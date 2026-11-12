@@ -28,6 +28,34 @@ local instance n03SourceFromCoefficientJetsParameterSMul (S : PhysicalSpacesData
 open Set Filter ContinuousFlexibility.Analysis
 open scoped Topology ContDiff
 
+private theorem source_pairGrading_continuous
+    {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) (s : ℕ)
+    (hp : Continuous (p s)) (hq : Continuous (q s)) :
+    Continuous (pairGrading p q s) := by
+  change Continuous (fun x : E × F => p s x.1 + q s x.2)
+  exact (hp.comp continuous_fst).add (hq.comp continuous_snd)
+
+private theorem source_parameterGrading_continuous (S : PhysicalSpacesData) (s : ℕ) :
+    Continuous (pairGrading (pairGrading (sectorGrading S) realGrading)
+      (S.circle (3 / 4 : ℝ)).grading s) :=
+  source_pairGrading_continuous
+    (E := StateDirections S × ℝ) (F := CircleSpace S)
+    (pairGrading (sectorGrading S) realGrading) (S.circle (3 / 4 : ℝ)).grading s
+    (sectorPairGrading_continuous S s)
+    (continuous_gradedSeminorm (fun n => (S.circle (3 / 4 : ℝ)).level n)
+      (S.circle (3 / 4 : ℝ)).bond s)
+
+private theorem source_heightPairGrading_continuous (S : PhysicalSpacesData) (s : ℕ) :
+    Continuous (heightPairGrading S s) :=
+  source_pairGrading_continuous
+    (E := (S.height (3 / 4 : ℝ)).Space) (F := ℝ)
+    (S.height (3 / 4 : ℝ)).grading realGrading s
+    (continuous_gradedSeminorm (fun n => (S.height (3 / 4 : ℝ)).level n)
+      (S.height (3 / 4 : ℝ)).bond s)
+    (show Continuous (realGrading s) from continuous_norm)
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -46,7 +74,6 @@ theorem N01Properties.symmetricDivergenceBilinear_actual_of_eq
   exact (congrArg (fun B => symmetricDivergenceBilinear hS hT B η) heq).trans
     (hN.symmetricDivergenceBilinear_actual hS hT R χ z ρ η hregular)
 
-set_option diagnostics true in
 theorem N01Properties.exists_returnCorrectionSource_of_coefficient_jets
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
@@ -92,7 +119,6 @@ theorem N01Properties.exists_returnCorrectionSource_of_coefficient_jets
         S.sourceGrading ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ univ)
         (fun z : ((StateDirections S × ℝ) × CircleSpace S) × HeightPair S =>
           E (liftSectorParameter S C z.1.1) z.1.2 z.2) := by
-  trace "N03Source: entered proof"
   have hsectorMember (x : (StateDirections S × ℝ) × CircleSpace S)
       (hx : x ∈ sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S)))
       (η : HeightPair S) : HeightMember D T (3 / 4 : ℝ)
@@ -101,7 +127,6 @@ theorem N01Properties.exists_returnCorrectionSource_of_coefficient_jets
     have heq := hN.symmetricDivergenceBilinear_actual_of_eq hS hT R χ
       (liftSectorParameter S C x.1) x.2 η (A 0 x Fin.elim0) (hzero x hx)
     exact (congrArg (HeightMember D T (3 / 4 : ℝ)) heq).mp hm
-  trace "N03Source: sector membership complete"
   have hmember (z : AnnularState S × ℝ) (hz : z ∈ stateNeighborhood S C base ε)
       (hs : stateSector S z.1) (ρ : CircleSpace S) (η : HeightPair S) :
       HeightMember D T (3 / 4 : ℝ) (returnCorrectionResidualErrorField D S C R χ z ρ η) := by
@@ -112,31 +137,21 @@ theorem N01Properties.exists_returnCorrectionSource_of_coefficient_jets
     have heq := congrArg (fun u => returnCorrectionResidualErrorField D S C R χ u ρ η)
       (hN.2.2.1.lift_sectorParameterOfState z hs)
     exact (congrArg (HeightMember D T (3 / 4 : ℝ)) heq).mp hm
-  trace "N03Source: full membership complete"
   let E : AnnularState S × ℝ → CircleSpace S →ₗ[ℝ] HeightPair S →ₗ[ℝ] S.Source :=
     returnCorrectionSourceError hN hS hT R χ hχ hχrange hsupp hend hdisc hmember
   have hdecode (z : AnnularState S × ℝ) (hz : z ∈ stateNeighborhood S C base ε)
       (hs : stateSector S z.1) (ρ : CircleSpace S) (η : HeightPair S) :
       physicalSourceDecode S (E z ρ η) = returnCorrectionResidualErrorField D S C R χ z ρ η :=
     returnCorrectionSourceError_decode hN hS hT R χ hχ hχrange hsupp hend hdisc hmember hz hs ρ η
-  trace "N03Source: source witness and decoder complete"
   refine ⟨E, fun z hz hs ρ η p => congrFun (hdecode z hz hs ρ η) p, ?_⟩
-  trace "N03Source: existential witness packaged"
   let p : ℕ → Seminorm ℝ ((StateDirections S × ℝ) × CircleSpace S) :=
     pairGrading (pairGrading (sectorGrading S) realGrading) (S.circle (3 / 4 : ℝ)).grading
   let q : ℕ → Seminorm ℝ (HeightPair S) := heightPairGrading S
   have hp : Monotone p := pairGrading_monotone (sectorPairGrading_monotone S)
     (gradedSeminorm_monotone _ _)
   have hq : Monotone q := pairGrading_monotone (gradedSeminorm_monotone _ _) (fun _ _ _ _ => le_rfl)
-  have hpcont (s : ℕ) : Continuous (p s) := by
-    change Continuous (fun x : (StateDirections S × ℝ) × CircleSpace S =>
-      pairGrading (sectorGrading S) realGrading s x.1 + (S.circle (3 / 4 : ℝ)).grading s x.2)
-    exact ((sectorPairGrading_continuous S s).comp continuous_fst).add
-      (((withSeminorms_graded _ _).continuous_seminorm s).comp continuous_snd)
-  have hqcont (s : ℕ) : Continuous (q s) := by
-    change Continuous (fun η : HeightPair S => (S.height (3 / 4 : ℝ)).grading s η.1 + ‖η.2‖)
-    exact (((withSeminorms_graded _ _).continuous_seminorm s).comp continuous_fst).add
-      continuous_snd.norm
+  have hpcont (s : ℕ) : Continuous (p s) := source_parameterGrading_continuous S s
+  have hqcont (s : ℕ) : Continuous (q s) := source_heightPairGrading_continuous S s
   have hIp : HasInterpolation p := hasInterpolation_of_hasSmoothing hp
     (hasSmoothing_pairGrading
       (hasSmoothing_pairGrading (solve_sector_hasSmoothing hS) hasSmoothing_realGrading)
@@ -147,7 +162,6 @@ theorem N01Properties.exists_returnCorrectionSource_of_coefficient_jets
       ((S.height (3 / 4 : ℝ)).decode η.1) ≤ q s η :=
     (sobolevModel_physicalNorm_le_grading (hS.1 (3 / 4 : ℝ)) η.1 s).trans
       (le_add_of_nonneg_right (apply_nonneg (realGrading s) η.2))
-  trace "N03Source: grading facts complete"
   refine smoothTameOn_symmetricSource_of_coefficient_jets
     (E := (StateDirections S × ℝ) × CircleSpace S) (D := D) (T := T) (S := S)
     (U := sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) hS hT
@@ -156,7 +170,6 @@ theorem N01Properties.exists_returnCorrectionSource_of_coefficient_jets
     p q hpcont hqcont hp hq hIp hIq hheight A hcoeff hsym hderiv
     (fun z : ((StateDirections S × ℝ) × CircleSpace S) × HeightPair S =>
       E (liftSectorParameter S C z.1.1) z.1.2 z.2) ?_
-  trace "N03Source: smooth tame assembly applied"
   intro z hz
   exact (hdecode (liftSectorParameter S C z.1.1)
     (liftSectorParameter_mem_stateNeighborhood hz.1.1 le_rfl)

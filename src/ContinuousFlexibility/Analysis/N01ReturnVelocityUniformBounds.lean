@@ -52,7 +52,7 @@ theorem N01Properties.uniformSmoothFamilyOn_returnCorrectionDisplacementCircleLi
     uniformSmoothFamilyOn_linear hU hp
       (fun _ : I => ContinuousLinearMap.snd ℝ (StateDirections S × ℝ) H.Space) 0
       (fun s => ⟨1, zero_le_one, fun i x => by
-        simp only [ContinuousLinearMap.snd_apply, Nat.add_zero, one_mul, pairGrading_apply]
+        simp only [ContinuousLinearMap.coe_snd', Nat.add_zero, one_mul, pairGrading_apply]
         exact le_add_of_nonneg_left (apply_nonneg _ _)⟩)
   have hproduct := uniformSmoothFamilyOn_circleProduct_maps hH hT hN.1.1 (by norm_num)
     (hS.2.2.2.2.1 (3 / 4 : ℝ)).2.2 hp hU hd hρ

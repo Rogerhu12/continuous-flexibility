@@ -133,8 +133,8 @@ theorem N01Properties.returnCorrectionSmoothCoefficientJets_material_bound_of_fl
     have hs0 := hN.returnCorrectionCoefficientScalarJets_component_mixed_zero
       hS hT hR j hcell χ hχrange hcutoff hdisc
       (ContinuousLinearMap.snd ℝ ℝ ℝ) hzero a b n x hx.1 v
-    simp only [ContinuousLinearMap.fst_apply] at hf0
-    simp only [ContinuousLinearMap.snd_apply] at hs0
+    simp only [ContinuousLinearMap.coe_fst'] at hf0
+    simp only [ContinuousLinearMap.coe_snd'] at hs0
     constructor
     · simpa only [hf0, abs_zero] using
         (mul_nonneg (mul_nonneg hA hK.le) hW)

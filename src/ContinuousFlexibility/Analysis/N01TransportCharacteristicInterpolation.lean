@@ -38,7 +38,7 @@ theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.fstParameter_ap
   simp only [SmoothDirections.fstParameter, SmoothDirections.compLinear,
     SmoothDirections.congrOn, SmoothDirections.compAffine_apply, zero_add,
     ContinuousLinearMap.prod_apply, ContinuousLinearMap.comp_apply,
-    ContinuousLinearMap.fst_apply, ContinuousLinearMap.snd_apply]
+    ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd']
 
 /-- Adding an independent parameter keeps the original constants, base,
 loss, and spatial directions. -/
