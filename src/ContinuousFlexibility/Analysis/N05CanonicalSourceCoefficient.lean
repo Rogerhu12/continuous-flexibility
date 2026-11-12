@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05ReferencePieceIndexBounds
 import ContinuousFlexibility.Analysis.N05ReferenceSourceWeightGap
 import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
@@ -26,7 +27,7 @@ theorem n05_referenceCanonicalHeight_density_piece_bound
     {base loss : ℕ} {ε : ℝ}
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     (hcoordinates : N05ControlledReferenceCoordinates D S C K) :
-    ∃ B A : ℝ, 0 < B ∧ 0 < A ∧ ∀ m p, p ∈ physicalPieceOpen S K m →
+    ∃ B A : ℝ, 0 < B ∧ 0 < A ∧ ∀ m p, p ∈ referencePhysicalPieceOpen S K m →
       |planeJacobian (K.chart (C.referenceState, 0) m) p| *
         (K.height (C.referenceState, 0) m p)⁻¹ ^ 2 ≤
           B * radialE (D.cellIndex (K.cell m)) ^ A := by
@@ -79,7 +80,7 @@ theorem n05_referenceCanonicalSource_weight_bound
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     (hcoordinates : N05ControlledReferenceCoordinates D S C K)
     {γw γ : ℝ} (hγw : 0 ≤ γw) (hgap : γw < γ) (t M : ℝ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ m j p, p ∈ physicalPieceOpen S K m → p.1 ∈ D.cells j →
+    ∃ B : ℝ, 0 < B ∧ ∀ m j p, p ∈ referencePhysicalPieceOpen S K m → p.1 ∈ D.cells j →
       Real.exp (2 * M * radialQ (D.cellIndex j) + 2 * γw * radialS (D.cellIndex j)) *
         |planeJacobian (K.chart (C.referenceState, 0) m) p| *
         (K.height (C.referenceState, 0) m p)⁻¹ ^ 2 *
@@ -119,7 +120,7 @@ theorem n05_referenceCanonicalSource_square_density_bound
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     (hcoordinates : N05ControlledReferenceCoordinates D S C K)
     {γw γ : ℝ} (hγw : 0 ≤ γw) (hgap : γw < γ) (t M : ℝ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ m j p, p ∈ physicalPieceOpen S K m → p.1 ∈ D.cells j →
+    ∃ B : ℝ, 0 < B ∧ ∀ m j p, p ∈ referencePhysicalPieceOpen S K m → p.1 ∈ D.cells j →
       Real.exp (2 * M * radialQ (D.cellIndex j) + 2 * γw * radialS (D.cellIndex j)) *
         (|planeJacobian (K.chart (C.referenceState, 0) m) p| /
           K.height (C.referenceState, 0) m p) ^ 2 *

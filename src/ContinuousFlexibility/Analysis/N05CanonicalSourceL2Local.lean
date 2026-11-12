@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05CanonicalSourceFiniteWeight
 import ContinuousFlexibility.Analysis.N05CanonicalPhysicalL2Local
 import ContinuousFlexibility.Geometry.EuclideanRigidity
@@ -47,16 +48,16 @@ theorem n05_canonicalSource_finite_weight_piece_bound
     n05_referenceState_mem h01.2.1
   have hs : stateSector S C.referenceState :=
     n05_referenceState_sector h01.2.2.1
-  have hangle : ∀ p ∈ physicalPieceOpen S K m,
+  have hangle : ∀ p ∈ referencePhysicalPieceOpen S K m,
       (K.chart (C.referenceState, 0) m p).2 = p.2 :=
     fun _ hp => n05_controlledReference_chart_second hcoordinates m hp
-  have hpull := (n05_canonicalChart_ae_iff h.2.2.2.2 hz hs m hangle
+  have hpull := (n05_referenceCanonicalChart_ae_iff h.2.2.2.2.1 hz hs m hangle
     (fun p => n05CanonicalSampleWeight T S K γ t m * u p =
       canonicalSource S K (C.referenceState, 0) m f p)).mp hrep
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, _, _, _, _, hcharts, _⟩
+  have h04 := h.2.2.2.2.1
+  have hcharts := n05_reference_charts h04
   obtain ⟨_, _, hleft, _, hchart, _, hheight, hnonzero⟩ :=
-    hcharts (C.referenceState, 0) hz hs m
+    hcharts hz hs m
   let μ : Measure PolarPoint := volume.restrict
     (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)
   have hreconstruct : f =ᵐ[μ] (fun p =>
@@ -65,7 +66,7 @@ theorem n05_canonicalSource_finite_weight_piece_bound
         n05CanonicalSampleWeight T S K γ t m * u (K.chart (C.referenceState, 0) m p)) := by
     filter_upwards [hpull,
       ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp hpm
-    have hpo : p ∈ physicalPieceOpen S K m := ⟨hpm.1, mem_univ _⟩
+    have hpo : p ∈ referencePhysicalPieceOpen S K m := ⟨hpm.1, mem_univ _⟩
     have hn := hnonzero p hpo
     simp only [canonicalSource, hleft p hpo] at hp
     calc
@@ -78,7 +79,7 @@ theorem n05_canonicalSource_finite_weight_piece_bound
           (|planeJacobian (K.chart (C.referenceState, 0) m) p| /
             K.height (C.referenceState, 0) m p) := by rw [← hp]
       _ = _ := by ring
-  have hucomp := n05_canonicalChart_aestronglyMeasurable_comp h.2.2.2.2 hz hs m hangle
+  have hucomp := n05_referenceCanonicalChart_aestronglyMeasurable_comp h.2.2.2.2.1 hz hs m hangle
     (Lp.memLp u).aestronglyMeasurable
   have hh : AEStronglyMeasurable (K.height (C.referenceState, 0) m) μ :=
     (hheight.continuousOn.mono (fun _ hp => ⟨hp.1, mem_univ _⟩)).aestronglyMeasurable
@@ -105,7 +106,7 @@ theorem n05_canonicalSource_finite_weight_piece_bound
   have hmajor : Integrable (fun p =>
       |planeJacobian (K.chart (C.referenceState, 0) m) p| *
         u (K.chart (C.referenceState, 0) m p) ^ 2) μ :=
-    (n05_canonicalChart_integrable_iff h.2.2.2.2 hz hs m hangle
+    (n05_referenceCanonicalChart_integrable_iff h.2.2.2.2.1 hz hs m hangle
       (fun p => u p ^ 2)).mp (Lp.memLp u).integrable_sq
   have hdom : ∀ᵐ p ∂μ,
       (Real.sqrt (n05ReferenceFiniteSourceWeight D γw M q p.1) * f p) ^ 2 ≤
@@ -113,7 +114,7 @@ theorem n05_canonicalSource_finite_weight_piece_bound
           u (K.chart (C.referenceState, 0) m p) ^ 2) := by
     filter_upwards [hreconstruct,
       ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp hpm
-    have hpo : p ∈ physicalPieceOpen S K m := ⟨hpm.1, mem_univ _⟩
+    have hpo : p ∈ referencePhysicalPieceOpen S K m := ⟨hpm.1, mem_univ _⟩
     calc
       _ = (n05ReferenceFiniteSourceWeight D γw M q p.1 *
           (|planeJacobian (K.chart (C.referenceState, 0) m) p| /
@@ -144,7 +145,7 @@ theorem n05_canonicalSource_finite_weight_piece_bound
       integral_mono_ae hint (hmajor.const_mul B) hdom
     _ = B * ∫ p, u p ^ 2 ∂canonicalMeasure S K m := by
       rw [integral_const_mul,
-        ← n05_canonicalChart_integral h.2.2.2.2 hz hs m hangle (fun p => u p ^ 2)]
+        ← n05_referenceCanonicalChart_integral h.2.2.2.2.1 hz hs m hangle (fun p => u p ^ 2)]
     _ = B * ‖u‖ ^ 2 := by rw [hnorm]
 
 end ContinuousFlexibility.Statements

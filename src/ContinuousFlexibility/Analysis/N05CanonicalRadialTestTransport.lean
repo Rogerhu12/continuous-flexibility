@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05CanonicalAngularTransport
 
 /-!
@@ -42,7 +43,7 @@ include h hcoordinates in
 /-- On the real chart this is its orientation sign times φ divided by
 the actual height. No independent Jacobian has been specified. -/
 theorem n05CanonicalRadialTestTransport_eq_actual (m : ℕ) (φ : PolarPoint → ℝ)
-    {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    {p : PolarPoint} (hp : p ∈ referencePhysicalPieceOpen S K m) :
     n05CanonicalRadialTestTransport S C K m φ p =
       (|planeJacobian (K.chart (C.referenceState, 0) m) p| /
         planeJacobian (K.chart (C.referenceState, 0) m) p) *
@@ -78,12 +79,13 @@ theorem n05CanonicalRadialTestTransport_test (m : ℕ)
   have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h.1.1.1.2.1
   have hs : stateSector S C.referenceState := n05_referenceState_sector h.1.1.1.2.2.1
-  rcases h.2.2.2.2 with ⟨_, _, _, hpieces, _, _, _, hcharts, _⟩
-  obtain ⟨_, _, _, _, hc, _, _, hn⟩ := hcharts (C.referenceState, 0) hz hs m
+  have hpieces := h.2.2.2.2.1.1.referenceBounds
+  have hcharts := n05_reference_charts h.2.2.2.2.1
+  obtain ⟨_, _, _, _, hc, _, _, hn⟩ := hcharts hz hs m
   have hd : ContDiff ℝ ∞ (n05CanonicalRadialTestTransport S C K m φ) := by
     apply contDiff_iff_contDiffAt.mpr
     intro p
-    by_cases hp : p ∈ physicalPieceOpen S K m
+    by_cases hp : p ∈ referencePhysicalPieceOpen S K m
     · have hnear := (isOpen_Ioo.prod isOpen_univ).mem_nhds hp
       have hactual : ContDiffAt ℝ ∞ (fun q =>
           n05CanonicalAngularTransport S C K m φ q /

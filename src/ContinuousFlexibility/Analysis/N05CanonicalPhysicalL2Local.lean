@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05CanonicalPhysicalCoefficient
 import ContinuousFlexibility.Radial.ReferenceGraphNorms
 
@@ -26,26 +27,44 @@ theorem n05_canonicalChart_aestronglyMeasurable_comp
     (h04 : N04Properties D T S C L K base loss ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ)
-    (hangle : ∀ p ∈ physicalPieceOpen S K m, (K.chart z m p).2 = p.2)
+    (hangle : ∀ p ∈ physicalPieceOpen S K z m, (K.chart z m p).2 = p.2)
     {g : PolarPoint → ℝ} (hg : AEStronglyMeasurable g (canonicalMeasure S K m)) :
     AEStronglyMeasurable (fun p => g (K.chart z m p))
       (volume.restrict
-        (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)) := by
+        (n05PhysicalPieceHalfPeriod S K z m)) := by
   have hpullAE : (fun p => g (K.chart z m p))
       =ᵐ[volume.restrict
-        (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)]
+        (n05PhysicalPieceHalfPeriod S K z m)]
           (fun p => hg.mk g (K.chart z m p)) :=
     (n05_canonicalChart_ae_iff h04 hz hs m hangle
       (fun p => g p = hg.mk g p)).mp hg.ae_eq_mk
-  rcases h04 with ⟨_, _, _, _, _, _, _, hcharts, _⟩
+  have hcharts := h04.1.charts
   have hc := (hcharts z hz hs m).2.2.2.2.1.continuousOn
   have hmap : AEMeasurable (K.chart z m)
       (volume.restrict
-        (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)) :=
-    (hc.mono (fun _ hp => ⟨hp.1, mem_univ _⟩)).aemeasurable
-      (measurableSet_Ioo.prod measurableSet_Ioc)
+        (n05PhysicalPieceHalfPeriod S K z m)) :=
+    (hc.mono (fun _ hp => hp.1)).aemeasurable
+      (n05_physicalPieceHalfPeriod_measurable h04 hz hs m)
   exact (hg.measurable_mk.comp_aemeasurable hmap).aestronglyMeasurable.congr
     (Filter.EventuallyEq.symm hpullAE)
+
+theorem n05_referenceCanonicalChart_aestronglyMeasurable_comp
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
+    {base loss : ℕ} {ε : ℝ} (h04 : N04Properties D T S C L K base loss ε)
+    (hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S C.referenceState) (m : ℕ)
+    (hangle : ∀ p ∈ referencePhysicalPieceOpen S K m,
+      (K.chart (C.referenceState, 0) m p).2 = p.2)
+    {g : PolarPoint → ℝ} (hg : AEStronglyMeasurable g (canonicalMeasure S K m)) :
+    AEStronglyMeasurable (fun p => g (K.chart (C.referenceState, 0) m p))
+      (volume.restrict
+        (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)) := by
+  have ha : ∀ p ∈ physicalPieceOpen S K (C.referenceState, 0) m,
+      (K.chart (C.referenceState, 0) m p).2 = p.2 := by
+    simpa only [h04.1.referenceDomain m] using hangle
+  simpa only [n05_reference_physicalHalfPeriod_eq h04 m] using
+    n05_canonicalChart_aestronglyMeasurable_comp h04 hz hs m ha hg
 
 /-- The constant is selected before the piece, its L² representative, and
 the physical field. All coefficient and Jacobian estimates are derived from
@@ -77,30 +96,31 @@ theorem n05_canonicalHeight_endpoint_piece_bound
     n05_referenceState_mem h01.2.1
   have hs : stateSector S C.referenceState :=
     n05_referenceState_sector h01.2.2.1
-  have hangle : ∀ p ∈ physicalPieceOpen S K m,
+  have hangle : ∀ p ∈ referencePhysicalPieceOpen S K m,
       (K.chart (C.referenceState, 0) m p).2 = p.2 :=
     fun _ hp => n05_controlledReference_chart_second hcoordinates m hp
-  have hpull := (n05_canonicalChart_ae_iff h.2.2.2.2 hz hs m hangle
+  have hpull := (n05_referenceCanonicalChart_ae_iff h.2.2.2.2.1 hz hs m hangle
     (fun p => n05CanonicalSampleWeight T S K γ t m * u p =
       canonicalHeight S K (C.referenceState, 0) m f p)).mp hrep
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _, _, _, hcharts, _⟩
+  have h04 := h.2.2.2.2.1
+  have hpieces := h04.1.referenceBounds
+  have hcharts := n05_reference_charts h04
   obtain ⟨_, _, hleft, _, _, _, hheight, hnonzero⟩ :=
-    hcharts (C.referenceState, 0) hz hs m
+    hcharts hz hs m
   let μ : Measure PolarPoint := volume.restrict
     (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)
   have hreconstruct : f =ᵐ[μ] (fun p => K.height (C.referenceState, 0) m p *
       n05CanonicalSampleWeight T S K γ t m * u (K.chart (C.referenceState, 0) m p)) := by
     filter_upwards [hpull,
       ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp hpm
-    have hpo : p ∈ physicalPieceOpen S K m := ⟨hpm.1, mem_univ _⟩
+    have hpo : p ∈ referencePhysicalPieceOpen S K m := ⟨hpm.1, mem_univ _⟩
     simp only [canonicalHeight, hleft p hpo] at hp
     calc
       f p = (n05CanonicalSampleWeight T S K γ t m *
           u (K.chart (C.referenceState, 0) m p)) * K.height (C.referenceState, 0) m p :=
         (div_eq_iff (hnonzero p hpo).1.ne').mp hp.symm
       _ = _ := by ring
-  have hucomp := n05_canonicalChart_aestronglyMeasurable_comp h.2.2.2.2 hz hs m hangle
+  have hucomp := n05_referenceCanonicalChart_aestronglyMeasurable_comp h.2.2.2.2.1 hz hs m hangle
     (Lp.memLp u).aestronglyMeasurable
   have hh : AEStronglyMeasurable (K.height (C.referenceState, 0) m) μ :=
     (hheight.continuousOn.mono (fun _ hp => ⟨hp.1, mem_univ _⟩)).aestronglyMeasurable
@@ -116,14 +136,14 @@ theorem n05_canonicalHeight_endpoint_piece_bound
   have hmajor : Integrable (fun p =>
       |planeJacobian (K.chart (C.referenceState, 0) m) p| *
         u (K.chart (C.referenceState, 0) m p) ^ 2) μ :=
-    (n05_canonicalChart_integrable_iff h.2.2.2.2 hz hs m hangle
+    (n05_referenceCanonicalChart_integrable_iff h.2.2.2.2.1 hz hs m hangle
       (fun p => u p ^ 2)).mp (Lp.memLp u).integrable_sq
   have hdom : ∀ᵐ p ∂μ, (Real.sqrt ((D.w p.1)⁻¹) * f p) ^ 2 ≤
       B * (|planeJacobian (K.chart (C.referenceState, 0) m) p| *
         u (K.chart (C.referenceState, 0) m p) ^ 2) := by
     filter_upwards [hreconstruct,
       ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp hpm
-    have hpo : p ∈ physicalPieceOpen S K m := ⟨hpm.1, mem_univ _⟩
+    have hpo : p ∈ referencePhysicalPieceOpen S K m := ⟨hpm.1, mem_univ _⟩
     have hwpos : 0 < D.w p.1 :=
       hD.choose_spec.1.2.2.2.2.1 p.1 ((hpieces m).2.2 hpm.1)
     calc
@@ -153,7 +173,7 @@ theorem n05_canonicalHeight_endpoint_piece_bound
       integral_mono_ae hint (hmajor.const_mul B) hdom
     _ = B * ∫ p, u p ^ 2 ∂canonicalMeasure S K m := by
       rw [integral_const_mul,
-        ← n05_canonicalChart_integral h.2.2.2.2 hz hs m hangle (fun p => u p ^ 2)]
+        ← n05_referenceCanonicalChart_integral h.2.2.2.2.1 hz hs m hangle (fun p => u p ^ 2)]
     _ = B * ‖u‖ ^ 2 := by rw [hnorm]
 
 end ContinuousFlexibility.Statements

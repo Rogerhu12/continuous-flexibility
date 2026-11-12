@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05CanonicalPhysicalL2Local
 import Mathlib.Dynamics.Ergodic.MeasurePreserving
 
@@ -59,7 +60,8 @@ theorem n05_physicalHalfPeriod_cover_ae
     (h04 : N04Properties D T S C L K base loss ε) :
     (⋃ m, Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)
       =ᵐ[volume] (radialCore D ×ˢ Ioc (0 : ℝ) Real.pi) := by
-  rcases h04 with ⟨_, _, _, hpieces, _, _, ⟨E, hE, hcover⟩, _⟩
+  have hpieces := h04.1.referenceBounds
+  obtain ⟨E, hE, hcover⟩ := h04.1.referencePartition
   have hEplane : ∀ᵐ p : PolarPoint ∂volume, p.1 ∉ E := by
     rw [Measure.volume_eq_prod]
     exact Measure.quasiMeasurePreserving_fst.ae (measure_eq_zero_iff_ae_notMem.mp hE)
@@ -131,7 +133,7 @@ theorem n05_volumeMember_canonicalHeight_endpoint_memLp
       (fun m => (hlocal m).1.integrable_sq) hsumNorm
   have hmeas : AEStronglyMeasurable q (volume.restrict (⋃ m, U m)) :=
     AEStronglyMeasurable.iUnion (fun m => (hlocal m).1.aestronglyMeasurable)
-  have hcover := n05_physicalHalfPeriod_cover_ae h.2.2.2.2
+  have hcover := n05_physicalHalfPeriod_cover_ae h.2.2.2.2.1
   have hhalf : MemLp q 2 (volume.restrict (radialCore D ×ˢ Ioc (0 : ℝ) Real.pi)) := by
     have hlocalUnion := (memLp_two_iff_integrable_sq hmeas).mpr hsq
     change MemLp q 2 (volume.restrict

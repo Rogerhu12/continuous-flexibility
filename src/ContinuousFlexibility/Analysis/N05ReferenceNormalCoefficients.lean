@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05PhysicalPieceRadialMultiplier
 import ContinuousFlexibility.Analysis.N05CanonicalRadialTestDerivative
 
@@ -50,16 +51,16 @@ theorem n05_referenceNormal_slices (m : ℕ) :
   have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h.1.1.1.2.1
   have hs : stateSector S C.referenceState := n05_referenceState_sector h.1.1.1.2.2.1
-  rcases h.2.2.2.2 with ⟨_, _, _, _, _, _, _, hcharts, _⟩
-  obtain ⟨_, _, _, _, hc, _, hh, hn⟩ := hcharts (C.referenceState, 0) hz hs m
+  have hcharts := n05_reference_charts h.2.2.2.2.1
+  obtain ⟨_, _, _, _, hc, _, hh, hn⟩ := hcharts hz hs m
   have hline : ContDiff ℝ ∞ (fun r : ℝ => (r, (0 : ℝ))) :=
     contDiff_id.prodMk contDiff_const
   have hmap : MapsTo (fun r : ℝ => (r, (0 : ℝ)))
-      (Ioo (K.physicalLeft m) (K.physicalRight m)) (physicalPieceOpen S K m) :=
+      (Ioo (K.physicalLeft m) (K.physicalRight m)) (referencePhysicalPieceOpen S K m) :=
     fun r hr => ⟨hr, mem_univ _⟩
   refine ⟨hh.comp hline.contDiffOn hmap, (hc.comp hline.contDiffOn hmap).fst, ?_⟩
   intro r hr
-  have hp : (r, (0 : ℝ)) ∈ physicalPieceOpen S K m := ⟨hr, mem_univ _⟩
+  have hp : (r, (0 : ℝ)) ∈ referencePhysicalPieceOpen S K m := ⟨hr, mem_univ _⟩
   refine ⟨(hn (r, 0) hp).1.ne', ?_⟩
   rw [← n05_reference_planeJacobian_radial h hcoordinates m hp]
   exact (hn (r, 0) hp).2.1
@@ -87,14 +88,14 @@ theorem n05ReferenceNormal_coefficients_measurable :
 
 include h hcoordinates in
 theorem n05ReferenceRadialNormalField_eq (m : ℕ) {p : PolarPoint}
-    (hp : p ∈ physicalPieceOpen S K m) (u ur : PolarPoint → ℝ) :
+    (hp : p ∈ referencePhysicalPieceOpen S K m) (u ur : PolarPoint → ℝ) :
     n05ReferenceRadialNormalField S C K u ur p =
       (ur p - u p * (radialPartial (K.height (C.referenceState, 0) m) p /
         K.height (C.referenceState, 0) m p)) /
           planeJacobian (K.chart (C.referenceState, 0) m) p := by
   unfold n05ReferenceRadialNormalField n05ReferenceNormalLeading n05ReferenceNormalDrift
-  rw [n05PhysicalPieceRadialMultiplier_eq h.2.2.2.2 _ hp.1,
-    n05PhysicalPieceRadialMultiplier_eq h.2.2.2.2 _ hp.1,
+  rw [n05PhysicalPieceRadialMultiplier_eq h.2.2.2.2.1 _ hp.1,
+    n05PhysicalPieceRadialMultiplier_eq h.2.2.2.2.1 _ hp.1,
     n05_referenceHeight_radial_deriv h hcoordinates m hp,
     ← (hcoordinates.1 m p hp).2,
     ← n05_reference_planeJacobian_radial h hcoordinates m hp]

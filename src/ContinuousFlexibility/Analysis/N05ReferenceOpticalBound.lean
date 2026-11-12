@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05OpticalLipschitz
 import ContinuousFlexibility.Analysis.N05ReferenceNegativeDensity
 
@@ -56,7 +57,7 @@ theorem n05_cut_reference_density_le_of_optical_lipschitz
       (Icc (K.physicalLeft (if right then (K.cutPair m).2 else (K.cutPair m).1))
         (K.physicalRight (if right then (K.cutPair m).2 else (K.cutPair m).1))))
     {x : PolarPoint}
-    (hx : x ∈ physicalPieceOpen S K
+    (hx : x ∈ referencePhysicalPieceOpen S K
       (if right then (K.cutPair m).2 else (K.cutPair m).1)) :
     let i := if right then (K.cutPair m).2 else (K.cutPair m).1
     let z := (C.referenceState, 0)
@@ -68,14 +69,15 @@ theorem n05_cut_reference_density_le_of_optical_lipschitz
   let ξ := (K.chart (C.referenceState, 0) i x).1
   let q := deriv (fun r => (K.chart (C.referenceState, 0) i (r, x.2)).1) x.1
   have h01 := h.1.1.1
-  rcases h.2.2.2.2 with ⟨_, _, _, _, _, _, _, hcharts, _, _, _, hcuts, _⟩
+  have hcharts := n05_reference_charts h.2.2.2.2.1
+  have hcuts := h.2.2.2.2.1.2.1.1.1
   obtain ⟨hnegL, hnegR, hleft, hright, _, _, hzeroL, hzeroR, _⟩ := hcuts m
   have hi : K.positive i = false := by cases right <;> assumption
   have hi0 : K.left i = 0 := by cases right <;> assumption
   have hr : x.1 ∈ Icc (K.physicalLeft i) (K.physicalRight i) :=
     ⟨hx.1.1.le, hx.1.2.le⟩
   have hξ : 0 < ξ := by
-    have hp := (hcharts (C.referenceState, 0) (n05_referenceState_mem h01.2.1)
+    have hp := (hcharts (n05_referenceState_mem h01.2.1)
       (n05_referenceState_sector h01.2.2.1) i).1 hx
     simpa only [hi0] using hp.1.1
   have hnonneg (t : ℝ) (ht : t ∈ Icc (K.physicalLeft i) (K.physicalRight i)) :

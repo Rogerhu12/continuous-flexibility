@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05CanonicalSourceL2Local
 import ContinuousFlexibility.Analysis.N05PeriodicPhysicalL2Norm
 import ContinuousFlexibility.Analysis.N05PhysicalPieces
@@ -78,7 +79,7 @@ theorem n05_volumeSource_finite_weight_bound
   have hmeas : AEStronglyMeasurable g (volume.restrict (⋃ m, U m)) :=
     AEStronglyMeasurable.iUnion (fun m => (hlocal m).1.aestronglyMeasurable)
   have hcover : (⋃ m, U m) =ᵐ[volume] (radialCore D ×ˢ Ioc (0 : ℝ) Real.pi) :=
-    n05_physicalHalfPeriod_cover_ae h.2.2.2.2
+    n05_physicalHalfPeriod_cover_ae h.2.2.2.2.1
   have hhalf : MemLp g 2 (volume.restrict (radialCore D ×ˢ Ioc (0 : ℝ) Real.pi)) := by
     have hi := (memLp_two_iff_integrable_sq hmeas).mpr hsq
     rw [Measure.restrict_congr_set hcover] at hi
@@ -88,7 +89,7 @@ theorem n05_volumeSource_finite_weight_bound
     simp only [g, Prod.fst_add, add_zero, hf p]
   have hdisjoint : Pairwise (fun m n => Disjoint (U m) (U n)) := by
     intro m n hmn
-    exact disjoint_prod.mpr (Or.inl (n05_physicalPieces_pairwise_disjoint h.2.2.2.2 hmn))
+    exact disjoint_prod.mpr (Or.inl (n05_physicalPieces_pairwise_disjoint h.2.2.2.2.1 hmn))
   have hhalfIntegral :
       (∫ p, g p ^ 2 ∂volume.restrict (radialCore D ×ˢ Ioc (0 : ℝ) Real.pi)) =
         ∑' m, ∫ p, g p ^ 2 ∂volume.restrict (U m) := by

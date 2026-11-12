@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05ReferenceNullPDE
 import ContinuousFlexibility.Analysis.N05OpticalPrimitive
 import ContinuousFlexibility.Analysis.N05RadialTransport
@@ -31,7 +32,8 @@ theorem n05_cut_physical_closed_subset_core
     Icc (K.physicalLeft (if right then (K.cutPair m).2 else (K.cutPair m).1))
         (K.physicalRight (if right then (K.cutPair m).2 else (K.cutPair m).1)) ⊆
       radialCore D := by
-  rcases h04 with ⟨_, _, _, hpieces, _, _, _, _, _, _, _, hcuts, _⟩
+  have hpieces := h04.1.referenceBounds
+  have hcuts := h04.2.1.1.1
   obtain ⟨_, _, hleft, hright, hmeet, _⟩ := hcuts m
   have hL := (hpieces (K.cutPair m).1).1
   have hR := (hpieces (K.cutPair m).2).1
@@ -57,7 +59,7 @@ theorem n05_cut_reference_signed_null_PDE
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     (m : ℕ) (right : Bool) {x : PolarPoint}
-    (hx : x ∈ physicalPieceOpen S K
+    (hx : x ∈ referencePhysicalPieceOpen S K
       (if right then (K.cutPair m).2 else (K.cutPair m).1))
     {σ : ℝ} (hσ : σ ^ 2 = 1) :
     let Ψ := K.chart (C.referenceState, 0)
@@ -97,10 +99,13 @@ theorem n05_cut_reference_null_transport
   let orientation : ℝ := if right then -1 else 1
   let A : ℝ → ℝ := fun r => (σ * orientation) * opticalTravel D.w (K.physicalLeft i) r
   have h01 := h.1.1.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _, hnegative, _, _, hclosed, _, _, hcuts, _⟩
+  have h04 := h.2.2.2.2.1
+  have hpieces := h04.1.referenceBounds
+  have hnegative := h04.1.referenceNegative
+  have hclosed := n05_reference_closed_properties h04
+  have hcuts := h04.2.1.1.1
   have hcore : Icc (K.physicalLeft i) (K.physicalRight i) ⊆ radialCore D :=
-    n05_cut_physical_closed_subset_core h01.2.2.2.1 h.2.2.2.2 m right
+    n05_cut_physical_closed_subset_core h01.2.2.2.1 h.2.2.2.2.1 m right
   have hl : K.physicalLeft i ∈ radialCore D :=
     hcore ⟨le_rfl, (hpieces i).1.le⟩
   have hmem : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
@@ -112,7 +117,7 @@ theorem n05_cut_reference_null_transport
     · exact (hcuts m).2.1
   have hchart (p : PolarPoint)
       (hp : p.1 ∈ Icc (K.physicalLeft i) (K.physicalRight i)) :
-      ContDiffAt ℝ ∞ Ψ p := (hclosed (C.referenceState, 0) hmem hsector i p hp).1
+      ContDiffAt ℝ ∞ Ψ p := (hclosed hmem hsector i p hp).1
   have hN : ContinuousOn (n05NullCoordinate Ψ σ)
       (Icc (K.physicalLeft i) (K.physicalRight i) ×ˢ univ) := by
     intro p hp

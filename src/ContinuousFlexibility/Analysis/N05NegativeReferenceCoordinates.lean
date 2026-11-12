@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05NegativePieceCount
 import ContinuousFlexibility.Radial.ReferenceCellL2
 
@@ -5,7 +6,7 @@ import ContinuousFlexibility.Radial.ReferenceCellL2
 # Controlled coordinates on the actual negative reference pieces
 
 The actual optical lower certificate and an interior point for each assigned
-cell give the negative part of the reference coordinate specification. The
+cell give reference radiality and a stronger bounded-index association. The
 radial identities, cell association, finite fibers and five first coefficient
 bounds all concern the same N04 data. One positive constant controls every
 quantitative conclusion; no chart estimate is assumed as an input.
@@ -18,9 +19,9 @@ namespace ContinuousFlexibility.Statements
 open Set
 open ContinuousFlexibility.Radial
 
-/-- The negative pieces satisfy the literal conjunction in the reference
-coordinate specification, with the piece quantifiers and index fibers
-restricted to `K.positive i = false`. -/
+/-- The negative pieces retain the bounded-index seed certificate, together
+with reference radiality, finite index fibers and the literal five first
+coefficient bounds, all restricted to `K.positive i = false`. -/
 theorem n05_negative_reference_coordinates
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {R : ReturnEquationData S}
@@ -29,7 +30,7 @@ theorem n05_negative_reference_coordinates
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     (hoptical : N05ActualCarrierOpticalLower D C)
     (hlabels : N05NegativePieceCellLabels D S K) :
-    (∀ i, K.positive i = false → ∀ p, p ∈ physicalPieceOpen S K i →
+    (∀ i, K.positive i = false → ∀ p, p ∈ referencePhysicalPieceOpen S K i →
       K.chart (C.referenceState, 0) i p =
         ((K.chart (C.referenceState, 0) i (p.1, 0)).1, p.2) ∧
       K.height (C.referenceState, 0) i p =
@@ -73,8 +74,8 @@ theorem n05_negative_reference_coordinates
       n05_negative_reference_height_radial_open hT hS h hi hp.1 θ⟩
   · intro i hi r hr
     have hpart : RadialPartition D := hD.1.choose_spec.2.1
-    have h04 := h.2.2.2.2
-    have hcore : r ∈ radialCore D := (h04.2.2.2.1 i).2.2 hr
+    have h04 := h.2.2.2.2.1
+    have hcore : r ∈ radialCore D := (h04.1.referenceBounds i).2.2 hr
     obtain ⟨j, hj⟩ := hpart.exists_localizer_ne_zero hcore
     have hrj : r ∈ D.cells j := hpart.2.2.1 j hj
     exact ⟨j, hrj, ((hgeometry i hi).1 j r hr hrj).trans hwindowB⟩

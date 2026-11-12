@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05ReferenceNegativeHeight
 
 /-!
@@ -46,10 +47,10 @@ theorem n05_negative_reference_density_closed
     ξ (r, θ) * |q| ^ 2 = -deriv D.w r / (r * D.w r) ∧
     |planeJacobian Ψ (r, θ)| / H ^ 2 = D.w r * |q| ^ 2
   have h01 := h.1.1.1
-  rcases h.2.2.2.2 with ⟨_, _, _, _, _, _, _, _, hclosed, _⟩
+  have hclosed := n05_reference_closed_properties h.2.2.2.2.1
   have hmem : z ∈ stateNeighborhood S C base ε := n05_referenceState_mem h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
-  have hc := hclosed z hmem hsector i (r, θ) hr
+  have hc := hclosed hmem hsector i (r, θ) hr
   have hΨ : DifferentiableAt ℝ Ψ (r, θ) := hc.1.differentiableAt (by simp)
   have hdξ : DifferentiableAt ℝ ξ (r, θ) := hΨ.fst
   have hdφ : DifferentiableAt ℝ φ (r, θ) := hΨ.snd

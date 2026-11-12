@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
 import ContinuousFlexibility.Analysis.N05CanonicalPhysicalWeight
 import ContinuousFlexibility.Analysis.N05ReferencePieceCoefficients
@@ -27,7 +28,7 @@ theorem n05_referenceCanonicalHeight_physical_weight_bound
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     (hcoordinates : N05ControlledReferenceCoordinates D S C K)
     {γ : ℝ} (hγ : 0 < γ) (t : ℝ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ m p, p ∈ physicalPieceOpen S K m →
+    ∃ B : ℝ, 0 < B ∧ ∀ m p, p ∈ referencePhysicalPieceOpen S K m →
       (D.w p.1)⁻¹ * K.height (C.referenceState, 0) m p ^ 2 *
         (n05CanonicalSampleWeight T S K γ t m) ^ 2 ≤
           B * |planeJacobian (K.chart (C.referenceState, 0) m) p| := by
@@ -90,9 +91,9 @@ theorem n05_referenceCanonicalHeight_physical_weight_bound
       _ = (Cw * A ^ 3) * (E ^ (Aw + 3 * A) * w ^ 2) := by ring
       _ ≤ _ := mul_le_mul_of_nonneg_left (hsample m) (by positivity)
   have h01 := h.1.1.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, _, _, _, _, hcharts, _⟩
-  have hnonzero := (hcharts (C.referenceState, 0)
+  have h04 := h.2.2.2.2.1
+  have hcharts := n05_reference_charts h04
+  have hnonzero := (hcharts
     (n05_referenceState_mem h01.2.1)
     (n05_referenceState_sector h01.2.2.1) m).2.2.2.2.2.2.2 p hp
   have hJ : |J| ≠ 0 := abs_ne_zero.mpr hnonzero.2.1

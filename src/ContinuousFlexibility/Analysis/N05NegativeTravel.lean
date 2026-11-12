@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05RootCutTransport
 import ContinuousFlexibility.Analysis.N05PeriodicLiftRigidity
 
@@ -55,19 +56,19 @@ theorem n05_cut_reference_root_lift
     n05_referenceState_mem h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
   have hr : root ∈ Icc (K.physicalLeft i) (K.physicalRight i) :=
-    n05_cut_physical_root_mem h.2.2.2.2 m right
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, _, _, _, _, _, hclosed, _⟩
+    n05_cut_physical_root_mem h.2.2.2.2.1 m right
+  have h04 := h.2.2.2.2.1
+  have hclosed := n05_reference_closed_properties h04
   refine ⟨continuous_iff_continuousAt.mpr (fun θ => ?_), ?_, ?_⟩
-  · exact (hclosed (C.referenceState, 0) hmem hsector i (root, θ) hr).1.continuousAt.snd.comp
+  · exact (hclosed hmem hsector i (root, θ) hr).1.continuousAt.snd.comp
       (f := fun t : ℝ => (root, t))
       (continuousAt_const.prodMk continuousAt_id)
   · intro θ
-    have hchart := (n05_canonical_closed_periodicity h.2.2.2.2 hmem hsector i
+    have hchart := (n05_reference_closed_periodicity h.2.2.2.2.1 hmem hsector i
       (p := (root, θ)) hr).1
     simpa only [Prod.mk_add_mk, Prod.snd_add, add_zero] using congrArg Prod.snd hchart
   · intro θ
-    exact congrArg Prod.snd (n05_canonical_closed_reflection h.2.2.2.2 hmem hsector i
+    exact congrArg Prod.snd (n05_reference_closed_reflection h.2.2.2.2.1 hmem hsector i
       (p := (root, θ)) hr).1
 
 theorem n05_cut_halfTravel_eq_time
@@ -88,8 +89,9 @@ theorem n05_cut_totalTravel_eq_time
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε) (m : ℕ) :
     C.travel m = 2 * n05TricomiTime (K.cutRadius m) := by
   have h01 := h.1.1.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _, _, _, _, _, _, _, hcuts, _⟩
+  have h04 := h.2.2.2.2.1
+  have hpieces := h04.1.referenceBounds
+  have hcuts := h04.2.1.1.1
   obtain ⟨_, _, hleft, hright, hmeet, _⟩ := hcuts m
   have hint (right : Bool) :
       IntervalIntegrable (opticalSpeed D.w) volume
@@ -98,7 +100,7 @@ theorem n05_cut_totalTravel_eq_time
     apply ContinuousOn.intervalIntegrable
     rw [uIcc_of_le (hpieces (if right then (K.cutPair m).2 else (K.cutPair m).1)).1.le]
     exact (n05_opticalSpeed_continuousOn_core h01.1.1).mono
-      (n05_cut_physical_closed_subset_core h01.2.2.2.1 h.2.2.2.2 m right)
+      (n05_cut_physical_closed_subset_core h01.2.2.2.1 h.2.2.2.2.1 m right)
   have hintR : IntervalIntegrable (opticalSpeed D.w) volume
       (K.physicalRight (K.cutPair m).1) (K.physicalRight (K.cutPair m).2) := by
     simpa only [↓reduceIte, hmeet] using hint true

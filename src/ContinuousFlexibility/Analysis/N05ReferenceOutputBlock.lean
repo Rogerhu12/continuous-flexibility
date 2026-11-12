@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05ReferenceOutputWeightWindow
 import ContinuousFlexibility.Analysis.N05ReferencePieceIndexBounds
 import ContinuousFlexibility.Radial.R11bPhysicalMultiplier
@@ -51,7 +52,7 @@ theorem n05_referenceOutput_piece_square_bound
   let E : ℝ := radialE n ^ A
   let P : Set PolarPoint :=
     Ioo (K.physicalLeft k) (K.physicalRight k) ×ˢ Ioc (0 : ℝ) Real.pi
-  let a : PolarPoint → ℝ := (physicalPieceOpen S K k).indicator
+  let a : PolarPoint → ℝ := (referencePhysicalPieceOpen S K k).indicator
     (fun _ => Real.sqrt e)
   let weights : ℕ → ℝ := fun j => C0 * E *
     Real.exp (-2 * M * radialQ (D.cellIndex j) + 2 * γ * radialS (D.cellIndex j))
@@ -63,7 +64,7 @@ theorem n05_referenceOutput_piece_square_bound
       D.localizer j p.1 ≠ 0 → |a p| ^ 2 ≤ weights j := by
     apply Eventually.of_forall
     intro p hpj
-    by_cases hp : p ∈ physicalPieceOpen S K k
+    by_cases hp : p ∈ referencePhysicalPieceOpen S K k
     · have hrj : p.1 ∈ D.cells j := hpart.2.2.1 j hpj
       dsimp only [a]
       rw [indicator_of_mem hp, sq_abs, Real.sq_sqrt he.le]
@@ -96,8 +97,7 @@ theorem n05_referenceOutput_piece_square_bound
     simp_rw [hterm]
     exact tsum_mul_left
   rw [hsumEq] at hI
-  have hpieces := h04
-  rcases hpieces with ⟨_, _, _, hpieces, _⟩
+  have hpieces := h04.1.referenceBounds
   have hsub : P ⊆ radialCore D ×ˢ Ioc (0 : ℝ) (2 * Real.pi) := by
     intro p hp
     exact ⟨(hpieces k).2.2 hp.1, hp.2.1,
@@ -109,7 +109,7 @@ theorem n05_referenceOutput_piece_square_bound
     filter_upwards [ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp
     change a p * f p = Real.sqrt e * f p
     dsimp only [a]
-    rw [indicator_of_mem (show p ∈ physicalPieceOpen S K k from ⟨hp.1, mem_univ _⟩)]
+    rw [indicator_of_mem (show p ∈ referencePhysicalPieceOpen S K k from ⟨hp.1, mem_univ _⟩)]
   have hscaled : MemLp (fun p => Real.sqrt e * f p) 2 (volume.restrict P) :=
     MemLp.ae_eq heq (haf.mono_measure hmeasure)
   have hlocal : MemLp f 2 (volume.restrict P) := by

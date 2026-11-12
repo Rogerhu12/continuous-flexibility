@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
@@ -25,7 +26,7 @@ The number of pieces over an index may grow by a coefficient power, which
 is absorbed by the fixed material loss. -/
 def N05ControlledReferenceCoordinates (D : ReferenceData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (K : CanonicalData S) : Prop :=
-  (∀ m p, p ∈ physicalPieceOpen S K m →
+  (∀ m p, p ∈ referencePhysicalPieceOpen S K m →
     K.chart (C.referenceState, 0) m p =
       ((K.chart (C.referenceState, 0) m (p.1, 0)).1, p.2) ∧
     K.height (C.referenceState, 0) m p = K.height (C.referenceState, 0) m (p.1, 0)) ∧

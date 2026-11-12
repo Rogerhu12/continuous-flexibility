@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05CanonicalOutputChange
 import ContinuousFlexibility.Analysis.N05CanonicalOutputMultiplier
 import ContinuousFlexibility.Analysis.N05CanonicalSourceCoefficient
@@ -43,7 +44,7 @@ theorem n05_referenceOutput_canonicalHeight_l2Sequence
   obtain ⟨B, A, hB, hA, hcoefficient⟩ :=
     n05_referenceCanonicalHeight_density_piece_bound h hcoordinates
   obtain ⟨C0, hC0, hmultiplier⟩ :=
-    n05CanonicalOutputMajorant_memLp hD hT h.2.2.2.2 hcoordinates hB hA.le hγ M
+    n05CanonicalOutputMajorant_memLp hD hT h.2.2.2.2.1 hcoordinates hB hA.le hγ M
   refine ⟨C0, hC0, fun f hf hsumf => ?_⟩
   let b : PolarPoint → ℝ := n05CanonicalOutputMajorant D S K B A
   let P : ℕ → Set PolarPoint := fun m =>
@@ -56,11 +57,12 @@ theorem n05_referenceOutput_canonicalHeight_l2Sequence
     n05_referenceState_mem h01.2.1
   have hs : stateSector S C.referenceState :=
     n05_referenceState_sector h01.2.2.1
-  have hangle (m : ℕ) : ∀ p ∈ physicalPieceOpen S K m,
+  have hangle (m : ℕ) : ∀ p ∈ referencePhysicalPieceOpen S K m,
       (K.chart (C.referenceState, 0) m p).2 = p.2 :=
     fun _ hp => n05_controlledReference_chart_second hcoordinates m hp
-  have hcharts := h.2.2.2.2
-  rcases hcharts with ⟨_, _, _, hpieces, _, _, _, hcharts, _⟩
+  have hcharts := h.2.2.2.2.1
+  have hpieces := hcharts.1.referenceBounds
+  have hcharts := n05_reference_charts hcharts
   have hsub (m : ℕ) : P m ⊆ radialCore D ×ˢ Ioc (0 : ℝ) (2 * Real.pi) := by
     intro p hp
     exact ⟨(hpieces m).2.2 hp.1, hp.2.1,
@@ -75,7 +77,7 @@ theorem n05_referenceOutput_canonicalHeight_l2Sequence
         ∂canonicalMeasure S K m) ≤
       ∫ p, (b p * f p) ^ 2 ∂volume.restrict (P m) := by
     obtain ⟨_, _, _, _, hchart, _, hheight, _⟩ :=
-      hcharts (C.referenceState, 0) hz hs m
+      hcharts hz hs m
     have hh : AEStronglyMeasurable (K.height (C.referenceState, 0) m)
         (volume.restrict (P m)) :=
       (hheight.continuousOn.mono (fun _ hp => ⟨hp.1, mem_univ _⟩)).aestronglyMeasurable
@@ -101,11 +103,11 @@ theorem n05_referenceOutput_canonicalHeight_l2Sequence
         |planeJacobian (K.chart (C.referenceState, 0) m) p| *
           (f p / K.height (C.referenceState, 0) m p) ^ 2 ≤ (b p * f p) ^ 2 := by
       filter_upwards [ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp
-      have hpo : p ∈ physicalPieceOpen S K m := ⟨hp.1, mem_univ _⟩
+      have hpo : p ∈ referencePhysicalPieceOpen S K m := ⟨hp.1, mem_univ _⟩
       have hb : |planeJacobian (K.chart (C.referenceState, 0) m) p| *
           (K.height (C.referenceState, 0) m p)⁻¹ ^ 2 ≤ b p ^ 2 := by
         exact (hcoefficient m p hpo).trans_eq
-          (n05CanonicalOutputMajorant_sq h.2.2.2.2 hB.le m hpo).symm
+          (n05CanonicalOutputMajorant_sq h.2.2.2.2.1 hB.le m hpo).symm
       calc
         _ = (|planeJacobian (K.chart (C.referenceState, 0) m) p| *
             (K.height (C.referenceState, 0) m p)⁻¹ ^ 2) * f p ^ 2 := by
@@ -126,10 +128,10 @@ theorem n05_referenceOutput_canonicalHeight_l2Sequence
           (sq_nonneg (f p / K.height (C.referenceState, 0) m p)))]
       exact hp
     refine ⟨(memLp_two_iff_integrable_sq
-      (n05_canonicalHeight_aestronglyMeasurable h.2.2.2.2 hz hs m (hangle m)
+      (n05_referenceCanonicalHeight_aestronglyMeasurable h.2.2.2.2.1 hz hs m (hangle m)
         hfmeas)).mpr
-      ((n05_canonicalHeight_sq_integrable_iff h.2.2.2.2 hz hs m (hangle m) f).mpr hint), ?_⟩
-    rw [n05_canonicalHeight_sq_integral h.2.2.2.2 hz hs m (hangle m) f]
+      ((n05_referenceCanonicalHeight_sq_integrable_iff h.2.2.2.2.1 hz hs m (hangle m) f).mpr hint), ?_⟩
+    rw [n05_referenceCanonicalHeight_sq_integral h.2.2.2.2.1 hz hs m (hangle m) f]
     exact integral_mono_ae hint hmajor hdom
   have hsubUnion : (⋃ m, P m) ⊆ radialCore D ×ˢ Ioc (0 : ℝ) (2 * Real.pi) := by
     intro p hp
@@ -139,7 +141,7 @@ theorem n05_referenceOutput_canonicalHeight_l2Sequence
     intro m n hmn
     apply Set.disjoint_left.mpr
     intro p hm hn
-    exact Set.disjoint_left.mp (n05_physicalPieces_pairwise_disjoint h.2.2.2.2 hmn)
+    exact Set.disjoint_left.mp (n05_physicalPieces_pairwise_disjoint h.2.2.2.2.1 hmn)
       hm.1 hn.1
   have hUnion : IntegrableOn (fun p => (b p * f p) ^ 2) (⋃ m, P m) volume :=
     hbf.integrable_sq.mono_measure (Measure.restrict_mono hsubUnion le_rfl)

@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05ReferencePieceIndexBounds
 import ContinuousFlexibility.Analysis.N05ReferencePieceCoefficients
 import ContinuousFlexibility.Analysis.N05PhysicalPieces
@@ -74,7 +75,7 @@ theorem n05CanonicalOutputMajorant_sq
     {K : CanonicalData S} {base loss : ℕ} {ε : ℝ}
     (h04 : N04Properties D T S C L K base loss ε)
     {B A : ℝ} (hB : 0 ≤ B) (m : ℕ) {p : PolarPoint}
-    (hp : p ∈ physicalPieceOpen S K m) :
+    (hp : p ∈ referencePhysicalPieceOpen S K m) :
     n05CanonicalOutputMajorant D S K B A p ^ 2 =
       B * radialE (D.cellIndex (K.cell m)) ^ A := by
   change n05PhysicalPieceConstant S K _ p.1 ^ 2 = _

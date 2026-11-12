@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05NegativePieceLabels
 import ContinuousFlexibility.Analysis.N05PhysicalPieces
 import Mathlib.Data.Set.Card
@@ -33,10 +34,10 @@ private theorem n05_cut_half_width_of_physical_envelope
     (2 * Λ ^ 2)⁻¹ ≤ K.physicalRight i - K.physicalLeft i := by
   let i := if right then (K.cutPair m).2 else (K.cutPair m).1
   have hΛp : 0 < Λ := zero_lt_one.trans_le hΛ
-  have h04 := h.2.2.2.2
-  have hwidth : K.physicalLeft i < K.physicalRight i := (h04.2.2.2.1 i).1
-  have hcore := n05_cut_physical_closed_subset_core h.1.1.1.2.2.2.1 h.2.2.2.2 m right
-  have hsub := n05_cut_physical_closed_subset_component h.2.2.2.2 m right
+  have h04 := h.2.2.2.2.1
+  have hwidth : K.physicalLeft i < K.physicalRight i := (h04.1.referenceBounds i).1
+  have hcore := n05_cut_physical_closed_subset_core h.1.1.1.2.2.2.1 h.2.2.2.2.1 m right
+  have hsub := n05_cut_physical_closed_subset_component h.2.2.2.2.1 m right
   have hint : IntervalIntegrable (opticalSpeed D.w) volume (K.physicalLeft i) (K.physicalRight i) := by
     apply ContinuousOn.intervalIntegrable
     rw [uIcc_of_le hwidth.le]
@@ -90,7 +91,7 @@ theorem n05_negativePiece_width_at_selected_cell
   refine ⟨2 * (B₀ * P) ^ 2, 2 * P, by positivity, by positivity, fun i hi => ?_⟩
   have hhalf : ∃ m : ℕ, ∃ right : Bool,
       i = if right then (K.cutPair m).2 else (K.cutPair m).1 := by
-    obtain ⟨m, hm⟩ := n05_negative_piece_is_cut_half h.1.1.1.2.2.2.1 h.2.2.2.2 hi
+    obtain ⟨m, hm⟩ := n05_negative_piece_is_cut_half h.1.1.1.2.2.2.1 h.2.2.2.2.1 hi
     rcases hm with hm | hm
     · exact ⟨m, false, hm⟩
     · exact ⟨m, true, hm⟩
@@ -102,7 +103,7 @@ theorem n05_negativePiece_width_at_selected_cell
   have hΛp : 0 < Λ := zero_lt_one.trans_le hΛ
   have hEp : 0 < E := Real.exp_pos _
   obtain ⟨r₀, hr₀, hr₀cell⟩ := hlabels i hi
-  have hsub := n05_cut_physical_open_subset_component h.2.2.2.2 m right
+  have hsub := n05_cut_physical_open_subset_component h.2.2.2.2.1 m right
   have hindex : |(D.cellIndex j : ℝ) - (D.cellIndex (K.cell i) : ℝ)| ≤ window :=
     hsame j (K.cell i) r₀ (hcarrier (hsub hr₀)) hr₀cell
   have hΛbound : Λ ≤ (B₀ * P) * E ^ P := by
@@ -139,7 +140,7 @@ private theorem n05_physical_piece_finite_packing
     have hsub : (⋃ i ∈ F, I i) ⊆ Ioo D.a D.b := by
       intro r hr
       obtain ⟨i, _, hri⟩ := mem_iUnion₂.mp hr
-      exact (h04.2.2.2.1 i).2.2 hri
+      exact (h04.1.referenceBounds i).2.2 hri
     have hvolume : volume.real (⋃ i ∈ F, I i) = ∑ i ∈ F, volume.real (I i) :=
       measureReal_biUnion_finset
         (fun i _ j _ hij => hdisjoint hij)
@@ -150,10 +151,10 @@ private theorem n05_physical_piece_finite_packing
           exact ENNReal.ofReal_ne_top)
     have hlocal (i : ℕ) (hi : i ∈ F) : δ ≤ volume.real (I i) := by
       dsimp only [I]
-      rw [Real.volume_real_Ioo_of_le (h04.2.2.2.1 i).1.le]
+      rw [Real.volume_real_Ioo_of_le (h04.1.referenceBounds i).1.le]
       exact hwidth i (hF hi)
     have hab : D.a ≤ D.b := by
-      have hi := h04.2.2.2.1 0
+      have hi := h04.1.referenceBounds 0
       have hm : (K.physicalLeft 0 + K.physicalRight 0) / 2 ∈
           Ioo (K.physicalLeft 0) (K.physicalRight 0) := by
         constructor <;> linarith only [hi.1]
@@ -202,7 +203,7 @@ theorem n05_negativePieceIndex_count
   have hE : 0 < radialE n := Real.exp_pos _
   have hE1 : 1 ≤ radialE n := Real.one_le_exp_iff.mpr (radialQ_nonneg n)
   have hc : 0 < C₀ * radialE n ^ A := mul_pos hC₀ (Real.rpow_pos_of_pos hE A)
-  obtain ⟨hfinite, hpacking⟩ := n05_physical_piece_finite_packing h.2.2.2.2
+  obtain ⟨hfinite, hpacking⟩ := n05_physical_piece_finite_packing h.2.2.2.2.1
     (Z := Z) (inv_pos.mpr hc) (fun i hi => by
       have hw := hwidth i hi.1
       simpa only [hi.2] using hw)

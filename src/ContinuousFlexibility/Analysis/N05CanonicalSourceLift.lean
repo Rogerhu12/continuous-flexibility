@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05CanonicalPeriodicRepresentative
 import ContinuousFlexibility.Analysis.N05PhysicalPieces
 import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
@@ -91,7 +92,7 @@ theorem n05CanonicalSourceLift_eq_piece
     {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
     {base loss : ℕ} {ε : ℝ}
     (h04 : N04Properties D T S C L K base loss ε) (F : CanonicalSequence S K)
-    (m : ℕ) {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    (m : ℕ) {p : PolarPoint} (hp : p ∈ referencePhysicalPieceOpen S K m) :
     n05CanonicalSourceLift S C K F p = n05CanonicalSourcePieceLift S C K m (F m) p := by
   classical
   have hi : n05PhysicalPieceIndex S K p.1 = m := n05PhysicalPieceIndex_eq h04 hp.1
@@ -109,7 +110,7 @@ theorem n05CanonicalSourcePieceLift_eq_actual
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     (hcoordinates : N05ControlledReferenceCoordinates D S C K)
     (m : ℕ) (u : CanonicalL2 S K m) {p : PolarPoint}
-    (hp : p ∈ physicalPieceOpen S K m) :
+    (hp : p ∈ referencePhysicalPieceOpen S K m) :
     n05CanonicalSourcePieceLift S C K m u p =
       |planeJacobian (K.chart (C.referenceState, 0) m) p| *
         n05CanonicalEvenPeriodicRepresentative S K m u
@@ -139,17 +140,17 @@ theorem n05CanonicalSourceLift_canonicalSource
     n05_referenceState_mem h01.2.1
   have hs : stateSector S C.referenceState :=
     n05_referenceState_sector h01.2.2.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, _, _, _, _, hcharts, _⟩
+  have h04 := h.2.2.2.2.1
+  have hcharts := n05_reference_charts h04
   obtain ⟨_, hΨ, _, hright, _, _, _, hnonzero⟩ :=
-    hcharts (C.referenceState, 0) hz hs m
+    hcharts hz hs m
   have hx := hΨ hp
   have hn := hnonzero _ hx
   change K.height (C.referenceState, 0) m (K.inverseChart (C.referenceState, 0) m p) *
       n05CanonicalSourceLift S C K F (K.inverseChart (C.referenceState, 0) m p) /
         |planeJacobian (K.chart (C.referenceState, 0) m)
           (K.inverseChart (C.referenceState, 0) m p)| = _
-  rw [n05CanonicalSourceLift_eq_piece h.2.2.2.2 F m hx,
+  rw [n05CanonicalSourceLift_eq_piece h.2.2.2.2.1 F m hx,
     n05CanonicalSourcePieceLift_eq_actual h hcoordinates m (F m) hx, hright p hp]
   field_simp [hn.1.ne', abs_ne_zero.mpr hn.2.1] <;> ring
 

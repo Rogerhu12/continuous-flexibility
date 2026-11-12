@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05CanonicalAngularTransport
 import ContinuousFlexibility.Analysis.N05CanonicalSmoothJets
 
@@ -57,8 +58,8 @@ theorem n05CanonicalAngularTransport_canonicalSource (m k : ℕ) (φ : PolarPoin
   have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h.1.1.1.2.1
   have hs : stateSector S C.referenceState := n05_referenceState_sector h.1.1.1.2.2.1
-  rcases h.2.2.2.2 with ⟨_, _, _, _, _, _, _, hcharts, _⟩
-  obtain ⟨_, hΨ, _, hright, _, _, _, hn⟩ := hcharts (C.referenceState, 0) hz hs k
+  have hcharts := n05_reference_charts h.2.2.2.2.1
+  obtain ⟨_, hΨ, _, hright, _, _, _, hn⟩ := hcharts hz hs k
   have hx := hΨ hp
   by_cases hkm : k = m
   · subst k
@@ -72,19 +73,19 @@ theorem n05CanonicalAngularTransport_canonicalSource (m k : ℕ) (φ : PolarPoin
   · have hnot : (K.inverseChart (C.referenceState, 0) k p).1 ∉
         Ioo (K.physicalLeft m) (K.physicalRight m) := by
       intro hm
-      exact Set.disjoint_left.mp (n05_physicalPieces_pairwise_disjoint h.2.2.2.2 hkm)
+      exact Set.disjoint_left.mp (n05_physicalPieces_pairwise_disjoint h.2.2.2.2.1 hkm)
         hx.1 hm
     simp only [canonicalSource, n05CanonicalAngularTransport, if_neg hnot,
       if_neg hkm, mul_zero, zero_div]
 
 include h in
 theorem n05CanonicalAngularLift_eq_piece (F : CanonicalSequence S K) (m : ℕ)
-    {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    {p : PolarPoint} (hp : p ∈ referencePhysicalPieceOpen S K m) :
     n05CanonicalAngularLift S C K F p = n05CanonicalAngularTransport S C K m
       (n05CanonicalPeriodicRepresentative S K m (F m)) p := by
   classical
   have hi : n05PhysicalPieceIndex S K p.1 = m :=
-    n05PhysicalPieceIndex_eq h.2.2.2.2 hp.1
+    n05PhysicalPieceIndex_eq h.2.2.2.2.1 hp.1
   simp only [n05CanonicalAngularLift, if_pos (show ∃ k,
     p.1 ∈ Ioo (K.physicalLeft k) (K.physicalRight k) from ⟨m, hp.1⟩)]
   rw [hi]
@@ -97,9 +98,9 @@ theorem n05CanonicalAngularLift_source_ae (F : CanonicalSequence S K) (m : ℕ) 
   have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h.1.1.1.2.1
   have hs : stateSector S C.referenceState := n05_referenceState_sector h.1.1.1.2.2.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, _, _, _, _, hcharts, _⟩
-  have hΨ := (hcharts (C.referenceState, 0) hz hs m).2.1
+  have h04 := h.2.2.2.2.1
+  have hcharts := n05_reference_charts h04
+  have hΨ := (hcharts hz hs m).2.1
   filter_upwards [n05CanonicalPeriodicRepresentative_ae S K m (F m),
     ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp hpm
   have hpo : p ∈ canonicalOpen S K m := ⟨hpm.1, mem_univ _⟩

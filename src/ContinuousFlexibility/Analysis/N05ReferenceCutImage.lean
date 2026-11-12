@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N05ReferenceSymbolClosure
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 
 /-!
 # The actual image of the negative cut
@@ -19,8 +20,8 @@ open scoped Topology ContDiff
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- The actual chart maps either physical endpoint to a canonical endpoint.
-Only the frozen maps, inverse identities and smoothness are used. -/
+/-- A point on the actual current physical boundary maps to a canonical
+endpoint. Closed inverse identities rule out an interior image. -/
 theorem n05_chart_physical_boundary_image
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {L : ReturnCorrectionData S}
@@ -28,29 +29,14 @@ theorem n05_chart_physical_boundary_image
     (h04 : N04Properties D T S C L K base loss ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) {m : ℕ} {x : PolarPoint}
-    (hx : x.1 = K.physicalLeft m ∨ x.1 = K.physicalRight m) :
+    (hx : x ∈ frontier (physicalPieceOpen S K z m)) :
     (K.chart z m x).1 = K.left m ∨ (K.chart z m x).1 = K.right m := by
-  rcases h04 with ⟨_, _, _, hpieces, _, _, _, hcharts, hclosed, _⟩
-  obtain ⟨hmap, himap, hleft, _, _, hinverse, _⟩ := hcharts z hz hs m
-  have hxClosed : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) := by
-    rcases hx with hxl | hxr
-    · rw [hxl]
-      exact ⟨le_rfl, (hpieces m).1.le⟩
-    · rw [hxr]
-      exact ⟨(hpieces m).1.le, le_rfl⟩
-  have hxClosure : x.1 ∈ closure (Ioo (K.physicalLeft m) (K.physicalRight m)) := by
-    rwa [closure_Ioo (hpieces m).1.ne]
-  have hΨ : ContinuousAt (K.chart z m) x :=
-    (hclosed z hz hs m x hxClosed).1.continuousAt
-  have hslice : ContinuousAt (fun r : ℝ => K.chart z m (r, x.2)) x.1 :=
-    hΨ.comp (f := fun r : ℝ => (r, x.2))
-      (continuousAt_id.prodMk continuousAt_const)
-  have himage : (K.chart z m x).1 ∈ Icc (K.left m) (K.right m) := by
-    have hmem := hslice.fst.continuousWithinAt.mem_closure hxClosure
-      (show MapsTo (fun r : ℝ => (K.chart z m (r, x.2)).1)
-          (Ioo (K.physicalLeft m) (K.physicalRight m)) (Ioo (K.left m) (K.right m)) from
-        fun r hr => (hmap ⟨hr, mem_univ _⟩).1)
-    simpa only [closure_Ioo (hpieces m).2.1.ne] using hmem
+  have hopen := (h04.1.domains z hz hs m).1
+  rw [hopen.frontier_eq] at hx
+  have hboundary := h04.1.boundary z hz hs m
+  have hxClosed : x ∈ physicalPieceClosed S K z m := hx.1
+  have himage : (K.chart z m x).1 ∈ Icc (K.left m) (K.right m) :=
+    (hboundary.1 hxClosed).1
   by_cases hleftEnd : (K.chart z m x).1 = K.left m
   · exact Or.inl hleftEnd
   by_cases hrightEnd : (K.chart z m x).1 = K.right m
@@ -58,25 +44,44 @@ theorem n05_chart_physical_boundary_image
   have hy : K.chart z m x ∈ canonicalOpen S K m :=
     ⟨⟨lt_of_le_of_ne himage.1 (Ne.symm hleftEnd),
       lt_of_le_of_ne himage.2 hrightEnd⟩, mem_univ _⟩
-  have hi : ContinuousAt (K.inverseChart z m) (K.chart z m x) :=
-    (hinverse.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hy)).continuousAt
-  haveI : NeBot (𝓝[Ioo (K.physicalLeft m) (K.physicalRight m)] x.1) :=
-    mem_closure_iff_nhdsWithin_neBot.mp hxClosure
-  have hevent : (fun r : ℝ => K.inverseChart z m (K.chart z m (r, x.2))) =ᶠ[
-      𝓝[Ioo (K.physicalLeft m) (K.physicalRight m)] x.1] (fun r => (r, x.2)) := by
-    filter_upwards [self_mem_nhdsWithin] with r hr
-    exact hleft (r, x.2) ⟨hr, mem_univ _⟩
-  have heq : K.inverseChart z m (K.chart z m x) = x :=
-    tendsto_nhds_unique_of_eventuallyEq
-      (hi.comp (f := fun r : ℝ => K.chart z m (r, x.2)) hslice).continuousWithinAt
-      (continuousAt_id.prodMk continuousAt_const).continuousWithinAt hevent
-  have hinside := (himap hy).1
-  rw [heq] at hinside
-  rcases hx with hxl | hxr
-  · rw [hxl] at hinside
-    exact (lt_irrefl _ hinside.1).elim
-  · rw [hxr] at hinside
-    exact (lt_irrefl _ hinside.2).elim
+  have hinside := (h04.1.charts z hz hs m).2.1 hy
+  have hinverse := hboundary.2.2.1 x hxClosed
+  rw [hinverse] at hinside
+  exact (hx.2 hinside).elim
+
+/-- The stored radial endpoints describe the physical boundary only at
+reference. This specialization preserves the reference cut-image interface. -/
+theorem n05_reference_chart_physical_boundary_image
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {L : ReturnCorrectionData S}
+    {K : CanonicalData S} {base loss : ℕ} {ε : ℝ}
+    (h04 : N04Properties D T S C L K base loss ε)
+    (hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S C.referenceState) {m : ℕ} {x : PolarPoint}
+    (hx : x.1 = K.physicalLeft m ∨ x.1 = K.physicalRight m) :
+    (K.chart (C.referenceState, 0) m x).1 = K.left m ∨
+      (K.chart (C.referenceState, 0) m x).1 = K.right m := by
+  have hxClosed : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) := by
+    rcases hx with hxl | hxr
+    · rw [hxl]
+      exact ⟨le_rfl, (h04.1.referenceBounds m).1.le⟩
+    · rw [hxr]
+      exact ⟨(h04.1.referenceBounds m).1.le, le_rfl⟩
+  have hxFrontier : x ∈ frontier (physicalPieceOpen S K (C.referenceState, 0) m) := by
+    rw [(h04.1.domains (C.referenceState, 0) hz hs m).1.frontier_eq]
+    refine ⟨?_, ?_⟩
+    · change x ∈ physicalPieceClosed S K (C.referenceState, 0) m
+      rw [n05_reference_physicalClosed_eq h04 m]
+      exact ⟨hxClosed, mem_univ _⟩
+    · intro hinside
+      rw [h04.1.referenceDomain m] at hinside
+      have hr : x.1 ∈ Ioo (K.physicalLeft m) (K.physicalRight m) := hinside.1
+      rcases hx with hxl | hxr
+      · rw [hxl] at hr
+        exact lt_irrefl _ hr.1
+      · rw [hxr] at hr
+        exact lt_irrefl _ hr.2
+  exact n05_chart_physical_boundary_image h04 hz hs hxFrontier
 
 /-- Strict negative physical slope forces positive canonical radius, even at
 a physical endpoint lying inside the annulus. -/
@@ -94,9 +99,8 @@ theorem n05_negative_reference_radius_pos
   obtain ⟨B, hB⟩ := h01.1.1
   have hr : 0 < x.1 := hB.1.1.trans hxD.1.1
   have hw : 0 < D.w x.1 := hB.1.2.2.2.2.1 x.1 hxD.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, _, _, _, _, _, hclosed, _⟩
-  have hh := (hclosed (C.referenceState, 0) (n05_referenceState_mem h01.2.1)
+  have h04 := h.2.2.2.2.1
+  have hh := (n05_reference_closed_properties h04 (n05_referenceState_mem h01.2.1)
     (n05_referenceState_sector h01.2.2.1) m x hx).2.2.2
   have hnegative : K.height (C.referenceState, 0) m x ^ 4 *
       (D.w x.1 * (deriv D.w x.1 / x.1)) < 0 :=
@@ -117,8 +121,9 @@ theorem n05_cut_reference_image
     (K.chart (C.referenceState, 0) i (K.physicalRight (K.cutPair m).1, θ)).1 =
       K.cutRadius m := by
   have h01 := h.1.1.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _, _, _, _, _, _, _, hcutpair, _⟩
+  have h04 := h.2.2.2.2.1
+  have hpieces := h04.1.referenceBounds
+  have hcutpair := h04.2.1.1.1
   obtain ⟨hnegL, hnegR, hleft, hright, hmeet, _, hzeroL, hzeroR, hendL, hendR⟩ :=
     hcutpair m
   let c : ℝ := K.physicalRight (K.cutPair m).1
@@ -143,11 +148,10 @@ theorem n05_cut_reference_image
   have hd : deriv D.w c < 0 := hgeom.2.2.2.1 m c hcut
   have hpositive := n05_negative_reference_radius_pos hT hS h hdata.1
     (x := (c, θ)) hcClosed hcD hd
-  have himage := n05_chart_physical_boundary_image h.2.2.2.2
+  have himage := n05_reference_chart_physical_boundary_image h.2.2.2.2.1
     (n05_referenceState_mem h01.2.1) (n05_referenceState_sector h01.2.2.1)
     (x := (c, θ)) hdata.2.2.2
   rw [hdata.2.1, hdata.2.2.1] at himage
   exact himage.resolve_left hpositive.ne'
 
 end ContinuousFlexibility.Statements
-

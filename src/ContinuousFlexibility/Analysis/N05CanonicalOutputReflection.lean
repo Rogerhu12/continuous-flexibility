@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05CanonicalInverseDefinition
 import ContinuousFlexibility.Analysis.N05CanonicalTests
 
@@ -30,14 +31,16 @@ theorem n05_canonicalHeight_reflection
     (m : ℕ) {p : PolarPoint} (hp : p ∈ canonicalOpen S K m) :
     canonicalHeight S K z m f (p.1, Real.pi - p.2) =
       canonicalHeight S K z m f p := by
-  rcases h04 with ⟨_, _, _, _, _, _, _, hcharts, _, hreflect, hinverse, _⟩
-  obtain ⟨_, hΨ, hleft, hright, _, _, _, hgeometry⟩ := hcharts z hz hs m
+  have hreflect := h04.1.reflection
+  have hinverse := h04.1.inverseReflection
+  have hdomains := h04.1.domains z hz hs m
+  obtain ⟨_, hΨ, hleft, hright, _, _, _, hgeometry⟩ := h04.1.charts z hz hs m
   have hshift (q : PolarPoint) (hq : q ∈ canonicalOpen S K m) :
       K.inverseChart z m (q + (0, Real.pi)) =
         K.inverseChart z m q + (0, Real.pi) := by
     have hx := hΨ hq
-    have hxshift : K.inverseChart z m q + (0, Real.pi) ∈ physicalPieceOpen S K m := by
-      exact ⟨by simpa only [Prod.fst_add, add_zero] using hx.1, mem_univ _⟩
+    have hxshift : K.inverseChart z m q + (0, Real.pi) ∈ physicalPieceOpen S K z m :=
+      (hdomains.2.2.2.1 _).mpr hx
     have he : K.chart z m (K.inverseChart z m q + (0, Real.pi)) =
         q + (0, Real.pi) := by
       rw [(hgeometry _ hx).2.2.1, hright q hq]
@@ -46,7 +49,7 @@ theorem n05_canonicalHeight_reflection
   have hpneg : (p.1, -p.2) ∈ canonicalOpen S K m := ⟨hp.1, mem_univ _⟩
   have hx := hΨ hp
   have hxneg : ((K.inverseChart z m p).1, -(K.inverseChart z m p).2) ∈
-      physicalPieceOpen S K m := ⟨hx.1, mem_univ _⟩
+      physicalPieceOpen S K z m := (hdomains.2.2.2.2.1 _).mpr hx
   have he : (p.1, Real.pi - p.2) = (p.1, -p.2) + ((0, Real.pi) : PolarPoint) := by
     ext <;> simp only [Prod.fst_add, Prod.snd_add, add_zero] <;> ring
   have hi : K.inverseChart z m (p.1, Real.pi - p.2) =
@@ -101,7 +104,7 @@ theorem n05CanonicalGlobalInverse_reflection
   have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h.1.1.1.2.1
   have hs : stateSector S C.referenceState := n05_referenceState_sector h.1.1.1.2.2.1
-  apply n05_canonicalL2_reflection_of_height_rep h.2.2.2.2 hz hs ?_ ?_ m (hrep.1 m)
+  apply n05_canonicalL2_reflection_of_height_rep h.2.2.2.2.1 hz hs ?_ ?_ m (hrep.1 m)
   · intro p
     dsimp only
     rw [ha.2.2.1 p]

@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05CanonicalSourceBlock
 import ContinuousFlexibility.Radial.ReferenceCellL2
 
@@ -53,10 +54,10 @@ theorem n05CanonicalSourceBlock_canonicalSource
   have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h.1.1.1.2.1
   have hs : stateSector S C.referenceState := n05_referenceState_sector h.1.1.1.2.2.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, _, _, _, _, hcharts, _⟩
+  have h04 := h.2.2.2.2.1
+  have hcharts := n05_reference_charts h04
   obtain ⟨_, hΨ, _, hright, _, _, _, hnonzero⟩ :=
-    hcharts (C.referenceState, 0) hz hs k
+    hcharts hz hs k
   have hx := hΨ hp
   by_cases hkm : k = m
   · subst k
@@ -72,7 +73,7 @@ theorem n05CanonicalSourceBlock_canonicalSource
   · have hnot : (K.inverseChart (C.referenceState, 0) k p).1 ∉
         Ioo (K.physicalLeft m) (K.physicalRight m) := by
       intro hm
-      exact Set.disjoint_left.mp (n05_physicalPieces_pairwise_disjoint h.2.2.2.2 hkm)
+      exact Set.disjoint_left.mp (n05_physicalPieces_pairwise_disjoint h.2.2.2.2.1 hkm)
         hx.1 hm
     simp only [canonicalSource, n05CanonicalSourceBlock, ite_eq_right hnot,
       ite_eq_right hkm, mul_zero, zero_div]

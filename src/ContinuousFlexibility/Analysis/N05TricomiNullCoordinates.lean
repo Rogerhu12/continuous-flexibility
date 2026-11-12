@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05ReferenceCutImage
 import ContinuousFlexibility.Analysis.N05CanonicalBoundarySymmetry
 import Mathlib.Analysis.SpecialFunctions.Sqrt
@@ -119,7 +120,7 @@ theorem n05_negative_reference_null_identities
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     {m : ℕ} (hm : K.positive m = false) {x : PolarPoint}
-    (hx : x ∈ physicalPieceOpen S K m) {σ : ℝ} (hσ : σ ^ 2 = 1) :
+    (hx : x ∈ referencePhysicalPieceOpen S K m) {σ : ℝ} (hσ : σ ^ 2 = 1) :
     let Ψ := K.chart (C.referenceState, 0) m
     let N := n05NullCoordinate Ψ σ
     let ξ := fun p => (Ψ p).1
@@ -131,14 +132,16 @@ theorem n05_negative_reference_null_identities
         σ * Real.sqrt (Ψ x).1 * |planeJacobian Ψ x| := by
   dsimp only
   have h01 := h.1.1.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _, hnegative, _, _, hclosed, _⟩
+  have h04 := h.2.2.2.2.1
+  have hpieces := h04.1.referenceBounds
+  have hnegative := h04.1.referenceNegative
+  have hclosed := n05_reference_closed_properties h04
   have hxClosed : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) :=
     ⟨hx.1.1.le, hx.1.2.le⟩
   have hxD : x ∈ annularOpen D := ⟨(hpieces m).2.2 hx.1, mem_univ _⟩
   have hpos := n05_negative_reference_radius_pos hT hS h hm hxClosed hxD
     (hnegative m hm x.1 hx.1)
-  obtain ⟨hΨ, _, _, hh⟩ := hclosed (C.referenceState, 0)
+  obtain ⟨hΨ, _, _, hh⟩ := hclosed
     (n05_referenceState_mem h01.2.1) (n05_referenceState_sector h01.2.2.1) m x hxClosed
   have hsym := n05_negative_reference_symbol_closed hT hS h hm hxClosed
   dsimp only at hsym
@@ -157,11 +160,13 @@ theorem n05_negative_reference_null_angular_ne_zero
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     {m : ℕ} (hm : K.positive m = false) {x : PolarPoint}
-    (hx : x ∈ physicalPieceOpen S K m) {σ : ℝ} (hσ : σ ^ 2 = 1) :
+    (hx : x ∈ referencePhysicalPieceOpen S K m) {σ : ℝ} (hσ : σ ^ 2 = 1) :
     angularPartial (n05NullCoordinate (K.chart (C.referenceState, 0) m) σ) x ≠ 0 := by
   have h01 := h.1.1.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _, hnegative, _, _, hclosed, _⟩
+  have h04 := h.2.2.2.2.1
+  have hpieces := h04.1.referenceBounds
+  have hnegative := h04.1.referenceNegative
+  have hclosed := n05_reference_closed_properties h04
   have hxClosed : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) :=
     ⟨hx.1.1.le, hx.1.2.le⟩
   have hxD : x ∈ annularOpen D := ⟨(hpieces m).2.2 hx.1, mem_univ _⟩
@@ -169,7 +174,7 @@ theorem n05_negative_reference_null_angular_ne_zero
   have hw : 0 < D.w x.1 := hB.1.2.2.2.2.1 x.1 hxD.1
   have hpos := n05_negative_reference_radius_pos hT hS h hm hxClosed hxD
     (hnegative m hm x.1 hx.1)
-  have hJ := (hclosed (C.referenceState, 0) (n05_referenceState_mem h01.2.1)
+  have hJ := (hclosed (n05_referenceState_mem h01.2.1)
     (n05_referenceState_sector h01.2.2.1) m x hxClosed).2.2.1
   have hσ0 : σ ≠ 0 := by
     intro hz
@@ -180,4 +185,3 @@ theorem n05_negative_reference_null_angular_ne_zero
     (Real.sqrt_pos.mpr hpos).ne' (abs_ne_zero.mpr hJ) hid.1 hid.2
 
 end ContinuousFlexibility.Statements
-

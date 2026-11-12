@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Statements.Nonlinear
 import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 
@@ -49,7 +50,8 @@ theorem n05_physicalPieces_pairwise_disjoint
     Pairwise (fun m n => Disjoint
       (Ioo (K.physicalLeft m) (K.physicalRight m))
       (Ioo (K.physicalLeft n) (K.physicalRight n))) := by
-  rcases h04 with ⟨_, _, _, hinterval, _, _, hcover, _⟩
+  have hinterval := h04.1.referenceBounds
+  have hcover := h04.1.referencePartition
   obtain ⟨E, hE, hcover⟩ := hcover
   apply n05_intervals_disjoint_of_ae_unique hE
   intro r hr m n hm hn

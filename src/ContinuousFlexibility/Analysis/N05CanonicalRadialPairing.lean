@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05CanonicalRadialTestDerivative
 import ContinuousFlexibility.Analysis.N05CanonicalAngularPairing
 import ContinuousFlexibility.Scalar.Conservation
@@ -46,7 +47,7 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 include h hcoordinates in
 theorem n05CanonicalRadialTestTransport_radial_zero_of_outside (m : ℕ)
     {φ : PolarPoint → ℝ} (hφ : CanonicalTest S K m φ) {p : PolarPoint}
-    (hp : p ∉ physicalPieceOpen S K m) :
+    (hp : p ∉ referencePhysicalPieceOpen S K m) :
     radialPartial (n05CanonicalRadialTestTransport S C K m φ) p = 0 := by
   obtain ⟨J, hJ, hJI, hzero⟩ :=
     n05CanonicalRadialTestTransport_compact_support h hcoordinates m hφ
@@ -72,7 +73,7 @@ theorem n05_weakCanonicalRadialDerivative_of_physical (hab : D.a ≤ D.b) (m : �
     (hur : MemLp ur 2 (radialPhysicalMeasure D))
     (hg : MemLp g 2 (radialPhysicalMeasure D))
     (hweak : WeakNormalDerivative D u ur)
-    (hformula : ∀ p ∈ physicalPieceOpen S K m,
+    (hformula : ∀ p ∈ referencePhysicalPieceOpen S K m,
       g p = (ur p - u p * (radialPartial (K.height (C.referenceState, 0) m) p /
         K.height (C.referenceState, 0) m p)) / planeJacobian (K.chart (C.referenceState, 0) m) p)
     {f d : CanonicalL2 S K m}
@@ -100,7 +101,7 @@ theorem n05_weakCanonicalRadialDerivative_of_physical (hab : D.a ≤ D.b) (m : �
     r11b_continuous_memLp hψrSmooth.continuous
   have hpoint (p : PolarPoint) :
       g p * τ p + u p * τr p = ur p * ψ p + u p * radialPartial ψ p := by
-    by_cases hp : p ∈ physicalPieceOpen S K m
+    by_cases hp : p ∈ referencePhysicalPieceOpen S K m
     · have hval : ψ p = τ p / planeJacobian (K.chart (C.referenceState, 0) m) p := by
         change n05CanonicalAngularTransport S C K m φ p /
           deriv (fun r => (K.chart (C.referenceState, 0) m (r, 0)).1) p.1 = _

@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05RootAngularRigidity
 import ContinuousFlexibility.Analysis.N05NegativePieceEnumeration
 
@@ -33,27 +34,25 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {L : ReturnCorrectionData S} {K : CanonicalData S} {base loss : ℕ} {ε : ℝ}
 
-/-- The actual chart maps the whole closed physical strip into its closed
-canonical interval.  Only the frozen interior map and closed continuity
-are needed for this extension. -/
+/-- The actual chart maps the closure of its current physical domain into
+the closed canonical interval, as recorded by the genuine boundary map. -/
 theorem n05_chart_physical_closed_range
     (h04 : N04Properties D T S C L K base loss ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) {m : ℕ} {x : PolarPoint}
-    (hx : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
+    (hx : x ∈ physicalPieceClosed S K z m) :
     (K.chart z m x).1 ∈ Icc (K.left m) (K.right m) := by
-  rcases h04 with ⟨_, _, _, hpieces, _, _, _, hcharts, hclosed, _⟩
-  have hxClosure : x.1 ∈ closure (Ioo (K.physicalLeft m) (K.physicalRight m)) := by
-    rwa [closure_Ioo (hpieces m).1.ne]
-  have hslice : ContinuousAt (fun r : ℝ => K.chart z m (r, x.2)) x.1 :=
-    (hclosed z hz hs m x hx).1.continuousAt.comp
-      (f := fun r : ℝ => (r, x.2))
-      (continuousAt_id.prodMk continuousAt_const)
-  have himage := hslice.fst.continuousWithinAt.mem_closure hxClosure
-    (show MapsTo (fun r : ℝ => (K.chart z m (r, x.2)).1)
-        (Ioo (K.physicalLeft m) (K.physicalRight m)) (Ioo (K.left m) (K.right m)) from
-      fun r hr => ((hcharts z hz hs m).1 ⟨hr, mem_univ _⟩).1)
-  simpa only [closure_Ioo (hpieces m).2.1.ne] using himage
+  exact ((h04.1.boundary z hz hs m).1 hx).1
+
+theorem n05_reference_chart_physical_closed_range
+    (h04 : N04Properties D T S C L K base loss ε)
+    (hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S C.referenceState) {m : ℕ} {x : PolarPoint}
+    (hx : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
+    (K.chart (C.referenceState, 0) m x).1 ∈ Icc (K.left m) (K.right m) := by
+  apply n05_chart_physical_closed_range h04 hz hs
+  rw [n05_reference_physicalClosed_eq h04 m]
+  exact ⟨hx, mem_univ _⟩
 
 theorem n05_cut_reference_closed_radius_nonneg
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
@@ -63,14 +62,14 @@ theorem n05_cut_reference_closed_radius_nonneg
       (K.physicalRight (if right then (K.cutPair m).2 else (K.cutPair m).1))) (θ : ℝ) :
     0 ≤ (K.chart (C.referenceState, 0)
       (if right then (K.cutPair m).2 else (K.cutPair m).1) (r, θ)).1 := by
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, _, _, _, _, _, _, _, _, hcuts, _⟩
+  have h04 := h.2.2.2.2.1
+  have hcuts := h04.2.1.1.1
   obtain ⟨_, _, _, _, _, _, hzeroL, hzeroR, _⟩ := hcuts m
   have hzero : K.left (if right then (K.cutPair m).2 else (K.cutPair m).1) = 0 := by
     cases right
     · exact hzeroL
     · exact hzeroR
-  have himage := n05_chart_physical_closed_range h.2.2.2.2
+  have himage := n05_reference_chart_physical_closed_range h.2.2.2.2.1
     (n05_referenceState_mem h.1.1.1.2.1) (n05_referenceState_sector h.1.1.1.2.2.1)
     (x := (r, θ)) hr
   simpa only [hzero] using himage.1
@@ -98,7 +97,7 @@ theorem n05_cut_reference_null_formula
     (σ * orientation) * opticalTravel D.w (K.physicalLeft i) root
   have ht : n05NullCoordinate Ψ σ (r, θ) = n05NullCoordinate Ψ σ (root, angle) :=
     n05_cut_reference_null_transport hT hS h m right hσ hr
-      (n05_cut_physical_root_mem h.2.2.2.2 m right) θ
+      (n05_cut_physical_root_mem h.2.2.2.2.1 m right) θ
   have hroot : Ψ (root, angle) = (0, angle) :=
     n05_cut_reference_root_chart hT hS h m right angle
   calc
@@ -155,7 +154,7 @@ theorem n05_negative_reference_chart_radial
     (hr : r ∈ Icc (K.physicalLeft i) (K.physicalRight i)) (θ : ℝ) :
     K.chart (C.referenceState, 0) i (r, θ) =
       ((K.chart (C.referenceState, 0) i (r, 0)).1, θ) := by
-  obtain ⟨m, hm⟩ := n05_negative_piece_is_cut_half h.1.1.1.2.2.2.1 h.2.2.2.2 hi
+  obtain ⟨m, hm⟩ := n05_negative_piece_is_cut_half h.1.1.1.2.2.2.1 h.2.2.2.2.1 hi
   rcases hm with rfl | rfl
   · exact n05_cut_reference_chart_radial hT hS h m false hr θ
   · exact n05_cut_reference_chart_radial hT hS h m true hr θ

@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05TricomiNullCoordinates
 import ContinuousFlexibility.Analysis.N05DerivativeOrientation
 
@@ -28,12 +29,14 @@ theorem n05_negative_reference_null_angular_pos
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     {m : ℕ} (hm : K.positive m = false) {x : PolarPoint}
-    (hx : x ∈ physicalPieceOpen S K m) {σ : ℝ} (hσ : σ ^ 2 = 1) :
+    (hx : x ∈ referencePhysicalPieceOpen S K m) {σ : ℝ} (hσ : σ ^ 2 = 1) :
     0 < angularPartial (n05NullCoordinate (K.chart (C.referenceState, 0) m) σ) x := by
   let N : PolarPoint → ℝ := n05NullCoordinate (K.chart (C.referenceState, 0) m) σ
   have h01 := h.1.1.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _, hnegative, _, _, hclosed, _⟩
+  have h04 := h.2.2.2.2.1
+  have hpieces := h04.1.referenceBounds
+  have hnegative := h04.1.referenceNegative
+  have hclosed := n05_reference_closed_properties h04
   have hxClosed : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) :=
     ⟨hx.1.1.le, hx.1.2.le⟩
   have hmem : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
@@ -44,7 +47,7 @@ theorem n05_negative_reference_null_angular_pos
     have hpositive := n05_negative_reference_radius_pos hT hS h hm
       (x := (x.1, θ)) hxClosed hp (hnegative m hm x.1 hx.1)
     exact n05NullCoordinate_contDiffAt
-      (hclosed (C.referenceState, 0) hmem hsector m (x.1, θ) hxClosed).1 hpositive σ
+      (hclosed hmem hsector m (x.1, θ) hxClosed).1 hpositive σ
   have hd (θ : ℝ) : HasDerivAt (fun t => N (x.1, t))
       (angularPartial N (x.1, θ)) θ :=
     Radial.hasDerivAt_angularSlice ((hN θ).differentiableAt (by simp))
@@ -60,7 +63,7 @@ theorem n05_negative_reference_null_angular_pos
     have hchart : K.chart (C.referenceState, 0) m (x.1, θ + Real.pi) =
         K.chart (C.referenceState, 0) m (x.1, θ) + (0, Real.pi) := by
       simpa only [Prod.mk_add_mk, add_zero] using
-        (n05_canonical_closed_periodicity h.2.2.2.2 hmem hsector m
+        (n05_reference_closed_periodicity h.2.2.2.2.1 hmem hsector m
           (p := (x.1, θ)) hxClosed).1
     simp only [N, n05NullCoordinate, hchart, Prod.fst_add, Prod.snd_add, add_zero]
     ring
@@ -70,17 +73,18 @@ theorem n05_negative_reference_radial_ne_zero
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     {m : ℕ} (hm : K.positive m = false) {x : PolarPoint}
-    (hx : x ∈ physicalPieceOpen S K m) :
+    (hx : x ∈ referencePhysicalPieceOpen S K m) :
     radialPartial (fun p => (K.chart (C.referenceState, 0) m p).1) x ≠ 0 := by
   have h01 := h.1.1.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, _, _, hnegative, _, _, hclosed, _⟩
+  have h04 := h.2.2.2.2.1
+  have hnegative := h04.1.referenceNegative
+  have hclosed := n05_reference_closed_properties h04
   have hxClosed : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) :=
     ⟨hx.1.1.le, hx.1.2.le⟩
-  have hr : 0 < x.1 := n05_physical_closed_radius_pos h01.1.1 h.2.2.2.2 hxClosed
+  have hr : 0 < x.1 := n05_physical_closed_radius_pos h01.1.1 h.2.2.2.2.1 hxClosed
   have hc : deriv D.w x.1 / x.1 ≤ 0 :=
     (div_neg_of_neg_of_pos (hnegative m hm x.1 hx.1) hr).le
-  have hJ := (hclosed (C.referenceState, 0) (n05_referenceState_mem h01.2.1)
+  have hJ := (hclosed (n05_referenceState_mem h01.2.1)
     (n05_referenceState_sector h01.2.2.1) m x hxClosed).2.2.1
   have hsym := (n05_negative_reference_symbol_closed hT hS h hm hxClosed).1
   intro hzero
@@ -105,7 +109,7 @@ theorem n05_negative_reference_radial_orientation
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     {m : ℕ} (hm : K.positive m = false) {x : PolarPoint}
-    (hx : x ∈ physicalPieceOpen S K m) {orientation : ℝ}
+    (hx : x ∈ referencePhysicalPieceOpen S K m) {orientation : ℝ}
     (hinc : 0 < orientation *
       ((K.chart (C.referenceState, 0) m (K.physicalRight m, x.2)).1 -
         (K.chart (C.referenceState, 0) m (K.physicalLeft m, x.2)).1)) :
@@ -113,14 +117,15 @@ theorem n05_negative_reference_radial_orientation
       radialPartial (fun p => (K.chart (C.referenceState, 0) m p).1) x := by
   let ξ : PolarPoint → ℝ := fun p => (K.chart (C.referenceState, 0) m p).1
   have h01 := h.1.1.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _, _, _, _, hclosed, _⟩
+  have h04 := h.2.2.2.2.1
+  have hpieces := h04.1.referenceBounds
+  have hclosed := n05_reference_closed_properties h04
   have hmem : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
   have hξ (r : ℝ) (hr : r ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
       ContDiffAt ℝ ∞ ξ (r, x.2) :=
-    (hclosed (C.referenceState, 0) hmem hsector m (r, x.2) hr).1.fst
+    (hclosed hmem hsector m (r, x.2) hr).1.fst
   have hf : ContinuousOn (fun r => ξ (r, x.2))
       (Icc (K.physicalLeft m) (K.physicalRight m)) := fun r hr =>
     ((hξ r hr).continuousAt.comp (f := fun t : ℝ => (t, x.2))
@@ -146,14 +151,15 @@ theorem n05_cut_reference_radial_orientation
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     (m : ℕ) (right : Bool) {x : PolarPoint}
-    (hx : x ∈ physicalPieceOpen S K
+    (hx : x ∈ referencePhysicalPieceOpen S K
       (if right then (K.cutPair m).2 else (K.cutPair m).1)) :
     0 < (if right then (-1 : ℝ) else 1) *
       radialPartial (fun p => (K.chart (C.referenceState, 0)
         (if right then (K.cutPair m).2 else (K.cutPair m).1) p).1) x := by
   have h01 := h.1.1.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _, _, _, _, _, _, _, hcuts, _⟩
+  have h04 := h.2.2.2.2.1
+  have hpieces := h04.1.referenceBounds
+  have hcuts := h04.2.1.1.1
   obtain ⟨hnegL, hnegR, hleft, hright, hmeet, hcutpos, _⟩ := hcuts m
   have hroots := h01.2.2.2.1.2.1 m
   have hrootL :

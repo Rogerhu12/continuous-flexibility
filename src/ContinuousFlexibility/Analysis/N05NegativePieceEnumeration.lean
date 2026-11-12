@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05PhysicalPieces
 
 /-!
@@ -25,8 +26,9 @@ theorem n05_negative_piece_is_cut_half
     (h04 : N04Properties D T S C L K base loss ε)
     {i : ℕ} (hi : K.positive i = false) :
     ∃ m : ℕ, i = (K.cutPair m).1 ∨ i = (K.cutPair m).2 := by
-  have hgeometry := h04
-  rcases hgeometry with ⟨_, _, _, hpieces, _, hnegative, _, _, _, _, _, hcuts, _⟩
+  have hpieces := h04.1.referenceBounds
+  have hnegative := h04.1.referenceNegative
+  have hcuts := h04.2.1.1.1
   obtain ⟨x, hx⟩ := nonempty_Ioo.mpr (hpieces i).1
   have hxD : x ∈ radialCore D := (hpieces i).2.2 hx
   obtain ⟨m, hxm⟩ := hgeom.2.2.2.2.1 x hxD (hnegative i hi x hx)

@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05OpticalRootActual
 import ContinuousFlexibility.Analysis.N05OpticalProfileSecondDerivative
 import ContinuousFlexibility.Analysis.N05NegativeTravel
@@ -137,8 +138,10 @@ theorem n05_negative_component_first_geometry
   let F : ℝ → ℝ := fun t => -deriv D.w t / (t * D.w t)
   have hΛpos : 0 < Λ := lt_of_lt_of_le zero_lt_one hΛ
   have hC := h.1.1.1.2.2.2.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _, _, _, _, hclosed, _, _, hcuts, _⟩
+  have h04 := h.2.2.2.2.1
+  have hpieces := h04.1.referenceBounds
+  have hclosed := n05_reference_closed_properties h04
+  have hcuts := h04.2.1.1.1
   obtain ⟨hnegL, hnegR, hleft, hright, hmeet, _, _, _, _⟩ := hcuts m
   have hlc : l < c := by
     change C.left m < K.physicalRight (K.cutPair m).1
@@ -241,12 +244,12 @@ theorem n05_negative_component_first_geometry
   have hξc (x : ℝ) (hx : x ∈ Icc (0 : ℝ) a) : ContDiffAt ℝ 2 ξ x :=
     (ContDiffAt.fun_comp (f := fun t : ℝ => (ρ t, θ))
       (g := fun p : PolarPoint => (K.chart (C.referenceState, 0) i p).1) x
-      (hclosed (C.referenceState, 0) hmem hs i (ρ x, θ) (hmapHalf x hx)).1.fst
+      (hclosed hmem hs i (ρ x, θ) (hmapHalf x hx)).1.fst
       (hρC.contDiffAt.prodMk contDiffAt_const)).of_le (by simp)
   have hHc (x : ℝ) (hx : x ∈ Icc (0 : ℝ) a) : ContDiffAt ℝ 1 H x :=
     (ContDiffAt.fun_comp (f := fun t : ℝ => (ρ t, θ))
       (g := K.height (C.referenceState, 0) i) x
-      (hclosed (C.referenceState, 0) hmem hs i (ρ x, θ) (hmapHalf x hx)).2.1
+      (hclosed hmem hs i (ρ x, θ) (hmapHalf x hx)).2.1
       (hρC.contDiffAt.prodMk contDiffAt_const)).of_le (by simp)
   have hwc (x : ℝ) (_hx : x ∈ Icc (0 : ℝ) a) : DifferentiableAt ℝ w x :=
     (hw.comp hρC).differentiable (by simp) x
@@ -313,7 +316,7 @@ theorem n05_negative_component_first_geometry
     rw [he]
     exact (n05_negative_reference_density_closed hT hS h hi (hmapHalf x hx) θ).2.1
   have hHpos (x : ℝ) (hx : x ∈ Icc (0 : ℝ) a) : 0 < H x :=
-    (hclosed (C.referenceState, 0) hmem hs i (ρ x, θ) (hmapHalf x hx)).2.2.2
+    (hclosed hmem hs i (ρ x, θ) (hmapHalf x hx)).2.2.2
   have hweightIn (x : ℝ) (hx : x ∈ Icc (0 : ℝ) a) : 1 / Λ ≤ w x ∧ w x ≤ Λ :=
     hweight _ (hmap x (hsub hx))
   have hwlog (x : ℝ) (hx : x ∈ Icc (0 : ℝ) a) : |deriv w x / w x| ≤ Λ ^ 2 := by

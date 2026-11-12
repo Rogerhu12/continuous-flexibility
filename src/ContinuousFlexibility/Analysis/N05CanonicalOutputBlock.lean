@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05ReferenceOutputBlock
 import ContinuousFlexibility.Analysis.N05CanonicalOutputChange
 import ContinuousFlexibility.Analysis.N05CanonicalSourceCoefficient
@@ -37,7 +38,7 @@ theorem n05_canonicalHeight_output_piece_bound
         C0 * radialE (D.cellIndex (K.cell k)) ^ A *
           ∑' j, outputCellSquare D γ M f j := by
   obtain ⟨C0, A0, hC0, hA0, hpiece⟩ :=
-    n05_referenceOutput_piece_square_bound hD hT h.2.2.2.2 hcoordinates hγ M
+    n05_referenceOutput_piece_square_bound hD hT h.2.2.2.2.1 hcoordinates hγ M
   obtain ⟨B, A, hB, hA, hdensity⟩ :=
     n05_referenceCanonicalHeight_density_piece_bound h hcoordinates
   refine ⟨B * C0, A + A0, mul_pos hB hC0, add_pos hA hA0, ?_⟩
@@ -47,7 +48,7 @@ theorem n05_canonicalHeight_output_piece_bound
   have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h01.2.1
   have hs : stateSector S C.referenceState := n05_referenceState_sector h01.2.2.1
-  have hangle : ∀ p ∈ physicalPieceOpen S K k,
+  have hangle : ∀ p ∈ referencePhysicalPieceOpen S K k,
       (K.chart (C.referenceState, 0) k p).2 = p.2 :=
     fun _ hp => n05_controlledReference_chart_second hcoordinates k hp
   let n : ℕ := D.cellIndex (K.cell k)
@@ -60,7 +61,7 @@ theorem n05_canonicalHeight_output_piece_bound
   have hu : MemLp (canonicalHeight S K (C.referenceState, 0) k f) 2
       (canonicalMeasure S K k) := MemLp.ae_eq hrep (Lp.memLp u)
   have hq : Integrable q (volume.restrict P) :=
-    (n05_canonicalHeight_sq_integrable_iff h.2.2.2.2 hz hs k hangle f).mp hu.integrable_sq
+    (n05_referenceCanonicalHeight_sq_integrable_iff h.2.2.2.2.1 hz hs k hangle f).mp hu.integrable_sq
   have hnorm : ‖u‖ ^ 2 = ∫ p, q p ∂volume.restrict P := by
     calc
       _ = ∫ p, u p ^ 2 ∂canonicalMeasure S K k := by
@@ -70,7 +71,7 @@ theorem n05_canonicalHeight_output_piece_bound
         apply integral_congr_ae
         filter_upwards [hrep] with p hp
         exact congrArg (fun x : ℝ => x ^ 2) hp
-      _ = _ := n05_canonicalHeight_sq_integral h.2.2.2.2 hz hs k hangle f
+      _ = _ := n05_referenceCanonicalHeight_sq_integral h.2.2.2.2.1 hz hs k hangle f
   have hlocal : ‖u‖ ^ 2 ≤ B * radialE n ^ A *
       ∫ p, f p ^ 2 ∂volume.restrict P := by
     rw [hnorm, ← integral_const_mul]

@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
 import ContinuousFlexibility.Analysis.N05CanonicalRadialField
 import ContinuousFlexibility.Analysis.N05ReferenceOutputWeightInclusion
@@ -162,7 +163,7 @@ theorem n05CanonicalGlobalInverse_normal_of_source
     n05_referenceState_mem h.1.1.1.2.1
   have hs : stateSector S C.referenceState := n05_referenceState_sector h.1.1.1.2.2.1
   refine ⟨ur, hur, hUr, hg, hweak, hrep,
-    fun m => n05_canonicalL2_reflection_of_height_rep h.2.2.2.2 hz hs hgp hgeven m (hrep m),
+    fun m => n05_canonicalL2_reflection_of_height_rep h.2.2.2.2.1 hz hs hgp hgeven m (hrep m),
     htot.trans (mul_le_mul_of_nonneg_right hB0B hQ), fun k => ?_⟩
   have hgBound : outputNormSquare D σ (M + A) 0 (g, 0) ≤ B0 * Q := by
     linarith only [htot, sq_nonneg ‖W‖]

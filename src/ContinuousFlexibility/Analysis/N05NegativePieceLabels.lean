@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05OpticalNegativeGeometry
 import ContinuousFlexibility.Analysis.N05ReferenceNegativeCoefficient
 import ContinuousFlexibility.Analysis.N05ReferencePieceIndexBounds
@@ -35,7 +36,7 @@ theorem n05_cut_physical_open_subset_component
         (K.physicalRight (if right then (K.cutPair m).2 else (K.cutPair m).1)) ⊆
       Ioo (C.left m) (C.right m) := by
   let i := if right then (K.cutPair m).2 else (K.cutPair m).1
-  have hwidth : K.physicalLeft i < K.physicalRight i := (h04.2.2.2.1 i).1
+  have hwidth : K.physicalLeft i < K.physicalRight i := (h04.1.referenceBounds i).1
   have hsub := n05_cut_physical_closed_subset_component h04 m right
   have hl := hsub (show K.physicalLeft i ∈ Icc (K.physicalLeft i) (K.physicalRight i)
     from ⟨le_rfl, hwidth.le⟩)
@@ -69,14 +70,14 @@ theorem n05_negative_reference_geometry_at_selected_cells
   intro i hi
   have hhalf : ∃ m : ℕ, ∃ right : Bool,
       i = if right then (K.cutPair m).2 else (K.cutPair m).1 := by
-    obtain ⟨m, hm⟩ := n05_negative_piece_is_cut_half h.1.1.1.2.2.2.1 h.2.2.2.2 hi
+    obtain ⟨m, hm⟩ := n05_negative_piece_is_cut_half h.1.1.1.2.2.2.1 h.2.2.2.2.1 hi
     rcases hm with hm | hm
     · exact ⟨m, false, hm⟩
     · exact ⟨m, true, hm⟩
   obtain ⟨m, right, rfl⟩ := hhalf
   let i := if right then (K.cutPair m).2 else (K.cutPair m).1
   obtain ⟨j, hcarrier, hbound⟩ := hgeometry m
-  have hsub := n05_cut_physical_open_subset_component h.2.2.2.2 m right
+  have hsub := n05_cut_physical_open_subset_component h.2.2.2.2.1 m right
   obtain ⟨r₀, hr₀, hr₀cell⟩ := hlabels i hi
   have hindex : |(D.cellIndex j : ℝ) - (D.cellIndex (K.cell i) : ℝ)| ≤ window :=
     hsame j (K.cell i) r₀ (hcarrier (hsub hr₀)) hr₀cell

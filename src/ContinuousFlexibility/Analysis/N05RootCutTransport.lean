@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05ReferenceNullTransport
 
 /-!
@@ -26,7 +27,8 @@ theorem n05_cut_physical_root_mem
     (if right then C.right m else C.left m) ∈
       Icc (K.physicalLeft (if right then (K.cutPair m).2 else (K.cutPair m).1))
         (K.physicalRight (if right then (K.cutPair m).2 else (K.cutPair m).1)) := by
-  rcases h04 with ⟨_, _, _, hpieces, _, _, _, _, _, _, _, hcuts, _⟩
+  have hpieces := h04.1.referenceBounds
+  have hcuts := h04.2.1.1.1
   obtain ⟨_, _, hleft, hright, _⟩ := hcuts m
   cases right with
   | false =>
@@ -43,7 +45,8 @@ theorem n05_cut_physical_cut_mem
     K.physicalRight (K.cutPair m).1 ∈
       Icc (K.physicalLeft (if right then (K.cutPair m).2 else (K.cutPair m).1))
         (K.physicalRight (if right then (K.cutPair m).2 else (K.cutPair m).1)) := by
-  rcases h04 with ⟨_, _, _, hpieces, _, _, _, _, _, _, _, hcuts, _⟩
+  have hpieces := h04.1.referenceBounds
+  have hcuts := h04.2.1.1.1
   have hmeet := (hcuts m).2.2.2.2.1
   cases right with
   | false => exact ⟨(hpieces (K.cutPair m).1).1.le, le_rfl⟩
@@ -60,8 +63,8 @@ theorem n05_cut_reference_root_image
     (K.chart (C.referenceState, 0)
       (if right then (K.cutPair m).2 else (K.cutPair m).1)
       (if right then C.right m else C.left m, θ)).1 = 0 := by
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, _, _, _, _, _, _, _, _, hcuts, _⟩
+  have h04 := h.2.2.2.2.1
+  have hcuts := h04.2.1.1.1
   have hneg : K.positive (if right then (K.cutPair m).2 else (K.cutPair m).1) = false := by
     cases right
     · exact (hcuts m).1
@@ -73,7 +76,7 @@ theorem n05_cut_reference_root_image
     · exact hroots.2.1
   exact n05_negative_reference_root_image hT hS h hneg
     (x := (if right then C.right m else C.left m, θ))
-    (n05_cut_physical_root_mem h.2.2.2.2 m right) hd
+    (n05_cut_physical_root_mem h.2.2.2.2.1 m right) hd
 
 /-- Optical transport from the cut to either actual physical root has the
 same inward displacement for the two half orientations. -/
@@ -91,8 +94,8 @@ theorem n05_cut_reference_root_transport
   let Ψ := K.chart (C.referenceState, 0) i
   let orientation : ℝ := if right then -1 else 1
   let travel := opticalTravel D.w (K.physicalLeft i) (K.physicalRight i)
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, _, _, _, _, _, _, _, _, hcuts, _⟩
+  have h04 := h.2.2.2.2.1
+  have hcuts := h04.2.1.1.1
   obtain ⟨_, _, hleft, hright, hmeet, _⟩ := hcuts m
   have hshift : θ + (σ * orientation) *
         opticalTravel D.w (K.physicalLeft i) (K.physicalRight (K.cutPair m).1) -
@@ -116,8 +119,8 @@ theorem n05_cut_reference_root_transport
       simp only [opticalTravel, intervalIntegral.integral_same, mul_zero, add_zero]
       ring
   have ht := n05_cut_reference_null_transport hT hS h m right hσ
-    (n05_cut_physical_cut_mem h.2.2.2.2 m right)
-    (n05_cut_physical_root_mem h.2.2.2.2 m right) θ
+    (n05_cut_physical_cut_mem h.2.2.2.2.1 m right)
+    (n05_cut_physical_root_mem h.2.2.2.2.1 m right) θ
   change n05NullCoordinate Ψ σ (K.physicalRight (K.cutPair m).1, θ) =
     n05NullCoordinate Ψ σ (root, θ + (σ * orientation) *
         opticalTravel D.w (K.physicalLeft i) (K.physicalRight (K.cutPair m).1) -

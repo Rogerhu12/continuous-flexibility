@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05OpticalProfileLipschitz
 import ContinuousFlexibility.Analysis.N05ReferenceOpticalBound
 
@@ -28,7 +29,8 @@ theorem n05_cut_physical_closed_subset_component
     Icc (K.physicalLeft (if right then (K.cutPair m).2 else (K.cutPair m).1))
         (K.physicalRight (if right then (K.cutPair m).2 else (K.cutPair m).1)) ⊆
       Icc (C.left m) (C.right m) := by
-  rcases h04 with ⟨_, _, _, hpieces, _, _, _, _, _, _, _, hcuts, _⟩
+  have hpieces := h04.1.referenceBounds
+  have hcuts := h04.2.1.1.1
   obtain ⟨_, _, hleft, hright, hmeet, _⟩ := hcuts m
   cases right with
   | false =>
@@ -54,7 +56,7 @@ theorem n05_negative_reference_actualCell_density_bound
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε) :
     ∃ B A : ℝ, 0 < B ∧ 0 < A ∧ ∀ m : ℕ, ∃ j : ℕ,
       Ioo (C.left m) (C.right m) ⊆ D.cells j ∧
-      ∀ right : Bool, ∀ x ∈ physicalPieceOpen S K
+      ∀ right : Bool, ∀ x ∈ referencePhysicalPieceOpen S K
           (if right then (K.cutPair m).2 else (K.cutPair m).1),
         let i := if right then (K.cutPair m).2 else (K.cutPair m).1
         let z := (C.referenceState, 0)
@@ -81,7 +83,7 @@ theorem n05_negative_reference_actualCell_density_bound
   obtain ⟨P, hP, hPeq, hPLip⟩ :=
     hLip j (C.left m) (C.right m) (hgeom.1 m).2.1 hcell hcore
   refine ⟨j, hcell, fun right x hx => ?_⟩
-  have hsub := n05_cut_physical_closed_subset_component h.2.2.2.2 m right
+  have hsub := n05_cut_physical_closed_subset_component h.2.2.2.2.1 m right
   have hb := n05_cut_reference_density_le_of_optical_lipschitz hT hS h m right hP
     (hPLip.mono hsub) hx
   have hxcore : x.1 ∈ radialCore D := hcore (hsub ⟨hx.1.1.le, hx.1.2.le⟩)

@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05ReferenceNegativeRadial
 
 /-!
@@ -29,8 +30,10 @@ theorem n05_negative_reference_height_radial_open
     (hr : r ∈ Ioo (K.physicalLeft i) (K.physicalRight i)) (θ : ℝ) :
     K.height (C.referenceState, 0) i (r, θ) = K.height (C.referenceState, 0) i (r, 0) := by
   have h01 := h.1.1.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _, hnegative, _, _, hclosed, _⟩
+  have h04 := h.2.2.2.2.1
+  have hpieces := h04.1.referenceBounds
+  have hnegative := h04.1.referenceNegative
+  have hclosed := n05_reference_closed_properties h04
   have hrClosed : r ∈ Icc (K.physicalLeft i) (K.physicalRight i) := ⟨hr.1.le, hr.2.le⟩
   have hmem : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h01.2.1
@@ -41,8 +44,8 @@ theorem n05_negative_reference_height_radial_open
   have hrpos : 0 < r := hB.1.1.trans hrD.1
   have hdetne : D.w r * (deriv D.w r / r) ≠ 0 :=
     mul_ne_zero hpositive.ne' (div_ne_zero (hnegative i hi r hr).ne hrpos.ne')
-  have hhθ := (hclosed (C.referenceState, 0) hmem hsector i (r, θ) hrClosed).2.2.2
-  have hh0 := (hclosed (C.referenceState, 0) hmem hsector i (r, 0) hrClosed).2.2.2
+  have hhθ := (hclosed hmem hsector i (r, θ) hrClosed).2.2.2
+  have hh0 := (hclosed hmem hsector i (r, 0) hrClosed).2.2.2
   have hξ : (K.chart (C.referenceState, 0) i (r, θ)).1 =
       (K.chart (C.referenceState, 0) i (r, 0)).1 := by
     simpa only using
@@ -62,8 +65,9 @@ theorem n05_negative_reference_height_radial
     (hr : r ∈ Icc (K.physicalLeft i) (K.physicalRight i)) (θ : ℝ) :
     K.height (C.referenceState, 0) i (r, θ) = K.height (C.referenceState, 0) i (r, 0) := by
   have h01 := h.1.1.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _, _, _, _, hclosed, _⟩
+  have h04 := h.2.2.2.2.1
+  have hpieces := h04.1.referenceBounds
+  have hclosed := n05_reference_closed_properties h04
   have hmem : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
@@ -71,9 +75,9 @@ theorem n05_negative_reference_height_radial
     (f := K.height (C.referenceState, 0) i)
     (g := fun p => K.height (C.referenceState, 0) i (p.1, 0)) _ _ _ (r, θ) hr
   · intro p hp
-    exact (hclosed (C.referenceState, 0) hmem hsector i p hp).2.1.continuousAt
+    exact (hclosed hmem hsector i p hp).2.1.continuousAt
   · intro p hp
-    exact (hclosed (C.referenceState, 0) hmem hsector i (p.1, 0) hp).2.1.continuousAt.comp
+    exact (hclosed hmem hsector i (p.1, 0) hp).2.1.continuousAt.comp
       (f := fun q : PolarPoint => (q.1, 0)) (continuousAt_fst.prodMk continuousAt_const)
   · intro p hp _
     exact n05_negative_reference_height_radial_open hT hS h hi hp p.2

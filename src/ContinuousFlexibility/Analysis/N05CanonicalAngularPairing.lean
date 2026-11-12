@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05CanonicalAngularTransport
 import ContinuousFlexibility.Analysis.N05PeriodicPhysicalL2Norm
 import ContinuousFlexibility.Analysis.N05CanonicalOutputChange
@@ -60,7 +61,7 @@ theorem n05_canonicalHeight_angular_test_pairing (m : ℕ)
   let z : AnnularState S × ℝ := (C.referenceState, 0)
   have hz : z ∈ stateNeighborhood S C base ε := n05_referenceState_mem h.1.1.1.2.1
   have hs : stateSector S z.1 := n05_referenceState_sector h.1.1.1.2.2.1
-  have hangle : ∀ p ∈ physicalPieceOpen S K m, (K.chart z m p).2 = p.2 := by
+  have hangle : ∀ p ∈ referencePhysicalPieceOpen S K m, (K.chart z m p).2 = p.2 := by
     intro p hp
     rw [(hcoordinates.1 m p hp).1]
   have ht := n05CanonicalAngularTransport_test h hcoordinates m hφ
@@ -78,7 +79,7 @@ theorem n05_canonicalHeight_angular_test_pairing (m : ℕ)
     (2 * Real.pi)⁻¹ * ∫ p, u p * n05CanonicalAngularTransport S C K m φ p
       ∂volume.restrict (radialCore D ×ˢ Ioc (0 : ℝ) (2 * Real.pi)) at hmean
   rw [hfull] at hmean
-  have hpieces := h.2.2.2.2.2.2.2.1
+  have hpieces := h.2.2.2.2.1.1.referenceBounds
   have hsubset : Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi ⊆
       radialCore D ×ˢ Ioc (0 : ℝ) Real.pi :=
     fun p hp => ⟨(hpieces m).2.2 hp.1, hp.2⟩
@@ -99,12 +100,12 @@ theorem n05_canonicalHeight_angular_test_pairing (m : ℕ)
         (canonicalHeight S K z m u (K.chart z m p) * φ (K.chart z m p))
         ∂volume.restrict
           (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi) :=
-      n05_canonicalChart_integral h.2.2.2.2 hz hs m hangle _
+      n05_referenceCanonicalChart_integral h.2.2.2.2.1 hz hs m hangle _
     _ = ∫ p, u p * n05CanonicalAngularTransport S C K m φ p
         ∂volume.restrict
           (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi) := by
       apply integral_congr_ae
-      filter_upwards [n05_canonicalHeight_chart_ae h.2.2.2.2 hz hs m u,
+      filter_upwards [n05_referenceCanonicalHeight_chart_ae h.2.2.2.2.1 hz hs m u,
         ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp hpm
       change |planeJacobian (K.chart z m) p| *
         (canonicalHeight S K z m u (K.chart z m p) * φ (K.chart z m p)) =

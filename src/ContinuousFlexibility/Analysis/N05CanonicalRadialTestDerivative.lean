@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05CanonicalRadialTestTransport
 
 /-!
@@ -38,14 +39,14 @@ include h hcoordinates in
 /-- The derivative of the genuine height slice at angle zero is the
 actual physical radial partial at every point of the reference piece. -/
 theorem n05_referenceHeight_radial_deriv (m : ℕ) {p : PolarPoint}
-    (hp : p ∈ physicalPieceOpen S K m) :
+    (hp : p ∈ referencePhysicalPieceOpen S K m) :
     deriv (fun r => K.height (C.referenceState, 0) m (r, 0)) p.1 =
       radialPartial (K.height (C.referenceState, 0) m) p := by
   have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h.1.1.1.2.1
   have hs : stateSector S C.referenceState := n05_referenceState_sector h.1.1.1.2.2.1
-  rcases h.2.2.2.2 with ⟨_, _, _, _, _, _, _, hcharts, _⟩
-  obtain ⟨_, _, _, _, _, _, hh, _⟩ := hcharts (C.referenceState, 0) hz hs m
+  have hcharts := n05_reference_charts h.2.2.2.2.1
+  obtain ⟨_, _, _, _, _, _, hh, _⟩ := hcharts hz hs m
   have hd : DifferentiableAt ℝ (K.height (C.referenceState, 0) m) p :=
     (hh.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp)).differentiableAt (by simp)
   have he : (fun r => K.height (C.referenceState, 0) m (r, 0)) =ᶠ[𝓝 p.1]
@@ -58,17 +59,17 @@ include h hcoordinates in
 /-- The actual reference chart preserves the angular coordinate, so its
 radial chain rule contains exactly its genuine planar Jacobian. -/
 theorem n05_referenceChart_radial_chain (m : ℕ) {φ : PolarPoint → ℝ}
-    (hφ : ContDiff ℝ ∞ φ) {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    (hφ : ContDiff ℝ ∞ φ) {p : PolarPoint} (hp : p ∈ referencePhysicalPieceOpen S K m) :
     radialPartial (fun q => φ (K.chart (C.referenceState, 0) m q)) p =
       planeJacobian (K.chart (C.referenceState, 0) m) p *
         radialPartial φ (K.chart (C.referenceState, 0) m p) := by
   have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h.1.1.1.2.1
   have hs : stateSector S C.referenceState := n05_referenceState_sector h.1.1.1.2.2.1
-  rcases h.2.2.2.2 with ⟨_, _, _, _, _, _, _, hcharts, _⟩
-  have hc := (hcharts (C.referenceState, 0) hz hs m).2.2.2.2.1
+  have hcharts := n05_reference_charts h.2.2.2.2.1
+  have hc := (hcharts hz hs m).2.2.2.2.1
   let ξ : ℝ → ℝ := fun r => (K.chart (C.referenceState, 0) m (r, 0)).1
-  have hp0 : (p.1, (0 : ℝ)) ∈ physicalPieceOpen S K m := ⟨hp.1, mem_univ _⟩
+  have hp0 : (p.1, (0 : ℝ)) ∈ referencePhysicalPieceOpen S K m := ⟨hp.1, mem_univ _⟩
   have hc0 : ContDiffAt ℝ ∞ (K.chart (C.referenceState, 0) m) (p.1, 0) :=
     hc.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp0)
   have hline : ContDiff ℝ ∞ (fun r : ℝ => (r, (0 : ℝ))) :=
@@ -104,7 +105,7 @@ include h hcoordinates in
 /-- The physical derivative of ψ is exactly the transported canonical
 test derivative minus the actual logarithmic height derivative times ψ. -/
 theorem n05CanonicalRadialTestTransport_radial (m : ℕ) {φ : PolarPoint → ℝ}
-    (hφ : ContDiff ℝ ∞ φ) {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    (hφ : ContDiff ℝ ∞ φ) {p : PolarPoint} (hp : p ∈ referencePhysicalPieceOpen S K m) :
     radialPartial (n05CanonicalRadialTestTransport S C K m φ) p =
       n05CanonicalAngularTransport S C K m (radialPartial φ) p -
         (radialPartial (K.height (C.referenceState, 0) m) p /
@@ -112,8 +113,8 @@ theorem n05CanonicalRadialTestTransport_radial (m : ℕ) {φ : PolarPoint → �
   have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h.1.1.1.2.1
   have hs : stateSector S C.referenceState := n05_referenceState_sector h.1.1.1.2.2.1
-  rcases h.2.2.2.2 with ⟨_, _, _, _, _, _, _, hcharts, _⟩
-  obtain ⟨_, _, _, _, hc, _, hh, hn⟩ := hcharts (C.referenceState, 0) hz hs m
+  have hcharts := n05_reference_charts h.2.2.2.2.1
+  obtain ⟨_, _, _, _, hc, _, hh, hn⟩ := hcharts hz hs m
   let Φ := K.chart (C.referenceState, 0) m
   let H := K.height (C.referenceState, 0) m
   let J := planeJacobian Φ

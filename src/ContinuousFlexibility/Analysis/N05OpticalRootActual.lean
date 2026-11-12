@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05OpticalRootGeometry
 import ContinuousFlexibility.Analysis.N05ReferenceNegativeDensity
 import Mathlib.Analysis.Calculus.Deriv.Abs
@@ -38,9 +39,9 @@ theorem n05_negative_reference_root_slices
   have hmem : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, _, _, _, _, _, hclosed, _⟩
-  have hc := hclosed (C.referenceState, 0) hmem hs i (r, θ) hr
+  have h04 := h.2.2.2.2.1
+  have hclosed := n05_reference_closed_properties h04
+  have hc := hclosed hmem hs i (r, θ) hr
   have hslice : ContDiffAt ℝ ∞ (fun t : ℝ => (t, θ)) r :=
     contDiffAt_id.prodMk contDiffAt_const
   have hd := n05_negative_reference_density_closed hT hS h hi hr θ
@@ -143,8 +144,8 @@ theorem n05_negative_reference_height_log_deriv
       (Ioo (K.physicalLeft i) (K.physicalRight i)) := by
     intro x hx
     exact n05_negative_reference_height_log_deriv_open hT hS h hi hx θ
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _⟩
+  have h04 := h.2.2.2.2.1
+  have hpieces := h04.1.referenceBounds
   apply he.of_subset_closure hHdC hrightC Ioo_subset_Icc_self _ hr
   simp only [closure_Ioo (hpieces i).1.ne]
   exact Subset.rfl
@@ -174,7 +175,7 @@ theorem n05_cut_reference_root_optical_time
     σ * (opticalTravel D.w (K.physicalLeft i) r -
       opticalTravel D.w (K.physicalLeft i) root) at ht
   have hcore : Icc (K.physicalLeft i) (K.physicalRight i) ⊆ radialCore D :=
-    n05_cut_physical_closed_subset_core h.1.1.1.2.2.2.1 h.2.2.2.2 m right
+    n05_cut_physical_closed_subset_core h.1.1.1.2.2.2.1 h.2.2.2.2.1 m right
   have hFC := (n05_opticalSpeed_continuousOn_core h.1.1.1.1.1).mono hcore
   have hint (x y : ℝ)
       (hx : x ∈ Icc (K.physicalLeft i) (K.physicalRight i))
@@ -184,12 +185,12 @@ theorem n05_cut_reference_root_optical_time
     apply hFC.mono
     intro t ht
     exact ⟨(le_min hx.1 hy.1).trans ht.1, ht.2.trans (max_le hx.2 hy.2)⟩
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _⟩
+  have h04 := h.2.2.2.2.1
+  have hpieces := h04.1.referenceBounds
   have hleft : K.physicalLeft i ∈ Icc (K.physicalLeft i) (K.physicalRight i) :=
     ⟨le_rfl, (hpieces i).1.le⟩
   have hroot : root ∈ Icc (K.physicalLeft i) (K.physicalRight i) :=
-    n05_cut_physical_root_mem h.2.2.2.2 m right
+    n05_cut_physical_root_mem h.2.2.2.2.1 m right
   have hadd := intervalIntegral.integral_add_adjacent_intervals
     (hint _ _ hleft hroot) (hint _ _ hroot hr)
   have hdiff : opticalTravel D.w (K.physicalLeft i) r -
@@ -258,8 +259,9 @@ theorem n05_cut_reference_inward_deriv_pos
   let σ : ℝ := if right then -1 else 1
   let ξ := fun t : ℝ => (K.chart (C.referenceState, 0) i (t, θ)).1
   change 0 < ξ r ∧ 0 < σ * deriv ξ r
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, _, _, _, _, hcharts, _, _, _, hcuts, _⟩
+  have h04 := h.2.2.2.2.1
+  have hcharts := n05_reference_charts h04
+  have hcuts := h04.2.1.1.1
   obtain ⟨hnegL, hnegR, _, _, _, _, hzeroL, hzeroR, _⟩ := hcuts m
   have hi : K.positive i = false := by
     cases right
@@ -272,14 +274,14 @@ theorem n05_cut_reference_inward_deriv_pos
   have hmem : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h.1.1.1.2.1
   have hs := n05_referenceState_sector h.1.1.1.2.2.1
-  have hmap := (hcharts (C.referenceState, 0) hmem hs i).1
-    (show (r, θ) ∈ physicalPieceOpen S K i from ⟨hr, mem_univ _⟩)
+  have hmap := (hcharts hmem hs i).1
+    (show (r, θ) ∈ referencePhysicalPieceOpen S K i from ⟨hr, mem_univ _⟩)
   have hξpos : 0 < ξ r := by simpa only [hzero] using hmap.1.1
   have hslices := n05_negative_reference_root_slices hT hS h hi (Ioo_subset_Icc_self hr) θ
   have hcore : Icc (K.physicalLeft i) (K.physicalRight i) ⊆ radialCore D :=
-    n05_cut_physical_closed_subset_core h.1.1.1.2.2.2.1 h.2.2.2.2 m right
+    n05_cut_physical_closed_subset_core h.1.1.1.2.2.2.1 h.2.2.2.2.1 m right
   have hroot : root ∈ radialCore D :=
-    hcore (n05_cut_physical_root_mem h.2.2.2.2 m right)
+    hcore (n05_cut_physical_root_mem h.2.2.2.2.1 m right)
   have hchartDeriv := (n05TricomiTime_hasDerivAt hξpos).comp r
     (hslices.1.differentiableAt (by simp)).hasDerivAt
   have htravelDeriv := (n05_opticalTravel_hasDerivAt_core h.1.1.1.1.1 hroot
@@ -330,9 +332,9 @@ theorem n05_cut_reference_inward_slice_pos
   have hmem : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h.1.1.1.2.1
   have hs := n05_referenceState_sector h.1.1.1.2.2.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, _, _, _, _, _, hclosed, _⟩
-  have hc := hclosed (C.referenceState, 0) hmem hs i
+  have h04 := h.2.2.2.2.1
+  have hclosed := n05_reference_closed_properties h04
+  have hc := hclosed hmem hs i
     (root + σ * x, θ) (Ioo_subset_Icc_self hr)
   have hradial : ContDiffAt ℝ ∞
       (fun r : ℝ => (K.chart (C.referenceState, 0) i (r, θ)).1) (root + σ * x) :=

@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05CanonicalSourceLift
 import ContinuousFlexibility.Analysis.N05ReferenceNormalizerJets
 import ContinuousFlexibility.Geometry.EuclideanRigidity
@@ -72,7 +73,7 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
 include h hcoordinates in
 theorem n05CanonicalAngularTransport_eq_actual (m : ℕ) (φ : PolarPoint → ℝ)
-    {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    {p : PolarPoint} (hp : p ∈ referencePhysicalPieceOpen S K m) :
     n05CanonicalAngularTransport S C K m φ p =
       |planeJacobian (K.chart (C.referenceState, 0) m) p| /
         K.height (C.referenceState, 0) m p * φ (K.chart (C.referenceState, 0) m p) := by
@@ -93,8 +94,8 @@ theorem n05CanonicalAngularTransport_compact_support (m : ℕ)
   have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h.1.1.1.2.1
   have hs : stateSector S C.referenceState := n05_referenceState_sector h.1.1.1.2.2.1
-  rcases h.2.2.2.2 with ⟨_, _, _, _, _, _, _, hcharts, _⟩
-  obtain ⟨_, hΨ, hleft, _, _, hΨc, _, _⟩ := hcharts (C.referenceState, 0) hz hs m
+  have hcharts := n05_reference_charts h.2.2.2.2.1
+  obtain ⟨_, hΨ, hleft, _, _, hΨc, _, _⟩ := hcharts hz hs m
   let ρ : ℝ → ℝ := fun x => (K.inverseChart (C.referenceState, 0) m (x, 0)).1
   have hρ : ContinuousOn ρ J :=
     (hΨc.continuousOn.comp (continuous_id.prodMk continuous_const).continuousOn
@@ -108,7 +109,7 @@ theorem n05CanonicalAngularTransport_compact_support (m : ℕ)
         intro hx
         apply hr
         refine ⟨(K.chart (C.referenceState, 0) m (r, 0)).1, hx, ?_⟩
-        have hp : (r, (0 : ℝ)) ∈ physicalPieceOpen S K m := ⟨hri, mem_univ _⟩
+        have hp : (r, (0 : ℝ)) ∈ referencePhysicalPieceOpen S K m := ⟨hri, mem_univ _⟩
         have he := congrArg (fun q : PolarPoint => q.1) (hleft (r, 0) hp)
         have hchart := congrArg
           (fun q : PolarPoint => (K.inverseChart (C.referenceState, 0) m q).1)
@@ -129,13 +130,14 @@ theorem n05CanonicalAngularTransport_test (m : ℕ)
   have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h.1.1.1.2.1
   have hs : stateSector S C.referenceState := n05_referenceState_sector h.1.1.1.2.2.1
-  have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _, _, _, hcharts, _⟩
-  obtain ⟨_, _, _, _, hc, _, hh, hn⟩ := hcharts (C.referenceState, 0) hz hs m
+  have h04 := h.2.2.2.2.1
+  have hpieces := h04.1.referenceBounds
+  have hcharts := n05_reference_charts h04
+  obtain ⟨_, _, _, _, hc, _, hh, hn⟩ := hcharts hz hs m
   have hd : ContDiff ℝ ∞ (n05CanonicalAngularTransport S C K m φ) := by
     apply contDiff_iff_contDiffAt.mpr
     intro p
-    by_cases hp : p ∈ physicalPieceOpen S K m
+    by_cases hp : p ∈ referencePhysicalPieceOpen S K m
     · have hnear := (isOpen_Ioo.prod isOpen_univ).mem_nhds hp
       have hca := hc.contDiffAt hnear
       have hha := hh.contDiffAt hnear

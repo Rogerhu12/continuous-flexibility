@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05ReferenceNormalCoefficients
 
 /-!
@@ -90,9 +91,9 @@ theorem n05ReferenceNormal_coefficients_cell_bound
   obtain ⟨B₁, A₁, hB₁, hA₁, hb₁⟩ := n05_referenceNormalLeading_piece_bound hcoordinates
   obtain ⟨B₀, A₀, hB₀, hA₀, hb₀⟩ := n05_referenceNormalDrift_piece_bound hcoordinates
   obtain ⟨C₁, L₁, hC₁, hL₁, hc₁⟩ :=
-    n05PhysicalPieceRadialMultiplier_cell_bound hD hT h.2.2.2.2 hcoordinates hB₁ hA₁.le hb₁
+    n05PhysicalPieceRadialMultiplier_cell_bound hD hT h.2.2.2.2.1 hcoordinates hB₁ hA₁.le hb₁
   obtain ⟨C₀, L₀, hC₀, hL₀, hc₀⟩ :=
-    n05PhysicalPieceRadialMultiplier_cell_bound hD hT h.2.2.2.2 hcoordinates hB₀ hA₀.le hb₀
+    n05PhysicalPieceRadialMultiplier_cell_bound hD hT h.2.2.2.2.1 hcoordinates hB₀ hA₀.le hb₀
   refine ⟨C₁ + C₀, L₁ + L₀, add_pos hC₁ hC₀, add_pos hL₁ hL₀, fun j p hp => ?_⟩
   have hQ := radialQ_nonneg (D.cellIndex j)
   have he₁ : Real.exp (L₁ * radialQ (D.cellIndex j)) ≤

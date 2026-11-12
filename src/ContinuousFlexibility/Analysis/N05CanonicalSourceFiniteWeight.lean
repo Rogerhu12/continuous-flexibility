@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05CanonicalSourceCoefficient
 import ContinuousFlexibility.Radial.ProfilePartitionBounds
 
@@ -52,7 +53,7 @@ theorem n05_referenceCanonicalSource_finite_density_bound
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     (hcoordinates : N05ControlledReferenceCoordinates D S C K)
     {γw γ : ℝ} (hγw : 0 ≤ γw) (hgap : γw < γ) (t M : ℝ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ (q : Finset ℕ) m p, p ∈ physicalPieceOpen S K m →
+    ∃ B : ℝ, 0 < B ∧ ∀ (q : Finset ℕ) m p, p ∈ referencePhysicalPieceOpen S K m →
       n05ReferenceFiniteSourceWeight D γw M q p.1 *
         (|planeJacobian (K.chart (C.referenceState, 0) m) p| /
           K.height (C.referenceState, 0) m p) ^ 2 *
