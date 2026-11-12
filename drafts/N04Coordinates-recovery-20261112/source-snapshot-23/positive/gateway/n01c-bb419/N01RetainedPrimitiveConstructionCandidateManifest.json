@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "kind": "actual_retained_N01_primitive_construction_candidate",
+  "status": "HELD_UNCOMPILED_PEER_REVIEW_PENDING",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01RetainedPrimitiveConstruction.lean",
+    "sha256": "5e4823895fdf7f549d98d6cff9e1e0d8ef460e1dadc531892bf1ed957a2125f6",
+    "blob": "b4c99756ab69d37a0a3ce2c61570bed32f749885",
+    "lines": 61
+  },
+  "target_module": "ContinuousFlexibility.Analysis.N01RetainedPrimitiveConstruction",
+  "selected_upstream_commit": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+  "local_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01ActualRetainedReference.lean",
+      "sha256": "ca09ea2f1ddf4bed503b6ac152f0aa286089625f48a4be9e33e22030de1118a2",
+      "blob": "ca7674d50e07ae8fbccfff307348308327941342",
+      "lines": 45
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01aFixedReferencePrimitiveContext.lean",
+      "sha256": "48542eac85fcd18116d018740b290ab9d57c41793d055e255d2b9791a9fe4c4c",
+      "blob": "41ee0aaa4a3971691bfdc8a8832a87300d97a863",
+      "lines": 64
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01PrimitiveFixedWitnessConstruction.lean",
+      "sha256": "5a786c0686f89e5186e4f39dc748c644e2d433be5a06d0c95f9324e27b9a539b",
+      "blob": "fa468a78f48266fb1c0603e9b16988a50d5a4fb4",
+      "lines": 52
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/NeighborhoodFlowRetainedGeometry.lean",
+      "sha256": "abdb8e16cd7f6a4163500e87c4f5d9dafe7cce08816d35f6f573df0b8036219a",
+      "blob": "1e5acd56f27b8dfe803c4ee990b470e839d47e0d",
+      "lines": 111
+    }
+  ],
+  "local_provider_reviewed_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01ActualRetainedReferenceReviewedManifest.json",
+      "sha256": "95453dcad31705c849cb73e43dd9df60f15924377b2de5c26d4694569b4f0b2a",
+      "blob": "43e16c8829d37ab8a04f52cd739c87fac0bda297",
+      "lines": 32
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01aFixedReferencePrimitiveContextReviewedManifest.json",
+      "sha256": "486949b4913e1131702923436c3ae5599de0dde98a1ee018dc8dcfbbd9946a22",
+      "blob": "d3a12a7dca9c2e027b61d3adb40cb67e5fd6ef6d",
+      "lines": 27
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01PrimitiveFixedWitnessConstructionReviewedManifest.json",
+      "sha256": "045ed9159495f51b233533e969638fa9a7792c9499dc51e1834603656479575a",
+      "blob": "2c55e5a9ab92665ee63940c065ecf86c008b493e",
+      "lines": 40
+    }
+  ],
+  "direct_actual_upstream_providers": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualPrimitiveGeometry.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "sha256": "5971fe324efc7e9b4df6a5eb04eef13d4acb51bfcd5e570acdfcc5edaea21c0d",
+      "blob": "799ecafd7c45f287d61fa23a8206352e74f23f63",
+      "lines": 155
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01cRetainedComponentEnumeration.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "sha256": "74cba95f8966416c78183bab6952abbaa05e1b8ed649fbb08f2a008e13b7f63b",
+      "blob": "bdd0d674c821041280d5f50776cf5d6e019c6cbf",
+      "lines": 53
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/NeighborhoodConstruction.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "sha256": "c0e8b8108ca2966bb6ec0b32804414612a64e1b6becfdc3801dc941b32bd7af7",
+      "blob": "62ef3dd8c7d97a2e9d1a75ea631a6f74f4bdd625",
+      "lines": 112
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/NeighborhoodFlowGeometry.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "sha256": "78e998516b51a611ecf43f1b463d7e25c039e970dfb34dc1cd3de19b97bbcc18",
+      "blob": "1207dd04b32d48b71e63a3c28b4d9d1c633b05c1",
+      "lines": 64
+    }
+  ],
+  "fixed_flow_compatibility": {
+    "full_111_proof_body_equals_bb419_fixed_input_extraction": true,
+    "proof_source": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/NeighborhoodFlowRetainedGeometry.lean",
+      "sha256": "abdb8e16cd7f6a4163500e87c4f5d9dafe7cce08816d35f6f573df0b8036219a",
+      "blob": "1e5acd56f27b8dfe803c4ee990b470e839d47e0d",
+      "lines": 111
+    },
+    "transformations": [
+      "Remove only the outer N01a existential destruct.",
+      "Replace A.val with the fixed input D.",
+      "Return the actual Theta/epsilon pair instead of wrapping existential reference/material/space/geometry."
+    ],
+    "no_mathematical_body_change": true
+  },
+  "closure_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01RetainedPrimitiveConstructionClosureInventory.json",
+    "sha256": "159ad34e4d6532d0bb36f2b11f1158e0d97d61996760a322df1d2114bce91f9f",
+    "blob": "897d0f2f5d1ea272e820ae62718654f450f8cf58",
+    "lines": 33963
+  },
+  "preserved_objects": [
+    "actual selected S0 and metadata",
+    "same retained P and realized Gamma",
+    "Gamma.reference with its exact profile identity",
+    "RadialConstructionGeometry and R11aRetainedCoordinates",
+    "same affine T and actual physical S",
+    "C fields except the three installed actual flow/inverse fields",
+    "actual N01PrimitiveGeometry and the proved E0 floor"
+  ],
+  "scope_limits": [
+    "The retained certificate comes from the actual constructor and is carried through the same witness. It is not extracted from arbitrary Through03.",
+    "The local fixed-flow provider has its exact proof verified against the same bb419 upstream source; all other remote sources in this inventory are also bb419.",
+    "N01Properties has the bb419 parameter-order-dependent flow-loss contract. No old uniform-loss Through03 or full N02/N03 gateway is asserted.",
+    "The 1937-module import/token inventory has no missing source; it is not a new combined Lean elaboration or axiom audit."
+  ],
+  "compiled": false,
+  "green_receipt_applies_to_candidate": false,
+  "active_source_index_refs_CI_modified": false
+}

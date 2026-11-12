@@ -1,0 +1,46 @@
+{
+  "kind": "exact_source_surface_comparison",
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair147/N03RootEndpointPhysicalJets.base.lean.txt",
+    "sha256": "2690e6c47e4557ba97eb37f91c00573f6d21cd18dd5dc6d40fbafb662861ad45",
+    "blob": "b47919889191d8709da04bd63f75f24e90a064ef",
+    "lines": 218
+  },
+  "candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair147/N03RootEndpointPhysicalJets.lean",
+    "sha256": "d5ba0977e2e650d2a7d51b89f8ddcf1cd10981311a3a15b9b141dae1720e829f",
+    "blob": "6dd741b196642f22a9461702306fe2755c352aa1",
+    "lines": 306
+  },
+  "public_declarations": [
+    {
+      "name": "N03RootEndpointFieldFamily",
+      "kind": "def",
+      "full_definition_byte_identical": true
+    },
+    {
+      "name": "n03_controlledRoot_endpoint_physicalJets",
+      "kind": "theorem",
+      "complete_header_byte_identical": true,
+      "header_sha256": "eafae38e02f073bf1d43f3f2220c9a56bf1e0ceff16ae41e4e92aed734579c72",
+      "complete_body_byte_identical": true
+    },
+    {
+      "name": "n04b_exists_common_root_endpoint_fields",
+      "kind": "theorem",
+      "complete_header_byte_identical": true,
+      "header_sha256": "32f13790a77708b126bba20fb1b0cc2ba958a6a1633946fc1df4456af218d4c6",
+      "complete_body_byte_identical": true
+    }
+  ],
+  "imports_identical": true,
+  "options_identical": true,
+  "original_private_header_identical": true,
+  "new_private_names": [
+    "RootEndpointPhysicalGeometry",
+    "n03_rootEndpoint_physicalGeometry",
+    "rootEndpointPhysical_fields_of_model"
+  ],
+  "all_changes_scoped_to_private_proof": true,
+  "compiled": false
+}

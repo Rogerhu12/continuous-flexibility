@@ -1,0 +1,185 @@
+--- c5c48/N01EndpointParameterTower.lean
++++ candidate/N01EndpointParameterOrder.lean
+@@ -1,28 +1,67 @@
+-import ContinuousFlexibility.Analysis.N01SectorFlowTower
++import ContinuousFlexibility.Analysis.N01SectorFlowParameterOrder
++import ContinuousFlexibility.Analysis.N01FlowAngularSmoothness
+ import ContinuousFlexibility.Analysis.SmoothDirectionsOneHighLimit
+ import ContinuousFlexibility.Analysis.MaterialSampleCofinite
+ import Mathlib.Topology.Sequences
+ 
+ /-!
+-# Actual parameter jets at every closed N01 flow radius
+-
+-The endpoint is approached through interior radii. N01 supplies genuine
+-parameter towers there, and uniqueness identifies the witnesses for all
+-orders. The uniform next-two-jet bounds produce an actual smooth limit
+-tower. The original sharp one-high-factor bound passes to that tower
+-without changing its height power, material loss, or uniform constant.
++# Closed actual flow towers with parameter-order losses
++
++The original scalar endpoint limit accepts an arbitrary high-order index
++for each parameter derivative. The actual N01 flow supplies those indices
++as b + loss + parameterLoss(n), while the sharp requested-order bound
++passes to the closed endpoint without changing its constant or weight.
++The fixed original reference, flow and neighborhood are retained.
+ -/
+ 
+ noncomputable section
+ 
+ namespace ContinuousFlexibility.Statements
+ 
+-local instance n01EndpointParameterTowerStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+-local instance n01EndpointParameterTowerRealNormedSpace : NormedSpace ℝ ℝ :=
++local instance n01EndpointOrderStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
++local instance n01EndpointOrderRealNormedSpace : NormedSpace ℝ ℝ :=
+     NormedField.toNormedSpace
+ 
+ open Set Filter ContinuousFlexibility.Analysis
+ open scoped Topology ContDiff
++
++private theorem N01Properties.parameterOrder_reference_mem_stateNeighborhood
++    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
++    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
++    (hN : N01Properties D T S C base loss ε) :
++    (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
++  constructor
++  · change stateGrading S base (C.referenceState - C.referenceState) < ε
++    have hz : stateGrading S base (C.referenceState - C.referenceState) = 0 :=
++      (congrArg (fun u : AnnularState S => stateGrading S base u)
++        (sub_self C.referenceState)).trans (stateGrading S base).map_zero'
++    exact hz.trans_lt hN.2.1
++  · simpa only [abs_zero] using hN.2.1
++
++private theorem N01Properties.parameterOrder_radial_continuousOn
++    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
++    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
++    (hN : N01Properties D T S C base loss ε)
++    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
++    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
++    (hsector : stateSector S z.1) (m b : ℕ) (θ : ℝ) :
++    ContinuousOn (fun r => ordinaryFlowFamily S C m 0 b (r, θ) z)
++      (Icc (C.left m) (C.right m)) := by
++  have href : referenceStateConditions D S C := hN.2.2.1
++  have hz0 := hN.parameterOrder_reference_mem_stateNeighborhood
++  have hc := (hN.minusFlow_angular_iteratedDeriv_continuousOn hS hT hz hsector m b).sub
++    (hN.minusFlow_angular_iteratedDeriv_continuousOn hS hT hz0 href.stateSector m b)
++  have hcr := hc.comp (continuous_id.prodMk continuous_const).continuousOn
++    (fun r hr => ⟨hr, mem_univ θ⟩)
++  apply hcr.congr
++  intro r hr
++  simp only [ordinaryFlowFamily, mixedDerivative, iteratedDeriv_zero]
++  exact iteratedDeriv_fun_sub
++    (((hN.minusFlow_angular_contDiff hS hT hz hsector m hr).of_le
++      (show (b : ℕ∞ω) ≤ ∞ by simp)).contDiffAt)
++    (((hN.minusFlow_angular_contDiff hS hT hz0 href.stateSector m hr).of_le
++      (show (b : ℕ∞ω) ≤ ∞ by simp)).contDiffAt)
++
+ 
+ private theorem exists_interior_sequence_of_mem_Icc
+     {l r x : ℝ} (hlr : l < r) (hx : x ∈ Icc l r) :
+@@ -85,11 +124,11 @@
+     congrArg (fun L => L v) ((J i).unique Ji k z hz)
+   exact (congrArg abs heq).trans_le (hJi z hz v)
+ 
+-private theorem N01Properties.sectorFlow_closed_tower_point
++private theorem N01Properties.parameterOrder_closed_tower_point
+     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+     (hN : N01Properties D T S C base loss ε)
+-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (k s : ℕ)
++    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (k s parameterLoss : ℕ)
+     (B : ℝ)
+     (hdata : ∀ m b θ r, b ≤ s → r ∈ Ioo (C.left m) (C.right m) →
+       ∃ J : SmoothDirections (sectorNeighborhood S base ε ε)
+@@ -98,7 +137,7 @@
+         |J.D k z v| ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B *
+           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-            base (s + loss) z v)
++            base (s + loss + parameterLoss) z v)
+     (m b : ℕ) (θ r : ℝ) (hb : b ≤ s) (hr : r ∈ Icc (C.left m) (C.right m)) :
+       ∃ J : SmoothDirections (sectorNeighborhood S base ε ε)
+         (fun z => ordinaryFlowFamily S C m 0 b (r, θ) (liftSectorParameter S C z)),
+@@ -106,7 +145,7 @@
+         |J.D k z v| ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B *
+           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-            base (s + loss) z v := by
++            base (s + loss + parameterLoss) z v := by
+   classical
+   have hsamples := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1
+   have hH (m : ℕ) : 0 < T.H (T.sample m) := (hT.2.1 _ (hsamples m)).2.1
+@@ -116,18 +155,19 @@
+       ContinuousOn (fun t => ordinaryFlowFamily S C m 0 b (t, θ)
+         (liftSectorParameter S C z)) (Icc (C.left m) (C.right m)) := by
+     intro z hz
+-    exact hN.ordinaryFlowFamily_radial_continuousOn hS hT
++    exact hN.parameterOrder_radial_continuousOn hS hT
+       (liftSectorParameter_mem_stateNeighborhood hz (le_refl ε))
+       (hN.2.2.1.liftSectorParameter_sector z) m b θ
++  let lossAt : ℕ → ℕ := fun n => (hN.sectorFlow_parameterOrder_tower n).choose
+   have hbounds : ∀ n, ∃ A : ℝ, 0 ≤ A ∧ ∀ t ∈ Ioo (C.left m) (C.right m),
+       ∃ J : SmoothDirections (sectorNeighborhood S base ε ε)
+         (fun z => ordinaryFlowFamily S C m 0 b (t, θ) (liftSectorParameter S C z)),
+       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ v : Fin n → (StateDirections S × ℝ),
+       |J.D n z v| ≤ A *
+         oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-          base (b + loss) z v := by
++          base (b + loss + lossAt n) z v := by
+     intro n
+-    let hraw := hN.sectorFlow_tower n b
++    let hraw := (hN.sectorFlow_parameterOrder_tower n).choose_spec b
+     let A : ℝ := hraw.choose
+     refine ⟨A * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+       T.E0 (T.sample (C.cell m)) ^ A,
+@@ -138,28 +178,34 @@
+   exact closed_parameter_tower_of_interior_towers
+     (pairGrading (sectorGrading S) realGrading)
+     (sectorPairGrading_continuous S) (sectorPairGrading_monotone S)
+-    base (fun _ => b + loss) (sectorNeighborhood_isOpen S base ε ε)
++    base (fun n => b + loss + lossAt n) (sectorNeighborhood_isOpen S base ε ε)
+     (sectorNeighborhood_convex S base ε ε) (hcontrol.1 m).2.1 hr
+     (fun t z => ordinaryFlowFamily S C m 0 b (t, θ) (liftSectorParameter S C z))
+-    hcontinuous hbounds k (s + loss)
++    hcontinuous hbounds k (s + loss + parameterLoss)
+     (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B)
+     (fun t ht => hdata m b θ t hb ht)
+ 
+-theorem N01Properties.sectorFlow_closed_tower
++/-- One extra loss is chosen for the requested parameter order before
++all spatial orders and all closed component points. -/
++theorem N01Properties.sectorFlow_parameterOrder_closed_tower
+     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+     (hN : N01Properties D T S C base loss ε)
+-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (k s : ℕ) :
+-    ∃ B : ℝ, 0 < B ∧ ∀ m b θ r, b ≤ s → r ∈ Icc (C.left m) (C.right m) →
+-      ∃ J : SmoothDirections (sectorNeighborhood S base ε ε)
+-        (fun z => ordinaryFlowFamily S C m 0 b (r, θ) (liftSectorParameter S C z)),
+-      ∀ z ∈ sectorNeighborhood S base ε ε, ∀ v : Fin k → (StateDirections S × ℝ),
+-        |J.D k z v| ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+-          T.E0 (T.sample (C.cell m)) ^ B *
+-          oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-            base (s + loss) z v := by
+-  let hdata := hN.sectorFlow_tower k s
+-  exact ⟨hdata.choose, hdata.choose_spec.1,
+-    hN.sectorFlow_closed_tower_point hS hT k s hdata.choose hdata.choose_spec.2⟩
++    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (k : ℕ) :
++    ∃ parameterLoss : ℕ, ∀ s : ℕ,
++      ∃ B : ℝ, 0 < B ∧ ∀ m b θ r, b ≤ s → r ∈ Icc (C.left m) (C.right m) →
++        ∃ J : SmoothDirections (sectorNeighborhood S base ε ε)
++          (fun z => ordinaryFlowFamily S C m 0 b (r, θ) (liftSectorParameter S C z)),
++        ∀ z ∈ sectorNeighborhood S base ε ε, ∀ v : Fin k → (StateDirections S × ℝ),
++          |J.D k z v| ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
++            T.E0 (T.sample (C.cell m)) ^ B *
++            oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
++              base (s + loss + parameterLoss) z v := by
++  obtain ⟨parameterLoss, horder⟩ := hN.sectorFlow_parameterOrder_tower k
++  refine ⟨parameterLoss, ?_⟩
++  intro s
++  obtain ⟨B, hB, hdata⟩ := horder s
++  exact ⟨B, hB,
++    hN.parameterOrder_closed_tower_point hS hT k s parameterLoss B hdata⟩
+ 
+ end ContinuousFlexibility.Statements

@@ -1,0 +1,68 @@
+{
+  "kind": "actual_material_scale_physical_jets_candidate",
+  "author": "/root",
+  "status": "UNCOMPILED_AWAITING_INDEPENDENT_FULL_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/MaterialScalePhysicalJets.lean",
+    "sha256": "c665f16f3f66aedbdc98fdd045a7e5192baade1b257b0f3d702ec31bb7621901",
+    "blob": "5a29ed16b3635e37ab9a0a4b9294fbcfd48898e0",
+    "lines": 74,
+    "target": "src/ContinuousFlexibility/Analysis/MaterialScalePhysicalJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.MaterialScalarPowerJets",
+      "ContinuousFlexibility.Analysis.SpacesTraceGeometry",
+      "ContinuousFlexibility.Scalar.WeightedMaterialScale"
+    ],
+    "public_names": [
+      "materialEll_rpow_physical_jet_bound",
+      "materialEll_signed_physical_jet_bound"
+    ]
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialScalarPowerJets.lean",
+      "sha256": "23d1c2fbc0e3c75b90bc0094497cc5bc9a40fb3cac94e2a6c22d4cbeab24b608",
+      "blob": "45db6555d66a3c007d9a62640aee8f67fbf398cc",
+      "lines": 107
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/SpacesTraceGeometry.lean",
+      "sha256": "dcc188b0d3cc434b5e100d36e0b2f011ec9ac7a7064596f5a5a94ee49df1780c",
+      "blob": "57ae014851d88eb43af8ed066c770a6455bfbf14",
+      "lines": 233
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Scalar/WeightedMaterialScale.lean",
+      "sha256": "ca9fe7191b2be4537f74485f92f09fd8e4e1e2cf1ff1a19632f3a64f2fa0b24e",
+      "blob": "cd40d8d77811b5d832c8c92da1d285990f886e4f",
+      "lines": 153
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "lines": 603
+    }
+  ],
+  "reviewed_provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialE0PowerJetsReviewedManifest.json",
+      "sha256": "3ee41a2ba9c2d88dca23df555f3569348b4d649607d20e863bc87574cf5238ae",
+      "blob": "c89f4193196ffb9cf77b868443071cd526717ded",
+      "lines": 176
+    }
+  ],
+  "checks": [
+    "Uses the actual third logarithmicDerivativeBounds clause for ell and the genuine scalar-power physical expansion, without any assumption on reference atoms.",
+    "The actual global ell upper bound and the true ell inverse bound derived from the first RadialMaterialExpansion provide the two zeroth-order costs.",
+    "One Boolean-indexed statement covers both scale atoms and all physical orders; B and A are selected before every physical point.",
+    "Only E0 positivity enters the rpow sum identity; no false original E0>=1 floor is used."
+  ],
+  "scope_limits": [
+    "No piece/sample transfer or enlarged material datum is asserted yet.",
+    "No compiler/elaborator/CI call or active checkout/index/ref mutation."
+  ],
+  "compiled": false,
+  "independent_reviews": [],
+  "created_at": "2026-11-12T14:18:35.904281+00:00"
+}

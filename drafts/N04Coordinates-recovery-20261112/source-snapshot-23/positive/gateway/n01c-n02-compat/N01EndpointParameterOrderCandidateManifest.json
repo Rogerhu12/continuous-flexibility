@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "kind": "closed_endpoint_parameter_order_loss_consumer_candidate",
+  "status": "HELD_UNCOMPILED_MIXED_PIN_COMPATIBILITY_DRAFT",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointParameterOrder.lean",
+    "sha256": "4491e37019b552600d38d77fe11e9d9b15a5ee3ff2a3e6776830b31de99dd566",
+    "blob": "3cf90bca72b10b52685c64ee1ab5fbaaac969c6a",
+    "lines": 211
+  },
+  "target_module": "ContinuousFlexibility.Analysis.N01EndpointParameterOrder",
+  "original_endpoint_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointParameterTower.c5c48-base.lean.txt",
+    "sha256": "8d898e3d10aae3c5fbec8b9a47190164c65299a20a731a047ac6e8df07d0d8bd",
+    "blob": "e7855eeb500ca5a0f188174db32e49d9d10f0b56",
+    "lines": 165
+  },
+  "original_sector_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01SectorFlowTower.c5c48-base.lean.txt",
+    "sha256": "64dca05a93d31a25a475389cc7d3544dd56b33543bcf606151b8c194727f9248",
+    "blob": "b078e9b4f8b9ca5336dcf3a9e18d1f26376acd79",
+    "lines": 125
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointParameterOrder.diff",
+    "sha256": "46d1b7096227bb6045426e34545c3708667f76d44e6e90eab3b071012dcafb2e",
+    "blob": "234a26000020d6bbbf219f37408997bfbc8cc054",
+    "lines": 185
+  },
+  "local_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01SectorFlowParameterOrder.lean",
+    "sha256": "494c9162be0c743bc15a29806486434cd58e48579d9e08bdeb3dbc2c83a95c47",
+    "blob": "ae74eb3f6fef35028c48d77d797646166361acde",
+    "lines": 83
+  },
+  "local_provider_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01SectorFlowParameterOrderReviewedManifest.json",
+    "sha256": "55abf20edc4064bab133fc2fb59bd7c11f1241f8489c6462c8506917a41c0585",
+    "blob": "bbce56a0e0e31c4422a02364378f131a7c7a1f22",
+    "lines": 27
+  },
+  "selected_upstream_providers": [
+    {
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointParameterTower.lean",
+      "sha256": "8d898e3d10aae3c5fbec8b9a47190164c65299a20a731a047ac6e8df07d0d8bd",
+      "blob": "e7855eeb500ca5a0f188174db32e49d9d10f0b56",
+      "lines": 165
+    },
+    {
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/N01SectorFlowTower.lean",
+      "sha256": "64dca05a93d31a25a475389cc7d3544dd56b33543bcf606151b8c194727f9248",
+      "blob": "b078e9b4f8b9ca5336dcf3a9e18d1f26376acd79",
+      "lines": 125
+    },
+    {
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowAngularSmoothness.lean",
+      "sha256": "c409f0da8e2a42f45fa7f82376026fc2c18d8f3af2b65caee445a4ab7f025281",
+      "blob": "c30744280a313edb1ae43c452a8cb9402d68b95d",
+      "lines": 126
+    },
+    {
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsOneHighLimit.lean",
+      "sha256": "2866cb506fab192cc70c632af5d08297d5caa69e339759d2f980a422b3d4236c",
+      "blob": "0253a94eb6f31c6f5aec0ff43dcf64a4b067b3ca",
+      "lines": 59
+    },
+    {
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialSampleCofinite.lean",
+      "sha256": "216a156a837d75f8ffb20ca2d4b12b84898ff606bc5d8f5bce4e79d25b9b3da3",
+      "blob": "1562a68cf59d5ebd5bedc7efce55bf3d7217ba44",
+      "lines": 98
+    },
+    {
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    }
+  ],
+  "closure_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointParameterOrderClosureInventory.json",
+    "sha256": "22a567534a5fd63c53693c96088cf663c835683abcf78023fb5912217b15beac",
+    "blob": "e23c419c9f2ff34a4b89138705d97cb494b1a723",
+    "lines": 2348
+  },
+  "mechanical_provenance": {
+    "generic_sequence_and_closed_limit_block_byte_identical": true,
+    "generic_block_sha256": "25a3895053dfb1eecac50d5066b08520749a39858eff03586a78339be02732fa",
+    "qualitative_sector_helpers_identical_after_private_renaming": true
+  },
+  "checks": [
+    "The existing generic endpoint limit already accepts high : Nat -> Nat. Its proof and sequence helper are retained byte-identically.",
+    "The qualitative actual radial continuity helpers are taken from the exact original sector module, privately renamed so importing its incompatible quantitative theorem is unnecessary. Their complete proof bodies are otherwise unchanged.",
+    "For the full limit tower, the actual interior contract is selected separately at every n, with high n = b + loss + lossAt n. No maximum over all parameter orders is taken.",
+    "The sharp bound for the requested order k uses the original B, H^(3/4), E0^B and high = s + loss + parameterLoss. Generic limit continuity transfers that bound without enlargement.",
+    "The public parameterLoss is chosen after k and before all s, components, points, states and increments. The original D/T/S/C/base/loss/radius are unchanged."
+  ],
+  "scope_limits": [
+    "This supplies one closed-endpoint scalar parameter tower consumer, not the complete N02/N03 construction or a uniform loss over all k.",
+    "The remote c5 branch and bb419 contract are exact selected inputs; the combined compatibility set has not been compiled.",
+    "No active source, checkout, index, refs, CI, CP, authority or plan was modified."
+  ],
+  "compiled": false,
+  "green_receipt_applies_to_candidate": false
+}

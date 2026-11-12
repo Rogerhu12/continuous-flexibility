@@ -1,0 +1,93 @@
+{
+  "kind": "actual_retained_positive_reference_prescribed_material_costs_candidate",
+  "author": "/root/quantitative_route",
+  "status": "UNCOMPILED_AWAITING_INDEPENDENT_FULL_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferencePrescribedMaterialCosts.lean",
+    "sha256": "7f25c657ae2450c60a3ec29d1af091675db3c8b65af39e42758479007e090c4b",
+    "blob": "c5e06eeeffc22c40ccf96bef5378c5925cbbc5a1",
+    "lines": 161,
+    "target": "src/ContinuousFlexibility/Analysis/ActualPositiveReferencePrescribedMaterialCosts.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualPositiveReferenceMidpointMaterialData",
+      "ContinuousFlexibility.Analysis.PositiveReferencePrescribedCosts"
+    ],
+    "public_names": [
+      "n04Coordinates_retained_positive_reference_prescribed_material_costs"
+    ]
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceMidpointMaterialData.lean",
+      "sha256": "56230c2eef444cc63f4a327f0f6f4383d6d6545eefc557dd853d60575b1bc03e",
+      "blob": "4bec9b285028e23a23bf5451913522251b942d6f",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferencePrescribedCosts.lean",
+      "sha256": "6b5ac3100acd682b1ebec4f73b6469cae178193b108ed3c4475498992d5aa7aa",
+      "blob": "f50437f2ab563c4e8a8076b803441290ef10a7a2",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceFinitePrescribed.lean",
+      "sha256": "9d90ac886d09bd6953294d7a554aafa9955ba9c570061befe0abb2be24dcf4f8",
+      "blob": "1eb9ca00d7c9a282a2bd06c447f7a7d74ca9723d",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceEndpointData.lean",
+      "sha256": "5996158db4711a93a40aeb62b7e21f9582b3da5c0959582efa48b6793ffa50bf",
+      "blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+      "lines": 160
+    }
+  ],
+  "reviewed_provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferencePrescribedCostsReviewedManifest.json",
+      "sha256": "c3b32e01b82651eadee6f4beb60d1c735aa4c6e82b3a363f32c41ecefd33fbb9",
+      "blob": "a37bf0123403114985dff58000dda06f07539cfb",
+      "lines": 61
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceFinitePrescribedReviewedManifest.json",
+      "sha256": "88c24fa2bb912bee35a1adab5b4104e70337129ae6202fe9341610e83f5f7c84",
+      "blob": "ceee3caed4a6e0268e724199643558654534712f",
+      "lines": 40
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolationReviewedManifest.json",
+      "sha256": "3828d5181d7559adea4d9dbb7e89ffbcb0ef9b452cb6d7a7c358fab84f736728",
+      "blob": "645b0b63b8f3dfd525b5366aaf648ef77d9b6229",
+      "lines": 74
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RetainedPositiveComponentMaterialWidthReviewedManifest.json",
+      "sha256": "389d814ef2b2e62b791f8c6389e9cf14a2ab8a5b79352cab0a25d3aee46e576c",
+      "blob": "36c30b652e1f95ca4828022c27c00ed9c404082f",
+      "lines": 39
+    }
+  ],
+  "pending_upstream_candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceMidpointMaterialDataCandidateManifest.json",
+    "sha256": "a63b84368aa25273253a35100c4c2d1cdc3020cae1d0e6b2740251495f160de1",
+    "blob": "8c0c388bde1bf0ced3f39b74ac1e2d598223aeb4",
+    "lines": 89
+  },
+  "checks": [
+    "The common finite envelope is obtained from the actual old K and the same positive midpoint sample. The retained-coordinate, original host and raw optical inputs remain explicit.",
+    "The finite degree n determines one U=B*(C0*E0(sample j))^B, kappa=U inverse, and exactly positiveReferenceTaylorWidth n l r kappa U. No subsequent order or state reselects this width.",
+    "Both actual scalar Taylor slices, integral Y and clipped-log H are the very same functions in the range geometry, full joint endpoint jet matching through n+1, and numerical bounds.",
+    "The actual source-data provider supplies all one-sided open/root smoothness, radiality and endpoint values. The midpoint-envelope provider supplies slope/height lower bounds and both finite-data bounds.",
+    "The existing displayed-width cost theorem yields delta inverse, Y derivative and reciprocal, H and reciprocal costs. All are raised to the explicit common power Z=(24+16(n+2))*B^2*(C0*E0(sample j))^(2B).",
+    "No forbidden-set avoidance radius is chosen. This new actual reference choice is not identified with the old qualitative interpolation."
+  ],
+  "scope_limits": [
+    "This is a conditional same-retained-witness reference construction; arbitrary Through03 does not supply the retained certificate or raw optical lower.",
+    "It proves finite endpoint jet matching and global value/first-derivative/width costs of the displayed functions. Arbitrary higher spatial derivative costs and state SmoothDirections are not asserted here.",
+    "The 148-line midpoint input is a separate candidate awaiting full independent review. Its formerly pending width99 provider has now been independently reviewed and is explicitly bound above.",
+    "No Lean/compiler/elaborator/CI query or active checkout/index/ref/CP/authority/plan mutation."
+  ],
+  "compiled": false,
+  "independent_reviews": []
+}

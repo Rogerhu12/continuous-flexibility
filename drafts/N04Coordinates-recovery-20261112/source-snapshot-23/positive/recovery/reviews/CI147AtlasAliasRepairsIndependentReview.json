@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "kind": "independent_CI147_actual_atlas_alias_repair_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "passed_full_sources_exact_deltas_actual_git_inputs_and_diagnostics",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair147/AtlasAliasCI147CandidateManifest.json",
+    "sha256": "06d674ac2877b5d24beab0c55458c97793d11b15b62d423aa69efff3f8085de3",
+    "blob": "4ab1b0c75be5af12086df45931d82420d6768b25",
+    "lines": 100
+  },
+  "base_head": "2058ced3cbf364e7e3ec9980dc76a90785890554",
+  "sources": [
+    {
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair147/N04bActualAtlasInteriorCompletion.lean",
+        "sha256": "b9d241c8984d02af87a2d6486a9a7e991ad59d15b038ecbebc281a1820661d8e",
+        "blob": "97a05cee066d07dee7a133440425f46f7fe6066e",
+        "lines": 90
+      },
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair147/N04bActualAtlasInteriorCompletion.base.lean.txt",
+        "sha256": "f189ff9f0ddd8a84bb6cb7a166f4463427f75a4ff994f3b2348dd48b7b2b9700",
+        "blob": "fbb67b770132e53b204ae4270d1b30f98e01c8b7",
+        "lines": 82
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair147/N04bActualAtlasInteriorCompletion.diff",
+        "sha256": "3610bca48fe1ec6194828bba4f3f3c12630d789db483e44f40e0c1d2898496d0",
+        "blob": "1c4a05a457ae3425e28d33e738ad82fd4e9e4f5d",
+        "lines": 20
+      },
+      "target": "src/ContinuousFlexibility/Analysis/N04bActualAtlasInteriorCompletion.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04ActualAtlasTransmission",
+        "ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity",
+        "ContinuousFlexibility.Analysis.N04bGeometricCompletion"
+      ]
+    },
+    {
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair147/WholeCanonicalAtlasRestrictedGeometry.lean",
+        "sha256": "29c43eb81d8250a000e3b9c0b217672afb2be922736cf5a183bf025e18a4ccef",
+        "blob": "28407ce18ea7eabac9bbe62345fb9df591fd7b16",
+        "lines": 154
+      },
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair147/WholeCanonicalAtlasRestrictedGeometry.base.lean.txt",
+        "sha256": "9e2cee52afc2fc29fa1ed3680e24534bfef821312a865d2523d10e6351be9218",
+        "blob": "701db6112228c64ffe09d6e04232fc1414f44785",
+        "lines": 146
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair147/WholeCanonicalAtlasRestrictedGeometry.diff",
+        "sha256": "111f75e39acb6f841fef8cc1746cc0ccbb46be62069d3ba999321338e7c47a76",
+        "blob": "dcce25162ffaacf6ad805bb6cd0713d4f3fd7ea8",
+        "lines": 20
+      },
+      "target": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasRestrictedGeometry.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeCanonicalAtlasGeometry",
+        "ContinuousFlexibility.Analysis.WholeCanonicalAtlasCutOperator",
+        "ContinuousFlexibility.Analysis.CanonicalNeighborhoodRestriction"
+      ]
+    }
+  ],
+  "verified_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ActualNegativePrincipalDensity.lean",
+      "sha256": "79be096548f4222f5265dc93e1b7ad6aa1bf426954089f48bb78b423c23ee2a3",
+      "blob": "7a3122c1e2c2081375a7be7405a2a348706ed261",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasPrincipalDensity.lean",
+      "sha256": "be4ce162e802d641ee1e37d7d9e125e9f45426ccf65b0b110ae7ade77b8ca7e9",
+      "blob": "a6e08b84cd66524d8f53399071d3a116adbf626e",
+      "lines": 91
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasCutOperator.lean",
+      "sha256": "47d05fc14f1c0103a0bb528300a449b6720998da258d37d085b5e5e21230fd74",
+      "blob": "d6c615f8d1f701511481356e9443f98e550ff4d1",
+      "lines": 76
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CoordinateOperatorConstruction.lean",
+      "sha256": "ffbecb5ae9d0d9e40a5fd193592dde632989d3c4fb2382b118be5180f9d7f1c1",
+      "blob": "aef71ea652edabf9d9c4788e2c6aba6780f6c1fe",
+      "lines": 76
+    }
+  ],
+  "failure_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-147.log",
+    "sha256": "bb69cd90b125bdf6794f71e952476f26a8c1670ba6c5a5bd9c8b2333e594a647",
+    "blob": "b22cadcd6b2b706e30c6984b89aae6d848fc735a",
+    "lines": 967
+  },
+  "read_scope": [
+    "Complete revised 90-line N04bActualAtlasInteriorCompletion and 154-line WholeCanonicalAtlasRestrictedGeometry.",
+    "Exact original Git bytes at the failed head, both exact diffs, and complete final detailed diagnostics at 74:8 and 142:4.",
+    "Complete actual density111, whole density91, green cut/operator76 and coordinate operator76 providers."
+  ],
+  "checks": [
+    "Both source preimages equal the exact installed failed commit. All three full public theorem headers and all imports/options remain byte-identical.",
+    "The two changes introduce only a type-directed change at the existing true principal-density proof. The local K/W aliases denote the original constructed atlas, so this conversion is definitional and does not change any chart, inverse, height, coefficient or state neighborhood.",
+    "The real chart/inverse equality hFx is used at the same canonical point p. It changes precisely the final negative-density right hand side from minus chart(inverse p).fst to minus p.fst.",
+    "After rewriting the existing stored coefficient equality, inverseChartPrincipalCoefficients is definitionally the three coordinate-density components evaluated at the same inverse point; exact hd supplies this conjunction.",
+    "The restricted proof still constructs K using the original hN/hfield and merely transports state membership through the pre-existing hsubState. No atlas is reconstructed from a new neighborhood proof.",
+    "The resulting conversion/rewrite/exact block is the existing fully compiled WholeCanonicalAtlasCutOperator proof pattern. The current fixes introduce no new import, hypothesis, proof option or heartbeat change."
+  ],
+  "scope_limits": [
+    "Static full-source and delta review; the new bytes have not been compiled or elaborated by this reviewer.",
+    "The cached CI result applies to the failed original preimages. This receipt does not predict the status of unrelated downstream modules.",
+    "No active sources, index, refs, authority, plan, CP or CI were modified."
+  ],
+  "compiled": false,
+  "source_modified": false,
+  "green_receipt_applies_to_candidate": false
+}

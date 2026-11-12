@@ -1,0 +1,89 @@
+{
+  "kind": "actual_retained_positive_reference_midpoint_material_data_candidate",
+  "author": "/root/quantitative_route",
+  "status": "UNCOMPILED_AWAITING_INDEPENDENT_FULL_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceMidpointMaterialData.lean",
+    "sha256": "56230c2eef444cc63f4a327f0f6f4383d6d6545eefc557dd853d60575b1bc03e",
+    "blob": "4bec9b285028e23a23bf5451913522251b942d6f",
+    "lines": 148,
+    "target": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceMidpointMaterialData.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualPositiveReferenceSourceMaterialData",
+      "ContinuousFlexibility.Analysis.RetainedPositiveEndpointHostSample",
+      "ContinuousFlexibility.Analysis.RetainedPositiveComponentMaterialWidth",
+      "ContinuousFlexibility.Analysis.RetainedPositiveComponentInteriorEndpoints"
+    ],
+    "public_names": [
+      "n04Coordinates_retained_positive_reference_midpoint_material_data"
+    ]
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceSourceMaterialData.lean",
+      "sha256": "f8dbc713ee26f42b84a69ebcba40d64c861a48cd4b9d3af9185452d6ace274eb",
+      "blob": "9549032208efa9a9dfa8fbc52a9d69fae35f61a6",
+      "lines": 96
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RetainedPositiveEndpointHostSample.lean",
+      "sha256": "21da218339f7328ff824072f56975b164c1f0e82e4dfc7648d8aafe5f50da83c",
+      "blob": "a37fc4e5fba09db2265e1870fc641c47d01add45",
+      "lines": 69
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RetainedPositiveComponentMaterialWidth.lean",
+      "sha256": "14267b9dbab42a6bf2ccb5548976368c700259eec173b22f70f66228b764b38b",
+      "blob": "f2870d41d073529cb929fb20e313243e00f4a540",
+      "lines": 99
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedPositiveComponentInteriorEndpoints.lean",
+      "sha256": "6ce75e11f89d534e25aa3147188dc1196a45d4ec692bbb46c2a313022b89a856",
+      "blob": "f5d74d7c6bd5230ac8af2e12548f9221fb8ea697",
+      "lines": 121
+    }
+  ],
+  "reviewed_provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceSourceMaterialDataReviewedManifest.json",
+      "sha256": "663eba309c9cab9f3ea9404c2e509adb2c3c2ae2f87c50d2393ff2ab7f2c56dc",
+      "blob": "cddc8a554c555333d6d5aa614f05d823cfea163a",
+      "lines": 44
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RetainedPositiveEndpointHostSampleReviewedManifest.json",
+      "sha256": "c7dc760c55577ca2da417ec05ddf0f8da13fdccd2628ca80955ca0436bdaf612",
+      "blob": "3514e165d67ba28b2bfbcdc4562f4a04e5fbf6e1",
+      "lines": 59
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedPositiveComponentInteriorEndpointsReviewedManifest.json",
+      "sha256": "ffb957a2d65dc7414ec023072c0e30d1aeb9b102d45ed9481ea858114c5aab85",
+      "blob": "9afbf056da73a97367f017caa26a90feef22e44e",
+      "lines": 87
+    }
+  ],
+  "pending_provider_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RetainedPositiveComponentMaterialWidthCandidateManifest.json",
+    "sha256": "55b97fdd8e785d2f9b2ffc17f7cc1b003d2e097460ec5e169b3f6657503db46f",
+    "blob": "e78afb1331ac1b725bf35568ba81a102473570b8",
+    "lines": 73
+  },
+  "checks": [
+    "The original same-Gamma Through03 data and actual old typed K are retained. The genuine original C.cell host inclusion and uniform raw optical lower remain explicit upstream inputs.",
+    "The same retained component geometry excludes an ambient endpoint source. Every actual certified source therefore identifies its genuine opposite negative root.",
+    "The 96-line actual finite source envelope at its original host is transferred by the true host-to-positive-midpoint E0 comparison, at exponent B0 chosen before the positive component.",
+    "With W=C0*E0(actual midpoint sample)>=1, B=1+D+A1+Bw+Aw bounds the two raw endpoint envelopes, positive slope/height reciprocals, and gap and reciprocal gap. The input C0 is chosen before the finite order.",
+    "No whole positive component cell containment, arbitrary cell relabel, reverse endpoint comparison, E0>=1, or replacement reference witness is used.",
+    "The source only supplies actual numerical inputs for the displayed reference interpolation. It does not identify it with any earlier qualitative interpolation choice."
+  ],
+  "scope_limits": [
+    "The same retained-coordinate certificate and the raw optical/host conditions are not inferred from arbitrary Through03.",
+    "Ordinary finite root jets are used; no state SmoothDirections, all-order interpolation cost, or final primitive geometry certificate is claimed.",
+    "The width99 provider is a separate candidate under independent review; it is not marked approved by this manifest.",
+    "No Lean/compiler/elaborator/CI query or active checkout/index/ref/CP/authority mutation."
+  ],
+  "compiled": false,
+  "independent_reviews": []
+}
