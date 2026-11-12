@@ -78,8 +78,9 @@ theorem n05_referenceModerate_opticalRadicand_secondDerivative {D : ReferenceDat
     rw [heq]
     exact (((hdiff hu r hr).mul (hdiff hv r hr)).mul (hdiff hz r hr)).neg.deriv
   have hsecond (r : ℝ) (hr : r ∈ radialCore D) : deriv (deriv F) r = H r := by
+    have hcore : ∀ᶠ x in 𝓝 r, x ∈ radialCore D := isOpen_Ioo.mem_nhds hr
     have hlocal : deriv F =ᶠ[𝓝 r] G :=
-      (isOpen_Ioo.mem_nhds hr).mono fun x hx => hfirst x hx
+      hcore.mono fun x hx => hfirst x hx
     rw [hlocal.deriv_eq]
     have du := hdiff hu r hr
     have du' := hdiff hu' r hr

@@ -132,7 +132,7 @@ theorem n05_optical_root_collar_bounds
         |deriv F x| = |deriv F x - deriv F 0 + deriv F 0| :=
           congrArg abs (sub_add_cancel (deriv F x) (deriv F 0)).symm
         _ ≤ |deriv F x - deriv F 0| + |deriv F 0| := abs_add_le _ _
-        _ ≤ M * δ + |deriv F 0| := add_le_add_right hdiff _
+        _ ≤ M * δ + |deriv F 0| := add_le_add hdiff le_rfl
         _ = |deriv F 0| + M * δ := add_comm _ _
   intro x hx
   have hi : IntervalIntegrable (fun t => deriv F (t * x)) volume 0 1 := by

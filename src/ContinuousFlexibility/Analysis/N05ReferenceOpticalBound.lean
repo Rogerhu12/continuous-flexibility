@@ -32,8 +32,11 @@ private theorem n05_optical_radicand_le_radius_right
     simpa only [dist_neg_neg] using hf.dist_le_mul (-x) (hmem x hx) (-y) (hmem y hy)
   have ht : (∫ x in -b..-a, Real.sqrt (f (-x))) =
       (2 / 3 : ℝ) * ξ * Real.sqrt ξ := by
-    rw [intervalIntegral.integral_comp_neg]
-    simpa only [neg_neg] using htime
+    have hneg : (∫ x in -b..-a, Real.sqrt (f (-x))) =
+        ∫ x in a..b, Real.sqrt (f x) := by
+      simpa only [neg_neg] using intervalIntegral.integral_comp_neg
+        (a := -b) (b := -a) (fun x => Real.sqrt (f x))
+    exact hneg.trans htime
   simpa only [neg_neg] using
     n05_optical_radicand_le_radius (neg_le_neg hab) hA hf'
       (by simpa only [neg_neg] using hzero)
@@ -73,7 +76,7 @@ theorem n05_cut_reference_density_le_of_optical_lipschitz
     ⟨hx.1.1.le, hx.1.2.le⟩
   have hξ : 0 < ξ := by
     have hp := (hcharts (C.referenceState, 0) (n05_referenceState_mem h01.2.1)
-      (n05_referenceState_sector h01.2.2.1) i).1 x hx
+      (n05_referenceState_sector h01.2.2.1) i).1 hx
     simpa only [hi0] using hp.1.1
   have hnonneg (t : ℝ) (ht : t ∈ Icc (K.physicalLeft i) (K.physicalRight i)) :
       0 ≤ F t := by
@@ -130,6 +133,7 @@ theorem n05_cut_reference_density_le_of_optical_lipschitz
         (hLip.mono (Icc_subset_Icc hx.1.1.le le_rfl)) hz
         (fun r hr' => hnonneg r ⟨hx.1.1.le.trans hr'.1, hr'.2⟩) hξ.le htime
   have hd := n05_negative_reference_density_closed hT hS h hi hr x.2
+  have hJ : planeJacobian (K.chart (C.referenceState, 0) i) x = q := hd.1
   have hmul : ξ * |q| ^ 2 ≤ ξ * (4 * (A : ℝ)) := calc
     _ = F x.1 := hd.2.2.1
     _ ≤ 4 * (A : ℝ) * ξ := hbound
@@ -144,7 +148,9 @@ theorem n05_cut_reference_density_le_of_optical_lipschitz
     rw [hd.2.1] at hbad
     norm_num at hbad
   constructor
-  · simpa only [hd.1] using hq
+  · change |planeJacobian (K.chart (C.referenceState, 0) i) x| ^ 2 ≤ 4 * (A : ℝ)
+    rw [hJ]
+    exact hq
   · calc
       _ = D.w x.1 * |q| ^ 2 := hd.2.2.2
       _ ≤ D.w x.1 * (4 * (A : ℝ)) := mul_le_mul_of_nonneg_left hq hw

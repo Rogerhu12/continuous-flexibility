@@ -36,7 +36,7 @@ theorem n05OpticalRootAverage_integrable {g : ℝ → ℝ} {a x : ℝ}
 theorem n05_optical_root_average_constant (c : ℝ) :
     3 * (∫ t in (0 : ℝ)..1, t ^ 2 * c) = c := by
   rw [intervalIntegral.integral_mul_const, integral_pow]
-  norm_num
+  norm_num <;> ring
 
 theorem n05OpticalRootAverage_bounds {g : ℝ → ℝ} {a x κ B : ℝ}
     (hg : ContinuousOn g (Icc (0 : ℝ) a))
@@ -151,7 +151,7 @@ theorem n05OpticalRootAverage_time {F g : ℝ → ℝ} {a x : ℝ}
       (f := fun t : ℝ => x * t ^ 2) (f' := fun t => 2 * x * t)
       (g := fun y => Real.sqrt (F y)) (a := (0 : ℝ)) (b := 1)
       (fun t _ => by
-        convert ((hasDerivAt_id t).pow 2).const_mul x using 1 <;> ring)
+        convert (hasDerivAt_pow 2 t).const_mul x using 1 <;> norm_num <;> ring)
       (by fun_prop) ?_
     · simpa only [Function.comp_apply, zero_pow (by decide : (2 : ℕ) ≠ 0),
         one_pow, mul_zero, mul_one] using hh
@@ -167,6 +167,8 @@ theorem n05OpticalRootAverage_time {F g : ℝ → ℝ} {a x : ℝ}
     apply intervalIntegral.integral_congr
     intro t ht
     rw [uIcc_of_le zero_le_one] at ht
+    change Real.sqrt (F (x * t ^ 2)) * (2 * x * t) =
+      (2 * x * Real.sqrt x) * (t ^ 2 * Real.sqrt (g (t ^ 2 * x)))
     rw [hfactor _ (hmap t ht), Real.sqrt_mul (mul_nonneg hx.1 (sq_nonneg t)),
       Real.sqrt_mul hx.1, Real.sqrt_sq ht.1]
     simp only [mul_comm x (t ^ 2)]
@@ -226,7 +228,7 @@ theorem n05_optical_root_cubic_bounds {P q g A : ℝ}
       _ ≤ P ^ 2 * P := mul_le_mul_of_nonneg_right hu hp.le
       _ = P ^ 3 := by ring
   have hql : (1 / P) ^ 3 ≤ q ^ 3 := by
-    apply (mul_le_mul_right hp).mp
+    apply le_of_mul_le_mul_right (a := P) ?_ hp
     calc
       (1 / P) ^ 3 * P = (1 / P) ^ 2 := by field_simp [hp.ne'] <;> ring
       _ ≤ g * Real.sqrt g := hl
@@ -303,6 +305,7 @@ theorem n05_optical_symbol_deriv {F ξ : ℝ → ℝ} {a x : ℝ}
     filter_upwards [Ioo_mem_nhds hx.1 hx.2] with y hy
     exact (hsymbol y hy).symm
   have hd := (hp.congr_of_eventuallyEq he).unique hF.hasDerivAt
+  simp only [Pi.pow_apply, Pi.mul_apply] at hd
   convert hd using 1 <;> ring
 
 /-- Closed-interval first geometry for the actual root coordinate.
@@ -390,7 +393,7 @@ theorem n05_optical_root_first_geometry {F ξ : ℝ → ℝ} {a κ P : ℝ} {M :
       (by simpa only [closure_Ioo ha.ne] using hqC) continuousOn_const hxc
   · exact le_on_closure (fun y hy => (ho y hy).2.2)
       (by simpa only [closure_Ioo ha.ne] using hqqC.abs)
-      (by simpa only [closure_Ioo ha.ne] using continuousOn_const.mul hqC) hxc
+      (by simpa only [closure_Ioo ha.ne] using hqC.const_mul ((M : ℝ) / κ)) hxc
 
 /-- The true height normalization gives reciprocal bounds without any
 derivative estimate or choice of a square-root representative. -/
@@ -434,6 +437,7 @@ theorem n05_optical_height_log_deriv_of_eventuallyEq {H w q : ℝ → ℝ} {x : 
     deriv H x = -(H x / 2) * (deriv w x / w x + deriv q x / q x) := by
   have hp := ((hH.hasDerivAt.pow 2).mul hw.hasDerivAt).mul hq.hasDerivAt
   have hd := (hp.congr_of_eventuallyEq hnormal.symm).unique (hasDerivAt_const x (1 : ℝ))
+  simp only [Pi.pow_apply, Pi.mul_apply] at hd
   have hm : H x * (2 * w x * q x * deriv H x +
       H x * (deriv w x * q x + w x * deriv q x)) = 0 := by
     convert hd using 1 <;> ring
@@ -515,7 +519,8 @@ theorem n05_optical_root_height_geometry {F ξ w H : ℝ → ℝ}
     have hsum : |deriv w x / w x + deriv (deriv ξ) x / deriv ξ x| ≤
         V + (M : ℝ) / κ :=
       (abs_add_le _ _).trans (add_le_add (hweightDeriv x hxc) hqlog)
-    rw [he, abs_mul, abs_neg, abs_of_pos (by positivity : 0 < H x / 2)]
+    rw [he, abs_mul, abs_neg,
+      abs_of_pos (div_pos (hHpos x hxc) (by norm_num : (0 : ℝ) < 2))]
     exact mul_le_mul (div_le_div_of_nonneg_right (hHbound x hxc).1 (by norm_num))
       hsum (abs_nonneg _) (by positivity)
   have hHdC : ContinuousOn (deriv H) (Icc (0 : ℝ) a) := by
