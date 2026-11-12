@@ -110,7 +110,7 @@ theorem SeedRetainedPair.exists_first_inner_inverse {S : SelectedTailData}
     (hjcore false) (hjcore true) hl hc hr
   have hG0 : G.left 0 = L :=
     innerModelChainCuts_first (fun _ : Fin 1 => center) L R
-  have hG2 : G.right 2 = R :=
+  have hG2 : G.right (Fin.last 2) = R :=
     innerModelChainCuts_last (fun _ : Fin 1 => center) L R
   have hGL : G.left 1 = centralRadius (-T) :=
     innerModelChainCuts_model_left (fun _ : Fin 1 => center) L R 0
@@ -143,11 +143,9 @@ theorem SeedRetainedPair.exists_first_inner_inverse {S : SelectedTailData}
       (by linarith only [h8] : 0 ≤ T) hTL hTR hmodel hwindow
       ((G.left_pos p).trans_le hmem.1)
     rcases (show p = 0 ∨ p = 2 by omega) with rfl | rfl
-    · exact Or.inl (by
-        simpa only [hG0, hG01, L, SeedRetainedPair.sideRadius,
-          Bool.false_eq_true, ite_false] using hmem)
-    · exact Or.inr (by
-        simpa only [hG21, hG2, R, SeedRetainedPair.sideRadius, ite_true] using hmem)
+    · exact Or.inl (by simpa [hG0, hG01, L, SeedRetainedPair.sideRadius] using hmem)
+    · have hG2' : G.right (2 : Fin 3) = R := hG2
+      exact Or.inr (by simpa [hG21, hG2', R, SeedRetainedPair.sideRadius] using hmem)
   have hbool : centralModelBordered q = decide (M.frequency = 2) := by
     by_cases hq1 : q = 1
     · simp [centralModelBordered, hq1, hfrequency]

@@ -24,7 +24,7 @@ open Real Set Filter MeasureTheory
 open scoped Topology ContDiff ENNReal
 open ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint
 
-theorem SeedRetainedPair.exists_later_terminalData_of_supplies
+theorem SeedRetainedPair.exists_later_terminalData_of_supplies_with_data
     {C : ℝ} {requested : ℕ} {S : SelectedTailData}
     {K : SeedCentralCutoff} {q length : ℝ} (P : SeedRetainedPair S K q length)
     (metadata : R10aSelectedMetadata C requested S)
@@ -47,7 +47,37 @@ theorem SeedRetainedPair.exists_later_terminalData_of_supplies
     ∃ W : TerminalRegionalData Γ.reference,
       W.matching.frequency = j ∧ W.matching.transitionIndex = n ∧
       W.matching.innerLeft = P.sideRadius false * S.joinInner false n ∧
-      W.matching.innerRight = P.sideRadius true * S.joinInner true n := by
+      W.matching.innerRight = P.sideRadius true * S.joinInner true n ∧
+      W.cutoff = (fun i => P.laterTerminalCutoff metadata.geometry n (selectedTerminalSide i)) ∧
+      W.standIn = (fun i => radialRadiusScale (P.sideRadius (selectedTerminalSide i)) 1
+        (S.incoming (selectedTerminalSide i) j)) ∧
+      W.matching.margin = r07UniformTolerance S.Cstar * exp (-(n : ℝ) ^ 2) / 8 ∧
+      W.sourceCost = radialE n ^ terminalMorseRelativeSourceExponent ∧
+      W.energyCost = radialE n ^ terminalMorseEnergyErrorExponent ∧
+      W.inverseCost = radialE n ^ (38 : ℝ) ∧
+      (∀ i, W.attenuation i = terminalMatchingAction S.chain (n - 1) j / 100000000) ∧
+      W.matching.sourceOuter = modeOuterSource Γ.reference
+        (P.sideRadius false * S.joinInner false n) (P.sideRadius true * S.joinInner true n) ∧
+      ∃ v : Bool → ℝ → ℝ,
+        (∀ side, ContDiff ℝ ∞ (v side) ∧
+          EqOn (v side) (S.outgoing side j)
+            (radialTailInterval (S.family S.sigma) side (S.entry side n)) ∧
+          ContDiff ℝ ∞ (radialRadiusScale (P.sideRadius side) 1 (v side)) ∧
+          RadialNaturalTail Γ.reference side j (P.sideRadius side * S.joinInner side n)
+            (radialRadiusScale (P.sideRadius side) 1 (v side))) ∧
+        ∀ i : Fin 2,
+          W.matching.A i i =
+            (outerUnitState (selectedBoundaryState Γ.reference j
+              (r07OutwardSign (selectedTerminalSide i))
+              (P.sideRadius (selectedTerminalSide i) * S.joinInner (selectedTerminalSide i) n)
+              (radialRadiusScale (P.sideRadius (selectedTerminalSide i)) 1
+                (v (selectedTerminalSide i))))).1 ∧
+          W.matching.B i i =
+            (outerUnitState (selectedBoundaryState Γ.reference j
+              (r07OutwardSign (selectedTerminalSide i))
+              (P.sideRadius (selectedTerminalSide i) * S.joinInner (selectedTerminalSide i) n)
+              (radialRadiusScale (P.sideRadius (selectedTerminalSide i)) 1
+                (v (selectedTerminalSide i))))).2 := by
   let D := Γ.reference
   let G := metadata.geometry
   let cut : Bool → ℝ := fun side => P.sideRadius side * S.joinInner side n
@@ -180,7 +210,9 @@ theorem SeedRetainedPair.exists_later_terminalData_of_supplies
     source_bound := fun i => hsourceBound (selectedTerminalSide i)
     energy_bound := fun i => henergyBound (selectedTerminalSide i)
     inverse_bound := hAnorm
-    error_budget := fun _ _ => hbudget.2 }, rfl, rfl, rfl, rfl⟩
+    error_budget := fun _ _ => hbudget.2 }, rfl, rfl, rfl, rfl,
+    rfl, rfl, rfl, rfl, rfl, rfl, (fun _ => rfl), rfl,
+    v, (fun side => ⟨hv side, hveq side, (hb side).2.1, (hb side).2.2.1⟩), hMdiag⟩
   · intro i
     rw [(hMdiag i).1, (hMdiag i).2]
     rcases hb (selectedTerminalSide i) with ⟨_, _, _, _, hlam, hdpos, hdhalf, _, _, hmargin⟩
@@ -207,5 +239,35 @@ theorem SeedRetainedPair.exists_later_terminalData_of_supplies
     change standInBoundarySlope (bufferSign i) ((j : ℝ) ^ 2)
       (matchingCut D M i) (U (selectedTerminalSide i)) = slope (selectedTerminalSide i)
     rw [hMcut i, selectedTerminalSide_sign i]
+
+/-- The original interface forgets only the exact cap and natural-line data. -/
+theorem SeedRetainedPair.exists_later_terminalData_of_supplies
+    {C : ℝ} {requested : ℕ} {S : SelectedTailData}
+    {K : SeedCentralCutoff} {q length : ℝ} (P : SeedRetainedPair S K q length)
+    (metadata : R10aSelectedMetadata C requested S)
+    (hq : 0 < q) {Γ : ConnectedReferenceGeometry} (hΓ : Γ.Realizes)
+    (hw : Γ.reference.w = P.pair.profile)
+    (hleft : Γ.centralLeft = exp K.left) (hright : Γ.centralRight = exp K.right)
+    (hC : 1000 ≤ S.Cstar) {n j : ℕ} (hn : S.chain.index < n)
+    (hj : 2 ≤ j) (heven : Even j) (hband : radialFrequencyBand S.chain S.Cstar n j)
+    (hbudget : 1000000000 ≤ terminalMatchingAction S.chain (n - 1) j ∧
+      (radialE n ^ terminalMorseEnergyErrorExponent + radialE n ^ (38 : ℝ) *
+        (radialE n ^ terminalMorseRelativeSourceExponent) ^ (2 : ℕ)) *
+        exp (-(terminalMatchingAction S.chain (n - 1) j / 100000000) -
+          terminalMatchingAction S.chain (n - 1) j / 100000000) ≤
+        ((r07UniformTolerance S.Cstar * exp (-(n : ℝ) ^ 2)) / 8) / 16)
+    (hinner : ∀ (margin : ℝ) (slope : Bool → ℝ) (boundary : Bool → ℝ × ℝ),
+      SelectedTerminalInnerSupply
+        (selectedTerminalMatching Γ.reference j n margin
+          (fun side => P.sideRadius side * S.joinInner side n) slope boundary)
+        (radialE n ^ (38 : ℝ))) :
+    ∃ W : TerminalRegionalData Γ.reference,
+      W.matching.frequency = j ∧ W.matching.transitionIndex = n ∧
+      W.matching.innerLeft = P.sideRadius false * S.joinInner false n ∧
+      W.matching.innerRight = P.sideRadius true * S.joinInner true n := by
+  obtain ⟨W, hfreq, hindex, hcutL, hcutR, _⟩ :=
+    P.exists_later_terminalData_of_supplies_with_data metadata hq hΓ hw hleft hright
+      hC hn hj heven hband hbudget hinner
+  exact ⟨W, hfreq, hindex, hcutL, hcutR⟩
 
 end ContinuousFlexibility.Radial

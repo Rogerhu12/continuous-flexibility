@@ -16,10 +16,10 @@ open Set Filter Real MeasureTheory
 open scoped Topology ContDiff
 open ContinuousFlexibility.Statements ContinuousFlexibility.Radial
 
-theorem R10aPoisson {D : ReferenceData} (hD : IsAccumulatingProfile D)
+theorem R10aPoisson_with_fields {D : ReferenceData} (hD : IsAccumulatingProfile D)
     (hB : RadialTrueBorder D) (W : TerminalRegionalData D) :
-    ∃ M : RadialMatchingData D,
-      M.frequency = W.matching.frequency ∧ MatchedPieces D M := by
+    ∃ P : Fin 2 → RadialModePair D, ∃ p : Fin 2 → ℝ → ℝ, ∃ Db : RadialMatrix,
+      MatchedPieces D { W.matching with innerPoisson := P, innerFunction := p, Db := Db } := by
   classical
   let M := W.matching
   have hsub : Icc M.innerLeft M.innerRight ⊆ radialCore D := by
@@ -78,8 +78,16 @@ theorem R10aPoisson {D : ReferenceData} (hD : IsAccumulatingProfile D)
         mul_le_mul (mul_le_mul_of_nonneg_left (hs i) heps) (hs k)
           (sqrt_nonneg _) (mul_nonneg heps (by norm_num))
       _ = M'.margin / 16 := by ring
-  exact ⟨M', rfl, matchedPieces_of_regions W.cut_order W.column_inside W.margin_pos
+  exact ⟨P, p, Db, matchedPieces_of_regions W.cut_order W.column_inside W.margin_pos
     W.diagonal herr hinner houter hsym W.boundary_off_diagonal W.boundary_normalized⟩
+
+/-- The public regional completion retains its original statement. -/
+theorem R10aPoisson {D : ReferenceData} (hD : IsAccumulatingProfile D)
+    (hB : RadialTrueBorder D) (W : TerminalRegionalData D) :
+    ∃ M : RadialMatchingData D,
+      M.frequency = W.matching.frequency ∧ MatchedPieces D M := by
+  obtain ⟨P, p, Db, hpieces⟩ := R10aPoisson_with_fields hD hB W
+  exact ⟨{ W.matching with innerPoisson := P, innerFunction := p, Db := Db }, rfl, hpieces⟩
 
 end ContinuousFlexibility.Blueprint
 

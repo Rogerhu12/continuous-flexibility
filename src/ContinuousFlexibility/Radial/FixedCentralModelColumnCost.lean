@@ -1,7 +1,7 @@
 import ContinuousFlexibility.Radial.FixedCentralModelSmallError
 import ContinuousFlexibility.Radial.InnerModelPoissonNormalization
 import ContinuousFlexibility.Radial.InnerLiouvilleConormal
-import ContinuousFlexibility.Radial.InnerUnitWeights
+import ContinuousFlexibility.Radial.MatchedInnerUnitWeights
 
 /-!
 # Actual fixed-central Poisson column costs
@@ -115,10 +115,8 @@ theorem fixedCentralPhysicalModelChart_column_bound
     (fun x hx => A.log_deriv_bound x (hbuf x hx)) (by simp)
   have hnorm : ‖(sqrt (A.kappa i))⁻¹ • A.column i‖ ≤
       fixedCentralModelColumnEnvelope M i := by
-    have hkappa : A.kappa i = fixedCentralModelPhysicalKappa M i :=
-      fixedCentralPhysicalModelChart_kappa B D hD hborder G central q hT hcap
-        hcolumn hcore hw hleft hright hB M i
-    rw [hkappa]
+    dsimp only [A]
+    rw [fixedCentralPhysicalModelChart_kappa]
     simpa only [A, fixedCentralModelPhysicalKappa,
       innerPhysicalCutKappa, one_mul, mul_one, innerBorderFieldMap_weight_one,
       ContinuousLinearMap.id_apply, InnerRadialModelChart.column,

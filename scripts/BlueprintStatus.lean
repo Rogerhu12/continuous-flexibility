@@ -57,3 +57,4 @@ run_cmd do
 #print axioms ContinuousFlexibility.Radial.OuterPhysicalRobinInverse.assertions
 #print axioms ContinuousFlexibility.Radial.OuterPhysicalRobinInverse.ordinary_jacobi_source
 #print axioms ContinuousFlexibility.Radial.accumulatingProfile_no_unweighted_outer_inverse
+#print axioms ContinuousFlexibility.Blueprint.R11a
