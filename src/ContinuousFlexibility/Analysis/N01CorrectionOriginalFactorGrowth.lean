@@ -148,6 +148,101 @@ private theorem scalar_sub_mul_jointGrowth
       (J := Jtemp) (base := B') (loss := M') htemp Jq (fun m x hx => heq m x hx)
   exact ⟨B', L', hB', productData.choose_spec.choose_spec.2.1, hq⟩
 
+private theorem originalFactors_flat_mixed_growth_of_source_data
+    {E₀ F : Type*}
+    [TopologicalSpace E₀] [AddCommGroup E₀] [Module ℝ E₀]
+    [IsTopologicalAddGroup E₀] [ContinuousSMul ℝ E₀]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    [IsTopologicalAddGroup F] [ContinuousSMul ℝ F]
+    {p₀ : ℕ → Seminorm ℝ E₀} (pc : ℕ → Seminorm ℝ F)
+    (hp : Monotone (pairGrading p₀ pc)) (hIp : HasInterpolation (pairGrading p₀ pc))
+    {W : ℕ → ℝ} (hW : ∀ m, 1 ≤ W m)
+    {U₀ : Set E₀} {V : ℕ → Set PolarPoint}
+    (hU₀ : IsOpen U₀) (hV : ∀ m, IsOpen (V m))
+    (hc : ∀ m, Convex ℝ ((U₀ ×ˢ (univ : Set F)) ×ˢ V m))
+    {entry : Fin 3 → ℕ → E₀ × PolarPoint → ℝ}
+    (K₀ : ∀ (i : Fin 3) (m : ℕ), SmoothDirections (U₀ ×ˢ V m) (entry i m))
+    {base loss : ℕ}
+    (hK₀ : ∀ i, UniformWeightedJointGrowth p₀ (fun _ => 1) (K₀ i) base loss)
+    {fa₀ fb₀ fv₀ fq₀ : ℕ → E₀ × PolarPoint → ℝ}
+    (Ja : ∀ m, SmoothDirections ((U₀ ×ˢ (univ : Set F)) ×ˢ V m)
+      (fun x : (E₀ × F) × PolarPoint => fa₀ m (x.1.1, x.2)))
+    (Jb : ∀ m, SmoothDirections ((U₀ ×ˢ (univ : Set F)) ×ˢ V m)
+      (fun x : (E₀ × F) × PolarPoint => fb₀ m (x.1.1, x.2)))
+    (Jq : ∀ m, SmoothDirections ((U₀ ×ˢ (univ : Set F)) ×ˢ V m)
+      (fun x : (E₀ × F) × PolarPoint => fq₀ m (x.1.1, x.2)))
+    (heqa : ∀ m x, x ∈ U₀ ×ˢ V m → entry 0 m x = fa₀ m x)
+    (heqb : ∀ m x, x ∈ U₀ ×ˢ V m → entry 1 m x = fb₀ m x)
+    (data : ∃ J : ∀ m, SmoothDirections (U₀ ×ˢ V m) (fv₀ m),
+      ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧ UniformWeightedJointGrowth p₀ W J B L)
+    (heq₀ : ∀ m x, x ∈ U₀ ×ˢ V m →
+      fb₀ m x - fa₀ m x * fv₀ m x = fq₀ m x) :
+    HasFlatMixedTameGrowth (pairGrading p₀ pc) W (fun _ => 1) Ja ∧
+      HasFlatMixedTameGrowth (pairGrading p₀ pc) W (fun _ => 1) Jb ∧
+        HasFlatMixedTameGrowth (pairGrading p₀ pc) W (fun _ => 1) Jq := by
+  let E : Type _ := E₀ × F
+  let p : ℕ → Seminorm ℝ E := pairGrading p₀ pc
+  let U : Set E := U₀ ×ˢ univ
+  let fa : ℕ → E × PolarPoint → ℝ := fun m x => fa₀ m (x.1.1, x.2)
+  let fb : ℕ → E × PolarPoint → ℝ := fun m x => fb₀ m (x.1.1, x.2)
+  let fq : ℕ → E × PolarPoint → ℝ := fun m x => fq₀ m (x.1.1, x.2)
+  have hW₀ (m : ℕ) : 0 ≤ W m := zero_le_one.trans (hW m)
+  have ha : UniformWeightedJointGrowth
+      (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ)
+      (U := U) (V := V) (f := fa) p W Ja base loss :=
+    fstParameter_jointGrowth_congr
+      (E := E₀) (F := F) (p := p₀) (W := W)
+      (U := U₀) (V := V) (f := entry 0) (g := fa₀) (J := K₀ 0)
+      (base := base) (loss := loss) pc (hK₀ 0) hU₀ hV Ja heqa
+  run_tac do Lean.logInfo "N02N03 Original assembly: weighted-a"
+  have hb : UniformWeightedJointGrowth
+      (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ)
+      (U := U) (V := V) (f := fb) p W Jb base loss :=
+    fstParameter_jointGrowth_congr
+      (E := E₀) (F := F) (p := p₀) (W := W)
+      (U := U₀) (V := V) (f := entry 1) (g := fb₀) (J := K₀ 1)
+      (base := base) (loss := loss) pc (hK₀ 1) hU₀ hV Jb heqb
+  run_tac do Lean.logInfo "N02N03 Original assembly: weighted"
+  let fv : ℕ → E × PolarPoint → ℝ := fun m x => fv₀ m (x.1.1, x.2)
+  let Jv₀ : ∀ m, SmoothDirections (U₀ ×ˢ V m) (fv₀ m) := data.choose
+  let Jv : ∀ m, SmoothDirections (U ×ˢ V m) (fv m) :=
+    fun m => SmoothDirections.fstParameter
+      (E := E₀) (F := F) (P := PolarPoint) (G := ℝ)
+      (U := U₀) (V := V m) (f := fv₀ m) (Jv₀ m) hU₀ (hV m)
+  let B : ℕ := data.choose_spec.choose
+  let L : ℕ := data.choose_spec.choose_spec.choose
+  have hB : base ≤ B := data.choose_spec.choose_spec.choose_spec.1
+  have hv₀ : UniformWeightedJointGrowth p₀ W Jv₀ B L :=
+    data.choose_spec.choose_spec.choose_spec.2.2
+  have hv : UniformWeightedJointGrowth p W Jv B L :=
+    UniformWeightedJointGrowth.fstParameter
+      (I := ℕ) (E := E₀) (F := F) (P := PolarPoint) (G := ℝ)
+      (p := p₀) (W := W) (U := U₀) (V := V) (f := fv₀)
+      (J := Jv₀) (base := B) (loss := L) pc hW₀ hv₀ hU₀ hV
+  run_tac do Lean.logInfo "N02N03 Original assembly: characteristic"
+  have heq : ∀ m (x : E × PolarPoint), x ∈ U ×ˢ V m →
+      fb m x - fa m x * fv m x = fq m x :=
+    fun m x hx => heq₀ m (x.1.1, x.2) ⟨hx.1.1, hx.2⟩
+  let scalarData : ∃ B' L' : ℕ, B ≤ B' ∧ max loss L ≤ B' ∧
+      UniformWeightedJointGrowth p W Jq B' (max loss L') :=
+    scalar_sub_mul_jointGrowth
+      (E := E) (p := p) (W := W) (U := U) (V := V)
+      (fa := fa) (fb := fb) (fv := fv) (fq := fq)
+      (base := base) (loss := loss) (B := B) (L := L)
+      hp hIp hW Ja Jb Jv Jq hB ha hb hv heq
+  obtain ⟨B', L', _, _, hq⟩ := scalarData
+  let M' : ℕ := max loss L'
+  run_tac do Lean.logInfo "N02N03 Original assembly: final"
+  exact ⟨UniformWeightedJointGrowth.hasFlatMixedTameGrowth
+      (I := ℕ) (E := E) (p := p) (W := W) (U := U) (V := V) (f := fa)
+      (J := Ja) (B := base) (L := loss) hp hW ha hV hc,
+    UniformWeightedJointGrowth.hasFlatMixedTameGrowth
+      (I := ℕ) (E := E) (p := p) (W := W) (U := U) (V := V) (f := fb)
+      (J := Jb) (B := base) (L := loss) hp hW hb hV hc,
+    UniformWeightedJointGrowth.hasFlatMixedTameGrowth
+      (I := ℕ) (E := E) (p := p) (W := W) (U := U) (V := V) (f := fq)
+      (J := Jq) (B := B') (L := M') hp hW hq hV hc⟩
+
 private def n01CorrectionOriginalFactorGrowthCircleSMul (S : PhysicalSpacesData) :
     SMul ℝ (CircleSpace S) :=
   Submodule.smul (R := ℝ) (S := ℝ)
@@ -218,18 +313,9 @@ theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
   let U : Set E := U₀ ×ˢ univ
   let V : ℕ → Set PolarPoint := fun m => Ioo (l m) (h m) ×ˢ univ
   let W : ℕ → ℝ := fun m => radialE (D.cellIndex (j m))
-  let fa : ℕ → E × PolarPoint → ℝ := fun _ x =>
-    (originalCoefficients D S C (liftSectorParameter S C x.1.1)).a x.2
-  let fb : ℕ → E × PolarPoint → ℝ := fun _ x =>
-    (originalCoefficients D S C (liftSectorParameter S C x.1.1)).b x.2
-  let fq : ℕ → E × PolarPoint → ℝ := fun _ x =>
-    Real.sqrt ((originalCoefficients D S C (liftSectorParameter S C x.1.1)).b x.2 ^ 2 -
-      (originalCoefficients D S C (liftSectorParameter S C x.1.1)).a x.2 *
-        (originalCoefficients D S C (liftSectorParameter S C x.1.1)).c x.2)
   have hp : Monotone p := correctionParameterGrading_monotone S
   have hIp : HasInterpolation p := correctionParameterGrading_hasInterpolation hS
   have hW (m : ℕ) : 1 ≤ W m := one_le_radialE_of_nat (D.cellIndex (j m))
-  have hW₀ (m : ℕ) : 0 ≤ W m := zero_le_one.trans (hW m)
   have hU₀ : IsOpen U₀ := sectorNeighborhood_isOpen S base ε ε
   have hV (m : ℕ) : IsOpen (V m) := isOpen_Ioo.prod isOpen_univ
   have hc (m : ℕ) : Convex ℝ (U ×ˢ V m) :=
@@ -264,82 +350,39 @@ theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
     simp only [entry, fb₀, originalCoefficientEntry, h10, eq_self_iff_true,
       ite_false, ite_true]
   run_tac do Lean.logInfo "N02N03 Original: unweighted"
-  have ha : UniformWeightedJointGrowth
-      (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ)
-      (U := U) (V := V) (f := fa)
-      p W Ja base loss :=
-    fstParameter_jointGrowth_congr
-      (E := E₀) (F := CircleSpace S) (p := p₀) (W := W)
-      (U := U₀) (V := V) (f := entry 0) (g := fa₀) (J := K₀ 0)
-      (base := base) (loss := loss) pc (hK₀ 0) hU₀ hV Ja heqa
-  run_tac do Lean.logInfo "N02N03 Original: weighted-a"
-  have hb : UniformWeightedJointGrowth
-      (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ)
-      (U := U) (V := V) (f := fb)
-      p W Jb base loss :=
-    fstParameter_jointGrowth_congr
-      (E := E₀) (F := CircleSpace S) (p := p₀) (W := W)
-      (U := U₀) (V := V) (f := entry 1) (g := fb₀) (J := K₀ 1)
-      (base := base) (loss := loss) pc (hK₀ 1) hU₀ hV Jb heqb
-  run_tac do Lean.logInfo "N02N03 Original: weighted"
   let fv₀ : ℕ → E₀ × PolarPoint → ℝ := fun _ x =>
     minusCharacteristicSpeed (originalCoefficients D S C (liftSectorParameter S C x.1)) x.2
-  let fv : ℕ → E × PolarPoint → ℝ := fun m x => fv₀ m (x.1.1, x.2)
+  let fq₀ : ℕ → E₀ × PolarPoint → ℝ := fun _ x =>
+    Real.sqrt ((originalCoefficients D S C (liftSectorParameter S C x.1)).b x.2 ^ 2 -
+      (originalCoefficients D S C (liftSectorParameter S C x.1)).a x.2 *
+        (originalCoefficients D S C (liftSectorParameter S C x.1)).c x.2)
   let data : ∃ J : ∀ m, SmoothDirections (U₀ ×ˢ V m) (fv₀ m),
       ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧ UniformWeightedJointGrowth p₀ W J B L :=
     hN.exists_minusCharacteristicSpeed_strip_joint_growth
       (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
       (lam := lam) (P := P) hS hT j hcell l h hl hh hlam hP hpositive
-  let Jv₀ : ∀ m, SmoothDirections (U₀ ×ˢ V m) (fv₀ m) := data.choose
-  let Jv : ∀ m, SmoothDirections (U ×ˢ V m) (fv m) :=
-    fun m => SmoothDirections.fstParameter
-      (E := E₀) (F := CircleSpace S) (P := PolarPoint) (G := ℝ)
-      (U := U₀) (V := V m) (f := fv₀ m) (Jv₀ m) hU₀ (hV m)
-  let B : ℕ := data.choose_spec.choose
-  let L : ℕ := data.choose_spec.choose_spec.choose
-  have hB : base ≤ B := data.choose_spec.choose_spec.choose_spec.1
-  have hv₀ : UniformWeightedJointGrowth p₀ W Jv₀ B L :=
-    data.choose_spec.choose_spec.choose_spec.2.2
-  have hv : UniformWeightedJointGrowth p W Jv B L :=
-    UniformWeightedJointGrowth.fstParameter
-      (I := ℕ) (E := E₀) (F := CircleSpace S) (P := PolarPoint) (G := ℝ)
-      (p := p₀) (W := W) (U := U₀) (V := V) (f := fv₀)
-      (J := Jv₀) (base := B) (loss := L) pc hW₀ hv₀ hU₀ hV
   run_tac do Lean.logInfo "N02N03 Original: characteristic"
-  have heq : ∀ m (x : E × PolarPoint), x ∈ U ×ˢ V m →
-      fb m x - fa m x * fv m x = fq m x := by
+  have heq₀ : ∀ m (x : E₀ × PolarPoint), x ∈ U₀ ×ˢ V m →
+      fb₀ m x - fa₀ m x * fv₀ m x = fq₀ m x := by
     intro m x hx
     have hpoint : x.2 ∈ annularOpen D := hN.negativeComponent_subset_annularOpen m
       ⟨⟨(hl m).trans hx.2.1.1, hx.2.1.2.trans (hh m)⟩, hx.2.2⟩
-    have hapos : 0 < (originalCoefficients D S C (liftSectorParameter S C x.1.1)).a x.2 :=
+    have hapos : 0 < (originalCoefficients D S C (liftSectorParameter S C x.1)).a x.2 :=
       hN.originalRadialCoefficient_pos
-        (liftSectorParameter_mem_stateNeighborhood hx.1.1 le_rfl)
-        (hN.2.2.1.liftSectorParameter_sector x.1.1) hpoint
-    simpa only [fa, fb, fq, fv, fv₀, minusCharacteristicSpeed] using
+        (liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl)
+        (hN.2.2.1.liftSectorParameter_sector x.1) hpoint
+    simpa only [fa₀, fb₀, fq₀, fv₀, minusCharacteristicSpeed] using
       (sqrt_discriminant_from_minus_speed
-        (a := (originalCoefficients D S C (liftSectorParameter S C x.1.1)).a x.2)
-        (b := (originalCoefficients D S C (liftSectorParameter S C x.1.1)).b x.2)
-        (c := (originalCoefficients D S C (liftSectorParameter S C x.1.1)).c x.2)
+        (a := (originalCoefficients D S C (liftSectorParameter S C x.1)).a x.2)
+        (b := (originalCoefficients D S C (liftSectorParameter S C x.1)).b x.2)
+        (c := (originalCoefficients D S C (liftSectorParameter S C x.1)).c x.2)
         hapos.ne')
   run_tac do Lean.logInfo "N02N03 Original: identity"
-  let scalarData : ∃ B' L' : ℕ, B ≤ B' ∧ max loss L ≤ B' ∧
-      UniformWeightedJointGrowth p W Jq B' (max loss L') :=
-    scalar_sub_mul_jointGrowth
-      (E := E) (p := p) (W := W) (U := U) (V := V)
-      (fa := fa) (fb := fb) (fv := fv) (fq := fq)
-      (base := base) (loss := loss) (B := B) (L := L)
-      hp hIp hW Ja Jb Jv Jq hB ha hb hv heq
-  obtain ⟨B', L', _, _, hq⟩ := scalarData
-  let M' : ℕ := max loss L'
   run_tac do Lean.logInfo "N02N03 Original: final"
-  exact ⟨UniformWeightedJointGrowth.hasFlatMixedTameGrowth
-      (I := ℕ) (E := E) (p := p) (W := W) (U := U) (V := V) (f := fa)
-      (J := Ja) (B := base) (L := loss) hp hW ha hV hc,
-    UniformWeightedJointGrowth.hasFlatMixedTameGrowth
-      (I := ℕ) (E := E) (p := p) (W := W) (U := U) (V := V) (f := fb)
-      (J := Jb) (B := base) (L := loss) hp hW hb hV hc,
-    UniformWeightedJointGrowth.hasFlatMixedTameGrowth
-      (I := ℕ) (E := E) (p := p) (W := W) (U := U) (V := V) (f := fq)
-      (J := Jq) (B := B') (L := M') hp hW hq hV hc⟩
+  exact originalFactors_flat_mixed_growth_of_source_data
+    (E₀ := E₀) (F := CircleSpace S) (p₀ := p₀) (W := W)
+    (U₀ := U₀) (V := V) (entry := entry) (base := base) (loss := loss)
+    (fa₀ := fa₀) (fb₀ := fb₀) (fv₀ := fv₀) (fq₀ := fq₀)
+    pc hp hIp hW hU₀ hV hc K₀ hK₀ Ja Jb Jq heqa heqb data heq₀
 
 end ContinuousFlexibility.Statements
