@@ -188,6 +188,10 @@ open scoped ContDiff Topology
 local instance n01TransportVelocityMixedGrowthStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
+local instance n01TransportVelocityMixedGrowthDirectionsSMul (S : PhysicalSpacesData) :
+    SMul ℝ (StateDirections S) :=
+  Submodule.smul (R := ℝ) (M := AnnularState S) (S := ℝ) (StateDirections S)
+
 local instance n01TransportVelocityMixedGrowthSectorSMul (S : PhysicalSpacesData) :
     SMul ℝ (StateDirections S × ℝ) := Prod.instSMul
 

@@ -72,6 +72,18 @@ private def correctionPolynomial_sqrtDirections
   exact Jdisc.comp_contDiff isOpen_Ioi
     (contDiffOn_id.sqrt (fun q (hq : q ∈ Ioi (0 : ℝ)) => hq.ne')) hpos
 
+
+private def correctionPolynomial_parameterSqrtDirections
+    (S : PhysicalSpacesData)
+    {U : Set (((StateDirections S × ℝ) × CircleSpace S) × PolarPoint)}
+    {a b c : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint → ℝ}
+    (Ja : SmoothDirections U a) (Jb : SmoothDirections U b) (Jc : SmoothDirections U c)
+    (hpos : ∀ x ∈ U, 0 < b x ^ 2 - a x * c x) :
+    SmoothDirections U (fun x => Real.sqrt (b x ^ 2 - a x * c x)) :=
+  correctionPolynomial_sqrtDirections
+    (X := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint)
+    (U := U) (a := a) (b := b) (c := c) Ja Jb Jc hpos
+
 section GenericPolynomial
 
 variable {I E : Type*}
@@ -366,7 +378,7 @@ theorem N01Properties.returnCorrectionCoefficient_joint_growth_of_velocity
     (Jentry 2 m).congrOn (fun x _ => correctionPolynomial_entry_two_apply D S C
       (liftSectorParameter S C x.1.1) x.2)
   let Jq : ∀ m, SmoothDirections (U ×ˢ V m) (q m) := fun m =>
-    correctionPolynomial_sqrtDirections (X := E × PolarPoint) (U := U ×ˢ V m)
+    correctionPolynomial_parameterSqrtDirections S (U := U ×ˢ V m)
       (a := a m) (b := b m) (c := c m) (Ja m) (Jb m) (Jc m)
       (fun x hx => hstripDisc x.1.1 hx.1.1 m x.2 hx.2.1)
   have hfactor : HasFlatMixedTameGrowth p W (fun _ => 1) Ja ∧
