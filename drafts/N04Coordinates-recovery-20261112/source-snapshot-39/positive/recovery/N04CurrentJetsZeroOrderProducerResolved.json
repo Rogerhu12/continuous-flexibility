@@ -1,0 +1,104 @@
+{
+  "schema": "n04-current-jets-zero-order-producer-resolved-supplement-v1",
+  "status": "READ_ONLY_SOURCE_ROUTE_COMPLETE_NOT_COMPILED",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "predecessor": {
+    "path": "positive/recovery/N04CurrentJetsZeroOrderProducerRoute.json",
+    "blob": "4a0cfea0bdf5102412dba0956e090c855d959e08",
+    "sha256": "c66defb4ee4311ab172248caccc77404a597552fcfb00dd972b74ba202e8f88d"
+  },
+  "conclusion": "The existing first-variation producer, actual coordinate projection, and existing envelope pack close the zeroth spatial-difference estimate from the same tower's k=1 bound. No new general tower or integral construction is needed.",
+  "exact_public_chain": [
+    {
+      "namespace": "ContinuousFlexibility.Analysis",
+      "module": "ContinuousFlexibility.Analysis.CanonicalVariationBounds",
+      "declaration": "abs_le_of_oneHigh_first_bound_low",
+      "blob": "1559b564891a9e89bbc16c6106b71d49d1ad295f",
+      "header": "See exact complete header in predecessor JSON",
+      "actual_794d_file_matches_green163": true
+    },
+    {
+      "namespace": "ContinuousFlexibility.Statements",
+      "module": "ContinuousFlexibility.Scalar.WeightedTowerCalculus",
+      "declarations": [
+        "smoothDirectionsScalarPostcompose",
+        "smoothDirectionsScalarPostcompose_apply"
+      ],
+      "blob": "016523877104f642a44e572693b1b8b2251faa2c",
+      "sha256": "ca17c1326690271a54670c095d664693a6d5680fff254ea96a6937b83eec1b84",
+      "actual_794d_matches_main1ece": true,
+      "read_scope": "Full source"
+    },
+    {
+      "namespace": "ContinuousLinearMap",
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Topology/Algebra/Module/ContinuousLinearMap/PiProd.lean",
+      "blob": "adc8aec3458c3c9a2d27d017daca7981a25ea956",
+      "sha256": "9c18b9c8d8eefd9e874bee3930ac30e160ff25d0ae9ecbb2e9c90572a56e3584",
+      "declarations": [
+        "proj",
+        "proj_apply"
+      ],
+      "read_scope": "Pi section variables and exact declarations, lines 200–245",
+      "fact": "Arbitrary index type; no Fintype premise. Five nested evaluations define JetField →L[ℝ] ℝ."
+    },
+    {
+      "namespace": "ContinuousFlexibility.Analysis",
+      "module": "ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "actual_794d_file_matches_green163": true,
+      "read_scope": "Envelope/pack definitions and proofs, plus preservation public headers",
+      "declarations": [
+        "coefficientEnvelope_pack",
+        "one_le_enlargedMaterialData_E0"
+      ],
+      "pack_header": "theorem coefficientEnvelope_pack (C A : ℝ) :\n    ∃ B : ℝ, 0 < B ∧ ∀ t : ℝ, 1 ≤ t → C * t ^ A ≤ B * t ^ B"
+    },
+    {
+      "namespace": "ContinuousFlexibility.Statements",
+      "module": "ContinuousFlexibility.Analysis.SectorParameterGeometry",
+      "blob": "2aedeefa0b7cecd1a972ac5b9fbf48bb538b6490",
+      "sha256": "0daae8b9f4f8b63e4bd6af764ca24973c63ce45fea2cc894a6b1678d35d42415",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "declarations": [
+        "sectorNeighborhood_convex",
+        "sectorPairGrading_monotone",
+        "liftSectorParameter_eq_affine"
+      ],
+      "read_scope": "Full source",
+      "availability": "Exact path is not yet installed at actual 794d5d0e3a0c7f6864660e89166fc58c6295cd70. Use when selected main cohort installs it; do not silently treat it as current-active."
+    }
+  ],
+  "minimal_actual_wiring": [
+    "Keep the single given J and U=sectorNeighborhood S base ε ε. Take only the actual k=1 bound, obtaining loss₁ before all spatial s.",
+    "Set L=max base loss₁ once. parameterGrading is monotone; hence s+loss₁≤s+L and base≤s+L. Upgrade only the high factor, preserving the original low base.",
+    "For each fixed output (a,m,i,j,p), compose J with the CLM eval_{a,m,i,j,p}. It is proj p ∘L proj j ∘L proj i ∘L proj m ∘L proj a. The public postcompose_apply theorem gives the exact original J.D coordinate at every order.",
+    "At zero parameter, liftSectorParameter is (referenceState,0), so the actual pointwise coefficient difference is zero. Unfold differenceJets and use sub_self, mixedDerivative and iteratedDeriv_fun_const_zero, as in the existing coefficientFamily_reference proof.",
+    "The original sector neighborhood is the product of two seminorm balls. It is convex, contains zero when ε>0, and gives parameterGrading S base z≤2ε.",
+    "For each spatial s choose the original k=1 constant C_s, then apply abs_le_of_oneHigh_first_bound_low with x=0,y=z,η=2ε,high=s+L and A=C_s*E0(sample)^C_s*H(sample)^(3/4).",
+    "This yields |differenceJets z a m i j p|≤[C_s*(2+2ε)]*E0(sample)^C_s*H(sample)^(3/4)*parameterGrading S(s+L)z, uniformly in m,a,p,i,j with i+j≤s.",
+    "Call coefficientEnvelope_pack (C_s*(2+2ε)) C_s. Its output B_s is chosen before all samples/states/outputs. At each actual sample use the already selected material floor E0≥1, then multiply by the unchanged nonnegative H^(3/4) and parameterGrading factor.",
+    "Return the original single J unchanged for CurrentJets' directional clause. The value clause uses this same J; no per-component or per-order tower choice is introduced."
+  ],
+  "exact_final_quantifiers": "The original fixed base and ε precede all k,s. The value loss L depends only on base and the k=1 loss. For every spatial s, B_s precedes z,m,a,p,i,j. No constant term remains in the parameter factor, and H^(3/4) is retained exactly.",
+  "envelope_scope": {
+    "required_fact": "1≤T.E0(T.sample(K.cell m)) for the ACTUAL selected T.",
+    "public_supply": "If final T was already chosen as enlargedMaterialData T₀, use one_le_enlargedMaterialData_E0 hT₀ and materialSample_mem_interval hD hT₀ (K.cell m); sample and H fields are literally preserved.",
+    "no_replacement_now": "Do not replace T after building the atom family, since ratioE0 atoms depend on T. This route consumes the selected witness's floor.",
+    "without_floor": "The independent multiplier/exponent estimate remains proved, but no argument here identifies it with a single B*E0^B under mere positivity."
+  },
+  "current_active_only_alternative": {
+    "sector_convexity": "If the main SectorParameterGeometry module is not yet installed, identify U with (sectorGrading S base).ball 0 ε ×ˢ (normSeminorm ℝ ℝ).ball 0 ε and use Seminorm.convex_ball.prod. This is a tiny domain calculation, not a new tower.",
+    "grading_monotonicity": "Use active StateNeighborhood.sectorGrading_monotone and the existing pair-grading monotonicity API."
+  },
+  "limits": {
+    "new_lean_lines": 0,
+    "local_lean": false,
+    "active_edits": false,
+    "index_refs_ci_actions": false,
+    "full_CurrentJets_claimed": false
+  },
+  "intended_backup_path": "positive/recovery/N04CurrentJetsZeroOrderProducerResolved.json"
+}

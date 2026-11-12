@@ -1,0 +1,542 @@
+{
+  "kind": "CI166_failed_quick_check_receipt",
+  "ci_iteration": 166,
+  "github_run_number": 1836,
+  "run_id": 43307122021,
+  "job_id": 131493233395,
+  "head": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+  "tree": "d6e6c25c9742129f9a50a929914845940b001761",
+  "conclusion": "failure",
+  "checked_at": "2026-11-12 21:15:18 UTC",
+  "run": {
+    "id": 43307122021,
+    "name": "Build",
+    "node_id": "WFR_kwLOVqN_5c8AAAAKFU49ZQ",
+    "head_branch": "line/N04Coordinates",
+    "head_sha": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+    "path": ".github/workflows/build.yml",
+    "display_title": "Repair coordinate proof elaboration reported by CI165",
+    "run_number": 1836,
+    "event": "push",
+    "status": "completed",
+    "conclusion": "failure",
+    "workflow_id": 414216120,
+    "check_suite_id": 117276280960,
+    "check_suite_node_id": "CS_kwDOVqN_5c8AAAAbTjYIgA",
+    "url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/actions/runs/43307122021",
+    "html_url": "https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43307122021",
+    "pull_requests": [
+      {
+        "url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/pulls/18",
+        "id": 5256713790,
+        "number": 18,
+        "head": {
+          "ref": "line/N04Coordinates",
+          "sha": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+          "repo": {
+            "id": 1453555685,
+            "url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility",
+            "name": "continuous-flexibility"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "89e539ccf7e9c558467cf875f44dcff9490ce271",
+          "repo": {
+            "id": 1453555685,
+            "url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility",
+            "name": "continuous-flexibility"
+          }
+        }
+      }
+    ],
+    "created_at": "2026-11-12T21:07:40Z",
+    "updated_at": "2026-11-12T21:12:51Z",
+    "actor": {
+      "login": "Rogerhu12",
+      "id": 199914264,
+      "node_id": "U_kgDOC-pzGA",
+      "avatar_url": "https://avatars.githubusercontent.com/u/199914264?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Rogerhu12",
+      "html_url": "https://github.com/Rogerhu12",
+      "followers_url": "https://api.github.com/users/Rogerhu12/followers",
+      "following_url": "https://api.github.com/users/Rogerhu12/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Rogerhu12/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Rogerhu12/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Rogerhu12/subscriptions",
+      "organizations_url": "https://api.github.com/users/Rogerhu12/orgs",
+      "repos_url": "https://api.github.com/users/Rogerhu12/repos",
+      "events_url": "https://api.github.com/users/Rogerhu12/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Rogerhu12/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "run_attempt": 1,
+    "referenced_workflows": [],
+    "run_started_at": "2026-11-12T21:07:40Z",
+    "triggering_actor": {
+      "login": "Rogerhu12",
+      "id": 199914264,
+      "node_id": "U_kgDOC-pzGA",
+      "avatar_url": "https://avatars.githubusercontent.com/u/199914264?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Rogerhu12",
+      "html_url": "https://github.com/Rogerhu12",
+      "followers_url": "https://api.github.com/users/Rogerhu12/followers",
+      "following_url": "https://api.github.com/users/Rogerhu12/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Rogerhu12/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Rogerhu12/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Rogerhu12/subscriptions",
+      "organizations_url": "https://api.github.com/users/Rogerhu12/orgs",
+      "repos_url": "https://api.github.com/users/Rogerhu12/repos",
+      "events_url": "https://api.github.com/users/Rogerhu12/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Rogerhu12/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "jobs_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/actions/runs/43307122021/jobs",
+    "logs_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/actions/runs/43307122021/logs",
+    "check_suite_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/check-suites/117276280960",
+    "artifacts_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/actions/runs/43307122021/artifacts",
+    "cancel_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/actions/runs/43307122021/cancel",
+    "rerun_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/actions/runs/43307122021/rerun",
+    "previous_attempt_url": null,
+    "workflow_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/actions/workflows/414216120",
+    "head_commit": {
+      "id": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+      "tree_id": "d6e6c25c9742129f9a50a929914845940b001761",
+      "message": "Repair coordinate proof elaboration reported by CI165\n\nFix explicit radial projection types, root-power rewrite aliases, positive chart simplification and radial principal formulas. Preserve the exact derivative tower when transporting primitive jet certificates through normalization. Use the neighboring compiled transparency policy and typed witness projections for the two large-bound elaboration timeouts.\n\nSeven source files; no public statement, import, provider, workflow, generator or resource-limit changes. Net +44 lines; conservative distance from full-green c796 is 19890 added Lean lines.\n\nExact repair plan: 1b61b8c9792937ad999dcb4fe35e7ffe9a1441c4. N04Coordinates Realization remains open.",
+      "timestamp": "2026-11-12T21:07:24Z",
+      "author": {
+        "name": "Boyang Hu",
+        "email": "2538238358@qq.com"
+      },
+      "committer": {
+        "name": "Boyang Hu",
+        "email": "2538238358@qq.com"
+      }
+    },
+    "repository": {
+      "id": 1453555685,
+      "node_id": "R_kgDOVqN_5Q",
+      "name": "continuous-flexibility",
+      "full_name": "Rogerhu12/continuous-flexibility",
+      "private": false,
+      "owner": {
+        "login": "Rogerhu12",
+        "id": 199914264,
+        "node_id": "U_kgDOC-pzGA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/199914264?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/Rogerhu12",
+        "html_url": "https://github.com/Rogerhu12",
+        "followers_url": "https://api.github.com/users/Rogerhu12/followers",
+        "following_url": "https://api.github.com/users/Rogerhu12/following{/other_user}",
+        "gists_url": "https://api.github.com/users/Rogerhu12/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/Rogerhu12/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/Rogerhu12/subscriptions",
+        "organizations_url": "https://api.github.com/users/Rogerhu12/orgs",
+        "repos_url": "https://api.github.com/users/Rogerhu12/repos",
+        "events_url": "https://api.github.com/users/Rogerhu12/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/Rogerhu12/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "html_url": "https://github.com/Rogerhu12/continuous-flexibility",
+      "description": "Lean 4 formalization of a smooth periodic isometric bending of an embedded sphere. In progress: the main theorem is not yet proved.",
+      "fork": false,
+      "url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility",
+      "forks_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/forks",
+      "keys_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/keys{/key_id}",
+      "collaborators_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/collaborators{/collaborator}",
+      "teams_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/teams",
+      "hooks_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/hooks",
+      "issue_events_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/issues/events{/number}",
+      "events_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/events",
+      "assignees_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/assignees{/user}",
+      "branches_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/branches{/branch}",
+      "tags_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/tags",
+      "blobs_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/git/blobs{/sha}",
+      "git_tags_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/git/tags{/sha}",
+      "git_refs_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/git/refs{/sha}",
+      "trees_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/git/trees{/sha}",
+      "statuses_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/statuses/{sha}",
+      "languages_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/languages",
+      "stargazers_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/stargazers",
+      "contributors_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/contributors",
+      "subscribers_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/subscribers",
+      "subscription_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/subscription",
+      "commits_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/commits{/sha}",
+      "git_commits_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/git/commits{/sha}",
+      "comments_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/comments{/number}",
+      "issue_comment_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/issues/comments{/number}",
+      "contents_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/contents/{+path}",
+      "compare_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/compare/{base}...{head}",
+      "merges_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/merges",
+      "archive_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/{archive_format}{/ref}",
+      "downloads_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/downloads",
+      "issues_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/issues{/number}",
+      "pulls_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/pulls{/number}",
+      "milestones_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/milestones{/number}",
+      "notifications_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/notifications{?since,all,participating}",
+      "labels_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/labels{/name}",
+      "releases_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/releases{/id}",
+      "deployments_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/deployments"
+    },
+    "head_repository": {
+      "id": 1453555685,
+      "node_id": "R_kgDOVqN_5Q",
+      "name": "continuous-flexibility",
+      "full_name": "Rogerhu12/continuous-flexibility",
+      "private": false,
+      "owner": {
+        "login": "Rogerhu12",
+        "id": 199914264,
+        "node_id": "U_kgDOC-pzGA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/199914264?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/Rogerhu12",
+        "html_url": "https://github.com/Rogerhu12",
+        "followers_url": "https://api.github.com/users/Rogerhu12/followers",
+        "following_url": "https://api.github.com/users/Rogerhu12/following{/other_user}",
+        "gists_url": "https://api.github.com/users/Rogerhu12/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/Rogerhu12/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/Rogerhu12/subscriptions",
+        "organizations_url": "https://api.github.com/users/Rogerhu12/orgs",
+        "repos_url": "https://api.github.com/users/Rogerhu12/repos",
+        "events_url": "https://api.github.com/users/Rogerhu12/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/Rogerhu12/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "html_url": "https://github.com/Rogerhu12/continuous-flexibility",
+      "description": "Lean 4 formalization of a smooth periodic isometric bending of an embedded sphere. In progress: the main theorem is not yet proved.",
+      "fork": false,
+      "url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility",
+      "forks_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/forks",
+      "keys_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/keys{/key_id}",
+      "collaborators_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/collaborators{/collaborator}",
+      "teams_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/teams",
+      "hooks_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/hooks",
+      "issue_events_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/issues/events{/number}",
+      "events_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/events",
+      "assignees_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/assignees{/user}",
+      "branches_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/branches{/branch}",
+      "tags_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/tags",
+      "blobs_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/git/blobs{/sha}",
+      "git_tags_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/git/tags{/sha}",
+      "git_refs_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/git/refs{/sha}",
+      "trees_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/git/trees{/sha}",
+      "statuses_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/statuses/{sha}",
+      "languages_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/languages",
+      "stargazers_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/stargazers",
+      "contributors_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/contributors",
+      "subscribers_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/subscribers",
+      "subscription_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/subscription",
+      "commits_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/commits{/sha}",
+      "git_commits_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/git/commits{/sha}",
+      "comments_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/comments{/number}",
+      "issue_comment_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/issues/comments{/number}",
+      "contents_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/contents/{+path}",
+      "compare_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/compare/{base}...{head}",
+      "merges_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/merges",
+      "archive_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/{archive_format}{/ref}",
+      "downloads_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/downloads",
+      "issues_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/issues{/number}",
+      "pulls_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/pulls{/number}",
+      "milestones_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/milestones{/number}",
+      "notifications_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/notifications{?since,all,participating}",
+      "labels_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/labels{/name}",
+      "releases_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/releases{/id}",
+      "deployments_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/deployments"
+    }
+  },
+  "steps": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 1
+    },
+    {
+      "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 2
+    },
+    {
+      "name": "Disk space",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 3
+    },
+    {
+      "name": "Set up the pinned Lean and Mathlib environment",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 4
+    },
+    {
+      "name": "Restore main's build artifacts",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 5
+    },
+    {
+      "name": "Reuse the builds of the lines merged by this push",
+      "status": "completed",
+      "conclusion": "skipped",
+      "number": 6
+    },
+    {
+      "name": "Reuse the build of the line this branch was cut from",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 7
+    },
+    {
+      "name": "Restore project build artifacts",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 8
+    },
+    {
+      "name": "Report which cache was restored",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 9
+    },
+    {
+      "name": "Generate the root import",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 10
+    },
+    {
+      "name": "Changed modules",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 11
+    },
+    {
+      "name": "Quick check of the changed modules",
+      "status": "completed",
+      "conclusion": "failure",
+      "number": 12
+    },
+    {
+      "name": "Build every library",
+      "status": "completed",
+      "conclusion": "skipped",
+      "number": 13
+    },
+    {
+      "name": "Save project build artifacts",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 14
+    },
+    {
+      "name": "Delete this branch's older build caches",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 15
+    },
+    {
+      "name": "Count compiled modules",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 16
+    },
+    {
+      "name": "Blueprint status and endpoint axioms",
+      "status": "completed",
+      "conclusion": "skipped",
+      "number": 17
+    },
+    {
+      "name": "Publish the precompiled build for line sandboxes",
+      "status": "completed",
+      "conclusion": "skipped",
+      "number": 18
+    },
+    {
+      "name": "Pack this line's build for main",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 19
+    },
+    {
+      "name": "Run actions/upload-artifact@v4",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 20
+    },
+    {
+      "name": "Run actions/upload-artifact@v4",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 21
+    },
+    {
+      "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 42
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 43
+    }
+  ],
+  "log": {
+    "sha256": "e31097de662da4b2dac4b5bb1fb092fae301ca4ea78d03c8f529bccdb5165474",
+    "bytes": 144991,
+    "lines": 1219,
+    "run": 43307122021,
+    "job": 131493233395,
+    "blob": "923cb8a210ecbde6676288e6e1e99e73096f8229"
+  },
+  "errors": {
+    "ActualNegativeOppositeRootFields": [
+      {
+        "line": 84,
+        "column": 69,
+        "text": "error: src/ContinuousFlexibility/Analysis/ActualNegativeOppositeRootFields.lean:84:69: unsolved goals\nD : ReferenceData\nT : MaterialData\nS : PhysicalSpacesData\nC : NonlinearGeometryData S\nR : ReturnEquationData S\nL : ReturnCorrectionData S\nbase loss : ℕ\nε : ℝ\nhT : IsMaterialData D T\nhS : IsPhysicalSpaces D T S\nhN : NonlinearPropertiesThrough03 D T S C R L base loss ε\nhfield : N04bFieldRegularity D S C L base ε\ne : ℕ ≃ N04PieceIndex D\nz : AnnularState S × ℝ\nhz : z ∈ stateNeighborhood S C base ε\nhs : stateSector S z.1\nk k' m : ℕ\nside : Bool\nhk : e k = Sum.inl (m, side)\nhk' : e k' = Sum.inl (m, !side)\np : PolarPoint\nhp : p ∈ Ioo (C.left m) (C.right m) ×ˢ univ\nK : CanonicalData S := n04bActualTypedAtlas hT hS hN hfield e\nF : PolarPoint → PolarPoint := n04bActualTravelChart S C L z m\nhg :\n  have K := n04bActualTypedAtlas hT hS hN hfield e;\n  K.chart z k =ᶠ[𝓝 p] n04bRootPhysicalChart (n04bActualTravelChart S C L z m) (C.travel m) side ∧\n    K.height z k =ᶠ[𝓝 p]\n      n04bRootPhysicalHeight (L.coefficients z) (n04bCharacteristicHalfGap (L.coefficients z))\n        (n04bActualTravelChart S C L z m) (C.travel m) side\nhg' :\n  have K := n04bActualTypedAtlas hT hS hN hfield e;\n  K.chart z k' =ᶠ[𝓝 p] n04bRootPhysicalChart (n04bActualTravelChart S C L z m) (C.travel m) !side ∧\n    K.height z k' =ᶠ[𝓝 p]\n      n04bRootPhysicalHeight (L.coefficients z) (n04bCharacteristicHalfGap (L.coefficients z))\n        (n04bActualTravelChart S C L z m) (C.travel m) !side\nhFk : K.chart z k p = n04bRootPhysicalChart F (C.travel m) side p\nhFk' : K.chart z k' p = n04bRootPhysicalChart F (C.travel m) (!side) p\nhHk :\n  (n04bActualTypedAtlas hT hS hN hfield e).height z k p ="
+      },
+      {
+        "line": 87,
+        "column": 72,
+        "text": "error: src/ContinuousFlexibility/Analysis/ActualNegativeOppositeRootFields.lean:87:72: unsolved goals\nD : ReferenceData\nT : MaterialData\nS : PhysicalSpacesData\nC : NonlinearGeometryData S\nR : ReturnEquationData S\nL : ReturnCorrectionData S\nbase loss : ℕ\nε : ℝ\nhT : IsMaterialData D T\nhS : IsPhysicalSpaces D T S\nhN : NonlinearPropertiesThrough03 D T S C R L base loss ε\nhfield : N04bFieldRegularity D S C L base ε\ne : ℕ ≃ N04PieceIndex D\nz : AnnularState S × ℝ\nhz : z ∈ stateNeighborhood S C base ε\nhs : stateSector S z.1\nk k' m : ℕ\nside : Bool\nhk : e k = Sum.inl (m, side)\nhk' : e k' = Sum.inl (m, !side)\np : PolarPoint\nhp : p ∈ Ioo (C.left m) (C.right m) ×ˢ univ\nK : CanonicalData S := n04bActualTypedAtlas hT hS hN hfield e\nF : PolarPoint → PolarPoint := n04bActualTravelChart S C L z m\nhg :\n  have K := n04bActualTypedAtlas hT hS hN hfield e;\n  K.chart z k =ᶠ[𝓝 p] n04bRootPhysicalChart (n04bActualTravelChart S C L z m) (C.travel m) side ∧\n    K.height z k =ᶠ[𝓝 p]\n      n04bRootPhysicalHeight (L.coefficients z) (n04bCharacteristicHalfGap (L.coefficients z))\n        (n04bActualTravelChart S C L z m) (C.travel m) side\nhg' :\n  have K := n04bActualTypedAtlas hT hS hN hfield e;\n  K.chart z k' =ᶠ[𝓝 p] n04bRootPhysicalChart (n04bActualTravelChart S C L z m) (C.travel m) !side ∧\n    K.height z k' =ᶠ[𝓝 p]\n      n04bRootPhysicalHeight (L.coefficients z) (n04bCharacteristicHalfGap (L.coefficients z))\n        (n04bActualTravelChart S C L z m) (C.travel m) !side\nhFk : K.chart z k p = n04bRootPhysicalChart F (C.travel m) side p\nhFk' : K.chart z k' p = n04bRootPhysicalChart F (C.travel m) (!side) p\nhHk :\n  (n04bActualTypedAtlas hT hS hN hfield e).height z k p ="
+      },
+      {
+        "line": 126,
+        "column": 4,
+        "text": "error: src/ContinuousFlexibility/Analysis/ActualNegativeOppositeRootFields.lean:126:4: Type mismatch\n  n04b_fderiv_rootPhysicalChart_opposite side hF ht v\nhas type\n  (fderiv ℝ (n04bRootPhysicalChart F (C.travel m) side) p) v =\n    (-(√(n04bRootPhysicalChart F (C.travel m) (!side) p).1 / √(n04bRootPhysicalChart F (C.travel m) side p).1) *\n        ((fderiv ℝ (n04bRootPhysicalChart F (C.travel m) !side) p) v).1,\n      ((fderiv ℝ (n04bRootPhysicalChart F (C.travel m) !side) p) v).2)\nbut is expected to have type\n  (fderiv ℝ (n04bRootPhysicalChart (n04bActualTravelChart S C L z m) (C.travel m) side) p) v =\n    (-√(((n04bActualTypedAtlas hT hS hN hfield e).chart z k' p).1 /\n              n04bOppositeRootRadial (C.travel m) ((n04bActualTypedAtlas hT hS hN hfield e).chart z k' p).1) *\n        ((fderiv ℝ (n04bRootPhysicalChart (n04bActualTravelChart S C L z m) (C.travel m) !side) p) v).1,\n      ((fderiv ℝ (n04bRootPhysicalChart (n04bActualTravelChart S C L z m) (C.travel m) !side) p) v).2)"
+      },
+      {
+        "line": 196,
+        "column": 37,
+        "text": "error: src/ContinuousFlexibility/Analysis/ActualNegativeOppositeRootFields.lean:196:37: unsolved goals\nD : ReferenceData\nT : MaterialData\nS : PhysicalSpacesData\nC : NonlinearGeometryData S\nR : ReturnEquationData S\nL : ReturnCorrectionData S\nbase loss : ℕ\nε : ℝ\nhT : IsMaterialData D T\nhS : IsPhysicalSpaces D T S\nhN : NonlinearPropertiesThrough03 D T S C R L base loss ε\nhfield : N04bFieldRegularity D S C L base ε\ne : ℕ ≃ N04PieceIndex D\nz : AnnularState S × ℝ\nhz : z ∈ stateNeighborhood S C base ε\nhs : stateSector S z.1\nk k' m : ℕ\nside : Bool\nhk : e k = Sum.inl (m, side)\nhk' : e k' = Sum.inl (m, !side)\np : PolarPoint\nhp : p ∈ Ioo (C.left m) (C.right m) ×ˢ univ\nK : CanonicalData S := n04bActualTypedAtlas hT hS hN hfield e\nh :\n  have K := n04bActualTypedAtlas hT hS hN hfield e;\n  0 < (K.chart z k p).1 ∧\n    0 < (K.chart z k' p).1 ∧\n      K.chart z k p = n04bOppositeRootMap (C.travel m) (K.chart z k' p) ∧\n        K.height z k p = K.height z k' p * n04bOppositeRootHeightFactor (C.travel m) (K.chart z k' p).1 ∧\n          |planeJacobian (K.chart z k) p| =\n              |planeJacobian (K.chart z k') p| * n04bOppositeRootJacobianFactor (C.travel m) (K.chart z k' p).1 ∧\n            ∀ (v : PolarPoint),\n              (fderiv ℝ (K.chart z k) p) v =\n                (-n04bOppositeRootJacobianFactor (C.travel m) (K.chart z k' p).1 * ((fderiv ℝ (K.chart z k') p) v).1,\n                  ((fderiv ℝ (K.chart z k') p) v).2)\nhg :\n  have K := n04bActualTypedAtlas hT hS hN hfield e;\n  K.chart z k' =ᶠ[𝓝 p] n04bRootPhysicalChart (n04bActualTravelChart S C L z m) (C.travel m) !side ∧\n    K.height z k' =ᶠ[𝓝 p]\n      n04bRootPhysicalHeight (L.coefficients z) (n04bCharacteristicHalfGap (L.coefficients z))"
+      }
+    ],
+    "ActualReferenceNegativeEndpointData": [
+      {
+        "line": 88,
+        "column": 32,
+        "text": "error: src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean:88:32: Application type mismatch: The argument\n  hopen.right.right.left p hp\nhas type\n  (n04bActualTypedAtlas hT hS hN hfield e).chart (C.referenceState, 0) (e.symm (Sum.inl (m, side))) p =\n    (((n04bActualTypedAtlas hT hS hN hfield e).chart (C.referenceState, 0) (e.symm (Sum.inl (m, side))) (p.1, 0)).1,\n      p.2)\nbut is expected to have type\n  K.chart z₀ k p = p\nin the application\n  congrArg Prod.snd (hopen.right.right.left p hp)"
+      },
+      {
+        "line": 95,
+        "column": 37,
+        "text": "error: src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean:95:37: Application type mismatch: The argument\n  hzero\nhas type\n  ContinuousAt (fun p => (p.1, 0)) (c, θ)\nbut is expected to have type\n  ContinuousAt (Prod.mk c) 0\nin the application\n  ContinuousAt.comp (ContDiffAt.continuousAt (hreg 0).right.left) hzero"
+      },
+      {
+        "line": 120,
+        "column": 4,
+        "text": "error: src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean:120:4: Type mismatch: After simplification, term\n  hsign.left (c, 0) (hroot 0).left\n has type\n  @LT.lt ℝ Real.instLT 0 (planeJacobian (K.chart z₀ (K.cutPair m).1) (c, 0))\nbut is expected to have type\n  @LT.lt ℝ Real.instLT 0 (planeJacobian (K.chart z₀ k) (c, 0))"
+      },
+      {
+        "line": 122,
+        "column": 19,
+        "text": "error: src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean:122:19: Unknown constant `Bool.true_eq_true`"
+      },
+      {
+        "line": 122,
+        "column": 4,
+        "text": "error: src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean:122:4: Type mismatch: After simplification, term\n  hsign.right (c, 0) (hroot 0).left\n has type\n  @LT.lt ℝ Real.instLT (planeJacobian (K.chart z₀ (K.cutPair m).2) (c, 0)) 0\nbut is expected to have type\n  @LT.lt ℝ Real.instLT (planeJacobian (K.chart z₀ k) (c, 0)) 0\n✔ [3918/4036] Replayed Mathlib.Topology.MetricSpace.PartitionOfUnity\n✔ [3919/4036] Replayed Mathlib.Geometry.Manifold.PartitionOfUnity\n✔ [3920/4036] Replayed Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff\n✔ [3921/4036] Replayed Mathlib.Order.Interval.Finset.Gaps\n✔ [3922/4036] Replayed Mathlib.Algebra.BigOperators.Group.Finset.Gaps\n✔ [3923/4036] Replayed Mathlib.MeasureTheory.Covering.Vitali\n✔ [3924/4036] Replayed Mathlib.MeasureTheory.Covering.DensityTheorem\n✔ [3925/4036] Replayed Mathlib.MeasureTheory.Covering.OneDim\n✔ [3926/4036] Replayed Mathlib.Order.Monotone.Extension\n✔ [3927/4036] Replayed Mathlib.Analysis.Calculus.Monotone\n✔ [3928/4036] Replayed Mathlib.Topology.EMetricSpace.BoundedVariation\n✔ [3929/4036] Replayed Mathlib.Topology.EMetricSpace.VariationOnFromTo\n✔ [3930/4036] Replayed Mathlib.Analysis.BoundedVariation\n✔ [3931/4036] Replayed Mathlib.Order.SuccPred.IntervalSucc\n✔ [3932/4036] Replayed Mathlib.MeasureTheory.Function.AbsolutelyContinuous\n✔ [3933/4036] Replayed Mathlib.MeasureTheory.Integral.IntervalIntegral.Slope\n✔ [3934/4036] Replayed Mathlib.MeasureTheory.Integral.IntervalIntegral.DerivIntegrable\n✔ [3935/4036] Replayed Mathlib.MeasureTheory.Integral.IntervalIntegral.LebesgueDifferentiationThm\n✔ [3936/4036] Replayed Mathlib.MeasureTheory.Integral.IntervalIntegral.AbsolutelyContinuousFun"
+      }
+    ],
+    "CanonicalCurrentUniformCloseness": [
+      {
+        "line": 95,
+        "column": 4,
+        "text": "error: src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean:95:4: Type mismatch: After simplification, term\n  hb z (hU hz) m v ⟨p, hp⟩ 0 0\n    (Decidable.byContradiction fun a => n04Coordinates_currentAtoms_uniformly_close._proof_1_2 a)\n has type\n  |CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m v p -\n        CanonicalGeometry.atom D T S C L K (C.referenceState, 0) m v p| ≤\n    ⋯.choose * T.E0 (T.sample (K.cell m)) ^ ⋯.choose * T.H (T.sample (K.cell m)) ^ (3 / 4) *\n      (CanonicalGeometry.parameterGrading S ⋯.choose) z\nbut is expected to have type\n  |CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m v p -\n        CanonicalGeometry.atom D T S C L K (C.referenceState, 0) m v p| ≤\n    B * T.E0 (T.sample (K.cell m)) ^ B * T.H (T.sample (K.cell m)) ^ (3 / 4) *\n      (CanonicalGeometry.parameterGrading S loss) z"
+      }
+    ],
+    "PositiveReferenceFiniteRadialJets": [
+      {
+        "line": 45,
+        "column": 2,
+        "text": "error: src/ContinuousFlexibility/Analysis/PositiveReferenceFiniteRadialJets.lean:45:2: Type mismatch: After simplification, term\n  radialBoundaryJet_oneSidedBoundaryTaylorRepresentative f n c hn 0\n has type\n  @Eq ℝ (deriv (fun x => oneSidedBoundaryTaylorRepresentative n c f (x, 0)) c) (deriv (fun x => f (x, 0)) c)\nbut is expected to have type\n  @Eq ℝ (deriv (radialEndpointTaylorSlice n c f) c) (deriv (fun x => f (x, 0)) c)\n✔ [4353/4429] Ran ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation\n✔ [4354/4429] Ran ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily"
+      }
+    ],
+    "CanonicalReferenceCurrentAbsoluteJets": [
+      {
+        "line": 67,
+        "column": 4,
+        "text": "error: src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean:67:4: Type mismatch: After simplification, term\n  hHb m\n has type\n  T.H (T.sample (K.cell m)) ^ (3 / 4) ≤ ⋯.choose\nbut is expected to have type\n  T.H (T.sample (K.cell m)) ^ (3 / 4) ≤ CH"
+      }
+    ],
+    "RadialReferencePrincipalFormulas": [
+      {
+        "line": 98,
+        "column": 47,
+        "text": "error: src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean:98:47: unsolved goals\nA : SymmetricCoefficients\nw Y H : ℝ → ℝ\np : PolarPoint\nhw : ContDiff ℝ ∞ w\nhH : ContDiff ℝ ∞ H\nhY : DifferentiableAt ℝ Y (Function.invFun Y p.1)\nhYpos : 0 < deriv Y (Function.invFun Y p.1)\nha : A.a =ᶠ[𝓝 (positiveReferenceCylinderInverse Y p)] fun q => w q.1\nhb : A.b =ᶠ[𝓝 (positiveReferenceCylinderInverse Y p)] fun x => 0\nhdiv :\n  divergenceOperator A (fun q => H q.1) (positiveReferenceCylinderInverse Y p) =\n    deriv (fun r => w r * deriv H r) (positiveReferenceCylinderInverse Y p).1\n⊢ H (Function.invFun Y p.1) * divergenceOperator A (fun q => H q.1) (Function.invFun Y p.1, p.2) /\n      |planeJacobian (positiveReferenceCylinderChart Y) (Function.invFun Y p.1, p.2)| =\n    H (Function.invFun Y p.1) * deriv (fun r => w r * deriv H r) (Function.invFun Y p.1) /\n      deriv Y (Function.invFun Y p.1)"
+      }
+    ],
+    "WholePositiveReferenceGauge": [
+      {
+        "line": 55,
+        "column": 43,
+        "text": "error: src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean:55:43: unsolved goals\nψ χ τ σ : PolarPoint → PolarPoint\nh₀ Q : PolarPoint → ℝ\nl r u v c d : ℝ\nH₀ : PositiveChartRangeGeometry ψ χ h₀ l r u v\nH : WholePositiveChartGeometry σ τ (wholePositiveChartHeight σ Q) l r c d\nF : PolarPoint → PolarPoint := wholePositiveReferenceGaugeChart ψ σ\nG : PolarPoint → PolarPoint := wholePositiveReferenceGaugeInverse τ χ\nh : PolarPoint → ℝ := wholePositiveReferenceGaugeHeight h₀ σ Q\nhF : ContDiff ℝ ∞ F\nhG : ContDiff ℝ ∞ G\nhh : ContDiff ℝ ∞ h\np : PolarPoint\n⊢ τ (χ (ψ (σ p))) = p"
+      },
+      {
+        "line": 59,
+        "column": 45,
+        "text": "error: src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean:59:45: unsolved goals\nψ χ τ σ : PolarPoint → PolarPoint\nh₀ Q : PolarPoint → ℝ\nl r u v c d : ℝ\nH₀ : PositiveChartRangeGeometry ψ χ h₀ l r u v\nH : WholePositiveChartGeometry σ τ (wholePositiveChartHeight σ Q) l r c d\nF : PolarPoint → PolarPoint := wholePositiveReferenceGaugeChart ψ σ\nG : PolarPoint → PolarPoint := wholePositiveReferenceGaugeInverse τ χ\nh : PolarPoint → ℝ := wholePositiveReferenceGaugeHeight h₀ σ Q\nhF : ContDiff ℝ ∞ F\nhG : ContDiff ℝ ∞ G\nhh : ContDiff ℝ ∞ h\nhleft : Function.LeftInverse G F\np : PolarPoint\n⊢ ψ (σ (τ (χ p))) = p"
+      },
+      {
+        "line": 117,
+        "column": 2,
+        "text": "error: src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean:117:2: unsolved goals"
+      },
+      {
+        "line": 119,
+        "column": 2,
+        "text": "error: src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean:119:2: unsolved goals"
+      },
+      {
+        "line": 122,
+        "column": 6,
+        "text": "error: src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean:122:6: Type mismatch: After simplification, term"
+      },
+      {
+        "line": 168,
+        "column": 4,
+        "text": "error: src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean:168:4: unsolved goals"
+      }
+    ],
+    "CanonicalPrimitiveJetsNormalization": [
+      {
+        "line": 86,
+        "column": 18,
+        "text": "error: src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean:86:18: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached"
+      },
+      {
+        "line": 47,
+        "column": 0,
+        "text": "error: src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean:47:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached"
+      }
+    ]
+  },
+  "proved_new_full_green": false,
+  "last_full_green": "c796387fb555392501c81f5b8bd834936251516c",
+  "compiled_since_prior_cache_from_log": [
+    "ContinuousFlexibility.Analysis.RootTravelOppositeCoordinates",
+    "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+    "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+  ],
+  "limitations": [
+    "The quick-check error excerpt is truncated by the existing workflow; later WholePositiveReferenceGauge diagnostics have only headers.",
+    "No full build or endpoint-axiom step ran. Three newly compiled modules do not release the full-green source budget.",
+    "N04Coordinates and Realization remain open; all future batch plans remain gated."
+  ]
+}

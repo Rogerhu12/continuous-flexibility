@@ -1,0 +1,95 @@
+{
+  "kind": "CI165_focused_failure_evidence",
+  "owner": "positive",
+  "head": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+  "tree": "49237cc2b902342c4a42b86d653fb00770d65d60",
+  "full_log": {
+    "name": "n04-ci-165.log",
+    "blob": "ca10b6e0164bf9c98dca5cfeb1c9496576def864",
+    "sha256": "4b6e6fe5d74b854e5aa19dbe802336b44bc7e45ea5acbbb534b752843ef019d3",
+    "bytes": 162038,
+    "lines": 1207,
+    "downloaded_once": true
+  },
+  "files": [
+    {
+      "name": "PositiveChartRangeGeometry.lean",
+      "path": "src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean",
+      "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "lines": 168,
+      "errors": [
+        {
+          "line": 111,
+          "column": 4,
+          "text": "error: src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean:111:4: Type mismatch: After simplification, term\n  hxy\n has type\n  x < y\nbut is expected to have type\n  Y (Function.invFun Y x) < Y (Function.invFun Y y)"
+        },
+        {
+          "line": 141,
+          "column": 6,
+          "text": "error: src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean:141:6: Type mismatch: After simplification, term\n  hmono hp.left.left\n has type\n  @LT.lt ℝ Real.instPreorder.toLT u (Y p.1)\nbut is expected to have type\n  @LT.lt ℝ Real.instPreorder.toLT u (positiveReferenceCylinderChart Y p).1"
+        },
+        {
+          "line": 142,
+          "column": 6,
+          "text": "error: src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean:142:6: Type mismatch: After simplification, term\n  hmono hp.left.right\n has type\n  @LT.lt ℝ Real.instPreorder.toLT (Y p.1) v\nbut is expected to have type\n  @LT.lt ℝ Real.instPreorder.toLT (positiveReferenceCylinderChart Y p).1 v"
+        },
+        {
+          "line": 145,
+          "column": 6,
+          "text": "error: src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean:145:6: Type mismatch: After simplification, term\n  hmonoInv hp.left.left\n has type\n  @LT.lt ℝ Real.instPreorder.toLT l (Function.invFun Y p.1)\nbut is expected to have type\n  @LT.lt ℝ Real.instPreorder.toLT l (positiveReferenceCylinderInverse Y p).1"
+        },
+        {
+          "line": 146,
+          "column": 6,
+          "text": "error: src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean:146:6: Type mismatch: After simplification, term\n  hmonoInv hp.left.right\n has type\n  @LT.lt ℝ Real.instPreorder.toLT (Function.invFun Y p.1) r\nbut is expected to have type\n  @LT.lt ℝ Real.instPreorder.toLT (positiveReferenceCylinderInverse Y p).1 r"
+        },
+        {
+          "line": 149,
+          "column": 6,
+          "text": "error: src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean:149:6: Type mismatch: After simplification, term\n  StrictMono.monotone hmono hp.left.left\n has type\n  @LE.le ℝ Real.instPreorder.toLE u (Y p.1)\nbut is expected to have type\n  @LE.le ℝ Real.instPreorder.toLE u (positiveReferenceCylinderChart Y p).1"
+        },
+        {
+          "line": 150,
+          "column": 6,
+          "text": "error: src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean:150:6: Type mismatch: After simplification, term\n  StrictMono.monotone hmono hp.left.right\n has type\n  @LE.le ℝ Real.instPreorder.toLE (Y p.1) v\nbut is expected to have type\n  @LE.le ℝ Real.instPreorder.toLE (positiveReferenceCylinderChart Y p).1 v"
+        },
+        {
+          "line": 153,
+          "column": 6,
+          "text": "error: src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean:153:6: Type mismatch: After simplification, term\n  StrictMono.monotone hmonoInv hp.left.left\n has type\n  @LE.le ℝ Real.instPreorder.toLE l (Function.invFun Y p.1)\nbut is expected to have type\n  @LE.le ℝ Real.instPreorder.toLE l (positiveReferenceCylinderInverse Y p).1"
+        },
+        {
+          "line": 154,
+          "column": 6,
+          "text": "error: src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean:154:6: Type mismatch: After simplification, term\n  StrictMono.monotone hmonoInv hp.left.right\n has type\n  @LE.le ℝ Real.instPreorder.toLE (Function.invFun Y p.1) r\nbut is expected to have type\n  @LE.le ℝ Real.instPreorder.toLE (positiveReferenceCylinderInverse Y p).1 r"
+        }
+      ]
+    },
+    {
+      "name": "RadialReferencePrincipalFormulas.lean",
+      "path": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+      "blob": "096b420be6425f39b2f5e73e4a0f60cbd9113ced",
+      "sha256": "fc2eb15c0da7e37fda9f227b906a75c801d0d628064e17e5bca4e63dae75e910",
+      "lines": 100,
+      "errors": [
+        {
+          "line": 75,
+          "column": 10,
+          "text": "error: src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean:75:10: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  fderiv ?m.340 (fun q => A.a q * radialPartial (fun y => H y.1) q + A.b q * angularPartial (fun y => H y.1) q) p\nin the target expression\n  (fderiv ℝ (fun y => A.a y * (fderiv ℝ (fun q => H q.1) y) (1, 0) + A.b y * (fderiv ℝ (fun q => H q.1) y) (0, 1)) p)\n        (1, 0) +\n      (fderiv ℝ (fun y => A.b y * (fderiv ℝ (fun q => H q.1) y) (1, 0) + A.c y * (fderiv ℝ (fun q => H q.1) y) (0, 1))\n          p)\n        (0, 1) =\n    (fderiv ℝ (fun q => w q.1 * deriv H q.1) p) (1, 0) + (fderiv ℝ (fun x => 0) p) (0, 1)\n\nA : SymmetricCoefficients\nw H : ℝ → ℝ\np : PolarPoint\nhw : ContDiff ℝ ∞ w\nhH : ContDiff ℝ ∞ H\nha : A.a =ᶠ[𝓝 p] fun q => w q.1\nhb : A.b =ᶠ[𝓝 p] fun x => 0\nhr : ∀ (q : PolarPoint), radialPartial (fun y => H y.1) q = deriv H q.1\nhθ : ∀ (q : PolarPoint), angularPartial (fun y => H y.1) q = 0\nhrad :\n  (fun q => A.a q * radialPartial (fun y => H y.1) q + A.b q * angularPartial (fun y => H y.1) q) =ᶠ[𝓝 p] fun q =>\n    w q.1 * deriv H q.1\nhang :\n  (fun q => A.b q * radialPartial (fun y => H y.1) q + A.c q * angularPartial (fun y => H y.1) q) =ᶠ[𝓝 p] fun x => 0\nhflux : DifferentiableAt ℝ (fun r => w r * deriv H r) p.1\n⊢ (fderiv ℝ (fun y => A.a y * (fderiv ℝ (fun q => H q.1) y) (1, 0) + A.b y * (fderiv ℝ (fun q => H q.1) y) (0, 1)) p)\n        (1, 0) +\n      (fderiv ℝ (fun y => A.b y * (fderiv ℝ (fun q => H q.1) y) (1, 0) + A.c y * (fderiv ℝ (fun q => H q.1) y) (0, 1))\n          p)\n        (0, 1) =\n    (fderiv ℝ (fun q => w q.1 * deriv H q.1) p) (1, 0) + (fderiv ℝ (fun x => 0) p) (0, 1)"
+        },
+        {
+          "line": 98,
+          "column": 64,
+          "text": "error: src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean:98:64: Application type mismatch: The argument\n  hY\nhas type\n  DifferentiableAt ℝ Y (Function.invFun Y p.1)\nbut is expected to have type\n  DifferentiableAt ℝ ?m.120 ?m.121.1\nin the application\n  planeJacobian_positiveReferenceCylinderChart hY"
+        },
+        {
+          "line": 95,
+          "column": 47,
+          "text": "error: src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean:95:47: unsolved goals\nA : SymmetricCoefficients\nw Y H : ℝ → ℝ\np : PolarPoint\ncompiled project modules: 101; slowest:\n     0.4 min  ContinuousFlexibility.Analysis.N07aMixedHeightMultiplication\n     0.4 min  ContinuousFlexibility.Analysis.N01cCoefficientRadialPowerInputs\n     0.4 min  ContinuousFlexibility.Analysis.N01cActualFlowCircleData\n     0.2 min  ContinuousFlexibility.Analysis.N01cCharacteristicSpeedTameBounds\n     0.2 min  ContinuousFlexibility.Analysis.N01cCosineSpeedParameterBounds\n     0.2 min  ContinuousFlexibility.Analysis.N01cActualFlowSpeedOuterBounds\n     0.2 min  ContinuousFlexibility.Analysis.N01cStateInterpolation\n     0.2 min  ContinuousFlexibility.Analysis.N01cCoefficientTameBounds\n     0.2 min  ContinuousFlexibility.Analysis.N01cFlowVariationInput\n     0.2 min  ContinuousFlexibility.Analysis.N07aMixedAngularProduct\n     0.2 min  ContinuousFlexibility.Analysis.N01cWholeSpeedPowerBounds\n     0.2 min  ContinuousFlexibility.Scalar.WeightedOddHeightGerms\n     0.2 min  ContinuousFlexibility.Analysis.N07aForwardCorrection\n     0.2 min  ContinuousFlexibility.Analysis.N01cNormalizedSpeedPowerBounds\n     0.2 min  ContinuousFlexibility.Analysis.N01cActualFlowUnitDirections"
+        }
+      ]
+    }
+  ],
+  "limits": "No heartbeat/resource increases, no new proof target premise, no main provider substitution; exact public headers preserved. Source repair candidates only; root owns staging/refs."
+}

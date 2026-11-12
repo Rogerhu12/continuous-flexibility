@@ -1,0 +1,58 @@
+{
+  "kind": "CI165_ActualReferenceNegativeRadialFields_RepairReviewedManifest",
+  "status": "INDEPENDENT_STATIC_REVIEW_PASSED_CI166_PENDING",
+  "owner": "quantitative_route",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "intended_backup_path": "quantitative/repair165/ActualReferenceNegativeRadialFieldsCI165RepairReviewedManifest.json",
+  "candidate_manifest": {
+    "sha256": "1fa550d9ce1cbceb3da653463daf8a844df4ee26c36ccb93dd396abb3a1ad92c",
+    "blob": "417cfeb8e288895186288a2cfe8e6b57832a44f8",
+    "bytes": 6828,
+    "lines": 151
+  },
+  "source": {
+    "path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean",
+    "sha256": "ac3d3070df56ad9a3d209e22ffb213ab44b0ad80294906f30b57b157100f261d",
+    "blob": "ef7e207e7d604dbb3a94cc389660e1d67894c958",
+    "bytes": 7672,
+    "lines": 159
+  },
+  "preimage": {
+    "sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+    "blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+    "bytes": 7450,
+    "lines": 156
+  },
+  "exact_diff": {
+    "sha256": "517d46b0335345d90d42c70c3f2d6e0774662c712a6bbb2b32a34013deb13e3f",
+    "blob": "9f9f664afd3ea76dec724b380145f67db62c6e7d",
+    "bytes": 727,
+    "lines": 12
+  },
+  "independent_review": {
+    "reviewer": "root",
+    "sha256": "01fcc057e24ad497adf0bcee05f63c820f2ce4daae726c49b5f4a14cc850751f",
+    "blob": "1d615641f82878de2f1bb20a042d16fae7c7bef5",
+    "bytes": 4195,
+    "lines": 60,
+    "scope": "Focused exact source/projection API repair review; unrelated mathematical bytes retain historical review."
+  },
+  "ci": {
+    "failed_head": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+    "successor_head_reported_by_root": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+    "successor_tree_reported_by_root": "d6e6c25c9742129f9a50a929914845940b001761",
+    "last_full_green": "c796387fb555392501c81f5b8bd834936251516c",
+    "full_success_required": true,
+    "compiled_claim": false
+  },
+  "preservation": {
+    "exact_new_source": "ef7e207e7d604dbb3a94cc389660e1d67894c958",
+    "net_new_lines": 3,
+    "public_declaration_including_proof_unchanged": true,
+    "imports_options_unchanged": true,
+    "old_reference_provider_07661_retained": true,
+    "source_not_recopied_to_an_archive": true,
+    "active_index_refs_untouched_by_owner": true,
+    "lean_not_run": true
+  }
+}

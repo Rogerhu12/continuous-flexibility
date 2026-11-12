@@ -1,0 +1,94 @@
+{
+  "schema": "N04Coordinates.ReviewedManifest.v1",
+  "intended_backup_path": "audit/repair165/CI165AuditCoordinatesRepairsReviewedManifest.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "owner": "audit_coordinates",
+  "status": "REVIEWED_EXACT_CANDIDATES; CI_VALIDATION_PENDING; ORIGINAL_SOURCES_AND_RECEIPTS_IMMUTABLE",
+  "candidate_manifest": {
+    "blob": "ca0a08f71da2c4aaea59f024e9ab80443b02c2a9",
+    "sha256": "aacb3b815a8b6f2e8c6526ecad8c67d4087672eb297147bcfc7420ee44b5a4b5"
+  },
+  "independent_review": {
+    "blob": "1d615641f82878de2f1bb20a042d16fae7c7bef5",
+    "sha256": "01fcc057e24ad497adf0bcee05f63c820f2ce4daae726c49b5f4a14cc850751f",
+    "reviewer": "root",
+    "status": "PASSED_FOCUSED_SOURCE_AND_PINNED_API_REVIEW_NOT_COMPILED",
+    "scope": "The two audit-owned candidates only; this receipt also covers quant's radial159, which this owner manifest does not select or own.",
+    "scope_detail": "Independent focused repair review. Earlier immutable full-source reviews remain historical; this receipt does not assert they had established compilation or re-review unchanged mathematical bodies unnecessarily."
+  },
+  "source_selection": [
+    {
+      "module": "ContinuousFlexibility.Analysis.RootTravelOppositeCoordinates",
+      "target": "src/ContinuousFlexibility/Analysis/RootTravelOppositeCoordinates.lean",
+      "archive_path": "audit/repair165/RootTravelOppositeCoordinates.lean",
+      "blob": "e573bf412782f3cd9d51fccc619367c3fc8fcd40",
+      "sha256": "52ea40ea85ce5a873754a4a39a44d0b5d39c792a18a1e1a487b37bf5bcfe80ce",
+      "bytes": 9522,
+      "lines": 199,
+      "preimage": {
+        "blob": "398cf5d4c3207cc9e9dd31cbe09887007d9aff2c",
+        "sha256": "ecd653a3b8f6817b590d1b385f1fc495fb4612b46fdb6e9398e8d798fd11ff9e",
+        "lines": 197,
+        "bytes": 9435
+      },
+      "public_header_count": 16,
+      "public_header_sha256": "de7898ed4011dc104c64373956a1be1a84928d02f970a398c9a27859555c8b4f",
+      "peer_bound": true,
+      "source_bytes_unchanged_after_peer": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalPrimitiveJetsNormalization",
+      "target": "src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean",
+      "archive_path": "audit/repair165/CanonicalPrimitiveJetsNormalization.lean",
+      "blob": "fcb1277422b54ea7f0dd44a618c8e154a797c947",
+      "sha256": "c0f106ce7b46c65cbf19cbd2815f43aa4deeda6cbde00b513e3e1b9c9cbbfe93",
+      "bytes": 4818,
+      "lines": 102,
+      "preimage": {
+        "blob": "19fbfbee2481dc3603bb1dcd55f479f55c256b97",
+        "sha256": "b930c8f21c01d5a534fc634a94bc354bc6dbeda3551d5995e8a9b711731233e5",
+        "lines": 85,
+        "bytes": 4147
+      },
+      "public_header_count": 2,
+      "public_header_sha256": "caec26f10fc86ac928944bd5eb6602f973d2ebca515437ec773c69ba3cd502cb",
+      "peer_bound": true,
+      "source_bytes_unchanged_after_peer": true
+    }
+  ],
+  "diff": {
+    "intended_backup_path": "audit/repair165/CI165AuditCoordinatesRepairs.diff",
+    "blob": "ddb9b5c7742f44540ebdbade80ecd2d24870fdfe",
+    "sha256": "11c4a4e955bb39316f0f8d4143cd337f5267690ff8b9a5e58008d6ffdf622c7e",
+    "additions": 25,
+    "deletions": 6,
+    "net_added_lean_lines": 19,
+    "authorized_net_budget": 45
+  },
+  "exact_repair_checks": {
+    "public_declarations": 18,
+    "new_public_names": 0,
+    "no_import_change": true,
+    "no_option_change": true,
+    "no_resource_increase": true,
+    "exact_literal_reverse_reconstruction": true,
+    "no_lean_or_local_build": true,
+    "no_active_write": true,
+    "no_index_ref_commit_or_ci_action": true
+  },
+  "existing_history": "No frozen 197/85 source, earlier compatibility source or previous review is overwritten. The new candidates alter only the exact diagnosed proof blocks identified in the candidate manifest.",
+  "review_notes": [
+    "Independent root receipt verifies the exact same-oriented alias positivity for Real.div_rpow.",
+    "Independent root receipt read the complete102 normalization source and actual CurrentJets/SmoothDirections definitions. J'.D is literally J.D; no changed tower/bounds.",
+    "Public headers, actual witness, same K/sample, all six primitive clauses, imports and options remain unchanged.",
+    "No local Lean/elaboration or CI query was performed by this owner. Successful compilation is not inferred from static review."
+  ],
+  "root_reported_selection": {
+    "commit": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+    "tree": "d6e6c25c9742129f9a50a929914845940b001761",
+    "reported_by": "root",
+    "reported_time": "2026-11-12 21:07:39 UTC",
+    "meaning": "Root reported selection in CI166. This record does not assert an independent ref query or successful CI."
+  },
+  "storage": "Only this small JSON is newly frozen; no additional Lean copy is created. Exact preimages and successors already remain as Git blobs and in root-managed active commit history."
+}

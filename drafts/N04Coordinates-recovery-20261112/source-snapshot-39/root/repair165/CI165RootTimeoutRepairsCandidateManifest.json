@@ -1,0 +1,63 @@
+{
+  "kind": "CI165_definition_elaboration_timeout_focused_repair",
+  "baseline": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+  "full_log": {
+    "name": "n04-ci-165.log",
+    "blob": "ca10b6e0164bf9c98dca5cfeb1c9496576def864",
+    "sha256": "4b6e6fe5d74b854e5aa19dbe802336b44bc7e45ea5acbbb534b752843ef019d3",
+    "bytes": 162038,
+    "lines": 1207,
+    "downloaded_once": true
+  },
+  "status": "AWAITING_INDEPENDENT_SOURCE_REVIEW_AND_CI",
+  "files": [
+    {
+      "name": "CanonicalReferenceCurrentAbsoluteJets.lean",
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean",
+      "old_blob": "74e009ae51c272ef758c21447a9f494156e3d6ec",
+      "old_sha256": "c1b05760d478ef2e0e480010ae0b985db327927ac4178153660f79ef6a15c699",
+      "old_lines": 109,
+      "blob": "5f8c8a6087e0446d2c54ef35b532b404f0b092f2",
+      "sha256": "59a80a8100cb69b80d010175760bfb073bd91f03813d02c2ea72671329a1ebc5",
+      "lines": 118,
+      "public_headers_unchanged": true,
+      "imports_unchanged": true
+    },
+    {
+      "name": "CanonicalCurrentUniformCloseness.lean",
+      "module": "ContinuousFlexibility.Analysis.CanonicalCurrentUniformCloseness",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean",
+      "old_blob": "ca4ff618fbc4e869ccc7195c8244ee965e4f2bbc",
+      "old_sha256": "542b75aa28930a3e7303536ea2ff712e20c0b7a49689e1eaf9d857f400c90aa0",
+      "old_lines": 94,
+      "blob": "e5b4919994abd7e7ddcde0bb83665c224d9e53fe",
+      "sha256": "34065e8e1044d6f5292ed1b0ad4ecce653c00c28fe5514e43bddae49e58b39c5",
+      "lines": 101,
+      "public_headers_unchanged": true,
+      "imports_unchanged": true
+    }
+  ],
+  "changes": [
+    "Use the already compiled neighboring N07aGeometryJetBounds / N07aNeighborhood backward.isDefEq.respectTransparency true option to avoid eager backward unification unfolding of the large dependent CurrentJets contracts.",
+    "Replace existential elimination at the observed timeout points and subsequent similar large bounds by explicitly typed let/choose projections, following the compiled N07aGeometryJetBounds pattern.",
+    "Specify D and T explicitly for the small material-height bound supplier."
+  ],
+  "math": "Same public statements, fixed-loss order, actual family/sample and existing numerical proof. No limit is raised, no added hypothesis, no replacement derivative tower.",
+  "providers": [
+    {
+      "module": "N07aGeometryJetBounds",
+      "blob": "e1e7c43bac69e82dbd72c609763521ad1472682b"
+    },
+    {
+      "module": "N07aNeighborhood",
+      "blob": "86b20bbbcad3781f00b90d3b7562ab700f99eef3"
+    },
+    {
+      "module": "MaterialSampleBounds",
+      "blob": "19becb59903b44c18c8f1afb72726b2f95952752"
+    }
+  ],
+  "net_lines": 16,
+  "local_or_remote_compile": false
+}

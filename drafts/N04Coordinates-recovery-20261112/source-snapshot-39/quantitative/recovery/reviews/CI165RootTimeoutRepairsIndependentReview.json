@@ -1,0 +1,182 @@
+{
+  "kind": "CI165 root timeout repairs independent source review",
+  "reviewer": "quantitative_route",
+  "status": "PASS_STATIC_EXACT_DELTA; DEFAULT_BUDGET_ELABORATION_PENDING_CI166",
+  "intended_path": "quantitative/recovery/reviews/CI165RootTimeoutRepairsIndependentReview.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "baseline": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+  "baseline_tree": "49237cc2b902342c4a42b86d653fb00770d65d60",
+  "candidate_manifest": {
+    "sha256": "a38e21e07b978a90fa058f7f8eee4d44d15b793b6eab004f959bae966926f785",
+    "blob": "fb92fc45e085e4855fc13ce56fd54cc587937fe1",
+    "bytes": 2881,
+    "lines": 63
+  },
+  "full_cached_log": {
+    "sha256": "4b6e6fe5d74b854e5aa19dbe802336b44bc7e45ea5acbbb534b752843ef019d3",
+    "blob": "ca10b6e0164bf9c98dca5cfeb1c9496576def864",
+    "bytes": 162038,
+    "lines": 1207
+  },
+  "exact_diagnostics": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean",
+      "line": 59,
+      "column": 2,
+      "error": "(deterministic) timeout at isDefEq, maximum number of heartbeats (200000)",
+      "old_site": "obtain CH/hCH/hHb from material_sample_height_coefficient_power_bounded"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean",
+      "line": 48,
+      "column": 2,
+      "error": "(deterministic) timeout at isDefEq, maximum number of heartbeats (200000)",
+      "old_site": "obtain B/hB/hb from hdiff 0"
+    }
+  ],
+  "scope": "Read both complete before and after sources, then checked only the precise elaboration repair delta against actual suppliers. This receipt does not assert CI success or replace earlier mathematical reviews.",
+  "files": [
+    {
+      "name": "CanonicalReferenceCurrentAbsoluteJets.lean",
+      "before": {
+        "sha256": "c1b05760d478ef2e0e480010ae0b985db327927ac4178153660f79ef6a15c699",
+        "blob": "74e009ae51c272ef758c21447a9f494156e3d6ec",
+        "bytes": 5173,
+        "lines": 109
+      },
+      "after": {
+        "sha256": "59a80a8100cb69b80d010175760bfb073bd91f03813d02c2ea72671329a1ebc5",
+        "blob": "5f8c8a6087e0446d2c54ef35b532b404f0b092f2",
+        "bytes": 5514,
+        "lines": 118
+      },
+      "actual_blob_matches": true,
+      "headers_equal": true,
+      "headers": [
+        "theorem n04Coordinates_reference_canonicalLengthInverse_envelope\n    (href : CanonicalGeometry.ReferenceJets D T S C L K) :\n    ∃ B : ℝ, 0 < B ∧ ∀ m,\n      |(K.right m - K.left m)⁻¹| ≤ B * T.E0 (T.sample (K.cell m)) ^ B := by",
+        "theorem n04Coordinates_unitAtom_absolute_envelope\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (hfloor : ∀ m, 1 ≤ T.E0 (T.sample (K.cell m)))\n    (href : CanonicalGeometry.ReferenceJets D T S C L K)\n    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε) :\n    ∃ loss : ℕ, ∀ s : ℕ, ∃ A B : ℝ, 0 < A ∧ 0 < B ∧\n      ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m v p,\n        p ∈ CanonicalGeometry.unitStrip → ∀ i j : ℕ, i + j ≤ s →\n          |mixedDerivative i j\n            (CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m v) p| ≤\n            A * T.E0 (T.sample (K.cell m)) ^ B *\n              (1 + CanonicalGeometry.parameterGrading S (s + loss) z) := by"
+      ],
+      "imports_equal": true,
+      "tail_unchanged": true,
+      "only_expected_replacements": true
+    },
+    {
+      "name": "CanonicalCurrentUniformCloseness.lean",
+      "before": {
+        "sha256": "542b75aa28930a3e7303536ea2ff712e20c0b7a49689e1eaf9d857f400c90aa0",
+        "blob": "ca4ff618fbc4e869ccc7195c8244ee965e4f2bbc",
+        "bytes": 4664,
+        "lines": 94
+      },
+      "after": {
+        "sha256": "34065e8e1044d6f5292ed1b0ad4ecce653c00c28fe5514e43bddae49e58b39c5",
+        "blob": "e5b4919994abd7e7ddcde0bb83665c224d9e53fe",
+        "bytes": 4917,
+        "lines": 101
+      },
+      "actual_blob_matches": true,
+      "headers_equal": true,
+      "headers": [
+        "theorem n04Coordinates_currentAtoms_uniformly_close\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}\n    {base : ℕ} {ε δ : ℝ}\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)\n    (hε : 0 < ε) (hδ : 0 < δ) :\n    ∃ base' : ℕ, base ≤ base' ∧ ∃ ε' : ℝ, 0 < ε' ∧ ε' ≤ ε ∧\n      sectorNeighborhood S base' ε' ε' ⊆ sectorNeighborhood S base ε ε ∧\n      CanonicalGeometry.CurrentJets D T S C L K base' ε' ∧\n      ∀ z ∈ sectorNeighborhood S base' ε' ε', ∀ m v p,\n        p ∈ CanonicalGeometry.unitStrip →\n          |CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m v p -\n            CanonicalGeometry.atom D T S C L K (C.referenceState, 0) m v p| < δ := by"
+      ],
+      "imports_equal": true,
+      "tail_unchanged": true,
+      "only_expected_replacements": true
+    }
+  ],
+  "exact_replacements": {
+    "absolute": [
+      [
+        "open Set ContinuousFlexibility.Statements\nopen scoped ContDiff",
+        "open Set ContinuousFlexibility.Statements\n\nset_option backward.isDefEq.respectTransparency true\nopen scoped ContDiff"
+      ],
+      [
+        "  obtain ⟨CH, hCH, hHb⟩ := material_sample_height_coefficient_power_bounded\n    hD hT K.cell 0 (by norm_num : (0 : ℝ) < 3 / 4)\n",
+        "  have hheight := material_sample_height_coefficient_power_bounded\n    (D := D) (T := T) hD hT K.cell 0 (by norm_num : (0 : ℝ) < 3 / 4)\n  let CH : ℝ := hheight.choose\n  have hCH : 0 < CH := hheight.choose_spec.1\n  have hHb := hheight.choose_spec.2\n"
+      ],
+      [
+        "  obtain ⟨B₀, hB₀, hb₀⟩ := href.2 s\n  obtain ⟨B₁, hB₁, hb₁⟩ := hdiff s\n",
+        "  let B₀ : ℝ := (href.2 s).choose\n  have hB₀ : 0 < B₀ := (href.2 s).choose_spec.1\n  have hb₀ := (href.2 s).choose_spec.2\n  let B₁ : ℝ := (hdiff s).choose\n  have hB₁ : 0 < B₁ := (hdiff s).choose_spec.1\n  have hb₁ := (hdiff s).choose_spec.2\n"
+      ]
+    ],
+    "closeness": [
+      [
+        "open Set ContinuousFlexibility.Statements\n\nattribute",
+        "open Set ContinuousFlexibility.Statements\n\nset_option backward.isDefEq.respectTransparency true\n\nattribute"
+      ],
+      [
+        "  obtain ⟨B, hB, hb⟩ := hdiff 0\n  obtain ⟨CH, hCH, hCHb⟩ := material_sample_height_coefficient_power_bounded\n    hD hT K.cell B (by norm_num : (0 : ℝ) < 3 / 4)\n",
+        "  let B : ℝ := (hdiff 0).choose\n  have hB : 0 < B := (hdiff 0).choose_spec.1\n  have hb := (hdiff 0).choose_spec.2\n  have hheight := material_sample_height_coefficient_power_bounded\n    (D := D) (T := T) hD hT K.cell B (by norm_num : (0 : ℝ) < 3 / 4)\n  let CH : ℝ := hheight.choose\n  have hCH : 0 < CH := hheight.choose_spec.1\n  have hCHb := hheight.choose_spec.2\n"
+      ]
+    ]
+  },
+  "providers": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aGeometryJetBounds.lean",
+      "sha256": "5eb75a3b06a90cf2611b95ca8ce9098ba95c057e7627a4bcf1a8d756bc02c498",
+      "blob": "e1e7c43bac69e82dbd72c609763521ad1472682b",
+      "bytes": 5954,
+      "lines": 119,
+      "complete_source_read": true
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aNeighborhood.lean",
+      "sha256": "814ee5af91417d6b4e109bde34d8460e476d0b211c26a36fa60714df6dd83409",
+      "blob": "86b20bbbcad3781f00b90d3b7562ab700f99eef3",
+      "bytes": 10343,
+      "lines": 218,
+      "complete_source_read": true
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046",
+      "blob": "19becb59903b44c18c8f1afb72726b2f95952752",
+      "bytes": 2965,
+      "lines": 66,
+      "complete_source_read": true
+    },
+    {
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "bytes": 101197,
+      "lines": 1773,
+      "read_scope": "Actual ReferenceJets and CurrentJets definitions, including the fixed-loss second component and genuine directional tower third component."
+    }
+  ],
+  "findings": [
+    {
+      "topic": "Transparency",
+      "result": "Both files add precisely set_option backward.isDefEq.respectTransparency true, already present in both unchanged actual N07a neighbor modules. This changes definitional-equality elaboration strategy, not any heartbeat or recursion budget; no theorem hypothesis is added."
+    },
+    {
+      "topic": "Height supplier",
+      "result": "The same material_sample_height_coefficient_power_bounded is specialized with explicit D/T. CH is the chosen witness and its two conjuncts are projected without changing K.cell, exponent, or the pre-state uniformity."
+    },
+    {
+      "topic": "Absolute jets",
+      "result": "loss still comes from hcur.2.1 before every s. For each s the exact href.2 s and hdiff s witnesses become typed real lets with choose_spec positivity/bounds. A=B0+B1*CH and B=max B0 B1 and all subsequent numerical inequalities are byte-identical."
+    },
+    {
+      "topic": "Uniform closeness",
+      "result": "The same loss is chosen before radius and all m/v/p. hdiff 0 selects B; the exact same-power material absorption selects CH. M, base'=max base loss, epsilon'=min epsilon(delta/(2*M)), restricted actual tower and final estimate are byte-identical."
+    },
+    {
+      "topic": "API contracts",
+      "result": "MaterialSampleBounds yields Exists C, 0<C and uniform all m bound exactly in the order now projected. CurrentJets.2.1 is Exists loss, forall s, Exists B, 0<B and the same difference bound. N07aGeometryJetBounds uses precisely this typed let/choose pattern."
+    },
+    {
+      "topic": "Invariance",
+      "result": "Three complete public headers, all imports, all local instances and all mathematical tails are unchanged. Applying the recorded exact substitutions to the two actual preimages gives the final bytes exactly; no extra mutation occurs."
+    }
+  ],
+  "limits": {
+    "local_lean_or_elaboration_run": false,
+    "resource_limits_changed": false,
+    "provider_selection_changed": false,
+    "active_files_or_index_changed": false,
+    "refs_or_ci_changed": false,
+    "successful_typechecking_claim": false,
+    "remaining_risk": "Actual performance of the revised elaboration must be established by CI166 under unchanged default limits."
+  }
+}

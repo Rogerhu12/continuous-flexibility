@@ -1,0 +1,12 @@
+--- a/src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean
++++ b/src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean
+@@ -35,3 +35,6 @@
+-  have hd := (hf.comp_hasFDerivAt (f := fun p : PolarPoint => p.1)
+-    (r, θ) (hasFDerivAt_fst (p := (r, θ)))).prodMk
+-    (hasFDerivAt_snd (p := (r, θ)))
++  have hd : HasFDerivAt (𝕜 := ℝ) (fun p : PolarPoint => (f p.1, p.2))
++      (((deriv f r) • ContinuousLinearMap.fst ℝ ℝ ℝ).prod
++        (ContinuousLinearMap.snd ℝ ℝ ℝ)) (r, θ) :=
++    (hf.comp_hasFDerivAt (f := fun p : PolarPoint => p.1)
++      (r, θ) (hasFDerivAt_fst (𝕜 := ℝ) (p := (r, θ)))).prodMk
++      (hasFDerivAt_snd (𝕜 := ℝ) (p := (r, θ)))

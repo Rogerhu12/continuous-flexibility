@@ -1,0 +1,151 @@
+{
+  "kind": "CI165_ActualReferenceNegativeRadialFields_RepairCandidate",
+  "status": "Frozen static candidate; not locally compiled; pending independent peer and CI166",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "actual_head": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+  "actual_tree": "49237cc2b902342c4a42b86d653fb00770d65d60",
+  "last_full_green": "c796387fb555392501c81f5b8bd834936251516c",
+  "path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean",
+  "planned_backup_path": "quantitative/repair165/ActualReferenceNegativeRadialFields.lean",
+  "before": {
+    "sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+    "blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+    "bytes": 7450,
+    "lines": 156
+  },
+  "after": {
+    "sha256": "ac3d3070df56ad9a3d209e22ffb213ab44b0ad80294906f30b57b157100f261d",
+    "blob": "ef7e207e7d604dbb3a94cc389660e1d67894c958",
+    "bytes": 7672,
+    "lines": 159
+  },
+  "exact_diff": {
+    "planned_backup_path": "quantitative/repair165/ActualReferenceNegativeRadialFields.diff",
+    "sha256": "517d46b0335345d90d42c70c3f2d6e0774662c712a6bbb2b32a34013deb13e3f",
+    "blob": "9f9f664afd3ea76dec724b380145f67db62c6e7d",
+    "bytes": 727,
+    "lines": 12,
+    "added": 6,
+    "removed": 3,
+    "net": 3
+  },
+  "diagnosis": {
+    "kind": "CI165_focused_failure_evidence",
+    "owner": "quantitative",
+    "head": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+    "tree": "49237cc2b902342c4a42b86d653fb00770d65d60",
+    "full_log": {
+      "name": "n04-ci-165.log",
+      "blob": "ca10b6e0164bf9c98dca5cfeb1c9496576def864",
+      "sha256": "4b6e6fe5d74b854e5aa19dbe802336b44bc7e45ea5acbbb534b752843ef019d3",
+      "bytes": 162038,
+      "lines": 1207,
+      "downloaded_once": true
+    },
+    "files": [
+      {
+        "name": "ActualReferenceNegativeRadialFields.lean",
+        "path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean",
+        "blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+        "sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+        "lines": 156,
+        "errors": [
+          {
+            "line": 37,
+            "column": 4,
+            "text": "error: src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean:37:4: Application type mismatch: The argument\n  hasFDerivAt_snd\nhas type\n  HasFDerivAt Prod.snd (ContinuousLinearMap.snd ?m.177 ℝ ℝ) (r, θ)\nbut is expected to have type\n  HasFDerivAt ?m.175 ?m.176 (r, θ)\nin the application\n  HasFDerivAt.prodMk (HasDerivAt.comp_hasFDerivAt (r, θ) hf ?m.160) hasFDerivAt_snd"
+          }
+        ]
+      }
+    ],
+    "limits": "No heartbeat/resource increases, no new proof target premise, no main provider substitution; exact public headers preserved. Source repair candidates only; root owns staging/refs."
+  },
+  "focused_evidence": {
+    "sha256": "198623ed83b41e2febedbcdc8cd65e6392604f400df16fca4b54cffeb588f5af",
+    "blob": "dfcc4871419db3b415aa7d0922454eafabfc5257",
+    "bytes": 1492,
+    "lines": 31,
+    "expected_blob": "dfcc4871419db3b415aa7d0922454eafabfc5257"
+  },
+  "change": "Give hd its complete real HasFDerivAt type and the exact product of scaled fst with snd; specialize both projection derivative suppliers with (𝕜 := ℝ). The function, point and derivative formula are unchanged.",
+  "preserved": {
+    "single_replacement_reverses_exactly": true,
+    "all_bytes_outside_lines35_to37_identical": true,
+    "entire_public_declaration_name": "ContinuousFlexibility.Analysis.n04Coordinates_actual_reference_negative_radial_fields",
+    "entire_public_declaration_including_proof_identical": true,
+    "imports_identical": true,
+    "options_identical": true,
+    "provider_selection_identical_to_actual_794d": true,
+    "no_reference_flow_or_newmain_signature_port": true,
+    "no_resource_limit_changes": true
+  },
+  "actual_direct_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity",
+      "path": "src/ContinuousFlexibility/Analysis/ActualNegativePrincipalDensity.lean",
+      "sha256": "79be096548f4222f5265dc93e1b7ad6aa1bf426954089f48bb78b423c23ee2a3",
+      "blob": "7a3122c1e2c2081375a7be7405a2a348706ed261",
+      "bytes": 6096,
+      "lines": 111
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualTravel.lean",
+      "sha256": "4307b8b206489be492e33a3f12198e4af5271c45a5db821b85ac2db0133ce7eb",
+      "blob": "07661eae46124d0a5550bf4f6de16a5874838d3c",
+      "bytes": 12681,
+      "lines": 243
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01OpticalCollarPositivity",
+      "path": "src/ContinuousFlexibility/Analysis/N01OpticalCollarPositivity.lean",
+      "sha256": "4b9b30f66f4d1d914e3830e111a0e8d69ef0ff1a5c0926c7528fc08cd0e76b1c",
+      "blob": "c392ff0cc2bba65c52097c72e879e2f90dd2dbec",
+      "bytes": 18141,
+      "lines": 340
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualRootInterior",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualRootInterior.lean",
+      "sha256": "e48818ca3333c9e39ad2b5cf2528733a278f2aa2921a83508be9f8e4c759e66c",
+      "blob": "f59704e802cdf7bd9ae8a66504974410052233e0",
+      "bytes": 5228,
+      "lines": 105
+    }
+  ],
+  "pinned_mathlib": {
+    "repository": "leanprover-community/mathlib4",
+    "commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "sources": [
+      {
+        "path": "Mathlib/Analysis/Calculus/FDeriv/Prod.lean",
+        "sha256": "d9edeab4ca3671820dd56f6bb5d12a875cbda846eded02c4aeac125112a892e5",
+        "blob": "411b5f2f6a95bdce18d85ba51f9f21e78f36e770",
+        "bytes": 26694,
+        "lines": 661,
+        "declarations": [
+          "hasFDerivAt_fst",
+          "hasFDerivAt_snd",
+          "HasFDerivAt.prodMk"
+        ],
+        "check": "Projection suppliers have implicit field parameter 𝕜, explicitly set to ℝ; prodMk returns the exact product CLM."
+      },
+      {
+        "path": "Mathlib/Analysis/Calculus/Deriv/Comp.lean",
+        "sha256": "16a41715830ec582c91cb5262e2defab08052d7e749bb91ee059905c0b0e1847",
+        "blob": "bca5a3ed558bd9f14be2a277d9e01bd025227307",
+        "bytes": 20966,
+        "lines": 415,
+        "declarations": [
+          "HasDerivAt.comp_hasFDerivAt"
+        ],
+        "check": "Returns HasFDerivAt (h₂ ∘ f) (h₂′ • f′) at the same point, definitionally the annotated first component."
+      }
+    ]
+  },
+  "limitations": [
+    "No Lean invocation, no elaboration or compilation assertion.",
+    "No active source/index/refs/CI changes; only detached candidate and metadata Git blobs.",
+    "Only actual reported type-inference error is addressed. All unrelated source remains exact."
+  ]
+}

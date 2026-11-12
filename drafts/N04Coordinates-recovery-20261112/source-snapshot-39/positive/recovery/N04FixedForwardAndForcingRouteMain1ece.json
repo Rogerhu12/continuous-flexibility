@@ -1,0 +1,579 @@
+{
+  "schema": "N04_READ_ONLY_FIXED_FORWARD_AND_FORCING_BLUEPRINT_V1",
+  "status": "READ_ONLY_DESIGN_WITH_EXACT_SOURCE_FINGERPRINTS_NOT_NEW_LEAN_NOT_COMPILED",
+  "author": "/root/proof_inventory",
+  "intended_path": "positive/recovery/N04FixedForwardAndForcingRouteMain1ece.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "constraints": {
+    "lean_written_this_pass": 0,
+    "local_lean_or_elaboration_run": false,
+    "active_src_index_ref_ci_actions": false,
+    "selected_upstream": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "selected_green_fallback": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+    "mathlib": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "source_budget": "Current actual fixed-base group 1222 lines, including historical326 and final328, exactly the parent's revised allowance. No further Lean authorized during this read-only pass.",
+    "graph_scope": "This is a fingerprinted proof plan, not a newly selected whole-DAG candidate or a claim that historical owned modules compile against main1ece.",
+    "parent_state": "Parent reports CI164 full green and CI165 pushed. No CI query was made by this agent.",
+    "persistence": "Only JSON will be created as a Git blob, without any commit or ref. Parent will attach it to a backup."
+  },
+  "completed": {
+    "selector152": {
+      "source_blob": "054e86dbc3a61f36df0ff4fd7ddf71aefeacb117",
+      "source_sha256": "93154c0937eac430488bc4927b7d5e5f42d026df05959e430686c650ddd79fd4",
+      "candidate_blob": "803c8dc182e4de0e68fb129891c30cf99d45f8e0",
+      "candidate_sha256": "91d733acb671c04e90f34c126050d6f2e33c4837d6973ea2fb9fba1f3102489d",
+      "graph_blob": "212dc2c6c64d807827ad916c8eadd312df2fa273",
+      "graph_sha256": "40188216c7dc445d1fb5a70ff4ce8d10ee1c3ad0fca955e7f42bd1312fef5ff7",
+      "peer_blob": "d248e692dba26bf04ff60447ef2dc77b6383a1f8",
+      "peer_sha256": "76f08fd2b3be38c225b7de7e1a862f3b7fb2aad6f97a672c18d683981b6e367e",
+      "owner_blob": "5dd7e2c487ecc063f6a1033d25a314c721a79acb",
+      "owner_sha256": "69c6eb5bafb51eb40c0f84727c858a466b4460d1d0d0967f51adb6ca1207e4c5",
+      "status": "FULL_INDEPENDENT_SOURCE_REVIEW_PASSED_NOT_COMPILED",
+      "contract": "Fixed B before every n; per-n L before R/s; numerical K before all closed-radius selectors and all given genuine J; same original selector inverse and H^(3/4) circle model.",
+      "graph_count": "517 reachable: 510 exact main1ece, 6 owned sources, 1 explicit green CanonicalStateInterpolation fallback.",
+      "historical_working_source": "Original unfrozen152 a356bf3400337bfb9b84728e10f255367a3123cb is a known Git blob only. Parent stated it will be committed as a .lean.txt historical archive in backup38; this note does not claim prior committed preservation."
+    },
+    "dependencies": [
+      {
+        "name": "N04EndpointCircleFixedBaseBounds115",
+        "blob": "09a1696b57c7fe3678cc6e10e419bb8fa22c0c11",
+        "state": "independently reviewed; main1ece fixed-B actual endpoint source"
+      },
+      {
+        "name": "CirclePositiveInverseFixedBaseBounds301",
+        "blob": "1f55edbb185fe33327757a087479196cc8565e4f",
+        "state": "independently reviewed; zero-travel application and all-travel output contraction"
+      },
+      {
+        "name": "TameFixedBaseCompositionBounds328",
+        "blob": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+        "state": "independently reviewed; actual ordered-partition jets, no private product-copy"
+      },
+      {
+        "name": "CircleShiftedForwardFixedBaseBounds159",
+        "blob": "4ea70ab43fc1fa6e51ddcfa3849f97580bf02235",
+        "state": "independently reviewed; inverseForwardJet source-last hF bound, not the complete joint-forward n-jet bound"
+      },
+      {
+        "name": "TameInverseFixedBaseBounds349_layout",
+        "blob": "45fae56b12e755379fcf3e4aa3e211ba0cfe9c7a",
+        "state": "selected final layout independently reviewed; no modification proposed"
+      }
+    ]
+  },
+  "next_actual_forward": {
+    "object": "F_t(psi,u)=circleShiftedChartComposeContinuousLinear ... t psi u, in the original circle model M, with p=pairGrading M.grading M.grading.",
+    "proposed_contract_in_prose": "Choose B and ell once before all n, radii, spatial orders, travel functions and genuine towers. For every n, R>=0, s choose C>=0 before travel t and J : SmoothDirections univ F_t. If p_B x<=R then q_s(J.D n x v)<=C*tameJetSize p n s (n+ell) B x v for every v. The per-n loss is n+ell; no B(n). This is a target for the next actual leaf, not an already proved theorem.",
+    "real_tower": "Use exists_circleChartComposition_smoothDirections at zero travel. Its decoder is exactly circleChartCompositionJets. It is a genuine continuous multilinear derivative tower, so current CML normalization applies directly.",
+    "pointwise_formula": [
+      "For zero travel, the principal term is kernel(r=n,k=n, psi=x.1, source=x.2, w_i=v_i.1).",
+      "For n=m+1, the i-th source-variation term is kernel(r=m,k=m, psi=x.1, source=v_i.2, w_j=(v (i.succAbove j)).1).",
+      "The finite sum of those actual circle elements equals J.D n x v by the public scalar formula and injectivity of M.decode. No Schwarz permutation or arbitrary representative is needed.",
+      "At n=0 the source-variation sum is empty. Keep this case explicit."
+    ],
+    "removed_slot_proof": [
+      "Apply Fin.prod_univ_succAbove to a scalar function f' with f'(i)=1 and f'(j)=f(j) for j!=i.",
+      "Finset.prod_erase with f'(i)=1 and prod_congr on univ.erase i identifies its erased product with the full product of f'.",
+      "Fin.succAbove_ne reduces the remaining factors to f(i.succAbove j). This proof never divides by f(i) and remains valid when any decoded direction is zero.",
+      "Only a scalar product is filled with 1. Do not introduce a constant-one circle element, which need not belong to the weighted circle space."
+    ],
+    "fixed_base_numerics": [
+      "Take the pair B=b and global ell from coupled_circle_kernel_grading_bounds, whose quantifiers are existential b,ell before r,k,s,R.",
+      "Use Rplus=max(1,R). On the unit p_B polydisc of increments, the principal kernel majorant is at most Rplus*(1+p_high x+sum_i p_high(v_i)).",
+      "Each source-variation kernel majorant is at most 1+p_high x+sum_i p_high(v_i). Raise its derivative index (n-1)+s+ell to high=s+n+ell using monotonicity.",
+      "The numerical constant is Rplus*Cprincipal+n*Cvariation. It depends on n,s,R and the fixed model data, not travel, x, selectors, a tower choice, or the number of components.",
+      "Apply multilinear_bound_of_unitBall to the actual CML J.D n x with low=p_B, high=p_(s+n+ell), a=1+p_(s+n+ell)x. This preserves B and handles the kernel of the low seminorm.",
+      "Use genuine-tower uniqueness to pass from the explicit zero-travel tower to every supplied genuine zero-travel tower."
+    ],
+    "uniform_travel": [
+      "Set A_t(x)=(x.1,circleTranslationContinuousLinear ... t x.2), a real continuous linear map.",
+      "circleShiftedChartComposeLinear_eq_zero_travel together with circleShiftedChartComposeContinuousLinear_apply gives F_t=F_0 o A_t.",
+      "The public translation grading contraction gives p_s(A_t x)<=p_s x at every s, with no travel-dependent constant.",
+      "Precompose the zero-travel genuine tower, use its exact jet formula, tameJetSize_linear_contraction, and uniqueness against the supplied J. Consequently C is selected before t and J.",
+      "This avoids proving a new derivative/translation commutation lemma and avoids the weaker old uniform-family wrapper."
+    ],
+    "remaining_implementation_checks": [
+      "Make all Fin(m+1)/Fin m reindexing explicit in the source-variation sum.",
+      "Use the public *_apply lemmas for mathlib CLMs and finite products.",
+      "Do not infer a public name collision check from this plan; choose/check the eventual declaration name when the actual source is authorized.",
+      "Build a new exact provider selection for that source; do not mutate the frozen159 or 349."
+    ]
+  },
+  "average_and_product_reuse": {
+    "average": {
+      "literal_identity": "circleAverageComposeLinear_eq_unitIntegral represents the original average as the actual unit-interval integral of F_t(pairScaleFirst a x).",
+      "genuine_jet": "smoothDirectionsUnitIntegralLinearFamily_jet identifies all jets with projectiveUnitIntegral of the same forward jets at pairScaleFirst a x.",
+      "bound": "pairScaleFirst_grading_le for 0<=a<=1, tameJetSize_linear_contraction and projectiveUnitIntegral_grading_le preserve the forward B and per-n loss, with no new low base.",
+      "warning": "uniformOneHigh_unitIntegralLinearFamily has the older forall n exists base interface. Use the public actual jet/integral identities directly, rather than extracting a fixed base from that weaker statement."
+    },
+    "product": {
+      "actual_supplier": "circleProduct_oneHigh_bound already returns base/loss before all s and bounds the original circleProductBilinear.",
+      "genuine_derivatives": "Use the existing quadraticJets of the actual circleProductPairMultilinear: orders 0,1,2 have the actual finite product formulas; orders >=3 vanish.",
+      "assembly": "Obtain the fixed-base actual quadratic family from those finite cases, then use selected328 for its genuine composition with the state family. Do not duplicate weighted-product analysis or define a new product representation.",
+      "warning": "The numerical low base for the finite operation chain is chosen by finitely many zeroth-order image bounds, not by the output parameter order."
+    }
+  },
+  "actual_operation_chain": [
+    {
+      "stage": "endpoint and linear inputs",
+      "supplier": "Reviewed115 plus original sectorChart, circle reflection/odd/even/derivative and cutoff-contraction CLMs.",
+      "identity_rule": "Same hN, sector domain, C and circle model; derivative CLM adds only its fixed angular loss."
+    },
+    {
+      "stage": "selector inverse",
+      "supplier": "Final152.",
+      "identity_rule": "Actual negative optical travel and given-J uniqueness are already proved; do not reconstruct this stage."
+    },
+    {
+      "stage": "return transport",
+      "supplier": "Actual definitions in N01ReturnCircleUniformBounds; replace their weak numeric wrappers with 301, fullforward and 328.",
+      "facts": "sectorReturnTransport uses inverse with travel -C.travel and flow lower1/2; odd transport has lower1/3."
+    },
+    {
+      "stage": "return residual and right inverse",
+      "supplier": "The same actual sectorReturnResidualCircle and rightChartInverseCircle; inverse lower1/3.",
+      "facts": "Public sectorReturnResidualCircle_eq_of_N02 identifies the original supplied R.residual on the same sector neighborhood."
+    },
+    {
+      "stage": "initial chart and interpolation",
+      "supplier": "Return transport inverse, actual initial circle, and actual interpolationSelectorCircle.",
+      "facts": "The coefficient chi_m(rsel m) is in [0,1], so the existing component contraction is uniform in all selectors. Actual interpolation slope lower1/12."
+    },
+    {
+      "stage": "corrected inverse and first integral",
+      "supplier": "Historical reviewed164 and166 literal identities, to be rebound explicitly to main1ece.",
+      "facts": "Corrected forward = interpolation + F_0(interpolation,endpoint); its actual slope lower1/24. Apply301 with the actual negative optical travel, then e+F_(+opticalTravel)(e,sectorChart). Actual travel chart uses the existing odd/even linear projections."
+    },
+    {
+      "stage": "velocity correction",
+      "supplier": "N01ReturnVelocityUniformBounds and the exact original residual identification.",
+      "facts": "Actual independent velocity is the opticalCutoffJetCircleLinear order1 applied to a finite product/composition expression. Its public bound has one fixed angular-order cost and constant before selectors and spatial orders."
+    }
+  ],
+  "forcing_and_radial": {
+    "original_speed_fixed_joint_growth": {
+      "witness": "Use the single retained numerical producer153 once; write l_m=x_m-delta_m and h_m=x_m+delta_m. Keep its original R,L,chi,cell,base',epsilon'.",
+      "lower_data": "Its closed-buffer field gives d>0, d<=a and d^2<=b^2-a*c, d=lam*radialE(cellIndex(cell m))^(-P)/2. Restrict Icc to Ioo and discard only the unused inequalities. These are exactly the public main hpositive hypotheses.",
+      "supplier": "N01Properties.minusCharacteristicSpeed_strip_joint_growth in N01CharacteristicJointGrowth. It accepts the already supplied genuine tower K; no re-selection is needed.",
+      "precise_quantifiers": "exists B L before every R and total derivative order n. UniformWeightedJointGrowth then says forall R>=0 forall n exists C Q>=0 before component, point, x and unit increments; norm(K.D n)<=C*W_m^Q*(1+p_(n+L)x+sum p_(n+L)v_parameter). B and L are fixed, W_m=radialE(cellIndex(cell m)).",
+      "scope": "This supplies unweighted original-speed magnitudes on the actual buffered strip. It does not by itself supply H^(3/4) for a speed difference or all of the negative component.",
+      "main_proof_path": "Actual original coefficient joint tower -> unweighted polynomial discriminant -> positive square-root and reciprocal composition using the same lower bounds -> actual scalar speed formula -> genuine-tower congruence."
+    },
+    "height_gain_supplier": {
+      "raw_source": "N01Properties.sectorCoefficientTower_bound in N01CoefficientParameterTower118 retains exact H(sample j)^(3/4)*E0(sample j)^C with the original fixed low base and spatial high index s+loss. It is the increment tower; all orders are transferred to one canonical choice by uniqueness.",
+      "do_not_use_for_gain": "sectorCoefficientTower_uniform_oneHigh and originalCoefficient_joint_mixed_uniform_oneHigh in N01OriginalCoefficientTameBounds have absorbed that height prefactor. They are appropriate for unweighted multiplier growth, not the forcing's retained height gain.",
+      "actionable_algebra": "Writing Delta=b^2-a*c, s=sqrt Delta, and subscript0 for the same reference fields: v-v0=(delta_b-v0*delta_a-delta_Delta/(s+s0))/a; delta_Delta=(b+b0)*delta_b-c*delta_a-a0*delta_c. Both states have the actual buffer lower. Each expanded term contains a genuine coefficient increment, so the height tag can be retained through the finite products.",
+      "remaining_proof": "Prove that identity on the actual strip and combine the real increment towers with unweighted material-power jets of the remaining factors. This is a proposed proof path, not a frozen new theorem or an already completed fixed-base forcing bound.",
+      "sample_accounting": "The actual host cell, C.cell m and circle index m must not be identified. material_actualCells_index_bound compares two cells containing the same real point; radialE_rpow_of_nat_sub_bound transfers the material power. materialSample_H_E0_rpow_of_index_sub_bound preserves the height exponent exactly. flow_sample_prefactor_le_M then handles the actual C.cell m-to-m prefactor with one material order. Any use in the final forcing proof must display these steps."
+    },
+    "actual_residual": {
+      "supplier": "N01Properties.sectorReturnResidualCircle_eq_of_N02",
+      "consequence": "Once the fixed-base operation chain estimates the actual sectorReturnResidualCircle, transfer to this same R.residual by equality and tower uniqueness. Do not take numeric constants from the abstract SmoothTame clause.",
+      "gain": "Its circle H^(3/4) weight remains attached; do not absorb it with a global height envelope merely to reuse a weaker theorem."
+    },
+    "exact_pde": {
+      "notation": "I_z is the genuine corrected minus first integral; v_z=minusCharacteristicSpeed(L.coefficients z); I_0=theta+opticalTravel(left,r); e_z=I_z-I_0.",
+      "equation": "partial_r e_z = -v_z * partial_theta e_z + (v_0-v_z).",
+      "rule": "The final summand is an inhomogeneous forcing term and cannot be dropped.",
+      "mixed_rule": "For parameter order n and spatial orders a+1,b, differentiate the product by the existing finite binomial state/radial/angular rule and add the same (n,a,b)-jet of v_0-v_z. The full-integral recurrence90 alone must not be mislabeled as a homogeneous recurrence for e.",
+      "actual_speed_identity": "Reviewed122 proves the literal corrected speed equals the original minus speed plus returnCorrectionVelocityLinear at the same actual R.residual. It uses surjectivity of the very same flow and uniqueness of HasDerivAt.",
+      "actual_transport_system": "Main N01ReturnTransportRecurrences provides the genuine inverse-slope recurrence and the pulled-displacement recurrence with actual corrected transport speed; jointMixedDiagonal_add_triple_mul supplies exactly the chi' * A * Z term.",
+      "scope_to_preserve": "Only use the strong lower bounds on the retained buffer. Off that buffer, use the actual cutoff germs/unchanged original-flow formulas; do not extend the buffer lower bound to a whole component.",
+      "all_order_gap": "A fixed-base numerical radial induction with per-parameter-order losses, retained height gain and this forcing term remains to be written and independently reviewed."
+    },
+    "known_weak_interfaces": [
+      {
+        "module": "WeightedJointMixedInterpolation",
+        "declaration": "UniformWeightedJointGrowth.mixed_diagonal_spatial_interpolation",
+        "actual_order": "nmax is an input, then exists B",
+        "reason": "Proof selects interpolation with loss nmax+loss; not a base uniform in all parameter orders."
+      },
+      {
+        "module": "N01TransportAngularInterpolation",
+        "declaration": "returnCorrectionPulledDisplacement_angular_diagonal_interpolation and companion wrappers",
+        "actual_order": "nmax is an input, then exists B",
+        "reason": "The actual tower identities and field equations are reusable, but the numerical quantifier order is too weak for CurrentJets."
+      },
+      {
+        "module": "N01TransportVelocityMixedGrowth",
+        "declaration": "N01Properties.returnCorrectionVelocity_flatMixedGrowth",
+        "actual_order": "nmax is an input, then exists B",
+        "reason": "JV retains H^(3/4); the supplied-residual JE conclusion has factor1. The theorem title 'fixed-loss' is not evidence of a base before every parameter order."
+      }
+    ]
+  },
+  "exact_existing_signatures": {
+    "kernel": "theorem coupled_circle_kernel_grading_bounds :\n    ∃ base loss : ℕ, ∀ (r k s : ℕ) (R : ℝ), 1 ≤ R →\n      ∃ C : ℝ, 0 ≤ C ∧ ∀ ψ : M.Space, M.grading base ψ ≤ R →\n        ∀ (v : M.Space) (w : Fin k → M.Space),\n          M.grading s (coupledCircleKernel hD hT hγ hM hI r k ψ v w) ≤\n            C * coupledCircleKernelMajorant M base (r + s + loss) ψ (Fin.cons v w)",
+    "genuine_forward_tower": "theorem exists_circleChartComposition_smoothDirections\n    (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)\n    (hD : IsAccumulatingProfile D) (hγ : 0 < γ)\n    (hinterp : HasInterpolation S.grading) (travel : ℕ → ℝ) :\n    ∃ J : SmoothDirections univ\n      (fun x : S.Space × S.Space =>\n        circleShiftedChartComposeContinuousLinear hS hT hD hγ travel x.1 x.2),\n      ∀ n x (v : Fin n → S.Space × S.Space),\n        S.decode (J.D n x v) = circleChartCompositionJets hS travel n x v",
+    "actual_raw_increment": "theorem N01Properties.sectorCoefficientTower_bound\n    (hN : N01Properties D T S C base loss ε) (k s : ℕ) :\n    ∃ B : ℝ, 0 < B ∧ ∀ m i a b p (hab : a + b ≤ s) (hp : p.1 ∈ D.cells m),\n      ∀ z ∈ sectorNeighborhood S base ε ε, ∀ v : Fin k → (StateDirections S × ℝ),\n        |(hN.sectorCoefficientTower m i a b p hp).D k z v| ≤\n          B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B *\n          oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)\n            base (s + loss) z v",
+    "actual_original_speed": "theorem N01Properties.minusCharacteristicSpeed_strip_joint_growth\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)\n    (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))\n    (l h : ℕ → ℝ) (hl : ∀ m, C.left m < l m) (hh : ∀ m, h m < C.right m)\n    {lam P : ℝ} (hlam : 0 < lam) (hP : 0 ≤ P)\n    (hpositive : ∀ z ∈ stateNeighborhood S C base ε, ∀ (m : ℕ) (p : PolarPoint),\n      p.1 ∈ Ioo (l m) (h m) →\n      let d := lam * radialE (D.cellIndex (j m)) ^ (-P) / 2\n      d ≤ (originalCoefficients D S C z).a p ∧\n      d ^ 2 ≤ (originalCoefficients D S C z).b p ^ 2 -\n        (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p)\n    (K : ∀ m, SmoothDirections\n      (sectorNeighborhood S base ε ε ×ˢ (Ioo (l m) (h m) ×ˢ univ))\n      (fun x : (StateDirections S × ℝ) × PolarPoint =>\n        minusCharacteristicSpeed (originalCoefficients D S C (liftSectorParameter S C x.1)) x.2)) :\n    ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧\n      UniformWeightedJointGrowth (pairGrading (sectorGrading S) realGrading)\n        (fun m => radialE (D.cellIndex (j m))) K B L",
+    "actual_residual_identity": "theorem N01Properties.sectorReturnResidualCircle_eq_of_N02\n    (z : StateDirections S × ℝ) (hz : z ∈ sectorNeighborhood S base ε ε) :\n    hN.sectorReturnResidualCircle hS hT z = R.residual (liftSectorParameter S C z)",
+    "product_fixed_orders": "theorem circleProduct_oneHigh_bound\n    (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)\n    (hD : IsAccumulatingProfile D) (hγ : 0 < γ)\n    (hinterp : HasInterpolation S.grading) :\n    ∃ base loss : ℕ, ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ u v : S.Space,\n      S.grading s (circleProductBilinear hS hT hD hγ u v) ≤\n        C * (S.grading (s + loss) u * S.grading base v +\n          S.grading base u * S.grading (s + loss) v)"
+  },
+  "existing_source_fingerprints": [
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleChartCompositionJets",
+      "path": "src/ContinuousFlexibility/Analysis/CircleChartCompositionJets.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "78ee43e48a7c8104ef977bd527f82f572f0ba107",
+      "sha256": "26d8489820d9b56af3f99caa2b7633aecc5cb475776d6c484698f518c517b3a6",
+      "utf8_bytes": 18723,
+      "lines": 367,
+      "read_scope": "Full relevant actual source/provider read in the ongoing fixed-base route; this blueprint is not a substitute for a candidate peer review."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleCompositionJetModels",
+      "path": "src/ContinuousFlexibility/Analysis/CircleCompositionJetModels.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "3877b674f0f5f1c154d7b754225e9e946032aff3",
+      "sha256": "7250c66e784f077b06a1415e8b3c93ab23b9fa9cf6de49fd9ff7d46f645fa8b6",
+      "utf8_bytes": 11957,
+      "lines": 241,
+      "read_scope": "Full relevant actual source/provider read in the ongoing fixed-base route; this blueprint is not a substitute for a candidate peer review."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleCompositionSmoothDirections",
+      "path": "src/ContinuousFlexibility/Analysis/CircleCompositionSmoothDirections.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "e18aa8ce1e77ebdc960d721a286e9ffdb7b58632",
+      "sha256": "aa517f48d3ea24278d0f4b7ef1b1a7e23547d22ee54b5cd09d1af73f8d259def",
+      "utf8_bytes": 5725,
+      "lines": 112,
+      "read_scope": "Full relevant actual source/provider read in the ongoing fixed-base route; this blueprint is not a substitute for a candidate peer review."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CoupledCircleCompositionRealization",
+      "path": "src/ContinuousFlexibility/Analysis/CoupledCircleCompositionRealization.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "c0b4ada33ad03e522aed5a3a52d8ef461bec9be3",
+      "sha256": "08ae5c8b3e993e1db595d5a4ee79e5711910bfac1f89a7871d7a42ced29223f0",
+      "utf8_bytes": 7809,
+      "lines": 151,
+      "read_scope": "Full relevant actual source/provider read in the ongoing fixed-base route; this blueprint is not a substitute for a candidate peer review."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleTranslationUniformBounds",
+      "path": "src/ContinuousFlexibility/Analysis/CircleTranslationUniformBounds.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "29683e9c974fecbcd03fef36251ebb8b0061c485",
+      "sha256": "7ef561296693115b33d9daa18e66efb1778b028ac5d558696449a73af322b79f",
+      "utf8_bytes": 6812,
+      "lines": 144,
+      "read_scope": "Full relevant actual source/provider read in the ongoing fixed-base route; this blueprint is not a substitute for a candidate peer review."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleAverageCompositionSmoothTame",
+      "path": "src/ContinuousFlexibility/Analysis/CircleAverageCompositionSmoothTame.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "da25ed949924696c8c3f82e87ffc9e8117b20653",
+      "sha256": "28b004db87235200fbdae2c6c2af62af485d5c03928c04be09613bcdc85ede5c",
+      "utf8_bytes": 5901,
+      "lines": 123,
+      "read_scope": "Full relevant actual source/provider read in the ongoing fixed-base route; this blueprint is not a substitute for a candidate peer review."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleProductSmoothTame",
+      "path": "src/ContinuousFlexibility/Analysis/CircleProductSmoothTame.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "d442ac2f3732e0d66b0392699d9e31c8c694333a",
+      "sha256": "4eca07694ef2636151d94f3ce7fc83d5e3beffac7e0055c89c9eff881fbc40d5",
+      "utf8_bytes": 17436,
+      "lines": 359,
+      "read_scope": "Public genuine product/CML identities and fixed base product bound read; prior source review exists, this note is not a new full peer."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+      "path": "src/ContinuousFlexibility/Analysis/TameElementaryCalculus.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "sha256": "8970cb3def322b3ecaf1d4c717754fc68f57d4a63d4ed82023a7d4fae5ac9b09",
+      "utf8_bytes": 23021,
+      "lines": 512,
+      "git_blob": "bc38b3601334a7b76a3eda9f3602c4d3b2440423",
+      "read_scope": "Public quadratic jets and actual quadratic-tower cases read; not a new full review of all 512 lines."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsUnitIntegral",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsUnitIntegral.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "524d2fbeddf977df987df89dc5547e823629fdc6",
+      "sha256": "75475eec0adf477fa67fe884d57428b1e74f52a771dd135a514d243f4f0ec308",
+      "utf8_bytes": 7456,
+      "lines": 161,
+      "read_scope": "Full relevant actual source/provider read in the ongoing fixed-base route; this blueprint is not a substitute for a candidate peer review."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ProjectiveUnitIntegral",
+      "path": "src/ContinuousFlexibility/Analysis/ProjectiveUnitIntegral.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "cea38f424190308e1420d5e3f4a61cebc50fce31",
+      "sha256": "d911ba956e50cf3be5628e2118e997be02e4fab255a41bf665730a9c412881f7",
+      "utf8_bytes": 8169,
+      "lines": 175,
+      "read_scope": "Full relevant actual source/provider read in the ongoing fixed-base route; this blueprint is not a substitute for a candidate peer review."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnVelocityUniformBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnVelocityUniformBounds.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "6a54e8cd9550b1e8d18e27069161bd1d80fc8fe2",
+      "sha256": "d166edeb5c1c0f9d3de327a381413c4bcaa9507e5e05c77d205243c24bb5303c",
+      "utf8_bytes": 21829,
+      "lines": 362,
+      "read_scope": "Full relevant actual source/provider read in the ongoing fixed-base route; this blueprint is not a substitute for a candidate peer review."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "path": "src/ContinuousFlexibility/Analysis/TameMultilinearNormalization.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "utf8_bytes": 9718,
+      "lines": 204,
+      "read_scope": "Full source read in this read-only pass."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CoefficientParameterTower",
+      "path": "src/ContinuousFlexibility/Analysis/N01CoefficientParameterTower.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "cd39fe6442e946b6dbc5c7b6e5bb1df7088461c3",
+      "sha256": "63683c286d4cd93f8fa6c100453956c1c6a3b56aa1a93ce98e90dd4967af4bb0",
+      "utf8_bytes": 5991,
+      "lines": 118,
+      "read_scope": "Full source read in this read-only pass."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01OriginalCoefficientTameBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01OriginalCoefficientTameBounds.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "2882b8f1346b141ca00fc4a465fa14235e0abc57",
+      "sha256": "be33de53e6b62482895e27484fa4812c68b1753446cf385242ec16f589efb03f",
+      "utf8_bytes": 12097,
+      "lines": 231,
+      "read_scope": "Full source read in this read-only pass."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CharacteristicJointGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/N01CharacteristicJointGrowth.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "b95f6b480dcf1aa6634d4591b24ae2125b645f9a",
+      "sha256": "41b21de7ebdb4b635f1b2b83657884713a0d3ca13b98c2ef69c64f6d09e3c30b",
+      "utf8_bytes": 24803,
+      "lines": 435,
+      "read_scope": "Full source read in this read-only pass."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WeightedJointComposition",
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointComposition.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "b3a73752bec84738dfc1f85cae1ddad39718e934",
+      "sha256": "7a04fb5661645cbd20a15252deadf05f732c3b84505141c89867f481bafd41b2",
+      "utf8_bytes": 7349,
+      "lines": 144,
+      "read_scope": "Full source read in this read-only pass."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WeightedJointMixedInterpolation",
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointMixedInterpolation.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "64a01fe0496cce318f88950cb05d103165f0c2b3",
+      "sha256": "5dda69f03b83426456b8c1ca085347d9ba27ac78c42f23ba56849d339c07bf70",
+      "utf8_bytes": 4108,
+      "lines": 87,
+      "read_scope": "Full source read in this read-only pass."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01TransportAngularInterpolation",
+      "path": "src/ContinuousFlexibility/Analysis/N01TransportAngularInterpolation.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "33e32a0bd6706814d68eacac0eda98bdf1232735",
+      "sha256": "57dc5e67c0e5f656159cd2b4f6603e41a61184667eb778befbba7d393c50cf18",
+      "utf8_bytes": 15641,
+      "lines": 275,
+      "read_scope": "Full source read in this read-only pass."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01TransportVelocityMixedGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/N01TransportVelocityMixedGrowth.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "55ce14f7eb28990cfb2faf19ff844ec3957607e7",
+      "sha256": "387bc3e28cb7761a9cc86a48ce1e0f377d296d894c5814b537ce6de2cf4643e8",
+      "utf8_bytes": 50524,
+      "lines": 865,
+      "read_scope": "Selected actual growth inputs, public final theorem and complete final assembly block read; NOT a full independent review of this 865-line source."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnTransportRecurrences",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnTransportRecurrences.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "c7392c229a019eeef398b8338edca3218d62ef15",
+      "sha256": "4e9e551d034ac9265d5574ea33f1a2087e3e94d0b27a2f6663d37e4517c32fa1",
+      "utf8_bytes": 8354,
+      "lines": 164,
+      "read_scope": "Full source read in this read-only pass."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ResidualUniformBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01ResidualUniformBounds.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "278da0d7202d16c0fceb30d4f63421b47061641d",
+      "sha256": "034099ca8fc6162f801012223aa784b9f2481f1752be5c787c55ea47209e8ebd",
+      "utf8_bytes": 4049,
+      "lines": 82,
+      "read_scope": "Full source read in this read-only pass."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualRadialCellComparison",
+      "path": "src/ContinuousFlexibility/Analysis/ActualRadialCellComparison.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "3348ac15c7a5b9f11d94cac0972eeddbebc2f6e5",
+      "sha256": "2742cf2727e450078cfebcf7363cc4b824846af5b25c3e11f304dddfebc726fa",
+      "utf8_bytes": 2568,
+      "lines": 61,
+      "read_scope": "Full source read in this read-only pass."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowSamplePrefactor",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowSamplePrefactor.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "62d01175dace47d6da9c87e1587a7118acce80aa",
+      "sha256": "97d0acac56b685e4e30499e752f9473266793ac37549dd5fcdb32e2818307a08",
+      "utf8_bytes": 2917,
+      "lines": 64,
+      "read_scope": "Full source read in this read-only pass."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialSampleShift",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialSampleShift.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "e79e27788e1c853bed9950e91d7d121995ab1508",
+      "sha256": "58b0285c60e26605a013ba3d580d17e37aef1fa450622b13c458227cb3aa8f74",
+      "utf8_bytes": 8706,
+      "lines": 175,
+      "read_scope": "Full source read in this read-only pass."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnCircleUniformBounds.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "a9b6d7a92da85f46f18f84563d4b1d29f333910a",
+      "sha256": "a5cdc37d50959078df17dfdee12b52f3c8dadcc2b5b90e3980ddd9edadaf4716",
+      "utf8_bytes": 11986,
+      "lines": 209,
+      "read_scope": "Full relevant actual source/provider read in the ongoing fixed-base route; this blueprint is not a substitute for a candidate peer review."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily",
+      "path": "src/ContinuousFlexibility/Analysis/TameUnitIntegralLinearFamily.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "f6269f9eb372fe9acaf71533c402bcd66d95e50d",
+      "sha256": "b186680556554b2ca94bda82adc8f327febd9737c42b65e70598e6d74eabea88",
+      "utf8_bytes": 6267,
+      "lines": 134,
+      "read_scope": "Full source read for the actual integral and grading contraction APIs; no new full-DAG readiness claim."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleUnitIntegral",
+      "path": "src/ContinuousFlexibility/Analysis/CircleUnitIntegral.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "539887de9877614276395ffbbadb8a8ab8d8904c",
+      "sha256": "9bbcfd648e9fc3da76d7120d167752a6572296f702a5a41e2337b126aa0a301d",
+      "utf8_bytes": 5300,
+      "lines": 112,
+      "read_scope": "Full source read for the actual integral and grading contraction APIs; no new full-DAG readiness claim."
+    }
+  ],
+  "historical_actual_tower_sources": [
+    {
+      "file": "N04ActualMinusFirstIntegralTransportTowers.lean",
+      "git_blob": "ecd589a83d268c6b10235e9a22f06ed21dc0ed10",
+      "sha256": "0cd1722af35f306bb817d446e271310285d6db2fe714d62aeb4741bc1767f1c4",
+      "lines": 90,
+      "stored_at": {
+        "commit": "4a8e25855b690da1fec1626ed9622699c561ca1e",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-31/positive/reconstructed/N04ActualMinusFirstIntegralTransportTowers.lean"
+      },
+      "read_scope": "Full exact recovered source read. Existing prior peer remains historical; main1ece import/field-signature rebinding is still a separate obligation."
+    },
+    {
+      "file": "N04ActualMinusSpeedStripTower.lean",
+      "git_blob": "f0ee10cf1c352acd5eaf85792f2f0b32ba9be796",
+      "sha256": "231e649dd57453716bbeb036dcaa4c4c0a1793d6198bedd0d482864c901bbfbf",
+      "lines": 122,
+      "stored_at": {
+        "commit": "4a8e25855b690da1fec1626ed9622699c561ca1e",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-31/positive/reconstructed/N04ActualMinusSpeedStripTower.lean"
+      },
+      "read_scope": "Full exact recovered source read. Existing prior peer remains historical; main1ece import/field-signature rebinding is still a separate obligation."
+    },
+    {
+      "file": "N04MinusFirstIntegralMixedJets.lean",
+      "git_blob": "886214bcb785a46d3c95369ce8afed8324f6400c",
+      "sha256": "8d53fcc78eb0c9a752a26562094c50e0a15085d028692054b6de32d3d9478bbc",
+      "lines": 82,
+      "stored_at": {
+        "commit": "34563c9cf53ad95b24e2c22d7f1c1c001559db99",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-29/positive/reconstructed/N04MinusFirstIntegralMixedJets.lean"
+      },
+      "read_scope": "Full exact recovered source read. Existing prior peer remains historical; main1ece import/field-signature rebinding is still a separate obligation."
+    },
+    {
+      "file": "N04ActualTravelMixedTowers.lean",
+      "git_blob": "661b921baf14f0bd058105116fbcc2e647bcc999",
+      "sha256": "cb1aa5f610ab01e37b6b8fb99c0b64f1fb0b6d31e4a5cdee275aa5e8083b9813",
+      "lines": 145,
+      "stored_at": {
+        "commit": "6dffbb0872c2d418d882746ff6f83be838b18563",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-30/positive/reconstructed/N04ActualTravelMixedTowers.lean"
+      },
+      "read_scope": "Full exact recovered source read. Existing prior peer remains historical; main1ece import/field-signature rebinding is still a separate obligation."
+    }
+  ],
+  "retained_producer": {
+    "file": "root/reconstructed/N04RetainedCorrectionNumericalWitness.lean",
+    "git_blob": "6ba76a32edfe98908b3b1d44f9af3c7e3d72bfe5",
+    "sha256": "15cc71a282ea4b0aaf371c968dc37a627b41b1407dff8f25e61f613e70c71bea",
+    "owner_sha256": "32919423d17d7d69e54be4341f67eb38615e1316c2419149e157a4eb17b2b4ed",
+    "scope": "Full source reread. Existing reviewed producer is historical; its main1ece provider selection must be explicitly rebound before installation."
+  },
+  "pinned_removed_slot_apis": [
+    {
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Algebra/BigOperators/Fin.lean",
+      "git_blob": "95092dd72334eb133dfc410d6d796b4cacc0fdfc",
+      "declarations": [
+        "Fin.prod_univ_succAbove",
+        "Fin.sum_univ_succAbove"
+      ],
+      "read_scope": "Relevant declarations and implementations checked; no new full-file peer claim."
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Algebra/BigOperators/Group/Finset/Basic.lean",
+      "git_blob": "c3b552527a22e70a3d2535dfa37841520dcba3b0",
+      "declarations": [
+        "Finset.prod_erase"
+      ],
+      "read_scope": "Relevant declaration and product identity checked."
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Logic/Equiv/Fin/Basic.lean",
+      "git_blob": "2b22dc76cd496d37f99e823a6eb6626e5e68c503",
+      "declarations": [
+        "finSuccAboveEquiv"
+      ],
+      "read_scope": "Optional reindexing API checked; the proposed scalar-product route does not require a new equivalence lemma."
+    }
+  ],
+  "next_execution_when_authorized": [
+    "Write and freeze one complete actual full-forward fixed-base leaf from the kernel formula and same-J normalization; obtain independent peer.",
+    "Use the actual public unit-integral and quadratic jet formulas to cover the remaining finite circle operations, without new abstract final-bound premises.",
+    "Assemble the actual state chain on one common domain and one fixed base by selected328; transfer to the given actual towers using uniqueness.",
+    "Carry exact retained153 buffer data into the original-speed and actual-correction transport system. Add the coefficient-increment forcing estimate with its unabsorbed height tag.",
+    "Finish a genuinely fixed-base radial numerical induction; reject existing nmax-dependent low-base wrappers as substitutes.",
+    "Only after the full tower estimate, use its k=1 segment bound and reference zero to remove the additive constant in the CurrentJets difference clause. No final CurrentJets claim is made here."
+  ]
+}

@@ -1,0 +1,275 @@
+{
+  "schema": "n04-ci165-positive-two-repairs-candidate-v1",
+  "status": "SOURCE_CANDIDATE_NOT_COMPILED_PENDING_INDEPENDENT_REVIEW",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "owner": "positive",
+  "actual_head": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+  "actual_tree": "49237cc2b902342c4a42b86d653fb00770d65d60",
+  "evidence": {
+    "blob": "c4e2fd658a480519785e462f8e7a0807a3bdd33d",
+    "sha256": "ae2b77335a1031c00dcc3c4560c66ff72d176cd73289fa50d1b26c59b690e033",
+    "full_log": {
+      "name": "n04-ci-165.log",
+      "blob": "ca10b6e0164bf9c98dca5cfeb1c9496576def864",
+      "sha256": "4b6e6fe5d74b854e5aa19dbe802336b44bc7e45ea5acbbb534b752843ef019d3",
+      "bytes": 162038,
+      "lines": 1207,
+      "downloaded_once": true
+    },
+    "used_cached_evidence_only": true,
+    "label": "CI165 focused positive failure evidence supplied by root as the exact Git blob"
+  },
+  "files": [
+    {
+      "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry",
+      "active_path": "src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean",
+      "before": {
+        "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+        "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+        "lines": 168
+      },
+      "candidate": {
+        "path": "positive/repair165/PositiveChartRangeGeometry.lean",
+        "blob": "37c324a711fd04efbc92d5df436ea670ce0dbfd9",
+        "sha256": "75ced3f23a0d0ff26ccae06abb8695ca6af7d59322daa975d04bacd53a0caddd",
+        "lines": 169,
+        "utf8_bytes": 7887
+      },
+      "diff": {
+        "path": "positive/repair165/PositiveChartRangeGeometry.diff",
+        "blob": "e9c757ab8bcebf45dc7c12ae1d35561e7fcebc06",
+        "sha256": "5517296f883ac7ba1ee12296d7e6b8bb3f37a62da6353f7f241e8dc04857758b",
+        "additions": 10,
+        "deletions": 9,
+        "net_lines": 1
+      },
+      "exact_replacements": [
+        {
+          "before": "    simpa only [Function.rightInverse_invFun hYbij.2] using hxy",
+          "after": "    simpa only [Function.rightInverse_invFun hYbij.2 x,\n      Function.rightInverse_invFun hYbij.2 y] using hxy"
+        },
+        {
+          "before": "    · simpa only [hleft] using hmono hp.1.1",
+          "after": "    · simpa only [positiveReferenceCylinderChart, hleft] using hmono hp.1.1"
+        },
+        {
+          "before": "    · simpa only [hright] using hmono hp.1.2",
+          "after": "    · simpa only [positiveReferenceCylinderChart, hright] using hmono hp.1.2"
+        },
+        {
+          "before": "    · simpa only [hleftInv] using hmonoInv hp.1.1",
+          "after": "    · simpa only [positiveReferenceCylinderInverse, hleftInv] using hmonoInv hp.1.1"
+        },
+        {
+          "before": "    · simpa only [hrightInv] using hmonoInv hp.1.2",
+          "after": "    · simpa only [positiveReferenceCylinderInverse, hrightInv] using hmonoInv hp.1.2"
+        },
+        {
+          "before": "    · simpa only [hleft] using hmono.monotone hp.1.1",
+          "after": "    · simpa only [positiveReferenceCylinderChart, hleft] using hmono.monotone hp.1.1"
+        },
+        {
+          "before": "    · simpa only [hright] using hmono.monotone hp.1.2",
+          "after": "    · simpa only [positiveReferenceCylinderChart, hright] using hmono.monotone hp.1.2"
+        },
+        {
+          "before": "    · simpa only [hleftInv] using hmonoInv.monotone hp.1.1",
+          "after": "    · simpa only [positiveReferenceCylinderInverse, hleftInv] using hmonoInv.monotone hp.1.1"
+        },
+        {
+          "before": "    · simpa only [hrightInv] using hmonoInv.monotone hp.1.2",
+          "after": "    · simpa only [positiveReferenceCylinderInverse, hrightInv] using hmonoInv.monotone hp.1.2"
+        }
+      ],
+      "reverse_replacement_exact": true,
+      "full_public_headers": [
+        {
+          "kind": "structure",
+          "name": "PositiveChartRangeGeometry",
+          "header": "structure PositiveChartRangeGeometry\n    (F G : PolarPoint → PolarPoint) (h : PolarPoint → ℝ)\n    (l r u v : ℝ) : Prop",
+          "sha256": "439c2bad41a9840c0f556a8f1edb64d60f3eae2e41bf108cbd358117de36f41c"
+        },
+        {
+          "kind": "theorem",
+          "name": "PositiveChartRangeGeometry.bijOn",
+          "header": "theorem PositiveChartRangeGeometry.bijOn\n    {F G : PolarPoint → PolarPoint} {h : PolarPoint → ℝ} {l r u v : ℝ}\n    (H : PositiveChartRangeGeometry F G h l r u v) :\n    BijOn F (Ioo l r ×ˢ (univ : Set ℝ)) (Ioo u v ×ˢ (univ : Set ℝ)) ",
+          "sha256": "557f54842fac9757e89277d92d6ca9a127a454dc70f97fb2174fa73b2353bea1"
+        },
+        {
+          "kind": "theorem",
+          "name": "PositiveChartRangeGeometry.inverse_germs",
+          "header": "theorem PositiveChartRangeGeometry.inverse_germs\n    {F G : PolarPoint → PolarPoint} {h : PolarPoint → ℝ} {l r u v : ℝ}\n    (H : PositiveChartRangeGeometry F G h l r u v) (p : PolarPoint) :\n    CanonicalBoundaryInverseGerm F G p ∧ CanonicalBoundaryInverseGerm G F p ",
+          "sha256": "9bbb170fe2a52544f41353dfab43a13bcfb3f9e44897191c227412ebfa77915f"
+        },
+        {
+          "kind": "theorem",
+          "name": "PositiveChartRangeGeometry.boundary_fields",
+          "header": "theorem PositiveChartRangeGeometry.boundary_fields\n    {F G : PolarPoint → PolarPoint} {h : PolarPoint → ℝ} {l r u v : ℝ}\n    (H : PositiveChartRangeGeometry F G h l r u v) (hlr : l < r) :\n    MapsTo F (closure (Ioo l r ×ˢ (univ : Set ℝ))) (Icc u v ×ˢ (univ : Set ℝ)) ∧\n    MapsTo G (Icc u v ×ˢ (univ : Set ℝ)) (closure (Ioo l r ×ˢ (univ : Set ℝ))) ∧\n    (∀ p ∈ closure (Ioo l r ×ˢ (univ : Set ℝ)), G (F p) = p) ∧\n    (∀ p ∈ Icc u v ×ˢ (univ : Set ℝ), F (G p) = p) ∧\n    (∀ p ∈ closure (Ioo l r ×ˢ (univ : Set ℝ)),\n      ContDiffAt ℝ ∞ F p ∧ ContDiffAt ℝ ∞ h p ∧\n      planeJacobian F p ≠ 0 ∧ 0 < h p) ∧\n    (∀ p ∈ frontier (Ioo l r ×ˢ (univ : Set ℝ)),\n      CanonicalBoundaryInverseGerm F G p) ",
+          "sha256": "7aad69612a97b56928e124f7cfee083c8edecb9d1826764f812d71172bc21ff6"
+        },
+        {
+          "kind": "theorem",
+          "name": "PositiveChartRangeGeometry.jacobian_even",
+          "header": "theorem PositiveChartRangeGeometry.jacobian_even\n    {F G : PolarPoint → PolarPoint} {h : PolarPoint → ℝ} {l r u v : ℝ}\n    (H : PositiveChartRangeGeometry F G h l r u v) (p : PolarPoint) :\n    planeJacobian F (p.1, -p.2) = planeJacobian F p ",
+          "sha256": "d00d233ecbd76450c1e008201df145a0382d2edadca1bcf055020cb36cc4e1c6"
+        },
+        {
+          "kind": "theorem",
+          "name": "positiveReferenceCylinder_rangeGeometry",
+          "header": "theorem positiveReferenceCylinder_rangeGeometry\n    {Y H : ℝ → ℝ} {l r u v : ℝ}\n    (hY : ContDiff ℝ ∞ Y) (hYpos : ∀ x, 0 < deriv Y x)\n    (hYbij : Function.Bijective Y) (hYinv : ContDiff ℝ ∞ (Function.invFun Y))\n    (hH : ContDiff ℝ ∞ H) (hHpos : ∀ x, 0 < H x)\n    (hleft : Y l = u) (hright : Y r = v) :\n    PositiveChartRangeGeometry (positiveReferenceCylinderChart Y)\n      (positiveReferenceCylinderInverse Y) (fun p : PolarPoint => H p.1) l r u v ",
+          "sha256": "c0bc1d6243e6c998d6e203bcbebe525676643af5a61b60a0524eed41d332d700"
+        }
+      ],
+      "public_headers_unchanged": true,
+      "imports_options_scopes_unchanged": true,
+      "diagnostic_lines": [
+        111,
+        141,
+        142,
+        145,
+        146,
+        149,
+        150,
+        153,
+        154
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+      "active_path": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+      "before": {
+        "blob": "096b420be6425f39b2f5e73e4a0f60cbd9113ced",
+        "sha256": "fc2eb15c0da7e37fda9f227b906a75c801d0d628064e17e5bca4e63dae75e910",
+        "lines": 100
+      },
+      "candidate": {
+        "path": "positive/repair165/RadialReferencePrincipalFormulas.lean",
+        "blob": "1292702418d040830307436014b493ae656ab469",
+        "sha256": "eb7f1e15a3e006b588861993260128b4d93045c27eedc159f75f2b3a8c5e0aa2",
+        "lines": 105,
+        "utf8_bytes": 5250
+      },
+      "diff": {
+        "path": "positive/repair165/RadialReferencePrincipalFormulas.diff",
+        "blob": "ae21ba7963dd12ad85eaaed9fd1aec5f68f56ceb",
+        "sha256": "9f5ec951cb30995607449e4e630fe64a2f5962e4a8e41ce37864e83270b5503d",
+        "additions": 7,
+        "deletions": 2,
+        "net_lines": 5
+      },
+      "exact_replacements": [
+        {
+          "before": "      unfold divergenceOperator radialPartial angularPartial\n      rw [hrad.fderiv_eq, hang.fderiv_eq]",
+          "after": "      have hrad' := hrad.fderiv_eq (𝕜 := ℝ)\n      have hang' := hang.fderiv_eq (𝕜 := ℝ)\n      simp only [radialPartial, angularPartial] at hrad' hang'\n      unfold divergenceOperator radialPartial angularPartial\n      rw [hrad', hang']"
+        },
+        {
+          "before": "  simp only [hdiv, planeJacobian_positiveReferenceCylinderChart hY, abs_of_pos hYpos]",
+          "after": "  simp only [hdiv, planeJacobian_positiveReferenceCylinderChart\n    (p := positiveReferenceCylinderInverse Y p) hY,\n    positiveReferenceCylinderInverse, abs_of_pos hYpos]"
+        }
+      ],
+      "reverse_replacement_exact": true,
+      "full_public_headers": [
+        {
+          "kind": "theorem",
+          "name": "coordinatePrincipalDensity_radial_cylinder",
+          "header": "theorem coordinatePrincipalDensity_radial_cylinder\n    {A : SymmetricCoefficients} {Y H : ℝ → ℝ} {p : PolarPoint}\n    (hY : DifferentiableAt ℝ Y p.1) :\n    let B ",
+          "sha256": "a89a0e1eae2a97e59e2cfc9bcc5fa4ab3d4bc14ee73e5f2f5c9563ab526ad41a"
+        },
+        {
+          "kind": "theorem",
+          "name": "divergenceOperator_radial_height_of_coefficient_germs",
+          "header": "theorem divergenceOperator_radial_height_of_coefficient_germs\n    {A : SymmetricCoefficients} {w H : ℝ → ℝ} {p : PolarPoint}\n    (hw : ContDiff ℝ ∞ w) (hH : ContDiff ℝ ∞ H)\n    (ha : A.a =ᶠ[𝓝 p] (fun q : PolarPoint => w q.1))\n    (hb : A.b =ᶠ[𝓝 p] (fun _ : PolarPoint => (0 : ℝ))) :\n    divergenceOperator A (fun q : PolarPoint => H q.1) p =\n      deriv (fun r => w r * deriv H r) p.1 ",
+          "sha256": "b74c475dee316c39fe0355e1c79e3e3c813d25f6192fc64371d91c4c9fa981ec"
+        },
+        {
+          "kind": "theorem",
+          "name": "inverseChartPotential_radial_cylinder",
+          "header": "theorem inverseChartPotential_radial_cylinder\n    {A : SymmetricCoefficients} {w Y H : ℝ → ℝ} {p : PolarPoint}\n    (hw : ContDiff ℝ ∞ w) (hH : ContDiff ℝ ∞ H)\n    (hY : DifferentiableAt ℝ Y (Function.invFun Y p.1))\n    (hYpos : 0 < deriv Y (Function.invFun Y p.1))\n    (ha : A.a =ᶠ[𝓝 (positiveReferenceCylinderInverse Y p)]\n      (fun q : PolarPoint => w q.1))\n    (hb : A.b =ᶠ[𝓝 (positiveReferenceCylinderInverse Y p)]\n      (fun _ : PolarPoint => (0 : ℝ))) :\n    inverseChartPotential A (positiveReferenceCylinderChart Y)\n      (positiveReferenceCylinderInverse Y) (fun q : PolarPoint => H q.1) p =\n        H (Function.invFun Y p.1) *\n          deriv (fun r => w r * deriv H r) (Function.invFun Y p.1) /\n            deriv Y (Function.invFun Y p.1) ",
+          "sha256": "f66f1cfc46bf707dac1e0e345c4f95c44fed1d09d208fc8e179a08bad6a5f7f8"
+        }
+      ],
+      "public_headers_unchanged": true,
+      "imports_options_scopes_unchanged": true,
+      "diagnostic_lines": [
+        75,
+        98,
+        95
+      ]
+    }
+  ],
+  "source_totals": {
+    "before_lines": 268,
+    "candidate_lines": 274,
+    "net_added_lines": 6,
+    "authorized_net_limit": 35
+  },
+  "exact_causes_and_changes": [
+    "Range inverse monotonicity: instantiate the existing rightInverse_invFun equation at both actual scalar points x and y before simplification.",
+    "Range open/closed MapsTo goals: explicitly unfold only the project cylinder map/inverse in the eight existing endpoint simpa steps.",
+    "Radial flux identity: use EventualEq.fderiv_eq with scalar field ℝ, then unfold radialPartial/angularPartial in those two equations to match the already-unfolded target exactly.",
+    "Actual potential: pin the Jacobian lemma to positiveReferenceCylinderInverse Y p, then expose that project inverse definition for the displayed scalar formula."
+  ],
+  "actual_direct_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.PositiveReferenceCylinder",
+      "ref": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+      "blob": "c1c59b1c3240feeec1539a65ce0c8a8a4ec7ba48",
+      "sha256": "6ececb96b06c704d8672c58cbe2b395bf3ce8967a667b046cd09466249b5c4de",
+      "lines": 128,
+      "read": "Full source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CoordinateOperatorConstruction",
+      "ref": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+      "blob": "aef71ea652edabf9d9c4788e2c6aba6780f6c1fe",
+      "sha256": "ffbecb5ae9d0d9e40a5fd193592dde632989d3c4fb2382b118be5180f9d7f1c1",
+      "lines": 76,
+      "read": "Full source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholePositiveCanonicalFields",
+      "ref": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+      "blob": "0fb940e74988b8ccf40f317447993147847713eb",
+      "sha256": "c26cd518553a29e68647291f463bbd0b271500dd9620ea0735280f2d0a8773b2",
+      "lines": 169,
+      "read": "Full source"
+    }
+  ],
+  "mathlib_declaration_pins": [
+    {
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Analysis/Calculus/FDeriv/Congr.lean",
+      "blob": "da599f75bd35b874f08b3fb7b326c2679500eefb",
+      "sha256": "4313c8cb8eab170a664df2753f3f1a59ac7f3ecd3f405b9b34e64c966430fa73",
+      "read": "Focused exact declaration and surrounding section",
+      "actual_declarations": [
+        "Filter.EventuallyEq.fderiv_eq"
+      ]
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Logic/Function/Basic.lean",
+      "blob": "b30902e8eb9831f07f5e859a9db0ae72d8c9180d",
+      "sha256": "b22aa6fb06d95095ae8e239d2d96f611a7f53707a4cfbc4bc334446a4cc9f966",
+      "read": "Focused exact declaration and surrounding section",
+      "actual_declarations": [
+        "Function.rightInverse_invFun",
+        "Function.leftInverse_invFun"
+      ]
+    }
+  ],
+  "invariant_checks": {
+    "all_9_public_headers_byte_identical": true,
+    "all_imports_and_options_byte_identical": true,
+    "all_unlisted_bytes_unchanged": true,
+    "no_new_premises_or_final_targets": true,
+    "no_resource_limits_changed": true,
+    "no_lean_or_elaboration_run": true,
+    "no_active_files_index_refs_or_ci_changed": true,
+    "only_server_git_blobs_created": true
+  },
+  "peer_request": "Review complete source, exact replacements, cached diagnostics and actual pinned providers; performance and typechecking remain CI-only.",
+  "storage": "Original active preimages are exact existing Git blobs. Candidate and diff blobs are immutable. Proposed scratch paths await root backup attachment."
+}

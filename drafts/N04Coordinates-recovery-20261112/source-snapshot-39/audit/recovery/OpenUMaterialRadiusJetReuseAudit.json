@@ -1,0 +1,245 @@
+{
+  "schema": "N04Coordinates.ReadonlySourceRoute.v1",
+  "intended_backup_path": "audit/recovery/OpenUMaterialRadiusJetReuseAudit.json",
+  "status": "READONLY_EXACT_PROVIDER_REUSE_AND_MINIMAL_MISSING_ADAPTER; NO_NEW_LEAN; NOT_A_COMPILED_PROOF",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "author": "audit_coordinates",
+  "pins": {
+    "green164": "c796387fb555392501c81f5b8bd834936251516c",
+    "inspected_active_ci165": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+    "readonly_main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "mathlib": "c55e6e786f49471c72fbddbec5415808896aec1e"
+  },
+  "request": "Find an existing arbitrary-open-U material-radius pullback / CylinderMixedJets-to-iteratedFDeriv theorem. Preserve genuine radius jet coefficients and constants preceding U, f and y. Restrict search to relevant modules.",
+  "conclusion": {
+    "direct_arbitrary_open_U_full_derivative_conversion_exists": true,
+    "direct_name": "ContinuousFlexibility.Statements.norm_iteratedFDeriv_le_of_mixedDerivative",
+    "direct_source": "Analysis/CylinderMixedJets.lean:208",
+    "material_radius_wrapper_gap": "The relevant installed N07aMaterialPullbackJets formulas/bounds and readonly-main MaterialCoordinateJetBudget still require ContDiffOn over annularOpen D. No exact arbitrary-U material wrapper was found in the narrowly inspected modules; this is not a whole-repository absence claim.",
+    "minimal_solution": "A local-domain version of the existing one-dimensional partition identity, reusing its exact globally bounded actual radius coefficients, followed by CylinderMixedJets on the open preimage of U.",
+    "no_extension_needed": true,
+    "no_global_smoothness_assumed_for_f": true,
+    "no_domain_width_or_local_neighborhood_cost": true,
+    "no_spatial_order_or_material_exponent_loss": true
+  },
+  "exact_installed_interfaces": [
+    {
+      "name": "contDiffOn_mixedDerivative",
+      "source": "Analysis/CylinderMixedJets.lean",
+      "line": 101,
+      "contract": "IsOpen U → ContDiffOn ℝ ∞ f U → ContDiffOn ℝ ∞ (mixedDerivative a b f) U",
+      "use": "Smoothness of the actual angular-jet function at the actual physical point, before composing with a radial slice."
+    },
+    {
+      "name": "norm_iteratedFDeriv_le_of_mixedDerivative",
+      "source": "Analysis/CylinderMixedJets.lean",
+      "line": 208,
+      "contract": "hU:IsOpen U; hf:ContDiffOn ℝ ∞ f U; hp:p∈U; 0≤M; all a+b=n mixed derivative norms at p ≤M ⇒ norm(iteratedFDeriv ℝ n f p)≤2^n*M",
+      "use": "Directly applicable to every true open piece and to Φ⁻¹ U. It does not require an annulus, a compact neighborhood or global smoothness."
+    },
+    {
+      "name": "iteratedDeriv_materialRadius_bounded",
+      "source": "Scalar/WeightedMaterialRadiusJets.lean",
+      "line": 80,
+      "contract": "IsMaterialData D T → ∀ n, ∃ C≥0, ∀ x:ℝ, |iteratedDeriv n T.radius x|≤C",
+      "use": "Actual supplied radius, with a bound on the entire material axis. No separately chosen coordinate or radius surrogate."
+    },
+    {
+      "name": "n07aRadiusJetCoefficient",
+      "source": "Analysis/N07aMaterialPullbackJets.lean",
+      "line": 24,
+      "contract": "For c:OrderedFinpartition a, the coefficient is ∏ j, iteratedDeriv (c.partSize j) T.radius x.",
+      "use": "Retain this literal coefficient in the local formula."
+    },
+    {
+      "name": "n07aRadiusJetCoefficient_bounded",
+      "source": "Analysis/N07aMaterialPullbackJets.lean",
+      "line": 41,
+      "contract": "For each c, ∃ Kc≥0, ∀ x, |n07aRadiusJetCoefficient T c x|≤Kc",
+      "use": "Choose Kc before U/f/y; finite sums produce all required constants."
+    },
+    {
+      "name": "n07a_materialPullback_zero_mixedDerivative",
+      "source": "Analysis/N07aMaterialPullbackJets.lean",
+      "line": 53,
+      "limitation": "Current public hf is smoothness on all annularOpen D.",
+      "reuse": "The numerical formula and final simp step are unchanged; only the proof of smoothness of the scalar slice g is localized to U."
+    },
+    {
+      "name": "n07a_materialPullback_zero_mixedDerivative_bound",
+      "source": "Analysis/N07aMaterialPullbackJets.lean",
+      "line": 80,
+      "limitation": "Current public hf is smoothness on all annularOpen D.",
+      "reuse": "The finite-partition absolute-value calculation already places K before f/b/p/W and uses jets only at the single physical point."
+    }
+  ],
+  "preferred_local_formula": {
+    "radius_map": "Φ(y)=(T.radius y.1,y.2)",
+    "minimal_inputs": [
+      "hT:IsMaterialData D T",
+      "U:Set PolarPoint and hU:IsOpen U",
+      "f:PolarPoint→ℝ and hf:ContDiffOn ℝ ∞ f U",
+      "y:PolarPoint and hΦy:Φ(y)∈U",
+      "a,b:ℕ"
+    ],
+    "asserted_formula_to_prove": "mixedDerivative a b (fun q => f (T.radius q.1,q.2)) y = Σ c:OrderedFinpartition a, mixedDerivative c.length b f (T.radius y.1,y.2) * n07aRadiusJetCoefficient T c y.1",
+    "exact_connection": [
+      "Let g(r)=iteratedDeriv b (fun θ => f(r,θ)) y.2. The source f is the original total function; no modification outside U is made.",
+      "Use contDiffOn_mixedDerivative hU hf 0 b, then ContDiffOn.contDiffAt at Φ(y) with hU.mem_nhds hΦy.",
+      "Compose that ContDiffAt function with the genuine smooth slice r↦(r,y.2), at r=T.radius y.1. Simplifying mixedDerivative 0 b and iteratedDeriv_zero yields ContDiffAt ℝ ∞ g (T.radius y.1). This does not choose a common infinity-smooth neighborhood.",
+      "Use actual hradius:ContDiff ℝ ∞ T.radius from the existing hT field.",
+      "Apply pinned iteratedDeriv_comp_eq_sum_orderedFinpartition to g and T.radius, with finite radial order a≤∞.",
+      "The unchanged mixedDerivative/materialPullback-zero simplification gives the literal partition formula. The angular coordinate is identity, so no new angular chain coefficients occur."
+    ],
+    "qualification": "ContDiffOn∞ on the actual open U is the sufficient hypothesis accepted by the existing CylinderMixedJets APIs. This report does not claim that an isolated ContDiffAt∞ assumption yields a single infinity-smooth neighborhood."
+  },
+  "minimal_uniform_full_jet_adapter": {
+    "logical_header": "For hT and every N, ∃ C≥0, ∀ U, IsOpen U → ∀ f, ContDiffOn ℝ ∞ f U → ∀ y, Φ(y)∈U → ∀ W, 0≤W → (∀ a b, a+b≤N → |mixedDerivative a b f (Φ(y))|≤W) → ∀ k≤N, ‖iteratedFDeriv ℝ k (f∘Φ) y‖≤C*W.",
+    "quantifier_order": "D,T,hT,N → C → U,hU,f,hf,y,hΦy,W,hW and all finite-order choices. C is independent of domain, function, point, component, state and directions.",
+    "constants": [
+      "For each a≤N and each ordered partition c of a, choose the existing actual global coefficient bound Kc.",
+      "Set Ka=Σc Kc, and P_N=Σa=0..N Ka. All Ka and P_N are nonnegative and selected before U/f/y.",
+      "The local formula gives each pullback mixed jet a+b≤N the bound Ka*W≤P_N*W, since c.length≤a.",
+      "V=Φ⁻¹ U is open because the actual radius is globally smooth. Φ maps V into U tautologically; hf.comp with Φ yields ContDiffOn∞(f∘Φ)V.",
+      "CylinderMixedJets at y∈V gives the k-th full derivative ≤2^k P_N W≤2^N P_N W.",
+      "Thus C_N=2^N P_N works for all k≤N. Add 1 if a strictly positive coefficient is desired. No E0≥1 assumption is involved."
+    ],
+    "preserves": [
+      "same actual T.radius",
+      "same actual f",
+      "same evaluation point Φ(y)",
+      "same physical mixed-derivative order N",
+      "same material weight/exponent evaluated at Φ(y)"
+    ],
+    "cost_explanation": "The physical pointwise envelope W is frozen for this pointwise estimate; it is not differentiated. Multiplying by C_N introduces no radius-of-U inverse or additional E0/M power."
+  },
+  "alternative_existing_mathlib_application": {
+    "theorem": "norm_iteratedFDerivWithin_comp_le",
+    "pinned_lines": "Mathlib/Analysis/Calculus/ContDiff/Bounds.lean:446–451",
+    "verified_actual_header": "For hg:ContDiffOn 𝕜 N g t, hf:ContDiffOn 𝕜 N f s, n≤N, UniqueDiffOn t/s, MapsTo f s t, x∈s, outer jet bounds through n by C and inner positive-order jet bounds by D^i, the n-th within derivative of g∘f is ≤n!*C*D^n.",
+    "open_domain_instantiation": "Take outer g=the actual physical field, t=U, inner f=Φ, s=Φ⁻¹ U. Both domains are open, hence unique-differentiable. Conversion of within to ordinary derivatives is on these genuine open domains.",
+    "constant_formula": "With globally chosen positive-jet bounds B_i for Φ, Q=1+Σi=1..N B_i, outer bound 2^N W gives N!*2^N*Q^N*W.",
+    "existing_main_example": "MaterialCoordinateJetBudget.materialCoordinate_fderiv_pointwise_budget is this argument specialized to t=annularOpen D and s=univ. The arbitrary-U variant only changes source/target domains and membership.",
+    "pin_caution": "MaterialCoordinateJetBudget, MaterialCoefficientMultipliers and Analysis.MaterialRadiusJets are absent from inspected active 794d; do not silently import them from main1ece. The preferred ordered-partition route uses already installed providers."
+  },
+  "rejected_shortcuts": [
+    "Do not pass actual piece smoothness as whole-annulus ContDiffOn.",
+    "Do not assume f is globally smooth or replace it by an uncontrolled extension.",
+    "Do not use arbitrary compact-neighborhood estimates whose constants are chosen after U/f/y.",
+    "Do not substitute an arbitrary radius function or only local radius jets for the supplied globally bounded T.radius jets.",
+    "Do not apply norm_iteratedFDeriv_comp_le' with range Φ⊆U; only Φ(y)∈U is known. Use within-composition on Φ⁻¹ U or the local one-dimensional formula.",
+    "Do not confuse ReturnCoefficientLocalBounds parameter-neighborhood locality with physical open-U locality.",
+    "Do not transport opposite inverse/source fields to u>1; Stage C/D still keeps those fields on target canonicalOpen. This radius adapter begins only after the actual physical field is smooth on its true U."
+  ],
+  "inspected_sources": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aMaterialPullbackJets.lean",
+      "blob": "3162470bd6b9ac60c8abb8ce498955f590bf9cf9",
+      "sha256": "44867b7d37f5d7a5b7e23052ad386f56e597b035b51da1a5522844f017765217",
+      "bytes": 4732,
+      "lines": 99,
+      "pin_status": "green164 and active CI165 exact; readonly main identical"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CylinderMixedJets.lean",
+      "blob": "3dc20e779221e16f9be32dff13d22e978b5a048d",
+      "sha256": "ae19c58f66f0778411f64607f52acf0525aceb27036c9d1ac1825e0e46e3614d",
+      "bytes": 13153,
+      "lines": 253,
+      "pin_status": "green164 and active CI165 exact; readonly main identical"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Scalar/WeightedNormalizedMaterialJets.lean",
+      "blob": "2438599fbadc588c1c11a97f56fbac4874d8e2de",
+      "sha256": "8fa05a1867c47e3cdf4fb53b8462de2296670f99da7fe02e938f332d54fbc1ce",
+      "bytes": 10048,
+      "lines": 190,
+      "pin_status": "green164 and active CI165 exact; readonly main identical"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Scalar/WeightedMaterialRadiusJets.lean",
+      "blob": "ae2caa0785c0314311e671084dd40f4e312d4442",
+      "sha256": "f7e5e778262df0a7503e16d8c62d3edb69940f0bfe517cca2bfaafd2f4d3cb6f",
+      "bytes": 7781,
+      "lines": 163,
+      "pin_status": "green164 and active CI165 exact; readonly main identical"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialCoordinateJetBudget.lean",
+      "blob": "c91e7a5e835943f29464fe60d659000fa70f7f79",
+      "sha256": "b9b122cdff7f6e4632513b7fa98220f45b2a8c15dd641a4605b6364c9cb810bb",
+      "bytes": 7580,
+      "lines": 140,
+      "pin_status": "readonly main1ece only; absent green164/active CI165"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialCoefficientMultipliers.lean",
+      "blob": "7f50f6910774e5db7649f373f339cd0c2dd9b239",
+      "sha256": "1d21be56d2fdc1a5d309fa44544a355a2a4f0237c15a801f1404d9b7de96490b",
+      "bytes": 8846,
+      "lines": 166,
+      "pin_status": "readonly main1ece only; absent green164/active CI165"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialRadiusJets.lean",
+      "blob": "8764c134a2ebbe76f19370b1da5365bbe7a5a716",
+      "sha256": "dc32ff6361aaf9d007f119a8ab8717482f2b86090cfa8ceef23fec9206f78ee4",
+      "bytes": 7552,
+      "lines": 159,
+      "pin_status": "readonly main1ece only; absent green164/active CI165"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialCoordinateParameterDerivatives.lean",
+      "blob": "171655349c0bd456560a3b877ffbee28a5307758",
+      "sha256": "69bd3d1fa2eab4ae93c56bc53223275be539eada32f77ac9d66f9f5a96bb4819",
+      "bytes": 8275,
+      "lines": 159,
+      "pin_status": "readonly main1ece only; absent green164/active CI165"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCoefficientLocalBounds.lean",
+      "blob": "fa259120cbee9bf240c57ecac86ff8787565391f",
+      "sha256": "5c25cf16efb1987767d0430a455a05b7fec75cfed0420f7afac575a608c1c400",
+      "bytes": 8207,
+      "lines": 160,
+      "pin_status": "readonly main1ece only; absent green164/active CI165"
+    }
+  ],
+  "mathlib_sources": [
+    {
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Analysis/Calculus/ContDiff/Bounds.lean",
+      "blob": "4a6bd8e6fced117ea3d6e3dba00b6699dd52cb2f",
+      "sha256": "e221c733d42668ebcee7fd95d2480d6d42c9003f68f9f0f7e57a250d04cd57b7",
+      "relevant_lines": [
+        446,
+        451
+      ]
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Analysis/Calculus/IteratedDeriv/FaaDiBruno.lean",
+      "blob": "3d2647ba30edffbe635c565a2c3f69724899c3e4",
+      "sha256": "2be57a970cda0aba46782b4ed07a46198354911da7a16bbd3ef6858f4ca06eb4",
+      "relevant_lines": [
+        206,
+        212
+      ]
+    }
+  ],
+  "related_stagecd_report": {
+    "blob": "1fe04d81815c8bf51910c2865290dccf0af081d6",
+    "sha256": "792e7059405cb2cddf308129b054a49ddd6e7907c1db01ec98246a849c1fd992"
+  },
+  "scope": {
+    "narrow_relevant_module_search": true,
+    "no_whole_repository_content_crawl": true,
+    "new_lean_lines": 0,
+    "no_local_lean_or_elaboration": true,
+    "no_active_source_or_refs_changed": true,
+    "no_ci_query_or_log_download": true,
+    "not_claimed_compiled": true
+  }
+}

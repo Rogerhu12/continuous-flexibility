@@ -1,0 +1,111 @@
+{
+  "schema": "n04-ci165-positive-two-repairs-reviewed-v1",
+  "status": "INDEPENDENT_FULL_SOURCE_REVIEW_PASSED_NOT_COMPILED",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "owner": "proof_inventory",
+  "actual_head": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+  "actual_tree": "49237cc2b902342c4a42b86d653fb00770d65d60",
+  "candidate_manifest": {
+    "path": "positive/repair165/CI165PositiveTwoRepairsCandidateManifest.json",
+    "blob": "097410d6fe8ef38172b4576889b7f6963dd4fd19",
+    "sha256": "30a2a2466e378e01f7424629bb025178ebfc5d46f6962e6e402af386936ddfff"
+  },
+  "independent_review": {
+    "path": "audit/recovery/reviews/CI165PositiveTwoRepairsIndependentReview.json",
+    "blob": "3fba8049d12fb9fe7f9f1ef8a44cd6574a14f3a8",
+    "sha256": "01229bc82e84cf91f7354e70384efa2010ec39a5a29b22158d2fd74ada317fba",
+    "status": "PASS_STATIC_FULL_SOURCE_AND_EXACT_DELTA_NOT_COMPILED",
+    "utf8_bytes": 15040
+  },
+  "sources": [
+    {
+      "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry",
+      "active_path": "src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean",
+      "before": {
+        "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+        "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+        "lines": 168
+      },
+      "selected": {
+        "path": "positive/repair165/PositiveChartRangeGeometry.lean",
+        "blob": "37c324a711fd04efbc92d5df436ea670ce0dbfd9",
+        "sha256": "75ced3f23a0d0ff26ccae06abb8695ca6af7d59322daa975d04bacd53a0caddd",
+        "lines": 169,
+        "utf8_bytes": 7887
+      },
+      "diff": {
+        "path": "positive/repair165/PositiveChartRangeGeometry.diff",
+        "blob": "e9c757ab8bcebf45dc7c12ae1d35561e7fcebc06",
+        "sha256": "5517296f883ac7ba1ee12296d7e6b8bb3f37a62da6353f7f241e8dc04857758b",
+        "additions": 10,
+        "deletions": 9,
+        "net_lines": 1
+      },
+      "complete_public_headers_ref": "Independent review sources[].complete_public_headers"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+      "active_path": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+      "before": {
+        "blob": "096b420be6425f39b2f5e73e4a0f60cbd9113ced",
+        "sha256": "fc2eb15c0da7e37fda9f227b906a75c801d0d628064e17e5bca4e63dae75e910",
+        "lines": 100
+      },
+      "selected": {
+        "path": "positive/repair165/RadialReferencePrincipalFormulas.lean",
+        "blob": "1292702418d040830307436014b493ae656ab469",
+        "sha256": "eb7f1e15a3e006b588861993260128b4d93045c27eedc159f75f2b3a8c5e0aa2",
+        "lines": 105,
+        "utf8_bytes": 5250
+      },
+      "diff": {
+        "path": "positive/repair165/RadialReferencePrincipalFormulas.diff",
+        "blob": "ae21ba7963dd12ad85eaaed9fd1aec5f68f56ceb",
+        "sha256": "9f5ec951cb30995607449e4e630fe64a2f5962e4a8e41ce37864e83270b5503d",
+        "additions": 7,
+        "deletions": 2,
+        "net_lines": 5
+      },
+      "complete_public_headers_ref": "Independent review sources[].complete_public_headers"
+    }
+  ],
+  "cached_evidence": {
+    "blob": "c4e2fd658a480519785e462f8e7a0807a3bdd33d",
+    "sha256": "ae2b77335a1031c00dcc3c4560c66ff72d176cd73289fa50d1b26c59b690e033",
+    "full_log": {
+      "name": "n04-ci-165.log",
+      "blob": "ca10b6e0164bf9c98dca5cfeb1c9496576def864",
+      "sha256": "4b6e6fe5d74b854e5aa19dbe802336b44bc7e45ea5acbbb534b752843ef019d3",
+      "bytes": 162038,
+      "lines": 1207,
+      "downloaded_once": true
+    },
+    "used_cached_evidence_only": true,
+    "label": "CI165 focused positive failure evidence supplied by root as the exact Git blob"
+  },
+  "metadata_correction": {
+    "finding": "The original candidate manifest's first RadialReferencePrincipalFormulas header excerpt stops at the internal `let B :=` and is not itself a complete public header.",
+    "resolution": "This receipt independently records and checks the complete declaration through all three B.a/B.b/B.c conclusions before its proof. The actual source header is byte-identical to the base. Owner acknowledged this metadata issue and will bind this correction; no source or frozen manifest rewrite is required.",
+    "severity": "metadata-only; does not change static source verdict"
+  },
+  "totals": {
+    "before_lines": 268,
+    "candidate_lines": 274,
+    "net_added_lines": 6,
+    "authorized_net_limit": 35
+  },
+  "checks": {
+    "independent_review_full_text_read": true,
+    "peer_source_and_candidate_fingerprints_match": true,
+    "complete_headers_as_corrected_by_peer_preserved": true,
+    "all_server_source_diff_manifest_blobs_read_back_exact": true,
+    "source_bytes_unchanged_after_peer": true
+  },
+  "limitations": {
+    "local_lean_run": false,
+    "ci_success_claimed": false,
+    "active_index_refs_changed": false,
+    "selection_and_ci_owned_by": "root"
+  },
+  "intended_backup_path": "positive/repair165/CI165PositiveTwoRepairsReviewedManifest.json"
+}

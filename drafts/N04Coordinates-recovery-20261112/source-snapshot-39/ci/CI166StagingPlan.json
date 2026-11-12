@@ -1,0 +1,134 @@
+{
+  "kind": "CI166_focused_repair_source_only_plan",
+  "parent": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+  "base_tree": "49237cc2b902342c4a42b86d653fb00770d65d60",
+  "last_full_green": "c796387fb555392501c81f5b8bd834936251516c",
+  "CI165_failed_log": {
+    "name": "n04-ci-165.log",
+    "blob": "ca10b6e0164bf9c98dca5cfeb1c9496576def864",
+    "sha256": "4b6e6fe5d74b854e5aa19dbe802336b44bc7e45ea5acbbb534b752843ef019d3",
+    "bytes": 162038,
+    "lines": 1207,
+    "downloaded_once": true
+  },
+  "files": [
+    {
+      "name": "RootTravelOppositeCoordinates.lean",
+      "module": "ContinuousFlexibility.Analysis.RootTravelOppositeCoordinates",
+      "path": "src/ContinuousFlexibility/Analysis/RootTravelOppositeCoordinates.lean",
+      "old_blob": "398cf5d4c3207cc9e9dd31cbe09887007d9aff2c",
+      "old_sha256": "ecd653a3b8f6817b590d1b385f1fc495fb4612b46fdb6e9398e8d798fd11ff9e",
+      "old_lines": 197,
+      "blob": "e573bf412782f3cd9d51fccc619367c3fc8fcd40",
+      "sha256": "52ea40ea85ce5a873754a4a39a44d0b5d39c792a18a1e1a487b37bf5bcfe80ce",
+      "lines": 199
+    },
+    {
+      "name": "CanonicalPrimitiveJetsNormalization.lean",
+      "module": "ContinuousFlexibility.Analysis.CanonicalPrimitiveJetsNormalization",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean",
+      "old_blob": "19fbfbee2481dc3603bb1dcd55f479f55c256b97",
+      "old_sha256": "b930c8f21c01d5a534fc634a94bc354bc6dbeda3551d5995e8a9b711731233e5",
+      "old_lines": 85,
+      "blob": "fcb1277422b54ea7f0dd44a618c8e154a797c947",
+      "sha256": "c0f106ce7b46c65cbf19cbd2815f43aa4deeda6cbde00b513e3e1b9c9cbbfe93",
+      "lines": 102
+    },
+    {
+      "name": "ActualReferenceNegativeRadialFields.lean",
+      "module": "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+      "path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean",
+      "old_blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+      "old_sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+      "old_lines": 156,
+      "blob": "ef7e207e7d604dbb3a94cc389660e1d67894c958",
+      "sha256": "ac3d3070df56ad9a3d209e22ffb213ab44b0ad80294906f30b57b157100f261d",
+      "lines": 159
+    },
+    {
+      "name": "PositiveChartRangeGeometry.lean",
+      "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean",
+      "old_blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "old_sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "old_lines": 168,
+      "blob": "37c324a711fd04efbc92d5df436ea670ce0dbfd9",
+      "sha256": "75ced3f23a0d0ff26ccae06abb8695ca6af7d59322daa975d04bacd53a0caddd",
+      "lines": 169
+    },
+    {
+      "name": "RadialReferencePrincipalFormulas.lean",
+      "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+      "path": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+      "old_blob": "096b420be6425f39b2f5e73e4a0f60cbd9113ced",
+      "old_sha256": "fc2eb15c0da7e37fda9f227b906a75c801d0d628064e17e5bca4e63dae75e910",
+      "old_lines": 100,
+      "blob": "1292702418d040830307436014b493ae656ab469",
+      "sha256": "eb7f1e15a3e006b588861993260128b4d93045c27eedc159f75f2b3a8c5e0aa2",
+      "lines": 105
+    },
+    {
+      "name": "CanonicalReferenceCurrentAbsoluteJets.lean",
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean",
+      "old_blob": "74e009ae51c272ef758c21447a9f494156e3d6ec",
+      "old_sha256": "c1b05760d478ef2e0e480010ae0b985db327927ac4178153660f79ef6a15c699",
+      "old_lines": 109,
+      "blob": "5f8c8a6087e0446d2c54ef35b532b404f0b092f2",
+      "sha256": "59a80a8100cb69b80d010175760bfb073bd91f03813d02c2ea72671329a1ebc5",
+      "lines": 118,
+      "public_headers_unchanged": true,
+      "imports_unchanged": true
+    },
+    {
+      "name": "CanonicalCurrentUniformCloseness.lean",
+      "module": "ContinuousFlexibility.Analysis.CanonicalCurrentUniformCloseness",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean",
+      "old_blob": "ca4ff618fbc4e869ccc7195c8244ee965e4f2bbc",
+      "old_sha256": "542b75aa28930a3e7303536ea2ff712e20c0b7a49689e1eaf9d857f400c90aa0",
+      "old_lines": 94,
+      "blob": "e5b4919994abd7e7ddcde0bb83665c224d9e53fe",
+      "sha256": "34065e8e1044d6f5292ed1b0ad4ecce653c00c28fe5514e43bddae49e58b39c5",
+      "lines": 101,
+      "public_headers_unchanged": true,
+      "imports_unchanged": true
+    }
+  ],
+  "budget": {
+    "previous_source_added": 19736,
+    "repair_net_added": 44,
+    "source_added_from_green": 19780,
+    "source_deleted_from_green": 6,
+    "generated_root_additions": 110,
+    "conservative_added_from_green": 19890,
+    "limit": 20000,
+    "remaining_conservative": 110
+  },
+  "unchanged": {
+    "public_statements": true,
+    "all_imports": true,
+    "all_selected_upstream_providers": true,
+    "root_generator": true,
+    "committed_root": true,
+    "workflow": true,
+    "toolchain": true,
+    "resource_limits": true
+  },
+  "peer_bindings": {
+    "audit_and_radial": "1d615641f82878de2f1bb20a042d16fae7c7bef5",
+    "positive": "3fba8049d12fb9fe7f9f1ef8a44cd6574a14f3a8",
+    "root_timeouts": "50f4eac5e564f9275c588198c3ed1ccc472f3aa6"
+  },
+  "graphs": {
+    "nodes": 755,
+    "only_seven_fingerprints_changed": true,
+    "edges_unchanged": true
+  },
+  "execution": {
+    "local_compile": false,
+    "local_stager": false,
+    "local_generator": false,
+    "source_only_Git_tree": true
+  },
+  "endpoint": "N04Coordinates and Realization remain open. CI166 must elaborate these repairs and then pass the default full build."
+}

@@ -1,0 +1,94 @@
+{
+  "schema": "n04-current-jets-zero-order-producer-route-v1",
+  "status": "READ_ONLY_SOURCE_ANALYSIS_NOT_COMPILED",
+  "task": "Derive the value-difference clause of CurrentJets from the same tower's genuine first-order bound",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "pins": {
+    "active_supplier": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+    "main_support": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac"
+  },
+  "outcome": "A public producer already exists; no new tower or general interpolation theorem is needed.",
+  "producer": {
+    "module": "ContinuousFlexibility.Analysis.CanonicalVariationBounds",
+    "path": "src/ContinuousFlexibility/Analysis/CanonicalVariationBounds.lean",
+    "blob": "1559b564891a9e89bbc16c6106b71d49d1ad295f",
+    "sha256": "db282b5542f7f114bac0be3a654136ffbeb217e9912ccb22a8732e1ef9802bb8",
+    "read_scope": "Full first-variation section, lines 1 through 192; not a new full-file peer review",
+    "header": "theorem abs_le_of_oneHigh_first_bound_low\n    {U : Set E} {f : E → ℝ} (J : SmoothDirections U f) (hU : Convex ℝ U)\n    (p : ℕ → Seminorm ℝ E) (hp : Monotone p)\n    {base high : ℕ} (hbh : base ≤ high)\n    {x y : E} (hx : x ∈ U) (hy : y ∈ U) (hzero : f x = 0)\n    {A η : ℝ} (hA : 0 ≤ A) (hlow : p base (y - x) ≤ η)\n    (hD : ∀ z ∈ U, ∀ v : Fin 1 → E,\n      |J.D 1 z v| ≤ A * oneHighVariationWeight p base high (z - x) v) :\n    |f y| ≤ A * (2 + η) * p high (y - x)",
+    "proof_chain": [
+      "abs_le_of_oneHigh_first_bound",
+      "abs_sub_le_of_oneHigh_first_bound",
+      "norm_sub_le_of_smoothDirections_first_bound",
+      "HasProjectiveJetsOn.hasLineDerivAt",
+      "norm_image_sub_le_of_norm_deriv_le_segment_01'"
+    ]
+  },
+  "support": [
+    {
+      "module": "ContinuousFlexibility.Scalar.WeightedTowerCalculus",
+      "blob": "016523877104f642a44e572693b1b8b2251faa2c",
+      "sha256": "ca17c1326690271a54670c095d664693a6d5680fff254ea96a6937b83eec1b84",
+      "read_scope": "Full source",
+      "public_names": [
+        "smoothDirectionsScalarPostcompose",
+        "smoothDirectionsScalarPostcompose_apply"
+      ],
+      "fact": "Postcomposition by an actual evaluation continuous linear map preserves the given J.D exactly; no choice of a replacement tower."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SectorParameterGeometry",
+      "blob": "2aedeefa0b7cecd1a972ac5b9fbf48bb538b6490",
+      "sha256": "0daae8b9f4f8b63e4bd6af764ca24973c63ce45fea2cc894a6b1678d35d42415",
+      "read_scope": "Full source",
+      "public_names": [
+        "sectorNeighborhood_convex",
+        "sectorPairGrading_monotone",
+        "liftSectorParameter_eq_affine"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateNeighborhood",
+      "blob": "71f6118a05293a2b49a121d77886443edbc81cb8",
+      "sha256": "700c7f45ce35b0f3a7ba9b5e875ecb0d12018deab9bff5f11be0aee740257246",
+      "read_scope": "Full source",
+      "public_names": [
+        "oneHighVariationWeight_mono"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "read_scope": "CanonicalGeometry definitions including the complete CurrentJets contract",
+      "public_names": [
+        "CanonicalGeometry.parameterGrading",
+        "CanonicalGeometry.differenceJets",
+        "CanonicalGeometry.CurrentJets"
+      ]
+    }
+  ],
+  "exact_instantiation": {
+    "same_domain": "U = sectorNeighborhood S base ε ε, with 0 < ε",
+    "same_tower": "J : SmoothDirections U (CanonicalGeometry.differenceJets D T S C L K)",
+    "scalar": "f(z) = differenceJets D T S C L K z a m i j p, obtained by evaluating this given J at (a,m,i,j,p)",
+    "first_bound": "Use only k=1 of the supplied pointwise tower bound: choose loss₁ once before all spatial s. C_s is chosen before z,m,a,p,i,j.",
+    "high_order": "L = max base loss₁. Raise s+loss₁ to s+L using monotone parameterGrading/oneHighVariationWeight_mono; base ≤ s+L.",
+    "zero": "liftSectorParameter S C 0 = (C.referenceState,0); the function inside mixedDerivative is literally zero. The existing coefficientFamily_reference proof supplies the same sub_self/mixedDerivative/iteratedDeriv_fun_const_zero pattern. No separate geometry estimate or ReferenceJets premise is required.",
+    "segment": "sectorNeighborhood_convex gives t•z in the unchanged U. The two defining inequalities imply parameterGrading S base z ≤ 2*ε.",
+    "application": "Apply abs_le_of_oneHigh_first_bound_low with x=0, y=z, η=2*ε, high=s+L, A=C_s*E0(sample)^C_s*H(sample)^(3/4).",
+    "result": "|differenceJets ... z a m i j p| ≤ C_s*(2+2*ε)*E0(sample)^C_s*H(sample)^(3/4)*parameterGrading S (s+L) z",
+    "envelope_pack": "If the ACTUAL selected T has E0(T.sample(K.cell m)) ≥ 1 uniformly in m, choose B_s=1+C_s*(2+2*ε); then B_s≥C_s and B_s≥C_s*(2+2*ε), giving the exact B_s*E0^B_s form.",
+    "quantifiers": "The fixed base/domain and J are unchanged. L is independent of s,m,a,p,i,j. B_s is independent of those indices and state. The factor H^(3/4) is untouched."
+  },
+  "remaining_tiny_wiring": [
+    "Use the actual product evaluation CLM for JetField (five nested evaluations) and smoothDirectionsScalarPostcompose_apply; the CLM projection's pinned mathlib header was not separately fetched in this short analysis.",
+    "Prove the literal differenceJets-at-zero identity by the existing mixedDerivative zero pattern.",
+    "Use the selected witness's explicit material floor for the final identical coefficient/exponent packaging. General IsMaterialData positivity alone was not treated as E0≥1."
+  ],
+  "cautions": [
+    "N06CurrentJetBounds and N08JetDifference are not used as producers.",
+    "This does not prove the actual all-orders tower bound; it closes the value-difference clause once that SAME genuine tower's k=1 estimate has been proved.",
+    "Do not use a base depending on k or spatial order.",
+    "No Lean source, active file, index, ref, or CI action was performed."
+  ]
+}

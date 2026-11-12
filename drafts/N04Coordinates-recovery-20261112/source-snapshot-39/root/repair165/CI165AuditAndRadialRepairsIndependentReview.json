@@ -1,0 +1,60 @@
+{
+  "kind": "CI165_audit_pair_and_radial_projection_independent_delta_review",
+  "reviewer": "root",
+  "status": "PASSED_FOCUSED_SOURCE_AND_PINNED_API_REVIEW_NOT_COMPILED",
+  "head": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+  "log": {
+    "name": "n04-ci-165.log",
+    "blob": "ca10b6e0164bf9c98dca5cfeb1c9496576def864",
+    "sha256": "4b6e6fe5d74b854e5aa19dbe802336b44bc7e45ea5acbbb534b752843ef019d3",
+    "bytes": 162038,
+    "lines": 1207,
+    "downloaded_once": true
+  },
+  "candidates": {
+    "audit_manifest": "ca0a08f71da2c4aaea59f024e9ab80443b02c2a9",
+    "root199": "e573bf412782f3cd9d51fccc619367c3fc8fcd40",
+    "normalization102": "fcb1277422b54ea7f0dd44a618c8e154a797c947",
+    "radial_manifest": "417cfeb8e288895186288a2cfe8e6b57832a44f8",
+    "radial159": "ef7e207e7d604dbb3a94cc389660e1d67894c958"
+  },
+  "checks": [
+    {
+      "file": "RootTravelOppositeCoordinates",
+      "finding": "All source bytes mechanically reconstruct from the two specified typed positivity bindings. The exact rootHalfCoordinate definition is rootCoordinate of the same orientation. Typing the positivity at the project alias fixes the syntactic Real.div_rpow rewrite while preserving sides, hypotheses and the two-root arithmetic. Public definitions/statements/imports/options unchanged.",
+      "provider": "f1b26fa6eea80e225e7b305e0179a1720417e1a3"
+    },
+    {
+      "file": "CanonicalPrimitiveJetsNormalization",
+      "finding": "Complete selected102 source read. The project canonicalUnitPoint definition depends only on unchanged left/right endpoints, so adding it to the atom simplifier closes the record-update goals. The actual CurrentJets conjunction was read; it is split into unchanged regularity, value bounds and genuine tower. The actual SmoothDirections definition was read: only zero depends on the represented function. J' retains literal J.D, open_domain, continuous and derivative, and transports only zero by the already-proved equality of whole difference functions. This gives exactly the same numerical hJ after projection reduction, without constructing a different family or bound. Reference potential now supplies z=(referenceState,0), matching the exact existing theorem header. All six primitive clauses and all public headers remain unchanged.",
+      "providers": [
+        "619fefcba9f3fd18c1d8131781971953a7965d2c",
+        "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+        "d2373f98afac2769d0ae67daa6b56d8bbadebb40"
+      ]
+    },
+    {
+      "file": "ActualReferenceNegativeRadialFields",
+      "finding": "The changed private radial derivative proof was read against its entire local hypothesis/near-equality argument. Its full real HasFDerivAt annotation is the exact product of derivative-scaled fst and snd at the same (r,theta). Both pinned projection suppliers expose implicit scalar field 𝕜, now explicitly ℝ. The pinned HasDerivAt.comp_hasFDerivAt returns the stated scaled projection, and prodMk returns that exact product CLM. The final public actual-atlas theorem, imports, provider selection and all unrelated bytes are unchanged; no new reference_flow contract or witness is selected.",
+      "providers": [
+        "411b5f2f6a95bdce18d85ba51f9f21e78f36e770",
+        "bca5a3ed558bd9f14be2a277d9e01bd025227307"
+      ]
+    }
+  ],
+  "verification": {
+    "all_selected_source_blobs_fetched": true,
+    "all_source_sha256_match_manifests": true,
+    "audit_pair_exact_replacements_reconstruct_full_files": true,
+    "actual_current_provider_definitions_retrieved": true,
+    "pinned_mathlib_headers_retrieved": true,
+    "normalization_same_D_literal": true,
+    "public_headers_or_target_hypotheses_changed": false,
+    "resource_limits_changed": false,
+    "new_main_provider_selected": false,
+    "local_elaboration": false,
+    "remote_compile": false
+  },
+  "review_scope": "Independent focused repair review. Earlier immutable full-source reviews remain historical; this receipt does not assert they had established compilation or re-review unchanged mathematical bodies unnecessarily.",
+  "conclusion": "Select exact199/102/159 candidates for the same bounded CI group, subject to final aggregate budget/tree checks and actual CI."
+}

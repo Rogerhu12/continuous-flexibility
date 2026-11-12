@@ -1,0 +1,31 @@
+{
+  "kind": "CI165_focused_failure_evidence",
+  "owner": "quantitative",
+  "head": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+  "tree": "49237cc2b902342c4a42b86d653fb00770d65d60",
+  "full_log": {
+    "name": "n04-ci-165.log",
+    "blob": "ca10b6e0164bf9c98dca5cfeb1c9496576def864",
+    "sha256": "4b6e6fe5d74b854e5aa19dbe802336b44bc7e45ea5acbbb534b752843ef019d3",
+    "bytes": 162038,
+    "lines": 1207,
+    "downloaded_once": true
+  },
+  "files": [
+    {
+      "name": "ActualReferenceNegativeRadialFields.lean",
+      "path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean",
+      "blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+      "sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+      "lines": 156,
+      "errors": [
+        {
+          "line": 37,
+          "column": 4,
+          "text": "error: src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean:37:4: Application type mismatch: The argument\n  hasFDerivAt_snd\nhas type\n  HasFDerivAt Prod.snd (ContinuousLinearMap.snd ?m.177 ℝ ℝ) (r, θ)\nbut is expected to have type\n  HasFDerivAt ?m.175 ?m.176 (r, θ)\nin the application\n  HasFDerivAt.prodMk (HasDerivAt.comp_hasFDerivAt (r, θ) hf ?m.160) hasFDerivAt_snd"
+        }
+      ]
+    }
+  ],
+  "limits": "No heartbeat/resource increases, no new proof target premise, no main provider substitution; exact public headers preserved. Source repair candidates only; root owns staging/refs."
+}

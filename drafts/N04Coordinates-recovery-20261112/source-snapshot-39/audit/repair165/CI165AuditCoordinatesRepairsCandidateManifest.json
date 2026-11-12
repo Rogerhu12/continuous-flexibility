@@ -1,0 +1,217 @@
+{
+  "schema": "N04Coordinates.CIRepairCandidate.v1",
+  "kind": "CI165 audit-owned exact proof repairs",
+  "intended_backup_path": "audit/repair165/CI165AuditCoordinatesRepairsCandidateManifest.json",
+  "status": "candidate; full-source static owner review; requires independent peer and CI; not compiled",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "owner": "audit_coordinates",
+  "base_commit": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+  "base_tree": "49237cc2b902342c4a42b86d653fb00770d65d60",
+  "branch_unchanged": true,
+  "evidence": {
+    "blob": "504edf6ce48cac1ac0cde4ac8cc87fd4a89809c0",
+    "sha256": "3c8356a314db265c6c5897f6bc123a6e645e33ea5ed0b75f732b7aa10144b0d7",
+    "full_cached_log": {
+      "name": "n04-ci-165.log",
+      "blob": "ca10b6e0164bf9c98dca5cfeb1c9496576def864",
+      "sha256": "4b6e6fe5d74b854e5aa19dbe802336b44bc7e45ea5acbbb534b752843ef019d3",
+      "bytes": 162038,
+      "lines": 1207,
+      "downloaded_once": true
+    },
+    "ci_downloads_performed_by_this_agent": 0
+  },
+  "files": [
+    {
+      "name": "RootTravelOppositeCoordinates",
+      "blob": "e573bf412782f3cd9d51fccc619367c3fc8fcd40",
+      "sha256": "52ea40ea85ce5a873754a4a39a44d0b5d39c792a18a1e1a487b37bf5bcfe80ce",
+      "bytes": 9522,
+      "lines": 199,
+      "public_header_count": 16,
+      "public_header_sha256": "de7898ed4011dc104c64373956a1be1a84928d02f970a398c9a27859555c8b4f",
+      "imports": [
+        "import ContinuousFlexibility.Analysis.N04bRootInteriorRegularity"
+      ],
+      "options": [],
+      "net_added_lines": 2,
+      "target": "src/ContinuousFlexibility/Analysis/RootTravelOppositeCoordinates.lean",
+      "intended_backup_path": "audit/repair165/RootTravelOppositeCoordinates.lean",
+      "before": {
+        "blob": "398cf5d4c3207cc9e9dd31cbe09887007d9aff2c",
+        "sha256": "ecd653a3b8f6817b590d1b385f1fc495fb4612b46fdb6e9398e8d798fd11ff9e",
+        "lines": 197,
+        "bytes": 9435
+      },
+      "diff_stats": {
+        "name": "RootTravelOppositeCoordinates",
+        "additions": 4,
+        "deletions": 2
+      },
+      "exact_replacements": [
+        [
+          "  have ha := n04bRootCoordinate_pos (n04b_travelOrientation_pos_of_fullStrip side hs)\n  have hb := n04bRootCoordinate_pos (n04b_travelOrientation_pos_of_fullStrip (!side) hs)",
+          "  have ha : 0 < n04bRootHalfCoordinate T side s :=\n    n04bRootCoordinate_pos (n04b_travelOrientation_pos_of_fullStrip side hs)\n  have hb : 0 < n04bRootHalfCoordinate T (!side) s :=\n    n04bRootCoordinate_pos (n04b_travelOrientation_pos_of_fullStrip (!side) hs)"
+        ]
+      ],
+      "whole_source_readback_matches": true,
+      "public_headers_byte_identical": true,
+      "imports_options_and_local_instances_preserved": true
+    },
+    {
+      "name": "CanonicalPrimitiveJetsNormalization",
+      "blob": "fcb1277422b54ea7f0dd44a618c8e154a797c947",
+      "sha256": "c0f106ce7b46c65cbf19cbd2815f43aa4deeda6cbde00b513e3e1b9c9cbbfe93",
+      "bytes": 4818,
+      "lines": 102,
+      "public_header_count": 2,
+      "public_header_sha256": "caec26f10fc86ac928944bd5eb6602f973d2ebca515437ec773c69ba3cd502cb",
+      "imports": [
+        "import ContinuousFlexibility.Analysis.CanonicalJetNormalization",
+        "import ContinuousFlexibility.Analysis.N07aGeometryJetBounds",
+        "import ContinuousFlexibility.Analysis.SolveReturnEquations"
+      ],
+      "options": [
+        "attribute [local instance]"
+      ],
+      "net_added_lines": 17,
+      "target": "src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean",
+      "intended_backup_path": "audit/repair165/CanonicalPrimitiveJetsNormalization.lean",
+      "before": {
+        "blob": "19fbfbee2481dc3603bb1dcd55f479f55c256b97",
+        "sha256": "b930c8f21c01d5a534fc634a94bc354bc6dbeda3551d5995e8a9b711731233e5",
+        "lines": 85,
+        "bytes": 4147
+      },
+      "diff_stats": {
+        "name": "CanonicalPrimitiveJetsNormalization",
+        "additions": 21,
+        "deletions": 4
+      },
+      "exact_replacements": [
+        [
+          "      simp [CanonicalGeometry.atom, normalizedCanonicalData, hz, hp]",
+          "      simp [CanonicalGeometry.atom, CanonicalGeometry.canonicalUnitPoint,\n        normalizedCanonicalData, hz, hp]"
+        ],
+        [
+          "    simpa only [CanonicalGeometry.CurrentJets, hcurrent, hdifference,\n      normalizedCanonicalData_cell] using hcur",
+          "    rcases hcur with ⟨hregular, hbound, J, hJ⟩\n    refine ⟨?_, ?_, ?_⟩\n    · intro z hz m v\n      simpa only [hcurrent] using hregular z hz m v\n    · simpa only [hdifference, normalizedCanonicalData_cell] using hbound\n    · let J' : SmoothDirections (sectorNeighborhood S base ε ε)\n          (CanonicalGeometry.differenceJets D T S C L (normalizedCanonicalData S K)) :=\n        { open_domain := J.open_domain\n          D := J.D\n          zero := by\n            intro z hz\n            rw [hdifference]\n            exact J.zero z hz\n          continuous := J.continuous\n          derivative := J.derivative }\n      refine ⟨J', ?_⟩\n      simpa only [J', normalizedCanonicalData_cell] using hJ"
+        ],
+        [
+          "    normalizedCanonicalData_potential_of_sector K hstate.stateSector] using hfields m p hp",
+          "    normalizedCanonicalData_potential_of_sector K (z := (C.referenceState, 0))\n      hstate.stateSector] using hfields m p hp"
+        ]
+      ],
+      "whole_source_readback_matches": true,
+      "public_headers_byte_identical": true,
+      "imports_options_and_local_instances_preserved": true
+    }
+  ],
+  "diff": {
+    "intended_backup_path": "audit/repair165/CI165AuditCoordinatesRepairs.diff",
+    "blob": "ddb9b5c7742f44540ebdbade80ecd2d24870fdfe",
+    "sha256": "11c4a4e955bb39316f0f8d4143cd337f5267690ff8b9a5e58008d6ffdf622c7e",
+    "additions": 25,
+    "deletions": 6,
+    "net_added_lean_lines": 19,
+    "authorized_net_budget": 45
+  },
+  "diagnosis_to_fix": [
+    {
+      "source": "RootTravelOppositeCoordinates",
+      "line": 176,
+      "cause": "rewrite matches rootCoordinate form from inferred positivity, while target retains project-defined rootHalfCoordinate alias",
+      "fix": "type ha/hb as positivity of exactly n04bRootHalfCoordinate, with identical n04bRootCoordinate_pos proofs",
+      "semantic_preservation": "n04bRootHalfCoordinate definition is rootCoordinate of the same travelOrientation; identical side/not-side and total travel"
+    },
+    {
+      "source": "CanonicalPrimitiveJetsNormalization",
+      "line": 39,
+      "cause": "remaining potential atom uses an unreduced canonicalUnitPoint of a record update",
+      "fix": "add the actual project canonicalUnitPoint definition to the existing simp set"
+    },
+    {
+      "source": "CanonicalPrimitiveJetsNormalization",
+      "line": 76,
+      "cause": "whole CurrentJets simplification must transport a dependent SmoothDirections witness",
+      "fix": "split the regularity, zero-variation bound and existential tower; build the transported witness with literal J.D, J.open_domain, J.continuous, J.derivative, updating only zero via the already-proved whole-function equality",
+      "semantic_preservation": "same exact tower D, same low order, losses, constants, sample and neighborhood; no target-bound premise"
+    },
+    {
+      "source": "CanonicalPrimitiveJetsNormalization",
+      "line": 83,
+      "cause": "reference sector proof alone does not determine the pair z for potential theorem elaboration",
+      "fix": "explicit z := (C.referenceState,0)"
+    }
+  ],
+  "actual_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bRootTravelIntervals",
+      "sha256": "7e0938b188bf262b10fb148e6cf08428c1fa27e47aaa032770feae85470aea80",
+      "bytes": 6071,
+      "verification": "actual CI165 tree identity; relevant actual declarations read",
+      "blob": "f1b26fa6eea80e225e7b305e0179a1720417e1a3",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N04bRootTravelIntervals.lean"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bRootInteriorRegularity",
+      "sha256": "5b940dc8d06b838873fab1ed874034e430ee410f74ba6b007819b9e7dcbabe37",
+      "bytes": 7043,
+      "verification": "actual CI165 tree identity; relevant actual declarations read",
+      "blob": "dfaf1caaf070c2f3f127d5578f6223e78e10acb0",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N04bRootInteriorRegularity.lean"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalJetNormalization",
+      "sha256": "376dea5b9a6281f63b21f6aeefd9273dc4aadc8a13629ad39d22c88320353288",
+      "bytes": 14499,
+      "verification": "actual CI165 tree identity; relevant actual declarations read",
+      "blob": "d2373f98afac2769d0ae67daa6b56d8bbadebb40",
+      "repo_path": "src/ContinuousFlexibility/Analysis/CanonicalJetNormalization.lean"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aGeometryJetBounds",
+      "sha256": "5eb75a3b06a90cf2611b95ca8ce9098ba95c057e7627a4bcf1a8d756bc02c498",
+      "bytes": 5954,
+      "verification": "actual CI165 tree identity; relevant actual declarations read",
+      "blob": "e1e7c43bac69e82dbd72c609763521ad1472682b",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aGeometryJetBounds.lean"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SolveReturnEquations",
+      "sha256": "936751f4227d524f93ee0daa0d620fb309e98bd78888b0b7cefed8da06e82d6c",
+      "bytes": 7131,
+      "verification": "actual CI165 tree identity; relevant actual declarations read",
+      "blob": "79f7407854a3dea4f22ebf924f1a074265e878dc",
+      "repo_path": "src/ContinuousFlexibility/Analysis/SolveReturnEquations.lean"
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Analysis",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "bytes": 30441,
+      "verification": "actual CI165 tree identity; relevant actual declarations read",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "repo_path": "src/ContinuousFlexibility/Statements/Analysis.lean"
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "verification": "actual atom/canonicalUnitPoint/CurrentJets/ReferencePrincipal/SmoothDirections dependency inspected",
+      "repo_path": "src/ContinuousFlexibility/Statements/Nonlinear.lean"
+    }
+  ],
+  "checks": {
+    "public_declarations": 18,
+    "new_public_names": 0,
+    "no_import_change": true,
+    "no_option_change": true,
+    "no_resource_increase": true,
+    "exact_literal_reverse_reconstruction": true,
+    "no_lean_or_local_build": true,
+    "no_active_write": true,
+    "no_index_ref_commit_or_ci_action": true
+  },
+  "review_recommendation": "Root to read both complete candidate sources, exact four replacement blocks, actual rootHalf definition and SmoothDirections/CurrentJets structure; verify J'.D is definitionally J.D and potential pair is explicit. Then select only these exact source blobs for CI.",
+  "metadata_note": "All provider blob identities are taken explicitly from the exact 794d5d0e candidate tree; no provider pin changed."
+}

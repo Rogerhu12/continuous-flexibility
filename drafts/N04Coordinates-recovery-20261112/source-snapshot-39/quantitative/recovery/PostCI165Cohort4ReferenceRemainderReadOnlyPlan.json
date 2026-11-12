@@ -1,0 +1,2378 @@
+{
+  "kind": "PostCI165Cohort4ReferenceRemainderReadOnlyPlan",
+  "status": "conditional counting and dependency proposal; not an activation authorization",
+  "date": "2026-11-12",
+  "author": "/root/quantitative_route",
+  "proposed_backup_path": "quantitative/recovery/PostCI165Cohort4ReferenceRemainderReadOnlyPlan.json",
+  "pins": {
+    "repository": "Rogerhu12/continuous-flexibility",
+    "source_baseline": "c796387fb555392501c81f5b8bd834936251516c",
+    "main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "original_cohort_source": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+    "CI165_head_parent_reported_short": "794d5d0e",
+    "CI165_status_at_report": "pushed; full-green not yet reported; exact completed commit/tree must be rebound before activation"
+  },
+  "authority_and_boundaries": {
+    "requested_scope": "Read-only count/dependency planning of old cohort4 plus remaining reference sources, after CI165 succeeds.",
+    "historical_full41_gate_unchanged": true,
+    "proposed_new_gate_required": true,
+    "no_new_Lean": true,
+    "no_local_compilation": true,
+    "no_active_index_ref_CI_operations": true,
+    "source_policy": "All 25 source bytes and owner/review references are the unchanged frozen 41-source selection. The 14-source CI165 prefix is a prerequisite. No 1ece field/signature replacement is selected, and no positive reference family is reselected."
+  },
+  "inputs": [
+    {
+      "kind": "original 41-source proposal",
+      "blob": "0ae5d8a1d49a64c412183757910c6ff25507260c",
+      "sha256": "e3df495b387d253732915923b113924c74fef74b8dd51310d20bcdbe68408f50"
+    },
+    {
+      "kind": "current 826-provider ledger",
+      "blob": "fbe3d483cc2243748761ee79b6d45b52e72a8727",
+      "sha256": "2899e402e186f17117eba07797edddc8c077dc3d4e5b55023fc056bd6bd567a7"
+    },
+    {
+      "kind": "c9 versus 1ece exact remaining-cohort equality",
+      "blob": "70df1c1e296c5c6d9aa6059a991f72663d8d59d6",
+      "sha256": "e180ff4b0292124aade3ea84b6a48231abecbe97f86a49b99f9d34e43158b286"
+    },
+    {
+      "kind": "CI165 14-source prefix",
+      "blob": "dfa280484b9f2153aad4cc13910d317e0508237f",
+      "sha256": "0914bc8829e0780a78db7d6969c5c1951e4587e29a62900fba36473339617d62"
+    },
+    {
+      "kind": "main contract migration audit, no main switch implied",
+      "blob": "e7589c3732c96b25028cfc2a0a8434fe83a98798",
+      "sha256": "407d1737da048dd4aab43f7842f6db99c2af4d784afa616852ebfd343e4e5216"
+    }
+  ],
+  "counts": {
+    "old_cohort4": {
+      "modules": 124,
+      "new_source_lines": 16836,
+      "planned_generated_root_added_lines": 122,
+      "planned_total_added_lines": 16958,
+      "planned_deleted_lines": 0
+    },
+    "all_remaining_27": {
+      "source_lines": 3022,
+      "generated_root_added_lines": 27,
+      "combined_total_added_lines": 20007,
+      "over_20000_by": 7
+    },
+    "alternative_26": {
+      "defer": "RadialGaugePrincipalFiniteJets (105 source lines plus one root import)",
+      "source_lines": 2917,
+      "generated_root_added_lines": 26,
+      "combined_total_added_lines": 19901,
+      "remaining_20000_budget": 99,
+      "comment": "Dependency closed, but retains a standalone transformation provider while deferring its finite-jet consumer."
+    },
+    "recommended_25": {
+      "source_lines": 2830,
+      "generated_root_added_lines": 25,
+      "combined_source_files": 149,
+      "combined_total_added_lines": 19813,
+      "remaining_20000_budget": 187
+    },
+    "after_recommended_selection": {
+      "old41_sources_compiled_or_scheduled": 39,
+      "old41_remaining_sources": 2,
+      "remaining_source_lines": 192,
+      "remaining_root_imports": 2
+    }
+  },
+  "recommendation": "Prefer the dependency-closed 25-source selection rather than using the entire 27 (over budget) or filling the window with an isolated provider. Defer the complete two-source radial-gauge finite-jet branch.",
+  "roots": [
+    "ContinuousFlexibility.Analysis.CanonicalActualReferenceGeometry",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeReferencePrincipal",
+    "ContinuousFlexibility.Analysis.BufferedRadialAuxiliaryColumn"
+  ],
+  "deferred_complete_branch": [
+    {
+      "module": "ContinuousFlexibility.Analysis.RadialGaugePrincipalFiniteJets",
+      "blob": "3a43ccceb3f82270ebdde43087111bd569cdab5f",
+      "sha256": "80cdd212e2e550da19280ac5eec2011695831fa4f43f64dcacd701c63a985e29",
+      "lines": 105,
+      "imports": [
+        "ContinuousFlexibility.Analysis.RadialGaugePrincipalTransformation",
+        "ContinuousFlexibility.Analysis.FiniteFullJetBoundary"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RadialGaugePrincipalTransformation",
+      "blob": "283d5dc38c2658787f5f410bdeb55d42d4bb1dd7",
+      "sha256": "44e09082aa8264a616f69e1c6d0e12e93d35ffb4c68983462ca2fe569b2872a1",
+      "lines": 87,
+      "imports": [
+        "ContinuousFlexibility.Analysis.PositiveReferenceCylinder",
+        "ContinuousFlexibility.Analysis.WholePositiveCanonicalFields",
+        "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalActualReferenceGeometry",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualReferenceGeometry.lean",
+      "file": "src/ContinuousFlexibility/Analysis/CanonicalActualReferenceGeometry.lean",
+      "sha256": "7950378d98e44658a560dd61196b6fc7c18cdf913bead17b515bebf73162abe4",
+      "blob": "c0a923a761357bfcb72f507a2b9906cc6221f45e",
+      "lines": 137,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasGeometry",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasCutOperator",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeReferenceRadial",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeTransmission",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeGlobalTransport"
+      ],
+      "public_names": [
+        "n04Coordinates_exists_actual_reference_geometry"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualReferenceGeometryReviewedManifest.json",
+        "sha256": "b24c25236d45604fe1ee6a5cb903de0dc830c6dc1f5beb30b848ade9738d3516"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CanonicalActualReferenceGeometryIndependentReview.json",
+        "sha256": "805165af5976034f29f296d8ddad11cda01fc1d7353859b79386470172b9da7c"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasCutOperator",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/reference-gauge-restriction/WholeReferenceGaugeAtlasCutOperator.lean",
+      "file": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean",
+      "sha256": "71427dd3175ca9dcd9cdcc8de5ce4216f998587db175fdf55c74d24a5332ac01",
+      "blob": "14acbf9b59c2fd57da53b0d7e0290c43f649331c",
+      "lines": 102,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+        "ContinuousFlexibility.Analysis.CanonicalSourceConversion",
+        "ContinuousFlexibility.Analysis.CanonicalNeighborhoodRestriction"
+      ],
+      "public_names": [
+        "n04WholeReferenceGaugeAtlasData_actual_cutOperator_and_sourcePairing"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/reference-gauge-restriction/WholeReferenceGaugeAtlasCutOperatorRestrictedReviewedManifest.json",
+        "sha256": "6cbca3bd5a107404cfe58b2f61f0b77b9bd26637c38c301834af6b0a092c774c"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholeReferenceGaugeAtlasCutOperatorRestrictedIndependentReview.json",
+        "sha256": "fe3c09dca9b2bf0959a909099491a045f75d8842d63ed3da5ab2ab1f9d08691a"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeReferenceRadial",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeReferenceRadial.lean",
+      "file": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferenceRadial.lean",
+      "sha256": "9c4fad098b505486080c3def2c38082db38c7655d857b95b8de1549f2b8596d8",
+      "blob": "4fb8973a3fbe0b887088e2d297b5ff0cb9cfd11d",
+      "lines": 138,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields"
+      ],
+      "public_names": [
+        "n04_referenceRadial_of_forward",
+        "n04WholeReferenceGaugeAtlasData_actual_referenceRadial"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeReferenceRadialReviewedManifest.json",
+        "sha256": "918b814c0c1fd0e063d1138b8a869079423c36f903ae18a20be96d07ca80c0e9"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/WholeReferenceGaugeReferenceRadialIndependentReview.json",
+        "sha256": "a75838fbdce6740ffa367f11f01784a19609a0163d4673505329b91282bcc372"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeTransmission",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeTransmission.lean",
+      "file": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeTransmission.lean",
+      "sha256": "e7db7456fa5221cfd2d9005a2dc1c88eb4cf3a775e5451518f2429b9b71ff100",
+      "blob": "706d01f4aaf9bc87b63313e16292f0528678aff5",
+      "lines": 110,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootMatching"
+      ],
+      "public_names": [
+        "n04WholeReferenceGaugeAtlasData_actual_transmissionGeometry_of_root",
+        "n04WholeReferenceGaugeAtlasData_actual_transmissionGeometry"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeTransmissionReviewedManifest.json",
+        "sha256": "3297c4d49269ded304b761fd4424ea19280ca6d2c9823bf498b0ff61dee5cec9"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholeReferenceGaugeTransmissionIndependentReview.json",
+        "sha256": "c8f663071db582f16cd45cc7dc410799c628ce9f77bff09d3ee28de48306bb3b"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootMatching",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeRootMatching.lean",
+      "file": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootMatching.lean",
+      "sha256": "56874820bdb1b924cac665f08355410d02885b4e449d4055f6020bda731d459f",
+      "blob": "d044ebf2139de1886c261a1ad19294ff4f227d5b",
+      "lines": 133,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootFirstJets",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootInterfaces"
+      ],
+      "public_names": [
+        "n04WholeReferenceGaugeAtlasData_actual_rootFirstJetMatching"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeTransmissionReviewedManifest.json",
+        "sha256": "3297c4d49269ded304b761fd4424ea19280ca6d2c9823bf498b0ff61dee5cec9"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholeReferenceGaugeTransmissionIndependentReview.json",
+        "sha256": "c8f663071db582f16cd45cc7dc410799c628ce9f77bff09d3ee28de48306bb3b"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootFirstJets",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeRootFirstJets.lean",
+      "file": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootFirstJets.lean",
+      "sha256": "5f4d8c51ed898f9dcac89b509d737dd7e736e2d0aa774e8220b9ec25c0e64253",
+      "blob": "be4a8a0a3fe29b50db53f246b56d536dbe172f49",
+      "lines": 102,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualPositiveGaugeRootFirstJets",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData"
+      ],
+      "public_names": [
+        "n04WholeReferenceGaugeAtlasData_actual_root_firstJets"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeTransmissionReviewedManifest.json",
+        "sha256": "3297c4d49269ded304b761fd4424ea19280ca6d2c9823bf498b0ff61dee5cec9"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholeReferenceGaugeTransmissionIndependentReview.json",
+        "sha256": "c8f663071db582f16cd45cc7dc410799c628ce9f77bff09d3ee28de48306bb3b"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualPositiveGaugeRootFirstJets",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ActualPositiveGaugeRootFirstJets.lean",
+      "file": "src/ContinuousFlexibility/Analysis/ActualPositiveGaugeRootFirstJets.lean",
+      "sha256": "dfb27209661ab5db574f9480022a981a2407cd03a2bd4afc8e82eac2f2b89fd0",
+      "blob": "af468a906190a61a33173a6df00a8ae88a30afb4",
+      "lines": 87,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualPositiveReferenceFirstJets",
+        "ContinuousFlexibility.Analysis.WholePositiveActualRootFirstJets"
+      ],
+      "public_names": [
+        "n04Coordinates_actual_positive_gauge_root_firstJets"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ActualPositiveGaugeRootFirstJetsReviewedManifest.json",
+        "sha256": "daab7af622f31bb567df9c543302b17a9108f8ac82acf0576dab101c0d46544f"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/ActualPositiveGaugeRootFirstJetsIndependentReview.json",
+        "sha256": "9305d2681a9c25c644f7d5cd982a598e0afdce61915b7105964cdf1df128863c"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceFirstJets",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ActualPositiveReferenceFirstJets.lean",
+      "file": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceFirstJets.lean",
+      "sha256": "dec4f15789b17a9ac6f6c196fb9e1c6f9929efa6b7a7866909bd2d6a9bf7ba05",
+      "blob": "76fa1a822a2df404ea31125c346670efa50b3010",
+      "lines": 123,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation",
+        "ContinuousFlexibility.Analysis.FiniteFirstJetInverse",
+        "ContinuousFlexibility.Analysis.CanonicalWholePositiveRootMatching"
+      ],
+      "public_names": [
+        "n04Coordinates_actual_positive_reference_firstJets"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ActualPositiveReferenceFirstJetsReviewedManifest.json",
+        "sha256": "451fea2a1013f2a6511ac9e13ab8fa766c38f96684cdd09c816a1b79b5613764"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/ActualPositiveReferenceFirstJetsIndependentReview.json",
+        "sha256": "de0677e54e1cfe0a4b3cc9155ab22688fb99cbda79fb21024d9482bf52600bb8"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.FiniteFirstJetInverse",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteFirstJetInverse.lean",
+      "file": "src/ContinuousFlexibility/Analysis/FiniteFirstJetInverse.lean",
+      "sha256": "fe97f63f7fc52a74a7a2a45f96839fa479f0e156540bdaddc83976ae0fe390ca",
+      "blob": "bf09a201a95c1fbcfb1c956a58a2fc041e6a0051",
+      "lines": 104,
+      "imports": [
+        "ContinuousFlexibility.Analysis.FiniteFullJetBoundary"
+      ],
+      "public_names": [
+        "finiteFullJetMatch_one_of_value_fderiv",
+        "FiniteFullJetMatch.comp_match",
+        "FiniteFullJetMatch.div",
+        "finiteFullJetMatch_one_inverse_of_germs"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteFirstJetInverseReviewedManifest.json",
+        "sha256": "152f63a0537a1b1cf8c628945d620eefa860716f5c09f348146f14154a3ac90c"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/FiniteFirstJetInverseIndependentReview.json",
+        "sha256": "70db2bf26d4d5312dc5dce0b390ca2747204634ae1e86649c0fd701f6be1c5f1"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholePositiveActualRootFirstJets",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveActualRootFirstJets.lean",
+      "file": "src/ContinuousFlexibility/Analysis/WholePositiveActualRootFirstJets.lean",
+      "sha256": "5abed2d470d8f82fe5ab57185644142a6998f5c7f9a5547d698370488472cbbe",
+      "blob": "8fd6a4e731dc52d1214203a3a2d0a6b05b24ef0c",
+      "lines": 80,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalWholePositiveRootMatching",
+        "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeRootCircleJets"
+      ],
+      "public_names": [
+        "wholePositiveTransportMatching_actual_root_firstJets"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveActualRootFirstJetsReviewedManifest.json",
+        "sha256": "a72c54e2493fa3a37e31a2e3bb8d1837148ef4104b8f3268e56e255fea5ce379"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/WholePositiveActualRootFirstJetsIndependentReview.json",
+        "sha256": "af400de12a9fd7ecbd13adce36493306c3069f22a8225f65d45fd52fed9991e7"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeRootCircleJets",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeRootCircleJets.lean",
+      "file": "src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeRootCircleJets.lean",
+      "sha256": "5dc841ec44f71e0195c7ee18b2b9b4c26bc1cb2891df37a68a75e3f1f664a1ca",
+      "blob": "b3384e644fc97fc8f120ed3377e4ebdd1b2adcd4",
+      "lines": 75,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalRootReferencePoint",
+        "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeFirstJetTransfer"
+      ],
+      "public_names": [
+        "canonicalReferenceGauge_rootCircle_firstJets"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeRootCircleJetsReviewedManifest.json",
+        "sha256": "c9ee57e932ea75c9e39ab17d07cd30c397a39afa4919c1a6b5f53e8ee214da89"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CanonicalReferenceGaugeRootCircleJetsIndependentReview.json",
+        "sha256": "21bbcdd6dcdad20ed22ad246f53c212a1e1539e4577b69e283b317a97ede0f68"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalRootReferencePoint",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalRootReferencePoint.lean",
+      "file": "src/ContinuousFlexibility/Analysis/CanonicalRootReferencePoint.lean",
+      "sha256": "25ccdbbc7ea4396d62aa807739b3a514a6f0d234716998bc8a7f2ea660204696",
+      "blob": "c9151542eb34c0b542e371c5e8795e9561c7a56c",
+      "lines": 56,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary"
+      ],
+      "public_names": [
+        "canonicalReferencePoint_root_data"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeRootCircleJetsReviewedManifest.json",
+        "sha256": "c9ee57e932ea75c9e39ab17d07cd30c397a39afa4919c1a6b5f53e8ee214da89"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CanonicalReferenceGaugeRootCircleJetsIndependentReview.json",
+        "sha256": "21bbcdd6dcdad20ed22ad246f53c212a1e1539e4577b69e283b317a97ede0f68"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeFirstJetTransfer",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeFirstJetTransfer.lean",
+      "file": "src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeFirstJetTransfer.lean",
+      "sha256": "d7c66f9ba5747ed0b2cfff763b67a823e0c2a5f2de86b6da045f0f56ef238c78",
+      "blob": "277d516f1a3b04934606c057b1539d3fd2d371b9",
+      "lines": 77,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeReconstruction"
+      ],
+      "public_names": [
+        "canonicalReferenceGauge_raw_firstJets",
+        "wholePositiveReferenceGaugeChart_normal_zero"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeFirstJetTransferReviewedManifest.json",
+        "sha256": "3714ad542b35b8111a70299fd5aa2ae68ab660b2bbdf247ceae422f8f9b42c7f"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/CanonicalReferenceGaugeFirstJetTransferIndependentReview.json",
+        "sha256": "5fb8f04a510367e58d45e26f4382e82e27896cc573f3b2471a92cb39aaa6fe1f"
+      },
+      "supplemental_reviews": [
+        {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/CanonicalReferenceGaugeFirstJetTransferRangeProviderReview.json",
+          "sha256": "aa9cb684d0138efc30c2be887ffe1cb602042912bb866b34bd61fb949ee090a0"
+        }
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeReconstruction",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeReconstruction.lean",
+      "file": "src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeReconstruction.lean",
+      "sha256": "93acd97fbcd9b462756450fd73b0c507a7c6685b498c4064742c6dc0ba33d210",
+      "blob": "26ed383f47116763359682c60dc2edc920b01d5e",
+      "lines": 108,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalActualEndpointFields",
+        "ContinuousFlexibility.Analysis.WholePositiveReferenceGaugeFirstJets"
+      ],
+      "public_names": [
+        "canonicalReferenceGauge_reconstructs_closed_fields",
+        "canonicalReferenceGauge_closed_fullJets"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ReferenceGaugeFirstJetsReviewedManifest.json",
+        "sha256": "20ecfa6e6254e59206b4d4a1aac70e25fb33908bb37c14aee065d29149e2e8a5"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/ReferenceGaugeFirstJetsIndependentReview.json",
+        "sha256": "4b9722c92dd6488fefee6ce735640402452ab6e02c5f58131554dfadae58c997"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGaugeFirstJets",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveReferenceGaugeFirstJets.lean",
+      "file": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGaugeFirstJets.lean",
+      "sha256": "eb26b1fa7b31c91e00d9671367cb8c80494714bd93053a41ae702f812780c3b4",
+      "blob": "65bb127b9dd24cee1d337794f1a01d8f12a54326",
+      "lines": 53,
+      "imports": [
+        "ContinuousFlexibility.Analysis.FiniteFirstJetInverse",
+        "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge"
+      ],
+      "public_names": [
+        "wholePositiveReferenceGauge_firstJets_of_transport"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ReferenceGaugeFirstJetsReviewedManifest.json",
+        "sha256": "20ecfa6e6254e59206b4d4a1aac70e25fb33908bb37c14aee065d29149e2e8a5"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/ReferenceGaugeFirstJetsIndependentReview.json",
+        "sha256": "4b9722c92dd6488fefee6ce735640402452ab6e02c5f58131554dfadae58c997"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootInterfaces",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeRootInterfaces.lean",
+      "file": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootInterfaces.lean",
+      "sha256": "928f78885b39f50f6b0a0259323d44a11f3cc1e4dd1c9922cfdfc59804c408cd",
+      "blob": "62be48b1594bfe8207dac3edb24dac4f750415cf",
+      "lines": 162,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasInterfaces",
+        "ContinuousFlexibility.Analysis.WholeComponentFieldSelection",
+        "ContinuousFlexibility.Analysis.PositiveComponentAdjacency"
+      ],
+      "public_names": [
+        "n04PositiveComponents_no_adjacent_endpoints",
+        "n04WholePiece_adjacent_root_types",
+        "n04WholeReferenceGaugeAtlasData_actual_root_types"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeRootInterfacesReviewedManifest.json",
+        "sha256": "6b31dac8dd8e087e42f6687941a31d711bf6bdc1652ea504211570a19a3a47d4"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/WholeReferenceGaugeRootInterfacesIndependentReview.json",
+        "sha256": "2a3222a37effffaad606cc389e3db688b8e74125cc2ee180868b0d6c0893fa7d"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasInterfaces",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeAtlasInterfaces.lean",
+      "file": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasInterfaces.lean",
+      "sha256": "2548423c10106e5764d37da89d55b1dc7ed3b910f9a26b7f629aa0fc4a6de6ac",
+      "blob": "23a91459c8a857886c76d04e87e1f9d09443f634",
+      "lines": 70,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+        "ContinuousFlexibility.Analysis.WholeCanonicalInterfaceClassification",
+        "ContinuousFlexibility.Analysis.ActualAtlasCutFirstJets"
+      ],
+      "public_names": [
+        "n04WholeReferenceGaugeAtlasData_actual_interfaceClassification",
+        "n04WholeReferenceGaugeAtlasData_cutFirstJetMatching"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeAtlasInterfacesReviewedManifest.json",
+        "sha256": "d88eae7d2730b560151c7d7b06d56642cdd5c74752da469b6e8a0dd43e53f26d"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/WholeReferenceGaugeAtlasInterfacesIndependentReview.json",
+        "sha256": "42087c571d9c0bc54785c828824a76c9234efd94d22cbe6692c5c5c58176974d"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeCanonicalInterfaceClassification",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeCanonicalInterfaceClassification.lean",
+      "file": "src/ContinuousFlexibility/Analysis/WholeCanonicalInterfaceClassification.lean",
+      "sha256": "4e258e62d63ad210d6d8e39ebf3e5b0f3dfe1a507134d77aceda3c3b7ac770bc",
+      "blob": "b21513d9523375d05141018d7f7e296f78d44212",
+      "lines": 122,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeCanonicalAtlasReferencePartition"
+      ],
+      "public_names": [
+        "n04WholePiece_adjacent_interface",
+        "n04WholeCanonicalAtlasData_actual_interfaceClassification"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeCanonicalInterfaceClassificationReviewedManifest.json",
+        "sha256": "0717275818f7cb2457dc99a2979b7c47571e9a56dc2b052a02dd47eda1b6f8c7"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholeCanonicalInterfaceClassificationIndependentReview.json",
+        "sha256": "7b0506d3e0ce5be7841152f697e840f4f8198c614ddf05da0dae8891e969fb7f"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualAtlasCutFirstJets",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualAtlasCutFirstJets.lean",
+      "file": "src/ContinuousFlexibility/Analysis/ActualAtlasCutFirstJets.lean",
+      "sha256": "8b9f98c22ddbad6a4c7244f7bd5ce061a14594d77926e7bc48d01d6d4a07c35c",
+      "blob": "ddb7cdf61cd013c97afe3efb33b13e03394fa986",
+      "lines": 146,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ConstructedRootCutFirstJets",
+        "ContinuousFlexibility.Analysis.N04bActualAtlasCuts",
+        "ContinuousFlexibility.Analysis.N04bActualCharacteristics",
+        "ContinuousFlexibility.Analysis.WholeCanonicalAtlasData"
+      ],
+      "public_names": [
+        "n04Coordinates_actualAtlas_cutFirstJetMatching",
+        "n04WholeCanonicalAtlasData_cutFirstJetMatching"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualCutTransmissionReviewedManifest.json",
+        "sha256": "75965327e6dda26c602e0003dd1291220510fff635637de62dabf15173a0b316"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/ActualAtlasCutFirstJetsIndependentReview.json",
+        "sha256": "f235572258cf03581d7d660b5fd752375dd3a0f292ac9f6738a99f715a1434d6"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeGlobalTransport",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeGlobalTransport.lean",
+      "file": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeGlobalTransport.lean",
+      "sha256": "17179bac21aa6863d3a35ec282d4e0420ca30d6444312149df3d06d78eae5f23",
+      "blob": "9dd60b6e07fff54af9c9212383f8fddaa9eb3fdb",
+      "lines": 97,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+        "ContinuousFlexibility.Analysis.CanonicalActualWholeGeometry"
+      ],
+      "public_names": [
+        "n04WholeReferenceGaugeAtlasData_relative_fields_eq",
+        "n04WholeReferenceGaugeAtlasData_global_transport"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeGlobalTransportReviewedManifest.json",
+        "sha256": "f0a26518adcc14cf6b2784edacd9972151c20aa65595c03325d5bfef665a5831"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/WholeReferenceGaugeGlobalTransportIndependentReview.json",
+        "sha256": "2a8684933f18defd0ba9f4ffa5bbaeef0ddf5eff891d3a40ef8a868425d1b1d3"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeReferencePrincipal",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeReferencePrincipal.lean",
+      "file": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean",
+      "sha256": "00a9377f1e6d12183ad385ce1e1e5a5fcec7035688eea3ce057c69ef878bd224",
+      "blob": "2d253a2be2fb1b7653fba79a0ff2495b7244e1ab",
+      "lines": 175,
+      "imports": [
+        "ContinuousFlexibility.Analysis.RadialReferencePotentialGerms",
+        "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeReferenceRadial",
+        "ContinuousFlexibility.Analysis.WholeCanonicalAtlasPrincipalDensity"
+      ],
+      "public_names": [
+        "n04WholeReferenceGaugeAtlasData_actual_referencePrincipal_qualitative"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeReferencePrincipalReviewedManifest.json",
+        "sha256": "01149dca044841909ecc4398c562e1ef48b584bacd18b3b850a8d84c83620b1b"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/WholeReferenceGaugeReferencePrincipalIndependentReview.json",
+        "sha256": "447c276cff47cb62bb697cc4937fd2ea67a8f9e1b1b058c9ef255f7e5868e449"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RadialReferencePotentialGerms",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePotentialGerms.lean",
+      "file": "src/ContinuousFlexibility/Analysis/RadialReferencePotentialGerms.lean",
+      "sha256": "1f3c55677ebfb7f954afd204318387084aa694a21a99c465d078465699012039",
+      "blob": "ccd28495960875f494c654dc82d107ed67ba59a4",
+      "lines": 143,
+      "imports": [
+        "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+        "ContinuousFlexibility.Analysis.ReferenceCircleFlow",
+        "ContinuousFlexibility.Analysis.N04bOperatorGerms"
+      ],
+      "public_names": [
+        "radial_reference_chart_germ_on_strip",
+        "physical_mixed_zero_of_radial_unit_density",
+        "divergenceOperator_of_radial_germs",
+        "inverseChartPotential_radial_formula_on_strip"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeReferencePrincipalReviewedManifest.json",
+        "sha256": "01149dca044841909ecc4398c562e1ef48b584bacd18b3b850a8d84c83620b1b"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/WholeReferenceGaugeReferencePrincipalIndependentReview.json",
+        "sha256": "447c276cff47cb62bb697cc4937fd2ea67a8f9e1b1b058c9ef255f7e5868e449"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.BufferedRadialAuxiliaryColumn",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/BufferedRadialAuxiliaryColumn.lean",
+      "file": "src/ContinuousFlexibility/Analysis/BufferedRadialAuxiliaryColumn.lean",
+      "sha256": "35dbcac716ecd0568795cc8510ee7eeed5d1cb47b5ef20ba784e4dd9d0d8d3ee",
+      "blob": "6bc85192cefb26fff23cca0845fdfa7296ed161e",
+      "lines": 122,
+      "imports": [
+        "ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn",
+        "ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer"
+      ],
+      "public_names": [
+        "exists_radial_auxiliaryColumn_on_interval",
+        "exists_radial_auxiliaryColumn_in_positiveBuffer",
+        "exists_buffered_auxiliaryColumnGauge_replacement"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/BufferedRadialAuxiliaryColumnReviewedManifest.json",
+        "sha256": "e41b8670ddd1f4646b96ca9613e73aaf83ad372c333b9a0c7f1e40e67b63d533"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/BufferedRadialAuxiliaryColumnIndependentReview.json",
+        "sha256": "74652b39d82eee25051aee1707d29fe1a8768479d5328ea77be86701ea3508d3"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/PhysicalSpacesAuxiliaryColumn.lean",
+      "file": "src/ContinuousFlexibility/Analysis/PhysicalSpacesAuxiliaryColumn.lean",
+      "sha256": "b2848268baf18c447dccbfc7275b74ea927c679351768d214ede503f31424160",
+      "blob": "f51d3dac4fa34bdb9cd36c4588b5a490437d10b5",
+      "lines": 134,
+      "imports": [
+        "ContinuousFlexibility.Analysis.SpacesSources",
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ],
+      "public_names": [
+        "physicalSpacesReplaceAuxiliaryColumn",
+        "geometryReplaceAuxiliaryColumn",
+        "returnReplaceAuxiliaryColumn",
+        "correctionReplaceAuxiliaryColumn",
+        "canonicalReplaceAuxiliaryColumn",
+        "isPhysicalSpaces_replaceAuxiliaryColumn",
+        "nonlinearThrough03_replaceAuxiliaryColumn",
+        "canonicalGeometry_replaceAuxiliaryColumn"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/BufferedRadialAuxiliaryColumnReviewedManifest.json",
+        "sha256": "e41b8670ddd1f4646b96ca9613e73aaf83ad372c333b9a0c7f1e40e67b63d533"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/PhysicalSpacesAuxiliaryColumnIndependentReview.json",
+        "sha256": "142b4f365c2e588ba0768b8ef82e88d299f0ea24bcccbf2f98d5e0b891c1932d"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ConstructedRootCutFirstJets",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/cut-first-jets-syntax/ConstructedRootCutFirstJets.lean",
+      "file": "src/ContinuousFlexibility/Analysis/ConstructedRootCutFirstJets.lean",
+      "sha256": "a29f05ee93cfb524e474c635109158346645adf7cda4c0c36152b30b0c4412e4",
+      "blob": "c351965626552621e295cf05b2295b8a07a5b29d",
+      "lines": 174,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bConstructedRootTransmission",
+        "ContinuousFlexibility.Analysis.N04bRootInteriorRegularity",
+        "Mathlib.Analysis.Calculus.FDeriv.Pow",
+        "Mathlib.Analysis.SpecialFunctions.Sqrt"
+      ],
+      "public_names": [
+        "n04Coordinates_constructedRoot_cut_firstJets"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ConstructedRootCutFirstJetsReviewedManifest.json",
+        "sha256": "149080f566248354e5323212d314326232a7057befd299975d5980fe5476c04d"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/ConstructedRootCutFirstJetsIndependentReview.json",
+        "sha256": "525080f4482b009d904021670e306101e2dad768fb763099fbf2f0d222e9015c"
+      },
+      "supplemental_reviews": []
+    }
+  ],
+  "installation_topological_order": [
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasCutOperator",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeReferenceRadial",
+    "ContinuousFlexibility.Analysis.FiniteFirstJetInverse",
+    "ContinuousFlexibility.Analysis.ActualPositiveReferenceFirstJets",
+    "ContinuousFlexibility.Analysis.CanonicalRootReferencePoint",
+    "ContinuousFlexibility.Analysis.WholePositiveReferenceGaugeFirstJets",
+    "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeReconstruction",
+    "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeFirstJetTransfer",
+    "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeRootCircleJets",
+    "ContinuousFlexibility.Analysis.WholePositiveActualRootFirstJets",
+    "ContinuousFlexibility.Analysis.ActualPositiveGaugeRootFirstJets",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootFirstJets",
+    "ContinuousFlexibility.Analysis.WholeCanonicalInterfaceClassification",
+    "ContinuousFlexibility.Analysis.ConstructedRootCutFirstJets",
+    "ContinuousFlexibility.Analysis.ActualAtlasCutFirstJets",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasInterfaces",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootInterfaces",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootMatching",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeTransmission",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeGlobalTransport",
+    "ContinuousFlexibility.Analysis.CanonicalActualReferenceGeometry",
+    "ContinuousFlexibility.Analysis.RadialReferencePotentialGerms",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeReferencePrincipal",
+    "ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn",
+    "ContinuousFlexibility.Analysis.BufferedRadialAuxiliaryColumn"
+  ],
+  "dependency_check": {
+    "nodes": 865,
+    "edges": 1589,
+    "missing": [],
+    "cycles": [],
+    "batch4_intersection": [],
+    "nonnew_nodes": 840,
+    "existing14_nodes": 14,
+    "current_baseline_nodes": 826,
+    "source_verification": "All 865 source bodies in this selected closure were already cached; every Git blob, SHA256, length, and project import was recomputed. No additional source fetch was needed for this plan.",
+    "full_source_fingerprint_sequence_digest": {
+      "sha256": "fa79ab1bf037c8ba1a8b1cea546ee6d4a29e58fd7141cf09133417e41114e1b0",
+      "blob": "157399ea8fd04ea177ae554d509826add85c7b52",
+      "bytes": 204854,
+      "lines": 1
+    },
+    "baseline_825": "825 baseline provider blobs equal c796 exactly.",
+    "explicit_normalizer": {
+      "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "reason": "The explicit CI165 addon; all seven old public headers were rechecked unchanged and the two algebraic APIs are additive.",
+      "evidence": {
+        "blob": "70dff750330a8243935b3a095d4d786a55d1701b",
+        "sha256": "2e31dd313d5c3acb462cee23b38bcfde98e6821f46de97ddcbd6cba16e92a33b"
+      }
+    },
+    "existing_14": "Exactly the unchanged 14 source blobs in the CI165 prefix are prerequisites.",
+    "cohort4_source_overlap": [],
+    "cohort4_provider_overlap": [],
+    "no_1ece_field_port_needed_for_this_current_pin": true,
+    "new_main_field_port_still_required_later": true,
+    "full_project_graph_not_written": "This small plan records the exact recipe, fingerprint-sequence digest, counts, and topological order. It is not represented as a newly frozen full 865-node graph object; a stage successor must rebind the exact green CI165 tree."
+  },
+  "symbols": {
+    "new_public_names": 50,
+    "internal_collisions": [],
+    "collisions_with_selected_840_existing_nodes": [],
+    "collisions_with_six_CI165_leaf_32_names": [],
+    "scope": "The 25 actual source bodies were scanned against their entire 840-node existing closure and the six CI165 leaves. The historical aae17 scan covers the original 105 names against the projected c9 source tree, including the exact cohort4 files. No new 124-file body fetch or fresh whole-repository scan was performed.",
+    "historical_projected_main_scan": {
+      "blob": "6b820fd901e274990396072d1569676ee82018bb",
+      "sha256": "aae17c62ec1956b8ffe5d2037e3f2d8450eb56fdfbb9b45df93d252c361cb070"
+    },
+    "public_names": [
+      {
+        "name": "ContinuousFlexibility.Analysis.n04Coordinates_exists_actual_reference_geometry",
+        "short": "n04Coordinates_exists_actual_reference_geometry",
+        "line": 24,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.CanonicalActualReferenceGeometry",
+        "blob": "c0a923a761357bfcb72f507a2b9906cc6221f45e"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_actual_cutOperator_and_sourcePairing",
+        "short": "n04WholeReferenceGaugeAtlasData_actual_cutOperator_and_sourcePairing",
+        "line": 23,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasCutOperator",
+        "blob": "14acbf9b59c2fd57da53b0d7e0290c43f649331c"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04_referenceRadial_of_forward",
+        "short": "n04_referenceRadial_of_forward",
+        "line": 20,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeReferenceRadial",
+        "blob": "4fb8973a3fbe0b887088e2d297b5ff0cb9cfd11d"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_actual_referenceRadial",
+        "short": "n04WholeReferenceGaugeAtlasData_actual_referenceRadial",
+        "line": 59,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeReferenceRadial",
+        "blob": "4fb8973a3fbe0b887088e2d297b5ff0cb9cfd11d"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_actual_transmissionGeometry_of_root",
+        "short": "n04WholeReferenceGaugeAtlasData_actual_transmissionGeometry_of_root",
+        "line": 19,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeTransmission",
+        "blob": "706d01f4aaf9bc87b63313e16292f0528678aff5"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_actual_transmissionGeometry",
+        "short": "n04WholeReferenceGaugeAtlasData_actual_transmissionGeometry",
+        "line": 56,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeTransmission",
+        "blob": "706d01f4aaf9bc87b63313e16292f0528678aff5"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_actual_rootFirstJetMatching",
+        "short": "n04WholeReferenceGaugeAtlasData_actual_rootFirstJetMatching",
+        "line": 22,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootMatching",
+        "blob": "d044ebf2139de1886c261a1ad19294ff4f227d5b"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_actual_root_firstJets",
+        "short": "n04WholeReferenceGaugeAtlasData_actual_root_firstJets",
+        "line": 21,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootFirstJets",
+        "blob": "be4a8a0a3fe29b50db53f246b56d536dbe172f49"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04Coordinates_actual_positive_gauge_root_firstJets",
+        "short": "n04Coordinates_actual_positive_gauge_root_firstJets",
+        "line": 21,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.ActualPositiveGaugeRootFirstJets",
+        "blob": "af468a906190a61a33173a6df00a8ae88a30afb4"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04Coordinates_actual_positive_reference_firstJets",
+        "short": "n04Coordinates_actual_positive_reference_firstJets",
+        "line": 22,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceFirstJets",
+        "blob": "76fa1a822a2df404ea31125c346670efa50b3010"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.finiteFullJetMatch_one_of_value_fderiv",
+        "short": "finiteFullJetMatch_one_of_value_fderiv",
+        "line": 23,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.FiniteFirstJetInverse",
+        "blob": "bf09a201a95c1fbcfb1c956a58a2fc041e6a0051"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.FiniteFullJetMatch.comp_match",
+        "short": "FiniteFullJetMatch.comp_match",
+        "line": 40,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.FiniteFirstJetInverse",
+        "blob": "bf09a201a95c1fbcfb1c956a58a2fc041e6a0051"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.FiniteFullJetMatch.div",
+        "short": "FiniteFullJetMatch.div",
+        "line": 48,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.FiniteFirstJetInverse",
+        "blob": "bf09a201a95c1fbcfb1c956a58a2fc041e6a0051"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.finiteFullJetMatch_one_inverse_of_germs",
+        "short": "finiteFullJetMatch_one_inverse_of_germs",
+        "line": 59,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.FiniteFirstJetInverse",
+        "blob": "bf09a201a95c1fbcfb1c956a58a2fc041e6a0051"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.wholePositiveTransportMatching_actual_root_firstJets",
+        "short": "wholePositiveTransportMatching_actual_root_firstJets",
+        "line": 21,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholePositiveActualRootFirstJets",
+        "blob": "8fd6a4e731dc52d1214203a3a2d0a6b05b24ef0c"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.canonicalReferenceGauge_rootCircle_firstJets",
+        "short": "canonicalReferenceGauge_rootCircle_firstJets",
+        "line": 20,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeRootCircleJets",
+        "blob": "b3384e644fc97fc8f120ed3377e4ebdd1b2adcd4"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.canonicalReferencePoint_root_data",
+        "short": "canonicalReferencePoint_root_data",
+        "line": 18,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.CanonicalRootReferencePoint",
+        "blob": "c9151542eb34c0b542e371c5e8795e9561c7a56c"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.canonicalReferenceGauge_raw_firstJets",
+        "short": "canonicalReferenceGauge_raw_firstJets",
+        "line": 20,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeFirstJetTransfer",
+        "blob": "277d516f1a3b04934606c057b1539d3fd2d371b9"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.wholePositiveReferenceGaugeChart_normal_zero",
+        "short": "wholePositiveReferenceGaugeChart_normal_zero",
+        "line": 71,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeFirstJetTransfer",
+        "blob": "277d516f1a3b04934606c057b1539d3fd2d371b9"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.canonicalReferenceGauge_reconstructs_closed_fields",
+        "short": "canonicalReferenceGauge_reconstructs_closed_fields",
+        "line": 31,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeReconstruction",
+        "blob": "26ed383f47116763359682c60dc2edc920b01d5e"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.canonicalReferenceGauge_closed_fullJets",
+        "short": "canonicalReferenceGauge_closed_fullJets",
+        "line": 72,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeReconstruction",
+        "blob": "26ed383f47116763359682c60dc2edc920b01d5e"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.wholePositiveReferenceGauge_firstJets_of_transport",
+        "short": "wholePositiveReferenceGauge_firstJets_of_transport",
+        "line": 23,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGaugeFirstJets",
+        "blob": "65bb127b9dd24cee1d337794f1a01d8f12a54326"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04PositiveComponents_no_adjacent_endpoints",
+        "short": "n04PositiveComponents_no_adjacent_endpoints",
+        "line": 25,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootInterfaces",
+        "blob": "62be48b1594bfe8207dac3edb24dac4f750415cf"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholePiece_adjacent_root_types",
+        "short": "n04WholePiece_adjacent_root_types",
+        "line": 58,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootInterfaces",
+        "blob": "62be48b1594bfe8207dac3edb24dac4f750415cf"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_actual_root_types",
+        "short": "n04WholeReferenceGaugeAtlasData_actual_root_types",
+        "line": 125,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootInterfaces",
+        "blob": "62be48b1594bfe8207dac3edb24dac4f750415cf"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_actual_interfaceClassification",
+        "short": "n04WholeReferenceGaugeAtlasData_actual_interfaceClassification",
+        "line": 21,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasInterfaces",
+        "blob": "23a91459c8a857886c76d04e87e1f9d09443f634"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_cutFirstJetMatching",
+        "short": "n04WholeReferenceGaugeAtlasData_cutFirstJetMatching",
+        "line": 48,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasInterfaces",
+        "blob": "23a91459c8a857886c76d04e87e1f9d09443f634"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholePiece_adjacent_interface",
+        "short": "n04WholePiece_adjacent_interface",
+        "line": 18,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeCanonicalInterfaceClassification",
+        "blob": "b21513d9523375d05141018d7f7e296f78d44212"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeCanonicalAtlasData_actual_interfaceClassification",
+        "short": "n04WholeCanonicalAtlasData_actual_interfaceClassification",
+        "line": 80,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeCanonicalInterfaceClassification",
+        "blob": "b21513d9523375d05141018d7f7e296f78d44212"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04Coordinates_actualAtlas_cutFirstJetMatching",
+        "short": "n04Coordinates_actualAtlas_cutFirstJetMatching",
+        "line": 106,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.ActualAtlasCutFirstJets",
+        "blob": "ddb7cdf61cd013c97afe3efb33b13e03394fa986"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeCanonicalAtlasData_cutFirstJetMatching",
+        "short": "n04WholeCanonicalAtlasData_cutFirstJetMatching",
+        "line": 127,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.ActualAtlasCutFirstJets",
+        "blob": "ddb7cdf61cd013c97afe3efb33b13e03394fa986"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_relative_fields_eq",
+        "short": "n04WholeReferenceGaugeAtlasData_relative_fields_eq",
+        "line": 32,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeGlobalTransport",
+        "blob": "9dd60b6e07fff54af9c9212383f8fddaa9eb3fdb"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_global_transport",
+        "short": "n04WholeReferenceGaugeAtlasData_global_transport",
+        "line": 66,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeGlobalTransport",
+        "blob": "9dd60b6e07fff54af9c9212383f8fddaa9eb3fdb"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_actual_referencePrincipal_qualitative",
+        "short": "n04WholeReferenceGaugeAtlasData_actual_referencePrincipal_qualitative",
+        "line": 93,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeReferencePrincipal",
+        "blob": "2d253a2be2fb1b7653fba79a0ff2495b7244e1ab"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.radial_reference_chart_germ_on_strip",
+        "short": "radial_reference_chart_germ_on_strip",
+        "line": 21,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.RadialReferencePotentialGerms",
+        "blob": "ccd28495960875f494c654dc82d107ed67ba59a4"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.physical_mixed_zero_of_radial_unit_density",
+        "short": "physical_mixed_zero_of_radial_unit_density",
+        "line": 40,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.RadialReferencePotentialGerms",
+        "blob": "ccd28495960875f494c654dc82d107ed67ba59a4"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.divergenceOperator_of_radial_germs",
+        "short": "divergenceOperator_of_radial_germs",
+        "line": 78,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.RadialReferencePotentialGerms",
+        "blob": "ccd28495960875f494c654dc82d107ed67ba59a4"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.inverseChartPotential_radial_formula_on_strip",
+        "short": "inverseChartPotential_radial_formula_on_strip",
+        "line": 110,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.RadialReferencePotentialGerms",
+        "blob": "ccd28495960875f494c654dc82d107ed67ba59a4"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.exists_radial_auxiliaryColumn_on_interval",
+        "short": "exists_radial_auxiliaryColumn_on_interval",
+        "line": 21,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.BufferedRadialAuxiliaryColumn",
+        "blob": "6bc85192cefb26fff23cca0845fdfa7296ed161e"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.exists_radial_auxiliaryColumn_in_positiveBuffer",
+        "short": "exists_radial_auxiliaryColumn_in_positiveBuffer",
+        "line": 67,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.BufferedRadialAuxiliaryColumn",
+        "blob": "6bc85192cefb26fff23cca0845fdfa7296ed161e"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.exists_buffered_auxiliaryColumnGauge_replacement",
+        "short": "exists_buffered_auxiliaryColumnGauge_replacement",
+        "line": 96,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.BufferedRadialAuxiliaryColumn",
+        "blob": "6bc85192cefb26fff23cca0845fdfa7296ed161e"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.physicalSpacesReplaceAuxiliaryColumn",
+        "short": "physicalSpacesReplaceAuxiliaryColumn",
+        "line": 20,
+        "kind": "def",
+        "module": "ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn",
+        "blob": "f51d3dac4fa34bdb9cd36c4588b5a490437d10b5"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.geometryReplaceAuxiliaryColumn",
+        "short": "geometryReplaceAuxiliaryColumn",
+        "line": 24,
+        "kind": "def",
+        "module": "ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn",
+        "blob": "f51d3dac4fa34bdb9cd36c4588b5a490437d10b5"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.returnReplaceAuxiliaryColumn",
+        "short": "returnReplaceAuxiliaryColumn",
+        "line": 37,
+        "kind": "def",
+        "module": "ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn",
+        "blob": "f51d3dac4fa34bdb9cd36c4588b5a490437d10b5"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.correctionReplaceAuxiliaryColumn",
+        "short": "correctionReplaceAuxiliaryColumn",
+        "line": 46,
+        "kind": "def",
+        "module": "ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn",
+        "blob": "f51d3dac4fa34bdb9cd36c4588b5a490437d10b5"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.canonicalReplaceAuxiliaryColumn",
+        "short": "canonicalReplaceAuxiliaryColumn",
+        "line": 53,
+        "kind": "def",
+        "module": "ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn",
+        "blob": "f51d3dac4fa34bdb9cd36c4588b5a490437d10b5"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.isPhysicalSpaces_replaceAuxiliaryColumn",
+        "short": "isPhysicalSpaces_replaceAuxiliaryColumn",
+        "line": 73,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn",
+        "blob": "f51d3dac4fa34bdb9cd36c4588b5a490437d10b5"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.nonlinearThrough03_replaceAuxiliaryColumn",
+        "short": "nonlinearThrough03_replaceAuxiliaryColumn",
+        "line": 98,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn",
+        "blob": "f51d3dac4fa34bdb9cd36c4588b5a490437d10b5"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.canonicalGeometry_replaceAuxiliaryColumn",
+        "short": "canonicalGeometry_replaceAuxiliaryColumn",
+        "line": 112,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn",
+        "blob": "f51d3dac4fa34bdb9cd36c4588b5a490437d10b5"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04Coordinates_constructedRoot_cut_firstJets",
+        "short": "n04Coordinates_constructedRoot_cut_firstJets",
+        "line": 79,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.ConstructedRootCutFirstJets",
+        "blob": "c351965626552621e295cf05b2295b8a07a5b29d"
+      }
+    ],
+    "required_final_check": "At the actual completed CI165 tree, perform the normal full proposed-tree qualified-name/path/import checks; do not treat this historical projected scan as a new whole-repository audit."
+  },
+  "cohort4_source_identities": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualFlowLowGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualFlowLowGeometry.lean",
+      "planned_c9_blob": "ce6de09340aaf652ed06f3675ad6c0b3398efff7",
+      "main_1ece_blob": "ce6de09340aaf652ed06f3675ad6c0b3398efff7",
+      "sha256": "1823dd5d9a652129d2a9603444a66ac5674a77cded696001a957030cd92167a8",
+      "lines": 166,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualLinearSpeedJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualLinearSpeedJets.lean",
+      "planned_c9_blob": "1fe066419359df3f8bc074f8faf64920a12a9939",
+      "main_1ece_blob": "1fe066419359df3f8bc074f8faf64920a12a9939",
+      "sha256": "b443e33eb0dd0ae221a74d3600b5118ec6c5fda7de9d5ee98904701db4384b73",
+      "lines": 86,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualLinearCoefficientBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualLinearCoefficientBounds.lean",
+      "planned_c9_blob": "d52f5c161d7fa05a1321d6d7e8dc0226d2a887df",
+      "main_1ece_blob": "d52f5c161d7fa05a1321d6d7e8dc0226d2a887df",
+      "sha256": "e0fc64f1b68da9576e5a1db7cd542592e90e0990976e7bb171dc8800ba82b9e3",
+      "lines": 127,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualFlowLowBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualFlowLowBounds.lean",
+      "planned_c9_blob": "076083fa73495c4fae6d6ab27dbe613676981762",
+      "main_1ece_blob": "076083fa73495c4fae6d6ab27dbe613676981762",
+      "sha256": "0a6300d9d56c35a72ab2260457ec5fa540fdcc3b73c9199b93cc9cca7ea7e10c",
+      "lines": 165,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCosineSignedSpeed",
+      "path": "src/ContinuousFlexibility/Analysis/N01cCosineSignedSpeed.lean",
+      "planned_c9_blob": "99e44876c9b6fc778d767ef46487522bb1d81870",
+      "main_1ece_blob": "99e44876c9b6fc778d767ef46487522bb1d81870",
+      "sha256": "5f82b26e3616c227911bf7a7ecd3007fba199d51728a722b278e970035fab835",
+      "lines": 107,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCosineAngularStateJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01cCosineAngularStateJets.lean",
+      "planned_c9_blob": "cb423a6de0001efb09b7b81e5e83b6419143be15",
+      "main_1ece_blob": "cb423a6de0001efb09b7b81e5e83b6419143be15",
+      "sha256": "153a968c9ef3ff237b66bfbd382323223fb5fe186868e7c0f970e10c392d534a",
+      "lines": 186,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cGradedJetContinuity",
+      "path": "src/ContinuousFlexibility/Analysis/N01cGradedJetContinuity.lean",
+      "planned_c9_blob": "160c33d0fd5b25f6251019098ee808685f3bd50e",
+      "main_1ece_blob": "160c33d0fd5b25f6251019098ee808685f3bd50e",
+      "sha256": "6db2e739ed6fbd0bcc3825e90a6a740e2fb0f6376ed4defd43098413a3dbc950",
+      "lines": 131,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cEndpointCosineTower",
+      "path": "src/ContinuousFlexibility/Analysis/N01cEndpointCosineTower.lean",
+      "planned_c9_blob": "43c537b34a86946bf57fd762622b528e43d8a7b3",
+      "main_1ece_blob": "43c537b34a86946bf57fd762622b528e43d8a7b3",
+      "sha256": "908f37fd26fbf2d4dbf0acc4a8a7c931f4d173c35b029cd3b01d9242a64d61ec",
+      "lines": 180,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualCosineSpeedTower",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualCosineSpeedTower.lean",
+      "planned_c9_blob": "58ab8e480631e0e2389b9acd51fb0cc26580a2eb",
+      "main_1ece_blob": "58ab8e480631e0e2389b9acd51fb0cc26580a2eb",
+      "sha256": "f6f50a40aab0367747a959f535e143fba408cd6e23b00192c1f171f198d86ee9",
+      "lines": 140,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOrdinarySpeedFiniteAffine",
+      "path": "src/ContinuousFlexibility/Analysis/N01cOrdinarySpeedFiniteAffine.lean",
+      "planned_c9_blob": "856dc5bceab926816d9d97c8c742c5921153bf20",
+      "main_1ece_blob": "856dc5bceab926816d9d97c8c742c5921153bf20",
+      "sha256": "51176802c3b51cea35ed833bce1cf8f2ef99a9e7821db3768c14ec40b7355619",
+      "lines": 191,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cEndpointRadialJointTowers",
+      "path": "src/ContinuousFlexibility/Analysis/N01cEndpointRadialJointTowers.lean",
+      "planned_c9_blob": "6cfcc25acd2acc4cf140ddcf9430af2494063b77",
+      "main_1ece_blob": "6cfcc25acd2acc4cf140ddcf9430af2494063b77",
+      "sha256": "4d9bd4e800107be453fdcee40e25367e9c317bde9f50ceaec42149acff11dabf",
+      "lines": 143,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOrdinarySpeedJointTowers",
+      "path": "src/ContinuousFlexibility/Analysis/N01cOrdinarySpeedJointTowers.lean",
+      "planned_c9_blob": "397be0f55f160fe1c019c7fbf0400150ba4e8a7d",
+      "main_1ece_blob": "397be0f55f160fe1c019c7fbf0400150ba4e8a7d",
+      "sha256": "cd9ac8cf07025e5300153593607297b87951a11847946caa00854e600bfa33fc",
+      "lines": 71,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCommonCosineTowers",
+      "path": "src/ContinuousFlexibility/Analysis/N01cCommonCosineTowers.lean",
+      "planned_c9_blob": "27961b515007982f65ba36bbde4990925ba0ddac",
+      "main_1ece_blob": "27961b515007982f65ba36bbde4990925ba0ddac",
+      "sha256": "b651cc62cae4ac172da4c6defd0be287885917655a986f23610054b15791c472",
+      "lines": 225,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOrdinaryFlowAngularBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cOrdinaryFlowAngularBounds.lean",
+      "planned_c9_blob": "adfb082c80dd515c360f46a2c230c2aebc3f61e9",
+      "main_1ece_blob": "adfb082c80dd515c360f46a2c230c2aebc3f61e9",
+      "sha256": "6ddcd35954079254757c1de424c83ecb6eed7840f5cbd4fcd35a088c88964ec1",
+      "lines": 164,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalFlowRadialRecursion",
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalFlowRadialRecursion.lean",
+      "planned_c9_blob": "2853697f82d86714056aec2e760bc7e0fe1ff241",
+      "main_1ece_blob": "2853697f82d86714056aec2e760bc7e0fe1ff241",
+      "sha256": "a2d5669a7adbac9888e91ffb390aa814f44e300885bba471898c0ab8f22137f6",
+      "lines": 218,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalLieWords",
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalLieWords.lean",
+      "planned_c9_blob": "9490b756534fb80eb3136498f1e124203e49b5a8",
+      "main_1ece_blob": "9490b756534fb80eb3136498f1e124203e49b5a8",
+      "sha256": "a6635fe8b6b851dc4538d76a9101b4a1b5d63e1ac849bdd7f7d1d2b89bbc9d0b",
+      "lines": 198,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalLieExpansion",
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalLieExpansion.lean",
+      "planned_c9_blob": "ee528358a99effc80a818426b54e1bd89408906c",
+      "main_1ece_blob": "ee528358a99effc80a818426b54e1bd89408906c",
+      "sha256": "3ef4b365f9a7ae797d3d223f7d558a01120ee4535e9cac7a4a87537f7bc2dfd9",
+      "lines": 190,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalLieAngularExpansion",
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalLieAngularExpansion.lean",
+      "planned_c9_blob": "3076dad7ce4f305e19512ed683a5a8a419c09624",
+      "main_1ece_blob": "3076dad7ce4f305e19512ed683a5a8a419c09624",
+      "sha256": "8927ce6ca15dadba4e745bed7c16b6d3387b19dc100dc429ba97ca4c36db2e98",
+      "lines": 150,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph",
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalFlowGraph.lean",
+      "planned_c9_blob": "b309a7853861fbd79269d4cba60979b2cbe12435",
+      "main_1ece_blob": "b309a7853861fbd79269d4cba60979b2cbe12435",
+      "sha256": "8037a50673b37682bb7af2cba6935469cdb304e52b0871a223cd7bd0f68568ed",
+      "lines": 97,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalLieParameterJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalLieParameterJets.lean",
+      "planned_c9_blob": "343071477f869d53ff146ae1b07803a0b0d9e722",
+      "main_1ece_blob": "343071477f869d53ff146ae1b07803a0b0d9e722",
+      "sha256": "875c3b7cf5b3073979d6b247b51f5e0409b0673c06b05d67fbd7ad57d48c830e",
+      "lines": 166,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalLieProducts",
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalLieProducts.lean",
+      "planned_c9_blob": "e6caaa56f09802a0a6b98e81d4ea0c1ade0bc4f5",
+      "main_1ece_blob": "e6caaa56f09802a0a6b98e81d4ea0c1ade0bc4f5",
+      "sha256": "23cce113c27afb7530d4648a1a5e64612d452a18513f97efacbf93e2deb54ffe",
+      "lines": 113,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalLieRawBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalLieRawBounds.lean",
+      "planned_c9_blob": "bdcd15d78f9f9ed63f82ebe25593ba8133382832",
+      "main_1ece_blob": "bdcd15d78f9f9ed63f82ebe25593ba8133382832",
+      "sha256": "9f64bcf8ac99406e7661b79e24c2f9ba7273997ce7e42471d2e2d4d8e420c2b9",
+      "lines": 169,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget",
+      "path": "src/ContinuousFlexibility/Analysis/N01cStateAngleGraphBudget.lean",
+      "planned_c9_blob": "60f511876d70f339cfc0e416e2e1a3592318a6f4",
+      "main_1ece_blob": "60f511876d70f339cfc0e416e2e1a3592318a6f4",
+      "sha256": "68b9dffbc4714550e4dd7c8cdaf20bfbd445745968c775eb7b3c0608a91f0598",
+      "lines": 267,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalGraphJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalGraphJets.lean",
+      "planned_c9_blob": "3c8475c1ba2c62f17f75a4b499da3d692b7ed2e3",
+      "main_1ece_blob": "3c8475c1ba2c62f17f75a4b499da3d692b7ed2e3",
+      "sha256": "671b243d8fe23c468a323c17d450a40e077ea6d8eb7ccfa10c47fb5f57782a7c",
+      "lines": 181,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalGraphTermBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalGraphTermBounds.lean",
+      "planned_c9_blob": "482e6a57e0962e87f076ff9ceb69184f1f4aaec3",
+      "main_1ece_blob": "482e6a57e0962e87f076ff9ceb69184f1f4aaec3",
+      "sha256": "0325e802ebb66cbc139d9e19c11a6bdbe37ac997627a7e0abe7fa24a3f69061f",
+      "lines": 120,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalGraphRawBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalGraphRawBounds.lean",
+      "planned_c9_blob": "d8b59fb2356c8e1476059225717549afb00b300f",
+      "main_1ece_blob": "d8b59fb2356c8e1476059225717549afb00b300f",
+      "sha256": "74e828b0f68946c4f8005fe0e31289551990bf2ca35e486fc34e125014d0db9a",
+      "lines": 176,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalGraphNormalization",
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalGraphNormalization.lean",
+      "planned_c9_blob": "621a7e0a6c97981b16676ce3ed2f8170ae149e77",
+      "main_1ece_blob": "621a7e0a6c97981b16676ce3ed2f8170ae149e77",
+      "sha256": "dd5b6d72736d18e1cfdc6d0c70f4d42db9a29a9994dfda53a468844dc9bac428",
+      "lines": 103,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalLiePrefixBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalLiePrefixBounds.lean",
+      "planned_c9_blob": "c4f76342528f391e43fcc4210ae953b38acfe9f4",
+      "main_1ece_blob": "c4f76342528f391e43fcc4210ae953b38acfe9f4",
+      "sha256": "1d1d0a4535a039909abab6f7f2b462546ab199e8587b12fcf16e8348d947a663",
+      "lines": 85,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalFlowPointJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalFlowPointJets.lean",
+      "planned_c9_blob": "c3ea304597b3fc9576fb8accd1181ff05b1e01f7",
+      "main_1ece_blob": "c3ea304597b3fc9576fb8accd1181ff05b1e01f7",
+      "sha256": "2dcd932280ab7425f5d4448c8ee58227a2ec9425861307ed8e344bbbab773a8d",
+      "lines": 100,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalFlowPointBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalFlowPointBounds.lean",
+      "planned_c9_blob": "a3fc50564cd8721cff4bf19d489ca889cf9c7f88",
+      "main_1ece_blob": "a3fc50564cd8721cff4bf19d489ca889cf9c7f88",
+      "sha256": "36bafe8a7752c97850d3713b4406e6a25c8194213752bffe1ce0c844261b346d",
+      "lines": 124,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cGraphInputInterpolation",
+      "path": "src/ContinuousFlexibility/Analysis/N01cGraphInputInterpolation.lean",
+      "planned_c9_blob": "7667c9c3624161a7b2c085dc9d32b263ba71ce65",
+      "main_1ece_blob": "7667c9c3624161a7b2c085dc9d32b263ba71ce65",
+      "sha256": "e2df60faa04a737b0613046752c3da429774eea8d09a83b45e8a9852061998bd",
+      "lines": 173,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalFlowAngularInputs",
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalFlowAngularInputs.lean",
+      "planned_c9_blob": "bc5992124dfa95e75302f29e5a6a8a4c5bad320f",
+      "main_1ece_blob": "bc5992124dfa95e75302f29e5a6a8a4c5bad320f",
+      "sha256": "155bcbd12da1beeaede2bc6bbc4fde6f2016dc6516ecd909abb70ffdd40479e2",
+      "lines": 115,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalFlowFixedBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalFlowFixedBounds.lean",
+      "planned_c9_blob": "613085b28f1f834880c7e8f74a67bab4a7ac7b35",
+      "main_1ece_blob": "613085b28f1f834880c7e8f74a67bab4a7ac7b35",
+      "sha256": "d146c6a773a8ef69a806dc0a3cd9760309e797e535e875ff4ae84ab52a3d9cc7",
+      "lines": 183,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cEndpointPowerRestriction",
+      "path": "src/ContinuousFlexibility/Analysis/N01cEndpointPowerRestriction.lean",
+      "planned_c9_blob": "365ef5b176edf3acaff76e7f34f6e6ff6fe75388",
+      "main_1ece_blob": "365ef5b176edf3acaff76e7f34f6e6ff6fe75388",
+      "sha256": "204d4516c8dbc0631bc1f6c41665ce9ecacb0f71eb50511fe51dc3193df7cf54",
+      "lines": 58,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCommonWholeSpeedBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cCommonWholeSpeedBounds.lean",
+      "planned_c9_blob": "d39dd11a9363c853c122042eaee26958ffed2c2d",
+      "main_1ece_blob": "d39dd11a9363c853c122042eaee26958ffed2c2d",
+      "sha256": "5ee9a2a7d4f12f38678645fd0c09cfd2215068de208db5d8ef616078163cb444",
+      "lines": 94,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOrdinaryFlowFixedBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cOrdinaryFlowFixedBounds.lean",
+      "planned_c9_blob": "8a3d65161013b44c38156a880d004f6ab2bc615b",
+      "main_1ece_blob": "8a3d65161013b44c38156a880d004f6ab2bc615b",
+      "sha256": "1f5c95678d618fcdc034146a305d6e0a3f37aac78b27dee255d6c392df85d692",
+      "lines": 137,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cAngularPrefixTransport",
+      "path": "src/ContinuousFlexibility/Analysis/N01cAngularPrefixTransport.lean",
+      "planned_c9_blob": "3e661729110614fcb95f7cc07614c6a390cf8dc1",
+      "main_1ece_blob": "3e661729110614fcb95f7cc07614c6a390cf8dc1",
+      "sha256": "7ce144f3e3f1eed2c99eab332b135bfbc7df9db37477a4f5eb4ee84c2d533015",
+      "lines": 120,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cRadialPrefixConstants",
+      "path": "src/ContinuousFlexibility/Analysis/N01cRadialPrefixConstants.lean",
+      "planned_c9_blob": "27b750f165fe1aef05d56dcc9fec1d5e80c488d8",
+      "main_1ece_blob": "27b750f165fe1aef05d56dcc9fec1d5e80c488d8",
+      "sha256": "68e1cf2d35f07b41a86e19df06bfbb6c2e1c8a3b8202435f604d1337d0c6c307",
+      "lines": 52,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOrdinaryFlowRadialBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cOrdinaryFlowRadialBounds.lean",
+      "planned_c9_blob": "d28b64067eddf8877dd82b55df8ea5663f977159",
+      "main_1ece_blob": "d28b64067eddf8877dd82b55df8ea5663f977159",
+      "sha256": "1e94987449d8696c18d980628b565fa9fb693e1497cd7294376395434d1304f5",
+      "lines": 262,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowPositivePrefix",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowPositivePrefix.lean",
+      "planned_c9_blob": "4ecdbb64d5d78e7d4d21ab737b3a50bb4b1a6a2e",
+      "main_1ece_blob": "4ecdbb64d5d78e7d4d21ab737b3a50bb4b1a6a2e",
+      "sha256": "bbdef7438b4e1cdc589931e3c0fa081dfb98fdc2abb06034fba9d3027e732fae",
+      "lines": 93,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowReferenceDifference",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowReferenceDifference.lean",
+      "planned_c9_blob": "185ba50a16d3ae472b21910760fcf755a627de5b",
+      "main_1ece_blob": "185ba50a16d3ae472b21910760fcf755a627de5b",
+      "sha256": "6756aa83f9ddc47be3a6bdb342408d15c43f75802eb1aa38bc6cce82127860c3",
+      "lines": 135,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOrdinaryFlowReferenceBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cOrdinaryFlowReferenceBounds.lean",
+      "planned_c9_blob": "71035aa2ec8763c26de96c5aac3a9662fd4e0d36",
+      "main_1ece_blob": "71035aa2ec8763c26de96c5aac3a9662fd4e0d36",
+      "sha256": "8585471844f9afb94e5682d2ce0431200d3af4ed8361943fb905249c161641e3",
+      "lines": 61,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOrdinaryFlowBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cOrdinaryFlowBounds.lean",
+      "planned_c9_blob": "4accd1b41c8fea9d47349f4dc12586c904958a31",
+      "main_1ece_blob": "4accd1b41c8fea9d47349f4dc12586c904958a31",
+      "sha256": "9302c99fde99090b13ff2ead75fc0ca5f3443ca7ddb588df6e79f0e8310846ad",
+      "lines": 90,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Blueprint.N01c.Flows",
+      "path": "src/ContinuousFlexibility/Blueprint/N01c/Flows.lean",
+      "planned_c9_blob": "8ffdf5e22b4f25374339bc63855bf9a3cc8ddda9",
+      "main_1ece_blob": "8ffdf5e22b4f25374339bc63855bf9a3cc8ddda9",
+      "sha256": "6091cc73a611399e34d3f35426482ecfe00a24d1f69b395728ecc3cee0348198",
+      "lines": 25,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05MaterialCellCoordinates",
+      "path": "src/ContinuousFlexibility/Analysis/N05MaterialCellCoordinates.lean",
+      "planned_c9_blob": "0cba77c14e23f7229e97972a1a1ea1b91accc4d3",
+      "main_1ece_blob": "0cba77c14e23f7229e97972a1a1ea1b91accc4d3",
+      "sha256": "390c95af8f001b9fe09354d9a470e28d772fce78961affa6bd5928bd29c4b12d",
+      "lines": 95,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ReferenceE0Weights",
+      "path": "src/ContinuousFlexibility/Analysis/N05ReferenceE0Weights.lean",
+      "planned_c9_blob": "1c397e564f28649b247eb83c2f5d412b318ad38a",
+      "main_1ece_blob": "1c397e564f28649b247eb83c2f5d412b318ad38a",
+      "sha256": "c02c377a4b7cefc73006b0b8fbfaf07bca9d663864fbdfb81ff0db8aa2be8bd4",
+      "lines": 124,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ReferenceEndpointWeights",
+      "path": "src/ContinuousFlexibility/Analysis/N05ReferenceEndpointWeights.lean",
+      "planned_c9_blob": "37b95fd39a1151a254c2cedae0e2377cf9411c6e",
+      "main_1ece_blob": "37b95fd39a1151a254c2cedae0e2377cf9411c6e",
+      "sha256": "cf1a8a57ef5e9bc6758dee1aec901a28153667c69e4cb43fb17238e5dc88f405",
+      "lines": 103,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ReferenceHeightWindow",
+      "path": "src/ContinuousFlexibility/Analysis/N05ReferenceHeightWindow.lean",
+      "planned_c9_blob": "4bf89f0b8b064b2fe00fb2a674cac0d784056c19",
+      "main_1ece_blob": "4bf89f0b8b064b2fe00fb2a674cac0d784056c19",
+      "sha256": "2bab19d1b1cf17325af6ddbd071be26813bdc8974ecb058e3839ba426cd79a7b",
+      "lines": 109,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05PrimitiveReferenceValues",
+      "path": "src/ContinuousFlexibility/Analysis/N05PrimitiveReferenceValues.lean",
+      "planned_c9_blob": "339d18bbc1816e7e547927730e5d6131011c688d",
+      "main_1ece_blob": "339d18bbc1816e7e547927730e5d6131011c688d",
+      "sha256": "e41feb0b8f5a52ac6494f4681b54ad0ad779cbc90d3aeb84125570f96767befe",
+      "lines": 102,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05PrimitiveReferenceFirstBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N05PrimitiveReferenceFirstBounds.lean",
+      "planned_c9_blob": "d5fe14aa2210d63f36ae11690a7c777fd17d5f09",
+      "main_1ece_blob": "d5fe14aa2210d63f36ae11690a7c777fd17d5f09",
+      "sha256": "920a429a1d987427b11cf40ad3556fec6104f2a224c8ec5d19299e6119bfe680",
+      "lines": 243,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05PhysicalPieces",
+      "path": "src/ContinuousFlexibility/Analysis/N05PhysicalPieces.lean",
+      "planned_c9_blob": "4bc96d702a5ae54810af91be2b18f6da19030b17",
+      "main_1ece_blob": "4bc96d702a5ae54810af91be2b18f6da19030b17",
+      "sha256": "f05c35a6d5149acc119c68536c49c88612a884fbe8f9415d5b20715257ff71eb",
+      "lines": 78,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ReferenceFiberPacking",
+      "path": "src/ContinuousFlexibility/Analysis/N05ReferenceFiberPacking.lean",
+      "planned_c9_blob": "e4f76634912451e530f7555b095115df0a3c3bfc",
+      "main_1ece_blob": "e4f76634912451e530f7555b095115df0a3c3bfc",
+      "sha256": "508ae896e20cc22c4c6de9d6e95c11f7d349a19b63ca2bde7c726a46033e15ec",
+      "lines": 121,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05PrimitiveReferenceFibers",
+      "path": "src/ContinuousFlexibility/Analysis/N05PrimitiveReferenceFibers.lean",
+      "planned_c9_blob": "48c9d63ecbf3a531930bbb46047c0b8154911610",
+      "main_1ece_blob": "48c9d63ecbf3a531930bbb46047c0b8154911610",
+      "sha256": "d80ed0d8119eb4fb774e90b80fefaa800ece654564117e7842eeb5c360dd19df",
+      "lines": 44,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalModel",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalModel.lean",
+      "planned_c9_blob": "48f300750960af29aa0521b7b4e738ed9f7e73fb",
+      "main_1ece_blob": "48f300750960af29aa0521b7b4e738ed9f7e73fb",
+      "sha256": "3c260536e8dbcae71a118314ab84bee9a2fb1b5c8345c8c394a2cec9085ca511",
+      "lines": 104,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Blueprint.N05.VolumeModel",
+      "path": "src/ContinuousFlexibility/Blueprint/N05/VolumeModel.lean",
+      "planned_c9_blob": "fa6407895d1149e9c91577d389e5896315d8c4ee",
+      "main_1ece_blob": "fa6407895d1149e9c91577d389e5896315d8c4ee",
+      "sha256": "9752d7a0eaa2c127ee93a4115131af4d938e9e4df7aaa13df2fbb6126cd91a46",
+      "lines": 24,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ReferenceWeightComparisons",
+      "path": "src/ContinuousFlexibility/Analysis/N05ReferenceWeightComparisons.lean",
+      "planned_c9_blob": "c4bead5e7b16d38b6e04388a5f3f1dd6ea657c48",
+      "main_1ece_blob": "c4bead5e7b16d38b6e04388a5f3f1dd6ea657c48",
+      "sha256": "9bf241b1138890f13f33169b4099652ce858bd70755c3ae6eb2acad5ad8ecb17",
+      "lines": 84,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05MaterialWeights",
+      "path": "src/ContinuousFlexibility/Analysis/N05MaterialWeights.lean",
+      "planned_c9_blob": "84fb49b50dd3e706773d8fb395d6b45c0a469346",
+      "main_1ece_blob": "84fb49b50dd3e706773d8fb395d6b45c0a469346",
+      "sha256": "1142fb2ca278f9012b27b5e23ac916e381dfade52cc3176970e883c4d9ba01a4",
+      "lines": 115,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ReferenceSourceWeightGap",
+      "path": "src/ContinuousFlexibility/Analysis/N05ReferenceSourceWeightGap.lean",
+      "planned_c9_blob": "74b4936f361bcb423663f8c0bc634625312d7e42",
+      "main_1ece_blob": "74b4936f361bcb423663f8c0bc634625312d7e42",
+      "sha256": "70c6e51792cc7c88ce69ecefb6f15734d7993bfd191ce6b59b2d60c980e10853",
+      "lines": 176,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalLpMaps",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalLpMaps.lean",
+      "planned_c9_blob": "09abf4c7097f248f6dcc9ccb2b6c056baa75d77c",
+      "main_1ece_blob": "09abf4c7097f248f6dcc9ccb2b6c056baa75d77c",
+      "sha256": "cceef79a55c3db37fd3addce8ec2f00d6c27ce259c72038be328263cd22decc2",
+      "lines": 73,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalMultipliers",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalMultipliers.lean",
+      "planned_c9_blob": "d6a5e97729096ad20c2a1e423f62043d347281a2",
+      "main_1ece_blob": "d6a5e97729096ad20c2a1e423f62043d347281a2",
+      "sha256": "c2735af39978c3974bffe46fac38d589d8ce86ab3310378ff4a898ffeaa5e59e",
+      "lines": 152,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalEmbeddings",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalEmbeddings.lean",
+      "planned_c9_blob": "5fbac7ea7805bbeee3d284ebb10140cf1c5d385c",
+      "main_1ece_blob": "5fbac7ea7805bbeee3d284ebb10140cf1c5d385c",
+      "sha256": "e530c17ab331f7c5116d2789305a5d9db5ffbbb840d963160e0667ee55aa0173",
+      "lines": 145,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalPhysicalWeight",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalPhysicalWeight.lean",
+      "planned_c9_blob": "a0b9f013ec2a65c3db42e59a4fa464186f632f67",
+      "main_1ece_blob": "a0b9f013ec2a65c3db42e59a4fa464186f632f67",
+      "sha256": "234fa03147d9d42ee0bbb29e45d8413364c7cb3ced328cf80f1d048b0cb80252",
+      "lines": 67,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalRadialCutoff",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalRadialCutoff.lean",
+      "planned_c9_blob": "8e408065baae88f7118242fa09148a318eb1e9b1",
+      "main_1ece_blob": "8e408065baae88f7118242fa09148a318eb1e9b1",
+      "sha256": "dde86382d7ddf6bfdcbf1ab9dc34ca99cfe5525aceb20ff0da7cb9a122ba8c46",
+      "lines": 112,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalZeroExtension",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalZeroExtension.lean",
+      "planned_c9_blob": "a847f7edae8a65f2ef2a139fbe2ea6e4ddefee7b",
+      "main_1ece_blob": "a847f7edae8a65f2ef2a139fbe2ea6e4ddefee7b",
+      "sha256": "f4a6b368233b6b57ba82749fb7939d1d7832f22bb259303a30cfa281fb20e7cf",
+      "lines": 193,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalPeriodicRepresentative",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalPeriodicRepresentative.lean",
+      "planned_c9_blob": "82860a3f787aa2a0378c5e2a0d9ba5a1611e5af7",
+      "main_1ece_blob": "82860a3f787aa2a0378c5e2a0d9ba5a1611e5af7",
+      "sha256": "139ecb0f2fb79d1f40ca6bd315f79957fa8d33160c85f742973e034c3a7cd277",
+      "lines": 128,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ReferenceCutoffChange",
+      "path": "src/ContinuousFlexibility/Analysis/N05ReferenceCutoffChange.lean",
+      "planned_c9_blob": "c422a734a7e22f967cd54694a4072cdfa1b5c36e",
+      "main_1ece_blob": "c422a734a7e22f967cd54694a4072cdfa1b5c36e",
+      "sha256": "233a29acd1da591cee3972ce41eacd76e10d7bd7eb4e06c51d686d34499cd6e0",
+      "lines": 104,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ReferenceAuxiliary",
+      "path": "src/ContinuousFlexibility/Analysis/N05ReferenceAuxiliary.lean",
+      "planned_c9_blob": "9c86c05f54e1c8de6362e4dd53dad6c061fac31e",
+      "main_1ece_blob": "9c86c05f54e1c8de6362e4dd53dad6c061fac31e",
+      "sha256": "94111f2ed72b65355a35f37b5547f91f542a02674367866f8fe3819050ebe2fc",
+      "lines": 67,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ReferenceNormalization",
+      "path": "src/ContinuousFlexibility/Analysis/N05ReferenceNormalization.lean",
+      "planned_c9_blob": "45a7ef9d630e5dee0a3d1b3cdcd691e43da29538",
+      "main_1ece_blob": "45a7ef9d630e5dee0a3d1b3cdcd691e43da29538",
+      "sha256": "1d2b3037c687496e42aa4e9f7fee6ddb7cd2c8a88b2688363969cb4cd373d9df",
+      "lines": 99,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ReferenceSourceCompatibility",
+      "path": "src/ContinuousFlexibility/Analysis/N05ReferenceSourceCompatibility.lean",
+      "planned_c9_blob": "99cb94a6ce2159bab0cae0249c35775d5baa4686",
+      "main_1ece_blob": "99cb94a6ce2159bab0cae0249c35775d5baa4686",
+      "sha256": "57594b6c9f88bc328d65c5290c03a09f425c85501e0704931ef1e11017f2cdbf",
+      "lines": 127,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ReferenceSourceBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N05ReferenceSourceBounds.lean",
+      "planned_c9_blob": "0cf8c0c0d85fe93bb7b5953a32820a00977438c2",
+      "main_1ece_blob": "0cf8c0c0d85fe93bb7b5953a32820a00977438c2",
+      "sha256": "be5ba9d016161993b08ac6f76680a80d37dc54a245f1e47aaf9bef9c00e613cf",
+      "lines": 104,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05PhysicalGraphUniqueness",
+      "path": "src/ContinuousFlexibility/Analysis/N05PhysicalGraphUniqueness.lean",
+      "planned_c9_blob": "62a541a3b363f44596865ab6b4d9ed128c93b7be",
+      "main_1ece_blob": "62a541a3b363f44596865ab6b4d9ed128c93b7be",
+      "sha256": "76d65c396ee3e69f23ae365807e345528dcfad7d237e71ae452755e5e93a6dd0",
+      "lines": 71,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ReferenceScalarLinearity",
+      "path": "src/ContinuousFlexibility/Analysis/N05ReferenceScalarLinearity.lean",
+      "planned_c9_blob": "ec651a6958e099c0efcf42300f7657c2d3f88959",
+      "main_1ece_blob": "ec651a6958e099c0efcf42300f7657c2d3f88959",
+      "sha256": "f7926bb2029354c16fe149b23134fa3c8d80b88429f935f23a2cb1b79ae30b2e",
+      "lines": 69,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05TwoWeightBlocks",
+      "path": "src/ContinuousFlexibility/Analysis/N05TwoWeightBlocks.lean",
+      "planned_c9_blob": "e6e89af91f57b51c7036a8a598144f62cfde7dac",
+      "main_1ece_blob": "e6e89af91f57b51c7036a8a598144f62cfde7dac",
+      "sha256": "c9f4eca59db9b7abb6f5c7440fa0b07e74649d481eedce9bf91b669613bc3be0",
+      "lines": 78,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05InnerExponentBlocks",
+      "path": "src/ContinuousFlexibility/Analysis/N05InnerExponentBlocks.lean",
+      "planned_c9_blob": "bc0dae024a58b0fcf0af99d00f14b401495d8b90",
+      "main_1ece_blob": "bc0dae024a58b0fcf0af99d00f14b401495d8b90",
+      "sha256": "3ef18f1078eefee1dc91fb59290c9c43f2423ab2a47595cf222754d9607ce396",
+      "lines": 44,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05MaterialLogComparison",
+      "path": "src/ContinuousFlexibility/Analysis/N05MaterialLogComparison.lean",
+      "planned_c9_blob": "d33e61d2623a1ab24ed7540201fed9f6eeaa65fc",
+      "main_1ece_blob": "d33e61d2623a1ab24ed7540201fed9f6eeaa65fc",
+      "sha256": "2ebfc9dfb287166905e02c98b5d3a21fddd13351f2ce40919f91d6501cafa5e1",
+      "lines": 149,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ActualWeightKernel",
+      "path": "src/ContinuousFlexibility/Analysis/N05ActualWeightKernel.lean",
+      "planned_c9_blob": "40f2f854f221a9171f5a66e99f6ee3e386d9f06c",
+      "main_1ece_blob": "40f2f854f221a9171f5a66e99f6ee3e386d9f06c",
+      "sha256": "b7b2b5ad1fa26849019d743b04d779034c8e9c08083a582bd4bd65729156ee7f",
+      "lines": 142,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalRestriction",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalRestriction.lean",
+      "planned_c9_blob": "e6fe83669c3997f11f3d1d6553de7a131edb8adf",
+      "main_1ece_blob": "e6fe83669c3997f11f3d1d6553de7a131edb8adf",
+      "sha256": "27edc8a26517c58a4a8337b0f61e33df78b1b9e4fac4792ec95eb04beafdc6c4",
+      "lines": 167,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalFiniteApproximation",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalFiniteApproximation.lean",
+      "planned_c9_blob": "2929c8739dd7ac7fcc7b01cf0a09359104d205d1",
+      "main_1ece_blob": "2929c8739dd7ac7fcc7b01cf0a09359104d205d1",
+      "sha256": "009fcfd5579296111cef603c0a72c41efe6488e846cc9121610a7159c988a719",
+      "lines": 143,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05IndexFiberSums",
+      "path": "src/ContinuousFlexibility/Analysis/N05IndexFiberSums.lean",
+      "planned_c9_blob": "5a01cf9b114c1d6a9c8668b3177b7cec26d300ed",
+      "main_1ece_blob": "5a01cf9b114c1d6a9c8668b3177b7cec26d300ed",
+      "sha256": "ba1bcc0650120470346a59591fceeb589b52458c129dd7e6febbf62760f1a4e9",
+      "lines": 113,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ActualWeightKernelSums",
+      "path": "src/ContinuousFlexibility/Analysis/N05ActualWeightKernelSums.lean",
+      "planned_c9_blob": "2c7867b1b5cee8c268faa91a3f4e2e2f4e673e86",
+      "main_1ece_blob": "2c7867b1b5cee8c268faa91a3f4e2e2f4e673e86",
+      "sha256": "95cbbe709017f00ce22c80199028f1513066453f5e43d8ee9617099b2b2dd33f",
+      "lines": 73,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05SchurMembership",
+      "path": "src/ContinuousFlexibility/Analysis/N05SchurMembership.lean",
+      "planned_c9_blob": "07a808f15e903f5884a1ebb3bb059ec0280bf1cc",
+      "main_1ece_blob": "07a808f15e903f5884a1ebb3bb059ec0280bf1cc",
+      "sha256": "ac172a5f2fbfff710612c4ce4dfa93c8aeddb1cda19ca4149ae0b9826f448061",
+      "lines": 130,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalAngularJetChoice",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalAngularJetChoice.lean",
+      "planned_c9_blob": "3b44c19264d461aebb7a27710f5c12c4d0b72e94",
+      "main_1ece_blob": "3b44c19264d461aebb7a27710f5c12c4d0b72e94",
+      "sha256": "dcf09f11913d969b40c90fb78f16a0021bfbe1dedb3f50f82931c77b7b9762e9",
+      "lines": 96,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalMollifierL2Estimate",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalMollifierL2Estimate.lean",
+      "planned_c9_blob": "b03b308350c03c1488c5bf8295c78af544e5dc22",
+      "main_1ece_blob": "b03b308350c03c1488c5bf8295c78af544e5dc22",
+      "sha256": "16f9674a1055a51a41220aed60aa547a0a86ac94f97c0c395aed830d7d7ea38b",
+      "lines": 186,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalMollifierL2Approximation",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalMollifierL2Approximation.lean",
+      "planned_c9_blob": "62d16f1e91c7f54bd45fb3eb262def9de924da3f",
+      "main_1ece_blob": "62d16f1e91c7f54bd45fb3eb262def9de924da3f",
+      "sha256": "e8807971face002951b76f0d972ad7a9405b05f73685ea90a326c4112a3e3d99",
+      "lines": 141,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalCutoffApproximation",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalCutoffApproximation.lean",
+      "planned_c9_blob": "c21751920cf261e4f168fdf3c5e13cc076b20a35",
+      "main_1ece_blob": "c21751920cf261e4f168fdf3c5e13cc076b20a35",
+      "sha256": "3792d951877b7a0298814cff83b085cc28fef6c2d4ec071dd6bc7f74a78d23ed",
+      "lines": 186,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalMollifiedJets",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalMollifiedJets.lean",
+      "planned_c9_blob": "5da52127884bc4ebc3c80d99eef8b928960c1f7b",
+      "main_1ece_blob": "5da52127884bc4ebc3c80d99eef8b928960c1f7b",
+      "sha256": "bd62909086237cf7690b94838a2d3fdcec3ffb386ba50e00bb91d39f8cd739ed",
+      "lines": 163,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalSymmetryLimits",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalSymmetryLimits.lean",
+      "planned_c9_blob": "3f2778a604078adb3973b32aa803b0944af2be36",
+      "main_1ece_blob": "3f2778a604078adb3973b32aa803b0944af2be36",
+      "sha256": "c66f4f2afdebf38c142fd0fbab836a60877496efbe39ec579bfd5b3d607a98cb",
+      "lines": 141,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalEvenMollifiedJets",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalEvenMollifiedJets.lean",
+      "planned_c9_blob": "036913ee4f26e3b04c9f1ba42ef968e1f9d900b4",
+      "main_1ece_blob": "036913ee4f26e3b04c9f1ba42ef968e1f9d900b4",
+      "sha256": "d5c71d1090bfb77a4eab80db42a8d0fcd8b73401d8ca10fe781b147d505217d6",
+      "lines": 132,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalGraphDensity",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalGraphDensity.lean",
+      "planned_c9_blob": "144ce356d0ea35532e330ff72bbd8d3378b8100b",
+      "main_1ece_blob": "144ce356d0ea35532e330ff72bbd8d3378b8100b",
+      "sha256": "05b446d4320dd577c1e406f291d2ec409111153289b84b95f626cf366b98c184",
+      "lines": 108,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalCommonCore",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalCommonCore.lean",
+      "planned_c9_blob": "55105fe6125af97dcf91715cee3c9b3a34c494d0",
+      "main_1ece_blob": "55105fe6125af97dcf91715cee3c9b3a34c494d0",
+      "sha256": "47bcb21a0f62f4c543484f1de13e12a8acfe0a4f44760c75b18baebb629471c2",
+      "lines": 142,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalJetAssembly",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalJetAssembly.lean",
+      "planned_c9_blob": "f735e4769eb709aacaab52dad42a77ed6872ae0d",
+      "main_1ece_blob": "f735e4769eb709aacaab52dad42a77ed6872ae0d",
+      "sha256": "72502409678bdd0db2ae4ffc81977a6035fa269ce7a624b9b5706c03dc8f6c56",
+      "lines": 71,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ReferenceOutputMultiplier",
+      "path": "src/ContinuousFlexibility/Analysis/N05ReferenceOutputMultiplier.lean",
+      "planned_c9_blob": "1f7d408740a86a8e8c2f799485d3fd0e8d96a1c0",
+      "main_1ece_blob": "1f7d408740a86a8e8c2f799485d3fd0e8d96a1c0",
+      "sha256": "80849b9b13b6e842db607acdb645430c110d6499b48ad7fbad756b9a941284dc",
+      "lines": 100,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalRadialJetChoice",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalRadialJetChoice.lean",
+      "planned_c9_blob": "633aa013d275f9fd9dfa7a47b81c06504776990e",
+      "main_1ece_blob": "633aa013d275f9fd9dfa7a47b81c06504776990e",
+      "sha256": "5240a583058554c0ddac59177cea48f7d8f69b4484bbf2c2986636ead99bda07",
+      "lines": 124,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalCutoffNormalJet",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalCutoffNormalJet.lean",
+      "planned_c9_blob": "935238c780fbf5195334881afb37d9d256a1939c",
+      "main_1ece_blob": "935238c780fbf5195334881afb37d9d256a1939c",
+      "sha256": "fd5f53daedf27a18fb23ef521fe71599dd68505cab791c0762300e2be20cb223",
+      "lines": 144,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalVolumeTransport",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalVolumeTransport.lean",
+      "planned_c9_blob": "2efbbf23a392dafc79e824575e1a297b8ff37b00",
+      "main_1ece_blob": "2efbbf23a392dafc79e824575e1a297b8ff37b00",
+      "sha256": "a016c7fbe9cb01d265424eb677381f813aa21714f5a375f84461c7b68da6d33f",
+      "lines": 36,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ClosedGraphAssembly",
+      "path": "src/ContinuousFlexibility/Analysis/N05ClosedGraphAssembly.lean",
+      "planned_c9_blob": "a3cd501201c03db26d54380c9c87752adf4daf07",
+      "main_1ece_blob": "a3cd501201c03db26d54380c9c87752adf4daf07",
+      "sha256": "c8ec528130ecccf7cca981ecc5e717936cb1c787b7a7e4de60eebe3f99352566",
+      "lines": 155,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cSampledHeightBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cSampledHeightBounds.lean",
+      "planned_c9_blob": "f798ce472f39b3ca112692284fe59d3f61b0188a",
+      "main_1ece_blob": "f798ce472f39b3ca112692284fe59d3f61b0188a",
+      "sha256": "9783668566510bd462b0a40665585585f0de688697c51343b889226fcfb4db8a",
+      "lines": 62,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cTranslationJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01cTranslationJets.lean",
+      "planned_c9_blob": "03462809e5c80223235996cf38345a116b1ec98d",
+      "main_1ece_blob": "03462809e5c80223235996cf38345a116b1ec98d",
+      "sha256": "97fef407eea9982d82ab2d80f1f0e5ab0ce9fc8f6c1e9c3c7a5055a35fd18f6e",
+      "lines": 190,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalAllLevelCore",
+      "path": "src/ContinuousFlexibility/Analysis/N05CanonicalAllLevelCore.lean",
+      "planned_c9_blob": "455f24865ca7dc152c1b0a25704b149b0f14f416",
+      "main_1ece_blob": "455f24865ca7dc152c1b0a25704b149b0f14f416",
+      "sha256": "f94b8f16576dd764823c33db2b66d7658f8c546a5c59d1804b1c0531978aa4e1",
+      "lines": 145,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05DerivativeOrientation",
+      "path": "src/ContinuousFlexibility/Analysis/N05DerivativeOrientation.lean",
+      "planned_c9_blob": "13aa3ef6e38cb723a7b30cd23068faf2250a611c",
+      "main_1ece_blob": "13aa3ef6e38cb723a7b30cd23068faf2250a611c",
+      "sha256": "5a4bc55fcea94a67bb1912fb8ab29e27ddde2f7948b39ada9063a947734517a9",
+      "lines": 67,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05OpticalRootQuotient",
+      "path": "src/ContinuousFlexibility/Analysis/N05OpticalRootQuotient.lean",
+      "planned_c9_blob": "f06a13d343c66bb788b044c130031857f599cc3b",
+      "main_1ece_blob": "f06a13d343c66bb788b044c130031857f599cc3b",
+      "sha256": "516afac3ef2b7c771dab3d9d485819c3d6d85119f6545a3bcaa8715ac7f42f0b",
+      "lines": 208,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05OpticalRootGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/N05OpticalRootGeometry.lean",
+      "planned_c9_blob": "c93b97383226bb2977cc2df6704d4ed3e6853266",
+      "main_1ece_blob": "c93b97383226bb2977cc2df6704d4ed3e6853266",
+      "sha256": "eade68e54e9f57ff8654fdb6394b8795f873d76f4082a60cc2f3d3a3a821aec2",
+      "lines": 610,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05NullOrientationAlgebra",
+      "path": "src/ContinuousFlexibility/Analysis/N05NullOrientationAlgebra.lean",
+      "planned_c9_blob": "2df168d001aaa3cca06d6afabf8edc3b1424ea1c",
+      "main_1ece_blob": "2df168d001aaa3cca06d6afabf8edc3b1424ea1c",
+      "sha256": "ca55d16fd60b16ad67cc7bd4f4ba39cfeadce90a652c13b42890ef0521ba4773",
+      "lines": 60,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05OpticalPrimitive",
+      "path": "src/ContinuousFlexibility/Analysis/N05OpticalPrimitive.lean",
+      "planned_c9_blob": "1b6c82ddd54065a6be21992df66d3fe9e891c7d0",
+      "main_1ece_blob": "1b6c82ddd54065a6be21992df66d3fe9e891c7d0",
+      "sha256": "231ee5b912f29d79b3af8c600b0c46eaf0fb4b7a3c4c6b1072a43565a0d83c5e",
+      "lines": 53,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05RadialTransport",
+      "path": "src/ContinuousFlexibility/Analysis/N05RadialTransport.lean",
+      "planned_c9_blob": "69b85ec28900d415ca93377882f2febd9b942f4c",
+      "main_1ece_blob": "69b85ec28900d415ca93377882f2febd9b942f4c",
+      "sha256": "286ba767d63cc7f33ad3880a72234268dc37e7e534ae7e907e5ff7c6d2dd103e",
+      "lines": 67,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05PeriodicLiftRigidity",
+      "path": "src/ContinuousFlexibility/Analysis/N05PeriodicLiftRigidity.lean",
+      "planned_c9_blob": "1b7fc2c21190365487000181ac61a4c20f282390",
+      "main_1ece_blob": "1b7fc2c21190365487000181ac61a4c20f282390",
+      "sha256": "f559270a61b2369b17ba3a536e046b7d955b046ed6f5ce4c2545853b6f3df425",
+      "lines": 108,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05NegativePieceEnumeration",
+      "path": "src/ContinuousFlexibility/Analysis/N05NegativePieceEnumeration.lean",
+      "planned_c9_blob": "2991152253178948ae120ef77bca4922ee8e3bd0",
+      "main_1ece_blob": "2991152253178948ae120ef77bca4922ee8e3bd0",
+      "sha256": "47504bc24a79df86bd518e56f09bef17d46bdc96dfb2f278d456c25d7831a3d7",
+      "lines": 58,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05OpticalProfileLipschitz",
+      "path": "src/ContinuousFlexibility/Analysis/N05OpticalProfileLipschitz.lean",
+      "planned_c9_blob": "04d71d8e7d956dddca96a507cdabe782d7477801",
+      "main_1ece_blob": "04d71d8e7d956dddca96a507cdabe782d7477801",
+      "sha256": "9e6e98ffb18ba3fe1e0a16f4948c7f6e7c4585774e215d5f35a1f061c0e36315",
+      "lines": 129,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05OpticalProfileSecondDerivative",
+      "path": "src/ContinuousFlexibility/Analysis/N05OpticalProfileSecondDerivative.lean",
+      "planned_c9_blob": "5e90b92150f0c6f415ef0c37832de5eb02752bf3",
+      "main_1ece_blob": "5e90b92150f0c6f415ef0c37832de5eb02752bf3",
+      "sha256": "4d871a7f2a5156d961f13917be9cd4649500866ef6fb55f4d234dda539dfc96c",
+      "lines": 178,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05OpticalLipschitz",
+      "path": "src/ContinuousFlexibility/Analysis/N05OpticalLipschitz.lean",
+      "planned_c9_blob": "09c9b9b0dbe64dfa68fbd751edbd96a6ff479fc4",
+      "main_1ece_blob": "09c9b9b0dbe64dfa68fbd751edbd96a6ff479fc4",
+      "sha256": "f62aa6c00ac2a15e29b683901bf5968565e2abd314c7809f570bdc3c588c134c",
+      "lines": 138,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05OpticalRootCollar",
+      "path": "src/ContinuousFlexibility/Analysis/N05OpticalRootCollar.lean",
+      "planned_c9_blob": "f5e1f185833d4e4aa61f592e488958b2bc837eb5",
+      "main_1ece_blob": "f5e1f185833d4e4aa61f592e488958b2bc837eb5",
+      "sha256": "e47d5572ff73a0c38c3746ea1a927fa6dbb52acfff58d082d07c72e9a7c75dfc",
+      "lines": 155,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.N05FixedReferenceRetention",
+      "path": "src/ContinuousFlexibility/Radial/N05FixedReferenceRetention.lean",
+      "planned_c9_blob": "f199cad28658955cd2e8b2f5505c395adba05876",
+      "main_1ece_blob": "f199cad28658955cd2e8b2f5505c395adba05876",
+      "sha256": "bdf5a9e10f6d9d705ee049e47b161f15a1500d55b7c48d0f1f2f95ba86ecb2ca",
+      "lines": 72,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05RetainedReferenceAssembly",
+      "path": "src/ContinuousFlexibility/Analysis/N05RetainedReferenceAssembly.lean",
+      "planned_c9_blob": "e9cf5f1563d679a1cafa857266e2af25e8d7ecf2",
+      "main_1ece_blob": "e9cf5f1563d679a1cafa857266e2af25e8d7ecf2",
+      "sha256": "68cbd2b62846f0f809385bc7f48cf50cb6de39d676be0ac80b298b050fbd20a5",
+      "lines": 404,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05SeedOpticalLowerMorse",
+      "path": "src/ContinuousFlexibility/Analysis/N05SeedOpticalLowerMorse.lean",
+      "planned_c9_blob": "288f3b60e8a0f3bbf42fc0a413b03a8c549861bd",
+      "main_1ece_blob": "288f3b60e8a0f3bbf42fc0a413b03a8c549861bd",
+      "sha256": "69e622482229f68798538cb69b67753a3764e5ce2cc6ade4f3de0f38993e5da1",
+      "lines": 407,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.SeedReferenceRetention",
+      "path": "src/ContinuousFlexibility/Radial/SeedReferenceRetention.lean",
+      "planned_c9_blob": "ac6ff48f8f4d3097e047d37239f9d52bd26829aa",
+      "main_1ece_blob": "ac6ff48f8f4d3097e047d37239f9d52bd26829aa",
+      "sha256": "ae137bee81de447d4531d2f28ef73a3bae20635488a928a528c7e5983c9ad9b2",
+      "lines": 157,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05SeedOpticalLowerTransport",
+      "path": "src/ContinuousFlexibility/Analysis/N05SeedOpticalLowerTransport.lean",
+      "planned_c9_blob": "d34331529ef67e544846c05e6b78710518755b36",
+      "main_1ece_blob": "d34331529ef67e544846c05e6b78710518755b36",
+      "sha256": "fd6a4b357ac162fcfef4249f2e89251c96effa6b6a0d1abe7a1e5bbf92a5854b",
+      "lines": 144,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05SeedOpticalLowerBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N05SeedOpticalLowerBounds.lean",
+      "planned_c9_blob": "da1e23c25c227aa56f979f0dce68a8747650d1da",
+      "main_1ece_blob": "da1e23c25c227aa56f979f0dce68a8747650d1da",
+      "sha256": "6a08aeb8951eaf9e2afe64043807456000678e315c9514f82d1f52e594c63484",
+      "lines": 146,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05SeedOpticalLowerComponents",
+      "path": "src/ContinuousFlexibility/Analysis/N05SeedOpticalLowerComponents.lean",
+      "planned_c9_blob": "c6cfa696b985ce55e30be0707311c605c72199e9",
+      "main_1ece_blob": "c6cfa696b985ce55e30be0707311c605c72199e9",
+      "sha256": "cc6b9a45ce387c473e8cc43ae78759e6c3a64ebb47fbb117ade8d93458223ac9",
+      "lines": 151,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05SeedOpticalLowerTail",
+      "path": "src/ContinuousFlexibility/Analysis/N05SeedOpticalLowerTail.lean",
+      "planned_c9_blob": "9dd6a8bb55b5219fb687c18ac55eee05c173dc84",
+      "main_1ece_blob": "9dd6a8bb55b5219fb687c18ac55eee05c173dc84",
+      "sha256": "95a39c2ff0cc39f398ef7bfa3831f6aef46c1226c0adccdcfa614903328b3a4f",
+      "lines": 118,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05SeedOpticalLowerFiniteHead",
+      "path": "src/ContinuousFlexibility/Analysis/N05SeedOpticalLowerFiniteHead.lean",
+      "planned_c9_blob": "dde05b595c57a3f26247dd68d4980d6815cb28cc",
+      "main_1ece_blob": "dde05b595c57a3f26247dd68d4980d6815cb28cc",
+      "sha256": "96ab09f011b6af1fae590efb3cc5e5f0df0b96af042e31a5d09fa989229ecb66",
+      "lines": 281,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05SeedOpticalLowerAssembly",
+      "path": "src/ContinuousFlexibility/Analysis/N05SeedOpticalLowerAssembly.lean",
+      "planned_c9_blob": "0d36c11e884a70ad843148c15dabe8230ba02fe4",
+      "main_1ece_blob": "0d36c11e884a70ad843148c15dabe8230ba02fe4",
+      "sha256": "8871e0b2376084797aa004d3927b608b198c8b9ceea77b30324ab35d41c9ca04",
+      "lines": 131,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05SeedNegativeEnumerationGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/N05SeedNegativeEnumerationGeometry.lean",
+      "planned_c9_blob": "dac82afaca3435927b0bc2b66fb4752e603ed7c5",
+      "main_1ece_blob": "dac82afaca3435927b0bc2b66fb4752e603ed7c5",
+      "sha256": "1ca7107d8d53c9e7cde65f2f7cd03cefafc48498f3b3ccf8c555bd0861e075cb",
+      "lines": 146,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05SeedNegativeEnumeration",
+      "path": "src/ContinuousFlexibility/Analysis/N05SeedNegativeEnumeration.lean",
+      "planned_c9_blob": "8802713d2ff0c064587da7d5c32e1f36449f0659",
+      "main_1ece_blob": "8802713d2ff0c064587da7d5c32e1f36449f0659",
+      "sha256": "69203762237e1a8f3769790d793780f5a23ceb9f2489ec2f27fa1a335170a3d0",
+      "lines": 167,
+      "identical": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05SeedNegativeEnumerationBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N05SeedNegativeEnumerationBounds.lean",
+      "planned_c9_blob": "33eb4f6f8369231513e1b9201b4f9a1ddb15c393",
+      "main_1ece_blob": "33eb4f6f8369231513e1b9201b4f9a1ddb15c393",
+      "sha256": "73340505a5894d5931551afdf9fa31c9681445424d72f8863e271486c810cf33",
+      "lines": 150,
+      "identical": true
+    }
+  ],
+  "mathematical_scope": {
+    "complete_outputs": "The selected roots compile the actual reference geometry/cut/transport/transmission assembly, the reference principal formulas on the same atlas, and the buffered radial auxiliary-column branch.",
+    "not_claimed": [
+      "CurrentJets production",
+      "all fifteen moving-domain primitive material bounds",
+      "final N04Coordinates theorem",
+      "uniform material estimates for the legacy qualitative choice",
+      "all 41 sources compiled before the new CI runs"
+    ],
+    "same_choice": "No source is edited. The actual qualitative factory keeps its original coherent reference family. This compilation subset neither replaces nor reselects the separately displayed material family used in the later ReferenceJets producer."
+  },
+  "activation_requirements": [
+    "CI165 must finish fully green, and its exact commit/tree and generated root result must be recorded.",
+    "Use a new explicit successor proposal; leave both the old full-main/41 gate and this read-only plan unchanged.",
+    "Verify old cohort4 still matches c9 and fixed 1ece source blobs, rules/workflow/toolchain constraints, and its exact predecessor.",
+    "Check every selected existing provider against the actual CI165 tree, with de78 normalizer explicit and the 14-prefix exact.",
+    "Confirm the proposed 149 source paths are exactly the old 124 plus the new 25, with no unrelated or signature-port changes.",
+    "Recompute actual Git additions/deletions including CI-generated root imports and keep the total below 20000; the current conservative estimate is 19813.",
+    "Recheck imports, cycles, explicit public names, and all required owner/review identities at staging; full compilation remains CI's job."
+  ],
+  "executed": {
+    "source_changes": false,
+    "new_Lean_lines": 0,
+    "compiled": false,
+    "stage_script_run": false,
+    "git_ref_mutation": false
+  }
+}

@@ -1,0 +1,335 @@
+{
+  "kind": "ActualNegativeStageCDTargetCanonicalAndMaterialMap",
+  "owner": "audit_coordinates",
+  "status": "READONLY_EXACT_INTERFACE_AND_MATHEMATICAL_DERIVATION_NOT_NEW_LEAN",
+  "created_at_utc": "2026-11-12 20:52:52 UTC",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "proposed_path": "audit/recovery/ActualNegativeStageCDTargetCanonicalAndMaterialMap.json",
+  "pins": {
+    "installed_provider_baseline": "c796387fb555392501c81f5b8bd834936251516c",
+    "exact_sources_unchanged_in_candidate": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+    "new_actual_opposite_sources": [
+      "398cf5d4c3207cc9e9dd31cbe09887007d9aff2c",
+      "5b0d8327ff2054595a95f053d2f5e82afeabc2dd"
+    ],
+    "main_not_silently_selected": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac"
+  },
+  "prior_routes": [
+    {
+      "blob": "b78fe451540e9076b18b913e78abd4970e83f092",
+      "sha256": "3f988dc3f78a4e7e2b360568fa803018110b1b4db912231fce6acdd27b5b7d52",
+      "role": "Original actual half/domain/sample route"
+    },
+    {
+      "blob": "f70b18e7f3472ca4ae34372590b1928812f46a09",
+      "sha256": "f5fe015806b5c65e35fd12ab59759e168df8ab2e79f82b796f2cdde2e6c58d97",
+      "role": "Quantitative fifteen-field route"
+    }
+  ],
+  "notation": {
+    "K": "The same original n04bActualTypedAtlas; actual whole V negative fields are its literal reindexing.",
+    "m": "One negative component, not an atlas index.",
+    "k": "Original target index with e0 k=inl(m,side).",
+    "ko": "Original opposite index with e0 ko=inl(m,!side).",
+    "rho": "n04bRootCutRadius(C.travel m)>0; common canonical half length.",
+    "ellk": "K.physicalRight k-K.physicalLeft k; a physical half width, distinct from rho.",
+    "Fz": "K.chart z k",
+    "Gz": "K.inverseChart z k",
+    "hz": "K.height z k",
+    "Jz": "abs(planeJacobian Fz)",
+    "F0": "K.chart ref k",
+    "G0": "K.inverseChart ref k",
+    "h0": "K.height ref k",
+    "x": "Physical point in the actual moving target half.",
+    "q": "Fz(x), always in the target canonicalOpen (0,rho) times R.",
+    "r": "G0(q), in the target fixed reference half.",
+    "Uo": "n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData K) ko x, only when x is in the opposite fixed reference half.",
+    "u": "(K.chart z ko x).1/rho; equal to the opposite chartRadial atom at Uo.",
+    "v": "(K.chart z k x).1/rho; in (0,1).",
+    "Ek": "T.E0(T.sample(K.cell k)); Eo uses ko. These samples are not equated."
+  },
+  "central_domain_boundary": {
+    "result": "Transfer only actual forward chart, height± and absolute Jacobian± across the fixed reference cut. Subsequent inverse and canonical source estimates use the target index k on its genuine canonical strip.",
+    "why": "In the crossing case u>1. The opposite normalized canonical point (u,theta) is outside unitStrip, and its unnormalized point is beyond the opposite certified canonical half.",
+    "prohibited_shortcuts": [
+      "Do not evaluate an opposite inverseRadial, inverseAngleDefect, sourceFactor or sourceFactorInverse unit-atom estimate at u>1.",
+      "The 256-line full-component germs concern chart, height and absolute forward Jacobian. They do not supply an arbitrary outside-strip stored inverse identity.",
+      "Do not identify the moving target half with a fixed reference half.",
+      "Absolute CurrentJets closeness does not by itself give uniform positive lower bounds for height or Jacobian. Nonvanishing comes from actual geometry/full-component regularity; reciprocal atoms are used quantitatively."
+    ],
+    "safe_inverse_identity": "Gz(Fz x)=x, G0(F0 r)=r and F0(G0 q)=q are used only on their actual mapped open sets."
+  },
+  "membership_sequence": [
+    {
+      "step": 1,
+      "fact": "x in moving target half implies x is in the original full negative component.",
+      "provider": "n04bTypedAtlasData_physicalPieceOpen + n04b_typed_negative_domain_subset"
+    },
+    {
+      "step": 2,
+      "fact": "q=Fz x is in canonicalOpen k, and r=G0 q is in the reference physical target half.",
+      "provider": "CanonicalGeometry.charts; n07b_canonicalReferencePoint_mapsTo; CanonicalGeometry.referenceDomain"
+    },
+    {
+      "step": 3,
+      "fact": "Away from the fixed reference cut, x lies in exactly one of the two fixed reference halves of the same original component.",
+      "provider": "n04b_negativeHalf_existsUnique / n04b_negativeHalf_index_unique"
+    },
+    {
+      "step": 4,
+      "fact": "On the target reference half the current physical unit atoms directly supply jets. On the opposite reference half use Uo in unitStrip and physicalUnitPoint K ko Uo=x.",
+      "provider": "n07aCanonicalUnitInversePoint_maps / n07aCanonicalUnitPoint_inverse with n07aPhysicalIntervalData"
+    },
+    {
+      "step": 5,
+      "fact": "The exact stored metadata give canonical left=0 and right=rho, so the chartRadial atom is the root radial coordinate divided by rho, not by a physical width.",
+      "provider": "n04bTypedAtlasData_left/right; Nonlinear.atom"
+    }
+  ],
+  "cross_half_point_and_germ_calculus": {
+    "range_proof": "Own current-half maps-to gives 0<v<1. The frozen normalized identity gives v^(3/2)+u^(3/2)=2, hence u>1. Reference maps-to gives 0<u_ref<1 at the opposite fixed-half point. One common CurrentJets shrink with |u-u_ref|<1/4 gives 1<u<5/4.",
+    "c": "c=(7/16)^(2/3)>0",
+    "scalar_functions": {
+      "g": "g(u)=(2-u^(3/2))^(2/3)",
+      "eta": "eta(u)=(g(u)/u)^(1/4)",
+      "zeta": "zeta(u)=sqrt(u/g(u))"
+    },
+    "scalar_bounds": [
+      "c<=g(u)<=1",
+      "(4*c/5)^(1/4)<=eta(u)<=1",
+      "1<=zeta(u)<=sqrt(5/(4*c))"
+    ],
+    "scalar_smoothness": "All three scalar functions and eta/zeta reciprocals are ordinarily smooth on a fixed open neighborhood of [1,5/4]. Their every fixed finite derivative bound is universal, independent of component, state, rho and samples.",
+    "exact_current_formulas": [
+      "Fz(x)=(rho*g(u), (K.chart z ko x).2)",
+      "hz(x)=K.height z ko x * eta(u)",
+      "hz(x)^(-1)=(K.height z ko x)^(-1) * eta(u)^(-1)",
+      "Jz(x)=abs(planeJacobian(K.chart z ko)x)*zeta(u)",
+      "Jz(x)^(-1)=abs(planeJacobian(K.chart z ko)x)^(-1)*zeta(u)^(-1)"
+    ],
+    "full_germ_provider": "n04bActualTypedAtlas_negative_opposite_germs; ratio and normalized forms from n04bActualTypedAtlas_negative_opposite_ratios/normalized.",
+    "useful_derived_identities": [
+      "g'(u)=-zeta(u)",
+      "eta(u)^2*zeta(u)=1",
+      "hz(x)^2*Jz(x)=(K.height z ko x)^2*abs(planeJacobian(K.chart z ko)x)"
+    ],
+    "derivative_cost_strategy": "Compose with the opposite chartRadial atom directly in its physical unit variable. This avoids introducing rho^(-1) in u derivatives. Reconstruct the target unnormalized forward radial coordinate by multiplying by rho once. Physical derivatives of order a then cost the true opposite physical width to power -a; angular defects are used instead of the unbounded unwrapped angle.",
+    "status": "Point/germ identities are frozen source results. The compact scalar range/jet estimate and its actual atom specialization are the next consumer and are not claimed formally proved here."
+  },
+  "same_component_sample_comparison": {
+    "exact_cell": "K.cell k=n04CellAt D((K.physicalLeft k+K.physicalRight k)/2). The two half midpoints generally differ. Cell equality or sample equality is neither required nor asserted.",
+    "provider": {
+      "path": "audit/reconstructed/ActualNegativeMaterialSamples.lean",
+      "blob": "2546c07212cf569a225e873eb38945a9cb4127e3",
+      "sha256": "696583df4d5261aff78e5a6cc32ff4fde06ea6d17b2bdf2745805fde0a06c2fc"
+    },
+    "preferred": "For any nonnegative sample exponent, apply n04bActualTypedAtlas_negative_material_sample_comparison independently to k and ko at the same actual physical radius x.1. Both use full closed-component membership. This bounds Ek^P and Eo^Q by powers of T.E0(x.1); multiply/pack only after these two true inequalities.",
+    "normalizer": "For the literal H(x.1)/H(sample(K.cell k)) normalizer use the target k comparison. Its derivatives keep this same constant denominator and use the actual material power-jet formula. Do not switch to the opposite denominator.",
+    "optional_sample_to_sample": "The single constant A from negative_sample_endpointX compares each sample with any point of the closed component. At the shared component midpoint, the triangle inequality gives |X(sample k)-X(sample ko)|<=2*A. Use material_global_H_M_E0_rpow_bounded_X_shift at the two sample radii (each is in radialCore) if an explicit sample-to-sample weight comparison is needed.",
+    "sample_core_warning": "A sample is known to lie in its chosen cell and the radial core. It is not automatically a point of the original negative component, so never feed the sample itself into a full-component-only lemma without extra membership proof.",
+    "preserved_indices": "Raw optical host, correction cutoff host and K.cell k/K.cell ko stay distinct.",
+    "floor": "No E0>=1 is inferred from IsMaterialData alone. Any envelope packing that uses a floor must consume the actual earlier normalized material record/floor certificate."
+  },
+  "target_canonical_derivative_identities": {
+    "current_inverse_angular": {
+      "actual_existing_provider": "n07b_fderiv_inverse_angular in N07bCanonicalInverseAngle.lean",
+      "formula": "canonicalPrimitiveDirection C K z k 0 x = DGz(q)(0,1).",
+      "hypotheses_from_actual_geometry": "Open moving domain, Gz(Fz y)=y there, actual differentiability of Fz at x and Gz at q, and nonzero forward Jacobian.",
+      "no_new_matrix_inverse_proof_needed": true
+    },
+    "reference_directions": {
+      "exact_definitions": "canonicalCurrentPoint=Gz compose F0; canonicalReferencePoint=G0 compose Fz.",
+      "formula": "For i=1,2, Y_i(x)=DGz(q)(DF0(r)e_i), where e_1=(1,0), e_2=(0,1).",
+      "proof_route": "Apply ordinary chain rule at r to Gz compose F0, then F0(r)=q from the reference right-inverse identity. n07b_canonicalReferencePoint_mapsTo and n07b_canonicalCurrentPoint_referencePoint already provide the needed true points and compositions.",
+      "status": "A direct specialization of existing true chart/chain providers; no separate Lean lemma was added in this read-only task."
+    },
+    "jacobian_inverse": "canonicalClosed_inverse_planeJacobian identifies det DGz(q)=(det DFz(x))^(-1) using the actual inverse germ, valid already on the canonical open subset.",
+    "exact_source_functions": [
+      "canonicalReferenceSourceFactor C K z k x = canonicalSource S K ref k (fun _=>1) q.",
+      "hz(x)/Jz(x)=canonicalSource S K z k (fun _=>1) q.",
+      "canonicalReferenceHeightRatio C K z k x = h0(r)/hz(x)."
+    ],
+    "source_domain": "All source atoms in these equalities use target q inside canonicalOpen k, even if x belongs to the opposite reference half."
+  },
+  "fifteen_field_map": [
+    {
+      "indices": "Sum.inl(i,0), i=0,1,2",
+      "count": 3,
+      "literal": "Y_i(x).1/T.ell(x.1)",
+      "inputs": "Target canonical DGz jets, target reference DF0 at r for i=1,2, forward Fz jets at x, ell^-1 physical jets.",
+      "sample_route": "Target canonical/reference costs use Ek; any opposite forward costs use Eo. Convert each separately to E0(x.1)."
+    },
+    {
+      "indices": "Sum.inl(i,1), i=0,1,2",
+      "count": 3,
+      "literal": "Y_i(x).2",
+      "inputs": "Same target-canonical direction formula; no full unwrapped angular value bound.",
+      "sample_route": "Same separate sample-to-point route."
+    },
+    {
+      "indices": "Sum.inl(i,2), i=0,1,2",
+      "count": 3,
+      "literal": "-(Y_i.1*partial_r(ell*Jz)+Y_i.2*partial_theta(ell*Jz))/(2*ell*Jz)",
+      "inputs": "Direction jets, one additional derivative of ell and actual Jz, plus ell^-1 and Jz^-1. Current J/J^-1 on the moving point are precisely the Stage C output.",
+      "order_note": "A conservative finite input prefix N+2 covers the explicit derivative slots; do not interpret this as an already-proved optimal-loss lemma."
+    },
+    {
+      "indices": "Sum.inr(Sum.inl 0)",
+      "count": 1,
+      "literal": "sqrt(ell*Jz)*(H(x)/H(sample k))^(3/4)*(hz/Jz)",
+      "inputs": "Positive-power calculus for true ell/J and reciprocal values, the target material H-ratio, and hz/Jz. The last factor may equally be the current target sourceFactor at q."
+    },
+    {
+      "indices": "Sum.inr(Sum.inl 1)",
+      "count": 1,
+      "literal": "sqrt(ell*Jz)*(H(x)/H(sample k))^(3/4)*hz^-1",
+      "inputs": "Same normalizer and actual Stage C reciprocal height."
+    },
+    {
+      "indices": "Sum.inr(Sum.inl 2)",
+      "count": 1,
+      "literal": "sqrt(ell*Jz)*(H(x)/H(sample k))^(3/4)*h0(r)*hz^-1",
+      "inputs": "Same normalizer, target reference height at its true reference point r, and Stage C reciprocal current height."
+    },
+    {
+      "indices": "Sum.inr(Sum.inr i), i=0,1,2",
+      "count": 3,
+      "literal": "SF_ref(q)*(w'(r.1),w(r.1),w'(r.1)/r.1)_i",
+      "inputs": "Target reference sourceFactor atom at q, R=G0 compose Fz positive jets and the genuine fixed profile finite jets. No inverse-profile compactness and no opposite inverse value are used."
+    }
+  ],
+  "local_material_pullback_interface": {
+    "precise_existing_gap": "n07a_materialPullback_zero_mixedDerivative and its bound currently take ContDiffOn infinity f on the whole annularOpen. A primitive field here is only supplied smooth on its actual moving open piece. That premise cannot be inserted without proof.",
+    "minimal_new_reusable_statement_in_math": "For each N, fixed hT supplies C_N>=0, independent of an open U, f and y, such that f smooth on U, Phi(y)=(T.radius(y.1),y.2) in U and all physical mixed jets a+b<=N at Phi(y) bounded by M>=0 imply ||D^k(f compose Phi)(y)||<=C_N*M for every k<=N.",
+    "proof_using_existing_coefficients": [
+      "Let U be the true current physical piece and work on its open preimage under Phi.",
+      "Use contDiffOn_mixedDerivative on U, then at the single true point compose the radial slice locally. A local open neighborhood may justify the derivative identity; its radius does not enter any numerical constant.",
+      "The existing one-dimensional ordered-partition formula gives the same sum over c of mixedDerivative(c.length,b,f)(Phi y) times n07aRadiusJetCoefficient(T,c)(y.1).",
+      "n07aRadiusJetCoefficient_bounded is genuinely global and independent of U/f/y. Use its finite prefix once, without replacing the actual T.radius.",
+      "Apply norm_iteratedFDeriv_le_of_mixedDerivative on Phi-preimage U. Its factor 2^k is absorbed into C_N."
+    ],
+    "finite_orders": "This radius pullback does not increase the physical derivative order. The N+2 reserve belongs to primitive-direction/Jacobian differentiation before this step.",
+    "quantifiers": "Choose C_N and all finite-prefix scalar constants before piece, state and point. Higher state orders r_N and polynomial degree d_N may depend on N, as allowed by materialJets. The low neighborhood is the one fixed earlier by normalized radial closeness, not reselected at each N.",
+    "no_new_source_written": true
+  },
+  "fixed_reference_cut_case": {
+    "statement": "If x lies on the fixed reference cut while remaining inside the target moving half, it is not in either open reference half.",
+    "route": "The actual moving domain is open. Approach x from the opposite fixed half while staying in that domain. Actual full-component chart/height regularity and nonzero Jacobian make their finite ordinary jets continuous at x; material envelopes and the finite state factor are continuous there. Uniform pointwise inequalities extend by continuity.",
+    "constants": "No chosen local neighborhood radius enters a bound, and no equality of reference/current cuts is assumed.",
+    "exclusions": "True roots and the current artificial cut are not in that target open materialJets domain. They are handled separately only for the global C3 transport conclusion."
+  },
+  "stage_E_separate_short_identity": {
+    "formula": "For reference p and y=F0(p), qtransport(p)=h0(p)*abs(det DGz(y))*sourceFactor_z(y)^(-1).",
+    "orders": "Reference F0/h0 through2, current inverse positive jets through3, current sourceFactorInverse through2; all target canonical arguments lie in canonicalOpen.",
+    "reason": "This is a reference-domain estimate, so it does not require the Stage C moving-physical transfer. Genuine inverse Jacobian reciprocity and the literal canonicalSource definition give the identity.",
+    "no_completion_claim": true
+  },
+  "source_evidence": [
+    {
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "lines": 1773,
+      "pin": "c796387fb555392501c81f5b8bd834936251516c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+      "blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "sha256": "166d48b590552637d5efedb29ce0b19d5963d02f33e7caebffe44a04b576fdf4",
+      "lines": 142,
+      "pin": "c796387fb555392501c81f5b8bd834936251516c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04bCurrentPartition.lean",
+      "blob": "1005399b1097409b64312fd2994c23a7b69e5757",
+      "sha256": "4087433cb73325005c6677a09b43531b3f8abc469c95958a5c874d8bbe41a2cf",
+      "lines": 165,
+      "pin": "c796387fb555392501c81f5b8bd834936251516c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+      "blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+      "sha256": "598b1d5f18c4a22eecd5108949d46b2ddca955d79ea66090b85ca6ba06ff8227",
+      "lines": 96,
+      "pin": "c796387fb555392501c81f5b8bd834936251516c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferencePieces.lean",
+      "blob": "ba67b0a6776363ed4ebf616d7fd56c489baf2b25",
+      "sha256": "0ae0b98aef8f688002cf783e7b129f6834a79b1502061bd123f90ffe59edf766",
+      "lines": 174,
+      "pin": "c796387fb555392501c81f5b8bd834936251516c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aForwardChartBounds.lean",
+      "blob": "fee0603405737ade95ecd8639bc33e2997272f3a",
+      "sha256": "c4eacdcafbf69c82dff51b1fa3438b126126d0fda52b9e1c01b5a6d8bbee553f",
+      "lines": 118,
+      "pin": "c796387fb555392501c81f5b8bd834936251516c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aMaterialPieceBounds.lean",
+      "blob": "321fa9566f12829d7c6769789a9b51d2fa13fc1f",
+      "sha256": "a452494a4445a85e2261f014c14034ca704cb976449d652b833af2e0a5fb888e",
+      "lines": 128,
+      "pin": "c796387fb555392501c81f5b8bd834936251516c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07bReferenceGeometry.lean",
+      "blob": "b4a4546928aab82b2f5eb9bf332fccc91f524ef4",
+      "sha256": "5f57de34ba6b32f82254385ce8c3105cf2fe98a2dd9d676f1a5e2732620a4340",
+      "lines": 200,
+      "pin": "c796387fb555392501c81f5b8bd834936251516c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalClosedInverseJets.lean",
+      "blob": "278df1dda278aadcc638141c9b1a98621e37c585",
+      "sha256": "f47f1852c7b9358d2a65d7fcad9e70ad9712798ce4d314113d31e5ea0f7aa2a2",
+      "lines": 148,
+      "pin": "c796387fb555392501c81f5b8bd834936251516c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07bCanonicalInverseAngle.lean",
+      "blob": "59579c821cb0a229237f026209d243ea0f1b78ae",
+      "sha256": "bf05c86e0cc24fd165cd5e51c78e329ab3e8be99c1ec536ad1e1e52d163bfe15",
+      "lines": 109,
+      "pin": "c796387fb555392501c81f5b8bd834936251516c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07bInverseDirection.lean",
+      "blob": "e871936b695bac8e18d7d59ee75269e7b353d835",
+      "sha256": "3b3438b86592334a4550309ee532562b73fa178b13ddf89206a150a7af931821",
+      "lines": 149,
+      "pin": "c796387fb555392501c81f5b8bd834936251516c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aMaterialPullbackJets.lean",
+      "blob": "3162470bd6b9ac60c8abb8ce498955f590bf9cf9",
+      "sha256": "44867b7d37f5d7a5b7e23052ad386f56e597b035b51da1a5522844f017765217",
+      "lines": 99,
+      "pin": "c796387fb555392501c81f5b8bd834936251516c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CylinderMixedJets.lean",
+      "blob": "3dc20e779221e16f9be32dff13d22e978b5a048d",
+      "sha256": "ae19c58f66f0778411f64607f52acf0525aceb27036c9d1ac1825e0e46e3614d",
+      "lines": 253,
+      "pin": "c796387fb555392501c81f5b8bd834936251516c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/BoundaryMixedJets.lean",
+      "blob": "756659895cbc27463f3ce4c058e3b4c9ce437924",
+      "sha256": "e3d747a16201ce8962614f7bd14136a924f3dce50874ce599d037be8ead1ba75",
+      "lines": 172,
+      "pin": "c796387fb555392501c81f5b8bd834936251516c"
+    }
+  ],
+  "remaining_work": "Implement and independently review the compact dimensionless jet consumer, actual moving-half finite jet aggregation and local material pullback/15-field numerical assembly. This read-only mapping does not manufacture CurrentJets or assert the final CanonicalPrimitiveGeometry.",
+  "restrictions": {
+    "new_Lean_written": 0,
+    "local_compilation": false,
+    "active_or_refs_modified": false,
+    "CI_queried": false,
+    "existing_sources_and_receipts_overwritten": false
+  }
+}
