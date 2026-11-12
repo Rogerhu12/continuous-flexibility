@@ -5,8 +5,9 @@
 This change follows the audit in N07a, branch `line/N07a`, PR #37. It preserves
 the exact public theorem signatures of N02N03, N04Coordinates, N04, N05, N06,
 and N07a. It strengthens the construction-stage propositions carried through N03 and N04
-and repairs the actual weak physical representation in N06. N07a remains
-open; these interface changes do not prove its analytic estimates.
+and repairs the actual weak physical representation in N06. This document records
+the interface audit made while N07a was open. The analytic conclusions are proved
+separately by N07aAngular, N07aLinear, N07aSmooth, and their N07a assembly.
 
 ## Full-period physical tests
 
@@ -94,8 +95,8 @@ The payload concerns only actual geometric functions:
 The coordinate construction must prove these facts. The payload assumes
 no inverse, commutator, Fourier realization, solution regularity, weak
 change of variables, local finiteness, solution trace matching, or grading
-equivalence. Those remain analytic conclusions to prove. In particular,
-the existing N07a band-preservation and bounded-coefficient lemmas consume
+equivalence. Those are analytic conclusions proved by N07a in separate modules.
+In particular, the N07a band-preservation and bounded-coefficient lemmas consume
 these named primitive facts explicitly; they do not manufacture them from
 the former qualitative clauses.
 
@@ -103,8 +104,18 @@ the former qualitative clauses.
 
 ### Spatial regularity of the actual return correction
 
-The previous last clause of `N03Properties` was the smooth-tame assertion
-for `L.error`. The other clauses fixed the leading coefficient, germs at
+The previous last clause of `N03Properties` was exactly:
+
+```lean
+SmoothTameOn
+  (pairGrading (pairGrading (pairGrading (sectorGrading S) realGrading)
+    (S.circle (3 / 4 : ℝ)).grading) (heightPairGrading S))
+  S.sourceGrading ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ univ)
+  (fun z : ((StateDirections S × ℝ) × CircleSpace S) × HeightPair S =>
+    L.error (liftSectorParameter S C z.1.1) z.1.2 z.2)
+```
+
+This is the smooth-tame assertion for `L.error`. The other clauses fixed the leading coefficient, germs at
 roots and on positive pieces, reflection, characteristic returns, and the
 action of the corrected divergence on actual `HeightPair` fields. They did
 not retain open-annulus smoothness and π-periodicity of the actual corrected
@@ -169,16 +180,26 @@ These are the coordinate/height facts explicitly used in
 The construction stage must prove them, and neighborhood restriction preserves
 them on the same objects. They do not assert membership of a solution in the
 reference graph, any inverse estimate, or higher regularity of a solution. N07a
-still has to prove reference-graph membership of arbitrary physical candidates,
-weak gluing, and uniqueness. This records the exact missing primitive output
-needed by that proof; it does not claim a counterexample to the former complete
-existential N07a statement.
+proves reference-graph membership of arbitrary physical candidates, weak gluing,
+and uniqueness from these geometric facts. It constructs the candidate's graph
+and volume realizations before applying the N05 graph equivalence and N06
+injectivity. This records the exact missing primitive output needed by that
+proof; it does not claim a counterexample to the former complete existential
+N07a statement.
 
-## Remaining obligations
+## Construction obligations and the analytic proof
 
-The N04Coordinates proof must construct the new primitive payload. The
-N06 proof must retain the actual physical witness periods and prove the
-full-period distributional identity. N07a must still derive the actual
-relative-operator bounds, smooth physical reconstruction, fixed-loss tame
-estimates, conservation cancellation, and the genuine smooth-tame inverse.
-The repair does not bypass any of these requirements.
+The N02N03 proof must construct the actual corrected coefficients' spatial
+regularity and periods. The N04Coordinates proof must construct the primitive
+geometry payload. The N06 proof must retain the actual physical witness periods
+and prove the full-period distributional identity. These upstream construction
+obligations remain explicit in their task files and cumulative statements.
+
+The N07a proof derives the actual relative-operator bounds, smooth physical
+reconstruction, fixed-loss tame estimates, conservation cancellation, and the
+smooth-tame inverse. Its Linear subnode constructs domain membership for every
+original normalized HeightPair and proves uniqueness against every such candidate.
+The same base source, N05 domain, N06 inverse, physical decoder, and final inverse
+family are retained. No inverse regularity, source membership, candidate-domain
+membership, solution trace, or tame estimate is added as a construction premise.
+The original exact N07a theorem is assembled from these analytic subnodes.
