@@ -17,6 +17,16 @@ witness, while retaining the cumulative N01–N03 conditions, and derive
 the exact all-order potential and divided-coefficient bound on one
 common state neighborhood with one fixed loss.
 
+The same witness must also carry both `CanonicalPrimitiveGeometry` and
+`CanonicalGeometry.PrimitiveGeometryProperties` from the current parent
+statement. The latter retains the actual radial reference gauge, reference
+principal positivity and unit-piece jets, current-minus-reference spatial
+jets and their `SmoothDirections` tower with the prescribed height gain,
+the radial supported auxiliary source, and `TransmissionGeometry`.
+In particular, relative transport matching alone does not replace the
+actual forward chart and height first-jet matching at roots and at the
+state-dependent middle cuts. See `docs/notes/N07a-interface-repair.md`.
+
 The proof includes the actual root charts and heights, global negative
 pieces and cut matching, positive reference interpolation and finite
 boundary jets, inverse coordinates, ordinary boundary jets, and the
@@ -43,7 +53,7 @@ be inserted as a new hypothesis.
 ## Source
 
 `paper/flexible-surface-readable/07-fixed-geometry.tex`, the root-coordinate
-and positive-crossing constructions and lines 1211–1725 for reference
+and positive-crossing constructions and lines 1211–1760 for reference
 interpolation, quantitative geometry, general-state bounds and source
 conversion. Existing coordinate, Seeley, cubic-division, source-measure,
 and state-neighborhood modules should be reused.

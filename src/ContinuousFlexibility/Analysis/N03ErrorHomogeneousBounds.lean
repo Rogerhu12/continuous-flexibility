@@ -81,7 +81,7 @@ theorem n03Error_homogeneous_tame_bound
         (S.circle (3 / 4 : ℝ)).grading) (heightPairGrading S))
       S.sourceGrading ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ univ)
       (fun z : ((StateDirections S × ℝ) × CircleSpace S) × HeightPair S =>
-        L.error (liftSectorParameter S C z.1.1) z.1.2 z.2) := hN03.2.2.2.2.2.2.2
+        L.error (liftSectorParameter S C z.1.1) z.1.2 z.2) := hN03.2.2.2.2.2.2.2.1
   have hz₀ : (0 : StateDirections S × ℝ) ∈ sectorNeighborhood S base ε ε := by
     change sectorGrading S base (0 : StateDirections S) < ε ∧ |(0 : ℝ)| < ε
     exact seminorm_pair_zero_lt (sectorGrading S base) hε

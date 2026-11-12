@@ -1,0 +1,34 @@
+{
+  "head": "c6c8f4881c127c415919addae844aee8422e4548",
+  "tree": "98a10b0ece483598aca44f33612c17cf14eddcef",
+  "run": 43223105609,
+  "job": 131199386174,
+  "conclusion": "failure",
+  "log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-144.log",
+    "sha256": "78885c9e4a111f0aef05ca9438c014091b51c7b3d677ae61cf82e1d7633f99d7",
+    "chars": 59957,
+    "lines": 654
+  },
+  "errors": [
+    [
+      "WholeCanonicalAtlasCutOperator",
+      "64",
+      "4",
+      "Type mismatch: After simplification, term"
+    ]
+  ],
+  "compiled_project_modules": 5,
+  "newly_compiled_modules": [
+    "WholeCanonicalAtlasCuts",
+    "CanonicalWholePositiveReferenceJets",
+    "WholeCanonicalAtlasReferencePartition",
+    "CanonicalWholePositiveCubicDifference",
+    "WholeCanonicalAtlasGeometry"
+  ],
+  "full_build": "skipped",
+  "blueprint": "skipped",
+  "counter": 4188,
+  "source_inventory": 3681,
+  "counter_caveat": "Restored main cache contains N06 sources absent from this checkout, so the counter is not a current-head compiled-source count."
+}

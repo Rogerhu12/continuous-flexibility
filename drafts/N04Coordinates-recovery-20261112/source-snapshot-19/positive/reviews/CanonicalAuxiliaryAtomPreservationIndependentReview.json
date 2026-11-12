@@ -1,0 +1,58 @@
+{
+  "kind": "actual_auxiliary_column_atom_preservation_independent_full_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "passed_static_full_source_and_actual_provider_review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalAuxiliaryAtomPreservation.lean",
+    "sha256": "c6aa5aeb70d35e64d328b6830ac462b63287ad5b3dd1c0f7e2ce0718b859a957",
+    "blob": "5090df125dd2c756ed0a4554caf9482ff6665cbe",
+    "lines": 68
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeAuxiliaryPackageCandidateManifest.json",
+    "sha256": "27d8e02eef9ee4fdb2721784f1ee9807e558268f5c57d2d4f41451abc135a039",
+    "blob": "69fbd6872ba172f1b5e0b54ba25b5cf93ff5e364",
+    "lines": 143
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/PhysicalSpacesAuxiliaryColumn.lean",
+      "sha256": "b2848268baf18c447dccbfc7275b74ea927c679351768d214ede503f31424160",
+      "blob": "f51d3dac4fa34bdb9cd36c4588b5a490437d10b5",
+      "lines": 134
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "5f73ab50c8dd436e8bfd4039f30722eaba68cbc77bcc862efff43251faff88e7",
+      "blob": "4523f8385550033058d8f7593f8a397a33157576",
+      "lines": 308
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "65fcde6ae1e43bf6fd2a5f56a2121cde66dea71c44357cd45b833e6bc3358ec1",
+      "blob": "7a05b947965738dcb91957059e102f9ea813e52b",
+      "lines": 1756
+    }
+  ],
+  "checks": [
+    "Read the complete 68-line candidate and 134-line fieldwise replacement provider, and the exact Atom/atom, ReferenceRadial, physicalUnitPoint, canonicalUnitPoint, canonicalSource, nuColumnField and enlargedMaterialData definitions.",
+    "AnnularState and all input function types reduce to the unchanged height/circle spaces; the psi replacement changes no chart, inverse, height, correction coefficient, physical/canonical interval, cell, sample, reference state or compatibility functional.",
+    "All Atom constructors were checked against their actual formulas. Only auxiliaryColumn contains S.psi; leftColumn uses retained chiLeft and L.coefficients, nuColumn uses retained actual fields, and canonicalSource retains its actual inverse point and Jacobian denominator.",
+    "enlargedMaterialData changes exactly E0. The only atom formulas reading E0 are ratioE0 and ratioE0Inverse. Both are excluded explicitly; all other branches are definitional equalities as full scalar functions.",
+    "The combined identity composes the enlarged-material equality at the replaced S/C/L/K with the auxiliary-replacement equality at original T. Its direction and complete function type agree.",
+    "ReferenceRadial only uses retained chart, inverse, height, state and interval fields, so the direct hR proof is definitionally well typed.",
+    "All four new public names have no matches in the actual installed src tree."
+  ],
+  "scope_limits": [
+    "This receipt covers only the 68-line atom-preservation leaf; the separate 111-line actual package is owned by the parent reviewer.",
+    "No estimates for the changed auxiliary column or E0 ratios, full primitive certificate, compilation or CI success are inferred from these function identities."
+  ],
+  "validation": {
+    "compiled": false,
+    "lean_invoked": false,
+    "source_modified": false,
+    "checkout_index_refs_or_ci_modified": false,
+    "ci_queried_or_downloaded": false
+  },
+  "actual_head_at_review": "c6c8f4881c127c415919addae844aee8422e4548"
+}

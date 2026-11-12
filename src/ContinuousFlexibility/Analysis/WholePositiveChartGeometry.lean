@@ -116,7 +116,9 @@ theorem wholePositiveChartGeometry_of_transport
   · intro x hx θ
     filter_upwards [hgeometry.inverse_middle_germ x hx θ, hQmiddle x hx θ] with p hpσ hpQ
     change (Q (σ p))⁻¹ = 1
-    rw [hpσ, hpQ, inv_one]
+    rw [hpσ]
+    change (Q p)⁻¹ = 1
+    rw [hpQ, inv_one]
 
 theorem wholePositiveChartGeometry_of_matching
     {n : ℕ} {F : Bool → PolarPoint → PolarPoint} {q : Bool → PolarPoint → ℝ}

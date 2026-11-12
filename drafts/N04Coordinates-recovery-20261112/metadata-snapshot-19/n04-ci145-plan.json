@@ -1,0 +1,47 @@
+{
+  "label": 145,
+  "parent": "c6c8f4881c127c415919addae844aee8422e4548",
+  "base_tree": "98a10b0ece483598aca44f33612c17cf14eddcef",
+  "tree": "aa001f260b62a3daaceac488288b6b134f21f4bb",
+  "main_included": "8cebde34f6668c523facece3312949e9dbec3444",
+  "current_main_checked": "ebfd528f2dd0c690799187be45b7c5a5c4c6b26a",
+  "pending_main_merge_reason": "Keep current failing module repair and the large upstream integration as separate reviewable CI steps.",
+  "added_since_green": 2870,
+  "deleted_since_green": 0,
+  "payload": "/workspace/scratch/bbbea77e4163/n04-ci145-tree-payload.json",
+  "payload_sha256": "b3bcaa38bb65d85e354ae7aff301003ef38c214fa5b2d7e59241d5c710be7a79",
+  "payload_codepoints": 3851,
+  "files": [
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasCutOperator.lean",
+      "before": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair144/WholeCanonicalAtlasCutOperator.base.lean.txt",
+        "sha256": "ec97d0b3260b7266b167fa4c0bf316dd74e899174a66251ad987a043ba6b7c43",
+        "blob": "0bbd8dfa6efe1702e6606ee6b5265adfae833421",
+        "lines": 68
+      },
+      "after": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair144/WholeCanonicalAtlasCutOperator.lean",
+        "sha256": "47d05fc14f1c0103a0bb528300a449b6720998da258d37d085b5e5e21230fd74",
+        "blob": "d6c615f8d1f701511481356e9443f98e550ff4d1",
+        "lines": 76
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair144/WholeCanonicalAtlasCutOperator.diff",
+        "sha256": "610ea05d59b0bd1707bd45ddecfc549e05dc1e7f8460b90cb352132ae2fa3c3c",
+        "blob": "35b1796face4e6e6db392576e1f0b88c3ad372f7",
+        "lines": 20
+      }
+    }
+  ],
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CI144WholeCanonicalAtlasCutOperatorIndependentReview.json",
+    "sha256": "10476692c0b0f18728188dadb513bfbc32f1f70e7f95016b1ff802ca2b4fb1da"
+  },
+  "paths": [
+    "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasCutOperator.lean"
+  ],
+  "source_all_total": 3681,
+  "generated_root_imports": 3624,
+  "status": "Staged one precise CI144 proof repair; not compiled."
+}

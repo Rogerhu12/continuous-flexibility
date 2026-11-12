@@ -1,0 +1,36 @@
+{
+  "kind": "reviewed_genuine_odd_root_axis_finite_jet_bound",
+  "status": "HELD_REVIEWED_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootOddAxisJets.lean",
+    "sha256": "93e9da18ea099fd3b409dc20ae6ad99b59bdd764111b34943e738013b333ec3e",
+    "blob": "f9c5871e0ad42f5d56e532fcdb111b22566e46e3",
+    "lines": 165
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootOddAxisJetsCandidateManifest.json",
+    "sha256": "8a7783afb672c6d9383633d6970d8440f2f713ac1563f1e7d192071a6185a63d",
+    "blob": "29eb08e7ec8a2980a9112073a1eb462f8899c17e",
+    "lines": 109
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/RootOddAxisJetsIndependentReview.json",
+    "sha256": "a1f14109fa0e4e1dad5420a672f6fc89c1128529e8cdb43e7e4aee9a2d00d625",
+    "blob": "8f74ffba44106e3e2931b8f78aac63c4014ced60",
+    "lines": 112
+  },
+  "even_axis_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootEvenAxisJetsReviewedManifest.json",
+    "sha256": "f0ffdd2141a62c94cf436e58066a46e9b40baf7d793c9203d0a00cbf0310ab1f",
+    "blob": "76fbb5fa541d8b832ff9bc4c1780664898a150e3",
+    "lines": 32
+  },
+  "scope": [
+    "Actual odd integral uses the same root point at every integration sample; the fixed kernel has angular-translation-invariant positive jets.",
+    "Only genuine smooth negative-odd extensions are estimated. The ordinary n-jet loses one positive source derivative and has no zeroth-order source bound.",
+    "All coefficients precede source, extension, angle and majorant; no actual R or delta inverse enters."
+  ],
+  "scope_caveat": "Material family packing, nonlinear radial and height powers, raw optical lower input, and the final N04c bounds remain separate.",
+  "compiled": false,
+  "checkout_index_refs_CP_authority_plan_modified": false
+}

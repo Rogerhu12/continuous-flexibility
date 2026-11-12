@@ -1,0 +1,36 @@
+{
+  "kind": "actual_stored_divided_field_representative_identification",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalDividedRepresentative.lean",
+    "sha256": "a42c52f348a56fd0f68ff3c5a0c09da4b66bfedb95b7313c8299dce081fac03c",
+    "blob": "fe62fe957762280bdd9714071fe8cadfe62f6350",
+    "lines": 48
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalFieldJetReduction.lean",
+      "sha256": "60a88163fb98cf3e12f42e240377136f5faf788378fa3c055312cbdba4aafbd3",
+      "blob": "d26a665de5f06590fc30615bdb376120761cd6bd",
+      "lines": 155
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalCoefficientIdentities.lean",
+      "sha256": "3af59f71444e8a5578085ccc929fd2cf4368435b6d97105dd268243111f017d7",
+      "blob": "84e0a03378352d0d5a4432edee36189aa82241a2",
+      "lines": 147
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PhysicalTransmissionTrace.lean",
+      "sha256": "06bae1df9c968c303f48dd5c04b48c95b49eb41eb6cb276902c1401e634ef8d4",
+      "blob": "e355936649f9946fad0101bd4f0e7ac93c0afe46",
+      "lines": 66
+    }
+  ],
+  "scope": [
+    "Uses the actual PartB cubic factorization for the stored K.dividedDifference and the same actual numerator. Interior nonzero boundary cube forces equality with the supplied removable representative.",
+    "Transfers genuine smoothness and every actual mixed jet through open-set equality; no new atlas field or canonical estimate is assumed.",
+    "The representative factorization must be supplied by the actual construction, for example the reviewed fixed-reference cubic lemma. This generic identification alone does not supply a material numerator bound or a state SmoothDirections tower."
+  ],
+  "compiled": false
+}
