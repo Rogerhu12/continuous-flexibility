@@ -28,7 +28,7 @@ theorem n05_closed_interval_zero_derivative
     have hzero := intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le
       (f' := fun _ : ℝ => (0 : ℝ)) ht.1 (hf.mono hsub)
       (fun z hz => hd z ⟨hz.1, hz.2.trans_le ht.2⟩)
-      (intervalIntegrable_zero : IntervalIntegrable (fun _ : ℝ => (0 : ℝ)) volume a t)
+      (IntervalIntegrable.zero : IntervalIntegrable (fun _ : ℝ => (0 : ℝ)) volume a t)
     have hdiff : f t - f a = 0 := by
       simpa only [intervalIntegral.integral_zero] using hzero.symm
     exact sub_eq_zero.mp hdiff
@@ -54,8 +54,8 @@ theorem n05_radial_transport
   have hFd (t : ℝ) (ht : t ∈ Ioo a b) : HasDerivAt F 0 t := by
     have hcurveD : HasDerivAt (fun u : ℝ => (u, θ + A x - A u))
         (1, -speed t) t := by
-      simpa only [zero_sub] using (hasDerivAt_id t).prodMk
-        ((hasDerivAt_const t (θ + A x)).sub (hAd t ht))
+      exact (hasDerivAt_id' t).prodMk
+        (HasDerivAt.const_sub (θ + A x) (hAd t ht))
     have hcomp := (hNd (t, θ + A x - A t) ht).hasFDerivAt.comp_hasDerivAt t hcurveD
     have hvalue : fderiv ℝ N (t, θ + A x - A t) (1, -speed t) = 0 := by
       rw [height_fderiv_coordinates, hPDE (t, θ + A x - A t) ht]

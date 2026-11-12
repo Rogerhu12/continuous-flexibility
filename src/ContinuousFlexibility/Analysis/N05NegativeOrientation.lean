@@ -50,7 +50,7 @@ theorem n05_negative_reference_null_angular_pos
     Radial.hasDerivAt_angularSlice ((hN θ).differentiableAt (by simp))
   have hc : Continuous (fun θ : ℝ => angularPartial N (x.1, θ)) :=
     continuous_iff_continuousAt.mpr fun θ =>
-      (contDiffAt_angularPartial (hN θ) (by simp)).continuousAt.comp
+      (contDiffAt_angularPartial (m := 0) (hN θ) (by simp)).continuousAt.comp
         (f := fun t : ℝ => (x.1, t))
         (continuousAt_const.prodMk continuousAt_id)
   have hne (θ : ℝ) : angularPartial N (x.1, θ) ≠ 0 :=
@@ -95,7 +95,9 @@ theorem n05_negative_reference_radial_ne_zero
   have hbad := mul_nonpos_of_nonneg_of_nonpos
     (sq_nonneg (K.height (C.referenceState, 0) m x)) hnonpos
   rw [hsym] at hbad
-  exact (abs_pos.mpr hJ).not_le hbad
+  have hpos : (0 : ℝ) < |planeJacobian (K.chart (C.referenceState, 0) m) x| :=
+    abs_pos.mpr hJ
+  exact (not_le_of_gt hpos) hbad
 
 /-- An oriented endpoint increment fixes the true radial derivative of the
 canonical radius on a negative piece. -/
@@ -129,7 +131,7 @@ theorem n05_negative_reference_radial_orientation
       ((hξ r ⟨hr.1.le, hr.2.le⟩).differentiableAt (by simp))
   have hc : ContinuousOn (fun r => radialPartial ξ (r, x.2))
       (Ioo (K.physicalLeft m) (K.physicalRight m)) := fun r hr =>
-    ((contDiffAt_radialPartial (hξ r ⟨hr.1.le, hr.2.le⟩) (by simp)).continuousAt.comp
+    ((contDiffAt_radialPartial (m := 0) (hξ r ⟨hr.1.le, hr.2.le⟩) (by simp)).continuousAt.comp
       (f := fun t : ℝ => (t, x.2))
       (continuousAt_id.prodMk continuousAt_const)).continuousWithinAt
   have hne (r : ℝ) (hr : r ∈ Ioo (K.physicalLeft m) (K.physicalRight m)) :
@@ -176,9 +178,11 @@ theorem n05_cut_reference_radial_orientation
   cases right with
   | false =>
     apply n05_negative_reference_radial_orientation hT hS h hnegL hx
-    simpa only [hrootL, hcutL, sub_zero, one_mul] using hcutpos
+    simpa only [Bool.false_eq_true, ↓reduceIte, hrootL, hcutL, sub_zero, one_mul]
+      using hcutpos
   | true =>
     apply n05_negative_reference_radial_orientation hT hS h hnegR hx
-    simpa only [hrootR, hcutR, zero_sub, neg_mul, one_mul, neg_neg] using hcutpos
+    simpa only [↓reduceIte, hrootR, hcutR, zero_sub, neg_mul, one_mul, neg_neg]
+      using hcutpos
 
 end ContinuousFlexibility.Statements

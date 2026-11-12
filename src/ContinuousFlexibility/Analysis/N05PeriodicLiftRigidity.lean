@@ -37,8 +37,10 @@ theorem n05_lift_translation_increment
     rw [intervalIntegral.integral_comp_add_right]
     simpa only [zero_add, add_comm t P] using hperiod.intervalIntegral_add_eq t 0
   have hintZero : (∫ x in (0 : ℝ)..P, F (x + t) - F x) = 0 := by
+    have hFt : Continuous (fun x : ℝ => F (x + t)) :=
+      hF.comp (continuous_id.add (continuous_const (y := t)))
     rw [intervalIntegral.integral_sub
-      ((hF.comp (continuous_id.add continuous_const)).intervalIntegrable 0 P)
+      (hFt.intervalIntegrable 0 P)
       (hF.intervalIntegrable 0 P), htranslate, sub_self]
   have hintValue : (∫ x in (0 : ℝ)..P, F (x + t) - F x) = P * (c - t) := by
     calc
@@ -73,7 +75,7 @@ theorem n05_two_periods_constant
       add_mem' := fun {a b} ha hb => ha.add_period hb
       neg_mem' := fun {a} ha => ha.neg }
   have hsub : AddSubgroup.closure ({t, P} : Set ℝ) ≤ periods :=
-    AddSubgroup.closure_le.mpr (pair_subset_iff.mpr ⟨ht, hP⟩)
+    (AddSubgroup.closure_le periods).mpr (pair_subset_iff.mpr ⟨ht, hP⟩)
   have hdense : Dense (periods : Set ℝ) :=
     (dense_addSubgroupClosure_pair_iff.mpr hirr).mono hsub
   exact hdense.induction
