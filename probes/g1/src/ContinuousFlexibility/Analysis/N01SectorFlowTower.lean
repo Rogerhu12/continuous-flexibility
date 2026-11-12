@@ -1,10 +1,6 @@
 import ContinuousFlexibility.Analysis.SectorParameterGeometry
 import ContinuousFlexibility.Analysis.N01FlowAngularSmoothness
 
-set_option maxHeartbeats 1000000
-set_option profiler true
-set_option profiler.threshold 500
-
 /-!
 # The actual N01 flow tower in sector coordinates
 
@@ -26,6 +22,8 @@ open Set Filter ContinuousFlexibility.Analysis
 open scoped Topology ContDiff
 
 set_option backward.isDefEq.respectTransparency false
+set_option profiler true
+set_option profiler.threshold 500
 
 private theorem sector_drop_zero_power_factor {a b c : ℝ}
     (h : c ^ (0 : ℕ) * a ≤ b) : a ≤ b := by
@@ -44,7 +42,9 @@ theorem N01Properties.sectorFlow_tower
           T.E0 (T.sample (C.cell m)) ^ B *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
             base (s + loss + d) z v := by
-  obtain ⟨d, horders⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 k
+  have hdata0 := hN
+  obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, hflow⟩ := hdata0
+  obtain ⟨d, horders⟩ := hflow k
   refine ⟨d, ?_⟩
   intro s
   let hdata := horders s
