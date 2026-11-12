@@ -65,6 +65,55 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
         (originalCoefficients D S C (liftSectorParameter S C z)).a p *
           (originalCoefficients D S C (liftSectorParameter S C z)).c p)
 
+include hN hl hh in
+private theorem correctionJointStripRadialCoefficient_pos
+    {z : StateDirections S × ℝ} (hz : z ∈ sectorNeighborhood S base ε ε)
+    {p : PolarPoint} (hp : p.1 ∈ Ioo l h) :
+    0 < (originalCoefficients D S C (liftSectorParameter S C z)).a p := by
+  have hpD : p ∈ annularOpen D := hN.negativeComponent_subset_annularOpen
+    (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε) m
+    ⟨⟨hl.trans hp.1, hp.2.trans hh⟩, mem_univ _⟩
+  exact hN.originalRadialCoefficient_pos
+    (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+    (z := liftSectorParameter S C z) (p := p)
+    (liftSectorParameter_mem_stateNeighborhood
+      (S := S) (C := C) (base := base) (ε := ε) (q0 := ε) (z := z) hz le_rfl)
+    (hN.2.2.1.liftSectorParameter_sector (D := D) (S := S) (C := C) z) hpD
+
+private def originalCoefficient_correctionParameterSpatialTower (i : Fin 3) :
+    SmoothDirections
+      ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
+      (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+        originalCoefficientEntry D S C i (liftSectorParameter S C x.1.1) x.2) := by
+  have hW : IsOpen
+      ((sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) ×ˢ
+        (Ioo l h ×ˢ (univ : Set ℝ))) :=
+    ((sectorNeighborhood_isOpen S base ε ε).prod
+      (isOpen_univ : IsOpen (univ : Set (CircleSpace S)))).prod
+        ((isOpen_Ioo : IsOpen (Ioo l h)).prod (isOpen_univ : IsOpen (univ : Set ℝ)))
+  let L : (((StateDirections S × ℝ) × CircleSpace S) × PolarPoint) →L[ℝ]
+      (StateDirections S × ℝ) × PolarPoint := correctionStateSpatialProjection S
+  have hLfull : MapsTo L
+      ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
+      (sectorNeighborhood S base ε ε ×ˢ (Ioo (C.left m) (C.right m) ×ˢ univ)) := by
+    intro x hx
+    simpa only [L, correctionStateSpatialProjection_apply] using
+      (show (x.1.1, x.2) ∈
+          sectorNeighborhood S base ε ε ×ˢ (Ioo (C.left m) (C.right m) ×ˢ univ) from
+        ⟨hx.1.1, ⟨hl.trans hx.2.1.1, hx.2.1.2.trans hh⟩, mem_univ _⟩)
+  exact ((hN.originalCoefficient_parameterSpatialTower
+    (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+    hS hT m j hcell i).compLinear
+      (E := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint)
+      (F := (StateDirections S × ℝ) × PolarPoint) (G := ℝ)
+      (U := sectorNeighborhood S base ε ε ×ˢ (Ioo (C.left m) (C.right m) ×ˢ univ))
+      (V := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
+      L hW hLfull).congrOn
+        (F := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint) (G := ℝ)
+        (U := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ)) (by
+          intro x hx
+          simp only [L, correctionStateSpatialProjection_apply])
+
 set_option diagnostics true in
 include hN hS hT hR hχ hχrange j hcell hl hh hdisc in
 private theorem returnCorrectionLocalCoefficient_parameterSpatialTower_nonempty :
@@ -166,30 +215,14 @@ private theorem returnCorrectionLocalCoefficient_parameterSpatialTower_nonempty 
             intro x hx
             simp only [P, parameterAngularReflection_apply,
               returnCorrectionDriftLinear_apply, returnCorrectionSpeedLinear_apply])
-  have hLfull : MapsTo L
-      ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
-      (sectorNeighborhood S base ε ε ×ˢ (Ioo (C.left m) (C.right m) ×ˢ univ)) := by
-    intro x hx
-    simpa only [L, correctionStateSpatialProjection_apply] using
-      (show (x.1.1, x.2) ∈
-          sectorNeighborhood S base ε ε ×ˢ (Ioo (C.left m) (C.right m) ×ˢ univ) from
-        ⟨hx.1.1, ⟨hl.trans hx.2.1.1, hx.2.1.2.trans hh⟩, mem_univ _⟩)
   let Jcoeff (i : Fin 3) : SmoothDirections
       ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
       (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
         originalCoefficientEntry D S C i (liftSectorParameter S C x.1.1) x.2) :=
-    ((hN.originalCoefficient_parameterSpatialTower
+    originalCoefficient_correctionParameterSpatialTower
       (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
-      hS hT m j hcell i).compLinear
-        (E := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint)
-        (F := (StateDirections S × ℝ) × PolarPoint) (G := ℝ)
-        (U := sectorNeighborhood S base ε ε ×ˢ (Ioo (C.left m) (C.right m) ×ˢ univ))
-        (V := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
-        L hW hLfull).congrOn
-          (F := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint) (G := ℝ)
-          (U := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ)) (by
-            intro x hx
-            simp only [L, correctionStateSpatialProjection_apply])
+      (hN := hN) (hS := hS) (hT := hT) (m := m) (j := j) (hcell := hcell)
+      (l := l) (h := h) (hl := hl) (hh := hh) i
   let JA : SmoothDirections
       ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
       (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
@@ -247,16 +280,12 @@ private theorem returnCorrectionLocalCoefficient_parameterSpatialTower_nonempty 
           m x.2 x.1.2)
       ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ)) := by
     intro x hx
-    have hp : x.2 ∈ annularOpen D := hN.negativeComponent_subset_annularOpen
-      (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε) m
-      ⟨⟨hl.trans hx.2.1.1, hx.2.1.2.trans hh⟩, mem_univ _⟩
     exact (returnCorrectionLocalCoefficientError_cancel_denominators D S C R χ
       (liftSectorParameter S C x.1.1) m x.2 x.1.2
-      (hN.originalRadialCoefficient_pos
+      (correctionJointStripRadialCoefficient_pos
         (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
-        (z := liftSectorParameter S C x.1.1) (p := x.2)
-        (liftSectorParameter_mem_stateNeighborhood hx.1.1 le_rfl)
-        (hN.2.2.1.liftSectorParameter_sector x.1.1) hp).ne').symm
+        (hN := hN) (m := m) (l := l) (h := h) (hl := hl) (hh := hh)
+        (z := x.1.1) (p := x.2) hx.1.1 hx.2.1).ne').symm
   exact K.congrOn
     (F := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint) (G := ℝ × ℝ)
     (U := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ)) hF
