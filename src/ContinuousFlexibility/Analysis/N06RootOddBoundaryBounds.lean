@@ -2,7 +2,6 @@ import ContinuousFlexibility.Analysis.N06PhysicalRootLogHeight
 import ContinuousFlexibility.Analysis.N06PositiveLogFiniteJets
 import ContinuousFlexibility.Analysis.N06RootLabelJets
 import ContinuousFlexibility.Analysis.N06MaterialAbsorption
-import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # Weighted angular jets of the true root odd-field logarithm
@@ -230,10 +229,18 @@ theorem n06_stateLeftChart_logDeriv_weighted_jets
             stateGrading S (n + 2) (z.1 - C.referenceState) := by
   exact n06_stateLeftChart_logDeriv_named hT hS hN n
 
+private theorem n06_rootOdd_seminorm_center
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : Seminorm ℝ E) (x : E) {ε : ℝ} (hε : 0 < ε) :
+    p (x - x) < ε := by
+  simpa only [sub_self, map_zero] using hε
+
 private theorem n06_rootOdd_reference_neighborhood
     (hN : N01Properties D T S C base loss ε) :
-    (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
-  reference_mem_stateNeighborhood S C base hN.2.1
+    (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
+  constructor
+  · exact n06_rootOdd_seminorm_center (stateGrading S base) C.referenceState hN.2.1
+  · simpa only [abs_zero] using hN.2.1
 
 /-- Exact cancellation for two actual root-coordinate witnesses.
 Their primitive speed germs need only be identified on the boundary.

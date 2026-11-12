@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Analysis.N06N05LocalModalTraces
+import ContinuousFlexibility.Analysis.N06N05CurrentRootTransmission
 import ContinuousFlexibility.Analysis.N06CurrentClosedTestJets
 
 /-!
@@ -119,7 +119,9 @@ private theorem n06_reference_scalarHeight_mode_eqOn
     (hc.2.2.2.2.2.2.2 x hxActual).1.ne'
   change w x.1 / K.height (C.referenceState, 0) m x = v y
   apply (div_eq_iff hH).mpr
-  rw [he hx.1, hshape.2, hyx]
+  have hmodeValue : w x.1 = K.height (C.referenceState, 0) m (x.1, 0) *
+      v ((K.chart (C.referenceState, 0) m (x.1, 0)).1) := he hx.1
+  rw [hmodeValue, hshape.2, hyx]
   ring
 
 /-- The genuine closed inverse and one-sided derivative uniqueness
@@ -158,8 +160,14 @@ private theorem n06_reference_scalarHeight_upper_jets
     change DifferentiableAt ℝ (fun p =>
       w (K.inverseChart (C.referenceState, 0) m p).1 /
         K.height (C.referenceState, 0) m (K.inverseChart (C.referenceState, 0) m p)) _
-    exact (hwx.comp _ hG).div
-      ((hH.2.1.differentiableAt (by simp)).comp _ hG) hH.2.2.2.ne'
+    have hnum : DifferentiableAt ℝ
+        (fun p => w (K.inverseChart (C.referenceState, 0) m p).1) (K.right m, 0) :=
+      hwx.comp _ hG
+    have hden : DifferentiableAt ℝ
+        (fun p => K.height (C.referenceState, 0) m
+          (K.inverseChart (C.referenceState, 0) m p)) (K.right m, 0) :=
+      (hH.2.1.differentiableAt (by simp)).comp _ hG
+    simpa only [div_eq_mul_inv] using hnum.fun_mul (hden.fun_inv hH.2.2.2.ne')
   have hslice := hasDerivAt_radial_slice hd
   have htrace := n06_cauchyData_eq_of_eqOn_Ioo_left (h04.1.referenceBounds m).2.1
     hslice.differentiableAt (hv.differentiable (by norm_num) (K.right m))
@@ -220,7 +228,13 @@ theorem n06N05_canonicalMode_cut_traces
     have hmodal := n06_controlledReference_modal_representation h.1 hcoordinates
       hrem hp m k (hrep.1 m) hmode
     have hsub := (h04.1.referenceBounds m).2.2
-    have hAE := (ae_restrict_of_ae_restrict_of_subset hsub hwAE).symm.trans hmodal
+    have hwAE' : evenFourierCoefficient rem k
+        =ᵐ[volume.restrict (Ioo (K.physicalLeft m) (K.physicalRight m))] w :=
+      ae_restrict_of_ae_restrict_of_subset hsub hwAE
+    have hAE : w =ᵐ[volume.restrict (Ioo (K.physicalLeft m) (K.physicalRight m))]
+        (fun r => K.height (C.referenceState, 0) m (r, 0) *
+          v ((K.chart (C.referenceState, 0) m (r, 0)).1)) :=
+      hwAE'.symm.trans hmodal
     have hc : ContinuousOn (fun r => K.height (C.referenceState, 0) m (r, 0) *
         v ((K.chart (C.referenceState, 0) m (r, 0)).1))
           (Ioo (K.physicalLeft m) (K.physicalRight m)) := by

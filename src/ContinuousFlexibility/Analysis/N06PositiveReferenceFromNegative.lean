@@ -151,13 +151,15 @@ theorem n06_positiveReference_from_finite_endpoint_jets
     | false =>
         have he' : (fun x => Real.log (H x)) =ᶠ[𝓝 l]
             n06ReferenceEndpointTaylor 3 l (fun x => Real.log (hL x)) := by
-          simpa only [Function.comp_apply, hL', Real.log_exp] using he
+          simpa only [Bool.false_eq_true, ite_false, ite_true, Function.comp_def,
+            hL', Real.log_exp] using he
         exact (he'.iteratedDeriv k).eq_of_nhds.trans
           (iteratedDeriv_n06ReferenceEndpointTaylor 3 l (fun x => Real.log (hL x)) hk)
     | true =>
         have he' : (fun x => Real.log (H x)) =ᶠ[𝓝 r]
             n06ReferenceEndpointTaylor 3 r (fun x => Real.log (hR x)) := by
-          simpa only [Function.comp_apply, hR', Real.log_exp] using he
+          simpa only [Bool.false_eq_true, ite_false, ite_true, Function.comp_def,
+            hR', Real.log_exp] using he
         exact (he'.iteratedDeriv k).eq_of_nhds.trans
           (iteratedDeriv_n06ReferenceEndpointTaylor 3 r (fun x => Real.log (hR x)) hk)
 
@@ -321,6 +323,7 @@ theorem n06_positiveReference_from_adjacent_negative
     simpa only [Bool.false_eq_true, if_false, ← hjoinR] using he
   have hderivL : 0 < deriv (fun x => -n06ReferenceNegativeY C K iL x)
       (K.physicalLeft m) := by
+    change 0 < deriv (-n06ReferenceNegativeY C K iL) (K.physicalLeft m)
     rw [((hL.1.differentiableAt (by simp)).hasDerivAt.neg).deriv]
     exact neg_pos.mpr hslopeL
   have hderivR : 0 < deriv (fun x => 1 + n06ReferenceNegativeY C K iR x)
