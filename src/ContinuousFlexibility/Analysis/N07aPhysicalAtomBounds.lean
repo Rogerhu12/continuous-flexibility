@@ -2,11 +2,12 @@ import ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds
 import ContinuousFlexibility.Analysis.N07aAngularPhysicalMeasure
 
 /-!
-# Actual raw atoms on the physical intervals
+# Raw atoms on the fixed reference physical intervals
 
-Physical atoms are unscaled with the physical interval inverse. In
-particular the height atom is evaluated at the original physical point,
-not at an affine substitute for the nonlinear inverse chart.
+Physical atoms are unscaled with the fixed reference interval inverse.
+CurrentJets samples these reference intervals even at a current state;
+the bounds here therefore have the explicit reference domain. Current
+moving-domain estimates must instead use the actual inverse-chart bounds.
 -/
 
 noncomputable section
@@ -45,7 +46,7 @@ theorem n07a_physicalAtomField_smooth
     (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
     (hinterval : ∀ m, K.physicalLeft m < K.physicalRight m) (a : CanonicalGeometry.Atom)
     (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε) (m : ℕ) :
-    ContDiffOn ℝ ∞ (n07aPhysicalAtomField D T S C L K a z m) (physicalPieceOpen S K m) :=
+    ContDiffOn ℝ ∞ (n07aPhysicalAtomField D T S C L K a z m) (referencePhysicalPieceOpen S K m) :=
   (hcur.1 z hz m a).1.comp n07aCanonicalUnitInversePoint_contDiff.contDiffOn
     (n07aCanonicalUnitInversePoint_maps (K := n07aPhysicalIntervalData K) (hinterval m))
 
@@ -56,7 +57,7 @@ theorem n07a_physicalAtomFields_sampleJetBounds
     (hinterval : ∀ m, K.physicalLeft m < K.physicalRight m) :
     ∃ loss : ℕ, ∀ a : CanonicalGeometry.Atom,
       N07aSampleJetBounds T K (CanonicalGeometry.parameterGrading S)
-        (sectorNeighborhood S base ε ε) (physicalPieceOpen S K) loss
+        (sectorNeighborhood S base ε ε) (referencePhysicalPieceOpen S K) loss
         (n07aPhysicalAtomField D T S C L K a) := by
   have hb := n07a_geometryAtom_absolute_jet_bound hD hT href hcur
   let loss : ℕ := hb.choose

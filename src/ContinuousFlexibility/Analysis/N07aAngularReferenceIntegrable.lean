@@ -26,7 +26,7 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 theorem n07a_reference_firstJet_bound_on_core
     (h04 : N04Properties D T S C L K base loss ε) {v : PolarPoint → ℝ}
     (hv : ContDiffOn ℝ 1 v (annularOpen D)) {B : ℝ}
-    (hB : ∀ m p, p ∈ physicalPieceOpen S K m → |radialPartial v p| ≤ B) :
+    (hB : ∀ m p, p ∈ referencePhysicalPieceOpen S K m → |radialPartial v p| ≤ B) :
     ∀ r ∈ radialCore D, ∀ θ, |radialPartial v (r, θ)| ≤ B := by
   have hdf : ContinuousOn (fderiv ℝ v) (annularOpen D) :=
     hv.continuousOn_fderiv_of_isOpen (isOpen_Ioo.prod isOpen_univ) le_rfl
@@ -68,7 +68,7 @@ theorem n07a_referenceDifferential_abs_le {v : PolarPoint → ℝ} {p : PolarPoi
 theorem n07a_referenceSources_integrable_of_jet_bounds
     (h04 : N04Properties D T S C L K base loss ε)
     (hgeom : RadialProfileGeometry D) {v : PolarPoint → ℝ} {B : ℝ} (hB0 : 0 ≤ B)
-    (hB : ∀ m p, p ∈ physicalPieceOpen S K m →
+    (hB : ∀ m p, p ∈ referencePhysicalPieceOpen S K m →
       |radialPartial v p| ≤ B ∧ |radialPartial (radialPartial v) p| ≤ B ∧
         |angularPartial (angularPartial v) p| ≤ B) :
     Integrable (n07aReferenceNormalSource D K v) (radialPhysicalMeasure D) ∧
@@ -78,7 +78,7 @@ theorem n07a_referenceSources_integrable_of_jet_bounds
   have hcoef {p : PolarPoint} (hp : p ∈ n07aReferencePieceInterior K) :
       coeff p.1 ≤ A := by
     obtain ⟨m, hm⟩ := mem_iUnion.mp hp
-    have hr := (h04.2.2.2.1 m).2.2 hm.1
+    have hr := (h04.1.referenceBounds m).2.2 hm.1
     exact hA p.1 hr
   have hbound (p : PolarPoint) :
       |n07aReferenceNormalSource D K v p| ≤ A * B ∧

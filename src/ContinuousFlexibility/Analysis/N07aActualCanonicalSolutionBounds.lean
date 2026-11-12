@@ -67,6 +67,7 @@ theorem n07a_exists_actualCanonicalSolutionData
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
     (hprincipal : CanonicalGeometry.ReferencePrincipal T S C K)
     (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
     (h05 : N05Properties D T S C K V b B)
     (h06 : N06Properties D S C K L V b B P base ε)
     (hAngular : N07aAngularProperties S C K V b B P base ε) :
@@ -94,7 +95,7 @@ theorem n07a_exists_actualCanonicalSolutionData
   let A := n07aNormalCoefficientFamily
     (fun k z m => n07aPrincipalField K (liftSectorParameter S C z) m k)
     (fun m => if K.positive m then -1 else 1)
-  have hs := n07a_actualSource_withoutColumns_terminal hD hS hT h01 h04 href hcur
+  have hs := n07a_actualSource_withoutColumns_terminal hD hS hT h01 h04 href hcur hRatio
     α data.low data.Cα data.Cα_nonneg data.scalars
   let lowS : ℕ := hs.choose
   let dS : ℕ := hs.choose_spec.choose

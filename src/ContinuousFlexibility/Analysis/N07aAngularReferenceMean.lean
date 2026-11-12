@@ -54,7 +54,7 @@ theorem n07a_referenceInteriorDifferential_compatible_mean
     (h04 : N04Properties D T S C L K base loss ε)
     (hab : D.a ≤ D.b) (hw : EndpointFlat D D.w) {v : PolarPoint → ℝ}
     (hv : ContDiffOn ℝ 1 v (annularOpen D))
-    (hpiece : ∀ m, ContDiffOn ℝ ∞ v (physicalPieceOpen S K m))
+    (hpiece : ∀ m, ContDiffOn ℝ ∞ v (referencePhysicalPieceOpen S K m))
     (hvp : Function.Periodic v (0, Real.pi))
     (hright : ∀ p ∈ annularOpen D, ∃ u : PolarPoint → ℝ,
       ContDiffAt ℝ ∞ u p ∧ ∀ᶠ q in 𝓝 p, p.1 ≤ q.1 → v q = u q)

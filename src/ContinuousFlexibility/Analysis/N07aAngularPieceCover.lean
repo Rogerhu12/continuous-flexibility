@@ -33,7 +33,7 @@ theorem n07a_physicalPieces_pairwise_disjoint
     Pairwise (fun m n => Disjoint
       (Ioo (K.physicalLeft m) (K.physicalRight m))
       (Ioo (K.physicalLeft n) (K.physicalRight n))) := by
-  obtain ⟨E, hE, hcover⟩ := h04.2.2.2.2.2.2.1
+  obtain ⟨E, hE, hcover⟩ := h04.1.referencePartition
   intro m n hmn
   apply Set.disjoint_left.mpr
   intro r hrm hrn
@@ -41,7 +41,7 @@ theorem n07a_physicalPieces_pairwise_disjoint
       Ioo (K.physicalLeft n) (K.physicalRight n) ⊆ E := by
     intro x hx
     by_contra hxE
-    obtain ⟨k, _, hk⟩ := hcover x ⟨(h04.2.2.2.1 m).2.2 hx.1, hxE⟩
+    obtain ⟨k, _, hk⟩ := hcover x ⟨(h04.1.referenceBounds m).2.2 hx.1, hxE⟩
     exact hmn ((hk m hx.1).trans (hk n hx.2).symm)
   have hzero := measure_mono_null hsub hE
   exact (isOpen_Ioo.inter isOpen_Ioo).measure_ne_zero volume ⟨r, hrm, hrn⟩ hzero
@@ -78,8 +78,8 @@ theorem n07a_physicalPiece_inverseLength_bound
   refine ⟨A * B ^ 2, mul_pos hA (sq_pos_of_pos hB), ?_⟩
   intro m x hx
   have hlen : 0 < K.physicalRight m - K.physicalLeft m :=
-    sub_pos.mpr (h04.2.2.2.1 m).1
-  have hxcore := (h04.2.2.2.1 m).2.2 hx
+    sub_pos.mpr (h04.1.referenceBounds m).1
+  have hxcore := (h04.1.referenceBounds m).2.2 hx
   have hM : 0 < T.M x := zero_lt_one.trans_le (hT.2.1 x hxcore).2.2.2
   have hsample := spaces_trace_sample_mem hD hT (K.cell m)
   have hE : 0 < T.E0 (T.sample (K.cell m)) := (hT.2.1 _ hsample).2.2.1
@@ -130,7 +130,7 @@ theorem n07a_physicalPieces_finite_inter_compact
     apply ne_top_of_le_ne_top (show volume (Ioo D.a D.b) ≠ ∞ by
       rw [Real.volume_Ioo]
       exact ENNReal.ofReal_ne_top)
-    exact measure_mono (iUnion_subset fun m => (h04.2.2.2.1 m).2.2)
+    exact measure_mono (iUnion_subset fun m => (h04.1.referenceBounds m).2.2)
   have hfiniteLarge := Measure.finite_const_le_meas_of_disjoint_iUnion volume
     (ENNReal.ofReal_pos.mpr (inv_pos.mpr hAB))
     (fun _ : ℕ => measurableSet_Ioo) (n07a_physicalPieces_pairwise_disjoint h04) hfinite
@@ -138,7 +138,7 @@ theorem n07a_physicalPieces_finite_inter_compact
   rintro m ⟨x, hxJ, hxm⟩
   have hMx : T.M x ≤ B' := (hB ⟨x, hxJ, rfl⟩).trans (le_max_right _ _)
   have hd : 0 < K.physicalRight m - K.physicalLeft m :=
-    sub_pos.mpr (h04.2.2.2.1 m).1
+    sub_pos.mpr (h04.1.referenceBounds m).1
   have hbound : (A * B')⁻¹ ≤ K.physicalRight m - K.physicalLeft m :=
     (inv_le_comm₀ hd hAB).mp ((hlen m x hxm).trans
       (mul_le_mul_of_nonneg_left hMx hA.le))
@@ -153,8 +153,8 @@ theorem n07a_physicalClosedPieces_finite_inter_compact
     {J : Set ℝ} (hJ : IsCompact J) (hJcore : J ⊆ Ioo D.a D.b) :
     Set.Finite {m : ℕ | (J ∩ Icc (K.physicalLeft m) (K.physicalRight m)).Nonempty} := by
   have hab : D.a < D.b := by
-    obtain ⟨x, hx⟩ := Set.nonempty_Ioo.mpr (h04.2.2.2.1 0).1
-    exact ((h04.2.2.2.1 0).2.2 hx).1.trans ((h04.2.2.2.1 0).2.2 hx).2
+    obtain ⟨x, hx⟩ := Set.nonempty_Ioo.mpr (h04.1.referenceBounds 0).1
+    exact ((h04.1.referenceBounds 0).2.2 hx).1.trans ((h04.1.referenceBounds 0).2.2 hx).2
   obtain ⟨l, r, hal, hlr, hrb, hJlr⟩ :=
     exists_inner_interval_of_isCompact_subset_Ioo hab hJ hJcore
   have hcore : Icc l r ⊆ Ioo D.a D.b :=
@@ -163,7 +163,7 @@ theorem n07a_physicalClosedPieces_finite_inter_compact
     isCompact_Icc hcore).subset
   rintro m ⟨x, hxJ, hxm⟩
   have hxcl : x ∈ closure (Ioo (K.physicalLeft m) (K.physicalRight m)) := by
-    rw [closure_Ioo (ne_of_lt (h04.2.2.2.1 m).1)]
+    rw [closure_Ioo (ne_of_lt (h04.1.referenceBounds m).1)]
     exact hxm
   obtain ⟨y, hylr, hym⟩ := mem_closure_iff.mp hxcl (Ioo l r) isOpen_Ioo (hJlr hxJ)
   exact ⟨y, Ioo_subset_Icc_self hylr, hym⟩

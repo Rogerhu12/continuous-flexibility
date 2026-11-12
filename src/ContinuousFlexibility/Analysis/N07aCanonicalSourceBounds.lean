@@ -46,7 +46,8 @@ theorem n07a_canonicalSource_height_sampleJets
     (hrefState : referenceStateConditions D S C)
     (h04 : N04Properties D T S C L K base loss ε)
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
-    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε) :
+    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε) :
     ∃ low outLoss : ℕ,
       N07aSampleLinearJetBounds T K (CanonicalGeometry.parameterGrading S)
         (S.height γ).grading
@@ -67,14 +68,14 @@ theorem n07a_canonicalSource_height_sampleJets
   have hIp : HasSmoothing p :=
     hasSmoothing_pairGrading (solve_sector_hasSmoothing hS) hasSmoothing_realGrading
   have hIq : HasSmoothing q := (hS.2.2.2.1 γ).2.1
-  have hinterval := h04.2.2.2.1
+  have hinterval := h04.1.referenceBounds
   have hw (c m : ℕ) : 0 ≤ w c m := by
     have hpos := hT.2.1 _
       (materialSample_mem_radialCore hT hD.choose_spec.2.1 (K.cell m))
     exact mul_nonneg (Real.rpow_pos_of_pos hpos.2.1 γ).le
       (inv_nonneg.mpr (pow_nonneg (zero_le_one.trans hpos.2.2.2) c))
   have hcomp := n07a_height_inverseChart_composition_bound hD hT hS hγ hγ1
-    hrefState h04 href hcur
+    hrefState h04 href hcur hRatio
   let lf := hcomp.choose
   let df := hcomp.choose_spec.choose
   have hfb := hcomp.choose_spec.choose_spec
@@ -99,12 +100,14 @@ theorem n07a_canonicalSource_height_sampleJets
   have hfs (z : CanonicalGeometry.Parameter S) (hz : z ∈ U₁)
       (u : (S.height γ).Space) (m : ℕ) :
       ContDiffOn ℝ ∞ (f z u m) (canonicalOpen S K m) := by
-    have hgeom := h04.2.2.2.2.2.2.2.1 _
+    have hgeom := h04.1.charts _
       (liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) hz.1 le_rfl)
       (hrefState.liftSectorParameter_sector z) m
     apply ((hS.1 γ).2.2.2.1 u).1.comp hgeom.2.2.2.2.2.1
     intro y hy
-    exact ⟨(hinterval m).2.2 (hgeom.2.1 hy).1, mem_univ _⟩
+    exact (h04.1.domains _
+      (liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) hz.1 le_rfl)
+      (hrefState.liftSectorParameter_sector z) m).2.2.1 (hgeom.2.1 hy)
   have hmul := n07a_sampleLinearJetBounds_mul hD hT p q hp hq hIp hIq U₁
     (canonicalOpen S K) (fun _ => isOpen_Ioo.prod isOpen_univ) w hw A f
     da lf df hab hf hAs hfs

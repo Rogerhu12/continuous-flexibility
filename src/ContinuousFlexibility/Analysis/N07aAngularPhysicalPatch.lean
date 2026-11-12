@@ -4,9 +4,9 @@ import ContinuousFlexibility.Analysis.N07aAngularPieceCover
 import ContinuousFlexibility.Analysis.SpacesLpRestriction
 
 /-!
-# Genuine local physical angular regularity across the piece boundaries
+# Angular patching across the fixed reference piece boundaries
 
-The actual pieces meeting a compact inner radial interval form a finite
+The fixed reference pieces meeting a compact inner radial interval form a finite
 set. Their zero-extended angular jet towers can therefore be summed in
 the real cylinder L² space. A.e. uniqueness of the physical cover
 identifies that sum with the original rough representative.
@@ -127,9 +127,9 @@ private theorem n07a_physical_finite_cover_ae
     (I : Finset ℕ)
     (hI : ∀ i, (Ioo (J.left n) (J.right n) ∩
       Ioo (K.physicalLeft i) (K.physicalRight i)).Nonempty → i ∈ I) :
-    ∀ᵐ p ∂canonicalMeasure S J n, ∃ i ∈ I, p ∈ physicalPieceOpen S K i := by
+    ∀ᵐ p ∂canonicalMeasure S J n, ∃ i ∈ I, p ∈ referencePhysicalPieceOpen S K i := by
   let : SFinite angleMeasure := by unfold angleMeasure; infer_instance
-  obtain ⟨E, hE, hcover⟩ := h04.2.2.2.2.2.2.1
+  obtain ⟨E, hE, hcover⟩ := h04.1.referencePartition
   have hEr : ∀ᵐ r ∂(volume : Measure ℝ), r ∉ E := by
     simpa only [ae_iff, not_not, Set.ofPred_mem_eq] using hE
   have hEr' := hEr.filter_mono (ae_mono (Measure.restrict_le_self
@@ -141,16 +141,17 @@ private theorem n07a_physical_finite_cover_ae
   obtain ⟨i, hi, _⟩ := hcover p.1 ⟨hinner hpJ.1, hp⟩
   exact ⟨i, hI i ⟨p.1, hpJ.1, hi⟩, hi, mem_univ _⟩
 
-/-- Locally finite physical pieces give all angular weak jets of the
-original rough function on every strict inner physical interval. -/
+/-- Locally finite fixed reference strips give all angular weak jets on
+every strict inner interval. A moving current cut requires its separate
+transmission proof before this rectangular patching lemma applies. -/
 theorem n07a_physical_local_angular_regular
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (h04 : N04Properties D T S C L K base loss ε)
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
     (hinner : Icc (J.left n) (J.right n) ⊆ Ioo D.a D.b)
     (f : ℕ → PolarPoint → ℝ)
-    (hf : ∀ i, ContDiffOn ℝ ∞ (f i) (physicalPieceOpen S K i))
-    (hp : ∀ i p, p ∈ physicalPieceOpen S K i → f i (p + (0, Real.pi)) = f i p)
+    (hf : ∀ i, ContDiffOn ℝ ∞ (f i) (referencePhysicalPieceOpen S K i))
+    (hp : ∀ i p, p ∈ referencePhysicalPieceOpen S K i → f i (p + (0, Real.pi)) = f i p)
     (hLp : ∀ i k, MemLp (mixedDerivative 0 k (f i)) 2
       (canonicalMeasure S (n07aPhysicalIntervalData K) i))
     {η : PolarPoint → ℝ}
@@ -172,7 +173,7 @@ theorem n07a_physical_local_angular_regular
     I f hf hp hLp
   refine ⟨u, hu, hue.trans ?_⟩
   have hcells : ∀ᵐ p ∂materialCylinderMeasure, ∀ i,
-      p ∈ physicalPieceOpen S K i → f i p = η p :=
+      p ∈ referencePhysicalPieceOpen S K i → f i p = η p :=
     ae_all_iff.mpr (fun i => n07aCanonical_ae_imp (he i))
   have hc := hcells.filter_mono (ae_mono
     (n07a_canonicalMeasure_le_cylinder (S := S) (J := J) (n := n)))

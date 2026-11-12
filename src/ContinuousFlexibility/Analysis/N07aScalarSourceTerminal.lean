@@ -57,6 +57,7 @@ theorem n07a_actualSource_withoutColumns_terminal
     (hT : IsMaterialData D T) (h01 : N01Properties D T S C base loss ε)
     (h04 : N04Properties D T S C L K base loss ε)
     (href : ReferenceJets D T S C L K) (hcur : CurrentJets D T S C L K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
     (α : Parameter S → S.Source → Fin 3 → ℝ) (lowα : ℕ) (Aα : ℝ) (hAα : 0 ≤ Aα)
     (hα : ∀ z ∈ sectorNeighborhood S base ε ε, ∀ f i,
       |α z f i| ≤ Aα * S.sourceGrading lowα f) :
@@ -80,7 +81,7 @@ theorem n07a_actualSource_withoutColumns_terminal
       (pow_pos (zero_lt_one.trans_le hm.2.2.2) _))
   have hp : Monotone p := n07aParameterGrading_monotone S
   have hq : Monotone q := fun _ _ h f => gradedSeminorm_monotone _ _ h f.val
-  have hI (m : ℕ) : K.left m < K.right m := (h04.2.2.2.1 m).2.1
+  have hI (m : ℕ) : K.left m < K.right m := (h04.1.referenceBounds m).2.1
   let φ : Fin 3 → Parameter S → ℕ → PolarPoint → ℝ :=
     fun i z m => n07aScalarColumn D S C L K (liftSectorParameter S C z) m i
   have hcoeff := n07a_canonicalAtomFields_sampleJetBounds hD hT href hcur hI
@@ -93,7 +94,7 @@ theorem n07a_actualSource_withoutColumns_terminal
   have hφs (i : Fin 3) (z : Parameter S) (hz : z ∈ U₀) (m : ℕ) :
       ContDiffOn ℝ ∞ (φ i z m) (canonicalOpen S K m) :=
     (n07aCurrentScalarOpenCoefficient href hcur z hz m (hI m) i).smooth
-  let support := n07a_canonicalScalarColumns_finite_support hD hS hT h01 h04 href
+  let support := n07a_canonicalScalarColumns_finite_support hD hS hT h01 h04 href hRatio
   let I : Finset ℕ := support.choose
   have hsupport := support.choose_spec
   have hzero (i : Fin 3) (z : Parameter S) (hz : z ∈ U₀) (m : ℕ) (hm : m ∉ I) :
@@ -104,7 +105,7 @@ theorem n07a_actualSource_withoutColumns_terminal
     I hzero α Aα hAα hα
   have hsource := n07a_canonicalSource_height_sampleJets hD hT hS
     (by norm_num : (0 : ℝ) ≤ 3 / 4) (by norm_num : (3 / 4 : ℝ) ≤ 1)
-    h01.2.2.1 h04 href hcur
+    h01.2.2.1 h04 href hcur hRatio
   let ls : ℕ := hsource.choose
   let ds : ℕ := hsource.choose_spec.choose
   let low : ℕ := max ls lowα

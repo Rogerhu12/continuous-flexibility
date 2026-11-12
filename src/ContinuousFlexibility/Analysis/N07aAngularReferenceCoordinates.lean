@@ -79,7 +79,7 @@ theorem n07a_referenceBasisProjection_affineRow (I : Finset ℕ)
 variable {S : PhysicalSpacesData} {C : NonlinearGeometryData S} {K : CanonicalData S}
 
 theorem n07a_reference_planeJacobian (hR : ReferenceRadial S C K) (m : ℕ)
-    (hF : ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m) (physicalPieceOpen S K m))
+    (hF : ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m) (referencePhysicalPieceOpen S K m))
     {r : ℝ} (hr : r ∈ Ioo (K.physicalLeft m) (K.physicalRight m)) (θ : ℝ) :
     planeJacobian (K.chart (C.referenceState, 0) m) (r, θ) =
       planeJacobian (K.chart (C.referenceState, 0) m) (r, 0) :=
@@ -90,7 +90,7 @@ theorem n07a_reference_planeJacobian (hR : ReferenceRadial S C K) (m : ℕ)
 
 theorem n07a_reference_inverseRadius_mem (_hR : ReferenceRadial S C K) (m : ℕ)
     (hmap : MapsTo (K.inverseChart (C.referenceState, 0) m)
-      (canonicalOpen S K m) (physicalPieceOpen S K m))
+      (canonicalOpen S K m) (referencePhysicalPieceOpen S K m))
     {r : ℝ} (hr : r ∈ Ioo (K.left m) (K.right m)) :
     (K.inverseChart (C.referenceState, 0) m (r, 0)).1 ∈
       Ioo (K.physicalLeft m) (K.physicalRight m) :=
@@ -99,7 +99,7 @@ theorem n07a_reference_inverseRadius_mem (_hR : ReferenceRadial S C K) (m : ℕ)
 /-- The actual transformed height is a radial multiplier and radial pullback. -/
 theorem n07a_canonicalHeight_reference_row (hR : ReferenceRadial S C K) (m : ℕ)
     (hmap : MapsTo (K.inverseChart (C.referenceState, 0) m)
-      (canonicalOpen S K m) (physicalPieceOpen S K m))
+      (canonicalOpen S K m) (referencePhysicalPieceOpen S K m))
     (u : PolarPoint → ℝ) {r : ℝ} (hr : r ∈ Ioo (K.left m) (K.right m)) (θ : ℝ) :
     canonicalHeight S K (C.referenceState, 0) m u (r, θ) =
       (K.height (C.referenceState, 0) m
@@ -114,8 +114,8 @@ theorem n07a_canonicalHeight_reference_row (hR : ReferenceRadial S C K) (m : ℕ
 /-- The source formula uses the actual Jacobian, whose radiality is proved above. -/
 theorem n07a_canonicalSource_reference_row (hR : ReferenceRadial S C K) (m : ℕ)
     (hmap : MapsTo (K.inverseChart (C.referenceState, 0) m)
-      (canonicalOpen S K m) (physicalPieceOpen S K m))
-    (hF : ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m) (physicalPieceOpen S K m))
+      (canonicalOpen S K m) (referencePhysicalPieceOpen S K m))
+    (hF : ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m) (referencePhysicalPieceOpen S K m))
     (f : PolarPoint → ℝ) {r : ℝ} (hr : r ∈ Ioo (K.left m) (K.right m)) (θ : ℝ) :
     canonicalSource S K (C.referenceState, 0) m f (r, θ) =
       (K.height (C.referenceState, 0) m
@@ -132,7 +132,7 @@ theorem n07a_canonicalSource_reference_row (hR : ReferenceRadial S C K) (m : ℕ
 
 theorem n07a_canonicalHeight_reference_projection (hR : ReferenceRadial S C K) (m : ℕ)
     (hmap : MapsTo (K.inverseChart (C.referenceState, 0) m)
-      (canonicalOpen S K m) (physicalPieceOpen S K m))
+      (canonicalOpen S K m) (referencePhysicalPieceOpen S K m))
     (u : PolarPoint → ℝ) (I : Finset ℕ) {p : PolarPoint}
     (hp : p ∈ canonicalOpen S K m) :
     referenceBasisProjection I (canonicalHeight S K (C.referenceState, 0) m u) p =
@@ -143,8 +143,8 @@ theorem n07a_canonicalHeight_reference_projection (hR : ReferenceRadial S C K) (
 
 theorem n07a_canonicalSource_reference_projection (hR : ReferenceRadial S C K) (m : ℕ)
     (hmap : MapsTo (K.inverseChart (C.referenceState, 0) m)
-      (canonicalOpen S K m) (physicalPieceOpen S K m))
-    (hF : ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m) (physicalPieceOpen S K m))
+      (canonicalOpen S K m) (referencePhysicalPieceOpen S K m))
+    (hF : ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m) (referencePhysicalPieceOpen S K m))
     (f : PolarPoint → ℝ) (I : Finset ℕ) {p : PolarPoint}
     (hp : p ∈ canonicalOpen S K m) :
     referenceBasisProjection I (canonicalSource S K (C.referenceState, 0) m f) p =

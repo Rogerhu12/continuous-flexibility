@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N07aAngularPhysicalSolution
 import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
+import ContinuousFlexibility.Analysis.N07aAngularCandidateCoordinates
 import ContinuousFlexibility.Scalar.WeightedDecodeLift
 import ContinuousFlexibility.Analysis.TameLocalCalculus
 
@@ -79,22 +80,29 @@ theorem n07aPhysicalRemainder_eqOn
     (hvp : Function.Periodic v (0, Real.pi)) (m : ℕ) :
     EqOn (n07aPhysicalRemainder D S U.2.1 v)
       (n07aPhysicalHeightRepresentative K z m
-        (n07aCanonicalSmoothDecode (h04.2.2.2.1 m).2.1 ⟨U.1 m, hU m⟩))
-      (physicalPieceOpen S K m) := by
+        (n07aCanonicalSmoothDecode (h04.1.referenceBounds m).2.1 ⟨U.1 m, hU m⟩))
+      (physicalPieceOpen S K z m) := by
   let u : n07aCanonicalSmoothSpace S K m := ⟨U.1 m, hU m⟩
-  have hw := n07aCanonicalSmoothRepresentative_properties (h04.2.2.2.1 m).2.1 u
-  have hsub : physicalPieceOpen S K m ⊆ annularOpen D :=
-    fun _ hp => ⟨(h04.2.2.2.1 m).2.2 hp.1, mem_univ _⟩
-  have he := n07a_canonical_periodicOn_eqOn_of_ae_eq
-    (S := S) (K := n07aPhysicalIntervalData K) (m := m)
-    (n07aPhysicalHeightRepresentative_contDiffOn h04 hz hs m hw.1).continuousOn
-    ((hv.mono hsub).sub (contDiffOn_const.mul
-      (hS.2.2.1.1.comp contDiff_fst).contDiffOn)).continuousOn
-    (n07aPhysicalHeightRepresentative_periodic_on h04 hz hs m hw.2.1)
-    (fun p _ => by simp only [Function.comp_apply, hvp p, Prod.fst_add, add_zero])
-    (n07aPhysicalHeightRepresentative_ae h04 hz hs hrep m hw.2.2.1.symm)
+  let w : PolarPoint → ℝ := n07aCanonicalSmoothDecode (h04.1.referenceBounds m).2.1 u
+  have hw := n07aCanonicalSmoothRepresentative_properties (h04.1.referenceBounds m).2.1 u
+  let rem : PolarPoint → ℝ := fun p => v p - U.2.1 * S.chiLeft p.1
+  have hχ : ContDiff ℝ ∞ (fun p : PolarPoint => U.2.1 * S.chiLeft p.1) :=
+    contDiff_const.mul (hS.2.2.1.1.comp contDiff_fst)
+  have hremp : Function.Periodic rem (0, Real.pi) := by
+    intro p
+    simp only [rem, hvp p, Prod.fst_add, add_zero]
+  have hecan : EqOn w (canonicalHeight S K z m rem) (canonicalOpen S K m) :=
+    n07a_canonical_periodicOn_eqOn_of_ae_eq hw.1.continuousOn
+      (n07a_candidateCanonicalHeight_contDiffOn h04 hz hs (hv.sub hχ.contDiffOn) m).continuousOn
+      (fun p _ => hw.2.1 p) (n07a_candidateCanonicalHeight_periodic h04 hz hs hremp m)
+      (hw.2.2.1.trans (hrep.1 m))
+  have hc := h04.1.charts z hz hs m
   intro p hp
-  exact (n07aPhysicalRemainder_apply (hsub hp)).trans (he hp).symm
+  rw [n07aPhysicalRemainder_apply ((h04.1.domains z hz hs m).2.2.1 hp)]
+  change rem p = n07aPhysicalHeightRepresentative K z m w p
+  simp only [n07aPhysicalHeightRepresentative, hecan (hc.1 hp), canonicalHeight,
+    hc.2.2.1 p hp]
+  field_simp [(hc.2.2.2.2.2.2.2 p hp).1.ne']
 
 theorem n07aPhysicalRemainder_heightMember
     (hS : IsPhysicalSpaces D T S) {a γ : ℝ} {v : PolarPoint → ℝ}

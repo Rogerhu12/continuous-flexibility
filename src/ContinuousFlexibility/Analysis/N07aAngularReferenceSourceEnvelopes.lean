@@ -70,7 +70,7 @@ theorem n07a_referenceInverseChart_positive_fixedEnvelope
       ∀ m y, y ∈ canonicalOpen S K m →
         ‖iteratedFDeriv ℝ n (K.inverseChart (C.referenceState, 0) m) y‖ ≤ e m := by
   let bounds := n07a_inverseChart_positive_jets hD hT href hcur
-    (fun m => (h04.2.2.2.1 m).2.1) (fun m => (h04.2.2.2.1 m).1)
+    (fun m => (h04.1.referenceBounds m).2.1) (fun m => (h04.1.referenceBounds m).1)
   let d : ℕ := bounds.choose
   have hd := bounds.choose_spec
   intro n hn
@@ -97,16 +97,16 @@ theorem n07a_referenceSource_fixedJetEnvelope
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
     (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
     {w : ℕ → ℝ} (hw : ∀ m, 0 ≤ w m) {f : ℕ → PolarPoint → ℝ}
-    (hfs : ∀ m, ContDiffOn ℝ ∞ (f m) (physicalPieceOpen S K m))
-    (hf : N07aAngularFixedJetEnvelope T K (physicalPieceOpen S K) w f) :
+    (hfs : ∀ m, ContDiffOn ℝ ∞ (f m) (referencePhysicalPieceOpen S K m))
+    (hf : N07aAngularFixedJetEnvelope T K (referencePhysicalPieceOpen S K) w f) :
     N07aAngularFixedJetEnvelope T K (canonicalOpen S K) w
       (fun m => canonicalSource S K (C.referenceState, 0) m (f m)) := by
   let z : AnnularState S × ℝ := (C.referenceState, 0)
-  let W := physicalPieceOpen S K
+  let W := referencePhysicalPieceOpen S K
   let U := canonicalOpen S K
   have hW : ∀ m, IsOpen (W m) := fun _ => isOpen_Ioo.prod isOpen_univ
   have hU : ∀ m, IsOpen (U m) := fun _ => isOpen_Ioo.prod isOpen_univ
-  have hphysical := fun m => (h04.2.2.2.1 m).1
+  have hphysical := fun m => (h04.1.referenceBounds m).1
   have hcs (i : Fin 6) (m : ℕ) : ContDiffOn ℝ ∞ (n07aPhysicalJetField K z m i) (W m) :=
     n07a_physicalJetField_smooth_of_atoms (fun m a => (href.1 m a).1) m (hphysical m) i
   have hcb := n07a_referencePhysicalJetFields_fixedEnvelope hD hT href hphysical
@@ -124,8 +124,9 @@ theorem n07a_referenceSource_fixedJetEnvelope
       (fun p => n07aPhysicalJetField K z m 5 p *
         (n07aPhysicalJetField K z m 2 p * f m p)) (W m) :=
     (hcs 5 m).mul ((hcs 2 m).mul (hfs m))
-  have hgeom (m : ℕ) := h04.2.2.2.2.2.2.2.1 z
+  have hgeom (m : ℕ) := h04.1.charts z
     (n07a_reference_mem_stateNeighborhood h01) h01.2.2.1.stateSector m
+  simp only [z, h04.1.referenceDomain] at hgeom
   have hcompose := hprod.comp hD hT hw (fun m => (hgeom m).2.1)
     (fun m y hy => (hprods m).contDiffAt ((hW m).mem_nhds ((hgeom m).2.1 hy)))
     (fun m y hy => (hgeom m).2.2.2.2.2.1.contDiffAt ((hU m).mem_nhds hy))
@@ -139,13 +140,14 @@ theorem n07a_referenceSource_piece_contDiffOn
     (h04 : N04Properties D T S C L K base loss ε)
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
     {f : ℕ → PolarPoint → ℝ}
-    (hfs : ∀ m, ContDiffOn ℝ ∞ (f m) (physicalPieceOpen S K m)) (m : ℕ) :
+    (hfs : ∀ m, ContDiffOn ℝ ∞ (f m) (referencePhysicalPieceOpen S K m)) (m : ℕ) :
     ContDiffOn ℝ ∞ (canonicalSource S K (C.referenceState, 0) m (f m))
       (canonicalOpen S K m) := by
-  have hgeom := h04.2.2.2.2.2.2.2.1 (C.referenceState, 0)
+  have hgeom := h04.1.charts (C.referenceState, 0)
     (n07a_reference_mem_stateNeighborhood h01) h01.2.2.1.stateSector m
+  rw [h04.1.referenceDomain m] at hgeom
   have hcs (i : Fin 6) := n07a_physicalJetField_smooth_of_atoms
-    (fun m a => (href.1 m a).1) m (h04.2.2.2.1 m).1 i
+    (fun m a => (href.1 m a).1) m (h04.1.referenceBounds m).1 i
   have hsm := ((hcs 5).mul ((hcs 2).mul (hfs m))).comp
     hgeom.2.2.2.2.2.1 hgeom.2.1
   exact hsm.congr (fun y _ =>

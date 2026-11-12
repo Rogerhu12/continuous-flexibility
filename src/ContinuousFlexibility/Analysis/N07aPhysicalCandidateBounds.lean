@@ -44,6 +44,7 @@ theorem n07a_exists_actualHeightCandidateFamily
     (h03 : N03Properties D T S C R L base ε)
     (h04 : N04Properties D T S C L K base geometryLoss ε)
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
     (Ω : Set (CanonicalGeometry.Parameter S))
     (hΩ : Ω ⊆ sectorNeighborhood S base ε ε)
     (U : CanonicalGeometry.Parameter S → S.Source → CanonicalUnknown S K)
@@ -64,8 +65,8 @@ theorem n07a_exists_actualHeightCandidateFamily
     (low loss lowα : ℕ) (Aα : ℝ) (hAα : 0 ≤ Aα)
     (hα : ∀ z ∈ Ω, ∀ f, |(U z f).2.1| + |(U z f).2.2.1| ≤
       Aα * S.sourceGrading lowα f)
-    (hr : N07aSampleLinearJetBounds T K (CanonicalGeometry.parameterGrading S)
-      S.sourceGrading Ω (physicalPieceOpen S K)
+    (hr : N07aStateSampleLinearJetBounds T K (CanonicalGeometry.parameterGrading S)
+      S.sourceGrading Ω (fun z m => physicalPieceOpen S K (liftSectorParameter S C z) m)
       (fun c m => T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) *
         (T.M (T.sample (K.cell m)) ^ c)⁻¹) low loss
       (fun z f _ => n07aPhysicalRemainder D S (U z f).2.1 (v z f))) :
@@ -82,7 +83,7 @@ theorem n07a_exists_actualHeightCandidateFamily
   have hq : Monotone S.sourceGrading := n07aSourceGrading_monotone S
   have hrs (z : CanonicalGeometry.Parameter S) (hz : z ∈ Ω) (f : S.Source) :
       ContDiffOn ℝ ∞ (r z f) (annularOpen D) := n07aPhysicalRemainder_smooth hS (hv z hz f).1
-  have hjet := n07a_sampleLinearJets_weighted_memLp_bound hD hT h04 href
+  have hjet := n07a_sampleLinearJets_weighted_memLp_bound hD hT h04 h01.2.2.1 hRatio id hΩ
     (by norm_num : (0 : ℝ) ≤ 3 / 4) (by norm_num : (3 / 4 : ℝ) ≤ 1) hp hq hr hrs
   have hmem (z : CanonicalGeometry.Parameter S) (hz : z ∈ Ω) (f : S.Source) :
       HeightMember D T (3 / 4 : ℝ) (r z f) := by
@@ -117,7 +118,7 @@ theorem n07a_exists_actualHeightCandidateFamily
         (U z f).2.1 (v z f) (hv z hz f).2.1 (hmem z hz f)]
       exact (hv z hz f).2.2.2.1
     · simpa only [hAux, zero_mul, add_zero] using heqPDE z hz f p hpD
-  · have bound := n07a_sampleLinearJets_physicalNorm_bound hD hT h04 href
+  · have bound := n07a_sampleLinearJets_physicalNorm_bound hD hT h04 h01.2.2.1 hRatio id hΩ
       (by norm_num : (0 : ℝ) ≤ 3 / 4) (by norm_num : (3 / 4 : ℝ) ≤ 1) hp hq hr hrs s
     let A : ℝ := bound.choose
     have hA : 0 < A := bound.choose_spec.1

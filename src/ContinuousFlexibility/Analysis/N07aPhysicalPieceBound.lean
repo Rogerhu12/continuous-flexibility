@@ -23,7 +23,7 @@ theorem n07a_physicalPieceInterior_ae
     (h04 : N04Properties D T S C L K base loss ε) :
     ∀ᵐ r ∂volume.restrict (radialCore D),
       ∃ m, r ∈ Ioo (K.physicalLeft m) (K.physicalRight m) := by
-  obtain ⟨E, hE, hcover⟩ := h04.2.2.2.2.2.2.1
+  obtain ⟨E, hE, hcover⟩ := h04.1.referencePartition
   have hEr : ∀ᵐ r ∂(volume : Measure ℝ), r ∉ E := by
     simpa only [ae_iff, not_not, Set.ofPred_mem_eq] using hE
   have hEr' := hEr.filter_mono (ae_mono (Measure.restrict_le_self
@@ -36,7 +36,7 @@ theorem n07a_physicalPiece_bound
     (h04 : N04Properties D T S C L K base loss ε)
     {f B : PolarPoint → ℝ} (hf : ContinuousOn f (annularOpen D))
     (hB : ContinuousOn B (annularOpen D))
-    (hbound : ∀ m p, p ∈ physicalPieceOpen S K m → f p ≤ B p) :
+    (hbound : ∀ m p, p ∈ referencePhysicalPieceOpen S K m → f p ≤ B p) :
     ∀ p ∈ annularOpen D, f p ≤ B p := by
   intro p hp
   have hfc : ContinuousOn (fun r => f (r, p.2)) (radialCore D) :=

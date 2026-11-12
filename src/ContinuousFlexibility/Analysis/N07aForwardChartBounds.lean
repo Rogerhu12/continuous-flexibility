@@ -2,10 +2,12 @@ import ContinuousFlexibility.Analysis.N07aPhysicalAtomBounds
 import ContinuousFlexibility.Analysis.N07aCoordinateJetNorms
 
 /-!
-# Positive order jets of the original physical-to-canonical chart
+# Forward-chart jets on the fixed reference physical intervals
 
-The true forward chart is recovered from its normalized radial component
-and angle defect. Its first derivative is charged in one fixed offset.
+The forward chart is recovered from its normalized radial component and
+angle defect on the fixed intervals sampled by CurrentJets. Its first
+derivative is charged in one fixed offset. These reference-domain bounds
+do not assert estimates on a moving current physical piece.
 -/
 
 noncomputable section
@@ -67,7 +69,7 @@ theorem n07a_forwardChart_positive_jets
     (hphysical : ∀ m, K.physicalLeft m < K.physicalRight m) :
     ∃ loss : ℕ, ∀ n : ℕ, 0 < n → ∃ e : ℕ → ℝ,
       N07aSampleSubpower T K e ∧ (∀ m, 0 ≤ e m) ∧
-        ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m x, x ∈ physicalPieceOpen S K m →
+        ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m x, x ∈ referencePhysicalPieceOpen S K m →
           ‖iteratedFDeriv ℝ n (K.chart (liftSectorParameter S C z) m) x‖ ≤
             e m * (1 + CanonicalGeometry.parameterGrading S ((n - 1) + loss) z) := by
   have h := n07a_physicalAtomFields_sampleJetBounds hD hT href hcur hphysical

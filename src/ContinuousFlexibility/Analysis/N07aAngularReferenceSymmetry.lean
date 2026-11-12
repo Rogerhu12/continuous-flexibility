@@ -19,9 +19,9 @@ theorem n07a_physical_periodic_of_piecewise
     (h04 : N04Properties D T S C L K base loss ε)
     {v : PolarPoint → ℝ} (hv : ContinuousOn v (annularOpen D))
     (hzero : ∀ p, p ∉ annularOpen D → v p = 0)
-    (hperiod : ∀ m p, p ∈ physicalPieceOpen S K m → v (p + (0, Real.pi)) = v p) :
+    (hperiod : ∀ m p, p ∈ referencePhysicalPieceOpen S K m → v (p + (0, Real.pi)) = v p) :
     Function.Periodic v (0, Real.pi) := by
-  obtain ⟨E, hE, hcover⟩ := h04.2.2.2.2.2.2.1
+  obtain ⟨E, hE, hcover⟩ := h04.1.referencePartition
   have hEr : ∀ᵐ r ∂(volume : Measure ℝ), r ∉ E := by
     simpa only [ae_iff, not_not, Set.ofPred_mem_eq] using hE
   rintro ⟨r, θ⟩
@@ -48,18 +48,21 @@ theorem n07aReferencePieceHeight_even_on
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (aL : ℝ) {η : PolarPoint → ℝ} (hη : ∀ r θ, η (r, -θ) = η (r, θ)) (m : ℕ) :
-    ∀ p ∈ physicalPieceOpen S K m,
+    ∀ p ∈ referencePhysicalPieceOpen S K m,
       n07aReferencePieceHeight C K z (K.inverseChart z) aL η m (p.1, -p.2) =
         n07aReferencePieceHeight C K z (K.inverseChart z) aL η m p := by
   intro p hp
   have hrefz := n07a_reference_mem_stateNeighborhood h01
   have hrefs := h01.2.2.1.stateSector
-  have hr := h04.2.2.2.2.2.2.2.2.2.1 (C.referenceState, 0) hrefz hrefs m p hp
-  have hcanon := (h04.2.2.2.2.2.2.2.1 (C.referenceState, 0) hrefz hrefs m).1 hp
-  have hphys := (h04.2.2.2.2.2.2.2.1 z hz hs m).2.1 hcanon
-  have hinv := h04.2.2.2.2.2.2.2.2.2.2.1 z hz hs m
+  have hpref : p ∈ physicalPieceOpen S K (C.referenceState, 0) m := by
+    rw [h04.1.referenceDomain m]
+    exact hp
+  have hr := h04.1.reflection (C.referenceState, 0) hrefz hrefs m p hpref
+  have hcanon := (h04.1.charts (C.referenceState, 0) hrefz hrefs m).1 hpref
+  have hphys := (h04.1.charts z hz hs m).2.1 hcanon
+  have hinv := h04.1.inverseReflection z hz hs m
     (K.chart (C.referenceState, 0) m p) hcanon
-  have hc := h04.2.2.2.2.2.2.2.2.2.1 z hz hs m
+  have hc := h04.1.reflection z hz hs m
     (K.inverseChart z m (K.chart (C.referenceState, 0) m p)) hphys
   simp only [n07aReferencePieceHeight, hr.1, hr.2.1, hinv, hc.2.1, hη]
 

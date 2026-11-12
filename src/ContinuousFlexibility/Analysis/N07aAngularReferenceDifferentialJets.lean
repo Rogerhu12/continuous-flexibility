@@ -27,7 +27,7 @@ theorem n07a_radialField_fixedJetEnvelope
     (hpieces : ∀ m, Ioo (K.physicalLeft m) (K.physicalRight m) ⊆ radialCore D)
     {J : Set ℝ} (hJ : IsOpen J) (hcore : Icc D.a D.b ⊆ J)
     {f : ℝ → ℝ} (hf : ContDiffOn ℝ ∞ f J) :
-    N07aAngularFixedJetEnvelope T K (physicalPieceOpen S K) (fun _ => 1)
+    N07aAngularFixedJetEnvelope T K (referencePhysicalPieceOpen S K) (fun _ => 1)
       (fun _ p => f p.1) := by
   have houter : N07aAngularFixedJetEnvelope T K (fun _ => radialCore D)
       (fun _ => 1) (fun _ => f) := by
@@ -66,7 +66,7 @@ theorem n07a_referenceDifferentialCoefficient_fixedJetEnvelope
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hpieces : ∀ m, Ioo (K.physicalLeft m) (K.physicalRight m) ⊆ radialCore D)
     (i : Fin 3) :
-    N07aAngularFixedJetEnvelope T K (physicalPieceOpen S K) (fun _ => 1)
+    N07aAngularFixedJetEnvelope T K (referencePhysicalPieceOpen S K) (fun _ => 1)
       (fun _ p => n07aReferenceRadialDifferentialCoefficient D i p.1) :=
   n07a_radialField_fixedJetEnvelope hD hT hpieces isOpen_Ioi
     (fun r hr => hD.choose_spec.1.1.trans_le hr.1)
@@ -90,11 +90,11 @@ theorem n07a_referenceDifferential_fixedJetEnvelope
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hpieces : ∀ m, Ioo (K.physicalLeft m) (K.physicalRight m) ⊆ radialCore D)
     {w : ℕ → ℝ} (hw : ∀ m, 0 ≤ w m) {f : ℕ → PolarPoint → ℝ}
-    (hfs : ∀ m, ContDiffOn ℝ ∞ (f m) (physicalPieceOpen S K m))
-    (hf : N07aAngularFixedJetEnvelope T K (physicalPieceOpen S K) w f) :
-    N07aAngularFixedJetEnvelope T K (physicalPieceOpen S K) w
+    (hfs : ∀ m, ContDiffOn ℝ ∞ (f m) (referencePhysicalPieceOpen S K m))
+    (hf : N07aAngularFixedJetEnvelope T K (referencePhysicalPieceOpen S K) w f) :
+    N07aAngularFixedJetEnvelope T K (referencePhysicalPieceOpen S K) w
       (fun m => n07aReferenceDifferential D (f m)) := by
-  let W := physicalPieceOpen S K
+  let W := referencePhysicalPieceOpen S K
   have hW : ∀ m, IsOpen (W m) := fun _ => isOpen_Ioo.prod isOpen_univ
   have hrs (m : ℕ) := scalar_contDiffOn_radialPartial (hW m) (hfs m)
   have hrrs (m : ℕ) := scalar_contDiffOn_radialPartial (hW m) (hrs m)

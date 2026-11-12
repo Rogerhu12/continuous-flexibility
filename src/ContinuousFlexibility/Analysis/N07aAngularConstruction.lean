@@ -67,6 +67,7 @@ theorem n07a_angular_construction
     (h03 : N03Properties D T S C R L base ε)
     (h04 : N04Properties D T S C L K base loss ε)
     (href : ReferenceJets D T S C L K) (hcur : CurrentJets D T S C L K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
     (hprincipal : ReferencePrincipal T S C K)
     (hR : ReferenceRadial S C K) (hAux : AuxiliaryColumnGauge S K)
     (h05 : N05Properties D T S C K V b B)
@@ -74,9 +75,9 @@ theorem n07a_angular_construction
     ∃ base' : ℕ, base ≤ base' ∧ ∃ ε' : ℝ, 0 < ε' ∧ ε' ≤ ε ∧
       N07aAngularProperties S C K V b B P base' ε' := by
   have hV := h05.2.1
-  have hI (m : ℕ) : K.left m < K.right m := (h04.2.2.2.1 m).2.1
+  have hI (m : ℕ) : K.left m < K.right m := (h04.1.referenceBounds m).2.1
   have hraw := n07a_actualRelative_weighted_band_lift hD hborder hS hT
-    h01 h02 h03 h04 href hcur hprincipal hR hAux h05 h06 hI
+    h01 h02 h03 h04 href hcur hRatio hprincipal hR hAux h05 h06 hI
   let d : ℕ := hraw.choose
   let A : ℝ → ℕ → ℝ := fun t p => (hraw.choose_spec t p).choose
   let C₁ : ℝ → ℕ → ℝ := fun t p => (hraw.choose_spec t p).choose_spec.choose

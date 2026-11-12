@@ -50,6 +50,10 @@ theorem n07a_exists_boundedPhysicalCandidate
     (h04 : N04Properties D T S C L K base geometryLoss ε)
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
     (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
+    (hFirst : N07aActualForwardFirstBound T S C K base ε)
+    (hcanonical : CanonicalPrimitiveGeometry D T S C L K base ε)
+    (h05 : N05Properties D T S C K V b B)
     (data : N07aActualCanonicalSolutionData D T S C L K V b B P base ε) :
     ∃ base' : ℕ, base ≤ base' ∧ ∃ ε' : ℝ, 0 < ε' ∧ ε' ≤ ε ∧
       ∃ u : CanonicalGeometry.Parameter S → S.Source → HeightPair S × ℝ,
@@ -71,14 +75,21 @@ theorem n07a_exists_boundedPhysicalCandidate
   have hws (z : CanonicalGeometry.Parameter S) (hz : z ∈ Ω) (f : S.Source) (m : ℕ) :
       ContDiffOn ℝ ∞ (data.w z f m) (canonicalOpen S K m) := by
     exact data.smooth z hz f m
+  have hreference (z : CanonicalGeometry.Parameter S) (_hz : z ∈ Ω) (f : S.Source) :
+      N07aReferenceGraphRepresentation D S C K (data.U z f) :=
+    ⟨B.weakExponent, B.sourceMaterial, B.outputMaterial, data.referenceGraph h05 z f⟩
+  have hnormal (z : CanonicalGeometry.Parameter S) (hz : z ∈ Ω) (f : S.Source) :
+      N07aActualNormalEquation D S C L K z (data.U z f) f (data.w z f) := by
+    intro m
+    exact data.equation z hz f m
   have family := n07a_exists_actualPhysicalSolutionFamily hD hT hS h01 h03 h04
-    href hcur Ω Subset.rfl data.U data.F data.relation data.regular data.even
-    data.sourceAE data.w data.decode
+    href hcur hcanonical h01.1.2.2.2.1 Ω Subset.rfl data.U data.F data.relation
+    data.regular hreference data.even data.sourceAE data.w data.decode hnormal
   let v : CanonicalGeometry.Parameter S → S.Source → PolarPoint → ℝ := family.choose
   have hv := family.choose_spec
   let r := fun z f => n07aPhysicalRemainder D S (data.U z f).2.1 (v z f)
   have reconstruction := n07a_physicalReconstruction_sampleJets hD hT hS h01.2.2.1
-    h04 href hcur S.sourceGrading (n07aSourceGrading_monotone S) (solve_source_hasSmoothing hS)
+    h04 href hcur hFirst S.sourceGrading (n07aSourceGrading_monotone S) (solve_source_hasSmoothing hS)
     Ω Subset.rfl wgt hwgt data.w r data.low data.loss data.jets hws
     (fun z hz f m => (hv z hz f).2.2.2.2.2 m)
   let lowr : ℕ := reconstruction.choose
@@ -105,8 +116,8 @@ theorem n07a_exists_boundedPhysicalCandidate
   let Ω' := sectorNeighborhood S base' ε' ε'
   have hsub : Ω' ⊆ Ω :=
     fun z hz => n07a_sectorNeighborhood_mono (S := S) hbaseN hεNle (hsubN hz)
-  have hsample : N07aSampleLinearJetBounds T K p S.sourceGrading Ω'
-      (physicalPieceOpen S K) wgt lowr dr (fun z f _ => r z f) :=
+  have hsample : N07aStateSampleLinearJetBounds T K p S.sourceGrading Ω'
+      (fun z m => physicalPieceOpen S K (liftSectorParameter S C z) m) wgt lowr dr (fun z f _ => r z f) :=
     hr.restrict (fun z (hz : z ∈ Ω') => ⟨hsub hz, hsmall z hz⟩)
   have hscalars (z : CanonicalGeometry.Parameter S) (hz : z ∈ Ω') (f : S.Source) :
       |(data.U z f).2.1| + |(data.U z f).2.2.1| ≤
@@ -119,7 +130,7 @@ theorem n07a_exists_boundedPhysicalCandidate
         using data.scalars z (hsub hz) f 1
     exact (add_le_add h0 h1).trans_eq (by ring)
   have candidate := n07a_exists_actualHeightCandidateFamily
-    hD hT hS h01 h02 h03 h04 href Ω' hsub data.U v
+    hD hT hS h01 h02 h03 h04 href hRatio Ω' hsub data.U v
     (fun z hz f => ⟨(hv z (hsub hz) f).1, (hv z (hsub hz) f).2.1,
       (hv z (hsub hz) f).2.2.1, (hv z (hsub hz) f).2.2.2.1,
       (hv z (hsub hz) f).2.2.2.2.1⟩)

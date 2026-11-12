@@ -105,8 +105,8 @@ theorem n07aReferenceScalarMap_band
     (h05 : N05Properties D T S C K V b B) (hI : ∀ m, K.left m < K.right m)
     (hR : ReferenceRadial S C K) (hAux : AuxiliaryColumnGauge S K)
     (hmap : ∀ m, MapsTo (K.inverseChart (C.referenceState, 0) m)
-      (canonicalOpen S K m) (physicalPieceOpen S K m))
-    (hsm : ∀ m, ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m) (physicalPieceOpen S K m))
+      (canonicalOpen S K m) (referencePhysicalPieceOpen S K m))
+    (hsm : ∀ m, ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m) (referencePhysicalPieceOpen S K m))
     (i : Fin 3) (j : ℕ) (F : V.level (3 / 4 : ℝ) 0 b) :
     n07aReferenceScalarMap B i (n07aAngularLevelBand h05.2.1 (3 / 4 : ℝ) 0 hI b j F) =
       if n07aScalarFrequency i = j then n07aReferenceScalarMap B i F else 0 := by

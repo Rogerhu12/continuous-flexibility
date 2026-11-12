@@ -232,10 +232,10 @@ theorem n07a_exists_actualNormalFamilyData
   let hregular : ∀ z ∈ Ω, ∀ f m k, N07aCanonicalNormalRegular S K m ((U z f).1 m) k :=
     fun z hz f m => (hex z hz f m).choose
   let w : CanonicalGeometry.Parameter S → S.Source → ℕ → PolarPoint → ℝ :=
-    fun z f m => if hz : z ∈ Ω then n07aCanonicalSmoothDecode (h04.2.2.2.1 m).2.1
+    fun z f m => if hz : z ∈ Ω then n07aCanonicalSmoothDecode (h04.1.referenceBounds m).2.1
       ⟨(U z f).1 m, hregular z hz f m⟩ else 0
   have hw (z : CanonicalGeometry.Parameter S) (hz : z ∈ Ω) (f : S.Source) (m : ℕ) :
-      w z f m = n07aCanonicalSmoothDecode (h04.2.2.2.1 m).2.1
+      w z f m = n07aCanonicalSmoothDecode (h04.1.referenceBounds m).2.1
         ⟨(U z f).1 m, hregular z hz f m⟩ := by simp only [w, dif_pos hz]
   let Cα : ℝ := (2 * ‖B.inverse‖) * C₀
   have hCα : 0 ≤ Cα := mul_nonneg (mul_nonneg (by norm_num) (norm_nonneg _)) hC.1.le
@@ -247,7 +247,7 @@ theorem n07a_exists_actualNormalFamilyData
     radius_le := he
     F₀ := F₀
     w := w
-    interval := fun m => (h04.2.2.2.1 m).2.1
+    interval := fun m => (h04.1.referenceBounds m).2.1
     low := low
     firstLoss := firstLoss
     C₀ := C₀
@@ -280,7 +280,7 @@ theorem n07a_exists_actualNormalFamilyData
       congrFun hW m
     exact (congrArg (n07aAngularReflection m) hm).symm.trans (heven.trans hm)
   · intro z hz f m y hy
-    let decoded : PolarPoint → ℝ := n07aCanonicalSmoothDecode (h04.2.2.2.1 m).2.1
+    let decoded : PolarPoint → ℝ := n07aCanonicalSmoothDecode (h04.1.referenceBounds m).2.1
       ⟨(U z f).1 m, hregular z hz f m⟩
     let A : Fin 6 → PolarPoint → ℝ := fun i => n07aNormalCoefficientFamily
       (fun k z m => n07aPrincipalField K (liftSectorParameter S C z) m k)

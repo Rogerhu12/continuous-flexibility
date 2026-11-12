@@ -35,17 +35,23 @@ theorem n07a_perturbedCanonical_smooth_solution
     (h04 : N04Properties D T S C L K base loss ε)
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
     (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
+    (hcanonical : CanonicalPrimitiveGeometry D T S C L K base ε)
+    (hborder : RadialTrueBorder D)
     (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε)
     (hz' : liftSectorParameter S C z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S (liftSectorParameter S C z).1)
     {U : CanonicalUnknown S K} {F : CanonicalSequence S K}
     (hrel : PerturbedCanonicalRelation D S C K L (liftSectorParameter S C z) U F)
     (hU : ∀ m k, N07aCanonicalNormalRegular S K m (U.1 m) k)
+    (hreference : N07aReferenceGraphRepresentation D S C K U)
     (hEven : ∀ m, n07aAngularReflection m (U.1 m) = U.1 m)
     (f₀ : S.Source)
     (hF : ∀ m, (F m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m]
       canonicalSource S K (liftSectorParameter S C z) m
-        ((S.height (3 / 4 : ℝ)).decode f₀.val)) :
+        ((S.height (3 / 4 : ℝ)).decode f₀.val))
+    (hnormal : N07aActualNormalEquation D S C L K z U f₀
+      (fun m => n07aCanonicalSmoothDecode (h04.1.referenceBounds m).2.1
+        ⟨U.1 m, hU m⟩)) :
     ∃ v : PolarPoint → ℝ,
       ContDiffOn ℝ ∞ v (annularOpen D) ∧
       Function.Periodic v (0, Real.pi) ∧ (∀ r θ, v (r, -θ) = v (r, θ)) ∧
@@ -60,7 +66,8 @@ theorem n07a_perturbedCanonical_smooth_solution
             (S.height (3 / 4 : ℝ)).decode f₀.val p := by
   obtain ⟨η, f, hrep, hηp, hfp, hrow, heq⟩ := hrel
   obtain ⟨v, hv, hvp, hve, hvzero⟩ := n07a_currentWeak_smoothPhysical
-    hD hT hS h01 h03 h04 href hcur z hz hz' hs hrep hU f₀ hF hηp hfp heq
+    hD hT hS h01 h03 h04 href hcur hcanonical hborder z hz hz' hs
+    hrep hU hreference f₀ hF hnormal hηp hfp heq
   have hrepv := n07a_canonicalRepresentation_replace_height h04 hz' hs hrep hve
   have hveven := n07a_canonicalRepresentation_smooth_even hS h04 hz' hs
     hrepv hU hEven hv hvp hvzero
@@ -71,8 +78,8 @@ theorem n07a_perturbedCanonical_smooth_solution
   refine ⟨v, hv, hvp, hveven, hvzero, ⟨hrepv.1, hF⟩,
     (n07a_referenceRow_congr_ae hab hvp hηp hve).trans hrow, ?_⟩
   let x := liftSectorParameter S C z
-  have hspace := h03.2.2.2.2.2.2.2.2 x hz' hs
-  have ha := n07a_correctedLeadingCoefficient_contDiffOn hS hT h01 h03 hz' hs
+  have hspace := hcanonical.physicalCoefficients x hz' hs
+  have ha := hspace.1
   have hap : ∀ p ∈ annularOpen D,
       (L.coefficients x).a (p + (0, Real.pi)) = (L.coefficients x).a p := by
     intro p _
@@ -81,8 +88,12 @@ theorem n07a_perturbedCanonical_smooth_solution
   have hf₀ := ((hS.1 (3 / 4 : ℝ)).2.2.2.1 f₀.val)
   have hψ := ((hS.1 (3 / 4 : ℝ)).2.2.2.1 S.psi)
   exact n07a_physicalWeak_smooth_classical hab (L.coefficients x)
-    ⟨ha, hspace.1, hspace.2.1⟩
-    (fun p hp => ⟨hap p hp, (hspace.2.2 p hp).1, (hspace.2.2 p hp).2⟩)
+    ⟨ha, hspace.2.1, hspace.2.2.1⟩
+    (fun p hp => ⟨hap p hp,
+      by simpa only [Prod.fst_add, Prod.snd_add, add_zero] using
+        hspace.2.2.2.1 p.1 hp.1 p.2,
+      by simpa only [Prod.fst_add, Prod.snd_add, add_zero] using
+        hspace.2.2.2.2 p.1 hp.1 p.2⟩)
     η f v ((S.height (3 / 4 : ℝ)).decode f₀.val)
     (nuColumnField D S C x) ((S.height (3 / 4 : ℝ)).decode S.psi)
     U.2.2.1 U.2.2.2 hηp hfp hv hf₀.1

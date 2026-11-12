@@ -1,12 +1,13 @@
-import ContinuousFlexibility.Analysis.N07aMaterialPieceBounds
+import ContinuousFlexibility.Analysis.N07aActualMaterialComparison
 import ContinuousFlexibility.Analysis.N07aSourceFrechetDecay
 import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Actual source jets at the true inverse-chart points
 
-The raw reference material ratios compare the physical and sampled
-weights. Their powers remain a single subpower envelope at each order.
+The derived current-domain material certificate compares the actual
+inverse-chart point with the sampled weights. Its powers remain a single
+subpower envelope at each order.
 -/
 
 noncomputable section
@@ -39,7 +40,7 @@ theorem n07a_source_jets_at_inverseChart
     (hA : IsSobolevModel D T γ A) (hγ : 0 ≤ γ) (hγ1 : γ ≤ 1)
     (hrefState : referenceStateConditions D S C)
     (h04 : N04Properties D T S C L K base loss ε)
-    (href : CanonicalGeometry.ReferenceJets D T S C L K) (n c : ℕ) :
+    (hRatio : N07aActualMaterialRatios T S C K base ε) (n c : ℕ) :
     ∃ e : ℕ → ℝ, N07aSampleSubpower T K e ∧ (∀ m, 0 ≤ e m) ∧
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ (u : A.Space) m y,
         y ∈ canonicalOpen S K m →
@@ -47,9 +48,6 @@ theorem n07a_source_jets_at_inverseChart
             (K.inverseChart (liftSectorParameter S C z) m y)‖ ≤
             e m * (T.H (T.sample (K.cell m)) ^ γ *
               (T.M (T.sample (K.cell m)) ^ c)⁻¹) * A.grading (c + n + 3) u := by
-  have hinterval := h04.2.2.2.1
-  have hRatio := n07a_material_piece_ratio_envelope (S := S) (C := C) (L := L) (K := K)
-    hD hT href (fun m => (hinterval m).1)
   let e : ℕ → ℝ := hRatio.choose
   have he := hRatio.choose_spec.1
   have he1 := hRatio.choose_spec.2.1
@@ -66,13 +64,13 @@ theorem n07a_source_jets_at_inverseChart
   let x := K.inverseChart (liftSectorParameter S C z) m y
   have hz' := liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) hz le_rfl
   have hs := hrefState.liftSectorParameter_sector z
-  have hx : x ∈ physicalPieceOpen S K m :=
-    (h04.2.2.2.2.2.2.2.1 _ hz' hs m).2.1 hy
-  have hx' : x ∈ annularOpen D := ⟨(hinterval m).2.2 hx.1, mem_univ _⟩
+  have hx : x ∈ physicalPieceOpen S K (liftSectorParameter S C z) m :=
+    (h04.1.charts _ hz' hs m).2.1 hy
+  have hx' : x ∈ annularOpen D := (h04.1.domains _ hz' hs m).2.2.1 hx
   have hm := materialSample_mem_radialCore hT hD.choose_spec.2.1 (K.cell m)
   have hpos := hT.2.1 x.1 hx'.1
   have hsample := hT.2.1 _ hm
-  have hratio := heb m x hx
+  have hratio := heb z hz m x hx
   have hweight := n07a_material_piece_decay_compare hpos.2.1 hsample.2.1
     (zero_lt_one.trans_le hpos.2.2.2) (zero_lt_one.trans_le hsample.2.2.2)
     (he1 m) hratio.1 hratio.2.2.2 hγ hγ1 c

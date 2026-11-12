@@ -97,11 +97,11 @@ theorem n07a_canonical_distribution_test_pairing
     simp only [g, mul_add]
     exact integral_add hiD hiQ
   rw [hcut, hsplit] at hop
-  have hνp : ∀ p ∈ physicalPieceOpen S K m,
+  have hνp : ∀ p ∈ physicalPieceOpen S K z m,
       nuColumnField D S C z (p + (0, Real.pi)) = nuColumnField D S C z p := by
     apply n07a_physical_periodic_of_canonicalSource h04 hz hs
     simpa only [hν] using (col 1).periodic
-  have hψp : ∀ p ∈ physicalPieceOpen S K m,
+  have hψp : ∀ p ∈ physicalPieceOpen S K z m,
       (S.height (3 / 4 : ℝ)).decode S.psi (p + (0, Real.pi)) =
         (S.height (3 / 4 : ℝ)).decode S.psi p := by
     apply n07a_physical_periodic_of_canonicalSource h04 hz hs

@@ -50,18 +50,18 @@ theorem n07a_referenceCompatibleSource_on_piece
     (h03 : N03Properties D T S C R L base ε)
     (h04 : N04Properties D T S C L K base loss ε)
     {v : PolarPoint → ℝ} (aL μ : ℝ) {m : ℕ}
-    (hv : ContDiffOn ℝ ∞ v (physicalPieceOpen S K m))
-    {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    (hv : ContDiffOn ℝ ∞ v (referencePhysicalPieceOpen S K m))
+    {p : PolarPoint} (hp : p ∈ referencePhysicalPieceOpen S K m) :
     n07aReferenceCompatibleSource D K v μ p =
       n07aReferenceRemainderDifferential D S v aL p +
         aL * divergenceOperator (L.coefficients (C.referenceState, 0))
           (fun q : PolarPoint => S.chiLeft q.1) p +
         μ * nuColumnField D S C (C.referenceState, 0) p := by
-  have hpD : p ∈ annularOpen D := ⟨(h04.2.2.2.1 m).2.2 hp.1, mem_univ _⟩
+  have hpD : p ∈ annularOpen D := ⟨(h04.1.referenceBounds m).2.2 hp.1, mem_univ _⟩
   have hχ : ContDiffOn ℝ ∞ (fun q : PolarPoint => S.chiLeft q.1)
-      (physicalPieceOpen S K m) := (hS.2.2.1.1.comp contDiff_fst).contDiffOn
+      (referencePhysicalPieceOpen S K m) := (hS.2.2.1.1.comp contDiff_fst).contDiffOn
   let r₀ : PolarPoint → ℝ := fun q => v q - aL * S.chiLeft q.1
-  have hr : ContDiffOn ℝ ∞ r₀ (physicalPieceOpen S K m) :=
+  have hr : ContDiffOn ℝ ∞ r₀ (referencePhysicalPieceOpen S K m) :=
     hv.sub (contDiffOn_const.mul hχ)
   have he : v = fun q => r₀ q + aL * S.chiLeft q.1 := by
     funext q
@@ -90,20 +90,21 @@ theorem n07a_referenceCompatibleSource_volume
     (h04 : N04Properties D T S C L K base loss ε)
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
     (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
     (hV : IsVolumeModel T S K V)
     (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε)
     (u : HeightPair S) (μ : ℝ) {v : PolarPoint → ℝ}
     (hvp : Function.Periodic v (0, Real.pi)) (hve : ∀ r θ, v (r, -θ) = v (r, θ))
     (hv : ∀ m, EqOn v (n07aReferencePieceHeight C K (liftSectorParameter S C z)
       (K.inverseChart (liftSectorParameter S C z)) u.2 (heightPairField S u) m)
-      (physicalPieceOpen S K m)) (t s : ℕ) :
+      (referencePhysicalPieceOpen S K m)) (t s : ℕ) :
     ∃ Fts : V.level (3 / 4 : ℝ) (t : ℝ) s,
       ∀ m, (V.forget (3 / 4 : ℝ) (t : ℝ) s Fts m : PolarPoint → ℝ)
         =ᵐ[canonicalMeasure S K m]
           canonicalSource S K (C.referenceState, 0) m
             (n07aReferenceCompatibleSource D K v μ) := by
   let remainder := n07a_referenceRemainderSource_volume
-    hD hT hS h01 h04 href hcur hV z hz u hvp hve hv t s
+    hD hT hS h01 h04 href hcur hRatio hV z hz u hvp hve hv t s
   let F : V.level (3 / 4 : ℝ) (t : ℝ) s := remainder.choose
   have hF := remainder.choose_spec
   let columns := n07a_referenceScalarColumns_volume
@@ -111,7 +112,7 @@ theorem n07a_referenceCompatibleSource_volume
   let W : Fin 3 → V.level (3 / 4 : ℝ) (t : ℝ) s := columns.choose
   have hW := columns.choose_spec
   refine ⟨F + u.2 • W 0 + μ • W 1, fun m => ?_⟩
-  let col := n07aReferenceScalarOpenCoefficient href m (h04.2.2.2.1 m).2.1
+  let col := n07aReferenceScalarOpenCoefficient href m (h04.1.referenceBounds m).2.1
   have hW₀ : V.forget (3 / 4 : ℝ) (t : ℝ) s (W 0) m = (col 0).toLp :=
     congrFun (hW 0) m
   have hW₁ : V.forget (3 / 4 : ℝ) (t : ℝ) s (W 1) m = (col 1).toLp :=
@@ -136,19 +137,20 @@ theorem n07a_referenceCompatibleSource_volume
     with p hs₂ hs₁ hsm₀ hsm₁ hfp hc₀ hc₁ hp
   simp only [Pi.add_apply, Pi.smul_apply, smul_eq_mul] at hs₂ hs₁ hsm₀ hsm₁
   rw [hs₂, hs₁, hsm₀, hsm₁, hfp, hc₀, hc₁]
-  have hphys := (h04.2.2.2.2.2.2.2.1 (C.referenceState, 0)
+  have hphys := (h04.1.charts (C.referenceState, 0)
     (n07a_reference_mem_stateNeighborhood h01) h01.2.2.1.stateSector m).2.1 hp
+  rw [h04.1.referenceDomain m] at hphys
   have hsrc := n07a_referenceCompatibleSource_on_piece hS hT h01 h02 h03 h04 u.2 μ
     (n07a_referenceTransport_piece_smooth hS h01 h04 z hz u hv m) hphys
   have hcol₀ : (col 0).value p = canonicalSource S K (C.referenceState, 0) m
         (divergenceOperator (L.coefficients (C.referenceState, 0))
           (fun q : PolarPoint => S.chiLeft q.1)) p := by
     simpa only [n07aScalarColumn, Matrix.cons_val_zero] using
-      congrFun (n07aReferenceScalarOpenCoefficient_value href m (h04.2.2.2.1 m).2.1 0) p
+      congrFun (n07aReferenceScalarOpenCoefficient_value href m (h04.1.referenceBounds m).2.1 0) p
   have hcol₁ : (col 1).value p = canonicalSource S K (C.referenceState, 0) m
       (nuColumnField D S C (C.referenceState, 0)) p := by
     simpa only [n07aScalarColumn, Matrix.cons_val_one, Matrix.cons_val_zero] using
-      congrFun (n07aReferenceScalarOpenCoefficient_value href m (h04.2.2.2.1 m).2.1 1) p
+      congrFun (n07aReferenceScalarOpenCoefficient_value href m (h04.1.referenceBounds m).2.1 1) p
   refine (congrArg₂ (fun a b : ℝ => canonicalSource S K (C.referenceState, 0) m
     (n07aReferenceRemainderDifferential D S v u.2) p + u.2 * a + μ * b) hcol₀ hcol₁).trans ?_
   simp only [canonicalSource]

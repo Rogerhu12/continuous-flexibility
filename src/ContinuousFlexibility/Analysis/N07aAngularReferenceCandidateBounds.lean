@@ -29,24 +29,25 @@ theorem n07a_referenceCandidate_physical_bounds
     (h04 : N04Properties D T S C L K base loss ε)
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
     (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
     (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε)
     (u : HeightPair S) {v : PolarPoint → ℝ}
     (hvc : ContDiffOn ℝ 1 v (annularOpen D))
     (hv : ∀ m, EqOn v
       (n07aReferencePieceHeight C K (liftSectorParameter S C z)
         (K.inverseChart (liftSectorParameter S C z)) u.2 (heightPairField S u) m)
-      (physicalPieceOpen S K m))
+      (referencePhysicalPieceOpen S K m))
     {γ : ℝ} (hγ : 0 < γ) (hγhi : γ < (3 / 4 : ℝ)) :
     ∃ A₀ A₁ B : ℝ, 0 ≤ A₀ ∧ 0 ≤ A₁ ∧ 0 ≤ B ∧
       (∀ p ∈ annularOpen D,
         |v p - u.2 * S.chiLeft p.1| ≤ A₁ * T.H p.1 ^ γ) ∧
       (∀ p ∈ annularOpen D,
         |n07aReferenceInteriorDifferential D K v p| ≤ A₀ * T.H p.1 ^ γ) ∧
-      ∀ m p, p ∈ physicalPieceOpen S K m →
+      ∀ m p, p ∈ referencePhysicalPieceOpen S K m →
         |radialPartial v p| ≤ B ∧ |radialPartial (radialPartial v) p| ≤ B ∧
           |angularPartial (angularPartial v) p| ≤ B := by
   obtain ⟨A₁, hA₁, hrem⟩ := n07a_referenceRemainder_mixed_decay hD hT hS h01 h04
-    href hcur z hz u.1 hγ.le hγhi 0 0
+    href hcur hRatio z hz u.1 hγ.le hγhi 0 0
   have hH : ContinuousOn (fun p : PolarPoint => T.H p.1 ^ γ) (annularOpen D) :=
     (((hT.1 T.H (by simp)).continuousOn).comp continuous_fst.continuousOn
       (fun _ hp => hp.1)).rpow_const (fun _ _ => Or.inr hγ.le)
@@ -62,20 +63,20 @@ theorem n07a_referenceCandidate_physical_bounds
     simp only [add_sub_cancel_right]
     simpa only [spaces_mixedDerivative_zero] using hrem m p hp
   obtain ⟨C₁, hC₁, h₁⟩ := n07a_referenceTransport_positive_mixed_decay hD hT hS h01 h04
-    href hcur z hz u hv hγ.le hγhi 1 0 (by decide)
+    href hcur hRatio z hz u hv hγ.le hγhi 1 0 (by decide)
   obtain ⟨C₂, hC₂, h₂⟩ := n07a_referenceTransport_positive_mixed_decay hD hT hS h01 h04
-    href hcur z hz u hv hγ.le hγhi 2 0 (by decide)
+    href hcur hRatio z hz u hv hγ.le hγhi 2 0 (by decide)
   obtain ⟨C₃, hC₃, h₃⟩ := n07a_referenceTransport_positive_mixed_decay hD hT hS h01 h04
-    href hcur z hz u hv hγ.le hγhi 0 2 (by decide)
+    href hcur hRatio z hz u hv hγ.le hγhi 0 2 (by decide)
   let C₀ : ℝ := C₁ + C₂ + C₃
   have hC₀ : 0 ≤ C₀ := add_nonneg (add_nonneg hC₁.le hC₂.le) hC₃.le
-  have hweighted (m : ℕ) (p : PolarPoint) (hp : p ∈ physicalPieceOpen S K m) :
+  have hweighted (m : ℕ) (p : PolarPoint) (hp : p ∈ referencePhysicalPieceOpen S K m) :
       |radialPartial v p| ≤ C₀ * T.H p.1 ^ γ ∧
         |radialPartial (radialPartial v) p| ≤ C₀ * T.H p.1 ^ γ ∧
         |angularPartial (angularPartial v) p| ≤ C₀ * T.H p.1 ^ γ := by
     have he := n07a_referencePartials_eq_mixed (isOpen_Ioo.prod isOpen_univ)
       (n07a_referenceTransport_piece_smooth hS h01 h04 z hz u hv m) hp
-    have hpD := (h04.2.2.2.1 m).2.2 hp.1
+    have hpD := (h04.1.referenceBounds m).2.2 hp.1
     have hpH : 0 ≤ T.H p.1 ^ γ := (Real.rpow_pos_of_pos (hT.2.1 _ hpD).2.1 γ).le
     rw [he.1, he.2.1, he.2.2]
     refine ⟨(h₁ m p hp).trans ?_, (h₂ m p hp).trans ?_, (h₃ m p hp).trans ?_⟩ <;>
@@ -100,7 +101,7 @@ theorem n07a_referenceCandidate_physical_bounds
   refine ⟨A * C₀, A₁, C₀ * H, mul_nonneg hA hC₀, hA₁.le,
     mul_nonneg hC₀ hHpos.le, hremGlobal, hsource, ?_⟩
   intro m p hp
-  have hb := mul_le_mul_of_nonneg_left (hHu p.1 ((h04.2.2.2.1 m).2.2 hp.1)) hC₀
+  have hb := mul_le_mul_of_nonneg_left (hHu p.1 ((h04.1.referenceBounds m).2.2 hp.1)) hC₀
   exact ⟨(hweighted m p hp).1.trans hb,
     (hweighted m p hp).2.1.trans hb, (hweighted m p hp).2.2.trans hb⟩
 

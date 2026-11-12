@@ -17,18 +17,19 @@ namespace ContinuousFlexibility.Analysis
 open Set Filter ContinuousFlexibility.Statements
 open scoped ContDiff Topology
 
-theorem n07a_strip_jacobian_periodic {a b : ℝ} {F : PolarPoint → PolarPoint}
-    (hs : ContDiffOn ℝ ∞ F (Ioo a b ×ˢ (univ : Set ℝ)))
-    (hp : ∀ p ∈ Ioo a b ×ˢ (univ : Set ℝ),
+theorem n07a_domain_jacobian_periodic {Omega : Set PolarPoint} {F : PolarPoint → PolarPoint}
+    (hOmega : IsOpen Omega)
+    (hshift : ∀ p ∈ Omega, p + (0, Real.pi) ∈ Omega)
+    (hs : ContDiffOn ℝ ∞ F Omega)
+    (hp : ∀ p ∈ Omega,
       F (p + (0, Real.pi)) = F p + (0, Real.pi)) :
-    ∀ p ∈ Ioo a b ×ˢ (univ : Set ℝ),
+    ∀ p ∈ Omega,
       planeJacobian F (p + (0, Real.pi)) = planeJacobian F p := by
   intro p hpm
-  have hps : p + (0, Real.pi) ∈ Ioo a b ×ˢ (univ : Set ℝ) :=
-    ⟨by simpa only [Prod.fst_add, add_zero] using hpm.1, mem_univ _⟩
-  have hf₀ := (hs.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hpm)).differentiableAt
+  have hps : p + (0, Real.pi) ∈ Omega := hshift p hpm
+  have hf₀ := (hs.contDiffAt (hOmega.mem_nhds hpm)).differentiableAt
     (by simp)
-  have hf₁ := (hs.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hps)).differentiableAt
+  have hf₁ := (hs.contDiffAt (hOmega.mem_nhds hps)).differentiableAt
     (by simp)
   have hd : HasFDerivAt (fun q => F (q + (0, Real.pi)))
       (fderiv ℝ F (p + (0, Real.pi))) p := by
@@ -42,7 +43,7 @@ theorem n07a_strip_jacobian_periodic {a b : ℝ} {F : PolarPoint → PolarPoint}
     exact h
   have he : (fun q => F (q + (0, Real.pi))) =ᶠ[𝓝 p]
       fun q => F q + (0, Real.pi) := by
-    filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds hpm] with q hq
+    filter_upwards [hOmega.mem_nhds hpm] with q hq
     exact hp q hq
   have hder := (hd.congr_of_eventuallyEq he.symm).unique
     (hf₀.hasFDerivAt.add_const (0, Real.pi))
@@ -58,14 +59,15 @@ theorem n07a_physical_periodic_of_canonicalSource
     {f : PolarPoint → ℝ}
     (hf : ∀ p ∈ canonicalOpen S K m,
       canonicalSource S K z m f (p + (0, Real.pi)) = canonicalSource S K z m f p) :
-    ∀ p ∈ physicalPieceOpen S K m, f (p + (0, Real.pi)) = f p := by
-  rcases h04 with ⟨_, _, _, _, _, _, _, hgeom, _⟩
-  obtain ⟨hmap, _, hgf, _, hFs, _, _, hpoint⟩ := hgeom z hz hs m
+    ∀ p ∈ physicalPieceOpen S K z m, f (p + (0, Real.pi)) = f p := by
+  have hdomain := h04.1.domains z hz hs m
+  obtain ⟨hmap, _, hgf, _, hFs, _, _, hpoint⟩ := h04.1.charts z hz hs m
   have hFP := fun p hp => (hpoint p hp).2.2.1
-  have hJ := n07a_strip_jacobian_periodic hFs hFP
+  have hJ := n07a_domain_jacobian_periodic hdomain.1
+    (fun p hp => (hdomain.2.2.2.1 p).mpr hp) hFs hFP
   intro p hp
-  have hps : p + (0, Real.pi) ∈ physicalPieceOpen S K m :=
-    ⟨by simpa only [Prod.fst_add, add_zero] using hp.1, mem_univ _⟩
+  have hps : p + (0, Real.pi) ∈ physicalPieceOpen S K z m :=
+    (hdomain.2.2.2.1 p).mpr hp
   have h := hf (K.chart z m p) (hmap hp)
   rw [← hFP p hp] at h
   simp only [canonicalSource, hgf p hp, hgf _ hps,
@@ -75,7 +77,7 @@ theorem n07a_physical_periodic_of_canonicalSource
 
 theorem n07aPhysicalTestPullback_zero (z : AnnularState S × ℝ) (m : ℕ)
     (W : PolarPoint → ℝ) {p : PolarPoint}
-    (hp : p.1 ∉ Ioo (K.physicalLeft m) (K.physicalRight m)) :
+    (hp : p ∉ physicalPieceOpen S K z m) :
     n07aPhysicalTestPullback S K z m W p = 0 := ite_eq_right hp
 
 theorem n07aPhysicalTestPullback_divergence_zero
@@ -83,14 +85,9 @@ theorem n07aPhysicalTestPullback_divergence_zero
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {W : PolarPoint → ℝ} (hW : CanonicalTest S K m W)
     (A : SymmetricCoefficients) {p : PolarPoint}
-    (hp : p.1 ∉ Ioo (K.physicalLeft m) (K.physicalRight m)) :
+    (hp : p ∉ physicalPieceOpen S K z m) :
     divergenceOperator A (n07aPhysicalTestPullback S K z m W) p = 0 := by
-  obtain ⟨_, _, J, hJ, hJU, hzero⟩ := n07aPhysicalTestPullback_test h04 hz hs hW
-  have hpJ : p.1 ∉ J := fun h => hp (hJU h)
-  have hgerm : n07aPhysicalTestPullback S K z m W =ᶠ[𝓝 p] fun _ => 0 := by
-    filter_upwards [continuous_fst.continuousAt.eventually
-      (hJ.isClosed.isOpen_compl.mem_nhds hpJ)] with q hq
-    exact hzero q.1 hq q.2
+  have hgerm := n07aPhysicalTestPullback_zero_germ h04 hz hs hW hp
   rw [n07a_divergenceOperator_unknown_germ A hgerm]
   simp only [divergenceOperator, radialPartial_const, angularPartial_const,
     mul_zero, add_zero]

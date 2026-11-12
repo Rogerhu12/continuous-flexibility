@@ -31,24 +31,27 @@ theorem n07a_referenceTransport_row_of_pieces
     (hηπ : Function.Periodic η (0, Real.pi))
     (hvπ : Function.Periodic v (0, Real.pi))
     (hv : ∀ m, EqOn v (n07aReferencePieceHeight C K z (K.inverseChart z) aL η m)
-      (physicalPieceOpen S K m)) : referenceRow D v = referenceRow D η := by
-  apply n07a_referenceRow_congr_weighted_ae (S := S) (K := K) hab hvπ hηπ
-  apply n07a_physical_piecewise_ae_eq h04 Subset.rfl
-  intro m
-  filter_upwards [n07a_canonicalOpen_ae (S := S) (K := n07aPhysicalIntervalData K)
-    (m := m)] with p hp
-  by_cases hcol : referenceColumn D p.1 = 0
-  · simp only [hcol, zero_mul]
-  · obtain ⟨hchart, hheight⟩ := h04.2.2.1 z hz hs m p hp (h04.2.1 hcol)
-    have hgeom := h04.2.2.2.2.2.2.2.1 z hz hs m
-    have hinv : K.inverseChart z m (K.chart (C.referenceState, 0) m p) = p := by
-      rw [← hchart]
-      exact hgeom.2.2.1 p hp
-    have hvalue : n07aReferencePieceHeight C K z (K.inverseChart z) aL η m p = η p := by
-      simp only [n07aReferencePieceHeight, hinv, ← hheight]
-      field_simp [(hgeom.2.2.2.2.2.2.2 p hp).1.ne']
-      ring
-    exact congrArg (referenceColumn D p.1 * ·) ((hv m hp).trans hvalue)
+      (referencePhysicalPieceOpen S K m)) : referenceRow D v = referenceRow D η := by
+  have heq : v =ᵐ[radialPhysicalMeasure D] n07bReferencePullback C K z aL η := by
+    obtain ⟨E, hE, hcover⟩ := h04.1.referencePartition
+    have hr : ∀ᵐ r : ℝ ∂volume, r ∉ E := by
+      apply ae_iff.mpr
+      simpa only [not_not, setOf_mem_eq] using hE
+    have houtside : ∀ᵐ p : PolarPoint ∂volume, p.1 ∉ E := by
+      rw [Measure.volume_eq_prod]
+      exact (Measure.quasiMeasurePreserving_fst
+        (μ := (volume : Measure ℝ)) (ν := (volume : Measure ℝ))).ae hr
+    change ∀ᵐ p ∂volume.restrict (radialCore D ×ˢ Ioc (0 : ℝ) (2 * Real.pi)),
+      v p = n07bReferencePullback C K z aL η p
+    apply (ae_restrict_iff' (measurableSet_Ioo.prod measurableSet_Ioc)).mpr
+    filter_upwards [houtside] with p hpE hpstrip
+    obtain ⟨m, hm, _⟩ := hcover p.1 ⟨hpstrip.1, hpE⟩
+    have hp : p ∈ referencePhysicalPieceOpen S K m := ⟨hm, mem_univ _⟩
+    rw [hv m hp, n07bReferencePullback_on_piece h04.1 z aL η hp]
+    dsimp only [n07aReferencePieceHeight, n07bReferencePiecePullback, canonicalHeight]
+    ring
+  exact (n07b_referenceRow_congr_ae hab heq).trans
+    (n07bReferencePullback_referenceRow h04.1 hz hs aL η)
 
 theorem n07a_exists_referenceGraph_of_current_heightPair
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
@@ -59,7 +62,8 @@ theorem n07a_exists_referenceGraph_of_current_heightPair
     (hrad : CanonicalGeometry.ReferenceRadial S C K)
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
     (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
-    (htrans : CanonicalGeometry.TransmissionGeometry D S C K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
+    (hcanonical : CanonicalPrimitiveGeometry D T S C L K base ε)
     (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε)
     (u : HeightPair S) (μ γ M₀ M₁ : ℝ) (hγ : 0 < γ) (hγhi : γ < (3 / 4 : ℝ))
     (hrow : referenceRow D (heightPairField S u) = 0) :
@@ -67,7 +71,7 @@ theorem n07a_exists_referenceGraph_of_current_heightPair
       (∀ m, EqOn v
         (n07aReferencePieceHeight C K (liftSectorParameter S C z)
           (K.inverseChart (liftSectorParameter S C z)) u.2 (heightPairField S u) m)
-        (physicalPieceOpen S K m)) ∧
+        (referencePhysicalPieceOpen S K m)) ∧
       (∀ m, EqOn
         (canonicalHeight S K (C.referenceState, 0) m (fun p => v p - u.2 * S.chiLeft p.1))
         (canonicalHeight S K (liftSectorParameter S C z) m
@@ -75,28 +79,29 @@ theorem n07a_exists_referenceGraph_of_current_heightPair
         (canonicalOpen S K m)) ∧
       ReferenceGraph D γ M₀ M₁ (v, μ) (n07aReferenceCompatibleSource D K v μ, 0) := by
   have hη := (hS.1 (3 / 4 : ℝ)).2.2.2.1 u.1
-  have hηs : ContDiffOn ℝ ∞ (heightPairField S u) (annularOpen D) :=
-    hη.1.add (contDiff_const.mul (hS.2.2.1.1.comp contDiff_fst)).contDiffOn
+  have hηs : ContDiff ℝ ∞ (heightPairField S u) :=
+    (heightMember_contDiff_and_flatJets hT (by norm_num : 0 < (3 / 4 : ℝ)) hη).1.add
+      (contDiff_const.mul (hS.2.2.1.1.comp contDiff_fst))
   have hηπ : Function.Periodic (heightPairField S u) (0, Real.pi) := by
     intro p
     simp only [heightPairField, hη.2.2.1 p, Prod.fst_add, add_zero]
   have hηe : ∀ r θ, heightPairField S u (r, -θ) = heightPairField S u (r, θ) := by
     intro r θ
     simp only [heightPairField, hη.2.1 r θ]
-  obtain ⟨v, hvc, hvπ, hve, hv, hcanonical, hzero, hright⟩ :=
-    n07a_exists_referenceTransport_C1 hD hT hS h01 h04 hrad href hcur htrans
+  obtain ⟨v, hvc, hvπ, hve, hv, hheightCanonical, hzero, hright⟩ :=
+    n07a_exists_referenceTransport_C1 hD hT hS h01 h04 href hcanonical
       z hz u.2 hηs hηπ hηe
   let β : ℝ := (γ + (3 / 4 : ℝ)) / 2
   have hβ : 0 < β := by dsimp only [β]; linarith
   have hβhi : β < (3 / 4 : ℝ) := by dsimp only [β]; linarith
   have hγβ : γ < β := by dsimp only [β]; linarith
   obtain ⟨A₀, A₁, B, hA₀, hA₁, hB, hrem, hsource, hjets⟩ :=
-    n07a_referenceCandidate_physical_bounds hD hT hS h01 h04 href hcur z hz u hvc hv hβ hβhi
+    n07a_referenceCandidate_physical_bounds hD hT hS h01 h04 href hcur hRatio z hz u hvc hv hβ hβhi
   have hrowv : referenceRow D v = 0 :=
     (n07a_referenceTransport_row_of_pieces hD.choose_spec.1.2.1.le h01 h04
       (liftSectorParameter_mem_stateNeighborhood (C := C) hz le_rfl)
       (h01.2.2.1.liftSectorParameter_sector z) u.2 hηπ hvπ hv).trans hrow
-  refine ⟨v, hvc, hv, hcanonical, ?_⟩
+  refine ⟨v, hvc, hv, hheightCanonical, ?_⟩
   apply n07a_referenceGraph_of_piecewise_material_bounds hD hT h04 hborder hS.2.2.1
     hvc (n07a_referenceTransport_piece_smooth hS h01 h04 z hz u hv)
     hvπ hve hzero hright hβ hγβ 0 0 hA₀ hA₁ hB

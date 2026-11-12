@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N07aAngularPhysicalRepresentative
 import ContinuousFlexibility.Analysis.N07aReferenceReturn
+import ContinuousFlexibility.Analysis.N07bCanonicalSourceSymmetry
 
 /-!
 # The actual current-to-reference physical height on each piece
@@ -37,10 +38,11 @@ theorem n07aReferencePieceHeight_eq_actual
     (aL : ℝ) (η : PolarPoint → ℝ) (m : ℕ) :
     EqOn (n07aReferencePieceHeight C K z g aL η m)
       (n07aReferencePieceHeight C K z (K.inverseChart z) aL η m)
-      (physicalPieceOpen S K m) := by
+      (referencePhysicalPieceOpen S K m) := by
   intro p hp
-  have href := h04.2.2.2.2.2.2.2.1 (C.referenceState, 0)
+  have href := h04.1.charts (C.referenceState, 0)
     (n07a_reference_mem_stateNeighborhood h01) h01.2.2.1.stateSector m
+  rw [h04.1.referenceDomain m] at href
   simp only [n07aReferencePieceHeight, ← hg m (href.1 hp)]
 
 theorem n07aReferencePieceHeight_contDiffOn
@@ -52,21 +54,22 @@ theorem n07aReferencePieceHeight_contDiffOn
     (hg : ∀ m, EqOn (K.inverseChart z m) (g m) (canonicalOpen S K m))
     (aL : ℝ) {η : PolarPoint → ℝ} (hη : ContDiffOn ℝ ∞ η (annularOpen D)) (m : ℕ) :
     ContDiffOn ℝ ∞ (n07aReferencePieceHeight C K z g aL η m)
-      (physicalPieceOpen S K m) := by
-  have hc := h04.2.2.2.2.2.2.2.1 z hz hs m
-  have hr := h04.2.2.2.2.2.2.2.1 (C.referenceState, 0)
+      (referencePhysicalPieceOpen S K m) := by
+  have hc := h04.1.charts z hz hs m
+  have hr := h04.1.charts (C.referenceState, 0)
     (n07a_reference_mem_stateNeighborhood h01) h01.2.2.1.stateSector m
+  rw [h04.1.referenceDomain m] at hr
   have hχ : ContDiff ℝ ∞ (fun p : PolarPoint => aL * S.chiLeft p.1) :=
     contDiff_const.mul (hS.2.2.1.1.comp contDiff_fst)
   have hT := hc.2.2.2.2.2.1.comp hr.2.2.2.2.1 hr.1
   have hmaps : MapsTo (K.inverseChart z m ∘ K.chart (C.referenceState, 0) m)
-      (physicalPieceOpen S K m) (physicalPieceOpen S K m) := hc.2.1.comp hr.1
+      (referencePhysicalPieceOpen S K m) (physicalPieceOpen S K z m) := hc.2.1.comp hr.1
   have hcore : MapsTo (K.inverseChart z m ∘ K.chart (C.referenceState, 0) m)
-      (physicalPieceOpen S K m) (annularOpen D) :=
-    fun p hp => ⟨(h04.2.2.2.1 m).2.2 (hmaps hp).1, mem_univ _⟩
+      (referencePhysicalPieceOpen S K m) (annularOpen D) :=
+    fun _ hp => (h04.1.domains z hz hs m).2.2.1 (hmaps hp)
   have hraw : ContDiffOn ℝ ∞
       (n07aReferencePieceHeight C K z (K.inverseChart z) aL η m)
-      (physicalPieceOpen S K m) :=
+      (referencePhysicalPieceOpen S K m) :=
     (hr.2.2.2.2.2.2.1.mul (((hη.sub hχ.contDiffOn).comp hT hcore).div
       (hc.2.2.2.2.2.2.1.comp hT hmaps)
       (fun p hp => (hc.2.2.2.2.2.2.2 _ (hmaps hp)).1.ne'))).add hχ.contDiffOn
@@ -80,23 +83,23 @@ theorem n07aReferencePieceHeight_periodic_on
     (hg : ∀ m, EqOn (K.inverseChart z m) (g m) (canonicalOpen S K m))
     (aL : ℝ) {η : PolarPoint → ℝ} (hη : Function.Periodic η (0, Real.pi))
     (m : ℕ) :
-    ∀ p ∈ physicalPieceOpen S K m,
+    ∀ p ∈ referencePhysicalPieceOpen S K m,
       n07aReferencePieceHeight C K z g aL η m (p + (0, Real.pi)) =
         n07aReferencePieceHeight C K z g aL η m p := by
-  have hc := h04.2.2.2.2.2.2.2.1 z hz hs m
-  have hr := h04.2.2.2.2.2.2.2.1 (C.referenceState, 0)
+  have hc := h04.1.charts z hz hs m
+  have hr := h04.1.charts (C.referenceState, 0)
     (n07a_reference_mem_stateNeighborhood h01) h01.2.2.1.stateSector m
-  have hgp := n07a_strip_inverse_periodic hc.2.1 hc.2.2.1 hc.2.2.2.1
-    (fun p hp => (hc.2.2.2.2.2.2.2 p hp).2.2.1)
+  rw [h04.1.referenceDomain m] at hr
   intro p hp
-  have hpπ : p + (0, Real.pi) ∈ physicalPieceOpen S K m := by
+  have hpπ : p + (0, Real.pi) ∈ referencePhysicalPieceOpen S K m := by
     exact ⟨by simpa only [Prod.fst_add, add_zero] using hp.1, mem_univ _⟩
   rw [n07aReferencePieceHeight_eq_actual h01 h04 hg aL η m hpπ,
     n07aReferencePieceHeight_eq_actual h01 h04 hg aL η m hp]
   have hpr := hr.2.2.2.2.2.2.2 p hp
   have hpc := hc.2.2.2.2.2.2.2 _ (hc.2.1 (hr.1 hp))
+  have hgp := n07b_canonicalInverse_add h04.1 hz hs m (hr.1 hp)
   simp only [n07aReferencePieceHeight, hpr.2.2.1, hpr.2.2.2,
-    hgp _ (hr.1 hp), hpc.2.2.2, hη _, Prod.fst_add, add_zero]
+    hgp, hpc.2.2.2, hη _, Prod.fst_add, add_zero]
 
 /-- The actual transport preserves the original canonical height class,
 including exactly the same left scalar. -/
@@ -106,13 +109,15 @@ theorem n07aReferencePieceHeight_canonical
     {g : ℕ → PolarPoint → PolarPoint}
     (hg : ∀ m, EqOn (K.inverseChart z m) (g m) (canonicalOpen S K m))
     (aL : ℝ) (η : PolarPoint → ℝ) {v : PolarPoint → ℝ} (m : ℕ)
-    (hv : EqOn v (n07aReferencePieceHeight C K z g aL η m) (physicalPieceOpen S K m)) :
+    (hv : EqOn v (n07aReferencePieceHeight C K z g aL η m)
+      (referencePhysicalPieceOpen S K m)) :
     EqOn (canonicalHeight S K (C.referenceState, 0) m
         (fun p => v p - aL * S.chiLeft p.1))
       (canonicalHeight S K z m (fun p => η p - aL * S.chiLeft p.1))
       (canonicalOpen S K m) := by
-  have hr := h04.2.2.2.2.2.2.2.1 (C.referenceState, 0)
+  have hr := h04.1.charts (C.referenceState, 0)
     (n07a_reference_mem_stateNeighborhood h01) h01.2.2.1.stateSector m
+  rw [h04.1.referenceDomain m] at hr
   intro p hp
   have hpoint := hr.2.2.2.2.2.2.2 _ (hr.2.1 hp)
   simp only [canonicalHeight, hv (hr.2.1 hp), n07aReferencePieceHeight,

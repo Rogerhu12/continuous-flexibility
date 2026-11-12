@@ -85,21 +85,22 @@ theorem n07a_referenceRemainder_mixed_decay
     (h04 : N04Properties D T S C L K base loss ε)
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
     (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
     (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε)
     (u : (S.height (3 / 4 : ℝ)).Space)
     {γ : ℝ} (hγ : 0 ≤ γ) (hγhi : γ < (3 / 4 : ℝ)) (a b : ℕ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ m p, p ∈ physicalPieceOpen S K m →
+    ∃ B : ℝ, 0 < B ∧ ∀ m p, p ∈ referencePhysicalPieceOpen S K m →
       |mixedDerivative a b (n07aReferenceRemainderField C K
         (liftSectorParameter S C z) ((S.height (3 / 4 : ℝ)).decode u) m) p| ≤
         B * T.H p.1 ^ γ := by
-  have henv : N07aAngularFixedJetEnvelope T K (physicalPieceOpen S K)
+  have henv : N07aAngularFixedJetEnvelope T K (referencePhysicalPieceOpen S K)
       (fun m => T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ))
       (n07aReferenceRemainderField C K (liftSectorParameter S C z)
         ((S.height (3 / 4 : ℝ)).decode u)) := by
     simpa only [pow_zero, inv_one, mul_one] using
-      n07a_referenceRemainder_fixedJetEnvelope hD hT hS h01 h04 href hcur z hz u 0
+      n07a_referenceRemainder_fixedJetEnvelope hD hT hS h01 h04 href hcur hRatio z hz u 0
   obtain ⟨B, hB, hBb⟩ := henv.physical_height_decay hD hT href
-    (fun m => (h04.2.2.2.1 m).1) (fun m => (h04.2.2.2.1 m).2.2)
+    (fun m => (h04.1.referenceBounds m).1) (fun m => (h04.1.referenceBounds m).2.2)
     hγ (by linarith) hγhi (a + b)
   refine ⟨B, hB, fun m p hp => ?_⟩
   have hs := n07aReferenceRemainderField_contDiffOn hS h01 h04
@@ -117,8 +118,8 @@ theorem n07a_referenceTransport_piece_smooth
     (hv : ∀ m, EqOn v
       (n07aReferencePieceHeight C K (liftSectorParameter S C z)
         (K.inverseChart (liftSectorParameter S C z)) u.2 (heightPairField S u) m)
-      (physicalPieceOpen S K m)) (m : ℕ) :
-    ContDiffOn ℝ ∞ v (physicalPieceOpen S K m) := by
+      (referencePhysicalPieceOpen S K m)) (m : ℕ) :
+    ContDiffOn ℝ ∞ v (referencePhysicalPieceOpen S K m) := by
   have hη : ContDiffOn ℝ ∞ (heightPairField S u) (annularOpen D) :=
     ((hS.1 (3 / 4 : ℝ)).2.2.2.1 u.1).1.add
       (contDiff_const.mul (hS.2.2.1.1.comp contDiff_fst)).contDiffOn
@@ -133,22 +134,23 @@ theorem n07a_referenceTransport_positive_mixed_decay
     (h04 : N04Properties D T S C L K base loss ε)
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
     (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
     (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε)
     (u : HeightPair S) {v : PolarPoint → ℝ}
     (hv : ∀ m, EqOn v
       (n07aReferencePieceHeight C K (liftSectorParameter S C z)
         (K.inverseChart (liftSectorParameter S C z)) u.2 (heightPairField S u) m)
-      (physicalPieceOpen S K m))
+      (referencePhysicalPieceOpen S K m))
     {γ : ℝ} (hγ : 0 ≤ γ) (hγhi : γ < (3 / 4 : ℝ)) (a b : ℕ) (hpos : 0 < a + b) :
-    ∃ B : ℝ, 0 < B ∧ ∀ m p, p ∈ physicalPieceOpen S K m →
+    ∃ B : ℝ, 0 < B ∧ ∀ m p, p ∈ referencePhysicalPieceOpen S K m →
       |mixedDerivative a b v p| ≤ B * T.H p.1 ^ γ := by
   obtain ⟨A, hA, hAb⟩ := n07a_referenceRemainder_mixed_decay hD hT hS h01 h04
-    href hcur z hz u.1 hγ hγhi a b
+    href hcur hRatio z hz u.1 hγ hγhi a b
   obtain ⟨B, hB, hBb⟩ := n07a_cutoff_positive_mixed_decay hT hS γ u.2 a b hpos
   refine ⟨A + B, add_pos_of_pos_of_nonneg hA hB, fun m p hp => ?_⟩
   let R := n07aReferenceRemainderField C K (liftSectorParameter S C z)
     ((S.height (3 / 4 : ℝ)).decode u.1) m
-  have hEq : EqOn v (fun q => R q + u.2 * S.chiLeft q.1) (physicalPieceOpen S K m) := by
+  have hEq : EqOn v (fun q => R q + u.2 * S.chiLeft q.1) (referencePhysicalPieceOpen S K m) := by
     intro q hq
     exact (hv m hq).trans (congrFun (n07aReferencePieceHeight_eq_remainder
       C K (liftSectorParameter S C z) u m) q)
@@ -156,11 +158,11 @@ theorem n07a_referenceTransport_positive_mixed_decay
     (liftSectorParameter_mem_stateNeighborhood (C := C) hz le_rfl)
     (h01.2.2.1.liftSectorParameter_sector z) ((hS.1 (3 / 4 : ℝ)).2.2.2.1 u.1).1 m
   have hχs : ContDiffOn ℝ ∞ (fun q : PolarPoint => u.2 * S.chiLeft q.1)
-      (physicalPieceOpen S K m) :=
+      (referencePhysicalPieceOpen S K m) :=
     (contDiff_const.mul (hS.2.2.1.1.comp contDiff_fst)).contDiffOn
   rw [n07a_mixedDerivative_eqOn (isOpen_Ioo.prod isOpen_univ) hEq a b hp,
     n07a_mixedDerivative_add_on (isOpen_Ioo.prod isOpen_univ) hRs hχs a b hp]
   exact (abs_add_le _ _).trans ((add_le_add (hAb m p hp)
-    (hBb p ⟨(h04.2.2.2.1 m).2.2 hp.1, mem_univ _⟩)).trans_eq (by ring))
+    (hBb p ⟨(h04.1.referenceBounds m).2.2 hp.1, mem_univ _⟩)).trans_eq (by ring))
 
 end ContinuousFlexibility.Analysis

@@ -2,10 +2,11 @@ import ContinuousFlexibility.Analysis.N07aGeometryLengthBounds
 import ContinuousFlexibility.Analysis.N07aAngularPhysicalMeasure
 
 /-!
-# Actual material ratios throughout each physical piece
+# Material ratios throughout each reference physical piece
 
-The ratios are fixed geometric atoms, so their reference zero-jets already
-control them at every physical point, independently of the current state.
+The ratios are fixed geometric atoms, so their reference zero-jets control
+them throughout the fixed reference interval. Comparison at an actual
+current inverse-chart point is established separately from displacement.
 -/
 
 noncomputable section
@@ -22,7 +23,7 @@ theorem n07a_material_piece_ratio_envelope
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
     (hinterval : ∀ m, K.physicalLeft m < K.physicalRight m) :
     ∃ e : ℕ → ℝ, N07aSampleSubpower T K e ∧ (∀ m, 1 ≤ e m) ∧
-      ∀ m p, p ∈ physicalPieceOpen S K m →
+      ∀ m p, p ∈ referencePhysicalPieceOpen S K m →
         T.H p.1 / T.H (T.sample (K.cell m)) ≤ e m ∧
         T.H (T.sample (K.cell m)) / T.H p.1 ≤ e m ∧
         T.M p.1 / T.M (T.sample (K.cell m)) ≤ e m ∧
@@ -62,6 +63,34 @@ theorem n07a_material_piece_ratio_envelope
     T.M (CanonicalGeometry.physicalUnitPoint K m x).1 ≤ e m at h₄
   rw [hpoint] at h₁ h₂ h₃ h₄
   exact ⟨h₁, h₂, h₃, h₄⟩
+
+/-- The reciprocal material length is controlled on each fixed reference
+piece by one sampled subpower envelope. -/
+theorem n07a_reference_materialEllInverse_bound
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (href : CanonicalGeometry.ReferenceJets D T S C L K)
+    (hinterval : ∀ m, K.physicalLeft m < K.physicalRight m) :
+    ∃ e : ℕ → ℝ, N07aSampleSubpower T K e ∧ (∀ m, 0 ≤ e m) ∧
+      ∀ m p, p ∈ referencePhysicalPieceOpen S K m → (T.ell p.1)⁻¹ ≤ e m := by
+  obtain ⟨B, hB, hBb⟩ := href.2 0
+  let e : ℕ → ℝ := fun m => B * T.E0 (T.sample (K.cell m)) ^ B
+  have he : N07aSampleSubpower T K e := N07aSampleSubpower.mul hD hT
+    (N07aSampleSubpower.const hD hT B) (N07aSampleSubpower.e0_rpow hD hT B)
+  have he0 (m : ℕ) : 0 ≤ e m := by
+    have hp := hT.2.1 _
+      (materialSample_mem_radialCore hT hD.choose_spec.2.1 (K.cell m))
+    exact mul_nonneg hB.le (Real.rpow_nonneg hp.2.2.1.le B)
+  refine ⟨e, he, he0, fun m p hp => ?_⟩
+  let x := n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData K) m p
+  have hx : x ∈ CanonicalGeometry.unitStrip :=
+    n07aCanonicalUnitInversePoint_maps (K := n07aPhysicalIntervalData K) (hinterval m) hp
+  have hpoint : CanonicalGeometry.physicalUnitPoint K m x = p :=
+    n07aCanonicalUnitPoint_inverse (K := n07aPhysicalIntervalData K) (hinterval m) p
+  have hb := hBb m .materialEllInverse x hx 0 0 (by omega)
+  rw [spaces_mixedDerivative_zero] at hb
+  change |(T.ell (CanonicalGeometry.physicalUnitPoint K m x).1)⁻¹| ≤ e m at hb
+  rw [hpoint] at hb
+  exact (le_abs_self _).trans hb
 
 /-- One fixed ratio envelope controls the actual height and any chosen
 material weight. The integer power belongs to the complete envelope. -/

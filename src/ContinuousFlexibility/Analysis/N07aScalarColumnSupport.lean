@@ -2,6 +2,8 @@ import ContinuousFlexibility.Analysis.N07aCanonicalScalarColumns
 import ContinuousFlexibility.Analysis.N07aNuSupport
 import ContinuousFlexibility.Analysis.N07aAngularPieceCover
 import ContinuousFlexibility.Analysis.N07aScalarColumnSymmetry
+import ContinuousFlexibility.Analysis.N07aActualPieceCover
+import ContinuousFlexibility.Analysis.N07aScalarSolution
 
 /-!
 # A fixed finite set of actual pieces for the scalar columns
@@ -90,9 +92,9 @@ theorem n07a_canonicalScalarColumn_even
     ∀ p ∈ canonicalOpen S K m,
       n07aScalarColumn D S C L K z m i (p.1, -p.2) = n07aScalarColumn D S C L K z m i p := by
   intro p hp
-  have hx := (h04.2.2.2.2.2.2.2.1 z hz hs m).2.1 hp
-  have hInv := h04.2.2.2.2.2.2.2.2.2.2.1 z hz hs m p hp
-  have hreflect := h04.2.2.2.2.2.2.2.2.2.1 z hz hs m _ hx
+  have hx := (h04.1.charts z hz hs m).2.1 hp
+  have hInv := h04.1.inverseReflection z hz hs m p hp
+  have hreflect := h04.1.reflection z hz hs m _ hx
   rw [n07aScalarColumn_eq_canonicalSource]
   simp only [canonicalSource, hInv, hreflect.2.1, hreflect.2.2,
     n07a_physicalScalarColumn_even hS h03 z hz hs i]
@@ -117,25 +119,62 @@ theorem n07a_physicalScalarColumns_uniform_support
   · exact n07a_nuColumnField_eq_zero_outside hS hT h01 z hr₁
   · exact haux r hr₂ θ
 
-theorem n07a_canonicalScalarColumns_finite_support
+theorem n07a_referenceCanonicalScalarColumns_finite_support
     (hD : IsAccumulatingProfile D) (hS : IsPhysicalSpaces D T S)
     (hT : IsMaterialData D T) (h01 : N01Properties D T S C base loss ε)
     (h04 : N04Properties D T S C L K base loss ε)
     (href : CanonicalGeometry.ReferenceJets D T S C L K) :
+    ∃ I : Finset ℕ, ∀ m, m ∉ I → ∀ i p, p ∈ canonicalOpen S K m →
+        n07aScalarColumn D S C L K (C.referenceState, 0) m i p = 0 := by
+  classical
+  obtain ⟨J, hJ, hJcore, hzero⟩ := n07a_physicalScalarColumns_uniform_support
+    (L := L) hS hT h01
+  let A : Set ℕ := {m | (J ∩ Ioo (K.physicalLeft m) (K.physicalRight m)).Nonempty}
+  have hA : A.Finite := n07a_physicalPieces_finite_inter_compact hD hT h04 href hJ hJcore
+  refine ⟨hA.toFinset, fun m hm i p hp => ?_⟩
+  let z : AnnularState S × ℝ := (C.referenceState, 0)
+  have hz := n07a_reference_mem_stateNeighborhood h01
+  have hs := h01.2.2.1.stateSector
+  have hx : K.inverseChart z m p ∈ referencePhysicalPieceOpen S K m := by
+    rw [← h04.1.referenceDomain m]
+    exact (h04.1.charts z hz hs m).2.1 hp
+  have hnot : (K.inverseChart z m p).1 ∉ J := by
+    intro hj
+    apply hm
+    exact hA.mem_toFinset.mpr ⟨(K.inverseChart z m p).1, hj, hx.1⟩
+  rw [n07aScalarColumn_eq_canonicalSource]
+  change K.height z m (K.inverseChart z m p) *
+    n07aPhysicalScalarColumn D S C L z i (K.inverseChart z m p) /
+      |planeJacobian (K.chart z m) (K.inverseChart z m p)| = 0
+  rw [hzero z i _ hnot, mul_zero, zero_div]
+
+theorem n07a_canonicalScalarColumns_finite_support
+    (hD : IsAccumulatingProfile D) (hS : IsPhysicalSpaces D T S)
+    (hT : IsMaterialData D T) (h01 : N01Properties D T S C base loss ε)
+    (h04 : N04Properties D T S C L K base loss ε)
+    (href : CanonicalGeometry.ReferenceJets D T S C L K)
+    (hRatio : N07aActualMaterialRatios T S C K base ε) :
     ∃ I : Finset ℕ, ∀ z, z ∈ stateNeighborhood S C base ε → stateSector S z.1 →
       ∀ m, m ∉ I → ∀ i p, p ∈ canonicalOpen S K m →
         n07aScalarColumn D S C L K z m i p = 0 := by
   classical
   obtain ⟨J, hJ, hJcore, hzero⟩ := n07a_physicalScalarColumns_uniform_support
     (L := L) hS hT h01
-  let A : Set ℕ := {m | (J ∩ Ioo (K.physicalLeft m) (K.physicalRight m)).Nonempty}
-  have hA : A.Finite := n07a_physicalPieces_finite_inter_compact hD hT h04 href hJ hJcore
+  let A : Set ℕ := {m | ∃ z ∈ sectorNeighborhood S base ε ε,
+    ∃ p ∈ physicalPieceOpen S K (liftSectorParameter S C z) m, p.1 ∈ J}
+  have hA : A.Finite := n07a_actualPhysicalPieces_finite_inter_compact
+    hD hT h04 href hRatio hJ hJcore
   refine ⟨hA.toFinset, fun z hz hs m hm i p hp => ?_⟩
-  have hx := (h04.2.2.2.2.2.2.2.1 z hz hs m).2.1 hp
+  have hx := (h04.1.charts z hz hs m).2.1 hp
   have hnot : (K.inverseChart z m p).1 ∉ J := by
     intro hj
     apply hm
-    exact hA.mem_toFinset.mpr ⟨(K.inverseChart z m p).1, hj, hx.1⟩
+    let ζ := n07aSectorParameterOfState h01.2.2.1 z hs
+    have hζ := n07aSectorParameterOfState_mem h01.2.2.1 hz hs
+    have hlift := lift_n07aSectorParameterOfState h01.2.2.1 z hs
+    apply hA.mem_toFinset.mpr
+    refine ⟨ζ, hζ, K.inverseChart z m p, ?_, hj⟩
+    simpa only [hlift] using hx
   rw [n07aScalarColumn_eq_canonicalSource]
   change K.height z m (K.inverseChart z m p) *
     n07aPhysicalScalarColumn D S C L z i (K.inverseChart z m p) /

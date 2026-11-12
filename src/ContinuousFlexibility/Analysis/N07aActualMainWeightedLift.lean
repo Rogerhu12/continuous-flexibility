@@ -134,11 +134,13 @@ theorem n07a_actualRelativeMain_weighted_band_lift
   have hb := budget.choose_spec
   have hzref := n07a_reference_mem_stateNeighborhood h01
   have hsref := h01.2.2.1.stateSector
-  have hmaps := h04.2.2.2.2.2.2.2.1 (C.referenceState, 0) hzref hsref
+  have hmaps := h04.1.charts (C.referenceState, 0) hzref hsref
   have hmap (m : ℕ) : MapsTo (K.inverseChart (C.referenceState, 0) m)
-      (canonicalOpen S K m) (physicalPieceOpen S K m) := (hmaps m).2.1
+      (canonicalOpen S K m) (referencePhysicalPieceOpen S K m) := by
+    simpa only [h04.1.referenceDomain] using (hmaps m).2.1
   have hsm (m : ℕ) : ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m)
-      (physicalPieceOpen S K m) := (hmaps m).2.2.2.2.1
+      (referencePhysicalPieceOpen S K m) := by
+    simpa only [h04.1.referenceDomain] using (hmaps m).2.2.2.2.1
   refine ⟨d, fun t p => ?_⟩
   let low := hb t b
   let A : ℝ := low.choose

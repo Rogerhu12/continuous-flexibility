@@ -42,7 +42,7 @@ theorem n07a_actual_cubic_difference
     {p : PolarPoint} (hp : p ∈ canonicalOpen S K m) (i : Fin 3) :
     n07aCubicPrincipalField K z m i p - n07aCubicPrincipalField K (C.referenceState, 0) m i p =
       ((p.1 - K.left m) * (K.right m - p.1)) ^ 3 * n07aCubicDividedField K z m i p := by
-  have h := h04.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1 z hz hs m hm p hp
+  have h := h04.2.1.2.2.2.2 z hz hs m hm p hp
   fin_cases i
   · exact h.1
   · exact h.2.1

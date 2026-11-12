@@ -48,8 +48,8 @@ theorem n07a_canonicalOperator_negative_difference
     (hu : ContDiff ℝ ∞ u) {p : PolarPoint} (hp : p ∈ canonicalOpen S K m) :
     canonicalOperator S K L z m u p - canonicalOperator S K L z₀ m u p =
       (K.potential z m p - K.potential z₀ m p) * u p := by
-  have hform := h04.2.2.2.2.2.2.2.2.2.2.2.2.2.1
-  have hnegative := h04.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have hform := h04.2.1.2.2.1
+  have hnegative := h04.2.1.2.2.2.1
   have hopen : IsOpen (canonicalOpen S K m) := isOpen_Ioo.prod isOpen_univ
   have hnear : ∀ᶠ q in 𝓝 p, q ∈ canonicalOpen S K m := hopen.mem_nhds hp
   have hsame :

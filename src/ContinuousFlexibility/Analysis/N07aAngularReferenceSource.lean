@@ -39,7 +39,7 @@ def n07aReferenceDifferential (D : ReferenceData) (v : PolarPoint → ℝ)
     deriv D.w p.1 / p.1 * angularPartial (angularPartial v) p
 
 def n07aReferencePieceInterior {S : PhysicalSpacesData} (K : CanonicalData S) : Set PolarPoint :=
-  ⋃ m, physicalPieceOpen S K m
+  ⋃ m, referencePhysicalPieceOpen S K m
 
 def n07aReferenceInteriorDifferential {S : PhysicalSpacesData} (D : ReferenceData)
     (K : CanonicalData S) (v : PolarPoint → ℝ) : PolarPoint → ℝ :=
@@ -108,7 +108,7 @@ theorem n07aReferenceInteriorDifferential_measurable {D : ReferenceData}
 
 theorem n07aReferenceInteriorDifferential_on_piece {D : ReferenceData}
     {S : PhysicalSpacesData} {K : CanonicalData S} (v : PolarPoint → ℝ)
-    {m : ℕ} {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    {m : ℕ} {p : PolarPoint} (hp : p ∈ referencePhysicalPieceOpen S K m) :
     n07aReferenceInteriorDifferential D K v p = n07aReferenceDifferential D v p :=
   indicator_of_mem (mem_iUnion.mpr ⟨m, hp⟩) _
 
@@ -148,7 +148,7 @@ theorem n07aReferenceInteriorDifferential_periodic {S : PhysicalSpacesData}
     Function.Periodic (n07aReferenceInteriorDifferential D K v) (0, Real.pi) := by
   intro p
   have hmem : p + (0, Real.pi) ∈ n07aReferencePieceInterior K ↔ p ∈ n07aReferencePieceInterior K := by
-    simp only [n07aReferencePieceInterior, mem_iUnion, physicalPieceOpen,
+    simp only [n07aReferencePieceInterior, mem_iUnion, referencePhysicalPieceOpen,
       mem_prod, Prod.fst_add, add_zero, mem_univ, and_true]
   by_cases hp : p ∈ n07aReferencePieceInterior K
   · simp only [n07aReferenceInteriorDifferential, indicator_of_mem hp,
@@ -163,7 +163,7 @@ theorem n07aReferenceInteriorDifferential_even {S : PhysicalSpacesData}
       n07aReferenceInteriorDifferential D K v (r, θ) := by
   intro r θ
   have hmem : (r, -θ) ∈ n07aReferencePieceInterior K ↔ (r, θ) ∈ n07aReferencePieceInterior K := by
-    simp only [n07aReferencePieceInterior, mem_iUnion, physicalPieceOpen, mem_prod, mem_univ, and_true]
+    simp only [n07aReferencePieceInterior, mem_iUnion, referencePhysicalPieceOpen, mem_prod, mem_univ, and_true]
   by_cases hp : (r, θ) ∈ n07aReferencePieceInterior K
   · simp only [n07aReferenceInteriorDifferential, indicator_of_mem hp,
       indicator_of_mem (hmem.mpr hp), n07aReferenceDifferential_even D hv r θ]

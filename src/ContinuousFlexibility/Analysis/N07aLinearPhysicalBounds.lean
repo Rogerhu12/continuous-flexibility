@@ -1,6 +1,6 @@
 import ContinuousFlexibility.Analysis.N07aSampleMaterialAbsorption
-import ContinuousFlexibility.Analysis.N07aPhysicalPieceBound
-import ContinuousFlexibility.Analysis.N07aSampleLinearJets
+import ContinuousFlexibility.Analysis.N07aActualPieceCover
+import ContinuousFlexibility.Analysis.N07aStateSampleLinearJets
 import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveBounds
 import ContinuousFlexibility.Analysis.N07aMaterialJetFunctional
 
@@ -30,9 +30,13 @@ variable {E F : Type*} [AddCommGroup E] [Module ℝ E]
 theorem n07a_sampleLinearJets_weighted_physical_bound
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (h04 : N04Properties D T S C L K base geometryLoss ε)
-    (href : CanonicalGeometry.ReferenceJets D T S C L K)
+    (hrefState : referenceStateConditions D S C)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
+    (ζ : E → CanonicalGeometry.Parameter S)
+    (hζ : MapsTo ζ U (sectorNeighborhood S base ε ε))
     (hγ : 0 ≤ γ) (hγ1 : γ ≤ 1) (hp : Monotone p) (hq : Monotone q)
-    (hf : N07aSampleLinearJetBounds T K p q U (physicalPieceOpen S K)
+    (hf : N07aStateSampleLinearJetBounds T K p q U
+      (fun z m => physicalPieceOpen S K (liftSectorParameter S C (ζ z)) m)
       (fun c m => T.H (T.sample (K.cell m)) ^ γ * (T.M (T.sample (K.cell m)) ^ c)⁻¹)
       low loss (fun z u _ => f z u))
     (hfs : ∀ z ∈ U, ∀ u, ContDiffOn ℝ ∞ (f z u) (annularOpen D))
@@ -50,17 +54,19 @@ theorem n07a_sampleLinearJets_weighted_physical_bound
   have he₀0 (m : ℕ) : 0 ≤ e₀ m := Finset.sum_nonneg (fun j _ => he0 j m)
   have hfull := N07aSampleSubpower.mul hD hT
     (N07aSampleSubpower.const hD hT K₀) he₀
-  obtain ⟨A, hA, hAb⟩ := n07a_sampleMaterial_absorb hD hT h04 href hγ hγ1
+  obtain ⟨A, hA, hAb⟩ := n07a_sampleMaterial_absorb_actual hD hT hrefState h04.1 hRatio hγ hγ1
     hfull (fun m => mul_nonneg hK₀ (he₀0 m)) c
   refine ⟨A, hA, fun z hz u x => ?_⟩
   let B := q (a + b + c + (loss + 2)) u +
     (1 + p (a + b + c + (loss + 2)) z) * q low u
   have hB : 0 ≤ B := add_nonneg (apply_nonneg _ _)
     (mul_nonneg (add_nonneg zero_le_one (apply_nonneg _ _)) (apply_nonneg _ _))
-  have hpiece (m : ℕ) (y : PolarPoint) (hy : y ∈ physicalPieceOpen S K m) :
+  have hpiece (m : ℕ) (y : PolarPoint) (hy : y ∈ physicalPieceOpen S K (liftSectorParameter S C (ζ z)) m) :
       |weightedPhysicalJet T γ a b c (f z u) (T.rho y.1, y.2)| ≤
         A * (T.M y.1)⁻¹ * B := by
-    have hyD := (h04.2.2.2.1 m).2.2 hy.1
+    have hyD := ((h04.1.domains _
+      (liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) (hζ hz) le_rfl)
+      (hrefState.liftSectorParameter_sector (ζ z)) m).2.2.1 hy).1
     have hsample := hT.2.1 _
       (materialSample_mem_radialCore hT hD.choose_spec.2.1 (K.cell m))
     let w := T.H (T.sample (K.cell m)) ^ γ *
@@ -97,7 +103,7 @@ theorem n07a_sampleLinearJets_weighted_physical_bound
     calc
       _ ≤ K₀ * T.M y.1 ^ c * T.H y.1 ^ (-γ) * (e₀ m * w * B) := hmat
       _ = ((K₀ * e₀ m) * T.M y.1 ^ c * T.H y.1 ^ (-γ) * w) * B := by ring
-      _ ≤ (A * (T.M y.1)⁻¹) * B := mul_le_mul_of_nonneg_right (hAb m y hy) hB
+      _ ≤ (A * (T.M y.1)⁻¹) * B := mul_le_mul_of_nonneg_right (hAb (ζ z) (hζ hz) m y hy) hB
   have hρ : ContinuousOn (fun y : PolarPoint => (T.rho y.1, y.2)) (annularOpen D) :=
     (((hT.1 T.rho (by simp)).continuousOn.comp continuous_fst.continuousOn
       (fun _ hy => hy.1)).prodMk continuous_snd.continuousOn)
@@ -109,7 +115,9 @@ theorem n07a_sampleLinearJets_weighted_physical_bound
     (((hT.1 T.M (by simp)).continuousOn.comp continuous_fst.continuousOn
       (fun _ hy => hy.1)).inv₀
       (fun y hy => (zero_lt_one.trans_le (hT.2.1 y.1 hy.1).2.2.2).ne'))
-  have hall := n07a_physicalPiece_bound h04 hleft
+  have hall := n07a_actualPhysicalPiece_bound h04.1
+    (liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) (hζ hz) le_rfl)
+    (hrefState.liftSectorParameter_sector (ζ z)) hleft
     ((continuousOn_const.mul hM).mul continuousOn_const) hpiece
     (T.radius x.1, x.2) ⟨(hT.2.2.2.2.2.2.2.1 x.1).1, mem_univ _⟩
   simpa only [Pi.mul_apply, Prod.fst, Prod.snd,

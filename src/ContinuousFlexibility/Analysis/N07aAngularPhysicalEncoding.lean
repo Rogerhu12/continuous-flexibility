@@ -25,7 +25,7 @@ theorem n07a_inverseChart_aemeasurable
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1) (m : ℕ) :
     AEMeasurable (K.inverseChart z m) (canonicalMeasure S K m) := by
-  have hg := (h04.2.2.2.2.2.2.2.1 z hz hs m).2.2.2.2.2.1
+  have hg := (h04.1.charts z hz hs m).2.2.2.2.2.1
   exact (hg.continuousOn.mono (fun p hp => ⟨hp.1, mem_univ _⟩)).aemeasurable
     (measurableSet_Ioo.prod measurableSet_Ioc)
 
@@ -33,9 +33,9 @@ theorem n07a_inverseChart_map
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1) (m : ℕ) :
     Measure.map (K.inverseChart z m) (canonicalMeasure S K m) =
-      (canonicalMeasure S (n07aPhysicalIntervalData K) m).withDensity
+      (n07aPhysicalMeasure S K z m).withDensity
         (n07aChartDensity K z m) := by
-  let μ := (canonicalMeasure S (n07aPhysicalIntervalData K) m).withDensity
+  let μ := (n07aPhysicalMeasure S K z m).withDensity
     (n07aChartDensity K z m)
   have hc : AEMeasurable (K.chart z m) μ :=
     (n07a_chart_aemeasurable h04 hz hs m).mono_ac
@@ -44,13 +44,12 @@ theorem n07a_inverseChart_map
     rw [n07a_chart_map_withDensity h04 hz hs m]
     exact n07a_inverseChart_aemeasurable h04 hz hs m
   have he : (K.inverseChart z m ∘ K.chart z m) =ᵐ[μ] id := by
-    have hmem := (ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc) :
-      ∀ᵐ p ∂canonicalMeasure S (n07aPhysicalIntervalData K) m,
-        p ∈ Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)
+    have hmem := n07aPhysicalMeasure_ae h04 hz hs m
     have hw := hmem.filter_mono (withDensity_absolutelyContinuous _
       (n07aChartDensity K z m)).ae_le
     filter_upwards [hw] with p hp
-    exact (n07a_physicalHalfGeometry h04 hz hs m).2.2.2 p hp |>.1
+    exact (h04.1.charts z hz hs m).2.2.1 p hp
+
   calc
     _ = Measure.map (K.inverseChart z m) (Measure.map (K.chart z m) μ) := by
       rw [n07a_chart_map_withDensity h04 hz hs m]
@@ -61,7 +60,7 @@ theorem n07a_inverseChart_ae_pullback {E : Type*}
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (m : ℕ) {f g : PolarPoint → E}
-    (he : f =ᵐ[canonicalMeasure S (n07aPhysicalIntervalData K) m] g) :
+    (he : f =ᵐ[n07aPhysicalMeasure S K z m] g) :
     (fun p => f (K.inverseChart z m p)) =ᵐ[canonicalMeasure S K m]
       fun p => g (K.inverseChart z m p) := by
   have hw := he.filter_mono (withDensity_absolutelyContinuous _
@@ -73,7 +72,7 @@ theorem n07a_canonicalHeight_congr_physical_ae
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (m : ℕ) {f g : PolarPoint → ℝ}
-    (he : f =ᵐ[canonicalMeasure S (n07aPhysicalIntervalData K) m] g) :
+    (he : f =ᵐ[n07aPhysicalMeasure S K z m] g) :
     canonicalHeight S K z m f =ᵐ[canonicalMeasure S K m] canonicalHeight S K z m g := by
   filter_upwards [n07a_inverseChart_ae_pullback h04 hz hs m he] with p hp
   exact congrArg (· / K.height z m (K.inverseChart z m p)) hp
@@ -89,12 +88,9 @@ theorem n07a_canonicalRepresentation_replace_height
     HasCanonicalRepresentation D S C K z U F v f := by
   refine ⟨?_, hrep.2⟩
   intro m
-  have hsub := (h04.2.2.2.1 m).2.2
-  have he' := he.filter_mono (ae_mono (n07a_canonicalMeasure_mono
-    (S := S) (K := n07aRadialIntervalData K D.a D.b)
-    (J := n07aPhysicalIntervalData K) (m := 0) (n := m) hsub))
+  have he' := he.filter_mono (ae_mono (n07aPhysicalMeasure_le_annulus h04 hz hs m))
   have hrem : (fun p => v p - U.2.1 * S.chiLeft p.1) =ᵐ[
-      canonicalMeasure S (n07aPhysicalIntervalData K) m]
+      n07aPhysicalMeasure S K z m]
       fun p => η p - U.2.1 * S.chiLeft p.1 :=
     he'.mono fun p hp => congrArg (· - U.2.1 * S.chiLeft p.1) hp
   exact (hrep.1 m).trans (n07a_canonicalHeight_congr_physical_ae h04 hz hs m hrem).symm

@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N06Neighborhood
 import ContinuousFlexibility.Analysis.N07aCanonicalSourceRegularity
 import ContinuousFlexibility.Analysis.N07aLinearJetVolumeBounds
 import ContinuousFlexibility.Analysis.N07aParameterNeighborhood
@@ -43,13 +44,14 @@ local instance n07aCanonicalSourceVolumeLevelSpace (γ t : ℝ) (s : ℕ) :
     NormedSpace ℝ (V.level γ t s) :=
   Submodule.normedSpace _
 
-theorem n07a_canonicalSource_height_volume
+private theorem n07a_canonicalSource_height_volume_of_ratios
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (hγ : 0 ≤ γ) (hγ1 : γ ≤ 1) (hε : 0 < ε)
     (hrefState : referenceStateConditions D S C)
     (h04 : N04Properties D T S C L K base loss ε)
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
     (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
     (hV : IsVolumeModel T S K V) :
     ∃ base' : ℕ, base ≤ base' ∧ ∃ ε' : ℝ, 0 < ε' ∧ ε' ≤ ε ∧
       ∃ low outLoss : ℕ, ∀ t s : ℕ, ∃ C₀ : ℝ, 0 < C₀ ∧
@@ -62,7 +64,7 @@ theorem n07a_canonicalSource_height_volume
               (1 + CanonicalGeometry.parameterGrading S (t + s + outLoss) z) *
                 (S.height γ).grading low u) := by
   have hj := n07a_canonicalSource_height_sampleJets hD hT hS hγ hγ1
-    hrefState h04 href hcur
+    hrefState h04 href hcur hRatio
   let low : ℕ := hj.choose
   let d : ℕ := hj.choose_spec.choose
   have hjb := hj.choose_spec.choose_spec
@@ -86,5 +88,31 @@ theorem n07a_canonicalSource_height_volume
     exact n07a_canonicalSource_even_on h04
       (liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) (hU hz) le_rfl)
       (hrefState.liftSectorParameter_sector z) ((hS.1 γ).2.2.2.1 u).2.1 m
+
+theorem n07a_canonicalSource_height_volume
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (hS : IsPhysicalSpaces D T S) (hγ : 0 ≤ γ) (hγ1 : γ ≤ 1) (hε : 0 < ε)
+    (hrefState : referenceStateConditions D S C)
+    (h04 : N04Properties D T S C L K base loss ε)
+    (href : CanonicalGeometry.ReferenceJets D T S C L K)
+    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
+    (hV : IsVolumeModel T S K V) :
+    ∃ base' : ℕ, base ≤ base' ∧ ∃ ε' : ℝ, 0 < ε' ∧ ε' ≤ ε ∧
+      ∃ low outLoss : ℕ, ∀ t s : ℕ, ∃ C₀ : ℝ, 0 < C₀ ∧
+        ∀ z ∈ sectorNeighborhood S base' ε' ε', ∀ u : (S.height γ).Space,
+          ∃ Fts : V.level γ (t : ℝ) s,
+            (∀ m, (V.forget γ (t : ℝ) s Fts m : PolarPoint → ℝ)
+              =ᵐ[canonicalMeasure S K m]
+                canonicalSource S K (liftSectorParameter S C z) m ((S.height γ).decode u)) ∧
+            ‖Fts‖ ≤ C₀ * ((S.height γ).grading (t + s + outLoss) u +
+              (1 + CanonicalGeometry.parameterGrading S (t + s + outLoss) z) *
+                (S.height γ).grading low u) := by
+  obtain ⟨base₀, hb₀, ε₀, he₀, he₀ε, hRatio⟩ :=
+    n07a_actualMaterialRatios_neighborhood hD hT hε hrefState h04.1 href hcur
+  have h04₀ := n06_N04Properties_mono h04 hb₀ he₀ε
+  have hcur₀ := n07a_currentJets_restrict hD hT hcur hb₀ he₀ε
+  obtain ⟨base₁, hb₁, ε₁, he₁, he₁ε, result⟩ :=
+    n07a_canonicalSource_height_volume_of_ratios hD hT hS hγ hγ1 he₀ hrefState h04₀ href hcur₀ hRatio hV
+  exact ⟨base₁, hb₀.trans hb₁, ε₁, he₁, he₁ε.trans he₀ε, result⟩
 
 end ContinuousFlexibility.Analysis

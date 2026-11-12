@@ -40,8 +40,8 @@ theorem n07a_referenceInverse_angularBand
     (h05 : N05Properties D T S C K V b B) (hK : ∀ m, K.left m < K.right m)
     (hR : ReferenceRadial S C K) (hAux : AuxiliaryColumnGauge S K)
     (hmap : ∀ m, MapsTo (K.inverseChart (C.referenceState, 0) m)
-      (canonicalOpen S K m) (physicalPieceOpen S K m))
-    (hsm : ∀ m, ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m) (physicalPieceOpen S K m))
+      (canonicalOpen S K m) (referencePhysicalPieceOpen S K m))
+    (hsm : ∀ m, ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m) (referencePhysicalPieceOpen S K m))
     (F : V.level (3 / 4 : ℝ) 0 b) (n : ℕ) :
     (B.inverse (n07aAngularLevelBand h05.2.1 (3 / 4 : ℝ) 0 hK b n F)).val.1 =
       n07aAngularUnknownBand hK n (B.inverse F).val.1 := by
@@ -70,8 +70,8 @@ theorem n07a_referenceGlobalInverse_angularBand
     (h05 : N05Properties D T S C K V b B) (hK : ∀ m, K.left m < K.right m)
     (hR : ReferenceRadial S C K) (hAux : AuxiliaryColumnGauge S K)
     (hmap : ∀ m, MapsTo (K.inverseChart (C.referenceState, 0) m)
-      (canonicalOpen S K m) (physicalPieceOpen S K m))
-    (hsm : ∀ m, ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m) (physicalPieceOpen S K m))
+      (canonicalOpen S K m) (referencePhysicalPieceOpen S K m))
+    (hsm : ∀ m, ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m) (referencePhysicalPieceOpen S K m))
     (F : V.level (3 / 4 : ℝ) 0 b) (n : ℕ) :
     B.globalInverse (V.forget (3 / 4 : ℝ) 0 b
       (n07aAngularLevelBand h05.2.1 (3 / 4 : ℝ) 0 hK b n F)) =

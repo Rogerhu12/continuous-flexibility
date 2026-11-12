@@ -23,8 +23,8 @@ theorem n07a_pulledTest_source_sub
     (hab : D.a ≤ D.b) (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {W f g : PolarPoint → ℝ} (hW : CanonicalTest S K m W)
-    (hfp : ∀ p ∈ physicalPieceOpen S K m, f (p + (0, Real.pi)) = f p)
-    (hgp : ∀ p ∈ physicalPieceOpen S K m, g (p + (0, Real.pi)) = g p)
+    (hfp : ∀ p ∈ physicalPieceOpen S K z m, f (p + (0, Real.pi)) = f p)
+    (hgp : ∀ p ∈ physicalPieceOpen S K z m, g (p + (0, Real.pi)) = g p)
     (hif : Integrable (fun p => canonicalSource S K z m f p * W p) (canonicalMeasure S K m))
     (hig : Integrable (fun p => canonicalSource S K z m g p * W p) (canonicalMeasure S K m))
     (c : ℝ) :
@@ -44,7 +44,7 @@ theorem n07a_pulledTest_source_sub
       (fun q => f q - c * g q) p * W p) (canonicalMeasure S K m) := by
     rw [he]
     exact hif.sub (hig.const_mul c)
-  have hp : ∀ p ∈ physicalPieceOpen S K m,
+  have hp : ∀ p ∈ physicalPieceOpen S K z m,
       (f (p + (0, Real.pi)) - c * g (p + (0, Real.pi))) = f p - c * g p := by
     intro p hp
     rw [hfp p hp, hgp p hp]

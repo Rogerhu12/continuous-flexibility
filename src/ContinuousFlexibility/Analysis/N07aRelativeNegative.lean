@@ -30,7 +30,7 @@ theorem n07a_canonical_negative_divergence_eq
     (m : ℕ) (hm : K.positive m = false) (u : PolarPoint → ℝ) :
     EqOn (divergenceOperator (K.coefficients z m) u)
       (divergenceOperator (K.coefficients z₀ m) u) (canonicalOpen S K m) := by
-  have hn := h04.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have hn := h04.2.1.2.2.2.1
   intro p hp
   have hnear := (isOpen_Ioo.prod isOpen_univ).mem_nhds hp
   apply n07a_divergenceOperator_eq_of_germs

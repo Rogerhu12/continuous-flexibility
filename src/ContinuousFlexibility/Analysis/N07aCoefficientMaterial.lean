@@ -204,7 +204,7 @@ private theorem n07a_canonicalCoefficientJets_bound
     {base loss : ℕ} {ε : ℝ}
     (h04 : N04Properties D T S C L K base loss ε) (s : ℕ) :
     ∃ A : ℝ, 0 < A ∧ n07aCanonicalJetsBound T S C K base loss ε s A :=
-  h04.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1 s
+  h04.2.2.1 s
 
 /-- The actual canonical potential and divided-difference jets cost one
 arbitrarily prescribed positive material power after collecting the full

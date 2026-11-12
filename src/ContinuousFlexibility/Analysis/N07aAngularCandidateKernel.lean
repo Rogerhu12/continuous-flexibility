@@ -34,7 +34,8 @@ theorem n07a_heightPair_homogeneous_eq_zero
     (hrad : CanonicalGeometry.ReferenceRadial S C K)
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
     (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
-    (htrans : CanonicalGeometry.TransmissionGeometry D S C K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
+    (hcanonical : CanonicalPrimitiveGeometry D T S C L K base ε)
     (h05 : N05Properties D T S C K V b B)
     (h06 : N06Properties D S C K L V b B P base ε)
     (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε)
@@ -45,7 +46,7 @@ theorem n07a_heightPair_homogeneous_eq_zero
         (heightPairField S u) p + μ * nuColumnField D S C (liftSectorParameter S C z) p = 0) :
     (u, μ) = 0 := by
   have domain := n07a_currentHeightPair_enters_referenceDomain
-    hD hT hS h01 h02 h03 h04 hborder hrad href hcur htrans h05 z hz u μ hrow
+    hD hT hS h01 h02 h03 h04 hborder hrad href hcur hRatio hcanonical h05 z hz u μ hrow
   let d : B.Space := domain.choose
   have haL : d.val.1.2.1 = u.2 := domain.choose_spec.1
   have hμ : d.val.1.2.2.1 = μ := domain.choose_spec.2.1

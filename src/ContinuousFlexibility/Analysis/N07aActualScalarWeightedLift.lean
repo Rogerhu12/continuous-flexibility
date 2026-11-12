@@ -197,6 +197,7 @@ theorem n07a_actualRelativeScalar_weighted_band_lift
     (h03 : N03Properties D T S C R L base ε)
     (h04 : N04Properties D T S C L K base loss ε)
     (href : ReferenceJets D T S C L K) (hcur : CurrentJets D T S C L K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
     (hV : IsVolumeModel T S K V) (hI : ∀ m, K.left m < K.right m) :
     ∃ d : ℕ, ∀ t : ℝ, ∀ s : ℕ, ∃ A : ℝ, 0 ≤ A ∧
       ∀ z (hz : z ∈ sectorNeighborhood S base ε ε),
@@ -209,7 +210,7 @@ theorem n07a_actualRelativeScalar_weighted_band_lift
         ‖W‖ ≤ n07aAngularTail ((j : ℤ) - l) *
           (A * (1 + parameterGrading S (s + d) z) * ‖F‖) := by
   classical
-  let columns := n07a_relativeScalarColumns_volume hD hS hT h01 h03 h04 href hcur hV
+  let columns := n07a_relativeScalarColumns_volume hD hS hT h01 h03 h04 href hcur hRatio hV
   let d : ℕ := columns.choose
   have hb := columns.choose_spec
   refine ⟨3 + d, fun t s => ?_⟩

@@ -28,7 +28,7 @@ theorem n07a_referenceGraph_of_piecewise_material_bounds
     (h04 : N04Properties D T S C L K base loss ε)
     (hborder : RadialTrueBorder D) (hχ : CutoffConditions D S.chiLeft)
     {v : PolarPoint → ℝ} (hv : ContDiffOn ℝ 1 v (annularOpen D))
-    (hpiece : ∀ m, ContDiffOn ℝ ∞ v (physicalPieceOpen S K m))
+    (hpiece : ∀ m, ContDiffOn ℝ ∞ v (referencePhysicalPieceOpen S K m))
     (hvp : Function.Periodic v (0, Real.pi)) (hve : ∀ r θ, v (r, -θ) = v (r, θ))
     (hzero : ∀ p, p ∉ annularOpen D → v p = 0)
     (hright : ∀ p ∈ annularOpen D, ∃ u : PolarPoint → ℝ,
@@ -39,7 +39,7 @@ theorem n07a_referenceGraph_of_piecewise_material_bounds
       |v p - aL * S.chiLeft p.1| ≤ A₁ * T.H p.1 ^ β * T.M p.1 ^ q₁)
     (hsource : ∀ p ∈ annularOpen D,
       |n07aReferenceInteriorDifferential D K v p| ≤ A₀ * T.H p.1 ^ β * T.M p.1 ^ q₀)
-    (hjets : ∀ m p, p ∈ physicalPieceOpen S K m →
+    (hjets : ∀ m p, p ∈ referencePhysicalPieceOpen S K m →
       |radialPartial v p| ≤ B ∧ |radialPartial (radialPartial v) p| ≤ B ∧
         |angularPartial (angularPartial v) p| ≤ B)
     (hrow : referenceRow D v = 0) :

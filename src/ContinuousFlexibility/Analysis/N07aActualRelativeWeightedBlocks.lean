@@ -111,6 +111,7 @@ theorem n07a_actualRelative_weighted_band_lift
     (h03 : N03Properties D T S C R L base ε)
     (h04 : N04Properties D T S C L K base loss ε)
     (href : ReferenceJets D T S C L K) (hcur : CurrentJets D T S C L K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
     (hprincipal : ReferencePrincipal T S C K)
     (hR : ReferenceRadial S C K) (hAux : AuxiliaryColumnGauge S K)
     (h05 : N05Properties D T S C K V b B)
@@ -136,7 +137,7 @@ theorem n07a_actualRelative_weighted_band_lift
   let d₀ : ℕ := main.choose
   have hmain := main.choose_spec
   let scalar := n07a_actualRelativeScalar_weighted_band_lift (B := B) hD hS hT
-    h01 h03 h04 href hcur h05.2.1 hI
+    h01 h03 h04 href hcur hRatio h05.2.1 hI
   let d₁ : ℕ := scalar.choose
   have hscalar := scalar.choose_spec
   have hmono : Monotone (parameterGrading S) := n07aParameterGrading_monotone S
@@ -145,11 +146,13 @@ theorem n07a_actualRelative_weighted_band_lift
   have h₁ : d₁ ≤ d := le_max_right _ _
   have hzref := n07a_reference_mem_stateNeighborhood h01
   have hsref := h01.2.2.1.stateSector
-  have hmaps := h04.2.2.2.2.2.2.2.1 (C.referenceState, 0) hzref hsref
+  have hmaps := h04.1.charts (C.referenceState, 0) hzref hsref
   have hmap (m : ℕ) : MapsTo (K.inverseChart (C.referenceState, 0) m)
-      (canonicalOpen S K m) (physicalPieceOpen S K m) := (hmaps m).2.1
+      (canonicalOpen S K m) (referencePhysicalPieceOpen S K m) := by
+    simpa only [h04.1.referenceDomain] using (hmaps m).2.1
   have hsm (m : ℕ) : ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m)
-      (physicalPieceOpen S K m) := (hmaps m).2.2.2.2.1
+      (referencePhysicalPieceOpen S K m) := by
+    simpa only [h04.1.referenceDomain] using (hmaps m).2.2.2.2.1
   refine ⟨d, fun t p => ?_⟩
   let A : ℝ := (hmain t p).choose
   let C₁ : ℝ := (hmain t p).choose_spec.choose

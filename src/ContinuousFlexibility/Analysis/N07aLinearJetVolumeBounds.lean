@@ -87,7 +87,7 @@ theorem n07a_sampleLinearJet_volume_bound
   have hjet (m : ℕ) (j : Fin (s + 1)) :
       ‖((χ m).jet 0 j.val).toLp‖ ≤
         Real.sqrt (Real.pi * (K.right m - K.left m)) * (e j m * w (t + 2) m * B) := by
-    apply ((χ m).jet 0 j.val).toLp_norm_le (h04.2.2.2.1 m).2.1
+    apply ((χ m).jet 0 j.val).toLp_norm_le (h04.1.referenceBounds m).2.1
       (mul_nonneg (mul_nonneg (he0 j m) (hw _ m)) hB)
     apply (n07a_canonicalOpen_ae (S := S) (K := K) (m := m)).mono
     intro y hy

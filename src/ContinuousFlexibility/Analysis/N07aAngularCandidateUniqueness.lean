@@ -45,7 +45,8 @@ theorem n07a_scalarSolution_unique
     (hrad : CanonicalGeometry.ReferenceRadial S C K)
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
     (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
-    (htrans : CanonicalGeometry.TransmissionGeometry D S C K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
+    (hcanonical : CanonicalPrimitiveGeometry D T S C L K base ε)
     (h05 : N05Properties D T S C K V b B)
     (h06 : N06Properties D S C K L V b B P base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
@@ -68,7 +69,7 @@ theorem n07a_scalarSolution_unique
     intro p hp
     simpa only [hζeq, Submodule.coe_zero, map_zero, Pi.zero_apply] using hzero.2 p hp
   have hkernel := n07a_heightPair_homogeneous_eq_zero
-    hD hT hS h01 h02 h03 h04 hborder hrad href hcur htrans h05 h06
+    hD hT hS h01 h02 h03 h04 hborder hrad href hcur hRatio hcanonical h05 h06
       ζ hζ (u - v).1 (u - v).2 hzero.1 heq
   exact sub_eq_zero.mp hkernel
 

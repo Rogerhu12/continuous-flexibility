@@ -28,9 +28,13 @@ variable {E F : Type*} [AddCommGroup E] [Module ℝ E]
 theorem n07a_sampleLinearJets_weighted_memLp_bound
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (h04 : N04Properties D T S C L K base geometryLoss ε)
-    (href : CanonicalGeometry.ReferenceJets D T S C L K)
+    (hrefState : referenceStateConditions D S C)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
+    (ζ : E → CanonicalGeometry.Parameter S)
+    (hζ : MapsTo ζ U (sectorNeighborhood S base ε ε))
     (hγ : 0 ≤ γ) (hγ1 : γ ≤ 1) (hp : Monotone p) (hq : Monotone q)
-    (hf : N07aSampleLinearJetBounds T K p q U (physicalPieceOpen S K)
+    (hf : N07aStateSampleLinearJetBounds T K p q U
+      (fun z m => physicalPieceOpen S K (liftSectorParameter S C (ζ z)) m)
       (fun c m => T.H (T.sample (K.cell m)) ^ γ * (T.M (T.sample (K.cell m)) ^ c)⁻¹)
       low loss (fun z u _ => f z u))
     (hfs : ∀ z ∈ U, ∀ u, ContDiffOn ℝ ∞ (f z u) (annularOpen D))
@@ -41,7 +45,7 @@ theorem n07a_sampleLinearJets_weighted_memLp_bound
         A * (q (a + b + c + (loss + 2)) u +
           (1 + p (a + b + c + (loss + 2)) z) * q low u) := by
   obtain ⟨A, hA, hAb⟩ := n07a_sampleLinearJets_weighted_physical_bound
-    hD hT h04 href hγ hγ1 hp hq hf hfs a b c
+    hD hT h04 hrefState hRatio ζ hζ hγ hγ1 hp hq hf hfs a b c
   let R : PolarPoint → ℝ := fun x => (T.M (T.radius x.1))⁻¹
   have hR : MemLp R 2 materialCylinderMeasure := n07a_materialM_inv_cylinder_memLp hT
   let W := hR.toLp R
@@ -74,9 +78,13 @@ theorem n07a_sampleLinearJets_weighted_memLp_bound
 theorem n07a_sampleLinearJets_physicalNorm_bound
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (h04 : N04Properties D T S C L K base geometryLoss ε)
-    (href : CanonicalGeometry.ReferenceJets D T S C L K)
+    (hrefState : referenceStateConditions D S C)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
+    (ζ : E → CanonicalGeometry.Parameter S)
+    (hζ : MapsTo ζ U (sectorNeighborhood S base ε ε))
     (hγ : 0 ≤ γ) (hγ1 : γ ≤ 1) (hp : Monotone p) (hq : Monotone q)
-    (hf : N07aSampleLinearJetBounds T K p q U (physicalPieceOpen S K)
+    (hf : N07aStateSampleLinearJetBounds T K p q U
+      (fun z m => physicalPieceOpen S K (liftSectorParameter S C (ζ z)) m)
       (fun c m => T.H (T.sample (K.cell m)) ^ γ * (T.M (T.sample (K.cell m)) ^ c)⁻¹)
       low loss (fun z u _ => f z u))
     (hfs : ∀ z ∈ U, ∀ u, ContDiffOn ℝ ∞ (f z u) (annularOpen D))
@@ -87,7 +95,7 @@ theorem n07a_sampleLinearJets_physicalNorm_bound
   classical
   let I := Fin (s + 1) × Fin (s + 1) × Fin (s + 1)
   choose A hA hAb using fun j : I => n07a_sampleLinearJets_weighted_memLp_bound
-    hD hT h04 href hγ hγ1 hp hq hf hfs j.1.val j.2.1.val j.2.2.val
+    hD hT h04 hrefState hRatio ζ hζ hγ hγ1 hp hq hf hfs j.1.val j.2.1.val j.2.2.val
   let C₀ : ℝ := ∑ j : I, A j
   have hC₀ : 0 ≤ C₀ := Finset.sum_nonneg (fun j _ => (hA j).le)
   let Q := Real.sqrt (Fintype.card (JetIndex s) : ℝ)

@@ -26,7 +26,7 @@ theorem n07a_pulledTest_source_pairing
     (hab : D.a ≤ D.b) (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {W f : PolarPoint → ℝ} (hW : CanonicalTest S K m W)
-    (hfp : ∀ p ∈ physicalPieceOpen S K m, f (p + (0, Real.pi)) = f p)
+    (hfp : ∀ p ∈ physicalPieceOpen S K z m, f (p + (0, Real.pi)) = f p)
     (hi : Integrable (fun p => canonicalSource S K z m f p * W p)
       (canonicalMeasure S K m)) :
     (∫ r in D.a..D.b, radialAngularMean (fun θ =>
@@ -40,16 +40,14 @@ theorem n07a_pulledTest_source_pairing
     rw [n07aPhysicalTestPullback_height h04 hz hs W hp]
     exact mul_comm _ _
   have hip := (integrable_congr he).mpr hi
-  have hzero : ∀ r ∉ Ioo (K.physicalLeft m) (K.physicalRight m),
-      ∀ θ, ψ (r, θ) * f (r, θ) = 0 := by
-    intro r hr θ
+  have hzero : ∀ p ∉ physicalPieceOpen S K z m, ψ p * f p = 0 := by
+    intro p hp
     dsimp only [ψ]
-    rw [n07aPhysicalTestPullback_zero (K := K) (p := (r, θ)) z m W hr, zero_mul]
-  have hperiod : ∀ r ∈ Ioo (K.physicalLeft m) (K.physicalRight m),
-      Function.Periodic (fun θ => ψ (r, θ) * f (r, θ)) Real.pi := by
-    intro r hr θ
-    have h := congrArg₂ (· * ·) (hψp (r, θ)) (hfp (r, θ) ⟨hr, mem_univ _⟩)
-    simpa only [Prod.mk_add_mk, add_zero] using h
+    rw [n07aPhysicalTestPullback_zero (K := K) z m W hp, zero_mul]
+  have hperiod : ∀ p ∈ physicalPieceOpen S K z m,
+      ψ (p + (0, Real.pi)) * f (p + (0, Real.pi)) = ψ p * f p := by
+    intro p hp
+    exact congrArg₂ (· * ·) (hψp p) (hfp p hp)
   have h := n07a_localized_rough_pairing hab h04 hz hs ψ f hip hzero hperiod
   rw [integral_congr_ae he] at h
   simpa only [mul_comm] using h
@@ -77,23 +75,21 @@ theorem n07a_pulledTest_operator_pairing
     n07a_canonicalOpen_ae.mono fun p hp => congrArg (canonicalHeight S K z m η p * ·) (he hp)
   have hi := (integrable_congr heAE).mpr
     (n07a_canonicalRepresentation_height_integrable h04 hz hs hχ hrep hg)
-  have hAp : ∀ p ∈ physicalPieceOpen S K m, Aψ (p + (0, Real.pi)) = Aψ p := by
+  have hAp : ∀ p ∈ physicalPieceOpen S K z m, Aψ (p + (0, Real.pi)) = Aψ p := by
     apply n07a_physical_periodic_of_canonicalSource h04 hz hs
     intro p hp
     have hps : p + (0, Real.pi) ∈ canonicalOpen S K m :=
       ⟨by simpa only [Prod.fst_add, add_zero] using hp.1, mem_univ _⟩
     exact (he hps).trans ((hg.2.1 p).trans (he hp).symm)
-  have hzero : ∀ r ∉ Ioo (K.physicalLeft m) (K.physicalRight m),
-      ∀ θ, η (r, θ) * Aψ (r, θ) = 0 := by
-    intro r hr θ
+  have hzero : ∀ p ∉ physicalPieceOpen S K z m, η p * Aψ p = 0 := by
+    intro p hp
     dsimp only [Aψ, ψ]
-    rw [n07aPhysicalTestPullback_divergence_zero (p := (r, θ))
-      h04 hz hs hW (L.coefficients z) hr, mul_zero]
-  have hperiod : ∀ r ∈ Ioo (K.physicalLeft m) (K.physicalRight m),
-      Function.Periodic (fun θ => η (r, θ) * Aψ (r, θ)) Real.pi := by
-    intro r hr θ
-    have h := congrArg₂ (· * ·) (hηp (r, θ)) (hAp (r, θ) ⟨hr, mem_univ _⟩)
-    simpa only [Prod.mk_add_mk, add_zero] using h
+    rw [n07aPhysicalTestPullback_divergence_zero
+      h04 hz hs hW (L.coefficients z) hp, mul_zero]
+  have hperiod : ∀ p ∈ physicalPieceOpen S K z m,
+      η (p + (0, Real.pi)) * Aψ (p + (0, Real.pi)) = η p * Aψ p := by
+    intro p hp
+    exact congrArg₂ (· * ·) (hηp p) (hAp p hp)
   have h := n07a_localized_rough_pairing hab h04 hz hs η Aψ hi hzero hperiod
   rw [integral_congr_ae heAE,
     n07a_canonicalRepresentation_height_pairing h04 hz hs hχ hrep hg] at h

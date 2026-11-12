@@ -41,9 +41,9 @@ theorem n07a_candidateCanonicalHeight_contDiffOn
     (hs : stateSector S z.1) {f : PolarPoint → ℝ}
     (hf : ContDiffOn ℝ ∞ f (annularOpen D)) (m : ℕ) :
     ContDiffOn ℝ ∞ (canonicalHeight S K z m f) (canonicalOpen S K m) := by
-  have hgeom := h04.2.2.2.2.2.2.2.1 z hz hs m
+  have hgeom := h04.1.charts z hz hs m
   have hmaps : MapsTo (K.inverseChart z m) (canonicalOpen S K m) (annularOpen D) :=
-    fun y hy => ⟨(h04.2.2.2.1 m).2.2 (hgeom.2.1 hy).1, mem_univ _⟩
+    fun y hy => (h04.1.domains z hz hs m).2.2.1 (hgeom.2.1 hy)
   exact (hf.comp hgeom.2.2.2.2.2.1 hmaps).div
     (hgeom.2.2.2.2.2.2.1.comp hgeom.2.2.2.2.2.1 hgeom.2.1)
     (fun y hy => (hgeom.2.2.2.2.2.2.2 _ (hgeom.2.1 hy)).1.ne')
@@ -55,9 +55,8 @@ theorem n07a_candidateCanonicalHeight_periodic
     (hf : Function.Periodic f (0, Real.pi)) (m : ℕ) :
     ∀ y ∈ canonicalOpen S K m,
       canonicalHeight S K z m f (y + (0, Real.pi)) = canonicalHeight S K z m f y := by
-  have hgeom := h04.2.2.2.2.2.2.2.1 z hz hs m
-  have hper := n07a_strip_inverse_periodic hgeom.2.1 hgeom.2.2.1 hgeom.2.2.2.1
-    (fun p hp => (hgeom.2.2.2.2.2.2.2 p hp).2.2.1)
+  have hgeom := h04.1.charts z hz hs m
+  have hper := n07a_current_inverseChart_periodic h04 hz hs m
   intro y hy
   have hh := (hgeom.2.2.2.2.2.2.2 _ (hgeom.2.1 hy)).2.2.2
   simp only [canonicalHeight, hper y hy, hf (K.inverseChart z m y), hh]
@@ -70,9 +69,9 @@ theorem n07a_candidateCanonicalHeight_even
     ∀ y ∈ canonicalOpen S K m,
       canonicalHeight S K z m f (y.1, -y.2) = canonicalHeight S K z m f y := by
   intro y hy
-  have hx := (h04.2.2.2.2.2.2.2.1 z hz hs m).2.1 hy
-  have hInv := h04.2.2.2.2.2.2.2.2.2.2.1 z hz hs m y hy
-  have hreflect := h04.2.2.2.2.2.2.2.2.2.1 z hz hs m _ hx
+  have hx := (h04.1.charts z hz hs m).2.1 hy
+  have hInv := h04.1.inverseReflection z hz hs m y hy
+  have hreflect := h04.1.reflection z hz hs m _ hx
   simp only [canonicalHeight, hInv, hreflect.2.1, hf]
 
 theorem n07a_currentHeight_volume
@@ -82,6 +81,7 @@ theorem n07a_currentHeight_volume
     (h04 : N04Properties D T S C L K base loss ε)
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
     (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
     (hV : IsVolumeModel T S K V)
     (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε)
     (u : (S.height (3 / 4 : ℝ)).Space) (t s : ℕ) :
@@ -98,6 +98,6 @@ theorem n07a_currentHeight_volume
     (n07a_candidateCanonicalHeight_periodic h04 hz' hs hdecode.2.2.1)
     (n07a_candidateCanonicalHeight_even h04 hz' hs hdecode.2.1)
     (fun c => n07a_currentCanonicalHeight_fixedJetEnvelope
-      hD hT hS h01 h04 href hcur z hz u c) t s
+      hD hT hS h01 h04 href hcur hRatio z hz u c) t s
 
 end ContinuousFlexibility.Analysis

@@ -67,7 +67,7 @@ theorem n07a_referenceOperator_eq_source
   have hV := h05.2.1
   apply hV.2.2.1 (3 / 4 : ℝ) 0 b
   funext m
-  have hm := (h04.2.2.2.1 m).2.1
+  have hm := (h04.1.referenceBounds m).2.1
   apply n07a_canonical_even_test_separation hm
     (n07a_volume_forget_reflection hV (P.operator (C.referenceState, 0) u) m)
     (n07a_volume_forget_reflection hV u.val.2 m)

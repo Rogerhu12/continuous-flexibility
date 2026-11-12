@@ -8,8 +8,9 @@ import ContinuousFlexibility.Analysis.N07aCoordinateJetNorms
 
 The height atoms are pulled back from their physical unit interval.
 In particular no height atom is misidentified with its value at a
-nonlinear inverse-chart point. Reference and current charts use the same
-affine calculation, with their actual raw spatial jet bounds.
+nonlinear inverse-chart point. Reference and current raw atoms use the same affine calculation on
+the reference rectangle. These estimates do not assert bounds on a
+state-dependent current physical piece.
 -/
 
 noncomputable section
@@ -41,7 +42,7 @@ theorem n07a_physicalJetField_smooth_of_atoms
     (hs : ∀ m a, ContDiffOn ℝ ∞ (CanonicalGeometry.atom D T S C L K z m a)
       CanonicalGeometry.unitStrip)
     (m : ℕ) (hm : K.physicalLeft m < K.physicalRight m) (i : Fin 6) :
-    ContDiffOn ℝ ∞ (n07aPhysicalJetField K z m i) (physicalPieceOpen S K m) := by
+    ContDiffOn ℝ ∞ (n07aPhysicalJetField K z m i) (referencePhysicalPieceOpen S K m) := by
   have hcomp := (hs m (n07aPhysicalJetAtom i)).comp
     (n07aCanonicalUnitInversePoint_contDiff (K := n07aPhysicalIntervalData K)).contDiffOn
     (n07aCanonicalUnitInversePoint_maps (K := n07aPhysicalIntervalData K) hm)
@@ -62,7 +63,7 @@ theorem n07a_physicalJetFields_fixedEnvelope_of_atoms
       ∀ m a p, p ∈ CanonicalGeometry.unitStrip → ∀ i j : ℕ, i + j ≤ n →
         |mixedDerivative i j (CanonicalGeometry.atom D T S C L K z m a) p| ≤ e m)
     (i : Fin 6) :
-    N07aAngularFixedJetEnvelope T K (physicalPieceOpen S K) (fun _ => 1)
+    N07aAngularFixedJetEnvelope T K (referencePhysicalPieceOpen S K) (fun _ => 1)
       (fun m => n07aPhysicalJetField K z m i) := by
   classical
   intro n
@@ -110,7 +111,7 @@ theorem n07a_referencePhysicalJetFields_fixedEnvelope
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
     (hphysical : ∀ m, K.physicalLeft m < K.physicalRight m) (i : Fin 6) :
-    N07aAngularFixedJetEnvelope T K (physicalPieceOpen S K) (fun _ => 1)
+    N07aAngularFixedJetEnvelope T K (referencePhysicalPieceOpen S K) (fun _ => 1)
       (fun m => n07aPhysicalJetField K (C.referenceState, 0) m i) := by
   apply n07a_physicalJetFields_fixedEnvelope_of_atoms hD hT href hphysical
     (fun m a => (href.1 m a).1)
@@ -132,7 +133,7 @@ theorem n07a_currentPhysicalJetFields_fixedEnvelope
     (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
     (hphysical : ∀ m, K.physicalLeft m < K.physicalRight m)
     (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε) (i : Fin 6) :
-    N07aAngularFixedJetEnvelope T K (physicalPieceOpen S K) (fun _ => 1)
+    N07aAngularFixedJetEnvelope T K (referencePhysicalPieceOpen S K) (fun _ => 1)
       (fun m => n07aPhysicalJetField K (liftSectorParameter S C z) m i) := by
   apply n07a_physicalJetFields_fixedEnvelope_of_atoms hD hT href hphysical
     (fun m a => (hcur.1 z hz m a).1)
@@ -174,10 +175,10 @@ theorem n07a_physicalChart_positive_fixedEnvelope
     (hs : ∀ m a, ContDiffOn ℝ ∞ (CanonicalGeometry.atom D T S C L K z m a)
       CanonicalGeometry.unitStrip)
     (hb : ∀ i : Fin 6,
-      N07aAngularFixedJetEnvelope T K (physicalPieceOpen S K) (fun _ => 1)
+      N07aAngularFixedJetEnvelope T K (referencePhysicalPieceOpen S K) (fun _ => 1)
         (fun m => n07aPhysicalJetField K z m i)) :
     ∀ n : ℕ, 0 < n → ∃ e : ℕ → ℝ, N07aSampleSubpower T K e ∧ (∀ m, 0 ≤ e m) ∧
-      ∀ m p, p ∈ physicalPieceOpen S K m → ‖iteratedFDeriv ℝ n (K.chart z m) p‖ ≤ e m := by
+      ∀ m p, p ∈ referencePhysicalPieceOpen S K m → ‖iteratedFDeriv ℝ n (K.chart z m) p‖ ≤ e m := by
   intro n hn
   let a : ℕ → ℝ := (hb 0 n).choose
   have ha := (hb 0 n).choose_spec.1

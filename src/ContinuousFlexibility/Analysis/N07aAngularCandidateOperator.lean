@@ -115,20 +115,20 @@ theorem n07a_candidate_operator_eq_zero
   apply hV.2.2.1 (3 / 4 : ℝ) 0 b
   rw [map_zero]
   funext m
-  apply n07a_canonical_test_separation (h04.2.2.2.1 m).2.1
+  apply n07a_canonical_test_separation (h04.1.referenceBounds m).2.1
   intro W hW
   have hc := n07a_currentOperator_distribution hab hS h01.2.2.1 h04 href hcur h06
-    z hz m (h04.2.2.2.1 m).2.1 d W hW
+    z hz m (h04.1.referenceBounds m).2.1 d W hW
   have hzero := n07a_candidate_zero_distribution hab hS hT h01 h03 h04 href hcur
-    z hz u μ d.val.1 haL hμ hAux hU heq m (h04.2.2.2.1 m).2.1 W hW
+    z hz u μ d.val.1 haL hμ hAux hU heq m (h04.1.referenceBounds m).2.1 W hW
   let ell : CanonicalL2 S K m →L[ℝ] ℝ :=
     n07aCanonicalTestPairing W (n07a_canonicalTest_memLp hW)
   let F : CanonicalSequence S K :=
     V.forget (3 / 4 : ℝ) 0 b (P.operator (liftSectorParameter S C z) d)
   have hpair : ell (n07aCurrentCanonicalRhs href hcur z hz m
-      (h04.2.2.2.1 m).2.1 d.val.1 F) =
+      (h04.1.referenceBounds m).2.1 d.val.1 F) =
       ell (n07aCurrentCanonicalRhs href hcur z hz m
-        (h04.2.2.2.1 m).2.1 d.val.1 0) :=
+        (h04.1.referenceBounds m).2.1 d.val.1 0) :=
     (n07aCanonicalTestPairing_apply W (n07a_canonicalTest_memLp hW) _).trans
       ((hc.symm.trans hzero).trans
         (n07aCanonicalTestPairing_apply W (n07a_canonicalTest_memLp hW) _).symm)

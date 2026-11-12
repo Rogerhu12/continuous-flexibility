@@ -37,13 +37,15 @@ theorem n07aPhysicalHeightRepresentative_ae
     (m : ℕ) {v : PolarPoint → ℝ}
     (hv : (U.1 m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m] v) :
     n07aPhysicalHeightRepresentative K z m v =ᵐ[
-        canonicalMeasure S (n07aPhysicalIntervalData K) m]
+        n07aPhysicalMeasure S K z m]
       fun p => η p - U.2.1 * S.chiLeft p.1 := by
   have he := n07a_chart_ae_pullback h04 hz hs m (hv.symm.trans (hrep.1 m))
-  obtain ⟨_, _, _, hpoint⟩ := n07a_physicalHalfGeometry h04 hz hs m
-  filter_upwards [he, ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)]
-    with p hp hpQ
-  have hd := hpoint p hpQ
+  have hgeo := h04.1.charts z hz hs m
+  filter_upwards [he, n07aPhysicalMeasure_ae h04 hz hs m] with p hp hpQ
+  have hd : K.inverseChart z m (K.chart z m p) = p ∧
+      K.height z m p ≠ 0 ∧ planeJacobian (K.chart z m) p ≠ 0 :=
+    ⟨hgeo.2.2.1 p hpQ, (hgeo.2.2.2.2.2.2.2 p hpQ).1.ne',
+      (hgeo.2.2.2.2.2.2.2 p hpQ).2.1⟩
   simp only [n07aPhysicalHeightRepresentative, hp, canonicalHeight, hd.1]
   field_simp [hd.2.1]
 
@@ -55,12 +57,14 @@ theorem n07aPhysicalSourceRepresentative_ae
     (m : ℕ) {v : PolarPoint → ℝ}
     (hv : (F m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m] v) :
     n07aPhysicalSourceRepresentative K z m v =ᵐ[
-      canonicalMeasure S (n07aPhysicalIntervalData K) m] f := by
+      n07aPhysicalMeasure S K z m] f := by
   have he := n07a_chart_ae_pullback h04 hz hs m (hv.symm.trans (hrep.2 m))
-  obtain ⟨_, _, _, hpoint⟩ := n07a_physicalHalfGeometry h04 hz hs m
-  filter_upwards [he, ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)]
-    with p hp hpQ
-  have hd := hpoint p hpQ
+  have hgeo := h04.1.charts z hz hs m
+  filter_upwards [he, n07aPhysicalMeasure_ae h04 hz hs m] with p hp hpQ
+  have hd : K.inverseChart z m (K.chart z m p) = p ∧
+      K.height z m p ≠ 0 ∧ planeJacobian (K.chart z m) p ≠ 0 :=
+    ⟨hgeo.2.2.1 p hpQ, (hgeo.2.2.2.2.2.2.2 p hpQ).1.ne',
+      (hgeo.2.2.2.2.2.2.2 p hpQ).2.1⟩
   simp only [n07aPhysicalSourceRepresentative, hp, canonicalSource, hd.1]
   field_simp [hd.2.1, abs_ne_zero.mpr hd.2.2]
 
@@ -69,19 +73,19 @@ theorem n07aPhysicalHeightRepresentative_contDiffOn
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (m : ℕ) {v : PolarPoint → ℝ}
     (hv : ContDiffOn ℝ ∞ v (canonicalOpen S K m)) :
-    ContDiffOn ℝ ∞ (n07aPhysicalHeightRepresentative K z m v) (physicalPieceOpen S K m) := by
-  obtain ⟨hmap, _, _, _, hchart, _, hh, _⟩ := h04.2.2.2.2.2.2.2.1 z hz hs m
+    ContDiffOn ℝ ∞ (n07aPhysicalHeightRepresentative K z m v) (physicalPieceOpen S K z m) := by
+  obtain ⟨hmap, _, _, _, hchart, _, hh, _⟩ := h04.1.charts z hz hs m
   exact hh.mul (hv.comp hchart hmap)
 
 theorem n07aPhysicalHeightRepresentative_periodic_on
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (m : ℕ) {v : PolarPoint → ℝ} (hv : Function.Periodic v (0, Real.pi)) :
-    ∀ p ∈ physicalPieceOpen S K m,
+    ∀ p ∈ physicalPieceOpen S K z m,
       n07aPhysicalHeightRepresentative K z m v (p + (0, Real.pi)) =
         n07aPhysicalHeightRepresentative K z m v p := by
   intro p hp
-  have h := h04.2.2.2.2.2.2.2.1 z hz hs m |>.2.2.2.2.2.2.2 p hp
+  have h := h04.1.charts z hz hs m |>.2.2.2.2.2.2.2 p hp
   simp only [n07aPhysicalHeightRepresentative, h.2.2.1, h.2.2.2, hv _]
 
 theorem n07aPhysicalHeightRepresentative_even_on
@@ -89,12 +93,12 @@ theorem n07aPhysicalHeightRepresentative_even_on
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (m : ℕ) {v : PolarPoint → ℝ}
     (hv : ∀ p ∈ canonicalOpen S K m, v (p.1, -p.2) = v p) :
-    ∀ p ∈ physicalPieceOpen S K m,
+    ∀ p ∈ physicalPieceOpen S K z m,
       n07aPhysicalHeightRepresentative K z m v (p.1, -p.2) =
         n07aPhysicalHeightRepresentative K z m v p := by
   intro p hp
-  have href := h04.2.2.2.2.2.2.2.2.2.1 z hz hs m p hp
-  have hmap := (h04.2.2.2.2.2.2.2.1 z hz hs m).1 hp
+  have href := h04.1.reflection z hz hs m p hp
+  have hmap := (h04.1.charts z hz hs m).1 hp
   simp only [n07aPhysicalHeightRepresentative, href.1, href.2.1, hv _ hmap]
 
 theorem n07aPhysicalHeightRepresentative_angular_memLp
@@ -109,11 +113,10 @@ theorem n07aPhysicalHeightRepresentative_angular_memLp
     (hLp : ∀ a b, MemLp (mixedDerivative a b v) 2 (canonicalMeasure S K m)) (n : ℕ) :
     MemLp (mixedDerivative 0 n
       (n07aPhysicalHeightRepresentative K (liftSectorParameter S C z) m v)) 2
-      (canonicalMeasure S (n07aPhysicalIntervalData K) m) := by
-  have hm := (h04.2.2.2.1 m).1
-  obtain ⟨hmap, _, _, _, hchart, _⟩ := h04.2.2.2.2.2.2.2.1 _ hz' hs m
+      (n07aPhysicalMeasure S K (liftSectorParameter S C z) m) := by
+  obtain ⟨hmap, _, _, _, hchart, _⟩ := h04.1.charts _ hz' hs m
   exact n07a_angularJet_memLp_mul
-    (n07aCurrentPhysicalOpenCoefficient href hcur z hz m hm 2)
+    (n07aCurrentPhysicalOpenCoefficient h04 hz' hs m 2)
     (hv.comp hchart hmap) n
     (fun j _ => n07a_current_chart_angular_memLp h04 href hcur z hz hz' hs m hv hLp j)
 
@@ -127,11 +130,10 @@ theorem n07aPhysicalSourceRepresentative_contDiffOn
     (m : ℕ) {v : PolarPoint → ℝ}
     (hv : ContDiffOn ℝ ∞ v (canonicalOpen S K m)) :
     ContDiffOn ℝ ∞ (n07aPhysicalSourceRepresentative K (liftSectorParameter S C z) m v)
-      (physicalPieceOpen S K m) := by
-  have hm := (h04.2.2.2.1 m).1
-  obtain ⟨hmap, _, _, _, hchart, _⟩ := h04.2.2.2.2.2.2.2.1 _ hz' hs m
-  exact (n07aCurrentPhysicalOpenCoefficient href hcur z hz m hm 4).smooth.mul
-    ((n07aCurrentPhysicalOpenCoefficient href hcur z hz m hm 3).smooth.mul
+      (physicalPieceOpen S K (liftSectorParameter S C z) m) := by
+  obtain ⟨hmap, _, _, _, hchart, _⟩ := h04.1.charts _ hz' hs m
+  exact (n07aCurrentPhysicalOpenCoefficient h04 hz' hs m 4).smooth.mul
+    ((n07aCurrentPhysicalOpenCoefficient h04 hz' hs m 3).smooth.mul
       (hv.comp hchart hmap))
 
 theorem n07aPhysicalSourceRepresentative_angular_memLp
@@ -146,11 +148,10 @@ theorem n07aPhysicalSourceRepresentative_angular_memLp
     (hLp : ∀ a b, MemLp (mixedDerivative a b v) 2 (canonicalMeasure S K m)) (n : ℕ) :
     MemLp (mixedDerivative 0 n
       (n07aPhysicalSourceRepresentative K (liftSectorParameter S C z) m v)) 2
-      (canonicalMeasure S (n07aPhysicalIntervalData K) m) := by
-  have hm := (h04.2.2.2.1 m).1
-  obtain ⟨hmap, _, _, _, hchart, _⟩ := h04.2.2.2.2.2.2.2.1 _ hz' hs m
-  let χ := n07aCurrentPhysicalOpenCoefficient href hcur z hz m hm 3
-  let J := n07aCurrentPhysicalOpenCoefficient href hcur z hz m hm 4
+      (n07aPhysicalMeasure S K (liftSectorParameter S C z) m) := by
+  obtain ⟨hmap, _, _, _, hchart, _⟩ := h04.1.charts _ hz' hs m
+  let χ := n07aCurrentPhysicalOpenCoefficient h04 hz' hs m 3
+  let J := n07aCurrentPhysicalOpenCoefficient h04 hz' hs m 4
   have hvcomp := hv.comp hchart hmap
   apply n07a_angularJet_memLp_mul J (χ.smooth.mul hvcomp) n
   intro j hj

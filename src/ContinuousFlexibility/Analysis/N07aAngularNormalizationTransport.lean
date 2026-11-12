@@ -37,22 +37,38 @@ theorem n07a_canonical_transport_referenceRow
   have hz₀ := n07a_reference_mem_stateNeighborhood h01
   have hs₀ := h01.2.2.1.stateSector
   apply n07a_referenceRow_congr_weighted_ae (S := S) (K := K) hab hη hη₀
-  apply n07a_physical_piecewise_ae_eq h04 Subset.rfl
+  apply n07a_physical_piecewise_ae_eq h04 hz hs Subset.rfl
   intro m
   have he := n07aPhysicalHeightRepresentative_ae h04 hz hs hrep m
     (Filter.EventuallyEq.rfl : (U.1 m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m] U.1 m)
   have he₀ := n07aPhysicalHeightRepresentative_ae h04 hz₀ hs₀ hrep₀ m
     (Filter.EventuallyEq.rfl : (U.1 m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m] U.1 m)
-  filter_upwards [he, he₀, n07a_canonicalOpen_ae
-    (S := S) (K := n07aPhysicalIntervalData K) (m := m)] with p hp hp₀ hpU
+  have hnorm := h04.1.normalization z hz hs m
+  have hrefAE := (ae_restrict_iff'
+    ((h04.1.domains (C.referenceState, 0) hz₀ hs₀ m).1.measurableSet.inter
+      (MeasurableSet.univ.prod measurableSet_Ioc))).mp he₀
+  have he₀' : ∀ᵐ p ∂n07aPhysicalMeasure S K z m,
+      p.1 ∈ K.normalizationRegion →
+        n07aPhysicalHeightRepresentative K (C.referenceState, 0) m (U.1 m) p =
+          η₀ p - U.2.1 * S.chiLeft p.1 := by
+    apply (ae_restrict_iff' ((h04.1.domains z hz hs m).1.measurableSet.inter
+      (MeasurableSet.univ.prod measurableSet_Ioc))).mpr
+    filter_upwards [hrefAE] with p hrefp hp hregion
+    have hboth : p ∈ physicalPieceOpen S K z m ∩ (K.normalizationRegion ×ˢ univ) :=
+      ⟨hp.1, hregion, mem_univ _⟩
+    rw [hnorm.1] at hboth
+    exact hrefp ⟨hboth.1, hp.2⟩
+  filter_upwards [he, he₀', n07aPhysicalMeasure_ae h04 hz hs m] with p hp hp₀ hpU
   by_cases hcol : referenceColumn D p.1 = 0
   · simp only [hcol, zero_mul]
-  · have hregion := h04.2.1 hcol
-    obtain ⟨hc, hh⟩ := h04.2.2.1 z hz hs m p hpU hregion
+  · have hregion := h04.1.normalizationSupport hcol
+    obtain ⟨hc, hh⟩ := hnorm.2 p hpU hregion
     have heq : n07aPhysicalHeightRepresentative K z m (U.1 m) p =
         n07aPhysicalHeightRepresentative K (C.referenceState, 0) m (U.1 m) p := by
       simp only [n07aPhysicalHeightRepresentative, hc, hh]
-    have hηeq : η p = η₀ p := by linarith only [hp, hp₀, heq]
+    have hηeq : η p = η₀ p := by
+      have hrefp := hp₀ hregion
+      linarith only [hp, hrefp, heq]
     exact congrArg (referenceColumn D p.1 * ·) hηeq
 
 end ContinuousFlexibility.Analysis

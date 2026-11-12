@@ -27,8 +27,8 @@ theorem n07a_referenceCanonicalRelation_band
     (hV : IsVolumeModel T S K V) (hK : ∀ m, K.left m < K.right m)
     (hR : ReferenceRadial S C K) (hAux : AuxiliaryColumnGauge S K)
     (hmap : ∀ m, MapsTo (K.inverseChart (C.referenceState, 0) m)
-      (canonicalOpen S K m) (physicalPieceOpen S K m))
-    (hsm : ∀ m, ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m) (physicalPieceOpen S K m))
+      (canonicalOpen S K m) (referencePhysicalPieceOpen S K m))
+    (hsm : ∀ m, ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m) (referencePhysicalPieceOpen S K m))
     {γ M₀ M₁ loss : ℝ} (hγ : 0 < γ)
     {U : CanonicalUnknown S K} {F : CanonicalSequence S K}
     (hrel : ReferenceCanonicalRelation D T S C K V γ M₀ M₁ loss U F) (n : ℕ) :

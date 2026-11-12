@@ -38,7 +38,7 @@ theorem n07a_physicalClosedPieces_cover
   have hAc : IsClosed A := hF.isClosed_biUnion fun _ _ => isClosed_Icc
   have hrA : r ∈ A := by
     by_contra hrA
-    obtain ⟨E, hE, hcover⟩ := h04.2.2.2.2.2.2.1
+    obtain ⟨E, hE, hcover⟩ := h04.1.referencePartition
     have hOE : Ioo l s \ A ⊆ E := by
       intro x hx
       by_contra hxE
@@ -97,7 +97,7 @@ theorem n07a_physicalPieces_adjacent_at_boundary
   have hrs : r < s := by dsimp only [s]; linarith [hr.2]
   have hsb : s < D.b := by dsimp only [s]; linarith [hr.2]
   have hright := n07a_finite_interval_right_neighbor hrs
-    (fun m => (h04.2.2.2.1 m).1)
+    (fun m => (h04.1.referenceBounds m).1)
     (fun q hq => n07a_physicalClosedPieces_cover hD hT h04 hjets
       ⟨hr.1.trans hq.1, hq.2.trans hsb⟩)
     (n07a_physicalClosedPieces_finite_inter_compact hD hT h04 hjets isCompact_Icc
@@ -112,7 +112,7 @@ theorem n07a_physicalPieces_adjacent_at_boundary
       ⟨by linarith [hm.2], by linarith [hm.1]⟩⟩
   have hleft := n07a_finite_interval_right_neighbor (neg_lt_neg hlr)
     (left := fun m => -K.physicalRight m) (right := fun m => -K.physicalLeft m)
-    (fun m => neg_lt_neg (h04.2.2.2.1 m).1)
+    (fun m => neg_lt_neg (h04.1.referenceBounds m).1)
     (fun q hq => by
       obtain ⟨m, hm⟩ := n07a_physicalClosedPieces_cover hD hT h04 hjets
         (show -q ∈ Ioo D.a D.b from ⟨by linarith [hq.2], by linarith [hq.1]⟩)
@@ -124,7 +124,7 @@ theorem n07a_physicalPieces_adjacent_at_boundary
   refine ⟨i, j, ?_, hi', hj⟩
   intro hij
   subst j
-  have hlen := (h04.2.2.2.1 i).1
+  have hlen := (h04.1.referenceBounds i).1
   linarith
 
 end ContinuousFlexibility.Statements

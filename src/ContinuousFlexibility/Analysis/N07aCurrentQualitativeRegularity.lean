@@ -278,12 +278,12 @@ theorem n07a_currentCanonical_qualitative_neighborhood
           (∀ m, N07aCanonicalNormalRegular S K m (U.1 m) 1) →
           ∀ m, ∃ hAll : ∀ n, N07aCanonicalNormalRegular S K m (U.1 m) n,
             EqOn (mixedDerivative 2 0
-              (n07aCanonicalSmoothDecode (h04.2.2.2.1 m).2.1 ⟨U.1 m, hAll⟩))
+              (n07aCanonicalSmoothDecode (h04.1.referenceBounds m).2.1 ⟨U.1 m, hAll⟩))
               (n07aNormalRhs
                 (fun i => n07aNormalCoefficientFamily
                   (fun k z m => n07aPrincipalField K (liftSectorParameter S C z) m k)
                   (fun m => if K.positive m then -1 else 1) i z m)
-                (n07aCanonicalSmoothDecode (h04.2.2.2.1 m).2.1 ⟨U.1 m, hAll⟩)
+                (n07aCanonicalSmoothDecode (h04.1.referenceBounds m).2.1 ⟨U.1 m, hAll⟩)
                 (n07aCurrentCanonicalSourceValue D S C L K (liftSectorParameter S C z)
                   U ((S.height (3 / 4 : ℝ)).decode f.val) m))
               (canonicalOpen S K m) := by
@@ -293,7 +293,7 @@ theorem n07a_currentCanonical_qualitative_neighborhood
   let es : ℝ := hs.choose_spec.2.choose
   have hsb := hs.choose_spec.2.choose_spec
   have hp := n07a_currentPrincipal_positive_neighborhood hD hT href hprincipal hcur hε
-    (fun m => (h04.2.2.2.1 m).2.1)
+    (fun m => (h04.1.referenceBounds m).2.1)
   let bp : ℕ := hp.choose
   let ep : ℝ := hp.choose_spec.2.choose
   have hpb := hp.choose_spec.2.choose_spec
@@ -322,17 +322,17 @@ theorem n07a_currentCanonical_qualitative_neighborhood
     exact (χ.toLp_ae.trans hχae).trans (hF m).symm
   have hregular := n07a_currentCanonical_classical_of_sourceCoefficient
     hD.choose_spec.1.2.1.le hS hrefState h04 href hcur z hz₀ m
-      (h04.2.2.2.1 m).2.1 hrel χ hsource (hpb.2.2 z hzp m) (hfirst m)
+      (h04.1.referenceBounds m).2.1 hrel χ hsource (hpb.2.2 z hzp m) (hfirst m)
   let hAll : ∀ n, N07aCanonicalNormalRegular S K m (U.1 m) n := hregular.choose
   refine ⟨hAll, ?_⟩
   have hvalue := n07aCurrentCanonicalSourceBar_value href hcur z hz₀ m
-    (h04.2.2.2.1 m).2.1 U χ _ hχ
+    (h04.1.referenceBounds m).2.1 U χ _ hχ
   intro p hp
   exact (hregular.choose_spec hp).trans (congrArg (fun g : PolarPoint → ℝ =>
     n07aNormalRhs
       (fun i => n07aNormalCoefficientFamily
         (fun k z m => n07aPrincipalField K (liftSectorParameter S C z) m k)
         (fun m => if K.positive m then -1 else 1) i z m)
-      (n07aCanonicalSmoothDecode (h04.2.2.2.1 m).2.1 ⟨U.1 m, hAll⟩) g p) hvalue)
+      (n07aCanonicalSmoothDecode (h04.1.referenceBounds m).2.1 ⟨U.1 m, hAll⟩) g p) hvalue)
 
 end ContinuousFlexibility.Analysis

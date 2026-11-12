@@ -26,25 +26,26 @@ theorem n07a_localized_rough_pairing
     (u f : PolarPoint → ℝ)
     (hi : Integrable (fun p => canonicalHeight S K z m u p *
       canonicalSource S K z m f p) (canonicalMeasure S K m))
-    (hzero : ∀ r ∉ Ioo (K.physicalLeft m) (K.physicalRight m),
-      ∀ θ, u (r, θ) * f (r, θ) = 0)
-    (hperiod : ∀ r ∈ Ioo (K.physicalLeft m) (K.physicalRight m),
-      Function.Periodic (fun θ => u (r, θ) * f (r, θ)) Real.pi) :
+    (hzero : ∀ p ∉ physicalPieceOpen S K z m, u p * f p = 0)
+    (hperiod : ∀ p ∈ physicalPieceOpen S K z m,
+      u (p + (0, Real.pi)) * f (p + (0, Real.pi)) = u p * f p) :
     (∫ r in D.a..D.b, radialAngularMean (fun θ => u (r, θ) * f (r, θ))) =
       Real.pi⁻¹ * ∫ p, canonicalHeight S K z m u p * canonicalSource S K z m f p
         ∂canonicalMeasure S K m := by
   let Q : Set PolarPoint :=
-    Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi
+    physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)
   let A : Set PolarPoint := Ioo D.a D.b ×ˢ Ioc (0 : ℝ) Real.pi
   let g : PolarPoint → ℝ := fun p => u p * f p
-  have hQm : MeasurableSet Q := measurableSet_Ioo.prod measurableSet_Ioc
+  have hdomain := h04.1.domains z hz hs m
+  have hQm : MeasurableSet Q := hdomain.1.measurableSet.inter
+    (MeasurableSet.univ.prod measurableSet_Ioc)
   have hAm : MeasurableSet A := measurableSet_Ioo.prod measurableSet_Ioc
-  have hQA : Q ⊆ A := fun p hp => ⟨(h04.2.2.2.1 m).2.2 hp.1, hp.2⟩
+  have hQA : Q ⊆ A := fun p hp => ⟨(hdomain.2.2.1 hp.1).1, hp.2.2⟩
   have hQ : IntegrableOn g Q :=
     (n07a_canonical_pairing_integrable_iff h04 hz hs m u f).mp hi
   have houtside : ∀ p ∈ A \ Q, g p = 0 := by
     intro p hp
-    exact hzero p.1 (fun hr => hp.2 ⟨hr, hp.1.2⟩) p.2
+    exact hzero p (fun hOmega => hp.2 ⟨hOmega, mem_univ _, hp.1.2⟩)
   have hzeroAE : g =ᵐ[volume.restrict (A \ Q)] fun _ => 0 :=
     (ae_restrict_mem (hAm.diff hQm)).mono houtside
   have hdiff : IntegrableOn g (A \ Q) := (integrable_congr hzeroAE).mpr (integrable_zero _ _ _)
@@ -57,14 +58,18 @@ theorem n07a_localized_rough_pairing
       volume.restrict A := by
     rw [angleMeasure, Measure.prod_restrict]
     rfl
+  have hperiodic : Function.Periodic g (0, Real.pi) := by
+    intro p
+    by_cases hp : p ∈ physicalPieceOpen S K z m
+    · exact hperiod p hp
+    · have hps : p + (0, Real.pi) ∉ physicalPieceOpen S K z m :=
+        fun h => hp ((hdomain.2.2.2.1 p).mp h)
+      exact (hzero _ hps).trans (hzero _ hp).symm
   have hAp : ∀ᵐ r ∂volume.restrict (Ioo D.a D.b),
-      Function.Periodic (fun θ => g (r, θ)) Real.pi := by
+      Function.Periodic (fun theta => g (r, theta)) Real.pi := by
     apply Eventually.of_forall
-    intro r
-    by_cases hr : r ∈ Ioo (K.physicalLeft m) (K.physicalRight m)
-    · exact hperiod r hr
-    · intro θ
-      exact (hzero r hr (θ + Real.pi)).trans (hzero r hr θ).symm
+    intro r theta
+    simpa only [Prod.mk_add_mk, add_zero] using hperiodic (r, theta)
   have hhalf := n07a_periodic_radial_mean_eq_half hab
     (show Integrable g ((volume.restrict (Ioo D.a D.b)).prod angleMeasure) by
       rw [hmeasure]; exact hA) hAp

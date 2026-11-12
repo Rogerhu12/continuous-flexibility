@@ -37,7 +37,8 @@ theorem n07a_currentHeightPair_enters_referenceDomain
     (hrad : CanonicalGeometry.ReferenceRadial S C K)
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
     (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
-    (htrans : CanonicalGeometry.TransmissionGeometry D S C K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
+    (hcanonical : CanonicalPrimitiveGeometry D T S C L K base ε)
     (h05 : N05Properties D T S C K V b B)
     (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε)
     (u : HeightPair S) (μ : ℝ)
@@ -49,7 +50,7 @@ theorem n07a_currentHeightPair_enters_referenceDomain
           ((S.height (3 / 4 : ℝ)).decode u.1) := by
   have hV := h05.2.1
   have reference := n07a_exists_referenceGraph_of_current_heightPair
-    hD hT hS h01 h04 hborder hrad href hcur htrans z hz u μ
+    hD hT hS h01 h04 hborder hrad href hcur hRatio hcanonical z hz u μ
     B.weakExponent B.sourceMaterial B.outputMaterial h05.2.2.1 h05.2.2.2.1 hrow
   let v : PolarPoint → ℝ := reference.choose
   have hvc : ContDiffOn ℝ 1 v (annularOpen D) := reference.choose_spec.1
@@ -68,7 +69,7 @@ theorem n07a_currentHeightPair_enters_referenceDomain
       (fun m => canonicalSource S K (C.referenceState, 0) m
         (n07aReferenceCompatibleSource D K v μ)) ((0 : ℕ) : ℝ) :=
     n07a_referenceCompatibleSource_volume
-      hD hT hS h01 h02 h03 h04 href hcur hV z hz u μ hvp hve hv 0 b
+      hD hT hS h01 h02 h03 h04 href hcur hRatio hV z hz u μ hvp hve hv 0 b
   have source : realizes b
       (fun m => canonicalSource S K (C.referenceState, 0) m
         (n07aReferenceCompatibleSource D K v μ)) 0 :=
@@ -79,7 +80,7 @@ theorem n07a_currentHeightPair_enters_referenceDomain
   have remainderNat : realizes 0
       (fun m => canonicalHeight S K (liftSectorParameter S C z) m
         ((S.height (3 / 4 : ℝ)).decode u.1)) ((0 : ℕ) : ℝ) :=
-    n07a_currentHeight_volume hD hT hS h01 h04 href hcur hV z hz u.1 0 0
+    n07a_currentHeight_volume hD hT hS h01 h04 href hcur hRatio hV z hz u.1 0 0
   have remainder : realizes 0
       (fun m => canonicalHeight S K (liftSectorParameter S C z) m
         ((S.height (3 / 4 : ℝ)).decode u.1)) 0 :=

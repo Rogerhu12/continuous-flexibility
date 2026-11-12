@@ -1,5 +1,5 @@
 import ContinuousFlexibility.Analysis.N07aCanonicalSourceBounds
-import ContinuousFlexibility.Analysis.N07aCanonicalHalfStrip
+import ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry
 
 noncomputable section
 
@@ -52,16 +52,18 @@ theorem n07a_canonicalSource_contDiffOn
     {f : PolarPoint → ℝ} (hf : ContDiffOn ℝ ∞ f (annularOpen D)) (m : ℕ) :
     ContDiffOn ℝ ∞ (canonicalSource S K (liftSectorParameter S C z) m f)
       (canonicalOpen S K m) := by
-  have hinterval := h04.2.2.2.1 m
-  have hgeom := h04.2.2.2.2.2.2.2.1 _
+  have hinterval := h04.1.referenceBounds m
+  have hgeom := h04.1.charts _
     (liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) hz le_rfl)
     (hrefState.liftSectorParameter_sector z) m
   have hmaps : MapsTo (K.inverseChart (liftSectorParameter S C z) m)
       (canonicalOpen S K m) (annularOpen D) :=
-    fun y hy => ⟨hinterval.2.2 (hgeom.2.1 hy).1, mem_univ _⟩
+    fun y hy => (h04.1.domains _
+      (liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) hz le_rfl)
+      (hrefState.liftSectorParameter_sector z) m).2.2.1 (hgeom.2.1 hy)
   rw [n07a_canonicalSource_eq_sourceFactor (D := D) (T := T) (S := S) (C := C) (L := L)
     m hinterval.2.1 z f]
-  exact (n07a_canonicalAtomField_smooth hcur (fun m => (h04.2.2.2.1 m).2.1)
+  exact (n07a_canonicalAtomField_smooth hcur (fun m => (h04.1.referenceBounds m).2.1)
     .sourceFactor z hz m).mul (hf.comp hgeom.2.2.2.2.2.1 hmaps)
 
 theorem n07a_canonicalSource_periodic_on
@@ -73,16 +75,17 @@ theorem n07a_canonicalSource_periodic_on
     ∀ y ∈ canonicalOpen S K m,
       canonicalSource S K (liftSectorParameter S C z) m f (y + (0, Real.pi)) =
         canonicalSource S K (liftSectorParameter S C z) m f y := by
-  have hgeom := h04.2.2.2.2.2.2.2.1 _
+  have hgeom := h04.1.charts _
     (liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) hz le_rfl)
     (hrefState.liftSectorParameter_sector z) m
-  have hper := n07a_strip_inverse_periodic hgeom.2.1 hgeom.2.2.1 hgeom.2.2.2.1
-    (fun p hp => (hgeom.2.2.2.2.2.2.2 p hp).2.2.1)
+  have hper := n07a_current_inverseChart_periodic h04
+    (liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) hz le_rfl)
+    (hrefState.liftSectorParameter_sector z) m
   intro y hy
-  have hA := n07a_canonicalAtomField_periodic hcur m (h04.2.2.2.1 m).2.1
+  have hA := n07a_canonicalAtomField_periodic hcur m (h04.1.referenceBounds m).2.1
     .sourceFactor z hz y hy
   rw [n07a_canonicalSource_eq_sourceFactor (D := D) (T := T) (S := S) (C := C) (L := L)
-    m (h04.2.2.2.1 m).2.1 z f]
+    m (h04.1.referenceBounds m).2.1 z f]
   change _ * f (K.inverseChart (liftSectorParameter S C z) m (y + (0, Real.pi))) = _
   rw [hA, hper y hy, hf]
 
@@ -94,9 +97,9 @@ theorem n07a_canonicalSource_even_on
     ∀ y ∈ canonicalOpen S K m,
       canonicalSource S K z m f (y.1, -y.2) = canonicalSource S K z m f y := by
   intro y hy
-  have hx := (h04.2.2.2.2.2.2.2.1 z hz hs m).2.1 hy
-  have hInv := h04.2.2.2.2.2.2.2.2.2.2.1 z hz hs m y hy
-  have hreflect := h04.2.2.2.2.2.2.2.2.2.1 z hz hs m _ hx
+  have hx := (h04.1.charts z hz hs m).2.1 hy
+  have hInv := h04.1.inverseReflection z hz hs m y hy
+  have hreflect := h04.1.reflection z hz hs m _ hx
   simp only [canonicalSource, hInv, hreflect.2.1, hreflect.2.2, hf]
 
 end ContinuousFlexibility.Analysis

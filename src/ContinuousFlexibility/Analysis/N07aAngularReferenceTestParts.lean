@@ -80,7 +80,7 @@ theorem n07a_physical_integrable_mul_continuous {D : ReferenceData}
 
 theorem n07a_reference_angular_green_on_piece {D : ReferenceData}
     {S : PhysicalSpacesData} {K : CanonicalData S} {v φ : PolarPoint → ℝ}
-    {m : ℕ} (hv : ContDiffOn ℝ ∞ v (physicalPieceOpen S K m))
+    {m : ℕ} (hv : ContDiffOn ℝ ∞ v (referencePhysicalPieceOpen S K m))
     (hvp : Function.Periodic v (0, Real.pi)) (hφ : RadialTest D φ)
     {r : ℝ} (hr : r ∈ Ioo (K.physicalLeft m) (K.physicalRight m)) :
     (∫ θ in (0 : ℝ)..2 * Real.pi, v (r, θ) * n07aReferenceTestAngular D φ (r, θ)) =

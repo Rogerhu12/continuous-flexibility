@@ -29,11 +29,13 @@ theorem n07aPhysicalTestPullback_even
     ∀ r θ, n07aPhysicalTestPullback S K z m W (r, -θ) =
       n07aPhysicalTestPullback S K z m W (r, θ) := by
   intro r θ
-  by_cases hr : r ∈ Ioo (K.physicalLeft m) (K.physicalRight m)
-  · have hp : (r, θ) ∈ physicalPieceOpen S K m := ⟨hr, mem_univ _⟩
-    obtain ⟨hc, hh, _⟩ := h04.2.2.2.2.2.2.2.2.2.1 z hz hs m (r, θ) hp
-    simp only [n07aPhysicalTestPullback, ite_eq_left hr, hc, hh, hW]
-  · simp only [n07aPhysicalTestPullback, ite_eq_right hr]
+  have hmem := (h04.1.domains z hz hs m).2.2.2.2.1 (r, θ)
+  by_cases hp : (r, θ) ∈ physicalPieceOpen S K z m
+  · have hp' : (r, -θ) ∈ physicalPieceOpen S K z m := hmem.mpr hp
+    obtain ⟨hc, hh, _⟩ := h04.1.reflection z hz hs m (r, θ) hp
+    simp only [n07aPhysicalTestPullback, ite_eq_left hp, ite_eq_left hp', hc, hh, hW]
+  · have hp' : (r, -θ) ∉ physicalPieceOpen S K z m := fun h => hp (hmem.mp h)
+    simp only [n07aPhysicalTestPullback, ite_eq_right hp, ite_eq_right hp']
 
 theorem n07a_referenceGraph_pulledTest_equation
     (hab : D.a ≤ D.b) (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
@@ -77,7 +79,7 @@ theorem n07a_referenceGraph_pulledTest_equation
       f p - U.2.2.2 * ψ p at hg
     rw [hψp p] at hg
     linarith only [hg]
-  have hm := (h04.2.2.2.1 m).2.1
+  have hm := (h04.1.referenceBounds m).2.1
   let col := n07aReferenceScalarOpenCoefficient hJ m hm 2
   have hψsrc : canonicalSource S K (C.referenceState, 0) m ψ = col.value := rfl
   have hiψ : Integrable (fun p => canonicalSource S K (C.referenceState, 0) m ψ p * W p)

@@ -72,14 +72,14 @@ variable {D : ReferenceData} {S : PhysicalSpacesData} {K : CanonicalData S}
 
 theorem n07a_referenceNormalSource_ae_right
     (hw : Differentiable ℝ D.w) {v : PolarPoint → ℝ}
-    (hv : ∀ m, ContDiffOn ℝ ∞ v (physicalPieceOpen S K m))
+    (hv : ∀ m, ContDiffOn ℝ ∞ v (referencePhysicalPieceOpen S K m))
     (hcover : ∀ᵐ r ∂volume.restrict (radialCore D),
       ∃ m, r ∈ Ioo (K.physicalLeft m) (K.physicalRight m)) (θ : ℝ) :
     (fun r => n07aReferenceNormalSource D K v (r, θ)) =ᵐ[volume.restrict (radialCore D)]
       fun r => n07aReferenceRightFluxDerivative D v (r, θ) := by
   filter_upwards [hcover] with r hr
   obtain ⟨m, hm⟩ := hr
-  have hp : (r, θ) ∈ physicalPieceOpen S K m := ⟨hm, mem_univ _⟩
+  have hp : (r, θ) ∈ referencePhysicalPieceOpen S K m := ⟨hm, mem_univ _⟩
   have hmem : (r, θ) ∈ n07aReferencePieceInterior K := mem_iUnion.mpr ⟨m, hp⟩
   rw [n07aReferenceNormalSource, indicator_of_mem hmem]
   exact (n07a_referenceRightFluxDerivative_eq (hw r)
@@ -87,7 +87,7 @@ theorem n07a_referenceNormalSource_ae_right
 
 theorem n07a_referenceSource_mean_eq_normal_on_piece
     {v : PolarPoint → ℝ}
-    {m : ℕ} (hv : ContDiffOn ℝ ∞ v (physicalPieceOpen S K m))
+    {m : ℕ} (hv : ContDiffOn ℝ ∞ v (referencePhysicalPieceOpen S K m))
     (hvp : Function.Periodic v (0, Real.pi))
     {r : ℝ} (hr : r ∈ Ioo (K.physicalLeft m) (K.physicalRight m)) :
     radialAngularMean (fun θ => n07aReferenceInteriorDifferential D K v (r, θ)) =

@@ -128,6 +128,24 @@ theorem periodic (data : N07aActualCanonicalSolutionData D T S C L K V b B P bas
   exact (n07aCanonicalSmoothRepresentative_properties (data.interval m)
     ⟨(data.U z f).1 m, data.regular z hz f m⟩).2.1
 
+/-- The actual relative inverse still takes its values in the original
+reference graph. This retains the reference weak equation needed to identify
+the two genuine first traces, independently of the current source sequence. -/
+theorem referenceGraph
+    (data : N07aActualCanonicalSolutionData D T S C L K V b B P base ε)
+    (h05 : N05Properties D T S C K V b B)
+    (z : CanonicalGeometry.Parameter S) (f : S.Source) :
+    ∃ Fref : CanonicalSequence S K, ∃ ηref fref : PolarPoint → ℝ,
+      HasCanonicalRepresentation D S C K (C.referenceState, 0)
+        (data.U z f) Fref ηref fref ∧
+      ReferenceGraph D B.weakExponent B.sourceMaterial B.outputMaterial
+        (ηref, (data.U z f).2.2.1)
+        ((fun p => fref p - (data.U z f).2.2.2 *
+          (S.height (3 / 4 : ℝ)).decode S.psi p), 0) := by
+  let u := n07aBaseInverse B P (liftSectorParameter S C z) (data.F₀ z f)
+  have hgraph := (h05.2.2.2.2.2.2.1 u.val).mp u.property
+  exact ⟨V.forget (3 / 4 : ℝ) 0 b u.val.2, hgraph.2⟩
+
 end N07aActualCanonicalSolutionData
 
 end ContinuousFlexibility.Analysis

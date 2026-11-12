@@ -58,16 +58,17 @@ theorem n07a_actualScalarColumns_volume
     (h03 : N03Properties D T S C R L base ε)
     (h04 : N04Properties D T S C L K base loss ε)
     (href : ReferenceJets D T S C L K) (hcur : CurrentJets D T S C L K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
     (hV : IsVolumeModel T S K V) :
     ∃ d : ℕ, ∀ γ t : ℝ, ∀ s : ℕ, ∃ A : ℝ, 0 < A ∧
       ∀ z (hz : z ∈ sectorNeighborhood S base ε ε), ∀ i : Fin 3,
       ∃ W : V.level γ t s,
         V.forget γ t s W = (fun m =>
-          (n07aCurrentScalarOpenCoefficient href hcur z hz m (h04.2.2.2.1 m).2.1 i).toLp) ∧
+          (n07aCurrentScalarOpenCoefficient href hcur z hz m (h04.1.referenceBounds m).2.1 i).toLp) ∧
         ‖W‖ ≤ A * (1 + parameterGrading S (s + d) z) := by
   classical
-  let hI : ∀ m, K.left m < K.right m := fun m => (h04.2.2.2.1 m).2.1
-  let support := n07a_canonicalScalarColumns_finite_support hD hS hT h01 h04 href
+  let hI : ∀ m, K.left m < K.right m := fun m => (h04.1.referenceBounds m).2.1
+  let support := n07a_canonicalScalarColumns_finite_support hD hS hT h01 h04 href hRatio
   let I : Finset ℕ := support.choose
   have hsupport := support.choose_spec
   let estimates := n07a_canonicalAtomFields_sampleJetBounds hD hT href hcur hI
@@ -124,10 +125,10 @@ theorem n07a_referenceScalarColumns_volume
     (γ t : ℝ) (s : ℕ) :
     ∃ W : Fin 3 → V.level γ t s, ∀ i : Fin 3,
       V.forget γ t s (W i) = (fun m =>
-        (n07aReferenceScalarOpenCoefficient href m (h04.2.2.2.1 m).2.1 i).toLp) := by
+        (n07aReferenceScalarOpenCoefficient href m (h04.1.referenceBounds m).2.1 i).toLp) := by
   classical
-  let hI : ∀ m, K.left m < K.right m := fun m => (h04.2.2.2.1 m).2.1
-  let support := n07a_canonicalScalarColumns_finite_support hD hS hT h01 h04 href
+  let hI : ∀ m, K.left m < K.right m := fun m => (h04.1.referenceBounds m).2.1
+  let support := n07a_referenceCanonicalScalarColumns_finite_support hD hS hT h01 h04 href
   let I : Finset ℕ := support.choose
   have hsupport := support.choose_spec
   have hz := n07a_reference_mem_stateNeighborhood h01
@@ -139,7 +140,7 @@ theorem n07a_referenceScalarColumns_volume
     n07a_canonicalScalarColumn_even hS h03 h04 _ hz hs m i p hp
   have hzero (i : Fin 3) (m : ℕ) (hm : m ∉ I) :
       EqOn (χ i m).value (fun _ => (0 : ℝ)) (canonicalOpen S K m) :=
-    hsupport _ hz hs m hm i
+    hsupport m hm i
   let all (i : Fin 3) := exists_n07aFiniteCoefficientVolume hD hT hV γ t s
     (χ i) (heven i) I (hzero i)
   exact ⟨fun i => (all i).choose, fun i => (all i).choose_spec.1⟩
@@ -150,16 +151,17 @@ theorem n07a_relativeScalarColumns_volume
     (h03 : N03Properties D T S C R L base ε)
     (h04 : N04Properties D T S C L K base loss ε)
     (href : ReferenceJets D T S C L K) (hcur : CurrentJets D T S C L K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε)
     (hV : IsVolumeModel T S K V) :
     ∃ d : ℕ, ∀ γ t : ℝ, ∀ s : ℕ, ∃ A : ℝ, 0 < A ∧
       ∀ z (hz : z ∈ sectorNeighborhood S base ε ε), ∀ i : Fin 3,
       ∃ W : V.level γ t s,
         V.forget γ t s W = (fun m =>
-          ((n07aCurrentScalarOpenCoefficient href hcur z hz m (h04.2.2.2.1 m).2.1 i).sub
-            (n07aReferenceScalarOpenCoefficient href m (h04.2.2.2.1 m).2.1 i)).toLp) ∧
+          ((n07aCurrentScalarOpenCoefficient href hcur z hz m (h04.1.referenceBounds m).2.1 i).sub
+            (n07aReferenceScalarOpenCoefficient href m (h04.1.referenceBounds m).2.1 i)).toLp) ∧
         ‖W‖ ≤ A * (1 + parameterGrading S (s + d) z) := by
   classical
-  let bounds := n07a_actualScalarColumns_volume hD hS hT h01 h03 h04 href hcur hV
+  let bounds := n07a_actualScalarColumns_volume hD hS hT h01 h03 h04 href hcur hRatio hV
   let d : ℕ := bounds.choose
   have hb := bounds.choose_spec
   refine ⟨d, fun γ t s => ?_⟩

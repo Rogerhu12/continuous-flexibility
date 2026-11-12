@@ -27,12 +27,11 @@ theorem n07aPhysicalTestPullback_height
     (W : PolarPoint → ℝ) :
     EqOn (canonicalHeight S K z m (n07aPhysicalTestPullback S K z m W)) W
       (canonicalOpen S K m) := by
-  rcases h04 with ⟨_, _, _, _, _, _, _, hgeom, _⟩
-  obtain ⟨_, hg, _, hfg, _, _, _, hp⟩ := hgeom z hz hs m
+  obtain ⟨_, hg, _, hfg, _, _, _, hp⟩ := h04.1.charts z hz hs m
   intro p hpm
   have hq := hg hpm
   have hh := (hp _ hq).1.ne'
-  simp only [canonicalHeight, n07aPhysicalTestPullback, ite_eq_left hq.1, hfg p hpm]
+  simp only [canonicalHeight, n07aPhysicalTestPullback, ite_eq_left hq, hfg p hpm]
   field_simp [hh]
 
 theorem n07aPhysicalTestPullback_source_operator
@@ -44,12 +43,12 @@ theorem n07aPhysicalTestPullback_source_operator
       (fun p => divergenceOperator (K.coefficients z m) W p +
         (if K.positive m then -1 else (1 : ℝ)) * K.potential z m p * W p)
       (canonicalOpen S K m) := by
-  rcases h04 with ⟨_, _, _, _, _, _, _, hgeom, _, _, _, _, _, hop, _⟩
-  obtain ⟨_, hg, _, _, _, _, _, _⟩ := hgeom z hz hs m
+  have hop := h04.2.1.2.2.1
+  have hg := (h04.1.charts z hz hs m).2.1
   intro p hp
   have hq := hg hp
   have he := n07a_divergenceOperator_unknown_germ (L.coefficients z)
-    (n07aPhysicalTestPullback_germ z m W hq)
+    (n07aPhysicalTestPullback_germ z m W (h04.1.domains z hz hs m).1 hq)
   have hsource : canonicalSource S K z m
       (divergenceOperator (L.coefficients z) (n07aPhysicalTestPullback S K z m W)) p =
       canonicalSource S K z m (divergenceOperator (L.coefficients z)

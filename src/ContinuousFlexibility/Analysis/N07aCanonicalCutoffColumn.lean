@@ -52,7 +52,7 @@ theorem n07aCanonicalCutoffHeight_smooth
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (hχ : ContDiff ℝ ∞ S.chiLeft) :
     ContDiffOn ℝ ∞ (n07aCanonicalCutoffHeight S K z m) (canonicalOpen S K m) := by
-  obtain ⟨_, hg, _, _, _, hgs, hh, hpoint⟩ := h04.2.2.2.2.2.2.2.1 z hz hs m
+  obtain ⟨_, hg, _, _, _, hgs, hh, hpoint⟩ := h04.1.charts z hz hs m
   exact (hχ.comp_contDiffOn hgs.fst).div (hh.comp hgs hg)
     (fun p hp => (hpoint _ (hg hp)).1.ne')
 
@@ -62,9 +62,8 @@ theorem n07aCanonicalCutoffHeight_periodic
     ∀ p ∈ canonicalOpen S K m,
       n07aCanonicalCutoffHeight S K z m (p + (0, Real.pi)) =
         n07aCanonicalCutoffHeight S K z m p := by
-  obtain ⟨_, hg, hgf, hfg, _, _, _, hpoint⟩ := h04.2.2.2.2.2.2.2.1 z hz hs m
-  have hgp := n07a_strip_inverse_periodic hg hgf hfg
-    (fun p hp => (hpoint p hp).2.2.1)
+  obtain ⟨_, hg, hgf, hfg, _, _, _, hpoint⟩ := h04.1.charts z hz hs m
+  have hgp := n07a_current_inverseChart_periodic h04 hz hs m
   intro p hp
   simp only [n07aCanonicalCutoffHeight, canonicalHeight, hgp p hp,
     Prod.fst_add, add_zero, (hpoint _ (hg hp)).2.2.2]
@@ -79,7 +78,7 @@ theorem n07aCanonicalCutoffHeight_column
           (if K.positive m then -1 else (1 : ℝ)) * K.potential z m p *
             n07aCanonicalCutoffHeight S K z m p)
       (canonicalOpen S K m) := by
-  obtain ⟨_, hg, hgf, hfg, hfs, _, _, hpoint⟩ := h04.2.2.2.2.2.2.2.1 z hz hs m
+  obtain ⟨_, hg, hgf, hfg, hfs, _, _, hpoint⟩ := h04.1.charts z hz hs m
   intro p hp
   obtain ⟨W, hW, hgerm⟩ := n07a_canonicalOpen_germ_test
     (n07aCanonicalCutoffHeight_smooth h04 hz hs hχ)
@@ -87,12 +86,12 @@ theorem n07aCanonicalCutoffHeight_column
   have hq := hg hp
   have hchart : Tendsto (K.chart z m) (𝓝 (K.inverseChart z m p)) (𝓝 p) := by
     simpa only [hfg p hp] using
-      (hfs.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hq)).continuousAt.tendsto
+      (hfs.contDiffAt ((h04.1.domains z hz hs m).1.mem_nhds hq)).continuousAt.tendsto
   have hraw : n07aPhysicalTestPullback S K z m W =ᶠ[𝓝 (K.inverseChart z m p)]
       fun q => S.chiLeft q.1 := by
-    filter_upwards [n07aPhysicalTestPullback_germ z m W hq,
+    filter_upwards [n07aPhysicalTestPullback_germ z m W (h04.1.domains z hz hs m).1 hq,
       hgerm.comp_tendsto hchart,
-      (isOpen_Ioo.prod isOpen_univ).mem_nhds hq] with q htest hcomp hqin
+      (h04.1.domains z hz hs m).1.mem_nhds hq] with q htest hcomp hqin
     simp only [Function.comp_apply] at hcomp
     rw [htest, hcomp]
     simp only [n07aCanonicalCutoffHeight, canonicalHeight, hgf q hqin]

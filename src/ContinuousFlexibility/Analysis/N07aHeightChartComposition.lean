@@ -42,7 +42,8 @@ theorem n07a_height_inverseChart_composition_bound
     (hrefState : referenceStateConditions D S C)
     (h04 : N04Properties D T S C L K base loss ε)
     (href : CanonicalGeometry.ReferenceJets D T S C L K)
-    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε) :
+    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
+    (hRatio : N07aActualMaterialRatios T S C K base ε) :
     ∃ low outLoss : ℕ, ∀ a b c : ℕ, ∃ e : ℕ → ℝ,
       N07aSampleSubpower T K e ∧ (∀ m, 0 ≤ e m) ∧
         ∀ z ∈ sectorNeighborhood S base ε ε,
@@ -67,7 +68,7 @@ theorem n07a_height_inverseChart_composition_bound
   have hIp : HasSmoothing p :=
     hasSmoothing_pairGrading (solve_sector_hasSmoothing hS) hasSmoothing_realGrading
   have hIq : HasSmoothing q := (hS.2.2.2.1 γ).2.1
-  have hinterval := h04.2.2.2.1
+  have hinterval := h04.1.referenceBounds
   have hInv := n07a_inverseChart_positive_jets hD hT href hcur
     (fun m => (hinterval m).2.1) (fun m => (hinterval m).1)
   let d₀ := hInv.choose
@@ -80,14 +81,16 @@ theorem n07a_height_inverseChart_composition_bound
       (inv_nonneg.mpr (pow_nonneg (zero_le_one.trans hpos.2.2.2) c))
   have hmaps (z : CanonicalGeometry.Parameter S) (hz : z ∈ U) (m : ℕ) :
       MapsTo (Φ z m) (canonicalOpen S K m) (annularOpen D) := by
-    have hgeom := h04.2.2.2.2.2.2.2.1 _
+    have hgeom := h04.1.charts _
       (liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) hz le_rfl)
       (hrefState.liftSectorParameter_sector z) m
     intro y hy
-    exact ⟨(hinterval m).2.2 (hgeom.2.1 hy).1, mem_univ _⟩
+    exact (h04.1.domains _
+      (liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) hz le_rfl)
+      (hrefState.liftSectorParameter_sector z) m).2.2.1 (hgeom.2.1 hy)
   have hφs (z : CanonicalGeometry.Parameter S) (hz : z ∈ U) (m : ℕ) :
       ContDiffOn ℝ ∞ (Φ z m) (canonicalOpen S K m) :=
-    (h04.2.2.2.2.2.2.2.1 _
+    (h04.1.charts _
       (liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) hz le_rfl)
       (hrefState.liftSectorParameter_sector z) m).2.2.2.2.2.1
   have houter (n c : ℕ) : ∃ e : ℕ → ℝ,
@@ -96,7 +99,7 @@ theorem n07a_height_inverseChart_composition_bound
           ‖iteratedFDeriv ℝ n ((S.height γ).decode u) (Φ z m y)‖ ≤
             e m * w c m * q (c + n + d) u := by
     have hout := n07a_source_jets_at_inverseChart (S := S) (C := C) (L := L) (K := K)
-      (A := S.height γ) hD hT (hS.1 γ) hγ hγ1 hrefState h04 href n c
+      (A := S.height γ) hD hT (hS.1 γ) hγ hγ1 hrefState h04 hRatio n c
     let e : ℕ → ℝ := hout.choose
     have he := hout.choose_spec.1
     have he0 := hout.choose_spec.2.1
