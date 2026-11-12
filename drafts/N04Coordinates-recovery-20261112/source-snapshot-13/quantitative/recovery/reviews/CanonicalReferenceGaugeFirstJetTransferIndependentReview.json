@@ -1,0 +1,70 @@
+{
+  "kind": "independent_actual_negative_reference_gauge_first_jet_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "passed_static_full_source_and_actual_provider_review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeFirstJetTransfer.lean",
+    "sha256": "d7c66f9ba5747ed0b2cfff763b67a823e0c2a5f2de86b6da045f0f56ef238c78",
+    "git_blob": "277d516f1a3b04934606c057b1539d3fd2d371b9",
+    "lines": 77
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeFirstJetTransferCandidateManifest.json",
+    "sha256": "66175753f868b41466911b71a2ef52c69490a31de7c52b0f0c225e1aa3d1b54c",
+    "git_blob": "48aadc76eac0b782678bac74407bf49b07ef8d09",
+    "lines": 58
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeReconstruction.lean",
+      "sha256": "93acd97fbcd9b462756450fd73b0c507a7c6685b498c4064742c6dc0ba33d210",
+      "git_blob": "26ed383f47116763359682c60dc2edc920b01d5e",
+      "lines": 108
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveReferenceGaugeFirstJets.lean",
+      "sha256": "eb26b1fa7b31c91e00d9671367cb8c80494714bd93053a41ae702f812780c3b4",
+      "git_blob": "65bb127b9dd24cee1d337794f1a01d8f12a54326",
+      "lines": 53
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteFirstJetInverse.lean",
+      "sha256": "fe97f63f7fc52a74a7a2a45f96839fa479f0e156540bdaddc83976ae0fe390ca",
+      "git_blob": "bf09a201a95c1fbcfb1c956a58a2fc041e6a0051",
+      "lines": 104
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveReferenceGauge.lean",
+      "sha256": "dcb5eb3bd694ee95af4247d255bdc86e8253f2e18756857ffcf46563ee26ccc9",
+      "git_blob": "de708f3a6b8139a3b1b0c995c270c576f7e451b4",
+      "lines": 171
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalActualEndpointFields.lean",
+      "sha256": "1ad3a145230072398f180d696e774230f26e0b8f2d97dc5acbb33f6acc6e93eb",
+      "git_blob": "b72852cb592db98ad8a2bf5ac5c0f09c74c72962",
+      "lines": 221
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalClosedTransport.lean",
+      "sha256": "446db5702c1e574466bb9e66c14a7ad72b6b824df7ea950a642fec5c9d0beb53",
+      "git_blob": "4042a6df041abfdc7024a0d8ef5e26d98710b93a",
+      "lines": 90
+    }
+  ],
+  "checks": [
+    "Read all 77 lines and the full 108-line reconstruction and 53-line transport transfer providers; verified the actual installed closed inverse-data and positive height-ratio signatures.",
+    "The zero jet of h_tau fixes tau(p) to the actual stored current point. Both reference inverse smoothness and the current/reference right germ are explicitly moved to this same point; the original left germ remains at p.",
+    "The actual positive stored height ratio proves Q(p) nonzero using hQ.value. No inverse or denominator is chosen independently.",
+    "The generic first-jet transfer is instantiated with A composed with psi and B composed with the old reference chart. Definitional composition associativity identifies its output with the displayed fixed outer alignments.",
+    "The actual closed full-germ reconstruction then replaces the negative-side gauge fields by the same stored current chart and height. Composition of the first chart match with the fixed smooth B preserves the evaluation point.",
+    "The scalar normal-zero corollary uses only the same inverse value equality sigma(tau(p))=p and the actual gauge definition. It does not assert current raw matching as an extra input.",
+    "Both public names are absent from the installed source tree. No source or active state was modified."
+  ],
+  "limitations": [
+    "Static source and provider review only; no compilation or quantitative inverse/material estimate is claimed."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

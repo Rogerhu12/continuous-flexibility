@@ -1,0 +1,11 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OpticalRootMaterialCollar.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/optical-collar-closure-direction/N01OpticalRootMaterialCollar.lean
+@@ -50,7 +50,7 @@
+       · rw [min_eq_right (by linarith only [ht.2])]
+         ring
+   have hcl : (0 : ℝ) ∈ closure (Ioo (0 : ℝ) ((h - l) / 2)) := by
+-    rw [closure_Ioo hρ.ne']
++    rw [closure_Ioo hρ.ne]
+     exact ⟨le_rfl, hρ.le⟩
+   haveI : NeBot (𝓝[Ioo (0 : ℝ) ((h - l) / 2)] (0 : ℝ)) :=
+     mem_closure_iff_nhdsWithin_neBot.mp hcl

@@ -1,0 +1,23 @@
+{
+  "kind": "same_actual_reference_gauge_reviewed_manifest",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+    "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+    "git_blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+    "lines": 131
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasDataCandidateManifest.json",
+    "sha256": "c0390a505015dddbdf7432539e49e47e95b97ddde1f79668e6e065635a3265e0",
+    "git_blob": "da59ebe42ee00f85ffcd764d2c6aa5277ff90f2f",
+    "lines": 43
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/WholeReferenceGaugeAtlasDataIndependentReview.json",
+    "sha256": "b1a632492a5d1c2199c1f446ca138af4a7571ba57c6d79c7bd533ac4003c530d",
+    "git_blob": "0b56a1350539b6fdad06455816d48d632db97a63",
+    "lines": 66
+  },
+  "compiled": false
+}

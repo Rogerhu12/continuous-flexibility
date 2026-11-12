@@ -1,0 +1,50 @@
+{
+  "kind": "actual_finite_radial_reference_interpolation_candidate",
+  "author": "/root",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/PositiveReferenceFiniteRadialJets.lean",
+    "sha256": "9116844af9f9df958750cee6c925e997fe461c16e6af0139dd5f54b5299c8e5f",
+    "git_blob": "63e70601a48da903d72342fbc1aa3e2e5dacf75f",
+    "lines": 163
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/OneSidedBoundaryTaylorRepresentative.lean",
+      "sha256": "50d11b8070524604511c037a38d04be1517f5802548d963ac93184c165787b76",
+      "git_blob": "3a3cfa0ce1db7be51420bcaa2ceb6dedd4e86855",
+      "lines": 130
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceInterpolation.lean",
+      "sha256": "1057a11e20d7fe6e346a1a51f730e761783a3235b60fc893f245c2838225322b",
+      "git_blob": "38da0bcc0e61d31edb2dfd6eb86cad45c71d9c71",
+      "lines": 166
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceCylinder.lean",
+      "sha256": "6ececb96b06c704d8672c58cbe2b395bf3ce8967a667b046cd09466249b5c4de",
+      "git_blob": "c1c59b1c3240feeec1539a65ce0c8a8a4ec7ba48",
+      "lines": 128
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "git_blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "lines": 168
+    }
+  ],
+  "construction": [
+    "Take the exact finite radial Taylor representative of each original one-sided endpoint field.",
+    "Radiality on the genuine open side gives global radiality of this polynomial representative; its zero-angle slice is globally smooth.",
+    "Original endpoint values and slopes are retained, so the positive scalar interpolation produces actual Y and H with smooth inverse and canonical range (0,1).",
+    "Lift scalar endpoint germs and use the existing full-jet boundary matching to retain every ordinary endpoint jet through the chosen fixed degree."
+  ],
+  "limits": [
+    "This is a qualitative constructor and finite full-jet identity, not a claim of uniform material bounds for its chosen collar.",
+    "The original actual negative/ambient endpoint fields and their radiality/positive slopes remain separate concrete adapters.",
+    "Reference jet material bounds require a genuinely quantitative width and coefficient analysis; no arbitrary inverse-radius bound is assumed."
+  ],
+  "compiled": false,
+  "active_checkout_modified": false
+}

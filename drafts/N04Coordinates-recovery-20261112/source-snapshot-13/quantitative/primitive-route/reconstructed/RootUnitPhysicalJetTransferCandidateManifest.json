@@ -1,0 +1,35 @@
+{
+  "kind": "orientation_only_actual_root_physical_transfer_candidate",
+  "author": "/root/quantitative_route",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootUnitPhysicalJetTransfer.lean",
+    "sha256": "3e2271909f99a4d4be277c97f5436b21de43aacd497e8134cdd3d47f8c3c855c",
+    "git_blob": "5585fe17464c601e3ef931d94f3d03a3238ab131",
+    "lines": 58
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootPhysicalJetTransfer.lean",
+      "sha256": "59965f4769148462b4cf526e64dbdca0fc8d8f764f77631bfbf0a58273a2442a",
+      "git_blob": "0f0f934377269572355ee7d3fbcedaa1aef759c0",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootAffineOrdinaryJets.lean",
+      "sha256": "019086a0c2d373cbd7d5c1b5bc4061657c1bda526d7bc631d1b45f7e3df1bd35",
+      "git_blob": "21960d99b3c526141925fc66a61ce3732eb5cf1b",
+      "lines": 193
+    }
+  ],
+  "derived": [
+    "For either genuine inward orientation, the actual inverse radial linear map has norm one.",
+    "The existing true ordinary-jet transfer therefore costs exactly two in the displayed majorant and no Jacobian scale divisor.",
+    "The same chart, height, state, loss and physical evaluation point are preserved."
+  ],
+  "limitations": [
+    "This is only the final algebraic transfer of genuine unit-model estimates; it does not assume or prove that those estimates follow from current Through03."
+  ],
+  "compiled": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

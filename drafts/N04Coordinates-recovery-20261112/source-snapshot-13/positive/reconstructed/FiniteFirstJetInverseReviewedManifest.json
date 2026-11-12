@@ -1,0 +1,24 @@
+{
+  "kind": "finite_first_jet_inverse_reviewed_manifest",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteFirstJetInverseCandidateManifest.json",
+    "sha256": "62f3545a309bc985ef086396a5c9d756dad1e608d482036bc8d091052a77ec67",
+    "blob": "31d57021a514cff643b6e7802c906d5974b87cf1",
+    "lines": 46
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteFirstJetInverse.lean",
+    "sha256": "fe97f63f7fc52a74a7a2a45f96839fa479f0e156540bdaddc83976ae0fe390ca",
+    "blob": "bf09a201a95c1fbcfb1c956a58a2fc041e6a0051",
+    "lines": 104
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/FiniteFirstJetInverseIndependentReview.json",
+    "sha256": "70db2bf26d4d5312dc5dce0b390ca2747204634ae1e86649c0fd701f6be1c5f1",
+    "blob": "390ea4b52a5c5017dcdd414388511823b279c4e4",
+    "lines": 70
+  },
+  "compiled": false,
+  "green_receipt_applies": false
+}

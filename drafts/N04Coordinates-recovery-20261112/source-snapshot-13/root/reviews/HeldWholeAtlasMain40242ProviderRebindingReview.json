@@ -1,0 +1,33 @@
+{
+  "kind": "held_25_source_group_main_interface_rebinding_review",
+  "reviewer": "/root",
+  "reviewed_at": "2026-11-12T11:28:08.965365+00:00",
+  "line_head": "1ceec0b0a72a356c3ed08740438cbc84f0fffdec",
+  "main": "40242eae88c48c0d7edf55177c1bbb84798a10cb",
+  "result": "reviewed for the existing relative and negative-field intermediate conclusions only",
+  "changed_providers": [
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "old": "97aa466ceee79bd9e21887d8948042478820ca79",
+      "new": "7a05b947965738dcb91957059e102f9ea813e52b",
+      "file": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean"
+    },
+    {
+      "module": "ContinuousFlexibility.Blueprint.Statements",
+      "old": "8652b4ea403cea588d932c7504b385828cfb04c0",
+      "new": "af5ba9dacc2c7b026d6535f09e886ce22ca2e673",
+      "file": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Blueprint/Statements.lean"
+    }
+  ],
+  "checks": [
+    "Read the complete exact Git diffs of both changed statement-provider blobs and the relevant new primitive/transmission definitions.",
+    "Statements.Nonlinear keeps all fields of CanonicalData, canonical/current-point functions, N04Properties and original CanonicalGeometry unchanged. It appends actual b/c spatial regularity to N03Properties, preserving its earlier clauses and Through03 outer structure.",
+    "Blueprint.Statements adds PrimitiveGeometryProperties to N04cStatement. No source in the held 25-file group proves or projects N04cStatement; no source is being declared a proof of the strengthened target.",
+    "Existing relative positive atlas results still prove their original intermediate geometry and operator conclusions. They do not supply the new raw reference gauge or RootFirstJetMatching and will only be used as intermediates.",
+    "The local state instance caches and moved nuColumnField retain their actual definitions. Added weak-relation periodicity lies downstream and is not consumed by these held modules.",
+    "The other three changed providers are the separately reviewed CI134-136 repairs with exact retained hashes. The full transitive import and declaration-collision preflight is required again before activation."
+  ],
+  "compiled": false,
+  "active_sources_modified": false,
+  "activation_gate": "Current-head full CI success is still required before staging this held group."
+}

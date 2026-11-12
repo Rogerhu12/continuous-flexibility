@@ -1,0 +1,117 @@
+{
+  "kind": "independent_full_source_and_actual_provider_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "passed static full-source and actual-provider review",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeRadialFields.lean",
+      "sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+      "git_blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+      "lines": 156
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeEndpointData.lean",
+      "sha256": "f88706279e2902514c3bda2fdd618785c19d2be4f848d1eaf44758e2bdfd7f27",
+      "git_blob": "7d2ff0fac9e08218174cd6870ba79b8529aa8a01",
+      "lines": 126
+    }
+  ],
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeEndpointDataCandidateManifest.json",
+    "sha256": "6fc673936537bcd75c97b5a00d0704ca19d8dff82c5f2699759a49120bad9d95",
+    "git_blob": "3e86293843d37a636aa34602fec7fda9c8f489ed",
+    "lines": 109
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativePrincipalDensity.lean",
+      "sha256": "9623635a4a0d7766d72eb7b2d09213aa1bae3fb23385e0325304e60c97741181",
+      "git_blob": "3ba8a57f4c89b91f24c918f32a8eea3d9460c910",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalRootTransportBoundary.lean",
+      "sha256": "061f9debff039902b318f9adb1478337bc0c0f00936a73a02314db9b8836eb8e",
+      "git_blob": "c68a526e559104ca8b71c64c708ee8526bcd67b1",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01OpticalCollarPositivity.lean",
+      "sha256": "4b9b30f66f4d1d914e3830e111a0e8d69ef0ff1a5c0926c7528fc08cd0e76b1c",
+      "git_blob": "c392ff0cc2bba65c52097c72e879e2f90dd2dbec",
+      "lines": 340
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasCuts.lean",
+      "sha256": "1c1ca0be70e7134d99086b9d491732bc983447a8d9700cd17cfa4606e0f7c26e",
+      "git_blob": "3e6847f1dc053e029284c4f490ab351c5c310da2",
+      "lines": 97
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualRootInterior.lean",
+      "sha256": "e48818ca3333c9e39ad2b5cf2528733a278f2aa2921a83508be9f8e4c759e66c",
+      "git_blob": "f59704e802cdf7bd9ae8a66504974410052233e0",
+      "lines": 105
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferenceActualTravel.lean",
+      "sha256": "4307b8b206489be492e33a3f12198e4af5271c45a5db821b85ac2db0133ce7eb",
+      "git_blob": "07661eae46124d0a5550bf4f6de16a5874838d3c",
+      "lines": 243
+    }
+  ],
+  "additional_targeted_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasGerms.lean",
+      "sha256": "5abee83c1a68e2b04a6d733f7e51473a15453d5debda0e8526106462e3b4d73e",
+      "git_blob": "0bf89b2339f60ac8ba2cf9678637f4bf96830a66",
+      "lines": 94
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalCutOrientation.lean",
+      "sha256": "c536ac6d71accab008265c7fd6cae7b8398cc89607a4f56abee52788a807e755",
+      "git_blob": "036e1277737b1441ead7382702aaf665f2169794",
+      "lines": 228
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootHeightSymmetry.lean",
+      "sha256": "5ff9c1ed62aad30e2ae259416e9710d003b1398841e772ba7bc1592d4256e24f",
+      "git_blob": "44a79862196d5ede176580b140ed8597232d5828",
+      "lines": 160
+    }
+  ],
+  "pinned_calculus_providers": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Comp.lean",
+      "sha256": "16a41715830ec582c91cb5262e2defab08052d7e749bb91ee059905c0b0e1847",
+      "git_blob": "bca5a3ed558bd9f14be2a277d9e01bd025227307",
+      "lines": 415
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Separation/Basic.lean",
+      "sha256": "eef069ed48539056723d55096ecc0a1cdb2a1a8ff6fa339cd2b91c0b513f07b0",
+      "git_blob": "381ec2341fa287989edd3e0ad506ee4cd0b69703",
+      "lines": 1218
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Order/DenselyOrdered.lean",
+      "sha256": "b02cb3aa48b52b227247c6efbd3ac1ec1f0ddbb24420dde89c40614d392c300d",
+      "git_blob": "6158d1cc81003eb1ac571469b7ac645e2e7b31f3",
+      "lines": 316
+    }
+  ],
+  "checks": [
+    "Read both complete sources, 156+126 lines. The actual reference travel identity gives the stored chart its radial first coordinate and angular identity on the full open negative component, using the original atlas germs.",
+    "The common radial differential is derived from the actual zero-angle slice, then transported to each angle by a genuine open germ. It is not inferred from radiality of an arbitrarily selected extension.",
+    "At each circle the actual unit first principal density and corrected a=w imply H(theta)^2 B=1 with the same scalar B. Nonvanishing of B follows from that identity; cancellation and actual positive heights give angle independence without a hidden division by the radial derivative.",
+    "The real cut-root inverse images and actual PartA boundary fields provide ordinary smoothness, positive height and zero radial chart value at the same root. The open angular and height identities pass to the root using continuity on the exact open-component closure.",
+    "At the root, derivatives of the actual constant first angular trace and identity second angular trace reduce the actual planar Jacobian to the radial scalar derivative. The true cut-pair signs give the inward signed slope for both Bool orientations.",
+    "Verified pinned HasDerivAt.comp_hasFDerivAt and ContinuousWithinAt.eq_const_of_mem_closure contracts, exact provider tuple projections, closure_Ioo direction, true reference state and original D/T/S/C/R/L/K identity. No installed declaration name collision was found."
+  ],
+  "limits": [
+    "Static only; neither source was compiled. The fields are radial on the actual negative open component and its root traces, not on an assumed common infinite-smoothness collar. No material root lower bound or positive reference factory is asserted."
+  ],
+  "source_edited": false,
+  "compiled": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

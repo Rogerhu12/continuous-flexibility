@@ -1,0 +1,41 @@
+{
+  "label": 138,
+  "head": "1ceec0b0a72a356c3ed08740438cbc84f0fffdec",
+  "tree": "a11bbe227cca307c247ed8f8e27dbd3c309b18b4",
+  "main": "40242eae88c48c0d7edf55177c1bbb84798a10cb",
+  "pushed": "2026-11-12 11:12:41 UTC",
+  "first_check_not_before": "2026-11-12 11:17:41 UTC",
+  "status": "failure",
+  "plan": "n04-ci138-plan.json",
+  "source_all_total": 3656,
+  "root_imports": 3599,
+  "scope": "required main merge plus two reviewed N03 interface projection/restriction changes and exact task doc clarification; no held feature group activated",
+  "run": 43207164285,
+  "job": 131145218278,
+  "last_observed_step": "Complete job",
+  "checked_at": "2026-11-12 11:35:31 UTC",
+  "blueprint": "skipped",
+  "counts": "full-build and blueprint unavailable; quickcheck compiled 657 project modules; raw cache counter 3650/3656",
+  "conclusion": "failure",
+  "completed_at": "2026-11-12T11:34:16Z",
+  "log": "n04-ci-138.log",
+  "log_sha256": "befc6f3b97e03970e3e6e2a6e641ab51e4efaae752d572b8e7704eab47a8f635",
+  "full_build": "skipped",
+  "quickcheck_compiled_project_modules": 657,
+  "raw_olean_counter": 3650,
+  "counter_caveat": "Raw olean count after merged cache restore; not a successful full-build source inventory.",
+  "unique_errors": [
+    {
+      "module": "CanonicalWholePositiveTransport",
+      "line": 113,
+      "error": "dsimp made no progress"
+    },
+    {
+      "module": "WholePositiveChartGeometry",
+      "line": 119,
+      "error": "rewrite hpQ did not reduce id p"
+    }
+  ],
+  "cache_save": "success",
+  "cache_size_bytes": 873649431
+}

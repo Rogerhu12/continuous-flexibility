@@ -1,0 +1,66 @@
+{
+  "kind": "actual_root_axis_division_without_strip_width_cost",
+  "author": "/root/quantitative_route",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootCoefficientAxisDivision.lean",
+    "sha256": "07acc208704e57ece107f3453e20130652b14f9bc1629edab4eb3ac93900a8c8",
+    "git_blob": "e9a784cfbbc14106f74928f77cace144ff97addc",
+    "lines": 103
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootCoefficientDivision.lean",
+      "sha256": "0605885b335d31a76c1b840f60e8821d1898a613f9b29cbc8aa55e5dde4aaf2d",
+      "git_blob": "96648e09b56b2a141c3a10ced82b7776d26648fd",
+      "lines": 105
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MixedSimpleDivisionBounds.lean",
+      "sha256": "cc6d59a7a1e025c2b06294a6f719008f22f73f5a983cb84fd54b782e351d4432",
+      "git_blob": "c0e236319486f07285bead33c8e0e3a46764f3e8",
+      "lines": 113
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootCoefficientFactorization.lean",
+      "sha256": "7517b6ad668e1433bde3b4d3a2a2de646d86c554d27c1a9d4131bbba8c12c653",
+      "git_blob": "756feea98dedb9141e1dc34eac4336704cd133d7",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootShiftMixedJets.lean",
+      "sha256": "6e8a469ee0363b34061e99b3eae1c992a1795fa8c5c70a533694d8cd00da0814",
+      "git_blob": "ca42ffd41aab783682ebc87d76eb6651b2d9686d",
+      "lines": 49
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CylinderMixedJets.lean",
+      "sha256": "ae19c58f66f0778411f64607f52acf0525aceb27036c9d1ac1825e0e46e3614d",
+      "git_blob": "3dc20e779221e16f9be32dff13d22e978b5a048d",
+      "lines": 253
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CylinderMixedJetNorms.lean",
+      "sha256": "a891ac19e785a16e063b9c0497304808a78ddf708bd4fe798157800415a44863",
+      "git_blob": "578fe3dcc097fdf9b5f381faa73536caf23417bd",
+      "lines": 51
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/OneSidedOrdinaryJets.lean",
+      "sha256": "24824a78937cc70caefdfa2ad5d119e9f6f7fdf6028a2ddf5c8e07679cfaf339",
+      "git_blob": "0788ad15d1a0d8a0ff36f6717a7889904eae9b55",
+      "lines": 136
+    }
+  ],
+  "construction": [
+    "The Taylor integral samples (t*0,theta)=(0,theta); its actual factor root jets cost one numerator derivative and the planar 2^n norm comparison.",
+    "The existing actual factor extension is only used as a smooth germ. All numerator and factor ordinary root jets are transferred by equality on the genuine open strip.",
+    "The physical mixed-jet variant uses both root orientations through the single signed-shift theorem; only the same physical turning-circle point appears on the right-hand side.",
+    "Every stated bound holds for any positive qualitative strip radius satisfying the actual strip conditions, with no radius or derivative of its clamp on the right-hand side."
+  ],
+  "limits": [
+    "This supplies the actual numerator-to-factor step. Uniform numerical bounds for the original coefficient numerator and a same-witness reciprocal root-factor bound remain upstream obligations."
+  ],
+  "compiled": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

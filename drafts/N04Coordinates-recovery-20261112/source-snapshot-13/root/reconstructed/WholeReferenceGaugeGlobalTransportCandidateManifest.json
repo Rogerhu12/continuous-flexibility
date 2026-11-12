@@ -1,0 +1,39 @@
+{
+  "kind": "same_reference_gauge_global_relative_transport_candidate",
+  "author": "/root",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeGlobalTransport.lean",
+    "sha256": "17179bac21aa6863d3a35ec282d4e0420ca30d6444312149df3d06d78eae5f23",
+    "git_blob": "9dd60b6e07fff54af9c9212383f8fddaa9eb3fdb",
+    "lines": 97
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeRelativeFields.lean",
+      "sha256": "4b34db7f7514160c2f86a8fe0ecb0c8d0a653ea4c1a4bdfc34b27ef862319dec",
+      "git_blob": "ba1d43881f06ffb76d0d658ed762dd435a668d0b",
+      "lines": 101
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasData.lean",
+      "sha256": "41a32a066758dcfb8fe7da1ab9e73bee2f7ad451fa1f7057aee40c01092905d6",
+      "git_blob": "c6abe2dcedd1974e7ec231275a17f869c0faed3b",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualWholeGeometry.lean",
+      "sha256": "b2e32adec83f1d401687f8365ecc59e16a99fa5a4abcbf138d3595f9bd7dffea",
+      "git_blob": "d82f602e7088470fbfc9c9f05f38f4d6432fc824",
+      "lines": 109
+    }
+  ],
+  "claims": [
+    "All actual relative fields agree with the original whole-atlas fields for every index, with the same inverse maps and height ratio.",
+    "The same global C3 transport, period/reflection laws, positivity and actual piece restriction belong to the reference-gauged record; no new field or collar is selected."
+  ],
+  "limits": [
+    "Qualitative gauge invariance only. Material jet and transport bounds are not claimed."
+  ],
+  "compiled": false
+}

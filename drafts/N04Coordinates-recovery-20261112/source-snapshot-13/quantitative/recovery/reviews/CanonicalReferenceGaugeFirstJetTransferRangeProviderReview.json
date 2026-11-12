@@ -1,0 +1,39 @@
+{
+  "kind": "exact_consumed_provider_range_supersession_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "passed_exact_consumed_definition_delta_review",
+  "original_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/CanonicalReferenceGaugeFirstJetTransferIndependentReview.json",
+    "sha256": "5fb8f04a510367e58d45e26f4382e82e27896cc573f3b2471a92cb39aaa6fe1f",
+    "git_blob": "bfeb53053794aa1148ed9cb3c8d84f125faaa7e6",
+    "lines": 70
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeFirstJetTransfer.lean",
+    "sha256": "d7c66f9ba5747ed0b2cfff763b67a823e0c2a5f2de86b6da045f0f56ef238c78",
+    "git_blob": "277d516f1a3b04934606c057b1539d3fd2d371b9",
+    "lines": 77
+  },
+  "historical_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveReferenceGauge.lean",
+    "sha256": "dcb5eb3bd694ee95af4247d255bdc86e8253f2e18756857ffcf46563ee26ccc9",
+    "git_blob": "de708f3a6b8139a3b1b0c995c270c576f7e451b4",
+    "lines": 171
+  },
+  "selected_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGauge.lean",
+    "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+    "git_blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+    "lines": 171
+  },
+  "consumed_block": [
+    "wholePositiveReferenceGaugeChart",
+    "wholePositiveReferenceGaugeInverse",
+    "wholePositiveReferenceGaugeHeight",
+    "wholePositiveReferenceGaugeHeight_eq"
+  ],
+  "consumed_block_byte_identical": true,
+  "scope": "The complete 77-line first-jet review remains applicable. This supplement selects the current distinct-canonical-range provider explicitly; its geometry theorem is not invoked by the 77-line adapter. It does not independently re-review the range geometry proof.",
+  "compiled": false,
+  "source_edited": false
+}

@@ -1,0 +1,46 @@
+{
+  "kind": "finite_first_jet_inverse_same_germs",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteFirstJetInverse.lean",
+    "sha256": "fe97f63f7fc52a74a7a2a45f96839fa479f0e156540bdaddc83976ae0fe390ca",
+    "blob": "bf09a201a95c1fbcfb1c956a58a2fc041e6a0051",
+    "lines": 104
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/FiniteFirstJetInverse.lean",
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FiniteFullJetMatching.lean",
+      "sha256": "45dfa31bbf202202959876a3140c805d0143112fcedd7405ebffd34ca3b703df",
+      "blob": "9baca93c394dae0092c356505a301df65635e749",
+      "lines": 82
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FiniteFullJetBoundary.lean",
+      "sha256": "fd42cc1894c3ec16125e7c0ef89188c2b3df3ca8375eb9b417e7080cf4786c75",
+      "blob": "69e3303eff0b945230f7210da126b95c232669b3",
+      "lines": 82
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/PlanarInverseMaterialCost.lean",
+      "sha256": "84aac2a222a9dae33c29cfda2db69aa9709360b09af32b37c80ff33809e6a71e",
+      "blob": "04b967095e78b5fc6b548ef75b938150b79bc9f0",
+      "lines": 119
+    }
+  ],
+  "public_declarations": [
+    "finiteFullJetMatch_one_of_value_fderiv",
+    "FiniteFullJetMatch.comp_match",
+    "FiniteFullJetMatch.div",
+    "finiteFullJetMatch_one_inverse_of_germs"
+  ],
+  "claims": [
+    "Value and fderiv equality give exactly order-one full jets.",
+    "Both-variable composition and division retain the actual common evaluation point.",
+    "Displayed inverse germs fix both inverse values at the same point; one left and one right derivative inverse imply derivative equality. No inverse map is chosen."
+  ],
+  "installed_public_collisions": [],
+  "compiled": false,
+  "green_receipt_applies": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

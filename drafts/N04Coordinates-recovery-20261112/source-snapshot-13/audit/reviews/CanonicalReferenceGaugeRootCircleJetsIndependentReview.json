@@ -1,0 +1,87 @@
+{
+  "kind": "independent_actual_current_root_circle_reference_gauge_review",
+  "reviewer": "/root/audit_coordinates",
+  "author": "/root/proof_inventory",
+  "result": "passed_static_full_source_and_actual_provider_review",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeRootCircleJetsCandidateManifest.json",
+    "sha256": "7f02e89dd241e5d2f768148d9d008a6605a39b1893ca098885052d31d7151c74",
+    "git_blob": "f23059542888fac70537edfd66db1c6967e23008",
+    "lines": 59
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalRootReferencePoint.lean",
+      "sha256": "25ccdbbc7ea4396d62aa807739b3a514a6f0d234716998bc8a7f2ea660204696",
+      "git_blob": "c9151542eb34c0b542e371c5e8795e9561c7a56c",
+      "lines": 56
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeRootCircleJets.lean",
+      "sha256": "5dc841ec44f71e0195c7ee18b2b9b4c26bc1cb2891df37a68a75e3f1f664a1ca",
+      "git_blob": "b3384e644fc97fc8f120ed3377e4ebdd1b2adcd4",
+      "lines": 75
+    }
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalRootTransportBoundary.lean",
+      "sha256": "061f9debff039902b318f9adb1478337bc0c0f00936a73a02314db9b8836eb8e",
+      "git_blob": "c68a526e559104ca8b71c64c708ee8526bcd67b1",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalClosedTransport.lean",
+      "sha256": "446db5702c1e574466bb9e66c14a7ad72b6b824df7ea950a642fec5c9d0beb53",
+      "git_blob": "4042a6df041abfdc7024a0d8ef5e26d98710b93a",
+      "lines": 90
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "65fcde6ae1e43bf6fd2a5f56a2121cde66dea71c44357cd45b833e6bc3358ec1",
+      "git_blob": "7a05b947965738dcb91957059e102f9ea813e52b",
+      "lines": 1756
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeFirstJetTransfer.lean",
+      "sha256": "d7c66f9ba5747ed0b2cfff763b67a823e0c2a5f2de86b6da045f0f56ef238c78",
+      "git_blob": "277d516f1a3b04934606c057b1539d3fd2d371b9",
+      "lines": 77
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeReconstruction.lean",
+      "sha256": "93acd97fbcd9b462756450fd73b0c507a7c6685b498c4064742c6dc0ba33d210",
+      "git_blob": "26ed383f47116763359682c60dc2edc920b01d5e",
+      "lines": 108
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveReferenceGaugeFirstJets.lean",
+      "sha256": "eb26b1fa7b31c91e00d9671367cb8c80494714bd93053a41ae702f812780c3b4",
+      "git_blob": "65bb127b9dd24cee1d337794f1a01d8f12a54326",
+      "lines": 53
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGauge.lean",
+      "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+      "git_blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+      "lines": 171
+    }
+  ],
+  "inspection_git_head": "3a8671c128296b431a9a0d23ce6cec8702dd654c",
+  "checks": [
+    "Read both full sources (56 and 75 lines), actual installed cut-root geometry and closed boundary inverse signatures, the complete 77-line first-jet transfer, and its complete 108/53-line reconstruction/transport providers.",
+    "At current (c,theta), the actual chart value lies on the zero canonical edge and in the canonical closed piece. The reference inverse zero-edge image therefore gives q.1=c, and the reference inverse MapsTo clause gives genuine reference closed-piece membership.",
+    "The two actual closed inverse identities yield currentPoint(q)=(c,theta); no angular coordinate equality is assumed. The code retains the real reference angle q.2.",
+    "All four finite first-jet hypotheses are applied at q=(c,q.2). Their value identity moves the transfer output from tau(q) to the original current (c,theta). The negative reference inverse and height are the same stored functions as in the 77-line provider.",
+    "The smooth inverse sigma and its actual left inverse provide the exact germ needed by the transfer. The fixed outer alignments A/B stay unchanged; B smoothness is used by the already reviewed actual transfer.",
+    "Normal zero uses the same inverse value sigma(tau(q))=q and the normal reference value at q.2. The simultaneous rewrite by tau(q)=(c,theta) applies to both the raw chart/height first jets and normal value.",
+    "All tuple projections agree with current CanonicalGeometry boundary and CanonicalCurrentCutPair definitions. Both new public names are absent from the inspected immutable Git source tree."
+  ],
+  "scope_limits": [
+    "These are actual negative root-circle and fixed reference-gauge transfer facts. They do not select a final reference family or assume final RootFirstJetMatching.",
+    "No uniform quantitative or material estimate is asserted."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

@@ -1,0 +1,38 @@
+{
+  "kind": "whole_reference_gauge_exact_relative_fields_candidate",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeRelativeFields.lean",
+    "sha256": "4b34db7f7514160c2f86a8fe0ecb0c8d0a653ea4c1a4bdfc34b27ef862319dec",
+    "blob": "ba1d43881f06ffb76d0d658ed762dd435a668d0b",
+    "lines": 101
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRelativeFields.lean",
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGauge.lean",
+      "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+      "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+      "lines": 171
+    }
+  ],
+  "public_declarations": [
+    "n04WholeReferenceGaugeAtlasData_positive_reference_fields",
+    "n04WholeReferenceGaugeAtlasData_positive_relative_fields",
+    "n04WholeReferenceGaugeAtlasData_negative_relative_fields"
+  ],
+  "claims": [
+    "At the reference member the positive fields are exactly the selected psi, chi and h0, not id/one.",
+    "With the same reference identities and true displayed inverse laws, the actual new record current point/reference point/height ratio are exactly the original tau/sigma/Q.",
+    "Both negative relative maps and the negative relative height ratio are unchanged functions of the same original stored K half."
+  ],
+  "compiled": false,
+  "green_receipt_applies": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

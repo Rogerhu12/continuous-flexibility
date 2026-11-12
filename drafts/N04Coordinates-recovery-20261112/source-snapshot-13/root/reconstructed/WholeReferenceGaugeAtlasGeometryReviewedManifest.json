@@ -1,0 +1,23 @@
+{
+  "kind": "same_actual_reference_gauge_reviewed_manifest",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasGeometry.lean",
+    "sha256": "41ac14bc8261391998aeb4e6d2c290171bba36baea4dec40a665449fa72c8299",
+    "git_blob": "e349394e51c8caef8a751f9b4e6c4900f13f8d0d",
+    "lines": 163
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasGeometryCandidateManifest.json",
+    "sha256": "0c39692f843b9bcf7c03e56e84b770e2a02050cc6a514032f3375376076ef9b4",
+    "git_blob": "2f0c52a5ecd2e23333255b958afe0c86e364e057",
+    "lines": 48
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/WholeReferenceGaugeAtlasGeometryIndependentReview.json",
+    "sha256": "78c1f3a9a80062453ca3b024db663f448368f73f290213b1279f5096c2c92b22",
+    "git_blob": "daac03eb491fc30e72f136484e9dd9a00058a726",
+    "lines": 61
+  },
+  "compiled": false
+}

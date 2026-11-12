@@ -1,0 +1,26 @@
+{
+  "kind": "frozen_root_scale_route_reviewed_manifest",
+  "author": "/root/quantitative_route",
+  "status": "FROZEN_STATICALLY_REVIEWED_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootStationaryInverseMaterialJets.lean",
+    "sha256": "7f8ab88170b90dbfd13cae60b4b8d5ccc4fe2573df1a0a5da9ee41380215b688",
+    "git_blob": "33272bc9a03295ba5d7a255bc07b40b565923877",
+    "lines": 163
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootStationaryInverseMaterialJetsCandidateManifest.json",
+    "sha256": "137d4f60126ff265fbdbf9d9f4346dffe31b8af0127a427d35523650bcfbd073",
+    "git_blob": "de4b5af0a26fc2f756f1e56edc27db80093f5f1b",
+    "lines": 75
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/RootStationaryInverseMaterialJetsIndependentReview.json",
+    "sha256": "97bd613fe616fb86c5c7e28622c16b4fb93954e1696e35f24f28ca8af4f49f58",
+    "git_blob": "eba33c8fde846865bb060daf60b702cb71d5e117",
+    "lines": 77
+  },
+  "source_bytes_unchanged": true,
+  "compiled": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

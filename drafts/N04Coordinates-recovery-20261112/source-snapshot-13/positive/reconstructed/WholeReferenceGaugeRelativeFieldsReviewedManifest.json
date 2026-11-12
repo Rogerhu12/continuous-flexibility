@@ -1,0 +1,39 @@
+{
+  "kind": "whole_reference_gauge_relative_fields_reviewed_manifest",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeRelativeFieldsCandidateManifest.json",
+    "sha256": "d58e891a8b2f7490e8b85f8ba4f677ecc76386536441f08e77ae30c4a91ea7ae",
+    "blob": "d0dbfeffad9ae5c79a34fa13904562b53ccf4970",
+    "lines": 38
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeRelativeFields.lean",
+    "sha256": "4b34db7f7514160c2f86a8fe0ecb0c8d0a653ea4c1a4bdfc34b27ef862319dec",
+    "blob": "ba1d43881f06ffb76d0d658ed762dd435a668d0b",
+    "lines": 101
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGauge.lean",
+      "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+      "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+      "lines": 171
+    }
+  ],
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/WholeReferenceGaugeRelativeFieldsIndependentReview.json",
+    "sha256": "e5b0941ddb21d4331bff37e82bfc0b9a16568f95629d3d0223c574bf2267a311",
+    "blob": "403cdcf23a807b47ceadbf56670d3dcb3251ee87",
+    "lines": 50
+  },
+  "compiled": false,
+  "green_receipt_applies": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

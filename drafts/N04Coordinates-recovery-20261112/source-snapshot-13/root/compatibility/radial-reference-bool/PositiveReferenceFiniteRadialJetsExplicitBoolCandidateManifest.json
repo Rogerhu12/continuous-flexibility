@@ -1,0 +1,26 @@
+{
+  "kind": "finite_radial_reference_explicit_bool_compatibility_candidate",
+  "author": "/root",
+  "status": "HELD_UNCOMPILED_PENDING_FINAL_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/radial-reference-bool/PositiveReferenceFiniteRadialJets.lean",
+    "sha256": "a515668c71f3895edfda3d1183a5c275f3758799de0d7ebb68d439d33095bc66",
+    "git_blob": "db60546bb34349a040955ace14facdf5b13dfa0d",
+    "lines": 167
+  },
+  "previous_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/PositiveReferenceFiniteRadialJets.lean",
+    "sha256": "9116844af9f9df958750cee6c925e997fe461c16e6af0139dd5f54b5299c8e5f",
+    "git_blob": "63e70601a48da903d72342fbc1aa3e2e5dacf75f",
+    "lines": 163
+  },
+  "previous_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/PositiveReferenceFiniteRadialJetsCandidateManifest.json",
+    "sha256": "5b4f91d619bc6551c2b01f7435815faae56282c1b959c52891670e1167fcfac3",
+    "git_blob": "d750898d774cc728f166c1ba66bf1f0e4b3082ed",
+    "lines": 50
+  },
+  "change": "Only the two local endpoint-germ cases use explicit hg false / hg true instead of elaborating hg underscore from an if-dependent expected type.",
+  "statement_imports_options_and_mathematics_unchanged": true,
+  "compiled": false
+}

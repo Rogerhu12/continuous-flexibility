@@ -1,0 +1,58 @@
+{
+  "kind": "actual_negative_reference_gauge_first_jet_transfer",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeFirstJetTransfer.lean",
+    "sha256": "d7c66f9ba5747ed0b2cfff763b67a823e0c2a5f2de86b6da045f0f56ef238c78",
+    "blob": "277d516f1a3b04934606c057b1539d3fd2d371b9",
+    "lines": 77
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeFirstJetTransfer.lean",
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeReconstruction.lean",
+      "sha256": "93acd97fbcd9b462756450fd73b0c507a7c6685b498c4064742c6dc0ba33d210",
+      "blob": "26ed383f47116763359682c60dc2edc920b01d5e",
+      "lines": 108
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveReferenceGaugeFirstJets.lean",
+      "sha256": "eb26b1fa7b31c91e00d9671367cb8c80494714bd93053a41ae702f812780c3b4",
+      "blob": "65bb127b9dd24cee1d337794f1a01d8f12a54326",
+      "lines": 53
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteFirstJetInverse.lean",
+      "sha256": "fe97f63f7fc52a74a7a2a45f96839fa479f0e156540bdaddc83976ae0fe390ca",
+      "blob": "bf09a201a95c1fbcfb1c956a58a2fc041e6a0051",
+      "lines": 104
+    }
+  ],
+  "reviewed_dependencies": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ReferenceGaugeFirstJetsReviewedManifest.json",
+      "sha256": "20ecfa6e6254e59206b4d4a1aac70e25fb33908bb37c14aee065d29149e2e8a5",
+      "blob": "feeaecd289b807f3544104613e43c5f31a1d3a15",
+      "lines": 38
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteFirstJetInverseReviewedManifest.json",
+      "sha256": "152f63a0537a1b1cf8c628945d620eefa860716f5c09f348146f14154a3ac90c",
+      "blob": "0a1b163d86c40c58d84d19d5b5d8d52555a443a5",
+      "lines": 24
+    }
+  ],
+  "public_declarations": [
+    "canonicalReferenceGauge_raw_firstJets",
+    "wholePositiveReferenceGaugeChart_normal_zero"
+  ],
+  "claims": [
+    "The actual negative inverse smoothness, left/right germs and positive actual height ratio come from the same closed old atlas at p.",
+    "Reference chart first-jet comparison may use the two fixed normal alignments A and B. Current comparison is at exactly tau(p), equal to the actual negative current point by the transported zero jet.",
+    "The original actual stored chart and height replace the negative gauge through proved full germs. No current raw matching is an assumption.",
+    "The zero normal reference value transfers through the same inverse value equality."
+  ],
+  "compiled": false,
+  "green_receipt_applies": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

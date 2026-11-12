@@ -1,0 +1,43 @@
+{
+  "kind": "actual_fixed_reference_whole_atlas_record_candidate",
+  "author": "/root",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+    "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+    "git_blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+    "lines": 131
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasData.lean",
+      "sha256": "41a32a066758dcfb8fe7da1ab9e73bee2f7ad451fa1f7057aee40c01092905d6",
+      "git_blob": "c6abe2dcedd1974e7ec231275a17f869c0faed3b",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGauge.lean",
+      "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+      "git_blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+      "lines": 171
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bPositiveDivision.lean",
+      "sha256": "d274f19959dd831c45e7d0ee0374a4bf01132369e13d69e595beb71a60de39ee",
+      "git_blob": "052cdea1dd1db004e3021e7100bf3b0704f1f472",
+      "lines": 110
+    }
+  ],
+  "claims": [
+    "The original negative fields, moving physical domains, material labels, cut pairs and radii are retained.",
+    "Positive canonical endpoints are exactly 0 and 1, while physical endpoints retain their original interval.",
+    "The chart, inverse and height are the actual fixed-reference composites; the principal field and potential use the real coordinate formulas for these same maps.",
+    "The final interior-division constructor uses the new raw coefficients and new canonical endpoints."
+  ],
+  "limits": [
+    "This record definition and its field equalities are not themselves a geometry, transmission or material certificate.",
+    "The old relative whole atlas remains an intermediate only."
+  ],
+  "compiled": false,
+  "active_checkout_modified": false
+}

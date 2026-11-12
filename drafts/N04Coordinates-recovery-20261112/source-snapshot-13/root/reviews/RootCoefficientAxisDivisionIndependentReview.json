@@ -1,0 +1,74 @@
+{
+  "kind": "independent_full_source_and_root_axis_cost_review",
+  "reviewer": "/root",
+  "result": "passed_static_full_source_and_provider_review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootCoefficientAxisDivision.lean",
+    "sha256": "07acc208704e57ece107f3453e20130652b14f9bc1629edab4eb3ac93900a8c8",
+    "git_blob": "e9a784cfbbc14106f74928f77cace144ff97addc",
+    "lines": 103
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootCoefficientAxisDivisionCandidateManifest.json",
+    "sha256": "0ab1c670578cea2f46ab4a69b1ae79e2031a15409e07ece3d78cd5f82464385e",
+    "git_blob": "5083fdcf690591dc1693476e3a4bd946ac9465a5",
+    "lines": 66
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootCoefficientDivision.lean",
+      "sha256": "0605885b335d31a76c1b840f60e8821d1898a613f9b29cbc8aa55e5dde4aaf2d",
+      "git_blob": "96648e09b56b2a141c3a10ced82b7776d26648fd",
+      "lines": 105
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MixedSimpleDivisionBounds.lean",
+      "sha256": "cc6d59a7a1e025c2b06294a6f719008f22f73f5a983cb84fd54b782e351d4432",
+      "git_blob": "c0e236319486f07285bead33c8e0e3a46764f3e8",
+      "lines": 113
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootCoefficientFactorization.lean",
+      "sha256": "7517b6ad668e1433bde3b4d3a2a2de646d86c554d27c1a9d4131bbba8c12c653",
+      "git_blob": "756feea98dedb9141e1dc34eac4336704cd133d7",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootShiftMixedJets.lean",
+      "sha256": "6e8a469ee0363b34061e99b3eae1c992a1795fa8c5c70a533694d8cd00da0814",
+      "git_blob": "ca42ffd41aab783682ebc87d76eb6651b2d9686d",
+      "lines": 49
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CylinderMixedJets.lean",
+      "sha256": "ae19c58f66f0778411f64607f52acf0525aceb27036c9d1ac1825e0e46e3614d",
+      "git_blob": "3dc20e779221e16f9be32dff13d22e978b5a048d",
+      "lines": 253
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CylinderMixedJetNorms.lean",
+      "sha256": "a891ac19e785a16e063b9c0497304808a78ddf708bd4fe798157800415a44863",
+      "git_blob": "578fe3dcc097fdf9b5f381faa73536caf23417bd",
+      "lines": 51
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/OneSidedOrdinaryJets.lean",
+      "sha256": "24824a78937cc70caefdfa2ad5d119e9f6f7fdf6028a2ddf5c8e07679cfaf339",
+      "git_blob": "0788ad15d1a0d8a0ff36f6717a7889904eae9b55",
+      "lines": 136
+    }
+  ],
+  "checks": [
+    "Read all 103 source lines and the actual factor extension, Taylor integral bound, norm comparison, signed physical shift and open-set jet locality providers.",
+    "The same radial factor F(r,theta)=r G(r,theta) is used. At the root all Taylor samples (t*0,theta) are exactly the same point, so no supremum over a collar or cost from its width is introduced.",
+    "The 2^n factor is exactly the existing max-norm planar mixed-to-Frechet estimate. Numerator order increases by one uniformly in n; order zero is included.",
+    "For the actual rootCoefficientRadialFactor, both numerator and factor are transferred from the constructed smooth extensions by equality on the actual open strip containing (0,theta). The rewrite orientations are correct.",
+    "The final statement uses the same original polar numerator at (r,theta), with both root orientations handled by the existing signed-shift absolute-jet identity. R remains only a qualitative positivity and factorization input.",
+    "The three public declaration names do not occur in installed src. No final canonical geometry, material estimate, reciprocal bound or new flow is assumed."
+  ],
+  "limitations": [
+    "Static review only; no Lean compilation claimed. The uniform original numerator bounds and actual reciprocal coefficient costs still require their separate construction proofs."
+  ],
+  "compiled": false,
+  "source_edited": false
+}

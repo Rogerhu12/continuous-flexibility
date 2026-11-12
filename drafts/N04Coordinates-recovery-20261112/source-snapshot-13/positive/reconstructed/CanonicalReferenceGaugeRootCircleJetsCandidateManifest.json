@@ -1,0 +1,59 @@
+{
+  "kind": "actual_root_circle_reference_gauge_first_jets_candidate",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalRootReferencePoint.lean",
+      "sha256": "25ccdbbc7ea4396d62aa807739b3a514a6f0d234716998bc8a7f2ea660204696",
+      "blob": "c9151542eb34c0b542e371c5e8795e9561c7a56c",
+      "lines": 56,
+      "target_path": "src/ContinuousFlexibility/Analysis/CanonicalRootReferencePoint.lean"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeRootCircleJets.lean",
+      "sha256": "5dc841ec44f71e0195c7ee18b2b9b4c26bc1cb2891df37a68a75e3f1f664a1ca",
+      "blob": "b3384e644fc97fc8f120ed3377e4ebdd1b2adcd4",
+      "lines": 75,
+      "target_path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeRootCircleJets.lean"
+    }
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeFirstJetTransfer.lean",
+      "sha256": "d7c66f9ba5747ed0b2cfff763b67a823e0c2a5f2de86b6da045f0f56ef238c78",
+      "blob": "277d516f1a3b04934606c057b1539d3fd2d371b9",
+      "lines": 77
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalRootTransportBoundary.lean",
+      "sha256": "061f9debff039902b318f9adb1478337bc0c0f00936a73a02314db9b8836eb8e",
+      "blob": "c68a526e559104ca8b71c64c708ee8526bcd67b1",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalClosedTransport.lean",
+      "sha256": "446db5702c1e574466bb9e66c14a7ad72b6b824df7ea950a642fec5c9d0beb53",
+      "blob": "4042a6df041abfdc7024a0d8ef5e26d98710b93a",
+      "lines": 90
+    }
+  ],
+  "reviewed_dependency": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/CanonicalReferenceGaugeFirstJetTransferIndependentReview.json",
+    "sha256": "5fb8f04a510367e58d45e26f4382e82e27896cc573f3b2471a92cb39aaa6fe1f",
+    "blob": "bfeb53053794aa1148ed9cb3c8d84f125faaa7e6",
+    "lines": 70
+  },
+  "public_declarations": [
+    "canonicalReferencePoint_root_data",
+    "canonicalReferenceGauge_rootCircle_firstJets"
+  ],
+  "claims": [
+    "The genuine reference inverse maps each current root point to the same physical reference root circle and the actual current map returns that exact point.",
+    "The reference angle is q.2 for q=canonicalReferencePoint(current root point), without identifying it with the current angle.",
+    "At that same reference point, actual relative first jets, fixed-reference first jets and the genuine closed inverses yield the raw chart/height first jets at the original current root point.",
+    "The displayed normal zero value follows through the same inverse law. The maps and reference gauge remain unchanged."
+  ],
+  "compiled": false,
+  "green_receipt_applies": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

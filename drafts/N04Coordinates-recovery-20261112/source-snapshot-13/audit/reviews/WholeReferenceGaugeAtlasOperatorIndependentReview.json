@@ -1,0 +1,65 @@
+{
+  "kind": "independent_full_source_and_actual_provider_review",
+  "reviewer": "/root/audit_coordinates",
+  "author": "/root",
+  "result": "passed_static_full_source_and_actual_callee_review",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasOperatorCandidateManifest.json",
+    "sha256": "48e1473724fc526a8002f57ed12c56b475ae96d8d3f67e93f0e59417f148c68b",
+    "git_blob": "8622f96b77fffd61b01892c9c609ee525215a607",
+    "lines": 40
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasOperator.lean",
+    "sha256": "2fddaf7a9418556a1915a1691b7ed4396740b227d269b8f84c78d6217f388c57",
+    "git_blob": "de3ff006b2c03592d7c5489ed41c4b73adad8c73",
+    "lines": 106
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "git_blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasOperator.lean",
+      "sha256": "d87df6c62654e5a9a426ba4d318291597cef3d6df3435ae17df91c47a2cb0990",
+      "git_blob": "4e74be6d5d2495499be2d13f1b908e6a49b1226c",
+      "lines": 112
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bGeometricCompletion.lean",
+      "sha256": "475ee911c0e35e7aac6d588f8038accdb35fd340e933fc6460754c3ccdfd78f1",
+      "git_blob": "b68b4e5b5343bacfbaef6243f8108becfeb69ad5",
+      "lines": 93
+    }
+  ],
+  "additional_API_sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bCanonicalOperator.lean",
+      "sha256": "344c622b2232939712c784404953c53c3c7a35378b0b70002313dac5bfcfefe3",
+      "git_blob": "70b5abc70e06c225d31f98d6c38d5a379369bad7",
+      "lines": 156
+    }
+  ],
+  "inspection_git_head": "1ceec0b0a72a356c3ed08740438cbc84f0fffdec",
+  "checks": [
+    "Read all 106 candidate lines, all 131 new record lines and all 112 old whole-atlas operator lines; the actual geometric coefficient-regularity and coordinate-operator callees were checked at their exact signatures and affected proofs.",
+    "The inl branch retains the old whole-atlas coefficient, potential, chart, inverse and height. The inr branch has the actual new coordinate coefficients by definition and the negative potential sign required by the positive canonical operator.",
+    "The concrete adapter supplies the old actual operator-fields identity for the original typed atlas, with the same enumeration and relative maps.",
+    "The final operator theorem uses the new same-record CanonicalGeometry to map the canonical point to its real physical image; hfield regularity is applied at that point. The coordinate identity then rewrites to the actual stored fields.",
+    "No primitive bound or new geometry certificate is assumed to have been constructed here; the required same-record CanonicalGeometry is an explicit construction-stage premise."
+  ],
+  "public_name_check": {
+    "new_names": [
+      "n04WholeReferenceGaugeAtlasData_operatorFields",
+      "n04WholeReferenceGaugeAtlasData_actual_operatorFields",
+      "n04WholeReferenceGaugeAtlasData_actual_operator"
+    ],
+    "baseline_matches": []
+  },
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

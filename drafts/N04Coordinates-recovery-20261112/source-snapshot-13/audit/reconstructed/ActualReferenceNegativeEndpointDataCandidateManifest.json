@@ -1,0 +1,109 @@
+{
+  "kind": "actual_reference_negative_radial_and_endpoint_data",
+  "author": "/root/audit_coordinates",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "inspection_baseline": {
+    "commit": "1ceec0b0a72a356c3ed08740438cbc84f0fffdec",
+    "tree": "a11bbe227cca307c247ed8f8e27dbd3c309b18b4"
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeRadialFields.lean",
+      "sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+      "git_blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+      "lines": 156,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity",
+        "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+        "ContinuousFlexibility.Analysis.N01OpticalCollarPositivity",
+        "ContinuousFlexibility.Analysis.N04bActualRootInterior"
+      ],
+      "public_declarations": [
+        "n04Coordinates_actual_reference_negative_radial_fields"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeEndpointData.lean",
+      "sha256": "f88706279e2902514c3bda2fdd618785c19d2be4f848d1eaf44758e2bdfd7f27",
+      "git_blob": "7d2ff0fac9e08218174cd6870ba79b8529aa8a01",
+      "lines": 126,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+        "ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary",
+        "ContinuousFlexibility.Analysis.N04bActualAtlasCuts"
+      ],
+      "public_declarations": [
+        "n04Coordinates_actual_reference_negative_endpoint_data"
+      ]
+    }
+  ],
+  "source_count": 2,
+  "source_lines": 282,
+  "actual_providers": [
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativePrincipalDensity.lean",
+      "origin": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativePrincipalDensity.lean",
+      "git_blob": "3ba8a57f4c89b91f24c918f32a8eea3d9460c910",
+      "sha256": "9623635a4a0d7766d72eb7b2d09213aa1bae3fb23385e0325304e60c97741181"
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/CanonicalRootTransportBoundary.lean",
+      "origin": "1ceec0b0a72a356c3ed08740438cbc84f0fffdec:src/ContinuousFlexibility/Analysis/CanonicalRootTransportBoundary.lean",
+      "git_blob": "c68a526e559104ca8b71c64c708ee8526bcd67b1",
+      "sha256": "061f9debff039902b318f9adb1478337bc0c0f00936a73a02314db9b8836eb8e"
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/N01OpticalCollarPositivity.lean",
+      "origin": "1ceec0b0a72a356c3ed08740438cbc84f0fffdec:src/ContinuousFlexibility/Analysis/N01OpticalCollarPositivity.lean",
+      "git_blob": "c392ff0cc2bba65c52097c72e879e2f90dd2dbec",
+      "sha256": "4b9b30f66f4d1d914e3830e111a0e8d69ef0ff1a5c0926c7528fc08cd0e76b1c"
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/N04bActualAtlasCuts.lean",
+      "origin": "1ceec0b0a72a356c3ed08740438cbc84f0fffdec:src/ContinuousFlexibility/Analysis/N04bActualAtlasCuts.lean",
+      "git_blob": "3e6847f1dc053e029284c4f490ab351c5c310da2",
+      "sha256": "1c1ca0be70e7134d99086b9d491732bc983447a8d9700cd17cfa4606e0f7c26e"
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/N04bActualRootInterior.lean",
+      "origin": "1ceec0b0a72a356c3ed08740438cbc84f0fffdec:src/ContinuousFlexibility/Analysis/N04bActualRootInterior.lean",
+      "git_blob": "f59704e802cdf7bd9ae8a66504974410052233e0",
+      "sha256": "e48818ca3333c9e39ad2b5cf2528733a278f2aa2921a83508be9f8e4c759e66c"
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualTravel.lean",
+      "origin": "1ceec0b0a72a356c3ed08740438cbc84f0fffdec:src/ContinuousFlexibility/Analysis/N04bReferenceActualTravel.lean",
+      "git_blob": "07661eae46124d0a5550bf4f6de16a5874838d3c",
+      "sha256": "4307b8b206489be492e33a3f12198e4af5271c45a5db821b85ac2db0133ce7eb"
+    }
+  ],
+  "mathematics": [
+    "Actual reference travel identifies the first chart coordinate as radial and second coordinate as the angle on the entire open negative component.",
+    "The actual a=1 principal density and corrected reference a=w force the positive stored height to be independent of angle on that component.",
+    "Actual closed cut-root geometry supplies ordinary full smoothness, positive height and zero radial chart value at the selected root.",
+    "Open angular identity and radial height equality pass to that root by continuity.",
+    "Actual left/right Jacobian signs and the root angular identity give the strictly positive inward signed radial derivative."
+  ],
+  "scope_limits": [
+    "No global radiality is assumed for the stored extension outside the negative component.",
+    "No common neighborhood of infinite smoothness is selected.",
+    "No positive reference chart factory or new primitive bound is asserted."
+  ],
+  "dependency_checks": {
+    "project_closure_count": 467,
+    "missing": [],
+    "cycles": [],
+    "closure_blob_mapping_sha256": "845b8a058bc2a3c978f35fdd3216f4dc1a7692b3024c2777f2644e877fd3b22c"
+  },
+  "public_name_check": {
+    "new_names": [
+      "n04Coordinates_actual_reference_negative_radial_fields",
+      "n04Coordinates_actual_reference_negative_endpoint_data"
+    ],
+    "baseline_matches": {}
+  },
+  "compiled": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

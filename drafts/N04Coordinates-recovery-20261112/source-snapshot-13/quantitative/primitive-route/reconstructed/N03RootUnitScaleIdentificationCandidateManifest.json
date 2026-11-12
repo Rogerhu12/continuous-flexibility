@@ -1,0 +1,87 @@
+{
+  "kind": "same_actual_K_unit_root_scale_identification_candidate",
+  "author": "/root/quantitative_route",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootParameterUnscaleRegularity.lean",
+      "sha256": "7fe3e42f4b9f474de98c984f6be9f6c96f47f899b65c9b6a7967d6709b33e6bc",
+      "git_blob": "fa603a5960bb0184e596256e97759f5042a886f3",
+      "lines": 134
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03RootUnitScaleIdentification.lean",
+      "sha256": "57327a7d92bf21c0201af0e28dcaaa022e38ce87dd3ef486fb30d51453cc6ff9",
+      "git_blob": "4a2ada0572b9c2c534e7958a9b30e1c29929d433",
+      "lines": 166
+    }
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootFlowParameterUnscale.lean",
+      "sha256": "82dc658872bd77c11d77ff9a4d3554ebcd11968c186ea22bb3dd88d8de790a34",
+      "git_blob": "99e5175e3bc217ba0ec1c34e4d444e1b7bfe81e0",
+      "lines": 81
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootPhysicalModelParameterUnscale.lean",
+      "sha256": "d184dc5ff283399395a1bc1269010fb7c5fba1a6f663e76b651c1c4645f99ed9",
+      "git_blob": "1faa730ba2eeb817ca0eade159949a05200e7d63",
+      "lines": 196
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N03FixedRootOrdinaryJets.lean",
+      "sha256": "6e5a8bae77dc08a20c027030362c89e93dd960f7697f590175401105d90f2c96",
+      "git_blob": "565cf163c03dcb56db87096f69c30beafd8293d8",
+      "lines": 140
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N03FixedRootHeightIdentity.lean",
+      "sha256": "014cb5ba8c7486b1220e5dc646eac6f2e0f08c6406a08376824ff9814264cfdb",
+      "git_blob": "7fc57775731871f27382e9a283a454e31674cae6",
+      "lines": 84
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N03UniformRootBandGeometry.lean",
+      "sha256": "cc008bcae7cde98219b307c60b3f4d0dde2aa23e666e74d89f75e4f7f3247cf1",
+      "git_blob": "ab0205004de65ccaf3a2fcd96a57a0c4a5c40ffc",
+      "lines": 133
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01ScaledDividedFactorJets.lean",
+      "sha256": "cde43e2927982c584530733f659892a560226391219ace9a77bec2e1a7592f7f",
+      "git_blob": "284264d290e331204458c60a62b2e4ae60adb6ad",
+      "lines": 161
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootChartExtensionGeometry.lean",
+      "sha256": "25b51c72af4ee2b961fbeb8fa1d54337dc011ee9934af30f97293a71155e8ede",
+      "git_blob": "f3ef9e3d89c4c45334fdc047805e48d271f700fc",
+      "lines": 184
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootDividedHeight.lean",
+      "sha256": "a9cc1f82ebbe96b6c6e9d95931004ab18ea4232d7d219910885cf682d352f42f",
+      "git_blob": "131ceed99f120ec82b3d878f85910e1160c626fe",
+      "lines": 72
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/OpenGermBoundaryJets.lean",
+      "sha256": "05b52b716681a024e31314ae49912488e7fb3d137e6c648d79e763b1ab6cc1ec",
+      "git_blob": "e78ad1c540d10874c7395c8fc16142170b57e5a8",
+      "lines": 47
+    }
+  ],
+  "derived": [
+    "The same unscaled inverse is the exact linear reparametrization of the original chosen inverse, so its global smoothness and lift period follow without choosing a new flow.",
+    "The exact positive-side odd scaling extends to the actual Seeley odd coefficient at the root by continuity; the original positive value supplies unit-model positivity only, with no numerical inverse-scale cost.",
+    "The original scaled divided coefficient supplies unit-coordinate smoothness by linear substitution and the identical positive value at the root.",
+    "The original hband and hcoeff identities, evaluated at x/delta, give exact stored chart and height agreement with the unscaled model on Ioo(0,delta*rho).",
+    "Actual PartA closed smoothness and actual unit-model smoothness then give every ordinary chart jet and every real height-power jet at the same physical root by closure from the open side."
+  ],
+  "same_witness": "D,T,S,C,E,L,K,z,m,side,Theta,label and divided coefficient are unchanged. Only the parameters of the same chosen flow are reexpressed.",
+  "no_quantitative_radius_claim": "R,delta,rho occur only in the genuine nonempty identification interval and qualitative substitutions. No inverse R/delta/rho factor is an estimate or a new premise.",
+  "remaining": "Actual unit-model material jet estimates and the final orientation-only physical transfer remain distinct downstream obligations.",
+  "compiled": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

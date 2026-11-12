@@ -1,0 +1,37 @@
+{
+  "kind": "actual_negative_reference_gauge_first_jet_transfer_reviewed_manifest",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeFirstJetTransferCandidateManifest.json",
+    "sha256": "66175753f868b41466911b71a2ef52c69490a31de7c52b0f0c225e1aa3d1b54c",
+    "blob": "48aadc76eac0b782678bac74407bf49b07ef8d09",
+    "lines": 58
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeFirstJetTransfer.lean",
+    "sha256": "d7c66f9ba5747ed0b2cfff763b67a823e0c2a5f2de86b6da045f0f56ef238c78",
+    "blob": "277d516f1a3b04934606c057b1539d3fd2d371b9",
+    "lines": 77
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/CanonicalReferenceGaugeFirstJetTransferIndependentReview.json",
+    "sha256": "5fb8f04a510367e58d45e26f4382e82e27896cc573f3b2471a92cb39aaa6fe1f",
+    "blob": "bfeb53053794aa1148ed9cb3c8d84f125faaa7e6",
+    "lines": 70
+  },
+  "selected_range_provider_addendum": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/CanonicalReferenceGaugeFirstJetTransferRangeProviderReview.json",
+    "sha256": "aa9cb684d0138efc30c2be887ffe1cb602042912bb866b34bd61fb949ee090a0",
+    "blob": "c607c795c608975f2043ea6480f54d04b88a6623",
+    "lines": 39
+  },
+  "selected_range_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGauge.lean",
+    "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+    "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+    "lines": 171
+  },
+  "compiled": false,
+  "green_receipt_applies": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

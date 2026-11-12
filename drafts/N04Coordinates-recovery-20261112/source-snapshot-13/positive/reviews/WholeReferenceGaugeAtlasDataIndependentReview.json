@@ -1,0 +1,66 @@
+{
+  "kind": "whole_reference_gauge_atlas_record_independent_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "passed_static_full_source_review",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasDataCandidateManifest.json",
+    "sha256": "c0390a505015dddbdf7432539e49e47e95b97ddde1f79668e6e065635a3265e0",
+    "git_blob": "da59ebe42ee00f85ffcd764d2c6aa5277ff90f2f",
+    "lines": 43
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+    "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+    "git_blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+    "lines": 131
+  },
+  "provider_refs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasData.lean",
+      "sha256": "41a32a066758dcfb8fe7da1ab9e73bee2f7ad451fa1f7057aee40c01092905d6",
+      "git_blob": "c6abe2dcedd1974e7ec231275a17f869c0faed3b",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGauge.lean",
+      "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+      "git_blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+      "lines": 171
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bPositiveDivision.lean",
+      "sha256": "d274f19959dd831c45e7d0ee0374a4bf01132369e13d69e595beb71a60de39ee",
+      "git_blob": "052cdea1dd1db004e3021e7100bf3b0704f1f472",
+      "lines": 110
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CoordinateOperatorConstruction.lean",
+      "sha256": "ffbecb5ae9d0d9e40a5fd193592dde632989d3c4fb2382b118be5180f9d7f1c1",
+      "git_blob": "aef71ea652edabf9d9c4788e2c6aba6780f6c1fe",
+      "lines": 76
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04WholeComponentPieces.lean",
+      "sha256": "5d2d7e19dcb41ad41fc58f433b96e0180ccd3d15acb514fe34025878380bf822",
+      "git_blob": "31a07cd1ac849aaa1a42f559dcaa84fb4e7e94b8",
+      "lines": 143
+    }
+  ],
+  "checks": [
+    "Full 131 source and actual WholeCanonicalAtlasData 165, final distinct-range gauge 171 and interior division 110 read.",
+    "Same e/positive component/cell/domain/cut metadata is retained; each negative branch preserves the same selected original half and its actual stored raw fields.",
+    "Positive canonical endpoints are 0/1 while physical endpoints and physicalDomain remain those of the whole positive component.",
+    "Same displayed psi compose sigma, tau compose chi, and h0 compose sigma divided by Q compose sigma define current fields; density and signed potential use those exact functions.",
+    "The final n04bWithInteriorDivision replaces the inherited divided field using the new coefficients and 0/1 endpoints. Applying the factorization provider once more is definitionally idempotent because it reads only endpoints and coefficients.",
+    "Field projection proofs are simplifications of project-owned record definitions and explicit Sum branch equations. No geometry/primitive/first-jet/material predicate is taken as a finished result."
+  ],
+  "import_closure": {
+    "project_modules": 508,
+    "missing": [],
+    "mapping_sha256": "3166d8a7f0fdcb03ecee2fceda0840f441b4fbbbfa33806c82a97aab01020571"
+  },
+  "source_modified": false,
+  "compiled": false,
+  "green_receipt_applies": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

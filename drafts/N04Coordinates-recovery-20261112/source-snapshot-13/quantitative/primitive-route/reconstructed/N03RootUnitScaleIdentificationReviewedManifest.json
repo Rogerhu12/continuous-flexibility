@@ -1,0 +1,34 @@
+{
+  "kind": "frozen_same_actual_K_unit_root_route_reviewed_manifest",
+  "author": "/root/quantitative_route",
+  "status": "FROZEN_STATICALLY_REVIEWED_UNCOMPILED",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootParameterUnscaleRegularity.lean",
+      "sha256": "7fe3e42f4b9f474de98c984f6be9f6c96f47f899b65c9b6a7967d6709b33e6bc",
+      "git_blob": "fa603a5960bb0184e596256e97759f5042a886f3",
+      "lines": 134
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03RootUnitScaleIdentification.lean",
+      "sha256": "57327a7d92bf21c0201af0e28dcaaa022e38ce87dd3ef486fb30d51453cc6ff9",
+      "git_blob": "4a2ada0572b9c2c534e7958a9b30e1c29929d433",
+      "lines": 166
+    }
+  ],
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03RootUnitScaleIdentificationCandidateManifest.json",
+    "sha256": "228639ceeb3583ace6901e415386535f105e6ea232d78ec5edf864160d465cee",
+    "git_blob": "e64b3017e878e9fe945316f2be85098d802f204b",
+    "lines": 87
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/RootUnitScaleIdentificationIndependentReview.json",
+    "sha256": "e7518f0169489422734daab92671210d68e107eaf9e020ffe417afd49c3919e1",
+    "git_blob": "830892185784987845299d8fa537f61c2c668605",
+    "lines": 119
+  },
+  "source_bytes_unchanged": true,
+  "compiled": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

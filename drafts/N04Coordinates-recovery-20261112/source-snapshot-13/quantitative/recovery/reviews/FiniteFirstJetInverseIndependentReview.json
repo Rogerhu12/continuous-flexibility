@@ -1,0 +1,70 @@
+{
+  "kind": "independent_full_source_and_actual_provider_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "passed static full-source and actual-provider review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteFirstJetInverse.lean",
+    "sha256": "fe97f63f7fc52a74a7a2a45f96839fa479f0e156540bdaddc83976ae0fe390ca",
+    "git_blob": "bf09a201a95c1fbcfb1c956a58a2fc041e6a0051",
+    "lines": 104
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteFirstJetInverseCandidateManifest.json",
+    "sha256": "62f3545a309bc985ef086396a5c9d756dad1e608d482036bc8d091052a77ec67",
+    "git_blob": "31d57021a514cff643b6e7802c906d5974b87cf1",
+    "lines": 46
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FiniteFullJetMatching.lean",
+      "sha256": "45dfa31bbf202202959876a3140c805d0143112fcedd7405ebffd34ca3b703df",
+      "git_blob": "9baca93c394dae0092c356505a301df65635e749",
+      "lines": 82
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FiniteFullJetBoundary.lean",
+      "sha256": "fd42cc1894c3ec16125e7c0ef89188c2b3df3ca8375eb9b417e7080cf4786c75",
+      "git_blob": "69e3303eff0b945230f7210da126b95c232669b3",
+      "lines": 82
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/PlanarInverseMaterialCost.lean",
+      "sha256": "84aac2a222a9dae33c29cfda2db69aa9709360b09af32b37c80ff33809e6a71e",
+      "git_blob": "04b967095e78b5fc6b548ef75b938150b79bc9f0",
+      "lines": 119
+    }
+  ],
+  "pinned_calculus_providers": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean",
+      "sha256": "f6ebee83905f13d5648f1a9bff39c15b6109f161fdf5d482af9c5f22176ba535",
+      "git_blob": "ad3dee4ba3e3f6a9fd4030b170538f3f7d6f7099",
+      "lines": 1008
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/FDeriv/Comp.lean",
+      "sha256": "b25791b5363ec250130d10d34fd77b9c2b24af63bfd89479b9b3c8443ebf74ed",
+      "git_blob": "d7dee1ff3320db9442853106989cda47b2c0a221",
+      "lines": 269
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/FDeriv/Congr.lean",
+      "sha256": "4313c8cb8eab170a664df2753f3f1a59ac7f3ecd3f405b9b34e64c966430fa73",
+      "git_blob": "da599f75bd35b874f08b3fb7b326c2679500eefb",
+      "lines": 309
+    }
+  ],
+  "checks": [
+    "Read all 104 lines and both finite-jet providers. Order one is exactly the zero-order value and the first Frechet derivative; both scalar and arbitrary normed codomain cases retain the original universes.",
+    "Both-variable composition compares outer jets at the actual common inner value and composes only the displayed smooth maps. Division is common smooth composition of the actual paired numerator and denominator; nonvanishing is needed only at the common value.",
+    "The actual left inverse germs give g1(f1 x)=x and g2(f1 x)=x, using the original forward value match. No inverse map or inverse point is chosen.",
+    "The common forward derivative has L1 as a left inverse and L2 as a right inverse by the actual germ derivative identities and exact chain rule at f1 x. Applying these identities to L2 v proves L1=L2 without finite-dimensional assumptions.",
+    "Verified pinned iteratedFDeriv_one_apply, fderiv_comp, fderiv_id and Filter.EventuallyEq.fderiv_eq signatures. No installed public declaration collides with the four new names."
+  ],
+  "limitations": [
+    "Static source/provider review only; no elaboration or compilation was run. This is a first-jet algebra adapter, not a quantitative inverse or material bound."
+  ],
+  "source_edited": false,
+  "compiled": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}
