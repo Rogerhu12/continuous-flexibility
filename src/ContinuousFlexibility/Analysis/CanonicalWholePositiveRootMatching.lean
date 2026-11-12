@@ -173,7 +173,6 @@ theorem n04Coordinates_wholePositive_transport_with_negative_root_jets
   rcases hout with ⟨Clog, Mσ, δ, hClog, hMσ, hδ, hδρ, hδone, hrecip, hB, hout⟩
   refine ⟨Clog, Mσ, δ, hClog, hMσ, hδ, hδρ, hδone, hrecip, hB, ?_⟩
   intro z hz hs
-  dsimp only
   have hzout := hout z hz hs
   exact ⟨hzout.1, hzout.2, wholePositiveTransportMatching_negative_root_jets hN.1.1 j hzout.1⟩
 
