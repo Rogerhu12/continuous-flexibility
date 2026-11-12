@@ -49,6 +49,46 @@ theorem exists_rootEndpointTameJet_finite_prefix_envelope
     fun k hkn θ => (h.height_jets k θ).trans (hraise k hkn),
     fun k hkn θ => (h.inverse_height_jets k θ).trans (hraise k hkn)⟩
 
+private theorem positiveSourceFinitePrefixes_of_allJets
+    {D : ReferenceData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {K : CanonicalData S} {base : ℕ} {ε : ℝ}
+    (hp : Monotone (pairGrading (stateGrading S) realGrading))
+    (hsources : ∃ newBase outLoss : ℕ, ∃ ε' : ℝ,
+      base ≤ newBase ∧ outLoss ≤ newBase ∧ 0 < ε' ∧ ε' ≤ ε ∧
+      ∀ i : N04PositiveComponent D.a D.b (deriv D.w),
+      ∀ j : ∀ side, N04PositiveEndpointSource C i side,
+      ∃ A : ℕ → ℝ, (∀ k, 1 ≤ A k) ∧
+        ∀ z ∈ stateNeighborhood S C newBase ε', stateSector S z.1 → ∀ side,
+          RootEndpointTameJetBounds (pairGrading (stateGrading S) realGrading)
+            outLoss A (z - (C.referenceState, 0))
+            (n04PositiveSourceMap (j side) K z) (n04PositiveSourceHeight (j side) K z)
+            (n04PositiveEndpoint i side)) :
+    ∃ newBase outLoss : ℕ, ∃ ε' : ℝ,
+      base ≤ newBase ∧ outLoss ≤ newBase ∧ 0 < ε' ∧ ε' ≤ ε ∧
+      ∀ i : N04PositiveComponent D.a D.b (deriv D.w),
+      ∀ j : ∀ side, N04PositiveEndpointSource C i side,
+      ∃ B : ℕ → ℝ, (∀ N, 1 ≤ B N) ∧
+        ∀ N z, z ∈ stateNeighborhood S C newBase ε' → stateSector S z.1 → ∀ side,
+          let F := n04PositiveSourceMap (j side) K z
+          let q := n04PositiveSourceHeight (j side) K z
+          let r := n04PositiveEndpoint i side
+          let M := B N * (1 + pairGrading (stateGrading S) realGrading (N + outLoss)
+            (z - (C.referenceState, 0)))
+          1 ≤ M ∧
+          (∀ k, 1 ≤ k → k ≤ N → ∀ θ, ‖iteratedFDeriv ℝ k F (r, θ)‖ ≤ M) ∧
+          (∀ k, k ≤ N → ∀ θ, ‖iteratedFDeriv ℝ k q (r, θ)‖ ≤ M) ∧
+          ∀ k, k ≤ N → ∀ θ, ‖iteratedFDeriv ℝ k (fun y => (q y)⁻¹) (r, θ)‖ ≤ M := by
+  classical
+  obtain ⟨newBase, outLoss, ε', hb, hl, hε', hε'ε, hsources⟩ := hsources
+  refine ⟨newBase, outLoss, ε', hb, hl, hε', hε'ε, ?_⟩
+  intro i j
+  obtain ⟨A, hA, hsource⟩ := hsources i j
+  choose B hB hbound using fun N => exists_rootEndpointTameJet_finite_prefix_envelope
+    hp outLoss A (fun k => zero_le_one.trans (hA k)) N
+  refine ⟨B, hB, ?_⟩
+  intro N z hz hs side
+  exact hbound N _ _ _ _ (hsource z hz hs side)
+
 /-- One sequence of finite-prefix coefficients controls the genuine
 source fields on one common neighborhood, for every high order. -/
 theorem n04Coordinates_actual_positiveSource_finite_prefixes
@@ -74,18 +114,9 @@ theorem n04Coordinates_actual_positiveSource_finite_prefixes
           (∀ k, 1 ≤ k → k ≤ N → ∀ θ, ‖iteratedFDeriv ℝ k F (r, θ)‖ ≤ M) ∧
           (∀ k, k ≤ N → ∀ θ, ‖iteratedFDeriv ℝ k q (r, θ)‖ ≤ M) ∧
           ∀ k, k ≤ N → ∀ θ, ‖iteratedFDeriv ℝ k (fun y => (q y)⁻¹) (r, θ)‖ ≤ M := by
-  classical
-  obtain ⟨newBase, outLoss, ε', hb, hl, hε', hε'ε, hsources⟩ :=
-    n04Coordinates_actual_positiveSource_allJets hT hS hN hfield e
-  have hp : Monotone (pairGrading (stateGrading S) realGrading) :=
-    tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
-  refine ⟨newBase, outLoss, ε', hb, hl, hε', hε'ε, ?_⟩
-  intro i j
-  obtain ⟨A, hA, hsource⟩ := hsources i j
-  choose B hB hbound using fun N => exists_rootEndpointTameJet_finite_prefix_envelope
-    hp outLoss A (fun k => zero_le_one.trans (hA k)) N
-  refine ⟨B, hB, ?_⟩
-  intro N z hz hs side
-  exact hbound N _ _ _ _ (hsource z hz hs side)
+  exact positiveSourceFinitePrefixes_of_allJets
+    (K := n04bActualTypedAtlas hT hS hN hfield e)
+    (tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl))
+    (n04Coordinates_actual_positiveSource_allJets hT hS hN hfield e)
 
 end ContinuousFlexibility.Analysis
