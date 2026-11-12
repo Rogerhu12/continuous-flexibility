@@ -21,33 +21,45 @@ local instance n01EndpointJetLocalGrowthStateSMul (S : PhysicalSpacesData) :
 open Set ContinuousFlexibility.Analysis
 open scoped BigOperators
 
-private theorem endpointJet_scalar_part_pairGrading_le
+private theorem pairGrading_scalar_part_le
     {E : Type*} [AddCommGroup E] [Module ℝ E]
     (p : ℕ → Seminorm ℝ E) (j : ℕ) (v : E × ℝ) :
     pairGrading p realGrading j (v.2 • ((0 : E), (1 : ℝ))) ≤
       pairGrading p realGrading j v := by
-  change p j (v.2 • (0 : E)) + ‖v.2 * 1‖ ≤ p j v.1 + ‖v.2‖
-  have hzero : p j (0 : E) = 0 := (p j).map_zero'
-  simp only [smul_zero, hzero, zero_add, mul_one]
-  exact le_add_of_nonneg_left (apply_nonneg _ _)
+  change p j (v.2 • (0 : E)) + ‖v.2 * (1 : ℝ)‖ ≤ p j v.1 + ‖v.2‖
+  simpa only [smul_zero, map_zero, mul_one, zero_add] using
+    (le_add_of_nonneg_left (apply_nonneg (p j) v.1) : ‖v.2‖ ≤ p j v.1 + ‖v.2‖)
 
-private theorem endpointJet_state_part_pairGrading_le
+private theorem pairGrading_state_part_le
     {E : Type*} [AddCommGroup E] [Module ℝ E]
     (p : ℕ → Seminorm ℝ E) (j : ℕ) (v : E × ℝ) :
     pairGrading p realGrading j (v - v.2 • ((0 : E), (1 : ℝ))) ≤
       pairGrading p realGrading j v := by
-  have heq : v - v.2 • ((0 : E), (1 : ℝ)) = (v.1, (0 : ℝ)) := by
-    apply Prod.ext
-    · change v.1 - v.2 • (0 : E) = v.1
-      rw [smul_zero, sub_zero]
-    · change v.2 - v.2 * 1 = 0
-      rw [mul_one, sub_self]
-  rw [heq]
-  change p j v.1 + ‖(0 : ℝ)‖ ≤ p j v.1 + ‖v.2‖
-  rw [norm_zero, add_zero]
-  exact le_add_of_nonneg_right (norm_nonneg _)
+  change p j (v.1 - v.2 • (0 : E)) + ‖v.2 - v.2 * (1 : ℝ)‖ ≤
+    p j v.1 + ‖v.2‖
+  simpa only [smul_zero, sub_zero, mul_one, sub_self, norm_zero, add_zero] using
+    (le_add_of_nonneg_right (norm_nonneg v.2) : p j v.1 ≤ p j v.1 + ‖v.2‖)
 
-private theorem endpointJet_scalar_split_diagonal_snd
+private theorem abs_snd_le_pairGrading
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (j : ℕ) (v : E × ℝ) :
+    |v.2| ≤ pairGrading p realGrading j v := by
+  change |v.2| ≤ p j v.1 + ‖v.2‖
+  simpa only [Real.norm_eq_abs] using
+    (le_add_of_nonneg_left (apply_nonneg (p j) v.1) : ‖v.2‖ ≤ p j v.1 + ‖v.2‖)
+
+private theorem differenceTuple_seminorm_le
+    {E : Type*} [AddCommGroup E] [Module ℝ E] {k : ℕ}
+    (p : Seminorm ℝ E) (q v : Fin k → E)
+    (hq : ∀ j, p (q j) ≤ p (v j)) (hsub : ∀ j, p (v j - q j) ≤ p (v j))
+    (i j : Fin k) : p (multilinearDifferenceTuple q v i j) ≤ p (v j) := by
+  dsimp only [multilinearDifferenceTuple]
+  split_ifs
+  · exact le_rfl
+  · exact hsub j
+  · exact hq j
+
+private theorem scalar_split_difference_snd_zero
     {E : Type*} [AddCommGroup E] [Module ℝ E] {k : ℕ}
     (u : E × ℝ) (hu : u.2 = 1) (v : Fin k → E × ℝ) (i : Fin k) :
     (multilinearDifferenceTuple (fun j => (v j).2 • u) v i i).2 = 0 := by
@@ -59,15 +71,32 @@ theorem sectorParameter_scalarPart_grading_le
     (S : PhysicalSpacesData) (j : ℕ) (v : StateDirections S × ℝ) :
     pairGrading (sectorGrading S) realGrading j (v.2 • scalarParameterDirection S) ≤
       pairGrading (sectorGrading S) realGrading j v := by
-  exact endpointJet_scalar_part_pairGrading_le
-    (E := StateDirections S) (sectorGrading S) j v
+  exact pairGrading_scalar_part_le (sectorGrading S) j v
 
 theorem sectorParameter_statePart_grading_le
     (S : PhysicalSpacesData) (j : ℕ) (v : StateDirections S × ℝ) :
     pairGrading (sectorGrading S) realGrading j (v - v.2 • scalarParameterDirection S) ≤
       pairGrading (sectorGrading S) realGrading j v := by
-  exact endpointJet_state_part_pairGrading_le
-    (E := StateDirections S) (sectorGrading S) j v
+  exact pairGrading_state_part_le (sectorGrading S) j v
+
+private theorem endpointJet_scalar_tuple_norm_le
+    {E F : Type*} [AddCommGroup E] [Module ℝ E]
+    [SeminormedAddCommGroup F] [NormedSpace ℝ F] {k : ℕ}
+    (A : MultilinearMap ℝ (fun _ : Fin k => E) F)
+    (u : E) (a : Fin k → ℝ) (ha : ∀ i, |a i| ≤ 1) :
+    ‖A (fun i => a i • u)‖ ≤ ‖A (fun _ => u)‖ := by
+  classical
+  have heq : A (fun i => a i • u) = (∏ i : Fin k, a i) • A (fun _ => u) :=
+    A.map_smul_univ a (fun _ => u)
+  have hprod : |∏ i : Fin k, a i| ≤ 1 := by
+    rw [Finset.abs_prod]
+    exact Finset.prod_le_one₀ (fun _ _ => abs_nonneg _) (fun i _ => ha i)
+  calc
+    _ = |∏ i : Fin k, a i| * ‖A (fun _ => u)‖ :=
+      (congrArg (fun y : F => ‖y‖) heq).trans
+        (by simpa only [Real.norm_eq_abs] using
+          norm_smul (∏ i : Fin k, a i) (A (fun _ => u)))
+    _ ≤ ‖A (fun _ => u)‖ := mul_le_of_le_one_left (norm_nonneg _) hprod
 
 private theorem endpointJet_mixed_norm_bound
     {E F : Type*} [AddCommGroup E] [Module ℝ E]
@@ -162,52 +191,38 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth_un
   have hsum0 : 0 ≤ ∑ i : Fin (n + 1), p (s + L) (v i) :=
     Finset.sum_nonneg (fun _ _ => apply_nonneg _ _)
   have hqp : ‖F q‖ ≤ Kq * Q := by
-    have heq : F q = (∏ i : Fin (n + 1), (v i).2) •
-        F (fun _ => scalarParameterDirection S) :=
-      F.map_smul_univ (fun i => (v i).2) (fun _ => scalarParameterDirection S)
-    have hcoeff (i : Fin (n + 1)) : |(v i).2| ≤ 1 := by
-      have h := (sectorParameter_scalarPart_grading_le S B (v i)).trans (hv i)
-      simpa only [map_smul_eq_mul, scalarParameterDirection_grading,
-        Real.norm_eq_abs, mul_one] using h
-    have hprod : |∏ i : Fin (n + 1), (v i).2| ≤ 1 := by
-      rw [Finset.abs_prod]
-      exact Finset.prod_le_one₀ (fun _ _ => abs_nonneg _) (fun i _ => hcoeff i)
-    have hhigh : p (s + Lq) z ≤ p (s + L) z := hp (by omega) z
+    have hcoeff (i : Fin (n + 1)) : |(v i).2| ≤ 1 :=
+      (abs_snd_le_pairGrading (sectorGrading S) B (v i)).trans (hv i)
+    have hhigh : p (s + Lq) z ≤ p (s + L) z := hp (Nat.add_le_add_left hLq s) z
     calc
-      ‖F q‖ = |∏ i : Fin (n + 1), (v i).2| * ‖F (fun _ => scalarParameterDirection S)‖ :=
-        (congrArg (fun y : (S.circle (3 / 4 : ℝ)).level s => ‖y‖) heq).trans
-          (by simpa only [Real.norm_eq_abs] using
-            norm_smul (∏ i : Fin (n + 1), (v i).2) (F (fun _ => scalarParameterDirection S)))
-      _ ≤ ‖F (fun _ => scalarParameterDirection S)‖ :=
-        mul_le_of_le_one_left (norm_nonneg _) hprod
+      ‖F q‖ ≤ ‖F (fun _ => scalarParameterDirection S)‖ :=
+        endpointJet_scalar_tuple_norm_le F (scalarParameterDirection S)
+          (fun i => (v i).2) hcoeff
       _ ≤ Kq * (1 + p (s + Lq) z) :=
         (hnorm (fun _ => scalarParameterDirection S)).trans_le
           (scalarOrder.choose_spec.2 rsel hrsel z hz ((hp hBq z).trans hzb))
       _ ≤ Kq * Q := mul_le_mul_of_nonneg_left
-        (by dsimp only [Q]; linarith only [hhigh, hsum0]) hKq
+        ((add_le_add (le_refl (1 : ℝ)) hhigh).trans (le_add_of_nonneg_right hsum0)) hKq
   have hterm (i : Fin (n + 1)) :
       ‖F (multilinearDifferenceTuple q v i)‖ ≤ Ks * Q := by
     let w := multilinearDifferenceTuple q v i
-    have hwgrade (j : ℕ) (a : Fin (n + 1)) : p j (w a) ≤ p j (v a) := by
-      dsimp only [w, multilinearDifferenceTuple]
-      split_ifs with h₀ h₁
-      · exact le_rfl
-      · subst a
-        exact sectorParameter_statePart_grading_le S j (v i)
-      · exact sectorParameter_scalarPart_grading_le S j (v a)
+    have hwgrade (j : ℕ) (a : Fin (n + 1)) : p j (w a) ≤ p j (v a) :=
+      differenceTuple_seminorm_le (p j) q v
+        (fun a => sectorParameter_scalarPart_grading_le S j (v a))
+        (fun a => sectorParameter_statePart_grading_le S j (v a)) i a
     have hwlow (a : Fin (n + 1)) : p Bₛ (w a) ≤ 1 :=
       (hwgrade Bₛ a).trans ((hp hBs (v a)).trans (hv a))
     have hwi : (w i).2 = 0 :=
-      endpointJet_scalar_split_diagonal_snd (E := StateDirections S)
-        (scalarParameterDirection S) rfl v i
-    have hhigh : p (s + Lₛ) z ≤ p (s + L) z := hp (by omega) z
+      scalar_split_difference_snd_zero (scalarParameterDirection S) rfl v i
+    have horder : s + Lₛ ≤ s + L := Nat.add_le_add_left hLs s
+    have hhigh : p (s + Lₛ) z ≤ p (s + L) z := hp horder z
     have hsum : (∑ a : Fin (n + 1), p (s + Lₛ) (w a)) ≤
         ∑ a : Fin (n + 1), p (s + L) (v a) :=
-      Finset.sum_le_sum (fun a _ => (hwgrade (s + Lₛ) a).trans (hp (by omega) (v a)))
+      Finset.sum_le_sum (fun a _ => (hwgrade (s + Lₛ) a).trans (hp horder (v a)))
     exact (hnorm w).trans_le
       ((stateOrder.choose_spec.2 rsel hrsel z hz ((hp hBs z).trans hzb) w hwlow ⟨i, hwi⟩).trans
         (mul_le_mul_of_nonneg_left
-          (by dsimp only [Q]; linarith only [hhigh, hsum]) hKs))
+          (add_le_add (add_le_add (le_refl (1 : ℝ)) hhigh) hsum) hKs))
   exact (hnorm v).symm.trans_le (endpointJet_mixed_norm_bound F v q Kq Ks Q hqp hterm)
 
 theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth
