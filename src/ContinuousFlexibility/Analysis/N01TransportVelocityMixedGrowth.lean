@@ -38,6 +38,23 @@ private def radialCutoffScalarTower
     (hU.prod hV) (fun _ _ => mem_univ _)
 
 
+private theorem transportVelocity_finTwo_transport
+    {I E : Type*} (f₀ f₁ : I → E × PolarPoint → ℝ)
+    (i : I) (x : E) (y : PolarPoint) (v : ℝ)
+    (h₀ : radialPartial (fun q => f₀ i (x, q)) y =
+      -v * angularPartial (fun q => f₀ i (x, q)) y)
+    (h₁ : radialPartial (fun q => f₁ i (x, q)) y =
+      -v * angularPartial (fun q => f₁ i (x, q)) y)
+    (c : Fin 2) :
+    let fZ : Fin 2 → I → E × PolarPoint → ℝ :=
+      Fin.cases f₀ (Fin.cases f₁ Fin.elim0)
+    radialPartial (fun q => fZ c i (x, q)) y =
+      -(v * angularPartial (fun q => fZ c i (x, q)) y) := by
+  refine Fin.cases ?_ (Fin.cases ?_ (fun j : Fin 0 => Fin.elim0 j)) c
+  · simpa only [Fin.cases_zero, neg_mul] using h₀
+  · simpa only [Fin.cases_succ, Fin.cases_zero, neg_mul] using h₁
+
+
 private theorem transportVelocity_flat_from_certificates
     {I E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
     [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
@@ -327,10 +344,11 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
         (liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl)
         (hN.2.2.1.liftSectorParameter_sector x.1) hR χ m (hχ m) (hχrange m)
         ρ y ⟨(hl m).trans hy.1.1, hy.1.2.trans (hh m)⟩
-    fin_cases c
-    · simpa only [fZ, f₀, f₁, Fin.cases_zero, neg_mul] using
-        hrec (R.residual (liftSectorParameter S C x.1))
-    · simpa only [fZ, f₀, f₁, Fin.cases_succ, Fin.cases_zero, neg_mul] using hrec x.2
+    exact transportVelocity_finTwo_transport (I := ℕ) (E := E) f₀ f₁ m x y
+      (minusCharacteristicSpeed (originalCoefficients D S C (liftSectorParameter S C x.1)) y +
+        deriv (χ m) y.1 * returnFlowInverseSlope S C (liftSectorParameter S C x.1) m y *
+          fZ 0 m (x, y))
+      (hrec (R.residual (liftSectorParameter S C x.1))) (hrec x.2) c
   exact transportVelocity_flat_from_certificates
     (I := ℕ) (E := E) (U := U) (l := l) (h := h)
     (fL := fL) (fA := fA) (fZ := fZ)

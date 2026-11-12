@@ -228,6 +228,46 @@ private theorem correctionPolynomial_actual_error
   simpa only [correctionPolynomialValue, returnCorrectionDriftLinear_apply,
     returnCorrectionSpeedLinear_apply] using heq.trans hlocal
 
+
+private def correctionPolynomial_parameterGrading (S : PhysicalSpacesData) :
+    ℕ → Seminorm ℝ ((StateDirections S × ℝ) × CircleSpace S) :=
+  pairGrading (pairGrading (sectorGrading S) realGrading)
+    (S.circle (3 / 4 : ℝ)).grading
+
+private theorem correctionPolynomial_parameterDomain_isOpen
+    (S : PhysicalSpacesData) (base : ℕ) (ε : ℝ) :
+    IsOpen (sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) :=
+  (sectorNeighborhood_isOpen S base ε ε).prod
+    (isOpen_univ : IsOpen (univ : Set (CircleSpace S)))
+
+private theorem correctionPolynomial_domain_convex
+    (S : PhysicalSpacesData) (base : ℕ) (ε l h : ℝ) :
+    Convex ℝ ((sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) ×ˢ
+      (Ioo l h ×ˢ (univ : Set ℝ))) :=
+  ((sectorNeighborhood_convex S base ε ε).prod
+    (convex_univ : Convex ℝ (univ : Set (CircleSpace S)))).prod
+      ((convex_Ioo l h).prod (convex_univ : Convex ℝ (univ : Set ℝ)))
+
+private def correctionPolynomial_entryDirections
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))
+    (l h : ℕ → ℝ) (hl : ∀ m, C.left m < l m) (hh : ∀ m, h m < C.right m)
+    (i : Fin 3) (m : ℕ) :
+    SmoothDirections
+      ((sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) ×ˢ
+        (Ioo (l m) (h m) ×ˢ (univ : Set ℝ)))
+      (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+        originalCoefficientEntry D S C i (liftSectorParameter S C x.1.1) x.2) :=
+  (N01Properties.originalCoefficient_stripTower
+    (D := D) (T := T) (S := S) (C := C)
+    (base := base) (loss := loss) (ε := ε) hN hS hT j hcell l h hl hh i m).fstParameter
+      (F := CircleSpace S) (sectorNeighborhood_isOpen S base ε ε)
+      ((isOpen_Ioo : IsOpen (Ioo (l m) (h m))).prod
+        (isOpen_univ : IsOpen (univ : Set ℝ)))
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {base loss : ℕ} {ε : ℝ}
@@ -286,7 +326,7 @@ theorem N01Properties.returnCorrectionCoefficient_joint_growth_of_velocity
   let E := (StateDirections S × ℝ) × CircleSpace S
   let U : Set E := sectorNeighborhood S base ε ε ×ˢ univ
   let V : ℕ → Set PolarPoint := fun m => Ioo (l m) (h m) ×ˢ univ
-  let p := pairGrading (pairGrading (sectorGrading S) realGrading) (S.circle (3 / 4 : ℝ)).grading
+  let p := correctionPolynomial_parameterGrading S
   let W : ℕ → ℝ := fun m => radialE (D.cellIndex (j m))
   let F : ℕ → ℝ := fun m => T.H (T.sample m) ^ (3 / 4 : ℝ)
   let a : ℕ → E × PolarPoint → ℝ := fun _ x =>
@@ -308,21 +348,14 @@ theorem N01Properties.returnCorrectionCoefficient_joint_growth_of_velocity
   have hW (m : ℕ) : 1 ≤ W m := one_le_radialE_of_nat _
   have hF (m : ℕ) : 0 ≤ F m :=
     (Real.rpow_pos_of_pos ((material_circle_sample_weights_pos hT hN.1.1).2 m) _).le
-  have hU : IsOpen U := (sectorNeighborhood_isOpen S base ε ε).prod
-    (isOpen_univ : IsOpen (univ : Set (CircleSpace S)))
+  have hU := correctionPolynomial_parameterDomain_isOpen S base ε
   have hV (m : ℕ) : IsOpen (V m) :=
     (isOpen_Ioo : IsOpen (Ioo (l m) (h m))).prod
       (isOpen_univ : IsOpen (univ : Set ℝ))
-  have hc (m : ℕ) : Convex ℝ (U ×ˢ V m) :=
-    ((sectorNeighborhood_convex S base ε ε).prod convex_univ).prod
-      ((convex_Ioo (l m) (h m)).prod convex_univ)
-  let Jentry : ∀ (i : Fin 3) (m : ℕ), SmoothDirections (U ×ˢ V m)
-      (fun x : E × PolarPoint => originalCoefficientEntry D S C i
-        (liftSectorParameter S C x.1.1) x.2) := fun i m =>
-    (N01Properties.originalCoefficient_stripTower
-      (D := D) (T := T) (S := S) (C := C)
-      (base := base) (loss := loss) (ε := ε) hN hS hT j hcell l h hl hh i m).fstParameter
-        (F := CircleSpace S) (sectorNeighborhood_isOpen S base ε ε) (hV m)
+  have hc := fun m : ℕ => correctionPolynomial_domain_convex S base ε (l m) (h m)
+  let Jentry := correctionPolynomial_entryDirections
+    (D := D) (T := T) (S := S) (C := C)
+    (base := base) (loss := loss) (ε := ε) hN hS hT j hcell l h hl hh
   let Ja : ∀ m, SmoothDirections (U ×ˢ V m) (a m) := fun m =>
     (Jentry 0 m).congrOn (fun x _ => correctionPolynomial_entry_zero_apply D S C
       (liftSectorParameter S C x.1.1) x.2)
