@@ -23,12 +23,12 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
 def referenceStateConditions.sectorParameterOfState
     (href : referenceStateConditions D S C) (z : AnnularState S × ℝ)
-    (hs : stateSector S z.1) : StateDirections S × ℝ :=
+    (hs : ContinuousFlexibility.Statements.stateSector S z.1) : StateDirections S × ℝ :=
   (⟨z.1 - C.referenceState, (stateSectorSubmodule S).sub_mem hs href.stateSector⟩, z.2)
 
 theorem referenceStateConditions.lift_sectorParameterOfState
     (href : referenceStateConditions D S C) (z : AnnularState S × ℝ)
-    (hs : stateSector S z.1) :
+    (hs : ContinuousFlexibility.Statements.stateSector S z.1) :
     liftSectorParameter S C (href.sectorParameterOfState z hs) = z := by
   apply Prod.ext
   · change C.referenceState + (z.1 - C.referenceState) = z.1
@@ -47,7 +47,7 @@ theorem referenceStateConditions.sectorParameterOfState_lift
 
 theorem referenceStateConditions.sectorParameterOfState_mem
     (href : referenceStateConditions D S C) (z : AnnularState S × ℝ)
-    (hs : stateSector S z.1) (hz : z ∈ stateNeighborhood S C base ε) :
+    (hs : ContinuousFlexibility.Statements.stateSector S z.1) (hz : z ∈ stateNeighborhood S C base ε) :
     href.sectorParameterOfState z hs ∈ sectorNeighborhood S base ε ε := by
   constructor
   · change stateGrading S base (z.1 - C.referenceState) < ε
