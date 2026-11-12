@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalRepresentationPairing
+import ContinuousFlexibility.Analysis.N07aCanonicalOpenLp
 
 /-!
 # Differences of the actual open coefficient multipliers
