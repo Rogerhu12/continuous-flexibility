@@ -47,8 +47,10 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_sourceSymmetry
     exact congrArg Prod.fst (hN.returnCorrectionCoefficientScalarJets_reflection
       hS hT hR j hcell χ hχrange hcutoff hdisc n x hx v r θ)
   · intro r θ
-    exact congrArg Prod.snd (hN.returnCorrectionCoefficientScalarJets_reflection
-      hS hT hR j hcell χ hχrange hcutoff hdisc n x hx v r θ)
+    have h := congrArg (fun q : ℝ × ℝ => q.2)
+      (hN.returnCorrectionCoefficientScalarJets_reflection
+        hS hT hR j hcell χ hχrange hcutoff hdisc n x hx v r θ)
+    exact h
   · intro p
     have hp : p + (0, Real.pi) = (p.1, p.2 + Real.pi) :=
       Prod.ext (add_zero p.1) rfl

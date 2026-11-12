@@ -61,7 +61,7 @@ def N01Properties.returnCorrectionLocalCoefficient_parameterSpatialTower :
           m x.2 x.1.2) := by
   have hW := ((sectorNeighborhood_isOpen S base ε ε).prod
     (isOpen_univ : IsOpen (univ : Set (CircleSpace S)))).prod
-      ((isOpen_Ioo : IsOpen (Ioo l h)).prod isOpen_univ)
+      ((isOpen_Ioo : IsOpen (Ioo l h)).prod (isOpen_univ : IsOpen (univ : Set ℝ)))
   let L := correctionStateSpatialProjection S
   let P := parameterAngularReflection ((StateDirections S × ℝ) × CircleSpace S)
   have hL : MapsTo L
