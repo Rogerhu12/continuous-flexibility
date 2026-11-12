@@ -58,7 +58,7 @@ theorem SeedRetainedPair.exists_uniform_selectedOuter_tailEnvelope
     have hthreshold : radialFrequencyThreshold S.chain S.Cstar n ≤
         radialFrequencyThreshold S.chain S.Cstar N₀ :=
       (morseTransition_threshold_strictMonoOn S.chain hS.1 h.d_eq).monotoneOn
-        hband.1 (by omega) hnlt.le
+        hband.1 ((Nat.le_add_right S.chain.index 3).trans hN₀) hnlt.le
     have hjlt : j < J₀ := Nat.lt_ceil.mpr (hband.2.2.trans_le hthreshold)
     let i : ι := ⟨(⟨n, hnlt⟩, ⟨j, hjlt⟩), hj, heven, hband⟩
     exact (hfixed (i, right)).mono (hB (i, right)).le
