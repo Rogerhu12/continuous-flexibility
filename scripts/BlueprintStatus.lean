@@ -51,9 +51,11 @@ run_cmd do
 #print axioms ContinuousFlexibility.Blueprint.N01b
 #print axioms ContinuousFlexibility.Blueprint.R11b
 #print axioms ContinuousFlexibility.Blueprint.N04a
+#print axioms ContinuousFlexibility.Blueprint.N07b
 
 -- Tool-R10a-Outer: actual inverse, ordinary compact sources, and the refuted global bound.
 #print axioms ContinuousFlexibility.Radial.exists_uniform_morseOuterInverse_fixed_parameters
 #print axioms ContinuousFlexibility.Radial.OuterPhysicalRobinInverse.assertions
 #print axioms ContinuousFlexibility.Radial.OuterPhysicalRobinInverse.ordinary_jacobi_source
 #print axioms ContinuousFlexibility.Radial.accumulatingProfile_no_unweighted_outer_inverse
+#print axioms ContinuousFlexibility.Blueprint.R11a
