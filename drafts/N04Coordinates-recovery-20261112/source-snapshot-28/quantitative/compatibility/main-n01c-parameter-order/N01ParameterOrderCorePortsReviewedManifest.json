@@ -1,0 +1,74 @@
+{
+  "kind": "main_c9cd_n01_parameter_order_core_ports_owner_freeze",
+  "status": "INDEPENDENT_FULL_STATIC_REVIEWED_HELD_UNCOMPILED",
+  "owner": "/root/quantitative_route",
+  "selected_upstream_contract": {
+    "ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+    "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+    "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+    "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+    "lines": 1773
+  },
+  "actual_preimage": "34a496f78ec2c9f35f74d2eb3dfd48a1d4190909",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/N01JetBounds.lean",
+      "sha256": "aad4c90c05e7ba57a31e8d63d1ef1a96c3f439ed3a57890de85bcb77e6acb39a",
+      "blob": "1e4f04ef7acf1b6050f63c7af3826a9dc6105ef2",
+      "lines": 74,
+      "target": "src/ContinuousFlexibility/Analysis/N01JetBounds.lean",
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/CanonicalNeighborhoodRestriction.lean",
+      "sha256": "f0333edb08700ba86b4db979edc64251ce86f32106635ac476e8ed910a8c1eef",
+      "blob": "99481854fcfc00bfd242fdccf388996297f83bd0",
+      "lines": 192,
+      "target": "src/ContinuousFlexibility/Analysis/CanonicalNeighborhoodRestriction.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.StateNeighborhood",
+        "ContinuousFlexibility.Analysis.MaterialSampleBounds",
+        "ContinuousFlexibility.Analysis.N01JetBounds"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "lines": 311,
+      "target": "src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "ContinuousFlexibility.Analysis.MaterialSampleBounds",
+        "ContinuousFlexibility.Analysis.N01JetBounds"
+      ]
+    }
+  ],
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/N01ParameterOrderCorePortsFinalCandidateManifest.json",
+    "sha256": "297a305be6dc826cc12879dcb094422a6371c531f781d087f391ee24a215c4a3",
+    "blob": "b44219d67a8471ec8a103aee96410f865fee8ab2",
+    "lines": 218
+  },
+  "independent_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/N01ParameterOrderCorePortsIndependentReview.json",
+    "sha256": "95f55482a3bb7e9e7848c3523f078484730fb880bc17b6f80e8424c3e3865a43",
+    "blob": "3991ed964295471751bfdf2381870fa5617b6d25",
+    "lines": 203
+  },
+  "required_downstream_cohort": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-values/CanonicalFlowValuesParameterOrderCandidateManifest.json",
+    "sha256": "d7597ff7a1f5c0e96bb1f1ef6d465a3ff5222a4ecef2f016a9b2bd5f55c238ac",
+    "blob": "144888e289ce3a9729c5f387500b8e3c59a7062c",
+    "lines": 142
+  },
+  "scope": [
+    "Only the three exact selected core ports are reviewed here; whole selected contract cohort still requires its independent full-source gates and actual CI.",
+    "The chosen additional parameter loss precedes all spatial orders and is preserved by restriction and material enlargement, with the same derivative tower and original H^(3/4) gain.",
+    "No compiler/elaborator or active source/index/ref/CP/CI action."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T15:51:24.498465+00:00"
+}

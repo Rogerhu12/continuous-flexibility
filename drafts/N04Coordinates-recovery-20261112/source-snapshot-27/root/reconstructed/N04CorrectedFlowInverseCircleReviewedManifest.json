@@ -1,0 +1,43 @@
+{
+  "kind": "reviewed_actual_corrected_flow_inverse_circle_source",
+  "status": "FULL_SOURCE_REVIEWED_HELD_UNCOMPILED_WITH_PENDING_PROVIDER_PORTS",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowInverseCircle.lean",
+    "sha256": "35ad5b06e178c76a4d208253027d57884980b62cb114253316b09c8ae93c8272",
+    "blob": "fff0022928fd6e8917dfdaa250fd635e2ca5ecdd",
+    "lines": 164,
+    "target": "src/ContinuousFlexibility/Analysis/N04CorrectedFlowInverseCircle.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowInverseCircleCandidateManifest.json",
+    "sha256": "3c83229cc0566654edeb1351cc150d681a5db4445e76abe5994e10f92ebee52e",
+    "blob": "b409992f9e482f95f6386c0d8bcac8d326ed8b57",
+    "lines": 128
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/N04CorrectedFlowInverseCircleIndependentReview.json",
+    "sha256": "dff48762dd0b454df6cfd0af9e9cdc428f879d650cbc106914ec8caf266389a9",
+    "blob": "ded278d2e5063704f16ae69c2b43a076b31e67cc",
+    "lines": 277
+  },
+  "forward_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowCircleReviewedManifest.json",
+    "sha256": "c597cfc58601f30f0503887eed92b127f40d9ccc9d1dac3a88b53a2ca6283aee",
+    "blob": "eff15346711c81e6a3dd28ced56d879cd179f027",
+    "lines": 36
+  },
+  "closure_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowInverseCircleClosureInventory.json",
+    "sha256": "b09bae472fc2a8b8334cb49cd4a9872087c2692ed5a8e4a91de21bdada0fa64d",
+    "blob": "57c856a709cf849c32aa00c52b632f02e93cba87",
+    "lines": 5375
+  },
+  "historical_pending_provider_ports": [
+    "ContinuousFlexibility.Analysis.N01FlowParameterVariation",
+    "ContinuousFlexibility.Analysis.N01FlowMixedParameterBound"
+  ],
+  "scope": "Same actual corrected flow, literal Function.invFun, positive optical inverse translation, genuine positive-lift domain and joint state-angle directional tower for a fixed radius selector.",
+  "provider_boundary": "Historical mixed-pin graph remains immutable and held; later selected flow and smallness ports will be rebound with their own reviewed records. No complete DAG compilation is claimed.",
+  "compiled": false,
+  "created_at": "2026-11-12T15:21:38.000519+00:00"
+}

@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "kind": "actual_collar_mixed_tower_and_old_sector_consumer_parameter_order_port",
+  "status": "HELD_UNCOMPILED_PEER_PENDING",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01OpticalCollarJetBounds.lean",
+      "sha256": "312587b3d352f1c2f684200bbe64a70b846089556ca8e7f96642ad5f84040daf",
+      "blob": "738c763b35ed2b320306a84ec7907283f0b15270",
+      "lines": 327,
+      "target": "src/ContinuousFlexibility/Analysis/N01OpticalCollarJetBounds.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01OpticalCollarJetBounds.c5c48-base.lean.txt",
+        "sha256": "1fd0412e61dd3ecb6c9f0c52d4d66929aa898c19c6ce758730e3ea33a1df2abe",
+        "blob": "82d54fac8fdf7a4c984792db45d68bbc82eda5ec",
+        "lines": 318,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01OpticalCollarJetBounds.diff",
+        "sha256": "e94b4a8b19f66d0e8465cb745e83423e63215ac1d53945fb2020520482baf9ff",
+        "blob": "40c110226aba111049469a8e967ca6119e547178",
+        "lines": 129
+      },
+      "public_headers_changed": [
+        "N01Properties.ordinaryFlowFamily_weighted_zeroth_bound",
+        "N01Properties.ordinaryFlowFamily_collar_directional_bounds",
+        "N01Properties.ordinaryFlowFamily_collar_bound"
+      ],
+      "public_headers_preserved": [
+        "abs_le_of_power_weight_bound",
+        "smoothDirections_zeroth_spatialWeight_bound",
+        "smoothDirections_zeroth_twoFactor_bound",
+        "smoothDirections_divide_spatialWeight_bound",
+        "opticalSpeed_lower_boundaryDistance",
+        "N01Properties.opticalCollar_inverse_boundaryDistance_bound"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowCollarJetBounds.lean",
+      "sha256": "5e2d702b0d5e0851cabf9110e895ab3123a08f5dbabcd1dd0c6cfb639890463c",
+      "blob": "793750ebfb8db079d1660cc1e924c65071f7e010",
+      "lines": 186,
+      "target": "src/ContinuousFlexibility/Analysis/N01FlowCollarJetBounds.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowCollarJetBounds.c5c48-base.lean.txt",
+        "sha256": "d81264084955dedfb623a76c60246f3f4620749e836f7639e22f32063656ae88",
+        "blob": "39c22c2905c22c958de75f142fe959a3a6ee214f",
+        "lines": 185,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowCollarJetBounds.diff",
+        "sha256": "cff0882ffbfeb158a8b577aca6e281e09715211919122a4b265420711ff0088b",
+        "blob": "9b4cd36f84b8dabb99a3a11bccaad1be68e3a067",
+        "lines": 18
+      },
+      "public_headers_changed": [],
+      "public_headers_preserved": [
+        "N01Properties.minusFlow_reference_contDiffAt",
+        "N01Properties.minusFlow_collar_contDiffOn",
+        "N01Properties.minusFlow_collar_mixed_jets",
+        "N01Properties.minusFlow_collar_positive_fderiv_jets"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowMixedParameterTower.lean",
+      "sha256": "084689be235d980f66bbb6b24b65b180eb293390ce2a1eceb2322f403d67ba81",
+      "blob": "df9d2a1bb30e4904f8e3b064a30290671df20465",
+      "lines": 176,
+      "target": "src/ContinuousFlexibility/Analysis/N01FlowMixedParameterTower.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowMixedParameterTower.c5c48-base.lean.txt",
+        "sha256": "b804773b2b9ac56249b8c9989d8f704cb6a2bd8108097c0f7b96d0f47f483a8d",
+        "blob": "dd4764d693e986a5e4c818cc239e31a9dddb5dc0",
+        "lines": 168,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowMixedParameterTower.diff",
+        "sha256": "ef2c7e5777320ac9497858b2629f10e0fc64595a49f555088d5ee4abdb4e4c90",
+        "blob": "f96730c9659ceb32173eb3b9c0d51ea938ae3122",
+        "lines": 115
+      },
+      "public_headers_changed": [
+        "N01Properties.sectorFlow_mixed_tower",
+        "N01Properties.sectorFlowMixedTower_bound"
+      ],
+      "public_headers_preserved": [
+        "N01Properties.sectorFlowMixedTower",
+        "N01Properties.sectorFlowMixedTower_uniform_on_radial_interval"
+      ],
+      "imports_preserved": false,
+      "options_preserved": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01CoefficientSpatialJets.lean",
+      "sha256": "6875e6286e51a3cf92c38731df7a906433ffedc828b429ef9a29987235f007c5",
+      "blob": "78c515da3e26de043e6514e2668442a37cc1e9e1",
+      "lines": 249,
+      "target": "src/ContinuousFlexibility/Analysis/N01CoefficientSpatialJets.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01CoefficientSpatialJets.c5c48-base.lean.txt",
+        "sha256": "5242b2bbb36f35525783b1941e73a51b0c6bbc0ff993b722a7b4f38040b16e12",
+        "blob": "0e038e131e20d709f5411f0c17637da9900b65e4",
+        "lines": 249,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01CoefficientSpatialJets.diff",
+        "sha256": "0293ce7ad30c6cfffa41de116fdcd81c37e1daa25bdb5ab4f5857a33aaa7b19a",
+        "blob": "c5278abc417877f05f5f5d8c830bfcb015f2cc7d",
+        "lines": 10
+      },
+      "public_headers_changed": [],
+      "public_headers_preserved": [
+        "coefficientFamily_eq_mixedDerivative_zero",
+        "N01Properties.coefficientFamily_contDiffOn",
+        "N01Properties.coefficientFamily_hasDerivAt_radial",
+        "N01Properties.coefficientFamily_hasDerivAt_angular",
+        "N01Properties.componentCoefficientTower",
+        "N01Properties.componentCoefficientTower_uniformBounds",
+        "N01Properties.componentCoefficientTower_localBounds",
+        "N01Properties.componentCoefficientScalarJet",
+        "N01Properties.componentCoefficientScalarJet_of_mem",
+        "N01Properties.componentCoefficientScalarJet_contDiffOn",
+        "N01Properties.componentCoefficientScalarJet_mixedDerivative",
+        "N01Properties.componentCoefficientScalarJet_hasDerivAt_line",
+        "N01Properties.componentCoefficientScalarJet_mixed_bound"
+      ],
+      "imports_preserved": false,
+      "options_preserved": true
+    }
+  ],
+  "source_lines": 938,
+  "selected_generic_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+  "selected_N01_contract_ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+  "neighborhood_provider_candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowSmallnessNeighborhoodParameterOrderCandidateManifest.json",
+    "sha256": "28df8ee2b4d961e5c1b9d940a3d9863f0ef78fe7c135335a272f58321d6856bf",
+    "blob": "2410cc25e70ce297bc2d40549fee7629e58baf42",
+    "lines": 119
+  },
+  "sector_provider_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01SectorFlowParameterOrderReviewedManifest.json",
+    "sha256": "55abf20edc4064bab133fc2fb59bd7c11f1241f8489c6462c8506917a41c0585",
+    "blob": "bbce56a0e0e31c4422a02364378f131a7c7a1f22",
+    "lines": 27
+  },
+  "angular_provider_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointAngularJetsParameterOrderReviewedManifest.json",
+    "sha256": "749950d6c4266205804e98a97c2510d84ae9a7abce153fc3e45c1741b2115cfc",
+    "blob": "e54c997613811463a07101189de4a47b14494997",
+    "lines": 37
+  },
+  "changes": [
+    "The optical collar geometry and endpoint-distance bound are byte-preserved. Its same geometric K/A precede every k; the genuine k-dependent loss precedes every spatial s. The k=0 scalar extraction keeps the same high grade.",
+    "The actual fixed-state mixed-jet collar consumer uses the chosen k=0 high grade a+b+loss+parameterLoss. Its public conclusions and all actual field/closure proofs are unchanged.",
+    "The sector mixed tower selects one actual full SmoothDirections tower using the k=0 witness; uniqueness transfers every sharp fixed-k bound to that same tower. The local radial-interval seminorm is selected only after the requested k-dependent loss.",
+    "The two remaining old-Sector imports are replaced with the already reviewed actual parameter-order and endpoint-angular providers. The coefficient module uses only the unchanged reference-neighborhood lemma; its full body and all headers are unchanged."
+  ],
+  "scope_limits": [
+    "Exact source selection and import closure will be frozen after combining all necessary consumer ports. This candidate alone does not assert the full 615-module graph is ready.",
+    "No compiler, active source/index/ref, CI, statement or resource-limit changes; original c5 sources and earlier manifests remain unchanged."
+  ],
+  "compiled": false,
+  "green_receipt_applies": false,
+  "created_at": "2026-11-12T15:22:16.755975+00:00"
+}

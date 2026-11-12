@@ -1,0 +1,125 @@
+{
+  "kind": "actual_minus_first_integral_circle_and_state_angle_tower",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW_AND_MAIN_INTEGRATION",
+  "author": "/root",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04MinusFirstIntegralCircle.lean",
+    "sha256": "2c6be9ee3d6ce0f6ec4e5b15248718dca7085dae2dd80580dfd816943f10eb0a",
+    "blob": "fc11c89b2e92489890485acfcfe221f4ec47dd28",
+    "lines": 136,
+    "target": "src/ContinuousFlexibility/Analysis/N04MinusFirstIntegralCircle.lean"
+  },
+  "public_names": [
+    "N01Properties.n04MinusFirstIntegralCircle",
+    "N01Properties.n04MinusFirstIntegralCircle_decode",
+    "N01Properties.smoothTameOn_n04MinusFirstIntegralCircle",
+    "N01Properties.n04MinusFirstIntegralSelector_jointTower"
+  ],
+  "selected_input_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N02N03AndCorrectedFlowParameterOrderSelectedInventory.json",
+    "sha256": "0ffb77aab1a331e32d8a32614f0ffea3256bfc4ae9f65dadbaf59e21ce698701",
+    "blob": "f52ac584e48894d0a4b9acf6b980638cf90f7f8e",
+    "lines": 8629
+  },
+  "closure_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04MinusFirstIntegralCircleClosureInventory.json",
+    "sha256": "9b007d59f2bb2ad3a3ea781ffebcdba5bee7d6f72ee091193da11516bca46ded",
+    "blob": "ceb1dc34913b90b2661129a66ff197e3fa3dead5",
+    "lines": 5540
+  },
+  "selected_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N04CorrectedFlowInverseCircle",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowInverseCircle.lean",
+      "sha256": "35ad5b06e178c76a4d208253027d57884980b62cb114253316b09c8ae93c8272",
+      "blob": "fff0022928fd6e8917dfdaa250fd635e2ca5ecdd",
+      "lines": 164,
+      "selected_ref": "LOCAL_HELD_CORRECTED_FLOW",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04CorrectedFlowCircle"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnInverseCircle",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnInverseCircle.lean",
+      "blob": "e99a08956ffd3e0dcf86d6e1ed0a4421b5675a86",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "4efcb2d32b0e23c51812bfe4b14add3e20ffd4356394f87a1f15ef5ab308c55e",
+      "lines": 317,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01SelectorInverse",
+        "ContinuousFlexibility.Analysis.N01ResidualSmoothTame",
+        "ContinuousFlexibility.Analysis.CircleCompositionSmoothTame",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionDisplacementRegularity"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CircleLinearTame",
+      "path": "src/ContinuousFlexibility/Analysis/N01CircleLinearTame.lean",
+      "blob": "60cb27e73d5bac0102e5436d7fad54ae47740532",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "18f9059ced21bc434aec9f75840a1dbb7842444192939afd4755dc1ed105ef7a",
+      "lines": 99,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N02ChartError",
+        "ContinuousFlexibility.Analysis.TameElementaryCalculus"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleJointEvaluation",
+      "path": "src/ContinuousFlexibility/Analysis/CircleJointEvaluation.lean",
+      "blob": "b18010ba5d5c86d247e70d32e8ffd134434e126b",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "5110f4d8cf53b34ed33b6221317e9421d876d9add22dca234e95493edcc33ba6",
+      "lines": 216,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleAngularJetLinear",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsJointAngular",
+        "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+        "ContinuousFlexibility.Analysis.SolveNewtonBridge"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals",
+      "path": "src/ContinuousFlexibility/Analysis/N04bCharacteristicFirstIntegrals.lean",
+      "selected_ref": "34a496f78ec2c9f35f74d2eb3dfd48a1d4190909",
+      "sha256": "cabf5a4f7de74c1e3c2c16c765bf7c67052841cda2582da16b669141e3839a27",
+      "blob": "6fc2f9eca3e1203e2d5598cc92ac6604f848c3ef",
+      "lines": 202,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TravelStripAngularInverse",
+        "ContinuousFlexibility.Scalar.Conservation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ParameterizedCircleInverse",
+      "path": "src/ContinuousFlexibility/Analysis/ParameterizedCircleInverse.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "7131aaca76e59f2dff2ceb3c1216e9bcff6e7f0bd999afaea55255cf86ce6e7d",
+      "blob": "d0823bcdb7716e3d9a179d6783c051509c5a6681",
+      "lines": 156,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ParameterizedScalarInverse",
+        "ContinuousFlexibility.Analysis.PeriodicScalarFlow",
+        "Mathlib.Topology.Order.IntermediateValue",
+        "Mathlib.Logic.Function.Basic",
+        "Mathlib.Tactic.Linarith",
+        "Mathlib.Tactic.Ring"
+      ]
+    }
+  ],
+  "checks": [
+    "The same actual corrected-flow inverse circle is composed with the prescribed left-chart coordinate, with positive opticalTravel in the composition argument.",
+    "The decoded displacement is exactly the existing n04bMinusFirstIntegral minus angle plus optical travel. Its definition uses the literal fiberwise Function.invFun of that same corrected flow.",
+    "Genuine smooth tame composition of the inverse and actual sector chart supplies one circle-valued family; the joint circle affine lift supplies its state-and-angle SmoothDirections tower.",
+    "Full selected content fingerprints, source imports, dependency acyclicity and public-name uniqueness checked without elaboration."
+  ],
+  "scope_limits": [
+    "A fixed closed radius selector is used. Radial derivatives, uniform sampled height-gain bounds and moving canonical compositions remain separate.",
+    "The input selected graph is static and uncompiled. Main integration and full CI are separate gates; no semantic closure is inferred merely from imports.",
+    "No final CurrentJets premise, new inverse selection, open Blueprint theorem or active source/index/ref/CI/resource-limit mutation."
+  ],
+  "compiled": false,
+  "independent_reviews": [],
+  "created_at": "2026-11-12T15:36:51.900411+00:00"
+}

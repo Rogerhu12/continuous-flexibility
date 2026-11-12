@@ -1,0 +1,170 @@
+--- src/ContinuousFlexibility/Analysis/CanonicalPositiveSourceJetBounds.lean (actual CI154)
++++ src/ContinuousFlexibility/Analysis/CanonicalPositiveSourceJetBounds.lean (repair154 candidate)
+@@ -1,5 +1,6 @@
+ import ContinuousFlexibility.Analysis.CanonicalPositiveFiniteEndpointBounds
+ import ContinuousFlexibility.Analysis.N04bActualAtlasInteriorCompletion
++import ContinuousFlexibility.Analysis.CanonicalPositiveSourceInteriorDivision
+ 
+ /-!
+ # All ordinary jets of the same certified positive endpoint sources
+@@ -65,6 +66,79 @@
+     height_jets := fun k θ => (hconst k θ).trans (hone k)
+     inverse_height_jets := fun k θ => by
+       simpa only [inv_one] using (hconst k θ).trans (hone k) }
++
++private theorem positiveSourceJetBounds_of_rootFamilies
++    {D : ReferenceData} {S : PhysicalSpacesData}
++    {C : NonlinearGeometryData S} {K : CanonicalData S}
++    {bF lF bQ lQ : ℕ} {εF εQ : ℝ}
++    (hp : Monotone (pairGrading (stateGrading S) realGrading))
++    (hF : ∀ m : ℕ, ∀ side : Bool, ∃ A : ℕ → ℝ, (∀ k, 0 < A k) ∧
++      CanonicalRootRelativeJetFamily S C K bF lF εF m side A)
++    (hQ : ∀ m : ℕ, ∀ side : Bool, ∃ B : ℕ → ℝ, (∀ k, 0 < B k) ∧
++      CanonicalRootHeightJetFamily S C K bQ lQ εQ m side B)
++    (i : N04PositiveComponent D.a D.b (deriv D.w)) (side : Bool)
++    (j : N04PositiveEndpointSource C i side) :
++    ∃ A : ℕ → ℝ, (∀ k, 1 ≤ A k) ∧
++      ∀ z ∈ stateNeighborhood S C (max bF bQ) (min εF εQ),
++      stateSector S z.1 →
++        RootEndpointTameJetBounds (pairGrading (stateGrading S) realGrading)
++          (max lF lQ) A (z - (C.referenceState, 0))
++          (n04PositiveSourceMap j K z) (n04PositiveSourceHeight j K z)
++          (n04PositiveEndpoint i side) := by
++  let outLoss := max lF lQ
++  rcases j with ⟨o, ho⟩
++  cases o with
++  | none =>
++      exact ⟨fun _ => 1, fun _ => le_rfl, fun z _hz _hs =>
++        rootEndpointTameJetBounds_identity _ outLoss (z - (C.referenceState, 0)) _⟩
++  | some m =>
++      obtain ⟨A, hApos, hrelative⟩ := hF m (!side)
++      obtain ⟨B, hBpos, hheight⟩ := hQ m (!side)
++      let Q : ℕ → ℝ := fun k => 1 + A k + B k
++      have hQone (k : ℕ) : 1 ≤ Q k := by
++        dsimp only [Q]
++        linarith only [hApos k, hBpos k]
++      have hAQ (k : ℕ) : A k ≤ Q k := by
++        dsimp only [Q]
++        linarith only [hBpos k]
++      have hBQ (k : ℕ) : B k ≤ Q k := by
++        dsimp only [Q]
++        linarith only [hApos k]
++      refine ⟨Q, hQone, ?_⟩
++      intro z hz hs
++      have hzF := stateNeighborhood_mono S C (le_max_left bF bQ)
++        (min_le_left εF εQ) hz
++      have hzQ := stateNeighborhood_mono S C (le_max_right bF bQ)
++        (min_le_right εF εQ) hz
++      have hraise (a : ℕ → ℝ) (haQ : ∀ k, a k ≤ Q k)
++          (l : ℕ) (hl : l ≤ outLoss) (k : ℕ) :
++          a k * (1 + pairGrading (stateGrading S) realGrading (k + l)
++            (z - (C.referenceState, 0))) ≤
++          Q k * (1 + pairGrading (stateGrading S) realGrading (k + outLoss)
++            (z - (C.referenceState, 0))) :=
++        mul_le_mul (haQ k)
++          (add_le_add le_rfl (hp (Nat.add_le_add_left hl k) _))
++          (add_nonneg zero_le_one (apply_nonneg _ _)) (zero_le_one.trans (hQone k))
++      change RootEndpointTameJetBounds _ outLoss Q _
++        (canonicalCurrentPoint C K z (if side then (K.cutPair m).1 else (K.cutPair m).2))
++        (n04CoordinatesCurrentHeightRatio C K z
++          (if side then (K.cutPair m).1 else (K.cutPair m).2))
++        (n04PositiveEndpoint i side)
++      change n04PositiveEndpoint i side = (if side then C.left m else C.right m) at ho
++      rw [ho]
++      refine ⟨?_, ?_, ?_⟩
++      · intro k hk θ
++        have h := ((hrelative z hzF hs θ).2.2.1 k hk).trans
++          (hraise A hAQ lF (le_max_left _ _) k)
++        cases side <;> exact h
++      · intro k θ
++        have h := ((hheight z hzQ hs θ).2.2.1 k).trans
++          (hraise B hBQ lQ (le_max_right _ _) k)
++        cases side <;> exact h
++      · intro k θ
++        have h := ((hheight z hzQ hs θ).2.2.2 k).trans
++          (hraise B hBQ lQ (le_max_right _ _) k)
++        cases side <;> exact h
+ 
+ /-- Certified endpoint selection preserves the actual all-order root
+ estimates. Both ends use one envelope and one common derivative loss. -/
+@@ -100,67 +174,8 @@
+   refine ⟨newBase, outLoss, ε', hbF.trans (le_max_left _ _), max_le_max hlF hlQ,
+     lt_min hεF hεQ, (min_le_left _ _).trans hεFε, ?_⟩
+   intro i j
+-  have hsource (side : Bool) (j : N04PositiveEndpointSource C i side) :
+-      ∃ A : ℕ → ℝ, (∀ k, 1 ≤ A k) ∧
+-        ∀ z ∈ stateNeighborhood S C newBase ε', stateSector S z.1 →
+-          RootEndpointTameJetBounds (pairGrading (stateGrading S) realGrading)
+-            outLoss A (z - (C.referenceState, 0))
+-            (n04PositiveSourceMap j K z) (n04PositiveSourceHeight j K z)
+-            (n04PositiveEndpoint i side) := by
+-    rcases j with ⟨o, ho⟩
+-    cases o with
+-    | none =>
+-        exact ⟨fun _ => 1, fun _ => le_rfl, fun z _hz _hs =>
+-          rootEndpointTameJetBounds_identity _ outLoss (z - (C.referenceState, 0)) _⟩
+-    | some m =>
+-        obtain ⟨A, hApos, hrelative⟩ := hF m (!side)
+-        obtain ⟨B, hBpos, hheight⟩ := hQ m (!side)
+-        let Q : ℕ → ℝ := fun k => 1 + A k + B k
+-        have hQone (k : ℕ) : 1 ≤ Q k := by
+-          dsimp only [Q]
+-          linarith only [hApos k, hBpos k]
+-        have hAQ (k : ℕ) : A k ≤ Q k := by
+-          dsimp only [Q]
+-          linarith only [hBpos k]
+-        have hBQ (k : ℕ) : B k ≤ Q k := by
+-          dsimp only [Q]
+-          linarith only [hApos k]
+-        refine ⟨Q, hQone, ?_⟩
+-        intro z hz hs
+-        have hzF := stateNeighborhood_mono S C (le_max_left bF bQ)
+-          (min_le_left εF εQ) hz
+-        have hzQ := stateNeighborhood_mono S C (le_max_right bF bQ)
+-          (min_le_right εF εQ) hz
+-        have hraise (a : ℕ → ℝ) (haQ : ∀ k, a k ≤ Q k)
+-            (l : ℕ) (hl : l ≤ outLoss) (k : ℕ) :
+-            a k * (1 + pairGrading (stateGrading S) realGrading (k + l)
+-              (z - (C.referenceState, 0))) ≤
+-            Q k * (1 + pairGrading (stateGrading S) realGrading (k + outLoss)
+-              (z - (C.referenceState, 0))) :=
+-          mul_le_mul (haQ k)
+-            (add_le_add le_rfl (hp (Nat.add_le_add_left hl k) _))
+-            (add_nonneg zero_le_one (apply_nonneg _ _)) (zero_le_one.trans (hQone k))
+-        change RootEndpointTameJetBounds _ outLoss Q _
+-          (canonicalCurrentPoint C K z (if side then (K.cutPair m).1 else (K.cutPair m).2))
+-          (n04CoordinatesCurrentHeightRatio C K z
+-            (if side then (K.cutPair m).1 else (K.cutPair m).2))
+-          (n04PositiveEndpoint i side)
+-        change n04PositiveEndpoint i side = (if side then C.left m else C.right m) at ho
+-        rw [ho]
+-        refine ⟨?_, ?_, ?_⟩
+-        · intro k hk θ
+-          have h := ((hrelative z hzF hs θ).2.2.1 k hk).trans
+-            (hraise A hAQ lF (le_max_left _ _) k)
+-          cases side <;> exact h
+-        · intro k θ
+-          have h := ((hheight z hzQ hs θ).2.2.1 k).trans
+-            (hraise B hBQ lQ (le_max_right _ _) k)
+-          cases side <;> exact h
+-        · intro k θ
+-          have h := ((hheight z hzQ hs θ).2.2.2 k).trans
+-            (hraise B hBQ lQ (le_max_right _ _) k)
+-          cases side <;> exact h
+-  choose A hAone hbound using fun side => hsource side (j side)
++  choose A hAone hbound using fun side =>
++    positiveSourceJetBounds_of_rootFamilies hp hF hQ i side (j side)
+   let B : ℕ → ℝ := fun k => A false k + A true k
+   have hB (k : ℕ) : 1 ≤ B k := by
+     dsimp only [B]
+@@ -195,8 +210,7 @@
+     (n04b_actualTypedAtlas_partA hT hS hN hfield e)
+   have hB := n04bActualTypedAtlas_interiorCompletion_partB hT hS hN hfield e
+   have hout := n04b_exists_common_positive_source_jets hS hT hN hfield hA hB
+-  simpa only [n04PositiveSourceMap, n04PositiveSourceHeight,
+-    canonicalCurrentPoint, n04CoordinatesCurrentHeightRatio, n04bWithInteriorDivision]
+-    using hout
++  simpa only [n04PositiveSourceMap_withInteriorDivision,
++    n04PositiveSourceHeight_withInteriorDivision] using hout
+ 
+ end ContinuousFlexibility.Analysis

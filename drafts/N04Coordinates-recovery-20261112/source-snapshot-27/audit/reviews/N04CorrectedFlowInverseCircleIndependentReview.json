@@ -1,0 +1,277 @@
+{
+  "kind": "independent_full_source_actual_corrected_flow_inverse_circle_review",
+  "status": "PASSED_STATIC_SOURCE_REVIEW_WITH_UPSTREAM_PORTS_HELD_UNCOMPILED",
+  "reviewer": "/root/audit_coordinates",
+  "author": "/root",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowInverseCircleCandidateManifest.json",
+    "sha256": "3c83229cc0566654edeb1351cc150d681a5db4445e76abe5994e10f92ebee52e",
+    "blob": "b409992f9e482f95f6386c0d8bcac8d326ed8b57",
+    "lines": 128
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowInverseCircle.lean",
+    "sha256": "35ad5b06e178c76a4d208253027d57884980b62cb114253316b09c8ae93c8272",
+    "blob": "fff0022928fd6e8917dfdaa250fd635e2ca5ecdd",
+    "lines": 164,
+    "target": "src/ContinuousFlexibility/Analysis/N04CorrectedFlowInverseCircle.lean"
+  },
+  "public_names": [
+    "N01Properties.n04CorrectedFlowCircle_mem_positiveLiftDomain",
+    "N01Properties.n04CorrectedFlowCircle_affineInverse",
+    "N01Properties.n04CorrectedFlowInverseCircle",
+    "N01Properties.n04CorrectedFlowInverseCircle_decode",
+    "N01Properties.smoothTameOn_n04CorrectedFlowInverseCircle",
+    "N01Properties.n04CorrectedFlowInverseSelector_jointTower"
+  ],
+  "forward_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowCircleReviewedManifest.json",
+    "sha256": "c597cfc58601f30f0503887eed92b127f40d9ccc9d1dac3a88b53a2ca6283aee",
+    "blob": "eff15346711c81e6a3dd28ced56d879cd179f027",
+    "lines": 36
+  },
+  "forward_full_peer": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/N04CorrectedFlowCircleIndependentReview.json",
+    "sha256": "5a518a7a01fc906fc7d536a4b2d790be565b6b17652eb628a33523b12a058824",
+    "blob": "bc25f522441b5133d2d5d475d4e3b1627a26d325",
+    "lines": 172
+  },
+  "checked_actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowCircle.lean",
+      "sha256": "1c499c99875b12e8a7a7abf91ff9dec371dca9c4f0a7505c5d4dfc50ce236e62",
+      "blob": "5a0a53733562aeb135e5c543ba3b6f36e7e7ab02",
+      "lines": 118,
+      "target": "src/ContinuousFlexibility/Analysis/N04CorrectedFlowCircle.lean",
+      "module": "ContinuousFlexibility.Analysis.N04CorrectedFlowCircle",
+      "selected_ref": "LOCAL_NEW_CORRECTED_FLOW",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01InterpolationInverseCircle",
+        "ContinuousFlexibility.Analysis.ReturnCorrectedFlow"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01InterpolationInverseCircle",
+      "path": "src/ContinuousFlexibility/Analysis/N01InterpolationInverseCircle.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "e4ddcbab9a22add55fca82e01770a15b004ba6cdf42fa1a928f3ba7565f8052b",
+      "blob": "5d29709ce82e9e2d9eddd11f6812a25fcd2faf6f",
+      "lines": 215,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ReturnInverseCircle",
+        "ContinuousFlexibility.Analysis.CircleComponentContraction"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01SelectorInverse",
+      "path": "src/ContinuousFlexibility/Analysis/N01SelectorInverse.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "e1ce3b7b578a17168ac6a432d732e302033f8e65309bc20c88fa610de4190a9b",
+      "blob": "959be823f4a888cca1c45c2f0fa77ef627bbc8f9",
+      "lines": 173,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointSmoothTame",
+        "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame",
+        "ContinuousFlexibility.Analysis.CirclePositiveInversePerturbation",
+        "ContinuousFlexibility.Analysis.CircleJointEvaluation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectedFlow",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectedFlow.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "9323567f5c4d710472b4d8b4f9ea52c5cdb5d16aa8d83b9661844f61f91b8763",
+      "blob": "36693b0d8102e289a31ebd012f8eeb6cf63f795c",
+      "lines": 343,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectionAlgebra",
+        "ContinuousFlexibility.Analysis.ReturnChartDifferentiation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CirclePositiveInversePerturbation",
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInversePerturbation.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "db1f19b5c13d3eb7146ea15da658ccf5e2f49cb752a8cde198e4ac66957d0b14",
+      "blob": "d532c92eee0cf46e41a22a1a641cf1d95ac87ef6",
+      "lines": 67,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame",
+        "ContinuousFlexibility.Analysis.CircleInversePerturbation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame",
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInverseSmoothTame.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "fad6b2f03c427d05ff8d94cf51cecc1e1377766f86f426979f3be82a65747f5d",
+      "blob": "28e258fbf0a0417606cb01a1c5abea5af9ccb49b",
+      "lines": 116,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CirclePositiveInverseModel",
+        "ContinuousFlexibility.Analysis.CircleInverseSmoothTame",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsGluing"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CirclePositiveInverseModel",
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInverseModel.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "a6767f0378b48caf72404311675e416be98e8d1bad81800d134190a0a7d9d34d",
+      "blob": "6f2c793893f51f1fd72c6201f149a0e527458994",
+      "lines": 81,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CirclePositiveLiftDomain"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CirclePositiveLiftDomain",
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveLiftDomain.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "1a29804386bd0ba3a3c51fa03162cb1e81f28746270d75576d331f4d11eefbf0",
+      "blob": "d718375ee23823ae2b5d10fd8da9b759c65e6eb4",
+      "lines": 248,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleInverseModel",
+        "ContinuousFlexibility.Analysis.CircleJetPointwiseEnergy",
+        "Mathlib.Topology.Algebra.InfiniteSum.ENNReal"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleInverseModel",
+      "path": "src/ContinuousFlexibility/Analysis/CircleInverseModel.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "b04e3cdfd2af3aa8309bd62abe082df5bb0b58364680e6a56b7b0dc5aeecd95a",
+      "blob": "d4cd16420a70111439856a3685e292a7ee34b17b",
+      "lines": 244,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleInverseCompositionGrowth",
+        "ContinuousFlexibility.Analysis.CircleCompositionJetModels"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleJointEvaluation",
+      "path": "src/ContinuousFlexibility/Analysis/CircleJointEvaluation.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "5110f4d8cf53b34ed33b6221317e9421d876d9add22dca234e95493edcc33ba6",
+      "blob": "b18010ba5d5c86d247e70d32e8ffd134434e126b",
+      "lines": 216,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleAngularJetLinear",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsJointAngular",
+        "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+        "ContinuousFlexibility.Analysis.SolveNewtonBridge"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsAffine",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAffine.lean",
+      "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+      "blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+      "lines": 124,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "ContinuousFlexibility.Analysis.ProjectiveJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameTopologicalComposition",
+      "path": "src/ContinuousFlexibility/Analysis/TameTopologicalComposition.lean",
+      "sha256": "5efa594a0a0b44d12427f42e759ca575e5bf69a05743a8d4326e1d81d2b197a0",
+      "blob": "55b7375931ca80f58ae6dd8b82e28ab9da80f5e4",
+      "lines": 103,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameComposition",
+        "ContinuousFlexibility.Analysis.ProjectiveCurveIteratedChain"
+      ]
+    }
+  ],
+  "selected_N01_contract": {
+    "module": "ContinuousFlexibility.Statements.Nonlinear",
+    "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+    "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+    "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+    "lines": 1773,
+    "selected_ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+    "imports": [
+      "ContinuousFlexibility.Statements.Analysis",
+      "ContinuousFlexibility.Contracts.Annular",
+      "ContinuousFlexibility.Scalar.NormalizedConservation",
+      "ContinuousFlexibility.Scalar.TypeCorrection",
+      "ContinuousFlexibility.Scalar.FormPullback",
+      "Mathlib.Topology.OpenPartialHomeomorph.Defs"
+    ]
+  },
+  "pinned_mathlib_commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "pinned_apis": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Comp.lean",
+      "sha256": "16a41715830ec582c91cb5262e2defab08052d7e749bb91ee059905c0b0e1847",
+      "blob": "bca5a3ed558bd9f14be2a277d9e01bd025227307",
+      "lines": 415,
+      "checked_declarations": [
+        "HasDerivAt.comp"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+      "sha256": "78fca2cc5f69fe7f7cf42cb31480aa15068851dae795e1d5fad62f62a28c4145",
+      "blob": "afdc3e3a27aad5f24293a47dc82304dfab84979d",
+      "lines": 985,
+      "checked_declarations": [
+        "differentiableAt_of_deriv_ne_zero"
+      ]
+    }
+  ],
+  "read_scope": [
+    "All 164 candidate lines, complete 118-line forward supplier, the actual selected interpolation, selector-inverse, positive-inverse perturbation/smooth-tame/model and joint circle-evaluation providers were read. The literal corrected-flow definition, positive-domain equivalence, invFun affine inverse definition, topological tame composition and congrOn implementations were checked.",
+    "The historical exact import inventory was mechanically reverified for all 424 source identities, imports and graph edges; its source content is not being treated as an elaborated or fully ported DAG."
+  ],
+  "checks": [
+    "The only actual flow is returnCorrectedMinusFlow S C chi (liftSectorParameter S C z) m (rsel m). Its definition is the original minusFlow composed with the same cutoff initial interpolation; the change at the positive-derivative goal is definitionally this composition.",
+    "The initial-map derivative is obtained from interpolationSelectorCircle_positive and its exact affine-lift equality. The outer derivative is obtained from endpointFlowCircle_mem_positiveLiftDomain at the actual initial(theta), with the original fixed-radius endpoint selector. Both are strictly positive on the same sector neighborhood.",
+    "Nonzero actual scalar derivatives give genuine differentiability. The pinned HasDerivAt.comp produces the product in the stated order, and mul_pos proves the corrected lift belongs to the actual circlePositiveLiftDomain. There is no assumed inverse family or positivity target.",
+    "circleAffineInverse is literally Function.invFun of the full affine lift. congrArg Function.invFun applied to the complete forward function equality identifies that same inverse with the corrected-flow inverse; no separate inverse is chosen or replaced.",
+    "The positive-inverse perturbation decoder is invFun minus (theta-travel). Forward travel is negative opticalTravel, so its inverse displacement is exactly invFun(theta) minus (theta+opticalTravel). The decoder proof uses only this true sign change.",
+    "The tame composition supplies the original sector topology and monotone pair grading, genuine WithSeminorms structures, complete circle levels, the open sector neighborhood, and the actual open positive-lift target. The checked map condition comes from the first theorem. The existing inverse operator is smooth tame on that whole positive domain.",
+    "The inverse state family supplies an actual chosen SmoothDirections tower. Positive sample H is derived from the original material contract and actual samples in the radial core. circleAffineLiftJointDirections then creates the genuine state-and-angle tower with positive optical translation.",
+    "The final congrOn equality is a+(b-a)=b at each point of the real sector-by-angle domain, where a is the opposite reference translation and b is the exact corrected-flow invFun. congrOn retains every actual tower derivative and changes only its zero-level function identity. It does not introduce derivative-bound premises.",
+    "All six public declarations have explicit hN/hS/hT/chi/rsel and all required proof binders. The radius selector is fixed. No radial-variation or moving-canonical-coordinate conclusion is claimed.",
+    "Every candidate and named provider identity was checked, and all 424 inventory source hashes/imports were independently reproduced with no missing project import or cycle. The six public names have no declaration collision in that selected graph. No placeholders, option changes or resource-limit changes appear."
+  ],
+  "closure_status": {
+    "inventory": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowInverseCircleClosureInventory.json",
+      "sha256": "b09bae472fc2a8b8334cb49cd4a9872087c2692ed5a8e4a91de21bdada0fa64d",
+      "blob": "57c856a709cf849c32aa00c52b632f02e93cba87",
+      "lines": 5375
+    },
+    "verified_module_count": 424,
+    "missing_project_imports": [],
+    "cycles": [],
+    "public_name_collisions": [],
+    "semantic_status": "HELD_UNCOMPILED_MIXED_PIN_PROVIDER_PORTS_NOT_YET_REBOUND",
+    "historical_pending_provider_ports": [
+      "ContinuousFlexibility.Analysis.N01FlowParameterVariation",
+      "ContinuousFlexibility.Analysis.N01FlowMixedParameterBound"
+    ],
+    "later_two_provider_peer": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/N01OrdinaryFlowParameterOrderIndependentReview.json",
+      "sha256": "e70eed94bac094861d79eaf2a8a67cf81b0a3d57e18f35cb1c2ab1ff5b3b2e7c",
+      "blob": "8c8ec7eff6f36a3b751ec4dd949a816edbf9c44e",
+      "lines": 206
+    },
+    "remaining_boundary": "The two explicit parameter-loss flow ports now have a separate full source peer, but the historical inventory still contains their c5 versions. Their real downstream consumer ports and graph selection remain separate work; this review does not certify the complete mixed-pin DAG."
+  },
+  "scope_limits": [
+    "Static source/API review only; no Lean compiler or elaborator was invoked.",
+    "Only fixed selected radii and the actual state-angle family are proved. No new radius regularity, uniform root optical cost or final CurrentJets contract is asserted.",
+    "The candidate source, historical manifests and active checkout/index/refs/CI/CP/authority remain unchanged."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "created_at": "2026-11-12T15:20:31.795104+00:00"
+}

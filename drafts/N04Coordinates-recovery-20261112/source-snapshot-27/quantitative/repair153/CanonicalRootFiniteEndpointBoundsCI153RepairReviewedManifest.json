@@ -1,0 +1,36 @@
+{
+  "kind": "ci153_canonical_root_finite_endpoint_addition_order_reviewed_source",
+  "status": "INDEPENDENTLY_REVIEWED_UNCOMPILED_READY_FOR_ROOT_CI_SELECTION",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair153/CanonicalRootFiniteEndpointBounds.lean",
+    "sha256": "8faa39da4c14e287a62815ee27e5621ce31eeb54ebdf99dad9542f7470961efe",
+    "blob": "2f138709e5a2993b87ead4c6cc01c6a0b34a6d7c",
+    "lines": 167,
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalRootFiniteEndpointBounds.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.CanonicalRootHeightJets",
+      "ContinuousFlexibility.Analysis.CanonicalRootDiagonalLower"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair153/CanonicalRootFiniteEndpointBoundsCI153RepairCandidateManifest.json",
+    "sha256": "242da0dd59f88ea0af9e0cbadcd0ed29504df6f03edcf26c2a7972639f49d0cd",
+    "blob": "49c67724f0a2253accc0356bdc67af1445265523",
+    "lines": 97
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CanonicalRootFiniteEndpointBoundsCI153IndependentReview.json",
+    "sha256": "0653af8daf3038f61470cd8da4eae38844208c92e7993860f73b4910bcc08f2d",
+    "blob": "b5304e699bd584922e02e6ec4997eafa02a2c127",
+    "lines": 88
+  },
+  "actual_base": {
+    "head": "11eeb8aebced4bef16f743c11484df9b0c0907a1",
+    "tree": "13c563567ec6c0ecdce19ef2f192970d2400b8b2",
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalRootFiniteEndpointBounds.lean"
+  },
+  "scope": "Exactly one application add_le_add_left hg 1 is replaced with add_le_add le_rfl hg. The actual common neighborhood, finite envelopes, same root maps/heights and complete public structure/theorem/imports/options remain unchanged.",
+  "prior_frozen_sources_preserved": true,
+  "compiled": false,
+  "observed_prior_progress": "Actual cached CI153 records Height268 compiled; the repaired finite-endpoint source itself awaits the next CI. No full-green claim is made."
+}

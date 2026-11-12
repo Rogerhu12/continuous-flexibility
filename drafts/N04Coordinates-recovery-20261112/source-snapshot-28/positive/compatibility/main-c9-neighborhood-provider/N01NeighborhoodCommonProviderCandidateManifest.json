@@ -1,0 +1,48 @@
+{
+  "kind": "main_N01c_neighborhood_common_provider_supersession",
+  "status": "HELD_UNCOMPILED_FULL_PEER_PENDING",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-neighborhood-provider/N01NeighborhoodRestriction.lean",
+    "blob": "551267986278d6717642c54f98f85ece2d4d4eb0",
+    "sha256": "8980a1dfece4b54cc46e1dcda20504cda7e90bcaedc76059c82c86cdbb9cdd9e",
+    "lines": 126
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean",
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-neighborhood-provider/N01NeighborhoodRestriction.reviewed160-base.lean.txt",
+    "blob": "78c3c5118a8a1e28eb1d4480a3c2b8f7ab46594a",
+    "sha256": "15a6e13aea3d47db039b5371c32779952b18e29742b6b0c93423821159482713",
+    "lines": 160
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-neighborhood-provider/N01NeighborhoodRestriction.diff",
+    "blob": "5bcdf7cc88712c6e5f591d9bcff61ed012788333",
+    "sha256": "ed1b3300f64e6f4c71b56d79db27eb18ed5e247e54f65ac8951f9f780ea9b397",
+    "lines": 51
+  },
+  "selected_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-neighborhood-provider/N01cStateSeminorms.main-c9-provider.lean.txt",
+    "blob": "f96fa185722d12bab8545de1d59ea100a0556417",
+    "sha256": "99abe3e9057a214b52c5188410cfc8d2ca2a3f9a52733bcb5c73dd9757666d26",
+    "lines": 331
+  },
+  "provider_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+  "historical_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowSmallnessNeighborhoodParameterOrderReviewedManifest.json",
+    "blob": "fe5fa8f67a6597c71745c9d1a78c53e2b65ad303",
+    "sha256": "8c585220de1df66ca2df32de5f642dc3cbe8d62189e3a42ea6a4e9e1ee4c7dbf",
+    "lines": 122
+  },
+  "selection": [
+    "Import the exact main N01cStateSeminorms provider.",
+    "Remove the two duplicate local declarations ContinuousFlexibility.Statements.SmoothDirections.restrict and ContinuousFlexibility.Statements.oneHighVariationWeight_mono.",
+    "Keep all four remaining public declaration heads and their proofs byte-for-byte, including the explicit parameter-order flow loss port."
+  ],
+  "binder_compatibility": [
+    "SmoothDirections.restrict has the same implicit E/F/topology/group/module and U/V/f parameters, same explicit J/hV/hVU order, and the same actual directional derivatives; the record proof fields are alpha-equivalent.",
+    "oneHighVariationWeight_mono has the same explicit hp/hb/hh/x/v order and mathematical proposition. Main renames the implicit b0/b1/h0/h1 binders to base/base_prime/high/high_prime and places implicit k immediately before v. All active consumers use positional explicit parameters and/or named k; no old binder-name calls were found."
+  ],
+  "scope": "This supersession is required only in the combined main-contract cohort; the original reviewed 160-line source and its historical c5-only selection remain unchanged.",
+  "compiled": false,
+  "created_at": "2026-11-12T15:51:54.761190+00:00"
+}

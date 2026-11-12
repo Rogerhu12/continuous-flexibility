@@ -1,0 +1,115 @@
+{
+  "kind": "independent_full_source_active_N04_type_parameter_order_review",
+  "status": "PASSED_STATIC_SOURCE_REVIEW_UNCOMPILED_REQUIRES_NEW_MAIN_CONTRACT",
+  "reviewer": "/root",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-contract/N04bTypeFlowParameterOrderCandidateManifest.json",
+    "sha256": "85e27beaa3c3bcee8356f42ccb892eefd48e5ebec7a45cb95055810bf39bc027",
+    "blob": "dc4e2527e537c3aa0c16569fb9f82892b3416ca7",
+    "lines": 97
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-contract/N04bSingletonType.lean",
+      "sha256": "a98ac114085f949ab29669a9493f0133a742035d688080135cdfec218761aac6",
+      "blob": "a4ec9016586cb1ff50f9fce931f54492fb961d2d",
+      "lines": 283,
+      "target": "src/ContinuousFlexibility/Analysis/N04bSingletonType.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-contract/N04bSingletonType.active34a496-base.lean.txt",
+        "sha256": "7e6a90bd560528e9f82a036e3f5c6e25101358b2ab993ff30620ad285f3aa06b",
+        "blob": "62e4758d8d56b86a064970d0522912134a868dd9",
+        "lines": 282,
+        "ref": "34a496f78ec2c9f35f74d2eb3dfd48a1d4190909"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-contract/N04bSingletonType.diff",
+        "sha256": "86c84e52e4994bce3be23cb25b2c008fd29eb574316ecd07615d0fe17b378e6e",
+        "blob": "53150e1a91669dab1bcaff96a14eb2e94178811a",
+        "lines": 12
+      },
+      "all_public_private_headers_preserved": [
+        "n04b_affine_pos_of_sqrt_differentiableAt_weighted_ball",
+        "SmoothDirections.n04b_differentiableAt_line",
+        "n04b_opticalSpeed_logPerturbation_affine",
+        "N01Properties.n04b_minusFlow_zero_hasDerivAt",
+        "N01Properties.n04b_ordinaryFlowFamily_radial_zero",
+        "n04b_affine_zero_parameter",
+        "n04b_singleton_reference_profile",
+        "n04b_control_opticalSpeed_affine",
+        "N01Properties.n04b_ordinaryFlowFamily_singletonKappa_radial",
+        "n04b_singleton_joint_line",
+        "N01Properties.n04b_sqrt_singletonKappa_differentiableAt",
+        "N01Properties.n04b_singletonKappa_radicand_ne_zero",
+        "N01Properties.n04b_singletonKappa_radicand_pos"
+      ],
+      "imports_options_remaining_proof_bytes_preserved": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-contract/N04bStateProfileType.lean",
+      "sha256": "d0453cae8528608053a30bf0cbc25787833e1538ff969adf0ea3a2627d51f0bc",
+      "blob": "a21640350dc6a6b400d83f646d7f451f4e977c90",
+      "lines": 283,
+      "target": "src/ContinuousFlexibility/Analysis/N04bStateProfileType.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-contract/N04bStateProfileType.active34a496-base.lean.txt",
+        "sha256": "b99eb7cac1b13771f48a1584592e54b1872249571874263c3e9063aa20cf8528",
+        "blob": "32fc4ba24a0a404c220758c5ec64b4a0068c7471",
+        "lines": 282,
+        "ref": "34a496f78ec2c9f35f74d2eb3dfd48a1d4190909"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-contract/N04bStateProfileType.diff",
+        "sha256": "898aaad16291998fe24eca8549893571881742bc7aa65353fbe592b53c6d79a3",
+        "blob": "b45247ea754abadd720f3dcad4f45eaf392732b4",
+        "lines": 12
+      },
+      "all_public_private_headers_preserved": [
+        "n04bStateLogExponent",
+        "n04b_stateType_zero_add_smul",
+        "n04b_stateType_mean_smul",
+        "n04b_stateType_seminorm_affine",
+        "n04b_stateType_affine_zero",
+        "n04b_stateKappa_reference_line",
+        "n04b_stateProfile_reference_line",
+        "N01Properties.n04b_stateLogExponent_contDiffAt",
+        "n04b_state_reference_line_mem",
+        "n04b_state_joint_line",
+        "n04b_stateType_reference_profile",
+        "n04b_stateType_opticalSpeed_affine",
+        "N01Properties.n04b_ordinaryFlowFamily_stateLine_radial",
+        "N01Properties.n04b_sqrt_stateLine_differentiableAt",
+        "N01Properties.n04b_stateLine_radicand_pos",
+        "N01Properties.n04b_stateProfile_deriv_neg",
+        "N01Properties.n04b_originalCoefficients_zero_negative_type"
+      ],
+      "imports_options_remaining_proof_bytes_preserved": true
+    }
+  ],
+  "contract": {
+    "ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+    "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+    "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+    "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d"
+  },
+  "read_scope": [
+    "Full283+283 candidate sources, both complete diffs, actual main OrdinaryFlowFamilyTameBounds and N01 tail contract.",
+    "Each pinned actual34a496 preimage is recovered byte-for-byte by reversing exactly the two-line k/s unpacking replacement."
+  ],
+  "checks": [
+    "The actual flow tail now quantifies k then parameterLoss then s; choosing k=0 and only afterwards s=1 preserves exactly the same complete SmoothDirections tower for the genuine first radial ordinary-flow family.",
+    "The complete tower, rather than its k=0 numerical bound, supplies differentiability of each actual scalar state line. Neither parameterLoss nor the numerical bound is used by the rest of either proof.",
+    "Actual affine logarithmic profile identities, original ODE, weighted neighborhood, square-root obstruction and strict negative type arguments are unchanged. No neighborhood shrink, geometric witness or extra positive-type premise is introduced.",
+    "All30 public and private declaration headers, imports/options and every proof byte outside the two literal replacements agree with the actual pinned originals."
+  ],
+  "preserved_header_counts": [
+    13,
+    17
+  ],
+  "compiled": false,
+  "scope_limits": [
+    "These two files must be installed atomically with the new OrdinaryFlowFamilyTameBounds contract; the old active contract does not support this arity.",
+    "No active source/index/ref/compiler/CI actions or resource-limit changes."
+  ],
+  "reviewed_at": "2026-11-12T15:41:04.131223+00:00"
+}

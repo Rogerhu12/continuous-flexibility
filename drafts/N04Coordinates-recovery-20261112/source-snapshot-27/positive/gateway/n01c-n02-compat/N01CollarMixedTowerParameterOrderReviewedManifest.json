@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "kind": "actual_collar_mixed_tower_parameter_order_port_reviewed",
+  "status": "STATIC_FULL_SOURCE_REVIEWED_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01CollarMixedTowerParameterOrderCandidateManifest.json",
+    "sha256": "e031e45d8cfd4915a21c75347bb7312323257312340ba208b8ec17eff59f4438",
+    "blob": "7ed351a65625de263dbf3c26d81af8f020d878dc",
+    "lines": 173
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01OpticalCollarJetBounds.lean",
+      "sha256": "312587b3d352f1c2f684200bbe64a70b846089556ca8e7f96642ad5f84040daf",
+      "blob": "738c763b35ed2b320306a84ec7907283f0b15270",
+      "lines": 327,
+      "target": "src/ContinuousFlexibility/Analysis/N01OpticalCollarJetBounds.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01OpticalCollarJetBounds.c5c48-base.lean.txt",
+        "sha256": "1fd0412e61dd3ecb6c9f0c52d4d66929aa898c19c6ce758730e3ea33a1df2abe",
+        "blob": "82d54fac8fdf7a4c984792db45d68bbc82eda5ec",
+        "lines": 318,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01OpticalCollarJetBounds.diff",
+        "sha256": "e94b4a8b19f66d0e8465cb745e83423e63215ac1d53945fb2020520482baf9ff",
+        "blob": "40c110226aba111049469a8e967ca6119e547178",
+        "lines": 129
+      },
+      "public_headers_changed": [
+        "N01Properties.ordinaryFlowFamily_weighted_zeroth_bound",
+        "N01Properties.ordinaryFlowFamily_collar_directional_bounds",
+        "N01Properties.ordinaryFlowFamily_collar_bound"
+      ],
+      "public_headers_preserved": [
+        "abs_le_of_power_weight_bound",
+        "smoothDirections_zeroth_spatialWeight_bound",
+        "smoothDirections_zeroth_twoFactor_bound",
+        "smoothDirections_divide_spatialWeight_bound",
+        "opticalSpeed_lower_boundaryDistance",
+        "N01Properties.opticalCollar_inverse_boundaryDistance_bound"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowCollarJetBounds.lean",
+      "sha256": "5e2d702b0d5e0851cabf9110e895ab3123a08f5dbabcd1dd0c6cfb639890463c",
+      "blob": "793750ebfb8db079d1660cc1e924c65071f7e010",
+      "lines": 186,
+      "target": "src/ContinuousFlexibility/Analysis/N01FlowCollarJetBounds.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowCollarJetBounds.c5c48-base.lean.txt",
+        "sha256": "d81264084955dedfb623a76c60246f3f4620749e836f7639e22f32063656ae88",
+        "blob": "39c22c2905c22c958de75f142fe959a3a6ee214f",
+        "lines": 185,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowCollarJetBounds.diff",
+        "sha256": "cff0882ffbfeb158a8b577aca6e281e09715211919122a4b265420711ff0088b",
+        "blob": "9b4cd36f84b8dabb99a3a11bccaad1be68e3a067",
+        "lines": 18
+      },
+      "public_headers_changed": [],
+      "public_headers_preserved": [
+        "N01Properties.minusFlow_reference_contDiffAt",
+        "N01Properties.minusFlow_collar_contDiffOn",
+        "N01Properties.minusFlow_collar_mixed_jets",
+        "N01Properties.minusFlow_collar_positive_fderiv_jets"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowMixedParameterTower.lean",
+      "sha256": "084689be235d980f66bbb6b24b65b180eb293390ce2a1eceb2322f403d67ba81",
+      "blob": "df9d2a1bb30e4904f8e3b064a30290671df20465",
+      "lines": 176,
+      "target": "src/ContinuousFlexibility/Analysis/N01FlowMixedParameterTower.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowMixedParameterTower.c5c48-base.lean.txt",
+        "sha256": "b804773b2b9ac56249b8c9989d8f704cb6a2bd8108097c0f7b96d0f47f483a8d",
+        "blob": "dd4764d693e986a5e4c818cc239e31a9dddb5dc0",
+        "lines": 168,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowMixedParameterTower.diff",
+        "sha256": "ef2c7e5777320ac9497858b2629f10e0fc64595a49f555088d5ee4abdb4e4c90",
+        "blob": "f96730c9659ceb32173eb3b9c0d51ea938ae3122",
+        "lines": 115
+      },
+      "public_headers_changed": [
+        "N01Properties.sectorFlow_mixed_tower",
+        "N01Properties.sectorFlowMixedTower_bound"
+      ],
+      "public_headers_preserved": [
+        "N01Properties.sectorFlowMixedTower",
+        "N01Properties.sectorFlowMixedTower_uniform_on_radial_interval"
+      ],
+      "imports_preserved": false,
+      "options_preserved": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01CoefficientSpatialJets.lean",
+      "sha256": "6875e6286e51a3cf92c38731df7a906433ffedc828b429ef9a29987235f007c5",
+      "blob": "78c515da3e26de043e6514e2668442a37cc1e9e1",
+      "lines": 249,
+      "target": "src/ContinuousFlexibility/Analysis/N01CoefficientSpatialJets.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01CoefficientSpatialJets.c5c48-base.lean.txt",
+        "sha256": "5242b2bbb36f35525783b1941e73a51b0c6bbc0ff993b722a7b4f38040b16e12",
+        "blob": "0e038e131e20d709f5411f0c17637da9900b65e4",
+        "lines": 249,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01CoefficientSpatialJets.diff",
+        "sha256": "0293ce7ad30c6cfffa41de116fdcd81c37e1daa25bdb5ab4f5857a33aaa7b19a",
+        "blob": "c5278abc417877f05f5f5d8c830bfcb015f2cc7d",
+        "lines": 10
+      },
+      "public_headers_changed": [],
+      "public_headers_preserved": [
+        "coefficientFamily_eq_mixedDerivative_zero",
+        "N01Properties.coefficientFamily_contDiffOn",
+        "N01Properties.coefficientFamily_hasDerivAt_radial",
+        "N01Properties.coefficientFamily_hasDerivAt_angular",
+        "N01Properties.componentCoefficientTower",
+        "N01Properties.componentCoefficientTower_uniformBounds",
+        "N01Properties.componentCoefficientTower_localBounds",
+        "N01Properties.componentCoefficientScalarJet",
+        "N01Properties.componentCoefficientScalarJet_of_mem",
+        "N01Properties.componentCoefficientScalarJet_contDiffOn",
+        "N01Properties.componentCoefficientScalarJet_mixedDerivative",
+        "N01Properties.componentCoefficientScalarJet_hasDerivAt_line",
+        "N01Properties.componentCoefficientScalarJet_mixed_bound"
+      ],
+      "imports_preserved": false,
+      "options_preserved": true
+    }
+  ],
+  "source_lines": 938,
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/N01CollarMixedTowerParameterOrderIndependentReview.json",
+      "sha256": "4f90dba6993a618c8379b0045b764c8503f9966390ccf37fcfb8fd11b49c3593",
+      "blob": "d8c3969c28782d798484a6c49b117bfccc0dccc4",
+      "lines": 264
+    }
+  ],
+  "selected_generic_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+  "selected_N01_contract_ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+  "provider_reviewed_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowSmallnessNeighborhoodParameterOrderReviewedManifest.json",
+      "sha256": "8c585220de1df66ca2df32de5f642dc3cbe8d62189e3a42ea6a4e9e1ee4c7dbf",
+      "blob": "fe5fa8f67a6597c71745c9d1a78c53e2b65ad303",
+      "lines": 122
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01SectorFlowParameterOrderReviewedManifest.json",
+      "sha256": "55abf20edc4064bab133fc2fb59bd7c11f1241f8489c6462c8506917a41c0585",
+      "blob": "bbce56a0e0e31c4422a02364378f131a7c7a1f22",
+      "lines": 27
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointAngularJetsParameterOrderReviewedManifest.json",
+      "sha256": "749950d6c4266205804e98a97c2510d84ae9a7abce153fc3e45c1741b2115cfc",
+      "blob": "e54c997613811463a07101189de4a47b14494997",
+      "lines": 37
+    }
+  ],
+  "scope_limits": [
+    "All four exact sources passed complete independent peer; same chosen mixed tower, genuine k-dependent loss before s and actual fixed-state collar are preserved.",
+    "The previous 616/43 graph remains historical pre-control selection evidence. Final selected graph and actual compilation are separate gates.",
+    "No source, active checkout/index/ref, CI, contract or resource-limit changes."
+  ],
+  "compiled": false,
+  "green_receipt_applies": false,
+  "created_at": "2026-11-12T15:27:59.835888+00:00"
+}

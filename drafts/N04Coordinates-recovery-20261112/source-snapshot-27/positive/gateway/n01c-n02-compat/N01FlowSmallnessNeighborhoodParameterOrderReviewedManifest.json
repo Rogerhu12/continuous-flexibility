@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "kind": "actual_N01_neighborhood_smallness_inverse_parameter_order_port_reviewed",
+  "status": "STATIC_FULL_SOURCE_REVIEWED_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowSmallnessNeighborhoodParameterOrderCandidateManifest.json",
+    "sha256": "28df8ee2b4d961e5c1b9d940a3d9863f0ef78fe7c135335a272f58321d6856bf",
+    "blob": "2410cc25e70ce297bc2d40549fee7629e58baf42",
+    "lines": 119
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01NeighborhoodRestriction.lean",
+      "sha256": "15a6e13aea3d47db039b5371c32779952b18e29742b6b0c93423821159482713",
+      "blob": "78c3c5118a8a1e28eb1d4480a3c2b8f7ab46594a",
+      "lines": 160,
+      "target": "src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01NeighborhoodRestriction.c5c48-base.lean.txt",
+        "sha256": "946a1903727a68e01ab0dfb87c0d377f7c8ed813ba05eec11b772b4b0f9a19e0",
+        "blob": "5beae92c80f829682b94ba3b58f5b97e75a39c01",
+        "lines": 157,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01NeighborhoodRestriction.diff",
+        "sha256": "e542d6300e3b7c2477c1b55fa1025c9afa0a8d0f85b938c144ee4caf1eb1fb35",
+        "blob": "4d5c2368992cfd0a85610e4037c922036b683bda",
+        "lines": 25
+      },
+      "public_headers_changed": [],
+      "public_headers_preserved": [
+        "SmoothDirections.restrict",
+        "oneHighVariationWeight_mono",
+        "stateNeighborhood_isOpen",
+        "smoothDirections_restrict_oneHigh_bound",
+        "stateNeighborhood_mono",
+        "N01Properties.restrict_neighborhood"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowSmallness.lean",
+      "sha256": "ad6648090847d20aeef9eff20176e398fab2c8a288f1650bc400040be8e57b39",
+      "blob": "ca66bd0e3aa4056fdbdef013e16fe4825d066887",
+      "lines": 219,
+      "target": "src/ContinuousFlexibility/Analysis/N01FlowSmallness.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowSmallness.c5c48-base.lean.txt",
+        "sha256": "011b5b96801ee4de7948eb0abbbaf1fec30e7820da730c941f0df5dcbc031491",
+        "blob": "75b478570fc5f1d2b449476a1c4b3a42d7ef3c1c",
+        "lines": 212,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowSmallness.diff",
+        "sha256": "d64a8059dbfac1ea8fbe4d669a93339bcf78e4cb2796ebd72ab46c6c35c4e479",
+        "blob": "3f9f933ab7dbe13c9726dbb0f93c3fe545bf6b68",
+        "lines": 88
+      },
+      "public_headers_changed": [
+        "N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood",
+        "N01Properties.minusFlow_near_reference_weighted",
+        "N01Properties.minusFlow_near_reference_uniform"
+      ],
+      "public_headers_preserved": [
+        "ordinaryFlowFamily_reference_zero",
+        "N01Properties.minusFlow_reference_eq",
+        "N01Properties.minusFlow_reference_angular_deriv"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowInverseJetBounds.lean",
+      "sha256": "73c5970047b8f92743722aace79b9d4ea6c601fd4918a452b8dd8026f5ee51dd",
+      "blob": "89a6e5eb2f931468e45bdfba3d8a087dcfbfad74",
+      "lines": 216,
+      "target": "src/ContinuousFlexibility/Analysis/N01FlowInverseJetBounds.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowInverseJetBounds.c5c48-base.lean.txt",
+        "sha256": "5e1b5a3342ff2ecd466e74645e99c37a1ef4c801fe386ccc945eb7b4869b81ec",
+        "blob": "ba82810a9682e183e5203e9748eed9794ced2a6b",
+        "lines": 215,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowInverseJetBounds.diff",
+        "sha256": "e59d82903901e2d909e581593277614162784140a1dde70a2301b2397f101515",
+        "blob": "94cc48f26b3d19a2046046004bcd6064b87d8de9",
+        "lines": 33
+      },
+      "public_headers_changed": [],
+      "public_headers_preserved": [
+        "N01Properties.minusFlow_reference_angular_iteratedDeriv_bound",
+        "N01Properties.ordinaryFlowFamily_angular_uniform_bound",
+        "N01Properties.minusFlow_angular_iteratedDeriv_uniform_bound",
+        "N01Properties.exists_uniform_inverse_angular_jets"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    }
+  ],
+  "source_lines": 595,
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/N01FlowSmallnessNeighborhoodParameterOrderIndependentReview.json",
+      "sha256": "f8642e2edeba044f111d1e52ca3625806a863d4086154ee351b7e6629e6c566a",
+      "blob": "9db1da08c97e28f6b854135e5ebc3e5aef50c6bd",
+      "lines": 162
+    }
+  ],
+  "scope_limits": [
+    "Only these three source ports have this full independent review. Their actual smallness/inverse and restricted towers remain the same objects; the fixed-order loss is explicit and precedes spatial order or common-neighborhood selection.",
+    "Return-correction, collar/mixed and audit-owned control consumers are separately held; this does not certify the full 616-module combined wrapper/corrected-circle graph.",
+    "No compiler, active checkout/index/ref, CI, statement, limits, authority or plan changes. Historical candidate bytes are unchanged."
+  ],
+  "compiled": false,
+  "green_receipt_applies": false,
+  "created_at": "2026-11-12T15:23:45.023120+00:00"
+}

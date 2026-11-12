@@ -1,0 +1,49 @@
+{
+  "label": 153,
+  "head_before": "3b4844ce29629e230aa9feffb3ed4987a06d27a2",
+  "base_tree": "634271261e070856b3c4bdb9fcc958d3b6d46ecf",
+  "tree": "13c563567ec6c0ecdce19ef2f192970d2400b8b2",
+  "main": "89e539ccf7e9c558467cf875f44dcff9490ce271",
+  "additional_parents": [
+    "89e539ccf7e9c558467cf875f44dcff9490ce271"
+  ],
+  "last_full_green": "03e526021c371413f03fc0ce052476b63e105361",
+  "owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair152/CanonicalRootHeightJetsCI152RepairReviewedManifest.json",
+    "sha256": "a7fa7b1347d106cd9906647d9da1f8e54c55ca7984a179d00e87f864165e7e3b"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair152/CanonicalRootHeightJets.lean",
+    "sha256": "96aa947744c65d39484564c8d63c8e56f31f1b4103a2e2ebe88d9a3f1908ebdf",
+    "blob": "0dc0308b5f440e5a5e0dd37af47de32d6aba250b",
+    "lines": 268,
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalRootHeightJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.CanonicalRootRelativeJets"
+    ]
+  },
+  "target": "src/ContinuousFlexibility/Analysis/CanonicalRootHeightJets.lean",
+  "preimage": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair152/CanonicalRootHeightJets.base.lean.txt",
+    "sha256": "28419f4e1fab3de13761c4b1c889797c981bcb64cc7743a95579b2f2e23af6c5",
+    "blob": "6d38c1f135519afb293d8de4e11e44e59af3dcf9",
+    "lines": 214
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI152CanonicalRootHeightPointSpecializationIndependentReview.json",
+    "sha256": "778ce60da2a929359412e031665c9dc5ca1c24cf5c8195f42e2339c69c4713ce",
+    "blob": "201ff9b08c701fd8ffedc93e31db770b0af2310e",
+    "lines": 148
+  },
+  "added_lean_since_full_green": 3131,
+  "deleted_lean_since_full_green": 0,
+  "delta": {
+    "added": 113,
+    "deleted": 59
+  },
+  "source_total": 4210,
+  "source_all_total": 4214,
+  "root_imports": 4151,
+  "created_at": "2026-11-12T15:19:56.516369+00:00",
+  "scope": "One independently reviewed actual per-point height specialization and current-main cache-restore guard. Same actual geometry, public contracts and resource limits. Full CI required; 41 reference modules held."
+}

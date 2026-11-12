@@ -1,0 +1,24 @@
+{
+  "label": 155,
+  "head": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+  "tree": "93221bdfea014a7ed555112fe6f2cf136d94df35",
+  "main": "89e539ccf7e9c558467cf875f44dcff9490ce271",
+  "main_checked": "b629bc27223b74ed17e9fd76fbb8212dcc9163f1",
+  "main_workflow_file_integrated": {
+    "main": "b629bc27223b74ed17e9fd76fbb8212dcc9163f1",
+    "path": ".github/workflows/build.yml",
+    "sha256": "74f9a3541d97b75dc209fe0f2475b8e71ff315511a3be1b5318999a6efd81206",
+    "blob": "8acb3130e16927715bbda4ec46856e2e520bc110",
+    "method": "Exact file copy; main ancestry is still pending source batches."
+  },
+  "pushed": "2026-11-12 15:49:49 UTC",
+  "first_check_not_before": "2026-11-12 15:54:49 UTC",
+  "status": "pending",
+  "plan": "n04-ci155-plan.json",
+  "source_total": 4211,
+  "source_all_total": 4215,
+  "root_imports": 4152,
+  "added_lean_since_full_green": 3186,
+  "repair_files": 3,
+  "scope": "Two independently reviewed exact CI154 repairs with one shared complete-function transport leaf; genuine per-source proof split, original actual functions and numerical choices, default limits. Main N01c/N05 integration remains pending dependency-complete batches under the hard20000-line limit. Includes the exact current-main workflow cache retry and successful-main-build cache guard; no source or rule changes from this workflow-only upstream commit."
+}

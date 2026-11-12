@@ -1,0 +1,69 @@
+{
+  "kind": "actual_positive_component_simple_root_profile_lower",
+  "status": "CANDIDATE_UNCOMPILED_PENDING_INDEPENDENT_FULL_REVIEW",
+  "author": "/root/quantitative_route",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentSimpleProfileLower.lean",
+    "sha256": "1daae7132a2cae409c1a685b16932ed3148e5b30a54ab928c2112c82c8528180",
+    "blob": "195f76dc5cdef33a628021f6b41b34190914bf6f",
+    "lines": 152
+  },
+  "imports": [
+    "ContinuousFlexibility.Analysis.PositiveComponentEndpoints",
+    "Mathlib.Analysis.Calculus.DSlope",
+    "Mathlib.Topology.Order.Compact"
+  ],
+  "public_names": [
+    "n04PositiveComponent_simple_profile_min_lower"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveComponentEndpoints.lean",
+      "sha256": "182e98b328b82c6feb5be57b16a1b6536a55b4e5f4af01ab51a27b7b01adb19d",
+      "blob": "85ac7d7b23c9e63f59e25e0d0281fd5106fb7527",
+      "lines": 79
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04PositiveComponents.lean",
+      "sha256": "5b7a7e28f279116415d8a3a23299294f8e5fc1858187ec00c3ea18a4d04757de",
+      "blob": "0d4de58a9b9ecd9f84e2f01da190847464669cc6",
+      "lines": 194
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Radial.lean",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352",
+      "blob": "473c530a1de50c672f2e54908d374f624f5955b0",
+      "lines": 874
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/DSlope.lean",
+      "sha256": "f0a8f117b95d786c84c618e6d6ba2766bf833242cc120930217d500a7687a205",
+      "blob": "235f8b43b375d54f86dc50d4636c91438fc227d4",
+      "lines": 156
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Order/Compact.lean",
+      "sha256": "7c02670f2e88f16acd11d69ddd6afb8d8118adca50279e1abb2a3c7761feb044",
+      "blob": "8e1982cb6cd1f808ded359ffdb0afa8ee9a8bdba",
+      "lines": 546
+    }
+  ],
+  "proof_summary": [
+    "One Bool-indexed half-interval proof applies the actual continuously completed divided slope dslope. Its absolute value is positive at the endpoint by the nonzero actual second derivative and positive away from that endpoint by the actual positive component.",
+    "Compactness on each half produces a strictly positive slope bound. The two bounds are combined by their minimum; the exact sub_smul_dslope identity recovers the same physical coefficient.",
+    "For the actual reference profile, the component lies in the positive-radius annulus. Dividing the coefficient by the fixed outer radius gives the true lower bound for w-prime(r)/r, including both endpoints."
+  ],
+  "quantifier_scope": "The positive constant may depend on this actual component. It will be used only for the proved finite central exception set; it is not a uniform estimate on infinitely many components.",
+  "static_checks": {
+    "one_symmetric_Bool_half_interval_argument": true,
+    "actual_D_and_component_unchanged": true,
+    "no_final_canonical_lower_assumption": true,
+    "new_public_name_installed_collision_count": 0,
+    "no_resource_override": true,
+    "direct_imports_resolve": true
+  },
+  "compiled": false,
+  "independent_reviews": [],
+  "forbidden_actions_performed": false,
+  "created_at": "2026-11-12T15:34:45.907578+00:00"
+}

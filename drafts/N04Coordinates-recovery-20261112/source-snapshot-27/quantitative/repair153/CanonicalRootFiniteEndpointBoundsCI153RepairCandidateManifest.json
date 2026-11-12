@@ -1,0 +1,97 @@
+{
+  "kind": "ci153_canonical_root_finite_endpoint_addition_order_repair",
+  "status": "CANDIDATE_UNCOMPILED_PENDING_INDEPENDENT_FULL_REVIEW",
+  "author": "/root/quantitative_route",
+  "actual_base": {
+    "head": "11eeb8aebced4bef16f743c11484df9b0c0907a1",
+    "tree": "13c563567ec6c0ecdce19ef2f192970d2400b8b2",
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalRootFiniteEndpointBounds.lean"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair153/CanonicalRootFiniteEndpointBounds.lean",
+    "sha256": "8faa39da4c14e287a62815ee27e5621ce31eeb54ebdf99dad9542f7470961efe",
+    "blob": "2f138709e5a2993b87ead4c6cc01c6a0b34a6d7c",
+    "lines": 167,
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalRootFiniteEndpointBounds.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.CanonicalRootHeightJets",
+      "ContinuousFlexibility.Analysis.CanonicalRootDiagonalLower"
+    ]
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair153/CanonicalRootFiniteEndpointBounds.base.lean.txt",
+    "sha256": "127b77a209d6cc28a3d0d21fdab36a3250656664010df762889ada7ba89a728e",
+    "blob": "13749c41ebf01d6f887885d882429d7ee0d7d735",
+    "lines": 167
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair153/CanonicalRootFiniteEndpointBounds.diff",
+    "sha256": "7ed7f8b611b323f0058c512169e02a95fc8492a1cfddd8855c831413b078a82a",
+    "blob": "391b772876f02c422d3ac1ab9b227aaf7469f811",
+    "lines": 11
+  },
+  "actual_cached_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-153.log",
+    "sha256": "e21d0c7d504b0d55ab09686c36c7785497ca7fae924795bf462c1ca005156518",
+    "blob": "db28a63622ed598ace4f3d9b24c51d6eb0417927",
+    "lines": 743
+  },
+  "diagnostics": [
+    {
+      "file": "src/ContinuousFlexibility/Analysis/CanonicalRootFiniteEndpointBounds.lean",
+      "line": 128,
+      "column": 53,
+      "message": "add_le_add_left hg 1 produces grading + 1 <= 1 + 1, while the actual product goal needs 1 + grading <= 1 + 1."
+    }
+  ],
+  "observed_progress": "CI153 actually compiled CanonicalRootHeightJets268 in approximately0.6min; no change is made to that source. The finite endpoint module is the sole new diagnostic. This is not a full-green receipt.",
+  "previous_full_source_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/CanonicalRootFiniteEndpointBoundsIndependentReview.json",
+    "sha256": "d6ab50652ce307ab232c2c9a358b3c8f1e191efd6542e64dbfbd5f08a830f5bf",
+    "blob": "0364d6f64923ef3950a14783a308c60f10cffcb9",
+    "lines": 60
+  },
+  "actual_direct_and_relative_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalRootHeightJets.lean",
+      "sha256": "96aa947744c65d39484564c8d63c8e56f31f1b4103a2e2ebe88d9a3f1908ebdf",
+      "blob": "0dc0308b5f440e5a5e0dd37af47de32d6aba250b",
+      "lines": 268
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalRootDiagonalLower.lean",
+      "sha256": "ec16cf8ed7c2a7150de60eb999301a936e4d89912c1f20c32ccbe425dce45a47",
+      "blob": "4033468ee34febb13d20d1e815e340c8018902ea",
+      "lines": 113
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalRootRelativeJets.lean",
+      "sha256": "1d153804a17ecfdf770509fe69ddab60c7ad5bcbaaacef233d5414e697876c2a",
+      "blob": "8934cb13451280c1f521ef5a5512ac37aad1f3b3",
+      "lines": 188
+    }
+  ],
+  "change_summary": [
+    "Replace exactly one call add_le_add_left hg 1 with add_le_add le_rfl hg. The first additive inequality is the unchanged leading 1 <= 1 and the second is the actual grading bound hg.",
+    "The surrounding nonnegative multiplication, finite envelope, same root and all witness/neighborhood/constant choices are unchanged.",
+    "All167 source lines were read with the full cached diagnostic and original full-source review; no other source correction is included."
+  ],
+  "static_checks": {
+    "base_equals_actual_head_source": true,
+    "single_replacement_reverse_recovers_all_base_bytes": true,
+    "structure_and_complete_public_theorem_header_unchanged": true,
+    "imports_options_namespace_unchanged": true,
+    "line_count_unchanged": true,
+    "added_lines": 1,
+    "deleted_lines": 1,
+    "default_resource_limits_unchanged": true
+  },
+  "scope_limits": [
+    "Static source/type review only; the repaired source has not been compiled.",
+    "No local compiler/elaborator, CI query/download, heartbeat increase, active checkout/index/ref/CP/authority/plan changes.",
+    "The previous qualitative root endpoint theorem remains componentwise in its numerical constants and does not assert uniform E0 cost."
+  ],
+  "compiled": false,
+  "independent_reviews": [],
+  "created_at": "2026-11-12T15:29:08.445266+00:00"
+}

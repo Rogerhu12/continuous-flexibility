@@ -1,0 +1,197 @@
+{
+  "kind": "main_c9cd_n01_parameter_order_three_core_consumer_ports",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_INDEPENDENT_FULL_REVIEW",
+  "owner": "/root/quantitative_route",
+  "upstream_contract": {
+    "ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+    "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+    "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+    "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+    "lines": 1773
+  },
+  "active_preimage_commit": "34a496f78ec2c9f35f74d2eb3dfd48a1d4190909",
+  "active_preimage_tree": "6976c913d75d04075537b04c6c31fd52b82742c2",
+  "rows": [
+    {
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/N01JetBounds.lean",
+        "sha256": "aad4c90c05e7ba57a31e8d63d1ef1a96c3f439ed3a57890de85bcb77e6acb39a",
+        "blob": "1e4f04ef7acf1b6050f63c7af3826a9dc6105ef2",
+        "lines": 74,
+        "target": "src/ContinuousFlexibility/Analysis/N01JetBounds.lean",
+        "imports": [
+          "ContinuousFlexibility.Statements.Nonlinear"
+        ]
+      },
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/N01JetBounds.base.lean.txt",
+        "sha256": "77bf138e02e8089a4ea143805d25c60953f518c79a52aa1559ef0f6b9dce0f61",
+        "blob": "e83ef353a0337ed0f23fc1224529bc00c8fd2e72",
+        "lines": 71
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/N01JetBounds.diff",
+        "sha256": "6ffd9ac4f6122f6e78e3d9159b6f3e7a641a8721e01d79bc28e1ed550e50964e",
+        "blob": "f860c7d61d17b5303d3bc70b9afaefc93926495d",
+        "lines": 31
+      },
+      "complete_public_headers_changed": [
+        "N01FlowJetBoundAtOrder"
+      ],
+      "complete_public_headers_preserved": [
+        "N01CoefficientJetBoundAtOrder",
+        "N01CoefficientJetBounds",
+        "N01FlowJetBounds",
+        "n01CoefficientJetBounds_of_properties",
+        "n01FlowJetBounds_of_properties"
+      ],
+      "new_public_names": [],
+      "added_lines": 7,
+      "deleted_lines": 4
+    },
+    {
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/CanonicalNeighborhoodRestriction.lean",
+        "sha256": "f0333edb08700ba86b4db979edc64251ce86f32106635ac476e8ed910a8c1eef",
+        "blob": "99481854fcfc00bfd242fdccf388996297f83bd0",
+        "lines": 192,
+        "target": "src/ContinuousFlexibility/Analysis/CanonicalNeighborhoodRestriction.lean",
+        "imports": [
+          "ContinuousFlexibility.Analysis.StateNeighborhood",
+          "ContinuousFlexibility.Analysis.MaterialSampleBounds",
+          "ContinuousFlexibility.Analysis.N01JetBounds"
+        ]
+      },
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/CanonicalNeighborhoodRestriction.base.lean.txt",
+        "sha256": "af2577f18d3d3af94162ce3415e3d0b96c054901827b5ea1db6d36be994d407c",
+        "blob": "7888f021746c6faf5ae5f0b149ed2fd17830c6e2",
+        "lines": 187
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/CanonicalNeighborhoodRestriction.diff",
+        "sha256": "cc4739bc0bd2d115909d836b0de0ffcf54bf0dc1abb96c82485b5b9d297918af",
+        "blob": "bfde1631fe9fca59bec0a3b06b56dd352bac99cb",
+        "lines": 36
+      },
+      "complete_public_headers_changed": [],
+      "complete_public_headers_preserved": [
+        "n01Properties_restrict",
+        "n02Properties_restrict",
+        "n03Properties_restrict",
+        "n04PartA_restrict",
+        "n04PartB_restrict",
+        "nonlinearPropertiesThrough03_restrict"
+      ],
+      "new_public_names": [],
+      "added_lines": 10,
+      "deleted_lines": 5
+    },
+    {
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/MaterialEnvelopeNormalization.lean",
+        "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+        "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+        "lines": 311,
+        "target": "src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+        "imports": [
+          "ContinuousFlexibility.Statements.Nonlinear",
+          "ContinuousFlexibility.Analysis.MaterialSampleBounds",
+          "ContinuousFlexibility.Analysis.N01JetBounds"
+        ]
+      },
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/MaterialEnvelopeNormalization.base.lean.txt",
+        "sha256": "5f73ab50c8dd436e8bfd4039f30722eaba68cbc77bcc862efff43251faff88e7",
+        "blob": "4523f8385550033058d8f7593f8a397a33157576",
+        "lines": 308
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/MaterialEnvelopeNormalization.diff",
+        "sha256": "dd2072b941f8c1199d58b7b76a4526b4c32f2616702560fc0b28c0d462ad6076",
+        "blob": "e3431bfe4a3484ac4e52d7a917dbf2cb977401d5",
+        "lines": 21
+      },
+      "complete_public_headers_changed": [],
+      "complete_public_headers_preserved": [
+        "coefficientEnvelope_pack",
+        "contDiff_materialEnvelopeMajorant",
+        "enlargedMaterialData",
+        "enlargedMaterialData_E0",
+        "isMaterialData_enlargedMaterialData",
+        "isPhysicalSpaces_enlargedMaterialData",
+        "le_enlargedMaterialData_E0",
+        "le_materialEnvelopeMajorant",
+        "materialEnvelopeMajorant",
+        "materialEnvelopeMajorant_eq_self",
+        "materialEnvelopeMajorant_le_add_one",
+        "n01Properties_enlargedMaterialData",
+        "nonlinearPropertiesThrough03_enlargedMaterialData",
+        "one_le_enlargedMaterialData_E0",
+        "one_le_materialEnvelopeMajorant"
+      ],
+      "new_public_names": [],
+      "added_lines": 6,
+      "deleted_lines": 3
+    }
+  ],
+  "protocol": {
+    "N01FlowJetBoundAtOrder": "base loss parameterLoss, then epsilon/k/s/B; high=s+loss+parameterLoss. This is the single necessary public signature change.",
+    "N01FlowJetBounds": "Unchanged declaration header, new body forall k, exists parameterLoss, forall s, exists B>0, AtOrder with the same parameterLoss.",
+    "restriction": "Choose the supplied loss once at k; retain it for every s, state, point and component. The new high index increases only the original loss/base; tower is the original tower restricted to the true smaller open neighborhood.",
+    "material_enlargement": "Choose the supplied loss once at k and keep it and the exact original J. Only the E0 factor increases; sample, H^(3/4), collar weight, grading and all geometric data are unchanged.",
+    "downstream_parallel_owner": "/root/proof_inventory owns CanonicalVariationBounds/CanonicalClosedEndpointJets/CanonicalFlowJacobianLower/CanonicalReturnInverseJets with effective loss+parameterLoss."
+  },
+  "static_checks": {
+    "all_preimages_equal_exact_active_commit": true,
+    "all_three_paths_absent_from_upstream_main": true,
+    "no_new_public_names": true,
+    "exact_expanded_coefficient_alias_matches_new_main_modulo_whitespace": true,
+    "exact_expanded_flow_alias_matches_new_main_modulo_whitespace": true,
+    "unchanged_cumulative_contracts": [
+      "N02Properties",
+      "N03Properties",
+      "NonlinearPropertiesThrough03"
+    ],
+    "import_lists_unchanged": true,
+    "options_and_limits_unchanged": true,
+    "selected_project_availability_closure": 119,
+    "missing_project_imports": [],
+    "cycles": []
+  },
+  "actual_unchanged_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/StateNeighborhood.lean",
+      "sha256": "d69d61889ad31640933f00a39c70c7ff33eeb0df52df51a509df97850d1399b6",
+      "blob": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046",
+      "blob": "19becb59903b44c18c8f1afb72726b2f95952752",
+      "lines": 66
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/TameTransfer.lean",
+      "sha256": "ea7705f4c2ecf863bde53d9fc8d3ac4b410c692e9b1defdbb28328fd88470552",
+      "blob": "e52be8048255e3f9fc3bff0efef7a49ed7efc709",
+      "lines": 370
+    }
+  ],
+  "change_summary": [
+    "Both common N01-property projections still extract the same thirteen-part tuple; the new main named coefficient and flow clauses are the exact expanded aliases.",
+    "The coefficient-only alias and restriction/enlargement proofs are unchanged.",
+    "The neighborhood proof preserves the chosen parameterLoss and uses Nat.add_le_add_right (Nat.add_le_add_left hl s) parameterLoss for its high-index inequality.",
+    "The material proof keeps J, B and parameterLoss; its new high slot is exactly s+loss+parameterLoss.",
+    "All other public theorem headers, all earlier/later material and N02/N03/N04 proofs, imports and existing options are unchanged."
+  ],
+  "scope_limits": [
+    "Static port against exact c9cd main contract only; not an installation, successful build or complete integration-cohort claim.",
+    "The separate four downstream flow consumers must be installed in the same contract cohort; this manifest does not claim old consumers accept the changed alias.",
+    "No extra uniform-in-parameter-order loss is assumed or inferred. No compiler/elaborator, active checkout/index/ref/CP/authority operation or CI query/download."
+  ],
+  "compiled": false,
+  "independent_reviews": [],
+  "created_at": "2026-11-12T15:47:14.929751+00:00"
+}

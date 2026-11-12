@@ -1,0 +1,37 @@
+{
+  "kind": "main_N01c_neighborhood_common_provider_reviewed_supersession",
+  "status": "FULL_SOURCE_PEER_PASSED_HELD_UNCOMPILED_COMBINED_CONTRACT_ONLY",
+  "candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-neighborhood-provider/N01NeighborhoodCommonProviderCandidateManifest.json",
+    "sha256": "f0dfec0195cbb4486d63ea688125b1d4abdd51b62cae4a232724bafb03b8f4a0",
+    "blob": "5b1d1bc060bc0d7391d6f33a37719349cf9d32b8",
+    "lines": 48
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/N01NeighborhoodCommonProviderIndependentReview.json",
+    "sha256": "5f4b222e1c39bca47087a80618d781c543cf7ca7d334df01559f7edc54232b7e",
+    "blob": "9ad8dfbbbaad74984ad3fa54503fe42a3ada3d5e",
+    "lines": 68
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-neighborhood-provider/N01NeighborhoodRestriction.lean",
+    "blob": "551267986278d6717642c54f98f85ece2d4d4eb0",
+    "sha256": "8980a1dfece4b54cc46e1dcda20504cda7e90bcaedc76059c82c86cdbb9cdd9e",
+    "lines": 126
+  },
+  "historical_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowSmallnessNeighborhoodParameterOrderReviewedManifest.json",
+    "blob": "fe5fa8f67a6597c71745c9d1a78c53e2b65ad303",
+    "sha256": "8c585220de1df66ca2df32de5f642dc3cbe8d62189e3a42ea6a4e9e1ee4c7dbf",
+    "lines": 122
+  },
+  "selected_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-neighborhood-provider/N01cStateSeminorms.main-c9-provider.lean.txt",
+    "blob": "f96fa185722d12bab8545de1d59ea100a0556417",
+    "sha256": "99abe3e9057a214b52c5188410cfc8d2ca2a3f9a52733bcb5c73dd9757666d26",
+    "lines": 331
+  },
+  "scope": "This supersession is required only in the combined main-contract cohort; the original reviewed 160-line source and its historical c5-only selection remain unchanged.",
+  "compiled": false,
+  "created_at": "2026-11-12T15:57:07.108051+00:00"
+}

@@ -1,0 +1,31 @@
+--- src/ContinuousFlexibility/Analysis/N01JetBounds.lean (active 34a496)
++++ src/ContinuousFlexibility/Analysis/N01JetBounds.lean (c9cd parameter-order candidate)
+@@ -36,9 +36,11 @@
+     (base loss : ℕ) (ε : ℝ) : Prop :=
+   ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ N01CoefficientJetBoundAtOrder D T S C base loss ε k s B
+ 
+-/-- The actual collar-weighted flow variation bound at one pair of orders. -/
++/-- The actual collar-weighted flow variation bound, with the loss selected
++for this parameter order retained explicitly. -/
+ def N01FlowJetBoundAtOrder (T : MaterialData) (S : PhysicalSpacesData)
+-    (C : NonlinearGeometryData S) (base loss : ℕ) (ε : ℝ) (k s : ℕ) (B : ℝ) : Prop :=
++    (C : NonlinearGeometryData S) (base loss parameterLoss : ℕ)
++    (ε : ℝ) (k s : ℕ) (B : ℝ) : Prop :=
+   ∀ m a b p, a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
+     ∃ J : SmoothDirections (stateNeighborhood S C base ε) (ordinaryFlowFamily S C m a b p),
+       ∀ z ∈ stateNeighborhood S C base ε, ∀ v : Fin k → (AnnularState S × ℝ),
+@@ -46,11 +48,12 @@
+           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B *
+           oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+-            base (s + loss) (z - (C.referenceState, 0)) v
++            base (s + loss + parameterLoss) (z - (C.referenceState, 0)) v
+ 
+ def N01FlowJetBounds (T : MaterialData) (S : PhysicalSpacesData)
+     (C : NonlinearGeometryData S) (base loss : ℕ) (ε : ℝ) : Prop :=
+-  ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ N01FlowJetBoundAtOrder T S C base loss ε k s B
++  ∀ k : ℕ, ∃ parameterLoss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
++    N01FlowJetBoundAtOrder T S C base loss parameterLoss ε k s B
+ 
+ theorem n01CoefficientJetBounds_of_properties
+     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

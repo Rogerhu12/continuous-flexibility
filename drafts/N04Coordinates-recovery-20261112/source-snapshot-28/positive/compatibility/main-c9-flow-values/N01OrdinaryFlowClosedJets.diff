@@ -1,0 +1,49 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-values/N01OrdinaryFlowClosedJets.active34a496-base.lean.txt
++++ /workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-values/N01OrdinaryFlowClosedJets.lean
+@@ -9,7 +9,7 @@
+ Genuine closed-time angular regularity makes the actual angular difference
+ jets continuous. The existing interior first-variation estimate therefore
+ passes to both endpoints with exactly the same material constant, grading,
+-base, and loss. No endpoint estimate is supplied as an additional input.
++base, and first-parameter loss, chosen before every angular order. No endpoint estimate is supplied as an additional input.
+ -/
+ 
+ noncomputable section
+@@ -74,11 +74,11 @@
+ 
+ private theorem n01_closedFlow_bound_of_open_bound
+     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+-    {C : NonlinearGeometryData S} {base loss s : ℕ} {ε B : ℝ}
++    {C : NonlinearGeometryData S} {base loss flowLoss s : ℕ} {ε B : ℝ}
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+     (hN : N01Properties D T S C base loss ε)
+-    (hbound : N01FlowLinearHighBoundAtOrder T S C base loss ε s B) :
+-    N01ClosedFlowLinearHighBoundAtOrder T S C base loss ε s B := by
++    (hbound : N01FlowLinearHighBoundAtOrder T S C base flowLoss ε s B) :
++    N01ClosedFlowLinearHighBoundAtOrder T S C base flowLoss ε s B := by
+   intro m b p hb hp z hz hsector
+   have hc := ordinaryFlowFamily_angular_continuousOn_of_n01 hS hT hN hz hsector m b
+   have hslice : ContinuousOn
+@@ -90,14 +90,18 @@
+     (fun r hr => hbound m b (r, p.2) hb hr z hz) hp
+ 
+ /-- N01's actual angular variation bound reaches both radial endpoints
+-without changing its fixed loss or its state-independent constant. -/
++with one first-parameter loss fixed before every angular order and without
++changing its state-independent constants. -/
+ theorem ordinaryFlowFamily_le_linear_high_on_closed_of_n01
+     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+-    (hN : N01Properties D T S C base loss ε) (s : ℕ) :
+-    ∃ B : ℝ, 0 < B ∧ N01ClosedFlowLinearHighBoundAtOrder T S C base loss ε s B := by
+-  obtain ⟨B, hB, hbound⟩ := ordinaryFlowFamily_le_linear_high_of_n01 hT hN s
++    (hN : N01Properties D T S C base loss ε) :
++    ∃ parameterLoss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
++      N01ClosedFlowLinearHighBoundAtOrder T S C base (loss + parameterLoss) ε s B := by
++  obtain ⟨parameterLoss, horders⟩ := ordinaryFlowFamily_le_linear_high_of_n01 hT hN
++  refine ⟨parameterLoss, fun s => ?_⟩
++  obtain ⟨B, hB, hbound⟩ := horders s
+   exact ⟨B, hB, n01_closedFlow_bound_of_open_bound hS hT hN hbound⟩
+ 
+ end ContinuousFlexibility.Analysis
