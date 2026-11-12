@@ -111,7 +111,8 @@ theorem n04Realization_potential_shifted_positive_oneHigh (K s shift : ℕ) (RH 
         have hmul := Nat.mul_le_mul_left shift hk
         omega
       have h := hcb i U hU Ω hΩ A H Q RF q hq J x hx v (s + 2 + shift * K) shift
-        (by omega) (W q) (E q) C P R hW hWR hE hC hP hR hbase hjet
+        (by change a + b + 2 ≤ s + 2 + shift * K; omega)
+        (W q) (E q) C P R hW hWR hE hC hP hR hbase hjet
       have hraw' : ‖J.D k x v‖ ≤ (c i * C ^ 3 * W q * E q ^ (P * 3)) *
           R ^ (((a + b + 2 + shift * k : ℕ) : ℝ) /
             (((s + 2 + shift * K : ℕ) : ℝ) + 1)) := by
