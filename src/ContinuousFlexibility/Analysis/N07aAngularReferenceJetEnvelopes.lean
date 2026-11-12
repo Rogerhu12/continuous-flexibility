@@ -39,6 +39,30 @@ def n07aReferenceRemainderField {S : PhysicalSpacesData}
   let q := K.inverseChart z m (K.chart (C.referenceState, 0) m p)
   K.height (C.referenceState, 0) m p * ((K.height z m q)⁻¹ * f q)
 
+private theorem n07a_canonicalHeight_eq_physicalJets
+    {S : PhysicalSpacesData} (K : CanonicalData S) (z : AnnularState S × ℝ)
+    (m : ℕ) (f : PolarPoint → ℝ) :
+    canonicalHeight S K z m f =
+      (fun p => n07aPhysicalJetField K z m 3 p * f p) ∘ K.inverseChart z m := by
+  funext p
+  simp only [canonicalHeight, Function.comp_apply, n07aPhysicalJetField,
+    Matrix.cons_val_three, Matrix.tail_cons, Matrix.head_cons, div_eq_mul_inv]
+  exact mul_comm _ _
+
+private theorem n07a_referenceRemainder_eq_physicalJets
+    {S : PhysicalSpacesData} (C : NonlinearGeometryData S) (K : CanonicalData S)
+    (z : AnnularState S × ℝ) (f : PolarPoint → ℝ) (m : ℕ) :
+    n07aReferenceRemainderField C K z f m = fun p =>
+      n07aPhysicalJetField K (C.referenceState, 0) m 2 p *
+        (((fun q => n07aPhysicalJetField K z m 3 q * f q) ∘ K.inverseChart z m) ∘
+          K.chart (C.referenceState, 0) m) p := by
+  funext p
+  simp only [n07aReferenceRemainderField, Function.comp_apply, n07aPhysicalJetField,
+    Matrix.cons_val_two, Matrix.cons_val_three, Matrix.tail_cons, Matrix.head_cons]
+
+private theorem n07a_fixedJet_weight_reorder (e w d : ℝ) :
+    e * w * d = (e * d) * w := by ring
+
 theorem n07aReferencePieceHeight_eq_remainder
     {S : PhysicalSpacesData} (C : NonlinearGeometryData S) (K : CanonicalData S)
     (z : AnnularState S × ℝ) (u : HeightPair S) (m : ℕ) :
@@ -102,8 +126,14 @@ theorem n07a_decodedPhysical_fixedJetEnvelope
     (liftSectorParameter_mem_stateNeighborhood (C := C) hz le_rfl)
     (hrefState.liftSectorParameter_sector z) m
   have h := heb z hz u m (K.chart (liftSectorParameter S C z) m p) (hgeom.1 hp)
-  rw [hgeom.2.2.1 p hp] at h
-  simpa only [d, mul_assoc, mul_left_comm, mul_comm] using h
+  have heq :
+      ‖iteratedFDeriv ℝ n ((S.height (3 / 4 : ℝ)).decode u)
+        (K.inverseChart (liftSectorParameter S C z) m
+          (K.chart (liftSectorParameter S C z) m p))‖ =
+      ‖iteratedFDeriv ℝ n ((S.height (3 / 4 : ℝ)).decode u) p‖ :=
+    congrArg (fun x : PolarPoint =>
+      ‖iteratedFDeriv ℝ n ((S.height (3 / 4 : ℝ)).decode u) x‖) (hgeom.2.2.1 p hp)
+  exact heq.symm.le.trans (h.trans_eq (n07a_fixedJet_weight_reorder (e m) _ d))
 
 theorem n07a_currentReference_remainder_fixedJetEnvelopes
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
@@ -200,10 +230,14 @@ theorem n07a_currentReference_remainder_fixedJetEnvelopes
   constructor
   · apply hcan.congr hV
     intro m y _
-    simp only [canonicalHeight, g, f, Ψ, Function.comp_apply, n07aPhysicalJetField,
-      Matrix.cons_val_succ, Matrix.cons_val_zero, div_eq_mul_inv]
-    ring
-  · simpa only [one_mul] using hfinal
+    exact congrFun (n07a_canonicalHeight_eq_physicalJets K z' m f) y
+  · have hfinal' : N07aAngularFixedJetEnvelope T K W w
+        (fun m p => n07aPhysicalJetField K (C.referenceState, 0) m 2 p *
+          ((g m ∘ Ψ m) ∘ Φ m) p) := by
+      simpa only [one_mul] using hfinal
+    apply hfinal'.congr hW
+    intro m p _
+    exact congrFun (n07a_referenceRemainder_eq_physicalJets C K z' f m) p
 
 theorem n07a_currentCanonicalHeight_fixedJetEnvelope
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
