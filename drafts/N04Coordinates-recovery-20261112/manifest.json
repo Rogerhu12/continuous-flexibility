@@ -1,0 +1,225 @@
+{
+  "kind": "source recovery snapshot",
+  "parent": "6fde0c827ce172d15c684b7f781c7e8b2c87050c",
+  "sources": [
+    {
+      "path": "audit/recovery/N04bActualAtlasCuts.lean",
+      "blob": "3e6847f1dc053e029284c4f490ab351c5c310da2",
+      "sha256": "1c1ca0be70e7134d99086b9d491732bc983447a8d9700cd17cfa4606e0f7c26e",
+      "lines": 97,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "audit/recovery/PositiveFiberClosedGeometry.lean",
+      "blob": "d47fadef22e92459f5076bca61124019eee8902e",
+      "sha256": "b5f36c8cdac592b0979009b507fe4d686efeea6ee74d2f8d00fa8dd075289d61",
+      "lines": 129,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "audit/recovery/PositiveReferenceIdentity.lean",
+      "blob": "0fe36f57855093a4274f44dc6a2d79ae9dcc67ae",
+      "sha256": "bea24325424288605021e73c8a7340b822333a25acbcdfbd824bc372a9ae8be2",
+      "lines": 128,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "positive/primitive-route/EndpointFiberPolynomialMargins.lean",
+      "blob": "a146711e1499655e0bc601feb55893808b379dcd",
+      "sha256": "c9b5d85d1515f1994b9b47fdc241bbea4101fcf452a9c1aae2b233f4da170c2b",
+      "lines": 159,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "positive/primitive-route/OneSidedWholeComponentTransport.lean",
+      "blob": "8de986a4b6772cbf403e9d60940eac2765a7a171",
+      "sha256": "00b537bdb84ca4bebc735c7ef06bd9b804b9de9bb9203f8e3de09658ec41a70f",
+      "lines": 190,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "positive/primitive-route/OneSidedWholeComponentTransportPolynomial.lean",
+      "blob": "c1a0998de3bebf4fbf4fcf10ec0e871e47e8247e",
+      "sha256": "0ae780cb662e8ecff763a06c3b4765773fa2b388a2d659bd277c1e969eaf4de9",
+      "lines": 185,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "positive/primitive-route/PositiveComponentAdjacency.lean",
+      "blob": "ea35126bfdf815d6ebf4df7b7cf3f1498bf507c1",
+      "sha256": "a11cbe1c096a128fc7301a5a0b3513b12bca7abd81bb3833f11e49095e9479e6",
+      "lines": 170,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "positive/primitive-route/PositiveComponentEndpoints.lean",
+      "blob": "85ac7d7b23c9e63f59e25e0d0281fd5106fb7527",
+      "sha256": "182e98b328b82c6feb5be57b16a1b6536a55b4e5f4af01ab51a27b7b01adb19d",
+      "lines": 79,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "positive/primitive-route/PrescribedEndpointWidth.lean",
+      "blob": "fb42f03831d21ec0a0e803b6fcafcbde09d720f7",
+      "sha256": "51240d5236188f6e4c41caa5289a0fc597f1d21a5344c25897a3bb5be22557a3",
+      "lines": 63,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "positive/primitive-route/WholePositiveTransportAssembly.lean",
+      "blob": "c48c9514699ff3ee2d292eb0aa0e32b2c70bc39c",
+      "sha256": "3afe46da6de99746f176c1de348b4d0b54f2a82ded8be9ea3d097ce03d46b138",
+      "lines": 208,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "positive/primitive-route/WholePositiveTransportPolynomialAssembly.lean",
+      "blob": "38183c65d2553465ee8e4c47b743a44b73ee2b7e",
+      "sha256": "06d270ae78749525cfe1fecdf6707bc9af3bdcedfcaf36d1399e4fc4f0759cec",
+      "lines": 196,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "positive/reconstructed/EndpointFiberInterpolation.lean",
+      "blob": "b7e4b696b9bf1296eeb076700e97f7e1cd923793",
+      "sha256": "c704ef46bb615920ca447117c91354d5716a7b70eca2b8877c7cc981b64d036f",
+      "lines": 207,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "positive/reconstructed/PositiveReferenceCollarPrescribedWidth.lean",
+      "blob": "1f84b6cf5d5beeb5fad0c833ae6762b546a46d64",
+      "sha256": "8683dd7945d847e1a4eebac1f984faaeb09f56df3da907b3bb274023be028e02",
+      "lines": 149,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "positive/recovery/PositiveReferenceIdentity.lean",
+      "blob": "0fe36f57855093a4274f44dc6a2d79ae9dcc67ae",
+      "sha256": "bea24325424288605021e73c8a7340b822333a25acbcdfbd824bc372a9ae8be2",
+      "lines": 128,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "quantitative/primitive-route/MaterialCellEndpointModels.lean",
+      "blob": "c91660140fe19221f98b95b599d2db5685e3bf68",
+      "sha256": "fbcef0e54e80091110431dae6b4a96ff49575acfbbc114dad1a9d08d8c499a3c",
+      "lines": 147,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "quantitative/primitive-route/MaterialCellHostIndex.lean",
+      "blob": "53d303c282778f6cb9f6431edb726793d688c92b",
+      "sha256": "5e5711d750844315c7af10ad33aaedf23f274be6ef7c7f01fbc8a2ad928378b2",
+      "lines": 39,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "quantitative/primitive-route/MaterialCellOverlapRadialPolynomial.lean",
+      "blob": "95a6b72144fae9e3715103b797c7b069fdba9074",
+      "sha256": "c1e1741a69c94f699b1a0305b8808acc70f4f823512e2e67b33f33d510c01e90",
+      "lines": 67,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "quantitative/primitive-route/MaterialSampleRadialPolynomial.lean",
+      "blob": "06106cdba67bb37b503837a23da3911b670a77ce",
+      "sha256": "3e73e356a44a95ebefb4207a9aa54f418aa9d705e3c12fb4d24232363ba11582",
+      "lines": 76,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "quantitative/primitive-route/MorseRealizationComponentOrder.lean",
+      "blob": "3ff524b332be2e5dc8408be6e001d020176f8e0b",
+      "sha256": "b8e835f9f85ac25637e4383a1981fe79ff7cca38fa09b24062b0c5b24b05e5d9",
+      "lines": 106,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "quantitative/primitive-route/RetainedNegativeComponentIdentification.lean",
+      "blob": "f59b4b9ecb97a4d5de73da6344c66b8561ed1f55",
+      "sha256": "086a4a2c663a3ecbe7417c175ac7a54d9251eff990678d1e5d3b3520ab5482bc",
+      "lines": 183,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "quantitative/primitive-route/RetainedReferenceComponentEnumeration.lean",
+      "blob": "bbca75c49b6aedbaa05b9054e2e9e8404d7aa948",
+      "sha256": "57a7fb04e4fd60ab04f2313c13f25fb797ff0e48c1e5f0bb25326897a996c047",
+      "lines": 187,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "quantitative/primitive-route/RetainedReferenceComponentHosts.lean",
+      "blob": "a2643774e7b8f1a6fc6a460b24350958edd174be",
+      "sha256": "ed70a36d71d32a9340a6e396bd95c866c20c4f8bebb19e566d223b4cceb19399",
+      "lines": 115,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "quantitative/primitive-route/RetainedReferenceN01aPrimitive.lean",
+      "blob": "a991948a5af82a086f2d9fc1040979f1a5421c3d",
+      "sha256": "9f93f53a1d3d4b0656967fa7b2634e5a5cf378ae6714224eddf1ffd5e23aaf92",
+      "lines": 128,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "quantitative/primitive-route/RetainedReferenceNormalizedOpticalLower.lean",
+      "blob": "153a79e2f5b6af28b2c99b3106598a04e556091a",
+      "sha256": "9dafadce8dee58dc77611338e3b8ac7c6c4f0625a9d3fd09bd64d14b5f639eee",
+      "lines": 62,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "quantitative/primitive-route/RetainedReferenceOpticalEnvelope.lean",
+      "blob": "fbe43c87cc17db559b4ba5aeb91697f6d97f1d1c",
+      "sha256": "d3c01e9b76055bf6c027689550d66b4ed7c58696708551318c78e802ad06257c",
+      "lines": 161,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "root/CanonicalWholeNegativeBoundary.lean",
+      "blob": "321249b424b451e986bc0356d668e183703cd2ff",
+      "sha256": "54b9aac3ba40d51a5a2bc8d69c4eb4870c9d79b4ca7af283181753ca7aa88a79",
+      "lines": 78,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "root/CanonicalWholeNegativeTransport.lean",
+      "blob": "429c2442678eb5094e0fc65718cff8f05b084f27",
+      "sha256": "2ef43db01541e6e9e518b1b987d4e9d72cc158e51ab8d5a56893d42e8d15c3f1",
+      "lines": 174,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "root/FiniteJetGluing.lean",
+      "blob": "66d40a5b5d4f7bade914536515ce98f765dedb70",
+      "sha256": "2a7f7536bd5a0db13c0ac5b0d2d5d652d74b4b112bdae53d8a3dd2bac7b06bc4",
+      "lines": 119,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "root/FiniteJetRadialGluing.lean",
+      "blob": "a5f458696af9a66b0f1e60569b6d765563346d34",
+      "sha256": "4cae2b706c8dac015b2be6ae3cd6c0d9918c9c67ba776b325e9c76aa3b3f18b7",
+      "lines": 84,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "root/compatibility/PositiveComponentAdjacency.lean",
+      "blob": "8728e5882472f70c596acdafd856b9c61eb7c903",
+      "sha256": "28cbd7b4f3695aac005457d9a45531b9cbb8de68252418d93bca0287aaf205e6",
+      "lines": 170,
+      "status": "source candidate; no compilation claim"
+    },
+    {
+      "path": "root/repair118/CanonicalNegativeTravelTransition.lean",
+      "blob": "e437ebd844869f8250ec6c4e58820461a9b968f5",
+      "sha256": "c88ff73384ba8360871e9b439f3d7c84985623763d8186441672b99c1e4df34b",
+      "lines": 185,
+      "status": "source candidate; no compilation claim"
+    }
+  ],
+  "source_count": 31,
+  "note": "The local execution environment reset on 2026-11-12. This preserves currently recovered or reconstructed candidates. It does not recreate lost historical review manifests and does not claim that these files compile. N04Coordinates remains open. Candidate source is intentionally outside src and the generated root."
+}
