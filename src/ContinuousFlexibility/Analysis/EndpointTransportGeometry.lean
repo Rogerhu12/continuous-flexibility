@@ -104,6 +104,7 @@ theorem wholeComponentTransportGeometry_of_scalars
     exact hq
   · intro p
     apply hστ.injective
+    dsimp only [τ] at hperiod
     rw [hτσ, hperiod, hτσ]
   · intro x hx θ
     filter_upwards [hmiddle x hx θ] with p hp

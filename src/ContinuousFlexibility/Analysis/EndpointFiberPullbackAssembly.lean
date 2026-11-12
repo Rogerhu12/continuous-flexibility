@@ -34,7 +34,7 @@ theorem endpointFiberPullback_family_of_bound
     (hκX : 0 < κX) (hMσ : 0 ≤ Mσ)
     (hφ : ∀ i, ContDiff ℝ ∞ (φ i))
     (hX : ∀ i side, ContDiff ℝ ∞ (X i side))
-    (hpositive : ∀ i p, 0 < deriv (fun θ => φ i (p.1, θ)) p.2)
+    (hpositive : ∀ i (p : PolarPoint), 0 < deriv (fun θ => φ i (p.1, θ)) p.2)
     (hφperiod : ∀ i x θ, φ i (x, θ + Real.pi) = φ i (x, θ) + Real.pi)
     (hφodd : ∀ i x θ, φ i (x, -θ) = -φ i (x, θ))
     (hXvalue : ∀ i side θ, X i side (if side then r else l, θ) = if side then r else l)
@@ -114,7 +114,7 @@ theorem exists_endpointFiberPullback_family
     (hφodd : ∀ i x θ, φ i (x, -θ) = -φ i (x, θ))
     (hXvalue : ∀ i side θ, X i side (if side then r else l, θ) = if side then r else l)
     (hXlow : ∀ i side θ, κX ≤ radialPartial (X i side) (if side then r else l, θ))
-    (hφraw : ∀ i side k, 1 ≤ k → k ≤ n + 1 → ∀ θ,
+    (hφraw : ∀ i (side : Bool) k, 1 ≤ k → k ≤ n + 1 → ∀ θ,
       ‖iteratedFDeriv ℝ k (φ i) (if side then r else l, θ)‖ ≤ M)
     (hXraw : ∀ i side k, 1 ≤ k → k ≤ n + 1 → ∀ θ,
       ‖iteratedFDeriv ℝ k (X i side) (if side then r else l, θ)‖ ≤ M)

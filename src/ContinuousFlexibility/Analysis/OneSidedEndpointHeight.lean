@@ -97,7 +97,9 @@ theorem exists_oneSidedEndpointHeight_family
     have hlogroot (η : ℝ) : ContDiffAt ℝ ∞
         (boundaryHeightLogRatio (fun _ => 1) (h i side))
         (if side then r else l, η) := by
-      simpa only [boundaryHeightLogRatio, div_one] using
+      change ContDiffAt ℝ ∞
+        (fun p : PolarPoint => Real.log (h i side p / 1)) _
+      simpa only [div_one] using
         (hroot i side η).log (hpositive i side η).ne'
     have heLog (x : ℝ) (hx : x ∈ Ioo (a side) (b side)) (η : ℝ) :
         boundaryHeightLogRatio (fun _ => 1) (h i side) (x, τ η) =
