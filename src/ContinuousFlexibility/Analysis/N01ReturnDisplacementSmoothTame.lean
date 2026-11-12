@@ -73,7 +73,13 @@ theorem smoothTameOn_circleProduct_maps
     fun n => (hH.2.1 n).isComplete.completeSpace_coe
   have htop : WithSeminorms H.grading :=
     withSeminorms_graded (fun n => H.level n) H.bond
-  exact smoothTameOn_comp_topological hp ht (withSeminorms_pairGrading htop htop)
+  exact smoothTameOn_comp_topological
+    (X := E) (Y := H.Space × H.Space)
+    (G := fun n => H.level n) (g := H.bond)
+    (p := p) (q := pairGrading H.grading H.grading) (r := H.grading)
+    (U := U) (V := univ) (u := fun x => (f x, g x))
+    (v := fun x : H.Space × H.Space => circleProductBilinear hH hT hD hγ x.1 x.2)
+    hp ht (withSeminorms_pairGrading htop htop)
     hU isOpen_univ (fun _ _ => mem_univ _) (smoothTameOn_prodMk hp ht hf hg)
     (smoothTameOn_circleProduct hH hT hD hγ hi)
 
@@ -104,7 +110,17 @@ theorem N01Properties.smoothTameOn_returnCorrectionDslopeCircle
     smoothTameOn_comp_topological hp ht htop hU isOpen_univ (fun _ _ => mem_univ _)
       (hN.smoothTameOn_returnTransportInverseCircle hS hT)
       (smoothTameOn_circleDerivativeLinear hH)
-  exact smoothTameOn_comp_topological hp ht (withSeminorms_pairGrading htop htop)
+  exact smoothTameOn_comp_topological
+    (X := StateDirections S × ℝ) (Y := H.Space × H.Space)
+    (G := fun n => H.level n) (g := H.bond)
+    (p := pairGrading (sectorGrading S) realGrading)
+    (q := pairGrading H.grading H.grading) (r := H.grading)
+    (U := sectorNeighborhood S base ε ε) (V := univ)
+    (u := fun z => (hN.sectorReturnResidualCircle hS hT z,
+      circleDerivativeLinear hH (hN.returnTransportInverseCircle hS hT z)))
+    (v := fun x : H.Space × H.Space =>
+      circleAverageComposeLinear hH hT hN.1.1 (by norm_num) (fun _ => 0) x.1 x.2)
+    hp ht (withSeminorms_pairGrading htop htop)
     hU isOpen_univ (fun _ _ => mem_univ _)
     (smoothTameOn_prodMk hp ht (hN.smoothTameOn_sectorReturnResidualCircle hS hT) hder)
     (smoothTameOn_circleAverageComposeLinear hH hT hN.1.1 (by norm_num)
@@ -144,8 +160,7 @@ theorem N01Properties.smoothTameOn_returnCorrectionDisplacementCircleLinear
     (hS.2.2.2.2.1 (3 / 4 : ℝ)).2.2 (fun m => -C.travel m) hp ht hU hchart hamp
   apply smoothTameOn_congr hcomp
   intro x hx
-  simp only [N01Properties.returnCorrectionDisplacementCircleLinear, LinearMap.comp_apply,
-    LinearMap.add_apply, LinearMap.id_apply]
+  rfl
 
 def N01Properties.returnCorrectionDisplacement_jointTower
     (hN : N01Properties D T S C base loss ε)

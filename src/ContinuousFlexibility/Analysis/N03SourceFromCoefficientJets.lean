@@ -3,6 +3,7 @@ import ContinuousFlexibility.Analysis.ReturnCorrectionSourceRealization
 import ContinuousFlexibility.Analysis.N01ResidualSectorCoordinates
 import ContinuousFlexibility.Analysis.PhysicalGradeEnergy
 import ContinuousFlexibility.Analysis.TameSmoothingCalculus
+import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # The original N03 source operator from its actual coefficient jets
@@ -111,10 +112,7 @@ private theorem n03Source_heightGrading_conditions
   let q : ℕ → Seminorm ℝ (HeightPair S) := heightPairGrading S
   have hq : Monotone q := pairGrading_monotone (gradedSeminorm_monotone _ _)
     (fun _ _ _ _ => le_rfl)
-  have hqcont (s : ℕ) : Continuous (q s) := by
-    change Continuous (fun η : HeightPair S => (S.height (3 / 4 : ℝ)).grading s η.1 + ‖η.2‖)
-    exact (((withSeminorms_graded _ _).continuous_seminorm s).comp continuous_fst).add
-      continuous_snd.norm
+  have hqcont (s : ℕ) : Continuous (q s) := continuous_heightPairGrading S s
   have hIq : HasInterpolation q := hasInterpolation_of_hasSmoothing hq
     (hasSmoothing_pairGrading (hS.2.2.2.1 (3 / 4 : ℝ)).2.1 hasSmoothing_realGrading)
   have hheight (s : ℕ) (η : HeightPair S) : physicalNorm T (3 / 4 : ℝ) s
