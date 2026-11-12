@@ -123,7 +123,9 @@ theorem n07a_actualForwardFirstBound_neighborhood
   have hzref : (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
     constructor
     · change stateGrading S base (C.referenceState - C.referenceState) < ε
-      simpa only [sub_self, map_zero] using hε
+      have hzero : stateGrading S base (0 : AnnularState S) = 0 :=
+        (stateGrading S base).map_zero'
+      simpa only [sub_self, hzero] using hε
     · simpa only [abs_zero] using hε
   let x₀ := K.inverseChart (C.referenceState, 0) m y
   have hx₀ : x₀ ∈ referencePhysicalPieceOpen S K m := by

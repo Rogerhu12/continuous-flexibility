@@ -57,7 +57,9 @@ private theorem n07a_reference_state_mem (hε : 0 < ε) :
     (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
   constructor
   · change stateGrading S base (C.referenceState - C.referenceState) < ε
-    simpa only [sub_self, map_zero] using hε
+    have hzero : stateGrading S base (0 : AnnularState S) = 0 :=
+      (stateGrading S base).map_zero'
+    simpa only [sub_self, hzero] using hε
   · simpa only [abs_zero] using hε
 
 /-- All actual inverse points lie in one fixed relative material window

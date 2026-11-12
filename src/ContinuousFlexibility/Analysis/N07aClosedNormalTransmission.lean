@@ -177,10 +177,10 @@ theorem n07a_closedRectangle_normalTransmission_matching_jets
   intro n θ hθ
   apply N07aClosedRectangleJets.multilinear_ext_coordinate_words
   intro w
-  rw [N07aClosedRectangleJets.word_eq_mixed hlc hab hu n w
-      ⟨⟨hlc.le, le_rfl⟩, Ioo_subset_Icc_self hθ⟩,
-    N07aClosedRectangleJets.word_eq_mixed hcr hab hv n w
-      ⟨⟨le_rfl, hcr.le⟩, Ioo_subset_Icc_self hθ⟩]
-  exact hmixed _ _ θ hθ
+  have hleft := N07aClosedRectangleJets.word_eq_mixed hlc hab hu n w (p := (c, θ))
+    ⟨⟨hlc.le, le_rfl⟩, Ioo_subset_Icc_self hθ⟩
+  have hright := N07aClosedRectangleJets.word_eq_mixed hcr hab hv n w (p := (c, θ))
+    ⟨⟨le_rfl, hcr.le⟩, Ioo_subset_Icc_self hθ⟩
+  exact hleft.trans ((hmixed _ _ θ hθ).trans hright.symm)
 
 end ContinuousFlexibility.Analysis

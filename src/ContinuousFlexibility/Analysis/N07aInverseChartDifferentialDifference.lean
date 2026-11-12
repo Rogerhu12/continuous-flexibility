@@ -170,7 +170,9 @@ theorem n07a_inverseChart_fderiv_difference_bound
   have hzref : (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
     constructor
     · change stateGrading S base (C.referenceState - C.referenceState) < ε
-      simpa only [sub_self, map_zero] using hε
+      have hzero : stateGrading S base (0 : AnnularState S) = 0 :=
+        (stateGrading S base).map_zero'
+      simpa only [sub_self, hzero] using hε
     · simpa only [abs_zero] using hε
   have hc₀ := hgeom.charts (C.referenceState, 0) hzref hrefState.stateSector m
   have hdG := (hc.2.2.2.2.2.1.contDiffAt (hQ.mem_nhds hy)).differentiableAt (by simp)

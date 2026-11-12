@@ -65,8 +65,10 @@ theorem n07a_chart_map_withDensity
       ((n07aPhysicalMeasure S K z m).withDensity (n07aChartDensity K z m)) =
         canonicalMeasure S K m := by
   obtain ⟨hi, hinj, hd, _⟩ := n07a_physicalHalfGeometry h04 hz hs m
-  have hQ := ((h04.1.domains z hz hs m).1.inter
-    (isOpen_univ.prod isOpen_Ioo)).measurableSet
+  have hQ : MeasurableSet
+      (physicalPieceOpen S K z m ∩ ((univ : Set ℝ) ×ˢ Ioo (0 : ℝ) Real.pi)) :=
+    ((h04.1.domains z hz hs m).1.inter
+      (isOpen_univ.prod isOpen_Ioo)).measurableSet
   have h := map_withDensity_abs_det_fderiv_eq_addHaar volume
     hQ.nullMeasurableSet hd hinj
   rw [hi] at h

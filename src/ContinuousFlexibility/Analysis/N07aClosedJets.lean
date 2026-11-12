@@ -108,10 +108,11 @@ theorem mixed_lipschitzOn {l r : ℝ} {f : PolarPoint → ℝ}
     (hr : ∀ p ∈ openStrip l r, |mixedDerivative (a + 1) b f p| ≤ Mr)
     (hθ : ∀ p ∈ openStrip l r, |mixedDerivative a (b + 1) f p| ≤ Mθ) :
     LipschitzOnWith (Mr + Mθ) (mixedDerivative a b f) (openStrip l r) := by
-  refine ((convex_Ioo l r).prod (convex_univ : Convex ℝ (univ : Set ℝ))).
-    lipschitzOnWith_of_nnnorm_hasFDerivWithin_le
-      (fun p hp => (mixed_hasFDerivAt (isOpen_Ioo.prod isOpen_univ)
-        hf a b hp).hasFDerivWithinAt) ?_
+  have hConv : Convex ℝ (openStrip l r) :=
+    (convex_Ioo l r).prod (convex_univ : Convex ℝ (univ : Set ℝ))
+  refine hConv.lipschitzOnWith_of_nnnorm_hasFDerivWithin_le
+    (fun p hp => (mixed_hasFDerivAt (isOpen_Ioo.prod isOpen_univ)
+      hf a b hp).hasFDerivWithinAt) ?_
   intro p hp
   rw [← NNReal.coe_le_coe, coe_nnnorm, NNReal.coe_add]
   exact (scalarGradient_norm_le _ _).trans (add_le_add (hr p hp) (hθ p hp))
@@ -227,14 +228,14 @@ theorem hasDerivWithinAt_radial (a b : ℕ) {r₀ : ℝ} (hr₀ : r₀ ∈ Icc l
 theorem hasDerivWithinAt_left (hlr : l < r) (a b : ℕ) (θ : ℝ) :
     HasDerivWithinAt (fun t => J.value a b (t, θ))
       (J.value (a + 1) b (l, θ)) (Ici l) l :=
-  (J.hasDerivWithinAt_radial a b ⟨le_rfl, hlr.le⟩ θ).
-    mono_of_mem_nhdsWithin (Icc_mem_nhdsGE hlr)
+  (J.hasDerivWithinAt_radial a b ⟨le_rfl, hlr.le⟩ θ).mono_of_mem_nhdsWithin
+    (Icc_mem_nhdsGE hlr)
 
 theorem hasDerivWithinAt_right (hlr : l < r) (a b : ℕ) (θ : ℝ) :
     HasDerivWithinAt (fun t => J.value a b (t, θ))
       (J.value (a + 1) b (r, θ)) (Iic r) r :=
-  (J.hasDerivWithinAt_radial a b ⟨hlr.le, le_rfl⟩ θ).
-    mono_of_mem_nhdsWithin (Icc_mem_nhdsLE hlr)
+  (J.hasDerivWithinAt_radial a b ⟨hlr.le, le_rfl⟩ θ).mono_of_mem_nhdsWithin
+    (Icc_mem_nhdsLE hlr)
 
 theorem iteratedDeriv_angular (a b n : ℕ) {r₀ : ℝ}
     (hr₀ : r₀ ∈ Icc l r) (θ : ℝ) :
@@ -275,11 +276,13 @@ theorem bound_on_closed (hlr : l < r) (a b : ℕ) {M : ℝ}
     ∀ p ∈ closedStrip l r, |J.value a b p| ≤ M := by
   have hsub : openStrip l r ⊆ {p | |J.value a b p| ≤ M} := by
     intro p hp
-    rw [J.agrees a b hp]
-    exact hM p hp
+    exact (congrArg abs (J.agrees a b hp)).le.trans (hM p hp)
   have hclosed : IsClosed {p | |J.value a b p| ≤ M} :=
     isClosed_le (J.continuous a b).abs continuous_const
-  simpa only [closure_openStrip hlr] using closure_minimal hsub hclosed
+  have hclosure := closure_minimal hsub hclosed
+  rw [closure_openStrip hlr] at hclosure
+  intro p hp
+  exact hclosure hp
 
 /-- Periodicity of the interior jets passes to their unique closed traces. -/
 theorem periodic_on_closed (hlr : l < r) (P : ℝ)
@@ -292,9 +295,11 @@ theorem periodic_on_closed (hlr : l < r) (P : ℝ)
     have hp' : p + (0, P) ∈ openStrip l r :=
       ⟨by simpa only [Prod.fst_add, add_zero] using hp.1, mem_univ _⟩
     exact (J.agrees a b hp').trans ((hper a b p hp).trans (J.agrees a b hp).symm)
-  simpa only [closure_openStrip hlr] using
-    he.closure ((J.continuous a b).comp (continuous_id.add continuous_const))
-      (J.continuous a b)
+  have hclosure := he.closure
+    ((J.continuous a b).comp (continuous_id.add continuous_const)) (J.continuous a b)
+  rw [closure_openStrip hlr] at hclosure
+  intro p hp
+  exact hclosure hp
 
 end ClosedJetTower
 
