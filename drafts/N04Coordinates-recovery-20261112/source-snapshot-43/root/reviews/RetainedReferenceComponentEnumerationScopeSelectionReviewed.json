@@ -1,0 +1,48 @@
+{
+  "schema": "N04Coordinates.ExplicitSourceSelectionReview.v1",
+  "intended_backup_path": "root/reviews/RetainedReferenceComponentEnumerationScopeSelectionReviewed.json",
+  "date": "2026-11-12",
+  "author": "/root",
+  "status": "SOURCE_ONLY_REVIEWED_SELECTION; NOT_YET_COMPILED; INSTALLATION_REQUIRES_DEPENDENCY_AND_GREEN_BASELINE_GATES",
+  "module": "ContinuousFlexibility.Analysis.RetainedReferenceComponentEnumeration",
+  "target_path": "src/ContinuousFlexibility/Analysis/RetainedReferenceComponentEnumeration.lean",
+  "candidate_manifest": {
+    "blob": "88447c43498f75d1e3acee804b85e32050306d63",
+    "sha256": "ffc151a19097962c74e0d72894d37733ceeb0f4a06364820ae5285066a6caa48"
+  },
+  "old_source": {
+    "blob": "bbca75c49b6aedbaa05b9054e2e9e8404d7aa948",
+    "sha256": "57a7fb04e4fd60ab04f2313c13f25fb797ff0e48c1e5f0bb25326897a996c047",
+    "lines": 187
+  },
+  "selected_source": {
+    "blob": "4301dad4fd75a74de75f39d482504f83fd5776b4",
+    "sha256": "e3ff3a2a35ea5e809c4271786587d21b715f26616ff1764ea0bd3874d34afc08",
+    "lines": 188
+  },
+  "selection_authority": "A new explicit owner selection by /root after reading both complete raw sources and the original candidate manifest. This does not invent or retroactively label an older owner review.",
+  "exact_change": "Insert the single line open scoped ContDiff after open Real Set. Deleting that exact line reconstructs the old raw source byte for byte.",
+  "reason": "The retained-reference proof contains ContDiff ℝ ∞ Γ.reference.w. Opening ContDiff supplies the intended smoothness notation at the actual expression; no function, estimate, witness, theorem statement or proof body changes.",
+  "checks": {
+    "full_187_and_188_lines_read": true,
+    "unique_scope_line": true,
+    "byte_exact_reconstruction": true,
+    "imports_unchanged": [
+      "ContinuousFlexibility.Analysis.RetainedNegativeComponentIdentification",
+      "ContinuousFlexibility.Analysis.MorseRealizationComponentOrder",
+      "ContinuousFlexibility.Analysis.N01aNegativeComponentGeometry"
+    ],
+    "public_header_unchanged": true,
+    "public_header_sha256": "96f3b06bbfe250b7eea240808235a9988fe64d4cc57e15550fa5a56539afa1d0",
+    "public_header": "theorem retainedReference_natural_component_enumeration\n    {S : SelectedTailData} {K : SeedCentralCutoff} {q length : ℝ}\n    (P : SeedRetainedPair S K q length) (hS : IsSelectedTail S)\n    (hband : radialFrequencyBand S.chain S.Cstar S.chain.index 2) (hq : 0 < q)\n    {Γ : ConnectedReferenceGeometry} (hΓ : Γ.Realizes)\n    (hw : Γ.reference.w = P.pair.profile)\n    (hcoordinates : R11aRetainedCoordinates P Γ) :\n    ∃ e : ℕ ≃ N01aNegativeComponent Γ.reference,\n      (e 0).left = centralRadius (-sqrt centralOscillatorA) ∧\n      (e 0).right = centralRadius (sqrt centralOscillatorA) ∧\n      ∀ side : Bool, ∀ k : ℕ,\n        (e (morseTailIndex side k)).left =\n          (if side then P.pair.radiusR else P.pair.radiusL) *\n            S.chain.radius side (S.chain.index + k)\n              (morseLeftTurn (morseChainA S.chain (S.chain.index + k))\n                (morseChainB S.chain (S.chain.index + k))) ∧\n        (e (morseTailIndex side k)).right =\n          (if side then P.pair.radiusR else P.pair.radiusL) *\n            S.chain.radius side (S.chain.index + k)\n              (morseRightTurn (morseChainA S.chain (S.chain.index + k))\n                (morseChainB S.chain (S.chain.index + k)))",
+    "private_header_and_all_proof_bodies_unchanged": true,
+    "new_explicit_public_names": 0,
+    "new_hypotheses": 0,
+    "new_axioms_or_sorry_or_unsafe": 0,
+    "resource_options_changed": false,
+    "source_bytes_written_or_changed": false,
+    "CI_claim": false
+  },
+  "peer_context": "audit_coordinates independently read both full sources and verified the same unique-line deletion identity. A separate immutable peer receipt may bind this selection in the completed Reference33 inventory.",
+  "activation": "Retain this exact 188-line blob for the post149 Reference33 closure. Before activating it, bind all selected provider preimages, full repository name/dependency checks, an actual full-green parent and <=20000 added Lean budget. No source tree/ref changes in this review."
+}

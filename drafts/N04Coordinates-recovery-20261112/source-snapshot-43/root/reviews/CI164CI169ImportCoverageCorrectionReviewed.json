@@ -1,0 +1,89 @@
+{
+  "schema": "N04Coordinates.CoverageCorrection.v1",
+  "intended_backup_path": "root/reviews/CI164CI169ImportCoverageCorrectionReviewed.json",
+  "status": "FULL_SOURCE_IMPORT_REACHABILITY_INDEPENDENTLY_RECOMPUTED; CI169_NOT_ASSUMED_GREEN",
+  "author": "/root",
+  "date": "2026-11-12",
+  "metadata": {
+    "blob": "9c50c8370e39154362ac6b35e7d045ebddcf04cd",
+    "sha256": "0dd675c42689c9b281546bc84637e34658004864e26bed50163b35bbe27c4543"
+  },
+  "method": "Read actual gen_root.py, root_exclude.txt and lakefile. Independently derive every root import from the exact Git tree, override only generated root imports, then traverse every source edge from all four default library roots. Verify every metadata path/blob against the actual tree. Baseline source tree is the verified byte-identical src tree in backup42.",
+  "baseline164": {
+    "head": "c796387fb555392501c81f5b8bd834936251516c",
+    "tree": "08257c9406671ac1f094b739e4971c1eca108c66",
+    "all_src": 4306,
+    "project": 4302,
+    "generated": 4241,
+    "reached_all": 4302,
+    "reached_project": 4298,
+    "unreached": [
+      {
+        "module": "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+        "path": "src/ContinuousFlexibility/Analysis/ProjectiveNewtonCommonOrbit.lean",
+        "blob": "a5ad392d126b4c78d4b5c1b740ab13be432d220f"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth",
+        "path": "src/ContinuousFlexibility/Analysis/ProjectiveNewtonParameterGrowth.lean",
+        "blob": "67a927fba191303480c51a86bae2b9cbb386339a"
+      },
+      {
+        "module": "ContinuousFlexibility.Blueprint.N01c.Coefficients",
+        "path": "src/ContinuousFlexibility/Blueprint/N01c/Coefficients.lean",
+        "blob": "d08bfe0f69de1d6f580d88bd542733d28d9475cc"
+      },
+      {
+        "module": "ContinuousFlexibility.Blueprint.N01c.Statements",
+        "path": "src/ContinuousFlexibility/Blueprint/N01c/Statements.lean",
+        "blob": "b7abdda1dad31c62dfcf1645dc3ab0be038179fe"
+      }
+    ],
+    "missing": [],
+    "all_actual_blob_match": true,
+    "CI_full_success_previously_verified": true
+  },
+  "current169": {
+    "head": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "tree": "aedbc4ec6f58d05e07de2eefb318651f69077036",
+    "all_src": 4417,
+    "project": 4413,
+    "generated": 4351,
+    "reached_all": 4413,
+    "reached_project": 4409,
+    "unreached": [
+      {
+        "module": "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+        "path": "src/ContinuousFlexibility/Analysis/ProjectiveNewtonCommonOrbit.lean",
+        "blob": "a5ad392d126b4c78d4b5c1b740ab13be432d220f"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth",
+        "path": "src/ContinuousFlexibility/Analysis/ProjectiveNewtonParameterGrowth.lean",
+        "blob": "67a927fba191303480c51a86bae2b9cbb386339a"
+      },
+      {
+        "module": "ContinuousFlexibility.Blueprint.N01c.Coefficients",
+        "path": "src/ContinuousFlexibility/Blueprint/N01c/Coefficients.lean",
+        "blob": "d08bfe0f69de1d6f580d88bd542733d28d9475cc"
+      },
+      {
+        "module": "ContinuousFlexibility.Blueprint.N01c.Speeds",
+        "path": "src/ContinuousFlexibility/Blueprint/N01c/Speeds.lean",
+        "blob": "b9732984d9723e5a61b4448e56d2cca328dac0a2"
+      }
+    ],
+    "missing": [],
+    "all_actual_blob_match": true,
+    "CI_status": "full build still in progress at 22:03:46 UTC"
+  },
+  "supersedes": {
+    "receipt": "013f867ad3cd2a60b3acd2c1b8dab83040496a76",
+    "incorrect_project_count": 4297,
+    "correct_project_count": 4298,
+    "error": "The old computation traversed Blueprint/library root headers but missed Analysis-to-Blueprint imports. CanonicalParts is reached through StateNeighborhood at both commits.",
+    "not_changed": "The independently observed complete CI164 success remains valid. This correction concerns its source-module coverage count."
+  },
+  "interpretation": "Reachability is not itself a Lean compile claim. Current-head compiled coverage can be stated after complete CI success on that exact generated root. Cached olean counters are not source coverage.",
+  "new_Lean_lines": 0
+}

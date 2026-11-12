@@ -1,10 +1,10 @@
 {
   "kind": "metadata_only_recovery_snapshot",
-  "snapshot": 42,
-  "prior_commit": "59d5815f72e803604a14531d51403a0b02943282",
+  "snapshot": 43,
+  "prior_commit": "cf20136dd181167c8347ac4bbb7ad794a3315d2b",
   "line_head": "836b039233920fa778d9747be7b5d5a9f953fea3",
   "line_tree": "aedbc4ec6f58d05e07de2eefb318651f69077036",
-  "frozen_at": "2026-11-12 21:55:00 UTC",
+  "frozen_at": "2026-11-12 22:06:54 UTC",
   "files": [
     {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/cut-first-jets-syntax/ConstructedRootCutFirstJets.base.lean.txt",
@@ -27877,7 +27877,7 @@
       "lines": 82,
       "blob": "95b8588be6ea03597d35146ffca423f4e2e9d787",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "cf20136dd181167c8347ac4bbb7ad794a3315d2b",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-42/ci/CI168FailureReceipt.json"
       }
     },
@@ -27888,7 +27888,7 @@
       "lines": 808,
       "blob": "30f3eed5a8e61ee0746311f8d5d1142ffc5cc727",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "cf20136dd181167c8347ac4bbb7ad794a3315d2b",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-42/ci/n04-ci-168.log"
       }
     },
@@ -27899,7 +27899,7 @@
       "lines": 95,
       "blob": "bf0a30e8c0fb918f6c655bb45a5f201fc279c4e3",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "cf20136dd181167c8347ac4bbb7ad794a3315d2b",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-42/root/repair168/WholePositiveReferencePrincipalCI168RepairCandidateManifest.json"
       }
     },
@@ -27910,7 +27910,7 @@
       "lines": 28,
       "blob": "5de29c4a03ddc7deaf56c5c20317cc71241f1577",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "cf20136dd181167c8347ac4bbb7ad794a3315d2b",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-42/root/repair168/WholePositiveReferencePrincipalCI168Repair.diff"
       }
     },
@@ -27921,7 +27921,7 @@
       "lines": 234,
       "blob": "3da7456ed79deac487dd8c2cc56e5161e198807b",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "cf20136dd181167c8347ac4bbb7ad794a3315d2b",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-42/positive/recovery/reviews/WholePositiveReferencePrincipalCI168RepairIndependentReview.json"
       }
     },
@@ -27932,7 +27932,7 @@
       "lines": 54,
       "blob": "1fb891929ade57809c11abcce427cc86d9b059f2",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "cf20136dd181167c8347ac4bbb7ad794a3315d2b",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-42/root/repair168/WholePositiveReferencePrincipalCI168RepairReviewedManifest.json"
       }
     },
@@ -27943,7 +27943,7 @@
       "lines": 85,
       "blob": "2a663bcab220fba046cb046420c111beeb6a7327",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "cf20136dd181167c8347ac4bbb7ad794a3315d2b",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-42/ci/CI169StagingPlan.json"
       }
     },
@@ -27954,7 +27954,7 @@
       "lines": 178,
       "blob": "4a39a24527f8a555274c9d59af1a72c030ab5690",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "cf20136dd181167c8347ac4bbb7ad794a3315d2b",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-42/root/recovery/Cohort4Reference25CI169SevenProviderDelta.json"
       }
     },
@@ -27965,7 +27965,7 @@
       "lines": 2543,
       "blob": "9824e09dea277e85e8198c7ee4f5950ed3cd0c64",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "cf20136dd181167c8347ac4bbb7ad794a3315d2b",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-42/audit/recovery/Reference33Post149ImportInventoryCheckpoint01.json"
       }
     },
@@ -27976,7 +27976,7 @@
       "lines": 16,
       "blob": "886d303a3ba03701448d06b374ad3074c3a6f613",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "cf20136dd181167c8347ac4bbb7ad794a3315d2b",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-42/ci/CI169PushReceipt.json"
       }
     },
@@ -27987,7 +27987,7 @@
       "lines": 44,
       "blob": "56192ea5bef87869582b6b82d9c1ec28c4e24e73",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "cf20136dd181167c8347ac4bbb7ad794a3315d2b",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-42/ci/CI169ProviderGraphDelta.json"
       }
     },
@@ -27998,7 +27998,7 @@
       "lines": 911,
       "blob": "7462b0f630d577f4831fa7c885c226399c940edc",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "cf20136dd181167c8347ac4bbb7ad794a3315d2b",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-42/ci/CI169GitHubCompareSummary.json"
       }
     },
@@ -28009,7 +28009,7 @@
       "lines": 25,
       "blob": "c8838081d79d3365987651f83f51107dc69a0c19",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "cf20136dd181167c8347ac4bbb7ad794a3315d2b",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-42/ci/CI164CoverageCorrectionPendingCompleteImportMap.json"
       }
     },
@@ -28023,9 +28023,97 @@
         "commit": "836b039233920fa778d9747be7b5d5a9f953fea3",
         "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean"
       }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/FixedBase518SelectedProvidersAtCI169.json",
+      "sha256": "10ce1ad71024dfcd300f5c815eb7a5049f86c02f6a97b61495fb8b55df78792e",
+      "bytes": 396368,
+      "lines": 9176,
+      "blob": "f8548b858d40234fce54e77c5ff0702a6f4ed86a",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-43/quantitative/recovery/FixedBase518SelectedProvidersAtCI169.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/FixedBase518MinimalTwoBatchPlanAtCI169.json",
+      "sha256": "ac34e182556c181d5cf745a2631638f4613234f4eaa12fbcdb6def5971b2dc7c",
+      "bytes": 529149,
+      "lines": 11663,
+      "blob": "e8d048a62c7b0bbf695503818b5f9a13d0bc3b07",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-43/quantitative/recovery/FixedBase518MinimalTwoBatchPlanAtCI169.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/ActualCI169SourceImportMapAndCoverage.json",
+      "sha256": "0dd675c42689c9b281546bc84637e34658004864e26bed50163b35bbe27c4543",
+      "bytes": 4152005,
+      "lines": 94124,
+      "blob": "9c50c8370e39154362ac6b35e7d045ebddcf04cd",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-43/quantitative/recovery/ActualCI169SourceImportMapAndCoverage.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/recovery/Reference33Post149MissingImportClosureInventory.json",
+      "sha256": "83154652dd5b6dae69dc215eb9a585b06c61f07a584f8d528510464b96886ab6",
+      "bytes": 419683,
+      "lines": 7715,
+      "blob": "85b9de7b007ad4bbacc6534f62b94ed6d5779da1",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-43/audit/recovery/Reference33Post149MissingImportClosureInventory.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/recovery/Reference33EnumerationScopeOwnerIndependentAddendum.json",
+      "sha256": "91d9ec8137222dfbf15668cac1ee30617770358a2f1c993a79ef88a4884f7f9c",
+      "bytes": 3627,
+      "lines": 80,
+      "blob": "62777fd394ee80611d3de38d5bb4f4f2b9ff4046",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-43/audit/recovery/Reference33EnumerationScopeOwnerIndependentAddendum.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/N04ActualForcingFixedBaseRadialRouteMain1ece.json",
+      "sha256": "212d80d53fb45c0eca445f9f8bd53528053fa283d99610b201b10e33b7167c79",
+      "bytes": 41686,
+      "lines": 519,
+      "blob": "01d69c55e39ba7bc4a5ce288e42023ecca3a4210",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-43/positive/recovery/N04ActualForcingFixedBaseRadialRouteMain1ece.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/RetainedReferenceComponentEnumerationScopeSelectionReviewed.json",
+      "sha256": "1319a49a51c54af08694063a4eed23aa5a5624600bdd6274f97d31b83ab099c2",
+      "bytes": 4231,
+      "lines": 48,
+      "blob": "1b0cc90b5b77a8a7fd73f4fff93faff845744073",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-43/root/reviews/RetainedReferenceComponentEnumerationScopeSelectionReviewed.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/CI164CI169ImportCoverageCorrectionReviewed.json",
+      "sha256": "ab1ce19d39136e1048bf7c4ae0045dc15fd73aaae492b748cf673c830d1c470b",
+      "bytes": 4199,
+      "lines": 89,
+      "blob": "97744d6a5d9b0b4fa4d833946dfd104e02acb035",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-43/root/reviews/CI164CI169ImportCoverageCorrectionReviewed.json"
+      }
     }
   ],
-  "storage_note": "Preserves CI168 failure/log, the reviewed one-source CI169 proof repair, the conditional149 seven-provider delta, and an incomplete Reference33 import inventory checkpoint. One Lean version is retained only at its actual active169 path through the additional parent; no duplicate Lean archive. Also records the CI164 coverage undercount detected from actual Analysis-to-Blueprint imports; exact recount remains pending. No next integration group activated.",
+  "storage_note": "Read-only full import map and independent corrected coverage for CI164/CI169, complete Reference33 post149 closure and exact188 scope owner/peer, fixed-base518 minimal two-batch plan, and actual forcing fixed-base radial proof route. No new Lean archived, no source integration. CI169 quick check passed and full build remains in progress; no budget release or endpoint completion claim.",
   "compiled_baseline": "c796387fb555392501c81f5b8bd834936251516c",
   "compiled_baseline_tree": "08257c9406671ac1f094b739e4971c1eca108c66"
 }

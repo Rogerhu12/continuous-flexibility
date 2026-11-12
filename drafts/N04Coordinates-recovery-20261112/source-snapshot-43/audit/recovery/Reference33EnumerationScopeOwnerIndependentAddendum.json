@@ -1,0 +1,80 @@
+{
+  "schema": "reference33-import-inventory-owner-selection-addendum/v1",
+  "status": "PASS_EXACT_SOURCE_SELECTION_DELTA_NOT_COMPILED",
+  "proposed_backup_path": "audit/recovery/Reference33EnumerationScopeOwnerIndependentAddendum.json",
+  "reviewer": "/root/audit_coordinates",
+  "inventory": {
+    "blob": "85b9de7b007ad4bbacc6534f62b94ed6d5779da1",
+    "sha256": "83154652dd5b6dae69dc215eb9a585b06c61f07a584f8d528510464b96886ab6",
+    "path": "audit/recovery/Reference33Post149MissingImportClosureInventory.json",
+    "unchanged": true,
+    "server_readback_exact": true
+  },
+  "module": "ContinuousFlexibility.Analysis.RetainedReferenceComponentEnumeration",
+  "fresh_owner": {
+    "path": "root/reviews/RetainedReferenceComponentEnumerationScopeSelectionReviewed.json",
+    "blob": "1b0cc90b5b77a8a7fd73f4fff93faff845744073",
+    "sha256": "1319a49a51c54af08694063a4eed23aa5a5624600bdd6274f97d31b83ab099c2",
+    "bytes": 4231,
+    "identity_verified_from_server": true,
+    "authority": "New explicit /root source selection; no claim that a historical owner existed"
+  },
+  "selected_source": {
+    "blob": "4301dad4fd75a74de75f39d482504f83fd5776b4",
+    "sha256": "e3ff3a2a35ea5e809c4271786587d21b715f26616ff1764ea0bd3874d34afc08",
+    "lines": 188,
+    "bytes": 9941
+  },
+  "historical_source": {
+    "blob": "bbca75c49b6aedbaa05b9054e2e9e8404d7aa948",
+    "sha256": "57a7fb04e4fd60ab04f2313c13f25fb797ff0e48c1e5f0bb25326897a996c047",
+    "lines": 187,
+    "bytes": 9920
+  },
+  "historical_candidate_manifest": {
+    "blob": "88447c43498f75d1e3acee804b85e32050306d63",
+    "sha256": "ffc151a19097962c74e0d72894d37733ceeb0f4a06364820ae5285066a6caa48"
+  },
+  "exact_checks": {
+    "full_selected_source_read": true,
+    "complete_old_source_reconstructed_byte_exact": true,
+    "one_line_inserted": "open scoped ContDiff",
+    "reverse_line_removal_exact": true,
+    "public_header_sha256": "96f3b06bbfe250b7eea240808235a9988fe64d4cc57e15550fa5a56539afa1d0",
+    "public_header_literal_equal_to_root_owner": true,
+    "public_header_exists_byte_exact_in_old_source": true,
+    "private_header_and_all_proof_bodies_byte_unchanged": true,
+    "imports_identical": [
+      "ContinuousFlexibility.Analysis.RetainedNegativeComponentIdentification",
+      "ContinuousFlexibility.Analysis.MorseRealizationComponentOrder",
+      "ContinuousFlexibility.Analysis.N01aNegativeComponentGeometry"
+    ],
+    "no_resource_option_changes": true,
+    "no_new_public_declarations": true
+  },
+  "effective_metadata_delta": {
+    "resolve_only_the_inventory_enumeration_owner_pending_entry": true,
+    "source_version_choices_status": "EXACT_FRESH_OWNER_SELECTION_BOUND; FUTURE_BASELINE_MIGRATION_AND_COMPILATION_GATES_REMAIN",
+    "replacement_owner_blob": "1b0cc90b5b77a8a7fd73f4fff93faff845744073",
+    "no_source_fingerprint_changes": true,
+    "no_import_edge_changes": true,
+    "no_node_or_topological_order_changes": true,
+    "no_budget_changes": true
+  },
+  "preserved_inventory_facts": {
+    "missing_sources": 161,
+    "missing_source_lines": 23184,
+    "generated_import_lines": 161,
+    "conservative_total": 23345,
+    "dependency_edges": 452,
+    "actual_boundary_nodes": 116,
+    "conditional_planned149_boundary_nodes": 3
+  },
+  "scope": "An exact-delta and owner-selection peer for the scope-only compatibility. It does not redo all historical mathematical provider reviews or certify elaboration against the future post149 baseline.",
+  "restrictions": {
+    "no_new_lean": true,
+    "no_active_source_index_ref_or_CI_change": true,
+    "no_local_compile": true,
+    "fullgreen_and_bounded_preflight_required": true
+  }
+}

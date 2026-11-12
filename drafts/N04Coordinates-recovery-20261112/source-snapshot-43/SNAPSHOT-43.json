@@ -1,0 +1,188 @@
+{
+  "kind": "metadata_only_recovery_snapshot",
+  "snapshot": 43,
+  "created_at": "2026-11-12 22:06:54 UTC",
+  "parent": "cf20136dd181167c8347ac4bbb7ad794a3315d2b",
+  "additional_parent": null,
+  "current_active_already_reachable_through_parent": true,
+  "compiled_baseline": "c796387fb555392501c81f5b8bd834936251516c",
+  "compiled_baseline_tree": "08257c9406671ac1f094b739e4971c1eca108c66",
+  "source_index_blob": "f90f651de812929a8742a2bf33f87e80f24b04fa",
+  "source_index": {
+    "path": "drafts/N04Coordinates-recovery-20261112/SOURCE-INDEX.json",
+    "sha256": "2c6ed0fb2bb6c380799e130bcad34ed01d2c26c8ed7fd4ed0fdb207a112667ae",
+    "entries": 3085,
+    "new": 8,
+    "updated": 0
+  },
+  "artifacts": [
+    {
+      "name": "quantitative/recovery/FixedBase518SelectedProvidersAtCI169.json",
+      "blob": "f8548b858d40234fce54e77c5ff0702a6f4ed86a",
+      "sha256": "10ce1ad71024dfcd300f5c815eb7a5049f86c02f6a97b61495fb8b55df78792e",
+      "bytes": 396368,
+      "lines": 9176
+    },
+    {
+      "name": "quantitative/recovery/FixedBase518MinimalTwoBatchPlanAtCI169.json",
+      "blob": "e8d048a62c7b0bbf695503818b5f9a13d0bc3b07",
+      "sha256": "ac34e182556c181d5cf745a2631638f4613234f4eaa12fbcdb6def5971b2dc7c",
+      "bytes": 529149,
+      "lines": 11663
+    },
+    {
+      "name": "quantitative/recovery/ActualCI169SourceImportMapAndCoverage.json",
+      "blob": "9c50c8370e39154362ac6b35e7d045ebddcf04cd",
+      "sha256": "0dd675c42689c9b281546bc84637e34658004864e26bed50163b35bbe27c4543",
+      "bytes": 4152005,
+      "lines": 94124
+    },
+    {
+      "name": "audit/recovery/Reference33Post149MissingImportClosureInventory.json",
+      "blob": "85b9de7b007ad4bbacc6534f62b94ed6d5779da1",
+      "sha256": "83154652dd5b6dae69dc215eb9a585b06c61f07a584f8d528510464b96886ab6",
+      "bytes": 419683,
+      "lines": 7715
+    },
+    {
+      "name": "audit/recovery/Reference33EnumerationScopeOwnerIndependentAddendum.json",
+      "blob": "62777fd394ee80611d3de38d5bb4f4f2b9ff4046",
+      "sha256": "91d9ec8137222dfbf15668cac1ee30617770358a2f1c993a79ef88a4884f7f9c",
+      "bytes": 3627,
+      "lines": 80
+    },
+    {
+      "name": "positive/recovery/N04ActualForcingFixedBaseRadialRouteMain1ece.json",
+      "blob": "01d69c55e39ba7bc4a5ce288e42023ecca3a4210",
+      "sha256": "212d80d53fb45c0eca445f9f8bd53528053fa283d99610b201b10e33b7167c79",
+      "bytes": 41686,
+      "lines": 519
+    },
+    {
+      "name": "root/reviews/RetainedReferenceComponentEnumerationScopeSelectionReviewed.json",
+      "blob": "1b0cc90b5b77a8a7fd73f4fff93faff845744073",
+      "sha256": "1319a49a51c54af08694063a4eed23aa5a5624600bdd6274f97d31b83ab099c2",
+      "bytes": 4231,
+      "lines": 48
+    },
+    {
+      "name": "root/reviews/CI164CI169ImportCoverageCorrectionReviewed.json",
+      "blob": "97744d6a5d9b0b4fa4d833946dfd104e02acb035",
+      "sha256": "ab1ce19d39136e1048bf7c4ae0045dc15fd73aaae492b748cf673c830d1c470b",
+      "bytes": 4199,
+      "lines": 89
+    }
+  ],
+  "active": {
+    "head": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "tree": "aedbc4ec6f58d05e07de2eefb318651f69077036",
+    "parent": "3f7cac81c9952e98b4c2ab1bc3956d422b8988c9",
+    "pushed_and_verified": "2026-11-12 21:51:57 UTC",
+    "main_rules_head": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "source_files_changed": 1,
+    "net_Lean_lines": 8,
+    "actual_added_from_green": 19826,
+    "actual_deleted_from_green": 6,
+    "conservative_added_from_green": 19936,
+    "force": false,
+    "CI_label": "CI169",
+    "first_lookup": "wait at least five minutes after this timestamp",
+    "last_full_green": "c796387fb555392501c81f5b8bd834936251516c"
+  },
+  "CI169": {
+    "run": 43314424168,
+    "job": 131518582983,
+    "workflow_number": 1841,
+    "first_lookup_UTC": "2026-11-12 21:58:52 UTC",
+    "latest_checked_UTC": "2026-11-12 22:06:10 UTC",
+    "quick_check": "success",
+    "full_build": "in_progress",
+    "complete_success_verified": false,
+    "budget_released": false,
+    "CI_check_interval_note": {
+      "latest_check_UTC": "2026-11-12 22:01:55 UTC",
+      "prior_check_UTC": "2026-11-12 22:00:58 UTC",
+      "interval_seconds": 57,
+      "correction": "All subsequent run/job status queries use current_time difference >=60 seconds guard, never manually estimated."
+    }
+  },
+  "coverage_correction": {
+    "metadata_blob": "9c50c8370e39154362ac6b35e7d045ebddcf04cd",
+    "independent_root_review": "97744d6a5d9b0b4fa4d833946dfd104e02acb035",
+    "CI164": {
+      "compiled_project": 4298,
+      "total_project": 4302,
+      "compiled_all_src": 4302,
+      "total_all_src": 4306
+    },
+    "CI169": {
+      "reachable_project": 4409,
+      "total_project": 4413,
+      "reachable_all_src": 4413,
+      "total_all_src": 4417,
+      "generated_imports": 4351,
+      "compiled_claim": false
+    },
+    "reason": "Analysis-to-Blueprint import traversal missing in older coverage receipt; CanonicalParts is reached at both heads. Original CI164 successful build remains valid."
+  },
+  "source_plans": {
+    "fixed_base518": {
+      "new_sources": 227,
+      "shared_updates": 9,
+      "minimum_batches": 2,
+      "batch1_conservative": 19670,
+      "batch2_conservative_upper_bound": 18108,
+      "activation": "conditional, exact preceding full green and global source checks required"
+    },
+    "reference33": {
+      "missing_sources": 161,
+      "source_lines": 23184,
+      "root_imports": 161,
+      "conservative_total": 23345,
+      "minimum_batches": 2,
+      "imports_closed": true,
+      "enumeration_scope_selection": "188-line4301dad4 explicitly selected by root1b0cc90b and independently reviewed62777fd3"
+    },
+    "next149": {
+      "source_lines": 19666,
+      "root_imports": 147,
+      "conservative_total": 19813,
+      "source_status": "unchanged from reviewed plan394db737 and seven-provider delta4a39a245; waiting complete CI169 success",
+      "new_full_repository_DAG": "being independently frozen, no new broad symbol-scan claim"
+    }
+  },
+  "proof_route": {
+    "actual_forcing": "Preserves same coefficient increment joint tower, H^(3/4), fixed low base before parameter order, actual closed buffer floors and inhomogeneous radial PDE; producer still unwritten."
+  },
+  "budget": {
+    "new_archived_Lean_lines": 0,
+    "preserved_uncompiled_upper_bound": 19526,
+    "active": {
+      "source_added": 19826,
+      "source_deleted": 6,
+      "generated_root_additions": 110,
+      "conservative_added": 19936,
+      "limit": 20000,
+      "remaining": 64,
+      "net": 8
+    }
+  },
+  "main_rules_checked": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "limits_unchanged": true,
+  "root_not_edited": true,
+  "outside_archive_expected": "Exactly the previous snapshot source tree; prior snapshot outside archive byte-identical to c796 compiled baseline.",
+  "endpoint_status": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open",
+    "blueprint_proved": 37,
+    "blueprint_total": 42,
+    "open": [
+      "N01c",
+      "N02N03",
+      "N04b",
+      "N04Coordinates",
+      "N05"
+    ]
+  }
+}

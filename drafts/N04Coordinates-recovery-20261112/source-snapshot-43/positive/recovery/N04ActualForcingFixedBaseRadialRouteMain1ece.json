@@ -1,0 +1,519 @@
+{
+  "schema": "n04-actual-forcing-fixed-base-route-v1",
+  "status": "READ_ONLY_PROOF_BLUEPRINT_NOT_FORMALIZED_NOT_COMPILED",
+  "author": "/root/proof_inventory",
+  "intended_path": "positive/recovery/N04ActualForcingFixedBaseRadialRouteMain1ece.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "selected_main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "active_head_last_reported_by_root": "836b039233920fa778d9747be7b5d5a9f953fea3",
+  "active_status": "CI169 quick check passed; full build running per root. This agent did not poll CI.",
+  "scope": {
+    "result": "Concrete producer plan for the same coefficient-increment joint tower and actual original-speed forcing on the retained buffer, preserving H^(3/4). A fixed-base radial degree budget is identified; complete CurrentJets is not claimed.",
+    "no_lean_written": true,
+    "no_build_or_elaboration": true,
+    "no_active_source_index_or_ref_changes": true,
+    "no_whole_dag_typecheck_claim": true,
+    "source_reading": "Exact blobs were read and rehashed. Critical declarations were checked at main1ece. Historical held actual tower/witness sources require explicit provider rebinding before installation.",
+    "distinct_remaining_work": [
+      "full-forward fixed-base circle tower and remaining actual finite operation chain",
+      "sample alignment between label m, C.cell m and retained host j_m",
+      "fixed-base radial induction on those actual jets",
+      "outer/root-region weighted composition and actual chart/germ gluing"
+    ]
+  },
+  "prior_artifacts": {
+    "forward_and_forcing": {
+      "git_blob": "eb09f4e4992975bdcab7913ba515154293a0fe00",
+      "sha256": "6e186dd9037043a8fb0de621074dd5668ea89616d8e0ca33795b204efa680f3a",
+      "relationship": "This route refines its forcing/radial sections; it does not replace frozen selections or claim the full-forward theorem exists."
+    },
+    "k0": {
+      "git_blob": "4a0cfea0bdf5102412dba0956e090c855d959e08",
+      "resolved_supplier_supplement": "ab55712815534f923c06cc526c55e8bafe135608",
+      "reuse": "CanonicalVariationBounds.abs_le_of_oneHigh_first_bound_low closes no-constant differences after the true fixed-base k=1 estimate and zero-at-reference. No new algorithm needed."
+    },
+    "completed_CI169_peer": {
+      "git_blob": "3da7456ed79deac487dd8c2cc56e5161e198807b",
+      "sha256": "0e547d73b6fc40d73fdf86a3413a366e8f2b308c7b7cec4df0df12750725a164",
+      "root_owner": "1fb891929ade57809c11abcce427cc86d9b059f2",
+      "new_source": "282cae524a31e9ec89a78ceca5be67b30142eebb",
+      "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED; delivered"
+    }
+  },
+  "exact_public_headers": [
+    {
+      "source": "N01CoefficientJointTower",
+      "declaration": "N01Properties.coefficientIncrement_parameterSpatialTower",
+      "header": "def N01Properties.coefficientIncrement_parameterSpatialTower :\n    SmoothDirections\n      (sectorNeighborhood S base ε ε ×ˢ (Ioo (C.left m) (C.right m) ×ˢ univ))\n      (fun x : (StateDirections S × ℝ) × PolarPoint =>\n        coefficientFamily D S C i 0 0 x.2 (liftSectorParameter S C x.1))"
+    },
+    {
+      "source": "N01CoefficientSpatialJets",
+      "declaration": "N01Properties.componentCoefficientScalarJet_mixed_bound",
+      "header": "theorem N01Properties.componentCoefficientScalarJet_mixed_bound\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n s : ℕ) :\n    ∃ B : ℝ, 0 < B ∧ ∀ m j (hcell : Ioo (C.left m) (C.right m) ⊆ D.cells j)\n      (i : Fin 3) a b, a + b ≤ s → ∀ p,\n      p ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ) →\n      ∀ x ∈ sectorNeighborhood S base ε ε, ∀ v : Fin n → StateDirections S × ℝ,\n      |mixedDerivative a b (hN.componentCoefficientScalarJet m j hcell i n x v) p| ≤\n        B * T.H (T.sample j) ^ (3 / 4 : ℝ) * T.E0 (T.sample j) ^ B *\n          oneHighVariationWeight (pairGrading (sectorGrading S) realGrading) base (s + loss) x v"
+    },
+    {
+      "source": "JointJetSpatialRegularity",
+      "declaration": "SmoothDirections.pointTower_eq_jointJet",
+      "header": "theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.pointTower_eq_jointJet\n    (J : SmoothDirections (U ×ˢ V) f) (hU : IsOpen U)\n    (p : PolarPoint) (hp : p ∈ V) (K : SmoothDirections U (fun x => f (x, p)))\n    (n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E) :\n    K.D n x v = J.D n (x, p) (fun i => (v i, 0))"
+    },
+    {
+      "source": "MixedJointTameBounds",
+      "declaration": "SmoothDirections.jointJet_unit_bound_of_mixed_parameter_bounds",
+      "header": "theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.jointJet_unit_bound_of_mixed_parameter_bounds\n    {f : E × PolarPoint → ℝ} (J : SmoothDirections (U ×ˢ V) f)\n    (hV : IsOpen V) (hc : Convex ℝ (U ×ˢ V))\n    (low high : Seminorm ℝ E) (r : ℕ) (x : E) (hx : x ∈ U)\n    (p : PolarPoint) (hp : p ∈ V) {C H : ℝ} (hC : 0 ≤ C) (hH : 0 ≤ H)\n    (hbound : ∀ k a b : ℕ, k + a + b ≤ r → ∀ u : Fin k → E,\n      (∀ i, low (u i) ≤ 1) →\n      |mixedDerivative a b (fun q => J.D k (x, q) (fun i => (u i, 0))) p| ≤\n        C * (H + ∑ i : Fin k, high (u i)))\n    (v : Fin r → E × PolarPoint)\n    (hv : ∀ i, low (v i).1 ≤ 1 ∧ |(v i).2.1| ≤ 1 ∧ |(v i).2.2| ≤ 1) :\n    |J.D r (x, p) v| ≤ (3 : ℝ) ^ r * C * (H + ∑ i : Fin r, high (v i).1)"
+    },
+    {
+      "source": "JointMixedTameBounds",
+      "declaration": "UniformWeightedJointGrowth.mixed_parameter_oneHigh",
+      "header": "theorem UniformWeightedJointGrowth.mixed_parameter_oneHigh\n    {ι : Type*} {V : ι → Set PolarPoint} {f : ι → E × PolarPoint → ℝ}\n    {J : ∀ i, SmoothDirections (U ×ˢ V i) (f i)}\n    {p : ℕ → Seminorm ℝ E} {W : ι → ℝ} {base loss : ℕ}\n    (hJ : UniformWeightedJointGrowth p W J base loss)\n    (hp : Monotone p) (hW : ∀ i, 1 ≤ W i)\n    (hV : ∀ i, IsOpen (V i)) (hc : ∀ i, Convex ℝ (U ×ˢ V i))\n    (R : ℝ) (hR : 0 ≤ R) (n s : ℕ) :\n    ∃ C Q : ℝ, 0 ≤ C ∧ 0 ≤ Q ∧\n      ∀ i x, x ∈ U → p base x ≤ R → ∀ y ∈ V i, ∀ v : Fin n → E,\n      ∀ a b : ℕ, a + b ≤ s →\n        |mixedDerivative a b (fun q => (J i).D n (x, q) (fun j => (v j, 0))) y| ≤\n          C * W i ^ Q * oneHighVariationWeight p base (s + (n + loss)) x v"
+    },
+    {
+      "source": "CircleUniformAngularInterpolation",
+      "declaration": "hasInterpolation_spatial_affine_rpow_bound",
+      "header": "theorem hasInterpolation_spatial_affine_rpow_bound\n    (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (hIp : HasInterpolation p)\n    (oldBase oldLoss : ℕ) :\n    ∃ B : ℕ, oldBase ≤ B ∧ ∀ R : ℝ, 0 ≤ R → ∀ N b : ℕ, b ≤ N → ∀ n : ℕ,\n      ∃ C : ℝ, 0 ≤ C ∧ ∀ x : E, ∀ v : Fin n → E, ∀ Q : ℝ,\n        p B x ≤ R → (∀ i, p B (v i) ≤ 1) →\n        p (N + B + 1) x ≤ Q → (∀ i, p (N + B + 1) (v i) ≤ Q) → 1 ≤ Q →\n        1 + p (b + oldLoss) x + ∑ i, p (b + oldLoss) (v i) ≤\n          C * Q ^ ((b : ℝ) / ((N : ℝ) + 1))"
+    },
+    {
+      "source": "ScalarTransportJetBounds",
+      "declaration": "weightedJetBound_of_transport_recurrence",
+      "header": "theorem weightedJetBound_of_transport_recurrence\n    {I : Type*} {W H Q : X → ℝ} {U : Set X} {denom : ℝ} (N : ℕ)\n    (hW : ∀ x ∈ U, 1 ≤ W x) (hH : ∀ x ∈ U, 0 ≤ H x)\n    (hQ : ∀ x ∈ U, 1 ≤ Q x) (hdenom : 0 < denom)\n    (F : ℕ → I → X → ℝ) (degree : ℕ → I → ℕ) (charge : I → ℕ)\n    (terms : ℕ → I → ℕ) (factors : ∀ a i, Fin (terms a i) → ℕ)\n    (rank : ∀ a i t, Fin (factors a i t) → ℕ)\n    (index : ∀ a i t, Fin (factors a i t) → I)\n    (known : ∀ a i, Fin (terms a i) → X → ℝ)\n    (knownDegree : ∀ a i, Fin (terms a i) → ℕ)\n    (hrank : ∀ a i t j, rank a i t j ≤ a)\n    (hdegree : ∀ a i t,\n      knownDegree a i t + ∑ j, degree (rank a i t j) (index a i t j) ≤ degree (a + 1) i)\n    (hcharge : ∀ a i t, (∑ j, charge (index a i t j)) = charge i)\n    (hzero : ∀ i, degree 0 i ≤ N →\n      HasWeightedJetBound W H Q U denom (degree 0 i) (charge i) (F 0 i))\n    (hknown : ∀ a i, degree (a + 1) i ≤ N → ∀ t,\n      HasWeightedJetBound W H Q U denom (knownDegree a i t) 0 (known a i t))\n    (hrecurrence : ∀ a i, degree (a + 1) i ≤ N → ∀ x ∈ U,\n      |F (a + 1) i x| ≤ ∑ t : Fin (terms a i),\n        |known a i t x| * ∏ j, |F (rank a i t j) (index a i t j) x|) :\n    ∀ a i, degree a i ≤ N →\n      HasWeightedJetBound W H Q U denom (degree a i) (charge i) (F a i)"
+    }
+  ],
+  "source_fingerprints": [
+    {
+      "id": "N01CoefficientJointTower",
+      "git_blob": "6a73e0d13b39b7cfda04fb0b22208e9c2e44fdb0",
+      "sha256": "082e10476e7067ac5bd8246dbce72aad825019fc196bd45d6191198abdd9b639",
+      "utf8_bytes": 4844,
+      "lines": 100,
+      "path": "src/ContinuousFlexibility/Analysis/N01CoefficientJointTower.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed"
+    },
+    {
+      "id": "N01CoefficientSpatialJets",
+      "git_blob": "0e038e131e20d709f5411f0c17637da9900b65e4",
+      "sha256": "5242b2bbb36f35525783b1941e73a51b0c6bbc0ff993b722a7b4f38040b16e12",
+      "utf8_bytes": 13967,
+      "lines": 249,
+      "path": "src/ContinuousFlexibility/Analysis/N01CoefficientSpatialJets.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed"
+    },
+    {
+      "id": "JointJetSpatialRegularity",
+      "git_blob": "8121ae30ba3505ef7020d759d0686257bea6fff6",
+      "sha256": "17c9b148bc6658c5acfb75e1b476b73e403d09263d6fe291747aa7ffb27a9dd1",
+      "utf8_bytes": 12920,
+      "lines": 249,
+      "path": "src/ContinuousFlexibility/Analysis/JointJetSpatialRegularity.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed"
+    },
+    {
+      "id": "MixedJointTameBounds",
+      "git_blob": "16fdec87b363c2eb4e9dbedda85a5d9a0298f3ac",
+      "sha256": "cf1f48dd90cf5adc2ec6889291a5bb7e50bf1ac76e658c53a564c60dfd995abc",
+      "utf8_bytes": 12586,
+      "lines": 245,
+      "path": "src/ContinuousFlexibility/Analysis/MixedJointTameBounds.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed"
+    },
+    {
+      "id": "WeightedTowerCalculus",
+      "git_blob": "016523877104f642a44e572693b1b8b2251faa2c",
+      "sha256": "ca17c1326690271a54670c095d664693a6d5680fff254ea96a6937b83eec1b84",
+      "utf8_bytes": 14257,
+      "lines": 306,
+      "path": "src/ContinuousFlexibility/Scalar/WeightedTowerCalculus.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Actual scalar postcompose definitions and apply proof; prior context preserved"
+    },
+    {
+      "id": "MaterialSampleGlobalModels",
+      "git_blob": "f4c793c5cb6b7823ce77a593bfd2ba04c9cd2e9a",
+      "sha256": "ea918cd4e735448b5bef1b2ea10b45ba13e7ee8d8725333ac5d819c0bf9950f0",
+      "utf8_bytes": 4639,
+      "lines": 98,
+      "path": "src/ContinuousFlexibility/Analysis/MaterialSampleGlobalModels.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed"
+    },
+    {
+      "id": "MaterialSampleShift",
+      "git_blob": "e79e27788e1c853bed9950e91d7d121995ab1508",
+      "sha256": "58b0285c60e26605a013ba3d580d17e37aef1fa450622b13c458227cb3aa8f74",
+      "utf8_bytes": 8706,
+      "lines": 175,
+      "path": "src/ContinuousFlexibility/Analysis/MaterialSampleShift.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed"
+    },
+    {
+      "id": "MaterialSampleDiscreteEnvelope",
+      "git_blob": "4b9de8d41ee0cac2a7f2cf3b1af9bede4dfbc437",
+      "sha256": "a1622572eafd1815a12c9851ba8ed8e12c0d6792694ffbf4fe75906ad6f2bfce",
+      "utf8_bytes": 5887,
+      "lines": 136,
+      "path": "src/ContinuousFlexibility/Analysis/MaterialSampleDiscreteEnvelope.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed"
+    },
+    {
+      "id": "ActualRadialCellComparison",
+      "git_blob": "3348ac15c7a5b9f11d94cac0972eeddbebc2f6e5",
+      "sha256": "2742cf2727e450078cfebcf7363cc4b824846af5b25c3e11f304dddfebc726fa",
+      "utf8_bytes": 2568,
+      "lines": 61,
+      "path": "src/ContinuousFlexibility/Analysis/ActualRadialCellComparison.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed"
+    },
+    {
+      "id": "N04RetainedCorrectionNumericalWitness",
+      "git_blob": "6ba76a32edfe98908b3b1d44f9af3c7e3d72bfe5",
+      "sha256": "15cc71a282ea4b0aaf371c968dc37a627b41b1407dff8f25e61f613e70c71bea",
+      "utf8_bytes": 8858,
+      "lines": 153,
+      "path": "root/reconstructed/N04RetainedCorrectionNumericalWitness.lean",
+      "pin": "reviewed held source; one selected producer",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed"
+    },
+    {
+      "id": "N01CharacteristicJointGrowth",
+      "git_blob": "b95f6b480dcf1aa6634d4591b24ae2125b645f9a",
+      "sha256": "41b21de7ebdb4b635f1b2b83657884713a0d3ca13b98c2ef69c64f6d09e3c30b",
+      "utf8_bytes": 24803,
+      "lines": 435,
+      "path": "src/ContinuousFlexibility/Analysis/N01CharacteristicJointGrowth.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed"
+    },
+    {
+      "id": "WeightedJointComposition",
+      "git_blob": "b3a73752bec84738dfc1f85cae1ddad39718e934",
+      "sha256": "7a04fb5661645cbd20a15252deadf05f732c3b84505141c89867f481bafd41b2",
+      "utf8_bytes": 7349,
+      "lines": 144,
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointComposition.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed"
+    },
+    {
+      "id": "WeightedJointOperations",
+      "git_blob": "33d59355404f7ad98ee177af0ccd0dbafbf136ce",
+      "sha256": "8caae1b11577f110368626ad71e48dd2ad8bd6f011b5e2ddf1710356a05f3993",
+      "utf8_bytes": 8016,
+      "lines": 155,
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointOperations.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed"
+    },
+    {
+      "id": "WeightedJointProducts",
+      "git_blob": "a2f03fe0abfaf31ef200ffe22d2ecce8bf3c0028",
+      "sha256": "d6a3c54795c2481294a543b4fe9dc4170cce2741b2718427c76d6112cb74b7c6",
+      "utf8_bytes": 3255,
+      "lines": 65,
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointProducts.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed"
+    },
+    {
+      "id": "WeightedJointPowers",
+      "git_blob": "860ee0b7c683ac5db3d6939f9dc6aa7703698ff3",
+      "sha256": "9108175edde74e2c72c1006f51d4371642d6848496b7571c523617fe289142a1",
+      "utf8_bytes": 5068,
+      "lines": 94,
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointPowers.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed"
+    },
+    {
+      "id": "JointMixedTameBounds",
+      "git_blob": "4d8f586b05c130768ef60a244b2325d5c6814444",
+      "sha256": "db2e93c7c91c4b5f9bd41691ec1a6973cecff8a4444b940ff1d237a50c46bf82",
+      "utf8_bytes": 12935,
+      "lines": 246,
+      "path": "src/ContinuousFlexibility/Analysis/JointMixedTameBounds.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed",
+      "retrieval_url": "https://github.com/Rogerhu12/continuous-flexibility/blob/1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac/src/ContinuousFlexibility/Analysis/JointMixedTameBounds.lean"
+    },
+    {
+      "id": "CircleUniformAngularInterpolation",
+      "git_blob": "466d286aa4f7b0ae51682ec163bbb2491f6ff7c0",
+      "sha256": "ad7ff2d938634dc60a41defdaa81dbdef82e5ef043fb97154c9b15f54c6e8733",
+      "utf8_bytes": 9471,
+      "lines": 192,
+      "path": "src/ContinuousFlexibility/Analysis/CircleUniformAngularInterpolation.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed",
+      "retrieval_url": "https://github.com/Rogerhu12/continuous-flexibility/blob/1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac/src/ContinuousFlexibility/Analysis/CircleUniformAngularInterpolation.lean"
+    },
+    {
+      "id": "ScalarTransportJetBounds",
+      "git_blob": "c8461ff7a49f927d833e7b8523ce185693756d4a",
+      "sha256": "fe3b3f4282c466308f5c85857aa0ad9478167218a7ef5521218bf1f3a96ebe4e",
+      "utf8_bytes": 12398,
+      "lines": 259,
+      "path": "src/ContinuousFlexibility/Analysis/ScalarTransportJetBounds.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed"
+    },
+    {
+      "id": "N01ReturnTransportRecurrences",
+      "git_blob": "c7392c229a019eeef398b8338edca3218d62ef15",
+      "sha256": "4e9e551d034ac9265d5574ea33f1a2087e3e94d0b27a2f6663d37e4517c32fa1",
+      "utf8_bytes": 8354,
+      "lines": 164,
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnTransportRecurrences.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed"
+    },
+    {
+      "id": "N04ActualMinusSpeedStripTower",
+      "git_blob": "f0ee10cf1c352acd5eaf85792f2f0b32ba9be796",
+      "sha256": "231e649dd57453716bbeb036dcaa4c4c0a1793d6198bedd0d482864c901bbfbf",
+      "utf8_bytes": 6517,
+      "lines": 122,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-31/positive/reconstructed/N04ActualMinusSpeedStripTower.lean",
+      "pin": "4a8e25855b690da1fec1626ed9622699c561ca1e",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed"
+    },
+    {
+      "id": "N04ActualMinusFirstIntegralTransportTowers",
+      "git_blob": "ecd589a83d268c6b10235e9a22f06ed21dc0ed10",
+      "sha256": "0cd1722af35f306bb817d446e271310285d6db2fe714d62aeb4741bc1767f1c4",
+      "utf8_bytes": 4934,
+      "lines": 90,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-31/positive/reconstructed/N04ActualMinusFirstIntegralTransportTowers.lean",
+      "pin": "4a8e25855b690da1fec1626ed9622699c561ca1e",
+      "read_scope": "Full source read in this route or the immediately preceding route; exact bytes rehashed"
+    },
+    {
+      "id": "Nonlinear",
+      "git_blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "utf8_bytes": 101197,
+      "lines": 1773,
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "read_scope": "Relevant complete definitions only; not a new full-file review",
+      "retrieval_url": "https://github.com/Rogerhu12/continuous-flexibility/blob/1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac/src/ContinuousFlexibility/Statements/Nonlinear.lean"
+    }
+  ],
+  "same_witness_and_domain": {
+    "invocation": "Call N01Properties.n04_exists_through03_preserving_correction_numerical_data once. Retain that R,L,chi,j,base',epsilon',x,delta,lambda,P and its restricted hN'; no second witness or collar choice.",
+    "E": "StateDirections S × ℝ",
+    "p": "pairGrading (sectorGrading S) realGrading",
+    "U": "sectorNeighborhood S base' epsilon' epsilon'",
+    "physical_point": "y=(r,theta):PolarPoint; r is physical radius, not a unit coordinate.",
+    "V_m": "Ioo(x_m-delta_m)(x_m+delta_m) ×ˢ univ",
+    "host": "j_m is the returned cell m, with Ioo(C.left m)(C.right m) ⊆ D.cells j_m.",
+    "W": "W_m=radialE(D.cellIndex j_m), with 1≤W_m by one_le_radialE_of_nat.",
+    "H": "h_m=T.H(T.sample j_m)^(3/4)>0; constant in state, physical point and all slots.",
+    "coefficients": "a,b,c are originalCoefficients D S C (liftSectorParameter S C z) at y. Subscript 0 is that same original field at (C.referenceState,0).",
+    "exact_retained_buffer_clause": "      (∃ x δ : ℕ → ℝ, ∃ K A B lam P : ℝ,\n        0 < K ∧ 0 < A ∧ 0 < B ∧ 0 < lam ∧ 0 < P ∧\n        (∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (cell m) ∧\n          0 < δ m ∧ C.left m < x m - δ m ∧ x m + δ m < C.right m ∧\n          (δ m)⁻¹ ≤ K * radialE (D.cellIndex (cell m)) ^ A ∧\n          ∀ r ∈ Icc (x m - δ m) (x m + δ m),\n            radialE (D.cellIndex (cell m)) ^ (-B) / (2 * (D.b - D.a)) ≤ opticalSpeed D.w r) ∧\n        (∀ m, χ m = returnOpticalCutoff (x m) (δ m / 2)) ∧\n        (∀ m, tsupport (deriv (χ m)) ⊆ Icc (x m - δ m / 2) (x m + δ m / 2)) ∧\n        (∀ m, tsupport (deriv (χ m)) ⊆ Ioo (x m - δ m) (x m + δ m)) ∧\n        (∀ n : ℕ, ∃ Kₙ : ℝ, 0 < Kₙ ∧ ∀ m r,\n          |iteratedDeriv n (χ m) r| ≤ Kₙ * radialE (D.cellIndex (cell m)) ^ (A * n)) ∧\n        ∀ z ∈ stateNeighborhood S C base' ε', ∀ m p,\n          p.1 ∈ Icc (x m - δ m) (x m + δ m) →\n          let d := lam * radialE (D.cellIndex (cell m)) ^ (-P) / 2\n          0 < d ∧ d ≤ (originalCoefficients D S C z).a p ∧\n          d ≤ -(originalCoefficients D S C z).c p ∧\n          d ^ 2 ≤ (originalCoefficients D S C z).b p ^ 2 -\n            (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p ∧\n          0 < (originalCoefficients D S C z).b p ^ 2 -\n            (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p) ∧",
+    "lower_consequences": [
+      "On the same closed Icc buffer, d_m=(lambda/2)*W_m^(-P)>0, a≥d_m, -c≥d_m and Delta=b^2-a*c≥d_m^2. Restrict to V_m.",
+      "The reference state belongs to the same state neighborhood, so a0,c0,Delta0 at the identical physical y obey the same lower.",
+      "sqrt Delta,sqrt Delta0≥d_m; their sum≥2*d_m. For WeightedJointPowers use lower (lambda/2)*W^-P for a, (lambda/2)^2*W^(-2P) for Delta, and the corresponding positive lower for the square-root sum."
+    ],
+    "scope_limit": "No whole-component raw discriminant floor is asserted. It may approach zero at a true root.",
+    "label_rule": "j_m, C.cell m and circle label m are distinct until a genuine index/containing-point comparison is supplied."
+  },
+  "coefficient_increment_producer": {
+    "target": "Bound the genuine coefficientIncrement_parameterSpatialTower, deterministically postcomposed by h_m^(-1), in UniformWeightedJointGrowth p W at original base',loss. This is a bound on the existing actual function/tower, not a new representative.",
+    "actual_inputs": [
+      "coefficientIncrement_parameterSpatialTower",
+      "componentCoefficientScalarJet_of_mem",
+      "componentCoefficientScalarJet_mixedDerivative",
+      "componentCoefficientScalarJet_mixed_bound",
+      "SmoothDirections.pointTower_eq_jointJet",
+      "SmoothDirections.jointJet_unit_bound_of_mixed_parameter_bounds"
+    ],
+    "steps": [
+      "At each physical q, use pointTower_eq_jointJet with the actual sectorCoefficientTower and combine componentCoefficientScalarJet_of_mem. This gives EqOn between the same joint J's pure-state jet and the actual local scalar jet on the open component.",
+      "Apply mixed-derivative congruence on that open set, then componentCoefficientScalarJet_mixed_bound. The scalar-pi tower141 is not substituted for a joint tower.",
+      "For total joint order r, take the finite parameter prefix k≤r and call the raw mixed bound with spatial cap r. Constants precede m,j,i,point,state and slots; high order r+loss and low base' remain fixed as stated.",
+      "Convert each sample E0^C to K(C)*W^P(C) before taking finite sums/maxima. W≥1 allows exponent enlargement; an arbitrary original E0 has not been assumed ≥1.",
+      "Use the unit-direction one-high-to-affine inequality. In the first MixedJointTameBounds public theorem put C=h_m*A_r*W_m^P_r and H=1+p(r+loss)z. Its 3^r factor multiplies the entire h_m; the theorem's H is the affine state term, not the material height.",
+      "Use smoothDirectionsScalarPostcompose and its exact apply formula for u↦h_m^(-1)*u. Cancel h_m>0 at every joint order, including zero. Do not estimate h_m^(-1) by an E0 power.",
+      "The normalized actual increment has UniformWeightedJointGrowth p W at base',loss. Restriction preserves J.D; uniqueness transfers to any already supplied tower of that same literal function."
+    ],
+    "sample_conversion": {
+      "suppliers": [
+        "materialSample_global_endpoint_models",
+        "materialE0_rpow_oneSided_shift",
+        "radialE_rpow_eq_materialE0"
+      ],
+      "formula": "Let x_j be the actual endpoint coordinate, |x_j-cellIndex j|≤L and E0(sample j)≤KE*materialE0(x_j). For R≥0 choose K,P uniformly in j with materialE0(x_j)^R≤K*materialE0(cellIndex j)^P. Then E0(sample j)^R≤KE^R*K*exp(P)*W_j^P.",
+      "reference": "Use the same hN'.IsRadialReference projection to IsAccumulatingProfile with hT; no unrelated retained Morse certificate is required for this comparison."
+    },
+    "nonuse": "The second MixedJointTameBounds wrapper requires C uniform in labels and returns component exponent zero. Do not fit this route by absorbing H/E0 into a label-dependent C."
+  },
+  "actual_forcing_producer": {
+    "actual_speed": "v=b/a-sqrt(Delta)/a, exactly minusCharacteristicSpeed(originalCoefficients ...).",
+    "G": "v0-v at the same physical point",
+    "algebra": [
+      "delta_a=a-a0; delta_b=b-b0; delta_c=c-c0",
+      "Delta-Delta0=(b+b0)*delta_b-c*delta_a-a0*delta_c",
+      "G=(v0*delta_a-delta_b+(Delta-Delta0)/(sqrt Delta+sqrt Delta0))/a",
+      "G/h_m=(v0*(delta_a/h_m)-(delta_b/h_m)+((b+b0)*(delta_b/h_m)-c*(delta_a/h_m)-a0*(delta_c/h_m))/(sqrt Delta+sqrt Delta0))/a"
+    ],
+    "proof_of_identity": "On U×V_m use the same positive a,a0,Delta,Delta0. Square-root square identities and difference of squares give the rationalized term; field/ring algebra fixes the displayed sign. The inspected private originalCoefficientEntry_minus_apply is evidence only: the new leaf must use public definitions/entry facts.",
+    "concrete_multiplier_supply": [
+      "originalCoefficient_strip_joint_growth provides actual a,b,c with unweighted joint growth at fixed base',loss. Its absorbed height is appropriate only for multipliers.",
+      "Freeze the same original towers at state zero via the continuous linear map (z,y)↦(0,y), with 0∈U and the defining value of liftSectorParameter at zero. Directly insert zero state slots in the actual bound. This yields the same a0,b0,c0, with no new reference choice.",
+      "Build the discriminant using actual tower products/polynomial composition. WeightedJointOperations.comp_smooth_unweighted and WeightedJointPowers.sqrt/inv use exactly the quantitative lower above.",
+      "Use minusCharacteristicSpeed_strip_joint_growth for the same actual original-speed tower and its state-zero restriction to obtain v0, or use the same finite a0,b0,c0 expression.",
+      "Combine the normalized increments with those multipliers via WeightedJointProducts.mul, WeightedJointOperations.prodMk/sub/postLinear/mono and WeightedJointPowers.inv. There are finitely many operations independent of derivative order, so resulting base/loss are fixed before all orders.",
+      "Identify the expression tower with the deterministic h_m^(-1) postcomposition of the actual G tower by equality and uniqueness. The actual G tower itself comes from the existing genuine strip speed tower and its state-zero freeze; no parameter regularity or final bound is added as a premise."
+    ],
+    "joint_contract": "∃B_G,L_G before every R≥0 and total order N; ∀R,N ∃C,Q≥0 before m,z,y,unit joint slots: |J_G.D N(z,y)slots|≤h_m*C*W_m^Q*(1+p(N+L_G)z+sum p(N+L_G)(slot.state)), under p B_G z≤R and p B_G(slot.state)+norm(slot.spatial)≤1.",
+    "mixed_supplier": "UniformWeightedJointGrowth.mixed_parameter_oneHigh on the normalized actual G tower, followed by exact scalar cancellation/mixedDerivative_const_mul.",
+    "mixed_contract": "Same B_G,L_G: ∀R≥0,n,s ∃C,Q≥0 before m,z,y,v,a,b, a+b≤s => |mixedDerivative a b (fun q=>J_G.D n(z,q)(fun i=>(v_i,0)))y|≤h_m*C*W_m^Q*oneHighVariationWeight p B_G (s+(n+L_G)) z v. delta_G(n)=n+L_G precedes all s.",
+    "implementation_status": "Two concrete glue proofs remain unwritten: weighted same-joint increment normalization and finite actual speed-difference algebra/growth. All listed inputs are existing actual suppliers; no final forcing estimate is assumed."
+  },
+  "fixed_base_radial_budget": {
+    "public_supplier": "Statements.hasInterpolation_spatial_affine_rpow_bound, the first public theorem of CircleUniformAngularInterpolation",
+    "actual_input_contract": "For a fixed finite list of genuine primitive types t, beta_t is fixed before parameter order n, and delta_t(n) precedes all physical orders. An input jet of physical order d uses high index d+delta_t(n). Preserve each separate height charge.",
+    "before_all_k": [
+      "oldBase=max_t beta_t",
+      "D0=max_t delta_t(0), including each actual type's fixed angular evaluation/derivative shift",
+      "Apply hasInterpolation_spatial_affine_rpow_bound(p,hp,hI,oldBase,D0) once. Its B precedes every k,s,label,state,point."
+    ],
+    "after_k_before_s": [
+      "c_k=Finset.sup over t and 1≤n≤k of Nat.sub(delta_t(n),D0); empty k=0 supremum is 0",
+      "M=s+k*c_k; denominator=M+1; high=M+B+1; Q=1+p(high)z+p(high)w for diagonal slots"
+    ],
+    "factor_budget": [
+      "For parameter order n≤k and physical order d, set b'=d+Nat.sub(delta_t(n),D0). Then b'+D0≥d+delta_t(n).",
+      "If n=0 then b'=d. If n≥1 then Nat.sub(delta_t(n),D0)≤c_k≤n*c_k, hence b'≤d+n*c_k.",
+      "Monotonicity and the public interpolation theorem at (N,b,n)=(M,b',n) bound the affine factor by C*Q^(b'/(M+1)); the low B is unchanged.",
+      "For each actual Leibniz product prove sum n_i≤k and sum d_i≤s. Then sum b'_i≤M, so the total Q exponent≤M/(M+1)≤1. Constants may depend on k,s and the finite expression, but not the low B.",
+      "The final high s+(k*c_k+B+1) gives a loss chosen after k and before all s."
+    ],
+    "physical_degree_check": "A_r=v_theta*A-v*A_theta spends an actual +1 physical degree on v or A; Z_r=-T*Z_theta spends +1 on Z. G in e_r has one fewer radial derivative than the target. Cutoff jets are state-independent W-cost factors, so their high-parameter degree is zero while their true physical derivative order remains paid in the separate cutoff constant.",
+    "scalar_kernel": {
+      "declaration": "weightedJetBound_of_transport_recurrence",
+      "source": "ScalarTransportJetBounds",
+      "degree": "For unknown A,Z,e jets: radial a+angular b+parameter n*c_k.",
+      "charges": "A and the unweighted estimate Z0 have charge 0. The charged estimate Z1 and e have charge 1.",
+      "forcing": "hknown in this theorem has charge 0. Do not put charged G there. Use the existing finite-add bound in the e induction, or a rank-zero source index for each already bounded actual G(n,radial,angular), with charge 1. Such indices are scalar bookkeeping of the same J_G, not extra field/tower choices.",
+      "recurrence": "All unknown factors have strictly smaller radial rank. Full coefficient/source jets are already bounded. Prove exact finite-index degree and charge sums from the actual differentiated equations.",
+      "last_step": "After the diagonal estimate, use the actual mixedParameterMultilinearMap plus polarization/unit normalization with the same seminorms. Do not change the representative or choose a new low base for each spatial order."
+    },
+    "nonuse": [
+      "UniformFamilyJetBounds.diagonal_spatial_interpolation chooses B after nmax",
+      "UniformWeightedJointGrowth.mixed_diagonal_spatial_interpolation chooses B after nmax",
+      "FlatMixedDiagonalGrowth.mul chooses B after its supplied loss, which is not fixed in n here"
+    ],
+    "independent_check": "audit_coordinates confirmed the Nat inequalities and quantifier order, including k=0. This validates only the budget; actual input bounds and derivative-accounting equalities remain separate."
+  },
+  "actual_PDE": {
+    "notation": "A=returnFlowInverseSlope; Z=returnCorrectionPulledDisplacementLinear at the same supplied R.residual; T=v+chi'*A*Z is the actual corrected minus speed; e=actual corrected first integral-(theta+reference opticalTravel).",
+    "equations": [
+      "A_r=v_theta*A-v*A_theta",
+      "Z_r=-T*Z_theta",
+      "e_r=-T*e_theta+(v0-v)-chi'*A*Z"
+    ],
+    "height_bookkeeping": "Z0 and Z1 are two bounds for the identical Z and J. For Z0 only, materialSample_H_E0_envelope(gamma=3/4,A=0) may remove the bounded height factor. Z1 retains it. Use T=v+chi'*A*Z0 in products with e or Z1, and chi'*A*Z1 in the charged source. Thus every charged term retains exactly one height factor.",
+    "actual_equation_suppliers": [
+      "N01ReturnTransportRecurrences.returnFlowInverseSlope_diagonal_recurrence",
+      "N01ReturnTransportRecurrences.returnCorrectionPulledDisplacement_diagonal_recurrence",
+      "N01ReturnTransportRecurrences.jointMixedDiagonal_add_triple_mul",
+      "N04ActualMinusSpeedStripTower.n04_actualMinusSpeed_eq_original_add_residual: same stored L speed from the literal hcoeff/hflow",
+      "N04ActualMinusFirstIntegralTransportTowers: true full-integral mixed radial recurrence; subtract the actual reference function to obtain the inhomogeneous e equation"
+    ],
+    "not_homogeneous": "The full integral I satisfies transport; e=I-I0 has the nonzero forcing displayed above. Do not reuse the homogeneous I recurrence as an equation for e.",
+    "available_actual_inputs": [
+      "coefficient-increment joint tower and raw charged mixed bounds",
+      "retained quantitative buffer and cutoff all-order material jets",
+      "unweighted original-speed joint growth on that buffer",
+      "actual transport recurrences and stored-speed identity"
+    ],
+    "pending_producers": [
+      "fixed-base pure angular estimates for A,Z,e from the complete actual circle chain, uniform in all radial selectors and for the same J",
+      "full-forward shifted-circle ordered-jet growth; hF159 covers only the source-last tensor used by inverse349",
+      "actual normalized increment and normalized forcing glue from the earlier sections",
+      "radial numerical induction with exact finite degree/charge sums and actual multilinear normalization",
+      "sample alignment using actual geometry before combining circle and physical coefficient estimates"
+    ],
+    "previously_reviewed_fixed_base_sources": {
+      "endpoint115": "09a1696b57c7fe3678cc6e10e419bb8fa22c0c11",
+      "positive_inverse301": "1f55edbb185fe33327757a087479196cc8565e4f",
+      "source_last_forward159": "4ea70ab43fc1fa6e51ddcfa3849f97580bf02235",
+      "inverse349_layout": "45fae56b12e755379fcf3e4aa3e211ba0cfe9c7a",
+      "composition328": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+      "actual_selector_inverse152": "054e86dbc3a61f36df0ff4fd7ddf71aefeacb117"
+    },
+    "historical_status": "Source-only peer evidence remains historical. This route does not assert all those modules are active/compiled, and historical tower imports need explicit current-main rebinding."
+  },
+  "exterior_and_sample_obligations": {
+    "safe_scope": "The normalized forcing construction uses the full retained buffer V_m, because the quantitative coefficient/discriminant lower is supplied there.",
+    "inner_guard": "On Icc(x_m-delta_m/2)(x_m+delta_m/2), min(r-C.left m,C.right m-r)≥delta_m/2. This follows from the strictly interior full buffer. Weighted ordinary-flow radial derivatives may therefore be unweighted on this smaller guard using the same material delta_m^(-1) bound.",
+    "full_buffer_distance_warning": "The same data do not give min distance≥delta_m/2 on the entire larger Icc(x_m-delta_m)(x_m+delta_m). Use its separate raw coefficient/discriminant lower instead.",
+    "actual_outer_supplier": {
+      "source": "Nonlinear",
+      "declaration": "OrdinaryFlowFamilyTameBounds",
+      "exact_definition": "def OrdinaryFlowFamilyTameBounds (T : MaterialData) (S : PhysicalSpacesData)\n    (C : NonlinearGeometryData S) (base loss : ℕ) (ε : ℝ) : Prop :=\n  ∀ k : ℕ, ∃ parameterLoss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b p,\n    a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →\n    ∃ J : SmoothDirections (stateNeighborhood S C base ε) (ordinaryFlowFamily S C m a b p),\n      ∀ z ∈ stateNeighborhood S C base ε, ∀ v : Fin k → (AnnularState S × ℝ),\n        min (p.1 - C.left m) (C.right m - p.1) ^ a * |J.D k z v| ≤\n          B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *\n          T.E0 (T.sample (C.cell m)) ^ B *\n          oneHighVariationWeight (pairGrading (stateGrading S) realGrading)\n            base (s + loss + parameterLoss) (z - (C.referenceState, 0)) v\n",
+      "role": "A genuine clause of the same N01 witness. It retains H(sample(C.cell m))^(3/4) and min-distance^a on the whole open component. It supplies actual ordinary forward-flow differences, not every inverse/travel/gauge field."
+    },
+    "remaining_outer_work": "Use actual cutoff constant germs and original-flow/endpoint identities off the supported transition, retaining the distance weight or proving genuine root-model cancellation. A uniform raw discriminant floor for a whole negative half is not supplied.",
+    "sample_alignment": "Display actual containing-point/index hypotheses before mixing circle label m, C.cell m and retained host j_m. material_actualCells_index_bound, radialE_rpow_of_nat_sub_bound and materialSample_H_E0_rpow_of_index_sub_bound transfer powers while retaining gamma=3/4. No identity among these labels is assumed.",
+    "final_scope": "Whole-region gluing, coordinate composition and actual canonical scaling remain CurrentJets assembly obligations after buffer forcing and radial induction."
+  },
+  "execution_order_when_authorized": [
+    {
+      "step": 1,
+      "deliverable": "Actual normalized coefficient-increment joint bound",
+      "depends_on": "existing 100/249/249/245 sources and material sample comparison",
+      "target_bound_assumed": false
+    },
+    {
+      "step": 2,
+      "deliverable": "Actual normalized original-speed difference on the same retained buffer; mixed one-high bound",
+      "depends_on": "step1 plus public weighted products/powers and same153 lower",
+      "target_bound_assumed": false
+    },
+    {
+      "step": 3,
+      "deliverable": "Full-forward circle ordered-jet identity and fixed-base growth; remaining finite actual operation chain",
+      "depends_on": "prior full-forward route, existing kernel, final301/328/115/152",
+      "target_bound_assumed": false
+    },
+    {
+      "step": 4,
+      "deliverable": "Fixed-base radial induction using the D0/c_k budget and actual inhomogeneous equations",
+      "depends_on": "steps2/3, explicit sample comparison and sameJ equations",
+      "target_bound_assumed": false
+    },
+    {
+      "step": 5,
+      "deliverable": "Outer/root weighted closure and actual CurrentJets assembly; k0 no-constant difference last",
+      "depends_on": "true outer suppliers/germs, prior k0 MVT route",
+      "target_bound_assumed": false
+    }
+  ],
+  "validation": {
+    "all_22_source_blobs_rehashed": true,
+    "new_compile_claim": false,
+    "new_full_dependency_graph_claim": false,
+    "critical_main_pin_checks": [
+      "N01CoefficientJointTower",
+      "N01CoefficientSpatialJets",
+      "JointJetSpatialRegularity",
+      "MixedJointTameBounds",
+      "JointMixedTameBounds",
+      "CircleUniformAngularInterpolation",
+      "Nonlinear"
+    ],
+    "independent_narrow_checks": [
+      "audit_coordinates read MixedJointTameBounds16fdec and actual speed b95f6; confirmed that the full multiplicative h_m must be in C, not the theorem's affine H; confirmed forcing sign and rationalized algebra.",
+      "audit_coordinates checked D0/c_k Nat budgets and fixed-B quantifiers, but explicitly did not certify missing actual primitive supplies."
+    ],
+    "persistence": "Git blob creation plus exact server readback; root attaches the artifact to a backup separately. No commit/ref action by this agent."
+  },
+  "header_scope": "Exact source-level declaration text is included; enclosing section variables/instances are fixed by each fully fingerprinted source. These are not freshly elaborated declarations."
+}
