@@ -137,7 +137,8 @@ private theorem n08_minusFlow_rhs_parameter_zero
       (angularPartial (heightAngular (fun p => Z (0, p))) (r, f 0)) :=
     (div_pos_iff_of_pos_right (n08_stateProfile_pos hg x hcore)).mp
       (lt_of_lt_of_le (by norm_num) hQlo)
-  obtain ⟨B, _, hBj⟩ := hjet 1 0
+  obtain ⟨parameterLoss, hparameter⟩ := hjet 1
+  obtain ⟨B, _, hBj⟩ := hparameter 0
   obtain ⟨J, _⟩ := hBj m 0 0 (r, θ) (by simp) hr
   have hc : HasDerivAt f
       (J.D 1 (x, 0) (Fin.cons ((0 : AnnularState S), (1 : ℝ)) Fin.elim0)) 0 :=

@@ -1,0 +1,13 @@
+src/ContinuousFlexibility/Analysis/CircleUnitIntegral.lean
+src/ContinuousFlexibility/Analysis/SmoothDirectionsUnitIntegral.lean
+src/ContinuousFlexibility/Analysis/TameUnitIntegralLinearFamily.lean
+src/ContinuousFlexibility/Analysis/CoupledCircleAverageSmooth.lean
+src/ContinuousFlexibility/Analysis/CoupledCircleErrorSmooth.lean
+src/ContinuousFlexibility/Blueprint/N09N10.lean
+src/ContinuousFlexibility/Blueprint/R10a/Geometry.lean
+src/ContinuousFlexibility/Radial/SelectedLaterTerminalData.lean
+src/ContinuousFlexibility/Radial/SelectedLaterTerminalRegional.lean
+src/ContinuousFlexibility/Radial/R10aRegionalConstruction.lean
+src/ContinuousFlexibility/Blueprint/R10a/Poisson.lean
+src/ContinuousFlexibility/Blueprint/R10a/Regional.lean
+src/ContinuousFlexibility/Blueprint/R10a.lean

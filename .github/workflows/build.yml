@@ -80,7 +80,19 @@ jobs:
             if [ -z "$id" ]; then echo "$line @${head:0:8}: no green run"; continue; fi
             dir="$RUNNER_TEMP/line-build-$id"
             if gh run download "$id" -R "$GITHUB_REPOSITORY" -n lake-build-line -D "$dir"; then
-              tar --zstd -xf "$dir/lake-build.tar.zst"
+              if [ -f "$dir/lake-build.tar.zst" ]; then
+                # Compatibility with line artifacts uploaded before chunking.
+                tar --zstd -xf "$dir/lake-build.tar.zst"
+              else
+                shopt -s nullglob
+                parts=("$dir"/lake-build.tar.zst.part-[0-9][0-9][0-9][0-9][0-9][0-9])
+                if [ "${#parts[@]}" -eq 0 ]; then
+                  echo "::warning::$line @${head:0:8}: run $id has no recognized build archive"
+                  continue
+                fi
+                # Fixed-width numeric suffixes make glob order archive order.
+                cat "${parts[@]}" | tar --zstd -xf -
+              fi
               echo "$line @${head:0:8}: reused the build of run $id"
             else
               echo "$line @${head:0:8}: run $id has no build artifact"
@@ -179,9 +191,30 @@ jobs:
         if: always()
         shell: bash
         run: |
-          total=$(find src/ContinuousFlexibility -name '*.lean' | wc -l)
-          built=$(find .lake/build/lib/lean/ContinuousFlexibility -name '*.olean' ! -name '*.server.olean' ! -name '*.private.olean' | wc -l)
-          echo "modules compiled / total: $built / $total"
+          python3 - <<'PYCOUNT'
+          from pathlib import Path
+
+          source_root = Path("src")
+          artifact_root = Path(".lake/build/lib/lean")
+          excluded = set()
+          for line in Path("scripts/root_exclude.txt").read_text(encoding="utf-8").splitlines():
+              name = line.split("#", 1)[0].strip()
+              if name:
+                  excluded.add(name)
+          sources = list((source_root / "ContinuousFlexibility").rglob("*.lean"))
+          built = 0
+          excluded_count = 0
+          for source in sources:
+              relative = source.relative_to(source_root)
+              module = ".".join(relative.with_suffix("").parts)
+              if module in excluded:
+                  excluded_count += 1
+                  continue
+              if (artifact_root / relative.with_suffix(".olean")).is_file():
+                  built += 1
+          print(f"modules compiled / total: {built} / {len(sources)}")
+          print(f"modules excluded from generated root: {excluded_count}")
+          PYCOUNT
       - name: Blueprint status and endpoint axioms
         shell: bash
         run: lake env lean scripts/BlueprintStatus.lean
@@ -202,23 +235,41 @@ jobs:
           fi
       - name: Pack this line's build for main
         # Main downloads it when it merges this exact head (see above).
+        # Stream into 4 MiB parts so every uploaded member stays below 5 MB.
         if: startsWith(github.ref_name, 'line/') && success()
         shell: bash
         run: |
+          set -o pipefail
           find .lake/build/ir -name '*.setup.json' -delete 2>/dev/null || true
-          tar --zstd -cf lake-build.tar.zst .lake/build
-          ls -lh lake-build.tar.zst
+          parts_dir="$RUNNER_TEMP/lake-build-parts"
+          mkdir -p "$parts_dir"
+          tar --zstd -cf - .lake/build |
+            split --bytes=4194304 --numeric-suffixes=0 --suffix-length=6 - "$parts_dir/lake-build.tar.zst.part-"
+          du -sh "$parts_dir"
       - uses: actions/upload-artifact@v4
         if: startsWith(github.ref_name, 'line/') && success()
         with:
           name: lake-build-line
-          path: lake-build.tar.zst
+          path: ${{ runner.temp }}/lake-build-parts/lake-build.tar.zst.part-*
           retention-days: 3
           compression-level: 0
+      - name: Prepare bounded log artifacts
+        if: always()
+        timeout-minutes: 1
+        continue-on-error: true
+        shell: bash
+        run: |
+          log_dir="$RUNNER_TEMP/build-log-parts"
+          mkdir -p "$log_dir"
+          for log in build.log quick.log; do
+            [ -f "$log" ] || continue
+            split --bytes=4194304 --numeric-suffixes=0 --suffix-length=6 "$log" "$log_dir/$log.part-"
+          done
       - uses: actions/upload-artifact@v4
+        # Log publishing is optional; proof validation is enforced by the build and axiom steps.
+        timeout-minutes: 2
+        continue-on-error: true
         if: always()
         with:
           name: build-log
-          path: |
-            build.log
-            quick.log
+          path: ${{ runner.temp }}/build-log-parts/*.part-*
