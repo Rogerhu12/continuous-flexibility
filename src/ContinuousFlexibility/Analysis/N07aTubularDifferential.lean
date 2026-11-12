@@ -12,8 +12,6 @@ noncomputable section
 
 namespace ContinuousFlexibility.Analysis
 
-open ContinuousFlexibility.Statements
-
 theorem n07a_tubularMap_hasFDerivAt
     {G : PolarPoint → PolarPoint} {R θ₀ : ℝ}
     (hG : DifferentiableAt ℝ G (R, θ₀)) :

@@ -74,7 +74,9 @@ def zero (T : MaterialData) {S : PhysicalSpacesData} (K : CanonicalData S) (a : 
 
 @[simp] theorem eval_zero {E : Type*} [AddCommGroup E] [Module ℝ E]
     (p : ℕ → Seminorm ℝ E) (d : ℕ) (z : E) (m : ℕ) :
-    (zero T K a).eval p d z m = 0 := by simp [eval, zero]
+    (zero T K a).eval p d z m = 0 := by
+  change Finset.sum (Finset.univ : Finset Empty) _ = 0
+  exact Finset.sum_eq_zero fun i _ => Empty.elim i
 
 def constant (e : ℕ → ℝ) (he : N07aSampleSubpower T K e) (he0 : ∀ m, 0 ≤ e m) :
     N07aJetBudgetExpression T K 0 where
@@ -90,7 +92,9 @@ def constant (e : ℕ → ℝ) (he : N07aSampleSubpower T K e) (he0 : ∀ m, 0 �
 @[simp] theorem eval_constant {E : Type*} [AddCommGroup E] [Module ℝ E]
     (e : ℕ → ℝ) (he : N07aSampleSubpower T K e) (he0 : ∀ m, 0 ≤ e m)
     (p : ℕ → Seminorm ℝ E) (d : ℕ) (z : E) (m : ℕ) :
-    (constant e he he0).eval p d z m = e m := by simp [eval, constant]
+    (constant e he he0).eval p d z m = e m := by
+  change (∑ _i : Unit, e m * ∏ j : Fin 0, (1 + p (Fin.elim0 j + d) z)) = e m
+  simp only [Fin.prod_univ_zero, mul_one, Fintype.sum_unique]
 
 /-- Append the untouched grading factors of one chain-rule term. -/
 def appendFactors (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
@@ -116,10 +120,15 @@ theorem eval_appendFactors {E : Type*} [AddCommGroup E] [Module ℝ E]
     (e.appendFactors hD hT order c hc hc0).eval p d z m =
       e.eval p d z m * (c m * ∏ j, (1 + p (order j + d) z)) := by
   letI := e.finite
-  simp only [eval, appendFactors, Fin.prod_univ_add,
-    Fin.addCases_left, Fin.addCases_right, Finset.sum_mul]
+  change (∑ i : e.Index, (e.coeff i m * c m) *
+      ∏ j : Fin (e.arity i + k), (1 + p (Fin.addCases (e.order i) order j + d) z)) =
+    (∑ i : e.Index, e.coeff i m * ∏ j : Fin (e.arity i),
+      (1 + p (e.order i j + d) z)) * (c m * ∏ j, (1 + p (order j + d) z))
+  rw [Finset.sum_mul]
   apply Finset.sum_congr rfl
   intro i _
+  rw [Fin.prod_univ_add]
+  simp only [Fin.addCases_left, Fin.addCases_right]
   ring
 
 /-- A finite sum uses the disjoint union of its monomial indices. -/
@@ -141,7 +150,11 @@ theorem eval_sum {E : Type*} [AddCommGroup E] [Module ℝ E]
     (p : ℕ → Seminorm ℝ E) (d : ℕ) (z : E) (m : ℕ) :
     (sum e).eval p d z m = ∑ i, (e i).eval p d z m := by
   letI (i : ι) := (e i).finite
-  simp only [eval, sum, Fintype.sum_sigma]
+  change (∑ i : Σ j, (e j).Index, (e i.1).coeff i.2 m *
+      ∏ j, (1 + p ((e i.1).order i.2 j + d) z)) =
+    ∑ i : ι, ∑ j : (e i).Index, (e i).coeff j m *
+      ∏ k, (1 + p ((e i).order j k + d) z)
+  exact Fintype.sum_sigma _
 
 /-- One common low order and loss estimate every finite expression at
 every budget. The number of monomials enters only the sampled envelope. -/

@@ -126,7 +126,7 @@ private theorem n07a_trace_angular_sections {l r : ℝ} {u : PolarPoint → ℝ}
       IntervalIntegrable (fun θ => u (x, θ)) volume 0 (2 * Real.pi) := by
   have hp : Integrable u ((volume.restrict (Ioc l r)).prod
       (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi)))) := by
-    simpa only [Measure.prod_restrict, ← Measure.volume_eq_prod] using hu
+    simpa only [Measure.prod_restrict, ← Measure.volume_eq_prod] using hu.integrable
   filter_upwards [hp.prod_right_ae] with x hx
   exact (intervalIntegrable_iff_integrableOn_Ioc_of_le
     (by positivity : (0 : ℝ) ≤ 2 * Real.pi)).mpr hx
@@ -150,10 +150,15 @@ theorem n07a_trace_angularMoment_integrable {l r : ℝ} (hlr : l ≤ r)
       ((volume.restrict (Ioc l r)).prod
         (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi)))) := by
     simpa only [Measure.prod_restrict, ← Measure.volume_eq_prod] using hi
-  rw [intervalIntegrable_iff_integrableOn_Ioc_of_le hlr]
-  simpa only [n07aTraceAngularMoment, radialAngularMean, IntegrableOn,
-    intervalIntegral.integral_of_le (by positivity : (0 : ℝ) ≤ 2 * Real.pi)] using
-      hp.integral_prod_left.const_mul ((2 * Real.pi)⁻¹)
+  have hmoment : n07aTraceAngularMoment β u =
+      fun x => (2 * Real.pi)⁻¹ *
+        ∫ θ in Ioc (0 : ℝ) (2 * Real.pi), u (x, θ) * β θ := by
+    funext x
+    simp only [n07aTraceAngularMoment, radialAngularMean,
+      intervalIntegral.integral_of_le (by positivity : (0 : ℝ) ≤ 2 * Real.pi)]
+  rw [hmoment, intervalIntegrable_iff_integrableOn_Ioc_of_le hlr]
+  have hmomentInt := hp.integral_prod_left.const_mul ((2 * Real.pi)⁻¹)
+  exact ⟨hmomentInt.aestronglyMeasurable, hmomentInt.hasFiniteIntegral⟩
 
 private theorem n07a_trace_interval_localize {D : ReferenceData} {l r : ℝ}
     (hsub : Icc l r ⊆ radialCore D) {f : ℝ → ℝ}
@@ -217,7 +222,11 @@ theorem n07a_referenceGraph_product_divergence
       (fun x => U.2 * referenceColumn D x * κ) volume l r :=
     hCcont.intervalIntegrable l r
   have hg : IntervalIntegrable (n07aTraceAngularRhs D U F β) volume l r := by
-    simpa only [n07aTraceAngularRhs, q, κ] using (hFM.sub hqU).sub hCi
+    change IntervalIntegrable
+      (fun x => n07aTraceAngularMoment β F.1 x -
+        q x * n07aTraceAngularMoment (deriv (deriv β)) U.1 x -
+        U.2 * referenceColumn D x * κ) volume l r
+    exact (hFM.sub hqU).sub hCi
   refine ⟨hUM, hg, ?_⟩
   intro φ hφ hφc hφs
   let dφ : ℝ → ℝ := fun x => deriv (fun y => D.w y * deriv φ y) x

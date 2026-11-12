@@ -24,14 +24,20 @@ theorem n07a_orderedPartition_eq_atomic_of_length_eq
     have hb := n07a_partition_source_order c
     have hsum : (∑ j, (c.partSize j - 1)) = 0 := by omega
     have hi : c.partSize i - 1 ≤ ∑ j, (c.partSize j - 1) :=
-      Finset.single_le_sum (fun _ _ => Nat.zero_le _) (Finset.mem_univ i)
+      Finset.single_le_sum (f := fun j : Fin c.length => c.partSize j - 1)
+        (fun _ _ => Nat.zero_le _) (Finset.mem_univ i)
     have hp := c.partSize_pos i
     omega
   rcases c with ⟨l, size, hpos, emb, hemb, hparts, hdis, hcover⟩
   dsimp only at h hs
   subst l
   obtain rfl : size = fun _ : Fin n => 1 := funext hs
-  have hmono : StrictMono (fun i : Fin n => emb i 0) := by simpa only using hparts
+  have hzero (i : Fin n) :
+      (⟨1 - 1, Nat.sub_one_lt_of_lt (hpos i)⟩ : Fin 1) = 0 :=
+    Subsingleton.elim _ _
+  have hmono : StrictMono (fun i : Fin n => emb i 0) := by
+    intro i j hij
+    simpa only [hzero] using hparts hij
   have he (i : Fin n) (j : Fin 1) : emb i j = i := by
     have hj : j = 0 := Subsingleton.elim _ _
     simpa only [hj] using hmono.apply_eq (x := i)
@@ -88,11 +94,12 @@ theorem n07a_norm_inverse_jet_le_partition_sum
       transformed, ContinuousMultilinearMap.compContinuousLinearMap_apply] using h
   have hatomic : transformed (OrderedFinpartition.atomic n) = iteratedFDeriv ℝ n F (G y) := by
     ext v
-    simp only [transformed, ContinuousMultilinearMap.compContinuousLinearMap_apply,
-      term, OrderedFinpartition.compAlongOrderFinpartition_apply,
-      OrderedFinpartition.applyOrderedFinpartition_apply,
-      OrderedFinpartition.atomic_length, OrderedFinpartition.atomic_partSize,
-      iteratedFDeriv_one_apply, Function.comp_apply, OrderedFinpartition.atomic_emb, hGV]
+    change (iteratedFDeriv ℝ n F (G y))
+        (fun i : Fin n => iteratedFDeriv ℝ 1 G y (fun _ : Fin 1 => V (v i))) =
+      (iteratedFDeriv ℝ n F (G y)) v
+    apply congrArg (iteratedFDeriv ℝ n F (G y))
+    funext i
+    exact (iteratedFDeriv_one_apply (fun _ : Fin 1 => V (v i))).trans (hGV (v i))
   have hsplit := Finset.sum_erase_add (s := Finset.univ) (f := transformed)
     (Finset.mem_univ (OrderedFinpartition.atomic n))
   rw [htsum] at hsplit
@@ -137,7 +144,7 @@ theorem n07a_norm_inverse_jet_le_partition_sum
           have he : c = OrderedFinpartition.atomic n := by
             by_contra hne
             exact hnot (Finset.mem_erase.mpr ⟨hne, hc⟩)
-          simp only [he, if_pos rfl])
+          exact if_pos he)
       rw [← heq]
       apply Finset.sum_congr rfl
       intro c hc

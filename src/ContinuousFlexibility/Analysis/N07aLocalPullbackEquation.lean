@@ -257,8 +257,8 @@ theorem n07a_localPullback_divergence_chain
     show angularPartial _ x = angularPartial
       (fun q => Ar q * (radialPartial v ∘ F) q + At q * (angularPartial v ∘ F) q) x
       from hangular',
-    radialPartial_add (hdNr.mul hdvrF) (hdNt.mul hdvtF),
-    angularPartial_add (hdAr.mul hdvrF) (hdAt.mul hdvtF),
+    radialPartial_add (hdNr.fun_mul hdvrF) (hdNt.fun_mul hdvtF),
+    angularPartial_add (hdAr.fun_mul hdvrF) (hdAt.fun_mul hdvtF),
     radialPartial_mul hdNr hdvrF, radialPartial_mul hdNt hdvtF,
     angularPartial_mul hdAr hdvrF, angularPartial_mul hdAt hdvtF,
     n07a_localPullback_radial_chain hdF hdvr, n07a_localPullback_radial_chain hdF hdvt,
@@ -315,6 +315,7 @@ theorem n07a_localPullback_normal_equation
     congrArg₂ (fun r t : PolarPoint →L[ℝ] ℝ => r (1, 0) + t (0, 1))
       hNr.fderiv_eq hAt.fderiv_eq
   have hchain := n07a_localPullback_divergence_chain hU hV ha hb hc hF hv hFmap (hGmap hy)
+  dsimp only at hchain
   rw [hFG y hy] at hchain
   have hsource := hchain.symm.trans (hdiv.trans (heq (hGmap hy)))
   have hn := n07a_localPullback_normal_algebra (r := v y) (hne y hy) hsource

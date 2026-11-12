@@ -124,7 +124,7 @@ theorem n07a_angularIntegral_ae_of_ae
   have hprod : u =ᵐ[(volume.restrict (Ioo l r)).prod
       (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi)))] v := by
     simpa only [Measure.prod_restrict, ← Measure.volume_eq_prod] using huv
-  filter_upwards [Measure.ae_ae_eq_curry_of_prod hprod] with x hx
+  filter_upwards [Measure.ae_ae_of_ae_prod hprod] with x hx
   unfold radialAngularMean
   apply congrArg (fun y : ℝ => (2 * Real.pi)⁻¹ * y)
   apply intervalIntegral.integral_congr_ae_restrict

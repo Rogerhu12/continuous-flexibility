@@ -121,7 +121,8 @@ theorem n07a_tubularCutCoordinates_exists
   have hA : (A : PolarPoint →L[ℝ] PolarPoint) = fderiv ℝ G q₀ :=
     planeLinearEquivOfBijective_coe _ _
   have hAsymm : (A.symm : PolarPoint →L[ℝ] PolarPoint) = fderiv ℝ F (Γ θ₀) := by
-    ext v
+    apply ContinuousLinearMap.ext
+    intro v
     have heq := hleftInv (A.symm v)
     rw [← hA] at heq
     simpa only [ContinuousLinearEquiv.apply_symm_apply] using heq.symm

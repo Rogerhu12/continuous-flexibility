@@ -53,7 +53,8 @@ def mixed (l r a b : ℝ) (u : PolarPoint → ℝ) (i j : ℕ) (p : PolarPoint) 
 variable {l r a b : ℝ} {u : PolarPoint → ℝ}
 
 theorem mixed_zero (p : PolarPoint) : mixed l r a b u 0 0 p = u p := by
-  simp only [mixed, Nat.zero_add, iteratedFDerivWithin_zero_apply]
+  unfold mixed
+  exact iteratedFDerivWithin_zero_apply _
 
 theorem mixed_one_radial (hlr : l < r) (hab : a < b) {p : PolarPoint}
     (hp : p ∈ closedRect l r a b) :
@@ -61,7 +62,6 @@ theorem mixed_one_radial (hlr : l < r) (hab : a < b) {p : PolarPoint}
   simp only [mixed, Nat.add_zero,
     iteratedFDerivWithin_one_apply (uniqueDiffOn_closedRect hlr hab p hp)]
   congr 1
-  simp [word, cylinderBasisVector]
 
 theorem continuousOn_mixed (hlr : l < r) (hab : a < b)
     (hu : ContDiffOn ℝ ∞ u (closedRect l r a b)) (i j : ℕ) :
@@ -102,6 +102,7 @@ theorem word_eq_mixed (hlr : l < r) (hab : a < b)
       (mixed l r a b u (∑ k, if w k = 0 then 1 else 0)
         (∑ k, if w k = 0 then 0 else 1)) (openRect l r a b) := by
     intro q hq
+    dsimp only
     have hactual := iteratedFDerivWithin_eq_iteratedFDeriv
       (uniqueDiffOn_closedRect hlr hab)
       ((hopen.contDiffAt (hs.mem_nhds hq)).of_le (by simp : (n : ℕ∞ω) ≤ ∞))
@@ -115,7 +116,7 @@ theorem word_eq_mixed (hlr : l < r) (hab : a < b)
       (fun k => cylinderBasisVector (w k))).continuous.comp_continuousOn
         (hu.continuousOn_iteratedFDerivWithin (by simp) (uniqueDiffOn_closedRect hlr hab))
   exact he.of_subset_closure hcont (continuousOn_mixed hlr hab hu _ _)
-    (open_subset_closed _ _ _ _) (by rw [closure_openRect hlr hab]; exact Subset.rfl) hp
+    (open_subset_closed _ _ _ _) (by rw [closure_openRect hlr hab]) hp
 
 /-- Angular differentiation of a boundary trace is the next actual
 closed mixed jet at every interior angular coordinate. -/
@@ -126,6 +127,7 @@ theorem mixed_angular_hasDerivAt (hlr : l < r) (hab : a < b)
       (mixed l r a b u i (j + 1) (t, θ)) θ := by
   let n := i + j
   let v : Fin n → PolarPoint := fun k => cylinderBasisVector (word i j k)
+  let w : Fin (n + 1) → Fin 2 := Fin.cons (1 : Fin 2) (word i j)
   let A := ContinuousMultilinearMap.apply ℝ (fun _ : Fin n => PolarPoint) ℝ v
   have hx : (t, θ) ∈ closedRect l r a b := ⟨ht, Ioo_subset_Icc_self hθ⟩
   have hn : (n : ℕ∞ω) < ∞ := WithTop.coe_lt_coe.mpr (ENat.natCast_lt_top n)
@@ -139,15 +141,17 @@ theorem mixed_angular_hasDerivAt (hlr : l < r) (hab : a < b)
     (iteratedFDerivWithin ℝ (n + 1) u (closedRect l r a b) (t, θ)
       (Fin.cons (0, 1) v)) (Icc a b) θ at hangle
   have hv : Fin.cons (0, 1) v =
-      fun k => cylinderBasisVector (Fin.cons (1 : Fin 2) (word i j) k) := by
+      fun k => cylinderBasisVector (w k) := by
     funext k
-    refine Fin.cases ?_ (fun _ => rfl) k
-    simp only [Fin.cons_zero, cylinderBasisVector, if_neg (by decide : (1 : Fin 2) ≠ 0)]
+    refine Fin.cases ?_ (fun k => ?_) k
+    · simp only [w, Fin.cons_zero, cylinderBasisVector,
+        ite_eq_right (by decide : (1 : Fin 2) ≠ 0)]
+    · simp only [w, Fin.cons_succ, v]
   have hsort : iteratedFDerivWithin ℝ (n + 1) u (closedRect l r a b) (t, θ)
       (Fin.cons (0, 1) v) = mixed l r a b u i (j + 1) (t, θ) := by
     rw [hv]
-    have h := word_eq_mixed hlr hab hu (n + 1) (Fin.cons (1 : Fin 2) (word i j)) hx
-    simpa [Fin.sum_univ_succ, word, Fin.sum_univ_add, Nat.add_comm] using h
+    have h := word_eq_mixed hlr hab hu (n + 1) w hx
+    simpa [w, Fin.sum_univ_succ, word, Fin.sum_univ_add, Nat.add_comm] using h
   rw [hsort] at hangle
   exact hangle.hasDerivAt (Icc_mem_nhds hθ.1 hθ.2)
 

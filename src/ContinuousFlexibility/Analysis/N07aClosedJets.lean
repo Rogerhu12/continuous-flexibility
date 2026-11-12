@@ -54,7 +54,8 @@ theorem scalarGradient_norm_le (a b : ℝ) :
 
 theorem scalarCLM_eq_gradient (L : PolarPoint →L[ℝ] ℝ) :
     L = scalarGradient (L (1, 0)) (L (0, 1)) := by
-  ext v
+  apply ContinuousLinearMap.ext
+  intro v
   rw [scalarGradient_apply]
   have hv : v = v.1 • (1, 0) + v.2 • (0, 1) := by
     ext <;> simp [smul_eq_mul]

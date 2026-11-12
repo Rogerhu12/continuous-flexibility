@@ -36,13 +36,13 @@ theorem n07a_parameterGrading_lt_twice_radius
     {b s : ℕ} {η : ℝ} {z : CanonicalGeometry.Parameter S}
     (hs : s ≤ b) (hz : z ∈ sectorNeighborhood S b η η) :
     CanonicalGeometry.parameterGrading S s z < 2 * η := by
-  have h₁ := (solve_sectorGrading_monotone S hs z.1).trans_lt hz.1
-  have h₂ := hz.2
+  have h₁ : sectorGrading S s z.1 < η :=
+    (solve_sectorGrading_monotone S hs z.1).trans_lt hz.1
+  have h₂ : |z.2| < η := hz.2
   have he : CanonicalGeometry.parameterGrading S s z =
       sectorGrading S s z.1 + |z.2| :=
     pairGrading_apply (E := StateDirections S) (F := ℝ) (sectorGrading S) realGrading s z
-  rw [he]
-  linarith only [h₁, h₂]
+  exact he.le.trans_lt (by linarith only [h₁, h₂])
 
 theorem n07a_inverseChart_radial_displacement
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
@@ -57,11 +57,8 @@ theorem n07a_inverseChart_radial_displacement
               (K.inverseChart (C.referenceState, 0) m y).1| ≤
             e m * T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) *
               CanonicalGeometry.parameterGrading S low z := by
-  let low : ℕ := hcur.2.1.choose
-  have hdiff := hcur.2.1.choose_spec
-  let B : ℝ := (hdiff 0).choose
-  have hB : 0 < B := (hdiff 0).choose_spec.1
-  have hBb := (hdiff 0).choose_spec.2
+  obtain ⟨low, hdiff⟩ := hcur.2.1
+  obtain ⟨B, hB, hBb⟩ := hdiff 0
   let e : ℕ → ℝ := fun m =>
     (K.physicalRight m - K.physicalLeft m) * (B * T.E0 (T.sample (K.cell m)) ^ B)
   have he : N07aSampleSubpower T K e := N07aSampleSubpower.mul hD hT

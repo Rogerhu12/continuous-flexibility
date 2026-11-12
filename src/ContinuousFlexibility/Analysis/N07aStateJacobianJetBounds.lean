@@ -86,9 +86,9 @@ theorem n07a_stateDirectionalComponent_sampleJets
     A.contDiff.contDiffOn.comp hds (mapsTo_univ _ _)
   have hd := (hds.contDiffAt ((hW z hz m).mem_nhds hx))
   have hA := A.norm_iteratedFDeriv_comp_left hd (n := n) (by simp)
-  have hdir := norm_iteratedFDeriv_clm_apply_const (c := v) (n := n)
-    (((hFs z hz m).contDiffAt ((hW z hz m).mem_nhds hx)).fderiv_right (by simp))
-    (by simp)
+  have hfd : ContDiffAt ℝ ∞ (fderiv ℝ (F z m)) x :=
+    ((hFs z hz m).contDiffAt ((hW z hz m).mem_nhds hx)).fderiv_right (by simp)
+  have hdir := norm_iteratedFDeriv_clm_apply_const (c := v) (n := n) hfd (by simp)
   rw [norm_iteratedFDeriv_fderiv] at hdir
   have hbnd := heb z hz m x hx
   simp only [Nat.add_sub_cancel] at hbnd
@@ -136,7 +136,8 @@ theorem n07a_statePlaneJacobian_sampleJets
     (fun z hz m => ((hs (1, 0) z hz.1 m).fst).mul ((hs (0, 1) z hz.1 m).snd))
     (fun z hz m => contDiffOn_const.mul
       (((hs (1, 0) z hz.1 m).snd).mul ((hs (0, 1) z hz.1 m).fst)))
-  refine ⟨low, loss, ?_⟩
-  simpa only [planeJacobian, sub_eq_add_neg, neg_one_mul] using hsum
+  refine ⟨low, loss, hsum.congr (fun z hz => hW z hz.1) ?_⟩
+  intro z hz m x hx
+  simp only [R, A, planeJacobian, sub_eq_add_neg, neg_one_mul]
 
 end ContinuousFlexibility.Analysis

@@ -53,7 +53,11 @@ theorem neg
   intro n
   obtain ⟨e, he, he0, heb⟩ := hf n
   refine ⟨e, he, he0, fun m x hx => ?_⟩
-  simpa only [iteratedFDeriv_neg_apply, norm_neg] using heb m x hx
+  have hneg : ‖iteratedFDeriv ℝ n (fun y => -(f m y)) x‖ =
+      ‖iteratedFDeriv ℝ n (f m) x‖ := by
+    simpa only [Pi.neg_def, norm_neg] using
+      congrArg norm (iteratedFDeriv_neg_apply (𝕜 := ℝ) (i := n) (f := f m) (x := x))
+  exact hneg.le.trans (heb m x hx)
 
 end N07aAngularFixedJetEnvelope
 
@@ -66,7 +70,9 @@ theorem n07a_norm_iteratedFDeriv_abs
     have he : (fun y => |f y|) =ᶠ[𝓝 x] (fun y => -(f y)) := by
       filter_upwards [hnear] with y hy
       exact abs_of_neg hy
-    rw [(he.iteratedFDeriv ℝ n).eq_of_nhds, iteratedFDeriv_neg_apply, norm_neg]
+    rw [(he.iteratedFDeriv ℝ n).eq_of_nhds]
+    simpa only [Pi.neg_def, norm_neg] using
+      congrArg norm (iteratedFDeriv_neg_apply (𝕜 := ℝ) (i := n) (f := f) (x := x))
   · have hnear : ∀ᶠ y in 𝓝 x, 0 < f y := hf.eventually (Ioi_mem_nhds hpos)
     have he : (fun y => |f y|) =ᶠ[𝓝 x] f := by
       filter_upwards [hnear] with y hy
@@ -146,7 +152,11 @@ theorem n07a_planeJacobian_fixedEnvelope_of_positiveJets
   have hsum := hP.add hD hT hW
     (fun m => ((hs (1, 0) m).fst).mul ((hs (0, 1) m).snd))
     (fun m => (((hs (1, 0) m).snd).mul ((hs (0, 1) m).fst)).neg) hQ.neg
-  simpa only [planeJacobian, sub_eq_add_neg] using hsum
+  refine hsum.congr hW ?_
+  intro m x _
+  change planeJacobian (F m) x =
+    (R m x).1 * (A m x).2 + -((R m x).2 * (A m x).1)
+  simp only [planeJacobian, R, A, sub_eq_add_neg]
 
 theorem n07a_actual_inverseChart_jacobian_abs
     {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}

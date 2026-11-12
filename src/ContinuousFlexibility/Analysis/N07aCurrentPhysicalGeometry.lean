@@ -121,8 +121,10 @@ theorem n07a_physical_mixedDerivative_bound_ae
   obtain ⟨B, hB, hbound⟩ := n07b_canonical_mixedDerivative_bound_closed m he 0 0
   refine ⟨B, hB, ?_⟩
   rw [n07aPhysicalMeasure_eq_openAngularStrip]
-  have hQ := ((h04.1.domains z hz hs m).1.inter
-    (isOpen_univ.prod isOpen_Ioo)).measurableSet
+  have hQ : MeasurableSet
+      (physicalPieceOpen S K z m ∩ ((univ : Set ℝ) ×ˢ Ioo (0 : ℝ) Real.pi)) :=
+    ((h04.1.domains z hz hs m).1.inter
+      (isOpen_univ.prod isOpen_Ioo)).measurableSet
   filter_upwards [ae_restrict_mem hQ] with p hp
   have himage : K.chart z m p ∈
       canonicalOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi) := by

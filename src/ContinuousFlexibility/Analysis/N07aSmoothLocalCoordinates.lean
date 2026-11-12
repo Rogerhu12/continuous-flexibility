@@ -15,7 +15,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Analysis
 
-open Set Filter ContinuousFlexibility.Statements
+open Set Filter
 open scoped Topology ContDiff
 
 /-- A global smooth map with an invertible derivative admits a chart that
@@ -83,10 +83,8 @@ theorem n07a_smoothLocalCoordinates_of_planeJacobian_ne_zero
   obtain ⟨e, he, ha, hHa, hes, hinvs, _, hdinv⟩ := n07a_smoothLocalCoordinates hH a A hder
   refine ⟨e, he, ha, hHa, hes, hinvs, ?_, ?_⟩
   · rw [hdinv, ← hA]
-    ext v
-    simp
+    exact ContinuousLinearEquiv.coe_symm_comp_coe A
   · rw [hdinv, ← hA]
-    ext v
-    simp
+    exact ContinuousLinearEquiv.coe_comp_coe_symm A
 
 end ContinuousFlexibility.Analysis
