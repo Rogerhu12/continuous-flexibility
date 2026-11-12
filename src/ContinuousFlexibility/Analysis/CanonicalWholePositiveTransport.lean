@@ -110,7 +110,6 @@ theorem n04Coordinates_wholePositive_transport_of_endpoint_bounds
   rcases hout with ⟨Clog, Mσ, δ, hClog, hMσ, hδ, hδρ, hδone, hrecip, hB, hout⟩
   refine ⟨Clog, Mσ, δ, hClog, hMσ, hδ, hδρ, hδone, hrecip, hB, ?_⟩
   intro z hz hs
-  dsimp only
   let z' : Z := ⟨z, hz, hs⟩
   have hzout := hout z'
   refine ⟨hzout.1, ?_⟩
