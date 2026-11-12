@@ -96,23 +96,25 @@ private theorem n08_center_seminorm_lt {E : Type*} [AddCommGroup E] [Module ℝ 
     (p : Seminorm ℝ E) (x : E) {ε : ℝ} (hε : 0 < ε) : p (x - x) < ε := by
   simpa only [sub_self, map_zero] using hε
 
-/-- The constant precedes the component, height direction and target
-radius. The material sample is exactly `C.cell m`, as in N01. -/
+/-- The second parameter order chooses its additional loss and constant
+before the component, height direction and target radius. The material
+sample is exactly `C.cell m`, as in N01. -/
 theorem n08_radialHeight_forcing_integral_bound
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (hN : N01Properties D T S C base loss ε) :
-    ∃ B : ℝ, 0 < B ∧ ∀ m (η : HeightPair S) (h g : ℝ → ℝ),
+    ∃ parameterLoss : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m (η : HeightPair S) (h g : ℝ → ℝ),
       (∀ s, HasDerivAt h (g s) s) →
       (∀ s ∈ Ioo (C.left m) (C.right m), ∀ θ, heightPairField S η (s, θ) = h s) →
       ∀ r ∈ Ioo (C.left m) (C.right m),
         |∫ s in C.left m..r, opticalSpeed D.w s * (1 + D.w s ^ 2) / D.w s * g s| ≤
           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
             T.E0 (T.sample (C.cell m)) ^ B *
-            (2 * heightPairGrading S base η + heightPairGrading S loss η) := by
+            (2 * heightPairGrading S base η + heightPairGrading S (loss + parameterLoss) η) := by
   have hdata := hN
   obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, hflow⟩ := hdata
-  obtain ⟨B, hB, hBj⟩ := hflow 2 0
-  refine ⟨B, hB, ?_⟩
+  obtain ⟨parameterLoss, hparameter⟩ := hflow 2
+  obtain ⟨B, hB, hBj⟩ := hparameter 0
+  refine ⟨parameterLoss, B, hB, ?_⟩
   intro m η h g hhg hη r hr
   obtain ⟨J, hJ⟩ := hBj m 0 0 (r, (0 : ℝ)) (by simp) hr
   have hzero : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=

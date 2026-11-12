@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.SolveStateSpaces
 import ContinuousFlexibility.Analysis.MaterialSampleCofinite
+import ContinuousFlexibility.Analysis.N01cStateSeminorms
 
 /-!
 # Restricting the common N01 neighborhood
@@ -21,41 +22,6 @@ local instance n01NeighborhoodRestrictionStateSMul (S : PhysicalSpacesData) : SM
 
 open Set ContinuousFlexibility.Analysis
 open scoped Topology BigOperators
-
-section RestrictDirections
-
-variable {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
-  [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
-  {U V : Set E} {f : E → F}
-
-def SmoothDirections.restrict (J : SmoothDirections U f)
-    (hV : IsOpen V) (hVU : V ⊆ U) : SmoothDirections V f where
-  open_domain := hV
-  D := J.D
-  zero x hx := J.zero x (hVU hx)
-  continuous n := (J.continuous n).mono (fun p hp => ⟨hVU hp.1, hp.2⟩)
-  derivative n x hx v w := J.derivative n x (hVU hx) v w
-
-end RestrictDirections
-
-theorem oneHighVariationWeight_mono
-    {E : Type*} [AddCommGroup E] [Module ℝ E]
-    {p : ℕ → Seminorm ℝ E} (hp : Monotone p)
-    {b₀ b₁ h₀ h₁ k : ℕ} (hb : b₀ ≤ b₁) (hh : h₀ ≤ h₁)
-    (x : E) (v : Fin k → E) :
-    oneHighVariationWeight p b₀ h₀ x v ≤ oneHighVariationWeight p b₁ h₁ x v := by
-  have hprod (s : Finset (Fin k)) :
-      (∏ i ∈ s, p b₀ (v i)) ≤ ∏ i ∈ s, p b₁ (v i) :=
-    Finset.prod_le_prod₀ (fun i hi => apply_nonneg _ _) (fun i hi => hp hb (v i))
-  unfold oneHighVariationWeight
-  apply add_le_add
-  · exact mul_le_mul (add_le_add_right (hp hh x) 1) (hprod Finset.univ)
-      (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _))
-      (add_nonneg zero_le_one (apply_nonneg _ _))
-  · apply Finset.sum_le_sum
-    intro i hi
-    exact mul_le_mul (hp hh (v i)) (hprod (Finset.univ.erase i))
-      (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _)) (apply_nonneg _ _)
 
 theorem stateNeighborhood_isOpen (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (base : ℕ) (ε : ℝ) :
@@ -131,8 +97,11 @@ theorem N01Properties.restrict_neighborhood
         (C.referenceState, (0 : ℝ)) hopen hsub hp hb hC
           (hdata.choose_spec.2 m i a b p hab hpm)
     exact Exists.intro B (And.intro hB hpoint)
-  · intro k s
-    let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 k s
+  · intro k
+    obtain ⟨parameterLoss, horder⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 k
+    refine ⟨parameterLoss, ?_⟩
+    intro s
+    let hdata := horder s
     let B : ℝ := hdata.choose
     have hB : 0 < B := hdata.choose_spec.1
     have hpoint : ∀ m a b p, a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
@@ -142,7 +111,7 @@ theorem N01Properties.restrict_neighborhood
             min (p.1 - C.left m) (C.right m - p.1) ^ a * |J.D k z v| ≤
               B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
                 oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-                  base' (s + loss) (z - (C.referenceState, 0)) v := by
+                  base' (s + loss + parameterLoss) (z - (C.referenceState, 0)) v := by
       intro m a b p hab hpm
       have hC : 0 ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B :=

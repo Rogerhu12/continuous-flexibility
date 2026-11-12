@@ -84,18 +84,21 @@ private theorem n08_flow_towers_restrict
     {base base' loss loss' : ℕ} {x0 : E}
     (hp : Monotone p) (hb : base ≤ base') (hl : loss ≤ loss')
     (hV : IsOpen V) (hVU : V ⊆ U) (hW : ∀ B, 0 < B → ∀ m, 0 ≤ weight B m)
-    (h : ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b y,
+    (h : ∀ k : ℕ, ∃ parameterLoss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b y,
       a + b ≤ s → region m y → ∃ J : SmoothDirections U (f m a b y),
         ∀ z ∈ U, ∀ v : Fin k → E, normFun m a y (J.D k z v) ≤
-          weight B m * oneHighVariationWeight p base (s + loss) (z - x0) v) :
-    ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b y,
+          weight B m * oneHighVariationWeight p base (s + loss + parameterLoss) (z - x0) v) :
+    ∀ k : ℕ, ∃ parameterLoss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b y,
       a + b ≤ s → region m y → ∃ J : SmoothDirections V (f m a b y),
         ∀ z ∈ V, ∀ v : Fin k → E, normFun m a y (J.D k z v) ≤
-          weight B m * oneHighVariationWeight p base' (s + loss') (z - x0) v := by
-  intro k s
-  obtain ⟨B, hB, hBj⟩ := h k s
+          weight B m * oneHighVariationWeight p base' (s + loss' + parameterLoss) (z - x0) v := by
+  intro k
+  obtain ⟨parameterLoss, hparameter⟩ := h k
+  refine ⟨parameterLoss, fun s => ?_⟩
+  obtain ⟨B, hB, hBj⟩ := hparameter s
   refine ⟨B, hB, fun m a b y hab hym => ?_⟩
-  exact n08_restrict_weighted_jet (normFun m a y) hp hb (Nat.add_le_add_left hl s)
+  exact n08_restrict_weighted_jet (normFun m a y) hp hb
+    (Nat.add_le_add_right (Nat.add_le_add_left hl s) parameterLoss)
     hV hVU (hW B hB m) (hBj m a b y hab hym)
 
 private theorem n08_canonical_bounds_restrict
@@ -132,14 +135,14 @@ private def n08CoefficientTowerBounds (D : ReferenceData) (T : MaterialData)
 
 private def n08FlowTowerBounds (D : ReferenceData) (T : MaterialData)
     (S : PhysicalSpacesData) (C : NonlinearGeometryData S) (base loss : ℕ) (ε : ℝ) : Prop :=
-  ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b p,
+  ∀ k : ℕ, ∃ parameterLoss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b p,
     a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
     ∃ J : SmoothDirections (stateNeighborhood S C base ε) (ordinaryFlowFamily S C m a b p),
       ∀ z ∈ stateNeighborhood S C base ε, ∀ v : Fin k → (AnnularState S × ℝ),
         min (p.1 - C.left m) (C.right m - p.1) ^ a * |J.D k z v| ≤
           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
           oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-            base (s + loss) (z - (C.referenceState, 0)) v
+            base (s + loss + parameterLoss) (z - (C.referenceState, 0)) v
 
 private theorem n08_coefficientTowerBounds_mono
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
