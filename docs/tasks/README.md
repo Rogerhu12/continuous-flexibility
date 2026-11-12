@@ -11,6 +11,11 @@ The rules below are the same for every line.
 
 Read this section every time you check the rules. A notice is removed when it is done.
 
+- **All lines: merge `origin/main` to get the quick check and the 5-minute file limit.** CI first
+  builds only the modules your branch changed and stops at the first failure, so errors return in
+  minutes; the full build runs only when that passes. A changed file that compiles for more than
+  5 minutes is stopped and named in the log: split it, or find the slow declaration. Each run prints
+  the 15 slowest modules it compiled.
 - **All lines: merge `origin/main` now to get the faster CI.** A run uses the workflow file of the
   branch it runs on. The workflow on `main` (since `4c5e7aff`) first restores main's compiled build
   and then your branch's own, so after merging main you no longer recompile what main already

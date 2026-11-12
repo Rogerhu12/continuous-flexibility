@@ -159,10 +159,17 @@ private theorem n07a_flowVariation_subpower
               T.M (T.sample (C.cell m)) ^ δ *
               oneHighVariationWeight (E := AnnularState S × ℝ) (pairGrading (E := AnnularState S) (F := ℝ) (stateGrading S) realGrading)
                 base (s + loss + parameterLoss) (z - (C.referenceState, 0) : AnnularState S × ℝ) v := by
-  obtain ⟨K0, hK0, hKb⟩ := materialE0_rpow_le_subpowerM hT A hδ
+  let material := materialE0_rpow_le_subpowerM hT A hδ
+  let K0 : ℝ := material.choose
+  have hK0 : 0 < K0 := material.choose_spec.1
+  have hKb : ∀ r ∈ Ioo D.a D.b, T.E0 r ^ A ≤ K0 * T.M r ^ δ :=
+    material.choose_spec.2
   refine ⟨A * K0, mul_pos hA hK0, ?_⟩
   intro m a b p hab hp
-  obtain ⟨J, hJ⟩ := hAj m a b p hab hp
+  let J : SmoothDirections (E := AnnularState S × ℝ) (F := ℝ)
+      (stateNeighborhood S C base ε) (ordinaryFlowFamily S C m a b p) :=
+    (hAj m a b p hab hp).choose
+  have hJ := (hAj m a b p hab hp).choose_spec
   refine ⟨J, ?_⟩
   intro z hz v
   have hm := spaces_trace_sample_mem hD hT (C.cell m)
@@ -193,10 +200,18 @@ theorem n07a_ordinaryFlowFamily_subpower
               T.M (T.sample (C.cell m)) ^ δ *
               oneHighVariationWeight (E := AnnularState S × ℝ) (pairGrading (E := AnnularState S) (F := ℝ) (stateGrading S) realGrading)
                 base (s + loss + parameterLoss) (z - (C.referenceState, 0) : AnnularState S × ℝ) v := by
-  obtain ⟨parameterLoss, hparameter⟩ := n07a_n01_flow_bound (D := D) (T := T) (S := S)
+  let bound := n07a_n01_flow_bound (D := D) (T := T) (S := S)
     (C := C) (base := base) (loss := loss) (ε := ε) h01 k
+  let parameterLoss : ℕ := bound.choose
+  have hparameter : ∀ s : ℕ, ∃ A : ℝ, 0 < A ∧
+      n07aFlowVariationBound D T S C base loss parameterLoss ε k s A :=
+    bound.choose_spec
   refine ⟨parameterLoss, fun s => ?_⟩
-  obtain ⟨A, hA, hAj⟩ := hparameter s
+  let spatialBound := hparameter s
+  let A : ℝ := spatialBound.choose
+  have hA : 0 < A := spatialBound.choose_spec.1
+  have hAj : n07aFlowVariationBound D T S C base loss parameterLoss ε k s A :=
+    spatialBound.choose_spec.2
   exact n07a_flowVariation_subpower h01.1.1 hT hδ hA hAj
 
 private def n07aCanonicalJetsBound (T : MaterialData) (S : PhysicalSpacesData)

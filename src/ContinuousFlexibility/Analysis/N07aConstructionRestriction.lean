@@ -87,50 +87,8 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 theorem n07a_N01_restrict
     (hT : IsMaterialData D T) (h : N01Properties D T S C base loss ε)
     (hb : base ≤ base') (he : ε' ≤ ε) (he' : 0 < ε') :
-    N01Properties D T S C base' loss ε' := by
-  have hU := n07a_stateNeighborhood_mono (S := S) (C := C) hb he
-  have hOpen := n07a_stateNeighborhood_isOpen S C base' ε'
-  have hmono : Monotone (pairGrading (stateGrading S) realGrading) :=
-    tamePairGrading_monotone (solve_stateGrading_monotone S) weighted_realGrading_monotone
-  obtain ⟨hD, _, href, hc, hi, hcj, hflow, hleft, hinv, hbounds, hcritical,
-    hcoeff, hflowj⟩ := h
-  refine ⟨hD, he', href, hc, hi, hcj, fun z hz => hflow z (hU hz),
-    fun z hz => hleft z (hU hz), fun z hz => hinv z (hU hz),
-    fun z hz => hbounds z (hU hz), fun z hz => hcritical z (hU hz), ?_, ?_⟩
-  · intro k s
-    let B : ℝ := (hcoeff k s).choose
-    have hB : 0 < B := (hcoeff k s).choose_spec.1
-    have hBb := (hcoeff k s).choose_spec.2
-    refine ⟨B, hB, fun m i a b p hab hp => ?_⟩
-    let J := (hBb m i a b p hab hp).choose
-    have hJ := (hBb m i a b p hab hp).choose_spec
-    refine ⟨smoothDirectionsRestrict J hOpen hU, fun z hz v => ?_⟩
-    have hw := n07a_oneHighVariationWeight_base_mono _ hmono hb
-      (s + loss) (z - (C.referenceState, 0)) v
-    have hfactor := n07a_materialSample_jetFactor_nonneg hD.1 hT hB.le m
-    have hfactor' : 0 ≤ B * T.H (T.sample m) ^ (3 / 4 : ℝ) *
-        T.E0 (T.sample m) ^ B := by
-      convert hfactor using 1
-      ring
-    exact (hJ z (hU hz) v).trans (mul_le_mul_of_nonneg_left hw hfactor')
-  · intro k
-    obtain ⟨parameterLoss, hparameter⟩ := hflowj k
-    refine ⟨parameterLoss, fun s => ?_⟩
-    let B : ℝ := (hparameter s).choose
-    have hB : 0 < B := (hparameter s).choose_spec.1
-    have hBb := (hparameter s).choose_spec.2
-    refine ⟨B, hB, fun m a b p hab hp => ?_⟩
-    let J := (hBb m a b p hab hp).choose
-    have hJ := (hBb m a b p hab hp).choose_spec
-    refine ⟨smoothDirectionsRestrict J hOpen hU, fun z hz v => ?_⟩
-    have hw := n07a_oneHighVariationWeight_base_mono _ hmono hb
-      (s + loss + parameterLoss) (z - (C.referenceState, 0)) v
-    have hfactor := n07a_materialSample_jetFactor_nonneg hD.1 hT hB.le (C.cell m)
-    have hfactor' : 0 ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-        T.E0 (T.sample (C.cell m)) ^ B := by
-      convert hfactor using 1
-      ring
-    exact (hJ z (hU hz) v).trans (mul_le_mul_of_nonneg_left hw hfactor')
+    N01Properties D T S C base' loss ε' :=
+  n06_N01Properties_mono hT h hb he' he
 
 theorem n07a_N02_restrict (h : N02Properties D T S C R base ε)
     (hb : base ≤ base') (he : ε' ≤ ε) :
