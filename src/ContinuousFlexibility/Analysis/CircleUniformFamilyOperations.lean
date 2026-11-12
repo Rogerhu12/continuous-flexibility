@@ -17,6 +17,41 @@ namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
 
+private theorem operations_constant_family_of_global_oneHigh
+    {I E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F)
+    {U : Set E} {f : E → F} (J : SmoothDirections U f)
+    (hb : ∀ n, ∃ base loss : ℕ, ∀ R : ℝ, 0 ≤ R → ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧
+      ∀ x, p base x ≤ R → ∀ v : Fin n → E,
+        q s (J.D n x v) ≤ C * tameJetSize p n s loss base x v) :
+    UniformFamilyJetBounds p q (fun _ : I => J) := by
+  intro n
+  refine uniformFamilyLowGrowthOn_of_oneHigh (p := p) (q := q) (U := U)
+    (fun (_ : I) (x : E) (v : Fin n → E) => J.D n x v) ?_
+  obtain ⟨base, loss, hbound⟩ := hb n
+  refine ⟨base, loss, fun R hR s => ?_⟩
+  obtain ⟨C, hC, hc⟩ := hbound R hR s
+  exact ⟨C, hC, fun _ x _ hx v => hc x hx v⟩
+
+private theorem operations_uniform_binary_comp
+    {I E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    [IsTopologicalAddGroup F] [ContinuousSMul ℝ F] [LocallyConvexSpace ℝ F]
+    {Y : ℕ → Type*} [∀ n, NormedAddCommGroup (Y n)] [∀ n, NormedSpace ℝ (Y n)]
+    [∀ n, CompleteSpace (Y n)] {bond : ∀ n, Y (n + 1) →L[ℝ] Y n}
+    {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F}
+    {r : ℕ → Seminorm ℝ (ProjectiveLimit Y bond)}
+    {U : Set E} {f g : I → E → F}
+    (B : I → F → F → ProjectiveLimit Y bond)
+    (hB : UniformSmoothFamilyOn (pairGrading q q) r univ
+      (fun i x => B i x.1 x.2))
+    (hp : Monotone p) (hU : IsOpen U)
+    (hf : UniformSmoothFamilyOn p q U f) (hg : UniformSmoothFamilyOn p q U g) :
+    UniformSmoothFamilyOn p r U (fun i x => B i (f i x) (g i x)) := by
+  exact hB.comp hp (hf.prodMk hp hg) hU isOpen_univ (fun _ _ _ => mem_univ _)
+
 variable {I : Type*} {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : CircleModelData}
 
 theorem uniformSmoothFamilyOn_circleComposition
@@ -48,12 +83,11 @@ theorem uniformSmoothFamilyOn_circleAverage
     UniformSmoothFamilyOn (pairGrading H.grading H.grading) H.grading univ
       (fun (_ : I) x => circleAverageComposeLinear hH hT hD hγ travel x.1 x.2) := by
   let h := exists_circleAverageComposeLinear_uniform_oneHigh hH hT hD hγ hi travel
-  refine ⟨fun _ => h.choose, fun n => ?_⟩
-  apply uniformFamilyLowGrowthOn_of_oneHigh
-  obtain ⟨base, loss, hb⟩ := h.choose_spec n
-  refine ⟨base, loss, fun R hR s => ?_⟩
-  obtain ⟨C, hC, hc⟩ := hb R hR s
-  exact ⟨C, hC, fun _ x _ hx v => hc x hx v⟩
+  let J : SmoothDirections univ (fun x : H.Space × H.Space =>
+      circleAverageComposeLinear hH hT hD hγ travel x.1 x.2) := h.choose
+  exact ⟨fun _ : I => J,
+    operations_constant_family_of_global_oneHigh
+      (pairGrading H.grading H.grading) H.grading J h.choose_spec⟩
 
 theorem uniformSmoothFamilyOn_circleProduct
     (hH : IsCircleModel T γ H) (hT : IsMaterialData D T)
@@ -101,8 +135,11 @@ theorem uniformSmoothFamilyOn_circleCompose_maps
       (fun i x => circleShiftedChartComposeLinear hH hT hD hγ (travel i) (f i x) (g i x)) := by
   letI : ∀ n, CompleteSpace (H.level n) :=
     fun n => (hH.2.1 n).isComplete.completeSpace_coe
-  exact (uniformSmoothFamilyOn_circleComposition hH hT hD hγ hi travel).comp hp
-    (hf.prodMk hp hg) hU isOpen_univ (fun _ _ _ => mem_univ _)
+  exact operations_uniform_binary_comp
+    (Y := fun n => H.level n) (bond := H.bond)
+    (p := p) (q := H.grading) (r := H.grading)
+    (fun i y z => circleShiftedChartComposeLinear hH hT hD hγ (travel i) y z)
+    (uniformSmoothFamilyOn_circleComposition hH hT hD hγ hi travel) hp hU hf hg
 
 theorem uniformSmoothFamilyOn_circleInverse_maps
     (hH : IsCircleModel T γ H) (hT : IsMaterialData D T)
@@ -130,8 +167,11 @@ theorem uniformSmoothFamilyOn_circleAverage_maps
       (fun i x => circleAverageComposeLinear hH hT hD hγ travel (f i x) (g i x)) := by
   letI : ∀ n, CompleteSpace (H.level n) :=
     fun n => (hH.2.1 n).isComplete.completeSpace_coe
-  exact (uniformSmoothFamilyOn_circleAverage hH hT hD hγ hi travel).comp hp
-    (hf.prodMk hp hg) hU isOpen_univ (fun _ _ _ => mem_univ _)
+  exact operations_uniform_binary_comp
+    (Y := fun n => H.level n) (bond := H.bond)
+    (p := p) (q := H.grading) (r := H.grading)
+    (fun (_ : I) y z => circleAverageComposeLinear hH hT hD hγ travel y z)
+    (uniformSmoothFamilyOn_circleAverage hH hT hD hγ hi travel) hp hU hf hg
 
 theorem uniformSmoothFamilyOn_circleProduct_maps
     (hH : IsCircleModel T γ H) (hT : IsMaterialData D T)

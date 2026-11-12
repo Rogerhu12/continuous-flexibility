@@ -74,7 +74,10 @@ theorem N01Properties.endpointFlowCircle_uniformFamilyJetBounds
         rw [hdecode i (n + 1) x hx v]
         exact hk (rsel i) (hrsel i) x hx hlow v
   intro n
-  apply uniformFamilyLowGrowthOn_of_oneHigh
+  refine uniformFamilyLowGrowthOn_of_oneHigh (p := p) (q := H.grading)
+    (U := sectorNeighborhood S base ε ε)
+    (fun (i : I) (x : StateDirections S × ℝ) (v : Fin n → StateDirections S × ℝ) =>
+      (J i).D n x v) ?_
   obtain ⟨B, L, hb⟩ := hraw n
   refine ⟨B, B + L, fun R hR s => ?_⟩
   obtain ⟨K, hK, hk⟩ := hb R hR (s + B) (by omega)

@@ -155,8 +155,10 @@ theorem jointMixedDiagonal_reflect_angle
     simp only [Prod.fst_zero, Prod.snd_zero, neg_zero, Prod.mk_zero_zero]
   have hmaps : MapsTo (fun z => (0 : E × PolarPoint) + P z) (U ×ˢ V₀) (U ×ˢ V₀) := by
     rintro ⟨z, q⟩ hz
-    rw [zero_add, hP]
-    exact ⟨hz.1, hmap q hz.2⟩
+    have hpoint : (0 : E × PolarPoint) + P (z, q) = (z, (q.1, -q.2)) :=
+      (zero_add (P (z, q))).trans (hP z q)
+    have hmem : (z, (q.1, -q.2)) ∈ U ×ˢ V₀ := ⟨hz.1, hmap q hz.2⟩
+    exact Set.mem_of_eq_of_mem hpoint hmem
   let M := J.compAffine P 0 (hU.prod hV) hmaps
   have hMK : EqOn (fun z => f ((0 : E × PolarPoint) + P z)) g (U ×ˢ V₀) := by
     intro z hz
