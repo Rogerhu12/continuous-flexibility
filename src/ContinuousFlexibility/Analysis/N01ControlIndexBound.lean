@@ -74,7 +74,7 @@ theorem N01Properties.control_actual_cell_cubic_exp_constraint
       Ioo (C.left m) (C.right m) ⊆ D.cells j →
       1 ≤ K * Real.exp (-(D.cellIndex j : ℝ) ^ 3 / 64 +
         L * ((D.cellIndex m : ℝ) + 1) ^ 3) := by
-  obtain ⟨K, B, A, F, hK, _, _, _, hconstraint⟩ :=
+  obtain ⟨parameterLoss, K, B, A, F, hK, _, _, _, hconstraint⟩ :=
     hN.control_actual_cell_weight_constraint hS hT
   obtain ⟨CE, hCE, he⟩ :=
     materialSample_H_E0_envelope hT hN.1.1 (γ := (3 / 8 : ℝ)) (by norm_num) B
@@ -82,7 +82,7 @@ theorem N01Properties.control_actual_cell_cubic_exp_constraint
     materialSample_H_radialE_envelope hT hN.1.1 (γ := (3 / 8 : ℝ)) (by norm_num) A
   obtain ⟨CC, hCC, hc⟩ :=
     materialSample_H_E0_envelope hT hN.1.1 (γ := (3 / 4 : ℝ)) (by norm_num) F
-  let d : ℕ := max base (1 + loss) + max base loss * 2
+  let d : ℕ := max base (1 + loss) + max base (loss + parameterLoss) * 2
   obtain ⟨CM, hCM, hm⟩ :=
     materialSample_H_M_envelope hT hN.1.1 (γ := (3 / 4 : ℝ)) (by norm_num) (d : ℝ)
   obtain ⟨CH, L, hCH, hL, hh⟩ :=
@@ -108,7 +108,7 @@ theorem N01Properties.control_actual_cell_cubic_exp_constraint
     simp only [Real.rpow_def_of_pos hHm, pow_two, ← Real.exp_add]
     congr 1
     ring
-  have hMd : Mm ^ d = Mm ^ max base (1 + loss) * (Mm ^ max base loss) ^ 2 := by
+  have hMd : Mm ^ d = Mm ^ max base (1 + loss) * (Mm ^ max base (loss + parameterLoss)) ^ 2 := by
     simp only [d, pow_add, pow_mul]
   have hm' : Hm ^ (3 / 4 : ℝ) * Mm ^ d ≤ CM := by
     simpa only [Real.rpow_natCast] using hm m
@@ -122,7 +122,7 @@ theorem N01Properties.control_actual_cell_cubic_exp_constraint
         radialE (D.cellIndex j) ^ A *
         T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ F *
         ((Mm ^ max base (1 + loss) * Hm ^ (-(3 / 4 : ℝ))) *
-          (Mm ^ max base loss * Hm ^ (-(3 / 4 : ℝ))) ^ 2) =
+          (Mm ^ max base (loss + parameterLoss) * Hm ^ (-(3 / 4 : ℝ))) ^ 2) =
       K * (Hj ^ (3 / 8 : ℝ) * T.E0 (T.sample j) ^ B) *
         (Hj ^ (3 / 8 : ℝ) * radialE (D.cellIndex j) ^ A) *
         (T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ F) *
