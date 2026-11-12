@@ -144,4 +144,3 @@ theorem n07b_c2_reference_green {D : ReferenceData}
         ((hu (r, θ) ⟨hr', mem_univ _⟩).contDiffAt (hopen.mem_nhds ⟨hr', mem_univ _⟩))]
 
 end ContinuousFlexibility.Analysis
-
