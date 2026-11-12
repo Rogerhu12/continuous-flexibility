@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.OpenDomainSourcePairing
+import ContinuousFlexibility.Analysis.CanonicalAngularStripMeasure
 import ContinuousFlexibility.Analysis.CanonicalStripGeometry
 
 /-!
