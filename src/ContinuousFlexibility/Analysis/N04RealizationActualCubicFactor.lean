@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N07aActualCubicFactors
+import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
 
 /-!
 # The actual cubic factor before the quantitative N04 certificate
@@ -30,11 +31,8 @@ theorem n04Realization_actual_cubic_factor
         n07aCubicPrincipalField K (C.referenceState, 0) m i p =
       ((p.1 - K.left m) * (K.right m - p.1)) ^ 3 *
         n07aCubicDividedField K z m i p := by
-  have h := hB.2.2.2.2 z hz hs m hm p hp
-  fin_cases i
-  · exact h.1
-  · exact h.2.1
-  · exact h.2.2
+  have h := canonicalCoefficientNumerator_factorization hB hz hs m hm i hp
+  fin_cases i <;> exact h
 
 /-- The genuine unit-coordinate difference has the exact fixed sixth
 width power before any estimate is made. The reference divided value is
