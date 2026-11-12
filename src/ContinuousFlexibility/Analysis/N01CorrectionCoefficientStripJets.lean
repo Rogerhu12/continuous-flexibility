@@ -37,6 +37,42 @@ private theorem correctionCoefficient_pureParameter_cons
   funext i
   cases i using Fin.cases <;> simp only [Fin.cons_zero, Fin.cons_succ]
 
+private theorem coefficientStrip_mixedLineTransport
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} {V : Set PolarPoint} {f : E × PolarPoint → ℝ}
+    (J : SmoothDirections (U ×ˢ V) f)
+    (A : ∀ n : ℕ, E → (Fin n → E) → PolarPoint → ℝ)
+    (hU : IsOpen U) (hV : IsOpen V) (hc : Convex ℝ (U ×ˢ V))
+    (hA : ∀ n x, x ∈ U → ∀ (v : Fin n → E) (p : PolarPoint), p ∈ V →
+      A n x v p = J.D n (x, p) (fun i => (v i, (0 : PolarPoint))))
+    (a b n : ℕ) (x w : E) {t : ℝ} (ht : x + t • w ∈ U)
+    (v : Fin n → E) {p : PolarPoint} (hp : p ∈ V) :
+    HasDerivAt
+      (fun s => mixedDerivative a b (A n (x + s • w) v) p)
+      (mixedDerivative a b (A (n + 1) (x + t • w) (Fin.cons w v)) p) t := by
+  have heq (k : ℕ) (y : E) (hy : y ∈ U) (vs : Fin k → E) :
+      mixedDerivative a b (A k y vs) p =
+        mixedDerivative a b (fun q => J.D k (y, q)
+          (fun i => (vs i, (0 : PolarPoint)))) p :=
+    mixedDerivative_congr_on_open hV (fun q hq => hA k y hy vs q hq) a b hp
+  have hcons :
+      (fun i : Fin (n + 1) =>
+        ((Fin.cons (α := fun _ : Fin (n + 1) => E) w v) i, (0 : PolarPoint))) =
+      Fin.cons (α := fun _ : Fin (n + 1) => E × PolarPoint)
+        (w, (0 : PolarPoint)) (fun i : Fin n => (v i, (0 : PolarPoint))) :=
+    correctionCoefficient_pureParameter_cons w v
+  have hd := J.jointJet_mixed_hasDerivAt_line hU hV hc a b n x w ht
+    (fun i => (v i, (0 : PolarPoint))) hp
+  have hvalue := heq (n + 1) (x + t • w) ht (Fin.cons w v)
+  rw [hcons] at hvalue
+  apply (hd.congr_deriv hvalue.symm).congr_of_eventuallyEq
+  have hnear : ∀ᶠ s in 𝓝 t, x + s • w ∈ U :=
+    (continuous_const.add (continuous_id.smul continuous_const)).continuousAt.eventually
+      (hU.mem_nhds ht)
+  filter_upwards [hnear] with s hs
+  exact heq n (x + s • w) hs v
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {base loss : ℕ} {ε : ℝ}
@@ -135,33 +171,16 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_component_mixed_hasD
   have hc := ((sectorNeighborhood_convex S base ε ε).prod
     (convex_univ : Convex ℝ (univ : Set (CircleSpace S)))).prod
       ((convex_Ioo l h).prod (convex_univ : Convex ℝ (univ : Set ℝ)))
-  have heq (k : ℕ) (y : (StateDirections S × ℝ) × CircleSpace S)
-      (hy : y ∈ sectorNeighborhood S base ε ε ×ˢ univ)
-      (vs : Fin k → (StateDirections S × ℝ) × CircleSpace S) :
-      mixedDerivative a b (fun q => Q
-        (hN.returnCorrectionCoefficientScalarJets hS hT hR j hcell χ hχrange hcutoff hdisc k y vs q)) p =
-        mixedDerivative a b (fun q => J.D k (y, q) (fun i => (vs i, 0))) p :=
-    mixedDerivative_congr_on_open hV
-      (fun q hq => hN.returnCorrectionCoefficientScalarJets_eq_joint_on_strip
-        hS hT hR j hcell χ hχrange hcutoff hdisc hχ m l h hl hh hstrip Q k y hy vs hq) a b hp
-  have hcons :
-      (fun i : Fin (n + 1) =>
-        ((Fin.cons (α := fun _ : Fin (n + 1) => (StateDirections S × ℝ) × CircleSpace S)
-          w v) i, (0 : PolarPoint))) =
-      Fin.cons (α := fun _ : Fin (n + 1) =>
-        ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint)
-        (w, (0 : PolarPoint)) (fun i : Fin n => (v i, (0 : PolarPoint))) :=
-    correctionCoefficient_pureParameter_cons w v
-  have hd := J.jointJet_mixed_hasDerivAt_line hU hV hc a b n x w ht
-    (fun i => (v i, 0)) hp
-  have hvalue := heq (n + 1) (x + t • w) ht (Fin.cons w v)
-  rw [hcons] at hvalue
-  apply (hd.congr_deriv hvalue.symm).congr_of_eventuallyEq
-  have hnear : ∀ᶠ s in 𝓝 t, x + s • w ∈ sectorNeighborhood S base ε ε ×ˢ univ :=
-    (continuous_const.add (continuous_id.smul continuous_const)).continuousAt.eventually
-      (hU.mem_nhds ht)
-  filter_upwards [hnear] with s hs
-  exact heq n (x + s • w) hs v
+  exact coefficientStrip_mixedLineTransport
+    (E := (StateDirections S × ℝ) × CircleSpace S) J
+    (fun k y vs q => Q (hN.returnCorrectionCoefficientScalarJets
+      hS hT hR j hcell χ hχrange hcutoff hdisc k y vs q))
+    hU hV hc
+    (fun k y hy vs q hq =>
+      hN.returnCorrectionCoefficientScalarJets_eq_joint_on_strip
+        hS hT hR j hcell χ hχrange hcutoff hdisc hχ m l h hl hh hstrip
+        Q k y hy vs hq)
+    a b n x w ht v hp
 
 theorem N01Properties.returnCorrectionCoefficientScalarJets_mixed_hasDerivAt_line_strip
     (a b n : ℕ) (x w : (StateDirections S × ℝ) × CircleSpace S)
