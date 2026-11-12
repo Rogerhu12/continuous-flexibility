@@ -132,8 +132,10 @@ theorem n04Coordinates_actual_positive_reference_source_data
         exact contDiffAt_const.add (contDiffAt_const.mul (hroot.1 θ).1.fst)
       · intro x hx θ
         have he : (K.chart (C.referenceState, 0) k (x, θ)).1 =
-            (K.chart (C.referenceState, 0) k (x, 0)).1 :=
-          congrArg Prod.fst (hopen.2.2.1 (x, θ) ⟨hx, mem_univ _⟩)
+            (K.chart (C.referenceState, 0) k (x, 0)).1 := by
+          have hf := congrArg (fun q : PolarPoint => q.1)
+            (hopen.2.2.1 (x, θ) ⟨hx, mem_univ _⟩)
+          exact hf
         change v + s * (K.chart (C.referenceState, 0) k (x, θ)).1 =
           v + s * (K.chart (C.referenceState, 0) k (x, 0)).1
         rw [he]
