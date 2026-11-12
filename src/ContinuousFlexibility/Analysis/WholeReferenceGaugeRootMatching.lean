@@ -108,7 +108,8 @@ theorem n04WholeReferenceGaugeAtlasData_actual_rootFirstJetMatching
     have hrad := n04WholeCanonicalAtlasData_actual_reference_radii
       hT hS hN hfield e₀ e cell σ τ Q N il
     have hp : V.physicalRight il = C.right m := by
-      simpa only [hl, n04WholePieceRight, n04bNegativeRight, ↓reduceIte] using hrad.2
+      change (n04WholeCanonicalAtlasData C L K e cell σ τ Q N).physicalRight il = C.right m
+      simpa only [K, hl, n04WholePieceRight, n04bNegativeRight, ↓reduceIte] using hrad.2
     dsimp only
     rw [hp]
     exact ⟨(congrArg Prod.fst hpair.2.1.value).symm.trans hpair.1,
