@@ -38,7 +38,9 @@ theorem n05CanonicalGlobalInverse_base_relation
     (β := (3 / 4 : ℝ)) (ρ := ρ) (γ := (3 / 4 : ℝ)) (δ := 0)
     hD hT hS h hcoordinates hminus hplus
     (show |(3 / 4 : ℝ) - (3 / 4 : ℝ)| ≤ (0 : ℝ) by simp) hρ hGminus hGplus 0 2
-  obtain ⟨W, hW, _⟩ := hweighted v
+  have hweightedAt := hweighted v
+  simp only [zero_sub] at hweightedAt
+  obtain ⟨W, hW, _⟩ := hweightedAt
   obtain ⟨hrep, hgraph⟩ := n05CanonicalGlobalInverse_represents
     hD hT hS h hcoordinates hV hminus hgap hGminus 0 2 v
   refine ⟨?_,
@@ -46,6 +48,6 @@ theorem n05CanonicalGlobalInverse_base_relation
       ((n05CanonicalVolumeModel T S K).forget (3 / 4 : ℝ) 0 2 v))).1,
     n05CanonicalSourceLift S C K
       ((n05CanonicalVolumeModel T S K).forget (3 / 4 : ℝ) 0 2 v), hrep, hgraph⟩
-  exact ⟨W, by simpa only [zero_sub] using hW⟩
+  exact ⟨W, hW⟩
 
 end ContinuousFlexibility.Statements
