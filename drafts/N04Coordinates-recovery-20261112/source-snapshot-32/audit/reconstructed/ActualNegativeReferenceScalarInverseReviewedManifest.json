@@ -1,0 +1,56 @@
+{
+  "kind": "actual_negative_scalar_inverse_geometry_and_unit_density_polynomial_reviewed",
+  "owner": "/root/audit_coordinates",
+  "status": "INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-clm-ext/RadialUnitDensityInverseJets.lean",
+      "sha256": "a04c93a733402f23e349a4a8a6d38e5f42b7eaa147e5b777fa00ee427eec88f5",
+      "blob": "b9bc21aa7c89b38691e7510288d38832f2ab3a0f",
+      "lines": 136,
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/RadialUnitDensityInverseJetsIndependentReview.json",
+        "sha256": "7e5dd41fa452e13950296b756f20a64d306c8d8b5b060d51b88ca6a0c07da203",
+        "blob": "f88f89109a9833676025e00589e54c99e9a46959",
+        "lines": 148
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverse.lean",
+      "sha256": "88897c617e7204b734ee70860aa58cc38514df3c6da5180375898c3ae37c427f",
+      "blob": "cf59332c8a3c6d42d13afd93722193d9662c3cc3",
+      "lines": 152,
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/ActualNegativeReferenceScalarInverseIndependentReview.json",
+        "sha256": "1876d7ab6f3c7c45fb742faa8627f9393a4eff875920c7883da63b0b5f5b53cc",
+        "blob": "786d863dd685913352da7e2032a2e2370f821214",
+        "lines": 138
+      }
+    }
+  ],
+  "original_candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverseCandidateManifest.json",
+    "sha256": "1e71edda88fdaf0b328abaaa2c60cd6aa583f9b2558a860c2aef9c430c7961ab",
+    "blob": "43c643c25e78a90a29fb423545a2164817dfb374",
+    "lines": 159
+  },
+  "explicit_compatibility_candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-clm-ext/RadialUnitDensityInverseJetsCompatibilityCandidateManifest.json",
+    "sha256": "8023f3d80aff28a3bd368dff5e59833c67fee196a74b884d9b8c0df1d98502f0",
+    "blob": "acbd1c7864478b2aa873e2d934429ea01719f8e9",
+    "lines": 41
+  },
+  "numerical_owner_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-clm-ext/RadialUnitDensityInverseJetsReviewedManifest.json",
+    "sha256": "ffef369617f1a1176cc68c877ef5e47d8a8aa21a41aa1e10fa225577537d23be",
+    "blob": "85b926bf9a18b2ee3b54a3b636d48e8f6237a8dd",
+    "lines": 47
+  },
+  "selection_note": "Select compatibility136 instead of original135 for RadialUnitDensityInverseJets; select unchanged actual152 for ActualNegativeReferenceScalarInverse. Historical original joint candidate and source135 are preserved.",
+  "scope_limits": [
+    "Literal same old-K scalar inverse and true unit density, plus local finite numerical inverse envelope. Actual207 sample packing is a subsequent separately reviewed consumer.",
+    "No full primitive/ReferenceJets or raw optical retained construction conclusion is claimed. No compiler/elaborator or active repo/index/ref/CI operation."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:26:07.225157+00:00"
+}

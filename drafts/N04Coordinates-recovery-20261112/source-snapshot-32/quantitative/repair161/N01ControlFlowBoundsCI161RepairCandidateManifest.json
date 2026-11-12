@@ -1,0 +1,69 @@
+{
+  "kind": "ci161_control_flow_bounds_explicit_scalar_limit_arguments",
+  "owner": "/root/quantitative_route",
+  "status": "EXACT_ACTUAL_SOURCE_REPAIR_CANDIDATE_PENDING_FULL_PEER_UNCOMPILED",
+  "actual_base": {
+    "commit": "7ac330b2e0c2420e449235a090055a8018ebf17e",
+    "tree": "4e255a3287e0954cc2c4b009298c6a8f5958d99a",
+    "target_path": "src/ContinuousFlexibility/Analysis/N01ControlFlowBounds.lean",
+    "blob": "c83ee3bea974c231233a5c942ac866b3cf0114ee"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair161/N01ControlFlowBounds.lean",
+    "sha256": "2c3534ff1a505e3c35ca2978d138d86a69859e4cefb62a390f5ec15f4e4a75d9",
+    "blob": "da5a86231558708da484b96b350a925cd0fe50d4",
+    "lines": 263
+  },
+  "preimage": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair161/N01ControlFlowBounds.base.lean.txt",
+    "sha256": "f73fa1c44d3fc265f2a86dfa67aa9ea91720ab91ae01ecbc8b29b6af37af4e1e",
+    "blob": "c83ee3bea974c231233a5c942ac866b3cf0114ee",
+    "lines": 263
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair161/N01ControlFlowBounds.diff",
+    "sha256": "d05668385771c32d95690fd428d120eab86590e51a0cfe1b08fe43298658e36d",
+    "blob": "872380105840fc0951896413ae17928470279f9a",
+    "lines": 11
+  },
+  "cached_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-161.log",
+    "sha256": "3cd24d16885a4ad19fec2df77775f3b5d2af9145610bdf9eb12216f28f11b48d",
+    "blob": "6acbb5f5b367683e194fb0a9e6fa2e13bdb84e24",
+    "lines": 830
+  },
+  "public_headers_identical": true,
+  "public_header_count": 6,
+  "imports": [
+    "ContinuousFlexibility.Analysis.N01ControlCoefficientVariation",
+    "ContinuousFlexibility.Analysis.N01JetBounds",
+    "ContinuousFlexibility.Analysis.OpticalControlFullCurvature",
+    "Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas",
+    "Mathlib.MeasureTheory.Integral.DominatedConvergence"
+  ],
+  "previous_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/CI160N01ControlFlowBoundsIndependentReview.json",
+    "sha256": "1e5ce781245bd2059dd7e992cab2926d2e172c607b45e727d6f499752a12fa0a",
+    "blob": "38cd8032d8df4222ac6edaa7fe2d7fbb3e1ed7be",
+    "lines": 110
+  },
+  "previous_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair160/N01ControlFlowBoundsCI160RepairReviewedManifest.json",
+    "sha256": "cb69462825837a725c13b38595cf09a2f53c1f524d427a2485d3a074caae821b",
+    "blob": "28522e9290a6720de2f22defe7ea278b5e42f704",
+    "lines": 34
+  },
+  "diagnostic": "Only Control222:8 application mismatch: inferred ContinuousOn abs on Icc ?m (G h) instead of ContinuousOn (fun r=>|G r|) on Icc l h. The preceding two timeouts do not recur.",
+  "exact_repair": "Only the existing scalar endpoint invocation gains explicit f=(fun r=>|G r|), a=l, b=h, K=K. Every other byte, including all public statements and default options, is preserved.",
+  "checks": [
+    "Read all263 actual source lines and the cached complete diagnostic. The same-file provider binds exactly f,a,b,K.",
+    "Exact inverse substitution returns every prior c83ee263 byte; the actual7ac330b2 preimage agrees with the prior reviewed source.",
+    "No new assumption, altered constant or parameterLoss order, unrelated proof or provider change."
+  ],
+  "compiled": false,
+  "scope_limits": [
+    "No local compiler/elaborator, resource increase, active/index/ref/CI action.",
+    "Initially preserved in functions store because the filesystem reported ENOSPC; eventual materialization must verify these exact identities."
+  ],
+  "created_at": "2026-11-12T17:43:27.126426+00:00"
+}

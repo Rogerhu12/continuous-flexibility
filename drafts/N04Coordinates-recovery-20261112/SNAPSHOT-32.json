@@ -1,0 +1,94 @@
+{
+  "snapshot": 32,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "parent": "4a8e25855b690da1fec1626ed9622699c561ca1e",
+  "additional_parents": [
+    "23d28b145e1361fd8c683ba77415226b82be7bb3"
+  ],
+  "base_tree": "da1b2c019076c555c54271210df4a0b9195ade98",
+  "compiled_baseline": "23d28b145e1361fd8c683ba77415226b82be7bb3",
+  "line_head": "e6f0123c8cc5958988184914abf8ca6e27a75b12",
+  "line_tree": "d0737dd159074aa8fa622ab6c8df27680614be6c",
+  "frozen_at": "2026-11-12T17:49:10.113195+00:00",
+  "indexed_files": 2842,
+  "new_sources": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePotentialFormula.lean",
+      "sha256": "99ed1115f16ce5cd65b12f5551a4672c5ee5a5a1e80f9cae7902da925f54cec7",
+      "lines": 137
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferenceScalarInverse.lean",
+      "sha256": "84346b8a1836363f9b0fdbe48a93c75b42deaa144beea6fe8e0bf32d2faffa3e",
+      "lines": 152
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-helper-visibility/RadialUnitDensityInverseJets.lean",
+      "sha256": "a56a59502b38aee6a0eaa680c0ba5aec43274d36a8992697cc8caaf09f0f8bc6",
+      "lines": 136
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceGeometryFields.lean",
+      "sha256": "17eb137b0c746f4ff44388b842b068a2745a96e99940de71667b75ffc8abbb52",
+      "lines": 124
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialMaterialJets.lean",
+      "sha256": "fac549078c91279f7952d73126b3ffcebd8b79134319f1e1971943277af754c9",
+      "lines": 222
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePotentialReferenceJets.lean",
+      "sha256": "ec8d38f33f34bb4ab3c24f59a0ca586a391f749e793665a57f2b25070ece6212",
+      "lines": 173
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelDifferenceAngularBounds.lean",
+      "sha256": "eaa14196be78e7434d780cb537c878193906d23b8b35da4d424265897e63ba4c",
+      "lines": 140
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair161/N01NeighborhoodRestriction.lean",
+      "sha256": "e49b0d271a6a1633dce24a1a2ac1c6b2c4ca33f73be8191d59fb827b6e30e8f4",
+      "lines": 143
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceScalarSourceData.lean",
+      "sha256": "08867865fd202f310315c530695fe3c93136fa577db5947d8c059a538a235bbd",
+      "lines": 101
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair160/N01ControlFlowBounds.lean",
+      "sha256": "f73fa1c44d3fc265f2a86dfa67aa9ea91720ab91ae01ecbc8b29b6af37af4e1e",
+      "lines": 263
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair161/N01ControlFlowBounds.lean",
+      "sha256": "2c3534ff1a505e3c35ca2978d138d86a69859e4cefb62a390f5ec15f4e4a75d9",
+      "lines": 263
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceScalarColumnMaterialJets.lean",
+      "sha256": "6de669a7ac170b19818a1d0778c27f1577fdbcaf70f6adf30c9a0158128e071b",
+      "lines": 104
+    }
+  ],
+  "new_source_lines": 1958,
+  "existing_added_lean_from_compiled_baseline159": 16251,
+  "projected_added_lean_from_compiled_baseline159": 18209,
+  "line_count_method": "Conservative git diff --numstat --no-renames over every Lean file. Content similarity or move detection gives no reduction in the hard source budget.",
+  "compressed_diagnostics": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelDifferenceAngularBoundsClosureInventory.json",
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-32/positive/reconstructed/N04ActualTravelDifferenceAngularBoundsClosureInventory.json.storage.gz",
+      "uncompressed_sha256": "744e658693898d4b94e3b58963622a67c784edae09216d2d3f45081e14e0ac1b",
+      "uncompressed_bytes": 458700,
+      "gzip_bytes": 81749,
+      "blob": "35a3935d488d345a28a0a33efbea0c477e896e05"
+    }
+  ],
+  "compression_note": "Lossless gzip for large JSON diagnostics; original source SHA256 and restore behavior preserved. Lean sources remain uncompressed. Binary gzip copies are also preserved exactly.",
+  "prior_versions": "All historical source versions remain immutable and reachable through the backup parent and exact SOURCE-INDEX locations.",
+  "status": "Source preservation only; outside src, no CI activation or completion claim.",
+  "entries": 98
+}

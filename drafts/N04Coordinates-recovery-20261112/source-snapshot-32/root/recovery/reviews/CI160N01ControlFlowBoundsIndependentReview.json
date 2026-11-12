@@ -1,0 +1,110 @@
+{
+  "kind": "CI160_actual_control_flow_choice_and_fixed_point_full_independent_review",
+  "reviewer": "/root",
+  "status": "PASSED_COMPLETE_STATIC_SOURCE_AND_EXACT_DELTA_REVIEW_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair160/N01ControlFlowBounds.lean",
+    "sha256": "f73fa1c44d3fc265f2a86dfa67aa9ea91720ab91ae01ecbc8b29b6af37af4e1e",
+    "blob": "c83ee3bea974c231233a5c942ac866b3cf0114ee",
+    "lines": 263
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair160/N01ControlFlowBounds.base.lean.txt",
+    "sha256": "91ab4e92b0252cef51da1b2de8c062157eb7724f391c359af24d5eb842655e02",
+    "blob": "3294b2a1a20f93e7ef4cab8bfa763b667ceb1382",
+    "lines": 249
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair160/N01ControlFlowBounds.diff",
+    "sha256": "1a5739e257e00623288fd4d2ee1ca89db7e1e7be6190b637f03571e65fdcc3cc",
+    "blob": "e067d58e6c616c9f30efd69ce4181d21492c3e3b",
+    "lines": 200
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair160/N01ControlFlowBoundsCI160RepairCandidateManifest.json",
+    "sha256": "ed25a553bdbf03ec73cac803617db4e8dc58ae2a48f99dfce49e9b3803a5c34d",
+    "blob": "1b82ca26c936fd8bdc1b18aebab1965e7f5a691e",
+    "lines": 117
+  },
+  "actual_base": {
+    "head": "03ea768c1f2211dff62714b932be808345dcf918",
+    "tree": "84a1b13b975d16f42aed7de40b8601bd09fda8ae",
+    "target": "src/ContinuousFlexibility/Analysis/N01ControlFlowBounds.lean"
+  },
+  "cached_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-160.log",
+    "sha256": "62386517362d0eeeed8b0663c0d399f4ccfdce08dcbcebe07ef90fd4167ca097",
+    "blob": "6e4ae1d5688bfa7c8dbd564feb1dddb0ef0fd4a6",
+    "lines": 933
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01JetBounds.lean",
+      "sha256": "aad4c90c05e7ba57a31e8d63d1ef1a96c3f439ed3a57890de85bcb77e6acb39a",
+      "blob": "1e4f04ef7acf1b6050f63c7af3826a9dc6105ef2",
+      "lines": 74
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01ControlCoefficientVariation.lean",
+      "sha256": "cc04bacc0f8d84563e2061878fac514f71be71099e3693a23abbdb59dacb936c",
+      "blob": "cdeb439d65d0fa1441b1dcd1b6e05b08ed5acb08",
+      "lines": 258
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01SingletonControl.lean",
+      "sha256": "9f9e4492e6de213eeab8d2c0539c46d9915dbced39ed0d26cb3edc022a8a9d47",
+      "blob": "25afc3b1c1b5e989c4bf975843efec5d91ce5adb",
+      "lines": 174
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/SmoothDirectionsScalarLine.lean",
+      "sha256": "565509069ae721ae2805249702f29121a5c767f3b1c3d7c71ec0bf347e12c1c3",
+      "blob": "74c704f4b692872fed0c1cd89b6aaf2fec178e1b",
+      "lines": 78
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/OpticalControlFullCurvature.lean",
+      "sha256": "204c863e281e0e6579dfdf17e01016e33881a4b0b4ed587e3a2660645b8090d6",
+      "blob": "286fef0b534b762cbfacdae9a542f5b15643c1c8",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    }
+  ],
+  "selected_import_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair160/N01ControlFlowBoundsCI160SelectedClosure.json",
+    "sha256": "dd9ca46cdecc85a8cc46679ea543504e6d43068098d4b9540cd456ba3d1f1775",
+    "blob": "66fb24551751142d15cdcc23abbb4cd8e608085d",
+    "lines": 1084
+  },
+  "read_scope": [
+    "All 263 selected source lines, all 200 supplied diff lines and the complete candidate manifest; actual previous public contracts and fixed-point body compared mechanically.",
+    "Complete actual N01JetBounds74 and SmoothDirectionsScalarLine78 providers; actual singleton-kappa flow germ, joint scalar line, full optical second derivative and ordinary-flow contract statements.",
+    "The unique cached CI160 diagnostics at 85:2 and 210:2; all 89 selected closure source identities, imports and topology verified."
+  ],
+  "findings": [
+    "The original order k=2, then parameterLoss, then spatial order s=0, then B is preserved. Named N01FlowJetBounds and AtOrder aliases expose the same contract without replacing the chosen actual tower.",
+    "The private fixed-point proof is exactly the prior proof after indentation and renaming the fixed supplier. It uses the same ordinaryFlowFamily, original reference state, singleton control direction, sample C.cell and H^(3/4) factor.",
+    "All six complete public headers are identical; all four other public declarations are byte-identical. The two modified public proofs only type the same choice projections and call the extracted private proofs.",
+    "The endpoint lemma transfers the genuine negative curvature integral through absolute values and continuous extension of the open interval. Its specialization uses the actual partial and full second-derivative theorems, with no assumed endpoint jet or new bound.",
+    "No proof placeholders, axioms, resource overrides, import cycles or missing project imports are introduced."
+  ],
+  "mechanical_checks": {
+    "public_headers": 6,
+    "unchanged_public_declarations": 4,
+    "fixed_point_body_exact_after_indent_and_supplier_rename": true,
+    "selected_closure_modules_verified": 89,
+    "actual_git_preimage_equal": true,
+    "source_unchanged": true
+  },
+  "compiled": false,
+  "scope_limits": [
+    "Static mathematical/API and proof-boundary review only. Default-budget compiler performance remains for the next CI run.",
+    "No local compiler/elaborator, source/index/ref mutation, resource increase or CI query/download was performed for this review."
+  ],
+  "created_at": "2026-11-12T17:30:59.121982+00:00"
+}

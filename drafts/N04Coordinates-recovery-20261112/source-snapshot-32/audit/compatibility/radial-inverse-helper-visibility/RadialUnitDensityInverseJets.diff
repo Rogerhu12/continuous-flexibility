@@ -1,0 +1,20 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-clm-ext/RadialUnitDensityInverseJets.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-helper-visibility/RadialUnitDensityInverseJets.lean
+@@ -19,7 +19,7 @@
+ open Set Filter
+ open scoped ContDiff Topology
+ 
+-private theorem radialUnit_abs_jet_of_abs_germ
++theorem radialUnit_abs_jet_of_abs_germ
+     {f g : ℝ → ℝ} {x : ℝ} (hf : ContinuousAt f x) (hne : f x ≠ 0)
+     (he : (fun t => |f t|) =ᶠ[𝓝 x] g) (n : ℕ) :
+     |iteratedDeriv n f x| = |iteratedDeriv n g x| := by
+@@ -36,7 +36,7 @@
+       simpa only [abs_of_pos hpt] using het
+     rw [hfg.iteratedDeriv_eq n]
+ 
+-private theorem radialUnit_scalar_normalization
++theorem radialUnit_scalar_normalization
+     {h w j : ℝ} (he : h ^ 2 * w * |j| = 1) :
+     j ≠ 0 ∧ |j|⁻¹ = h ^ 2 * w ∧ |j| = h ^ (-2 : ℝ) * w⁻¹ := by
+   have hj : j ≠ 0 := by

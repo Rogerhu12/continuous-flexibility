@@ -1,0 +1,78 @@
+{
+  "label": 161,
+  "head_before": "03ea768c1f2211dff62714b932be808345dcf918",
+  "base_tree": "84a1b13b975d16f42aed7de40b8601bd09fda8ae",
+  "tree": "4e255a3287e0954cc2c4b009298c6a8f5958d99a",
+  "main_checked": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+  "main_integrated": "89e539ccf7e9c558467cf875f44dcff9490ce271",
+  "main_source_batch": 1,
+  "main_source_batch_count": 5,
+  "last_full_green": "23d28b145e1361fd8c683ba77415226b82be7bb3",
+  "owner_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/flow-opaque/N01NeighborhoodRestrictionCI160RepairReviewedManifest.json",
+      "sha256": "3e07c84e408796717e7c1fc92d6f56bd99f0b6de456264a2591a9921ccdae6b6",
+      "blob": "9c2c9683497750c1b17ba94e6e0798356a14f6af",
+      "lines": 46
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair160/N01ControlFlowBoundsCI160RepairReviewedManifest.json",
+      "sha256": "cb69462825837a725c13b38595cf09a2f53c1f524d427a2485d3a074caae821b",
+      "blob": "28522e9290a6720de2f22defe7ea278b5e42f704",
+      "lines": 34
+    }
+  ],
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI160N01NeighborhoodRestrictionIndependentReview.json",
+      "sha256": "7f50346217b80caf04ef1754495bdd588ff41a736a2d63af428b9744fbd9d037",
+      "blob": "9d6973353cf92e8841f7b34573622eb8c5a2976b",
+      "lines": 120
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/CI160N01ControlFlowBoundsIndependentReview.json",
+      "sha256": "1e5ce781245bd2059dd7e992cab2926d2e172c607b45e727d6f499752a12fa0a",
+      "blob": "38cd8032d8df4222ac6edaa7fe2d7fbb3e1ed7be",
+      "lines": 110
+    }
+  ],
+  "sources": [
+    {
+      "target": "src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean",
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/flow-opaque/N01NeighborhoodRestriction.lean",
+        "sha256": "9da10cc067a2606c3fef7d14ce73d4bb1c8e660022c0ce6df5837da5d333ad3b",
+        "blob": "4c615b70f2ab1b3e44ba228e2c578d00f2b748c1",
+        "lines": 142
+      },
+      "preimage": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/N01NeighborhoodRestriction.ci160-base.lean.txt",
+        "sha256": "8980a1dfece4b54cc46e1dcda20504cda7e90bcaedc76059c82c86cdbb9cdd9e",
+        "blob": "551267986278d6717642c54f98f85ece2d4d4eb0",
+        "lines": 126
+      }
+    },
+    {
+      "target": "src/ContinuousFlexibility/Analysis/N01ControlFlowBounds.lean",
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair160/N01ControlFlowBounds.lean",
+        "sha256": "f73fa1c44d3fc265f2a86dfa67aa9ea91720ab91ae01ecbc8b29b6af37af4e1e",
+        "blob": "c83ee3bea974c231233a5c942ac866b3cf0114ee",
+        "lines": 263
+      },
+      "preimage": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair160/N01ControlFlowBounds.base.lean.txt",
+        "sha256": "91ab4e92b0252cef51da1b2de8c062157eb7724f391c359af24d5eb842655e02",
+        "blob": "3294b2a1a20f93e7ef4cab8bfa763b667ceb1382",
+        "lines": 249
+      }
+    }
+  ],
+  "added_lean_since_full_green": 1079,
+  "deleted_lean_since_full_green": 389,
+  "source_total": 4214,
+  "source_all_total": 4218,
+  "root_imports": 4155,
+  "scope": "Repair only the two CI160 default-heartbeat failures. Private proof boundaries and typed choice projections preserve every complete public contract, the original flow tower and parameter-loss order. Current-main source batch remains 1/5; further cohorts require full CI.",
+  "created_at": "2026-11-12T17:32:11.795555+00:00"
+}

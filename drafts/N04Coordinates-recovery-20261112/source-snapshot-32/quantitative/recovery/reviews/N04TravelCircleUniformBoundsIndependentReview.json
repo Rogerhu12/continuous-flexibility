@@ -1,0 +1,251 @@
+{
+  "kind": "actual_travel_circle_selector_uniform_bounds_complete_independent_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelCircleUniformBounds.lean",
+    "sha256": "a38f9a389f71f9811a9d99135155a73dd48b1ddc597682cdca05a4248f319a36",
+    "blob": "ccc6e3813c819470b322d059a560be09372e8d0a",
+    "lines": 166
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelCircleUniformBoundsCandidateManifest.json",
+    "sha256": "8c7df7961eedb87d658ee988228af916eadbb60ac18de8aa48cbbda21bc41d4c",
+    "blob": "e10735185e610903f9574b4444f312314c018164",
+    "lines": 219
+  },
+  "selected_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelCircleUniformBoundsClosureInventory.json",
+    "sha256": "871c0a0de79771fa8954c20a5824a51ac9e92ee5953262d4f04a2fd0125efbe1",
+    "blob": "b714776f8b147083fa52a8deee0dc5614ade7b5b",
+    "lines": 7495
+  },
+  "selected_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelChartCircle.lean",
+      "blob": "104f0953d774e3a3d5c37d386952aeed75774f8f",
+      "sha256": "b7263767dc103093d832994c184503da11351aa3338fd1c06f682224c792b808",
+      "lines": 154,
+      "module": "ContinuousFlexibility.Analysis.N04TravelChartCircle",
+      "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelChartCircle.lean",
+      "source_ref": "LOCAL_NEW_TRAVEL_CIRCLE",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04TravelChartCircle.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04MinusFirstIntegralCircle",
+        "ContinuousFlexibility.Analysis.N04bActualTravelChart",
+        "ContinuousFlexibility.Analysis.SpacesCircleParity",
+        "ContinuousFlexibility.Analysis.CircleJointEvaluation",
+        "ContinuousFlexibility.Analysis.TameProductDirections",
+        "ContinuousFlexibility.Scalar.WeightedSmoothTameLinear"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04MinusFirstIntegralCircle.lean",
+      "sha256": "2c6be9ee3d6ce0f6ec4e5b15248718dca7085dae2dd80580dfd816943f10eb0a",
+      "blob": "fc11c89b2e92489890485acfcfe221f4ec47dd28",
+      "lines": 136,
+      "target": "src/ContinuousFlexibility/Analysis/N04MinusFirstIntegralCircle.lean",
+      "module": "ContinuousFlexibility.Analysis.N04MinusFirstIntegralCircle",
+      "selected_ref": "LOCAL_NEW_ACTUAL_MINUS_FIRST_INTEGRAL",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04CorrectedFlowInverseCircle",
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04CorrectedFlowCircle",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowCircle.lean",
+      "sha256": "1c499c99875b12e8a7a7abf91ff9dec371dca9c4f0a7505c5d4dfc50ce236e62",
+      "blob": "5a0a53733562aeb135e5c543ba3b6f36e7e7ab02",
+      "lines": 118,
+      "selected_ref": "LOCAL_HELD_CORRECTED_FLOW",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01InterpolationInverseCircle",
+        "ContinuousFlexibility.Analysis.ReturnCorrectedFlow"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04CorrectedFlowInverseCircle",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowInverseCircle.lean",
+      "sha256": "35ad5b06e178c76a4d208253027d57884980b62cb114253316b09c8ae93c8272",
+      "blob": "fff0022928fd6e8917dfdaa250fd635e2ca5ecdd",
+      "lines": 164,
+      "selected_ref": "LOCAL_HELD_CORRECTED_FLOW",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04CorrectedFlowCircle"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnVelocityUniformBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnVelocityUniformBounds.lean",
+      "blob": "6a54e8cd9550b1e8d18e27069161bd1d80fc8fe2",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "d166edeb5c1c0f9d3de327a381413c4bcaa9507e5e05c77d205243c24bb5303c",
+      "lines": 362,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds",
+        "ContinuousFlexibility.Analysis.ReturnInterpolationJetBounds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnCircleUniformBounds.lean",
+      "blob": "a9b6d7a92da85f46f18f84563d4b1d29f333910a",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "a5cdc37d50959078df17dfdee12b52f3c8dadcc2b5b90e3980ddd9edadaf4716",
+      "lines": 209,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowCircleUniformBounds",
+        "ContinuousFlexibility.Analysis.CircleUniformFamilyOperations",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame",
+        "ContinuousFlexibility.Analysis.ReturnChartUniformBounds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleUniformFamilyOperations",
+      "path": "src/ContinuousFlexibility/Analysis/CircleUniformFamilyOperations.lean",
+      "blob": "c5282293b21370a88a5b1f198d61bd0507d79dd0",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "b48f8889543fcf398a652570e2348e61dafcb0b1ec4734a94978297726595c86",
+      "lines": 191,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleTravelUniformJets",
+        "ContinuousFlexibility.Analysis.CircleAverageCompositionUniformBounds",
+        "ContinuousFlexibility.Analysis.TameUniformSmoothFamily"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CirclePositiveInversePerturbation",
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInversePerturbation.lean",
+      "blob": "d532c92eee0cf46e41a22a1a641cf1d95ac87ef6",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "db1f19b5c13d3eb7146ea15da658ccf5e2f49cb752a8cde198e4ac66957d0b14",
+      "lines": 67,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame",
+        "ContinuousFlexibility.Analysis.CircleInversePerturbation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameUniformSmoothFamily",
+      "path": "src/ContinuousFlexibility/Analysis/TameUniformSmoothFamily.lean",
+      "blob": "a52a1e3d098c51d67260efef9b64b2d42195161a",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "9c6826d76b69da22774d75954775a838fb0c16270ad0c0202123fa4bbcfc2802",
+      "lines": 200,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameUniformFamilyJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameUniformFamilyJets",
+      "path": "src/ContinuousFlexibility/Analysis/TameUniformFamilyJets.lean",
+      "blob": "af2fcbf1366ab7ff2a314f03f02cbfe99234961d",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "a568602dff4fba3065d7ee05893e1d64e03301ef2b603393d49facc9854e2760",
+      "lines": 270,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameUniformFamilyGrowth",
+        "ContinuousFlexibility.Analysis.TameTopologicalComposition",
+        "ContinuousFlexibility.Analysis.TameProductDirections",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsAffine",
+        "ContinuousFlexibility.Analysis.TameTransfer"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SpacesCircleParity",
+      "target_path": "src/ContinuousFlexibility/Analysis/SpacesCircleParity.lean",
+      "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+      "blob": "d45ab137d1e034ac515a2453e4558164dbe4993b",
+      "sha256": "6728cc182b90bbb6fd091ac3151b759c16f85da485cae0f1bad59cdc5806bca7",
+      "lines": 278,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleJetEncoding",
+        "ContinuousFlexibility.Analysis.CylinderTestPairing",
+        "ContinuousFlexibility.Analysis.ProjectiveLimitSubspace"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectedFlow",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectedFlow.lean",
+      "blob": "36693b0d8102e289a31ebd012f8eeb6cf63f795c",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "9323567f5c4d710472b4d8b4f9ea52c5cdb5d16aa8d83b9661844f61f91b8763",
+      "lines": 343,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectionAlgebra",
+        "ContinuousFlexibility.Analysis.ReturnChartDifferentiation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowCircleUniformBounds",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowCircleUniformBounds.lean",
+      "sha256": "b4e1e9c2a63d88c62d9b8bfd9264529fb04cbf8b40b073479d68163e1d976a57",
+      "blob": "d97fb575bcf0f9857ad40e95bf7d2cd229125e99",
+      "lines": 127,
+      "selected_ref": "LOCAL_HELD_PARAMETER_ORDER",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointSmoothTame",
+        "ContinuousFlexibility.Analysis.TameUniformFamilyJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointSmoothTame",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointSmoothTame.lean",
+      "sha256": "80c1d63b655fd4fa1ee1dab48cf72c3740dbd3fb06b8bf20a313f305ebf79026",
+      "blob": "db33d6cf7df8e3aaed5cf75dc82d7f22b0f384aa",
+      "lines": 124,
+      "selected_ref": "LOCAL_HELD_PARAMETER_ORDER",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointZeroGrowth"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CirclePositiveLiftDomain",
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveLiftDomain.lean",
+      "blob": "d718375ee23823ae2b5d10fd8da9b759c65e6eb4",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "1a29804386bd0ba3a3c51fa03162cb1e81f28746270d75576d331f4d11eefbf0",
+      "lines": 248,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleInverseModel",
+        "ContinuousFlexibility.Analysis.CircleJetPointwiseEnergy",
+        "Mathlib.Topology.Algebra.InfiniteSum.ENNReal"
+      ]
+    }
+  ],
+  "read_scope": [
+    "All166 source lines and all six public declarations.",
+    "Complete actual118 corrected circle,164 corrected inverse,136 first-integral circle,154 travel parity projection,209 return-circle uniform family,191 circle-uniform operations,67 inverse perturbation,200 uniform smooth-family operations and127 selected per-order flow-circle uniform provider.",
+    "The actual selector-interpolation uniform estimate and lower-bound declarations from362; the actual returnCorrectedMinusFlow definition, circleAffineLift_deriv and parity projection contracts; exact fixed-family jets/oneHigh definitions and provider signatures.",
+    "All546 selected source identities, imports, graph topology and six new public declaration collision checks were independently recomputed; this graph check does not constitute mathematical review of every transitive module."
+  ],
+  "checks": [
+    "The actual interpolation selector has derivative at least1/12, and the original same lifted-state flow has derivative at least1/2. Both are differentiable because their actual total derivatives are positive; the exact whole-function composition equality gives corrected derivative at least1/24.",
+    "The real affine-lift derivative identity removes the optical translation without any bound on its value. The same literal corrected circle is the interpolation displacement plus the forward zero-travel shifted composition.",
+    "The inverse map is exactly the already defined negative diagonal of circlePositiveInverseComposeLinear at travel minus opticalTravel. The uniform1/24 lower bound supplies its actual inverse-domain requirement; no new inverse or radius selector is chosen.",
+    "The fixed original left chart is composed after that inverse using the actual positive opticalTravel translation. Adding the original inverse displacement reproduces the same first-integral circle.",
+    "The two travel components are the existing even and odd continuous linear projections. Their tame bounds preserve the original circle-model grading and material height weight.",
+    "UniformSmoothFamilyOn retains a genuine family of towers. Its jets operation transfers the bounds by uniqueness to the supplied, already fixed J before the parameter order is selected.",
+    "For each parameter order n, the output low-box index B and derivative loss delta precede R, the spatial grading s, every selector, state and increment. The estimate is exactly the existing oneHigh contract, with a nonnegative numerical K.",
+    "All six declarations explicitly include the actual hflow assumption, avoiding omission of proof-only section binders. The selected endpoint and flow uniform providers use the reviewed parameter-order ports, not a stronger all-order uniform-loss contract."
+  ],
+  "mechanical_checks": {
+    "verified_modules": 546,
+    "missing_imports_or_cycles": [],
+    "new_public_collision_count": 0,
+    "explicit_hflow_includes": 6,
+    "resource_options": [],
+    "forbidden_tokens": [],
+    "closure_gzip_exact": true
+  },
+  "scope_limits": [
+    "hflow remains an explicit genuine original-flow angular slope input; the preserved same-witness correction gateway is a separate provider.",
+    "These are selector-uniform circle grading bounds on low-grade boxes whose index may depend on parameter order. They are not the final CurrentJets estimate on one common chosen state neighborhood.",
+    "No new cutoff/inverse/reference witness or final estimate is supplied as an assumption. No local compiler/elaborator, resource-limit change, active/index/ref mutation or CI query/download."
+  ],
+  "findings": [],
+  "compiled": false,
+  "source_edited": false,
+  "reviewed_at": "2026-11-12T17:28:16.145051+00:00"
+}

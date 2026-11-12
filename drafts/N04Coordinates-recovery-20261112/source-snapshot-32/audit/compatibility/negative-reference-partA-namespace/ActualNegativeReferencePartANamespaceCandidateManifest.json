@@ -1,0 +1,69 @@
+{
+  "kind": "qualify_existing_Blueprint_N04PartA_inside_two_actual_reference_proofs",
+  "owner": "/root/audit_coordinates",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_EXACT_NAMESPACE_REVIEW",
+  "replacements": [
+    {
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePotentialFormula.lean",
+        "sha256": "99ed1115f16ce5cd65b12f5551a4672c5ee5a5a1e80f9cae7902da925f54cec7",
+        "blob": "e1fb2d7a68e3cbb3164113b6e689ba9ae3f79798",
+        "lines": 137,
+        "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferencePotentialFormula.lean"
+      },
+      "exact_prior_source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormula.lean",
+        "sha256": "9901ab0f2a3ff035d99d3f420c0b1215a279b53ba99785b06b3e1a9047a7ea7b",
+        "blob": "4f635532f777f7272f15937a1b7f7f53f681d171",
+        "lines": 137
+      },
+      "preimage": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePotentialFormula.base.lean.txt",
+        "sha256": "9901ab0f2a3ff035d99d3f420c0b1215a279b53ba99785b06b3e1a9047a7ea7b",
+        "blob": "4f635532f777f7272f15937a1b7f7f53f681d171",
+        "lines": 137
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePotentialFormula.diff",
+        "sha256": "3d6514fb2ab4266ee3281735b1bd772be74d4af4a081bab1e24ede26d8fc9413",
+        "blob": "49bd05e035d500d4e86c5b54086b1737128aff98",
+        "lines": 11
+      }
+    },
+    {
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferenceScalarInverse.lean",
+        "sha256": "84346b8a1836363f9b0fdbe48a93c75b42deaa144beea6fe8e0bf32d2faffa3e",
+        "blob": "532d3bc282c59cd7c96647db57d037efbd9f42a4",
+        "lines": 152,
+        "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceScalarInverse.lean"
+      },
+      "exact_prior_source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverse.lean",
+        "sha256": "88897c617e7204b734ee70860aa58cc38514df3c6da5180375898c3ae37c427f",
+        "blob": "cf59332c8a3c6d42d13afd93722193d9662c3cc3",
+        "lines": 152
+      },
+      "preimage": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferenceScalarInverse.base.lean.txt",
+        "sha256": "88897c617e7204b734ee70860aa58cc38514df3c6da5180375898c3ae37c427f",
+        "blob": "cf59332c8a3c6d42d13afd93722193d9662c3cc3",
+        "lines": 152
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferenceScalarInverse.diff",
+        "sha256": "4d1cff3b6d591cc7a32af98f6b12de935c47e995d59ea469488db69615f132fc",
+        "blob": "0ae60caba6558ce4a6d12485c8a6d3d40f3b58ec",
+        "lines": 11
+      }
+    }
+  ],
+  "namespace_evidence": "Current Blueprint/Statements.lean declares N04PartA only in ContinuousFlexibility.Blueprint. Both old sources open Statements without an explicit Blueprint qualifier; the local internal annotation is made explicit.",
+  "checks": [
+    "Each source has exactly one token prefix Blueprint. added to an internal hA type. Full public declarations, imports, all proof terms and all other bytes remain unchanged.",
+    "The actual n04b_actualTypedAtlas_partA provider already returns this exact Blueprint.N04PartA; no new condition or cast is introduced.",
+    "Historical137/152 sources, candidate and full mathematical reviews remain immutable; this explicit selection handles a namespace-elaboration boundary omitted by earlier static reviews."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:39:23.130299+00:00"
+}

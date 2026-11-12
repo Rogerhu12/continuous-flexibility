@@ -1,0 +1,11 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverse.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferenceScalarInverse.lean
+@@ -58,7 +58,7 @@
+   have href : z₀ ∈ stateNeighborhood S C base ε :=
+     reference_mem_stateNeighborhood S C base hN.1.1.2.1
+   have hsref : stateSector S z₀.1 := hN.1.1.2.2.1.stateSector
+-  have hA : N04PartA D S C K base ε :=
++  have hA : Blueprint.N04PartA D S C K base ε :=
+     n04b_actualTypedAtlas_partA hT hS hN hfield e
+   have hphysical : physicalPieceOpen S K z₀ k = I ×ˢ (univ : Set ℝ) := by
+     rw [hA.referenceDomain k]

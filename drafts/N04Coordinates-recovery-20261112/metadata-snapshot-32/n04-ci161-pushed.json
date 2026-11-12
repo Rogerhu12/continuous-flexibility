@@ -1,0 +1,26 @@
+{
+  "label": 161,
+  "head": "7ac330b2e0c2420e449235a090055a8018ebf17e",
+  "tree": "4e255a3287e0954cc2c4b009298c6a8f5958d99a",
+  "main": "89e539ccf7e9c558467cf875f44dcff9490ce271",
+  "main_checked": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+  "main_workflow_file_integrated": {
+    "main": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+    "path": ".github/workflows/build.yml",
+    "sha256": "6e1b0a3c010b6988811399ec9a71c5f5f58ca7a83421e5cd3d28a3bbf5b8bb24",
+    "blob": "3152629f2ebb53a7af652218ea5bd2d64d16d493",
+    "method": "Exact workflow-only file copy; main ancestry remains pending dependency-complete source batches."
+  },
+  "pushed": "2026-11-12 17:32:46 UTC",
+  "first_check_not_before": "2026-11-12 17:37:46 UTC",
+  "status": "pending",
+  "plan": "n04-ci161-plan.json",
+  "source_total": 4214,
+  "source_all_total": 4218,
+  "root_imports": 4155,
+  "added_lean_since_full_green": 1079,
+  "main_source_batch": 1,
+  "main_source_batch_count": 5,
+  "source_files": 2,
+  "scope": "Repair only the two CI160 default-heartbeat failures. Private proof boundaries and typed choice projections preserve every complete public contract, the original flow tower and parameter-loss order. Current-main source batch remains 1/5; further cohorts require full CI."
+}

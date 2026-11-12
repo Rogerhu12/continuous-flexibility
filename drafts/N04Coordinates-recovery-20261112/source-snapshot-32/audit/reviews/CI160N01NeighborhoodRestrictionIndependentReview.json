@@ -1,0 +1,120 @@
+{
+  "kind": "CI160_actual_neighborhood_opaque_flow_proof_boundary_full_independent_review",
+  "reviewer": "/root/audit_coordinates",
+  "status": "PASSED_COMPLETE_STATIC_SOURCE_AND_EXACT_DELTA_REVIEW_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/flow-opaque/N01NeighborhoodRestriction.lean",
+    "sha256": "9da10cc067a2606c3fef7d14ce73d4bb1c8e660022c0ce6df5837da5d333ad3b",
+    "blob": "4c615b70f2ab1b3e44ba228e2c578d00f2b748c1",
+    "lines": 142
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/N01NeighborhoodRestriction.ci160-base.lean.txt",
+    "sha256": "8980a1dfece4b54cc46e1dcda20504cda7e90bcaedc76059c82c86cdbb9cdd9e",
+    "blob": "551267986278d6717642c54f98f85ece2d4d4eb0",
+    "lines": 126
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/flow-opaque/N01NeighborhoodRestriction.diff",
+    "sha256": "61639985d6cfac3d158f5b6c40be085b9aa7bcad7497cbe66a4f64b5d5057fba",
+    "blob": "b157308e960cc227377ea83c244f4c9c79bf5d2f",
+    "lines": 81
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/flow-opaque/N01NeighborhoodRestrictionCI160RepairCandidateManifest.json",
+    "sha256": "1484d37da79fac8f0be42bb6170bff1df2cae7da9b29b82042adb808bb047e4a",
+    "blob": "ea63737339c3e7395b6d97c5ae21a98dd21c5a95",
+    "lines": 93
+  },
+  "actual_head": "03ea768c1f2211dff62714b932be808345dcf918",
+  "actual_tree": "84a1b13b975d16f42aed7de40b8601bd09fda8ae",
+  "target_path": "src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean",
+  "cached_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-160.log",
+    "sha256": "62386517362d0eeeed8b0663c0d399f4ccfdce08dcbcebe07ef90fd4167ca097",
+    "blob": "6e4ae1d5688bfa7c8dbd564feb1dddb0ef0fd4a6",
+    "lines": 933
+  },
+  "target_diagnostics": [
+    "error: src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean:101:4: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached"
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01cStateSeminorms.lean",
+      "sha256": "99abe3e9057a214b52c5188410cfc8d2ca2a3f9a52733bcb5c73dd9757666d26",
+      "blob": "f96fa185722d12bab8545de1d59ea100a0556417",
+      "lines": 331
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/SolveStateSpaces.lean",
+      "sha256": "035be369042b7d7ab904bdd9ec4fed643b94e2bc65d7dc44835529cb6a647115",
+      "blob": "ffea3f07f4a1fc03b0cdd99bc1d9bdd6c64bed13",
+      "lines": 184
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleCofinite.lean",
+      "sha256": "216a156a837d75f8ffb20ca2d4b12b84898ff606bc5d8f5bce4e79d25b9b3da3",
+      "blob": "1562a68cf59d5ebd5bedc7efce55bf3d7217ba44",
+      "lines": 98
+    }
+  ],
+  "additional_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/StateKappaBounds.lean",
+    "sha256": "52f620b420c0d975e96a206b6a90a128c9d0787a132e1a6ac8b98617303697bf",
+    "blob": "a53457ac660853de9bd3d0a1f4585bdf5496de80",
+    "lines": 136
+  },
+  "read_scope": [
+    "All142 selected flow-opaque source lines, all126 actual Git preimage lines, complete81-line supplied diff and candidate manifest.",
+    "Actual OrdinaryFlowFamilyTameBounds, ordinaryFlowFamily, stateNeighborhood, CoefficientFamilyTameBounds and complete N01Properties contract; all actual tail projections checked.",
+    "Complete SmoothDirections.restrict and oneHighVariationWeight_mono declarations/proofs, actual state-grading monotonicity/continuity providers and materialSample_mem_radialCore proof.",
+    "The unique cached N01NeighborhoodRestriction:101:4 deterministic isDefEq200000 error, with surrounding build/error context. The separate ControlFlowBounds errors are outside this review."
+  ],
+  "findings": [
+    {
+      "topic": "Quantifier order and data identity",
+      "result": "The extracted proof introduces k, selects the original parameterLoss, then introduces spatial s and takes the same B from horder s. No parameter loss is absorbed into B or chosen after the component/state. C.minusFlow, center, physical point, C.cell and T.sample remain the original ones."
+    },
+    {
+      "topic": "True restricted tower",
+      "result": "The helper applies the existing generic restriction theorem. Its underlying SmoothDirections.restrict keeps D := J.D exactly and only changes the open domain and membership proofs. The target low base is raised by the actual monotonicity lemma; high order remains s+loss+parameterLoss."
+    },
+    {
+      "topic": "Material coefficient and bound direction",
+      "result": "B,H(sample),E0(sample) are positive from the same actual hT and partition sample facts. Their product is nonnegative, so the monotonicity step has the correct direction. No E0>=1 premise or new numerical cost is introduced."
+    },
+    {
+      "topic": "Concrete-to-generic proof boundary",
+      "result": "The public N01 proof types the exact final tail once as OrdinaryFlowFamilyTameBounds T S C base loss epsilon, then passes it as hbound. The private helper no longer projects through the full N01 conjunction while expanding the existential flow bound."
+    },
+    {
+      "topic": "Exact preservation",
+      "result": "Four complete public headers, three earlier public proof bodies, the successful N01 prefix and coefficient branch, all imports/options/local instance bytes are preserved. The new private body is byte-identical to the original final bullet after only deindentation and replacing the tail projection by hbound."
+    }
+  ],
+  "mechanical_checks": {
+    "artifact_rows_verified": 9,
+    "actual_git_preimage_equal": true,
+    "actual_tree_equal": true,
+    "four_public_headers_identical": true,
+    "private_body_exact_after_only_deindent_and_projection_substitution": true,
+    "inverse_transform_reproduces_full_preimage": true,
+    "imports_options_remaining_bytes_preserved": true,
+    "prohibited_placeholders_or_resource_overrides": []
+  },
+  "selection_note": "Only positive/repair160/flow-opaque final142 is reviewed. The earlier unreviewed layout candidate remains historical and is not selected.",
+  "compiled": false,
+  "source_modified": false,
+  "ci_queried_or_downloaded": false,
+  "scope_limits": [
+    "Static proof-boundary and mathematical/API compatibility review only. Actual performance under the unchanged default heartbeat limit is for the next authorized CI run.",
+    "No compiler/elaborator, active checkout/index/ref/checkpoint/authority mutation, resource-limit change, or CI query/download was performed."
+  ],
+  "created_at": "2026-11-12T17:25:25.569805+00:00"
+}

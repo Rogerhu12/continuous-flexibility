@@ -1,0 +1,111 @@
+{
+  "kind": "same_actual_reference_left_and_nu_column_identities",
+  "owner": "/root",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceScalarColumnIdentities.lean",
+    "sha256": "8d5eaa37b7bdafb44903df37e1f35b1b114bdc03ce52ac3497dff4a670a2d320",
+    "blob": "51c778ef628e8028eb968e46ce1396bbd3d8eee1",
+    "lines": 104
+  },
+  "public_names": [
+    "referenceScalarColumnRadial",
+    "referenceScalarColumnAngular",
+    "referenceScalarColumn_regular",
+    "referenceScalarColumn_actual_eqOn"
+  ],
+  "imports": [
+    "ContinuousFlexibility.Analysis.N06LeftColumnPhysical",
+    "ContinuousFlexibility.Analysis.FixedReferenceScalarSourceMaterialJets",
+    "ContinuousFlexibility.Analysis.LocalMixedProductBounds"
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N06LeftColumnPhysical.lean",
+      "sha256": "c64a4f9a2288786de217ffe5abfb0ae66baef48c82b4b2b8f1e8537889c0d2de",
+      "blob": "0bad43e8b201502e37f6d9096d87f1f8daac6557",
+      "lines": 178
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N06FiniteReferenceColumns.lean",
+      "sha256": "adca65511243cf1fa9fdc2874a30ef30831d2e96d0c88a993f3f4e8fe3c8df90",
+      "blob": "13afb66bdaa2885bbbd439e635c3e1caad916ed7",
+      "lines": 188
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N06ReferenceNuColumn.lean",
+      "sha256": "f2493554f61b683b678775a9cd3ff8d9355edb24ab0af6fb3da45d35a21c4ae7",
+      "blob": "20529f449f55cab26dac90192a8c2763b3f067a1",
+      "lines": 139
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/ReferenceColumnSmooth.lean",
+      "sha256": "85178cd7a41043e2c2b022d7336d11f10aa04493523d3ec27b11caa4e5fa96c1",
+      "blob": "c32781e10f7d29db1d07210e66557a7defe6b411",
+      "lines": 90
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/FourierModes.lean",
+      "sha256": "1f6a02e5261585b519e7bb51e79e57eff478b5adecd8959f1ee3dca111ac2b74",
+      "blob": "24eff48b12d19ffe2bdff0907d6a62fcb3b049aa",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/R11bFourierTests.lean",
+      "sha256": "5ae409433065e04a65cbb5ab5adfbcee8e9c5a7a1c2a7972fb6fc22d2bde11bb",
+      "blob": "0d22b8a978bbe12dbc8b17a6227aa8b5a772a184",
+      "lines": 130
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "lines": 603
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Radial.lean",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352",
+      "blob": "473c530a1de50c672f2e54908d374f624f5955b0",
+      "lines": 874
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/LocalMixedProductBounds.lean",
+      "sha256": "d0faf14d190ae8c14f16f80958e8c166183c0914f822815a8d98aa13a660dfd7",
+      "blob": "cd30f2f9bb0efbb186788c4010cfaeef58befd57",
+      "lines": 125
+    }
+  ],
+  "scalar_material_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedReferenceScalarSourceMaterialJets.lean",
+    "sha256": "cc9d0f96fbd066179f2bb3910642f67f2d0b3f8ad82108e4339ff476f17bf870",
+    "blob": "e410d5c93a544817741449d6c6f952bfd0203297",
+    "lines": 140
+  },
+  "scalar_material_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedReferenceScalarSourceMaterialJetsReviewedManifest.json",
+    "sha256": "05a798a8f9a66f3f5203ce19ad74b39106280541bcd44d405d886cb051dd3059",
+    "blob": "25ba71b9d70ee967f994ab7f37f10b6371bf01eb",
+    "lines": 32
+  },
+  "active_head_at_freeze": "7ac330b2e0c2420e449235a090055a8018ebf17e",
+  "checks": [
+    "Read all104 selected lines and the actual N01/N03, canonicalSource/atom, physical cutoff and true-border contracts and callee statements.",
+    "The left radial profile is the derivative of the original w*chiLeft derivative flux. Its global smoothness uses the actual physical cutoff and radial profile smoothness.",
+    "The nu radial profile is the actual referenceColumn D; its global smooth extension at zero uses the existing true-border theorem. Its angular factor is the actual cosineMode2 with its proved pi period.",
+    "The source pullback is factored algebraically through exactly the same stored inverse and sourceFactor atom. No Jacobian or height positivity is needed just for this identity.",
+    "The reference corrected left column uses the actual N03 equality theorem; the nu column uses the N01 reference state and true positive radial core to discharge r nonzero.",
+    "Only literal inverse/source-factor fields and a genuine radial-core range are assumptions. No canonical column estimate, alternate atlas or material witness is selected."
+  ],
+  "scope_limits": [
+    "This leaf proves identities and fixed physical-profile regularity. The subsequent numerical adapter must supply the actual source-factor and positive inverse jets at the original material samples.",
+    "No final ReferenceJets or CurrentJets certificate is assumed or claimed. No compiler, resource override, active source/index/ref or CI action."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:35:32.722863+00:00"
+}

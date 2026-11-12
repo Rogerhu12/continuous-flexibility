@@ -1,0 +1,237 @@
+{
+  "kind": "actual_first_integral_reference_difference_and_angular_material_interpolation",
+  "owner": "/root/proof_inventory",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_PEER",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelDifferenceAngularBounds.lean",
+    "sha256": "eaa14196be78e7434d780cb537c878193906d23b8b35da4d424265897e63ba4c",
+    "blob": "d201f14194e6df9c339b3e9b0ea0ae9ecf626f5c",
+    "lines": 140,
+    "module": "ContinuousFlexibility.Analysis.N04ActualTravelDifferenceAngularBounds",
+    "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelDifferenceAngularBounds.lean",
+    "source_ref": "LOCAL_HELD_CANDIDATE",
+    "target_path": "src/ContinuousFlexibility/Analysis/N04ActualTravelDifferenceAngularBounds.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.N04ActualTravelStripTower",
+      "ContinuousFlexibility.Analysis.N04TravelCircleUniformBounds",
+      "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+      "ContinuousFlexibility.Analysis.N01TransportAngularInterpolation"
+    ]
+  },
+  "public_names": [
+    "NonlinearPropertiesThrough03.n04ActualMinusFirstIntegralDifference_stripJointTower",
+    "NonlinearPropertiesThrough03.n04ActualMinusFirstIntegralDifference_angular_interpolation"
+  ],
+  "selected_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTower.lean",
+      "sha256": "b56f6a83992424a397bede0353ac43c6a34fa75e172f5b39e162d69228b39176",
+      "blob": "8defbd534dce0d43f28ad8ed155c8e684eea771a",
+      "lines": 119,
+      "module": "ContinuousFlexibility.Analysis.N04ActualTravelStripTower",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04ActualTravelStripTower.lean",
+      "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTower.lean",
+      "source_ref": "LOCAL_HELD_REVIEWED_OR_CANDIDATE",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04MinusFirstIntegralStripTower",
+        "ContinuousFlexibility.Analysis.N04bActualTravelChart",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionPatching",
+        "ContinuousFlexibility.Analysis.TameProductDirections",
+        "ContinuousFlexibility.Analysis.SolveNewtonBridge"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04TravelCircleUniformBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04TravelCircleUniformBounds.lean",
+      "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelCircleUniformBounds.lean",
+      "source_ref": "LOCAL_HELD_CANDIDATE",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelCircleUniformBounds.lean",
+      "sha256": "a38f9a389f71f9811a9d99135155a73dd48b1ddc597682cdca05a4248f319a36",
+      "blob": "ccc6e3813c819470b322d059a560be09372e8d0a",
+      "lines": 166,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04TravelChartCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocityUniformBounds"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04MinusFirstIntegralCircle.lean",
+      "sha256": "2c6be9ee3d6ce0f6ec4e5b15248718dca7085dae2dd80580dfd816943f10eb0a",
+      "blob": "fc11c89b2e92489890485acfcfe221f4ec47dd28",
+      "lines": 136,
+      "target": "src/ContinuousFlexibility/Analysis/N04MinusFirstIntegralCircle.lean",
+      "module": "ContinuousFlexibility.Analysis.N04MinusFirstIntegralCircle",
+      "selected_ref": "LOCAL_NEW_ACTUAL_MINUS_FIRST_INTEGRAL",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04CorrectedFlowInverseCircle",
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualTravel.lean",
+      "source_ref": "7ac330b2e0c2420e449235a090055a8018ebf17e",
+      "blob": "07661eae46124d0a5550bf4f6de16a5874838d3c",
+      "sha256": "4307b8b206489be492e33a3f12198e4af5271c45a5db821b85ac2db0133ce7eb",
+      "lines": 243,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bOperatorGerms",
+        "ContinuousFlexibility.Analysis.N04bActualTravelChart",
+        "ContinuousFlexibility.Analysis.N04bReferenceTravelCut",
+        "ContinuousFlexibility.Analysis.N04bErrorFactorization",
+        "ContinuousFlexibility.Analysis.N08ReferenceFlow",
+        "ContinuousFlexibility.Analysis.N01CoefficientValueJets",
+        "ContinuousFlexibility.Analysis.EvenPeriodicTestGerms",
+        "ContinuousFlexibility.Analysis.OperatorCoefficientClassification",
+        "ContinuousFlexibility.Analysis.OffAxisContinuousRecovery"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01TransportAngularInterpolation",
+      "path": "src/ContinuousFlexibility/Analysis/N01TransportAngularInterpolation.lean",
+      "blob": "33e32a0bd6706814d68eacac0eda98bdf1232735",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "57dc5e67c0e5f656159cd2b4f6603e41a61184667eb778befbba7d393c50cf18",
+      "lines": 275,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleStripAngularInterpolation",
+        "ContinuousFlexibility.Analysis.N01ResidualUniformBounds",
+        "ContinuousFlexibility.Analysis.N01ReturnTransportSpatialTowers",
+        "ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleStripAngularInterpolation",
+      "path": "src/ContinuousFlexibility/Analysis/CircleStripAngularInterpolation.lean",
+      "blob": "f50cc35b6834effabd3138841b58c3cbedcc2064",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "f3d74ab93c568f463201e75de897cde99146602a44c4e80a8a9bb1c0be27cc88",
+      "lines": 133,
+      "imports": [
+        "ContinuousFlexibility.Analysis.JointMixedCircleEvaluation",
+        "ContinuousFlexibility.Analysis.CircleUniformAngularInterpolation",
+        "ContinuousFlexibility.Analysis.TameUniformSmoothFamily"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.JointMixedCircleEvaluation",
+      "path": "src/ContinuousFlexibility/Analysis/JointMixedCircleEvaluation.lean",
+      "blob": "4b8ce57628201fdef1d3924ac0b1173bb1d29e9d",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "f84887a8589a3fae2675346ae085c1694e9f3e4af4e22a89d67cc9e6968a9a18",
+      "lines": 138,
+      "imports": [
+        "ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus",
+        "ContinuousFlexibility.Analysis.CircleJointEvaluation",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsConstantShift"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsAffine",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAffine.lean",
+      "blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+      "lines": 124,
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "ContinuousFlexibility.Analysis.ProjectiveJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameProductDirections",
+      "path": "src/ContinuousFlexibility/Analysis/TameProductDirections.lean",
+      "blob": "da7b331dbdf5958e0f9e2f18326085519ae35398",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "15f7e37725e1710ef8e56bb1e47a302afc070381b9a0fc5613345f6440f5f20f",
+      "lines": 48,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameJetLocalBounds",
+        "ContinuousFlexibility.Analysis.ProjectiveCurveIteratedChain"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SolveNewtonBridge",
+      "path": "src/ContinuousFlexibility/Analysis/SolveNewtonBridge.lean",
+      "blob": "af8c1aef7d93e7bfa47e87ae08272dfe46b0fa40",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "6f1c11fc500fee7b43ecf034f966e108f46feb38368ab517f9b8fb71b4cff07e",
+      "lines": 235,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameTransfer"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SolveStateSpaces",
+      "path": "src/ContinuousFlexibility/Analysis/SolveStateSpaces.lean",
+      "blob": "ffea3f07f4a1fc03b0cdd99bc1d9bdd6c64bed13",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "035be369042b7d7ab904bdd9ec4fed643b94e2bc65d7dc44835529cb6a647115",
+      "lines": 184,
+      "imports": [
+        "ContinuousFlexibility.Analysis.SolveCircleProjection",
+        "ContinuousFlexibility.Analysis.SolveSmoothing",
+        "ContinuousFlexibility.Analysis.ProjectiveNewtonTameData",
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ]
+    }
+  ],
+  "selected_provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelCircleUniformBoundsReviewedManifest.json",
+      "sha256": "a45c8ebc4e02c22673dd4de355e4be35852dc503ad47786e2805b93ec2098520",
+      "blob": "f7e22f8f94b1f97bce6400ad6b65f66ebb10d5a4",
+      "lines": 52
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTowerReviewedManifest.json",
+      "sha256": "dd13090289d452733a130ed72139ff5a05deff14cbac6e90be81015ecfc3d0bb",
+      "blob": "5c2f241012afa2dc284b63dbaefc529c35111409",
+      "lines": 33
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04RetainedCorrectionNumericalWitnessReviewedManifest.json",
+      "sha256": "32919423d17d7d69e54be4341f67eb38615e1316c2419149e157a4eb17b2b4ed",
+      "blob": "d52b4873da2a27f52a099a62286eed0c53d0aca1",
+      "lines": 44
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/flow-opaque/N01NeighborhoodRestrictionCI160RepairReviewedManifest.json",
+      "sha256": "3e07c84e408796717e7c1fc92d6f56bd99f0b6de456264a2591a9921ccdae6b6",
+      "blob": "9c2c9683497750c1b17ba94e6e0798356a14f6af",
+      "lines": 46
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair160/N01ControlFlowBoundsCI160RepairReviewedManifest.json",
+      "sha256": "cb69462825837a725c13b38595cf09a2f53c1f524d427a2485d3a074caae821b",
+      "blob": "28522e9290a6720de2f22defe7ea278b5e42f704",
+      "lines": 34
+    }
+  ],
+  "selected_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelDifferenceAngularBoundsClosureInventory.json",
+    "sha256": "744e658693898d4b94e3b58963622a67c784edae09216d2d3f45081e14e0ac1b",
+    "blob": "b83df8d3566ea4db271316cfd6e3d96ed8ad5f6a",
+    "lines": 9726
+  },
+  "selected_closure_gzip": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelDifferenceAngularBoundsClosureInventory.json.gz",
+    "sha256": "ad250903225f0c5010b4d5dde8066713c6d7282c6472a66342fcb6254a054819",
+    "bytes": 81749,
+    "decompresses_to_sha256": "744e658693898d4b94e3b58963622a67c784edae09216d2d3f45081e14e0ac1b"
+  },
+  "checks": [
+    "The difference tower is formed from the existing119 actual first-integral joint tower and its state-zero pullback, before all parameter and spatial orders. It subtracts the same stored reference flow and left chart.",
+    "The exact genuine reference first integral equals theta plus opticalTravel. The existing136 actual circle decoder therefore equals the actual current-minus-reference difference, with no bound on the affine part.",
+    "Existing closed-radius selectors cover each actual strip point. Existing133 strip interpolation and138 uniqueness identify the supplied genuine J, retaining T.H(T.sample m)^(3/4) at every angular order including zero.",
+    "nmax precedes the common interpolation low index B; B precedes the radius, every spatial order, actual component, physical radius, angle, state and direction. No new inverse/cutoff/L is selected.",
+    "The new selected graph explicitly supersedes the two known CI160 failed providers by their exact peer-reviewed CI161 candidates; all old manifests remain unchanged. Current CI161 is pending, not compilation evidence."
+  ],
+  "scope_limits": [
+    "The pure angular bound is on a low-grade box whose index may depend on the maximum parameter order. Fixed-base final CurrentJets and radial material forcing estimates remain separate.",
+    "Input hflowSlope and literal hflow/hcoeff/discriminant belong to the same retained153 numerical witness; no independently chosen L or cutoff may be mixed.",
+    "No compiler/elaborator, active/index/ref/CI action or resource-limit change."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:35:45.170998+00:00"
+}

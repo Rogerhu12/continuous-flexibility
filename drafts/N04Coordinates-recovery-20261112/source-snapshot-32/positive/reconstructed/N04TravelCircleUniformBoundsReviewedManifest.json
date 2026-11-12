@@ -1,0 +1,52 @@
+{
+  "kind": "same_actual_travel_circle_uniform_bounds_reviewed_source",
+  "owner": "/root/proof_inventory",
+  "status": "FULL_STATIC_PEER_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "module": "ContinuousFlexibility.Analysis.N04TravelCircleUniformBounds",
+    "target_path": "src/ContinuousFlexibility/Analysis/N04TravelCircleUniformBounds.lean",
+    "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelCircleUniformBounds.lean",
+    "source_ref": "LOCAL_HELD_CANDIDATE",
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelCircleUniformBounds.lean",
+    "sha256": "a38f9a389f71f9811a9d99135155a73dd48b1ddc597682cdca05a4248f319a36",
+    "blob": "ccc6e3813c819470b322d059a560be09372e8d0a",
+    "lines": 166,
+    "imports": [
+      "ContinuousFlexibility.Analysis.N04TravelChartCircle",
+      "ContinuousFlexibility.Analysis.N01ReturnVelocityUniformBounds"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelCircleUniformBoundsCandidateManifest.json",
+    "sha256": "8c7df7961eedb87d658ee988228af916eadbb60ac18de8aa48cbbda21bc41d4c",
+    "blob": "e10735185e610903f9574b4444f312314c018164",
+    "lines": 219
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/N04TravelCircleUniformBoundsIndependentReview.json",
+    "sha256": "0fd6eacd8874a1d174310feca73dafd8103137554e4a22bb18a4c1b10f2d1134",
+    "blob": "71095b24c85774555953cb4f30ca6096f437650a",
+    "lines": 251
+  },
+  "selected_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelCircleUniformBoundsClosureInventory.json",
+    "sha256": "871c0a0de79771fa8954c20a5824a51ac9e92ee5953262d4f04a2fd0125efbe1",
+    "blob": "b714776f8b147083fa52a8deee0dc5614ade7b5b",
+    "lines": 7495
+  },
+  "selected_closure_gzip": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelCircleUniformBoundsClosureInventory.json.gz",
+    "sha256": "d8cfe6d10636c8300d7f4d8ea93743112c2388d5e6fe013328c0b78c423f2463",
+    "bytes": 62799,
+    "decompresses_to_sha256": "871c0a0de79771fa8954c20a5824a51ac9e92ee5953262d4f04a2fd0125efbe1"
+  },
+  "scope": [
+    "The same actual corrected circle, its already defined inverse, fixed left-chart composition and parity projections are retained.",
+    "The genuine circle family J is fixed before n. The low-box index B and parameter loss delta are chosen after n, before R,s and every selector.",
+    "The real original-flow lower bound hflow is retained by the separately reviewed N04RetainedCorrectionNumericalWitness153 producer. No independent witness choices may be combined.",
+    "No final CurrentJets claim, compilation, resource override or active/index/ref/CI change. Historical candidate scope and selected graph remain immutable."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "created_at": "2026-11-12T17:30:22.885493+00:00"
+}

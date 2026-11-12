@@ -1,0 +1,54 @@
+{
+  "kind": "expose_reviewed_radial_unit_normalization_and_local_absolute_jet_helpers",
+  "owner": "/root/audit_coordinates",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_EXACT_VISIBILITY_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-helper-visibility/RadialUnitDensityInverseJets.lean",
+    "sha256": "a56a59502b38aee6a0eaa680c0ba5aec43274d36a8992697cc8caaf09f0f8bc6",
+    "blob": "ca8d3d45ec3a151d968739563a81f5089cef827c",
+    "lines": 136,
+    "target_path": "src/ContinuousFlexibility/Analysis/RadialUnitDensityInverseJets.lean"
+  },
+  "exact_prior_selected_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-clm-ext/RadialUnitDensityInverseJets.lean",
+    "sha256": "a04c93a733402f23e349a4a8a6d38e5f42b7eaa147e5b777fa00ee427eec88f5",
+    "blob": "b9bc21aa7c89b38691e7510288d38832f2ab3a0f",
+    "lines": 136
+  },
+  "exact_preimage": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-helper-visibility/RadialUnitDensityInverseJets.base.lean.txt",
+    "sha256": "a04c93a733402f23e349a4a8a6d38e5f42b7eaa147e5b777fa00ee427eec88f5",
+    "blob": "b9bc21aa7c89b38691e7510288d38832f2ab3a0f",
+    "lines": 136
+  },
+  "exact_diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-helper-visibility/RadialUnitDensityInverseJets.diff",
+    "sha256": "75168326fb8fa45a11182b4c2554e81104581e20c8bb5a90a68a5c7be4493efc",
+    "blob": "a9a72fa1e691fc68f763dc642a078587ffd78a83",
+    "lines": 20
+  },
+  "prior_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-clm-ext/RadialUnitDensityInverseJetsReviewedManifest.json",
+    "sha256": "ffef369617f1a1176cc68c877ef5e47d8a8aa21a41aa1e10fa225577537d23be",
+    "blob": "85b926bf9a18b2ee3b54a3b636d48e8f6237a8dd",
+    "lines": 47
+  },
+  "prior_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/RadialUnitDensityInverseJetsIndependentReview.json",
+    "sha256": "7e5dd41fa452e13950296b756f20a64d306c8d8b5b060d51b88ca6a0c07da203",
+    "blob": "f88f89109a9833676025e00589e54c99e9a46959",
+    "lines": 148
+  },
+  "new_public_names": [
+    "radialUnit_abs_jet_of_abs_germ",
+    "radialUnit_scalar_normalization"
+  ],
+  "checks": [
+    "Exactly two private tokens are removed. All names, complete statement bodies/proofs/imports/options and other bytes equal the reviewed136 source.",
+    "The explicit CLM.ext correction from prior136 is retained. Both original135 and prior136 remain untouched.",
+    "The exposed local sign and unit normalization proofs are needed by the same actual negative chart/Jacobian/source-factor material consumers; no new assumption or theorem body is added."
+  ],
+  "selection_note": "New consumers require this visibility candidate. Historical candidates/owners continue to describe their original source; final provider selection must explicitly supersede136 after peer.",
+  "compiled": false,
+  "created_at": "2026-11-12T17:37:20.325338+00:00"
+}

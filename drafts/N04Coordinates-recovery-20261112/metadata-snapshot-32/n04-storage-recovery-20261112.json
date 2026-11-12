@@ -1,0 +1,73 @@
+{
+  "exact_compressed_payloads": [
+    {
+      "stored": "n04-backup16-tree-payload.json.gz",
+      "original_sha256": "6018618f98d06a1852c2602fd314d90c1e71f4d6c725b10d96f099708580a491",
+      "original_bytes": 1143657,
+      "compressed_bytes": 186815,
+      "restoration": "gzip decompression returns exact original API payload"
+    },
+    {
+      "stored": "n04-backup17-tree-payload.json.gz",
+      "original_sha256": "2730cef4cf60c8976ec00e2cb3cf0590beb199c7b32a8ea697e292efdfafe320",
+      "original_bytes": 1038837,
+      "compressed_bytes": 172574,
+      "restoration": "gzip decompression returns exact original API payload"
+    },
+    {
+      "stored": "n04-backup18-tree-payload.json.gz",
+      "original_sha256": "c0529436d8ec72bf507c730630dd12e9e25ad6aa394096f8a17b7300b8ebfb2c",
+      "original_bytes": 1038344,
+      "compressed_bytes": 168842,
+      "restoration": "gzip decompression returns exact original API payload"
+    },
+    {
+      "stored": "n04-backup19-tree-payload.json.gz",
+      "original_sha256": "e43f701ed76a5edbc8dd2caff276f3ed9d07bd80de9b6202ec6a5b5c3823b324",
+      "original_bytes": 975984,
+      "compressed_bytes": 159506,
+      "restoration": "gzip decompression returns exact original API payload"
+    },
+    {
+      "stored": "n04-backup20-tree-payload.json.gz",
+      "original_sha256": "b7bf1f9340de61b580bb5b0cba0eef558c19617d3b8c34d0f3f73c2f5c9bf86e",
+      "original_bytes": 1143011,
+      "compressed_bytes": 184847,
+      "restoration": "gzip decompression returns exact original API payload"
+    },
+    {
+      "stored": "n04-backup21-tree-payload.json.gz",
+      "original_sha256": "9425ad09d33dd7df79af2d717845e9e3617b6c9f7213c13d51f7f3ee9271022c",
+      "original_bytes": 4615061,
+      "compressed_bytes": 679742,
+      "restoration": "gzip decompression returns exact original API payload"
+    },
+    {
+      "stored": "n04-backup22-tree-payload.json.gz",
+      "original_sha256": "6d97fdccc8025dab957caa3b9645f0beb5ead74c5f28ca032142e597b85bb158",
+      "original_bytes": 2375272,
+      "compressed_bytes": 387553,
+      "restoration": "gzip decompression returns exact original API payload"
+    },
+    {
+      "stored": "n04-backup23-tree-payload.json.gz",
+      "original_sha256": "4defdfd49d13171f82550dee3c95ca0b077e1850e0ea277c28540828de39f0b8",
+      "original_bytes": 3361330,
+      "compressed_bytes": 511911,
+      "restoration": "gzip decompression returns exact original API payload"
+    }
+  ],
+  "transport_payload24": {
+    "stored": "n04-backup24-tree-payload-reconstructed.json.gz",
+    "original_transport_json_lost_during_ENOSPC": true,
+    "source_loss": false,
+    "replacement": "Equivalent SHA-addressed tree entries rebuilt from the verified remote-backed Git objects; original byte layout is not claimed.",
+    "parent": "d70b8af972abcee12136f58ec21e8b4342a2fddc",
+    "commit": "d286be7c492ef26d1008b0b0adbeb3a679687090",
+    "tree": "805e34c11bc08c67b9af1feb3b7c17096cc5fbd7",
+    "tree_reconstructed_exactly": true,
+    "entries": 129
+  },
+  "unique_sources_manifests_and_cached_ci_logs": "unchanged",
+  "workspace_available_at_recovery": "2.6 GiB"
+}

@@ -1,0 +1,206 @@
+{
+  "kind": "actual_negative_reference_internal_PartA_namespace_explicit_compatibility_independent_review",
+  "reviewer": "/root/proof_inventory",
+  "status": "PASSED_EXACT_DELTA_AND_ACTUAL_NAMESPACE_REVIEW_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePartANamespaceCandidateManifest.json",
+    "sha256": "6c23eb54621b71725e87be17ce027dc1671ad4e8be302a09ecce4970b6f10f63",
+    "blob": "7c526e5135ffb0d970f3432411ac52f74d3abbaf",
+    "lines": 69
+  },
+  "replacements": [
+    {
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePotentialFormula.lean",
+        "sha256": "99ed1115f16ce5cd65b12f5551a4672c5ee5a5a1e80f9cae7902da925f54cec7",
+        "blob": "e1fb2d7a68e3cbb3164113b6e689ba9ae3f79798",
+        "lines": 137,
+        "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferencePotentialFormula.lean"
+      },
+      "prior_source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormula.lean",
+        "sha256": "9901ab0f2a3ff035d99d3f420c0b1215a279b53ba99785b06b3e1a9047a7ea7b",
+        "blob": "4f635532f777f7272f15937a1b7f7f53f681d171",
+        "lines": 137
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePotentialFormula.diff",
+        "sha256": "3d6514fb2ab4266ee3281735b1bd772be74d4af4a081bab1e24ede26d8fc9413",
+        "blob": "49bd05e035d500d4e86c5b54086b1737128aff98",
+        "lines": 11
+      },
+      "public_headers_unchanged": 2
+    },
+    {
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferenceScalarInverse.lean",
+        "sha256": "84346b8a1836363f9b0fdbe48a93c75b42deaa144beea6fe8e0bf32d2faffa3e",
+        "blob": "532d3bc282c59cd7c96647db57d037efbd9f42a4",
+        "lines": 152,
+        "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceScalarInverse.lean"
+      },
+      "prior_source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverse.lean",
+        "sha256": "88897c617e7204b734ee70860aa58cc38514df3c6da5180375898c3ae37c427f",
+        "blob": "cf59332c8a3c6d42d13afd93722193d9662c3cc3",
+        "lines": 152
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferenceScalarInverse.diff",
+        "sha256": "4d1cff3b6d591cc7a32af98f6b12de935c47e995d59ea469488db69615f132fc",
+        "blob": "0ae60caba6558ce4a6d12485c8a6d3d40f3b58ec",
+        "lines": 11
+      },
+      "public_headers_unchanged": 1
+    }
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Blueprint/Statements.lean",
+      "sha256": "4eff8f3724ee80268cebe29904e817efa068f6e398d6ab7d1ebb05bcebe09eda",
+      "blob": "af5ba9dacc2c7b026d6535f09e886ce22ca2e673",
+      "lines": 275
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasGeometry.lean",
+      "sha256": "9249ea8b23d4edc27fe5e9d405e32a3da2248556efb394db33faf279aefa1d0a",
+      "blob": "6e704770a6066c6279f7c3cdae96c1d695d554d3",
+      "lines": 101
+    }
+  ],
+  "read_scope": [
+    "All selected 137+152 source lines and both exact 11-line diffs, with all supplied preimage and source hashes independently verified.",
+    "Actual Blueprint.Statements N04PartA definition and N04bActualAtlasGeometry.n04b_actualTypedAtlas_partA complete public contract and relevant construction prefix.",
+    "Actual selected import reachability, including the existing Blueprint.Statements provider; no new import is required."
+  ],
+  "findings": [
+    {
+      "topic": "Resolved declaration and exact argument order",
+      "result": "N04PartA is declared in ContinuousFlexibility.Blueprint with D,S,C,K,base,epsilon, and its body is CanonicalGeometry D S C K base epsilon. The actual partA producer literally returns CanonicalGeometry; the newly qualified local annotation is definitionally that exact result, with the same original K and no cast or new assumption."
+    },
+    {
+      "topic": "Namespace visibility",
+      "result": "Both consumers are inside ContinuousFlexibility.Analysis and open Statements, not Blueprint. The explicit Blueprint. prefix resolves through the common ContinuousFlexibility ancestor. The existing selected import closure reaches Blueprint.Statements, so this change does not depend on an unavailable provider."
+    },
+    {
+      "topic": "Exact preservation",
+      "result": "Each source adds precisely one Blueprint. prefix at an internal have hA annotation. Three complete public headers total, all proof expressions after the annotation, all imports/options and every other byte are unchanged. Reverse replacement reproduces each historical source exactly."
+    },
+    {
+      "topic": "Historical review correction",
+      "result": "The earlier full mathematical reviews did not resolve this local unqualified name boundary. They remain immutable historical evidence; this receipt records and corrects the namespace omission, without treating either version as compiled."
+    }
+  ],
+  "import_visibility": {
+    "project_modules": 473,
+    "missing_project_imports": [],
+    "provider_chain": [
+      "ContinuousFlexibility.Analysis.ActualNegativeReferenceScalarInverse",
+      "ContinuousFlexibility.Analysis.ActualNegativeReferencePotentialFormula",
+      "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+      "ContinuousFlexibility.Analysis.N04bActualRootInterior",
+      "ContinuousFlexibility.Analysis.N04bRootCollarDomain",
+      "ContinuousFlexibility.Analysis.N04bRootLiteralMaps",
+      "ContinuousFlexibility.Analysis.N04bCollarInverseGluing",
+      "ContinuousFlexibility.Analysis.N04bCollarInverse",
+      "ContinuousFlexibility.Analysis.N04bPlanarInverseGerm",
+      "ContinuousFlexibility.Analysis.PlanarInverseRegularity",
+      "ContinuousFlexibility.Analysis.CanonicalEndpointInverse",
+      "ContinuousFlexibility.Blueprint.CanonicalParts",
+      "ContinuousFlexibility.Blueprint.Statements"
+    ],
+    "chain_files": [
+      {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferenceScalarInverse.lean",
+        "sha256": "84346b8a1836363f9b0fdbe48a93c75b42deaa144beea6fe8e0bf32d2faffa3e",
+        "blob": "532d3bc282c59cd7c96647db57d037efbd9f42a4",
+        "lines": 152
+      },
+      {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePotentialFormula.lean",
+        "sha256": "99ed1115f16ce5cd65b12f5551a4672c5ee5a5a1e80f9cae7902da925f54cec7",
+        "blob": "e1fb2d7a68e3cbb3164113b6e689ba9ae3f79798",
+        "lines": 137
+      },
+      {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeRadialFields.lean",
+        "sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+        "blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+        "lines": 156
+      },
+      {
+        "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualRootInterior.lean",
+        "sha256": "e48818ca3333c9e39ad2b5cf2528733a278f2aa2921a83508be9f8e4c759e66c",
+        "blob": "f59704e802cdf7bd9ae8a66504974410052233e0",
+        "lines": 105
+      },
+      {
+        "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootCollarDomain.lean",
+        "sha256": "0b133c5fa14afcf08decae4fcfca6623663bb6877aec422728d47a5789139005",
+        "blob": "f7a4a4a601e2a587f74dc5dd9c9d52c6ee7fa354",
+        "lines": 96
+      },
+      {
+        "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootLiteralMaps.lean",
+        "sha256": "b4d11c9ea744a226b5d0a85d1adea3449ab83368e6d171b35d04ca794cb06cde",
+        "blob": "fad77ab6a76d9a1cd34f379e29336f20f9102dfd",
+        "lines": 137
+      },
+      {
+        "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bCollarInverseGluing.lean",
+        "sha256": "89f0e94e7f0208ee2daffc9904605aec8562d646056136b52e7f010e0ad68c49",
+        "blob": "7deca0d1ed95b277da3d5415cc4864e9d847d43f",
+        "lines": 114
+      },
+      {
+        "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bCollarInverse.lean",
+        "sha256": "54a1956244a76e79859e64209eb0d47a4a3978d6ffc3c21a4cc514660c61bf04",
+        "blob": "205a3fc67f7a9e91c0ba67661ff29aecc06e16a6",
+        "lines": 115
+      },
+      {
+        "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bPlanarInverseGerm.lean",
+        "sha256": "36fdc15231049ab174bfef23e26e46fb4c56faa6751a838b17c26d187cc5c7e4",
+        "blob": "610cda7700dc9704daee620add4fb687d67c8aa9",
+        "lines": 67
+      },
+      {
+        "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PlanarInverseRegularity.lean",
+        "sha256": "b1bc96e7f5689f6a0a47ebde7cda43db73b8a2f478761ccfef34a46e38069800",
+        "blob": "145450a8039e6f60c779c57a5eea11a89f242f71",
+        "lines": 75
+      },
+      {
+        "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalEndpointInverse.lean",
+        "sha256": "5b625a5464325b5fbb155eee50a9afeb7aa1fcefc846d256f7693a337f7f4e5d",
+        "blob": "73b93023dbcd3dfb1fa7521317a6a7da7f9c02da",
+        "lines": 98
+      },
+      {
+        "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Blueprint/CanonicalParts.lean",
+        "sha256": "209846850d2f7a70a21161396a0204c033336398f36e0266d2ac156295475e5a",
+        "blob": "fef5d9a4b4a54d7170f63bd0b50fb98e900af41a",
+        "lines": 9
+      },
+      {
+        "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Blueprint/Statements.lean",
+        "sha256": "4eff8f3724ee80268cebe29904e817efa068f6e398d6ab7d1ebb05bcebe09eda",
+        "blob": "af5ba9dacc2c7b026d6535f09e886ce22ca2e673",
+        "lines": 275
+      }
+    ]
+  },
+  "mechanical_checks": {
+    "all_declared_sha256_blobs_lines_verified": true,
+    "exact_single_prefix_per_source": true,
+    "public_headers_preserved": 3,
+    "imports_options_remaining_bytes_preserved": true
+  },
+  "compiled": false,
+  "source_modified": false,
+  "scope_limits": [
+    "Exact compatibility continuation of the earlier full reviews; no new mathematical or numerical claim.",
+    "No local Lean/elaboration, active source/index/ref/generated-root change or CI query/download."
+  ],
+  "created_at": "2026-11-12T17:43:04.404320+00:00"
+}

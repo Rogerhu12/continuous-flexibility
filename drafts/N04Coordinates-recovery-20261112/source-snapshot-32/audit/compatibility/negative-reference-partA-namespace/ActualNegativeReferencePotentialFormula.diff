@@ -1,0 +1,11 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormula.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePotentialFormula.lean
+@@ -101,7 +101,7 @@
+   have href : z₀ ∈ stateNeighborhood S C base ε :=
+     reference_mem_stateNeighborhood S C base hN.1.1.2.1
+   have hsref : stateSector S z₀.1 := hN.1.1.2.2.1.stateSector
+-  have hA : N04PartA D S C K base ε :=
++  have hA : Blueprint.N04PartA D S C K base ε :=
+     n04b_actualTypedAtlas_partA hT hS hN hfield e
+   have hx : K.inverseChart z₀ k p ∈ physicalPieceOpen S K z₀ k :=
+     (hA.charts z₀ href hsref k).2.1 hp

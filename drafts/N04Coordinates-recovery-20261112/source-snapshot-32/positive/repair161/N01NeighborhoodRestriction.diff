@@ -1,0 +1,18 @@
+--- 7ac330b2e0c2420e449235a090055a8018ebf17e:src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/positive/repair161/N01NeighborhoodRestriction.lean
+@@ -69,13 +69,14 @@
+     (hp : Monotone (pairGrading (stateGrading S) realGrading))
+     (hb : base ≤ base')
+     (hH : ∀ m, 0 < T.H (T.sample m))
+     (hE : ∀ m, 0 < T.E0 (T.sample m)) :
+     OrdinaryFlowFamilyTameBounds T S C base' loss ε' := by
+   intro k
+-  obtain ⟨parameterLoss, horder⟩ := hbound k
++  let parameterLoss : ℕ := (hbound k).choose
++  have horder := (hbound k).choose_spec
+   refine ⟨parameterLoss, ?_⟩
+   intro s
+   let hdata := horder s
+   let B : ℝ := hdata.choose
+   have hB : 0 < B := hdata.choose_spec.1
+   have hpoint : ∀ m a b p, a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →

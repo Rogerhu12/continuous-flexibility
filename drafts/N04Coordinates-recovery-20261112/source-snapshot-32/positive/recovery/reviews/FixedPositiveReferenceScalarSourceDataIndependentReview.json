@@ -1,0 +1,118 @@
+{
+  "kind": "same_fixed_positive_reference_scalar_source_data_independent_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceScalarSourceData.lean",
+    "sha256": "08867865fd202f310315c530695fe3c93136fa577db5947d8c059a538a235bbd",
+    "blob": "3f61fdf07c5ca21ccfd5f8050e5eacc274afd989",
+    "lines": 101
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceScalarSourceDataCandidateManifest.json",
+    "sha256": "4bba7ffb2d861f8576446db9437394e3758aaa44fa5ca6e119505e87752e8443",
+    "blob": "b94451247892cc3f2261a3c4362855a7a7fa58b0",
+    "lines": 103
+  },
+  "selected_actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceGeometryMaterialJets.lean",
+      "sha256": "d6b776738c3be81a9c9a306822717f60436d3b4d40d2275f1ec27ed8eadfc394",
+      "blob": "ae0e573b2f210d37e73aed88e9ecf4c4d53a6a9d",
+      "lines": 102
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveGeometryJets.lean",
+      "sha256": "7f1bc458ad7b0700ea10e51475d3af9e371b60d687a4675ac519a02110553b5a",
+      "blob": "40f9f2614b7abce6022c2eb8e915c2f8a96c46f2",
+      "lines": 262
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceGeometryJetEnvelope.lean",
+      "sha256": "4d2065b6de1e1ff9081681c019d98f562c650f2551e4bcb6c985f834b0efe350",
+      "blob": "23b187c20404b418f813b5d6e992a43bb3daf204",
+      "lines": 196
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "lines": 168
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04PositiveComponents.lean",
+      "sha256": "5b7a7e28f279116415d8a3a23299294f8e5fc1858187ec00c3ea18a4d04757de",
+      "blob": "0d4de58a9b9ecd9f84e2f01da190847464669cc6",
+      "lines": 194
+    }
+  ],
+  "selected_provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceGeometryMaterialJetsReviewedManifest.json",
+      "sha256": "b1209727941ef3052ee5cd1a43225996ac36332eb8dfe95d6af614df583284fb",
+      "blob": "59533aa7f13c463acfec960f319f687a2c014725",
+      "lines": 37
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveGeometryJetsReviewedManifest.json",
+      "sha256": "212c7ee8715539c1cd54cb228c86b18d9450386ab86e351f4d681d0781b26e6d",
+      "blob": "cfde01815ead91d9744af24744788e7924e7cf9d",
+      "lines": 64
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFifteenAtomsReviewedManifest.json",
+      "sha256": "be633ee48d81fd7de671391b971824a1f9040120968576fecb1294c6b7356abe",
+      "blob": "f86b8b1a72aa3e004f6685344769f7730850659b",
+      "lines": 54
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedReferenceScalarSourceMaterialJetsReviewedManifest.json",
+      "sha256": "05a798a8f9a66f3f5203ce19ad74b39106280541bcd44d405d886cb051dd3059",
+      "blob": "25ba71b9d70ee967f994ab7f37f10b6371bf01eb",
+      "lines": 32
+    }
+  ],
+  "pinned_api_sources": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "lines": 1155
+    }
+  ],
+  "read_scope": [
+    "All101 source lines and its complete public theorem.",
+    "Full102 fixed-material geometry provider;262 smooth scalar theorem and its actual scalar-data proof;196 exact scalar definitions and envelope contract;168 range structure;194 actual positive interval bounds and inclusion.",
+    "Pinned iteratedDeriv_const_add, iteratedDeriv_const_mul_field, Real.rpow_add and exponent monotonicity declarations."
+  ],
+  "checks": [
+    "The literal invFun(Y i) is globally smooth by slicing the supplied actual planar inverse. Its value is mapped from (0,1) to the genuine positive component and then to radialCore D; no global zeroth inverse bound is assumed.",
+    "The source scalar is exactly the existing H(chi)*chi-prime definition. Its global smoothness and all finite jets come from the unchanged262/102 providers with identical W/B/width/Y/H/range/jet data.",
+    "The exact global identity chi=l+(r-l)*inverseRadial uses the true positive gap; field_simp cancels only that nonzero gap. Positive iterated derivatives remove the constant and retain one genuine width factor.",
+    "The physical width bound and normalized inverse-radial bound multiply to (B*M)*W^(B+M). A=max(M,max(B*M,B+M)) dominates both the coefficient and exponent using W>=1. All constants precede component, point and k<=N.",
+    "The input family is fixed before N. No width, coordinate, height, inverse, low B or sample is selected again; N=0 remains valid since the positive-inverse claim is conditional on k>=1."
+  ],
+  "mechanical_checks": {
+    "source_fingerprints_match_candidate": true,
+    "source_new_public_names_absent_from_active": true,
+    "actual_import_visibility_checked": true,
+    "explicit_ContDiff_scope": true,
+    "resource_overrides": [],
+    "forbidden_tokens": []
+  },
+  "scope_limits": [
+    "The already reviewed102/262 numerical and geometric results are used with their exact selected contracts; this receipt does not replace their full reviews.",
+    "This is same-family scalar-source data. It does not discharge the retained family producer optical assumptions or assert state-directional CurrentJets.",
+    "Static source/API review only; no compilation, source edit, active/index/ref/CI operation."
+  ],
+  "findings": [],
+  "compiled": false,
+  "source_edited": false,
+  "reviewed_at": "2026-11-12T17:37:27.242146+00:00"
+}

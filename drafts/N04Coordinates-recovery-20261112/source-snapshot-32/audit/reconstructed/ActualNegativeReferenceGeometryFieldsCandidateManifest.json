@@ -1,0 +1,115 @@
+{
+  "kind": "actual_original_negative_reference_geometry_field_identities",
+  "owner": "/root/audit_coordinates",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_COMPLETE_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceGeometryFields.lean",
+    "sha256": "17eb137b0c746f4ff44388b842b068a2745a96e99940de71667b75ffc8abbb52",
+    "blob": "9f46123e9067e42a31444649e6392ba3d0bae493",
+    "lines": 124,
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceGeometryFields.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualNegativeReferenceScalarInverse",
+      "ContinuousFlexibility.Analysis.RadialUnitDensityInverseJets"
+    ],
+    "public_names": [
+      "n04Coordinates_actual_reference_negative_geometry_fields"
+    ]
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferenceScalarInverse.lean",
+      "sha256": "84346b8a1836363f9b0fdbe48a93c75b42deaa144beea6fe8e0bf32d2faffa3e",
+      "blob": "532d3bc282c59cd7c96647db57d037efbd9f42a4",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-helper-visibility/RadialUnitDensityInverseJets.lean",
+      "sha256": "a56a59502b38aee6a0eaa680c0ba5aec43274d36a8992697cc8caaf09f0f8bc6",
+      "blob": "ca8d3d45ec3a151d968739563a81f5089cef827c",
+      "lines": 136
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeRadialFields.lean",
+      "sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+      "blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+      "lines": 156
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePotentialGerms.lean",
+      "sha256": "1f3c55677ebfb7f954afd204318387084aa694a21a99c465d078465699012039",
+      "blob": "ccd28495960875f494c654dc82d107ed67ba59a4",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceCylinder.lean",
+      "sha256": "6ececb96b06c704d8672c58cbe2b395bf3ce8967a667b046cd09466249b5c4de",
+      "blob": "c1c59b1c3240feeec1539a65ce0c8a8a4ec7ba48",
+      "lines": 128
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasGeometry.lean",
+      "sha256": "9249ea8b23d4edc27fe5e9d405e32a3da2248556efb394db33faf279aefa1d0a",
+      "blob": "6e704770a6066c6279f7c3cdae96c1d695d554d3",
+      "lines": 101
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+      "sha256": "598b1d5f18c4a22eecd5108949d46b2ddca955d79ea66090b85ca6ba06ff8227",
+      "blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+      "lines": 96
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Blueprint/Statements.lean",
+      "sha256": "4eff8f3724ee80268cebe29904e817efa068f6e398d6ab7d1ebb05bcebe09eda",
+      "blob": "af5ba9dacc2c7b026d6535f09e886ce22ca2e673",
+      "lines": 275
+    }
+  ],
+  "selected_provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePartANamespaceReviewedManifest.json",
+      "sha256": "1a16f2e8437ce8eb96ae2f3898479ac42753411f92260ec4343ba4fb31f7c23c",
+      "blob": "3edbaa3198a4e7d4975614969f0be033e7ec5a61",
+      "lines": 109
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-helper-visibility/RadialUnitDensityInverseJetsVisibilityReviewedManifest.json",
+      "sha256": "2b0671f4acfa8c26d884d47a30b92a46df43fc79c682f2ef792592933462d8ce",
+      "blob": "83fa44dc5b45b8fdf50ce0f1c0b7ee95199bdf20",
+      "lines": 53
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverseReviewedManifest.json",
+      "sha256": "e136252bba805148d49e501b11a0de84d50a4b003c6269177ef59e441cce3f38",
+      "blob": "8c659170a981e8d1a930d164ac3423597c3356fc",
+      "lines": 56
+    }
+  ],
+  "pinned_api": {
+    "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/FDeriv/Congr.lean",
+    "sha256": "4313c8cb8eab170a664df2753f3f1a59ac7f3ecd3f405b9b34e64c966430fa73",
+    "blob": "da599f75bd35b874f08b3fb7b326c2679500eefb",
+    "lines": 309
+  },
+  "checks": [
+    "The chart, inverse and height are literal zero-angle slices of the same old actual typed K. The true physical half and canonical half are used throughout, with the true angle preserved.",
+    "The actual reference-domain equation and actual chart MapsTo property supply the forward scalar range. The previously reviewed scalar inverse supplies the inverse range and full planar inverse identity.",
+    "Unit radial density H^2*w*abs(Y-prime)=1 and the actual radial cylinder germ give absoluteJ=H^(-2)*w^(-1) and reciprocalJ=H^2*w on the true half.",
+    "The actual canonicalSource definition is evaluated at the same inverse point. Its source-factor and reciprocal reduce to H^3*w and H^(-3)*w^(-1), with no replacement field or final material-bound premise.",
+    "The exact selected136 public scalar normalization helper is required; historical private136 is not an admissible provider for this new external consumer. Blueprint.N04PartA and the real scalar of fderiv_eq are explicit.",
+    "The one new public name has no declaration in active src. No proof placeholders or resource settings occur."
+  ],
+  "scope_limits": [
+    "Only actual field identities/ranges; no numerical jet estimate, final primitive certificate or raw optical lower conclusion.",
+    "This existing draft is frozen during the CI161 repair gate; no active source/index/ref/checkpoint/authority/CI change or local compilation."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:46:05.025224+00:00"
+}

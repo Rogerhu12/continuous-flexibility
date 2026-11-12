@@ -1,0 +1,44 @@
+{
+  "kind": "same_actual_return_correction_complete_numerical_witness_reviewed_owner",
+  "owner": "/root",
+  "status": "FULL_SOURCE_INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04RetainedCorrectionNumericalWitness.lean",
+    "sha256": "15cc71a282ea4b0aaf371c968dc37a627b41b1407dff8f25e61f613e70c71bea",
+    "blob": "6ba76a32edfe98908b3b1d44f9af3c7e3d72bfe5",
+    "lines": 153,
+    "target_path": "src/ContinuousFlexibility/Analysis/N04RetainedCorrectionNumericalWitness.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04RetainedCorrectionNumericalWitnessCandidateManifest.json",
+    "sha256": "89139f2774b2e4742e9adbd131608b9959f0d8578dd9ce96610d022e20abcace",
+    "blob": "90636917168b62dd75538be63655f9c4fedadb57",
+    "lines": 75
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/N04RetainedCorrectionNumericalWitnessIndependentReview.json",
+    "sha256": "c572743be524a171cd1dab21c0ea874895f114e3d682653ad3279827dc82dfbf",
+    "blob": "882e31ae1843e31bba16cd3f6b6df5b9a691e59f",
+    "lines": 171
+  },
+  "original_reviewed_gateway": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-optical/N04PreservedOpticalCorrectionWitnessReviewedManifest.json",
+    "sha256": "ec437100c279ef1a1c1336a2bf0ff9e57bcc44b2be3714110a75e1a0bc5f039d",
+    "blob": "30afcdfb73966e0ff6257abe01cd66437dca41d5",
+    "lines": 45
+  },
+  "selected_dependency_graph": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/N04PreservedOpticalCorrectionWitnessSelectedMainGraph.json",
+    "sha256": "86ba423cc24ec858b3c9d9d5dba13d2b3b9ffa0cb38db4188c063aa495fd8b3f",
+    "blob": "82120459415a138701382c6d5c5f5ef17687713c",
+    "lines": 10057
+  },
+  "selection": "Select this new stronger producer exactly once and retain its R,L,chi,host,width and common neighborhood. The immutable old148 witness is not called a second time or equated to an independently selected output.",
+  "scope_limits": [
+    "The returned closed-buffer optical lower bound is not a bound on the entire negative component.",
+    "Historical selected dependency identities remain unchanged; actual CI160 proof-boundary repairs are tracked independently in CI161.",
+    "No final CurrentJets, ReferenceJets or N04Coordinates completion claim; no local compiler or resource override."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:33:22.885573+00:00"
+}

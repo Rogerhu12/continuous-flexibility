@@ -1,0 +1,40 @@
+{
+  "kind": "CI161_neighborhood_typed_choice_repair_reviewed_manifest",
+  "owner": "/root/proof_inventory",
+  "status": "REVIEWED_STATIC_CANDIDATE_UNCOMPILED_AWAITING_AUTHORIZED_CI",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair161/N01NeighborhoodRestriction.lean",
+    "sha256": "e49b0d271a6a1633dce24a1a2ac1c6b2c4ca33f73be8191d59fb827b6e30e8f4",
+    "blob": "5150d77940daa6a3f95bd505bdb929b2e95db667",
+    "lines": 143
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair161/N01NeighborhoodRestrictionCI161RepairCandidateManifest.json",
+    "sha256": "58c606305bf3aed8fa2720cd03afc8a972d7ba76d2ac27d53df11eed176138b7",
+    "blob": "d15585971356366e44122eeafc2869a3ed71ce5f",
+    "lines": 90
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI161N01NeighborhoodRestrictionIndependentReview.json",
+    "sha256": "b5c0e7936dbc8db6358ced2acb76f44251cd18166ae8b7ca40c464e95dcec12b",
+    "blob": "27b0d22ee8ae27fd902ac33f36fadc8104a610c0",
+    "lines": 106
+  },
+  "actual_head": "7ac330b2e0c2420e449235a090055a8018ebf17e",
+  "actual_tree": "4e255a3287e0954cc2c4b009298c6a8f5958d99a",
+  "target_path": "src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean",
+  "supersedes_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair161/N01NeighborhoodRestriction.ci161-base.lean.txt",
+    "sha256": "9da10cc067a2606c3fef7d14ce73d4bb1c8e660022c0ce6df5837da5d333ad3b",
+    "blob": "4c615b70f2ab1b3e44ba228e2c578d00f2b748c1",
+    "lines": 142
+  },
+  "proof_change": "Only the private per-k existential obtain is replaced by typed Nat choose and corresponding choose_spec. All four public headers and all remaining bytes are unchanged.",
+  "scope_limits": [
+    "No actual elaboration/performance result is claimed; CI161 diagnosed the old obtain and the next authorized CI must validate the repair.",
+    "Original CI160 source and review remain immutable history.",
+    "No active source/index/ref/CI mutation."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:45:00.453056+00:00"
+}

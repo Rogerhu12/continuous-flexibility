@@ -1,0 +1,84 @@
+{
+  "kind": "actual_negative_reference_potential_planar_germ_independent_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialGerms.lean",
+    "sha256": "d9fd05beea6390b03493b772357fe3110865629dab6d6c17689487fce4e7d205",
+    "blob": "a82945a31a992d2b428782d030a35c5e1074542d",
+    "lines": 70
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialMaterialJetsCandidateManifest.json",
+    "sha256": "9c9dc0f5d204182bf1a9f0afca38188a4d2648c7466817355efad376d003327a",
+    "blob": "56821038a5a4288b1502e8886d47146edc6b9501",
+    "lines": 151
+  },
+  "selected_actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverse.lean",
+      "sha256": "88897c617e7204b734ee70860aa58cc38514df3c6da5180375898c3ae37c427f",
+      "blob": "cf59332c8a3c6d42d13afd93722193d9662c3cc3",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormula.lean",
+      "sha256": "9901ab0f2a3ff035d99d3f420c0b1215a279b53ba99785b06b3e1a9047a7ea7b",
+      "blob": "4f635532f777f7272f15937a1b7f7f53f681d171",
+      "lines": 137
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/LocalMixedProductBounds.lean",
+      "sha256": "d0faf14d190ae8c14f16f80958e8c166183c0914f822815a8d98aa13a660dfd7",
+      "blob": "cd30f2f9bb0efbb186788c4010cfaeef58befd57",
+      "lines": 125
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N08RadialFamilyMaterialJets.lean",
+      "sha256": "5796d127cb631248523060a373d0cdea3d07052857008b6dcfb987dbae59289d",
+      "blob": "3fd9b99c74162ee221843491623573b719c172b3",
+      "lines": 159
+    }
+  ],
+  "provider_reviewed_selections": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverseReviewedManifest.json",
+      "sha256": "e136252bba805148d49e501b11a0de84d50a4b003c6269177ef59e441cce3f38",
+      "blob": "8c659170a981e8d1a930d164ac3423597c3356fc",
+      "lines": 56
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormulaReviewedManifest.json",
+      "sha256": "fe60c28dd61886bf2cb1b0ee7b3bf15663b277931c93da8a42a9dc21a4a7fd7a",
+      "blob": "fc7c8cb35fdabb37465162738edd2cc869bfe90b",
+      "lines": 42
+    }
+  ],
+  "read_scope": [
+    "All70 source lines and its complete public statement/proof.",
+    "Full actual152 scalar-inverse theorem and137 potential-formula theorem, with the exact final tuple projection and stored fields.",
+    "The actual canonicalOpen definition, LocalMixedProductBounds germ transport theorem, and the complete n08_mixedDerivative_radial proof including zero order."
+  ],
+  "checks": [
+    "The let-bound actual K/k/reference/H/chi/V are reduced before introducing p; they are the original stored fields throughout.",
+    "The final152 tuple projection is exactly the whole planar inverse identity G(q)=(chi(q.1),q.2), not a radial-only point equality. Its direct import supplies137 transitively.",
+    "Every q in a true open canonical neighborhood satisfies the actual137 potential formula. Rewriting its actual inverse with152 yields the displayed V(q.1) at the same point and same angle.",
+    "The resulting equality is a full planar germ, so actual mixedDerivative_eq_of_germ transfers arbitrary mixed orders. The radial theorem makes all positive angular orders zero and includes a=b=0.",
+    "No new extension, global smoothness assumption, inverse choice, optical bound or terminal material estimate is used."
+  ],
+  "mechanical_checks": {
+    "source_fingerprints_match_candidate": true,
+    "source_new_public_names_absent_from_active": true,
+    "explicit_ContDiff_scope": true,
+    "resource_overrides": [],
+    "forbidden_tokens": []
+  },
+  "scope_limits": [
+    "Only source70 is reviewed here; the separate222 material consumer and207 inverse-material source remain under their separately assigned reviews.",
+    "Static source/API review only; no compilation, source edit, active/index/ref/CI operation."
+  ],
+  "findings": [],
+  "compiled": false,
+  "source_edited": false,
+  "reviewed_at": "2026-11-12T17:37:27.157582+00:00"
+}

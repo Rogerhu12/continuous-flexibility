@@ -1,0 +1,106 @@
+{
+  "kind": "CI161_typed_parameter_loss_choice_complete_independent_review",
+  "reviewer": "/root/audit_coordinates",
+  "status": "PASSED_COMPLETE_STATIC_SOURCE_AND_EXACT_DELTA_REVIEW_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair161/N01NeighborhoodRestriction.lean",
+    "sha256": "e49b0d271a6a1633dce24a1a2ac1c6b2c4ca33f73be8191d59fb827b6e30e8f4",
+    "blob": "5150d77940daa6a3f95bd505bdb929b2e95db667",
+    "lines": 143
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair161/N01NeighborhoodRestriction.ci161-base.lean.txt",
+    "sha256": "9da10cc067a2606c3fef7d14ce73d4bb1c8e660022c0ce6df5837da5d333ad3b",
+    "blob": "4c615b70f2ab1b3e44ba228e2c578d00f2b748c1",
+    "lines": 142
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair161/N01NeighborhoodRestriction.diff",
+    "sha256": "98a4f46231e4c02c933d180755cd20d69b29ed008f812126495eca7907de2dd9",
+    "blob": "9f0677249943ed48f72cbddcc52eb4bf10c98d2a",
+    "lines": 18
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair161/N01NeighborhoodRestrictionCI161RepairCandidateManifest.json",
+    "sha256": "58c606305bf3aed8fa2720cd03afc8a972d7ba76d2ac27d53df11eed176138b7",
+    "blob": "d15585971356366e44122eeafc2869a3ed71ce5f",
+    "lines": 90
+  },
+  "actual_head": "7ac330b2e0c2420e449235a090055a8018ebf17e",
+  "actual_tree": "4e255a3287e0954cc2c4b009298c6a8f5958d99a",
+  "target_path": "src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean",
+  "cached_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-161.log",
+    "sha256": "3cd24d16885a4ad19fec2df77775f3b5d2af9145610bdf9eb12216f28f11b48d",
+    "blob": "6acbb5f5b367683e194fb0a9e6fa2e13bdb84e24",
+    "lines": 830
+  },
+  "target_diagnostics": [
+    "error: src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean:75:2: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached"
+  ],
+  "prior_complete_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI160N01NeighborhoodRestrictionIndependentReview.json",
+    "sha256": "7f50346217b80caf04ef1754495bdd588ff41a736a2d63af428b9744fbd9d037",
+    "blob": "9d6973353cf92e8841f7b34573622eb8c5a2976b",
+    "lines": 120
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01cStateSeminorms.lean",
+      "sha256": "99abe3e9057a214b52c5188410cfc8d2ca2a3f9a52733bcb5c73dd9757666d26",
+      "blob": "f96fa185722d12bab8545de1d59ea100a0556417",
+      "lines": 331
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/SolveStateSpaces.lean",
+      "sha256": "035be369042b7d7ab904bdd9ec4fed643b94e2bc65d7dc44835529cb6a647115",
+      "blob": "ffea3f07f4a1fc03b0cdd99bc1d9bdd6c64bed13",
+      "lines": 184
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleCofinite.lean",
+      "sha256": "216a156a837d75f8ffb20ca2d4b12b84898ff606bc5d8f5bce4e79d25b9b3da3",
+      "blob": "1562a68cf59d5ebd5bedc7efce55bf3d7217ba44",
+      "lines": 98
+    }
+  ],
+  "read_scope": [
+    "All143 final source lines and all142 actual Git preimage lines; the entire18-line exact diff, candidate and previous full mathematical/proof-boundary review.",
+    "The actual OrdinaryFlowFamilyTameBounds definition and complete N01Properties contract, including the exact final ordinary-flow projection and its k-before-parameterLoss-before-s quantifiers.",
+    "The unique cached N01NeighborhoodRestriction:75:2 default isDefEq200000 diagnostic and its surrounding build context. The separate ControlFlowBounds error is outside this receipt."
+  ],
+  "checks": [
+    "The source is exactly the actual 7ac330b2 file with one obtain replaced by the two explicit choice projections. The in-memory independent reconstruction equals the final source SHA/blob and its reverse transform recovers the preimage byte-for-byte.",
+    "hbound k has type exists parameterLoss : Nat, forall s, ... . The explicitly typed let chooses that exact natural witness; choose_spec supplies the corresponding forall-s proposition. Its witness is definitionally the local let parameterLoss.",
+    "Selection remains before s, B, component, physical point, state and increment. The original horder s supplies exactly the same B and restricted SmoothDirections tower; high remains s+loss+parameterLoss. No parameter loss is absorbed into a material constant.",
+    "The later proof already uses the same choose/choose_spec pattern for horder s. The new proof avoids existential pattern elimination while retaining the private theorem statement and every other proof byte.",
+    "Four complete public headers and complete public proof bodies, all imports/options/local instance and all source bytes outside the single statement are unchanged. No helper, mathematical premise, data replacement or resource override is introduced.",
+    "All9 manifest artifact/provider SHA256, Git blob and line-count rows plus the candidate manifest itself were independently verified against disk; the actual Git tree matches the stated baseline."
+  ],
+  "findings": [],
+  "mechanical_checks": {
+    "artifact_rows_verified": 9,
+    "actual_git_preimage_equal": true,
+    "actual_tree_equal": true,
+    "public_headers_preserved": 4,
+    "exact_single_statement_replacement": true,
+    "inverse_transform_reproduces_preimage": true,
+    "imports_options_remaining_bytes_unchanged": true,
+    "prohibited_placeholders_or_resource_overrides": []
+  },
+  "compiled": false,
+  "source_modified": false,
+  "ci_queried_or_downloaded": false,
+  "scope_limits": [
+    "Static source/API and proof-preservation review only. Performance under the unchanged default heartbeat limit remains for the next authorized CI run.",
+    "The prior CI160 source and receipt remain immutable; CI161 identified the new actual timeout inside its private existential obtain.",
+    "No local compiler/elaborator, active source/index/ref/checkpoint/authority mutation or CI query/download."
+  ],
+  "created_at": "2026-11-12T17:44:27.439925+00:00"
+}

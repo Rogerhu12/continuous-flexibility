@@ -1,0 +1,79 @@
+{
+  "kind": "independent_fixed_scalar_source_two_actual_columns_material_review",
+  "reviewer": "/root/quantitative_route",
+  "status": "PASS_FULL_STATIC_SOURCE_AND_ACTUAL_CALLEE_REVIEW_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceScalarColumnMaterialJets.lean",
+    "sha256": "6de669a7ac170b19818a1d0778c27f1577fdbcaf70f6adf30c9a0158128e071b",
+    "blob": "c2275dd042ab2a6768f6379c55da5e03a1c85d89",
+    "lines": 104
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceScalarColumnMaterialJetsCandidateManifest.json",
+    "sha256": "31f3dcdfcc0df7da6d001b8c976383f471e428169d5718b533c23c762b5e4115",
+    "blob": "0dad4bae9215d97a51bacc0c21d28197caf230e5",
+    "lines": 77
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceScalarColumnIdentities.lean",
+      "sha256": "8d5eaa37b7bdafb44903df37e1f35b1b114bdc03ce52ac3497dff4a670a2d320",
+      "blob": "51c778ef628e8028eb968e46ce1396bbd3d8eee1",
+      "lines": 104
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedReferenceScalarSourceMaterialJets.lean",
+      "sha256": "cc9d0f96fbd066179f2bb3910642f67f2d0b3f8ad82108e4339ff476f17bf870",
+      "blob": "e410d5c93a544817741449d6c6f952bfd0203297",
+      "lines": 140
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PhysicalTransmissionTrace.lean",
+      "sha256": "06bae1df9c968c303f48dd5c04b48c95b49eb41eb6cb276902c1401e634ef8d4",
+      "blob": "e355936649f9946fad0101bd4f0e7ac93c0afe46",
+      "lines": 66
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    }
+  ],
+  "provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceScalarColumnIdentitiesReviewedManifest.json",
+      "sha256": "1e831af4905cec1a70f168abdfc44b5f96f4dced08f650b36ee43e8b9a51dd80",
+      "blob": "164ce921f81518983c49c2ac6a10796618cd07c1",
+      "lines": 26
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedReferenceScalarSourceMaterialJetsReviewedManifest.json",
+      "sha256": "05a798a8f9a66f3f5203ce19ad74b39106280541bcd44d405d886cb051dd3059",
+      "blob": "25ba71b9d70ee967f994ab7f37f10b6371bf01eb",
+      "lines": 32
+    }
+  ],
+  "pinned_api": {
+    "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+    "sha256": "1e9fbd861ac27cb4b17113c3f8ede3c5f573a6b342b23e41ff514b05bd3334ef",
+    "blob": "e7fd4979f58f787927500713547b3671402ae782",
+    "lines": 1283
+  },
+  "full_source_read": true,
+  "checks": [
+    "Read all104 selected lines and the exact previously reviewed identity104/numerical140 contracts, actual PhysicalTransmissionTrace mixed-jet locality and pinned ContDiffOn.congr direction. All listed fingerprints match.",
+    "Both fixed physical columns use the identical X,F,W family. Their radial profiles are globally smooth on the one fixed closed annulus, obtained only from genuine radialCore range; no global inverse value bound or new coordinate is assumed.",
+    "B=BL+BN is chosen after s and before K, piece, actual field-equality proofs, index, atom and point. Coefficient and exponent enlargement uses W>=1 and B>=1, with no hidden original E0>=1 premise.",
+    "The actual identity has direction atom=model. Therefore model smoothness transfers through ContDiffOn.congr correctly; both p and p+(0,pi) lie in the same unit strip for the periodic identity.",
+    "The unit strip is open and mixedDerivative_eqOn_of_isOpen transfers every actual mixed jet to the same model before applying its uniform bound. The two physical profiles are selected by the existing Atom cases, with no atlas or material-data replacement."
+  ],
+  "findings": [],
+  "scope_limits": [
+    "The inverse/source finite jets and genuine inverse/core/source-factor identities are inputs supplied separately by actual side-specific constructions. They are not terminal column estimates.",
+    "No compilation/elaboration, source edit, resource override, active/index/ref or CI action."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "created_at": "2026-11-12T17:43:27.126426+00:00"
+}

@@ -1,0 +1,54 @@
+{
+  "kind": "one_actual_positive_reference_selection_fifteen_atoms_reviewed",
+  "owner": "/root/quantitative_route",
+  "status": "STATIC_INDEPENDENTLY_FULL_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFifteenAtoms.lean",
+    "sha256": "f5a8d53e84c32002efeaa216d916caa23c263b0b1c16b117d92fd0ac8fbb9e2c",
+    "blob": "bd18311eb7ab6f62d4ac8cc11c2218269675ed44",
+    "lines": 178
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFifteenAtomsCandidateManifest.json",
+    "sha256": "80c8ec98cd221ba119d251cfcdb64ec5f73cc28bd51a4698a1804e1fa4a71701",
+    "blob": "71e893684475b12060621365992b401e3c6bca74",
+    "lines": 71
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/ActualPositiveReferenceFifteenAtomsIndependentReview.json",
+      "sha256": "a81a3bec75cd30c7a6028276cfb0fa9517f26bd0fda033c5d5e34c4060225c46",
+      "blob": "aee1f05b5e38c5991612aae788b169d63a44b2ff",
+      "lines": 89
+    }
+  ],
+  "provider_selection_supplement": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFiveAtomsReviewedManifest.json",
+      "sha256": "6dfb9ab1b09e54b4d6d7b842a33d5c02ce9f54ef906a1498b4240c0fefb1f2c6",
+      "blob": "8cef1cd17f91eb989cdc4b50a10c63326da2eb27",
+      "lines": 41
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveGeometryJetsReviewedManifest.json",
+      "sha256": "212c7ee8715539c1cd54cb228c86b18d9450386ab86e351f4d681d0781b26e6d",
+      "blob": "cfde01815ead91d9744af24744788e7924e7cf9d",
+      "lines": 64
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/WholeReferenceGaugePositiveGeometryJetsIndependentReview.json",
+      "sha256": "afacdc3687cb567396c5fd707eaa7069485db54beba62b9708627d96724b0a5d",
+      "blob": "b8ac56159c1fb2e55644665b89b937ee00f168c5",
+      "lines": 137
+    }
+  ],
+  "source_unchanged": true,
+  "compiled": false,
+  "scope_limits": [
+    "One call of the already reviewed194 producer retains its original C0/B, universal finite certificate, displayed delta/Y/H and sample. No second276 selection.",
+    "The actual262 geometry consumer and its root full review are now selected explicitly; the original pending candidate manifest is preserved as historical metadata.",
+    "The same T sample floor, retained witness, actual raw optical lower and negative host inclusion remain explicit input obligations.",
+    "Fifteen actual positive reference atoms only; no complete all-atoms atlas ReferenceJets or CurrentJets assertion."
+  ],
+  "created_at": "2026-11-12T17:26:47.368855+00:00"
+}

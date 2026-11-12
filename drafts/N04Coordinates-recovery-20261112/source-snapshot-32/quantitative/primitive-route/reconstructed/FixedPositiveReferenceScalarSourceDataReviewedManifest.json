@@ -1,0 +1,57 @@
+{
+  "kind": "same_fixed_positive_inverse_source_factor_material_data_reviewed",
+  "owner": "/root/quantitative_route",
+  "status": "FULL_SOURCE_INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceScalarSourceData.lean",
+    "sha256": "08867865fd202f310315c530695fe3c93136fa577db5947d8c059a538a235bbd",
+    "blob": "3f61fdf07c5ca21ccfd5f8050e5eacc274afd989",
+    "lines": 101
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceScalarSourceDataCandidateManifest.json",
+    "sha256": "4bba7ffb2d861f8576446db9437394e3758aaa44fa5ca6e119505e87752e8443",
+    "blob": "b94451247892cc3f2261a3c4362855a7a7fa58b0",
+    "lines": 103
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/FixedPositiveReferenceScalarSourceDataIndependentReview.json",
+    "sha256": "b6ebfc7ed2e25415616cb695f1d549e709a863b8327eb0907fb997f298ca8b3b",
+    "blob": "d75fbc4e964a4c8743c5ed10fea0fb6c5e745b72",
+    "lines": 118
+  },
+  "provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceGeometryMaterialJetsReviewedManifest.json",
+      "sha256": "b1209727941ef3052ee5cd1a43225996ac36332eb8dfe95d6af614df583284fb",
+      "blob": "59533aa7f13c463acfec960f319f687a2c014725",
+      "lines": 37
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveGeometryJetsReviewedManifest.json",
+      "sha256": "212c7ee8715539c1cd54cb228c86b18d9450386ab86e351f4d681d0781b26e6d",
+      "blob": "cfde01815ead91d9744af24744788e7924e7cf9d",
+      "lines": 64
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFifteenAtomsReviewedManifest.json",
+      "sha256": "be633ee48d81fd7de671391b971824a1f9040120968576fecb1294c6b7356abe",
+      "blob": "f86b8b1a72aa3e004f6685344769f7730850659b",
+      "lines": 54
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedReferenceScalarSourceMaterialJetsReviewedManifest.json",
+      "sha256": "05a798a8f9a66f3f5203ce19ad74b39106280541bcd44d405d886cb051dd3059",
+      "blob": "25ba71b9d70ee967f994ab7f37f10b6371bf01eb",
+      "lines": 32
+    }
+  ],
+  "scope_limits": [
+    "No state-directional estimate, no new actual family, no replacement of T/cell/sample or original C0/B/width.",
+    "The existing family producer retains its explicit same-witness raw optical and host assumptions; this consumer does not remove them.",
+    "Static source and provider inspection only. No compilation/elaboration, resource-limit changes, active source/index/ref/CI actions."
+  ],
+  "compiled": false,
+  "source_unchanged_since_peer": true,
+  "created_at": "2026-11-12T17:43:27.126426+00:00"
+}

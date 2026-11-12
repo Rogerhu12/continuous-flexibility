@@ -1,0 +1,107 @@
+{
+  "kind": "same_actual_half_reference_potential_germ_and_material_jets_reviewed",
+  "owner": "/root/audit_coordinates",
+  "status": "INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialGerms.lean",
+      "sha256": "d9fd05beea6390b03493b772357fe3110865629dab6d6c17689487fce4e7d205",
+      "blob": "a82945a31a992d2b428782d030a35c5e1074542d",
+      "lines": 70,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferencePotentialGerms.lean",
+      "public_names": [
+        "n04Coordinates_actual_reference_negative_potential_germ"
+      ],
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualNegativeReferenceScalarInverse",
+        "ContinuousFlexibility.Analysis.LocalMixedProductBounds",
+        "ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialMaterialJets.lean",
+      "sha256": "fac549078c91279f7952d73126b3ffcebd8b79134319f1e1971943277af754c9",
+      "blob": "183f620bae1945b04f114f069a304338f40cdbed",
+      "lines": 222,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferencePotentialMaterialJets.lean",
+      "public_names": [
+        "n04bActualTypedAtlas_reference_half_potential_material_jets"
+      ],
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualNegativeReferenceInverseMaterialJets",
+        "ContinuousFlexibility.Analysis.ActualNegativeReferencePotentialGerms",
+        "ContinuousFlexibility.Analysis.RadialUnitDensityPotentialJets"
+      ]
+    }
+  ],
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialMaterialJetsCandidateManifest.json",
+    "sha256": "9c9dc0f5d204182bf1a9f0afca38188a4d2648c7466817355efad376d003327a",
+    "blob": "56821038a5a4288b1502e8886d47146edc6b9501",
+    "lines": 151
+  },
+  "independent_reviews": [
+    {
+      "source_blob": "a82945a31a992d2b428782d030a35c5e1074542d",
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/ActualNegativeReferencePotentialGermsIndependentReview.json",
+        "sha256": "2f0589e06497c6fe78384bcea28e463bb87f3b1e36f267716aa387e1fe950c6b",
+        "blob": "be2430a923d169a3d4e9e77d512d29b788f3faff",
+        "lines": 84
+      }
+    },
+    {
+      "source_blob": "183f620bae1945b04f114f069a304338f40cdbed",
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ActualNegativeReferencePotentialMaterialJetsIndependentReview.json",
+        "sha256": "459ad8e893ea577c12b29b9e55515bfe5de451b3a8281d535c26ba24e9e3c012",
+        "blob": "667941612ec8b2e54641ebaf34c890b4762df048",
+        "lines": 152
+      }
+    }
+  ],
+  "selected_namespace_compatibility": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePartANamespaceReviewedManifest.json",
+    "sha256": "1a16f2e8437ce8eb96ae2f3898479ac42753411f92260ec4343ba4fb31f7c23c",
+    "blob": "3edbaa3198a4e7d4975614969f0be033e7ec5a61",
+    "lines": 109
+  },
+  "selected_radial_helper_visibility": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-helper-visibility/RadialUnitDensityInverseJetsVisibilityReviewedManifest.json",
+    "sha256": "2b0671f4acfa8c26d884d47a30b92a46df43fc79c682f2ef792592933462d8ce",
+    "blob": "83fa44dc5b45b8fdf50ce0f1c0b7ee95199bdf20",
+    "lines": 53
+  },
+  "completed_inverse_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceInverseMaterialJetsReviewedManifest.json",
+    "sha256": "8673113760c3d0eeeec6cd2513e2b3863e1e74b80ae2e5c1a9a32eb50e8c7e28",
+    "blob": "fa8f75e002ad16d85437327dd0cf0f64d0f15690",
+    "lines": 44
+  },
+  "completed_height_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightMaterialJetsReviewedManifest.json",
+    "sha256": "637ef52639e1a5b1931946ab387f07c59961d9841735d7c694650709014c6799",
+    "blob": "5bfb4d8c935777c2dab8f22de4ece2fb88cf858c",
+    "lines": 88
+  },
+  "numerical_potential_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialUnitDensityPotentialJetsReviewedManifest.json",
+    "sha256": "4a3ebc6b67b77fa2b278fc10634d24857a75f7ecf03d5e242a22156d009cb851",
+    "blob": "b01fea40a4a54a87fc52c906c35f5233b63c6927",
+    "lines": 45
+  },
+  "checks": [
+    "The two exact source bytes remain unchanged. The independent70 and222 receipts cover the respective complete source and actual APIs.",
+    "The historical candidate pending207 record is superseded only in this new owner selection by the actual867311 reviewed owner.",
+    "Final lower-level providers select the explicit internal namespace fixes and exposed136 helpers; all their public contracts and mathematical proofs are preserved by exact independent delta reviews.",
+    "Same original K, physical height, scalar inverse and half sample are retained. Numerical CH and Cinv are combined, never identified as independently chosen witnesses."
+  ],
+  "scope_limits": [
+    "Uniform K0 and the true full-component optical host remain explicit intermediate inputs until supplied by the same retained61 then153 construction; no arbitrary Through03 projection is claimed.",
+    "This establishes the original-K mixed potential tower. Same-V unit rescaling is a separately reviewed consumer; no complete final primitive certificate is claimed.",
+    "No compiler/elaborator, active source/index/ref/checkpoint/authority mutation or CI query/download."
+  ],
+  "compiled": false,
+  "source_bytes_unchanged": true,
+  "created_at": "2026-11-12T17:45:04.497121+00:00"
+}

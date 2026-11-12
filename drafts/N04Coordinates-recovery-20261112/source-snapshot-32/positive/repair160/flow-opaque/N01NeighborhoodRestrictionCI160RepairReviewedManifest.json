@@ -1,0 +1,46 @@
+{
+  "kind": "CI160_neighborhood_opaque_flow_restriction_reviewed",
+  "owner": "/root/proof_inventory",
+  "status": "COMPLETE_STATIC_INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/flow-opaque/N01NeighborhoodRestriction.lean",
+    "sha256": "9da10cc067a2606c3fef7d14ce73d4bb1c8e660022c0ce6df5837da5d333ad3b",
+    "blob": "4c615b70f2ab1b3e44ba228e2c578d00f2b748c1",
+    "lines": 142
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/flow-opaque/N01NeighborhoodRestrictionCI160RepairCandidateManifest.json",
+    "sha256": "1484d37da79fac8f0be42bb6170bff1df2cae7da9b29b82042adb808bb047e4a",
+    "blob": "ea63737339c3e7395b6d97c5ae21a98dd21c5a95",
+    "lines": 93
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI160N01NeighborhoodRestrictionIndependentReview.json",
+    "sha256": "7f50346217b80caf04ef1754495bdd588ff41a736a2d63af428b9744fbd9d037",
+    "blob": "9d6973353cf92e8841f7b34573622eb8c5a2976b",
+    "lines": 120
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/N01NeighborhoodRestriction.ci160-base.lean.txt",
+    "sha256": "8980a1dfece4b54cc46e1dcda20504cda7e90bcaedc76059c82c86cdbb9cdd9e",
+    "blob": "551267986278d6717642c54f98f85ece2d4d4eb0",
+    "lines": 126
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/flow-opaque/N01NeighborhoodRestriction.diff",
+    "sha256": "61639985d6cfac3d158f5b6c40be085b9aa7bcad7497cbe66a4f64b5d5057fba",
+    "blob": "b157308e960cc227377ea83c244f4c9c79bf5d2f",
+    "lines": 81
+  },
+  "actual_head": "03ea768c1f2211dff62714b932be808345dcf918",
+  "actual_tree": "84a1b13b975d16f42aed7de40b8601bd09fda8ae",
+  "target_path": "src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean",
+  "source_unchanged": true,
+  "compiled": false,
+  "scope_limits": [
+    "Selected flow-opaque142 only; the unreviewed first extraction is historical and not selected.",
+    "All four public contracts and per-k loss order are unchanged. This removes proof projection through the concrete N01 conjunction but does not supply runtime/compiler evidence.",
+    "Only root may activate and validate with CI; no active source/index/ref changes by this owner."
+  ],
+  "created_at": "2026-11-12T17:25:51.188110+00:00"
+}

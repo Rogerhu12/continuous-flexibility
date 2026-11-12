@@ -1,0 +1,65 @@
+{
+  "kind": "actual_travel_reference_difference_joint_tower_angular_bounds_reviewed_manifest",
+  "owner": "/root/proof_inventory",
+  "status": "REVIEWED_SOURCE_UNCOMPILED_DEPENDENCY_REPAIR_HOLD",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelDifferenceAngularBounds.lean",
+    "sha256": "eaa14196be78e7434d780cb537c878193906d23b8b35da4d424265897e63ba4c",
+    "blob": "d201f14194e6df9c339b3e9b0ea0ae9ecf626f5c",
+    "lines": 140,
+    "module": "ContinuousFlexibility.Analysis.N04ActualTravelDifferenceAngularBounds",
+    "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelDifferenceAngularBounds.lean",
+    "source_ref": "LOCAL_HELD_CANDIDATE",
+    "target_path": "src/ContinuousFlexibility/Analysis/N04ActualTravelDifferenceAngularBounds.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.N04ActualTravelStripTower",
+      "ContinuousFlexibility.Analysis.N04TravelCircleUniformBounds",
+      "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+      "ContinuousFlexibility.Analysis.N01TransportAngularInterpolation"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelDifferenceAngularBoundsCandidateManifest.json",
+    "sha256": "a4031e1bb7852a02f0eb44a6b5ecb07a8ca3d0c57f57790627df4f955cdecd70",
+    "blob": "b814a76a7cc500ae0fcd6c8c8957f0c2133659dd",
+    "lines": 237
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/N04ActualTravelDifferenceAngularBoundsIndependentReview.json",
+    "sha256": "fb5aa89ab8ffad2453c06c1bc9267b9d5bf8e978cf0c28db470cab3353850b1d",
+    "blob": "5686a5e7dcf750e1537423d812b24573bc0bc1be",
+    "lines": 244
+  },
+  "historical_selected_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelDifferenceAngularBoundsClosureInventory.json",
+    "sha256": "744e658693898d4b94e3b58963622a67c784edae09216d2d3f45081e14e0ac1b",
+    "blob": "b83df8d3566ea4db271316cfd6e3d96ed8ad5f6a",
+    "lines": 9726
+  },
+  "scope_limits": [
+    "One actual difference J is fixed before nmax and angular/spatial orders; exact current/reference first integrals and H(sample m)^(3/4) are retained.",
+    "Low box base B depends on nmax. This is not the final fixed-base CurrentJets theorem or the required radial forcing bound.",
+    "The historical654 graph selected CI160 Neighborhood142 and Control263. CI161 found subsequent issues in those providers. The present owner preserves that graph and requires explicit later supersession before activation; the target140 source is unchanged.",
+    "Only one retained numerical witness153 may supply L/chi and numerical data; independently reselected witnesses must not be mixed.",
+    "No local compiler/elaborator, active source/index/ref/generated root/CI changes."
+  ],
+  "pending_dependency_supersession": {
+    "NeighborhoodRestriction": {
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair161/N01NeighborhoodRestriction.lean",
+        "sha256": "e49b0d271a6a1633dce24a1a2ac1c6b2c4ca33f73be8191d59fb827b6e30e8f4",
+        "blob": "5150d77940daa6a3f95bd505bdb929b2e95db667",
+        "lines": 143
+      },
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair161/N01NeighborhoodRestrictionCI161RepairReviewedManifest.json",
+        "sha256": "4dba1684f7f844118ee9b5f0b3d51ec3473a40a02a371f441eb664aa997bae11",
+        "blob": "c8bb310adfa6dd8aba32f12acc6829fdcad02473",
+        "lines": 40
+      }
+    },
+    "ControlFlowBounds": "Owner preparing the exact CI161 named-binder repair; must bind its final peer/owner separately."
+  },
+  "compiled": false,
+  "created_at": "2026-11-12T17:45:00.461670+00:00"
+}

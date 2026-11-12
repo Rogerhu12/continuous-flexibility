@@ -1,0 +1,87 @@
+{
+  "kind": "local_actual_unit_density_potential_finite_polynomial_jets_independent_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialUnitDensityPotentialJets.lean",
+    "sha256": "d9fb69ef9dd8eaa5ca91c5fdd5b817abcdbcfc6047a2e87fde15a718cdfa476b",
+    "blob": "5c3e5a5446aaefe72e3b1981604a3351efac8cb4",
+    "lines": 85
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialUnitDensityPotentialJetsCandidateManifest.json",
+    "sha256": "bd70b2bf8ec09a880cf280a36ef8f4b7ec1c4e47f98ff480ce956e94833fc5ab",
+    "blob": "1f1a86b3c914384ca4989d78557313801b3283bb",
+    "lines": 66
+  },
+  "selected_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.lean",
+      "sha256": "9bd854157a276a4c5fd8d3161f63d65a851fedbc656beba959ad5899e89cb5a7",
+      "blob": "4df4d9e114ae59bd99b5d3c09825adc95dbe3808",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormula.lean",
+      "sha256": "9901ab0f2a3ff035d99d3f420c0b1215a279b53ba99785b06b3e1a9047a7ea7b",
+      "blob": "4f635532f777f7272f15937a1b7f7f53f681d171",
+      "lines": 137
+    }
+  ],
+  "provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelopeVisibilityReviewedManifest.json",
+      "sha256": "55e1f9fe0d0e8e16ec596a3bebb948de20821dc3d05675dfaf382d4eb1901984",
+      "blob": "2ff192a92ea67f4a7a301b651ece487da37125e0",
+      "lines": 46
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormulaReviewedManifest.json",
+      "sha256": "fe60c28dd61886bf2cb1b0ee7b3bf15663b277931c93da8a42a9dc21a4a7fd7a",
+      "blob": "fc7c8cb35fdabb37465162738edd2cc869bfe90b",
+      "lines": 42
+    }
+  ],
+  "pinned_apis": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Deriv.lean",
+      "sha256": "3033d2b35bcfdad1ab06168dee62c8587215de8fa049caa85e5445c54d4fb98c",
+      "blob": "ede41b77d146105bee637d6db9b91a1a21a48547",
+      "lines": 141
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+      "sha256": "d6c3ace5e5e251e2943bd5985eb9c0a076a875c98fd876c961cb54c366ca50cb",
+      "blob": "86135f3b7295638a64b59ddaf2653b87d2733431",
+      "lines": 391
+    }
+  ],
+  "read_scope": [
+    "All85 source lines, complete selected159 product/composition envelope source, actual137 stored negative-potential formula, full141 pinned ContDiff/Deriv and the iteratedDeriv_succ signature.",
+    "All source/manifest/provider identities independently recomputed; the actual137 formula is used as an already reviewed provider, not relabelled as a newly completed atlas theorem."
+  ],
+  "checks": [
+    "The target is exactly the physical unit-cancelled negative potential w*H^3*deriv(w*deriv H), composed with the same actual inverse chi. It preserves the positive sign of the selected negative-reference formula.",
+    "Local ContDiffAt infinity of H yields local smoothness of deriv H at the same inverse point; the fixed pinned derivWithin lemma requires only m+1<=infinity. No global smooth extension is requested.",
+    "Flux w*Hprime is bounded through N+1 by CP1*M*M. Rewriting iteratedDeriv_succ backwards transfers its derivative prefix through N without a new numerical coefficient and uses H derivatives only through N+2.",
+    "The w*H^3 prefactor uses actual supplied H^3 jets and w through N. Two product applications give CP*(CP*M^2)*(CP1*M^2), with all nonnegative coefficients explicitly supplied.",
+    "The actual composition envelope depends only on positive chi jets through N and multiplies by M^N. The final constant is CC*CP^2*CP1 and the exact total exponent is N+4.",
+    "C and its lower bound1 are selected before M, all functions and the evaluation point. N=0 is covered and does not introduce a zero-order inverse-coordinate bound."
+  ],
+  "mechanical_checks": {
+    "verified_artifact_rows": 7,
+    "single_public_declaration": true,
+    "public_collision_count": 0,
+    "resource_options": [],
+    "forbidden_tokens": []
+  },
+  "findings": [],
+  "scope_limits": [
+    "Numerical local finite jets only; sameK half-sample material inputs and the actual stored-field adapter remain separate consumers.",
+    "No target potential estimate, global inverse value bound, new witness or radius cost is assumed.",
+    "No source edit, compiler/elaborator, resource-limit change, active/index/ref mutation or CI query/download."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "reviewed_at": "2026-11-12T17:29:20.405145+00:00"
+}

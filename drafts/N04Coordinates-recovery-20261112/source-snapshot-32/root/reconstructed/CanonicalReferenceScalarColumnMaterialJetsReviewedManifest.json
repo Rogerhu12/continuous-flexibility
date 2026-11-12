@@ -1,0 +1,40 @@
+{
+  "kind": "same_fixed_scalar_families_actual_two_reference_columns_reviewed_owner",
+  "owner": "/root",
+  "status": "FULL_SOURCE_INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceScalarColumnMaterialJets.lean",
+    "sha256": "6de669a7ac170b19818a1d0778c27f1577fdbcaf70f6adf30c9a0158128e071b",
+    "blob": "c2275dd042ab2a6768f6379c55da5e03a1c85d89",
+    "lines": 104
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceScalarColumnMaterialJetsCandidateManifest.json",
+    "sha256": "31f3dcdfcc0df7da6d001b8c976383f471e428169d5718b533c23c762b5e4115",
+    "blob": "0dad4bae9215d97a51bacc0c21d28197caf230e5",
+    "lines": 77
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/CanonicalReferenceScalarColumnMaterialJetsIndependentReview.json",
+    "sha256": "a9b859e38c6bd8660b9f5b76278898b8919d307045a07e9089b83f93f41793da",
+    "blob": "0f0c41d5a582ef54f4a74866a173de69ebdde5c7",
+    "lines": 79
+  },
+  "reviewed_provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceScalarColumnIdentitiesReviewedManifest.json",
+      "sha256": "1e831af4905cec1a70f168abdfc44b5f96f4dced08f650b36ee43e8b9a51dd80",
+      "blob": "164ce921f81518983c49c2ac6a10796618cd07c1",
+      "lines": 26
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedReferenceScalarSourceMaterialJetsReviewedManifest.json",
+      "sha256": "05a798a8f9a66f3f5203ce19ad74b39106280541bcd44d405d886cb051dd3059",
+      "blob": "25ba71b9d70ee967f994ab7f37f10b6371bf01eb",
+      "lines": 32
+    }
+  ],
+  "scope": "Same given X/F/W families supply both actual left/nu column smoothness, pi-period and all mixed material jets. B(s) precedes K, piece enumeration and field-equality proofs. No final column estimate is an input.",
+  "compiled": false,
+  "created_at": "2026-11-12T17:45:56.690307+00:00"
+}

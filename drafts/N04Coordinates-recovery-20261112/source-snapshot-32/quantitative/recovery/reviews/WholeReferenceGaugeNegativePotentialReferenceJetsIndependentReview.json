@@ -1,0 +1,127 @@
+{
+  "kind": "same_whole_reference_atlas_negative_potential_unit_atom_full_independent_review",
+  "reviewer": "/root/quantitative_route",
+  "status": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_CALLEE_REVIEW_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePotentialReferenceJets.lean",
+    "sha256": "ec8d38f33f34bb4ab3c24f59a0ca586a391f749e793665a57f2b25070ece6212",
+    "blob": "42f4ee6bd9294182fd6f1f798a9f42df99e0a740",
+    "lines": 173
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePotentialReferenceJetsCandidateManifest.json",
+    "sha256": "5eb3535d464766e17f5f671ffc2d213d7ec06261182344e2abf77c3669358e64",
+    "blob": "034b788581d1c380bcc0a3c54ff1195fa5002c50",
+    "lines": 103
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialMaterialJets.lean",
+      "sha256": "fac549078c91279f7952d73126b3ffcebd8b79134319f1e1971943277af754c9",
+      "blob": "183f620bae1945b04f114f069a304338f40cdbed",
+      "lines": 222
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthMaterialBounds.lean",
+      "sha256": "a1355b681442efbae6b424f142b2841024bf85d37c7f16c3127339eb926a907c",
+      "blob": "97ba75908af68271cfed29233a7043de7af28ab4",
+      "lines": 86
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "lines": 311
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "sha256": "bbec6c5ccb9e0d9bcf75516b8c9024e4f15c2e834119822ace6da3c4e70fd51c",
+      "blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "lines": 128
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    }
+  ],
+  "pinned_api_sources": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Order/GroupWithZero/Basic.lean",
+      "sha256": "6526bf3a919d5306c90daf75cf96cfe3bbfacc702f3858fb00f893f7346e2cbd",
+      "blob": "335ef50464487b5763d4ad885d55d83b00964f1b",
+      "lines": 1474
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "lines": 1155
+    }
+  ],
+  "subsequently_completed_provider_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialMaterialJetsReviewedManifest.json",
+      "sha256": "d54ca78164168d197ef30c711e313fa871cff92caabd49890fdb40b7b0d7e168",
+      "blob": "4aa8c69daa725daac57b767f38e4ae65ed75110d",
+      "lines": 107
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthMaterialBoundsReviewedManifest.json",
+      "sha256": "e21b63e0ec60e432f4924b97056edbba72a0725b77090a538524a390ab89507c",
+      "blob": "62d50e6ed5412e8ef5c4d63d1a387c0d3906275d",
+      "lines": 65
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ActualNegativeReferencePotentialMaterialJetsIndependentReview.json",
+      "sha256": "459ad8e893ea577c12b29b9e55515bfe5de451b3a8281d535c26ba24e9e3c012",
+      "blob": "667941612ec8b2e54641ebaf34c890b4762df048",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePartANamespaceReviewedManifest.json",
+      "sha256": "1a16f2e8437ce8eb96ae2f3898479ac42753411f92260ec4343ba4fb31f7c23c",
+      "blob": "3edbaa3198a4e7d4975614969f0be033e7ec5a61",
+      "lines": 109
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-helper-visibility/RadialUnitDensityInverseJetsVisibilityReviewedManifest.json",
+      "sha256": "2b0671f4acfa8c26d884d47a30b92a46df43fc79c682f2ef792592933462d8ce",
+      "blob": "83fa44dc5b45b8fdf50ce0f1c0b7ee95199bdf20",
+      "lines": 53
+    }
+  ],
+  "read_scope": [
+    "All173 selected source lines and its complete candidate manifest; full whole-reference record131, full actual length86 and unconditional affine mixed-derivative128 provider.",
+    "The exact complete public contract of actual potential222, its root full-source review459ad8 and completed70/222 ownerd54ca781. Its internal higher-order proof is not duplicated by this consumer review.",
+    "Exact normalization/pack definitions and actual typed-atlas endpoints/cutPair/sample APIs; fixed-pin power monotonicity and rpow_mul_natCast statements.",
+    "All12 candidate/source/provider/pinned-source identities verified; imports exactly match the source and the single new public name has no active collision."
+  ],
+  "checks": [
+    "The same original K is fixed before the whole enumeration and positive data. Its opposite-side cutPair index is identified by the actual e0 enumeration; the twelve-field negative-record tuple gives the original sample and potential without changing K or the optical host.",
+    "The real unit point is (rho*p.1,p.2), where rho is the original positive optical cut radius. The exact old endpoints0/rho and p in the unit strip place it inside the actual canonical half.",
+    "The full-function atom equality followed by the unconditional radial affine mixed-derivative lemma gives exactly rho^a; the angular derivative order is unchanged.",
+    "The actual222 potential bound is used at this precise old-K canonical point and its original K.cell sample. The containing host supplied by the raw optical hypothesis is separate from that sample and is not identified with it.",
+    "For fixed s, a finite prefix A dominates BN, AN and every B(n) for n<=s. C0 and A are chosen before e, positive families, piece, host and point. A and C0 are at least1, including s=0.",
+    "M=(A*C0^A)*t^A dominates both rho and every needed potential jet using the exact fourth length bound and the same material sample. All rpow base/exponent comparisons explicitly use their nonnegativity/floors.",
+    "The final factor rho^a times the potential is bounded by M^(a+1)<=M^(s+1), then the actual coefficientEnvelope_pack gives the one BM before all whole-atlas data. The reverse rpow_mul_natCast rewrite has the correct direction.",
+    "Only U=enlargedMaterialData T supplies t>=1; original T.E0 is used only with its actual positivity and E<=t. The underlying construction remains at T, and the potential atom is independent of the auxiliary material parameter.",
+    "No extra whole-component cell, whole-atlas replacement, final potential estimate or inverse-jet estimate is assumed. Raw optical lower and the true containing host remain explicit upstream obligations."
+  ],
+  "findings": [],
+  "compiled": false,
+  "source_modified": false,
+  "scope_limits": [
+    "This is the negative numerical potential atom consumer on the same whole reference-gauge record. It does not assert all ReferenceJets, genuine state-directional CurrentJets or a final primitive construction.",
+    "The historical candidate marks actual222 pending; this new receipt binds the later full review and completed owner, including exact namespace and visibility supersessions. No historical manifest is changed.",
+    "No compiler/elaborator, resource override, active source/index/ref or CI operation was performed; default-budget compilation remains unverified."
+  ],
+  "created_at": "2026-11-12T17:48:48.690700+00:00"
+}

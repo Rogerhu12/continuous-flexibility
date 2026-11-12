@@ -1,0 +1,138 @@
+{
+  "kind": "actual_old_atlas_reference_scalar_inverse_complete_independent_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverse.lean",
+    "sha256": "88897c617e7204b734ee70860aa58cc38514df3c6da5180375898c3ae37c427f",
+    "blob": "cf59332c8a3c6d42d13afd93722193d9662c3cc3",
+    "lines": 152
+  },
+  "combined_candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverseCandidateManifest.json",
+    "sha256": "1e71edda88fdaf0b328abaaa2c60cd6aa583f9b2558a860c2aef9c430c7961ab",
+    "blob": "43c643c25e78a90a29fb423545a2164817dfb374",
+    "lines": 159
+  },
+  "review_scope_only": "The actual152 geometry source; the separate135 RadialUnitDensityInverseJets numerical source remains owned by another reviewer.",
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormula.lean",
+      "sha256": "9901ab0f2a3ff035d99d3f420c0b1215a279b53ba99785b06b3e1a9047a7ea7b",
+      "blob": "4f635532f777f7272f15937a1b7f7f53f681d171",
+      "lines": 137
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeRadialFields.lean",
+      "sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+      "blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+      "lines": 156
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePrincipalFormulas.lean",
+      "sha256": "fc2eb15c0da7e37fda9f227b906a75c801d0d628064e17e5bca4e63dae75e910",
+      "blob": "096b420be6425f39b2f5e73e4a0f60cbd9113ced",
+      "lines": 100
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ActualNegativePrincipalDensity.lean",
+      "sha256": "79be096548f4222f5265dc93e1b7ad6aa1bf426954089f48bb78b423c23ee2a3",
+      "blob": "7a3122c1e2c2081375a7be7405a2a348706ed261",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasGeometry.lean",
+      "sha256": "9249ea8b23d4edc27fe5e9d405e32a3da2248556efb394db33faf279aefa1d0a",
+      "blob": "6e704770a6066c6279f7c3cdae96c1d695d554d3",
+      "lines": 101
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasGerms.lean",
+      "sha256": "5abee83c1a68e2b04a6d733f7e51473a15453d5debda0e8526106462e3b4d73e",
+      "blob": "0bf89b2339f60ac8ba2cf9678637f4bf96830a66",
+      "lines": 94
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PrincipalDensityGerms.lean",
+      "sha256": "fda299e40090b434cc97b09721c7481eedc0aa75864ac460a919226ce7987203",
+      "blob": "ecd7557827191f76636b9b448164044ccaefd781",
+      "lines": 118
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+      "sha256": "598b1d5f18c4a22eecd5108949d46b2ddca955d79ea66090b85ca6ba06ff8227",
+      "blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+      "lines": 96
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bTypedAtlasDomains.lean",
+      "sha256": "8032ce84bf016719e83ee02e2d6d11ab3869314b5de2aae207935b757ef121b9",
+      "blob": "4114c475e0bda07b9674ea1f5127fc56507695fc",
+      "lines": 155
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    }
+  ],
+  "provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormulaReviewedManifest.json",
+      "sha256": "fe60c28dd61886bf2cb1b0ee7b3bf15663b277931c93da8a42a9dc21a4a7fd7a",
+      "blob": "fc7c8cb35fdabb37465162738edd2cc869bfe90b",
+      "lines": 42
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeEndpointDataReviewedManifest.json",
+      "sha256": "f5792f65df07694fa330cdc669d7ebd446577e0cffef75b61e0f4edf4f845c8f",
+      "blob": "798621a81c8ffc57a1b3fde6be7e2935f4ce1121",
+      "lines": 51
+    }
+  ],
+  "pinned_apis": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+      "sha256": "1e9fbd861ac27cb4b17113c3f8ede3c5f573a6b342b23e41ff514b05bd3334ef",
+      "blob": "e7fd4979f58f787927500713547b3671402ae782",
+      "lines": 1283
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Comp.lean",
+      "sha256": "26495369d99d4815f99e8319623231a5fe25f0fdd1756c31162216323e27ed0f",
+      "blob": "067d19883550ab5637d02f038d451c42ab16e4b7",
+      "lines": 839
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/GroupWithZero/Defs.lean",
+      "sha256": "a9eae4c59296342085ee6dde0c167bfd6a0a6bfee6e1acb60cdf944445dc5a19",
+      "blob": "53094afd9e0763f9d022ca93980daf72f99845a8",
+      "lines": 330
+    }
+  ],
+  "read_scope": [
+    "All152 source lines and complete combined candidate manifest; all137 potential identity,156 actual radial fields,100 radial principal formula,111 actual negative density,96 true half definitions, and actual PartA/source-germ declarations.",
+    "Current Nonlinear N03 coefficient projection, canonicalOpen, referenceDomain and full charts conjunction; relevant155 reference-domain clauses and pinned ContDiffAt composition/cancellation contracts.",
+    "All relevant source/provider/owner SHA256 and Git-blob identities recomputed. Actual PartA visibility follows through ActualNegativePrincipalDensity -> N04bActualAtlasGerms -> N04bActualAtlasGeometry; radial density/germ providers are present through the declared potential import."
+  ],
+  "checks": [
+    "Y,H,chi are literal zero-angle slices of the same original actual typed atlas, at its genuine reference state. I is the same optical-cut physical half and J the same stored canonical interval; no invFun or new reference family is chosen.",
+    "The true referenceDomain field gives the exact physical half. Its inclusion in the whole negative component permits the reviewed full-component radial chart and height formulas to be restricted to that half.",
+    "Ordinary smoothness of all three scalar slices follows by composing actual ordinary chart/inverse/height germs on open domains with r -> (r,0). MapsTo chi J I is obtained from the actual inverse MapsTo, with the angle fixed explicitly at0.",
+    "Y(chi xi)=xi uses the actual right inverse and radial first component. chi(Yr)=r uses the actual left inverse and the same zero-angle chart value. Explicit point arguments match the forall-point inverse fields, not EqOn implicit-point APIs.",
+    "Actual chart/height germs at(r,0) give equality of true principal densities. The radial formula, the same Through03 reference coefficient a=w and actual Airy principal a=1 yield H^2/abs(Yprime)*(w*Yprime^2)=1. This forces abs(Yprime) nonzero, and squaring/cancellation gives H^2*w*abs(Yprime)=1 without imposing the sign of Yprime.",
+    "The final planar inverse uses q=(chi(p.1),p.2) in the actual physical half. Its true chart image is p, so the same left inverse at q proves Gp=q. No totalized inverse value outside the actual canonical half is used.",
+    "All initial let aliases are explicitly reduced before the proof, each source projection uses the current cumulative N01/N03 shape, and the new public name has no installed-source collision. No resource override or bypass occurs."
+  ],
+  "findings": [],
+  "compiled": false,
+  "source_edited": false,
+  "public_collision_count": 0,
+  "scope_limits": [
+    "This is actual scalar inverse geometry and unit density on the open negative half; it does not assert global inverse identities or uniform numerical/material estimates.",
+    "The other135 numerical leaf in the combined candidate is not reviewed by this receipt.",
+    "No local compiler/elaborator, CI query/download or active source/index/ref operation. Static review is not compilation evidence."
+  ],
+  "reviewed_at": "2026-11-12T17:24:27.041743+00:00"
+}

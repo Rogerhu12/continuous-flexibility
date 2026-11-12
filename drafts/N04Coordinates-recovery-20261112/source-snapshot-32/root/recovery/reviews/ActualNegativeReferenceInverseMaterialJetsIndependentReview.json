@@ -1,0 +1,121 @@
+{
+  "kind": "actual_negative_reference_inverse_material_jets_full_independent_review",
+  "reviewer": "/root",
+  "status": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceInverseMaterialJets.lean",
+    "sha256": "ba704d27a5edf8f0f8a7bcf9eefba41d7f440f982f4dd8622daf25c3949e1eae",
+    "blob": "777b7bac04467e51554377f80235b6b55efbb9ce",
+    "lines": 207,
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceInverseMaterialJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualNegativeReferenceHeightMaterialJets",
+      "ContinuousFlexibility.Analysis.ActualNegativeReferenceScalarInverse",
+      "ContinuousFlexibility.Analysis.RadialUnitDensityInverseJets"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceInverseMaterialJetsCandidateManifest.json",
+    "sha256": "b500575094559b25f8ce553de8ca50977f2723a1c569ff964209d07a7f52aece",
+    "blob": "2fe0afb0001646c390dc65a3bc5778d627033e70",
+    "lines": 114
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightMaterialJets.lean",
+      "sha256": "bda1d2cda9e6c88c394819233f9606026e417e03a5c357cb6aab76ab7da8d383",
+      "blob": "20423f5dc8e83101d8950003cb5454bf3def9007",
+      "lines": 293
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverse.lean",
+      "sha256": "88897c617e7204b734ee70860aa58cc38514df3c6da5180375898c3ae37c427f",
+      "blob": "cf59332c8a3c6d42d13afd93722193d9662c3cc3",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-clm-ext/RadialUnitDensityInverseJets.lean",
+      "sha256": "a04c93a733402f23e349a4a8a6d38e5f42b7eaa147e5b777fa00ee427eec88f5",
+      "blob": "b9bc21aa7c89b38691e7510288d38832f2ab3a0f",
+      "lines": 136
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJets.lean",
+      "sha256": "52e91e6500606231c499fcd3863d9b2f9ca99535348f52e9abc8f15b139b8e23",
+      "blob": "6fbfba9f7a349a6604eb28473b5098a5f45a3e1f",
+      "lines": 103
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeMaterialSamples.lean",
+      "sha256": "696583df4d5261aff78e5a6cc32ff4fde06ea6d17b2bdf2745805fde0a06c2fc",
+      "blob": "2546c07212cf569a225e873eb38945a9cb4127e3",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01ReturnMargins.lean",
+      "sha256": "f6837c40fe69a787217b9cac9af9388bfba17785c39c29bdcad83afca21f4fbb",
+      "blob": "f239b311b3a9f8428fb49177124e1289113a0512",
+      "lines": 103
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+      "sha256": "598b1d5f18c4a22eecd5108949d46b2ddca955d79ea66090b85ca6ba06ff8227",
+      "blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+      "lines": 96
+    }
+  ],
+  "reviewed_provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightMaterialJetsReviewedManifest.json",
+      "sha256": "637ef52639e1a5b1931946ab387f07c59961d9841735d7c694650709014c6799",
+      "blob": "5bfb4d8c935777c2dab8f22de4ece2fb88cf858c",
+      "lines": 88
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-clm-ext/RadialUnitDensityInverseJetsReviewedManifest.json",
+      "sha256": "ffef369617f1a1176cc68c877ef5e47d8a8aa21a41aa1e10fa225577537d23be",
+      "blob": "85b926bf9a18b2ee3b54a3b636d48e8f6237a8dd",
+      "lines": 47
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJetsReviewedManifest.json",
+      "sha256": "16b143562879d7afa35191e4a5850af9407223fed8af59136062433a67906846",
+      "blob": "d45cce809854a44f29de33bf413d6d46afcb51e7",
+      "lines": 34
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeMaterialSamplesReviewedManifest.json",
+      "sha256": "c296199c9dec8bfd1cf7f5ba7d3540a783ce6d0f6043ee58c41bdce59e5e6729",
+      "blob": "c3770c51f99a3a4a734213541f7b04436263350c",
+      "lines": 54
+    }
+  ],
+  "subsequently_completed_geometry_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverseReviewedManifest.json",
+    "sha256": "e136252bba805148d49e501b11a0de84d50a4b003c6269177ef59e441cce3f38",
+    "blob": "8c659170a981e8d1a930d164ac3423597c3356fc",
+    "lines": 56
+  },
+  "read_scope": [
+    "Complete selected207 inverse-material source and manifest; complete actual152 stored scalar inverse and selected compatibility136 unit-density inverse polynomial.",
+    "Complete103 reciprocal-profile and131 actual sample providers; previously full-reviewed293 physical-height power provider and its exact public physical adapter. Actual N01ReturnMargins and N04bReferenceHalves interfaces checked.",
+    "Every recorded provider and owner identity verified. The new152/136 reviewed owner is bound separately without rewriting the historical candidate pending-status record."
+  ],
+  "checks": [
+    "One actual physical-height call fixes C0 before every real power and derivative order. H^2 and H^(-2) are two estimates for that same literal stored H, not reselected height families.",
+    "The only compact bound used at ambient annulus endpoints concerns the smooth profile value w. Reciprocal profile jets come from real accumulating-profile cell estimates and then transfer to the original K.cell half sample.",
+    "The actual host j of the full open component is kept distinct from K.cell. The raw optical hypothesis uses that host and is explicitly passed to the same height bounds.",
+    "For each N the finite H^(-2) prefix, reciprocal-profile constant/exponent and forward-profile bound determine one A before all pieces, hosts and canonical points. M=A*(C0*E0sample)^A satisfies each numerical inverse hypothesis.",
+    "The scalar inverse is the literal first component of K.inverseChart at angle zero. The actual geometry theorem maps the genuine canonical half into the genuine physical half and supplies inverse/unit-density germs on open neighborhoods.",
+    "The unit-density inverse polynomial is evaluated at exactly those germs and that H/w. Its natural polynomial cost is explicitly converted to one real material exponent B(N) at the same original sample.",
+    "The conclusion bounds positive inverse orders N+1 only. No zero-coordinate estimate, alternate inverse, changed material data or final ReferenceJets certificate is inserted."
+  ],
+  "findings": [],
+  "compiled": false,
+  "source_modified": false,
+  "scope_limits": [
+    "Uniform K0 and the actual-host full-component raw optical lower bound remain explicit construction inputs. Final realization must produce them from the retained data.",
+    "This is a full static source/API review, not CI or combined-graph activation. No local compiler, resource limit, active source/index/ref or CI operation was used."
+  ],
+  "created_at": "2026-11-12T17:34:08.097386+00:00"
+}

@@ -1,0 +1,90 @@
+{
+  "kind": "CI161_neighborhood_per_parameter_order_choice_projection_repair",
+  "owner": "/root/proof_inventory",
+  "status": "CANDIDATE_HELD_PENDING_COMPLETE_INDEPENDENT_PEER_UNCOMPILED",
+  "actual_head": "7ac330b2e0c2420e449235a090055a8018ebf17e",
+  "actual_tree": "4e255a3287e0954cc2c4b009298c6a8f5958d99a",
+  "target_path": "src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair161/N01NeighborhoodRestriction.lean",
+    "sha256": "e49b0d271a6a1633dce24a1a2ac1c6b2c4ca33f73be8191d59fb827b6e30e8f4",
+    "blob": "5150d77940daa6a3f95bd505bdb929b2e95db667",
+    "lines": 143
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair161/N01NeighborhoodRestriction.ci161-base.lean.txt",
+    "sha256": "9da10cc067a2606c3fef7d14ce73d4bb1c8e660022c0ce6df5837da5d333ad3b",
+    "blob": "4c615b70f2ab1b3e44ba228e2c578d00f2b748c1",
+    "lines": 142
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair161/N01NeighborhoodRestriction.diff",
+    "sha256": "98a4f46231e4c02c933d180755cd20d69b29ed008f812126495eca7907de2dd9",
+    "blob": "9f0677249943ed48f72cbddcc52eb4bf10c98d2a",
+    "lines": 18
+  },
+  "cached_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-161.log",
+    "sha256": "3cd24d16885a4ad19fec2df77775f3b5d2af9145610bdf9eb12216f28f11b48d",
+    "blob": "6acbb5f5b367683e194fb0a9e6fa2e13bdb84e24",
+    "lines": 830
+  },
+  "diagnostics": [
+    "error: src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean:75:2: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached"
+  ],
+  "prior_reviewed_candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/flow-opaque/N01NeighborhoodRestrictionCI160RepairReviewedManifest.json",
+    "sha256": "3e07c84e408796717e7c1fc92d6f56bd99f0b6de456264a2591a9921ccdae6b6",
+    "blob": "9c2c9683497750c1b17ba94e6e0798356a14f6af",
+    "lines": 46
+  },
+  "public_headers_preserved": 4,
+  "proof_delta": [
+    "Replace only the private helper existential obtain at k by a let parameterLoss : Nat := (hbound k).choose and have horder := (hbound k).choose_spec. This avoids pattern elimination of the full projective-space-dependent predicate.",
+    "The selected loss is the witness from the original hbound k. Selection remains before spatial s; the original B and hpoint proof, exact J.D restriction, all material weights and s+loss+parameterLoss are unchanged.",
+    "All four public headers and proofs, the private header and all private proof bytes outside the one replaced statement, imports, options and local instance remain byte-identical. No helper, premise, data choice or resource override is added."
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01cStateSeminorms.lean",
+      "sha256": "99abe3e9057a214b52c5188410cfc8d2ca2a3f9a52733bcb5c73dd9757666d26",
+      "blob": "f96fa185722d12bab8545de1d59ea100a0556417",
+      "lines": 331
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/SolveStateSpaces.lean",
+      "sha256": "035be369042b7d7ab904bdd9ec4fed643b94e2bc65d7dc44835529cb6a647115",
+      "blob": "ffea3f07f4a1fc03b0cdd99bc1d9bdd6c64bed13",
+      "lines": 184
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleCofinite.lean",
+      "sha256": "216a156a837d75f8ffb20ca2d4b12b84898ff606bc5d8f5bce4e79d25b9b3da3",
+      "blob": "1562a68cf59d5ebd5bedc7efce55bf3d7217ba44",
+      "lines": 98
+    }
+  ],
+  "mechanical_checks": {
+    "actual_git_preimage_equal": true,
+    "actual_tree_equal": true,
+    "four_public_headers_exact_equal": true,
+    "reverse_transform_exact_bytes": true,
+    "all_bytes_outside_one_statement_unchanged": true,
+    "imports_options_unchanged": true,
+    "same_choice_projection_pattern_already_used_for_horder_s": true,
+    "prohibited_tokens_or_new_resource_settings": []
+  },
+  "scope_limits": [
+    "The original CI160 opaque-helper candidate remains immutable history; CI161 showed the timeout now occurs at existential pattern elimination in that helper.",
+    "Static proof-preserving repair only. Performance and type elaboration remain for the authorized next CI run under unchanged defaults.",
+    "No local compiler/elaborator, active src/index/ref/generated-root change, or CI query/download. The other CI161 module is outside this repair."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:40:57.801157+00:00"
+}

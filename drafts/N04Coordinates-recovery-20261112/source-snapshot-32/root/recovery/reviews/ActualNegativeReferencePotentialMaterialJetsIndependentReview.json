@@ -1,0 +1,152 @@
+{
+  "kind": "actual_negative_reference_potential_material_jets_full_independent_review",
+  "reviewer": "/root",
+  "status": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialMaterialJets.lean",
+    "sha256": "fac549078c91279f7952d73126b3ffcebd8b79134319f1e1971943277af754c9",
+    "blob": "183f620bae1945b04f114f069a304338f40cdbed",
+    "lines": 222,
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferencePotentialMaterialJets.lean",
+    "public_names": [
+      "n04bActualTypedAtlas_reference_half_potential_material_jets"
+    ],
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualNegativeReferenceInverseMaterialJets",
+      "ContinuousFlexibility.Analysis.ActualNegativeReferencePotentialGerms",
+      "ContinuousFlexibility.Analysis.RadialUnitDensityPotentialJets"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialMaterialJetsCandidateManifest.json",
+    "sha256": "9c9dc0f5d204182bf1a9f0afca38188a4d2648c7466817355efad376d003327a",
+    "blob": "56821038a5a4288b1502e8886d47146edc6b9501",
+    "lines": 151
+  },
+  "actual_germ_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialGerms.lean",
+    "sha256": "d9fd05beea6390b03493b772357fe3110865629dab6d6c17689487fce4e7d205",
+    "blob": "a82945a31a992d2b428782d030a35c5e1074542d",
+    "lines": 70,
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferencePotentialGerms.lean",
+    "public_names": [
+      "n04Coordinates_actual_reference_negative_potential_germ"
+    ],
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualNegativeReferenceScalarInverse",
+      "ContinuousFlexibility.Analysis.LocalMixedProductBounds",
+      "ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets"
+    ]
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverse.lean",
+      "sha256": "88897c617e7204b734ee70860aa58cc38514df3c6da5180375898c3ae37c427f",
+      "blob": "cf59332c8a3c6d42d13afd93722193d9662c3cc3",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormula.lean",
+      "sha256": "9901ab0f2a3ff035d99d3f420c0b1215a279b53ba99785b06b3e1a9047a7ea7b",
+      "blob": "4f635532f777f7272f15937a1b7f7f53f681d171",
+      "lines": 137
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightMaterialJets.lean",
+      "sha256": "bda1d2cda9e6c88c394819233f9606026e417e03a5c357cb6aab76ab7da8d383",
+      "blob": "20423f5dc8e83101d8950003cb5454bf3def9007",
+      "lines": 293
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceInverseMaterialJets.lean",
+      "sha256": "ba704d27a5edf8f0f8a7bcf9eefba41d7f440f982f4dd8622daf25c3949e1eae",
+      "blob": "777b7bac04467e51554377f80235b6b55efbb9ce",
+      "lines": 207
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialUnitDensityPotentialJets.lean",
+      "sha256": "d9fb69ef9dd8eaa5ca91c5fdd5b817abcdbcfc6047a2e87fde15a718cdfa476b",
+      "blob": "5c3e5a5446aaefe72e3b1981604a3351efac8cb4",
+      "lines": 85
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/LocalMixedProductBounds.lean",
+      "sha256": "d0faf14d190ae8c14f16f80958e8c166183c0914f822815a8d98aa13a660dfd7",
+      "blob": "cd30f2f9bb0efbb186788c4010cfaeef58befd57",
+      "lines": 125
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N08RadialFamilyMaterialJets.lean",
+      "sha256": "5796d127cb631248523060a373d0cdea3d07052857008b6dcfb987dbae59289d",
+      "blob": "3fd9b99c74162ee221843491623573b719c172b3",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01ReturnMargins.lean",
+      "sha256": "f6837c40fe69a787217b9cac9af9388bfba17785c39c29bdcad83afca21f4fbb",
+      "blob": "f239b311b3a9f8428fb49177124e1289113a0512",
+      "lines": 103
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+      "sha256": "598b1d5f18c4a22eecd5108949d46b2ddca955d79ea66090b85ca6ba06ff8227",
+      "blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+      "lines": 96
+    }
+  ],
+  "reviewed_provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverseReviewedManifest.json",
+      "sha256": "e136252bba805148d49e501b11a0de84d50a4b003c6269177ef59e441cce3f38",
+      "blob": "8c659170a981e8d1a930d164ac3423597c3356fc",
+      "lines": 56
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormulaReviewedManifest.json",
+      "sha256": "fe60c28dd61886bf2cb1b0ee7b3bf15663b277931c93da8a42a9dc21a4a7fd7a",
+      "blob": "fc7c8cb35fdabb37465162738edd2cc869bfe90b",
+      "lines": 42
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightMaterialJetsReviewedManifest.json",
+      "sha256": "637ef52639e1a5b1931946ab387f07c59961d9841735d7c694650709014c6799",
+      "blob": "5bfb4d8c935777c2dab8f22de4ece2fb88cf858c",
+      "lines": 88
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialUnitDensityPotentialJetsReviewedManifest.json",
+      "sha256": "4a3ebc6b67b77fa2b278fc10634d24857a75f7ecf03d5e242a22156d009cb851",
+      "blob": "b01fea40a4a54a87fc52c906c35f5233b63c6927",
+      "lines": 45
+    }
+  ],
+  "subsequently_completed_inverse_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceInverseMaterialJetsReviewedManifest.json",
+    "sha256": "8673113760c3d0eeeec6cd2513e2b3863e1e74b80ae2e5c1a9a32eb50e8c7e28",
+    "blob": "fa8f75e002ad16d85437327dd0cf0f64d0f15690",
+    "lines": 44
+  },
+  "read_scope": [
+    "All222 selected material-source lines and complete manifest; all85 local numerical potential lemma and all70 actual planar-germ caller.",
+    "The complete207 stored inverse material theorem and actual152 geometry were full-reviewed separately. The previously full-reviewed293 physical height provider and exact powers1/3 adapter were rechecked at their call sites.",
+    "Actual mixed-germ/radial mixed API and the fixed profile smoothness/range facts; every recorded source, owner and pinned API fingerprint verified."
+  ],
+  "checks": [
+    "The literal K, physical height H, scalar inverse chi and original K.cell sample are fixed throughout. Independently obtained height and inverse numerical constants CH/Cinv are combined by addition; no equality of independently chosen numerical families is assumed.",
+    "C0=CH+Cinv is chosen before N and dominates both positive floors. The profile-only compact bound is valid on the closed annulus; no reciprocal-profile bound is obtained by compactness there.",
+    "For each N a single finite prefix through N+2 dominates B1,B3,BI before component, host and point selection. It supplies physical H through N+2, H^3 through N, w through N+1 and only positive inverse orders through N.",
+    "The true half inverse map places chi(x) inside the physical half and radial core. The generic85 lemma is instantiated with local smoothness at those actual points, so no outside extension is charged.",
+    "The generic cost CN*M^(N+4) is converted explicitly to coefficient times W^exponent and then dominated by B*W^B with W>=1. Every exponent comparison has the required positivity.",
+    "The actual planar germ identifies the stored potential with the same w H^3 (w H-prime)-prime expression. b=0 uses the exact radial bound; b!=0 gives a zero mixed derivative and the nonnegative material right side.",
+    "The genuine full-component optical host j is retained separately from K.cell; its original K0 hypothesis is never silently replaced by a half-sample or closed-buffer claim."
+  ],
+  "findings": [],
+  "compiled": false,
+  "source_modified": false,
+  "scope_limits": [
+    "This receipt covers222. The separate70 source is an explicitly bound mathematical provider and has its own independent peer assignment.",
+    "The actual-host raw optical lower input and uniform K0 still need the same retained-construction producer. Same-V unit rescaling/atom and final ReferenceJets packaging are later consumers.",
+    "Full static source/API review only; no compiler/elaborator, resource override, active source/index/ref or CI action."
+  ],
+  "created_at": "2026-11-12T17:36:34.141405+00:00"
+}

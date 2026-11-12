@@ -1,0 +1,46 @@
+{
+  "kind": "ci161_control_scalar_endpoint_reviewed_repair",
+  "owner": "/root/quantitative_route",
+  "status": "STATIC_INDEPENDENTLY_FULL_REVIEWED_PENDING_AUTHORIZED_CI",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair161/N01ControlFlowBounds.lean",
+    "sha256": "2c3534ff1a505e3c35ca2978d138d86a69859e4cefb62a390f5ec15f4e4a75d9",
+    "blob": "da5a86231558708da484b96b350a925cd0fe50d4",
+    "lines": 263
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair161/N01ControlFlowBoundsCI161RepairCandidateManifest.json",
+    "sha256": "ddb4e6eae9c832d2e47153962eae9d559698797de3ce746da31d1696ef418735",
+    "blob": "2f9ee4eb812dcf1391ce1cd0bc588d18ec29b0b4",
+    "lines": 69
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/CI161N01ControlFlowBoundsIndependentReview.json",
+      "sha256": "ecfa3588e1698f38874ded47f29e8cf6865e8c7bde0017c50636290aa850fff1",
+      "blob": "79c4e9777ad463e35ef5b8ba53a78553ec1e56e7",
+      "lines": 61
+    }
+  ],
+  "actual_base": {
+    "commit": "7ac330b2e0c2420e449235a090055a8018ebf17e",
+    "tree": "4e255a3287e0954cc2c4b009298c6a8f5958d99a",
+    "target_path": "src/ContinuousFlexibility/Analysis/N01ControlFlowBounds.lean",
+    "blob": "c83ee3bea974c231233a5c942ac866b3cf0114ee"
+  },
+  "previous_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair160/N01ControlFlowBoundsCI160RepairReviewedManifest.json",
+    "sha256": "cb69462825837a725c13b38595cf09a2f53c1f524d427a2485d3a074caae821b",
+    "blob": "28522e9290a6720de2f22defe7ea278b5e42f704",
+    "lines": 34
+  },
+  "public_contracts_unchanged": true,
+  "source_unchanged_since_peer": true,
+  "compiled": false,
+  "scope_limits": [
+    "Only the existing scalar endpoint invocation gains explicit f,a,b,K arguments; all other263 source bytes remain unchanged.",
+    "Exact7ac330b2 actual preimage and cached CI161 diagnostic were reviewed. No local compiler or resource increase; root owns integration and authorized CI.",
+    "The repair160 timeout locations passed CI161. This remaining explicit-parameter correction is static-reviewed and awaits CI162 validation."
+  ],
+  "created_at": "2026-11-12T17:47:34.548263+00:00"
+}
