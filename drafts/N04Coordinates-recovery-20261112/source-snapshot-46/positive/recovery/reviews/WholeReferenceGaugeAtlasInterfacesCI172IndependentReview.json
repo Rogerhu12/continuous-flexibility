@@ -1,0 +1,176 @@
+{
+  "schema": "n04-independent-source-repair-review.v1",
+  "status": "PASS_SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "author": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "intended_archive_path": "positive/recovery/reviews/WholeReferenceGaugeAtlasInterfacesCI172IndependentReview.json",
+  "task": "Independent complete source and exact-delta review of root CI172 endpointAlignedChart partial-application repair",
+  "candidate_manifest": {
+    "git_blob": "f6661399b49499f9d0115a8bfd9ec8f6e7bf8a26",
+    "sha256": "40e5461638ce73c0145ef0c176f9bbd7d97ef79b9ce4624b9742eec7e50ee29b",
+    "utf8_bytes": 1931,
+    "lines": 48,
+    "final_newline": true
+  },
+  "base_commit": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+  "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasInterfaces",
+  "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasInterfaces.lean",
+  "before": {
+    "git_blob": "23a91459c8a857886c76d04e87e1f9d09443f634",
+    "sha256": "2548423c10106e5764d37da89d55b1dc7ed3b910f9a26b7f629aa0fc4a6de6ac",
+    "utf8_bytes": 3500,
+    "lines": 70,
+    "final_newline": true,
+    "actual_base_ref_path_fetch_exact": true,
+    "complete_source_read": true
+  },
+  "after": {
+    "git_blob": "5280da9d0a351369f2a9b9d220929be0f23fccc5",
+    "sha256": "f8eaea450262528f3a5133141e078282b8a762f35be27452ebc6ef7ee8152f23",
+    "utf8_bytes": 3668,
+    "lines": 73,
+    "final_newline": true,
+    "complete_source_read": true,
+    "source_unchanged_by_reviewer": true
+  },
+  "diagnostic": {
+    "run": 43325153408,
+    "job": 131555640327,
+    "local_cache": "/dev/shm/n04-ci172/WholeReferenceGaugeAtlasInterfaces.lean.errors.txt",
+    "git_blob": "af6af9b0e722cc7967cbc9528a86ab88b82e25a3",
+    "sha256": "b430db1183460f11fc899359420a86cca8491c69407575b4a75d6eb4edcf1f2e",
+    "utf8_bytes": 32056,
+    "lines": 453,
+    "final_newline": false,
+    "characters": 31651,
+    "complete_read": true,
+    "retrieved_from_existing_local_cache": true,
+    "new_CI_or_job_download": false,
+    "error_count": 1,
+    "location": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasInterfaces.lean:64:2",
+    "full_context_status": "The local cache has all31651 characters. Initial combined tool rendering truncated the display; reviewer subsequently reread overlapping0..16200 and16000..end slices, covering every cached character. The cached text itself contains no truncation marker.",
+    "actual_mismatch": "All pointwise chart, inverse cut point, radius, height and height-derivative expressions already reduce to the same K expressions. Only the two fderiv function arguments retain endpointAlignedChart applied to the entire gauged record; the supplied hcut has endpointAlignedChart K instead.",
+    "exact_source_side_derivative": "fderiv ℝ (CanonicalGeometry.endpointAlignedChart K z (K.cutPair m).1 (K.cutRadius m) 1) (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ))",
+    "exact_expected_side_shape": "fderiv ℝ (CanonicalGeometry.endpointAlignedChart {entire gauged record} z (e.symm (.inl (m,false))) (K.cutRadius m) 1) at the identical K.inverseChart point; likewise right with true and−1"
+  },
+  "exact_delta": {
+    "removed": "  simpa only [CanonicalGeometry.endpointAlignedChart, canonicalCutPoint,\n",
+    "replacement": "  have hE (V : CanonicalData S) (j : ℕ) (ρ s : ℝ) :\n      CanonicalGeometry.endpointAlignedChart V z j ρ s =\n        (fun p : PolarPoint => (s * ((V.chart z j p).1 - ρ), (V.chart z j p).2)) := rfl\n  simpa only [hE, canonicalCutPoint,\n",
+    "forward_reconstruction_equals_after": true,
+    "inverse_reconstruction_equals_before": true,
+    "copied_hE_block_exactly_in_actual_compiled_pattern": true,
+    "added_lines": 4,
+    "deleted_lines": 1,
+    "net_lines": 3,
+    "all_other_bytes_unchanged": true
+  },
+  "preserved_surface": {
+    "public_theorem_count": 2,
+    "complete_public_headers": [
+      {
+        "name": "n04WholeReferenceGaugeAtlasData_actual_interfaceClassification",
+        "header": "theorem n04WholeReferenceGaugeAtlasData_actual_interfaceClassification\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}\n    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)\n    (hN : NonlinearPropertiesThrough03 D T S C R L base loss ε)\n    (hfield : N04bFieldRegularity D S C L base ε)\n    (e₀ : ℕ ≃ N04PieceIndex D) (e : ℕ ≃ N04WholePieceIndex D)\n    (cell : N04PositiveComponent D.a D.b (deriv D.w) → ℕ)\n    (ψ χ : N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → PolarPoint)\n    (h₀ : N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → ℝ)\n    (τ σ : (AnnularState S × ℝ) →\n      N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → PolarPoint)\n    (Q : (AnnularState S × ℝ) →\n      N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → ℝ)\n    (N : Set ℝ) :\n    CanonicalGeometry.PhysicalInterfaceClassification D\n      (n04WholeReferenceGaugeAtlasData C L\n        (n04bActualTypedAtlas hT hS hN hfield e₀) e cell ψ χ h₀ τ σ Q N)",
+        "after_byte_identical": true
+      },
+      {
+        "name": "n04WholeReferenceGaugeAtlasData_cutFirstJetMatching",
+        "header": "theorem n04WholeReferenceGaugeAtlasData_cutFirstJetMatching\n    {D : ReferenceData} {S : PhysicalSpacesData}\n    (C : NonlinearGeometryData S) (L : ReturnCorrectionData S) (K : CanonicalData S)\n    (e : ℕ ≃ N04WholePieceIndex D)\n    (cell : N04PositiveComponent D.a D.b (deriv D.w) → ℕ)\n    (ψ χ : N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → PolarPoint)\n    (h₀ : N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → ℝ)\n    (τ σ : (AnnularState S × ℝ) →\n      N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → PolarPoint)\n    (Q : (AnnularState S × ℝ) →\n      N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → ℝ)\n    (N : Set ℝ) {base : ℕ} {ε : ℝ}\n    (hcut : CanonicalGeometry.CutFirstJetMatching S C K base ε) :\n    CanonicalGeometry.CutFirstJetMatching S C\n      (n04WholeReferenceGaugeAtlasData C L K e cell ψ χ h₀ τ σ Q N) base ε",
+        "after_byte_identical": true
+      }
+    ],
+    "imports": [
+      "import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+      "import ContinuousFlexibility.Analysis.WholeCanonicalInterfaceClassification",
+      "import ContinuousFlexibility.Analysis.ActualAtlasCutFirstJets"
+    ],
+    "imports_byte_identical": true,
+    "options": [],
+    "options_byte_identical": true,
+    "first_theorem_and_its_entire_proof_unchanged": true,
+    "no_new_public_declaration": true,
+    "no_new_hypothesis": true,
+    "same_C_L_K_e_cell_reference_gauge_and_relative_family": true
+  },
+  "source_reasoning": [
+    "The actual Nonlinear definition is endpointAlignedChart K z j rho s p=(s*((K.chart z j p).1−rho),(K.chart z j p).2). Therefore the new hE is a definitional equality of complete functions, with exactly the same z, j, rho and s. Its proof rfl makes no differentiability or inverse-law assumption.",
+    "Rewriting by hE is applicable below fderiv because its left side is the full partial application endpointAlignedChart V z j rho s. This is the exact syntactic depth that the cached failing simp did not unfold.",
+    "After hE, the existing unchanged simp set evaluates the gauged record's chart at e.symm(.inl(m,false/true)). Both nested record cases reduce by Equiv.apply_symm_apply and the same Bool branches to K.chart z (K.cutPair m).1/2. Thus the full fderiv input functions coincide, not merely their values at the cut point.",
+    "The complete record definitions preserve cutPair/cutRadius and all negative inverse, chart and height fields. canonicalCutPoint on the gauged record is the same K.inverseChart z (K.cutPair m).1 (K.cutRadius m,theta), exactly as shown in the complete diagnostic. No pointwise-only substitution is used to identify derivatives.",
+    "The height equality and Robin first-derivative expression are unchanged, including the sign and division by2*cutRadius. Their cached simplified forms already agree.",
+    "The first theorem uses only physical interface metadata. Both records retain physicalLeft, physicalRight and cutPair, and its unchanged actual caller has the exact parameter order hT hS hN hfield e0 e cell sigma tau Q N.",
+    "The identical three-line hE proof occurs in ActualAtlasCutFirstJets at the actual CI172 base ref. Its scope and types match this source; the new negative reference gauge adds record nesting but does not alter the field computation.",
+    "No mathlib fderiv theorem or boundary regularity API is newly invoked. The repair is function equality followed by the existing simplifier proof."
+  ],
+  "provider_evidence": [
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasData.lean",
+      "ref": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+      "git_blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "utf8_bytes": 6809,
+      "lines": 131,
+      "final_newline": true,
+      "review_scope": "complete source read"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeCanonicalInterfaceClassification",
+      "path": "src/ContinuousFlexibility/Analysis/WholeCanonicalInterfaceClassification.lean",
+      "ref": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+      "git_blob": "b21513d9523375d05141018d7f7e296f78d44212",
+      "sha256": "4e258e62d63ad210d6d8e39ebf3e5b0f3dfe1a507134d77aceda3c3b7ac770bc",
+      "utf8_bytes": 4784,
+      "lines": 122,
+      "final_newline": true,
+      "review_scope": "complete source read"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeCanonicalAtlasData",
+      "path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasData.lean",
+      "ref": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+      "git_blob": "c3a5f79617c7e583e16deb09c44e5679744ea092",
+      "sha256": "a4a3c629dcde3b7c324291d5e65c6bc6ceacbbdf8968577f2abcc3f0472c9f1d",
+      "utf8_bytes": 7986,
+      "lines": 165,
+      "final_newline": true,
+      "review_scope": "complete source read"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualAtlasCutFirstJets",
+      "path": "src/ContinuousFlexibility/Analysis/ActualAtlasCutFirstJets.lean",
+      "ref": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+      "git_blob": "528eda106b3b3300314ce573953e14f856dc8cfe",
+      "sha256": "8cf600bd87bd6ca4cf2c1ab020ed4d4baf7d185a4bc09b730223a9ade83dd74f",
+      "utf8_bytes": 7801,
+      "lines": 149,
+      "final_newline": true,
+      "review_scope": "complete149-line source read; exact hE block independently matched; actual-ref identity verified",
+      "compilation": "CI172 successful compilation reported by parent; no independent CI request performed"
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "ref": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+      "git_blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "utf8_bytes": 101197,
+      "lines": 1773,
+      "final_newline": true,
+      "review_scope": "exact canonicalCutPoint, endpointAlignedChart, PhysicalInterfaceClassification and full CutFirstJetMatching definitions read; not a new whole1773-line review"
+    }
+  ],
+  "validation": {
+    "no_deterministic_source_or_API_defect_found": true,
+    "all_listed_blobs_fingerprinted": true,
+    "candidate_hashes_match_owner_manifest": true,
+    "public_headers_independently_compared": true,
+    "full_candidate_and_full_before_read": true,
+    "full_cached_diagnostic_read": true,
+    "no_forbidden_proof_bypass_added": true,
+    "no_sorry_axiom_admit_or_resource_limit_change": true,
+    "no_Lean_elaboration_or_compilation": true,
+    "no_active_source_index_refs_mutation": true,
+    "no_CI_query_or_download": true,
+    "limitation": "This is independent source review, not execution evidence. The next parent-controlled CI must validate elaboration and performance of the complete active tree."
+  }
+}

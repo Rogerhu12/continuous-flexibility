@@ -1,0 +1,76 @@
+{
+  "schema": "n04_reviewed_source_manifest_v1",
+  "path": "quantitative/repair172/CI172WholeReferenceGaugeRootFirstJetsReviewedManifest.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "owner": "/root/quantitative_route",
+  "status": "independent_full_source_peer_passed_held_uncompiled",
+  "base": {
+    "commit": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+    "tree": "944690f469cb649cafd0e1dc582b6acb4992af6c",
+    "CI": "172 failed; parent owns all CI operations"
+  },
+  "candidate_manifest": {
+    "path": "quantitative/repair172/CI172WholeReferenceGaugeRootFirstJetsCandidateManifest.json",
+    "blob": "9faf12afe23cebba8846cacb92fe8680e93184f6",
+    "sha256": "0d1a35685613483696b9fe8a533392cd28508b7d02fcf991ba01c586686261be",
+    "bytes": 5125
+  },
+  "source": {
+    "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootFirstJets.lean",
+    "blob": "5f443d94d97da89b5e51d52ca72e0071099be0fe",
+    "sha256": "c6558847662a442f5f4e33edf3a46e2f52270aef148119f906ded80a28e96214",
+    "bytes": 5441,
+    "lines": 102
+  },
+  "preimage": {
+    "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootFirstJets.lean",
+    "blob": "be4a8a0a3fe29b50db53f246b56d536dbe172f49",
+    "sha256": "5f4d8c51ed898f9dcac89b509d737dd7e736e2d0aa774e8220b9ec25c0e64253",
+    "bytes": 5428,
+    "lines": 102
+  },
+  "diff": {
+    "path": "quantitative/repair172/WholeReferenceGaugeRootFirstJets.diff",
+    "blob": "eb5f74bbf8f6f5a69a5137cae3256d89580c4d52",
+    "sha256": "49ac5a163a0763115516afa8f473d98e13fa27ce947cf5862575a3ed0ea5de60",
+    "bytes": 1033,
+    "lines": 16
+  },
+  "full_diagnostics": {
+    "path": "quantitative/repair172/WholeReferenceGaugeRootFirstJets.errors.txt",
+    "blob": "be97b9188718b7f99338cbddfd71a8b4d1f48428",
+    "sha256": "5a0f93af4dc66ba7b989b122bd361b29fd870858e6dbc076605be562016ed832",
+    "bytes": 14997,
+    "lines": 252,
+    "origin": "Read existing parent-downloaded /dev/shm/n04-ci172/WholeReferenceGaugeRootFirstJets.lean.errors.txt",
+    "full_diagnostics": 2,
+    "reported_locations": [
+      "88:91",
+      "92:62"
+    ],
+    "no_new_download_or_CI_query": true
+  },
+  "independent_review": {
+    "reviewer": "/root",
+    "blob": "7910891a89d787fd0ed0452f8ddd7de279e17a0d",
+    "sha256": "197eb23fcea1dcd90d3c0f52535d21693ddf1ef6ed9c4eff6f3561a45b3d521c",
+    "bytes": 1992,
+    "result": "PASS before CI"
+  },
+  "checks": {
+    "complete_source_read": true,
+    "complete_two_diagnostics_read": true,
+    "exact_two_substitutions_reverse_to_preimage": true,
+    "one_complete_public_header_unchanged": true,
+    "imports_options_and_remaining_bytes_unchanged": true,
+    "net_added_lines": 0,
+    "same_selected_K_Y_H_tau_sigma_Q_and_endpoints": true,
+    "new_estimate_assumptions": false,
+    "no_resource_limit_increase": true
+  },
+  "compiled": false,
+  "local_Lean_or_elaboration": false,
+  "active_index_refs_or_CI_changes": false,
+  "extra_Lean_archive": false,
+  "gate": "Parent may select these immutable bytes in CI173. Actual compilation is still unclaimed; original source and candidate metadata remain preserved."
+}

@@ -1,0 +1,222 @@
+{
+  "schema": "N04-seven-source-prepared-plan-v1",
+  "status": "STATICALLY_REVIEWED_HELD_FOR_FULL_GREEN",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "author": "/root",
+  "observed_head": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+  "observed_tree": "944690f469cb649cafd0e1dc582b6acb4992af6c",
+  "observed_ci": "CI172 quick check failed; full build skipped. Do not activate.",
+  "source_files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ActualRetainedReference.lean",
+      "module": "ContinuousFlexibility.Analysis.N01ActualRetainedReference",
+      "blob": "ca7674d50e07ae8fbccfff307348308327941342",
+      "sha256": "ca09ea2f1ddf4bed503b6ac152f0aa286089625f48a4be9e33e22030de1118a2",
+      "lines": 45,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cActualReferenceWith"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01PrimitiveFixedWitnessConstruction.lean",
+      "module": "ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction",
+      "blob": "fa468a78f48266fb1c0603e9b16988a50d5a4fb4",
+      "sha256": "5a786c0686f89e5186e4f39dc748c644e2d433be5a06d0c95f9324e27b9a539b",
+      "lines": 52,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCoefficientTameBounds",
+        "ContinuousFlexibility.Analysis.N01cCharacteristicSpeedTameBounds",
+        "ContinuousFlexibility.Analysis.N01cOrdinaryFlowBounds"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01RetainedPrimitiveConstruction.lean",
+      "module": "ContinuousFlexibility.Analysis.N01RetainedPrimitiveConstruction",
+      "blob": "b4c99756ab69d37a0a3ce2c61570bed32f749885",
+      "sha256": "5e4823895fdf7f549d98d6cff9e1e0d8ef460e1dadc531892bf1ed957a2125f6",
+      "lines": 61,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ActualRetainedReference",
+        "ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext",
+        "ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry",
+        "ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction",
+        "ContinuousFlexibility.Analysis.N01cActualPrimitiveGeometry",
+        "ContinuousFlexibility.Analysis.N01cRetainedComponentEnumeration"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01aFixedReferencePrimitiveContext.lean",
+      "module": "ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext",
+      "blob": "41ee0aaa4a3971691bfdc8a8832a87300d97a863",
+      "sha256": "48542eac85fcd18116d018740b290ab9d57c41793d055e255d2b9791a9fe4c4c",
+      "lines": 64,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01aFinalAssembly",
+        "ContinuousFlexibility.Analysis.N01aReferenceHeight",
+        "ContinuousFlexibility.Analysis.SpacesConclusion",
+        "ContinuousFlexibility.Analysis.TameCalculusTheorem"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/NeighborhoodFlowRetainedGeometry.lean",
+      "module": "ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry",
+      "blob": "1e5acd56f27b8dfe803c4ee990b470e839d47e0d",
+      "sha256": "abdb8e16cd7f6a4163500e87c4f5d9dafe7cce08816d35f6f573df0b8036219a",
+      "lines": 111,
+      "imports": [
+        "ContinuousFlexibility.Analysis.NeighborhoodConstruction"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04MaterialRadiusLocalJets.lean",
+      "module": "ContinuousFlexibility.Analysis.N04MaterialRadiusLocalJets",
+      "blob": "c4ce6d627aecdad5dd13050f972c8b1e85e03ba6",
+      "sha256": "338a7ea23f75defa2ec38488ae5e6c7bb2b4ee3702214dad293c505012dc52e9",
+      "lines": 100,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aMaterialPullbackJets",
+        "ContinuousFlexibility.Analysis.CylinderMixedJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentFrechetJets",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentFrechetJets.lean",
+      "blob": "d53b5c3cececfff9655dc1a570e21f3b2281db32",
+      "sha256": "829ec714b643035b32cc1cd6e4e90e4cb54af2a6a75c998784c814c9eac41526",
+      "bytes": 3460,
+      "lines": 74,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets",
+        "ContinuousFlexibility.Analysis.CylinderMixedJets"
+      ],
+      "selection": "new held candidate"
+    }
+  ],
+  "fresh_source_checks": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ActualRetainedReference.lean",
+      "sha256": "ca09ea2f1ddf4bed503b6ac152f0aa286089625f48a4be9e33e22030de1118a2",
+      "lines": 45,
+      "public_names": [
+        "n01c_exists_actual_retained_reference"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01PrimitiveFixedWitnessConstruction.lean",
+      "sha256": "5a786c0686f89e5186e4f39dc748c644e2d433be5a06d0c95f9324e27b9a539b",
+      "lines": 52,
+      "public_names": [
+        "n01Primitive_exists_fixedWitness_properties"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01RetainedPrimitiveConstruction.lean",
+      "sha256": "5e4823895fdf7f549d98d6cff9e1e0d8ef460e1dadc531892bf1ed957a2125f6",
+      "lines": 61,
+      "public_names": [
+        "n01c_exists_retained_primitive_properties"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01aFixedReferencePrimitiveContext.lean",
+      "sha256": "48542eac85fcd18116d018740b290ab9d57c41793d055e255d2b9791a9fe4c4c",
+      "lines": 64,
+      "public_names": [
+        "n01a_exists_fixedReference_primitive_context"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/NeighborhoodFlowRetainedGeometry.lean",
+      "sha256": "abdb8e16cd7f6a4163500e87c4f5d9dafe7cce08816d35f6f573df0b8036219a",
+      "lines": 111,
+      "public_names": [
+        "exists_n01b_circleFlowGeometry"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04MaterialRadiusLocalJets.lean",
+      "sha256": "338a7ea23f75defa2ec38488ae5e6c7bb2b4ee3702214dad293c505012dc52e9",
+      "lines": 100,
+      "public_names": [
+        "n04_materialRadiusPullback_mixedDerivative",
+        "n04_materialRadiusPullback_mixedDerivative_bound",
+        "n04_materialRadiusPullback_iteratedFDeriv_bound"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentFrechetJets.lean",
+      "sha256": "829ec714b643035b32cc1cd6e4e90e4cb54af2a6a75c998784c814c9eac41526",
+      "lines": 74,
+      "public_names": [
+        "n04Coordinates_unitAtom_absolute_iteratedFDeriv_envelope"
+      ]
+    }
+  ],
+  "provider_checks": {
+    "gateway": {
+      "plan": "b55da774bdeb5ea34f69842122fb20cf8ff969ce",
+      "owner_binding": "8990a59ded6e06b4b68b6d2f86b380b66b7ad5ed",
+      "exact_existing_providers": 1933,
+      "mismatches": [],
+      "new_sources": 5,
+      "lines": 333
+    },
+    "frechet": {
+      "graph": "6e726e56f6a74572c817114f37ade7a223f2241b",
+      "owner": "aa48c9c2aac06c095ca835bc4f168d4e6e9334d2",
+      "peer": "2ee76b504dcb84388af39441f0d958dc6d17f17f",
+      "exact_existing_providers": 136,
+      "mismatches": []
+    },
+    "radius": {
+      "owner": "2cacf3c230ea8ebf9faf5e8318a517ccbdb967a7",
+      "peer": "d2fb34c960d86f860a57aa27194e230b058384e9",
+      "exact_direct_providers": [
+        {
+          "path": "src/ContinuousFlexibility/Analysis/N07aMaterialPullbackJets.lean",
+          "blob": "3162470bd6b9ac60c8abb8ce498955f590bf9cf9"
+        },
+        {
+          "path": "src/ContinuousFlexibility/Analysis/CylinderMixedJets.lean",
+          "blob": "3dc20e779221e16f9be32dff13d22e978b5a048d"
+        }
+      ]
+    }
+  },
+  "names": {
+    "new_public": 9,
+    "pairwise_collisions": [],
+    "gateway_evidence": "b55da774bdeb5ea34f69842122fb20cf8ff969ce",
+    "frechet_evidence": "96896301a54d8a16a4795129419011e333b1f993",
+    "radius_evidence": "Existing root owner and independent peer; exact prefix/name check in prior non-main,149 and fixed518 declaration tables, not a new global main declaration scan."
+  },
+  "hypothetical_post_green_budget": {
+    "new_source_lines": 507,
+    "new_root_imports": 7,
+    "checked_in_root_imports": 4241,
+    "projected_generated_imports": 4505,
+    "entire_root_lag": 264,
+    "conservative_total": 771,
+    "limit": 20000
+  },
+  "current_gate": {
+    "must_not_activate_on_failed172": true,
+    "current_from_green169_source": 19710,
+    "with_this_group_source": 20217,
+    "with_this_group_entire_root_lag": 264,
+    "with_this_group_conservative": 20481,
+    "exceeds_limit": true
+  },
+  "activation_requirements": [
+    "Verify a complete-green exact predecessor and record its receipt.",
+    "Rebind every provider against that exact predecessor; review any changed source fingerprint.",
+    "Verify all seven new paths are absent; preserve exact reviewed source bodies and imports.",
+    "Recompute actual numstat, full checked-in-root lag and repository import DAG for the actual successor.",
+    "Do not combine the following fixed518 batch1 until this seven-file successor is fully green, because 507+19539 already exceeds 20000 source lines."
+  ],
+  "nonclaims": [
+    "No new Lean source is written by this record.",
+    "No local Lean build or CI success is claimed.",
+    "No final CurrentJets, materialJets, Realization or parent completion is claimed."
+  ]
+}

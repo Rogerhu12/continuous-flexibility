@@ -1,0 +1,48 @@
+{
+  "schema": "N04-reviewed-CI172-local-repair-v1",
+  "author": "/root",
+  "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasInterfaces",
+  "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasInterfaces.lean",
+  "base_commit": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+  "before": {
+    "blob": "23a91459c8a857886c76d04e87e1f9d09443f634",
+    "sha256": "2548423c10106e5764d37da89d55b1dc7ed3b910f9a26b7f629aa0fc4a6de6ac",
+    "lines": 70
+  },
+  "after": {
+    "blob": "5280da9d0a351369f2a9b9d220929be0f23fccc5",
+    "sha256": "f8eaea450262528f3a5133141e078282b8a762f35be27452ebc6ef7ee8152f23",
+    "lines": 73
+  },
+  "diagnostic": {
+    "run": 43325153408,
+    "line": 64,
+    "column": 2,
+    "full_read_characters": 31651,
+    "local": "/dev/shm/n04-ci172/WholeReferenceGaugeAtlasInterfaces.lean.errors.txt",
+    "reason": "The only surviving difference is endpointAlignedChart used as a partially applied function below fderiv; ordinary definition simp unfolded point evaluations but not the function argument."
+  },
+  "repair": "Use the actual function equality hE with exactly the already compiled three-line body from ActualAtlasCutFirstJets, then use hE instead of the pointwise definition in the unchanged metadata simp list.",
+  "compiled_pattern": {
+    "blob": "528eda106b3b3300314ce573953e14f856dc8cfe",
+    "module": "ContinuousFlexibility.Analysis.ActualAtlasCutFirstJets",
+    "CI172_compilation_reported": true,
+    "pattern_exact": true
+  },
+  "unchanged": {
+    "public_theorem_heads": 2,
+    "imports": true,
+    "options": true,
+    "first_theorem": true,
+    "witnesses": true,
+    "all_other_bytes": true
+  },
+  "delta": {
+    "added": 4,
+    "deleted": 1,
+    "net": 3
+  },
+  "forbidden_proof_bypasses_added": false,
+  "local_lean_run": false,
+  "validation": "Complete source and full diagnostic read; after source server readback exact; independent peer and CI pending."
+}

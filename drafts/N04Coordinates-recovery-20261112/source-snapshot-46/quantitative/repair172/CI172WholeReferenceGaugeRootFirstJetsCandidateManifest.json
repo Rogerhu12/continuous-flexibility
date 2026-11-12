@@ -1,0 +1,107 @@
+{
+  "schema": "n04_exact_ci_repair_candidate_v1",
+  "path": "quantitative/repair172/CI172WholeReferenceGaugeRootFirstJetsCandidateManifest.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "author": "/root/quantitative_route",
+  "status": "candidate_self_reviewed_awaiting_independent_peer",
+  "base": {
+    "commit": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+    "tree": "944690f469cb649cafd0e1dc582b6acb4992af6c",
+    "CI": "172 failed; parent owns all CI operations"
+  },
+  "preimage": {
+    "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootFirstJets.lean",
+    "blob": "be4a8a0a3fe29b50db53f246b56d536dbe172f49",
+    "sha256": "5f4d8c51ed898f9dcac89b509d737dd7e736e2d0aa774e8220b9ec25c0e64253",
+    "bytes": 5428,
+    "lines": 102
+  },
+  "candidate": {
+    "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootFirstJets.lean",
+    "blob": "5f443d94d97da89b5e51d52ca72e0071099be0fe",
+    "sha256": "c6558847662a442f5f4e33edf3a46e2f52270aef148119f906ded80a28e96214",
+    "bytes": 5441,
+    "lines": 102
+  },
+  "diff": {
+    "path": "quantitative/repair172/WholeReferenceGaugeRootFirstJets.diff",
+    "blob": "eb5f74bbf8f6f5a69a5137cae3256d89580c4d52",
+    "sha256": "49ac5a163a0763115516afa8f473d98e13fa27ce947cf5862575a3ed0ea5de60",
+    "bytes": 1033,
+    "lines": 16
+  },
+  "diagnostics": {
+    "path": "quantitative/repair172/WholeReferenceGaugeRootFirstJets.errors.txt",
+    "blob": "be97b9188718b7f99338cbddfd71a8b4d1f48428",
+    "sha256": "5a0f93af4dc66ba7b989b122bd361b29fd870858e6dbc076605be562016ed832",
+    "bytes": 14997,
+    "lines": 252,
+    "origin": "Read existing parent-downloaded /dev/shm/n04-ci172/WholeReferenceGaugeRootFirstJets.lean.errors.txt",
+    "full_diagnostics": 2,
+    "reported_locations": [
+      "88:91",
+      "92:62"
+    ],
+    "no_new_download_or_CI_query": true
+  },
+  "exact_substitutions": [
+    {
+      "before": "    simp only [CanonicalGeometry.endpointAlignedChart, hFp, one_mul, Function.comp_apply]\n",
+      "after": "    simp only [CanonicalGeometry.endpointAlignedChart, V, hFp, ψ, one_mul, Function.comp_apply]\n"
+    },
+    {
+      "before": "    simp only [CanonicalGeometry.endpointAlignedChart, hFn, sub_zero, Function.comp_apply]\n",
+      "after": "    simp only [CanonicalGeometry.endpointAlignedChart, V, hFn, k, sub_zero, Function.comp_apply]\n"
+    }
+  ],
+  "reverse_substitutions_restore_preimage": true,
+  "complete_public_header": {
+    "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_actual_root_firstJets",
+    "sha256": "15d5dabe55f4aa4ab947a4e4a30870e3e78689a60b2b5c57eaf13de1c042ce41",
+    "unchanged": true
+  },
+  "imports": [
+    "import ContinuousFlexibility.Analysis.ActualPositiveGaugeRootFirstJets",
+    "import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData"
+  ],
+  "imports_unchanged": true,
+  "options_unchanged": true,
+  "diff_counts": {
+    "added": 2,
+    "deleted": 2,
+    "net_added": 0
+  },
+  "actual_providers": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasData.lean",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "bytes": 6809
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ActualPositiveGaugeRootFirstJets.lean",
+      "blob": "af468a906190a61a33173a6df00a8ae88a30afb4",
+      "sha256": "dfb27209661ab5db574f9480022a981a2407cd03a2bd4afc8e82eac2f2b89fd0",
+      "bytes": 4715
+    },
+    {
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "bytes": 101197
+    }
+  ],
+  "self_review": [
+    "The complete102-line original and candidate were read, together with both full error goals and the actual positive/negative field contracts.",
+    "Both reported goals have already reduced the fully applied endpointAlignedChart; the residue is V.chart while hFp/hFn are expressed with the literal n04WholeReferenceGaugeAtlasData constructor. Explicit V in simp only exposes that exact constructor.",
+    "The positive identity also explicitly reduces the already chosen local psi family to positiveReferenceCylinderChart(Y i). It keeps the same sigma, Y, endpoint v, point and orientation1.",
+    "The negative identity explicitly reduces the already chosen index k. The actual field provider's pair projections (m,side) reduce to the same original cutPair index; side and orientation s are not split or reselected.",
+    "All metadata witnesses, hraw call, two height equalities, final rw/exact and every nonreplacement byte remain unchanged.",
+    "No resource setting, new import, public name, new estimate assumption or new selected object was introduced."
+  ],
+  "local_Lean_or_elaboration": false,
+  "compiled": false,
+  "active_index_refs_or_CI_changes": false,
+  "extra_Lean_archive": false,
+  "gate": "Parent independent review must bind these exact bytes before owner freeze and the next CI; actual elaboration remains unclaimed."
+}

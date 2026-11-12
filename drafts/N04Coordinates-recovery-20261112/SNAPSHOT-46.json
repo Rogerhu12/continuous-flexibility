@@ -1,0 +1,297 @@
+{
+  "kind": "recovery_snapshot_with_latest_compiled_tree",
+  "snapshot": 46,
+  "created_at": "2026-11-12 23:15:00 UTC",
+  "parent": "20bb2ff5c333dc6f3b7612fb8fa7a0f83c5920fb",
+  "additional_parent": "fe5e4ceec7c959c0a078eacdea58ce6741940149",
+  "compiled_baseline": "836b039233920fa778d9747be7b5d5a9f953fea3",
+  "compiled_baseline_tree": "aedbc4ec6f58d05e07de2eefb318651f69077036",
+  "source_index_blob": "95d90869c5d85d965642783b72b220e51ff29bf3",
+  "source_index": {
+    "path": "drafts/N04Coordinates-recovery-20261112/SOURCE-INDEX.json",
+    "sha256": "b99768cfefd0fd8f779602bb31c3848a233b89930c775b33b09b643aea091306",
+    "entries": 3171,
+    "new": 22,
+    "updated": 0
+  },
+  "artifacts": [
+    {
+      "name": "root/ci/CI172FailureReceipt.json",
+      "blob": "3a0c4b8f6b989bf00c8c699cd80bcbacc7249126",
+      "sha256": "d2da2e082ea001c4ef27f053699c3d251a7e2a467e5d10832acc9d7c681d4a5d",
+      "bytes": 3291,
+      "lines": 71
+    },
+    {
+      "name": "root/ci/CI172-build.log",
+      "blob": "c2404f3cb159fc4b57634043a16d764eae9ca7ed",
+      "sha256": "1f2a8db1620531f200c0e67d7d096698b09f4acd2208c1261c6145a243166507",
+      "bytes": 91137,
+      "lines": 944
+    },
+    {
+      "name": "root/ci/CI172CompleteErrorBlocks.json",
+      "blob": "ba2d56fac3e0e9901915120c095c7c19a327f4a6",
+      "sha256": "c646a92f4e706b59d8774584283e01fd6422c41338c04e84492e6547760de5e2",
+      "bytes": 50274,
+      "lines": 33
+    },
+    {
+      "name": "root/repair172/WholeReferenceGaugeAtlasInterfacesOwner.json",
+      "blob": "f6661399b49499f9d0115a8bfd9ec8f6e7bf8a26",
+      "sha256": "40e5461638ce73c0145ef0c176f9bbd7d97ef79b9ce4624b9742eec7e50ee29b",
+      "bytes": 1931,
+      "lines": 48
+    },
+    {
+      "name": "root/repair172/WholeReferenceGaugeAtlasInterfacesReviewedManifest.json",
+      "blob": "6718f902a59f4fd4e0ad064ac703620a09019cc9",
+      "sha256": "b19a24b93047d292080d9a1dfe1a07da205ba87a5dde368057423e6d4eb92698",
+      "bytes": 2073,
+      "lines": 52
+    },
+    {
+      "name": "positive/recovery/reviews/WholeReferenceGaugeAtlasInterfacesCI172IndependentReview.json",
+      "blob": "2044146893efb7610a8ef6d18fa814cff5283827",
+      "sha256": "c5107d65d05b0183666beaa9948bdc525b88265521c014dce8c65664bb984ad5",
+      "bytes": 12434,
+      "lines": 176
+    },
+    {
+      "name": "audit/repair172/WholeReferenceGaugeReferencePrincipalCI172RepairCandidateManifest.json",
+      "blob": "aa1ff6b479743361cc0169df4f8a5c1b7e0be32c",
+      "sha256": "53507c2851b5be08fbd489f61b84776a2c5f224b2ef21f4131844e7c637fa273",
+      "bytes": 11246,
+      "lines": 124
+    },
+    {
+      "name": "audit/repair172/WholeReferenceGaugeReferencePrincipalCI172Repair.diff",
+      "blob": "5d8abd1f4da7226c340443e40d90dbdd94c76fbb",
+      "sha256": "897d92a558f8687a5c7aa8027b73cb500f23da5a22b38947f431cc2b972e9c77",
+      "bytes": 587,
+      "lines": 10
+    },
+    {
+      "name": "audit/repair172/WholeReferenceGaugeReferencePrincipalCI172RepairReviewedManifest.json",
+      "blob": "7a0f6e3fa83c759b8aa646197ae83ac8ac5d5cb5",
+      "sha256": "dd2906447ccfd386b6386f46e1ace13dc7d6a3fd782c4cae0b1016782c464a20",
+      "bytes": 3390,
+      "lines": 93
+    },
+    {
+      "name": "root/repair172/WholeReferenceGaugeReferencePrincipalIndependentReview.json",
+      "blob": "44bc909984a3277b4eadcb33ec6bbd6bd064f12d",
+      "sha256": "07a28a7c6793413ef85dc523abf0c932294d9a311a0ff491dd6975b579cf90ba",
+      "bytes": 1581,
+      "lines": 35
+    },
+    {
+      "name": "quantitative/repair172/CI172WholeReferenceGaugeRootFirstJetsCandidateManifest.json",
+      "blob": "9faf12afe23cebba8846cacb92fe8680e93184f6",
+      "sha256": "0d1a35685613483696b9fe8a533392cd28508b7d02fcf991ba01c586686261be",
+      "bytes": 5125,
+      "lines": 107
+    },
+    {
+      "name": "quantitative/repair172/CI172WholeReferenceGaugeRootFirstJets.diff",
+      "blob": "eb5f74bbf8f6f5a69a5137cae3256d89580c4d52",
+      "sha256": "49ac5a163a0763115516afa8f473d98e13fa27ce947cf5862575a3ed0ea5de60",
+      "bytes": 1033,
+      "lines": 16
+    },
+    {
+      "name": "quantitative/repair172/CI172WholeReferenceGaugeRootFirstJetsReviewedManifest.json",
+      "blob": "da23a09afa8d22c8a015cad91bd676c2891c6077",
+      "sha256": "33c71d506b3ed75bb56a9b1746f3a14b1c4d6af5e2794cd2f9e613afa1e9065b",
+      "bytes": 3100,
+      "lines": 76
+    },
+    {
+      "name": "root/repair172/WholeReferenceGaugeRootFirstJetsIndependentReview.json",
+      "blob": "7910891a89d787fd0ed0452f8ddd7de279e17a0d",
+      "sha256": "197eb23fcea1dcd90d3c0f52535d21693ddf1ef6ed9c4eff6f3561a45b3d521c",
+      "bytes": 1992,
+      "lines": 48
+    },
+    {
+      "name": "root/ci/CI173SourceOnlyRepairPlan.json",
+      "blob": "cec0558a2ea690a7e6086ba9bb2bf032b592402d",
+      "sha256": "f2f90f831c5d9fd0a1d8960673c28bc28aa9223577bb8fdf728815b47440a563",
+      "bytes": 3014,
+      "lines": 81
+    },
+    {
+      "name": "root/ci/CI173PushReceipt.json",
+      "blob": "de5cbdc8b18b5d271b74a00271cd4377da3f51e8",
+      "sha256": "6063b06137c6387f21925e74415dd0b80452ce4b157632e6b260e76e3c6a7d67",
+      "bytes": 685,
+      "lines": 20
+    },
+    {
+      "name": "audit/recovery/CanonicalPrimitiveStageBActualHalfClosenessRoute.json",
+      "blob": "c75cab2b29c2d3047261c97492adf3f6af48d6b6",
+      "sha256": "5c59e17a5e5ea97770059f619ffd48e3fdbeed036fe56affea25cb61dd84b68d",
+      "bytes": 28536,
+      "lines": 414
+    },
+    {
+      "name": "root/integration/SevenActualGatewayAndMaterialSourcesPreparedAtCI172.json",
+      "blob": "1cc3b4648a8db15da7e7b333b597908b45e6ee0e",
+      "sha256": "80c487bbfa3ad053272a0c98abb17a607dac112a9e6fed0783d9c9ef25c93a0d",
+      "bytes": 9315,
+      "lines": 222
+    },
+    {
+      "name": "quantitative/recovery/N03NumericalWitnessExtra148TwoBatchSourcePlanAtCI172.json",
+      "blob": "14d63e2dfd4abf9853ebf0d301b40fe1fd2c9d22",
+      "sha256": "05f6a0f1e0515158954a0ad2186a851efab1b165d94c483c064ff02c0e630186",
+      "bytes": 157506,
+      "lines": 3462
+    },
+    {
+      "name": "quantitative/recovery/FixedBaseTwoBatchFullRootLagAtCI172.json",
+      "blob": "5ba3f2d03094fd4d6bf33446bd502e68faeda483",
+      "sha256": "cbc9979cac103bc950ad602fb0df4bc4f427f48beae4d0a6a4e48e1f96af899d",
+      "bytes": 22137,
+      "lines": 363
+    },
+    {
+      "name": "positive/recovery/N04DiscriminantIncrementFirstLeafImplementationPlan.json",
+      "blob": "1a8c2975c59151b2b5208898bfdd2809a4674ab3",
+      "sha256": "cbdd52f590f30a8f575bd72c7b288bcb362cb37c8a038e8d1f7ead3ada19273a",
+      "bytes": 27724,
+      "lines": 362
+    },
+    {
+      "name": "quantitative/recovery/tools/ExactTextIdentity.js",
+      "blob": "294fb83d230a0c0b2ced5da1560b299cb57ab399",
+      "sha256": "fdd408e07af6d873a1b8b7c2e23635a6f011f0a8d7e6c52909c66e9a6c17c79d",
+      "bytes": 3142,
+      "lines": 65
+    }
+  ],
+  "outside_archive": {
+    "exact_target": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "unchanged_from_snapshot45": true
+  },
+  "CI172": {
+    "receipt": "3a0c4b8f6b989bf00c8c699cd80bcbacc7249126",
+    "run": 43325153408,
+    "job": 131555640327,
+    "conclusion": "failure",
+    "quick_compiled_project_modules": 7,
+    "prior_repairs_compiled": 3,
+    "full_build": "skipped",
+    "diagnostics": 4,
+    "files": 3,
+    "full_diagnostics": "ba2d56fac3e0e9901915120c095c7c19a327f4a6"
+  },
+  "active": {
+    "ci_round": 173,
+    "commit": "fe5e4ceec7c959c0a078eacdea58ce6741940149",
+    "tree": "e92d8ed54fae5a18179f13cdfaadc15b4669ed80",
+    "parent": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+    "pushed_readback": "2026-11-12 23:12:57 UTC",
+    "first_ci_lookup_not_before": "2026-11-12T23:17:57.000Z",
+    "plan_blob": "cec0558a2ea690a7e6086ba9bb2bf032b592402d",
+    "budget": {
+      "source_added_since_complete_green": 19713,
+      "source_deleted_since_complete_green": 0,
+      "source_paths": 149,
+      "full_checked_in_root_lag": 257,
+      "conservative_total": 19970,
+      "limit": 20000,
+      "margin": 30,
+      "repair_net_lines": 3
+    },
+    "status": "pushed; awaiting first permitted CI lookup"
+  },
+  "CI173": {
+    "status": "pending validation",
+    "query_count": 0,
+    "repairs": [
+      {
+        "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasInterfaces.lean",
+        "before": "23a91459c8a857886c76d04e87e1f9d09443f634",
+        "after": "5280da9d0a351369f2a9b9d220929be0f23fccc5",
+        "before_lines": 70,
+        "after_lines": 73,
+        "owner": "6718f902a59f4fd4e0ad064ac703620a09019cc9",
+        "peer": "2044146893efb7610a8ef6d18fa814cff5283827"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean",
+        "before": "c7eaf4fe2c88fa12158ece8d2f32a86bbaad817e",
+        "after": "5eddcf61d077190611c1a84cf5b88a132b5573f0",
+        "before_lines": 184,
+        "after_lines": 184,
+        "owner": "7a0f6e3fa83c759b8aa646197ae83ac8ac5d5cb5",
+        "peer": "44bc909984a3277b4eadcb33ec6bbd6bd064f12d"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootFirstJets.lean",
+        "before": "be4a8a0a3fe29b50db53f246b56d536dbe172f49",
+        "after": "5f443d94d97da89b5e51d52ca72e0071099be0fe",
+        "before_lines": 102,
+        "after_lines": 102,
+        "owner": "da23a09afa8d22c8a015cad91bd676c2891c6077",
+        "peer": "7910891a89d787fd0ed0452f8ddd7de279e17a0d"
+      }
+    ],
+    "patch": {
+      "added": 7,
+      "deleted": 4,
+      "net": 3
+    },
+    "all_complete_theorem_heads_imports_and_witnesses_unchanged": true
+  },
+  "drafts": {
+    "new_Lean_sources": 0,
+    "new_Lean_lines": 0,
+    "existing_uncompiled_draft_upper_bound": 19899,
+    "maximum_new_Lean_allocation_to_audit": 80,
+    "reserved_maximum": 19979,
+    "limit": 20000,
+    "reserved_margin": 21,
+    "note": "The 80-line allocation is not a completed or archived source. It is conditional on a genuinely missing actual-domain lemma and is the only newly authorized draft allocation."
+  },
+  "budget": {
+    "retained_uncompiled_conservative_upper_bound": 19899,
+    "actual_new_archived_Lean_lines": 0,
+    "active": {
+      "source_added_since_complete_green": 19713,
+      "source_deleted_since_complete_green": 0,
+      "source_paths": 149,
+      "full_checked_in_root_lag": 257,
+      "conservative_total": 19970,
+      "limit": 20000,
+      "margin": 30,
+      "repair_net_lines": 3
+    },
+    "repair_storage": "Three repaired source files remain in actual src at the additional-parent CI173, not duplicated as archive Lean."
+  },
+  "next_steps": {
+    "seven_small_sources": "1cc3b4648a8db15da7e7b333b597908b45e6ee0e",
+    "fixed_ordering": "5ba3f2d03094fd4d6bf33446bd502e68faeda483",
+    "additional150": "14d63e2dfd4abf9853ebf0d301b40fe1fd2c9d22",
+    "discriminant": "1a8c2975c59151b2b5208898bfdd2809a4674ab3",
+    "stageB": "c75cab2b29c2d3047261c97492adf3f6af48d6b6",
+    "all_sources_require_full_green_predecessors": true
+  },
+  "main_rules_checked": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "root_workflow_resource_toolchain_dependency_limits_unchanged": true,
+  "endpoint_status": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open",
+    "proved": 37,
+    "total": 42,
+    "open": [
+      "N01c",
+      "N02N03",
+      "N04b",
+      "N04Coordinates",
+      "N05"
+    ]
+  }
+}

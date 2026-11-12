@@ -1,0 +1,71 @@
+{
+  "schema": "N04-CI-complete-failure-receipt-v1",
+  "ci_round": 172,
+  "head": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+  "tree": "944690f469cb649cafd0e1dc582b6acb4992af6c",
+  "run": 43325153408,
+  "workflow_run_number": 1847,
+  "job": 131555640327,
+  "status": "completed",
+  "conclusion": "failure",
+  "updated_at": "2026-11-12T23:06:31Z",
+  "first_checked": "2026-11-12 23:06:14 UTC",
+  "completion_checked": "2026-11-12 23:07:20 UTC",
+  "job_log": {
+    "blob": "c2404f3cb159fc4b57634043a16d764eae9ca7ed",
+    "sha256": "1f2a8db1620531f200c0e67d7d096698b09f4acd2208c1261c6145a243166507",
+    "bytes": 91137,
+    "download_count": 1
+  },
+  "full_diagnostics": {
+    "blob": "ba2d56fac3e0e9901915120c095c7c19a327f4a6",
+    "sha256": "c646a92f4e706b59d8774584283e01fd6422c41338c04e84492e6547760de5e2",
+    "count": 4,
+    "source_files": [
+      "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasInterfaces.lean",
+      "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean",
+      "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootFirstJets.lean"
+    ],
+    "artifact_id": 13992148326,
+    "archive_sha256": "b2988aa02a0f272ff119980140bba22fc1622d0400bb90eeaa8a5a27e9fe0084",
+    "quick_sha256": "b935b74f199afe2c5375b9fd611b3c6d7ea84df8a76ef7767606e6de777801b3",
+    "quick_bytes": 7050026,
+    "artifact_download_count": 1
+  },
+  "quick_check": {
+    "result": "failure",
+    "changed_modules": 1011,
+    "compiled_project_modules": 7,
+    "compiled_module_evidence": "compiled project modules: 7; slowest:\n2026-11-12T23:05:20.3938436Z      0.2 min  ContinuousFlexibility.Analysis.CanonicalReferenceGaugeReconstruction\n2026-11-12T23:05:20.3938975Z      0.2 min  ContinuousFlexibility.Analysis.ActualAtlasCutFirstJets\n2026-11-12T23:05:20.3939484Z      0.0 min  ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasCutOperator\n2026-11-12T23:05:20.3940025Z      0.0 min  ContinuousFlexibility.Analysis.ActualPositiveGaugeRootFirstJets\n2026-11-12T23:05:20.3940551Z      0.0 min  ContinuousFlexibility.Analysis.WholePositiveActualRootFirstJets\n2026-11-12T23:05:20.3941117Z      0.0 min  ContinuousFlexibility.Analysis.CanonicalReferenceGaugeFirstJetTransfer\n2026-11-12T23:05:20.3941704Z      0.0 min  ContinuousFlexibility.Analysis.CanonicalReferenceGaugeRootCircleJets"
+  },
+  "previous_repairs": {
+    "passed": 3,
+    "modules": [
+      "CanonicalReferenceGaugeReconstruction",
+      "ActualAtlasCutFirstJets",
+      "WholeReferenceGaugeAtlasCutOperator"
+    ],
+    "remaining": "WholeReferenceGaugeReferencePrincipal has only final potential equality at line182"
+  },
+  "full_build": "skipped",
+  "blueprint_status_step": "skipped",
+  "raw_cache_counter": {
+    "printed": "5109 / 4562",
+    "is_coverage": false,
+    "reason": "restored cache includes modules not in the actual source tree"
+  },
+  "last_complete_green": {
+    "head": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "receipt": "40f4094476659c1b052cd462cdfb119ca6032f44",
+    "project_compiled": 4409,
+    "project_total": 4413
+  },
+  "current_source_total_project": 4562,
+  "current_full_coverage": "not established",
+  "endpoint_status": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open"
+  },
+  "no_more_log_downloads": true
+}

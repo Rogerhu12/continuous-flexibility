@@ -1,0 +1,35 @@
+{
+  "schema": "independent-full-source-repair-review-v1",
+  "reviewer": "/root",
+  "author": "/root/audit_coordinates",
+  "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean",
+  "before": {
+    "blob": "c7eaf4fe2c88fa12158ece8d2f32a86bbaad817e",
+    "lines": 184
+  },
+  "after": {
+    "blob": "5eddcf61d077190611c1a84cf5b88a132b5573f0",
+    "sha256": "f8fa5d095a766edb197614a42edf911bc81f0f6dcf517d331c871bb486b13f56",
+    "lines": 184
+  },
+  "diff": "5d8abd1f4da7226c340443e40d90dbdd94c76fbb",
+  "full_source_read": true,
+  "full_diagnostic_read": {
+    "blob": "ba2d56fac3e0e9901915120c095c7c19a327f4a6",
+    "line": 182,
+    "column": 8,
+    "characters": 1538
+  },
+  "mathematical_check": "The same actual V/z0 operator identity has already been exposed. hneg reduces V.positive m to false, leaving a proposition false = true in the if condition. Bool.false_eq_true rewrites that proposition to False, reduceIte chooses the existing unit coefficient, and one_mul returns exactly the same inverseChartPotential. The local V,z0 abbreviations retain all chart, inverse and height witnesses.",
+  "checks": {
+    "one_public_and_one_private_complete_heads_identical": true,
+    "imports_and_options_identical": true,
+    "reverse_exact_single_replacement_reconstructs_entire_old_source": true,
+    "all_other_bytes_identical": true,
+    "net_added_lines": 0,
+    "no_new_axioms_admits_or_resource_changes": true,
+    "no_additional_hypotheses_or_changed_objects": true
+  },
+  "decision": "PASS_STATIC_REVIEW_AWAITING_CI",
+  "local_build": false
+}

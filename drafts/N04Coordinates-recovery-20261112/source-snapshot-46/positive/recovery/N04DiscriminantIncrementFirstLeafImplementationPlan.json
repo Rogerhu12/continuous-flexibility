@@ -1,0 +1,362 @@
+{
+  "schema": "n04.readonly-implementation-plan.v1",
+  "status": "READ_ONLY_CODE_LEVEL_PLAN_NOT_COMPILED_NO_NEW_LEAN",
+  "author": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "intended_archive_path": "positive/recovery/N04DiscriminantIncrementFirstLeafImplementationPlan.json",
+  "selected_main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "mathlib_pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "parent_request": "Prepare the next genuine discriminant-increment leaf while CI172 is pending; no source/index/ref/CI mutation.",
+  "predecessor_artifacts": [
+    {
+      "path": "positive/recovery/N04ActualForcingNextConsumersMain1ece.json",
+      "git_blob": "2dd998ad26a02e2044542f90312f18e41454d146",
+      "sha256": "1258f35f97bef486e88d8e79ae904797b2a594aa6740c5148ab2c8e02a80a020"
+    },
+    {
+      "path": "positive/recovery/N04ActualForcingNextConsumersPublicSupplierNote.json",
+      "git_blob": "a5d8bad6cf8431b2a4d8f1cd6880bf43e3c009b4",
+      "sha256": "438a9b248909351327bcf177478cb72c27b8e92243bcec04ad02a84b8c4f4250"
+    }
+  ],
+  "decision": {
+    "next_module": "ContinuousFlexibility.Analysis.N04DiscriminantIncrementJointGain",
+    "mathematical_input_gap": false,
+    "intended_new_lean_upper_bound": 250,
+    "new_lean_written": 0,
+    "proof": "Restrict public normalized199; derive state-zero reference towers by the public affine pullback; form exactly three products and two differences; identify the literal normalized discriminant by a polynomial identity.",
+    "improvement_over_previous_outline": "Use SmoothDirections.compAffine already imported through WeightedJointComposition. No extra CircleSmoothDirectionsOperations import is needed. The final identity needs neither a new sample bound nor division cancellation: rewrite division as multiplication by H inverse and use ring.",
+    "compile_scope": "This is a code-level proof plan, not an elaboration or compiled theorem. Only direct public API visibility and the listed exact source identities were checked; a final candidate import/name graph remains to be frozen with the future source."
+  },
+  "intended_direct_imports": [
+    "ContinuousFlexibility.Analysis.N04CoefficientIncrementJointGain",
+    "ContinuousFlexibility.Analysis.N01CharacteristicJointGrowth",
+    "ContinuousFlexibility.Analysis.WeightedJointProducts"
+  ],
+  "proposed_public_header": "theorem N01Properties.exists_discriminantIncrement_strip_joint_growth\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)\n    (j : ℕ → ℕ)\n    (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))\n    (l h : ℕ → ℝ) (hl : ∀ m, C.left m < l m)\n    (hh : ∀ m, h m < C.right m) :\n    ∃ K : ∀ m, SmoothDirections\n      (sectorNeighborhood S base ε ε ×ˢ (Ioo (l m) (h m) ×ˢ univ))\n      (fun z : (StateDirections S × ℝ) × PolarPoint =>\n        (((originalCoefficients D S C (liftSectorParameter S C z.1)).b z.2 ^ 2 -\n            (originalCoefficients D S C (liftSectorParameter S C z.1)).a z.2 *\n              (originalCoefficients D S C (liftSectorParameter S C z.1)).c z.2) -\n          ((originalCoefficients D S C (C.referenceState, 0)).b z.2 ^ 2 -\n            (originalCoefficients D S C (C.referenceState, 0)).a z.2 *\n              (originalCoefficients D S C (C.referenceState, 0)).c z.2)) /\n          T.H (T.sample (j m)) ^ (3 / 4 : ℝ)),\n      ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧\n        UniformWeightedJointGrowth (pairGrading (sectorGrading S) realGrading)\n          (fun m => radialE (D.cellIndex (j m))) K B L",
+  "common_data": {
+    "E": "StateDirections S × ℝ",
+    "p": "pairGrading (sectorGrading S) realGrading",
+    "U": "sectorNeighborhood S base ε ε",
+    "V": "fun m => Ioo (l m) (h m) ×ˢ (univ : Set ℝ)",
+    "W": "fun m => radialE (D.cellIndex (j m))",
+    "H": "fun m => T.H (T.sample (j m)) ^ (3 / 4 : ℝ)",
+    "f": "fun (i : Fin 3) (_m : ℕ) (z : E × PolarPoint) => originalCoefficientEntry D S C i (liftSectorParameter S C z.1) z.2",
+    "f0": "fun (i : Fin 3) (_m : ℕ) (z : E × PolarPoint) => originalCoefficientEntry D S C i (C.referenceState, 0) z.2",
+    "di": "fun (i : Fin 3) (m : ℕ) (z : E × PolarPoint) => (H m)⁻¹ * coefficientFamily D S C i 0 0 z.2 (liftSectorParameter S C z.1)",
+    "identity_convention": "i=0 is a, i=1 is b, i=2 is c; all coefficients and the reference coefficient use the identical physical z.2. Setting the sector parameter to 0 gives exactly (C.referenceState,0). No C/R/L/χ/sample/domain selector is reselected.",
+    "domain_requirements": "Only hcell, C.left<l and h<C.right are needed for this polynomial leaf. l<h need not be added: empty strips are allowed and all existing source constructors have the same contract.",
+    "positivity_not_assumed": "No discriminant or a lower bound is used in this first polynomial leaf. The later inverse/sqrt leaf must use the actual closed-buffer lower bound from the same153 witness."
+  },
+  "exact_public_inputs": {
+    "normalized199_section_context": "variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n  {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n  (hN : N01Properties D T S C base loss ε)\n  (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)",
+    "normalized199_header": "theorem N01Properties.coefficientIncrement_normalized_joint_growth\n    (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))\n    (i : Fin 3) :\n    UniformWeightedJointGrowth (pairGrading (sectorGrading S) realGrading)\n      (fun m => radialE (D.cellIndex (j m)))\n      (fun m => smoothDirectionsScalarPostcompose\n        (hN.coefficientIncrement_parameterSpatialTower hS hT m (j m) (hcell m) i)\n        ((T.H (T.sample (j m)) ^ (3 / 4 : ℝ))⁻¹ • ContinuousLinearMap.id ℝ ℝ))\n      base loss",
+    "original_growth_header": "theorem N01Properties.originalCoefficient_strip_joint_growth\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)\n    (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))\n    (l h : ℕ → ℝ) (hl : ∀ m, C.left m < l m) (hh : ∀ m, h m < C.right m)\n    (i : Fin 3) :\n    UniformWeightedJointGrowth (pairGrading (sectorGrading S) realGrading) (fun _ => 1)\n      (hN.originalCoefficient_stripTower hS hT j hcell l h hl hh i) base loss",
+    "multiplication_header": "theorem UniformWeightedJointGrowth.mul\n    {p : ℕ → Seminorm ℝ E} (hp : Monotone p) (hIp : HasInterpolation p)\n    {W : I → ℝ} (hW : ∀ i, 1 ≤ W i)\n    {U : Set E} {V : I → Set P} {f g : I → E × P → ℝ}\n    {J : ∀ i, SmoothDirections (U ×ˢ V i) (f i)}\n    {K : ∀ i, SmoothDirections (U ×ˢ V i) (g i)} {base loss : ℕ}\n    (hJ : UniformWeightedJointGrowth p W J base loss)\n    (hK : UniformWeightedJointGrowth p W K base loss)\n    (H : ∀ i, SmoothDirections (U ×ˢ V i) (fun z => f i z * g i z)) :\n    ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧ UniformWeightedJointGrowth p W H B L",
+    "original_speed_existence_header": "theorem N01Properties.exists_minusCharacteristicSpeed_strip_joint_growth\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)\n    (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))\n    (l h : ℕ → ℝ) (hl : ∀ m, C.left m < l m) (hh : ∀ m, h m < C.right m)\n    {lam P : ℝ} (hlam : 0 < lam) (hP : 0 ≤ P)\n    (hpositive : ∀ z ∈ stateNeighborhood S C base ε, ∀ (m : ℕ) (p : PolarPoint),\n      p.1 ∈ Ioo (l m) (h m) →\n      let d := lam * radialE (D.cellIndex (j m)) ^ (-P) / 2\n      d ≤ (originalCoefficients D S C z).a p ∧\n      d ^ 2 ≤ (originalCoefficients D S C z).b p ^ 2 -\n        (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p) :\n    ∃ K : ∀ m, SmoothDirections\n        (sectorNeighborhood S base ε ε ×ˢ (Ioo (l m) (h m) ×ˢ univ))\n        (fun x : (StateDirections S × ℝ) × PolarPoint =>\n          minusCharacteristicSpeed (originalCoefficients D S C (liftSectorParameter S C x.1)) x.2),\n      ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧\n        UniformWeightedJointGrowth (pairGrading (sectorGrading S) realGrading)\n          (fun m => radialE (D.cellIndex (j m))) K B L",
+    "other_public_calls": [
+      "SmoothDirections.restrict (N01cStateSeminorms): D := J.D exactly.",
+      "SmoothDirections.compAffine; SmoothDirections.compAffine_apply; SmoothDirections.congrOn (SmoothDirectionsAffine).",
+      "smoothDirectionsScalarPostcompose; smoothDirectionsScalarPostcompose_apply (WeightedTowerCalculus).",
+      "SmoothDirections.mul (SmoothDirectionsNormedComposition); smoothDirectionsProd and smoothDirectionsPostContinuousLinear.",
+      "UniformWeightedJointGrowth.withWeight, prodMk, postLinear, mono, sub and congr.",
+      "sectorPairGrading_monotone S; hasInterpolation_of_hasSmoothing; hasSmoothing_pairGrading; solve_sector_hasSmoothing hS; hasSmoothing_realGrading.",
+      "one_le_radialE_of_nat for the actual j m; no host relabeling."
+    ],
+    "prohibited_private_calls": [
+      "n04_increment_sample_E0_power_bound",
+      "originalCoefficientEntry_zero_apply / one_apply / two_apply / discriminant_apply / minus_apply in N01CharacteristicJointGrowth",
+      "scalarDiscriminantDirections / scalarMinusCharacteristicDirections / scalar_characteristic_joint_growth in N01CharacteristicJointGrowth"
+    ],
+    "scope_note": "The public speed theorems internally use their private helpers legitimately. The future leaf can call the public theorem, but cannot name any of those private helpers itself."
+  },
+  "code_level_construction": [
+    {
+      "step": 1,
+      "title": "Fix the grading, domains and actual current towers before any order.",
+      "outline": "Let Ji m := hN.originalCoefficient_stripTower hS hT j hcell l h hl hh i m. Set hp := sectorPairGrading_monotone S and obtain HasInterpolation p exactly as public b95 lines345–347. hW m := one_le_radialE_of_nat _. For each i, the exact originalCoefficient_strip_joint_growth gives Growth p 1 (Ji) base loss; .withWeight W gives the same base/loss with exponent0.",
+      "no_target_input": "No derivative bound is assumed beyond hN/hS/hT; the supplier is the public original-coefficient theorem."
+    },
+    {
+      "step": 2,
+      "title": "Construct reference towers by the actual zero-state continuous linear map.",
+      "L0": "(0 : (E × PolarPoint) →L[ℝ] E).prod (ContinuousLinearMap.snd ℝ E PolarPoint)",
+      "exact_maps": "L0 (u,y)=(0,y), and L0(v_state,v_phys)=(0,v_phys). Use ContinuousLinearMap.prod_apply, _root_.zero_apply, ContinuousLinearMap.coe_snd' rather than unfolding mathlib records.",
+      "zero_domain": "hN.2.1 is 0<ε from the actual N01 definition. Unfold only project sectorNeighborhood; map_zero and abs_zero show (0:E)∈U. simp [liftSectorParameter] gives liftSectorParameter S C 0=(C.referenceState,0).",
+      "tower": "For each i,m, take (Ji m).compAffine L0 0 ((sectorNeighborhood_isOpen S base ε ε).prod (isOpen_Ioo.prod isOpen_univ)) hmap and .congrOn to f0 i m. hmap sends (u,y) to (0,y); its physical point is unchanged.",
+      "actual_jet_identity": "The D layer of congrOn is unchanged. compAffine_apply gives (J0i m).D n (u,y) v=(Ji m).D n (0,y) (fun t => (0,(v t).2)) on the same U×V m. This also holds at n=0."
+    },
+    {
+      "step": 3,
+      "title": "Prove reference growth without changing the low base.",
+      "outline": "For each fixed i and n, call the original Growth p 1 Ji base loss with low radius 0, then state x=0. The input low bound is p base 0=0. If p base (v t).1+norm((v t).2)≤1, seminorm nonnegativity implies norm((v t).2)≤1, hence the pulled-back slot (0,(v t).2) satisfies the source unit condition.",
+      "RHS": "All high state terms are p(n+loss)0=0. Thus norm(J0i.D n (u,y)v)≤A. Enlarge to A*(1+p(n+loss)u+Σp(n+loss)(v t).1), whose parenthesis is at least1. This is Growth p 1 J0i base loss. Apply .withWeight W afterward.",
+      "quantified_order": "A may depend on i,n; it is independent of m, physical y, u and slots. There are only the fixed i=0,1,2 uses. base and loss remain unchanged and precede every n and radius."
+    },
+    {
+      "step": 4,
+      "title": "Restrict the public normalized increment towers.",
+      "tower": "For each i,m take the exact smoothDirectionsScalarPostcompose returned in the type of public199 and restrict it to U×V m. The inclusion uses only hl m and hh m, with hcell m unchanged.",
+      "growth": "Call hN.coefficientIncrement_normalized_joint_growth hS hT j hcell i. Introduce its R/n/constants and apply its bound at the enlarged-domain physical point. SmoothDirections.restrict.D is definitionally the same D. The original constants, base/loss and W are unchanged.",
+      "value": "The target function of this tower is di above by the public postcomposition definition, _root_.smul_apply, ContinuousLinearMap.id_apply and smul_eq_mul. This is an actual function identity, not a new input assumption.",
+      "sample_cost": "No material endpoint bound, H lower bound, or private sample helper is called here."
+    },
+    {
+      "step": 5,
+      "title": "Use three actual products and two actual differences.",
+      "bsum": "Build JS := smoothDirectionsPostContinuousLinear (smoothDirectionsProd (J1) (J01)) (ContinuousLinearMap.fst ℝ ℝ ℝ + ContinuousLinearMap.snd ℝ ℝ ℝ). Growth follows from .prodMk hp hW then .postLinear; its function is b+b0.",
+      "terms": [
+        {
+          "name": "T1",
+          "function": "(b+b0)*di 1",
+          "tower": "(JS m).mul (JD1 m)",
+          "bound": "(hJS.mul hp hIp hW hJD1 T1)"
+        },
+        {
+          "name": "T2",
+          "function": "c*di 0",
+          "tower": "(J2 m).mul (JD0 m)",
+          "bound": "(hJ2.mul hp hIp hW hJD0 T2)"
+        },
+        {
+          "name": "T3",
+          "function": "a0*di 2",
+          "tower": "(J00 m).mul (JD2 m)",
+          "bound": "(hJ00.mul hp hIp hW hJD2 T3)"
+        }
+      ],
+      "output_orders": "Each .mul call returns Bi,Li with base≤Bi, loss≤Bi. It does NOT assert loss≤Li. Set B=max B1 (max B2 B3) and L=max L1 (max L2 L3), and use .mono with the separate base and loss inequalities.",
+      "differences": "Define the actual T1−T2 and then (T1−T2)−T3 towers by smoothDirectionsProd followed by the continuous linear map fst−snd. After the common B/L enlargement, .sub hp hW supplies both estimates at that same B/L.",
+      "tower_selection": "All three product and two difference towers are defined before choosing their bounds. There is no order-dependent tower or new physical witness."
+    },
+    {
+      "step": 6,
+      "title": "Identify the literal normalized discriminant with a ring identity.",
+      "scalar_identity": "(b+b0)*(H⁻¹*(b-b0)) - c*(H⁻¹*(a-a0)) - a0*(H⁻¹*(c-c0)) = ((b^2-a*c)-(b0^2-a0*c0))/H",
+      "exact_strategy": "Expand only public project coefficientFamily, mixedDerivative at0, originalCoefficientEntry, and the own local aliases. iteratedDeriv_zero and ite_apply reduce the definition. For the three concrete Fin3 indices, simp/norm_num selects a,b,c. Rewrite div_eq_mul_inv and close by ring.",
+      "no_division_assumption": "This polynomial identity is valid with H⁻¹ treated as an arbitrary scalar, including H=0. No field_simp or H≠0 obligation is needed. Actual H>0 is already part of public199's proof, but is not an extra hypothesis or new cost.",
+      "final_tower": "Use .congrOn of the constructed difference tower to the fully literal function in the proposed public header. Use UniformWeightedJointGrowth.congr for the exact final K if necessary. Return this single K, then B,L and their already fixed bounds.",
+      "state_zero": "At u=0 the literal increment is0. This follows directly from liftSectorParameter_zero and sub_self, without another producer or extra public theorem."
+    }
+  ],
+  "quantifier_audit": {
+    "target_order": "Fix D/T/S/C,hN/hS/hT and the given j,l,h. Construct K once. Choose B,L once. Then ∀lowRadius≥0 ∀jointOrder n ∃A,Q≥0 ∀m/u/y/slots, the actual D bound holds.",
+    "stronger_than_required": "This polynomial leaf has one common joint loss L before all n, rather than merely an order-dependent loss.",
+    "no_hidden_Bn": "The only new low-base choices are the three fixed calls to public multiplication closure; none is inside the jointOrder/radius quantifiers.",
+    "how_spatial_cap_enters_later": "For state order k and physical mixed order a+b≤s, jointOrder=k+a+b≤k+s. Monotonicity raises high k+a+b+L to s+(k+L). Thus a later per-k loss can be k+L while the low base B stays fixed. A separate mixed extraction/normalization still needs its actual theorem; this route does not claim the final CurrentJets inequality.",
+    "height_gain": "K estimates normalized Δ/H with exactly H=T.H(T.sample(j m))^(3/4). Since H is a label-fixed scalar, returning to the unnormalized Δ multiplies every genuine D layer by the same H. No W power or constant is used to absorb that factor."
+  },
+  "original_speed_boundary": {
+    "checked_exact_object": "minusCharacteristicSpeed (originalCoefficients D S C (liftSectorParameter S C u)) y",
+    "excluded_object": "minusCharacteristicSpeed (L.coefficients ...) is not the function in b95's public theorem.",
+    "actual_buffer_instantiation": "For the same153 j,x,δ choose l=x−δ and h=x+δ; its retained strict interior inequalities provide hl/hh. The actual closed-buffer a/Δ floor restricts to Ioo(l,h). Keep the identical j and physical point. Do not extend this floor to a complete root half.",
+    "next_raw_forcing_formula": "Let q=b−a*v and q0=b0−a0*v0. On this same positive buffer q=sqrtΔ and q0=sqrtΔ0. Then Graw/H = (v0*(δa/H) − δb/H + (δΔ/H)/(q+q0))/a.",
+    "next_cost_inputs": "Use the actual original-speed public tower and its fixed B/L growth, the same public coefficient towers, and the actual buffer lower bounds for a and q+q0; these are separate from this polynomial leaf.",
+    "full_forcing": "The same corrected153 field gives G=Graw−χ′ A Z. A and Z are the literal factors of the already established same-object returnCorrectionVelocity identity; Z carries the actual R.residual. No original-speed estimate is silently applied to corrected L, and no second residual or flow construction is selected.",
+    "still_missing": "The strong fixed-low-base high-parameter weighted bound for the actual same R.residual (and its contribution through the actual χ′ A Z operator) is not implemented. N02's genuine SmoothTameOn object alone does not provide that quantifier order. Completing Δ or Graw does not establish CurrentJets.",
+    "definition_of_Graw": "Graw := v0−v, the reference original minus speed minus the current original minus speed at the identical physical point."
+  },
+  "projected_line_budget": [
+    {
+      "block": "imports, namespace, exact public statement and local aliases",
+      "lines": 50
+    },
+    {
+      "block": "actual current/reference towers and zero-state growth",
+      "lines": 60
+    },
+    {
+      "block": "normalized199 strip restriction",
+      "lines": 20
+    },
+    {
+      "block": "three products, common maxima and two differences",
+      "lines": 60
+    },
+    {
+      "block": "literal identity and final tower transport",
+      "lines": 35
+    },
+    {
+      "block": "explicit typing/closing reserve",
+      "lines": 25
+    }
+  ],
+  "source_fingerprints": [
+    {
+      "name": "N04CoefficientIncrementJointGain",
+      "path": "positive/reconstructed/N04CoefficientIncrementJointGain.lean",
+      "selection": "held reviewed199",
+      "git_blob": "63073bc007f7945e905e6cb9237a96f2c463ff8a",
+      "sha256": "d94ade21f71bc1074689e67b3ef5922d24c9f15ed26b7c9d0490d0c8ef3a40e8",
+      "utf8_bytes": 10715,
+      "lines": 199,
+      "final_newline": true,
+      "read_scope": "held reviewed source; full source reread"
+    },
+    {
+      "name": "N01CharacteristicJointGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/N01CharacteristicJointGrowth.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "b95f6b480dcf1aa6634d4591b24ae2125b645f9a",
+      "sha256": "41b21de7ebdb4b635f1b2b83657884713a0d3ca13b98c2ef69c64f6d09e3c30b",
+      "utf8_bytes": 24803,
+      "lines": 435,
+      "final_newline": true,
+      "read_scope": "complete435 reread, including private/public boundary"
+    },
+    {
+      "name": "WeightedJointComposition",
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointComposition.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "b3a73752bec84738dfc1f85cae1ddad39718e934",
+      "sha256": "7a04fb5661645cbd20a15252deadf05f732c3b84505141c89867f481bafd41b2",
+      "utf8_bytes": 7349,
+      "lines": 144,
+      "final_newline": true,
+      "read_scope": "complete source reread"
+    },
+    {
+      "name": "WeightedJointOperations",
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointOperations.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "33d59355404f7ad98ee177af0ccd0dbafbf136ce",
+      "sha256": "8caae1b11577f110368626ad71e48dd2ad8bd6f011b5e2ddf1710356a05f3993",
+      "utf8_bytes": 8016,
+      "lines": 155,
+      "final_newline": true,
+      "read_scope": "complete source reread"
+    },
+    {
+      "name": "WeightedJointProducts",
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointProducts.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "a2f03fe0abfaf31ef200ffe22d2ecce8bf3c0028",
+      "sha256": "d6a3c54795c2481294a543b4fe9dc4170cce2741b2718427c76d6112cb74b7c6",
+      "utf8_bytes": 3255,
+      "lines": 65,
+      "final_newline": true,
+      "read_scope": "complete source reread"
+    },
+    {
+      "name": "SmoothDirectionsAffine",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAffine.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+      "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+      "utf8_bytes": 5346,
+      "lines": 124,
+      "final_newline": true,
+      "read_scope": "compAffine/congrOn/unique complete proofs reread"
+    },
+    {
+      "name": "SmoothDirectionsNormedComposition",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsNormedComposition.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "044cabd4f03203951521892a886e54e7eafa3863",
+      "sha256": "f59f35ed991dfdcd1715cd5a9c478f0fb6e0e4e0d6f723925a9bbdbe2d63de2e",
+      "utf8_bytes": 5282,
+      "lines": 113,
+      "final_newline": true,
+      "read_scope": "complete source reread"
+    },
+    {
+      "name": "N01CoefficientJointTower",
+      "path": "src/ContinuousFlexibility/Analysis/N01CoefficientJointTower.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "6a73e0d13b39b7cfda04fb0b22208e9c2e44fdb0",
+      "sha256": "082e10476e7067ac5bd8246dbce72aad825019fc196bd45d6191198abdd9b639",
+      "utf8_bytes": 4844,
+      "lines": 100,
+      "final_newline": true,
+      "read_scope": "complete source reread"
+    },
+    {
+      "name": "N01CoefficientSpatialJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01CoefficientSpatialJets.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "0e038e131e20d709f5411f0c17637da9900b65e4",
+      "sha256": "5242b2bbb36f35525783b1941e73a51b0c6bbc0ff993b722a7b4f38040b16e12",
+      "utf8_bytes": 13967,
+      "lines": 249,
+      "final_newline": true,
+      "read_scope": "complete source reread"
+    },
+    {
+      "name": "N01OriginalCoefficientSpatialJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01OriginalCoefficientSpatialJets.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "a6ef81af9b34cd42ee567396bc989fabe3381c18",
+      "sha256": "8d8751954a975c5a8d8d7b22e4c592ddff0ffcda787f35b7eb9c11018a9db528",
+      "utf8_bytes": 11580,
+      "lines": 208,
+      "final_newline": true,
+      "read_scope": "complete source reread; public entry definition"
+    },
+    {
+      "name": "N01cStateSeminorms",
+      "path": "src/ContinuousFlexibility/Analysis/N01cStateSeminorms.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "f96fa185722d12bab8545de1d59ea100a0556417",
+      "sha256": "99abe3e9057a214b52c5188410cfc8d2ca2a3f9a52733bcb5c73dd9757666d26",
+      "utf8_bytes": 16398,
+      "lines": 331,
+      "final_newline": true,
+      "read_scope": "exact restriction block only, not a new full-source review"
+    },
+    {
+      "name": "WeightedTowerCalculus",
+      "path": "src/ContinuousFlexibility/Scalar/WeightedTowerCalculus.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "016523877104f642a44e572693b1b8b2251faa2c",
+      "sha256": "ca17c1326690271a54670c095d664693a6d5680fff254ea96a6937b83eec1b84",
+      "utf8_bytes": 14257,
+      "lines": 306,
+      "final_newline": true,
+      "read_scope": "exact scalar postcompose definition/apply block only"
+    },
+    {
+      "name": "Nonlinear",
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "utf8_bytes": 101197,
+      "lines": 1773,
+      "final_newline": true,
+      "read_scope": "actual coefficient/lift/neighborhood/oneHigh/N01 definitions"
+    },
+    {
+      "name": "MathlibPiProd",
+      "path": "Mathlib/Topology/Algebra/Module/ContinuousLinearMap/PiProd.lean",
+      "selection": "mathlib c55e6e786f49471c72fbddbec5415808896aec1e",
+      "git_blob": "adc8aec3458c3c9a2d27d017daca7981a25ea956",
+      "sha256": "9c18b9c8d8eefd9e874bee3930ac30e160ff25d0ae9ecbb2e9c90572a56e3584",
+      "utf8_bytes": 16603,
+      "lines": 439,
+      "final_newline": true,
+      "read_scope": "actual prod_apply, coe_fst', coe_snd' blocks"
+    },
+    {
+      "name": "MathlibCLMBasic",
+      "path": "Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Basic.lean",
+      "selection": "mathlib c55e6e786f49471c72fbddbec5415808896aec1e",
+      "git_blob": "47fed33950cf184bf699fd945809de5e75e8fcc6",
+      "sha256": "7bdb5def2e7b70c85181b3d8f3df311e8928ccae1fd6000b9e61a4a75a2ab1db",
+      "utf8_bytes": 45178,
+      "lines": 1111,
+      "final_newline": true,
+      "read_scope": "actual id_apply and zero/add/sub/smul public alias blocks"
+    }
+  ],
+  "verification": {
+    "primary_evidence": "Exact Git blobs and the listed pinned mathlib sources, not a keyword-only match.",
+    "code_level_math": "Every quantitative input is supplied by public199 or public originalCoefficient_strip_joint_growth; remaining bounds are derived by explicitly listed public tower/closure operations.",
+    "build_or_elaboration_performed": false,
+    "CI_queried": false,
+    "active_source_or_refs_modified": false,
+    "new_Lean_source_written": false,
+    "private_helpers_called": false,
+    "note": "The future candidate still needs complete source review, an exact selected import/name graph and CI. This JSON is ready for parent archival and immediate implementation once the explicit source budget is released."
+  }
+}

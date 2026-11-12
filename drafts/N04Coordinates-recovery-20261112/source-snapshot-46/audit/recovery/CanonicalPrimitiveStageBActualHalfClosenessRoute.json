@@ -1,0 +1,414 @@
+{
+  "schema": "n04_actual_stage_B_readonly_mathematical_route_v1",
+  "path": "audit/recovery/CanonicalPrimitiveStageBActualHalfClosenessRoute.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "author": "/root/audit_coordinates",
+  "status": "implementable mathematical route from the actual CurrentJets contract; no new Lean producer or final PrimitiveGeometry claim",
+  "baseline": {
+    "read_commit": "fc5254a50811fac73c0fd24697c6342ff8585493",
+    "read_tree": "45d186b993824a8b3b30d407deb250844da4cfd6",
+    "current_parent_submitted_commit": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+    "current_tree": "944690f469cb649cafd0e1dc582b6acb4992af6c",
+    "readonly_exact_compare": {
+      "base": "fc5254a50811fac73c0fd24697c6342ff8585493",
+      "head": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+      "status": "ahead",
+      "ahead_by": 1,
+      "behind_by": 0,
+      "total_commits": 1,
+      "files": [
+        {
+          "path": "src/ContinuousFlexibility/Analysis/ActualAtlasCutFirstJets.lean",
+          "blob": "528eda106b3b3300314ce573953e14f856dc8cfe",
+          "status": "modified",
+          "additions": 4,
+          "deletions": 1
+        },
+        {
+          "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeReconstruction.lean",
+          "blob": "03ae22426c55b94746067ac9a7e09ca2da76bd28",
+          "status": "modified",
+          "additions": 6,
+          "deletions": 3
+        },
+        {
+          "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean",
+          "blob": "5c6c40a679707ef636c77dee0bb479c51153adfe",
+          "status": "modified",
+          "additions": 7,
+          "deletions": 4
+        },
+        {
+          "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean",
+          "blob": "c7eaf4fe2c88fa12158ece8d2f32a86bbaad817e",
+          "status": "modified",
+          "additions": 13,
+          "deletions": 4
+        }
+      ]
+    },
+    "provider_intersection_with_four_changes": [],
+    "ci_actions": "No CI query, log download, build, checkout, index, tree, commit, ref or push action by this agent."
+  },
+  "task": "Identify a single low-order shrink and the real scalar/domain giving cross-half normalized opposite root coordinate in [1,5/4], retaining the original typed atlas, whole-atlas indexing and material samples.",
+  "decisive_correction": {
+    "false_universal_claim": "Every point of a moving open half lies in one fixed reference OPEN half.",
+    "reason": "When the moving cut differs from the reference cut, a point on the old reference cut circle can be an interior point of the moving half.",
+    "correct_split": "First prove membership in the full original negative component. Then split the physical radius into < reference cut, > reference cut, or = reference cut. The first two yield a genuine fixed reference unitStrip point; the equality case is a closure/continuity argument at an interior component point.",
+    "consequence": "Dropping the equality branch would lose points quantified by CanonicalPrimitiveGeometry.materialJets."
+  },
+  "fixed_objects": {
+    "old_K": "K = n04bActualTypedAtlas hT hS hN hfield e₀",
+    "whole_V": "The same n04WholeReferenceGaugeAtlasData built from K and its original whole enumeration e; no witness or map is replaced.",
+    "component": "m : ℕ, Ω_m = Ioo (C.left m) (C.right m) ×ˢ univ",
+    "root_indices": "k_s = e₀.symm (.inl (m,s)); whole index ℓ_s = e.symm (.inl (m,s)). These are different enumerations and must be kept explicit.",
+    "reference_cut": "c_m = n04bActualReferenceCut hN m, with C.left m < c_m < C.right m.",
+    "radius": "ρ_m = n04bRootCutRadius (C.travel m) > 0. Both negative halves have canonical left 0 and right ρ_m, literally from the retained metadata.",
+    "state": "ζ lies in the one shrunk sectorNeighborhood; z = liftSectorParameter S C ζ. Neighborhood alignment with the existing hN/hfield and actual V geometry is retained by existing monotonicity/restriction lemmas.",
+    "material_cell": "The shrink uses κ(ℓ)=V.cell ℓ. For a negative piece this is the original K.cell k_s. It is not replaced by C.cell m, the correction cutoff host, or a common cell for both halves."
+  },
+  "actual_scalar": {
+    "atom": "CanonicalGeometry.Atom.chartRadial",
+    "exact_definition": "atom D T S C L V z ℓ chartRadial q = ((V.chart z ℓ (physicalUnitPoint V ℓ q)).1 - V.left ℓ) / (V.right ℓ - V.left ℓ).",
+    "sampling_domain": "q ∈ CanonicalGeometry.unitStrip = Ioo 0 1 ×ˢ univ; physicalUnitPoint uses fixed reference physical endpoints, independently of z.",
+    "scalar_difference": "F(ζ,ℓ,q) = atom(...,liftSectorParameter ζ,ℓ,chartRadial,q) - atom(...,(C.referenceState,0),ℓ,chartRadial,q).",
+    "normalized_negative_specialization": "For ℓ_s, F = (K.chart z k_s x).1/ρ_m - (K.chart ref k_s x).1/ρ_m, where x is exactly that fixed reference physicalUnitPoint.",
+    "why_not_inverseRadial": "inverseRadial samples a canonical point and normalizes its image by physical length. It is not the normalized forward coordinate needed to certify the opposite-root u range at a prescribed moving physical point."
+  },
+  "single_shrink": {
+    "actual_provider": "n04Coordinates_currentAtoms_uniformly_close",
+    "provider_module": "ContinuousFlexibility.Analysis.CanonicalCurrentUniformCloseness",
+    "original_input": "Use the genuine CurrentJets D T S C L V base ε from the same family. This route consumes that contract; it does not claim its construction has already been completed.",
+    "zeroth_bound": "Choose loss₀ from hcur.2.1 once, then choose B₀>0 from its s=0 clause. For all ℓ and q∈unitStrip: |F| ≤ B₀ E0(sample(V.cell ℓ))^B₀ H(sample(V.cell ℓ))^(3/4) parameterGrading S loss₀ ζ.",
+    "absorption": "material_sample_height_coefficient_power_bounded hD hT V.cell B₀ (0<3/4) gives CH>0 before all ℓ with H(sample)^.75 E0(sample)^B₀ ≤ CH.",
+    "choice": "δ=1/4; M=B₀*CH; base'=max base loss₀; ε'=min ε (δ/(2*M)). First align any finitely many existing bases/radii by max/min and restriction if they are not already identical.",
+    "proof": "parameterGrading loss₀ ζ = sectorGrading loss₀ ζ.1 + |ζ.2| < 2 ε'. Hence |F| < M*2ε' ≤ δ.",
+    "quantifiers": "loss₀,B₀,CH and the single base'/ε' are chosen before every component, side, point, derivative order N and later parameter-jet order. No later order-dependent neighborhood shrink is needed for this range step.",
+    "tower_preserved": "n07a_currentJets_restrict restricts the original SmoothDirections tower and keeps the original zero-order loss and functions.",
+    "generic_absorption_relation": "CanonicalMaterialAbsorption.exists_stateNeighborhood_uniform_smallness is the general AnnularState analogue (β=3/4,K=1). Its domain is not definitionally the sector parameter domain. The existing 101-line currentAtoms_uniformly_close theorem is the exact sector-specialized consumer and avoids silently changing coordinates.",
+    "unnecessary_hypotheses": [
+      "No E0(sample)≥1 floor is required for the shrink.",
+      "No ReferenceJets estimate is needed for the zeroth difference shrink.",
+      "No final materialJets bound is assumed."
+    ]
+  },
+  "point_membership": [
+    {
+      "stage": "Current moving half to the actual full component",
+      "input": "x ∈ physicalPieceOpen S V z ℓ_s",
+      "steps": [
+        "n04WholeReferenceGaugeAtlasData_negative_fields identifies this with physicalPieceOpen S K z k_s.",
+        "n04bTypedAtlasData_physicalPieceOpen and the .inl index give the actual travel-half definition.",
+        "(mem_n04bTravelDomain.mp hx).1 gives x∈Ω_m; alternatively use the actual negative-half domain subset clause."
+      ],
+      "prohibition": "Do not infer reference-half membership from the moving-half index."
+    },
+    {
+      "stage": "Open reference-half branches",
+      "steps": [
+        "If x.1<c_m use reference side t=false; if c_m<x.1 use t=true.",
+        "The actual metadata give x∈referencePhysicalPieceOpen S V ℓ_t. The same-component membership is supplied explicitly by the preceding step.",
+        "Let λ_t=V.physicalRight ℓ_t−V.physicalLeft ℓ_t>0 and q=((x.1−V.physicalLeft ℓ_t)/λ_t,x.2). Strict radial membership proves q∈unitStrip.",
+        "Expand the project definition of physicalUnitPoint and use λ_t≠0 to prove physicalUnitPoint V ℓ_t q=x."
+      ],
+      "existing_lemmas": [
+        "n04bNegativeLeft",
+        "n04bNegativeRight",
+        "n04b_negativeHalf_bounds",
+        "n04b_negativeHalf_subset",
+        "n04b_negativeHalf_existsUnique",
+        "n04bTypedAtlasData_referencePhysicalPieceOpen",
+        "n04WholeReferenceGaugeAtlasData_negative_fields"
+      ],
+      "new_glue_only": "The explicit trichotomy and affine unit-coordinate cancellation are small genuine deductions, not existing final range assumptions."
+    },
+    {
+      "stage": "Reference-cut equality",
+      "input": "x.1=c_m; x can still belong to the current moving open half",
+      "steps": [
+        "x is strictly inside Ω_m because c_m is a true interior cut.",
+        "n04bActualTypedAtlas_negative_component_germs gives the actual current and reference forward chart germs on a full neighborhood of x; actual travel/root regularity yields continuity there.",
+        "Approach x from the appropriate fixed reference half with the angle fixed. Its normalized chart-difference bound is <1/4 at every approximating interior point, hence ≤1/4 at x.",
+        "The actual reference optical cut gives chart_ref radial coordinate ρ_m at x, so u_ref=1.",
+        "This yields u_current≤5/4 at the boundary. The current target half still gives v_current<1."
+      ],
+      "no_extra_assumptions": "No uniform extension width, common infinite collar, or identification of current and reference cuts is assumed.",
+      "later_jet_note": "If a later finite-order spatial bound must also include this circle, extend that fixed-order bound by continuity of the genuine component derivatives; do not evaluate unitStrip theorems at a nonmember endpoint."
+    }
+  ],
+  "range_argument": {
+    "same_reference_side": "If the reference side t equals current target s, the required target forward/height/Jacobian fields are sampled directly at a valid fixed reference unit point. No opposite-root conversion is needed.",
+    "crossed_reference_side": "If t=!s, use the genuine fixed reference opposite-half unit point q, and set u=(K.chart z k_(!s) x).1/ρ_m and v=(K.chart z k_s x).1/ρ_m.",
+    "upper": "The true reference chart maps its reference half to (0,ρ_m), hence u_ref∈(0,1). The chartRadial difference bound gives u<u_ref+1/4<5/4. At the reference cut the continuity argument gives u≤5/4.",
+    "lower": "Current target MapsTo gives 0<v<1. n04bActualTypedAtlas_negative_opposite_normalized at x∈Ω_m gives u>0 and v^(3/2)+u^(3/2)=2. Since v^(3/2)<1, u^(3/2)>1 and u>1.",
+    "output": "Thus crossed points have 1<u<5/4 off the old cut and 1<u≤5/4 on it. A common [1,5/4] range is valid for all crossed points.",
+    "actual_suppliers": [
+      "CanonicalGeometry.charts at z and at ref, with CanonicalGeometry.referenceDomain at ref",
+      "n04b_actualTypedAtlas_partA",
+      "n04bActualTypedAtlas_negative_opposite_normalized",
+      "n04b_rootHalfCoordinate_normalized_sum",
+      "n04b_rootHalfCoordinate_normalized_opposite"
+    ],
+    "angular_identity": "Both actual root charts have the same travel angle at the same physical point; retain this literal equality. Do not replace that travel angle by the physical angle or reference angle."
+  },
+  "normalized_conversion": {
+    "g": "g(u)=(2-u^(3/2))^(2/3), with v=g(u).",
+    "height": "H_target/H_opposite=(g(u)/u)^(1/4).",
+    "abs_jacobian": "|J_target|/|J_opposite|=sqrt(u/g(u)).",
+    "first_differential": "The first differential row changes by -sqrt(u/g(u)); the second (angular) row is unchanged.",
+    "exact_active_lemmas": [
+      "n04bActualTypedAtlas_negative_opposite_fields_at",
+      "n04bActualTypedAtlas_negative_opposite_germs",
+      "n04bActualTypedAtlas_negative_opposite_firstJets",
+      "n04bActualTypedAtlas_negative_opposite_ratios",
+      "n04bActualTypedAtlas_negative_opposite_normalized"
+    ],
+    "fixed_compact_cost": "On [1,5/4], u^(3/2)≤u²≤25/16, hence 2-u^(3/2)≥7/16. Set c=(7/16)^(2/3)>0. Then c≤g(u)≤1, (4c/5)^(1/4)≤height factor≤1, and 1≤Jacobian factor≤sqrt(5/(4c)).",
+    "derivative_cost_scope": "The normalized scalar conversion functions and their reciprocals are smooth on a neighborhood of this fixed compact interval. Their finite-order constants depend on the order, not m, travel, the raw optical lower bound or a new collar width. Raw chart reconstruction still multiplies by the actual ρ_m, and physical/unit derivative conversion still pays the true widths.",
+    "not_formalized_here": "The compact scalar inequalities and the final domain gluing are mathematical deductions recorded here; no new Lean theorem was written or claimed compiled."
+  },
+  "inverse_and_source_domain": {
+    "target_only": "For x in the moving target half, y=K.chart z k_s x belongs to the TARGET canonicalOpen (0,ρ_m)×ℝ.",
+    "reference_point": "canonicalReferencePoint C K z k_s x = K.inverseChart ref k_s y belongs to the TARGET fixed reference physical half by the actual inverse MapsTo.",
+    "legitimate_atoms": "Reference/current inverseRadial, inverseAngleDefect, sourceFactor and inverse sourceFactor estimates must be consumed on the target canonical unit point (y.1/ρ_m,y.2), which really lies in unitStrip.",
+    "prohibited": "The opposite normalized coordinate u>1 is outside the opposite canonical unit interval. The opposite-root conversion is only for forward chart, height and Jacobian fields/germs at the common physical point; it does not license opposite inverse/source atom estimates at u.",
+    "travel_consistency": "CanonicalNegativeTravelTransition identifies both root transitions with the same genuine travel transition on Ω_m. It is not used to identify the moving physical half with a reference half."
+  },
+  "sample_comparison": {
+    "literal_cells": "K.cell k_false=n04CellAt D ((C.left m+c_m)/2); K.cell k_true=n04CellAt D ((c_m+C.right m)/2). These are not definitionally equal and no cell uniqueness is assumed.",
+    "existing_held_source": "ActualNegativeMaterialSamples131, selected in the held Reference33 inventory.",
+    "actual_point_route": "n04bActualTypedAtlas_negative_material_sample_comparison gives E0(sample(K.cell k_t))^P ≤ BE*E0(x.1)^AE for every x.1 in the CLOSED full component, before all m/t/x. It applies directly to the crossed physical point.",
+    "target_sample_route": "If an estimate is required back at the target sample, apply n04bActualTypedAtlas_negative_material_sample_weights with γ=η=0 to transfer that nonnegative E0 point power to sample(K.cell k_s). Exponents/constants can depend on the requested finite order, while the neighborhood remains the fixed low-order one.",
+    "two_sample_shift": "Alternatively n04bActualTypedAtlas_negative_sample_endpointX bounds each sample's endpointX distance to the same real component point (for example c_m) by A0. Triangle gives distance between the two sample endpointX values ≤2A0. material_global_H_M_E0_rpow_bounded_X_shift then preserves prescribed H/M powers with real exponents and a nonnegative E0 cost.",
+    "prohibited": [
+      "Do not substitute C.cell m for the typed half's stored cell.",
+      "Do not assume a stored sample itself lies in the component.",
+      "Do not reverse a one-sided E0 estimate without this real comparison.",
+      "Do not assume the original material E0 has a unit floor."
+    ],
+    "material_replacement": "If the final family uses enlargedMaterialData, instantiate these comparisons with the explicitly transported same witness and exact preserved sample identity; do not silently identify different constructor choices."
+  },
+  "minimal_next_formal_steps": [
+    "Consume currentAtoms_uniformly_close at δ=1/4 after one max/min alignment of existing neighborhoods.",
+    "Prove the current-domain/full-component plus reference-cut trichotomy and the exact affine inverse unit-point identity.",
+    "On crossed open-reference branches, combine same actual chartRadial difference with target MapsTo and opposite_normalized to obtain the fixed [1,5/4] range.",
+    "Add the reference-cut closure argument using genuine full-component chart continuity; this is essential for all-point materialJets.",
+    "Use the already proved stored-field germs to transport finite forward/height/Jacobian jets through the fixed scalar functions. Preserve target canonical domains for inverse/source fields.",
+    "Pay actual width/radius costs and convert the original reference-side sample at the actual physical point using 131; no index equality shortcut."
+  ],
+  "actual_source_evidence": [
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "lines": 1773,
+      "review": "Relevant actual definitions and clauses, including atom 1024–1067, CurrentJets 1123–1147, reference/current point and primitive fields.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalMaterialAbsorption",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalMaterialAbsorption.lean",
+      "blob": "5ac17982dae32173a3295ff5b8c2778646ed9042",
+      "sha256": "eb7cab5033d48ac3601082eecd5c403a01d31844e4093b117fb248a4860ff6fe",
+      "lines": 76,
+      "review": "Full source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalCurrentUniformCloseness",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean",
+      "blob": "f5b40e8f0c2af008aebf74066a8ef36d82c761fb",
+      "sha256": "fa10773294a616aae51226c5e6ea735a5b87727afca8ae2de81d3bc84094543f",
+      "lines": 101,
+      "review": "Full current compiled-source revision read; not the historical 94-line candidate.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RootTravelOppositeCoordinates",
+      "path": "src/ContinuousFlexibility/Analysis/RootTravelOppositeCoordinates.lean",
+      "blob": "e573bf412782f3cd9d51fccc619367c3fc8fcd40",
+      "sha256": "52ea40ea85ce5a873754a4a39a44d0b5d39c792a18a1e1a487b37bf5bcfe80ce",
+      "lines": 199,
+      "review": "Full active source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualNegativeOppositeRootFields",
+      "path": "src/ContinuousFlexibility/Analysis/ActualNegativeOppositeRootFields.lean",
+      "blob": "2741a227986d3479a7ced38469e19133966a0d35",
+      "sha256": "ff81af86365dfcd2fa3c5eaa7b58e41dbbf49828cf4eab328dc8ed8101f44689",
+      "lines": 268,
+      "review": "Full active source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bTypedAtlasData",
+      "path": "src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+      "blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "sha256": "166d48b590552637d5efedb29ce0b19d5963d02f33e7caebffe44a04b576fdf4",
+      "lines": 142,
+      "review": "Full source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bTypedAtlasDomains",
+      "path": "src/ContinuousFlexibility/Analysis/N04bTypedAtlasDomains.lean",
+      "blob": "4114c475e0bda07b9674ea1f5127fc56507695fc",
+      "sha256": "8032ce84bf016719e83ee02e2d6d11ab3869314b5de2aae207935b757ef121b9",
+      "lines": 155,
+      "review": "Full source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualAtlasGerms",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualAtlasGerms.lean",
+      "blob": "0bf89b2339f60ac8ba2cf9678637f4bf96830a66",
+      "sha256": "5abee83c1a68e2b04a6d733f7e51473a15453d5debda0e8526106462e3b4d73e",
+      "lines": 94,
+      "review": "Full source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalNegativeTravelTransition",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalNegativeTravelTransition.lean",
+      "blob": "e437ebd844869f8250ec6c4e58820461a9b968f5",
+      "sha256": "c88ff73384ba8360871e9b439f3d7c84985623763d8186441672b99c1e4df34b",
+      "lines": 185,
+      "review": "Full source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceMetadata",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceMetadata.lean",
+      "blob": "d2be1124da85939a9dfd1cba380a9ac303c61308",
+      "sha256": "21d8319b313d567698500bb20354251130e9d1746ff414fdf5aad2adb94ee7c0",
+      "lines": 76,
+      "review": "Full source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferencePieces",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferencePieces.lean",
+      "blob": "ba67b0a6776363ed4ebf616d7fd56c489baf2b25",
+      "sha256": "0ae0b98aef8f688002cf783e7b129f6834a79b1502061bd123f90ffe59edf766",
+      "lines": 174,
+      "review": "Full source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualDomainGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualDomainGeometry.lean",
+      "blob": "4ad5cbd7979d26b7e8f5733d9795df09f5d9ec9d",
+      "sha256": "853eb7d9cc44e1ac4706ea8dc83e39a7a5356d21f5bd0ecd4e864a8ac88ef256",
+      "lines": 165,
+      "review": "Full source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasData.lean",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "lines": 131,
+      "review": "Full source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceHalves",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+      "blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+      "sha256": "598b1d5f18c4a22eecd5108949d46b2ddca955d79ea66090b85ca6ba06ff8227",
+      "lines": 96,
+      "review": "Full source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualDomains",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualDomains.lean",
+      "blob": "22dba872c605b5168d156c01f6d0e5bdeeb554d9",
+      "sha256": "8d34d189917cf632f50a004e6c2a44e245113972caa933f893e5f6e531c728b9",
+      "lines": 124,
+      "review": "Full active source read; older hT/hS/hN arguments retained at this pin, not silently replaced by main shortened signatures.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bNegativePairDomains",
+      "path": "src/ContinuousFlexibility/Analysis/N04bNegativePairDomains.lean",
+      "blob": "bb29a694355ccecf0bb8ec2d65a5b3fad0d6dbc8",
+      "sha256": "ef37be2edfdd58704641616c8379b72dff2170cbef856b58382d937ff9a4be45",
+      "lines": 120,
+      "review": "Full source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualAtlasGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualAtlasGeometry.lean",
+      "blob": "6e704770a6066c6279f7c3cdae96c1d695d554d3",
+      "sha256": "9249ea8b23d4edc27fe5e9d405e32a3da2248556efb394db33faf279aefa1d0a",
+      "lines": 101,
+      "review": "Full source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateNeighborhood",
+      "path": "src/ContinuousFlexibility/Analysis/StateNeighborhood.lean",
+      "blob": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+      "sha256": "d69d61889ad31640933f00a39c70c7ff33eeb0df52df51a509df97850d1399b6",
+      "lines": 143,
+      "review": "Full exact fc525 source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aNeighborhood",
+      "path": "src/ContinuousFlexibility/Analysis/N07aNeighborhood.lean",
+      "blob": "86b20bbbcad3781f00b90d3b7562ab700f99eef3",
+      "sha256": "814ee5af91417d6b4e109bde34d8460e476d0b211c26a36fa60714df6dd83409",
+      "lines": 218,
+      "review": "Full exact fc525 source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bRootTravelCharts",
+      "path": "src/ContinuousFlexibility/Analysis/N04bRootTravelCharts.lean",
+      "blob": "4c07f9e17218a4366860a3984a2e933033115a8b",
+      "sha256": "3d9439442dea831b5b918e47a2606e6e6460081be5e7b3e8beee0a2c052840a7",
+      "lines": 146,
+      "review": "Full exact fc525 source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    }
+  ],
+  "held_source_evidence": [
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualNegativeMaterialSamples",
+      "blob": "2546c07212cf569a225e873eb38945a9cb4127e3",
+      "sha256": "696583df4d5261aff78e5a6cc32ff4fde06ea6d17b2bdf2745805fde0a06c2fc",
+      "lines": 131,
+      "review": "Full source re-read for this route; existing independent peer retained, not active yet."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalNegativeMaterialTransport",
+      "blob": "82da95883c7681220c0f05d18326b89b10e55bdb",
+      "sha256": "3e3906dfc18e2bce292e04a91e0c32f495287a8af573195fc26a270a06508ca6",
+      "lines": 103,
+      "selection": "negative-material-boundary compatibility source",
+      "review": "Full source re-read, including true host→closed-component endpointX bound; not active yet."
+    }
+  ],
+  "related_new_stage_A_leaf": {
+    "source": "d53b5c3cececfff9655dc1a570e21f3b2281db32",
+    "sha256": "829ec714b643035b32cc1cd6e4e90e4cb54af2a6a75c998784c814c9eac41526",
+    "owner": "aa48c9c2aac06c095ca835bc4f168d4e6e9334d2",
+    "peer": "2ee76b504dcb84388af39441f0d958dc6d17f17f",
+    "lightweight_names": "96896301a54d8a16a4795129419011e333b1f993",
+    "scope": "74-line actual unit-atom mixed→finite iteratedFDeriv bound, independently reviewed and held uncompiled; no need to use its absolute bound for this zeroth difference shrink."
+  },
+  "nonclaims": [
+    "No new Lean source was written for Stage B.",
+    "CurrentJets construction itself remains a separate required producer.",
+    "No final materialJets, uniform transport or complete CanonicalPrimitiveGeometry certificate is claimed.",
+    "No new whole-repository import/name scan was performed.",
+    "This JSON is a read-only route, not an independent peer of a new proof source."
+  ],
+  "cache_note": "Functions store reset during the work. All listed source identities and readings were retained in the tool transcript and/or immutable Git blobs; this is a newly serialized route, not a claim to have recovered an earlier unpersisted document byte-for-byte."
+}

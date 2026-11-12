@@ -1,0 +1,48 @@
+{
+  "schema": "independent-full-source-repair-review-v1",
+  "reviewer": "/root",
+  "author": "/root/quantitative_route",
+  "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootFirstJets.lean",
+  "before": {
+    "blob": "be4a8a0a3fe29b50db53f246b56d536dbe172f49",
+    "lines": 102
+  },
+  "after": {
+    "blob": "5f443d94d97da89b5e51d52ca72e0071099be0fe",
+    "sha256": "c6558847662a442f5f4e33edf3a46e2f52270aef148119f906ded80a28e96214",
+    "lines": 102
+  },
+  "candidate": "9faf12afe23cebba8846cacb92fe8680e93184f6",
+  "diff": "eb5f74bbf8f6f5a69a5137cae3256d89580c4d52",
+  "full_source_read": true,
+  "full_diagnostics_read": {
+    "blob": "ba2d56fac3e0e9901915120c095c7c19a327f4a6",
+    "positions": [
+      "88:91",
+      "92:62"
+    ],
+    "characters": [
+      7092,
+      7128
+    ]
+  },
+  "reasoning": [
+    "The complete positive goal has V.chart z ip p while hFp uses the displayed same n04WholeReferenceGaugeAtlasData record. Explicit V unfolding exposes exactly that head; ψ then unfolds to the same positiveReferenceCylinderChart (Y i). The given v and unit endpoint orientation are untouched.",
+    "The negative goal has V.chart z ineg p while hFn targets the same record chart and a Boolean half selected from (m,side). Unfolding V permits the given hFn rewrite; k exposes the identical half. Pair projection reduction is definitional. The same sign s, C endpoint r, K and m/side are retained.",
+    "The subsequent same hraw match, height rewrites and result statement are byte-identical; no new field formula or endpoint source is assumed."
+  ],
+  "checks": {
+    "one_complete_public_head_identical": true,
+    "imports_and_options_identical": true,
+    "exact_two_replacements_reconstruct_entire_after": true,
+    "all_other_bytes_identical": true,
+    "delta": {
+      "added": 2,
+      "deleted": 2,
+      "net": 0
+    },
+    "no_axioms_admits_resource_or_witness_changes": true
+  },
+  "decision": "PASS_STATIC_REVIEW_AWAITING_CI",
+  "local_build": false
+}

@@ -1,0 +1,93 @@
+{
+  "schema": "n04-focused-repair-reviewed-owner-v1",
+  "path": "audit/repair172/WholeReferenceGaugeReferencePrincipalCI172RepairReviewedManifest.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "owner": "/root/audit_coordinates",
+  "status": "full_independent_peer_passed_uncompiled",
+  "baseline": {
+    "commit": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+    "tree": "944690f469cb649cafd0e1dc582b6acb4992af6c",
+    "ci": "172 failed"
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean",
+  "before": {
+    "blob": "c7eaf4fe2c88fa12158ece8d2f32a86bbaad817e",
+    "sha256": "1ba433790477f1013bcb4a16a11115eeb3691c16b57daef7ca6304194500fc72",
+    "bytes": 10180,
+    "lines": 184
+  },
+  "after": {
+    "blob": "5eddcf61d077190611c1a84cf5b88a132b5573f0",
+    "sha256": "f8fa5d095a766edb197614a42edf911bc81f0f6dcf517d331c871bb486b13f56",
+    "bytes": 10200,
+    "lines": 184
+  },
+  "candidate": {
+    "blob": "aa1ff6b479743361cc0169df4f8a5c1b7e0be32c",
+    "sha256": "53507c2851b5be08fbd489f61b84776a2c5f224b2ef21f4131844e7c637fa273",
+    "bytes": 11246
+  },
+  "diff": {
+    "blob": "5d8abd1f4da7226c340443e40d90dbdd94c76fbb",
+    "sha256": "897d92a558f8687a5c7aa8027b73cb500f23da5a22b38947f431cc2b972e9c77",
+    "bytes": 587,
+    "added": 1,
+    "deleted": 1,
+    "net": 0
+  },
+  "independent_peer": {
+    "blob": "44bc909984a3277b4eadcb33ec6bbd6bd064f12d",
+    "sha256": "07a28a7c6793413ef85dc523abf0c932294d9a311a0ff491dd6975b579cf90ba",
+    "bytes": 1581,
+    "reviewer": "/root",
+    "decision": "PASS_STATIC_REVIEW_AWAITING_CI",
+    "full_source_read": true,
+    "full_diagnostic_read": true
+  },
+  "exact_replacement": {
+    "line": 182,
+    "old": "        simpa only [hneg, ↓reduceIte, one_mul] using hpot",
+    "new": "        simpa only [hneg, Bool.false_eq_true, ↓reduceIte, one_mul] using hpot"
+  },
+  "complete_headers": [
+    {
+      "kind": "private theorem",
+      "name": "negative_reference_qualitative_of_radial_density",
+      "line": 24,
+      "header_sha256": "b4f245b370b41ab793cba4330f01453e1d30579765ffc190fbe073c8759948b4"
+    },
+    {
+      "kind": "theorem",
+      "name": "n04WholeReferenceGaugeAtlasData_actual_referencePrincipal_qualitative",
+      "line": 98,
+      "header_sha256": "3f3ca9647ab21333d12afa953c1dbb6e8fab4baae03df4724a7e22a38dfa0b95"
+    }
+  ],
+  "preserved": {
+    "public_heads": 1,
+    "private_heads": 1,
+    "imports": true,
+    "options": true,
+    "all_other_source_bytes": true,
+    "actual_V_z0_chart_inverse_height_witnesses": true,
+    "net_lines": 0
+  },
+  "binding": "Source/diff/candidate/peer server readbacks and exact hashes verified; peer after-source and before/diff identities match. Source remains unchanged after peer.",
+  "predecessor_owner": {
+    "blob": "6e773807d04bca215c218642552b6e2281fa37e1",
+    "status": "Immutable previous CI171-repair owner; CI172 exposed the remaining Boolean proposition simp omission. Select the new after-source for the next repair batch."
+  },
+  "gates": [
+    "Parent selection and CI173 activation remain separate.",
+    "No local compilation or future CI success is claimed."
+  ],
+  "actions": {
+    "local_Lean": false,
+    "active_edits": false,
+    "index_edits": false,
+    "ref_or_push": false,
+    "tree_or_commit": false,
+    "CI_query_or_log_download": false,
+    "duplicate_Lean_archive_copy": false
+  }
+}

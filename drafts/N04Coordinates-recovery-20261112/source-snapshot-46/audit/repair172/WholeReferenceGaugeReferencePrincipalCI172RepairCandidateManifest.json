@@ -1,0 +1,124 @@
+{
+  "schema": "n04-focused-ci-repair-candidate-v1",
+  "path": "audit/repair172/WholeReferenceGaugeReferencePrincipalCI172RepairCandidateManifest.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "owner": "/root/audit_coordinates",
+  "status": "uncompiled_minimal_candidate_pending_root_independent_peer",
+  "baseline": {
+    "commit": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+    "tree": "944690f469cb649cafd0e1dc582b6acb4992af6c",
+    "ci": "172 failed; parent downloaded the complete log once",
+    "source_identity_evidence": "Exact fc525→1206 Git compare previously read and source c7eaf re-fetched. No branch/ref lookup or CI request."
+  },
+  "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeReferencePrincipal",
+  "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean",
+  "before": {
+    "blob": "c7eaf4fe2c88fa12158ece8d2f32a86bbaad817e",
+    "sha256": "1ba433790477f1013bcb4a16a11115eeb3691c16b57daef7ca6304194500fc72",
+    "bytes": 10180,
+    "lines": 184
+  },
+  "after": {
+    "blob": "5eddcf61d077190611c1a84cf5b88a132b5573f0",
+    "sha256": "f8fa5d095a766edb197614a42edf911bc81f0f6dcf517d331c871bb486b13f56",
+    "bytes": 10200,
+    "lines": 184
+  },
+  "exact_diff": {
+    "blob": "5d8abd1f4da7226c340443e40d90dbdd94c76fbb",
+    "sha256": "897d92a558f8687a5c7aa8027b73cb500f23da5a22b38947f431cc2b972e9c77",
+    "bytes": 587,
+    "added": 1,
+    "deleted": 1,
+    "net": 0,
+    "path": "audit/repair172/WholeReferenceGaugeReferencePrincipalCI172.diff",
+    "unified_diff_applies_exactly": true
+  },
+  "literal_replacement": {
+    "line": 182,
+    "old": "        simpa only [hneg, ↓reduceIte, one_mul] using hpot",
+    "new": "        simpa only [hneg, Bool.false_eq_true, ↓reduceIte, one_mul] using hpot"
+  },
+  "complete_declaration_headers": [
+    {
+      "kind": "private theorem",
+      "name": "negative_reference_qualitative_of_radial_density",
+      "line": 24,
+      "header": "private theorem negative_reference_qualitative_of_radial_density\n    {D : ReferenceData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {K : CanonicalData S} {base : ℕ} {ε : ℝ}\n    (hA : CanonicalGeometry D S C K base ε)\n    (href : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)\n    (hsref : stateSector S C.referenceState)\n    (hradial : CanonicalGeometry.ReferenceRadial S C K)\n    (A : SymmetricCoefficients) (w : ℝ → ℝ) (m : ℕ)\n    (ha : ∀ q ∈ referencePhysicalPieceOpen S K m, A.a q = w q.1)\n    (hunit : ∀ q ∈ referencePhysicalPieceOpen S K m,\n      (coordinatePrincipalDensity A (K.chart (C.referenceState, 0) m)\n        (K.height (C.referenceState, 0) m)).a q = 1 ∧\n      (coordinatePrincipalDensity A (K.chart (C.referenceState, 0) m)\n        (K.height (C.referenceState, 0) m)).b q = 0 ∧\n      (coordinatePrincipalDensity A (K.chart (C.referenceState, 0) m)\n        (K.height (C.referenceState, 0) m)).c q =\n          -(K.chart (C.referenceState, 0) m q).1)\n    (hcoeff : K.coefficients (C.referenceState, 0) m =\n      inverseChartPrincipalCoefficients A (K.chart (C.referenceState, 0) m)\n        (K.inverseChart (C.referenceState, 0) m) (K.height (C.referenceState, 0) m))\n    (hpotential : ∀ p, K.potential (C.referenceState, 0) m p =\n      inverseChartPotential A (K.chart (C.referenceState, 0) m)\n        (K.inverseChart (C.referenceState, 0) m) (K.height (C.referenceState, 0) m) p)\n    {p : PolarPoint} (hp : p ∈ canonicalOpen S K m) :\n    let B := K.coefficients (C.referenceState, 0) m\n    0 < B.a p ∧ B.b p = 0 ∧ B.a p = B.a (p.1, 0) ∧ B.c p = B.c (p.1, 0) ∧\n      K.potential (C.referenceState, 0) m p =\n        K.potential (C.referenceState, 0) m (p.1, 0)",
+      "header_sha256": "b4f245b370b41ab793cba4330f01453e1d30579765ffc190fbe073c8759948b4"
+    },
+    {
+      "kind": "theorem",
+      "name": "n04WholeReferenceGaugeAtlasData_actual_referencePrincipal_qualitative",
+      "line": 98,
+      "header": "theorem n04WholeReferenceGaugeAtlasData_actual_referencePrincipal_qualitative\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {L : ReturnCorrectionData S} {base newBase loss : ℕ} {ε ε' : ℝ}\n    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)\n    (hN : NonlinearPropertiesThrough03 D T S C R L base loss ε)\n    (hfield : N04bFieldRegularity D S C L base ε)\n    (e₀ : ℕ ≃ N04PieceIndex D) (e : ℕ ≃ N04WholePieceIndex D)\n    (cell : N04PositiveComponent D.a D.b (deriv D.w) → ℕ)\n    (Y H : N04PositiveComponent D.a D.b (deriv D.w) → ℝ → ℝ)\n    (τ σ : (AnnularState S × ℝ) →\n      N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → PolarPoint)\n    (Q : (AnnularState S × ℝ) →\n      N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → ℝ)\n    (N : Set ℝ) (hε' : 0 < ε')\n    (href : ∀ i, τ (C.referenceState, 0) i = id ∧\n      σ (C.referenceState, 0) i = id ∧ Q (C.referenceState, 0) i = (fun _ => 1))\n    (hgeometry : ∀ i, PositiveChartRangeGeometry (positiveReferenceCylinderChart (Y i))\n      (positiveReferenceCylinderInverse (Y i)) (fun p : PolarPoint => H i p.1)\n      (n04PositiveLeft i) (n04PositiveRight i) 0 1)\n    (hA : CanonicalGeometry D S C\n      (n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀)\n        e cell (fun i => positiveReferenceCylinderChart (Y i))\n        (fun i => positiveReferenceCylinderInverse (Y i))\n        (fun i p => H i p.1) τ σ Q N) newBase ε') :\n    let V := n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀)\n      e cell (fun i => positiveReferenceCylinderChart (Y i))\n      (fun i => positiveReferenceCylinderInverse (Y i))\n      (fun i p => H i p.1) τ σ Q N\n    ∀ m p, p ∈ canonicalOpen S V m →\n      let A := V.coefficients (C.referenceState, 0) m\n      0 < A.a p ∧ A.b p = 0 ∧ A.a p = A.a (p.1, 0) ∧ A.c p = A.c (p.1, 0) ∧\n        V.potential (C.referenceState, 0) m p =\n          V.potential (C.referenceState, 0) m (p.1, 0)",
+      "header_sha256": "3f3ca9647ab21333d12afa953c1dbb6e8fab4baae03df4724a7e22a38dfa0b95"
+    }
+  ],
+  "invariants": {
+    "public_heads_unchanged": 1,
+    "private_heads_unchanged": 1,
+    "imports_options_unchanged": true,
+    "all_remaining_bytes_identical": true,
+    "no_new_assumptions": true,
+    "same_fields_state_atlas_witness_and_sample": true,
+    "limits_unchanged": true,
+    "net_line_change": 0
+  },
+  "cached_diagnostic": {
+    "path": "/dev/shm/n04-ci172/WholeReferenceGaugeReferencePrincipal.lean.errors.txt",
+    "sha256": "cd5d40c84f6b1e44f7d0b7e83027e9abb4277b31291ecc5def4d57cd468c7af5",
+    "bytes": 1566,
+    "characters": 1538,
+    "content": "error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean:182:8: Type mismatch: After simplification, term\n  hpot\n has type\n  V.potential z₀ m q =\n    (if false = true then -1 else 1) *\n      inverseChartPotential (L.coefficients z₀) (V.chart z₀ m) (V.inverseChart z₀ m) (V.height z₀ m) q\nbut is expected to have type\n  (n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell\n          (fun i => positiveReferenceCylinderChart (Y i)) (fun i => positiveReferenceCylinderInverse (Y i))\n          (fun i p => H i p.1) τ σ Q N).potential\n      (C.referenceState, 0) m q =\n    inverseChartPotential (L.coefficients z₀)\n      ((n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell\n            (fun i => positiveReferenceCylinderChart (Y i)) (fun i => positiveReferenceCylinderInverse (Y i))\n            (fun i p => H i p.1) τ σ Q N).chart\n        (C.referenceState, 0) m)\n      ((n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell\n            (fun i => positiveReferenceCylinderChart (Y i)) (fun i => positiveReferenceCylinderInverse (Y i))\n            (fun i p => H i p.1) τ σ Q N).inverseChart\n        (C.referenceState, 0) m)\n      ((n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell\n            (fun i => positiveReferenceCylinderChart (Y i)) (fun i => positiveReferenceCylinderInverse (Y i))\n            (fun i p => H i p.1) τ σ Q N).height\n        (C.referenceState, 0) m)\n      q",
+    "download": "Read the parent-provided local extracted full error; no new CI/job/log download."
+  },
+  "mathematical_review": {
+    "full_before_and_after_sources_read": true,
+    "remaining_error": "After rewriting hneg, the Boolean condition is the proposition false=true. The old simp-only list reduced neither this proposition nor the resulting ite, leaving its factor visibly unresolved in the diagnostic.",
+    "correction": "Add Bool.false_eq_true to that existing simp-only list. It rewrites the exact condition to False; ↓reduceIte selects the else branch 1; one_mul removes the coefficient. All local V/z₀ fields and the original hf.2 operator identity remain the same.",
+    "result": "Exactly the negative-piece inverseChartPotential equality required by negative_reference_qualitative_of_radial_density; no mathematical hypothesis or conclusion changes.",
+    "api_evidence": {
+      "module": "ContinuousFlexibility.Analysis.N04bActualDomainGeometry",
+      "blob": "4ad5cbd7979d26b7e8f5733d9795df09f5d9ec9d",
+      "sha256": "853eb7d9cc44e1ac4706ea8dc83e39a7a5356d21f5bd0ecd4e864a8ac88ef256",
+      "occurrences": [
+        {
+          "line": 86,
+          "text": "      simp only [n04TypedPiecePositive, Bool.false_eq_true] at hpos",
+          "previous": "    · intro hpos"
+        },
+        {
+          "line": 88,
+          "text": "      simp only [n04TypedPiecePositive, Bool.false_eq_true] at hpos",
+          "previous": "    · intro p hp hpos"
+        }
+      ],
+      "scope": "Existing active project proof uses the same Bool false equality simplification name; no fresh whole provider graph claimed."
+    },
+    "previous_repair": "The previous explicit domain/G/projection/local-V corrections are byte-identical. Parent reports the first three diagnostic sites now passed CI172; this candidate only addresses the one remaining line182 error.",
+    "compile_claim": false
+  },
+  "verification": {
+    "unique_literal_forward_and_reverse_exact": true,
+    "complete_public_and_private_heads_fingerprinted": true,
+    "standard_unified_diff_application_exact": true,
+    "source_and_diff_server_readback_exact": true
+  },
+  "predecessor": {
+    "candidate_blob": "551a061ec61334a5af4f062a5c48d85d49307261",
+    "owner_blob": "6e773807d04bca215c218642552b6e2281fa37e1",
+    "root_peer_blob": "7c1aa62bd57027ef7438df3c1f941c458a86f798",
+    "status": "Immutable historical full peer of c7eaf; actual CI172 revealed this remaining explicit simp-set omission. Historical files are not edited."
+  },
+  "actions": {
+    "local_Lean": false,
+    "active_edits": false,
+    "index_edits": false,
+    "refs": false,
+    "tree_or_commit": false,
+    "CI_queries": false,
+    "new_Lean_archive_copy": false
+  },
+  "gate": "Root independent peer, owner binding, parent activation and CI. No compilation success is claimed."
+}

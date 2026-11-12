@@ -1,0 +1,81 @@
+{
+  "schema": "N04Coordinates-reviewed-source-repair-v1",
+  "ci_round": 173,
+  "repository": "Rogerhu12/continuous-flexibility",
+  "branch": "line/N04Coordinates",
+  "base_commit": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+  "base_tree": "944690f469cb649cafd0e1dc582b6acb4992af6c",
+  "tree": "e92d8ed54fae5a18179f13cdfaadc15b4669ed80",
+  "main_readback": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "last_complete_green": {
+    "commit": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "receipt": "40f4094476659c1b052cd462cdfb119ca6032f44"
+  },
+  "failed_predecessor": {
+    "run": 43325153408,
+    "receipt": "3a0c4b8f6b989bf00c8c699cd80bcbacc7249126",
+    "complete_diagnostics": "ba2d56fac3e0e9901915120c095c7c19a327f4a6",
+    "errors": 4,
+    "files": 3,
+    "previous_repairs_compiled": 3
+  },
+  "prior_plan": "cd4237057df74e77d9a772a7f9540d813f899e0d",
+  "selected_dependency_graph": "8d2aa82e28f0575edd9f69ac871029dc19bf6610",
+  "repairs": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasInterfaces.lean",
+      "before": "23a91459c8a857886c76d04e87e1f9d09443f634",
+      "after": "5280da9d0a351369f2a9b9d220929be0f23fccc5",
+      "before_lines": 70,
+      "after_lines": 73,
+      "owner": "6718f902a59f4fd4e0ad064ac703620a09019cc9",
+      "peer": "2044146893efb7610a8ef6d18fa814cff5283827"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean",
+      "before": "c7eaf4fe2c88fa12158ece8d2f32a86bbaad817e",
+      "after": "5eddcf61d077190611c1a84cf5b88a132b5573f0",
+      "before_lines": 184,
+      "after_lines": 184,
+      "owner": "7a0f6e3fa83c759b8aa646197ae83ac8ac5d5cb5",
+      "peer": "44bc909984a3277b4eadcb33ec6bbd6bd064f12d"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootFirstJets.lean",
+      "before": "be4a8a0a3fe29b50db53f246b56d536dbe172f49",
+      "after": "5f443d94d97da89b5e51d52ca72e0071099be0fe",
+      "before_lines": 102,
+      "after_lines": 102,
+      "owner": "da23a09afa8d22c8a015cad91bd676c2891c6077",
+      "peer": "7910891a89d787fd0ed0452f8ddd7de279e17a0d"
+    }
+  ],
+  "public_theorem_heads_unchanged": 4,
+  "private_theorem_heads_unchanged": 1,
+  "all_imports_and_dependency_edges_unchanged": true,
+  "all_witnesses_and_statements_unchanged": true,
+  "budget": {
+    "source_added_since_complete_green": 19713,
+    "source_deleted_since_complete_green": 0,
+    "source_paths": 149,
+    "full_checked_in_root_lag": 257,
+    "conservative_total": 19970,
+    "limit": 20000,
+    "margin": 30,
+    "repair_net_lines": 3
+  },
+  "actual_expected_patch": {
+    "added": 7,
+    "deleted": 4,
+    "net": 3
+  },
+  "unchanged": [
+    "all other blob paths",
+    "generated import root",
+    "workflow",
+    "toolchain",
+    "lake manifest",
+    "resource limits"
+  ],
+  "validation": "Complete sources and four full diagnostics reviewed by source owners and independent peers. Lean validation is pending CI; no task completion or axiom-clearance claim."
+}
