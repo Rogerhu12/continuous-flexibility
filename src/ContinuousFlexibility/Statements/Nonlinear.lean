@@ -589,6 +589,143 @@ def canonicalOperator (S : PhysicalSpacesData) (K : CanonicalData S)
     (fun x => K.height z m x * W (K.chart z m x))
   (if K.positive m then -1 else (1 : ℝ)) * canonicalSource S K z m f p
 
+/-! ## Primitive estimates retained by the actual coordinate construction
+
+These are fields of the geometry, independent of every physical source or
+unknown. The normalized density contains the actual cell weight; the
+coordinate derivatives refer to actual chart and inverse-chart maps.
+-/
+
+/-- The angular column of the inverse of an actual planar derivative. -/
+def canonicalInverseAngularVector (Ψ : PolarPoint → PolarPoint)
+    (x : PolarPoint) : PolarPoint :=
+  (-(fderiv ℝ Ψ x (0, 1)).1 / planeJacobian Ψ x,
+    (fderiv ℝ Ψ x (1, 0)).1 / planeJacobian Ψ x)
+
+/-- The actual physical-to-material Jacobian density. -/
+def canonicalMaterialJacobian {S : PhysicalSpacesData} (T : MaterialData)
+    (K : CanonicalData S) (z : AnnularState S × ℝ) (m : ℕ) (x : PolarPoint) : ℝ :=
+  T.ell x.1 * |planeJacobian (K.chart z m) x|
+
+def canonicalMaterialHeightRatio {S : PhysicalSpacesData} (T : MaterialData)
+    (K : CanonicalData S) (m : ℕ) (x : PolarPoint) : ℝ :=
+  T.H x.1 / T.H (T.sample (K.cell m))
+
+/-- The common half-density normalization for every material coefficient. -/
+def canonicalMaterialNormalizer {S : PhysicalSpacesData} (T : MaterialData)
+    (K : CanonicalData S) (z : AnnularState S × ℝ) (m : ℕ) (β : ℝ)
+    (x : PolarPoint) : ℝ :=
+  Real.sqrt (canonicalMaterialJacobian T K z m x) *
+    canonicalMaterialHeightRatio T K m x ^ β
+
+/-- The reference physical point having the same canonical coordinates. -/
+def canonicalReferencePoint {S : PhysicalSpacesData}
+    (C : NonlinearGeometryData S) (K : CanonicalData S)
+    (z : AnnularState S × ℝ) (m : ℕ) (x : PolarPoint) : PolarPoint :=
+  K.inverseChart (C.referenceState, 0) m (K.chart z m x)
+
+/-- The actual transition from a reference physical piece to the current one. -/
+def canonicalCurrentPoint {S : PhysicalSpacesData}
+    (C : NonlinearGeometryData S) (K : CanonicalData S)
+    (z : AnnularState S × ℝ) (m : ℕ) (y : PolarPoint) : PolarPoint :=
+  K.inverseChart z m (K.chart (C.referenceState, 0) m y)
+
+def canonicalReferenceHeightRatio {S : PhysicalSpacesData}
+    (C : NonlinearGeometryData S) (K : CanonicalData S)
+    (z : AnnularState S × ℝ) (m : ℕ) (x : PolarPoint) : ℝ :=
+  K.height (C.referenceState, 0) m (canonicalReferencePoint C K z m x) /
+    K.height z m x
+
+def canonicalReferenceSourceFactor {S : PhysicalSpacesData}
+    (C : NonlinearGeometryData S) (K : CanonicalData S)
+    (z : AnnularState S × ℝ) (m : ℕ) (x : PolarPoint) : ℝ :=
+  K.height (C.referenceState, 0) m (canonicalReferencePoint C K z m x) /
+    |planeJacobian (K.chart (C.referenceState, 0) m)
+      (canonicalReferencePoint C K z m x)|
+
+/-- Current inverse-angular direction, then transported reference radial
+and angular directions. These are genuine derivatives of the stored maps. -/
+def canonicalPrimitiveDirection {S : PhysicalSpacesData}
+    (C : NonlinearGeometryData S) (K : CanonicalData S)
+    (z : AnnularState S × ℝ) (m : ℕ) (i : Fin 3) (x : PolarPoint) : PolarPoint :=
+  if i = 0 then canonicalInverseAngularVector (K.chart z m) x else
+    fderiv ℝ (canonicalCurrentPoint C K z m)
+      (canonicalReferencePoint C K z m x) (if i = 1 then (1, 0) else (0, 1))
+
+/-- Nine direction fields, three normalized initial factors, and three
+reference differential multipliers. No recursively expanded coefficient
+or variable physical function is part of this index type. -/
+abbrev CanonicalPrimitiveIndex := (Fin 3 × Fin 3) ⊕ (Fin 3 ⊕ Fin 3)
+
+def canonicalPrimitiveField (D : ReferenceData) (T : MaterialData)
+    {S : PhysicalSpacesData} (C : NonlinearGeometryData S) (K : CanonicalData S)
+    (z : AnnularState S × ℝ) (m : ℕ) : CanonicalPrimitiveIndex → PolarPoint → ℝ
+  | Sum.inl (i, j), x =>
+      let Y := canonicalPrimitiveDirection C K z m i
+      if j = 0 then (Y x).1 / T.ell x.1 else if j = 1 then (Y x).2 else
+        -((Y x).1 * radialPartial (canonicalMaterialJacobian T K z m) x +
+          (Y x).2 * angularPartial (canonicalMaterialJacobian T K z m) x) /
+            (2 * canonicalMaterialJacobian T K z m x)
+  | Sum.inr (Sum.inl i), x =>
+      canonicalMaterialNormalizer T K z m (3 / 4 : ℝ) x *
+        (if i = 0 then K.height z m x / |planeJacobian (K.chart z m) x|
+         else if i = 1 then (K.height z m x)⁻¹
+         else canonicalReferenceHeightRatio C K z m x)
+  | Sum.inr (Sum.inr i), x =>
+      let r := (canonicalReferencePoint C K z m x).1
+      canonicalReferenceSourceFactor C K z m x *
+        (if i = 0 then deriv D.w r else if i = 1 then D.w r else deriv D.w r / r)
+
+/-- Primitive geometric information retained on the same neighborhood as
+the charts. Finite polynomial state dependence is sufficient because N07b
+uses one fixed angular order and may raise the low neighborhood order.
+
+The transition maps are independent of the physical field. Their C3
+matching is finite: arbitrary normal jets of adjacent charts are not
+required to agree. All higher estimates are on the actual open pieces.
+Neither canonical-space membership nor an inverse bound is a field here. -/
+structure CanonicalPrimitiveGeometry (D : ReferenceData) (T : MaterialData)
+    (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (L : ReturnCorrectionData S) (K : CanonicalData S)
+    (base : ℕ) (ε : ℝ) : Prop where
+  materialJets : ∀ N : ℕ, ∃ r d : ℕ, ∃ C₀ A : ℝ, 0 < C₀ ∧ 0 ≤ A ∧
+    ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
+      ∀ (m : ℕ) (y : PolarPoint), (T.radius y.1, y.2) ∈ physicalPieceOpen S K z m →
+        ∀ i : CanonicalPrimitiveIndex, ∀ k : ℕ, k ≤ N →
+          ‖iteratedFDeriv ℝ k
+            (fun v : PolarPoint => canonicalPrimitiveField D T C K z m i
+              (T.radius v.1, v.2)) y‖ ≤
+            C₀ * T.E0 (T.radius y.1) ^ A *
+              (1 + stateGrading S r (z.1 - C.referenceState) + |z.2|) ^ d
+  transport : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
+    ∃ τ : PolarPoint → PolarPoint, ∃ q : PolarPoint → ℝ,
+      ContDiffOn ℝ 3 τ (annularOpen D) ∧ ContDiffOn ℝ 3 q (annularOpen D) ∧
+      MapsTo τ (annularOpen D) (annularOpen D) ∧
+      (∀ p, τ (p + (0, Real.pi)) = τ p + (0, Real.pi)) ∧
+      Function.Periodic q (0, Real.pi) ∧
+      (∀ p, τ (p.1, -p.2) = ((τ p).1, -(τ p).2)) ∧
+      (∀ r θ, q (r, -θ) = q (r, θ)) ∧
+      (∀ m, ∀ p ∈ referencePhysicalPieceOpen S K m,
+        τ p = canonicalCurrentPoint C K z m p ∧
+          q p = K.height (C.referenceState, 0) m p / K.height z m (τ p)) ∧
+      ∃ C₀ A : ℝ, 0 < C₀ ∧ 0 ≤ A ∧
+        (∀ p ∈ annularOpen D, ∀ n : ℕ, n ≤ 2 →
+          ‖iteratedFDeriv ℝ n q p‖ ≤ C₀ * T.M p.1 ^ A) ∧
+        (∀ p ∈ annularOpen D, ∀ n : ℕ, 1 ≤ n → n ≤ 2 →
+          ‖iteratedFDeriv ℝ n τ p‖ ≤ C₀ * T.M p.1 ^ A) ∧
+        (∀ p ∈ annularOpen D,
+          T.H (τ p).1 / T.H p.1 ≤ C₀ * T.E0 p.1 ^ A) ∧
+        (∀ p ∈ annularOpen D,
+          T.M (τ p).1 / T.M p.1 ≤ C₀ * T.E0 p.1 ^ A)
+  physicalCoefficients : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
+    ContDiffOn ℝ ∞ (L.coefficients z).a (annularOpen D) ∧
+    ContDiffOn ℝ ∞ (L.coefficients z).b (annularOpen D) ∧
+    ContDiffOn ℝ ∞ (L.coefficients z).c (annularOpen D) ∧
+    (∀ r ∈ radialCore D,
+      Function.Periodic (fun θ => (L.coefficients z).b (r, θ)) Real.pi) ∧
+    (∀ r ∈ radialCore D,
+      Function.Periodic (fun θ => (L.coefficients z).c (r, θ)) Real.pi)
+
 /-- A stored inverse agrees on a full neighborhood with a genuine local inverse.
 This fixes the boundary jets used by the canonical transmission equation. -/
 def CanonicalBoundaryInverseGerm
@@ -767,7 +904,8 @@ def NonlinearPropertiesThrough04 (D : ReferenceData) (T : MaterialData)
     (base loss : ℕ) (ε : ℝ) : Prop :=
   NonlinearPropertiesThrough03 D T S C R L base loss ε ∧
     RootCompositionTarget ∧ CubicDivisionTarget ∧ PhysicalTransmissionTarget ∧
-      N04Properties D T S C L K base loss ε
+      N04Properties D T S C L K base loss ε ∧
+        CanonicalPrimitiveGeometry D T S C L K base ε
 
 /-- N04 includes the independently precise root-composition and cubic-division
 targets and actual coordinate/source formulas; §7 lines 462--715. -/
@@ -921,19 +1059,22 @@ def nuColumnField (D : ReferenceData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (z : AnnularState S × ℝ) (p : PolarPoint) : ℝ :=
   deriv (fun ν => scalarResidualField D S C ((z.1.1, (ν, z.1.2.2)), z.2) p) z.1.2.1
 
+/-- The physical weak equation uses the full angular period of `RadialTest`,
+as does `ReferenceGraph`. The canonical source coordinates still use one
+half-period for the half-periodic fields themselves. -/
 def PerturbedCanonicalRelation (D : ReferenceData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (K : CanonicalData S) (L : ReturnCorrectionData S)
     (z : AnnularState S × ℝ) (U : CanonicalUnknown S K) (F : CanonicalSequence S K) : Prop :=
   ∃ η f : PolarPoint → ℝ,
     HasCanonicalRepresentation D S C K z U F η f ∧ referenceRow D η = 0 ∧
     ∀ φ, RadialTest D φ →
-      (∫ r in D.a..D.b, angularMean (fun θ =>
+      (∫ r in D.a..D.b, radialAngularMean (fun θ =>
         η (r, θ) * divergenceOperator (L.coefficients z) φ (r, θ))) +
-        U.2.2.1 * (∫ r in D.a..D.b, angularMean (fun θ =>
+        U.2.2.1 * (∫ r in D.a..D.b, radialAngularMean (fun θ =>
           nuColumnField D S C z (r, θ) * φ (r, θ))) +
-        U.2.2.2 * (∫ r in D.a..D.b, angularMean (fun θ =>
+        U.2.2.2 * (∫ r in D.a..D.b, radialAngularMean (fun θ =>
           (S.height (3 / 4 : ℝ)).decode S.psi (r, θ) * φ (r, θ))) =
-      ∫ r in D.a..D.b, angularMean (fun θ => f (r, θ) * φ (r, θ))
+      ∫ r in D.a..D.b, radialAngularMean (fun θ => f (r, θ) * φ (r, θ))
 
 structure RelativeInverseData (S : PhysicalSpacesData) (K : CanonicalData S)
     (V : VolumeModelData S K) (b : ℕ) (B : CanonicalDomainData S K V b) where

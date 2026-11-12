@@ -15,6 +15,49 @@ namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements
 
+/-- The upstream arbitrary-target inverse translation interface follows
+from the two actual inverse identities. -/
+theorem inverseChart_periodic_of_chart_periodic_on
+    {Ω U : Set PolarPoint} {P : ℝ} {F G : PolarPoint → PolarPoint}
+    (hG : MapsTo G U Ω)
+    (hshift : ∀ p ∈ Ω, p + (0, P) ∈ Ω)
+    (hGF : ∀ p ∈ Ω, G (F p) = p)
+    (hFG : ∀ p ∈ U, F (G p) = p)
+    (hperiod : ∀ p ∈ Ω, F (p + (0, P)) = F p + (0, P))
+    {p : PolarPoint} (hp : p ∈ U) :
+    G (p + (0, P)) = G p + (0, P) := by
+  simpa only [hFG p hp] using
+    (congrArg G (hperiod (G p) (hG hp))).symm.trans (hGF _ (hshift _ (hG hp)))
+
+/-- The upstream open-interval interface specializes the existing
+nonzero-period strip theorem. -/
+theorem chart_angle_mem_openInterval_iff
+    {a b P : ℝ} {F : PolarPoint → PolarPoint} (hP : 0 < P)
+    (hinj : InjOn F (Ioo a b ×ˢ (univ : Set ℝ)))
+    (hcont : ContinuousOn F (Ioo a b ×ˢ (univ : Set ℝ)))
+    (hperiod : ∀ p ∈ Ioo a b ×ˢ (univ : Set ℝ), F (p + (0, P)) = F p + (0, P))
+    (hreflect : ∀ p ∈ Ioo a b ×ˢ (univ : Set ℝ),
+      F (p.1, -p.2) = ((F p).1, -(F p).2))
+    {p : PolarPoint} (hp : p ∈ Ioo a b ×ˢ (univ : Set ℝ)) :
+    (F p).2 ∈ Ioo 0 P ↔ p.2 ∈ Ioo 0 P := by
+  exact chart_angle_mem_Ioo_iff hP.ne' hinj hcont hperiod hreflect hp
+
+/-- The upstream arbitrary-image strip interface uses the same angular
+interval equivalence and the actual image membership. -/
+theorem chart_mapsTo_openAngularStrip_target
+    {a b P : ℝ} {Ω : Set PolarPoint} {F : PolarPoint → PolarPoint} (hP : 0 < P)
+    (hF : MapsTo F (Ioo a b ×ˢ (univ : Set ℝ)) Ω)
+    (hinj : InjOn F (Ioo a b ×ˢ (univ : Set ℝ)))
+    (hcont : ContinuousOn F (Ioo a b ×ˢ (univ : Set ℝ)))
+    (hperiod : ∀ p ∈ Ioo a b ×ˢ (univ : Set ℝ), F (p + (0, P)) = F p + (0, P))
+    (hreflect : ∀ p ∈ Ioo a b ×ˢ (univ : Set ℝ),
+      F (p.1, -p.2) = ((F p).1, -(F p).2)) :
+    MapsTo F (Ioo a b ×ˢ Ioo 0 P) (Ω ∩ (univ ×ˢ Ioo 0 P)) := by
+  intro p hp
+  have hpfull : p ∈ Ioo a b ×ˢ (univ : Set ℝ) := ⟨hp.1, mem_univ _⟩
+  exact ⟨hF hpfull, mem_univ _,
+    (chart_angle_mem_Ioo_iff hP.ne' hinj hcont hperiod hreflect hpfull).mpr hp.2⟩
+
 /-- An actual canonical chart is injective on its whole current piece. -/
 theorem canonicalChart_injOn
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
