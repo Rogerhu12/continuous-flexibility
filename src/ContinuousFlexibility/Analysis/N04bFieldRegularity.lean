@@ -39,11 +39,32 @@ structure N04bFieldRegularity (D : ReferenceData) (S : PhysicalSpacesData)
   positive_a :
     ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
       ∀ p ∈ annularOpen D, 0 < (L.coefficients z).a p
+  /-- The explicitly constructed correction is the actual radial optical flow
+  at the reference state. This is a raw construction property, proved before
+  introducing any canonical chart. -/
+  reference_flow :
+    ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,
+      L.minusFlow (C.referenceState, 0) m r θ =
+        θ - ∫ s in C.left m..r, Real.sqrt (-deriv D.w s / (s * D.w s))
   negative_discriminant :
     ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
       ∀ m, ∀ p ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ),
         0 < (L.coefficients z).b p ^ 2 -
           (L.coefficients z).a p * (L.coefficients z).c p
+
+/-- The raw field properties imply the actual spatial correction contract. -/
+theorem N04bFieldRegularity.toReturnCorrectionSpatialProperties
+    {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
+    {L : ReturnCorrectionData S} {base : ℕ} {ε : ℝ}
+    (hfield : N04bFieldRegularity D S C L base ε) :
+    ReturnCorrectionSpatialProperties D S C L base ε := by
+  intro z hz hs
+  have hregular := hfield.smooth_coefficients z hz hs
+  refine ⟨hregular.2.1, hregular.2.2, ?_⟩
+  rintro ⟨r, θ⟩ hp
+  have hperiod := hfield.periodic_coefficients z hz hs r hp.1
+  simpa only [Prod.mk_add_mk, add_zero] using
+    And.intro (hperiod.2.1 θ) (hperiod.2.2 θ)
 
 /-- A genuine cumulative corrected field with the additional raw regularity
 needed to construct its characteristic atlas. All witnesses may be chosen

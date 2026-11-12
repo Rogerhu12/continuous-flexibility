@@ -214,9 +214,10 @@ theorem N01Properties.n04b_sqrt_singletonKappa_differentiableAt
     DifferentiableAt ℝ
       (fun s : ℝ => Real.sqrt
         (-deriv D.w r / (r * D.w r) + (-deriv (C.control m) r / r) * s)) t := by
-  obtain ⟨parameterLoss, horder⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 0
-  obtain ⟨B, hB, htower⟩ := horder 1
-  obtain ⟨J, hJ⟩ := htower m 1 0 (r, 0) (by norm_num) hr
+  -- `obtain` on the parameter-loss existential is very slow; select the witnesses.
+  let orderData := hN.2.2.2.2.2.2.2.2.2.2.2.2 0
+  let htower := (orderData.choose_spec 1).choose_spec.2 m 1 0 (r, 0) (by norm_num) hr
+  let J := htower.choose
   let v : AnnularState S × ℝ :=
     (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, 0)
   have hmem : (C.referenceState, (0 : ℝ)) + t • v ∈

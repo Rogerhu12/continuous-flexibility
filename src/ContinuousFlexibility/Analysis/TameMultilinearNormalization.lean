@@ -57,8 +57,8 @@ theorem multilinearTameSize_le_affine (low high : Seminorm ℝ E) (k : ℕ)
 
 /-- Unit-ball normalization, with exactly the original constant.
 No norm or separation assumption on the low seminorm is needed. -/
-theorem multilinear_bound_of_unitBall {k : ℕ}
-    (A : E [×k]→L[ℝ] F) (q : Seminorm ℝ F) (low high : Seminorm ℝ E)
+theorem multilinearMap_bound_of_unitBall {k : ℕ}
+    (A : MultilinearMap ℝ (fun _ : Fin k => E) F) (q : Seminorm ℝ F) (low high : Seminorm ℝ E)
     {C a : ℝ} (hC : 0 ≤ C)
     (hlocal : ∀ v : Fin k → E, (∀ i, low (v i) < 1) →
       q (A v) ≤ C * (a + ∑ i, high (v i))) :
@@ -128,6 +128,15 @@ theorem multilinear_bound_of_unitBall {k : ℕ}
   filter_upwards [self_mem_nhdsWithin] with δ hpos
   exact hδ δ hpos
 
+/-- The continuous version is the same algebraic normalization argument. -/
+theorem multilinear_bound_of_unitBall {k : ℕ}
+    (A : E [×k]→L[ℝ] F) (q : Seminorm ℝ F) (low high : Seminorm ℝ E)
+    {C a : ℝ} (hC : 0 ≤ C)
+    (hlocal : ∀ v : Fin k → E, (∀ i, low (v i) < 1) →
+      q (A v) ≤ C * (a + ∑ i, high (v i))) :
+    ∀ v : Fin k → E, q (A v) ≤ C * multilinearTameSize low high k a v :=
+  multilinearMap_bound_of_unitBall A.toMultilinearMap q low high hC hlocal
+
 /-- The constant is uniform in the affine term and in the multilinear map. -/
 def multilinearNormalizationConstant (k : ℕ) (ε C : ℝ) : ℝ :=
   C / (min (ε / 2) 1) ^ k
@@ -141,8 +150,8 @@ variable [ContinuousConstSMul ℝ F]
 
 /-- Local affine growth on any positive low-seminorm ball implies the global
 one-high-factor bound. The displayed constant is independent of `a`, `A`, and `v`. -/
-theorem multilinear_oneHighFactor_of_local {k : ℕ}
-    (A : E [×k]→L[ℝ] F) (q : Seminorm ℝ F) (low high : Seminorm ℝ E)
+theorem multilinearMap_oneHighFactor_of_local {k : ℕ}
+    (A : MultilinearMap ℝ (fun _ : Fin k => E) F) (q : Seminorm ℝ F) (low high : Seminorm ℝ E)
     {ε C a : ℝ} (hε : 0 < ε) (hC : 0 ≤ C)
     (hlocal : ∀ v : Fin k → E, (∀ i, low (v i) < ε) →
       q (A v) ≤ C * (a + ∑ i, high (v i))) :
@@ -152,7 +161,7 @@ theorem multilinear_oneHighFactor_of_local {k : ℕ}
   have hα : 0 < α := lt_min (half_pos hε) zero_lt_one
   have hα1 : α ≤ 1 := min_le_right _ _
   have hαε : α < ε := (min_le_left _ _).trans_lt (half_lt_self hε)
-  let A' : E [×k]→L[ℝ] F := (α ^ k) • A
+  let A' : MultilinearMap ℝ (fun _ : Fin k => E) F := (α ^ k) • A
   have hscale (v : Fin k → E) : A' v = A (fun i => α • v i) := by
     rw [A.map_smul_univ]
     simp only [Finset.prod_const, Finset.card_univ, Fintype.card_fin]
@@ -169,7 +178,7 @@ theorem multilinear_oneHighFactor_of_local {k : ℕ}
     rw [hscale]
     exact (hlocal _ hsmall).trans (mul_le_mul_of_nonneg_left
       (add_le_add (le_refl a) (Finset.sum_le_sum (fun i _ => hh i))) hC)
-  have hglobal := multilinear_bound_of_unitBall A' q low high hC hunit
+  have hglobal := multilinearMap_bound_of_unitBall A' q low high hC hunit
   intro v
   have hpow : 0 < α ^ k := pow_pos hα _
   have hq : q (A' v) = α ^ k * q (A v) := by
@@ -181,5 +190,15 @@ theorem multilinear_oneHighFactor_of_local {k : ℕ}
   rw [div_mul_eq_mul_div]
   apply (le_div_iff₀ hpow).mpr
   simpa only [mul_comm] using h
+
+/-- Continuous multilinear maps inherit the algebraic local normalization. -/
+theorem multilinear_oneHighFactor_of_local {k : ℕ}
+    (A : E [×k]→L[ℝ] F) (q : Seminorm ℝ F) (low high : Seminorm ℝ E)
+    {ε C a : ℝ} (hε : 0 < ε) (hC : 0 ≤ C)
+    (hlocal : ∀ v : Fin k → E, (∀ i, low (v i) < ε) →
+      q (A v) ≤ C * (a + ∑ i, high (v i))) :
+    ∀ v : Fin k → E, q (A v) ≤
+      multilinearNormalizationConstant k ε C * multilinearTameSize low high k a v :=
+  multilinearMap_oneHighFactor_of_local A.toMultilinearMap q low high hε hC hlocal
 
 end ContinuousFlexibility.Analysis

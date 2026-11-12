@@ -1,6 +1,5 @@
 import ContinuousFlexibility.Analysis.SolveStateSpaces
 import ContinuousFlexibility.Analysis.MaterialSampleCofinite
-import ContinuousFlexibility.Analysis.N01cStateSeminorms
 import ContinuousFlexibility.Analysis.N01cBoundsRestriction
 
 /-!
@@ -66,8 +65,6 @@ theorem N01Properties.restrict_neighborhood
     (hN : N01Properties D T S C base loss ε) (hT : IsMaterialData D T)
     (hb : base ≤ base') (hε' : 0 < ε') (hε : ε' ≤ ε) :
     N01Properties D T S C base' loss ε' := by
-  exact ContinuousFlexibility.Blueprint.n01Properties_mono
-    (base := base) (base' := base') (loss := loss) (loss' := loss)
-    (ε := ε) (ε' := ε') hT hN hb le_rfl hε hε'
+  exact ContinuousFlexibility.Blueprint.n01Properties_mono hT hN hb le_rfl hε hε'
 
 end ContinuousFlexibility.Statements

@@ -164,8 +164,7 @@ theorem N01Properties.returnCorrectionInitialMap_and_residual_small
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
-    ∃ parameterLoss : ℕ, ∃ B : ℝ, 0 < B ∧
-      ∀ base' : ℕ, base ≤ base' → 1 + loss + parameterLoss ≤ base' →
+    ∃ d₁ : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → 1 + loss + d₁ ≤ base' →
       ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →
       ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →
       ∀ m θ,
@@ -174,8 +173,8 @@ theorem N01Properties.returnCorrectionInitialMap_and_residual_small
       let L := (2 * circleSobolevConstant * η) * T.H (T.sample m) ^ (3 / 4 : ℝ)
       |returnCorrectionInitialMap S C z m θ - θ| ≤ 2 * (F + L) ∧
         |returnResidualField S C z m θ| ≤ F + L := by
-  obtain ⟨parameterLoss, B, hB, hb⟩ := hN.minusFlow_near_reference_weighted hS hT
-  refine ⟨parameterLoss, B, hB, fun base' hbase hhigh η hηε hη₁ z hz hsector m θ => ?_⟩
+  obtain ⟨d₁, B, hB, hb⟩ := hN.minusFlow_near_reference_weighted hS hT
+  refine ⟨d₁, B, hB, fun base' hbase hhigh η hηε hη₁ z hz hsector m θ => ?_⟩
   have hzold := stateNeighborhood_mono S C hbase hηε hz
   have hC : controlGeometryConditions D S C := hN.2.2.2.1
   have hr : C.right m ∈ Icc (C.left m) (C.right m) := ⟨(hC.1 m).2.1.le, le_rfl⟩

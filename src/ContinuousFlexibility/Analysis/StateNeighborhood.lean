@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Blueprint.CanonicalParts
+import ContinuousFlexibility.Statements.Nonlinear
 import ContinuousFlexibility.Analysis.TameLocalCalculus
 import ContinuousFlexibility.Analysis.TameTransfer
 
@@ -20,7 +20,7 @@ namespace ContinuousFlexibility.Analysis
 
 open Set
 open scoped Topology BigOperators
-open ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint
+open ContinuousFlexibility.Statements
 
 set_option backward.isDefEq.respectTransparency false
 

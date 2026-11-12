@@ -60,36 +60,11 @@ theorem control_first_second_deriv_zero_off_interval
     {χ : ℝ → ℝ} {l h r : ℝ} (hχ : ContDiff ℝ ∞ χ)
     (hsupp : Function.support χ ⊆ Ioo l h) (hr : r ∉ Ioo l h) :
     deriv χ r = 0 ∧ deriv (deriv χ) r = 0 := by
-  have hzero (n : ℕ) : iteratedDeriv n χ r = 0 := by
-    have hc : IsClosed {x : ℝ | iteratedDeriv n χ x = 0} :=
-      isClosed_eq (hχ.continuous_iteratedDeriv n (by simp)) continuous_const
-    by_cases hl : r ≤ l
-    · have hz : Iio l ⊆ {x : ℝ | iteratedDeriv n χ x = 0} := by
-        intro x hx
-        have heq : χ =ᶠ[𝓝 x] (0 : ℝ → ℝ) := by
-          filter_upwards [Iio_mem_nhds hx] with y hy
-          change χ y = 0
-          by_contra hne
-          exact (not_lt_of_ge (hsupp hne).1.le) hy
-        change iteratedDeriv n χ x = 0
-        simpa only [iteratedDeriv_const_zero] using heq.iteratedDeriv_eq n
-      apply closure_minimal hz hc
-      rwa [closure_Iio]
-    · have hh : h ≤ r := le_of_not_gt fun hb => hr ⟨lt_of_not_ge hl, hb⟩
-      have hz : Ioi h ⊆ {x : ℝ | iteratedDeriv n χ x = 0} := by
-        intro x hx
-        have heq : χ =ᶠ[𝓝 x] (0 : ℝ → ℝ) := by
-          filter_upwards [Ioi_mem_nhds hx] with y hy
-          change χ y = 0
-          by_contra hne
-          exact (not_lt_of_ge (hsupp hne).2.le) hy
-        change iteratedDeriv n χ x = 0
-        simpa only [iteratedDeriv_const_zero] using heq.iteratedDeriv_eq n
-      apply closure_minimal hz hc
-      rwa [closure_Ioi]
   constructor
-  · simpa only [iteratedDeriv_one] using hzero 1
-  · simpa only [iteratedDeriv_succ, iteratedDeriv_one, iteratedDeriv_zero] using hzero 2
+  · simpa only [iteratedDeriv_one] using
+      iteratedDeriv_zero_off_open_interval hχ hsupp 1 hr
+  · simpa only [iteratedDeriv_succ, iteratedDeriv_one, iteratedDeriv_zero] using
+      iteratedDeriv_zero_off_open_interval hχ hsupp 2 hr
 
 def opticalLogRatio (w χ : ℝ → ℝ) (r : ℝ) : ℝ :=
   deriv χ r * w r / deriv w r

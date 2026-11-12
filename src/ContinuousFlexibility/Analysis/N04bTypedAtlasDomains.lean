@@ -99,13 +99,10 @@ the radial endpoint fields merely record their optical-cut intervals. -/
 theorem n04bTypedAtlasData_referenceDomain
     (hD : RadialProfileGeometry D) (hC : controlGeometryConditions D S C)
     (href : referenceStateConditions D S C)
-    {T : MaterialData} {R : ReturnEquationData S} {base loss : ℕ} {ε : ℝ}
-    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
-    (hN : NonlinearPropertiesThrough03 D T S C R L base loss ε)
-    (hfield : N04bFieldRegularity D S C L base ε) (m : ℕ) :
+    {base : ℕ} {ε : ℝ} (hfield : N04bFieldRegularity D S C L base ε) (m : ℕ) :
     let K := n04bTypedAtlasData D S C L (n04bReferenceTravelCut hD hC) e F h J
     physicalPieceOpen S K (C.referenceState, 0) m = referencePhysicalPieceOpen S K m :=
-  n04b_reference_typed_domain hD hC href hT hS hN hfield (e m)
+  n04b_reference_typed_domain hD hC href hfield (e m)
 
 theorem n04bTypedAtlasData_domains
     {T : MaterialData} {R : ReturnEquationData S} {base loss : ℕ} {ε : ℝ}
@@ -128,7 +125,7 @@ theorem n04bTypedAtlasData_domains
   refine ⟨hopen, hne, ha, hp, hr, ?_, hpos, hneg⟩
   intro hpositive
   exact (hfixed hpositive).trans
-    (n04b_reference_typed_domain hD hC h03.1.1.2.2.1 hT hS h03 hfield (e m))
+    (n04b_reference_typed_domain hD hC h03.1.1.2.2.1 hfield (e m))
 
 theorem n04bTypedAtlasData_partition
     {T : MaterialData} {R : ReturnEquationData S} {base loss : ℕ} {ε : ℝ}

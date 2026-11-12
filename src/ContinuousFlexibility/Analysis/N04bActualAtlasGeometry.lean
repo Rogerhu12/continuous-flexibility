@@ -60,7 +60,7 @@ theorem n04b_actualTypedAtlas_partA
   · exact n04bTypedAtlasData_referencePositive e F h J hD hC cut hcut
   · exact n04bTypedAtlasData_referenceNegative e F h J hD hC cut hcut
   · exact n04bTypedAtlasData_referencePartition e F h J hD hC cut hcut
-  · exact n04bTypedAtlasData_referenceDomain e F h J hD hC hN.1.1.2.2.1 hT hS hN hfield
+  · exact n04bTypedAtlasData_referenceDomain e F h J hD hC hN.1.1.2.2.1 hfield
   · intro z hz hs m
     exact n04bTypedAtlasData_domains e F h J hT hS hN hfield hD hC hz hs m
   · intro z hz hs

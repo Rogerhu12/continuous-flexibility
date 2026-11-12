@@ -1,5 +1,4 @@
 import ContinuousFlexibility.Analysis.N01ControlCoefficientVariation
-import ContinuousFlexibility.Analysis.N01JetBounds
 import ContinuousFlexibility.Analysis.OpticalControlFullCurvature
 import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 import Mathlib.MeasureTheory.Integral.DominatedConvergence
@@ -30,12 +29,11 @@ private theorem drop_zero_power_factor {a b c : ℝ} (h : c ^ (0 : ℕ) * a ≤ 
 
 private theorem oneHigh_at_zero_offset
     {E : Type*} [AddCommGroup E] [Module ℝ E]
-    (p : ℕ → Seminorm ℝ E) (base loss parameterLoss : ℕ)
-    (x : E) {k : ℕ} (v : Fin k → E) :
-    oneHighVariationWeight p base (0 + loss + parameterLoss) (x - x) v =
-      oneHighVariationWeight p base (loss + parameterLoss) 0 v :=
+    (p : ℕ → Seminorm ℝ E) (base loss d : ℕ) (x : E) {k : ℕ} (v : Fin k → E) :
+    oneHighVariationWeight p base (0 + loss + d) (x - x) v =
+      oneHighVariationWeight p base (loss + d) 0 v :=
   congrArg₂ (fun n y => oneHighVariationWeight p base n y v)
-    (congrArg (fun n : ℕ => n + parameterLoss) (Nat.zero_add loss)) (sub_self x)
+    (congrArg (fun n : ℕ => n + d) (Nat.zero_add loss)) (sub_self x)
 
 theorem abs_second_deriv_le_of_smoothDirections_germ
     {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
@@ -75,21 +73,17 @@ uses the interior flow tower that appears verbatim in N01. -/
 theorem N01Properties.controlTravelPartial_second_bound
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
-    ∃ parameterLoss : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m r, r ∈ Ioo (C.left m) (C.right m) →
+    ∃ d₂ : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m r, r ∈ Ioo (C.left m) (C.right m) →
       |deriv (deriv (fun t => opticalTravel
         (opticalLogPerturbation D.w (C.control m) t) (C.left m) r)) 0| ≤
       B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B *
         oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-          base (loss + parameterLoss) 0 (fun _ : Fin 2 =>
+          base (loss + d₂) 0 (fun _ : Fin 2 =>
             (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) := by
-  have hflow : Analysis.N01FlowJetBounds T S C base loss ε :=
-    Analysis.n01FlowJetBounds_of_properties hN
-  let parameterLoss : ℕ := (hflow 2).choose
-  have hparameter : ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
-      Analysis.N01FlowJetBoundAtOrder T S C base loss parameterLoss ε 2 s B :=
-    (hflow 2).choose_spec
-  let hdata := hparameter 0
+  let data₂ := hN.2.2.2.2.2.2.2.2.2.2.2.2 2
+  let d₂ : ℕ := data₂.choose
+  let hdata := data₂.choose_spec 0
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ (m : ℕ) (r : ℝ), r ∈ Ioo (C.left m) (C.right m) →
@@ -98,7 +92,7 @@ theorem N01Properties.controlTravelPartial_second_bound
       B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B *
         oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-          base (loss + parameterLoss) 0 (fun _ : Fin 2 =>
+          base (loss + d₂) 0 (fun _ : Fin 2 =>
             (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) := by
     intro m r hr
     let v : AnnularState S × ℝ :=
@@ -133,8 +127,8 @@ theorem N01Properties.controlTravelPartial_second_bound
       (fun W : ℝ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B * W)
       (oneHigh_at_zero_offset (pairGrading (stateGrading S) realGrading)
-        base loss parameterLoss (C.referenceState, (0 : ℝ)) (fun _ : Fin 2 => v)))
-  exact ⟨parameterLoss, B, hB, hpoint⟩
+        base loss d₂ (C.referenceState, (0 : ℝ)) (fun _ : Fin 2 => v)))
+  exact ⟨d₂, B, hB, hpoint⟩
 
 /-- The same fixed ratio on the full closed component gives the actual
 second parameter derivative for every partial interval. -/
@@ -205,16 +199,17 @@ The passage to the endpoint is a limit of the actual curvature primitive. -/
 theorem N01Properties.controlTravel_second_bound
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
-    ∃ parameterLoss : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m,
+    ∃ d₂ : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m,
       |deriv (deriv (fun t => opticalTravel
         (opticalLogPerturbation D.w (C.control m) t) (C.left m) (C.right m))) 0| ≤
       B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B *
         oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-          base (loss + parameterLoss) 0 (fun _ : Fin 2 =>
+          base (loss + d₂) 0 (fun _ : Fin 2 =>
             (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) := by
-  let parameterLoss : ℕ := (hN.controlTravelPartial_second_bound hS hT).choose
-  have hdata := (hN.controlTravelPartial_second_bound hS hT).choose_spec
+  let data := hN.controlTravelPartial_second_bound hS hT
+  let d₂ : ℕ := data.choose
+  let hdata := data.choose_spec
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ m : ℕ,
@@ -223,13 +218,13 @@ theorem N01Properties.controlTravel_second_bound
       B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B *
         oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-          base (loss + parameterLoss) 0 (fun _ : Fin 2 =>
+          base (loss + d₂) 0 (fun _ : Fin 2 =>
             (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) := by
     intro m
     let K : ℝ := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
       T.E0 (T.sample (C.cell m)) ^ B *
       oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-        base (loss + parameterLoss) 0 (fun _ : Fin 2 =>
+        base (loss + d₂) 0 (fun _ : Fin 2 =>
           (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ)))
     change |deriv (deriv (fun t => opticalTravel
       (opticalLogPerturbation D.w (C.control m) t) (C.left m) (C.right m))) 0| ≤ K
@@ -251,6 +246,6 @@ theorem N01Properties.controlTravel_second_bound
       simpa only [G, abs_neg] using congrArg abs (hN.controlTravel_hasDerivAt_second m).deriv
     exact hend.trans_le (le_at_right_of_continuousOn_closed_interval
       (f := fun r => |G r|) (a := C.left m) (b := C.right m) (K := K) hlh hc hinner)
-  exact ⟨parameterLoss, B, hB, hpoint⟩
+  exact ⟨d₂, B, hB, hpoint⟩
 
 end ContinuousFlexibility.Statements
