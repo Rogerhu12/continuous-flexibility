@@ -340,8 +340,7 @@ theorem n05_cut_reference_inward_slice_pos
       (g := fun p : ℝ × ℝ => (K.chart (C.referenceState, 0) i p).1)
       (root + σ * x) hc.1.fst (contDiffAt_id.prodMk contDiffAt_const)
   have hline : HasDerivAt (fun t : ℝ => root + σ * t) σ x := by
-    simpa only [mul_one, zero_add] using
-      (hasDerivAt_const x root).add ((hasDerivAt_id x).const_mul σ)
+    exact (hasDerivAt_const_mul σ).const_add root
   have hd := ((hradial.differentiableAt (by simp)).hasDerivAt.comp x hline).deriv
   change deriv ξ x =
     deriv (fun r : ℝ => (K.chart (C.referenceState, 0) i (r, θ)).1) (root + σ * x) * σ at hd
