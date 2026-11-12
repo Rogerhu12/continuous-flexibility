@@ -133,7 +133,10 @@ theorem canonicalCut_characteristicSpeeds_eq_closed
   have hbounds := hN01.2.2.2.1.1 m
   have hpAnn : p ∈ annularOpen D :=
     ⟨⟨hbounds.1.trans hpN.1.1, hpN.1.2.trans hbounds.2.2⟩, mem_univ _⟩
-  have hcut := canonicalCut_closed_and_chart hA hB hz hs m false θ
+  have hcut : p ∈ physicalPieceClosed S K z (K.cutPair m).1 ∧
+      K.chart z (K.cutPair m).1 p = (K.cutRadius m, θ) := by
+    simpa only [Bool.false_eq_true, ↓reduceIte] using
+      canonicalCut_closed_and_chart hA hB hz hs m false θ
   have hboundary := (hA.boundary z hz hs (K.cutPair m).1).2.2.2.2.1 p hcut.1
   have hBa : B.a p ≠ 0 := by
     rw [negativeCanonicalClosedCoefficients_radial_eq_original_on_closure
@@ -177,7 +180,10 @@ theorem negativeCutPair_coefficients_eq_closed_on_cut
       (L.coefficients z).c p = (negativeCanonicalClosedCoefficients S K z i).c p := by
   let p := canonicalCutPoint S K z m θ
   let B := negativeCanonicalClosedCoefficients S K z (K.cutPair m).1
-  have hcut := canonicalCut_closed_and_chart hA hB hz hs m false θ
+  have hcut : p ∈ physicalPieceClosed S K z (K.cutPair m).1 ∧
+      K.chart z (K.cutPair m).1 p = (K.cutRadius m, θ) := by
+    simpa only [Bool.false_eq_true, ↓reduceIte] using
+      canonicalCut_closed_and_chart hA hB hz hs m false θ
   have hpN := (hB.1.2 z hz hs m).2.1 (mem_range_self θ)
   have hbounds := hN01.2.2.2.1.1 m
   have hpAnn : p ∈ annularOpen D :=
@@ -197,9 +203,12 @@ theorem negativeCutPair_coefficients_eq_closed_on_cut
       (K.cutPair m).1 hcut.1
     rw [neg_div] at he
     linarith only [he, hquot]
-  have hspeeds := canonicalCut_characteristicSpeeds_eq_closed
+  have hspeeds : minusCharacteristicSpeed (L.coefficients z) p = minusCharacteristicSpeed B p ∧
+      plusCharacteristicSpeed (L.coefficients z) p = plusCharacteristicSpeed B p :=
+    canonicalCut_characteristicSpeeds_eq_closed
     hS hT hN01 hN02 hN03 hA hB hz hs m θ
-  obtain ⟨hb, hc⟩ := scalar_coefficients_eq_of_characteristicSpeeds hapos.ne' hdisc
+  obtain ⟨hb, hc⟩ := scalar_coefficients_eq_of_characteristicSpeeds
+    (b := (L.coefficients z).b p) (c := (L.coefficients z).c p) hapos.ne' hdisc
     (by simpa only [minusCharacteristicSpeed, ha] using hspeeds.1)
     (by simpa only [plusCharacteristicSpeed, ha] using hspeeds.2)
   cases side with
