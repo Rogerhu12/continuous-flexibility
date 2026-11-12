@@ -168,8 +168,10 @@ theorem n04b_rootHalfCoordinate_normalized_sum {T s : ℝ} (hT : 0 < T)
     (side : Bool) (hs : s ∈ Ioo (0 : ℝ) T) :
     (n04bRootHalfCoordinate T side s / n04bRootCutRadius T) ^ (3 / 2 : ℝ) +
       (n04bRootHalfCoordinate T (!side) s / n04bRootCutRadius T) ^ (3 / 2 : ℝ) = 2 := by
-  have ha := n04bRootCoordinate_pos (n04b_travelOrientation_pos_of_fullStrip side hs)
-  have hb := n04bRootCoordinate_pos (n04b_travelOrientation_pos_of_fullStrip (!side) hs)
+  have ha : 0 < n04bRootHalfCoordinate T side s :=
+    n04bRootCoordinate_pos (n04b_travelOrientation_pos_of_fullStrip side hs)
+  have hb : 0 < n04bRootHalfCoordinate T (!side) s :=
+    n04bRootCoordinate_pos (n04b_travelOrientation_pos_of_fullStrip (!side) hs)
   have hρ := n04bRootCutRadius_pos hT
   have hsum := n04b_rootHalfCoordinate_travel_sum side hs
   have hcut := n04b_rootTravel_cut hT

@@ -55,11 +55,11 @@ theorem wholePositiveReferenceGauge_geometry
   have hleft : Function.LeftInverse G F := by
     intro p
     simp only [F, G, wholePositiveReferenceGaugeChart, wholePositiveReferenceGaugeInverse,
-      Function.comp_apply, H₀.left_inverse, H.left_inverse]
+      Function.comp_apply, H₀.left_inverse (σ p), H.left_inverse p]
   have hright : Function.RightInverse G F := by
     intro p
     simp only [F, G, wholePositiveReferenceGaugeChart, wholePositiveReferenceGaugeInverse,
-      Function.comp_apply, H.right_inverse, H₀.right_inverse]
+      Function.comp_apply, H.right_inverse (χ p), H₀.right_inverse p]
   refine {
     chart_smooth := hF
     inverse_smooth := hG
@@ -115,12 +115,13 @@ theorem wholePositiveReferenceGauge_middle_germs
       (wholePositiveReferenceGaugeInverse τ χ =ᶠ[𝓝 (ψ (x, θ))] χ) := by
   refine ⟨?_, ?_, ?_⟩
   · filter_upwards [H.middle_germ x hx θ] with p hp
-    simp only [wholePositiveReferenceGaugeChart, Function.comp_apply, hp]
+    simp only [wholePositiveReferenceGaugeChart, Function.comp_apply, hp, id_eq]
   · filter_upwards [H.middle_germ x hx θ, H.height_middle_germ x hx θ] with p hp hph
-    simp only [wholePositiveReferenceGaugeHeight, hp, hph, mul_one]
+    simp only [wholePositiveReferenceGaugeHeight, hp, hph, id_eq, mul_one]
   · have hχ : Tendsto χ (𝓝 (ψ (x, θ))) (𝓝 (x, θ)) := by
-      simpa only [H₀.left_inverse (x, θ)] using
-        H₀.inverse_smooth.continuous.continuousAt (x := ψ (x, θ))
+      have hc := H₀.inverse_smooth.continuous.continuousAt (x := ψ (x, θ))
+      change Tendsto χ (𝓝 (ψ (x, θ))) (𝓝 (χ (ψ (x, θ)))) at hc
+      simpa only [H₀.left_inverse (x, θ)] using hc
     have he := (H.inverse_middle_germ x hx θ).comp_tendsto hχ
     filter_upwards [he] with p hp
     simpa only [wholePositiveReferenceGaugeInverse, Function.comp_apply, id_eq] using hp
@@ -162,10 +163,9 @@ theorem wholePositiveReferenceGauge_relative_fields
   · funext p
     simp only [wholePositiveReferenceGaugeChart, Function.comp_apply, hχψ (σ p)]
   · intro p
+    rw [wholePositiveReferenceGaugeHeight_eq, hστ p]
     by_cases hQ : Q p = 0
-    · simp only [wholePositiveReferenceGaugeHeight, wholePositiveChartHeight,
-        hστ p, hQ, inv_zero, mul_zero, div_zero]
-    · field_simp [wholePositiveReferenceGaugeHeight, wholePositiveChartHeight,
-        hστ p, hh₀ p, hQ] <;> ring
+    · simp only [hQ, div_zero]
+    · field_simp [hh₀ p, hQ] <;> ring
 
 end ContinuousFlexibility.Analysis

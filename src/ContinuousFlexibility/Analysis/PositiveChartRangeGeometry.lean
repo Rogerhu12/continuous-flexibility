@@ -108,7 +108,8 @@ theorem positiveReferenceCylinder_rangeGeometry
   have hmonoInv : StrictMono (Function.invFun Y) := by
     intro x y hxy
     apply hmono.lt_iff_lt.mp
-    simpa only [Function.rightInverse_invFun hYbij.2] using hxy
+    simpa only [Function.rightInverse_invFun hYbij.2 x,
+      Function.rightInverse_invFun hYbij.2 y] using hxy
   have hleftInv : Function.invFun Y u = l := by
     rw [← hleft]
     exact Function.leftInverse_invFun hYbij.1 l
@@ -138,20 +139,20 @@ theorem positiveReferenceCylinder_rangeGeometry
     exact hYpos p.1
   · intro p hp
     refine ⟨⟨?_, ?_⟩, mem_univ _⟩
-    · simpa only [hleft] using hmono hp.1.1
-    · simpa only [hright] using hmono hp.1.2
+    · simpa only [positiveReferenceCylinderChart, hleft] using hmono hp.1.1
+    · simpa only [positiveReferenceCylinderChart, hright] using hmono hp.1.2
   · intro p hp
     refine ⟨⟨?_, ?_⟩, mem_univ _⟩
-    · simpa only [hleftInv] using hmonoInv hp.1.1
-    · simpa only [hrightInv] using hmonoInv hp.1.2
+    · simpa only [positiveReferenceCylinderInverse, hleftInv] using hmonoInv hp.1.1
+    · simpa only [positiveReferenceCylinderInverse, hrightInv] using hmonoInv hp.1.2
   · intro p hp
     refine ⟨⟨?_, ?_⟩, mem_univ _⟩
-    · simpa only [hleft] using hmono.monotone hp.1.1
-    · simpa only [hright] using hmono.monotone hp.1.2
+    · simpa only [positiveReferenceCylinderChart, hleft] using hmono.monotone hp.1.1
+    · simpa only [positiveReferenceCylinderChart, hright] using hmono.monotone hp.1.2
   · intro p hp
     refine ⟨⟨?_, ?_⟩, mem_univ _⟩
-    · simpa only [hleftInv] using hmonoInv.monotone hp.1.1
-    · simpa only [hrightInv] using hmonoInv.monotone hp.1.2
+    · simpa only [positiveReferenceCylinderInverse, hleftInv] using hmonoInv.monotone hp.1.1
+    · simpa only [positiveReferenceCylinderInverse, hrightInv] using hmonoInv.monotone hp.1.2
   · rintro ⟨x, θ⟩
     simp only [positiveReferenceCylinderChart, Prod.mk_add_mk, add_zero]
   · rintro ⟨x, θ⟩

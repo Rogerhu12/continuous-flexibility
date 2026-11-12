@@ -85,14 +85,16 @@ theorem n04Coordinates_actual_reference_negative_endpoint_data
     exact ((hreg θ).1.snd.continuousAt.sub continuousAt_snd).continuousWithinAt
       |>.eq_const_of_mem_closure (hcl θ) (fun p hp => by
         apply sub_eq_zero.mpr
-        exact congrArg Prod.snd (hopen.2.2.1 p hp))
+        have hs := congrArg (fun q : PolarPoint => q.2) (hopen.2.2.1 p hp)
+        exact hs)
   have hcircle (θ : ℝ) : K.chart z₀ k (c, θ) = (0, θ) :=
     Prod.ext (hroot θ).2 (hangle θ)
   have hheight (θ : ℝ) : K.height z₀ k (c, θ) = K.height z₀ k (c, 0) := by
     have hzero : ContinuousAt (fun p : PolarPoint => (p.1, (0 : ℝ))) (c, θ) :=
       (continuous_fst.prodMk continuous_const).continuousAt
     have hr : ContinuousAt (fun p : PolarPoint => K.height z₀ k (p.1, 0)) (c, θ) :=
-      (hreg 0).2.1.continuousAt.comp hzero
+      (hreg 0).2.1.continuousAt.comp
+        (f := fun p : PolarPoint => (p.1, (0 : ℝ))) (x := (c, θ)) hzero
     apply sub_eq_zero.mp
     exact ((hreg θ).2.1.continuousAt.sub hr).continuousWithinAt
       |>.eq_const_of_mem_closure (hcl θ) (fun p hp =>
@@ -117,9 +119,11 @@ theorem n04Coordinates_actual_reference_negative_endpoint_data
   rw [← hJ]
   have hsign := canonicalCutPair_planeJacobian_signs hA hcut hz₀ hs₀ m
   cases side
-  · simpa only [σ, Bool.false_eq_true, ↓reduceIte, one_mul] using
+  · have hi' : (K.cutPair m).1 = k := hi
+    simpa only [σ, Bool.false_eq_true, ↓reduceIte, one_mul, hi'] using
       hsign.1 (c, 0) (hroot 0).1
-  · simpa only [σ, Bool.true_eq_true, ↓reduceIte, neg_one_mul, neg_pos] using
+  · have hi' : (K.cutPair m).2 = k := hi
+    simpa only [σ, ↓reduceIte, neg_one_mul, neg_pos, hi'] using
       hsign.2 (c, 0) (hroot 0).1
 
 end ContinuousFlexibility.Analysis

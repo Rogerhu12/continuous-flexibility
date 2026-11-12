@@ -14,6 +14,8 @@ noncomputable section
 namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements
+
+set_option backward.isDefEq.respectTransparency true
 open scoped ContDiff
 
 attribute [local instance]
@@ -56,15 +58,22 @@ theorem n04Coordinates_unitAtom_absolute_envelope
             (CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m v) p| ≤
             A * T.E0 (T.sample (K.cell m)) ^ B *
               (1 + CanonicalGeometry.parameterGrading S (s + loss) z) := by
-  obtain ⟨CH, hCH, hHb⟩ := material_sample_height_coefficient_power_bounded
-    hD hT K.cell 0 (by norm_num : (0 : ℝ) < 3 / 4)
+  have hheight := material_sample_height_coefficient_power_bounded
+    (D := D) (T := T) hD hT K.cell 0 (by norm_num : (0 : ℝ) < 3 / 4)
+  let CH : ℝ := hheight.choose
+  have hCH : 0 < CH := hheight.choose_spec.1
+  have hHb := hheight.choose_spec.2
   have hHeight (m : ℕ) : T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) ≤ CH := by
-    simpa only [Real.rpow_zero, mul_one] using hHb m
+    simpa only [CH, Real.rpow_zero, mul_one] using hHb m
   let loss : ℕ := hcur.2.1.choose
   have hdiff := hcur.2.1.choose_spec
   refine ⟨loss, fun s => ?_⟩
-  obtain ⟨B₀, hB₀, hb₀⟩ := href.2 s
-  obtain ⟨B₁, hB₁, hb₁⟩ := hdiff s
+  let B₀ : ℝ := (href.2 s).choose
+  have hB₀ : 0 < B₀ := (href.2 s).choose_spec.1
+  have hb₀ := (href.2 s).choose_spec.2
+  let B₁ : ℝ := (hdiff s).choose
+  have hB₁ : 0 < B₁ := (hdiff s).choose_spec.1
+  have hb₁ := (hdiff s).choose_spec.2
   let A : ℝ := B₀ + B₁ * CH
   let B : ℝ := max B₀ B₁
   refine ⟨A, B, add_pos hB₀ (mul_pos hB₁ hCH),
