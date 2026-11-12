@@ -160,21 +160,26 @@ jobs:
             status=1
           fi
           exit "$status"
-      - name: Delete this branch's previous build cache
-        if: always()
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-          PREFIX: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~
-        run: |
-          gh cache list -R "$GITHUB_REPOSITORY" --key "$PREFIX" --limit 100 --json id --jq '.[].id' |
-            while read -r id; do gh cache delete "$id" -R "$GITHUB_REPOSITORY" || true; done
       - name: Save project build artifacts
+        # Save first, delete older entries only after the save succeeded, so a cancelled
+        # or failed run never leaves the branch without a cache.
+        id: save
         if: always()
+        continue-on-error: true
         uses: actions/cache/save@v4
         with:
           path: .lake/build
           key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~${{ github.sha }}
+      - name: Delete this branch's older build caches
+        if: always() && steps.save.outcome == 'success'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PREFIX: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~
+          KEEP: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~${{ github.sha }}
+        run: |
+          gh cache list -R "$GITHUB_REPOSITORY" --key "$PREFIX" --limit 100 --json id,key             --jq '.[] | select(.key != $ENV.KEEP) | .id' |
+            while read -r id; do gh cache delete "$id" -R "$GITHUB_REPOSITORY" || true; done
       - name: Count compiled modules
         if: always()
         shell: bash
@@ -201,15 +206,16 @@ jobs:
             echo "::warning::release lake-cache does not exist; the compiled build was not published"
           fi
       - name: Pack this line's build for main
-        # Main downloads it when it merges this exact head (see above).
-        if: startsWith(github.ref_name, 'line/') && success()
+        # Main downloads it (green runs only) when it merges this exact head; the build of a
+        # failed run is kept too, so the lead can download it and compile files locally.
+        if: startsWith(github.ref_name, 'line/') && !cancelled()
         shell: bash
         run: |
           find .lake/build/ir -name '*.setup.json' -delete 2>/dev/null || true
           tar --zstd -cf lake-build.tar.zst .lake/build
           ls -lh lake-build.tar.zst
       - uses: actions/upload-artifact@v4
-        if: startsWith(github.ref_name, 'line/') && success()
+        if: startsWith(github.ref_name, 'line/') && !cancelled()
         with:
           name: lake-build-line
           path: lake-build.tar.zst
