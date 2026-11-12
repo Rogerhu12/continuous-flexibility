@@ -86,6 +86,7 @@ theorem exists_wholeComponentEndpointTransport_family
   have hφraw (i : ι) (side : Bool) (k : ℕ) (hk : 1 ≤ k)
       (hkn : k ≤ n + 1) (θ : ℝ) :
       ‖iteratedFDeriv ℝ k (φ i) (if side then r else l, θ)‖ ≤ M := by
+    dsimp only [φ, wholeComponentEndpointAngle]
     rw [(hang i).2.2.2.1 side k hkn θ]
     exact hψjets i side k hk (by omega) θ
   obtain ⟨Mσ, hMσ, hη, hηgap, hB, hfiber⟩ :=
