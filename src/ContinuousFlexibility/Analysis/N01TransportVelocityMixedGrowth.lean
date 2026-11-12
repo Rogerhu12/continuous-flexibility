@@ -140,7 +140,7 @@ private theorem transportVelocity_flat_from_certificates
   have hgZ (c : Fin 2) : AngularDiagonalPowerGrowth p (fun m => H m ^ c.val) (JZ c) nmax B := by
     refine Fin.cases ?_ (Fin.cases ?_ (fun i : Fin 0 => Fin.elim0 i)) c
     · simpa only [J₀, Fin.val_zero, pow_zero] using hg0
-    · simpa only [J₁, Fin.val_succ, Fin.val_zero, Nat.zero_add, pow_one] using hg1
+    · simpa only [J₁, Fin.succ_zero_eq_one, Fin.val_one, pow_one] using hg1
   have hgC (n a b : ℕ) : ∃ K Q : ℝ, 0 ≤ K ∧ 0 ≤ Q ∧
       ∀ m x, x ∈ U → ∀ w, ∀ y ∈ V m,
         |jointMixedDiagonal (JC m) n a b x w y| ≤ K * W m ^ Q := by
@@ -170,6 +170,13 @@ open scoped ContDiff Topology
 
 local instance n01TransportVelocityMixedGrowthStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
+
+local instance n01TransportVelocityMixedGrowthSectorSMul (S : PhysicalSpacesData) :
+    SMul ℝ (StateDirections S × ℝ) := Prod.instSMul
+
+local instance n01TransportVelocityMixedGrowthCorrectionSMul (S : PhysicalSpacesData) :
+    SMul ℝ ((StateDirections S × ℝ) × CircleSpace S) := Prod.instSMul
+
 local instance n01TransportVelocityMixedGrowthParameterSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S × ℝ) := Prod.instSMul
 
@@ -217,8 +224,6 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
         nmax B (B + 1) ∧
       FlatMixedDiagonalGrowth p W (fun _ => 1) JE nmax B (B + 1) := by
   let E : Type := (StateDirections S × ℝ) × CircleSpace S
-  letI : SMul ℝ (StateDirections S × ℝ) := Prod.instSMul
-  letI : SMul ℝ E := Prod.instSMul
   let U : Set E := sectorNeighborhood S base ε ε ×ˢ univ
   let V : ℕ → Set PolarPoint := fun m => Ioo (l m) (h m) ×ˢ univ
   let p : ℕ → Seminorm ℝ E := pairGrading (pairGrading (sectorGrading S) realGrading)
