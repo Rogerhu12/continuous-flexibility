@@ -1,5 +1,5 @@
 import ContinuousFlexibility.Analysis.N04RealizationLeftReducedTower
-import ContinuousFlexibility.Analysis.N04RealizationUniformAffine
+import ContinuousFlexibility.Analysis.N04RealizationUniformAffineFamily
 import ContinuousFlexibility.Analysis.N04RealizationUniformSector
 import ContinuousFlexibility.Analysis.N07aNuSource
 
@@ -32,6 +32,61 @@ attribute [local instance]
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
 
+private theorem n04Realization_leftColumn_affineDecoder
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {R : ReturnEquationData S}
+    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (h01 : N01Properties D T S C base loss ε)
+    (h03 : N03Properties D T S C R L base ε)
+    (U : Set (N07aNuParameter S)) (N : N07aNuParameter S → ScalarHeightSpace S)
+    (hgeometry : ∀ y ∈ U,
+      ScalarStateGeometry D S (n07aNuParameterState hT hS h01.1.2.2.2.1 y))
+    (hdecode : ∀ y ∈ U, ∀ p ∈ annularOpen D,
+      (S.height scalarBeta).decode (N y) p =
+        scalarStateOperator D S (n07aNuParameterState hT hS h01.1.2.2.2.1 y) (0, 1) p)
+    {b : ℕ} {η : ℝ} (hb : base ≤ b) (hηε : η ≤ ε)
+    (hmaps : sectorNeighborhood S b η η ⊆
+      (fun z => n07aNuParameterCenter S C.referenceState.1.1 +
+        n07aNuSectorProjectionCLM S z) ⁻¹' U) :
+    ∀ z ∈ sectorNeighborhood S b η η, ∀ p,
+      (S.height scalarBeta).decode
+        (N (n07aNuParameterCenter S C.referenceState.1.1 +
+          n07aNuSectorProjectionCLM S z)) p =
+        n06CurrentLeftColumn S L (liftSectorParameter S C z) p := by
+  intro z hz p
+  by_cases hp : p ∈ annularOpen D
+  · have hcoord : n07aNuParameterCenter S C.referenceState.1.1 +
+        n07aNuSectorProjectionCLM S z =
+        n07aNuRawProjectionCLM S (liftSectorParameter S C z) :=
+      n07aNuSectorProjectionCLM_center h01.2.2.1 z
+    have hy : n07aNuParameterState hT hS h01.1.2.2.2.1
+        (n07aNuParameterCenter S C.referenceState.1.1 + n07aNuSectorProjectionCLM S z) =
+        n07aNuScalarState hT hS h01.1.2.2.2.1 (liftSectorParameter S C z) := by
+      rw [hcoord, n07aNuRawProjectionCLM_apply]
+      rfl
+    have hg : ScalarStateGeometry D S
+        (n07aNuScalarState hT hS h01.1.2.2.2.1 (liftSectorParameter S C z)) :=
+      hy ▸ hgeometry _ (hmaps hz)
+    have hzold := sectorNeighborhood_mono S hb hηε hηε hz
+    have hraw := liftSectorParameter_mem_stateNeighborhood (C := C) hzold le_rfl
+    have hsector := h01.2.2.1.liftSectorParameter_sector z
+    calc
+      _ = scalarStateOperator D S
+          (n07aNuParameterState hT hS h01.1.2.2.2.1
+            (n07aNuParameterCenter S C.referenceState.1.1 +
+              n07aNuSectorProjectionCLM S z)) (0, 1) p :=
+        hdecode _ (hmaps hz) p hp
+      _ = scalarStateOperator D S
+          (n07aNuScalarState hT hS h01.1.2.2.2.1 (liftSectorParameter S C z))
+          (0, 1) p := congrArg (fun x => scalarStateOperator D S x (0, 1) p) hy
+      _ = _ := (n04Realization_actualLeft_eq_reduced hT hS h01 h03
+        hraw hsector hg hp).symm
+  · rw [scalarHeight_decode_eq_zero_outside hS _ hp]
+    obtain ⟨J, _, hJD, _, hzero⟩ := n06_currentLeftColumns_commonSupport (L := L) hS
+    exact (hzero (liftSectorParameter S C z) p.1
+      (fun hpJ => hp ⟨hJD hpJ, mem_univ _⟩) p.2).symm
+
 /-- The same corrected coefficient record has this actual height-valued
 column on one fixed neighborhood, before all derivative orders. -/
 theorem n04Realization_exists_uniformLeftColumn
@@ -50,66 +105,26 @@ theorem n04Realization_exists_uniformLeftColumn
             n06CurrentLeftColumn S L (liftSectorParameter S C z) p) := by
   letI : IsTopologicalAddGroup (N07aNuParameter S) :=
     (n07aNuParameterGrading_withSeminorms S).isTopologicalAddGroup
-  have hseed :=
-    n04Realization_exists_uniformLeftReducedColumn h01.1.1 hT hS h01.1.2.2.2.1
-      C.referenceState.1.1
-  let U : Set (N07aNuParameter S) := hseed.choose
-  have hU : IsOpen U := hseed.choose_spec.1
-  have hcenter : n07aNuParameterCenter S C.referenceState.1.1 ∈ U :=
-    hseed.choose_spec.2.1
-  let b₀ : ℕ := hseed.choose_spec.2.2.choose
-  let ell : ℕ := hseed.choose_spec.2.2.choose_spec.choose
-  let N : N07aNuParameter S → ScalarHeightSpace S :=
-    hseed.choose_spec.2.2.choose_spec.choose_spec.choose
-  have hN : FixedNeighborhoodSmoothTame (n07aNuParameterGrading S)
-      (scalarHeightGrading S) U b₀ ell N :=
-    hseed.choose_spec.2.2.choose_spec.choose_spec.choose_spec.1
-  have hgeometry := hseed.choose_spec.2.2.choose_spec.choose_spec.choose_spec.2.1
-  have hdecode := hseed.choose_spec.2.2.choose_spec.choose_spec.choose_spec.2.2
-  let c : N07aNuParameter S := n07aNuParameterCenter S C.referenceState.1.1
-  let A : (StateDirections S × ℝ) → N07aNuParameter S :=
-    fun z => c + n07aNuSectorProjectionCLM S z
-  have hA : Continuous A := continuous_const.add (n07aNuSectorProjectionCLM S).continuous
-  have hA0 : A (0 : StateDirections S × ℝ) = c :=
-    (congrArg (fun y : N07aNuParameter S => c + y)
-      (ContinuousLinearMap.map_zero (n07aNuSectorProjectionCLM S))).trans (add_zero c)
-  have hzero : (0 : StateDirections S × ℝ) ∈ A ⁻¹' U := by
-    rw [Set.mem_preimage, hA0]
-    exact hcenter
-  have hpull : FixedNeighborhoodSmoothTame (n07aParameterGrading S)
-      (scalarHeightGrading S) (A ⁻¹' U) b₀ ell (fun z => N (A z)) :=
-    n04Realization_fixedNeighborhood_affine hN c (n07aNuSectorProjectionCLM S)
-      (n07aNuSectorProjectionCLM_grading_le S)
-  obtain ⟨b, η, hb, hη, hηε, hmaps, htower⟩ :=
-    n04Realization_fixedNeighborhood_sectorRestriction S (base := base)
-      (hU.preimage hA) hzero hpull h01.2.1
-  refine ⟨b, ell, η, hb, hη, hηε, fun z => N (A z), htower, ?_⟩
-  intro z hz p
-  by_cases hp : p ∈ annularOpen D
-  · have hcoord : A z = n07aNuRawProjectionCLM S (liftSectorParameter S C z) :=
-      n07aNuSectorProjectionCLM_center h01.2.2.1 z
-    have hy : n07aNuParameterState hT hS h01.1.2.2.2.1 (A z) =
-        n07aNuScalarState hT hS h01.1.2.2.2.1 (liftSectorParameter S C z) := by
-      rw [hcoord, n07aNuRawProjectionCLM_apply]
-      rfl
-    have hg : ScalarStateGeometry D S
-        (n07aNuScalarState hT hS h01.1.2.2.2.1 (liftSectorParameter S C z)) :=
-      hy ▸ hgeometry (A z) (hmaps hz)
-    have hzold := sectorNeighborhood_mono S hb hηε hηε hz
-    have hraw := liftSectorParameter_mem_stateNeighborhood (C := C) hzold le_rfl
-    have hsector := h01.2.2.1.liftSectorParameter_sector z
-    calc
-      _ = scalarStateOperator D S
-          (n07aNuParameterState hT hS h01.1.2.2.2.1 (A z)) (0, 1) p :=
-        hdecode (A z) (hmaps hz) p hp
-      _ = scalarStateOperator D S
-          (n07aNuScalarState hT hS h01.1.2.2.2.1 (liftSectorParameter S C z))
-          (0, 1) p := congrArg (fun x => scalarStateOperator D S x (0, 1) p) hy
-      _ = _ := (n04Realization_actualLeft_eq_reduced hT hS h01 h03
-        hraw hsector hg hp).symm
-  · rw [scalarHeight_decode_eq_zero_outside hS _ hp]
-    obtain ⟨J, _, hJD, _, hzero⟩ := n06_currentLeftColumns_commonSupport (L := L) hS
-    exact (hzero (liftSectorParameter S C z) p.1
-      (fun hpJ => hp ⟨hJD hpJ, mem_univ _⟩) p.2).symm
+  exact n04Realization_uniformAffine_family
+    (X := StateDirections S × ℝ) (Y := N07aNuParameter S) (Z := ScalarHeightSpace S)
+    (n07aParameterGrading S) (n07aNuParameterGrading S) (scalarHeightGrading S)
+    (n07aNuParameterCenter S C.referenceState.1.1) (n07aNuSectorProjectionCLM S)
+    (n07aNuSectorProjectionCLM_grading_le S)
+    (fun b η => sectorNeighborhood S b η η) base ε
+    (fun U N =>
+      (∀ y ∈ U, ScalarStateGeometry D S (n07aNuParameterState hT hS h01.1.2.2.2.1 y)) ∧
+      (∀ y ∈ U, ∀ p ∈ annularOpen D, (S.height scalarBeta).decode (N y) p =
+        scalarStateOperator D S (n07aNuParameterState hT hS h01.1.2.2.2.1 y) (0, 1) p))
+    (fun b η N => ∀ z ∈ sectorNeighborhood S b η η, ∀ p,
+      (S.height scalarBeta).decode (N z) p =
+        n06CurrentLeftColumn S L (liftSectorParameter S C z) p)
+    (fun W f b ell hW hzero hf =>
+      n04Realization_fixedNeighborhood_sectorRestriction S (base := base)
+        (towerBase := b) (loss := ell) (f := f) hW hzero hf h01.2.1)
+    (fun U N hdecoded b η hb _ hηε hmaps =>
+      n04Realization_leftColumn_affineDecoder hS hT h01 h03 U N
+        hdecoded.1 hdecoded.2 hb hηε hmaps)
+    (n04Realization_exists_uniformLeftReducedColumn h01.1.1 hT hS
+      h01.1.2.2.2.1 C.referenceState.1.1)
 
 end ContinuousFlexibility.Analysis
