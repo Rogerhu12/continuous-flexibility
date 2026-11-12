@@ -18,6 +18,13 @@ namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
 
+private theorem returnCircle_uniform_neg
+    {I E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (H : CircleModelData) {p : ℕ → Seminorm ℝ E} {U : Set E} {f : I → E → H.Space}
+    (hf : UniformSmoothFamilyOn p H.grading U f) (hp : Monotone p) :
+    UniformSmoothFamilyOn p H.grading U (fun i x => -f i x) := by
+  exact hf.neg hp
+
 local instance n01ReturnCircleUniformBoundsStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
@@ -48,7 +55,8 @@ theorem uniformSmoothFamilyOn_sectorChart (S : PhysicalSpacesData) (base : ℕ) 
   uniformSmoothFamilyOn_linear (sectorNeighborhood_isOpen S base ε ε)
     (sectorPairGrading_monotone S) (fun _ : I => sectorChartContinuousLinear S) 0
     (fun s => ⟨1, zero_le_one, fun _ z => by
-      simpa only [Nat.add_zero, one_mul] using sectorParameter_chart_grading_le S s z⟩)
+      simpa only [Nat.add_zero, one_mul, sectorChartContinuousLinear_apply] using
+        sectorParameter_chart_grading_le S s z⟩)
 
 variable
   (hflow : ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m r,
@@ -122,7 +130,7 @@ theorem N01Properties.uniformSmoothFamilyOn_rightChartInverseCircle :
     (hS.2.2.2.2.1 (3 / 4 : ℝ)).2.2 (fun _ : I => fun _ => 0) (1 / 3) (by norm_num)
     (sectorPairGrading_monotone S) (sectorNeighborhood_isOpen S base ε ε)
     (fun _ z hz m θ => hN.transportedOddCircle_uniform_lower hS hT hflow z hz m θ) ho ho
-  exact hi.neg (sectorPairGrading_monotone S)
+  exact returnCircle_uniform_neg (S.circle (3 / 4 : ℝ)) hi (sectorPairGrading_monotone S)
 
 include hflow in
 theorem N01Properties.uniformSmoothFamilyOn_selectorInverseCircle
@@ -138,7 +146,7 @@ theorem N01Properties.uniformSmoothFamilyOn_selectorInverseCircle
     (sectorNeighborhood_isOpen S base ε ε)
     (fun i z hz m θ => hN.endpointFlowCircle_uniform_lower hS hT hflow
       (rsel i) (hrsel i) z hz m θ) hf hf
-  exact hi.neg (sectorPairGrading_monotone S)
+  exact returnCircle_uniform_neg (S.circle (3 / 4 : ℝ)) hi (sectorPairGrading_monotone S)
 
 include hflow in
 theorem N01Properties.uniformSmoothFamilyOn_returnTransportInverseCircle :

@@ -60,7 +60,15 @@ theorem N01Properties.smoothTameOn_returnCorrectionVelocity_at_residual
     exact h
   have hv := hN.smoothTameOn_returnCorrectionVelocityCircleLinear
     hS hT j hcell χ hχrange hcutoff rsel hrsel
-  exact smoothTameOn_comp_topological hp ht (withSeminorms_pairGrading ht htop)
+  exact smoothTameOn_comp_topological
+    (G := fun n => H.level n) (g := H.bond)
+    (p := p) (q := pairGrading p H.grading) (r := H.grading)
+    (U := U) (V := U ×ˢ (univ : Set H.Space))
+    (u := fun z : StateDirections S × ℝ => (z, R.residual (liftSectorParameter S C z)))
+    (v := fun x : (StateDirections S × ℝ) × H.Space =>
+      hN.returnCorrectionVelocityCircleLinear hS hT j hcell χ hχrange hcutoff rsel hrsel
+        x.1 x.2)
+    hp ht (withSeminorms_pairGrading ht htop)
     hU (hU.prod isOpen_univ) (fun z hz => ⟨hz, mem_univ _⟩)
     (smoothTameOn_prodMk hp ht hid hres) hv
 
