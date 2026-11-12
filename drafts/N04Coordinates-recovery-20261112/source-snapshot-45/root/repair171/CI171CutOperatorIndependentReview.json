@@ -1,0 +1,28 @@
+{
+  "kind": "independent_root_CI171_cut_operator_eta_review",
+  "reviewer": "/root",
+  "owner_candidate": "1d25c274b8c8cbaa7e069f068b6fff250662f074",
+  "result": "pass before CI",
+  "source": {
+    "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean",
+    "preimage": "79a986c2a3dcd87523b2f123c517f9107a21a941",
+    "candidate": "5c6c40a679707ef636c77dee0bb479c51153adfe",
+    "sha256": "d12d00370749e13176b9ec8cf6ae078636e7d81d3e4ddc049992e88a555b3a36",
+    "lines": 109,
+    "net_added": 3
+  },
+  "full_previous106_and_new109_read": true,
+  "exact_two_substitutions_verified": true,
+  "complete_public_head_and_imports_unchanged": true,
+  "full_error_blocks": "f268a70c5e722f73c15557d09abb3f20a0a1157f",
+  "actual_definitions": "Statements.Nonlinear 1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+  "mathematics": [
+    "The local hcurve is a literal function equality with no final theta argument on the lhs. It rewrites every Set.range of the same canonical cut curve before metadata selection.",
+    "The local hheight similarly identifies the same literal scalar function before it is passed to radialPartial. No boundary inverse value or trace is assumed.",
+    "Both equalities are definitionally exact project-definition eta expansions. The original hB projections and entire mathematical contract are retained.",
+    "The unchanged simp set selects the same negative chart/inverse/height on both real cut indices."
+  ],
+  "new_public_names": 0,
+  "local_Lean": false,
+  "CI": false
+}

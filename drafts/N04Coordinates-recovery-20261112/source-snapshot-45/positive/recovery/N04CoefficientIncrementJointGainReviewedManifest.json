@@ -1,0 +1,73 @@
+{
+  "schema": "n04-owned-reviewed-source-manifest/v1",
+  "path": "positive/reconstructed/N04CoefficientIncrementJointGainReviewedManifest.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "owner": "/root/proof_inventory",
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "selected_main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "mathlib_pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "source": {
+    "path": "positive/reconstructed/N04CoefficientIncrementJointGain.lean",
+    "target_module": "ContinuousFlexibility.Analysis.N04CoefficientIncrementJointGain",
+    "git_blob": "63073bc007f7945e905e6cb9237a96f2c463ff8a",
+    "sha256": "d94ade21f71bc1074689e67b3ef5922d24c9f15ed26b7c9d0490d0c8ef3a40e8",
+    "utf8_bytes": 10715,
+    "lines": 199
+  },
+  "candidate": {
+    "path": "positive/reconstructed/N04CoefficientIncrementJointGainCandidateManifest.json",
+    "git_blob": "56b7b0d3176bae7805b3443b5e36710e51277699",
+    "sha256": "6fe82878bf5665d2ab1e1d8d6382bfdda9b40a246930c1898e3dd0bee68c7449",
+    "utf8_bytes": 13077,
+    "lines": 235
+  },
+  "independent_review": {
+    "path": "audit/recovery/reviews/N04CoefficientIncrementJointGainIndependentReview.json",
+    "reviewer": "/root/audit_coordinates",
+    "status": "PASS_FULL_SOURCE_AND_ACTUAL_PROVIDER_REVIEW_NOT_COMPILED",
+    "git_blob": "f51a7c5303f3ead57a169d8eee834c8895d42bb4",
+    "sha256": "ff6e36312b1872e5c89274fc2f1cf68595d66e2c2dd212ec9d868beb61def0a7",
+    "utf8_bytes": 19033,
+    "lines": 338
+  },
+  "owner_verification": {
+    "exact_source_and_candidate_rehashed": true,
+    "full_peer_read": true,
+    "peer_source_candidate_identity_match": true,
+    "no_source_change_after_freeze": true,
+    "public_declarations": 3,
+    "private_declarations": 1,
+    "review_findings": []
+  },
+  "preserved": [
+    "same original coefficient increment joint tower",
+    "same host j and material sample",
+    "literal original base and loss",
+    "full H(sample j)^(3/4) gain before normalization",
+    "scalar H^-1 postcomposition at every order including zero",
+    "constants before component, host, point and directions"
+  ],
+  "deployment_gate": {
+    "complete_transitive_graph": "PENDING; peer checks actual direct and critical provider contracts only",
+    "global_new_name_scan": "PENDING",
+    "local_Lean_run": false,
+    "CI_run_for_this_source": false,
+    "active_changes": false,
+    "not_claimed": [
+      "installation readiness",
+      "full forcing bound",
+      "CurrentJets",
+      "uniform discriminant floor on a whole negative component"
+    ]
+  },
+  "partial_cache_availability": {
+    "path": "quantitative/recovery/IncrementSevenImportsMain1eceCacheAvailability.json",
+    "git_blob": "ab6d694416e3f4b518141722a3930e71b7c8731b",
+    "sha256": "fa521ee9474f003eb01076ed3c2cf167f06fdfdadcaaf9d23faa99c1ac901d94",
+    "status": "PARTIAL; follow-up cache expansion in progress; no source or provider silently changed"
+  },
+  "budget": {
+    "new_Lean_source_lines": 199,
+    "additional_Lean_written_by_this_receipt": 0
+  }
+}

@@ -1,0 +1,338 @@
+{
+  "schema": "n04-independent-source-review/v1",
+  "path": "audit/recovery/reviews/N04CoefficientIncrementJointGainIndependentReview.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "reviewer": "/root/audit_coordinates",
+  "owner": "/root/proof_inventory",
+  "status": "PASS_FULL_SOURCE_AND_ACTUAL_PROVIDER_REVIEW_NOT_COMPILED",
+  "source": {
+    "blob": "63073bc007f7945e905e6cb9237a96f2c463ff8a",
+    "sha256": "d94ade21f71bc1074689e67b3ef5922d24c9f15ed26b7c9d0490d0c8ef3a40e8",
+    "bytes": 10715,
+    "lines": 199
+  },
+  "candidate": {
+    "blob": "56b7b0d3176bae7805b3443b5e36710e51277699",
+    "sha256": "6fe82878bf5665d2ab1e1d8d6382bfdda9b40a246930c1898e3dd0bee68c7449",
+    "bytes": 13077,
+    "lines": 235,
+    "path": "positive/reconstructed/N04CoefficientIncrementJointGainCandidateManifest.json"
+  },
+  "pins": {
+    "selected_main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "mathlib": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "active_at_review": "fc5254a50811fac73c0fd24697c6342ff8585493",
+    "active_is_not_implicitly_the_selected_provider_pin": true
+  },
+  "scope": {
+    "full_candidate_lines": 199,
+    "full_critical_provider_sources_read": 10,
+    "additional_full_contract_sources_read": [
+      "WeightedJointComposition",
+      "MixedDerivativeLocality"
+    ],
+    "public_declarations": 3,
+    "private_declarations": 1,
+    "all_four_full_headers_match_candidate_manifest": true
+  },
+  "complete_headers": [
+    {
+      "name": "n04_increment_sample_E0_power_bound",
+      "private": true,
+      "text": "private theorem n04_increment_sample_E0_power_bound\n    {D : ReferenceData} {T : MaterialData}\n    (hT : IsMaterialData D T) (hRef : IsAccumulatingProfile D)\n    {R : ℝ} (hR : 0 ≤ R) :\n    ∃ K Q : ℝ, 0 < K ∧ 0 ≤ Q ∧ ∀ j,\n      T.E0 (T.sample j) ^ R ≤ K * radialE (D.cellIndex j) ^ Q",
+      "sha256": "b3b376d9576318c46de762e36217411296ecef37341cedf382a384b82b506fcf"
+    },
+    {
+      "name": "N01Properties.coefficientIncrement_parameterSpatialTower_parameterJet",
+      "private": false,
+      "text": "theorem N01Properties.coefficientIncrement_parameterSpatialTower_parameterJet\n    (m j : ℕ) (hcell : Ioo (C.left m) (C.right m) ⊆ D.cells j)\n    (i : Fin 3) (n : ℕ) (x : StateDirections S × ℝ)\n    (hx : x ∈ sectorNeighborhood S base ε ε) (v : Fin n → StateDirections S × ℝ)\n    {y : PolarPoint} (hy : y ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ)) :\n    hN.componentCoefficientScalarJet m j hcell i n x v y =\n      (hN.coefficientIncrement_parameterSpatialTower hS hT m j hcell i).D\n        n (x, y) (fun k => (v k, 0))",
+      "sha256": "95840709d51ee78e342ec3743fc1b3477211db5d40febe6ff17a19c599e66029"
+    },
+    {
+      "name": "N01Properties.coefficientIncrement_joint_unit_bound",
+      "private": false,
+      "text": "theorem N01Properties.coefficientIncrement_joint_unit_bound (n : ℕ) :\n    ∃ A Q : ℝ, 0 ≤ A ∧ 0 ≤ Q ∧\n      ∀ (m j : ℕ) (hcell : Ioo (C.left m) (C.right m) ⊆ D.cells j) (i : Fin 3),\n      ∀ x ∈ sectorNeighborhood S base ε ε,\n      ∀ y ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ),\n      ∀ v : Fin n → (StateDirections S × ℝ) × PolarPoint,\n      (∀ k, pairGrading (sectorGrading S) realGrading base (v k).1 + ‖(v k).2‖ ≤ 1) →\n      |(hN.coefficientIncrement_parameterSpatialTower hS hT m j hcell i).D n (x, y) v| ≤\n        A * T.H (T.sample j) ^ (3 / 4 : ℝ) * radialE (D.cellIndex j) ^ Q *\n          (1 + pairGrading (sectorGrading S) realGrading (n + loss) x +\n            ∑ k, pairGrading (sectorGrading S) realGrading (n + loss) (v k).1)",
+      "sha256": "edce4eb7ca4627d4c1fc933533813d0e2f8e060b99c2b1d5ee3f3ae5fc5e9eef"
+    },
+    {
+      "name": "N01Properties.coefficientIncrement_normalized_joint_growth",
+      "private": false,
+      "text": "theorem N01Properties.coefficientIncrement_normalized_joint_growth\n    (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))\n    (i : Fin 3) :\n    UniformWeightedJointGrowth (pairGrading (sectorGrading S) realGrading)\n      (fun m => radialE (D.cellIndex (j m)))\n      (fun m => smoothDirectionsScalarPostcompose\n        (hN.coefficientIncrement_parameterSpatialTower hS hT m (j m) (hcell m) i)\n        ((T.H (T.sample (j m)) ^ (3 / 4 : ℝ))⁻¹ • ContinuousLinearMap.id ℝ ℝ))\n      base loss",
+      "sha256": "8de09cc0dbfb567c39306395c07a8e367ba16cc994f0f8bc2691fd1abdc74b08"
+    }
+  ],
+  "providers": [
+    {
+      "name": "N01CoefficientJointTower",
+      "module": "ContinuousFlexibility.Analysis.N01CoefficientJointTower",
+      "git_blob": "6a73e0d13b39b7cfda04fb0b22208e9c2e44fdb0",
+      "sha256": "082e10476e7067ac5bd8246dbce72aad825019fc196bd45d6191198abdd9b639",
+      "utf8_bytes": 4844,
+      "lines": 100,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01OriginalCoefficientSpatialJets",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsSpatialJoint"
+      ],
+      "read_scope": "Full actual source read",
+      "server_readback_verified": true,
+      "review_scope": "Full source read; exact actual contract and mathematical use reviewed"
+    },
+    {
+      "name": "N01CoefficientSpatialJets",
+      "module": "ContinuousFlexibility.Analysis.N01CoefficientSpatialJets",
+      "git_blob": "0e038e131e20d709f5411f0c17637da9900b65e4",
+      "sha256": "5242b2bbb36f35525783b1941e73a51b0c6bbc0ff993b722a7b4f38040b16e12",
+      "utf8_bytes": 13967,
+      "lines": 249,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01CoefficientParameterTower",
+        "ContinuousFlexibility.Analysis.N01CoefficientMixedBounds",
+        "ContinuousFlexibility.Analysis.N01SectorFlowTower",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsSpatialJets",
+        "ContinuousFlexibility.Analysis.MixedDerivativeHierarchy"
+      ],
+      "read_scope": "Full actual source read",
+      "server_readback_verified": true,
+      "review_scope": "Full source read; exact actual contract and mathematical use reviewed"
+    },
+    {
+      "name": "MixedJointTameBounds",
+      "module": "ContinuousFlexibility.Analysis.MixedJointTameBounds",
+      "git_blob": "16fdec87b363c2eb4e9dbedda85a5d9a0298f3ac",
+      "sha256": "cf1f48dd90cf5adc2ec6889291a5bb7e50bf1ac76e658c53a564c60dfd995abc",
+      "utf8_bytes": 12586,
+      "lines": 245,
+      "imports": [
+        "ContinuousFlexibility.Analysis.JointJetSpatialRegularity",
+        "ContinuousFlexibility.Analysis.WeightedJointComposition",
+        "ContinuousFlexibility.Analysis.TameMultilinearNormalization"
+      ],
+      "read_scope": "Full actual source read",
+      "server_readback_verified": true,
+      "review_scope": "Full source read; exact actual contract and mathematical use reviewed"
+    },
+    {
+      "name": "MaterialSampleShift",
+      "module": "ContinuousFlexibility.Analysis.MaterialSampleShift",
+      "git_blob": "e79e27788e1c853bed9950e91d7d121995ab1508",
+      "sha256": "58b0285c60e26605a013ba3d580d17e37aef1fa450622b13c458227cb3aa8f74",
+      "utf8_bytes": 8706,
+      "lines": 175,
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialSampleGlobalModels",
+        "ContinuousFlexibility.Analysis.MaterialSampleRadialLoss",
+        "ContinuousFlexibility.Analysis.MaterialWeightShift"
+      ],
+      "read_scope": "Full actual source read",
+      "server_readback_verified": true,
+      "review_scope": "Full source read; exact actual contract and mathematical use reviewed"
+    },
+    {
+      "name": "MaterialSampleDiscreteEnvelope",
+      "module": "ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope",
+      "git_blob": "4b9de8d41ee0cac2a7f2cf3b1af9bede4dfbc437",
+      "sha256": "a1622572eafd1815a12c9851ba8ed8e12c0d6792694ffbf4fe75906ad6f2bfce",
+      "utf8_bytes": 5887,
+      "lines": 136,
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialSampleIndexModels",
+        "ContinuousFlexibility.Analysis.MaterialShiftedEnvelope"
+      ],
+      "read_scope": "Full actual source read",
+      "server_readback_verified": true,
+      "review_scope": "Full source read; exact actual contract and mathematical use reviewed"
+    },
+    {
+      "name": "ActualRadialCellComparison",
+      "module": "ContinuousFlexibility.Analysis.ActualRadialCellComparison",
+      "git_blob": "3348ac15c7a5b9f11d94cac0972eeddbebc2f6e5",
+      "sha256": "2742cf2727e450078cfebcf7363cc4b824846af5b25c3e11f304dddfebc726fa",
+      "utf8_bytes": 2568,
+      "lines": 61,
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialSampleShift"
+      ],
+      "read_scope": "Full actual source read",
+      "server_readback_verified": true,
+      "review_scope": "Full source read; exact actual contract and mathematical use reviewed"
+    },
+    {
+      "name": "WeightedTowerCalculus",
+      "module": "ContinuousFlexibility.Scalar.WeightedTowerCalculus",
+      "git_blob": "016523877104f642a44e572693b1b8b2251faa2c",
+      "sha256": "ca17c1326690271a54670c095d664693a6d5680fff254ea96a6937b83eec1b84",
+      "utf8_bytes": 14257,
+      "lines": 306,
+      "imports": [
+        "ContinuousFlexibility.Statements.ScalarWeighted",
+        "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+        "ContinuousFlexibility.Analysis.TameTransfer"
+      ],
+      "read_scope": "Full actual source read",
+      "server_readback_verified": true,
+      "review_scope": "Full source read; exact actual contract and mathematical use reviewed"
+    },
+    {
+      "name": "JointJetSpatialRegularity",
+      "module": "ContinuousFlexibility.Analysis.JointJetSpatialRegularity",
+      "git_blob": "8121ae30ba3505ef7020d759d0686257bea6fff6",
+      "sha256": "17c9b148bc6658c5acfb75e1b476b73e403d09263d6fe291747aa7ffb27a9dd1",
+      "utf8_bytes": 12920,
+      "lines": 249,
+      "imports": [
+        "ContinuousFlexibility.Analysis.SmoothDirectionsFixedLast",
+        "ContinuousFlexibility.Analysis.ScalarPlaneJetRegularity",
+        "ContinuousFlexibility.Analysis.MixedDerivativeLocality",
+        "ContinuousFlexibility.Analysis.MixedDerivativeHierarchy",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsAffine"
+      ],
+      "read_scope": "Full actual source read",
+      "server_readback_verified": true,
+      "review_scope": "Full source read; exact actual contract and mathematical use reviewed"
+    },
+    {
+      "name": "MaterialSampleGlobalModels",
+      "module": "ContinuousFlexibility.Analysis.MaterialSampleGlobalModels",
+      "git_blob": "f4c793c5cb6b7823ce77a593bfd2ba04c9cd2e9a",
+      "sha256": "ea918cd4e735448b5bef1b2ea10b45ba13e7ee8d8725333ac5d819c0bf9950f0",
+      "utf8_bytes": 4639,
+      "lines": 98,
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialSampleIndexModels"
+      ],
+      "read_scope": "Full actual source read",
+      "server_readback_verified": true,
+      "review_scope": "Full source read; exact actual contract and mathematical use reviewed"
+    },
+    {
+      "name": "TameMultilinearNormalization",
+      "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "git_blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "utf8_bytes": 9718,
+      "lines": 204,
+      "imports": [
+        "Mathlib.Analysis.Normed.Module.Seminorm.Basic",
+        "Mathlib.Topology.Algebra.Module.Multilinear.Basic",
+        "Mathlib.Topology.Order.OrderClosed",
+        "Mathlib.Topology.Instances.Real.Lemmas",
+        "Mathlib.Tactic.Positivity",
+        "Mathlib.Tactic.Ring"
+      ],
+      "read_scope": "Full actual source read; pure and continuous map APIs selected explicitly",
+      "server_readback_verified": true,
+      "review_scope": "Full source read; exact actual contract and mathematical use reviewed"
+    }
+  ],
+  "additional_contracts": [
+    {
+      "name": "WeightedJointComposition",
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointComposition.lean",
+      "blob": "b3a73752bec84738dfc1f85cae1ddad39718e934",
+      "sha256": "7a04fb5661645cbd20a15252deadf05f732c3b84505141c89867f481bafd41b2",
+      "bytes": 7349,
+      "lines": 144,
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac"
+    },
+    {
+      "name": "MixedDerivativeLocality",
+      "path": "src/ContinuousFlexibility/Analysis/MixedDerivativeLocality.lean",
+      "blob": "02386ba505db686f26f36abbdd2d9a98d537cf3b",
+      "sha256": "a893fbaeda475c4e9c2c34ac4aae2bfa905929cd82ff8ebc2ff86aa10b2e8ffd",
+      "bytes": 4325,
+      "lines": 89,
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac"
+    }
+  ],
+  "pinned_mathlib": [
+    {
+      "path": "Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "scope": "rpow_pos_of_pos, rpow_nonneg, mul_rpow, rpow_le_rpow and rpow_le_rpow_of_exponent_le signatures and bodies"
+    },
+    {
+      "path": "Mathlib/Algebra/Order/BigOperators/Group/Finset.lean",
+      "blob": "9a2a19c62c65329f604f175559d556d6e45ec13a",
+      "sha256": "327dadef5af7180764c161be2418446b7950aa35210af24e98f099d2463139c3",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "scope": "single_le_sum generated by to_additive from single_le_prod; finite-index membership and nonnegative terms"
+    },
+    {
+      "path": "Mathlib/Algebra/GroupWithZero/Units/Basic.lean",
+      "blob": "b3148d9bd8bac8cbc1c64edf40b1c0bbb61f2916",
+      "sha256": "7a7b5c40f914ff08c6d363d455aaba017714e7c23ae8d5ecdf898301a02c9429",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "scope": "The pinned source uses inv_mul_cancel₀ with a nonzero real argument; no obsolete div_eq_iff₀ is introduced"
+    }
+  ],
+  "mathematical_review": [
+    {
+      "part": "Private sample E0 bound",
+      "conclusion": "The actual endpoint model has the same sample j and the same D.cellIndex j. The upper half of |x-index|≤L gives x≤index+L. E0 positivity and R≥0 permit raising the real inequality; KE^R multiplies the one-sided shift constant. materialE0(index)^Q=exp(Q)*radialE(index)^Q follows from the exact actual radialE conversion. K,Q are selected before all j. H is not changed or used for absorption."
+    },
+    {
+      "part": "Same tower parameter identity",
+      "conclusion": "The existing componentCoefficientScalarJet_of_mem returns the existing sectorCoefficientTower. pointTower_eq_jointJet identifies that exact pointwise tower with the literal coefficientIncrement_parameterSpatialTower on the same open sector and open physical component. The equality includes n=0; no new arbitrary tower or spatial extension is selected."
+    },
+    {
+      "part": "Finite prefix and uniform host",
+      "conclusion": "For total joint order n, data k uses the existing mixed bound at parameter arity k and spatial cap n for every k in Fin(n+1). All constants and exponents are selected before component m, true containing host j, coefficient i, state x, physical point y and directions. Summing nonnegative P_k and B_k K_k is valid because the actual radialE(D.cellIndex j)≥1. The host remains the explicit input with Ioo(C.left m)(C.right m)⊆D.cells j; it is never replaced by m or C.cell."
+    },
+    {
+      "part": "Actual mixed derivative transport",
+      "conclusion": "EqOn of the two pure-parameter jet functions on the actual open component gives equality of all mixed derivatives there. k+a+b≤n supplies both k≤n and a+b≤n for the selected supplier. The original oneHighVariationWeight is bounded by its affine expression on unit low seminorm directions exactly as in the public mixed-to-joint provider."
+    },
+    {
+      "part": "Height gain preservation",
+      "conclusion": "The pointwise mixed-to-joint lemma receives C=A*H_j*W_j^Q and affine H=1+p_(n+loss)(x). The sample factor H_j=T.H(T.sample j)^(3/4) therefore multiplies the parameter, radial and angular contributions. The result is 3^n*A*H_j*W_j^Q times the affine high-seminorm expression. The source deliberately does not use the separate unweighted uniform wrapper."
+    },
+    {
+      "part": "Joint direction norm",
+      "conclusion": "The given p_base(v_param)+norm(v_spatial)≤1 implies p_base(v_param)≤1 and both real coordinate absolute values≤1. Convexity and openness are those of the actual sector times the same physical component, so the 3^n conversion applies at the original point."
+    },
+    {
+      "part": "Exact normalized family",
+      "conclusion": "smoothDirectionsScalarPostcompose applies the deterministic scalar H_j^-1 times the identity CLM to every layer of the same joint tower. Strict positivity of the actual sample height gives H_j>0. Taking the real norm and multiplying the already proved inequality cancels H_j exactly. This includes the zero layer and retains the literal input base and loss; the low-ball radius R is unused because the preceding bound is stronger. UniformWeightedJointGrowth has precisely the quantifier order used by the final proof."
+    }
+  ],
+  "lean_boundary_checks": {
+    "actual_namespace_and_direct_provider_names_checked": true,
+    "all_complete_header_texts_and_import_list_match_manifest": true,
+    "section_variables_used_in_headers": true,
+    "finite_Fin_coercions_and_order_bounds_checked": true,
+    "same_J_K_function_types_and_point_argument_order_checked": true,
+    "mixed_locality_direction_checked": true,
+    "oneHigh_to_affine_matches_existing_public_provider": true,
+    "real_pow_sign_assumptions_checked": true,
+    "postcompose_real_smul_and_absolute_value_slots_checked": true,
+    "no_private_provider_copies_used": true,
+    "no_removed_or_unresolved_API_found_in_review": true
+  },
+  "scope_limits": [
+    "Static review only; no local Lean or CI execution.",
+    "The complete transitive selected import graph and global new-name collision scan were still pending at review time. This receipt does not certify a complete installation closure or installation readiness. A later exact graph may be bound by an addendum without changing these source bytes.",
+    "The selected providers are main1ece pinned in the candidate. This receipt does not silently substitute active CI171 versions.",
+    "No CurrentJets, final forcing, discriminant lower bound, or whole-negative-half lower bound is claimed. The result is the actual normalized coefficient increment tower on its explicit genuine component/host domain."
+  ],
+  "unchanged": {
+    "source_bytes": true,
+    "base": true,
+    "loss": true,
+    "state_neighborhood": true,
+    "physical_domain": true,
+    "material_sample": true,
+    "true_host": true,
+    "actual_joint_tower": true
+  },
+  "actions": {
+    "source_edited": false,
+    "active_or_refs_modified": false,
+    "resource_limits_changed": false,
+    "new_lean_created": false,
+    "ci_queried": false
+  },
+  "findings": []
+}

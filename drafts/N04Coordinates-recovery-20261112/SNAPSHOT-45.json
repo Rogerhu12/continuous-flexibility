@@ -1,0 +1,352 @@
+{
+  "kind": "recovery_snapshot_with_latest_compiled_tree",
+  "snapshot": 45,
+  "created_at": "2026-11-12 23:04:06 UTC",
+  "parent": "acd6e3c7662ebf2328ebfb7cbf2db5bcd26cc17a",
+  "additional_parent": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+  "compiled_baseline": "836b039233920fa778d9747be7b5d5a9f953fea3",
+  "compiled_baseline_tree": "aedbc4ec6f58d05e07de2eefb318651f69077036",
+  "source_index_blob": "d9aabd98390edcc87dc6925ecb108d62a4ae477e",
+  "source_index": {
+    "path": "drafts/N04Coordinates-recovery-20261112/SOURCE-INDEX.json",
+    "sha256": "a62710ee6c6d575a9be2f5f7231f77a898317361f3b86159dbebdc0d41ba4d3c",
+    "entries": 3149,
+    "new": 28,
+    "updated": 0
+  },
+  "artifacts": [
+    {
+      "name": "root/ci/CI171FailureReceipt.json",
+      "blob": "66a05cecb030bf7ed819f0cd0143e73f437ae124",
+      "sha256": "8c34a3bf3ae6fa775487bed3b4b51c9f9faf7cbde5681aee83cf8a53c1e1d98e",
+      "bytes": 3194,
+      "lines": 70
+    },
+    {
+      "name": "root/ci/CI171-build.log",
+      "blob": "6c0b35ca035fa5886643bce8e0a354664988746d",
+      "sha256": "58e0624d79a2d144ed6a131a76b0ca7bf4201e81adfd3c4e0e8b73d4ab21df22",
+      "bytes": 100963,
+      "lines": 1054
+    },
+    {
+      "name": "root/ci/CI171CompleteErrorBlocks.json",
+      "blob": "f268a70c5e722f73c15557d09abb3f20a0a1157f",
+      "sha256": "7ce910a69f1dc432902150a0868550af27d7c5ddfc95f55ffd3d67348e227298",
+      "bytes": 164163,
+      "lines": 38
+    },
+    {
+      "name": "root/repair171/CI171RootTwoRepairsOwner.json",
+      "blob": "6a7dc78cf149315b9e268fad44a0bb885271128c",
+      "sha256": "ad45207710b7705b9ed0edfcdc8ebb0201222ec6394a2dfb58cfd591a6b82dfd",
+      "bytes": 1565,
+      "lines": 36
+    },
+    {
+      "name": "quantitative/repair171/CI171RootTwoRepairsIndependentReview.json",
+      "blob": "e4fe14f3c24cb02cd1659872f6d71d01e8c86c55",
+      "sha256": "748c3570f40f052ecb9eed8385cf92c2dbd30892311cef9e768170ebee574920",
+      "bytes": 13492,
+      "lines": 234
+    },
+    {
+      "name": "quantitative/repair171/CI171CutOperatorCandidateManifest.json",
+      "blob": "1d25c274b8c8cbaa7e069f068b6fff250662f074",
+      "sha256": "3238afa7fb9ca5deb3fe62b54d01f0d257388b17c40d7578084b15bae95d9518",
+      "bytes": 8689,
+      "lines": 174
+    },
+    {
+      "name": "quantitative/repair171/CI171CutOperatorReviewedManifest.json",
+      "blob": "8d200b400520505774917db14fad0846189602b8",
+      "sha256": "c189c6a7137653b68108c12083272bfad982b44f1bc99e5f1cbc6f369b66d082",
+      "bytes": 2651,
+      "lines": 69
+    },
+    {
+      "name": "root/repair171/CI171CutOperatorIndependentReview.json",
+      "blob": "a1f02a632f6bfff74c946018f55c7545c1370a09",
+      "sha256": "05e7f3f029f9747e77500bb127564669972ee5e177f8ea806da5ba01af3bd8c5",
+      "bytes": 1523,
+      "lines": 28
+    },
+    {
+      "name": "audit/repair171/CI171ReferencePrincipalCandidateManifest.json",
+      "blob": "551a061ec61334a5af4f062a5c48d85d49307261",
+      "sha256": "d469a337dc320c1c74175bac11fc1f5eca386357f340dcf242388b014912497d",
+      "bytes": 20922,
+      "lines": 216
+    },
+    {
+      "name": "audit/repair171/CI171ReferencePrincipal.diff",
+      "blob": "af5ff06b61f9d5bf0029dde4aeaf15bd632368d5",
+      "sha256": "b7d73c8a81eea959b8471ec8fd2bb1445ddd4c7cd93693f6268a5ce8edec2320",
+      "bytes": 2152,
+      "lines": 41
+    },
+    {
+      "name": "audit/repair171/CI171ReferencePrincipalReviewedManifest.json",
+      "blob": "6e773807d04bca215c218642552b6e2281fa37e1",
+      "sha256": "c395abd4ce3de9c29ecf1f691cfb3635840339245458250d59f1c762b60071c5",
+      "bytes": 2551,
+      "lines": 63
+    },
+    {
+      "name": "root/repair171/CI171ReferencePrincipalIndependentReview.json",
+      "blob": "7c1aa62bd57027ef7438df3c1f941c458a86f798",
+      "sha256": "ad9c2717f06cd9116815c99d25e92f5f73068bc7d155e84ae1e364afb6c91d21",
+      "bytes": 1463,
+      "lines": 29
+    },
+    {
+      "name": "root/ci/CI172SourceOnlyRepairPlan.json",
+      "blob": "cd4237057df74e77d9a772a7f9540d813f899e0d",
+      "sha256": "374fde84539d14b22622a5788900d54e25cf04256789f44ef44cb5fff2f5c1cc",
+      "bytes": 3254,
+      "lines": 84
+    },
+    {
+      "name": "root/ci/CI172PushReceipt.json",
+      "blob": "709d5984e6a26c469f672e5128c06a001a02aa5f",
+      "sha256": "5420f650d81203eb89c2d2a084c5a37d270c48b5ab65d8dfedd837db3fd71ac0",
+      "bytes": 686,
+      "lines": 20
+    },
+    {
+      "name": "audit/recovery/reviews/N04CoefficientIncrementJointGainIndependentReview.json",
+      "blob": "f51a7c5303f3ead57a169d8eee834c8895d42bb4",
+      "sha256": "ff6e36312b1872e5c89274fc2f1cf68595d66e2c2dd212ec9d868beb61def0a7",
+      "bytes": 19033,
+      "lines": 338
+    },
+    {
+      "name": "positive/recovery/N04CoefficientIncrementJointGainReviewedManifest.json",
+      "blob": "5081c4b1441e511e156173bcebfe9dd56b985469",
+      "sha256": "09c18721620841b121881827a859e15b5aec34c106cfea3098a76557601b0eaf",
+      "bytes": 3038,
+      "lines": 73
+    },
+    {
+      "name": "quantitative/recovery/CoefficientIncrementSevenImportsMain1eceProviderClosure.json",
+      "blob": "ba4f80c814ec1273b8363c5f50b5a12c8e9a1b34",
+      "sha256": "d3991538bfb405c6d02859f888d43d9d84a65dfa4a4b6f051be6dc8315e5783f",
+      "bytes": 628177,
+      "lines": 14738
+    },
+    {
+      "name": "audit/reconstructed/CanonicalReferenceCurrentFrechetJets.lean",
+      "blob": "d53b5c3cececfff9655dc1a570e21f3b2281db32",
+      "sha256": "829ec714b643035b32cc1cd6e4e90e4cb54af2a6a75c998784c814c9eac41526",
+      "bytes": 3460,
+      "lines": 74
+    },
+    {
+      "name": "audit/recovery/CanonicalReferenceCurrentFrechetJetsCandidateManifest.json",
+      "blob": "2750e967d895dedaa99965cb54bb496e97ed769d",
+      "sha256": "d7355efd284cab9d2b66967297ebe8f8f146a164db0a329e9933b6533bf3624f",
+      "bytes": 6968,
+      "lines": 124
+    },
+    {
+      "name": "audit/recovery/CanonicalReferenceCurrentFrechetJetsProviderGraph.json",
+      "blob": "6e726e56f6a74572c817114f37ade7a223f2241b",
+      "sha256": "1a48c4c1de536be6469a56eb137e50a031f0dee40be7b87322d722f2e58cf619",
+      "bytes": 110548,
+      "lines": 2753
+    },
+    {
+      "name": "root/reviews/CanonicalReferenceCurrentFrechetJetsIndependentReview.json",
+      "blob": "2ee76b504dcb84388af39441f0d958dc6d17f17f",
+      "sha256": "115d4bf61b8d09a933c29a46c1bd22fd5cd65f264269e12fea11bc75e43f6e02",
+      "bytes": 1660,
+      "lines": 40
+    },
+    {
+      "name": "audit/recovery/CanonicalReferenceCurrentFrechetJetsReviewedManifest.json",
+      "blob": "aa48c9c2aac06c095ca835bc4f168d4e6e9334d2",
+      "sha256": "c496fc2c8037f94c71b6b18a757e99a1bc0627c1533aade686d1c24414ec82c6",
+      "bytes": 3053,
+      "lines": 70
+    },
+    {
+      "name": "quantitative/recovery/N03NumericalWitness623ProviderInventoryAtCI171.json",
+      "blob": "a0948c5b56e409d3a636e97a873df717f978caeb",
+      "sha256": "415575d3469c47c8206e6c050cc44b8ec5c465664be88237455846336aeb43f1",
+      "bytes": 783953,
+      "lines": 17205
+    },
+    {
+      "name": "positive/recovery/N04ActualForcingNextConsumersMain1ece.json",
+      "blob": "2dd998ad26a02e2044542f90312f18e41454d146",
+      "sha256": "1258f35f97bef486e88d8e79ae904797b2a594aa6740c5148ab2c8e02a80a020",
+      "bytes": 30326,
+      "lines": 368
+    },
+    {
+      "name": "positive/recovery/N04CoefficientWeightPublicSupplierNote.json",
+      "blob": "a5d8bad6cf8431b2a4d8f1cd6880bf43e3c009b4",
+      "sha256": "438a9b248909351327bcf177478cb72c27b8e92243bcec04ad02a84b8c4f4250",
+      "bytes": 2001,
+      "lines": 30
+    },
+    {
+      "name": "quantitative/recovery/N04IncrementAndFrechetPublicNameCheck.json",
+      "blob": "96896301a54d8a16a4795129419011e333b1f993",
+      "sha256": "84c8458d4082014afc048a74f752200cdb05a288b60caf68324bcdc0f9456be0",
+      "bytes": 7972,
+      "lines": 179
+    },
+    {
+      "name": "quantitative/recovery/FixedBase518FullRootLagOrderingConstraint.json",
+      "blob": "d26b5059f88fd269cad0a98ea71d63974e11f422",
+      "sha256": "f7bc2581148b83a3cc1d398884601224e8e038f769ec8aac5d37138ab9884726",
+      "bytes": 3440,
+      "lines": 63
+    },
+    {
+      "name": "quantitative/recovery/N03ThreeActualReturnCorrectionProviderContracts.json",
+      "blob": "7efba7b49783952b6206fcd0872e4110217e7149",
+      "sha256": "15ebb4ca673b11b10beac53bc8a2a5c182a12b2a9d8989dad1cdc13fdea505f4",
+      "bytes": 19731,
+      "lines": 256
+    }
+  ],
+  "outside_archive": {
+    "exact_target": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "unchanged_from_snapshot44": true,
+    "only_compiled_sources": true
+  },
+  "CI171": {
+    "run": 43321752722,
+    "job": 131543898637,
+    "conclusion": "failure",
+    "quick": "failure",
+    "full_build": "skipped",
+    "prior_repairs_compiled": 6,
+    "remaining_diagnostic_count": 9,
+    "remaining_files": 4,
+    "job_log": "6c0b35ca035fa5886643bce8e0a354664988746d",
+    "full_diagnostics": "f268a70c5e722f73c15557d09abb3f20a0a1157f",
+    "receipt": "66a05cecb030bf7ed819f0cd0143e73f437ae124"
+  },
+  "active": {
+    "ci_round": 172,
+    "commit": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+    "tree": "944690f469cb649cafd0e1dc582b6acb4992af6c",
+    "parent": "fc5254a50811fac73c0fd24697c6342ff8585493",
+    "pushed_readback": "2026-11-12 23:01:08 UTC",
+    "first_ci_lookup_not_before": "2026-11-12T23:06:08.000Z",
+    "plan_blob": "cd4237057df74e77d9a772a7f9540d813f899e0d",
+    "budget": {
+      "source_added_since_complete_green": 19710,
+      "source_deleted_since_complete_green": 0,
+      "source_paths": 149,
+      "full_checked_in_root_lag": 257,
+      "conservative_total": 19967,
+      "limit": 20000,
+      "margin": 33,
+      "repair_net_lines": 18
+    },
+    "status": "pushed; awaiting first permitted CI lookup"
+  },
+  "CI172": {
+    "status": "pending validation",
+    "query_count": 0,
+    "repairs": [
+      {
+        "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeReconstruction.lean",
+        "before": "26ed383f47116763359682c60dc2edc920b01d5e",
+        "after": "03ae22426c55b94746067ac9a7e09ca2da76bd28",
+        "before_lines": 108,
+        "after_lines": 111,
+        "owner": "6a7dc78cf149315b9e268fad44a0bb885271128c",
+        "peer": "e4fe14f3c24cb02cd1659872f6d71d01e8c86c55"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/ActualAtlasCutFirstJets.lean",
+        "before": "ddb7cdf61cd013c97afe3efb33b13e03394fa986",
+        "after": "528eda106b3b3300314ce573953e14f856dc8cfe",
+        "before_lines": 146,
+        "after_lines": 149,
+        "owner": "6a7dc78cf149315b9e268fad44a0bb885271128c",
+        "peer": "e4fe14f3c24cb02cd1659872f6d71d01e8c86c55"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean",
+        "before": "79a986c2a3dcd87523b2f123c517f9107a21a941",
+        "after": "5c6c40a679707ef636c77dee0bb479c51153adfe",
+        "before_lines": 106,
+        "after_lines": 109,
+        "owner": "8d200b400520505774917db14fad0846189602b8",
+        "peer": "a1f02a632f6bfff74c946018f55c7545c1370a09"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean",
+        "before": "2d253a2be2fb1b7653fba79a0ff2495b7244e1ab",
+        "after": "c7eaf4fe2c88fa12158ece8d2f32a86bbaad817e",
+        "before_lines": 175,
+        "after_lines": 184,
+        "owner": "6e773807d04bca215c218642552b6e2281fa37e1",
+        "peer": "7c1aa62bd57027ef7438df3c1f941c458a86f798"
+      }
+    ],
+    "actual_patch": {
+      "added": 30,
+      "deleted": 12,
+      "net": 18
+    },
+    "all_theorem_heads_imports_witnesses_unchanged": true
+  },
+  "drafts": {
+    "new_Lean_sources": 1,
+    "new_Lean_lines": 74,
+    "frechet_unit_atoms": {
+      "source": "d53b5c3cececfff9655dc1a570e21f3b2281db32",
+      "owner": "aa48c9c2aac06c095ca835bc4f168d4e6e9334d2",
+      "peer": "2ee76b504dcb84388af39441f0d958dc6d17f17f",
+      "compiled": false
+    },
+    "coefficient_increment": {
+      "source": "63073bc007f7945e905e6cb9237a96f2c463ff8a",
+      "reviewed_owner": "5081c4b1441e511e156173bcebfe9dd56b985469",
+      "peer": "f51a7c5303f3ead57a169d8eee834c8895d42bb4",
+      "graph": "ba4f80c814ec1273b8363c5f50b5a12c8e9a1b34",
+      "compiled": false
+    }
+  },
+  "budget": {
+    "prior_conservative_uncompiled_draft_upper_bound": 19825,
+    "new_archived_Lean_lines": 74,
+    "retained_uncompiled_conservative_upper_bound": 19899,
+    "limit": 20000,
+    "remaining_archive_margin": 101,
+    "active": {
+      "source_added_since_complete_green": 19710,
+      "source_deleted_since_complete_green": 0,
+      "source_paths": 149,
+      "full_checked_in_root_lag": 257,
+      "conservative_total": 19967,
+      "limit": 20000,
+      "margin": 33,
+      "repair_net_lines": 18
+    },
+    "repair_storage": "Four repaired Lean sources retained only at actual src paths in additional-parent CI172 ancestry; no duplicate archived Lean copies."
+  },
+  "main_rules_checked": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "root_workflow_resource_toolchain_dependency_limits_unchanged": true,
+  "endpoint_status": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open",
+    "proved": 37,
+    "total": 42,
+    "open": [
+      "N01c",
+      "N02N03",
+      "N04b",
+      "N04Coordinates",
+      "N05"
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "kind": "independent_root_CI171_reference_principal_review",
+  "reviewer": "/root",
+  "candidate_owner": "551a061ec61334a5af4f062a5c48d85d49307261",
+  "source": {
+    "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean",
+    "preimage": "2d253a2be2fb1b7653fba79a0ff2495b7244e1ab",
+    "candidate": "c7eaf4fe2c88fa12158ece8d2f32a86bbaad817e",
+    "sha256": "1ba433790477f1013bcb4a16a11115eeb3691c16b57daef7ca6304194500fc72",
+    "old_lines": 175,
+    "new_lines": 184,
+    "net": 9
+  },
+  "result": "pass before CI",
+  "full_source_and_previous_source_read": true,
+  "exact_four_replacements_verified": true,
+  "all_public_and_private_heads_unchanged": 2,
+  "imports_options_unchanged": true,
+  "full_error_blocks": "f268a70c5e722f73c15557d09abb3f20a0a1157f",
+  "reason": [
+    "Use the original referenceDomain equality to expose the same actual physical domain before applying hcharts smoothness.",
+    "Unfold the local G abbreviation at the same original inverse point, permitting the actual chart right-inverse equality to identify the c coefficient.",
+    "Extract only the first coordinate of the original radial inverse pair equality with an explicitly typed projection.",
+    "The original operator potential identity is first stated at its exact V/z0 arguments, then its negative-branch sign simplifies using the existing hneg."
+  ],
+  "no_new_hypotheses_or_witnesses": true,
+  "local_Lean": false,
+  "CI": false
+}

@@ -1,0 +1,63 @@
+{
+  "schema": "n04_fixed_base_activation_budget_addendum_v1",
+  "path": "quantitative/recovery/FixedBaseTwoBatchFullGeneratedRootLagConstraint.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "author": "/root/quantitative_route",
+  "status": "conditional_ordering_constraint_no_source_selection_change",
+  "original_plan": {
+    "blob": "e8d048a62c7b0bbf695503818b5f9a13d0bc3b07",
+    "sha256": "ac34e182556c181d5cf745a2631638f4613234f4eaa12fbcdb6def5971b2dc7c",
+    "selected_graph_blob": "f8548b858d40234fce54e77c5ff0702a6f4ed86a",
+    "preflight_blob": "da6cfb498fcfd4d13a87a453929383ff783e9306"
+  },
+  "evidence_scope": "The source selections remain the frozen dependency-closed two-batch plan. These root-lag values are the parent's explicit current sequencing audit supplied after CI171 staging, recorded here without claiming a fresh whole-tree recomputation.",
+  "fixed_source_budget": {
+    "batch1_added_source_lines": 19539,
+    "limit_added_Lean_lines": 20000,
+    "generated_root_policy": "Do not hand-edit the root. Charge the complete checked-in-root lag to the latest full green, including prior source-only cohorts whose missing imports the CI generator will add."
+  },
+  "scenarios": [
+    {
+      "preceding_group": "post149, before the five-source retained gateway and the root material-radius leaf",
+      "full_root_lag": 388,
+      "source_added": 19539,
+      "conservative_added": 19927,
+      "remaining": 73,
+      "fits": true
+    },
+    {
+      "preceding_group": "post149 plus five-source retained gateway and one root material-radius leaf (six extra imports)",
+      "full_root_lag": 394,
+      "source_added": 19539,
+      "conservative_added": 19933,
+      "remaining": 67,
+      "fits": true
+    },
+    {
+      "preceding_group": "post149 plus the six imports above and the 85-source reference group",
+      "full_root_lag": 479,
+      "source_added": 19539,
+      "conservative_added": 20018,
+      "excess": 18,
+      "fits": false
+    }
+  ],
+  "allowed_execution_paths": [
+    "Run fixed-base batch1 before the 85-source reference group, subject to exact current full-green and provider rebind checks.",
+    "If the 85-source reference group runs first, create a separate explicit successor plan moving a dependency-safe terminal node or closed suffix from batch1 to batch2, recompute both prefix DAGs and both complete root-lag budgets, and obtain review before activation."
+  ],
+  "rejected_shortcut": "The marginal root count 131, or a marginal 19670 upper bound, is insufficient after prior source-only cohorts. It must not replace the complete generated-root lag.",
+  "unchanged_selection": {
+    "new_main_nodes": 221,
+    "shared_updates": 9,
+    "StateNeighborhood": {
+      "selected_blob": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+      "reason": "Keep the current exact provider and its genuine CanonicalParts dependency. Do not silently introduce the main successor."
+    },
+    "all_order_fixed_base_quantifiers_preserved": true,
+    "no_cohort_or_provider_was_moved_by_this_addendum": true,
+    "no_Lean_source_created": true
+  },
+  "current_gate": "CI171 is failed. The next selected repair commit must complete full CI before subsequent staging. At actual activation recompute the exact latest-green source diff plus complete root generation and rebind any changed provider bytes; this JSON is not a readiness certificate.",
+  "active_index_ref_or_CI_operations": false
+}

@@ -1,0 +1,40 @@
+{
+  "kind": "independent_root_actual_unit_atom_Frechet_review",
+  "reviewer": "/root",
+  "candidate": "2750e967d895dedaa99965cb54bb496e97ed769d",
+  "source": {
+    "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentFrechetJets.lean",
+    "blob": "d53b5c3cececfff9655dc1a570e21f3b2281db32",
+    "sha256": "829ec714b643035b32cc1cd6e4e90e4cb54af2a6a75c998784c814c9eac41526",
+    "lines": 74
+  },
+  "graph": {
+    "blob": "6e726e56f6a74572c817114f37ade7a223f2241b",
+    "nodes": 137,
+    "existing_exact_actual171": 136,
+    "new_sources": 1,
+    "missing": 0,
+    "cycles": 0
+  },
+  "result": "pass before CI",
+  "complete_source_read": true,
+  "actual_smoothness_contract_read": "CurrentJets in actual Nonlinear1f7afd gives the same atom ContDiffOn on unitStrip in its first projection.",
+  "compiled_direct_providers_full_read": [
+    "4a0f2095b9c16558d889f814750f1fa648590e52",
+    "3dc20e779221e16f9be32dff13d22e978b5a048d"
+  ],
+  "quantifiers": [
+    "Choose the original loss before N.",
+    "At N choose exactly original A/B before z,m,atom,p and k<=N.",
+    "Mixed i+j=k is at most N and therefore uses that same N-order mixed envelope.",
+    "Cylinder bound multiplies by2^k; only this numeric factor rises to2^N.",
+    "Same material sample, E0 exponent, actual atlas and parameter grading(N+loss) throughout."
+  ],
+  "no_new_conclusion_assumptions": true,
+  "remaining_gates": [
+    "Lightweight unique-public-name verification against preserved exact indexes and main token search, without a new whole-repository gate.",
+    "Activate only after current repair batch full green, then CI."
+  ],
+  "CI": false,
+  "local_Lean": false
+}

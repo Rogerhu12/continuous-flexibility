@@ -1,0 +1,368 @@
+{
+  "schema": "n04-actual-forcing-next-consumers-v2",
+  "status": "READ_ONLY_IMPLEMENTATION_BLUEPRINT_NOT_FORMALIZED_NOT_COMPILED",
+  "author": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "path": "positive/recovery/N04ActualForcingNextConsumersMain1ece.json",
+  "selected_main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "mathlib_pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "scope": {
+    "new_Lean_written": 0,
+    "active_index_refs_CI_mutated": false,
+    "purpose": "Concrete next consumers of the implemented199 increment tower. The first proposed source produces the actual normalized discriminant increment; the second produces the original-speed forcing. Actual corrected forcing additionally needs the same R.residual operation chain.",
+    "budget": "Root forbids new Lean in this pass. The first source is planned for <=250 lines when separately authorized; it must be counted and frozen before moving to the next source.",
+    "not_claimed": [
+      "CurrentJets",
+      "fixed-base growth for actual R.residual already proved",
+      "full-half discriminant floor",
+      "whole producer graph compiled",
+      "installation readiness"
+    ]
+  },
+  "existing_artifacts": {
+    "old_forcing_route": {
+      "git_blob": "01d69c55e39ba7bc4a5ce288e42023ecca3a4210",
+      "sha256": "212d80d53fb45c0eca445f9f8bd53528053fa283d99610b201b10e33b7167c79"
+    },
+    "same_witness_gateway": {
+      "git_blob": "fc631678cd227d3f2b34feeefe37bbf79fd3d20e",
+      "sha256": "9ddfd7d8932e6bf00ca9e61dc70e517c2adb22dd1606faacc73205a904cc2b53"
+    },
+    "implemented199": {
+      "source_blob": "63073bc007f7945e905e6cb9237a96f2c463ff8a",
+      "source_sha256": "d94ade21f71bc1074689e67b3ef5922d24c9f15ed26b7c9d0490d0c8ef3a40e8",
+      "candidate_blob": "56b7b0d3176bae7805b3443b5e36710e51277699",
+      "peer_blob": "f51a7c5303f3ead57a169d8eee834c8895d42bb4",
+      "peer_sha256": "ff6e36312b1872e5c89274fc2f1cf68595d66e2c2dd212ec9d868beb61def0a7",
+      "owner_blob": "5081c4b1441e511e156173bcebfe9dd56b985469",
+      "owner_sha256": "09c18721620841b121881827a859e15b5aec34c106cfea3098a76557601b0eaf",
+      "review": "Complete source and actual-provider static peer passed; not compiled.",
+      "provider_graph": {
+        "git_blob": "ba4f80c814ec1273b8363c5f50b5a12c8e9a1b34",
+        "sha256": "d3991538bfb405c6d02859f888d43d9d84a65dfa4a4b6f051be6dc8315e5783f",
+        "nodes": 491,
+        "project_edges": 919,
+        "owner_structural_recheck": "All491 reachable; no missing node, cycle or topological-order violation; seven exact roots/imports/source blobs match199. Global names remain a separate gate."
+      }
+    }
+  },
+  "correction_to_old_route": {
+    "explicit": "The public N01CharacteristicJointGrowth theorems bound minusCharacteristicSpeed(originalCoefficients D S C z), never minusCharacteristicSpeed(L.coefficients z). Any reading of old route01d69 as directly instantiating them with corrected L is rejected.",
+    "actual_original_speed": "v=b/a-sqrt(b^2-a*c)/a for originalCoefficients at the same physical point.",
+    "original_forcing": "G_raw=v0-v, where0 denotes the same original field at (C.referenceState,0).",
+    "actual_corrected_speed": "T_corr=v+returnCorrectionVelocityLinear D S C chi z m p (R.residual z)=v+chi'(r)*A*Z.",
+    "actual_error_equation": "e_r=-T_corr*e_theta+G_raw-chi'(r)*A*Z.",
+    "identity_supplier": "NonlinearPropertiesThrough03.n04_actualMinusSpeed_eq_original_add_residual, actual122 blobf0ee10cf, using the same153 hflow, hN and R.",
+    "no_homogeneous_substitution": "The actual full first integral I has a homogeneous transport equation; e=I-I0 has the displayed nonzero forcing. Actual90 is not a homogeneous equation for e."
+  },
+  "common_data": {
+    "witness": "Keep retained61's D,T,S,C,hG=N01PrimitiveGeometry and the one invocation of153 giving R,L,chi,j,x,delta,base',epsilon',lambda,P. Strict-gap/field completion may only restrict that same base/radius as recorded in gatewayfc631; no second R,L,chi or buffer.",
+    "aliases": {
+      "E": "StateDirections S × ℝ",
+      "p": "pairGrading (sectorGrading S) realGrading",
+      "U": "sectorNeighborhood S base epsilon epsilon",
+      "V": "fun m => Ioo (l m) (h m) ×ˢ (univ : Set ℝ)",
+      "actual_buffer": "l m=x m-delta m, h m=x m+delta m",
+      "W": "fun m => radialE (D.cellIndex (j m))",
+      "H": "fun m => T.H(T.sample(j m))^(3/4:ℝ)",
+      "z": "liftSectorParameter S C u",
+      "a_b_c": "entries of originalCoefficients D S C z evaluated at y=(r,theta)",
+      "a0_b0_c0": "entries of originalCoefficients D S C (C.referenceState,0) at that identical y"
+    },
+    "domain": "r is the physical radius. The first polynomial consumer works on any supplied actual interior strip. Reciprocal/square-root consumers are restricted to the same retained full buffer, using its quantitative lower. No lower is inferred near a true component root.",
+    "lower": "On153's Icc(x-delta)(x+delta), d_m=lambda*W_m^(-P)/2>0, d_m<=a, d_m<=-c and d_m^2<=Delta. Reference0 is in the same neighborhood, so the same d_m applies to a0,Delta0. Thus sqrtDelta,sqrtDelta0>=d_m.",
+    "height": "H_m is independent of u,y and every direction slot. It is canceled algebraically in all orders, never bounded away by an E0 loss."
+  },
+  "first_source": {
+    "proposed_path": "positive/reconstructed/N04DiscriminantIncrementJointGain.lean",
+    "status": "PROPOSED_NOT_WRITTEN; exact source must still be constructed and independently reviewed",
+    "planned_limit_lines": 250,
+    "proposed_public_header": "theorem N01Properties.exists_discriminantIncrement_strip_joint_growth\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)\n    (j : ℕ → ℕ)\n    (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))\n    (l h : ℕ → ℝ) (hl : ∀ m, C.left m < l m)\n    (hh : ∀ m, h m < C.right m) :\n    ∃ K : ∀ m, SmoothDirections\n      (sectorNeighborhood S base ε ε ×ˢ (Ioo (l m) (h m) ×ˢ univ))\n      (fun z : (StateDirections S × ℝ) × PolarPoint =>\n        (((originalCoefficients D S C (liftSectorParameter S C z.1)).b z.2 ^ 2 -\n            (originalCoefficients D S C (liftSectorParameter S C z.1)).a z.2 *\n              (originalCoefficients D S C (liftSectorParameter S C z.1)).c z.2) -\n          ((originalCoefficients D S C (C.referenceState, 0)).b z.2 ^ 2 -\n            (originalCoefficients D S C (C.referenceState, 0)).a z.2 *\n              (originalCoefficients D S C (C.referenceState, 0)).c z.2)) /\n          T.H (T.sample (j m)) ^ (3 / 4 : ℝ)),\n      ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧\n        UniformWeightedJointGrowth (pairGrading (sectorGrading S) realGrading)\n          (fun m => radialE (D.cellIndex (j m))) K B L",
+    "header_caveat": "This is an explicit target declaration, not an elaborated or existing public theorem. Enclosing local instances/scopes must match199 and b95f6.",
+    "actual_inputs": [
+      "N01Properties.coefficientIncrement_normalized_joint_growth from199, with i=0,1,2, restricted to exactly V_m",
+      "N01Properties.originalCoefficient_stripTower and originalCoefficient_strip_joint_growth fromb95f6, for the identical i,m,j and strip",
+      "SmoothDirections.compLinear and compAffine_apply for the fixed state-zero map (u,y)↦(0,y)",
+      "UniformWeightedJointGrowth.withWeight, mono, postLinear, sub, mul and congr"
+    ],
+    "identity": "(Delta-Delta0)/H=(b+b0)*((b-b0)/H)-c*((a-a0)/H)-a0*((c-c0)/H).",
+    "proof_steps": [
+      "Restrict the three199 normalized increment towers. SmoothDirections.restrict preserves D definitionally; feed the smaller strip into the existing bound directly rather than adding a generic restriction framework.",
+      "Take the existing original a,b,c strip towers and their unweighted fixed-base bounds; withWeight gives the same W. These are multiplier estimates, so their prior H absorption is legitimate.",
+      "For a0,b0 use the genuine original tower precomposed by the continuous linear map F0=(0,fst-spatial): (u,y)↦(0,y). Zero is in U because epsilon>0. The actual lift at zero is (C.referenceState,0). compAffine_apply inserts zero parameter slots and keeps each spatial slot. Apply the original growth at state0 and R=0; enlarge its affine right side from1. This retains the original base/loss.",
+      "Build the three actual products in the displayed identity. WeightedJointProducts.mul chooses B,L before every R,n. Align each finite pair by mono, with max only over the finitely many previously selected bases/losses. No derivative-order maximum enters B.",
+      "Use actual smoothDirectionsAdd/sub and postLinear(-id). WeightedJointOperations has sub, not an assumed add lemma: b+b0 can be estimated as b-(-b0).",
+      "Unfold only public coefficientFamily/mixedDerivative order0/originalCoefficientEntry to identify the normalized increments. H>0 follows from hT and the actual sample; ring/field algebra proves the displayed identity.",
+      "Transfer the constructed tower to the literal normalized discriminant with SmoothDirections.congrOn and UniformWeightedJointGrowth.congr. Return that single K before B,L and all derivative orders."
+    ],
+    "line_plan": "About40 lines for domain/state-zero transport,35 for coefficient/normalized-increment inputs,90 for finite products/alignments,40 for literal identity and theorem setup: approximately205, with45 lines reserved for explicit typing. Stop before exceeding250 rather than adding unreviewed generic infrastructure.",
+    "no_extra_hypotheses": "No discriminant lower, final forcing bound, residual tower bound, seed certificate or new witness is required for this polynomial leaf."
+  },
+  "second_source": {
+    "proposed_path": "positive/reconstructed/N04OriginalMinusSpeedIncrementJointGain.lean",
+    "status": "FOLLOW-UP_NOT_WRITTEN",
+    "planned_limit_lines": 250,
+    "input_contract": "Same hN/hS/hT,j,hcell,l/h/hl/hh plus exactly b95f6's hpositive with lambda>0,P>=0. Instantiate that hpositive from the SAME153 closed-buffer clause; retain its real host and reference0.",
+    "output": "A genuine tower of (v0-v)/H on U×V_m and fixed B_G,L_G with UniformWeightedJointGrowth p W. All choices precede every total joint order. No L.coefficients appears in this output.",
+    "formula": "G_raw/H=(v0*((a-a0)/H)-(b-b0)/H+((Delta-Delta0)/H)*(q+q0)^(-1))*a^(-1), with q=b-a*v.",
+    "proof_steps": [
+      "Use the actual existing minusCharacteristicSpeed_stripTower and the public minusCharacteristicSpeed_strip_joint_growth for that same tower. Its function is originalCoefficients; do not instantiate with corrected L.",
+      "Build q=b-a*v from actual scalar products/subtraction. Public minusCharacteristicSpeed plus a!=0 proves q=sqrtDelta by field algebra. This avoids constructing another square-root tower for the current original discriminant.",
+      "Freeze the same v and q towers at parameter0 as above, preserving D and base/loss. These give v0,q0, not a new reference field.",
+      "Use153's a>=d and Delta>=d^2 to get q>=d, and the same atreference0. The sum q+q0 has a fixed W-power lower on precisely V_m.",
+      "Apply UniformWeightedJointGrowth.inv to a and q+q0, using genuine inverse towers from actual smooth scalar postcomposition. All lower premises are supplied by the same buffer. No global component floor is claimed.",
+      "Combine the first source's normalized discriminant with the two199 normalized increments and these uncharged multipliers via finitely many weighted products/subtractions. Rationalization (sqrtDelta-sqrtDelta0)*(sqrtDelta+sqrtDelta0)=Delta-Delta0 fixes the sign.",
+      "Identify the result with the deterministic H^-1 postcomposition of the actual difference between the zero-frozen original-speed tower and current original-speed tower. All actual functions and host samples remain fixed."
+    ],
+    "mixed_output": "Use the existing public UniformWeightedJointGrowth.mixed_parameter_oneHigh on the normalized tower, then exact scalar postcomposition. Spatial cap s and parameter k use high s+(k+L_G), so delta_G(k)=k+L_G precedes every s while B_G is fixed before k.",
+    "scope_limit": "This closes only G_raw. It is not the corrected PDE source and not CurrentJets."
+  },
+  "actual_residual_gap": {
+    "existing_genuine_object": {
+      "supplier": "The final SmoothTameOn conjunct of N02Properties; equivalently n08_return_smoothTame hR and n08CircleSectorJet hR in N08CircleDerivative09ddc49e.",
+      "exact_function": "fun u => R.residual (liftSectorParameter S C u)",
+      "existing_quantifier": "SmoothTameOn gives one J, then ∀k ∀x0∈U ∃loss base epsilon. It does not itself provide one base before all k.",
+      "velocity_supplier": "N01Properties.returnCorrectionVelocity_actual_parameterSpatialTower in198e815b fixes a genuine joint tower of returnCorrectionVelocityLinear ... (R.residual ...), using exactly that same N02 witness. It supplies regularity/identity, not the missing strong fixed-base estimate."
+    },
+    "proposed_actual_header": "theorem N01Properties.actual_returnResidual_fixedBase_oneHigh\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {base loss : ℕ} {ε : ℝ}\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)\n    (hR : N02Properties D T S C R base ε)\n    (hflow : ∀ u ∈ sectorNeighborhood S base ε ε, ∀ m r,\n      r ∈ Icc (C.left m) (C.right m) → ∀ θ,\n        1 / 2 ≤ deriv (C.minusFlow (liftSectorParameter S C u) m r) θ ∧\n        deriv (C.minusFlow (liftSectorParameter S C u) m r) θ ≤ 3 / 2) :\n    ∃ B : ℕ, base ≤ B ∧ ∀ k : ℕ, ∃ delta : ℕ,\n      ∀ R0 : ℝ, 0 ≤ R0 → ∀ s : ℕ, ∃ K : ℝ, 0 ≤ K ∧\n      ∀ J : SmoothDirections (sectorNeighborhood S base ε ε)\n        (fun u => R.residual (liftSectorParameter S C u)),\n      ∀ u ∈ sectorNeighborhood S base ε ε,\n        pairGrading (sectorGrading S) realGrading B u ≤ R0 →\n      ∀ v : Fin k → StateDirections S × ℝ,\n        (S.circle (3 / 4 : ℝ)).grading s (J.D k u v) ≤\n          K * tameJetSize (pairGrading (sectorGrading S) realGrading) k s delta B u v",
+    "header_status": "PROPOSED_NOT_WRITTEN; no final growth bound is an input. It may be split into two actual <=250-line sources for transport then residual.",
+    "concrete_two_inverse_path": [
+      "Let a(u)=hN.returnFlowCircle hS hT u, l(u)=sectorChartContinuousLinear S u. The actual transport is circlePositiveInverseComposeLinear(-C.travel) a(u) (l(u)-a(u)); this is the literal definition in e7aeb751.",
+      "Use the reviewed endpoint115 at rsel=C.right for a. The genuine chart CLM60cb has sectorParameter_chart_grading_le and sectorChartContinuousLinear_tame, both loss0/base0; its actual linear tower has only orders0/1. Products, subtraction and true CLM postcomposition give the input pair's fixed-base bounds.",
+      "For the first outer inverse use circleUniformInverseDomain H (1/2) × univ. The same153 hflow gives membership by the exact endpointFlowCircle lower used in152. The open domain supplies lower1/4 to301. Reuse152's hKP construction with arbitrary input pair (a,l-a), not its final negative-diagonal specialization.",
+      "Apply reviewed328 projectiveCompositionJets_fixedBase_oneHigh once, and HasProjectiveJetsOn.comp_topological plus smoothDirectionsOfJets to realize the SAME transport. Constants are independent of J by uniqueness; the source normalization and circle weight are unchanged.",
+      "Take actual odd/even continuous linear projections60cb. N01Properties.sectorReturnTransportCircle_odd_lift e7aeb751 identifies the odd lift with the SAME rightChartCandidate.",
+      "ReturnChartUniformBounds.d632e8aa public rightChartCandidate_deriv_bounds gives [1/3,4] from the same endpoint hflow. Therefore the second outer domain is circleUniformInverseDomain H (1/3) × univ. Its interior lower is1/6, so301 is invoked with a=1/6 at zero travel. This is a proved common domain, not merely pointwise positivity.",
+      "Apply328 a second time to the actual pair(odd transport,even transport). The literal result is sectorReturnResidualCircle. Both finite composition selections precede all k; after k each loss is chosen before R0,s.",
+      "N02Properties' decode clause and sectorReturnResidualCircle_decode agree at every m,theta on U. IsCircleModel's actual Function.Injective decode conjunct yields equality with the supplied R.residual(lift u). Transfer the resulting actual tower to ANY given J of that literal function via SmoothDirections.unique. R is not reconstructed or reselected."
+    ],
+    "availability": "115/301/328/final152 are fully peer-reviewed held sources with explicit exact blobs below. This route does not claim their full graph is active or compiled. The same-R transfer only needs the actual N02 decode clause, so it also applies to the unique R produced by153.",
+    "existing_weighted_results_do_not_close_it": [
+      {
+        "module": "ReturnResidualWeightedBounds",
+        "blob": "d8b1b64050cb0addeffdca2a36798b3bf1418e27",
+        "public": "returnCorrectionDisplacementLinear_weighted_abs_bound; returnCorrectionVelocityLinear_weighted_abs_bound",
+        "scope": "For fixed state and independent rho: value bounds linear in circle grading1(rho), preserving H(sample m)^.75. No parameter-order estimate."
+      },
+      {
+        "module": "ReturnResidualVelocityMixedWeighted",
+        "blob": "61e6126df8ece1ec393a497046341a3005f1cb0c",
+        "public": "returnCorrectionVelocityLinear_mixed_weighted_bound",
+        "scope": "After state z and rho are fixed, ∀n∃A,P gives physical full derivatives on the actual strip. A/P may depend on z/rho; this is not the required parameter-uniform family."
+      }
+    ],
+    "later_actual_velocity_obligation": "After the strong residual-circle bound, finish the actual pulled displacement/inverse-slope angular chain and the same-J radial recurrences. Then estimate the genuine198e actual velocity tower and transfer through122. The two-inverse residual bound alone does not provide all mixed parameter/physical bounds of chi'*A*Z."
+  },
+  "sample_alignment_now_concrete": {
+    "inputs": "Retain hG:N01PrimitiveGeometry from61 together with hN and153's j; hG is not projected from bare hN.",
+    "exact_N01_clause": "N01Properties fifth clause: ∃Bidx>0, ∀m, |(D.cellIndex(C.cell m):ℝ)-D.cellIndex m|≤Bidx.",
+    "exact_hG_clause": "N01PrimitiveGeometry.1: ∀m, Ioo(C.left m)(C.right m)⊆D.cells(C.cell m).",
+    "proof": [
+      "Use r_m=(C.left m+C.right m)/2, in the actual component by controlGeometryConditions' strict endpoint inequality.",
+      "Apply hG.1 and153 hcell to the SAME r_m. material_actualCells_index_bound yields a constant Bhost before m for |cellIndex(C.cell m)-cellIndex(j m)|.",
+      "Triangle with the actual N01 fifth clause yields uniform |cellIndex m-cellIndex(j m)|≤Bidx+Bhost. Do not identify these labels.",
+      "Apply materialSample_H_E0_rpow_of_index_sub_bound with gamma=3/4 and R=0. This converts the circle-decoding H(T.sample m)^.75 to K*H(T.sample(j m))^.75*E0(T.sample(j m))^A.",
+      "Use199's already-proved sample-E0-to-W comparison on the uncharged E0 power only. The H^.75 exponent stays unchanged. All constants precede m,k,s and no collar/sample is reselected."
+    ],
+    "role": "This closes the specific sample-comparison premise in the retained61→same153 route. The short numerical glue is not yet written. For arbitrary Through03 without hG, do not silently use this step."
+  },
+  "PDE_boundary": {
+    "quantitative_domain": "Same physical full buffer from153; reciprocal/sqrt costs are charged by its actual a/Delta lower.",
+    "inner_guard": "On Icc(x-delta/2)(x+delta/2), distance to either true component endpoint is at leastdelta/2, using the strict full-buffer interior and delta>0. This can remove the original flow's min-distance weight with the same material delta^-1.",
+    "not_entire_buffer": "The min-distance>=delta/2 conclusion is only for the half-sized guard, not all of Icc(x-delta)(x+delta).",
+    "outer_roots": "Outside the transition, use actual cutoff constant germs and ordinary-flow/root model identities. No raw discriminant floor is inferred over a whole negative half.",
+    "fixed_B_radial_budget": "Reuse01d69's D0=max_t delta_t(0), then c_k=max_{t,1<=n<=k}(delta_t(n)-D0), M=s+k*c_k. Each actual product must satisfy sum parameter degrees<=k and sum physical degrees<=s. Public interpolation is chosen once before k; final high=s+(k*c_k+B+1). The true derivative +1 in A_r or Z_r must be charged in that physical-degree sum.",
+    "source_charge": "Use Z0 only as an uncharged estimate of the SAME Z in T_corr; use Z1 with H^.75 in the source. G_raw and chi'*A*Z1 both carry one height charge. Never drop the residual source or substitute a homogeneous equation for e.",
+    "final_k0": "After the same fixed-base first-parameter bound and actual zero-at-reference, use the already located CanonicalVariationBounds public segment/MVT producer. It is downstream of, not a replacement for, these estimates."
+  },
+  "selected_previous_fixed_base_sources": {
+    "endpoint115": "09a1696b57c7fe3678cc6e10e419bb8fa22c0c11",
+    "positive_inverse301": "1f55edbb185fe33327757a087479196cc8565e4f",
+    "composition328": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+    "actual_selector_inverse152": "054e86dbc3a61f36df0ff4fd7ddf71aefeacb117",
+    "note": "301 lower=a is restricted to one actual common open domain before328. Its constants precede travel and the given outer J. No old forall-n-exists-base wrapper is used."
+  },
+  "source_fingerprints": [
+    {
+      "module": "N04CoefficientIncrementJointGain",
+      "git_blob": "63073bc007f7945e905e6cb9237a96f2c463ff8a",
+      "sha256": "d94ade21f71bc1074689e67b3ef5922d24c9f15ed26b7c9d0490d0c8ef3a40e8",
+      "lines": 199,
+      "read_scope": "Implemented199 and complete independent peer; not compiled"
+    },
+    {
+      "module": "N01CharacteristicJointGrowth",
+      "git_blob": "b95f6b480dcf1aa6634d4591b24ae2125b645f9a",
+      "sha256": "41b21de7ebdb4b635f1b2b83657884713a0d3ca13b98c2ef69c64f6d09e3c30b",
+      "lines": 435,
+      "read_scope": "Exact relevant declaration and proof read; no elaboration"
+    },
+    {
+      "module": "WeightedJointComposition",
+      "git_blob": "b3a73752bec84738dfc1f85cae1ddad39718e934",
+      "sha256": "7a04fb5661645cbd20a15252deadf05f732c3b84505141c89867f481bafd41b2",
+      "lines": 144,
+      "read_scope": "Exact relevant declaration and proof read; no elaboration"
+    },
+    {
+      "module": "WeightedJointOperations",
+      "git_blob": "33d59355404f7ad98ee177af0ccd0dbafbf136ce",
+      "sha256": "8caae1b11577f110368626ad71e48dd2ad8bd6f011b5e2ddf1710356a05f3993",
+      "lines": 155,
+      "read_scope": "Exact relevant declaration and proof read; no elaboration"
+    },
+    {
+      "module": "WeightedJointProducts",
+      "git_blob": "a2f03fe0abfaf31ef200ffe22d2ecce8bf3c0028",
+      "sha256": "d6a3c54795c2481294a543b4fe9dc4170cce2741b2718427c76d6112cb74b7c6",
+      "lines": 65,
+      "read_scope": "Exact relevant declaration and proof read; no elaboration"
+    },
+    {
+      "module": "WeightedJointPowers",
+      "git_blob": "860ee0b7c683ac5db3d6939f9dc6aa7703698ff3",
+      "sha256": "9108175edde74e2c72c1006f51d4371642d6848496b7571c523617fe289142a1",
+      "lines": 94,
+      "read_scope": "Exact relevant declaration and proof read; no elaboration"
+    },
+    {
+      "module": "CircleSmoothDirectionsOperations",
+      "git_blob": "da4963869db936865516fc441a28967765a84b2f",
+      "sha256": "e6e6157b0c663b15fbba3ab7b61374ae7ebd52ec7f465cc729d7b3dd9106d743",
+      "lines": 129,
+      "read_scope": "Exact relevant declaration and proof read; no elaboration"
+    },
+    {
+      "module": "N01ReturnVelocitySpatialTower",
+      "git_blob": "198e815b49f723edca476ad56ec173040e11edfe",
+      "sha256": "b05abee5a782c5621c8bfae80b66ef323eed66e0476e7d865fd0517757ac623d",
+      "lines": 421,
+      "read_scope": "Exact relevant declaration and proof read; no elaboration"
+    },
+    {
+      "module": "N01ResidualCircleModel",
+      "git_blob": "e7aeb751c99fbc50dbb5a0b1398b0afe061213b6",
+      "sha256": "69096dee20990cc9e9e06ce9c823c138080aa648a08f329af47fd16580dbfebd",
+      "lines": 264,
+      "read_scope": "Complete source read in this route pass"
+    },
+    {
+      "module": "N01ResidualSectorCoordinates",
+      "git_blob": "f10148f5287f1e0cd6802cec6ced3a2dca0d6d98",
+      "sha256": "7cb2eb450dec4d3c45df18151efff46f38f26de19457e7f4b488bea09796d5eb",
+      "lines": 104,
+      "read_scope": "Exact relevant declaration and proof read; no elaboration"
+    },
+    {
+      "module": "N01ResidualSmoothTame",
+      "git_blob": "ddef35ff6690d2ea86984e765305ed23e3708bc3",
+      "sha256": "6282bdb211d2ed494d7002fc23972918cdbe5bcadd71886268e90bb37682459c",
+      "lines": 169,
+      "read_scope": "Complete source reread; SmoothTameOn's weaker quantifier is explicit"
+    },
+    {
+      "module": "N01CircleLinearTame",
+      "git_blob": "60cb27e73d5bac0102e5436d7fad54ae47740532",
+      "sha256": "18f9059ced21bc434aec9f75840a1dbb7842444192939afd4755dc1ed105ef7a",
+      "lines": 99,
+      "read_scope": "Complete source read in this route pass"
+    },
+    {
+      "module": "ReturnChartUniformBounds",
+      "git_blob": "d632e8aa3ad47fa9733b123e14a42fcd5ff90d40",
+      "sha256": "a1677fbf43c7000ede695fbcbdafd48d3290e84970b197cdf3470ec8fadaf22d",
+      "lines": 283,
+      "read_scope": "Complete source read in this route pass"
+    },
+    {
+      "module": "ReturnResidualWeightedBounds",
+      "git_blob": "d8b1b64050cb0addeffdca2a36798b3bf1418e27",
+      "sha256": "1eebecda32ca18af49f97371c7cda6b0871beed50b7d1f3a39e964aa07df0b38",
+      "lines": 204,
+      "read_scope": "Complete source read; independent-rho value bounds only"
+    },
+    {
+      "module": "ReturnResidualVelocityMixedWeighted",
+      "git_blob": "61e6126df8ece1ec393a497046341a3005f1cb0c",
+      "sha256": "070a463e19712296070b2a268298d79e421d9787e2b27bd4a2d6b4b6f8145735",
+      "lines": 195,
+      "read_scope": "Complete source read; state/rho precede spatial constants"
+    },
+    {
+      "module": "N04ActualMinusSpeedStripTower",
+      "git_blob": "f0ee10cf1c352acd5eaf85792f2f0b32ba9be796",
+      "sha256": "231e649dd57453716bbeb036dcaa4c4c0a1793d6198bedd0d482864c901bbfbf",
+      "lines": 122,
+      "read_scope": "Full owned122 source reread; historical held provider selection must be rebound"
+    },
+    {
+      "module": "N04ActualMinusFirstIntegralTransportTowers",
+      "git_blob": "ecd589a83d268c6b10235e9a22f06ed21dc0ed10",
+      "sha256": "0cd1722af35f306bb817d446e271310285d6db2fe714d62aeb4741bc1767f1c4",
+      "lines": 90,
+      "read_scope": "Full owned90 source reread; homogeneous I equation is not the e equation"
+    },
+    {
+      "module": "N04RetainedCorrectionNumericalWitness",
+      "git_blob": "6ba76a32edfe98908b3b1d44f9af3c7e3d72bfe5",
+      "sha256": "15cc71a282ea4b0aaf371c968dc37a627b41b1407dff8f25e61f613e70c71bea",
+      "lines": 153,
+      "read_scope": "Full retained153 source reread; one R/L/chi construction"
+    },
+    {
+      "module": "Statements.Nonlinear",
+      "git_blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "lines": 1773,
+      "read_scope": "N01/N02 definitions, actual coefficient/speed/sector definitions read"
+    },
+    {
+      "module": "Blueprint.Statements",
+      "git_blob": "4d426c2990d6d685eec9b270469f440b40c9ccce",
+      "sha256": "c5ceb29deb95dde0f00563392d37d33d9f62a725d118c9540435911349de41e1",
+      "lines": 289,
+      "read_scope": "N01PrimitiveGeometry exact clause read; not a new whole-file review"
+    },
+    {
+      "module": "ActualRadialCellComparison",
+      "git_blob": "3348ac15c7a5b9f11d94cac0972eeddbebc2f6e5",
+      "sha256": "2742cf2727e450078cfebcf7363cc4b824846af5b25c3e11f304dddfebc726fa",
+      "lines": 61,
+      "read_scope": "Exact relevant declaration and proof read; no elaboration"
+    },
+    {
+      "module": "MaterialSampleShift",
+      "git_blob": "e79e27788e1c853bed9950e91d7d121995ab1508",
+      "sha256": "58b0285c60e26605a013ba3d580d17e37aef1fa450622b13c458227cb3aa8f74",
+      "lines": 175,
+      "read_scope": "Exact relevant declaration and proof read; no elaboration"
+    },
+    {
+      "module": "N04SelectorInverseCircleFixedBaseBounds",
+      "git_blob": "054e86dbc3a61f36df0ff4fd7ddf71aefeacb117",
+      "sha256": "93154c0937eac430488bc4927b7d5e5f42d026df05959e430686c650ddd79fd4",
+      "lines": 152,
+      "read_scope": "Previously independently reviewed152, full proof reread for the two-inverse plan"
+    },
+    {
+      "module": "CirclePositiveInverseFixedBaseBounds",
+      "git_blob": "1f55edbb185fe33327757a087479196cc8565e4f",
+      "sha256": "435088fc0bad2d63d09101dfcb8a2629cc24e5437f855867e41cac8368b2eb64",
+      "lines": 301,
+      "read_scope": "Previously independently reviewed301; public heads rechecked"
+    },
+    {
+      "module": "TameFixedBaseCompositionBounds",
+      "git_blob": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+      "sha256": "f70497231b60b5c0a59e8de16cb534f1820e2bd9d6469ed8c86643b88f428b80",
+      "lines": 328,
+      "read_scope": "Previously independently reviewed328; public composition head rechecked"
+    }
+  ],
+  "validation": {
+    "all_listed_source_blobs_rehashed": true,
+    "new_math_or_tactic_execution": false,
+    "independent_narrow_checks": "Audit previously checked rationalized original-speed sign and full multiplicative H placement. The new residual domain and sample-chain refinements here are readonly source deductions, not peer-reviewed Lean implementations.",
+    "next_execution": "After root releases budget/CI gate, implement and peer the first concrete discriminant leaf, then raw original forcing. Independently implement the actual transport/residual fixed-base operation chain. Do not merge those milestones into an unsupported CurrentJets claim."
+  }
+}

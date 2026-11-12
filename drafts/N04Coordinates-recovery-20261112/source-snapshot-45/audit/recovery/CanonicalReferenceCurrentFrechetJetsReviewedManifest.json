@@ -1,0 +1,70 @@
+{
+  "schema": "n04-owner-reviewed-manifest-v1",
+  "path": "audit/reconstructed/CanonicalReferenceCurrentFrechetJetsReviewedManifest.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "owner": "/root/audit_coordinates",
+  "status": "independent_full_source_peer_passed_held_uncompiled",
+  "source": {
+    "path": "audit/reconstructed/CanonicalReferenceCurrentFrechetJets.lean",
+    "target_module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentFrechetJets",
+    "git_blob": "d53b5c3cececfff9655dc1a570e21f3b2281db32",
+    "sha256": "829ec714b643035b32cc1cd6e4e90e4cb54af2a6a75c998784c814c9eac41526",
+    "bytes": 3460,
+    "lines": 74
+  },
+  "candidate": {
+    "blob": "2750e967d895dedaa99965cb54bb496e97ed769d",
+    "sha256": "d7355efd284cab9d2b66967297ebe8f8f146a164db0a329e9933b6533bf3624f",
+    "bytes": 6968
+  },
+  "selected_providers": {
+    "blob": "6e726e56f6a74572c817114f37ade7a223f2241b",
+    "sha256": "1a48c4c1de536be6469a56eb137e50a031f0dee40be7b87322d722f2e58cf619",
+    "nodes": 137,
+    "edges": 209,
+    "existing_exact_actual171": 136,
+    "new_sources": 1,
+    "missing": 0,
+    "cycles": 0
+  },
+  "independent_review": {
+    "blob": "2ee76b504dcb84388af39441f0d958dc6d17f17f",
+    "sha256": "115d4bf61b8d09a933c29a46c1bd22fd5cd65f264269e12fea11bc75e43f6e02",
+    "bytes": 1660,
+    "reviewer": "/root",
+    "result": "pass before CI",
+    "complete_source_read": true
+  },
+  "exact_binding_checks": [
+    "Independent receipt identifies the complete immutable 74-line source by Git blob and SHA256.",
+    "Independent receipt identifies the exact candidate and selected-provider graph.",
+    "Source, candidate, graph, and peer were fetched from the Git object store and their exact contents/identities verified.",
+    "No source changes were made after the independent review."
+  ],
+  "preserved_mathematics": {
+    "loss_before_N": true,
+    "A_B_before_all_points_and_k": true,
+    "k_bound": "k ≤ N",
+    "same_material_sample": true,
+    "same_E0_power": true,
+    "same_parameter_grading": "N + loss",
+    "actual_smoothness": "First clause of the existing CurrentJets contract for this actual atom on unitStrip.",
+    "additional_numeric_cost": "2^N only",
+    "new_smoothness_or_final_estimate_assumptions": false
+  },
+  "remaining_gates": [
+    "Lightweight explicit-name check using preserved indexes / fixed-main token search (parent assigned separately).",
+    "Parent activation only after the current repair batch has full CI success.",
+    "Compilation of this new source in a later selected CI batch."
+  ],
+  "nonclaims": [
+    "This source has not been compiled locally or in CI.",
+    "This receipt does not claim the complete CanonicalPrimitiveGeometry materialJets obligation is finished.",
+    "No active checkout, index, ref, tree, commit, or CI operations were performed."
+  ],
+  "baseline": {
+    "commit": "fc5254a50811fac73c0fd24697c6342ff8585493",
+    "tree": "45d186b993824a8b3b30d407deb250844da4cfd6",
+    "ci": "171 failed in other downstream files; new source not active"
+  }
+}

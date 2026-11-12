@@ -1,0 +1,70 @@
+{
+  "kind": "CI171_failed_quick_check",
+  "head": "fc5254a50811fac73c0fd24697c6342ff8585493",
+  "tree": "45d186b993824a8b3b30d407deb250844da4cfd6",
+  "run": 43321752722,
+  "workflow_number": 1845,
+  "job": 131543898637,
+  "first_lookup": "2026-11-12 22:43:30 UTC",
+  "run_conclusion": "failure",
+  "run_updated_at": "2026-11-12T22:43:24Z",
+  "quick": "failure",
+  "full": "skipped",
+  "endpoint_axiom_report": "skipped",
+  "compiled_quick_modules": [
+    "ConstructedRootCutFirstJets",
+    "ActualPositiveReferenceFirstJets",
+    "WholeReferenceGaugeGlobalTransport",
+    "WholeReferenceGaugeReferenceRadial",
+    "RadialReferencePotentialGerms",
+    "WholePositiveReferenceGaugeFirstJets"
+  ],
+  "log": {
+    "blob": "6c0b35ca035fa5886643bce8e0a354664988746d",
+    "sha256": "58e0624d79a2d144ed6a131a76b0ca7bf4201e81adfd3c4e0e8b73d4ab21df22",
+    "bytes": 100963,
+    "lines": 1054,
+    "run": 43321752722,
+    "job": 131543898637,
+    "downloaded_once": true
+  },
+  "full_error_blocks": {
+    "blob": "f268a70c5e722f73c15557d09abb3f20a0a1157f",
+    "quick_bytes": 7148597,
+    "quick_sha256": "beb73a068df64be5641090f312fdcdc13eb5831e91e12565710b6cb6726b04e2",
+    "blocks": 9,
+    "errors_bytes": 164163,
+    "errors_sha256": "7ce910a69f1dc432902150a0868550af27d7c5ddfc95f55ffd3d67348e227298",
+    "path": "/dev/shm/n04-ci171/errors.json"
+  },
+  "remaining_errors": [
+    "error: src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeReconstruction.lean:56:4: Type mismatch: After simplification, term",
+    "error: src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeReconstruction.lean:102:4: Type mismatch: After simplification, term",
+    "error: src/ContinuousFlexibility/Analysis/ActualAtlasCutFirstJets.lean:141:2: Type mismatch: After simplification, term",
+    "error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean:68:8: Type mismatch: After simplification, term",
+    "error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean:75:6: Type mismatch: After simplification, term",
+    "error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean:62:4: Type mismatch: After simplification, term",
+    "error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean:82:4: Type mismatch: After simplification, term",
+    "error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean:85:58: Application type mismatch: The argument",
+    "error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean:173:8: Type mismatch: After simplification, term"
+  ],
+  "last_complete_green": "836b039233920fa778d9747be7b5d5a9f953fea3",
+  "baseline_coverage": {
+    "compiled": 4409,
+    "total": 4413
+  },
+  "no_new_full_compiled_coverage": true,
+  "budget": {
+    "last_full_green": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "source_added": 19692,
+    "source_deleted": 0,
+    "total_changed_paths_from_green": 149,
+    "net_repair_lines": 26,
+    "generated_root_new_since_green": 147,
+    "full_checked_in_root_lag": 257,
+    "conservative_added": 19949,
+    "limit": 20000,
+    "remaining": 51
+  },
+  "all_limits_unchanged": true
+}

@@ -1,0 +1,174 @@
+{
+  "schema": "n04-ci-repair-candidate-v1",
+  "status": "STATIC_CANDIDATE_PENDING_INDEPENDENT_REVIEW_AND_CI",
+  "path": "quantitative/repair171/CI171WholeGaugeCutOperatorEtaCandidateManifest.json",
+  "author": "/root/quantitative_route",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "base": {
+    "commit": "fc5254a50811fac73c0fd24697c6342ff8585493",
+    "tree": "45d186b993824a8b3b30d407deb250844da4cfd6",
+    "source_delta": "5d29a30f40b0e1c8f9935a4b4075f9ae31c2f467"
+  },
+  "preimage": {
+    "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean",
+    "blob": "79a986c2a3dcd87523b2f123c517f9107a21a941",
+    "sha256": "96a7b8ce367af2b1fc725de8a5fbcc6b2c3b52f055e3c066ae5f96e98564d7e7",
+    "lines": 106,
+    "bytes": 5594
+  },
+  "candidate": {
+    "kind": "source",
+    "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean",
+    "blob": "5c6c40a679707ef636c77dee0bb479c51153adfe",
+    "sha256": "d12d00370749e13176b9ec8cf6ae078636e7d81d3e4ddc049992e88a555b3a36",
+    "bytes": 5790,
+    "server_readback_exact": true,
+    "lines": 109
+  },
+  "diff": {
+    "kind": "diff",
+    "path": "quantitative/repair171/WholeReferenceGaugeAtlasCutOperator.diff",
+    "blob": "57ff95170968d0045e5e1c08d369b1e336e6c347",
+    "sha256": "f4fd5d71384a503063d4e1c9b495d9f18470006a3b9cb08b40b42f98b6e7bf95",
+    "bytes": 1589,
+    "server_readback_exact": true,
+    "added": 7,
+    "deleted": 4,
+    "net": 3
+  },
+  "exact_substitutions": [
+    {
+      "old": "        dsimp only [CanonicalCurrentCutPair, canonicalCutPoint, physicalPieceOpen] at hcut ⊢\n        simpa only [CanonicalCurrentCutPair, canonicalCutPoint, physicalPieceOpen,\n",
+      "new": "        have hcurve (A : CanonicalData S) : canonicalCutPoint S A z m =\n            (fun θ : ℝ => A.inverseChart z (A.cutPair m).1 (A.cutRadius m, θ)) := rfl\n        simpa only [CanonicalCurrentCutPair, hcurve, physicalPieceOpen,\n"
+    },
+    {
+      "old": "      dsimp only [canonicalHeight] at htrans ⊢\n      simpa only [canonicalHeight, V, W,\n",
+      "new": "      have hheight (A : CanonicalData S) (j : ℕ) : canonicalHeight S A z j u =\n          (fun p : PolarPoint => u (A.inverseChart z j p) /\n            A.height z j (A.inverseChart z j p)) := rfl\n      simpa only [hheight, V, W,\n"
+    }
+  ],
+  "reverse_substitutions_restore_preimage": true,
+  "complete_public_header": {
+    "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_actual_cutOperator_and_sourcePairing",
+    "sha256": "0552cf85a39044023a868c5f39f7c632a64ed68eda7e13aa1bc5c08e6afabee4",
+    "byte_unchanged": true
+  },
+  "imports_byte_unchanged": true,
+  "options_byte_unchanged": true,
+  "no_resource_settings_added": true,
+  "diagnostics": {
+    "workflow_log": {
+      "blob": "6c0b35ca035fa5886643bce8e0a354664988746d",
+      "sha256": "58e0624d79a2d144ed6a131a76b0ca7bf4201e81adfd3c4e0e8b73d4ab21df22",
+      "bytes": 100963
+    },
+    "complete_cached_artifact": {
+      "path": "/dev/shm/n04-ci171/quick.log",
+      "sha256": "beb73a068df64be5641090f312fdcdc13eb5831e91e12565710b6cb6726b04e2"
+    },
+    "complete_cached_errors": {
+      "path": "/dev/shm/n04-ci171/errors.json",
+      "sha256": "7ce910a69f1dc432902150a0868550af27d7c5ddfc95f55ffd3d67348e227298",
+      "bytes": 164163,
+      "blocks": 9
+    },
+    "two_owned_full_blocks": {
+      "kind": "evidence",
+      "path": "quantitative/repair171/WholeReferenceGaugeAtlasCutOperatorFullDiagnostics.json",
+      "blob": "4ddfe7917eb47fb943523fe8b44265951817fd89",
+      "sha256": "3f5889a83a11ef0a878f5770ea1f3b867121fbee4884eec2d918ef83ffe8250e",
+      "bytes": 139743,
+      "server_readback_exact": true
+    },
+    "block_hashes": [
+      {
+        "header": "error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean:68:8: Type mismatch: After simplification, term",
+        "body_sha256": "e5c5ed055e910bc6b1306bcaff952848a0f9a34c5739c31e79432e694c530e55",
+        "body_bytes": 69746
+      },
+      {
+        "header": "error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean:75:6: Type mismatch: After simplification, term",
+        "body_sha256": "f4ec80afc67c536f191c7f648af8dbcfb8a300b752aae5bca2e5a166a11c2f59",
+        "body_bytes": 67634
+      }
+    ]
+  },
+  "actual_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasData.lean",
+      "git_blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "bytes": 6809,
+      "lines": 131,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeCanonicalAtlasData",
+        "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge"
+      ],
+      "actual_tree_match": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeCanonicalAtlasData",
+      "path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasData.lean",
+      "git_blob": "c3a5f79617c7e583e16deb09c44e5679744ea092",
+      "sha256": "a4a3c629dcde3b7c324291d5e65c6bc6ceacbbdf8968577f2abcc3f0472c9f1d",
+      "bytes": 7986,
+      "lines": 165,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04WholeComponentPieces",
+        "ContinuousFlexibility.Analysis.WholePositiveCanonicalFields",
+        "ContinuousFlexibility.Analysis.N04bPositiveDivision",
+        "ContinuousFlexibility.Analysis.CanonicalClosedTransport"
+      ],
+      "actual_tree_match": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeCanonicalAtlasCuts",
+      "path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasCuts.lean",
+      "git_blob": "8a0a0ea0915b84df510b40e284c8fceaec96b179",
+      "sha256": "4bb1d9bdf307bb29e05c9ec8f7765aee320a5b0db39fcc12b8e04f22b97ebd96",
+      "bytes": 4430,
+      "lines": 95,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeCanonicalAtlasData"
+      ],
+      "actual_tree_match": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bPositiveDivision",
+      "path": "src/ContinuousFlexibility/Analysis/N04bPositiveDivision.lean",
+      "git_blob": "052cdea1dd1db004e3021e7100bf3b0704f1f472",
+      "sha256": "d274f19959dd831c45e7d0ee0374a4bf01132369e13d69e595beb71a60de39ee",
+      "bytes": 5646,
+      "lines": 110,
+      "imports": [
+        "ContinuousFlexibility.Blueprint.Statements",
+        "ContinuousFlexibility.Analysis.N04bGeometryPreservation"
+      ],
+      "actual_tree_match": true
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "git_blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "bytes": 101197,
+      "lines": 1773,
+      "actual_tree_match": true,
+      "read_scope": "Actual canonicalCutPoint, canonicalHeight, canonicalCurrentPoint, canonicalReferencePoint, CanonicalCurrentCutPair definitions."
+    }
+  ],
+  "self_review": {
+    "full_original_and_candidate_read": true,
+    "failed_previous_dsimp_explicitly_acknowledged": true,
+    "diagnosis": "The actual full diagnostics retain canonicalCutPoint as a partial application inside Set.range and canonicalHeight as a partial application inside radialPartial. Already-applied scalar values and negative metadata have reduced correctly; the remaining difference is the retained whole-record argument under these function wrappers.",
+    "repair": "Replace the two failed dsimp steps with local generic full-function eta equalities proved by rfl. These equalities omit the final argument in their left hand sides, so they match exactly the partial functions. Keep the existing original hB projections and all actual negative metadata simplification.",
+    "curve_identity": "For arbitrary A : CanonicalData S, canonicalCutPoint S A z m = fun theta => A.inverseChart z (A.cutPair m).1 (A.cutRadius m, theta).",
+    "height_identity": "For arbitrary A : CanonicalData S and j : Nat, canonicalHeight S A z j u = fun p => u (A.inverseChart z j p) / A.height z j (A.inverseChart z j p).",
+    "scope": "Both are definitional equalities of total functions, with no new hypothesis, domain or bound. Original K/e0/e/V/W/cut pair and hB remain unchanged. This is not a newly chosen atlas or transmission estimate."
+  },
+  "compiled": false,
+  "local_Lean_or_elaboration": false,
+  "active_index_ref_or_ci_edits": false,
+  "extra_Lean_archive": false,
+  "gate": "Independent full-source peer, then actual remote CI under unchanged default limits."
+}

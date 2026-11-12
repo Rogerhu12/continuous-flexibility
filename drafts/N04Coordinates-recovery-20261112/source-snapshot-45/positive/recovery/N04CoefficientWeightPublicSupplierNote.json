@@ -1,0 +1,30 @@
+{
+  "schema": "n04-forcing-route-public-supplier-clarification-v1",
+  "status": "READ_ONLY_NO_SOURCE_CHANGE",
+  "path": "positive/recovery/N04ActualForcingNextConsumersPublicSupplierNote.json",
+  "route_blob": "2dd998ad26a02e2044542f90312f18e41454d146",
+  "route_sha256": "1258f35f97bef486e88d8e79ae904797b2a594aa6740c5148ab2c8e02a80a020",
+  "clarification": "The sample-alignment paragraph's phrase '199's already-proved sample-E0-to-W comparison' describes its verified mathematics, not an importable public lemma: n04_increment_sample_E0_power_bound in199 is private. No downstream source may call that private declaration.",
+  "actual_public_chain": [
+    "materialSample_global_endpoint_models hT hN.1.1 supplies common d0,L,KE and every sample's |endpointX-cellIndex| bound and E0 upper model.",
+    "materialE0_rpow_oneSided_shift (R>=0) (L>=0) converts the model power at endpointX to a fixed power at the same cellIndex.",
+    "radialE_rpow_eq_materialE0 converts that model at the integer index to exp(P)*radialE^P."
+  ],
+  "implementation_rule": "A future sample-alignment leaf must either invoke those public suppliers directly in a short actual proof, or use a separately authorized public extraction with an explicit source diff and peer. This note authorizes neither a frozen199 edit nor a duplicate generic helper. The first proposed discriminant leaf needs only199's public normalized_joint_growth and is unaffected.",
+  "height": "Apply this numerical chain only to the uncharged E0 power after gamma=3/4 sample comparison; never absorb the charged H^gamma factor.",
+  "selected_public_sources": [
+    {
+      "module": "MaterialSampleGlobalModels",
+      "git_blob": "f4c793c5cb6b7823ce77a593bfd2ba04c9cd2e9a"
+    },
+    {
+      "module": "MaterialSampleShift",
+      "git_blob": "e79e27788e1c853bed9950e91d7d121995ab1508"
+    },
+    {
+      "module": "MaterialSampleDiscreteEnvelope",
+      "git_blob": "4b9de8d41ee0cac2a7f2cf3b1af9bede4dfbc437"
+    }
+  ],
+  "new_Lean_lines": 0
+}

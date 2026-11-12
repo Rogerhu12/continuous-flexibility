@@ -1,0 +1,36 @@
+{
+  "kind": "CI171_root_two_owned_narrow_repairs",
+  "owner": "/root",
+  "parent": "fc5254a50811fac73c0fd24697c6342ff8585493",
+  "files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeReconstruction.lean",
+      "preimage": "26ed383f47116763359682c60dc2edc920b01d5e",
+      "candidate": "03ae22426c55b94746067ac9a7e09ca2da76bd28",
+      "sha256": "3d23df77cb192b49a50c41f3492df12dee2840ce11e6750fa2b8230edd4b64da",
+      "lines": 111,
+      "net_added": 3
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ActualAtlasCutFirstJets.lean",
+      "preimage": "ddb7cdf61cd013c97afe3efb33b13e03394fa986",
+      "candidate": "528eda106b3b3300314ce573953e14f856dc8cfe",
+      "sha256": "8cf600bd87bd6ca4cf2c1ab020ed4d4baf7d185a4bc09b730223a9ade83dd74f",
+      "lines": 149,
+      "net_added": 3
+    }
+  ],
+  "complete_public_headers_unchanged": 4,
+  "private_heads_unchanged": 1,
+  "imports_unchanged": true,
+  "reason": [
+    "Give the continuity proof the exact local x type before rewriting its target neighborhood by the original inverse-germ identity.",
+    "Expose the same height ratio as its literal product lambda before composing the original smooth quotient.",
+    "Use a generic definitional function equality for endpointAlignedChart so that the same pointwise whole-atlas metadata also simplifies inside fderiv."
+  ],
+  "full_diagnostics": "f268a70c5e722f73c15557d09abb3f20a0a1157f",
+  "net_Lean_added": 6,
+  "local_Lean": false,
+  "compiled": false,
+  "independent_peer": "requested from quantitative_route"
+}

@@ -1,0 +1,234 @@
+{
+  "schema": "n04_independent_static_repair_review_v1",
+  "path": "quantitative/recovery/reviews/CI171ReferenceGaugeAndActualCutFirstJetsIndependentReview.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "reviewer": "/root/quantitative_route",
+  "source_author": "/root",
+  "result": "PASS: exact narrow elaboration repairs, not compiled",
+  "base": {
+    "commit": "fc5254a50811fac73c0fd24697c6342ff8585493",
+    "tree": "45d186b993824a8b3b30d407deb250844da4cfd6",
+    "parent": "84f31a030a632f7d5ddba43b5a638d29da00af45",
+    "seven_path_delta_blob": "5d29a30f40b0e1c8f9935a4b4075f9ae31c2f467",
+    "preimage_validation": "Both reviewed source paths and the six providers below match the exact parent tree and are absent from the seven changed paths; therefore they are the actual CI171 bytes."
+  },
+  "full_source_reads": {
+    "before_lines": 254,
+    "after_lines": 260,
+    "complete_sources_read": true,
+    "complete_error_blocks_read": 3
+  },
+  "files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeReconstruction.lean",
+      "before": {
+        "blob": "26ed383f47116763359682c60dc2edc920b01d5e",
+        "sha256": "93acd97fbcd9b462756450fd73b0c507a7c6685b498c4064742c6dc0ba33d210",
+        "bytes": 5447,
+        "lines": 108
+      },
+      "after": {
+        "blob": "03ae22426c55b94746067ac9a7e09ca2da76bd28",
+        "sha256": "3d23df77cb192b49a50c41f3492df12dee2840ce11e6750fa2b8230edd4b64da",
+        "bytes": 5663,
+        "lines": 111
+      },
+      "public_headers": [
+        {
+          "name": "ContinuousFlexibility.Analysis.canonicalReferenceGauge_reconstructs_closed_fields",
+          "kind": "theorem",
+          "sha256": "7fcb08849b3e5799e93ad8b6525aa8f83898a38844cba8ff893ff7cf3c295dec"
+        },
+        {
+          "name": "ContinuousFlexibility.Analysis.canonicalReferenceGauge_closed_fullJets",
+          "kind": "theorem",
+          "sha256": "32ffa55b1193c9eb44ee9cb8e53aeb6fd35cf6eed801c50b54aa915e79b7933d"
+        }
+      ],
+      "private_headers": [],
+      "imports": [
+        "import ContinuousFlexibility.Analysis.CanonicalActualEndpointFields",
+        "import ContinuousFlexibility.Analysis.WholePositiveReferenceGaugeFirstJets"
+      ],
+      "options": [],
+      "all_complete_headers_unchanged": true,
+      "exact_substitutions": [
+        {
+          "before": "    simpa only [hSp] using hinv.1.continuousAt.tendsto\n",
+          "after": "    have hSx : ContinuousAt (canonicalReferencePoint C K z m) x := hinv.1.continuousAt\n    simpa only [hSp] using hSx.tendsto\n"
+        },
+        {
+          "before": "    simpa only [wholePositiveReferenceGaugeHeight, wholePositiveChartHeight,\n      Function.comp_def, div_eq_mul_inv] using hquot.comp x hinv.1\n",
+          "after": "    change ContDiffAt ℝ ∞ (fun y => K.height (C.referenceState, 0) m\n      (canonicalReferencePoint C K z m y) * (n04CoordinatesCurrentHeightRatio C K z m\n        (canonicalReferencePoint C K z m y))⁻¹) x\n    simpa only [Function.comp_def, div_eq_mul_inv] using hquot.comp x hinv.1\n"
+        }
+      ],
+      "reverse_substitutions_restore_preimage": true,
+      "diff": {
+        "text": "--- a/src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeReconstruction.lean\n+++ b/src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeReconstruction.lean\n@@ -53,7 +53,8 @@\n   have hinv := canonicalCurrentPoint_closed_inverse_data hA hz₀ hs₀ hz hs m hp\n   have hSp : canonicalReferencePoint C K z m x = p := hinv.2.1.eq_of_nhds\n   have hSto : Tendsto (canonicalReferencePoint C K z m) (𝓝 x) (𝓝 p) := by\n+    have hSx : ContinuousAt (canonicalReferencePoint C K z m) x := hinv.1.continuousAt\n+    simpa only [hSp] using hSx.tendsto\n-    simpa only [hSp] using hinv.1.continuousAt.tendsto\n   have hrefpos : ∀ᶠ y in 𝓝 p, 0 < K.height (C.referenceState, 0) m y :=\n     href.2.1.continuousAt.tendsto.eventually (Ioi_mem_nhds href.2.2.2)\n   have hcurpos : ∀ᶠ y in 𝓝 x, 0 < K.height z m y :=\n@@ -99,8 +100,10 @@\n   have hheight : ContDiffAt ℝ ∞\n       (wholePositiveReferenceGaugeHeight (K.height (C.referenceState, 0) m)\n         (canonicalReferencePoint C K z m) (n04CoordinatesCurrentHeightRatio C K z m)) x := by\n+    change ContDiffAt ℝ ∞ (fun y => K.height (C.referenceState, 0) m\n+      (canonicalReferencePoint C K z m y) * (n04CoordinatesCurrentHeightRatio C K z m\n+        (canonicalReferencePoint C K z m y))⁻¹) x\n+    simpa only [Function.comp_def, div_eq_mul_inv] using hquot.comp x hinv.1\n-    simpa only [wholePositiveReferenceGaugeHeight, wholePositiveChartHeight,\n-      Function.comp_def, div_eq_mul_inv] using hquot.comp x hinv.1\n   have he := canonicalReferenceGauge_reconstructs_closed_fields hA hz₀ hs₀ hz hs m hp\n   exact ⟨finiteFullJetMatch_of_germ (hFref.comp x hinv.1) hcur.1 he.1,\n     finiteFullJetMatch_of_germ hheight hcur.2.1 he.2⟩\n",
+        "counts": {
+          "added": 6,
+          "deleted": 3
+        }
+      }
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ActualAtlasCutFirstJets.lean",
+      "before": {
+        "blob": "ddb7cdf61cd013c97afe3efb33b13e03394fa986",
+        "sha256": "8b9f98c22ddbad6a4c7244f7bd5ce061a14594d77926e7bc48d01d6d4a07c35c",
+        "bytes": 7633,
+        "lines": 146
+      },
+      "after": {
+        "blob": "528eda106b3b3300314ce573953e14f856dc8cfe",
+        "sha256": "8cf600bd87bd6ca4cf2c1ab020ed4d4baf7d185a4bc09b730223a9ade83dd74f",
+        "bytes": 7801,
+        "lines": 149
+      },
+      "public_headers": [
+        {
+          "name": "ContinuousFlexibility.Analysis.n04Coordinates_actualAtlas_cutFirstJetMatching",
+          "kind": "theorem",
+          "sha256": "096f5250f46c681fae351ad43bf2e4ee366ca315c35a504ac3a5f0deda9be261"
+        },
+        {
+          "name": "ContinuousFlexibility.Analysis.n04WholeCanonicalAtlasData_cutFirstJetMatching",
+          "kind": "theorem",
+          "sha256": "c7864d0c9c50c1adf707b92afa9fd5ca976b1785d2498014ca0a118176b941ac"
+        }
+      ],
+      "private_headers": [
+        {
+          "name": "n04Coordinates_actualAtlas_middle_firstJets",
+          "header_equal": true,
+          "sha256": "46577e1bbe6554aceea42e69bdbd21370fee9aa67607d9f3baf2bec025723db7"
+        }
+      ],
+      "imports": [
+        "import ContinuousFlexibility.Analysis.ConstructedRootCutFirstJets",
+        "import ContinuousFlexibility.Analysis.N04bActualAtlasCuts",
+        "import ContinuousFlexibility.Analysis.N04bActualCharacteristics",
+        "import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData"
+      ],
+      "options": [],
+      "all_complete_headers_unchanged": true,
+      "exact_substitutions": [
+        {
+          "before": "  simpa only [CanonicalGeometry.endpointAlignedChart, canonicalCutPoint,\n",
+          "after": "  have hE (V : CanonicalData S) (j : ℕ) (ρ s : ℝ) :\n      CanonicalGeometry.endpointAlignedChart V z j ρ s =\n        (fun p : PolarPoint => (s * ((V.chart z j p).1 - ρ), (V.chart z j p).2)) := rfl\n  simpa only [hE, canonicalCutPoint,\n"
+        }
+      ],
+      "reverse_substitutions_restore_preimage": true,
+      "diff": {
+        "text": "--- a/src/ContinuousFlexibility/Analysis/ActualAtlasCutFirstJets.lean\n+++ b/src/ContinuousFlexibility/Analysis/ActualAtlasCutFirstJets.lean\n@@ -138,7 +138,10 @@\n     CanonicalGeometry.CutFirstJetMatching S C\n       (n04WholeCanonicalAtlasData C L K e cell F G Q N) base ε := by\n   intro m z hz θ\n+  have hE (V : CanonicalData S) (j : ℕ) (ρ s : ℝ) :\n+      CanonicalGeometry.endpointAlignedChart V z j ρ s =\n+        (fun p : PolarPoint => (s * ((V.chart z j p).1 - ρ), (V.chart z j p).2)) := rfl\n+  simpa only [hE, canonicalCutPoint,\n-  simpa only [CanonicalGeometry.endpointAlignedChart, canonicalCutPoint,\n     n04WholeCanonicalAtlasData, n04bWithInteriorDivision,\n     n04WholeCutPair, Equiv.apply_symm_apply,\n     Bool.false_eq_true, ite_false, ite_true] using hcut m z hz θ\n",
+        "counts": {
+          "added": 4,
+          "deleted": 1
+        }
+      }
+    }
+  ],
+  "actual_providers": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalActualEndpointFields.lean",
+      "blob": "b72852cb592db98ad8a2bf5ac5c0f09c74c72962",
+      "sha256": "1ad3a145230072398f180d696e774230f26e0b8f2d97dc5acbb33f6acc6e93eb",
+      "bytes": 10828,
+      "review_scope": "canonicalCurrentPoint_closed_inverse_data; currentPoint mapsTo closed; closed current height regularity/positivity"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean",
+      "blob": "9f240624bea6c815b9ceb64eb7eff050b4f51316",
+      "sha256": "89b8e10fee150ed5c3816f725f0bafa80352d4af749519948e3833ed0ca2af28",
+      "bytes": 8095,
+      "review_scope": "wholePositiveReferenceGaugeHeight and its quotient equality"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholePositiveChartGeometry.lean",
+      "blob": "118c0019a784242b74c880166ee4dedc43e1dede",
+      "sha256": "b0f9f540c1d8bcdf0e5414b487f15df378e3b36e369697c012f8bc28bbba892c",
+      "bytes": 7224,
+      "review_scope": "wholePositiveChartHeight"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "bytes": 101197,
+      "review_scope": "CanonicalGeometry.endpointAlignedChart; CutFirstJetMatching; canonicalCutPoint"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasData.lean",
+      "blob": "c3a5f79617c7e583e16deb09c44e5679744ea092",
+      "sha256": "a4a3c629dcde3b7c324291d5e65c6bc6ceacbbdf8968577f2abcc3f0472c9f1d",
+      "bytes": 7986,
+      "review_scope": "actual whole negative chart/height/inverse and cut metadata"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04bPositiveDivision.lean",
+      "blob": "052cdea1dd1db004e3021e7100bf3b0704f1f472",
+      "sha256": "d274f19959dd831c45e7d0ee0374a4bf01132369e13d69e595beb71a60de39ee",
+      "bytes": 5646,
+      "review_scope": "n04bWithInteriorDivision only changes dividedDifference"
+    }
+  ],
+  "diagnostics": {
+    "complete_nine_error_blocks_blob": "f268a70c5e722f73c15557d09abb3f20a0a1157f",
+    "sha256": "7ce910a69f1dc432902150a0868550af27d7c5ddfc95f55ffd3d67348e227298",
+    "source": "Already downloaded complete CI171 artifact; no new CI/log request.",
+    "reviewed": [
+      {
+        "header": "error: src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeReconstruction.lean:56:4: Type mismatch: After simplification, term",
+        "sha256": "b3ce986ff550661d6b226f8e4c66fe190d6a14c50b04276e2069fb5379b06adf",
+        "bytes": 456
+      },
+      {
+        "header": "error: src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeReconstruction.lean:102:4: Type mismatch: After simplification, term",
+        "sha256": "69b4506501728dbee3908db5f05da1e96091be84f1f521e13d1d296168e0097d",
+        "bytes": 954
+      },
+      {
+        "header": "error: src/ContinuousFlexibility/Analysis/ActualAtlasCutFirstJets.lean:141:2: Type mismatch: After simplification, term",
+        "sha256": "58c5489fc654ead692061eb3b0323a9b51ead33b23eb9d1c1c0b44f2b3d6b0b4",
+        "bytes": 16734
+      }
+    ]
+  },
+  "conclusions": [
+    {
+      "source": "CanonicalReferenceGaugeReconstruction",
+      "location": "hSto",
+      "finding": "The explicit ContinuousAt type fixes the source point to the existing local x before constructing Tendsto. The genuine inverse-germ provider gives that exact continuity by reduction of x. hSp then rewrites the destination neighborhood to p. No inverse point or neighborhood is reselected."
+    },
+    {
+      "source": "CanonicalReferenceGaugeReconstruction",
+      "location": "hheight",
+      "finding": "The new change exposes the literal reference-height times reciprocal-current-ratio function. It is exactly the definition of wholePositiveReferenceGaugeHeight through wholePositiveChartHeight. Existing hquot.comp x hinv.1 then matches under Function.comp_def and div_eq_mul_inv. Same hquot, point, and local inverse remain."
+    },
+    {
+      "source": "ActualAtlasCutFirstJets",
+      "location": "whole-atlas transfer",
+      "finding": "The generic rfl equality hE stops before the PolarPoint argument. It therefore rewrites endpointAlignedChart when it is an unapplied argument to fderiv, which the former applied equation did not expose. Existing whole-atlas cut metadata reduces the same negative chart and indices on both sides. The fully applied cut point and all scalar/height terms retain their original simplification."
+    }
+  ],
+  "unchanged_contracts": {
+    "complete_public_headers": 4,
+    "complete_private_headers": 1,
+    "imports": true,
+    "options": true,
+    "all_nonreplacement_bytes": true,
+    "same_witnesses_points_cutoff_and_constants": true,
+    "no_new_public_declarations": true,
+    "no_added_assumption_or_estimate": true,
+    "total_added_lines": 10,
+    "total_deleted_lines": 4,
+    "net_added_lines": 6,
+    "no_resource_limit_increase": true
+  },
+  "scope_limits": [
+    "No local Lean, elaboration, build or CI was run.",
+    "The complete sources and actual changed-expression providers were read; this is not a new whole-repository dependency or compilation certification.",
+    "Success of actual elaboration remains for the parent-selected next CI."
+  ],
+  "active_index_refs_or_ci_changed": false
+}

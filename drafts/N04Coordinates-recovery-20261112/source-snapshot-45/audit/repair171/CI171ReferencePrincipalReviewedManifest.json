@@ -1,0 +1,63 @@
+{
+  "schema": "n04-owner-reviewed-focused-repair-v1",
+  "path": "audit/repair171/WholeReferenceGaugeReferencePrincipalCI171RepairReviewedManifest.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "owner": "/root/audit_coordinates",
+  "status": "independent_full_peer_passed_held_uncompiled",
+  "actual_preimage": {
+    "commit": "fc5254a50811fac73c0fd24697c6342ff8585493",
+    "tree": "45d186b993824a8b3b30d407deb250844da4cfd6",
+    "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean",
+    "blob": "2d253a2be2fb1b7653fba79a0ff2495b7244e1ab",
+    "sha256": "00a9377f1e6d12183ad385ce1e1e5a5fcec7035688eea3ce057c69ef878bd224",
+    "bytes": 9780,
+    "lines": 175,
+    "ref": "fc5254a50811fac73c0fd24697c6342ff8585493"
+  },
+  "selected_source": {
+    "blob": "c7eaf4fe2c88fa12158ece8d2f32a86bbaad817e",
+    "sha256": "1ba433790477f1013bcb4a16a11115eeb3691c16b57daef7ca6304194500fc72",
+    "bytes": 10180,
+    "lines": 184
+  },
+  "candidate": {
+    "blob": "551a061ec61334a5af4f062a5c48d85d49307261",
+    "sha256": "d469a337dc320c1c74175bac11fc1f5eca386357f340dcf242388b014912497d",
+    "bytes": 20922
+  },
+  "exact_diff": {
+    "blob": "af5ff06b61f9d5bf0029dde4aeaf15bd632368d5",
+    "sha256": "b7d73c8a81eea959b8471ec8fd2bb1445ddd4c7cd93693f6268a5ce8edec2320",
+    "bytes": 2152,
+    "path": "audit/repair171/WholeReferenceGaugeReferencePrincipalCI171.diff",
+    "added": 13,
+    "deleted": 4,
+    "net": 9,
+    "unified_apply_exact": true,
+    "literal_forward_reverse_exact": true
+  },
+  "independent_peer": {
+    "blob": "7c1aa62bd57027ef7438df3c1f941c458a86f798",
+    "sha256": "ad9c2717f06cd9116815c99d25e92f5f73068bc7d155e84ae1e364afb6c91d21",
+    "bytes": 1463,
+    "reviewer": "/root",
+    "result": "pass before CI",
+    "full_before_and_after_read": true
+  },
+  "preserved": {
+    "complete_public_heads": 1,
+    "complete_private_heads": 1,
+    "all_headers_unchanged": true,
+    "imports_and_options_unchanged": true,
+    "all_other_bytes_unchanged": true,
+    "same_atlas_state_sample_and_witness": true,
+    "new_assumptions": false,
+    "resource_limits_changed": false
+  },
+  "validation": "All source, diff, candidate and peer identities were fetched and verified from the Git object store. No source edits occurred after the peer.",
+  "limits": [
+    "This is an uncompiled repair candidate; parent controls activation and the next CI.",
+    "No active repository/index/ref/tree/commit or CI operation was performed by this agent.",
+    "No duplicate Lean archive copy was created."
+  ]
+}

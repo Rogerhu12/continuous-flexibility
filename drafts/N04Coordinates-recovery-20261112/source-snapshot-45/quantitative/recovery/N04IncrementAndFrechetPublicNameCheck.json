@@ -1,0 +1,179 @@
+{
+  "schema": "n04_lightweight_explicit_public_name_check_v1",
+  "path": "quantitative/recovery/CoefficientIncrementAndFrechetPublicNameCheckCI171.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "author": "/root/quantitative_route",
+  "status": "pass_with_explicit_scope",
+  "source_rows": [
+    {
+      "key": "increment199",
+      "blob": "63073bc007f7945e905e6cb9237a96f2c463ff8a",
+      "sha256": "d94ade21f71bc1074689e67b3ef5922d24c9f15ed26b7c9d0490d0c8ef3a40e8",
+      "lines": 199,
+      "declarations": [
+        {
+          "name": "ContinuousFlexibility.Statements.N01Properties.coefficientIncrement_parameterSpatialTower_parameterJet",
+          "short": "N01Properties.coefficientIncrement_parameterSpatialTower_parameterJet",
+          "kind": "theorem",
+          "line": 64,
+          "header_sha256": "95840709d51ee78e342ec3743fc1b3477211db5d40febe6ff17a19c599e66029"
+        },
+        {
+          "name": "ContinuousFlexibility.Statements.N01Properties.coefficientIncrement_joint_unit_bound",
+          "short": "N01Properties.coefficientIncrement_joint_unit_bound",
+          "kind": "theorem",
+          "line": 80,
+          "header_sha256": "edce4eb7ca4627d4c1fc933533813d0e2f8e060b99c2b1d5ee3f3ae5fc5e9eef"
+        },
+        {
+          "name": "ContinuousFlexibility.Statements.N01Properties.coefficientIncrement_normalized_joint_growth",
+          "short": "N01Properties.coefficientIncrement_normalized_joint_growth",
+          "kind": "theorem",
+          "line": 171,
+          "header_sha256": "8de09cc0dbfb567c39306395c07a8e367ba16cc994f0f8bc2691fd1abdc74b08"
+        }
+      ],
+      "warnings": [],
+      "target_module": "ContinuousFlexibility.Analysis.N04CoefficientIncrementJointGain"
+    },
+    {
+      "key": "frechet74",
+      "blob": "d53b5c3cececfff9655dc1a570e21f3b2281db32",
+      "sha256": "829ec714b643035b32cc1cd6e4e90e4cb54af2a6a75c998784c814c9eac41526",
+      "lines": 74,
+      "declarations": [
+        {
+          "name": "ContinuousFlexibility.Analysis.n04Coordinates_unitAtom_absolute_iteratedFDeriv_envelope",
+          "short": "n04Coordinates_unitAtom_absolute_iteratedFDeriv_envelope",
+          "kind": "theorem",
+          "line": 34,
+          "header_sha256": "8a5255d1f3b5c194a7d7bf575d3e2fed783aef77c84a962e999022d23c84f141"
+        }
+      ],
+      "warnings": [],
+      "target_module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentFrechetJets"
+    }
+  ],
+  "source_bindings": {
+    "increment199": {
+      "candidate_blob": "56b7b0d3176bae7805b3443b5e36710e51277699",
+      "owner_blob": "5081c4b1441e511e156173bcebfe9dd56b985469",
+      "independent_math_review_blob": "f51a7c5303f3ead57a169d8eee834c8895d42bb4",
+      "seven_import_closure_blob": "ba4f80c814ec1273b8363c5f50b5a12c8e9a1b34"
+    },
+    "frechet74": {
+      "owner_blob": "aa48c9c2aac06c095ca835bc4f168d4e6e9334d2",
+      "owner_sha256": "c496fc2c8037f94c71b6b18a757e99a1bc0627c1533aade686d1c24414ec82c6",
+      "independent_math_review_blob": "2ee76b504dcb84388af39441f0d958dc6d17f17f",
+      "selected_graph_blob": "6e726e56f6a74572c817114f37ade7a223f2241b"
+    }
+  },
+  "cached_index_checks": [
+    {
+      "label": "actual169_nonmain_524",
+      "index_blob": "9c3e8c742cbce4d8b019b5d7923b45af5f30dcba",
+      "source_count": 524,
+      "declaration_count": 1974,
+      "collisions": []
+    },
+    {
+      "label": "149_selected_sources",
+      "index_blob": "394db737d43724d8c5b39783fa7263419f89ada1",
+      "source_count": 149,
+      "declaration_count": 703,
+      "collisions": []
+    },
+    {
+      "label": "fixedB227_new_sources",
+      "index_blob": "5c815b6f63a572455a89ef2cc2e778fb4ed717b6",
+      "source_count": 227,
+      "declaration_count": 1301,
+      "collisions": []
+    },
+    {
+      "label": "reference33_post149_new_sources",
+      "index_blob": "170b0a0717f1275be27271a136533996c8f2584d",
+      "index_sha256": "69c859ad141c271135e53984ff4033f3b535de58170ef4eeb32fb51f33cf961c",
+      "source_count": 161,
+      "declaration_count": 318,
+      "collisions": []
+    }
+  ],
+  "new_sources_pairwise_collision": [],
+  "main_exact_token_search": {
+    "head_confirmed": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "ref_response": {
+      "ref": "refs/heads/main",
+      "node_id": "REF_kwDOVqN_5a9yZWZzL2hlYWRzL21haW4",
+      "url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/git/refs/heads/main",
+      "object": {
+        "sha": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "type": "commit",
+        "url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/git/commits/1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac"
+      }
+    },
+    "search_results": [
+      {
+        "token": "coefficientIncrement_parameterSpatialTower_parameterJet",
+        "url": "https://api.github.com/search/code?q=repo%3ARogerhu12%2Fcontinuous-flexibility%20%22coefficientIncrement_parameterSpatialTower_parameterJet%22&per_page=100",
+        "response": {
+          "total_count": 0,
+          "incomplete_results": false,
+          "items": []
+        },
+        "raw_response_sha256": "4af480b8ee5b87b369a76c49bd22c9a783908272ebffbe97898f8ab0f0772a5f"
+      },
+      {
+        "token": "coefficientIncrement_joint_unit_bound",
+        "url": "https://api.github.com/search/code?q=repo%3ARogerhu12%2Fcontinuous-flexibility%20%22coefficientIncrement_joint_unit_bound%22&per_page=100",
+        "response": {
+          "total_count": 0,
+          "incomplete_results": false,
+          "items": []
+        },
+        "raw_response_sha256": "4af480b8ee5b87b369a76c49bd22c9a783908272ebffbe97898f8ab0f0772a5f"
+      },
+      {
+        "token": "coefficientIncrement_normalized_joint_growth",
+        "url": "https://api.github.com/search/code?q=repo%3ARogerhu12%2Fcontinuous-flexibility%20%22coefficientIncrement_normalized_joint_growth%22&per_page=100",
+        "response": {
+          "total_count": 0,
+          "incomplete_results": false,
+          "items": []
+        },
+        "raw_response_sha256": "4af480b8ee5b87b369a76c49bd22c9a783908272ebffbe97898f8ab0f0772a5f"
+      },
+      {
+        "token": "n04Coordinates_unitAtom_absolute_iteratedFDeriv_envelope",
+        "url": "https://api.github.com/search/code?q=repo%3ARogerhu12%2Fcontinuous-flexibility%20%22n04Coordinates_unitAtom_absolute_iteratedFDeriv_envelope%22&per_page=100",
+        "response": {
+          "total_count": 0,
+          "incomplete_results": false,
+          "items": []
+        },
+        "raw_response_sha256": "4af480b8ee5b87b369a76c49bd22c9a783908272ebffbe97898f8ab0f0772a5f"
+      }
+    ],
+    "scope": "GitHub code-search exact token queries on the default branch, whose ref was checked at main1ece. All returned total_count=0 and incomplete_results=false. This is an indexed-name check, not a fresh lexical scan of every main source."
+  },
+  "explicit_lexical_scope": {
+    "parser": "Existing namespace-aware explicit declaration parser",
+    "names_read_from_exact_source_bytes": true,
+    "source_Git_and_SHA256_verified": true,
+    "complete_public_headers_fingerprinted": true,
+    "index_counts": [
+      1974,
+      703,
+      1301,
+      318
+    ],
+    "indexes_may_overlap": true,
+    "matching": "Exact qualified name, additionally conservative exact short declaration name.",
+    "elaborator_generated_names_or_aliases_checked": false
+  },
+  "current_base_note": "The retained nonmain index is actual169 and the 703-name index is the selected149 source set. Subsequent CI170/171 repairs retain complete public headers and add no public names, as separately reviewed; this artifact does not claim a new full-repository scan or compilation.",
+  "mathematical_review": false,
+  "local_Lean": false,
+  "active_index_ref_or_CI_changes": false,
+  "gate": "This discharges only the requested lightweight explicit-name check. The two held sources retain their existing mathematical peer/owner and provider-selection gates; actual compilation and parent activation remain separate."
+}

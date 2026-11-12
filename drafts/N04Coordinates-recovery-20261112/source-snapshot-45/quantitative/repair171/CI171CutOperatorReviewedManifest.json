@@ -1,0 +1,69 @@
+{
+  "schema": "n04_reviewed_source_manifest_v1",
+  "status": "independently_reviewed_uncompiled",
+  "path": "quantitative/repair171/CI171WholeGaugeCutOperatorEtaReviewedManifest.json",
+  "owner": "/root/quantitative_route",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "base": {
+    "commit": "fc5254a50811fac73c0fd24697c6342ff8585493",
+    "tree": "45d186b993824a8b3b30d407deb250844da4cfd6",
+    "source_delta": "5d29a30f40b0e1c8f9935a4b4075f9ae31c2f467"
+  },
+  "candidate_manifest": {
+    "path": "quantitative/repair171/CI171WholeGaugeCutOperatorEtaCandidateManifest.json",
+    "blob": "1d25c274b8c8cbaa7e069f068b6fff250662f074",
+    "sha256": "3238afa7fb9ca5deb3fe62b54d01f0d257388b17c40d7578084b15bae95d9518",
+    "bytes": 8689
+  },
+  "source": {
+    "kind": "source",
+    "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean",
+    "blob": "5c6c40a679707ef636c77dee0bb479c51153adfe",
+    "sha256": "d12d00370749e13176b9ec8cf6ae078636e7d81d3e4ddc049992e88a555b3a36",
+    "bytes": 5790,
+    "server_readback_exact": true,
+    "lines": 109
+  },
+  "preimage": {
+    "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean",
+    "blob": "79a986c2a3dcd87523b2f123c517f9107a21a941",
+    "sha256": "96a7b8ce367af2b1fc725de8a5fbcc6b2c3b52f055e3c066ae5f96e98564d7e7",
+    "lines": 106,
+    "bytes": 5594
+  },
+  "diff": {
+    "kind": "diff",
+    "path": "quantitative/repair171/WholeReferenceGaugeAtlasCutOperator.diff",
+    "blob": "57ff95170968d0045e5e1c08d369b1e336e6c347",
+    "sha256": "f4fd5d71384a503063d4e1c9b495d9f18470006a3b9cb08b40b42f98b6e7bf95",
+    "bytes": 1589,
+    "server_readback_exact": true,
+    "added": 7,
+    "deleted": 4,
+    "net": 3
+  },
+  "independent_review": {
+    "reviewer": "/root",
+    "blob": "a1f02a632f6bfff74c946018f55c7545c1370a09",
+    "sha256": "05e7f3f029f9747e77500bb127564669972ee5e177f8ea806da5ba01af3bd8c5",
+    "bytes": 1523,
+    "result": "pass before CI"
+  },
+  "selection": {
+    "only_successor_for": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean",
+    "older_candidates_and_reviews_preserved": true
+  },
+  "checks": {
+    "exact_two_substitutions": true,
+    "full_source_and_public_header_review": true,
+    "imports_and_options_unchanged": true,
+    "actual_same_data": true,
+    "no_new_assumptions_or_public_names": true,
+    "net_added_lines": 3
+  },
+  "compiled": false,
+  "local_Lean_or_elaboration": false,
+  "active_index_ref_or_ci_edits": false,
+  "extra_Lean_archive": false,
+  "gate": "Parent may select these exact bytes for the next bounded CI repair. Actual compilation is not claimed."
+}

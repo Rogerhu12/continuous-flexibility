@@ -1,0 +1,84 @@
+{
+  "schema": "N04Coordinates-reviewed-source-repair-v1",
+  "ci_round": 172,
+  "repository": "Rogerhu12/continuous-flexibility",
+  "branch": "line/N04Coordinates",
+  "base_commit": "fc5254a50811fac73c0fd24697c6342ff8585493",
+  "base_tree": "45d186b993824a8b3b30d407deb250844da4cfd6",
+  "tree": "944690f469cb649cafd0e1dc582b6acb4992af6c",
+  "main_readback": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "last_complete_green": {
+    "commit": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "receipt": "40f4094476659c1b052cd462cdfb119ca6032f44"
+  },
+  "failed_predecessor": {
+    "run": 43321752722,
+    "receipt": "66a05cecb030bf7ed819f0cd0143e73f437ae124",
+    "complete_diagnostics": "f268a70c5e722f73c15557d09abb3f20a0a1157f",
+    "errors": 9,
+    "files": 4
+  },
+  "prior_plan": "5d29a30f40b0e1c8f9935a4b4075f9ae31c2f467",
+  "selected_dependency_graph": "8d2aa82e28f0575edd9f69ac871029dc19bf6610",
+  "repairs": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeReconstruction.lean",
+      "before": "26ed383f47116763359682c60dc2edc920b01d5e",
+      "after": "03ae22426c55b94746067ac9a7e09ca2da76bd28",
+      "before_lines": 108,
+      "after_lines": 111,
+      "owner": "6a7dc78cf149315b9e268fad44a0bb885271128c",
+      "peer": "e4fe14f3c24cb02cd1659872f6d71d01e8c86c55"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ActualAtlasCutFirstJets.lean",
+      "before": "ddb7cdf61cd013c97afe3efb33b13e03394fa986",
+      "after": "528eda106b3b3300314ce573953e14f856dc8cfe",
+      "before_lines": 146,
+      "after_lines": 149,
+      "owner": "6a7dc78cf149315b9e268fad44a0bb885271128c",
+      "peer": "e4fe14f3c24cb02cd1659872f6d71d01e8c86c55"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean",
+      "before": "79a986c2a3dcd87523b2f123c517f9107a21a941",
+      "after": "5c6c40a679707ef636c77dee0bb479c51153adfe",
+      "before_lines": 106,
+      "after_lines": 109,
+      "owner": "8d200b400520505774917db14fad0846189602b8",
+      "peer": "a1f02a632f6bfff74c946018f55c7545c1370a09"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean",
+      "before": "2d253a2be2fb1b7653fba79a0ff2495b7244e1ab",
+      "after": "c7eaf4fe2c88fa12158ece8d2f32a86bbaad817e",
+      "before_lines": 175,
+      "after_lines": 184,
+      "owner": "6e773807d04bca215c218642552b6e2281fa37e1",
+      "peer": "7c1aa62bd57027ef7438df3c1f941c458a86f798"
+    }
+  ],
+  "public_theorem_heads_unchanged": 6,
+  "private_theorem_heads_unchanged": 2,
+  "all_imports_and_dependencies_unchanged": true,
+  "all_witnesses_and_statements_unchanged": true,
+  "budget": {
+    "source_added_since_complete_green": 19710,
+    "source_deleted_since_complete_green": 0,
+    "source_paths": 149,
+    "full_checked_in_root_lag": 257,
+    "conservative_total": 19967,
+    "limit": 20000,
+    "margin": 33,
+    "repair_net_lines": 18
+  },
+  "unchanged": [
+    "all other blob paths",
+    "generated import root",
+    "workflow",
+    "toolchain",
+    "lake manifest",
+    "resource limits"
+  ],
+  "validation": "Source identity, statement and witness review complete; Lean validation is pending CI. This is not a completion or axiom-clearance claim."
+}

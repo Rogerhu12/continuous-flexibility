@@ -1,0 +1,124 @@
+{
+  "schema": "n04-candidate-source-manifest/v1",
+  "path": "audit/reconstructed/CanonicalReferenceCurrentFrechetJetsCandidateManifest.json",
+  "status": "FROZEN_FOR_ROOT_INDEPENDENT_REVIEW_NOT_COMPILED",
+  "owner": "/root/audit_coordinates",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "source": {
+    "path": "audit/reconstructed/CanonicalReferenceCurrentFrechetJets.lean",
+    "target_module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentFrechetJets",
+    "git_blob": "d53b5c3cececfff9655dc1a570e21f3b2281db32",
+    "sha256": "829ec714b643035b32cc1cd6e4e90e4cb54af2a6a75c998784c814c9eac41526",
+    "bytes": 3460,
+    "lines": 74,
+    "server_readback_verified": true
+  },
+  "baseline": {
+    "commit": "fc5254a50811fac73c0fd24697c6342ff8585493",
+    "tree": "45d186b993824a8b3b30d407deb250844da4cfd6",
+    "ci": "CI171 failed; upstream source selection only, no new compilation claim"
+  },
+  "imports": [
+    "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets",
+    "ContinuousFlexibility.Analysis.CylinderMixedJets"
+  ],
+  "public_declarations": [
+    {
+      "name": "ContinuousFlexibility.Analysis.n04Coordinates_unitAtom_absolute_iteratedFDeriv_envelope",
+      "complete_header": "theorem n04Coordinates_unitAtom_absolute_iteratedFDeriv_envelope\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}\n    {base : ℕ} {ε : ℝ}\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (hfloor : ∀ m, 1 ≤ T.E0 (T.sample (K.cell m)))\n    (href : CanonicalGeometry.ReferenceJets D T S C L K)\n    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε) :\n    ∃ loss : ℕ, ∀ N : ℕ, ∃ A B : ℝ, 0 < A ∧ 0 < B ∧\n      ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m v p,\n        p ∈ CanonicalGeometry.unitStrip → ∀ k : ℕ, k ≤ N →\n          ‖iteratedFDeriv ℝ k\n            (CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m v) p‖ ≤\n            (2 : ℝ) ^ N * A * T.E0 (T.sample (K.cell m)) ^ B *\n              (1 + CanonicalGeometry.parameterGrading S (N + loss) z)",
+      "header_sha256": "8a5255d1f3b5c194a7d7bf575d3e2fed783aef77c84a962e999022d23c84f141"
+    }
+  ],
+  "direct_actual_providers": [
+    {
+      "blob": "4a0f2095b9c16558d889f814750f1fa648590e52",
+      "sha256": "cf481c45cf6ab2b1d5c1b3e9b9588bd3189291fe79e122a60cf355c4a07a1152",
+      "bytes": 5518,
+      "lines": 118
+    },
+    {
+      "blob": "3dc20e779221e16f9be32dff13d22e978b5a048d",
+      "sha256": "ae19c58f66f0778411f64607f52acf0525aceb27036c9d1ac1825e0e46e3614d",
+      "bytes": 13153,
+      "lines": 253
+    }
+  ],
+  "actual_smoothness_provider": {
+    "module": "ContinuousFlexibility.Statements.Nonlinear",
+    "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+    "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+    "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+    "bytes": 101197,
+    "lines": 1773,
+    "imports": [
+      "ContinuousFlexibility.Statements.Analysis",
+      "ContinuousFlexibility.Contracts.Annular",
+      "ContinuousFlexibility.Scalar.NormalizedConservation",
+      "ContinuousFlexibility.Scalar.TypeCorrection",
+      "ContinuousFlexibility.Scalar.FormPullback",
+      "Mathlib.Topology.OpenPartialHomeomorph.Defs"
+    ],
+    "declaration": "CanonicalGeometry.CurrentJets",
+    "actual_projection": "(hcur.1 z hz m v).1",
+    "type": "ContDiffOn ℝ ∞ (CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m v) CanonicalGeometry.unitStrip",
+    "already_used_by_compiled_provider": {
+      "module": "ContinuousFlexibility.Analysis.N07aGeometryJetBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N07aGeometryJetBounds.lean",
+      "blob": "e1e7c43bac69e82dbd72c609763521ad1472682b",
+      "sha256": "5eb75a3b06a90cf2611b95ca8ce9098ba95c057e7627a4bcf1a8d756bc02c498",
+      "bytes": 5954,
+      "lines": 119,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aMaterialProductBounds",
+        "ContinuousFlexibility.Analysis.N07aMixedLocalCalculus",
+        "ContinuousFlexibility.Analysis.N07aNeighborhood"
+      ],
+      "declaration": "n07a_geometryAtom_jet_decomposition"
+    }
+  },
+  "mathlib_pow": {
+    "path": "Mathlib/Algebra/Order/GroupWithZero/Basic.lean",
+    "blob": "335ef50464487b5763d4ad885d55d83b00964f1b",
+    "sha256": "6526bf3a919d5306c90daf75cf96cfe3bbfacc702f3858fb00f893f7346e2cbd",
+    "ref": "c55e6e786f49471c72fbddbec5415808896aec1e"
+  },
+  "selected_graph": {
+    "blob": "6e726e56f6a74572c817114f37ade7a223f2241b",
+    "sha256": "1a48c4c1de536be6469a56eb137e50a031f0dee40be7b87322d722f2e58cf619",
+    "project_nodes": 137,
+    "edges": 209,
+    "missing": [],
+    "cycles": [],
+    "server_readback_verified": true
+  },
+  "self_review": [
+    "The existing CurrentJets first conjunct supplies smoothness for the literal current unit atom on the literal unitStrip. No independent smoothness or final norm bound is introduced as a premise.",
+    "The supplier n04Coordinates_unitAtom_absolute_envelope is called once. Its loss is retained before N, and its A and B are chosen once at N before every state, piece, atom, point and k≤N.",
+    "The compiled cylinder lemma applies at the same point and same open strip. For each i+j=k, equality followed by k≤N gives the original supplier's order bound. Real.norm_eq_abs is the only scalar norm conversion.",
+    "The product M is nonnegative by A>0, the original sampled E0 floor and nonnegativity of the parameter seminorm. Only 2^k is enlarged to 2^N; neither the material exponent B nor parameter order N+loss changes.",
+    "Order zero is included by the existing cylinder theorem, without a separate selected witness.",
+    "The exact original K, D/T/S/C/L, liftSectorParameter, sample T.sample(K.cell m), domain, and loss are preserved."
+  ],
+  "budget": {
+    "authorized_new_lean_lines": 120,
+    "actual_new_lean_lines": 74,
+    "new_lean_files": 1,
+    "remaining_of_this_allocation": 46,
+    "archive_only_no_active_installation": true
+  },
+  "verification": {
+    "source_hash_and_bytes_checked": true,
+    "public_head_complete": true,
+    "no_sorry_admit_axiom_native_decide_unsafe": true,
+    "no_heartbeat_limit_changes": true,
+    "only_existing_local_instance_set_and_transparency_option_reused_from_compiled_supplier": true,
+    "no_external_refs_or_ci_touched": true,
+    "no_local_lean": true,
+    "raw_sources_remain_frozen": true
+  },
+  "limitations": [
+    "Static self-review; root independent peer and future CI required.",
+    "This converts actual ReferenceJets plus CurrentJets into spatial Frechet norm bounds. It does not construct CurrentJets or finish CanonicalPrimitiveGeometry.",
+    "CI171 was reported failed while this draft was being finalized; it is not activated. Its 136 upstream nodes are disjoint from all seven CI170 repair changes."
+  ]
+}

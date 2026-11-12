@@ -1,0 +1,256 @@
+{
+  "schema": "n04_exact_retained_provider_alpha_compatibility_v1",
+  "path": "quantitative/recovery/N03NumericalWitnessRetainedReturnCorrectionProviderCompatibility.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "author": "/root/quantitative_route",
+  "status": "static_contract_compatibility_pass_no_rebinding",
+  "base": {
+    "commit": "fc5254a50811fac73c0fd24697c6342ff8585493",
+    "tree": "45d186b993824a8b3b30d407deb250844da4cfd6",
+    "fixed_main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac"
+  },
+  "input_inventory": {
+    "blob": "a0948c5b56e409d3a636e97a873df717f978caeb",
+    "sha256": "415575d3469c47c8206e6c050cc44b8ec5c465664be88237455846336aeb43f1",
+    "nodes": 623,
+    "missing": 0,
+    "cycles": 0
+  },
+  "retained_provider_checks": [
+    {
+      "name": "ReturnCorrectionSpeedGap",
+      "selected_blob": "d1a81d60b31bf68689e99722e23fc8c594999b8b",
+      "main_blob": "0f822c7de6b3e6d7c767a18578496b22b604c232",
+      "selected_sha256": "73081341f18367e1a792b6a1dda84c9d07cd2beadb147b05c8cf3637444c1617",
+      "main_sha256": "7fd9362ce03fac1a69fb7b81540e47bcf165b7764c179e6a02fc215c643ed29e",
+      "imports_identical": true,
+      "full_file_equal_after_only_listed_local_renames_and_whitespace": true,
+      "explicit_renames": [
+        {
+          "scope": "first radial-small theorem",
+          "from": "parameterLoss",
+          "to": "d₁"
+        },
+        {
+          "scope": "later optical characteristic-gap proof",
+          "from": "parameterLoss",
+          "to": "dVel"
+        }
+      ],
+      "normalized_full_sha256": "fb6f8a0da4b3a525673eeb2e49472cb1141359b00b48f7aa8cbd9ca3b3008d11",
+      "public_declarations": [
+        {
+          "name": "ContinuousFlexibility.Statements.N01Properties.controlSample_radial_envelope",
+          "before_sha256": "5487acaad61ea09684d95f46c508bf6560f9ef5b4eb602ff92d4c0fa935f7edf",
+          "after_sha256": "5487acaad61ea09684d95f46c508bf6560f9ef5b4eb602ff92d4c0fa935f7edf",
+          "alpha_whitespace_equal": true
+        },
+        {
+          "name": "ContinuousFlexibility.Statements.N01Properties.returnCorrectedMinusSpeed_error_radial_small",
+          "before_sha256": "aff0f8cf0a7ad09d0d7eb2ac9540361220889f224196bd6f5f968b4299d26521",
+          "after_sha256": "e39cb1c8238e69b7b1f9e9f848218b3bf415d0953685eae47468f14919be6ace",
+          "alpha_whitespace_equal": true
+        },
+        {
+          "name": "ContinuousFlexibility.Statements.N01Properties.exists_opticalCorrection_characteristic_gap",
+          "before_sha256": "5e8fe280f7c60db7d1bbd8e3c18e226ab367e26e0ddac344e5e5c564b6ef9377",
+          "after_sha256": "5e8fe280f7c60db7d1bbd8e3c18e226ab367e26e0ddac344e5e5c564b6ef9377",
+          "alpha_whitespace_equal": true
+        },
+        {
+          "name": "ContinuousFlexibility.Statements.N01Properties.exists_opticalCorrection_flow",
+          "before_sha256": "2ff6dde3c93f79e08be76c73d3a16401128ac88683fac39de976a67c7136672c",
+          "after_sha256": "2ff6dde3c93f79e08be76c73d3a16401128ac88683fac39de976a67c7136672c",
+          "alpha_whitespace_equal": true
+        }
+      ],
+      "diff": {
+        "text": "--- a/src/ContinuousFlexibility/Analysis/ReturnCorrectionSpeedGap.lean\n+++ b/src/ContinuousFlexibility/Analysis/ReturnCorrectionSpeedGap.lean\n@@ -91,22 +91,21 @@\n     (hJ : 0 < J) (hA : 0 ≤ A) (hP : 0 ≤ P)\n     (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))\n     (hcutoff : ∀ m r, |deriv (χ m) r| ≤ J * radialE (D.cellIndex (j m)) ^ A) :\n+    ∃ d₁ : ℕ, ∃ V K : ℝ, 0 < V ∧ 0 < K ∧\n+      ∀ base' : ℕ, base ≤ base' → 1 + loss + d₁ ≤ base' →\n-    ∃ parameterLoss : ℕ, ∃ V K : ℝ, 0 < V ∧ 0 < K ∧\n-      ∀ base' : ℕ, base ≤ base' → 1 + loss + parameterLoss ≤ base' →\n       ∀ η : ℝ, 0 ≤ η → η ≤ ε → η ≤ 1 / 2 → K * η ≤ 1 →\n       ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →\n       ∀ m p, p.1 ∈ Icc (C.left m) (C.right m) →\n       |returnCorrectedMinusSpeed D S C χ z m p -\n         minusCharacteristicSpeed (originalCoefficients D S C z) p| ≤\n         V * η * radialE (D.cellIndex (j m)) ^ (-P) := by\n+  obtain ⟨d₁, B, K, hB, hK, hvelocity⟩ := hN.returnCorrectedMinusSpeed_error_weighted hS hT\n-  obtain ⟨parameterLoss, B, K, hB, hK, hvelocity⟩ :=\n-    hN.returnCorrectedMinusSpeed_error_weighted hS hT\n   obtain ⟨W, hW, henv⟩ := hN.controlSample_radial_envelope hS hT hB.le (add_nonneg hA hP)\n   let N := max (6 * B) (2 * circleSobolevConstant)\n   have hNpos : 0 < N := (mul_pos (by norm_num) hB).trans_le (le_max_left _ _)\n   let V := 4 * J * N * W\n   have hV : 0 < V := by dsimp only [V]; positivity\n+  refine ⟨d₁, V, K, hV, hK,\n-  refine ⟨parameterLoss, V, K, hV, hK,\n     fun base' hbase hhigh η hη hηε hη₁ hηK z hz hsector m p hp => ?_⟩\n   let F := T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *\n     T.E0 (T.sample (C.cell m)) ^ B\n@@ -223,10 +222,10 @@\n   have hcutoff (m : ℕ) (r : ℝ) :\n       |deriv (χ m) r| ≤ J * radialE (D.cellIndex (j m)) ^ A := by\n     simpa only [iteratedDeriv_one, Nat.cast_one, mul_one] using hjet m r\n+  obtain ⟨dVel, V, K, hV, hK, herror⟩ := hN₀.returnCorrectedMinusSpeed_error_radial_small\n-  obtain ⟨parameterLoss, V, K, hV, hK, herror⟩ := hN₀.returnCorrectedMinusSpeed_error_radial_small\n     hS hT χ j hJ hA.le hP.le hcell hcutoff\n   obtain ⟨U, hU, hupper⟩ := hN₀.originalRadialCoefficient_uniform_upper\n+  let base' := max b₀ (1 + loss + dVel)\n-  let base' := max b₀ (1 + loss + parameterLoss)\n   let ε' := min ε₀ (min (1 / 2) (min K⁻¹ (lam / (4 * U * V))))\n   have hε' : 0 < ε' := lt_min hε₀\n     (lt_min (by norm_num) (lt_min (inv_pos.mpr hK) (div_pos hlam (by positivity))))\n@@ -243,7 +242,7 @@\n     field_simp [hU.ne', hV.ne']\n     <;> ring\n   have hb : b₀ ≤ base' := le_max_left _ _\n+  have hh : 1 + loss + dVel ≤ base' := le_max_right _ _\n-  have hh : 1 + loss + parameterLoss ≤ base' := le_max_right _ _\n   have hnew := hN₀.restrict_neighborhood hT hb hε' hε'₀\n   have hdisc : ∀ z ∈ stateNeighborhood S C base' ε', ∀ m p,\n       p.1 ∈ tsupport (deriv (χ m)) →\n",
+        "counts": {
+          "added": 7,
+          "deleted": 8
+        }
+      }
+    },
+    {
+      "name": "ReturnCorrectionVelocityBounds",
+      "selected_blob": "b6c7cefc7e6768f7a2c43b36e688d0e4bef28637",
+      "main_blob": "0f44da19f80e96790ec08980e6e8ad0b7c280e4a",
+      "selected_sha256": "5e99bb6e2d0b8c1e0e7e457d44308c8212f29ed9dbe900cb3cc3fd2f9d0ba300",
+      "main_sha256": "a3c47b2aa5dc64496e782975b4827401ee736defa49e417ef4acf8d61f9b9374",
+      "imports_identical": true,
+      "full_file_equal_after_only_listed_local_renames_and_whitespace": true,
+      "explicit_renames": [
+        {
+          "from": "parameterLoss",
+          "to": "d₁",
+          "scope": "bound proof-local or existential variable"
+        },
+        {
+          "from": "initialLoss",
+          "to": "dF",
+          "scope": "bound proof-local or existential variable"
+        },
+        {
+          "from": "derivativeLoss",
+          "to": "dJ",
+          "scope": "bound proof-local or existential variable"
+        },
+        {
+          "from": "hhighInitial",
+          "to": "hhighF",
+          "scope": "bound proof-local or existential variable"
+        },
+        {
+          "from": "hhighDerivative",
+          "to": "hhighJ",
+          "scope": "bound proof-local or existential variable"
+        }
+      ],
+      "normalized_full_sha256": "b20818a63773b7b258ba1c89e32959193480f12ff527d44732c23f5bd9f8a9cf",
+      "public_declarations": [
+        {
+          "name": "ContinuousFlexibility.Statements.radialCoefficient_upper_of_ratios",
+          "before_sha256": "53e23bd5f44434a6bb789de9f351c5c4b29f1235927a250379655b82bfef973e",
+          "after_sha256": "53e23bd5f44434a6bb789de9f351c5c4b29f1235927a250379655b82bfef973e",
+          "alpha_whitespace_equal": true
+        },
+        {
+          "name": "ContinuousFlexibility.Statements.N01Properties.originalRadialCoefficient_le_nine_profile",
+          "before_sha256": "b76515905209d3b889a8f5d7b0170ca5328a698ece496470c784f7e07c005700",
+          "after_sha256": "b76515905209d3b889a8f5d7b0170ca5328a698ece496470c784f7e07c005700",
+          "alpha_whitespace_equal": true
+        },
+        {
+          "name": "ContinuousFlexibility.Statements.N01Properties.originalRadialCoefficient_uniform_upper",
+          "before_sha256": "2512e85daf027c24e350ca4f150cfdaf9f8481ba578eddf065e896b07914380a",
+          "after_sha256": "2512e85daf027c24e350ca4f150cfdaf9f8481ba578eddf065e896b07914380a",
+          "alpha_whitespace_equal": true
+        },
+        {
+          "name": "ContinuousFlexibility.Statements.characteristic_halfGap_lower_of_discriminant",
+          "before_sha256": "cc5405271b039e7f60b27c2349d224433027fb5801ac7ed84292d9270f9e8844",
+          "after_sha256": "cc5405271b039e7f60b27c2349d224433027fb5801ac7ed84292d9270f9e8844",
+          "alpha_whitespace_equal": true
+        },
+        {
+          "name": "ContinuousFlexibility.Statements.returnCorrectedMinusSpeed_error_bound",
+          "before_sha256": "e76bcb0c485f75732d0ae0092a3af725a2714f5d06f52236e2a4695b816e8446",
+          "after_sha256": "e76bcb0c485f75732d0ae0092a3af725a2714f5d06f52236e2a4695b816e8446",
+          "alpha_whitespace_equal": true
+        },
+        {
+          "name": "ContinuousFlexibility.Statements.N01Properties.returnCorrectedMinusSpeed_error_weighted",
+          "before_sha256": "bcc2a1c6fa59f0c4911098080e39c135a6e5ed4f0aa6ddabc272ccabbaf6a348",
+          "after_sha256": "2a347e334a9e664c61cc9a6290ce19f406f054f0c397b1b4de9a03f372f6c5a0",
+          "alpha_whitespace_equal": true
+        }
+      ],
+      "diff": {
+        "text": "--- a/src/ContinuousFlexibility/Analysis/ReturnCorrectionVelocityBounds.lean\n+++ b/src/ContinuousFlexibility/Analysis/ReturnCorrectionVelocityBounds.lean\n@@ -109,8 +109,8 @@\n     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n     (hN : N01Properties D T S C base loss ε)\n     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :\n+    ∃ d₁ : ℕ, ∃ B K : ℝ, 0 < B ∧ 0 < K ∧\n+      ∀ base' : ℕ, base ≤ base' → 1 + loss + d₁ ≤ base' →\n-    ∃ parameterLoss : ℕ, ∃ B K : ℝ, 0 < B ∧ 0 < K ∧\n-      ∀ base' : ℕ, base ≤ base' → 1 + loss + parameterLoss ≤ base' →\n       ∀ η : ℝ, 0 ≤ η → η ≤ ε → η ≤ 1 / 2 → K * η ≤ 1 →\n       ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →\n       ∀ χ : ℕ → ℝ → ℝ, ∀ m p, p.1 ∈ Icc (C.left m) (C.right m) →\n@@ -120,23 +120,23 @@\n           (6 * B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *\n             T.E0 (T.sample (C.cell m)) ^ B * η +\n             (2 * circleSobolevConstant * η) * T.H (T.sample m) ^ (3 / 4 : ℝ)) := by\n+  obtain ⟨dF, B, hB, hb⟩ := hN.returnCorrectionInitialMap_and_residual_small hS hT\n+  obtain ⟨dJ, K, hK, hk⟩ := hN.minusFlow_near_reference_uniform hS hT\n+  refine ⟨max dF dJ, B, K, hB, hK,\n-  obtain ⟨initialLoss, B, hB, hb⟩ := hN.returnCorrectionInitialMap_and_residual_small hS hT\n-  obtain ⟨derivativeLoss, K, hK, hk⟩ := hN.minusFlow_near_reference_uniform hS hT\n-  refine ⟨max initialLoss derivativeLoss, B, K, hB, hK,\n     fun base' hbase hhigh η hη hηε hη₁ hηK z hz hsector χ m p hp => ?_⟩\n+  have hhighF : 1 + loss + dF ≤ base' :=\n+    (Nat.add_le_add_left (le_max_left dF dJ) (1 + loss)).trans hhigh\n+  have hhighJ : 1 + loss + dJ ≤ base' :=\n+    (Nat.add_le_add_left (le_max_right dF dJ) (1 + loss)).trans hhigh\n-  have hhighInitial : 1 + loss + initialLoss ≤ base' :=\n-    (Nat.add_le_add_left (le_max_left initialLoss derivativeLoss) (1 + loss)).trans hhigh\n-  have hhighDerivative : 1 + loss + derivativeLoss ≤ base' :=\n-    (Nat.add_le_add_left (le_max_right initialLoss derivativeLoss) (1 + loss)).trans hhigh\n   have hderiv (θ : ℝ) : |deriv (C.minusFlow z m p.1) θ| ≤ 2 := by\n+    have hd := (hk base' hbase hhighJ η hη hηε hη₁ z hz hsector m p.1 hp θ).2.trans hηK\n-    have hd := (hk base' hbase hhighDerivative η hη hηε hη₁ z hz hsector m p.1 hp θ).2.trans hηK\n     calc\n       _ = |(deriv (C.minusFlow z m p.1) θ - 1) + 1| := by congr 1; ring\n       _ ≤ |deriv (C.minusFlow z m p.1) θ - 1| + |(1 : ℝ)| := abs_add_le _ _\n       _ ≤ 1 + 1 := add_le_add hd (by norm_num)\n       _ = 2 := by norm_num\n   have h := returnCorrectedMinusSpeed_error_bound D S C χ z m p hderiv\n+    (fun θ => (hb base' hbase hhighF η hηε hη₁ z hz hsector m θ).1)\n-    (fun θ => (hb base' hbase hhighInitial η hηε hη₁ z hz hsector m θ).1)\n   exact h.trans_eq (by ring)\n \n end ContinuousFlexibility.Statements\n",
+        "counts": {
+          "added": 11,
+          "deleted": 11
+        }
+      }
+    },
+    {
+      "name": "ReturnCorrectionSmallness",
+      "selected_blob": "5e8807badcc8eaabf7aa3a31ecbc64d64a76cb56",
+      "main_blob": "964de0968d569445ca9775e4e449a1fa7f86fba6",
+      "selected_sha256": "3d7f3cb7a4defd9b7aef34f7763b05a3f9befa358487aebbb57b0ec54f5cb4fa",
+      "main_sha256": "f9813101e2500c18809112d91dfedab1a7fd387d0650175ee027dd6a072b56ab",
+      "imports_identical": true,
+      "full_file_equal_after_only_listed_local_renames_and_whitespace": true,
+      "explicit_renames": [
+        {
+          "from": "parameterLoss",
+          "to": "d₁",
+          "scope": "bound proof-local or existential variable"
+        }
+      ],
+      "normalized_full_sha256": "e4d7a5ca95c8fd9ddfea64b636111319d7487d70b431ea0b4eff59885f979f6b",
+      "public_declarations": [
+        {
+          "name": "ContinuousFlexibility.Analysis.inverse_translation_error_bound",
+          "before_sha256": "54c44d229a94399105ca33a321688cc4ef0f3d62cee247fc4c44de5af95b7ba7",
+          "after_sha256": "54c44d229a94399105ca33a321688cc4ef0f3d62cee247fc4c44de5af95b7ba7",
+          "alpha_whitespace_equal": true
+        },
+        {
+          "name": "ContinuousFlexibility.Analysis.oddPart_sub_id_bound",
+          "before_sha256": "b68991f860bfd13a9c02e9f41ee943487d781d9b287dfc538e748305089c2d77",
+          "after_sha256": "b68991f860bfd13a9c02e9f41ee943487d781d9b287dfc538e748305089c2d77",
+          "alpha_whitespace_equal": true
+        },
+        {
+          "name": "ContinuousFlexibility.Analysis.evenPart_bound_of_sub_id_bound",
+          "before_sha256": "79b22ad6de1b8b49b3832ae16f390841db14ccb87358d4faf16955158a1f4d13",
+          "after_sha256": "79b22ad6de1b8b49b3832ae16f390841db14ccb87358d4faf16955158a1f4d13",
+          "alpha_whitespace_equal": true
+        },
+        {
+          "name": "ContinuousFlexibility.Statements.stateChartGrading_le_stateGrading",
+          "before_sha256": "e9fa1075859f7718229213d7892a358164665ab61bccb0da1ea2cccfb91d92f3",
+          "after_sha256": "e9fa1075859f7718229213d7892a358164665ab61bccb0da1ea2cccfb91d92f3",
+          "alpha_whitespace_equal": true
+        },
+        {
+          "name": "ContinuousFlexibility.Statements.N01Properties.stateLeftChart_sub_id_bound",
+          "before_sha256": "1440b7aa25a60e535735000d0adcab6763a231d51ef7ef68d074f6573653b186",
+          "after_sha256": "1440b7aa25a60e535735000d0adcab6763a231d51ef7ef68d074f6573653b186",
+          "alpha_whitespace_equal": true
+        },
+        {
+          "name": "ContinuousFlexibility.Statements.N01Properties.returnCorrectionInitialMap_and_residual_bound",
+          "before_sha256": "f32f048f0947e7d760a15b8183f3ba4e43dc7b6c633de064780d15597f411c61",
+          "after_sha256": "f32f048f0947e7d760a15b8183f3ba4e43dc7b6c633de064780d15597f411c61",
+          "alpha_whitespace_equal": true
+        },
+        {
+          "name": "ContinuousFlexibility.Statements.N01Properties.returnCorrectionInitialMap_and_residual_small",
+          "before_sha256": "124920188350f50f5cf64da74d98cf2e2a2cf2cdb5892d0b9f93fcc60a80d6c3",
+          "after_sha256": "a7ab544a4865a141739f264d87b951e43c358386c49f402f0b45f97f17775234",
+          "alpha_whitespace_equal": true
+        }
+      ],
+      "diff": {
+        "text": "--- a/src/ContinuousFlexibility/Analysis/ReturnCorrectionSmallness.lean\n+++ b/src/ContinuousFlexibility/Analysis/ReturnCorrectionSmallness.lean\n@@ -164,8 +164,7 @@\n     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n     (hN : N01Properties D T S C base loss ε)\n     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :\n+    ∃ d₁ : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → 1 + loss + d₁ ≤ base' →\n-    ∃ parameterLoss : ℕ, ∃ B : ℝ, 0 < B ∧\n-      ∀ base' : ℕ, base ≤ base' → 1 + loss + parameterLoss ≤ base' →\n       ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →\n       ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →\n       ∀ m θ,\n@@ -174,8 +173,8 @@\n       let L := (2 * circleSobolevConstant * η) * T.H (T.sample m) ^ (3 / 4 : ℝ)\n       |returnCorrectionInitialMap S C z m θ - θ| ≤ 2 * (F + L) ∧\n         |returnResidualField S C z m θ| ≤ F + L := by\n+  obtain ⟨d₁, B, hB, hb⟩ := hN.minusFlow_near_reference_weighted hS hT\n+  refine ⟨d₁, B, hB, fun base' hbase hhigh η hηε hη₁ z hz hsector m θ => ?_⟩\n-  obtain ⟨parameterLoss, B, hB, hb⟩ := hN.minusFlow_near_reference_weighted hS hT\n-  refine ⟨parameterLoss, B, hB, fun base' hbase hhigh η hηε hη₁ z hz hsector m θ => ?_⟩\n   have hzold := stateNeighborhood_mono S C hbase hηε hz\n   have hC : controlGeometryConditions D S C := hN.2.2.2.1\n   have hr : C.right m ∈ Icc (C.left m) (C.right m) := ⟨(hC.1 m).2.1.le, le_rfl⟩\n",
+        "counts": {
+          "added": 3,
+          "deleted": 4
+        }
+      }
+    }
+  ],
+  "exact_scope": [
+    "All three complete retained/current and fixed-main texts were compared.",
+    "Every difference is accounted for by the listed proof-local/existential variable alpha renamings and whitespace; normalized complete-file SHA256 identities agree.",
+    "All 17 explicit public declarations retain the same mathematical type; the existential Nat witness is before base', eta, state and component in both versions.",
+    "The ordinary-flow loss remains the same original loss; the additional parameter loss is added only in the displayed high-order requirement."
+  ],
+  "direct_consumer_boundary": [
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionBufferedCollars",
+      "blob": "e52779806ba4290ea6dc7af3864a2cb20455afbd",
+      "use": "The actual source destructures the first Nat witness dVel, then V,K and their bounds, and sets base' = max base (1 + loss + dVel). This matches the retained radial-small theorem exactly."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N03CorrectionAssembly",
+      "blob": "fd48b7aea0616211039f84119dd4fb7f5d36a455",
+      "use": "Imports ReturnCorrectionSpeedGap. The public objects are unchanged; no main-only theorem name or changed explicit argument is introduced by these three provider deltas."
+    }
+  ],
+  "selection": {
+    "retain_current_blobs": true,
+    "replace_by_main_blobs": false,
+    "source_or_mathematical_statement_changed": false,
+    "new_Lean_lines": 0
+  },
+  "limits": [
+    "This checks the precise three retained-provider differences, not a new proof review of the unchanged source mathematics.",
+    "No Lean or CI has run for the prospective 623-node combination; each staged prefix still requires full CI.",
+    "The separate fixed518 nine shared updates and the two owned gateway leaves keep their own reviewed selection and activation gates."
+  ],
+  "active_index_refs_or_ci_changed": false
+}
