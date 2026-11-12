@@ -1,0 +1,35 @@
+{
+  "kind": "reviewed_actual_same_witness_characteristic_drift_material_jets",
+  "status": "HELD_REVIEWED_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01CharacteristicDriftMaterialJetsCandidateManifest.json",
+    "sha256": "606e8ce543a1f879fd918ae6b1a07ce34e39e5a41091cce969d69705e3923d78",
+    "blob": "a0092a139292cff8dd8be12acb42f42226c7e7d5",
+    "lines": 116
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PointwiseProductPolynomialMaterialJets.lean",
+      "sha256": "8eea68ab7ee7671d432b40b7833154f3c3a69a568c7fb96d7fb4a7a95fe40d02",
+      "blob": "c2eef2dac4cf079d6ad8da950038309b7714261d",
+      "lines": 85
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01CharacteristicDriftMaterialJets.lean",
+      "sha256": "1a31d6ee0bb1d0504075d2a57c1299d7285d3e2194d3c277af1e83407edc5aae",
+      "blob": "0d3588267eb6bb57ac977025a0f2603dea2667a3",
+      "lines": 153
+    }
+  ],
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/N01CharacteristicDriftMaterialJetsIndependentReview.json",
+    "sha256": "b434e4bbced6de823511202454edce22950ffdf3573a15b384a4552c7ac6278d",
+    "blob": "cc8b17d5f88f88354f14941525198eb8e5cc2908",
+    "lines": 120
+  },
+  "same_witness": true,
+  "root_radius_or_scale_cost": false,
+  "optical_root_lower_or_Through03_primitive_certificate_claimed": false,
+  "compiled": false,
+  "checkout_index_refs_CP_authority_plan_modified": false
+}

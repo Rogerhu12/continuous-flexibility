@@ -1,0 +1,68 @@
+{
+  "kind": "independent_full_source_actual_prescribed_reference_factory_review",
+  "reviewer": "/root",
+  "author": "/root/proof_inventory",
+  "result": "passed_static_full_source_and_selected_provider_review",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceFinitePrescribedCandidateManifest.json",
+    "sha256": "c3bf7f4b5d53fd79d70312c078f298d1dd8383152cd8059acb1fe6bf5f86ec11",
+    "blob": "9774a9a5b90a9ed61e3e1cf4669a80065f7621c0",
+    "lines": 56
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceFinitePrescribed.lean",
+      "sha256": "9d90ac886d09bd6953294d7a554aafa9955ba9c570061befe0abb2be24dcf4f8",
+      "blob": "1eb9ca00d7c9a282a2bd06c447f7a7d74ca9723d",
+      "lines": 148
+    }
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-taylor-triangle/PositiveReferenceTaylorPrescribedWidth.lean",
+      "sha256": "44bc853c9750ea6ef6125b7af5f878b7fd47d3ffb3175b521a3ba21be36059a4",
+      "blob": "6520aad4926928dba5080ffed052e7630f413668",
+      "lines": 147
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceValueEnvelope.lean",
+      "sha256": "267b575f81da274e9710fd4fbd0df574c7d527bfd78a5e5c867e749ce2698297",
+      "blob": "25205de05e190acb6ec954e7ec34ce73351c88be",
+      "lines": 145
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/radial-reference-bool/PositiveReferenceFiniteRadialJets.lean",
+      "sha256": "a515668c71f3895edfda3d1183a5c275f3758799de0d7ebb68d439d33095bc66",
+      "blob": "db60546bb34349a040955ace14facdf5b13dfa0d",
+      "lines": 167
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceCoordinate.lean",
+      "sha256": "64f15c330a043cd80bde15d122b4e16c3295493df67199dc95fb0d79fade23de",
+      "blob": "08de005c626e3d6e963a27a6588f1082ac8c3335",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceHeight.lean",
+      "sha256": "fdb3c55006eff4e326ad0caa486565818edf872d739ade5269496a950d88e276",
+      "blob": "2241295ddd81a72783eb627023362b326c54fad6",
+      "lines": 91
+    }
+  ],
+  "checks": [
+    "Read all 148 lines, the selected 147-line width and 145-line value-envelope sources, and the retained 167-line qualitative Taylor provider.",
+    "The actual integral coordinate and clipped-log height are constructed at the displayed common width from exactly the same finite radial Taylor slices. No equality with a previously chosen qualitative interpolation is asserted.",
+    "The displayed width yields positive coordinate derivatives and height on both endpoint collars, an endpoint mass at most one half, and a positive middle mass. Actual bijectivity and smooth inverse then supply the RangeGeometry from the same Y and H.",
+    "The actual endpoint germs and radial Taylor representatives transfer ordinary full jets through n+1 at every angle, including both endpoints in a single Bool parameter.",
+    "The global Y derivative bounds use the same selected scale and collars. The actual height and reciprocal are bounded by the square of max(1,2M,2/kappa), without exponentiating a polynomial material bound.",
+    "No radius is chosen from qualitative continuity and then silently assigned a quantitative inverse bound; no final E0 estimate is an input or output."
+  ],
+  "limitations": [
+    "Static review only; uncompiled.",
+    "The numerical root lower bound kappa and finite jet bound M still need actual material estimates before this construction can prove a uniform E0 certificate.",
+    "The selected ValueEnvelope is separately under peer review; this receipt does not label the complete import closure as compiled."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_modified": false
+}

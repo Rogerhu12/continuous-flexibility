@@ -1,0 +1,116 @@
+{
+  "kind": "candidate_actual_same_witness_characteristic_drift_material_jets",
+  "status": "HELD_UNCOMPILED_REVIEW_PENDING",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PointwiseProductPolynomialMaterialJets.lean",
+      "sha256": "8eea68ab7ee7671d432b40b7833154f3c3a69a568c7fb96d7fb4a7a95fe40d02",
+      "blob": "c2eef2dac4cf079d6ad8da950038309b7714261d",
+      "lines": 85
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01CharacteristicDriftMaterialJets.lean",
+      "sha256": "1a31d6ee0bb1d0504075d2a57c1299d7285d3e2194d3c277af1e83407edc5aae",
+      "blob": "0d3588267eb6bb57ac977025a0f2603dea2667a3",
+      "lines": 153
+    }
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PointwiseProductMaterialJets.lean",
+      "sha256": "2b27d9381160a9df94c2579c965d5ef26be7b496607e31a5ad2b32ce50b35fb0",
+      "blob": "fd26eeb587536423ad1223940ee11b9f089b60ae",
+      "lines": 119
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/FlowJetMaterialClosure.lean",
+      "sha256": "73064778e3932bb04d20dd2bf0a8cb069432e69f2c64fac705c05689f3bf2e7e",
+      "blob": "34ac6e592d6bea481efe6403e83906e0b94f51b6",
+      "lines": 155
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/FlowJetPartitionPolynomial.lean",
+      "sha256": "267d47d5b19a7fc05fee341082b5153793740871c3ea31186be904280a77d225",
+      "blob": "50921c82a96186ad0e1e33d53e9267fae06ab5c7",
+      "lines": 126
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/FlowJetPolynomial.lean",
+      "sha256": "25a9b7ff63599ce1ff916fe3a1ba83afd1c5cecec9bd0f281d5f58b1379eb660",
+      "blob": "6f56a2d064645f4f7d217e5d725cb08b31a6f015",
+      "lines": 144
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RadialCoefficientPowerMaterialJets.lean",
+      "sha256": "ceb920593eff670b62364ed6608e1a9b2b4030bee26ef532588f495e30b1ef95",
+      "blob": "65dba3f278439d4bb0acfff3cedb3bc4ac076d48",
+      "lines": 128
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OriginalCoefficientOrdinaryGlobalJets.lean",
+      "sha256": "248d8d8276cf23922afa7138712827eedce7d1e1d1669e47c5f0a639512114b7",
+      "blob": "c2aab4a1827e96bb86ff2d363b6649bfcf04d9b9",
+      "lines": 55
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RadialCoefficientMaterialInverse.lean",
+      "sha256": "a28a6319b276e4ad7b078b844ae122d9fa1b2bd8fffcabce6ba1b914185f7221",
+      "blob": "4aced4b7ac973d750dcf4c206c78fea2b9322150",
+      "lines": 145
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01CoefficientValueJets.lean",
+      "sha256": "a13364b11fc053a1145f4b587e00d7b20ca1236c47cb534a29cebc69b7530134",
+      "blob": "6a5d4d600fadf2dfe63bb8f0126f7b6e4cefe2c1",
+      "lines": 129
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bOpticalCoefficientVariation.lean",
+      "sha256": "77c21a8d53aed14ce2dabe55a342baeee137502a29e3d60c96e3b98f89c74100",
+      "blob": "4e5951d3c662ecc445b8b3baa9d6aa7ccd246ad7",
+      "lines": 157
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/OneSidedOrdinaryJets.lean",
+      "sha256": "24824a78937cc70caefdfa2ad5d119e9f6f7fdf6028a2ddf5c8e07679cfaf339",
+      "blob": "0788ad15d1a0d8a0ff36f6717a7889904eae9b55",
+      "lines": 136
+    }
+  ],
+  "reviewed_inputs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RadialCoefficientPowerMaterialJetsReviewedManifest.json",
+      "sha256": "6417467bd1b3e02a34e763187894219285bc72c3a9fda865e5efe5e7cdddf1a4",
+      "blob": "02b39ce2453dc18472cd70bee8f10472e9a4282f",
+      "lines": 33
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OriginalCoefficientOrdinaryGlobalJetsReviewedManifest.json",
+      "sha256": "580c6aa6c2b66940fd6e83850bb8475cbb399779e5d472289971206de4c441f0",
+      "blob": "b7d9efe4f1f5b2e9ee6a7fa7c590fe2046a537c9",
+      "lines": 26
+    }
+  ],
+  "reasoning": [
+    "The actual local Leibniz norm bound has monomial derivative weights i and n-i, including zero-order terms; the installed weighted polynomial closure therefore gives a common low order and loss before the material envelope, point, and state.",
+    "Actual N01 profile/Q/discriminant positivity proves characteristicDrift=b/a on the physical annulus, so actual ordinary jets agree at every point.",
+    "The same N01 witness supplies the global b tower and the already reviewed real-power a inverse tower on the closed negative component with its genuine host; scaled E0 is at least one without replacing T.",
+    "The final constants are selected before state, component, host, point, and order evaluation; one high state seminorm remains. No root-factor lower, optical radius inverse, or target drift estimate is assumed."
+  ],
+  "scope_caveats": [
+    "This proves drift jets, not a lower bound or inverse jets of the divided optical root factor.",
+    "The actual host inclusion is explicit and not inferred from the control good-point host.",
+    "Sources are held and uncompiled; no CI outcome, checkout, index, ref, CP, authority, or plan was changed."
+  ],
+  "new_public_declarations": [
+    "pointwiseProduct_polynomial_material_bound",
+    "n01_characteristicDrift_eq_original_ratio",
+    "n01_characteristicDrift_component_material_jets"
+  ],
+  "new_private_declarations": [
+    "exists_ordinaryProduct_material_majorant",
+    "drift_material_envelope_mono"
+  ],
+  "imports_or_options_of_existing_sources_changed": false,
+  "compiled": false
+}

@@ -1,0 +1,71 @@
+{
+  "kind": "candidate_actual_root_drift_axis_material_jets",
+  "status": "HELD_UNCOMPILED_REVIEW_PENDING",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootDriftAxisMaterialJets.lean",
+    "sha256": "579584e7f611a5e24afe5cad3de38f488f43f6a6cb529fa36267421975f83c05",
+    "blob": "68c96fcf81ab844826ffaaa8e8e6065a7893c749",
+    "lines": 136
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01CharacteristicDriftMaterialJets.lean",
+      "sha256": "1a31d6ee0bb1d0504075d2a57c1299d7285d3e2194d3c277af1e83407edc5aae",
+      "blob": "0d3588267eb6bb57ac977025a0f2603dea2667a3",
+      "lines": 153
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01ActualRootGeometry.lean",
+      "sha256": "df838bf216d8d2f594b6b1b27587fdab83bf622658925a03268b25f8c7f18d05",
+      "blob": "309106cea183b863c056a9c150aea5a6f688252d",
+      "lines": 100
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PointwiseAffineMaterialJets.lean",
+      "sha256": "3bcba380a61ce99114b245672257334ecdf4c6e5f538247fe47a6417b8219c5e",
+      "blob": "4814a6aa7254709e1ab6d28b8c4f74d77929f53c",
+      "lines": 57
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PointwiseMaterialJetOperations.lean",
+      "sha256": "6d100022491b6a0858badce398873d75f9a1642dc309f11beaf9ad7e1c4eb14c",
+      "blob": "58f9546e8979123ef35e36a79ca56b54081c5312",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01CoefficientValueJets.lean",
+      "sha256": "a13364b11fc053a1145f4b587e00d7b20ca1236c47cb534a29cebc69b7530134",
+      "blob": "6a5d4d600fadf2dfe63bb8f0126f7b6e4cefe2c1",
+      "lines": 129
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootCharacteristicFactor.lean",
+      "sha256": "05fdcf51d1959bc6900ed1fc56309a32d61f8cfed73818deb4e929d16d69f46a",
+      "blob": "3d6cd21e82be41b65116fc559c74ca8dbe8d6f99",
+      "lines": 264
+    }
+  ],
+  "reviewed_input": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01CharacteristicDriftMaterialJetsReviewedManifest.json",
+    "sha256": "0896fa810ada2ce324201dce8a5bfe330e024d316ebb512c39ac11fe53128c3f",
+    "blob": "19979ae19828dbfabe32f072e3f9596ea8f761e4",
+    "lines": 35
+  },
+  "mathematical_scope": [
+    "The true inward root shift is an affine map with operator norm at most one; translation contributes no derivative cost.",
+    "The actual characteristic drift is smooth on the original physical annulus by its proved same-point quotient identity and the actual positive radial coefficient.",
+    "Both root orientations use the same constant function B, material scale C0, low order, loss, and genuine host; all root-axis ordinary derivatives, including zero order, retain the drift material bound.",
+    "No qualitative model radius, flow box, scale inverse, optical root lower, or target drift-jet estimate is assumed."
+  ],
+  "public_declarations": [
+    "norm_iteratedFDeriv_rootProfileShift_le",
+    "contDiffAt_characteristicDrift_of_n01",
+    "n01_orientedRootDrift_axis_material_jets"
+  ],
+  "new_private_declarations": 0,
+  "new_options": [],
+  "compiled": false,
+  "same_witness": true,
+  "checkout_index_refs_CP_authority_plan_modified": false,
+  "scope_caveat": "Actual root-factor reciprocal jets and their same-witness optical lower remain separate obligations."
+}

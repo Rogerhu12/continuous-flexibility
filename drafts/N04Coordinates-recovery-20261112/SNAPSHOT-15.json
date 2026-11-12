@@ -1,0 +1,72 @@
+{
+  "snapshot": 15,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "parent": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+  "base_tree": "eacdbff06cbd680c84e533f8374783e5fb4e9969",
+  "line_head": "51f748cb71b876e4664d9d750240c7522d0cf92f",
+  "line_tree": "44e29d2eafa37456221914df1e33e73f16ecba1a",
+  "frozen_at": "2026-11-12T12:17:09.118159+00:00",
+  "indexed_files": 1068,
+  "new_sources": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/BufferedRadialAuxiliaryColumn.lean",
+      "sha256": "35dbcac716ecd0568795cc8510ee7eeed5d1cb47b5ef20ba784e4dd9d0d8d3ee",
+      "lines": 122
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/PhysicalSpacesAuxiliaryColumn.lean",
+      "sha256": "b2848268baf18c447dccbfc7275b74ea927c679351768d214ede503f31424160",
+      "lines": 134
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/PositiveReferencePhysicalLower.lean",
+      "sha256": "531eb07e8de402ba9f78121ebc664bd15138cec5d4c5ac3355de97f042ce2f33",
+      "lines": 116
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugePrincipalLower.lean",
+      "sha256": "6936771d2cfb7052ededc9ad2c1960b4ffc02689cec69d7300a02612b42339d4",
+      "lines": 167
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeReferencePrincipal.lean",
+      "sha256": "00a9377f1e6d12183ad385ce1e1e5a5fcec7035688eea3ce057c69ef878bd224",
+      "lines": 175
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-taylor-triangle/PositiveReferenceTaylorPrescribedWidth.lean",
+      "sha256": "44bc853c9750ea6ef6125b7af5f878b7fd47d3ffb3175b521a3ba21be36059a4",
+      "lines": 147
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceFinitePrescribed.lean",
+      "sha256": "9d90ac886d09bd6953294d7a554aafa9955ba9c570061befe0abb2be24dcf4f8",
+      "lines": 148
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceValueEnvelope.lean",
+      "sha256": "267b575f81da274e9710fd4fbd0df574c7d527bfd78a5e5c867e749ce2698297",
+      "lines": 145
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01CharacteristicDriftMaterialJets.lean",
+      "sha256": "1a31d6ee0bb1d0504075d2a57c1299d7285d3e2194d3c277af1e83407edc5aae",
+      "lines": 153
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootDriftAxisMaterialJets.lean",
+      "sha256": "579584e7f611a5e24afe5cad3de38f488f43f6a6cb529fa36267421975f83c05",
+      "lines": 136
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootFactorAxisMaterialInverse.lean",
+      "sha256": "ba2815b77efb2303f1e5e40cdffb9b23a816965983c51ba742e9b45bddc13fc1",
+      "lines": 143
+    }
+  ],
+  "new_source_lines": 1586,
+  "existing_added_lean_from_green128": 12799,
+  "projected_added_lean_from_green128": 14385,
+  "status": "Source preservation only; outside src, no CI activation or completion claim.",
+  "entries": 48
+}

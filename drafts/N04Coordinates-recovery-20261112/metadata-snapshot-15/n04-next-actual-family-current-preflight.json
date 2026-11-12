@@ -1,0 +1,28 @@
+{
+  "kind": "actual_family_static_preflight",
+  "status": "HELD_NOT_ACTIVATED",
+  "checked_at": "2026-11-12T12:16:48.539622+00:00",
+  "head": "51f748cb71b876e4664d9d750240c7522d0cf92f",
+  "tree": "44e29d2eafa37456221914df1e33e73f16ecba1a",
+  "proposal": "/workspace/scratch/bbbea77e4163/n04-next-actual-family-group-reconstructed-held.json",
+  "proposal_sha256": "bd2804ba63b06e66d551b46bd47b887deb7147972c11e1c6f927bdfd9668fd8c",
+  "files": 19,
+  "source_lines": 2794,
+  "project_closure": 792,
+  "providers": 773,
+  "public_names": 40,
+  "missing_prerequisite_modules": [],
+  "current_ci": {
+    "label": 141,
+    "head": "51f748cb71b876e4664d9d750240c7522d0cf92f",
+    "tree": "44e29d2eafa37456221914df1e33e73f16ecba1a",
+    "main": "40242eae88c48c0d7edf55177c1bbb84798a10cb",
+    "pushed": "2026-11-12 12:16:19 UTC",
+    "first_check_not_before": "2026-11-12 12:21:19 UTC",
+    "status": "pending",
+    "plan": "n04-ci141-plan.json",
+    "source_all_total": 3681,
+    "root_imports": 3624,
+    "scope": "25 independently reviewed whole-atlas/principal endpoint-jet modules; generated root adds 25 imports. 2807 added Lean lines since full green140."
+  }
+}

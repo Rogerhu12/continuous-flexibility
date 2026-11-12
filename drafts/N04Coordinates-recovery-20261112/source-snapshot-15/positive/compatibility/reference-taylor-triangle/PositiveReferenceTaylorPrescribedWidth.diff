@@ -1,0 +1,11 @@
+--- n04-drafts/positive/reconstructed/PositiveReferenceTaylorPrescribedWidth.lean
++++ n04-drafts/positive/compatibility/reference-taylor-triangle/PositiveReferenceTaylorPrescribedWidth.lean
+@@ -78,7 +78,7 @@
+     (n := n + 1) (A := radialBoundaryJet g c) (θ := 0)
+     hδ hδone hM hx (fun j _ hj => hg j hj)).trans hsmall
+   have hκM : κ ≤ M := hheight.trans ((le_abs_self _).trans (hg 0 (by omega)))
+-  have htriangle := abs_add
++  have htriangle := abs_add_le
+     (boundaryTaylorPolynomial (n + 1) c (radialBoundaryJet g c) (x, 0) -
+       radialBoundaryJet g c 0 0) (radialBoundaryJet g c 0 0)
+   rw [sub_add_cancel] at htriangle
