@@ -30,7 +30,7 @@ theorem positiveReferenceCollarCoordinate_reference_identity
     funext side
     by_cases he : side = root
     · subst side
-      simp only [positiveReferenceCollarField, if_pos rfl, boundaryTaylorPolynomial_fst]
+      simp only [positiveReferenceCollarField, boundaryTaylorPolynomial_fst, ite_self]
     · simp only [positiveReferenceCollarField, if_neg he]
   have hslope : (fun side => radialPartial (positiveReferenceCollarField n a b root
       (radialBoundaryJet (Prod.fst : PolarPoint → ℝ) (if root then b else a))
@@ -53,10 +53,10 @@ theorem endpointFiberInterpolation_reference_identity
       (fun t => radialBoundaryJet (Prod.fst : PolarPoint → ℝ)
         (if t then r else l)) side = (Prod.fst : PolarPoint → ℝ) := by
     cases side with
-    | false => exact positiveReferenceCollarCoordinate_reference_identity n
-        (hη false) (hgap false) false
-    | true => exact positiveReferenceCollarCoordinate_reference_identity n
-        (hη true) (hgap true) true
+    | false =>
+        exact positiveReferenceCollarCoordinate_reference_identity n (hη false) (hgap false) false
+    | true =>
+        exact positiveReferenceCollarCoordinate_reference_identity n (hη true) (hgap true) true
   funext p
   simp only [endpointFiberInterpolation, twoEndpointFiberCoordinate, hcollar,
     radialGermGlue, ite_self]
