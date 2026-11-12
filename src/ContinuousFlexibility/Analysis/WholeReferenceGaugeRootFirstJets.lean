@@ -87,11 +87,11 @@ theorem n04WholeReferenceGaugeAtlasData_actual_root_firstJets
       (fun p : PolarPoint => (p.1 - v, p.2)) ∘
         wholePositiveReferenceGaugeChart (positiveReferenceCylinderChart (Y i)) (σ z i) := by
     funext p
-    simp only [CanonicalGeometry.endpointAlignedChart, hFp, one_mul, Function.comp_apply]
+    simp only [CanonicalGeometry.endpointAlignedChart, V, hFp, ψ, one_mul, Function.comp_apply]
   have hnegative : CanonicalGeometry.endpointAlignedChart V z ineg 0 s =
       (fun p : PolarPoint => (s * p.1, p.2)) ∘ K.chart z k := by
     funext p
-    simp only [CanonicalGeometry.endpointAlignedChart, hFn, sub_zero, Function.comp_apply]
+    simp only [CanonicalGeometry.endpointAlignedChart, V, hFn, k, sub_zero, Function.comp_apply]
   have hraw := n04Coordinates_actual_positive_gauge_root_firstJets
     hT hS hN hfield e₀ i j hgeometry hYjets hHjets hz hs hn hm m side hadj
   dsimp only

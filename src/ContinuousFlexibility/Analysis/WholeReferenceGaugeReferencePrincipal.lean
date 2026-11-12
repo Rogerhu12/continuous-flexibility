@@ -179,6 +179,6 @@ theorem n04WholeReferenceGaugeAtlasData_actual_referencePrincipal_qualitative
         change V.potential z₀ m q = (if V.positive m then -1 else (1 : ℝ)) *
           inverseChartPotential (L.coefficients z₀) (V.chart z₀ m)
             (V.inverseChart z₀ m) (V.height z₀ m) q at hpot
-        simpa only [hneg, ↓reduceIte, one_mul] using hpot
+        simpa only [hneg, Bool.false_eq_true, ↓reduceIte, one_mul] using hpot
 
 end ContinuousFlexibility.Analysis

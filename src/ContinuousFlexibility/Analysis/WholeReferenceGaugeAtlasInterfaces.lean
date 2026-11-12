@@ -61,7 +61,10 @@ theorem n04WholeReferenceGaugeAtlasData_cutFirstJetMatching
     CanonicalGeometry.CutFirstJetMatching S C
       (n04WholeReferenceGaugeAtlasData C L K e cell ψ χ h₀ τ σ Q N) base ε := by
   intro m z hz θ
-  simpa only [CanonicalGeometry.endpointAlignedChart, canonicalCutPoint,
+  have hE (V : CanonicalData S) (j : ℕ) (ρ s : ℝ) :
+      CanonicalGeometry.endpointAlignedChart V z j ρ s =
+        (fun p : PolarPoint => (s * ((V.chart z j p).1 - ρ), (V.chart z j p).2)) := rfl
+  simpa only [hE, canonicalCutPoint,
     n04WholeReferenceGaugeAtlasData, n04WholeCanonicalAtlasData, n04bWithInteriorDivision,
     n04WholeCutPair, Equiv.apply_symm_apply, Bool.false_eq_true, ite_false, ite_true]
     using hcut m z hz θ
