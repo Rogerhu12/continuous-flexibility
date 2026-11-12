@@ -17,6 +17,7 @@ noncomputable section
 namespace ContinuousFlexibility.Statements
 
 open Set MeasureTheory
+open scoped ContDiff
 open ContinuousFlexibility.Radial
 
 theorem n05_weakReferenceAngularJet_sub_radial
@@ -34,7 +35,9 @@ theorem n05_weakReferenceAngularJet_sub_radial
   have hχjet : n05_weakReferenceAngularJet D (fun p => χ p.1)
       (fun _ => 0) j := by
     have hh := n05_referenceAngularJet_weak_of_smooth_slices D (fun p => χ p.1)
-      (fun _ => contDiff_const) (fun _ _ => rfl) j
+      (fun r => by
+        simpa only using (contDiff_const : ContDiff ℝ ∞ (fun _ : ℝ => χ r)))
+      (fun _ _ => rfl) j
     simpa only [mixedDerivative, iteratedDeriv_zero, iteratedDeriv_const,
       if_neg (Nat.ne_of_gt hj)] using hh
   have hs := n05_weakReferenceAngularJet_add hab hu (hχLp.const_mul (-a))

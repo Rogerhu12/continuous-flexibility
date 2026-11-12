@@ -30,6 +30,7 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 include hD hT in
 /-- Every reweighted single column is exactly the original raw column,
 before taking any physical representative. -/
+set_option backward.isDefEq.respectTransparency false in
 theorem n05CanonicalJetSource_reweighted_single (s m : ℕ)
     (v : n05CanonicalClosedSubmodule S K s) (j : Fin (s + 1)) :
     n05CanonicalJetSource T S C K 1 0 s j
@@ -51,6 +52,7 @@ theorem n05CanonicalJetSource_reweighted_single (s m : ℕ)
 include hD hT h hcoordinates in
 /-- The literal single source has all the genuine unsigned physical
 angular weak derivatives encoded by its canonical graph row. -/
+set_option backward.isDefEq.respectTransparency false in
 theorem n05CanonicalSourceLift_single_weakJet (s m : ℕ)
     (v : n05CanonicalClosedSubmodule S K s) (j : Fin (s + 1)) :
     n05_weakReferenceAngularJet D
