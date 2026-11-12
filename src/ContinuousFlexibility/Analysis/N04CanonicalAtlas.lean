@@ -1,5 +1,5 @@
 import ContinuousFlexibility.Analysis.N04PieceData
-import ContinuousFlexibility.Analysis.N04LiouvilleCharts
+import ContinuousFlexibility.Analysis.N04bAtlasBoundary
 import ContinuousFlexibility.Blueprint.Statements
 import Mathlib.MeasureTheory.Measure.Typeclasses.NullSingletonClass
 
@@ -70,6 +70,7 @@ def n04CanonicalAtlas (D : ReferenceData) (S : PhysicalSpacesData)
   right := fun _ => 1
   physicalLeft := P.left
   physicalRight := P.right
+  physicalDomain := fun _ m => Ioo (P.left m) (P.right m) ×ˢ univ
   cell := P.cell
   positive := P.positive
   chart := fun _ m => n04UnitChart (P.left m) (P.right m) (P.reversed m)
@@ -83,8 +84,9 @@ def n04CanonicalAtlas (D : ReferenceData) (S : PhysicalSpacesData)
   normalizationRegion := univ
 
 theorem n04CanonicalAtlas_physicalPieceOpen (D : ReferenceData) (S : PhysicalSpacesData)
-    (C : NonlinearGeometryData S) (L : ReturnCorrectionData S) (P : N04PieceData) (m : ℕ) :
-    physicalPieceOpen S (n04CanonicalAtlas D S C L P) m =
+    (C : NonlinearGeometryData S) (L : ReturnCorrectionData S) (P : N04PieceData)
+    (z : AnnularState S × ℝ) (m : ℕ) :
+    physicalPieceOpen S (n04CanonicalAtlas D S C L P) z m =
       Ioo (P.left m) (P.right m) ×ˢ (univ : Set ℝ) := rfl
 
 theorem n04CanonicalAtlas_canonicalOpen (D : ReferenceData) (S : PhysicalSpacesData)
@@ -105,17 +107,52 @@ theorem n04CanonicalAtlas_partA {D : ReferenceData} {S : PhysicalSpacesData}
       0 < D.w p.1 :=
     hD.2.2.2.2.1 p.1
       ⟨(hbound m).1.trans_le hp.1, hp.2.trans_lt (hbound m).2.2⟩
-  unfold N04PartA
-  refine ⟨isOpen_univ, subset_univ _, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
-  · intro z hz hsector m p hp hnormal
-    exact ⟨rfl, rfl⟩
+  have hclosed (z : AnnularState S × ℝ) (m : ℕ) :
+      physicalPieceClosed S (n04CanonicalAtlas D S C L P) z m =
+        Icc (P.left m) (P.right m) ×ˢ (univ : Set ℝ) := by
+    rw [physicalPieceClosed, n04CanonicalAtlas_physicalPieceOpen,
+      n04b_closure_radial_strip (hlr m)]
+  refine {
+    normalizationOpen := isOpen_univ
+    normalizationSupport := subset_univ _
+    normalization := ?_
+    referenceBounds := ?_
+    referencePositive := hpositive
+    referenceNegative := hnegative
+    referencePartition := ⟨E, hE.measure_zero volume, hcover⟩
+    referenceDomain := fun _ => rfl
+    domains := ?_
+    partition := ?_
+    charts := ?_
+    boundary := ?_
+    reflection := ?_
+    inverseReflection := ?_ }
+  · intro z hz hsector m
+    exact ⟨rfl, fun p hp hnormal => ⟨rfl, rfl⟩⟩
   · intro m
     refine ⟨hlr m, by change (0 : ℝ) < 1; norm_num, ?_⟩
     intro r hr
     exact ⟨(hbound m).1.trans hr.1, hr.2.trans (hbound m).2.2⟩
-  · exact hpositive
-  · exact hnegative
-  · exact ⟨E, hE.measure_zero volume, hcover⟩
+  · intro z hz hsector m
+    refine ⟨isOpen_Ioo.prod isOpen_univ, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+    · refine ⟨((P.left m + P.right m) / 2, 0), ?_, mem_univ _⟩
+      constructor <;> linarith [hlr m]
+    · intro p hp
+      exact ⟨⟨(hbound m).1.trans hp.1.1, hp.1.2.trans (hbound m).2.2⟩,
+        mem_univ _⟩
+    · intro p
+      simp only [physicalPieceOpen, n04CanonicalAtlas, mem_prod, Prod.fst_add,
+        add_zero, mem_univ, and_true]
+    · intro p
+      rfl
+    · intro hpos
+      rfl
+    · intro p hp hpos
+      exact hpositive m hpos p.1 hp.1
+    · intro p hp hneg
+      exact hnegative m hneg p.1 hp.1
+  · intro z hz hsector
+    exact n04b_planar_partition_of_countable_radial hE hcover
   · intro z hz hsector m
     refine ⟨n04UnitChart_mapsTo (hlr m) (P.reversed m),
       n04UnitInverseChart_mapsTo (hlr m) (P.reversed m), ?_, ?_,
@@ -134,11 +171,21 @@ theorem n04CanonicalAtlas_partA {D : ReferenceData} {S : PhysicalSpacesData}
         n04UnitChart_planeJacobian_ne_zero (hlr m) (P.reversed m) p,
         n04UnitChart_lift (P.left m) (P.right m) (P.reversed m) Real.pi p,
         n04LiouvilleHeight_lift D.w (P.left m) (P.right m) Real.pi p⟩
-  · intro z hz hsector m p hp
-    exact ⟨(contDiff_n04UnitChart (P.left m) (P.right m) (P.reversed m)).contDiffAt,
-      contDiffAt_n04LiouvilleHeight (p := p) hw (hlr m) (hwp m p hp),
-      n04UnitChart_planeJacobian_ne_zero (hlr m) (P.reversed m) p,
-      n04LiouvilleHeight_pos (p := p) (hlr m) (hwp m p hp)⟩
+  · intro z hz hsector m
+    rw [hclosed]
+    refine ⟨n04bUnitChart_mapsTo_closed (hlr m) (P.reversed m),
+      n04bUnitInverseChart_mapsTo_closed (hlr m) (P.reversed m), ?_, ?_, ?_, ?_⟩
+    · intro p hp
+      exact n04UnitInverseChart_chart (hlr m) (P.reversed m) p
+    · intro p hp
+      exact n04UnitChart_inverseChart (hlr m) (P.reversed m) p
+    · intro p hp
+      exact ⟨(contDiff_n04UnitChart (P.left m) (P.right m) (P.reversed m)).contDiffAt,
+        contDiffAt_n04LiouvilleHeight (p := p) hw (hlr m) (hwp m p hp.1),
+        n04UnitChart_planeJacobian_ne_zero (hlr m) (P.reversed m) p,
+        n04LiouvilleHeight_pos (p := p) (hlr m) (hwp m p hp.1)⟩
+    · intro p hp
+      exact n04bUnitChart_boundaryInverseGerm (hlr m) (P.reversed m) p
   · intro z hz hsector m p hp
     exact ⟨n04UnitChart_reflection (P.left m) (P.right m) (P.reversed m) p,
       n04LiouvilleHeight_reflection D.w (P.left m) (P.right m) p,

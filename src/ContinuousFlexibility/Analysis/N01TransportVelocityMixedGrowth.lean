@@ -115,8 +115,8 @@ private theorem transportVelocity_commonGrowth
   refine ⟨hgL, hgA, ?_⟩
   intro c
   fin_cases c
-  · simpa only [pow_zero] using hg0
-  · simpa only [pow_one] using hg1
+  · simpa only [Fin.mk_zero, Fin.val_zero, pow_zero] using hg0
+  · simpa only [Fin.mk_one, Fin.val_one, pow_one] using hg1
 
 private theorem transportVelocity_flatOfGrowth
     {I E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
@@ -189,7 +189,7 @@ private theorem transportVelocity_flatOfGrowth
         (p := p) (W := W) (F := fun i => H i ^ (1 : Fin 2).val)
         (f := fvel 1) (g := fV) (J := Jvel 1) (n := nmax) (low := B) (loss := B + 1)
         hflat1 JV hV hVeq
-    simpa only [pow_one] using hsame
+    simpa only [Fin.val_one, pow_one] using hsame
   · have hsame : FlatMixedDiagonalGrowth p W (fun i => H i ^ (0 : Fin 2).val)
         JE nmax B (B + 1) :=
       FlatMixedDiagonalGrowth.congr
@@ -197,7 +197,7 @@ private theorem transportVelocity_flatOfGrowth
         (p := p) (W := W) (F := fun i => H i ^ (0 : Fin 2).val)
         (f := fvel 0) (g := fE) (J := Jvel 0) (n := nmax) (low := B) (loss := B + 1)
         hflat0 JE hV hEeq
-    simpa only [pow_zero] using hsame
+    simpa only [Fin.val_zero, pow_zero] using hsame
 
 end ContinuousFlexibility.Analysis
 
@@ -255,6 +255,7 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
       FlatMixedDiagonalGrowth p W (fun m => T.H (T.sample m) ^ (3 / 4 : ℝ)) JV
         nmax B (B + 1) ∧
       FlatMixedDiagonalGrowth p W (fun _ => 1) JE nmax B (B + 1) := by
+  run_tac Lean.logInfo "N02N03 Velocity: start"
   let E₀ : Type := StateDirections S × ℝ
   let E : Type := E₀ × CircleSpace S
   let U₀ : Set E₀ := sectorNeighborhood S base ε ε
@@ -299,6 +300,7 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
       half_pos (mul_pos hlam (Real.rpow_pos_of_pos (zero_lt_one.trans_le (hW m)) _))
     exact (pow_pos hd 2).trans_le (hpositive (liftSectorParameter S C z)
       (liftSectorParameter_mem_stateNeighborhood hz le_rfl) m y hy).2
+  run_tac Lean.logInfo "N02N03 Velocity: geometry"
   let characteristicData : ∃ K : ∀ m, SmoothDirections (U₀ ×ˢ V m) (fL₀ m),
       ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧ UniformWeightedJointGrowth p₀ W K B L :=
     hN.exists_minusCharacteristicSpeed_strip_joint_growth
@@ -340,6 +342,7 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
   let JC : ∀ m, SmoothDirections (U ×ˢ V m) (fC m) := fun m =>
     radialCutoffScalarTower (E := E) (U := U) (V := V m) (χ := χ m)
       hU (hV m) (hχ m)
+  run_tac Lean.logInfo "N02N03 Velocity: towers"
   let characteristicBounds : ∃ B : ℕ,
       ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ a b : ℕ, a + b ≤ N →
         ∃ K Q : ℝ, 0 ≤ K ∧ 0 ≤ Q ∧
@@ -411,6 +414,7 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
           |jointMixedDiagonal (J₁ m) n 0 b x w y| ≤ K * H m *
             (1 + p (N + B₁ + 1) x + p (N + B₁ + 1) w) ^
               ((b : ℝ) / ((N : ℝ) + 1)) := displacementBounds.choose_spec
+  run_tac Lean.logInfo "N02N03 Velocity: bounds"
   let B : ℕ := BL + BA + B₀ + B₁
   have hbL : BL ≤ B := by dsimp only [B]; omega
   have hbA : BA ≤ B := by dsimp only [B]; omega
@@ -425,6 +429,7 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
       (I := ℕ) (E := E) (U := U) (fL := fL) (fA := fA) (fZ := fZ)
       l h p W H hp hW0 hH JL JA JZ nmax BL BA B₀ B₁ B
       hbL hbA hb0 hb1 hBL hBA hB₀ hB₁
+  run_tac Lean.logInfo "N02N03 Velocity: common-growth"
   have hgC (n a b : ℕ) : ∃ K Q : ℝ, 0 ≤ K ∧ 0 ≤ Q ∧
       ∀ m x, x ∈ U → ∀ w, ∀ y ∈ V m,
         |jointMixedDiagonal (JC m) n a b x w y| ≤ K * W m ^ Q := by
@@ -472,6 +477,7 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
     · simpa only [fZ, Fin.cases_zero, neg_mul] using
         hrec (R.residual (liftSectorParameter S C x.1))
     · simpa only [fZ, Fin.cases_succ, Fin.cases_zero, neg_mul] using hrec x.2
+  run_tac Lean.logInfo "N02N03 Velocity: transport"
   refine ⟨B, ?_⟩
   exact transportVelocity_flatOfGrowth
     (I := ℕ) (E := E) (U := U) (V := V)

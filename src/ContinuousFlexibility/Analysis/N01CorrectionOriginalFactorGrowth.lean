@@ -175,6 +175,7 @@ theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
     HasFlatMixedTameGrowth p W (fun _ => 1) Ja ∧
       HasFlatMixedTameGrowth p W (fun _ => 1) Jb ∧
         HasFlatMixedTameGrowth p W (fun _ => 1) Jq := by
+  run_tac do Lean.logInfo "N02N03 Original: entry"
   let E₀ : Type := StateDirections S × ℝ
   let E : Type := (StateDirections S × ℝ) × CircleSpace S
   let p₀ : ℕ → Seminorm ℝ E₀ := pairGrading (sectorGrading S) realGrading
@@ -201,6 +202,7 @@ theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
   have hc (m : ℕ) : Convex ℝ (U ×ˢ V m) :=
     ((sectorNeighborhood_convex S base ε ε).prod convex_univ).prod
       ((convex_Ioo (l m) (h m)).prod convex_univ)
+  run_tac do Lean.logInfo "N02N03 Original: domains"
   let entry : Fin 3 → ℕ → E₀ × PolarPoint → ℝ := fun i _ x =>
     originalCoefficientEntry D S C i (liftSectorParameter S C x.1) x.2
   let K₀ : ∀ (i : Fin 3) (m : ℕ), SmoothDirections (U₀ ×ˢ V m) (entry i m) :=
@@ -227,6 +229,7 @@ theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
         have h10 : (1 : Fin 3) ≠ 0 := by decide
         simp only [entry, fb, originalCoefficientEntry, h10, eq_self_iff_true,
           ite_false, ite_true])
+  run_tac do Lean.logInfo "N02N03 Original: unweighted"
   have ha : UniformWeightedJointGrowth p W Ja base loss :=
     UniformWeightedJointGrowth.withWeight
       (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ) (p := p)
@@ -235,6 +238,7 @@ theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
     UniformWeightedJointGrowth.withWeight
       (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ) (p := p)
       (U := U) (V := V) (f := fb) (J := Jb) (base := base) (loss := loss) hb₀ W
+  run_tac do Lean.logInfo "N02N03 Original: weighted"
   let fv₀ : ℕ → E₀ × PolarPoint → ℝ := fun _ x =>
     minusCharacteristicSpeed (originalCoefficients D S C (liftSectorParameter S C x.1)) x.2
   let fv : ℕ → E × PolarPoint → ℝ := fun m x => fv₀ m (x.1.1, x.2)
@@ -258,6 +262,7 @@ theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
       (I := ℕ) (E := E₀) (F := CircleSpace S) (P := PolarPoint) (G := ℝ)
       (p := p₀) (W := W) (U := U₀) (V := V) (f := fv₀)
       (J := Jv₀) (base := B) (loss := L) pc hW₀ hv₀ hU₀ hV
+  run_tac do Lean.logInfo "N02N03 Original: characteristic"
   have heq : ∀ m (x : E × PolarPoint), x ∈ U ×ˢ V m →
       fb m x - fa m x * fv m x = fq m x := by
     intro m x hx
@@ -273,6 +278,7 @@ theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
         (b := (originalCoefficients D S C (liftSectorParameter S C x.1.1)).b x.2)
         (c := (originalCoefficients D S C (liftSectorParameter S C x.1.1)).c x.2)
         hapos.ne')
+  run_tac do Lean.logInfo "N02N03 Original: identity"
   let scalarData : ∃ B' L' : ℕ, B ≤ B' ∧ max loss L ≤ B' ∧
       UniformWeightedJointGrowth p W Jq B' (max loss L') :=
     scalar_sub_mul_jointGrowth
@@ -282,6 +288,7 @@ theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
       hp hIp hW Ja Jb Jv Jq hB ha hb hv heq
   obtain ⟨B', L', _, _, hq⟩ := scalarData
   let M' : ℕ := max loss L'
+  run_tac do Lean.logInfo "N02N03 Original: final"
   exact ⟨UniformWeightedJointGrowth.hasFlatMixedTameGrowth
       (I := ℕ) (E := E) (p := p) (W := W) (U := U) (V := V) (f := fa)
       (J := Ja) (B := base) (L := loss) hp hW ha hV hc,
