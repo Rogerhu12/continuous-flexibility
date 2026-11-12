@@ -98,7 +98,6 @@ local instance n01TransportCharacteristicInterpolationStateSMul (S : PhysicalSpa
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
-set_option diagnostics true in
 /-- The same actual characteristic bound on the parameter space that
 also contains the independent residual. -/
 theorem N01Properties.minusCharacteristicSpeed_correction_joint_growth
@@ -165,7 +164,6 @@ theorem N01Properties.minusCharacteristicSpeed_correction_joint_growth
       (originalCoefficients D S C (liftSectorParameter S C x.1.1)) x.2)
     (J := K') (base := B) (loss := L) hlift J (fun _ _ _ => rfl)⟩
 
-set_option diagnostics true in
 /-- Primitive characteristic jets have exactly the total spatial order
 as their exponent budget on the same high scale as the angular fields. -/
 theorem N01Properties.minusCharacteristicSpeed_correction_mixed_interpolation

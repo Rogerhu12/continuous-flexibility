@@ -25,6 +25,7 @@ private theorem sqrt_discriminant_from_minus_speed {a b c : ℝ} (ha : a ≠ 0) 
     b - a * (b / a - Real.sqrt (b ^ 2 - a * c) / a) = Real.sqrt (b ^ 2 - a * c) := by
   field_simp [ha] <;> ring
 
+set_option diagnostics true in
 theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -59,72 +60,183 @@ theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
     HasFlatMixedTameGrowth p W (fun _ => 1) Ja ∧
       HasFlatMixedTameGrowth p W (fun _ => 1) Jb ∧
         HasFlatMixedTameGrowth p W (fun _ => 1) Jq := by
-  let p := pairGrading (pairGrading (sectorGrading S) realGrading)
-    (S.circle (3 / 4 : ℝ)).grading
+  let E₀ : Type := StateDirections S × ℝ
+  let E : Type := (StateDirections S × ℝ) × CircleSpace S
+  let p₀ : ℕ → Seminorm ℝ E₀ := pairGrading (sectorGrading S) realGrading
+  let pc : ℕ → Seminorm ℝ (CircleSpace S) := (S.circle (3 / 4 : ℝ)).grading
+  let p : ℕ → Seminorm ℝ E := pairGrading p₀ pc
+  let U₀ : Set E₀ := sectorNeighborhood S base ε ε
+  let U : Set E := U₀ ×ˢ univ
+  let V : ℕ → Set PolarPoint := fun m => Ioo (l m) (h m) ×ˢ univ
   let W : ℕ → ℝ := fun m => radialE (D.cellIndex (j m))
+  let fa : ℕ → E × PolarPoint → ℝ := fun _ x =>
+    (originalCoefficients D S C (liftSectorParameter S C x.1.1)).a x.2
+  let fb : ℕ → E × PolarPoint → ℝ := fun _ x =>
+    (originalCoefficients D S C (liftSectorParameter S C x.1.1)).b x.2
+  let fq : ℕ → E × PolarPoint → ℝ := fun _ x =>
+    Real.sqrt ((originalCoefficients D S C (liftSectorParameter S C x.1.1)).b x.2 ^ 2 -
+      (originalCoefficients D S C (liftSectorParameter S C x.1.1)).a x.2 *
+        (originalCoefficients D S C (liftSectorParameter S C x.1.1)).c x.2)
   have hp : Monotone p := correctionParameterGrading_monotone S
   have hIp : HasInterpolation p := correctionParameterGrading_hasInterpolation hS
-  have hW (m : ℕ) : 1 ≤ W m := one_le_radialE_of_nat _
+  have hW (m : ℕ) : 1 ≤ W m := one_le_radialE_of_nat (D.cellIndex (j m))
   have hW₀ (m : ℕ) : 0 ≤ W m := zero_le_one.trans (hW m)
-  have hU := (sectorNeighborhood_isOpen S base ε ε).prod
-    (isOpen_univ : IsOpen (univ : Set (CircleSpace S)))
-  have hV (m : ℕ) : IsOpen (Ioo (l m) (h m) ×ˢ (univ : Set ℝ)) :=
-    isOpen_Ioo.prod isOpen_univ
-  have hc (m : ℕ) : Convex ℝ
-      ((sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) ×ˢ
-        (Ioo (l m) (h m) ×ˢ (univ : Set ℝ))) :=
+  have hU₀ : IsOpen U₀ := sectorNeighborhood_isOpen S base ε ε
+  have hV (m : ℕ) : IsOpen (V m) := isOpen_Ioo.prod isOpen_univ
+  have hc (m : ℕ) : Convex ℝ (U ×ˢ V m) :=
     ((sectorNeighborhood_convex S base ε ε).prod convex_univ).prod
       ((convex_Ioo (l m) (h m)).prod convex_univ)
+  let entry : Fin 3 → ℕ → E₀ × PolarPoint → ℝ := fun i _ x =>
+    originalCoefficientEntry D S C i (liftSectorParameter S C x.1) x.2
+  let K₀ : ∀ (i : Fin 3) (m : ℕ), SmoothDirections (U₀ ×ˢ V m) (entry i m) :=
+    fun i m => hN.originalCoefficient_stripTower
+      (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+      hS hT j hcell l h hl hh i m
+  let K : ∀ (i : Fin 3) (m : ℕ), SmoothDirections (U ×ˢ V m)
+      (fun x : E × PolarPoint => entry i m (x.1.1, x.2)) :=
+    fun i m => SmoothDirections.fstParameter
+      (E := E₀) (F := CircleSpace S) (P := PolarPoint) (G := ℝ)
+      (U := U₀) (V := V m) (f := entry i m) (K₀ i m) hU₀ (hV m)
+  have hK₀ (i : Fin 3) : UniformWeightedJointGrowth p₀ (fun _ => 1) (K₀ i) base loss :=
+    hN.originalCoefficient_strip_joint_growth
+      (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+      hS hT j hcell l h hl hh i
+  have hK (i : Fin 3) : UniformWeightedJointGrowth p (fun _ => 1) (K i) base loss :=
+    UniformWeightedJointGrowth.fstParameter
+      (I := ℕ) (E := E₀) (F := CircleSpace S) (P := PolarPoint) (G := ℝ)
+      (p := p₀) (W := fun _ => 1) (U := U₀) (V := V) (f := entry i)
+      (J := K₀ i) (base := base) (loss := loss) pc (fun _ => zero_le_one)
+      (hK₀ i) hU₀ hV
   have ha₀ : UniformWeightedJointGrowth p (fun _ => 1) Ja base loss := by
-    have hb := (hN.originalCoefficient_strip_joint_growth hS hT j hcell l h hl hh 0).fstParameter
-      (S.circle (3 / 4 : ℝ)).grading (fun _ => zero_le_one)
-      (sectorNeighborhood_isOpen S base ε ε) hV
-    apply hb.congr Ja
+    apply UniformWeightedJointGrowth.congr
+      (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ)
+      (p := p) (W := fun _ => 1) (U := U) (V := V)
+      (f := fun m x => entry 0 m (x.1.1, x.2)) (g := fa)
+      (J := K 0) (base := base) (loss := loss) (hK 0) Ja
     intro m x hx
-    simp only [originalCoefficientEntry, eq_self_iff_true, ite_true]
+    simp only [entry, fa, originalCoefficientEntry, eq_self_iff_true, ite_true]
   have hb₀ : UniformWeightedJointGrowth p (fun _ => 1) Jb base loss := by
-    have hb := (hN.originalCoefficient_strip_joint_growth hS hT j hcell l h hl hh 1).fstParameter
-      (S.circle (3 / 4 : ℝ)).grading (fun _ => zero_le_one)
-      (sectorNeighborhood_isOpen S base ε ε) hV
-    apply hb.congr Jb
+    apply UniformWeightedJointGrowth.congr
+      (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ)
+      (p := p) (W := fun _ => 1) (U := U) (V := V)
+      (f := fun m x => entry 1 m (x.1.1, x.2)) (g := fb)
+      (J := K 1) (base := base) (loss := loss) (hK 1) Jb
     intro m x hx
-    norm_num [originalCoefficientEntry]
-  have ha : UniformWeightedJointGrowth p W Ja base loss := ha₀.withWeight W
-  have hb : UniformWeightedJointGrowth p W Jb base loss := hb₀.withWeight W
-  let data := hN.exists_minusCharacteristicSpeed_strip_joint_growth hS hT
-    j hcell l h hl hh hlam hP hpositive
-  let Jv := fun m => (data.choose m).fstParameter
-    (F := CircleSpace S) (sectorNeighborhood_isOpen S base ε ε) (hV m)
-  let B := data.choose_spec.choose
-  let L := data.choose_spec.choose_spec.choose
+    have h10 : (1 : Fin 3) ≠ 0 := by decide
+    simp only [entry, fb, originalCoefficientEntry, h10, eq_self_iff_true,
+      ite_false, ite_true]
+  have ha : UniformWeightedJointGrowth p W Ja base loss :=
+    UniformWeightedJointGrowth.withWeight
+      (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ) (p := p)
+      (U := U) (V := V) (f := fa) (J := Ja) (base := base) (loss := loss) ha₀ W
+  have hb : UniformWeightedJointGrowth p W Jb base loss :=
+    UniformWeightedJointGrowth.withWeight
+      (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ) (p := p)
+      (U := U) (V := V) (f := fb) (J := Jb) (base := base) (loss := loss) hb₀ W
+  let fv₀ : ℕ → E₀ × PolarPoint → ℝ := fun _ x =>
+    minusCharacteristicSpeed (originalCoefficients D S C (liftSectorParameter S C x.1)) x.2
+  let fv : ℕ → E × PolarPoint → ℝ := fun m x => fv₀ m (x.1.1, x.2)
+  let data : ∃ J : ∀ m, SmoothDirections (U₀ ×ˢ V m) (fv₀ m),
+      ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧ UniformWeightedJointGrowth p₀ W J B L :=
+    hN.exists_minusCharacteristicSpeed_strip_joint_growth
+      (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+      (lam := lam) (P := P) hS hT j hcell l h hl hh hlam hP hpositive
+  let Jv₀ : ∀ m, SmoothDirections (U₀ ×ˢ V m) (fv₀ m) := data.choose
+  let Jv : ∀ m, SmoothDirections (U ×ˢ V m) (fv m) :=
+    fun m => SmoothDirections.fstParameter
+      (E := E₀) (F := CircleSpace S) (P := PolarPoint) (G := ℝ)
+      (U := U₀) (V := V m) (f := fv₀ m) (Jv₀ m) hU₀ (hV m)
+  let B : ℕ := data.choose_spec.choose
+  let L : ℕ := data.choose_spec.choose_spec.choose
   have hB : base ≤ B := data.choose_spec.choose_spec.choose_spec.1
+  have hv₀ : UniformWeightedJointGrowth p₀ W Jv₀ B L :=
+    data.choose_spec.choose_spec.choose_spec.2.2
   have hv : UniformWeightedJointGrowth p W Jv B L :=
-    data.choose_spec.choose_spec.choose_spec.2.2.fstParameter
-      (S.circle (3 / 4 : ℝ)).grading hW₀ (sectorNeighborhood_isOpen S base ε ε) hV
-  let M := max loss L
-  let Jprod := fun m => (Ja m).mul (Jv m)
-  obtain ⟨B', L', hB', _, hprod⟩ :=
-    (ha.mono hp hW₀ hB (le_max_left loss L)).mul hp hIp hW
-      (hv.mono hp hW₀ le_rfl (le_max_right loss L)) Jprod
-  let M' := max loss L'
+    UniformWeightedJointGrowth.fstParameter
+      (I := ℕ) (E := E₀) (F := CircleSpace S) (P := PolarPoint) (G := ℝ)
+      (p := p₀) (W := W) (U := U₀) (V := V) (f := fv₀)
+      (J := Jv₀) (base := B) (loss := L) pc hW₀ hv₀ hU₀ hV
+  let M : ℕ := max loss L
+  let fprod : ℕ → E × PolarPoint → ℝ := fun m x => fa m x * fv m x
+  let Jprod : ∀ m, SmoothDirections (U ×ˢ V m) (fprod m) :=
+    fun m => (Ja m).mul (Jv m)
+  have haM : UniformWeightedJointGrowth p W Ja B M :=
+    UniformWeightedJointGrowth.mono
+      (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ)
+      (p := p) (W := W) (U := U) (V := V) (f := fa) (J := Ja)
+      (base := base) (loss := loss) (B := B) (L := M)
+      hp hW₀ ha hB (le_max_left loss L)
+  have hvM : UniformWeightedJointGrowth p W Jv B M :=
+    UniformWeightedJointGrowth.mono
+      (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ)
+      (p := p) (W := W) (U := U) (V := V) (f := fv) (J := Jv)
+      (base := B) (loss := L) (B := B) (L := M)
+      hp hW₀ hv le_rfl (le_max_right loss L)
+  let productData : ∃ B' L' : ℕ, B ≤ B' ∧ M ≤ B' ∧
+      UniformWeightedJointGrowth p W Jprod B' L' :=
+    UniformWeightedJointGrowth.mul
+      (I := ℕ) (E := E) (P := PolarPoint)
+      (p := p) (W := W) (U := U) (V := V) (f := fa) (g := fv)
+      (J := Ja) (K := Jv) (base := B) (loss := M) hp hIp hW haM hvM Jprod
+  let B' : ℕ := productData.choose
+  let L' : ℕ := productData.choose_spec.choose
+  have hB' : B ≤ B' := productData.choose_spec.choose_spec.1
+  have hprod : UniformWeightedJointGrowth p W Jprod B' L' :=
+    productData.choose_spec.choose_spec.2.2
+  let M' : ℕ := max loss L'
   let subL : (ℝ × ℝ) →L[ℝ] ℝ :=
     ContinuousLinearMap.fst ℝ ℝ ℝ - ContinuousLinearMap.snd ℝ ℝ ℝ
-  let Jtemp := fun m => smoothDirectionsPostContinuousLinear
-    (smoothDirectionsProd (Jb m) (Jprod m)) subL
+  let ftemp : ℕ → E × PolarPoint → ℝ := fun m x => fb m x - fprod m x
+  let Jtemp : ∀ m, SmoothDirections (U ×ˢ V m) (ftemp m) := fun m =>
+    (smoothDirectionsPostContinuousLinear
+      (smoothDirectionsProd (Jb m) (Jprod m)) subL).congrOn (by
+        intro x hx
+        simp only [subL, ftemp, _root_.sub_apply,
+          ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd'])
+  have hbM' : UniformWeightedJointGrowth p W Jb B' M' :=
+    UniformWeightedJointGrowth.mono
+      (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ)
+      (p := p) (W := W) (U := U) (V := V) (f := fb) (J := Jb)
+      (base := base) (loss := loss) (B := B') (L := M')
+      hp hW₀ hb (hB.trans hB') (le_max_left loss L')
+  have hprodM' : UniformWeightedJointGrowth p W Jprod B' M' :=
+    UniformWeightedJointGrowth.mono
+      (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ)
+      (p := p) (W := W) (U := U) (V := V) (f := fprod) (J := Jprod)
+      (base := B') (loss := L') (B := B') (L := M')
+      hp hW₀ hprod le_rfl (le_max_right loss L')
   have htemp : UniformWeightedJointGrowth p W Jtemp B' M' :=
-    (hb.mono hp hW₀ (hB.trans hB') (le_max_left _ _)).sub hp hW
-      (hprod.mono hp hW₀ le_rfl (le_max_right _ _)) Jtemp
+    UniformWeightedJointGrowth.sub
+      (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ)
+      (p := p) (W := W) (U := U) (V := V) (f := fb) (g := fprod)
+      (J := Jb) (K := Jprod) (base := B') (loss := M')
+      hp hW hbM' hprodM' Jtemp
   have hq : UniformWeightedJointGrowth p W Jq B' M' := by
-    apply htemp.congr Jq
+    apply UniformWeightedJointGrowth.congr
+      (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ)
+      (p := p) (W := W) (U := U) (V := V) (f := ftemp) (g := fq)
+      (J := Jtemp) (base := B') (loss := M') htemp Jq
     intro m x hx
     have hpoint : x.2 ∈ annularOpen D := hN.negativeComponent_subset_annularOpen m
       ⟨⟨(hl m).trans hx.2.1.1, hx.2.1.2.trans (hh m)⟩, hx.2.2⟩
-    have hapos := hN.originalRadialCoefficient_pos
-      (liftSectorParameter_mem_stateNeighborhood hx.1.1 le_rfl)
-      (hN.2.2.1.liftSectorParameter_sector x.1.1) hpoint
-    exact sqrt_discriminant_from_minus_speed hapos.ne'
-  exact ⟨ha.hasFlatMixedTameGrowth hp hW hV hc,
-    hb.hasFlatMixedTameGrowth hp hW hV hc,
-    hq.hasFlatMixedTameGrowth hp hW hV hc⟩
+    have hapos : 0 < (originalCoefficients D S C (liftSectorParameter S C x.1.1)).a x.2 :=
+      hN.originalRadialCoefficient_pos
+        (liftSectorParameter_mem_stateNeighborhood hx.1.1 le_rfl)
+        (hN.2.2.1.liftSectorParameter_sector x.1.1) hpoint
+    simpa only [ftemp, fprod, fa, fb, fq, fv, fv₀, minusCharacteristicSpeed] using
+      (sqrt_discriminant_from_minus_speed
+        (a := (originalCoefficients D S C (liftSectorParameter S C x.1.1)).a x.2)
+        (b := (originalCoefficients D S C (liftSectorParameter S C x.1.1)).b x.2)
+        (c := (originalCoefficients D S C (liftSectorParameter S C x.1.1)).c x.2)
+        hapos.ne')
+  exact ⟨UniformWeightedJointGrowth.hasFlatMixedTameGrowth
+      (I := ℕ) (E := E) (p := p) (W := W) (U := U) (V := V) (f := fa)
+      (J := Ja) (B := base) (L := loss) hp hW ha hV hc,
+    UniformWeightedJointGrowth.hasFlatMixedTameGrowth
+      (I := ℕ) (E := E) (p := p) (W := W) (U := U) (V := V) (f := fb)
+      (J := Jb) (B := base) (L := loss) hp hW hb hV hc,
+    UniformWeightedJointGrowth.hasFlatMixedTameGrowth
+      (I := ℕ) (E := E) (p := p) (W := W) (U := U) (V := V) (f := fq)
+      (J := Jq) (B := B') (L := M') hp hW hq hV hc⟩
 
 end ContinuousFlexibility.Statements
