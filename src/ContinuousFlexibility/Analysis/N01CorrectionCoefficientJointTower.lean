@@ -38,6 +38,37 @@ def parameterAngularReflection (E : Type*)
     (((ContinuousLinearMap.fst ℝ ℝ ℝ).prod (-(ContinuousLinearMap.snd ℝ ℝ ℝ))).comp
       (ContinuousLinearMap.snd ℝ E PolarPoint))
 
+
+private theorem correctionStateSpatialProjection_apply (S : PhysicalSpacesData)
+    (x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint) :
+    correctionStateSpatialProjection S x = (x.1.1, x.2) := by
+  simp only [correctionStateSpatialProjection, ContinuousLinearMap.prod_apply,
+    ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
+    ContinuousLinearMap.coe_snd']
+
+private theorem parameterAngularReflection_apply (E : Type*)
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (x : E × PolarPoint) :
+    parameterAngularReflection E x = (x.1, (x.2.1, -x.2.2)) := by
+  simp only [parameterAngularReflection, ContinuousLinearMap.prod_apply,
+    ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
+    ContinuousLinearMap.coe_snd', ContinuousLinearMap.neg_apply]
+
+private def jointCoefficientDiscriminantSqrt
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} {a b c : E → ℝ}
+    (Ja : SmoothDirections U a) (Jb : SmoothDirections U b)
+    (Jc : SmoothDirections U c)
+    (hpos : ∀ x ∈ U, 0 < b x ^ 2 - a x * c x) :
+    SmoothDirections U (fun x => Real.sqrt (b x ^ 2 - a x * c x)) := by
+  let Jdisc : SmoothDirections U (fun x => b x ^ 2 - a x * c x) :=
+    ((smoothDirectionsProd (Jb.mul Jb) (Ja.mul Jc)).comp_contDiff isOpen_univ
+      (contDiff_fst.sub contDiff_snd).contDiffOn (fun _ _ => mem_univ _)).congrOn
+      (by intro x hx; simp only [pow_two])
+  exact Jdisc.comp_contDiff isOpen_Ioi
+    (contDiffOn_id.sqrt (fun q (hq : q ∈ Ioi (0 : ℝ)) => ne_of_gt hq)) hpos
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {base loss : ℕ} {ε : ℝ}
@@ -59,45 +90,71 @@ def N01Properties.returnCorrectionLocalCoefficient_parameterSpatialTower :
       (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
         returnCorrectionLocalCoefficientError D S C R χ (liftSectorParameter S C x.1.1)
           m x.2 x.1.2) := by
-  have hW := ((sectorNeighborhood_isOpen S base ε ε).prod
-    (isOpen_univ : IsOpen (univ : Set (CircleSpace S)))).prod
-      ((isOpen_Ioo : IsOpen (Ioo l h)).prod (isOpen_univ : IsOpen (univ : Set ℝ)))
+  have hW : IsOpen
+      ((sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) ×ˢ
+        (Ioo l h ×ˢ (univ : Set ℝ))) :=
+    ((sectorNeighborhood_isOpen S base ε ε).prod
+      (isOpen_univ : IsOpen (univ : Set (CircleSpace S)))).prod
+        ((isOpen_Ioo : IsOpen (Ioo l h)).prod (isOpen_univ : IsOpen (univ : Set ℝ)))
   let L := correctionStateSpatialProjection S
   let P := parameterAngularReflection ((StateDirections S × ℝ) × CircleSpace S)
   have hL : MapsTo L
       ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
-      (sectorNeighborhood S base ε ε ×ˢ (Ioo l h ×ˢ univ)) :=
-    fun x hx => ⟨hx.1.1, hx.2⟩
+      (sectorNeighborhood S base ε ε ×ˢ (Ioo l h ×ˢ univ)) := by
+    intro x hx
+    simp only [L, correctionStateSpatialProjection_apply]
+    exact ⟨hx.1.1, hx.2⟩
   have hP : MapsTo P
       ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
-      ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ)) :=
-    fun x hx => ⟨hx.1, hx.2.1, mem_univ _⟩
+      ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ)) := by
+    intro x hx
+    simp only [P, parameterAngularReflection_apply]
+    exact ⟨hx.1, hx.2.1, mem_univ _⟩
   let JV := hN.returnCorrectionVelocity_parameterSpatialTower hS hT χ hχrange hχ
     m l h hl hh hdisc
-  let JVactual := (hN.returnCorrectionVelocity_actual_parameterSpatialTower hS hT χ hχrange hχ
-    m l h hl hh hdisc hR).compLinear L hW hL
+  let JVactual :
+      SmoothDirections ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
+        (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+          returnCorrectionVelocityLinear D S C χ (liftSectorParameter S C x.1.1)
+            m x.2 (R.residual (liftSectorParameter S C x.1.1))) :=
+    ((hN.returnCorrectionVelocity_actual_parameterSpatialTower hS hT χ hχrange hχ
+      m l h hl hh hdisc hR).compLinear L hW hL).congrOn
+      (by intro x hx; simp only [L, correctionStateSpatialProjection_apply])
   let JD := (reflectedVelocityDirections JV (JV.compLinear P hW hP)).congrOn
     (g := fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
       (returnCorrectionDriftLinear D S C χ (liftSectorParameter S C x.1.1) m x.2 x.1.2,
         returnCorrectionSpeedLinear D S C χ (liftSectorParameter S C x.1.1) m x.2 x.1.2))
-    (by intro x hx; simp only [returnCorrectionDriftLinear_apply, returnCorrectionSpeedLinear_apply])
+    (by
+      intro x hx
+      simp only [P, parameterAngularReflection_apply,
+        returnCorrectionDriftLinear_apply, returnCorrectionSpeedLinear_apply])
   let JE := (reflectedVelocityDirections JVactual (JVactual.compLinear P hW hP)).congrOn
     (g := fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
       (returnCorrectionDriftLinear D S C χ (liftSectorParameter S C x.1.1) m x.2
           (R.residual (liftSectorParameter S C x.1.1)),
         returnCorrectionSpeedLinear D S C χ (liftSectorParameter S C x.1.1) m x.2
           (R.residual (liftSectorParameter S C x.1.1))))
-    (by intro x hx; simp only [returnCorrectionDriftLinear_apply, returnCorrectionSpeedLinear_apply])
+    (by
+      intro x hx
+      simp only [P, parameterAngularReflection_apply,
+        returnCorrectionDriftLinear_apply, returnCorrectionSpeedLinear_apply])
   have hLfull : MapsTo L
       ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
-      (sectorNeighborhood S base ε ε ×ˢ (Ioo (C.left m) (C.right m) ×ˢ univ)) :=
-    fun x hx => ⟨hx.1.1, ⟨hl.trans hx.2.1.1, hx.2.1.2.trans hh⟩, mem_univ _⟩
-  let Jcoeff (i : Fin 3) :=
-    (hN.originalCoefficient_parameterSpatialTower hS hT m j hcell i).compLinear L hW hLfull
+      (sectorNeighborhood S base ε ε ×ˢ (Ioo (C.left m) (C.right m) ×ˢ univ)) := by
+    intro x hx
+    simp only [L, correctionStateSpatialProjection_apply]
+    exact ⟨hx.1.1, ⟨hl.trans hx.2.1.1, hx.2.1.2.trans hh⟩, mem_univ _⟩
+  let Jcoeff (i : Fin 3) :
+      SmoothDirections ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
+        (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+          originalCoefficientEntry D S C i (liftSectorParameter S C x.1.1) x.2) :=
+    ((hN.originalCoefficient_parameterSpatialTower hS hT m j hcell i).compLinear
+      L hW hLfull).congrOn
+      (by intro x hx; simp only [L, correctionStateSpatialProjection_apply])
   let JA := (Jcoeff 0).congrOn
     (g := fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
       (originalCoefficients D S C (liftSectorParameter S C x.1.1)).a x.2)
-    (by intro x hx; simp only [originalCoefficientEntry, if_pos rfl])
+    (by intro x hx; simp only [originalCoefficientEntry, ite_true])
   let JB := (Jcoeff 1).congrOn
     (g := fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
       (originalCoefficients D S C (liftSectorParameter S C x.1.1)).b x.2)
@@ -106,15 +163,7 @@ def N01Properties.returnCorrectionLocalCoefficient_parameterSpatialTower :
     (g := fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
       (originalCoefficients D S C (liftSectorParameter S C x.1.1)).c x.2)
     (by intro x hx; norm_num [originalCoefficientEntry])
-  let Jdisc := ((smoothDirectionsProd (JB.mul JB) (JA.mul JC)).comp_contDiff isOpen_univ
-    (contDiff_fst.sub contDiff_snd).contDiffOn (fun _ _ => mem_univ _)).congrOn
-      (g := fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
-        (originalCoefficients D S C (liftSectorParameter S C x.1.1)).b x.2 ^ 2 -
-          (originalCoefficients D S C (liftSectorParameter S C x.1.1)).a x.2 *
-            (originalCoefficients D S C (liftSectorParameter S C x.1.1)).c x.2)
-      (by intro x hx; simp only [pow_two])
-  let JQ := Jdisc.comp_contDiff isOpen_Ioi
-    (contDiffOn_id.sqrt (fun q (hq : q ∈ Ioi (0 : ℝ)) => ne_of_gt hq))
+  let JQ := jointCoefficientDiscriminantSqrt JA JB JC
     (fun x hx => hdisc x.1.1 hx.1.1 x.2 hx.2.1)
   apply (coefficientPolynomialDirections JA JB JQ JE JD).congrOn
   intro x hx
