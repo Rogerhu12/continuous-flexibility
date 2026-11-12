@@ -65,6 +65,7 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_eq_joint_on_strip
   exact J.pointTower_eq_jointJet
     ((sectorNeighborhood_isOpen S base ε ε).prod isOpen_univ) p hp K n x hx v
 
+include hχ m hl hh hstrip in
 theorem N01Properties.returnCorrectionCoefficientScalarJets_component_contDiffOn_strip
     (Q : (ℝ × ℝ) →L[ℝ] ℝ)
     (n : ℕ) (x : (StateDirections S × ℝ) × CircleSpace S)
@@ -82,6 +83,7 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_component_contDiffOn
   exact hN.returnCorrectionCoefficientScalarJets_eq_joint_on_strip
     hS hT hR j hcell χ hχrange hcutoff hdisc hχ m l h hl hh hstrip Q n x hx v hp
 
+include hχ m hl hh hstrip in
 theorem N01Properties.returnCorrectionCoefficientScalarJets_contDiffOn_strip
     (n : ℕ) (x : (StateDirections S × ℝ) × CircleSpace S)
     (hx : x ∈ sectorNeighborhood S base ε ε ×ˢ univ)
@@ -96,6 +98,7 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_contDiffOn_strip
         j hcell χ hχrange hcutoff hdisc hχ m l h hl hh hstrip
         (ContinuousLinearMap.snd ℝ ℝ ℝ) n x hx v)
 
+include hχ m hl hh hstrip in
 theorem N01Properties.returnCorrectionCoefficientScalarJets_component_mixed_hasDerivAt_line_strip
     (Q : (ℝ × ℝ) →L[ℝ] ℝ) (a b n : ℕ)
     (x w : (StateDirections S × ℝ) × CircleSpace S)
@@ -142,6 +145,7 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_component_mixed_hasD
   filter_upwards [hnear] with s hs
   exact heq n (x + s • w) hs v
 
+include hχ m hl hh hstrip in
 theorem N01Properties.returnCorrectionCoefficientScalarJets_mixed_hasDerivAt_line_strip
     (a b n : ℕ) (x w : (StateDirections S × ℝ) × CircleSpace S)
     {t : ℝ} (ht : x + t • w ∈ sectorNeighborhood S base ε ε ×ˢ univ)

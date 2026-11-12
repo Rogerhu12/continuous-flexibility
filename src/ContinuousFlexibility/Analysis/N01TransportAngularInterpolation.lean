@@ -47,9 +47,9 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   (hN : N01Properties D T S C base loss ε)
   (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
 
+include hN in
 /-- A point of a negative component extends to an actual closed-radius
 selector. The extension leaves all other components at their left end. -/
-include hN in
 theorem N01Properties.closedRadiusSelector_cover
     (m : ℕ) (r : ℝ) (hr : r ∈ Icc (C.left m) (C.right m)) :
     ∃ s : {s : ℕ → ℝ // ∀ i, s i ∈ Icc (C.left i) (C.right i)}, s.val m = r := by
@@ -61,7 +61,7 @@ theorem N01Properties.closedRadiusSelector_cover
       simpa only [s, Function.update_self] using hr
     · have hleft : C.left i ∈ Icc (C.left i) (C.right i) :=
         ⟨le_rfl, (hN.2.2.2.1.1 i).2.1.le⟩
-      simpa only [s, Function.update_noteq hi] using hleft
+      simpa only [s, Function.update_of_ne hi] using hleft
   exact ⟨⟨s, hs⟩, Function.update_self _ _ _⟩
 
 variable

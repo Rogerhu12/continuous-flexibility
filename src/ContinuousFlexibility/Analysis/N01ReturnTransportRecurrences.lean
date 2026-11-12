@@ -34,9 +34,9 @@ variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
   (hσ : MapsTo σ U (sectorNeighborhood S base ε ε))
   (m : ℕ) (l h : ℝ) (hl : C.left m < l) (hh : h < C.right m)
 
+include hN hS hT hU hUc hσ hl hh in
 /-- The inverse-flow angular slope obeys the actual variational
 transport equation at every mixed parameter/spatial order. -/
-include hN hS hT hU hUc hσ hl hh in
 theorem N01Properties.returnFlowInverseSlope_diagonal_recurrence
     (hdisc : ∀ x ∈ U, ∀ p : PolarPoint, p.1 ∈ Ioo l h →
       0 < (originalCoefficients D S C (liftSectorParameter S C (σ x))).b p ^ 2 -
@@ -69,9 +69,9 @@ variable (hR : N02Properties D T S C R base ε)
   (χ : ℕ → ℝ → ℝ) (hχ : ∀ m, ContDiff ℝ ∞ (χ m))
   (hχrange : ∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1)
 
+include hN hS hT hU hUc hσ hl hh hR hχ hχrange in
 /-- The same finite recurrence holds for any supplied residual field
 `ρ x`, including the independent input and the actual N02 residual. -/
-include hN hS hT hU hUc hσ hl hh hR hχ hχrange in
 theorem N01Properties.returnCorrectionPulledDisplacement_diagonal_recurrence
     (ρ : E → CircleSpace S)
     (JZ : SmoothDirections (U ×ˢ (Ioo l h ×ˢ univ))

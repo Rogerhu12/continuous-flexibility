@@ -16,8 +16,6 @@ jets and retain their homogeneous one-high bound.
 
 noncomputable section
 
-set_option backward.isDefEq.respectTransparency false
-
 namespace ContinuousFlexibility.Statements
 
 local instance n01OriginalCoefficientTameBoundsStateSMul (S : PhysicalSpacesData) :
@@ -26,10 +24,44 @@ local instance n01OriginalCoefficientTameBoundsStateSMul (S : PhysicalSpacesData
 open Set ContinuousFlexibility.Analysis
 open scoped ContDiff BigOperators
 
+private theorem originalCoefficient_oneHigh_nonneg
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (B H : ℕ) {n : ℕ} (x : E) (v : Fin n → E) :
+    0 ≤ oneHighVariationWeight p B H x v :=
+  multilinearTameSize_nonneg (p B) (p H) n
+    (add_nonneg zero_le_one (apply_nonneg _ _)) v
+
+private theorem originalCoefficient_oneHigh_zero_ge_one
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (B H : ℕ) (x : E) (v : Fin 0 → E) :
+    1 ≤ oneHighVariationWeight p B H x v := by
+  simp only [oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero,
+    mul_one, add_zero]
+  exact le_add_of_nonneg_right (apply_nonneg (p H) x)
+
+private theorem originalCoefficient_abs_weighted_bound
+    {u B H E₀ A W : ℝ} (hB : 0 ≤ B) (hW : 0 ≤ W)
+    (hweight : H * E₀ ≤ A) (hb : |u| ≤ B * H * E₀ * W) :
+    |u| ≤ (B * A) * W := by
+  calc
+    |u| ≤ B * H * E₀ * W := hb
+    _ = (B * W) * (H * E₀) := by ring
+    _ ≤ (B * W) * A := mul_le_mul_of_nonneg_left hweight (mul_nonneg hB hW)
+    _ = (B * A) * W := by ring
+
+private theorem originalCoefficient_abs_add_bound
+    {u v A B W : ℝ} (hB : 0 ≤ B) (hW : 1 ≤ W)
+    (hu : |u| ≤ A * W) (hv : |v| ≤ B) :
+    |u + v| ≤ (A + B) * W :=
+  (abs_add_le u v).trans
+    ((add_le_add hu (hv.trans (le_mul_of_one_le_right hB hW))).trans_eq
+      (add_mul A B W).symm)
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
   (hN : N01Properties D T S C base loss ε)
 
+include hN in
 theorem N01Properties.reference_coefficient_mixed_uniform_bound (s : ℕ) :
     ∃ K : ℝ, 0 ≤ K ∧ ∀ (i : Fin 3) (a b : ℕ), a + b ≤ s →
       ∀ p ∈ annularOpen D,
@@ -55,20 +87,26 @@ theorem N01Properties.sectorCoefficientTower_uniform_oneHigh
         |(hN.sectorCoefficientTower j i a b p hp).D n x v| ≤
           K * oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
             base (s + loss) x v := by
-  let data := hN.sectorCoefficientTower_bound n s
+  let data := N01Properties.sectorCoefficientTower_bound
+    (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε) hN n s
   let B : ℝ := data.choose
   have hB : 0 < B := data.choose_spec.1
-  obtain ⟨A, hA, hweight⟩ := materialSample_H_E0_envelope hT hN.1.1
+  let weightData := materialSample_H_E0_envelope (D := D) (T := T) hT hN.1.1
     (γ := (3 / 4 : ℝ)) (by norm_num) B
+  let A : ℝ := weightData.choose
+  have hA : 0 < A := weightData.choose_spec.1
   refine ⟨B * A, mul_nonneg hB.le hA.le, ?_⟩
   intro j i a b p hab hp x hx v
   have hW : 0 ≤ oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
       base (s + loss) x v :=
-    multilinearTameSize_nonneg _ _ _ (add_nonneg zero_le_one (apply_nonneg _ _)) v
-  have hb := data.choose_spec.2 j i a b p hab hp x hx v
-  have hscale := mul_le_mul_of_nonneg_left (hweight j) (mul_nonneg hB.le hW)
-  apply hb.trans
-  convert hscale using 1 <;> ring
+    originalCoefficient_oneHigh_nonneg (pairGrading (sectorGrading S) realGrading)
+      base (s + loss) x v
+  have hb : |(hN.sectorCoefficientTower j i a b p hp).D n x v| ≤
+      B * T.H (T.sample j) ^ (3 / 4 : ℝ) * T.E0 (T.sample j) ^ B *
+        oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+          base (s + loss) x v :=
+    data.choose_spec.2 j i a b p hab hp x hx v
+  exact originalCoefficient_abs_weighted_bound hB.le hW (weightData.choose_spec.2 j) hb
 
 theorem N01Properties.originalComponentCoefficientScalarJet_uniform_oneHigh
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n s : ℕ) :
@@ -83,37 +121,57 @@ theorem N01Properties.originalComponentCoefficientScalarJet_uniform_oneHigh
             base (s + loss) x v := by
   cases n with
   | zero =>
-      obtain ⟨A, hA, habound⟩ := hN.sectorCoefficientTower_uniform_oneHigh hT 0 s
-      obtain ⟨B, hB, hb⟩ := hN.reference_coefficient_mixed_uniform_bound s
+      let incData := N01Properties.sectorCoefficientTower_uniform_oneHigh
+        (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+        hN hT 0 s
+      let A : ℝ := incData.choose
+      have hA : 0 ≤ A := incData.choose_spec.1
+      let refData := N01Properties.reference_coefficient_mixed_uniform_bound
+        (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε) hN s
+      let B : ℝ := refData.choose
+      have hB : 0 ≤ B := refData.choose_spec.1
       refine ⟨A + B, add_nonneg hA hB, ?_⟩
       intro m j hcell i a b hab x hx v p hp
-      have hpoint : (hN.sectorCoefficientTower j i a b p (hcell hp.1)).D 0 x v =
-          coefficientFamily D S C i a b p (liftSectorParameter S C x) := by
-        have hv : v = Fin.elim0 := Subsingleton.elim _ _
-        rw [hv]
-        exact (hN.sectorCoefficientTower j i a b p (hcell hp.1)).zero x hx
-      have hinc := habound j i a b p hab (hcell hp.1) x hx v
-      rw [hpoint] at hinc
-      have hpD : p ∈ annularOpen D := by
-        have he := hN.2.2.2.1.1 m
-        exact ⟨⟨he.1.trans hp.1.1, hp.1.2.trans he.2.2⟩, mem_univ _⟩
+      let J : SmoothDirections (sectorNeighborhood S base ε ε)
+          (fun y => coefficientFamily D S C i a b p (liftSectorParameter S C y)) :=
+        hN.sectorCoefficientTower j i a b p (hcell hp.1)
+      have hv : v = (Fin.elim0 : Fin 0 → StateDirections S × ℝ) := Subsingleton.elim _ _
+      have hpoint : J.D 0 x v =
+          coefficientFamily D S C i a b p (liftSectorParameter S C x) :=
+        (congrArg (fun w : Fin 0 → StateDirections S × ℝ => J.D 0 x w) hv).trans
+          (J.zero x hx)
+      have hinc : |coefficientFamily D S C i a b p (liftSectorParameter S C x)| ≤
+          A * oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+            base (s + loss) x v :=
+        (congrArg abs hpoint).symm.trans_le
+          (incData.choose_spec.2 j i a b p hab (hcell hp.1) x hx v)
+      have hpD : p ∈ annularOpen D := hN.negativeComponent_subset_annularOpen m hp
       have hW : 1 ≤ oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-          base (s + loss) x v := by
-        simp only [oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero,
-          mul_one, add_zero]
-        exact le_add_of_nonneg_right (apply_nonneg _ _)
-      have href := (hb i a b hab p hpD).trans
-        (le_mul_of_one_le_right hB hW)
-      rw [hN.originalComponentCoefficientScalarJet_mixedDerivative_zero
-        hS hT m j hcell i a b x hx v hp]
-      exact (abs_add_le _ _).trans ((add_le_add hinc href).trans_eq (by ring))
+          base (s + loss) x v :=
+        originalCoefficient_oneHigh_zero_ge_one (pairGrading (sectorGrading S) realGrading)
+          base (s + loss) x v
+      have heq : mixedDerivative a b
+          (hN.originalComponentCoefficientScalarJet m j hcell i 0 x v) p =
+          coefficientFamily D S C i a b p (liftSectorParameter S C x) +
+            mixedDerivative a b (originalCoefficientEntry D S C i (C.referenceState, 0)) p :=
+        hN.originalComponentCoefficientScalarJet_mixedDerivative_zero
+          hS hT m j hcell i a b x hx v hp
+      exact (congrArg abs heq).trans_le (originalCoefficient_abs_add_bound hB hW hinc
+        (refData.choose_spec.2 i a b hab p hpD))
   | succ n =>
-      obtain ⟨K, hK, hb⟩ := hN.sectorCoefficientTower_uniform_oneHigh hT (n + 1) s
-      refine ⟨K, hK, ?_⟩
+      let data := N01Properties.sectorCoefficientTower_uniform_oneHigh
+        (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+        hN hT (n + 1) s
+      let K : ℝ := data.choose
+      refine ⟨K, data.choose_spec.1, ?_⟩
       intro m j hcell i a b hab x hx v p hp
-      rw [hN.originalComponentCoefficientScalarJet_mixedDerivative_positive
-        hS hT m j hcell i a b n hp x hx v]
-      exact hb j i a b p hab (hcell hp.1) x hx v
+      have heq : mixedDerivative a b
+          (hN.originalComponentCoefficientScalarJet m j hcell i (n + 1) x v) p =
+          (hN.sectorCoefficientTower j i a b p (hcell hp.1)).D (n + 1) x v :=
+        hN.originalComponentCoefficientScalarJet_mixedDerivative_positive
+          hS hT m j hcell i a b n hp x hx v
+      exact (congrArg abs heq).trans_le
+        (data.choose_spec.2 j i a b p hab (hcell hp.1) x hx v)
 
 theorem N01Properties.originalCoefficient_parameterSpatialTower_parameterJet
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
@@ -148,13 +206,26 @@ theorem N01Properties.originalCoefficient_joint_mixed_uniform_oneHigh
             n (x, q) (fun k => (v k, 0))) p| ≤
           K * oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
             base (s + loss) x v := by
-  obtain ⟨K, hK, hb⟩ :=
-    hN.originalComponentCoefficientScalarJet_uniform_oneHigh hS hT n s
-  refine ⟨K, hK, ?_⟩
+  let data := N01Properties.originalComponentCoefficientScalarJet_uniform_oneHigh
+    (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+    hN hS hT n s
+  let K : ℝ := data.choose
+  refine ⟨K, data.choose_spec.1, ?_⟩
   intro m j hcell i a b hab x hx v p hp
-  have heq := mixedDerivative_congr_on_open (isOpen_Ioo.prod isOpen_univ)
-    (fun q hq => hN.originalCoefficient_parameterSpatialTower_parameterJet
-      hS hT m j hcell i n x hx v hq) a b hp
-  exact (congrArg abs heq).symm.trans_le (hb m j hcell i a b hab x hx v p hp)
+  let f : PolarPoint → ℝ := hN.originalComponentCoefficientScalarJet m j hcell i n x v
+  let g : PolarPoint → ℝ := fun q =>
+    (hN.originalCoefficient_parameterSpatialTower hS hT m j hcell i).D
+      n (x, q) (fun k => (v k, 0))
+  have hfg : EqOn f g (Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ)) :=
+    fun q hq => hN.originalCoefficient_parameterSpatialTower_parameterJet
+      hS hT m j hcell i n x hx v hq
+  have heq : mixedDerivative a b f p = mixedDerivative a b g p :=
+    mixedDerivative_congr_on_open (f := f) (g := g)
+      (isOpen_Ioo.prod isOpen_univ) hfg a b hp
+  have hb : |mixedDerivative a b f p| ≤
+      K * oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+        base (s + loss) x v :=
+    data.choose_spec.2 m j hcell i a b hab x hx v p hp
+  exact (congrArg abs heq).symm.trans_le hb
 
 end ContinuousFlexibility.Statements

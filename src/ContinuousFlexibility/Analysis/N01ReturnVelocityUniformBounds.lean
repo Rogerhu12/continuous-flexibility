@@ -171,7 +171,6 @@ theorem N01Properties.uniformSmoothFamilyOn_returnCorrectionPulledDisplacementCi
   exact hsecond.congr (fun _ _ _ => rfl)
 
 include hflow in
-set_option diagnostics true in
 theorem N01Properties.uniformSmoothFamilyOn_returnCorrectionPulledResidualCircle
     (χ : ℕ → ℝ → ℝ)
     (hχrange : ∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1)
@@ -252,7 +251,6 @@ theorem N01Properties.returnCorrectionPulledResidualCircle_uniformFamilyJetBound
     hS hT hflow χ hχrange rsel hrsel).jets J
 
 include hflow in
-set_option diagnostics true in
 theorem N01Properties.uniformSmoothFamilyOn_returnCorrectionVelocityCircleLinear
     (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))
     (χ : ℕ → ℝ → ℝ)
@@ -307,7 +305,6 @@ theorem N01Properties.uniformSmoothFamilyOn_returnCorrectionVelocityCircleLinear
   exact heq i _
 
 include hflow in
-set_option diagnostics true in
 /-- The constant is chosen before the radius selector and before the
 choice of any genuine tower for the same actual velocity map. -/
 theorem N01Properties.returnCorrectionVelocity_uniform_oneHigh

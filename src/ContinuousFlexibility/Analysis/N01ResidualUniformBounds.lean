@@ -25,6 +25,7 @@ variable {I : Type*} {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesD
   (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
   (hR : N02Properties D T S C R base ε)
 
+include hR in
 theorem N01Properties.sectorReturnResidualCircle_eq_of_N02
     (z : StateDirections S × ℝ) (hz : z ∈ sectorNeighborhood S base ε ε) :
     hN.sectorReturnResidualCircle hS hT z = R.residual (liftSectorParameter S C z) := by
@@ -41,7 +42,7 @@ variable
       1 / 2 ≤ deriv (C.minusFlow (liftSectorParameter S C z) m r) θ ∧
       deriv (C.minusFlow (liftSectorParameter S C z) m r) θ ≤ 3 / 2)
 
-include hflow in
+include hN hS hT hR hflow in
 theorem N01Properties.uniformSmoothFamilyOn_returnResidual_of_N02 :
     UniformSmoothFamilyOn (pairGrading (sectorGrading S) realGrading)
       (S.circle (3 / 4 : ℝ)).grading (sectorNeighborhood S base ε ε)
@@ -49,7 +50,7 @@ theorem N01Properties.uniformSmoothFamilyOn_returnResidual_of_N02 :
   (hN.uniformSmoothFamilyOn_sectorReturnResidualCircle (I := I) hS hT hflow).congr
     (fun _ z hz => hN.sectorReturnResidualCircle_eq_of_N02 hS hT hR z hz)
 
-include hflow in
+include hR hflow in
 theorem N01Properties.uniformSmoothFamilyOn_returnCorrectionPulledResidual_of_N02
     (χ : ℕ → ℝ → ℝ)
     (hχrange : ∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1)
@@ -65,7 +66,7 @@ theorem N01Properties.uniformSmoothFamilyOn_returnCorrectionPulledResidual_of_N0
           (rsel i) (hrsel i) z)
         (hN.sectorReturnResidualCircle_eq_of_N02 hS hT hR z hz))
 
-include hflow in
+include hR hflow in
 theorem N01Properties.returnCorrectionPulledResidual_uniformFamilyJetBounds_of_N02
     (χ : ℕ → ℝ → ℝ)
     (hχrange : ∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1)

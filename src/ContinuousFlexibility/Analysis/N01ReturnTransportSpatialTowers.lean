@@ -78,28 +78,51 @@ def N01Properties.singleComponentInverseSlopeCircleTower :
   exact circleInverseComposeDirections hH hT hN.1.1 (by norm_num) hi (fun _ => 0)
     J (circleDerivativeDirections hH J) hpos
 
+private theorem returnTransport_one_add_sub_one (a : ℝ) : 1 + (a - 1) = a := by
+  ring
+
+include hN hS hT hl hh hdisc in
+private theorem returnFlowInverseSlope_parameterSpatialTower_nonempty :
+    Nonempty (SmoothDirections (sectorNeighborhood S base ε ε ×ˢ (Ioo l h ×ˢ univ))
+      (fun x : (StateDirections S × ℝ) × PolarPoint =>
+        returnFlowInverseSlope S C (liftSectorParameter S C x.1) m x.2)) := by
+  let H := S.circle (3 / 4 : ℝ)
+  let f : ((StateDirections S × ℝ) × ℝ) → H.Space :=
+    hN.singleComponentInverseSlopeCircle hS hT m
+  let J : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ Ioo l h) f :=
+    hN.singleComponentInverseSlopeCircleTower hS hT m l h hl hh hdisc
+  have hH (i : ℕ) : 0 < T.H (T.sample i) :=
+    (material_circle_sample_weights_pos hT hN.1.1).2 i
+  let K : SmoothDirections ((sectorNeighborhood S base ε ε ×ˢ Ioo l h) ×ˢ univ)
+      (fun x : ((StateDirections S × ℝ) × ℝ) × ℝ => H.decode (f x.1) m x.2) :=
+    circleDecodedJointDirections (hS.2.1 (3 / 4 : ℝ)) hH J m
+  let L : SmoothDirections ((sectorNeighborhood S base ε ε ×ˢ Ioo l h) ×ˢ univ)
+      (fun x : ((StateDirections S × ℝ) × ℝ) × ℝ => 1 + H.decode (f x.1) m x.2) :=
+    K.comp_contDiff (g := fun y : ℝ => 1 + y) (V := univ) isOpen_univ
+      ((contDiff_const.add contDiff_id : ContDiff ℝ ∞ (fun y : ℝ => 1 + y)).contDiffOn)
+        (fun _ _ => mem_univ _)
+  let M : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ (Ioo l h ×ˢ univ))
+      (fun x : (StateDirections S × ℝ) × PolarPoint =>
+        1 + H.decode (f (x.1, x.2.1)) m x.2.2) :=
+    L.compLinear (parameterSpatialAssociation (StateDirections S × ℝ))
+      ((sectorNeighborhood_isOpen S base ε ε).prod (isOpen_Ioo.prod isOpen_univ))
+      (fun x hx => ⟨⟨hx.1, hx.2.1⟩, hx.2.2⟩)
+  refine ⟨M.congrOn ?_⟩
+  intro x hx
+  have hd : H.decode (f (x.1, x.2.1)) m x.2.2 =
+      returnFlowInverseSlope S C (liftSectorParameter S C x.1) m x.2 - 1 :=
+    hN.singleComponentInverseSlopeCircle_decode hS hT m (x.1, x.2.1) hx.1
+      ⟨hl.trans hx.2.1.1, hx.2.1.2.trans hh⟩ x.2.2
+  exact (congrArg (fun y : ℝ => 1 + y) hd).trans
+    (returnTransport_one_add_sub_one (returnFlowInverseSlope S C (liftSectorParameter S C x.1) m x.2))
+
 def N01Properties.returnFlowInverseSlope_parameterSpatialTower :
     SmoothDirections (sectorNeighborhood S base ε ε ×ˢ (Ioo l h ×ˢ univ))
       (fun x : (StateDirections S × ℝ) × PolarPoint =>
-        returnFlowInverseSlope S C (liftSectorParameter S C x.1) m x.2) := by
-  let J := hN.singleComponentInverseSlopeCircleTower hS hT m l h hl hh hdisc
-  have hH (i : ℕ) : 0 < T.H (T.sample i) :=
-    (material_circle_sample_weights_pos hT hN.1.1).2 i
-  let K := circleDecodedJointDirections (hS.2.1 (3 / 4 : ℝ)) hH J m
-  let L := K.comp_contDiff isOpen_univ
-    ((contDiff_const.add contDiff_id : ContDiff ℝ ∞ (fun y : ℝ => 1 + y)).contDiffOn)
-      (fun _ _ => mem_univ _)
-  let M := L.compLinear (parameterSpatialAssociation (StateDirections S × ℝ))
-    ((sectorNeighborhood_isOpen S base ε ε).prod (isOpen_Ioo.prod isOpen_univ))
-    (fun x hx => ⟨⟨hx.1, hx.2.1⟩, hx.2.2⟩)
-  apply M.congrOn
-  intro x hx
-  change 1 + (S.circle (3 / 4 : ℝ)).decode
-      (hN.singleComponentInverseSlopeCircle hS hT m (x.1, x.2.1)) m x.2.2 = _
-  rw [hN.singleComponentInverseSlopeCircle_decode hS hT m (x.1, x.2.1) hx.1
-    ⟨hl.trans hx.2.1.1, hx.2.1.2.trans hh⟩]
-  change 1 + (returnFlowInverseSlope S C (liftSectorParameter S C x.1) m x.2 - 1) = _
-  ring
+        returnFlowInverseSlope S C (liftSectorParameter S C x.1) m x.2) :=
+  Classical.choice (returnFlowInverseSlope_parameterSpatialTower_nonempty
+    (hN := hN) (hS := hS) (hT := hT) (m := m) (l := l) (h := h)
+    (hl := hl) (hh := hh) (hdisc := hdisc))
 
 variable (χ : ℕ → ℝ → ℝ) (hχ : ∀ m, ContDiff ℝ ∞ (χ m))
   (hχrange : ∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1)
