@@ -80,7 +80,7 @@ theorem coupled_nonlinearPropertiesThrough10_of_returnErrorSmooth
     coupled_sectorNeighborhood_mono hb hδε (hqδ.trans hδε)
   have htype := smoothTameOn_mono htype0 hU
     (coupled_sectorNeighborhood_mono (S := S) le_rfl le_rfl hqδ)
-  have hLerror := h3.2.2.2.2.2.2.2
+  have hLerror := h3.2.2.2.2.2.2.2.1
   have hLerror' := smoothTameOn_mono hLerror ((hU.prod isOpen_univ).prod isOpen_univ)
     (Set.prod_mono
       (Set.prod_mono hsub (subset_refl (univ : Set (CircleSpace S))))

@@ -153,7 +153,7 @@ theorem N01Properties.returnCorrectionCoefficient_joint_growth_of_velocity
   let Ja := fun m => (Jentry 0 m).congrOn
     (g := fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
       (originalCoefficients D S C (liftSectorParameter S C x.1.1)).a x.2)
-    (by intro x hx; simp only [originalCoefficientEntry, if_pos rfl])
+    (by intro x hx; simp only [originalCoefficientEntry, eq_self_iff_true, ite_true])
   let Jb := fun m => (Jentry 1 m).congrOn
     (g := fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
       (originalCoefficients D S C (liftSectorParameter S C x.1.1)).b x.2)
