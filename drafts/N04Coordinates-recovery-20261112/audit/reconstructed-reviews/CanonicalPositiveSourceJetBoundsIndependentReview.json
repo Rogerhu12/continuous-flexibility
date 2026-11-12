@@ -1,0 +1,102 @@
+{
+  "kind": "independent_actual_same_atlas_positive_source_all_order_jets_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed static full-source and actual-provider review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveSourceJetBounds.lean",
+    "sha256": "a63cdeb753148513fbf29eb44dde6c501f6d18d4070039a2a7b6095a13048f78",
+    "blob": "adddc89d2a9b11bf2ad84130508e5f4e1ca72c07",
+    "lines": 202
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveSourceJetBoundsCandidateManifest.json",
+    "sha256": "41cf1044fd4c78ae05bc776e9b842765c4b4348bed931867c67747c56e95e9f8"
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveFiniteEndpointBounds.lean",
+      "sha256": "dd85776cacbd3bb5a4c16814d3d02d6da4b9d0ada6bc2b29ee1ab5c0996e1954",
+      "blob": "f8147f4ddf4e65d17405d30654c93d8ccd12dc42",
+      "lines": 133
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootRelativeJets.lean",
+      "sha256": "1d153804a17ecfdf770509fe69ddab60c7ad5bcbaaacef233d5414e697876c2a",
+      "blob": "8934cb13451280c1f521ef5a5512ac37aad1f3b3",
+      "lines": 188
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootHeightJets.lean",
+      "sha256": "79167a67ec213c3cff6fbcad6db34eeac598ae2899e8a10c2a763c2da111c68a",
+      "blob": "39ccec5461527b3e3cd7e7fa07b86c34bd961a82",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N04bActualAtlasInteriorCompletion.lean",
+      "sha256": "f189ff9f0ddd8a84bb6cb7a166f4463427f75a4ff994f3b2348dd48b7b2b9700",
+      "blob": "fbb67b770132e53b204ae4270d1b30f98e01c8b7",
+      "lines": 82
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveEndpointFields.lean",
+      "sha256": "c024651329c6b725f61097116a892f032b80b1f2ef363c920e37ac7e007c0587",
+      "blob": "d5ac37d8aae450523577552e3fb13815cd0a0468",
+      "lines": 132
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bPositiveDivision.lean",
+      "sha256": "d274f19959dd831c45e7d0ee0374a4bf01132369e13d69e595beb71a60de39ee",
+      "blob": "052cdea1dd1db004e3021e7100bf3b0704f1f472",
+      "lines": 110
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/StateNeighborhood.lean",
+      "sha256": "d69d61889ad31640933f00a39c70c7ff33eeb0df52df51a509df97850d1399b6",
+      "blob": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalClosedTransport.lean",
+      "sha256": "446db5702c1e574466bb9e66c14a7ad72b6b824df7ea950a642fec5c9d0beb53",
+      "blob": "4042a6df041abfdc7024a0d8ef5e26d98710b93a",
+      "lines": 90
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/FlowJetLinearization.lean",
+      "sha256": "8df5e31e178c773d63ce97768ad3f516ed86e4facc5381fa2d3b05b18afde61b",
+      "blob": "53c94b4432f3b1dab77f911aa7787e8effd3f6be",
+      "lines": 146
+    }
+  ],
+  "inspection_baseline": {
+    "commit": "1128dfa9f256a358227759001b9f13fabc21f971",
+    "no_CI_claim": true
+  },
+  "checks": [
+    "Read all 202 source lines and the exact declarations and implementations consumed by the source, including both actual root-jet families, the finite endpoint adapter, certified Option endpoint fields, and the temporary interior-completion adapter.",
+    "RootEndpointTameJetBounds retains positive coordinate jets and all height and reciprocal-height jets. Its envelope monotonicity multiplies by the nonnegative actual seminorm factor.",
+    "The ambient branch is definitionally the actual identity map and height one. The zeroth constant jet is one; positive constant jets vanish; all positive identity jets are bounded by the continuous linear identity norm.",
+    "The common base is max(bF,bQ), loss is max(lF,lQ), and radius is min(epsilonF,epsilonQ), all chosen before the positive component, certified source selection, derivative order, state and angle. The two loss-to-base inequalities justify the common loss bound.",
+    "For a negative neighbor, the actual source definition selects cutPair.left when positive side is true and cutPair.right when false. Calling each root provider at !side gives exactly this cut index and the endpoint radius certified by the source subtype.",
+    "Actual state-neighborhood monotonicity gives both source neighborhoods. Raising the derivative loss uses the monotone pair grading and nonnegative multiplication, without increasing the chosen low neighborhood with derivative order.",
+    "The per-source envelope 1+A(k)+B(k) bounds both provider towers; after selecting both endpoints, their sum is at least one and dominates each. These envelopes precede every state and angle but are allowed to depend on the component and certified endpoint choice.",
+    "All three tuple projections are checked against CanonicalRootRelativeJetFamily and CanonicalRootHeightJetFamily: current-coordinate positive jets, height all jets, reciprocal-height all jets.",
+    "The final actual typed-atlas adapter obtains Part A and Part B for the genuine n04bWithInteriorDivision completion. That operation updates only dividedDifference. Unfolding the source-map, current-point and height-ratio definitions removes the completion while leaving every original chart, inverse chart, height and cutPair exactly unchanged.",
+    "Both import paths are actual declared providers; all candidate-manifest source and dependency SHA256/blob bindings match the files read. The four public declaration names have no installed declaration collision."
+  ],
+  "public_declarations": [
+    "RootEndpointTameJetBounds",
+    "RootEndpointTameJetBounds.mono_envelope",
+    "n04b_exists_common_positive_source_jets",
+    "n04Coordinates_actual_positiveSource_allJets"
+  ],
+  "installed_public_name_collisions": [],
+  "findings": [],
+  "limitations": [
+    "Static review does not establish Lean compilation or heartbeat behavior.",
+    "The per-component envelopes are not asserted to have uniform material/E0 growth. No zeroth angular-lift bound, final primitive bound, new fixed-width choice or changed reference witness is claimed."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

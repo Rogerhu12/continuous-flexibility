@@ -1,0 +1,35 @@
+{
+  "kind": "reviewed_lean_candidate_manifest",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootFiniteEndpointBounds.lean",
+    "sha256": "127b77a209d6cc28a3d0d21fdab36a3250656664010df762889ada7ba89a728e"
+  },
+  "git_blob": "13749c41ebf01d6f887885d882429d7ee0d7d735",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootFiniteEndpointBoundsCandidateManifest.json",
+    "sha256": "62195c1a51a60b9242b9ad740840e25adbbf688986b42a0d695dff877b6f8ad5"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/CanonicalRootFiniteEndpointBoundsIndependentReview.json",
+    "sha256": "d6ab50652ce307ab232c2c9a358b3c8f1e191efd6542e64dbfbd5f08a830f5bf"
+  },
+  "compiled": false,
+  "checkout_changed": false,
+  "same_witness": true,
+  "component_uniform_material_bound_claimed": false,
+  "dependency_supersession": {
+    "module": "ContinuousFlexibility.Analysis.CanonicalRootDiagonalLower",
+    "original_sha256": "077fc6e6afb5fc2372bbc44ef8ac47f97aa5171d2eec315aa5e52bd7de3967b4",
+    "final_source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/root-diagonal-inverse-order/CanonicalRootDiagonalLower.lean",
+    "final_sha256": "5f926ab21480a54b3f129a50cc99998a178965671c9f266f79c6d522622b4399",
+    "public_headers_unchanged": true,
+    "review": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CanonicalRootDiagonalLowerIndependentReview.json",
+    "review_sha256": "0c10e99b46c9069ba007a5d6c84b17a6955d647db44093b64375ca6b008cf481",
+    "reason": "The exact pinned inverse inequality expects 1<=a*M. The original final commutation to M*a is removed; the finite endpoint consumer uses the identical public theorem."
+  },
+  "selected_diagonal_provider_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/root-diagonal-inverse-order/CanonicalRootDiagonalLowerReviewedManifest.json",
+    "sha256": "28707aa734f8a26f3cb38296e6204a6c704e5949e16bd416b4c5d2cc241379a4"
+  }
+}

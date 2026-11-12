@@ -1,0 +1,54 @@
+{
+  "kind": "same_actual_whole_atlas_qualitative_assembly_without_endpoint_premise",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualWholeGeometry.lean",
+    "sha256": "b2e32adec83f1d401687f8365ecc59e16a99fa5a4abcbf138d3595f9bd7dffea",
+    "blob": "d82f602e7088470fbfc9c9f05f38f4d6432fc824",
+    "lines": 109
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/CanonicalActualWholeGeometry.lean",
+  "public_declarations": [
+    "WholeCanonicalTransportQualitative",
+    "n04Coordinates_exists_actual_whole_geometry"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalFixedPositiveFamily.lean",
+      "sha256": "c40e1c6d652b0044329ba6ac362cab26cc0f3aad3551b82394ddf04775f16196",
+      "blob": "4cb0f979dcfe47dd1a186b356964a72f6ed6e9df",
+      "lines": 129
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasRestrictedGeometry.lean",
+      "sha256": "9e2cee52afc2fc29fa1ed3680e24534bfef821312a865d2523d10e6351be9218",
+      "blob": "701db6112228c64ffe09d6e04232fc1414f44785",
+      "lines": 146
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeCanonicalGlobalReferenceAgreement.lean",
+      "sha256": "6fe479b284d9e6cbd0a0910769da46e84daaeee1403555cb9183df4103eb14bb",
+      "blob": "c483dce90a644173c39eb795d86c8c6033654529",
+      "lines": 218
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalSourceConversion.lean",
+      "sha256": "d27b8960c5b3ca3b9fbab35d9854135204681df40c346da83b0f932565a219bc",
+      "blob": "82fad205b331910136373ef94fccd6598caead5d",
+      "lines": 48
+    }
+  ],
+  "claims": [
+    "Original typed K is retained on the smaller neighborhood; the whole atlas W is exactly the existing constructor from degree-three actual fixed positive maps.",
+    "Derived matching, canonical geometry, actual cut/operator identities and true source pairing refer to this same W.",
+    "The global selector has C3 regularity, annular mapping, periodicity, reflection, positive height and equality to the relative fields of every true reference piece of W.",
+    "The six component parameter functions and exact low-control certificate remain explicit outputs for later numerical estimates."
+  ],
+  "limitations": [
+    "Endpoint sources, normalization buffer, enumerations and material labels remain explicit geometric inputs, all already constructible from the actual hypotheses.",
+    "No final quantitative or primitive estimate is claimed.",
+    "Not compiled."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

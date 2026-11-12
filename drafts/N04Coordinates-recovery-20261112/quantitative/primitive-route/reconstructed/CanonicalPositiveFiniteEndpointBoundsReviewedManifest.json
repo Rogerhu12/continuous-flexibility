@@ -1,0 +1,25 @@
+{
+  "kind": "reviewed_lean_candidate_manifest",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveFiniteEndpointBounds.lean",
+    "sha256": "dd85776cacbd3bb5a4c16814d3d02d6da4b9d0ada6bc2b29ee1ab5c0996e1954"
+  },
+  "git_blob": "f8147f4ddf4e65d17405d30654c93d8ccd12dc42",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveFiniteEndpointBoundsCandidateManifest.json",
+    "sha256": "a0402a33fd356cf0196025d2fcd8ce12662624ce9fae2337695a90cdbec67a33"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/CanonicalPositiveFiniteEndpointBoundsIndependentReview.json",
+    "sha256": "5b7505cc7d72aa302cc347aea0e91ef630594a89b754b004555b38259153c839"
+  },
+  "compiled": false,
+  "checkout_changed": false,
+  "same_witness": true,
+  "component_uniform_material_bound_claimed": false,
+  "finite_root_provider_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootFiniteEndpointBoundsReviewedManifest.json",
+    "sha256": "b5d48449c536c6d5fce42768c17be57b0184ccc1c33151994e0d70feb86d87d9"
+  }
+}

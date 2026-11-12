@@ -1,0 +1,19 @@
+{
+  "label": 137,
+  "head": "1128dfa9f256a358227759001b9f13fabc21f971",
+  "tree": "31f999251097e7e11fbd53becc7c5693077990fa",
+  "pushed": "2026-11-12 10:34:21 UTC",
+  "first_check_not_before": "2026-11-12 10:39:21 UTC",
+  "status": "cancelled",
+  "added_lean_since_last_green": 2795,
+  "plan": "n04-ci137-plan.json",
+  "attempt": 1,
+  "run": 43201549606,
+  "job": 131125970556,
+  "checked_at": "2026-11-12T10:40:20.561838+00:00",
+  "compiled_modules": null,
+  "total_modules": 3200,
+  "raw_log": "n04-ci-137-attempt1.log",
+  "raw_sha256": "f9e0d5fd544f84d91538d33363e64952b6b8d77597198f6e53aca57f57fb4881",
+  "reason": "Cancelled during pinned Lean/Mathlib setup; no Lean source build or source diagnostic. The log does not identify the cancelling actor."
+}

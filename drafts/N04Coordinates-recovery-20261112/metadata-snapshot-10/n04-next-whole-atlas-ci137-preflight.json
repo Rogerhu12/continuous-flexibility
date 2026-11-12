@@ -1,0 +1,59 @@
+{
+  "kind": "frozen_group_current_provider_rebinding",
+  "status": "HELD_STATIC_PREFLIGHT_ONLY",
+  "checked_at": "2026-11-12T10:42:55.380692+00:00",
+  "proposal": "/workspace/scratch/bbbea77e4163/n04-next-whole-atlas-group-held.json",
+  "proposal_sha256": "c7da090b6977ce0391b34b490acd94552a56b1dcc59546105a1d56d5d781b56f",
+  "head": "1128dfa9f256a358227759001b9f13fabc21f971",
+  "tree": "31f999251097e7e11fbd53becc7c5693077990fa",
+  "files": 25,
+  "source_lines": 2782,
+  "project_closure": 568,
+  "installed_closure": 543,
+  "public_names": 71,
+  "collisions": [],
+  "exact_review_count": 27,
+  "rebound_anchors": [
+    {
+      "module": "ContinuousFlexibility.Analysis.WholePositiveTransportAssembly",
+      "before": "c48c9514699ff3ee2d292eb0aa0e32b2c70bc39c",
+      "after": "50a48bb4413593159f910338e52055459f07cc04",
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair136/WholePositiveTransportAssemblyCI136RootReview.json",
+        "sha256": "3e38fd2554a098b4bebc2a8e078906fb57ca2f3e1aa019de952733572b152c72"
+      }
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeComponentReferenceIdentity",
+      "before": "9ec6ff71dd12429ac90af05b1ad52bb2bb774dc3",
+      "after": "2ee9d541738dddf81c5e1c40288850ae337ee0c2",
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair135/WholeComponentReferenceIdentityCI135RootReview.json",
+        "sha256": "0a7e9ab983d585f00701daf827046b250ea9ee77046aadf2ef1231639e58bc36"
+      }
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.OneSidedWholeComponentTransport",
+      "before": "5dce3683121cbe14c1668fe8af8a29ee5efdb23d",
+      "after": "59c088961e44cc8c2f265831f64c71700c8f9dcb",
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair134/OneSidedWholeComponentTransportCI134RootReview.json",
+        "sha256": "6a8e5e1f254e254e23e9107322a208e417e0d4c0a6c747954b803ef3470e25d2"
+      }
+    }
+  ],
+  "current_ci": {
+    "label": 137,
+    "head": "1128dfa9f256a358227759001b9f13fabc21f971",
+    "tree": "31f999251097e7e11fbd53becc7c5693077990fa",
+    "pushed": "2026-11-12 10:34:21 UTC",
+    "first_check_not_before": "2026-11-12 10:45:05 UTC",
+    "status": "pending",
+    "added_lean_since_last_green": 2795,
+    "plan": "n04-ci137-plan.json",
+    "attempt": 2,
+    "retry_requested_at": "2026-11-12 10:40:05 UTC",
+    "run": 43201549606,
+    "previous_job": 131125970556
+  }
+}

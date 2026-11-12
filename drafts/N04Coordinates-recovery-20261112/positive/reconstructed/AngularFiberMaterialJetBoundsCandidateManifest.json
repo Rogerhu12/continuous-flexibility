@@ -1,0 +1,67 @@
+{
+  "kind": "actual_angular_inverse_pullback_fixed_loss_material_jet_adapter",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/AngularFiberMaterialJetBounds.lean",
+    "sha256": "4eae055e33a2bd0c8d0dcb309c5e7a91b19cbd00e3d96255672ed7e5184892eb",
+    "blob": "aec8614239c6f051a49e86743826a461bd83006b",
+    "lines": 220
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/AngularFiberMaterialJetBounds.lean",
+  "public_declarations": [
+    "angularFiberPullback_positiveJets_le_material"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/AngularFiberFiniteJetBounds.lean",
+      "sha256": "8c534406a942db628ab652050859329889ea949a482bfa90fa6b5b492ce3c52d",
+      "blob": "feda734f06cf191cd5194a6e5c941699c817153e",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/AngularInverseFirstDerivative.lean",
+      "sha256": "91d5169c2fcc70fecc57177935b8b11ca811312084c54f5fdcc282013686fcad",
+      "blob": "09fd82066e9c724e036a5fe910ab026ea453b521",
+      "lines": 93
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/NonlinearInverseMaterialBounds.lean",
+      "sha256": "25ebb60e7cee5193219345b2f12a4591d1194614dd71d5219ffb2dcc8ce231e7",
+      "blob": "1d9f7c20419746a3f844205fe79d4a55550920a6",
+      "lines": 94
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CoordinateCompositionMaterialBounds.lean",
+      "sha256": "9c5be75d75c6014baf98250769c1636eb10aceb0ca0b3330606498ac2d2f0a61",
+      "blob": "3dbe4b94ae8039d7b35ac5cb945b144b45c1d48d",
+      "lines": 119
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/FlowJetMaterialClosure.lean",
+      "sha256": "73064778e3932bb04d20dd2bf0a8cb069432e69f2c64fac705c05689f3bf2e7e",
+      "blob": "34ac6e592d6bea481efe6403e83906e0b94f51b6",
+      "lines": 155
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalJetProductClosure.lean",
+      "sha256": "e86821d2118f456ef683ff14657a706f867eeb751e0aeabf00c3474f45776a9e",
+      "blob": "91e78331a557e1eb506af800906db5cf48870a38",
+      "lines": 117
+    }
+  ],
+  "claims": [
+    "Uses the same parameterizedCircleInverse and angularFiberPullback as the selected endpoint construction. No map or width is chosen.",
+    "The actual augmented inverse first derivative is bounded by the true angular lower bound and the original first forward derivative. The numeric inequality is 1+(1+M)/kappa <=3*R*M for M,R>=1 and inverse(kappa)<=R.",
+    "All higher augmented inverse jets follow from the existing weighted inverse polynomial theorem. The subsequent actual composition uses the existing weighted partition theorem. No higher inverse-jet estimate is an input.",
+    "One low order and output loss are selected before K, every raw coefficient sequence A, all fields, states, envelope values and points. The final estimate has exactly one high state-grading factor at every positive derivative order.",
+    "The inverse lower-bound cost K*W^K and original positive-order forward jet envelopes are genuine source premises awaiting the corresponding same-component material estimates."
+  ],
+  "limitations": [
+    "This is the actual inverse/composition adapter, not yet the final whole-component numerator or primitive estimate.",
+    "No uniform component growth of source coefficients is asserted.",
+    "No zeroth angular-lift value bound is used or asserted.",
+    "Not compiled."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

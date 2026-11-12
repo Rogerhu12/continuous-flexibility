@@ -1,0 +1,45 @@
+{
+  "kind": "actual_fixed_positive_family_with_retained_numerical_parameters",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalFixedPositiveFamily.lean",
+    "sha256": "c40e1c6d652b0044329ba6ac362cab26cc0f3aad3551b82394ddf04775f16196",
+    "blob": "4cb0f979dcfe47dd1a186b356964a72f6ed6e9df",
+    "lines": 129
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/CanonicalFixedPositiveFamily.lean",
+  "public_declarations": [
+    "n04FixedPositiveTransport",
+    "n04FixedPositiveInverse",
+    "n04FixedPositiveHeight",
+    "N04FixedPositiveFamilyControls",
+    "n04Coordinates_exists_fixed_positive_family"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalActualPositiveFiniteFactory.lean",
+      "sha256": "8a08617e492ca5a7b3d3f50194ffd33aeeadfafffce5e2af7c16d4c02556d126",
+      "blob": "cda98a7e3251f9bd9b5568e54eb48e19b031f76a",
+      "lines": 135
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04PositiveNormalizationBuffer.lean",
+      "sha256": "c9cc82dcff9d6942d726424cee8b9d570094e26769636c2c702265d08d7e59fa",
+      "blob": "4d4d83bfb0bc2d619305e8906f904e194eec7689",
+      "lines": 114
+    }
+  ],
+  "claims": [
+    "The three definitions are direct aliases of the existing actual one-sided whole transport, inverse transport and height Taylor interpolation.",
+    "The finite family theorem derives every bound from the actual original typed atlas; common base and radius precede all positive components.",
+    "The six scalar functions and fixed buffer are chosen before every state and future output order. All low bounds and the exact height-width reciprocal are retained.",
+    "The reference state is inside the new neighborhood and sector, so the actual identity reference formulas follow from the same matched family."
+  ],
+  "limitations": [
+    "No uniform material growth for these numerical constants is asserted.",
+    "No final numerator, material primitive or complete N04c bound is asserted.",
+    "Not compiled."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

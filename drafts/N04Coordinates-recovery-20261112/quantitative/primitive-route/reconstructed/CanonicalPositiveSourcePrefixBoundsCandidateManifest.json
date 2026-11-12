@@ -1,0 +1,35 @@
+{
+  "kind": "actual_same_source_finite_prefix_high_envelope_candidate",
+  "status": "HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveSourcePrefixBounds.lean",
+    "sha256": "c3d8637c9edeb45e7ef8982951afa9d8d9eaa111fca2e8c5d5bd8b1384a756ad",
+    "git_blob": "eb7384f7dfd8b4789393250c849af9f8a385a932",
+    "lines": 91
+  },
+  "dependencies": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveSourceJetBounds.lean",
+      "sha256": "a63cdeb753148513fbf29eb44dde6c501f6d18d4070039a2a7b6095a13048f78",
+      "git_blob": "adddc89d2a9b11bf2ad84130508e5f4e1ca72c07",
+      "lines": 202
+    }
+  ],
+  "quantifier_order": [
+    "common base/loss/epsilon from the all-order theorem, before any high order",
+    "per-component sequence B(N) from a finite sum of actual source coefficients, before state",
+    "actual high input is B(N)*(1+pairGrading(N+loss)(z-reference)), linear in one high grading"
+  ],
+  "exact_cost": "B(N)=1+sum_{k<=N} A(k); the prefix argument is valid for any requested order, including N=0.",
+  "fixed_construction_preserved": [
+    "No n or interpolation width is selected in this file.",
+    "The same original typed atlas/source functions remain throughout.",
+    "A later use may request n+N at fixed construction n=3, while keeping the earlier low neighborhood and geometric widths."
+  ],
+  "limits": [
+    "The source sequence has no established uniform E0 growth across all components.",
+    "No terminal material numerator or primitive bound is asserted."
+  ],
+  "compiled": false,
+  "checkout_modified": false
+}

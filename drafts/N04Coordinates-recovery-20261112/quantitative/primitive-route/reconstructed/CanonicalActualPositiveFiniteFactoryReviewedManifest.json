@@ -1,0 +1,32 @@
+{
+  "kind": "reviewed_lean_candidate_manifest",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalActualPositiveFiniteFactory.lean",
+    "sha256": "8a08617e492ca5a7b3d3f50194ffd33aeeadfafffce5e2af7c16d4c02556d126"
+  },
+  "git_blob": "cda98a7e3251f9bd9b5568e54eb48e19b031f76a",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalActualPositiveFiniteFactoryCandidateManifest.json",
+    "sha256": "89725050877ecac9d79925d3ead625dcaedc1292de061133d879f70548f5d285"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/CanonicalActualPositiveFiniteFactoryIndependentReview.json",
+    "sha256": "6f0f156073dd6816c1b2da71a1f0fe70d18a64c4e3cf858ae8f67eee5c3fb456"
+  },
+  "reviewed_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N04bActualAtlasInteriorCompletionReviewedManifest.json",
+      "sha256": "d6c7a09ce2042f695e641caffdabafa57dd65c555a500fb03fbf3534a827b04a"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveFiniteEndpointBoundsReviewedManifest.json",
+      "sha256": "42bed8599597f794b1ed6caa25d3d98c3e5407828f369b12939947a74de801ad"
+    }
+  ],
+  "same_original_typed_atlas_retained": true,
+  "endpoint_bounds_are_derived_not_assumed": true,
+  "component_uniform_material_bound_claimed": false,
+  "compiled": false,
+  "checkout_changed": false
+}

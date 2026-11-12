@@ -1,0 +1,37 @@
+{
+  "kind": "actual_point_radial_coefficient_to_material_E0_candidate",
+  "status": "HELD_UNCOMPILED",
+  "author": "/root/audit_coordinates",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialPointRadialPolynomial.lean",
+    "sha256": "8a1d72f57708d275956e28d42473591327f46078e409b85481e87e70372acef2",
+    "git_blob": "3832a300bde8548bfee21149583af3b08d843420",
+    "lines": 50
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialCellEndpointModels.lean",
+      "sha256": "fbcef0e54e80091110431dae6b4a96ff49575acfbbc114dad1a9d08d8c499a3c",
+      "git_blob": "c91660140fe19221f98b95b599d2db5685e3bf68",
+      "lines": 147
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleRadialPolynomial.lean",
+      "sha256": "3e73e356a44a95ebefb4207a9aa54f418aa9d705e3c12fb4d24232363ba11582",
+      "git_blob": "06106cdba67bb37b503837a23da3911b670a77ce",
+      "lines": 76
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleShift.lean",
+      "sha256": "58b0285c60e26605a013ba3d580d17e37aef1fa450622b13c458227cb3aa8f74",
+      "git_blob": "e79e27788e1c853bed9950e91d7d121995ab1508",
+      "lines": 175
+    }
+  ],
+  "derived": [
+    "Uniform constants precede the actual cell and physical point.",
+    "Use the actual all-point model once, with its genuine cell-index error; no sample substitution or E0>=1 assumption."
+  ],
+  "compiled": false,
+  "checkout_modified": false
+}

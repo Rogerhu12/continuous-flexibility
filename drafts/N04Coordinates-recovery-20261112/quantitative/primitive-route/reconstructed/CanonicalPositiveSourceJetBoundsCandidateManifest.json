@@ -1,0 +1,53 @@
+{
+  "kind": "actual_same_atlas_all_order_positive_source_jet_bounds_candidate",
+  "status": "HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveSourceJetBounds.lean",
+    "sha256": "a63cdeb753148513fbf29eb44dde6c501f6d18d4070039a2a7b6095a13048f78",
+    "git_blob": "adddc89d2a9b11bf2ad84130508e5f4e1ca72c07",
+    "lines": 202
+  },
+  "dependencies": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootRelativeJets.lean",
+      "sha256": "1d153804a17ecfdf770509fe69ddab60c7ad5bcbaaacef233d5414e697876c2a",
+      "git_blob": "8934cb13451280c1f521ef5a5512ac37aad1f3b3",
+      "lines": 188
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootHeightJets.lean",
+      "sha256": "79167a67ec213c3cff6fbcad6db34eeac598ae2899e8a10c2a763c2da111c68a",
+      "git_blob": "39ccec5461527b3e3cd7e7fa07b86c34bd961a82",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N04bActualAtlasInteriorCompletion.lean",
+      "sha256": "f189ff9f0ddd8a84bb6cb7a166f4463427f75a4ff994f3b2348dd48b7b2b9700",
+      "git_blob": "fbb67b770132e53b204ae4270d1b30f98e01c8b7",
+      "lines": 82
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveEndpointFields.lean",
+      "sha256": "c024651329c6b725f61097116a892f032b80b1f2ef363c920e37ac7e007c0587",
+      "git_blob": "d5ac37d8aae450523577552e3fb13815cd0a0468",
+      "lines": 132
+    }
+  ],
+  "quantifier_order": [
+    "one common base, loss and radius before every component and derivative order",
+    "one positive envelope A(k) per component and certified two-end source choice, before every state and angle",
+    "one high grading factor per derivative bound, without raising the low neighborhood order with the high derivative order"
+  ],
+  "derived": [
+    "positive ordinary coordinate jets of the actual negative root source; identity ambient branch",
+    "all ordinary height and reciprocal-height jets of the actual source; one ambient branch",
+    "the same original typed K after deleting only temporary divided-field changes"
+  ],
+  "not_claimed": [
+    "uniform E0 growth of the component envelope",
+    "a change of the already selected fixed interpolation width",
+    "bounded zeroth angular lift or terminal primitive material jets"
+  ],
+  "compiled": false,
+  "checkout_modified": false
+}

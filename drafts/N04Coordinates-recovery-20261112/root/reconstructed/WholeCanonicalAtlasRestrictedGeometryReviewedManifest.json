@@ -1,0 +1,19 @@
+{
+  "kind": "reviewed_candidate_manifest",
+  "status": "HELD_REVIEWED_UNCOMPILED",
+  "candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasRestrictedGeometryCandidateManifest.json",
+    "sha256": "58334973b4ee8ef5c8de6c5a824cb9e493258212d77e098fd72f13630d9b4942"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasRestrictedGeometry.lean",
+    "sha256": "9e2cee52afc2fc29fa1ed3680e24534bfef821312a865d2523d10e6351be9218",
+    "blob": "701db6112228c64ffe09d6e04232fc1414f44785",
+    "lines": 146
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/WholeCanonicalAtlasRestrictedGeometryIndependentReview.json",
+    "sha256": "ee9c49b583d56e9d3074b6bb6299172f3058cbce0e7ee67a18cb6a47e896aa3a"
+  },
+  "compiled": false
+}
