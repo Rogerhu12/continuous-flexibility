@@ -20,6 +20,39 @@ open scoped ContDiff
 
 set_option backward.isDefEq.respectTransparency false
 
+private theorem n04Realization_mixedJet_frechetEnvelope
+    (n : ℕ) {A : ℝ} (hA : 0 < A) :
+    ∃ B : ℝ, 0 < B ∧ ∀ (U : Set PolarPoint), IsOpen U →
+      ∀ (f : PolarPoint → ℝ), ContDiffOn ℝ ∞ f U →
+        ∀ E rho : ℝ, 1 ≤ E → 0 ≤ rho →
+          (∀ i j : ℕ, i + j ≤ n → ∀ x ∈ U,
+            |mixedDerivative i j f x| ≤ A * E ^ A * rho) →
+          ∀ x ∈ U, ‖iteratedFDeriv ℝ n f x‖ ≤ B * E ^ B * rho := by
+  obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack ((2 : ℝ) ^ n * A) A
+  refine ⟨B, hB, ?_⟩
+  intro U hU f hf E rho hE hrho hjet x hx
+  have hM : 0 ≤ A * E ^ A * rho :=
+    mul_nonneg (mul_nonneg hA.le
+      (Real.rpow_nonneg (zero_le_one.trans hE) _)) hrho
+  have hnorm := norm_iteratedFDeriv_le_of_mixedDerivative hU hf n hx hM
+    (fun i j hij => by
+      rw [Real.norm_eq_abs]
+      exact hjet i j hij.le x hx)
+  calc
+    ‖iteratedFDeriv ℝ n f x‖ ≤ (2 : ℝ) ^ n * (A * E ^ A * rho) := hnorm
+    _ = ((2 : ℝ) ^ n * A * E ^ A) * rho := by ring
+    _ ≤ (B * E ^ B) * rho := mul_le_mul_of_nonneg_right (hpack E hE) hrho
+
+private theorem n04Realization_allOrderEnvelope_repack
+    {P Q : ℕ → ℕ → ℝ → Prop}
+    (hP : ∃ d : ℕ, ∀ n : ℕ, ∃ A : ℝ, 0 < A ∧ P d n A)
+    (hPQ : ∀ d n A, 0 < A → P d n A → ∃ B : ℝ, 0 < B ∧ Q d n B) :
+    ∃ d : ℕ, ∀ n : ℕ, ∃ B : ℝ, 0 < B ∧ Q d n B := by
+  obtain ⟨d, hd⟩ := hP
+  refine ⟨d, fun n => ?_⟩
+  obtain ⟨A, hA, hbound⟩ := hd n
+  exact hPQ d n A hA hbound
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S}
   {K : CanonicalData S} {base : ℕ} {ε : ℝ}
@@ -63,28 +96,18 @@ theorem n04Realization_canonicalAtom_frechet_bounds
           ∀ x ∈ canonicalOpen S K m,
             ‖iteratedFDeriv ℝ n f x‖ ≤ B * T.E0 (T.sample (K.cell m)) ^ B *
               (1 + stateGrading S (n + d) (z.1 - C.referenceState) + |z.2|) := by
-  obtain ⟨d, hbound⟩ :=
-    n04Realization_canonicalAtom_jet_bounds hD hT hrefState href hcur hlen hfloor
-  refine ⟨d, fun n => ?_⟩
-  obtain ⟨A, hA, hjet⟩ := hbound n
-  obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack ((2 : ℝ) ^ n * A) A
+  refine n04Realization_allOrderEnvelope_repack
+    (P := fun d n A => N04RealizationCanonicalAtomBoundAtOrder D T S C L K base d ε n A)
+    (hP := n04Realization_canonicalAtom_jet_bounds
+      (S := S) (C := C) (L := L) (K := K) (base := base) (ε := ε)
+      hD hT hrefState href hcur hlen hfloor) ?_
+  intro d n A hA hjet
+  obtain ⟨B, hB, hbound⟩ := n04Realization_mixedJet_frechetEnvelope n hA
   refine ⟨B, hB, fun z hz hs m a f hf heq x hx => ?_⟩
-  let rho : ℝ := 1 + stateGrading S (n + d) (z.1 - C.referenceState) + |z.2|
-  have hrho : 0 ≤ rho :=
-    add_nonneg (add_nonneg zero_le_one (apply_nonneg _ _)) (abs_nonneg _)
-  have hM : 0 ≤ A * T.E0 (T.sample (K.cell m)) ^ A * rho :=
-    mul_nonneg (mul_nonneg hA.le
-      (Real.rpow_nonneg (zero_le_one.trans (hfloor m)) _)) hrho
-  have hnorm := norm_iteratedFDeriv_le_of_mixedDerivative
-    (isOpen_Ioo.prod isOpen_univ) hf n hx hM
-    (fun i j hij => by
-      rw [Real.norm_eq_abs]
-      exact hjet z hz hs m a f heq i j hij.le x hx)
-  calc
-    ‖iteratedFDeriv ℝ n f x‖ ≤
-        (2 : ℝ) ^ n * (A * T.E0 (T.sample (K.cell m)) ^ A * rho) := hnorm
-    _ = ((2 : ℝ) ^ n * A * T.E0 (T.sample (K.cell m)) ^ A) * rho := by ring
-    _ ≤ (B * T.E0 (T.sample (K.cell m)) ^ B) * rho :=
-      mul_le_mul_of_nonneg_right (hpack _ (hfloor m)) hrho
+  exact hbound (canonicalOpen S K m) (isOpen_Ioo.prod isOpen_univ) f hf
+    (T.E0 (T.sample (K.cell m)))
+    (1 + stateGrading S (n + d) (z.1 - C.referenceState) + |z.2|) (hfloor m)
+    (add_nonneg (add_nonneg zero_le_one (apply_nonneg _ _)) (abs_nonneg _))
+    (fun i j hij y hy => hjet z hz hs m a f heq i j hij y hy) x hx
 
 end ContinuousFlexibility.Analysis
