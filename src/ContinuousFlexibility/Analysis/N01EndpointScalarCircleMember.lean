@@ -119,7 +119,7 @@ theorem N01Properties.endpointFlow_pure_scalar_circleMember
   let pointData := horders s
   refine ⟨pointData.choose, pointData.choose_spec.1.le, ?_⟩
   intro m b c horder θ
-  simpa only [Nat.add_assoc] using
+  simpa only [A, Nat.add_assoc] using
     pointData.choose_spec.2 m b c θ (by omega) z hz (η m)
       (directions.choose_spec.2.2.1 m)
 
