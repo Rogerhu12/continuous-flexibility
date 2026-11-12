@@ -114,8 +114,15 @@ theorem n04b_exists_common_root_heightJets
   have hcurrent : RootPhysicalFieldJetBound
       (pairGrading (stateGrading S) realGrading) rootLoss A
       (z - (C.referenceState, 0)) (K.chart z i) (K.height z i) (τ (r, θ)) := by
-    rw [hy]
-    exact (hroot z hzR hs (τ (r, θ)).2).2.2
+    have hrootCurrent : RootPhysicalFieldJetBound
+        (pairGrading (stateGrading S) realGrading) rootLoss A
+        (z - (C.referenceState, 0)) (K.chart z i) (K.height z i)
+        (r, (τ (r, θ)).2) :=
+      (hroot z hzR hs (τ (r, θ)).2).2.2
+    exact (congrArg
+      (fun q : PolarPoint => RootPhysicalFieldJetBound
+        (pairGrading (stateGrading S) realGrading) rootLoss A
+        (z - (C.referenceState, 0)) (K.chart z i) (K.height z i) q) hy).mpr hrootCurrent
   have hreference : RootPhysicalFieldJetBound
       (pairGrading (stateGrading S) realGrading) rootLoss A
       (z - (C.referenceState, 0)) (K.chart (C.referenceState, 0) i)
