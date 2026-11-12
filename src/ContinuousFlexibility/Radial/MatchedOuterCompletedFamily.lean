@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Radial.MatchedOuterUniformRetainedEnvelope
 import ContinuousFlexibility.Radial.MatchedOuterMatchingTransfer
+import ContinuousFlexibility.Radial.MatchedModeCellBounds
 import ContinuousFlexibility.Radial.ReferenceRawKernelSchur
 
 /-!
@@ -99,18 +100,37 @@ theorem SeedRetainedPair.exists_uniform_selectedOuter_matching_bounds
         MatchedOuterTailEnvelope (S.family S.sigma) Γ.reference hPE side (cut side)
           M.frequency M.transitionIndex C A := by
       have hh := hall M.transitionIndex M.frequency (hj i) (heven i) (hband i) side
+      change MatchedOuterTailEnvelope (S.family S.sigma) Γ.reference hPE side
+        (P.sideRadius side * S.joinInner side (W i).matching.transitionIndex)
+        (W i).matching.frequency (W i).matching.transitionIndex C A at hh
       cases side
-      · simpa only [← hleft i] using hh
-      · simpa only [← hright i] using hh
+      · change MatchedOuterTailEnvelope (S.family S.sigma) Γ.reference hPE false
+          (W i).matching.innerLeft (W i).matching.frequency
+          (W i).matching.transitionIndex C A
+        rw [hleft i]
+        exact hh
+      · change MatchedOuterTailEnvelope (S.family S.sigma) Γ.reference hPE true
+          (W i).matching.innerRight (W i).matching.frequency
+          (W i).matching.transitionIndex C A
+        rw [hright i]
+        exact hh
     have hs (side : Bool) :
         standInBoundaryScale ((M.frequency : ℝ) ^ 2) (Γ.reference.w (cut side)) (cut side) =
           M.boundaryScale (if side then 1 else 0) := by
       cases side
-      · simpa only [matchingCut, if_pos rfl] using ((W i).boundary_scale 0).symm
-      · simpa only [matchingCut, if_neg (by decide : (1 : Fin 2) ≠ 0)] using
-          ((W i).boundary_scale 1).symm
+      · change standInBoundaryScale (((W i).matching.frequency : ℝ) ^ 2)
+          (Γ.reference.w (W i).matching.innerLeft) (W i).matching.innerLeft =
+            (W i).matching.boundaryScale (0 : Fin 2)
+        simpa [matchingCut] using ((W i).boundary_scale 0).symm
+      · change standInBoundaryScale (((W i).matching.frequency : ℝ) ^ 2)
+          (Γ.reference.w (W i).matching.innerRight) (W i).matching.innerRight =
+            (W i).matching.boundaryScale (1 : Fin 2)
+        simpa [matchingCut] using ((W i).boundary_scale 1).symm
     have ht' := ht
-    simp only [MatchedOuterTailEnvelope, hs] at ht'
+    conv at ht' =>
+      intro side
+      unfold MatchedOuterTailEnvelope
+      rw [hs side]
     choose c P₀ ZP Q ZQ H hV R hR hline hkernel hcolumn using ht'
     have hline' (side : Bool) (z : ℝ × ℝ) :
         outerStatePair (H side).entrance z = 0 ↔
@@ -123,8 +143,13 @@ theorem SeedRetainedPair.exists_uniform_selectedOuter_matching_bounds
       (W i).cut_order.1 (W i).cut_order.2.1 (W i).cut_order.2.2
       (fun t => ((W i).diagonal t).1)
       (W i).boundary_off_diagonal (W i).boundary_normalized (hsource i)
+      (c := c) (P := P₀) (ZP := ZP) (Q := Q) (ZQ := ZQ)
       H hV R hR hline' (referenceRawChannelLevel (S.family S.sigma)) M.transitionIndex
-      hC.le hC.le hkernel hcolumn
+      (C₀ := C) (Cₚ := C) (A := A) hC.le hC.le
+      (fun side k m => by
+        simpa only [referenceRawChannelLevel] using hkernel side k m)
+      (fun side m => by
+        simpa only [referenceRawChannelLevel] using hcolumn side m)
     exact ⟨hb.1 (decide (i = 0)), hb.2⟩
   exact ⟨2 * C, A, C, A, mul_pos (by norm_num) hC, hA.le, hC, hA.le,
     fun i => (hone i).1, fun i => (hone i).2⟩
