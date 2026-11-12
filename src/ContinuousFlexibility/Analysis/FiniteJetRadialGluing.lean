@@ -41,7 +41,11 @@ theorem contDiffOn_radial_piecewise_of_matching_full_jets
     rw [hs.closure_eq] at hp
     exact hp
   have hright : closure sᶜ ⊆ t :=
-    closure_minimal (fun p hp => le_of_lt (lt_of_not_ge hp)) ht
+    closure_minimal (by
+      intro p hp
+      change ¬ p.1 ≤ c at hp
+      change c ≤ p.1
+      exact le_of_lt (lt_of_not_ge hp)) ht
   have hregular : ContDiffOn ℝ n (s.piecewise f g) U := by
     apply contDiffOn_nat_piecewise_of_matching_full_jets n hU
     · intro p hp
