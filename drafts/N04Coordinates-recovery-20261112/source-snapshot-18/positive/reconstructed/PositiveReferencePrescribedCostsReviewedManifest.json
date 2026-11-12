@@ -1,0 +1,61 @@
+{
+  "kind": "reviewed_actual_prescribed_reference_costs",
+  "owner": "/root/proof_inventory",
+  "status": "HELD_UNCOMPILED_STATICALLY_REVIEWED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferencePrescribedCosts.lean",
+    "sha256": "6b5ac3100acd682b1ebec4f73b6469cae178193b108ed3c4475498992d5aa7aa",
+    "blob": "f50437f2ab563c4e8a8076b803441290ef10a7a2",
+    "lines": 148
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferencePrescribedCostsCandidateManifest.json",
+    "sha256": "cb8d67c34696fbe8b867434afe4a83b33f4aea72f40e7a6343fabe60e6b6ccbd",
+    "blob": "fb994e2ee844399e3781dd1627ac7620811da799",
+    "lines": 79
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/PositiveReferencePrescribedCostsIndependentReview.json",
+    "sha256": "f80394f31016fbc0992d35706e4ae5fd48fa5409c9da41e2415365290f4f1bf5",
+    "blob": "0067fbffe50dcbb3a5227a0e97debaf322d72f1f",
+    "lines": 82
+  },
+  "provider_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/PositiveReferenceFinitePrescribedIndependentReview.json",
+      "sha256": "c91d9ea32eb102f3bcc50d15f91535f9ef41fbe4e3df1b330dc0b78d783a28cd",
+      "blob": "c29a462837853d50adca5ca9335c60de39965e7d",
+      "lines": 68
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/PositiveReferenceTaylorPrescribedWidthIndependentReview.json",
+      "sha256": "9278d86985f834fca7404c8c081cdcf034b90012aaa577aeaabc89b19b8c3370",
+      "blob": "6faf139ac7260c557283b542b626e996a07bf7b7",
+      "lines": 80
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/PositiveReferenceValueEnvelopeIndependentReview.json",
+      "sha256": "95cf6a10437bdb36fb8cf15e1fb895bee6e63d03b4a0bea020008c55de946662",
+      "blob": "5ad28b526ff15060f906944e305d50409a741a27",
+      "lines": 90
+    }
+  ],
+  "public_declarations": [
+    "positiveReferenceFiniteRadialJets_prescribed_costs",
+    "positiveReferencePrescribedCost_material_bound"
+  ],
+  "scope": [
+    "The same displayed width, radial Taylor slices, integral Y and log-interpolated H are retained; no qualitatively selected width is estimated or silently identified.",
+    "Input U bounds the finite positive-order chart jets and all height jets, reciprocal endpoint lower, reciprocal span and span. These remain numerical raw-data inputs.",
+    "The actual prescribed factory gives derivative lower/upper and true positive height. The new scalar arithmetic gives width reciprocal at most (24+16(n+2))*U^2, derivative at most (n+2)*U, inverse derivative at most 2U, and height/reciprocal at most 4U^2. For n=3 the displayed width cost is 104U^2.",
+    "The second theorem converts a supplied U <= K*W^K into the exact same material base with coefficient (24+16(n+2))*K^2 and exponent 2K. It does not derive that input from arbitrary Through03."
+  ],
+  "actual_remaining_inputs": [
+    "Uniform same-witness material bounds for actual reference root chart/height finite jets and inverse root slope/height are being derived by quantitative_route.",
+    "A reciprocal positive component span bound and comparison of the two actual endpoint host bases with one selected positive sample are not assumed proved here.",
+    "Latest current N01c final Flows drops its N01PrimitiveGeometry certificate; no projection of retained Gamma or raw optical lower from arbitrary Through03 is used."
+  ],
+  "compiled": false,
+  "source_edited_after_review": false,
+  "checkout_index_refs_modified": false
+}

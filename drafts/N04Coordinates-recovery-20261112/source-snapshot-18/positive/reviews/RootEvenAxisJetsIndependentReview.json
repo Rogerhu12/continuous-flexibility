@@ -1,0 +1,71 @@
+{
+  "kind": "genuine_even_root_axis_finite_jet_bound_independent_full_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "passed_static_full_source_and_actual_provider_review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootEvenAxisJets.lean",
+    "sha256": "b0d7b165fa08827e2b85a1b634da2cf30689bb8c35e539c25ff8bfafb1d30160",
+    "blob": "2c922e1288ef2eb351f3622ceb14e83b0057a128",
+    "lines": 138
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootEvenAxisJetsCandidateManifest.json",
+    "sha256": "6f4562e580748b05c07192485e2c074b9678d103fb1a53e7a6df83a6f37cfeed",
+    "blob": "f4adc22b60bef22dc2014e0bcb060f747ae1d6bd",
+    "lines": 60
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootEvenInteriorBounds.lean",
+      "sha256": "00990c0e47928a736306a8018ddb8846476555b63afc910452dd4af8dad473de",
+      "blob": "c4952d83511bfe57057948d3fee4b46247ff50c6",
+      "lines": 187
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootTaylorBounds.lean",
+      "sha256": "8d54e002e82529feeaab7ad6e10ee10532206513eaaa397f26f57c63c8dae309",
+      "blob": "507319d71a2941b5cce788fa6b0c8e9c0666178a",
+      "lines": 106
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootCoordinateJets.lean",
+      "sha256": "ead8a9db10e300a57c0f579cc14a7b0d884277e8c032371dba275b98d462d4e1",
+      "blob": "e97a0d6224b553681b2a86aa4950bfade033cefc",
+      "lines": 144
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/TaylorRemainderBounds.lean",
+      "sha256": "8ac1260a63f7792e12ee33311f044f7a4a7485390aeade0b6d5517e6bff23b48",
+      "blob": "bae149b1491c4f99eace80ad2f81fa9daba9d539",
+      "lines": 80
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootExtensionPhysicalBounds.lean",
+      "sha256": "21d84a8cd1a575bd29d324b59747dbb088026ccf52f202f8fed91c0f2fdfa0e6",
+      "blob": "699377923313ed13f225c7f74c30e9cfea044b93",
+      "lines": 159
+    }
+  ],
+  "checks": [
+    "Read the full 138-line source and the complete actual RootEvenInteriorBounds, RootTaylorBounds, RootCoordinateJets, TaylorRemainderBounds and RootExtensionPhysicalBounds providers. Exact source/provider hashes match the candidate.",
+    "The positive-point Taylor argument uses only the convex closed ball centered at (x,0,theta) of radius x^(3/2). It replaces the older box intersection by this genuine ball without changing any Taylor or weighted-remainder hypothesis. The actual root sample lies in this ball for every sign parameter of norm at most one.",
+    "The polynomial part uses the exact finite Taylor jet theorem at the actual center and needs only input orders 0 through n. The remainder uses the true weighted composition theorem and the fixed root-coordinate constant D_n; its bound is n!*(2M)*D_n^n. Averaging the two signs and adding both terms gives C_n*M with C_n chosen before the input and all points.",
+    "The positive-radius estimate is not applied to any ordinary jet of totalized rootEven at zero. For a genuine global smooth extension F, equality on the positive open half-plane gives equality of ordinary iterated Frechet derivatives at positive points by the installed open-set congruence theorem.",
+    "The finite family of actual input jet norms is continuous at (0,0,theta). For any positive eta it is uniformly below M+eta on some neighborhood, using Fin(n+1) and eventually_all. The radius is used only to locate a shrinking ball; no reciprocal neighborhood-radius bound enters the coefficient.",
+    "For x<min(1,delta/4), the actual closed source ball is within delta of the root since x^(3/2)<=x and the product max-norm distance of its center from the root is x. Every input jet through n is therefore bounded by M+eta on that ball.",
+    "The closed norm inequality for the true derivative of F contains Ioo(0,a) times {theta}; its closure contains the actual root. Continuity of that same derivative transfers C_n*(M+eta) to the root. Eta=epsilon/C_n and le_of_forall_pos_le_add remove the arbitrary error with no derivative loss.",
+    "Checked the pinned finite eventually_all, Metric.mem_nhds_iff, ContinuousAt.eventually_lt_const, rpow_le_self_of_le_one and closure product/interval APIs, plus the actual extension open-jet proof template. Both n=0 and all positive orders retain the same stated quantifier order. The new public name is absent from active source."
+  ],
+  "scope": "Local linear bound for the ordinary root jets of a genuine smooth extension agreeing with the physical even formula. No raw totalized boundary jet is substituted. Odd divided-difference loss and actual material family packing are separate; no inverse radius, extra high-state factor or optical lower assumption is added.",
+  "public_declarations": [
+    "exists_rootEven_axis_jet_bound"
+  ],
+  "new_private_declarations": [
+    "rootEven_pos_local_jet_bound"
+  ],
+  "mathlib_pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "compiled": false,
+  "source_edited_by_reviewer": false,
+  "ci_queried_or_downloaded": false,
+  "checkout_index_refs_CP_authority_modified": false
+}

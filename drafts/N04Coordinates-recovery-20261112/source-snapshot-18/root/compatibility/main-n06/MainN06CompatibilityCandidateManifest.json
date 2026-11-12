@@ -1,0 +1,99 @@
+{
+  "kind": "main_N06_conflict_resolution_candidate",
+  "status": "HELD_NOT_INSTALLED_OR_COMPILED",
+  "base_head": "c6c8f4881c127c415919addae844aee8422e4548",
+  "main": "ebfd528f2dd0c690799187be45b7c5a5c4c6b26a",
+  "merge_base": "8cebde34f6668c523facece3312949e9dbec3444",
+  "files": [
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/CanonicalBoundaryImage.lean",
+      "before": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/CanonicalBoundaryImage.base.lean.txt",
+        "sha256": "a26253ee65f817ddaed12b91e57a6403ffec092a2f29c5f3b41b2ccf5d889a1d",
+        "blob": "3234b236bcd07cbda8f5a3c58911b8451f6bf720",
+        "lines": 146
+      },
+      "after": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/CanonicalBoundaryImage.lean",
+        "sha256": "35891796295555767b93b96bf2b627825c07536daf7819c72ac4abb04719135d",
+        "blob": "aab2c515bfb3559cf3cdb4099664ee635ba55acf",
+        "lines": 148
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/CanonicalBoundaryImage.diff",
+        "sha256": "dcf7644a980d3ea07e57534afdd24ec92692a294d4e944c0e3d830d13f68f387",
+        "blob": "d78bea0f617d6de95c98f37c5062cb12fba994f2",
+        "lines": 31
+      }
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/ReflectionStripGeometry.lean",
+      "before": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/ReflectionStripGeometry.base.lean.txt",
+        "sha256": "eb25f33bb571ac782b48284ed1933eb840285b804a13dc595eda132f772c96c0",
+        "blob": "9a188ce86595bb07ca245ada4fa690f044e00451",
+        "lines": 123
+      },
+      "after": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/ReflectionStripGeometry.lean",
+        "sha256": "a79ab55763b9a98a684bd08389a1e9d65334819c206eb6e3b742cee317a3fdbb",
+        "blob": "d28b9f63d2861a32f1968b21a0196953804daec4",
+        "lines": 123
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/ReflectionStripGeometry.diff",
+        "sha256": "639a8fb8819462b29b403ea9a23a31693137a4728e1f0e6e894554c8d506d29a",
+        "blob": "55c7ebec41dc3025ed52ec60155848a6ae257841",
+        "lines": 21
+      }
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/EquivariantOpenDomainStrip.lean",
+      "before": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/EquivariantOpenDomainStrip.base.lean.txt",
+        "sha256": "e7e291bc13e5a0f648a9de272da07b4bbf9ae3716f5d6753736847db0c5c9263",
+        "blob": "80381f2ebf7947e2be3a11ad948c40e748375dd4",
+        "lines": 118
+      },
+      "after": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/EquivariantOpenDomainStrip.lean",
+        "sha256": "098bb1b8a28c8bf83b00d07a2738ac731df171a81ff9f03e97a252f6bcab7375",
+        "blob": "73dc6ec89993d66b87089de125fc9ee52aad2242",
+        "lines": 118
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/EquivariantOpenDomainStrip.diff",
+        "sha256": "4621a5436577c10a6fc7952a91bd0899fc42baaab000f8cdeecb92036866f474",
+        "blob": "2d9138958e3a7ad4bc54a07760d3470a0e45242f",
+        "lines": 22
+      }
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/CanonicalStripGeometry.lean",
+      "before": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/CanonicalStripGeometry.base.lean.txt",
+        "sha256": "b67db3461ba333fc48fb13b38105068d0222952ebd12e87fab2ec8b81b644733",
+        "blob": "e5f9d2ddce6e9251e057aafbadef0e11f6b59979",
+        "lines": 110
+      },
+      "after": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/CanonicalStripGeometry.lean",
+        "sha256": "b5cbf27a85c56302b0a7d29eb84dafac056fee6e5e61685d46d1b9ce6eba1277",
+        "blob": "8414a47460b602309aea49d2a58dfda9ed59867b",
+        "lines": 110
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/CanonicalStripGeometry.diff",
+        "sha256": "4550409ed9292ee1a1340ad4eed7130e57300b85cea74a75539f7e1d9acaef9a",
+        "blob": "e2defac6866b1f11e2976a9b234c21b2e98d7456",
+        "lines": 22
+      }
+    }
+  ],
+  "scope": [
+    "CanonicalBoundaryImage uses the exact new main generic boundary theorem proof while preserving both existing positive-piece specializations.",
+    "The main arbitrary-radial-set interface is carried through the existing split module representation, generalizing the reflection and strip lemmas from Ioo a b to A. No duplicated main declarations are copied into CanonicalStripGeometry.",
+    "All three generalized proofs are otherwise unchanged; other theorem bodies and imports stay byte-identical. Generated root will be resolved only by scripts/gen_root.py."
+  ],
+  "active_checkout_index_refs_CP_modified": false
+}

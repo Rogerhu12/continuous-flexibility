@@ -1,0 +1,21 @@
+--- src/ContinuousFlexibility/Analysis/ReflectionStripGeometry.lean
++++ src/ContinuousFlexibility/Analysis/ReflectionStripGeometry.lean
+@@ -43,13 +43,13 @@
+ 
+ /-- Reflection and injectivity identify the preimage of the angular axis. -/
+ theorem chart_angle_eq_zero_of_reflection
+-    {a b : ℝ} {F : PolarPoint → PolarPoint}
+-    (hinj : InjOn F (Ioo a b ×ˢ (univ : Set ℝ)))
+-    (hreflect : ∀ p ∈ Ioo a b ×ˢ (univ : Set ℝ),
++    {A : Set ℝ} {F : PolarPoint → PolarPoint}
++    (hinj : InjOn F (A ×ˢ (univ : Set ℝ)))
++    (hreflect : ∀ p ∈ A ×ˢ (univ : Set ℝ),
+       F (p.1, -p.2) = ((F p).1, -(F p).2))
+-    {p : PolarPoint} (hp : p ∈ Ioo a b ×ˢ (univ : Set ℝ))
++    {p : PolarPoint} (hp : p ∈ A ×ˢ (univ : Set ℝ))
+     (hangle : (F p).2 = 0) : p.2 = 0 := by
+-  have hp' : (p.1, -p.2) ∈ Ioo a b ×ˢ (univ : Set ℝ) := ⟨hp.1, mem_univ _⟩
++  have hp' : (p.1, -p.2) ∈ A ×ˢ (univ : Set ℝ) := ⟨hp.1, mem_univ _⟩
+   have hF : F (p.1, -p.2) = F p := by
+     rw [hreflect p hp]
+     apply Prod.ext

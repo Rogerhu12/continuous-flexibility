@@ -1,0 +1,82 @@
+{
+  "kind": "independent_full_source_prescribed_reference_cost_review",
+  "reviewer": "/root/audit_coordinates",
+  "author": "/root/proof_inventory",
+  "result": "passed_static_full_source_and_actual_same_construction_review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferencePrescribedCosts.lean",
+    "sha256": "6b5ac3100acd682b1ebec4f73b6469cae178193b108ed3c4475498992d5aa7aa",
+    "blob": "f50437f2ab563c4e8a8076b803441290ef10a7a2",
+    "lines": 148
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferencePrescribedCostsCandidateManifest.json",
+    "sha256": "cb8d67c34696fbe8b867434afe4a83b33f4aea72f40e7a6343fabe60e6b6ccbd"
+  },
+  "provider_sources_read": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceFinitePrescribed.lean",
+      "sha256": "9d90ac886d09bd6953294d7a554aafa9955ba9c570061befe0abb2be24dcf4f8",
+      "blob": "1eb9ca00d7c9a282a2bd06c447f7a7d74ca9723d",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-taylor-triangle/PositiveReferenceTaylorPrescribedWidth.lean",
+      "sha256": "44bc853c9750ea6ef6125b7af5f878b7fd47d3ffb3175b521a3ba21be36059a4",
+      "blob": "6520aad4926928dba5080ffed052e7630f413668",
+      "lines": 147
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceValueEnvelope.lean",
+      "sha256": "267b575f81da274e9710fd4fbd0df574c7d527bfd78a5e5c867e749ce2698297",
+      "blob": "25205de05e190acb6ec954e7ec34ce73351c88be",
+      "lines": 145
+    }
+  ],
+  "provider_reviews_verified": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/PositiveReferenceFinitePrescribedIndependentReview.json",
+      "sha256": "c91d9ea32eb102f3bcc50d15f91535f9ef41fbe4e3df1b330dc0b78d783a28cd",
+      "blob": "c29a462837853d50adca5ca9335c60de39965e7d",
+      "lines": 68
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/PositiveReferenceTaylorPrescribedWidthIndependentReview.json",
+      "sha256": "9278d86985f834fca7404c8c081cdcf034b90012aaa577aeaabc89b19b8c3370",
+      "blob": "6faf139ac7260c557283b542b626e996a07bf7b7",
+      "lines": 80
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/PositiveReferenceValueEnvelopeIndependentReview.json",
+      "sha256": "95cf6a10437bdb36fb8cf15e1fb895bee6e63d03b4a0bea020008c55de946662",
+      "blob": "5ad28b526ff15060f906944e305d50409a741a27",
+      "lines": 90
+    }
+  ],
+  "checks": [
+    "The entire 148-line source and the selected 148-line prescribed factory, 147-line corrected Taylor-width provider, and 145-line value-envelope provider were read. Their exact bytes match the manifest.",
+    "The displayed delta is exactly positiveReferenceTaylorWidth n l r kappa M. The actual ys/hs Taylor slices, Y=positiveReferenceCoordinate, and H=positiveReferenceHeight repeat the same factory definitions and numerical data; no qualitative choice is substituted or silently equated.",
+    "The actual factory tuple projections are correct: .1 gives RangeGeometry/positive height, .2.2.2.1 gives derivative bounds, and .2.2.2.2 gives both height values. The numerical proof needs no additional geometric assertion.",
+    "kappa inverse <= U gives 1 <= kappa*U, hence 1/(2U) <= kappa/2. The explicitly supplied span <= U gives 1/(2U) <= 1/(2span). Their minimum therefore bounds the actual derivative below; positive reciprocal reversal gives actual derivative inverse <= 2U.",
+    "The finite Taylor derivative upper bound is exactly M+(n+1)M=(n+2)M. Combining M<=U, span inverse<=U, and n+2>=2 bounds both alternatives in the actual factory maximum by (n+2)U.",
+    "The height envelope V=max(1,max(2M,2/kappa)) is nonnegative and <=2U. The actual H and inverse-H are therefore <=V^2<=4U^2; polynomial raw-jet magnitude is not placed inside an exponential.",
+    "The width reciprocal is the previously proved explicit polynomial cost (24+16(n+2))*U^2 of that very displayed width. The proof does not estimate a width selected only by continuity.",
+    "The scalar material conversion uses the supplied U<=K*W^K and W>=1. Squaring is justified by U>=0, and the pinned Real.rpow_mul_natCast rewrites (W^K)^2 to W^(2K), retaining the same material base. No existence or uniformity of the input K is asserted.",
+    "Both new public names are absent from the active source. No public/provider source was edited and no elaborator, compiler or CI operation was run."
+  ],
+  "pinned_mathlib": {
+    "commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "checked_APIs": [
+      "one_div_le_one_div_of_le",
+      "pow_le_pow_left₀",
+      "Real.rpow_mul_natCast"
+    ]
+  },
+  "material_scope": "U, reciprocal endpoint lower, both span costs, and the bound U<=K*W^K remain explicit numerical hypotheses. This report does not convert them into a same-witness sample-E0 theorem or an unconditional PrimitiveGeometryProperties certificate.",
+  "verification": {
+    "compiled": false,
+    "source_edited": false,
+    "ci_queried_or_downloaded": false,
+    "checkout_index_refs_CP_authority_or_active_plan_changed": false
+  }
+}

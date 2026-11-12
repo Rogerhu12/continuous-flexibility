@@ -1,0 +1,58 @@
+{
+  "kind": "candidate_CI143_actual_positive_reference_jet_selector_repair",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "base_commit": "597e5c478ed253d74b89cb7a077dc39a12acc44c",
+  "base_tree": "8b7c371e142e08a09bc8171e90d392031b1713f6",
+  "target_path": "src/ContinuousFlexibility/Analysis/CanonicalWholePositiveReferenceJets.lean",
+  "before": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair143/CanonicalWholePositiveReferenceJets.base.lean.txt",
+    "sha256": "f073be472d15bb804ef90f2b2e800f9c5d11e850c35364149ec2152ff91ae5a9",
+    "blob": "9c27d7e41b041b4b5d3787a181803642834f1479",
+    "lines": 151
+  },
+  "after": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair143/CanonicalWholePositiveReferenceJets.lean",
+    "sha256": "2b249412298b83bdf50d296b7585fbcca9f8f1c084b0cb05dba3ed711d907784",
+    "blob": "ffa931131ef09cea066a91b46f554d6240fefbae",
+    "lines": 153
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair143/CanonicalWholePositiveReferenceJets.diff",
+    "sha256": "fa496852fd50c32d407aabcee1581b9cf2998e432c7dfd2175f1456e0985496a",
+    "blob": "a54d307d147120734988213355349999a3958d7b",
+    "lines": 21
+  },
+  "cached_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-143.log",
+    "sha256": "14c51d68c4b520fc4537bda1363af378ff2885d764f63be0d32cfb863f0d0d90",
+    "blob": "270f459a7bee4d7b7b9ecae86e87fcfcf3b79b5f",
+    "lines": 762
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalFieldJetReduction.lean",
+      "sha256": "60a88163fb98cf3e12f42e240377136f5faf788378fa3c055312cbdba4aafbd3",
+      "blob": "d26a665de5f06590fc30615bdb376120761cd6bd",
+      "lines": 155
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bFieldRegularity.lean",
+      "sha256": "e9785ca55354e5eb97a0243c085d2ddfefdd0d302b70fb9ee759fdde7591ca55",
+      "blob": "0accc70bea719eb47f46bcde4989c99798027273",
+      "lines": 59
+    }
+  ],
+  "repair": "Restrict branching to the Fin 3 coefficient selector v=0 and v=1. Each simp-only list contains only its exact if_pos/if_neg proof. The Bool root endpoint remains unchanged in both the target and its actual neighborhood certificate.",
+  "surface": {
+    "public_headers_identical": true,
+    "public_declarations": 5,
+    "imports_identical": true,
+    "options_identical": true,
+    "all_other_source_bytes_identical": true,
+    "inverse_single_block_restores_base": true
+  },
+  "diagnostics": "Cached four diagnostics at 105/106/107/102 arise because broad split_ifs also split the actual Bool endpoint; the revised branches retain the original point and choose the corresponding smooth coefficient.",
+  "source_self_review": "Read complete actual source, all four cached diagnostics, exact selector definition and actual smooth-coefficient field signature. Earlier generic eventual-equality lemma and all downstream physical proofs are unchanged.",
+  "compiled": false,
+  "checkout_index_refs_CP_authority_plan_modified": false
+}

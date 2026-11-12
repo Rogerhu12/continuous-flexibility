@@ -1,0 +1,32 @@
+{
+  "kind": "reviewed_genuine_even_root_axis_finite_jet_local_bound",
+  "status": "HELD_REVIEWED_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootEvenAxisJets.lean",
+    "sha256": "b0d7b165fa08827e2b85a1b634da2cf30689bb8c35e539c25ff8bfafb1d30160",
+    "blob": "2c922e1288ef2eb351f3622ceb14e83b0057a128",
+    "lines": 138
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootEvenAxisJetsCandidateManifest.json",
+    "sha256": "6f4562e580748b05c07192485e2c074b9678d103fb1a53e7a6df83a6f37cfeed",
+    "blob": "f4adc22b60bef22dc2014e0bcb060f747ae1d6bd",
+    "lines": 60
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/RootEvenAxisJetsIndependentReview.json",
+    "sha256": "959146d0ea8dac38f98532ff726c6c2955146774428e4654b9449ec274212717",
+    "blob": "480b5d2c48fbe1747b7e2792242933fef6b067d3",
+    "lines": 71
+  },
+  "scope": [
+    "The finite positive-point Taylor argument uses only the actual closed ball centered at (x,0,theta) of radius x^(3/2). Its constant depends only on n, and both coordinate signs share the same bound.",
+    "All input jets through n at the true root bound the same finite family in some neighborhood by M+eta, by actual continuity. The radius is used only to locate shrinking balls, never as a numerical cost.",
+    "A point in the source ball is at distance at most x^(3/2)+x<=2x from the root when x<=1. Thus the positive-point bound holds on a nonempty open radial interval whose closure contains the root.",
+    "The actual smooth extension F agrees with the physical even formula on the open positive half-plane; equality of genuine ordinary jets there and continuity of those jets give the root bound. The raw totalized rootEven boundary derivative is never used.",
+    "The arbitrary positive error eta=epsilon/C is removed. The resulting C_n is fixed before G, F, theta, M and the local radius. No added high-order target bound or inverse radius premise is present."
+  ],
+  "scope_caveat": "This is a local linear operator estimate for genuine smooth extensions of the physical even formula. Odd divided-difference loss, actual material family packing and radial/height nonlinear powers are separate subsequent steps.",
+  "compiled": false,
+  "checkout_index_refs_CP_authority_plan_modified": false
+}

@@ -1,0 +1,31 @@
+{
+  "kind": "reviewed_actual_n01_uniform_root_label_jets",
+  "status": "STATICALLY_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootLabelUniformJets.lean",
+    "sha256": "26561df651f55b4376b9b9d3765d22950af06528a26c5ceda138fe458146130c",
+    "blob": "9dc5ce481f7e3cdf9c3411f0052bf446626fe9aa",
+    "lines": 182
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootLabelUniformJetsCandidateManifest.json",
+    "sha256": "984b5fce1e1e5be1d3e399e6b82f1edf39d7d210c4aa2eb188ae29ecf7e6b37c",
+    "blob": "601037ce47c7f56cc09f23d6f68faffc6f3316a9",
+    "lines": 62
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/N01RootLabelUniformJetsIndependentReview.json",
+    "sha256": "84aeaa3307cce3c39c959236bfedef60198c27c89134c4a51d0ac9ed0deecc5c",
+    "blob": "cfa4a80e442a16fee99676f3bf1867d79031b9f6",
+    "lines": 88
+  },
+  "return_provider_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01ReturnUniformPositiveJetsReviewedManifest.json",
+    "sha256": "e9c61ac5aab44304b8007f7191abf438d56657e6da2da7a05a5e7ca41f7ed220",
+    "blob": "54068df6329b819273d25db340f7cad0eb05802c",
+    "lines": 25
+  },
+  "scope": "Same original labels, true pi displacement bound at order zero, and the entire higher derivative sequence before m. Genuine OrdinaryFlowJacobianBounds stays explicit; no raw optical lower or new reference.",
+  "compiled": false,
+  "checkout_index_refs_CP_modified": false
+}

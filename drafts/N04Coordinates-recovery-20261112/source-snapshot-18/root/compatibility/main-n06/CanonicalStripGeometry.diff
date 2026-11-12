@@ -1,0 +1,22 @@
+--- src/ContinuousFlexibility/Analysis/CanonicalStripGeometry.lean
++++ src/ContinuousFlexibility/Analysis/CanonicalStripGeometry.lean
+@@ -32,13 +32,13 @@
+ /-- The upstream open-interval interface specializes the existing
+ nonzero-period strip theorem. -/
+ theorem chart_angle_mem_openInterval_iff
+-    {a b P : ℝ} {F : PolarPoint → PolarPoint} (hP : 0 < P)
+-    (hinj : InjOn F (Ioo a b ×ˢ (univ : Set ℝ)))
+-    (hcont : ContinuousOn F (Ioo a b ×ˢ (univ : Set ℝ)))
+-    (hperiod : ∀ p ∈ Ioo a b ×ˢ (univ : Set ℝ), F (p + (0, P)) = F p + (0, P))
+-    (hreflect : ∀ p ∈ Ioo a b ×ˢ (univ : Set ℝ),
++    {A : Set ℝ} {P : ℝ} {F : PolarPoint → PolarPoint} (hP : 0 < P)
++    (hinj : InjOn F (A ×ˢ (univ : Set ℝ)))
++    (hcont : ContinuousOn F (A ×ˢ (univ : Set ℝ)))
++    (hperiod : ∀ p ∈ A ×ˢ (univ : Set ℝ), F (p + (0, P)) = F p + (0, P))
++    (hreflect : ∀ p ∈ A ×ˢ (univ : Set ℝ),
+       F (p.1, -p.2) = ((F p).1, -(F p).2))
+-    {p : PolarPoint} (hp : p ∈ Ioo a b ×ˢ (univ : Set ℝ)) :
++    {p : PolarPoint} (hp : p ∈ A ×ˢ (univ : Set ℝ)) :
+     (F p).2 ∈ Ioo 0 P ↔ p.2 ∈ Ioo 0 P := by
+   exact chart_angle_mem_Ioo_iff hP.ne' hinj hcont hperiod hreflect hp
+ 

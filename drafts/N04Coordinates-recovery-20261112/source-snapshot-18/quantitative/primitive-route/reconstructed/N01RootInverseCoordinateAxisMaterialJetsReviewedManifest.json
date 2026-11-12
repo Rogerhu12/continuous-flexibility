@@ -1,0 +1,32 @@
+{
+  "kind": "reviewed_actual_normalized_root_inverse_coordinate_axis_material_jets",
+  "status": "HELD_REVIEWED_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootInverseCoordinateAxisMaterialJets.lean",
+    "sha256": "e9d3ef61f020b614b8e997f94051e1de43dc41538f3c0a11d32e69ae4925a92c",
+    "blob": "a29f80c8047e953ff0afdb58277d53a1c70fd4b1",
+    "lines": 233
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootInverseCoordinateAxisMaterialJetsCandidateManifest.json",
+    "sha256": "7a61ec1ef0ab16276bbd5bdb9b1c66a2a2d73fcb6d542d16b9e26c21846b4a83",
+    "blob": "562b09a0cd4a3223e3256152400ca2f7fb268145",
+    "lines": 93
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/N01RootInverseCoordinateAxisMaterialJetsIndependentReview.json",
+    "sha256": "fa5c4f14188b4b89f402b9a032270cebc99d3dfb5b2c1b608bd09e0fd9169251",
+    "blob": "59a7f03787927ad1bb13e5604c860508f8c0baac",
+    "lines": 93
+  },
+  "scope": [
+    "Same original n01RootLabel and actual parameterizedCircleInverse of rootFlowParameterUnscale Theta delta. No new flow or chart is selected.",
+    "Actual root stationarity gives G(0,0,theta)=the original label. Zero-order angular displacement is at most pi, independently of component, travel, strip radius and normalization.",
+    "Positive-order composition uses the true inverse spatial jets and true label jets, both chosen before the component; one fixed composition loss and common low state order work for all n.",
+    "The product reassociation is a genuine linear isometry. All constants precede state, component, actual host, factor g, strip radius R, normalization delta, selected Theta and angle.",
+    "The material scale remains C0 times E0 of the same supplied true host sample. No endpoint-to-positive-midpoint comparison is assumed."
+  ],
+  "scope_caveat": "Same-component raw optical lower remains an explicit upstream condition, and genuine OrdinaryFlowJacobianBounds is explicit. N01Properties/Through03 does not currently expose the former. This proves actual inverse-coordinate input jets on the root axis, not yet the even/odd extension or physical height tower.",
+  "compiled": false,
+  "checkout_index_refs_CP_authority_plan_modified": false
+}

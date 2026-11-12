@@ -1,0 +1,18 @@
+{
+  "label": 143,
+  "head": "597e5c478ed253d74b89cb7a077dc39a12acc44c",
+  "tree": "8b7c371e142e08a09bc8171e90d392031b1713f6",
+  "run": 43220947182,
+  "job": 131192006423,
+  "status": "failure",
+  "quick_check": "failure",
+  "full_build": "skipped",
+  "blueprint": "skipped",
+  "checked_at": "2026-11-12 12:52:21 UTC",
+  "log": "n04-ci-143.log",
+  "log_sha256": "14c51d68c4b520fc4537bda1363af378ff2885d764f63be0d32cfb863f0d0d90",
+  "compiled_project_modules": 4,
+  "raw_olean_counter": 4183,
+  "source_all_total": 3681,
+  "raw_olean_counter_caveat": "The restored main cache now includes newly integrated N06 modules absent from this checkout. This raw object count exceeds source inventory and is not a current-head compiled-module count or a completed full build."
+}

@@ -1,0 +1,55 @@
+{
+  "kind": "candidate_actual_fixed_reference_principal_cubic_division",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualReferenceGaugeCubicDifference.lean",
+    "sha256": "1f84b04583f12c2fe8b65a580d193f4219ffe80fdf836b9e96a37e69a754e45f",
+    "blob": "09c3aa89f0a40319f2da0601fcc034ecc3d8b86d",
+    "lines": 111
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualReferenceGaugeEndpointJets.lean",
+      "sha256": "fdc1fe254979e937aaff78852ad6142a4ecd2fefff1751f29b859cab444b7d47",
+      "blob": "99441781ed5a0d0a42aac13fd7c07ab71180b3a1",
+      "lines": 95
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalDifferenceExtension.lean",
+      "sha256": "7d687b01cef7a585fd2782b613ff13fa3c770175bc4efd3f1f4a6a65d3b7b4e7",
+      "blob": "c26be1c71e89eaf379777a3c700a82fd88aef2a4",
+      "lines": 85
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/IntervalCubicGermDivision.lean",
+      "sha256": "9fdc1286df823061bbdf32d934a857a869e19e32520a5fc0a3a7ffc7f735ce8d",
+      "blob": "9035998ff42569232066dc38443ca668f60e5c27",
+      "lines": 102
+    }
+  ],
+  "reviewed_inputs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualReferenceGaugeEndpointJetsReviewedManifest.json",
+      "sha256": "635d6d09305c9437dd4aa6f669e87df8740fc6da1a5a2b5e2fcfe1c8f09f1936",
+      "blob": "b2900f742609ec0677e788c5df5521447b7e87af",
+      "lines": 30
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalDifferenceExtensionReviewedManifest.json",
+      "sha256": "72e5519b467ec24e41c2a2bfb7ba334ae1e314bf3d81094b97efac3d12bed991",
+      "blob": "05b31bba9e92ccb5a92df1844a9b769f1b339855",
+      "lines": 30
+    }
+  ],
+  "public_declarations": [
+    "n04Coordinates_referenceGaugePrincipal_cubic_difference"
+  ],
+  "scope": [
+    "Both actual current/reference fields are evaluated in the same fixed positive reference gauge.",
+    "Actual endpoint finite matching implies the zero radial jets of orders zero, one and two at both canonical endpoints.",
+    "The same actual numerator has a smooth global representative by its true closed-cylinder germs; the two-endpoint quotient gives actual factorization and the numerator-based six-radial-derivative bound M/36.",
+    "Both physical endpoints are required to be interior. No material numerator bound or final N04c estimate is assumed or asserted."
+  ],
+  "compiled": false,
+  "checkout_index_refs_modified": false
+}

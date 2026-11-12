@@ -1,0 +1,25 @@
+{
+  "kind": "reviewed_CI143_owned_positive_reference_jet_selector_repair",
+  "status": "STATICALLY_REVIEWED_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair143/CanonicalWholePositiveReferenceJets.lean",
+    "sha256": "2b249412298b83bdf50d296b7585fbcca9f8f1c084b0cb05dba3ed711d907784",
+    "blob": "ffa931131ef09cea066a91b46f554d6240fefbae",
+    "lines": 153
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair143/CanonicalWholePositiveReferenceJetsCI143RepairCandidateManifest.json",
+    "sha256": "efbc8f95146ca4840ba20867e122628939540e5bb82b02290f26cc6a4b24214e",
+    "blob": "0fdc060cec021a4c1b1a0d5b65ee925e0972c544",
+    "lines": 58
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI143WholeAtlasThreeRepairsIndependentReview.json",
+    "sha256": "a8f1b638e108c6a115a3cca9c0045d85a5b435978a32ffb0e4e5f2d1659b957b",
+    "blob": "5f71610f9ee461c639e1b062dd8c54728cb5c1b2",
+    "lines": 213
+  },
+  "review_scope": "The CanonicalWholePositiveReferenceJets row in the unified independent review; only exact v=0/v=1 selector branching, original Bool root endpoint remains unchanged.",
+  "compiled": false,
+  "checkout_index_refs_CP_modified": false
+}

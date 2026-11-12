@@ -1,0 +1,55 @@
+{
+  "kind": "radial_gauge_actual_principal_difference_extension_independent_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "passed_static_full_source_and_actual_providers",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalDifferenceExtensionCandidateManifest.json",
+    "sha256": "243e72c5cdb62e2f5db1b0c5675a31554ee948b45d29b7769c05a0dd2d215849",
+    "blob": "9700bb300297579978b6b742c7fc8d0bbd624617",
+    "lines": 47
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalDifferenceExtension.lean",
+    "sha256": "7d687b01cef7a585fd2782b613ff13fa3c770175bc4efd3f1f4a6a65d3b7b4e7",
+    "blob": "c26be1c71e89eaf379777a3c700a82fd88aef2a4",
+    "lines": 85
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalFiniteJets.lean",
+      "sha256": "80cdd212e2e550da19280ac5eec2011695831fa4f43f64dcacd701c63a985e29",
+      "blob": "3a43ccceb3f82270ebdde43087111bd569cdab5f",
+      "lines": 105
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositivePrincipalExtension.lean",
+      "sha256": "fca39fba34350c9038c61e3d01d0734115b645661c13459b66dcb072053c1539",
+      "blob": "69deb030e2bde13dd8325dc55b7f5ad7f0db5f2a",
+      "lines": 114
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "lines": 168
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveCanonicalFields.lean",
+      "sha256": "c26cd518553a29e68647291f463bbd0b271500dd9620ea0735280f2d0a8773b2",
+      "blob": "0fb940e74988b8ccf40f317447993147847713eb",
+      "lines": 169
+    }
+  ],
+  "checks": [
+    "Read the complete 85-line candidate and complete 114-line actual physical difference extension, together with the 105-line common-gauge coefficient/finite-jet provider.",
+    "The same hG gives scalar Y/H0 smoothness and actual positive derivative. Its inverse_maps_closed sends each actual canonical p in [0,1] times R to the closed physical component, exactly the point required by the physical extension germ.",
+    "The constructed global representative is M_v(p)*F_v(chi(p)) with the actual radialGaugePrincipalMultiplier and the same true inverse chi. Smoothness follows by ordinary product/composition with those supplied actual functions.",
+    "The germ at chi(p) is pulled back using continuity of the same chi at p. Both actual principal fields use the common Y/H0 multiplier. The reference relative identity is used only to replace the reference relative coefficient by A0.",
+    "The final two pointwise coefficient formulas and pulled-back germ give M*(current-reference)=M*current-M*reference; the scalar ring step changes no coefficient function, chart, height, inverse, source or point.",
+    "Strict buffered physical endpoints are explicit inputs. No ambient, material, endpoint-zero-jet or final primitive claim is added."
+  ],
+  "compiled": false,
+  "source_modified_by_reviewer": false,
+  "checkout_index_refs_modified": false,
+  "ci_queried_or_downloaded": false
+}

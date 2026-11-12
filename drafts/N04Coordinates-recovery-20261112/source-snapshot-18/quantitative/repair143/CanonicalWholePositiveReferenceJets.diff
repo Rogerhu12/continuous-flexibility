@@ -1,0 +1,21 @@
+--- before/src/ContinuousFlexibility/Analysis/CanonicalWholePositiveReferenceJets.lean
++++ after/src/ContinuousFlexibility/Analysis/CanonicalWholePositiveReferenceJets.lean
+@@ -100,11 +100,13 @@
+   have hAi : ContDiffAt ℝ ∞
+       (canonicalCoefficientComponent v (L.coefficients (C.referenceState, 0)))
+       (if side then C.right m else C.left m, θ) := by
+-    unfold canonicalCoefficientComponent
+-    split_ifs
+-    · exact hA.1.contDiffAt hnhds
+-    · exact hA.2.1.contDiffAt hnhds
+-    · exact hA.2.2.contDiffAt hnhds
++    by_cases hv0 : v = 0
++    · simpa only [canonicalCoefficientComponent, if_pos hv0] using hA.1.contDiffAt hnhds
++    · by_cases hv1 : v = 1
++      · simpa only [canonicalCoefficientComponent, if_neg hv0, if_pos hv1] using
++          hA.2.1.contDiffAt hnhds
++      · simpa only [canonicalCoefficientComponent, if_neg hv0, if_neg hv1] using
++          hA.2.2.contDiffAt hnhds
+   refine ⟨hmatch.right_smooth, hAi, ?_⟩
+   intro k hk
+   exact (hmatch.jets k hk).symm.trans

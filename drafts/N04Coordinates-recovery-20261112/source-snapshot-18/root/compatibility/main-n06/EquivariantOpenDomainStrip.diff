@@ -1,0 +1,22 @@
+--- src/ContinuousFlexibility/Analysis/EquivariantOpenDomainStrip.lean
++++ src/ContinuousFlexibility/Analysis/EquivariantOpenDomainStrip.lean
+@@ -20,13 +20,13 @@
+ full source strip preserves the fundamental angular interval in both
+ directions. Its image need not be a radial strip. -/
+ theorem chart_angle_mem_Ioo_iff
+-    {a b P : ℝ} {G : PolarPoint → PolarPoint} (hP : P ≠ 0)
+-    (hinj : InjOn G (Ioo a b ×ˢ (univ : Set ℝ)))
+-    (hcont : ContinuousOn G (Ioo a b ×ˢ (univ : Set ℝ)))
+-    (hperiod : ∀ p ∈ Ioo a b ×ˢ (univ : Set ℝ), G (p + (0, P)) = G p + (0, P))
+-    (hreflect : ∀ p ∈ Ioo a b ×ˢ (univ : Set ℝ),
++    {A : Set ℝ} {P : ℝ} {G : PolarPoint → PolarPoint} (hP : P ≠ 0)
++    (hinj : InjOn G (A ×ˢ (univ : Set ℝ)))
++    (hcont : ContinuousOn G (A ×ˢ (univ : Set ℝ)))
++    (hperiod : ∀ p ∈ A ×ˢ (univ : Set ℝ), G (p + (0, P)) = G p + (0, P))
++    (hreflect : ∀ p ∈ A ×ˢ (univ : Set ℝ),
+       G (p.1, -p.2) = ((G p).1, -(G p).2))
+-    {p : PolarPoint} (hp : p ∈ Ioo a b ×ˢ (univ : Set ℝ)) :
++    {p : PolarPoint} (hp : p ∈ A ×ˢ (univ : Set ℝ)) :
+     (G p).2 ∈ Ioo 0 P ↔ p.2 ∈ Ioo 0 P := by
+   let f : ℝ → ℝ := fun θ => (G (p.1, θ)).2
+   have hf : Continuous f := by

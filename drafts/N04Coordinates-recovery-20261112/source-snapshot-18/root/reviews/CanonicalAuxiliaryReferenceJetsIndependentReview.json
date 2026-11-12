@@ -1,0 +1,59 @@
+{
+  "kind": "independent_full_source_actual_auxiliary_reference_adapter_review",
+  "reviewer": "/root",
+  "author": "/root/audit_coordinates",
+  "result": "passed_static_full_source_and_actual_provider_review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalAuxiliaryReferenceJets.lean",
+    "sha256": "53646d7d69f62c0f132e8ae68e1ceeb0f8bd3ddabd89117dfd20f5af9fede39c",
+    "blob": "9a16fdb05086007f6c72692fce2e50b0acc58e30",
+    "lines": 132
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalAuxiliaryReferenceJetsCandidateManifest.json",
+    "sha256": "f98fe6fb8a92df1083eb4ad8203d8ab340f1e8fc568df16751d63455e00ba02d",
+    "blob": "88f749bd08c315b7b42df466c24e33087b7b1d48",
+    "lines": 65
+  },
+  "providers": [
+    {
+      "module": "CanonicalSinglePieceReferenceBounds",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalSinglePieceReferenceBounds.lean",
+      "blob": "0faf674e011dad24acc0cc1bc818e9b012b68bc4",
+      "sha256": "1814bf57a8cda13d340f7fd315bedf5ec68d8a192aa0da9914b22f9bfdf160f9"
+    },
+    {
+      "module": "BufferedAuxiliaryColumnWitness",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/BufferedAuxiliaryColumnWitness.lean",
+      "blob": "0c7fdb43f9427a38602e91da42f8c0fe272f3f67",
+      "sha256": "81a2dc394820b074a3d70336184f668c9c4fc830d7a1cfaa57b2cf6cc3af5b74"
+    },
+    {
+      "module": "MaterialEnvelopeNormalization",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "blob": "4523f8385550033058d8f7593f8a397a33157576",
+      "sha256": "5f73ab50c8dd436e8bfd4039f30722eaba68cbc77bcc862efff43251faff88e7"
+    },
+    {
+      "module": "WholeReferenceGaugeAtlasData",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a"
+    }
+  ],
+  "checks": [
+    "Read all 132 adapter lines and the actual single-piece bound contract, buffer ordered endpoints, same-atlas positive field projections, atom definition, height decoding regularity and all consumed material-enlargement contracts.",
+    "The original buffered Icc is sent to the actual index e.symm(inr i) using exactly the same positive atlas metadata. Both strict endpoint inequalities follow from the same buffer order and actual support interval.",
+    "The source is exactly (S.height (3/4)).decode S.psi. The radial condition and support are retained inputs for this same psi; the single-piece theorem supplies the actual open-strip smoothness, periodicity and all finite mixed constants, uniform over every piece.",
+    "The final construction explicitly returns enlargedMaterialData T and the existing proved IsMaterialData, IsPhysicalSpaces and Through03 preservation for the same S/C/R/L. The auxiliary atom is definitionally independent of the changed E0 field, so the actual function and grading data are retained.",
+    "The scaled lower floor is proved for the new E0 at the original sample, from actual sample interval membership. coefficientEnvelope_pack C0 0 yields the exact common coefficient/exponent B in B*E0(sample)^B; no floor for old E0 is silently assumed.",
+    "All source/provider blobs and SHA256 bindings checked; exact installed public-name scan has no collision. The separately authored 202-line single-piece theorem is a retained uncompiled dependency with its own independent review pending."
+  ],
+  "limitations": [
+    "Static review only; no compilation or elaboration.",
+    "This supplies only the auxiliary-column slice of ReferenceJets, for the explicit material enlargement. It does not assert the complete canonical primitive certificate."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_modified": false
+}

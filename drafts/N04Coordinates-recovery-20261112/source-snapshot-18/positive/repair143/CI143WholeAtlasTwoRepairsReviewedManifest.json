@@ -1,0 +1,81 @@
+{
+  "kind": "ci143_reviewed_actual_whole_atlas_two_repairs",
+  "owner": "/root/proof_inventory",
+  "status": "HELD_UNCOMPILED_STATICALLY_REVIEWED",
+  "actual_head": "597e5c478ed253d74b89cb7a077dc39a12acc44c",
+  "actual_tree": "8b7c371e142e08a09bc8171e90d392031b1713f6",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair143/CI143WholeAtlasTwoRepairsCandidateManifest.json",
+    "sha256": "508c0f90bdc625ffd9916d841d365f1e561f29894fdea52751edd0420fd044a1",
+    "blob": "da137832adddcb688a29acefbc522fe7713e35bb",
+    "lines": 105
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI143WholeAtlasThreeRepairsIndependentReview.json",
+    "sha256": "a8f1b638e108c6a115a3cca9c0045d85a5b435978a32ffb0e4e5f2d1659b957b",
+    "blob": "5f71610f9ee461c639e1b062dd8c54728cb5c1b2",
+    "lines": 213
+  },
+  "rows": [
+    {
+      "module": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasCuts.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair143/WholeCanonicalAtlasCuts.base.lean.txt",
+        "sha256": "d60353a33b319ab316cc5eb7f0f37803c85e0a3ca5182c4b15e72dd3e001b46b",
+        "blob": "7806004198795023f90728e9f100dde0ab4d035f",
+        "lines": 70
+      },
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair143/WholeCanonicalAtlasCuts.lean",
+        "sha256": "4bb1d9bdf307bb29e05c9ec8f7765aee320a5b0db39fcc12b8e04f22b97ebd96",
+        "blob": "8a0a0ea0915b84df510b40e284c8fceaec96b179",
+        "lines": 95
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair143/WholeCanonicalAtlasCuts.diff",
+        "sha256": "f134e3d960f7834be78b431e8648e50632b0093f67029b4eb0b3d6013947f318",
+        "blob": "1460971764857f43281b90440ce20e1727ff0b3f",
+        "lines": 57
+      },
+      "before_blob": "7806004198795023f90728e9f100dde0ab4d035f",
+      "after_blob": "8a0a0ea0915b84df510b40e284c8fceaec96b179",
+      "full_public_headers_unchanged": true,
+      "imports_unchanged": true,
+      "options_unchanged": true,
+      "literal_replacements": 2,
+      "reverse_exact": true
+    },
+    {
+      "module": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasReferencePartition.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair143/WholeCanonicalAtlasReferencePartition.base.lean.txt",
+        "sha256": "ccb22e2134e8d8b62ff8fec06b31cc7f1356b853db42f48b67dcaed65bb2dd0a",
+        "blob": "5f68cbf1b0dafa6f237d9071b2ed912954b51123",
+        "lines": 92
+      },
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair143/WholeCanonicalAtlasReferencePartition.lean",
+        "sha256": "1208378855ce36f5185958a40b485ddd1f6faca3e4123ae3e6c6140acbf61207",
+        "blob": "11142364a13b1664c4d627be253d52f47dcf5edf",
+        "lines": 91
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair143/WholeCanonicalAtlasReferencePartition.diff",
+        "sha256": "df949b3d3d4fe007af4fe8b185b2f047ed69ea4acd051718f1a1d3ebf8ada609",
+        "blob": "f5c9ce4870b07db2b142eb3295689f93eddd2ce9",
+        "lines": 10
+      },
+      "before_blob": "5f68cbf1b0dafa6f237d9071b2ed912954b51123",
+      "after_blob": "11142364a13b1664c4d627be253d52f47dcf5edf",
+      "full_public_headers_unchanged": true,
+      "imports_unchanged": true,
+      "options_unchanged": true,
+      "literal_replacements": 1,
+      "reverse_exact": true
+    }
+  ],
+  "source_unchanged_after_review": true,
+  "compiled": false,
+  "checkout_index_refs_modified": false,
+  "previous_repair_status": "The CI142 partial-definition expansion attempt is preserved as history and is not claimed successful. These candidates address the subsequent actual CI143 diagnostics."
+}

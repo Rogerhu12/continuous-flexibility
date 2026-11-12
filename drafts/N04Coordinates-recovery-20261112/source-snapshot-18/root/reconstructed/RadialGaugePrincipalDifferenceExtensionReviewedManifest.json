@@ -1,0 +1,30 @@
+{
+  "kind": "reviewed_actual_fixed_radial_gauge_principal_difference_closed_germs",
+  "status": "HELD_REVIEWED_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalDifferenceExtension.lean",
+    "sha256": "7d687b01cef7a585fd2782b613ff13fa3c770175bc4efd3f1f4a6a65d3b7b4e7",
+    "blob": "c26be1c71e89eaf379777a3c700a82fd88aef2a4",
+    "lines": 85
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalDifferenceExtensionCandidateManifest.json",
+    "sha256": "243e72c5cdb62e2f5db1b0c5675a31554ee948b45d29b7769c05a0dd2d215849",
+    "blob": "9700bb300297579978b6b742c7fc8d0bbd624617",
+    "lines": 47
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/RadialGaugePrincipalDifferenceExtensionIndependentReview.json",
+    "sha256": "2c32c82f975f6c0932a623ce385ab33e196469abe86808fc2bcc08e3c64d4071",
+    "blob": "35eb7138512402d64145463a558e9d79b987ff87",
+    "lines": 55
+  },
+  "scope": [
+    "The actual physical coefficient difference receives the same fixed radial inverse and exact scalar principal multiplier.",
+    "The actual range geometry maps the entire closed canonical cylinder into the closed physical component, retaining both endpoint germs.",
+    "The smooth representative uses the existing physical coefficient cutoff only; the chosen chart, inverse, relative height and reference data are unchanged.",
+    "The output germ is the displayed current minus displayed reference principal coefficient, not a different normal form."
+  ],
+  "compiled": false,
+  "checkout_index_refs_modified": false
+}

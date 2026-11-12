@@ -1,0 +1,62 @@
+[
+  {
+    "module": "ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity",
+    "proposal_blob": "3ba8a57f4c89b91f24c918f32a8eea3d9460c910",
+    "current_blob": "7a3122c1e2c2081375a7be7405a2a348706ed261",
+    "merged_blob": "7a3122c1e2c2081375a7be7405a2a348706ed261"
+  },
+  {
+    "module": "ContinuousFlexibility.Analysis.CanonicalBoundaryImage",
+    "proposal_blob": "3234b236bcd07cbda8f5a3c58911b8451f6bf720",
+    "current_blob": "3234b236bcd07cbda8f5a3c58911b8451f6bf720",
+    "merged_blob": "aab2c515bfb3559cf3cdb4099664ee635ba55acf"
+  },
+  {
+    "module": "ContinuousFlexibility.Analysis.CanonicalStripGeometry",
+    "proposal_blob": "e5f9d2ddce6e9251e057aafbadef0e11f6b59979",
+    "current_blob": "e5f9d2ddce6e9251e057aafbadef0e11f6b59979",
+    "merged_blob": "8414a47460b602309aea49d2a58dfda9ed59867b"
+  },
+  {
+    "module": "ContinuousFlexibility.Analysis.EquivariantOpenDomainStrip",
+    "proposal_blob": "80381f2ebf7947e2be3a11ad948c40e748375dd4",
+    "current_blob": "80381f2ebf7947e2be3a11ad948c40e748375dd4",
+    "merged_blob": "73dc6ec89993d66b87089de125fc9ee52aad2242"
+  },
+  {
+    "module": "ContinuousFlexibility.Analysis.ReflectionStripGeometry",
+    "proposal_blob": "9a188ce86595bb07ca245ada4fa690f044e00451",
+    "current_blob": "9a188ce86595bb07ca245ada4fa690f044e00451",
+    "merged_blob": "d28b9f63d2861a32f1968b21a0196953804daec4"
+  },
+  {
+    "module": "ContinuousFlexibility.Analysis.WholeCanonicalAtlasCuts",
+    "proposal_blob": "f7fb03e39c681fe28833d7b5aae54807c57fa0c8",
+    "current_blob": "8a0a0ea0915b84df510b40e284c8fceaec96b179",
+    "merged_blob": "8a0a0ea0915b84df510b40e284c8fceaec96b179"
+  },
+  {
+    "module": "ContinuousFlexibility.Analysis.WholeCanonicalAtlasData",
+    "proposal_blob": "c6abe2dcedd1974e7ec231275a17f869c0faed3b",
+    "current_blob": "c3a5f79617c7e583e16deb09c44e5679744ea092",
+    "merged_blob": "c3a5f79617c7e583e16deb09c44e5679744ea092"
+  },
+  {
+    "module": "ContinuousFlexibility.Analysis.WholeCanonicalAtlasOperator",
+    "proposal_blob": "4e74be6d5d2495499be2d13f1b908e6a49b1226c",
+    "current_blob": "7b18e1768744c85463cf9979c8a4d1a309a6033e",
+    "merged_blob": "7b18e1768744c85463cf9979c8a4d1a309a6033e"
+  },
+  {
+    "module": "ContinuousFlexibility.Analysis.WholeCanonicalAtlasPrincipalDensity",
+    "proposal_blob": "052931f3d9b1717a4ac479ee6e88ec7e1d701b71",
+    "current_blob": "a6e08b84cd66524d8f53399071d3a116adbf626e",
+    "merged_blob": "a6e08b84cd66524d8f53399071d3a116adbf626e"
+  },
+  {
+    "module": "ContinuousFlexibility.Analysis.WholeCanonicalAtlasReferencePartition",
+    "proposal_blob": "c5e704c5f367c931fe0873999744fbe2a854f473",
+    "current_blob": "11142364a13b1664c4d627be253d52f47dcf5edf",
+    "merged_blob": "11142364a13b1664c4d627be253d52f47dcf5edf"
+  }
+]
