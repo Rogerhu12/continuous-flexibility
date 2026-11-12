@@ -1,0 +1,124 @@
+{
+  "kind": "actual_negative_reference_height_profile_product_and_inverse_composition_candidate",
+  "owner": "/root/audit_coordinates",
+  "status": "HELD_UNCOMPILED_AWAITING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightProfileJets.lean",
+    "sha256": "3f5469853c612cf6e08dcc38a4bebd0b48e25efce4e978768129496c77abd607",
+    "blob": "b91d53b6530be55909d6ffa3ea259760dfef25d0",
+    "lines": 215,
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceHeightProfileJets.lean"
+  },
+  "public_declarations": [
+    "n04bActualTypedAtlas_reference_half_heightProfile_material_jets"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceGeometryFields.lean",
+      "sha256": "17eb137b0c746f4ff44388b842b068a2745a96e99940de71667b75ffc8abbb52",
+      "blob": "9f46123e9067e42a31444649e6392ba3d0bae493",
+      "lines": 124
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightMaterialJets.lean",
+      "sha256": "bda1d2cda9e6c88c394819233f9606026e417e03a5c357cb6aab76ab7da8d383",
+      "blob": "20423f5dc8e83101d8950003cb5454bf3def9007",
+      "lines": 293
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceInverseMaterialJets.lean",
+      "sha256": "ba704d27a5edf8f0f8a7bcf9eefba41d7f440f982f4dd8622daf25c3949e1eae",
+      "blob": "777b7bac04467e51554377f80235b6b55efbb9ce",
+      "lines": 207
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferenceScalarInverse.lean",
+      "sha256": "84346b8a1836363f9b0fdbe48a93c75b42deaa144beea6fe8e0bf32d2faffa3e",
+      "blob": "532d3bc282c59cd7c96647db57d037efbd9f42a4",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeMaterialSamples.lean",
+      "sha256": "696583df4d5261aff78e5a6cc32ff4fde06ea6d17b2bdf2745805fde0a06c2fc",
+      "blob": "2546c07212cf569a225e873eb38945a9cb4127e3",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJets.lean",
+      "sha256": "52e91e6500606231c499fcd3863d9b2f9ca99535348f52e9abc8f15b139b8e23",
+      "blob": "6fbfba9f7a349a6604eb28473b5098a5f45a3e1f",
+      "lines": 103
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.lean",
+      "sha256": "9bd854157a276a4c5fd8d3161f63d65a851fedbc656beba959ad5899e89cb5a7",
+      "blob": "4df4d9e114ae59bd99b5d3c09825adc95dbe3808",
+      "lines": 159
+    }
+  ],
+  "selected_provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceGeometryFieldsReviewedManifest.json",
+      "sha256": "b889b812d707d5dcac345870030d67ea0255fb027180e9a361717c69b19a4027",
+      "blob": "9cca81df03404d340125ce607eb1bec6e9ffcfa4",
+      "lines": 64
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightMaterialJetsReviewedManifest.json",
+      "sha256": "637ef52639e1a5b1931946ab387f07c59961d9841735d7c694650709014c6799",
+      "blob": "5bfb4d8c935777c2dab8f22de4ece2fb88cf858c",
+      "lines": 88
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceInverseMaterialJetsReviewedManifest.json",
+      "sha256": "8673113760c3d0eeeec6cd2513e2b3863e1e74b80ae2e5c1a9a32eb50e8c7e28",
+      "blob": "fa8f75e002ad16d85437327dd0cf0f64d0f15690",
+      "lines": 44
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePartANamespaceReviewedManifest.json",
+      "sha256": "1a16f2e8437ce8eb96ae2f3898479ac42753411f92260ec4343ba4fb31f7c23c",
+      "blob": "3edbaa3198a4e7d4975614969f0be033e7ec5a61",
+      "lines": 109
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeMaterialSamplesReviewedManifest.json",
+      "sha256": "c296199c9dec8bfd1cf7f5ba7d3540a783ce6d0f6043ee58c41bdce59e5e6729",
+      "blob": "c3770c51f99a3a4a734213541f7b04436263350c",
+      "lines": 54
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJetsReviewedManifest.json",
+      "sha256": "16b143562879d7afa35191e4a5850af9407223fed8af59136062433a67906846",
+      "blob": "d45cce809854a44f29de33bf413d6d46afcb51e7",
+      "lines": 34
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelopeVisibilityReviewedManifest.json",
+      "sha256": "55e1f9fe0d0e8e16ec596a3bebb948de20821dc3d05675dfaf382d4eb1901984",
+      "blob": "2ff192a92ea67f4a7a301b651ece487da37125e0",
+      "lines": 46
+    }
+  ],
+  "mathematical_checks": [
+    "C0=CH+CI combines only numerical sample scales and precedes the real height exponent, profile/reciprocal Bool, order, piece, host and evaluation point. The stored height and inverse are unchanged.",
+    "The profile finite prefix uses ordinary smoothness on the fixed compact annulus. Reciprocal-profile derivatives use the actual open-core bound followed by the exact old-half sample transport, not ambient compactness.",
+    "For each finite order, real powers of the actual height are smooth at the true half point because the stored height is positive there. No ambient smooth extension is assumed.",
+    "Leibniz gives CP*M^2 for the physical product; the partition composition envelope uses only positive actual inverse jets and gives CC*CP*M^(N+2). The inverse value is used only through its true MapsTo into the same half.",
+    "The finite-prefix envelope and real-power packing are uniform before all piece and true-host choices; original E0 only positive, while C0*E0 has the proved floor.",
+    "Raw optical host j and old typed K.cell remain distinct, and the raw optical lower bound is explicit until the same retained construction supplies it.",
+    "One private compact-prefix helper is byte-equivalent after renaming to the previously reviewed negativePotential_profile_prefix helper; no compiler, elaborator, CI or active-source mutation was run."
+  ],
+  "budget": {
+    "root_authorized_new_lean_lines": 550,
+    "this_source_lines": 215,
+    "remaining_new_lean_lines": 335
+  },
+  "collision_check": {
+    "scope": "all current active src Lean declarations",
+    "matches": []
+  },
+  "compiled": false,
+  "active_modified": false,
+  "created_at_utc": "2026-11-12T18:06:10.767482+00:00"
+}

@@ -79,20 +79,54 @@ jobs:
             id=$(gh run list -R "$GITHUB_REPOSITORY" --branch "$line" --commit "$head" --status success               --limit 1 --json databaseId --jq '.[0].databaseId // empty' || true)
             if [ -z "$id" ]; then echo "$line @${head:0:8}: no green run"; continue; fi
             dir="$RUNNER_TEMP/line-build-$id"
-            if gh run download "$id" -R "$GITHUB_REPOSITORY" -n lake-build-line -D "$dir"; then
-              tar --zstd -xf "$dir/lake-build.tar.zst"
+            for try in 1 2 3; do
+              [ -f "$dir/lake-build.tar.zst" ] && break
+              rm -rf "$dir"
+              gh run download "$id" -R "$GITHUB_REPOSITORY" -n lake-build-line -D "$dir" || sleep 10
+            done
+            if [ -f "$dir/lake-build.tar.zst" ] && tar --zstd -xf "$dir/lake-build.tar.zst"; then
               echo "$line @${head:0:8}: reused the build of run $id"
             else
-              echo "$line @${head:0:8}: run $id has no build artifact"
+              echo "::warning::$line @${head:0:8}: the build artifact of run $id could not be used"
             fi
           done
+      - name: Reuse the build of the line this branch was cut from
+        # A branch can read only its own caches and main's. A branch without its own entry
+        # (e.g. a new line cut from another line's head) extracts the packed build of the
+        # newest line run whose head is one of its recent commits; its own entry, once it
+        # exists, replaces this layer.
+        if: github.ref_name != 'main' && !startsWith(github.ref_name, 'integrate/')
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PREFIX: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~
+        run: |
+          own=$(gh cache list -R "$GITHUB_REPOSITORY" --key "$PREFIX" --limit 1 --json key --jq '.[0].key // empty' || true)
+          if [ -n "$own" ]; then echo "own cache entry exists ($own)"; exit 0; fi
+          for sha in $(git log -60 --format=%H); do
+            id=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$sha&per_page=30"               --jq '[.workflow_runs[] | select(.name == "Build" and .status == "completed" and .conclusion != "cancelled" and (.head_branch | startswith("line/")))][0].id // empty' || true)
+            [ -n "$id" ] || continue
+            dir="$RUNNER_TEMP/line-build-$id"
+            for try in 1 2 3; do
+              [ -f "$dir/lake-build.tar.zst" ] && break
+              rm -rf "$dir"
+              gh run download "$id" -R "$GITHUB_REPOSITORY" -n lake-build-line -D "$dir" || sleep 10
+            done
+            if [ -f "$dir/lake-build.tar.zst" ] && tar --zstd -xf "$dir/lake-build.tar.zst"; then
+              echo "reused the build of run $id (head ${sha:0:8})"
+              exit 0
+            fi
+            echo "run $id (head ${sha:0:8}) has no usable build artifact"
+          done
+          echo "no line build among the last 60 commits"
       - name: Restore project build artifacts
         # Layer 2, on line branches only: this branch's own entry (one per branch;
         # the previous one is deleted when a new one is saved). Lake rebuilds any
-        # module whose trace no longer matches, so the layering is safe. Without an
-        # own entry the newest entry of any branch is used. `~` separates the branch
-        # from the commit because git forbids it in branch names, so the prefix of
-        # line/R10a does not match line/R10a-Inner.
+        # module whose trace no longer matches, so the layering is safe. `~` separates
+        # the branch from the commit because git forbids it in branch names, so the
+        # prefix of line/R10a does not match line/R10a-Inner. There is no fallback to
+        # other entries: main's is layer 1, and restoring it again would overwrite the
+        # reused line build.
         if: github.ref_name != 'main'
         id: restore
         uses: actions/cache/restore@v4
@@ -101,7 +135,6 @@ jobs:
           key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~${{ github.sha }}
           restore-keys: |
             lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~
-            lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-
       - name: Report which cache was restored
         run: |
           echo "main layer = ${{ steps.restore-main.outputs.cache-matched-key }}"
@@ -139,6 +172,7 @@ jobs:
           fi
           exit "$status"
       - name: Build every library
+        id: build
         shell: bash
         run: |
           set -o pipefail
@@ -160,21 +194,33 @@ jobs:
             status=1
           fi
           exit "$status"
-      - name: Delete this branch's previous build cache
-        if: always()
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-          PREFIX: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~
-        run: |
-          gh cache list -R "$GITHUB_REPOSITORY" --key "$PREFIX" --limit 100 --json id --jq '.[].id' |
-            while read -r id; do gh cache delete "$id" -R "$GITHUB_REPOSITORY" || true; done
       - name: Save project build artifacts
-        if: always()
+        # Save first, delete older entries only after the save succeeded, so a cancelled
+        # or failed run never leaves the branch without a cache. Only a run whose cache
+        # layers were fully restored saves: a run cancelled while restoring has a partial
+        # or missing .lake/build, and saving it would replace the branch's good entry.
+        # Main saves only a complete build: the key of main's entry tells later runs which
+        # merged lines it already covers.
+        id: save
+        if: >-
+          always() && steps.restore-main.outcome == 'success' &&
+          ((github.ref_name == 'main' && steps.build.outcome == 'success') ||
+           (github.ref_name != 'main' && steps.restore.outcome == 'success'))
+        continue-on-error: true
         uses: actions/cache/save@v4
         with:
           path: .lake/build
           key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~${{ github.sha }}
+      - name: Delete this branch's older build caches
+        if: always() && steps.save.outcome == 'success'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PREFIX: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~
+          KEEP: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~${{ github.sha }}
+        run: |
+          gh cache list -R "$GITHUB_REPOSITORY" --key "$PREFIX" --limit 100 --json id,key             --jq '.[] | select(.key != $ENV.KEEP) | .id' |
+            while read -r id; do gh cache delete "$id" -R "$GITHUB_REPOSITORY" || true; done
       - name: Count compiled modules
         if: always()
         shell: bash
@@ -201,15 +247,16 @@ jobs:
             echo "::warning::release lake-cache does not exist; the compiled build was not published"
           fi
       - name: Pack this line's build for main
-        # Main downloads it when it merges this exact head (see above).
-        if: startsWith(github.ref_name, 'line/') && success()
+        # Main downloads it (green runs only) when it merges this exact head; the build of a
+        # failed run is kept too, so the lead can download it and compile files locally.
+        if: startsWith(github.ref_name, 'line/') && !cancelled()
         shell: bash
         run: |
           find .lake/build/ir -name '*.setup.json' -delete 2>/dev/null || true
           tar --zstd -cf lake-build.tar.zst .lake/build
           ls -lh lake-build.tar.zst
       - uses: actions/upload-artifact@v4
-        if: startsWith(github.ref_name, 'line/') && success()
+        if: startsWith(github.ref_name, 'line/') && !cancelled()
         with:
           name: lake-build-line
           path: lake-build.tar.zst

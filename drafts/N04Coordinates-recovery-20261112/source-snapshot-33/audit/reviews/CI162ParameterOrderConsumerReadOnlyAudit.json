@@ -1,0 +1,367 @@
+{
+  "kind": "parameter_order_consumer_read_only_audit",
+  "status": "READ_ONLY_INTERFACE_AUDIT_NOT_COMPILATION_OR_REPAIR_APPROVAL",
+  "reviewer": "/root/audit_coordinates",
+  "baseline": {
+    "commit": "e6f0123c8cc5958988184914abf8ca6e27a75b12",
+    "tree": "d0737dd159074aa8fa622ab6c8df27680614be6c",
+    "active_lean_source_count": 4218
+  },
+  "scope": [
+    "All active source searches for returnCorrectedMinusSpeed_error_radial_small, ReturnCorrectionSmallness and new ordinary-flow parameter-loss interfaces.",
+    "Full reads of directly affected consumers and recursive checks of public changed-result consumers, whole-bound aliases, long N01 tail projections and thirteen-field N01 destructurings.",
+    "Evidence is bound to the immutable scanned Git baseline; the later CI163 repair and current checkout are not substituted into this audit."
+  ],
+  "cached_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-162.log",
+    "sha256": "a04057cc24b44326e4346f4f7d2d0ede03f43b706314065d4177d01936be6501",
+    "git_blob": "83c16e03eb7baea4613e08a2e990742d371f8b3f",
+    "bytes": 83696,
+    "lines": 978
+  },
+  "provider_contracts": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionSpeedGap.lean",
+      "declaration_line": 85,
+      "contract_lines": [
+        94,
+        101
+      ],
+      "name": "N01Properties.returnCorrectedMinusSpeed_error_radial_small",
+      "binder_order": "exists parameterLoss : Nat, exists V K : Real, 0 < V and 0 < K and forall basePrime, base <= basePrime -> 1 + loss + parameterLoss <= basePrime -> forall eta, ...",
+      "result": "The same corrected minus-speed error is bounded by V * eta * radialE (D.cellIndex (j m)) ^ (-P)."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "contract_lines": [
+        332,
+        342
+      ],
+      "name": "OrdinaryFlowFamilyTameBounds",
+      "binder_order": "forall k : Nat, exists parameterLoss : Nat, forall s : Nat, exists B : Real, 0 < B and ...",
+      "actual_high_order": "s + loss + parameterLoss",
+      "note": "CoefficientFamilyTameBounds remains a different contract with forall k s; it must not be migrated by analogy."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01JetBounds.lean",
+      "contract_lines": [
+        41,
+        56
+      ],
+      "names": [
+        "N01FlowJetBoundAtOrder",
+        "N01FlowJetBounds"
+      ],
+      "binder_order": "AtOrder has explicit base, loss, parameterLoss; Bounds is forall k, exists parameterLoss, forall s, exists B."
+    }
+  ],
+  "known_confirmed_mismatch": {
+    "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionReferenceLower.lean",
+    "lines": [
+      55,
+      56,
+      58,
+      76,
+      118
+    ],
+    "old_obtain": "obtain <V, K, hV, hK, herror> := returnCorrectedMinusSpeed_error_radial_small ...",
+    "issue": "The old obtain omits the newly leading Nat parameterLoss witness. The chosen base and high-order comparison consequently retain 1 + loss rather than 1 + loss + parameterLoss.",
+    "minimal_migration": [
+      "Decode parameterLoss before V and K.",
+      "Choose basePrime at least 1 + loss + parameterLoss.",
+      "Pass the correspondingly typed high-order inequality to herror."
+    ],
+    "public_header": "The final existential basePrime/epsilonPrime public theorem may remain unchanged because it selects the stronger base internally.",
+    "repair_owner": "/root/quantitative_route",
+    "repair_peer": "/root",
+    "note": "This is the already reported CI162 failure; this audit does not independently approve or compile the repair."
+  },
+  "checked_compatible_chains": [
+    {
+      "chain": "Smallness and corrected velocity",
+      "locations": [
+        "N01FlowSmallness:47,141,205",
+        "ReturnCorrectionSmallness:162-177",
+        "ReturnCorrectionVelocityBounds:107-130",
+        "ReturnCorrectionSpeedGap:102,226-246"
+      ],
+      "finding": "Leading Nat loss and fixed-order high grades are explicitly retained. The other radial_small call at SpeedGap:226 is correct."
+    },
+    {
+      "chain": "Closed values and inverse estimates",
+      "locations": [
+        "CanonicalVariationBounds:290-330",
+        "N01OrdinaryFlowClosedJets:95-105",
+        "N01ReturnInverseJets:195-204",
+        "OrdinaryFlowJacobianBounds:58-75"
+      ],
+      "finding": "New Nat witnesses are consumed before spatial order; later existential low/loss outputs are unchanged legitimately."
+    },
+    {
+      "chain": "Fixed-order optical control and cell index",
+      "locations": [
+        "N01ControlFlowBounds:134-141,237-261",
+        "N01ControlWeightConstraint:68-135",
+        "N01ControlIndexBound:77-85"
+      ],
+      "finding": "The k=2 loss is retained through the actual weight inequality and index exponent max base (1+loss) + 2*max base (loss+parameterLoss)."
+    },
+    {
+      "chain": "Restriction, enlargement and whole-bound aliases",
+      "locations": [
+        "CanonicalNeighborhoodRestriction:66-79",
+        "MaterialEnvelopeNormalization:265-276",
+        "N01NeighborhoodRestriction:75-97,139-141",
+        "N01cBoundsRestriction:97-129,187-209,242-253",
+        "N01cAssembly:20-25",
+        "CoupledNeighborhoodRestriction:144-182",
+        "N06Neighborhood:127-156,183-193",
+        "N08ParameterRestriction:80-104,136-145,194-207"
+      ],
+      "finding": "Each wrapper preserves forall k / exists parameterLoss / forall s and the same J or high-order inequality; no old two-index elimination was found."
+    },
+    {
+      "chain": "Other direct and hidden aliases",
+      "locations": [
+        "N04bSingletonType:217-219",
+        "N04bStateProfileType:171-173",
+        "N07aCoefficientMaterial:94-100,203-215",
+        "N08OpticalControlType:87-103,158-164",
+        "N08FlowParameterBounds:55-60",
+        "N08ReferenceFlowVariation:123,140-141",
+        "N08RadialHeightForcing:102-128",
+        "N08RadialForcingLowerBound:101-116",
+        "N08PhysicalLabelTests:38-46"
+      ],
+      "finding": "The hidden hjet alias and direct tail consumers all decode the Nat witness; qualitative consumers may discard its numeric value after obtaining the required finite jet."
+    }
+  ],
+  "additional_confirmed_interface_mismatches": [],
+  "not_active_in_this_baseline": [
+    "N01FlowParameterVariation.lean",
+    "N01FlowMixedParameterBound.lean"
+  ],
+  "qualification": "This is a source/interface audit of the current integrated cohort, not a complete mathematical review of every source, not Lean elaboration or compilation, and not compatibility certification for the remaining held main batches. No resource-limit or speculative elaboration changes are recommended.",
+  "source_fingerprints": [
+    {
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "git_blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "bytes": 101197,
+      "lines": 1773
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01JetBounds.lean",
+      "sha256": "aad4c90c05e7ba57a31e8d63d1ef1a96c3f439ed3a57890de85bcb77e6acb39a",
+      "git_blob": "1e4f04ef7acf1b6050f63c7af3826a9dc6105ef2",
+      "bytes": 3550,
+      "lines": 74
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowSmallness.lean",
+      "sha256": "ad6648090847d20aeef9eff20176e398fab2c8a288f1650bc400040be8e57b39",
+      "git_blob": "ca66bd0e3aa4056fdbdef013e16fe4825d066887",
+      "bytes": 12028,
+      "lines": 219
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionSmallness.lean",
+      "sha256": "3d7f3cb7a4defd9b7aef34f7763b05a3f9befa358487aebbb57b0ec54f5cb4fa",
+      "git_blob": "5e8807badcc8eaabf7aa3a31ecbc64d64a76cb56",
+      "bytes": 9030,
+      "lines": 191
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionVelocityBounds.lean",
+      "sha256": "5e99bb6e2d0b8c1e0e7e457d44308c8212f29ed9dbe900cb3cc3fd2f9d0ba300",
+      "git_blob": "b6c7cefc7e6768f7a2c43b36e688d0e4bef28637",
+      "bytes": 7341,
+      "lines": 143
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionSpeedGap.lean",
+      "sha256": "73081341f18367e1a792b6a1dda84c9d07cd2beadb147b05c8cf3637444c1617",
+      "git_blob": "d1a81d60b31bf68689e99722e23fc8c594999b8b",
+      "bytes": 21499,
+      "lines": 374
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionReferenceLower.lean",
+      "sha256": "10f55363eb4d0179d697e914bb2fd04f0d5b214cfaada715b258436353bd30d7",
+      "git_blob": "43f7c779c53e7d80dcfa183515765172cd8e8c7d",
+      "bytes": 6835,
+      "lines": 128
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalVariationBounds.lean",
+      "sha256": "db282b5542f7f114bac0be3a654136ffbeb217e9912ccb22a8732e1ef9802bb8",
+      "git_blob": "1559b564891a9e89bbc16c6106b71d49d1ad295f",
+      "bytes": 17698,
+      "lines": 332
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01OrdinaryFlowClosedJets.lean",
+      "sha256": "57b4fa7e2961bfb11c3adaae368c05d9b5e07237a9871746f6e81d1a9c057218",
+      "git_blob": "60f16193c9d55dc55507972d1c50625fed81877e",
+      "bytes": 5282,
+      "lines": 107
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnInverseJets.lean",
+      "sha256": "83e467d4e638fd37c4339e8d33567e4b9d4703221bb9dbea77b6b55cf31cd620",
+      "git_blob": "be782379d17ff730f0f70a55e37be1ad99ba773a",
+      "bytes": 10572,
+      "lines": 207
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/OrdinaryFlowJacobianBounds.lean",
+      "sha256": "1cdb99b5eddfc69d80e8bbe0ae74ad129de3f826c56817a1dd4e683b443e130b",
+      "git_blob": "310242cadb1925df8f87887fd6b31d3cb7ac1e29",
+      "bytes": 6091,
+      "lines": 114
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ControlFlowBounds.lean",
+      "sha256": "2c3534ff1a505e3c35ca2978d138d86a69859e4cefb62a390f5ec15f4e4a75d9",
+      "git_blob": "da5a86231558708da484b96b350a925cd0fe50d4",
+      "bytes": 13218,
+      "lines": 263
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ControlWeightConstraint.lean",
+      "sha256": "1a0652ff7f498ed31b7a84664683ce312e72a8a53eb8b77e75be0d93e7b21e0c",
+      "git_blob": "c0e13885832aa4b133e24e45ff76bc0ca3cc2495",
+      "bytes": 8256,
+      "lines": 157
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ControlIndexBound.lean",
+      "sha256": "8850853f4d34fb8e449f61afbe81e68e7f5b42c2aaf10711d3f0ec8043d95a37",
+      "git_blob": "1928f91ca23a5a0620ca958c0d83fc46b148e33a",
+      "bytes": 8275,
+      "lines": 179
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean",
+      "sha256": "e49b0d271a6a1633dce24a1a2ac1c6b2c4ca33f73be8191d59fb827b6e30e8f4",
+      "git_blob": "5150d77940daa6a3f95bd505bdb929b2e95db667",
+      "bytes": 7509,
+      "lines": 143
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalNeighborhoodRestriction.lean",
+      "sha256": "f0333edb08700ba86b4db979edc64251ce86f32106635ac476e8ed910a8c1eef",
+      "git_blob": "99481854fcfc00bfd242fdccf388996297f83bd0",
+      "bytes": 9374,
+      "lines": 192
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "git_blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "bytes": 14988,
+      "lines": 311
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01cBoundsRestriction.lean",
+      "sha256": "a85fe4fbc139f2dc4fd008c0e0d447dc7a7f6f16ace5181d35b1c916b05c6c97",
+      "git_blob": "ffbd5d98eb6ab73c3b6fb8cddb83b843a1baa0b5",
+      "bytes": 14432,
+      "lines": 288
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CoupledNeighborhoodRestriction.lean",
+      "sha256": "4c77ff72cbe75dc83f98542937c4fd9d18c301c320e4ad8634eee8028275ea96",
+      "git_blob": "d48a58b3197bbaf411f17f662b9ec6f9d9fb9ce0",
+      "bytes": 16078,
+      "lines": 317
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N06Neighborhood.lean",
+      "sha256": "0836202e101288ec8f63f10c2be3571cc616851757c214251395c0765aa9989f",
+      "git_blob": "a7f79ee3223158510eae69028af7ab7f8f326542",
+      "bytes": 16784,
+      "lines": 320
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N08ParameterRestriction.lean",
+      "sha256": "ef85b01795dbb68064a4cf21111c091ab592eb954736ef9449130f3ef7649540",
+      "git_blob": "e1ad7a78a567b63cad89b9e3269df7c28e488bb3",
+      "bytes": 22951,
+      "lines": 408
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01cAssembly.lean",
+      "sha256": "06f9c26c4ab6a1af844d18ee31874de1404fa1f245bc4735f7c080f28440a441",
+      "git_blob": "245e028edcd0d102dd8872ea3f2ab83bbc8da1c2",
+      "bytes": 1167,
+      "lines": 27
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aCoefficientMaterial.lean",
+      "sha256": "8d6fa8841ca86370af49240d6e4d7a1755d52325aa45bfe874f37ac202ae0ced",
+      "git_blob": "ad87773a588111aad1ca1a53dc99800ae7319888",
+      "bytes": 15467,
+      "lines": 284
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N08OpticalControlType.lean",
+      "sha256": "04341e379c9f99b52c79260e19412267b12250a94e893289577a7ce8fe119152",
+      "git_blob": "3a40b05c44f7babcc64359bc4161e48f5c92019d",
+      "bytes": 11923,
+      "lines": 238
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N08FlowParameterBounds.lean",
+      "sha256": "21c3c9e1eac92c189805bde9702aaef6dec344d7337687587e07eecccb7c3cef",
+      "git_blob": "af037e8b75a86618719055e3c6e0e34cdff84dba",
+      "bytes": 4532,
+      "lines": 91
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N08ReferenceFlowVariation.lean",
+      "sha256": "dae1397df27b4501d7e4fc738dfdd0c9c150afa9d9c9c5a98b3a67366fcd81b8",
+      "git_blob": "cbbe277ab899177cbc486292e28bcf026b56ce26",
+      "bytes": 13540,
+      "lines": 235
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N08RadialHeightForcing.lean",
+      "sha256": "9c9a7955b5435bf13215de6f713de1e3ac75f19a85d5c755618677ee312d59c0",
+      "git_blob": "10836ea0c8271a5072eddb2d956818fb54829106",
+      "bytes": 6674,
+      "lines": 130
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N08RadialForcingLowerBound.lean",
+      "sha256": "bb680afdd4f55e2d1557898a0b0e869a14b4ff22fe52976897c85d40a96d8fa2",
+      "git_blob": "396eeb985ed4e3683f06dc2066b599b6a8fbd472",
+      "bytes": 6935,
+      "lines": 145
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N08PhysicalLabelTests.lean",
+      "sha256": "684815b1292b1822340ceadf891640d83c42ef0f785e4314d2013b17df1bace7",
+      "git_blob": "2e36b3e35fdfe2b0a12fde0880c2e355830e7fee",
+      "bytes": 6055,
+      "lines": 119
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04bSingletonType.lean",
+      "sha256": "a98ac114085f949ab29669a9493f0133a742035d688080135cdfec218761aac6",
+      "git_blob": "a4ec9016586cb1ff50f9fce931f54492fb961d2d",
+      "bytes": 13573,
+      "lines": 283
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04bStateProfileType.lean",
+      "sha256": "d0453cae8528608053a30bf0cbc25787833e1538ff969adf0ea3a2627d51f0bc",
+      "git_blob": "a21640350dc6a6b400d83f646d7f451f4e977c90",
+      "bytes": 13424,
+      "lines": 283
+    }
+  ],
+  "compiled": false,
+  "source_modified": false,
+  "created_at_utc": "2026-11-12T18:01:50.045640+00:00"
+}

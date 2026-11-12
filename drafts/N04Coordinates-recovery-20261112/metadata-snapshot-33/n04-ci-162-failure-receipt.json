@@ -1,0 +1,155 @@
+{
+  "kind": "exact_current_head_complete_ci_failure",
+  "label": 162,
+  "head": "e6f0123c8cc5958988184914abf8ca6e27a75b12",
+  "tree": "d0737dd159074aa8fa622ab6c8df27680614be6c",
+  "run": 43273248780,
+  "job": 131374833174,
+  "run_conclusion": "failure",
+  "job_conclusion": "failure",
+  "completed_run_updated_at": "2026-11-12T17:53:38Z",
+  "checked_at": "2026-11-12T17:56:00.198635+00:00",
+  "log": "n04-ci-162.log",
+  "log_sha256": "a04057cc24b44326e4346f4f7d2d0ede03f43b706314065d4177d01936be6501",
+  "log_bytes": 83696,
+  "errors": [
+    [
+      "ReturnCorrectionReferenceLower.lean",
+      "100",
+      "55",
+      "unsolved goals"
+    ],
+    [
+      "ReturnCorrectionReferenceLower.lean",
+      "118",
+      "27",
+      "Function expected at"
+    ],
+    [
+      "ReturnCorrectionReferenceLower.lean",
+      "61",
+      "69",
+      "failed to prove strict positivity, but it would be possible to prove nonnegativity if desired"
+    ],
+    [
+      "ReturnCorrectionReferenceLower.lean",
+      "69",
+      "39",
+      "unsolved goals"
+    ],
+    [
+      "ReturnCorrectionReferenceLower.lean",
+      "72",
+      "44",
+      "Invalid field `le`: The environment does not contain `Real.le`, so it is not possible to project the field `le` from an expression"
+    ],
+    [
+      "ReturnCorrectionReferenceLower.lean",
+      "73",
+      "27",
+      "Invalid field `ne'`: The environment does not contain `Real.ne'`, so it is not possible to project the field `ne'` from an expression"
+    ]
+  ],
+  "cached_module_files_reported": 4633,
+  "modules_total_reported": 4214,
+  "module_count_note": "Raw cache count includes restored artifacts and exceeds the current source count; it is not a validated compiled-current-source count.",
+  "repaired_modules_compiled": [
+    "ContinuousFlexibility.Analysis.N01ControlFlowBounds",
+    "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction"
+  ],
+  "steps": [
+    {
+      "name": "Set up job",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "conclusion": "success"
+    },
+    {
+      "name": "Disk space",
+      "conclusion": "success"
+    },
+    {
+      "name": "Set up the pinned Lean and Mathlib environment",
+      "conclusion": "success"
+    },
+    {
+      "name": "Restore main's build artifacts",
+      "conclusion": "success"
+    },
+    {
+      "name": "Reuse the builds of the lines merged by this push",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Reuse the build of the line this branch was cut from",
+      "conclusion": "success"
+    },
+    {
+      "name": "Restore project build artifacts",
+      "conclusion": "success"
+    },
+    {
+      "name": "Report which cache was restored",
+      "conclusion": "success"
+    },
+    {
+      "name": "Generate the root import",
+      "conclusion": "success"
+    },
+    {
+      "name": "Changed modules",
+      "conclusion": "success"
+    },
+    {
+      "name": "Quick check of the changed modules",
+      "conclusion": "failure"
+    },
+    {
+      "name": "Build every library",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Save project build artifacts",
+      "conclusion": "success"
+    },
+    {
+      "name": "Delete this branch's older build caches",
+      "conclusion": "success"
+    },
+    {
+      "name": "Count compiled modules",
+      "conclusion": "success"
+    },
+    {
+      "name": "Blueprint status and endpoint axioms",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Publish the precompiled build for line sandboxes",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Pack this line's build for main",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/upload-artifact@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/upload-artifact@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "conclusion": "success"
+    }
+  ],
+  "latest_complete_green_unchanged": "23d28b145e1361fd8c683ba77415226b82be7bb3"
+}

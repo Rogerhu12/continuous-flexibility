@@ -1,0 +1,187 @@
+{
+  "kind": "same_whole_reference_atlas_negative_ten_geometric_spatial_jet_candidate",
+  "owner": "/root/audit_coordinates",
+  "status": "HELD_UNCOMPILED_AWAITING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativeGeometryJets.lean",
+    "sha256": "7ba90dfaa75886ba9da261af630d6c88df8190c24d6062f779e5ab946cfa26f5",
+    "blob": "011a1e88d8a9c7c1c427c0d97213a453e3f005a2",
+    "lines": 321,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeNegativeGeometryJets.lean"
+  },
+  "public_declarations": [
+    "n04WholeReferenceGauge_negative_geometryReferenceJets_enlargedMaterialData"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightProfileJets.lean",
+      "sha256": "3f5469853c612cf6e08dcc38a4bebd0b48e25efce4e978768129496c77abd607",
+      "blob": "b91d53b6530be55909d6ffa3ea259760dfef25d0",
+      "lines": 215
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceGeometryFields.lean",
+      "sha256": "17eb137b0c746f4ff44388b842b068a2745a96e99940de71667b75ffc8abbb52",
+      "blob": "9f46123e9067e42a31444649e6392ba3d0bae493",
+      "lines": 124
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightMaterialJets.lean",
+      "sha256": "bda1d2cda9e6c88c394819233f9606026e417e03a5c357cb6aab76ab7da8d383",
+      "blob": "20423f5dc8e83101d8950003cb5454bf3def9007",
+      "lines": 293
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceInverseMaterialJets.lean",
+      "sha256": "ba704d27a5edf8f0f8a7bcf9eefba41d7f440f982f4dd8622daf25c3949e1eae",
+      "blob": "777b7bac04467e51554377f80235b6b55efbb9ce",
+      "lines": 207
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthMaterialBounds.lean",
+      "sha256": "a1355b681442efbae6b424f142b2841024bf85d37c7f16c3127339eb926a907c",
+      "blob": "97ba75908af68271cfed29233a7043de7af28ab4",
+      "lines": 86
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferenceScalarInverse.lean",
+      "sha256": "84346b8a1836363f9b0fdbe48a93c75b42deaa144beea6fe8e0bf32d2faffa3e",
+      "blob": "532d3bc282c59cd7c96647db57d037efbd9f42a4",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-helper-visibility/RadialUnitDensityInverseJets.lean",
+      "sha256": "a56a59502b38aee6a0eaa680c0ba5aec43274d36a8992697cc8caaf09f0f8bc6",
+      "blob": "ca8d3d45ec3a151d968739563a81f5089cef827c",
+      "lines": 136
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "lines": 311
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "sha256": "bbec6c5ccb9e0d9bcf75516b8c9024e4f15c2e834119822ace6da3c4e70fd51c",
+      "blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "lines": 128
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N08RadialFamilyMaterialJets.lean",
+      "sha256": "5796d127cb631248523060a373d0cdea3d07052857008b6dcfb987dbae59289d",
+      "blob": "3fd9b99c74162ee221843491623573b719c172b3",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+      "sha256": "598b1d5f18c4a22eecd5108949d46b2ddca955d79ea66090b85ca6ba06ff8227",
+      "blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+      "lines": 96
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    }
+  ],
+  "selected_provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightProfileJetsReviewedManifest.json",
+      "sha256": "ad19d504da2c870a42b0f9a0a14b7a7891fc98644b8373731c4587c4d4ffcf3a",
+      "blob": "75a1548464fa2f178416500754f2e9e005ba9eb4",
+      "lines": 38
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceGeometryFieldsReviewedManifest.json",
+      "sha256": "b889b812d707d5dcac345870030d67ea0255fb027180e9a361717c69b19a4027",
+      "blob": "9cca81df03404d340125ce607eb1bec6e9ffcfa4",
+      "lines": 64
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightMaterialJetsReviewedManifest.json",
+      "sha256": "637ef52639e1a5b1931946ab387f07c59961d9841735d7c694650709014c6799",
+      "blob": "5bfb4d8c935777c2dab8f22de4ece2fb88cf858c",
+      "lines": 88
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceInverseMaterialJetsReviewedManifest.json",
+      "sha256": "8673113760c3d0eeeec6cd2513e2b3863e1e74b80ae2e5c1a9a32eb50e8c7e28",
+      "blob": "fa8f75e002ad16d85437327dd0cf0f64d0f15690",
+      "lines": 44
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthMaterialBoundsReviewedManifest.json",
+      "sha256": "e21b63e0ec60e432f4924b97056edbba72a0725b77090a538524a390ab89507c",
+      "blob": "62d50e6ed5412e8ef5c4d63d1a387c0d3906275d",
+      "lines": 65
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasDataReviewedManifest.json",
+      "sha256": "701abf400f31e9d5bd990eff6d782e8878b3bb25e17a721750de8d04a4e319d7",
+      "blob": "89a4780b10a4d508b9d5ac33dd3abdf393efa901",
+      "lines": 23
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePartANamespaceReviewedManifest.json",
+      "sha256": "1a16f2e8437ce8eb96ae2f3898479ac42753411f92260ec4343ba4fb31f7c23c",
+      "blob": "3edbaa3198a4e7d4975614969f0be033e7ec5a61",
+      "lines": 109
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-helper-visibility/RadialUnitDensityInverseJetsVisibilityReviewedManifest.json",
+      "sha256": "2b0671f4acfa8c26d884d47a30b92a46df43fc79c682f2ef792592933462d8ce",
+      "blob": "83fa44dc5b45b8fdf50ce0f1c0b7ee95199bdf20",
+      "lines": 53
+    }
+  ],
+  "pinned_apis": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "lines": 1155
+    }
+  ],
+  "checks": [
+    "All ten actual geometric atoms on negative pieces are treated; the positive family is arbitrary and its fields are never used in the negative branch.",
+    "The same old K negative fields and half sample are copied into V. K is constructed from original T; U=enlargedMaterialData T appears only in the material-independent atom and material RHS, with exactly the same sample function.",
+    "Normalized forward and inverse coordinate zeroth values are controlled by genuine interval ranges, not by an unwrapped coordinate bound. Positive forward jets follow from actual unit density, local constant sign and the reviewed abs-jet germ lemma; literal inverse jets use the original207.",
+    "Physical affine scaling uses the actual optical half length lambda, and canonical affine scaling uses the original optical radius rho. All four width/inverse-width costs are supplied by86 at the same original half sample.",
+    "H/Hinv jets use293. Absolute Jacobian/reciprocal and source/reciprocal use215 at gamma=-2/2/3/-3 and true124 field identities; no new representative or final target bound is assumed.",
+    "The numerical prefix combines coefficients only. Every raw scalar and length is bounded by M=A*(C0*t)^A, t=U.E0 at the original sample, and all normalized affine derivatives are at most M^(s+2). The actual enlarged floor and coefficientEnvelope_pack give the final single BM.",
+    "The full-unit EqOn identities transfer all mixed jets, including order zero. Positive angular orders of the displayed radial scalars vanish; angular defects are identically zero.",
+    "Explicit zero-add and subtraction-zero conversions are supplied before normalized helper calls. No compiler, elaborator, CI or active-source operation was used."
+  ],
+  "scope_limits": [
+    "This theorem is the numerical spatial-jet portion for the ten negative geometric atoms. It does not assert their qualitative ContDiffOn/period package or a completed ReferenceJets/CurrentJets certificate.",
+    "The intermediate uniform raw optical lower input still uses an independent true full-component host. Its final producer is the fixed retained N01 construction; arbitrary Through03 is not claimed to contain that certificate.",
+    "Original T.E0 is only used as positive. The bound with floor one uses the explicit enlarged U, and the field construction itself is not replaced."
+  ],
+  "budget": {
+    "root_authorized_new_lean_lines": 550,
+    "first_reviewed_source_lines": 215,
+    "this_source_lines": 321,
+    "total_new_lean_lines": 536,
+    "remaining_lines": 14
+  },
+  "collision_check": {
+    "active_public_declarations": 0
+  },
+  "compiled": false,
+  "active_modified": false,
+  "created_at_utc": "2026-11-12T18:16:41.537671+00:00"
+}

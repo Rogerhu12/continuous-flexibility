@@ -1,0 +1,137 @@
+{
+  "kind": "ci162_return_corrected_reference_lower_per_order_loss_consumer_repair",
+  "owner": "/root/quantitative_route",
+  "status": "EXACT_ACTUAL_SOURCE_REPAIR_CANDIDATE_PENDING_FULL_PEER_UNCOMPILED",
+  "actual_base": {
+    "commit": "e6f0123c8cc5958988184914abf8ca6e27a75b12",
+    "tree": "d0737dd159074aa8fa622ab6c8df27680614be6c",
+    "target_path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionReferenceLower.lean",
+    "blob": "43f7c779c53e7d80dcfa183515765172cd8e8c7d"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair162/ReturnCorrectionReferenceLower.lean",
+    "sha256": "eb91a9b47d45ee74a5347276aa69209e835447977702b93790f352fd6c57416d",
+    "blob": "bfb0f877d13812f2fbcff828162a857b7b2762f2",
+    "lines": 128
+  },
+  "preimage": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair162/ReturnCorrectionReferenceLower.base.lean.txt",
+    "sha256": "10f55363eb4d0179d697e914bb2fd04f0d5b214cfaada715b258436353bd30d7",
+    "blob": "43f7c779c53e7d80dcfa183515765172cd8e8c7d",
+    "lines": 128
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair162/ReturnCorrectionReferenceLower.diff",
+    "sha256": "be9c72a4fc71fe90457fdbd923a584ab94ce1890fea0a143ac32035bd7761828",
+    "blob": "1a37344c7cc7107c924ad2a139576d8d001af1df",
+    "lines": 24
+  },
+  "cached_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-162.log",
+    "sha256": "a04057cc24b44326e4346f4f7d2d0ede03f43b706314065d4177d01936be6501",
+    "blob": "83c16e03eb7baea4613e08a2e990742d371f8b3f",
+    "lines": 978
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ReturnCorrectionSpeedGap.lean",
+      "sha256": "73081341f18367e1a792b6a1dda84c9d07cd2beadb147b05c8cf3637444c1617",
+      "blob": "d1a81d60b31bf68689e99722e23fc8c594999b8b",
+      "lines": 374
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ReturnCorrectionVelocityBounds.lean",
+      "sha256": "5e99bb6e2d0b8c1e0e7e457d44308c8212f29ed9dbe900cb3cc3fd2f9d0ba300",
+      "blob": "b6c7cefc7e6768f7a2c43b36e688d0e4bef28637",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ReturnCorrectionRelativeDiscriminant.lean",
+      "sha256": "5e87d31e17d7ac570f553670e5a1734314c716e25724fdc0ee3b5b1e9a5a8869",
+      "blob": "0e1199a37e4860f1312687fa207edddca1855ad6",
+      "lines": 107
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01NegativeOpticalLower.lean",
+      "sha256": "55bf0f53a5925af0f306d20439d1ea415a8eed9caa33f86527be4385c47052c8",
+      "blob": "97867a8a9f61e1974994cd8f081bee6fbcae9989",
+      "lines": 180
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean",
+      "sha256": "e49b0d271a6a1633dce24a1a2ac1c6b2c4ca33f73be8191d59fb827b6e30e8f4",
+      "blob": "5150d77940daa6a3f95bd505bdb929b2e95db667",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    }
+  ],
+  "public_names": [
+    "N04ReturnReferenceDiscriminantBound",
+    "N01Properties.n04Coordinates_returnCorrected_reference_lower"
+  ],
+  "public_headers_identical": true,
+  "imports": [
+    "ContinuousFlexibility.Analysis.ReturnCorrectionRelativeDiscriminant",
+    "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap",
+    "ContinuousFlexibility.Analysis.N01NegativeOpticalLower"
+  ],
+  "options_identical": true,
+  "delta": {
+    "added_lines": 3,
+    "removed_lines": 3,
+    "exact_changes": [
+      {
+        "old": "  obtain \u27e8V, K, hV, hK, herror\u27e9 :=",
+        "new": "  obtain \u27e8lossV, V, K, hV, hK, herror\u27e9 :="
+      },
+      {
+        "old": "  let base' := max base (1 + loss)",
+        "new": "  let base' := max base (1 + loss + lossV)"
+      },
+      {
+        "old": "  have hh : 1 + loss \u2264 base' := le_max_right _ _",
+        "new": "  have hh : 1 + loss + lossV \u2264 base' := le_max_right _ _"
+      }
+    ]
+  },
+  "provider_contract": "N01Properties.returnCorrectedMinusSpeed_error_radial_small returns existential parameterLoss:Nat, V K:Real, 0<V, 0<K and the same actual error bound on every base-prime >= base and >= 1+loss+parameterLoss. The loss is selected before all neighborhoods, states, components and points.",
+  "diagnostics": [
+    {
+      "line": 61,
+      "problem": "V was incorrectly bound to the new natural parameterLoss, so strict positivity of the denominator is unavailable."
+    },
+    {
+      "lines": [
+        72,
+        73,
+        69
+      ],
+      "problem": "hV was incorrectly bound to the second real coefficient, producing invalid le/ne-prime projections and the resulting algebra goal."
+    },
+    {
+      "lines": [
+        118,
+        100
+      ],
+      "problem": "herror retained the leading positivity conjunct instead of being the actual error function."
+    }
+  ],
+  "checks": [
+    "Read all128 actual consumer source lines and the exact cached diagnostic contexts. Read the full actual error-supplier contract/body and the neighboring already-updated characteristic-gap consumer.",
+    "Only the existential witness extraction, local base-prime definition and its high-index inequality change. Inverse substitution reproduces every actual preimage byte; both public complete headers, imports/options and remaining proofs are identical.",
+    "The original cutoff chi, host j, input N01 witness and output loss remain unchanged. The existing existential base-prime can absorb lossV; no uniform-in-order loss premise is introduced.",
+    "The same epsilon-prime min expression now uses the genuine positive real V and K. The original neighborhood restriction/half-ball/reference-discriminant and quarter-gap proofs are retained verbatim.",
+    "No downstream/active file, generated root, CI state or ref is modified. Existing resource options are unchanged."
+  ],
+  "compiled": false,
+  "scope_limits": [
+    "Static minimal consumer compatibility repair only, awaiting independent peer and authorized CI.",
+    "No local compiler/elaborator, raised limits, active/index/ref or CI query/download."
+  ],
+  "created_at": "2026-11-12T17:56:38.909685+00:00"
+}

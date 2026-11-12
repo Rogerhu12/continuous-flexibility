@@ -1,0 +1,54 @@
+{
+  "schema": "n04-compatibility-candidate-v1",
+  "status": "pending_final_delta_peer_uncompiled",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.lean",
+    "sha256": "5e099aae8613c8f52bfefb6caf3e952e8153a1e95f8f34cadb7cf222fdb89864",
+    "git_blob": "708038714ee89624264cb7f7d3ddb0c9f9720124",
+    "lines": 349,
+    "bytes": 18485
+  },
+  "supersedes": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/TameInverseFixedBaseBounds.lean",
+    "sha256": "4f9e0ce5e1ac930cab621ba13ef2a161030e407eaada26109f5eee513395ac4a",
+    "git_blob": "87f7691022eeb24f6d79c42e689da369c06a8236",
+    "lines": 349,
+    "bytes": 18483
+  },
+  "retained_base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.base.lean.txt",
+    "sha256": "4f9e0ce5e1ac930cab621ba13ef2a161030e407eaada26109f5eee513395ac4a",
+    "git_blob": "87f7691022eeb24f6d79c42e689da369c06a8236",
+    "lines": 349,
+    "bytes": 18483
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.diff",
+    "sha256": "e88a74fb6b002dc7dff07ede919faacc6e09a1841ef49d583226e1d078d9e131",
+    "git_blob": "e2015a3a2cf5702b311f55919923df41218b7aaa",
+    "lines": 11,
+    "bytes": 806
+  },
+  "original_candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/TameInverseFixedBaseBoundsCandidateManifest.json",
+    "sha256": "15253dcf14fb03f2af9bb9a0b395568b49db3f99e0d1651a61e045103b97981c",
+    "git_blob": "2a9c7f5a238e33f7f393b9ffe3ecce945e0cfdba",
+    "lines": 66,
+    "bytes": 4718
+  },
+  "initial_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/TameInverseFixedBaseBoundsInitialIndependentReview.json",
+    "sha256": "6c7e73442bb83bd1a34de216e2faeebd456b42e17abe0f49959a67511635796d",
+    "git_blob": "d942310470d51718c176da4728751f01f2a0f780",
+    "lines": 546,
+    "bytes": 29300
+  },
+  "exact_delta": "Only have hv declaration indentation, six leading spaces to eight. No other byte changes.",
+  "unchanged_complete_declaration_headers": true,
+  "reverse_delta_restores_all_old_bytes": true,
+  "public_theorem": "inverseFamilySmoothDirections_fixedBase_oneHigh",
+  "source_budget_lines": 349,
+  "local_lean_execution": false,
+  "active_src_index_refs_changed": false,
+  "scope": "All mathematics and the explicit remaining primitive-circle instantiation obligations remain exactly as in the original candidate."
+}

@@ -1,0 +1,38 @@
+{
+  "kind": "actual_negative_reference_height_profile_and_inverse_composition_reviewed",
+  "owner": "/root/audit_coordinates",
+  "status": "INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightProfileJets.lean",
+    "sha256": "3f5469853c612cf6e08dcc38a4bebd0b48e25efce4e978768129496c77abd607",
+    "blob": "b91d53b6530be55909d6ffa3ea259760dfef25d0",
+    "lines": 215,
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceHeightProfileJets.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightProfileJetsCandidateManifest.json",
+    "sha256": "ff9a737e964db264b10d867ea1209d1a1409a13042d313e90e1005bc04c1691c",
+    "blob": "fcea98ba1a3ca3e6fe512ca01ff9b736fd3cebf2",
+    "lines": 124
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/ActualNegativeReferenceHeightProfileJetsIndependentReview.json",
+    "sha256": "85e9113624512d91d2aa90918fc015f192f680613b4f06bd4c2ad4c41ecb2a3a",
+    "blob": "99f027a3d22baed330e00b885a3f88ab635dcf29",
+    "lines": 187
+  },
+  "source_bytes_unchanged": true,
+  "budget": {
+    "root_authorized_new_lean_lines": 550,
+    "this_source_lines": 215,
+    "remaining_new_lean_lines": 335
+  },
+  "scope_limits": [
+    "Same original K, actual stored height/inverse and original half sample; the raw optical host is distinct.",
+    "Only actual ordinary finite-prefix estimates; no complete ReferenceJets/CurrentJets or state-directional certificate is claimed.",
+    "All historical provider choices remain immutable; the exact selected provider owners are bound by the unchanged candidate and independent review."
+  ],
+  "compiled": false,
+  "active_modified": false,
+  "created_at_utc": "2026-11-12T18:11:21.555622+00:00"
+}

@@ -1,0 +1,125 @@
+{
+  "kind": "new_verified_full_ci_success",
+  "label": 159,
+  "head": "23d28b145e1361fd8c683ba77415226b82be7bb3",
+  "tree": "6b784f09efb45c796f4e03648dedaed5e163ae86",
+  "main": "89e539ccf7e9c558467cf875f44dcff9490ce271",
+  "main_checked": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+  "run": 43261713672,
+  "job": 131334470593,
+  "run_conclusion": "success",
+  "job_conclusion": "success",
+  "source_all_compiled": 4209,
+  "source_all_total": 4211,
+  "root_imports": 4152,
+  "build_jobs": 8194,
+  "blueprint_proved": 37,
+  "blueprint_total": 42,
+  "open": 5,
+  "open_nodes": [
+    "N01c",
+    "N02N03",
+    "N04b",
+    "N04Coordinates",
+    "N05"
+  ],
+  "log": "n04-ci-159.log",
+  "log_sha256": "f2dfc3b72ce15ae288abe3683e8701b698b7c7e54f43e65a5e83bec5c02018cf",
+  "steps": [
+    {
+      "name": "Set up job",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "conclusion": "success"
+    },
+    {
+      "name": "Disk space",
+      "conclusion": "success"
+    },
+    {
+      "name": "Set up the pinned Lean and Mathlib environment",
+      "conclusion": "success"
+    },
+    {
+      "name": "Restore main's build artifacts",
+      "conclusion": "success"
+    },
+    {
+      "name": "Reuse the builds of the lines merged by this push",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Reuse the build of the line this branch was cut from",
+      "conclusion": "success"
+    },
+    {
+      "name": "Restore project build artifacts",
+      "conclusion": "success"
+    },
+    {
+      "name": "Report which cache was restored",
+      "conclusion": "success"
+    },
+    {
+      "name": "Generate the root import",
+      "conclusion": "success"
+    },
+    {
+      "name": "Changed modules",
+      "conclusion": "success"
+    },
+    {
+      "name": "Quick check of the changed modules",
+      "conclusion": "success"
+    },
+    {
+      "name": "Build every library",
+      "conclusion": "success"
+    },
+    {
+      "name": "Save project build artifacts",
+      "conclusion": "success"
+    },
+    {
+      "name": "Delete this branch's older build caches",
+      "conclusion": "success"
+    },
+    {
+      "name": "Count compiled modules",
+      "conclusion": "success"
+    },
+    {
+      "name": "Blueprint status and endpoint axioms",
+      "conclusion": "success"
+    },
+    {
+      "name": "Publish the precompiled build for line sandboxes",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Pack this line's build for main",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/upload-artifact@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/upload-artifact@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "conclusion": "success"
+    }
+  ],
+  "completed_run_updated_at": "2026-11-12T16:49:58Z",
+  "checked_at": "2026-11-12T16:51:23.936398+00:00",
+  "note": "Exact current head passed changed-module checking, every default library including AxiomAudit, generated root and Blueprint status with default limits. The final positive source-prefix repair compiled in 0.3 minutes. This is a compilation baseline, not completion of the open N04Coordinates parent or Realization. Held reference sources and new main source batches are not in this head."
+}

@@ -1,0 +1,78 @@
+{
+  "kind": "same_whole_reference_atlas_negative_potential_unit_jets_reviewed",
+  "owner": "/root/audit_coordinates",
+  "status": "INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePotentialReferenceJets.lean",
+    "sha256": "ec8d38f33f34bb4ab3c24f59a0ca586a391f749e793665a57f2b25070ece6212",
+    "blob": "42f4ee6bd9294182fd6f1f798a9f42df99e0a740",
+    "lines": 173,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeNegativePotentialReferenceJets.lean",
+    "public_names": [
+      "n04WholeReferenceGauge_negative_potentialReferenceJets_enlargedMaterialData"
+    ],
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualNegativeReferencePotentialMaterialJets",
+      "ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds",
+      "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+      "ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization",
+      "ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePotentialReferenceJetsCandidateManifest.json",
+    "sha256": "5eb3535d464766e17f5f671ffc2d213d7ec06261182344e2abf77c3669358e64",
+    "blob": "034b788581d1c380bcc0a3c54ff1195fa5002c50",
+    "lines": 103
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholeReferenceGaugeNegativePotentialReferenceJetsIndependentReview.json",
+    "sha256": "b9475c6af6cf243f22a23af13a653dec4ad91369b1e77cb92a9a6168b51e77aa",
+    "blob": "6e48f21e4f939d30e3ab2724cff871d13986cbe8",
+    "lines": 127
+  },
+  "completed_provider_selections": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialMaterialJetsReviewedManifest.json",
+      "sha256": "d54ca78164168d197ef30c711e313fa871cff92caabd49890fdb40b7b0d7e168",
+      "blob": "4aa8c69daa725daac57b767f38e4ae65ed75110d",
+      "lines": 107
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthMaterialBoundsReviewedManifest.json",
+      "sha256": "e21b63e0ec60e432f4924b97056edbba72a0725b77090a538524a390ab89507c",
+      "blob": "62d50e6ed5412e8ef5c4d63d1a387c0d3906275d",
+      "lines": 65
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ActualNegativeReferencePotentialMaterialJetsIndependentReview.json",
+      "sha256": "459ad8e893ea577c12b29b9e55515bfe5de451b3a8281d535c26ba24e9e3c012",
+      "blob": "667941612ec8b2e54641ebaf34c890b4762df048",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePartANamespaceReviewedManifest.json",
+      "sha256": "1a16f2e8437ce8eb96ae2f3898479ac42753411f92260ec4343ba4fb31f7c23c",
+      "blob": "3edbaa3198a4e7d4975614969f0be033e7ec5a61",
+      "lines": 109
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-helper-visibility/RadialUnitDensityInverseJetsVisibilityReviewedManifest.json",
+      "sha256": "2b0671f4acfa8c26d884d47a30b92a46df43fc79c682f2ef792592933462d8ce",
+      "blob": "83fa44dc5b45b8fdf50ce0f1c0b7ee95199bdf20",
+      "lines": 53
+    }
+  ],
+  "checks": [
+    "The173 source is unchanged from its candidate. The full independent peer verifies the true canonical unit coordinate, actual length upper cost, original half sample and fixed-family quantifiers.",
+    "The later70/222 completed owner and exact137/152 namespace and136 visibility supersessions are selected explicitly here, preserving all historical pending manifests.",
+    "Original T constructs the same V; enlarged U is used only for this material-independent potential atom and its numerical right side. The optical host is distinct from the stored half sample."
+  ],
+  "scope_limits": [
+    "No all-atoms ReferenceJets or final primitive certificate is asserted. The raw optical input must come from the same retained N01 construction, not arbitrary Through03.",
+    "No local compiler/elaborator, active source/index/ref/checkpoint/authority mutation or CI query/download."
+  ],
+  "compiled": false,
+  "source_bytes_unchanged": true,
+  "created_at": "2026-11-12T17:49:19.345798+00:00"
+}

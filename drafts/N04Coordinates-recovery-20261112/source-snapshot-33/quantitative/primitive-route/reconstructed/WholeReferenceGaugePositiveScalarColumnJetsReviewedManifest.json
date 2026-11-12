@@ -1,0 +1,58 @@
+{
+  "kind": "same_positive_reference_family_actual_scalar_columns_reviewed_owner",
+  "owner": "/root/quantitative_route",
+  "status": "FULL_SOURCE_INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveScalarColumnJets.lean",
+    "sha256": "5b430424e8d1f018305218e2066ad7057fb2a89acbb6eb8a55dd425e2b6ea826",
+    "blob": "3878a8163544ad203e2b04a6f58c4e11f0abc145",
+    "lines": 153
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveScalarColumnJetsCandidateManifest.json",
+    "sha256": "492d24d53ddf60894c7a7015c64546a08637009cb564711cc2b7929d137c2308",
+    "blob": "1ec749ad44a08c610c18a41969f982701225064f",
+    "lines": 146
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/WholeReferenceGaugePositiveScalarColumnJetsIndependentReview.json",
+    "sha256": "55b03166cd7b14d3e25e9b411d1f5f7d6c74f62261e6fe4112b5b798523e3e1a",
+    "blob": "c1547ff047fb01e2c159e2539c9a764e8676c959",
+    "lines": 136
+  },
+  "provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceScalarSourceDataReviewedManifest.json",
+      "sha256": "d234cf5e4a479116ce146646b2d485dbc621df090c340f9a124dae82d1b498e9",
+      "blob": "9cb26ed2fdeace5bc4644a4f12d75a145ad35816",
+      "lines": 57
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceScalarColumnMaterialJetsReviewedManifest.json",
+      "sha256": "fd1e7d0da381023550b612fe2f6c1240db57ecb729f1bca71d10bcd7d026e78e",
+      "blob": "79817082044105aee55d64879425916e85a71612",
+      "lines": 40
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveGeometryJetsReviewedManifest.json",
+      "sha256": "212c7ee8715539c1cd54cb228c86b18d9450386ab86e351f4d681d0781b26e6d",
+      "blob": "cfde01815ead91d9744af24744788e7924e7cf9d",
+      "lines": 64
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFifteenAtomsReviewedManifest.json",
+      "sha256": "be633ee48d81fd7de671391b971824a1f9040120968576fecb1294c6b7356abe",
+      "blob": "f86b8b1a72aa3e004f6685344769f7730850659b",
+      "lines": 54
+    }
+  ],
+  "scope": [
+    "The literal inverse and source factor of the same chosen Y/H supply both actual left/nu atoms. M and the final BM are selected after spatial order but before K/e/relative fields.",
+    "Real positive endpoints0/1, actual field identities and e.symm(inr i) preserve the original sample. C0 is absorbed only with the explicit normalized same-T E0 floor.",
+    "No repeated276 choice, alternate width/degree/family or final column estimate premise. The existing178 producer retains its explicit raw optical/host/retained-witness inputs.",
+    "Only153 new Lean lines in this authorized wrapper. No local compiler, resource override, active source/index/ref or CI action."
+  ],
+  "compiled": false,
+  "source_unchanged_since_peer": true,
+  "created_at": "2026-11-12T18:02:48.330021+00:00"
+}

@@ -1,0 +1,67 @@
+{
+  "kind": "full_source_independent_review_after_exact_indentation_supersession",
+  "reviewer": "/root",
+  "status": "FULL_SOURCE_PEER_PASSED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.lean",
+    "sha256": "5e099aae8613c8f52bfefb6caf3e952e8153a1e95f8f34cadb7cf222fdb89864",
+    "blob": "708038714ee89624264cb7f7d3ddb0c9f9720124",
+    "lines": 349
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBoundsIndentCandidateManifest.json",
+    "sha256": "1138dd698a524dc3669a239a21bac657f9a83cdd5673d2e8e7ee90f98ce489ed",
+    "blob": "df27230a600e029345fdb119aaa0d0d3164a1212",
+    "lines": 54
+  },
+  "initial_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/TameInverseFixedBaseBoundsInitialIndependentReview.json",
+    "sha256": "6c7e73442bb83bd1a34de216e2faeebd456b42e17abe0f49959a67511635796d",
+    "blob": "d942310470d51718c176da4728751f01f2a0f780",
+    "lines": 546
+  },
+  "original_candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/TameInverseFixedBaseBoundsCandidateManifest.json",
+    "sha256": "15253dcf14fb03f2af9bb9a0b395568b49db3f99e0d1651a61e045103b97981c",
+    "blob": "2a9c7f5a238e33f7f393b9ffe3ecce945e0cfdba",
+    "lines": 66
+  },
+  "retained_base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.base.lean.txt",
+    "sha256": "4f9e0ce5e1ac930cab621ba13ef2a161030e407eaada26109f5eee513395ac4a",
+    "blob": "87f7691022eeb24f6d79c42e689da369c06a8236",
+    "lines": 349
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.diff",
+    "sha256": "e88a74fb6b002dc7dff07ede919faacc6e09a1841ef49d583226e1d078d9e131",
+    "blob": "e2015a3a2cf5702b311f55919923df41218b7aaa",
+    "lines": 11
+  },
+  "baseline_head": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+  "baseline_tree": "64a18c3f510156a0386b5601f7c26fe575e6f958",
+  "source_full_review_inherited_with_exact_all_other_bytes_equality": true,
+  "provider_fingerprints_checked": 70,
+  "mathematical_checks": [
+    "The interpolation supplier has p(a+2), p(b+2) and one fixed base/loss; monotonicity yields the requested p(a),p(b), without adding a low-base dependence on cardinality.",
+    "The double finite sum is bounded by 2*C*R*H from the same sum of low input seminorms; augmented product constant 3+2*C*R is nonnegative and independent of cardinality.",
+    "The recurrence charges the child at operatorBase to the high budget operatorBase+childLoss; no child low-norm bound is assumed. Inverse and forward losses remain independent of output spatial order and radius.",
+    "IsZeroLoss controls only actual auxiliary continuous linear maps. Forward direction constants may depend on expression/order and radius, while the selected base is unchanged.",
+    "The existing inverseExpressionJet and genuine inverseFamilySmoothDirections tower are used via the exact apply theorem. The finite input profile uses Fin.cons of the original state/source pair and increments.",
+    "Unit-ball normalization gives the exact same low-factor/high-factor homogeneous expression for every n including n=0. Base is max(operatorBase, interpolation base) selected before n.",
+    "hV and hF are explicitly outstanding primitive operator estimates; neither is the target inverse-tower estimate. Actual circle instance, correction composition, height gain and radial PDE remain to be proved."
+  ],
+  "exact_delta": "Only the have hv declaration moves from six to eight leading spaces into the hstep proof after the bound variable i. Every other byte, full public/private header, proof term and resource setting is identical.",
+  "selected_public_declarations": [
+    "inverseFamilySmoothDirections_fixedBase_oneHigh"
+  ],
+  "remaining_actual_instantiations": [
+    "Actual homogeneous circle inverse-value hV on the same positive domain",
+    "Actual inverseForwardJet hF identified with the coupled kernel and the exact derivative tower",
+    "Actual pair interpolation, correction composition, height gain and radial PDE estimates"
+  ],
+  "compiled": false,
+  "local_lean_execution": false,
+  "active_modified": false,
+  "created_at": "2026-11-12T18:19:49.821805+00:00"
+}

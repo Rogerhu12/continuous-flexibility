@@ -1,0 +1,49 @@
+{
+  "kind": "same_whole_reference_atlas_negative_ten_geometric_spatial_jets_reviewed",
+  "owner": "/root/audit_coordinates",
+  "status": "INDEPENDENT_FULL_SOURCE_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativeGeometryJets.lean",
+    "sha256": "7ba90dfaa75886ba9da261af630d6c88df8190c24d6062f779e5ab946cfa26f5",
+    "blob": "011a1e88d8a9c7c1c427c0d97213a453e3f005a2",
+    "lines": 321,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeNegativeGeometryJets.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativeGeometryJetsCandidateManifest.json",
+    "sha256": "d70c3fc038c0ce9869b60f31d42cf05da764a4adeee9866ed59d4951341948f7",
+    "blob": "23e82d5ed5bb6eda351cc6d0bb928ffc2d52eee8",
+    "lines": 187
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/WholeReferenceGaugeNegativeGeometryJetsIndependentReview.json",
+    "sha256": "1189a25f85b42b390582ece1c7d08af09484b6c2bec5918fedea8cc994cc4842",
+    "blob": "425b27de8294f014e2707d17a4c72d0b34790680",
+    "lines": 230
+  },
+  "previous_reviewed_source_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightProfileJetsReviewedManifest.json",
+    "sha256": "ad19d504da2c870a42b0f9a0a14b7a7891fc98644b8373731c4587c4d4ffcf3a",
+    "blob": "75a1548464fa2f178416500754f2e9e005ba9eb4",
+    "lines": 38
+  },
+  "selected_provider_bindings": "Exact13 providers/8 owners/2 pinned APIs remain those of the immutable candidate; the independent review additionally binds mixed-derivative locality and the actual pinned zero-order/derivative APIs.",
+  "budget": {
+    "root_authorized_new_lean_lines": 550,
+    "first_reviewed_source_lines": 215,
+    "this_source_lines": 321,
+    "total_new_lean_lines": 536,
+    "remaining_lines": 14
+  },
+  "scope_limits": [
+    "This theorem is the numerical spatial-jet portion for the ten negative geometric atoms. It does not assert their qualitative ContDiffOn/period package or a completed ReferenceJets/CurrentJets certificate.",
+    "The intermediate uniform raw optical lower input still uses an independent true full-component host. Its final producer is the fixed retained N01 construction; arbitrary Through03 is not claimed to contain that certificate.",
+    "Original T.E0 is only used as positive. The bound with floor one uses the explicit enlarged U, and the field construction itself is not replaced."
+  ],
+  "zero_order_api_question_resolved": "The pinned iteratedFDeriv_zero_apply is rfl, so iteratedDeriv0 applied at a point is definitionally the scalar value; no source repair was required.",
+  "source_bytes_unchanged": true,
+  "compiled": false,
+  "local_lean_execution": false,
+  "active_modified": false,
+  "created_at_utc": "2026-11-12T18:29:43.230134+00:00"
+}

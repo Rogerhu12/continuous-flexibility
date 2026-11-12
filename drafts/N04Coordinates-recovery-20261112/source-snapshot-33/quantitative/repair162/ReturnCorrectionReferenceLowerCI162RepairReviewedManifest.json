@@ -1,0 +1,40 @@
+{
+  "kind": "ci162_return_corrected_reference_lower_reviewed_repair",
+  "owner": "/root/quantitative_route",
+  "status": "STATIC_INDEPENDENTLY_FULL_REVIEWED_PENDING_AUTHORIZED_CI",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair162/ReturnCorrectionReferenceLower.lean",
+    "sha256": "eb91a9b47d45ee74a5347276aa69209e835447977702b93790f352fd6c57416d",
+    "blob": "bfb0f877d13812f2fbcff828162a857b7b2762f2",
+    "lines": 128
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair162/ReturnCorrectionReferenceLowerCI162RepairCandidateManifest.json",
+    "sha256": "9ba6a6eeda8f18ea62556e763c1e20064ecb90673d8869e31dfa063d77f0c01f",
+    "blob": "18ca958066031a18a1585593a4ef9c463b90508a",
+    "lines": 137
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/CI162ReturnCorrectionReferenceLowerIndependentReview.json",
+      "sha256": "ff0f006692a8fbc3ba230de98efe4003d98f5814fe3dcd35ff7710785647e0e3",
+      "blob": "f35110cbd03614f00f63a017f28434413498fc5e",
+      "lines": 95
+    }
+  ],
+  "actual_base": {
+    "commit": "e6f0123c8cc5958988184914abf8ca6e27a75b12",
+    "tree": "d0737dd159074aa8fa622ab6c8df27680614be6c",
+    "target_path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionReferenceLower.lean",
+    "blob": "43f7c779c53e7d80dcfa183515765172cd8e8c7d"
+  },
+  "public_contracts_unchanged": true,
+  "source_unchanged_since_peer": true,
+  "compiled": false,
+  "scope_limits": [
+    "Only lossV witness extraction, local base-prime and its high-index inequality change. The same cutoff, host, input witness and output original loss remain unchanged.",
+    "All other source bytes, public complete headers, imports and default options match actual e6f0123c. Root owns integration and authorized CI.",
+    "No local compiler/elaborator or active/index/ref/CI action."
+  ],
+  "created_at": "2026-11-12T17:57:29.231692+00:00"
+}

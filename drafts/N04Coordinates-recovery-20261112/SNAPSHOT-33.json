@@ -1,0 +1,67 @@
+{
+  "snapshot": 33,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "parent": "bd8f9de7652d86f512992345f8a07f39e6924d22",
+  "additional_parents": [
+    "23d28b145e1361fd8c683ba77415226b82be7bb3"
+  ],
+  "base_tree": "fd5997bf4be93f3316ebb3780bd85509c70832ef",
+  "compiled_tree": "6b784f09efb45c796f4e03648dedaed5e163ae86",
+  "preserved_archive_tree": "26cdf93a0adbf3447a49988db219c6e8ce7e077d",
+  "compiled_tree_refresh": "Use exact complete-green repository bytes while grafting the full previous archive subtree unchanged; source preservation is not compilation.",
+  "compiled_baseline": "23d28b145e1361fd8c683ba77415226b82be7bb3",
+  "line_head": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+  "line_tree": "64a18c3f510156a0386b5601f7c26fe575e6f958",
+  "frozen_at": "2026-11-12T18:32:47.715836+00:00",
+  "indexed_files": 2880,
+  "new_sources": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightProfileJets.lean",
+      "sha256": "3f5469853c612cf6e08dcc38a4bebd0b48e25efce4e978768129496c77abd607",
+      "lines": 215
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativeGeometryJets.lean",
+      "sha256": "7ba90dfaa75886ba9da261af630d6c88df8190c24d6062f779e5ab946cfa26f5",
+      "lines": 321
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.lean",
+      "sha256": "5e099aae8613c8f52bfefb6caf3e952e8153a1e95f8f34cadb7cf222fdb89864",
+      "lines": 349
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualNegativeReferenceScalarSourceData.lean",
+      "sha256": "dcd9c44b21cf5f415f2f86491ddaf806782120d61ea8869db3f5a1c2e778a4cb",
+      "lines": 210
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveScalarColumnJets.lean",
+      "sha256": "5b430424e8d1f018305218e2066ad7057fb2a89acbb6eb8a55dd425e2b6ea826",
+      "lines": 153
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair162/ReturnCorrectionReferenceLower.lean",
+      "sha256": "eb91a9b47d45ee74a5347276aa69209e835447977702b93790f352fd6c57416d",
+      "lines": 128
+    }
+  ],
+  "new_source_lines": 1376,
+  "existing_added_lean_from_compiled_baseline159": 18209,
+  "projected_added_lean_from_compiled_baseline159": 19585,
+  "line_count_method": "Conservative git diff --numstat --no-renames over every Lean file. Content similarity or move detection gives no reduction in the hard source budget.",
+  "compressed_diagnostics": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-workspace-relocation-20261112.json",
+      "path": "drafts/N04Coordinates-recovery-20261112/metadata-snapshot-33/n04-workspace-relocation-20261112.json.storage.gz",
+      "uncompressed_sha256": "ba83915a7eb48fae7124073ccf689e0600a7ba3d2d0c68ad0964f846aa916746",
+      "uncompressed_bytes": 2532633,
+      "gzip_bytes": 618530,
+      "blob": "50481d1e259f636b26a7bc35575fe4199e1cd573"
+    }
+  ],
+  "compression_note": "Lossless gzip for large JSON diagnostics; original source SHA256 and restore behavior preserved. Lean sources remain uncompressed. Binary gzip copies are also preserved exactly.",
+  "prior_versions": "All historical source versions remain immutable and reachable through the backup parent and exact SOURCE-INDEX locations.",
+  "status": "Source preservation only; outside src, no CI activation or completion claim.",
+  "entries": 60
+}

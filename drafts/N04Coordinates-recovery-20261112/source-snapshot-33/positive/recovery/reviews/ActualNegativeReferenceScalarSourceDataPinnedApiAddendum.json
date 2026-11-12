@@ -1,0 +1,101 @@
+{
+  "kind": "pinned_mathlib_api_addendum_to_full_source_review",
+  "reviewer": "/root/proof_inventory",
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "candidate_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualNegativeReferenceScalarSourceData.lean",
+    "sha256": "dcd9c44b21cf5f415f2f86491ddaf806782120d61ea8869db3f5a1c2e778a4cb",
+    "git_blob": "5c19660b736e579346f659994fc21142bf5241fe"
+  },
+  "full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/ActualNegativeReferenceScalarSourceDataIndependentReview.json",
+    "sha256": "ef63217d2bcbe3a0cb9b2c7ce6fcd0fea916d0c89d085f646a476e4fc3af4c8e"
+  },
+  "mathlib_pin_from_active_lake_manifest": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "pinned_files": [
+    {
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "git_blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "fetch_encoding": "utf-8",
+      "signatures": [
+        {
+          "name": "rpow_ofNat",
+          "line": 69,
+          "text": "lemma rpow_ofNat (x : ℝ) (n : ℕ) [n.AtLeastTwo] :\n    x ^ (ofNat(n) : ℝ) = x ^ (ofNat(n) : ℕ) :="
+        },
+        {
+          "name": "rpow_mul_natCast",
+          "line": 520,
+          "text": "lemma rpow_mul_natCast (hx : 0 ≤ x) (y : ℝ) (n : ℕ) : x ^ (y * n) = (x ^ y) ^ n := by"
+        },
+        {
+          "name": "rpow_le_rpow_of_exponent_le",
+          "line": 617,
+          "text": "theorem rpow_le_rpow_of_exponent_le (hx : 1 ≤ x) (hyz : y ≤ z) : x ^ y ≤ x ^ z := by"
+        },
+        {
+          "name": "one_le_rpow",
+          "line": 678,
+          "text": "theorem one_le_rpow {x z : ℝ} (hx : 1 ≤ x) (hz : 0 ≤ z) : 1 ≤ x ^ z := by"
+        },
+        {
+          "name": "rpow_le_rpow",
+          "line": 550,
+          "text": "theorem rpow_le_rpow {x y z : ℝ} (h : 0 ≤ x) (h₁ : x ≤ y) (h₂ : 0 ≤ z) : x ^ z ≤ y ^ z := by"
+        }
+      ]
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+      "git_blob": "e7fd4979f58f787927500713547b3671402ae782",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+      "fetch_encoding": "utf-8",
+      "signatures": [
+        {
+          "name": "ContDiffOn.congr",
+          "line": 565,
+          "text": "theorem ContDiffOn.congr (h : ContDiffOn 𝕜 n f s) (h₁ : ∀ x ∈ s, f₁ x = f x) :\n    ContDiffOn 𝕜 n f₁ s := fun x hx => (h x hx).congr h₁ (h₁ x hx)"
+        }
+      ]
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "git_blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "fetch_encoding": "utf-8",
+      "signatures": [
+        {
+          "name": "Set.EqOn.iteratedDeriv_of_isOpen",
+          "line": 441,
+          "text": "lemma Set.EqOn.iteratedDeriv_of_isOpen (hfg : Set.EqOn f g s) (hs : IsOpen s) (n : ℕ) :\n    Set.EqOn (iteratedDeriv n f) (iteratedDeriv n g) s := by"
+        },
+        {
+          "name": "iteratedDeriv_comp_const_add",
+          "line": 458,
+          "text": "lemma iteratedDeriv_comp_const_add :\n    iteratedDeriv n (fun z ↦ f (s + z)) = fun t ↦ iteratedDeriv n f (s + t) := by"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    "Real.rpow_ofNat rewrites the supplied real gamma=3 to the natural cube, with the numeral AtLeastTwo instance.",
+    "rpow_mul_natCast has exactly the direction used in reverse when expanding (W^A)^(N+1); W>=1 supplies its nonnegative-base premise.",
+    "The two monotonicity APIs use exactly nonnegative base, ordered bases and nonnegative exponent, or base>=1 and ordered exponents as used by hpack and hfinal.",
+    "ContDiffOn.congr expects the new function equal to the known smooth function; heq:F=g∘a has the required orientation.",
+    "Set.EqOn.iteratedDeriv_of_isOpen returns EqOn with implicit point, so supplying hx after q is correct.",
+    "The active affine provider's shift step agrees with pinned unconditional iteratedDeriv_comp_const_add."
+  ],
+  "result": "No additional defect found; the full source-review acceptance is unchanged.",
+  "original_review_and_source_unchanged": true,
+  "compiled": false,
+  "local_lean_execution": false,
+  "active_src_index_refs_changed": false,
+  "created_at_utc": "2026-11-12T18:28:23.213904+00:00"
+}

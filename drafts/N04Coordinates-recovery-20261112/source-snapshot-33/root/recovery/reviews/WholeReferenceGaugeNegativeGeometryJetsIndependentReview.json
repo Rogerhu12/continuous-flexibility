@@ -1,0 +1,230 @@
+{
+  "kind": "independent_full_source_review_of_same_whole_atlas_negative_ten_geometry_jets",
+  "reviewer": "/root",
+  "status": "FULL_SOURCE_PEER_PASSED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativeGeometryJets.lean",
+    "sha256": "7ba90dfaa75886ba9da261af630d6c88df8190c24d6062f779e5ab946cfa26f5",
+    "blob": "011a1e88d8a9c7c1c427c0d97213a453e3f005a2",
+    "lines": 321,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeNegativeGeometryJets.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativeGeometryJetsCandidateManifest.json",
+    "sha256": "d70c3fc038c0ce9869b60f31d42cf05da764a4adeee9866ed59d4951341948f7",
+    "blob": "23e82d5ed5bb6eda351cc6d0bb928ffc2d52eee8",
+    "lines": 187
+  },
+  "public_declarations": [
+    "n04WholeReferenceGauge_negative_geometryReferenceJets_enlargedMaterialData"
+  ],
+  "exact_selected_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightProfileJets.lean",
+      "sha256": "3f5469853c612cf6e08dcc38a4bebd0b48e25efce4e978768129496c77abd607",
+      "blob": "b91d53b6530be55909d6ffa3ea259760dfef25d0",
+      "lines": 215
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceGeometryFields.lean",
+      "sha256": "17eb137b0c746f4ff44388b842b068a2745a96e99940de71667b75ffc8abbb52",
+      "blob": "9f46123e9067e42a31444649e6392ba3d0bae493",
+      "lines": 124
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightMaterialJets.lean",
+      "sha256": "bda1d2cda9e6c88c394819233f9606026e417e03a5c357cb6aab76ab7da8d383",
+      "blob": "20423f5dc8e83101d8950003cb5454bf3def9007",
+      "lines": 293
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceInverseMaterialJets.lean",
+      "sha256": "ba704d27a5edf8f0f8a7bcf9eefba41d7f440f982f4dd8622daf25c3949e1eae",
+      "blob": "777b7bac04467e51554377f80235b6b55efbb9ce",
+      "lines": 207
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthMaterialBounds.lean",
+      "sha256": "a1355b681442efbae6b424f142b2841024bf85d37c7f16c3127339eb926a907c",
+      "blob": "97ba75908af68271cfed29233a7043de7af28ab4",
+      "lines": 86
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferenceScalarInverse.lean",
+      "sha256": "84346b8a1836363f9b0fdbe48a93c75b42deaa144beea6fe8e0bf32d2faffa3e",
+      "blob": "532d3bc282c59cd7c96647db57d037efbd9f42a4",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-helper-visibility/RadialUnitDensityInverseJets.lean",
+      "sha256": "a56a59502b38aee6a0eaa680c0ba5aec43274d36a8992697cc8caaf09f0f8bc6",
+      "blob": "ca8d3d45ec3a151d968739563a81f5089cef827c",
+      "lines": 136
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "lines": 311
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "sha256": "bbec6c5ccb9e0d9bcf75516b8c9024e4f15c2e834119822ace6da3c4e70fd51c",
+      "blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "lines": 128
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N08RadialFamilyMaterialJets.lean",
+      "sha256": "5796d127cb631248523060a373d0cdea3d07052857008b6dcfb987dbae59289d",
+      "blob": "3fd9b99c74162ee221843491623573b719c172b3",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+      "sha256": "598b1d5f18c4a22eecd5108949d46b2ddca955d79ea66090b85ca6ba06ff8227",
+      "blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+      "lines": 96
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    }
+  ],
+  "selected_provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightProfileJetsReviewedManifest.json",
+      "sha256": "ad19d504da2c870a42b0f9a0a14b7a7891fc98644b8373731c4587c4d4ffcf3a",
+      "blob": "75a1548464fa2f178416500754f2e9e005ba9eb4",
+      "lines": 38
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceGeometryFieldsReviewedManifest.json",
+      "sha256": "b889b812d707d5dcac345870030d67ea0255fb027180e9a361717c69b19a4027",
+      "blob": "9cca81df03404d340125ce607eb1bec6e9ffcfa4",
+      "lines": 64
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightMaterialJetsReviewedManifest.json",
+      "sha256": "637ef52639e1a5b1931946ab387f07c59961d9841735d7c694650709014c6799",
+      "blob": "5bfb4d8c935777c2dab8f22de4ece2fb88cf858c",
+      "lines": 88
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceInverseMaterialJetsReviewedManifest.json",
+      "sha256": "8673113760c3d0eeeec6cd2513e2b3863e1e74b80ae2e5c1a9a32eb50e8c7e28",
+      "blob": "fa8f75e002ad16d85437327dd0cf0f64d0f15690",
+      "lines": 44
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthMaterialBoundsReviewedManifest.json",
+      "sha256": "e21b63e0ec60e432f4924b97056edbba72a0725b77090a538524a390ab89507c",
+      "blob": "62d50e6ed5412e8ef5c4d63d1a387c0d3906275d",
+      "lines": 65
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasDataReviewedManifest.json",
+      "sha256": "701abf400f31e9d5bd990eff6d782e8878b3bb25e17a721750de8d04a4e319d7",
+      "blob": "89a4780b10a4d508b9d5ac33dd3abdf393efa901",
+      "lines": 23
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePartANamespaceReviewedManifest.json",
+      "sha256": "1a16f2e8437ce8eb96ae2f3898479ac42753411f92260ec4343ba4fb31f7c23c",
+      "blob": "3edbaa3198a4e7d4975614969f0be033e7ec5a61",
+      "lines": 109
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-helper-visibility/RadialUnitDensityInverseJetsVisibilityReviewedManifest.json",
+      "sha256": "2b0671f4acfa8c26d884d47a30b92a46df43fc79c682f2ef792592933462d8ce",
+      "blob": "83fa44dc5b45b8fdf50ce0f1c0b7ee95199bdf20",
+      "lines": 53
+    }
+  ],
+  "pinned_mathlib_apis": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "lines": 1155
+    }
+  ],
+  "additional_checked_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/LocalMixedProductBounds.lean",
+      "sha256": "d0faf14d190ae8c14f16f80958e8c166183c0914f822815a8d98aa13a660dfd7",
+      "blob": "cd30f2f9bb0efbb186788c4010cfaeef58befd57",
+      "lines": 125
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PhysicalTransmissionTrace.lean",
+      "sha256": "06bae1df9c968c303f48dd5c04b48c95b49eb41eb6cb276902c1401e634ef8d4",
+      "blob": "e355936649f9946fad0101bd4f0e7ac93c0afe46",
+      "lines": 66
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+      "sha256": "d6c3ace5e5e251e2943bd5985eb9c0a076a875c98fd876c961cb54c366ca50cb",
+      "blob": "86135f3b7295638a64b59ddaf2653b87d2733431",
+      "lines": 391
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean",
+      "sha256": "f6ebee83905f13d5648f1a9bff39c15b6109f161fdf5d482af9c5f22176ba535",
+      "blob": "ad3dee4ba3e3f6a9fd4030b170538f3f7d6f7099",
+      "lines": 1008
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Deriv.lean",
+      "sha256": "3033d2b35bcfdad1ab06168dee62c8587215de8fa049caa85e5445c54d4fb98c",
+      "blob": "ede41b77d146105bee637d6db9b91a1a21a48547",
+      "lines": 141
+    }
+  ],
+  "active_head_at_review": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+  "mathlib_pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "review_scope": [
+    "Read all 321 source lines and every exact numerical/field contract used. Read the complete215 profile,124 geometry,136 public inverse helper,152 qualified scalar inverse,86 length and131 whole-atlas sources; reviewed actual293/207 provider statements and proof interfaces. Independently recomputed all13 provider,8 owner and2 pinned-API fingerprints.",
+    "Checked actual unit/atom definitions, affine derivative, material envelope pack and floor, radial mixed derivative, open-set mixedDerivative congruence, and pinned derivative/rpow signatures. No complete dependency DAG compilation is claimed."
+  ],
+  "mathematical_checks": [
+    "The quantified bound BM(s) is selected before the whole equivalence, all positive-family data, raw optical host, negative piece, atom and point. The negative chart K remains constructed with original T. U=enlargedMaterialData T only supplies the material envelope on the bound; all ten selected atoms are material-independent.",
+    "The negative index k is exactly the selected side of K.cutPair; hk and hki connect the original e0 to the whole e. The twelve negative-fields conjunction supplies exactly the retained endpoints, cell, chart, inverse and height. V.cell m=K.cell k is used without identifying it with the independent whole-component raw optical host.",
+    "Physical affine length lambda=r-l and canonical optical radius rho are positive on each actual half. The reviewed86 provider bounds lambda,lambda inverse,rho,rho inverse at the original sample. Every use of raw optical lower data keeps its own host and interval inclusion.",
+    "Constants CP,CH,CI are uniform before order. A dominates their fixed-order coefficients and exponents through a nonnegative finite prefix; M=A*(C0*t)^A has M>=1 because t is the explicitly enlarged E0. The pack argument uses only original E0 positivity and E0<=t, never original E0>=1.",
+    "H and H inverse use293 at powers1 and-1. Absolute Jacobian, reciprocal Jacobian and source/reciprocal source use215 at gamma -2,2,3,-3 and the exact124 unit-density identities. Their physical/canonical domains coincide with the unchanged stored fields.",
+    "Forward positive derivatives are derived from actual unit density and local constant sign of nonzero Y derivative. The scalar normalization gives the true absolute derivative germ; the public radialUnit_abs_jet_of_abs_germ and iteratedDeriv_succ convert it to the raw Jacobian-product prefix. No artificial forward coordinate or inverse representative is used.",
+    "Literal inverse derivatives are supplied at q-1 by207 only for q>=1. The finite prefix contains q-1. Neither this branch nor the scalar helper requires an unbounded zeroth inverse value.",
+    "Normalized chart and inverse zeroth values use genuine interval ranges. Positive derivatives of (f(d+c*x)-a)/b cost at most M^(n+2); raw affine scalar derivatives cost M^(n+1). n<=s yields the common M^(s+2).",
+    "All ten actual atom identities hold EqOn on the complete open unit strip using the exact same physical/canonical affine arguments. The two angular defects are zero; other fields are radial, so positive angular derivative orders vanish. Congruence on an open set transfers mixed derivatives without imposing global smoothness of extensions.",
+    "The final equality M^(s+2)=A^(s+2)*C0^(A*(s+2))*t^(A*(s+2)) uses the pinned real-power multiplication laws with the supplied nonnegativity conditions. coefficientEnvelope_pack gives the required single BM multiplier/exponent."
+  ],
+  "resolved_api_questions": [
+    "The n=0 normalized helper is definitionally the original scalar value: iteratedDeriv unfolds to the zero iteratedFDeriv, whose actual pinned FTaylorSeries zero application is rfl. The direct exact hzero.trans(one_le_pow0 hM) is therefore type-correct by definitional reduction; no source edit was made or compiler result claimed.",
+    "ContDiffAt.derivWithin is the actual pinned name for smoothness of the ordinary deriv, despite its name; its m+1<=n premise holds for infinity.",
+    "mixedDerivative_eqOn_of_isOpen is actually declared in Statements namespace in PhysicalTransmissionTrace and imported through LocalMixedProductBounds. Both exact provider fingerprints are recorded. LocalMixedProductBounds itself is scheduled for a reviewed common-provider port in main batch2; the used congruence contract must be preserved during activation."
+  ],
+  "scope_limits": [
+    "This is only the numerical spatial mixed-jet portion for the ten negative geometric atoms. Qualitative ContDiffOn and periodicity are not asserted by this source, and neither ReferenceJets nor CurrentJets is completed here.",
+    "The actual whole-component raw optical lower bound remains an explicit primitive input whose final producer must be the retained N01 construction. It is not inferred from arbitrary Through03.",
+    "Sources remain held outside active src. Compilation, default-limit performance, final dependency rebindings and axiom audit remain for the centrally managed CI gate."
+  ],
+  "source_modified": false,
+  "compiled": false,
+  "local_lean_execution": false,
+  "active_src_index_refs_changed": false,
+  "created_at_utc": "2026-11-12T18:28:59.676546+00:00"
+}

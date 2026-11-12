@@ -1,0 +1,125 @@
+{
+  "kind": "same_actual_negative_unit_inverse_and_source_factor_material_data_candidate",
+  "owner": "/root/quantitative_route",
+  "status": "HELD_UNCOMPILED_AWAITING_FULL_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualNegativeReferenceScalarSourceData.lean",
+    "sha256": "dcd9c44b21cf5f415f2f86491ddaf806782120d61ea8869db3f5a1c2e778a4cb",
+    "blob": "5c19660b736e579346f659994fc21142bf5241fe",
+    "lines": 210,
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceScalarSourceData.lean"
+  },
+  "public_declarations": [
+    "n04bActualTypedAtlas_negative_scalarSource_material_data"
+  ],
+  "imports": [
+    "ContinuousFlexibility.Analysis.ActualNegativeReferenceHeightProfileJets",
+    "ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds",
+    "ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightProfileJets.lean",
+      "sha256": "3f5469853c612cf6e08dcc38a4bebd0b48e25efce4e978768129496c77abd607",
+      "blob": "b91d53b6530be55909d6ffa3ea259760dfef25d0",
+      "lines": 215
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceInverseMaterialJets.lean",
+      "sha256": "ba704d27a5edf8f0f8a7bcf9eefba41d7f440f982f4dd8622daf25c3949e1eae",
+      "blob": "777b7bac04467e51554377f80235b6b55efbb9ce",
+      "lines": 207
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceGeometryFields.lean",
+      "sha256": "17eb137b0c746f4ff44388b842b068a2745a96e99940de71667b75ffc8abbb52",
+      "blob": "9f46123e9067e42a31444649e6392ba3d0bae493",
+      "lines": 124
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferenceScalarInverse.lean",
+      "sha256": "84346b8a1836363f9b0fdbe48a93c75b42deaa144beea6fe8e0bf32d2faffa3e",
+      "blob": "532d3bc282c59cd7c96647db57d037efbd9f42a4",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthMaterialBounds.lean",
+      "sha256": "a1355b681442efbae6b424f142b2841024bf85d37c7f16c3127339eb926a907c",
+      "blob": "97ba75908af68271cfed29233a7043de7af28ab4",
+      "lines": 86
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "sha256": "bbec6c5ccb9e0d9bcf75516b8c9024e4f15c2e834119822ace6da3c4e70fd51c",
+      "blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "lines": 128
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01ReturnMargins.lean",
+      "sha256": "f6837c40fe69a787217b9cac9af9388bfba17785c39c29bdcad83afca21f4fbb",
+      "blob": "f239b311b3a9f8428fb49177124e1289113a0512",
+      "lines": 103
+    }
+  ],
+  "selected_provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightProfileJetsReviewedManifest.json",
+      "sha256": "ad19d504da2c870a42b0f9a0a14b7a7891fc98644b8373731c4587c4d4ffcf3a",
+      "blob": "75a1548464fa2f178416500754f2e9e005ba9eb4",
+      "lines": 38
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceInverseMaterialJetsReviewedManifest.json",
+      "sha256": "8673113760c3d0eeeec6cd2513e2b3863e1e74b80ae2e5c1a9a32eb50e8c7e28",
+      "blob": "fa8f75e002ad16d85437327dd0cf0f64d0f15690",
+      "lines": 44
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceGeometryFieldsReviewedManifest.json",
+      "sha256": "b889b812d707d5dcac345870030d67ea0255fb027180e9a361717c69b19a4027",
+      "blob": "9cca81df03404d340125ce607eb1bec6e9ffcfa4",
+      "lines": 64
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePartANamespaceReviewedManifest.json",
+      "sha256": "1a16f2e8437ce8eb96ae2f3898479ac42753411f92260ec4343ba4fb31f7c23c",
+      "blob": "3edbaa3198a4e7d4975614969f0be033e7ec5a61",
+      "lines": 109
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthMaterialBoundsReviewedManifest.json",
+      "sha256": "e21b63e0ec60e432f4924b97056edbba72a0725b77090a538524a390ab89507c",
+      "blob": "62d50e6ed5412e8ef5c4d63d1a387c0d3906275d",
+      "lines": 65
+    }
+  ],
+  "self_review": [
+    "The fixed e0 precedes the original typed K and all numerical constants. X and F are the literal zero-angle slices after canonicalUnitPoint of that K. The same sample K.cell(piece i) is retained throughout.",
+    "The 152-line selected scalar inverse supplies chi local smoothness and the actual MapsTo into the physical half. The 124-line full-angle geometry formula identifies sourceFactor with H^3*w at the same inverse point and proves both exact unit-field identities.",
+    "The unit affine map uses the actual canonical length rho=K.right-K.left. Its positivity follows from the real root-cut radius, and its image lies in the actual canonical half. The actual negative component puts its inverse image in radialCore.",
+    "C0=CH+CI combines the 215 and 207 numerical sample scales before every finite order. Only original E0>0 is used; the floor is proved for C0*E0. No enlarged T or new witness is silently substituted.",
+    "For each N, A dominates the actual gamma=3,false source envelope, all required positive inverse envelopes, and both the coefficient and exponent of the 86-line canonical-length bound. Constants are chosen before the piece and point.",
+    "The exact affine derivative formula pays rho^q. The original source jets and positive chi jets are <=M, rho<=M and M>=1, hence both unit estimates are <=M^(N+1). Packing uses coefficient A^(N+1) and exponent A*(N+1). N=0 includes the source value, while the inverse bound remains explicitly positive-order only.",
+    "The common affine estimate is applied to explicit g i and chi i functions, avoiding higher-order metavariable inference. The profile gamma=3 conversion uses the pinned Real.rpow_ofNat; no extra profile inverse compact bound is used.",
+    "Read the complete final source and exact contracts of 215, 207, 152, 124, 86 and the active unconditional affine-derivative provider. No local Lean/compiler/elaborator or CI operation was performed."
+  ],
+  "scope_limits": [
+    "The raw optical lower bound remains supplied at the true host of the same component; it is not a final scalar-jet target and is not claimed to follow from arbitrary Through03.",
+    "This leaf produces actual negative X/F data. The later whole-V left/nu adapter can use the already reviewed generic scalar-column theorem; no new whole enumeration or positive reference family is chosen here.",
+    "The result is ordinary spatial finite-prefix data, not state-directional SmoothDirections.",
+    "Final E0-only single-B atom packaging still needs explicit same-T normalization or an explicit old-K cost transport to enlarged material data."
+  ],
+  "budget": {
+    "root_authorized_total_new_lean_lines": 300,
+    "this_complete_leaf_lines": 210,
+    "remaining_lines": 90,
+    "additional_lean_sources_written": 0
+  },
+  "collision_check": {
+    "scope": "current active src public declarations",
+    "matches": []
+  },
+  "compiled": false,
+  "active_modified": false,
+  "created_at_utc": "2026-11-12T18:16:25.253674+00:00"
+}

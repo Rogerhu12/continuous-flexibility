@@ -1,0 +1,52 @@
+{
+  "label": 162,
+  "head": "e6f0123c8cc5958988184914abf8ca6e27a75b12",
+  "tree": "d0737dd159074aa8fa622ab6c8df27680614be6c",
+  "main": "89e539ccf7e9c558467cf875f44dcff9490ce271",
+  "main_checked": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+  "main_workflow_file_integrated": {
+    "main": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+    "path": ".github/workflows/build.yml",
+    "sha256": "6e1b0a3c010b6988811399ec9a71c5f5f58ca7a83421e5cd3d28a3bbf5b8bb24",
+    "blob": "3152629f2ebb53a7af652218ea5bd2d64d16d493",
+    "method": "Exact workflow-only file copy; main ancestry remains pending dependency-complete source batches."
+  },
+  "pushed": "2026-11-12 17:48:10 UTC",
+  "first_check_not_before": "2026-11-12 17:53:10 UTC",
+  "status": "failure",
+  "plan": "n04-ci162-plan.json",
+  "source_total": 4214,
+  "source_all_total": 4218,
+  "root_imports": 4155,
+  "added_lean_since_full_green": 1080,
+  "main_source_batch": 1,
+  "main_source_batch_count": 5,
+  "source_files": 2,
+  "scope": "Repair only the exact two CI161 diagnostics: typed per-k choice projections for the neighborhood helper and explicit scalar endpoint arguments for the optical helper. Every other source byte, public contract and default resource setting is preserved. Current-main source batch remains 1/5; further cohorts require full CI.",
+  "run": 43273248780,
+  "job": 131374833174,
+  "completed_run_updated_at": "2026-11-12T17:53:38Z",
+  "checked_at": "2026-11-12T17:56:00.198635+00:00",
+  "last_checked_at": "2026-11-12 17:55:02 UTC",
+  "observed_run_status": "completed",
+  "quick_check": "failure",
+  "full_build": "skipped",
+  "axiom_audit": "skipped",
+  "blueprint": "skipped",
+  "cached_module_files_reported": 4633,
+  "modules_total_reported": 4214,
+  "module_count_note": "Raw cache count includes restored artifacts and exceeds the current source count; it is not a validated compiled-current-source count.",
+  "log": "n04-ci-162.log",
+  "log_sha256": "a04057cc24b44326e4346f4f7d2d0ede03f43b706314065d4177d01936be6501",
+  "failure_log": "cached_once",
+  "failed_modules": [
+    "ContinuousFlexibility.Analysis.ReturnCorrectionReferenceLower"
+  ],
+  "repaired_modules_compiled": [
+    "ContinuousFlexibility.Analysis.N01ControlFlowBounds",
+    "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction"
+  ],
+  "failure": "The two CI161 repairs compiled. The next consumer ReturnCorrectionReferenceLower still destructures the speed-error provider before its new natural-number loss witness, misassigning real constants/proofs and missing the new base lower bound.",
+  "receipt": "n04-ci-162-failure-receipt.json",
+  "receipt_sha256": "f114758e1b052aa3c87800e4dd6a0ee503523f6adb8b33afd82d5bf1a9a9a5d6"
+}

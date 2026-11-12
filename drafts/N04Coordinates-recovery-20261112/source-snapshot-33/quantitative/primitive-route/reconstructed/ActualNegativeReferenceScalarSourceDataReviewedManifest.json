@@ -1,0 +1,75 @@
+{
+  "kind": "same_actual_negative_unit_inverse_and_source_factor_material_data_reviewed_owner",
+  "owner": "/root/quantitative_route",
+  "status": "FULL_SOURCE_INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualNegativeReferenceScalarSourceData.lean",
+    "sha256": "dcd9c44b21cf5f415f2f86491ddaf806782120d61ea8869db3f5a1c2e778a4cb",
+    "blob": "5c19660b736e579346f659994fc21142bf5241fe",
+    "lines": 210,
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceScalarSourceData.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualNegativeReferenceScalarSourceDataCandidateManifest.json",
+    "sha256": "6f6ee30c76dd1e9223a5ac1fe02989665d9dbab96dec497d8503a4eb068f9952",
+    "blob": "9a229bc05f96b414145f22bc31e4893453299550",
+    "lines": 125
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/ActualNegativeReferenceScalarSourceDataIndependentReview.json",
+    "sha256": "ef63217d2bcbe3a0cb9b2c7ce6fcd0fea916d0c89d085f646a476e4fc3af4c8e",
+    "blob": "19171a9daee00e39343097de2c50026c9aefd589",
+    "lines": 203
+  },
+  "selected_provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightProfileJetsReviewedManifest.json",
+      "sha256": "ad19d504da2c870a42b0f9a0a14b7a7891fc98644b8373731c4587c4d4ffcf3a",
+      "blob": "75a1548464fa2f178416500754f2e9e005ba9eb4",
+      "lines": 38
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceInverseMaterialJetsReviewedManifest.json",
+      "sha256": "8673113760c3d0eeeec6cd2513e2b3863e1e74b80ae2e5c1a9a32eb50e8c7e28",
+      "blob": "fa8f75e002ad16d85437327dd0cf0f64d0f15690",
+      "lines": 44
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceGeometryFieldsReviewedManifest.json",
+      "sha256": "b889b812d707d5dcac345870030d67ea0255fb027180e9a361717c69b19a4027",
+      "blob": "9cca81df03404d340125ce607eb1bec6e9ffcfa4",
+      "lines": 64
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePartANamespaceReviewedManifest.json",
+      "sha256": "1a16f2e8437ce8eb96ae2f3898479ac42753411f92260ec4343ba4fb31f7c23c",
+      "blob": "3edbaa3198a4e7d4975614969f0be033e7ec5a61",
+      "lines": 109
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthMaterialBoundsReviewedManifest.json",
+      "sha256": "e21b63e0ec60e432f4924b97056edbba72a0725b77090a538524a390ab89507c",
+      "blob": "62d50e6ed5412e8ef5c4d63d1a387c0d3906275d",
+      "lines": 65
+    }
+  ],
+  "public_declarations": [
+    "n04bActualTypedAtlas_negative_scalarSource_material_data"
+  ],
+  "scope": [
+    "The raw optical lower bound remains supplied at the true host of the same component; it is not a final scalar-jet target and is not claimed to follow from arbitrary Through03.",
+    "This leaf produces actual negative X/F data. The later whole-V left/nu adapter can use the already reviewed generic scalar-column theorem; no new whole enumeration or positive reference family is chosen here.",
+    "The result is ordinary spatial finite-prefix data, not state-directional SmoothDirections.",
+    "Final E0-only single-B atom packaging still needs explicit same-T normalization or an explicit old-K cost transport to enlarged material data."
+  ],
+  "budget": {
+    "new_lean_lines": 210,
+    "authorized_total_lean_lines": 300,
+    "remaining_90_lines_on_hold_by_parent": true,
+    "additional_lean_written": false
+  },
+  "compiled": false,
+  "source_unchanged_since_peer": true,
+  "active_src_index_refs_changed": false,
+  "created_at_utc": "2026-11-12T18:27:44.059456+00:00"
+}

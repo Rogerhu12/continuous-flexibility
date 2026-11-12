@@ -1,0 +1,91 @@
+{
+  "schema": "n04-reviewed-supersession-v1",
+  "owner": "/root/proof_inventory",
+  "status": "FULL_SOURCE_INDEPENDENT_REVIEW_PASSED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.lean",
+    "sha256": "5e099aae8613c8f52bfefb6caf3e952e8153a1e95f8f34cadb7cf222fdb89864",
+    "git_blob": "708038714ee89624264cb7f7d3ddb0c9f9720124",
+    "lines": 349,
+    "bytes": 18485
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBoundsIndentCandidateManifest.json",
+    "sha256": "1138dd698a524dc3669a239a21bac657f9a83cdd5673d2e8e7ee90f98ce489ed",
+    "git_blob": "df27230a600e029345fdb119aaa0d0d3164a1212",
+    "lines": 54,
+    "bytes": 2660
+  },
+  "supersedes_preserved": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/TameInverseFixedBaseBounds.lean",
+    "sha256": "4f9e0ce5e1ac930cab621ba13ef2a161030e407eaada26109f5eee513395ac4a",
+    "git_blob": "87f7691022eeb24f6d79c42e689da369c06a8236",
+    "lines": 349,
+    "bytes": 18483
+  },
+  "retained_base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.base.lean.txt",
+    "sha256": "4f9e0ce5e1ac930cab621ba13ef2a161030e407eaada26109f5eee513395ac4a",
+    "git_blob": "87f7691022eeb24f6d79c42e689da369c06a8236",
+    "lines": 349,
+    "bytes": 18483
+  },
+  "exact_diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.diff",
+    "sha256": "e88a74fb6b002dc7dff07ede919faacc6e09a1841ef49d583226e1d078d9e131",
+    "git_blob": "e2015a3a2cf5702b311f55919923df41218b7aaa",
+    "lines": 11,
+    "bytes": 806
+  },
+  "original_candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/TameInverseFixedBaseBoundsCandidateManifest.json",
+    "sha256": "15253dcf14fb03f2af9bb9a0b395568b49db3f99e0d1651a61e045103b97981c",
+    "git_blob": "2a9c7f5a238e33f7f393b9ffe3ecce945e0cfdba",
+    "lines": 66,
+    "bytes": 4718
+  },
+  "initial_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/TameInverseFixedBaseBoundsInitialIndependentReview.json",
+    "sha256": "6c7e73442bb83bd1a34de216e2faeebd456b42e17abe0f49959a67511635796d",
+    "git_blob": "d942310470d51718c176da4728751f01f2a0f780",
+    "lines": 546,
+    "bytes": 29300
+  },
+  "final_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/TameInverseFixedBaseBoundsIndependentReview.json",
+    "sha256": "bdb98adabaa5cc1414614f4b2af5ac137a62e4981bef7704c4d8ff341899caf2",
+    "git_blob": "706ce6315030904ddda7d96d0c9a6c14c6fd8cc5",
+    "lines": 67,
+    "bytes": 4530
+  },
+  "provider_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/TameInverseFixedBaseBoundsClosureInventory.json",
+    "sha256": "2658b55665e01c6e4d88299bad0c298d988386d1844e297228fe5a1fa0b6be34",
+    "git_blob": "87428eafb1d8c06fe2fb57ae592edd2d90d2c352",
+    "lines": 1088,
+    "bytes": 51719
+  },
+  "provider_count": 70,
+  "original_baseline_head": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+  "original_baseline_tree": "64a18c3f510156a0386b5601f7c26fe575e6f958",
+  "exact_delta": "Only have hv declaration indentation, six leading spaces to eight. No other byte changes.",
+  "public_declarations": [
+    "inverseFamilySmoothDirections_fixedBase_oneHigh"
+  ],
+  "complete_declaration_headers_unchanged": true,
+  "reverse_delta_recovers_all_original_bytes": true,
+  "scope": [
+    "One fixed base is chosen before the inverse jet order; the additional loss is chosen after the order and before the radius/output seminorm.",
+    "The genuine original inverseFamilySmoothDirections and inverseExpressionJet are used; finite-input cardinality is not charged to the low base.",
+    "The original source and original candidate remain frozen; only this explicit indentation supersession is selected."
+  ],
+  "remaining_actual_instantiations": [
+    "Actual homogeneous circle inverse-value hV on the same positive domain",
+    "Actual inverseForwardJet hF identified with the coupled kernel and the exact derivative tower",
+    "Actual pair interpolation, correction composition, height gain and radial PDE estimates"
+  ],
+  "compiled": false,
+  "local_lean_execution": false,
+  "active_src_index_refs_changed": false,
+  "created_at_utc": "2026-11-12T18:21:12.189680+00:00"
+}

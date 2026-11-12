@@ -1,0 +1,187 @@
+{
+  "kind": "actual_negative_reference_height_profile_product_and_inverse_composition_independent_review",
+  "reviewer": "/root/quantitative_route",
+  "author": "/root/audit_coordinates",
+  "status": "PASS_FULL_SOURCE_AND_ACTUAL_PROVIDER_STATIC_REVIEW_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightProfileJets.lean",
+    "sha256": "3f5469853c612cf6e08dcc38a4bebd0b48e25efce4e978768129496c77abd607",
+    "blob": "b91d53b6530be55909d6ffa3ea259760dfef25d0",
+    "lines": 215,
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceHeightProfileJets.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightProfileJetsCandidateManifest.json",
+    "sha256": "ff9a737e964db264b10d867ea1209d1a1409a13042d313e90e1005bc04c1691c",
+    "blob": "fcea98ba1a3ca3e6fe512ca01ff9b736fd3cebf2",
+    "lines": 124
+  },
+  "review_scope": {
+    "complete_source_read": true,
+    "source_lines": 215,
+    "public_declarations": [
+      "n04bActualTypedAtlas_reference_half_heightProfile_material_jets"
+    ],
+    "actual_provider_contracts_read": true,
+    "source_and_all_fifteen_manifest_artifact_fingerprints_match": true,
+    "mathlib_pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "lean_toolchain": "leanprover/lean4:v4.35.0-rc3"
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceGeometryFields.lean",
+      "sha256": "17eb137b0c746f4ff44388b842b068a2745a96e99940de71667b75ffc8abbb52",
+      "blob": "9f46123e9067e42a31444649e6392ba3d0bae493",
+      "lines": 124
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightMaterialJets.lean",
+      "sha256": "bda1d2cda9e6c88c394819233f9606026e417e03a5c357cb6aab76ab7da8d383",
+      "blob": "20423f5dc8e83101d8950003cb5454bf3def9007",
+      "lines": 293
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceInverseMaterialJets.lean",
+      "sha256": "ba704d27a5edf8f0f8a7bcf9eefba41d7f440f982f4dd8622daf25c3949e1eae",
+      "blob": "777b7bac04467e51554377f80235b6b55efbb9ce",
+      "lines": 207
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferenceScalarInverse.lean",
+      "sha256": "84346b8a1836363f9b0fdbe48a93c75b42deaa144beea6fe8e0bf32d2faffa3e",
+      "blob": "532d3bc282c59cd7c96647db57d037efbd9f42a4",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeMaterialSamples.lean",
+      "sha256": "696583df4d5261aff78e5a6cc32ff4fde06ea6d17b2bdf2745805fde0a06c2fc",
+      "blob": "2546c07212cf569a225e873eb38945a9cb4127e3",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJets.lean",
+      "sha256": "52e91e6500606231c499fcd3863d9b2f9ca99535348f52e9abc8f15b139b8e23",
+      "blob": "6fbfba9f7a349a6604eb28473b5098a5f45a3e1f",
+      "lines": 103
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.lean",
+      "sha256": "9bd854157a276a4c5fd8d3161f63d65a851fedbc656beba959ad5899e89cb5a7",
+      "blob": "4df4d9e114ae59bd99b5d3c09825adc95dbe3808",
+      "lines": 159
+    }
+  ],
+  "selected_provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceGeometryFieldsReviewedManifest.json",
+      "sha256": "b889b812d707d5dcac345870030d67ea0255fb027180e9a361717c69b19a4027",
+      "blob": "9cca81df03404d340125ce607eb1bec6e9ffcfa4",
+      "lines": 64
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightMaterialJetsReviewedManifest.json",
+      "sha256": "637ef52639e1a5b1931946ab387f07c59961d9841735d7c694650709014c6799",
+      "blob": "5bfb4d8c935777c2dab8f22de4ece2fb88cf858c",
+      "lines": 88
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceInverseMaterialJetsReviewedManifest.json",
+      "sha256": "8673113760c3d0eeeec6cd2513e2b3863e1e74b80ae2e5c1a9a32eb50e8c7e28",
+      "blob": "fa8f75e002ad16d85437327dd0cf0f64d0f15690",
+      "lines": 44
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePartANamespaceReviewedManifest.json",
+      "sha256": "1a16f2e8437ce8eb96ae2f3898479ac42753411f92260ec4343ba4fb31f7c23c",
+      "blob": "3edbaa3198a4e7d4975614969f0be033e7ec5a61",
+      "lines": 109
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeMaterialSamplesReviewedManifest.json",
+      "sha256": "c296199c9dec8bfd1cf7f5ba7d3540a783ce6d0f6043ee58c41bdce59e5e6729",
+      "blob": "c3770c51f99a3a4a734213541f7b04436263350c",
+      "lines": 54
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJetsReviewedManifest.json",
+      "sha256": "16b143562879d7afa35191e4a5850af9407223fed8af59136062433a67906846",
+      "blob": "d45cce809854a44f29de33bf413d6d46afcb51e7",
+      "lines": 34
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelopeVisibilityReviewedManifest.json",
+      "sha256": "55e1f9fe0d0e8e16ec596a3bebb948de20821dc3d05675dfaf382d4eb1901984",
+      "blob": "2ff192a92ea67f4a7a301b651ece487da37125e0",
+      "lines": 46
+    }
+  ],
+  "checks": [
+    {
+      "area": "Quantifier order and unchanged witness",
+      "result": "C0=CH+CI is selected before gamma, the profile/reciprocal Bool, finite order, piece, optical host and point. Both CH and CI come from the same original hT/hS/hN/hfield/e and actual typed K. B may depend on gamma/Bool/N, but is chosen before k/m/side/j and all evaluation points. No atlas, sample, inverse or cutoff is reselected."
+    },
+    {
+      "area": "Physical height provider",
+      "result": "The actual 293-line provider n04bActualTypedAtlas_reference_half_height_physical_power_material_jets has precisely the theta-then-n ordinary-derivative contract used at theta=0. Its raw optical bound remains an explicit input at the true host j, independently of the stored K.cell sample."
+    },
+    {
+      "area": "Profile and reciprocal profile",
+      "result": "The compact-prefix helper uses only globally smooth w on the fixed closed annulus. Its declaration is byte-equivalent to negativePotential_profile_prefix after the private name change, excluding separator blank lines. Reciprocal w instead uses the 103-line open-core point estimate and the 131-line actual old-half sample transport with gamma=eta=0 and exponent Pi. No reciprocal profile is assumed smooth or bounded at ambient endpoints."
+    },
+    {
+      "area": "Actual geometry and local smoothness",
+      "result": "The selected namespace-corrected 152-line scalar inverse supplies H smooth on the physical half, literal chi smooth on the canonical half, MapsTo chi into that same physical half, and H>0. Tuple projections match the exact contract. N01 negative-component bounds put each physical-half point in radialCore; profile positivity there permits reciprocal smoothness, and positive H permits every real height power locally."
+    },
+    {
+      "area": "Finite prefix and material floors",
+      "result": "A dominates both BH_q and BI_q for every q<=N, as well as P, Ki*Ks and Ps, by the actual Fin(N+1) sum. W=C0*E is proved >=1 from the material sample positivity and CH floor; only E>0 is assumed for the original E0. The local hpack uses monotonicity in the nonnegative base and then in the exponent on W>=1 with the correct directions."
+    },
+    {
+      "area": "Physical product estimate",
+      "result": "The public product envelope applies to the true local functions H^gamma and w or w^-1 at r, with both finite prefixes bounded by M=A*W^A. This yields CP*M^2 at every derivative order q<=N, including q=0 and arbitrary real gamma."
+    },
+    {
+      "area": "Inverse composition estimate",
+      "result": "The exact 207-line inverse provider bounds positive derivative a by its (a-1)+1 estimate. Nat.sub_add_cancel uses 1<=a and the prefix bound covers a-1<=N. The composition envelope uses only positive chi jets, while chi(xi) is evaluated inside the actual physical half by MapsTo. It yields CC*CP*M^(N+2), including N=0, without a global zeroth inverse bound."
+    },
+    {
+      "area": "Final exponent packing",
+      "result": "CN dominates CP and CC*CP. The identity CN*(A*W^A)^(N+2)=(CN*A^(N+2))*W^(A*(N+2)) uses the pinned reverse rpow_mul_natCast direction. B=1+coefficient+exponent dominates both real coefficient and exponent, and W>=1 justifies the final bound B*W^B. The same B controls physical and canonical prefixes."
+    },
+    {
+      "area": "Lean and source checks",
+      "result": "Read all 215 source lines, both public finite-envelope provider proofs, the exact height/inverse/scalar/sample/point contracts and actual IsMaterialData/RadialProfileGeometry projections. Checked the pinned ContDiff.continuous_iteratedDeriv, ContDiffAt.rpow_const_of_ne, rpow_le_rpow, rpow_le_rpow_of_exponent_le, one_le_rpow and rpow_mul_natCast signatures. The one public declaration has no current active-source collision; no source edits were made."
+    }
+  ],
+  "pinned_api_sources": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "lines": 1155
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Deriv.lean",
+      "sha256": "9098e465d4b2a9898352ad3eb944c1b76fa7bd010862391f790d57f59ab59d25",
+      "blob": "5c4314cbc0f51719245bc3b268948275c4a21812",
+      "lines": 778
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+      "sha256": "d6c3ace5e5e251e2943bd5985eb9c0a076a875c98fd876c961cb54c366ca50cb",
+      "blob": "86135f3b7295638a64b59ddaf2653b87d2733431",
+      "lines": 391
+    }
+  ],
+  "findings": [],
+  "scope_limits": [
+    "This is a full independent static review, not compilation or a guarantee of elaboration performance under default limits.",
+    "The same-witness raw optical lower bound remains explicit; this review does not claim arbitrary Through03 already supplies that bound.",
+    "The result is ordinary spatial finite-prefix bounds for actual height/profile products and their literal inverse compositions. It does not assert state-directional SmoothDirections or a completed whole-atlas ReferenceJets certificate.",
+    "Public source remains frozen. No compiler, elaborator, resource-limit change, active source/index/ref/checkpoint mutation or CI operation was performed."
+  ],
+  "compiled": false,
+  "active_modified": false,
+  "source_bytes_unchanged": true,
+  "created_at_utc": "2026-11-12T18:10:58.335132+00:00"
+}

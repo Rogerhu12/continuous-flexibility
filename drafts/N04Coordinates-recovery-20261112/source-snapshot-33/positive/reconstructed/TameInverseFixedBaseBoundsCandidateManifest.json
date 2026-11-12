@@ -1,0 +1,66 @@
+{
+  "schema": "n04-candidate-manifest-v1",
+  "status": "candidate_uncompiled_pending_full_peer",
+  "owner": "/root/proof_inventory",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/TameInverseFixedBaseBounds.lean",
+    "sha256": "4f9e0ce5e1ac930cab621ba13ef2a161030e407eaada26109f5eee513395ac4a",
+    "git_blob": "87f7691022eeb24f6d79c42e689da369c06a8236",
+    "lines": 349,
+    "bytes": 18483
+  },
+  "baseline_head": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+  "baseline_tree": "64a18c3f510156a0386b5601f7c26fe575e6f958",
+  "closure_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/TameInverseFixedBaseBoundsClosureInventory.json",
+    "sha256": "2658b55665e01c6e4d88299bad0c298d988386d1844e297228fe5a1fa0b6be34",
+    "git_blob": "87428eafb1d8c06fe2fb57ae592edd2d90d2c352",
+    "lines": 1088,
+    "bytes": 51719
+  },
+  "public_declarations": [
+    "inverseFamilySmoothDirections_fixedBase_oneHigh"
+  ],
+  "public_collisions_in_active": [],
+  "authorization": "Root permits one complete fixed-base inverse numerical foundation of at most 400 new Lean lines; own scratch only.",
+  "new_lean_lines": 349,
+  "full_compile": false,
+  "local_lean_execution": false,
+  "active_src_index_refs_changed": false,
+  "mathematical_scope": [
+    "The finite-input augmented sum product uses one interpolation base and loss before the index type/cardinality, both derivative indices, radius and every input.",
+    "The existing TameInverseExpression.eval is estimated by structural induction, with IsZeroLoss reused unchanged. No new inverse or jet representation.",
+    "Inverse-node high budget is inverseLoss + operatorBase + childLoss + productLoss. Forward-node high budget is n + forwardLoss + operatorBase + childLoss + productLoss. Add uses max.",
+    "The original inverseFamilySmoothDirections is normalized directly by multilinear_bound_of_unitBall; the public output chooses base before every parameter order n, and loss(n) before radius/output order.",
+    "The domain U and maps L/V/J remain exactly the supplied actual ones. No appeal to the older per-order HasUniformLowGrowth or to a new higher-order state neighborhood."
+  ],
+  "primitive_inputs_still_to_instantiate": [
+    {
+      "input": "hV",
+      "contract": "Uniform homogeneous inverse-value bound with one fixed operatorBase/inverseLoss and actual positivity domain.",
+      "exact_supplier": "c5c48d262157a11a76604113c40d2438d480433f:src/ContinuousFlexibility/Analysis/CircleInverseFamilyTame.lean",
+      "construction": "circleInverseComposeLinear_unit_growth + linearMap_oneHigh_bound_of_unitBall; restrict actual positive inverse to the same fixed lower bound. Not implemented in this leaf."
+    },
+    {
+      "input": "hF",
+      "contract": "Actual inverseForwardJet of the same forward tower, with fixed operatorBase/forwardLoss and high index s+n+forwardLoss; directions are only bounded at operatorBase.",
+      "exact_suppliers": [
+        "c5c48d262157a11a76604113c40d2438d480433f:src/ContinuousFlexibility/Analysis/CoupledCircleCompositionRealization.lean",
+        "c5c48d262157a11a76604113c40d2438d480433f:src/ContinuousFlexibility/Analysis/CircleCompositionJetModels.lean",
+        "c5c48d262157a11a76604113c40d2438d480433f:src/ContinuousFlexibility/Analysis/CircleTranslationUniformBounds.lean"
+      ],
+      "construction": "Identify genuine forward jets with the realized coupled kernels via decoder injectivity/tower uniqueness. Translation is a grading contraction. Absorb low direction products into the radius-dependent constant. Not implemented in this leaf."
+    },
+    {
+      "input": "hI",
+      "contract": "HasInterpolation for pairGrading of the actual supplied circle grading, fixed before all orders.",
+      "construction": "Use the actual model interpolation/smoothing certificate once; no order-dependent product base."
+    }
+  ],
+  "remaining_actual_task": "Instantiate the primitive circle operators, compose with the one retained correction witness and actual same J, retain H^0.75, then close actual speed/forcing/radial estimates. This foundation alone is not CurrentJets.",
+  "notes": [
+    "All direct/import-closure files are the actual active 18f7f633 source identities; TameInverseBounds/Jets/Expressions and SpacesInterpolationProducts match the inspected c5 bytes.",
+    "Actual active TameMultilinearNormalization was freshly read and selected; it differs from c5 historically but preserves the exact invoked multilinear_bound_of_unitBall signature.",
+    "The initial draft lacked direct TameJetLocalBounds visibility; caught before this first frozen candidate and fixed by selecting that direct import."
+  ]
+}

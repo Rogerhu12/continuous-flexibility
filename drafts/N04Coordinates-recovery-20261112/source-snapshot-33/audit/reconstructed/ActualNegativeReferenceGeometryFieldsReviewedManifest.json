@@ -1,0 +1,64 @@
+{
+  "kind": "actual_original_negative_reference_geometry_fields_reviewed",
+  "owner": "/root/audit_coordinates",
+  "status": "INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceGeometryFields.lean",
+    "sha256": "17eb137b0c746f4ff44388b842b068a2745a96e99940de71667b75ffc8abbb52",
+    "blob": "9f46123e9067e42a31444649e6392ba3d0bae493",
+    "lines": 124,
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceGeometryFields.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualNegativeReferenceScalarInverse",
+      "ContinuousFlexibility.Analysis.RadialUnitDensityInverseJets"
+    ],
+    "public_names": [
+      "n04Coordinates_actual_reference_negative_geometry_fields"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceGeometryFieldsCandidateManifest.json",
+    "sha256": "d24f82d0e37649a0785d40a1a544152526f6f19c21f13e1b6ccb5169fbc0a082",
+    "blob": "8fcb2f73d3e7977067df5f4b34f1f72175e47037",
+    "lines": 115
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ActualNegativeReferenceGeometryFieldsIndependentReview.json",
+    "sha256": "3802d573bd176fd07dd7c09f896efa242ef4da49c5891ee1df4d7de44c3cb28f",
+    "blob": "cab25adee9f2f1ceb85224d452d60cc7e3cc6710",
+    "lines": 129
+  },
+  "selected_provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePartANamespaceReviewedManifest.json",
+      "sha256": "1a16f2e8437ce8eb96ae2f3898479ac42753411f92260ec4343ba4fb31f7c23c",
+      "blob": "3edbaa3198a4e7d4975614969f0be033e7ec5a61",
+      "lines": 109
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-helper-visibility/RadialUnitDensityInverseJetsVisibilityReviewedManifest.json",
+      "sha256": "2b0671f4acfa8c26d884d47a30b92a46df43fc79c682f2ef792592933462d8ce",
+      "blob": "83fa44dc5b45b8fdf50ce0f1c0b7ee95199bdf20",
+      "lines": 53
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverseReviewedManifest.json",
+      "sha256": "e136252bba805148d49e501b11a0de84d50a4b003c6269177ef59e441cce3f38",
+      "blob": "8c659170a981e8d1a930d164ac3423597c3356fc",
+      "lines": 56
+    }
+  ],
+  "checks": [
+    "The complete124 source and all14 candidate source/provider/owner/API identities were reverified before this owner freeze. The source bytes are unchanged.",
+    "The actual same-K scalar slices, true physical/canonical half ranges, absolute Jacobian and reciprocal and actual canonical source-factor identities have a complete independent source/API review.",
+    "Final selection explicitly requires the Blueprint-qualified152 scalar-inverse provider and the public-helper136 visibility provider. Historical sources, pending manifests and earlier reviews remain unchanged.",
+    "No numerical geometry-jet bound, final primitive certificate or raw optical lower conclusion is asserted by this124 leaf."
+  ],
+  "compiled": false,
+  "source_bytes_unchanged": true,
+  "scope_limits": [
+    "Held static review only. No local compiler/elaborator or active source/index/ref/checkpoint/authority/CI action.",
+    "The current CI/budget gate permits owner metadata freeze only; no new mathematical Lean source was added."
+  ],
+  "created_at": "2026-11-12T17:55:27.324124+00:00"
+}

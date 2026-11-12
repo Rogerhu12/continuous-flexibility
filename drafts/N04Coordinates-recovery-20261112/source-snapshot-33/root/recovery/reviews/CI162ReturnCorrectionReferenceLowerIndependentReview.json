@@ -1,0 +1,95 @@
+{
+  "kind": "ci162_return_reference_lower_full_independent_source_and_provider_review",
+  "reviewer": "/root",
+  "status": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair162/ReturnCorrectionReferenceLower.lean",
+    "sha256": "eb91a9b47d45ee74a5347276aa69209e835447977702b93790f352fd6c57416d",
+    "blob": "bfb0f877d13812f2fbcff828162a857b7b2762f2",
+    "lines": 128
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair162/ReturnCorrectionReferenceLowerCI162RepairCandidateManifest.json",
+    "sha256": "9ba6a6eeda8f18ea62556e763c1e20064ecb90673d8869e31dfa063d77f0c01f",
+    "blob": "18ca958066031a18a1585593a4ef9c463b90508a",
+    "lines": 137
+  },
+  "preimage": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair162/ReturnCorrectionReferenceLower.base.lean.txt",
+    "sha256": "10f55363eb4d0179d697e914bb2fd04f0d5b214cfaada715b258436353bd30d7",
+    "blob": "43f7c779c53e7d80dcfa183515765172cd8e8c7d",
+    "lines": 128
+  },
+  "actual_base": {
+    "commit": "e6f0123c8cc5958988184914abf8ca6e27a75b12",
+    "tree": "d0737dd159074aa8fa622ab6c8df27680614be6c",
+    "target_path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionReferenceLower.lean",
+    "blob": "43f7c779c53e7d80dcfa183515765172cd8e8c7d"
+  },
+  "cached_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-162.log",
+    "sha256": "a04057cc24b44326e4346f4f7d2d0ede03f43b706314065d4177d01936be6501",
+    "blob": "83c16e03eb7baea4613e08a2e990742d371f8b3f",
+    "lines": 978
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ReturnCorrectionSpeedGap.lean",
+      "sha256": "73081341f18367e1a792b6a1dda84c9d07cd2beadb147b05c8cf3637444c1617",
+      "blob": "d1a81d60b31bf68689e99722e23fc8c594999b8b",
+      "lines": 374
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ReturnCorrectionVelocityBounds.lean",
+      "sha256": "5e99bb6e2d0b8c1e0e7e457d44308c8212f29ed9dbe900cb3cc3fd2f9d0ba300",
+      "blob": "b6c7cefc7e6768f7a2c43b36e688d0e4bef28637",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ReturnCorrectionRelativeDiscriminant.lean",
+      "sha256": "5e87d31e17d7ac570f553670e5a1734314c716e25724fdc0ee3b5b1e9a5a8869",
+      "blob": "0e1199a37e4860f1312687fa207edddca1855ad6",
+      "lines": 107
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01NegativeOpticalLower.lean",
+      "sha256": "55bf0f53a5925af0f306d20439d1ea415a8eed9caa33f86527be4385c47052c8",
+      "blob": "97867a8a9f61e1974994cd8f081bee6fbcae9989",
+      "lines": 180
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean",
+      "sha256": "e49b0d271a6a1633dce24a1a2ac1c6b2c4ca33f73be8191d59fb827b6e30e8f4",
+      "blob": "5150d77940daa6a3f95bd505bdb929b2e95db667",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    }
+  ],
+  "public_names": [
+    "N04ReturnReferenceDiscriminantBound",
+    "N01Properties.n04Coordinates_returnCorrected_reference_lower"
+  ],
+  "read_scope": [
+    "Complete128-line repaired and failed preimage source, exact3-line delta and cached failure context.",
+    "Actual speed-error supplier complete public contract and proof, neighboring corrected gap consumer, and the updated neighborhood restriction were read. Other provider identities and unchanged imported definitions are preserved."
+  ],
+  "checks": [
+    "The first returned witness is the natural parameterLoss; lossV now binds it before the two positive real constants. V, K and their positivity proofs again match their actual supplier types.",
+    "The local existential base-prime is max base (1+loss+lossV), supplying both the old neighborhood inclusion and exactly the new high-order requirement to herror. lossV is selected before every state, component and point.",
+    "The same original chi, host j, N01 witness, original output loss, epsilon-prime formula and full discriminant argument are retained. No per-component neighborhood or new final estimate premise is introduced.",
+    "Inverse substitution of the exact three changes reproduces every preimage byte. Both full public contracts, imports, options and all remaining proof text are unchanged.",
+    "Every recorded source/provider/log fingerprint and the active Git preimage are verified. No source declaration is added and no default resource setting changes."
+  ],
+  "findings": [],
+  "compiled": false,
+  "source_modified": false,
+  "scope_limits": [
+    "Static full consumer review; CI is still required. No local compiler/elaborator, active source/index/ref operation or CI query was used for this review."
+  ],
+  "created_at": "2026-11-12T17:57:14.299494+00:00"
+}

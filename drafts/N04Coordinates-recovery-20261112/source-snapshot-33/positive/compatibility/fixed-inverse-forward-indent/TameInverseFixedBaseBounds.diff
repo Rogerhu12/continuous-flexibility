@@ -1,0 +1,11 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/TameInverseFixedBaseBounds.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.lean
+@@ -232,7 +232,7 @@
+           (Finset.sum_nonneg (fun i _ => (cHigh i).coe_nonneg))
+         obtain ⟨C, hC, hc⟩ := hF n R' hR' s
+         refine ⟨C * K, mul_nonneg hC (zero_le_one.trans hK), fun i => ?_⟩
+-      have hv (j : Fin n) : q operatorBase (v j i.val.2) ≤ R' := by
++        have hv (j : Fin n) : q operatorBase (v j i.val.2) ≤ R' := by
+           have hAj : (cLow j : ℝ) ≤ 1 + ∑ i, (cLow i : ℝ) :=
+             (Finset.single_le_sum (fun i _ => (cLow i).coe_nonneg) (Finset.mem_univ j)).trans
+               (le_add_of_nonneg_left zero_le_one)
