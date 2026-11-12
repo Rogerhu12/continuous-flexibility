@@ -63,15 +63,19 @@ theorem n04WholeReferenceGaugeAtlasData_actual_cutOperator_and_sourcePairing
           n04bWithInteriorDivision, n04WholeCutPair, Equiv.apply_symm_apply,
           n04WholePiecePositive, Bool.false_eq_true, ite_false, ite_true] using hB.1.1 m
       · intro z hz hs m
+        have hcut := hB.1.2 z hz hs m
+        dsimp only [CanonicalCurrentCutPair, canonicalCutPoint, physicalPieceOpen] at hcut ⊢
         simpa only [CanonicalCurrentCutPair, canonicalCutPoint, physicalPieceOpen,
           V, W, n04WholeReferenceGaugeAtlasData, n04WholeCanonicalAtlasData,
           n04bWithInteriorDivision, n04WholeCutPair, Equiv.apply_symm_apply,
-          Bool.false_eq_true, ite_false, ite_true] using hB.1.2 z hz hs m
+          Bool.false_eq_true, ite_false, ite_true] using hcut
     · intro z hz hs u hu m θ
+      have htrans := hB.2.1 z hz hs u hu m θ
+      dsimp only [canonicalHeight] at htrans ⊢
       simpa only [canonicalHeight, V, W,
         n04WholeReferenceGaugeAtlasData, n04WholeCanonicalAtlasData, n04bWithInteriorDivision,
         n04WholeCutPair, Equiv.apply_symm_apply, Bool.false_eq_true, ite_false, ite_true]
-        using hB.2.1 z hz hs u hu m θ
+        using htrans
     · intro z hz hs m u hu p hp
       have hx := (hA.charts z hz hs m).2.1 hp
       obtain ⟨ha, hb, hc⟩ := n04b_field_contDiffAt_on_piece hA hfield' hz hs m hx

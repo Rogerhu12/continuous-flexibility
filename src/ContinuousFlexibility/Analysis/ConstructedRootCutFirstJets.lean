@@ -67,7 +67,7 @@ private theorem n04Coordinates_height_cut_first_derivative
       _ = -(1 / Real.sqrt ρ) := by
         field_simp [hρ.ne', hs.ne'] <;> nlinarith [Real.sq_sqrt hρ.le]
   simp only [ContinuousLinearMap.sub_apply, ContinuousLinearMap.smul_apply, smul_eq_mul]
-  apply mul_left_cancel₀ (mul_ne_zero (mul_ne_zero (by norm_num) hup.ne') hBp.ne')
+  apply mul_left_cancel₀ (show 2 * u x * B x ≠ 0 by positivity)
   calc
     (2 * u x * B x) * (fderiv ℝ v x q - fderiv ℝ u x q) =
         -(2 * (1 / (2 * Real.sqrt ρ))) * fderiv ℝ f x q := hdifference
@@ -154,10 +154,15 @@ theorem n04Coordinates_constructedRoot_cut_firstJets
   have hHr := (hXs true).differentiableAt (by simp)
   have hFl := (hHl.hasFDerivAt.fst.sub_const ρ).prodMk hHl.hasFDerivAt.snd
   have hFr := (hHr.hasFDerivAt.fst.sub_const ρ).neg.prodMk hHr.hasFDerivAt.snd
+  simp only [Pi.neg_apply] at hFr
   refine ⟨?_, ?_, ?_, hHvalue.symm, ?_⟩
-  · simp only [hXraw, sub_self]
-  · simp only [hXraw, sub_self, neg_zero]
-  · rw [hFl.fderiv, hFr.fderiv]
+  · change ((X false x).1 - ρ, (X false x).2) = (0, θ)
+    simp only [hX, sub_self]
+  · change (-((X true x).1 - ρ), (X true x).2) = ((X false x).1 - ρ, (X false x).2)
+    simp only [hX, sub_self, neg_zero]
+  · change fderiv ℝ (fun y => ((X false y).1 - ρ, (X false y).2)) x =
+      fderiv ℝ (fun y => (-((X true y).1 - ρ), (X true y).2)) x
+    rw [hFl.fderiv, hFr.fderiv]
     apply ContinuousLinearMap.ext
     intro q
     simp only [ContinuousLinearMap.prod_apply, ContinuousLinearMap.comp_apply,

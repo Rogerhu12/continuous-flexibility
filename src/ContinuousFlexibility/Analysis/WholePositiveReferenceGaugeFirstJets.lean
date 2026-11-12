@@ -47,7 +47,9 @@ theorem wholePositiveReferenceGauge_firstJets_of_transport
     rw [hp]
     exact hh₀.div hQ hQp
   refine ⟨hinv.comp_match hψat, ?_⟩
-  simpa only [wholePositiveReferenceGaugeHeight, wholePositiveChartHeight,
-    Function.comp_def, div_eq_mul_inv] using hinv.comp_match hquot
+  change FiniteFullJetMatch 1 (τ p)
+    (fun x : PolarPoint => h₀ (σ x) * (Q (σ x))⁻¹)
+    (fun x : PolarPoint => g₀ (S x) * (q (S x))⁻¹)
+  simpa only [Function.comp_def, div_eq_mul_inv] using hinv.comp_match hquot
 
 end ContinuousFlexibility.Analysis
