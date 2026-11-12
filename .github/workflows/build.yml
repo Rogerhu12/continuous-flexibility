@@ -80,19 +80,7 @@ jobs:
             if [ -z "$id" ]; then echo "$line @${head:0:8}: no green run"; continue; fi
             dir="$RUNNER_TEMP/line-build-$id"
             if gh run download "$id" -R "$GITHUB_REPOSITORY" -n lake-build-line -D "$dir"; then
-              if [ -f "$dir/lake-build.tar.zst" ]; then
-                # Compatibility with line artifacts uploaded before chunking.
-                tar --zstd -xf "$dir/lake-build.tar.zst"
-              else
-                shopt -s nullglob
-                parts=("$dir"/lake-build.tar.zst.part-[0-9][0-9][0-9][0-9][0-9][0-9])
-                if [ "${#parts[@]}" -eq 0 ]; then
-                  echo "::warning::$line @${head:0:8}: run $id has no recognized build archive"
-                  continue
-                fi
-                # Fixed-width numeric suffixes make glob order archive order.
-                cat "${parts[@]}" | tar --zstd -xf -
-              fi
+              tar --zstd -xf "$dir/lake-build.tar.zst"
               echo "$line @${head:0:8}: reused the build of run $id"
             else
               echo "$line @${head:0:8}: run $id has no build artifact"
@@ -172,49 +160,37 @@ jobs:
             status=1
           fi
           exit "$status"
-      - name: Delete this branch's previous build cache
-        if: always()
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-          PREFIX: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~
-        run: |
-          gh cache list -R "$GITHUB_REPOSITORY" --key "$PREFIX" --limit 100 --json id --jq '.[].id' |
-            while read -r id; do gh cache delete "$id" -R "$GITHUB_REPOSITORY" || true; done
       - name: Save project build artifacts
-        if: always()
+        # Save first, delete older entries only after the save succeeded, so a cancelled
+        # or failed run never leaves the branch without a cache. Only a run whose cache
+        # layers were fully restored saves: a run cancelled while restoring has a partial
+        # or missing .lake/build, and saving it would replace the branch's good entry.
+        id: save
+        if: >-
+          always() && steps.restore-main.outcome == 'success' &&
+          (github.ref_name == 'main' || steps.restore.outcome == 'success')
+        continue-on-error: true
         uses: actions/cache/save@v4
         with:
           path: .lake/build
           key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~${{ github.sha }}
+      - name: Delete this branch's older build caches
+        if: always() && steps.save.outcome == 'success'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PREFIX: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~
+          KEEP: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~${{ github.sha }}
+        run: |
+          gh cache list -R "$GITHUB_REPOSITORY" --key "$PREFIX" --limit 100 --json id,key             --jq '.[] | select(.key != $ENV.KEEP) | .id' |
+            while read -r id; do gh cache delete "$id" -R "$GITHUB_REPOSITORY" || true; done
       - name: Count compiled modules
         if: always()
         shell: bash
         run: |
-          python3 - <<'PYCOUNT'
-          from pathlib import Path
-
-          source_root = Path("src")
-          artifact_root = Path(".lake/build/lib/lean")
-          excluded = set()
-          for line in Path("scripts/root_exclude.txt").read_text(encoding="utf-8").splitlines():
-              name = line.split("#", 1)[0].strip()
-              if name:
-                  excluded.add(name)
-          sources = list((source_root / "ContinuousFlexibility").rglob("*.lean"))
-          built = 0
-          excluded_count = 0
-          for source in sources:
-              relative = source.relative_to(source_root)
-              module = ".".join(relative.with_suffix("").parts)
-              if module in excluded:
-                  excluded_count += 1
-                  continue
-              if (artifact_root / relative.with_suffix(".olean")).is_file():
-                  built += 1
-          print(f"modules compiled / total: {built} / {len(sources)}")
-          print(f"modules excluded from generated root: {excluded_count}")
-          PYCOUNT
+          total=$(find src/ContinuousFlexibility -name '*.lean' | wc -l)
+          built=$(find .lake/build/lib/lean/ContinuousFlexibility -name '*.olean' ! -name '*.server.olean' ! -name '*.private.olean' | wc -l)
+          echo "modules compiled / total: $built / $total"
       - name: Blueprint status and endpoint axioms
         shell: bash
         run: lake env lean scripts/BlueprintStatus.lean
@@ -234,42 +210,25 @@ jobs:
             echo "::warning::release lake-cache does not exist; the compiled build was not published"
           fi
       - name: Pack this line's build for main
-        # Main downloads it when it merges this exact head (see above).
-        # Stream into 4 MiB parts so every uploaded member stays below 5 MB.
-        if: startsWith(github.ref_name, 'line/') && success()
+        # Main downloads it (green runs only) when it merges this exact head; the build of a
+        # failed run is kept too, so the lead can download it and compile files locally.
+        if: startsWith(github.ref_name, 'line/') && !cancelled()
         shell: bash
         run: |
-          set -o pipefail
           find .lake/build/ir -name '*.setup.json' -delete 2>/dev/null || true
-          parts_dir="$RUNNER_TEMP/lake-build-parts"
-          mkdir -p "$parts_dir"
-          tar --zstd -cf - .lake/build |
-            split --bytes=4194304 --numeric-suffixes=0 --suffix-length=6 - "$parts_dir/lake-build.tar.zst.part-"
-          du -sh "$parts_dir"
+          tar --zstd -cf lake-build.tar.zst .lake/build
+          ls -lh lake-build.tar.zst
       - uses: actions/upload-artifact@v4
-        if: startsWith(github.ref_name, 'line/') && success()
+        if: startsWith(github.ref_name, 'line/') && !cancelled()
         with:
           name: lake-build-line
-          path: ${{ runner.temp }}/lake-build-parts/lake-build.tar.zst.part-*
+          path: lake-build.tar.zst
           retention-days: 3
           compression-level: 0
-      - name: Prepare bounded log artifacts
-        if: always()
-        timeout-minutes: 1
-        continue-on-error: true
-        shell: bash
-        run: |
-          log_dir="$RUNNER_TEMP/build-log-parts"
-          mkdir -p "$log_dir"
-          for log in build.log quick.log; do
-            [ -f "$log" ] || continue
-            split --bytes=4194304 --numeric-suffixes=0 --suffix-length=6 "$log" "$log_dir/$log.part-"
-          done
       - uses: actions/upload-artifact@v4
-        # Log publishing is optional; proof validation is enforced by the build and axiom steps.
-        timeout-minutes: 2
-        continue-on-error: true
         if: always()
         with:
           name: build-log
-          path: ${{ runner.temp }}/build-log-parts/*.part-*
+          path: |
+            build.log
+            quick.log
