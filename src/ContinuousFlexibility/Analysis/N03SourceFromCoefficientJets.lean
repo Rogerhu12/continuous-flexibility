@@ -76,6 +76,96 @@ private theorem n03Source_heightMember_of_sector
       (href.lift_sectorParameterOfState z hs)
   exact (congrArg (HeightMember D T (3 / 4 : ℝ)) heq).mp hm
 
+/-- Grading conditions independent of the coefficient tower and source family. -/
+private theorem n03Source_parameterGrading_conditions
+    (hS : IsPhysicalSpaces D T S) :
+    (∀ s, Continuous
+      (pairGrading (pairGrading (sectorGrading S) realGrading)
+        (S.circle (3 / 4 : ℝ)).grading s)) ∧
+    Monotone (pairGrading (pairGrading (sectorGrading S) realGrading)
+      (S.circle (3 / 4 : ℝ)).grading) ∧
+    HasInterpolation (pairGrading (pairGrading (sectorGrading S) realGrading)
+      (S.circle (3 / 4 : ℝ)).grading) := by
+  let p : ℕ → Seminorm ℝ ((StateDirections S × ℝ) × CircleSpace S) :=
+    pairGrading (pairGrading (sectorGrading S) realGrading) (S.circle (3 / 4 : ℝ)).grading
+  have hp : Monotone p := pairGrading_monotone (sectorPairGrading_monotone S)
+    (gradedSeminorm_monotone _ _)
+  have hpcont (s : ℕ) : Continuous (p s) := by
+    change Continuous (fun x : (StateDirections S × ℝ) × CircleSpace S =>
+      pairGrading (sectorGrading S) realGrading s x.1 + (S.circle (3 / 4 : ℝ)).grading s x.2)
+    exact ((sectorPairGrading_continuous S s).comp continuous_fst).add
+      (((withSeminorms_graded _ _).continuous_seminorm s).comp continuous_snd)
+  have hIp : HasInterpolation p := hasInterpolation_of_hasSmoothing hp
+    (hasSmoothing_pairGrading
+      (hasSmoothing_pairGrading (solve_sector_hasSmoothing hS) hasSmoothing_realGrading)
+      (hS.2.2.2.2.1 (3 / 4 : ℝ)).2.1)
+  exact ⟨hpcont, hp, hIp⟩
+
+private theorem n03Source_heightGrading_conditions
+    (hS : IsPhysicalSpaces D T S) :
+    (∀ s, Continuous (heightPairGrading S s)) ∧
+    Monotone (heightPairGrading S) ∧
+    HasInterpolation (heightPairGrading S) ∧
+    ∀ s (η : HeightPair S), physicalNorm T (3 / 4 : ℝ) s
+      ((S.height (3 / 4 : ℝ)).decode η.1) ≤ heightPairGrading S s η := by
+  let q : ℕ → Seminorm ℝ (HeightPair S) := heightPairGrading S
+  have hq : Monotone q := pairGrading_monotone (gradedSeminorm_monotone _ _)
+    (fun _ _ _ _ => le_rfl)
+  have hqcont (s : ℕ) : Continuous (q s) := by
+    change Continuous (fun η : HeightPair S => (S.height (3 / 4 : ℝ)).grading s η.1 + ‖η.2‖)
+    exact (((withSeminorms_graded _ _).continuous_seminorm s).comp continuous_fst).add
+      continuous_snd.norm
+  have hIq : HasInterpolation q := hasInterpolation_of_hasSmoothing hq
+    (hasSmoothing_pairGrading (hS.2.2.2.1 (3 / 4 : ℝ)).2.1 hasSmoothing_realGrading)
+  have hheight (s : ℕ) (η : HeightPair S) : physicalNorm T (3 / 4 : ℝ) s
+      ((S.height (3 / 4 : ℝ)).decode η.1) ≤ q s η :=
+    (sobolevModel_physicalNorm_le_grading (hS.1 (3 / 4 : ℝ)) η.1 s).trans
+      (le_add_of_nonneg_right (apply_nonneg (realGrading s) η.2))
+  exact ⟨hqcont, hq, hIq, hheight⟩
+
+private theorem n03Source_smoothTame_of_sector_decode
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (A : ∀ n : ℕ, ((StateDirections S × ℝ) × CircleSpace S) →
+      MultilinearMap ℝ (fun _ : Fin n => (StateDirections S × ℝ) × CircleSpace S)
+        (annularSmoothCoefficientSpace D))
+    (hcoeff : LocalCoefficientMaterialTameBounds (T := T)
+      (U := sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S)))
+      (pairGrading (pairGrading (sectorGrading S) realGrading)
+        (S.circle (3 / 4 : ℝ)).grading) A)
+    (hsym : ∀ n x, x ∈ sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S)) →
+      ∀ v, SymmetricErrorCoefficientSymmetry (A n x v).val)
+    (hderiv : ∀ n (x w : (StateDirections S × ℝ) × CircleSpace S)
+      (v : Fin n → (StateDirections S × ℝ) × CircleSpace S) (t : ℝ),
+      x + t • w ∈ sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S)) →
+      MixedJetHasDerivAt
+        (fun s r => ((A n (x + s • w) v).val (T.radius r.1, r.2)).1)
+        (fun r => ((A (n + 1) (x + t • w) (Fin.cons w v)).val
+          (T.radius r.1, r.2)).1) t ∧
+      MixedJetHasDerivAt
+        (fun s r => ((A n (x + s • w) v).val (T.radius r.1, r.2)).2)
+        (fun r => ((A (n + 1) (x + t • w) (Fin.cons w v)).val
+          (T.radius r.1, r.2)).2) t)
+    (f : ((StateDirections S × ℝ) × CircleSpace S) × HeightPair S → S.Source)
+    (hdecode : ∀ z ∈ (sectorNeighborhood S base ε ε ×ˢ
+        (univ : Set (CircleSpace S))) ×ˢ (univ : Set (HeightPair S)),
+      physicalSourceDecode S (f z) =
+        symmetricDivergenceBilinear hS hT (A 0 z.1 Fin.elim0) z.2) :
+    SmoothTameOn
+      (pairGrading (pairGrading (pairGrading (sectorGrading S) realGrading)
+        (S.circle (3 / 4 : ℝ)).grading) (heightPairGrading S))
+      S.sourceGrading ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ univ) f := by
+  have hp := n03Source_parameterGrading_conditions hS
+  have hq := n03Source_heightGrading_conditions hS
+  exact smoothTameOn_symmetricSource_of_coefficient_jets
+    (E := (StateDirections S × ℝ) × CircleSpace S) (D := D) (T := T) (S := S)
+    (U := sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S)))
+    hS hT ((sectorNeighborhood_isOpen S base ε ε).prod isOpen_univ)
+    ((sectorNeighborhood_convex S base ε ε).prod convex_univ)
+    (pairGrading (pairGrading (sectorGrading S) realGrading)
+      (S.circle (3 / 4 : ℝ)).grading) (heightPairGrading S)
+    hp.1 hq.1 hp.2.1 hq.2.1 hp.2.2 hq.2.2.1 hq.2.2.2
+    A hcoeff hsym hderiv f hdecode
+
 /-- Keep the realized source family opaque while applying the generic jet theorem. -/
 private theorem n03Source_smoothTame_of_actual_decode
     (hN : N01Properties D T S C base loss ε)
@@ -114,37 +204,7 @@ private theorem n03Source_smoothTame_of_actual_decode
       S.sourceGrading ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ univ)
       (fun z : ((StateDirections S × ℝ) × CircleSpace S) × HeightPair S =>
         F (liftSectorParameter S C z.1.1) z.1.2 z.2) := by
-  let p : ℕ → Seminorm ℝ ((StateDirections S × ℝ) × CircleSpace S) :=
-    pairGrading (pairGrading (sectorGrading S) realGrading) (S.circle (3 / 4 : ℝ)).grading
-  let q : ℕ → Seminorm ℝ (HeightPair S) := heightPairGrading S
-  have hp : Monotone p := pairGrading_monotone (sectorPairGrading_monotone S)
-    (gradedSeminorm_monotone _ _)
-  have hq : Monotone q := pairGrading_monotone (gradedSeminorm_monotone _ _) (fun _ _ _ _ => le_rfl)
-  have hpcont (s : ℕ) : Continuous (p s) := by
-    change Continuous (fun x : (StateDirections S × ℝ) × CircleSpace S =>
-      pairGrading (sectorGrading S) realGrading s x.1 + (S.circle (3 / 4 : ℝ)).grading s x.2)
-    exact ((sectorPairGrading_continuous S s).comp continuous_fst).add
-      (((withSeminorms_graded _ _).continuous_seminorm s).comp continuous_snd)
-  have hqcont (s : ℕ) : Continuous (q s) := by
-    change Continuous (fun η : HeightPair S => (S.height (3 / 4 : ℝ)).grading s η.1 + ‖η.2‖)
-    exact (((withSeminorms_graded _ _).continuous_seminorm s).comp continuous_fst).add
-      continuous_snd.norm
-  have hIp : HasInterpolation p := hasInterpolation_of_hasSmoothing hp
-    (hasSmoothing_pairGrading
-      (hasSmoothing_pairGrading (solve_sector_hasSmoothing hS) hasSmoothing_realGrading)
-      (hS.2.2.2.2.1 (3 / 4 : ℝ)).2.1)
-  have hIq : HasInterpolation q := hasInterpolation_of_hasSmoothing hq
-    (hasSmoothing_pairGrading (hS.2.2.2.1 (3 / 4 : ℝ)).2.1 hasSmoothing_realGrading)
-  have hheight (s : ℕ) (η : HeightPair S) : physicalNorm T (3 / 4 : ℝ) s
-      ((S.height (3 / 4 : ℝ)).decode η.1) ≤ q s η :=
-    (sobolevModel_physicalNorm_le_grading (hS.1 (3 / 4 : ℝ)) η.1 s).trans
-      (le_add_of_nonneg_right (apply_nonneg (realGrading s) η.2))
-  refine smoothTameOn_symmetricSource_of_coefficient_jets
-    (E := (StateDirections S × ℝ) × CircleSpace S) (D := D) (T := T) (S := S)
-    (U := sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S)))
-    hS hT ((sectorNeighborhood_isOpen S base ε ε).prod isOpen_univ)
-    ((sectorNeighborhood_convex S base ε ε).prod convex_univ)
-    p q hpcont hqcont hp hq hIp hIq hheight A hcoeff hsym hderiv
+  refine n03Source_smoothTame_of_sector_decode hS hT A hcoeff hsym hderiv
     (fun z : ((StateDirections S × ℝ) × CircleSpace S) × HeightPair S =>
       F (liftSectorParameter S C z.1.1) z.1.2 z.2) ?_
   intro z hz
