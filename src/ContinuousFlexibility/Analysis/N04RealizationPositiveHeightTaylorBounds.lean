@@ -33,7 +33,7 @@ private theorem n04Realization_signedExp_outer (inv : Bool) (a b : ℕ) (y : ℝ
       have he : (fun x : ℝ => Real.exp (-x)) = (fun x => Real.exp ((-1) * x)) := by
         funext x
         rw [neg_one_mul]
-      rw [he, Real.iteratedDeriv_exp_const_mul (a + b) (-1)]
+      rw [he, _root_.iteratedDeriv_exp_const_mul (a + b) (-1)]
       simp only [norm_mul, norm_pow,
         Real.norm_eq_abs, abs_neg, abs_one, one_pow, one_mul, neg_one_mul,
         abs_of_pos (Real.exp_pos (-y)), ite_true]
