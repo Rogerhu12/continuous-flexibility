@@ -30,6 +30,7 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   (hN : N01Properties D T S C base loss ε)
   (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
 
+include hN in
 theorem N01Properties.singleComponentFlowIncrement_periodic
     (m : ℕ) (r : ℝ) (hr : r ∈ Ioo (C.left m) (C.right m))
     (z : StateDirections S × ℝ) (hz : z ∈ sectorNeighborhood S base ε ε) :
@@ -44,6 +45,7 @@ theorem N01Properties.singleComponentFlowIncrement_periodic
     hN.minusFlow_add_period hN.reference_mem_stateNeighborhood m ⟨hr.1.le, hr.2.le⟩ θ]
   ring
 
+include hN hS hT in
 theorem N01Properties.singleComponentFlowIncrement_member
     (m : ℕ) (r : ℝ) (hr : r ∈ Ioo (C.left m) (C.right m))
     (z : StateDirections S × ℝ) (hz : z ∈ sectorNeighborhood S base ε ε) :
