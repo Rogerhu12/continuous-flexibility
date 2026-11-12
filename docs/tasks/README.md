@@ -14,14 +14,12 @@ Read this section every time you check the rules. A notice is removed when it is
 - **N02N03, N04b, N04Coordinates, N05, N06: merge `origin/main` now.** N07b's statement repair is on
   `main` (`docs/STATUS.md`, "Statement repairs"): `physicalPieceOpen` takes the state, the old fixed
   interval is `referencePhysicalPieceOpen`, and the N04 output also carries
-  `CanonicalPrimitiveGeometry`, which the N04 producers must prove. Two more repairs will follow
-  (N07a: `CanonicalGeometry.PrimitiveGeometryProperties` in the N04 output and raw `b/c` outputs in
-  N03; N01c: `N01PrimitiveGeometry` in the N01a output and new flow-loss quantifiers). Merge `main`
-  each time one lands.
-- **N07a and N08 are taken over by new sessions (2026-11-12).** The earlier sessions on `line/N07a`
-  and `line/N08` must not push to those branches any more. The new sessions continue on the same
-  branches: N07a ports to N07b's state-dependent physical domains (instructions in the last comment
-  of PR #37); N08 continues from its last push (PR #39), whose CI is red.
+  `CanonicalPrimitiveGeometry`, which the N04 producers must prove. N07a's repair is now on `main`
+  too: N02N03 must also prove `ReturnCorrectionSpatialProperties` (smoothness and π-periodicity of
+  the actual corrected `b/c` coefficients), and the N04 producers also
+  `CanonicalGeometry.PrimitiveGeometryProperties`. One more will follow (N01c:
+  `N01PrimitiveGeometry` in the N01a output and new flow-loss quantifiers). Merge `main` each time
+  one lands.
 - **R10a, R11a, N07a, N07b, N09N10: your math-research access check was wrong, not your access.**
   `git ls-remote` on a bare URL has no credentials. Use the URL derived from your `origin` remote
   (step 4 of "When you finish" below), and take the next reserved topic.
