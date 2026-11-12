@@ -19,6 +19,12 @@ namespace ContinuousFlexibility.Statements
 local instance n01CorrectionCoefficientSmoothJetsStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
+local instance n01CorrectionCoefficientSmoothJetsSectorSMul (S : PhysicalSpacesData) :
+    SMul ℝ (StateDirections S × ℝ) := Prod.instSMul
+
+local instance n01CorrectionCoefficientSmoothJetsParameterSMul (S : PhysicalSpacesData) :
+    SMul ℝ ((StateDirections S × ℝ) × CircleSpace S) := Prod.instSMul
+
 open Set Filter ContinuousFlexibility.Analysis
 open scoped ContDiff Topology
 

@@ -18,6 +18,12 @@ namespace ContinuousFlexibility.Statements
 
 local instance n01CorrectionCoefficientSpatialJetsStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
+local instance n01CorrectionCoefficientSpatialJetsSectorSMul (S : PhysicalSpacesData) :
+    SMul ℝ (StateDirections S × ℝ) := Prod.instSMul
+
+local instance n01CorrectionCoefficientSpatialJetsParameterSMul (S : PhysicalSpacesData) :
+    SMul ℝ ((StateDirections S × ℝ) × CircleSpace S) := Prod.instSMul
+
 local instance n01CorrectionCoefficientSpatialJetsRealNormedSpace : NormedSpace ℝ ℝ :=
     NormedField.toNormedSpace
 

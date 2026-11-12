@@ -142,7 +142,7 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_component_mixed_hasD
       Fin.cons (α := fun _ : Fin (n + 1) =>
         ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint)
         (w, (0 : PolarPoint)) (fun i : Fin n => (v i, (0 : PolarPoint))) := by
-    simpa only [Function.comp_apply] using
+    simpa only [Function.comp_def] using
       (Fin.comp_cons (fun z : (StateDirections S × ℝ) × CircleSpace S =>
         (z, (0 : PolarPoint))) w v)
   have hd := J.jointJet_mixed_hasDerivAt_line hU hV hc a b n x w ht
