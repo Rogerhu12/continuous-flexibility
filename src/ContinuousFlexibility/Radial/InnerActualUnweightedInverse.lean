@@ -1,6 +1,6 @@
 import ContinuousFlexibility.Radial.InnerRadialWeightedInverse
 import ContinuousFlexibility.Radial.InnerRadialDirichletWeights
-import ContinuousFlexibility.Radial.InnerUnitWeights
+import ContinuousFlexibility.Radial.MatchedInnerUnitWeights
 
 /-!
 # The actual finite-chain inverse with unit physical weights
@@ -99,8 +99,8 @@ theorem exists_unweighted_inverse_of_local_bounds (hw : ContDiff ℝ ∞ D.w)
   have hΩ : innerMatrixEquiv (Matrix.diagonal (fun _ : Fin n => (1 : ℝ)))
       (Matrix.PosDef.isUnit (Matrix.posDef_diagonal_iff.mpr (fun _ => zero_lt_one))) =
       ContinuousLinearEquiv.refl ℝ (EuclideanSpace ℝ (Fin n)) := by
-    apply DFunLike.ext
-    intro ξ
+    apply ContinuousLinearEquiv.ext
+    funext ξ
     rw [innerMatrixEquiv_apply]
     change innerBoundaryDiagonal (fun _ : Fin n => (1 : ℝ)) ξ = ξ
     rw [innerBoundaryDiagonal_one, ContinuousLinearMap.id_apply]
