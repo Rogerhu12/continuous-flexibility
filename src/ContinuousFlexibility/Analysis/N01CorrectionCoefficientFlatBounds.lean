@@ -59,7 +59,6 @@ def StripCoefficientFlatOneHighBound
       |mixedDerivative a b (fun y => (A n x v y).2) q| ≤
         K * F m * W m ^ Q * oneHighVariationWeight p low (k + loss) x v
 
-set_option diagnostics true in
 /-- Patch the same strip jets and their proved zero values, then apply the
 ordinary-to-material bound without specializing the parameter space. -/
 private theorem correctionCoefficient_material_bound_of_flat_data
@@ -83,14 +82,12 @@ private theorem correctionCoefficient_material_bound_of_flat_data
     (r : ℝ) (hr : 0 ≤ r) :
     CoefficientMaterialOneHighBound (T := T) p Asmooth n B L 0
       (U ∩ {x | p B x ≤ r}) := by
-  run_tac Lean.logInfo "N02N03 FlatBounds: material-assembly"
   refine coefficientMaterialOneHighBound_of_ordinary
     (E := E) (D := D) (T := T) hT p Asmooth n B L 0
     (U ∩ {x | p B x ≤ r}) ?_
   intro k
   obtain ⟨A, Q, hA, hQ, hab⟩ := hb r hr k
   obtain ⟨K, hK, hflat⟩ := hflat Q hQ
-  run_tac Lean.logInfo "N02N03 FlatBounds: material-envelope"
   refine ⟨A * K, mul_nonneg hA hK.le, fun x hx v a b habk q hq => ?_⟩
   have heq := hrestrict x hx.1 v
   have hfst := congrArg (fun f : PolarPoint → ℝ × ℝ =>
@@ -115,7 +112,6 @@ private theorem correctionCoefficient_material_bound_of_flat_data
     · simpa only [hs0, abs_zero] using
         (mul_nonneg (mul_nonneg hA hK.le) hW)
 
-set_option diagnostics true in
 /-- Assemble the original unit low-order neighborhoods from the same order
 witnesses and absolute sublevel bounds. -/
 private theorem correctionCoefficient_local_bounds_of_sublevels
@@ -131,7 +127,6 @@ private theorem correctionCoefficient_local_bounds_of_sublevels
       CoefficientMaterialOneHighBound (T := T) p A n B L 0
         (U ∩ {x | p B x ≤ r})) :
     LocalCoefficientMaterialTameBounds (T := T) (U := U) p A := by
-  run_tac Lean.logInfo "N02N03 FlatBounds: local-assembly"
   intro n x₀ hx₀
   obtain ⟨B, L, hb⟩ := hb n
   refine ⟨B, L, 0, 1, zero_lt_one, ?_⟩
@@ -176,7 +171,6 @@ variable {R : ReturnEquationData S}
 
 include hχ hsupp hend hl hh hstripSupport hstripDisc
 
-set_option diagnostics true in
 theorem N01Properties.returnCorrectionSmoothCoefficientJets_material_bound_of_flat_strips
     (p : ℕ → Seminorm ℝ ((StateDirections S × ℝ) × CircleSpace S))
     (n B L : ℕ)
@@ -190,7 +184,6 @@ theorem N01Properties.returnCorrectionSmoothCoefficientJets_material_bound_of_fl
       (hN.returnCorrectionSmoothCoefficientJets hS hT hR j hcell χ hχrange hcutoff hdisc
         hχ hsupp hend l h hl hh hstripSupport hstripDisc)
       n B L 0 ((sectorNeighborhood S base ε ε ×ˢ univ) ∩ {x | p B x ≤ r}) := by
-  run_tac Lean.logInfo "N02N03 FlatBounds: material-provider"
   let E : Type := (StateDirections S × ℝ) × CircleSpace S
   let U : Set E := sectorNeighborhood S base ε ε ×ˢ univ
   let Araw : ∀ i : ℕ, E → MultilinearMap ℝ (fun _ : Fin i => E) (PolarPoint → ℝ × ℝ) :=
@@ -241,7 +234,6 @@ theorem N01Properties.returnCorrectionSmoothCoefficientJets_material_bound_of_fl
       exact ⟨hf0, hs0⟩)
     hb r hr
 
-set_option diagnostics true in
 /-- The local tame interface for the same smooth coefficient jets. The
 material exponent is zero, and the low order and loss precede every
 spatial order. -/
@@ -256,7 +248,6 @@ theorem N01Properties.returnCorrectionSmoothCoefficientJets_local_bounds_of_flat
       (U := sectorNeighborhood S base ε ε ×ˢ univ) p
       (hN.returnCorrectionSmoothCoefficientJets hS hT hR j hcell χ hχrange hcutoff hdisc
         hχ hsupp hend l h hl hh hstripSupport hstripDisc) := by
-  run_tac Lean.logInfo "N02N03 FlatBounds: local-provider"
   let E : Type := (StateDirections S × ℝ) × CircleSpace S
   let U : Set E := sectorNeighborhood S base ε ε ×ˢ univ
   let Araw : ∀ i : ℕ, E → MultilinearMap ℝ (fun _ : Fin i => E) (PolarPoint → ℝ × ℝ) :=
