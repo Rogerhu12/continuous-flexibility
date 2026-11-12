@@ -46,7 +46,8 @@ theorem n05_tail_slot_index
     (side : Bool) (k : ℕ) :
     P.reference.cellIndex (morseTailIndex side k) =
       max (P.selected.chain.index + k) P.indexFloor := by
-  rw [P.cellIndex, hraw, morseTwoTailAt_tail]
+  simpa only [hraw, morseTwoTailAt_tail] using
+    congrFun P.cellIndex (morseTailIndex side k)
 
 theorem n05_tail_floor_shift (k : ℕ) :
     |((max (P.retainedIndex + k) P.indexFloor : ℕ) : ℝ) -
@@ -111,7 +112,7 @@ theorem n05NegativeComponentAt_carrier_index_bound (hq : 0 < q)
       hcarrier ⟨mul_lt_mul_of_pos_left hr.1 (P.n05TailScale_pos side),
         mul_lt_mul_of_pos_left hr.2 (P.n05TailScale_pos side)⟩
     have hindex : P.reference.cellIndex i = max (P.retainedIndex + k) P.indexFloor := by
-      rw [P.cellIndex, hi]
+      simpa only [hi] using congrFun P.cellIndex i
     have hw := hN j i (P.n05TailScale side * r) hrhost hscaled
     rw [hindex] at hw
     have hf : |((max (P.retainedIndex + k) P.indexFloor : ℕ) : ℝ) -
