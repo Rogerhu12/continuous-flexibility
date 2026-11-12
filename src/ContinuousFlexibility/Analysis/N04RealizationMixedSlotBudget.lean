@@ -87,8 +87,8 @@ theorem n04Realization_mixedSlots_snoc
 theorem n04Realization_partition_mixedSlot_cost
     {n K s : ℕ} (w : StateAngleWord n) (c : OrderedFinpartition n) (offset : ℕ)
     (hn : n ≤ K + s) (hw : w.stateArity ≤ K) :
-    (∑ i : Fin c.length, (w.restrict (c.emb i)).angleArity +
-      (offset + 1) * (w.restrict (c.emb i)).stateArity) ≤ s + (offset + 1) * K := by
+    (∑ i : Fin c.length, ((w.restrict (c.emb i)).angleArity +
+      (offset + 1) * (w.restrict (c.emb i)).stateArity)) ≤ s + (offset + 1) * K := by
   calc
     _ = w.angleArity + (offset + 1) * w.stateArity := by
       rw [Finset.sum_add_distrib, ← Finset.mul_sum,
