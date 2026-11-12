@@ -43,10 +43,11 @@ theorem N01Properties.sectorFlow_mixed_tower
             T.E0 (T.sample (C.cell m)) ^ B *
             oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
               base (s + loss + d) z v := by
-  obtain ⟨d, horders⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 k
+  let lossData := hN.2.2.2.2.2.2.2.2.2.2.2.2 k
+  let d : ℕ := lossData.choose
   refine ⟨d, ?_⟩
   intro s
-  let data := horders s
+  let data := lossData.choose_spec s
   let B : ℝ := data.choose
   have hB : 0 < B := data.choose_spec.1
   refine ⟨B, hB, ?_⟩
@@ -101,10 +102,11 @@ theorem N01Properties.sectorFlowMixedTower_bound
             T.E0 (T.sample (C.cell m)) ^ B *
             oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
               base (s + loss + d) z v := by
-  obtain ⟨d, horders⟩ := hN.sectorFlow_mixed_tower k
+  let lossData := hN.sectorFlow_mixed_tower k
+  let d : ℕ := lossData.choose
   refine ⟨d, ?_⟩
   intro s
-  let data := horders s
+  let data := lossData.choose_spec s
   refine ⟨data.choose, data.choose_spec.1, ?_⟩
   intro m a b p hab hp z hz v
   let pointData := data.choose_spec.2 m a b p hab hp
@@ -121,8 +123,9 @@ theorem N01Properties.sectorFlowMixedTower_uniform_on_radial_interval
       (fun p : Icc l h × ℝ => hN.sectorFlowMixedTower m a b (p.1, p.2)
         ⟨hl.trans_le p.1.property.1, p.1.property.2.trans_lt hh⟩) := by
   intro n
-  obtain ⟨parameterLoss, horders⟩ := hN.sectorFlowMixedTower_bound n
-  let data := horders (a + b)
+  let lossData := hN.sectorFlowMixedTower_bound n
+  let parameterLoss : ℕ := lossData.choose
+  let data := lossData.choose_spec (a + b)
   let B : ℝ := data.choose
   have hB : 0 < B := data.choose_spec.1
   let d : ℝ := min (l - C.left m) (C.right m - h)

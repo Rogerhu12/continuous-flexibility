@@ -160,10 +160,11 @@ theorem N01Properties.sectorFlow_closed_tower
           T.E0 (T.sample (C.cell m)) ^ B *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
             base (s + loss + d) z v := by
-  obtain ⟨d, horders⟩ := hN.sectorFlow_tower k
+  let orderData := hN.sectorFlow_tower k
+  let d : ℕ := orderData.choose
   refine ⟨d, ?_⟩
   intro s
-  let hdata := horders s
+  let hdata := orderData.choose_spec s
   exact ⟨hdata.choose, hdata.choose_spec.1,
     hN.sectorFlow_closed_tower_point hS hT k s d hdata.choose hdata.choose_spec.2⟩
 
