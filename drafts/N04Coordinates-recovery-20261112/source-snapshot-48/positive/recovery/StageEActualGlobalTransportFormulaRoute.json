@@ -1,0 +1,335 @@
+{
+  "schema": "n04.readonly.actual-transport-formula-route.v1",
+  "report": "StageEActualGlobalTransportFormulaRoute",
+  "destination": "positive/recovery/StageEActualGlobalTransportFormulaRoute.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "kind": "READ_ONLY_IMPLEMENTATION_BLUEPRINT_NO_NEW_LEAN",
+  "selected_active_ref": "fe5e4ceec7c959c0a078eacdea58ce6741940149",
+  "selected_active_tree": "e92d8ed54fae5a18179f13cdfaadc15b4669ed80",
+  "mathematical_target": {
+    "module": "ContinuousFlexibility.Statements.Nonlinear",
+    "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+    "git_blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+    "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+    "utf8_bytes": 101197,
+    "lines": 1773,
+    "final_newline": true,
+    "field": "CanonicalPrimitiveGeometry.transport",
+    "exact_field": "  transport : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →\n    ∃ τ : PolarPoint → PolarPoint, ∃ q : PolarPoint → ℝ,\n      ContDiffOn ℝ 3 τ (annularOpen D) ∧ ContDiffOn ℝ 3 q (annularOpen D) ∧\n      MapsTo τ (annularOpen D) (annularOpen D) ∧\n      (∀ p, τ (p + (0, Real.pi)) = τ p + (0, Real.pi)) ∧\n      Function.Periodic q (0, Real.pi) ∧\n      (∀ p, τ (p.1, -p.2) = ((τ p).1, -(τ p).2)) ∧\n      (∀ r θ, q (r, -θ) = q (r, θ)) ∧\n      (∀ m, ∀ p ∈ referencePhysicalPieceOpen S K m,\n        τ p = canonicalCurrentPoint C K z m p ∧\n          q p = K.height (C.referenceState, 0) m p / K.height z m (τ p)) ∧\n      ∃ C₀ A : ℝ, 0 < C₀ ∧ 0 ≤ A ∧\n        (∀ p ∈ annularOpen D, ∀ n : ℕ, n ≤ 2 →\n          ‖iteratedFDeriv ℝ n q p‖ ≤ C₀ * T.M p.1 ^ A) ∧\n        (∀ p ∈ annularOpen D, ∀ n : ℕ, 1 ≤ n → n ≤ 2 →\n          ‖iteratedFDeriv ℝ n τ p‖ ≤ C₀ * T.M p.1 ^ A) ∧\n        (∀ p ∈ annularOpen D,\n          T.H (τ p).1 / T.H p.1 ≤ C₀ * T.E0 p.1 ^ A) ∧\n        (∀ p ∈ annularOpen D,\n          T.M (τ p).1 / T.M p.1 ≤ C₀ * T.E0 p.1 ^ A)"
+  },
+  "conclusion": {
+    "tau": "On each referencePhysicalPieceOpen S K m, the already selected qualitative transport tau equals the literal stored composite K.inverseChart z m ∘ K.chart (C.referenceState,0) m. The composite identity for canonicalCurrentPoint is definitional.",
+    "q": "On the same reference piece, q = h_ref * (abs(planeJacobian G_z) ∘ F_ref) * ((canonicalSource S K z m (fun _ => 1))⁻¹ ∘ F_ref). The inverse-Jacobian identity needed for this formula is already public with geometry-only hypotheses.",
+    "smallest_remaining_identity_work": "One EqOn lemma using the existing inverse-Jacobian theorem and the definition of canonicalSource; approximately 40–70 Lean lines including imports/namespace, comfortably below the requested 100. No new map, inverse, atlas, family, or global extension is chosen.",
+    "no_new_source_created": true,
+    "global_transport_not_completed": "The formula is an interior identity. Uniform finite-jet bounds, extension across all cuts/roots, and the two H/M transport-ratio bounds remain separate."
+  },
+  "exact_definitions": {
+    "canonicalSource": "def canonicalSource (S : PhysicalSpacesData) (K : CanonicalData S)\n    (z : AnnularState S × ℝ) (m : ℕ) (f : PolarPoint → ℝ) (p : PolarPoint) : ℝ :=\n  let x := K.inverseChart z m p\n  K.height z m x * f x / |planeJacobian (K.chart z m) x|\n",
+    "canonicalCurrentPoint": "def canonicalCurrentPoint {S : PhysicalSpacesData}\n    (C : NonlinearGeometryData S) (K : CanonicalData S)\n    (z : AnnularState S × ℝ) (m : ℕ) (y : PolarPoint) : PolarPoint :=\n  K.inverseChart z m (K.chart (C.referenceState, 0) m y)\n",
+    "referenceDomain": "  referenceDomain : ∀ m, physicalPieceOpen S K (C.referenceState, 0) m =\n    referencePhysicalPieceOpen S K m",
+    "charts": "  charts : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 → ∀ m,\n    MapsTo (K.chart z m) (physicalPieceOpen S K z m) (canonicalOpen S K m) ∧\n    MapsTo (K.inverseChart z m) (canonicalOpen S K m) (physicalPieceOpen S K z m) ∧\n    (∀ p ∈ physicalPieceOpen S K z m, K.inverseChart z m (K.chart z m p) = p) ∧\n    (∀ p ∈ canonicalOpen S K m, K.chart z m (K.inverseChart z m p) = p) ∧\n    ContDiffOn ℝ ∞ (K.chart z m) (physicalPieceOpen S K z m) ∧\n    ContDiffOn ℝ ∞ (K.inverseChart z m) (canonicalOpen S K m) ∧\n    ContDiffOn ℝ ∞ (K.height z m) (physicalPieceOpen S K z m) ∧\n    (∀ p ∈ physicalPieceOpen S K z m,\n      0 < K.height z m p ∧ planeJacobian (K.chart z m) p ≠ 0 ∧\n      K.chart z m (p + (0, Real.pi)) = K.chart z m p + (0, Real.pi) ∧\n      K.height z m (p + (0, Real.pi)) = K.height z m p)",
+    "N04Properties": "def N04Properties (D : ReferenceData) (T : MaterialData) (S : PhysicalSpacesData)\n    (C : NonlinearGeometryData S) (L : ReturnCorrectionData S)\n    (K : CanonicalData S) (base loss : ℕ) (ε : ℝ) : Prop :=\n  let U := stateNeighborhood S C base ε\n  CanonicalGeometry D S C K base ε ∧\n  CanonicalCutOperatorProperties S C L K base ε ∧\n  (∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ z ∈ U, ∀ m p,\n    p ∈ canonicalOpen S K m → ∀ a b : ℕ, a + b ≤ s →\n      |mixedDerivative a b (K.potential z m) p| +\n      |mixedDerivative a b (K.dividedDifference z m).a p| +\n      |mixedDerivative a b (K.dividedDifference z m).b p| +\n      |mixedDerivative a b (K.dividedDifference z m).c p| ≤\n        B * T.E0 (T.sample (K.cell m)) ^ B *\n          (1 + stateGrading S (s + loss) (z.1 - C.referenceState) + |z.2|)) ∧\n  CanonicalSourcePairing D S C K base ε"
+  },
+  "providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aAngularJacobianEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/N07aAngularJacobianEnvelope.lean",
+      "selected_ref": "fe5e4ceec7c959c0a078eacdea58ce6741940149",
+      "git_blob": "81b85e8973a267426cc6311dc5ad0f32c28b69fa",
+      "sha256": "abe3838996cb4231a3464b4f76106dfb28c9a91ddb8fc3614c635887cfca008f",
+      "utf8_bytes": 10307,
+      "lines": 209,
+      "final_newline": true,
+      "role": "Primary geometry-only inverse-Jacobian identity and the actual no-cost absolute-value jet identity.",
+      "full_source_read": true,
+      "public_headers": [
+        {
+          "name": "n07a_actual_inverseChart_jacobian_abs",
+          "header": "theorem n07a_actual_inverseChart_jacobian_abs\n    {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}\n    (hgeom : CanonicalGeometry D S C K base ε)\n    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)\n    (hs : stateSector S z.1) (m : ℕ) {y : PolarPoint}\n    (hy : y ∈ canonicalOpen S K m) :\n    |planeJacobian (K.inverseChart z m) y| =\n      |planeJacobian (K.chart z m) (K.inverseChart z m y)|⁻¹"
+        },
+        {
+          "name": "n07a_norm_iteratedFDeriv_abs",
+          "header": "theorem n07a_norm_iteratedFDeriv_abs\n    {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n    {f : E → ℝ} {x : E} (hf : ContinuousAt f x) (hne : f x ≠ 0) (n : ℕ) :\n    ‖iteratedFDeriv ℝ n (fun y => |f y|) x‖ = ‖iteratedFDeriv ℝ n f x‖"
+        },
+        {
+          "name": "n07a_canonicalHeightInverse_eq_sourceFactorInverse",
+          "header": "theorem n07a_canonicalHeightInverse_eq_sourceFactorInverse\n    {C : NonlinearGeometryData S} {L : ReturnCorrectionData S}\n    {base loss : ℕ} {ε : ℝ}\n    (h04 : N04Properties D T S C L K base loss ε)\n    (z : CanonicalGeometry.Parameter S)\n    (hz : liftSectorParameter S C z ∈ stateNeighborhood S C base ε)\n    (hs : stateSector S (liftSectorParameter S C z).1)\n    (m : ℕ) {y : PolarPoint} (hy : y ∈ canonicalOpen S K m) :\n    (K.height (liftSectorParameter S C z) m\n      (K.inverseChart (liftSectorParameter S C z) m y))⁻¹ =\n        n07aCanonicalAtomField D T S C L K .sourceFactorInverse z m y *\n          |planeJacobian (K.inverseChart (liftSectorParameter S C z) m) y|"
+        }
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aActualChartDifferentials",
+      "path": "src/ContinuousFlexibility/Analysis/N07aActualChartDifferentials.lean",
+      "selected_ref": "fe5e4ceec7c959c0a078eacdea58ce6741940149",
+      "git_blob": "39c494529007bf113837fc8142b36db76bac3b89",
+      "sha256": "b21f26b129f8dfc99b11a5c386509fcbd58bb49064fca48b7e21c81d4b282cb6",
+      "utf8_bytes": 2329,
+      "lines": 56,
+      "final_newline": true,
+      "role": "Actual two inverse differential identities on the current physical and canonical open pieces, used in the primary public theorem.",
+      "full_source_read": true,
+      "public_headers": [
+        {
+          "name": "n07a_actualChart_fderiv_inverse",
+          "header": "theorem n07a_actualChart_fderiv_inverse\n    (hgeom : CanonicalGeometry D S C K base ε)\n    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)\n    (hs : stateSector S z.1) (m : ℕ) {y : PolarPoint}\n    (hy : y ∈ canonicalOpen S K m) :\n    (fderiv ℝ (K.chart z m) (K.inverseChart z m y)).comp\n        (fderiv ℝ (K.inverseChart z m) y) = ContinuousLinearMap.id ℝ PolarPoint ∧\n      (fderiv ℝ (K.inverseChart z m) y).comp\n        (fderiv ℝ (K.chart z m) (K.inverseChart z m y)) =\n          ContinuousLinearMap.id ℝ PolarPoint"
+        }
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalSourceMeasure",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalSourceMeasure.lean",
+      "selected_ref": "fe5e4ceec7c959c0a078eacdea58ce6741940149",
+      "git_blob": "d39ed36d51c77bdceaea75d1fbb4a605b21d3df9",
+      "sha256": "fe92adb0765019395811870a0efb985f8b18692e2b2117de0d2068d787de1660",
+      "utf8_bytes": 3317,
+      "lines": 82,
+      "final_newline": true,
+      "role": "Identifies the coordinate determinant with the true Frechet derivative determinant; the source pairing integral is not required for the local formula.",
+      "full_source_read": true,
+      "public_headers": [
+        {
+          "name": "planeJacobian_eq_fderiv_det",
+          "header": "theorem planeJacobian_eq_fderiv_det (F : PolarPoint → PolarPoint) (x : PolarPoint) :\n    planeJacobian F x = (fderiv ℝ F x).det"
+        }
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalEndpointInverse",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalEndpointInverse.lean",
+      "selected_ref": "fe5e4ceec7c959c0a078eacdea58ce6741940149",
+      "git_blob": "73b93023dbcd3dfb1fa7521317a6a7da7f9c02da",
+      "sha256": "5b625a5464325b5fbb155eee50a9afeb7aa1fcefc846d256f7693a337f7f4e5d",
+      "utf8_bytes": 4648,
+      "lines": 98,
+      "final_newline": true,
+      "role": "Reviewed endpoint inverse supplier. It gives a local inverse and agreement on an actual interior image collar, but is unnecessary for the open-piece formula.",
+      "full_source_read": true,
+      "public_headers": [
+        {
+          "name": "canonicalChart_exists_smooth_endpointInverse",
+          "header": "theorem canonicalChart_exists_smooth_endpointInverse\n    {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}\n    {K : CanonicalData S} {base : ℕ} {ε : ℝ}\n    (hK : Blueprint.N04PartA D S C K base ε)\n    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)\n    (hsector : stateSector S z.1) (m : ℕ) (p : PolarPoint)\n    (hp : p ∈ physicalPieceClosed S K z m) :\n    ∃ e : OpenPartialHomeomorph PolarPoint PolarPoint,\n      (e : PolarPoint → PolarPoint) = K.chart z m ∧ p ∈ e.source ∧\n      ContDiffAt ℝ ∞ e.symm (K.chart z m p) ∧\n      EqOn e.symm (K.inverseChart z m)\n        (K.chart z m '' (physicalPieceOpen S K z m ∩ e.source))"
+        }
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalActualEndpointFields",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalActualEndpointFields.lean",
+      "selected_ref": "fe5e4ceec7c959c0a078eacdea58ce6741940149",
+      "git_blob": "b72852cb592db98ad8a2bf5ac5c0f09c74c72962",
+      "sha256": "1ad3a145230072398f180d696e774230f26e0b8f2d97dc5acbb33f6acc6e93eb",
+      "utf8_bytes": 10828,
+      "lines": 221,
+      "final_newline": true,
+      "role": "Reviewed genuine closed inverse/germ supplier. No fixed reference rectangle is substituted for a moving physical domain.",
+      "full_source_read": true,
+      "public_headers": [
+        {
+          "name": "canonicalCurrentPoint_closed_inverse_data",
+          "header": "theorem canonicalCurrentPoint_closed_inverse_data\n    {D : ReferenceData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {K : CanonicalData S} {base : ℕ} {ε : ℝ}\n    (hA : CanonicalGeometry D S C K base ε)\n    (hz₀ : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)\n    (hs₀ : stateSector S C.referenceState)\n    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)\n    (hs : stateSector S z.1) (k : ℕ) {p : PolarPoint}\n    (hp : p ∈ physicalPieceClosed S K (C.referenceState, 0) k) :\n    ContDiffAt ℝ ∞ (canonicalReferencePoint C K z k)\n        (canonicalCurrentPoint C K z k p) ∧\n      canonicalReferencePoint C K z k ∘ canonicalCurrentPoint C K z k =ᶠ[𝓝 p]\n        (id : PolarPoint → PolarPoint) ∧\n      canonicalCurrentPoint C K z k ∘ canonicalReferencePoint C K z k\n        =ᶠ[𝓝 (canonicalCurrentPoint C K z k p)] (id : PolarPoint → PolarPoint)"
+        }
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeReconstruction",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeReconstruction.lean",
+      "selected_ref": "fe5e4ceec7c959c0a078eacdea58ce6741940149",
+      "git_blob": "03ae22426c55b94746067ac9a7e09ca2da76bd28",
+      "sha256": "3d23df77cb192b49a50c41f3492df12dee2840ce11e6750fa2b8230edd4b64da",
+      "utf8_bytes": 5663,
+      "lines": 111,
+      "final_newline": true,
+      "role": "Reviewed same-field reconstruction at actual closed images. It is a jet/germ identification, not a uniform transport estimate.",
+      "full_source_read": true,
+      "public_headers": [
+        {
+          "name": "canonicalReferenceGauge_reconstructs_closed_fields",
+          "header": "theorem canonicalReferenceGauge_reconstructs_closed_fields :\n    (wholePositiveReferenceGaugeChart (K.chart (C.referenceState, 0) m)\n        (canonicalReferencePoint C K z m)\n      =ᶠ[𝓝 (canonicalCurrentPoint C K z m p)] K.chart z m) ∧\n    (wholePositiveReferenceGaugeHeight (K.height (C.referenceState, 0) m)\n        (canonicalReferencePoint C K z m) (n04CoordinatesCurrentHeightRatio C K z m)\n      =ᶠ[𝓝 (canonicalCurrentPoint C K z m p)] K.height z m)"
+        },
+        {
+          "name": "canonicalReferenceGauge_closed_fullJets",
+          "header": "theorem canonicalReferenceGauge_closed_fullJets (n : ℕ) :\n    FiniteFullJetMatch n (canonicalCurrentPoint C K z m p)\n        (wholePositiveReferenceGaugeChart (K.chart (C.referenceState, 0) m)\n          (canonicalReferencePoint C K z m)) (K.chart z m) ∧\n      FiniteFullJetMatch n (canonicalCurrentPoint C K z m p)\n        (wholePositiveReferenceGaugeHeight (K.height (C.referenceState, 0) m)\n          (canonicalReferencePoint C K z m) (n04CoordinatesCurrentHeightRatio C K z m))\n        (K.height z m)"
+        }
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeGlobalTransport",
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeGlobalTransport.lean",
+      "selected_ref": "fe5e4ceec7c959c0a078eacdea58ce6741940149",
+      "git_blob": "0874680247b405fcbd3019c51f2b92f73df35b17",
+      "sha256": "761d25bffba6631ab996d7aa7e76c03ca1d55ac8f27b6946e435dc1f1dbba874",
+      "utf8_bytes": 5022,
+      "lines": 101,
+      "final_newline": true,
+      "role": "Transfers the already selected global qualitative maps from the old whole atlas to the reference-gauged atlas; it preserves the actual F/q functions.",
+      "full_source_read": true,
+      "public_headers": [
+        {
+          "name": "n04WholeReferenceGaugeAtlasData_relative_fields_eq",
+          "header": "theorem n04WholeReferenceGaugeAtlasData_relative_fields_eq\n    (z : AnnularState S × ℝ)\n    (href : ∀ i, τ (C.referenceState, 0) i = id ∧\n      σ (C.referenceState, 0) i = id ∧ Q (C.referenceState, 0) i = (fun _ => 1))\n    (hχψ : ∀ i, Function.LeftInverse (χ i) (ψ i))\n    (hστ : ∀ i, Function.LeftInverse (σ z i) (τ z i))\n    (hh₀ : ∀ i p, h₀ i p ≠ 0) :\n    let V := n04WholeReferenceGaugeAtlasData C L K e cell ψ χ h₀ τ σ Q N\n    let W := n04WholeCanonicalAtlasData C L K e cell σ τ Q N\n    ∀ m, canonicalCurrentPoint C V z m = canonicalCurrentPoint C W z m ∧\n      canonicalReferencePoint C V z m = canonicalReferencePoint C W z m ∧\n      n04CoordinatesCurrentHeightRatio C V z m =\n        n04CoordinatesCurrentHeightRatio C W z m"
+        },
+        {
+          "name": "n04WholeReferenceGaugeAtlasData_global_transport",
+          "header": "theorem n04WholeReferenceGaugeAtlasData_global_transport\n    (z : AnnularState S × ℝ) (F : PolarPoint → PolarPoint) (q : PolarPoint → ℝ)\n    (href : ∀ i, τ (C.referenceState, 0) i = id ∧\n      σ (C.referenceState, 0) i = id ∧ Q (C.referenceState, 0) i = (fun _ => 1))\n    (hχψ : ∀ i, Function.LeftInverse (χ i) (ψ i))\n    (hστ : ∀ i, Function.LeftInverse (σ z i) (τ z i))\n    (hh₀ : ∀ i p, h₀ i p ≠ 0)\n    (hW : WholeCanonicalTransportQualitative (D := D) C\n      (n04WholeCanonicalAtlasData C L K e cell σ τ Q N) z F q) :\n    WholeCanonicalTransportQualitative (D := D) C\n      (n04WholeReferenceGaugeAtlasData C L K e cell ψ χ h₀ τ σ Q N) z F q"
+        }
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalActualWholeGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalActualWholeGeometry.lean",
+      "selected_ref": "fe5e4ceec7c959c0a078eacdea58ce6741940149",
+      "git_blob": "d82f602e7088470fbfc9c9f05f38f4d6432fc824",
+      "sha256": "b2e32adec83f1d401687f8365ecc59e16a99fa5a4abcbf138d3595f9bd7dffea",
+      "utf8_bytes": 5851,
+      "lines": 109,
+      "final_newline": true,
+      "role": "Defines WholeCanonicalTransportQualitative, whose actual piecewise field equalities are the bridge from the proposed EqOn identity to the selected global tau/q.",
+      "full_source_read": true,
+      "public_headers": []
+    }
+  ],
+  "existing_formula_assumption_check": {
+    "exact_related_formula": "n07a_canonicalHeightInverse_eq_sourceFactorInverse",
+    "uses_full_N04Properties": true,
+    "correction": "N04Properties itself does not contain CanonicalPrimitiveGeometry.transport. It does contain extra cut-operator, quantified potential/divided-difference, and source-pairing clauses. Thus its related height identity is stronger in hypotheses than needed here; this report does not label it circular merely because it takes h04.",
+    "selected_minimal_route": "Use n07a_actual_inverseChart_jacobian_abs, whose only geometric hypothesis is CanonicalGeometry, and perform the scalar source cancellation directly.",
+    "normalized_atom_caution": "The existing related formula uses n07aCanonicalAtomField and inverse unit-coordinate cancellation. The proposed formula uses literal canonicalSource at the true canonical point, so no extra normalization or width transformation is silently inserted."
+  },
+  "domain_chain": [
+    {
+      "step": 1,
+      "claim": "p ∈ referencePhysicalPieceOpen S K m",
+      "source": "This is the intended physical domain of the transport agreement."
+    },
+    {
+      "step": 2,
+      "claim": "p ∈ physicalPieceOpen S K (C.referenceState,0) m",
+      "actual_call": "rw [hgeom.referenceDomain m]; exact hp"
+    },
+    {
+      "step": 3,
+      "claim": "y := K.chart (C.referenceState,0) m p ∈ canonicalOpen S K m",
+      "actual_call": "(hgeom.charts (C.referenceState,0) hz₀ hs₀ m).1 hp₀"
+    },
+    {
+      "step": 4,
+      "claim": "x := K.inverseChart z m y ∈ physicalPieceOpen S K z m",
+      "actual_call": "(hgeom.charts z hz hs m).2.1 hy"
+    },
+    {
+      "step": 5,
+      "claim": "x is exactly canonicalCurrentPoint C K z m p",
+      "actual_call": "canonicalCurrentPoint is the literal same composite."
+    },
+    {
+      "step": 6,
+      "claim": "0 < K.height z m x and planeJacobian (K.chart z m) x ≠ 0",
+      "actual_call": "((hgeom.charts z hz hs m).2.2.2.2.2.2.2 x hx).1 and .2.1"
+    },
+    {
+      "step": 7,
+      "claim": "abs(JG_z y) = abs(JF_z x)⁻¹",
+      "actual_call": "n07a_actual_inverseChart_jacobian_abs hgeom hz hs m hy"
+    }
+  ],
+  "minimal_future_producer": {
+    "proposed_name": "canonicalCurrentHeightRatio_eq_sourceJacobianPullback",
+    "proposed_name_is_not_claimed_existing": true,
+    "proposed_header": "theorem canonicalCurrentHeightRatio_eq_sourceJacobianPullback\n    {D : ReferenceData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {K : CanonicalData S}\n    {base : ℕ} {ε : ℝ}\n    (hgeom : CanonicalGeometry D S C K base ε)\n    (hz₀ : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)\n    (hs₀ : stateSector S C.referenceState)\n    {z : AnnularState S × ℝ}\n    (hz : z ∈ stateNeighborhood S C base ε)\n    (hs : stateSector S z.1) (m : ℕ) :\n    EqOn\n      (fun p => K.height (C.referenceState, 0) m p /\n        K.height z m (canonicalCurrentPoint C K z m p))\n      (fun p => K.height (C.referenceState, 0) m p *\n        |planeJacobian (K.inverseChart z m)\n          (K.chart (C.referenceState, 0) m p)| *\n        (canonicalSource S K z m (fun _ => 1)\n          (K.chart (C.referenceState, 0) m p))⁻¹)\n      (referencePhysicalPieceOpen S K m)",
+    "suggested_single_import": "ContinuousFlexibility.Analysis.N07aAngularJacobianEnvelope",
+    "planned_total_lines_upper_bound": 100,
+    "expected_lines": "40–70 including namespace/header and proof; no Lean written in this task",
+    "proof_steps": [
+      "Introduce p and hp from EqOn; construct hp₀, hy, and hx with the exact domain chain above.",
+      "Set hc := hgeom.charts z hz hs m. Obtain hh : K.height z m (K.inverseChart z m y) ≠ 0 from (hc.2.2.2.2.2.2.2 _ hx).1.ne'; obtain hj : |planeJacobian (K.chart z m) (K.inverseChart z m y)| ≠ 0 by abs_ne_zero.mpr applied to the same tuple's .2.1.",
+      "Use n07a_actual_inverseChart_jacobian_abs hgeom hz hs m hy to rewrite the inverse Jacobian factor.",
+      "Inside the proof, establish the same-point scalar identity (K.height z m (K.inverseChart z m y))⁻¹ = |planeJacobian (K.inverseChart z m) y| * (canonicalSource S K z m (fun _ => 1) y)⁻¹. After the public Jacobian rewrite, simp only [canonicalSource, mul_one], then field_simp [hh,hj]. This is the scalar algebra H⁻¹ = J⁻¹*(H/J)⁻¹.",
+      "Apply congrArg (fun u : ℝ => K.height (C.referenceState,0) m p * u) to that identity, and normalize with canonicalCurrentPoint, div_eq_mul_inv and mul_assoc. This supplies exactly the proposed RHS ordering.",
+      "No theorem for tau is necessary: canonicalCurrentPoint is already definitionally G_z ∘ F_ref."
+    ],
+    "assumptions_not_added": [
+      "No final CurrentJets, ReferenceJets, transport bound or material floor is a hypothesis.",
+      "No full N04Properties is needed.",
+      "No global homeomorphism of total chart functions is asserted.",
+      "No equality of current physical pieces with reference rectangles is used for negative pieces.",
+      "No new inverse choice and no new reference family is made."
+    ]
+  },
+  "transfer_to_the_selected_global_maps": {
+    "supplier_module": "WholeReferenceGaugeGlobalTransport",
+    "exact_qualitative_predicate": "def WholeCanonicalTransportQualitative\n    {D : ReferenceData} {S : PhysicalSpacesData}\n    (C : NonlinearGeometryData S) (W : CanonicalData S)\n    (z : AnnularState S × ℝ) (F : PolarPoint → PolarPoint) (q : PolarPoint → ℝ) : Prop :=\n  ContDiffOn ℝ 3 F (annularOpen D) ∧ ContDiffOn ℝ 3 q (annularOpen D) ∧\n    MapsTo F (annularOpen D) (annularOpen D) ∧\n    (∀ p, F (p + (0, Real.pi)) = F p + (0, Real.pi)) ∧\n    Function.Periodic q (0, Real.pi) ∧\n    (∀ p, F (p.1, -p.2) = ((F p).1, -(F p).2)) ∧\n    (∀ r θ, q (r, -θ) = q (r, θ)) ∧\n    (∀ m, ∀ p ∈ referencePhysicalPieceOpen S W m,\n      F p = canonicalCurrentPoint C W z m p ∧\n        q p = W.height (C.referenceState, 0) m p / W.height z m (F p)) ∧\n    ∀ p ∈ annularOpen D, 0 < q p",
+    "actual_pointwise_step": "For the already chosen global F,q and hqual, its hfields m p hp gives F p = canonicalCurrentPoint C K z m p and q p = href p / hz(F p). Rewrite the latter with the first equality, then apply the EqOn producer at p.",
+    "ordinary_germ_step": "referencePhysicalPieceOpen is Ioo × univ and hence open. At p in it, combine its neighborhood membership with the pointwise equality to get eventual equality of the actual global functions with the stated composites/products.",
+    "finite_derivative_step": "Use the actual germ to transfer iteratedFDeriv. The public n07a_norm_iteratedFDeriv_abs itself exhibits the pinned EventuallyEq.iteratedFDeriv usage, and CanonicalReferenceGauge_closed_fullJets demonstrates the actual finite-jet germ transfer route. No globally valid total inverse identity is needed.",
+    "no_new_qualitative_selection": "Reuse the exact F/q already carried by WholeCanonicalTransportQualitative. The global-transfer theorem is a witness-preserving transfer, not a source of new quantitative constants."
+  },
+  "finite_order_budget": [
+    {
+      "target": "tau, n=1,2",
+      "required_actual_inputs": "G_z positive Frechet jets through 2 at y and F_ref positive jets through 2 at p.",
+      "zero_order_note": "No quantitative G_z or F_ref value norm is needed for positive derivative bounds; actual image membership is required."
+    },
+    {
+      "target": "q, n=0,1,2",
+      "required_actual_inputs": "h_ref jets0..2 at p; F_ref positive jets1..2; G_z positive jets1..3 at y; the literal reciprocal canonicalSource S K z m (fun _=>1) jets0..2 at y.",
+      "jacobian_reason": "The Jacobian is a quadratic expression in DG_z, so two derivatives of it use G_z derivatives up to order3."
+    },
+    {
+      "target": "absolute inverse Jacobian jets",
+      "required_actual_inputs": "ContDiffOn of G_z on the true canonical open set and nonvanishing of its Jacobian there.",
+      "actual_supplier": "n07a_norm_iteratedFDeriv_abs",
+      "quantitative_note": "Local sign constancy transfers derivative norms exactly. This step requires no uniform numerical lower bound for the Jacobian and performs no new quantitative reciprocal estimate."
+    },
+    {
+      "target": "unit-to-physical conversion",
+      "required_actual_inputs": "The actual same-K physical and canonical widths and their established costs whenever the input bounds are stated in unit coordinates.",
+      "not_performed_here": true
+    },
+    {
+      "target": "target material RHS",
+      "required_actual_inputs": "Uniform-in-m constants and the actual same-sample/physical-point comparisons converting input E0 or normalized-weight costs to C0*T.M(p.1)^A.",
+      "not_performed_here": true
+    }
+  ],
+  "remaining_global_obligations": [
+    "Retain the same global C3 transport supplied by the actual whole atlas construction; the local identity alone does not build or prove global C3 matching.",
+    "First establish bounds uniform over all reference pieces and the same selected family. Constants depending arbitrarily on a piece cannot be used in CanonicalPrimitiveGeometry.transport.",
+    "Extend the uniform n≤2 estimates through cuts and roots using the actual global C3 regularity and a proved coverage/density or endpoint argument. CanonicalGeometry.referencePartition supplies null-exception coverage, but this report does not claim that the needed global extension lemma has been implemented.",
+    "Preserve the original source sample and all unit-width factors. The target q/tau estimates use T.M at the reference physical radius, not an arbitrary endpoint or moving-half sample.",
+    "Prove T.H((tau p).1)/T.H(p.1) and T.M((tau p).1)/T.M(p.1) against the same reference-point E0 weight. The Jacobian/source identity does not imply these ratios.",
+    "For a negative moving piece, tau p lies in the actual current domain. It must not be treated as automatically lying in the corresponding fixed reference half. The separately reviewed ActualNegativeMovingReferenceUnitPoint identifies a genuine old reference half or cut in the same full component, but does not by itself prove a material comparison or the global ratios."
+  ],
+  "evaluated_but_not_used": [
+    {
+      "module": "Geometry.PlanarOrientation",
+      "blob": "80b0e204ff31ec795e624ed14e2951aa8c905076",
+      "reason": "planeJacobian_inverse_mul is stated for a genuine global Homeomorph. The stored piece charts are not supplied as such a global object; n07a_actual_inverseChart_jacobian_abs is the correct local-domain public replacement."
+    },
+    {
+      "module": "Analysis.N06CurrentSourceJets",
+      "blob": "3a53a16902ffe732d25d30683d565fe8e07d6ebf",
+      "reason": "Contains actual source recursions and compact/state-dependent bounds, not the required uniform Stage E material producer."
+    },
+    {
+      "module": "Analysis.N06SourceSpatialTransport",
+      "blob": "aa96bb014434e13a3cc54a5706172c579f31873c",
+      "reason": "Its source spatial bounds take numerical geometry bounds as input. It is not a source of those inputs or a replacement for the transport identity."
+    },
+    {
+      "module": "Analysis.N06CurrentInverseTestJets",
+      "blob": "0c739497913c9f5c327c5dc912cda576e140023d",
+      "reason": "Provides actual inverse differential/test formulas under stronger h04 assumptions; unnecessary given the geometry-only inverse-Jacobian identity."
+    }
+  ],
+  "verification": {
+    "source_reading": "All listed primary and evaluated sources were read fully at their exact cached Git identities; the Nonlinear target/definitions were read at exact blob1f7afd.",
+    "fingerprints_recomputed_locally_in_functions_js": true,
+    "no_local_execution_or_compilation": true,
+    "no_CI_queries_or_downloads": true,
+    "no_active_source_index_or_ref_mutation": true,
+    "no_new_Lean_files": true,
+    "no_new_transitive_DAG_or_global_name_preflight_claim": true,
+    "not_a_full_peer_receipt_for_a_new_implementation": true
+  }
+}

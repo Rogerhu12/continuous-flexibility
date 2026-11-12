@@ -1,0 +1,36 @@
+{
+  "ci_round": 175,
+  "head": "5998e753d1e57c592fc4970009611857cfbbce22",
+  "tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+  "run": 43330820289,
+  "job": 131574774571,
+  "workflow_number": 1852,
+  "first_queried": "2026-11-12 23:46:01 UTC",
+  "completed": "2026-11-12T23:45:38Z",
+  "conclusion": "failure",
+  "quick": "failure",
+  "full_build": "skipped",
+  "blueprint_and_axiom_steps": "skipped",
+  "new_sources_compiled": 7,
+  "total_new_sources": 8,
+  "successful_sources": [
+    "ContinuousFlexibility.Analysis.N01ActualRetainedReference",
+    "ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction",
+    "ContinuousFlexibility.Analysis.N01RetainedPrimitiveConstruction",
+    "ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext",
+    "ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry",
+    "ContinuousFlexibility.Analysis.N04MaterialRadiusLocalJets",
+    "ContinuousFlexibility.Analysis.ActualNegativeMovingReferenceUnitPoint"
+  ],
+  "sole_failed_module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentFrechetJets",
+  "error": "isDefEq timeout at supplier application, line49:2, unchanged200000heartbeats",
+  "log": {
+    "blob": "ebc25a1f381fb8404bc5409ac828df2d01fb46d3",
+    "sha256": "dd1d6cd69dca80839f309e1f0ca2373ad9e395c783bb29122425e04b94a87ea7",
+    "bytes": 90325
+  },
+  "complete_diagnostics": "ac89b98b6541fd3195d0d972c46d3ed9b5d509bf",
+  "last_full_green": "a195d1ecf1cacb20c98250e601e58489e0239d86",
+  "no_draft_reclassification": true,
+  "no_fixed131_activation": true
+}

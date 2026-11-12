@@ -1,0 +1,479 @@
+{
+  "schema": "n04-small8-independent-execution-audit/v1",
+  "path": "quantitative/recovery/Small8CI175ExecutionAndFixed131ProviderGate.json",
+  "reviewer": "/root/quantitative_route",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "verdict": "PASS_EXACT_SOURCE_SELECTION_AND_EXECUTION_GATES_CI175_RESULT_NOT_ASSUMED",
+  "plan": {
+    "blob": "0f326a50afa843ea490d998c9a2db63c7a4244d2",
+    "sha256": "6cb9244f021a63814f65af6e8b170ed88ec79cdcf82cebcd846bbb3d05cc1d40",
+    "bytes": 11498
+  },
+  "predecessor": {
+    "commit": "a195d1ecf1cacb20c98250e601e58489e0239d86",
+    "tree": "807284b6c96dec4c4d109c9ad4ad27d85a719c12",
+    "full_green": {
+      "authority": "Parent/root report; not independently queried by this agent",
+      "run": 43329278528,
+      "job": 131569606026,
+      "completed_utc": "2026-11-12 23:37:51",
+      "checked_by_parent_utc": "2026-11-12 23:38:52",
+      "steps": "quick, full, status, upload success"
+    }
+  },
+  "actual_successor": {
+    "commit": "5998e753d1e57c592fc4970009611857cfbbce22",
+    "tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+    "parent_commit": "a195d1ecf1cacb20c98250e601e58489e0239d86",
+    "commit_tree_parent_read_from_Git_objects": true,
+    "status": "Parent has already pushed CI175; no CI outcome queried or assumed here."
+  },
+  "eight_sources": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ActualRetainedReference.lean",
+      "module": "ContinuousFlexibility.Analysis.N01ActualRetainedReference",
+      "blob": "ca7674d50e07ae8fbccfff307348308327941342",
+      "sha256": "ca09ea2f1ddf4bed503b6ac152f0aa286089625f48a4be9e33e22030de1118a2",
+      "lines": 45,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cActualReferenceWith"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01PrimitiveFixedWitnessConstruction.lean",
+      "module": "ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction",
+      "blob": "fa468a78f48266fb1c0603e9b16988a50d5a4fb4",
+      "sha256": "5a786c0686f89e5186e4f39dc748c644e2d433be5a06d0c95f9324e27b9a539b",
+      "lines": 52,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCoefficientTameBounds",
+        "ContinuousFlexibility.Analysis.N01cCharacteristicSpeedTameBounds",
+        "ContinuousFlexibility.Analysis.N01cOrdinaryFlowBounds"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01RetainedPrimitiveConstruction.lean",
+      "module": "ContinuousFlexibility.Analysis.N01RetainedPrimitiveConstruction",
+      "blob": "b4c99756ab69d37a0a3ce2c61570bed32f749885",
+      "sha256": "5e4823895fdf7f549d98d6cff9e1e0d8ef460e1dadc531892bf1ed957a2125f6",
+      "lines": 61,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ActualRetainedReference",
+        "ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext",
+        "ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry",
+        "ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction",
+        "ContinuousFlexibility.Analysis.N01cActualPrimitiveGeometry",
+        "ContinuousFlexibility.Analysis.N01cRetainedComponentEnumeration"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01aFixedReferencePrimitiveContext.lean",
+      "module": "ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext",
+      "blob": "41ee0aaa4a3971691bfdc8a8832a87300d97a863",
+      "sha256": "48542eac85fcd18116d018740b290ab9d57c41793d055e255d2b9791a9fe4c4c",
+      "lines": 64,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01aFinalAssembly",
+        "ContinuousFlexibility.Analysis.N01aReferenceHeight",
+        "ContinuousFlexibility.Analysis.SpacesConclusion",
+        "ContinuousFlexibility.Analysis.TameCalculusTheorem"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/NeighborhoodFlowRetainedGeometry.lean",
+      "module": "ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry",
+      "blob": "1e5acd56f27b8dfe803c4ee990b470e839d47e0d",
+      "sha256": "abdb8e16cd7f6a4163500e87c4f5d9dafe7cce08816d35f6f573df0b8036219a",
+      "lines": 111,
+      "imports": [
+        "ContinuousFlexibility.Analysis.NeighborhoodConstruction"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04MaterialRadiusLocalJets.lean",
+      "module": "ContinuousFlexibility.Analysis.N04MaterialRadiusLocalJets",
+      "blob": "c4ce6d627aecdad5dd13050f972c8b1e85e03ba6",
+      "sha256": "338a7ea23f75defa2ec38488ae5e6c7bb2b4ee3702214dad293c505012dc52e9",
+      "lines": 100,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aMaterialPullbackJets",
+        "ContinuousFlexibility.Analysis.CylinderMixedJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentFrechetJets",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentFrechetJets.lean",
+      "blob": "d53b5c3cececfff9655dc1a570e21f3b2281db32",
+      "sha256": "829ec714b643035b32cc1cd6e4e90e4cb54af2a6a75c998784c814c9eac41526",
+      "bytes": 3460,
+      "lines": 74,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets",
+        "ContinuousFlexibility.Analysis.CylinderMixedJets"
+      ],
+      "selection": "new held candidate"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualNegativeMovingReferenceUnitPoint",
+      "path": "src/ContinuousFlexibility/Analysis/ActualNegativeMovingReferenceUnitPoint.lean",
+      "blob": "aba2322ac91263cc9b63a6f487c5338f21667574",
+      "sha256": "4de7f0e3cff3982cb846413fa1f6eedbe2762a82bcd9e88d350ff1c5f38e9ff9",
+      "lines": 71,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bActualTypedAtlas",
+        "ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient",
+        "ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry"
+      ]
+    }
+  ],
+  "checks": {
+    "all_eight_entire_sources_read": true,
+    "all_eight_Git_SHA256_line_counts_imports_verified": true,
+    "source_lines": 578,
+    "before_blob_paths": 4794,
+    "after_blob_paths": 4802,
+    "exact_tree_additions": [
+      {
+        "path": "src/ContinuousFlexibility/Analysis/ActualNegativeMovingReferenceUnitPoint.lean",
+        "blob": "aba2322ac91263cc9b63a6f487c5338f21667574"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentFrechetJets.lean",
+        "blob": "d53b5c3cececfff9655dc1a570e21f3b2281db32"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N01ActualRetainedReference.lean",
+        "blob": "ca7674d50e07ae8fbccfff307348308327941342"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N01PrimitiveFixedWitnessConstruction.lean",
+        "blob": "fa468a78f48266fb1c0603e9b16988a50d5a4fb4"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N01RetainedPrimitiveConstruction.lean",
+        "blob": "b4c99756ab69d37a0a3ce2c61570bed32f749885"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N01aFixedReferencePrimitiveContext.lean",
+        "blob": "41ee0aaa4a3971691bfdc8a8832a87300d97a863"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N04MaterialRadiusLocalJets.lean",
+        "blob": "c4ce6d627aecdad5dd13050f972c8b1e85e03ba6"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/NeighborhoodFlowRetainedGeometry.lean",
+        "blob": "1e5acd56f27b8dfe803c4ee990b470e839d47e0d"
+      }
+    ],
+    "modified_paths": [],
+    "deleted_paths": [],
+    "all_new_targets_absent_before": true,
+    "source_only_tree_delta_exact": true,
+    "unchanged_controls": [
+      {
+        "path": "AGENTS.md",
+        "blob": "e6835ac7265ded9040e63ea60908e8f91f645f7d"
+      },
+      {
+        "path": "lean-toolchain",
+        "blob": "f0e00b3338bac0d6f050d9a64e277314a9f7830f"
+      },
+      {
+        "path": "lake-manifest.json",
+        "blob": "67156a1517d5fa6b4cd5e3adb52354c7eba69bc8"
+      },
+      {
+        "path": "scripts/gen_root.py",
+        "blob": "8c4778a0260d7f7125f2deb16c15a89dc416d4f8"
+      },
+      {
+        "path": "scripts/root_exclude.txt",
+        "blob": "fb280f584a48220180a18c65ab9a6883cbba800c"
+      },
+      {
+        "path": "src/ContinuousFlexibility.lean",
+        "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+      }
+    ],
+    "control_bytes_unchanged": true,
+    "generated_root_not_hand_edited": true
+  },
+  "independent_review_bindings": {
+    "gateway_five": {
+      "binding": {
+        "blob": "8990a59ded6e06b4b68b6d2f86b380b66b7ad5ed",
+        "sha256": "b7814ce56bf30cb3918b5632ebebe9dafc91469ebf2d2e6875c8e296e82eca6b",
+        "bytes": 6122
+      },
+      "plan": {
+        "blob": "b55da774bdeb5ea34f69842122fb20cf8ff969ce",
+        "sha256": "0816a918e8394e5ae5c8dc7ffb96313587cde5864e344af43bb9b9c84164e79e",
+        "bytes": 1518911
+      },
+      "exact_six_candidate_owner_peer_records_refetched_and_hashed": [
+        {
+          "kind": "combined_candidate",
+          "blob": "5a186eac3ad509a97617dfb8f31acfb55ba7d762",
+          "sha256": "b00fb88032f76cde352e512996b4a66aec519ea9ef47513661178796e2516324",
+          "bytes": 6320,
+          "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01RetainedPrimitiveConstruction.lean",
+          "static_status": "HELD_UNCOMPILED_PEER_REVIEW_PENDING",
+          "compiled": false
+        },
+        {
+          "kind": "combined_owner",
+          "blob": "bd3f2fd83df84a4d0d51248f38f67035ca7d926c",
+          "sha256": "46dd450a35a26bb3e041e9f00d500463293a0f7e8a5f29bca3e69a2293ad8f47",
+          "bytes": 2619,
+          "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01RetainedPrimitiveConstruction.lean",
+          "static_status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+          "compiled": false
+        },
+        {
+          "kind": "combined_peer",
+          "blob": "6f58ab582852a0d2edc40fc0c15d6cce5f970cf3",
+          "sha256": "28d8272692417a36a167470d5c588bc809f9c02466cfb9e1cf4a2b857c133430",
+          "bytes": 8003,
+          "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01RetainedPrimitiveConstruction.lean",
+          "static_status": "PASS_STATIC_REVIEW_UNCOMPILED",
+          "compiled": false
+        },
+        {
+          "kind": "owner45",
+          "blob": "43e16c8829d37ab8a04f52cd739c87fac0bda297",
+          "sha256": "95453dcad31705c849cb73e43dd9df60f15924377b2de5c26d4694569b4f0b2a",
+          "bytes": 1928,
+          "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01ActualRetainedReference.lean",
+          "static_status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED_AT_PINNED_UPSTREAM",
+          "compiled": false
+        },
+        {
+          "kind": "owner64",
+          "blob": "d3a12a7dca9c2e027b61d3adb40cb67e5fd6ef6d",
+          "sha256": "486949b4913e1131702923436c3ae5599de0dde98a1ee018dc8dcfbbd9946a22",
+          "bytes": 1376,
+          "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01aFixedReferencePrimitiveContext.lean",
+          "static_status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+          "compiled": false
+        },
+        {
+          "kind": "owner52",
+          "blob": "2c55e5a9ab92665ee63940c065ecf86c008b493e",
+          "sha256": "045ed9159495f51b233533e969638fa9a7792c9499dc51e1834603656479575a",
+          "bytes": 1721,
+          "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01PrimitiveFixedWitnessConstruction.lean",
+          "static_status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED_AT_PINNED_UPSTREAM",
+          "compiled": false
+        }
+      ],
+      "all_five_source_records_match_combined_candidate_and_peer": true,
+      "complete_five_headers_match_frozen_plan": true,
+      "existing111_body_covered_by_combined_peer": {
+        "equal_after_only_documented_wrapper_transformations": true,
+        "full_mathematical_body_byte_identical": true
+      },
+      "no_invented_standalone111_owner": true
+    },
+    "radius100": {
+      "owner": {
+        "blob": "2cacf3c230ea8ebf9faf5e8318a517ccbdb967a7",
+        "sha256": "6f9870e1b0c0a059c3a83eace80af59f7a0764d7683675ffea9821dfbe11175b",
+        "bytes": 3563
+      },
+      "peer": {
+        "blob": "d2fb34c960d86f860a57aa27194e230b058384e9",
+        "sha256": "3b32dd9680231c3d944333e61f21c52f732969c1ddb1320bd078b2880dc6afe8",
+        "bytes": 9556
+      },
+      "source_exact": true,
+      "complete_three_owner_headers_contained_verbatim_in_source": true
+    },
+    "frechet74": {
+      "owner": {
+        "blob": "aa48c9c2aac06c095ca835bc4f168d4e6e9334d2",
+        "sha256": "c496fc2c8037f94c71b6b18a757e99a1bc0627c1533aade686d1c24414ec82c6",
+        "bytes": 3053
+      },
+      "peer": {
+        "blob": "2ee76b504dcb84388af39441f0d958dc6d17f17f",
+        "sha256": "115d4bf61b8d09a933c29a46c1bd22fd5cd65f264269e12fea11bc75e43f6e02",
+        "bytes": 1660
+      },
+      "source_exact": true,
+      "graph": {
+        "blob": "6e726e56f6a74572c817114f37ade7a223f2241b",
+        "sha256": "1a48c4c1de536be6469a56eb137e50a031f0dee40be7b87322d722f2e58cf619",
+        "bytes": 110548
+      }
+    },
+    "moving71": {
+      "owner": {
+        "blob": "01165ee25048ab2541b585f3fae506ef5e5ab346",
+        "sha256": "2673931c828afd8e05ebdc0ad918b3c3776becc53479443b450a7f55c60c5c11",
+        "bytes": 9116
+      },
+      "peer": {
+        "blob": "cb6df894811759aa407c32d9ff6489a52d1b1c73",
+        "sha256": "dfb5567d8e5a47b32d8f39ab5641e0bf62b0cbf1ae77247247b23e232d1522f1"
+      },
+      "source_exact": true,
+      "supplement": {
+        "blob": "38b71499a10946284b5f896b86c8d7e75b3d525b",
+        "sha256": "01d3d6bf1ce01aa39c1bab53b3314f1b6f83a5751de7671584053d636121d091"
+      }
+    }
+  },
+  "provider_rechecks_at_exact174": {
+    "gateway": {
+      "inventory_blob": "b55da774bdeb5ea34f69842122fb20cf8ff969ce",
+      "node_field": "existing_gateway_graph.nodes",
+      "existing_checked": 1933,
+      "mismatches": []
+    },
+    "frechet": {
+      "inventory_blob": "6e726e56f6a74572c817114f37ade7a223f2241b",
+      "node_field": "nodes",
+      "existing_checked": 136,
+      "mismatches": []
+    },
+    "moving71": {
+      "owner_blob": "01165ee25048ab2541b585f3fae506ef5e5ab346",
+      "existing_direct_and_called_checked": 7,
+      "mismatches": []
+    },
+    "radius100": {
+      "existing_direct_checked": 2,
+      "mismatches": []
+    },
+    "all_new_direct_imports_resolve": true,
+    "missing_imports": [],
+    "only_new_internal_edges": [
+      [
+        "ContinuousFlexibility.Analysis.N01RetainedPrimitiveConstruction",
+        "ContinuousFlexibility.Analysis.N01ActualRetainedReference"
+      ],
+      [
+        "ContinuousFlexibility.Analysis.N01RetainedPrimitiveConstruction",
+        "ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext"
+      ],
+      [
+        "ContinuousFlexibility.Analysis.N01RetainedPrimitiveConstruction",
+        "ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry"
+      ],
+      [
+        "ContinuousFlexibility.Analysis.N01RetainedPrimitiveConstruction",
+        "ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction"
+      ]
+    ],
+    "new_internal_cycles": [],
+    "graph_scope": "Reuse the immutable prior complete import DAG and exact existing provider metadata. All old paths are unchanged in the successor. Eight previously absent targets add only the four listed new-to-new edges and edges into the existing graph."
+  },
+  "names": {
+    "actual_eight_source_explicit_declarations": [
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ActualRetainedReference",
+        "name": "ContinuousFlexibility.Radial.n01c_exists_actual_retained_reference",
+        "blob": "ca7674d50e07ae8fbccfff307348308327941342"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction",
+        "name": "ContinuousFlexibility.Statements.n01Primitive_exists_fixedWitness_properties",
+        "blob": "fa468a78f48266fb1c0603e9b16988a50d5a4fb4"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01RetainedPrimitiveConstruction",
+        "name": "ContinuousFlexibility.Radial.n01c_exists_retained_primitive_properties",
+        "blob": "b4c99756ab69d37a0a3ce2c61570bed32f749885"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext",
+        "name": "ContinuousFlexibility.Statements.n01a_exists_fixedReference_primitive_context",
+        "blob": "41ee0aaa4a3971691bfdc8a8832a87300d97a863"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry",
+        "name": "ContinuousFlexibility.Blueprint.exists_n01b_circleFlowGeometry",
+        "blob": "1e5acd56f27b8dfe803c4ee990b470e839d47e0d"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04MaterialRadiusLocalJets",
+        "name": "ContinuousFlexibility.Analysis.n04_materialRadiusPullback_mixedDerivative",
+        "blob": "c4ce6d627aecdad5dd13050f972c8b1e85e03ba6"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04MaterialRadiusLocalJets",
+        "name": "ContinuousFlexibility.Analysis.n04_materialRadiusPullback_mixedDerivative_bound",
+        "blob": "c4ce6d627aecdad5dd13050f972c8b1e85e03ba6"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04MaterialRadiusLocalJets",
+        "name": "ContinuousFlexibility.Analysis.n04_materialRadiusPullback_iteratedFDeriv_bound",
+        "blob": "c4ce6d627aecdad5dd13050f972c8b1e85e03ba6"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentFrechetJets",
+        "name": "ContinuousFlexibility.Analysis.n04Coordinates_unitAtom_absolute_iteratedFDeriv_envelope",
+        "blob": "d53b5c3cececfff9655dc1a570e21f3b2281db32"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ActualNegativeMovingReferenceUnitPoint",
+        "name": "ContinuousFlexibility.Analysis.n04bActualTypedAtlas_moving_negative_reference_unitPoint",
+        "blob": "aba2322ac91263cc9b63a6f487c5338f21667574"
+      }
+    ],
+    "count": 10,
+    "pairwise_collisions": [],
+    "cross_with_fixed131_selected684": [],
+    "reused_scope": "Prior gateway/name evidence, 96896301 four-name receipt and frozen new71 tables/token search in plan0f326a50. No fresh4k or generated-declaration scan.",
+    "four_name_receipt": {
+      "blob": "96896301a54d8a16a4795129419011e333b1f993",
+      "sha256": "84c8458d4082014afc048a74f752200cdb05a288b60caf68324bcdc0f9456be0"
+    }
+  },
+  "source_and_root_budget": {
+    "source_added": 578,
+    "source_deleted": 0,
+    "new_modules": 8,
+    "checked_in_root_imports": 4241,
+    "generated_after_eight_imports": 4506,
+    "full_root_additions": 265,
+    "full_root_deletions": [],
+    "conservative_total_added": 843,
+    "limit": 20000,
+    "actual_generator_and_exclusion_reused_exactly": true
+  },
+  "next_fixed131": {
+    "immutable_selection": {
+      "blob": "a9969267ba216a1d29840079894603d480ffd536",
+      "sha256": "74a1ecd904248853c48b1712a3f187f3b4540a8026733ff11b086422e14dec0a"
+    },
+    "existing216_checked_at174_and175_tree": 216,
+    "mismatches": [],
+    "exact173_to174_delta": [
+      {
+        "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootMatching.lean",
+        "before": "d044ebf2139de1886c261a1ad19294ff4f227d5b",
+        "after": "098a4853bebee5185fba6a50fc170045172827cc"
+      }
+    ],
+    "delta_intersection216": [],
+    "new_small8_explicit_names_do_not_collide_with_selected684": true,
+    "source_selection_unchanged": true,
+    "after_exact_small8_full_green_conservative_added": 19935,
+    "must_precede_reference85": true,
+    "remaining_gate": "CI175 or an explicitly rebound repair successor must finish complete CI successfully; then recheck the exact selected131 absence/preimages and whole root lag. This receipt itself does not activate fixed131."
+  },
+  "scope": {
+    "final_execution_review": true,
+    "mathematical_source_reviews_reused_with_exact_byte_bindings": true,
+    "no_replacement_of_fixed_witness_or_choice": true,
+    "no_local_Lean_or_build": true,
+    "no_CI_queries": true,
+    "no_new_Lean": true,
+    "no_active_index_or_ref_changes": true,
+    "no_claim_current_or_reference_final_theorem_completed": true,
+    "no_draft_credit_applied": true
+  },
+  "findings": []
+}

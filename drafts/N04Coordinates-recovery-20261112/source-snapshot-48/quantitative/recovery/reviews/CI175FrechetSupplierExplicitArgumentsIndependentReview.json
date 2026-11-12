@@ -1,0 +1,132 @@
+{
+  "schema": "n04-independent-explicit-supplier-argument-repair-review/v1",
+  "path": "quantitative/recovery/reviews/CI175FrechetSupplierExplicitArgumentsIndependentReview.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "reviewer": "/root/quantitative_route",
+  "author": "/root",
+  "verdict": "PASS_EXACT_FULL_SOURCE_AND_DELTA_REVIEW_ELABORATION_PENDING",
+  "base": {
+    "commit": "5998e753d1e57c592fc4970009611857cfbbce22",
+    "tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+    "status": "CI175 failed; source tree read as fixed immutable Git data."
+  },
+  "before": {
+    "blob": "d53b5c3cececfff9655dc1a570e21f3b2281db32",
+    "sha256": "829ec714b643035b32cc1cd6e4e90e4cb54af2a6a75c998784c814c9eac41526",
+    "bytes": 3460,
+    "lines": 74
+  },
+  "after": {
+    "blob": "2a5a26576abbc983bef6f9c51735cd28f5623859",
+    "sha256": "c75e4efb81cbb6c70de8e7fa278f8942ae97a6ae6ff9a847142fd757f1e89dad",
+    "bytes": 3552,
+    "lines": 76
+  },
+  "source_path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentFrechetJets.lean",
+  "owner": {
+    "blob": "d096b53796845bbea4dd42924e390fed8b63e473",
+    "sha256": "307a317d30c2153158652e4faa3f28c573146568a07eec2816f13cfdd7ecf0ac",
+    "bytes": 2708,
+    "lines": 76
+  },
+  "failure_receipt": {
+    "blob": "a1e85654c0d6911fd853806dc1c9ebabf02901ab",
+    "sha256": "478274b147de35e768ce94f8340a75ab6f01b94973eb97397111526287b92176",
+    "bytes": 1552,
+    "lines": 36
+  },
+  "complete_diagnostic": {
+    "blob": "ac89b98b6541fd3195d0d972c46d3ed9b5d509bf",
+    "sha256": "ae41d8e127343e9597185456f6e63eb04db2bdf85b2fdc4eb3698ad382053e60",
+    "bytes": 910,
+    "lines": 21
+  },
+  "original_job_log": {
+    "blob": "ebc25a1f381fb8404bc5409ac828df2d01fb46d3",
+    "sha256": "dd1d6cd69dca80839f309e1f0ca2373ad9e395c783bb29122425e04b94a87ea7",
+    "bytes": 90325,
+    "lines": 856
+  },
+  "diagnostic_checks": {
+    "complete_five_lines_reconstructed_from_existing_log": true,
+    "next_event": "⚠ [6717/6769] Replayed ContinuousFlexibility.Analysis.N01cMorseOpticalLowerBound",
+    "limit_200000_unchanged": true,
+    "no_artifact_or_CI_redownload": true
+  },
+  "exact_delta": {
+    "replacement_count": 1,
+    "old_literal": "    n04Coordinates_unitAtom_absolute_envelope hD hT hfloor href hcur",
+    "new_literal": "    n04Coordinates_unitAtom_absolute_envelope\n      (D := D) (T := T) (S := S) (C := C) (L := L) (K := K)\n      (base := base) (ε := ε) hD hT hfloor href hcur",
+    "added_lines": 3,
+    "deleted_lines": 1,
+    "net_lines": 2,
+    "forward_rebuild_equal": true,
+    "reverse_rebuild_equal": true,
+    "complete_public_heads": 1,
+    "complete_public_header_byte_equal": true,
+    "complete_public_header_sha256": "8a5255d1f3b5c194a7d7bf575d3e2fed783aef77c84a962e999022d23c84f141",
+    "imports_byte_equal": true,
+    "imports": [
+      "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets",
+      "ContinuousFlexibility.Analysis.CylinderMixedJets"
+    ],
+    "option_lines_byte_equal": true,
+    "retained_option": "set_option backward.isDefEq.respectTransparency true",
+    "local_instance_attributes_byte_equal": true,
+    "all_other_source_bytes_equal": true
+  },
+  "supplier": {
+    "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean",
+    "blob": "4a0f2095b9c16558d889f814750f1fa648590e52",
+    "sha256": "cf481c45cf6ab2b1d5c1b3e9b9588bd3189291fe79e122a60cf355c4a07a1152",
+    "bytes": 5518,
+    "lines": 118,
+    "actual175_tree_blob_verified": true,
+    "read_scope": "Complete118-line source, including the section-variable binder declaration and the complete public supplier.",
+    "declaration": "ContinuousFlexibility.Analysis.n04Coordinates_unitAtom_absolute_envelope",
+    "eight_actual_named_implicit_parameters": [
+      "D",
+      "T",
+      "S",
+      "C",
+      "L",
+      "K",
+      "base",
+      "ε"
+    ],
+    "proof_arguments_unchanged": [
+      "hD",
+      "hT",
+      "hfloor",
+      "href",
+      "hcur"
+    ],
+    "assessment": "All eight named arguments exist in the actual provider signature and are set to precisely the caller's already-bound objects. The call no longer asks elaboration to infer these objects through the large ReferenceJets and CurrentJets propositions."
+  },
+  "semantic_checks": [
+    "The same actual CanonicalData K, reference/current atom, material T and sample K.cell are retained.",
+    "The same existential loss is selected before N; no new or order-dependent loss is introduced.",
+    "A and B remain selected at the same N before z, m, atom, point and k<=N.",
+    "The remaining mixed-to-Frechet proof, numeric2^N factor and parameterGrading(N+loss) are byte-identical.",
+    "No theorem head, hypothesis, return value, scope, positive-floor requirement or instance choice is changed.",
+    "The repair adds no maxHeartbeats, timeout, dependency, workflow or toolchain setting."
+  ],
+  "previous_full_math_review": {
+    "original_owner": "aa48c9c2aac06c095ca835bc4f168d4e6e9334d2",
+    "original_peer": "2ee76b504dcb84388af39441f0d958dc6d17f17f",
+    "unchanged_source_body_outside_named_argument_call": true
+  },
+  "budget_scope": {
+    "net_source_charge": 2,
+    "owner_proposed_active_added": 845,
+    "owner_proposed_pending_draft_bound": 19972,
+    "no_credit_applied_by_this_review": true,
+    "note": "The owner's conditional247-line post-green reclassification is a separate ledger operation; this proof review does not apply it."
+  },
+  "result_limitations": [
+    "Named-argument source compatibility and the exact repair are independently verified; actual elaboration cost must be tested by the parent's next CI.",
+    "The previous source failed, so no compilation success is inferred from its historical mathematical review.",
+    "Only existing Git blobs were read and this JSON review is preserved as an unreferenced Git blob; no active source, refs, CI or local Lean operation was performed."
+  ],
+  "findings": []
+}

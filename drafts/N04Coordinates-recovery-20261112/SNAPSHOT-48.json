@@ -1,0 +1,282 @@
+{
+  "kind": "recovery_snapshot_with_latest_compiled_tree",
+  "snapshot": 48,
+  "created_at": "2026-11-12 23:53:31 UTC",
+  "parent": "535fce0c1d27b2b130af8299cacbaddd933017b1",
+  "additional_parent": "ae9eb8801b4bd629989e1f4b46f195263adb188d",
+  "compiled_baseline": "a195d1ecf1cacb20c98250e601e58489e0239d86",
+  "compiled_baseline_tree": "807284b6c96dec4c4d109c9ad4ad27d85a719c12",
+  "source_index_blob": "0d640f6c32b058e6923e1d898f7abe3dc700c093",
+  "source_index": {
+    "path": "drafts/N04Coordinates-recovery-20261112/SOURCE-INDEX.json",
+    "sha256": "0843d01a7686d86afd13cae034497a3fbdda4a088d445519a942aa646f6f0549",
+    "entries": 3208,
+    "new": 19,
+    "updated": 0
+  },
+  "artifacts": [
+    {
+      "name": "root/ci/CI174-build.log",
+      "blob": "c86f754f560068d64eee3aeba36081835b87b580",
+      "sha256": "4e2e61937184401ad029929019884a002a58c541b9b5c145efd83bd779222330",
+      "bytes": 71634,
+      "lines": 871
+    },
+    {
+      "name": "root/ci/CI174CompleteSuccessReceipt.json",
+      "blob": "ed26f541e8abb1f33fa26a34bdc9afeb9aa618e2",
+      "sha256": "e97dd1297a94812dcfc668200fc6b29826cd2342b2c79691a7ff9f7229d81c51",
+      "bytes": 3832,
+      "lines": 133
+    },
+    {
+      "name": "root/ci/CI175EightSourceStagingPlan.json",
+      "blob": "bd81ee1ab5043fe9e70940fc14d7f4e958e4758c",
+      "sha256": "681e4ac184798bc7be2a784b5b971601296809108106b9c9cc6da340486812fd",
+      "bytes": 12849,
+      "lines": 316
+    },
+    {
+      "name": "root/ci/CI175PushReceipt.json",
+      "blob": "51b7ea4bf7f876a319fcdaa32582a89efbe73203",
+      "sha256": "d6a52056516bd179065e0bc6073ff60f191320aafa8db29f10a43caf15e68739",
+      "bytes": 605,
+      "lines": 16
+    },
+    {
+      "name": "positive/recovery/StageEActualGlobalTransportFormulaRoute.json",
+      "blob": "b46eb06138dfd5761a536176a88be584499c37a4",
+      "sha256": "5ef17536ba6f923eee745948c0f79d6dc1ff9c2bc54f96acaed198f181009aad",
+      "bytes": 30664,
+      "lines": 335
+    },
+    {
+      "name": "root/recovery/StageEMaterialRatioRefinement.json",
+      "blob": "7353ec06fd63e6c5f4b17546dcb1805008d357e1",
+      "sha256": "a2ffba30eee833e25779573e35eca3a4dedb82c4791e4bf10a1631cb124d8740",
+      "bytes": 2573,
+      "lines": 38
+    },
+    {
+      "name": "root/integration/Fixed131Actual175ProviderRebind.json",
+      "blob": "bc696dbd470ccfba430ad5981832165e20b17c5d",
+      "sha256": "6f880a732fbf1288c98baba6da1ddeec55621d322742e1e2fe16f753b6b45a5b",
+      "bytes": 480,
+      "lines": 14
+    },
+    {
+      "name": "quantitative/recovery/Small8CI175ExecutionAndFixed131ProviderGate.json",
+      "blob": "3b011be949b3886221e7141c2c72e0d55e0c8b27",
+      "sha256": "11f88cb4fc456f2a3af953991fc73896747f7eab2aed01557455e26ceaff4f9a",
+      "bytes": 20471,
+      "lines": 479
+    },
+    {
+      "name": "quantitative/recovery/FixedBaseFirstBatchExact677DraftCreditProvenance.json",
+      "blob": "0b4fc88a7cc2b1e8d7ca4f7f0e97b9d96885cdb5",
+      "sha256": "261395053745bd9a9ec34ebcdcbd8f145588264016251d1406706690b6353d56",
+      "bytes": 15675,
+      "lines": 354
+    },
+    {
+      "name": "root/ci/CI175-build.log",
+      "blob": "ebc25a1f381fb8404bc5409ac828df2d01fb46d3",
+      "sha256": "dd1d6cd69dca80839f309e1f0ca2373ad9e395c783bb29122425e04b94a87ea7",
+      "bytes": 90325,
+      "lines": 856
+    },
+    {
+      "name": "root/ci/CI175CompleteErrorBlocks.json",
+      "blob": "ac89b98b6541fd3195d0d972c46d3ed9b5d509bf",
+      "sha256": "ae41d8e127343e9597185456f6e63eb04db2bdf85b2fdc4eb3698ad382053e60",
+      "bytes": 910,
+      "lines": 21
+    },
+    {
+      "name": "root/ci/CI175FailureReceipt.json",
+      "blob": "a1e85654c0d6911fd853806dc1c9ebabf02901ab",
+      "sha256": "478274b147de35e768ce94f8340a75ab6f01b94973eb97397111526287b92176",
+      "bytes": 1552,
+      "lines": 36
+    },
+    {
+      "name": "root/repair175/CanonicalReferenceCurrentFrechetJetsExplicitArgumentsOwner.json",
+      "blob": "d096b53796845bbea4dd42924e390fed8b63e473",
+      "sha256": "307a317d30c2153158652e4faa3f28c573146568a07eec2816f13cfdd7ecf0ac",
+      "bytes": 2708,
+      "lines": 76
+    },
+    {
+      "name": "root/repair175/CanonicalReferenceCurrentFrechetJetsReviewedOwner.json",
+      "blob": "4533fd04bc6aad9ec1b2f6ca42dec116ec18269f",
+      "sha256": "7bdaa05b18d9846a041bb933339108522c94aef06302ff2fef6548cff73566f9",
+      "bytes": 2890,
+      "lines": 81
+    },
+    {
+      "name": "quantitative/recovery/reviews/CI175FrechetSupplierExplicitArgumentsIndependentReview.json",
+      "blob": "6ee29b7d9e6b4e05c8492f387a0684ceb4e296ec",
+      "sha256": "c5d9c91382cbe02955da487e802654348cf9c8cbd67b115ce7657ecfb93f7ab7",
+      "bytes": 5944,
+      "lines": 132
+    },
+    {
+      "name": "root/ci/CI176SourceOnlyRepairPlan.json",
+      "blob": "0f3ec6cbbba94d1441c9531d60b3998588484be3",
+      "sha256": "39dd14f745e56c39595155813386ad1a6def6229197d1b59fdf64fa14657ea47",
+      "bytes": 2358,
+      "lines": 71
+    },
+    {
+      "name": "root/ci/CI176PushReceipt.json",
+      "blob": "9e0b12dd4f298acd4440ec4367689da57694f466",
+      "sha256": "3711bccc222e1b64bda875bdd794247b2e30200238d36d4674f100d9dab23bd2",
+      "bytes": 580,
+      "lines": 15
+    },
+    {
+      "name": "positive/recovery/N04ActualResidualFixedBasePublicExecutionCheck.json",
+      "blob": "147e5887ac36e6114d9043e2187eb1aeba5873a5",
+      "sha256": "9e4334a2424da7f7ab0da85f93ffcf09549ee09886d29454d06df3b420272a35",
+      "bytes": 25249,
+      "lines": 280
+    },
+    {
+      "name": "audit/recovery/CanonicalPrimitiveStageBCutContinuityRoute.json",
+      "blob": "d7e3259e315b21d575a428620c9c14b5b9078dde",
+      "sha256": "d3eb96b091bc46099bcdaed454ecd3dca0a735d887b7ed3fc4d453ffa411d63c",
+      "bytes": 30477,
+      "lines": 372
+    }
+  ],
+  "outside_archive": {
+    "exact_target": "a195d1ecf1cacb20c98250e601e58489e0239d86",
+    "upgrade_from": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "actual_added_source_paths": 149,
+    "actual_added_Lean_lines": 19714,
+    "all_complete_green": true
+  },
+  "CI174": {
+    "receipt": "ed26f541e8abb1f33fa26a34bdc9afeb9aa618e2",
+    "run": 43329278528,
+    "job": 131569606026,
+    "conclusion": "success",
+    "verified_at": "2026-11-12T23:38:52Z",
+    "coverage": {
+      "evidence": "2423233254216be57bae5c892f40909e10361544",
+      "verified_merge_base": "89e539ccf7e9c558467cf875f44dcff9490ce271",
+      "main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "exact_quick_count_and_first40_match": true,
+      "default_project": 4556,
+      "total_project": 4562,
+      "default_all_src": 4560,
+      "total_all_src": 4566,
+      "additional_quick_targets": [
+        "ContinuousFlexibility.Blueprint.N01c.Coefficients",
+        "ContinuousFlexibility.Blueprint.N01c.Speeds",
+        "ContinuousFlexibility.Blueprint.N01c.Flows",
+        "ContinuousFlexibility.Blueprint.N05.VolumeModel"
+      ],
+      "combined_project": 4560,
+      "combined_all_src": 4564,
+      "remaining_unreached": [
+        "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+        "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth"
+      ],
+      "cache_file_count_5116_is_not_coverage": true
+    }
+  },
+  "active": {
+    "ci_round": 176,
+    "commit": "ae9eb8801b4bd629989e1f4b46f195263adb188d",
+    "tree": "57a0345b93f168e268e9aac63612b635fd695262",
+    "parent": "5998e753d1e57c592fc4970009611857cfbbce22",
+    "pushed_readback": "2026-11-12 23:51:00 UTC",
+    "first_ci_lookup_not_before": "2026-11-12T23:56:00.000Z",
+    "plan_blob": "0f3ec6cbbba94d1441c9531d60b3998588484be3",
+    "source_added_since_complete_green": 580,
+    "source_deleted_since_complete_green": 0,
+    "whole_root_lag": 265,
+    "conservative_total": 845,
+    "repair_net_lines": 2,
+    "status": "pushed; awaiting first permitted CI lookup"
+  },
+  "CI175": {
+    "receipt": "a1e85654c0d6911fd853806dc1c9ebabf02901ab",
+    "run": 43330820289,
+    "job": 131574774571,
+    "conclusion": "failure",
+    "new_compiled_sources": 7,
+    "new_sources_total": 8,
+    "sole_failure": "CanonicalReferenceCurrentFrechetJets:49:2 supplier implicit inference isDefEq timeout",
+    "complete_diagnostic": "ac89b98b6541fd3195d0d972c46d3ed9b5d509bf",
+    "full_build": "skipped"
+  },
+  "budget": {
+    "new_archived_Lean_lines": 0,
+    "prior_conservative_draft_bound": 19970,
+    "pending_repair_net_lines": 2,
+    "retained_uncompiled_conservative_upper_bound": 19972,
+    "limit": 20000,
+    "remaining": 28,
+    "no_conditional_draft_credit_applied": true,
+    "conditional_after_CI176_complete_green": {
+      "reclassifiable": 247,
+      "components": [
+        100,
+        74,
+        2,
+        71
+      ],
+      "result": 19725,
+      "margin": 275
+    },
+    "gateway333_not_counted_or_subtracted": true,
+    "provenance": "7a0aab35f942c06078903f0f05633480eadf2e5c",
+    "later_fixed131_credit_only_after_its_own_complete_green": {
+      "sources": [
+        328,
+        349
+      ],
+      "total": 677,
+      "provenance": "0b4fc88a7cc2b1e8d7ca4f7f0e97b9d96885cdb5",
+      "current_credit": 0
+    },
+    "repair_storage": "Repaired76 only at actual src path through CI176 parent; original74 counted once plus2 new repair lines, no duplicate archived76."
+  },
+  "next_fixed131": {
+    "selection": "a9969267ba216a1d29840079894603d480ffd536",
+    "actual175_rebind": "bc696dbd470ccfba430ad5981832165e20b17c5d",
+    "existing_providers_exact": 216,
+    "new_sources": 131,
+    "source_lines": 19539,
+    "not_activated": true,
+    "activation": "Held until the complete-green eight-source group, now repaired by CI176. The Frechet delta is outside the216-provider closure; before activation rebind exact actual green tree.",
+    "after_small_group_green_budget": 19935
+  },
+  "main_rules_checked": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "root_workflow_resource_toolchain_dependency_limits_unchanged": true,
+  "environment": "Exec unavailable; continued with exact Git source objects and ordinary CI. No local compilation attempted.",
+  "endpoint_status": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open",
+    "proved": 37,
+    "total": 42,
+    "open": [
+      "N01c",
+      "N02N03",
+      "N04b",
+      "N04Coordinates",
+      "N05"
+    ]
+  },
+  "CI176": {
+    "status": "pending first lookup not before23:56:00UTC",
+    "source_only_repair": true,
+    "owner": "4533fd04bc6aad9ec1b2f6ca42dec116ec18269f",
+    "peer": "6ee29b7d9e6b4e05c8492f387a0684ceb4e296ec",
+    "net_added": 2,
+    "full_budget": 845
+  }
+}

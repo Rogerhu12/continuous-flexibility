@@ -1,0 +1,316 @@
+{
+  "schema": "N04-eight-source-staging-plan-v1",
+  "ci_round": 175,
+  "parent": "a195d1ecf1cacb20c98250e601e58489e0239d86",
+  "parent_tree": "807284b6c96dec4c4d109c9ad4ad27d85a719c12",
+  "verified_complete_green": {
+    "receipt": "ed26f541e8abb1f33fa26a34bdc9afeb9aa618e2",
+    "run": 43329278528,
+    "verified_at": "2026-11-12T23:38:52Z"
+  },
+  "tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+  "prepared_plan": "0f326a50afa843ea490d998c9a2db63c7a4244d2",
+  "source_files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ActualRetainedReference.lean",
+      "module": "ContinuousFlexibility.Analysis.N01ActualRetainedReference",
+      "blob": "ca7674d50e07ae8fbccfff307348308327941342",
+      "sha256": "ca09ea2f1ddf4bed503b6ac152f0aa286089625f48a4be9e33e22030de1118a2",
+      "lines": 45,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cActualReferenceWith"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01PrimitiveFixedWitnessConstruction.lean",
+      "module": "ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction",
+      "blob": "fa468a78f48266fb1c0603e9b16988a50d5a4fb4",
+      "sha256": "5a786c0686f89e5186e4f39dc748c644e2d433be5a06d0c95f9324e27b9a539b",
+      "lines": 52,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCoefficientTameBounds",
+        "ContinuousFlexibility.Analysis.N01cCharacteristicSpeedTameBounds",
+        "ContinuousFlexibility.Analysis.N01cOrdinaryFlowBounds"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01RetainedPrimitiveConstruction.lean",
+      "module": "ContinuousFlexibility.Analysis.N01RetainedPrimitiveConstruction",
+      "blob": "b4c99756ab69d37a0a3ce2c61570bed32f749885",
+      "sha256": "5e4823895fdf7f549d98d6cff9e1e0d8ef460e1dadc531892bf1ed957a2125f6",
+      "lines": 61,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ActualRetainedReference",
+        "ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext",
+        "ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry",
+        "ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction",
+        "ContinuousFlexibility.Analysis.N01cActualPrimitiveGeometry",
+        "ContinuousFlexibility.Analysis.N01cRetainedComponentEnumeration"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01aFixedReferencePrimitiveContext.lean",
+      "module": "ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext",
+      "blob": "41ee0aaa4a3971691bfdc8a8832a87300d97a863",
+      "sha256": "48542eac85fcd18116d018740b290ab9d57c41793d055e255d2b9791a9fe4c4c",
+      "lines": 64,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01aFinalAssembly",
+        "ContinuousFlexibility.Analysis.N01aReferenceHeight",
+        "ContinuousFlexibility.Analysis.SpacesConclusion",
+        "ContinuousFlexibility.Analysis.TameCalculusTheorem"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/NeighborhoodFlowRetainedGeometry.lean",
+      "module": "ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry",
+      "blob": "1e5acd56f27b8dfe803c4ee990b470e839d47e0d",
+      "sha256": "abdb8e16cd7f6a4163500e87c4f5d9dafe7cce08816d35f6f573df0b8036219a",
+      "lines": 111,
+      "imports": [
+        "ContinuousFlexibility.Analysis.NeighborhoodConstruction"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04MaterialRadiusLocalJets.lean",
+      "module": "ContinuousFlexibility.Analysis.N04MaterialRadiusLocalJets",
+      "blob": "c4ce6d627aecdad5dd13050f972c8b1e85e03ba6",
+      "sha256": "338a7ea23f75defa2ec38488ae5e6c7bb2b4ee3702214dad293c505012dc52e9",
+      "lines": 100,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aMaterialPullbackJets",
+        "ContinuousFlexibility.Analysis.CylinderMixedJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentFrechetJets",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentFrechetJets.lean",
+      "blob": "d53b5c3cececfff9655dc1a570e21f3b2281db32",
+      "sha256": "829ec714b643035b32cc1cd6e4e90e4cb54af2a6a75c998784c814c9eac41526",
+      "bytes": 3460,
+      "lines": 74,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets",
+        "ContinuousFlexibility.Analysis.CylinderMixedJets"
+      ],
+      "selection": "new held candidate"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualNegativeMovingReferenceUnitPoint",
+      "path": "src/ContinuousFlexibility/Analysis/ActualNegativeMovingReferenceUnitPoint.lean",
+      "blob": "aba2322ac91263cc9b63a6f487c5338f21667574",
+      "sha256": "4de7f0e3cff3982cb846413fa1f6eedbe2762a82bcd9e88d350ff1c5f38e9ff9",
+      "lines": 71,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bActualTypedAtlas",
+        "ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient",
+        "ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry"
+      ]
+    }
+  ],
+  "tree_elements": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ActualRetainedReference.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ca7674d50e07ae8fbccfff307348308327941342"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01PrimitiveFixedWitnessConstruction.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fa468a78f48266fb1c0603e9b16988a50d5a4fb4"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01RetainedPrimitiveConstruction.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b4c99756ab69d37a0a3ce2c61570bed32f749885"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01aFixedReferencePrimitiveContext.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "41ee0aaa4a3971691bfdc8a8832a87300d97a863"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/NeighborhoodFlowRetainedGeometry.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1e5acd56f27b8dfe803c4ee990b470e839d47e0d"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04MaterialRadiusLocalJets.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c4ce6d627aecdad5dd13050f972c8b1e85e03ba6"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentFrechetJets.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d53b5c3cececfff9655dc1a570e21f3b2281db32"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ActualNegativeMovingReferenceUnitPoint.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "aba2322ac91263cc9b63a6f487c5338f21667574"
+    }
+  ],
+  "full_blob_tree_verified": 4802,
+  "root_full_source_hash_and_line_read": true,
+  "source_additions": 578,
+  "source_deletions": 0,
+  "all_new_paths": 8,
+  "generated_root_imports": 4506,
+  "checked_in_root_imports": 4241,
+  "full_root_lag": 265,
+  "conservative_added_since_complete_green": 843,
+  "limit": 20000,
+  "provider_preflight": {
+    "gateway_existing_exact": 1933,
+    "frechet_existing_exact": 136,
+    "actual71_direct_and_called_providers_exact": 7,
+    "mismatches": [],
+    "all8_targets_absent": true,
+    "all_new_imports_resolve": true,
+    "new_internal_edges": [
+      [
+        "ContinuousFlexibility.Analysis.N01RetainedPrimitiveConstruction",
+        "ContinuousFlexibility.Analysis.N01ActualRetainedReference"
+      ],
+      [
+        "ContinuousFlexibility.Analysis.N01RetainedPrimitiveConstruction",
+        "ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext"
+      ],
+      [
+        "ContinuousFlexibility.Analysis.N01RetainedPrimitiveConstruction",
+        "ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry"
+      ],
+      [
+        "ContinuousFlexibility.Analysis.N01RetainedPrimitiveConstruction",
+        "ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction"
+      ]
+    ],
+    "new_cycles": [],
+    "complete_repository_prior_dag": "9f5480dfc6e6e901e135b15d1d4424245b1e5ae1",
+    "proof_only_graph_deltas": [
+      "5d29a30f40b0e1c8f9935a4b4075f9ae31c2f467",
+      "cd4237057df74e77d9a772a7f9540d813f899e0d",
+      "cec0558a2ea690a7e6086ba9bb2bf032b592402d",
+      "ccac3ff6c96ea95f5947778d3cc34adaf2887b14"
+    ],
+    "new_node_extension_argument": "The prior actual repository graph has no missing project import and none of these eight new targets exists in it. Existing providers therefore have no edge to the new nodes. The only new-to-new edges are the four explicit gateway edges above; their DFS is acyclic. Every other new edge goes to an existing closed provider."
+  },
+  "source_reviews": {
+    "actual71": {
+      "candidate": "4e7587d1ca8f24326c5c1d9c4514e5a51c018103",
+      "owner": "01165ee25048ab2541b585f3fae506ef5e5ab346",
+      "peer": "cb6df894811759aa407c32d9ff6489a52d1b1c73",
+      "source_bytes_hash_verified": "4de7f0e3cff3982cb846413fa1f6eedbe2762a82bcd9e88d350ff1c5f38e9ff9"
+    },
+    "seven": {
+      "gateway": {
+        "plan": "b55da774bdeb5ea34f69842122fb20cf8ff969ce",
+        "owner_binding": "8990a59ded6e06b4b68b6d2f86b380b66b7ad5ed",
+        "exact_existing_providers": 1933,
+        "mismatches": [],
+        "new_sources": 5,
+        "lines": 333
+      },
+      "frechet": {
+        "graph": "6e726e56f6a74572c817114f37ade7a223f2241b",
+        "owner": "aa48c9c2aac06c095ca835bc4f168d4e6e9334d2",
+        "peer": "2ee76b504dcb84388af39441f0d958dc6d17f17f",
+        "exact_existing_providers": 136,
+        "mismatches": []
+      },
+      "radius": {
+        "owner": "2cacf3c230ea8ebf9faf5e8318a517ccbdb967a7",
+        "peer": "d2fb34c960d86f860a57aa27194e230b058384e9",
+        "exact_direct_providers": [
+          {
+            "path": "src/ContinuousFlexibility/Analysis/N07aMaterialPullbackJets.lean",
+            "blob": "3162470bd6b9ac60c8abb8ce498955f590bf9cf9"
+          },
+          {
+            "path": "src/ContinuousFlexibility/Analysis/CylinderMixedJets.lean",
+            "blob": "3dc20e779221e16f9be32dff13d22e978b5a048d"
+          }
+        ]
+      }
+    }
+  },
+  "names": {
+    "new_explicit_public_count": 10,
+    "pairwise_collision": false,
+    "previous7_evidence": "1cc3b4648a8db15da7e7b333b597908b45e6ee0e",
+    "new71_frozen_tables": [
+      {
+        "key": "names1974",
+        "blob": "9c3e8c742cbce4d8b019b5d7923b45af5f30dcba",
+        "sha256": "79a86b2a00a0b16fcb343221248cd6d1a271f94e9b09ba427018939695d88cb1",
+        "new71TokenPresent": false,
+        "chars": 987363
+      },
+      {
+        "key": "names703",
+        "blob": "394db737d43724d8c5b39783fa7263419f89ada1",
+        "sha256": "9ad7165978ba19924ac326eade24359169f3eda69dacf71b80f227e63280cac2",
+        "new71TokenPresent": false,
+        "chars": 374929
+      },
+      {
+        "key": "names1301",
+        "blob": "5c815b6f63a572455a89ef2cc2e778fb4ed717b6",
+        "sha256": "5f9fc6d9b1f83dc346a3b5193ee0979cfc565c990426c4a60b5f96a8b4625c76",
+        "new71TokenPresent": false,
+        "chars": 527799
+      },
+      {
+        "key": "names318",
+        "blob": "170b0a0717f1275be27271a136533996c8f2584d",
+        "sha256": "69c859ad141c271135e53984ff4033f3b535de58170ef4eeb32fb51f33cf961c",
+        "new71TokenPresent": false,
+        "chars": 209697
+      }
+    ],
+    "new71_main_exact_token_search": {
+      "scope": "Exact token search on repository default main; not a fresh whole-active generated-declaration scan",
+      "query": "n04bActualTypedAtlas_moving_negative_reference_unitPoint",
+      "total_count": 0,
+      "incomplete_results": false,
+      "items": []
+    },
+    "scope": "Exact explicit-name reuse and source extension; no fresh generated-declaration/full-main scan claimed."
+  },
+  "main_rules": "Current main1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac AGENTS.md and docs/tasks/README.md reread byte-equal to active; unchanged since reviewed plan.",
+  "draft_reclassification": {
+    "current_archived_prior": 19899,
+    "new_actual71": 71,
+    "current_upper_bound": 19970,
+    "after_complete_small8_CI_only": {
+      "reclassifiable": 245,
+      "components": [
+        100,
+        74,
+        71
+      ],
+      "new_upper_bound": 19725,
+      "margin": 275
+    },
+    "gateway333_must_not_be_subtracted": true,
+    "provenance": "7a0aab35f942c06078903f0f05633480eadf2e5c"
+  },
+  "prepush_requirements": [
+    "Verify candidate commit exact parent and tree",
+    "Verify Git compare exactly eight added source paths and 578+/0-",
+    "Fresh ref check then nonforce CAS push; wait>=5 minutes before first CI lookup"
+  ],
+  "nonclaims": [
+    "No new Lean written by this metadata record.",
+    "No current task completion or endpoint axiom clearance.",
+    "The reference-cut equality branch is retained but its continuity/range/material estimate follow-up remains separate."
+  ]
+}

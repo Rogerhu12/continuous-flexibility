@@ -1,10 +1,10 @@
 {
   "kind": "metadata_only_recovery_snapshot",
-  "snapshot": 47,
-  "prior_commit": "3bac4d6e5c64c938435955ff9010074cc6a75f1a",
-  "line_head": "a195d1ecf1cacb20c98250e601e58489e0239d86",
-  "line_tree": "807284b6c96dec4c4d109c9ad4ad27d85a719c12",
-  "frozen_at": "2026-11-12 23:32:19 UTC",
+  "snapshot": 48,
+  "prior_commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
+  "line_head": "ae9eb8801b4bd629989e1f4b46f195263adb188d",
+  "line_tree": "57a0345b93f168e268e9aac63612b635fd695262",
+  "frozen_at": "2026-11-12 23:53:31 UTC",
   "files": [
     {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/cut-first-jets-syntax/ConstructedRootCutFirstJets.base.lean.txt",
@@ -29065,7 +29065,7 @@
       "lines": 52,
       "blob": "0a5635b54fd3d3754a2fb4b18069bf112671e124",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-47/root/ci/CI173FailureReceipt.json"
       }
     },
@@ -29076,7 +29076,7 @@
       "lines": 841,
       "blob": "0eb8d265c4860084766c1a045615217eee1ccb00",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-47/root/ci/CI173-build.log"
       }
     },
@@ -29087,7 +29087,7 @@
       "lines": 23,
       "blob": "07915f3536523e5addadf2987bd8424afe359760",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-47/root/ci/CI173CompleteErrorBlocks.json"
       }
     },
@@ -29098,7 +29098,7 @@
       "lines": 48,
       "blob": "7828cb9678a45b77150d0dd6ff4c39b3f051ac46",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-47/root/repair173/WholeReferenceGaugeRootMatchingOwner.json"
       }
     },
@@ -29109,7 +29109,7 @@
       "lines": 52,
       "blob": "37f33ffa2433124e577a52fb566c10eafeb16e21",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-47/root/repair173/WholeReferenceGaugeRootMatchingReviewedManifest.json"
       }
     },
@@ -29120,7 +29120,7 @@
       "lines": 183,
       "blob": "b8bf00b65e34bb7eac04e28ab0011b878c706446",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-47/quantitative/recovery/reviews/CI173WholeReferenceGaugeRootMatchingIndependentReview.json"
       }
     },
@@ -29131,7 +29131,7 @@
       "lines": 62,
       "blob": "ccac3ff6c96ea95f5947778d3cc34adaf2887b14",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-47/root/ci/CI174SourceOnlyRepairPlan.json"
       }
     },
@@ -29142,7 +29142,7 @@
       "lines": 20,
       "blob": "f13cc0e8456123d1d41ff5c58804a37eca9e7186",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-47/root/ci/CI174PushReceipt.json"
       }
     },
@@ -29153,7 +29153,7 @@
       "lines": 1057,
       "blob": "2423233254216be57bae5c892f40909e10361544",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-47/root/ci/CI174QuickPlusDefaultCoveragePreflight.json"
       }
     },
@@ -29164,7 +29164,7 @@
       "lines": 71,
       "blob": "aba2322ac91263cc9b63a6f487c5338f21667574",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-47/audit/reconstructed/ActualNegativeMovingReferenceUnitPoint.lean"
       }
     },
@@ -29175,7 +29175,7 @@
       "lines": 213,
       "blob": "4e7587d1ca8f24326c5c1d9c4514e5a51c018103",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-47/audit/reconstructed/ActualNegativeMovingReferenceUnitPointCandidateManifest.json"
       }
     },
@@ -29186,7 +29186,7 @@
       "lines": 74,
       "blob": "7100074cf403816ab0e422d64dcc9f9a574871aa",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-47/audit/reconstructed/ActualNegativeMovingReferenceUnitPoint.diff"
       }
     },
@@ -29197,7 +29197,7 @@
       "lines": 187,
       "blob": "01165ee25048ab2541b585f3fae506ef5e5ab346",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-47/audit/reconstructed/ActualNegativeMovingReferenceUnitPointReviewedManifest.json"
       }
     },
@@ -29208,7 +29208,7 @@
       "lines": 382,
       "blob": "cb6df894811759aa407c32d9ff6489a52d1b1c73",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-47/positive/recovery/reviews/ActualNegativeMovingReferenceUnitPointIndependentReview.json"
       }
     },
@@ -29219,7 +29219,7 @@
       "lines": 453,
       "blob": "7a0aab35f942c06078903f0f05633480eadf2e5c",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-47/positive/recovery/GatewayFiveDraftBudgetProvenance.json"
       }
     },
@@ -29230,7 +29230,7 @@
       "lines": 11140,
       "blob": "a9969267ba216a1d29840079894603d480ffd536",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-47/quantitative/recovery/FixedBaseFirstBatchSelectionAfterCI173AndSmallGroup.json"
       }
     },
@@ -29241,7 +29241,7 @@
       "lines": 128,
       "blob": "38b71499a10946284b5f896b86c8d7e75b3d525b",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-47/quantitative/recovery/FixedBaseFirstBatchSmall8OwnerAddendum.json"
       }
     },
@@ -29252,12 +29252,221 @@
       "lines": 268,
       "blob": "0f326a50afa843ea490d998c9a2db63c7a4244d2",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "535fce0c1d27b2b130af8299cacbaddd933017b1",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-47/root/integration/EightActualGatewayAndMaterialSourcesPreparedAtCI174.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/ci/CI174-build.log",
+      "sha256": "4e2e61937184401ad029929019884a002a58c541b9b5c145efd83bd779222330",
+      "bytes": 71634,
+      "lines": 871,
+      "blob": "c86f754f560068d64eee3aeba36081835b87b580",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/root/ci/CI174-build.log"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/ci/CI174CompleteSuccessReceipt.json",
+      "sha256": "e97dd1297a94812dcfc668200fc6b29826cd2342b2c79691a7ff9f7229d81c51",
+      "bytes": 3832,
+      "lines": 133,
+      "blob": "ed26f541e8abb1f33fa26a34bdc9afeb9aa618e2",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/root/ci/CI174CompleteSuccessReceipt.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/ci/CI175EightSourceStagingPlan.json",
+      "sha256": "681e4ac184798bc7be2a784b5b971601296809108106b9c9cc6da340486812fd",
+      "bytes": 12849,
+      "lines": 316,
+      "blob": "bd81ee1ab5043fe9e70940fc14d7f4e958e4758c",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/root/ci/CI175EightSourceStagingPlan.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/ci/CI175PushReceipt.json",
+      "sha256": "d6a52056516bd179065e0bc6073ff60f191320aafa8db29f10a43caf15e68739",
+      "bytes": 605,
+      "lines": 16,
+      "blob": "51b7ea4bf7f876a319fcdaa32582a89efbe73203",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/root/ci/CI175PushReceipt.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/StageEActualGlobalTransportFormulaRoute.json",
+      "sha256": "5ef17536ba6f923eee745948c0f79d6dc1ff9c2bc54f96acaed198f181009aad",
+      "bytes": 30664,
+      "lines": 335,
+      "blob": "b46eb06138dfd5761a536176a88be584499c37a4",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/positive/recovery/StageEActualGlobalTransportFormulaRoute.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/StageEMaterialRatioRefinement.json",
+      "sha256": "a2ffba30eee833e25779573e35eca3a4dedb82c4791e4bf10a1631cb124d8740",
+      "bytes": 2573,
+      "lines": 38,
+      "blob": "7353ec06fd63e6c5f4b17546dcb1805008d357e1",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/root/recovery/StageEMaterialRatioRefinement.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/integration/Fixed131Actual175ProviderRebind.json",
+      "sha256": "6f880a732fbf1288c98baba6da1ddeec55621d322742e1e2fe16f753b6b45a5b",
+      "bytes": 480,
+      "lines": 14,
+      "blob": "bc696dbd470ccfba430ad5981832165e20b17c5d",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/root/integration/Fixed131Actual175ProviderRebind.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/Small8CI175ExecutionAndFixed131ProviderGate.json",
+      "sha256": "11f88cb4fc456f2a3af953991fc73896747f7eab2aed01557455e26ceaff4f9a",
+      "bytes": 20471,
+      "lines": 479,
+      "blob": "3b011be949b3886221e7141c2c72e0d55e0c8b27",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/quantitative/recovery/Small8CI175ExecutionAndFixed131ProviderGate.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/FixedBaseFirstBatchExact677DraftCreditProvenance.json",
+      "sha256": "261395053745bd9a9ec34ebcdcbd8f145588264016251d1406706690b6353d56",
+      "bytes": 15675,
+      "lines": 354,
+      "blob": "0b4fc88a7cc2b1e8d7ca4f7f0e97b9d96885cdb5",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/quantitative/recovery/FixedBaseFirstBatchExact677DraftCreditProvenance.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/ci/CI175-build.log",
+      "sha256": "dd1d6cd69dca80839f309e1f0ca2373ad9e395c783bb29122425e04b94a87ea7",
+      "bytes": 90325,
+      "lines": 856,
+      "blob": "ebc25a1f381fb8404bc5409ac828df2d01fb46d3",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/root/ci/CI175-build.log"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/ci/CI175CompleteErrorBlocks.json",
+      "sha256": "ae41d8e127343e9597185456f6e63eb04db2bdf85b2fdc4eb3698ad382053e60",
+      "bytes": 910,
+      "lines": 21,
+      "blob": "ac89b98b6541fd3195d0d972c46d3ed9b5d509bf",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/root/ci/CI175CompleteErrorBlocks.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/ci/CI175FailureReceipt.json",
+      "sha256": "478274b147de35e768ce94f8340a75ab6f01b94973eb97397111526287b92176",
+      "bytes": 1552,
+      "lines": 36,
+      "blob": "a1e85654c0d6911fd853806dc1c9ebabf02901ab",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/root/ci/CI175FailureReceipt.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair175/CanonicalReferenceCurrentFrechetJetsExplicitArgumentsOwner.json",
+      "sha256": "307a317d30c2153158652e4faa3f28c573146568a07eec2816f13cfdd7ecf0ac",
+      "bytes": 2708,
+      "lines": 76,
+      "blob": "d096b53796845bbea4dd42924e390fed8b63e473",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/root/repair175/CanonicalReferenceCurrentFrechetJetsExplicitArgumentsOwner.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair175/CanonicalReferenceCurrentFrechetJetsReviewedOwner.json",
+      "sha256": "7bdaa05b18d9846a041bb933339108522c94aef06302ff2fef6548cff73566f9",
+      "bytes": 2890,
+      "lines": 81,
+      "blob": "4533fd04bc6aad9ec1b2f6ca42dec116ec18269f",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/root/repair175/CanonicalReferenceCurrentFrechetJetsReviewedOwner.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/CI175FrechetSupplierExplicitArgumentsIndependentReview.json",
+      "sha256": "c5d9c91382cbe02955da487e802654348cf9c8cbd67b115ce7657ecfb93f7ab7",
+      "bytes": 5944,
+      "lines": 132,
+      "blob": "6ee29b7d9e6b4e05c8492f387a0684ceb4e296ec",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/quantitative/recovery/reviews/CI175FrechetSupplierExplicitArgumentsIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/ci/CI176SourceOnlyRepairPlan.json",
+      "sha256": "39dd14f745e56c39595155813386ad1a6def6229197d1b59fdf64fa14657ea47",
+      "bytes": 2358,
+      "lines": 71,
+      "blob": "0f3ec6cbbba94d1441c9531d60b3998588484be3",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/root/ci/CI176SourceOnlyRepairPlan.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/ci/CI176PushReceipt.json",
+      "sha256": "3711bccc222e1b64bda875bdd794247b2e30200238d36d4674f100d9dab23bd2",
+      "bytes": 580,
+      "lines": 15,
+      "blob": "9e0b12dd4f298acd4440ec4367689da57694f466",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/root/ci/CI176PushReceipt.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/N04ActualResidualFixedBasePublicExecutionCheck.json",
+      "sha256": "9e4334a2424da7f7ab0da85f93ffcf09549ee09886d29454d06df3b420272a35",
+      "bytes": 25249,
+      "lines": 280,
+      "blob": "147e5887ac36e6114d9043e2187eb1aeba5873a5",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/positive/recovery/N04ActualResidualFixedBasePublicExecutionCheck.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/recovery/CanonicalPrimitiveStageBCutContinuityRoute.json",
+      "sha256": "d3eb96b091bc46099bcdaed454ecd3dca0a735d887b7ed3fc4d453ffa411d63c",
+      "bytes": 30477,
+      "lines": 372,
+      "blob": "d7e3259e315b21d575a428620c9c14b5b9078dde",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-48/audit/recovery/CanonicalPrimitiveStageBCutContinuityRoute.json"
       }
     }
   ],
-  "storage_note": "Outside the recovery archive is the exact complete-green CI169 tree. Full CI169 evidence, CI170 failure and all16 complete error blocks, the seven reviewed source-only repairs and CI171 push, pinned remaining source plans, one100-line open-U radius lemma and one199-line coefficient joint-gain candidate are preserved. CI171 is pending; Realization and parent remain open. The seven repaired Lean files are retained through the CI171 additional parent at their actual src paths, without duplicate Lean archive copies. stored_at is authoritative; source labels are logical draft paths and local mirrors are transient.",
-  "compiled_baseline": "836b039233920fa778d9747be7b5d5a9f953fea3",
-  "compiled_baseline_tree": "aedbc4ec6f58d05e07de2eefb318651f69077036"
+  "storage_note": "Outside this recovery archive is the exact complete-green CI174 source tree. CI174 success and exact quick-plus-default coverage, CI175's seven compiled new modules and complete timeout diagnostic, CI176's reviewed explicit-parameter repair, fixed131 source/provider/budget evidence, and actual Stage B/E/return-residual execution routes are preserved. CI176 is pending complete CI; no conditional draft credit has been applied. Pending source is retained through the CI176 additional parent and the earlier exact source records, without another archived Lean copy of the repaired76-line source. stored_at is authoritative; source labels are logical original draft paths.",
+  "compiled_baseline": "a195d1ecf1cacb20c98250e601e58489e0239d86",
+  "compiled_baseline_tree": "807284b6c96dec4c4d109c9ad4ad27d85a719c12"
 }

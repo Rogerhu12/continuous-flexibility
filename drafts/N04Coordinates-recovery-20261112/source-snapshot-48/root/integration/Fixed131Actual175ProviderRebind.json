@@ -1,0 +1,14 @@
+{
+  "base": "5998e753d1e57c592fc4970009611857cfbbce22",
+  "tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+  "existing_count": 216,
+  "new_count": 131,
+  "source_lines": 19539,
+  "missing": [],
+  "cycles": [],
+  "all_selected_roots_reached": true,
+  "retained_shared9": true,
+  "source_prepared": "a9969267ba216a1d29840079894603d480ffd536",
+  "rootMatching_not_in_graph": true,
+  "activation": "Held until CI175 complete green; rebind if repair touches a selected provider."
+}

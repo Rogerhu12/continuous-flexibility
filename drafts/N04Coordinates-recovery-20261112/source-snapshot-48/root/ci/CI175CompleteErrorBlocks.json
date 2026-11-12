@@ -1,0 +1,21 @@
+{
+  "ci_round": 175,
+  "run": 43330820289,
+  "job": 131574774571,
+  "unique_errors": 1,
+  "errors": [
+    {
+      "start": 596,
+      "lines": [
+        "error: src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentFrechetJets.lean:49:2: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached",
+        "",
+        "Note: Use `set_option maxHeartbeats <num>` to set the limit.",
+        "",
+        "Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command."
+      ],
+      "next": "⚠ [6717/6769] Replayed ContinuousFlexibility.Analysis.N01cMorseOpticalLowerBound",
+      "complete": true
+    }
+  ],
+  "completeness": "The five-line timeout diagnostic ends at the next replay event. The earlier one-line occurrence is the same headline; no full diagnostic has been truncated. No artifact ZIP retrieval is needed."
+}

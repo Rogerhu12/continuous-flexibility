@@ -1,0 +1,81 @@
+{
+  "schema": "N04-source-only-compiler-repair-owner-v1",
+  "author": "/root",
+  "ci_failure": 175,
+  "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentFrechetJets.lean",
+  "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentFrechetJets",
+  "parent": "5998e753d1e57c592fc4970009611857cfbbce22",
+  "before": {
+    "blob": "d53b5c3cececfff9655dc1a570e21f3b2281db32",
+    "sha256": "829ec714b643035b32cc1cd6e4e90e4cb54af2a6a75c998784c814c9eac41526",
+    "lines": 74,
+    "original_owner": "aa48c9c2aac06c095ca835bc4f168d4e6e9334d2",
+    "original_full_peer": "2ee76b504dcb84388af39441f0d958dc6d17f17f"
+  },
+  "after": {
+    "blob": "2a5a26576abbc983bef6f9c51735cd28f5623859",
+    "sha256": "c75e4efb81cbb6c70de8e7fa278f8942ae97a6ae6ff9a847142fd757f1e89dad",
+    "lines": 76,
+    "bytes": 3552
+  },
+  "diagnostic": {
+    "receipt": "a1e85654c0d6911fd853806dc1c9ebabf02901ab",
+    "complete_error": "ac89b98b6541fd3195d0d972c46d3ed9b5d509bf",
+    "message": "line49:2 deterministic isDefEq timeout at the unannotated n04Coordinates_unitAtom_absolute_envelope application"
+  },
+  "change": {
+    "kind": "Bind the supplier's actual eight implicit parameters to the current eight objects before its five proof arguments.",
+    "added_lines": 3,
+    "deleted_lines": 1,
+    "net": 2,
+    "new_public_declarations": 0,
+    "public_head_byte_identical": true,
+    "imports_byte_identical": true,
+    "all_other_source_bytes_identical": true
+  },
+  "supplier": {
+    "blob": "4a0f2095b9c16558d889f814750f1fa648590e52",
+    "full_source_read": true,
+    "name": "n04Coordinates_unitAtom_absolute_envelope",
+    "explicit_existing_implicit_binders": [
+      "D",
+      "T",
+      "S",
+      "C",
+      "L",
+      "K",
+      "base",
+      "ε"
+    ]
+  },
+  "semantics": "Same actual reference/current atom functions, fixed loss before N, original sampled E0 exponent and state grading, and same proof. Only parameter inference is made explicit.",
+  "resource_policy": "No heartbeat, timeout, toolchain, dependency, workflow, or instance setting changes.",
+  "budget": {
+    "active_vs_full_green174": {
+      "source_lines": 580,
+      "full_root_lag": 265,
+      "total": 845
+    },
+    "draft_conservative_before": 19970,
+    "net_pending_repair_addition": 2,
+    "draft_conservative_after": 19972,
+    "remaining": 28,
+    "only_after_complete_successor_green": {
+      "reclassify": 247,
+      "components": {
+        "radius": 100,
+        "frechet_original": 74,
+        "frechet_repair_net": 2,
+        "moving_point": 71
+      },
+      "result": 19725
+    },
+    "no_archive_Lean_duplicate": true
+  },
+  "status": "REVIEWED_SOURCE_ONLY_PENDING_CI",
+  "independent_peer": {
+    "blob": "6ee29b7d9e6b4e05c8492f387a0684ceb4e296ec",
+    "sha256": "c5d9c91382cbe02955da487e802654348cf9c8cbd67b115ce7657ecfb93f7ab7",
+    "full_source_and_exact_delta_pass": true
+  }
+}

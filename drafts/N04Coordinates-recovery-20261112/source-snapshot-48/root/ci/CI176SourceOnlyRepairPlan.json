@@ -1,0 +1,71 @@
+{
+  "schema": "N04-source-only-CI-repair-staging-v1",
+  "ci_round": 176,
+  "parent": "5998e753d1e57c592fc4970009611857cfbbce22",
+  "commit": "ae9eb8801b4bd629989e1f4b46f195263adb188d",
+  "tree": "57a0345b93f168e268e9aac63612b635fd695262",
+  "complete_green": "a195d1ecf1cacb20c98250e601e58489e0239d86",
+  "failure": "a1e85654c0d6911fd853806dc1c9ebabf02901ab",
+  "diagnostics": "ac89b98b6541fd3195d0d972c46d3ed9b5d509bf",
+  "source": {
+    "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentFrechetJets.lean",
+    "before": {
+      "blob": "d53b5c3cececfff9655dc1a570e21f3b2281db32",
+      "sha256": "829ec714b643035b32cc1cd6e4e90e4cb54af2a6a75c998784c814c9eac41526",
+      "lines": 74,
+      "original_owner": "aa48c9c2aac06c095ca835bc4f168d4e6e9334d2",
+      "original_full_peer": "2ee76b504dcb84388af39441f0d958dc6d17f17f"
+    },
+    "after": {
+      "blob": "2a5a26576abbc983bef6f9c51735cd28f5623859",
+      "sha256": "c75e4efb81cbb6c70de8e7fa278f8942ae97a6ae6ff9a847142fd757f1e89dad",
+      "lines": 76,
+      "bytes": 3552
+    }
+  },
+  "owner": "4533fd04bc6aad9ec1b2f6ca42dec116ec18269f",
+  "peer": "6ee29b7d9e6b4e05c8492f387a0684ceb4e296ec",
+  "git_parent_diff": {
+    "paths": 1,
+    "added": 3,
+    "deleted": 1
+  },
+  "git_green_diff": {
+    "paths": 8,
+    "added": 580,
+    "deleted": 0
+  },
+  "generated_root_imports": 4506,
+  "checked_in_root_imports": 4241,
+  "full_root_lag": 265,
+  "conservative_budget": 845,
+  "limit": 20000,
+  "exact_blob_tree_paths_verified": 4802,
+  "existing_dependencies_and_all_imports_unchanged": true,
+  "public_head_unchanged": true,
+  "main_rules_checked": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "draft_budget": {
+    "active_vs_full_green174": {
+      "source_lines": 580,
+      "full_root_lag": 265,
+      "total": 845
+    },
+    "draft_conservative_before": 19970,
+    "net_pending_repair_addition": 2,
+    "draft_conservative_after": 19972,
+    "remaining": 28,
+    "only_after_complete_successor_green": {
+      "reclassify": 247,
+      "components": {
+        "radius": 100,
+        "frechet_original": 74,
+        "frechet_repair_net": 2,
+        "moving_point": 71
+      },
+      "result": 19725
+    },
+    "no_archive_Lean_duplicate": true
+  },
+  "fixed131": "Still held; first batch19935 after this exact group completes full CI.",
+  "resources_and_toolchain_unchanged": true
+}

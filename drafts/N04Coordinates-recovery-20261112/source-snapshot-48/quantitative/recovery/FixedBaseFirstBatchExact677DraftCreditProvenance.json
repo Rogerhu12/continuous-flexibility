@@ -1,0 +1,354 @@
+{
+  "schema": "n04-exact-charged-draft-credit-audit/v1",
+  "path": "quantitative/recovery/FixedBaseFirstBatchExact677DraftCreditProvenance.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "reviewer": "/root/quantitative_route",
+  "status": "CHARGED_MEMBERSHIP_VERIFIED_FUTURE_CREDIT_ONLY_NO_RECLASSIFICATION_NOW",
+  "decision": {
+    "current_authoritative_conservative_bound": 19970,
+    "exact_selected_source_lines_proven_charged": 677,
+    "conditional_credit_breakdown": {
+      "composition_final328": 328,
+      "inverse_final349": 349
+    },
+    "permitted_current_credit": 0,
+    "permitted_future_credit": "At most677, once, only after the parent's exact complete-green CI includes both selected final byte versions and root explicitly reclassifies their existing charges.",
+    "no_extra_new_Lean_authorization": true
+  },
+  "authoritative_records": {
+    "snapshot47": {
+      "blob": "34b89af44fea15919101ec0e9a39211af8816968",
+      "sha256": "183be2b6c7079b42790725fc77657577903ab15de92e37d2b3a0a061d108cd58",
+      "bytes": 9174
+    },
+    "snapshot47_index": {
+      "blob": "89f6c52694801f43cc92907e5f71c4b13096c1dd",
+      "sha256": "33032f3b8372b6bedded71594c3e34465fbd3f1d68ea2279717ef8876f32c01f",
+      "bytes": 1610540
+    },
+    "prior_carried_budget_provenance": {
+      "blob": "7a0aab35f942c06078903f0f05633480eadf2e5c",
+      "sha256": "90d1b2c3460b060c0c6ccc299406dd34880d6a8854c55f70e7b4c2da296296ee",
+      "bytes": 19632
+    },
+    "selected_first_batch": {
+      "blob": "a9969267ba216a1d29840079894603d480ffd536",
+      "sha256": "74a1ecd904248853c48b1712a3f187f3b4540a8026733ff11b086422e14dec0a"
+    }
+  },
+  "exact_selected_sources": [
+    {
+      "label": "composition328",
+      "blob": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+      "sha256": "f70497231b60b5c0a59e8de16cb534f1820e2bd9d6469ed8c86643b88f428b80",
+      "bytes": 17787,
+      "lines": 328,
+      "stored_at": {
+        "commit": "0227745d7d0b759233e7714896f99493b29661d2",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBounds.lean"
+      },
+      "logical_source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBounds.lean",
+      "exact_historical_path_verified": true
+    },
+    {
+      "label": "inverse349",
+      "blob": "45fae56b12e755379fcf3e4aa3e211ba0cfe9c7a",
+      "sha256": "7e79129c9a9df8e2d74c353106685db461089a05ec1141f333211d5a257c6aac",
+      "bytes": 18485,
+      "lines": 349,
+      "stored_at": {
+        "commit": "acac62fd1903dd18733c1759927aca87ad7b045a",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-35/positive/compatibility/fixed-inverse-include-layout/TameInverseFixedBaseBounds.lean"
+      },
+      "logical_source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-include-layout/TameInverseFixedBaseBounds.lean",
+      "exact_historical_path_verified": true
+    }
+  ],
+  "historical_membership_proof": {
+    "inverse349": {
+      "record": {
+        "blob": "f8eec1034be1f1b09f018b3f2399d518fec1d90a",
+        "sha256": "d9a781f0caf62b43a105a1be4ddcdc595617b13baa03017b0b50b9fa5f154a20",
+        "bytes": 3528
+      },
+      "exact_new_source_row": {
+        "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-include-layout/TameInverseFixedBaseBounds.lean",
+        "sha256": "7e79129c9a9df8e2d74c353106685db461089a05ec1141f333211d5a257c6aac",
+        "lines": 349
+      },
+      "new_source_sum": 1470,
+      "new_source_sum_recomputed": true,
+      "arithmetic": "15482 +1470 =16952",
+      "projected_bound": 16952,
+      "duplicate_compiled_copy_deductions": 0,
+      "historical_commit_path_fetched_exact": true,
+      "conclusion": "The selected final include-layout349 is an explicitly charged new source in snapshot35, not merely recoverable from an older unrelated archive."
+    },
+    "composition328": {
+      "record": {
+        "blob": "ee9d072e5cf0ca7baf0ef5832298425f42004a07",
+        "sha256": "c96c60607ea09541d6a5df31ead1b6fb5c4960b288ebfc9398c2d3bd6bdb8d17",
+        "bytes": 16981
+      },
+      "exact_new_source_row": {
+        "name": "positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBounds.lean",
+        "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBounds.lean",
+        "blob": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+        "sha256": "f70497231b60b5c0a59e8de16cb534f1820e2bd9d6469ed8c86643b88f428b80",
+        "bytes": 17787,
+        "lines": 328
+      },
+      "actual_Lean_changes": [
+        {
+          "name": "positive/reconstructed/TameFixedBaseCompositionBounds.lean",
+          "dest": "drafts/N04Coordinates-recovery-20261112/working/positive/reconstructed/TameFixedBaseCompositionBounds.lean",
+          "blob": "7e8ed357c9a53ad2c888da6e401b0084e3f9f142",
+          "sha256": "85080c53cdff94fa40ecea646d300ffe3b549bf614e5a1eede073a8f3842379b",
+          "bytes": 17717,
+          "lines": 326
+        },
+        {
+          "name": "positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBounds.lean",
+          "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBounds.lean",
+          "blob": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+          "sha256": "f70497231b60b5c0a59e8de16cb534f1820e2bd9d6469ed8c86643b88f428b80",
+          "bytes": 17787,
+          "lines": 328
+        },
+        {
+          "name": "positive/reconstructed/N04SelectorInverseCircleFixedBaseBounds.lean",
+          "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/positive/reconstructed/N04SelectorInverseCircleFixedBaseBounds.lean",
+          "blob": "054e86dbc3a61f36df0ff4fd7ddf71aefeacb117",
+          "sha256": "93154c0937eac430488bc4927b7d5e5f42d026df05959e430686c650ddd79fd4",
+          "bytes": 8461,
+          "lines": 152
+        }
+      ],
+      "charged_new_additions": {
+        "working153_to326_added": 174,
+        "selected_final328_added": 328,
+        "selector152_added": 152,
+        "total": 654
+      },
+      "arithmetic": "18872 +654 =19526; the unrelated one-line working-source deletion was not subtracted from this conservative upper bound.",
+      "exact_budget": {
+        "snapshot_added_Lean_lines_conservative": 654,
+        "snapshot_deleted_Lean_lines": 1,
+        "working_source_diff": {
+          "added": 174,
+          "deleted": 1,
+          "old_lines": 153,
+          "new_lines": 326
+        },
+        "prior_preserved_uncompiled_upper_bound": 18872,
+        "current_preserved_uncompiled_upper_bound": 19526,
+        "hard_limit": 20000,
+        "quantitative_unspent_allocation": 325,
+        "remaining_unallocated": 149,
+        "active_CI_source_additions": 19736,
+        "active_CI_conservative_with_generated_root": 19846
+      },
+      "historical_commit_path_fetched_exact": true,
+      "conclusion": "The selected final328 is a separate, full328-line charge in snapshot38. The original working326 history is not the copy credited by this review."
+    },
+    "carry_forward": {
+      "reuse_scope": "Use the immutable prior provenance7a0aab35 carried chain; do not claim a new full recount of all historical sources.",
+      "chain": [
+        {
+          "snapshot": 34,
+          "starting": 19585,
+          "compiled_copy_deduction": 4481,
+          "new_lines": 378,
+          "result": 15482
+        },
+        {
+          "snapshot": 35,
+          "starting": 15482,
+          "new_lines": 1470,
+          "deduction": 0,
+          "result": 16952
+        },
+        {
+          "snapshot": 36,
+          "starting": 16952,
+          "new_lines": 953,
+          "deduction": 0,
+          "result": 17905
+        },
+        {
+          "snapshot": 37,
+          "starting": 17905,
+          "new_lines": 967,
+          "deduction": 0,
+          "result": 18872
+        },
+        {
+          "snapshot": 38,
+          "starting": 18872,
+          "new_conservatively_added_lines": 654,
+          "result": 19526,
+          "note": "The only deletion is1 line in the unrelated working153→326 composition source; the conservative result uses added654 without subtracting it. No gateway source is among changes."
+        },
+        {
+          "snapshot": 39,
+          "starting": 19526,
+          "new_archived_Lean_lines": 0,
+          "preserved_upper_bound": 19526,
+          "gateway_addition_or_deduction": 0
+        },
+        {
+          "snapshot": 40,
+          "starting": 19526,
+          "new_archived_Lean_lines": 0,
+          "preserved_upper_bound": 19526,
+          "gateway_addition_or_deduction": 0
+        },
+        {
+          "snapshot": 41,
+          "starting": 19526,
+          "new_archived_Lean_lines": 0,
+          "preserved_upper_bound": 19526,
+          "gateway_addition_or_deduction": 0
+        },
+        {
+          "snapshot": 42,
+          "starting": 19526,
+          "new_archived_Lean_lines": 0,
+          "preserved_upper_bound": 19526,
+          "gateway_addition_or_deduction": 0
+        },
+        {
+          "snapshot": 43,
+          "starting": 19526,
+          "new_archived_Lean_lines": 0,
+          "preserved_upper_bound": 19526,
+          "gateway_addition_or_deduction": 0
+        },
+        {
+          "snapshot": 44,
+          "starting": 19526,
+          "new_archived_Lean_lines": 299,
+          "result": 19825,
+          "prior_bound_not_reclassified_on_CI169_success": true
+        },
+        {
+          "snapshot": 45,
+          "starting": 19825,
+          "new_archived_Lean_lines": 74,
+          "result": 19899
+        }
+      ],
+      "snapshot47": {
+        "prior": 19899,
+        "added71": 71,
+        "result": 19970,
+        "no_reclassification_applied": true,
+        "provenance": "7a0aab35f942c06078903f0f05633480eadf2e5c"
+      },
+      "no_selected_source_credit_already_applied_in_the_carried_chain": true
+    },
+    "source_index47_rows_match_both_final_versions": true,
+    "historical_path_checks": "Both exact stored_at commit/path files were fetched from Git; recomputed Git blob SHA1, SHA256, UTF8 size and newline count equal the final fixed131 source identities."
+  },
+  "excluded_version_credits": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.base.lean.txt",
+      "sha256": "4f9e0ce5e1ac930cab621ba13ef2a161030e407eaada26109f5eee513395ac4a",
+      "lines": 349,
+      "stored_at": {
+        "commit": "6cf0c8d0517e0d53f368a4eecf0d0c53f69deb3c",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-33/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.base.lean.txt"
+      },
+      "permitted_credit_in_this_review": 0,
+      "reason": "Not either selected exact final source; initial, working, indentation or base-text version. No duplicate deduction allowed."
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.lean",
+      "sha256": "5e099aae8613c8f52bfefb6caf3e952e8153a1e95f8f34cadb7cf222fdb89864",
+      "lines": 349,
+      "stored_at": {
+        "commit": "6cf0c8d0517e0d53f368a4eecf0d0c53f69deb3c",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-33/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.lean"
+      },
+      "permitted_credit_in_this_review": 0,
+      "reason": "Not either selected exact final source; initial, working, indentation or base-text version. No duplicate deduction allowed."
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/TameInverseFixedBaseBounds.lean",
+      "sha256": "4f9e0ce5e1ac930cab621ba13ef2a161030e407eaada26109f5eee513395ac4a",
+      "lines": 349,
+      "stored_at": {
+        "commit": "6cf0c8d0517e0d53f368a4eecf0d0c53f69deb3c",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-33/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.base.lean.txt"
+      },
+      "permitted_credit_in_this_review": 0,
+      "reason": "Not either selected exact final source; initial, working, indentation or base-text version. No duplicate deduction allowed."
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/TameFixedBaseCompositionBounds.lean",
+      "sha256": "85080c53cdff94fa40ecea646d300ffe3b549bf614e5a1eede073a8f3842379b",
+      "lines": 326,
+      "stored_at": {
+        "commit": "0227745d7d0b759233e7714896f99493b29661d2",
+        "path": "drafts/N04Coordinates-recovery-20261112/working/positive/reconstructed/TameFixedBaseCompositionBounds.lean"
+      },
+      "permitted_credit_in_this_review": 0,
+      "reason": "Not either selected exact final source; initial, working, indentation or base-text version. No duplicate deduction allowed."
+    }
+  ],
+  "current_activation": {
+    "commit": "5998e753d1e57c592fc4970009611857cfbbce22",
+    "tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+    "both_fixed_files_absent": [
+      {
+        "module": "ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds",
+        "path": "src/ContinuousFlexibility/Analysis/TameFixedBaseCompositionBounds.lean",
+        "blob": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+        "present": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds",
+        "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+        "blob": "45fae56b12e755379fcf3e4aa3e211ba0cfe9c7a",
+        "present": false
+      }
+    ],
+    "CI175_status": "Submitted per parent; no CI query or success claim by this reviewer.",
+    "fixed131_complete_green_not_yet_established": true
+  },
+  "conditional_arithmetic": {
+    "starting_bound": 19970,
+    "after_only_exact_fixed677_credit": {
+      "bound": 19293,
+      "remaining_of_20000": 707
+    },
+    "after_small8_exact245_credit_then_exact_fixed677_credit": {
+      "bound": 19048,
+      "remaining_of_20000": 952,
+      "total_credits": 922
+    },
+    "small8_credit_components": [
+      100,
+      74,
+      71
+    ],
+    "gateway333_credit": 0,
+    "conditions": [
+      "Both credits are separate and require their own exact complete-green evidence and explicit root ledger update.",
+      "Recompute from the then-current ledger if any intervening new source charge or permitted credit occurs.",
+      "Do not credit these final sources a second time through earlier same-name initial/indent/working or text-base copies.",
+      "If CI requires changed source bytes, bind the repaired selected version and its precise charge/credit mapping separately before applying the release."
+    ],
+    "archive_vs_active_budget": "These are retained draft-source charges. Generated-root imports and active CI change budgets are separate and are not deducted here."
+  },
+  "scope": {
+    "no_refs_or_active_files_modified": true,
+    "no_Lean_created_or_compiled": true,
+    "no_CI_query": true,
+    "mathematical_proof_review_repeated": false,
+    "source_archive_existence_alone_not_used": true,
+    "no_deletion_or_recompression_of_historical_artifacts": true,
+    "gate_result": "Evidence is sufficient for both conditional328 and349 components, not only one."
+  },
+  "findings": []
+}

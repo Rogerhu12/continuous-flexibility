@@ -1,0 +1,38 @@
+{
+  "schema": "N04-stageE-material-ratio-refinement-v1",
+  "author": "/root",
+  "status": "SOURCE_REVIEW_ONLY_NOT_IMPLEMENTED",
+  "active": "5998e753d1e57c592fc4970009611857cfbbce22",
+  "source": {
+    "module": "ContinuousFlexibility.Analysis.N07aActualMaterialComparison",
+    "blob": "07f326d248a88a0a78e561ed2967a7b060008d6e",
+    "full_source_read": true
+  },
+  "local_window": {
+    "module": "ContinuousFlexibility.Analysis.N07aMaterialLocalWindow",
+    "blob": "c1736f076aaf29b8a7452f71471e69338f6e0a5a",
+    "full_source_read": true
+  },
+  "relation_to_prior": "Refines the separate material-ratio obligation of b46eb06138dfd5761a536176a88be584499c37a4; no finite derivative or endpoint extension claimed.",
+  "supplier": "n07a_inverseChart_material_displacement hD hT hε hrefState hgeom href hcur hδ",
+  "hypotheses": [
+    "same CanonicalGeometry",
+    "same ReferenceJets and CurrentJets",
+    "IsMaterialData, IsAccumulatingProfile, referenceStateConditions, epsilon positive"
+  ],
+  "neighborhood_order": "First choose positive delta from n07a_material_local_ratio_window hT; then one base' and eta from the displacement theorem; neither choice depends on state, piece, physical point, or derivative order.",
+  "piece_proof": [
+    "For p in referencePhysicalPieceOpen S K m, use referenceDomain and the reference charts MapsTo to obtain y=K.chart reference m p in canonicalOpen.",
+    "The same reference chart left-inverse gives K.inverseChart reference m y=p.",
+    "The actual global tau's qualitative piece identity is tau p=canonicalCurrentPoint C K z m p=K.inverseChart z m y.",
+    "Apply hdisp z hz m y hy, rewrite reference inverse identity, and use tau MapsTo (or the current inverse MapsTo) for radialCore membership.",
+    "n07a_material_local_ratio_window yields all four H and M ratios bounded by exp 1. In particular the two required transport ratios have uniform constant exp 1 on every reference open piece."
+  ],
+  "global_extension_needed": [
+    "Extend these actual continuous ratios to all annularOpen using the existing reference partition null-exception coverage/density and global C3 tau plus positive smooth H/M.",
+    "This does not prove q/tau derivative bounds. Their separate finite-jet composition and common sampled-envelope absorption remain.",
+    "No reuse of N04Properties/CanonicalPrimitiveGeometry.transport is required."
+  ],
+  "future_target_bound": "After the continuity extension, take exponent0 for these two ratio factors and enlarge the eventual common transport constant as needed.",
+  "no_Lean_added": true
+}
