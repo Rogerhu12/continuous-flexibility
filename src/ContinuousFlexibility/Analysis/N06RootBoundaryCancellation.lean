@@ -160,7 +160,7 @@ theorem n06N05_finite_current_root_boundaryDensity
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (u : B.Space) (ml mr : ℕ) (s : Finset ℕ) (vl vr : ℕ → ℝ → ℝ)
     (hjoin : K.physicalRight ml = K.physicalLeft mr)
-    (hcore : Icc (K.physicalLeft ml) (K.physicalRight mr) ⊆ radialCore D)
+    (hroot : K.physicalRight ml ∈ radialCore D)
     {yl yr σl σr : ℝ} {β₀ H₀ ρ₀ κ₀ Hr₀ β H ρ κ Hr : ℝ → ℝ}
     (Jl₀ : N06RootFirstJets (K.chart (C.referenceState, 0) ml)
       (K.height (C.referenceState, 0) ml) (K.physicalRight ml) yl σl β₀ H₀ ρ₀ κ₀ Hr₀)
@@ -202,7 +202,7 @@ theorem n06N05_finite_current_root_boundaryDensity
     ContDiff.sum (fun n hn => ((hvr n hn).comp contDiff_fst).mul
       (((contDiff_referenceAngularBasis n).of_le (by simp)).comp contDiff_snd))
   have hmatch := n06N05_finite_current_root_conormal hS h hcoordinates u ml mr s vl vr
-    hjoin hcore Jl₀ Jr₀ hH₀ hρ₀ Jl Jr hvl hvr hmodeL hmodeR A.a A.b θ
+    hjoin hroot Jl₀ Jr₀ hH₀ hρ₀ Jl Jr hvl hvr hmodeL hmodeR A.a A.b θ
   exact n06_current_root_boundaryDensity_eq_of_value_conormal Jl Jr Ql Qr h04 hz hs hφ
     hrl hrr hθ A (hWl.differentiable (by norm_num) _) (hWr.differentiable (by norm_num) _)
     hmatch.1 hmatch.2

@@ -97,7 +97,7 @@ theorem n06N05_canonicalModes_physical_traces_local
     (hcoordinates : N05ControlledReferenceCoordinates D S C K)
     (u : B.Space) (ml mr n : ℕ) (vl vr : ℝ → ℝ)
     (hjoin : K.physicalRight ml = K.physicalLeft mr)
-    (hcore : Icc (K.physicalLeft ml) (K.physicalRight mr) ⊆ radialCore D)
+    (hroot : K.physicalRight ml ∈ radialCore D)
     (hvl : ContDiff ℝ 1 vl) (hvr : ContDiff ℝ 1 vr)
     (hmodeL : n06HalfCosineCoefficient (u.val.1.1 ml) n
       =ᵐ[volume.restrict (Ioo (K.left ml) (K.right ml))] vl)
@@ -125,7 +125,6 @@ theorem n06N05_canonicalModes_physical_traces_local
   have hleft : K.physicalLeft ml < K.physicalRight ml := (h04.2.2.2.1 ml).1
   have hright : K.physicalRight ml < K.physicalRight mr :=
     hjoin.trans_lt (h04.2.2.2.1 mr).1
-  have hroot : K.physicalRight ml ∈ radialCore D := hcore ⟨hleft.le, hright.le⟩
   have hη : MemLp η 2 (radialPhysicalMeasure D) :=
     r11b_output_memLp h01.1.1 h01.1.2.2.2.1 h.2.2.2.1 hgraph.1
   have hχ : MemLp (fun p : PolarPoint => u.val.1.2.1 * S.chiLeft p.1) 2

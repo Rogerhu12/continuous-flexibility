@@ -51,7 +51,7 @@ theorem n06N05_finite_current_cut_boundary_integrals_cancel
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (u : B.Space) (ml mr : ℕ) (s : Finset ℕ) (vl vr : ℕ → ℝ → ℝ)
     (hjoin : K.physicalRight ml = K.physicalLeft mr)
-    (hcore : Icc (K.physicalLeft ml) (K.physicalRight mr) ⊆ radialCore D)
+    (hroot : K.physicalRight ml ∈ radialCore D)
     {y σ τ : ℝ} {β₀ H₀ ρ₀ κ₀ Hr₀ β H ρ κ Hr : ℝ → ℝ}
     (Jl₀ : N06RootFirstJets (K.chart (C.referenceState, 0) ml)
       (K.height (C.referenceState, 0) ml) (K.physicalRight ml) y σ β₀ H₀ ρ₀ κ₀ Hr₀)
@@ -92,7 +92,7 @@ theorem n06N05_finite_current_cut_boundary_integrals_cancel
     obtain ⟨θ, hθ, heq⟩ := hsurj hη
     rw [← heq]
     exact n06N05_finite_current_cut_wronskians_cancel hS h hcoordinates hz hs
-      u ml mr s vl vr hjoin hcore Jl₀ Jr₀ Jl Jr Ql Qr hφ hvl hvr hmodeL hmodeR hθ
+      u ml mr s vl vr hjoin hroot Jl₀ Jr₀ Jl Jr Ql Qr hφ hvl hvr hmodeL hmodeR hθ
   have he : ∀ n ∈ s, ContDiff ℝ 1 (referenceAngularBasis n) :=
     fun n _ => (contDiff_referenceAngularBasis n).of_le (by simp)
   have hlc : Continuous gl := n06_current_boundary_wronskian_continuous Ql

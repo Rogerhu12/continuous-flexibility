@@ -137,4 +137,28 @@ theorem n06_smallStripPerturbation_smooth_inverse {g : PolarPoint → PolarPoint
     rw [hr p] at hc
     exact hc.contDiffWithinAt
 
+/-- If the genuine correction is globally smooth and small, its actual
+global inverse is smooth on the entire plane, including full neighborhoods
+of both strip boundaries. No radial clamp occurs in this inverse. -/
+theorem n06_smallGlobalPerturbation_smooth_inverse {g : PolarPoint → PolarPoint}
+    (hg : ContDiff ℝ ∞ g)
+    (hbound : ∀ p, ‖fderiv ℝ g p‖ ≤ (1 / 2 : ℝ)) :
+    let F := fun p => p + g p
+    let G := Function.invFun F
+    Function.LeftInverse G F ∧ Function.RightInverse G F ∧
+      ContDiff ℝ ∞ G ∧ LipschitzWith 2 G := by
+  have hlip : LipschitzWith (1 / 2 : ℝ≥0) g :=
+    lipschitzWith_of_nnnorm_fderiv_le (hg.differentiable (by simp))
+      (fun p => by exact_mod_cast hbound p)
+  have hb := n06_halfLipschitz_id_add_bijective hlip
+  have hinv := n06_halfLipschitz_id_add_inverse hlip
+  refine ⟨hinv.1, hinv.2.1, ?_, hinv.2.2⟩
+  apply contDiff_iff_contDiffAt.mpr
+  intro y
+  obtain ⟨p, rfl⟩ := hb.surjective y
+  obtain ⟨e, he⟩ := n06_id_add_derivative_equiv
+    (hg.contDiffAt.differentiableAt (by simp)) (hbound p)
+  exact n06_invFun_contDiffAt_of_invertible
+    (contDiffAt_id.add hg.contDiffAt) he hb.injective
+
 end ContinuousFlexibility.Analysis

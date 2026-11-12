@@ -86,7 +86,7 @@ theorem n06N05_canonicalMode_root_traces
     (hcoordinates : N05ControlledReferenceCoordinates D S C K)
     (u : B.Space) (ml mr n : ℕ) (vl vr : ℝ → ℝ)
     (hjoin : K.physicalRight ml = K.physicalLeft mr)
-    (hcore : Icc (K.physicalLeft ml) (K.physicalRight mr) ⊆ radialCore D)
+    (hroot : K.physicalRight ml ∈ radialCore D)
     {yl yr σl σr : ℝ} {β H ρ κ Hr : ℝ → ℝ}
     (Jl : N06RootFirstJets (K.chart (C.referenceState, 0) ml)
       (K.height (C.referenceState, 0) ml) (K.physicalRight ml) yl σl β H ρ κ Hr)
@@ -100,7 +100,7 @@ theorem n06N05_canonicalMode_root_traces
       =ᵐ[volume.restrict (Ioo (K.left mr) (K.right mr))] vr) :
     vl yl = vr yr ∧ σl * deriv vl yl = σr * deriv vr yr := by
   have ht := n06N05_canonicalModes_physical_traces_local hS h hcoordinates u ml mr n vl vr
-    hjoin hcore hvl hvr hmodeL hmodeR
+    hjoin hroot hvl hvr hmodeL hmodeR
   dsimp only at ht
   have hvalue : vl yl = vr yr := by
     apply mul_left_cancel₀ hH
@@ -154,7 +154,7 @@ theorem n06N05_finite_current_root_conormal
     (hcoordinates : N05ControlledReferenceCoordinates D S C K)
     (u : B.Space) (ml mr : ℕ) (s : Finset ℕ) (vl vr : ℕ → ℝ → ℝ)
     (hjoin : K.physicalRight ml = K.physicalLeft mr)
-    (hcore : Icc (K.physicalLeft ml) (K.physicalRight mr) ⊆ radialCore D)
+    (hroot : K.physicalRight ml ∈ radialCore D)
     {yl yr σl σr : ℝ} {β₀ H₀ ρ₀ κ₀ Hr₀ β H ρ κ Hr : ℝ → ℝ}
     (Jl₀ : N06RootFirstJets (K.chart (C.referenceState, 0) ml)
       (K.height (C.referenceState, 0) ml) (K.physicalRight ml) yl σl β₀ H₀ ρ₀ κ₀ Hr₀)
@@ -183,7 +183,7 @@ theorem n06N05_finite_current_root_conormal
         (K.physicalRight ml, θ) := by
   have htrace (n : ℕ) (hn : n ∈ s) :=
     n06N05_canonicalMode_root_traces hS h hcoordinates u ml mr n (vl n) (vr n)
-      hjoin hcore Jl₀ Jr₀ hH₀ hρ₀ (hvl n hn) (hvr n hn)
+      hjoin hroot Jl₀ Jr₀ hH₀ hρ₀ (hvl n hn) (hvr n hn)
       (hmodeL n hn) (hmodeR n hn)
   have hvlAt : ∀ n ∈ s, DifferentiableAt ℝ (vl n) yl :=
     fun n hn => (hvl n hn).differentiable (by norm_num) yl

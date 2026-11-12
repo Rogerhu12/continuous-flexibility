@@ -96,7 +96,7 @@ theorem n06N05_canonicalMode_cut_traces
     (hcoordinates : N05ControlledReferenceCoordinates D S C K)
     (u : B.Space) (ml mr n : ℕ) (vl vr : ℝ → ℝ)
     (hjoin : K.physicalRight ml = K.physicalLeft mr)
-    (hcore : Icc (K.physicalLeft ml) (K.physicalRight mr) ⊆ radialCore D)
+    (hroot : K.physicalRight ml ∈ radialCore D)
     {y σ τ : ℝ} {β H ρ κ Hr : ℝ → ℝ}
     (Jl : N06RootFirstJets (K.chart (C.referenceState, 0) ml)
       (K.height (C.referenceState, 0) ml) (K.physicalRight ml) y σ β H ρ κ Hr)
@@ -110,7 +110,7 @@ theorem n06N05_canonicalMode_cut_traces
       =ᵐ[volume.restrict (Ioo (K.left mr) (K.right mr))] vr) :
     vl y = vr y ∧ deriv vl y + deriv vr y = -τ * vl y := by
   have ht := n06N05_canonicalModes_physical_traces_local hS h hcoordinates u ml mr n vl vr
-    hjoin hcore hvl hvr hmodeL hmodeR
+    hjoin hroot hvl hvr hmodeL hmodeR
   have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
   have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
   have href : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
@@ -188,7 +188,7 @@ theorem n06N05_finite_current_cut_conormal
     (hcoordinates : N05ControlledReferenceCoordinates D S C K)
     (u : B.Space) (ml mr : ℕ) (s : Finset ℕ) (vl vr : ℕ → ℝ → ℝ)
     (hjoin : K.physicalRight ml = K.physicalLeft mr)
-    (hcore : Icc (K.physicalLeft ml) (K.physicalRight mr) ⊆ radialCore D)
+    (hroot : K.physicalRight ml ∈ radialCore D)
     {y σ τ : ℝ} {β₀ H₀ ρ₀ κ₀ Hr₀ β H ρ κ Hr : ℝ → ℝ}
     (Jl₀ : N06RootFirstJets (K.chart (C.referenceState, 0) ml)
       (K.height (C.referenceState, 0) ml) (K.physicalRight ml) y σ β₀ H₀ ρ₀ κ₀ Hr₀)
@@ -220,7 +220,7 @@ theorem n06N05_finite_current_cut_conormal
     fun n _ => (contDiff_referenceAngularBasis n).of_le (by simp)
   have htrace (n : ℕ) (hn : n ∈ s) :=
     n06N05_canonicalMode_cut_traces hS h hcoordinates u ml mr n (vl n) (vr n)
-      hjoin hcore Jl₀ Jr₀ (hvl n hn) (hvr n hn) (hmodeL n hn) (hmodeR n hn)
+      hjoin hroot Jl₀ Jr₀ (hvl n hn) (hvr n hn) (hmodeL n hn) (hmodeR n hn)
   have hsum (η : ℝ) := n06_finiteSynthesis_cut_traces s vl vr referenceAngularBasis
     hvl hvr he htrace η
   have hdl := (n06_contDiff_one_finiteSynthesis s vl referenceAngularBasis hvl he).differentiable

@@ -103,7 +103,7 @@ theorem n06N05_finite_current_cut_wronskians_cancel
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (u : B.Space) (ml mr : ℕ) (s : Finset ℕ) (vl vr : ℕ → ℝ → ℝ)
     (hjoin : K.physicalRight ml = K.physicalLeft mr)
-    (hcore : Icc (K.physicalLeft ml) (K.physicalRight mr) ⊆ radialCore D)
+    (hroot : K.physicalRight ml ∈ radialCore D)
     {y σ τ : ℝ} {β₀ H₀ ρ₀ κ₀ Hr₀ β H ρ κ Hr : ℝ → ℝ}
     (Jl₀ : N06RootFirstJets (K.chart (C.referenceState, 0) ml)
       (K.height (C.referenceState, 0) ml) (K.physicalRight ml) y σ β₀ H₀ ρ₀ κ₀ Hr₀)
@@ -142,7 +142,7 @@ theorem n06N05_finite_current_cut_wronskians_cancel
     fun n _ => (contDiff_referenceAngularBasis n).of_le (by simp)
   have htrace (n : ℕ) (hn : n ∈ s) :=
     n06N05_canonicalMode_cut_traces hS h hcoordinates u ml mr n (vl n) (vr n)
-      hjoin hcore Jl₀ Jr₀ (hvl n hn) (hvr n hn) (hmodeL n hn) (hmodeR n hn)
+      hjoin hroot Jl₀ Jr₀ (hvl n hn) (hvr n hn) (hmodeL n hn) (hmodeR n hn)
   have hsum := n06_finiteSynthesis_cut_traces s vl vr referenceAngularBasis
     hvl hvr he htrace (β θ)
   exact n06_affine_cut_wronskians_cancel htest.1 hsum.1 htest.2.1 hsum.2
