@@ -142,7 +142,6 @@ private def N06WeightedPrincipalBudget
     ∃ a : lp (fun _ : ℕ => ℝ) 2, (∀ m, 0 ≤ a m) ∧ ‖a‖ ≤ A * ‖F‖ ∧
       N06WeightedPieceEstimate href hcur hI J N z hz j F a
 
-set_option diagnostics true in
 private theorem n06_weightedBudget_modes
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)
@@ -163,7 +162,6 @@ private theorem n06_weightedBudget_specialize
   h.elim (fun x hx => hx.2.elim (fun y hy =>
     ⟨x, hx.1, y, hy.1, hy.2.1, hy.2.2 i⟩))
 
-set_option diagnostics true in
 private theorem n06_weightedBudget_source
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)
@@ -180,7 +178,6 @@ private theorem n06_weightedBudget_source
       (K := K) (V := V) (b := b) (B := B)
       (base := base) (loss := loss) (ε := ε) hT hS h href)
 
-set_option diagnostics true in
 private theorem n06_weightedBudget_inverse_bands
     (h01 : N01Properties D T S C base loss ε)
     (h04 : N04Properties D T S C L K base loss ε)
@@ -204,7 +201,6 @@ private theorem n06_weightedBudget_inverse_bands
   exact (n07a_referenceInverse_angularBand hD h01.1.2.2.2.1 h05 hI hR hAux hmap hsm F j).symm.trans
     (congrArg (fun G : V.level (3 / 4 : ℝ) 0 b => (B.inverse G).val.1) hF)
 
-set_option diagnostics true in
 private theorem n06_weightedBudget_piece
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (href : ReferenceJets D T S C L K) (hcur : CurrentJets D T S C L K base ε)
@@ -254,7 +250,6 @@ private theorem n06_weightedBudget_piece
     exact mul_nonneg (mul_nonneg hρ (n07aAngularTail_nonneg _))
       (mul_nonneg (mul_nonneg hC₀ hM) (ha₀ m))
 
-set_option diagnostics true in
 private theorem n06_weightedBudget_assemble
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hV : IsVolumeModel T S K V)
@@ -300,7 +295,6 @@ private theorem n06_weightedBudget_bind_packages
     hzw.elim (fun z hz => hz.2.elim (fun w hw =>
       hcombine x y hxy z hz.1 w hw.1 hw.2.1 hw.2.2))))
 
-set_option diagnostics true in
 private theorem n06_weightedBudget_uniform
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)
@@ -330,7 +324,6 @@ private theorem n06_weightedBudget_uniform
       ⟨b + 4 + d, n06_weightedBudget_assemble h.1.1.1.1.1.1 hT h.2.2.1
         href hcur hI J hbands d e he.1 he.2.1 he.2.2 A₀ hA₀ e₀ he₀ he₀one hsource⟩)
 
-set_option diagnostics true in
 theorem n06_primitivePrincipal_weighted_budget
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)

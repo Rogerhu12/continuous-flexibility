@@ -26,11 +26,12 @@ jobs:
     timeout-minutes: 300
     env:
       LEAN_NUM_THREADS: "2"
+      FILE_LIMIT_SECONDS: "300" # a changed file that compiles longer than this is stopped
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-          fetch-depth: 30 # on main: find the line heads merged by this push
+          fetch-depth: 400 # merge base with main; on main, the line heads merged by a push
       - name: Disk space
         # The runner has about 88 GB free; no cleanup is needed.
         run: df -h /
@@ -107,17 +108,57 @@ jobs:
           echo "matched key = ${{ steps.restore.outputs.cache-matched-key }}"
       - name: Generate the root import
         run: python3 scripts/gen_root.py
+      - name: Changed modules
+        id: changed
+        shell: bash
+        run: |
+          bash scripts/ci/changed_modules.sh > changed_modules.txt || true
+          echo "count=$(wc -l < changed_modules.txt | tr -d ' ')" >> "$GITHUB_OUTPUT"
+          echo "$(wc -l < changed_modules.txt) changed modules"; head -40 changed_modules.txt
+      - name: Quick check of the changed modules
+        # Builds only the modules this branch changed (and what they import) and stops
+        # the job on the first failure, so errors come back in minutes. A changed file
+        # that compiles longer than FILE_LIMIT_SECONDS is stopped and reported.
+        if: steps.changed.outputs.count != '0'
+        shell: bash
+        run: |
+          bash scripts/ci/watchdog.sh changed_modules.txt "$FILE_LIMIT_SECONDS" &
+          wd=$!
+          set +e
+          timeout --signal=TERM --kill-after=60s 240m lake build -v $(cat changed_modules.txt) > quick.log 2>&1
+          status=$?
+          kill "$wd" 2>/dev/null
+          grep -E '^(error|✖)' quick.log | head -100
+          grep -E '^error' -A40 quick.log | head -400
+          bash scripts/ci/slowest.sh quick.log
+          if [ -s slow_files.txt ]; then
+            while read -r m s; do
+              echo "::error::$m compiled for more than $FILE_LIMIT_SECONDS seconds and was stopped; split the file or find the slow declaration"
+            done < slow_files.txt
+            status=1
+          fi
+          exit "$status"
       - name: Build every library
         shell: bash
         run: |
           set -o pipefail
           status=0
-          timeout --signal=TERM --kill-after=60s 270m lake build 2>&1 | tee build.log |
+          bash scripts/ci/watchdog.sh changed_modules.txt "$FILE_LIMIT_SECONDS" &
+          wd=$!
+          timeout --signal=TERM --kill-after=60s 270m lake build -v 2>&1 | tee build.log |
             awk '/^error:|^✖/ { remaining = 60 }
               /Build completed|Some required targets logged failures|error: build failed/ || remaining > 0 {
                 print; fflush(); if (remaining > 0) remaining--
               }' || status=$?
+          kill "$wd" 2>/dev/null || true
           grep -E '^(error|✖)' build.log | head -100 || true
+          bash scripts/ci/slowest.sh build.log || true
+          if [ -s slow_files.txt ]; then
+            while read -r m s; do
+              echo "::error::$m compiled for more than $FILE_LIMIT_SECONDS seconds and was stopped; split the file or find the slow declaration"
+            done < slow_files.txt
+            status=1
+          fi
           exit "$status"
       - name: Delete this branch's previous build cache
         if: always()
@@ -178,4 +219,6 @@ jobs:
         if: always()
         with:
           name: build-log
-          path: build.log
+          path: |
+            build.log
+            quick.log
