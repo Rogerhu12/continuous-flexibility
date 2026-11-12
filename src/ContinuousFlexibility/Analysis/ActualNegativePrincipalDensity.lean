@@ -102,7 +102,7 @@ theorem n04Coordinates_actualAtlas_negativePrincipalDensity
       (C.travel m) side hU hV hUr hVr hbc.1 hbc.2 ha hv hUθ hVθ horient
   have hg := n04bActualTypedAtlas_negative_component_germs
     hT hS hN hfield e hz hs k m side hi hp
-  have hD := hg.1.fderiv_eq
+  have hD := hg.1.fderiv_eq (𝕜 := ℝ)
   have hh := hg.2.self_of_nhds
   have hpoint := hg.1.self_of_nhds
   simpa only [coordinatePrincipalDensity, coefficientQuadratic, planeJacobian,

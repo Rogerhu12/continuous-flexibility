@@ -159,7 +159,7 @@ theorem n04WholeCanonicalAtlasData_positive_relative_fields
   · funext p
     simp only [n04CoordinatesCurrentHeightRatio, canonicalCurrentPoint,
       n04WholeCanonicalAtlasData, n04bWithInteriorDivision, hi,
-      wholePositiveChartHeight, hFref, hQref, id_eq, hleft,
+      wholePositiveChartHeight, hFref, hQref, id_eq, hleft p,
       inv_one, one_div, inv_inv]
 
 end ContinuousFlexibility.Analysis

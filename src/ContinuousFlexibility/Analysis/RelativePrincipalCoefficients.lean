@@ -155,7 +155,7 @@ theorem reverseCoordinatePrincipalCoefficients_eq_of_common_density
     hinverse (show q x ≠ 0 from div_ne_zero hh₀ hh₁)
   have hc := adjugateCoordinatePrincipalCoefficients_comp B τ F₁ q h₁ x hτ hF₁
   have hq : q x * h₁ (τ x) = h₀ x := div_mul_cancel₀ _ hh₁
-  have hd := hchart.fderiv_eq
+  have hd := hchart.fderiv_eq (𝕜 := ℝ)
   have hv := hchart.self_of_nhds
   have hJ : planeJacobian (F₁ ∘ τ) x = planeJacobian F₀ x := by
     simp only [planeJacobian, hd]
