@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Analysis.N05ReferenceInterface
+import ContinuousFlexibility.Analysis.N05CanonicalInverseBounds
 
 /-!
 # N05: the same reference inverse on all weighted volume levels
@@ -21,6 +21,10 @@ theorem N05InverseBounds {D : ReferenceData} {T : MaterialData}
     (hcoordinates : N05ControlledReferenceCoordinates D S C K)
     (hV : IsVolumeModel T S K V) :
     ∃ G : N05ReferenceInverseData S K V, N05ReferenceInverseBounds D T S C K V G := by
-  sorry
+  exact n05_existsReferenceInverseBounds hD hT hS h04 hcoordinates hV
+
+/-- info: 'ContinuousFlexibility.Blueprint.N05InverseBounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms N05InverseBounds
 
 end ContinuousFlexibility.Blueprint
