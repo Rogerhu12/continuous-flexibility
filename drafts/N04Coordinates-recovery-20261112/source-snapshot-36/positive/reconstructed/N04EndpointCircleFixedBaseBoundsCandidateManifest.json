@@ -1,0 +1,144 @@
+{
+  "schema": "n04-source-candidate-v1",
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04EndpointCircleFixedBaseBounds.lean",
+    "bytes": 6005,
+    "sha256": "4726b99d556fcd77b094156f54551a65b5ec63b04f570f2ffb90fecdd1d0c29e",
+    "git_blob": "09a1696b57c7fe3678cc6e10e419bb8fa22c0c11",
+    "lines": 115,
+    "eof_lf": true
+  },
+  "module": "ContinuousFlexibility.Analysis.N04EndpointCircleFixedBaseBounds",
+  "public_declarations": [
+    "ContinuousFlexibility.Statements.N01Properties.endpointFlowCircle_fixedBase_oneHigh"
+  ],
+  "upstream_selection": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/upstream-main-1ece-fixed-base/Main1eceFixedBaseEndpointProviderSelection.json",
+    "bytes": 31498,
+    "sha256": "1d76fced054ba60b64a0fe05c52127790760def4e946502b479a1f5e2f700b5e",
+    "git_blob": "96b9c975201f9dabf8ae7295e9b58954b60b7f6d",
+    "lines": 533,
+    "eof_lf": true
+  },
+  "selected_provider_graph": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04EndpointCircleFixedBaseBoundsSelectedProviders.json",
+    "bytes": 182749,
+    "sha256": "f840a3570dc47ca8d77bf5ce45dd27c55e91660260c62c39c12c59f667de63e9",
+    "git_blob": "737cf46d4a382669062d3a0d7e0467c014e11852",
+    "lines": 4443,
+    "eof_lf": true
+  },
+  "direct_and_key_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointOneHigh",
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointOneHigh.lean",
+      "bytes": 7505,
+      "sha256": "44dd0ae23cc8ee854f2b7e20bc20ced0104cf7c354b3aded8c96034e65e15ec2",
+      "git_blob": "89d524bcc7934390eecae7a0c60d0790cbfc16f0",
+      "lines": 150,
+      "eof_lf": true,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointJetLocalGrowth",
+        "ContinuousFlexibility.Analysis.TameMultilinearNormalization"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointZeroGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointZeroGrowth.lean",
+      "bytes": 9144,
+      "sha256": "cd5dfe6019fd62402ea733c2aa56381e4ba4ebc11a53a290b5bbb036ab1c9e29",
+      "git_blob": "62cd5f1fb9570b052f87b129c94cd5f845a5d95f",
+      "lines": 164,
+      "eof_lf": true,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointCircleTower"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointCircleTower",
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointCircleTower.lean",
+      "bytes": 8012,
+      "sha256": "365844c7663074aa25ab251fc41b25164f43c79e8db7aecad2c7cd51c6d5b200",
+      "git_blob": "4568eb845666ec52e17e51a8864c670503e57ecb",
+      "lines": 151,
+      "eof_lf": true,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointOneHigh",
+        "ContinuousFlexibility.Analysis.N01EndpointSecondEnvelope",
+        "ContinuousFlexibility.Analysis.N01EndpointZeroCircleMember",
+        "ContinuousFlexibility.Analysis.CirclePositiveJetAssembly",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsGluing"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cStateSeminorms",
+      "path": "src/ContinuousFlexibility/Analysis/N01cStateSeminorms.lean",
+      "bytes": 16398,
+      "sha256": "99abe3e9057a214b52c5188410cfc8d2ca2a3f9a52733bcb5c73dd9757666d26",
+      "git_blob": "f96fa185722d12bab8545de1d59ea100a0556417",
+      "lines": 331,
+      "eof_lf": true,
+      "imports": [
+        "ContinuousFlexibility.Analysis.StateKappaBounds",
+        "ContinuousFlexibility.Analysis.TameLocalCalculus"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsAffine",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAffine.lean",
+      "bytes": 5346,
+      "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+      "git_blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+      "lines": 124,
+      "eof_lf": true,
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "ContinuousFlexibility.Analysis.ProjectiveJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+      "path": "src/ContinuousFlexibility/Analysis/TameElementaryCalculus.lean",
+      "bytes": 23021,
+      "sha256": "8970cb3def322b3ecaf1d4c717754fc68f57d4a63d4ed82023a7d4fae5ac9b09",
+      "git_blob": "bc38b3601334a7b76a3eda9f3602c4d3b2440423",
+      "lines": 512,
+      "eof_lf": true,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Analysis.ProjectiveJets"
+      ]
+    }
+  ],
+  "source_reading_scope": "All source bytes and listed actual interfaces reviewed locally; new-main fixed-base chain selection separately records full primary source review. Independent peer requested.",
+  "actual_input": "Only N01Properties hN, IsPhysicalSpaces hS and IsMaterialData hT. No final derivative or CurrentJets bound is an input.",
+  "quantifier_order": "exists B before every n; exists L(n) before every R and output s; exists K(n,R,s) before every closed-radius selector and every given genuine J. Original base neighborhood and weighted gamma=3/4 are retained.",
+  "proof_outline": [
+    "Select B=max(zero-data base,positive-data base) once. Positive data base is already chosen before all n in the reviewed new-main chain.",
+    "Use genuine tower uniqueness solely to identify H.decode(J.D n) with actual endpointFlowScalarJets; bounds apply to the given J.",
+    "Zero case uses J.zero and actual zero growth. Positive case uses actual scalar one-high and monotonicity only to increase the fixed low order to B.",
+    "Evaluate the raw bound at s+B, so all output orders s are covered; combine actual CircleMember monotonicity and circleGrading_le_iff_circleNorm. The final high index is s+(B+L(n))."
+  ],
+  "constraints": {
+    "no_local_lean_or_elaboration": true,
+    "no_active_source_index_git_refs_or_ci": true,
+    "no_new_derivative_family": true,
+    "no_new_material_or_width_choice": true,
+    "no_final_CurrentJets_claim": true
+  },
+  "public_name_collision_scan": {
+    "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac": [],
+    "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67": [],
+    "c5c48d262157a11a76604113c40d2438d480433f": []
+  },
+  "budget": {
+    "authorized_actual_group_total": 1200,
+    "previous_frozen_301": 301,
+    "this_source": 115,
+    "used": 416,
+    "remaining": 784
+  },
+  "independent_peer": "requested from /root/audit_coordinates"
+}

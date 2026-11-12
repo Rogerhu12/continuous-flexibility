@@ -1,0 +1,1551 @@
+{
+  "kind": "readonly_selected_project_import_closure",
+  "root": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RootTravelOppositeCoordinates.lean",
+  "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+  "project_module_count": 147,
+  "missing": [],
+  "nodes": {
+    "ContinuousFlexibility.Analysis.N04bRootInteriorRegularity": {
+      "path": "src/ContinuousFlexibility/Analysis/N04bRootInteriorRegularity.lean",
+      "sha256": "5b940dc8d06b838873fab1ed874034e430ee410f74ba6b007819b9e7dcbabe37",
+      "blob": "dfaf1caaf070c2f3f127d5578f6223e78e10acb0",
+      "bytes": 7043,
+      "lines": 151,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bConstructedRootTransmission",
+        "ContinuousFlexibility.Analysis.N04bContinuousInverseGerm",
+        "ContinuousFlexibility.Geometry.PlanarOrientation"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.PlanarOrientation": {
+      "path": "src/ContinuousFlexibility/Geometry/PlanarOrientation.lean",
+      "sha256": "c73471d5d28712ed2670631e41869c73a41996d1bb90238b74f7922f36501621",
+      "blob": "80b0e204ff31ec795e624ed14e2951aa8c905076",
+      "bytes": 6505,
+      "lines": 139,
+      "imports": [
+        "ContinuousFlexibility.Contracts.IsometricGraph"
+      ]
+    },
+    "ContinuousFlexibility.Contracts.IsometricGraph": {
+      "path": "src/ContinuousFlexibility/Contracts/IsometricGraph.lean",
+      "sha256": "0b1b61403fe28245dabce8ecbde93fcfad00550513e37047e4a9162f97e71638",
+      "blob": "a743594693fd7fcb7ea7574c9f443316db1d1aaa",
+      "bytes": 4939,
+      "lines": 103,
+      "imports": [
+        "ContinuousFlexibility.Contracts.PlanarDevelopment",
+        "ContinuousFlexibility.Geometry.GraphEmbedding"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.GraphEmbedding": {
+      "path": "src/ContinuousFlexibility/Geometry/GraphEmbedding.lean",
+      "sha256": "21de271b588de7e2e688bcb577ef4997edf8c8fa34676b5fb98d2c3c03c8e286",
+      "blob": "3e18780f3c0ec571a5c07ce216c928be49de4180",
+      "bytes": 10291,
+      "lines": 220,
+      "imports": [
+        "ContinuousFlexibility.Contracts.CartesianMetric"
+      ]
+    },
+    "ContinuousFlexibility.Contracts.CartesianMetric": {
+      "path": "src/ContinuousFlexibility/Contracts/CartesianMetric.lean",
+      "sha256": "a402c2565b6988149131730672e29face82992b8465c68c2bb085c93364d14ef",
+      "blob": "c49e7bc3b082f4c1af61d2f50fb0e154139a5245",
+      "bytes": 6678,
+      "lines": 152,
+      "imports": [
+        "ContinuousFlexibility.Contracts.CartesianHeight",
+        "ContinuousFlexibility.Geometry.FlatDevelopment",
+        "ContinuousFlexibility.Geometry.CartesianCoframe"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.CartesianCoframe": {
+      "path": "src/ContinuousFlexibility/Geometry/CartesianCoframe.lean",
+      "sha256": "745d5649f0860fd64e8c4b661318490dc7705e7bef818febc73cc93141dd44cb",
+      "blob": "af71ba088613c38143ccd0dc039fa9cad84dbebc",
+      "bytes": 3664,
+      "lines": 92,
+      "imports": [
+        "ContinuousFlexibility.Geometry.Primitive",
+        "ContinuousFlexibility.Geometry.LocalInverse"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.LocalInverse": {
+      "path": "src/ContinuousFlexibility/Geometry/LocalInverse.lean",
+      "sha256": "5c62d7add8a4af0234a1d15842807e77ec96eeefa4de428144891fe84162ac2c",
+      "blob": "4c1cedacbded6e7bc282d9fbb1c126017fc71e2e",
+      "bytes": 7245,
+      "lines": 157,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Coordinates",
+        "ContinuousFlexibility.Scalar.Positivity"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.Positivity": {
+      "path": "src/ContinuousFlexibility/Scalar/Positivity.lean",
+      "sha256": "0c8239d8a040fdf3abdcf2e442f4642fbb376a088494df01bfa8a26c1e65a616",
+      "blob": "b6c1316faefe7f763fbdf6cc51e6d6cb12fa7976",
+      "bytes": 5573,
+      "lines": 135,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Definitions"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.Definitions": {
+      "path": "src/ContinuousFlexibility/Scalar/Definitions.lean",
+      "sha256": "06dfe8054cb871fbf35a27003a63076dd5dce541a298cff89f094e4b02696501",
+      "blob": "c3c35a7ad2f3d75a941487907e0e4ced479f8b62",
+      "bytes": 1344,
+      "lines": 36,
+      "imports": []
+    },
+    "ContinuousFlexibility.Scalar.Coordinates": {
+      "path": "src/ContinuousFlexibility/Scalar/Coordinates.lean",
+      "sha256": "fb2764e0b6752be0c36127e775e4a64001b1683d796f8ec43129e82de5ab881a",
+      "blob": "3a80c86f2d2007ba774e12ccf3816c1f5d236b51",
+      "bytes": 1501,
+      "lines": 40,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Definitions"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.Primitive": {
+      "path": "src/ContinuousFlexibility/Geometry/Primitive.lean",
+      "sha256": "161b26739074b8080a8e552710658dd50e707d2ef4a408013976b3694bf453b6",
+      "blob": "83455d6aa5607e7ae422bf79cec6739c0f6ddb98",
+      "bytes": 9516,
+      "lines": 195,
+      "imports": [
+        "ContinuousFlexibility.Geometry.RotatedCoframe"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.RotatedCoframe": {
+      "path": "src/ContinuousFlexibility/Geometry/RotatedCoframe.lean",
+      "sha256": "b1de51389ca7b93dea79fb88406a0bde818f741ccbb0da641bd9f783f62a713f",
+      "blob": "0f8c1a00ca94c24a07c1c64201170d9ac114eb03",
+      "bytes": 10554,
+      "lines": 219,
+      "imports": [
+        "ContinuousFlexibility.Scalar.HeightDerivatives"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.HeightDerivatives": {
+      "path": "src/ContinuousFlexibility/Scalar/HeightDerivatives.lean",
+      "sha256": "23f1e5b32150474d94f01611a11a83f47bc4b99fa190d390dfec96b9ae832d12",
+      "blob": "8058b80b52b5d1e45e5ddebc8964a6a1e936bab4",
+      "bytes": 10040,
+      "lines": 236,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Coordinates"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.FlatDevelopment": {
+      "path": "src/ContinuousFlexibility/Geometry/FlatDevelopment.lean",
+      "sha256": "78dd60da4c54a7ac23085c024521362e6aa1b7c638768dadf24fce16f6559587",
+      "blob": "3e2f2f5452a89bf50deabb009d5a4a87cedca098",
+      "bytes": 10101,
+      "lines": 200,
+      "imports": [
+        "ContinuousFlexibility.Geometry.HeightCoframe",
+        "ContinuousFlexibility.Geometry.Primitive",
+        "ContinuousFlexibility.Geometry.LocalInverse"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.HeightCoframe": {
+      "path": "src/ContinuousFlexibility/Geometry/HeightCoframe.lean",
+      "sha256": "6e326c487079bbf7582b1355324397fdaae515a3b77aae916dd0b7e2f06c89eb",
+      "blob": "d4634b09b0a3541169707e4e7c56f0d6a36d1048",
+      "bytes": 8532,
+      "lines": 162,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Cartan",
+        "ContinuousFlexibility.Geometry.RotatedCoframe"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.Cartan": {
+      "path": "src/ContinuousFlexibility/Scalar/Cartan.lean",
+      "sha256": "c9d078867a36645c4421772ab91afbc97d06ce3490c69f40d330448757e9214a",
+      "blob": "27d81e09db874de0221ad6a0c19ca155fc40d880",
+      "bytes": 9464,
+      "lines": 202,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Connection",
+        "ContinuousFlexibility.Scalar.CoframeDerivatives"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.CoframeDerivatives": {
+      "path": "src/ContinuousFlexibility/Scalar/CoframeDerivatives.lean",
+      "sha256": "d1f7ba60f63733f03501cafd2baffb67724047653bb2fc7da16b9802c42386a2",
+      "blob": "c2602ef9d95549c9f58ccac59102cce9e984b787",
+      "bytes": 4946,
+      "lines": 123,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Coframe",
+        "ContinuousFlexibility.Scalar.ConnectionVariation"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.ConnectionVariation": {
+      "path": "src/ContinuousFlexibility/Scalar/ConnectionVariation.lean",
+      "sha256": "ec958c85fd58fcca739a8592362000a5b6c2fd0e8a921cb474abbfcadb43ef77",
+      "blob": "28fdef5ed1e7bae36d5b674ee95e3cebbfe814e0",
+      "bytes": 8971,
+      "lines": 193,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Determinant"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.Determinant": {
+      "path": "src/ContinuousFlexibility/Scalar/Determinant.lean",
+      "sha256": "ee227d182326377abc45e2f81f083bc63403cf9d3af76d028f7d98dcccc0f436",
+      "blob": "fe0c72f6a7eb6c2251cb9c850c51a114f24d2b67",
+      "bytes": 7944,
+      "lines": 202,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Definitions"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.Coframe": {
+      "path": "src/ContinuousFlexibility/Scalar/Coframe.lean",
+      "sha256": "20526165fa39512cb2bfb3dbc474428b6af9aed32af04f0f8058a1ff4bfcced2",
+      "blob": "240bb68cef2792916bd4699ca5ae95682dc52f71",
+      "bytes": 1782,
+      "lines": 45,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Positivity"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.Connection": {
+      "path": "src/ContinuousFlexibility/Scalar/Connection.lean",
+      "sha256": "d02b087ed6a6ce07e0bad8fa3ca6ea19a04ba838ca8190b94c4939adef3708f4",
+      "blob": "ad56772be11d823f3311c3e48fc580255054026f",
+      "bytes": 10001,
+      "lines": 193,
+      "imports": [
+        "ContinuousFlexibility.Scalar.HeightDerivatives",
+        "ContinuousFlexibility.Scalar.ConnectionVariation"
+      ]
+    },
+    "ContinuousFlexibility.Contracts.CartesianHeight": {
+      "path": "src/ContinuousFlexibility/Contracts/CartesianHeight.lean",
+      "sha256": "13c8e838561fa6a48352188850a959bac1e83ea51a90df74bd7c36e455099c1e",
+      "blob": "3d2c47232429c1483ed9994d264669b84e08b30a",
+      "bytes": 8072,
+      "lines": 179,
+      "imports": [
+        "ContinuousFlexibility.Contracts.Annular"
+      ]
+    },
+    "ContinuousFlexibility.Contracts.Annular": {
+      "path": "src/ContinuousFlexibility/Contracts/Annular.lean",
+      "sha256": "9940457e243dc1e4a40d89105b67ad8bb77429999591de31f730476a9f7eb6a7",
+      "blob": "7ad8e78628dc68679325c8a9666f6188ac283c47",
+      "bytes": 6152,
+      "lines": 149,
+      "imports": [
+        "ContinuousFlexibility.Scalar.FlatCollar"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.FlatCollar": {
+      "path": "src/ContinuousFlexibility/Scalar/FlatCollar.lean",
+      "sha256": "43e8c4e9750b96df7520d33fba0fb20eb54f4cf9278ce206d7cb1ca8ef9bd45a",
+      "blob": "787c8a8186244185df512a7ef3b50070cf5913f8",
+      "bytes": 3044,
+      "lines": 70,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Connection"
+      ]
+    },
+    "ContinuousFlexibility.Contracts.PlanarDevelopment": {
+      "path": "src/ContinuousFlexibility/Contracts/PlanarDevelopment.lean",
+      "sha256": "a2f5eb2ba11b38d8fb81f04e2bf42b3ed5e0680db46149311569b94c814dfbb2",
+      "blob": "12b67fc1210dd5dd012696bc415f854fc24de52a",
+      "bytes": 3293,
+      "lines": 75,
+      "imports": [
+        "ContinuousFlexibility.Contracts.CartesianFlatness",
+        "ContinuousFlexibility.Geometry.MatrixDevelopment"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.MatrixDevelopment": {
+      "path": "src/ContinuousFlexibility/Geometry/MatrixDevelopment.lean",
+      "sha256": "32ba7b5906f31373b881500ff21d8897cdf930538aa64291b3bd9f483320e0f1",
+      "blob": "e9b921fd6fa619698f6e2075c9ed6aa8f296b37d",
+      "bytes": 3988,
+      "lines": 82,
+      "imports": [
+        "ContinuousFlexibility.Geometry.CartesianMetricCoframe",
+        "ContinuousFlexibility.Geometry.CartesianExterior"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.CartesianExterior": {
+      "path": "src/ContinuousFlexibility/Geometry/CartesianExterior.lean",
+      "sha256": "738559d70e00191283e51bcde3af67055557700108eea7073dbe30b5b97b4392",
+      "blob": "5e477192dd93dd35df63c69d0648c33fc0a3cf1c",
+      "bytes": 4934,
+      "lines": 106,
+      "imports": [
+        "ContinuousFlexibility.Geometry.CartesianDevelopment"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.CartesianDevelopment": {
+      "path": "src/ContinuousFlexibility/Geometry/CartesianDevelopment.lean",
+      "sha256": "846d85ada5fadb5bd692a72e7eb9d88f9b1794c6030e280a2dd073c1b47c082f",
+      "blob": "c32b6403f4970ac2e2e289ebbf98e092e9486109",
+      "bytes": 12563,
+      "lines": 248,
+      "imports": [
+        "ContinuousFlexibility.Geometry.CartesianCoframe",
+        "ContinuousFlexibility.Geometry.GlobalCovering"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.GlobalCovering": {
+      "path": "src/ContinuousFlexibility/Geometry/GlobalCovering.lean",
+      "sha256": "afe0bf8f5e16c554e2658cd7378692e3fa1e64b16d3bb8161502b19910f59001",
+      "blob": "2c05705cd165d83c47d207ed5ed8b1800b6380b0",
+      "bytes": 6535,
+      "lines": 133,
+      "imports": [
+        "ContinuousFlexibility.Geometry.GlobalInverse",
+        "ContinuousFlexibility.Geometry.LocalInverse"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.GlobalInverse": {
+      "path": "src/ContinuousFlexibility/Geometry/GlobalInverse.lean",
+      "sha256": "a56be76d3d154d212ec72d91431694722c84c78e82b5de2b51b5c72ef34a6a97",
+      "blob": "db962619e3a735c8be359d90827f27e490350322",
+      "bytes": 2559,
+      "lines": 75,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Coordinates"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.CartesianMetricCoframe": {
+      "path": "src/ContinuousFlexibility/Geometry/CartesianMetricCoframe.lean",
+      "sha256": "17d76aa2dd7ef40feb5d3af2ca747d2a3104e0691ddd693a060f31fdbe90f117",
+      "blob": "0682a2c08103f90e0eac68c456939430c7568cac",
+      "bytes": 8516,
+      "lines": 180,
+      "imports": [
+        "ContinuousFlexibility.Geometry.CartesianCoframe"
+      ]
+    },
+    "ContinuousFlexibility.Contracts.CartesianFlatness": {
+      "path": "src/ContinuousFlexibility/Contracts/CartesianFlatness.lean",
+      "sha256": "423c0bdf6ea4219d2be6afeb6a66d7132881db5f55066c8c06506fd05f558f9e",
+      "blob": "82d8ff114430584559e684e375caaf65dac9e177",
+      "bytes": 10015,
+      "lines": 182,
+      "imports": [
+        "ContinuousFlexibility.Contracts.CartesianMetricRegularity",
+        "ContinuousFlexibility.Geometry.PullbackCurvature"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.PullbackCurvature": {
+      "path": "src/ContinuousFlexibility/Geometry/PullbackCurvature.lean",
+      "sha256": "c764efc1481610559715555ca0eda56f4274ee4b5959ac75ca258ecac407e59b",
+      "blob": "fa1a4960b2f2bf9f2e3e6b9dcf486cf2cc0e69f4",
+      "bytes": 5409,
+      "lines": 105,
+      "imports": [
+        "ContinuousFlexibility.Geometry.CoframeCurvature",
+        "ContinuousFlexibility.Scalar.FormPullback"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.FormPullback": {
+      "path": "src/ContinuousFlexibility/Scalar/FormPullback.lean",
+      "sha256": "09885fd35b2086a984883f723c5bce94fed1d3987a71485a2fa7185108083a50",
+      "blob": "6238095a75eb06479071372465a41701824657c8",
+      "bytes": 6667,
+      "lines": 137,
+      "imports": [
+        "ContinuousFlexibility.Geometry.Primitive"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.CoframeCurvature": {
+      "path": "src/ContinuousFlexibility/Geometry/CoframeCurvature.lean",
+      "sha256": "9191c34c5c2c8938892c8b58014ba81809d1227cf2690fb03e340336e2394cf1",
+      "blob": "247a33134d7164315a38106183727ccd2d443e0e",
+      "bytes": 8158,
+      "lines": 156,
+      "imports": [
+        "ContinuousFlexibility.Geometry.CoframeSO2"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.CoframeSO2": {
+      "path": "src/ContinuousFlexibility/Geometry/CoframeSO2.lean",
+      "sha256": "8539891e2334fe28dc2c1ee2cd8616e65b07827c9acbf86ebee598ae29881041",
+      "blob": "2b75e8e774ad4a1cbbbde540fec34c1706e3c193",
+      "bytes": 9879,
+      "lines": 181,
+      "imports": [
+        "ContinuousFlexibility.Geometry.CoframeRotationAlgebra",
+        "ContinuousFlexibility.Geometry.GaugeConnection"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.GaugeConnection": {
+      "path": "src/ContinuousFlexibility/Geometry/GaugeConnection.lean",
+      "sha256": "aaf5bf9735e95865ecc31e06a2f6c3d50611c9682b689bcd7be6626b32dc4124",
+      "blob": "165e53958ac3b06f66a6fc660e1cd618cad4eae2",
+      "bytes": 5763,
+      "lines": 106,
+      "imports": [
+        "ContinuousFlexibility.Geometry.RotatedCoframe"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.CoframeRotationAlgebra": {
+      "path": "src/ContinuousFlexibility/Geometry/CoframeRotationAlgebra.lean",
+      "sha256": "431357eda82497dec59b6ea08cc667b8b72ec4ed347062c7d21d04948766fdbe",
+      "blob": "59af1ceb5409e75a84b120d700d1fe5cce5a0df4",
+      "bytes": 3956,
+      "lines": 93,
+      "imports": [
+        "ContinuousFlexibility.Geometry.CartesianCoframe"
+      ]
+    },
+    "ContinuousFlexibility.Contracts.CartesianMetricRegularity": {
+      "path": "src/ContinuousFlexibility/Contracts/CartesianMetricRegularity.lean",
+      "sha256": "9ba3a0471558d0807c68fa5983893624686e9503130f95ba92e3c2224e7cfad5",
+      "blob": "f828b1e65dccd3969ac9f0f6fbc43da32d1ee319",
+      "bytes": 11547,
+      "lines": 237,
+      "imports": [
+        "ContinuousFlexibility.Contracts.CartesianMetric",
+        "ContinuousFlexibility.Geometry.CartesianMetricCoframe"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.N04bContinuousInverseGerm": {
+      "path": "src/ContinuousFlexibility/Analysis/N04bContinuousInverseGerm.lean",
+      "sha256": "cac0775cd148284890d819de7bdb3a5b1ca6b4ab46a977829abc69c254bc1032",
+      "blob": "adca56e8e5c1772fcde884bd592b0f196598d7a3",
+      "bytes": 1913,
+      "lines": 49,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bPlanarInverseGerm"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.N04bPlanarInverseGerm": {
+      "path": "src/ContinuousFlexibility/Analysis/N04bPlanarInverseGerm.lean",
+      "sha256": "36fdc15231049ab174bfef23e26e46fb4c56faa6751a838b17c26d187cc5c7e4",
+      "blob": "610cda7700dc9704daee620add4fb687d67c8aa9",
+      "bytes": 2500,
+      "lines": 67,
+      "imports": [
+        "ContinuousFlexibility.Analysis.PlanarInverseRegularity"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.PlanarInverseRegularity": {
+      "path": "src/ContinuousFlexibility/Analysis/PlanarInverseRegularity.lean",
+      "sha256": "b1bc96e7f5689f6a0a47ebde7cda43db73b8a2f478761ccfef34a46e38069800",
+      "blob": "145450a8039e6f60c779c57a5eea11a89f242f71",
+      "bytes": 2777,
+      "lines": 75,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalEndpointInverse"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.CanonicalEndpointInverse": {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalEndpointInverse.lean",
+      "sha256": "5b625a5464325b5fbb155eee50a9afeb7aa1fcefc846d256f7693a337f7f4e5d",
+      "blob": "73b93023dbcd3dfb1fa7521317a6a7da7f9c02da",
+      "bytes": 4648,
+      "lines": 98,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalSourceMeasure",
+        "ContinuousFlexibility.Analysis.BoundaryMixedJets",
+        "ContinuousFlexibility.Blueprint.CanonicalParts"
+      ]
+    },
+    "ContinuousFlexibility.Blueprint.CanonicalParts": {
+      "path": "src/ContinuousFlexibility/Blueprint/CanonicalParts.lean",
+      "sha256": "209846850d2f7a70a21161396a0204c033336398f36e0266d2ac156295475e5a",
+      "blob": "fef5d9a4b4a54d7170f63bd0b50fb98e900af41a",
+      "bytes": 298,
+      "lines": 9,
+      "imports": [
+        "ContinuousFlexibility.Blueprint.Statements"
+      ]
+    },
+    "ContinuousFlexibility.Blueprint.Statements": {
+      "path": "src/ContinuousFlexibility/Blueprint/Statements.lean",
+      "sha256": "4eff8f3724ee80268cebe29904e817efa068f6e398d6ab7d1ebb05bcebe09eda",
+      "blob": "af5ba9dacc2c7b026d6535f09e886ce22ca2e673",
+      "bytes": 15051,
+      "lines": 275,
+      "imports": [
+        "ContinuousFlexibility.Statements.Milestones"
+      ]
+    },
+    "ContinuousFlexibility.Statements.Milestones": {
+      "path": "src/ContinuousFlexibility/Statements/Milestones.lean",
+      "sha256": "82aee4c1daa95b2d30b11db16972c6f022045468815ed49cc7fa3ef154bc37c0",
+      "blob": "591c1c577b716e045c381c83f822e6fde073e347",
+      "bytes": 3360,
+      "lines": 147,
+      "imports": [
+        "ContinuousFlexibility.Statements.Scalar",
+        "ContinuousFlexibility.Statements.ScalarWeighted",
+        "ContinuousFlexibility.Statements.FiniteFourier",
+        "ContinuousFlexibility.Statements.RadialTargets",
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "ContinuousFlexibility.Statements.NonlinearCompletion",
+        "ContinuousFlexibility.Statements.MainGeometry"
+      ]
+    },
+    "ContinuousFlexibility.Statements.MainGeometry": {
+      "path": "src/ContinuousFlexibility/Statements/MainGeometry.lean",
+      "sha256": "0ec15af08d07309d351ce3c6e93c4988fa8a1c82a10bf4f00eb87475b6095a97",
+      "blob": "7ccf0873a3f37f91a62309b6be796f1f644dd6ce",
+      "bytes": 26990,
+      "lines": 497,
+      "imports": [
+        "ContinuousFlexibility.Geometry.SphereCapGluing",
+        "ContinuousFlexibility.Geometry.SurfaceReparametrization",
+        "ContinuousFlexibility.Contracts.GraphFamilyCurvature"
+      ]
+    },
+    "ContinuousFlexibility.Contracts.GraphFamilyCurvature": {
+      "path": "src/ContinuousFlexibility/Contracts/GraphFamilyCurvature.lean",
+      "sha256": "27a4def56bd8ad96175b0f19d6aa4b774445fec605729856f7fb6e87d47c5132",
+      "blob": "72d932e3f8ffddb21496059eac6efb77ed8395bf",
+      "bytes": 12979,
+      "lines": 250,
+      "imports": [
+        "ContinuousFlexibility.Contracts.GraphFamilyImage",
+        "ContinuousFlexibility.Geometry.GraphSurfaceGeometry",
+        "ContinuousFlexibility.Geometry.SurfaceReparametrization"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.SurfaceReparametrization": {
+      "path": "src/ContinuousFlexibility/Geometry/SurfaceReparametrization.lean",
+      "sha256": "4591c278fc430b24f3a69a6f8a44060f430d444a19f877216196ad6edd9a807e",
+      "blob": "0a052cf36ef1cef40c5af5181deacde74d188a7e",
+      "bytes": 11245,
+      "lines": 231,
+      "imports": [
+        "ContinuousFlexibility.Geometry.SurfaceGeometry"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.SurfaceGeometry": {
+      "path": "src/ContinuousFlexibility/Geometry/SurfaceGeometry.lean",
+      "sha256": "81a3528387b41c7370dde16ff7b1a14be65cf3f87c08bf78a61818737f5b097e",
+      "blob": "f06b49491513f8dc4cecdce62a2dfbaf4914dec2",
+      "bytes": 12462,
+      "lines": 262,
+      "imports": [
+        "ContinuousFlexibility.Geometry.GraphEmbedding"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.GraphSurfaceGeometry": {
+      "path": "src/ContinuousFlexibility/Geometry/GraphSurfaceGeometry.lean",
+      "sha256": "fa598a5a56fcd0a2e644396c7eadc0ec5f4583a29c3b8fd548aa234b2926d1f2",
+      "blob": "1a87c7675ee9a8d76ea40c26b64fc86578732636",
+      "bytes": 12342,
+      "lines": 257,
+      "imports": [
+        "ContinuousFlexibility.Geometry.GraphEmbedding",
+        "ContinuousFlexibility.Geometry.SurfaceGeometry",
+        "ContinuousFlexibility.Scalar.HeightDerivatives"
+      ]
+    },
+    "ContinuousFlexibility.Contracts.GraphFamilyImage": {
+      "path": "src/ContinuousFlexibility/Contracts/GraphFamilyImage.lean",
+      "sha256": "35b90747c484cea05eb1af10ebb8db0971ea6633cdc45adced5c70605a6ccdb2",
+      "blob": "c3eadba8ae30383a127b2068e7f6b8e94c028c79",
+      "bytes": 10540,
+      "lines": 227,
+      "imports": [
+        "ContinuousFlexibility.Geometry.GraphRotationFamily"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.GraphRotationFamily": {
+      "path": "src/ContinuousFlexibility/Geometry/GraphRotationFamily.lean",
+      "sha256": "05a42d08e9f4fee8245f199d8ee84cd02fe36d820766429b8c37ed613feca06f",
+      "blob": "3cb75ba5e15aed6b49c4fc087ff177241c561460",
+      "bytes": 9296,
+      "lines": 174,
+      "imports": [
+        "ContinuousFlexibility.Geometry.PlanarRotations",
+        "ContinuousFlexibility.Contracts.CenteredDevelopment"
+      ]
+    },
+    "ContinuousFlexibility.Contracts.CenteredDevelopment": {
+      "path": "src/ContinuousFlexibility/Contracts/CenteredDevelopment.lean",
+      "sha256": "73985abd120e54bae362416154ea41aea05d3018533889fa782c85b84a30a6f9",
+      "blob": "cea1f2eb8a91147b5c4b8c9531425f97815ff9b1",
+      "bytes": 4777,
+      "lines": 109,
+      "imports": [
+        "ContinuousFlexibility.Contracts.DevelopmentSymmetry",
+        "ContinuousFlexibility.Geometry.EuclideanRigidity",
+        "ContinuousFlexibility.Geometry.PlanarOrientation"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.EuclideanRigidity": {
+      "path": "src/ContinuousFlexibility/Geometry/EuclideanRigidity.lean",
+      "sha256": "787a63606f71543ef633124e5dc399e7d12e03279be3c0c0dbcf2e0d2784d036",
+      "blob": "e8661ee46213781a21e712a99628a89899e0e756",
+      "bytes": 10866,
+      "lines": 209,
+      "imports": [
+        "ContinuousFlexibility.Geometry.EuclideanRigidityCoordinates"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.EuclideanRigidityCoordinates": {
+      "path": "src/ContinuousFlexibility/Geometry/EuclideanRigidityCoordinates.lean",
+      "sha256": "d7ba4da0ff59fc2bbd093cb2e7d36c6b9e998e2e4a59137f619c0b44e905cf57",
+      "blob": "00895726584d3a74b43b378fa7e8e4ad42dfcbe2",
+      "bytes": 8327,
+      "lines": 173,
+      "imports": [
+        "ContinuousFlexibility.Geometry.CoframeCurvature",
+        "ContinuousFlexibility.Geometry.FlatDevelopment",
+        "ContinuousFlexibility.Scalar.FormPullback"
+      ]
+    },
+    "ContinuousFlexibility.Contracts.DevelopmentSymmetry": {
+      "path": "src/ContinuousFlexibility/Contracts/DevelopmentSymmetry.lean",
+      "sha256": "ab634fe386042235fa3600b0b1ae466a6db49e28a1faa595b82464ab529d2e0e",
+      "blob": "1fe0c7da34d07cce6ad1ded51dfcb15a23cd7bf4",
+      "bytes": 5939,
+      "lines": 129,
+      "imports": [
+        "ContinuousFlexibility.Contracts.IsometricGraph"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.PlanarRotations": {
+      "path": "src/ContinuousFlexibility/Geometry/PlanarRotations.lean",
+      "sha256": "f0f81aceb0c8e042fac49810d887a79e1ef5e0e74e7566c5be4e397e0cda5ae9",
+      "blob": "6b759a4981c74a372da59c9d469afe1c2551ccb5",
+      "bytes": 4826,
+      "lines": 106,
+      "imports": [
+        "ContinuousFlexibility.Geometry.EuclideanRigidityCoordinates",
+        "ContinuousFlexibility.Contracts.CartesianMetric"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.SphereCapGluing": {
+      "path": "src/ContinuousFlexibility/Geometry/SphereCapGluing.lean",
+      "sha256": "d95cb20541e1f454d039c8b2735c010245b4679f9dafbe99f6e4bfa70c3d2718",
+      "blob": "138d9d06abb4bd83d96de65b30c77e9be21157ec",
+      "bytes": 37055,
+      "lines": 657,
+      "imports": [
+        "ContinuousFlexibility.Geometry.SphereCoordinates",
+        "ContinuousFlexibility.Geometry.CapSphereProfile",
+        "ContinuousFlexibility.Geometry.GraphCapAttachment",
+        "ContinuousFlexibility.Geometry.MarkedCapDisk"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.MarkedCapDisk": {
+      "path": "src/ContinuousFlexibility/Geometry/MarkedCapDisk.lean",
+      "sha256": "9cb597469bc3a02c2ffde712af65e35d339520f8ce47f0cd62cd0071231e8315",
+      "blob": "770cea27b61ef15bcffb5f91b0e47f33833ac621",
+      "bytes": 25822,
+      "lines": 510,
+      "imports": [
+        "ContinuousFlexibility.Geometry.CapDisk",
+        "ContinuousFlexibility.Geometry.MarkerBump",
+        "ContinuousFlexibility.Geometry.PlanarRotations"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.MarkerBump": {
+      "path": "src/ContinuousFlexibility/Geometry/MarkerBump.lean",
+      "sha256": "d8d25764e45a1539decd769eedd7386b6076a3082bdb07d75d5369aea4186684",
+      "blob": "823ef0b3e7ec668562137bfa620df80b00eec65b",
+      "bytes": 13198,
+      "lines": 293,
+      "imports": [
+        "ContinuousFlexibility.Scalar.HeightDerivatives"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.CapDisk": {
+      "path": "src/ContinuousFlexibility/Geometry/CapDisk.lean",
+      "sha256": "8ef6f43da90674645a6df8fdecd5291e8d27eee64af9b25cde9eaadbe14a2820",
+      "blob": "746a545003540715af7a43893e906a2ea64ae8e8",
+      "bytes": 24654,
+      "lines": 531,
+      "imports": [
+        "ContinuousFlexibility.Geometry.CapRevolution",
+        "ContinuousFlexibility.Contracts.CartesianMetricRegularity"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.CapRevolution": {
+      "path": "src/ContinuousFlexibility/Geometry/CapRevolution.lean",
+      "sha256": "669fd3d026c2392ea3d3b02a22036e50fd1d050f57fe9685d6ce23a417fd6417",
+      "blob": "53c8fce2bf084e6cd436440d8cff68fdee0c71f6",
+      "bytes": 11031,
+      "lines": 235,
+      "imports": [
+        "ContinuousFlexibility.Geometry.CapMeridian",
+        "ContinuousFlexibility.Geometry.GraphEmbedding"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.CapMeridian": {
+      "path": "src/ContinuousFlexibility/Geometry/CapMeridian.lean",
+      "sha256": "42aa59b2affaac3cd809ebf98d8411d2129d31a45cc3d6101e2c96a0f5c6ca1e",
+      "blob": "2a7c6370966ecff711d7f869a63d3e3080d75a89",
+      "bytes": 23224,
+      "lines": 523,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Coordinates"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.GraphCapAttachment": {
+      "path": "src/ContinuousFlexibility/Geometry/GraphCapAttachment.lean",
+      "sha256": "7d8aedc30b0cb25d8b1eb54bca73cc0f03092aa85f06eafc923285e5a88e88ef",
+      "blob": "74731d7b0473ad33572dde7deda69086557544ac",
+      "bytes": 9840,
+      "lines": 192,
+      "imports": [
+        "ContinuousFlexibility.Geometry.CapDisk",
+        "ContinuousFlexibility.Contracts.GraphFamilyImage"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.CapSphereProfile": {
+      "path": "src/ContinuousFlexibility/Geometry/CapSphereProfile.lean",
+      "sha256": "a865fb197b5848b3549615de741f620761c447dcb2f08d657222b69ee9304c19",
+      "blob": "07f4cea5fc3641ca3dfc0edf35c088f1f424f333",
+      "bytes": 22926,
+      "lines": 499,
+      "imports": [
+        "ContinuousFlexibility.Geometry.CapDisk"
+      ]
+    },
+    "ContinuousFlexibility.Geometry.SphereCoordinates": {
+      "path": "src/ContinuousFlexibility/Geometry/SphereCoordinates.lean",
+      "sha256": "56508ddc68f867383ce80866f18775e3accbefa4fbcd34253f226f5af41d2ead",
+      "blob": "4a57646a1201a903c3af72ab72b75d69e04170fa",
+      "bytes": 16929,
+      "lines": 422,
+      "imports": [
+        "ContinuousFlexibility.Geometry.GraphEmbedding"
+      ]
+    },
+    "ContinuousFlexibility.Statements.NonlinearCompletion": {
+      "path": "src/ContinuousFlexibility/Statements/NonlinearCompletion.lean",
+      "sha256": "d4df3cef439f0fca93e668e0bff8616501d610976c36c41cbac7d3b2ea1b87ec",
+      "blob": "33f4cb9a62cbb768ae194167cf19f26bed39a1e5",
+      "bytes": 12351,
+      "lines": 232,
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ]
+    },
+    "ContinuousFlexibility.Statements.Nonlinear": {
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "bytes": 101197,
+      "lines": 1773,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Contracts.Annular",
+        "ContinuousFlexibility.Scalar.NormalizedConservation",
+        "ContinuousFlexibility.Scalar.TypeCorrection",
+        "ContinuousFlexibility.Scalar.FormPullback"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.TypeCorrection": {
+      "path": "src/ContinuousFlexibility/Scalar/TypeCorrection.lean",
+      "sha256": "eeb9c3ed1c80a368957530b177ab263f88b82c544014648411ea4c8cf3e62c83",
+      "blob": "d40da5359abab2b5185a10f36b0a048ae80ff6d2",
+      "bytes": 13868,
+      "lines": 267,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Linearization",
+        "ContinuousFlexibility.Scalar.Normalization"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.Normalization": {
+      "path": "src/ContinuousFlexibility/Scalar/Normalization.lean",
+      "sha256": "3ca9fddab69f928baef1e0073ab1be24719529c6c45dbe1f14facd808d83fbaa",
+      "blob": "99c019d79733789b5b51e21bbfe19d981beee333",
+      "bytes": 6216,
+      "lines": 125,
+      "imports": [
+        "ContinuousFlexibility.Scalar.HeightVariation"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.HeightVariation": {
+      "path": "src/ContinuousFlexibility/Scalar/HeightVariation.lean",
+      "sha256": "d455c46769f752f8527812bf29e329b7e1647bf3f31a7ca4102b1f29444ed798",
+      "blob": "8263d03d7d771d3e3ee7ef8e8213e9131110f3a8",
+      "bytes": 13437,
+      "lines": 254,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Connection"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.Linearization": {
+      "path": "src/ContinuousFlexibility/Scalar/Linearization.lean",
+      "sha256": "dd3c6eda3a906801e19df493bc436d62d6b2e29a3d4fa04f7608456b9b79e7bb",
+      "blob": "453262b76f1edee0f1e9fd3ea22424e2d55da967",
+      "bytes": 22889,
+      "lines": 402,
+      "imports": [
+        "ContinuousFlexibility.Scalar.LinearizationAlgebra"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.LinearizationAlgebra": {
+      "path": "src/ContinuousFlexibility/Scalar/LinearizationAlgebra.lean",
+      "sha256": "4244749d1ef6a92981284dd8227149006870bba3f6c6db1291c39ad351970963",
+      "blob": "7d93342b41c3f5306e813bc69619d44209e4d1f9",
+      "bytes": 2480,
+      "lines": 56,
+      "imports": [
+        "ContinuousFlexibility.Scalar.HeightVariation"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.NormalizedConservation": {
+      "path": "src/ContinuousFlexibility/Scalar/NormalizedConservation.lean",
+      "sha256": "031d94bded5c743d6ef031d18e6d85f30cfe9b3f3ef25f7c2cce6479d80bbbe8",
+      "blob": "489e64d736b52e8a37d974da65345cfa7eee1173",
+      "bytes": 11038,
+      "lines": 215,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Conservation",
+        "ContinuousFlexibility.Scalar.Normalization",
+        "ContinuousFlexibility.Radial.RadialHeight"
+      ]
+    },
+    "ContinuousFlexibility.Radial.RadialHeight": {
+      "path": "src/ContinuousFlexibility/Radial/RadialHeight.lean",
+      "sha256": "c08c761f0560d5039bfbd50969fb241c0279bb95562c3ebb6cc0fc93697e860e",
+      "blob": "8b8dfa86c48003f5b492049d8c2aa38e09f68263",
+      "bytes": 9987,
+      "lines": 202,
+      "imports": [
+        "ContinuousFlexibility.Radial.FourierModes",
+        "ContinuousFlexibility.Scalar.Normalization"
+      ]
+    },
+    "ContinuousFlexibility.Radial.FourierModes": {
+      "path": "src/ContinuousFlexibility/Radial/FourierModes.lean",
+      "sha256": "1f6a02e5261585b519e7bb51e79e57eff478b5adecd8959f1ee3dca111ac2b74",
+      "blob": "24eff48b12d19ffe2bdff0907d6a62fcb3b049aa",
+      "bytes": 6787,
+      "lines": 165,
+      "imports": [
+        "ContinuousFlexibility.Radial.Gauge"
+      ]
+    },
+    "ContinuousFlexibility.Radial.Gauge": {
+      "path": "src/ContinuousFlexibility/Radial/Gauge.lean",
+      "sha256": "89a7ce0c663bcd9f98ba873b3c8e3b079094284c1aed0ab89f4303d8b2c31d5c",
+      "blob": "ef65a3e184f4c27d6b97e00ef4dbb08936815e73",
+      "bytes": 8690,
+      "lines": 199,
+      "imports": []
+    },
+    "ContinuousFlexibility.Scalar.Conservation": {
+      "path": "src/ContinuousFlexibility/Scalar/Conservation.lean",
+      "sha256": "7c0ae9361932bbc987816911fcd0e4e3695d73e16d113db7e2ed7c89cefd2419",
+      "blob": "37c8be7917de107517c6e6f8dfb84136dc0283eb",
+      "bytes": 13090,
+      "lines": 252,
+      "imports": [
+        "ContinuousFlexibility.Geometry.FlatDevelopment"
+      ]
+    },
+    "ContinuousFlexibility.Statements.Analysis": {
+      "path": "src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "bytes": 30441,
+      "lines": 603,
+      "imports": [
+        "ContinuousFlexibility.Statements.Radial",
+        "ContinuousFlexibility.Analysis.BastianiCurveChain",
+        "ContinuousFlexibility.Analysis.ExponentialSequenceSpace",
+        "ContinuousFlexibility.Analysis.MaterialIntervalWeights",
+        "ContinuousFlexibility.Analysis.TameLinear"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.TameLinear": {
+      "path": "src/ContinuousFlexibility/Analysis/TameLinear.lean",
+      "sha256": "6cbb0db795c3cd44a9282ef65b2d555b0bf2dbf727ecaaa9655e8bdaa982ce44",
+      "blob": "47955116a5d0f378c95941eae26a941510fe6015",
+      "bytes": 11803,
+      "lines": 268,
+      "imports": [
+        "ContinuousFlexibility.Analysis.Graded"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.Graded": {
+      "path": "src/ContinuousFlexibility/Analysis/Graded.lean",
+      "sha256": "4e14602df2c81c84c73bda52412e3f39d5a7699364258d8686d140c31a225fab",
+      "blob": "cbde48fbc802d4d850d34cfd992affc49a9db33b",
+      "bytes": 9009,
+      "lines": 202,
+      "imports": []
+    },
+    "ContinuousFlexibility.Analysis.MaterialIntervalWeights": {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialIntervalWeights.lean",
+      "sha256": "f9327978dcec183490e303d12c9c46db254468d6e433acfc52a3aaf63a70a998",
+      "blob": "d0c907841b63ff64f14c6ce80ba39978ad7c81c6",
+      "bytes": 14408,
+      "lines": 287,
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialInterval"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.MaterialInterval": {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialInterval.lean",
+      "sha256": "149d2da2823f58668a363c9c1050eff31a613b7ce3349d828e52e538f8f58fe4",
+      "blob": "5242d6794fe273a721425f1a439c970d98760440",
+      "bytes": 15920,
+      "lines": 313,
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialCoordinate"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.MaterialCoordinate": {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialCoordinate.lean",
+      "sha256": "e113e4c2141428426748e22e0f5f53093940a70d77befe3bcf2f422bdc99fefc",
+      "blob": "b1bcf0081f837c19af51bf120762c7efb491b54a",
+      "bytes": 9497,
+      "lines": 215,
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialWeights"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.MaterialWeights": {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialWeights.lean",
+      "sha256": "e4998fa3dc7afe79fb5fc68d4b37a9df11d8c4be01fc7a51cf8015acc214dd51",
+      "blob": "4788cd70cd81842326a4e1cedde510d2c302f1cd",
+      "bytes": 12366,
+      "lines": 262,
+      "imports": []
+    },
+    "ContinuousFlexibility.Analysis.ExponentialSequenceSpace": {
+      "path": "src/ContinuousFlexibility/Analysis/ExponentialSequenceSpace.lean",
+      "sha256": "c038ec8daa99d2e12b095d9a42b9084f654187e0577f5c713c224469c16934f4",
+      "blob": "284ea9363fa1a258300b48fc0f806370ee012a81",
+      "bytes": 20133,
+      "lines": 423,
+      "imports": [
+        "ContinuousFlexibility.Analysis.Graded"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.BastianiCurveChain": {
+      "path": "src/ContinuousFlexibility/Analysis/BastianiCurveChain.lean",
+      "sha256": "f03354022430a3548644a9e0675a37fd252ac3ad1b845d70aaf9a0bd83bfaf77",
+      "blob": "fb09a3bbe8997164a8e2c141a205498cdddac136",
+      "bytes": 12341,
+      "lines": 238,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ProjectiveDifferential"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.ProjectiveDifferential": {
+      "path": "src/ContinuousFlexibility/Analysis/ProjectiveDifferential.lean",
+      "sha256": "0ed62c54e8cf1e36f906368c47e79e6aef089ad2e439e1bb44ff99a36fd3e7a3",
+      "blob": "a6290d8207dc1171bd6b4aa1a4d60b512e9c35b4",
+      "bytes": 14138,
+      "lines": 289,
+      "imports": [
+        "ContinuousFlexibility.Analysis.Graded"
+      ]
+    },
+    "ContinuousFlexibility.Statements.Radial": {
+      "path": "src/ContinuousFlexibility/Statements/Radial.lean",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352",
+      "blob": "473c530a1de50c672f2e54908d374f624f5955b0",
+      "bytes": 45261,
+      "lines": 874,
+      "imports": [
+        "ContinuousFlexibility.Statements.DeepTailOperator",
+        "ContinuousFlexibility.Radial.OscillatorCompactCore",
+        "ContinuousFlexibility.Radial.CentralSpectralInverse",
+        "ContinuousFlexibility.Radial.MorseModel",
+        "ContinuousFlexibility.Radial.FourierOrthogonality",
+        "ContinuousFlexibility.Scalar.GreenIdentity"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.GreenIdentity": {
+      "path": "src/ContinuousFlexibility/Scalar/GreenIdentity.lean",
+      "sha256": "0e6bd07148aad1d5495bb0389c10a095c2974bd018b20e11143505b2bd565c60",
+      "blob": "7ce965966ea75bfb3227638d29f944b77fe8df19",
+      "bytes": 18696,
+      "lines": 361,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Conservation",
+        "ContinuousFlexibility.Scalar.TypeCorrection"
+      ]
+    },
+    "ContinuousFlexibility.Radial.FourierOrthogonality": {
+      "path": "src/ContinuousFlexibility/Radial/FourierOrthogonality.lean",
+      "sha256": "3990f7450e7387ed74a23792e0117ad9cb6b7f151d560039a9bf4233340ff44c",
+      "blob": "825443468fe0bf4f3815422c91960220e72f7e21",
+      "bytes": 5311,
+      "lines": 129,
+      "imports": [
+        "ContinuousFlexibility.Radial.FourierModes"
+      ]
+    },
+    "ContinuousFlexibility.Radial.MorseModel": {
+      "path": "src/ContinuousFlexibility/Radial/MorseModel.lean",
+      "sha256": "4bb049d1ef2da72b167fc1f78e84ba0d6b8ac81c6210aa78bae6bf88088f6a08",
+      "blob": "07731ed3f2cc12860844f6e0520a0dbaf74c0992",
+      "bytes": 13172,
+      "lines": 291,
+      "imports": []
+    },
+    "ContinuousFlexibility.Radial.CentralSpectralInverse": {
+      "path": "src/ContinuousFlexibility/Radial/CentralSpectralInverse.lean",
+      "sha256": "7db3a431f32bcec3df7819caf72791750f59eed8ab69ae92d8002f9ce1e0acac",
+      "blob": "9053f66e2b85311e6b5ba5f776aefe0f5cb9da4b",
+      "bytes": 16020,
+      "lines": 350,
+      "imports": [
+        "ContinuousFlexibility.Radial.OscillatorClosedGraph"
+      ]
+    },
+    "ContinuousFlexibility.Radial.OscillatorClosedGraph": {
+      "path": "src/ContinuousFlexibility/Radial/OscillatorClosedGraph.lean",
+      "sha256": "274070a67b4a84427fa7e37eb0a2e685b7234353305a65bc11de5c5522581a3c",
+      "blob": "ece9702f41f24d5f9fb37132638856adf4c9a9f2",
+      "bytes": 8079,
+      "lines": 192,
+      "imports": [
+        "ContinuousFlexibility.Radial.HermiteBasis",
+        "ContinuousFlexibility.Radial.CentralSpectralGap"
+      ]
+    },
+    "ContinuousFlexibility.Radial.CentralSpectralGap": {
+      "path": "src/ContinuousFlexibility/Radial/CentralSpectralGap.lean",
+      "sha256": "20a887582069dc68aa937cb319d57fcf910b0185845097a2c319d4ed602b2dfd",
+      "blob": "258e9ecbf5a43a7f18404af90158c6cb377923b2",
+      "bytes": 6521,
+      "lines": 165,
+      "imports": [
+        "ContinuousFlexibility.Radial.OscillatorSpectrum"
+      ]
+    },
+    "ContinuousFlexibility.Radial.OscillatorSpectrum": {
+      "path": "src/ContinuousFlexibility/Radial/OscillatorSpectrum.lean",
+      "sha256": "831dc91bb23800e36f9954198fc9b5560126eac28885f413293715b693bc5acf",
+      "blob": "a80a2097a7ae575e05bcf9dd60419429636adca5",
+      "bytes": 14149,
+      "lines": 311,
+      "imports": [
+        "ContinuousFlexibility.Radial.OscillatorKernel",
+        "ContinuousFlexibility.Radial.HermitePolynomial"
+      ]
+    },
+    "ContinuousFlexibility.Radial.HermitePolynomial": {
+      "path": "src/ContinuousFlexibility/Radial/HermitePolynomial.lean",
+      "sha256": "10c6bb1cc43a6a7246735be076fd8ef3b34fde46f227ae55ae50f9776d38ba6f",
+      "blob": "83534d6ca1309e0772408380cde6924652e16f47",
+      "bytes": 3157,
+      "lines": 77,
+      "imports": []
+    },
+    "ContinuousFlexibility.Radial.OscillatorKernel": {
+      "path": "src/ContinuousFlexibility/Radial/OscillatorKernel.lean",
+      "sha256": "fe59264dfb61e9522a3f9a4d6046a2705175abbb579b2dab3303f4087e0d99ed",
+      "blob": "c4a6e4de4746791816ff95a4188022403afa0354",
+      "bytes": 13283,
+      "lines": 303,
+      "imports": [
+        "ContinuousFlexibility.Radial.CentralModel"
+      ]
+    },
+    "ContinuousFlexibility.Radial.CentralModel": {
+      "path": "src/ContinuousFlexibility/Radial/CentralModel.lean",
+      "sha256": "f0fcde30af15d2b337ca9ae6b83fe98c197a511ad6a69bca017d536984aeea7a",
+      "blob": "77266a4fcc2cd426e9ae3f39068b3fa47898e41b",
+      "bytes": 7961,
+      "lines": 163,
+      "imports": [
+        "ContinuousFlexibility.Radial.CentralRadiusMetric"
+      ]
+    },
+    "ContinuousFlexibility.Radial.CentralRadiusMetric": {
+      "path": "src/ContinuousFlexibility/Radial/CentralRadiusMetric.lean",
+      "sha256": "a7a9289b029c5fdf503244b64acd8aa7e120062208fe5d94dcec3e4af610b7b1",
+      "blob": "ce20515b26f6c903ef161f2161d053a6f1b9b0da",
+      "bytes": 6978,
+      "lines": 146,
+      "imports": [
+        "ContinuousFlexibility.Radial.CentralRadius"
+      ]
+    },
+    "ContinuousFlexibility.Radial.CentralRadius": {
+      "path": "src/ContinuousFlexibility/Radial/CentralRadius.lean",
+      "sha256": "b173bcd59d9e2763d13559d080f49233a25e678f12a0fe03cb9d713de91d8871",
+      "blob": "1a6fbca80030572e8cc52f2592910b00585b32a9",
+      "bytes": 11791,
+      "lines": 275,
+      "imports": [
+        "ContinuousFlexibility.Radial.GaussianLaplace",
+        "ContinuousFlexibility.Radial.CentralTravelAngle",
+        "ContinuousFlexibility.Radial.Liouville"
+      ]
+    },
+    "ContinuousFlexibility.Radial.Liouville": {
+      "path": "src/ContinuousFlexibility/Radial/Liouville.lean",
+      "sha256": "32510babdee588a53e0c97bc0df9ff5aaf51b6a72d2f4cd44dc2f819f3790950",
+      "blob": "d3f177af2ac65f9f8be6e7c5a5f3d3591e52c3c8",
+      "bytes": 8719,
+      "lines": 201,
+      "imports": [
+        "ContinuousFlexibility.Radial.Gauge"
+      ]
+    },
+    "ContinuousFlexibility.Radial.CentralTravelAngle": {
+      "path": "src/ContinuousFlexibility/Radial/CentralTravelAngle.lean",
+      "sha256": "1e4cd1434b4278f6453bb601fc208442debab32817027b7e8a26925247b5c55c",
+      "blob": "164edfd2d85fdf42c652a4c1adae4cc776002bf3",
+      "bytes": 3766,
+      "lines": 91,
+      "imports": [
+        "ContinuousFlexibility.Radial.CentralSmallDivisor"
+      ]
+    },
+    "ContinuousFlexibility.Radial.CentralSmallDivisor": {
+      "path": "src/ContinuousFlexibility/Radial/CentralSmallDivisor.lean",
+      "sha256": "2aef804fe33b1c27b67da52a6fef15ac39e1ea395af8326dbabcd07a060efe58",
+      "blob": "bd7578936cd04f42c012a38c19cf94658dbd4f22",
+      "bytes": 6098,
+      "lines": 146,
+      "imports": []
+    },
+    "ContinuousFlexibility.Radial.GaussianLaplace": {
+      "path": "src/ContinuousFlexibility/Radial/GaussianLaplace.lean",
+      "sha256": "aff1c631d65dad86040d465770a3df4ebee2f474239747466fccf66f76c15aef",
+      "blob": "b4c9b102b7fbb7df7ac62c3b661bca24489fcedb",
+      "bytes": 10458,
+      "lines": 219,
+      "imports": []
+    },
+    "ContinuousFlexibility.Radial.HermiteBasis": {
+      "path": "src/ContinuousFlexibility/Radial/HermiteBasis.lean",
+      "sha256": "5365b29b1c6f5a06a8dae35beeedd2b15875330456639c03c0a4ad7071c424b0",
+      "blob": "28934162b9f68ed3a0ccaba118ca20a4ccc6a313",
+      "bytes": 8748,
+      "lines": 190,
+      "imports": [
+        "ContinuousFlexibility.Radial.HermiteCompleteness"
+      ]
+    },
+    "ContinuousFlexibility.Radial.HermiteCompleteness": {
+      "path": "src/ContinuousFlexibility/Radial/HermiteCompleteness.lean",
+      "sha256": "758f2ca03a7520f04c1a942aca465b4708e36532108f2b851fe555f1fd4d5947",
+      "blob": "07bb77533833170591c3776469d71fce308517b1",
+      "bytes": 8336,
+      "lines": 182,
+      "imports": [
+        "ContinuousFlexibility.Radial.OscillatorSpectrum",
+        "ContinuousFlexibility.Radial.ExponentialMoments"
+      ]
+    },
+    "ContinuousFlexibility.Radial.ExponentialMoments": {
+      "path": "src/ContinuousFlexibility/Radial/ExponentialMoments.lean",
+      "sha256": "b32e76f713835c97a4d3c9c61b263b9145558adabc9878fcff905403c4f460d2",
+      "blob": "220baeaa6d41d8c211600973e170cfd41b7b06c1",
+      "bytes": 7197,
+      "lines": 159,
+      "imports": []
+    },
+    "ContinuousFlexibility.Radial.OscillatorCompactCore": {
+      "path": "src/ContinuousFlexibility/Radial/OscillatorCompactCore.lean",
+      "sha256": "72ad34b33ddab15bb7945555074eeaa10ee277584d0d48c34c0c288d8bb41f58",
+      "blob": "62cf1e5205c52f05caa1e2212ae3a1c99001a5cf",
+      "bytes": 31066,
+      "lines": 597,
+      "imports": [
+        "ContinuousFlexibility.Radial.OscillatorClosedGraph",
+        "ContinuousFlexibility.Radial.CentralGraphAdjoint",
+        "ContinuousFlexibility.Radial.OscillatorDifferentialPairing"
+      ]
+    },
+    "ContinuousFlexibility.Radial.OscillatorDifferentialPairing": {
+      "path": "src/ContinuousFlexibility/Radial/OscillatorDifferentialPairing.lean",
+      "sha256": "cc8a71fc49c0199a7c5b55aa7727c83a04c23d14962c85f5febcafdeb78447ed",
+      "blob": "50ffe11ec22d0fdbf47a710a88eb9f6d35839ab7",
+      "bytes": 13056,
+      "lines": 285,
+      "imports": [
+        "ContinuousFlexibility.Radial.CentralSpectralGap"
+      ]
+    },
+    "ContinuousFlexibility.Radial.CentralGraphAdjoint": {
+      "path": "src/ContinuousFlexibility/Radial/CentralGraphAdjoint.lean",
+      "sha256": "6ef3252d26004db60a34fde1c8bd647239f3917876cdc68f2a0ae11a10f940ff",
+      "blob": "997a3cd9d9bca528232a4d017c0161ffc3715581",
+      "bytes": 6349,
+      "lines": 147,
+      "imports": [
+        "ContinuousFlexibility.Radial.OscillatorClosedGraph"
+      ]
+    },
+    "ContinuousFlexibility.Statements.DeepTailOperator": {
+      "path": "src/ContinuousFlexibility/Statements/DeepTailOperator.lean",
+      "sha256": "25f6c6bdac65386225e5a566d5da49a7f227f236cf8ec5864a21b7528f07d1a9",
+      "blob": "2abb5a18add520e7a7bd363a1e4cec1445df355e",
+      "bytes": 6605,
+      "lines": 144,
+      "imports": []
+    },
+    "ContinuousFlexibility.Statements.RadialTargets": {
+      "path": "src/ContinuousFlexibility/Statements/RadialTargets.lean",
+      "sha256": "6296bf88e2c368206d1ec39dad5647a768016d10d5f574a0d58d65064c9285d2",
+      "blob": "7b2ba6641046904003f09f9c708a7e8538de3c4d",
+      "bytes": 25425,
+      "lines": 492,
+      "imports": [
+        "ContinuousFlexibility.Statements.Radial"
+      ]
+    },
+    "ContinuousFlexibility.Statements.FiniteFourier": {
+      "path": "src/ContinuousFlexibility/Statements/FiniteFourier.lean",
+      "sha256": "df274c0e441ce3bff66c7d838f452d0097fac38cdaf5e7094dae17a4c7947f61",
+      "blob": "11994300dff212edfaeebcf161a422c24651b85c",
+      "bytes": 2576,
+      "lines": 58,
+      "imports": [
+        "ContinuousFlexibility.Statements.Scalar",
+        "ContinuousFlexibility.Radial.FourierModes"
+      ]
+    },
+    "ContinuousFlexibility.Statements.Scalar": {
+      "path": "src/ContinuousFlexibility/Statements/Scalar.lean",
+      "sha256": "90ca70565051f03577e1f4555b325ccda4a9a85bbf04d6d54b9addb5941af46c",
+      "blob": "0577cee4ba3210e322083715a8ddc29f4039afbf",
+      "bytes": 15547,
+      "lines": 275,
+      "imports": [
+        "ContinuousFlexibility.Scalar.GreenIdentity",
+        "ContinuousFlexibility.Scalar.NormalizedConservation",
+        "ContinuousFlexibility.Geometry.FlatDevelopment"
+      ]
+    },
+    "ContinuousFlexibility.Statements.ScalarWeighted": {
+      "path": "src/ContinuousFlexibility/Statements/ScalarWeighted.lean",
+      "sha256": "e677c7eb3149635fbe0961a4dd9fdbdbb294eb5cdf0d7846a822c740c7449d87",
+      "blob": "cf7a5559de89576123045f70dd7f9e195e851191",
+      "bytes": 18963,
+      "lines": 366,
+      "imports": [
+        "ContinuousFlexibility.Statements.Scalar",
+        "ContinuousFlexibility.Statements.Analysis"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.BoundaryMixedJets": {
+      "path": "src/ContinuousFlexibility/Analysis/BoundaryMixedJets.lean",
+      "sha256": "e3d747a16201ce8962614f7bd14136a924f3dce50874ce599d037be8ead1ba75",
+      "blob": "756659895cbc27463f3ce4c058e3b4c9ce437924",
+      "bytes": 8474,
+      "lines": 172,
+      "imports": [
+        "ContinuousFlexibility.Analysis.BoundaryTaylorExtension"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.BoundaryTaylorExtension": {
+      "path": "src/ContinuousFlexibility/Analysis/BoundaryTaylorExtension.lean",
+      "sha256": "569766332fa55b39cf1aea1a437366cd44591818758530f2dafffde49bdcd1da",
+      "blob": "5c7b80c9ff8255850e05bb3308a30579b035a8d6",
+      "bytes": 10778,
+      "lines": 223,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CylinderMixedJets"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.CylinderMixedJets": {
+      "path": "src/ContinuousFlexibility/Analysis/CylinderMixedJets.lean",
+      "sha256": "ae19c58f66f0778411f64607f52acf0525aceb27036c9d1ac1825e0e46e3614d",
+      "blob": "3dc20e779221e16f9be32dff13d22e978b5a048d",
+      "bytes": 13153,
+      "lines": 253,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Scalar.HeightDerivatives"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.CanonicalSourceMeasure": {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalSourceMeasure.lean",
+      "sha256": "fe92adb0765019395811870a0efb985f8b18692e2b2117de0d2068d787de1660",
+      "blob": "d39ed36d51c77bdceaea75d1fbb4a605b21d3df9",
+      "bytes": 3317,
+      "lines": 82,
+      "imports": [
+        "ContinuousFlexibility.Scalar.FormPullback"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.N04bConstructedRootTransmission": {
+      "path": "src/ContinuousFlexibility/Analysis/N04bConstructedRootTransmission.lean",
+      "sha256": "1076fbba3122f07dbbae57dc87e4268e096faeaa0dda7e0474aa774c68d4d342",
+      "blob": "6a7d727819d0298af773209a3bd0d6a1c01a9c7e",
+      "bytes": 8053,
+      "lines": 165,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bConstructedRootDensity",
+        "ContinuousFlexibility.Analysis.N04bCanonicalCut"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.N04bCanonicalCut": {
+      "path": "src/ContinuousFlexibility/Analysis/N04bCanonicalCut.lean",
+      "sha256": "89a1837d3650b454d50aaa699b8740259358dc96dd59ce76b72b9557012fe4e6",
+      "blob": "af044966fab72910589e9ef793c9b2ae941f3a42",
+      "bytes": 2921,
+      "lines": 68,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bRootCutHeight",
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.N04bRootCutHeight": {
+      "path": "src/ContinuousFlexibility/Analysis/N04bRootCutHeight.lean",
+      "sha256": "c4ff9ace6709e559a10b7ec486e1e14f67e94f2a34af738ad81347adbf6d24a6",
+      "blob": "0fcc3e651f95b3c5d25a4717ed1cfda596232e04",
+      "bytes": 4432,
+      "lines": 102,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bRootCutPowers"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.N04bRootCutPowers": {
+      "path": "src/ContinuousFlexibility/Analysis/N04bRootCutPowers.lean",
+      "sha256": "8fc8d7556e88cf71599651ccab09313b4c0089b506c472b7d52a7c641c41d408",
+      "blob": "6eb3669a9f846a83de80722b7dd2d8779cdf1b94",
+      "bytes": 3526,
+      "lines": 89,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bCutPullback"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.N04bCutPullback": {
+      "path": "src/ContinuousFlexibility/Analysis/N04bCutPullback.lean",
+      "sha256": "a74f3faaff6114a133a808259be32e3d7ef66a145e12bde079160aa8360af6c3",
+      "blob": "f556673a17c2fe87f38c0c018b546b404c9aab52",
+      "bytes": 4356,
+      "lines": 99,
+      "imports": [
+        "ContinuousFlexibility.Scalar.HeightDerivatives"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.N04bConstructedRootDensity": {
+      "path": "src/ContinuousFlexibility/Analysis/N04bConstructedRootDensity.lean",
+      "sha256": "b59f3fe82209f565c6470c3c666e24680a45964c598d76e344649e141ba58f4c",
+      "blob": "32bb22fc7e17a99cf7273062ef7045f7f56bd859",
+      "bytes": 6921,
+      "lines": 131,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bRootTravelDifferential",
+        "ContinuousFlexibility.Analysis.N04bRootCanonicalCoefficients"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.N04bRootCanonicalCoefficients": {
+      "path": "src/ContinuousFlexibility/Analysis/N04bRootCanonicalCoefficients.lean",
+      "sha256": "c4a815ff764bb0edade6b1c8670c2634f66bf994358cbf58f0e2c15487297f9e",
+      "blob": "c4f4f846ec8f2668616ff6e07483ed1277423288",
+      "bytes": 2676,
+      "lines": 54,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bSignedRootDensity",
+        "ContinuousFlexibility.Analysis.N04bCanonicalOperator"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.N04bCanonicalOperator": {
+      "path": "src/ContinuousFlexibility/Analysis/N04bCanonicalOperator.lean",
+      "sha256": "344c622b2232939712c784404953c53c3c7a35378b0b70002313dac5bfcfefe3",
+      "blob": "70b5abc70e06c225d31f98d6c38d5a379369bad7",
+      "bytes": 7999,
+      "lines": 156,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CoordinateOperatorConstruction",
+        "ContinuousFlexibility.Blueprint.Statements",
+        "ContinuousFlexibility.Analysis.N04bGeometryPreservation"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.N04bGeometryPreservation": {
+      "path": "src/ContinuousFlexibility/Analysis/N04bGeometryPreservation.lean",
+      "sha256": "e76f97bac38f403a9ef49137fbe576115a2287058b94f491c708710ca36a55c3",
+      "blob": "ab6f7cd679af0057d730cfa8833307120a1a349a",
+      "bytes": 1864,
+      "lines": 48,
+      "imports": [
+        "ContinuousFlexibility.Blueprint.Statements"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.CoordinateOperatorConstruction": {
+      "path": "src/ContinuousFlexibility/Analysis/CoordinateOperatorConstruction.lean",
+      "sha256": "ffbecb5ae9d0d9e40a5fd193592dde632989d3c4fb2382b118be5180f9d7f1c1",
+      "blob": "aef71ea652edabf9d9c4788e2c6aba6780f6c1fe",
+      "bytes": 3769,
+      "lines": 76,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CoordinateDivergenceIdentity",
+        "ContinuousFlexibility.Analysis.PrincipalDensityBoundaryJets"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.PrincipalDensityBoundaryJets": {
+      "path": "src/ContinuousFlexibility/Analysis/PrincipalDensityBoundaryJets.lean",
+      "sha256": "67aeef19bd06d7fb3ad15190c54231f04faa4a876dff55a360dd121b7c571e50",
+      "blob": "e3a80839f54e580850893544d0425abe7e2ff4d1",
+      "bytes": 17825,
+      "lines": 319,
+      "imports": [
+        "ContinuousFlexibility.Analysis.PrincipalCoefficientPullback",
+        "ContinuousFlexibility.Analysis.BoundaryMixedJets",
+        "ContinuousFlexibility.Analysis.FiniteRadialJets"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.FiniteRadialJets": {
+      "path": "src/ContinuousFlexibility/Analysis/FiniteRadialJets.lean",
+      "sha256": "a5f1e30d8049e54dc68d543ac8558141cc869ebcb15b4a6933aba83bd40d198d",
+      "blob": "7033d80e902990dfacb43a742dfa198a3b6fba4d",
+      "bytes": 2512,
+      "lines": 64,
+      "imports": []
+    },
+    "ContinuousFlexibility.Analysis.PrincipalCoefficientPullback": {
+      "path": "src/ContinuousFlexibility/Analysis/PrincipalCoefficientPullback.lean",
+      "sha256": "88ccf751162a22460c15d8bfdedcdd558328b0e56f51a145dc74bd343114e3f0",
+      "blob": "19262a1834a49fdb7958b07352f409bb0940de19",
+      "bytes": 7712,
+      "lines": 160,
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "ContinuousFlexibility.Scalar.SecondProduct",
+        "ContinuousFlexibility.Scalar.Linearization"
+      ]
+    },
+    "ContinuousFlexibility.Scalar.SecondProduct": {
+      "path": "src/ContinuousFlexibility/Scalar/SecondProduct.lean",
+      "sha256": "b2a43696f21f29277023a2e0ba2ba5e1d748fcc9fbf677a61fca1717688e7879",
+      "blob": "7cd45032fd463ce1a18e6a5823852ddd12ac5fd0",
+      "bytes": 4115,
+      "lines": 90,
+      "imports": [
+        "ContinuousFlexibility.Scalar.HeightDerivatives"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.CoordinateDivergenceIdentity": {
+      "path": "src/ContinuousFlexibility/Analysis/CoordinateDivergenceIdentity.lean",
+      "sha256": "dab910dbb2b6ed443609e08cfa0260074cc8ce5cdc2a5b1aaa7b74ee0ff49c57",
+      "blob": "0adce6c0b40e6357eff4e84d4a2560f7f99d8c63",
+      "bytes": 5892,
+      "lines": 118,
+      "imports": [
+        "ContinuousFlexibility.Analysis.DivergenceFluxPullback"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.DivergenceFluxPullback": {
+      "path": "src/ContinuousFlexibility/Analysis/DivergenceFluxPullback.lean",
+      "sha256": "3431470f22d16c8b8f57feec665b41797e2e634bec2f9c64dc31c4f2d8711301",
+      "blob": "1673abb5daff6d6bed3c197e3802b63e76641ba8",
+      "bytes": 4714,
+      "lines": 95,
+      "imports": [
+        "ContinuousFlexibility.Analysis.DivergenceConjugation"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.DivergenceConjugation": {
+      "path": "src/ContinuousFlexibility/Analysis/DivergenceConjugation.lean",
+      "sha256": "3e21aac08b775dbec544834a696fdb33a59c13eb2920c3d84a971aea3170d352",
+      "blob": "06ebe7203542d0f3d310c05e0c6593e3c5039414",
+      "bytes": 3033,
+      "lines": 68,
+      "imports": [
+        "ContinuousFlexibility.Analysis.PrincipalCoefficientPullback"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.N04bSignedRootDensity": {
+      "path": "src/ContinuousFlexibility/Analysis/N04bSignedRootDensity.lean",
+      "sha256": "ce64415559ec276361821e015aa582631d44e27093b1877b8b8240a7d6f62523",
+      "blob": "68b6f8abf25b08f014a08fd1c8cb585cfab2940b",
+      "bytes": 4973,
+      "lines": 110,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CharacteristicRootDensity"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.CharacteristicRootDensity": {
+      "path": "src/ContinuousFlexibility/Analysis/CharacteristicRootDensity.lean",
+      "sha256": "371f8aa8d8cc7091cccc260e54817e8c63a06d70c13dedd6220936fdf4c9375e",
+      "blob": "7fb76ca9ad899eab90254b208bcce056adea5ca5",
+      "bytes": 4513,
+      "lines": 94,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CharacteristicPrincipalDensity",
+        "ContinuousFlexibility.Analysis.ScaledRadialPrincipalDensity"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.ScaledRadialPrincipalDensity": {
+      "path": "src/ContinuousFlexibility/Analysis/ScaledRadialPrincipalDensity.lean",
+      "sha256": "7c0b30009e5f184cb7ad37a4ebc36921a97cc8b09ad1ec985a215ebb376683d2",
+      "blob": "d099936b496d27106bf1a662d61f011f06885361",
+      "bytes": 2164,
+      "lines": 53,
+      "imports": [
+        "ContinuousFlexibility.Analysis.PrincipalCoefficientPullback"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.CharacteristicPrincipalDensity": {
+      "path": "src/ContinuousFlexibility/Analysis/CharacteristicPrincipalDensity.lean",
+      "sha256": "3558e594d7d6bfec1df3e481a0b23205bd18a1a2c45450ccf53b2a6110946d12",
+      "blob": "4e260140855bfeea59c06bbcafed7bf6d401589d",
+      "bytes": 4516,
+      "lines": 95,
+      "imports": [
+        "ContinuousFlexibility.Analysis.PrincipalCoefficientPullback"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.N04bRootTravelDifferential": {
+      "path": "src/ContinuousFlexibility/Analysis/N04bRootTravelDifferential.lean",
+      "sha256": "dec3f7fdccef46e0d43db9eed699626ae5e6a8a7567b2b20fc3def18283413ed",
+      "blob": "bd67589bb9af176fa7c25f9c7b1664bd47ed6d1b",
+      "bytes": 5541,
+      "lines": 129,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bRootReparametrization"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.N04bRootReparametrization": {
+      "path": "src/ContinuousFlexibility/Analysis/N04bRootReparametrization.lean",
+      "sha256": "446966afde9bbb675d2416f5918d1f167cd44af6dfff82daa9c50bb378a117e8",
+      "blob": "91426bc1389ab3ddaf66195c3676966fd03f9432",
+      "bytes": 5127,
+      "lines": 115,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bRootTravelCharts"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.N04bRootTravelCharts": {
+      "path": "src/ContinuousFlexibility/Analysis/N04bRootTravelCharts.lean",
+      "sha256": "3d9439442dea831b5b918e47a2606e6e6460081be5e7b3e8beee0a2c052840a7",
+      "blob": "4c07f9e17218a4366860a3984a2e933033115a8b",
+      "bytes": 6609,
+      "lines": 146,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bRootTravelIntervals"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.N04bRootTravelIntervals": {
+      "path": "src/ContinuousFlexibility/Analysis/N04bRootTravelIntervals.lean",
+      "sha256": "7e0938b188bf262b10fb148e6cf08428c1fa27e47aaa032770feae85470aea80",
+      "blob": "f1b26fa6eea80e225e7b305e0179a1720417e1a3",
+      "bytes": 6071,
+      "lines": 144,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bRootCutPowers",
+        "ContinuousFlexibility.Analysis.N04bMovingDomains"
+      ]
+    },
+    "ContinuousFlexibility.Analysis.N04bMovingDomains": {
+      "path": "src/ContinuousFlexibility/Analysis/N04bMovingDomains.lean",
+      "sha256": "1b1ef5879a6c998542dae46445f67ad062424dba87209db9f30aba88fdf2e120",
+      "blob": "035683f498f94545f3c53ae77bacb0ce86c8c4ba",
+      "bytes": 15583,
+      "lines": 353,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Coordinates"
+      ]
+    }
+  },
+  "compiled": false
+}

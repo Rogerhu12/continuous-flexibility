@@ -1,0 +1,533 @@
+{
+  "schema": "n04-explicit-upstream-provider-selection-v1",
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "selected_ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "green_comparison_ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+  "historical_c5_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+  "selected_provider_graph": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/upstream-main-1ece-fixed-base/Main1eceFixedBaseEndpointSelectedProviders.json",
+    "bytes": 180751,
+    "sha256": "faa0fa62088ac03bb6540c1dd40ed2aba5d32f191a81aa4e49de82d8d530fb1e",
+    "git_blob": "21223d72e6479eab3ac36b6510fee1375cbeb89e",
+    "lines": 4395,
+    "eof_lf": true
+  },
+  "scope": "Explicitly select the three-root endpoint subtree at the single new-main pin for subsequent actual fixed-base consumers. This does not mutate or silently rebind earlier 301/349/159 or actual-travel manifests. No Lean source is created.",
+  "primary_full_source_reviews": [
+    {
+      "module": "ContinuousFlexibility.Analysis.TameInterpolationProducts",
+      "path": "src/ContinuousFlexibility/Analysis/TameInterpolationProducts.lean",
+      "bytes": 13618,
+      "sha256": "03470aa48e2aebd241c4dedf9f0d35cb1de1c428246497060f990579c9f7d7c4",
+      "git_blob": "554f3ac62d0d4e8033c7e2139d55fcb088045b37",
+      "lines": 289,
+      "eof_lf": true,
+      "review_scope": "Complete selected source and its actual named interfaces read; project closure identity is a separate mechanical check."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.LocalizedJetInterpolation",
+      "path": "src/ContinuousFlexibility/Analysis/LocalizedJetInterpolation.lean",
+      "bytes": 12001,
+      "sha256": "ac2eed346e919bf2cba88b9f4b0738bc71600b2aa3877e8a5f44847c7d40d2d1",
+      "git_blob": "6c35cc9c69be4ffc631bf2d62fb9a5b0edac95ab",
+      "lines": 246,
+      "eof_lf": true,
+      "review_scope": "Complete selected source and its actual named interfaces read; project closure identity is a separate mechanical check."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointSplitNorm",
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointSplitNorm.lean",
+      "bytes": 8699,
+      "sha256": "e5fb6efb2dd2ffd430c791d4e118ee5b1daace89e914dcc6569f7bb3a7792675",
+      "git_blob": "392808fbcfc2a68f8d340f4a5dcff3c96fb62d95",
+      "lines": 162,
+      "eof_lf": true,
+      "review_scope": "Complete selected source and its actual named interfaces read; project closure identity is a separate mechanical check.",
+      "historical_owned_comparison": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointSplitNorm.lean",
+        "bytes": 8824,
+        "sha256": "246dff89ee519cb2adf83ccb3639de705246ac975cf92391177386561c4c9370",
+        "git_blob": "274f6f239d5c2ab2d270c5b5604760fb2099126c",
+        "lines": 159,
+        "eof_lf": true,
+        "public_header_changes": [
+          "N01Properties.endpointFlowScalarJets_state_weightedJetNorm_bound_uniform_radius",
+          "N01Properties.endpointFlowScalarJets_state_weightedJetNorm_bound"
+        ],
+        "missing_old_public_names": [],
+        "preserved_public_headers": [
+          "circleWeightedJetNorm",
+          "weightedJetNorm_le_scaled_two_envelopes"
+        ]
+      }
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointScalarSplitNorm",
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointScalarSplitNorm.lean",
+      "bytes": 13439,
+      "sha256": "8fd014c5a5a9f711baf655466e6de538b9d78424eb1fb697352f8dc46e020169",
+      "git_blob": "b233e30041f596bc30c4c50c6bf863ae1e57ebfa",
+      "lines": 259,
+      "eof_lf": true,
+      "review_scope": "Complete selected source and its actual named interfaces read; project closure identity is a separate mechanical check.",
+      "historical_owned_comparison": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarSplitNorm.lean",
+        "bytes": 13601,
+        "sha256": "960092b0563f0ce75438e22e7dcf29b74de5c00f49fcd180809e4f4624fa0a11",
+        "git_blob": "64bcd22355621cab6040113cbeefef78e0d43fb5",
+        "lines": 253,
+        "eof_lf": true,
+        "public_header_changes": [
+          "N01Properties.endpointFlow_pure_scalar_weightedJetNorm_height_bound_uniform_radius",
+          "N01Properties.endpointFlow_pure_scalar_weightedJetNorm_height_bound",
+          "N01Properties.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_uniform_radius",
+          "N01Properties.endpointFlow_pure_scalar_weightedJetNorm_budget_bound"
+        ],
+        "missing_old_public_names": [],
+        "preserved_public_headers": [
+          "liftSectorParameter_physical_height_grading_le"
+        ]
+      }
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointStateJetGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointStateJetGrowth.lean",
+      "bytes": 19389,
+      "sha256": "768a7d0924a5f343316c5b7f71bd9104b340d82fedbe795be366462ddca485cd",
+      "git_blob": "49b8f818a5b38195bae5311d96e5bdf442175a90",
+      "lines": 373,
+      "eof_lf": true,
+      "review_scope": "Complete selected source and its actual named interfaces read; project closure identity is a separate mechanical check.",
+      "historical_owned_comparison": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointStateJetGrowth.lean",
+        "bytes": 18818,
+        "sha256": "b317dec00e13585ba70ee64b04651a9e2c0629ce317955bab5de9fe48cbb80fe",
+        "git_blob": "b778432382b93cbcd8717ae3110e4a256e74ad93",
+        "lines": 352,
+        "eof_lf": true,
+        "public_header_changes": [
+          "N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all_uniform_radius",
+          "N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all",
+          "N01Properties.endpointFlowScalarJets_state_circleNorm_local_growth_all_uniform_radius",
+          "N01Properties.endpointFlowScalarJets_state_circleNorm_local_growth_all",
+          "N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all_uniform_radius",
+          "N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all"
+        ],
+        "missing_old_public_names": [],
+        "preserved_public_headers": []
+      }
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointScalarJetGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointScalarJetGrowth.lean",
+      "bytes": 5584,
+      "sha256": "4676de1c9d80ec1a1818518f041a35fa78805880cf3c1cc15e25fe1711b8ce4c",
+      "git_blob": "6efff96e65dced74c3781bf959a6c8b30b38517f",
+      "lines": 114,
+      "eof_lf": true,
+      "review_scope": "Complete selected source and its actual named interfaces read; project closure identity is a separate mechanical check.",
+      "historical_owned_comparison": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarJetGrowth.lean",
+        "bytes": 5344,
+        "sha256": "231857303e7f8502e3edb40e6ecbbde4136b0ade150c8d9b845c8e9c3f4c3eca",
+        "git_blob": "90b58593be4cfc7fc7a6f2f03c283afe35dd9437",
+        "lines": 106,
+        "eof_lf": true,
+        "public_header_changes": [
+          "N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all_uniform_radius",
+          "N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all"
+        ],
+        "missing_old_public_names": [],
+        "preserved_public_headers": []
+      }
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointJetLocalGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointJetLocalGrowth.lean",
+      "bytes": 13318,
+      "sha256": "3363b3e290ec7614e7db1ec315fe8c3cd8eafe2e515087dc9efd91e160824995",
+      "git_blob": "6ffd056b6f856a2caf27a44a440dcbf3cd8eb1b5",
+      "lines": 259,
+      "eof_lf": true,
+      "review_scope": "Complete selected source and its actual named interfaces read; project closure identity is a separate mechanical check.",
+      "historical_owned_comparison": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointJetLocalGrowth.lean",
+        "bytes": 13252,
+        "sha256": "36e24f465df5e89982fde68fb9d316b91f6d3550b624a08f475c02d4681754d7",
+        "git_blob": "2b3565121e9bdf4c49ccdf8d2b711152bd754b60",
+        "lines": 253,
+        "eof_lf": true,
+        "public_header_changes": [
+          "N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth_uniform_radius",
+          "N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth"
+        ],
+        "missing_old_public_names": [],
+        "preserved_public_headers": [
+          "sectorParameter_scalarPart_grading_le",
+          "sectorParameter_statePart_grading_le"
+        ]
+      }
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointOneHigh",
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointOneHigh.lean",
+      "bytes": 7505,
+      "sha256": "44dd0ae23cc8ee854f2b7e20bc20ced0104cf7c354b3aded8c96034e65e15ec2",
+      "git_blob": "89d524bcc7934390eecae7a0c60d0790cbfc16f0",
+      "lines": 150,
+      "eof_lf": true,
+      "review_scope": "Complete selected source and its actual named interfaces read; project closure identity is a separate mechanical check.",
+      "historical_owned_comparison": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointOneHigh.lean",
+        "bytes": 7430,
+        "sha256": "041f3e6e348f32e0a78d3639b134e1ec860b6371301a25762c48813400dd2f4d",
+        "git_blob": "dec07f797fa982d9029760925276dc83d46d2148",
+        "lines": 145,
+        "eof_lf": true,
+        "public_header_changes": [
+          "N01Properties.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform_radius",
+          "N01Properties.endpointFlowScalarJets_positive_circleNorm_oneHigh",
+          "N01Properties.endpointFlowScalarJets_positive_norm_bounds_on_box"
+        ],
+        "missing_old_public_names": [],
+        "preserved_public_headers": []
+      }
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "path": "src/ContinuousFlexibility/Analysis/TameMultilinearNormalization.lean",
+      "bytes": 9718,
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "git_blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "lines": 204,
+      "eof_lf": true,
+      "review_scope": "Complete selected source and its actual named interfaces read; project closure identity is a separate mechanical check."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CirclePositiveJetAssembly",
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveJetAssembly.lean",
+      "bytes": 5363,
+      "sha256": "e100319fd9f1b59cadd3e2d637c02c59026a93327064c6399fc954182af8ed99",
+      "git_blob": "a3a36711425ab8be2c94ed33a78e5b4d6f9bede9",
+      "lines": 112,
+      "eof_lf": true,
+      "review_scope": "Complete selected source and its actual named interfaces read; project closure identity is a separate mechanical check."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsGluing",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsGluing.lean",
+      "bytes": 5510,
+      "sha256": "48b65821f162b0c704dea9da5a45826f1dba18094e91614d73ff2be22d36ba91",
+      "git_blob": "17c20b98c1e0789179039177e5d689bb9dd96dc9",
+      "lines": 119,
+      "eof_lf": true,
+      "review_scope": "Complete selected source and its actual named interfaces read; project closure identity is a separate mechanical check."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointCircleTower",
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointCircleTower.lean",
+      "bytes": 8012,
+      "sha256": "365844c7663074aa25ab251fc41b25164f43c79e8db7aecad2c7cd51c6d5b200",
+      "git_blob": "4568eb845666ec52e17e51a8864c670503e57ecb",
+      "lines": 151,
+      "eof_lf": true,
+      "review_scope": "Complete selected source and its actual named interfaces read; project closure identity is a separate mechanical check.",
+      "historical_owned_comparison": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointCircleTower.lean",
+        "bytes": 6820,
+        "sha256": "1e9e014301e77d01118c4b2a1fbfb766f989ccf30195656bd11f858be897c346",
+        "git_blob": "89213606dbf2006df4cd0d0b4fd4dc5bbca385b7",
+        "lines": 131,
+        "eof_lf": true,
+        "public_header_changes": [],
+        "missing_old_public_names": [],
+        "preserved_public_headers": [
+          "N01Properties.endpointFlowCircle",
+          "N01Properties.endpointFlowCircle_decode",
+          "N01Properties.endpointFlowCircle_decode_apply",
+          "N01Properties.endpointFlowCircle_zero",
+          "N01Properties.exists_endpointFlowCircle_smoothDirections"
+        ]
+      }
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointZeroGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointZeroGrowth.lean",
+      "bytes": 9144,
+      "sha256": "cd5dfe6019fd62402ea733c2aa56381e4ba4ebc11a53a290b5bbb036ab1c9e29",
+      "git_blob": "62cd5f1fb9570b052f87b129c94cd5f845a5d95f",
+      "lines": 164,
+      "eof_lf": true,
+      "review_scope": "Complete selected source and its actual named interfaces read; project closure identity is a separate mechanical check.",
+      "historical_owned_comparison": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointZeroGrowth.lean",
+        "bytes": 9139,
+        "sha256": "84cc77d988279c1b348be135d6493c4831cc1619b9f5f0217aacd97cf721b255",
+        "git_blob": "bed5c26e863da0cce1db9700dd279ee164e5c22d",
+        "lines": 163,
+        "eof_lf": true,
+        "public_header_changes": [],
+        "missing_old_public_names": [],
+        "preserved_public_headers": [
+          "N01Properties.endpointFlowCircle_circleNorm_local_growth_uniform_radius",
+          "N01Properties.endpointFlowCircle_circleNorm_local_growth"
+        ]
+      }
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointSmoothTame",
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointSmoothTame.lean",
+      "bytes": 5805,
+      "sha256": "c8cf8eac21c64675520948714996ad7d7dd4622367378a70eb273b023e9db8d0",
+      "git_blob": "2da111ee694d4a440f4a2f4b2bbcfe6d4788f5e6",
+      "lines": 125,
+      "eof_lf": true,
+      "review_scope": "Complete selected source and its actual named interfaces read; project closure identity is a separate mechanical check.",
+      "historical_owned_comparison": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointSmoothTame.lean",
+        "bytes": 5782,
+        "sha256": "80c1d63b655fd4fa1ee1dab48cf72c3740dbd3fb06b8bf20a313f305ebf79026",
+        "git_blob": "db33d6cf7df8e3aaed5cf75dc82d7f22b0f384aa",
+        "lines": 124,
+        "eof_lf": true,
+        "public_header_changes": [],
+        "missing_old_public_names": [],
+        "preserved_public_headers": [
+          "N01Properties.smoothTameOn_endpointFlowCircle"
+        ]
+      }
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowCircleUniformBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowCircleUniformBounds.lean",
+      "bytes": 6368,
+      "sha256": "a01b24b0bdd84a50f60524da297a4d9e93a1b608d8c4dbfba8328ad494c845d6",
+      "git_blob": "84dfd97594ecb91e64c204b89d82625d8fddfd08",
+      "lines": 128,
+      "eof_lf": true,
+      "review_scope": "Complete selected source and its actual named interfaces read; project closure identity is a separate mechanical check.",
+      "historical_owned_comparison": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowCircleUniformBounds.lean",
+        "bytes": 6343,
+        "sha256": "b4e1e9c2a63d88c62d9b8bfd9264529fb04cbf8b40b073479d68163e1d976a57",
+        "git_blob": "d97fb575bcf0f9857ad40e95bf7d2cd229125e99",
+        "lines": 127,
+        "eof_lf": true,
+        "public_header_changes": [],
+        "missing_old_public_names": [],
+        "preserved_public_headers": [
+          "N01Properties.endpointFlowCircle_uniformFamilyJetBounds"
+        ]
+      }
+    }
+  ],
+  "exact_selected_signatures": {
+    "TameInterpolationProducts": {
+      "hasInterpolation_mul_local_growth_common_base": "theorem hasInterpolation_mul_local_growth_common_base\n    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F)\n    (hp : Monotone p) (hq : Monotone q)\n    (hIp : HasInterpolation p) (hIq : HasInterpolation q)\n    (requestedBase : ℕ) :\n    ∃ base : ℕ, requestedBase ≤ base ∧ ∀ offset : ℕ, ∃ loss : ℕ,\n      ∀ Kp Kq : ℝ, 0 ≤ Kp → 0 ≤ Kq →\n      ∀ s : ℕ, base ≤ s → ∃ C : ℝ, 0 ≤ C ∧\n        ∀ a b : ℕ, a + b ≤ s + offset → ∀ x y,\n          p base x ≤ Kp → q base y ≤ Kq →\n          p a x * q b y ≤ C * (1 + p (s + loss) x + q (s + loss) y)"
+    },
+    "LocalizedJetInterpolation": {
+      "hasInterpolation_localized_slot_growth_common_base": "theorem hasInterpolation_localized_slot_growth_common_base\n    {E : Type*} [AddCommGroup E] [Module ℝ E]\n    (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (hI : HasInterpolation p)\n    (oldBase extra : ℕ) :\n    ∃ B : ℕ, oldBase ≤ B ∧ ∀ oldLoss : ℕ, ∃ L : ℕ,\n      ∀ n : ℕ, ∀ K : ℝ, 0 ≤ K →\n      ∀ s : ℕ, B ≤ s → ∃ C : ℝ, 0 ≤ C ∧\n      ∀ b c : ℕ, b + c ≤ s → ∀ (x : E) (v : Fin n → E) (w : E),\n        p B x ≤ K → (∀ i, p B (v i) ≤ 1) → p B w ≤ 1 →\n        ((1 + p (b + oldLoss) x + ∑ i : Fin n, p (b + oldLoss) (v i)) *\n          p (oldBase + c + extra) w + p (b + oldLoss + c + extra) w) ≤\n        C * (1 + p (s + L) x + ∑ i : Fin n, p (s + L) (v i) + p (s + L) w)",
+      "hasInterpolation_quadratic_local_growth_common_base": "theorem hasInterpolation_quadratic_local_growth_common_base\n    {E : Type*} [AddCommGroup E] [Module ℝ E]\n    (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (hI : HasInterpolation p)\n    (oldBase extra : ℕ) :\n    ∃ B : ℕ, oldBase ≤ B ∧ ∀ oldLoss : ℕ, ∃ L : ℕ,\n      ∀ R : ℝ, 0 ≤ R →\n      ∀ s : ℕ, B ≤ s → ∃ C : ℝ, 0 ≤ C ∧\n      ∀ b c : ℕ, b + c ≤ s → ∀ x : E, p B x ≤ R →\n        ((1 + p (b + oldLoss) x) * (1 + p (oldBase + c + extra) x) +\n          (1 + p (b + oldLoss + c + extra) x)) ≤ C * (1 + p (s + L) x)"
+    },
+    "N01EndpointOneHigh": {
+      "N01Properties.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform_radius": "theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform_radius\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :\n    ∃ B : ℕ, base ≤ B ∧ ∀ n : ℕ, ∃ L : ℕ, ∀ R : ℝ, 0 ≤ R →\n      ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧\n      ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),\n      ∀ z ∈ sectorNeighborhood S base ε ε,\n      pairGrading (sectorGrading S) realGrading B z ≤ R →\n      ∀ v : Fin (n + 1) → (StateDirections S × ℝ),\n      circleNorm T (3 / 4 : ℝ) s\n        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) ≤\n        K * oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)\n          B (s + L) z v"
+    },
+    "N01EndpointCircleTower": {
+      "N01Properties.exists_endpointFlowCircle_smoothDirections": "theorem N01Properties.exists_endpointFlowCircle_smoothDirections\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)\n    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :\n    ∃ J : SmoothDirections (sectorNeighborhood S base ε ε) (hN.endpointFlowCircle hS hT rsel hrsel),\n      ∀ n x, x ∈ sectorNeighborhood S base ε ε → ∀ v : Fin n → (StateDirections S × ℝ),\n        (S.circle (3 / 4 : ℝ)).decode (J.D n x v) = hN.endpointFlowScalarJets hS hT rsel hrsel n x v"
+    },
+    "N01EndpointZeroGrowth": {
+      "N01Properties.endpointFlowCircle_circleNorm_local_growth_uniform_radius": "theorem N01Properties.endpointFlowCircle_circleNorm_local_growth_uniform_radius\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :\n    ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →\n      ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧\n      ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),\n      ∀ x ∈ sectorNeighborhood S base ε ε,\n      pairGrading (sectorGrading S) realGrading B x ≤ R →\n      circleNorm T (3 / 4 : ℝ) s ((S.circle (3 / 4 : ℝ)).decode (hN.endpointFlowCircle hS hT rsel hrsel x)) ≤\n        K * (1 + pairGrading (sectorGrading S) realGrading (s + L) x)"
+    },
+    "N01FlowCircleUniformBounds": {
+      "N01Properties.endpointFlowCircle_uniformFamilyJetBounds": "theorem N01Properties.endpointFlowCircle_uniformFamilyJetBounds\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)\n    (rsel : I → ℕ → ℝ)\n    (hrsel : ∀ i m, rsel i m ∈ Icc (C.left m) (C.right m))\n    (J : ∀ i, SmoothDirections (sectorNeighborhood S base ε ε)\n      (hN.endpointFlowCircle hS hT (rsel i) (hrsel i))) :\n    UniformFamilyJetBounds (pairGrading (sectorGrading S) realGrading)\n      (S.circle (3 / 4 : ℝ)).grading J"
+    }
+  },
+  "proof_checks": [
+    {
+      "step": "Interpolation common low base",
+      "finding": "TameInterpolationProducts selects max(requestedBase,max bp bq) before offset. The offset contributes only to loss=offset+lp+lq+1; the two-factor interpolation and finite order split constants are selected afterwards."
+    },
+    {
+      "step": "Localized state and quadratic budgets",
+      "finding": "LocalizedJetInterpolation selects B before oldLoss, hence before each parameter-order d. State/scalar input losses are inserted into high indices; oldBase+c+6 remains the low angular index. Its old public wrappers retain their earlier contracts."
+    },
+    {
+      "step": "Actual scalar/state endpoint tensors",
+      "finding": "State373 and Scalar114 use those common-base results on the genuine raw split estimates. Local259 chooses the maximum of their two bases once, then the maximum of losses at each n. Cyclic slot permutation and scalar/state tuple decomposition are actual endpointFlowScalarJets identities."
+    },
+    {
+      "step": "Homogeneous one-high estimate",
+      "finding": "OneHigh150 forms the actual algebraic map coordinate composed with liftCircleMultilinear, identifies its norm with circleNorm, and applies the restored algebraic normalization. It does not assume continuity of the raw tensor. B precedes n and K precedes all closed radius selectors."
+    },
+    {
+      "step": "One actual tower",
+      "finding": "CircleTower151 uses actual positive norm bounds and the local open-cover assembly/gluing. It returns a genuine tower of endpointFlowCircle and its decoded tensors. ZeroGrowth164 uses the actual segment from zero and the positive order-one bound with the same endpoint map."
+    },
+    {
+      "step": "Remaining useful adaptation",
+      "finding": "N01FlowCircleUniformBounds128 internally has the fixed positive B but exports UniformFamilyJetBounds, whose quantifier is still forall n exists base. A small actual same-J fixed-base grading extraction can preserve the stronger source quantifier instead of using that weaker conclusion."
+    }
+  ],
+  "normalization_compatibility": {
+    "old": {
+      "bytes": 8563,
+      "sha256": "1f6c08d38555fdb2135b8622216b86cb0aa89ab367c5fe2443854f5e079b361d",
+      "git_blob": "04e7e732ab5f0d16ba232b561bd612f93dff4c51",
+      "lines": 185,
+      "eof_lf": true
+    },
+    "selected": {
+      "bytes": 9718,
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "git_blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "lines": 204,
+      "eof_lf": true
+    },
+    "selected_equals_c5": true,
+    "seven_existing_public_headers_exactly_preserved": [
+      "multilinearTameSize",
+      "multilinearTameSize_nonneg",
+      "multilinearTameSize_le_affine",
+      "multilinear_bound_of_unitBall",
+      "multilinearNormalizationConstant",
+      "multilinearNormalizationConstant_nonneg",
+      "multilinear_oneHighFactor_of_local"
+    ],
+    "added_algebraic_public_heads": [
+      "multilinearMap_bound_of_unitBall",
+      "multilinearMap_oneHighFactor_of_local"
+    ],
+    "section_assumptions": "TopologicalSpace/AddCommGroup/Module assumptions unchanged; ContinuousConstSMul appears at the same local-normalization stage. The unit-ball proof uses algebraic map_smul_univ and a real positive-delta limit, not continuity of A.",
+    "all_new_main_named_call_sites": [
+      {
+        "path": "src/ContinuousFlexibility/Analysis/CircleInverseFamilyTame.lean",
+        "line": 30,
+        "call": "have h := multilinearMap_bound_of_unitBall A q low high hC hu (fun _ : Fin 1 => u)"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/CircleOuterCompositionBounds.lean",
+        "line": 90,
+        "call": "have h := multilinear_bound_of_unitBall A q low high hC hu (fun _ : Fin 1 => u)"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/CircleProductSmoothTame.lean",
+        "line": 189,
+        "call": "have hnormalized := multilinear_bound_of_unitBall B (q s)"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/FlatMixedDiagonalRealization.lean",
+        "line": 175,
+        "call": "have hnorm := multilinearMap_bound_of_unitBall A (normSeminorm ℝ ℝ)"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/JointMixedTameBounds.lean",
+        "line": 240,
+        "call": "have h := multilinearMap_bound_of_unitBall L (normSeminorm ℝ ℝ)"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/MixedDiagonalOneHighBounds.lean",
+        "line": 50,
+        "call": "have hb := multilinearMap_bound_of_unitBall A (normSeminorm ℝ ℝ)"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N01EndpointOneHigh.lean",
+        "line": 80,
+        "call": "have h := multilinearMap_bound_of_unitBall F"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N01cCompositionJetBounds.lean",
+        "line": 147,
+        "call": "apply multilinear_bound_of_unitBall A (normSeminorm ℝ Z)"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N01cEndpointMixedPowerNormalization.lean",
+        "line": 48,
+        "call": "have hn := multilinear_bound_of_unitBall Jscaled (normSeminorm ℝ ℝ)"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N01cFlowParameterNormalization.lean",
+        "line": 131,
+        "call": "apply multilinear_bound_of_unitBall A (normSeminorm ℝ F)"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N01cGradedJetContinuity.lean",
+        "line": 62,
+        "call": "have hn := multilinear_bound_of_unitBall A (normSeminorm ℝ ℝ) p 0 hC (a := 1)"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N01cMixedPowerNormalization.lean",
+        "line": 36,
+        "call": "have hn := multilinear_bound_of_unitBall (J.D k x) (normSeminorm ℝ ℝ)"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N01cOneHighProducts.lean",
+        "line": 225,
+        "call": "apply multilinear_bound_of_unitBall A q (p base) (p (s + loss))"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalGraphNormalization.lean",
+        "line": 57,
+        "call": "have hn := multilinear_bound_of_unitBall B (normSeminorm ℝ ℝ)"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/PhysicalMultilinearNormalization.lean",
+        "line": 44,
+        "call": "theorem physicalNorm_multilinear_bound_of_unitBall"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/PhysicalMultilinearNormalization.lean",
+        "line": 60,
+        "call": "have hb := multilinearMap_bound_of_unitBall L q low high hC"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionSourceNormBounds.lean",
+        "line": 116,
+        "call": "exact physicalNorm_multilinear_bound_of_unitBall (hS.1 (3 / 4 : ℝ)) (F z)"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameJetLocalBounds.lean",
+        "line": 191,
+        "call": "exact multilinear_oneHighFactor_of_local (J.D k x) (q s) (p (max base b))"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameUniformFamilyGrowth.lean",
+        "line": 236,
+        "call": "exact multilinear_bound_of_unitBall (A i x) (q s) (p base) (p (s + loss)) hC hlocal v"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameUniformGrowth.lean",
+        "line": 251,
+        "call": "exact multilinear_bound_of_unitBall (A x) (q s) (p base) (p (s + loss)) hC hlocal v"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameUniformGrowth.lean",
+        "line": 279,
+        "call": "exact multilinear_bound_of_unitBall (A x) (q s) (p base) (p (s + loss)) hC hlocal v"
+      }
+    ],
+    "local_call_typing_checked": [
+      "CircleInverseFamilyTame: actual ofSubsingleton of a LinearMap is algebraic; restored pure API matches.",
+      "N01EndpointOneHigh: projective coordinate composed with actual algebraic lift is algebraic; restored pure API matches.",
+      "FlatMixedDiagonalRealization, JointMixedTameBounds, MixedDiagonalOneHighBounds: genuine mixedParameterMultilinearMap is algebraic and accepted without added continuity.",
+      "PhysicalMultilinearNormalization: actual height lift algebraic map matches.",
+      "CircleOuterCompositionBounds and CircleProductSmoothTame: existing ContinuousMultilinearMap inputs still use the same CML heads.",
+      "Green TameJetLocalBounds and selected159/301 use unchanged CML heads."
+    ],
+    "compatibility_limit": "This is exact interface compatibility and inspected call-typing evidence, not a new compiled result for every consumer."
+  },
+  "explicit_exclusions_and_holds": [
+    "Do not select new-main N04bReferenceActualTravel into historical actual140 without its separately required four-call signature port.",
+    "Do not claim the unchanged new-main UniformFamilyJetBounds inverse/composition results have a fixed base before n.",
+    "Do not infer final CurrentJets, radial forcing estimates, retained-witness construction, or full mixed-pin compilation from this endpoint selection.",
+    "Original historical own sources, receipts and graphs remain unchanged."
+  ],
+  "budget": {
+    "authorized_group_new_lean_total": 1200,
+    "frozen_group_new_lean_used": 301,
+    "new_lean_created_by_this_selection": 0,
+    "remaining": 899
+  },
+  "compiled": false,
+  "no_active_source_index_refs_or_ci_changed": true
+}

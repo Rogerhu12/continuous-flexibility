@@ -1,0 +1,26 @@
+{
+  "label": 164,
+  "head": "c796387fb555392501c81f5b8bd834936251516c",
+  "tree": "08257c9406671ac1f094b739e4971c1eca108c66",
+  "main": "89e539ccf7e9c558467cf875f44dcff9490ce271",
+  "main_checked": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+  "main_workflow_file_integrated": {
+    "main": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+    "path": ".github/workflows/build.yml",
+    "sha256": "6e1b0a3c010b6988811399ec9a71c5f5f58ca7a83421e5cd3d28a3bbf5b8bb24",
+    "blob": "3152629f2ebb53a7af652218ea5bd2d64d16d493",
+    "method": "Exact workflow-only file copy; main ancestry remains pending dependency-complete source batches."
+  },
+  "pushed": "2026-11-12 18:57:21 UTC",
+  "first_check_not_before": "2026-11-12 19:02:21 UTC",
+  "status": "pending",
+  "plan": "n04-ci164-plan.json",
+  "source_total": 4302,
+  "source_all_total": 4306,
+  "root_imports": 4241,
+  "added_lean_since_full_green": 16992,
+  "main_source_batch": 2,
+  "main_source_batch_count": 5,
+  "source_files": 99,
+  "scope": "Current-main source cohort 2/5: primitive_reference_and_preserved_N01a_N01b_witness. Exact upstream sources with the independently reviewed common-provider port where applicable. All preimages and full import graph revalidated; no main ancestry claim yet. Complete CI is required before further activation."
+}

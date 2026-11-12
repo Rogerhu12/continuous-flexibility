@@ -1,0 +1,424 @@
+{
+  "kind": "actual_same_family_all_reference_atoms_independent_full_source_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "FULL_SOURCE_AND_EXACT_PROVIDER_REVIEW_PASSED_HELD_UNCOMPILED",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualWholeReferenceNonAuxiliaryJets.lean",
+      "sha256": "358d4e8fe47e1e83605184fe137d58f0045a1313923d3c30453b4ebb464c008e",
+      "blob": "f92cac74d1a7d5f0f5906e27bb2d1aad8c37cdd5",
+      "lines": 294,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualWholeReferenceNonAuxiliaryJets.lean"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualWholeReferenceJets.lean",
+      "sha256": "18cd7ce0a25f111952bab72d8dd3c346997a5911921a8eff8002a6eb92d87a78",
+      "blob": "46844fab38919d0d3808cbf39a16e63aae173e2e",
+      "lines": 151,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualWholeReferenceJets.lean"
+    }
+  ],
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualWholeReferenceJetsCandidateManifest.json",
+    "sha256": "5fbdb3b40d27be9cbdac1e73340713f2849b80a266ad43c4f3c964d0940393ce",
+    "blob": "cbd9a7091f222cfbdd582d253b48f408cd2eae2d",
+    "lines": 233
+  },
+  "full_source_lines_read": 445,
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFifteenAtoms.lean",
+      "sha256": "f5a8d53e84c32002efeaa216d916caa23c263b0b1c16b117d92fd0ac8fbb9e2c",
+      "blob": "bd18311eb7ab6f62d4ac8cc11c2218269675ed44",
+      "lines": 178
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveScalarColumnJets.lean",
+      "sha256": "5b430424e8d1f018305218e2066ad7057fb2a89acbb6eb8a55dd425e2b6ea826",
+      "blob": "3878a8163544ad203e2b04a6f58c4e11f0abc145",
+      "lines": 153
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativeGeometryJets.lean",
+      "sha256": "7ba90dfaa75886ba9da261af630d6c88df8190c24d6062f779e5ab946cfa26f5",
+      "blob": "011a1e88d8a9c7c1c427c0d97213a453e3f005a2",
+      "lines": 321
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePrincipalJets.lean",
+      "sha256": "a539b4ccf54410a7db50a43cf4b708c41d840820a3b7e5e9c107b36ba6867ecb",
+      "blob": "f7f3ec3c2aafb234fb77b69076de6e2873988e22",
+      "lines": 239
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePotentialReferenceJets.lean",
+      "sha256": "ec8d38f33f34bb4ab3c24f59a0ca586a391f749e793665a57f2b25070ece6212",
+      "blob": "42f4ee6bd9294182fd6f1f798a9f42df99e0a740",
+      "lines": 173
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeScalarColumnJets.lean",
+      "sha256": "0962726e582a33ac93e67b422f5ad36b1ee587acf5502fd081fb8dc013508186",
+      "blob": "c878dca87fbddbd6ac23d406a3c4d202096c8bd6",
+      "lines": 140
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeReferenceRegularity.lean",
+      "sha256": "fe580d742f806bef92bc561c3b39440d9ce69c9d74ab677a6a8d6b50576ffbf4",
+      "blob": "e24ecfd93b53589d3f757ad22473558cd853cfdf",
+      "lines": 235
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeStaticReferenceJets.lean",
+      "sha256": "ff06ea003b1f9979d6db4c054b904801cc4f9dbfea515c7ca4541d49106e9495",
+      "blob": "35434f32659a50bbbd7883b480beba91ea0b476e",
+      "lines": 113
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceDividedJets.lean",
+      "sha256": "b88fd4118e9e3ec46e9da0a49240ab4d107fc0ebbbfd2be043bf135add0330f9",
+      "blob": "eb7424e622d46576e131c1963cbda89515d96a0f",
+      "lines": 83
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalAuxiliaryAtomPreservation.lean",
+      "sha256": "c6aa5aeb70d35e64d328b6830ac462b63287ad5b3dd1c0f7e2ce0718b859a957",
+      "blob": "5090df125dd2c756ed0a4554caf9482ff6665cbe",
+      "lines": 68
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeAuxiliaryPackage.lean",
+      "sha256": "18b52a67b711ea53b05c41e736a3f767385cccc9bf9752f92f6a490fff85064a",
+      "blob": "505a22c75a965fc75bf35bf74e13175b7d95097a",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/PhysicalSpacesAuxiliaryColumn.lean",
+      "sha256": "b2848268baf18c447dccbfc7275b74ea927c679351768d214ede503f31424160",
+      "blob": "f51d3dac4fa34bdb9cd36c4588b5a490437d10b5",
+      "lines": 134
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalAuxiliaryReferenceJets.lean",
+      "sha256": "53646d7d69f62c0f132e8ae68e1ceeb0f8bd3ddabd89117dfd20f5af9fede39c",
+      "blob": "9a16fdb05086007f6c72692fce2e50b0acc58e30",
+      "lines": 132
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "lines": 311
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    }
+  ],
+  "provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFifteenAtomsReviewedManifest.json",
+      "sha256": "be633ee48d81fd7de671391b971824a1f9040120968576fecb1294c6b7356abe",
+      "blob": "f86b8b1a72aa3e004f6685344769f7730850659b",
+      "lines": 54
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveScalarColumnJetsReviewedManifest.json",
+      "sha256": "a3796ef4250af7c61c089f6491a815305100c6179886e216deeeb2a5e09635d6",
+      "blob": "58c73eb4bfc57201fa59794baa933d359f729177",
+      "lines": 58
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativeGeometryJetsReviewedManifest.json",
+      "sha256": "b7f51b7cf2fc61a8dbf4857133993fcff7def72ee3602e293a430a5041c9af7e",
+      "blob": "5573b5febd2d0b03cbfe4339f8d63ed6d23a0ec8",
+      "lines": 49
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePrincipalJetsReviewedManifest.json",
+      "sha256": "238b69b30d2406149938a681401f05dafac413ab38b9acf2ce83e2449c9c48b1",
+      "blob": "ec5419cf3a9a4b41b877bafad019d3286f9d711a",
+      "lines": 46
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePotentialReferenceJetsReviewedManifest.json",
+      "sha256": "579b554412f71c41123eef04c8998e63dc338664994dda557ad2e8ad5f328f88",
+      "blob": "bded6724112c11748c8fbef0543f44e375da0e8a",
+      "lines": 78
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeScalarColumnJetsReviewedManifest.json",
+      "sha256": "84cc328ec9160045e5b6c78b4615bee5f766421dd659497b37ac6420a81fd99f",
+      "blob": "9a9347ee24587abc53a9cf8e6f0eae6aee5085d2",
+      "lines": 28
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeStaticReferenceJetsReviewedManifest.json",
+      "sha256": "54bf460401a9a310c2e1485b48e8033eb2b030a0424391663c82236851e06fc6",
+      "blob": "12d94ba7ab1bbe3cd67efb00284de2e405e6f957",
+      "lines": 92
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceDividedJetsReviewedManifest.json",
+      "sha256": "11df8a32d30ef8cf38a54e924a207c145feac6ba5faf231ab40d5d576fa13cff",
+      "blob": "0453fc5c50a59d93b7a683a9772a459ead1c1da2",
+      "lines": 32
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeAuxiliaryPackageReviewedManifest.json",
+      "sha256": "0f257e3d9f2f62c70ffc6f6c2847caba776ea815464a185453ffd460a79a3e3a",
+      "blob": "50f3da5361605234e08480c84c30c57f0839af00",
+      "lines": 107
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasDataReviewedManifest.json",
+      "sha256": "701abf400f31e9d5bd990eff6d782e8878b3bb25e17a721750de8d04a4e319d7",
+      "blob": "89a4780b10a4d508b9d5ac33dd3abdf393efa901",
+      "lines": 23
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/N01ParameterOrderCorePortsReviewedManifest.json",
+      "sha256": "fb5f2f94e949515723cba8bd40549e47461693b8ae613313f568d5cf0c1aee18",
+      "blob": "8c880f0446ec9edb494782270177407dac82a580",
+      "lines": 74
+    }
+  ],
+  "post_freeze_provider_owner_addendum": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeReferenceRegularityReviewedManifest.json",
+    "sha256": "48c13821d83e219089ccad33b5007e8132e3039f15ddad48b48cc8cf0f7307df",
+    "blob": "4035d38ab200ace5359332c56ff6ae618a766eaf",
+    "lines": 35
+  },
+  "new_negative_independent_peers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/WholeReferenceGaugeNegativeScalarColumnJetsIndependentReview.json",
+      "sha256": "3651d475b3590bf764b19469aeca3a8bf4976cd9036c0a6ac26c3d89642d759b",
+      "blob": "032c2dddb4a3a874de1d0a04fe18a66f1d447f8f",
+      "lines": 140
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/WholeReferenceGaugeNegativeReferenceRegularityIndependentReview.json",
+      "sha256": "b9595f91ba71aff1622b7dbca46cce8f3d8dd14985271dae76630b8054ecb0eb",
+      "blob": "d23dd1ccccbd7c8db6f59b48b7db5a0163897e74",
+      "lines": 179
+    }
+  ],
+  "formal_provider_peer_fingerprints_verified": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/ActualPositiveReferenceFifteenAtomsIndependentReview.json",
+      "sha256": "a81a3bec75cd30c7a6028276cfb0fa9517f26bd0fda033c5d5e34c4060225c46",
+      "blob": "aee1f05b5e38c5991612aae788b169d63a44b2ff",
+      "lines": 89
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/WholeReferenceGaugePositiveGeometryJetsIndependentReview.json",
+      "sha256": "afacdc3687cb567396c5fd707eaa7069485db54beba62b9708627d96724b0a5d",
+      "blob": "b8ac56159c1fb2e55644665b89b937ee00f168c5",
+      "lines": 137
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/WholeReferenceGaugePositiveScalarColumnJetsIndependentReview.json",
+      "sha256": "55b03166cd7b14d3e25e9b411d1f5f7d6c74f62261e6fe4112b5b798523e3e1a",
+      "blob": "c1547ff047fb01e2c159e2539c9a764e8676c959",
+      "lines": 136
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/WholeReferenceGaugeNegativeGeometryJetsIndependentReview.json",
+      "sha256": "1189a25f85b42b390582ece1c7d08af09484b6c2bec5918fedea8cc994cc4842",
+      "blob": "425b27de8294f014e2707d17a4c72d0b34790680",
+      "lines": 230
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/WholeReferenceGaugeNegativePrincipalJetsIndependentReview.json",
+      "sha256": "d09dc4c252ac5fa15377aa335eb3362a4e63ee0e51ef5722f846a98f6b70f3d9",
+      "blob": "6e80dce6492272cd7d73ed033808de919d39cd99",
+      "lines": 190
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholeReferenceGaugeNegativePotentialReferenceJetsIndependentReview.json",
+      "sha256": "b9475c6af6cf243f22a23af13a653dec4ad91369b1e77cb92a9a6168b51e77aa",
+      "blob": "6e48f21e4f939d30e3ab2724cff871d13986cbe8",
+      "lines": 127
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ActualNegativeReferencePotentialMaterialJetsIndependentReview.json",
+      "sha256": "459ad8e893ea577c12b29b9e55515bfe5de451b3a8281d535c26ba24e9e3c012",
+      "blob": "667941612ec8b2e54641ebaf34c890b4762df048",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/WholeReferenceGaugeNegativeScalarColumnJetsIndependentReview.json",
+      "sha256": "3651d475b3590bf764b19469aeca3a8bf4976cd9036c0a6ac26c3d89642d759b",
+      "blob": "032c2dddb4a3a874de1d0a04fe18a66f1d447f8f",
+      "lines": 140
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/WholeReferenceGaugeStaticReferenceJetsIndependentReview.json",
+      "sha256": "2071c086ab6a06e1a5cec88bb97665bd9d0c06374702423da30cf28876fc38c5",
+      "blob": "7c2dafe634470a8e852090223b5370b8b047028e",
+      "lines": 157
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/CanonicalReferenceDividedJetsIndependentReview.json",
+      "sha256": "adc8a96cc0154a2e7d1a25de1b4f99e185c02336795322d2872df832d8b46270",
+      "blob": "6c055c394ec2fa84a5cd682a354294ec5f395722",
+      "lines": 80
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CanonicalAuxiliaryAtomPreservationIndependentReview.json",
+      "sha256": "ce97ae73759930c31462e8428bff85e5d8e1500c6c13a5563fe0816609a36d32",
+      "blob": "2dcad42ba663bfb4bd1b4b807ce21df7012c3be5",
+      "lines": 58
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/WholeReferenceGaugeAuxiliaryPackageIndependentReview.json",
+      "sha256": "1fc559d95f769a5914ceb6238d7780e44d70daf6bdb418ed5af56c056061235e",
+      "blob": "0791e05d8192fbb93ca29f5c1b7be474c1bc2653",
+      "lines": 100
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/WholeReferenceGaugeAtlasDataIndependentReview.json",
+      "sha256": "b1a632492a5d1c2199c1f446ca138af4a7571ba57c6d79c7bd533ac4003c530d",
+      "blob": "0b56a1350539b6fdad06455816d48d632db97a63",
+      "lines": 66
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/N01ParameterOrderCorePortsIndependentReview.json",
+      "sha256": "95f55482a3bb7e9e7848c3523f078484730fb880bc17b6f80e8424c3e3865a43",
+      "blob": "3991ed964295471751bfdf2381870fa5617b6d25",
+      "lines": 203
+    }
+  ],
+  "source_identity_checks": {
+    "all_manifest_sha256_git_blobs_linecounts_match": true,
+    "candidate_manifest_unchanged": true,
+    "source_bytes_unchanged": true,
+    "active_public_name_collisions": [],
+    "exact_33_constructor_order_checked": [
+      "chartRadial",
+      "chartAngleDefect",
+      "inverseRadial",
+      "inverseAngleDefect",
+      "height",
+      "heightInverse",
+      "jacobian",
+      "jacobianInverse",
+      "sourceFactor",
+      "sourceFactorInverse",
+      "principalA",
+      "principalAInverse",
+      "principalB",
+      "principalC",
+      "potential",
+      "dividedA",
+      "dividedB",
+      "dividedC",
+      "leftColumn",
+      "nuColumn",
+      "auxiliaryColumn",
+      "physicalLength",
+      "physicalLengthInverse",
+      "canonicalLength",
+      "canonicalLengthInverse",
+      "materialEll",
+      "materialEllInverse",
+      "ratioH",
+      "ratioHInverse",
+      "ratioM",
+      "ratioMInverse",
+      "ratioE0",
+      "ratioE0Inverse"
+    ]
+  },
+  "provider_read_scope": {
+    "complete_sources": [
+      "ActualPositiveReferenceFifteenAtoms.lean",
+      "WholeReferenceGaugePositiveScalarColumnJets.lean",
+      "WholeReferenceGaugeStaticReferenceJets.lean",
+      "CanonicalReferenceDividedJets.lean",
+      "CanonicalAuxiliaryAtomPreservation.lean",
+      "WholeReferenceGaugeAuxiliaryPackage.lean",
+      "PhysicalSpacesAuxiliaryColumn.lean",
+      "CanonicalAuxiliaryReferenceJets.lean",
+      "WholeReferenceGaugeAtlasData.lean"
+    ],
+    "complete_public_contracts_and_selected_proof_applications": [
+      "WholeReferenceGaugeNegativeGeometryJets.lean",
+      "WholeReferenceGaugeNegativePrincipalJets.lean",
+      "WholeReferenceGaugeNegativePotentialReferenceJets.lean"
+    ],
+    "owned_sources_read_and_independently_reviewed": [
+      "WholeReferenceGaugeNegativeScalarColumnJets.lean",
+      "WholeReferenceGaugeNegativeReferenceRegularity.lean"
+    ],
+    "actual_definitions": [
+      "Nonlinear.Atom",
+      "Nonlinear.CanonicalGeometry.atom",
+      "Nonlinear.CanonicalGeometry.ReferenceJets",
+      "Nonlinear.CanonicalGeometry.canonicalSource",
+      "OrdinaryFlowFamilyTameBounds",
+      "N01Properties",
+      "enlargedMaterialData",
+      "le_enlargedMaterialData_E0",
+      "one_le_enlargedMaterialData_E0"
+    ],
+    "scope_note": "The existing independent full reviews are preserved for upstream internal mathematics; this review reads both new bodies in full and verifies every actual supplier interface used by them, rather than claiming a new compilation or re-review of every upstream implementation."
+  },
+  "mathematical_checks": [
+    "The294 producer invokes actual178 exactly once. C0,B,the fixed degree-three width, degree-four endpoint slices,Y,H,the original K and the selected positive midpoint sample are definitionally the same throughout. The returned hfamily is that same existing family4 certificate.",
+    "The finite certificate projections are exact: hi.2.2.1 is width <= W and hi.2.1 is width inverse <= W. Those same data and the all-order hjets feed actual153; no second Y/H or arbitrary cutoff is selected.",
+    "The raw optical supplier hraw uses the existing C.cell m witness with hhost and hoptical. It does not identify that host with the original typed half sample or with a positive midpoint sample.",
+    "The negative239 producer supplies one all-order principal constant on the actual U atlas. Its reference-state specialization uses the true reference neighborhood membership and reference stateSector from the original hN. The numerical geometry321/potential173/scalar140 providers use precisely the same oldK, optical proposition and final U.",
+    "The originalT negative235 qualitative results are transported to U through full-function equality for the relevant eleven non-ratio atoms. Each geometry disjunct is explicitly embedded in the flat eleven-way predicate. Positive15 and positive2 use the same full-function identity and monotonicity of the unchanged positive sample cost.",
+    "E0 enlargement preserves sample,cell,H,M,ell and every geometric field. Original sample positivity is obtained from the explicit hE0 assumption when moving a positive bound to U; the exponent is positive. The stronger U sample floor is proved from actual material sample membership, and is used only for coefficient/exponent enlargement.",
+    "The two E0 ratio atoms are deliberately excluded from the full-function E0 transport. Both are supplied by actual113 staticReferenceJets on U, alongside the other ten static atoms; no old ratio estimate is silently transported.",
+    "At every s, BP,BC,BG,BN,BV,BZ,BS,BD are fixed before m,v,p and derivative indices. BM=1+their sum is positive and dominates every coefficient/exponent. Real.rpow_le_rpow_of_exponent_le is applied only with the verified same U sample >=1. mul_le_mul needs no unsupported positivity of the smaller arbitrary d.",
+    "The complete33-constructor case split has been mechanically compared with the frozen Atom declaration and has identical order/cardinality. The first theorem excludes only auxiliaryColumn. All three divided reference atoms use their actual literal sub_self quotient and hence the genuine all-order zero function.",
+    "The151 producer obtains the already chosen Y/H once from294 and calls the actual buffered auxiliary package once on that same V,buffer.region,and originalT. Its only added hypotheses are construction-stage CanonicalGeometry and ReferenceRadial for that exact V, not any final ReferenceJets or numerical atom bound.",
+    "The auxiliary replacement copies all state spaces,referenceState,sample metadata and geometric fields; only the physical psi is changed. canonicalAtom_replaceAuxiliaryColumn_of_ne applies at already enlarged U to all32 remaining constructors, including both E0 ratios. The target reference point and V-prime.cell reduce to the actual retained fields.",
+    "For ReferenceJets regularity, hother at s=0 gives exactly the smooth/period pair for every non-auxiliary atom and hauxRegular supplies the single auxiliary atom. For each s, max(B1,B2) is chosen before m,v,p,a,b and bounds both families by the proved U sample floor. The final conjunction is precisely the original ReferenceJets definition.",
+    "The final witness tuple preserves the same eta,interval,i,Q normalization,compact support,actual enlarged Through03,CanonicalGeometry,ReferenceRadial,AuxiliaryColumnGauge,zero auxiliary difference tower and all32 non-auxiliary full-function equalities. There is no further choice of a positive family or atlas."
+  ],
+  "lean_api_checks": [
+    "Every new theorem explicit argument order was compared with the actual selected suppliers, including153 extra K argument after s, the implicit K0 extracted from h\u03ba, and the all-state239 reference specialization.",
+    "The product/tuple nesting of actual178 finite data and of auxiliary111 was read in full. The final151 witness adds hreference in the correct position and discards only the older weaker combined T-to-U preservation clause in favor of the stronger same-U32-atom identity.",
+    "All parent-provider hashes, blobs and line counts match their immutable selected manifests; fourteen formal upstream peer receipts were independently fingerprinted. The previously pending235 owner is explicitly bound by an addendum; the parent candidate manifest remains unchanged.",
+    "Pinned mathlib Real.rpow_le_rpow requires nonnegative base, ordered bases and nonnegative exponent; Real.rpow_le_rpow_of_exponent_le requires base >=1 and ordered exponents. Both exact signatures and the displayed inequalities were verified.",
+    "The local let aliases for original A,positive Y/H,wholeV,U and auxiliary replacements are definitionally identical to provider fields. All uses of full-function equality occur on the actual atom function, so smoothness,periodicity and mixed derivatives transfer together."
+  ],
+  "pinned_mathlib": {
+    "commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "files": [
+      {
+        "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+        "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+        "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+        "lines": 1155
+      },
+      {
+        "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Order/GroupWithZero/Defs.lean",
+        "sha256": "01a908236dc99e5040cb487165c1a73fbd4e495d44183e6465f86b42f744dc02",
+        "blob": "40e8ee9d4c90cd7de002282692c26aff90da3ac2",
+        "lines": 472
+      }
+    ]
+  },
+  "scope_limits": [
+    "This is a static full-source review. No local Lean/elaboration, compilation, CI query, raised resource option, active source/index/ref edit or toolchain change was performed. Future CI still determines elaboration and performance.",
+    "The retained-coordinate,original optical host/lower and original sample-floor hypotheses remain explicit; this does not claim they can be projected from arbitrary Through03.",
+    "The second theorem assumes the actual construction-stage geometry and radiality of the same V. It produces full reference33 jets plus one coherent auxiliary replacement; it does not claim CurrentJets,CanonicalPrimitiveGeometry,transmission or the final N04 theorem."
+  ],
+  "definite_findings": [],
+  "source_changed": false,
+  "compiled": false,
+  "active_state_modified": false,
+  "created_at_utc": "2026-11-12T19:25:54.624100+00:00"
+}

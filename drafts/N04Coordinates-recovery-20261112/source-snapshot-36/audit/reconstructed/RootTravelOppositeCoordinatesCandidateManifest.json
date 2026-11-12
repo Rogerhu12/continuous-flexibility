@@ -1,0 +1,187 @@
+{
+  "kind": "same_travel_opposite_root_coordinate_actual_algebra_candidate",
+  "owner": "/root/audit_coordinates",
+  "status": "HELD_UNCOMPILED_AWAITING_FULL_INDEPENDENT_REVIEW",
+  "created_at_utc": "2026-11-12T19:30:05.391825+00:00",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RootTravelOppositeCoordinates.lean",
+    "target_path": "src/ContinuousFlexibility/Analysis/RootTravelOppositeCoordinates.lean",
+    "sha256": "49b821e72ffe428dfe9e072bcbdb9db5da23a83809aa058bb693cee1d2335ece",
+    "blob": "4958985473d488df7d4f447b3a12722aa2512689",
+    "bytes": 9438,
+    "lines": 197
+  },
+  "public_declarations": [
+    "n04bOppositeRootRadial",
+    "n04bOppositeRootMap",
+    "n04bTravelOrientation_not",
+    "n04b_rootHalfCoordinate_opposite",
+    "n04b_rootHalfCoordinate_travel_sum",
+    "n04b_rootPhysicalChart_opposite",
+    "n04bOppositeRootRadial_pos",
+    "n04b_contDiffAt_oppositeRootRadial",
+    "n04b_hasDerivAt_oppositeRootRadial",
+    "n04bRootDifferentialScale_opposite",
+    "n04b_fderiv_rootPhysicalChart_opposite",
+    "n04b_abs_planeJacobian_rootPhysicalChart_opposite",
+    "n04b_rootPhysicalHeight_opposite",
+    "n04b_nested_sqrt_ratio_eq_rpow",
+    "n04b_rootHalfCoordinate_normalized_sum",
+    "n04b_rootHalfCoordinate_normalized_opposite"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootCutPowers.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "8fc8d7556e88cf71599651ccab09313b4c0089b506c472b7d52a7c641c41d408",
+      "blob": "6eb3669a9f846a83de80722b7dd2d8779cdf1b94",
+      "bytes": 3526,
+      "lines": 89,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "6eb3669a9f846a83de80722b7dd2d8779cdf1b94",
+        "byte_equal": true
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootTravelIntervals.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "7e0938b188bf262b10fb148e6cf08428c1fa27e47aaa032770feae85470aea80",
+      "blob": "f1b26fa6eea80e225e7b305e0179a1720417e1a3",
+      "bytes": 6071,
+      "lines": 144,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "f1b26fa6eea80e225e7b305e0179a1720417e1a3",
+        "byte_equal": true
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootTravelDifferential.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "dec3f7fdccef46e0d43db9eed699626ae5e6a8a7567b2b20fc3def18283413ed",
+      "blob": "bd67589bb9af176fa7c25f9c7b1664bd47ed6d1b",
+      "bytes": 5541,
+      "lines": 129,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "bd67589bb9af176fa7c25f9c7b1664bd47ed6d1b",
+        "byte_equal": true
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootReparametrization.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "446966afde9bbb675d2416f5918d1f167cd44af6dfff82daa9c50bb378a117e8",
+      "blob": "91426bc1389ab3ddaf66195c3676966fd03f9432",
+      "bytes": 5127,
+      "lines": 115,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "91426bc1389ab3ddaf66195c3676966fd03f9432",
+        "byte_equal": true
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootInteriorRegularity.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "5b940dc8d06b838873fab1ed874034e430ee410f74ba6b007819b9e7dcbabe37",
+      "blob": "dfaf1caaf070c2f3f127d5578f6223e78e10acb0",
+      "bytes": 7043,
+      "lines": 151,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "dfaf1caaf070c2f3f127d5578f6223e78e10acb0",
+        "byte_equal": true
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bConstructedRootDensity.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "b59f3fe82209f565c6470c3c666e24680a45964c598d76e344649e141ba58f4c",
+      "blob": "32bb22fc7e17a99cf7273062ef7045f7f56bd859",
+      "bytes": 6921,
+      "lines": 131,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "32bb22fc7e17a99cf7273062ef7045f7f56bd859",
+        "byte_equal": true
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootTravelCharts.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "3d9439442dea831b5b918e47a2606e6e6460081be5e7b3e8beee0a2c052840a7",
+      "blob": "4c07f9e17218a4366860a3984a2e933033115a8b",
+      "bytes": 6609,
+      "lines": 146,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "4c07f9e17218a4366860a3984a2e933033115a8b",
+        "byte_equal": true
+      }
+    }
+  ],
+  "mathlib_sources": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Real/Sqrt.lean",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "sha256": "f4e96c735ead60a8983bcf8eb6e38dfd05d8102c3f741094f73639858605bb6a",
+      "blob": "92936ac2ea8d16aff301eecc8983d24e0b1f65d2",
+      "bytes": 18588,
+      "lines": 510
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "bytes": 50432,
+      "lines": 1155
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Comp.lean",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "sha256": "26495369d99d4815f99e8319623231a5fe25f0fdd1756c31162216323e27ed0f",
+      "blob": "067d19883550ab5637d02f038d451c42ab16e4b7",
+      "bytes": 44705,
+      "lines": 839
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Add.lean",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "sha256": "0c337370d60b27ce270b4efb71ecf5c7a2a11ddf2cda2ad19ba1049d7174b47c",
+      "blob": "240c7d41e7793d435af0d76db13ec9934d2bc411",
+      "bytes": 17177,
+      "lines": 476
+    }
+  ],
+  "selected_project_import_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RootTravelOppositeCoordinatesSelectedProviders.json",
+    "sha256": "ff9afd6e112447ad62fbd050778c227cc655d23170a26f50371cda14e09dab99",
+    "blob": "c69a7b75a82a8bdede9194a92bd8b4a4e1cc8511",
+    "bytes": 64810,
+    "lines": 1551,
+    "project_module_count": 147,
+    "missing": []
+  },
+  "scope": [
+    "One common full travel strip, one Bool side and its complement; no equality of moving and fixed half domains.",
+    "Exact chart and first differential at the same physical point; signed scale reverses orientation, absolute Jacobian changes by sqrt(opposite radial/target radial).",
+    "Same positive a and characteristic gap cancel from the height ratio; nested sqrt equals the stated one-quarter rpow.",
+    "The actual cut radius gives normalized powers summing to two and the literal normalized opposite coordinate (2-u^(3/2))^(2/3).",
+    "No CurrentJets, final material estimate, optical bound, arbitrary new atlas or inverse extension is supplied as a premise. The actual stored-field adapter is a subsequent authorized leaf."
+  ],
+  "checks": {
+    "new_public_name_collisions": [],
+    "forbidden_tokens": [],
+    "resource_limit_changes": false,
+    "compiled": false,
+    "active_sources_index_refs_CI_modified": false
+  },
+  "budget": {
+    "authorized_total_new_lean_lines": 700,
+    "this_source_lines": 197,
+    "remaining": 503
+  }
+}

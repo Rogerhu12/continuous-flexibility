@@ -1,0 +1,44 @@
+{
+  "schema": "n04-reviewed-source-selection-v1",
+  "owner": "/root",
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualWholeReferenceNonAuxiliaryJets.lean",
+      "sha256": "358d4e8fe47e1e83605184fe137d58f0045a1313923d3c30453b4ebb464c008e",
+      "blob": "f92cac74d1a7d5f0f5906e27bb2d1aad8c37cdd5",
+      "lines": 294,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualWholeReferenceNonAuxiliaryJets.lean"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualWholeReferenceJets.lean",
+      "sha256": "18cd7ce0a25f111952bab72d8dd3c346997a5911921a8eff8002a6eb92d87a78",
+      "blob": "46844fab38919d0d3808cbf39a16e63aae173e2e",
+      "lines": 151,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualWholeReferenceJets.lean"
+    }
+  ],
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualWholeReferenceJetsCandidateManifest.json",
+    "sha256": "5fbdb3b40d27be9cbdac1e73340713f2849b80a266ad43c4f3c964d0940393ce",
+    "blob": "cbd9a7091f222cfbdd582d253b48f408cd2eae2d",
+    "lines": 233
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/ActualWholeReferenceJetsIndependentReview.json",
+    "sha256": "766a1762872b98d62effa35e53bd5067d1fcd2afd65ba94c921f6d5faa8b8282",
+    "blob": "ae9e08b9f6446a38ed7d38438e52b3a95a777c94",
+    "lines": 424
+  },
+  "post_freeze_provider_owner_addendum": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeReferenceRegularityReviewedManifest.json",
+    "sha256": "48c13821d83e219089ccad33b5007e8132e3039f15ddad48b48cc8cf0f7307df",
+    "blob": "4035d38ab200ace5359332c56ff6ae618a766eaf",
+    "lines": 35
+  },
+  "selection": "Select both exact unchanged actual sources after full independent source/provider review and owner readback. The candidate manifest and all historical versions remain unchanged.",
+  "scope": "One actual positive reference family, original optical host and material samples, eight constants before all pieces/atoms, true E0 enlargement, then one buffered auxiliary replacement proving all 33 ReferenceJets atoms on the same U/V. Construction-stage geometry and radiality remain explicit.",
+  "remaining": "CurrentJets, moving-domain primitive geometry, transmission, final normalized N04 assembly and CI compilation are separate obligations.",
+  "compiled": false,
+  "active_source_index_refs_or_ci_changed": false
+}

@@ -1,0 +1,116 @@
+{
+  "kind": "actual_current_uniform_small_neighborhood_candidate",
+  "owner": "/root",
+  "status": "HELD_UNCOMPILED_AWAITING_FULL_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalCurrentUniformCloseness.lean",
+    "sha256": "d2209cdb8d2149a1352b1460874d4b8fcd3c14a66bbbcf09802e49689ab27edc",
+    "blob": "e74638a241371e2af4d3d140f77ed243a276f38c",
+    "bytes": 4646,
+    "lines": 94,
+    "target_path": "src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean",
+    "source_ref": "LOCAL_HELD_CANDIDATE",
+    "imports": [
+      "ContinuousFlexibility.Analysis.N07aNeighborhood",
+      "ContinuousFlexibility.Analysis.MaterialSampleBounds"
+    ]
+  },
+  "public_declarations": [
+    "n04Coordinates_currentAtoms_uniformly_close"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aNeighborhood.lean",
+      "sha256": "814ee5af91417d6b4e109bde34d8460e476d0b211c26a36fa60714df6dd83409",
+      "blob": "86b20bbbcad3781f00b90d3b7562ab700f99eef3",
+      "bytes": 10343,
+      "lines": 218,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aParameterGrading",
+        "ContinuousFlexibility.Analysis.N07aForwardCoefficients",
+        "ContinuousFlexibility.Analysis.TameTransfer"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aNeighborhood.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "86b20bbbcad3781f00b90d3b7562ab700f99eef3",
+      "main_1ece_comparison": "same"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046",
+      "blob": "19becb59903b44c18c8f1afb72726b2f95952752",
+      "bytes": 2965,
+      "lines": 66,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "green163_equal": true,
+      "main_1ece_blob": null,
+      "main_1ece_comparison": "absent"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+      "sha256": "6952ac2501bd38f0f6d51b1633f52d30ed1820f9380bd6dd58ebc24c601e1991",
+      "blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+      "bytes": 11512,
+      "lines": 250,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Analysis.TameLinear"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+      "main_1ece_comparison": "same"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "bytes": 101197,
+      "lines": 1773,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Contracts.Annular",
+        "ContinuousFlexibility.Scalar.NormalizedConservation",
+        "ContinuousFlexibility.Scalar.TypeCorrection",
+        "ContinuousFlexibility.Scalar.FormPullback",
+        "Mathlib.Topology.OpenPartialHomeomorph.Defs"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "main_1ece_comparison": "same"
+    }
+  ],
+  "selected_project_import_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalCurrentUniformClosenessSelectedProviders.json",
+    "sha256": "47efd638fa0e11dc3b2be16dc7c20e921fb8df503422275f411490a800865704",
+    "blob": "34a2298f4f8027d0c2ca5e8f8d805d67caeb5c37",
+    "bytes": 92671,
+    "lines": 1862
+  },
+  "project_modules": 103,
+  "scope": [
+    "The exact CurrentJets zero-order clause chooses one loss and one positive B before all pieces, atoms and unit points.",
+    "The same original T.H and T.E0 at exactly T.sample(K.cell m) obey the true positive-height-power absorption estimate. No equality between sample cells is assumed.",
+    "For any positive delta the actual radius min(epsilon,delta/(2*B*CH)) and base max(base,loss) make every true atom difference strictly smaller than delta, uniformly.",
+    "The original full CurrentJets tower is restricted using the existing proved neighborhood theorem; no synthetic directional derivatives or separate atom family is chosen.",
+    "The result can be applied at delta=1/4 for the cross-half range argument, but moving/reference domain membership and sample comparisons still require their actual geometric proofs."
+  ],
+  "checks": {
+    "new_lean_lines": 94,
+    "root_additional_new_lean_total": 385,
+    "root_current_allocation": 500,
+    "no_missing_imports_or_cycles": true,
+    "new_public_name_collisions": [],
+    "compiled": false,
+    "active_source_index_refs_or_CI_changed": false
+  },
+  "created_at_utc": "2026-11-12T19:45:49.747708+00:00"
+}

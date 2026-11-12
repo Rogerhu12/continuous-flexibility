@@ -1,0 +1,208 @@
+{
+  "kind": "same_full_travel_two_root_coordinates_independent_full_review",
+  "reviewer": "/root",
+  "result": "FULL_SOURCE_AND_EXACT_PROVIDER_REVIEW_PASSED_HELD_UNCOMPILED",
+  "reviewed_at_utc": "2026-11-12T19:33:47.318182+00:00",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RootTravelOppositeCoordinates.lean",
+    "target_path": "src/ContinuousFlexibility/Analysis/RootTravelOppositeCoordinates.lean",
+    "sha256": "49b821e72ffe428dfe9e072bcbdb9db5da23a83809aa058bb693cee1d2335ece",
+    "blob": "4958985473d488df7d4f447b3a12722aa2512689",
+    "bytes": 9438,
+    "lines": 197
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RootTravelOppositeCoordinatesCandidateManifest.json",
+    "sha256": "f664efc83ffd1528e2f577250cdaa84d615f910f850fe7d9ce63be2c2a9e5277",
+    "blob": "3f7d5e7dc749bca3d9e8b56bd7161c77e3b90682",
+    "lines": 187
+  },
+  "full_source_lines_read": 197,
+  "providers_read_in_full": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootCutPowers.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "8fc8d7556e88cf71599651ccab09313b4c0089b506c472b7d52a7c641c41d408",
+      "blob": "6eb3669a9f846a83de80722b7dd2d8779cdf1b94",
+      "bytes": 3526,
+      "lines": 89,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "6eb3669a9f846a83de80722b7dd2d8779cdf1b94",
+        "byte_equal": true
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootTravelIntervals.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "7e0938b188bf262b10fb148e6cf08428c1fa27e47aaa032770feae85470aea80",
+      "blob": "f1b26fa6eea80e225e7b305e0179a1720417e1a3",
+      "bytes": 6071,
+      "lines": 144,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "f1b26fa6eea80e225e7b305e0179a1720417e1a3",
+        "byte_equal": true
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootTravelDifferential.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "dec3f7fdccef46e0d43db9eed699626ae5e6a8a7567b2b20fc3def18283413ed",
+      "blob": "bd67589bb9af176fa7c25f9c7b1664bd47ed6d1b",
+      "bytes": 5541,
+      "lines": 129,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "bd67589bb9af176fa7c25f9c7b1664bd47ed6d1b",
+        "byte_equal": true
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootReparametrization.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "446966afde9bbb675d2416f5918d1f167cd44af6dfff82daa9c50bb378a117e8",
+      "blob": "91426bc1389ab3ddaf66195c3676966fd03f9432",
+      "bytes": 5127,
+      "lines": 115,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "91426bc1389ab3ddaf66195c3676966fd03f9432",
+        "byte_equal": true
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootInteriorRegularity.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "5b940dc8d06b838873fab1ed874034e430ee410f74ba6b007819b9e7dcbabe37",
+      "blob": "dfaf1caaf070c2f3f127d5578f6223e78e10acb0",
+      "bytes": 7043,
+      "lines": 151,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "dfaf1caaf070c2f3f127d5578f6223e78e10acb0",
+        "byte_equal": true
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bConstructedRootDensity.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "b59f3fe82209f565c6470c3c666e24680a45964c598d76e344649e141ba58f4c",
+      "blob": "32bb22fc7e17a99cf7273062ef7045f7f56bd859",
+      "bytes": 6921,
+      "lines": 131,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "32bb22fc7e17a99cf7273062ef7045f7f56bd859",
+        "byte_equal": true
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootTravelCharts.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "3d9439442dea831b5b918e47a2606e6e6460081be5e7b3e8beee0a2c052840a7",
+      "blob": "4c07f9e17218a4366860a3984a2e933033115a8b",
+      "bytes": 6609,
+      "lines": 146,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "4c07f9e17218a4366860a3984a2e933033115a8b",
+        "byte_equal": true
+      }
+    }
+  ],
+  "selected_project_import_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RootTravelOppositeCoordinatesSelectedProviders.json",
+    "sha256": "ff9afd6e112447ad62fbd050778c227cc655d23170a26f50371cda14e09dab99",
+    "blob": "c69a7b75a82a8bdede9194a92bd8b4a4e1cc8511",
+    "bytes": 64810,
+    "lines": 1551,
+    "project_module_count": 147,
+    "missing": []
+  },
+  "closure_verification": {
+    "exact_nodes": 147,
+    "all_source_hashes_and_import_edges_verified": true,
+    "closure_reachability_verified": true,
+    "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67"
+  },
+  "mathlib_signature_sources": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Real/Sqrt.lean",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "sha256": "f4e96c735ead60a8983bcf8eb6e38dfd05d8102c3f741094f73639858605bb6a",
+      "blob": "92936ac2ea8d16aff301eecc8983d24e0b1f65d2",
+      "bytes": 18588,
+      "lines": 510
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "bytes": 50432,
+      "lines": 1155
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Comp.lean",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "sha256": "26495369d99d4815f99e8319623231a5fe25f0fdd1756c31162216323e27ed0f",
+      "blob": "067d19883550ab5637d02f038d451c42ab16e4b7",
+      "bytes": 44705,
+      "lines": 839
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Add.lean",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "sha256": "0c337370d60b27ce270b4efb71ecf5c7a2a11ddf2cda2ad19ba1049d7174b47c",
+      "blob": "240c7d41e7793d435af0d76db13ec9934d2bc411",
+      "bytes": 17177,
+      "lines": 476
+    }
+  ],
+  "additional_mathlib_signature_source": {
+    "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+    "sha256": "78fca2cc5f69fe7f7cf42cb31480aa15068851dae795e1d5fad62f62a28c4145",
+    "blob": "afdc3e3a27aad5f24293a47dc82304dfab84979d",
+    "lines": 985
+  },
+  "public_declarations": [
+    "n04bOppositeRootRadial",
+    "n04bOppositeRootMap",
+    "n04bTravelOrientation_not",
+    "n04b_rootHalfCoordinate_opposite",
+    "n04b_rootHalfCoordinate_travel_sum",
+    "n04b_rootPhysicalChart_opposite",
+    "n04bOppositeRootRadial_pos",
+    "n04b_contDiffAt_oppositeRootRadial",
+    "n04b_hasDerivAt_oppositeRootRadial",
+    "n04bRootDifferentialScale_opposite",
+    "n04b_fderiv_rootPhysicalChart_opposite",
+    "n04b_abs_planeJacobian_rootPhysicalChart_opposite",
+    "n04b_rootPhysicalHeight_opposite",
+    "n04b_nested_sqrt_ratio_eq_rpow",
+    "n04b_rootHalfCoordinate_normalized_sum",
+    "n04b_rootHalfCoordinate_normalized_opposite"
+  ],
+  "mathematical_checks": [
+    "Both orientations are handled by one Bool and its negation. Full-strip membership gives strictly positive complementary travels, with no fixed-half/moving-half identification.",
+    "The existing root-coordinate/root-travel inverse gives both the opposite radial formula and the sum of actual root travel values equal to T. The angle is the same actual F angle.",
+    "The opposite radial derivative is minus sqrt(input)/sqrt(output). All fractional-power differentiability is used only at strictly positive arguments; no root-endpoint smoothness is asserted.",
+    "The actual differential scale reverses sign. The arbitrary-direction differential identity uses the existing real chart derivative, so both columns are covered by one lemma.",
+    "The existing planeJacobian formula and positive radial coordinates yield abs(J_target)=abs(J_other)*sqrt(radial_other/radial_target), without assuming a numerical Jacobian bound or an inverse extension.",
+    "The same actual a and characteristic gap v at the physical point cancel from height=sqrt(a*v/sqrt(radial)) inverse. Positive denominators justify the nested-square-root ratio and its one-quarter real-power form.",
+    "The original cut radius satisfies rootTravel(rho)=T/2. Together with the exact travel sum this proves target_normalized^(3/2)+other_normalized^(3/2)=2 and the literal opposite formula (2-other_normalized^(3/2))^(2/3).",
+    "These identities hold in the full open component including the artificial middle cut. The later [1,5/4] numerical range and stored-atlas germ substitution are not claimed by this source."
+  ],
+  "lean_api_checks": [
+    "Read all 197 new lines and all seven direct root-coordinate/differential/density provider files in full. Verified exact provider bytes at full-green 18f and current main 1ece.",
+    "Compared the pinned sqrt_div, sqrt_div-prime, rpow_mul, div_rpow and HasDerivAt.congr_deriv/const_sub signatures. The positivity and argument order used by each invocation match.",
+    "Existing root derivative and Jacobian interfaces use the actual F and the same side/travel point. New changes unfold owned definitions; continuous linear map values are obtained from the existing apply theorem.",
+    "All 16 new declaration names are absent from active HEAD and fixed main 1ece. Forbidden proof-hole/axiom/unsafe/native_decide/resource-limit patterns are absent."
+  ],
+  "findings": [],
+  "limitations": [
+    "Static source review only; no Lean/elaboration, CI, active source/index/ref edit or resource change.",
+    "The lemma supplies true raw coordinate transition identities. A separate actual stored-field adapter must discharge the raw field assumptions, and CurrentJets/material/primitive/transmission completion remains open."
+  ]
+}

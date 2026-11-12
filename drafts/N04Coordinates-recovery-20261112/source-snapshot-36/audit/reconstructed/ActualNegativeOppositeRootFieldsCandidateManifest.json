@@ -1,0 +1,211 @@
+{
+  "kind": "actual_same_atlas_negative_opposite_root_fields_candidate",
+  "owner": "/root/audit_coordinates",
+  "status": "HELD_UNCOMPILED_AWAITING_FULL_INDEPENDENT_REVIEW",
+  "created_at_utc": "2026-11-12T19:35:45.115724+00:00",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeOppositeRootFields.lean",
+    "sha256": "79c1ad3c7f0c9556ba2e4ed4d57c0dc28e947a590754063df9c7ec3290110309",
+    "blob": "035ac75cd9c6946549ed205dcb6f43940aabbc51",
+    "bytes": 12577,
+    "lines": 256,
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeOppositeRootFields.lean"
+  },
+  "public_declarations": [
+    "n04bOppositeRootHeightFactor",
+    "n04bOppositeRootJacobianFactor",
+    "n04b_contDiffAt_oppositeRootFactors",
+    "n04bActualTypedAtlas_negative_opposite_fields_at",
+    "n04bActualTypedAtlas_negative_opposite_germs",
+    "n04bActualTypedAtlas_negative_opposite_firstJets",
+    "n04bActualTypedAtlas_negative_opposite_ratios",
+    "n04bActualTypedAtlas_negative_opposite_normalized"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RootTravelOppositeCoordinates.lean",
+      "sha256": "49b821e72ffe428dfe9e072bcbdb9db5da23a83809aa058bb693cee1d2335ece",
+      "blob": "4958985473d488df7d4f447b3a12722aa2512689",
+      "bytes": 9438,
+      "lines": 197
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasGerms.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "5abee83c1a68e2b04a6d733f7e51473a15453d5debda0e8526106462e3b4d73e",
+      "blob": "0bf89b2339f60ac8ba2cf9678637f4bf96830a66",
+      "bytes": 4540,
+      "lines": 94,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "0bf89b2339f60ac8ba2cf9678637f4bf96830a66",
+        "byte_equal": true
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualRootInterior.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "e48818ca3333c9e39ad2b5cf2528733a278f2aa2921a83508be9f8e4c759e66c",
+      "blob": "f59704e802cdf7bd9ae8a66504974410052233e0",
+      "bytes": 5228,
+      "lines": 105,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "f59704e802cdf7bd9ae8a66504974410052233e0",
+        "byte_equal": true
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualTravelChart.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "5c7da22817d01115c5837f791ed4ba939d9f097c5ad547cb4882d02e435fb30a",
+      "blob": "a1b60844375f7e23349c24356cd300a76a6fd72e",
+      "bytes": 11057,
+      "lines": 229,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "a1b60844375f7e23349c24356cd300a76a6fd72e",
+        "byte_equal": true
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bFieldRegularity.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "e9785ca55354e5eb97a0243c085d2ddfefdd0d302b70fb9ee759fdde7591ca55",
+      "blob": "0accc70bea719eb47f46bcde4989c99798027273",
+      "bytes": 2927,
+      "lines": 59,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "fc6a92f96c18e23d8b87eb0f3385909c90154194",
+        "byte_equal": false
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootInteriorRegularity.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "5b940dc8d06b838873fab1ed874034e430ee410f74ba6b007819b9e7dcbabe37",
+      "blob": "dfaf1caaf070c2f3f127d5578f6223e78e10acb0",
+      "bytes": 7043,
+      "lines": 151,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "dfaf1caaf070c2f3f127d5578f6223e78e10acb0",
+        "byte_equal": true
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootTravelDifferential.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "dec3f7fdccef46e0d43db9eed699626ae5e6a8a7567b2b20fc3def18283413ed",
+      "blob": "bd67589bb9af176fa7c25f9c7b1664bd47ed6d1b",
+      "bytes": 5541,
+      "lines": 129,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "bd67589bb9af176fa7c25f9c7b1664bd47ed6d1b",
+        "byte_equal": true
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bConstructedRootDensity.lean",
+      "pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "b59f3fe82209f565c6470c3c666e24680a45964c598d76e344649e141ba58f4c",
+      "blob": "32bb22fc7e17a99cf7273062ef7045f7f56bd859",
+      "bytes": 6921,
+      "lines": 131,
+      "new_main_comparison": {
+        "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+        "blob": "32bb22fc7e17a99cf7273062ef7045f7f56bd859",
+        "byte_equal": true
+      }
+    }
+  ],
+  "selected_algebra_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RootTravelOppositeCoordinatesReviewedManifest.json",
+    "sha256": "2a6a53f984a6d429c848ece8df3e178d73a1ea57c10ea00d925b01c1370ff348",
+    "blob": "b14346ea157c0d11791587fe0813a66e8adaee5a",
+    "bytes": 1392,
+    "lines": 27
+  },
+  "selected_project_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeOppositeRootFieldsSelectedProviders.json",
+    "sha256": "6c8e5f060ec4dfc0b14e3800d8c10b1cb22e876c34196c8f794ab2522d7c34ba",
+    "blob": "260c4329925aeefaea035ef39bd04e2d0e3f119e",
+    "bytes": 256420,
+    "lines": 5379,
+    "project_module_count": 426,
+    "missing": [],
+    "cycles": []
+  },
+  "mathlib_api_sources": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/FDeriv/Congr.lean",
+      "sha256": "4313c8cb8eab170a664df2753f3f1a59ac7f3ecd3f405b9b34e64c966430fa73",
+      "blob": "da599f75bd35b874f08b3fb7b326c2679500eefb",
+      "bytes": 14914,
+      "lines": 309,
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e"
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Neighborhoods.lean",
+      "sha256": "bd9f85999a8b70e960e1fa9d913ba4d64ebcaa2df04b60ddf2b460d04ff97435",
+      "blob": "664a41d5be85fe2ca5e3b8b8e5ab2c71b4f61cc6",
+      "bytes": 17699,
+      "lines": 381,
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e"
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Real/Sqrt.lean",
+      "sha256": "f4e96c735ead60a8983bcf8eb6e38dfd05d8102c3f741094f73639858605bb6a",
+      "blob": "92936ac2ea8d16aff301eecc8983d24e0b1f65d2",
+      "bytes": 18588,
+      "lines": 510,
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e"
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Sqrt.lean",
+      "sha256": "38c916b763ade8ed7174488bad31aee40735d03877a1bf9e540c1cf0107ec1ab",
+      "blob": "97eb457d12cd8d572257fca6f330c5b3788f7dd9",
+      "bytes": 6406,
+      "lines": 167,
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e"
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Deriv.lean",
+      "sha256": "9098e465d4b2a9898352ad3eb944c1b76fa7bd010862391f790d57f59ab59d25",
+      "blob": "5c4314cbc0f51719245bc3b268948275c4a21812",
+      "bytes": 37091,
+      "lines": 778,
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e"
+    }
+  ],
+  "mathematical_checks": [
+    "Same original n04bActualTypedAtlas and two original indices certified e k=inl(m,side), e k′=inl(m,!side); no new field, half, sample, component or travel choice.",
+    "All identities are obtained at p in the true full negative component using actualTravelChart_bijOn/smooth, the actual positive a/half-gap, and negative_component_germs.",
+    "The full-component open neighborhood yields literal chart/height/absolute-Jacobian germs. fderiv_eq uses explicit scalar field ℝ; the chart has an explicit signed first-row multiplier and unchanged second row.",
+    "The height and Jacobian quotient forms cancel genuine stored nonzero denominators from actualRootPhysical_regular_at, not an assumed final transport target.",
+    "With actual rho=RootCutRadius(C.travel m), u=opposite radial/rho and v=target radial/rho, the original stored fields satisfy v^(3/2)+u^(3/2)=2, v=(2-u^(3/2))^(2/3), Htarget/Hopposite=(v/u)^(1/4), and absJtarget/absJopposite=sqrt(u/v).",
+    "The scalar conversion factors are genuinely smooth at every positive xi with RootTravel(xi)<C.travel m. Fixed compact bounds and transfer of high material jets are not claimed here."
+  ],
+  "new_main_scope": {
+    "commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "selected_pin_unchanged": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+    "unchanged_direct_function_provider_count": 6,
+    "known_semantic_change": "N04bFieldRegularity gains reference_flow and toReturnCorrectionSpatialProperties. This source uses only its unchanged positive_a plus the unchanged actual open-component providers. No ReferenceActualTravel/ReferenceActualDomains function with the new shortened binder list is called; the entire selected graph remains explicitly old-pin, not asserted interchangeable with main."
+  },
+  "checks": {
+    "public_collisions": [],
+    "forbidden_tokens": [],
+    "resource_limits_changed": false,
+    "compiled": false,
+    "active_sources_index_refs_CI_modified": false
+  },
+  "budget": {
+    "root_authorized_new_lean_lines": 700,
+    "algebra_lines": 197,
+    "adapter_lines": 256,
+    "total_new_lean_lines": 453,
+    "remaining_lines": 247
+  }
+}

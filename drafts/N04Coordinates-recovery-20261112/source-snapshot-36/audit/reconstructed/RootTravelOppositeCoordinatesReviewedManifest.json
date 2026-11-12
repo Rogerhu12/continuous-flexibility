@@ -1,0 +1,27 @@
+{
+  "kind": "same_travel_opposite_root_coordinate_reviewed_manifest",
+  "owner": "/root/audit_coordinates",
+  "status": "FULL_SOURCE_INDEPENDENT_REVIEW_PASSED_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RootTravelOppositeCoordinates.lean",
+    "sha256": "49b821e72ffe428dfe9e072bcbdb9db5da23a83809aa058bb693cee1d2335ece",
+    "blob": "4958985473d488df7d4f447b3a12722aa2512689",
+    "lines": 197
+  },
+  "candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RootTravelOppositeCoordinatesCandidateManifest.json",
+    "sha256": "f664efc83ffd1528e2f577250cdaa84d615f910f850fe7d9ce63be2c2a9e5277",
+    "blob": "3f7d5e7dc749bca3d9e8b56bd7161c77e3b90682",
+    "lines": 187
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/RootTravelOppositeCoordinatesIndependentReview.json",
+    "sha256": "98c8a7c683a9bbab07e12b15872123222e84547c5ca2d697748cd636407b7c61",
+    "blob": "dc71c958896996c2529e820ac091b6057e84764f",
+    "lines": 208
+  },
+  "scope": "Actual raw full-travel two-root algebra, first derivatives, height and Jacobian factors, normalized radius formula. The actual stored-field adapter remains separate.",
+  "compiled": false,
+  "active_sources_index_refs_CI_modified": false,
+  "created_at_utc": "2026-11-12T19:34:30.442498+00:00"
+}

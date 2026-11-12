@@ -1,0 +1,284 @@
+{
+  "kind": "actual_reference_current_to_sector_canonical_estimate_candidate",
+  "owner": "/root",
+  "status": "HELD_UNCOMPILED_AWAITING_FULL_INDEPENDENT_REVIEW",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceCurrentAbsoluteJets.lean",
+      "sha256": "c1b05760d478ef2e0e480010ae0b985db327927ac4178153660f79ef6a15c699",
+      "blob": "74e009ae51c272ef758c21447a9f494156e3d6ec",
+      "bytes": 5173,
+      "lines": 109,
+      "target_path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceCurrentSectorBounds.lean",
+      "sha256": "eb172cebbdc78d439c150c38aa23c945c488d614b5255f8d0736c928ddb94731",
+      "blob": "14715ca2fbc5ad6b63e18b324e88817c96e245b7",
+      "bytes": 9203,
+      "lines": 182,
+      "target_path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentSectorBounds.lean"
+    }
+  ],
+  "public_declarations": [
+    "n04Coordinates_reference_canonicalLengthInverse_envelope",
+    "n04Coordinates_unitAtom_absolute_envelope",
+    "n04Coordinates_canonicalAtom_absolute_envelope",
+    "n04Coordinates_sectorParameterOfState_grading",
+    "n04Coordinates_sectorCanonicalJetBounds_of_reference_current"
+  ],
+  "selected_project_import_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceCurrentSectorBoundsSelectedProviders.json",
+    "sha256": "f7df61bf5ca885b8a5df42e774396d44811f9d2568928131247177b01f4750ec",
+    "blob": "7944d5287f3f222e82adebf9b3fa4648ed40619c",
+    "bytes": 324808,
+    "lines": 6344
+  },
+  "project_modules": 359,
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aGeometryJetBounds.lean",
+      "sha256": "5eb75a3b06a90cf2611b95ca8ce9098ba95c057e7627a4bcf1a8d756bc02c498",
+      "blob": "e1e7c43bac69e82dbd72c609763521ad1472682b",
+      "bytes": 5954,
+      "lines": 119,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aMaterialProductBounds",
+        "ContinuousFlexibility.Analysis.N07aMixedLocalCalculus",
+        "ContinuousFlexibility.Analysis.N07aNeighborhood"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aGeometryJetBounds.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "e1e7c43bac69e82dbd72c609763521ad1472682b",
+      "main_1ece_comparison": "same"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046",
+      "blob": "19becb59903b44c18c8f1afb72726b2f95952752",
+      "bytes": 2965,
+      "lines": 66,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "green163_equal": true,
+      "main_1ece_blob": null,
+      "main_1ece_comparison": "absent"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aCanonicalAtomBounds.lean",
+      "sha256": "a162c68611e25b6851e7d0a582437100ddd24c28ec65acd32ee002975087b0e7",
+      "blob": "7f58525255a1dd409689e8b21ba4bab30a4af3c5",
+      "bytes": 4894,
+      "lines": 102,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aGeometryLengthBounds",
+        "ContinuousFlexibility.Analysis.N07aSampleJetBounds"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aCanonicalAtomBounds.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "7f58525255a1dd409689e8b21ba4bab30a4af3c5",
+      "main_1ece_comparison": "same"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aGeometryLengthBounds.lean",
+      "sha256": "31f0cce08f7612f3fdee200cc3f077796510bd12534af8287a6b866ba0b2c47b",
+      "blob": "2c336c9315bc5aa70efc149544448e30a2be0967",
+      "bytes": 4072,
+      "lines": 89,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aGeometryJetBounds",
+        "ContinuousFlexibility.Analysis.N07aSampleEnvelopes",
+        "ContinuousFlexibility.Analysis.N07aCurrentPrincipalBounds"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aGeometryLengthBounds.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "2c336c9315bc5aa70efc149544448e30a2be0967",
+      "main_1ece_comparison": "same"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "sha256": "bbec6c5ccb9e0d9bcf75516b8c9024e4f15c2e834119822ace6da3c4e70fd51c",
+      "blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "bytes": 5638,
+      "lines": 128,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients",
+        "ContinuousFlexibility.Statements.N07aCanonicalGeometry",
+        "Mathlib.Analysis.Calculus.Deriv.CompMul",
+        "Mathlib.Analysis.Calculus.Deriv.Shift"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "main_1ece_comparison": "same"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aScalarSolution.lean",
+      "sha256": "89bc0865e47eb789bc7ccf457ca841b403df0752e62b463a700cbd94c21209fe",
+      "blob": "a77ae6ed52b89b6c4edd7b2bc9521f9406889f52",
+      "bytes": 9198,
+      "lines": 183,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aCorrectedForward",
+        "ContinuousFlexibility.Analysis.N07aNormalizedSpaces",
+        "ContinuousFlexibility.Analysis.SolveReturnEquations"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aScalarSolution.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "a77ae6ed52b89b6c4edd7b2bc9521f9406889f52",
+      "main_1ece_comparison": "same"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "bytes": 14988,
+      "lines": 311,
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "ContinuousFlexibility.Analysis.MaterialSampleBounds",
+        "ContinuousFlexibility.Analysis.N01JetBounds"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "green163_equal": true,
+      "main_1ece_blob": null,
+      "main_1ece_comparison": "absent"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalJetNormalization.lean",
+      "sha256": "376dea5b9a6281f63b21f6aeefd9273dc4aadc8a13629ad39d22c88320353288",
+      "blob": "d2373f98afac2769d0ae67daa6b56d8bbadebb40",
+      "bytes": 14499,
+      "lines": 276,
+      "imports": [
+        "ContinuousFlexibility.Blueprint.CanonicalParts",
+        "ContinuousFlexibility.Analysis.N04bGeometryPreservation"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/CanonicalJetNormalization.lean",
+      "green163_equal": true,
+      "main_1ece_blob": null,
+      "main_1ece_comparison": "absent"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalCoordinateCompletion.lean",
+      "sha256": "a9e912be4e6ce2a2904363acbe65c11386d212e63bab041a80e83a7f8242cf79",
+      "blob": "f5f28f3b222a19598d19053d75314972fbc6c104",
+      "bytes": 3099,
+      "lines": 65,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalJetNormalization",
+        "ContinuousFlexibility.Analysis.CanonicalSourceConversion"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/CanonicalCoordinateCompletion.lean",
+      "green163_equal": true,
+      "main_1ece_blob": null,
+      "main_1ece_comparison": "absent"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+      "sha256": "6952ac2501bd38f0f6d51b1633f52d30ed1820f9380bd6dd58ebc24c601e1991",
+      "blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+      "bytes": 11512,
+      "lines": 250,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Analysis.TameLinear"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+      "main_1ece_comparison": "same"
+    }
+  ],
+  "frozen_definitions": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "bytes": 101197,
+      "lines": 1773,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Contracts.Annular",
+        "ContinuousFlexibility.Scalar.NormalizedConservation",
+        "ContinuousFlexibility.Scalar.TypeCorrection",
+        "ContinuousFlexibility.Scalar.FormPullback",
+        "Mathlib.Topology.OpenPartialHomeomorph.Defs"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "main_1ece_comparison": "same"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "bytes": 30441,
+      "lines": 603,
+      "imports": [
+        "ContinuousFlexibility.Statements.Radial",
+        "ContinuousFlexibility.Analysis.BastianiCurveChain",
+        "ContinuousFlexibility.Analysis.ExponentialSequenceSpace",
+        "ContinuousFlexibility.Analysis.MaterialIntervalWeights",
+        "ContinuousFlexibility.Analysis.TameLinear",
+        "Mathlib.Analysis.InnerProductSpace.PiL2",
+        "Mathlib.MeasureTheory.Function.L2Space",
+        "Mathlib.Topology.Algebra.Module.Multilinear.Basic"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Statements/Analysis.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "main_1ece_comparison": "same"
+    }
+  ],
+  "mathlib_signature_sources": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "bytes": 50432,
+      "lines": 1155
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Order/GroupWithZero/Basic.lean",
+      "sha256": "6526bf3a919d5306c90daf75cf96cfe3bbfacc702f3858fb00f893f7346e2cbd",
+      "blob": "335ef50464487b5763d4ad885d55d83b00964f1b",
+      "bytes": 64250,
+      "lines": 1474
+    }
+  ],
+  "mathematical_scope": [
+    "One loss from CurrentJets clause2 is chosen before every spatial order; no parameter tower or loss is replaced.",
+    "Actual sample H^(3/4) is uniformly bounded using IsMaterialData at the same K.cell and sample. Reference and genuine difference jets give an explicit E0 envelope.",
+    "The true canonicalLengthInverse reference atom supplies the inverse affine cost. Its power changes only the numeric exponent, never the state derivative loss.",
+    "Every actual unit atom is pulled back by the existing inverse affine map. Four literal atoms give the potential and positive-piece divided fields; negative-piece divided terms are genuinely gated out.",
+    "The existing sector-state center has literal lift z and exact grading stateGrading(z-reference)+abs(parameter). Packing yields the frozen SectorCanonicalJetBounds with unchanged K/base/epsilon.",
+    "The sample E0 floor is explicit and is available for the already enlarged material data. This leaf neither asserts CurrentJets nor substitutes an arbitrary atom bound for it."
+  ],
+  "self_checks": {
+    "all_source_bytes_frozen": true,
+    "active_public_name_collisions": [],
+    "current_main_public_name_collisions": [],
+    "new_Lean_lines": 291,
+    "source_closure_no_missing_or_cycles": true,
+    "compiled": false,
+    "active_source_index_refs_or_CI_changed": false
+  },
+  "remaining": "Independent full-source review, any exact-provider migration required by later main integration, CI compilation, actual CurrentJets and complete primitive geometry/Realization remain separate obligations.",
+  "created_at_utc": "2026-11-12T19:43:02.268536+00:00"
+}

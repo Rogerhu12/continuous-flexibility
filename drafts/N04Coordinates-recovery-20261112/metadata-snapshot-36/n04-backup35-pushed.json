@@ -1,0 +1,26 @@
+{
+  "snapshot": 35,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "sha": "acac62fd1903dd18733c1759927aca87ad7b045a",
+  "tree": "df2c614ec933d5d8ee66e22781b4f86a7bff522b",
+  "parents": [
+    "9f11634c5091a3fd5901bc11b2bfb7971f8e7122",
+    "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67"
+  ],
+  "pushed": "2026-11-12 19:30:36 UTC",
+  "main_rules_rechecked": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "plan": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-backup35-plan.json",
+    "sha256": "d9a781f0caf62b43a105a1be4ddcdc595617b13baa03017b0b50b9fa5f154a20",
+    "blob": "f8eec1034be1f1b09f018b3f2399d518fec1d90a",
+    "lines": 61
+  },
+  "payload_sha256": "615e7ef38f2f2592816f1f47ff766daef58ea18fb2f116951d199701a1119bb2",
+  "indexed_files": 2919,
+  "new_lean_sources": 6,
+  "new_lean_lines": 1470,
+  "added_lean_from_complete_green163": 16952,
+  "remote_verified": true,
+  "active_unchanged": true,
+  "status": "Point-in-time source preservation only; the post-freeze 445 peer/owner will be preserved by the next snapshot."
+}

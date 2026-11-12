@@ -1,0 +1,70 @@
+{
+  "snapshot": 36,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "parent": "acac62fd1903dd18733c1759927aca87ad7b045a",
+  "additional_parents": [
+    "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67"
+  ],
+  "base_tree": "df2c614ec933d5d8ee66e22781b4f86a7bff522b",
+  "compiled_tree": "64a18c3f510156a0386b5601f7c26fe575e6f958",
+  "preserved_archive_tree": "d0d9bee252300437c847637a0453466c1b2f8cff",
+  "compiled_tree_refresh": "Use exact complete-green repository bytes while grafting the full previous archive subtree unchanged; source preservation is not compilation.",
+  "compiled_baseline": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+  "line_head": "c796387fb555392501c81f5b8bd834936251516c",
+  "line_tree": "08257c9406671ac1f094b739e4971c1eca108c66",
+  "frozen_at": "2026-11-12T19:46:40.380041+00:00",
+  "indexed_files": 2942,
+  "new_sources": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeOppositeRootFields.lean",
+      "sha256": "79c1ad3c7f0c9556ba2e4ed4d57c0dc28e947a590754063df9c7ec3290110309",
+      "lines": 256
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RootTravelOppositeCoordinates.lean",
+      "sha256": "49b821e72ffe428dfe9e072bcbdb9db5da23a83809aa058bb693cee1d2335ece",
+      "lines": 197
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04EndpointCircleFixedBaseBounds.lean",
+      "sha256": "4726b99d556fcd77b094156f54551a65b5ec63b04f570f2ffb90fecdd1d0c29e",
+      "lines": 115
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalCurrentUniformCloseness.lean",
+      "sha256": "d2209cdb8d2149a1352b1460874d4b8fcd3c14a66bbbcf09802e49689ab27edc",
+      "lines": 94
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceCurrentAbsoluteJets.lean",
+      "sha256": "c1b05760d478ef2e0e480010ae0b985db327927ac4178153660f79ef6a15c699",
+      "lines": 109
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceCurrentSectorBounds.lean",
+      "sha256": "eb172cebbdc78d439c150c38aa23c945c488d614b5255f8d0736c928ddb94731",
+      "lines": 182
+    }
+  ],
+  "new_source_lines": 953,
+  "existing_added_lean_from_compiled_baseline163": 16952,
+  "removed_redundant_compiled_archives": [],
+  "removed_compiled_copy_lines": 0,
+  "compiled_dedup_note": "No archive copies are removed in this snapshot. Snapshot34 already redirected the independently verified compiled duplicates to exact CI163 commit/path references. Every uncompiled source and historical version remains preserved.",
+  "projected_added_lean_from_compiled_baseline163": 17905,
+  "line_count_method": "Conservative git diff --numstat --no-renames over every Lean file. Content similarity or move detection gives no reduction in the hard source budget.",
+  "compressed_diagnostics": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceCurrentSectorBoundsSelectedProviders.json",
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-36/root/reconstructed/CanonicalReferenceCurrentSectorBoundsSelectedProviders.json.storage.gz",
+      "uncompressed_sha256": "f7df61bf5ca885b8a5df42e774396d44811f9d2568928131247177b01f4750ec",
+      "uncompressed_bytes": 324808,
+      "gzip_bytes": 46830,
+      "blob": "94cb7c3c10839b0b40b5449e362b7b32eb78e672"
+    }
+  ],
+  "compression_note": "Lossless gzip for large JSON diagnostics; original source SHA256 and restore behavior preserved. Lean sources remain uncompressed. Binary gzip copies are also preserved exactly.",
+  "prior_versions": "All historical source versions remain immutable and reachable through the backup parent and exact SOURCE-INDEX locations.",
+  "status": "Source preservation only; outside src, no CI activation or completion claim.",
+  "entries": 48
+}
