@@ -16,6 +16,8 @@ namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements
 
+set_option backward.isDefEq.respectTransparency true
+
 attribute [local instance]
   n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
   n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
@@ -81,16 +83,9 @@ theorem n04Coordinates_primitiveGeometryProperties_normalized
     · simpa only [hdifference, normalizedCanonicalData_cell] using hbound
     · let J' : SmoothDirections (sectorNeighborhood S base ε ε)
           (CanonicalGeometry.differenceJets D T S C L (normalizedCanonicalData S K)) :=
-        { open_domain := J.open_domain
-          D := J.D
-          zero := by
-            intro z hz
-            rw [hdifference]
-            exact J.zero z hz
-          continuous := J.continuous
-          derivative := J.derivative }
+        J.congr (fun z _ => congrFun hdifference.symm z)
       refine ⟨J', ?_⟩
-      simpa only [J', normalizedCanonicalData_cell] using hJ
+      simpa only [J', SmoothDirections.congr, normalizedCanonicalData_cell] using hJ
   refine ⟨hradial, ?_, href', hcur', haux, htrans⟩
   rcases hprincipal with ⟨hfields, hbound⟩
   refine ⟨?_, hbound⟩

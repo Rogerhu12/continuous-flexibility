@@ -80,12 +80,20 @@ theorem n04bActualTypedAtlas_negative_opposite_fields_at
     hg'.1.eq_of_nhds
   have hHk := hg.2.eq_of_nhds
   have hHk' := hg'.2.eq_of_nhds
+  have hDk : fderiv ℝ (K.chart z k) p =
+      fderiv ℝ (n04bRootPhysicalChart F (C.travel m) side) p :=
+    hg.1.fderiv_eq (𝕜 := ℝ)
+  have hDk' : fderiv ℝ (K.chart z k') p =
+      fderiv ℝ (n04bRootPhysicalChart F (C.travel m) (!side)) p :=
+    hg'.1.fderiv_eq (𝕜 := ℝ)
   have hJk : planeJacobian (K.chart z k) p =
       planeJacobian (n04bRootPhysicalChart F (C.travel m) side) p := by
-    simp only [planeJacobian, hg.1.fderiv_eq (𝕜 := ℝ)]
+    unfold planeJacobian
+    rw [hDk]
   have hJk' : planeJacobian (K.chart z k') p =
       planeJacobian (n04bRootPhysicalChart F (C.travel m) (!side)) p := by
-    simp only [planeJacobian, hg'.1.fderiv_eq (𝕜 := ℝ)]
+    unfold planeJacobian
+    rw [hDk']
   have ht : (F p).1 ∈ Ioo (0 : ℝ) (C.travel m) :=
     ((n04b_actualTravelChart_bijOn hN hS hT hfield hz hs m).mapsTo hp).1
   have hF : DifferentiableAt ℝ F p :=
@@ -121,8 +129,8 @@ theorem n04bActualTypedAtlas_negative_opposite_fields_at
     rw [← hrad]
     exact n04b_abs_planeJacobian_rootPhysicalChart_opposite side hF ht
   · intro v
-    simp only [hg.1.fderiv_eq (𝕜 := ℝ), hg'.1.fderiv_eq (𝕜 := ℝ), hFk',
-      n04bOppositeRootJacobianFactor, ← hrad, Real.sqrt_div' _ hx.le]
+    rw [hDk, hDk', hFk', n04bOppositeRootJacobianFactor, ← hrad,
+      Real.sqrt_div' _ hx.le]
     exact n04b_fderiv_rootPhysicalChart_opposite side hF ht v
 
 /-- Full open-component germs, including the actual artificial cut.
@@ -194,7 +202,11 @@ theorem n04bActualTypedAtlas_negative_opposite_ratios
     have he : planeJacobian (K.chart z k') p =
         planeJacobian (n04bRootPhysicalChart (n04bActualTravelChart S C L z m)
           (C.travel m) (!side)) p := by
-      simp only [planeJacobian, hg.1.fderiv_eq (𝕜 := ℝ)]
+      have hd : fderiv ℝ (K.chart z k') p =
+          fderiv ℝ (n04bRootPhysicalChart (n04bActualTravelChart S C L z m)
+            (C.travel m) (!side)) p := hg.1.fderiv_eq (𝕜 := ℝ)
+      unfold planeJacobian
+      rw [hd]
     rw [he]
     exact abs_ne_zero.mpr hr.2.2.1
   constructor

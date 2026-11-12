@@ -92,7 +92,7 @@ theorem n04Coordinates_currentAtoms_uniformly_close
         B * T.E0 (T.sample (K.cell m)) ^ B *
           T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) *
             CanonicalGeometry.parameterGrading S loss z := by
-    simpa only [CanonicalGeometry.differenceJets, mixedDerivative, iteratedDeriv_zero, Prod.eta,
+    simpa only [B, loss, CanonicalGeometry.differenceJets, mixedDerivative, iteratedDeriv_zero, Prod.eta,
       Nat.zero_add] using hb z (hU hz) m v ⟨p, hp⟩ 0 0 (by omega)
   exact (hactual.trans
     (mul_le_mul_of_nonneg_right hcoeff (apply_nonneg _ _))).trans_lt

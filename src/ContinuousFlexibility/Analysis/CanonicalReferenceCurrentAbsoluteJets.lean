@@ -64,7 +64,7 @@ theorem n04Coordinates_unitAtom_absolute_envelope
   have hCH : 0 < CH := hheight.choose_spec.1
   have hHb := hheight.choose_spec.2
   have hHeight (m : ℕ) : T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) ≤ CH := by
-    simpa only [Real.rpow_zero, mul_one] using hHb m
+    simpa only [CH, Real.rpow_zero, mul_one] using hHb m
   let loss : ℕ := hcur.2.1.choose
   have hdiff := hcur.2.1.choose_spec
   refine ⟨loss, fun s => ?_⟩

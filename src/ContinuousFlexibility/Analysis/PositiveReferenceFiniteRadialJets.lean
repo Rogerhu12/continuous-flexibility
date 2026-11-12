@@ -42,7 +42,9 @@ theorem radialEndpointTaylorSlice_deriv
     (f : PolarPoint → ℝ) {n : ℕ} (hn : 1 ≤ n) (c : ℝ) :
     deriv (radialEndpointTaylorSlice n c f) c =
       deriv (fun x : ℝ => f (x, 0)) c := by
-  simpa only [radialEndpointTaylorSlice, radialBoundaryJet, iteratedDeriv_one] using
+  change deriv (fun x : ℝ => oneSidedBoundaryTaylorRepresentative n c f (x, 0)) c =
+    deriv (fun x : ℝ => f (x, 0)) c
+  simpa only [radialBoundaryJet, iteratedDeriv_one] using
     radialBoundaryJet_oneSidedBoundaryTaylorRepresentative f n c hn 0
 
 /-- Radiality on the original side makes the full Taylor representative
