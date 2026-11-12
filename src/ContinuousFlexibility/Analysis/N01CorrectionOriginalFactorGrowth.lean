@@ -194,7 +194,6 @@ private theorem originalFactors_flat_mixed_growth_of_source_data
       (E := E₀) (F := F) (p := p₀) (W := W)
       (U := U₀) (V := V) (f := entry 0) (g := fa₀) (J := K₀ 0)
       (base := base) (loss := loss) pc (hK₀ 0) hU₀ hV Ja heqa
-  run_tac do Lean.logInfo "N02N03 Original assembly: weighted-a"
   have hb : UniformWeightedJointGrowth
       (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ)
       (U := U) (V := V) (f := fb) p W Jb base loss :=
@@ -202,7 +201,6 @@ private theorem originalFactors_flat_mixed_growth_of_source_data
       (E := E₀) (F := F) (p := p₀) (W := W)
       (U := U₀) (V := V) (f := entry 1) (g := fb₀) (J := K₀ 1)
       (base := base) (loss := loss) pc (hK₀ 1) hU₀ hV Jb heqb
-  run_tac do Lean.logInfo "N02N03 Original assembly: weighted"
   let fv : ℕ → E × PolarPoint → ℝ := fun m x => fv₀ m (x.1.1, x.2)
   let Jv₀ : ∀ m, SmoothDirections (U₀ ×ˢ V m) (fv₀ m) := data.choose
   let Jv : ∀ m, SmoothDirections (U ×ˢ V m) (fv m) :=
@@ -219,7 +217,6 @@ private theorem originalFactors_flat_mixed_growth_of_source_data
       (I := ℕ) (E := E₀) (F := F) (P := PolarPoint) (G := ℝ)
       (p := p₀) (W := W) (U := U₀) (V := V) (f := fv₀)
       (J := Jv₀) (base := B) (loss := L) pc hW₀ hv₀ hU₀ hV
-  run_tac do Lean.logInfo "N02N03 Original assembly: characteristic"
   have heq : ∀ m (x : E × PolarPoint), x ∈ U ×ˢ V m →
       fb m x - fa m x * fv m x = fq m x :=
     fun m x hx => heq₀ m (x.1.1, x.2) ⟨hx.1.1, hx.2⟩
@@ -232,7 +229,6 @@ private theorem originalFactors_flat_mixed_growth_of_source_data
       hp hIp hW Ja Jb Jv Jq hB ha hb hv heq
   obtain ⟨B', L', _, _, hq⟩ := scalarData
   let M' : ℕ := max loss L'
-  run_tac do Lean.logInfo "N02N03 Original assembly: final"
   exact ⟨UniformWeightedJointGrowth.hasFlatMixedTameGrowth
       (I := ℕ) (E := E) (p := p) (W := W) (U := U) (V := V) (f := fa)
       (J := Ja) (B := base) (L := loss) hp hW ha hV hc,
@@ -268,7 +264,6 @@ attribute [local instance]
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
 
-set_option diagnostics true in
 theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -303,7 +298,6 @@ theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
     HasFlatMixedTameGrowth p W (fun _ => 1) Ja ∧
       HasFlatMixedTameGrowth p W (fun _ => 1) Jb ∧
         HasFlatMixedTameGrowth p W (fun _ => 1) Jq := by
-  run_tac do Lean.logInfo "N02N03 Original: entry"
   let E₀ : Type := StateDirections S × ℝ
   let E : Type := (StateDirections S × ℝ) × CircleSpace S
   let p₀ : ℕ → Seminorm ℝ E₀ := pairGrading (sectorGrading S) realGrading
@@ -321,7 +315,6 @@ theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
   have hc (m : ℕ) : Convex ℝ (U ×ˢ V m) :=
     ((sectorNeighborhood_convex S base ε ε).prod convex_univ).prod
       ((convex_Ioo (l m) (h m)).prod convex_univ)
-  run_tac do Lean.logInfo "N02N03 Original: domains"
   let entry : Fin 3 → ℕ → E₀ × PolarPoint → ℝ := fun i _ x =>
     originalCoefficientEntry D S C i (liftSectorParameter S C x.1) x.2
   let K₀ : ∀ (i : Fin 3) (m : ℕ), SmoothDirections (U₀ ×ˢ V m) (entry i m) :=
@@ -349,7 +342,6 @@ theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
     have h10 : (1 : Fin 3) ≠ 0 := by decide
     simp only [entry, fb₀, originalCoefficientEntry, h10, eq_self_iff_true,
       ite_false, ite_true]
-  run_tac do Lean.logInfo "N02N03 Original: unweighted"
   let fv₀ : ℕ → E₀ × PolarPoint → ℝ := fun _ x =>
     minusCharacteristicSpeed (originalCoefficients D S C (liftSectorParameter S C x.1)) x.2
   let fq₀ : ℕ → E₀ × PolarPoint → ℝ := fun _ x =>
@@ -361,7 +353,6 @@ theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
     hN.exists_minusCharacteristicSpeed_strip_joint_growth
       (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
       (lam := lam) (P := P) hS hT j hcell l h hl hh hlam hP hpositive
-  run_tac do Lean.logInfo "N02N03 Original: characteristic"
   have heq₀ : ∀ m (x : E₀ × PolarPoint), x ∈ U₀ ×ˢ V m →
       fb₀ m x - fa₀ m x * fv₀ m x = fq₀ m x := by
     intro m x hx
@@ -377,8 +368,6 @@ theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
         (b := (originalCoefficients D S C (liftSectorParameter S C x.1)).b x.2)
         (c := (originalCoefficients D S C (liftSectorParameter S C x.1)).c x.2)
         hapos.ne')
-  run_tac do Lean.logInfo "N02N03 Original: identity"
-  run_tac do Lean.logInfo "N02N03 Original: final"
   exact originalFactors_flat_mixed_growth_of_source_data
     (E₀ := E₀) (F := CircleSpace S) (p₀ := p₀) (W := W)
     (U₀ := U₀) (V := V) (entry := entry) (base := base) (loss := loss)

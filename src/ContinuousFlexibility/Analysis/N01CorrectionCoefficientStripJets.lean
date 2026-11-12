@@ -19,6 +19,9 @@ namespace ContinuousFlexibility.Statements
 local instance n01CorrectionCoefficientStripJetsStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
+local instance n01CorrectionCoefficientStripJetsParameterSMul (S : PhysicalSpacesData) :
+    SMul ℝ ((StateDirections S × ℝ) × CircleSpace S) := Prod.instSMul
+
 open Set Filter ContinuousFlexibility.Analysis
 open scoped ContDiff Topology
 
@@ -131,7 +134,8 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_component_mixed_hasD
       (fun q hq => hN.returnCorrectionCoefficientScalarJets_eq_joint_on_strip
         hS hT hR j hcell χ hχrange hcutoff hdisc hχ m l h hl hh hstrip Q k y hy vs hq) a b hp
   have hcons : (fun i : Fin (n + 1) => ((Fin.cons w v) i, (0 : PolarPoint))) =
-      Fin.cons (w, 0) (fun i => (v i, 0)) := by
+      (Fin.cons (w, (0 : PolarPoint)) (fun i : Fin n => (v i, (0 : PolarPoint))) :
+        Fin (n + 1) → (((StateDirections S × ℝ) × CircleSpace S) × PolarPoint)) := by
     funext i
     exact Fin.cases rfl (fun _ => rfl) i
   have hd := J.jointJet_mixed_hasDerivAt_line hU hV hc a b n x w ht
