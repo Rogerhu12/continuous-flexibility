@@ -59,7 +59,10 @@ private theorem negative_reference_qualitative_of_radial_density
     exact hcharts.2.1 hq
   have hF : ContDiffOn ℝ ∞ F
       (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ (univ : Set ℝ)) := by
-    simpa only [hA.referenceDomain m] using hcharts.2.2.2.2.1
+    change ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m)
+      (referencePhysicalPieceOpen S K m)
+    rw [← hA.referenceDomain m]
+    exact hcharts.2.2.2.2.1
   have hshape (q : PolarPoint) (hq : q ∈ referencePhysicalPieceOpen S K m) :
       F q = ((F (q.1, 0)).1, q.2) := (hradial.1 m q hq).1
   have hheight (q : PolarPoint) (hq : q ∈ referencePhysicalPieceOpen S K m) :
@@ -79,10 +82,12 @@ private theorem negative_reference_qualitative_of_radial_density
       (K.coefficients (C.referenceState, 0) m).b q = 0 ∧
       (K.coefficients (C.referenceState, 0) m).c q = -q.1 := by
     rw [hcoeff]
-    simpa only [inverseChartPrincipalCoefficients, hcharts.2.2.2.1 q hq] using
+    simpa only [inverseChartPrincipalCoefficients, G, hcharts.2.2.2.1 q hq] using
       hunit (G q) (hmap hq)
   have hp₀ : (p.1, (0 : ℝ)) ∈ canonicalOpen S K m := ⟨hp.1, mem_univ _⟩
-  have hr : (G p).1 = (G (p.1, 0)).1 := congrArg Prod.fst (hradial.2 m p hp)
+  have hr : (G p).1 = (G (p.1, 0)).1 := by
+    have he := congrArg (fun q : PolarPoint => q.1) (hradial.2 m p hp)
+    exact he
   have ha₀ := hprincipal p hp
   have ha₁ := hprincipal (p.1, 0) hp₀
   refine ⟨?_, ha₀.2.1, ha₀.1.trans ha₁.1.symm, ha₀.2.2.trans ha₁.2.2.symm, ?_⟩
@@ -170,6 +175,10 @@ theorem n04WholeReferenceGaugeAtlasData_actual_referencePrincipal_qualitative
       · intro q _hq
         exact (hN.2.1 z₀ hz₀ hs₀ q).trans (hN.1.1.reference_coefficients q).1
       · intro q
-        simpa only [hneg, ↓reduceIte, one_mul] using hf.2 q
+        have hpot := hf.2 q
+        change V.potential z₀ m q = (if V.positive m then -1 else (1 : ℝ)) *
+          inverseChartPotential (L.coefficients z₀) (V.chart z₀ m)
+            (V.inverseChart z₀ m) (V.height z₀ m) q at hpot
+        simpa only [hneg, ↓reduceIte, one_mul] using hpot
 
 end ContinuousFlexibility.Analysis
