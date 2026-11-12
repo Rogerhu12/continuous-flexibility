@@ -1,0 +1,201 @@
+{
+  "kind": "actual_stored_minus_speed_identity_and_joint_tower",
+  "owner": "/root/proof_inventory",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_PEER",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusSpeedStripTower.lean",
+    "sha256": "231e649dd57453716bbeb036dcaa4c4c0a1793d6198bedd0d482864c901bbfbf",
+    "blob": "f0ee10cf1c352acd5eaf85792f2f0b32ba9be796",
+    "lines": 122,
+    "module": "ContinuousFlexibility.Analysis.N04ActualMinusSpeedStripTower",
+    "target_path": "src/ContinuousFlexibility/Analysis/N04ActualMinusSpeedStripTower.lean",
+    "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusSpeedStripTower.lean",
+    "source_ref": "LOCAL_HELD_CANDIDATE",
+    "imports": [
+      "ContinuousFlexibility.Analysis.N04ActualTravelStripTower",
+      "ContinuousFlexibility.Analysis.N01CharacteristicJointGrowth",
+      "ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower",
+      "ContinuousFlexibility.Analysis.N01FlowJointRegularity"
+    ]
+  },
+  "public_names": [
+    "NonlinearPropertiesThrough03.n04_actualMinusSpeed_eq_corrected",
+    "NonlinearPropertiesThrough03.n04_actualMinusSpeed_eq_original_add_residual",
+    "NonlinearPropertiesThrough03.n04ActualMinusSpeed_stripJointTower"
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTower.lean",
+      "sha256": "b56f6a83992424a397bede0353ac43c6a34fa75e172f5b39e162d69228b39176",
+      "blob": "8defbd534dce0d43f28ad8ed155c8e684eea771a",
+      "lines": 119,
+      "module": "ContinuousFlexibility.Analysis.N04ActualTravelStripTower",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04ActualTravelStripTower.lean",
+      "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTower.lean",
+      "source_ref": "LOCAL_HELD_REVIEWED_OR_CANDIDATE",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04MinusFirstIntegralStripTower",
+        "ContinuousFlexibility.Analysis.N04bActualTravelChart",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionPatching",
+        "ContinuousFlexibility.Analysis.TameProductDirections",
+        "ContinuousFlexibility.Analysis.SolveNewtonBridge"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CharacteristicJointGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/N01CharacteristicJointGrowth.lean",
+      "blob": "b95f6b480dcf1aa6634d4591b24ae2125b645f9a",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "41b21de7ebdb4b635f1b2b83657884713a0d3ca13b98c2ef69c64f6d09e3c30b",
+      "lines": 435,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01OriginalCoefficientTameBounds",
+        "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction",
+        "ContinuousFlexibility.Analysis.MixedJointTameBounds",
+        "ContinuousFlexibility.Analysis.JointMixedTameBounds",
+        "ContinuousFlexibility.Analysis.WeightedJointProducts",
+        "ContinuousFlexibility.Analysis.WeightedJointPowers",
+        "ContinuousFlexibility.Analysis.TameSmoothingCalculus",
+        "ContinuousFlexibility.Analysis.ActualRadialCellComparison"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnVelocitySpatialTower.lean",
+      "blob": "198e815b49f723edca476ad56ec173040e11edfe",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "b05abee5a782c5621c8bfae80b66ef323eed66e0476e7d865fd0517757ac623d",
+      "lines": 421,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01SingleComponentInterpolation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowJointRegularity",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowJointRegularity.lean",
+      "blob": "6081fe177712c69010c027d8458e03a240f373ff",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "e247738529ec5b7264d80109a5974c68709b8a20166ce4ad4a7a3c4af82979c8",
+      "lines": 166,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowAngularVariation",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionPatching",
+        "Mathlib.Analysis.Calculus.FDeriv.Partial",
+        "Mathlib.Analysis.Normed.Operator.Mul"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionResidualLinear",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionResidualLinear.lean",
+      "blob": "20c303b0135ac0eb7e779d7767bded4ba3e05be5",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "011d097e57c082dfe2aa6bef910a224df021b23709c8ee4329083dd65fbb5e5d",
+      "lines": 223,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCoefficientParity",
+        "ContinuousFlexibility.Analysis.N01ReturnChartC1",
+        "Mathlib.Analysis.Calculus.DSlope"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals",
+      "path": "src/ContinuousFlexibility/Analysis/N04bCharacteristicFirstIntegrals.lean",
+      "selected_ref": "34a496f78ec2c9f35f74d2eb3dfd48a1d4190909",
+      "sha256": "cabf5a4f7de74c1e3c2c16c765bf7c67052841cda2582da16b669141e3839a27",
+      "blob": "6fc2f9eca3e1203e2d5598cc92ac6604f848c3ef",
+      "lines": 202,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TravelStripAngularInverse",
+        "ContinuousFlexibility.Scalar.Conservation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bCharacteristicFlowField",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04bCharacteristicFlowField.lean",
+      "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+      "blob": "40645919e21be32b88512c967e38f8991dfdd0cd",
+      "sha256": "1dec19f7ec658422189c339a3260b79a483e0ce51edf163eaa5cc3fcf1fb72e2",
+      "lines": 145,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFlowOriginal",
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFlowInterior",
+        "ContinuousFlexibility.Analysis.N04bActualCharacteristics",
+        "ContinuousFlexibility.Analysis.N04bRootGermCollar",
+        "ContinuousFlexibility.Analysis.CylinderMixedJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionResidualError",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionResidualError.lean",
+      "blob": "712d9d91eb7644a7851769500e7a7143361794d4",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "1997cab37a0c3acce3e9ff036154a1be3e37b91dd0cfd6d0df50249442062d59",
+      "lines": 159,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectionResidualLinear",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionDivergence",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSource"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+      "path": "src/ContinuousFlexibility/Analysis/TameElementaryCalculus.lean",
+      "blob": "bc38b3601334a7b76a3eda9f3602c4d3b2440423",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "8970cb3def322b3ecaf1d4c717754fc68f57d4a63d4ed82023a7d4fae5ac9b09",
+      "lines": 512,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Analysis.ProjectiveJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "target_path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "lines": 1773,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Contracts.Annular",
+        "ContinuousFlexibility.Scalar.NormalizedConservation",
+        "ContinuousFlexibility.Scalar.TypeCorrection",
+        "ContinuousFlexibility.Scalar.FormPullback",
+        "Mathlib.Topology.OpenPartialHomeomorph.Defs"
+      ]
+    }
+  ],
+  "selected_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusSpeedStripTowerClosureInventory.json",
+    "sha256": "b40d3c3c3a130926dc4750a9038b5c61bd0217a80c560f333307a50a8c59b534",
+    "blob": "baafc2d6be8d267dd7d3e84eb8b18c617e315c05",
+    "lines": 7890
+  },
+  "selected_closure_gzip": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusSpeedStripTowerClosureInventory.json.gz",
+    "sha256": "b3fa54b5891c52f3447b1c941515865957cb4fc9dfc125516974e2ef7db2d710",
+    "bytes": 66130,
+    "decompresses_to_sha256": "b40d3c3c3a130926dc4750a9038b5c61bd0217a80c560f333307a50a8c59b534"
+  },
+  "reviewed_travel_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTowerReviewedManifest.json",
+    "sha256": "dd13090289d452733a130ed72139ff5a05deff14cbac6e90be81015ecfc3d0bb",
+    "blob": "5c2f241012afa2dc284b63dbaefc529c35111409",
+    "lines": 33
+  },
+  "checks": [
+    "The genuine stored N03 flow is slice-surjective by actual field regularity. At its true preimage of any interior point, N03 and the physical corrected-flow derivative theorem are HasDerivAt statements for the same literal function; uniqueness identifies the actual speed.",
+    "The N02 residual equality is the exact public returnCorrectionVelocityLinear_at_actual. No corrected-gap positivity or speed identity is supplied as a premise.",
+    "The original speed tower is the existing public N01 strip tower. Its coefficient positivity follows from actual N01 and real annulus membership. Its discriminant positivity is the already-proved support/original patch argument119.",
+    "The velocity tower uses the actual residual in the same circle space, the same cutoff and the same old-flow/interpolation inverses. Addition and congrOn give the stored coefficient speed tower before any derivative order.",
+    "All reachable source hashes/blobs/import lists/line counts have been checked; no missing imports, cycles or new-public collision. Main selected contract ports are retained without fallback to their old uniform-loss versions."
+  ],
+  "scope_limits": [
+    "The retained literal flow/coefficient identities, raw discriminant-support certificate and actual component hosts are genuine construction inputs; this lemma does not claim arbitrary Through03 supplies them.",
+    "This source constructs one qualitative state/radius/angle tower. Numerical CurrentJets estimates and parameter-order losses remain separate obligations.",
+    "Static only: no Lean elaboration, local compilation, CI query/download or active source/index/ref/authority mutation."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:04:23.268501+00:00"
+}

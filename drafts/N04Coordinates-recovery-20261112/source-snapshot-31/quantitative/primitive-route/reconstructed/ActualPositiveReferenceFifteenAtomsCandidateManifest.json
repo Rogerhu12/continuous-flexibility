@@ -1,0 +1,71 @@
+{
+  "kind": "single_chosen_positive_family_fifteen_actual_reference_atoms",
+  "owner": "/root/quantitative_route",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_PEER",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFifteenAtoms.lean",
+    "sha256": "f5a8d53e84c32002efeaa216d916caa23c263b0b1c16b117d92fd0ac8fbb9e2c",
+    "blob": "bd18311eb7ab6f62d4ac8cc11c2218269675ed44",
+    "lines": 178
+  },
+  "public_names": [
+    "n04Coordinates_actual_positive_reference_fifteenAtoms"
+  ],
+  "imports": [
+    "ContinuousFlexibility.Analysis.ActualPositiveReferenceFiveAtoms",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugePositiveGeometryJets"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFiveAtoms.lean",
+      "sha256": "196538c50d4320c4d4678834ea5e0bab2cab73b43bb5aadb57d30c7cd1d193c4",
+      "blob": "3313f7fc6808be3498a617719d645b5d9d845178",
+      "lines": 194
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveGeometryJets.lean",
+      "sha256": "7f1bc458ad7b0700ea10e51475d3af9e371b60d687a4675ac519a02110553b5a",
+      "blob": "40f9f2614b7abce6022c2eb8e915c2f8a96c46f2",
+      "lines": 262
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceInverseMaterialJets.lean",
+      "sha256": "ef40450003358fd22e68a70ecd7c722bfb630b77f6fb6e234331efcb9ab74af5",
+      "blob": "6dd64a27ede32a71db55d16a2029b9b6858a4c12",
+      "lines": 276
+    }
+  ],
+  "five_atom_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFiveAtomsReviewedManifest.json",
+    "sha256": "6dfb9ab1b09e54b4d6d7b842a33d5c02ce9f54ef906a1498b4240c0fefb1f2c6",
+    "blob": "8cef1cd17f91eb989cdc4b50a10c63326da2eb27",
+    "lines": 41
+  },
+  "pending_geometry_candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveGeometryJetsCandidateManifest.json",
+    "sha256": "c795180d91d5778081abe1a916cf4727e92ad98ff69368a911f244c8674ada22",
+    "blob": "3c9da7e2a7222f24605fd83fecf2b52f16abedfc",
+    "lines": 132
+  },
+  "proof_summary": [
+    "One invocation of the actual194 five-atom producer chooses the existing C0/B/finite certificate and displayed degree-three width/degree-four slices. No new276 call, coordinate, height, inverse, cell or parameter is selected.",
+    "The original universal finite certificate supplies both width directions for the actual cell and actual endpoint source; its root data and all-order Y/H/positive inverse jets are returned unchanged.",
+    "The already specified262 consumer is applied to the same Y/H and same B. It estimates all ten geometric atoms in the same actual V; the prior five atoms retain their original fields.",
+    "At each spatial order BM=max BG BF is fixed before enumeration,relative fields,piece andpoint. The explicit same-T normalized sample floor allows both material exponents to be increased to BM.",
+    "The entire public input/output header matches194 byte-for-byte after the declaration name and atom predicate are restored. No added construction assumption, changed finite certificate or order of quantifiers."
+  ],
+  "mechanical_checks": {
+    "header_only_name_and_atom_predicate_changed": true,
+    "actual194_calls": 1,
+    "new276_calls": 0,
+    "resource_options": [],
+    "forbidden_tokens": []
+  },
+  "scope_limits": [
+    "262 actual geometry has its separate full peer assigned to root; this candidate does not mark that provider accepted prematurely.",
+    "Retained same-witness coordinates, actual raw optical/host conditions and normalized same-T sample floor remain explicit input obligations. No arbitrary Through03 is silently replaced.",
+    "Fifteen positive reference atoms only, not all atlas atoms, not state CurrentJets and not a completed N04 certificate. No local compilation or active/CI mutation."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:15:57.558823+00:00"
+}

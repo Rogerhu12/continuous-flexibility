@@ -1,0 +1,22 @@
+{
+  "snapshot": 30,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "parent": "34563c9cf53ad95b24e2c22d7f1c1c001559db99",
+  "additional_parents": [
+    "23d28b145e1361fd8c683ba77415226b82be7bb3"
+  ],
+  "compiled_baseline": "23d28b145e1361fd8c683ba77415226b82be7bb3",
+  "indexed_files": 2682,
+  "new_source_lines": 3277,
+  "projected_added_lean_from_compiled_baseline159": 13428,
+  "line_count_method": "Conservative git diff --numstat --no-renames over every Lean file. Content similarity or move detection gives no reduction in the hard source budget.",
+  "prior_versions": "All historical source versions remain immutable and reachable through the backup parent and exact SOURCE-INDEX locations.",
+  "status": "Source preservation only; outside src, no CI activation or completion claim.",
+  "head": "6dffbb0872c2d418d882746ff6f83be838b18563",
+  "tree": "7d8ad1a4e275107391134501744e0893ca5ada20",
+  "pushed": "2026-11-12 17:01:22 UTC",
+  "new_source_versions": 20,
+  "payload_sha256": "37808a574edeab93149b4622413f1cfa01bd4e8904c88fa4648a30542b1b8cd5",
+  "blob_payload_sha256": "943a996f63e6c95ad1343292c236edfe41dbc8c7d8b22c8c76d7f3f1dcbb011d",
+  "compressed_diagnostics": 5
+}

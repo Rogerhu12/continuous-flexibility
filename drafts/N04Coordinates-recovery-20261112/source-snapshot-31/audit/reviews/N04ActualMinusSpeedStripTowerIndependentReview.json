@@ -1,0 +1,230 @@
+{
+  "kind": "independent_full_source_review",
+  "reviewer": "/root/audit_coordinates",
+  "status": "PASSED_STATIC_SOURCE_AND_ACTUAL_API_REVIEW_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusSpeedStripTower.lean",
+    "sha256": "231e649dd57453716bbeb036dcaa4c4c0a1793d6198bedd0d482864c901bbfbf",
+    "blob": "f0ee10cf1c352acd5eaf85792f2f0b32ba9be796",
+    "lines": 122
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusSpeedStripTowerCandidateManifest.json",
+    "sha256": "10df621ea3513bf0c1d227701c9a98cd43b126faf4106c4842337b79b03f0362",
+    "blob": "3a39c9b99c114e7c46c476eb7e63f08b7b7bf769",
+    "lines": 201
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTower.lean",
+      "sha256": "b56f6a83992424a397bede0353ac43c6a34fa75e172f5b39e162d69228b39176",
+      "blob": "8defbd534dce0d43f28ad8ed155c8e684eea771a",
+      "lines": 119,
+      "module": "ContinuousFlexibility.Analysis.N04ActualTravelStripTower",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04ActualTravelStripTower.lean",
+      "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTower.lean",
+      "source_ref": "LOCAL_HELD_REVIEWED_OR_CANDIDATE",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04MinusFirstIntegralStripTower",
+        "ContinuousFlexibility.Analysis.N04bActualTravelChart",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionPatching",
+        "ContinuousFlexibility.Analysis.TameProductDirections",
+        "ContinuousFlexibility.Analysis.SolveNewtonBridge"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CharacteristicJointGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/N01CharacteristicJointGrowth.lean",
+      "blob": "b95f6b480dcf1aa6634d4591b24ae2125b645f9a",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "41b21de7ebdb4b635f1b2b83657884713a0d3ca13b98c2ef69c64f6d09e3c30b",
+      "lines": 435,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01OriginalCoefficientTameBounds",
+        "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction",
+        "ContinuousFlexibility.Analysis.MixedJointTameBounds",
+        "ContinuousFlexibility.Analysis.JointMixedTameBounds",
+        "ContinuousFlexibility.Analysis.WeightedJointProducts",
+        "ContinuousFlexibility.Analysis.WeightedJointPowers",
+        "ContinuousFlexibility.Analysis.TameSmoothingCalculus",
+        "ContinuousFlexibility.Analysis.ActualRadialCellComparison"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnVelocitySpatialTower.lean",
+      "blob": "198e815b49f723edca476ad56ec173040e11edfe",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "b05abee5a782c5621c8bfae80b66ef323eed66e0476e7d865fd0517757ac623d",
+      "lines": 421,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01SingleComponentInterpolation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowJointRegularity",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowJointRegularity.lean",
+      "blob": "6081fe177712c69010c027d8458e03a240f373ff",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "e247738529ec5b7264d80109a5974c68709b8a20166ce4ad4a7a3c4af82979c8",
+      "lines": 166,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowAngularVariation",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionPatching",
+        "Mathlib.Analysis.Calculus.FDeriv.Partial",
+        "Mathlib.Analysis.Normed.Operator.Mul"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionResidualLinear",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionResidualLinear.lean",
+      "blob": "20c303b0135ac0eb7e779d7767bded4ba3e05be5",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "011d097e57c082dfe2aa6bef910a224df021b23709c8ee4329083dd65fbb5e5d",
+      "lines": 223,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCoefficientParity",
+        "ContinuousFlexibility.Analysis.N01ReturnChartC1",
+        "Mathlib.Analysis.Calculus.DSlope"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals",
+      "path": "src/ContinuousFlexibility/Analysis/N04bCharacteristicFirstIntegrals.lean",
+      "selected_ref": "34a496f78ec2c9f35f74d2eb3dfd48a1d4190909",
+      "sha256": "cabf5a4f7de74c1e3c2c16c765bf7c67052841cda2582da16b669141e3839a27",
+      "blob": "6fc2f9eca3e1203e2d5598cc92ac6604f848c3ef",
+      "lines": 202,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TravelStripAngularInverse",
+        "ContinuousFlexibility.Scalar.Conservation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bCharacteristicFlowField",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04bCharacteristicFlowField.lean",
+      "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+      "blob": "40645919e21be32b88512c967e38f8991dfdd0cd",
+      "sha256": "1dec19f7ec658422189c339a3260b79a483e0ce51edf163eaa5cc3fcf1fb72e2",
+      "lines": 145,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFlowOriginal",
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFlowInterior",
+        "ContinuousFlexibility.Analysis.N04bActualCharacteristics",
+        "ContinuousFlexibility.Analysis.N04bRootGermCollar",
+        "ContinuousFlexibility.Analysis.CylinderMixedJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionResidualError",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionResidualError.lean",
+      "blob": "712d9d91eb7644a7851769500e7a7143361794d4",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "1997cab37a0c3acce3e9ff036154a1be3e37b91dd0cfd6d0df50249442062d59",
+      "lines": 159,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectionResidualLinear",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionDivergence",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSource"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+      "path": "src/ContinuousFlexibility/Analysis/TameElementaryCalculus.lean",
+      "blob": "bc38b3601334a7b76a3eda9f3602c4d3b2440423",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "8970cb3def322b3ecaf1d4c717754fc68f57d4a63d4ed82023a7d4fae5ac9b09",
+      "lines": 512,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Analysis.ProjectiveJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "target_path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "lines": 1773,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Contracts.Annular",
+        "ContinuousFlexibility.Scalar.NormalizedConservation",
+        "ContinuousFlexibility.Scalar.TypeCorrection",
+        "ContinuousFlexibility.Scalar.FormPullback",
+        "Mathlib.Topology.OpenPartialHomeomorph.Defs"
+      ]
+    }
+  ],
+  "additional_actual_provider_refs": [
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsAffine",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAffine.lean",
+      "blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+      "lines": 124,
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "ContinuousFlexibility.Analysis.ProjectiveJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+      "path": "src/ContinuousFlexibility/Analysis/TameElementaryCalculus.lean",
+      "blob": "bc38b3601334a7b76a3eda9f3602c4d3b2440423",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "8970cb3def322b3ecaf1d4c717754fc68f57d4a63d4ed82023a7d4fae5ac9b09",
+      "lines": 512,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Analysis.ProjectiveJets"
+      ]
+    }
+  ],
+  "reviewed_travel_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTowerReviewedManifest.json",
+    "sha256": "dd13090289d452733a130ed72139ff5a05deff14cbac6e90be81015ecfc3d0bb",
+    "blob": "5c2f241012afa2dc284b63dbaefc529c35111409",
+    "lines": 33
+  },
+  "pinned_derivative_api": {
+    "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+    "sha256": "78fca2cc5f69fe7f7cf42cb31480aa15068851dae795e1d5fad62f62a28c4145",
+    "blob": "afdc3e3a27aad5f24293a47dc82304dfab84979d",
+    "lines": 985
+  },
+  "review_findings": [
+    "Read all122 lines. The two identities use the same actual stored N03 flow and the literal retained corrected flow. No alternate flow, inverse or characteristic-speed assertion is selected.",
+    "The actual flow-regularity provider gives slice surjectivity for its true period pi. The preimage angle is chosen for the same physical radius. The fifth N03 clause gives HasDerivAt of the stored flow at that angle.",
+    "The physical corrected-flow theorem supplies the second HasDerivAt statement for the identical function after the full hflow equality. Pinned HasDerivAt.unique then gives the actual speeds at the actual preimage; htheta and Prod.mk.eta identify the requested point.",
+    "The actual N02 residual theorem is returnCorrectionVelocityLinear_at_actual in ReturnCorrectionResidualLinear223. Its difference identity has the correct sign; adding the original speed is exact ring algebra.",
+    "The interior strip lies in the same actual negative component. N01 control endpoints and originalRadialCoefficient_pos give a>0 on the real annulus. The raw discriminant-support certificate and literal coefficient identity supply positivity via the already-reviewed patch/original119 theorem.",
+    "The N01 original minus-speed tower takes the exact host j and strip l/h. The residual velocity tower uses the same circle space, N02 residual, cutoff, original flow and interpolation inverses. Both have exactly the same joint domain.",
+    "smoothDirectionsAdd constructs one complete tower before any order. SmoothDirections.congrOn preserves its D fields and the final equality is oriented from original-plus-residual to the stored speed.",
+    "The two theorem commands explicitly include their proof-only section hypotheses before doc comments. The final object is a def whose construction uses those variables. No old uniform parameter-loss contract is introduced.",
+    "Independently recomputed all572 selected source SHA256/blob/import/line identities,1529 import edges, topological order and all three new public-name checks. The explicit main contract ports remain selected; this is static source verification only."
+  ],
+  "selected_closure_check": {
+    "inventory": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusSpeedStripTowerClosureInventory.json",
+      "sha256": "b40d3c3c3a130926dc4750a9038b5c61bd0217a80c560f333307a50a8c59b534",
+      "blob": "baafc2d6be8d267dd7d3e84eb8b18c617e315c05",
+      "lines": 7890
+    },
+    "module_count": 572,
+    "import_edges": 1529,
+    "missing_imports": [],
+    "cycles": [],
+    "new_public_name_collisions": []
+  },
+  "scope_limits": [
+    "Literal retained flow and coefficient identities, cutoff regularity/range, discriminant-support positivity and real hosts remain explicit genuine construction inputs. They are not claimed for arbitrary Through03 witnesses.",
+    "This proves qualitative identities and one joint SmoothDirections tower, not numerical CurrentJets or a uniform quantitative parameter loss.",
+    "No source modification, Lean elaboration or compilation, CI query/download, active checkout/index/ref/checkpoint/authority write."
+  ],
+  "source_bytes_unchanged": true,
+  "compiled": false,
+  "created_at": "2026-11-12T17:07:07.408011+00:00"
+}

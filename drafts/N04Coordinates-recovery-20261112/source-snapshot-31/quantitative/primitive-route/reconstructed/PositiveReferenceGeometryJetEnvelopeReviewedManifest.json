@@ -1,0 +1,37 @@
+{
+  "kind": "finite_prefix_actual_positive_geometry_scalar_envelope_reviewed",
+  "owner": "/root/quantitative_route",
+  "status": "FULL_STATIC_PEER_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceGeometryJetEnvelope.lean",
+    "sha256": "4d2065b6de1e1ff9081681c019d98f562c650f2551e4bcb6c985f834b0efe350",
+    "blob": "23b187c20404b418f813b5d6e992a43bb3daf204",
+    "lines": 196
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceGeometryJetEnvelopeCandidateManifest.json",
+    "sha256": "75cb4d7981a2dba0d590912f7cbdb525d166bf1dcb1d1dfcb5994adb2bc59f1b",
+    "blob": "abb2ba8d7b55af9623b82980b0a536aac08de5f0",
+    "lines": 76
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/PositiveReferenceGeometryJetEnvelopeIndependentReview.json",
+    "sha256": "cca1bc194cff1044b8f1fe0f752fa137d78d70392212089358c313f0367dce05",
+    "blob": "0a218b1b11b44f1d194bf07b441cd4b5499a2923",
+    "lines": 85
+  },
+  "provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelopeVisibilityReviewedManifest.json",
+    "sha256": "55e1f9fe0d0e8e16ec596a3bebb948de20821dc3d05675dfaf382d4eb1901984",
+    "blob": "2ff192a92ea67f4a7a301b651ece487da37125e0",
+    "lines": 46
+  },
+  "scope_limits": [
+    "This is a numerical input lemma for the actual displayed geometry scalars, not an assertion that arbitrary supplied geometry has material costs.",
+    "The actual ten Atom identities and material specialization are separate consumers still to be written.",
+    "No state SmoothDirections or final ReferenceJets claim, no compiler or active source mutation."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "created_at": "2026-11-12T17:10:16.430138+00:00"
+}

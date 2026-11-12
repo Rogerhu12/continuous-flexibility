@@ -1,0 +1,64 @@
+{
+  "kind": "actual_same_family_positive_ten_geometry_atoms_reviewed",
+  "owner": "/root/quantitative_route",
+  "status": "FULL_STATIC_PEER_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveGeometryJets.lean",
+    "sha256": "7f1bc458ad7b0700ea10e51475d3af9e371b60d687a4675ac519a02110553b5a",
+    "blob": "40f9f2614b7abce6022c2eb8e915c2f8a96c46f2",
+    "lines": 262
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveGeometryJetsCandidateManifest.json",
+    "sha256": "c795180d91d5778081abe1a916cf4727e92ad98ff69368a911f244c8674ada22",
+    "blob": "3c9da7e2a7222f24605fd83fecf2b52f16abedfc",
+    "lines": 132
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/WholeReferenceGaugePositiveGeometryJetsIndependentReview.json",
+    "sha256": "afacdc3687cb567396c5fd707eaa7069485db54beba62b9708627d96724b0a5d",
+    "blob": "b8ac56159c1fb2e55644665b89b937ee00f168c5",
+    "lines": 137
+  },
+  "provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceGeometryMaterialJetsReviewedManifest.json",
+      "sha256": "b1209727941ef3052ee5cd1a43225996ac36332eb8dfe95d6af614df583284fb",
+      "blob": "59533aa7f13c463acfec960f319f687a2c014725",
+      "lines": 37
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceGeometryJetEnvelopeReviewedManifest.json",
+      "sha256": "8789e7aa43c5cc2c999532f39f202dee5df6b06088e2441a4818090129103c88",
+      "blob": "359eee84515208e07a9dae6f10e06aa6b263ea85",
+      "lines": 37
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasDataReviewedManifest.json",
+      "sha256": "701abf400f31e9d5bd990eff6d782e8878b3bb25e17a721750de8d04a4e319d7",
+      "blob": "89a4780b10a4d508b9d5ac33dd3abdf393efa901",
+      "lines": 23
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGaugeReviewedManifest.json",
+      "sha256": "c840e5892621bb0d24bc16a65ce264898a538ecafb8c82b4728ee5760b11d6c2",
+      "blob": "bb8b3b0dddfb62c737cfd2c6f11f562b256378da",
+      "lines": 38
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometryReviewedManifest.json",
+      "sha256": "97cd4ecb74836bca17a67d6e413f437e2019c6449037d66e23b788e2525e70b3",
+      "blob": "3b9e9a1869056ffee6b05c09ff6bf26b8ffb73f0",
+      "lines": 22
+    }
+  ],
+  "scope_limits": [
+    "No new reference family, interpolation width, cell, material data or low finite envelope is selected.",
+    "This fixed-family consumer obtains its inputs from the same single276 family and retained finite certificate; it does not manufacture those costs from arbitrary qualitative geometry.",
+    "Only the ten displayed positive geometry atoms are handled. Five principal/potential atoms are supplied by the independently reviewed companion family. No negative-side or complete terminal ReferenceJets claim.",
+    "No local compilation/elaboration, resource-limit change, active source/index/ref edit or CI request."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "created_at": "2026-11-12T17:17:32.566673+00:00"
+}

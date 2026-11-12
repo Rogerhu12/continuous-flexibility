@@ -1,0 +1,88 @@
+{
+  "kind": "same_actual_negative_half_reference_height_all_order_material_reviewed",
+  "owner": "/root/audit_coordinates",
+  "status": "INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightMaterialJets.lean",
+    "sha256": "bda1d2cda9e6c88c394819233f9606026e417e03a5c357cb6aab76ab7da8d383",
+    "blob": "20423f5dc8e83101d8950003cb5454bf3def9007",
+    "lines": 293,
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceHeightMaterialJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualNegativeOpticalRootDivision",
+      "ContinuousFlexibility.Analysis.ActualNegativeReferenceAiryHeight",
+      "ContinuousFlexibility.Analysis.OpticalHalfAiryHeightMaterialJets",
+      "ContinuousFlexibility.Analysis.ReferenceInverseProfileMaterialJets",
+      "ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels",
+      "Mathlib.Topology.Order.Compact"
+    ],
+    "public_names": [
+      "n04bActualTypedAtlas_reference_half_height_power_material_jets",
+      "n04bActualTypedAtlas_reference_half_height_physical_power_material_jets"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightMaterialJetsCandidateManifest.json",
+    "sha256": "c978698094452943f73353d8d31f36b9cdd0a6e8d1f23ec62562e8490bc654c1",
+    "blob": "8babb214b0a84d9633990f29326b263c60e20746",
+    "lines": 149
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ActualNegativeReferenceHeightMaterialJetsIndependentReview.json",
+    "sha256": "3aab9414d0b0394d8f66343edb100bb59f1c634d4fb92f2d8576513ea68a31c2",
+    "blob": "84b9843d7184aac6ee017c13af7403b5840f6f1d",
+    "lines": 179
+  },
+  "reviewed_provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeOpticalRootDivisionReviewedManifest.json",
+      "sha256": "266d9c269f03139a7af30df7048979c8d4ff4cb6c30effdff4177d911f1c2731",
+      "blob": "55995e2c84b3056bdb005ede2b12d4816bb8a232",
+      "lines": 51
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceAiryFieldsReviewedManifest.json",
+      "sha256": "2d28747c29fa62b43c1fdb1204cc87c8656eaac286341c43bded636e71e8409e",
+      "blob": "11c65323b511f84d417df4c78c738763492a8617",
+      "lines": 64
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryHeightMaterialJetsReviewedManifest.json",
+      "sha256": "1bd61081d642b02d1f4f748c753eca78af6731b200a625a82910bdc31dfc26f1",
+      "blob": "6184d0d411461aa36655dc56b30f804f4f43a924",
+      "lines": 60
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeMaterialSamplesReviewedManifest.json",
+      "sha256": "c296199c9dec8bfd1cf7f5ba7d3540a783ce6d0f6043ee58c41bdce59e5e6729",
+      "blob": "c3770c51f99a3a4a734213541f7b04436263350c",
+      "lines": 54
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryAverageReviewedManifest.json",
+      "sha256": "c2a150c2c703e085608ba0e41f10350e6ef889599bdf785e9c35259544a5481e",
+      "blob": "cd82d84d6ed8f98f29452f9218b1e02a11f29852",
+      "lines": 44
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJetsReviewedManifest.json",
+      "sha256": "16b143562879d7afa35191e4a5850af9407223fed8af59136062433a67906846",
+      "blob": "d45cce809854a44f29de33bf413d6d46afcb51e7",
+      "lines": 34
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/ReconstructedOpticalMaterialCoreEightReviewedManifest.json",
+      "sha256": "f4df7de7d44e93490131ad38746cee3c17734c2db4cb615014b0a813d920f16b",
+      "blob": "88dc69b24b1600f559e728d9814a9126dfd76947",
+      "lines": 115
+    }
+  ],
+  "source_bytes_unchanged": true,
+  "compiled": false,
+  "scope_limits": [
+    "The actual raw optical lower bound with one K0 is explicit. Its retained fixed-witness construction provenance is a subsequent obligation, not a new final-certificate premise.",
+    "The bound is for actual stored height powers on either open physical negative half. Canonical inverse composition, potential jets, and whole-V atom packaging are subsequent steps.",
+    "Source was read in full and actual/pinned APIs checked statically. No compiler/elaborator, active source/index/ref/checkpoint/authority or CI operation."
+  ],
+  "created_at": "2026-11-12T17:12:23.485440+00:00"
+}

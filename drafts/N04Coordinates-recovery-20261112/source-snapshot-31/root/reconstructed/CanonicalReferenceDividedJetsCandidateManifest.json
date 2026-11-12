@@ -1,0 +1,70 @@
+{
+  "kind": "actual_reference_divided_atoms_zero_and_all_mixed_material_jets",
+  "owner": "/root",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceDividedJets.lean",
+    "sha256": "b88fd4118e9e3ec46e9da0a49240ab4d107fc0ebbbfd2be043bf135add0330f9",
+    "blob": "eb7424e622d46576e131c1963cbda89515d96a0f",
+    "lines": 83,
+    "target_path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceDividedJets.lean"
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bPositiveDivision.lean",
+      "sha256": "d274f19959dd831c45e7d0ee0374a4bf01132369e13d69e595beb71a60de39ee",
+      "blob": "052cdea1dd1db004e3021e7100bf3b0704f1f472",
+      "lines": 110
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "lines": 603
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+      "sha256": "d6c3ace5e5e251e2943bd5985eb9c0a076a875c98fd876c961cb54c366ca50cb",
+      "blob": "86135f3b7295638a64b59ddaf2653b87d2733431",
+      "lines": 391
+    }
+  ],
+  "whole_atlas_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasDataReviewedManifest.json",
+    "sha256": "701abf400f31e9d5bd990eff6d782e8878b3bb25e17a721750de8d04a4e319d7",
+    "blob": "89a4780b10a4d508b9d5ac33dd3abdf393efa901",
+    "lines": 23
+  },
+  "public_names": [
+    "n04bWithInteriorDivision_reference_dividedAtom_zero",
+    "n04bWithInteriorDivision_reference_dividedJets",
+    "n04WholeReferenceGauge_reference_dividedJets"
+  ],
+  "public_collisions": [],
+  "checks": [
+    "The full source and literal quotient/atom/whole-atlas definitions were read before freezing.",
+    "At the actual reference state each numerator is a-a; the quotient is therefore0 for every point, including zero denominator. The stored positivity flag then selects0 on both branches.",
+    "All three atom functions are globally the zero function. Their smoothness, actual pi-periodicity and every mixed spatial derivative follow from that equality.",
+    "B=1 is selected before every piece and atom. Only nonnegativity of the original fixed sample E0 is used; no floor enlargement or geometry assumptions are needed.",
+    "The whole reference atlas already ends in n04bWithInteriorDivision. The final adapter merely unfolds this definition and reuses its exact original fields and sampling.",
+    "No current-state divided difference is asserted to vanish, and no endpoint extension or final coordinate certificate is used."
+  ],
+  "scope_limits": [
+    "This supplies the three reference divided atoms only. Quantitative current divided atoms remain a separate boundary-jet and parameter-tower obligation.",
+    "Static source review only; no compiler, resource overrides, active source/index/ref mutation or completion claim."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:10:53.709569+00:00"
+}

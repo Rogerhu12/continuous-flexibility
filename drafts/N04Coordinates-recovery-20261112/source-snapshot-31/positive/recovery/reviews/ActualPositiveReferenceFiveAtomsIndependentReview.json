@@ -1,0 +1,106 @@
+{
+  "kind": "single_actual_reference_family_five_positive_atoms_complete_independent_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFiveAtoms.lean",
+    "sha256": "196538c50d4320c4d4678834ea5e0bab2cab73b43bb5aadb57d30c7cd1d193c4",
+    "blob": "3313f7fc6808be3498a617719d645b5d9d845178",
+    "lines": 194
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFiveAtomsCandidateManifest.json",
+    "sha256": "4bc633fe20c168bbf3c84f586b0ff7fe4832ffa6b4f9a3ec0d2fc5fa27087e6d",
+    "blob": "ab0c6dc7015307a4c2caedd6b06455e5aa89d385",
+    "lines": 106
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceInverseMaterialJets.lean",
+      "sha256": "ef40450003358fd22e68a70ecd7c722bfb630b77f6fb6e234331efcb9ab74af5",
+      "blob": "6dd64a27ede32a71db55d16a2029b9b6858a4c12",
+      "lines": 276
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferencePrescribedFamily.lean",
+      "sha256": "5451e514fc3df2dd89dcd7bfc445abfa8b4c7d8fd46b88095c1ea17fe7cf54f2",
+      "blob": "3c7c8581ea7cbeeb80abd7ed67e23c61860f7f93",
+      "lines": 110
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositivePrincipalJets.lean",
+      "sha256": "b8e9fe14a443cf93d04a9643633566b731268408fc8ce38131639eced6887540",
+      "blob": "b926843c192aa175dd25404f005a55ddb46ac874",
+      "lines": 290
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeFixedPotentialReferenceJets.lean",
+      "sha256": "0dd9a3b48093074e943d596fa77a1a5393c2c13459e1ca50cf0c814596905084",
+      "blob": "339445c09e482ac242a370585a25f494c44c2182",
+      "lines": 173
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalPositiveReferenceFamily.lean",
+      "sha256": "792a5148b96084a722578a9f25dbd9ed24b62691f9f31b0fbb2843311d0ae173",
+      "blob": "0a0206739fd3b542d87723155b08504317d2562e",
+      "lines": 56
+    }
+  ],
+  "reviewed_provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceInverseMaterialJetsReviewedManifest.json",
+      "sha256": "2c0359a48d72cf1d299fe1aa55afd4ff9e08c978f1450c24838733e889ea5cf9",
+      "blob": "24c481db3520705d623302527da7aa10727989d6",
+      "lines": 46
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferencePrescribedFamilyReviewedManifest.json",
+      "sha256": "81539b87d11771e38f6aa5fec7ecc958ca4ae2eb0500a391bbd10c6a5286490e",
+      "blob": "250e27afa3fc743f777b43649089820d47954bc5",
+      "lines": 37
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositivePrincipalJetsReviewedManifest.json",
+      "sha256": "26e9e95945aca3c481e3158da3e1c97bd523792cea56450460a35883a8be1d77",
+      "blob": "48386d7c5958bfaf7c9e1b8fd6b0a63661f5b07d",
+      "lines": 40
+    }
+  ],
+  "fixed_potential_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/WholeReferenceGaugeFixedPotentialReferenceJetsIndependentReview.json",
+    "sha256": "87b5e8b8a8cce6ece341a6319e92a2e7e8756c20aa775db7f776030c2abd0f30",
+    "blob": "0d06d79205f1b209a9292a949293865ad16d9244",
+    "lines": 131
+  },
+  "additional_pinned_provider": {
+    "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+    "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+    "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+    "lines": 1155
+  },
+  "read_scope": [
+    "All194 source lines and full candidate manifest; all276 inverse-material producer,110 displayed prescribed-family adapter and56 family-definition lines.",
+    "All290 fixed-family principal-atom source; the173 potential source had just received complete independent review87b5e8b8, and its exact complete public header was reread here.",
+    "All11 recorded source/provider/owner/candidate/review identities recomputed; pinned real rpow exponent monotonicity and the actual conjunction/let/function argument order checked."
+  ],
+  "checks": [
+    "There is exactly one invocation of the inverse-material producer. It chooses C0 and then B at n=3, before every output derivative order. Its universal finite certificate over component, midpoint host and both actual endpoint sources is returned unchanged, modulo reduction3+1=4.",
+    "The supplied midpoint selector and certified source define the literal degree4 endpoint slices and positiveReferenceTaylorWidth3. The prescribed-family adapter gives range geometry and full endpoint jets through4 of those exact same Y,H; it does not select another reference family.",
+    "For each output N, hall N is specialized to the original cell and source. This preserves the simultaneous forward positive Y derivatives, all H and reciprocal-H derivatives, and positive derivatives of literal invFun(Y). No inverse zeroth-value bound is asserted.",
+    "The potential contract is obtained only by projecting H and inverse clauses of that same hjets tuple. The principal and potential adapters receive the same original atlas, C0, normalized T, cell, Y,H and true geometry.",
+    "For each total spatial order s, BP and BV are selected before enumeration, transport fields, normalization set, component, atom and point. BM=max(BP,BV)>0 dominates both.",
+    "The disjunction of the four principal atoms with potential is handled without changing the actual atom. Smoothness and pi-periodicity pass unchanged. Since the explicit hE0 gives t>=1 at the actual V.cell sample, D<=BM implies D*t^D<=BM*t^BM using rpow exponent monotonicity and nonnegativity. This covers s=0 and all a+b<=s.",
+    "The source introduces no resource-limit option or bypass; its one public name has no installed-source collision. All source/provider files remained unchanged."
+  ],
+  "findings": [],
+  "compiled": false,
+  "source_edited": false,
+  "public_collision_count": 0,
+  "scope_limits": [
+    "The same retained Gamma, actual original negative host inclusion and raw optical lower bound remain explicit inputs. This theorem does not extract them from arbitrary Through03.",
+    "The unit E0 sample floor must already hold on this same material T. No post-selection material replacement or endpoint-to-sample comparison is invented.",
+    "Only five positive reference coefficient atoms are covered. This is not a final CurrentJets, ReferenceJets or unconditional N04 certificate.",
+    "No local compiler/elaborator, CI query/download, active source/index/ref or authority mutation; a static peer pass is not compilation evidence."
+  ],
+  "reviewed_at": "2026-11-12T17:00:43.742095+00:00"
+}

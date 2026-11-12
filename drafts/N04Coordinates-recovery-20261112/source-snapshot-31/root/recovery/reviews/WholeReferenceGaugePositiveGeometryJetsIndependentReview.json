@@ -1,0 +1,137 @@
+{
+  "kind": "same_actual_positive_ten_geometry_atoms_full_independent_review",
+  "reviewer": "/root",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveGeometryJetsCandidateManifest.json",
+    "sha256": "c795180d91d5778081abe1a916cf4727e92ad98ff69368a911f244c8674ada22",
+    "blob": "3c9da7e2a7222f24605fd83fecf2b52f16abedfc",
+    "lines": 132
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveGeometryJets.lean",
+    "sha256": "7f1bc458ad7b0700ea10e51475d3af9e371b60d687a4675ac519a02110553b5a",
+    "blob": "40f9f2614b7abce6022c2eb8e915c2f8a96c46f2",
+    "lines": 262
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceGeometryMaterialJets.lean",
+      "sha256": "d6b776738c3be81a9c9a306822717f60436d3b4d40d2275f1ec27ed8eadfc394",
+      "blob": "ae0e573b2f210d37e73aed88e9ecf4c4d53a6a9d",
+      "lines": 102
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceGeometryJetEnvelope.lean",
+      "sha256": "4d2065b6de1e1ff9081681c019d98f562c650f2551e4bcb6c985f834b0efe350",
+      "blob": "23b187c20404b418f813b5d6e992a43bb3daf204",
+      "lines": 196
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGauge.lean",
+      "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+      "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+      "lines": 171
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "lines": 168
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceCylinder.lean",
+      "sha256": "6ececb96b06c704d8672c58cbe2b395bf3ce8967a667b046cd09466249b5c4de",
+      "blob": "c1c59b1c3240feeec1539a65ce0c8a8a4ec7ba48",
+      "lines": 128
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "lines": 311
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N08RadialFamilyMaterialJets.lean",
+      "sha256": "5796d127cb631248523060a373d0cdea3d07052857008b6dcfb987dbae59289d",
+      "blob": "3fd9b99c74162ee221843491623573b719c172b3",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Inverse.lean",
+      "sha256": "d09dedd0090af21a326031aaaac409bb9065bb028915b64232df18733f482573",
+      "blob": "4ca6d75a836c94e9a169fe9b3fc5876adedd4010",
+      "lines": 173
+    }
+  ],
+  "provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceGeometryMaterialJetsReviewedManifest.json",
+      "sha256": "b1209727941ef3052ee5cd1a43225996ac36332eb8dfe95d6af614df583284fb",
+      "blob": "59533aa7f13c463acfec960f319f687a2c014725",
+      "lines": 37
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceGeometryJetEnvelopeReviewedManifest.json",
+      "sha256": "8789e7aa43c5cc2c999532f39f202dee5df6b06088e2441a4818090129103c88",
+      "blob": "359eee84515208e07a9dae6f10e06aa6b263ea85",
+      "lines": 37
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasDataReviewedManifest.json",
+      "sha256": "701abf400f31e9d5bd990eff6d782e8878b3bb25e17a721750de8d04a4e319d7",
+      "blob": "89a4780b10a4d508b9d5ac33dd3abdf393efa901",
+      "lines": 23
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGaugeReviewedManifest.json",
+      "sha256": "c840e5892621bb0d24bc16a65ce264898a538ecafb8c82b4728ee5760b11d6c2",
+      "blob": "bb8b3b0dddfb62c737cfd2c6f11f562b256378da",
+      "lines": 38
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometryReviewedManifest.json",
+      "sha256": "97cd4ecb74836bca17a67d6e413f437e2019c6449037d66e23b788e2525e70b3",
+      "blob": "3b9e9a1869056ffee6b05c09ff6bf26b8ffb73f0",
+      "lines": 22
+    }
+  ],
+  "read_scope": [
+    "All262 candidate lines and complete candidate manifest; full102 fixed-family material supplier and196 numerical ten-scalar envelope.",
+    "Full131 whole-atlas definition and fields; exact171 reference-gauge identity,168 range-geometry fields, literal atom/canonicalSource/unit-point definitions, pinned inverse derivative API and ordinary-to-mixed radial identity.",
+    "Exact current coefficientEnvelope_pack declaration and proof. Every source, provider and owner fingerprint independently recomputed; public names checked against installed sources."
+  ],
+  "checks": [
+    "The same global positive range geometry yields true scalar smoothness of Y,H and the literal invFunY. Its actual nonzero Jacobian and right inverse give chi_prime=1/Y_prime_at_chi; its left inverse gives the reciprocal derivative identity at Y.",
+    "The actual physical unit point is l+(r-l)*u, while the positive canonical unit point is exactly(u,theta). The ten full-function equalities preserve this distinction, including JacobianInverse evaluated at the physical point and sourceFactor evaluated at the canonical inverse.",
+    "The source is the literal canonicalSource H*f/absJac. Positivity removes the absolute value, and the inverse derivative identity gives H(chi)*chi_prime. Its inverse is reciprocalH(chi)*Y_prime(chi), with signs and factor order checked.",
+    "Every displayed scalar is globally smooth from the actual given geometry, including both reciprocal height and derivative-of-inverse factors. Both angle defects are exactly zero; the same radial fields give actual pi-periodicity.",
+    "The196 finite envelope handles true zero-order normalized chart and inverse values via real range maps, not an arbitrary inverse-value bound. Its double composition for JacobianInverse and two source products fit C*M^(2N+2), including N=0.",
+    "The102 supplier retains the given width and reciprocal-width envelope and all original Y,H,inverse jets. A finite numerical prefix is the only aggregation; no coordinate, interpolation width, cell or height is selected anew.",
+    "One BM is obtained before K,e,transports,height ratios,m and points. Exact stored positive metadata determines the original cell, and coefficientEnvelope_pack absorbs C0 only using the explicitly supplied normalized E0>=1.",
+    "The inl branch contradicts actual positive metadata and the inr branch uses exact original fields at the reference. The underlying negative atlas is arbitrary and never altered by the positive estimates.",
+    "The three public declarations expose only true scalar smoothness, actual full-function equality and the ten reference estimates. No final ReferenceJets, CurrentJets or independently selected family is assumed."
+  ],
+  "findings": [],
+  "compiled": false,
+  "source_edited": false,
+  "fingerprints_verified": 16,
+  "public_collisions": [],
+  "scope_limits": [
+    "Actual once-selected family assembly and the remaining reference scalar columns are separate consumers. Negative estimates and quantitative current jets are not established here.",
+    "Static full-source review is not Lean elaboration evidence. No compiler, resource override, active source/index/ref mutation or CI operation was used for the review."
+  ],
+  "reviewed_at": "2026-11-12T17:16:56.857309+00:00"
+}

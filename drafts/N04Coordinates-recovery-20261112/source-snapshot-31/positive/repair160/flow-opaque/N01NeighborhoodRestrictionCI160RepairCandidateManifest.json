@@ -1,0 +1,93 @@
+{
+  "kind": "CI160_neighborhood_flow_restriction_opaque_proof_boundary_repair",
+  "owner": "/root/proof_inventory",
+  "status": "CANDIDATE_HELD_PENDING_COMPLETE_INDEPENDENT_PEER_UNCOMPILED",
+  "actual_head": "03ea768c1f2211dff62714b932be808345dcf918",
+  "actual_tree": "84a1b13b975d16f42aed7de40b8601bd09fda8ae",
+  "target_path": "src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/flow-opaque/N01NeighborhoodRestriction.lean",
+    "sha256": "9da10cc067a2606c3fef7d14ce73d4bb1c8e660022c0ce6df5837da5d333ad3b",
+    "blob": "4c615b70f2ab1b3e44ba228e2c578d00f2b748c1",
+    "lines": 142
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/N01NeighborhoodRestriction.ci160-base.lean.txt",
+    "sha256": "8980a1dfece4b54cc46e1dcda20504cda7e90bcaedc76059c82c86cdbb9cdd9e",
+    "blob": "551267986278d6717642c54f98f85ece2d4d4eb0",
+    "lines": 126
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/flow-opaque/N01NeighborhoodRestriction.diff",
+    "sha256": "61639985d6cfac3d158f5b6c40be085b9aa7bcad7497cbe66a4f64b5d5057fba",
+    "blob": "b157308e960cc227377ea83c244f4c9c79bf5d2f",
+    "lines": 81
+  },
+  "cached_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-160.log",
+    "sha256": "62386517362d0eeeed8b0663c0d399f4ccfdce08dcbcebe07ef90fd4167ca097",
+    "blob": "6e4ae1d5688bfa7c8dbd564feb1dddb0ef0fd4a6",
+    "lines": 933
+  },
+  "diagnostics": [
+    "error: src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean:101:4: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached"
+  ],
+  "public_headers_preserved": 4,
+  "new_private_declarations": [
+    "ordinaryFlowFamilyTameBounds_restrict_neighborhood"
+  ],
+  "proof_delta": [
+    "Extract only the existing ordinary-flow final bullet to one private theorem with the existing OrdinaryFlowFamilyTameBounds as an explicit opaque proof input. Its per-k parameterLoss selection remains before every spatial s; the entire numerical/tower restriction proof is mechanically identical after deindent and hN-tail-to-hbound substitution.",
+    "The public proof projects the old ordinary-flow bound once into an explicitly typed hflow, then invokes the private result. The original state data, C.minusFlow, sample selector, B, parameterLoss, s+loss+parameterLoss, and restricted J.D are unchanged.",
+    "All four public headers, all imports and options, the three earlier public proofs, and the successful prefix/coefficient branch of N01Properties.restrict_neighborhood are byte-identical. No resource limit is increased."
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01cStateSeminorms.lean",
+      "sha256": "99abe3e9057a214b52c5188410cfc8d2ca2a3f9a52733bcb5c73dd9757666d26",
+      "blob": "f96fa185722d12bab8545de1d59ea100a0556417",
+      "lines": 331
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/SolveStateSpaces.lean",
+      "sha256": "035be369042b7d7ab904bdd9ec4fed643b94e2bc65d7dc44835529cb6a647115",
+      "blob": "ffea3f07f4a1fc03b0cdd99bc1d9bdd6c64bed13",
+      "lines": 184
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleCofinite.lean",
+      "sha256": "216a156a837d75f8ffb20ca2d4b12b84898ff606bc5d8f5bce4e79d25b9b3da3",
+      "blob": "1562a68cf59d5ebd5bedc7efce55bf3d7217ba44",
+      "lines": 98
+    }
+  ],
+  "mechanical_checks": {
+    "actual_git_preimage_equal": true,
+    "public_headers_exact_equal": true,
+    "reverse_transform_exact_bytes": true,
+    "extracted_flow_body_only_projection_substitution": true,
+    "import_list_unchanged": true,
+    "option_list_unchanged": true,
+    "forbidden_tokens": [],
+    "private_tactic_layout_normalized": true
+  },
+  "scope_limits": [
+    "This addresses the cached deterministic isDefEq heartbeat exhaustion through a proof boundary; actual performance and elaboration remain for CI.",
+    "No local compiler, resource limit override, active source/index/ref or CI mutation. No other failing module is edited."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:23:39.963328+00:00",
+  "supersedes_unreviewed_candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/N01NeighborhoodRestrictionCI160RepairCandidateManifest.json",
+    "sha256": "5af7b9e89a2297183a7e30853b21392335e41ddf13aadd8added1c5cff7078d9",
+    "blob": "ee8d7cf05d309ae0e8807342ad8b69c6e3572b65",
+    "lines": 85
+  },
+  "self_review_correction": "The first extraction retained the old bullet indentation after intro k. The selected source dedents the private proof remainder by two spaces; tokens, all public bytes and the copied mathematical proof are unchanged. The earlier unreviewed candidate is preserved."
+}

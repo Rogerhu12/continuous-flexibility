@@ -1,0 +1,132 @@
+{
+  "kind": "actual_same_family_positive_ten_geometry_atoms",
+  "owner": "/root/quantitative_route",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_PEER",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveGeometryJets.lean",
+    "sha256": "7f1bc458ad7b0700ea10e51475d3af9e371b60d687a4675ac519a02110553b5a",
+    "blob": "40f9f2614b7abce6022c2eb8e915c2f8a96c46f2",
+    "lines": 262
+  },
+  "public_names": [
+    "positiveReferenceGeometryScalar_smooth",
+    "positiveReferenceGeometry_actual_atom_eq",
+    "n04WholeReferenceGauge_positive_geometryReferenceJets_fixedFamily"
+  ],
+  "imports": [
+    "ContinuousFlexibility.Analysis.FixedPositiveReferenceGeometryMaterialJets",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+    "ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization",
+    "ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceGeometryMaterialJets.lean",
+      "sha256": "d6b776738c3be81a9c9a306822717f60436d3b4d40d2275f1ec27ed8eadfc394",
+      "blob": "ae0e573b2f210d37e73aed88e9ecf4c4d53a6a9d",
+      "lines": 102
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceGeometryJetEnvelope.lean",
+      "sha256": "4d2065b6de1e1ff9081681c019d98f562c650f2551e4bcb6c985f834b0efe350",
+      "blob": "23b187c20404b418f813b5d6e992a43bb3daf204",
+      "lines": 196
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGauge.lean",
+      "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+      "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+      "lines": 171
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "lines": 168
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceCylinder.lean",
+      "sha256": "6ececb96b06c704d8672c58cbe2b395bf3ce8967a667b046cd09466249b5c4de",
+      "blob": "c1c59b1c3240feeec1539a65ce0c8a8a4ec7ba48",
+      "lines": 128
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "lines": 311
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N08RadialFamilyMaterialJets.lean",
+      "sha256": "5796d127cb631248523060a373d0cdea3d07052857008b6dcfb987dbae59289d",
+      "blob": "3fd9b99c74162ee221843491623573b719c172b3",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Inverse.lean",
+      "sha256": "d09dedd0090af21a326031aaaac409bb9065bb028915b64232df18733f482573",
+      "blob": "4ca6d75a836c94e9a169fe9b3fc5876adedd4010",
+      "lines": 173
+    }
+  ],
+  "provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceGeometryMaterialJetsReviewedManifest.json",
+      "sha256": "b1209727941ef3052ee5cd1a43225996ac36332eb8dfe95d6af614df583284fb",
+      "blob": "59533aa7f13c463acfec960f319f687a2c014725",
+      "lines": 37
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceGeometryJetEnvelopeReviewedManifest.json",
+      "sha256": "8789e7aa43c5cc2c999532f39f202dee5df6b06088e2441a4818090129103c88",
+      "blob": "359eee84515208e07a9dae6f10e06aa6b263ea85",
+      "lines": 37
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasDataReviewedManifest.json",
+      "sha256": "701abf400f31e9d5bd990eff6d782e8878b3bb25e17a721750de8d04a4e319d7",
+      "blob": "89a4780b10a4d508b9d5ac33dd3abdf393efa901",
+      "lines": 23
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGaugeReviewedManifest.json",
+      "sha256": "c840e5892621bb0d24bc16a65ce264898a538ecafb8c82b4728ee5760b11d6c2",
+      "blob": "bb8b3b0dddfb62c737cfd2c6f11f562b256378da",
+      "lines": 38
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometryReviewedManifest.json",
+      "sha256": "97cd4ecb74836bca17a67d6e413f437e2019c6449037d66e23b788e2525e70b3",
+      "blob": "3b9e9a1869056ffee6b05c09ff6bf26b8ffb73f0",
+      "lines": 22
+    }
+  ],
+  "proof_summary": [
+    "The literal physical unit point and canonical unit point remain distinct. Real endpoint metadata plus full stored-field identities give a global equality for each of the ten actual atoms.",
+    "Actual positive Jacobian and two inverse identities give chi_prime=1/Y_prime_at_chi and reciprocalYprime=chi_prime_at_Y. The canonical source factor is H(chi)*chi_prime; its inverse is reciprocalH(chi)*Y_prime(chi).",
+    "Global regularity of the supplied reference cylinder implies global smoothness of every displayed scalar. Its radial lift is periodic and all mixed jets reduce to the genuine scalar jets.",
+    "The exact finite-prefix102 material bound uses the original width bound and the same Y/H/positive inverse jets. Packing (M*C0^M)*E0^M requires the explicit actual normalized sample E0>=1.",
+    "For every order the numerical constant precedes the underlying K,enumeration,relative fields,component and point. Only the positive fields of the true n04WholeReferenceGaugeAtlasData are used; the negative K is never replaced.",
+    "The generic actual-atom identity and scalar regularity are public for the subsequent left/nu source-column consumers, avoiding a second expansion of the true source formula."
+  ],
+  "scope_limits": [
+    "No new reference family, interpolation width, cell, material data or low finite envelope is selected.",
+    "This fixed-family consumer obtains its inputs from the same single276 family and retained finite certificate; it does not manufacture those costs from arbitrary qualitative geometry.",
+    "Only the ten displayed positive geometry atoms are handled. Five principal/potential atoms are supplied by the independently reviewed companion family. No negative-side or complete terminal ReferenceJets claim.",
+    "No local compilation/elaboration, resource-limit change, active source/index/ref edit or CI request."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:14:10.044379+00:00"
+}

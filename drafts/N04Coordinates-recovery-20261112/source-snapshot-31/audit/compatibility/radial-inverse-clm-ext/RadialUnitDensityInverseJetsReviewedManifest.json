@@ -1,0 +1,47 @@
+{
+  "kind": "local_unit_density_inverse_finite_polynomial_reviewed",
+  "owner": "/root/audit_coordinates",
+  "status": "INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-clm-ext/RadialUnitDensityInverseJets.lean",
+    "sha256": "a04c93a733402f23e349a4a8a6d38e5f42b7eaa147e5b777fa00ee427eec88f5",
+    "blob": "b9bc21aa7c89b38691e7510288d38832f2ab3a0f",
+    "lines": 136
+  },
+  "superseded_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialUnitDensityInverseJets.lean",
+    "sha256": "9a33546517d40f3e894fe7856b664b0f317a2b404473339e33855b4f0b238f3a",
+    "blob": "9a0a2764867e0dd76f93a8f74daa54ddfbd5bc2d",
+    "lines": 135
+  },
+  "compatibility_candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-clm-ext/RadialUnitDensityInverseJetsCompatibilityCandidateManifest.json",
+    "sha256": "8023f3d80aff28a3bd368dff5e59833c67fee196a74b884d9b8c0df1d98502f0",
+    "blob": "acbd1c7864478b2aa873e2d934429ea01719f8e9",
+    "lines": 41
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/RadialUnitDensityInverseJetsIndependentReview.json",
+    "sha256": "7e5dd41fa452e13950296b756f20a64d306c8d8b5b060d51b88ca6a0c07da203",
+    "blob": "f88f89109a9833676025e00589e54c99e9a46959",
+    "lines": 148
+  },
+  "reviewed_provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteInverseAngularPolynomialReviewedManifest.json",
+      "sha256": "090767198f3fcb1e975f6994ac8c21ca9fd47c3870f1f3f0549cd1b16949f094",
+      "blob": "0ed64e821bf646c8449e71f1817511967aa44569",
+      "lines": 84
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelopeVisibilityReviewedManifest.json",
+      "sha256": "55e1f9fe0d0e8e16ec596a3bebb948de20821dc3d05675dfaf382d4eb1901984",
+      "blob": "2ff192a92ea67f4a7a301b651ece487da37125e0",
+      "lines": 46
+    }
+  ],
+  "selection_note": "Select this explicit CLM.ext136 source for the Analysis.RadialUnitDensityInverseJets module. Original135 and original joint candidate remain historical unchanged.",
+  "public_header_imports_options_unchanged": true,
+  "compiled": false,
+  "created_at": "2026-11-12T17:20:40.238775+00:00"
+}

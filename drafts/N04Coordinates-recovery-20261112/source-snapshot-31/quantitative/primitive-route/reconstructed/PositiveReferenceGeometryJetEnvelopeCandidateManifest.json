@@ -1,0 +1,76 @@
+{
+  "kind": "finite_prefix_actual_positive_geometry_scalar_envelope",
+  "owner": "/root/quantitative_route",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_PEER",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceGeometryJetEnvelope.lean",
+    "sha256": "4d2065b6de1e1ff9081681c019d98f562c650f2551e4bcb6c985f834b0efe350",
+    "blob": "23b187c20404b418f813b5d6e992a43bb3daf204",
+    "lines": 196
+  },
+  "public_names": [
+    "positiveReferenceGeometryScalar",
+    "exists_positiveReferenceGeometry_jet_envelope"
+  ],
+  "imports": [
+    "ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope",
+    "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.lean",
+      "sha256": "9bd854157a276a4c5fd8d3161f63d65a851fedbc656beba959ad5899e89cb5a7",
+      "blob": "4df4d9e114ae59bd99b5d3c09825adc95dbe3808",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "lines": 168
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceCylinder.lean",
+      "sha256": "6ececb96b06c704d8672c58cbe2b395bf3ce8967a667b046cd09466249b5c4de",
+      "blob": "c1c59b1c3240feeec1539a65ce0c8a8a4ec7ba48",
+      "lines": 128
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+      "sha256": "d6c3ace5e5e251e2943bd5985eb9c0a076a875c98fd876c961cb54c366ca50cb",
+      "blob": "86135f3b7295638a64b59ddaf2653b87d2733431",
+      "lines": 391
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Order/Field/Basic.lean",
+      "sha256": "c8ac46d74034b9d4c7c92297a62340d5bde580b4b61474382c0e7a54e1decda7",
+      "blob": "9bf925a162dff33e3cbcedcc645a2c49c0c28a67",
+      "lines": 812
+    }
+  ],
+  "provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelopeVisibilityReviewedManifest.json",
+    "sha256": "55e1f9fe0d0e8e16ec596a3bebb948de20821dc3d05675dfaf382d4eb1901984",
+    "blob": "2ff192a92ea67f4a7a301b651ece487da37125e0",
+    "lines": 46
+  },
+  "proof_summary": [
+    "The displayed scalar definitions distinguish physical unit affine evaluation from the canonical inverse coordinate. Angle-defect and irrelevant atom slots are zero.",
+    "Actual open maps and inverse maps give the two normalized coordinate values in (0,1), so no unwrapped or unnormalized inverse zeroth bound is inserted.",
+    "Finite prefix product/composition estimates use one common M, interval width and reciprocal width at most M, forward/inverse positive jets through N+1 and height/reciprocal jets through N.",
+    "For Z=CC*M*M^N every direct pullback is bounded by Z; the inverse Jacobian double pullback costs at most Z^2, the source products cost CP*Z^2. The exact common bound is (CP*CC^2)*M^(2*N+2), including N=0."
+  ],
+  "scope_limits": [
+    "This is a numerical input lemma for the actual displayed geometry scalars, not an assertion that arbitrary supplied geometry has material costs.",
+    "The actual ten Atom identities and material specialization are separate consumers still to be written.",
+    "No state SmoothDirections or final ReferenceJets claim, no compiler or active source mutation."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:04:25.389149+00:00"
+}

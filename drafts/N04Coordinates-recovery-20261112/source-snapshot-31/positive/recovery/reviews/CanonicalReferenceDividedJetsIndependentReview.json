@@ -1,0 +1,80 @@
+{
+  "kind": "actual_reference_divided_atoms_full_independent_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceDividedJets.lean",
+    "sha256": "b88fd4118e9e3ec46e9da0a49240ab4d107fc0ebbbfd2be043bf135add0330f9",
+    "blob": "eb7424e622d46576e131c1963cbda89515d96a0f",
+    "lines": 83
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceDividedJetsCandidateManifest.json",
+    "sha256": "6961f657fc8a7472d07121d063c3d28cb2c63c0bd36a66054bb0885ea4c8dac4",
+    "blob": "baacc54f9f7b386b0a1ab5ea638a01429228c78d",
+    "lines": 70
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bPositiveDivision.lean",
+      "sha256": "d274f19959dd831c45e7d0ee0374a4bf01132369e13d69e595beb71a60de39ee",
+      "blob": "052cdea1dd1db004e3021e7100bf3b0704f1f472",
+      "lines": 110
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "lines": 603
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+      "sha256": "d6c3ace5e5e251e2943bd5985eb9c0a076a875c98fd876c961cb54c366ca50cb",
+      "blob": "86135f3b7295638a64b59ddaf2653b87d2733431",
+      "lines": 391
+    }
+  ],
+  "whole_atlas_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasDataReviewedManifest.json",
+    "sha256": "701abf400f31e9d5bd990eff6d782e8878b3bb25e17a721750de8d04a4e319d7",
+    "blob": "89a4780b10a4d508b9d5ac33dd3abdf393efa901",
+    "lines": 23
+  },
+  "read_scope": [
+    "Full83 candidate source, actual131 whole-reference atlas and110 literal interior-division provider.",
+    "Exact atom definition and mixedDerivative definition in current Nonlinear/Analysis; pinned iteratedDeriv_const and ContDiffOn constant APIs."
+  ],
+  "checks": [
+    "The actual ref argument is literally (C.referenceState,0). Each stored divided coefficient subtracts precisely that same coefficient value, so the numerator is zero even at totalized zero denominator. No root or physical-domain argument is needed.",
+    "Both branches of the positive-flag test are zero. This yields equality of the entire atom function, before any spatial point is chosen; the rewrite therefore also applies under ContDiffOn and mixedDerivative.",
+    "Each iterated derivative of the zero function is zero, including order0: the two iteratedDeriv_const cases reduce with ite_self. Smoothness and pi-periodicity are for the literal stored reference atom.",
+    "B=1 precedes s-dependent fields,piece,atom and all points. The supplied assumption is only nonnegativity of E0(sample); Real.rpow_nonneg supplies the RHS sign without an E0 floor.",
+    "The same whole-reference constructor ends in n04bWithInteriorDivision of its actual updated raw atlas. The final exact application unfolds that existing constructor and changes no field or sample.",
+    "All source/provider/owner fingerprints match the manifest; three new public names have zero installed collisions."
+  ],
+  "findings": [],
+  "mechanical_checks": {
+    "all_fingerprints_exact": true,
+    "public_collisions": [],
+    "forbidden_tokens": []
+  },
+  "scope_limits": [
+    "Only the three reference divided atoms vanish. Current-state quotients and their parameter towers are not asserted to vanish.",
+    "No compilation, CI operation, active src/index/ref mutation or final certificate claim."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "reviewed_at": "2026-11-12T17:12:39.246291+00:00"
+}

@@ -1,0 +1,219 @@
+{
+  "kind": "same_actual_first_integral_and_travel_circle_selector_uniform_estimates",
+  "owner": "/root/proof_inventory",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_PEER",
+  "source": {
+    "module": "ContinuousFlexibility.Analysis.N04TravelCircleUniformBounds",
+    "target_path": "src/ContinuousFlexibility/Analysis/N04TravelCircleUniformBounds.lean",
+    "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelCircleUniformBounds.lean",
+    "source_ref": "LOCAL_HELD_CANDIDATE",
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelCircleUniformBounds.lean",
+    "sha256": "a38f9a389f71f9811a9d99135155a73dd48b1ddc597682cdca05a4248f319a36",
+    "blob": "ccc6e3813c819470b322d059a560be09372e8d0a",
+    "lines": 166,
+    "imports": [
+      "ContinuousFlexibility.Analysis.N04TravelChartCircle",
+      "ContinuousFlexibility.Analysis.N01ReturnVelocityUniformBounds"
+    ]
+  },
+  "public_names": [
+    "N01Properties.n04CorrectedFlowCircle_uniform_lower",
+    "N01Properties.uniformSmoothFamilyOn_n04CorrectedFlowCircle",
+    "N01Properties.uniformSmoothFamilyOn_n04CorrectedFlowInverseCircle",
+    "N01Properties.uniformSmoothFamilyOn_n04MinusFirstIntegralCircle",
+    "N01Properties.uniformSmoothFamilyOn_n04TravelChartCircle",
+    "N01Properties.n04TravelChartCircle_uniform_oneHigh"
+  ],
+  "selected_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelChartCircle.lean",
+      "blob": "104f0953d774e3a3d5c37d386952aeed75774f8f",
+      "sha256": "b7263767dc103093d832994c184503da11351aa3338fd1c06f682224c792b808",
+      "lines": 154,
+      "module": "ContinuousFlexibility.Analysis.N04TravelChartCircle",
+      "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelChartCircle.lean",
+      "source_ref": "LOCAL_NEW_TRAVEL_CIRCLE",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04TravelChartCircle.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04MinusFirstIntegralCircle",
+        "ContinuousFlexibility.Analysis.N04bActualTravelChart",
+        "ContinuousFlexibility.Analysis.SpacesCircleParity",
+        "ContinuousFlexibility.Analysis.CircleJointEvaluation",
+        "ContinuousFlexibility.Analysis.TameProductDirections",
+        "ContinuousFlexibility.Scalar.WeightedSmoothTameLinear"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04MinusFirstIntegralCircle.lean",
+      "sha256": "2c6be9ee3d6ce0f6ec4e5b15248718dca7085dae2dd80580dfd816943f10eb0a",
+      "blob": "fc11c89b2e92489890485acfcfe221f4ec47dd28",
+      "lines": 136,
+      "target": "src/ContinuousFlexibility/Analysis/N04MinusFirstIntegralCircle.lean",
+      "module": "ContinuousFlexibility.Analysis.N04MinusFirstIntegralCircle",
+      "selected_ref": "LOCAL_NEW_ACTUAL_MINUS_FIRST_INTEGRAL",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04CorrectedFlowInverseCircle",
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04CorrectedFlowCircle",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowCircle.lean",
+      "sha256": "1c499c99875b12e8a7a7abf91ff9dec371dca9c4f0a7505c5d4dfc50ce236e62",
+      "blob": "5a0a53733562aeb135e5c543ba3b6f36e7e7ab02",
+      "lines": 118,
+      "selected_ref": "LOCAL_HELD_CORRECTED_FLOW",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01InterpolationInverseCircle",
+        "ContinuousFlexibility.Analysis.ReturnCorrectedFlow"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04CorrectedFlowInverseCircle",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowInverseCircle.lean",
+      "sha256": "35ad5b06e178c76a4d208253027d57884980b62cb114253316b09c8ae93c8272",
+      "blob": "fff0022928fd6e8917dfdaa250fd635e2ca5ecdd",
+      "lines": 164,
+      "selected_ref": "LOCAL_HELD_CORRECTED_FLOW",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04CorrectedFlowCircle"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnVelocityUniformBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnVelocityUniformBounds.lean",
+      "blob": "6a54e8cd9550b1e8d18e27069161bd1d80fc8fe2",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "d166edeb5c1c0f9d3de327a381413c4bcaa9507e5e05c77d205243c24bb5303c",
+      "lines": 362,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds",
+        "ContinuousFlexibility.Analysis.ReturnInterpolationJetBounds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnCircleUniformBounds.lean",
+      "blob": "a9b6d7a92da85f46f18f84563d4b1d29f333910a",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "a5cdc37d50959078df17dfdee12b52f3c8dadcc2b5b90e3980ddd9edadaf4716",
+      "lines": 209,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowCircleUniformBounds",
+        "ContinuousFlexibility.Analysis.CircleUniformFamilyOperations",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame",
+        "ContinuousFlexibility.Analysis.ReturnChartUniformBounds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleUniformFamilyOperations",
+      "path": "src/ContinuousFlexibility/Analysis/CircleUniformFamilyOperations.lean",
+      "blob": "c5282293b21370a88a5b1f198d61bd0507d79dd0",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "b48f8889543fcf398a652570e2348e61dafcb0b1ec4734a94978297726595c86",
+      "lines": 191,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleTravelUniformJets",
+        "ContinuousFlexibility.Analysis.CircleAverageCompositionUniformBounds",
+        "ContinuousFlexibility.Analysis.TameUniformSmoothFamily"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CirclePositiveInversePerturbation",
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInversePerturbation.lean",
+      "blob": "d532c92eee0cf46e41a22a1a641cf1d95ac87ef6",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "db1f19b5c13d3eb7146ea15da658ccf5e2f49cb752a8cde198e4ac66957d0b14",
+      "lines": 67,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame",
+        "ContinuousFlexibility.Analysis.CircleInversePerturbation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameUniformSmoothFamily",
+      "path": "src/ContinuousFlexibility/Analysis/TameUniformSmoothFamily.lean",
+      "blob": "a52a1e3d098c51d67260efef9b64b2d42195161a",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "9c6826d76b69da22774d75954775a838fb0c16270ad0c0202123fa4bbcfc2802",
+      "lines": 200,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameUniformFamilyJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameUniformFamilyJets",
+      "path": "src/ContinuousFlexibility/Analysis/TameUniformFamilyJets.lean",
+      "blob": "af2fcbf1366ab7ff2a314f03f02cbfe99234961d",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "a568602dff4fba3065d7ee05893e1d64e03301ef2b603393d49facc9854e2760",
+      "lines": 270,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameUniformFamilyGrowth",
+        "ContinuousFlexibility.Analysis.TameTopologicalComposition",
+        "ContinuousFlexibility.Analysis.TameProductDirections",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsAffine",
+        "ContinuousFlexibility.Analysis.TameTransfer"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SpacesCircleParity",
+      "target_path": "src/ContinuousFlexibility/Analysis/SpacesCircleParity.lean",
+      "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+      "blob": "d45ab137d1e034ac515a2453e4558164dbe4993b",
+      "sha256": "6728cc182b90bbb6fd091ac3151b759c16f85da485cae0f1bad59cdc5806bca7",
+      "lines": 278,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleJetEncoding",
+        "ContinuousFlexibility.Analysis.CylinderTestPairing",
+        "ContinuousFlexibility.Analysis.ProjectiveLimitSubspace"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectedFlow",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectedFlow.lean",
+      "blob": "36693b0d8102e289a31ebd012f8eeb6cf63f795c",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "9323567f5c4d710472b4d8b4f9ea52c5cdb5d16aa8d83b9661844f61f91b8763",
+      "lines": 343,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectionAlgebra",
+        "ContinuousFlexibility.Analysis.ReturnChartDifferentiation"
+      ]
+    }
+  ],
+  "selected_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelCircleUniformBoundsClosureInventory.json",
+    "sha256": "871c0a0de79771fa8954c20a5824a51ac9e92ee5953262d4f04a2fd0125efbe1",
+    "blob": "b714776f8b147083fa52a8deee0dc5614ade7b5b",
+    "lines": 7495
+  },
+  "selected_closure_gzip": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelCircleUniformBoundsClosureInventory.json.gz",
+    "sha256": "d8cfe6d10636c8300d7f4d8ea93743112c2388d5e6fe013328c0b78c423f2463",
+    "bytes": 62799,
+    "decompresses_to_sha256": "871c0a0de79771fa8954c20a5824a51ac9e92ee5953262d4f04a2fd0125efbe1"
+  },
+  "real_input_retention_specification": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/N04PreservedCorrectionNumericalInputSpecification.json",
+    "sha256": "7fe47c4107fc90955485799f115fe9e39c599c6003f91375da9a7b676ea8a5d1",
+    "blob": "24a89f4451fd020afdc343cc8e716084de4e1f9c",
+    "lines": 30
+  },
+  "checks": [
+    "Uses exactly the corrected circle, its existing negative-diagonal inverse perturbation, root136 first-integral circle and positive154 even/odd travel projections. No map or inverse choice is replaced.",
+    "Actual original-flow slope>=1/2 and actual interpolation slope>=1/12 give corrected slope>=1/24 by the real derivative chain rule. The whole-function equality makes the partial corrected-flow application explicit before rewriting under deriv.",
+    "Existing selector-uniform endpoint/interpolation families, forward circle composition and inverse composition produce UniformSmoothFamilyOn for the same literal maps. Arbitrary optical translations cost no selector-dependent constant.",
+    "The inverse is the existing negative diagonal; a local ContinuousNeg instance uses the actual projective model topology. The fixed left chart then gives the normalized first-integral displacement, retaining the circle model H^3/4 weight.",
+    "Both actual travel components are continuous linear parity projections of that same first-integral circle. The final estimate accepts any already fixed genuine family J and obtains its bounds by uniqueness; n is chosen only after J.",
+    "The numerical low-box index B and parameter-order loss delta are fixed before R,s and all selectors. This is a local uniform oneHigh estimate, not an unconditional final CurrentJets bound on one fixed low-grade neighborhood.",
+    "All selected source hash/blob/line/import identities and topology checked. No missing import, cycle, new public collision or forbidden token."
+  ],
+  "scope_limits": [
+    "hflow is an actual field of the same ReturnCorrectionUniformNeighborhood output, already used inside the fixed correction constructor. Its new retained gateway is being prepared by root; no target estimate is used as a substitute.",
+    "The same-circle angular grading estimates still require conversion to actual scalar/spatial jets and the numerical radial recurrence. No terminal CurrentJets assertion.",
+    "No compilation, active source/index/ref/CI mutation or resource override."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:17:55.464238+00:00"
+}

@@ -1,0 +1,111 @@
+{
+  "kind": "full_independent_static_source_and_actual_provider_review",
+  "reviewer": "/root/audit_coordinates",
+  "status": "PASSED_STATIC_REVIEW_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedReferenceScalarSourceMaterialJets.lean",
+    "sha256": "cc9d0f96fbd066179f2bb3910642f67f2d0b3f8ad82108e4339ff476f17bf870",
+    "blob": "e410d5c93a544817741449d6c6f952bfd0203297",
+    "lines": 140,
+    "target_path": "src/ContinuousFlexibility/Analysis/FixedReferenceScalarSourceMaterialJets.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedReferenceScalarSourceMaterialJetsCandidateManifest.json",
+    "sha256": "027d7018c2af22d6a224f388a0aa546707e858035b3bb1542f391a6873798003",
+    "blob": "50a609e2f1ec992d6a34ac3d70b4b949389cce9b",
+    "lines": 72
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.lean",
+      "sha256": "9bd854157a276a4c5fd8d3161f63d65a851fedbc656beba959ad5899e89cb5a7",
+      "blob": "4df4d9e114ae59bd99b5d3c09825adc95dbe3808",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N06ReferenceSourceJets.lean",
+      "sha256": "bd09d8647d420fcaab6b36eda3d3fc564fde52291b867ee910832d55854ffe5e",
+      "blob": "21a926d230cca9fe164b23f281e82ae349fd9b06",
+      "lines": 161
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "lines": 603
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+      "sha256": "1e9fbd861ac27cb4b17113c3f8ede3c5f573a6b342b23e41ff514b05bd3334ef",
+      "blob": "e7fd4979f58f787927500713547b3671402ae782",
+      "lines": 1283
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    }
+  ],
+  "additional_verified_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "lines": 1155
+    }
+  ],
+  "numerical_provider_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelopeVisibilityReviewedManifest.json",
+    "sha256": "55e1f9fe0d0e8e16ec596a3bebb948de20821dc3d05675dfaf382d4eb1901984",
+    "blob": "2ff192a92ea67f4a7a301b651ece487da37125e0",
+    "lines": 46
+  },
+  "read_scope": [
+    "All 140 source lines, including the compact finite-prefix helper and the complete public declaration/proof.",
+    "All 159 selected RadialReferencePotentialJetEnvelope source lines, particularly the public local product and composition estimates.",
+    "All 161 N06ReferenceSourceJets source lines, verifying that the exact called smooth periodic angular bound is unconditional; its later Through04-based declarations are not used.",
+    "Actual mixedDerivative and unitStrip definitions; pinned scalar iterated derivative constant-multiplication, open-set ContDiffWithinAt-to-ContDiffAt, real-power/natural-power conversion APIs."
+  ],
+  "findings": [
+    {
+      "topic": "Same family and actual domain",
+      "result": "X,F,W remain the fixed input functions. All local differentiability is derived from ContDiffOn on Ioo 0 1 using its actual openness. No extension or new inverse is selected."
+    },
+    {
+      "topic": "Reference profile and angular jet bound",
+      "result": "A finite sum of absolute compact derivative bounds gives P for all orders at most s on the actual physical range Icc l r. The periodic plane function g composed with snd permits the unconditional angular bound at radial interval Icc 0 0. G is common to all family members and all angles."
+    },
+    {
+      "topic": "Positive inverse jets only",
+      "result": "The composition estimate consumes f-jets at the actual X i x and only orders 1 through s of X. The inverse value is used through hrange, with no artificial zeroth derivative bound."
+    },
+    {
+      "topic": "Exact mixed derivative",
+      "result": "The actual definition differentiates angularly first and then radially. The two constant multiplication identities give exactly the radial derivative of F*(f composed with X) times the angular derivative of g, including order zero."
+    },
+    {
+      "topic": "Numerical power and quantifiers",
+      "result": "With Z=A*W^A, composition gives CC*P*Z^s and product gives CP*Z*(CC*P*Z^s). Multiplication by G yields coefficient*W^(A*(s+1)); M=1+coefficient+exponent dominates both nonnegative quantities. M is chosen before all indices, points and derivative pairs."
+    },
+    {
+      "topic": "Assumptions and selected source identities",
+      "result": "All seven candidate/provider/owner rows match exact file SHA256, Git blob and line count. The new public theorem has no active-source declaration collision. The inputs are inverse/source-factor jets, not the desired scalar source conclusion or a final canonical certificate."
+    }
+  ],
+  "source_modified": false,
+  "compiled": false,
+  "ci_queried": false,
+  "scope_limits": [
+    "Only the common fixed-family scalar-source numerical consequence is certified by this review. The actual left/nu column identities and same-family geometry/material adapters remain separate.",
+    "No claim is made that a complete ReferenceJets or final primitive geometry certificate has been assembled.",
+    "No compiler/elaborator, resource override, active checkout/index/ref/checkpoint/authority mutation, or CI operation was performed."
+  ],
+  "created_at": "2026-11-12T17:17:36.789361+00:00"
+}

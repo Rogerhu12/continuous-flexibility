@@ -1,0 +1,159 @@
+{
+  "kind": "actual_negative_reference_scalar_inverse_and_local_unit_density_envelope",
+  "owner": "/root/audit_coordinates",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_INDEPENDENT_REVIEW",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialUnitDensityInverseJets.lean",
+      "sha256": "9a33546517d40f3e894fe7856b664b0f317a2b404473339e33855b4f0b238f3a",
+      "blob": "9a0a2764867e0dd76f93a8f74daa54ddfbd5bc2d",
+      "lines": 135,
+      "target_path": "src/ContinuousFlexibility/Analysis/RadialUnitDensityInverseJets.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.FiniteInversePolynomialEnvelope",
+        "ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope",
+        "Mathlib.Analysis.SpecialFunctions.Pow.Deriv"
+      ],
+      "public_names": [
+        "radialUnitDensity_inverse_finiteJet_envelope"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverse.lean",
+      "sha256": "88897c617e7204b734ee70860aa58cc38514df3c6da5180375898c3ae37c427f",
+      "blob": "cf59332c8a3c6d42d13afd93722193d9662c3cc3",
+      "lines": 152,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceScalarInverse.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualNegativeReferencePotentialFormula"
+      ],
+      "public_names": [
+        "n04Coordinates_actual_reference_negative_scalar_inverse"
+      ]
+    }
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteInversePolynomialEnvelope.lean",
+      "sha256": "d73838d259228ff320f106fc1e1439d76ba15178b2146f54ab5ec4009edeea7e",
+      "blob": "e229f50f114442e4b07e1682c4693ac0ad8b4724",
+      "lines": 117
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.lean",
+      "sha256": "9bd854157a276a4c5fd8d3161f63d65a851fedbc656beba959ad5899e89cb5a7",
+      "blob": "4df4d9e114ae59bd99b5d3c09825adc95dbe3808",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormula.lean",
+      "sha256": "9901ab0f2a3ff035d99d3f420c0b1215a279b53ba99785b06b3e1a9047a7ea7b",
+      "blob": "4f635532f777f7272f15937a1b7f7f53f681d171",
+      "lines": 137
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeRadialFields.lean",
+      "sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+      "blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+      "lines": 156
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePrincipalFormulas.lean",
+      "sha256": "fc2eb15c0da7e37fda9f227b906a75c801d0d628064e17e5bca4e63dae75e910",
+      "blob": "096b420be6425f39b2f5e73e4a0f60cbd9113ced",
+      "lines": 100
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ActualNegativePrincipalDensity.lean",
+      "sha256": "79be096548f4222f5265dc93e1b7ad6aa1bf426954089f48bb78b423c23ee2a3",
+      "blob": "7a3122c1e2c2081375a7be7405a2a348706ed261",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+      "sha256": "598b1d5f18c4a22eecd5108949d46b2ddca955d79ea66090b85ca6ba06ff8227",
+      "blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+      "lines": 96
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bTypedAtlasDomains.lean",
+      "sha256": "8032ce84bf016719e83ee02e2d6d11ab3869314b5de2aae207935b757ef121b9",
+      "blob": "4114c475e0bda07b9674ea1f5127fc56507695fc",
+      "lines": 155
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    }
+  ],
+  "reviewed_provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteInverseAngularPolynomialReviewedManifest.json",
+      "sha256": "090767198f3fcb1e975f6994ac8c21ca9fd47c3870f1f3f0549cd1b16949f094",
+      "blob": "0ed64e821bf646c8449e71f1817511967aa44569",
+      "lines": 84
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelopeVisibilityReviewedManifest.json",
+      "sha256": "55e1f9fe0d0e8e16ec596a3bebb948de20821dc3d05675dfaf382d4eb1901984",
+      "blob": "2ff192a92ea67f4a7a301b651ece487da37125e0",
+      "lines": 46
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormulaReviewedManifest.json",
+      "sha256": "fe60c28dd61886bf2cb1b0ee7b3bf15663b277931c93da8a42a9dc21a4a7fd7a",
+      "blob": "fc7c8cb35fdabb37465162738edd2cc869bfe90b",
+      "lines": 42
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeEndpointDataReviewedManifest.json",
+      "sha256": "f5792f65df07694fa330cdc669d7ebd446577e0cffef75b61e0f4edf4f845c8f",
+      "blob": "798621a81c8ffc57a1b3fde6be7e2935f4ce1121",
+      "lines": 51
+    }
+  ],
+  "pinned_api_sources": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Deriv.lean",
+      "sha256": "3033d2b35bcfdad1ab06168dee62c8587215de8fa049caa85e5445c54d4fb98c",
+      "blob": "ede41b77d146105bee637d6db9b91a1a21a48547",
+      "lines": 141
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+      "sha256": "78fca2cc5f69fe7f7cf42cb31480aa15068851dae795e1d5fad62f62a28c4145",
+      "blob": "afdc3e3a27aad5f24293a47dc82304dfab84979d",
+      "lines": 985
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Group/DivInvMonoid.lean",
+      "sha256": "7d4d18e9987e81a35e17574fb4e39754fb44ea75f5a09d8bc3ce0d0647e40acf",
+      "blob": "178684cb03c904cee29050460c48a0225daeaf64",
+      "lines": 365
+    }
+  ],
+  "mathlib_pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "checks": [
+    "Complete source and actual declaration/proof providers read; all scalar function and point arguments use the same actual chart/inverse/height.",
+    "The geometry source uses literal zero-angle slices of the stored actual old K, true referenceDomain and both PartA inverses. The entire inverse is the cylindrical map on the actual canonical half.",
+    "The unit identity H^2*w*abs(Yprime)=1 comes from the actual negative principal density a=1 and the genuine reference coefficient a=w, with ordinary local derivatives of the radial chart.",
+    "The local numerical lemma differentiates abs(Yprime)=H^(-2)*w^(-1) using the true fixed sign near the nonzero derivative. No sign is asserted globally.",
+    "The first inverse derivative equals H^2*w, and the finite inverse polynomial uses only positive forward jets; constants C,d precede M, all four fields, and the point.",
+    "Only local ContDiffAt hypotheses are used by the numerical consequence. No infinite extension, inverse value bound, artificial collar size, or final target certificate is an input.",
+    "Both new public names have zero matches in the active source tree; no source import/options or existing public declarations are modified."
+  ],
+  "scope_limits": [
+    "These two sources prove actual scalar inverse geometry and a local numerical envelope. The same-sample all-order material packing is the next adapter and is not claimed here.",
+    "No Lean compiler/elaborator, active checkout/index/ref/checkpoint/authority modification, or CI query/download was run."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:16:21.529137+00:00"
+}

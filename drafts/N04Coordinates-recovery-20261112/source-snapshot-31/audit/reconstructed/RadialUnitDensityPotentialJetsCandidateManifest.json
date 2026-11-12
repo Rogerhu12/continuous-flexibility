@@ -1,0 +1,66 @@
+{
+  "kind": "local_finite_jets_of_unit_cancelled_actual_negative_potential",
+  "owner": "/root/audit_coordinates",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialUnitDensityPotentialJets.lean",
+    "sha256": "d9fb69ef9dd8eaa5ca91c5fdd5b817abcdbcfc6047a2e87fde15a718cdfa476b",
+    "blob": "5c3e5a5446aaefe72e3b1981604a3351efac8cb4",
+    "lines": 85,
+    "target_path": "src/ContinuousFlexibility/Analysis/RadialUnitDensityPotentialJets.lean"
+  },
+  "public_names": [
+    "radialUnitDensityPotential_finiteJet_envelope"
+  ],
+  "selected_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.lean",
+    "sha256": "9bd854157a276a4c5fd8d3161f63d65a851fedbc656beba959ad5899e89cb5a7",
+    "blob": "4df4d9e114ae59bd99b5d3c09825adc95dbe3808",
+    "lines": 159
+  },
+  "provider_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelopeVisibilityReviewedManifest.json",
+    "sha256": "55e1f9fe0d0e8e16ec596a3bebb948de20821dc3d05675dfaf382d4eb1901984",
+    "blob": "2ff192a92ea67f4a7a301b651ece487da37125e0",
+    "lines": 46
+  },
+  "formula_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormula.lean",
+    "sha256": "9901ab0f2a3ff035d99d3f420c0b1215a279b53ba99785b06b3e1a9047a7ea7b",
+    "blob": "4f635532f777f7272f15937a1b7f7f53f681d171",
+    "lines": 137
+  },
+  "formula_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormulaReviewedManifest.json",
+    "sha256": "fe60c28dd61886bf2cb1b0ee7b3bf15663b277931c93da8a42a9dc21a4a7fd7a",
+    "blob": "fc7c8cb35fdabb37465162738edd2cc869bfe90b",
+    "lines": 42
+  },
+  "pinned_api_sources": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Deriv.lean",
+      "sha256": "3033d2b35bcfdad1ab06168dee62c8587215de8fa049caa85e5445c54d4fb98c",
+      "blob": "ede41b77d146105bee637d6db9b91a1a21a48547",
+      "lines": 141
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+      "sha256": "d6c3ace5e5e251e2943bd5985eb9c0a076a875c98fd876c961cb54c366ca50cb",
+      "blob": "86135f3b7295638a64b59ddaf2653b87d2733431",
+      "lines": 391
+    }
+  ],
+  "checks": [
+    "This is the actual physical negative potential w*H^3*deriv(w*deriv H), composed with the same chi; the sign and normalization come from the separately reviewed actual137 identity.",
+    "All smoothness hypotheses are local ContDiffAt at x or the actual inverse point chi x. No artificial global smooth extension is required.",
+    "Flux jets through N+1 cost CP1*M^2; the true derivative flux through N has the same bound. The prefactor w*H^3 costs CP*M^2.",
+    "The physical potential product costs CP*(CP*M^2)*(CP1*M^2); composition with positive inverse jets through N gives the fixed coefficient CC*CP^2*CP1 and power M^(N+4).",
+    "C is chosen before M and all fields/points. N=0 and all finite prefix inequalities are included; no zeroth inverse-coordinate bound or desired potential estimate is assumed."
+  ],
+  "scope_limits": [
+    "The next adapter supplies the actual stored height/inverse material inputs at the same original half sample. This local numerical lemma alone is not a completed atom or parent certificate.",
+    "No Lean compiler/elaborator, active source/index/ref/checkpoint/authority mutation or CI query/download."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:23:00.231393+00:00"
+}

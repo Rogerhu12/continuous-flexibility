@@ -1,0 +1,49 @@
+{
+  "kind": "fixed_family_positive_geometry_material_prefix",
+  "owner": "/root/quantitative_route",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_PEER",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceGeometryMaterialJets.lean",
+    "sha256": "d6b776738c3be81a9c9a306822717f60436d3b4d40d2275f1ec27ed8eadfc394",
+    "blob": "ae0e573b2f210d37e73aed88e9ecf4c4d53a6a9d",
+    "lines": 102
+  },
+  "public_names": [
+    "fixedPositiveReference_geometry_material_jets"
+  ],
+  "imports": [
+    "ContinuousFlexibility.Analysis.PositiveReferenceGeometryJetEnvelope"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceGeometryJetEnvelope.lean",
+      "sha256": "4d2065b6de1e1ff9081681c019d98f562c650f2551e4bcb6c985f834b0efe350",
+      "blob": "23b187c20404b418f813b5d6e992a43bb3daf204",
+      "lines": 196
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceInverseMaterialJets.lean",
+      "sha256": "ef40450003358fd22e68a70ecd7c722bfb630b77f6fb6e234331efcb9ab74af5",
+      "blob": "6dd64a27ede32a71db55d16a2029b9b6858a4c12",
+      "lines": 276
+    }
+  ],
+  "pending_provider_candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceGeometryJetEnvelopeCandidateManifest.json",
+    "sha256": "75cb4d7981a2dba0d590912f7cbdb525d166bf1dcb1d1dfcb5994adb2bc59f1b",
+    "blob": "abb2ba8d7b55af9623b82980b0a536aac08de5f0",
+    "lines": 76
+  },
+  "proof_summary": [
+    "This input is precisely the same all-order forward, reciprocal-height and positive inverse jet family produced by276, together with its retained interval width and reciprocal-width cost.",
+    "For each N the finite prefix of numerical A_j and the original low B form D before i/v/x. Reindexing j-1 extracts every positive inverse jet without a zeroth inverse-value estimate.",
+    "The numerical196 scalar envelope is applied at Z=D*W^D. Its C*Z^(2N+2) is packed into M*W^M with M fixed before all component and spatial variables; the original W/Y/H/lowB are not selected again."
+  ],
+  "scope_limits": [
+    "Numerical196 was pending its independent full peer when this candidate was created.",
+    "This lemma does not select the actual family or assert supplied numerical costs automatically; its real producer is the existing same-witness276 finite/all-order output.",
+    "No actual Atom identification, state-directional or terminal ReferenceJets claim; uncompiled scratch only."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:06:42.733250+00:00"
+}

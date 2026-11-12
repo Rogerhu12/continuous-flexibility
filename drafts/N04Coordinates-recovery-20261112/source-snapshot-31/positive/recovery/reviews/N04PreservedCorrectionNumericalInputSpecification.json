@@ -1,0 +1,30 @@
+{
+  "kind": "exact_same_witness_numerical_retention_specification",
+  "owner": "/root/proof_inventory",
+  "status": "READ_ONLY_INTERFACE_SPECIFICATION_NOT_NEW_PROOF",
+  "actual_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-optical/ReturnCorrectionUniformNeighborhood.provider.lean.txt",
+    "sha256": "6076d8d95cfbc3ddda9c3238ace1f5365f7295cab7840d73a474695db45ad4c6",
+    "blob": "d93ffb039a87de62f1e5130351da1e974c43114c",
+    "lines": 146
+  },
+  "actual_theorem": "N01Properties.exists_opticalCorrection_flow_buffered_uniform",
+  "collar_exact_header_fragment": "      (∃ j : ℕ → ℕ, ∃ x δ : ℕ → ℝ, ∃ K A B lam P : ℝ,\n        0 < K ∧ 0 < A ∧ 0 < B ∧ 0 < lam ∧ 0 < P ∧\n        (∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m) ∧\n          0 < δ m ∧ C.left m < x m - δ m ∧ x m + δ m < C.right m ∧\n          (δ m)⁻¹ ≤ K * radialE (D.cellIndex (j m)) ^ A ∧\n          ∀ r ∈ Icc (x m - δ m) (x m + δ m),\n            radialE (D.cellIndex (j m)) ^ (-B) / (2 * (D.b - D.a)) ≤ opticalSpeed D.w r) ∧\n        (∀ m, χ m = returnOpticalCutoff (x m) (δ m / 2)) ∧\n        (∀ m, tsupport (deriv (χ m)) ⊆ Icc (x m - δ m / 2) (x m + δ m / 2)) ∧\n        (∀ m, tsupport (deriv (χ m)) ⊆ Ioo (x m - δ m) (x m + δ m)) ∧\n        (∀ n : ℕ, ∃ Kₙ : ℝ, 0 < Kₙ ∧ ∀ m r,\n          |iteratedDeriv n (χ m) r| ≤ Kₙ * radialE (D.cellIndex (j m)) ^ (A * n)) ∧\n        ∀ z ∈ stateNeighborhood S C base' ε', ∀ m p,\n          p.1 ∈ Icc (x m - δ m) (x m + δ m) →\n          let d := lam * radialE (D.cellIndex (j m)) ^ (-P) / 2\n          0 < d ∧ d ≤ (originalCoefficients D S C z).a p ∧\n          d ≤ -(originalCoefficients D S C z).c p ∧\n          d ^ 2 ≤ (originalCoefficients D S C z).b p ^ 2 -\n            (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p ∧\n          0 < (originalCoefficients D S C z).b p ^ 2 -\n            (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p) ∧",
+  "sector_flow_exact_header_fragment": "      ∀ z ∈ sectorNeighborhood S base' ε' ε',\n        ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,\n          1 / 2 ≤ deriv (C.minusFlow (liftSectorParameter S C z) m r) θ ∧\n          deriv (C.minusFlow (liftSectorParameter S C z) m r) θ ≤ 3 / 2",
+  "mapping": [
+    "j is the same full negative-component host map exported as cell; it is chosen in hcollar, not reset to the atlas half-cell.",
+    "x,delta and the same cutoff chi are from the original hcollar. chi equals returnOpticalCutoff(x)(delta/2), with derivative support in the half buffer and strictly inside the full buffer.",
+    "K,A control delta inverse and the actual all-order chi jets. B is the optical-speed exponent; lam,P give original coefficient a and discriminant lower bounds on the same closed physical buffer.",
+    "All collar constants precede component/state/order variables except the permitted derivative-specific K_n. No estimate of final coordinates is assumed.",
+    "The sector flow slope lower/upper hflow is the final actual provider output already obtained in the current148 construction; returning it changes no base,epsilon or witness."
+  ],
+  "consumer_projections": [
+    "For central transport use l=x-delta, h=x+delta and hstripSupport; hdata supplies C.left<l<h<C.right together with positive delta.",
+    "For coefficient reciprocal/spatial growth use hpositive.2.1 : d<=a and hpositive.2.2.2.1 : d^2<=discriminant, where d=lam*radialE(index(j m))^(-P)/2.",
+    "For selector uniform actual inverse/circle operations use hflow directly on sectorNeighborhood S basePrime epsilonPrime epsilonPrime.",
+    "For all-state original discriminant on cutoff support retain the existing hdiscFull separately; it is stronger in domain than merely sector states."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "created_at": "2026-11-12T17:14:55.402978+00:00"
+}

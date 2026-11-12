@@ -1,0 +1,32 @@
+{
+  "kind": "fixed_radial_reference_scalar_source_material_jets_reviewed_owner",
+  "status": "FULL_SOURCE_INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedReferenceScalarSourceMaterialJets.lean",
+    "sha256": "cc9d0f96fbd066179f2bb3910642f67f2d0b3f8ad82108e4339ff476f17bf870",
+    "blob": "e410d5c93a544817741449d6c6f952bfd0203297",
+    "lines": 140,
+    "target_path": "src/ContinuousFlexibility/Analysis/FixedReferenceScalarSourceMaterialJets.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedReferenceScalarSourceMaterialJetsCandidateManifest.json",
+    "sha256": "027d7018c2af22d6a224f388a0aa546707e858035b3bb1542f391a6873798003",
+    "blob": "50a609e2f1ec992d6a34ac3d70b4b949389cce9b",
+    "lines": 72
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/FixedReferenceScalarSourceMaterialJetsIndependentReview.json",
+    "sha256": "f3be8b26f2a0ed215c3b6c3ac95b6c5cdf6fa57092325d229303cd27dd73ce46",
+    "blob": "9f0ef51f06c7da8ff62ce6df4dbbcbaff830e0e1",
+    "lines": 111
+  },
+  "numeric_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelopeVisibilityReviewedManifest.json",
+    "sha256": "55e1f9fe0d0e8e16ec596a3bebb948de20821dc3d05675dfaf382d4eb1901984",
+    "blob": "2ff192a92ea67f4a7a301b651ece487da37125e0",
+    "lines": 46
+  },
+  "compiled": false,
+  "scope": "Same fixed inverse, source factor and sample envelope. Actual scalar-column identities and family inputs remain separate consumers.",
+  "created_at": "2026-11-12T17:20:21.047241+00:00"
+}

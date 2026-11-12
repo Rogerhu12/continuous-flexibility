@@ -1,0 +1,37 @@
+{
+  "kind": "fixed_family_positive_geometry_material_prefix_reviewed",
+  "owner": "/root/quantitative_route",
+  "status": "FULL_STATIC_PEER_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceGeometryMaterialJets.lean",
+    "sha256": "d6b776738c3be81a9c9a306822717f60436d3b4d40d2275f1ec27ed8eadfc394",
+    "blob": "ae0e573b2f210d37e73aed88e9ecf4c4d53a6a9d",
+    "lines": 102
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceGeometryMaterialJetsCandidateManifest.json",
+    "sha256": "b6afbdf6b04212e2e61ce64fc48e6050dd1b2904e45c7a5e0ddf4bb373b25fe4",
+    "blob": "6dc782116100246d494a59a50feaf5ae62bf93db",
+    "lines": 49
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/FixedPositiveReferenceGeometryMaterialJetsIndependentReview.json",
+    "sha256": "888243b1dc2aed52f4b903f5d440e93909dc2104a46e72f0955f76e333bc6b35",
+    "blob": "8aceba244b551c3ceb524b2c4dcf03f6023c796b",
+    "lines": 72
+  },
+  "selected_numeric_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceGeometryJetEnvelopeReviewedManifest.json",
+    "sha256": "8789e7aa43c5cc2c999532f39f202dee5df6b06088e2441a4818090129103c88",
+    "blob": "359eee84515208e07a9dae6f10e06aa6b263ea85",
+    "lines": 37
+  },
+  "scope": [
+    "Same original W/B/Y/H and finite prefix; no family or width rechoice.",
+    "The historically pending196 provider is now explicitly reviewed; original candidate is immutable.",
+    "Actual stored atom identity is a separate consumer."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "created_at": "2026-11-12T17:14:09.974020+00:00"
+}

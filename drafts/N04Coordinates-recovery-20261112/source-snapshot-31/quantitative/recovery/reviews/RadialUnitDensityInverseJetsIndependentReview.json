@@ -1,0 +1,148 @@
+{
+  "kind": "local_radial_unit_density_inverse_polynomial_complete_independent_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-clm-ext/RadialUnitDensityInverseJets.lean",
+    "sha256": "a04c93a733402f23e349a4a8a6d38e5f42b7eaa147e5b777fa00ee427eec88f5",
+    "blob": "b9bc21aa7c89b38691e7510288d38832f2ab3a0f",
+    "lines": 136
+  },
+  "superseded_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialUnitDensityInverseJets.lean",
+    "sha256": "9a33546517d40f3e894fe7856b664b0f317a2b404473339e33855b4f0b238f3a",
+    "blob": "9a0a2764867e0dd76f93a8f74daa54ddfbd5bc2d",
+    "lines": 135
+  },
+  "compatibility_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-clm-ext/RadialUnitDensityInverseJetsCompatibilityCandidateManifest.json",
+    "sha256": "8023f3d80aff28a3bd368dff5e59833c67fee196a74b884d9b8c0df1d98502f0",
+    "blob": "acbd1c7864478b2aa873e2d934429ea01719f8e9",
+    "lines": 41
+  },
+  "original_joint_candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverseCandidateManifest.json",
+    "sha256": "1e71edda88fdaf0b328abaaa2c60cd6aa583f9b2558a860c2aef9c430c7961ab",
+    "blob": "43c643c25e78a90a29fb423545a2164817dfb374",
+    "lines": 159
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-clm-ext/RadialUnitDensityInverseJets.diff",
+    "sha256": "ce987b91c4750b2afc3d489ac2e3c7cff9a4abf289184623cb6152d86d7aea0c",
+    "blob": "a00dd6c661efea287f84ae57164ba5056e2a37a1",
+    "lines": 12
+  },
+  "selected_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteInversePolynomialEnvelope.lean",
+      "sha256": "d73838d259228ff320f106fc1e1439d76ba15178b2146f54ab5ec4009edeea7e",
+      "blob": "e229f50f114442e4b07e1682c4693ac0ad8b4724",
+      "lines": 117
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.lean",
+      "sha256": "9bd854157a276a4c5fd8d3161f63d65a851fedbc656beba959ad5899e89cb5a7",
+      "blob": "4df4d9e114ae59bd99b5d3c09825adc95dbe3808",
+      "lines": 159
+    }
+  ],
+  "selected_provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteInverseAngularPolynomialReviewedManifest.json",
+      "sha256": "090767198f3fcb1e975f6994ac8c21ca9fd47c3870f1f3f0549cd1b16949f094",
+      "blob": "0ed64e821bf646c8449e71f1817511967aa44569",
+      "lines": 84
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelopeVisibilityReviewedManifest.json",
+      "sha256": "55e1f9fe0d0e8e16ec596a3bebb948de20821dc3d05675dfaf382d4eb1901984",
+      "blob": "2ff192a92ea67f4a7a301b651ece487da37125e0",
+      "lines": 46
+    }
+  ],
+  "pinned_apis": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Deriv.lean",
+      "sha256": "3033d2b35bcfdad1ab06168dee62c8587215de8fa049caa85e5445c54d4fb98c",
+      "blob": "ede41b77d146105bee637d6db9b91a1a21a48547",
+      "lines": 141
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+      "sha256": "78fca2cc5f69fe7f7cf42cb31480aa15068851dae795e1d5fad62f62a28c4145",
+      "blob": "afdc3e3a27aad5f24293a47dc82304dfab84979d",
+      "lines": 985
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+      "sha256": "d6c3ace5e5e251e2943bd5985eb9c0a076a875c98fd876c961cb54c366ca50cb",
+      "blob": "86135f3b7295638a64b59ddaf2653b87d2733431",
+      "lines": 391
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Group/DivInvMonoid.lean",
+      "sha256": "7d4d18e9987e81a35e17574fb4e39754fb44ea75f5a09d8bc3ce0d0647e40acf",
+      "blob": "178684cb03c904cee29050460c48a0225daeaf64",
+      "lines": 365
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "lines": 1155
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Deriv.lean",
+      "sha256": "9098e465d4b2a9898352ad3eb944c1b76fa7bd010862391f790d57f59ab59d25",
+      "blob": "5c4314cbc0f51719245bc3b268948275c4a21812",
+      "lines": 778
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Basic.lean",
+      "sha256": "7bdb5def2e7b70c85181b3d8f3df311e8928ccae1fd6000b9e61a4a75a2ab1db",
+      "blob": "47fed33950cf184bf699fd945809de5e75e8fcc6",
+      "lines": 1111
+    }
+  ],
+  "read_scope": [
+    "All135 original source lines, the full136 selected source through exact one-replacement reconstruction, complete base/diff and both manifests.",
+    "All117 finite inverse polynomial and159 selected product/composition-envelope source lines; actual pinned inverse-cancellation, real integral power, local derivative regularity, fderiv/deriv, inverse-germ and CLM extensionality signatures."
+  ],
+  "checks": [
+    "The real unit identity H^2*w*abs(Yprime)=1 implies nonzero Yprime, reciprocal abs(Yprime)=H^2*w and abs(Yprime)=H^(-2)*w_inverse. Negative integer rpow conversion is exact even without first assuming a sign for H.",
+    "Continuity of Yprime at the actual inverse image fixes its sign on a genuine neighborhood. Differentiating the positive or negative germ yields equality of absolute iterated derivatives; no global sign or auxiliary extension is assumed.",
+    "The selected product envelope bounds actual positive Y jets through N+1 by CP*M^2 using only local H^(-2) and w_inverse jets through N. Local smoothness uses the given true positive values.",
+    "Differentiating Y composed with chi equal to id gives Yprime(chi x)*chi_prime(x)=1. Absolute values and the unit identity yield the exact first inverse bound H(chi x)^2*w(chi x); no zeroth inverse-value envelope is inserted.",
+    "The explicit CLM.ext at arbitrary v verifies the scalar left-inverse derivative required by the actual117 provider. Its positive raw forward orders and inverse first derivative are bounded by V=(1+CP)*M^2.",
+    "The existing finite inverse polynomial chooses CI,d before the numerical bound and all fields/points. Substitution of V gives the displayed fixed coefficient CI*(1+CP)^d and exponent2*d, including N=0.",
+    "The compatibility delta selects ContinuousLinearMap.ext explicitly; removing its two lines and restoring ext v reproduces every original byte. Public header, imports, constants and every other proof byte remain unchanged.",
+    "All source and manifest fingerprints were independently recomputed. The companion actual152 source is identity-checked as part of the joint manifest but is outside this full mathematical review."
+  ],
+  "mechanical_checks": {
+    "verified_artifact_rows": 24,
+    "exact_single_replacement": true,
+    "public_header_unchanged": true,
+    "resource_options": [],
+    "forbidden_tokens": []
+  },
+  "finding_resolved": {
+    "original": "The scalar CLM ext v step competed with the pinned @[ext] ext_ring rule, which does not introduce an arbitrary v; the subsequent proof referred to v. This is the previously observed ext-selection pattern, not a claim of running this candidate.",
+    "selected": "Explicit apply ContinuousLinearMap.ext followed by intro v removes the search-order dependency and proves the same map equality.",
+    "original_bytes_preserved": true
+  },
+  "scope_limits": [
+    "Local numerical inverse jets only. Same-sample material packing and the actual152 inverse geometry are separate consumers.",
+    "No global inverse value bound, profile collar cost, state-directional estimate or final CurrentJets/ReferenceJets conclusion.",
+    "No compiler/elaborator, resource-limit change, active source/index/ref mutation or CI query/download."
+  ],
+  "findings": [],
+  "compiled": false,
+  "source_edited": false,
+  "reviewed_at": "2026-11-12T17:19:18.354919+00:00"
+}

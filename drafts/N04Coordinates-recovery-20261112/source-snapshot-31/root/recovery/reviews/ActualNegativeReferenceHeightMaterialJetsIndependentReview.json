@@ -1,0 +1,179 @@
+{
+  "kind": "same_actual_negative_half_stored_height_material_jets_full_independent_review",
+  "reviewer": "/root",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightMaterialJetsCandidateManifest.json",
+    "sha256": "c978698094452943f73353d8d31f36b9cdd0a6e8d1f23ec62562e8490bc654c1",
+    "blob": "8babb214b0a84d9633990f29326b263c60e20746",
+    "lines": 149
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightMaterialJets.lean",
+    "sha256": "bda1d2cda9e6c88c394819233f9606026e417e03a5c357cb6aab76ab7da8d383",
+    "blob": "20423f5dc8e83101d8950003cb5454bf3def9007",
+    "lines": 293,
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceHeightMaterialJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualNegativeOpticalRootDivision",
+      "ContinuousFlexibility.Analysis.ActualNegativeReferenceAiryHeight",
+      "ContinuousFlexibility.Analysis.OpticalHalfAiryHeightMaterialJets",
+      "ContinuousFlexibility.Analysis.ReferenceInverseProfileMaterialJets",
+      "ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels",
+      "Mathlib.Topology.Order.Compact"
+    ],
+    "public_names": [
+      "n04bActualTypedAtlas_reference_half_height_power_material_jets",
+      "n04bActualTypedAtlas_reference_half_height_physical_power_material_jets"
+    ]
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeOpticalRootDivision.lean",
+      "sha256": "5b631337c20031a69fab824a07c73702556ae9b3532a784f29fd868b64270187",
+      "blob": "a7d083a6bd4b3f1cce55c2647117967dcbc5704b",
+      "lines": 238
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceAiryHeight.lean",
+      "sha256": "596c3a9e251af4cf733969373eed0530c9d3857a2e8825e61417efddf83edc9e",
+      "blob": "806604cbc578c78f75ab380a34c07274cd3e551d",
+      "lines": 151
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryHeightMaterialJets.lean",
+      "sha256": "2a332f186f3b6d6f4500b9a05a988b0c460dfb2cb783cc42228f1de1b4b7527a",
+      "blob": "b164d2df00ec004514087942cf5e3d9c619e2e19",
+      "lines": 261
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeMaterialSamples.lean",
+      "sha256": "696583df4d5261aff78e5a6cc32ff4fde06ea6d17b2bdf2745805fde0a06c2fc",
+      "blob": "2546c07212cf569a225e873eb38945a9cb4127e3",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryAverage.lean",
+      "sha256": "3042235baed470dbba3f46a0db906d299c504b8e0569e255393693265f350fe7",
+      "blob": "5b72f289315de1f7af1090266df6c7723f52e369",
+      "lines": 215
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJets.lean",
+      "sha256": "52e91e6500606231c499fcd3863d9b2f9ca99535348f52e9abc8f15b139b8e23",
+      "blob": "6fbfba9f7a349a6604eb28473b5098a5f45a3e1f",
+      "lines": 103
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialGlobalEndpointModels.lean",
+      "sha256": "2296624a6ce1501048acda5f6ba6a6779d9491bcccd8653db158d8ef9120b4fa",
+      "blob": "94856c92ba535db174db559d1ab2ddacdf77dfd5",
+      "lines": 65
+    }
+  ],
+  "reviewed_provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeOpticalRootDivisionReviewedManifest.json",
+      "sha256": "266d9c269f03139a7af30df7048979c8d4ff4cb6c30effdff4177d911f1c2731",
+      "blob": "55995e2c84b3056bdb005ede2b12d4816bb8a232",
+      "lines": 51
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceAiryFieldsReviewedManifest.json",
+      "sha256": "2d28747c29fa62b43c1fdb1204cc87c8656eaac286341c43bded636e71e8409e",
+      "blob": "11c65323b511f84d417df4c78c738763492a8617",
+      "lines": 64
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryHeightMaterialJetsReviewedManifest.json",
+      "sha256": "1bd61081d642b02d1f4f748c753eca78af6731b200a625a82910bdc31dfc26f1",
+      "blob": "6184d0d411461aa36655dc56b30f804f4f43a924",
+      "lines": 60
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeMaterialSamplesReviewedManifest.json",
+      "sha256": "c296199c9dec8bfd1cf7f5ba7d3540a783ce6d0f6043ee58c41bdce59e5e6729",
+      "blob": "c3770c51f99a3a4a734213541f7b04436263350c",
+      "lines": 54
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryAverageReviewedManifest.json",
+      "sha256": "c2a150c2c703e085608ba0e41f10350e6ef889599bdf785e9c35259544a5481e",
+      "blob": "cd82d84d6ed8f98f29452f9218b1e02a11f29852",
+      "lines": 44
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJetsReviewedManifest.json",
+      "sha256": "16b143562879d7afa35191e4a5850af9407223fed8af59136062433a67906846",
+      "blob": "d45cce809854a44f29de33bf413d6d46afcb51e7",
+      "lines": 34
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/ReconstructedOpticalMaterialCoreEightReviewedManifest.json",
+      "sha256": "f4df7de7d44e93490131ad38746cee3c17734c2db4cb615014b0a813d920f16b",
+      "blob": "88dc69b24b1600f559e728d9814a9126dfd76947",
+      "lines": 115
+    }
+  ],
+  "pinned_api_refs": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Normed/Group/Bounded.lean",
+      "sha256": "b399b0280564faa2493dc7e814c90f09f73e9c710db8ec2c1ac9bb1046062435",
+      "blob": "d6b3dd69687ad53535e86689abd4f4aed66949ef",
+      "lines": 173
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "lines": 1155
+    }
+  ],
+  "additional_definitions": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OpticalRootDivision.lean",
+      "sha256": "96170f08b3ebee938ed86ed8276be8018d9d0de565128560850fac989d8d1e75",
+      "blob": "1966ba3edb4375cc90aeb7795927723b1b1cd9f4",
+      "lines": 154
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Order/GroupWithZero/Basic.lean",
+      "sha256": "6526bf3a919d5306c90daf75cf96cfe3bbfacc702f3858fb00f893f7346e2cbd",
+      "blob": "335ef50464487b5763d4ad885d55d83b00964f1b",
+      "lines": 1474
+    }
+  ],
+  "read_scope": [
+    "All293 source lines and the complete candidate manifest; full151 stored Airy-height equality,131 actual negative sample transport and65 global material floor provider.",
+    "The238 actual optical factor,261 all-real-power half-height provider,215 actual average and103 inverse-profile jets were already independently read in full in this task; their exact argument order and relevant interfaces were rechecked.",
+    "Pinned translation/reflection iterated-derivative identities, inverse antitonicity, compact derivative bounds and actual inward-coordinate definition were checked. Every manifest fingerprint was recomputed."
+  ],
+  "checks": [
+    "The first common C0 comes from actual material endpoint models throughout the core, before the real power and piece choices. The raw E0 needs positivity only; no E0>=1 premise is inserted.",
+    "All coefficient functions and reciprocal costs are fixed before k,m,side,host,point and angle. The same B(n) controls every true half at the original K.cell k sample.",
+    "The238 actual root-division provider supplies a genuine smooth factor g and its exact radicand factorization. The true host j is used only for the optical lower input and is not identified with the stored midpoint sample.",
+    "The physical w jets have a compact bound on the closed ambient annulus. Its reciprocal is controlled instead by the103 actual inverse-profile estimate at core points and the131 exact-sample transfer; no compact reciprocal bound at ambient endpoints is used.",
+    "Packing from the raw sample to U=C0*E0 uses nonnegative exponents and U>=1, and the single M dominates all coefficient and exponent costs. The g and w value, reciprocal and jet hypotheses of261 are supplied explicitly.",
+    "The actual half has positive width and sits inside the closed whole component. One positive smooth c is chosen with the square-root germ on the entire closed half before any x,theta,n. Its average remains the same integral, with no exterior jet or collar-radius bound.",
+    "The151 actual stored height equality holds on the full open half for the original K and enumeration. Open EqOn transports every real-power ordinary derivative, including order0; the input c is not reselected per derivative.",
+    "The physical-radius corollary reuses the identical C0 and B. The inward map has slope+1 or-1, whose nth absolute power is1. The original k is recovered exactly from e.symm after the explicit index equality.",
+    "No final ReferenceJets, CurrentJets, Through04 or coordinate-certificate premise is introduced. Actual raw optical lower provenance remains a separately stated construction obligation."
+  ],
+  "findings": [],
+  "compiled": false,
+  "source_edited": false,
+  "fingerprints_verified": 18,
+  "public_collisions": [],
+  "scope_limits": [
+    "These are physical-radius reference height-power estimates for the same actual negative half. Canonical inverse composition, potential and final atom packaging are later consumers.",
+    "The uniform raw optical constant and true-host premise must still be produced from the retained construction; this review does not discharge them.",
+    "Static full-source review is not Lean elaboration evidence. No compiler, resource overrides, active source/index/ref or CI operation was used for this review."
+  ],
+  "reviewed_at": "2026-11-12T17:10:53.545739+00:00"
+}

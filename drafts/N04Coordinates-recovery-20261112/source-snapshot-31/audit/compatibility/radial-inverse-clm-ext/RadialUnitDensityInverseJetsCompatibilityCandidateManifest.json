@@ -1,0 +1,41 @@
+{
+  "kind": "explicit_continuous_linear_map_extensionality_compatibility",
+  "owner": "/root/audit_coordinates",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_PEER_BINDING",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-clm-ext/RadialUnitDensityInverseJets.lean",
+    "sha256": "a04c93a733402f23e349a4a8a6d38e5f42b7eaa147e5b777fa00ee427eec88f5",
+    "blob": "b9bc21aa7c89b38691e7510288d38832f2ab3a0f",
+    "lines": 136
+  },
+  "superseded_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialUnitDensityInverseJets.lean",
+    "sha256": "9a33546517d40f3e894fe7856b664b0f317a2b404473339e33855b4f0b238f3a",
+    "blob": "9a0a2764867e0dd76f93a8f74daa54ddfbd5bc2d",
+    "lines": 135
+  },
+  "preimage": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-clm-ext/RadialUnitDensityInverseJets.base.lean.txt",
+    "sha256": "9a33546517d40f3e894fe7856b664b0f317a2b404473339e33855b4f0b238f3a",
+    "blob": "9a0a2764867e0dd76f93a8f74daa54ddfbd5bc2d",
+    "lines": 135
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-clm-ext/RadialUnitDensityInverseJets.diff",
+    "sha256": "ce987b91c4750b2afc3d489ac2e3c7cff9a4abf289184623cb6152d86d7aea0c",
+    "blob": "a00dd6c661efea287f84ae57164ba5056e2a37a1",
+    "lines": 12
+  },
+  "original_candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverseCandidateManifest.json",
+    "sha256": "1e71edda88fdaf0b328abaaa2c60cd6aa583f9b2558a860c2aef9c430c7961ab",
+    "blob": "43c643c25e78a90a29fb423545a2164817dfb374",
+    "lines": 159
+  },
+  "exact_change": "Only ext v is replaced by apply ContinuousLinearMap.ext followed by intro v, selecting the complete map extensionality theorem explicitly and preserving the proof at arbitrary v.",
+  "public_headers_imports_options_unchanged": true,
+  "rest_of_bytes_unchanged": true,
+  "compiled": false,
+  "source_bytes_historical_preserved": true,
+  "created_at": "2026-11-12T17:18:23.529213+00:00"
+}

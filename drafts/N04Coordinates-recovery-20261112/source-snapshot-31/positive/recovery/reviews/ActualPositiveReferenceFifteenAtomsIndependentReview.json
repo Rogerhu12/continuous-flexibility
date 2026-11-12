@@ -1,0 +1,89 @@
+{
+  "kind": "single_actual_positive_reference_family_fifteen_atoms_complete_independent_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFifteenAtoms.lean",
+    "sha256": "f5a8d53e84c32002efeaa216d916caa23c263b0b1c16b117d92fd0ac8fbb9e2c",
+    "blob": "bd18311eb7ab6f62d4ac8cc11c2218269675ed44",
+    "lines": 178
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFifteenAtomsCandidateManifest.json",
+    "sha256": "80c8ec98cd221ba119d251cfcdb64ec5f73cc28bd51a4698a1804e1fa4a71701",
+    "blob": "71e893684475b12060621365992b401e3c6bca74",
+    "lines": 71
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFiveAtoms.lean",
+      "sha256": "196538c50d4320c4d4678834ea5e0bab2cab73b43bb5aadb57d30c7cd1d193c4",
+      "blob": "3313f7fc6808be3498a617719d645b5d9d845178",
+      "lines": 194
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveGeometryJets.lean",
+      "sha256": "7f1bc458ad7b0700ea10e51475d3af9e371b60d687a4675ac519a02110553b5a",
+      "blob": "40f9f2614b7abce6022c2eb8e915c2f8a96c46f2",
+      "lines": 262
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceInverseMaterialJets.lean",
+      "sha256": "ef40450003358fd22e68a70ecd7c722bfb630b77f6fb6e234331efcb9ab74af5",
+      "blob": "6dd64a27ede32a71db55d16a2029b9b6858a4c12",
+      "lines": 276
+    }
+  ],
+  "provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFiveAtomsReviewedManifest.json",
+      "sha256": "6dfb9ab1b09e54b4d6d7b842a33d5c02ce9f54ef906a1498b4240c0fefb1f2c6",
+      "blob": "8cef1cd17f91eb989cdc4b50a10c63326da2eb27",
+      "lines": 41
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveGeometryJetsReviewedManifest.json",
+      "sha256": "212c7ee8715539c1cd54cb228c86b18d9450386ab86e351f4d681d0781b26e6d",
+      "blob": "cfde01815ead91d9744af24744788e7924e7cf9d",
+      "lines": 64
+    }
+  ],
+  "provider_independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/ActualPositiveReferenceFiveAtomsIndependentReview.json",
+      "sha256": "726f1c29186b68755ec79c9debe0bcdf812ac382683e48af6b5ac5b20574d337",
+      "blob": "e8c0a41696e683422f7a6965961c67cd80b8b889",
+      "lines": 106
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/WholeReferenceGaugePositiveGeometryJetsIndependentReview.json",
+      "sha256": "afacdc3687cb567396c5fd707eaa7069485db54beba62b9708627d96724b0a5d",
+      "blob": "b8ac56159c1fb2e55644665b89b937ee00f168c5",
+      "lines": 137
+    }
+  ],
+  "read_scope": [
+    "All178 candidate source lines and full candidate manifest; complete actual194 producer contract and its prior full independent review726f, and actual262 fixed-family geometry contract/proof tail with fresh root full reviewafacdc.",
+    "Every recorded source/provider/owner identity was recomputed. The same276 producer and original finite-certificate contract remain the already-reviewed input to194; this review does not repeat the separately owned full262 internal mathematical audit.",
+    "Header restoration was checked byte-for-byte against194 after restoring only the declaration name and five-atom predicate. The new public name was searched in the actual installed src/ContinuousFlexibility tree."
+  ],
+  "checks": [
+    "Exactly one actual194 call selects C0,B,hfinite and the literal degree-three width/degree-four slices. The candidate makes no fresh276 call, and returns the original universal finite certificate, family and all-order jets unchanged.",
+    "For the actual supplied cell/source, hfinite.2.2.1 is the physical width upper bound and hfinite.2.1 is its reciprocal upper bound. Their reordered pair exactly matches262; no whole-positive-piece single-cell assumption is introduced.",
+    "The same family4 geometry gives range l,r to0,1 for the same Y,H. The literal original typed atlas A, same T,C0,cell,B and same inverse jets are passed to262. Actual positive metadata and atoms are supplied by that exact reviewed provider.",
+    "At every spatial order s, BG,BF are obtained and BM=max BG BF is fixed before enumeration, relative fields, normalization set, component, atom, point and mixed orders. The ten/five atom disjunction uses the same actual V in both branches.",
+    "The explicit normalized same-T sample floor gives t>=1. For D<=BM, rpow exponent monotonicity and nonnegative powers give D*t^D<=BM*t^BM; the existing positive BM supplies the required fourth mul_le_mul argument. Smoothness and pi-periodicity are preserved verbatim, including order0.",
+    "All input/output header bytes other than theorem name and broadened atom predicate exactly restore194. There are no new assumptions, shifted finite-degree bounds, changed quantifier order, resource options or proof bypasses."
+  ],
+  "findings": [],
+  "compiled": false,
+  "source_edited": false,
+  "public_collision_count": 0,
+  "scope_limits": [
+    "The original retained Gamma, negative host inclusion, raw optical lower and same-T sample normalization remain explicit obligations. No arbitrary Through03 witness is silently replaced.",
+    "This is fifteen positive reference atoms for one chosen family. It is not all atlas atoms, CurrentJets or a completed terminal N04 certificate.",
+    "The historical candidate correctly recorded262 as pending. This receipt additionally binds its now-completed root peer and owner manifest without changing that historical candidate.",
+    "Static source/API review is not compilation evidence. No compiler/elaborator, CI query, active source/index/ref or authority mutation was used."
+  ],
+  "reviewed_at": "2026-11-12T17:21:20.691679+00:00"
+}

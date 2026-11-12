@@ -1,0 +1,53 @@
+{
+  "kind": "actual_stored_minus_speed_identity_and_joint_tower_reviewed_source",
+  "owner": "/root/proof_inventory",
+  "status": "FULL_STATIC_PEER_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusSpeedStripTower.lean",
+    "sha256": "231e649dd57453716bbeb036dcaa4c4c0a1793d6198bedd0d482864c901bbfbf",
+    "blob": "f0ee10cf1c352acd5eaf85792f2f0b32ba9be796",
+    "lines": 122,
+    "module": "ContinuousFlexibility.Analysis.N04ActualMinusSpeedStripTower",
+    "target_path": "src/ContinuousFlexibility/Analysis/N04ActualMinusSpeedStripTower.lean",
+    "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusSpeedStripTower.lean",
+    "source_ref": "LOCAL_HELD_CANDIDATE",
+    "imports": [
+      "ContinuousFlexibility.Analysis.N04ActualTravelStripTower",
+      "ContinuousFlexibility.Analysis.N01CharacteristicJointGrowth",
+      "ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower",
+      "ContinuousFlexibility.Analysis.N01FlowJointRegularity"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusSpeedStripTowerCandidateManifest.json",
+    "sha256": "10df621ea3513bf0c1d227701c9a98cd43b126faf4106c4842337b79b03f0362",
+    "blob": "3a39c9b99c114e7c46c476eb7e63f08b7b7bf769",
+    "lines": 201
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/N04ActualMinusSpeedStripTowerIndependentReview.json",
+    "sha256": "c17eb0200d951b1e17e11987f77cf5ca44b8fc41e6283ab65aadb1576019cc4b",
+    "blob": "bd104e18ef42834d7567c49d932e3b5373a03c44",
+    "lines": 230
+  },
+  "selected_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusSpeedStripTowerClosureInventory.json",
+    "sha256": "b40d3c3c3a130926dc4750a9038b5c61bd0217a80c560f333307a50a8c59b534",
+    "blob": "baafc2d6be8d267dd7d3e84eb8b18c617e315c05",
+    "lines": 7890
+  },
+  "selected_closure_gzip": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusSpeedStripTowerClosureInventory.json.gz",
+    "sha256": "b3fa54b5891c52f3447b1c941515865957cb4fc9dfc125516974e2ef7db2d710",
+    "bytes": 66130,
+    "decompresses_to_sha256": "b40d3c3c3a130926dc4750a9038b5c61bd0217a80c560f333307a50a8c59b534"
+  },
+  "scope": [
+    "Same stored N03 flow, actual N02 residual and original-speed plus residual-speed genuine joint tower.",
+    "One tower is constructed before all parameter/spatial derivative orders; no numerical CurrentJets conclusion is made.",
+    "No source byte changed on peer acceptance. Exact selected-source/import graph is static evidence only; compiled=false."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "created_at": "2026-11-12T17:07:41.145172+00:00"
+}

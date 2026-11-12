@@ -1,0 +1,32 @@
+{
+  "kind": "same_actual_reference_divided_atoms_reviewed_owner",
+  "status": "FULL_SOURCE_INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceDividedJetsCandidateManifest.json",
+    "sha256": "6961f657fc8a7472d07121d063c3d28cb2c63c0bd36a66054bb0885ea4c8dac4",
+    "blob": "baacc54f9f7b386b0a1ab5ea638a01429228c78d",
+    "lines": 70
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/CanonicalReferenceDividedJetsIndependentReview.json",
+    "sha256": "adc8a96cc0154a2e7d1a25de1b4f99e185c02336795322d2872df832d8b46270",
+    "blob": "6c055c394ec2fa84a5cd682a354294ec5f395722",
+    "lines": 80
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceDividedJets.lean",
+    "sha256": "b88fd4118e9e3ec46e9da0a49240ab4d107fc0ebbbfd2be043bf135add0330f9",
+    "blob": "eb7424e622d46576e131c1963cbda89515d96a0f",
+    "lines": 83,
+    "target_path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceDividedJets.lean"
+  },
+  "whole_atlas_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasDataReviewedManifest.json",
+    "sha256": "701abf400f31e9d5bd990eff6d782e8878b3bb25e17a721750de8d04a4e319d7",
+    "blob": "89a4780b10a4d508b9d5ac33dd3abdf393efa901",
+    "lines": 23
+  },
+  "scope": "The literal stored divided field has three zero reference atom functions. Their smoothness, pi-periodicity and all mixed material jets use the same whole atlas and original sample. No current-state vanishing is asserted.",
+  "compiled": false,
+  "created_at": "2026-11-12T17:14:19.637985+00:00"
+}

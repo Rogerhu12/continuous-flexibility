@@ -1,0 +1,160 @@
+{
+  "kind": "actual_first_integral_three_index_transport_full_independent_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusFirstIntegralTransportTowers.lean",
+    "sha256": "0cd1722af35f306bb817d446e271310285d6db2fe714d62aeb4741bc1767f1c4",
+    "blob": "ecd589a83d268c6b10235e9a22f06ed21dc0ed10",
+    "lines": 90
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusFirstIntegralTransportTowersCandidateManifest.json",
+    "sha256": "5e1600f260c1c3077edbd23561a67f364fd432b25692fe6720c5eeee3ab7ea09",
+    "blob": "197b407451fb01d032ead22b8e241371f1f6a16d",
+    "lines": 148
+  },
+  "selected_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusFirstIntegralTransportTowersClosureInventory.json",
+    "sha256": "ab3bf74c671f496ac0a753baad76e61ab7ce2349bd17b5cffe7e340e863b703b",
+    "blob": "714841351afc9585c5aec7eec873526f03aa9a15",
+    "lines": 7924
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusSpeedStripTower.lean",
+      "sha256": "231e649dd57453716bbeb036dcaa4c4c0a1793d6198bedd0d482864c901bbfbf",
+      "blob": "f0ee10cf1c352acd5eaf85792f2f0b32ba9be796",
+      "lines": 122,
+      "module": "ContinuousFlexibility.Analysis.N04ActualMinusSpeedStripTower",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04ActualMinusSpeedStripTower.lean",
+      "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusSpeedStripTower.lean",
+      "source_ref": "LOCAL_HELD_CANDIDATE",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04ActualTravelStripTower",
+        "ContinuousFlexibility.Analysis.N01CharacteristicJointGrowth",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower",
+        "ContinuousFlexibility.Analysis.N01FlowJointRegularity"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTower.lean",
+      "sha256": "b56f6a83992424a397bede0353ac43c6a34fa75e172f5b39e162d69228b39176",
+      "blob": "8defbd534dce0d43f28ad8ed155c8e684eea771a",
+      "lines": 119,
+      "module": "ContinuousFlexibility.Analysis.N04ActualTravelStripTower",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04ActualTravelStripTower.lean",
+      "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTower.lean",
+      "source_ref": "LOCAL_HELD_REVIEWED_OR_CANDIDATE",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04MinusFirstIntegralStripTower",
+        "ContinuousFlexibility.Analysis.N04bActualTravelChart",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionPatching",
+        "ContinuousFlexibility.Analysis.TameProductDirections",
+        "ContinuousFlexibility.Analysis.SolveNewtonBridge"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.JointMixedTransportCalculus",
+      "path": "src/ContinuousFlexibility/Analysis/JointMixedTransportCalculus.lean",
+      "blob": "b9db709bafbaaf513229374bac8a370f6919e733",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "fa32b4a1c91ed3926f4e132234aaa4860363fac1a81508ee05dc67707e63f9cf",
+      "lines": 250,
+      "imports": [
+        "ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegralsTransport",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04bCharacteristicFirstIntegralsTransport.lean",
+      "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+      "blob": "7bb5c2cab5edb3cd43bcb31f700e34c61294cb35",
+      "sha256": "eb3cbeac3eb2463402021ec59548168c68a9ace72a9ffdb4402999708c22dc69",
+      "lines": 158,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals",
+        "ContinuousFlexibility.Analysis.RootPhysicalTransport"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bCharacteristicFlowField",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04bCharacteristicFlowField.lean",
+      "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+      "blob": "40645919e21be32b88512c967e38f8991dfdd0cd",
+      "sha256": "1dec19f7ec658422189c339a3260b79a483e0ce51edf163eaa5cc3fcf1fb72e2",
+      "lines": 145,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFlowOriginal",
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFlowInterior",
+        "ContinuousFlexibility.Analysis.N04bActualCharacteristics",
+        "ContinuousFlexibility.Analysis.N04bRootGermCollar",
+        "ContinuousFlexibility.Analysis.CylinderMixedJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SectorParameterGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/SectorParameterGeometry.lean",
+      "blob": "2aedeefa0b7cecd1a972ac5b9fbf48bb538b6490",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "0daae8b9f4f8b63e4bd6af764ca24973c63ce45fea2cc894a6b1678d35d42415",
+      "lines": 105,
+      "imports": [
+        "ContinuousFlexibility.Analysis.SolveStateSpaces",
+        "ContinuousFlexibility.Analysis.SolveReturnEquations",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsAffine"
+      ]
+    }
+  ],
+  "selected_speed_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusSpeedStripTowerReviewedManifest.json",
+    "sha256": "b1df4fbc5852f0a158b9058da4bf936684126c40838f5cdf83cf66c2cc2a2076",
+    "blob": "5a1349fa35e2a44051f684297e9cf6846b0c4259",
+    "lines": 53
+  },
+  "selected_speed_full_peer": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/N04ActualMinusSpeedStripTowerIndependentReview.json",
+    "sha256": "c17eb0200d951b1e17e11987f77cf5ca44b8fc41e6283ab65aadb1576019cc4b",
+    "blob": "bd104e18ef42834d7567c49d932e3b5373a03c44",
+    "lines": 230
+  },
+  "selected_travel_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTowerReviewedManifest.json",
+    "sha256": "dd13090289d452733a130ed72139ff5a05deff14cbac6e90be81015ecfc3d0bb",
+    "blob": "5c2f241012afa2dc284b63dbaefc529c35111409",
+    "lines": 33
+  },
+  "read_scope": [
+    "All90 source lines and complete candidate manifest, all122 actual stored-speed and119 actual stored-travel providers.",
+    "All250 selected JointMixedTransportCalculus and105 SectorParameterGeometry lines, actual158 characteristic-first-integral transport and145 actual flow-field regularity providers.",
+    "Actual N03 flow tuple, state-left-chart regularity, characteristic drift/half-gap and minusCharacteristicSpeed definitions. Exact selected576-source graph independently hashed and checked."
+  ],
+  "checks": [
+    "The theorem retains the same actual J and K constructed before all n,a,b. The two let definitions and all arguments match their real providers; no derivative family or corrected flow is reselected.",
+    "Sector lift belongs to the original state neighborhood and actual sector. The strict inner strip inclusion uses the genuine left/right component bounds, so the actual stored-flow regularity and N03 ODE apply at every physical point.",
+    "The fifth N03 tuple block supplies the real HasDerivAt equation for L.minusFlow. Drift minus half-gap is definitionally the actual minusCharacteristicSpeed; neg_mul gives exactly the sign required by the general transport theorem.",
+    "The parameter sector and actual spatial strip are both open and convex. Their product is the domain used by the existing jointMixedDiagonal_transport, with no new differentiability or PDE premise.",
+    "The three independent binomial coefficients count angular, radial and state-line differentiation respectively. Each first-integral factor on the right has radial order a-i at most a, whereas the left has a+1; its angular order is b-q+1 and parameter order n-k at the identical state,direction,point.",
+    "Every section argument required in the proof is retained through the actual tower definitions appearing in the public result. No proof-only hypothesis is silently omitted.",
+    "All576 selected source hashes, Git blob identities, line counts and import lists were recomputed; no missing project import or cycle. Source has no resource option, forbidden proof token, or source mutation."
+  ],
+  "mechanical_checks": {
+    "selected_modules": 576,
+    "all_selected_identities_exact": true,
+    "missing_imports": [],
+    "cycles": [],
+    "resource_options": [],
+    "forbidden_tokens": []
+  },
+  "findings": [],
+  "metadata_note": "The candidate recorded actual122 peer as pending. Its unchanged source now has audit full peer c17eb020 and the explicitly bound reviewed owner b1df4fbc; historical candidate bytes remain unchanged.",
+  "scope_limits": [
+    "Genuine qualitative transport recurrence for the stored joint towers, not uniform numerical CurrentJets estimates.",
+    "Same-witness correction identities, cutoff-support discriminant and actual field regularity remain explicit construction inputs.",
+    "Static graph/source review is not elaboration. No compilation, CI query/download, or active source/index/ref action."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "reviewed_at": "2026-11-12T17:10:16.355337+00:00"
+}

@@ -1,0 +1,145 @@
+{
+  "snapshot": 31,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "parent": "6dffbb0872c2d418d882746ff6f83be838b18563",
+  "additional_parents": [
+    "23d28b145e1361fd8c683ba77415226b82be7bb3"
+  ],
+  "base_tree": "7d8ad1a4e275107391134501744e0893ca5ada20",
+  "compiled_baseline": "23d28b145e1361fd8c683ba77415226b82be7bb3",
+  "line_head": "03ea768c1f2211dff62714b932be808345dcf918",
+  "line_tree": "84a1b13b975d16f42aed7de40b8601bd09fda8ae",
+  "frozen_at": "2026-11-12T17:24:31.409497+00:00",
+  "indexed_files": 2761,
+  "new_sources": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-clm-ext/RadialUnitDensityInverseJets.lean",
+      "sha256": "a04c93a733402f23e349a4a8a6d38e5f42b7eaa147e5b777fa00ee427eec88f5",
+      "lines": 136
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceHeightMaterialJets.lean",
+      "sha256": "bda1d2cda9e6c88c394819233f9606026e417e03a5c357cb6aab76ab7da8d383",
+      "lines": 293
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceInverseMaterialJets.lean",
+      "sha256": "ba704d27a5edf8f0f8a7bcf9eefba41d7f440f982f4dd8622daf25c3949e1eae",
+      "lines": 207
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialGerms.lean",
+      "sha256": "d9fd05beea6390b03493b772357fe3110865629dab6d6c17689487fce4e7d205",
+      "lines": 70
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceScalarInverse.lean",
+      "sha256": "88897c617e7204b734ee70860aa58cc38514df3c6da5180375898c3ae37c427f",
+      "lines": 152
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialUnitDensityPotentialJets.lean",
+      "sha256": "d9fb69ef9dd8eaa5ca91c5fdd5b817abcdbcfc6047a2e87fde15a718cdfa476b",
+      "lines": 85
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusFirstIntegralTransportTowers.lean",
+      "sha256": "0cd1722af35f306bb817d446e271310285d6db2fe714d62aeb4741bc1767f1c4",
+      "lines": 90
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusSpeedStripTower.lean",
+      "sha256": "231e649dd57453716bbeb036dcaa4c4c0a1793d6198bedd0d482864c901bbfbf",
+      "lines": 122
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelCircleUniformBounds.lean",
+      "sha256": "a38f9a389f71f9811a9d99135155a73dd48b1ddc597682cdca05a4248f319a36",
+      "lines": 166
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/N01NeighborhoodRestriction.lean",
+      "sha256": "307f1cfbe60a4ff71683bf475b80830e756d2f39111c339cb76b9c181ef707a4",
+      "lines": 142
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/flow-opaque/N01NeighborhoodRestriction.lean",
+      "sha256": "9da10cc067a2606c3fef7d14ce73d4bb1c8e660022c0ce6df5837da5d333ad3b",
+      "lines": 142
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFifteenAtoms.lean",
+      "sha256": "f5a8d53e84c32002efeaa216d916caa23c263b0b1c16b117d92fd0ac8fbb9e2c",
+      "lines": 178
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceGeometryMaterialJets.lean",
+      "sha256": "d6b776738c3be81a9c9a306822717f60436d3b4d40d2275f1ec27ed8eadfc394",
+      "lines": 102
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceGeometryJetEnvelope.lean",
+      "sha256": "4d2065b6de1e1ff9081681c019d98f562c650f2551e4bcb6c985f834b0efe350",
+      "lines": 196
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveGeometryJets.lean",
+      "sha256": "7f1bc458ad7b0700ea10e51475d3af9e371b60d687a4675ac519a02110553b5a",
+      "lines": 262
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceDividedJets.lean",
+      "sha256": "b88fd4118e9e3ec46e9da0a49240ab4d107fc0ebbbfd2be043bf135add0330f9",
+      "lines": 83
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceScalarColumnIdentities.lean",
+      "sha256": "8d5eaa37b7bdafb44903df37e1f35b1b114bdc03ce52ac3497dff4a670a2d320",
+      "lines": 104
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedReferenceScalarSourceMaterialJets.lean",
+      "sha256": "cc9d0f96fbd066179f2bb3910642f67f2d0b3f8ad82108e4339ff476f17bf870",
+      "lines": 140
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04RetainedCorrectionNumericalWitness.lean",
+      "sha256": "15cc71a282ea4b0aaf371c968dc37a627b41b1407dff8f25e61f613e70c71bea",
+      "lines": 153
+    }
+  ],
+  "new_source_lines": 2823,
+  "existing_added_lean_from_compiled_baseline159": 13428,
+  "projected_added_lean_from_compiled_baseline159": 16251,
+  "line_count_method": "Conservative git diff --numstat --no-renames over every Lean file. Content similarity or move detection gives no reduction in the hard source budget.",
+  "compressed_diagnostics": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusFirstIntegralTransportTowersClosureInventory.json",
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-31/positive/reconstructed/N04ActualMinusFirstIntegralTransportTowersClosureInventory.json.storage.gz",
+      "uncompressed_sha256": "ab3bf74c671f496ac0a753baad76e61ab7ce2349bd17b5cffe7e340e863b703b",
+      "uncompressed_bytes": 373882,
+      "gzip_bytes": 66356,
+      "blob": "803e8c5ac0add208b87a23798cab00cefa8dff20"
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualMinusSpeedStripTowerClosureInventory.json",
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-31/positive/reconstructed/N04ActualMinusSpeedStripTowerClosureInventory.json.storage.gz",
+      "uncompressed_sha256": "b40d3c3c3a130926dc4750a9038b5c61bd0217a80c560f333307a50a8c59b534",
+      "uncompressed_bytes": 372533,
+      "gzip_bytes": 66130,
+      "blob": "323ca868b81544cf9ba5c7e2af19b132034c08d8"
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelCircleUniformBoundsClosureInventory.json",
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-31/positive/reconstructed/N04TravelCircleUniformBoundsClosureInventory.json.storage.gz",
+      "uncompressed_sha256": "871c0a0de79771fa8954c20a5824a51ac9e92ee5953262d4f04a2fd0125efbe1",
+      "uncompressed_bytes": 352482,
+      "gzip_bytes": 62799,
+      "blob": "6e091f943e4d29d5ece3248843ef6e58257854ef"
+    }
+  ],
+  "compression_note": "Lossless gzip for large JSON diagnostics; original source SHA256 and restore behavior preserved. Lean sources remain uncompressed. Binary gzip copies are also preserved exactly.",
+  "prior_versions": "All historical source versions remain immutable and reachable through the backup parent and exact SOURCE-INDEX locations.",
+  "status": "Source preservation only; outside src, no CI activation or completion claim.",
+  "entries": 95
+}

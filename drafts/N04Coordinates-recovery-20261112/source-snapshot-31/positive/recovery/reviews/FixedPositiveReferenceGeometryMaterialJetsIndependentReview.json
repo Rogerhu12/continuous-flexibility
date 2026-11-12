@@ -1,0 +1,72 @@
+{
+  "kind": "fixed_positive_reference_geometry_material_prefix_full_independent_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_SELECTED_PROVIDER_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceGeometryMaterialJets.lean",
+    "sha256": "d6b776738c3be81a9c9a306822717f60436d3b4d40d2275f1ec27ed8eadfc394",
+    "blob": "ae0e573b2f210d37e73aed88e9ecf4c4d53a6a9d",
+    "lines": 102
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferenceGeometryMaterialJetsCandidateManifest.json",
+    "sha256": "b6afbdf6b04212e2e61ce64fc48e6050dd1b2904e45c7a5e0ddf4bb373b25fe4",
+    "blob": "6dc782116100246d494a59a50feaf5ae62bf93db",
+    "lines": 49
+  },
+  "selected_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceGeometryJetEnvelope.lean",
+      "sha256": "4d2065b6de1e1ff9081681c019d98f562c650f2551e4bcb6c985f834b0efe350",
+      "blob": "23b187c20404b418f813b5d6e992a43bb3daf204",
+      "lines": 196
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceInverseMaterialJets.lean",
+      "sha256": "ef40450003358fd22e68a70ecd7c722bfb630b77f6fb6e234331efcb9ab74af5",
+      "blob": "6dd64a27ede32a71db55d16a2029b9b6858a4c12",
+      "lines": 276
+    }
+  ],
+  "finite_envelope_full_peer": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/PositiveReferenceGeometryJetEnvelopeIndependentReview.json",
+    "sha256": "cca1bc194cff1044b8f1fe0f752fa137d78d70392212089358c313f0367dce05",
+    "blob": "0a218b1b11b44f1d194bf07b441cd4b5499a2923",
+    "lines": 85
+  },
+  "finite_envelope_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceGeometryJetEnvelopeReviewedManifest.json",
+    "sha256": "8789e7aa43c5cc2c999532f39f202dee5df6b06088e2441a4818090129103c88",
+    "blob": "359eee84515208e07a9dae6f10e06aa6b263ea85",
+    "lines": 37
+  },
+  "read_scope": [
+    "All102 source lines and exact candidate manifest; actual196 finite scalar envelope contract and proof,276 retained family all-order output contract.",
+    "Pinned Real.rpow_mul_natCast, finite-prefix sum and monotone-exponent APIs; source/manifest/provider fingerprints and installed public-name scan."
+  ],
+  "checks": [
+    "The same W,l,r,Y,H and original low B occur throughout. The finite numerical prefix A_0 through A_N is selected after N and changes no interpolation width or family.",
+    "The bound D=1+B+sum A_j dominates B and every A_j for j<=N. Positivity is instantiated explicitly; the argument is also valid at N=0.",
+    "Forward positive jets use the N-prefix at j-1; height and reciprocal-height jets use order N. Positive inverse jets use A_(j-1), so no zeroth inverse-coordinate bound is assumed.",
+    "Z=D*W^D satisfies Z>=1 from the explicit W>=1 hypothesis. Both width directions and all actual scalar inputs are bounded by the same Z before invoking the exact196 envelope.",
+    "Pinned rpow_mul_natCast rewrites C*Z^(2N+2) to coefficient*W^exponent. M=1+coefficient+exponent dominates the coefficient and exponent before all component/atom/point/k variables.",
+    "The candidate recorded196 peer as pending; its unchanged selected source now has complete peer cca1bc and the separately bound reviewed owner. Historical candidate bytes remain unchanged."
+  ],
+  "mechanical_checks": {
+    "source_and_provider_fingerprints_exact": true,
+    "new_public_names": [
+      "fixedPositiveReference_geometry_material_jets"
+    ],
+    "installed_collisions": [],
+    "forbidden_tokens": []
+  },
+  "findings": [],
+  "scope_limits": [
+    "This is a fixed-family material consequence of the supplied real producer bounds, not a new construction of them.",
+    "Actual geometric atom identity, regularity and period remain separate downstream obligations.",
+    "Static source/API review only; no local compilation or active source/index/ref/CI change."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "reviewed_at": "2026-11-12T17:11:41.756662+00:00"
+}

@@ -1,0 +1,131 @@
+{
+  "kind": "exact_current_head_complete_ci_failure",
+  "label": 160,
+  "head": "03ea768c1f2211dff62714b932be808345dcf918",
+  "tree": "84a1b13b975d16f42aed7de40b8601bd09fda8ae",
+  "run": 43263558841,
+  "job": 131340981489,
+  "run_conclusion": "failure",
+  "job_conclusion": "failure",
+  "completed_run_updated_at": "2026-11-12T17:21:09Z",
+  "checked_at": "2026-11-12T17:23:36.738060+00:00",
+  "log": "n04-ci-160.log",
+  "log_sha256": "62386517362d0eeeed8b0663c0d399f4ccfdce08dcbcebe07ef90fd4167ca097",
+  "errors": [
+    [
+      "N01ControlFlowBounds.lean",
+      "210",
+      "2",
+      "(deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached"
+    ],
+    [
+      "N01ControlFlowBounds.lean",
+      "85",
+      "2",
+      "(deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached"
+    ],
+    [
+      "N01NeighborhoodRestriction.lean",
+      "101",
+      "4",
+      "(deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached"
+    ]
+  ],
+  "compiled_modules_partial": 4210,
+  "modules_total_reported": 4214,
+  "steps": [
+    {
+      "name": "Set up job",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "conclusion": "success"
+    },
+    {
+      "name": "Disk space",
+      "conclusion": "success"
+    },
+    {
+      "name": "Set up the pinned Lean and Mathlib environment",
+      "conclusion": "success"
+    },
+    {
+      "name": "Restore main's build artifacts",
+      "conclusion": "success"
+    },
+    {
+      "name": "Reuse the builds of the lines merged by this push",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Reuse the build of the line this branch was cut from",
+      "conclusion": "success"
+    },
+    {
+      "name": "Restore project build artifacts",
+      "conclusion": "success"
+    },
+    {
+      "name": "Report which cache was restored",
+      "conclusion": "success"
+    },
+    {
+      "name": "Generate the root import",
+      "conclusion": "success"
+    },
+    {
+      "name": "Changed modules",
+      "conclusion": "success"
+    },
+    {
+      "name": "Quick check of the changed modules",
+      "conclusion": "failure"
+    },
+    {
+      "name": "Build every library",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Save project build artifacts",
+      "conclusion": "success"
+    },
+    {
+      "name": "Delete this branch's older build caches",
+      "conclusion": "success"
+    },
+    {
+      "name": "Count compiled modules",
+      "conclusion": "success"
+    },
+    {
+      "name": "Blueprint status and endpoint axioms",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Publish the precompiled build for line sandboxes",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Pack this line's build for main",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/upload-artifact@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/upload-artifact@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "conclusion": "success"
+    }
+  ],
+  "latest_complete_green_unchanged": "23d28b145e1361fd8c683ba77415226b82be7bb3"
+}

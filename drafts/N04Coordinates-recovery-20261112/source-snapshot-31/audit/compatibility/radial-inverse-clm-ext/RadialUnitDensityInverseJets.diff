@@ -1,0 +1,12 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialUnitDensityInverseJets.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/radial-inverse-clm-ext/RadialUnitDensityInverseJets.lean
+@@ -111,7 +111,8 @@
+       _ ≤ A * M ^ 2 := le_mul_of_one_le_left (sq_nonneg M) hA
+   have hL : (fderiv ℝ χ x).comp (fderiv ℝ Y (χ x)) =
+       ContinuousLinearMap.id ℝ ℝ := by
+-    ext v
++    apply ContinuousLinearMap.ext
++    intro v
+     simp only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.id_apply,
+       fderiv_eq_deriv_mul]
+     calc

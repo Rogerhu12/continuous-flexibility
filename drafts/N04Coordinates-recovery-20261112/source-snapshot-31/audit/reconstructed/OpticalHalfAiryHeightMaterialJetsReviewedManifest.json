@@ -1,0 +1,60 @@
+{
+  "kind": "same_optical_half_airy_height_all_order_material_reviewed_source",
+  "owner": "/root/audit_coordinates",
+  "status": "INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryHeightMaterialJets.lean",
+    "sha256": "2a332f186f3b6d6f4500b9a05a988b0c460dfb2cb783cc42228f1de1b4b7527a",
+    "blob": "b164d2df00ec004514087942cf5e3d9c619e2e19",
+    "lines": 261,
+    "target_path": "src/ContinuousFlexibility/Analysis/OpticalHalfAiryHeightMaterialJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.OpticalHalfAiryAverage",
+      "ContinuousFlexibility.Analysis.PositivePowerPolynomialMaterialJets",
+      "ContinuousFlexibility.Analysis.PointwiseProductPolynomialMaterialJets"
+    ],
+    "public_names": [
+      "opticalHalf_airyHeight_power_material_jets"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryHeightMaterialJetsCandidateManifest.json",
+    "sha256": "224de0c7309f6b1ad4961a4c740df73b26edd0bf715cc93d39cb6d15b91dcbcd",
+    "blob": "ef169778733856587255e88efc656e7d350d456f",
+    "lines": 113
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/OpticalHalfAiryHeightMaterialJetsIndependentReview.json",
+    "sha256": "6f6e70885a34bbf566e743472f6748ce4378e8411f5a981abc607f85fc9c40a7",
+    "blob": "f4f7d6931e167377a0883de6418f4812862dcbfd",
+    "lines": 136
+  },
+  "reviewed_provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryAverageReviewedManifest.json",
+      "sha256": "c2a150c2c703e085608ba0e41f10350e6ef889599bdf785e9c35259544a5481e",
+      "blob": "cd82d84d6ed8f98f29452f9218b1e02a11f29852",
+      "lines": 44
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositivePowerPolynomialMaterialJetsReviewedManifest.json",
+      "sha256": "0c1e97266f72fdb1d02a5a42852c657052398ea87f79bf2ec4010c92905a5aa8",
+      "blob": "530e0f5b3305b8b5cb5f642065ad31e3e8b76e86",
+      "lines": 26
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01CharacteristicDriftMaterialJetsReviewedManifest.json",
+      "sha256": "0896fa810ada2ce324201dce8a5bfe330e024d316ebb512c39ac11fe53128c3f",
+      "blob": "19979ae19828dbfabe32f072e3f9596ea8f761e4",
+      "lines": 35
+    }
+  ],
+  "source_bytes_unchanged": true,
+  "compiled": false,
+  "scope_limits": [
+    "The same positive square-root germs and actual interval average yield all-order bounds for each real height power on the closed half.",
+    "Actual stored-height identification and the original sample packing are separate subsequent source. Raw optical lower provenance remains an upstream construction obligation.",
+    "No compiler/elaborator, active source/index/ref/checkpoint/authority or CI operation."
+  ],
+  "created_at": "2026-11-12T17:01:12.670866+00:00"
+}

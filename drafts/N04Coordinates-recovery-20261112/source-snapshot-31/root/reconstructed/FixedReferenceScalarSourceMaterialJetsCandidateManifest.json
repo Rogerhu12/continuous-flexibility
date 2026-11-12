@@ -1,0 +1,72 @@
+{
+  "kind": "same_fixed_radial_inverse_and_source_factor_scalar_column_material_jets",
+  "owner": "/root",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedReferenceScalarSourceMaterialJets.lean",
+    "sha256": "cc9d0f96fbd066179f2bb3910642f67f2d0b3f8ad82108e4339ff476f17bf870",
+    "blob": "e410d5c93a544817741449d6c6f952bfd0203297",
+    "lines": 140,
+    "target_path": "src/ContinuousFlexibility/Analysis/FixedReferenceScalarSourceMaterialJets.lean"
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.lean",
+      "sha256": "9bd854157a276a4c5fd8d3161f63d65a851fedbc656beba959ad5899e89cb5a7",
+      "blob": "4df4d9e114ae59bd99b5d3c09825adc95dbe3808",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N06ReferenceSourceJets.lean",
+      "sha256": "bd09d8647d420fcaab6b36eda3d3fc564fde52291b867ee910832d55854ffe5e",
+      "blob": "21a926d230cca9fe164b23f281e82ae349fd9b06",
+      "lines": 161
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "lines": 603
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+      "sha256": "1e9fbd861ac27cb4b17113c3f8ede3c5f573a6b342b23e41ff514b05bd3334ef",
+      "blob": "e7fd4979f58f787927500713547b3671402ae782",
+      "lines": 1283
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    }
+  ],
+  "numeric_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelopeVisibilityReviewedManifest.json",
+    "sha256": "55e1f9fe0d0e8e16ec596a3bebb948de20821dc3d05675dfaf382d4eb1901984",
+    "blob": "2ff192a92ea67f4a7a301b651ece487da37125e0",
+    "lines": 46
+  },
+  "public_names": [
+    "fixedReferenceScalarSource_material_jets"
+  ],
+  "read_scope": [
+    "Complete candidate and complete159 numerical product/composition provider.",
+    "Complete unconditional n06_smooth_periodic_angularJets_bounded declaration/proof, mixedDerivative definition, pinned ContDiffWithinAt-to-At and scalar iterated-derivative product identities."
+  ],
+  "checks": [
+    "X,F,W and physical l,r are fixed inputs. Only A,P,G,CC,CP,M are selected; no coordinate, inverse, height, sample or material normalization is reselected.",
+    "Only positive inverse derivatives are quantitative hypotheses. The actual inverse value enters via its genuine compact physical range; no artificial zeroth inverse bound is imposed.",
+    "The numerical composition and product envelopes use ContDiffAt at each genuine open-unit point. ContDiffOn is converted using the open interval, so no smooth extension or jet bound outside that interval is assumed.",
+    "The fixed radial profile has compact finite-prefix bounds. The fixed angular profile has genuine pi-periodic bounded jets by the unconditional smooth-periodic theorem, without any Through04 or N05 hypothesis.",
+    "Separation of radial and angular variables gives the actual mixed derivative exactly. A single s-prefix envelope yields coefficient times (A*W^A)^(s+1), then one M dominates both its nonnegative coefficient and exponent.",
+    "M is selected before every family index, point and derivative pair. The result includes actual smoothness and pi-periodicity on the unit strip, as well as all a+b<=s material bounds.",
+    "The assumptions are the source factor and inverse jets already produced by the geometry construction. No desired scalar-column bound or final coordinate certificate is assumed."
+  ],
+  "scope_limits": [
+    "The genuine left and nu column identities, and the positive/negative actual geometry inputs, are separate adapters to this common numerical consequence.",
+    "Static source review only; no compiler, resource override, active source/index/ref mutation or completion claim."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T17:14:20.150811+00:00"
+}
