@@ -34,7 +34,7 @@ private theorem singleFlow_component_reassemble
     circleSingletonField m (g 0) i θ = circleSingleComponentField m (fun θ => f θ - θ) i θ
   by_cases hi : i = m
   · subst i
-    simp only [circleSingleComponentField, circleSingletonField, if_pos rfl]
+    simp only [circleSingleComponentField, circleSingletonField, if_pos rfl, ite_true]
     rw [hg θ, hg 0]
     ring
   · simp only [circleSingleComponentField, circleSingletonField, if_neg hi, add_zero]
