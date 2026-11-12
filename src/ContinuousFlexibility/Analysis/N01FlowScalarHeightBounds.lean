@@ -119,7 +119,9 @@ theorem N01Properties.sectorFlow_pure_scalar_height_bound_mod_constant
             T.E0 (T.sample (C.cell m)) ^ B *
             (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss + d) z) *
               heightPairGrading S base η + heightPairGrading S (s + loss + d) η) := by
-  obtain ⟨d, horders⟩ := hN.sectorFlow_closed_tower hS hT (n + 2)
+  let lossData := hN.sectorFlow_closed_tower hS hT (n + 2)
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   refine ⟨d, ?_⟩
   intro s
   let hdata := horders s
@@ -168,7 +170,9 @@ theorem N01Properties.sectorFlow_pure_scalar_height_bound
             T.E0 (T.sample (C.cell m)) ^ B *
             (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss + d) z) *
               heightPairGrading S base η + heightPairGrading S (s + loss + d) η) := by
-  obtain ⟨d, horders⟩ := hN.sectorFlow_pure_scalar_height_bound_mod_constant hS hT n
+  let lossData := hN.sectorFlow_pure_scalar_height_bound_mod_constant hS hT n
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   refine ⟨d, ?_⟩
   intro s
   let hdata := horders s

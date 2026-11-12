@@ -99,7 +99,9 @@ theorem N01Properties.sectorFlow_closed_angularTower_bound
           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
             oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
               base (s + loss + d) z v := by
-  obtain ⟨d, horders⟩ := hN.sectorFlow_closed_tower hS hT k
+  let lossData := hN.sectorFlow_closed_tower hS hT k
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   refine ⟨d, ?_⟩
   intro s
   let hdata := horders s

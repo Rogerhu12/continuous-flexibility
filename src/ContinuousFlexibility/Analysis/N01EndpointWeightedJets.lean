@@ -52,7 +52,9 @@ theorem N01Properties.endpointFlowScalarJets_weighted_bound_uniform_radius
         K * T.M (T.sample m) ^ (c + 1) *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
             base (s + loss + d) z v := by
-  obtain ⟨d, horders⟩ := hN.sectorFlow_closed_angularTower_bound hS hT k
+  let lossData := hN.sectorFlow_closed_angularTower_bound hS hT k
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   refine ⟨d, ?_⟩
   intro s
   let hdata := horders s
@@ -93,7 +95,9 @@ theorem N01Properties.endpointFlowScalarJets_weighted_bound
         K * T.M (T.sample m) ^ (c + 1) *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
             base (s + loss + d) z v := by
-  obtain ⟨d, horders⟩ := hN.endpointFlowScalarJets_weighted_bound_uniform_radius hS hT k
+  let lossData := hN.endpointFlowScalarJets_weighted_bound_uniform_radius hS hT k
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   refine ⟨d, ?_⟩
   intro s
   let hdata := horders s

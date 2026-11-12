@@ -73,7 +73,9 @@ theorem N01Properties.endpointFlow_pure_scalar_line_energy_envelope
       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) (x + t • w)
           (fun _ => scalarParameterDirection S) m) θ| ≤ K * Real.sqrt (E m).toReal := by
-  obtain ⟨d, horders⟩ := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT rsel hrsel n
+  let lossData := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT rsel hrsel n
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   let ξ₀ : HeightPair S := (liftSectorParameter S C x).1.1
   let ξ₁ : HeightPair S := w.1.val.1
   let data₀ := hN.exists_height_pair_plateau_directions hS hT ξ₀

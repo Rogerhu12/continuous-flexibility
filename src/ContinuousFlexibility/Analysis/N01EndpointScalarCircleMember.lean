@@ -88,7 +88,9 @@ theorem N01Properties.endpointFlow_pure_scalar_circleMember
     (hz : z ∈ sectorNeighborhood S base ε ε) :
     CircleMember T (3 / 4 : ℝ)
       (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (fun _ => scalarParameterDirection S)) := by
-  obtain ⟨d, horders⟩ := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT rsel hrsel n
+  let lossData := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT rsel hrsel n
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   have hs (m : ℕ) := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
   have hM (m : ℕ) : 1 ≤ T.M (T.sample m) := (hT.2.1 _ (hs m)).2.2.2
   have hH (m : ℕ) : 0 ≤ T.H (T.sample m) := (hT.2.1 _ (hs m)).2.1.le

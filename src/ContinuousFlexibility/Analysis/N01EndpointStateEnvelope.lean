@@ -101,7 +101,9 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_energy_envelope
         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v m) θ| ≤
         K * (1 + pairGrading (sectorGrading S) realGrading (max base (s + loss + d)) z) *
           Real.sqrt (E m).toReal := by
-  obtain ⟨d, horders⟩ := hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel n
+  let lossData := hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel n
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   refine ⟨d, ?_⟩
   intro s v i hi
   let p : ℕ → Seminorm ℝ (StateDirections S × ℝ) := pairGrading (sectorGrading S) realGrading
@@ -141,7 +143,9 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_line_energy_envelope
       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) (x + t • w) v m) θ| ≤
         K * Real.sqrt (E m).toReal := by
-  obtain ⟨d, horders⟩ := hN.endpointFlowScalarJets_state_slot_energy_envelope hS hT rsel hrsel n
+  let lossData := hN.endpointFlowScalarJets_state_slot_energy_envelope hS hT rsel hrsel n
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   let data := horders s v i hi
   let energy : ℕ → ℝ≥0∞ := data.choose
   let constantData := data.choose_spec

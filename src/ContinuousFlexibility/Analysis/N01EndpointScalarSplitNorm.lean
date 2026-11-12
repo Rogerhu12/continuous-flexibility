@@ -59,7 +59,9 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_height_bound_unif
             (liftSectorParameter S C z).1.1.1 +
           (S.height (3 / 4 : ℝ)).grading (b + loss + d + c + 6)
             (liftSectorParameter S C z).1.1.1) := by
-  obtain ⟨d, horders⟩ := hN.endpointFlow_pure_scalar_weighted_height_bound_uniform_radius hS hT n
+  let lossData := hN.endpointFlow_pure_scalar_weighted_height_bound_uniform_radius hS hT n
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   refine ⟨d, ?_⟩
   intro b c
   let pointData := horders b
@@ -131,7 +133,9 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_height_bound
             (liftSectorParameter S C z).1.1.1 +
           (S.height (3 / 4 : ℝ)).grading (b + loss + d + c + 6)
             (liftSectorParameter S C z).1.1.1) := by
-  obtain ⟨d, horders⟩ := hN.endpointFlow_pure_scalar_weightedJetNorm_height_bound_uniform_radius hS hT n
+  let lossData := hN.endpointFlow_pure_scalar_weightedJetNorm_height_bound_uniform_radius hS hT n
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   refine ⟨d, ?_⟩
   intro b c
   let data := horders b c
@@ -200,7 +204,9 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_unif
         K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss + d) z) *
           (1 + pairGrading (sectorGrading S) realGrading (base + c + 6) z) +
           (1 + pairGrading (sectorGrading S) realGrading (b + loss + d + c + 6) z)) := by
-  obtain ⟨d, horders⟩ := hN.endpointFlow_pure_scalar_weightedJetNorm_height_bound_uniform_radius hS hT n
+  let lossData := hN.endpointFlow_pure_scalar_weightedJetNorm_height_bound_uniform_radius hS hT n
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   refine ⟨d, ?_⟩
   intro b c
   let normData := horders b c
@@ -242,7 +248,9 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_budget_bound
         K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss + d) z) *
           (1 + pairGrading (sectorGrading S) realGrading (base + c + 6) z) +
           (1 + pairGrading (sectorGrading S) realGrading (b + loss + d + c + 6) z)) := by
-  obtain ⟨d, horders⟩ := hN.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_uniform_radius hS hT n
+  let lossData := hN.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_uniform_radius hS hT n
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   refine ⟨d, ?_⟩
   intro b c
   let data := horders b c

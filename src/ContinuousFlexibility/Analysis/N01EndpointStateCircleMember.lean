@@ -90,7 +90,9 @@ theorem N01Properties.endpointFlowScalarJets_state_energy_bound
           (∏ i : Fin n, pairGrading (sectorGrading S) realGrading
             (max base (s + loss + d)) (vs i)) *
           Real.sqrt (stateLocalizationEnergy D T C (max base (s + loss + d)) (s + 1) v m).toReal := by
-  obtain ⟨d, horders⟩ := hN.endpointFlowScalarJets_weighted_bound hS hT rsel hrsel (n + 1)
+  let lossData := hN.endpointFlowScalarJets_weighted_bound hS hT rsel hrsel (n + 1)
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   refine ⟨d, ?_⟩
   intro s
   let pointData := horders s
@@ -151,7 +153,9 @@ theorem N01Properties.endpointFlowScalarJets_state_circleMember
     (v : StateDirections S × ℝ) (hvq : v.2 = 0) :
     CircleMember T (3 / 4 : ℝ)
       (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v)) := by
-  obtain ⟨d, horders⟩ := hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel n
+  let lossData := hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel n
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   have hs (m : ℕ) := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
   have hM (m : ℕ) : 0 ≤ T.M (T.sample m) := zero_le_one.trans (hT.2.1 _ (hs m)).2.2.2
   have hH (m : ℕ) : 0 ≤ T.H (T.sample m) := (hT.2.1 _ (hs m)).2.1.le

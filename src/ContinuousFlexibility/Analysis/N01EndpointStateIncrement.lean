@@ -111,7 +111,9 @@ theorem N01Properties.endpointFlowScalarJets_state_increment_circleMember
   have hs (m : ℕ) := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
   have hM (m : ℕ) : 0 ≤ T.M (T.sample m) := zero_le_one.trans (hT.2.1 _ (hs m)).2.2.2
   have hH (m : ℕ) : 0 ≤ T.H (T.sample m) := (hT.2.1 _ (hs m)).2.1.le
-  obtain ⟨d, horders⟩ := hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel 0
+  let lossData := hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel 0
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   have hmem : CircleMember T (3 / 4 : ℝ) (fun m θ => F 1 m θ - F 0 m θ) := by
     apply circleMember_sub_of_curve_energy_envelope F G
       (hN.endpointFlowScalarJets_regular hS hT rsel hrsel 0 (0 • u) (hpath 0 (by simp)) Fin.elim0)

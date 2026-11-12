@@ -59,7 +59,9 @@ theorem N01Properties.endpointFlow_pure_scalar_height_bound_uniform_radius
           T.E0 (T.sample (C.cell m)) ^ B *
           (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss + d) z) *
             heightPairGrading S base η + heightPairGrading S (s + loss + d) η) := by
-  obtain ⟨d, horders⟩ := hN.sectorFlow_pure_scalar_height_bound_mod_constant hS hT n
+  let lossData := hN.sectorFlow_pure_scalar_height_bound_mod_constant hS hT n
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   refine ⟨d, ?_⟩
   intro s
   let data := horders s
@@ -93,7 +95,9 @@ theorem N01Properties.endpointFlow_pure_scalar_height_bound
           T.E0 (T.sample (C.cell m)) ^ B *
           (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss + d) z) *
             heightPairGrading S base η + heightPairGrading S (s + loss + d) η) := by
-  obtain ⟨d, horders⟩ := hN.endpointFlow_pure_scalar_height_bound_uniform_radius hS hT n
+  let lossData := hN.endpointFlow_pure_scalar_height_bound_uniform_radius hS hT n
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   refine ⟨d, ?_⟩
   intro s
   let data := horders s
@@ -116,7 +120,9 @@ theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound_uniform_rad
         K * T.M (T.sample m) ^ (c + 1) *
           (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss + d) z) *
             heightPairGrading S base η + heightPairGrading S (s + loss + d) η) := by
-  obtain ⟨d, horders⟩ := hN.endpointFlow_pure_scalar_height_bound_uniform_radius hS hT n
+  let lossData := hN.endpointFlow_pure_scalar_height_bound_uniform_radius hS hT n
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   refine ⟨d, ?_⟩
   intro s
   let data := horders s
@@ -155,7 +161,9 @@ theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound
         K * T.M (T.sample m) ^ (c + 1) *
           (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss + d) z) *
             heightPairGrading S base η + heightPairGrading S (s + loss + d) η) := by
-  obtain ⟨d, horders⟩ := hN.endpointFlow_pure_scalar_weighted_height_bound_uniform_radius hS hT n
+  let lossData := hN.endpointFlow_pure_scalar_weighted_height_bound_uniform_radius hS hT n
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   refine ⟨d, ?_⟩
   intro s
   let data := horders s

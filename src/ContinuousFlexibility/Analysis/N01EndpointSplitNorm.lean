@@ -96,7 +96,9 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_bound_uniform
           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss + d) (vs i)) *
             pairGrading (sectorGrading S) realGrading (base + c + 6) v +
           pairGrading (sectorGrading S) realGrading (b + loss + d + c + 6) v) := by
-  obtain ⟨d, horders⟩ := hN.endpointFlowScalarJets_state_split_energy_bound_uniform_radius hS hT n
+  let lossData := hN.endpointFlowScalarJets_state_split_energy_bound_uniform_radius hS hT n
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   refine ⟨d, ?_⟩
   intro b c
   let pointData := horders b c
@@ -149,7 +151,9 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_bound
           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss + d) (vs i)) *
             pairGrading (sectorGrading S) realGrading (base + c + 6) v +
           pairGrading (sectorGrading S) realGrading (b + loss + d + c + 6) v) := by
-  obtain ⟨d, horders⟩ := hN.endpointFlowScalarJets_state_weightedJetNorm_bound_uniform_radius hS hT n
+  let lossData := hN.endpointFlowScalarJets_state_weightedJetNorm_bound_uniform_radius hS hT n
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
   refine ⟨d, ?_⟩
   intro b c
   let data := horders b c
