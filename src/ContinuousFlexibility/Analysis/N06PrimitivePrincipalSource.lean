@@ -109,7 +109,8 @@ theorem n06PrimitivePrincipalTest_eq_actualCubic
           (K.dividedDifference (liftSectorParameter S C z) m).c) φ p := by
   have hz' := liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) hz le_rfl
   have hs' := h01.2.2.1.liftSectorParameter_sector z
-  have hnear := (isOpen_Ioo.prod isOpen_univ).mem_nhds hp
+  have hnear : ∀ᶠ q in 𝓝 p, q ∈ canonicalOpen S K m :=
+    (isOpen_Ioo.prod isOpen_univ).mem_nhds hp
   have hcube := hnear.mono (fun q hq =>
     h04.2.1.2.2.2.2 (liftSectorParameter S C z) hz' hs' m hm q hq)
   rw [n06PrimitivePrincipalTest, if_pos hm]
@@ -230,9 +231,22 @@ def n06PrimitivePrincipalSourceLinear
       ∫ p, (n06PrimitivePrincipalSource href hcur hI J z hz F m +
         n06PrimitivePrincipalSource href hcur hI J z hz G m) p * φ p
         ∂canonicalMeasure S K m
-    rw [← n07aCanonicalTestPairing_apply φ (n07a_canonicalTest_memLp hφ),
-      ← n07aCanonicalTestPairing_apply φ (n07a_canonicalTest_memLp hφ), map_add]
-    simp only [n06PrimitivePrincipalSource_pairingCLM, map_add]
+    let P := n07aCanonicalTestPairing φ (n07a_canonicalTest_memLp hφ)
+    let Q := n06PrimitivePrincipalTestPairing (B := B) href hcur hI z hz m φ hφ
+    have hpair (X : V.level (3 / 4 : ℝ) 0 b) :
+        P (n06PrimitivePrincipalSource href hcur hI J z hz X m) = Q X :=
+      n06PrimitivePrincipalSource_pairingCLM href hcur hI J z hz X m φ hφ
+    calc
+      _ = P (n06PrimitivePrincipalSource href hcur hI J z hz (F + G) m) :=
+        (n07aCanonicalTestPairing_apply φ (n07a_canonicalTest_memLp hφ) _).symm
+      _ = Q (F + G) := hpair (F + G)
+      _ = Q F + Q G := Q.map_add F G
+      _ = P (n06PrimitivePrincipalSource href hcur hI J z hz F m) +
+          P (n06PrimitivePrincipalSource href hcur hI J z hz G m) :=
+        congrArg₂ (fun x y : ℝ => x + y) (hpair F).symm (hpair G).symm
+      _ = P (n06PrimitivePrincipalSource href hcur hI J z hz F m +
+          n06PrimitivePrincipalSource href hcur hI J z hz G m) := (P.map_add _ _).symm
+      _ = _ := n07aCanonicalTestPairing_apply φ (n07a_canonicalTest_memLp hφ) _
   map_smul' c F := by
     funext m
     apply n06_canonicalL2_test_ext
@@ -241,9 +255,21 @@ def n06PrimitivePrincipalSourceLinear
       ∂canonicalMeasure S K m) =
       ∫ p, (c • n06PrimitivePrincipalSource href hcur hI J z hz F m) p * φ p
         ∂canonicalMeasure S K m
-    rw [← n07aCanonicalTestPairing_apply φ (n07a_canonicalTest_memLp hφ),
-      ← n07aCanonicalTestPairing_apply φ (n07a_canonicalTest_memLp hφ), map_smul]
-    simp only [n06PrimitivePrincipalSource_pairingCLM, map_smul]
+    let P := n07aCanonicalTestPairing φ (n07a_canonicalTest_memLp hφ)
+    let Q := n06PrimitivePrincipalTestPairing (B := B) href hcur hI z hz m φ hφ
+    have hpair (X : V.level (3 / 4 : ℝ) 0 b) :
+        P (n06PrimitivePrincipalSource href hcur hI J z hz X m) = Q X :=
+      n06PrimitivePrincipalSource_pairingCLM href hcur hI J z hz X m φ hφ
+    calc
+      _ = P (n06PrimitivePrincipalSource href hcur hI J z hz (c • F) m) :=
+        (n07aCanonicalTestPairing_apply φ (n07a_canonicalTest_memLp hφ) _).symm
+      _ = Q (c • F) := hpair (c • F)
+      _ = c • Q F := Q.map_smul c F
+      _ = c • P (n06PrimitivePrincipalSource href hcur hI J z hz F m) :=
+        congrArg (fun x : ℝ => c • x) (hpair F).symm
+      _ = P (c • n06PrimitivePrincipalSource href hcur hI J z hz F m) :=
+        (P.map_smul c _).symm
+      _ = _ := n07aCanonicalTestPairing_apply φ (n07a_canonicalTest_memLp hφ) _
 
 theorem n06PrimitivePrincipalSource_reflection
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)

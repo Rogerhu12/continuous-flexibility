@@ -168,7 +168,7 @@ private theorem n06_sourceSchur_assemble
   have hrow (l : ℕ) : Summable (fun j => a l j) ∧ ∑' j, a l j ≤ A * total := by
     have he : (fun j : ℕ => a l j) = fun j : ℕ => A * n07aAngularTail ((l : ℤ) - j) := by
       funext j
-      rw [a, n06_sourceSchur_tail_swap]
+      exact congrArg (fun x : ℝ => A * x) (n06_sourceSchur_tail_swap j l)
     rw [he]
     refine ⟨(n07aAngularTail_shift_summable l).mul_left A, ?_⟩
     rw [tsum_mul_left]
