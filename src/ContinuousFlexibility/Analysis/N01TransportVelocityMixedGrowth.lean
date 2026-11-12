@@ -473,6 +473,102 @@ private def n01TransportVelocity_buildTowers
   exact ⟨JL, JA, JZ⟩
 
 set_option diagnostics true in
+/-- Select the four interpolation orders and assemble their common budget while
+all parameter spaces and seminorms are abstract. -/
+private def transportVelocity_growthData
+    {I E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} (l h : I → ℝ)
+    (p : ℕ → Seminorm ℝ E) (W H : I → ℝ)
+    (hp : Monotone p) (hW0 : ∀ i, 0 ≤ W i) (hH : ∀ i, 0 ≤ H i)
+    {fL fA : I → E × PolarPoint → ℝ} {fZ : Fin 2 → I → E × PolarPoint → ℝ}
+    (JL : ∀ i, SmoothDirections (U ×ˢ (Ioo (l i) (h i) ×ˢ univ)) (fL i))
+    (JA : ∀ i, SmoothDirections (U ×ˢ (Ioo (l i) (h i) ×ˢ univ)) (fA i))
+    (JZ : ∀ c i, SmoothDirections (U ×ˢ (Ioo (l i) (h i) ×ˢ univ)) (fZ c i))
+    (nmax : ℕ)
+    (characteristicBounds : ∃ B : ℕ,
+      ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ a b : ℕ, a + b ≤ N →
+        ∃ K Q : ℝ, 0 ≤ K ∧ 0 ≤ Q ∧
+          ∀ i (x : E), x ∈ U → ∀ w : E, p B x ≤ A → p B w ≤ 1 →
+            ∀ y : PolarPoint, y.1 ∈ Ioo (l i) (h i) →
+              |jointMixedDiagonal (JL i) n a b x w y| ≤ K * W i ^ Q *
+                (1 + p (N + B + 1) x + p (N + B + 1) w) ^
+                  (((a + b : ℕ) : ℝ) / ((N : ℝ) + 1)))
+    (slopeBounds : ∃ B : ℕ,
+      ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ b : ℕ, b ≤ N →
+        ∃ K : ℝ, 0 ≤ K ∧ ∀ i (x : E), x ∈ U → ∀ w : E,
+          p B x ≤ A → p B w ≤ 1 → ∀ y : PolarPoint, y.1 ∈ Ioo (l i) (h i) →
+            |jointMixedDiagonal (JA i) n 0 b x w y| ≤ K *
+              (1 + p (N + B + 1) x + p (N + B + 1) w) ^
+                ((b : ℝ) / ((N : ℝ) + 1)))
+    (residualBounds : ∃ B : ℕ,
+      ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ b : ℕ, b ≤ N →
+        ∃ K : ℝ, 0 ≤ K ∧ ∀ i (x : E), x ∈ U → ∀ w : E,
+          p B x ≤ A → p B w ≤ 1 → ∀ y : PolarPoint, y.1 ∈ Ioo (l i) (h i) →
+            |jointMixedDiagonal (JZ 0 i) n 0 b x w y| ≤ K *
+              (1 + p (N + B + 1) x + p (N + B + 1) w) ^
+                ((b : ℝ) / ((N : ℝ) + 1)))
+    (displacementBounds : ∃ B : ℕ,
+      ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ b : ℕ, b ≤ N →
+        ∃ K : ℝ, 0 ≤ K ∧ ∀ i (x : E), x ∈ U → ∀ w : E,
+          p B x ≤ A → p B w ≤ 1 → ∀ y : PolarPoint, y.1 ∈ Ioo (l i) (h i) →
+            |jointMixedDiagonal (JZ 1 i) n 0 b x w y| ≤ K * H i *
+              (1 + p (N + B + 1) x + p (N + B + 1) w) ^
+                ((b : ℝ) / ((N : ℝ) + 1)))
+    : TransportVelocityGrowthData (fun B =>
+      MixedDiagonalPowerGrowth p W (fun _ => 1) JL nmax B ∧
+        AngularDiagonalPowerGrowth p (fun _ => 1) JA nmax B ∧
+        ∀ c : Fin 2,
+          AngularDiagonalPowerGrowth p (fun i => H i ^ c.val) (JZ c) nmax B) := by
+  run_tac Lean.logInfo "N02N03 Velocity: growth-assembly"
+  let BL : ℕ := characteristicBounds.choose
+  have hBL : ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ a b : ℕ, a + b ≤ N →
+      ∃ K Q : ℝ, 0 ≤ K ∧ 0 ≤ Q ∧
+        ∀ i (x : E), x ∈ U → ∀ w : E, p BL x ≤ A → p BL w ≤ 1 →
+          ∀ y : PolarPoint, y.1 ∈ Ioo (l i) (h i) →
+            |jointMixedDiagonal (JL i) n a b x w y| ≤ K * W i ^ Q *
+              (1 + p (N + BL + 1) x + p (N + BL + 1) w) ^
+                (((a + b : ℕ) : ℝ) / ((N : ℝ) + 1)) := characteristicBounds.choose_spec
+  let BA : ℕ := slopeBounds.choose
+  have hBA : ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ b : ℕ, b ≤ N →
+      ∃ K : ℝ, 0 ≤ K ∧ ∀ i (x : E), x ∈ U → ∀ w : E,
+        p BA x ≤ A → p BA w ≤ 1 → ∀ y : PolarPoint, y.1 ∈ Ioo (l i) (h i) →
+          |jointMixedDiagonal (JA i) n 0 b x w y| ≤ K *
+            (1 + p (N + BA + 1) x + p (N + BA + 1) w) ^
+              ((b : ℝ) / ((N : ℝ) + 1)) := slopeBounds.choose_spec
+  let B₀ : ℕ := residualBounds.choose
+  have hB₀ : ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ b : ℕ, b ≤ N →
+      ∃ K : ℝ, 0 ≤ K ∧ ∀ i (x : E), x ∈ U → ∀ w : E,
+        p B₀ x ≤ A → p B₀ w ≤ 1 → ∀ y : PolarPoint, y.1 ∈ Ioo (l i) (h i) →
+          |jointMixedDiagonal (JZ 0 i) n 0 b x w y| ≤ K *
+            (1 + p (N + B₀ + 1) x + p (N + B₀ + 1) w) ^
+              ((b : ℝ) / ((N : ℝ) + 1)) := residualBounds.choose_spec
+  let B₁ : ℕ := displacementBounds.choose
+  have hB₁ : ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ b : ℕ, b ≤ N →
+      ∃ K : ℝ, 0 ≤ K ∧ ∀ i (x : E), x ∈ U → ∀ w : E,
+        p B₁ x ≤ A → p B₁ w ≤ 1 → ∀ y : PolarPoint, y.1 ∈ Ioo (l i) (h i) →
+          |jointMixedDiagonal (JZ 1 i) n 0 b x w y| ≤ K * H i *
+            (1 + p (N + B₁ + 1) x + p (N + B₁ + 1) w) ^
+              ((b : ℝ) / ((N : ℝ) + 1)) := displacementBounds.choose_spec
+  run_tac Lean.logInfo "N02N03 Velocity: bounds"
+  let B : ℕ := BL + BA + B₀ + B₁
+  have hbL : BL ≤ B := by dsimp only [B]; omega
+  have hbA : BA ≤ B := by dsimp only [B]; omega
+  have hb0 : B₀ ≤ B := by dsimp only [B]; omega
+  have hb1 : B₁ ≤ B := by dsimp only [B]; omega
+  have hcommon :
+      MixedDiagonalPowerGrowth p W (fun _ => 1) JL nmax B ∧
+        AngularDiagonalPowerGrowth p (fun _ => 1) JA nmax B ∧
+        ∀ c : Fin 2,
+          AngularDiagonalPowerGrowth p (fun i => H i ^ c.val) (JZ c) nmax B :=
+    transportVelocity_commonGrowth
+      (I := I) (E := E) (U := U) (fL := fL) (fA := fA) (fZ := fZ)
+      l h p W H hp hW0 hH JL JA JZ nmax BL BA B₀ B₁ B
+      hbL hbA hb0 hb1 hBL hBA hB₀ hB₁
+  run_tac Lean.logInfo "N02N03 Velocity: common-growth"
+  exact ⟨BL, BA, B₀, B₁, hcommon⟩
+
+set_option diagnostics true in
 /-- Choose each original interpolation order once and keep their sum as the common order. -/
 private def n01TransportVelocity_buildGrowth
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -544,14 +640,6 @@ private def n01TransportVelocity_buildGrowth
     hN.minusCharacteristicSpeed_correction_mixed_interpolation
       (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
       (lam := lam) (P := P) hS hT j hcell l h hl hh hlam hP hpositive JL nmax
-  let BL : ℕ := characteristicBounds.choose
-  have hBL : ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ a b : ℕ, a + b ≤ N →
-      ∃ K Q : ℝ, 0 ≤ K ∧ 0 ≤ Q ∧
-        ∀ m (x : E), x ∈ U → ∀ w : E, p BL x ≤ A → p BL w ≤ 1 →
-          ∀ y : PolarPoint, y.1 ∈ Ioo (l m) (h m) →
-            |jointMixedDiagonal (JL m) n a b x w y| ≤ K * W m ^ Q *
-              (1 + p (N + BL + 1) x + p (N + BL + 1) w) ^
-                (((a + b : ℕ) : ℝ) / ((N : ℝ) + 1)) := characteristicBounds.choose_spec
   let slopeBounds : ∃ B : ℕ,
       ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ b : ℕ, b ≤ N →
         ∃ K : ℝ, 0 ≤ K ∧ ∀ m (x : E), x ∈ U → ∀ w : E,
@@ -562,13 +650,6 @@ private def n01TransportVelocity_buildGrowth
     hN.returnFlowInverseSlope_angular_diagonal_interpolation
       (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
       hS hT hflow l h hl hh JA nmax
-  let BA : ℕ := slopeBounds.choose
-  have hBA : ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ b : ℕ, b ≤ N →
-      ∃ K : ℝ, 0 ≤ K ∧ ∀ m (x : E), x ∈ U → ∀ w : E,
-        p BA x ≤ A → p BA w ≤ 1 → ∀ y : PolarPoint, y.1 ∈ Ioo (l m) (h m) →
-          |jointMixedDiagonal (JA m) n 0 b x w y| ≤ K *
-            (1 + p (N + BA + 1) x + p (N + BA + 1) w) ^
-              ((b : ℝ) / ((N : ℝ) + 1)) := slopeBounds.choose_spec
   let residualBounds : ∃ B : ℕ,
       ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ b : ℕ, b ≤ N →
         ∃ K : ℝ, 0 ≤ K ∧ ∀ m (x : E), x ∈ U → ∀ w : E,
@@ -580,13 +661,6 @@ private def n01TransportVelocity_buildGrowth
       (D := D) (T := T) (S := S) (C := C) (R := R)
       (base := base) (loss := loss) (ε := ε)
       hS hT hflow l h hl hh χ hχrange hR J₀ nmax
-  let B₀ : ℕ := residualBounds.choose
-  have hB₀ : ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ b : ℕ, b ≤ N →
-      ∃ K : ℝ, 0 ≤ K ∧ ∀ m (x : E), x ∈ U → ∀ w : E,
-        p B₀ x ≤ A → p B₀ w ≤ 1 → ∀ y : PolarPoint, y.1 ∈ Ioo (l m) (h m) →
-          |jointMixedDiagonal (J₀ m) n 0 b x w y| ≤ K *
-            (1 + p (N + B₀ + 1) x + p (N + B₀ + 1) w) ^
-              ((b : ℝ) / ((N : ℝ) + 1)) := residualBounds.choose_spec
   let displacementBounds : ∃ B : ℕ,
       ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ b : ℕ, b ≤ N →
         ∃ K : ℝ, 0 ≤ K ∧ ∀ m (x : E), x ∈ U → ∀ w : E,
@@ -597,30 +671,11 @@ private def n01TransportVelocity_buildGrowth
     hN.returnCorrectionPulledDisplacement_angular_diagonal_interpolation
       (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
       hS hT hflow l h hl hh χ hχrange J₁ nmax
-  let B₁ : ℕ := displacementBounds.choose
-  have hB₁ : ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ b : ℕ, b ≤ N →
-      ∃ K : ℝ, 0 ≤ K ∧ ∀ m (x : E), x ∈ U → ∀ w : E,
-        p B₁ x ≤ A → p B₁ w ≤ 1 → ∀ y : PolarPoint, y.1 ∈ Ioo (l m) (h m) →
-          |jointMixedDiagonal (J₁ m) n 0 b x w y| ≤ K * H m *
-            (1 + p (N + B₁ + 1) x + p (N + B₁ + 1) w) ^
-              ((b : ℝ) / ((N : ℝ) + 1)) := displacementBounds.choose_spec
-  run_tac Lean.logInfo "N02N03 Velocity: bounds"
-  let B : ℕ := BL + BA + B₀ + B₁
-  have hbL : BL ≤ B := by dsimp only [B]; omega
-  have hbA : BA ≤ B := by dsimp only [B]; omega
-  have hb0 : B₀ ≤ B := by dsimp only [B]; omega
-  have hb1 : B₁ ≤ B := by dsimp only [B]; omega
-  have hcommon :
-      MixedDiagonalPowerGrowth p W (fun _ => 1) JL nmax B ∧
-        AngularDiagonalPowerGrowth p (fun _ => 1) JA nmax B ∧
-        ∀ c : Fin 2,
-          AngularDiagonalPowerGrowth p (fun m => H m ^ c.val) (JZ c) nmax B :=
-    transportVelocity_commonGrowth
-      (I := ℕ) (E := E) (U := U) (fL := fL) (fA := fA) (fZ := fZ)
-      l h p W H hp hW0 hH JL JA JZ nmax BL BA B₀ B₁ B
-      hbL hbA hb0 hb1 hBL hBA hB₀ hB₁
-  run_tac Lean.logInfo "N02N03 Velocity: common-growth"
-  exact ⟨BL, BA, B₀, B₁, hcommon⟩
+  run_tac Lean.logInfo "N02N03 Velocity: bounds-providers"
+  exact transportVelocity_growthData
+    (I := ℕ) (E := E) (U := U) (fL := fL) (fA := fA) (fZ := fZ)
+    l h p W H hp hW0 hH JL JA JZ nmax
+    characteristicBounds slopeBounds residualBounds displacementBounds
 
 set_option diagnostics true in
 /-- The actual transport equations finish the supplied towers at the selected common order. -/
@@ -741,10 +796,11 @@ private theorem n01TransportVelocity_flatFromGrowth
         (liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl)
         (hN.2.2.1.liftSectorParameter_sector x.1) hR χ m (hχ m) (hχrange m)
         ρ y ⟨(hl m).trans hy.1.1, hy.1.2.trans (hh m)⟩
-    fin_cases c
+    refine Fin.cases ?_ (fun c => ?_) c
     · simpa only [fZ, f₀, f₀₀, Fin.cases_zero, neg_mul] using
         hrec (R.residual (liftSectorParameter S C x.1))
-    · simpa only [fZ, f₀, f₀₀, f₁, Fin.cases_succ, Fin.cases_zero, neg_mul] using hrec x.2
+    · refine Fin.cases ?_ (fun i => Fin.elim0 i) c
+      simpa only [fZ, f₀, f₀₀, f₁, Fin.cases_succ, Fin.cases_zero, neg_mul] using hrec x.2
   run_tac Lean.logInfo "N02N03 Velocity: transport"
   exact transportVelocity_flatWithRadialCutoff
     (I := ℕ) (E := E) (U := U) (V := V)

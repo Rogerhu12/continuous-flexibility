@@ -76,4 +76,3 @@ theorem n07bVolumeUnknownSequence_apply
     n07bVolumeUnknownSequence hD hT hV hγ t s v m = V.forget γ t s v m := rfl
 
 end ContinuousFlexibility.Statements
-

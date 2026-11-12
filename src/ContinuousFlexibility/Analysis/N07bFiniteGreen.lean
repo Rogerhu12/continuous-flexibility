@@ -138,4 +138,3 @@ theorem n07b_c2_integral_symmetric_green_eq_zero
     _ = 0 := hi
 
 end ContinuousFlexibility.Analysis
-
