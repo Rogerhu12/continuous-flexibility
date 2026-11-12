@@ -67,7 +67,7 @@ theorem positiveHeightTaylorInterpolation_amplitude
         simpa only [Metric.mem_ball, Real.dist_eq] using hx)).le
     have hd := (abs_boundaryTaylorPolynomial_sub_zero_le
       hδ.le hδone hM hx' (fun j hj hjn => hlog side j hj hjn p.2)).trans hsmall
-    have ht := abs_add
+    have ht := abs_add_le
       (boundaryTaylorPolynomial n (e side) (A side) (x, p.2) - A side 0 p.2) (A side 0 p.2)
     rw [sub_add_cancel] at ht
     linarith only [ht, hd, hA0 side]
@@ -76,7 +76,7 @@ theorem positiveHeightTaylorInterpolation_amplitude
     have hright := hterm true
     change |positiveEndpointCutoff l δ p.1 * boundaryTaylorPolynomial n l (A false) p +
       positiveEndpointCutoff r δ p.1 * boundaryTaylorPolynomial n r (A true) p| ≤ _
-    exact (abs_add _ _).trans (by
+    exact (abs_add_le _ _).trans (by
       change |positiveEndpointCutoff l δ p.1 * boundaryTaylorPolynomial n l (A false) p| +
         |positiveEndpointCutoff r δ p.1 * boundaryTaylorPolynomial n r (A true) p| ≤ _
       change |positiveEndpointCutoff l δ p.1 * boundaryTaylorPolynomial n l (A false) p| ≤ _ at hleft

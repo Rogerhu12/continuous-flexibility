@@ -25,9 +25,10 @@ theorem positiveFiberChart_period_add
     (hφ : ∀ r θ, φ (r, θ + T) = φ (r, θ) + T)
     (hY : ∀ r η, Y (r, η + T) = Y (r, η)) (p : PolarPoint) :
     positiveFiberChart φ Y (p + (0, T)) = positiveFiberChart φ Y p + (0, T) := by
+  rcases p with ⟨r, θ⟩
   apply Prod.ext
-  · simp only [positiveFiberChart, Prod.fst_add, Prod.snd_add, add_zero, hφ, hY]
-  · simp only [positiveFiberChart, Prod.fst_add, Prod.snd_add, add_zero, hφ]
+  · simp only [positiveFiberChart, Prod.mk_add_mk, add_zero, hφ, hY]
+  · simp only [positiveFiberChart, Prod.mk_add_mk, add_zero, hφ]
 
 theorem positiveFiberChart_reflect
     {φ Y : PolarPoint → ℝ}
@@ -118,11 +119,13 @@ theorem positiveFiberChart_maps_closedStrip
     · change l ≤ positiveFiberRadialInverse Y q
       by_contra hnot
       have hh := hmono q.2 (lt_of_not_ge hnot)
+      dsimp only at hh
       rw [hR q, hleft q.2] at hh
       exact (not_lt_of_ge hq.1.1) hh
     · change positiveFiberRadialInverse Y q ≤ r
       by_contra hnot
       have hh := hmono q.2 (lt_of_not_ge hnot)
+      dsimp only at hh
       rw [hR q, hright q.2] at hh
       exact (not_lt_of_ge hq.1.2) hh
 
