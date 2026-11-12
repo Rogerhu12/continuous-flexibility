@@ -62,8 +62,11 @@ theorem exists_n05RetainedN01a (hq : 0 < q)
   have hlabel (m : ℕ) :
       |(P.reference.cellIndex (C.cell m) : ℝ) - P.reference.cellIndex m| ≤ L := by
     apply hindex m (host (e m))
-    simpa only [e, n05NegativeEnumeration_apply, N01aNegativeComponent.left,
-      N01aNegativeComponent.right] using hhost (e m)
+    have hh := hhost (e m)
+    change Ioo (e m).val.1 (e m).val.2 ⊆ P.reference.cells (host (e m)) at hh
+    have he : (e m).val = (P.n05NegativeComponentAt hq m).val :=
+      congrArg Subtype.val (P.n05NegativeEnumeration_apply hq m)
+    simpa only [he] using hh
   have hpartA : N01PartA P.reference T S C := by
     refine ⟨hD, ?_, hcontrol, ⟨L, hL, hlabel⟩, ?_⟩
     · simpa only [referenceStateConditions, C, n01aGeometryOfControls] using hx
