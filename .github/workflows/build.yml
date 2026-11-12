@@ -30,7 +30,6 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-          fetch-depth: 30 # enough history to see which line a push to main merged
       - name: Disk space
         # The runner has about 88 GB free; no cleanup is needed.
         run: df -h /
@@ -45,7 +44,8 @@ jobs:
           use-github-cache: "false"
       - name: Restore main's build artifacts
         # Layer 1, on every ref: the newest build of main. A line branch that merged
-        # main reuses every module main has already compiled.
+        # main reuses every module main has already compiled. (GitHub lets a branch
+        # read only its own caches and main's, so main cannot reuse a line's cache.)
         id: restore-main
         uses: actions/cache/restore@v4
         with:
@@ -53,27 +53,8 @@ jobs:
           key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-main~${{ github.sha }}
           restore-keys: |
             lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-main~
-      - name: Find the line merged by this push
-        if: github.ref_name == 'main'
-        id: merged
-        shell: bash
-        run: |
-          line=$(git log -30 --format=%s | grep -o -m1 '^Merge line/[^ ]*' | sed 's/^Merge //' || true)
-          echo "line=$line" >> "$GITHUB_OUTPUT"
-          echo "merged line: ${line:-none}"
-      - name: Restore the merged line's build artifacts
-        # Layer 2, on main only: the newest build of the line just merged, so main
-        # does not recompile what that line's CI already compiled.
-        if: github.ref_name == 'main' && steps.merged.outputs.line != ''
-        id: restore-merged
-        uses: actions/cache/restore@v4
-        with:
-          path: .lake/build
-          key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ steps.merged.outputs.line }}~${{ github.sha }}
-          restore-keys: |
-            lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ steps.merged.outputs.line }}~
       - name: Restore project build artifacts
-        # Layer 3, on line branches only: this branch's own entry (one per branch;
+        # Layer 2, on line branches only: this branch's own entry (one per branch;
         # the previous one is deleted when a new one is saved). Lake rebuilds any
         # module whose trace no longer matches, so the layering is safe. Without an
         # own entry the newest entry of any branch is used. `~` separates the branch
@@ -91,7 +72,6 @@ jobs:
       - name: Report which cache was restored
         run: |
           echo "main layer = ${{ steps.restore-main.outputs.cache-matched-key }}"
-          echo "merged line layer = ${{ steps.restore-merged.outputs.cache-matched-key }}"
           echo "matched key = ${{ steps.restore.outputs.cache-matched-key }}"
       - name: Generate the root import
         run: python3 scripts/gen_root.py
