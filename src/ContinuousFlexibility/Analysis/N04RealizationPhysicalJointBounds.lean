@@ -67,11 +67,11 @@ theorem n04Realization_spatialJoint_expansion
       scalarAngularExpansion n (fun b k => scalarAngularExpansion k
         (fun a j => ((J a b q hq).D j x).toMultilinearMap)) v := by
   change scalarAngularExpansion n
-    (fun b k => (localScalarJetMap (fun θ _ =>
+    (fun b k => (localScalarJetMap (fun (θ : ℝ) (_ : θ ∈ (univ : Set ℝ)) =>
       mixedScalarRadialJointDirections J hU hcU hI hf hb hr b θ)
         k (x, q.1) q.2).toMultilinearMap) v = _
   have heq :
-      (fun b k => (localScalarJetMap (fun θ _ =>
+      (fun b k => (localScalarJetMap (fun (θ : ℝ) (_ : θ ∈ (univ : Set ℝ)) =>
         mixedScalarRadialJointDirections J hU hcU hI hf hb hr b θ)
           k (x, q.1) q.2).toMultilinearMap) =
       (fun b k => scalarAngularExpansion k
@@ -110,10 +110,18 @@ theorem n04Realization_heightFieldJointDirections_bound
   let RF : MixedJetRegularity U (annularOpen D) g :=
     n04Realization_heightFieldMixedJets hT hM J heq
   have hΩ : IsOpen (annularOpen D) := isOpen_Ioo.prod isOpen_univ
-  let hf := fun a b x hx => (contDiffOn_mixedDerivative hΩ (RF.spatial x hx) a b).continuousOn
+  let hf : ∀ a b : ℕ, ∀ x ∈ U,
+      ContinuousOn (fun q => mixedDerivative a b (g x) q) (annularOpen D) :=
+    fun a b x hx => (contDiffOn_mixedDerivative hΩ (RF.spatial x hx) a b).continuousOn
   let hbounds := n04Realization_heightField_uniformSeminormBounds hT hM hγ hp hcp J hJ heq
-  let hrad := fun a b q hq x hx => mixedDerivative_hasDerivAt_radial hΩ (RF.spatial x hx) a b hq
-  let hang := fun a b q hq x hx => mixedDerivative_hasDerivAt_angular hΩ (RF.spatial x hx) a b hq
+  let hrad : ∀ a b : ℕ, ∀ q : PolarPoint, q ∈ annularOpen D → ∀ x ∈ U,
+      HasDerivAt (fun r => mixedDerivative a b (g x) (r, q.2))
+        (mixedDerivative (a + 1) b (g x) q) q.1 :=
+    fun a b q hq x hx => mixedDerivative_hasDerivAt_radial hΩ (RF.spatial x hx) a b hq
+  let hang : ∀ a b : ℕ, ∀ q : PolarPoint, q ∈ annularOpen D → ∀ x ∈ U,
+      HasDerivAt (fun θ => mixedDerivative a b (g x) (q.1, θ))
+        (mixedDerivative a (b + 1) (g x) q) q.2 :=
+    fun a b q hq x hx => mixedDerivative_hasDerivAt_angular hΩ (RF.spatial x hx) a b hq
   let K := mixedScalarSpatialJointDirections RF.parameter J.open_domain hc isOpen_Ioo
     hf hbounds hrad hang (convex_Ioo D.a D.b)
   have hsame :
