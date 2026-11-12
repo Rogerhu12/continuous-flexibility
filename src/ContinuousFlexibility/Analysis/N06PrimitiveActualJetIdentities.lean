@@ -122,6 +122,7 @@ theorem n06_primitive_column_unit_identity
         (n06CurrentScalarField D S C L (C.referenceState, 0) i) (canonicalUnitPoint K m p) := by
     dsimp only [canonicalSource]
     rw [n06_primitive_referenceScalarField_actual hS h01 h03 i hxD]
+  dsimp only [Function.comp_apply]
   rw [hfield z p, hfield (C.referenceState, 0) p]
   change canonicalSource S K z m (n06CurrentScalarField D S C L z i)
       (canonicalUnitPoint K m p) -
