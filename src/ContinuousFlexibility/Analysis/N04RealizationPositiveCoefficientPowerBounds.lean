@@ -3,6 +3,7 @@ import ContinuousFlexibility.Analysis.N01cCoefficientTameBounds
 import ContinuousFlexibility.Analysis.SectorParameterGeometry
 import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
 import ContinuousFlexibility.Analysis.N07aNeighborhood
+import ContinuousFlexibility.Analysis.MixedDerivativeLocality
 
 /-!
 # Actual positive physical coefficients on one fixed sector neighborhood
@@ -92,6 +93,31 @@ private theorem n04Realization_mixedPower_affine_domain
     (fun j => (hgrade (s + loss) (v j)).trans_le (hvhigh j))
   exact (congrArg norm he).trans_le hb'
 
+/-- Assemble a supplied family before specializing the abstract parameter
+spaces to the physical state and sector records. -/
+private theorem n04Realization_mixedPower_affine_family
+    {E F I₀ : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    [IsTopologicalAddGroup F] [ContinuousSMul ℝ F]
+    {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F}
+    {base loss : ℕ} {U : Set E} {V : Set F}
+    {Ω Ω₀ : Set PolarPoint} {H W : PolarPoint → ℝ}
+    {f : I₀ → F → PolarPoint → ℝ} {g : I₀ → E → PolarPoint → ℝ}
+    (I : E →L[ℝ] F) (center : F)
+    (hU : IsOpen U) (hΩ : IsOpen Ω) (hΩ₀ : Ω ⊆ Ω₀)
+    (hmap : MapsTo (fun x => center + I x) U V)
+    (hgrade : ∀ n x, q n (I x) = p n x)
+    (RF : ∀ i, MixedJetRegularity V Ω₀ (f i))
+    (hf : ∀ i, MixedPowerBounds q center base loss V Ω₀ H W (f i))
+    (heq : ∀ i x, x ∈ U → EqOn (g i x) (f i (center + I x)) Ω) :
+    ∀ i, ∃ RG : MixedJetRegularity U Ω (g i),
+      MixedPowerBounds p 0 base loss U Ω H W (g i) := by
+  intro i
+  exact n04Realization_mixedPower_affine_domain I center hU hΩ hΩ₀
+    hmap hgrade (RF i) (hf i) (heq i)
+
 /-- This is a certificate for the literal corrected fields. The domain
 contains every positive component, so its constants are uniform in the
 component label and physical point. -/
@@ -109,6 +135,25 @@ def N04RealizationPositiveCoefficientPowerBounds
       (fun p => T.H p.1 ^ (3 / 4 : ℝ)) (fun p => T.E0 p.1)
       (fun z => canonicalCoefficientComponent i (L.coefficients (liftSectorParameter S C z)))
 
+private theorem n04Realization_positiveCoefficient_eq_original
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {R : ReturnEquationData S}
+    {L : ReturnCorrectionData S} {base : ℕ} {ε : ℝ}
+    (h03 : N03Properties D T S C R L base ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1) {p : PolarPoint}
+    (hp : p ∈ annularOpen D) (hpositive : 0 < deriv D.w p.1) (i : Fin 3) :
+    canonicalCoefficientComponent i (L.coefficients z) p =
+      coefficientOriginalField D S C i z p := by
+  have ha := h03.1 z hz hs p
+  have hbc := h03.2.1 z hz hs p hp hpositive
+  simp only [canonicalCoefficientComponent, coefficientOriginalField, ite_apply]
+  split_ifs
+  · exact ha
+  · exact hbc.1.self_of_nhds
+  · exact hbc.2.self_of_nhds
+
+set_option backward.isDefEq.respectTransparency true in
 private theorem n04Realization_positiveCoefficient_of_original
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {R : ReturnEquationData S}
@@ -123,6 +168,10 @@ private theorem n04Realization_positiveCoefficient_of_original
         (fun p => T.H p.1 ^ (3 / 4 : ℝ)) (fun p => T.E0 p.1)
         (coefficientOriginalField D S C i)) :
     N04RealizationPositiveCoefficientPowerBounds D T S C L base loss η := by
+  letI : IsTopologicalAddGroup (AnnularState S × ℝ) := inferInstance
+  letI : ContinuousSMul ℝ (AnnularState S × ℝ) := inferInstance
+  letI : IsTopologicalAddGroup (StateDirections S × ℝ) := inferInstance
+  letI : ContinuousSMul ℝ (StateDirections S × ℝ) := inferInstance
   have hw : ContDiff ℝ ∞ D.w := hA.1.1.choose_spec.1.2.2.1.1
   have hΩ : IsOpen {p : PolarPoint | p ∈ annularOpen D ∧ 0 < deriv D.w p.1} :=
     (isOpen_Ioo.prod isOpen_univ).inter
@@ -131,34 +180,34 @@ private theorem n04Realization_positiveCoefficient_of_original
       (C.referenceState, 0) + sectorParameterInclusion S z)
       (sectorNeighborhood S base η η) (stateNeighborhood S C base η) := by
     intro z hz
+    change (C.referenceState, 0) + sectorParameterInclusion S z ∈
+      stateNeighborhood S C base η
     rw [← liftSectorParameter_eq_affine S C z]
     exact liftSectorParameter_mem_stateNeighborhood hz le_rfl
-  intro i
-  let RF : MixedJetRegularity (stateNeighborhood S C base η) (annularOpen D)
-      (coefficientOriginalField D S C i) :=
-    ⟨fun z hz => contDiffOn_coefficientOriginalField hS hT hA hB i hz,
-      n01_originalCoefficientMixedSmoothDirections hS hT hA hB i⟩
-  apply n04Realization_mixedPower_affine_domain
+  exact n04Realization_mixedPower_affine_family
+    (E := StateDirections S × ℝ) (F := AnnularState S × ℝ)
+    (p := pairGrading (sectorGrading S) realGrading)
+    (q := pairGrading (stateGrading S) realGrading) (base := base) (loss := loss)
+    (U := sectorNeighborhood S base η η) (V := stateNeighborhood S C base η)
+    (Ω := {p : PolarPoint | p ∈ annularOpen D ∧ 0 < deriv D.w p.1})
+    (Ω₀ := annularOpen D)
+    (H := fun p => T.H p.1 ^ (3 / 4 : ℝ)) (W := fun p => T.E0 p.1)
+    (f := coefficientOriginalField D S C)
+    (g := fun i z => canonicalCoefficientComponent i
+      (L.coefficients (liftSectorParameter S C z)))
     (sectorParameterInclusion S) (C.referenceState, 0)
     (sectorNeighborhood_isOpen S base η η) hΩ (fun _ hp => hp.1)
-    hmap (pairGrading_sectorParameterInclusion S) RF (hraw i)
-  intro z hz p hp
-  have hz' : liftSectorParameter S C z ∈ stateNeighborhood S C originalBase ε :=
-    stateNeighborhood_subset hbase hη (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
-  have hs : stateSector S (liftSectorParameter S C z).1 :=
-    hA.2.1.liftSectorParameter_sector z
-  have hcoef :
-      canonicalCoefficientComponent i (L.coefficients (liftSectorParameter S C z)) p =
-        coefficientOriginalField D S C i (liftSectorParameter S C z) p := by
-    have ha := h03.1 _ hz' hs p
-    have hbc := h03.2.1 _ hz' hs p hp.1 hp.2
-    simp only [canonicalCoefficientComponent, coefficientOriginalField, ite_apply]
-    split_ifs
-    · exact ha
-    · exact hbc.1.self_of_nhds
-    · exact hbc.2.self_of_nhds
-  exact hcoef.trans (congrArg (fun x => coefficientOriginalField D S C i x p)
-    (liftSectorParameter_eq_affine S C z))
+    hmap (pairGrading_sectorParameterInclusion S)
+    (fun i => ⟨fun z hz => contDiffOn_coefficientOriginalField hS hT hA hB i hz,
+      n01_originalCoefficientMixedSmoothDirections hS hT hA hB i⟩)
+    hraw (fun i z hz p hp => by
+      have hz' : liftSectorParameter S C z ∈ stateNeighborhood S C originalBase ε :=
+        stateNeighborhood_subset hbase hη
+          (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
+      have he := n04Realization_positiveCoefficient_eq_original h03 hz'
+        (hA.2.1.liftSectorParameter_sector z) hp.1 hp.2 i
+      exact he.trans (congrArg (fun x => coefficientOriginalField D S C i x p)
+        (liftSectorParameter_eq_affine S C z)))
 
 /-- The retained construction supplies every input. One strengthened low
 base and one positive radius precede all parameter and spatial orders;
