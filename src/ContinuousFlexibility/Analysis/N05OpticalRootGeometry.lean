@@ -81,7 +81,7 @@ theorem n05_optical_sqrt_sub_le {κ u v : ℝ} (hκ : 0 < κ)
 
 /-- The average differs from the square root at its outer endpoint by
 `O(x)`. This is the cancellation estimate used for the actual `q'`. -/
-theorem n05OpticalRootAverage_sub_sqrt_le {g : ℝ → ℝ} {a x κ : ℝ} {M : ℝ≥0}
+theorem n05OpticalRootAverage_sub_sqrt_le {g : ℝ → ℝ} {a x κ : ℝ} {M : NNReal}
     (hκ : 0 < κ) (hg : LipschitzOnWith M g (Icc (0 : ℝ) a))
     (hlower : ∀ y ∈ Icc (0 : ℝ) a, κ ≤ g y)
     (hx : x ∈ Icc (0 : ℝ) a) :
@@ -308,7 +308,7 @@ theorem n05_optical_symbol_deriv {F ξ : ℝ → ℝ} {a x : ℝ}
 /-- Closed-interval first geometry for the actual root coordinate.
 The coordinate is identified by its actual optical time and symbol;
 its second derivative bound is a conclusion, including at the root. -/
-theorem n05_optical_root_first_geometry {F ξ : ℝ → ℝ} {a κ P : ℝ} {M : ℝ≥0}
+theorem n05_optical_root_first_geometry {F ξ : ℝ → ℝ} {a κ P : ℝ} {M : NNReal}
     (ha : 0 < a) (hκ : 0 < κ) (hP : 1 ≤ P) (hPκ : 1 / P ≤ κ)
     (hF : ∀ x ∈ Icc (0 : ℝ) a, ContDiffAt ℝ 2 F x)
     (hξ : ∀ x ∈ Icc (0 : ℝ) a, ContDiffAt ℝ 2 ξ x)
@@ -463,7 +463,7 @@ The weight enters through its own reciprocal envelope and logarithmic
 derivative bound. In the radial application the latter is `|r F(r)|`.
 All coordinate and height derivative estimates remain conclusions. -/
 theorem n05_optical_root_height_geometry {F ξ w H : ℝ → ℝ}
-    {a κ P W V : ℝ} {M : ℝ≥0}
+    {a κ P W V : ℝ} {M : NNReal}
     (ha : 0 < a) (hκ : 0 < κ) (hP : 1 ≤ P) (hPκ : 1 / P ≤ κ)
     (hW : 0 < W) (hV : 0 ≤ V)
     (hF : ∀ x ∈ Icc (0 : ℝ) a, ContDiffAt ℝ 2 F x)
@@ -537,7 +537,7 @@ theorem n05_optical_root_height_geometry {F ξ w H : ℝ → ℝ}
 The constants are explicit finite algebraic expressions in the original
 two-root lower bound, travel, interval length and derivative bounds. -/
 theorem n05_optical_equal_cut_height_geometry {F ξ w H : ℝ → ℝ}
-    {L a α τ B B₁ W V : ℝ} {M : ℝ≥0}
+    {L a α τ B B₁ W V : ℝ} {M : NNReal}
     (ha : 0 < a) (haL : a < L) (hα : 0 < α) (hτ : 0 < τ)
     (hB : 0 < B) (hB₁ : 0 ≤ B₁) (hW : 0 < W) (hV : 0 ≤ V)
     (hF : ∀ x ∈ Icc (0 : ℝ) L, ContDiffAt ℝ 2 F x)

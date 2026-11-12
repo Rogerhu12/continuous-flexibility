@@ -51,11 +51,13 @@ theorem n05_referenceCellIndex_count_of_bounds
     measureReal_biUnion_finset
       (fun m _ j _ hmj => hdisjoint hmj)
       (fun _ _ => measurableSet_Ioo)
-      (fun _ _ => by simp only [I, Real.volume_Ioo, ENNReal.ofReal_ne_top, not_false_eq_true])
+      (fun _ _ => by
+        rw [I, Real.volume_Ioo]
+        exact ENNReal.ofReal_ne_top)
   have hlocal (m : ℕ) (hm : m ∈ F) :
       K⁻¹ * radialE n ^ (-K) ≤ volume.real (I m) := by
     have hmn : D.cellIndex m = n := by
-      simpa only [F, Set.Finite.mem_toFinset, Set.mem_setOf_eq] using hm
+      simpa only [F, Set.Finite.mem_toFinset, Set.mem_ofPred_eq] using hm
     have hp := (hwidth m).2.1
     have hw := (hwidth m).2.2.1
     rw [hmn] at hw
@@ -69,7 +71,9 @@ theorem n05_referenceCellIndex_count_of_bounds
       _ ≤ ∑ m ∈ F, volume.real (I m) := Finset.sum_le_sum hlocal
       _ = volume.real (⋃ m ∈ F, I m) := hvolume.symm
       _ ≤ volume.real (Ioo D.a D.b) :=
-        measureReal_mono hsub (by simp only [Real.volume_Ioo, ENNReal.ofReal_ne_top, not_false_eq_true])
+        measureReal_mono hsub (by
+          rw [Real.volume_Ioo]
+          exact ENNReal.ofReal_ne_top)
       _ = D.b - D.a := Real.volume_real_Ioo_of_le hgeometry.2.1.le
   have hE : 0 < radialE n := Real.exp_pos _
   have hcancel : (K⁻¹ * radialE n ^ (-K)) * (K * radialE n ^ K) = 1 := by

@@ -349,7 +349,7 @@ theorem n05_negative_component_first_geometry
       ((hGcontinuous.mono (Icc_subset_Icc ha.le le_rfl)).intervalIntegrable_of_Icc haℓ.le)
     rw [hhalf, hfull] at hadd
     linarith only [hadd, htravel]
-  let M : ℝ≥0 := ⟨Λ, hΛpos.le⟩
+  let M : NNReal := ⟨Λ, hΛpos.le⟩
   have hbound := n05_optical_equal_cut_height_geometry ha haℓ (one_div_pos.mpr hΛpos)
     (one_div_pos.mpr hΛpos) hΛpos hΛpos.le hΛpos (sq_nonneg Λ)
     hGc hξc hwc hHc hzero hGlow hGupper hGfirst (M := M) hGsecond

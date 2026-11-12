@@ -20,7 +20,7 @@ open Set Filter MeasureTheory
 /-- A genuine interval integral controls the endpoint value. The proof
 uses a plateau of length `f b / (2 * L)` and no fractional-power formula. -/
 theorem n05_lipschitz_sqrt_integral_lower
-    {f : ℝ → ℝ} {a b : ℝ} {L : ℝ≥0} (hab : a ≤ b) (hL : 0 < (L : ℝ))
+    {f : ℝ → ℝ} {a b : ℝ} {L : NNReal} (hab : a ≤ b) (hL : 0 < (L : ℝ))
     (hf : LipschitzOnWith L f (Icc a b))
     (hzero : f a = 0) (hnonneg : ∀ x ∈ Icc a b, 0 ≤ f x) :
     f b * Real.sqrt (f b) ≤
@@ -83,7 +83,7 @@ theorem n05_lipschitz_sqrt_integral_lower
 /-- The exact Tricomi time identity turns the optical lower bound into a
 coarse coefficient-power bound, without a lower bound for the root slope. -/
 theorem n05_optical_radicand_le_radius
-    {f : ℝ → ℝ} {a b ξ : ℝ} {L : ℝ≥0} (hab : a ≤ b) (hL : 1 ≤ (L : ℝ))
+    {f : ℝ → ℝ} {a b ξ : ℝ} {L : NNReal} (hab : a ≤ b) (hL : 1 ≤ (L : ℝ))
     (hf : LipschitzOnWith L f (Icc a b))
     (hzero : f a = 0) (hnonneg : ∀ x ∈ Icc a b, 0 ≤ f x) (hξ : 0 ≤ ξ)
     (htime : (∫ x in a..b, Real.sqrt (f x)) = (2 / 3 : ℝ) * ξ * Real.sqrt ξ) :
@@ -127,7 +127,7 @@ theorem n05_optical_radicand_le_radius
 /-- In the canonical interior the radicand-to-radius ratio has the same
 polynomial bound. This is the ratio appearing in the exact negative symbol. -/
 theorem n05_optical_radicand_div_radius_le
-    {f : ℝ → ℝ} {a b ξ : ℝ} {L : ℝ≥0} (hab : a ≤ b) (hL : 1 ≤ (L : ℝ))
+    {f : ℝ → ℝ} {a b ξ : ℝ} {L : NNReal} (hab : a ≤ b) (hL : 1 ≤ (L : ℝ))
     (hf : LipschitzOnWith L f (Icc a b))
     (hzero : f a = 0) (hnonneg : ∀ x ∈ Icc a b, 0 ≤ f x) (hξ : 0 < ξ)
     (htime : (∫ x in a..b, Real.sqrt (f x)) = (2 / 3 : ℝ) * ξ * Real.sqrt ξ) :

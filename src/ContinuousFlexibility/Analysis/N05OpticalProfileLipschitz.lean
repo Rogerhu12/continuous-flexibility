@@ -78,7 +78,7 @@ theorem n05_opticalRadicand_cell_lipschitz {D : ReferenceData}
     (hD : IsAccumulatingProfile D) :
     ∃ C A : ℝ, 0 < C ∧ 0 < A ∧ ∀ (m : ℕ) (l b : ℝ),
       l < b → Ioo l b ⊆ D.cells m → Icc l b ⊆ radialCore D →
-      ∃ P : ℝ≥0, 1 ≤ (P : ℝ) ∧
+      ∃ P : NNReal, 1 ≤ (P : ℝ) ∧
         (P : ℝ) = C * radialE (D.cellIndex m) ^ A ∧
         LipschitzOnWith P (fun r => -deriv D.w r / (r * D.w r)) (Icc l b) := by
   let F : ℝ → ℝ := fun r => -deriv D.w r / (r * D.w r)
@@ -91,7 +91,7 @@ theorem n05_opticalRadicand_cell_lipschitz {D : ReferenceData}
   have hA : 0 < A := by dsimp only [A]; positivity
   have hA₀ : A₀ ≤ A := by dsimp only [A]; linarith only [le_abs_self A₀]
   refine ⟨C, A, hC, hA, fun m l b hlb hcell hcore => ?_⟩
-  let P : ℝ≥0 := ⟨C * Real.exp (A * radialQ (D.cellIndex m)),
+  let P : NNReal := ⟨C * Real.exp (A * radialQ (D.cellIndex m)),
     mul_nonneg hC.le (Real.exp_pos _).le⟩
   have hQ := radialQ_nonneg (D.cellIndex m)
   have hP : 1 ≤ (P : ℝ) := by

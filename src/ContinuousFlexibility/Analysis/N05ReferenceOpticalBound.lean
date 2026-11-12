@@ -19,7 +19,7 @@ open Set MeasureTheory
 set_option backward.isDefEq.respectTransparency false
 
 private theorem n05_optical_radicand_le_radius_right
-    {f : ℝ → ℝ} {a b ξ : ℝ} {A : ℝ≥0} (hab : a ≤ b) (hA : 1 ≤ (A : ℝ))
+    {f : ℝ → ℝ} {a b ξ : ℝ} {A : NNReal} (hab : a ≤ b) (hA : 1 ≤ (A : ℝ))
     (hf : LipschitzOnWith A f (Icc a b))
     (hzero : f b = 0) (hnonneg : ∀ x ∈ Icc a b, 0 ≤ f x) (hξ : 0 ≤ ξ)
     (htime : (∫ x in a..b, Real.sqrt (f x)) = (2 / 3 : ℝ) * ξ * Real.sqrt ξ) :
@@ -48,7 +48,7 @@ theorem n05_cut_reference_density_le_of_optical_lipschitz
     {L : ReturnCorrectionData S} {K : CanonicalData S} {base loss : ℕ} {ε : ℝ}
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
-    (m : ℕ) (right : Bool) {A : ℝ≥0} (hA : 1 ≤ (A : ℝ))
+    (m : ℕ) (right : Bool) {A : NNReal} (hA : 1 ≤ (A : ℝ))
     (hLip : LipschitzOnWith A (fun r => -deriv D.w r / (r * D.w r))
       (Icc (K.physicalLeft (if right then (K.cutPair m).2 else (K.cutPair m).1))
         (K.physicalRight (if right then (K.cutPair m).2 else (K.cutPair m).1))))

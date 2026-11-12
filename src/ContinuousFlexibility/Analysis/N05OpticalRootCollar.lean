@@ -23,7 +23,7 @@ open scoped Topology ContDiff
 /-- The two-root distance lower bound controls the actual derivative at
 the left root; apply this to the inward affine slice at a right root. -/
 theorem n05_optical_root_slope_lower
-    {F : ℝ → ℝ} {L α : ℝ} {M : ℝ≥0} (hL : 0 < L)
+    {F : ℝ → ℝ} {L α : ℝ} {M : NNReal} (hL : 0 < L)
     (hF : ∀ x ∈ Icc (0 : ℝ) L, ContDiffAt ℝ 2 F x)
     (hzero : F 0 = 0)
     (hsecond : ∀ x ∈ Icc (0 : ℝ) L, |deriv (deriv F) x| ≤ M)

@@ -36,7 +36,7 @@ theorem n05_optical_deriv_continuousOn {F : ℝ → ℝ} {a : ℝ}
   intro x hx
   exact ((hF x hx).derivWithin (m := 1) (by norm_num)).continuousAt.continuousWithinAt
 
-theorem n05_optical_deriv_lipschitz {F : ℝ → ℝ} {a : ℝ} {M : ℝ≥0}
+theorem n05_optical_deriv_lipschitz {F : ℝ → ℝ} {a : ℝ} {M : NNReal}
     (hF : ∀ x ∈ Icc (0 : ℝ) a, ContDiffAt ℝ 2 F x)
     (hM : ∀ x ∈ Icc (0 : ℝ) a, |deriv (deriv F) x| ≤ M) :
     LipschitzOnWith M (deriv F) (Icc (0 : ℝ) a) := by
@@ -50,7 +50,7 @@ theorem n05_optical_deriv_lipschitz {F : ℝ → ℝ} {a : ℝ} {M : ℝ≥0}
 theorem n05OpticalRootQuotient_integrable {F : ℝ → ℝ} {a x : ℝ}
     (hF : ContinuousOn (deriv F) (Icc (0 : ℝ) a)) (hx : x ∈ Icc (0 : ℝ) a) :
     IntervalIntegrable (fun t => deriv F (t * x)) volume 0 1 := by
-  apply ContinuousOn.intervalIntegrable_of_Icc _ zero_le_one
+  apply ContinuousOn.intervalIntegrable_of_Icc zero_le_one
   exact hF.comp (continuous_id.mul continuous_const).continuousOn
     (fun t ht => n05_optical_unit_mul_mem hx ht)
 
@@ -75,7 +75,7 @@ theorem n05OpticalRootQuotient_mul {F : ℝ → ℝ} {a x : ℝ}
 
 /-- A second derivative bound controls differences of the extended root
 quotient. A coarse constant avoids any endpoint division. -/
-theorem n05OpticalRootQuotient_lipschitz {F : ℝ → ℝ} {a : ℝ} {M : ℝ≥0}
+theorem n05OpticalRootQuotient_lipschitz {F : ℝ → ℝ} {a : ℝ} {M : NNReal}
     (hF : ContinuousOn (deriv F) (Icc (0 : ℝ) a))
     (hM : LipschitzOnWith M (deriv F) (Icc (0 : ℝ) a)) :
     LipschitzOnWith M (n05OpticalRootQuotient F) (Icc (0 : ℝ) a) := by
@@ -112,7 +112,7 @@ theorem n05OpticalRootQuotient_abs_le {F : ℝ → ℝ} {a x B : ℝ}
 
 /-- The global optical lower bound survives division at the root itself,
 by continuity of the integral quotient. -/
-theorem n05OpticalRootQuotient_lower {F : ℝ → ℝ} {a κ : ℝ} {M : ℝ≥0}
+theorem n05OpticalRootQuotient_lower {F : ℝ → ℝ} {a κ : ℝ} {M : NNReal}
     (ha : 0 < a) (hF : ∀ y ∈ Icc (0 : ℝ) a, ContDiffAt ℝ 2 F y)
     (hzero : F 0 = 0)
     (hM : LipschitzOnWith M (deriv F) (Icc (0 : ℝ) a))
@@ -132,7 +132,7 @@ theorem n05OpticalRootQuotient_lower {F : ℝ → ℝ} {a κ : ℝ} {M : ℝ≥0
 
 /-- The derivative at the outer endpoint of a root segment differs from
 the averaged derivative by at most the second-derivative scale times its length. -/
-theorem n05OpticalRootQuotient_deriv_sub_le {F : ℝ → ℝ} {a x : ℝ} {M : ℝ≥0}
+theorem n05OpticalRootQuotient_deriv_sub_le {F : ℝ → ℝ} {a x : ℝ} {M : NNReal}
     (hF : ContinuousOn (deriv F) (Icc (0 : ℝ) a))
     (hM : LipschitzOnWith M (deriv F) (Icc (0 : ℝ) a))
     (hx : x ∈ Icc (0 : ℝ) a) :
@@ -169,10 +169,10 @@ theorem n05_optical_equal_cut_distance {F : ℝ → ℝ} {l c u B τ : ℝ}
   have hc := Real.continuous_sqrt.comp_continuousOn hF
   have hb (r : ℝ) (hr : r ∈ Icc l u) : Real.sqrt (F r) ≤ B :=
     (Real.sqrt_le_left hB.le).mpr (hupper r hr)
-  have hL := intervalIntegral.integral_mono_on hlc.le
+  have hL := intervalIntegral.integral_mono_on (μ := volume) hlc.le
     ((hc.mono (Icc_subset_Icc le_rfl hcu.le)).intervalIntegrable_of_Icc hlc.le)
     intervalIntegrable_const (fun r hr => hb r ⟨hr.1, hr.2.trans hcu.le⟩)
-  have hR := intervalIntegral.integral_mono_on hcu.le
+  have hR := intervalIntegral.integral_mono_on (μ := volume) hcu.le
     ((hc.mono (Icc_subset_Icc hlc.le le_rfl)).intervalIntegrable_of_Icc hcu.le)
     intervalIntegrable_const (fun r hr => hb r ⟨hlc.le.trans hr.1, hr.2⟩)
   simp only [intervalIntegral.integral_const, smul_eq_mul] at hL hR
