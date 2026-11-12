@@ -93,7 +93,7 @@ theorem n03_interiorRootTravel_bounds_of_actual_sections
           (L.coefficients z).a (s, φ) := div_nonneg (Real.sqrt_nonneg _) hapos.le
     dsimp only [fm, fp]
     rw [hlocal false s hss φ, hlocal true s hss φ]
-    dsimp only [negativeCharacteristicField, minusCharacteristicSpeed,
+    simp only [negativeCharacteristicField, minusCharacteristicSpeed,
       plusCharacteristicSpeed, Bool.false_eq_true, ↓reduceIte]
     linarith only [hv]
   have hnonnegative (s : ℝ) (hss : s ∈ Icc a b) (φ : ℝ) : 0 ≤ angularPartial U (s, φ) :=

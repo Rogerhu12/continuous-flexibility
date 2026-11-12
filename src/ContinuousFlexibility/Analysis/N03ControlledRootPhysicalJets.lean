@@ -193,7 +193,7 @@ theorem n03_fixedCutoff_controlledRoot_physicalJets
     simpa only [← hpoint', hpoint] using he
   have hclosed : (r + σ * x, θ) ∈ physicalPieceClosed S K z i := by
     by_cases hzero : x = 0
-    · simpa only [hzero, mul_zero, add_zero] using
+    · simpa only [r, i, n01ComponentRoot, hzero, mul_zero, add_zero] using
         (canonicalCutPair_root_mem_closed_and_zero hA hB hzold hs m rightEnd θ).1
     · exact subset_closure (hopen (lt_of_le_of_ne hx.1 (Ne.symm hzero)))
   have hregular := (hA.boundary z hzold hs i).2.2.2.2.1 (r + σ * x, θ) hclosed

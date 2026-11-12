@@ -63,8 +63,8 @@ theorem n03_leftRoot_firstIntegrals_eq_controlled_samples
       n01ComponentRootOrientation, Bool.false_eq_true, ↓reduceIte, one_mul] using hh.2
   have ht := congrArg Prod.fst
     (characteristicTravelChart_rootCharacteristicCoordinate G (p := (x, θ)) hx.1)
-  change (G (x, -(x ^ (3 / 2 : ℝ)), θ) - G (x, x ^ (3 / 2 : ℝ), θ)) / 2 =
-    x ^ (3 / 2 : ℝ) * rootOddCoefficient G (x, θ) at ht
+  simp only [characteristicTravelChart, rootCharacteristicCoordinate,
+    one_mul, neg_one_mul] at ht
   change V = G (x, -(x ^ (3 / 2 : ℝ)), θ) ∧ U = G (x, x ^ (3 / 2 : ℝ), θ)
   constructor <;> linarith only [htravel, hangle, ht]
 

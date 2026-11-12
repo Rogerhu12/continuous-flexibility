@@ -90,7 +90,7 @@ theorem n03_fixedRoot_chart_height_ordinaryJets
   have hclosed : arg q ∈ physicalPieceClosed S K z i := by
     by_cases hzero : q.1 = 0
     · have hh := (canonicalCutPair_root_mem_closed_and_zero hA hB hz hs m rightEnd q.2).1
-      simpa only [arg, hzero, mul_zero, add_zero] using hh
+      simpa only [arg, r, i, n01ComponentRoot, hzero, mul_zero, add_zero] using hh
     · exact subset_closure (hband q.1 ⟨lt_of_le_of_ne hq.1 (Ne.symm hzero), hq.2⟩ q.2).1
   have hregular := (hA.boundary z hz hs i).2.2.2.2.1 (arg q) hclosed
   have harg : ContDiff ℝ ∞ arg :=

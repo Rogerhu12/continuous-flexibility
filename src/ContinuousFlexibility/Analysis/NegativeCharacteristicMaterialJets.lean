@@ -46,9 +46,10 @@ theorem negativeCharacteristicValue_contDiffAt (plus : Bool)
   have hc : ContDiffAt ℝ ∞ (fun q : ℝ × ℝ × ℝ => q.2.2) x := contDiffAt_snd.snd
   have hd := hb.fun_div ha hx.1.ne'
   have hv := (((hb.pow 2).sub (ha.mul hc)).sqrt hx.2.ne').fun_div ha hx.1.ne'
-  cases plus
-  · simpa only [negativeCharacteristicValue, Bool.false_eq_true, ite_false] using hd.sub hv
-  · simpa only [negativeCharacteristicValue, ite_true] using hd.add hv
+  unfold negativeCharacteristicValue
+  split_ifs
+  · exact hd.add hv
+  · exact hd.sub hv
 
 private theorem negativeCharacteristicValue_outer_bounds
     {l κ M : ℝ} (hl : 0 < l) (hκ : 0 < κ) :

@@ -46,6 +46,7 @@ theorem canonicalCutPair_abs_jacobian_eq_characteristic_product :
         angularPartial (canonicalGluedAiryIntegral S K z m (-1)) q *
         angularPartial (canonicalGluedAiryIntegral S K z m 1) q / 2| /
           Real.sqrt (K.chart z i q).1 := by
+  dsimp only
   let i := if side then (K.cutPair m).2 else (K.cutPair m).1
   let U := canonicalGluedAiryIntegral S K z m (-1)
   let V := canonicalGluedAiryIntegral S K z m 1
@@ -76,13 +77,14 @@ theorem canonicalCutPair_abs_jacobian_eq_characteristic_product :
         canonicalGluedAiryIntegral S K z m (-1) y) / 2)) = F := by
     funext y
     cases side <;> apply Prod.ext <;>
-      dsimp only [F, P, U, V, canonicalGluedRootTravel, characteristicTravelChart,
+      simp only [F, P, U, V, canonicalGluedRootTravel, characteristicTravelChart,
         Bool.false_eq_true, ↓reduceIte] <;> ring
   have he : K.chart z i =ᶠ[𝓝 q] rootPowerTravelChart F := by
     filter_upwards [(hA.domains z hz hs i).1.mem_nhds hq] with y hy
     rw [canonicalCutPair_chart_eq_rootTravel hA hB hz hs m side hy]
-    exact Prod.ext (congrArg rootTravelPower (congrArg Prod.fst (congrFun hcoords y)))
-      (congrArg Prod.snd (congrFun hcoords y))
+    have hpoint := congrArg (fun v : PolarPoint => (rootTravelPower v.1, v.2))
+      (congrFun hcoords y)
+    exact hpoint
   obtain ⟨_, _, _, _, _, _, hl₀, hl₁, _, _⟩ := hB.1.1 m
   have hl : K.left i = 0 := by cases side <;> assumption
   have hξ : 0 < (K.chart z i q).1 := by
@@ -90,7 +92,11 @@ theorem canonicalCutPair_abs_jacobian_eq_characteristic_product :
   have hvalues := canonicalCutPair_chartValues_of_gluedIntegrals
     m side (hB.1.2 z hz hs m).2.2.1 hq
   have hτ : 0 < (F q).1 := by
-    rw [← congrArg Prod.fst (congrFun hcoords q), ← hvalues.2]
+    have hvalue : airyTravelPrimitive (K.chart z i q).1 =
+        canonicalGluedRootTravel S K z m side q := hvalues.2
+    have hcoord : canonicalGluedRootTravel S K z m side q = (F q).1 :=
+      congrArg Prod.fst (congrFun hcoords q)
+    rw [← hcoord, ← hvalue]
     exact mul_pos (by norm_num : (0 : ℝ) < 2 / 3) (Real.rpow_pos_of_pos hξ _)
   have htransport := canonicalGluedAiryIntegral_stored_characteristic_transport
     hS hT hN01 hN02 hN03 hA hB hz hs m hqN
