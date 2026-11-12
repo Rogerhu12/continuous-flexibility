@@ -23,7 +23,7 @@ theorem N07b (hN07a : N07aStatement) : N07Statement := by
     hthrough.1.1
   have hK : N04PartA A.val S C K base ε := h04.2.2.2.2.1.1
   have hprimitive : CanonicalPrimitiveGeometry A.val T S C L K base ε :=
-    h04.2.2.2.2.2
+    h04.2.2.2.2.2.2
   have hstate : referenceStateConditions A.val S C := h04.1.1.1.2.2.1
   obtain ⟨base', ε', hb, hε', hεle, hbridge⟩ :=
     n07b_exists_scalarBanachBridge_on_smaller A.property.1 hT hS

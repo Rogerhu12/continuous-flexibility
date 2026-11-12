@@ -49,6 +49,8 @@ theorem n07b_scalarInverse_perturbedCanonicalRelation
   have hf : ContDiffOn ℝ ∞ ((S.height (3 / 4 : ℝ)).decode f.val)
       (annularOpen D) :=
     ((hS.1 (3 / 4 : ℝ)).2.2.2.1 f.val).1
+  have hfp : Function.Periodic ((S.height (3 / 4 : ℝ)).decode f.val) (0, Real.pi) :=
+    ((hS.1 (3 / 4 : ℝ)).2.2.2.1 f.val).2.2.1
   have hmember : HeightMember D T (3 / 4 : ℝ)
       ((S.height (3 / 4 : ℝ)).decode (G.G z f).1.1) :=
     (hS.1 (3 / 4 : ℝ)).2.2.2.1 (G.G z f).1.1
@@ -65,7 +67,7 @@ theorem n07b_scalarInverse_perturbedCanonicalRelation
     simp only [add_zero, hp]
   obtain ⟨hrow, hstrong⟩ := hG.1 z hz hsector f
   apply n07b_perturbedCanonicalRelation_of_strong
-    hab ha hb hc hη hf hBp hCp hηp hrep hrow hcompat
+    hab ha hb hc hη hf hBp hCp hηp hfp hrep hrow hcompat
   intro p hp
   rw [hscalar]
   exact hstrong p hp

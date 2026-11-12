@@ -145,6 +145,7 @@ def N04cStatement : Prop :=
           IsMaterialData A.val T ∧ IsPhysicalSpaces A.val T S ∧
             NonlinearPropertiesThrough03 A.val T S C R L base loss ε ∧
               N04Properties A.val T S C L K base loss ε ∧
+                CanonicalGeometry.PrimitiveGeometryProperties A.val T S C L K base ε ∧
                 CanonicalPrimitiveGeometry A.val T S C L K base ε
 
 /-! ## N07: the scalar inverse, then its identification with the Banach solution -/

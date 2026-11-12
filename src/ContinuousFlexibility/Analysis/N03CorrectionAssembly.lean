@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap
 import ContinuousFlexibility.Analysis.ReturnCorrectionOperatorComparison
+import ContinuousFlexibility.Analysis.N04bCorrectedFieldFacts
 import ContinuousFlexibility.Analysis.N02ReturnAssembly
 
 /-!
@@ -66,7 +67,7 @@ theorem N01Properties.exists_returnCorrection_of_smoothTame_source
       minusFlow := returnCorrectedMinusFlow S C χ
       error := E }
   refine ⟨L, rfl, ?_⟩
-  refine ⟨?_, ?_, ?_, ?_, hflow, ?_, ?_, htame⟩
+  refine ⟨?_, ?_, ?_, ?_, hflow, ?_, ?_, htame, ?_⟩
   · intro z hz hs p
     rfl
   · intro z hz hs p hp hpositive
@@ -87,5 +88,14 @@ theorem N01Properties.exists_returnCorrection_of_smoothTame_source
         (hE z hz hs (R.residual z) η p).symm
   · intro z hz hs ρ η
     exact physicalSourceIntegral_decode_source_eq_zero hS (E z ρ η)
+  · intro z hz hs
+    have hregular := hN.n04b_opticalCorrectedCoefficients_contDiffOn
+      hR hS hT hz hs χ hχ hχrange hsupp hend (hdisc z hz)
+    refine ⟨hregular.2.1, hregular.2.2, ?_⟩
+    rintro ⟨r, θ⟩ hp
+    have hperiod := hN.n04b_opticalCorrectedCoefficients_periodic
+      hR hS hz hs χ hχrange (hdisc z hz) r hp.1
+    simpa only [Prod.mk_add_mk, add_zero] using
+      And.intro (hperiod.2.1 θ) (hperiod.2.2 θ)
 
 end ContinuousFlexibility.Statements
