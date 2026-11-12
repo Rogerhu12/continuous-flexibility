@@ -14,11 +14,6 @@ primitive mixed bounds used by the radial transport recurrence.
 
 noncomputable section
 
-/- Temporary CI diagnostics for slow completed elaboration tasks.
-The heartbeat and per-file watchdog limits are unchanged. -/
-set_option trace.profiler true
-set_option trace.profiler.threshold 1000
-
 namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements

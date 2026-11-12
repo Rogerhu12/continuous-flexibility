@@ -135,7 +135,7 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
     (Fin.cases (fun m x => returnCorrectionPulledDisplacementLinear S C χ
       (liftSectorParameter S C x.1.1) m x.2 x.1.2) Fin.elim0)
   let JZ : ∀ c m, SmoothDirections (U ×ˢ V m) (fZ c m) :=
-    Fin.cases J₀ (Fin.cases J₁ Fin.elim0)
+    Fin.cases J₀ (Fin.cases J₁ (fun i : Fin 0 => Fin.elim0 i))
   let JC := fun m => radialCutoffScalarTower hU (hV m) (hχ m)
   let characteristicBounds := hN.minusCharacteristicSpeed_correction_mixed_interpolation
     (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
