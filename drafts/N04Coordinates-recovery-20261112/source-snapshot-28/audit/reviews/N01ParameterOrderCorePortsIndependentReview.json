@@ -1,0 +1,203 @@
+{
+  "kind": "independent_full_source_review",
+  "status": "PASSED_STATIC_REVIEW_UNCOMPILED",
+  "reviewer": "/root/audit_coordinates",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/N01ParameterOrderCorePortsFinalCandidateManifest.json",
+    "sha256": "297a305be6dc826cc12879dcb094422a6371c531f781d087f391ee24a215c4a3",
+    "blob": "b44219d67a8471ec8a103aee96410f865fee8ab2",
+    "lines": 218
+  },
+  "upstream_contract": {
+    "ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+    "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+    "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+    "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+    "lines": 1773
+  },
+  "active_preimage_commit": "34a496f78ec2c9f35f74d2eb3dfd48a1d4190909",
+  "active_preimage_tree": "6976c913d75d04075537b04c6c31fd52b82742c2",
+  "reviewed_rows": [
+    {
+      "target": "src/ContinuousFlexibility/Analysis/N01JetBounds.lean",
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/N01JetBounds.lean",
+        "sha256": "aad4c90c05e7ba57a31e8d63d1ef1a96c3f439ed3a57890de85bcb77e6acb39a",
+        "blob": "1e4f04ef7acf1b6050f63c7af3826a9dc6105ef2",
+        "lines": 74,
+        "target": "src/ContinuousFlexibility/Analysis/N01JetBounds.lean",
+        "imports": [
+          "ContinuousFlexibility.Statements.Nonlinear"
+        ]
+      },
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/N01JetBounds.base.lean.txt",
+        "sha256": "77bf138e02e8089a4ea143805d25c60953f518c79a52aa1559ef0f6b9dce0f61",
+        "blob": "e83ef353a0337ed0f23fc1224529bc00c8fd2e72",
+        "lines": 71
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/N01JetBounds.diff",
+        "sha256": "6ffd9ac4f6122f6e78e3d9159b6f3e7a641a8721e01d79bc28e1ed550e50964e",
+        "blob": "f860c7d61d17b5303d3bc70b9afaefc93926495d",
+        "lines": 31
+      },
+      "public_headers_preserved": [
+        "N01CoefficientJetBoundAtOrder",
+        "N01CoefficientJetBounds",
+        "N01FlowJetBounds",
+        "n01CoefficientJetBounds_of_properties",
+        "n01FlowJetBounds_of_properties"
+      ],
+      "public_headers_changed": [
+        "N01FlowJetBoundAtOrder"
+      ],
+      "actual_numstat": {
+        "added": 7,
+        "deleted": 4
+      }
+    },
+    {
+      "target": "src/ContinuousFlexibility/Analysis/CanonicalNeighborhoodRestriction.lean",
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/CanonicalNeighborhoodRestriction.lean",
+        "sha256": "f0333edb08700ba86b4db979edc64251ce86f32106635ac476e8ed910a8c1eef",
+        "blob": "99481854fcfc00bfd242fdccf388996297f83bd0",
+        "lines": 192,
+        "target": "src/ContinuousFlexibility/Analysis/CanonicalNeighborhoodRestriction.lean",
+        "imports": [
+          "ContinuousFlexibility.Analysis.StateNeighborhood",
+          "ContinuousFlexibility.Analysis.MaterialSampleBounds",
+          "ContinuousFlexibility.Analysis.N01JetBounds"
+        ]
+      },
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/CanonicalNeighborhoodRestriction.base.lean.txt",
+        "sha256": "af2577f18d3d3af94162ce3415e3d0b96c054901827b5ea1db6d36be994d407c",
+        "blob": "7888f021746c6faf5ae5f0b149ed2fd17830c6e2",
+        "lines": 187
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/CanonicalNeighborhoodRestriction.diff",
+        "sha256": "cc4739bc0bd2d115909d836b0de0ffcf54bf0dc1abb96c82485b5b9d297918af",
+        "blob": "bfde1631fe9fca59bec0a3b06b56dd352bac99cb",
+        "lines": 36
+      },
+      "public_headers_preserved": [
+        "n01Properties_restrict",
+        "n02Properties_restrict",
+        "n03Properties_restrict",
+        "n04PartA_restrict",
+        "n04PartB_restrict",
+        "nonlinearPropertiesThrough03_restrict"
+      ],
+      "public_headers_changed": [],
+      "actual_numstat": {
+        "added": 10,
+        "deleted": 5
+      }
+    },
+    {
+      "target": "src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/MaterialEnvelopeNormalization.lean",
+        "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+        "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+        "lines": 311,
+        "target": "src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+        "imports": [
+          "ContinuousFlexibility.Statements.Nonlinear",
+          "ContinuousFlexibility.Analysis.MaterialSampleBounds",
+          "ContinuousFlexibility.Analysis.N01JetBounds"
+        ]
+      },
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/MaterialEnvelopeNormalization.base.lean.txt",
+        "sha256": "5f73ab50c8dd436e8bfd4039f30722eaba68cbc77bcc862efff43251faff88e7",
+        "blob": "4523f8385550033058d8f7593f8a397a33157576",
+        "lines": 308
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/MaterialEnvelopeNormalization.diff",
+        "sha256": "dd2072b941f8c1199d58b7b76a4526b4c32f2616702560fc0b28c0d462ad6076",
+        "blob": "e3431bfe4a3484ac4e52d7a917dbf2cb977401d5",
+        "lines": 21
+      },
+      "public_headers_preserved": [
+        "coefficientEnvelope_pack",
+        "contDiff_materialEnvelopeMajorant",
+        "enlargedMaterialData",
+        "enlargedMaterialData_E0",
+        "isMaterialData_enlargedMaterialData",
+        "isPhysicalSpaces_enlargedMaterialData",
+        "le_enlargedMaterialData_E0",
+        "le_materialEnvelopeMajorant",
+        "materialEnvelopeMajorant",
+        "materialEnvelopeMajorant_eq_self",
+        "materialEnvelopeMajorant_le_add_one",
+        "n01Properties_enlargedMaterialData",
+        "nonlinearPropertiesThrough03_enlargedMaterialData",
+        "one_le_enlargedMaterialData_E0",
+        "one_le_materialEnvelopeMajorant"
+      ],
+      "public_headers_changed": [],
+      "actual_numstat": {
+        "added": 6,
+        "deleted": 3
+      }
+    }
+  ],
+  "full_selected_source_lines": 577,
+  "actual_diff_budget": {
+    "added": 23,
+    "deleted": 12
+  },
+  "actual_provider_refs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/StateNeighborhood.lean",
+      "sha256": "d69d61889ad31640933f00a39c70c7ff33eeb0df52df51a509df97850d1399b6",
+      "blob": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046",
+      "blob": "19becb59903b44c18c8f1afb72726b2f95952752",
+      "lines": 66
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/TameTransfer.lean",
+      "sha256": "ea7705f4c2ecf863bde53d9fc8d3ac4b410c692e9b1defdbb28328fd88470552",
+      "blob": "e52be8048255e3f9fc3bff0efef7a49ed7efc709",
+      "lines": 370
+    }
+  ],
+  "checks": {
+    "all_source_base_diff_hashes_and_git_preimages_exact": true,
+    "all_three_full_sources_and_exact_diffs_read": true,
+    "expanded_coefficient_alias_equals_exact_main_contract_modulo_whitespace": true,
+    "expanded_flow_alias_equals_exact_main_contract_modulo_whitespace": true,
+    "N01_properties_thirteen_conjuncts_preserved": true,
+    "N02_N03_Through03_complete_declarations_unchanged": true,
+    "all_other_public_headers_imports_options_unchanged": true,
+    "selected_main_with_active_fallback_project_availability": 119,
+    "missing_project_imports": [],
+    "project_import_cycles": []
+  },
+  "mathematical_review": [
+    "AtOrder now explicitly accepts parameterLoss; the quantified flow alias chooses it after k and before s, all components, points, states and increments, exactly as OrdinaryFlowFamilyTameBounds at c9cd90e7.",
+    "Both named projection lemmas extract the same last two actual N01 fields. The coefficient clause is unchanged. No uniform-in-k loss is introduced.",
+    "Restriction retains the supplied parameterLoss and B for every s. Actual SmoothDirections restriction keeps J.D unchanged; stateNeighborhood_mono and oneHighVariationWeight_mono use base<=baseprime and (s+loss)+parameterLoss<=(s+lossprime)+parameterLoss.",
+    "Material enlargement retains the exact original J, parameterLoss and B. Only the nonnegative E0 sample factor increases; physical sample, H^(3/4), collar weight, all geometric maps and source grading remain the same.",
+    "The untouched cumulative N02/N03/PartA/PartB restriction and material-transfer statements match exact new-main declarations. In particular N03 still includes its spatial clause, and all existing public restriction theorem headers remain unchanged."
+  ],
+  "findings": [],
+  "scope_limits": [
+    "This receipt covers exactly the three selected source files, their actual contract and called restriction/material providers. The separate four downstream aliases form a required integration cohort and are not re-reviewed here.",
+    "The import count is availability under exact new-main plus actual fallback, not a proof that the entire downstream integration DAG elaborates.",
+    "The necessary N01FlowJetBoundAtOrder signature and N01FlowJetBounds body changes are explicit; no unchanged-public-body claim is made for those definitions.",
+    "No compilation, elaboration, resource increase, CI query/download, checkout/index/ref/CP/authority mutation was performed."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T15:51:06.840367+00:00"
+}

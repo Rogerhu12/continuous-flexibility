@@ -1,0 +1,63 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-values/N01ReturnInverseJets.active34a496-base.lean.txt
++++ /workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-values/N01ReturnInverseJets.lean
+@@ -11,7 +11,8 @@
+ The stored inverse is smooth by its actual right-inverse identity, and
+ the nonlinear inverse estimate supplies all its higher derivatives.
+ Component constants are selected before the state and the angle; the
+-common low order and loss are selected before the component.
++common low order and loss are selected before the component. The first
++parameter-order loss is chosen once before every angular order.
+ -/
+ 
+ noncomputable section
+@@ -92,14 +93,14 @@
+ 
+ private theorem n01_returnForwardJets_of_closed_bound
+     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+-    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
++    {C : NonlinearGeometryData S} {base loss flowLoss : ℕ} {ε : ℝ}
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+     (hN : N01Properties D T S C base loss ε)
+     (B : ℕ → ℝ)
+-    (hbound : ∀ n, N01ClosedFlowLinearHighBoundAtOrder T S C base loss ε n (B n))
++    (hbound : ∀ n, N01ClosedFlowLinearHighBoundAtOrder T S C base flowLoss ε n (B n))
+     (m : ℕ) :
+     ∃ A : ℕ → ℝ, (∀ n, 1 ≤ A n) ∧
+-      N01ReturnForwardJetBound S C base (base + loss) ε m A := by
++      N01ReturnForwardJetBound S C base (base + flowLoss) ε m A := by
+   let M : ℕ → ℝ := fun n => B n * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+     T.E0 (T.sample (C.cell m)) ^ B n * (2 + 2 * ε)
+   let c : ℝ := C.minusFlow (C.referenceState, 0) m (C.right m) 0
+@@ -154,14 +155,14 @@
+ 
+ private theorem n01_returnInverse_bound_of_forward
+     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+-    {C : NonlinearGeometryData S} {base loss low outLoss : ℕ} {ε : ℝ}
++    {C : NonlinearGeometryData S} {base loss forwardLoss low outLoss : ℕ} {ε : ℝ}
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+     (hN : N01Properties D T S C base loss ε)
+     (hJ : CanonicalReturnJacobianBounds S C base ε)
+     (m : ℕ) (A B : ℕ → ℝ)
+-    (hf : N01ReturnForwardJetBound S C base (base + loss) ε m A)
++    (hf : N01ReturnForwardJetBound S C base forwardLoss ε m A)
+     (hbound : ScalarInverseDisplacementEstimate
+-      (pairGrading (stateGrading S) realGrading) low (base + loss) outLoss A B) :
++      (pairGrading (stateGrading S) realGrading) low forwardLoss outLoss A B) :
+     N01ReturnInverseJetBound S C base low outLoss ε m B := by
+   intro z hz hs hlow
+   have hr : C.right m ∈ Icc (C.left m) (C.right m) :=
+@@ -191,9 +192,11 @@
+   have hI := coordinate_hasInterpolation_pair (stateGrading_monotone S)
+     (fun _ _ _ => le_rfl) (coordinate_hasInterpolation_stateGrading hS)
+     coordinate_hasInterpolation_realGrading
+-  obtain ⟨low, outLoss, htarget⟩ := scalarInverse_displacement_fixed_loss hp hI (base + loss)
+-  choose A hA hforward using
+-    (fun n => ordinaryFlowFamily_le_linear_high_on_closed_of_n01 hS hT hN n)
++  obtain ⟨parameterLoss, horders⟩ :=
++    ordinaryFlowFamily_le_linear_high_on_closed_of_n01 hS hT hN
++  obtain ⟨low, outLoss, htarget⟩ :=
++    scalarInverse_displacement_fixed_loss hp hI (base + (loss + parameterLoss))
++  choose A hA hforward using horders
+   have hJ := canonicalReturnJacobianBounds_of_n01 hN hflow
+   refine ⟨low, outLoss, ?_⟩
+   intro m

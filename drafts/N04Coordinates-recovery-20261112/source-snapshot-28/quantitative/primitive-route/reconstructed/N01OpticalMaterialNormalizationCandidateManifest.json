@@ -1,0 +1,53 @@
+{
+  "kind": "same_witness_optical_material_envelope_normalization",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_REVIEW",
+  "owner": "/root/quantitative_route",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OpticalMaterialNormalization.lean",
+    "sha256": "ef7afde46d1cb9ccf65ce879d9391426ac1a581bca011e2f2b6e03c434e77471",
+    "blob": "8fdbe7de3252f5f5c81b07ed0b61fb223748de4c",
+    "lines": 60,
+    "target": "src/ContinuousFlexibility/Analysis/N01OpticalMaterialNormalization.lean"
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "lines": 311
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/N01JetBounds.lean",
+      "sha256": "aad4c90c05e7ba57a31e8d63d1ef1a96c3f439ed3a57890de85bcb77e6acb39a",
+      "blob": "1e4f04ef7acf1b6050f63c7af3826a9dc6105ef2",
+      "lines": 74
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046",
+      "blob": "19becb59903b44c18c8f1afb72726b2f95952752",
+      "lines": 66
+    }
+  ],
+  "provider_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/N01ParameterOrderCorePortsReviewedManifest.json",
+    "sha256": "fb5f2f94e949515723cba8bd40549e47461693b8ae613313f568d5cf0c1aee18",
+    "blob": "8c880f0446ec9edb494782270177407dac82a580",
+    "lines": 74
+  },
+  "facts": [
+    "Use the actual enlargedMaterialData majorant, with the same D/S/C/R/L/base/loss/epsilon, sample points, H/M and unchanged field-regularity input.",
+    "Existing proved material, spaces and Through03 transfer theorems are applied before any actual typed atlas or positive reference family is chosen.",
+    "The actual material certificate proves E0>=1 throughout the physical annulus; this is not inferred from only a scaled lower bound.",
+    "The raw optical lower coefficient decreases under enlargement: K>0 and positive sample envelopes allow rpow_neg and inverse antitonicity, then multiplication by the nonnegative endpoint distance.",
+    "The same negative host inclusion is independent of material E0 and remains available unchanged; this lemma adds no host assumption."
+  ],
+  "scope": [
+    "This supplies the normalization needed before the same displayed reference family is instantiated and before coefficientEnvelope_pack is used. It constructs no new unrelated reference/witness.",
+    "The raw optical inequality is still an explicit upstream certificate, not projected from Through03.",
+    "No ordinary/spatial estimate is converted into SmoothDirections, and no final primitive predicate is assumed.",
+    "The selected normalization provider includes the reviewed new-main parameter-order port; its public normalization API is unchanged. This new leaf itself is uncompiled."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T15:52:21.001914+00:00"
+}

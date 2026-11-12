@@ -1,0 +1,21 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-values/OrdinaryFlowJacobianBounds.active34a496-base.lean.txt
++++ /workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-values/OrdinaryFlowJacobianBounds.lean
+@@ -55,7 +55,8 @@
+   have hflow : ordinaryFlowConditions D S C (stateNeighborhood S C base ε) :=
+     hN.2.2.2.2.2.2.1
+   have hlength (m : ℕ) : C.left m < C.right m := (hN.2.2.2.1.1 m).2.1
+-  obtain ⟨B, hB, hbound⟩ := ordinaryFlowFamily_le_linear_high_of_n01 hT hN 1
++  obtain ⟨parameterLoss, horders⟩ := ordinaryFlowFamily_le_linear_high_of_n01 hT hN
++  obtain ⟨B, hB, hbound⟩ := horders 1
+   let V : ℕ → Set PolarPoint := fun m => Ioo (C.left m) (C.right m) ×ˢ univ
+   let F : AnnularState S × ℝ → ℕ → PolarPoint → ℝ :=
+     fun z m p => ordinaryFlowFamily S C m 0 1 p z
+@@ -64,7 +65,7 @@
+       ∀ m p, p ∈ V m → |F z m p| ≤
+         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B * (2 + 2 * ε) *
+-            (stateGrading S (max base (1 + loss)) (z.1 - C.referenceState) + |z.2|) := by
++            (stateGrading S (max base (1 + (loss + parameterLoss))) (z.1 - C.referenceState) + |z.2|) := by
+     intro z hz _ m p hp
+     simpa only [F, pairGrading_apply, realGrading, coe_normSeminorm,
+       Real.norm_eq_abs, Prod.fst_sub, Prod.snd_sub, sub_zero] using

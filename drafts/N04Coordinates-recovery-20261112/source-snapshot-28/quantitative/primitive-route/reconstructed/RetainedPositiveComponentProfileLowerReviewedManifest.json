@@ -1,0 +1,29 @@
+{
+  "kind": "RetainedPositiveComponentProfileLower_owner_freeze",
+  "status": "INDEPENDENT_FULL_STATIC_REVIEWED_HELD_UNCOMPILED",
+  "owner": "/root/quantitative_route",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RetainedPositiveComponentProfileLower.lean",
+    "sha256": "776135cda63374b488f048b3b44a178f29648497446daac2a5821e275427972e",
+    "blob": "acbf48810b111be8060c03c10a7adbd2bda15520",
+    "lines": 122
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RetainedPositiveComponentProfileLowerCandidateManifest.json",
+    "sha256": "16df37fd08b62c938c28be770931c15eabb735d45cdcae2171806037fd00b848",
+    "blob": "9dd048b4677c37b89786a99ca7be934778c934f6",
+    "lines": 108
+  },
+  "independent_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/RetainedPositiveComponentProfileLowerIndependentReview.json",
+    "sha256": "3935e8bfef3e30623caf6e988be45ed6474527245d86664faa60b1075e157146",
+    "blob": "2e10933328c330ec0721c6c18ea1af87c8ecd941",
+    "lines": 122
+  },
+  "scope": [
+    "Actual tail gaps and the proved finite central exception set of the same retained reference.",
+    "No E0>=1 assumption; fixed scaled-floor costs are retained."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T15:55:57.985189+00:00"
+}

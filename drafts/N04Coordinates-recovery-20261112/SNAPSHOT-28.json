@@ -1,0 +1,140 @@
+{
+  "snapshot": 28,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "parent": "dd75d89da8aa123761259df71b8271d11cfacc87",
+  "additional_parents": [
+    "03e526021c371413f03fc0ce052476b63e105361"
+  ],
+  "base_tree": "26180d3a80ce0353d3cd58f4b25afaaa666a3a4b",
+  "compiled_baseline": "03e526021c371413f03fc0ce052476b63e105361",
+  "prior_versions": "All historical source locations remain immutable and reachable through the backup parent; SOURCE-INDEX names their exact commit and path.",
+  "line_head": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+  "line_tree": "93221bdfea014a7ed555112fe6f2cf136d94df35",
+  "frozen_at": "2026-11-12T16:00:41.941904+00:00",
+  "indexed_files": 1923,
+  "new_sources": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePotentialJetEnvelope.lean",
+      "sha256": "1f9b3defaf95b285251e29c321f40c9e53c4745469447ad5861ccd51ffb8f455",
+      "lines": 159
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholePositiveReferencePotentialJets.lean",
+      "sha256": "aa09f494ce342a9baf1f1b8a111973ddf5f8f909d4d3bfb3d1c3a7fcdb9f5b51",
+      "lines": 141
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugePositivePotentialReferenceJets.lean",
+      "sha256": "2b5857a4e63c984a9003ea74eacb6f402ecb48cfc2a0c36f7080aca6aac86112",
+      "lines": 207
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-values/CanonicalVariationBounds.lean",
+      "sha256": "db282b5542f7f114bac0be3a654136ffbeb217e9912ccb22a8732e1ef9802bb8",
+      "lines": 332
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-values/N01OrdinaryFlowClosedJets.lean",
+      "sha256": "57b4fa7e2961bfb11c3adaae368c05d9b5e07237a9871746f6e81d1a9c057218",
+      "lines": 107
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-values/N01ReturnInverseJets.lean",
+      "sha256": "83e467d4e638fd37c4339e8d33567e4b9d4703221bb9dbea77b6b55cf31cd620",
+      "lines": 207
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-values/OrdinaryFlowJacobianBounds.lean",
+      "sha256": "1cdb99b5eddfc69d80e8bbe0ae74ad129de3f826c56817a1dd4e683b443e130b",
+      "lines": 114
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-mixed-provider/LocalMixedProductBounds.lean",
+      "sha256": "edc7fc2508fe231f3b18bfc7e52da8c004cf32e501c5ea48f3044b351d01a556",
+      "lines": 105
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-neighborhood-provider/N01NeighborhoodRestriction.lean",
+      "sha256": "8980a1dfece4b54cc46e1dcda20504cda7e90bcaedc76059c82c86cdbb9cdd9e",
+      "lines": 126
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/CanonicalNeighborhoodRestriction.lean",
+      "sha256": "f0333edb08700ba86b4db979edc64251ce86f32106635ac476e8ed910a8c1eef",
+      "lines": 192
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "lines": 311
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/N01JetBounds.lean",
+      "sha256": "aad4c90c05e7ba57a31e8d63d1ef1a96c3f439ed3a57890de85bcb77e6acb39a",
+      "lines": 74
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferencePrincipalMaterialCost.lean",
+      "sha256": "ba393b10bc15df29a8e645b2661e26e8a2848b1a54b1dd9d96f55a08da7fa904",
+      "lines": 194
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OpticalMaterialNormalization.lean",
+      "sha256": "ef7afde46d1cb9ccf65ce879d9391426ac1a581bca011e2f2b6e03c434e77471",
+      "lines": 60
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair154/CanonicalPositiveSourceJetBounds.lean",
+      "sha256": "b3b094eb8b3ebb7657b016c5ecdd785f5ab2ee4240c678273592222e36f332da",
+      "lines": 216
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair155/CanonicalPositiveSourceJetBounds.lean",
+      "sha256": "aa9836ed56d325eba1ee90e89e74242ab7a7d94f36f8a502f6308ac8af834269",
+      "lines": 288
+    }
+  ],
+  "new_source_lines": 2833,
+  "existing_added_lean_from_compiled_baseline146": 5309,
+  "projected_added_lean_from_compiled_baseline146": 8142,
+  "status": "Source preservation only; outside src, no CI activation or completion claim.",
+  "entries": 108,
+  "compressed_diagnostics": [
+    {
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-28/positive/upstream-main-c9/MainC9ActiveSourceAnalysisDraft.json.gz",
+      "uncompressed_sha256": "f836c67cccb77e7848c5a689e3cc3511471e9deef88e3e35ab7fae0fb237d38f",
+      "uncompressed_bytes": 562990,
+      "gzip_bytes": 75007,
+      "blob": "b2f3fa2d435ad4a299eb194213595e98fca26724"
+    },
+    {
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-28/positive/upstream-main-c9/MainC9ActiveSourceAnalysisV2Draft.json.gz",
+      "uncompressed_sha256": "a3da3174193ebc5858d370a833f40815c7607be2b9231ead3c82b35534c0b2e2",
+      "uncompressed_bytes": 562990,
+      "gzip_bytes": 75007,
+      "blob": "8b36a2a1b1cc42b699bad06ff78b7f7f610bf194"
+    },
+    {
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-28/positive/upstream-main-c9/MainC9SelectedFullTreePublicScanDraft.json.gz",
+      "uncompressed_sha256": "0ba963b307c7fdc4f0cade4bcd1f0c279ee6a711f91bea7e70dd737bc8352366",
+      "uncompressed_bytes": 3031561,
+      "gzip_bytes": 515338,
+      "blob": "91ad5ebea12f8e64914c180b748d23faabb670dd"
+    },
+    {
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-28/positive/upstream-main-c9/MainC9SelectedFullTreePublicScanV2Draft.json.gz",
+      "uncompressed_sha256": "58647aaa908ed052133c27d445c1f609021b311d79421f60d0ec149236531eb3",
+      "uncompressed_bytes": 3031145,
+      "gzip_bytes": 515294,
+      "blob": "da97a39d613c82a6ed429fd3359feae19c718738"
+    },
+    {
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-28/positive/upstream-main-c9/MainC9SourceTables.json.gz",
+      "uncompressed_sha256": "4dffdbcfecaeaeb0aa08577a33d0254a6181f61197bcf5609b260a56297dee4d",
+      "uncompressed_bytes": 10628324,
+      "gzip_bytes": 1789335,
+      "blob": "6ac2d5ab8230400177d1f0447b41391056ce6db5"
+    }
+  ],
+  "compression_note": "Lossless gzip of five large reproducible JSON analyses; original SHA256 identities and restoration are verified. All source identities/line budgets are unchanged."
+}

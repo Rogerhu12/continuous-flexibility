@@ -1,0 +1,88 @@
+{
+  "kind": "actual_positive_component_simple_profile_lower_independent_full_review",
+  "status": "PASSED_STATIC_FULL_SOURCE_REVIEW_HELD_UNCOMPILED",
+  "reviewer": "/root/audit_coordinates",
+  "author": "/root/quantitative_route",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentSimpleProfileLowerCandidateManifest.json",
+    "sha256": "55d65fd50e1b5666c44e34619f4a0805b8e790af825d310416cc0aadc3afb2db",
+    "blob": "70b0b2ce2c0d64f6ef27e3b83c86588ee80f4b87",
+    "lines": 69
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentSimpleProfileLower.lean",
+    "sha256": "1daae7132a2cae409c1a685b16932ed3148e5b30a54ab928c2112c82c8528180",
+    "blob": "195f76dc5cdef33a628021f6b41b34190914bf6f",
+    "lines": 152
+  },
+  "providers_verified": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveComponentEndpoints.lean",
+      "sha256": "182e98b328b82c6feb5be57b16a1b6536a55b4e5f4af01ab51a27b7b01adb19d",
+      "blob": "85ac7d7b23c9e63f59e25e0d0281fd5106fb7527",
+      "lines": 79
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04PositiveComponents.lean",
+      "sha256": "5b7a7e28f279116415d8a3a23299294f8e5fc1858187ec00c3ea18a4d04757de",
+      "blob": "0d4de58a9b9ecd9f84e2f01da190847464669cc6",
+      "lines": 194
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Radial.lean",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352",
+      "blob": "473c530a1de50c672f2e54908d374f624f5955b0",
+      "lines": 874
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/DSlope.lean",
+      "sha256": "f0a8f117b95d786c84c618e6d6ba2766bf833242cc120930217d500a7687a205",
+      "blob": "235f8b43b375d54f86dc50d4636c91438fc227d4",
+      "lines": 156
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Order/Compact.lean",
+      "sha256": "7c02670f2e88f16acd11d69ddd6afb8d8118adca50279e1abb2a3c7761feb044",
+      "blob": "8e1982cb6cd1f808ded359ffdb0afa8ee9a8bdba",
+      "lines": 546
+    }
+  ],
+  "additional_pinned_providers": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Order/Interval/Set/UnorderedInterval.lean",
+      "sha256": "845a280c85d7c3e2fb9796ca1c0df9f7b6ad9174dba3fad74b5e8c26001bd9a8",
+      "blob": "79d193f1815123e5acc441a8a9b9b44a5f6eac76",
+      "lines": 390
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Order/Defs/PartialOrder.lean",
+      "sha256": "7af151b7c035aa9969999bd704a8820162900e4c0fdac65a97d64992bacaf0b8",
+      "blob": "364afe73f20b40324b61cca24689125fc04ed3e9",
+      "lines": 227
+    }
+  ],
+  "mathlib_pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "read_scope": [
+    "Full 152-line candidate, full actual PositiveComponentEndpoints79 and N04PositiveComponents194, actual RadialProfileGeometry and EndpointFlat contracts.",
+    "Pinned dslope definition and all used dslope lemmas, compact strictly-positive lower-bound theorem, both unoriented-interval membership directions, and lt_of_le_of_ne signature."
+  ],
+  "checks": [
+    "Every recorded source/provider SHA256, Git blob and line count was recomputed. The one new public name has no installed declaration collision.",
+    "The single Bool half-interval proof uses exactly the continuously completed divided slope. At its own endpoint differentiability gives continuity and the nonzero actual derivative gives positive absolute value. Away from the endpoint, the other root is excluded by the strict midpoint inequalities, so the actual positive interior value and sub_smul_dslope rule out zero.",
+    "The compact theorem gives b(side)>0 below the absolute divided slope on each actual closed half. Their minimum c is positive. Both endpoints are included: f is nonnegative on the closed interval and the exact product |x-e|*|dslope f e x|=f(x) remains true there.",
+    "The two distance inequalities compare the same min(x-l,u-x) to the selected endpoint distance. Multiplication uses explicit nonnegative factors. The two final half-membership cases cover the whole Icc; no derivative sign or orientation is silently assumed on the right half.",
+    "The actual reference instantiation uses the smooth derivative of the same D.w and the real positive-component bounds. The supplied endpoint certificates are genuine simple-root hypotheses, not a canonical-coefficient lower bound. The conclusion does not infer these hypotheses from an arbitrary ambient endpoint.",
+    "Since 0<D.a<=l<=r<=u<=D.b, dividing the numerator bound by D.b first and comparing 1/D.b<=1/r is valid. The resulting coefficient c/D.b is positive and gives exactly w-prime(r)/r, with both physical endpoints included.",
+    "The coefficient depends on this component. This source supplies only the individual bounds later combined over a proved finite exceptional set; it asserts no uniform lower bound for all infinitely many components.",
+    "No source editing, compiler/elaborator, active checkout/index/ref/CP/authority operation or CI query was performed."
+  ],
+  "scope_limits": [
+    "Static mathematical/API review only; no Lean compilation claim.",
+    "The simple-root certificates must still be supplied for each intended actual component, and a separate finite-exception argument is necessary before obtaining a common constant."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "active_checkout_index_refs_CP_authority_modified": false,
+  "ci_queried_or_downloaded": false,
+  "created_at": "2026-11-12T15:42:14.531418+00:00"
+}

@@ -1,0 +1,38 @@
+{
+  "kind": "N04b_type_ordinary_flow_parameter_order_reviewed_sources",
+  "status": "STATIC_FULL_SOURCE_PEER_PASSED_HELD_UNCOMPILED_CONTRACT_COHORT_REQUIRED",
+  "candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-contract/N04bTypeFlowParameterOrderCandidateManifest.json",
+    "sha256": "85e27beaa3c3bcee8356f42ccb892eefd48e5ebec7a45cb95055810bf39bc027",
+    "blob": "dc4e2527e537c3aa0c16569fb9f82892b3416ca7",
+    "lines": 97
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/N04bTypeFlowParameterOrderIndependentReview.json",
+    "sha256": "8445ce715997e5ea6281e15b0bcfa60e956c973dc0c657d4b979184c90ae2641",
+    "blob": "bdcb0e02e6d014d22c2708276ce351303e99e0c1",
+    "lines": 115
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-contract/N04bSingletonType.lean",
+      "sha256": "a98ac114085f949ab29669a9493f0133a742035d688080135cdfec218761aac6",
+      "blob": "a4ec9016586cb1ff50f9fce931f54492fb961d2d",
+      "lines": 283
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-contract/N04bStateProfileType.lean",
+      "sha256": "d0453cae8528608053a30bf0cbc25787833e1538ff969adf0ea3a2627d51f0bc",
+      "blob": "a21640350dc6a6b400d83f646d7f451f4e977c90",
+      "lines": 283
+    }
+  ],
+  "scope": [
+    "Both active N04b type proofs retain all complete theorem heads, imports, options and all bytes outside the two-line extraction of the parameter-order loss.",
+    "The new parameterLoss is chosen at k=0 before spatial order 1. Both consumers use only existence of the genuine complete SmoothDirections tower.",
+    "These sources must be installed atomically with the new OrdinaryFlowFamilyTameBounds contract. They are not valid standalone replacements against the old active contract.",
+    "No compiler, active checkout, index, ref or CI changes."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T15:41:46.427726+00:00"
+}

@@ -1,0 +1,99 @@
+{
+  "kind": "actual_positive_reference_potential_atom_material_increment",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_INDEPENDENT_FULL_REVIEW",
+  "owner": "/root/audit_coordinates",
+  "created_at": "2026-11-12T15:59:39.154969+00:00",
+  "inspection_head": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+  "inspection_tree": "93221bdfea014a7ed555112fe6f2cf136d94df35",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugePositivePotentialReferenceJets.lean",
+    "sha256": "2b5857a4e63c984a9003ea74eacb6f402ecb48cfc2a0c36f7080aca6aac86112",
+    "blob": "e7e257a74e24c1d2ff5607871ca5bd4224dcff53",
+    "lines": 207,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugePositivePotentialReferenceJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.WholePositiveReferencePotentialJets",
+      "ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization",
+      "ContinuousFlexibility.Analysis.MaterialSampleBounds"
+    ],
+    "public_names": [
+      "n04WholeReferenceGauge_positive_potentialReferenceJets_enlargedMaterialData"
+    ]
+  },
+  "provider_refs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholePositiveReferencePotentialJets.lean",
+      "sha256": "aa09f494ce342a9baf1f1b8a111973ddf5f8f909d4d3bfb3d1c3a7fcdb9f5b51",
+      "blob": "c9b78f187c42dd8427d3c18ed7e806ebbecd1685",
+      "lines": 141
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferencePotentialMaterialJets.lean",
+      "sha256": "867e851173adc2d6748b2d61718bf94672056637482f766a45862bb6ce38daf3",
+      "blob": "de62b2af6ce8a13c879fc9baf8938d7a8cfcd630",
+      "lines": 251
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferencePotentialCandidateManifest.json",
+      "sha256": "d8f564fcc88bfa60fd6683a5e60d0c062a68ec18a615006eb78c4816d9a32bdd",
+      "blob": "5fa8f472b2717fb8bf0f537d30351380c673a7d9",
+      "lines": 192
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "5f73ab50c8dd436e8bfd4039f30722eaba68cbc77bcc862efff43251faff88e7",
+      "blob": "4523f8385550033058d8f7593f8a397a33157576",
+      "lines": 308
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046",
+      "blob": "19becb59903b44c18c8f1afb72726b2f95952752",
+      "lines": 66
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "65fcde6ae1e43bf6fd2a5f56a2121cde66dea71c44357cd45b833e6bc3358ec1",
+      "blob": "7a05b947965738dcb91957059e102f9ea813e52b",
+      "lines": 1756
+    }
+  ],
+  "pinned_mathlib_commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "pinned_api_refs": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "lines": 1155
+    }
+  ],
+  "mathematical_checks": [
+    "The original potential supplier is invoked exactly once. Its returned C0, one finite B, and complete finite endpoint certificate are retained without selecting another width.",
+    "For each requested total order s, a finite prefix of actual scalar potential bounds is dominated by D=1+sum_{a<=s} M(a). D and the final packed constant precede all enumerations, cell assignments and transport families.",
+    "Positive canonical endpoints are the actual record values 0 and 1. The whole function canonicalUnitPoint V m equals id, so the true potential atom equals V.potential at the reference state.",
+    "The same true range geometry from the scalar supplier feeds the existing actual mixed-potential identity on canonicalOpen. Positive angular orders are exactly zero.",
+    "The exact record cell equals the selected actual midpoint host. No different cell or sample replaces it.",
+    "Only C0 times original E0 is known to be at least one. Conversion to the explicitly enlarged E0 uses original sample membership and le_enlargedMaterialData_E0; no lower floor is assumed for original E0.",
+    "The scalar cost M(a)*W^M(a) is bounded by D*W^D, then (D*C0^D)*enlargedE0^D, and coefficientEnvelope_pack gives the final single BM."
+  ],
+  "scope_limits": [
+    "The same-retained actual host and raw optical lower inputs remain explicit, as in the actual inverse supplier; they are not asserted for arbitrary Through03.",
+    "This source proves the numerical ReferenceJets part for the actual positive potential atom. It does not claim the negative potential atom, all 33 atoms, CurrentJets or a complete PrimitiveGeometryProperties certificate.",
+    "The three-source potential prerequisite candidate remains independently pending review. This increment does not relabel it as reviewed or compiled.",
+    "No active checkout/index/refs/CI/authority changes or Lean compilation were performed."
+  ],
+  "static_checks": {
+    "installed_public_name_collisions": [],
+    "forbidden_proof_tokens": 0,
+    "new_options_or_resource_overrides": false,
+    "project_closure_recomputed": false,
+    "lean_compilation_performed": false
+  },
+  "independent_reviews": []
+}

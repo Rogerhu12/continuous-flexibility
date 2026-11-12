@@ -1,0 +1,30 @@
+{
+  "kind": "positive_component_simple_profile_lower_owner_freeze",
+  "status": "INDEPENDENT_FULL_STATIC_REVIEWED_UNCOMPILED",
+  "owner": "/root/quantitative_route",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentSimpleProfileLower.lean",
+    "sha256": "1daae7132a2cae409c1a685b16932ed3148e5b30a54ab928c2112c82c8528180",
+    "blob": "195f76dc5cdef33a628021f6b41b34190914bf6f",
+    "lines": 152
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentSimpleProfileLowerCandidateManifest.json",
+    "sha256": "55d65fd50e1b5666c44e34619f4a0805b8e790af825d310416cc0aadc3afb2db",
+    "blob": "70b0b2ce2c0d64f6ef27e3b83c86588ee80f4b87",
+    "lines": 69
+  },
+  "independent_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/PositiveComponentSimpleProfileLowerIndependentReview.json",
+    "sha256": "3504a3713f6aa25ba848c796c959c6095db387bd38c4a99087aaf7d75bbea95d",
+    "blob": "04acbf880e56cdf6bde7cc8ebdc998f2aaead1f6",
+    "lines": 88
+  },
+  "scope": [
+    "The same actual component, true interior/simple-root certificates, and fixed D are retained.",
+    "This result selects a positive constant for one component only; it is not a uniform infinite-family profile estimate.",
+    "Any later finite-exception uniformization must supply the actual finite set; all snapshots remain immutable."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T15:43:47.713257+00:00"
+}

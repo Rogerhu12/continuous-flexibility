@@ -1,0 +1,40 @@
+{
+  "kind": "reviewed_actual_minus_first_integral_circle_source",
+  "status": "FULL_SOURCE_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04MinusFirstIntegralCircle.lean",
+    "sha256": "2c6be9ee3d6ce0f6ec4e5b15248718dca7085dae2dd80580dfd816943f10eb0a",
+    "blob": "fc11c89b2e92489890485acfcfe221f4ec47dd28",
+    "lines": 136,
+    "target": "src/ContinuousFlexibility/Analysis/N04MinusFirstIntegralCircle.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04MinusFirstIntegralCircleCandidateManifest.json",
+    "sha256": "b4258c87e47a2780763e82b5b0b00d37b642236c5c89da70c926f3a38a4df030",
+    "blob": "630654338ba1eab0e31783b654d1175f66c50166",
+    "lines": 125
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/N04MinusFirstIntegralCircleIndependentReview.json",
+    "sha256": "13d86f28d16191e82fc6d9b0c84ffc70c452cd5e5d486e2f7d1f35ec979ffa1f",
+    "blob": "ec50633053f43589f5c9cdcd6aa89e5bf7fee1fb",
+    "lines": 204
+  },
+  "actual_inverse_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowInverseCircleReviewedManifest.json",
+    "sha256": "c76623673f3db8a7577c104de6d4e55d2e91daa70198bb6ad6f46f873ec8ff31",
+    "blob": "a616b0d08de68428a04d0befddd9103ad9fe11ec",
+    "lines": 43
+  },
+  "closure_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04MinusFirstIntegralCircleClosureInventory.json",
+    "sha256": "9b007d59f2bb2ad3a3ea781ffebcdba5bee7d6f72ee091193da11516bca46ded",
+    "blob": "ceb1dc34913b90b2661129a66ff197e3fa3dead5",
+    "lines": 5540
+  },
+  "scope": "Same literal corrected-flow inverse, actual left-chart composition and positive optical-travel affine reconstruction; genuine circle-valued smooth tame family and joint state-angle directional tower at each fixed selected closed radius.",
+  "remaining": "Radial mixed derivatives, moving canonical compositions, uniform sampled height-gain estimates and final CurrentJets remain separate. The historical selected graph has availability checks only and awaits current-main integration and full CI.",
+  "compiled": false,
+  "source_changed_after_review": false,
+  "created_at": "2026-11-12T15:57:45.528186+00:00"
+}

@@ -1,0 +1,35 @@
+--- active/src/ContinuousFlexibility/Analysis/LocalMixedProductBounds.lean
++++ candidate/src/ContinuousFlexibility/Analysis/LocalMixedProductBounds.lean
+@@ -1,3 +1,4 @@
++import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+ import ContinuousFlexibility.Analysis.ReverseCoordinateOperator
+ import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
+ import ContinuousFlexibility.Analysis.SpacesHeightAlgebra
+@@ -29,27 +30,6 @@
+     mixedDerivative a b f p = mixedDerivative a b g p := by
+   obtain ⟨U, hUsub, hU, hp⟩ := mem_nhds_iff.mp h
+   exact mixedDerivative_eqOn_of_isOpen hU (fun _ hq => hUsub hq) a b hp
+-
+-/-- Subtraction of two fields smooth on the same actual open set.
+-Global smoothness of their zero extensions is not required. -/
+-theorem mixedDerivative_sub_of_contDiffOn
+-    {U : Set PolarPoint} (hU : IsOpen U) {f g : PolarPoint → ℝ}
+-    (hf : ContDiffOn ℝ ∞ f U) (hg : ContDiffOn ℝ ∞ g U)
+-    (a b : ℕ) {p : PolarPoint} (hp : p ∈ U) :
+-    mixedDerivative a b (fun q => f q - g q) p =
+-      mixedDerivative a b f p - mixedDerivative a b g p := by
+-  obtain ⟨F, hF, heF⟩ := exists_global_contDiff_germ_of_open hU hf hp
+-  obtain ⟨G, hG, heG⟩ := exists_global_contDiff_germ_of_open hU hg hp
+-  have he : (fun q => F q + (-1 : ℝ) * G q) =ᶠ[𝓝 p]
+-      (fun q => f q - g q) := by
+-    filter_upwards [heF, heG] with q hqF hqG
+-    rw [hqF, hqG]
+-    ring
+-  rw [← mixedDerivative_eq_of_germ he a b,
+-    spaces_mixedDerivative_add hF (contDiff_const.mul hG),
+-    spaces_mixedDerivative_const_mul,
+-    mixedDerivative_eq_of_germ heF a b, mixedDerivative_eq_of_germ heG a b]
+-  ring
+ 
+ /-- A local source factor has the ordinary actual mixed Leibniz formula.
+ The globally smooth multiplier is kept unchanged in the cutoff argument. -/

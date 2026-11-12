@@ -1,0 +1,41 @@
+{
+  "kind": "ci154_positive_source_jet_bounds_owner_freeze",
+  "status": "INDEPENDENT_FULL_STATIC_REVIEWED_UNCOMPILED",
+  "owner": "/root/quantitative_route",
+  "actual_base": {
+    "head": "34a496f78ec2c9f35f74d2eb3dfd48a1d4190909",
+    "tree": "6976c913d75d04075537b04c6c31fd52b82742c2",
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalPositiveSourceJetBounds.lean"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair154/CanonicalPositiveSourceJetBounds.lean",
+    "sha256": "b3b094eb8b3ebb7657b016c5ecdd785f5ab2ee4240c678273592222e36f332da",
+    "blob": "fef324c95be64fdf45018ba2255201c88b6ae81b",
+    "lines": 216
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair154/CanonicalPositiveSourceJetBoundsCI154RepairCandidateManifest.json",
+    "sha256": "ef50c0353d04c17689b16730cc1ce7c79e6e7ca4bd169885e07ae612e63ead63",
+    "blob": "e7daa6ccc2a95bc7681ad2968b70e8aec71ea87d",
+    "lines": 141
+  },
+  "independent_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI154CanonicalPositiveSourceJetBoundsIndependentReview.json",
+    "sha256": "8e6f56484f231f6b221394c1067ad0855573067a745e00b8d638a7db6361101a",
+    "blob": "97c6abccb990558ed6713b9182f0ec4202da5113",
+    "lines": 150
+  },
+  "required_shared_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair154/CanonicalPositiveSourceInteriorDivision.lean",
+    "sha256": "419ee0ece8c8be0607908d18399ba8f9342f897b3d9951afef665c5ece5ebd4d",
+    "blob": "1578500670d565ad7ddd08d0345ae0fea8179346",
+    "lines": 40
+  },
+  "scope": [
+    "Preserves every complete public declaration header, same root-source functions, constants, neighborhood/loss choices and default resource limits.",
+    "The private helper isolates the complete original per-source body; the actual adapter uses only the two new complete-function equalities.",
+    "No active installation or compiler/elaborator/CI operation was performed. Actual performance remains a gate of the next CI run."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T15:45:25.127172+00:00"
+}

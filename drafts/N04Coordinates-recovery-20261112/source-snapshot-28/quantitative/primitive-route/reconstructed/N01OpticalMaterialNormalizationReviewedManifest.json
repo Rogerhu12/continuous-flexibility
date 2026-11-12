@@ -1,0 +1,30 @@
+{
+  "kind": "N01OpticalMaterialNormalization_owner_freeze",
+  "status": "INDEPENDENT_FULL_STATIC_REVIEWED_HELD_UNCOMPILED",
+  "owner": "/root/quantitative_route",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OpticalMaterialNormalization.lean",
+    "sha256": "ef7afde46d1cb9ccf65ce879d9391426ac1a581bca011e2f2b6e03c434e77471",
+    "blob": "8fdbe7de3252f5f5c81b07ed0b61fb223748de4c",
+    "lines": 60
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OpticalMaterialNormalizationCandidateManifest.json",
+    "sha256": "458b3da11f00446154745de46e58426c6be7abd2353f89ccb6b707f29dc1d63a",
+    "blob": "ab0dc24ff68854096f3931394c989d708641ddc8",
+    "lines": 53
+  },
+  "independent_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/N01OpticalMaterialNormalizationIndependentReview.json",
+    "sha256": "8b140c8ff524db63514ee19f5ca2df316761a0311b7b9a786a34db8d12613506",
+    "blob": "64755419677fff08c2c479c851eb76d11efe5ef9",
+    "lines": 68
+  },
+  "scope": [
+    "Actual enlargedMaterialData is chosen before the fixed reference family.",
+    "Same D/S/C/R/L and samples; raw optical lower remains an explicit upstream certificate.",
+    "Uses the reviewed new-main parameter-order MaterialEnvelopeNormalization provider."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T15:55:57.993169+00:00"
+}
