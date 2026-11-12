@@ -98,8 +98,8 @@ theorem negativeCanonicalClosedCoefficients_radial_eq_original_on_closure
     intro q hq
     have hqAnn := (hA.domains z hz hs i).2.2.1 hq
     exact negativeCanonicalClosedCoefficients_radial_eq_original hA hB hN03 hz hs i hi hq
-      ((hOriginal q hqAnn).contDiffAt
-        ((isOpen_Ioo.prod isOpen_univ).mem_nhds hqAnn)).differentiableAt (by simp)
+      (((hOriginal q hqAnn).contDiffAt
+        ((isOpen_Ioo.prod isOpen_univ).mem_nhds hqAnn)).differentiableAt (by simp))
   have hBc : ContinuousAt (negativeCanonicalClosedCoefficients S K z i).a p :=
     (negativeCanonicalClosedCoefficients_contDiffAt hA hz hs i hp).1.continuousAt
   have hOc : ContinuousAt (originalCoefficients D S C z).a p :=
@@ -150,7 +150,8 @@ theorem canonicalGluedAiryIntegral_angularPartial_ne_zero
     have hleft := canonicalCut_closed_and_chart hA hB hz hs m false θ
     have hξ : 0 < (K.chart z (i false) p).1 := by rw [← hpθ, hleft.2]; exact hρ
     exact hpart false (by simpa only [hpθ] using hleft.1) hξ
-      (by simpa only [hpθ] using canonicalGluedAiryIntegral_fderiv_on_cut hA hB hz hs m σ θ)
+      (by simpa only [i, Bool.false_eq_true, ↓reduceIte, hpθ] using
+        canonicalGluedAiryIntegral_fderiv_on_cut hA hB hz hs m σ θ)
   · have hwhere : p ∈ physicalPieceOpen S K z (K.cutPair m).1 ∪
         physicalPieceOpen S K z (K.cutPair m).2 := by
       rw [(hB.1.2 z hz hs m).2.2.2.1]
