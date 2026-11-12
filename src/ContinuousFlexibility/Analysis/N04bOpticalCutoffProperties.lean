@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N04bOpticalCutoffData
 import ContinuousFlexibility.Analysis.N04bOriginalType
+import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Source and flow inputs from the same actual optical cutoff
@@ -110,6 +111,7 @@ theorem strip_positive
         (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p :=
   Q.buffer_positive z hz m p ⟨hp.1.le, hp.2.le⟩
 
+include Q in
 theorem sector_flow_slope
     {T : MaterialData} {loss : ℕ}
     (hN : N01Properties D T S C base loss ε)
