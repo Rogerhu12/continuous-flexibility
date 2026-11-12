@@ -54,7 +54,7 @@ theorem n05_canonicalAngularInverseBlock_weighted_bound (t : ℝ) :
   have hrow : (wi • v).val m = wi • v.val m := rfl
   have hb : Real.exp (γ * d) * ‖u‖ ≤
       Cb * Real.exp (a * q - (ρ - δ) * |d|) * (wi * ‖v.val m‖) := by
-    simpa only [hzero, hrow, norm_smul, Real.norm_eq_abs, abs_of_pos hwi] using
+    simpa only [hzero, hrow, PiLp.smul_apply, norm_smul, Real.norm_eq_abs, abs_of_pos hwi] using
       hblock γ δ hγ k m (wi • v) j
   have hc : Real.exp (-γ * d) * Real.exp (γ * d) = 1 := by
     rw [← Real.exp_add, show -γ * d + γ * d = 0 by ring, Real.exp_zero]

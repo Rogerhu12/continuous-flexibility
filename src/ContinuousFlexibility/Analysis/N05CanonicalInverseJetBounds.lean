@@ -48,9 +48,10 @@ theorem n05CanonicalGlobalInverse_angularJets_bound (t : ℝ) (s : ℕ) :
   obtain ⟨Cg, hCg, hinverse⟩ :=
     n05CanonicalGlobalInverse_positive_angularJet hD hT hS h hcoordinates hγw hG
   let Z : ℝ := ∑ j : Fin (s + 1), (2 : ℝ) ^ (2 * j.val)
-  have hZ : 0 ≤ Z := Finset.sum_nonneg (fun j _ => by positivity)
+  have hterm (j : Fin (s + 1)) : 0 ≤ (2 : ℝ) ^ (2 * j.val) := by positivity
+  have hZ : 0 ≤ Z := Finset.sum_nonneg (fun j _ => hterm j)
   have hpow (j : Fin (s + 1)) : (2 : ℝ) ^ (2 * j.val) ≤ Z :=
-    Finset.single_le_sum (fun j _ => by positivity) (Finset.mem_univ j)
+    Finset.single_le_sum (fun k _ => hterm k) (Finset.mem_univ j)
   let E := Cn * Cr
   have hE : 0 < E := mul_pos hCn hCr
   let B := Cb + Cg * (Cj + Z * E)
