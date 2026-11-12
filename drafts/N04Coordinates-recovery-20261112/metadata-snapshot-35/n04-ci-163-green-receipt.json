@@ -1,0 +1,155 @@
+{
+  "kind": "new_verified_full_ci_success",
+  "label": 163,
+  "head": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+  "tree": "64a18c3f510156a0386b5601f7c26fe575e6f958",
+  "main": "89e539ccf7e9c558467cf875f44dcff9490ce271",
+  "main_checked": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+  "main_source_batch": 1,
+  "run": 43274946283,
+  "job": 131380759534,
+  "run_conclusion": "success",
+  "job_conclusion": "success",
+  "job_head_binding": "Normalized job.run_id equals the ID of the exact-head workflow run",
+  "source_all_compiled": 4212,
+  "source_all_total": 4214,
+  "all_src_lean_files": 4218,
+  "root_imports": 4155,
+  "source_coverage_basis": "Exact current source import graph of all successful default library targets",
+  "excluded_project_modules": [
+    "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+    "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth"
+  ],
+  "default_targets": [
+    "ContinuousFlexibility",
+    "AxiomAudit",
+    "FlexibleSphereChallenge",
+    "FlexibleSphereSolution"
+  ],
+  "covered_names_sha256": "36d5260bb73118251cec33b9862ab31fc9729ed619c32bf4ee8b1b3f5854330f",
+  "raw_cached_olean_compiled": 4634,
+  "raw_ci_reported_source_total": 4214,
+  "raw_count_caution": "Restored caches may retain .olean files for deleted modules; use current source coverage above.",
+  "build_jobs": 8197,
+  "blueprint_proved": 37,
+  "blueprint_total": 42,
+  "open": 5,
+  "open_nodes": [
+    "N01c",
+    "N02N03",
+    "N04b",
+    "N04Coordinates",
+    "N05"
+  ],
+  "log": "n04-ci-163.log",
+  "log_sha256": "f3852670e86bbf73bc05a0dfc97c4c8b62c163dde445ed5a1f5ee901fe0eac88",
+  "saved_run": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-163-run-complete.json",
+    "sha256": "e1bfa61e5f5dcbd1163fb856d3ac25bac3531ccab38b5cf4178927eb26bdb4f5",
+    "blob": "c17e5d664b9bced3e0a416b079705723d33c2b90",
+    "bytes": 15553
+  },
+  "saved_jobs": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-163-jobs-complete.json",
+    "sha256": "db3ee3be284a80629a735c9b11cbadd98b9577bbb21e6feae5a30069fee6f5a2",
+    "blob": "e4575050bacbced464327ab679db69ec240e3c0c",
+    "bytes": 4045
+  },
+  "steps": [
+    {
+      "name": "Set up job",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "conclusion": "success"
+    },
+    {
+      "name": "Disk space",
+      "conclusion": "success"
+    },
+    {
+      "name": "Set up the pinned Lean and Mathlib environment",
+      "conclusion": "success"
+    },
+    {
+      "name": "Restore main's build artifacts",
+      "conclusion": "success"
+    },
+    {
+      "name": "Reuse the builds of the lines merged by this push",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Reuse the build of the line this branch was cut from",
+      "conclusion": "success"
+    },
+    {
+      "name": "Restore project build artifacts",
+      "conclusion": "success"
+    },
+    {
+      "name": "Report which cache was restored",
+      "conclusion": "success"
+    },
+    {
+      "name": "Generate the root import",
+      "conclusion": "success"
+    },
+    {
+      "name": "Changed modules",
+      "conclusion": "success"
+    },
+    {
+      "name": "Quick check of the changed modules",
+      "conclusion": "success"
+    },
+    {
+      "name": "Build every library",
+      "conclusion": "success"
+    },
+    {
+      "name": "Save project build artifacts",
+      "conclusion": "success"
+    },
+    {
+      "name": "Delete this branch's older build caches",
+      "conclusion": "success"
+    },
+    {
+      "name": "Count compiled modules",
+      "conclusion": "success"
+    },
+    {
+      "name": "Blueprint status and endpoint axioms",
+      "conclusion": "success"
+    },
+    {
+      "name": "Publish the precompiled build for line sandboxes",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Pack this line's build for main",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/upload-artifact@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/upload-artifact@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "conclusion": "success"
+    }
+  ],
+  "completed_run_updated_at": "2026-11-12T18:52:55Z",
+  "checked_at": "2026-11-12T18:55:48.758502+00:00",
+  "note": "Exact head passed changed modules, all default libraries including AxiomAudit, generated root and Blueprint status at default limits. This compilation baseline does not close the open N04Coordinates parent or Realization. Held leaves outside src were not compiled."
+}

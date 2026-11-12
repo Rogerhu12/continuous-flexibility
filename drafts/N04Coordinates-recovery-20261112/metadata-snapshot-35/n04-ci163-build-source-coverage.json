@@ -1,0 +1,21 @@
+{
+  "kind": "static_default_library_current_source_import_coverage",
+  "head": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+  "tree": "64a18c3f510156a0386b5601f7c26fe575e6f958",
+  "default_targets": [
+    "ContinuousFlexibility",
+    "AxiomAudit",
+    "FlexibleSphereChallenge",
+    "FlexibleSphereSolution"
+  ],
+  "project_source_modules": 4214,
+  "current_project_modules_in_complete_build_closure": 4212,
+  "excluded_project_modules": [
+    "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+    "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth"
+  ],
+  "covered_names_sha256": "36d5260bb73118251cec33b9862ab31fc9729ed619c32bf4ee8b1b3f5854330f",
+  "status": "STATIC_COVERAGE_ONLY_UNTIL_EXACT_HEAD_FULL_BUILD_SUCCEEDS",
+  "raw_cache_count_caution": "CI count uses find over restored .olean files and can include stale modules. This source import graph excludes such artifacts.",
+  "created_at": "2026-11-12T18:06:29.722285+00:00"
+}

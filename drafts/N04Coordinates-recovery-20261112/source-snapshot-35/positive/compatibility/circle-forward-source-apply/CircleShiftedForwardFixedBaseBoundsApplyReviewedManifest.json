@@ -1,0 +1,31 @@
+{
+  "schema": "n04-reviewed-source-selection-v1",
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/circle-forward-source-apply/CircleShiftedForwardFixedBaseBounds.lean",
+    "bytes": 8240,
+    "lines": 159,
+    "sha256": "4c3c07d97d9b4ad03cbb16f4b9b1829eabacdbeb1c012dee3733958f32ac1941",
+    "git_blob": "4ea70ab43fc1fa6e51ddcfa3849f97580bf02235",
+    "eof_lf": true,
+    "declarations": [
+      "circleShiftedChartCompose_orderedJet_eq_kernel",
+      "circleShiftedChartCompose_orderedJets_fixedBase_bound"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/circle-forward-source-apply/CircleShiftedForwardFixedBaseBoundsApplyCandidateManifest.json",
+    "sha256": "d5785a5b9d767a5bb5cd6cb899428d2173ed5041b904ce19163434ceb9431e4d",
+    "git_blob": "d2333910d7e4ca1aa9316cab49127861eb601236"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CircleShiftedForwardFixedBaseBoundsIndependentReview.json",
+    "sha256": "f1cfa7fbf109fb6b3d6b9d6880e7dda7e52342737a20f521c70c40b317f6c959",
+    "git_blob": "19c43b0d732068575e30dfccf4661c32c65a92c5"
+  },
+  "selection": "Select this exact supersession; preserve earlier source and metadata as historical.",
+  "scope": "Actual shifted forward ordered jets of the given genuine J and a homogeneous source-linear bound with one low base before every parameter/spatial order and travel. This is the actual hF supplier only.",
+  "compiled": false,
+  "no_active_source_index_refs_or_ci_changed": true
+}

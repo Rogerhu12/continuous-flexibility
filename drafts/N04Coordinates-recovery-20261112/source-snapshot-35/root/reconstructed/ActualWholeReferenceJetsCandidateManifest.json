@@ -1,0 +1,233 @@
+{
+  "kind": "actual_same_family_all_reference_atoms_assembly_candidate",
+  "owner": "/root",
+  "status": "HELD_UNCOMPILED_AWAITING_INDEPENDENT_FULL_REVIEW",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualWholeReferenceNonAuxiliaryJets.lean",
+      "sha256": "358d4e8fe47e1e83605184fe137d58f0045a1313923d3c30453b4ebb464c008e",
+      "blob": "f92cac74d1a7d5f0f5906e27bb2d1aad8c37cdd5",
+      "lines": 294,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualWholeReferenceNonAuxiliaryJets.lean"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualWholeReferenceJets.lean",
+      "sha256": "18cd7ce0a25f111952bab72d8dd3c346997a5911921a8eff8002a6eb92d87a78",
+      "blob": "46844fab38919d0d3808cbf39a16e63aae173e2e",
+      "lines": 151,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualWholeReferenceJets.lean"
+    }
+  ],
+  "public_declarations": [
+    "n04Coordinates_actual_whole_reference_nonAuxiliaryJets",
+    "n04Coordinates_actual_whole_referenceJets_with_auxiliary"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFifteenAtoms.lean",
+      "sha256": "f5a8d53e84c32002efeaa216d916caa23c263b0b1c16b117d92fd0ac8fbb9e2c",
+      "blob": "bd18311eb7ab6f62d4ac8cc11c2218269675ed44",
+      "lines": 178
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveScalarColumnJets.lean",
+      "sha256": "5b430424e8d1f018305218e2066ad7057fb2a89acbb6eb8a55dd425e2b6ea826",
+      "blob": "3878a8163544ad203e2b04a6f58c4e11f0abc145",
+      "lines": 153
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativeGeometryJets.lean",
+      "sha256": "7ba90dfaa75886ba9da261af630d6c88df8190c24d6062f779e5ab946cfa26f5",
+      "blob": "011a1e88d8a9c7c1c427c0d97213a453e3f005a2",
+      "lines": 321
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePrincipalJets.lean",
+      "sha256": "a539b4ccf54410a7db50a43cf4b708c41d840820a3b7e5e9c107b36ba6867ecb",
+      "blob": "f7f3ec3c2aafb234fb77b69076de6e2873988e22",
+      "lines": 239
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePotentialReferenceJets.lean",
+      "sha256": "ec8d38f33f34bb4ab3c24f59a0ca586a391f749e793665a57f2b25070ece6212",
+      "blob": "42f4ee6bd9294182fd6f1f798a9f42df99e0a740",
+      "lines": 173
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeScalarColumnJets.lean",
+      "sha256": "0962726e582a33ac93e67b422f5ad36b1ee587acf5502fd081fb8dc013508186",
+      "blob": "c878dca87fbddbd6ac23d406a3c4d202096c8bd6",
+      "lines": 140
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeReferenceRegularity.lean",
+      "sha256": "fe580d742f806bef92bc561c3b39440d9ce69c9d74ab677a6a8d6b50576ffbf4",
+      "blob": "e24ecfd93b53589d3f757ad22473558cd853cfdf",
+      "lines": 235
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeStaticReferenceJets.lean",
+      "sha256": "ff06ea003b1f9979d6db4c054b904801cc4f9dbfea515c7ca4541d49106e9495",
+      "blob": "35434f32659a50bbbd7883b480beba91ea0b476e",
+      "lines": 113
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceDividedJets.lean",
+      "sha256": "b88fd4118e9e3ec46e9da0a49240ab4d107fc0ebbbfd2be043bf135add0330f9",
+      "blob": "eb7424e622d46576e131c1963cbda89515d96a0f",
+      "lines": 83
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalAuxiliaryAtomPreservation.lean",
+      "sha256": "c6aa5aeb70d35e64d328b6830ac462b63287ad5b3dd1c0f7e2ce0718b859a957",
+      "blob": "5090df125dd2c756ed0a4554caf9482ff6665cbe",
+      "lines": 68
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeAuxiliaryPackage.lean",
+      "sha256": "18b52a67b711ea53b05c41e736a3f767385cccc9bf9752f92f6a490fff85064a",
+      "blob": "505a22c75a965fc75bf35bf74e13175b7d95097a",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/PhysicalSpacesAuxiliaryColumn.lean",
+      "sha256": "b2848268baf18c447dccbfc7275b74ea927c679351768d214ede503f31424160",
+      "blob": "f51d3dac4fa34bdb9cd36c4588b5a490437d10b5",
+      "lines": 134
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalAuxiliaryReferenceJets.lean",
+      "sha256": "53646d7d69f62c0f132e8ae68e1ceeb0f8bd3ddabd89117dfd20f5af9fede39c",
+      "blob": "9a16fdb05086007f6c72692fce2e50b0acc58e30",
+      "lines": 132
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "lines": 311
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    }
+  ],
+  "provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFifteenAtomsReviewedManifest.json",
+      "sha256": "be633ee48d81fd7de671391b971824a1f9040120968576fecb1294c6b7356abe",
+      "blob": "f86b8b1a72aa3e004f6685344769f7730850659b",
+      "lines": 54
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositiveScalarColumnJetsReviewedManifest.json",
+      "sha256": "a3796ef4250af7c61c089f6491a815305100c6179886e216deeeb2a5e09635d6",
+      "blob": "58c73eb4bfc57201fa59794baa933d359f729177",
+      "lines": 58
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativeGeometryJetsReviewedManifest.json",
+      "sha256": "b7f51b7cf2fc61a8dbf4857133993fcff7def72ee3602e293a430a5041c9af7e",
+      "blob": "5573b5febd2d0b03cbfe4339f8d63ed6d23a0ec8",
+      "lines": 49
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePrincipalJetsReviewedManifest.json",
+      "sha256": "238b69b30d2406149938a681401f05dafac413ab38b9acf2ce83e2449c9c48b1",
+      "blob": "ec5419cf3a9a4b41b877bafad019d3286f9d711a",
+      "lines": 46
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePotentialReferenceJetsReviewedManifest.json",
+      "sha256": "579b554412f71c41123eef04c8998e63dc338664994dda557ad2e8ad5f328f88",
+      "blob": "bded6724112c11748c8fbef0543f44e375da0e8a",
+      "lines": 78
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeScalarColumnJetsReviewedManifest.json",
+      "sha256": "84cc328ec9160045e5b6c78b4615bee5f766421dd659497b37ac6420a81fd99f",
+      "blob": "9a9347ee24587abc53a9cf8e6f0eae6aee5085d2",
+      "lines": 28
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeStaticReferenceJetsReviewedManifest.json",
+      "sha256": "54bf460401a9a310c2e1485b48e8033eb2b030a0424391663c82236851e06fc6",
+      "blob": "12d94ba7ab1bbe3cd67efb00284de2e405e6f957",
+      "lines": 92
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceDividedJetsReviewedManifest.json",
+      "sha256": "11df8a32d30ef8cf38a54e924a207c145feac6ba5faf231ab40d5d576fa13cff",
+      "blob": "0453fc5c50a59d93b7a683a9772a459ead1c1da2",
+      "lines": 32
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeAuxiliaryPackageReviewedManifest.json",
+      "sha256": "0f257e3d9f2f62c70ffc6f6c2847caba776ea815464a185453ffd460a79a3e3a",
+      "blob": "50f3da5361605234e08480c84c30c57f0839af00",
+      "lines": 107
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasDataReviewedManifest.json",
+      "sha256": "701abf400f31e9d5bd990eff6d782e8878b3bb25e17a721750de8d04a4e319d7",
+      "blob": "89a4780b10a4d508b9d5ac33dd3abdf393efa901",
+      "lines": 23
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/N01ParameterOrderCorePortsReviewedManifest.json",
+      "sha256": "fb5f2f94e949515723cba8bd40549e47461693b8ae613313f568d5cf0c1aee18",
+      "blob": "8c880f0446ec9edb494782270177407dac82a580",
+      "lines": 74
+    }
+  ],
+  "pending_provider_owner": [
+    "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeReferenceRegularityReviewedManifest.json"
+  ],
+  "new_negative_independent_peers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/WholeReferenceGaugeNegativeScalarColumnJetsIndependentReview.json",
+      "sha256": "3651d475b3590bf764b19469aeca3a8bf4976cd9036c0a6ac26c3d89642d759b",
+      "blob": "032c2dddb4a3a874de1d0a04fe18a66f1d447f8f",
+      "lines": 140
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/WholeReferenceGaugeNegativeReferenceRegularityIndependentReview.json",
+      "sha256": "b9595f91ba71aff1622b7dbca46cce8f3d8dd14985271dae76630b8054ecb0eb",
+      "blob": "d23dd1ccccbd7c8db6f59b48b7db5a0163897e74",
+      "lines": 179
+    }
+  ],
+  "actual_head": "c796387fb555392501c81f5b8bd834936251516c",
+  "full_green_baseline": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+  "self_review": [
+    "Read the complete294 and151 sources and actual imported contracts. The first theorem calls the actual178 positive producer once; its C0/B, fixed degree-three width, degree-four endpoint slices, Y/H, original negative atlas and midpoint sample are retained. It returns that exact Y/H and its original N04PositiveReferenceFamily proof, without selecting a second family after E0 enlargement.",
+    "The same finite certificate yields physical width/inverse width; the153 column bound uses precisely that Y/H and the same all-order inverse/height bounds. The actual raw optical hypothesis supplies a genuine original host by j=C.cell m; it is not identified with the typed half sample.",
+    "Positive15 and positive2 estimates transfer from T to U only via the existing68 equality for non-ratio atoms. Numerical monotonicity uses proved positivity and T.E0<=U.E0. The twelve static atoms, including the changed E0 ratios, use their dedicated actual U producer.",
+    "The negative10 geometry, four principal, potential and two scalar column inputs are actual numerical producers on the original K. The negative235 qualitative producer has a flat eleven-way Atom predicate; its geometry/potential memberships are explicitly constructed. No regularity or bound for an arbitrary PartA/B witness is assumed.",
+    "The first theorem selects eight positive numerical constants at spatial order s before any piece or atom, combines them as one positive sum, and checks all33 constructors explicitly, excluding only auxiliaryColumn. The three divided reference atoms use their literal zero quotient proof. The hraise step uses the same enlarged sample floor and real-power exponent monotonicity.",
+    "The second theorem calls the actual non-auxiliary producer once and the buffered auxiliary111 package once for that same whole atlas. Its only later geometry inputs are the construction-stage CanonicalGeometry and ReferenceRadial facts for that exact V. No final reference estimate is a public input.",
+    "The auxiliary replacement preserves all32 non-auxiliary atom functions at already enlarged U, including both E0 ratios. One order-zero invocation supplies their qualitative regularity; each s merges their common bound with the actual single auxiliary column bound by max. The resulting ReferenceJets is the complete frozen33-atom predicate.",
+    "Final output retains the same chosen eta, actual Q psi=1, compact support and exact buffer interval, cumulative Through03, geometry and radiality, zero auxiliary difference tower, and every non-auxiliary full-function identity at all states. It does not claim CurrentJets, material primitive geometry, transmission assembly or the parent node.",
+    "No local Lean, generated-root mutation, active source/index/ref change, increased resource setting or compilation claim. Public names have no active declarations. New sources remain subject to independent full review and exact-base dependency activation gates."
+  ],
+  "source_budget": {
+    "backup34_added_lean": 15482,
+    "new_fixed_inverse_layout": 349,
+    "new_actual_circle_inverse": 301,
+    "new_negative_sources": 375,
+    "this_group": 445,
+    "total_current_new_lean": 16952,
+    "remaining_allocated_positive": 599,
+    "remaining_allocated_quantitative": 325
+  },
+  "compiled": false,
+  "created_at_utc": "2026-11-12T19:21:53.825552+00:00"
+}

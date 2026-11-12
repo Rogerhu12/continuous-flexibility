@@ -1,0 +1,35 @@
+{
+  "kind": "same_actual_negative_geometry_and_potential_reference_regularity_reviewed_owner",
+  "owner": "/root/quantitative_route",
+  "status": "FULL_SOURCE_INDEPENDENT_REVIEW_PASSED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeReferenceRegularity.lean",
+    "sha256": "fe580d742f806bef92bc561c3b39440d9ce69c9d74ab677a6a8d6b50576ffbf4",
+    "blob": "e24ecfd93b53589d3f757ad22473558cd853cfdf",
+    "lines": 235
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeReferenceRegularityCandidateManifest.json",
+    "sha256": "6c7aad397930c3ca966fa0c1a8c71692273f9cf06df61b8beb379270ed427d91",
+    "blob": "d5a913437881a26d56514702d1a530c998c2bc9b",
+    "lines": 196
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/WholeReferenceGaugeNegativeReferenceRegularityIndependentReview.json",
+    "sha256": "b9595f91ba71aff1622b7dbca46cce8f3d8dd14985271dae76630b8054ecb0eb",
+    "blob": "d23dd1ccccbd7c8db6f59b48b7db5a0163897e74",
+    "lines": 179
+  },
+  "scope": "Smoothness and pi-period of the ten actual negative geometric reference atoms and potential on the same whole reference-gauged atlas. No optical lower bound or numerical certificate is an input. The original T, old K, fields, half ranges and inverse are preserved; final material enlargement uses the separately reviewed whole-function transport.",
+  "source_bytes_unchanged": true,
+  "compiled": false,
+  "active_src_index_refs_modified": false,
+  "budget": {
+    "authorized_new_lean_total": 700,
+    "scalar_column_lines": 140,
+    "this_source_lines": 235,
+    "total": 375,
+    "remaining": 325
+  },
+  "created_at_utc": "2026-11-12T19:23:06.835738+00:00"
+}

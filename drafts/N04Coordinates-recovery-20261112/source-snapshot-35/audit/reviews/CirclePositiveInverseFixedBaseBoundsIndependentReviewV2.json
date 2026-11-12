@@ -1,0 +1,412 @@
+{
+  "schema": "n04-independent-source-review-v1",
+  "status": "PASSED_FULL_SOURCE_AND_ACTUAL_PROVIDER_API_REVIEW_HELD_UNCOMPILED",
+  "reviewer": "/root/audit_coordinates",
+  "owner": "/root/proof_inventory",
+  "reviewed_at_utc": "2026-11-12T19:21:12.046712+00:00",
+  "source": {
+    "module": "ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds",
+    "origin": "owned",
+    "ref": null,
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CirclePositiveInverseFixedBaseBounds.lean",
+    "lines": 301,
+    "sha256": "435088fc0bad2d63d09101dfcb8a2629cc24e5437f855867e41cac8368b2eb64",
+    "git_blob": "1f55edbb185fe33327757a087479196cc8565e4f",
+    "imports": [
+      "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+      "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds",
+      "ContinuousFlexibility.Analysis.CircleInverseCompositionGrowth",
+      "ContinuousFlexibility.Analysis.CanonicalStateInterpolation",
+      "ContinuousFlexibility.Analysis.SolveNewtonBridge",
+      "ContinuousFlexibility.Analysis.N01cStateSeminorms"
+    ],
+    "bytes": 15638,
+    "eof_lf": true
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CirclePositiveInverseFixedBaseBoundsCandidateManifest.json",
+    "sha256": "3ea7b4917bcdeb9b6c80db44354427b538d9b1e235d599e4607ca3f58d783d48",
+    "git_blob": "9b14606fb3107115c4431d7350766013b3f59524",
+    "bytes": 20528
+  },
+  "selected_provider_graph": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CirclePositiveInverseFixedBaseBoundsSelectedProviders.json",
+    "sha256": "7ee327382ed4517bc1c67ce298e712ccafb3ad9899fa5acb9917c20e1679a126",
+    "git_blob": "207bb0816468a0b1e4f7a6737402e93f3f3b9427",
+    "bytes": 145575
+  },
+  "pins": {
+    "active": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+    "main": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+    "c5": "c5c48d262157a11a76604113c40d2438d480433f",
+    "mathlib": "c55e6e786f49471c72fbddbec5415808896aec1e"
+  },
+  "exact_scope": {
+    "full_source_lines_read": 301,
+    "public_headers_checked": [
+      "theorem circlePositiveInverseComposeLinear_zero_fixedBase_value\n    (JP : SmoothDirections (circlePositiveLiftDomain M ×ˢ univ)\n      (fun z : M.Space × M.Space =>\n        circlePositiveInverseComposeLinear hM hT hD hγ (fun _ => 0) z.1 z.2))\n    (a : ℝ) (ha : 0 < a) :\n    ∃ base loss : ℕ, ∀ R : ℝ, 1 ≤ R → ∀ s : ℕ,\n      ∃ C : ℝ, 0 ≤ C ∧ ∀ e : M.Space,\n        (∀ m θ, a ≤ deriv (circleAffineLift (fun _ => 0) (M.decode e) 1 m) θ) →\n        M.grading base e ≤ R → ∀ y : M.Space,\n          M.grading s (circlePositiveInverseComposeLinear hM hT hD hγ\n            (fun _ => 0) e y) ≤ C *\n              ((1 + M.grading (s + loss) e) * M.grading base y +\n                M.grading (s + loss) y)",
+      "theorem circlePositiveInverseComposeLinear_fixedBase_oneHigh\n    (JF : SmoothDirections univ (fun z : M.Space × M.Space =>\n      circleShiftedChartComposeContinuousLinear hM hT hD hγ (fun _ => 0) z.1 z.2))\n    (JP₀ : SmoothDirections (circlePositiveLiftDomain M ×ˢ univ)\n      (fun z : M.Space × M.Space =>\n        circlePositiveInverseComposeLinear hM hT hD hγ (fun _ => 0) z.1 z.2))\n    (a : ℝ) (ha : 0 < a) :\n    ∃ base : ℕ, ∀ n : ℕ, ∃ loss : ℕ, ∀ R : ℝ, 1 ≤ R →\n      ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧ ∀ (travel : ℕ → ℝ)\n        (JP : SmoothDirections (circlePositiveLiftDomain M ×ˢ univ)\n          (fun z : M.Space × M.Space =>\n            circlePositiveInverseComposeLinear hM hT hD hγ travel z.1 z.2)),\n        ∀ x : M.Space × M.Space,\n          (∀ m θ, a ≤ deriv (circleAffineLift travel (M.decode x.1) 1 m) θ) →\n          pairGrading M.grading M.grading base x ≤ R → ∀ v : Fin n → M.Space × M.Space,\n            M.grading s (JP.D n x v) ≤\n              C * tameJetSize (pairGrading M.grading M.grading) n s loss base x v"
+    ],
+    "source_edited": false,
+    "local_lean_or_elaboration_run": false,
+    "ci_queried_or_downloaded": false,
+    "active_source_index_refs_checkpoints_changed": false,
+    "graph_reachability_is_not_compilation": true
+  },
+  "selected_owned_providers": {
+    "forward_owner": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/circle-forward-source-apply/CircleShiftedForwardFixedBaseBoundsApplyReviewedManifest.json",
+      "sha256": "6105f92815170893af34cf2fa7dfb52d402357520feabc51e816fc6f2fccb0e2",
+      "git_blob": "29077697145a273ed7ead4420a1a7314674cc7b2"
+    },
+    "inverse_owner": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-include-layout/TameInverseFixedBaseBoundsLayoutReviewedManifest.json",
+      "sha256": "d2d8835926ae52ddcf6dd18194555de3af3156ab55e0636e041f34f74f74074d",
+      "git_blob": "652f71cd2f0cbde8d19d0f99a33521e2756ae7ba"
+    }
+  },
+  "prior_independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CircleShiftedForwardFixedBaseBoundsIndependentReview.json",
+      "sha256": "f1cfa7fbf109fb6b3d6b9d6880e7dda7e52342737a20f521c70c40b317f6c959",
+      "git_blob": "19c43b0d732068575e30dfccf4661c32c65a92c5",
+      "bytes": 10395
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/TameInverseFixedBaseBoundsLayoutIndependentReview.json",
+      "sha256": "e495db63886b79a9227152621fc797ee2e860d8a94f55924c4a96459ae3f9aab",
+      "git_blob": "d065e3d0d43274c629bc3fa2e7f14b808f124e19",
+      "bytes": 5490
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/TameInverseFixedBaseBoundsIndependentReview.json",
+      "sha256": "bdb98adabaa5cc1414614f4b2af5ac137a62e4981bef7704c4d8ff341899caf2",
+      "git_blob": "706ce6315030904ddda7d96d0c9a6c14c6fd8cc5",
+      "bytes": 4530
+    }
+  ],
+  "actual_provider_fingerprints_checked": [
+    {
+      "module": "ContinuousFlexibility.Analysis.TameInverseFamily",
+      "origin": "active",
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseFamily.lean",
+      "lines": 166,
+      "sha256": "cf50a95054f72bd3c05690e0b59c846b31115aafc6ed0eb3c1ed712baf605ce9",
+      "git_blob": "990cd02c956d11d9d232234ce3d232893ebad2db",
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Analysis.ProjectiveJetEvaluation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ProjectiveJets",
+      "origin": "active",
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/ProjectiveJets.lean",
+      "lines": 352,
+      "sha256": "2411247d23d436966563315406fc15b2bf2c3a2340c3b77a94a0391db66b8e0b",
+      "git_blob": "b7ada8e57f9f58fa568762693eaded6538708e6e",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ProjectiveDifferential"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleTranslationUniformBounds",
+      "origin": "c5",
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/CircleTranslationUniformBounds.lean",
+      "lines": 144,
+      "sha256": "7ef561296693115b33d9daa18e66efb1778b028ac5d558696449a73af322b79f",
+      "git_blob": "29683e9c974fecbcd03fef36251ebb8b0061c485",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CirclePositiveInverseModel",
+        "ContinuousFlexibility.Analysis.CircleReturnBounded"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CirclePositiveInverseModel",
+      "origin": "c5",
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInverseModel.lean",
+      "lines": 81,
+      "sha256": "a6767f0378b48caf72404311675e416be98e8d1bad81800d134190a0a7d9d34d",
+      "git_blob": "6f2c793893f51f1fd72c6201f149a0e527458994",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CirclePositiveLiftDomain"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CirclePositiveLiftDomain",
+      "origin": "c5",
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveLiftDomain.lean",
+      "lines": 248,
+      "sha256": "1a29804386bd0ba3a3c51fa03162cb1e81f28746270d75576d331f4d11eefbf0",
+      "git_blob": "d718375ee23823ae2b5d10fd8da9b759c65e6eb4",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleInverseModel",
+        "ContinuousFlexibility.Analysis.CircleJetPointwiseEnergy"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleInverseModel",
+      "origin": "c5",
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/CircleInverseModel.lean",
+      "lines": 244,
+      "sha256": "b04e3cdfd2af3aa8309bd62abe082df5bb0b58364680e6a56b7b0dc5aeecd95a",
+      "git_blob": "d4cd16420a70111439856a3685e292a7ee34b17b",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleInverseCompositionGrowth",
+        "ContinuousFlexibility.Analysis.CircleCompositionJetModels"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleInverseCompositionGrowth",
+      "origin": "c5",
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/CircleInverseCompositionGrowth.lean",
+      "lines": 162,
+      "sha256": "bfa84748ab952d12b7dc81af4ebda64aae5e4acfc3cb5cd1f188031b008b28a2",
+      "git_blob": "4b9561e1984fbc8e3d228b0c1ab9aa23950418b5",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleInverseInterpolatedJets",
+        "ContinuousFlexibility.Analysis.CircleInverseFaaBounds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleInverseInterpolatedJets",
+      "origin": "c5",
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/CircleInverseInterpolatedJets.lean",
+      "lines": 125,
+      "sha256": "32c3334960fe18872f004ea200ad38630b5200984017ad883713877d2d036d3c",
+      "git_blob": "3b78988f92909bd9c29fb617a2fb0a1a5090fda2",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ScalarInverseScaleBounds",
+        "ContinuousFlexibility.Analysis.CircleCompositionTameBounds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleModelRealization",
+      "origin": "active",
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/CircleModelRealization.lean",
+      "lines": 119,
+      "sha256": "fad34c7a87e5a79a044edac46165294e2a8bf2bca57da149b0452464c38e51ee",
+      "git_blob": "44eadd052c8a1dee79853024f8e1b4e5e954c533",
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleInverseFaaBounds",
+      "origin": "c5",
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/CircleInverseFaaBounds.lean",
+      "lines": 151,
+      "sha256": "7a8dd3167d15ddefa05f5777faa6f767efc53a3c8ae0eb25efe89b10930e0ca3",
+      "git_blob": "6421119f4ecd651955aeeec34ed00772e4f608e7",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleCompositionFaaBounds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleProductSmoothTame",
+      "origin": "c5",
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/CircleProductSmoothTame.lean",
+      "lines": 359,
+      "sha256": "4eca07694ef2636151d94f3ce7fc83d5e3beffac7e0055c89c9eff881fbc40d5",
+      "git_blob": "d442ac2f3732e0d66b0392699d9e31c8c694333a",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleProductMixedBounds",
+        "ContinuousFlexibility.Analysis.CircleMultilinearRealization",
+        "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+        "ContinuousFlexibility.Analysis.TameElementaryCalculus"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "origin": "active",
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/TameMultilinearNormalization.lean",
+      "lines": 185,
+      "sha256": "1f6c08d38555fdb2135b8622216b86cb0aa89ab367c5fe2443854f5e079b361d",
+      "git_blob": "04e7e732ab5f0d16ba232b561bd612f93dff4c51",
+      "imports": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+      "origin": "active",
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/TameElementaryCalculus.lean",
+      "lines": 512,
+      "sha256": "8970cb3def322b3ecaf1d4c717754fc68f57d4a63d4ed82023a7d4fae5ac9b09",
+      "git_blob": "bc38b3601334a7b76a3eda9f3602c4d3b2440423",
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Analysis.ProjectiveJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameInverseJets",
+      "origin": "active",
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseJets.lean",
+      "lines": 254,
+      "sha256": "e34d22d95954a7c2bbd2dd6317eb1fcd08e4e7ded3cd3633729b501236bf694d",
+      "git_blob": "976c9b64fc749b055e22c2e8596a8781263956bc",
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameInverseExpressions"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalStateInterpolation",
+      "origin": "active",
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalStateInterpolation.lean",
+      "lines": 173,
+      "sha256": "6c31333851353e661b0c5177ad6239387154ebde3557e8a343a633671622cc2b",
+      "git_blob": "3b016eb8f2348a15d6d9d926ed03881ddc47b747",
+      "imports": [
+        "ContinuousFlexibility.Analysis.StateNeighborhood",
+        "ContinuousFlexibility.Analysis.SpacesInterpolationProducts"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SolveNewtonBridge",
+      "origin": "active",
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/SolveNewtonBridge.lean",
+      "lines": 235,
+      "sha256": "6f1c11fc500fee7b43ecf034f966e108f46feb38368ab517f9b8fb71b4cff07e",
+      "git_blob": "af8c1aef7d93e7bfa47e87ae08272dfe46b0fa40",
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameTransfer"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cStateSeminorms",
+      "origin": "active",
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/N01cStateSeminorms.lean",
+      "lines": 331,
+      "sha256": "99abe3e9057a214b52c5188410cfc8d2ca2a3f9a52733bcb5c73dd9757666d26",
+      "git_blob": "f96fa185722d12bab8545de1d59ea100a0556417",
+      "imports": [
+        "ContinuousFlexibility.Analysis.StateKappaBounds",
+        "ContinuousFlexibility.Analysis.TameLocalCalculus"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleCompositionModel",
+      "origin": "c5",
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/CircleCompositionModel.lean",
+      "lines": 217,
+      "sha256": "6ccda024d1558958e12d8205bcdb9cbc55f67026bedec6f3c1dd9eb5ef312bf8",
+      "git_blob": "558cbffe8d66e2f033967b9744841798ac4f56fa",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleWeightedComposition"
+      ]
+    }
+  ],
+  "pinned_mathlib_api": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Algebra/Module/Multilinear/Basic.lean",
+      "sha256": "ac1064e6f05a965c71a769d4828aead1759b78d8b6a9f6a6b8b43dfee6452af4",
+      "git_blob": "09d44a8ac099607cca90e3f0a9aa126246ee58aa",
+      "bytes": 30059,
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e"
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Mul.lean",
+      "sha256": "9a5f4cda6bdba50954d27879160adfdb7d408b41c49dde6343cd03a30227b242",
+      "git_blob": "72534c7d4bdd8a8810e4657edf16caadf16a2d7a",
+      "bytes": 28882,
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e"
+    }
+  ],
+  "review_findings": [
+    {
+      "area": "Actual zero-travel inverse value estimate",
+      "result": "passed",
+      "detail": "The family index is the actual pair (parameter,source) with the original derivative lower a, parameter grading <= R and source grading <= 1. Direct Growth162 is specialized once at travel = 0. Its interpolation input is obtained at base = max b0 (ell+2), with loss = base+ell+2 chosen before R and s. Original sample H^gamma and M weights are kept."
+    },
+    {
+      "area": "All lower angular norms to the true grading",
+      "result": "passed",
+      "detail": "For fixed s, B is the finite sum of C j over j <= s. The actual circleGrading_le_iff_circleNorm theorem is applied with a proved nonnegative bound. Monotonicity only raises j+loss to s+loss; neither base nor the common domain is changed with s."
+    },
+    {
+      "area": "Continuous source normalization",
+      "result": "passed",
+      "detail": "The literal positive inverse P0 is packaged with inverseFamilyContinuousLinearMap using the actual JP0.continuousOn on the positive domain. The apply lemma gives equality to P0 at the actual parameter. The Fin 1 continuous multilinear map uses ofSubsingleton_apply_apply and current185 multilinear_bound_of_unitBall; the affine coefficient 1+q_high(parameter) is explicit. This normalizes only the source and covers zero seminorms without an assumed normed inverse operator."
+    },
+    {
+      "area": "One actual common lower domain",
+      "result": "passed",
+      "detail": "For fixed a>0, c=min(a,1)/2 satisfies 0<c<a and c<=1/2. With t=1-c>0, U is the preimage of the actual positive-lift domain under t^-1 scalar multiplication. The proved decoder derivative scaling identifies U with the strict lower bound c. U is open, is contained in the positive domain, and contains every parameter with derivative >=a. The strict inequality c<a is used in the containment proof. No order-dependent radius or old uniform-family helper enters."
+    },
+    {
+      "area": "Same actual inverse and genuine maps",
+      "result": "passed",
+      "detail": "P0 agrees with the literal fixed-lower inverse on U by circlePositiveInverseComposeLinear_eq_fixed. Both existing left/right inverse lemmas therefore apply to the same zero-travel L. The CLM wrapper equals P0 only on U, and all uses remain on U. SmoothDirections.restrict retains its actual D field; no replacement map or numerical inverse-jet hypothesis is introduced."
+    },
+    {
+      "area": "Single application of the fixed-base inverse theorem",
+      "result": "passed",
+      "detail": "The inverse value base/loss and the forward159 base/loss are selected before n. Their maximum raises only the common low operator base, and the two monotonicity inequalities use nonnegative coefficients. Selected349 is invoked exactly once for zero travel, after the actual pair-grading interpolation theorem. Its base precedes all n, while its derivative loss may depend on n and remains before R and s."
+    },
+    {
+      "area": "Each given travel tower is estimated",
+      "result": "passed",
+      "detail": "The actual inverse equality is output translation by minus travel. Postcomposition constructs a genuine tower on the same U. Current HasProjectiveJetsOn.unique identifies the restriction of every supplied JP with this tower at the actual point; its source is the same literal positive inverse. Both congr and restrict retain D. The pinned compContinuousMultilinearMap_coe API exposes the exact translated value, and translation grading contraction has constant 1. Thus the C already chosen at zero travel precedes every travel and every given JP."
+    },
+    {
+      "area": "Section binders, actual APIs and selected mixed pins",
+      "result": "passed",
+      "detail": "Both public declarations have include hI before their documentation. The decoder-scaling private theorem includes hM, and the common-domain theorem explicitly includes hD/hT/hgamma/hM. Actual derivative, inverse, restriction, continuity, uniqueness and postcomposition signatures were read at the declared 18f/c5 pins. The c5 product normalization call uses a genuine continuous multilinear map and matches current185. The two new public names occur only in this selected source."
+    }
+  ],
+  "mechanical_verification": {
+    "selected_project_provider_count": 270,
+    "independently_reachable_project_modules": 270,
+    "origin_counts": {
+      "owned": 3,
+      "active": 224,
+      "c5": 43
+    },
+    "missing": [],
+    "cycles": [],
+    "extra_provider_rows": [],
+    "all_270_source_sha256_blob_line_counts_and_project_import_lists_checked": true,
+    "owned_manifest_hashes_checked": true,
+    "full_public_headers_equal_manifest": true,
+    "new_public_name_collisions": [],
+    "old_inverse_family_modules_selected": [],
+    "new_source_sorry_admit_axiom_unsafe_native_decide_resource_options": [],
+    "eight_explicit_79300_readonly_provider_comparisons_match": true,
+    "reviewer_script_note": "One initial import-list comparison included Mathlib imports although the manifest records project-only imports. The reviewer corrected that filter and independently reran all 270 rows; no source or manifest was changed.",
+    "direct_manifest_provider_count": 17,
+    "additional_actual_provider_count": 1,
+    "all_18_actual_provider_fingerprints_checked": true
+  },
+  "boundaries": {
+    "qualitative_given_towers": "JF and JP0 are genuine zero-travel SmoothDirections inputs, without any numerical bound. This leaf proves the fixed-base estimates for them and for every given actual travel JP; it does not itself construct these qualitative towers.",
+    "quantifier_order": "exists base; forall n; exists loss; forall R>=1,s; exists C>=0; forall travel and actual JP and points/directions. The fixed material exponent gamma is unchanged.",
+    "not_final_current_jets": "The actual state-parameter composition, one common final neighborhood, finite-product derivative budget and radial PDE recurrence remain later work. No CurrentJets or full primitive certificate is asserted.",
+    "validation_limit": "Static independent source and actual-provider/API review only. No local Lean, elaboration, CI operation or full mixed-pin DAG typecheck was performed."
+  },
+  "conclusion": "No definite mathematical or API defect found in the exact frozen 301-line source. The source is accepted for held candidate selection subject to the existing CI gates; original candidates and receipts remain immutable.",
+  "metadata_clarification": {
+    "preserved_first_receipt": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CirclePositiveInverseFixedBaseBoundsIndependentReview.json",
+      "sha256": "5fca061bbd7e117bb850b325edb443fc66f39ad9da69761c5c208338620e62b6",
+      "git_blob": "2d7c67ef2217ab85efd54c84b002fd73f5ab7561"
+    },
+    "delta": "Correct the provider-count label: 17 candidate-listed direct fingerprints plus one independently added CircleCompositionModel fingerprint equals 18 checked actual provider fingerprints. All source identities, mathematical findings, API findings and validation boundaries are unchanged."
+  }
+}

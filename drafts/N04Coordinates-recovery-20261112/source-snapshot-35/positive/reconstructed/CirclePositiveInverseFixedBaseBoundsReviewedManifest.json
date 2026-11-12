@@ -1,0 +1,58 @@
+{
+  "schema": "n04-reviewed-source-selection-v1",
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CirclePositiveInverseFixedBaseBounds.lean",
+    "bytes": 15638,
+    "sha256": "435088fc0bad2d63d09101dfcb8a2629cc24e5437f855867e41cac8368b2eb64",
+    "git_blob": "1f55edbb185fe33327757a087479196cc8565e4f",
+    "lines": 301,
+    "eof_lf": true,
+    "declarations": [
+      "circlePositiveInverseComposeLinear_zero_fixedBase_value",
+      "circlePositiveInverseComposeLinear_fixedBase_oneHigh"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CirclePositiveInverseFixedBaseBoundsCandidateManifest.json",
+    "bytes": 20528,
+    "sha256": "3ea7b4917bcdeb9b6c80db44354427b538d9b1e235d599e4607ca3f58d783d48",
+    "git_blob": "9b14606fb3107115c4431d7350766013b3f59524"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CirclePositiveInverseFixedBaseBoundsIndependentReviewV2.json",
+    "bytes": 23676,
+    "sha256": "9dae94366bfd280d36301f52715857cd69c72a35ccc438c90c10caddf0b07ad6",
+    "git_blob": "bf9fea7b30e8fc0dd3928f7036f69437929deb17"
+  },
+  "selected_provider_graph": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CirclePositiveInverseFixedBaseBoundsSelectedProviders.json",
+    "bytes": 145575,
+    "sha256": "7ee327382ed4517bc1c67ce298e712ccafb3ad9899fa5acb9917c20e1679a126",
+    "git_blob": "207bb0816468a0b1e4f7a6737402e93f3f3b9427",
+    "project_modules": 270
+  },
+  "owned_provider_selections": {
+    "forward_owner": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/circle-forward-source-apply/CircleShiftedForwardFixedBaseBoundsApplyReviewedManifest.json",
+      "sha256": "6105f92815170893af34cf2fa7dfb52d402357520feabc51e816fc6f2fccb0e2",
+      "git_blob": "29077697145a273ed7ead4420a1a7314674cc7b2"
+    },
+    "inverse_owner": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-include-layout/TameInverseFixedBaseBoundsLayoutReviewedManifest.json",
+      "sha256": "d2d8835926ae52ddcf6dd18194555de3af3156ab55e0636e041f34f74f74074d",
+      "git_blob": "652f71cd2f0cbde8d19d0f99a33521e2756ae7ba"
+    }
+  },
+  "scope": "Actual inverse source-linear value bound, one zero-travel fixed-base application and estimates for every given genuine travel tower by actual translation and uniqueness. Base precedes all parameter orders; loss at each parameter order precedes output order; C precedes every travel and JP. Original weighted circle exponent gamma is unchanged.",
+  "remaining": "Qualitative JF/JP0 production and actual state-parameter composition/finite-product budget/radial PDE estimates are not concluded by this leaf; no final CurrentJets or primitive claim.",
+  "selection": "Select this exact unchanged 301-line source. Preserve both earlier audit receipts; V2 clarifies only provider counts.",
+  "compiled": false,
+  "no_active_source_index_refs_or_ci_changed": true,
+  "authorized_budget": {
+    "additional_actual_inverse_allocation": 900,
+    "new_Lean_used": 301,
+    "new_Lean_remaining": 599
+  }
+}

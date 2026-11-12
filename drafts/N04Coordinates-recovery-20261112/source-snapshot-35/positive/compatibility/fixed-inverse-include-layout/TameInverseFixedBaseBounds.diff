@@ -1,0 +1,14 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-include-layout/TameInverseFixedBaseBounds.lean
+@@ -276,10 +276,10 @@
+       obtain ⟨C, hC, hc⟩ := hg s
+       exact ⟨C, hC, fun z hz hl => hc ⟨z, hz, hl⟩⟩
+ 
++include hq hV hF in
+ /-- A single low base controls every order of the same inverse tower.
+ The two inputs are value estimates for the inverse operator and for the
+ actual ordered forward jets, not estimates for the desired inverse jets. -/
+-include hq hV hF in
+ theorem inverseFamilySmoothDirections_fixedBase_oneHigh
+     (hI : HasInterpolation (pairGrading q q))
+     (hU : IsOpen U)

@@ -1,0 +1,159 @@
+{
+  "kind": "same_actual_whole_negative_scalar_columns_candidate",
+  "owner": "/root/quantitative_route",
+  "status": "HELD_UNCOMPILED_AWAITING_FULL_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeScalarColumnJets.lean",
+    "sha256": "0962726e582a33ac93e67b422f5ad36b1ee587acf5502fd081fb8dc013508186",
+    "blob": "c878dca87fbddbd6ac23d406a3c4d202096c8bd6",
+    "lines": 140,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeNegativeScalarColumnJets.lean"
+  },
+  "public_declarations": [
+    "n04WholeReferenceGauge_negative_scalarColumnReferenceJets_enlargedMaterialData"
+  ],
+  "imports": [
+    "ContinuousFlexibility.Analysis.ActualNegativeReferenceScalarSourceData",
+    "ContinuousFlexibility.Analysis.CanonicalReferenceScalarColumnMaterialJets",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeAtomTransport",
+    "ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualNegativeReferenceScalarSourceData.lean",
+      "sha256": "dcd9c44b21cf5f415f2f86491ddaf806782120d61ea8869db3f5a1c2e778a4cb",
+      "blob": "5c19660b736e579346f659994fc21142bf5241fe",
+      "lines": 210
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceScalarColumnMaterialJets.lean",
+      "sha256": "6de669a7ac170b19818a1d0778c27f1577fdbcaf70f6adf30c9a0158128e071b",
+      "blob": "c2275dd042ab2a6768f6379c55da5e03a1c85d89",
+      "lines": 104
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeNegativeAtomTransport.lean",
+      "sha256": "e79db2343fd6934f29ace44a13f3906346c712f241f191f87d5fa7c0d603a8ad",
+      "blob": "1cdaaae680c7761e79e670aa79e5eb033f9384fa",
+      "lines": 60
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalAuxiliaryAtomPreservation.lean",
+      "sha256": "c6aa5aeb70d35e64d328b6830ac462b63287ad5b3dd1c0f7e2ce0718b859a957",
+      "blob": "5090df125dd2c756ed0a4554caf9482ff6665cbe",
+      "lines": 68
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "lines": 311
+    }
+  ],
+  "selected_provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualNegativeReferenceScalarSourceDataReviewedManifest.json",
+      "sha256": "8f9693a3a9a8ae4a8ff6e8656ead40133f444ffde66178151b69adcb4a656c4b",
+      "blob": "bf9867165928e1a46c6932c1411572bb9ac4c689",
+      "lines": 75
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceScalarColumnMaterialJetsReviewedManifest.json",
+      "sha256": "fd1e7d0da381023550b612fe2f6c1240db57ecb729f1bca71d10bcd7d026e78e",
+      "blob": "79817082044105aee55d64879425916e85a71612",
+      "lines": 40
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeNegativeAtomTransportReviewedManifest.json",
+      "sha256": "baf710184596c3759c7351479fa34daedee53ea5e13e540c85012429e6cfd38f",
+      "blob": "07dce6b0f96cf8def2e3adeb1129804369af9f8b",
+      "lines": 51
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeAuxiliaryPackageReviewedManifest.json",
+      "sha256": "0f257e3d9f2f62c70ffc6f6c2847caba776ea815464a185453ffd460a79a3e3a",
+      "blob": "50f3da5361605234e08480c84c30c57f0839af00",
+      "lines": 107
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/N01ParameterOrderCorePortsReviewedManifest.json",
+      "sha256": "fb5f2f94e949515723cba8bd40549e47461693b8ae613313f568d5cf0c1aee18",
+      "blob": "8c880f0446ec9edb494782270177407dac82a580",
+      "lines": 74
+    }
+  ],
+  "pinned_installed_providers": [
+    {
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+      "sha256": "166d48b590552637d5efedb29ce0b19d5963d02f33e7caebffe44a04b576fdf4",
+      "blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "lines": 142,
+      "current_worktree_bytes_equal": true
+    },
+    {
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean",
+      "sha256": "91687b630205a380f137dcdb4cb32068d79582e09d17d4a4cd14317e21b9e19f",
+      "blob": "334d3c0c19727465e3afc75f988c79df1b8d7b8a",
+      "lines": 111,
+      "current_worktree_bytes_equal": true
+    },
+    {
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/N04SignedPieces.lean",
+      "sha256": "9c19e2b88f5ce7b5e93a41aa13575c440677ebc8c20b68808b6ac48809cc8a00",
+      "blob": "cdc180b7d11337446407047fb5f88d9c1b26bd0c",
+      "lines": 220,
+      "current_worktree_bytes_equal": true
+    },
+    {
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773,
+      "current_worktree_bytes_equal": true
+    }
+  ],
+  "route": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/CanonicalPrimitiveGeometryActualRoute.json",
+    "sha256": "f5fe015806b5c65e35fd12ab59759e168df8ab2e79f82b796f2cdde2e6c58d97",
+    "blob": "f70b18e7f3472ca4ae34372590b1928812f46a09",
+    "lines": 1006
+  },
+  "self_review": [
+    "Read complete 140-line source and complete actual 210/104/60/68/131 contracts. The old enumeration, atlas, reference state, stored material sample and physical column fields are unchanged.",
+    "The raw optical condition is a proposition depending only on the fixed original D/T/C/K0. Classical cases on that proposition permit a numerical witness before later whole-atlas choices and the proof argument: the false branch is vacuous, the true branch selects the literal 210 scalar data exactly once before every order. No pointwise estimate or final target is inserted.",
+    "The actual original X/F families feed the generic 104 column provider, which supplies smoothness, pi-period and mixed jets together for both actual physical source columns. It does not choose a reference family or atlas.",
+    "The actual negative cutPair index is identified with e0.symm(inl j) by one Bool proof. The original typed positivity definition supplies the negative hypothesis of the all-33-function transport theorem. The whole sample projection is the sixth field of the exact 131 tuple.",
+    "The root 60 identity and the existing 68 enlargement identity transport entire atom functions, hence all regularity, period and derivative assertions. The original and whole positive fields are arbitrary and never rebuilt.",
+    "W=C0*originalE0 has its proved scaled floor. Only U=enlargedMaterialData T has E0>=1. The estimate W<=C0*U.E0 follows from actual envelope enlargement; multiplication and real-power monotonicity then permit the existing coefficientEnvelope_pack.",
+    "The single-B output precedes e, positive cell/families, all state maps and the supplied proof of the optical condition. No assertion that original E0>=1 is used.",
+    "No local Lean/elaboration, compilation, active source/index/ref change or CI action. Static public-name collision check and exact pinned provider comparisons only."
+  ],
+  "scope_limits": [
+    "The original same-component raw optical lower condition remains explicit.",
+    "Only the two reference scalar columns are covered; no current state jets or primitive material certificate is claimed.",
+    "The complete selected dependency DAG remains held until independent review and CI; static inspection is not compilation."
+  ],
+  "budget": {
+    "authorized_new_lean_total": 700,
+    "this_source_lines": 140,
+    "total_new_lean_this_assignment": 140,
+    "remaining": 560
+  },
+  "collision_check": {
+    "scope": "current active src public declarations",
+    "matches": []
+  },
+  "compiled": false,
+  "active_modified": false,
+  "created_at_utc": "2026-11-12T19:14:03.204393+00:00"
+}

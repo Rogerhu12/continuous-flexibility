@@ -1,0 +1,28 @@
+{
+  "kind": "same_actual_whole_negative_scalar_columns_reviewed_owner",
+  "owner": "/root/quantitative_route",
+  "status": "FULL_SOURCE_INDEPENDENT_REVIEW_PASSED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeScalarColumnJets.lean",
+    "sha256": "0962726e582a33ac93e67b422f5ad36b1ee587acf5502fd081fb8dc013508186",
+    "blob": "c878dca87fbddbd6ac23d406a3c4d202096c8bd6",
+    "lines": 140
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeScalarColumnJetsCandidateManifest.json",
+    "sha256": "c728fb77508b2f4ff545eb1e516cd90e43ba15b2d9fbae2a220f1518ac3e5173",
+    "blob": "18a6d8060ec8c04bb87884572a6ed9feb149f590",
+    "lines": 159
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/WholeReferenceGaugeNegativeScalarColumnJetsIndependentReview.json",
+    "sha256": "3651d475b3590bf764b19469aeca3a8bf4976cd9036c0a6ac26c3d89642d759b",
+    "blob": "032c2dddb4a3a874de1d0a04fe18a66f1d447f8f",
+    "lines": 140
+  },
+  "scope": "Both actual negative left/nu columns of the same whole reference-gauged atlas, with smoothness, pi-period and all mixed spatial envelopes. The original K/sample/optical host remain fixed; only RHS E0 is enlarged. Constants precede the whole enumeration and arbitrary positive fields by classical cases on the fixed original optical proposition.",
+  "source_bytes_unchanged": true,
+  "compiled": false,
+  "active_src_index_refs_modified": false,
+  "created_at_utc": "2026-11-12T19:15:42.613560+00:00"
+}

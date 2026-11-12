@@ -1,0 +1,196 @@
+{
+  "kind": "same_actual_negative_geometry_and_potential_reference_regularity_candidate",
+  "owner": "/root/quantitative_route",
+  "status": "HELD_UNCOMPILED_AWAITING_FULL_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeReferenceRegularity.lean",
+    "sha256": "fe580d742f806bef92bc561c3b39440d9ce69c9d74ab677a6a8d6b50576ffbf4",
+    "blob": "e24ecfd93b53589d3f757ad22473558cd853cfdf",
+    "lines": 235,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeNegativeReferenceRegularity.lean"
+  },
+  "public_declarations": [
+    "n04WholeReferenceGauge_negative_geometryPotentialReferenceRegularity"
+  ],
+  "private_declarations": [
+    "negativeReference_unit_radial_regular"
+  ],
+  "imports": [
+    "ContinuousFlexibility.Analysis.ActualNegativeReferenceGeometryFields",
+    "ContinuousFlexibility.Analysis.ActualNegativeReferencePotentialGerms",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeAtomTransport"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceGeometryFields.lean",
+      "sha256": "17eb137b0c746f4ff44388b842b068a2745a96e99940de71667b75ffc8abbb52",
+      "blob": "9f46123e9067e42a31444649e6392ba3d0bae493",
+      "lines": 124
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferenceScalarInverse.lean",
+      "sha256": "84346b8a1836363f9b0fdbe48a93c75b42deaa144beea6fe8e0bf32d2faffa3e",
+      "blob": "532d3bc282c59cd7c96647db57d037efbd9f42a4",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialGerms.lean",
+      "sha256": "d9fd05beea6390b03493b772357fe3110865629dab6d6c17689487fce4e7d205",
+      "blob": "a82945a31a992d2b428782d030a35c5e1074542d",
+      "lines": 70
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeNegativeAtomTransport.lean",
+      "sha256": "e79db2343fd6934f29ace44a13f3906346c712f241f191f87d5fa7c0d603a8ad",
+      "blob": "1cdaaae680c7761e79e670aa79e5eb033f9384fa",
+      "lines": 60
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    }
+  ],
+  "selected_provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceGeometryFieldsReviewedManifest.json",
+      "sha256": "b889b812d707d5dcac345870030d67ea0255fb027180e9a361717c69b19a4027",
+      "blob": "9cca81df03404d340125ce607eb1bec6e9ffcfa4",
+      "lines": 64
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/negative-reference-partA-namespace/ActualNegativeReferencePartANamespaceReviewedManifest.json",
+      "sha256": "1a16f2e8437ce8eb96ae2f3898479ac42753411f92260ec4343ba4fb31f7c23c",
+      "blob": "3edbaa3198a4e7d4975614969f0be033e7ec5a61",
+      "lines": 109
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialMaterialJetsReviewedManifest.json",
+      "sha256": "d54ca78164168d197ef30c711e313fa871cff92caabd49890fdb40b7b0d7e168",
+      "blob": "4aa8c69daa725daac57b767f38e4ae65ed75110d",
+      "lines": 107
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeNegativeAtomTransportReviewedManifest.json",
+      "sha256": "baf710184596c3759c7351479fa34daedee53ea5e13e540c85012429e6cfd38f",
+      "blob": "07dce6b0f96cf8def2e3adeb1129804369af9f8b",
+      "lines": 51
+    }
+  ],
+  "pinned_installed_providers": [
+    {
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+      "sha256": "166d48b590552637d5efedb29ce0b19d5963d02f33e7caebffe44a04b576fdf4",
+      "blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "lines": 142,
+      "current_worktree_bytes_equal": true
+    },
+    {
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean",
+      "sha256": "91687b630205a380f137dcdb4cb32068d79582e09d17d4a4cd14317e21b9e19f",
+      "blob": "334d3c0c19727465e3afc75f988c79df1b8d7b8a",
+      "lines": 111,
+      "current_worktree_bytes_equal": true
+    },
+    {
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualAtlasGeometry.lean",
+      "sha256": "9249ea8b23d4edc27fe5e9d405e32a3da2248556efb394db33faf279aefa1d0a",
+      "blob": "6e704770a6066c6279f7c3cdae96c1d695d554d3",
+      "lines": 101,
+      "current_worktree_bytes_equal": true
+    },
+    {
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferencePieces.lean",
+      "sha256": "0ae0b98aef8f688002cf783e7b129f6834a79b1502061bd123f90ffe59edf766",
+      "blob": "ba67b0a6776363ed4ebf616d7fd56c489baf2b25",
+      "lines": 174,
+      "current_worktree_bytes_equal": true
+    },
+    {
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773,
+      "current_worktree_bytes_equal": true
+    }
+  ],
+  "pinned_mathlib": {
+    "commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "files": [
+      {
+        "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+        "sha256": "1e9fbd861ac27cb4b17113c3f8ede3c5f573a6b342b23e41ff514b05bd3334ef",
+        "blob": "e7fd4979f58f787927500713547b3671402ae782",
+        "lines": 1283
+      },
+      {
+        "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Comp.lean",
+        "sha256": "26495369d99d4815f99e8319623231a5fe25f0fdd1756c31162216323e27ed0f",
+        "blob": "067d19883550ab5637d02f038d451c42ab16e4b7",
+        "lines": 839
+      },
+      {
+        "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Deriv.lean",
+        "sha256": "3033d2b35bcfdad1ab06168dee62c8587215de8fa049caa85e5445c54d4fb98c",
+        "blob": "ede41b77d146105bee637d6db9b91a1a21a48547",
+        "lines": 141
+      },
+      {
+        "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Operations.lean",
+        "sha256": "2a5fd66cb597c253e023f1072948e1a591f64ba0ee747a6a89139fc7c8c980eb",
+        "blob": "80e898b98348cb111761430989137705f4a3cf63",
+        "lines": 1052
+      },
+      {
+        "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Deriv.lean",
+        "sha256": "9098e465d4b2a9898352ad3eb944c1b76fa7bd010862391f790d57f59ab59d25",
+        "blob": "5c4314cbc0f51719245bc3b268948275c4a21812",
+        "lines": 778
+      }
+    ],
+    "checked_signatures": [
+      "ContDiffOn.comp",
+      "ContDiffOn.congr",
+      "ContDiffOn.inv",
+      "ContDiffOn.rpow_const_of_ne",
+      "ContDiffOn.deriv_of_isOpen",
+      "ContDiffOn.div_const"
+    ]
+  },
+  "self_review": [
+    "Read all source lines and complete actual124, corrected152,70,60 and131 contracts. No optical lower hypothesis, numerical jet certificate, positive-family matching or replacement atlas is an input.",
+    "The public parameters are hT,hS,hN,hfield,e0,e,cell,psi,chi0,h0,tau,sigma,Q,N. The conclusion is original-T smoothness and pi-period for the exact ten geometric atoms or potential, on each actual negative unit strip.",
+    "One Bool identification matches the selected cutPair half with e0.symm(inl j). The all-atom whole-function identity reduces the entire qualitative goal to the same original K, without changing any source or representation.",
+    "Both physical and canonical unit affine maps have true interval range by the actual referenceBounds. The common affine range proof serves both; no bound on inverse zero jets is assumed.",
+    "Corrected152 supplies local Y/H/chi smoothness, the actual inverse range and positive H. The actual referenceBounds put the physical half inside radialCore, so w is nonzero only where its inverse is used. No inverse-profile smoothness on ambient endpoints is claimed.",
+    "The exact124 field identities identify each unit atom with a radial scalar formula. Smoothness follows from open-interval composition, powers and reciprocals at their true nonzero points. A single generic radial lemma transfers both smoothness and pi-period from exact EqOn.",
+    "For potential, H infinity on the open physical interval gives H-prime infinity and then the derivative of w*H-prime infinity using the pinned ContDiffOn.deriv_of_isOpen twice. The exact70 actual potential germ supplies its value at every canonical point. Composition with the same chi and true affine map yields the same potential atom, not a chosen new representative.",
+    "The negative optical host and E0 play no role in this qualitative theorem. Existing321/173 numerical providers remain separate and unchanged.",
+    "Only static source/API/tuple/metadata and pinned-byte verification was performed. No local Lean/elaboration, compile, CI call or active source/index/ref change."
+  ],
+  "scope_limits": [
+    "These are reference ordinary spatial regularity and period assertions, not current state-direction towers.",
+    "The result is for the original material record T; the already reviewed68 all-function identity transports these eleven non-ratio atoms to the final enlarged record.",
+    "No full final N04 or primitive geometry statement is asserted; the selected sources remain held and uncompiled."
+  ],
+  "budget": {
+    "authorized_new_lean_total": 700,
+    "this_source_lines": 235,
+    "earlier_scalar_source_lines": 140,
+    "total_new_lean_this_assignment": 375,
+    "remaining": 325
+  },
+  "collision_check": {
+    "scope": "current active src public declarations",
+    "matches": []
+  },
+  "compiled": false,
+  "active_modified": false,
+  "created_at_utc": "2026-11-12T19:18:48.507228+00:00"
+}

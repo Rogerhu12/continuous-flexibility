@@ -1,0 +1,1006 @@
+{
+  "kind": "readonly_actual_canonical_primitive_geometry_route",
+  "owner": "/root/quantitative_route",
+  "status": "SOURCE_BACKED_PROOF_PLAN_NOT_A_LEAN_THEOREM",
+  "created_at_utc": "2026-11-12T19:09:21.137063+00:00",
+  "pins": {
+    "active_sources_at_read": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+    "active_tree_at_read": "64a18c3f510156a0386b5601f7c26fe575e6f958",
+    "new_N04b_readonly_comparison": "79300a205c79284707725e01fa2142a567dfd267",
+    "main_context_only": "2aa3dbb1",
+    "mathlib": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "lean": "v4.35.0-rc3",
+    "historical_c5": "Not silently selected: no source from c5 replaces an active or frozen draft provider in this route."
+  },
+  "constraints": {
+    "new_lean_written": false,
+    "lean_executed": false,
+    "active_index_refs_CI_modified": false,
+    "new_atlas_or_positive_family_chosen": false,
+    "small_json_only": true
+  },
+  "answer": {
+    "already_produced": "Actual whole-component relative maps, global C3 transport with correct chart/height agreement, global H/M pointwise transport ratios, and the physical coefficient smoothness/periodicity clause have actual providers. Reference-only full-half jets do not supply moving-domain current estimates.",
+    "not_already_produced": "No actual CanonicalPrimitiveGeometry.materialJets producer or material second-derivative bound for the global relative transport was found in the pinned active sources or the exact target-name search of 79300a. This is not a proof of mathematical impossibility and does not discard generic calculus providers.",
+    "preferred_route": "Once the intended same-atlas ReferenceJets and CurrentJets are actually supplied, use their spatial clause plus a single low-order neighborhood shrink. The transport derivative clause follows from canonical inverse/source atoms. The fifteen material fields need an actual two-root-chart conversion on the part of a moving negative half outside its fixed reference half, followed by finite polynomial jet calculus.",
+    "upstream_not_claimed": "CurrentJets and the full assembled reference certificate are not asserted completed here. In particular, this plan cannot be cited as a producer from arbitrary Through03 alone."
+  },
+  "target_quantifiers": {
+    "materialJets": "For each N choose r(N), d(N), C_N>0, A_N>=0 before all states, pieces and points; retain one fixed base/epsilon neighborhood. Bounds concern actual x=(T.radius y.1,y.2) in physicalPieceOpen S K z m, and ordinary Frechet jets in y of the fifteen literal primitive functions.",
+    "transport": "For each valid state choose the already constructed global tau,q. It is legitimate for the final C0,A in their <=2 derivative bound to depend on that state. They must remain uniform over all pieces and all annular points. Positive derivatives of tau only; q includes order zero.",
+    "fixed_loss": "The materialJets target permits r and polynomial degree d to depend on N. Do not introduce a requirement of one linear all-order tame bound. The one common neighborhood shrink below uses only the s=0 spatial difference loss and its fixed coefficient.",
+    "material_record": "All certificates and atom identities are instantiated for the same final T. If T is enlarged, do it explicitly before these uses. The argument uses a scaled E0 floor or an explicit normalized T, never assumes arbitrary original E0>=1."
+  },
+  "domain_map": [
+    {
+      "case": "positive",
+      "fact": "N04PartA positive-domain clause identifies current physicalPieceOpen with the whole fixed reference interval. Current physical-unit atoms cover the desired points directly.",
+      "refs": [
+        "positive_domain",
+        "whole_record"
+      ]
+    },
+    {
+      "case": "negative own reference half",
+      "fact": "Current physical-unit chart/height/Jacobian atoms cover that fixed reference half. Their actual germs are the same root-chart/height functions throughout the full negative component.",
+      "refs": [
+        "target",
+        "actual_germs"
+      ]
+    },
+    {
+      "case": "negative opposite reference half",
+      "fact": "An actual current half can cross the fixed optical cut. The current physical point is then covered by the other reference physical half, not by the requested half. A new explicit two-root conversion is needed. Neither the N06 angular tile theorem nor canonical maps-to makes these domains equal.",
+      "refs": [
+        "moving_domains",
+        "root_formula",
+        "actual_germs"
+      ]
+    },
+    {
+      "case": "fixed reference cut",
+      "fact": "Both open reference halves omit the fixed cut radius. At a point of an open current domain on that line, use continuity of the actual smooth jet and a sequence from one of the adjacent reference halves inside the same current open domain. Constants are common and E0 is continuous. No local radius enters a numerical constant.",
+      "refs": [
+        "primitive_geometry",
+        "actual_germs",
+        "mixed_fd"
+      ]
+    },
+    {
+      "case": "true roots and global low jets",
+      "fact": "The global C3 construction is smooth there. Low-jet inequalities pass from an adjacent actual component by continuity; materialJets itself is required only on open pieces.",
+      "refs": [
+        "global_gluing",
+        "whole_closed"
+      ]
+    }
+  ],
+  "stage_A_current_absolute_atoms": {
+    "status": "NEW_SMALL_ASSEMBLY_REQUIRED; decomposition and numerical suppliers exist",
+    "input": "Same final K,T, ReferenceJets, spatial CurrentJets and actual sector/reference conditions.",
+    "steps": [
+      "Use n07a_geometryAtom_jet_decomposition and the reference/current spatial inequalities. Keep E0 powers explicitly instead of using the N07aSampleSubpower output, which would weaken the required E0 estimate.",
+      "For every finite prefix, combine all finitely many atom/order constants into A_N>=1 and E0 exponents into P_N. H(sample)^.75 is globally bounded by IsMaterialData with M exponent zero, yielding A_N E0(sample)^P_N (1+p_(N+ell)(z-ref)).",
+      "Recover physical/canonical derivatives from unit atoms by the exact affine formula. PhysicalLengthInverse and canonicalLengthInverse are reference zero-order atoms; their bounds have the same sample and no new chosen collar.",
+      "Lift admissible states through n07aSectorParameterOfState. Pair grading is exactly stateGrading plus the scalar absolute value, so no extra derivative loss is inserted."
+    ],
+    "refs": [
+      "current_decomposition",
+      "affine_jets",
+      "inverse_affine",
+      "sample_absorption",
+      "sector_parameters",
+      "target"
+    ]
+  },
+  "stage_B_one_low_neighborhood_shrink": {
+    "status": "NEW_NUMERICAL_ASSEMBLY_REQUIRED",
+    "goal": "Every current normalized radial chart atom differs from its reference value by at most 1/4 on its own fixed reference half.",
+    "calculation": "At s=0 the CurrentJets bound is B0 E_m^B0 H_m^.75 p_ell(z). material_sample_height_coefficient_power_bounded supplies D0 with E_m^B0 H_m^.75<=D0 uniformly in every sample. Choose newBase>=max(oldBase,ell) and epsilonNew<=min(oldEpsilon,1/(8*B0*D0)) (replace D0 by max(1,D0) if needed). Then p_ell(z)<=2 epsilonNew and the difference is <=1/4.",
+    "same_objects": "Use existing neighborhood restriction on the original witness/K. No new chart, positive-family width or reference normalization is selected.",
+    "all_orders": "This one shrink is independent of N. Higher state seminorms remain polynomial factors in materialJets rather than being assumed small.",
+    "refs": [
+      "sample_absorption",
+      "sector_parameters",
+      "target"
+    ]
+  },
+  "stage_C_actual_negative_cross_half": {
+    "status": "NEW_ACTUAL_ALGEBRA_AND_FINITE_JET_LEMMA_REQUIRED",
+    "scope": "Fix one original negative component, target side s, and actual x in its moving half but in the opposite fixed reference half. All root-coordinate identities below use the same actual travel width and the same corrected travel chart.",
+    "notation": {
+      "Tn": "C.travel component >0; this is a scalar, not the material record",
+      "rho": "n04bRootCutRadius Tn=(3*Tn/4)^(2/3)",
+      "u": "current opposite-side root radial coordinate divided by rho",
+      "v": "current target-side root radial coordinate divided by rho",
+      "J_s": "absolute planeJacobian of the actual stored target chart",
+      "H_s": "actual stored target height"
+    },
+    "range_proof": [
+      "Reference maps-to on the opposite fixed half gives 0<u_ref<1. Stage B gives u<=5/4.",
+      "Membership of the target moving half gives target oriented travel<Tn/2, hence opposite oriented travel>Tn/2 and u>=1.",
+      "The root-travel inverse identity gives v^(3/2)+u^(3/2)=2. For 1<=u<=5/4, u^(3/2)<=u^2<=25/16, hence v^(3/2)>=7/16.",
+      "Thus v=g(u)=(2-u^(3/2))^(2/3) lies in [(7/16)^(2/3),1]. All scalar conversion factors below are smooth on a fixed neighborhood of [1,5/4], uniformly in state, component, sample and rho."
+    ],
+    "literal_formulas_to_prove": [
+      "target chart = (rho*g(u), opposite chart angular coordinate). Both angular coordinates are the same travel angle; use its defect or positive jets, never bound the unwrapped angle at order zero.",
+      "H_target = H_opposite * (g(u)/u)^(1/4), and the reciprocal uses the reciprocal factor.",
+      "J_target = J_opposite * sqrt(u/g(u)); reciprocal J_target uses sqrt(g(u)/u). The root differential scale is signed +/-1/sqrt(root radial coordinate); its absolute value gives this ratio."
+    ],
+    "finite_estimate": "Apply finite product/composition jets to these fixed compact scalar functions and the opposite current atoms. The only component scales are rho and inverse physical affine widths, already reference atoms; higher bounds are polynomial in a finite current-atom prefix. Convert the original opposite sample cost to E0(x) with the actual full-negative-component sample comparison. No inverse qualitative localization radius, no whole-component common-cell assumption, and no replacement of the original half sample.",
+    "refs": [
+      "actual_germs",
+      "moving_domains",
+      "root_formula",
+      "root_scale",
+      "root_height",
+      "negative_samples",
+      "negative_atom_transport"
+    ],
+    "not_yet_checked_by_Lean": "The displayed dimensionless power identities, fixed compact range proof, and assembled all-order physical jet transfer are a proof plan, not existing public declarations. They require their own source review and CI."
+  },
+  "stage_D_fifteen_fields": {
+    "status": "NEW_FINITE_POLYNOMIAL_ASSEMBLY_REQUIRED",
+    "required_primitive_inputs": "Physical finite jets of current F,h,h^-1,J,J^-1 on the actual current piece (Stages A-C); positive jets of current/reference inverses on their fixed canonical strips; reference F/h/sourceFactor jets; true maps and inverse germs; sample-to-current-point E0 comparison; actual material-weight and radius jet estimates.",
+    "rows": [
+      {
+        "indices": "(i,0),(i,1), i=0,1,2: six fields",
+        "formula": "Y_i.1/ell and Y_i.2",
+        "construction": "Y_0(x)=DG_z(F_z x)(0,1). Y_1/2(x)=DG_z(F_z x) DF_ref(G_ref(F_z x)) e_1/2. These equal the literal canonicalPrimitiveDirection by the inverse derivative/chain identities. Use finite derivatives of derivatives plus composition; all angular inputs use positive map jets.",
+        "refs": [
+          "inverse_jacobian",
+          "primitive_geometry"
+        ]
+      },
+      {
+        "indices": "(i,2), i=0,1,2: three drift fields",
+        "formula": "- (Y_i.1 * partial_r Jmat + Y_i.2 * partial_theta Jmat)/(2*Jmat), Jmat=ell*J",
+        "construction": "Use one extra derivative of J, ell and the preceding directions, together with J^-1 and ell^-1. No derivative of a merely chosen inverse is assumed; current J^-1 is an actual atom extended in Stage C.",
+        "refs": [
+          "target",
+          "mixed_fd"
+        ]
+      },
+      {
+        "indices": "inr(inl 0,1,2): three initial factors",
+        "formula": "sqrt(ell*J)*(H(x)/H(sample))^.75 times h/J, h^-1, or h_ref(referencePoint x)/h_z(x)",
+        "construction": "Finite positive-power calculus uses value and reciprocal bounds for ell,J and the actual H-ratio. Real powers do not require E0>=1. The ratio is controlled at the original requested sample by actual sample comparison, and its physical jets follow materialHMWeight_rpow_physical_jet_bound.",
+        "refs": [
+          "target",
+          "physical_weight_powers",
+          "negative_samples",
+          "positive_samples"
+        ]
+      },
+      {
+        "indices": "inr(inr 0,1,2): three reference multipliers",
+        "formula": "SF_ref(F_z x) times w_prime(Rx.1), w(Rx.1), w_prime(Rx.1)/Rx.1, where R=G_ref compose F_z",
+        "construction": "Canonical reference sourceFactor is a reference atom. R maps the current point to the same fixed reference piece. w,w_prime and w_prime/r have uniformly bounded finite jets on the fixed closed annulus since D.a>0; no inverse w compactness is used.",
+        "refs": [
+          "target",
+          "primitive_geometry"
+        ]
+      }
+    ],
+    "weight_localization": "For negative pieces the existing negative sample comparison holds on the entire closed original negative component, including points on the moving half. Positive pieces use the same selected physical-midpoint sample and its one-sided sample-to-point comparison. All comparisons precede piece and point.",
+    "degree_order": "For a requested N a conservative source prefix such as N+2 suffices for derivative slots; select r_N as the maximum of the finitely many state orders used. Finite products and Faà di Bruno produce an explicit finite degree d_N. An exact optimal degree is unnecessary, but the Lean proof must not invoke a low-seminorm assumption whose order depends on N.",
+    "material_coordinate": "Use the globally bounded genuine T.radius jets. N07a material pullback formulas already prove the finite expansion for functions smooth on the whole annulus; here a local/open-piece variant is needed because the primitive field is only known smooth on its actual piece. The mathlib local composition formula and CylinderMixedJets give the same finite bound with no new point-dependent radius. Do not apply the global-annulus premise unproved.",
+    "refs": [
+      "primitive_geometry",
+      "radius_jets",
+      "material_pullback",
+      "mixed_fd"
+    ]
+  },
+  "stage_E_global_transport_low_jets": {
+    "status": "NEW_SHORT_ACTUAL_IDENTITY_AND_FINITE_ESTIMATE_ASSEMBLY_REQUIRED",
+    "does_not_require_stage_C": "The derivative estimate is on reference physical pieces, so every current inverse/source argument lies in the fixed canonical strip. No moving-physical-height estimate is needed.",
+    "notation": "For a reference physical p, y=F_ref(p), G_z=K.inverseChart z m, h_ref=K.height ref m, SF_z(y)=canonicalSource S K z m (fun _=>1) y.",
+    "identities": [
+      "tau(p)=G_z(F_ref(p)).",
+      "SF_z(y)=h_z(G_z y)*abs(det DG_z(y)), by canonicalClosed_inverse_planeJacobian and the actual canonicalSource definition.",
+      "q(p)=h_ref(p)*abs(det DG_z(F_ref p))*SF_z(F_ref p)^(-1)."
+    ],
+    "required_orders": "Reference chart/height jets through order2; current inverse positive jets through order3 (the determinant consumes one derivative); current sourceFactorInverse jets through order2; physical/canonical inverse-length reference zero-order bounds. All are among the same ReferenceJets/CurrentJets atoms. abs(det DG) is smooth locally because the true inverse Jacobian is nonzero; its jets have the fixed-sign determinant bound, with no reciprocal inverse-Jacobian cost.",
+    "bound": "Finite product/composition gives C E0(sample)^P (1+p_r(z))^d on each reference half. Actual negative/positive sample comparison changes this to C_prime E0(p.1)^A (1+p_r(z))^d. Fix z only now and absorb the finite state factor into C_z. IsMaterialData supplies E0^A<=C_A*M, so one may take M exponent1 after increasing C_z. Preserve the existing independent H/M ratio constants by a finite maximum.",
+    "globalization": "Reuse the already chosen global fields from WholeCanonicalGlobalRegularity and WholeReferenceGaugeGlobalTransport. On each open reference piece their jets agree by neighborhood equality; at artificial cuts and true roots pass the n<=2 bound by continuity of the global C3 jets from an adjacent piece. The E0 majorant is continuous and constants are uniform before the piece. No different global extension or component-dependent compact constant is selected.",
+    "refs": [
+      "inverse_jacobian",
+      "global_qualitative",
+      "global_gluing",
+      "global_ratios",
+      "negative_samples",
+      "positive_samples",
+      "material"
+    ]
+  },
+  "minimal_new_lemma_sequence": [
+    {
+      "proposed_name": "actual_current_atom_finite_prefix_and_low_radial_closeness",
+      "existing": false,
+      "input": "ReferenceJets plus spatial CurrentJets on the actual same atlas; same final material data",
+      "output": "Finite polynomial atom envelopes and a single common smaller neighborhood with normalized radial difference<=1/4",
+      "purpose": "Select low neighborhood once, independent of all requested N"
+    },
+    {
+      "proposed_name": "actual_negative_moving_half_physical_jets_from_fixed_halves",
+      "existing": false,
+      "input": "Same two actual root-chart germs, moving half membership and the preceding fixed-reference atom bounds",
+      "output": "Current F/h/hinv/J/Jinv finite jets on the actual moving half with pointwise E0 and state polynomial cost",
+      "purpose": "Resolve the precise domain mismatch using fixed compact dimensionless conversion; use one Bool proof"
+    },
+    {
+      "proposed_name": "canonicalPrimitiveField_finite_polynomial_envelope",
+      "existing": false,
+      "input": "Those literal primitive-function finite jets and true inverse/chain identities, actual same-sample comparisons",
+      "output": "All fifteen fields simultaneously on each actual open piece, then material-coordinate FD jets",
+      "purpose": "Finite calculus only; no final materialJets predicate is assumed"
+    },
+    {
+      "proposed_name": "actual_global_relative_low_jets_from_inverse_source_atoms",
+      "existing": false,
+      "input": "Actual same global qualitative fields, current inverse/sourceFactorInverse and reference atoms",
+      "output": "Actual q orders0..2/tau orders1..2 bounded by C_z*M^A uniformly on the annulus",
+      "purpose": "Use determinant/source cancellation and continuity to globalize"
+    },
+    {
+      "proposed_name": "actual_whole_reference_gauge_primitive_geometry",
+      "existing": false,
+      "input": "The preceding actual outputs plus existing global ratios and hfield",
+      "output": "CanonicalPrimitiveGeometry for the same atlas, followed by existing primitive normalization preservation",
+      "purpose": "Final record assembly with no relaxed statement"
+    }
+  ],
+  "alternative_direct_construction_route": {
+    "available": "Whole travel is the exact L.minusFlow/stateLeftChart construction, actual component germs cover the full negative component, positive angular/radial inverse-pullback material calculus exists, and root endpoint-only material estimates have explicit optical inputs.",
+    "precise_gap": "The current root material theorem bounds only actual root points, not a uniform material collar. The generic root/interior pointwise closures choose their coefficients after numerical lower intervals, and cannot convert arbitrary component-dependent choices into uniform E0 exponents without a separate explicit polynomial cost. Similarly, finite positive factory width inputs must be tied to the already selected current family, not reselected per order.",
+    "recommendation": "Complete the intended CurrentJets from actual flow/correction suppliers, then use the cross-half route above. It avoids a separate all-order current collar-width construction solely for CanonicalPrimitiveGeometry. If CurrentJets proof itself needs this cross-half bound, break that cycle by proving its physical atoms on fixed reference halves first; the conversion only uses that subcertificate, not the final PrimitiveGeometry target.",
+    "refs": [
+      "whole_travel",
+      "root_endpoint_only",
+      "positive_radial_closure",
+      "positive_angular_closure",
+      "old_chart_closure",
+      "finite_inverse"
+    ]
+  },
+  "noncircularity_and_limits": [
+    "N07bPrimitiveGeometrySource/Height/Reference and N07bReferencePrimitiveGrowth consume primitive estimates. They cannot serve as producers for this task.",
+    "ChartFieldsMaterialJets packages a different list of raw coefficient/chart primitives and has constants after arbitrary A and kappa; it is not the fifteen-field record and cannot hide a material-varying inverse kappa.",
+    "The negative reference215/321 and all positive reference atoms describe reference-state fixed domains; they are not current moving-domain jet bounds.",
+    "The actual global H/M ratio theorem is pointwise only. Its existing proof does not bound spatial derivatives of tau/q.",
+    "Reference/current input objects, T and sample indices remain exactly the same. All statements about cross-half formulas and finite closure not present in source are explicitly proposed and uncompiled.",
+    "No conclusion about SmoothDirections is obtained from these ordinary spatial estimates. This target only needs ordinary FD/material jets; the full CurrentJets state-directional tower remains a separate upstream obligation."
+  ],
+  "readonly_remote_search": {
+    "commit": "79300a205c79284707725e01fa2142a567dfd267",
+    "query": "git grep CanonicalPrimitiveGeometry or materialJets := under src/ContinuousFlexibility/Analysis",
+    "result": "Found restriction/projection/consumer uses, no named actual producer. Generic lemmas may exist under other names; no universal absence claim is made."
+  },
+  "sources": [
+    {
+      "id": "target",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "git_blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773,
+      "declarations": [
+        {
+          "name": "canonicalSource",
+          "line": 658
+        },
+        {
+          "name": "canonicalInverseAngularVector",
+          "line": 678
+        },
+        {
+          "name": "canonicalMaterialJacobian",
+          "line": 684
+        },
+        {
+          "name": "canonicalMaterialNormalizer",
+          "line": 693
+        },
+        {
+          "name": "canonicalReferencePoint",
+          "line": 700
+        },
+        {
+          "name": "canonicalCurrentPoint",
+          "line": 706
+        },
+        {
+          "name": "canonicalPrimitiveDirection",
+          "line": 726
+        },
+        {
+          "name": "canonicalPrimitiveField",
+          "line": 738
+        },
+        {
+          "name": "CanonicalPrimitiveGeometry",
+          "line": 765
+        },
+        {
+          "name": "ReferenceJets",
+          "line": 1099
+        },
+        {
+          "name": "CurrentJets",
+          "line": 1123
+        }
+      ]
+    },
+    {
+      "id": "whole_travel",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalNegativeTravelTransition.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "c88ff73384ba8360871e9b439f3d7c84985623763d8186441672b99c1e4df34b",
+      "git_blob": "e437ebd844869f8250ec6c4e58820461a9b968f5",
+      "lines": 185,
+      "declarations": [
+        {
+          "name": "n04CoordinatesNegativeTravelTransition",
+          "line": 23
+        },
+        {
+          "name": "n04CoordinatesNegativeTravelHeightRatio",
+          "line": 29
+        },
+        {
+          "name": "n04CoordinatesNegativeTravelTransition_smooth",
+          "line": 50
+        },
+        {
+          "name": "n04CoordinatesNegativeTravelTransition_mapsTo",
+          "line": 59
+        },
+        {
+          "name": "n04Coordinates_actualAtlas_currentPoint_eq_travel",
+          "line": 122
+        },
+        {
+          "name": "n04Coordinates_actualAtlas_height_ratio_eq_travel",
+          "line": 147
+        }
+      ]
+    },
+    {
+      "id": "whole_closed",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalWholeNegativeTransport.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "b904744b4a2ca98616fc0b1681fdd563be7471776ab8aadafbc063177aa71b3f",
+      "git_blob": "c432ff8163f525d6273ebb8e671426a92992eab5",
+      "lines": 188,
+      "declarations": [
+        {
+          "name": "canonicalWholeNegativeTransport_eq_travel",
+          "line": 98
+        },
+        {
+          "name": "canonicalWholeNegativeTransport_closed_regular",
+          "line": 123
+        }
+      ]
+    },
+    {
+      "id": "actual_germs",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasGerms.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "5abee83c1a68e2b04a6d733f7e51473a15453d5debda0e8526106462e3b4d73e",
+      "git_blob": "0bf89b2339f60ac8ba2cf9678637f4bf96830a66",
+      "lines": 94,
+      "declarations": [
+        {
+          "name": "n04bActualTypedAtlas_negative_component_germs",
+          "line": 32
+        },
+        {
+          "name": "n04bActualTypedAtlas_negative_inverse_germ",
+          "line": 57
+        }
+      ]
+    },
+    {
+      "id": "moving_domains",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bMovingDomains.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "1b1ef5879a6c998542dae46445f67ad062424dba87209db9f30aba88fdf2e120",
+      "git_blob": "035683f498f94545f3c53ae77bacb0ce86c8c4ba",
+      "lines": 353,
+      "declarations": [
+        {
+          "name": "n04bTravelHalfInterval",
+          "line": 107
+        },
+        {
+          "name": "n04bTravelHalfDomain",
+          "line": 112
+        }
+      ]
+    },
+    {
+      "id": "root_formula",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootTravelCharts.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "3d9439442dea831b5b918e47a2606e6e6460081be5e7b3e8beee0a2c052840a7",
+      "git_blob": "4c07f9e17218a4366860a3984a2e933033115a8b",
+      "lines": 146,
+      "declarations": [
+        {
+          "name": "n04bRootPhysicalChart",
+          "line": 67
+        },
+        {
+          "name": "n04bRootPhysicalInverse",
+          "line": 71
+        },
+        {
+          "name": "n04b_rootPhysical_chart_data",
+          "line": 84
+        }
+      ]
+    },
+    {
+      "id": "root_scale",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootTravelDifferential.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "dec3f7fdccef46e0d43db9eed699626ae5e6a8a7567b2b20fc3def18283413ed",
+      "git_blob": "bd67589bb9af176fa7c25f9c7b1664bd47ed6d1b",
+      "lines": 129,
+      "declarations": [
+        {
+          "name": "n04bRootDifferentialScale",
+          "line": 61
+        },
+        {
+          "name": "n04b_fderiv_rootPhysicalChart_apply",
+          "line": 74
+        },
+        {
+          "name": "n04bRootDifferentialScale_abs",
+          "line": 99
+        }
+      ]
+    },
+    {
+      "id": "root_height",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bConstructedRootDensity.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "b59f3fe82209f565c6470c3c666e24680a45964c598d76e344649e141ba58f4c",
+      "git_blob": "32bb22fc7e17a99cf7273062ef7045f7f56bd859",
+      "lines": 131,
+      "declarations": [
+        {
+          "name": "n04bRootPhysicalHeight",
+          "line": 23
+        },
+        {
+          "name": "n04bRootPhysicalHeight_pos",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "id": "cancellation",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalTravelTransitionAlgebra.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "8e08e0bb26dbc226ae0f3b6aebc1f25bbd24d957d709d5d35547a25732db5650",
+      "git_blob": "7699f897c024e1d9ec5b0fb7cf7299c698f88430",
+      "lines": 52,
+      "declarations": [
+        {
+          "name": "n04Coordinates_rootPhysical_transition",
+          "line": 20
+        },
+        {
+          "name": "n04Coordinates_rootPhysical_height_ratio",
+          "line": 35
+        }
+      ]
+    },
+    {
+      "id": "inverse_jacobian",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalClosedInverseJets.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "f47f1852c7b9358d2a65d7fcad9e70ad9712798ce4d314113d31e5ea0f7aa2a2",
+      "git_blob": "278df1dda278aadcc638141c9b1a98621e37c585",
+      "lines": 148,
+      "declarations": [
+        {
+          "name": "canonicalClosed_inverse_fderiv",
+          "line": 89
+        },
+        {
+          "name": "canonicalClosed_inverse_planeJacobian",
+          "line": 124
+        }
+      ]
+    },
+    {
+      "id": "primitive_geometry",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07bReferenceGeometry.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "5f57de34ba6b32f82254385ce8c3105cf2fe98a2dd9d676f1a5e2732620a4340",
+      "git_blob": "b4a4546928aab82b2f5eb9bf332fccc91f524ef4",
+      "lines": 200,
+      "declarations": [
+        {
+          "name": "n07b_canonicalReferencePoint_mapsTo",
+          "line": 38
+        },
+        {
+          "name": "n07b_canonicalCurrentPoint_referencePoint",
+          "line": 52
+        },
+        {
+          "name": "n07b_canonicalReferencePoint_contDiffOn",
+          "line": 71
+        },
+        {
+          "name": "n07b_canonicalCurrentPoint_contDiffOn",
+          "line": 78
+        },
+        {
+          "name": "n07b_canonicalReferenceHeightRatio_contDiffOn",
+          "line": 88
+        },
+        {
+          "name": "n07b_canonicalReferenceSourceFactor_contDiffOn",
+          "line": 99
+        },
+        {
+          "name": "n07b_canonicalReferenceDirection_contDiffOn",
+          "line": 113
+        },
+        {
+          "name": "n07b_canonicalPrimitiveField_direction",
+          "line": 168
+        },
+        {
+          "name": "n07b_canonicalPrimitiveField_source_initial",
+          "line": 177
+        },
+        {
+          "name": "n07b_canonicalPrimitiveField_height_initial",
+          "line": 182
+        },
+        {
+          "name": "n07b_canonicalPrimitiveField_reference_initial",
+          "line": 187
+        },
+        {
+          "name": "n07b_canonicalPrimitiveField_reference_multiplier",
+          "line": 192
+        }
+      ]
+    },
+    {
+      "id": "primitive_preservation",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalPrimitivePreservation.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "d30e0dde1407b59ea139014f5715d3cff6e08ef02218dfbf8d5714d1dfcd510d",
+      "git_blob": "9baf771b7e16079913a1e7f6acfa5e228ff8b063",
+      "lines": 51,
+      "declarations": [
+        {
+          "name": "n04Coordinates_primitiveGeometry_normalized",
+          "line": 20
+        },
+        {
+          "name": "n04Coordinates_physicalCoefficients_of_fieldRegularity",
+          "line": 31
+        }
+      ]
+    },
+    {
+      "id": "positive_domain",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N06CanonicalProperties.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "5100505136320d9247f4e70d3fb225bcf5ad42eb47a33a6cf8bed200ac44d89a",
+      "git_blob": "11e4941e86ceef5657e25ac4c5f89cc8974e7117",
+      "lines": 53,
+      "declarations": [
+        {
+          "name": "n06_positivePhysicalPiece_eq_reference",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "id": "current_decomposition",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aGeometryJetBounds.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "5eb75a3b06a90cf2611b95ca8ce9098ba95c057e7627a4bcf1a8d756bc02c498",
+      "git_blob": "e1e7c43bac69e82dbd72c609763521ad1472682b",
+      "lines": 119,
+      "declarations": [
+        {
+          "name": "n07a_geometryAtom_jet_decomposition",
+          "line": 50
+        },
+        {
+          "name": "n07a_geometryAtom_absolute_jet_bound",
+          "line": 78
+        }
+      ]
+    },
+    {
+      "id": "affine_jets",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "bbec6c5ccb9e0d9bcf75516b8c9024e4f15c2e834119822ace6da3c4e70fd51c",
+      "git_blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "lines": 128,
+      "declarations": [
+        {
+          "name": "n07a_mixedDerivative_radialAffine",
+          "line": 40
+        },
+        {
+          "name": "n07aCanonicalUnitInversePoint_maps",
+          "line": 53
+        },
+        {
+          "name": "n07aCanonicalUnitPoint_inverse",
+          "line": 65
+        }
+      ]
+    },
+    {
+      "id": "inverse_affine",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aGeometryLengthBounds.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "31f0cce08f7612f3fdee200cc3f077796510bd12534af8287a6b866ba0b2c47b",
+      "git_blob": "2c336c9315bc5aa70efc149544448e30a2be0967",
+      "lines": 89,
+      "declarations": [
+        {
+          "name": "n07aCanonicalUnit_jet_inverse",
+          "line": 70
+        }
+      ]
+    },
+    {
+      "id": "sample_absorption",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046",
+      "git_blob": "19becb59903b44c18c8f1afb72726b2f95952752",
+      "lines": 66,
+      "declarations": [
+        {
+          "name": "material_sample_height_coefficient_power_bounded",
+          "line": 59
+        }
+      ]
+    },
+    {
+      "id": "sector_parameters",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aScalarSolution.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "89bc0865e47eb789bc7ccf457ca841b403df0752e62b463a700cbd94c21209fe",
+      "git_blob": "a77ae6ed52b89b6c4edd7b2bc9521f9406889f52",
+      "lines": 183,
+      "declarations": [
+        {
+          "name": "n07aSectorParameterOfState",
+          "line": 43
+        },
+        {
+          "name": "lift_n07aSectorParameterOfState",
+          "line": 50
+        },
+        {
+          "name": "n07aSectorParameterOfState_mem",
+          "line": 60
+        }
+      ]
+    },
+    {
+      "id": "material",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "git_blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "lines": 603,
+      "declarations": [
+        {
+          "name": "IsMaterialData",
+          "line": 67
+        },
+        {
+          "name": "RadialMaterialExpansion",
+          "line": 57
+        }
+      ]
+    },
+    {
+      "id": "radius_jets",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Scalar/WeightedMaterialRadiusJets.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "f7e5e778262df0a7503e16d8c62d3edb69940f0bfe517cca2bfaafd2f4d3cb6f",
+      "git_blob": "ae2caa0785c0314311e671084dd40f4e312d4442",
+      "lines": 163,
+      "declarations": [
+        {
+          "name": "materialEll_bounded",
+          "line": 32
+        },
+        {
+          "name": "iteratedDeriv_materialEll_bounded",
+          "line": 56
+        },
+        {
+          "name": "iteratedDeriv_materialRadius_bounded",
+          "line": 80
+        }
+      ]
+    },
+    {
+      "id": "material_pullback",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aMaterialPullbackJets.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "44867b7d37f5d7a5b7e23052ad386f56e597b035b51da1a5522844f017765217",
+      "git_blob": "3162470bd6b9ac60c8abb8ce498955f590bf9cf9",
+      "lines": 99,
+      "declarations": [
+        {
+          "name": "n07aRadiusJetCoefficient_bounded",
+          "line": 41
+        },
+        {
+          "name": "n07a_materialPullback_zero_mixedDerivative",
+          "line": 53
+        },
+        {
+          "name": "n07a_materialPullback_zero_mixedDerivative_bound",
+          "line": 80
+        }
+      ]
+    },
+    {
+      "id": "mixed_fd",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CylinderMixedJets.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "ae19c58f66f0778411f64607f52acf0525aceb27036c9d1ac1825e0e46e3614d",
+      "git_blob": "3dc20e779221e16f9be32dff13d22e978b5a048d",
+      "lines": 253,
+      "declarations": [
+        {
+          "name": "contDiffOn_mixedDerivative",
+          "line": 101
+        },
+        {
+          "name": "mixedDerivative_radialPartial",
+          "line": 123
+        },
+        {
+          "name": "mixedDerivative_angularPartial",
+          "line": 131
+        },
+        {
+          "name": "norm_iteratedFDeriv_le_of_mixedDerivative",
+          "line": 208
+        }
+      ]
+    },
+    {
+      "id": "old_chart_closure",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ChartFieldsMaterialJets.lean",
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "sha256": "c1f4b6c506152cab1744ab95698d85c905506fe1cac62c7e22c156786283ccdc",
+      "git_blob": "160bd09e8a5d94cd8d6e3e5097c631f8242d489f",
+      "lines": 166,
+      "declarations": [
+        {
+          "name": "chartFields_from_positiveJets_fixed_loss_bound",
+          "line": 33
+        }
+      ]
+    },
+    {
+      "id": "whole_record",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "commit": null,
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "git_blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131,
+      "declarations": [
+        {
+          "name": "n04WholeReferenceGaugeAtlasData",
+          "line": 21
+        },
+        {
+          "name": "n04WholeReferenceGaugeAtlasData_negative_fields",
+          "line": 82
+        },
+        {
+          "name": "n04WholeReferenceGaugeAtlasData_positive_fields",
+          "line": 96
+        }
+      ]
+    },
+    {
+      "id": "whole_relative",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeRelativeFields.lean",
+      "commit": null,
+      "sha256": "4b34db7f7514160c2f86a8fe0ecb0c8d0a653ea4c1a4bdfc34b27ef862319dec",
+      "git_blob": "ba1d43881f06ffb76d0d658ed762dd435a668d0b",
+      "lines": 101,
+      "declarations": [
+        {
+          "name": "n04WholeReferenceGaugeAtlasData_positive_relative_fields",
+          "line": 45
+        },
+        {
+          "name": "n04WholeReferenceGaugeAtlasData_negative_relative_fields",
+          "line": 81
+        }
+      ]
+    },
+    {
+      "id": "negative_atom_transport",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeNegativeAtomTransport.lean",
+      "commit": null,
+      "sha256": "e79db2343fd6934f29ace44a13f3906346c712f241f191f87d5fa7c0d603a8ad",
+      "git_blob": "1cdaaae680c7761e79e670aa79e5eb033f9384fa",
+      "lines": 60,
+      "declarations": [
+        {
+          "name": "n04WholeReferenceGaugeAtlasData_negative_atom",
+          "line": 22
+        }
+      ]
+    },
+    {
+      "id": "global_qualitative",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeGlobalTransport.lean",
+      "commit": null,
+      "sha256": "17179bac21aa6863d3a35ec282d4e0420ca30d6444312149df3d06d78eae5f23",
+      "git_blob": "9dd60b6e07fff54af9c9212383f8fddaa9eb3fdb",
+      "lines": 97,
+      "declarations": [
+        {
+          "name": "n04WholeReferenceGaugeAtlasData_global_transport",
+          "line": 66
+        }
+      ]
+    },
+    {
+      "id": "global_gluing",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalGlobalRegularity.lean",
+      "commit": null,
+      "sha256": "ba6f284df91e959724ac50d3ee1a11703b697bd76a11d5ad78aa5b1a12fe4513",
+      "git_blob": "4ee5e602015799f1e34226f8f15967639f6fa08c",
+      "lines": 103,
+      "declarations": [
+        {
+          "name": "n04WholeCanonical_global_relative_regular",
+          "line": 28
+        }
+      ]
+    },
+    {
+      "id": "global_ratios",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeMaterialTransport.lean",
+      "commit": null,
+      "sha256": "4765d34487d0828022e12bf46e01c08e8127aaa4e471892761f8130150bdebe1",
+      "git_blob": "edb6abfe9612bec41103692884bd193734ed138d",
+      "lines": 190,
+      "declarations": [
+        {
+          "name": "n04WholeReferenceGauge_global_material_transport",
+          "line": 26
+        }
+      ]
+    },
+    {
+      "id": "negative_samples",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeMaterialSamples.lean",
+      "commit": null,
+      "sha256": "696583df4d5261aff78e5a6cc32ff4fde06ea6d17b2bdf2745805fde0a06c2fc",
+      "git_blob": "2546c07212cf569a225e873eb38945a9cb4127e3",
+      "lines": 131,
+      "declarations": [
+        {
+          "name": "n04bActualTypedAtlas_negative_sample_endpointX",
+          "line": 32
+        },
+        {
+          "name": "n04bActualTypedAtlas_negative_material_sample_weights",
+          "line": 81
+        },
+        {
+          "name": "n04bActualTypedAtlas_negative_material_sample_comparison",
+          "line": 106
+        }
+      ]
+    },
+    {
+      "id": "positive_samples",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentMaterialCell.lean",
+      "commit": null,
+      "sha256": "5f21c6b32b0c9241fb560d286690cb93199e0365a9d1314af1c8daab943f4368",
+      "git_blob": "9bd8135577563874f4fa614e1af047afd9982d94",
+      "lines": 131,
+      "declarations": [
+        {
+          "name": "exists_wholePositive_midpoint_material_cells",
+          "line": 66
+        }
+      ]
+    },
+    {
+      "id": "physical_weight_powers",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialWeightPhysicalPowerJets.lean",
+      "commit": null,
+      "sha256": "84221698a4955d9d8e67459769e5289336b341f5353807cd59195895c45af3f9",
+      "git_blob": "645be57c4bd2a556e7ff74d0d2dfb9449f2d8dcc",
+      "lines": 89,
+      "declarations": [
+        {
+          "name": "materialHMWeight_rpow_physical_jet_bound",
+          "line": 41
+        }
+      ]
+    },
+    {
+      "id": "root_endpoint_only",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03RootEndpointMaterialJets.lean",
+      "commit": null,
+      "sha256": "dcdb96e62937189c4e819ec7c9d9055f6629b1b329e69721b4be5100a5358001",
+      "git_blob": "67909442f863f93ac90079022eeb473feee7e722",
+      "lines": 202,
+      "declarations": [
+        {
+          "name": "n04b_actual_root_material_jets_of_component_optical",
+          "line": 51
+        }
+      ]
+    },
+    {
+      "id": "positive_radial_closure",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberPullbackMaterialJets.lean",
+      "commit": null,
+      "sha256": "a49fe5226bafabbeb494adf0fafa5ef2efabfdb226f08620004c7c8f9ecec405",
+      "git_blob": "04250c019b3bb5a3e4b702371621e78d87362cef",
+      "lines": 152,
+      "declarations": [
+        {
+          "name": "endpointFiberPullback_displacementJets_le_material",
+          "line": 26
+        }
+      ]
+    },
+    {
+      "id": "positive_angular_closure",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/angular-material-positive-coefficient/AngularFiberMaterialJetBounds.lean",
+      "commit": null,
+      "sha256": "a36e69a058a8763a6be6a79aee40c460a943e7b3c28fe7ae78a98349f6232a3e",
+      "git_blob": "7f144f0f140ffae830fac923078ace53320a16d5",
+      "lines": 222,
+      "declarations": [
+        {
+          "name": "angularFiberPullback_positiveJets_le_material",
+          "line": 58
+        }
+      ]
+    },
+    {
+      "id": "finite_inverse",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteInversePolynomialEnvelope.lean",
+      "commit": null,
+      "sha256": "d73838d259228ff320f106fc1e1439d76ba15178b2146f54ab5ec4009edeea7e",
+      "git_blob": "e229f50f114442e4b07e1682c4693ac0ad8b4724",
+      "lines": 117,
+      "declarations": [
+        {
+          "name": "exists_nonlinearInverse_finiteJet_polynomial_envelope",
+          "line": 71
+        }
+      ]
+    }
+  ]
+}

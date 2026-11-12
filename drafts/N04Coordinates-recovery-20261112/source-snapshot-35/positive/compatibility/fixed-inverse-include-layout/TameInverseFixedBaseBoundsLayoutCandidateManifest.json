@@ -1,0 +1,56 @@
+{
+  "schema": "n04-layout-supersession-candidate-v1",
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED_PENDING_LAYOUT_PEER",
+  "owner": "/root/proof_inventory",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-include-layout/TameInverseFixedBaseBounds.lean",
+    "bytes": 18485,
+    "lines": 349,
+    "sha256": "7e79129c9a9df8e2d74c353106685db461089a05ec1141f333211d5a257c6aac",
+    "git_blob": "45fae56b12e755379fcf3e4aa3e211ba0cfe9c7a",
+    "eof_lf": true
+  },
+  "supersedes": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.lean",
+    "sha256": "5e099aae8613c8f52bfefb6caf3e952e8153a1e95f8f34cadb7cf222fdb89864",
+    "blob": "708038714ee89624264cb7f7d3ddb0c9f9720124",
+    "lines": 349
+  },
+  "finding": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/TameInverseFixedBaseBoundsLayoutFinding.json",
+    "sha256": "6f138f867d0924066aa9e6ca289d1e7db5f83711f0625dd8b3faf770230e239b"
+  },
+  "prior_full_source_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/TameInverseFixedBaseBoundsIndependentReview.json",
+    "sha256": "bdb98adabaa5cc1414614f4b2af5ac137a62e4981bef7704c4d8ff341899caf2",
+    "blob": "706ce6315030904ddda7d96d0c9a6c14c6fd8cc5",
+    "lines": 67
+  },
+  "prior_owner_historical_only": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBoundsReviewedManifest.json",
+    "sha256": "258b8ceedf552222afc9233e0daf79a46fef6c9dbcdd229f916ec4bcebee62d5",
+    "blob": "652e93b3eeb709efc6bc7ef1125aff98ccc2150a",
+    "lines": 91
+  },
+  "minimal_repair": {
+    "before": "/-- A single low base controls every order of the same inverse tower.\nThe two inputs are value estimates for the inverse operator and for the\nactual ordered forward jets, not estimates for the desired inverse jets. -/\ninclude hq hV hF in\ntheorem inverseFamilySmoothDirections_fixedBase_oneHigh",
+    "after": "include hq hV hF in\n/-- A single low base controls every order of the same inverse tower.\nThe two inputs are value estimates for the inverse operator and for the\nactual ordered forward jets, not estimates for the desired inverse jets. -/\ntheorem inverseFamilySmoothDirections_fixedBase_oneHigh",
+    "expected_source_sha256": "7e79129c9a9df8e2d74c353106685db461089a05ec1141f333211d5a257c6aac",
+    "expected_source_blob": "45fae56b12e755379fcf3e4aa3e211ba0cfe9c7a",
+    "lines_unchanged": 349,
+    "all_other_bytes_unchanged": true
+  },
+  "exact_diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-include-layout/TameInverseFixedBaseBounds.diff",
+    "sha256": "ce20a684086f88a325c88ea48f892d833686d94e3b056f693a4d04a0e65170d6"
+  },
+  "preserved": {
+    "all_other_bytes": true,
+    "all_imports_options_public_headers_and_proofs": true,
+    "old_frozen_source_and_reviews": true
+  },
+  "authorization": "Root confirmed backup34 compiled-identical dedup and authorized one349-line layout supersession, then at most900 additional Lean lines including repairs. This source consumes349; no source of the following900 allocation written yet.",
+  "scope": "Prior mathematical full-source review retained; parser readiness of old708038 withdrawn by the attached finding. This candidate fixes only declaration documentation/include layout and needs independent delta peer.",
+  "no_local_lean_or_elaboration": true,
+  "no_active_source_index_refs_ci_changed": true
+}

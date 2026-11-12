@@ -1,0 +1,48 @@
+{
+  "schema": "n04-reviewed-source-selection-v1",
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-include-layout/TameInverseFixedBaseBounds.lean",
+    "bytes": 18485,
+    "lines": 349,
+    "sha256": "7e79129c9a9df8e2d74c353106685db461089a05ec1141f333211d5a257c6aac",
+    "git_blob": "45fae56b12e755379fcf3e4aa3e211ba0cfe9c7a",
+    "eof_lf": true
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-include-layout/TameInverseFixedBaseBoundsLayoutCandidateManifest.json",
+    "sha256": "fdbf7419912cf68d79881a4370e61f9319f446a674d981fc3311a07ca4d3803a",
+    "git_blob": "826dc431f2b598fcddfa2e2077b36cf53ffd1d84"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/TameInverseFixedBaseBoundsLayoutIndependentReview.json",
+    "sha256": "e495db63886b79a9227152621fc797ee2e860d8a94f55924c4a96459ae3f9aab",
+    "git_blob": "d065e3d0d43274c629bc3fa2e7f14b808f124e19"
+  },
+  "selection": "Select this exact supersession; preserve earlier source and metadata as historical.",
+  "scope": "Complete final349 source read, exact one-block layout verification, all headers/proofs/providers unchanged, and binding of the prior full mathematical review. This is the independent parser-layout supersession peer; no new hV/hF theorem is assumed proved here.",
+  "compiled": false,
+  "no_active_source_index_refs_or_ci_changed": true,
+  "prior_full_mathematical_source_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/TameInverseFixedBaseBoundsIndependentReview.json",
+    "sha256": "bdb98adabaa5cc1414614f4b2af5ac137a62e4981bef7704c4d8ff341899caf2",
+    "blob": "706ce6315030904ddda7d96d0c9a6c14c6fd8cc5",
+    "lines": 67,
+    "bytes": 4530
+  },
+  "readiness_superseding_finding": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/TameInverseFixedBaseBoundsLayoutFinding.json",
+    "sha256": "6f138f867d0924066aa9e6ca289d1e7db5f83711f0625dd8b3faf770230e239b",
+    "blob": "25a8f7a7dc34b6ad9e2b4d2d4277748b27ad37fb",
+    "lines": 38,
+    "bytes": 3041
+  },
+  "historical_owner_readiness_withdrawn": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBoundsReviewedManifest.json",
+    "sha256": "258b8ceedf552222afc9233e0daf79a46fef6c9dbcdd229f916ec4bcebee62d5",
+    "blob": "652e93b3eeb709efc6bc7ef1125aff98ccc2150a",
+    "lines": 91,
+    "bytes": 4618
+  }
+}

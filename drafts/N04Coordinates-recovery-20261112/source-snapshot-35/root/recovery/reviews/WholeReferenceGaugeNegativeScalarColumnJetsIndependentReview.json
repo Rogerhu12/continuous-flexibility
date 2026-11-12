@@ -1,0 +1,140 @@
+{
+  "kind": "same_actual_whole_negative_scalar_columns_independent_full_review",
+  "reviewer": "/root",
+  "result": "FULL_SOURCE_AND_EXACT_PROVIDER_REVIEW_PASSED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeScalarColumnJets.lean",
+    "sha256": "0962726e582a33ac93e67b422f5ad36b1ee587acf5502fd081fb8dc013508186",
+    "blob": "c878dca87fbddbd6ac23d406a3c4d202096c8bd6",
+    "lines": 140,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeNegativeScalarColumnJets.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeScalarColumnJetsCandidateManifest.json",
+    "sha256": "c728fb77508b2f4ff545eb1e516cd90e43ba15b2d9fbae2a220f1518ac3e5173",
+    "blob": "18a6d8060ec8c04bb87884572a6ed9feb149f590",
+    "lines": 159
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualNegativeReferenceScalarSourceData.lean",
+      "sha256": "dcd9c44b21cf5f415f2f86491ddaf806782120d61ea8869db3f5a1c2e778a4cb",
+      "blob": "5c19660b736e579346f659994fc21142bf5241fe",
+      "lines": 210
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceScalarColumnMaterialJets.lean",
+      "sha256": "6de669a7ac170b19818a1d0778c27f1577fdbcaf70f6adf30c9a0158128e071b",
+      "blob": "c2275dd042ab2a6768f6379c55da5e03a1c85d89",
+      "lines": 104
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeNegativeAtomTransport.lean",
+      "sha256": "e79db2343fd6934f29ace44a13f3906346c712f241f191f87d5fa7c0d603a8ad",
+      "blob": "1cdaaae680c7761e79e670aa79e5eb033f9384fa",
+      "lines": 60
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalAuxiliaryAtomPreservation.lean",
+      "sha256": "c6aa5aeb70d35e64d328b6830ac462b63287ad5b3dd1c0f7e2ce0718b859a957",
+      "blob": "5090df125dd2c756ed0a4554caf9482ff6665cbe",
+      "lines": 68
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "lines": 311
+    }
+  ],
+  "provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualNegativeReferenceScalarSourceDataReviewedManifest.json",
+      "sha256": "8f9693a3a9a8ae4a8ff6e8656ead40133f444ffde66178151b69adcb4a656c4b",
+      "blob": "bf9867165928e1a46c6932c1411572bb9ac4c689",
+      "lines": 75
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceScalarColumnMaterialJetsReviewedManifest.json",
+      "sha256": "fd1e7d0da381023550b612fe2f6c1240db57ecb729f1bca71d10bcd7d026e78e",
+      "blob": "79817082044105aee55d64879425916e85a71612",
+      "lines": 40
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeNegativeAtomTransportReviewedManifest.json",
+      "sha256": "baf710184596c3759c7351479fa34daedee53ea5e13e540c85012429e6cfd38f",
+      "blob": "07dce6b0f96cf8def2e3adeb1129804369af9f8b",
+      "lines": 51
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeAuxiliaryPackageReviewedManifest.json",
+      "sha256": "0f257e3d9f2f62c70ffc6f6c2847caba776ea815464a185453ffd460a79a3e3a",
+      "blob": "50f3da5361605234e08480c84c30c57f0839af00",
+      "lines": 107
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/N01ParameterOrderCorePortsReviewedManifest.json",
+      "sha256": "fb5f2f94e949515723cba8bd40549e47461693b8ae613313f568d5cf0c1aee18",
+      "blob": "8c880f0446ec9edb494782270177407dac82a580",
+      "lines": 74
+    }
+  ],
+  "pinned_installed_providers": [
+    {
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+      "sha256": "166d48b590552637d5efedb29ce0b19d5963d02f33e7caebffe44a04b576fdf4",
+      "blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "lines": 142,
+      "current_worktree_bytes_equal": true
+    },
+    {
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean",
+      "sha256": "91687b630205a380f137dcdb4cb32068d79582e09d17d4a4cd14317e21b9e19f",
+      "blob": "334d3c0c19727465e3afc75f988c79df1b8d7b8a",
+      "lines": 111,
+      "current_worktree_bytes_equal": true
+    },
+    {
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/N04SignedPieces.lean",
+      "sha256": "9c19e2b88f5ce7b5e93a41aa13575c440677ebc8c20b68808b6ac48809cc8a00",
+      "blob": "cdc180b7d11337446407047fb5f88d9c1b26bd0c",
+      "lines": 220,
+      "current_worktree_bytes_equal": true
+    },
+    {
+      "commit": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773,
+      "current_worktree_bytes_equal": true
+    }
+  ],
+  "actual_head_at_review": "c796387fb555392501c81f5b8bd834936251516c",
+  "checks": [
+    "Read the complete140 candidate, complete210 scalar-source data, complete104 scalar-column bound, complete60 all-atom transport, complete68 enlargement identity, complete131 whole-atlas record and exact typed-atlas/cutPair/positive definitions. Checked the current311 envelope pack and enlargement contracts. All17 manifest source/provider/owner/pin/route identities were independently rehashed; all claimed active-equality pins match.",
+    "The classical split is on one proposition using only the fixed D,T,C,K0. In the true branch the same actual X,F and original atlas are chosen before every spatial order; the false branch discharges the later identical optical proof by contradiction. Thus BM legitimately precedes all whole-atlas data and its later proof argument, without a uniform estimate being assumed.",
+    "The210 output supplies ContDiffOn of the literal X/F, their core range, full-angle inverse and source-factor identities, and finite F derivatives from0 plus X derivatives from1. These are exactly the104 inputs. hcolumnsK uses the original piece=e0.symm(inl j), not an alternate inverse or representative.",
+    "The Bool cutPair proof identifies the copied negative k with that exact piece. The original typed-positive field is false, discharging the explicit necessary premise of root60. The sixth field of the131 tuple is V.cell=K.cell k; the projection and its rewriting direction are correct.",
+    "The full-function identity first transports U-atoms from V to the same K, then replaces only enlarged E0 by original T for left/nu. Neither atom reads E0. Regularity, period and every mixed derivative are rewritten by this same equality; the two ratioE0 atoms are excluded explicitly.",
+    "The same original sample appears in W=C0*T.E0 and in the final enlarged sample. W>=1 is proved by210, U.E0>=1 by actual material enlargement, and W<=C0*U.E0 by positivity of C0. Real-power monotonicity, multiplicative splitting, and coefficientEnvelope_pack keep all constants independent of piece and atom.",
+    "Checked all type-level reference-state, material, space, geometry and correction arguments against actual definitions. No new atlas, optical-host identification, endpoint radius, final target estimate, changed loss or resource setting is introduced. Public name appears only in the intended held candidate and root downstream use."
+  ],
+  "scope_limits": [
+    "This covers only the two reference scalar columns; no CurrentJets or primitive material certificate is asserted.",
+    "Referenced route JSON identity was verified for preservation only; this peer does not certify its proposed unproved lemmas.",
+    "Source and selected dependency DAG are held and uncompiled. No local Lean, CI query/download, active source/index/ref/CP mutation was used for this review."
+  ],
+  "compiled": false,
+  "source_modified": false,
+  "created_at_utc": "2026-11-12T19:15:28.298816+00:00"
+}

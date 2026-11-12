@@ -1,0 +1,61 @@
+{
+  "snapshot": 35,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "parent": "9f11634c5091a3fd5901bc11b2bfb7971f8e7122",
+  "additional_parents": [
+    "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67"
+  ],
+  "base_tree": "815e9297db69b6db9adb1be81538dba567acc933",
+  "compiled_tree": "64a18c3f510156a0386b5601f7c26fe575e6f958",
+  "preserved_archive_tree": "b1d3fe6993d94b51340776e8855010127fec5959",
+  "compiled_tree_refresh": "Use exact complete-green repository bytes while grafting the full previous archive subtree unchanged; source preservation is not compilation.",
+  "compiled_baseline": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+  "line_head": "c796387fb555392501c81f5b8bd834936251516c",
+  "line_tree": "08257c9406671ac1f094b739e4971c1eca108c66",
+  "frozen_at": "2026-11-12T19:24:37.630449+00:00",
+  "indexed_files": 2919,
+  "new_sources": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-include-layout/TameInverseFixedBaseBounds.lean",
+      "sha256": "7e79129c9a9df8e2d74c353106685db461089a05ec1141f333211d5a257c6aac",
+      "lines": 349
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CirclePositiveInverseFixedBaseBounds.lean",
+      "sha256": "435088fc0bad2d63d09101dfcb8a2629cc24e5437f855867e41cac8368b2eb64",
+      "lines": 301
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeReferenceRegularity.lean",
+      "sha256": "fe580d742f806bef92bc561c3b39440d9ce69c9d74ab677a6a8d6b50576ffbf4",
+      "lines": 235
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugeNegativeScalarColumnJets.lean",
+      "sha256": "0962726e582a33ac93e67b422f5ad36b1ee587acf5502fd081fb8dc013508186",
+      "lines": 140
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualWholeReferenceJets.lean",
+      "sha256": "18cd7ce0a25f111952bab72d8dd3c346997a5911921a8eff8002a6eb92d87a78",
+      "lines": 151
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualWholeReferenceNonAuxiliaryJets.lean",
+      "sha256": "358d4e8fe47e1e83605184fe137d58f0045a1313923d3c30453b4ebb464c008e",
+      "lines": 294
+    }
+  ],
+  "new_source_lines": 1470,
+  "existing_added_lean_from_compiled_baseline163": 15482,
+  "removed_redundant_compiled_archives": [],
+  "removed_compiled_copy_lines": 0,
+  "compiled_dedup_note": "No archive copies are removed in this snapshot. Snapshot34 already redirected the independently verified compiled duplicates to exact CI163 commit/path references. Every uncompiled source and historical version remains preserved.",
+  "projected_added_lean_from_compiled_baseline163": 16952,
+  "line_count_method": "Conservative git diff --numstat --no-renames over every Lean file. Content similarity or move detection gives no reduction in the hard source budget.",
+  "compressed_diagnostics": [],
+  "compression_note": "Lossless gzip for large JSON diagnostics; original source SHA256 and restore behavior preserved. Lean sources remain uncompressed. Binary gzip copies are also preserved exactly.",
+  "prior_versions": "All historical source versions remain immutable and reachable through the backup parent and exact SOURCE-INDEX locations.",
+  "status": "Source preservation only; outside src, no CI activation or completion claim.",
+  "entries": 51
+}

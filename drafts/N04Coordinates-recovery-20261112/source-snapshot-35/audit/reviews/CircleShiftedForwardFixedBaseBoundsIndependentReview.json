@@ -1,0 +1,173 @@
+{
+  "kind": "full_source_and_exact_application_lemma_supersession_independent_review",
+  "reviewer": "/root/audit_coordinates",
+  "status": "PASSED_FULL_SOURCE_STATIC_REVIEW_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/circle-forward-source-apply/CircleShiftedForwardFixedBaseBounds.lean",
+    "sha256": "4c3c07d97d9b4ad03cbb16f4b9b1829eabacdbeb1c012dee3733958f32ac1941",
+    "blob": "4ea70ab43fc1fa6e51ddcfa3849f97580bf02235",
+    "lines": 159,
+    "bytes": 8240
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/circle-forward-source-apply/CircleShiftedForwardFixedBaseBoundsApplyCandidateManifest.json",
+    "sha256": "d5785a5b9d767a5bb5cd6cb899428d2173ed5041b904ce19163434ceb9431e4d",
+    "blob": "d2333910d7e4ca1aa9316cab49127861eb601236",
+    "lines": 116,
+    "bytes": 7121
+  },
+  "preserved_original_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CircleShiftedForwardFixedBaseBounds.lean",
+    "sha256": "c1b41d4794c898a89f78b1bd0eeaaee62889caf75bb9ae6639e81bd8867ae0a3",
+    "blob": "13cf8216a32a9fdd1d8db9d80c765c08c70eb2b5",
+    "lines": 159,
+    "bytes": 8219
+  },
+  "preserved_original_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CircleShiftedForwardFixedBaseBoundsCandidateManifest.json",
+    "sha256": "7d91465074aa92275612fe8b03e0b93b6f0eca3f14dbc16cd5f9f2656c3232c3",
+    "blob": "1e7590aa8c0cfae8f6e1d68443b9854f7d0cd2a0",
+    "lines": 100,
+    "bytes": 7403
+  },
+  "pins": {
+    "active": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+    "main_read_only": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+    "external_circle_objects": "c5c48d262157a11a76604113c40d2438d480433f",
+    "mathlib": "c55e6e786f49471c72fbddbec5415808896aec1e"
+  },
+  "pin_policy": "All provider reads use the stated immutable Git objects. Subsequent active batch2 changes are not silently substituted.",
+  "scope": "Actual shifted forward ordered jets of the given genuine J and a homogeneous source-linear bound with one low base before every parameter/spatial order and travel. This is the actual hF supplier only.",
+  "exact_delta": {
+    "one_occurrence": true,
+    "before": "    change inverseForwardJetLinear J n e v (w 0) = _\n    exact inverseForwardJetLinear_apply J n e v (w 0)",
+    "after": "    simpa only [A, ContinuousMultilinearMap.ofSubsingleton_apply_apply] using\n      inverseForwardJetLinear_apply J n e v (w 0)",
+    "forward_and_reverse_literal_reconstruction_verified": true,
+    "public_headers_imports_options_and_all_other_bytes_identical": true,
+    "reason": "Use the pinned mathlib generated application lemma instead of definitional change through ofSubsingleton, as required by main AGENTS.md."
+  },
+  "direct_providers_verified": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseExpressions.lean",
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "origin": "active",
+      "blob": "14ad46cae7d92dca46f5efd006f5260873046713",
+      "sha256": "5f19c405b830b56e9ad43319b2e9b306af3a27d840167fc29d592e9b9edaec56",
+      "lines": 490
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CoupledCircleCompositionCurveDerivative.lean",
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "origin": "active",
+      "blob": "8ea11ac34960b5ebec1df0085ef1237cda8a8a56",
+      "sha256": "c66b2304951e6d0e2e94b9d83e289447032aa34deed51b27edd537815647980c",
+      "lines": 166
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleTranslationUniformBounds.lean",
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "origin": "c5",
+      "blob": "29683e9c974fecbcd03fef36251ebb8b0061c485",
+      "sha256": "7ef561296693115b33d9daa18e66efb1778b028ac5d558696449a73af322b79f",
+      "lines": 144
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameMultilinearNormalization.lean",
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "origin": "active",
+      "blob": "04e7e732ab5f0d16ba232b561bd612f93dff4c51",
+      "sha256": "1f6c08d38555fdb2135b8622216b86cb0aa89ab367c5fe2443854f5e079b361d",
+      "lines": 185
+    }
+  ],
+  "additional_used_provider_fingerprints": [
+    {
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/CoupledCircleCompositionRealization.lean",
+      "sha256": "08ae5c8b3e993e1db595d5a4ee79e5711910bfac1f89a7871d7a42ced29223f0",
+      "blob": "c0b4ada33ad03e522aed5a3a52d8ef461bec9be3",
+      "lines": 151
+    },
+    {
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/CoupledCircleCompositionKernels.lean",
+      "sha256": "58c16923546ad83f8bc2dffb465f75a483e271f5efc763d683bba50c630ebf1c",
+      "blob": "f50299408fad51d50612b6222f1cf8cca9fcc84b",
+      "lines": 134
+    },
+    {
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/CoupledCircleCompositionTermBounds.lean",
+      "sha256": "1ce1e2445bbeb05ddffa346a1ab35e35739d0d326537e3484ee1477bc69ec7a9",
+      "blob": "4f967585624ebde934d174ae304a62b93d5d20b0",
+      "lines": 172
+    },
+    {
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/CoupledCircleCompositionJetBounds.lean",
+      "sha256": "30bca6f872d5ec88a5653cee5f3485a8a5a2d544b3cb2bffff686e891fc9dcc0",
+      "blob": "e1c5a8aead00ed031a1ff7ac9da3dcfcd530d91d",
+      "lines": 221
+    },
+    {
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/SpacesInterpolationProducts.lean",
+      "sha256": "302248ce14c8d3ef488a6a46d8cb80cb72b374f89da308baac7012fa92f8fd58",
+      "blob": "bef566d963e0bafb656cca8fb64d118d2c396162",
+      "lines": 212
+    },
+    {
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/ProjectiveJets.lean",
+      "sha256": "2411247d23d436966563315406fc15b2bf2c3a2340c3b77a94a0391db66b8e0b",
+      "blob": "b7ada8e57f9f58fa568762693eaded6538708e6e",
+      "lines": 352
+    },
+    {
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "path": "src/ContinuousFlexibility/Analysis/ProjectiveDifferential.lean",
+      "sha256": "0ed62c54e8cf1e36f906368c47e79e6aef089ad2e439e1bb44ff99a36fd3e7a3",
+      "blob": "a6290d8207dc1171bd6b4aa1a4d60b512e9c35b4",
+      "lines": 289
+    }
+  ],
+  "pinned_mathlib_api": {
+    "commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "path": "Mathlib/Topology/Algebra/Module/Multilinear/Basic.lean",
+    "blob": "09d44a8ac099607cca90e3f0a9aa126246ee58aa",
+    "sha256": "ac1064e6f05a965c71a769d4828aead1759b78d8b6a9f6a6b8b43dfee6452af4",
+    "checked": "The simps! apply_apply declaration on ofSubsingleton generates ContinuousMultilinearMap.ofSubsingleton_apply_apply; the replacement reduces only own A and uses that application lemma plus the actual inverseForwardJetLinear_apply."
+  },
+  "mathematical_and_interface_checks": [
+    "At order zero, the actual forward linear map decoder equals the existing shifted scalar composition. Translation by +travel on the source supplies exactly theta + travel + e; the kernel is not a replacement map.",
+    "At successor order the actual inverseForwardJet recurrence prepends the new parameter increment while preserving the final source slot. The genuine kernel has the same line derivative; equality on the open U yields the correctly directed germ and derivative uniqueness. No Schwarz symmetry assumption is introduced.",
+    "coupled_circle_kernel_grading_bounds chooses base and loss before r,k,s,R. Specializing r=k=n preserves a single base and loss before n. The high order n+s+loss is exactly s+(n+loss).",
+    "C is selected before travel,U,hU,J,e,v,y. Actual translation is a contraction at every grading, so no travel-dependent constant enters.",
+    "For a source of low seminorm less than one, every parameter increment is bounded at the same fixed base by R. Every finite product of n+1 low factors, including erased and empty products, is bounded by R^(n+1) using R>=1.",
+    "The actual majorant uses Fin.cons of translated source and parameter increments. Its high sum is bounded by the untranslated source high seminorm plus the unchanged increment sum, yielding P*(a+q_high(source)).",
+    "Only the source is homogenized. inverseForwardJetLinear is the continuous linear partial source map of the same tower; ofSubsingleton makes the one-slot continuous multilinear map required by the selected current185 normalization API.",
+    "The Fin1 product/sum and typed erased-universe equality yield exactly the homogeneous source bound, including seminorm-zero sources and parameter order n=0.",
+    "include hI precedes the declaration documentation, so the interpolation proof-only parameter is retained in theorem2. The entire two public headers remain byte-identical to the original candidate.",
+    "The resulting theorem has the precise hF quantifier/estimate shape of the selected fixed-base inverse theorem after fixing travel,U,J. It does not supply hV or an inverse-tower/current-jet conclusion."
+  ],
+  "selected_graph_preflight": {
+    "project_provider_modules": 210,
+    "origins": {
+      "active18f": 167,
+      "main2aa": 0,
+      "external_c5": 43
+    },
+    "missing_imports": 0,
+    "cycles": 0,
+    "new_public_name_collisions": 0,
+    "normalization": "current/main185 blob04e7e732, not c5 old204",
+    "scope": "Independent static reachability/name/pin checks only; not a complete semantic review or typecheck of all 210 providers."
+  },
+  "further_inverse_preflight": "The existing c5 inverse growth theorem has travel before its constant. To obtain travel-uniform hV or all jets, specialize to zero travel and then use the actual output translation by minus travel and its grading contraction; no such conclusion is asserted by this source.",
+  "separate_349_layout": "The old349 doc/include issue is handled by a separate immutable layout candidate/review. This forward peer does not silently validate that old source.",
+  "compiled": false,
+  "local_lean_or_elaboration_run": false,
+  "active_source_index_refs_ci_modified": false,
+  "source_modified_by_reviewer": false,
+  "created_at_utc": "2026-11-12T19:09:58.622811+00:00"
+}

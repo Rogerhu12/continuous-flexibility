@@ -1,0 +1,84 @@
+{
+  "kind": "exact_declaration_documentation_include_layout_independent_review",
+  "reviewer": "/root/audit_coordinates",
+  "status": "PASSED_LAYOUT_SUPERSESSION_STATIC_REVIEW_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-include-layout/TameInverseFixedBaseBounds.lean",
+    "sha256": "7e79129c9a9df8e2d74c353106685db461089a05ec1141f333211d5a257c6aac",
+    "blob": "45fae56b12e755379fcf3e4aa3e211ba0cfe9c7a",
+    "lines": 349,
+    "bytes": 18485
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-include-layout/TameInverseFixedBaseBoundsLayoutCandidateManifest.json",
+    "sha256": "fdbf7419912cf68d79881a4370e61f9319f446a674d981fc3311a07ca4d3803a",
+    "blob": "826dc431f2b598fcddfa2e2077b36cf53ffd1d84",
+    "lines": 56,
+    "bytes": 3599
+  },
+  "preserved_original_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.lean",
+    "sha256": "5e099aae8613c8f52bfefb6caf3e952e8153a1e95f8f34cadb7cf222fdb89864",
+    "blob": "708038714ee89624264cb7f7d3ddb0c9f9720124",
+    "lines": 349,
+    "bytes": 18485
+  },
+  "exact_diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-include-layout/TameInverseFixedBaseBounds.diff",
+    "sha256": "ce20a684086f88a325c88ea48f892d833686d94e3b056f693a4d04a0e65170d6",
+    "blob": "d53c235b87bd086841e6c256f259c57ee9e8ac1a",
+    "lines": 14,
+    "bytes": 772
+  },
+  "finding": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/TameInverseFixedBaseBoundsLayoutFinding.json",
+    "sha256": "6f138f867d0924066aa9e6ca289d1e7db5f83711f0625dd8b3faf770230e239b",
+    "blob": "25a8f7a7dc34b6ad9e2b4d2d4277748b27ad37fb",
+    "lines": 38,
+    "bytes": 3041
+  },
+  "prior_full_mathematical_source_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/TameInverseFixedBaseBoundsIndependentReview.json",
+    "sha256": "bdb98adabaa5cc1414614f4b2af5ac137a62e4981bef7704c4d8ff341899caf2",
+    "blob": "706ce6315030904ddda7d96d0c9a6c14c6fd8cc5",
+    "lines": 67,
+    "bytes": 4530
+  },
+  "historical_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBoundsReviewedManifest.json",
+    "sha256": "258b8ceedf552222afc9233e0daf79a46fef6c9dbcdd229f916ec4bcebee62d5",
+    "blob": "652e93b3eeb709efc6bc7ef1125aff98ccc2150a",
+    "lines": 91,
+    "bytes": 4618
+  },
+  "scope": "Complete final349 source read, exact one-block layout verification, all headers/proofs/providers unchanged, and binding of the prior full mathematical review. This is the independent parser-layout supersession peer; no new hV/hF theorem is assumed proved here.",
+  "exact_delta": {
+    "before": "/-- A single low base controls every order of the same inverse tower.\nThe two inputs are value estimates for the inverse operator and for the\nactual ordered forward jets, not estimates for the desired inverse jets. -/\ninclude hq hV hF in\ntheorem inverseFamilySmoothDirections_fixedBase_oneHigh",
+    "after": "include hq hV hF in\n/-- A single low base controls every order of the same inverse tower.\nThe two inputs are value estimates for the inverse operator and for the\nactual ordered forward jets, not estimates for the desired inverse jets. -/\ntheorem inverseFamilySmoothDirections_fixedBase_oneHigh",
+    "occurrences": 1,
+    "forward_and_reverse_literal_reconstruction_verified": true,
+    "line_count_unchanged": 349,
+    "byte_count_unchanged": 18485,
+    "all_other_bytes_identical": true
+  },
+  "checks": [
+    "The include command now wraps the declaration documentation and theorem, rather than interrupting a declaration doc modifier. It still includes exactly hq,hV,hF in the same public theorem.",
+    "The final SHA256 and Git blob exactly match the root finding expected corrected source.",
+    "The entire sole public header and proof, all three private statements/proofs, imports, local variables and resource settings are unchanged.",
+    "The public quantifier order remains exists base, forall n, exists loss, forall R>=1,s, exists C, followed by the actual same inverse tower and all increments. The layout fix neither moves base under n nor claims a common loss for every n.",
+    "The operator-value hV and ordered-forward hF remain explicit inputs. Actual circle hF is independently reviewed in the companion159 receipt; actual hV and the concrete same-J uniform-travel application remain separate work.",
+    "Prior full source review is retained for its recorded mathematics and exact provider bindings; its missed parser-layout issue is explicitly superseded. Old source/owner/finding are preserved without rewriting."
+  ],
+  "prior_confirmed_parser_layout_evidence": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/RetainedPositiveMaterialRatioJetsSectionCompatibilityIndependentReview.json",
+    "sha256": "53f1e94f0c28213ad66ed1f9adb2ee2b5fa8ac20efc8b67185a939c142c4518c",
+    "blob": "a4fc933d6e71b12ceb645a4bf57980709be8a20d",
+    "lines": 132,
+    "bytes": 9117
+  },
+  "compiled": false,
+  "local_lean_or_elaboration_run": false,
+  "active_source_index_refs_ci_modified": false,
+  "source_modified_by_reviewer": false,
+  "created_at_utc": "2026-11-12T19:09:58.622811+00:00"
+}

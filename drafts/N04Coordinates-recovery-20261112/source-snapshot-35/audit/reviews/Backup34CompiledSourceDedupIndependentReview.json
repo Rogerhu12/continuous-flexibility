@@ -1,0 +1,190 @@
+{
+  "kind": "independent_frozen_backup_compiled_source_dedup_read_review",
+  "reviewer": "/root/audit_coordinates",
+  "status": "PASSED_EXACT_GIT_OBJECT_AND_COMPLETE_SOURCE_COVERAGE_VERIFICATION",
+  "scope": "Already-frozen backup34 only; independent readback of all index entries and exact deletion set. No activation, CI query, Lean execution, or rerun of the backup writer.",
+  "backup_head": "9f11634c5091a3fd5901bc11b2bfb7971f8e7122",
+  "tree": "815e9297db69b6db9adb1be81538dba567acc933",
+  "parents": [
+    "6cf0c8d0517e0d53f368a4eecf0d0c53f69deb3c",
+    "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67"
+  ],
+  "green_full_ci_metadata_verified": {
+    "run": 43274946283,
+    "job": 131380759534,
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "recomputed_default_target_coverage": {
+    "all_src_lean": 4218,
+    "project_modules": 4214,
+    "covered_project_modules": 4212,
+    "excluded": [
+      "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+      "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth"
+    ],
+    "covered_names_sha256": "36d5260bb73118251cec33b9862ab31fc9729ed619c32bf4ee8b1b3f5854330f"
+  },
+  "deleted_archive_copies_verified": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ControlIndexBound",
+      "lines": 179,
+      "blob": "1928f91ca23a5a0620ca958c0d83fc46b148e33a"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ControlWeightConstraint",
+      "lines": 157,
+      "blob": "c0e13885832aa4b133e24e45ff76bc0ca3cc2495"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bSingletonType",
+      "lines": 283,
+      "blob": "a4ec9016586cb1ff50f9fce931f54492fb961d2d"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bStateProfileType",
+      "lines": 283,
+      "blob": "a21640350dc6a6b400d83f646d7f451f4e977c90"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowSmallness",
+      "lines": 219,
+      "blob": "ca66bd0e3aa4056fdbdef013e16fe4825d066887"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionSmallness",
+      "lines": 191,
+      "blob": "5e8807badcc8eaabf7aa3a31ecbc64d64a76cb56"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap",
+      "lines": 374,
+      "blob": "d1a81d60b31bf68689e99722e23fc8c594999b8b"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionVelocityBounds",
+      "lines": 143,
+      "blob": "b6c7cefc7e6768f7a2c43b36e688d0e4bef28637"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalRootFiniteEndpointBounds",
+      "lines": 167,
+      "blob": "2f138709e5a2993b87ead4c6cc01c6a0b34a6d7c"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalActualPositiveFiniteFactory",
+      "lines": 135,
+      "blob": "c10212e520142c34a32d0ef19f960bd85992dd64"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalPositiveSourceInteriorDivision",
+      "lines": 40,
+      "blob": "1578500670d565ad7ddd08d0345ae0fea8179346"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalVariationBounds",
+      "lines": 332,
+      "blob": "1559b564891a9e89bbc16c6106b71d49d1ad295f"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01OrdinaryFlowClosedJets",
+      "lines": 107,
+      "blob": "60f16193c9d55dc55507972d1c50625fed81877e"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnInverseJets",
+      "lines": 207,
+      "blob": "be782379d17ff730f0f70a55e37be1ad99ba773a"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.OrdinaryFlowJacobianBounds",
+      "lines": 114,
+      "blob": "310242cadb1925df8f87887fd6b31d3cb7ac1e29"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalNeighborhoodRestriction",
+      "lines": 192,
+      "blob": "99481854fcfc00bfd242fdccf388996297f83bd0"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization",
+      "lines": 311,
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01JetBounds",
+      "lines": 74,
+      "blob": "1e4f04ef7acf1b6050f63c7af3826a9dc6105ef2"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalPositiveSourceJetBounds",
+      "lines": 309,
+      "blob": "4ab2ef388753fd779280571b22abcfd7db544684"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalPositiveSourcePrefixBounds",
+      "lines": 130,
+      "blob": "e4069046d3eb91895d147fb67ebe34e75d2478db"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction",
+      "lines": 143,
+      "blob": "5150d77940daa6a3f95bd505bdb929b2e95db667"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ControlFlowBounds",
+      "lines": 263,
+      "blob": "da5a86231558708da484b96b350a925cd0fe50d4"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionReferenceLower",
+      "lines": 128,
+      "blob": "bfb0f877d13812f2fbcff828162a857b7b2762f2"
+    }
+  ],
+  "deleted_lines": 4481,
+  "uncompiled_archive_deletions": 0,
+  "unchanged_prior_archive_paths_except_source_index": true,
+  "all_index_rows_restored_and_hashed": 2892,
+  "unique_storage_locations": 2753,
+  "compressed_index_rows_restored": 18,
+  "dedup_locations_all_point_to_exact_green_paths": true,
+  "non_archive_tree_exact_green": true,
+  "added_lean_no_renames": 15482,
+  "budget_arithmetic": "19585 - 4481 + 378 = 15482",
+  "script_executed_by_reviewer": false,
+  "ci_queried_by_reviewer": false,
+  "inputs": {
+    "plan": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-backup34-plan.json",
+      "sha256": "ad98588b21566a8643a62b79f2743d348e51c86fccbb0fe18fd5ca261bd949ef"
+    },
+    "writer": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-backup34-freeze.py",
+      "read_in_full": true,
+      "executed_by_reviewer": false
+    },
+    "green_receipt": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-ci-163-green-receipt.json",
+      "sha256": "03997f656c7cb4daea3bd80686ac4dd3a01132e8ece0120ec54f8ff82901bedd"
+    },
+    "source_coverage": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-ci163-build-source-coverage.json",
+      "sha256": "a9c7f18c3f2e9e0d260c0909455a12a69ec5536c5d97729a5e92ce4b4d7befe4"
+    }
+  },
+  "writer_guard_review": [
+    "The writer pins GREEN and PARENT to immutable commits. The pinned green tree's default-library graph was independently reconstructed, not inferred from cached olean counts. Its two stated excluded modules exactly match the two uncovered source modules.",
+    "Every deletion is selected by identical Git blob in the pinned green source tree, and the script asserts the exact 23 copies and 4481 lines. Independent verification additionally compared full archive/source bytes, SHA256, line counts, and build-closure membership of every deletion.",
+    "The original archive is grafted byte-identically before deletion. The final archive diff has exactly the declared23 deletions; the only modification of an existing remaining archive path is SOURCE-INDEX.json. All old archive copies remain readable through the backup parent.",
+    "All matching SOURCE-INDEX rows resolve directly to the correct green commit/path. All2892 rows were independently restored, including18 explicit gzip rows, and their original SHA256 and line counts matched. Binary gzip sources without a storage compression flag were not inadvertently decompressed.",
+    "The writer uses private GIT_INDEX_FILE values for refresh/staging, checks active head/tree unchanged, and does not write active source. The resulting entire nonarchive repository tree equals green163, independently verified.",
+    "Conservative git diff --numstat --no-renames reproduces19585 before deletion, minus4481 compiled duplicate lines, plus378 new lines, equals15482. No rename similarity credit or removal of uncompiled Lean is used."
+  ],
+  "limitations": [
+    "This review binds the frozen backup objects and the cached completed CI163 run/job evidence. It makes no claim that held new159/root60 sources compiled.",
+    "The backup writer is a one-shot script pinned to this green commit; its exclusion list is justified for this exact graph, not automatically for another baseline.",
+    "Active c796 and its pending CI164 result are outside this read-only verification."
+  ],
+  "created_at_utc": "2026-11-12T19:12:13.214Z"
+}
