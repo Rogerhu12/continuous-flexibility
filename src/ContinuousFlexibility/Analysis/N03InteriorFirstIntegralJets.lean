@@ -144,6 +144,53 @@ private theorem n03_interiorFirstIntegral_eqOn_sample
     (rootScaledInverseCoordinate Θ₀ (n01RootLabel S C z m false) (Real.sqrt δ))
     a x (interiorEndpointPullback Ψ a b y) plus hsection)
 
+private theorem n01_interiorFirstIntegral_root_data
+    {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
+    {m rootLoss : ℕ} {g : ℝ → ℝ} {R κ δ Λ : ℝ} (hR : 0 < R)
+    {A : ℕ → ℝ} {z : AnnularState S × ℝ}
+    (hinput : N01ControlledRootInputAtState D S C m false g hR κ δ Λ rootLoss A z) :
+    ∃ Θ₀ : (ℝ × ℝ) → ℝ → ℝ → ℝ,
+      N04FlowEquations
+        (rootRescaledField (localizedRootDrift D S C (C.left m) 1 hR z)
+          (localizedRootSpeed D S C g (C.left m) 1 hR z) δ) Θ₀ ∧
+      let G := rootScaledInverseCoordinate Θ₀ (n01RootLabel S C z m false) (Real.sqrt δ)
+      ContDiff ℝ ∞ G ∧
+        (∀ r ζ θ, G (r, ζ, θ + Real.pi) = G (r, ζ, θ) + Real.pi) ∧
+        ∀ s : ℕ, CSBound s
+          (Icc (0 : ℝ) 1 ×ˢ Icc (-1 : ℝ) 1 ×ˢ Icc (-Real.pi) Real.pi) G
+          (A s * (1 + pairGrading (stateGrading S) realGrading (s + rootLoss)
+            (z - (C.referenceState, 0)))) := by
+  obtain ⟨_hcontrol, Θ₀, hΘ₀, hG, hperiod, _hzero, _hlower, hrootjets⟩ := hinput
+  exact ⟨Θ₀, hΘ₀, hG, hperiod, hrootjets⟩
+
+private theorem interiorFirstIntegral_inputs_of_root_and_flows
+    {E : Type} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (rootLoss flowLoss : ℕ) (A F : ℕ → ℝ)
+    (z : E) (a b Γ x : ℝ)
+    (Q : ((ℝ × ℝ) → ℝ → ℝ → ℝ) → Prop)
+    (M : ((ℝ × ℝ) → ℝ → ℝ → ℝ) → (ℝ × ℝ × ℝ) → ℝ)
+    (f : Bool → PolarPoint → ℝ) (U : Bool → PolarPoint → ℝ)
+    (hroot : ∃ Θ₀ : (ℝ × ℝ) → ℝ → ℝ → ℝ,
+      Q Θ₀ ∧ ContDiff ℝ ∞ (M Θ₀) ∧
+        (∀ r ζ θ, M Θ₀ (r, ζ, θ + Real.pi) = M Θ₀ (r, ζ, θ) + Real.pi) ∧
+        ∀ s : ℕ, CSBound s
+          (Icc (0 : ℝ) 1 ×ˢ Icc (-1 : ℝ) 1 ×ˢ Icc (-Real.pi) Real.pi) (M Θ₀)
+          (A s * (1 + p (s + rootLoss) z)))
+    (hflows : ∀ plus : Bool, ∃ Θ Ψ : (ℝ × ℝ) → ℝ → ℝ → ℝ,
+      InteriorFlowPairBounds p flowLoss F z Γ a b (f plus) Θ Ψ)
+    (heq : ∀ Θ₀, Q Θ₀ → ∀ plus Θ Ψ,
+      N04FlowEquations (interiorScalarFlowField (f plus) a b) Θ →
+      (∀ v θ, Θ v 1 (Ψ v 1 θ) = θ) →
+      EqOn (U plus) (fun y => rootCircleSample (M Θ₀) x
+        ((if plus then 1 else -1) * x ^ (3 / 2 : ℝ))
+          (interiorEndpointPullback Ψ a b y)) (Ioo a b ×ˢ (univ : Set ℝ))) :
+    InteriorFirstIntegralInputs p rootLoss flowLoss A F z a b Γ x U := by
+  obtain ⟨Θ₀, hΘ₀, hG, hperiod, hrootjets⟩ := hroot
+  refine ⟨M Θ₀, hG, hperiod, hrootjets, ?_⟩
+  intro plus
+  obtain ⟨Θ, Ψ, hΘ, _hΨeq, hinverse, _hΘjets, hΨjets⟩ := hflows plus
+  exact ⟨Ψ, hΨjets, heq Θ₀ hΘ₀ plus Θ Ψ hΘ (fun v θ => (hinverse v θ).1)⟩
+
 private theorem n03_interiorFirstIntegral_actual_inputs
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {E : ReturnEquationData S}
@@ -172,16 +219,21 @@ private theorem n03_interiorFirstIntegral_actual_inputs
       rootLoss flowLoss A F (z - (C.referenceState, 0))
       (C.left m + δ * x) b Γ x
       (fun plus => canonicalGluedAiryIntegral S K z m (if plus then -1 else 1)) := by
-  obtain ⟨_hcontrol, Θ₀, hΘ₀, hG, hperiod, _hzero, _hlower, hrootjets⟩ := hinput
-  let G := rootScaledInverseCoordinate Θ₀ (n01RootLabel S C z m false) (Real.sqrt δ)
-  have hmatch := hfixed z hz hs Θ₀ hΘ₀
-  refine ⟨G, hG, hperiod, hrootjets, ?_⟩
-  intro plus
-  obtain ⟨Θ, Ψ, hΘ, _hΨeq, hinverse, _hΘjets, hΨjets⟩ := hflows plus
-  refine ⟨Ψ, hΨjets, ?_⟩
-  exact n03_interiorFirstIntegral_eqOn_sample (Θ₀ := Θ₀) (Θ := Θ) (Ψ := Ψ)
-    hS hT hN hE hL hA hB hz hs m hg hR hδ hx hab hb hρ hstrip
-    hΘ₀ hmatch plus hΘ (fun v θ => (hinverse v θ).1)
+  exact interiorFirstIntegral_inputs_of_root_and_flows
+    (E := AnnularState S × ℝ) (pairGrading (stateGrading S) realGrading)
+    rootLoss flowLoss A F (z - (C.referenceState, 0)) (C.left m + δ * x) b Γ x
+    (fun Θ₀ => N04FlowEquations
+      (rootRescaledField (localizedRootDrift D S C (C.left m) 1 hR z)
+        (localizedRootSpeed D S C g (C.left m) 1 hR z) δ) Θ₀)
+    (fun Θ₀ => rootScaledInverseCoordinate Θ₀ (n01RootLabel S C z m false) (Real.sqrt δ))
+    (fun plus => interiorLocalizedSpeed hab.le hρ
+      (negativeCharacteristicField plus (L.coefficients z)))
+    (fun plus => canonicalGluedAiryIntegral S K z m (if plus then -1 else 1))
+    (n01_interiorFirstIntegral_root_data hR hinput) hflows
+    (fun Θ₀ hΘ₀ plus Θ Ψ hΘ hinverse =>
+      n03_interiorFirstIntegral_eqOn_sample (Θ₀ := Θ₀) (Θ := Θ) (Ψ := Ψ)
+        hS hT hN hE hL hA hB hz hs m hg hR hδ hx hab hb hρ hstrip
+        hΘ₀ (hfixed z hz hs Θ₀ hΘ₀) plus hΘ hinverse)
 
 theorem n03_interiorFirstIntegral_material_propagation
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
