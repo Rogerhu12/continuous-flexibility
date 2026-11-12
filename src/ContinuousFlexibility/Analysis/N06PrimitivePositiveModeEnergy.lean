@@ -7,9 +7,9 @@ import ContinuousFlexibility.Analysis.N07aCanonicalModeEnergySum
 
 The first normal derivative is supplied by N05.  The actual reference
 equation and the reciprocal leading coefficient recover the second normal
-derivative in the original canonical L2 space.  The affine open-interval
-estimate then controls these same fields, retaining the full length
-dependence.  There is no N06 premise and no replacement of K, V, b or B.
+derivative in the original canonical L2 space.  These are the fields used
+by the principal mode estimate on the original intervals.  There is no
+N06 premise and no replacement of K, V, b or B.
 -/
 
 noncomputable section
@@ -88,40 +88,5 @@ theorem n06_primitiveReferenceInverse_positiveJets_nonempty
   obtain ⟨urr, hrr, hrr₂⟩ := n07a_reference_secondNormal_of_fourJets hJ hP
     (h04.1.referenceBounds m).2.1 hr hθ hrθ hθθ heq
   exact ⟨⟨ur, uθ, urθ, uθθ, urr, hr, hθ, hrθ, hθθ, hrr, hrr₂⟩⟩
-
-/-- Complete modal energy of those same weak fields.  All constants are
-chosen before the source and the positive piece.  The displayed budget
-retains the original interval length, including its inverse Jacobian. -/
-theorem n06_primitiveReferenceInverse_positive_energy
-    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
-    (h01 : N01Properties D T S C base loss ε)
-    (h03 : N03Properties D T S C R L base ε)
-    (h04 : N04Properties D T S C L K base loss ε)
-    (h05 : N05Properties D T S C K V b B)
-    (hJ : ReferenceJets D T S C L K) (hP : ReferencePrincipal T S C K) :
-    ∃ A P Q : ℝ, 0 < A ∧ 0 < P ∧ 0 < Q ∧
-      ∀ (F : V.level (3 / 4 : ℝ) 0 b) (m : ℕ), K.positive m = true →
-      ∃ J : N06PrimitivePositiveJets (n07aReferenceInverseField (B := B) F m),
-        Summable (n07aCanonicalModeEnergy (h04.1.referenceBounds m).2.1
-          (n07aReferenceInverseField (B := B) F m) J.radial J.secondRadial) ∧
-        (∑' n, n07aCanonicalModeEnergy (h04.1.referenceBounds m).2.1
-          (n07aReferenceInverseField (B := B) F m) J.radial J.secondRadial n) ≤
-          n07aReferenceModeBudget A P Q (K.right m - K.left m)
-            (T.E0 (T.sample (K.cell m))) *
-              (‖n07aReferenceInverseField (B := B) F m‖ ^ 2 +
-                ‖n07aReferenceCanonicalRhs hJ m (h04.1.referenceBounds m).2.1
-                  (B.inverse F).val.1 (V.forget (3 / 4 : ℝ) 0 b F)‖ ^ 2) := by
-  have hD : IsAccumulatingProfile D := h01.1.1
-  have hE (m : ℕ) : 0 < T.E0 (T.sample (K.cell m)) :=
-    (hT.2.1 _ (materialSample_mem_radialCore hT hD.choose_spec.2.1 (K.cell m))).2.2.1
-  have hlen (m : ℕ) : K.left m < K.right m := (h04.1.referenceBounds m).2.1
-  obtain ⟨A, P, Q, hA, hPpos, hQ, henergy⟩ :=
-    n07a_reference_actualMode_sum hJ hP hE hlen
-  refine ⟨A, P, Q, hA, hPpos, hQ, ?_⟩
-  intro F m hm
-  obtain ⟨J⟩ := n06_primitiveReferenceInverse_positiveJets_nonempty
-    hS h01 h03 h04 h05 hJ hP F m hm
-  exact ⟨J, henergy m hm _ _ _ _ J.radial_weak J.secondRadial_weak
-    (n06_primitiveReferenceInverse_positive_distribution hS h01 h03 h04 h05 hJ F m hm)⟩
 
 end ContinuousFlexibility.Analysis

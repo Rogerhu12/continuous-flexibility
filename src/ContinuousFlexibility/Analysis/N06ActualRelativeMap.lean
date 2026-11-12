@@ -120,7 +120,7 @@ private theorem n06ActualRelativeMap_forget_value
   let decode : V.level (3 / 4 : ℝ) 0 b →ₗ[ℝ] CanonicalL2 S K m :=
     (LinearMap.proj m).comp (V.forget (3 / 4 : ℝ) 0 b)
   have he := congrArg (fun u : V.level (3 / 4 : ℝ) 0 b => decode (F + u))
-    (n06ActualRelativeMap_apply Mc Mp columns F)
+    (n06ActualRelativeMap_apply (B := B) Mc Mp columns F)
   exact he.trans (n06_actual_linear_combination decode F (Mc F) (Mp F)
     (columns 0) (columns 1) (columns 2) (B.inverse F).val.1.2.1
     (B.inverse F).val.1.2.2.1 (B.inverse F).val.1.2.2.2)
@@ -150,7 +150,7 @@ theorem n06ActualRelativeMap_forget
     (V.forget (3 / 4 : ℝ) 0 b (Mp F) m) (V.forget (3 / 4 : ℝ) 0 b (columns 0) m)
     (V.forget (3 / 4 : ℝ) 0 b (columns 1) m) (V.forget (3 / 4 : ℝ) 0 b (columns 2) m)
     (B.inverse F).val.1.2.1 (B.inverse F).val.1.2.2.1 (B.inverse F).val.1.2.2.2
-    (n06ActualRelativeMap_forget_value Mc Mp columns F m)
+    (n06ActualRelativeMap_forget_value (B := B) Mc Mp columns F m)
     (hMp F m) (hcolumns 0 m) (hcolumns 1 m) (hcolumns 2 m)
 
 theorem norm_n06ActualRelativeMap_le

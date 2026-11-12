@@ -80,6 +80,22 @@ theorem n06PrimitiveParameterOfState_grading (href : referenceStateConditions D 
     (n06PrimitiveParameterOfState href z hs).1
     (n06PrimitiveParameterOfState href z hs).2
 
+private def N06PrimitiveCurrentJetOrderBound
+    (D : ReferenceData) (T : MaterialData) (S : PhysicalSpacesData)
+    (C : NonlinearGeometryData S) (L : ReturnCorrectionData S) (K : CanonicalData S)
+    (base : ℕ) (ε : ℝ) (d s : ℕ) (B : ℝ) : Prop :=
+  0 < B ∧ ∀ w ∈ sectorNeighborhood S base ε ε, ∀ m a (p : unitStrip),
+    ∀ i j : ℕ, i + j ≤ s →
+      |differenceJets D T S C L K w a m i j p| ≤
+        B * T.E0 (T.sample (K.cell m)) ^ B *
+          T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) * parameterGrading S (s + d) w
+
+private theorem n06_currentJets_zero_bounds
+    (hcur : CurrentJets D T S C L K base ε) :
+    ∃ d : ℕ, ∀ s : ℕ, ∃ B : ℝ,
+      N06PrimitiveCurrentJetOrderBound D T S C L K base ε d s B :=
+  hcur.2.1
+
 /-- The state loss is selected once, before every spatial order. -/
 theorem n06_primitive_currentAtom_difference_jets
     (href : referenceStateConditions D S C)
@@ -93,12 +109,12 @@ theorem n06_primitive_currentAtom_difference_jets
           B * T.E0 (T.sample (K.cell m)) ^ B *
             T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) *
               (stateGrading S (s + d) (z.1 - C.referenceState) + |z.2|) := by
-  obtain ⟨d, hd⟩ := hcur.2.1
+  obtain ⟨d, hd⟩ := n06_currentJets_zero_bounds hcur
   refine ⟨d, fun s => ?_⟩
-  obtain ⟨B, hB, hb⟩ := hd s
-  refine ⟨B, hB, ?_⟩
+  obtain ⟨B, hb⟩ := hd s
+  refine ⟨B, hb.1, ?_⟩
   intro z hz hs m a p hp i j hij
-  have h := hb (n06PrimitiveParameterOfState href z hs)
+  have h := hb.2 (n06PrimitiveParameterOfState href z hs)
     (n06PrimitiveParameterOfState_mem href hz hs) m a ⟨p, hp⟩ i j hij
   simpa only [differenceJets, n06PrimitiveParameterOfState_lift,
     n06PrimitiveParameterOfState_grading] using h
