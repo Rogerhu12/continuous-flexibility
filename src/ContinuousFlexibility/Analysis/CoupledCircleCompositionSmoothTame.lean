@@ -56,9 +56,12 @@ private theorem coupled_joint_jet_grading_continuous
     intro i _
     exact ((hp s).comp (((continuous_apply i).comp continuous_snd).fst)).add
       ((hp s).comp (((continuous_apply i).comp continuous_snd).snd))
+  have hsum := hbase.add hdirs
+  change Continuous (fun z : (X × X) × (Fin n → X × X) =>
+    (p s z.1.1 + p s z.1.2) + ∑ i, (p s (z.2 i).1 + p s (z.2 i).2)) at hsum
   change Continuous (fun z : (X × X) × (Fin n → X × X) =>
     jetGrading (pairGrading p p) n s z)
-  simpa only [jetGrading_apply, pairGrading_apply, Pi.add_apply] using hbase.add hdirs
+  simpa only [jetGrading_apply, pairGrading_apply] using hsum
 
 end ContinuousFlexibility.Analysis
 

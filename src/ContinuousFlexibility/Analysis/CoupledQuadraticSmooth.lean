@@ -339,8 +339,17 @@ private theorem coupled_error_source_smoothTameOn
           L.error (liftSectorParameter S C z.1.1) z.1.2.2.val
             (V.V (liftSectorParameter S C z.1.1) z.2).1) := by
   have hg := coupled_error_grading_facts S
-  exact coupled_error_source_product hD hT hS hg.1 hg.2.1 hg.2.2 hU
+  have h := coupled_error_source_product (D := D) (T := T) (S := S)
+    (E := StateDirections S × ℝ) (p := coupledErrorParameterGrading S) (U := U)
+    (a := fun z : StateDirections S × ℝ => z.2)
+    (t := fun z : StateDirections S × ℝ => typeCoefficient (liftSectorParameter S C z))
+    (height := fun z : (StateDirections S × ℝ) × ResidualSpace S =>
+      (V.V (liftSectorParameter S C z.1) z.2).1)
+    (error := fun z : ((StateDirections S × ℝ) × CircleSpace S) × HeightPair S =>
+      L.error (liftSectorParameter S C z.1.1) z.1.2 z.2)
+    hD hT hS hg.1 hg.2.1 hg.2.2 hU
     (coupled_error_scale_smoothTameOn S hU) htype hheight hLerror
+  exact h
 
 private theorem coupled_error_even_smoothTameOn
     (hS : IsPhysicalSpaces D T S) (C : NonlinearGeometryData S)
@@ -368,7 +377,17 @@ private theorem coupled_error_even_smoothTameOn
               B.circleColumn (liftSectorParameter S C z.1.1)
                 (V.V (liftSectorParameter S C z.1.1) z.2).2.2.1)))) := by
   have hg := coupled_error_grading_facts S
-  exact coupled_error_even_product hS hg.1 hg.2.1 hg.2.2 hU hinverse hRerror
+  have h := coupled_error_even_product (D := D) (T := T) (S := S)
+    (E := StateDirections S × ℝ) (p := coupledErrorParameterGrading S) (U := U)
+    (inverse := fun z : (StateDirections S × ℝ) × ResidualSpace S =>
+      R.inverse (z.2.2.val - z.1.2 • B.heightRow (liftSectorParameter S C z.1)
+        (V.V (liftSectorParameter S C z.1) z.2).1 -
+        B.circleColumn (liftSectorParameter S C z.1)
+          (V.V (liftSectorParameter S C z.1) z.2).2.2.1))
+    (error := fun z : ((StateDirections S × ℝ) × CircleSpace S) × CircleSpace S =>
+      R.error (liftSectorParameter S C z.1.1) z.1.2 z.2)
+    hS hg.1 hg.2.1 hg.2.2 hU hinverse hRerror
+  exact h
 
 theorem coupledQuadraticErrorData_smoothTameOn
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)

@@ -101,7 +101,11 @@ theorem coupledCircleProduct_oneHigh_bound :
   have hdata := hb 0 1 s 1 le_rfl
   let A : ℝ := hdata.choose
   have hA : 0 ≤ A := hdata.choose_spec.1
-  have hbound := hdata.choose_spec.2
+  have hbound : ∀ ψ : M.Space, M.grading base ψ ≤ (1 : ℝ) →
+      ∀ (v : M.Space) (w : Fin 1 → M.Space),
+        M.grading s (coupledCircleKernel hD hT hγ hM hI 0 1 ψ v w) ≤
+          A * coupledCircleKernelMajorant M base (0 + s + loss) ψ (Fin.cons v w) :=
+    hdata.choose_spec.2
   refine ⟨2 * A, mul_nonneg (by norm_num) hA, fun u v => ?_⟩
   have hzero : M.grading base (0 : M.Space) ≤ (1 : ℝ) :=
     (coupled_product_seminorm_zero (M.grading base)).trans_le zero_le_one
