@@ -40,10 +40,30 @@ theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.fstParameter_ap
     (n : ℕ) (x : E × F) (y : P) (v : Fin n → (E × F) × P) :
     (J.fstParameter (F := F) hU hV).D n (x, y) v =
       J.D n (x.1, y) (fun i => ((v i).1.1, (v i).2)) := by
-  simp only [SmoothDirections.fstParameter, SmoothDirections.compLinear,
-    SmoothDirections.congrOn, SmoothDirections.compAffine_apply, zero_add,
-    ContinuousLinearMap.prod_apply, ContinuousLinearMap.comp_apply,
-    ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd']
+  let L : (E × F) × P →L[ℝ] E × P :=
+    ((ContinuousLinearMap.fst ℝ E F).comp
+      (ContinuousLinearMap.fst ℝ (E × F) P)).prod
+        (ContinuousLinearMap.snd ℝ (E × F) P)
+  have hopen : IsOpen ((U ×ˢ (univ : Set F)) ×ˢ V) :=
+    (hU.prod isOpen_univ).prod hV
+  have hmap : MapsTo (fun z : (E × F) × P => (0 : E × P) + L z)
+      ((U ×ˢ (univ : Set F)) ×ˢ V) (U ×ˢ V) := by
+    intro z hz
+    simpa only [L, zero_add, ContinuousLinearMap.prod_apply,
+      ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
+      ContinuousLinearMap.coe_snd'] using
+        (show (z.1.1, z.2) ∈ U ×ˢ V from ⟨hz.1.1, hz.2⟩)
+  have hpoint :
+      (J.compAffine L (0 : E × P) hopen hmap).D n (x, y) v =
+        J.D n ((0 : E × P) + L (x, y)) (fun i => L (v i)) :=
+    SmoothDirections.compAffine_apply
+      (E := (E × F) × P) (F := E × P) (G := G)
+      (U := U ×ˢ V) (V := (U ×ˢ (univ : Set F)) ×ˢ V) (f := f)
+      J L (0 : E × P) hopen hmap n (x, y) v
+  simpa only [SmoothDirections.fstParameter, SmoothDirections.compLinear,
+    SmoothDirections.congrOn, L, zero_add, ContinuousLinearMap.prod_apply,
+    ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
+    ContinuousLinearMap.coe_snd'] using hpoint
 
 /-- Adding an independent parameter keeps the original constants, base,
 loss, and spatial directions. -/
@@ -77,12 +97,16 @@ private theorem characteristic_fstParameter_joint_growth
     {p : ℕ → Seminorm ℝ E} (q : ℕ → Seminorm ℝ F)
     {W : I → ℝ} (hW : ∀ i, 0 ≤ W i)
     {U : Set E} {V : I → Set P} {f : I → E × P → G}
-    (K : ∀ i, SmoothDirections (U ×ˢ V i) (f i))
     (J : ∀ i, SmoothDirections ((U ×ˢ (univ : Set F)) ×ˢ V i)
       (fun x : (E × F) × P => f i (x.1.1, x.2)))
-    {B L : ℕ} (hK : UniformWeightedJointGrowth p W K B L)
+    {base loss : ℕ}
+    (hdata : ∃ K : ∀ i, SmoothDirections (U ×ˢ V i) (f i),
+      ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧ UniformWeightedJointGrowth p W K B L)
     (hU : IsOpen U) (hV : ∀ i, IsOpen (V i)) :
-    UniformWeightedJointGrowth (pairGrading p q) W J B L := by
+    ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧
+      UniformWeightedJointGrowth (pairGrading p q) W J B L := by
+  obtain ⟨K, B, L, hb, hloss, hK⟩ := hdata
+  refine ⟨B, L, hb, hloss, ?_⟩
   have hproject : UniformWeightedJointGrowth (pairGrading p q) W
       (fun i => (K i).fstParameter (F := F) hU (hV i)) B L :=
     UniformWeightedJointGrowth.fstParameter
@@ -110,7 +134,9 @@ private theorem characteristic_strip_mixed_interpolation
     {f : I → E × PolarPoint → ℝ}
     (l h : I → ℝ)
     (J : ∀ i, SmoothDirections (U ×ˢ (Ioo (l i) (h i) ×ˢ univ)) (f i))
-    {B₀ L : ℕ} (hJ : UniformWeightedJointGrowth p W J B₀ L)
+    {base loss : ℕ}
+    (hdata : ∃ B₀ L : ℕ, base ≤ B₀ ∧ loss ≤ B₀ ∧
+      UniformWeightedJointGrowth p W J B₀ L)
     (hp : Monotone p) (hIp : HasInterpolation p) (hW : ∀ i, 1 ≤ W i)
     (hc : ∀ i, Convex ℝ (U ×ˢ (Ioo (l i) (h i) ×ˢ (univ : Set ℝ))))
     (nmax : ℕ) :
@@ -121,6 +147,7 @@ private theorem characteristic_strip_mixed_interpolation
         |jointMixedDiagonal (J i) n a b x w y| ≤
           K * W i ^ Q * (1 + p (N + B + 1) x + p (N + B + 1) w) ^
             (((a + b : ℕ) : ℝ) / ((N : ℝ) + 1)) := by
+  obtain ⟨B₀, L, _, _, hJ⟩ := hdata
   obtain ⟨B, _, hbound⟩ :=
     UniformWeightedJointGrowth.mixed_diagonal_spatial_interpolation
       (I := I) (E := E) (p := p) (W := W) (U := U)
@@ -171,12 +198,6 @@ theorem N01Properties.minusCharacteristicSpeed_correction_joint_growth
         (pairGrading (pairGrading (sectorGrading S) realGrading)
           (S.circle (3 / 4 : ℝ)).grading)
         (fun m => radialE (D.cellIndex (j m))) J B L := by
-  obtain ⟨K, B, L, hb, hloss, hg⟩ :=
-    hN.exists_minusCharacteristicSpeed_strip_joint_growth
-      (D := D) (T := T) (S := S) (C := C)
-      (base := base) (loss := loss) (ε := ε)
-      hS hT j hcell l h hl hh hlam hP hpositive
-  refine ⟨B, L, hb, hloss, ?_⟩
   exact characteristic_fstParameter_joint_growth
     (I := ℕ) (E := StateDirections S × ℝ) (F := CircleSpace S)
     (P := PolarPoint) (G := ℝ)
@@ -187,9 +208,13 @@ theorem N01Properties.minusCharacteristicSpeed_correction_joint_growth
     (f := fun (_m : ℕ) (x : (StateDirections S × ℝ) × PolarPoint) =>
       minusCharacteristicSpeed
         (originalCoefficients D S C (liftSectorParameter S C x.1)) x.2)
-    (B := B) (L := L) (S.circle (3 / 4 : ℝ)).grading
-    (fun m => zero_le_one.trans (one_le_radialE_of_nat _))
-    K J hg (sectorNeighborhood_isOpen S base ε ε)
+    (base := base) (loss := loss) (S.circle (3 / 4 : ℝ)).grading
+    (fun m => zero_le_one.trans (one_le_radialE_of_nat _)) J
+    (N01Properties.exists_minusCharacteristicSpeed_strip_joint_growth
+      (D := D) (T := T) (S := S) (C := C)
+      (base := base) (loss := loss) (ε := ε) (lam := lam) (P := P)
+      hN hS hT j hcell l h hl hh hlam hP hpositive)
+    (sectorNeighborhood_isOpen S base ε ε)
     (fun m => (isOpen_Ioo : IsOpen (Ioo (l m) (h m))).prod
       (isOpen_univ : IsOpen (univ : Set ℝ)))
 
@@ -223,11 +248,6 @@ theorem N01Properties.minusCharacteristicSpeed_correction_mixed_interpolation
           K * radialE (D.cellIndex (j m)) ^ Q *
             (1 + p (N + B + 1) x + p (N + B + 1) w) ^
               (((a + b : ℕ) : ℝ) / ((N : ℝ) + 1)) := by
-  obtain ⟨B₀, L, _, _, hg⟩ :=
-    hN.minusCharacteristicSpeed_correction_joint_growth
-      (D := D) (T := T) (S := S) (C := C)
-      (base := base) (loss := loss) (ε := ε)
-      hS hT j hcell l h hl hh hlam hP hpositive J
   have hdomain (m : ℕ) : Convex ℝ
       ((sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) ×ˢ
         (Ioo (l m) (h m) ×ˢ (univ : Set ℝ))) :=
@@ -242,7 +262,11 @@ theorem N01Properties.minusCharacteristicSpeed_correction_mixed_interpolation
     (f := fun (_m : ℕ) (x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint) =>
       minusCharacteristicSpeed
         (originalCoefficients D S C (liftSectorParameter S C x.1.1)) x.2)
-    (B₀ := B₀) (L := L) l h J hg
+    (base := base) (loss := loss) l h J
+    (N01Properties.minusCharacteristicSpeed_correction_joint_growth
+      (D := D) (T := T) (S := S) (C := C)
+      (base := base) (loss := loss) (ε := ε) (lam := lam) (P := P)
+      hN hS hT j hcell l h hl hh hlam hP hpositive J)
     (correctionParameterGrading_monotone S) (correctionParameterGrading_hasInterpolation hS)
     (fun m => one_le_radialE_of_nat _) hdomain nmax
 
