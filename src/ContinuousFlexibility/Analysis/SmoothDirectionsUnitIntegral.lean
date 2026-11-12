@@ -104,9 +104,10 @@ theorem smoothDirectionsUnitIntegral_jet
       projectiveUnitIntegral (fun a => (J a).D n x v)
         (by simpa only [Function.comp_def, id_eq] using
           ((hJ n).comp (continuous_id.prodMk (continuous_const (y := (x, v)))))) := by
-  have hA : Continuous (fun p : ℝ × (Fin n → E) => (J p.1).D n x p.2) :=
-    (hJ n).comp
-      (continuous_fst.prodMk ((continuous_const (y := x)).prodMk continuous_snd))
+  have hA : Continuous (fun p : ℝ × (Fin n → E) => (J p.1).D n x p.2) := by
+    simpa only [Function.comp_def] using
+      (hJ n).comp (continuous_fst.prodMk
+        ((continuous_const (y := x)).prodMk continuous_snd))
   change projectiveUnitIntegralMultilinear (fun a => (J a).D n x) hA v = _
   exact projectiveUnitIntegralMultilinear_apply (fun a => (J a).D n x) hA v
 

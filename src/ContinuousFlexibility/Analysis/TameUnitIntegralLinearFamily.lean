@@ -65,11 +65,11 @@ theorem smoothTameOn_unitIntegralLinearFamily
     have hc : Continuous (fun t : ℝ => p (base a ha) (L t x₀ - L a x₀)) :=
       (ht.continuous_seminorm (base a ha)).comp
         ((hL.comp (continuous_id.prodMk continuous_const)).sub continuous_const)
-    have hca : ContinuousAt
-        (fun t : ℝ => p (base a ha) (L t x₀ - L a x₀)) a := hc.continuousAt
-    have hzero : p (base a ha) (L a x₀ - L a x₀) < ε a ha / 2 := by
-      simpa only [sub_self, map_zero] using half_pos (hε a ha)
-    exact hca.preimage_mem_nhds (Iio_mem_nhds hzero)
+    change (fun t : ℝ => p (base a ha) (L t x₀ - L a x₀)) ⁻¹'
+      Iio (ε a ha / 2) ∈ 𝓝 a
+    apply hc.continuousAt.preimage_mem_nhds
+    apply Iio_mem_nhds
+    simpa only [sub_self, map_zero] using half_pos (hε a ha)
   obtain ⟨K, hcover⟩ := (isCompact_Icc : IsCompact (Icc (0 : ℝ) 1)).elim_nhds_subcover' O hO
   have hcover' (a : ℝ) (ha : a ∈ Icc (0 : ℝ) 1) :
       ∃ w ∈ K, a ∈ O w w.property := by
@@ -109,11 +109,10 @@ theorem smoothTameOn_unitIntegralLinearFamily
   obtain ⟨w, hwK, haw⟩ := hcover' a ha
   let w' : ↥K := ⟨w, hwK⟩
   have hwb : base w w.property ≤ b :=
-    Finset.le_sup (f := fun a : Icc (0 : ℝ) 1 => base a a.property) hwK
+    Finset.le_sup (f := fun z : Icc (0 : ℝ) 1 => base z z.property) hwK
   have hwl : loss w w.property ≤ l :=
-    Finset.le_sup (f := fun a : Icc (0 : ℝ) 1 => loss a a.property) hwK
-  have hδε : δ ≤ ε w w.property / 2 :=
-    Finset.inf'_le (fun a : Icc (0 : ℝ) 1 => ε a a.property / 2) hwK
+    Finset.le_sup (f := fun z : Icc (0 : ℝ) 1 => loss z z.property) hwK
+  have hδε : δ ≤ ε w w.property / 2 := Finset.inf'_le _ hwK
   have hperturb : p (base w w.property) (L a (x - x₀)) < ε w w.property / 2 :=
     ((hcontract a ha _ _).trans (hp hwb (x - x₀))).trans_lt (hnear.trans_le hδε)
   have hmem : p (base w w.property) (L a x - L w x₀) < ε w w.property := by
@@ -124,7 +123,8 @@ theorem smoothTameOn_unitIntegralLinearFamily
     have hs' := (map_add_le_add (p (base w w.property))
       (L a (x - x₀)) (L a x₀ - L w x₀)).trans_lt (add_lt_add hperturb haw)
     linarith only [hs']
-  have hwA : C w' ≤ A := Finset.single_le_sum (fun a _ => hC a) (Finset.mem_univ w')
+  have hwA : C w' ≤ A :=
+    Finset.single_le_sum (f := C) (fun a _ => hC a) (Finset.mem_univ w')
   have hsize := (tameJetSize_linear_contraction p (L a).toLinearMap
     (hcontract a ha) k s (loss w w.property) (base w w.property) x v).trans
       (tameJetSize_mono hp hwl hwb k s x v)

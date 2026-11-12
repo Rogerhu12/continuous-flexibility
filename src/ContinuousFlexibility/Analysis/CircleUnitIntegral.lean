@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.ProjectiveUnitIntegral
-import ContinuousFlexibility.Analysis.CircleJetEvaluation
+import ContinuousFlexibility.Analysis.CircleAngleEvaluation
+import ContinuousFlexibility.Analysis.CircleModelRealization
 
 /-!
 # Parameter integration and the actual circle decoder
@@ -19,10 +20,9 @@ open scoped Topology
 
 variable {T : MaterialData} {γ : ℝ} {S : CircleModelData}
 
-private theorem circleUnitIntegral_mul_cancel
-    (a b c : ℝ) (h : a * b = 1) : a * (b * c) = c :=
-  (mul_assoc a b c).symm.trans
-    ((congrArg (fun t : ℝ => t * c) h).trans (one_mul c))
+private theorem scalar_mul_cancel_pair (a b c : ℝ) (h : a * b = 1) :
+    a * (b * c) = c := by
+  rw [← mul_assoc, h, one_mul]
 
 def circleModelValueLevel (T : MaterialData) (γ : ℝ) (S : CircleModelData)
     (m : ℕ) (θ : ℝ) : S.level 1 →L[ℝ] ℝ :=
@@ -81,7 +81,9 @@ theorem circleModelValueLevel_apply
     _ = T.H (T.sample m) ^ γ *
         (T.H (T.sample m) ^ (-γ) * S.decode u m θ) :=
       congrArg (fun y : ℝ => T.H (T.sample m) ^ γ * y) he
-    _ = S.decode u m θ := circleUnitIntegral_mul_cancel _ _ _ hw
+    _ = S.decode u m θ :=
+      scalar_mul_cancel_pair (T.H (T.sample m) ^ γ)
+        (T.H (T.sample m) ^ (-γ)) (S.decode u m θ) hw
 
 def circleUnitIntegral (hS : IsCircleModel T γ S)
     (f : ℝ → S.Space) (hf : Continuous f) : S.Space := by
