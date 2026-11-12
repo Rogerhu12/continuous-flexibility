@@ -136,8 +136,23 @@ theorem n06Normalizer_N03 (ψ : (S.height (3 / 4 : ℝ)).Space)
 theorem n06Normalizer_N04 (ψ : (S.height (3 / 4 : ℝ)).Space)
     (h : N04Properties D T S C L K base loss ε) :
     N04Properties D T (n06WithNormalizer S ψ) (n06NormalizerGeometry C ψ)
-      (n06NormalizerCorrection L ψ) (n06NormalizerCanonical K ψ) base loss ε :=
-  h
+      (n06NormalizerCorrection L ψ) (n06NormalizerCanonical K ψ) base loss ε := by
+  refine ⟨?_, h.2⟩
+  exact {
+    normalizationOpen := h.1.normalizationOpen
+    normalizationSupport := h.1.normalizationSupport
+    normalization := h.1.normalization
+    referenceBounds := h.1.referenceBounds
+    referencePositive := h.1.referencePositive
+    referenceNegative := h.1.referenceNegative
+    referencePartition := h.1.referencePartition
+    referenceDomain := h.1.referenceDomain
+    domains := h.1.domains
+    partition := h.1.partition
+    charts := h.1.charts
+    boundary := h.1.boundary
+    reflection := h.1.reflection
+    inverseReflection := h.1.inverseReflection }
 
 /-- Through04 keeps the same physical construction, with only its unused
 normalizer parameter retyped. The full N05 graph is transported separately. -/

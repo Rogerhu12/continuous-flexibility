@@ -112,7 +112,8 @@ theorem n05_cut_reference_image
   have hd : deriv D.w c < 0 := hgeom.2.2.2.1 m c hcut
   have hpositive := n05_negative_reference_radius_pos hT hS h hdata.1
     (x := (c, θ)) hcClosed hcD hd
-  have hmem := n05_referenceState_mem h01.2.1
+  have hmem : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
+    n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
   have hfrontier : (c, θ) ∈ frontier (physicalPieceOpen S K (C.referenceState, 0) i) := by
     rw [(h04.1.domains (C.referenceState, 0) hmem hsector i).1.frontier_eq]

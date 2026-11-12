@@ -81,7 +81,11 @@ theorem n06_currentAtlasReplacement_inverse_eq
   obtain ⟨_, _, hleft, _, _, _, _, _⟩ := hK.charts z hz hs m
   obtain ⟨_, hmap, _, hright, _, _, _, _⟩ := hJ.charts z hz hs m
   have hq : J.inverseChart z m p ∈ physicalPieceOpen S K z m := by
-    simpa only [hdomains m] using hmap hp
+    have hq' := hmap hp
+    change J.inverseChart z m p ∈
+      physicalPieceOpen S (n06CurrentAtlasReplacement K J) z m at hq'
+    rw [hdomains m] at hq'
+    exact hq'
   have he : K.chart z m (J.inverseChart z m p) = p :=
     (hchart m hq).symm.trans (hright p hp)
   have hi := hleft _ hq

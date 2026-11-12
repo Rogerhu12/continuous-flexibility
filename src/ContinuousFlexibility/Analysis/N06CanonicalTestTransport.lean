@@ -118,6 +118,7 @@ theorem n06CanonicalTestPullback_eventually_zero_of_not_mem
       ((hb.2.2.2.2.1 p hpcl).1.continuousAt.fst.tendsto).eventually
         (hJ.isClosed.isOpen_compl.mem_nhds hFpJ)
     filter_upwards [hnear] with q hq
+    change n06CanonicalTestPullback S K z m φ q = 0
     by_cases hqΩ : q ∈ physicalPieceOpen S K z m
     · rw [n06CanonicalTestPullback_eq_of_mem hqΩ,
         hzero (K.chart z m q).1 hq (K.chart z m q).2, mul_zero]

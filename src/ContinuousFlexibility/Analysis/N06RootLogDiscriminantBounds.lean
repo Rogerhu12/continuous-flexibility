@@ -207,10 +207,14 @@ theorem n06_rootLogDiscriminant_finite_weighted_jets
   have hgrade : stateGrading S (n + 7) (z.1 - C.referenceState) ≤ 1 :=
     (le_add_of_nonneg_right (abs_nonneg z.2)).trans hsmall
   have hstate : stateGrading S (n + 7) z.1 ≤ R := by
-    have h := (map_add_le_add (stateGrading S (n + 7))
-      (z.1 - C.referenceState) C.referenceState).trans
-        (add_le_add_right hgrade (stateGrading S (n + 7) C.referenceState))
-    simpa only [sub_add_cancel, R, add_comm] using h
+    calc
+      stateGrading S (n + 7) z.1 ≤
+          stateGrading S (n + 7) (z.1 - C.referenceState) +
+            stateGrading S (n + 7) C.referenceState := by
+        simpa only [sub_add_cancel] using map_add_le_add
+          (stateGrading S (n + 7)) (z.1 - C.referenceState) C.referenceState
+      _ ≤ 1 + stateGrading S (n + 7) C.referenceState := add_le_add hgrade le_rfl
+      _ = R := add_comm _ _
   have hq : |z.2| ≤ 1 := (le_add_of_nonneg_left
     (apply_nonneg (stateGrading S (n + 7)) (z.1 - C.referenceState))).trans hsmall
   have hp : (r, θ) ∈ annularOpen D := ⟨hr, mem_univ θ⟩
@@ -240,6 +244,34 @@ theorem n06_rootLogDiscriminant_finite_weighted_jets
   have he := (hgerm.iteratedFDeriv ℝ k).eq_of_nhds
   exact ((congrArg norm he).trans_le hbound).trans_eq (by ring)
 
+def N06RootLogDiscriminantOrientedFiniteJetsBound (D : ReferenceData) (T : MaterialData)
+    (S : PhysicalSpacesData) (C : NonlinearGeometryData S) (base n : ℕ) (ε Q : ℝ) : Prop :=
+    ∀ z : AnnularState S × ℝ,
+      z ∈ stateNeighborhood S C base ε → stateSector S z.1 →
+      stateGrading S (n + 7) (z.1 - C.referenceState) + |z.2| ≤ 1 →
+      ∀ r ∈ radialCore D, deriv D.w r = 0 → ∀ ι : ℝ, (ι = 1 ∨ ι = -1) →
+      ∀ θ : ℝ, ∀ k, k ≤ n →
+        ‖iteratedFDeriv ℝ k (fun p => Real.log
+          (n06RootPhysicalDiscriminant (stateProfile D S C z.1)
+            (stateHeight D S C z) r ι p)) (0, θ)‖ ≤
+          Q * n06RootJetWeight T (r, θ) * |z.2|
+
+private theorem n06_rootLogDiscriminant_orient_bound {n : ℕ} {Q : ℝ}
+    (hbound : N06RootLogDiscriminantFiniteJetsBound D T S C base n ε Q) :
+    N06RootLogDiscriminantOrientedFiniteJetsBound D T S C base n ε Q := by
+  intro z hz hs hsmall r hr hroot ι hι θ k hk
+  let f : PolarPoint → ℝ := fun p => Real.log
+    (polarDiscriminant (stateProfile D S C z.1) (stateHeight D S C z) p)
+  have hb : ‖iteratedFDeriv ℝ k f (r, θ)‖ ≤
+      Q * n06RootJetWeight T (r, θ) * |z.2| :=
+    hbound z hz hs hsmall r hr hroot θ k hk
+  have he : ‖iteratedFDeriv ℝ k (f ∘ rootProfileShift r ι) (0, θ)‖ =
+      ‖iteratedFDeriv ℝ k f (r, θ)‖ := by
+    simpa only [n06_rootProfileShift_boundary] using
+      n06_norm_iteratedFDeriv_rootProfileShift f r ι hι k (0, θ)
+  change ‖iteratedFDeriv ℝ k (f ∘ rootProfileShift r ι) (0, θ)‖ ≤ _
+  exact he.trans_le hb
+
 /-- The same bound applies to both physical radial orientations, with
 no loss from the actual translation or reflection. This is the term in
 `n06_N01_rootLogHeight_difference_boundaryJets`. -/
@@ -255,16 +287,9 @@ theorem n06_rootLogDiscriminant_oriented_finite_weighted_jets
           (n06RootPhysicalDiscriminant (stateProfile D S C z.1)
             (stateHeight D S C z) r ι p)) (0, θ)‖ ≤
           Q * n06RootJetWeight T (r, θ) * |z.2| := by
+  change ∃ Q : ℝ, 0 ≤ Q ∧
+    N06RootLogDiscriminantOrientedFiniteJetsBound D T S C base n ε Q
   obtain ⟨Q, hQ, hbound⟩ := n06_rootLogDiscriminant_finite_weighted_jets hT hS hN01 n
-  refine ⟨Q, hQ, ?_⟩
-  intro z hz hs hsmall r hr hroot ι hι θ k hk
-  have he := n06_norm_iteratedFDeriv_rootProfileShift
-    (fun p => Real.log (polarDiscriminant (stateProfile D S C z.1)
-      (stateHeight D S C z) p)) r ι hι k (0, θ)
-  rw [n06_rootProfileShift_boundary] at he
-  change ‖iteratedFDeriv ℝ k ((fun p : PolarPoint => Real.log
-    (polarDiscriminant (stateProfile D S C z.1) (stateHeight D S C z) p)) ∘
-      rootProfileShift r ι) (0, θ)‖ ≤ _
-  exact he.trans_le (hbound z hz hs hsmall r hr hroot θ k hk)
+  exact ⟨Q, hQ, n06_rootLogDiscriminant_orient_bound hbound⟩
 
 end ContinuousFlexibility.Statements

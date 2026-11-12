@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
+import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
 
 /-!
 # Actual angular jets of controlled reference sources

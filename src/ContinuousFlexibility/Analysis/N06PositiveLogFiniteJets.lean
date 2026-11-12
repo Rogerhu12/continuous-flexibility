@@ -72,7 +72,7 @@ theorem n06_log_finite_jets_of_one_difference (n : ℕ) {B : ℝ} (hB : 0 ≤ B)
       (iteratedDeriv j (fun _ : ℝ => (1 : ℝ)) x)
     rw [sub_add_cancel] at ht
     exact ht.trans ((add_le_add (hdiff j hj) (hone j)).trans
-      (add_le_add_right hδB 1))
+      (add_le_add hδB (le_refl (1 : ℝ))))
   have hfx : f x ∈ Icc (1 / 2 : ℝ) M :=
     ⟨hpositive, (le_abs_self _).trans (by simpa only [iteratedDeriv_zero] using hF 0 (Nat.zero_le n))⟩
   have honeMem : (1 : ℝ) ∈ Icc (1 / 2 : ℝ) M := ⟨by norm_num, by dsimp only [M]; linarith⟩

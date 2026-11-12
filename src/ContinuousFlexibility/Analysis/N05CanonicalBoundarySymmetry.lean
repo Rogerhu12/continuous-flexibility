@@ -250,7 +250,7 @@ theorem n05_canonical_closed_inverse_angle_mem_Icc_iff
     · rw [hpi.mp hzpi]
       exact ⟨Real.pi_pos.le, le_rfl⟩
     exact mem_Icc_of_Ioo (hopen.mp
-      ⟨lt_of_le_of_ne hangle.1 hz0.symm, lt_of_le_of_ne hangle.2 hzpi⟩)
+      ⟨lt_of_le_of_ne hangle.1 (Ne.symm hz0), lt_of_le_of_ne hangle.2 hzpi⟩)
   · intro hangle
     by_cases hz0 : p.2 = 0
     · rw [(hzero p hp).mpr hz0]
@@ -259,7 +259,7 @@ theorem n05_canonical_closed_inverse_angle_mem_Icc_iff
     · rw [hpi.mpr hzpi]
       exact ⟨Real.pi_pos.le, le_rfl⟩
     exact mem_Icc_of_Ioo (hopen.mpr
-      ⟨lt_of_le_of_ne hangle.1 hz0.symm, lt_of_le_of_ne hangle.2 hzpi⟩)
+      ⟨lt_of_le_of_ne hangle.1 (Ne.symm hz0), lt_of_le_of_ne hangle.2 hzpi⟩)
 
 /-- The forward chart detects the same closed angular interval on its
 actual closed physical domain. -/
