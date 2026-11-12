@@ -33,8 +33,9 @@ private theorem weighted_abs_multilinear_scalar_split
   have hidentity : F v = F q + ∑ i : Fin k, F (multilinearDifferenceTuple q v i) := by
     have h := F.map_sub_map_piecewise v q Finset.univ
     have heq : F v - F q = ∑ i : Fin k, F (multilinearDifferenceTuple q v i) := by
-      simpa only [Finset.piecewise_univ, Finset.mem_univ, true_implies,
-        multilinearDifferenceTuple, eq_comm] using h
+      change F v - F q = ∑ i : Fin k,
+        F (fun j => if j < i then v j else if i = j then v j - q j else q j)
+      simpa only [Finset.piecewise_univ, Finset.mem_univ, true_implies] using h
     calc
       F v = F q + (F v - F q) := by ring
       _ = _ := congrArg (fun z => F q + z) heq
