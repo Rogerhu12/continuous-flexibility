@@ -38,7 +38,8 @@ theorem n01aStatement_of_quantitative_reference (D : RadialReference)
     intro r hr
     obtain ⟨m, hm⟩ := radialPartition_exists_cell hD.1.choose_spec.2.1 hr
     have hp : 0 < T.E0 r := (hT.2.1 r hr).2.2.1
-    have he := Real.exp_le_exp.mpr (zero_le_one.trans (hlog m r hm).1)
+    have hl : 0 ≤ Real.log (T.E0 r) := zero_le_one.trans (hlog m r hm).1
+    have he := Real.exp_le_exp.mpr hl
     simpa only [Real.exp_zero, Real.exp_log hp] using he
   obtain ⟨host, χ, hhost, hχ, hderiv, hjets⟩ :=
     exists_n01a_opticalControls_of_radialReference hD

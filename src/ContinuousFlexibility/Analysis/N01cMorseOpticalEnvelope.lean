@@ -40,6 +40,7 @@ theorem opticalCoefficient_ge_radialE (h : MorseChainRealization T σ D C)
   have hE : radialE n ^ (-6 : ℝ) ≤ exp (-(n : ℝ) ^ 2) ^ 6 := by
     rw [radialE, ← exp_mul, ← exp_nat_mul]
     apply exp_le_exp.mpr
+    norm_num only [Nat.cast_ofNat]
     have hQ := radial_nat_sq_le_Q n
     nlinarith only [hQ]
   have hscale : radialE n ^ (-6 : ℝ) / (3 : ℝ) ^ 6 ≤ A ^ 6 := by
@@ -55,7 +56,7 @@ theorem opticalCoefficient_ge_radialE (h : MorseChainRealization T σ D C)
         A ^ 6 / (1372 * D.b ^ 3 * (9 : ℝ) ^ 9) := by
     calc
       _ = (radialE n ^ (-6 : ℝ) / (3 : ℝ) ^ 6) /
-          (1372 * D.b ^ 3 * (9 : ℝ) ^ 9) := by field_simp [hb.ne']; ring
+          (1372 * D.b ^ 3 * (9 : ℝ) ^ 9) := by field_simp [hb.ne']
       _ ≤ _ := div_le_div_of_nonneg_right hscale (by positivity)
   apply hfirst.trans
   change A ^ 6 / (1372 * D.b ^ 3 * (9 : ℝ) ^ 9) ≤
@@ -64,7 +65,7 @@ theorem opticalCoefficient_ge_radialE (h : MorseChainRealization T σ D C)
   calc
     (A ^ 6 / (1372 * D.b ^ 3 * (9 : ℝ) ^ 9)) *
         (1372 * D.b ^ 3 * A ^ 3) = A ^ 9 / (9 : ℝ) ^ 9 := by
-      field_simp [hb.ne']; ring
+      field_simp [hb.ne']
     _ ≤ B := hBA
 
 /-- A common constant gives a negative-power optical lower bound on every
@@ -88,7 +89,8 @@ theorem exists_opticalRatio_radialE_lower_bound
   have h6K : (6 : ℝ) ≤ K := le_max_left _ _
   have hAK : A ≤ K := le_max_right _ _
   refine ⟨K, hK, fun side n hn h100 r hr => ?_⟩
-  have hE : 1 ≤ radialE n := one_le_exp_iff.mpr (radialQ_nonneg n)
+  have hE : 1 ≤ radialE n := one_le_exp_iff.mpr
+    ((sq_nonneg (n : ℝ)).trans (radial_nat_sq_le_Q n))
   have hinv : K⁻¹ ≤ A⁻¹ := by
     simpa only [one_div] using one_div_le_one_div_of_le hA hAK
   have hpower : radialE n ^ (-K) ≤ radialE n ^ (-6 : ℝ) :=

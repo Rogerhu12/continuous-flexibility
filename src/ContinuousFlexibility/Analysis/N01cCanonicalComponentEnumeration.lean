@@ -34,7 +34,7 @@ theorem exists_n01c_canonical_component_enumeration
     (hq : 0 < q) (hE : IsAccumulatingProfile E)
     (ha : E.a = G.radiusL * D.a) (hb : E.b = G.radiusR * D.b)
     (hw : E.w = G.profile)
-    (hseams : ∀ side n, T.index ≤ n →
+    (hseams : ∀ (side : Bool) (n : ℕ), T.index ≤ n →
       if side then morseChainSeam T side T.index ≤ morseChainSeam T side n
       else morseChainSeam T side n ≤ morseChainSeam T side T.index)
     (hlabels : D.cellIndex = morseTwoTailAt T.index (fun _ k => T.index + k))
