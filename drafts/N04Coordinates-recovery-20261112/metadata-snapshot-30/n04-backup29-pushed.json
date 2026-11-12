@@ -1,0 +1,22 @@
+{
+  "snapshot": 29,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "parent": "bda0a6089d1a12995a2502c3a3f93ee9444b30dd",
+  "additional_parents": [
+    "03e526021c371413f03fc0ce052476b63e105361"
+  ],
+  "compiled_baseline": "03e526021c371413f03fc0ce052476b63e105361",
+  "indexed_files": 2581,
+  "new_source_lines": 2009,
+  "projected_added_lean_from_compiled_baseline146": 10151,
+  "prior_versions": "All historical source versions remain immutable and reachable through the backup parent and exact SOURCE-INDEX locations.",
+  "status": "Source preservation only; outside src, no CI activation or completion claim.",
+  "head": "34563c9cf53ad95b24e2c22d7f1c1c001559db99",
+  "tree": "a47c3f207707ee5d709e5da9dcf5ddf8148d4c3e",
+  "pushed": "2026-11-12 16:28:22 UTC",
+  "new_source_versions": 13,
+  "payload_sha256": "586f34cd606002da3d60f4dfdcd04abcdea906bb71ba1550a25eb4d3575b1e54",
+  "blob_payload_sha256": "87b1bae8cc5e7f1490a5b662cf251c2af546e8ae6c4007f96aa71a97c2c91ccb",
+  "compressed_diagnostics": 4,
+  "compression_note": "Lossless gzip for large JSON diagnostics; original source SHA256 and restore behavior preserved. Lean sources remain uncompressed. Binary gzip copies are also preserved exactly."
+}

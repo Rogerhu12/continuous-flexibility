@@ -1,0 +1,166 @@
+{
+  "snapshot": 30,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "parent": "34563c9cf53ad95b24e2c22d7f1c1c001559db99",
+  "additional_parents": [
+    "23d28b145e1361fd8c683ba77415226b82be7bb3"
+  ],
+  "base_tree": "a47c3f207707ee5d709e5da9dcf5ddf8148d4c3e",
+  "compiled_baseline": "23d28b145e1361fd8c683ba77415226b82be7bb3",
+  "line_head": "03ea768c1f2211dff62714b932be808345dcf918",
+  "line_tree": "84a1b13b975d16f42aed7de40b8601bd09fda8ae",
+  "frozen_at": "2026-11-12T16:59:00.859071+00:00",
+  "indexed_files": 2682,
+  "new_sources": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeOpticalRootDivision.lean",
+      "sha256": "5b631337c20031a69fab824a07c73702556ae9b3532a784f29fd868b64270187",
+      "lines": 238
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceAiryCoordinate.lean",
+      "sha256": "8f7b0552ef8d8001432a74d11359cec6a51263dd84a51711853bf414b381bdce",
+      "lines": 134
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceAiryHeight.lean",
+      "sha256": "596c3a9e251af4cf733969373eed0530c9d3857a2e8825e61417efddf83edc9e",
+      "lines": 151
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryAverage.lean",
+      "sha256": "3042235baed470dbba3f46a0db906d299c504b8e0569e255393693265f350fe7",
+      "lines": 215
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryHeightMaterialJets.lean",
+      "sha256": "2a332f186f3b6d6f4500b9a05a988b0c460dfb2cb783cc42228f1de1b4b7527a",
+      "lines": 261
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTower.lean",
+      "sha256": "c6453415ecbafbb9694be2295bd29bfcdee2b98a0a5ce5f53030dda9ceb7fea7",
+      "lines": 157
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelMixedTowers.lean",
+      "sha256": "cb1aa5f610ab01e37b6b8fb99c0b64f1fb0b6d31e4a5cdee275aa5e8083b9813",
+      "lines": 145
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTower.lean",
+      "sha256": "b56f6a83992424a397bede0353ac43c6a34fa75e172f5b39e162d69228b39176",
+      "lines": 119
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04MinusFirstIntegralStripTower.lean",
+      "sha256": "e49929c25d4503c9d23fdb55b16ef26bcec02f9bdc3e4b01c69ec0d1ddfd781f",
+      "lines": 156
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.lean",
+      "sha256": "9bd854157a276a4c5fd8d3161f63d65a851fedbc656beba959ad5899e89cb5a7",
+      "lines": 159
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceFiveAtoms.lean",
+      "sha256": "196538c50d4320c4d4678834ea5e0bab2cab73b43bb5aadb57d30c7cd1d193c4",
+      "lines": 194
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferencePrincipalMaterialJets.lean",
+      "sha256": "ba30210799a8513a04fe59f50eecec9edbe5d5f73fd3346c29b1a8b35a5bfca7",
+      "lines": 163
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RadialReferencePrincipalJetEnvelope.lean",
+      "sha256": "1be3a119508e3f1e6d234e82d258d4930b89df274277650dd17c66a79171d002",
+      "lines": 91
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferencePrincipalPhysicalMaterialJets.lean",
+      "sha256": "f829971e69d193fe93cab137aea5198045ff765c0e659d2587599386296547e8",
+      "lines": 108
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositivePrincipalJets.lean",
+      "sha256": "b8e9fe14a443cf93d04a9643633566b731268408fc8ce38131639eced6887540",
+      "lines": 290
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair157/CanonicalPositiveSourcePrefixBounds.lean",
+      "sha256": "2a534678b940aba00ec2272d791bf1f9475352bfc0f53472f483e1bd0504d2da",
+      "lines": 122
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair158/CanonicalPositiveSourcePrefixBounds.lean",
+      "sha256": "5e136c7f38ac3c8873a24184c87d890541070b81419788ddcedcc04778ec5646",
+      "lines": 130
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-optical/N04FixedCorrectionWitness.lean",
+      "sha256": "31cc9daa037d8704afa88ebb2d2ea93724450c94ade5e63ce8e0ce37a21e9a12",
+      "lines": 148
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedPositiveReferencePotentialMaterialJets.lean",
+      "sha256": "0907bd7f6cecbd52a23169516f946964f1a8e46ec97f0f6dc9fb48e64dd0304f",
+      "lines": 123
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeFixedPotentialReferenceJets.lean",
+      "sha256": "0dd9a3b48093074e943d596fa77a1a5393c2c13459e1ca50cf0c814596905084",
+      "lines": 173
+    }
+  ],
+  "new_source_lines": 3277,
+  "existing_added_lean_from_compiled_baseline159": 10151,
+  "projected_added_lean_from_compiled_baseline159": 13428,
+  "line_count_method": "Conservative git diff --numstat --no-renames over every Lean file. Content similarity or move detection gives no reduction in the hard source budget.",
+  "compressed_diagnostics": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTowerClosureInventory.json",
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-30/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTowerClosureInventory.json.storage.gz",
+      "uncompressed_sha256": "1dfe3267c9ea9dd58557ac752b696570146e58657756bc59bc6d1eb612814d07",
+      "uncompressed_bytes": 314193,
+      "gzip_bytes": 56356,
+      "blob": "fb9716ccf7ece778af3301813ac7e0080085864c"
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelMixedTowersClosureInventory.json",
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-30/positive/reconstructed/N04ActualTravelMixedTowersClosureInventory.json.storage.gz",
+      "uncompressed_sha256": "5d67e4cdeb8ef7273c8ce7aa7750c3d8395a44e5a0a6dcc8a11ee6bd75f9e181",
+      "uncompressed_bytes": 359429,
+      "gzip_bytes": 63915,
+      "blob": "45b6520f591783b9fa9486a66a2730ba1787645b"
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTowerClosureInventory.json",
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-30/positive/reconstructed/N04ActualTravelStripTowerClosureInventory.json.storage.gz",
+      "uncompressed_sha256": "117540f18878916a7b67d118012ab4d0cdff5fbddf72d88fd6c06363d6098f14",
+      "uncompressed_bytes": 352977,
+      "gzip_bytes": 62632,
+      "blob": "8576538fd550d615ff5f06e5206351f8327d8a22"
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04MinusFirstIntegralStripTowerClosureInventory.json",
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-30/positive/reconstructed/N04MinusFirstIntegralStripTowerClosureInventory.json.storage.gz",
+      "uncompressed_sha256": "76a8d066bea9acf185761873fa485e53bcf7baaf364b70a37bc04ab1930d385e",
+      "uncompressed_bytes": 312504,
+      "gzip_bytes": 55827,
+      "blob": "09ea662b148c6557465ac781d808e97b51135f4a"
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/N04PreservedOpticalCorrectionWitnessSelectedMainGraph.json",
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-30/positive/recovery/reviews/N04PreservedOpticalCorrectionWitnessSelectedMainGraph.json.storage.gz",
+      "uncompressed_sha256": "86ba423cc24ec858b3c9d9d5dba13d2b3b9ffa0cb38db4188c063aa495fd8b3f",
+      "uncompressed_bytes": 480439,
+      "gzip_bytes": 86099,
+      "blob": "bd45a15a23fc9584b8c0be5d26088bf2b4af6d76"
+    }
+  ],
+  "compression_note": "Lossless gzip for large JSON diagnostics; original source SHA256 and restore behavior preserved. Lean sources remain uncompressed. Binary gzip copies are also preserved exactly.",
+  "prior_versions": "All historical source versions remain immutable and reachable through the backup parent and exact SOURCE-INDEX locations.",
+  "status": "Source preservation only; outside src, no CI activation or completion claim.",
+  "entries": 141
+}

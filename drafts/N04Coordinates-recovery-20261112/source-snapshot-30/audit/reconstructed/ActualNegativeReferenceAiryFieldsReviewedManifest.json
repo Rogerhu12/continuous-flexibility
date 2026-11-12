@@ -1,0 +1,64 @@
+{
+  "kind": "actual_negative_reference_airy_fields_reviewed_sources",
+  "owner": "/root/audit_coordinates",
+  "status": "INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceAiryCoordinate.lean",
+      "sha256": "8f7b0552ef8d8001432a74d11359cec6a51263dd84a51711853bf414b381bdce",
+      "blob": "b5d3ecd7b7260eb69b418da9ddcb0d6279986653",
+      "lines": 134,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceAiryCoordinate.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.OpticalHalfAiryAverage",
+        "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+        "ContinuousFlexibility.Analysis.N01OpticalRootDivision"
+      ],
+      "public_names": [
+        "n04b_reference_orientedTravel_inwardIntegral",
+        "n04b_reference_rootHalfCoordinate_eq_airy",
+        "n04Coordinates_actual_reference_negative_airy_chart"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceAiryHeight.lean",
+      "sha256": "596c3a9e251af4cf733969373eed0530c9d3857a2e8825e61417efddf83edc9e",
+      "blob": "806604cbc578c78f75ab380a34c07274cd3e551d",
+      "lines": 151,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceAiryHeight.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualNegativeReferenceAiryCoordinate",
+        "ContinuousFlexibility.Analysis.PositiveReferenceCylinder"
+      ],
+      "public_names": [
+        "n04Coordinates_actual_reference_negative_airy_height"
+      ]
+    }
+  ],
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceAiryFieldsCandidateManifest.json",
+    "sha256": "2b171d297e8e72b5e42e9d06ff9ee9cbcef1c28ebb47139e5414f38b575b1f3f",
+    "blob": "515b89868c78ea0fc7397041d792125fcf830cb5",
+    "lines": 142
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/ActualNegativeReferenceAiryFieldsIndependentReview.json",
+    "sha256": "28beb3b80c84e8dcc0ea335a08f1adfd0fd0896bdae2e2a6475b35e4557fae22",
+    "blob": "937e504f32b9af791ad04441a65b4892570a5c86",
+    "lines": 188
+  },
+  "upstream_integral_average_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryAverageReviewedManifest.json",
+    "sha256": "c2a150c2c703e085608ba0e41f10350e6ef889599bdf785e9c35259544a5481e",
+    "blob": "cd82d84d6ed8f98f29452f9218b1e02a11f29852",
+    "lines": 44
+  },
+  "source_bytes_unchanged": true,
+  "compiled": false,
+  "scope_limits": [
+    "The same actual typed atlas and same integral Airy coordinate are identified on the negative half. Stored height identity uses genuine positive height and the unit a-density.",
+    "Actual height identity currently concerns 0<x<d. No boundary, exterior-extension or material jet assertion is added by this owner record.",
+    "The subsequent all-order numerical height estimate is a separate new candidate; no active source/index/ref/checkpoint/CI change."
+  ],
+  "created_at": "2026-11-12T16:54:41.694500+00:00"
+}

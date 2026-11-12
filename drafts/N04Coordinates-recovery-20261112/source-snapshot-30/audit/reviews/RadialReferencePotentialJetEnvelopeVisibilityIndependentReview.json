@@ -1,0 +1,78 @@
+{
+  "kind": "radial_reference_potential_envelope_public_visibility_delta_independent_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "PASSED_EXACT_VISIBILITY_DELTA_AND_FULL_FINAL_SOURCE_REVIEW",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelopeVisibilityCandidateManifest.json",
+    "sha256": "4076fb4251e6d491bdb18f7b05a2a7074e562777bef19ddde8bcec6970a43217",
+    "blob": "b3d4df8b26c33b480ea45491c2c66c3a269a75a7",
+    "lines": 56
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.lean",
+    "sha256": "9bd854157a276a4c5fd8d3161f63d65a851fedbc656beba959ad5899e89cb5a7",
+    "blob": "4df4d9e114ae59bd99b5d3c09825adc95dbe3808",
+    "lines": 159
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePotentialJetEnvelope.lean",
+    "sha256": "1f9b3defaf95b285251e29c321f40c9e53c4745469447ad5861ccd51ffb8f455",
+    "blob": "d63e8e50b1918c38a0864f79afd1bffebc5d6a46",
+    "lines": 159
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.diff",
+    "sha256": "a66d9b7eb167977040850fd028dc535f31fa2181afef4e3bd552cc632821f211",
+    "blob": "9cc1be7243e0102412e669793fbc47c3fa652849",
+    "lines": 20
+  },
+  "prior_complete_mathematical_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ActualPositiveReferencePotentialEnvelopeMaterialIndependentReview.json",
+    "sha256": "a7df20c5f0d405184afec8cfb6ef9abf49f5f834626acd11a7f00897a750684b",
+    "blob": "7f7fea509b317a52633eeb2ba9f95b3990b31167",
+    "lines": 215
+  },
+  "prior_owner_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferencePotentialReviewedManifest.json",
+    "sha256": "597cefd6794acfe7740a3406127dddf8bec7f4117e84e381d7ed13adc32ef99d",
+    "blob": "cfe35ac88b909785096edab9fd7c4fd45df20bac",
+    "lines": 121
+  },
+  "new_public_names": [
+    "referencePotential_product_envelope",
+    "referencePotential_composition_envelope"
+  ],
+  "checks": [
+    "Read the complete final159 source and the exact20-line diff; recomputed all seven manifest-bound identities.",
+    "Removing exactly the two private modifiers produces the final source byte-for-byte; reversing the two deletions recovers the immutable original159. All complete mathematical statement types, proof bodies, imports/options and existing public theorem remain identical.",
+    "The product estimate uses the finite Leibniz sum with constants before functions and envelopes. The composition estimate uses genuine ordered partitions, only positive inner jets, and ContDiffAt of the outer function at the actual image. No zeroth inner bound or ambient inverse-profile smoothness was introduced.",
+    "The two new public names were scanned in installed src and current owned reconstructed source directories. The only previous declarations are the two private originals in the superseded same-module source; no public declaration collision was found.",
+    "This is an explicit visibility supersession of one module. The old source, original551 candidate/owner and historical mathematical receipt remain unchanged. The two versions must not be installed as distinct modules."
+  ],
+  "collision_scan": {
+    "roots": [
+      "/workspace/scratch/bbbea77e4163/continuous-flexibility/src",
+      "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed",
+      "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed",
+      "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed",
+      "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed"
+    ],
+    "prior_declarations": [
+      {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePotentialJetEnvelope.lean",
+        "private": true,
+        "name": "referencePotential_product_envelope"
+      },
+      {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePotentialJetEnvelope.lean",
+        "private": true,
+        "name": "referencePotential_composition_envelope"
+      }
+    ]
+  },
+  "findings": [],
+  "compiled": false,
+  "source_edited": false,
+  "active_state_modified": false,
+  "reviewed_at": "2026-11-12T16:29:02.904431+00:00"
+}

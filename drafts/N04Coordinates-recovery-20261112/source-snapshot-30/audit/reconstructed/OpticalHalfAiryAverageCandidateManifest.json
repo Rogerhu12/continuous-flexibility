@@ -1,0 +1,90 @@
+{
+  "kind": "same_closed_optical_half_airy_average_and_actual_integral_coordinate",
+  "owner": "/root/audit_coordinates",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryAverage.lean",
+    "sha256": "3042235baed470dbba3f46a0db906d299c504b8e0569e255393693265f350fe7",
+    "blob": "5b72f289315de1f7af1090266df6c7723f52e369",
+    "lines": 215,
+    "target_path": "src/ContinuousFlexibility/Analysis/OpticalHalfAiryAverage.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.N06AiryRadialGerm",
+      "ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization"
+    ],
+    "public_names": [
+      "airyAverage_bounds_on_nonnegative_interval",
+      "airyAverage_jet_bound_on_nonnegative_interval",
+      "exists_positive_sqrt_germ_extension",
+      "opticalHalf_integral_eq_airyAverage",
+      "opticalHalf_rootCoordinate_eq_airyRadialCoordinate",
+      "exists_opticalHalfAiryAverage_of_factor_bounds"
+    ]
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N06AiryAverage.lean",
+      "sha256": "25667dee5c13acbd60a26ec73d9b6ae8d18df2ddebb46660475a4681796ab29e",
+      "blob": "4fad6f2a1ad80c9e039669a8fa48f5db4e5ff229",
+      "lines": 201
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N06AiryRadialGerm.lean",
+      "sha256": "a2bf43dd757db61c008348c266e2f3c3215cde6dea7db51ab6dc3393e32bed5c",
+      "blob": "a21a633cc12cdfbf8103c2310cdc814d28557a3d",
+      "lines": 212
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/SmoothScaledIntegral.lean",
+      "sha256": "73bdf8a80a843de28f4289626081380ae3543c444ff83473b88bdde315f6ec95",
+      "blob": "19c6708f7a763f9106baa228d21a8290d11802aa",
+      "lines": 127
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/OneHighCircleFlowLocalization.lean",
+      "sha256": "b83f6df3f3e618efb3345a691b03e805767432739ecd22e545d2cc549a2b28a3",
+      "blob": "0244a54220d1b7f9ef130216eabff159d83b9911",
+      "lines": 153
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/SmoothDivisionBounds.lean",
+      "sha256": "3b78a6ec27add3df86492635c18b10d57da5623cb22c3f45e29f4b79283c8272",
+      "blob": "79461bd72fae888688990bf0e9173212e2d47813",
+      "lines": 102
+    }
+  ],
+  "pinned_api_sources": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean",
+      "sha256": "31d57d81e75cc6b42ea50dbbb0a6856f4c760c422b41e6691d3660dfc876711d",
+      "blob": "bcf4a893f0a46471ec5f14a6dde0a960b739560a",
+      "lines": 1473
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "lines": 1155
+    }
+  ],
+  "intended_actual_factor_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeOpticalRootDivisionReviewedManifest.json",
+    "sha256": "266d9c269f03139a7af30df7048979c8d4ff4cb6c30effdff4177d911f1c2731",
+    "blob": "55995e2c84b3056bdb005ede2b12d4816bb8a232",
+    "lines": 51
+  },
+  "checks": [
+    "The local value and all-order jet estimates integrate only t*x with t in[0,1] and x in the same[0,d]; no global derivative bound is imposed on the extension.",
+    "A value-variable smooth clamp has range bounded below by m/4 and is the identity near every genuine input value in[m,M]. Taking its square root yields a global positive smooth representative with exactly the original sqrt(g) germs on the closed half.",
+    "The real substitution y=t*x identifies (3/2)*integral sqrt(y*g(y)) with x^(3/2)*the existing N06 Airy average; the exact2/3 power then recovers the original nonnegative optical coordinate, including x=0.",
+    "The single representative is selected before requesting n or B. Its average is globally positive, while the quantitative value/jet conclusions depend only on the actual interval data.",
+    "All new explicit public names were scanned against installed and current peer reconstructed sources; no collision. No resource or proof-escape directive."
+  ],
+  "scope_limits": [
+    "This is the concrete fixed-integral calculus bridge for the actual factor produced by238. Its value bounds m/M are raw factor inputs, not a final height or potential bound.",
+    "No arbitrary extension-width inverse or derivatives outside the actual half are charged. No common infinite collar across components is assumed.",
+    "Actual typed-atlas height identification and subsequent material packing are separate next steps. No compilation or active checkout/index/ref/CI/checkpoint action."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T16:38:14.834637+00:00"
+}

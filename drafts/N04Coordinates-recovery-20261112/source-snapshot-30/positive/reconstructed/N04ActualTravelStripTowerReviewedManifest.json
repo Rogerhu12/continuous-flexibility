@@ -1,0 +1,33 @@
+{
+  "kind": "actual_stored_travel_strip_joint_tower_reviewed_candidate",
+  "owner": "/root/proof_inventory",
+  "status": "STATIC_INDEPENDENTLY_FULL_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTower.lean",
+    "sha256": "b56f6a83992424a397bede0353ac43c6a34fa75e172f5b39e162d69228b39176",
+    "blob": "8defbd534dce0d43f28ad8ed155c8e684eea771a",
+    "lines": 119
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTowerCandidateManifest.json",
+    "sha256": "76811d8aee7dc65de6d9a0c4cc5f49b9c94659ce58bbec01aa37d1ca2359c99f",
+    "blob": "e84eb22145ebfb28816b32c29d62726554e9e72d",
+    "lines": 144
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/N04ActualTravelStripTowerIndependentReview.json",
+      "sha256": "a6e65c0d34fcc978f42f7d088b6383a17f92d2451e0f5de5bfe059cb5926c7ce",
+      "blob": "8cb8b8722023a195fa6682b5dcbbf533c5c90b50",
+      "lines": 168
+    }
+  ],
+  "source_unchanged": true,
+  "compiled": false,
+  "scope_limits": [
+    "The raw original discriminant is derived from the same corrected field and retained cutoff-support data. Literal correction/minus-flow identities and field regularity remain actual inputs.",
+    "One genuine joint travel tower is constructed; no numerical CurrentJets bounds are claimed.",
+    "No active checkout/index/ref/CI operation."
+  ],
+  "created_at": "2026-11-12T16:48:41.955169+00:00"
+}

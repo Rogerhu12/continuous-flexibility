@@ -1,0 +1,82 @@
+{
+  "kind": "actual_three_physical_principal_factors_same_positive_sample_envelope",
+  "owner": "/root/quantitative_route",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_PEER",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferencePrincipalPhysicalMaterialJets.lean",
+    "sha256": "f829971e69d193fe93cab137aea5198045ff765c0e659d2587599386296547e8",
+    "blob": "7c0092bb7a14fc38cb7252f67c33c19a165a2d3c",
+    "lines": 108
+  },
+  "public_names": [
+    "retainedReference_positive_principal_physical_material_jets"
+  ],
+  "imports": [
+    "ContinuousFlexibility.Analysis.ReferenceInverseProfileMaterialJets",
+    "ContinuousFlexibility.Radial.ReferenceModerateCoefficients",
+    "Mathlib.Topology.Order.Compact"
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJets.lean",
+      "sha256": "52e91e6500606231c499fcd3863d9b2f9ca99535348f52e9abc8f15b139b8e23",
+      "blob": "6fbfba9f7a349a6604eb28473b5098a5f45a3e1f",
+      "lines": 103
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/ReferenceModerateCoefficients.lean",
+      "sha256": "c2a86b45c7e15d9ceb1d807ee9398db0a1652fc1a4a9206cf52a23180fd9487f",
+      "blob": "5ebec66fc1a840a83166cb74866b94fba1df7ef3",
+      "lines": 201
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046",
+      "blob": "19becb59903b44c18c8f1afb72726b2f95952752",
+      "lines": 66
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04PositiveComponents.lean",
+      "sha256": "5b7a7e28f279116415d8a3a23299294f8e5fc1858187ec00c3ea18a4d04757de",
+      "blob": "0d4de58a9b9ecd9f84e2f01da190847464669cc6",
+      "lines": 194
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Deriv.lean",
+      "sha256": "3033d2b35bcfdad1ab06168dee62c8587215de8fa049caa85e5445c54d4fb98c",
+      "blob": "ede41b77d146105bee637d6db9b91a1a21a48547",
+      "lines": 141
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Order/Compact.lean",
+      "sha256": "7c02670f2e88f16acd11d69ddd6afb8d8118adca50279e1abb2a3c7761feb044",
+      "blob": "8e1982cb6cd1f808ded359ffdb0afa8ee9a8bdba",
+      "lines": 546
+    }
+  ],
+  "selected_inverse_profile_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJetsReviewedManifest.json",
+    "sha256": "16b143562879d7afa35191e4a5850af9407223fed8af59136062433a67906846",
+    "blob": "d45cce809854a44f29de33bf413d6d46afcb51e7",
+    "lines": 34
+  },
+  "proof_summary": [
+    "A single Bool-indexed compact finite sum bounds w and w-prime/r on the fixed closed annulus. Radius positivity keeps the flux smooth on Ioi0, so there is no reciprocal-profile compact assumption.",
+    "The already reviewed reciprocal-profile cell-to-point-to-positive-midpoint theorem supplies the only noncompact physical factor. Its actual original j and T are preserved.",
+    "For any fixed supplied C0>=1 and actual sample floor, M=1+P0+K+A controls all three finite prefixes by M*(C0*E0(sample j))^M before the component, sample host and point. Raw E0>=1 is never assumed."
+  ],
+  "static_checks": {
+    "resource_options": [],
+    "forbidden_tokens": [],
+    "single_Bool_proof_for_compact_factors": true,
+    "C0_unchanged": true,
+    "constants_before_component_sample_point": true
+  },
+  "scope_limits": [
+    "Same retained P/Gamma and control evidence remains explicit.",
+    "The result is a physical-factor input to the same displayed positive reference Y/H/chi, not yet all four transformed ReferenceJets atoms.",
+    "No local compiler/elaborator, CI query/download or active src/index/ref/CP action."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T16:34:29.299451+00:00"
+}

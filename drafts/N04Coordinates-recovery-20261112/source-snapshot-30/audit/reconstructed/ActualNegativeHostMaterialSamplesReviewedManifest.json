@@ -1,0 +1,42 @@
+{
+  "kind": "ActualNegativeHostMaterialSamples_reviewed_source_selection",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "owner": "/root/audit_coordinates",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeHostMaterialSamplesCandidateManifest.json",
+    "sha256": "e15e11055156831ec2579168a6e2311f322ed078c7584f769b4233b3f69b254e",
+    "blob": "1f8f38ebbbd72b4f84fb6068bfb3bd792e9aee3a",
+    "lines": 65
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeHostMaterialSamples.lean",
+    "sha256": "b2619246dbb66548907155805acab44c75e0b54bcff2726d6d8afe9c1221571a",
+    "blob": "7a62d6940288af5540f52f2017f595eaaa69e13e",
+    "lines": 90,
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeHostMaterialSamples.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualNegativeMaterialSamples"
+    ],
+    "public_names": [
+      "n04bActualTypedAtlas_negative_host_sample_endpointX",
+      "n04bActualTypedAtlas_negative_host_sample_weights",
+      "n04bActualTypedAtlas_negative_host_sample_E0_power"
+    ]
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/ActualNegativeHostMaterialSamplesIndependentReview.json",
+      "sha256": "967fb036321aac2b1aac24ebc87c2302077fe366fd02824fcbb434bbb919ff1d",
+      "blob": "5570694cc7b54ab1d8b98fbd18524e4cc602fadd",
+      "lines": 84
+    }
+  ],
+  "source_changed_since_candidate": false,
+  "scope": [
+    "For any true whole-component host, its actual sample is compared with the original old-K half sample through their common physical component midpoint.",
+    "Arbitrary real H/M exponents are preserved and only a nonnegative E0 power is paid. No equality of the host cell and K.cell, no whole-component common-cell assumption and no original E0>=1 assumption.",
+    "This sample transfer is a provider for the whole-half root-division construction; it does not itself prove a height or potential tower."
+  ],
+  "compiled": false,
+  "active_state_modified": false
+}

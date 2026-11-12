@@ -1,0 +1,82 @@
+{
+  "kind": "radial_reference_principal_finite_jet_envelope_full_independent_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RadialReferencePrincipalJetEnvelope.lean",
+    "sha256": "1be3a119508e3f1e6d234e82d258d4930b89df274277650dd17c66a79171d002",
+    "blob": "2acbfe2daade71e72ed7970ce21fe09f9f49c0b3",
+    "lines": 91
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RadialReferencePrincipalJetEnvelopeCandidateManifest.json",
+    "sha256": "c2f72f86f25e5922cc645dfd1cfaad98e3de298d561e6780397bdf81811c315c",
+    "blob": "6bc60935f5e2f48dc5199c8119e8fd827890c4e5",
+    "lines": 73
+  },
+  "actual_provider_identities": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.lean",
+      "sha256": "9bd854157a276a4c5fd8d3161f63d65a851fedbc656beba959ad5899e89cb5a7",
+      "blob": "4df4d9e114ae59bd99b5d3c09825adc95dbe3808",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/OneHighCompositionJets.lean",
+      "sha256": "c9d18bc3cd346d55434c7b39fcbd8589c226bae2cd4b1ad46597288735692af3",
+      "blob": "55ee6f621f2b0a63a723dfdceab93144234f9ab4",
+      "lines": 79
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Deriv.lean",
+      "sha256": "3033d2b35bcfdad1ab06168dee62c8587215de8fa049caa85e5445c54d4fb98c",
+      "blob": "ede41b77d146105bee637d6db9b91a1a21a48547",
+      "lines": 141
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+      "sha256": "d6c3ace5e5e251e2943bd5985eb9c0a076a875c98fd876c961cb54c366ca50cb",
+      "blob": "86135f3b7295638a64b59ddaf2653b87d2733431",
+      "lines": 391
+    }
+  ],
+  "selected_visibility_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelopeVisibilityReviewedManifest.json",
+    "sha256": "55e1f9fe0d0e8e16ec596a3bebb948de20821dc3d05675dfaf382d4eb1901984",
+    "blob": "2ff192a92ea67f4a7a301b651ece487da37125e0",
+    "lines": 46
+  },
+  "selected_visibility_provider_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/RadialReferencePotentialJetEnvelopeVisibilityIndependentReview.json",
+    "sha256": "6b7b8004f478c6c9c01819672ee81bdb6a840cc9ad694d7de6b697932af9adcf",
+    "blob": "e898ffd3ad48cdeb96dfe12092c708984e165285",
+    "lines": 78
+  },
+  "read_scope": [
+    "Complete candidate91, complete selected visibility159, complete OneHighCompositionJets79 and pinned ContDiff/Deriv141; exact pinned iteratedDeriv_succ' and finite Leibniz statements."
+  ],
+  "checks": [
+    "The constants CP and CC are chosen solely from N. C=CP^3*CC^4 is at least one and precedes M, all four fields and the evaluation point.",
+    "Every physical factor is smooth only at the actual image chi(x). The selected composition helper needs outer jets including order zero and only positive inner jets. The candidate supplies exactly those hypotheses, with N+1 available only for the final derivative factor.",
+    "The common envelope Z=CC*M*M^N is at least M and at least one. Three successive genuine Leibniz estimates give CP^3*Z^4 for both product shapes. All multiplicative nonnegativity obligations are explicitly discharged.",
+    "The shared hfinish proof covers the last composed physical factor and deriv chi. Pinned ContDiffAt.derivWithin returns the ordinary derivative at the same point with only m+1<=n; its infinity hypothesis is valid. The pinned iteratedDeriv_succ' converts order k of deriv chi into order k+1 of chi.",
+    "The algebraic exponent is exactly (N+1)*4=4*N+4. The source includes N=0: then the physical values and chi' are bounded, with no bound on chi(x) itself required.",
+    "The imports explicitly select the reviewed public visibility supersession of RadialReferencePotentialJetEnvelope. All listed source/provider/owner/review hashes and line counts were recomputed; the new public name has no declaration collision in installed src."
+  ],
+  "findings": [],
+  "scope_limits": [
+    "This is a finite numerical envelope at one genuine inverse-coordinate point. Actual material bounds, one fixed reference family and width remain separate obligations.",
+    "The source and all historical manifests remain unchanged. No compiler/elaborator, active checkout/index/ref, CI query/download or authority change was performed.",
+    "Static source and API review does not certify compilation."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "public_collision_count": 0,
+  "reviewed_at": "2026-11-12T16:35:29.832537+00:00"
+}

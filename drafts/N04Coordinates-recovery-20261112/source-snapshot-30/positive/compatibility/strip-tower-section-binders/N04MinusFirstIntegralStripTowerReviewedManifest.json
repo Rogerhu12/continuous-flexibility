@@ -1,0 +1,50 @@
+{
+  "kind": "actual_first_integral_strip_joint_tower_reviewed_supersession",
+  "owner": "/root/proof_inventory",
+  "status": "STATIC_FULL_INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTower.lean",
+    "sha256": "c6453415ecbafbb9694be2295bd29bfcdee2b98a0a5ce5f53030dda9ceb7fea7",
+    "blob": "47ccd49cf14b4fc0f029020d8ead3bebc2474c7c",
+    "lines": 157,
+    "target": "src/ContinuousFlexibility/Analysis/N04MinusFirstIntegralStripTower.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTowerSectionCandidateManifest.json",
+    "sha256": "5ad97020ad11cd28db2e703d0c52658d116c1389f57a5568a11ea5a8d4ac1ec1",
+    "blob": "10245cf1d196528c0ac6bc7c9c810e11dc066c92",
+    "lines": 204
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/N04MinusFirstIntegralStripTowerIndependentReview.json",
+    "sha256": "f85aaea643593dbbaf6112e5b54764cf695c232bad1a27b98cbd8d7150c7c565",
+    "blob": "01a6206e1e91c0c8db224fb77c9ea6d108f278e0",
+    "lines": 201
+  },
+  "selected_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTowerClosureInventory.json",
+    "sha256": "1dfe3267c9ea9dd58557ac752b696570146e58657756bc59bc6d1eb612814d07",
+    "blob": "2722d4d9d9ca47f8f4bb45e42caf001886a6921d",
+    "lines": 6695
+  },
+  "selected_closure_gzip": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTowerClosureInventory.json.gz",
+    "sha256": "88edb977ec1a93dda04172d4a3c2407860f05e9ad369f8497e36152b0b50f90c",
+    "bytes": 56356,
+    "decompresses_to_sha256": "1dfe3267c9ea9dd58557ac752b696570146e58657756bc59bc6d1eb612814d07"
+  },
+  "superseded_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04MinusFirstIntegralStripTower.lean",
+    "sha256": "e49929c25d4503c9d23fdb55b16ef26bcec02f9bdc3e4b01c69ec0d1ddfd781f",
+    "blob": "ca0e5c21e47271bea2e6f83490425caceb0b95a4",
+    "lines": 156
+  },
+  "source_unchanged": true,
+  "compiled": false,
+  "scope_limits": [
+    "The actual original-coefficient discriminant remains explicit on the chosen interior strip.",
+    "One genuine same-map joint tower precedes every order; no final CurrentJets or material bound is claimed.",
+    "No active src/index/ref/CI mutation."
+  ],
+  "created_at": "2026-11-12T16:38:09.350561+00:00"
+}

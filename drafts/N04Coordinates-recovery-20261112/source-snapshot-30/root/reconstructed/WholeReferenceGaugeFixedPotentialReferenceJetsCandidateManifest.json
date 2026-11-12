@@ -1,0 +1,95 @@
+{
+  "kind": "actual_fixed_positive_reference_potential_atom_adapter",
+  "owner": "/root",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeFixedPotentialReferenceJets.lean",
+    "sha256": "0dd9a3b48093074e943d596fa77a1a5393c2c13459e1ca50cf0c814596905084",
+    "blob": "339445c09e482ac242a370585a25f494c44c2182",
+    "lines": 173,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeFixedPotentialReferenceJets.lean"
+  },
+  "actual_providers_and_patterns": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedPositiveReferencePotentialMaterialJets.lean",
+      "sha256": "0907bd7f6cecbd52a23169516f946964f1a8e46ec97f0f6dc9fb48e64dd0304f",
+      "blob": "158d133a29535703e3b38dddd92b349645065a19",
+      "lines": 123
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholePositiveReferencePotentialJets.lean",
+      "sha256": "aa09f494ce342a9baf1f1b8a111973ddf5f8f909d4d3bfb3d1c3a7fcdb9f5b51",
+      "blob": "c9b78f187c42dd8427d3c18ed7e806ebbecd1685",
+      "lines": 141
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "lines": 311
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugePositivePotentialReferenceJets.lean",
+      "sha256": "2b5857a4e63c984a9003ea74eacb6f402ecb48cfc2a0c36f7080aca6aac86112",
+      "blob": "e7e257a74e24c1d2ff5607871ca5bd4224dcff53",
+      "lines": 207
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositivePrincipalJets.lean",
+      "sha256": "b8e9fe14a443cf93d04a9643633566b731268408fc8ce38131639eced6887540",
+      "blob": "b926843c192aa175dd25404f005a55ddb46ac874",
+      "lines": 290
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Neighborhoods.lean",
+      "sha256": "bd9f85999a8b70e960e1fa9d913ba4d64ebcaa2df04b60ddf2b460d04ff97435",
+      "blob": "664a41d5be85fe2ca5e3b8b8e5ab2c71b4f61cc6",
+      "lines": 381
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+      "sha256": "1e9fbd861ac27cb4b17113c3f8ede3c5f573a6b342b23e41ff514b05bd3334ef",
+      "blob": "e7fd4979f58f787927500713547b3671402ae782",
+      "lines": 1283
+    }
+  ],
+  "fixed_family_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedPositiveReferencePotentialMaterialJetsReviewedManifest.json",
+    "sha256": "320bf319872bdf8ad8732fb7589f93b9bc664197a71f78765ae06175e425057b",
+    "blob": "f4d273a0a22291e0617728399cb567d9b9885fb7",
+    "lines": 33
+  },
+  "historical_potential_atom_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugePositivePotentialReferenceJetsReviewedManifest.json",
+    "sha256": "b154d04e2ea1ec9a9a0401d7897d526447a38d297a6238194e6be733dfa3ca77",
+    "blob": "c8dbda043ae6865c7a3451a7802668b540a8f929",
+    "lines": 42
+  },
+  "principal_atom_owner_for_same_family_contract": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositivePrincipalJetsReviewedManifest.json",
+    "sha256": "26e9e95945aca3c481e3158da3e1c97bd523792cea56450460a35883a8be1d77",
+    "blob": "48386d7c5958bfaf7c9e1b8fd6b0a63661f5b07d",
+    "lines": 40
+  },
+  "normalization_provider_note": "The selected main-cohort provider changes unrelated flow-loss wiring. The complete coefficientEnvelope_pack declaration/proof is byte-identical to complete-green CI159.",
+  "pack_declaration_sha256": "4787c22774eb48dfee1bf796edebd29e20e4eab4b6c340216160ae5de7f1dad8",
+  "public_names": [
+    "n04WholeReferenceGauge_positive_potentialReferenceJets_fixedFamily"
+  ],
+  "checks": [
+    "The entire source was read before freezing. No prior immutable source, active index or ref was modified by this candidate.",
+    "Only coefficients M and BM are selected. C0, original cell, Y, H, literal invFun Y, material data T and all geometry are given and remain unchanged.",
+    "The hE0 sample floor is supplied on the single actual material normalization before the common family. No further enlargement occurs in the result.",
+    "The generic123 scalar bound receives actual height and inverse jets, smoothness from the same range geometry, and the true component inclusion in the fixed compact annulus.",
+    "The unit map is exactly the identity on positive canonical pieces with endpoints0/1. Actual141 flux germ yields EqOn for the stored potential; smoothness, pi-periodicity and every mixed derivative transfer through that equality.",
+    "One finite prefix coefficient D and coefficientEnvelope_pack are selected before atlas enumeration, transports, piece, spatial point and derivative indices. Sampling is exactly the stored positive cell.",
+    "Height and principal adapters can be supplied by one selection of276. This source never invokes that existential producer or any independently selected family."
+  ],
+  "scope_limits": [
+    "The actual single-selection producer and final ReferenceJets assembly are separate leaves; this is a concrete adapter for the exact supplied family.",
+    "This proves the positive potential reference atom only. It does not supply negative potential bounds or quantitative current jets.",
+    "Static source review only; no local compiler, resource overrides, CI pass or parent completion claim."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T16:54:41.441704+00:00"
+}

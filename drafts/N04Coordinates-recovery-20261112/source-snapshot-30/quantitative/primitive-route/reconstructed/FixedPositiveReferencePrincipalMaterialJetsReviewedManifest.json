@@ -1,0 +1,33 @@
+{
+  "kind": "fixed_positive_reference_principal_material_jets_reviewed_candidate",
+  "owner": "/root/quantitative_route",
+  "status": "STATIC_INDEPENDENTLY_FULL_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferencePrincipalMaterialJets.lean",
+    "sha256": "ba30210799a8513a04fe59f50eecec9edbe5d5f73fd3346c29b1a8b35a5bfca7",
+    "blob": "833b47aee0e9476d25e0eec4bc3323a4830fb6bb",
+    "lines": 163
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferencePrincipalMaterialJetsCandidateManifest.json",
+    "sha256": "d74d862e1eafbf375d5a973303d20598deb57d818b1025d0ec3558011ae3cfe3",
+    "blob": "e8fd153a44d00c2a0829c6da69699ba3c89c3da3",
+    "lines": 103
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/FixedPositiveReferencePrincipalMaterialJetsIndependentReview.json",
+      "sha256": "9dbcf38b60c597588b2a84689bad5ec1bcf2fd7e1f200d8d94690b1f3770c29b",
+      "blob": "b57e34702b73d03bda6d731b2e1ab540d3b2a69b",
+      "lines": 136
+    }
+  ],
+  "source_unchanged": true,
+  "compiled": false,
+  "scope_limits": [
+    "Only numerical constants are selected. Same C0/sample/cell/Y/H/literal inverse retained.",
+    "The actual276 producer retains its original raw optical/host and same-witness prerequisites.",
+    "No compiler, active src/index/ref/CP or CI action."
+  ],
+  "created_at": "2026-11-12T16:49:21.536678+00:00"
+}

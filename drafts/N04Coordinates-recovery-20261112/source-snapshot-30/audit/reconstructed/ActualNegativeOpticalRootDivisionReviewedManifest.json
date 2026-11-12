@@ -1,0 +1,51 @@
+{
+  "kind": "ActualNegativeOpticalRootDivision_reviewed_source_selection",
+  "owner": "/root/audit_coordinates",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeOpticalRootDivision.lean",
+    "sha256": "5b631337c20031a69fab824a07c73702556ae9b3532a784f29fd868b64270187",
+    "blob": "a7d083a6bd4b3f1cce55c2647117967dcbc5704b",
+    "lines": 238,
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeOpticalRootDivision.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.N01OpticalRootDivision",
+      "ContinuousFlexibility.Analysis.N01ReturnMargins",
+      "ContinuousFlexibility.Analysis.ActualNegativeLengthRadialBounds",
+      "ContinuousFlexibility.Analysis.ActualNegativeHostMaterialSamples"
+    ],
+    "public_names": [
+      "normalizedOpticalRootDivision_inverse_on_half",
+      "n04bActualTypedAtlas_negative_allHalf_inverse_material",
+      "n04bActualTypedAtlas_opticalRootDivision_half_material"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeOpticalRootDivisionCandidateManifest.json",
+    "sha256": "265e76e881f007d1eaacca85e706d6549b6598abba2c3cb5b876b0ae79e32a58",
+    "blob": "12a86351c9649aaca5580404a3f985d04379c5d1",
+    "lines": 117
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ActualNegativeOpticalRootDivisionIndependentReview.json",
+      "sha256": "51be03dfe9ee5e595b0eb8db0832511bbb5bfb16ff50f5a8cedb035e8cfaaa07",
+      "blob": "6ba2447445b6e181ee229c0b53664bebc35c9337",
+      "lines": 154
+    }
+  ],
+  "source_changed_since_candidate": false,
+  "selected_sample_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeHostMaterialSamplesReviewedManifest.json",
+    "sha256": "7f7be4d881ab4cd071983590d1efdb63532ed0096b5ce17177c5f0e0b1a096e0",
+    "blob": "a2155a0393960eca94e2f07002720d451bbd1808",
+    "lines": 42
+  },
+  "scope": [
+    "The same globally smooth S05 factor is chosen before every order, preserves the actual radicand on the entire closed component and has all jets at the original half sample.",
+    "On the true optical half, the same-witness raw optical lower inequality plus the opposite half width gives a positive factor and polynomial reciprocal value. Both half inverse widths and the raw optical cost are transferred from genuine hosts without identifying them with K.cell.",
+    "Raw optical lower is explicit. No Through03 projection, chosen root-model radius or final height/potential tower is asserted."
+  ],
+  "compiled": false,
+  "active_state_modified": false
+}

@@ -1,0 +1,148 @@
+{
+  "kind": "actual_stored_travel_mixed_spatial_and_point_towers",
+  "owner": "/root/proof_inventory",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_PEER",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelMixedTowers.lean",
+    "sha256": "cb1aa5f610ab01e37b6b8fb99c0b64f1fb0b6d31e4a5cdee275aa5e8083b9813",
+    "blob": "661b921baf14f0bd058105116fbcc2e647bcc999",
+    "lines": 145,
+    "module": "ContinuousFlexibility.Analysis.N04ActualTravelMixedTowers",
+    "target_path": "src/ContinuousFlexibility/Analysis/N04ActualTravelMixedTowers.lean",
+    "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelMixedTowers.lean",
+    "source_ref": "LOCAL_HELD_CANDIDATE",
+    "imports": [
+      "ContinuousFlexibility.Analysis.N04ActualTravelStripTower",
+      "ContinuousFlexibility.Analysis.JointMixedTransportCalculus",
+      "ContinuousFlexibility.Analysis.SectorParameterGeometry"
+    ]
+  },
+  "public_names": [
+    "N01Properties.n04ActualTravelScalar_stripJointTower",
+    "N01Properties.n04ActualTravelMixed_stripJointTower",
+    "N01Properties.n04ActualTravelMixed_pointTower",
+    "N01Properties.n04ActualTravelMixed_pointTower_eq",
+    "N01Properties.n04ActualTravelMixed_diagonal"
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTower.lean",
+      "sha256": "b56f6a83992424a397bede0353ac43c6a34fa75e172f5b39e162d69228b39176",
+      "blob": "8defbd534dce0d43f28ad8ed155c8e684eea771a",
+      "lines": 119,
+      "module": "ContinuousFlexibility.Analysis.N04ActualTravelStripTower",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04ActualTravelStripTower.lean",
+      "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTower.lean",
+      "source_ref": "LOCAL_HELD_REVIEWED_OR_CANDIDATE",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04MinusFirstIntegralStripTower",
+        "ContinuousFlexibility.Analysis.N04bActualTravelChart",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionPatching",
+        "ContinuousFlexibility.Analysis.TameProductDirections",
+        "ContinuousFlexibility.Analysis.SolveNewtonBridge"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.JointMixedTransportCalculus",
+      "path": "src/ContinuousFlexibility/Analysis/JointMixedTransportCalculus.lean",
+      "blob": "b9db709bafbaaf513229374bac8a370f6919e733",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "fa32b4a1c91ed3926f4e132234aaa4860363fac1a81508ee05dc67707e63f9cf",
+      "lines": 250,
+      "imports": [
+        "ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus",
+      "path": "src/ContinuousFlexibility/Analysis/JointMixedDiagonalCalculus.lean",
+      "blob": "030159292b3d6ecfffb207ffb7f515c8b07f78aa",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "fdb7dd2f331e36b1e50679a50e972ffb7891aa7742221447eb25a9f04feb4b40",
+      "lines": 295,
+      "imports": [
+        "ContinuousFlexibility.Analysis.JointJetSpatialRegularity",
+        "ContinuousFlexibility.Analysis.PhysicalJetLinearity",
+        "ContinuousFlexibility.Analysis.MaterialMixedMultiplier"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.JointJetSpatialRegularity",
+      "path": "src/ContinuousFlexibility/Analysis/JointJetSpatialRegularity.lean",
+      "blob": "8121ae30ba3505ef7020d759d0686257bea6fff6",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "17c9b148bc6658c5acfb75e1b476b73e403d09263d6fe291747aa7ffb27a9dd1",
+      "lines": 249,
+      "imports": [
+        "ContinuousFlexibility.Analysis.SmoothDirectionsFixedLast",
+        "ContinuousFlexibility.Analysis.ScalarPlaneJetRegularity",
+        "ContinuousFlexibility.Analysis.MixedDerivativeLocality",
+        "ContinuousFlexibility.Analysis.MixedDerivativeHierarchy",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsAffine"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MixedDerivativeHierarchy",
+      "path": "src/ContinuousFlexibility/Analysis/MixedDerivativeHierarchy.lean",
+      "blob": "b67fc3dc8858f56c715ad95b680a07b873399f75",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "e9db31f132dda5a403eadd732849efc5516f7f9261e02f4ca48351ce47bfc8c8",
+      "lines": 96,
+      "imports": [
+        "ContinuousFlexibility.Analysis.MixedDerivativeLocality"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SectorParameterGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/SectorParameterGeometry.lean",
+      "blob": "2aedeefa0b7cecd1a972ac5b9fbf48bb538b6490",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "0daae8b9f4f8b63e4bd6af764ca24973c63ce45fea2cc894a6b1678d35d42415",
+      "lines": 105,
+      "imports": [
+        "ContinuousFlexibility.Analysis.SolveStateSpaces",
+        "ContinuousFlexibility.Analysis.SolveReturnEquations",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsAffine"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SolveNewtonBridge",
+      "path": "src/ContinuousFlexibility/Analysis/SolveNewtonBridge.lean",
+      "blob": "af8c1aef7d93e7bfa47e87ae08272dfe46b0fa40",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "6f1c11fc500fee7b43ecf034f966e108f46feb38368ab517f9b8fb71b4cff07e",
+      "lines": 235,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameTransfer"
+      ]
+    }
+  ],
+  "selected_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelMixedTowersClosureInventory.json",
+    "sha256": "5d67e4cdeb8ef7273c8ce7aa7750c3d8395a44e5a0a6dcc8a11ee6bd75f9e181",
+    "blob": "f6bd709b8e99fbfbb274c5c16084761b93f97fae",
+    "lines": 7633
+  },
+  "selected_closure_gzip": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelMixedTowersClosureInventory.json.gz",
+    "sha256": "8a50291915350c5eef75170a541e768ec962df7ba64f843c9569813cc42f420b",
+    "bytes": 63915,
+    "decompresses_to_sha256": "5d67e4cdeb8ef7273c8ce7aa7750c3d8395a44e5a0a6dcc8a11ee6bd75f9e181"
+  },
+  "checks": [
+    "Both scalar components use a fixed continuous linear projection of the one actual stored travel chart tower. The chart, inverse, cutoff, neighborhood and original reference data are unchanged.",
+    "Angular induction at radial order zero, then radial induction at fixed angular order, use only the existing spatialAngularTower/spatialRadialTower and actual mixed derivative hierarchy. No independent formal derivative family is postulated.",
+    "All ordinary spatial smoothness follows from the genuine base joint tower. The actual sector neighborhood and original strip are convex; this is exactly the existing fixedLast/Schwarz hypothesis.",
+    "The fixed-point tower freezes the same mixed joint tower. pointTower_eq_jointJet compares every parameter slot with any genuine point tower of the same scalar.",
+    "The diagonal identity is proved by two applications of the existing actual parameter-line iterated derivative theorem, preserving the same state and physical point.",
+    "All selected source fingerprints, import lists and line counts rechecked; no missing import, dependency cycle or collision of the five new explicit names."
+  ],
+  "remaining": [
+    "No numerical uniform CurrentJets estimate is claimed. Future estimates must use this same tower and keep the parameter-order loss before the spatial order.",
+    "The actual119 provider is frozen pending its independent full static review; all original construction identities and corrected-field regularity remain explicit actual input data."
+  ],
+  "compiled": false,
+  "active_checkout_index_refs_CI_unchanged": true,
+  "created_at": "2026-11-12T16:46:52.933905+00:00"
+}

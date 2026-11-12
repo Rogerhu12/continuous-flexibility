@@ -1,0 +1,87 @@
+{
+  "kind": "independent_full_source_same_positive_sample_physical_principal_factors",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferencePrincipalPhysicalMaterialJetsCandidateManifest.json",
+    "sha256": "b746db1fab6d825ba69a19defae473d57e6b8be264d0b97b5e9050f70d715de9",
+    "blob": "805561cb0fd5efda3f7eff65e910fa7abff4cc8a",
+    "lines": 82
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferencePrincipalPhysicalMaterialJets.lean",
+    "sha256": "f829971e69d193fe93cab137aea5198045ff765c0e659d2587599386296547e8",
+    "blob": "7c0092bb7a14fc38cb7252f67c33c19a165a2d3c",
+    "lines": 108
+  },
+  "actual_providers_verified": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJets.lean",
+      "sha256": "52e91e6500606231c499fcd3863d9b2f9ca99535348f52e9abc8f15b139b8e23",
+      "blob": "6fbfba9f7a349a6604eb28473b5098a5f45a3e1f",
+      "lines": 103
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/ReferenceModerateCoefficients.lean",
+      "sha256": "c2a86b45c7e15d9ceb1d807ee9398db0a1652fc1a4a9206cf52a23180fd9487f",
+      "blob": "5ebec66fc1a840a83166cb74866b94fba1df7ef3",
+      "lines": 201
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046",
+      "blob": "19becb59903b44c18c8f1afb72726b2f95952752",
+      "lines": 66
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04PositiveComponents.lean",
+      "sha256": "5b7a7e28f279116415d8a3a23299294f8e5fc1858187ec00c3ea18a4d04757de",
+      "blob": "0d4de58a9b9ecd9f84e2f01da190847464669cc6",
+      "lines": 194
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Deriv.lean",
+      "sha256": "3033d2b35bcfdad1ab06168dee62c8587215de8fa049caa85e5445c54d4fb98c",
+      "blob": "ede41b77d146105bee637d6db9b91a1a21a48547",
+      "lines": 141
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Order/Compact.lean",
+      "sha256": "7c02670f2e88f16acd11d69ddd6afb8d8118adca50279e1abb2a3c7761feb044",
+      "blob": "8e1982cb6cd1f808ded359ffdb0afa8ee9a8bdba",
+      "lines": 546
+    }
+  ],
+  "selected_inverse_profile_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJetsReviewedManifest.json",
+    "sha256": "16b143562879d7afa35191e4a5850af9407223fed8af59136062433a67906846",
+    "blob": "d45cce809854a44f29de33bf413d6d46afcb51e7",
+    "lines": 34
+  },
+  "additional_pinned_provider": {
+    "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Normed/Group/Bounded.lean",
+    "sha256": "b399b0280564faa2493dc7e814c90f09f73e9c710db8ec2c1ac9bb1046062435",
+    "blob": "d6b3dd69687ad53535e86689abd4f4aed66949ef",
+    "lines": 173
+  },
+  "read_scope": [
+    "Full108 source and complete candidate; the previously fully reviewed103 reciprocal-profile producer and its original sample transport.",
+    "Actual reference_contDiffOn_iteratedDeriv, n04PositiveComponent_bounds, contDiff_infty_iff_deriv and the to_additive-generated IsCompact.exists_bound_of_continuousOn contract."
+  ],
+  "checks": [
+    "Only w and wprime/r are bounded by compactness on the fixed closed annulus. Both are smooth on Ioi0 since the actual ambient radius a is positive; no compact bound for inverse w is taken at the vanishing ambient endpoints.",
+    "The finite Bool x Fin(N+1) family supplies all derivatives through N. Summing absolute values of its compact bounds gives a single nonnegative prefix constant, with no component or point dependence.",
+    "The true reciprocal profile is supplied exclusively by the reviewed103 accumulating-profile and retained-positive-sample theorem, at the unchanged original midpoint host.",
+    "The supplied C0 remains fixed. Positivity of E0 and C0>=1 give E0<=C0*E0, while only the supplied proved floor for C0*E0 is used to enlarge real exponents.",
+    "M=1+P0+K+A dominates both coefficients and the reciprocal exponent. It is selected before all components, host indices, closed-interval points and derivative orders through N.",
+    "The true positive-component endpoint bounds place each physical point in the fixed closed annulus. Both endpoint values are retained, with no false whole-component cell assumption.",
+    "Every source/provider identity is exact, the new public name has no active collision, and there are no new axioms, placeholders, unsafe primitives or resource options."
+  ],
+  "scope_limits": [
+    "The retained reference/control evidence and existing scaled-envelope floor remain explicit; no assertion is made for an unrelated Through03 witness.",
+    "This is the physical-factor input for the actual positive principal atoms. It does not itself establish their transformed jets or CurrentJets.",
+    "Static source/API review only. No compiler, CI or active source/index/ref action; selected full import closure remains an integration gate."
+  ],
+  "reviewer": "/root",
+  "status": "PASSED_STATIC_FULL_SOURCE_REVIEW_HELD_UNCOMPILED",
+  "compiled": false,
+  "reviewed_at": "2026-11-12T16:36:35.344596+00:00"
+}

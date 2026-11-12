@@ -1,0 +1,56 @@
+{
+  "kind": "reference_principal_reuse_existing_finite_jet_envelopes_visibility_supersession",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_VISIBILITY_PEER",
+  "owner": "/root/quantitative_route",
+  "original_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePotentialJetEnvelope.lean",
+    "sha256": "1f9b3defaf95b285251e29c321f40c9e53c4745469447ad5861ccd51ffb8f455",
+    "blob": "d63e8e50b1918c38a0864f79afd1bffebc5d6a46",
+    "lines": 159
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.lean",
+    "sha256": "9bd854157a276a4c5fd8d3161f63d65a851fedbc656beba959ad5899e89cb5a7",
+    "blob": "4df4d9e114ae59bd99b5d3c09825adc95dbe3808",
+    "lines": 159
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.base.lean.txt",
+    "sha256": "1f9b3defaf95b285251e29c321f40c9e53c4745469447ad5861ccd51ffb8f455",
+    "blob": "d63e8e50b1918c38a0864f79afd1bffebc5d6a46",
+    "lines": 159
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.diff",
+    "sha256": "a66d9b7eb167977040850fd028dc535f31fa2181afef4e3bd552cc632821f211",
+    "blob": "9cc1be7243e0102412e669793fbc47c3fa652849",
+    "lines": 20
+  },
+  "original_complete_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ActualPositiveReferencePotentialEnvelopeMaterialIndependentReview.json",
+    "sha256": "a7df20c5f0d405184afec8cfb6ef9abf49f5f834626acd11a7f00897a750684b",
+    "blob": "7f7fea509b317a52633eeb2ba9f95b3990b31167",
+    "lines": 215
+  },
+  "original_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferencePotentialReviewedManifest.json",
+    "sha256": "597cefd6794acfe7740a3406127dddf8bec7f4117e84e381d7ed13adc32ef99d",
+    "blob": "cfe35ac88b909785096edab9fd7c4fd45df20bac",
+    "lines": 121
+  },
+  "new_public_names": [
+    "referencePotential_product_envelope",
+    "referencePotential_composition_envelope"
+  ],
+  "change_summary": [
+    "Remove exactly two private modifiers, exposing the already fully reviewed finite-prefix product/composition estimates to the actual positive-principal consumer.",
+    "Every complete theorem type and proof body, all imports/options and existing public potential theorem stay byte-identical.",
+    "Reverse the two modifier deletions to recover exact original159 source. Original source/candidates/551 owner remain immutable."
+  ],
+  "scope_limits": [
+    "Necessary public visibility change is explicit; this does not claim public declaration names are unchanged.",
+    "No new mathematical claim, final material hypothesis, compiler/elaborator or active source/index/ref action."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T16:25:56.749445+00:00"
+}

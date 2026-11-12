@@ -1,0 +1,135 @@
+{
+  "kind": "ci157_positive_source_prefix_full_independent_repair_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_ACTUAL_SUPPLIER_AND_EXACT_DELTA_REVIEW",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair157/CanonicalPositiveSourcePrefixBoundsCI157RepairCandidateManifest.json",
+    "sha256": "ef152d4f4b6af36b6eed0a12f7345b15a5bd301d442637cceb39402be71bcff4",
+    "blob": "4691650814082076cf1cff345beb6425687a0e40",
+    "lines": 113
+  },
+  "actual_base": {
+    "head": "f44526b34baa27e45b8d32fe20d27deb52d24a80",
+    "tree": "83843ffdcc1539971cdedad2ba36e935da0ad729",
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalPositiveSourcePrefixBounds.lean"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair157/CanonicalPositiveSourcePrefixBounds.lean",
+    "sha256": "2a534678b940aba00ec2272d791bf1f9475352bfc0f53472f483e1bd0504d2da",
+    "blob": "26b5c393ceed954ce93224a01c7c48ccfee2175e",
+    "lines": 122
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair157/CanonicalPositiveSourcePrefixBounds.base.lean.txt",
+    "sha256": "c3d8637c9edeb45e7ef8982951afa9d8d9eaa111fca2e8c5d5bd8b1384a756ad",
+    "blob": "eb7384f7dfd8b4789393250c849af9f8a385a932",
+    "lines": 91
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair157/CanonicalPositiveSourcePrefixBounds.diff",
+    "sha256": "0cc2a0f8ae959195379002094f4e9ec7520b2b42adafaab6880a7c793fa8dd38",
+    "blob": "ba9f6509f566aa5582c12ee64124b837a31ec506",
+    "lines": 72
+  },
+  "cached_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-157.log",
+    "sha256": "63cbe9fb480477414184e1a19adb8191280827606441208dd9bb6ef5afaeb2c3",
+    "blob": "e7452d4a1c8b71643ed6a4c652e8045bdcffd94e",
+    "lines": 748
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalPositiveSourceJetBounds.lean",
+      "sha256": "74a5f486c095cd171fbb56c0270827cd89c7616aaa1f86fc701ba5e4e466a127",
+      "blob": "4ab2ef388753fd779280571b22abcfd7db544684",
+      "lines": 309
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveEndpointFields.lean",
+      "sha256": "c024651329c6b725f61097116a892f032b80b1f2ef363c920e37ac7e007c0587",
+      "blob": "d5ac37d8aae450523577552e3fb13815cd0a0468",
+      "lines": 132
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean",
+      "sha256": "91687b630205a380f137dcdb4cb32068d79582e09d17d4a4cd14317e21b9e19f",
+      "blob": "334d3c0c19727465e3afc75f988c79df1b8d7b8a",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalNeighborhoodRestriction.lean",
+      "sha256": "af2577f18d3d3af94162ce3415e3d0b96c054901827b5ea1db6d36be994d407c",
+      "blob": "7888f021746c6faf5ae5f0b149ed2fd17830c6e2",
+      "lines": 187
+    }
+  ],
+  "additional_actual_grading_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "lines": 603
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/StateNeighborhood.lean",
+      "sha256": "d69d61889ad31640933f00a39c70c7ff33eeb0df52df51a509df97850d1399b6",
+      "blob": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+      "sha256": "6952ac2501bd38f0f6d51b1633f52d30ed1820f9380bd6dd58ebc24c601e1991",
+      "blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+      "lines": 250
+    }
+  ],
+  "prior_exact_source_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CanonicalPositiveSourcePrefixBoundsIndependentReview.json",
+    "sha256": "ca111bcfdcf5465e672f1bcaa356e4337f72f216f7136325c9cbb0942dfaa2fa",
+    "blob": "67d448c9d9932badabf3326b8beb3006e4176ffd",
+    "lines": 37
+  },
+  "actual_supplier_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI156CanonicalPositiveSourceJetBoundsIndependentReview.json",
+    "sha256": "be8adebde7d9570023ef3ff87e78b6a5921c1fabe0b7c1890cbb9e5e6dc7d05b",
+    "blob": "174e33ee8dea808c232824f7d69b4e34db5002dd",
+    "lines": 139
+  },
+  "read_scope": [
+    "All122 final source lines, all91 actual base lines, the entire72-line diff and both cached diagnostic locations.",
+    "All309 lines of the current actual all-jets supplier; full132 endpoint-source and111 actual typed-atlas modules; exact pairGrading/realGrading, stateGrading_monotone and tamePairGrading_monotone definitions."
+  ],
+  "checks": [
+    "The cached actual CI157 log reports the first existential obtain at78:2 and a cascading declaration timeout at52:0, both at the unchanged200000 default. It also records the previous309 supplier compiling. The corrected exact log identity is bound here; no download/query occurred.",
+    "The new private theorem takes K as an independent CanonicalData parameter and the complete original existential all-jets proposition as a hypothesis. Decomposing the common parameters and selecting per-order finite coefficients therefore occurs without unfolding the actual constructed atlas.",
+    "The original finite-sum theorem and every aggregation step after the common-parameter refine are byte-identical. B(N)=1+sum_{k<=N}A(k) is chosen before z and both endpoints; seminorm monotonicity raises only k+outLoss to N+outLoss. Coordinate jets remain positive order and height/inverse-height include order zero.",
+    "The actual public producer supplies exactly n04bActualTypedAtlas hT hS hN hfield e, actual monotone pair grading, and the same compiled n04Coordinates_actual_positiveSource_allJets. Its inner let K reduces to that explicit helper parameter. No component, neighborhood, loss, source selector or numerical envelope is replaced.",
+    "Both complete public statement headers, the full original generic numerical theorem, imports/options/open context and all public names are unchanged. Exact actual Git preimage and tree were verified; the sole delta is44 added and13 removed proof/helper lines.",
+    "The same target overlay recursively has756 project modules with no missing import or cycle. No forbidden proof/resource directive was introduced."
+  ],
+  "mechanical_checks": {
+    "actual_git_preimage_exact": true,
+    "actual_tree_exact": true,
+    "public_headers_exact": [
+      "exists_rootEndpointTameJet_finite_prefix_envelope",
+      "n04Coordinates_actual_positiveSource_finite_prefixes"
+    ],
+    "generic_finite_sum_theorem_exact": true,
+    "aggregation_tail_exact": true,
+    "imports_options_context_exact": true,
+    "added_lines": 44,
+    "deleted_lines": 13,
+    "project_closure_modules": 756,
+    "missing_imports": [],
+    "cycles": []
+  },
+  "findings": [],
+  "limitations": [
+    "Static correctness and interface review only. Whether the generic boundary avoids the default-budget timeout is for the next actual CI to establish.",
+    "No new material growth or full primitive certificate is claimed; the original per-component high-data envelope is unchanged.",
+    "No Lean compiler/elaborator, active source/index/ref/checkpoint/authority or CI action."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "reviewed_at": "2026-11-12T16:30:56.113477+00:00"
+}

@@ -1,0 +1,113 @@
+{
+  "kind": "ci157_positive_source_prefix_existential_aggregation_repair",
+  "owner": "/root/quantitative_route",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_INDEPENDENT_FULL_REVIEW",
+  "actual_base": {
+    "head": "f44526b34baa27e45b8d32fe20d27deb52d24a80",
+    "tree": "83843ffdcc1539971cdedad2ba36e935da0ad729",
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalPositiveSourcePrefixBounds.lean"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair157/CanonicalPositiveSourcePrefixBounds.lean",
+    "sha256": "2a534678b940aba00ec2272d791bf1f9475352bfc0f53472f483e1bd0504d2da",
+    "blob": "26b5c393ceed954ce93224a01c7c48ccfee2175e",
+    "lines": 122
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair157/CanonicalPositiveSourcePrefixBounds.base.lean.txt",
+    "sha256": "c3d8637c9edeb45e7ef8982951afa9d8d9eaa111fca2e8c5d5bd8b1384a756ad",
+    "blob": "eb7384f7dfd8b4789393250c849af9f8a385a932",
+    "lines": 91
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair157/CanonicalPositiveSourcePrefixBounds.diff",
+    "sha256": "0cc2a0f8ae959195379002094f4e9ec7520b2b42adafaab6880a7c793fa8dd38",
+    "blob": "ba9f6509f566aa5582c12ee64124b837a31ec506",
+    "lines": 72
+  },
+  "cached_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-157.log",
+    "sha256": "63cbe9fb480477414184e1a19adb8191280827606441208dd9bb6ef5afaeb2c3",
+    "blob": "e7452d4a1c8b71643ed6a4c652e8045bdcffd94e",
+    "lines": 748
+  },
+  "diagnostics": [
+    {
+      "line": 78,
+      "column": 2,
+      "message": "default200000 isDefEq timeout in the first obtain applied to the actual all-jets supplier"
+    },
+    {
+      "line": 52,
+      "column": 0,
+      "message": "whole-declaration whnf default200000 timeout"
+    }
+  ],
+  "observed_progress": "The actual CanonicalPositiveSourceJetBounds309 provider compiled in CI157; this new downstream prefix declaration alone failed. No full-green claim.",
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalPositiveSourceJetBounds.lean",
+      "sha256": "74a5f486c095cd171fbb56c0270827cd89c7616aaa1f86fc701ba5e4e466a127",
+      "blob": "4ab2ef388753fd779280571b22abcfd7db544684",
+      "lines": 309
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveEndpointFields.lean",
+      "sha256": "c024651329c6b725f61097116a892f032b80b1f2ef363c920e37ac7e007c0587",
+      "blob": "d5ac37d8aae450523577552e3fb13815cd0a0468",
+      "lines": 132
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean",
+      "sha256": "91687b630205a380f137dcdb4cb32068d79582e09d17d4a4cd14317e21b9e19f",
+      "blob": "334d3c0c19727465e3afc75f988c79df1b8d7b8a",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalNeighborhoodRestriction.lean",
+      "sha256": "af2577f18d3d3af94162ce3415e3d0b96c054901827b5ea1db6d36be994d407c",
+      "blob": "7888f021746c6faf5ae5f0b149ed2fd17830c6e2",
+      "lines": 187
+    }
+  ],
+  "previous_exact_source_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CanonicalPositiveSourcePrefixBoundsIndependentReview.json",
+    "sha256": "ca111bcfdcf5465e672f1bcaa356e4337f72f216f7136325c9cbb0942dfaa2fa",
+    "blob": "67d448c9d9932badabf3326b8beb3006e4176ffd",
+    "lines": 37
+  },
+  "actual_supplier_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI156CanonicalPositiveSourceJetBoundsIndependentReview.json",
+    "sha256": "be8adebde7d9570023ef3ff87e78b6a5921c1fabe0b7c1890cbb9e5e6dc7d05b",
+    "blob": "174e33ee8dea808c232824f7d69b4e34db5002dd",
+    "lines": 139
+  },
+  "change_summary": [
+    "Move the complete existential all-jets to finite-prefix aggregation to a private theorem with an independent CanonicalData K parameter. The actual constructed atlas is never destructured while choosing common parameters and finite sums.",
+    "Preserve the original finite-sum generic theorem and every aggregation step from the common-parameter refine through the final source specialization byte-for-byte.",
+    "The actual public producer now supplies the same actual typed K, grading monotonicity and the same already compiled actual all-jets theorem to that private aggregation.",
+    "Both public theorem headers, the numerical envelope, common-base/outLoss/radius and their order, actual source maps/heights/radii, imports and options remain unchanged."
+  ],
+  "static_checks": {
+    "base_exact_actual_head": true,
+    "both_public_headers_exact": true,
+    "existing_generic_finite_sum_theorem_exact": true,
+    "aggregation_tail_exact": true,
+    "imports_options_open_context_exact": true,
+    "actual_supplier_and_atlas_unchanged": true,
+    "project_closure_modules": 756,
+    "missing_project_imports": [],
+    "project_import_cycles": [],
+    "added_lines": 44,
+    "deleted_lines": 13,
+    "forbidden_tokens": [],
+    "default_resource_limits_unchanged": true
+  },
+  "scope_limits": [
+    "Static repair only; default-budget performance requires the next actual CI.",
+    "No new final estimate, whole-cell claim, material growth or state-directional claim.",
+    "No local compiler/elaborator, new CI query/download or active src/index/ref/CP modification."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T16:29:44.017893+00:00"
+}

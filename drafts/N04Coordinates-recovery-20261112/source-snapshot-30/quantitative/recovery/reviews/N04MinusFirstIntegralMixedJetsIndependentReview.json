@@ -1,0 +1,102 @@
+{
+  "kind": "actual_first_integral_mixed_radial_recurrence_full_independent_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04MinusFirstIntegralMixedJets.lean",
+    "sha256": "8d53fcc78eb0c9a752a26562094c50e0a15085d028692054b6de32d3d9478bbc",
+    "blob": "886214bcb785a46d3c95369ce8afed8324f6400c",
+    "lines": 82
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04MinusFirstIntegralMixedJetsCandidateManifest.json",
+    "sha256": "b804495e1050560243eb01875243909c78a2431046d8f06e4b57c44a1c3ee6f4",
+    "blob": "5b1c0856a0675a49e4d873ff83325cf68634e37a",
+    "lines": 102
+  },
+  "actual_baseline_head": "4bb40f935b646a0c4bfa264cff6c2dbb1f67e17c",
+  "actual_provider_identities": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualTravelChart.lean",
+      "sha256": "5c7da22817d01115c5837f791ed4ba939d9f097c5ad547cb4882d02e435fb30a",
+      "blob": "a1b60844375f7e23349c24356cd300a76a6fd72e",
+      "lines": 229
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bCharacteristicFlowField.lean",
+      "sha256": "1dec19f7ec658422189c339a3260b79a483e0ce51edf163eaa5cc3fcf1fb72e2",
+      "blob": "40645919e21be32b88512c967e38f8991dfdd0cd",
+      "lines": 145
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bCharacteristicFirstIntegralsTransport.lean",
+      "sha256": "eb3cbeac3eb2463402021ec59548168c68a9ace72a9ffdb4402999708c22dc69",
+      "blob": "7bb5c2cab5edb3cd43bcb31f700e34c61294cb35",
+      "lines": 158
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualCharacteristics.lean",
+      "sha256": "da8388b36ca405be529ba7c8aed772ea675175c20a1b84deaac61de8c3bc821b",
+      "blob": "35b5c40473937d26dc724aae8503d94aac191c6d",
+      "lines": 135
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aMixedLocalCalculus.lean",
+      "sha256": "26f78720eec7420066d24dc1f0f623b6b22532776bf6b919c4753a3a1de6ab62",
+      "blob": "752e4c231c514e19055fb18cc1b1647684855a09",
+      "lines": 176
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CylinderMixedJets.lean",
+      "sha256": "ae19c58f66f0778411f64607f52acf0525aceb27036c9d1ac1825e0e46e3614d",
+      "blob": "3dc20e779221e16f9be32dff13d22e978b5a048d",
+      "lines": 253
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01ReturnChartRegularity.lean",
+      "sha256": "9fa7482f5ebf7b9d7b79023a0eea8d97e5d7ed194aeb165e9d6b2735f44f1c0c",
+      "blob": "2f0bf651cf6213d86ab32b8458bb85e9aefa2764",
+      "lines": 104
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "65fcde6ae1e43bf6fd2a5f56a2121cde66dea71c44357cd45b833e6bc3358ec1",
+      "blob": "7a05b947965738dcb91957059e102f9ea813e52b",
+      "lines": 1756
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Scalar/HeightDerivatives.lean",
+      "sha256": "23f1e5b32150474d94f01611a11a83f47bc4b99fa190d390dfec96b9ae832d12",
+      "blob": "8058b80b52b5d1e45e5ddebc8964a6a1e936bab4",
+      "lines": 236
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bCharacteristicFirstIntegrals.lean",
+      "sha256": "cabf5a4f7de74c1e3c2c16c765bf7c67052841cda2582da16b669141e3839a27",
+      "blob": "6fc2f9eca3e1203e2d5598cc92ac6604f848c3ef",
+      "lines": 202
+    }
+  ],
+  "read_scope": [
+    "All82 candidate lines. Full N04bActualTravelChart229, N04bCharacteristicFlowField145, N04bCharacteristicFirstIntegralsTransport158 and N07aMixedLocalCalculus176; exact called contracts and definitions in CylinderMixedJets, ActualCharacteristics, ReturnChartRegularity, FirstIntegrals, HeightDerivatives and Nonlinear."
+  ],
+  "checks": [
+    "The generic identity starts with the actual radialPartial transport equation on an open set. Mixed derivative locality and the real open-domain Leibniz theorem preserve its binomial coefficient order (angular j outside, radial i inside).",
+    "The conversion mixedDerivative(a-i,b-j)(angularPartial V)=mixedDerivative(a-i,b-j+1)V is the actual public CylinderMixedJets identity. All terms have first-integral radial order at most a and positive angular order; no global extension is assumed.",
+    "AngularPartial V is genuinely smooth at every point of the same open set by contDiffAt_angularPartial at infinite order. The required derivative commutation hypotheses are supplied by the actual ContDiffOn witnesses.",
+    "The public theorem uses the literal stored L.minusFlow and literal stateLeftChart. Existing actualMinusFlow_regular supplies the original inverse-flow regularity from the same Through03/raw-field witness; actual first-integral smoothness uses the same parameterized inverse.",
+    "The PDE supplier is precisely the fifth N03 clause: hN.2.2.2.2.2.1 followed by .2.2.1. Its derivative equals minusCharacteristicSpeed at the stored forward point. The existing first-integral transport converts this to negative drift-minus-halfgap times the angular derivative, definitionally the source F=-minusCharacteristicSpeed.",
+    "Corrected characteristic smoothness uses actual positive a and negative discriminant inside the same negative component, through the named hfield certificate. The selected .2.2.1 is exactly minus-speed regularity.",
+    "The let V in the public conclusion is the same local V passed directly to the generic lemma. No new radius, inverse, coefficient, state tower, material estimate or final CurrentJets assumption is selected.",
+    "All candidate/provider hashes and complete source identities were recomputed; no source bytes or resource options were changed."
+  ],
+  "scope_limits": [
+    "This is an exact ordinary mixed-jet recurrence. The state-directional angular base tower and quantitative coefficient product estimates remain separate tasks.",
+    "Static inspection does not certify elaboration or runtime; source remains uncompiled and held.",
+    "No compiler/elaborator, CI query/download, active checkout/index/ref/CP or authority mutation."
+  ],
+  "findings": [],
+  "compiled": false,
+  "source_edited": false,
+  "reviewed_at": "2026-11-12T16:23:53.317224+00:00"
+}

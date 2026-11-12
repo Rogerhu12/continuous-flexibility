@@ -1,0 +1,73 @@
+{
+  "kind": "same_radial_principal_product_shapes_finite_jet_envelope",
+  "owner": "/root/quantitative_route",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_PEER",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RadialReferencePrincipalJetEnvelope.lean",
+    "sha256": "1be3a119508e3f1e6d234e82d258d4930b89df274277650dd17c66a79171d002",
+    "blob": "2acbfe2daade71e72ed7970ce21fe09f9f49c0b3",
+    "lines": 91
+  },
+  "public_names": [
+    "exists_radialReferencePrincipal_jet_envelope"
+  ],
+  "imports": [
+    "ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope"
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.lean",
+      "sha256": "9bd854157a276a4c5fd8d3161f63d65a851fedbc656beba959ad5899e89cb5a7",
+      "blob": "4df4d9e114ae59bd99b5d3c09825adc95dbe3808",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/OneHighCompositionJets.lean",
+      "sha256": "c9d18bc3cd346d55434c7b39fcbd8589c226bae2cd4b1ad46597288735692af3",
+      "blob": "55ee6f621f2b0a63a723dfdceab93144234f9ab4",
+      "lines": 79
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Deriv.lean",
+      "sha256": "3033d2b35bcfdad1ab06168dee62c8587215de8fa049caa85e5445c54d4fb98c",
+      "blob": "ede41b77d146105bee637d6db9b91a1a21a48547",
+      "lines": 141
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    }
+  ],
+  "selected_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelopeVisibilityReviewedManifest.json",
+    "sha256": "55e1f9fe0d0e8e16ec596a3bebb948de20821dc3d05675dfaf382d4eb1901984",
+    "blob": "2ff192a92ea67f4a7a301b651ece487da37125e0",
+    "lines": 46
+  },
+  "selected_provider_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/RadialReferencePotentialJetEnvelopeVisibilityIndependentReview.json",
+    "sha256": "6b7b8004f478c6c9c01819672ee81bdb6a840cc9ad694d7de6b697932af9adcf",
+    "blob": "e898ffd3ad48cdeb96dfe12092c708984e165285",
+    "lines": 78
+  },
+  "proof_summary": [
+    "Use the same reviewed finite ordered-partition composition estimate for each physical factor at chi(x). Only positive inner jets through N+1 are assumed; no zeroth global inverse-coordinate bound enters.",
+    "Three finite Leibniz products bound f(chi)^2*g(chi)*v(chi), and the same last-product helper also treats deriv chi. C=CP^3*CC^4 is selected before every field and M.",
+    "The actual exponent is 4N+4; N=0 is included. Smoothness of physical factors is only at the actual image, so reciprocal profile smoothness at ambient endpoints is not assumed."
+  ],
+  "static_checks": {
+    "public_collision_count": 0,
+    "resource_options": [],
+    "forbidden_tokens": [],
+    "provider_visibility_supersession_explicit": true
+  },
+  "scope_limits": [
+    "Finite numerical adapter only; the subsequent actual material proof must supply all factors at the same C0/B/degree/width/Y/H/chi.",
+    "The reference reciprocal profile remains controlled by its true material-cell bounds, not a global compact inverse bound.",
+    "No local compilation, CI query/download, active src/index/ref/CP action."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T16:32:14.172791+00:00"
+}

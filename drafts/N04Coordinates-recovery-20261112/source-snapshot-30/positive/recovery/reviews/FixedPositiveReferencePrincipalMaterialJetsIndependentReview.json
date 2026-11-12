@@ -1,0 +1,136 @@
+{
+  "kind": "fixed_actual_positive_reference_principal_material_jets_full_independent_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferencePrincipalMaterialJets.lean",
+    "sha256": "ba30210799a8513a04fe59f50eecec9edbe5d5f73fd3346c29b1a8b35a5bfca7",
+    "blob": "833b47aee0e9476d25e0eec4bc3323a4830fb6bb",
+    "lines": 163
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferencePrincipalMaterialJetsCandidateManifest.json",
+    "sha256": "d74d862e1eafbf375d5a973303d20598deb57d818b1025d0ec3558011ae3cfe3",
+    "blob": "e8fd153a44d00c2a0829c6da69699ba3c89c3da3",
+    "lines": 103
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RadialReferencePrincipalJetEnvelope.lean",
+      "sha256": "1be3a119508e3f1e6d234e82d258d4930b89df274277650dd17c66a79171d002",
+      "blob": "2acbfe2daade71e72ed7970ce21fe09f9f49c0b3",
+      "lines": 91
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferencePrincipalPhysicalMaterialJets.lean",
+      "sha256": "f829971e69d193fe93cab137aea5198045ff765c0e659d2587599386296547e8",
+      "blob": "7c0092bb7a14fc38cb7252f67c33c19a165a2d3c",
+      "lines": 108
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "lines": 168
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceInverseMaterialJets.lean",
+      "sha256": "ef40450003358fd22e68a70ecd7c722bfb630b77f6fb6e234331efcb9ab74af5",
+      "blob": "6dd64a27ede32a71db55d16a2029b9b6858a4c12",
+      "lines": 276
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/ReferenceModerateCoefficients.lean",
+      "sha256": "c2a86b45c7e15d9ceb1d807ee9398db0a1652fc1a4a9206cf52a23180fd9487f",
+      "blob": "5ebec66fc1a840a83166cb74866b94fba1df7ef3",
+      "lines": 201
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Operations.lean",
+      "sha256": "2a5fd66cb597c253e023f1072948e1a591f64ba0ee747a6a89139fc7c8c980eb",
+      "blob": "80e898b98348cb111761430989137705f4a3cf63",
+      "lines": 1052
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+      "sha256": "d6c3ace5e5e251e2943bd5985eb9c0a076a875c98fd876c961cb54c366ca50cb",
+      "blob": "86135f3b7295638a64b59ddaf2653b87d2733431",
+      "lines": 391
+    }
+  ],
+  "selected_provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RadialReferencePrincipalJetEnvelopeReviewedManifest.json",
+      "sha256": "1d8b848459441ccf49d3141649a057605a1e4c4bed641c4521d332b4627d8cc9",
+      "blob": "1accaf8363086387666f97c0220186016b3a4a25",
+      "lines": 33
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferencePrincipalPhysicalMaterialJetsReviewedManifest.json",
+      "sha256": "7b564477cd9d135b0a63832cf0bd063f94ab2bf9b1ecaf6fd62a01c0accd3127",
+      "blob": "45d07eff5708518770a4dfbbebf79abdaa3d1712",
+      "lines": 33
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceInverseMaterialJetsReviewedManifest.json",
+      "sha256": "2c0359a48d72cf1d299fe1aa55afd4ff9e08c978f1450c24838733e889ea5cf9",
+      "blob": "24c481db3520705d623302527da7aa10727989d6",
+      "lines": 46
+    }
+  ],
+  "additional_exact_api_sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Radial.lean",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352",
+      "blob": "473c530a1de50c672f2e54908d374f624f5955b0",
+      "lines": 874
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/ConnectedReferenceBorder.lean",
+      "sha256": "bf57e7e5c646c28a8c343c5b0029c4f9bbaf80ffec95ea25c1565eba284889ab",
+      "blob": "d21dc5b19a193ae15df0fce1bc75a00e86554b73",
+      "lines": 101
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04PositiveComponents.lean",
+      "sha256": "5b7a7e28f279116415d8a3a23299294f8e5fc1858187ec00c3ea18a4d04757de",
+      "blob": "0d4de58a9b9ecd9f84e2f01da190847464669cc6",
+      "lines": 194
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "lines": 1155
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Deriv.lean",
+      "sha256": "3033d2b35bcfdad1ab06168dee62c8587215de8fa049caa85e5445c54d4fb98c",
+      "blob": "ede41b77d146105bee637d6db9b91a1a21a48547",
+      "lines": 141
+    }
+  ],
+  "read_scope": [
+    "Complete163 candidate, complete91 principal product envelope, complete108 physical factor provider and complete168 actual range geometry. Rechecked the exact all-order output of the already fully reviewed276 same-family inverse construction. Read the actual radial geometry/component inclusion definitions and pinned derivative/rpow identities used by this adapter."
+  ],
+  "checks": [
+    "C0, its genuine scaled floor, the original midpoint cell and the displayed Y/H/invFunY are unchanged. Only the numerical constants A0(N), D and M are selected; no width, degree, coordinate family or sample is reselected at order s.",
+    "The all-order hjets contract matches the selected276 output: all forward/height/inverse-height jets through N and the (N+1)st inverse-coordinate derivative. Summing A0(k) for k<=s controls inverse orders1..s+1 via k-1, including s=0 without demanding a bound on the inverse value.",
+    "The same actual range geometry supplies global scalar smoothness by restriction to the radius line, and maps canonical x in(0,1) to the physical positive component. The actual profile geometry gives positive radius/profile at that same evaluation point for reciprocal/division smoothness.",
+    "Physical108 is evaluated at the same physical inverse image and same original midpoint sample. It controls w, w inverse and w-prime/r on the actual component, not on an unproved common cell or an off-domain extension.",
+    "D=1+P0+sum A0(k) dominates every finite-prefix input; W>=1 implies Z=D*W^D>=1 and monotone exponent enlargement. All nonnegativity hypotheses used by mul_le_mul are explicitly instantiated.",
+    "The reviewed91 envelope is applied to the exact three shapes: H(chi)^2*w(chi)*Y-prime(chi), H(chi)^(-2)*w(chi)^(-1)*chi-prime, and H(chi)^2*(w-prime(chi)/chi)*chi-prime. The second and third calls use the second returned shape, so the unused constant-one factor is harmless.",
+    "The fixed natural exponent d=4s+4 converts C1*Z^d exactly to coefficient*W^exponent using the pinned rpow_mul_natCast identity with nonnegative W. M=1+coefficient+exponent controls both numerical coefficient and real exponent; constants precede all components and canonical points.",
+    "All source/provider/owner fingerprints recomputed; one new public declaration has no installed-source collision. No source edits, compiler/elaborator, CI query/download, active checkout/index/ref or resource-limit change."
+  ],
+  "findings": [],
+  "scope_limits": [
+    "The retained same-Gamma geometry, actual chosen-family jet contract and scaled envelope floor remain explicit genuine inputs. The family producer retains its separate raw optical/host obligations.",
+    "This establishes three scalar principal formulas. Identification with the actual V atoms and mixed canonical derivatives remains a separate consumer.",
+    "Static review does not certify elaboration or compilation."
+  ],
+  "public_collision_count": 0,
+  "source_edited": false,
+  "compiled": false,
+  "reviewed_at": "2026-11-12T16:48:41.917489+00:00"
+}

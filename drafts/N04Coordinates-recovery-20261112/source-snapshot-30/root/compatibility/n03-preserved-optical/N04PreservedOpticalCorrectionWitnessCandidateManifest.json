@@ -1,0 +1,74 @@
+{
+  "kind": "fixed_actual_N03_correction_preserves_existing_discriminant",
+  "owner": "/root",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-optical/N04FixedCorrectionWitness.lean",
+    "sha256": "31cc9daa037d8704afa88ebb2d2ea93724450c94ade5e63ce8e0ce37a21e9a12",
+    "blob": "c6a002df0ac70f6b2bbb1d62186c97b0bd560e12",
+    "lines": 148,
+    "target_path": "src/ContinuousFlexibility/Analysis/N04FixedCorrectionWitness.lean"
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N04FixedCorrectionWitness.lean",
+    "sha256": "cf0ef6b6b5df83bfe4214f4540ad949e0d95731d92bc65b931e81c6425360bd0",
+    "blob": "14bd53d10d3bc8e31a0bdcf67169cf11e5aa717e",
+    "lines": 117
+  },
+  "base_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N04PreservedCorrectionWitnessReviewedManifest.json",
+    "sha256": "eec7b5a0a03df2c4a29c0249eec940c113f23af9d1e2e96235781726a89ced52",
+    "blob": "695afcd519fabd22dc82889b388d78ae57698a25",
+    "lines": 43
+  },
+  "base_independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/N04PreservedCorrectionWitnessIndependentReview.json",
+    "sha256": "47aaed608c03fe5cf554a86613c0c7674076b73966d836a163f34bf30d156af9",
+    "blob": "5d4b866209decb64116f4226818bbcad08ff7cc0",
+    "lines": 257
+  },
+  "base_selected_graph": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/N04PreservedCorrectionWitnessSelectedMainGraph.json",
+    "sha256": "0b6f69f407388f9de5d2b95735ee6a1a17bcf857418adb21c1be5400696eb379",
+    "blob": "9562f344b4ebffacf2459e3da523047ea74330be",
+    "lines": 10012
+  },
+  "actual_discriminant_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-optical/ReturnCorrectionUniformNeighborhood.provider.lean.txt",
+    "sha256": "6076d8d95cfbc3ddda9c3238ace1f5365f7295cab7840d73a474695db45ad4c6",
+    "blob": "d93ffb039a87de62f1e5130351da1e974c43114c",
+    "lines": 146,
+    "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+    "target_path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionUniformNeighborhood.lean"
+  },
+  "actual_N03_record_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N03CorrectionAssembly.lean",
+    "sha256": "a699eb62ab13a137bf5e75ee7f27a8d8fb9d0449dee431b3980bdd015997efaa",
+    "blob": "fd48b7aea0616211039f84119dd4fb7f5d36a455",
+    "lines": 206
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-optical/N04FixedCorrectionWitness.diff",
+    "sha256": "d262fd60c853f4187c6c6a025b670153547901bea22a8afe1da465934d635e5b",
+    "blob": "568a949e8ce4e9782370d28b53dae6848463e54a",
+    "lines": 59
+  },
+  "public_names": [
+    "N01Properties.n04_exists_through03_preserving_correction_and_discriminant",
+    "N01Properties.n04_exists_through03_preserving_correction"
+  ],
+  "checks": [
+    "The stronger producer retains the same original117 proof through the complete actual return-correction construction, with only hdiscFull added to its final result tuple.",
+    "The extra conclusion is the existing original-coefficient discriminant positivity on the tsupport of the very same cutoff derivative, at the very same restricted base and radius. It is quantified over all states in that neighborhood and requires no added stateSector hypothesis.",
+    "The exact original public theorem header remains unchanged as a wrapper, discarding only the additional already-proved discriminant clause.",
+    "No R/L/chi/cell/reference/material/control witness is reselected in the wrapper. It uses the stronger theorem once and returns the same witnesses.",
+    "Imports, local instance name, default options and the original immutable117 source remain unchanged. Select this as a supersession of that one module, never alongside a duplicate provider."
+  ],
+  "scope_limits": [
+    "This preserves actual construction data; it does not claim full CurrentJets or a final material estimate.",
+    "The selected705 main-compatible graph still applies except for the exact one-module source supersession, which needs peer rebinding.",
+    "No compiler, CI or active source/index/ref mutation."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T16:35:27.436907+00:00"
+}

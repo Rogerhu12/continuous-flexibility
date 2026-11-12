@@ -1,0 +1,33 @@
+{
+  "kind": "ci157_positive_source_prefix_aggregation_reviewed_repair",
+  "owner": "/root/quantitative_route",
+  "status": "STATIC_INDEPENDENTLY_FULL_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair157/CanonicalPositiveSourcePrefixBounds.lean",
+    "sha256": "2a534678b940aba00ec2272d791bf1f9475352bfc0f53472f483e1bd0504d2da",
+    "blob": "26b5c393ceed954ce93224a01c7c48ccfee2175e",
+    "lines": 122
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair157/CanonicalPositiveSourcePrefixBoundsCI157RepairCandidateManifest.json",
+    "sha256": "ef152d4f4b6af36b6eed0a12f7345b15a5bd301d442637cceb39402be71bcff4",
+    "blob": "4691650814082076cf1cff345beb6425687a0e40",
+    "lines": 113
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI157CanonicalPositiveSourcePrefixBoundsIndependentReview.json",
+      "sha256": "6af3bcc7b5136ebcf64478a13c1a116ba20b2e2407b74f20fbc1dfd3e5903867",
+      "blob": "4f777182f2d8ed38ebcfbe69def6f8757be41f34",
+      "lines": 135
+    }
+  ],
+  "source_unchanged": true,
+  "compiled": false,
+  "default_limits_unchanged": true,
+  "scope_limits": [
+    "No local compiler, actual src/index/ref/CP write or CI query/download.",
+    "The candidate remains uncompiled; only subsequent authorized CI can validate performance."
+  ],
+  "created_at": "2026-11-12T16:31:14.962808+00:00"
+}

@@ -1,0 +1,59 @@
+--- reviewed117/N04FixedCorrectionWitness.lean
++++ preserved-optical/N04FixedCorrectionWitness.lean
+@@ -24,7 +24,7 @@
+ local instance n04FixedCorrectionStateSMul (S : PhysicalSpacesData) :
+     SMul ℝ (AnnularState S) := Prod.instSMul
+ 
+-theorem N01Properties.n04_exists_through03_preserving_correction
++theorem N01Properties.n04_exists_through03_preserving_correction_and_discriminant
+     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+     (hN : N01Properties D T S C base loss ε)
+@@ -42,7 +42,12 @@
+             χ m =ᶠ[𝓝 (C.right m)] (fun _ => 1)) ∧
+           (∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (cell m)) ∧
+           (∀ k : ℕ, ∃ B Q : ℝ, 0 ≤ B ∧ 0 ≤ Q ∧ ∀ m r,
+-            |iteratedDeriv k (χ m) r| ≤ B * radialE (D.cellIndex (cell m)) ^ Q) := by
++            |iteratedDeriv k (χ m) r| ≤ B * radialE (D.cellIndex (cell m)) ^ Q) ∧
++          (∀ z ∈ stateNeighborhood S C base' ε', ∀ m (p : PolarPoint),
++            p.1 ∈ tsupport (deriv (χ m)) →
++              0 < (originalCoefficients D S C z).b p ^ 2 -
++                (originalCoefficients D S C z).a p *
++                  (originalCoefficients D S C z).c p) := by
+   classical
+   obtain ⟨base', ε', χ, hbase, hε', hε'ε, hN', hχdata, hendData, hcollar,
+     hdiscFull, hcorrected, _, hflow⟩ :=
+@@ -112,6 +117,32 @@
+     hN'.n04_exists_returnCorrection_preserving_fields hR hS hT
+       χ hχ hχrange hsupp hend hdiscFull hcorrected E hE' htame
+   exact ⟨R, L, χ, j, base', ε', hbase, hε', hε'ε, ⟨⟨hN', hR⟩, hL⟩,
+-    hLcoefficients, hLminusFlow, hχ, hχrange, hsupp, hend, hcell, hcutoff⟩
++    hLcoefficients, hLminusFlow, hχ, hχrange, hsupp, hend, hcell, hcutoff, hdiscFull⟩
++
++/-- The original fixed-witness interface, retaining the same construction. -/
++theorem N01Properties.n04_exists_through03_preserving_correction
++    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
++    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
++    (hN : N01Properties D T S C base loss ε)
++    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
++    ∃ R : ReturnEquationData S, ∃ L : ReturnCorrectionData S,
++      ∃ χ : ℕ → ℝ → ℝ, ∃ cell : ℕ → ℕ, ∃ base' : ℕ, ∃ ε' : ℝ,
++        base ≤ base' ∧ 0 < ε' ∧ ε' ≤ ε ∧
++          NonlinearPropertiesThrough03 D T S C R L base' loss ε' ∧
++          L.coefficients = returnCorrectedCoefficients D S C χ ∧
++          L.minusFlow = returnCorrectedMinusFlow S C χ ∧
++          (∀ m, ContDiff ℝ ∞ (χ m)) ∧
++          (∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1) ∧
++          (∀ m, Function.support (deriv (χ m)) ⊆ Ioo (C.left m) (C.right m)) ∧
++          (∀ m, χ m =ᶠ[𝓝 (C.left m)] (fun _ => 0) ∧
++            χ m =ᶠ[𝓝 (C.right m)] (fun _ => 1)) ∧
++          (∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (cell m)) ∧
++          (∀ k : ℕ, ∃ B Q : ℝ, 0 ≤ B ∧ 0 ≤ Q ∧ ∀ m r,
++            |iteratedDeriv k (χ m) r| ≤ B * radialE (D.cellIndex (cell m)) ^ Q) := by
++  obtain ⟨R, L, χ, cell, base', ε', hbase, hε', hε'ε, hthrough,
++    hcoefficients, hminusFlow, hχ, hrange, hsupp, hend, hcell, hjets, _⟩ :=
++    hN.n04_exists_through03_preserving_correction_and_discriminant hS hT
++  exact ⟨R, L, χ, cell, base', ε', hbase, hε', hε'ε, hthrough,
++    hcoefficients, hminusFlow, hχ, hrange, hsupp, hend, hcell, hjets⟩
+ 
+ end ContinuousFlexibility.Statements

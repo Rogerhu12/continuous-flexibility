@@ -1,0 +1,34 @@
+{
+  "kind": "actual_inverse_profile_point_and_positive_sample_reviewed_jets",
+  "owner": "/root/quantitative_route",
+  "status": "STATIC_INDEPENDENTLY_FULL_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJets.lean",
+    "sha256": "52e91e6500606231c499fcd3863d9b2f9ca99535348f52e9abc8f15b139b8e23",
+    "blob": "6fbfba9f7a349a6604eb28473b5098a5f45a3e1f",
+    "lines": 103
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJetsCandidateManifest.json",
+    "sha256": "8a2c0e6f690e2499a64d18ee9b22a28dca7fef8df883d5f5148a1bd1d8a91a53",
+    "blob": "773da90602a2fdd7a69c0ff74b4b131b30e6fb7f",
+    "lines": 113
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ReferenceInverseProfileMaterialJetsIndependentReview.json",
+      "sha256": "971feedd1b4118e8f2e013de930804cf777f9d12a6281e6496dc2c3fab3ad168",
+      "blob": "282dfdfd7214fad4120fb604e28630821a535b63",
+      "lines": 121
+    }
+  ],
+  "source_unchanged": true,
+  "compiled": false,
+  "scope_limits": [
+    "Same retained P/Gamma evidence stays explicit; it is not extracted from arbitrary Through03.",
+    "The arbitrary-profile first theorem holds only on the open radial core, as required since w vanishes at ambient endpoints. The retained positive closed components have genuine interior endpoints.",
+    "These are physical reciprocal-profile jets, not yet the four transformed principal atoms. The downstream same C0/B/degree/width/Y/H will remain unchanged.",
+    "No local compiler/elaborator, CI query/download, active source/index/ref/CP action."
+  ],
+  "created_at": "2026-11-12T16:32:02.513505+00:00"
+}

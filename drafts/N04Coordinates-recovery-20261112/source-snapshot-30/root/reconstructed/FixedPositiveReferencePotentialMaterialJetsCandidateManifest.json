@@ -1,0 +1,61 @@
+{
+  "kind": "fixed_chosen_positive_reference_family_potential_material_adapter",
+  "owner": "/root",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedPositiveReferencePotentialMaterialJets.lean",
+    "sha256": "0907bd7f6cecbd52a23169516f946964f1a8e46ec97f0f6dc9fb48e64dd0304f",
+    "blob": "158d133a29535703e3b38dddd92b349645065a19",
+    "lines": 123,
+    "target_path": "src/ContinuousFlexibility/Analysis/FixedPositiveReferencePotentialMaterialJets.lean"
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePotentialJetEnvelope.lean",
+      "sha256": "1f9b3defaf95b285251e29c321f40c9e53c4745469447ad5861ccd51ffb8f455",
+      "blob": "d63e8e50b1918c38a0864f79afd1bffebc5d6a46",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferencePotentialMaterialJets.lean",
+      "sha256": "867e851173adc2d6748b2d61718bf94672056637482f766a45862bb6ce38daf3",
+      "blob": "de62b2af6ce8a13c879fc9baf8938d7a8cfcd630",
+      "lines": 251
+    }
+  ],
+  "prior_full_reviewed_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferencePotentialReviewedManifest.json",
+    "sha256": "597cefd6794acfe7740a3406127dddf8bec7f4117e84e381d7ed13adc32ef99d",
+    "blob": "cfe35ac88b909785096edab9fd7c4fd45df20bac",
+    "lines": 121
+  },
+  "same_chosen_family_supplier": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceInverseMaterialJets.lean",
+    "sha256": "ef40450003358fd22e68a70ecd7c722bfb630b77f6fb6e234331efcb9ab74af5",
+    "blob": "6dd64a27ede32a71db55d16a2029b9b6858a4c12",
+    "lines": 276
+  },
+  "pinned_compact_provider": {
+    "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Normed/Group/Bounded.lean",
+    "sha256": "b399b0280564faa2493dc7e814c90f09f73e9c710db8ec2c1ac9bb1046062435",
+    "blob": "d6b3dd69687ad53535e86689abd4f4aed66949ef",
+    "lines": 173
+  },
+  "public_names": [
+    "fixedPositiveReference_potential_material_jets"
+  ],
+  "checks": [
+    "The private fixed-profile compact-prefix proof is byte-identical to the reviewed251 source after only its private name changes.",
+    "Y,H and W are given families. The inverse is literally Function.invFun(Y i). The proof chooses only all-order coefficients and never calls the276 existential producer.",
+    "The only quantitative inputs are the actual forward height and positive inverse jets already returned by one selected276 family. Zeroth inverse values enter only the genuine range certificate.",
+    "All coefficients precede family index and physical point. The original fixed compact profile bound and159 potential numerical polynomial have the same order s+1/s+2/s+1 and power2*s+3.",
+    "The supplied floor is for W, which the actual adapter will instantiate by the unchanged C0*E0(sample). No lower bound for the unscaled envelope is introduced."
+  ],
+  "scope_limits": [
+    "Generic fixed-family consequence of already proved jet inputs; the actual276 specialization and same-V potential atom adapter remain to be added.",
+    "Original251/207 sources and historical owners remain immutable; this is a new provider, not a claim that two independently chosen existential families coincide.",
+    "No compiler, CI or active source/index/ref mutation."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T16:41:50.316333+00:00"
+}

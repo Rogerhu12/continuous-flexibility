@@ -1,0 +1,127 @@
+{
+  "kind": "whole_reference_gauge_actual_positive_principal_atoms_independent_full_source_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositivePrincipalJetsCandidateManifest.json",
+    "sha256": "91e4b1675467cc69ed1770b53e382c3d222d91b56d43fa48a06d251a766b15e7",
+    "blob": "7a62aded11e71ca9e4359d0f6d52f35094ac3acb",
+    "lines": 116
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositivePrincipalJets.lean",
+    "sha256": "b8e9fe14a443cf93d04a9643633566b731268408fc8ce38131639eced6887540",
+    "blob": "b926843c192aa175dd25404f005a55ddb46ac874",
+    "lines": 290
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferencePrincipalMaterialJets.lean",
+      "sha256": "ba30210799a8513a04fe59f50eecec9edbe5d5f73fd3346c29b1a8b35a5bfca7",
+      "blob": "833b47aee0e9476d25e0eec4bc3323a4830fb6bb",
+      "lines": 163
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholePositiveReferencePrincipal.lean",
+      "sha256": "3e3daeb4e127d77150c85fe2cf205ae2564a86da1a7b92a54d16f447a62cc3fc",
+      "blob": "fcb65801fb0da7c1ccbf3e7a0bf826f303bf9a3b",
+      "lines": 195
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "lines": 168
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/reference-gauge-restriction/WholeReferenceGaugeAtlasCutOperator.lean",
+      "sha256": "71427dd3175ca9dcd9cdcc8de5ce4216f998587db175fdf55c74d24a5332ac01",
+      "blob": "14acbf9b59c2fd57da53b0d7e0290c43f649331c",
+      "lines": 102
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PhysicalTransmissionTrace.lean",
+      "sha256": "06bae1df9c968c303f48dd5c04b48c95b49eb41eb6cb276902c1401e634ef8d4",
+      "blob": "e355936649f9946fad0101bd4f0e7ac93c0afe46",
+      "lines": 66
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N08RadialFamilyMaterialJets.lean",
+      "sha256": "5796d127cb631248523060a373d0cdea3d07052857008b6dcfb987dbae59289d",
+      "blob": "3fd9b99c74162ee221843491623573b719c172b3",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "5f73ab50c8dd436e8bfd4039f30722eaba68cbc77bcc862efff43251faff88e7",
+      "blob": "4523f8385550033058d8f7593f8a397a33157576",
+      "lines": 308
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "65fcde6ae1e43bf6fd2a5f56a2121cde66dea71c44357cd45b833e6bc3358ec1",
+      "blob": "7a05b947965738dcb91957059e102f9ea813e52b",
+      "lines": 1756
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Inverse.lean",
+      "sha256": "d09dedd0090af21a326031aaaac409bb9065bb028915b64232df18733f482573",
+      "blob": "4ca6d75a836c94e9a169fe9b3fc5876adedd4010",
+      "lines": 173
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+      "sha256": "1e9fbd861ac27cb4b17113c3f8ede3c5f573a6b342b23e41ff514b05bd3334ef",
+      "blob": "e7fd4979f58f787927500713547b3671402ae782",
+      "lines": 1283
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Group/Basic.lean",
+      "sha256": "1de660ac794263d0363bc5bf9ce7b357409c2db36c0642521738103a0938fa84",
+      "blob": "87499371d701f92163612c570f82a76a74421462",
+      "lines": 1099
+    }
+  ],
+  "additional_actual_record": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+    "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+    "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+    "lines": 131
+  },
+  "reviewed_fixed_numerical_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferencePrincipalMaterialJetsReviewedManifest.json",
+    "sha256": "ce106bcb05cdd1c9e058e9a565f0fead5f7e1a7f2a9a6f5c83bd75abc157e5cf",
+    "blob": "2e42a98346c62bc7a7f7e995199a718539ce92a7",
+    "lines": 33
+  },
+  "fixed_numerical_provider_full_peer": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/FixedPositiveReferencePrincipalMaterialJetsIndependentReview.json",
+    "sha256": "9dbcf38b60c597588b2a84689bad5ec1bcf2fd7e1f200d8d94690b1f3770c29b",
+    "blob": "b57e34702b73d03bda6d731b2e1ab540d3b2a69b",
+    "lines": 136
+  },
+  "read_scope": [
+    "All290 candidate lines, all163 fixed numerical provider lines, the actual195 reference principal formulas and their proof, the168 range-geometry structure and inverse contracts, the131 same-V record definitions and positive metadata theorem.",
+    "Actual Atom/canonicalUnitPoint/unitStrip definitions, the open EqOn-to-mixed-derivative proof, the actual radial mixed-derivative proof, coefficientEnvelope_pack, and the pinned inverse-function derivative and ContDiffOn congruence APIs."
+  ],
+  "checks": [
+    "The same supplied Y/H/cell/C0 and same material T occur in the actual atlas, the fixed163 numerical call, and the final sample RHS. No reference family, width, sample, or coordinate is selected again. The explicit hE0 is a genuine post-normalization hypothesis, not an inference that the original IsMaterialData has a unit floor.",
+    "Restriction of the actual global two-dimensional range certificate to t -> (t,0) gives genuine Y,H,invFunY smoothness. The positive actual Jacobian is derivY at the true inverse image. The exact global right-inverse identity gives deriv(invFunY)(x)=(derivY(invFunY x))^-1 by the pinned local inverse theorem.",
+    "At each canonical x in (0,1), the actual inverse maps into the same positive physical component. Profile and radius positivity hold there, which is sufficient for reciprocal smoothness; no ambient-endpoint reciprocal smoothness or compact inverse-profile extension is assumed.",
+    "The actual metadata gives canonical endpoints0/1, hence canonicalUnitPoint is precisely the identity on the plane. The already proved actual density formulas identify a with H(chi)^2*w(chi)*Yprime(chi), its inverse with H(chi)^-2*w(chi)^-1*chi-prime, b with0, and c with H(chi)^2*(wprime(chi)/chi)*chi-prime. Inverse powers and product orders are reconciled algebraically.",
+    "Only equality on the genuine open unitStrip is used. That equality transports smoothness and all mixed jets; period follows from the same radial formula and true shifted-point membership. Outside-strip total extensions need not agree.",
+    "The finite prefix D=1+sum_{k<=s}M(k) dominates each a<=s estimate. The scaled W=C0*t is at least1, and the true sample t is at least1 by the explicit hE0. The identity D*W^D=(D*C0^D)*t^D and coefficientEnvelope_pack produce B before every whole index, relative family, atom, point, and mixed order.",
+    "All four branches including principalB=0 and nonzero angular derivative orders are handled; the zero-order case a=b=0 uses the same true scalar bounds. The nonzero radial expressions are exactly the three outputs of the independently reviewed163 provider.",
+    "All manifest source/provider hashes were recomputed and matched. The sole new public theorem has no installed-source duplicate. Every public assumption is an explicit binder; no proof-only section variable is silently omitted."
+  ],
+  "findings": [],
+  "scope_limits": [
+    "This supplies the four actual positive reference principal atoms for the given family. Its genuine family jet, retained-coordinate and raw-optical producer obligations remain upstream; no completed CanonicalPrimitiveGeometry claim is made.",
+    "The candidate-time provider status remains historical. The separate163 owner/peer now recorded here certifies static review of those same bytes, not compilation.",
+    "No compiler/elaborator, source edit, active checkout/index/ref/checkpoint/authority change, CI query or CI download was performed."
+  ],
+  "public_collision_count": 0,
+  "source_edited": false,
+  "compiled": false,
+  "reviewed_at": "2026-11-12T16:51:06.785215+00:00"
+}

@@ -1,0 +1,99 @@
+{
+  "kind": "fixed_positive_reference_potential_material_jets_independent_full_source_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedPositiveReferencePotentialMaterialJetsCandidateManifest.json",
+    "sha256": "4fcf86d93a521d584a3e5ad39ff2eb759c8f4bea92a34a4eb3c3be8e0c827b2b",
+    "blob": "359426ffc8df78d670c44a63e787ffa42b424b74",
+    "lines": 61
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedPositiveReferencePotentialMaterialJets.lean",
+    "sha256": "0907bd7f6cecbd52a23169516f946964f1a8e46ec97f0f6dc9fb48e64dd0304f",
+    "blob": "158d133a29535703e3b38dddd92b349645065a19",
+    "lines": 123,
+    "target_path": "src/ContinuousFlexibility/Analysis/FixedPositiveReferencePotentialMaterialJets.lean"
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePotentialJetEnvelope.lean",
+      "sha256": "1f9b3defaf95b285251e29c321f40c9e53c4745469447ad5861ccd51ffb8f455",
+      "blob": "d63e8e50b1918c38a0864f79afd1bffebc5d6a46",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferencePotentialMaterialJets.lean",
+      "sha256": "867e851173adc2d6748b2d61718bf94672056637482f766a45862bb6ce38daf3",
+      "blob": "de62b2af6ce8a13c879fc9baf8938d7a8cfcd630",
+      "lines": 251
+    }
+  ],
+  "same_family_supplier_header_and_actual_smoothness_proof": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceInverseMaterialJets.lean",
+    "sha256": "ef40450003358fd22e68a70ecd7c722bfb630b77f6fb6e234331efcb9ab74af5",
+    "blob": "6dd64a27ede32a71db55d16a2029b9b6858a4c12",
+    "lines": 276
+  },
+  "supplier_reviewed_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceInverseMaterialJetsReviewedManifest.json",
+    "sha256": "2c0359a48d72cf1d299fe1aa55afd4ff9e08c978f1450c24838733e889ea5cf9",
+    "blob": "24c481db3520705d623302527da7aa10727989d6",
+    "lines": 46
+  },
+  "prior_full_reviewed_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferencePotentialReviewedManifest.json",
+    "sha256": "597cefd6794acfe7740a3406127dddf8bec7f4117e84e381d7ed13adc32ef99d",
+    "blob": "cfe35ac88b909785096edab9fd7c4fd45df20bac",
+    "lines": 121
+  },
+  "compatible_final_envelope_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.lean",
+    "sha256": "9bd854157a276a4c5fd8d3161f63d65a851fedbc656beba959ad5899e89cb5a7",
+    "blob": "4df4d9e114ae59bd99b5d3c09825adc95dbe3808",
+    "lines": 159
+  },
+  "pinned_apis": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Normed/Group/Bounded.lean",
+      "sha256": "b399b0280564faa2493dc7e814c90f09f73e9c710db8ec2c1ac9bb1046062435",
+      "blob": "d6b3dd69687ad53535e86689abd4f4aed66949ef",
+      "lines": 173
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+      "sha256": "d6c3ace5e5e251e2943bd5985eb9c0a076a875c98fd876c961cb54c366ca50cb",
+      "blob": "86135f3b7295638a64b59ddaf2653b87d2733431",
+      "lines": 391
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "lines": 1155
+    }
+  ],
+  "read_scope": [
+    "All123 new source lines and the complete159 potential-envelope source; exact251 fixed-profile helper and previous numerical finite-prefix construction.",
+    "The276 supplier public header and actual range/global inverse smoothness proof, plus the pinned compact derivative-bound and real-power APIs."
+  ],
+  "checks": [
+    "The fixed compact profile-prefix proof is byte-identical to the reviewed251 helper after only its private name changes. It selects finitely many bounds for the genuine ordinary derivatives on Icc(l,r), sums their absolute values, and yields P0>=0 before every family index.",
+    "Y,H and W are inputs and chi is literally Function.invFun(Y i). No reference factory or existential family is selected in this lemma. Only numerical A0,D,M are chosen.",
+    "D=1+sum_{k<s+3}A0(k) uniformly dominates all coefficients needed. The supplied W>=1 raises both coefficient and exponent to Z=D*W^D; no original material E0 floor is inferred.",
+    "The actual height estimate is taken at order s+2 and supplies all k<=s+2. Every positive inverse order k<=s+1 is obtained from the same hjets at k-1, using k-1+1=k. No zeroth inverse-value estimate is introduced.",
+    "The actual range places chi(x) inside the same fixed physical Icc(l,r), exactly where the profile derivative prefix is bounded. The159 potential estimate uses profile s+1, height s+2, and positive inverse s+1, and returns degree2*s+3 for the exact signed flux expression.",
+    "The final identity C1*P0*(D*W^D)^d=(C1*P0*D^d)*W^(D*d) follows the pinned rpow_mul_natCast orientation. M=1+D+coefficient+exponent controls both coefficient and exponent before i/x. All nonnegativity prerequisites are explicit.",
+    "The supplied276 family already retains one C0/B/delta/Y/H and genuine positive inverse jets; its actual prescribed geometry yields the global height/inverse smoothness and range needed for specialization. This new lemma does not equate two independent choices.",
+    "All manifest source/provider/review hashes were checked. The selected public159 envelope is byte-identical in the visibility compatibility provider, so the two-private export change does not alter this call."
+  ],
+  "findings": [],
+  "scope_limits": [
+    "This is the generic fixed-family numerical consequence. The actual same-V atom adapter and final primitive certificate are not asserted here.",
+    "No Lean compiler or elaborator, active source/index/ref/checkpoint/authority, or CI operation.",
+    "Source and historical251/207 manifests were not edited."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "reviewed_at": "2026-11-12T16:43:27.103771+00:00"
+}

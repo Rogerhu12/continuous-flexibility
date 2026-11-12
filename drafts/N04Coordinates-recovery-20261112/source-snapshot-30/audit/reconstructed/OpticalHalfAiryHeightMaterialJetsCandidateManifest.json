@@ -1,0 +1,113 @@
+{
+  "kind": "same_optical_half_airy_height_all_order_power_material_jets",
+  "owner": "/root/audit_coordinates",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_COMPLETE_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryHeightMaterialJets.lean",
+    "sha256": "2a332f186f3b6d6f4500b9a05a988b0c460dfb2cb783cc42228f1de1b4b7527a",
+    "blob": "b164d2df00ec004514087942cf5e3d9c619e2e19",
+    "lines": 261,
+    "target_path": "src/ContinuousFlexibility/Analysis/OpticalHalfAiryHeightMaterialJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.OpticalHalfAiryAverage",
+      "ContinuousFlexibility.Analysis.PositivePowerPolynomialMaterialJets",
+      "ContinuousFlexibility.Analysis.PointwiseProductPolynomialMaterialJets"
+    ],
+    "public_names": [
+      "opticalHalf_airyHeight_power_material_jets"
+    ]
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryAverage.lean",
+      "sha256": "3042235baed470dbba3f46a0db906d299c504b8e0569e255393693265f350fe7",
+      "blob": "5b72f289315de1f7af1090266df6c7723f52e369",
+      "lines": 215
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositivePowerPolynomialMaterialJets.lean",
+      "sha256": "8179be21858b3703e4997fc8d8773527c5a56c856d6aab0659b8497177796c1c",
+      "blob": "b96ab8e2242b762952bf571b0583abcc010dcc00",
+      "lines": 137
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PointwiseProductPolynomialMaterialJets.lean",
+      "sha256": "8eea68ab7ee7671d432b40b7833154f3c3a69a568c7fb96d7fb4a7a95fe40d02",
+      "blob": "c2eef2dac4cf079d6ad8da950038309b7714261d",
+      "lines": 85
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalStateInterpolation.lean",
+      "sha256": "6c31333851353e661b0c5177ad6239387154ebde3557e8a343a633671622cc2b",
+      "blob": "3b016eb8f2348a15d6d9d926ed03881ddc47b747",
+      "lines": 173
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N06AiryRadialGerm.lean",
+      "sha256": "a2bf43dd757db61c008348c266e2f3c3215cde6dea7db51ab6dc3393e32bed5c",
+      "blob": "a21a633cc12cdfbf8103c2310cdc814d28557a3d",
+      "lines": 212
+    }
+  ],
+  "reviewed_provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryAverageReviewedManifest.json",
+      "sha256": "c2a150c2c703e085608ba0e41f10350e6ef889599bdf785e9c35259544a5481e",
+      "blob": "cd82d84d6ed8f98f29452f9218b1e02a11f29852",
+      "lines": 44
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositivePowerPolynomialMaterialJetsReviewedManifest.json",
+      "sha256": "0c1e97266f72fdb1d02a5a42852c657052398ea87f79bf2ec4010c92905a5aa8",
+      "blob": "530e0f5b3305b8b5cb5f642065ad31e3e8b76e86",
+      "lines": 26
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01CharacteristicDriftMaterialJetsReviewedManifest.json",
+      "sha256": "0896fa810ada2ce324201dce8a5bfe330e024d316ebb512c39ac11fe53128c3f",
+      "blob": "19979ae19828dbfabe32f072e3f9596ea8f761e4",
+      "lines": 35
+    }
+  ],
+  "pinned_api_refs": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "lines": 1155
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Deriv.lean",
+      "sha256": "9098e465d4b2a9898352ad3eb944c1b76fa7bd010862391f790d57f59ab59d25",
+      "blob": "5c4314cbc0f51719245bc3b268948275c4a21812",
+      "lines": 778
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Order/GroupWithZero/Basic.lean",
+      "sha256": "6526bf3a919d5306c90daf75cf96cfe3bbfacc702f3858fb00f893f7346e2cbd",
+      "blob": "335ef50464487b5763d4ad885d55d83b00964f1b",
+      "lines": 1474
+    }
+  ],
+  "checks": [
+    "The already reviewed polynomial power and product estimates are specialized to realGrading at z=0, so every state factor is exactly1. They return numerical functions before the envelope, factor, representative, profile, interval or point.",
+    "Genuine c=sqrt(g) germs on the same closed half transport every c jet. The actual average samples only t*x in that half; its ordinary jets cost at most2 times the same c jet bound. No exterior extension derivative or width cost occurs.",
+    "Value and reciprocal bounds for g imply both bounds for c, since all exponents have absolute value at most1 and V>=1. The positive normalized average preserves c bounds V^-1<=A<=V, hence also A^-1<=V.",
+    "The exact slope is c*A^(-1/3). Two actual products produce F=w*slope. F and its inverse have value bound V^3, packed with K1=1+K^3+3K. The polynomial all-order power theorem is then applied to F^(-a/2).",
+    "The actual height^a equals F^(-a/2) as a genuine neighborhood germ at every closed-half point because F is positive there. This includes x=0 and the cut point for the model, without asserting an unproved stored-field boundary equality.",
+    "Only given g/w ordinary jets and value/reciprocal material data enter the numerical input. These are exactly the preceding238 factor output plus actual physical-profile compact/reciprocal bounds; final actual typed-atlas material specialization is a subsequent lemma."
+  ],
+  "scope_limits": [
+    "No arbitrary smooth extension jet bounds, root-model radius, or target height jet hypothesis.",
+    "The source does not itself remove the original238 raw optical lower premise or prove the final primitive certificate.",
+    "No compiler/elaborator, active source/index/ref/checkpoint/authority or CI operation."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T16:56:38.650419+00:00"
+}

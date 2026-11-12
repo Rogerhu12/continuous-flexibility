@@ -1,0 +1,33 @@
+{
+  "kind": "fixed_chosen_positive_reference_potential_family_reviewed_manifest",
+  "owner": "/root",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedPositiveReferencePotentialMaterialJets.lean",
+    "sha256": "0907bd7f6cecbd52a23169516f946964f1a8e46ec97f0f6dc9fb48e64dd0304f",
+    "blob": "158d133a29535703e3b38dddd92b349645065a19",
+    "lines": 123,
+    "target_path": "src/ContinuousFlexibility/Analysis/FixedPositiveReferencePotentialMaterialJets.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedPositiveReferencePotentialMaterialJetsCandidateManifest.json",
+    "sha256": "4fcf86d93a521d584a3e5ad39ff2eb759c8f4bea92a34a4eb3c3be8e0c827b2b",
+    "blob": "359426ffc8df78d670c44a63e787ffa42b424b74",
+    "lines": 61
+  },
+  "independent_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/FixedPositiveReferencePotentialMaterialJetsIndependentReview.json",
+    "sha256": "439a909525330821f2f8fe08286439e43284de37fcc4b5657a5fd56a6efe52ec",
+    "blob": "d7ae959bd9758aa880886aaea4cb035e6ec04652",
+    "lines": 99
+  },
+  "compatible_final_envelope_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.lean",
+    "sha256": "9bd854157a276a4c5fd8d3161f63d65a851fedbc656beba959ad5899e89cb5a7",
+    "blob": "4df4d9e114ae59bd99b5d3c09825adc95dbe3808",
+    "lines": 159
+  },
+  "scope": "Only numerical bounds are selected for the given Y/H and literal invFun(Y), with the original W and physical range. Actual same-family specialization and stored potential atom adaptation remain separate obligations.",
+  "compiled": false,
+  "created_at": "2026-11-12T16:46:20.623061+00:00"
+}

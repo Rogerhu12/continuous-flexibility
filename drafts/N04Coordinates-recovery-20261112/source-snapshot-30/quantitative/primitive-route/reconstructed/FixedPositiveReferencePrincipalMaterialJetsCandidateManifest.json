@@ -1,0 +1,103 @@
+{
+  "kind": "fixed_actual_positive_reference_three_principal_material_jets",
+  "owner": "/root/quantitative_route",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_PEER",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferencePrincipalMaterialJets.lean",
+    "sha256": "ba30210799a8513a04fe59f50eecec9edbe5d5f73fd3346c29b1a8b35a5bfca7",
+    "blob": "833b47aee0e9476d25e0eec4bc3323a4830fb6bb",
+    "lines": 163
+  },
+  "public_names": [
+    "fixedPositiveReference_principal_material_jets"
+  ],
+  "imports": [
+    "ContinuousFlexibility.Analysis.RadialReferencePrincipalJetEnvelope",
+    "ContinuousFlexibility.Analysis.ReferencePrincipalPhysicalMaterialJets",
+    "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RadialReferencePrincipalJetEnvelope.lean",
+      "sha256": "1be3a119508e3f1e6d234e82d258d4930b89df274277650dd17c66a79171d002",
+      "blob": "2acbfe2daade71e72ed7970ce21fe09f9f49c0b3",
+      "lines": 91
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferencePrincipalPhysicalMaterialJets.lean",
+      "sha256": "f829971e69d193fe93cab137aea5198045ff765c0e659d2587599386296547e8",
+      "blob": "7c0092bb7a14fc38cb7252f67c33c19a165a2d3c",
+      "lines": 108
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "lines": 168
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceInverseMaterialJets.lean",
+      "sha256": "ef40450003358fd22e68a70ecd7c722bfb630b77f6fb6e234331efcb9ab74af5",
+      "blob": "6dd64a27ede32a71db55d16a2029b9b6858a4c12",
+      "lines": 276
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/ReferenceModerateCoefficients.lean",
+      "sha256": "c2a86b45c7e15d9ceb1d807ee9398db0a1652fc1a4a9206cf52a23180fd9487f",
+      "blob": "5ebec66fc1a840a83166cb74866b94fba1df7ef3",
+      "lines": 201
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Operations.lean",
+      "sha256": "2a5fd66cb597c253e023f1072948e1a591f64ba0ee747a6a89139fc7c8c980eb",
+      "blob": "80e898b98348cb111761430989137705f4a3cf63",
+      "lines": 1052
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+      "sha256": "d6c3ace5e5e251e2943bd5985eb9c0a076a875c98fd876c961cb54c366ca50cb",
+      "blob": "86135f3b7295638a64b59ddaf2653b87d2733431",
+      "lines": 391
+    }
+  ],
+  "selected_provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RadialReferencePrincipalJetEnvelopeReviewedManifest.json",
+      "sha256": "1d8b848459441ccf49d3141649a057605a1e4c4bed641c4521d332b4627d8cc9",
+      "blob": "1accaf8363086387666f97c0220186016b3a4a25",
+      "lines": 33
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferencePrincipalPhysicalMaterialJetsReviewedManifest.json",
+      "sha256": "7b564477cd9d135b0a63832cf0bd063f94ab2bf9b1ecaf6fd62a01c0accd3127",
+      "blob": "45d07eff5708518770a4dfbbebf79abdaa3d1712",
+      "lines": 33
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceInverseMaterialJetsReviewedManifest.json",
+      "sha256": "2c0359a48d72cf1d299fe1aa55afd4ff9e08c978f1450c24838733e889ea5cf9",
+      "blob": "24c481db3520705d623302527da7aa10727989d6",
+      "lines": 46
+    }
+  ],
+  "proof_summary": [
+    "The supplied C0, original positive midpoint cell, Y/H and literal invFunY are preserved. The all-order input is the exact forward/inverse jet contract returned by the same chosen actual276 family.",
+    "Actual physical108 bounds w, reciprocal w and radial flux at the inverse image in the same positive component. No compact reciprocal-profile estimate is used.",
+    "For each order s, a finite sum of original A(k) and the physical factor coefficient gives Z=D*W^D before all components and points. The reviewed91 product shapes control the leading, inverse-leading and tangential scalar expressions.",
+    "The common numerical exponent4s+4 is absorbed into M*W^M with W>=1 from the supplied scaled floor. Only positive inverse-coordinate jets are used."
+  ],
+  "static_checks": {
+    "public_collision_count": 0,
+    "resource_options": [],
+    "forbidden_tokens": [],
+    "same_family_and_sample": true,
+    "material_constants_before_component_and_point": true
+  },
+  "scope_limits": [
+    "This proves scalar material estimates for the already selected family; actual V atom/germ/mixed-jet identification follows separately.",
+    "The actual retained geometry assumptions remain explicit. The family producer still has its existing raw optical and host prerequisites.",
+    "No local compiler/elaborator, CI query/download or active src/index/ref/CP change."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T16:44:50.744021+00:00"
+}

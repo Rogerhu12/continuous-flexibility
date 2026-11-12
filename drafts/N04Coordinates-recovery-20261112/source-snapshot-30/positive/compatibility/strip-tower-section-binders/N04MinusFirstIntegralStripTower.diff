@@ -1,0 +1,10 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04MinusFirstIntegralStripTower.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTower.lean
+@@ -38,6 +38,7 @@
+   (χ : ℕ → ℝ → ℝ)
+   (hχrange : ∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1)
+ 
++include hN hS hT hχrange in
+ private theorem correctedFlow_inverse_comp
+     (m : ℕ) (x : (StateDirections S × ℝ) × ℝ)
+     (hx : x.1 ∈ sectorNeighborhood S base ε ε)

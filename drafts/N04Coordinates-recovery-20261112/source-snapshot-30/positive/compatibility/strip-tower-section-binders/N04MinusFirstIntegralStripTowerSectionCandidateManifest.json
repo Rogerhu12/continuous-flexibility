@@ -1,0 +1,204 @@
+{
+  "kind": "actual_first_integral_strip_tower_explicit_section_binder_supersession",
+  "owner": "/root/proof_inventory",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTower.lean",
+    "sha256": "c6453415ecbafbb9694be2295bd29bfcdee2b98a0a5ce5f53030dda9ceb7fea7",
+    "blob": "47ccd49cf14b4fc0f029020d8ead3bebc2474c7c",
+    "lines": 157,
+    "target": "src/ContinuousFlexibility/Analysis/N04MinusFirstIntegralStripTower.lean"
+  },
+  "public_names": [
+    "ContinuousFlexibility.Statements.N01Properties.n04MinusFirstIntegral_stripJointTower"
+  ],
+  "actual_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnVelocitySpatialTower.lean",
+      "blob": "198e815b49f723edca476ad56ec173040e11edfe",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "b05abee5a782c5621c8bfae80b66ef323eed66e0476e7d865fd0517757ac623d",
+      "lines": 421,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01SingleComponentInterpolation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01SingleComponentFlow",
+      "path": "src/ContinuousFlexibility/Analysis/N01SingleComponentFlow.lean",
+      "blob": "73fda03ff2dd73df268be15c9569429eaabd1f0f",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "53c0456a4801295ad3a213601e995c3d628e080dbad30d819d86ad0a89422720",
+      "lines": 307,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowSpatialJets",
+        "ContinuousFlexibility.Analysis.CircleSingleComponentJets",
+        "ContinuousFlexibility.Analysis.N01SelectorInverse",
+        "ContinuousFlexibility.Analysis.NormedSmoothDirections"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01SingleComponentInterpolation",
+      "path": "src/ContinuousFlexibility/Analysis/N01SingleComponentInterpolation.lean",
+      "blob": "02a20ae3324142b01bcbe22836f7cd001ae4d197",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "12a6b0964ffa7b47c4f0771eff693f4308afe58aa8a391eec709898116d7ac4f",
+      "lines": 186,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01SingleComponentFlow",
+        "ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations",
+      "path": "src/ContinuousFlexibility/Analysis/CircleSmoothDirectionsOperations.lean",
+      "blob": "da4963869db936865516fc441a28967765a84b2f",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "e6e6157b0c663b15fbba3ab7b61374ae7ebd52ec7f465cc729d7b3dd9106d743",
+      "lines": 129,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame",
+        "ContinuousFlexibility.Analysis.NormedSmoothDirections"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleInverseModel",
+      "path": "src/ContinuousFlexibility/Analysis/CircleInverseModel.lean",
+      "blob": "d4cd16420a70111439856a3685e292a7ee34b17b",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "b04e3cdfd2af3aa8309bd62abe082df5bb0b58364680e6a56b7b0dc5aeecd95a",
+      "lines": 244,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleInverseCompositionGrowth",
+        "ContinuousFlexibility.Analysis.CircleCompositionJetModels"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CirclePositiveInverseModel",
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInverseModel.lean",
+      "blob": "6f2c793893f51f1fd72c6201f149a0e527458994",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "a6767f0378b48caf72404311675e416be98e8d1bad81800d134190a0a7d9d34d",
+      "lines": 81,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CirclePositiveLiftDomain"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleJointEvaluation",
+      "path": "src/ContinuousFlexibility/Analysis/CircleJointEvaluation.lean",
+      "blob": "b18010ba5d5c86d247e70d32e8ffd134434e126b",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "5110f4d8cf53b34ed33b6221317e9421d876d9add22dca234e95493edcc33ba6",
+      "lines": 216,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleAngularJetLinear",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsJointAngular",
+        "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+        "ContinuousFlexibility.Analysis.SolveNewtonBridge"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CircleLinearTame",
+      "path": "src/ContinuousFlexibility/Analysis/N01CircleLinearTame.lean",
+      "blob": "60cb27e73d5bac0102e5436d7fad54ae47740532",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "18f9059ced21bc434aec9f75840a1dbb7842444192939afd4755dc1ed105ef7a",
+      "lines": 99,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N02ChartError",
+        "ContinuousFlexibility.Analysis.TameElementaryCalculus"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals",
+      "path": "src/ContinuousFlexibility/Analysis/N04bCharacteristicFirstIntegrals.lean",
+      "selected_ref": "34a496f78ec2c9f35f74d2eb3dfd48a1d4190909",
+      "sha256": "cabf5a4f7de74c1e3c2c16c765bf7c67052841cda2582da16b669141e3839a27",
+      "blob": "6fc2f9eca3e1203e2d5598cc92ac6604f848c3ef",
+      "lines": 202,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TravelStripAngularInverse",
+        "ContinuousFlexibility.Scalar.Conservation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ParameterizedCircleInverse",
+      "path": "src/ContinuousFlexibility/Analysis/ParameterizedCircleInverse.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "7131aaca76e59f2dff2ceb3c1216e9bcff6e7f0bd999afaea55255cf86ce6e7d",
+      "blob": "d0823bcdb7716e3d9a179d6783c051509c5a6681",
+      "lines": 156,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ParameterizedScalarInverse",
+        "ContinuousFlexibility.Analysis.PeriodicScalarFlow",
+        "Mathlib.Topology.Order.IntermediateValue",
+        "Mathlib.Logic.Function.Basic",
+        "Mathlib.Tactic.Linarith",
+        "Mathlib.Tactic.Ring"
+      ]
+    }
+  ],
+  "mathlib_inverse_API": {
+    "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "path": "Mathlib/Logic/Function/Basic.lean",
+    "names": [
+      "Function.invFun_eq_of_injective_of_rightInverse",
+      "Function.rightInverse_invFun"
+    ]
+  },
+  "selected_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTowerClosureInventory.json",
+    "sha256": "1dfe3267c9ea9dd58557ac752b696570146e58657756bc59bc6d1eb612814d07",
+    "blob": "2722d4d9d9ca47f8f4bb45e42caf001886a6921d",
+    "lines": 6695
+  },
+  "selected_closure_gzip": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTowerClosureInventory.json.gz",
+    "sha256": "88edb977ec1a93dda04172d4a3c2407860f05e9ad369f8497e36152b0b50f90c",
+    "bytes": 56356,
+    "decompresses_to_sha256": "1dfe3267c9ea9dd58557ac752b696570146e58657756bc59bc6d1eb612814d07"
+  },
+  "checks": [
+    "The genuine existing single-component flow and interpolation towers use the actual supplied cutoff and the actual ordinary flow; neither an inverse regularity assumption nor a new coordinate map is selected.",
+    "The supplied original-coefficient discriminant is needed only on the chosen interior physical strip. It is a raw geometric condition and remains explicit here.",
+    "Bijectivity is derived from the actual positive circle lifts and their genuine surjectivity. Function.invFun of the corrected composition is exactly the same interpolation inverse after the same ordinary inverse.",
+    "The left-chart displacement is pulled first through the actual interpolation inverse and then through the actual ordinary inverse, using existing circleInverseComposeDirections. The decoded affine lift is the literal n04bMinusFirstIntegral of returnCorrectedMinusFlow.",
+    "The joint radius/angle association is the existing continuous linear parameterSpatialAssociation. A single SmoothDirections object precedes every derivative order.",
+    "All selected source identities and actual import edges were recomputed; no missing import, cycle or collision of the new explicit public name was found."
+  ],
+  "remaining": [
+    "The actual constructor-preserving gateway must retain its already constructed hdiscFull before eliminating the strip discriminant premise. The original reviewed117 is not modified here.",
+    "Uniform per-parameter-order mixed estimates and final canonical CurrentJets remain separate from this qualitative joint tower."
+  ],
+  "compiled": false,
+  "active_checkout_index_refs_CI_unchanged": true,
+  "created_at": "2026-11-12T16:36:08.695278+00:00",
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04MinusFirstIntegralStripTower.lean",
+    "sha256": "e49929c25d4503c9d23fdb55b16ef26bcec02f9bdc3e4b01c69ec0d1ddfd781f",
+    "blob": "ca0e5c21e47271bea2e6f83490425caceb0b95a4",
+    "lines": 156
+  },
+  "base_candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04MinusFirstIntegralStripTowerCandidateManifest.json",
+    "sha256": "34681c0917dc75c96fd71d896c859ee827ff48190c4c4de42d61efadb35b6d70",
+    "blob": "8f43890debed756ee113c8e66c7b5ef8354deb40",
+    "lines": 178
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTower.diff",
+    "sha256": "41c5e78ba56b6e6a1a4aec6e5861236d459c30ead910a8e07ce2889d4980b0f4",
+    "blob": "06a19e2d1527f4565375aa05308961059d7b226f",
+    "lines": 10
+  },
+  "delta": [
+    "Exactly one include hN hS hT hχrange in line before the private correctedFlow_inverse_comp theorem. These variables occur only in its proof and must be retained explicitly.",
+    "All other source bytes, the public definition header/body, imports/options and original487 import topology are identical."
+  ],
+  "prior_finding": {
+    "reviewer": "/root/quantitative_route",
+    "finding": "Proof-only section variables in the private theorem need explicit inclusion; final full peer remains pending."
+  }
+}

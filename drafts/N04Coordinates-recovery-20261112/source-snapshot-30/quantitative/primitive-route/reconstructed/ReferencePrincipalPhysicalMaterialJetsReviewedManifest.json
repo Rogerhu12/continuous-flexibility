@@ -1,0 +1,33 @@
+{
+  "kind": "ReferencePrincipalPhysicalMaterialJets_reviewed_candidate",
+  "owner": "/root/quantitative_route",
+  "status": "STATIC_INDEPENDENTLY_FULL_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferencePrincipalPhysicalMaterialJets.lean",
+    "sha256": "f829971e69d193fe93cab137aea5198045ff765c0e659d2587599386296547e8",
+    "blob": "7c0092bb7a14fc38cb7252f67c33c19a165a2d3c",
+    "lines": 108
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferencePrincipalPhysicalMaterialJetsCandidateManifest.json",
+    "sha256": "b746db1fab6d825ba69a19defae473d57e6b8be264d0b97b5e9050f70d715de9",
+    "blob": "805561cb0fd5efda3f7eff65e910fa7abff4cc8a",
+    "lines": 82
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ReferencePrincipalPhysicalMaterialJetsIndependentReview.json",
+      "sha256": "644862b5c5c6f982640ca208e210a35d94099a5dbb9e3cdf142ad27ca4975f22",
+      "blob": "8da1f4ee206f5f01c6217d0af90ab88fe48f17fe",
+      "lines": 87
+    }
+  ],
+  "source_unchanged": true,
+  "compiled": false,
+  "scope_limits": [
+    "Same retained P/Gamma and control evidence remains explicit.",
+    "The result is a physical-factor input to the same displayed positive reference Y/H/chi, not yet all four transformed ReferenceJets atoms.",
+    "No local compiler/elaborator, CI query/download or active src/index/ref/CP action."
+  ],
+  "created_at": "2026-11-12T16:37:46.331337+00:00"
+}

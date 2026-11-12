@@ -1,0 +1,131 @@
+{
+  "kind": "same_fixed_reference_family_actual_positive_potential_atom_full_independent_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeFixedPotentialReferenceJets.lean",
+    "sha256": "0dd9a3b48093074e943d596fa77a1a5393c2c13459e1ca50cf0c814596905084",
+    "blob": "339445c09e482ac242a370585a25f494c44c2182",
+    "lines": 173,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeFixedPotentialReferenceJets.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeFixedPotentialReferenceJetsCandidateManifest.json",
+    "sha256": "8e6600bc0538fa127c0ddf7488ce4e3a6f863a951ddf28fc4028c824e7795c97",
+    "blob": "ae9d33121b07454f4e68c64de7f7b18381cf95c4",
+    "lines": 95
+  },
+  "actual_providers_and_patterns": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedPositiveReferencePotentialMaterialJets.lean",
+      "sha256": "0907bd7f6cecbd52a23169516f946964f1a8e46ec97f0f6dc9fb48e64dd0304f",
+      "blob": "158d133a29535703e3b38dddd92b349645065a19",
+      "lines": 123
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholePositiveReferencePotentialJets.lean",
+      "sha256": "aa09f494ce342a9baf1f1b8a111973ddf5f8f909d4d3bfb3d1c3a7fcdb9f5b51",
+      "blob": "c9b78f187c42dd8427d3c18ed7e806ebbecd1685",
+      "lines": 141
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "lines": 311
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugePositivePotentialReferenceJets.lean",
+      "sha256": "2b5857a4e63c984a9003ea74eacb6f402ecb48cfc2a0c36f7080aca6aac86112",
+      "blob": "e7e257a74e24c1d2ff5607871ca5bd4224dcff53",
+      "lines": 207
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositivePrincipalJets.lean",
+      "sha256": "b8e9fe14a443cf93d04a9643633566b731268408fc8ce38131639eced6887540",
+      "blob": "b926843c192aa175dd25404f005a55ddb46ac874",
+      "lines": 290
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Neighborhoods.lean",
+      "sha256": "bd9f85999a8b70e960e1fa9d913ba4d64ebcaa2df04b60ddf2b460d04ff97435",
+      "blob": "664a41d5be85fe2ca5e3b8b8e5ab2c71b4f61cc6",
+      "lines": 381
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+      "sha256": "1e9fbd861ac27cb4b17113c3f8ede3c5f573a6b342b23e41ff514b05bd3334ef",
+      "blob": "e7fd4979f58f787927500713547b3671402ae782",
+      "lines": 1283
+    }
+  ],
+  "fixed_family_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedPositiveReferencePotentialMaterialJetsReviewedManifest.json",
+    "sha256": "320bf319872bdf8ad8732fb7589f93b9bc664197a71f78765ae06175e425057b",
+    "blob": "f4d273a0a22291e0617728399cb567d9b9885fb7",
+    "lines": 33
+  },
+  "principal_atom_owner_for_same_family_contract": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositivePrincipalJetsReviewedManifest.json",
+    "sha256": "26e9e95945aca3c481e3158da3e1c97bd523792cea56450460a35883a8be1d77",
+    "blob": "48386d7c5958bfaf7c9e1b8fd6b0a63661f5b07d",
+    "lines": 40
+  },
+  "additional_actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "lines": 168
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PhysicalTransmissionTrace.lean",
+      "sha256": "06bae1df9c968c303f48dd5c04b48c95b49eb41eb6cb276902c1401e634ef8d4",
+      "blob": "e355936649f9946fad0101bd4f0e7ac93c0afe46",
+      "lines": 66
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N08RadialFamilyMaterialJets.lean",
+      "sha256": "5796d127cb631248523060a373d0cdea3d07052857008b6dcfb987dbae59289d",
+      "blob": "3fd9b99c74162ee221843491623573b719c172b3",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    }
+  ],
+  "read_scope": [
+    "All173 candidate lines, complete manifest, full fixed-family scalar123 and actual flux-germ141; complete same-family principal290 adapter used for the source/atom/sample contract comparison.",
+    "The actual gauge record131 positive field tuple and canonical unit-point/potential atom definitions; the exact coefficientEnvelope_pack declaration/proof, actual radial mixed-derivative identity and open-set mixed-germ equality API.",
+    "Pinned ContDiffOn.congr direction and real-power monotonicity/product normalization; all11 manifest source/pattern/owner fingerprints independently recomputed."
+  ],
+  "checks": [
+    "C0, cell, Y, H, literal invFun(Y), material T, and original old atlas are supplied before all derivative estimates. Only numerical M/D/BM are selected; this adapter never invokes an existential reference-family producer or enlarges T.",
+    "The range geometry supplies global H and literal inverse smoothness by restriction to the real radial line. Its actual inverse maps each canonical (x,0), 0<x<1, into the physical positive component; that component lies in the fixed compact annulus, exactly the scalar123 range premise.",
+    "The scalar123 contract consumes precisely the supplied height-prefix and positive inverse-derivative bounds. It returns one M(a) before piece and point. D=1+sum_{a<=s}M(a) bounds every needed M(a) with a<=s, including a=s=0.",
+    "The positive metadata tuple gives the unchanged actual cell and canonical endpoints0/1, so canonicalUnitPoint is literally the identity. A negative enumerated piece contradicts the required positive flag. No enumeration or sample is changed.",
+    "At every point of unitStrip, the true actual141 flux germ identifies the stored potential with -H(invFunY(x))*deriv((w*derivH) composed with invFunY)(x). The model is globally smooth from the same supplied fields; ContDiffOn.congr has the correct atom=model equality direction.",
+    "Angular translation leaves the model radial coordinate unchanged and preserves the unit strip. Open EqOn transports every mixed derivative; positive angular order is exactly zero and zero angular order is the scalar radial derivative.",
+    "Using the explicit sample assumptions W=C0*t>=1 and t>=1, M(a)*W^M(a)<=D*W^D=(D*C0^D)*t^D. The actual pack lemma supplies one BM before enumeration, transports, piece, point and a/b. No original E0 floor or reverse endpoint/sample comparison is inferred.",
+    "The full source has no new resource options or bypasses. Its one new public name has no installed-source collision. All inspected sources were left unchanged."
+  ],
+  "findings": [],
+  "compiled": false,
+  "source_edited": false,
+  "public_collision_count": 0,
+  "scope_limits": [
+    "A concrete adapter for the fixed supplied reference family and its genuine all-order jet contract. The single-selection producer remains separate, and this theorem does not claim to supply the jet contract by itself.",
+    "Only the actual positive reference potential atom is bounded. Negative potential and current-parameter bounds are separate obligations.",
+    "No compiler/elaborator, CI query/download, active checkout/index/ref or authority operation. Static review is not elaboration evidence."
+  ],
+  "reviewed_at": "2026-11-12T16:56:38.757765+00:00"
+}

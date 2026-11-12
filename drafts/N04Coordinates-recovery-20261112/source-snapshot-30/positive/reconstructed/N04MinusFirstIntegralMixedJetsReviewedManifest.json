@@ -1,0 +1,41 @@
+{
+  "kind": "actual_first_integral_mixed_radial_recurrence_reviewed",
+  "status": "FULL_SOURCE_STATIC_REVIEWED_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04MinusFirstIntegralMixedJetsCandidateManifest.json",
+    "sha256": "b804495e1050560243eb01875243909c78a2431046d8f06e4b57c44a1c3ee6f4",
+    "blob": "5b1c0856a0675a49e4d873ff83325cf68634e37a",
+    "lines": 102
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04MinusFirstIntegralMixedJets.lean",
+    "sha256": "8d53fcc78eb0c9a752a26562094c50e0a15085d028692054b6de32d3d9478bbc",
+    "blob": "886214bcb785a46d3c95369ce8afed8324f6400c",
+    "lines": 82
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/N04MinusFirstIntegralMixedJetsIndependentReview.json",
+    "sha256": "df34a3bf12df5f3d179ff624a82a0cb58f50c7d0c49d6f567a2d264843ac624b",
+    "blob": "e493bf408c29f4dd1bb916d5b50d508b818f6d3c",
+    "lines": 102
+  },
+  "closure_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04MinusFirstIntegralMixedJetsClosureInventory.json",
+    "sha256": "c27156de70cc68785bcd08e4ae17cc57b46637ce78b67047ca13c1306fc793ee",
+    "blob": "605e51c2e690017fff20062d0712a3181336e59a",
+    "lines": 3400
+  },
+  "closure_gzip": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04MinusFirstIntegralMixedJetsClosureInventory.json.gz",
+    "sha256": "59fb08dd7c061663feea17c5ef25d964cbf06803cad722bb407914a760b8cd5f",
+    "bytes": 28507,
+    "decompresses_to_sha256": "c27156de70cc68785bcd08e4ae17cc57b46637ce78b67047ca13c1306fc793ee"
+  },
+  "compiled": false,
+  "scope_limits": [
+    "The common state tower for the angular base is supplied by the same actual first-integral circle separately.",
+    "Corrected speed mixed-jet state towers and quantitative product bounds must be proved from actual constructors; this algebraic identity alone does not establish final CurrentJets.",
+    "No compiler, active checkout/index/ref or CI action."
+  ],
+  "created_at": "2026-11-12T16:26:14.208409+00:00"
+}

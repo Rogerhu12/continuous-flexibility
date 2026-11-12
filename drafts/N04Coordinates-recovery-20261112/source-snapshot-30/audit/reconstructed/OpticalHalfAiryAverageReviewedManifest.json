@@ -1,0 +1,44 @@
+{
+  "kind": "optical_half_airy_average_reviewed_source",
+  "owner": "/root/audit_coordinates",
+  "status": "INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryAverage.lean",
+    "sha256": "3042235baed470dbba3f46a0db906d299c504b8e0569e255393693265f350fe7",
+    "blob": "5b72f289315de1f7af1090266df6c7723f52e369",
+    "lines": 215,
+    "target_path": "src/ContinuousFlexibility/Analysis/OpticalHalfAiryAverage.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.N06AiryRadialGerm",
+      "ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization"
+    ],
+    "public_names": [
+      "airyAverage_bounds_on_nonnegative_interval",
+      "airyAverage_jet_bound_on_nonnegative_interval",
+      "exists_positive_sqrt_germ_extension",
+      "opticalHalf_integral_eq_airyAverage",
+      "opticalHalf_rootCoordinate_eq_airyRadialCoordinate",
+      "exists_opticalHalfAiryAverage_of_factor_bounds"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryAverageCandidateManifest.json",
+    "sha256": "df3cbb68bf2f9cd78a4aefe99f56916d5dc8b14aea8ef8339cf73c6191b21646",
+    "blob": "06dd5f211c99e8b9a08fbeb4f24b6b49780db637",
+    "lines": 90
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/OpticalHalfAiryAverageIndependentReview.json",
+    "sha256": "e0b3fb1f276e011ae622bc0a81ec79088d34eebfd25a0faa0286dfaa0bc214e9",
+    "blob": "a7dcf2ca7804c62307258cda5a34bcf598659416",
+    "lines": 98
+  },
+  "scope": [
+    "One positive square-root representative is selected before all derivative orders. True integral jets sample only the closed physical half.",
+    "The exact integral-coordinate identity includes x=0 and no extension-width or exterior jet cost.",
+    "Actual atlas identification and material packing remain subsequent explicit steps."
+  ],
+  "compiled": false,
+  "source_changed_after_review": false,
+  "created_at": "2026-11-12T16:45:42.409351+00:00"
+}

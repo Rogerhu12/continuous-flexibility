@@ -1,0 +1,26 @@
+{
+  "label": 160,
+  "head": "03ea768c1f2211dff62714b932be808345dcf918",
+  "tree": "84a1b13b975d16f42aed7de40b8601bd09fda8ae",
+  "main": "89e539ccf7e9c558467cf875f44dcff9490ce271",
+  "main_checked": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+  "main_workflow_file_integrated": {
+    "main": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+    "path": ".github/workflows/build.yml",
+    "sha256": "6e1b0a3c010b6988811399ec9a71c5f5f58ca7a83421e5cd3d28a3bbf5b8bb24",
+    "blob": "3152629f2ebb53a7af652218ea5bd2d64d16d493",
+    "method": "Exact workflow-only file copy; main ancestry remains pending dependency-complete source batches."
+  },
+  "pushed": "2026-11-12 16:53:26 UTC",
+  "first_check_not_before": "2026-11-12 16:58:26 UTC",
+  "status": "pending",
+  "plan": "n04-ci160-plan.json",
+  "source_total": 4214,
+  "source_all_total": 4218,
+  "root_imports": 4155,
+  "added_lean_since_full_green": 966,
+  "main_source_batch": 1,
+  "main_source_batch_count": 5,
+  "source_files": 32,
+  "scope": "First atomic current-main source cohort: new parameter-order flow contract with all identified active consumers, exact upstream restriction providers and independently reviewed local ports. The stronger N01a/N01b blueprint witness and factories remain together in batch two. No main ancestry claim yet; next batch requires complete CI."
+}

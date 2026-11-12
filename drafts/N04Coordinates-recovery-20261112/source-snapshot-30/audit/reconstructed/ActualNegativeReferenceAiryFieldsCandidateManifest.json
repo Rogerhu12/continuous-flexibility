@@ -1,0 +1,142 @@
+{
+  "kind": "same_actual_negative_reference_integral_chart_and_height_identity",
+  "owner": "/root/audit_coordinates",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_COMPLETE_INDEPENDENT_REVIEW",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceAiryCoordinate.lean",
+      "sha256": "8f7b0552ef8d8001432a74d11359cec6a51263dd84a51711853bf414b381bdce",
+      "blob": "b5d3ecd7b7260eb69b418da9ddcb0d6279986653",
+      "lines": 134,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceAiryCoordinate.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.OpticalHalfAiryAverage",
+        "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+        "ContinuousFlexibility.Analysis.N01OpticalRootDivision"
+      ],
+      "public_names": [
+        "n04b_reference_orientedTravel_inwardIntegral",
+        "n04b_reference_rootHalfCoordinate_eq_airy",
+        "n04Coordinates_actual_reference_negative_airy_chart"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceAiryHeight.lean",
+      "sha256": "596c3a9e251af4cf733969373eed0530c9d3857a2e8825e61417efddf83edc9e",
+      "blob": "806604cbc578c78f75ab380a34c07274cd3e551d",
+      "lines": 151,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceAiryHeight.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualNegativeReferenceAiryCoordinate",
+        "ContinuousFlexibility.Analysis.PositiveReferenceCylinder"
+      ],
+      "public_names": [
+        "n04Coordinates_actual_reference_negative_airy_height"
+      ]
+    }
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryAverage.lean",
+      "sha256": "3042235baed470dbba3f46a0db906d299c504b8e0569e255393693265f350fe7",
+      "blob": "5b72f289315de1f7af1090266df6c7723f52e369",
+      "lines": 215
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeRadialFields.lean",
+      "sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+      "blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+      "lines": 156
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OpticalRootDivision.lean",
+      "sha256": "96170f08b3ebee938ed86ed8276be8018d9d0de565128560850fac989d8d1e75",
+      "blob": "1966ba3edb4375cc90aeb7795927723b1b1cd9f4",
+      "lines": 154
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ActualNegativePrincipalDensity.lean",
+      "sha256": "79be096548f4222f5265dc93e1b7ad6aa1bf426954089f48bb78b423c23ee2a3",
+      "blob": "7a3122c1e2c2081375a7be7405a2a348706ed261",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferenceTravelCut.lean",
+      "sha256": "9e9116e69a649d72eb4d05aa5989c2a10aedae8025568972437c1fc00f0b5030",
+      "blob": "d0abf85548b22ac21260636b709f3f01ea25482a",
+      "lines": 136
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferenceActualTravel.lean",
+      "sha256": "4307b8b206489be492e33a3f12198e4af5271c45a5db821b85ac2db0133ce7eb",
+      "blob": "07661eae46124d0a5550bf4f6de16a5874838d3c",
+      "lines": 243
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootTravelIntervals.lean",
+      "sha256": "7e0938b188bf262b10fb148e6cf08428c1fa27e47aaa032770feae85470aea80",
+      "blob": "f1b26fa6eea80e225e7b305e0179a1720417e1a3",
+      "lines": 144
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N06AiryRadialGerm.lean",
+      "sha256": "a2bf43dd757db61c008348c266e2f3c3215cde6dea7db51ab6dc3393e32bed5c",
+      "blob": "a21a633cc12cdfbf8103c2310cdc814d28557a3d",
+      "lines": 212
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceCylinder.lean",
+      "sha256": "6ececb96b06c704d8672c58cbe2b395bf3ce8967a667b046cd09466249b5c4de",
+      "blob": "c1c59b1c3240feeec1539a65ce0c8a8a4ec7ba48",
+      "lines": 128
+    }
+  ],
+  "reviewed_integral_average_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryAverageReviewedManifest.json",
+    "sha256": "c2a150c2c703e085608ba0e41f10350e6ef889599bdf785e9c35259544a5481e",
+    "blob": "cd82d84d6ed8f98f29452f9218b1e02a11f29852",
+    "lines": 44
+  },
+  "reviewed_whole_half_factor_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeOpticalRootDivisionReviewedManifest.json",
+    "sha256": "266d9c269f03139a7af30df7048979c8d4ff4cb6c30effdff4177d911f1c2731",
+    "blob": "55995e2c84b3056bdb005ede2b12d4816bb8a232",
+    "lines": 51
+  },
+  "pinned_api_refs": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean",
+      "sha256": "31d57d81e75cc6b42ea50dbbb0a6856f4c760c422b41e6691d3660dfc876711d",
+      "blob": "bcf4a893f0a46471ec5f14a6dde0a960b739560a",
+      "lines": 1473
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Comp.lean",
+      "sha256": "16a41715830ec582c91cb5262e2defab08052d7e749bb91ee059905c0b0e1847",
+      "blob": "bca5a3ed558bd9f14be2a277d9e01bd025227307",
+      "lines": 415
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "lines": 1155
+    }
+  ],
+  "checks": [
+    "The left inward integral is literal translation. On the right, actual whole-component travel and adjacent-interval additivity give T-travel(r)=integral(r,right); reflection then gives the same inward integral.",
+    "The true radicand=t*g factor and square-root representative identify the actual rootHalfCoordinate with n06AiryRadialCoordinate on every closed inward prefix.",
+    "The stored actual typed-atlas chart agrees with the true reference optical travel throughout the open negative component. No new coordinate is selected.",
+    "The inward inverse coordinate has derivative +1 or -1. Its genuine chart germ has Jacobian j=AirySlope*sign and |j|=AirySlope>0; the scalar field is fixed explicitly to real.",
+    "The actual reference unit a-density gives H^2*w*|j|=1. Stored H>0 and physical w>0 select exactly the negative-half-power formula n06AiryRadialHeight for the same c and same w.",
+    "The displayed d can be the actual optical half width, as supplied by the preceding238 factor bound. Only open physical points are used in the stored-field identity; no radial extension outside the component or common infinite collar is assumed."
+  ],
+  "scope_limits": [
+    "This proves actual chart and height identities. Uniform all-order material jets and the potential composition remain subsequent steps.",
+    "Raw optical lower is not used by these identities; its factory evidence is still required to instantiate the uniform reciprocal factor bound upstream.",
+    "No compiler/elaborator, active source/index/ref/checkpoint/authority or CI operation."
+  ],
+  "public_name_collisions": [],
+  "compiled": false,
+  "created_at": "2026-11-12T16:45:44.013315+00:00"
+}

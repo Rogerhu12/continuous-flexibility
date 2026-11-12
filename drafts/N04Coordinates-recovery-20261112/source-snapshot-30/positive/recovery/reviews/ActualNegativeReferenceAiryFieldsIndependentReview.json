@@ -1,0 +1,188 @@
+{
+  "kind": "same_actual_negative_reference_airy_chart_and_height_full_independent_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceAiryCoordinate.lean",
+      "sha256": "8f7b0552ef8d8001432a74d11359cec6a51263dd84a51711853bf414b381bdce",
+      "blob": "b5d3ecd7b7260eb69b418da9ddcb0d6279986653",
+      "lines": 134,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceAiryCoordinate.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.OpticalHalfAiryAverage",
+        "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+        "ContinuousFlexibility.Analysis.N01OpticalRootDivision"
+      ],
+      "public_names": [
+        "n04b_reference_orientedTravel_inwardIntegral",
+        "n04b_reference_rootHalfCoordinate_eq_airy",
+        "n04Coordinates_actual_reference_negative_airy_chart"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceAiryHeight.lean",
+      "sha256": "596c3a9e251af4cf733969373eed0530c9d3857a2e8825e61417efddf83edc9e",
+      "blob": "806604cbc578c78f75ab380a34c07274cd3e551d",
+      "lines": 151,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferenceAiryHeight.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualNegativeReferenceAiryCoordinate",
+        "ContinuousFlexibility.Analysis.PositiveReferenceCylinder"
+      ],
+      "public_names": [
+        "n04Coordinates_actual_reference_negative_airy_height"
+      ]
+    }
+  ],
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceAiryFieldsCandidateManifest.json",
+    "sha256": "2b171d297e8e72b5e42e9d06ff9ee9cbcef1c28ebb47139e5414f38b575b1f3f",
+    "blob": "515b89868c78ea0fc7397041d792125fcf830cb5",
+    "lines": 142
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OpticalHalfAiryAverage.lean",
+      "sha256": "3042235baed470dbba3f46a0db906d299c504b8e0569e255393693265f350fe7",
+      "blob": "5b72f289315de1f7af1090266df6c7723f52e369",
+      "lines": 215
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeRadialFields.lean",
+      "sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+      "blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+      "lines": 156
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OpticalRootDivision.lean",
+      "sha256": "96170f08b3ebee938ed86ed8276be8018d9d0de565128560850fac989d8d1e75",
+      "blob": "1966ba3edb4375cc90aeb7795927723b1b1cd9f4",
+      "lines": 154
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ActualNegativePrincipalDensity.lean",
+      "sha256": "79be096548f4222f5265dc93e1b7ad6aa1bf426954089f48bb78b423c23ee2a3",
+      "blob": "7a3122c1e2c2081375a7be7405a2a348706ed261",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferenceTravelCut.lean",
+      "sha256": "9e9116e69a649d72eb4d05aa5989c2a10aedae8025568972437c1fc00f0b5030",
+      "blob": "d0abf85548b22ac21260636b709f3f01ea25482a",
+      "lines": 136
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferenceActualTravel.lean",
+      "sha256": "4307b8b206489be492e33a3f12198e4af5271c45a5db821b85ac2db0133ce7eb",
+      "blob": "07661eae46124d0a5550bf4f6de16a5874838d3c",
+      "lines": 243
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootTravelIntervals.lean",
+      "sha256": "7e0938b188bf262b10fb148e6cf08428c1fa27e47aaa032770feae85470aea80",
+      "blob": "f1b26fa6eea80e225e7b305e0179a1720417e1a3",
+      "lines": 144
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N06AiryRadialGerm.lean",
+      "sha256": "a2bf43dd757db61c008348c266e2f3c3215cde6dea7db51ab6dc3393e32bed5c",
+      "blob": "a21a633cc12cdfbf8103c2310cdc814d28557a3d",
+      "lines": 212
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceCylinder.lean",
+      "sha256": "6ececb96b06c704d8672c58cbe2b395bf3ce8967a667b046cd09466249b5c4de",
+      "blob": "c1c59b1c3240feeec1539a65ce0c8a8a4ec7ba48",
+      "lines": 128
+    }
+  ],
+  "additional_actual_definition_sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PrincipalCoefficientPullback.lean",
+      "sha256": "88ccf751162a22460c15d8bfdedcdd558328b0e56f51a145dc74bd343114e3f0",
+      "blob": "19262a1834a49fdb7958b07352f409bb0940de19",
+      "lines": 160
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Scalar/FormPullback.lean",
+      "sha256": "09885fd35b2086a984883f723c5bce94fed1d3987a71485a2fa7185108083a50",
+      "blob": "6238095a75eb06479071372465a41701824657c8",
+      "lines": 137
+    }
+  ],
+  "pinned_api_sources": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean",
+      "sha256": "31d57d81e75cc6b42ea50dbbb0a6856f4c760c422b41e6691d3660dfc876711d",
+      "blob": "bcf4a893f0a46471ec5f14a6dde0a960b739560a",
+      "lines": 1473
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Comp.lean",
+      "sha256": "16a41715830ec582c91cb5262e2defab08052d7e749bb91ee059905c0b0e1847",
+      "blob": "bca5a3ed558bd9f14be2a277d9e01bd025227307",
+      "lines": 415
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "lines": 1155
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/FDeriv/Congr.lean",
+      "sha256": "4313c8cb8eab170a664df2753f3f1a59ac7f3ecd3f405b9b34e64c966430fa73",
+      "blob": "da599f75bd35b874f08b3fb7b326c2679500eefb",
+      "lines": 309
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Continuous.lean",
+      "sha256": "14b6c26b5d22be63134a1bed41bcd9ae7720b1b3fc1c0798a42d71e33feb615c",
+      "blob": "620526f00d25f19d30d07ba5cad2b7a3370ba6bb",
+      "lines": 459
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Order/GroupWithZero/Basic.lean",
+      "sha256": "6526bf3a919d5306c90daf75cf96cfe3bbfacc702f3858fb00f893f7346e2cbd",
+      "blob": "335ef50464487b5763d4ad885d55d83b00964f1b",
+      "lines": 1474
+    }
+  ],
+  "preceding_integral_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/OpticalHalfAiryAverageIndependentReview.json",
+    "sha256": "e0b3fb1f276e011ae622bc0a81ec79088d34eebfd25a0faa0286dfaa0bc214e9",
+    "blob": "a7dcf2ca7804c62307258cda5a34bcf598659416",
+    "lines": 98
+  },
+  "read_scope": [
+    "All134 coordinate and151 height source lines, complete candidate manifest and all listed source/provider fingerprints.",
+    "Complete actual reference radial fields156, optical root division154, negative principal density111, reference travel cut136, oriented root intervals144, reference actual travel243 and positive reference cylinder128; actual Airy coordinate/slope/height definitions and derivative provider in N06AiryRadialGerm212.",
+    "The integral-average215 source was fully reviewed in the separately bound e0b3 receipt. Exact pinned translation/reflection of interval integrals, adjacent-interval additivity, real derivative composition, genuine-germ derivative equality, square-root positivity and real negative-power APIs were checked."
+  ],
+  "checks": [
+    "On the left, the inward integral is exactly the pinned translation formula. On the right, continuity of the actual optical speed supplies both adjacent integrability witnesses; their sum equals the stored full travel, and integral_comp_sub_left has the required reversed endpoints without an extra sign.",
+    "For every x in the displayed closed inward interval, the factor t*g(t) is used only at t in [0,x] contained in [0,d]. The actual rootHalfCoordinate uses the same orientation and the same full travel; the reviewed Airy integral formula identifies its literal (3I/2)^(2/3) value, including x=0.",
+    "The typed-atlas chart is identified from its actual negative-component germ, then from the true reference optical travel. The Bool endpoint formulas and the N01 reference-state/sector projections are correct; no replacement atlas or off-component identity is introduced.",
+    "The inverse inward scalar X has derivative +1 on the left and -1 on the right. Composing the genuine Airy derivative yields the signed j. The open preimage X in (0,d) supplies a full neighborhood on which the same stored chart equals the cylinder map, giving its real Frechet derivative and actual determinant j.",
+    "The actual N03 first coefficient equals the original coefficient, whose reference value is w. Substitution into the independently derived actual unit principal density gives exactly H^2/|j|*(w*j^2)=1; no unit-density hypothesis is added to the new theorem.",
+    "The private scalar argument first rules out |j|=0, cancels the denominator, and uses H>0 and w>0 to select the positive square-root branch. It yields H=(w*|j|)^(-1/2). The genuine positive Airy slope then gives |j|=slope in both Bool cases, matching the actual n06AiryRadialHeight definition.",
+    "All16 manifest-bound fingerprints were recomputed exactly. Direct project imports include the actual density and reference travel providers. Four new public names have no installed-source collision. No source, resource option or frozen candidate was changed."
+  ],
+  "findings": [],
+  "scope_limits": [
+    "The stored chart and height equalities are proved at open physical points 0<x<d. The integral/root-coordinate identity itself includes the closed inward interval; the height theorem does not silently assert endpoint or off-component values.",
+    "The same factor and globally positive smooth representative remain explicit inputs. These identities introduce no raw optical lower bound, no new atlas choice and no material jet estimate; the upstream bounds and later all-order estimates remain separate obligations.",
+    "No Lean compiler/elaborator, active checkout/index/ref, CI query/download or authority operation. Static acceptance is not compilation evidence."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "public_collision_count": 0,
+  "reviewed_at": "2026-11-12T16:53:46.163448+00:00"
+}

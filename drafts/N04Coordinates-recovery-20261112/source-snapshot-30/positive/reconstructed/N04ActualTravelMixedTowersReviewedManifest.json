@@ -1,0 +1,45 @@
+{
+  "kind": "actual_stored_travel_mixed_joint_towers_reviewed_candidate",
+  "owner": "/root/proof_inventory",
+  "status": "STATIC_INDEPENDENTLY_FULL_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelMixedTowers.lean",
+    "sha256": "cb1aa5f610ab01e37b6b8fb99c0b64f1fb0b6d31e4a5cdee275aa5e8083b9813",
+    "blob": "661b921baf14f0bd058105116fbcc2e647bcc999",
+    "lines": 145
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelMixedTowersCandidateManifest.json",
+    "sha256": "068acf301a5163ade33a261a76df5548bbb38a74a78af625d9eb0b52e102f947",
+    "blob": "c14b0d62afd4d979600ad38a851fb9c0e47fc938",
+    "lines": 148
+  },
+  "selected_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelMixedTowersClosureInventory.json",
+    "sha256": "5d67e4cdeb8ef7273c8ce7aa7750c3d8395a44e5a0a6dcc8a11ee6bd75f9e181",
+    "blob": "f6bd709b8e99fbfbb274c5c16084761b93f97fae",
+    "lines": 7633
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/N04ActualTravelMixedTowersIndependentReview.json",
+      "sha256": "1454160d1f9b2b77c05a6843f20a4ae309413eb816fbda71164fd1a8cc5f083e",
+      "blob": "5336c593d240890e3fd0169016379e35cd0118c6",
+      "lines": 162
+    }
+  ],
+  "selected_actual119_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTowerReviewedManifest.json",
+    "sha256": "dd13090289d452733a130ed72139ff5a05deff14cbac6e90be81015ecfc3d0bb",
+    "blob": "5c2f241012afa2dc284b63dbaefc529c35111409",
+    "lines": 33
+  },
+  "source_unchanged": true,
+  "compiled": false,
+  "metadata_note": "The unchanged historical candidate recorded actual119 as pending. Its current full peer and owner are now explicitly bound here; the historical candidate remains unchanged.",
+  "scope_limits": [
+    "Genuine mixed spatial and parameter towers of the same stored travel map, with all-slot and diagonal identification; numerical uniform CurrentJets bounds remain separate.",
+    "No active checkout/index/ref/CI operation. Selected-graph static verification is not elaboration."
+  ],
+  "created_at": "2026-11-12T16:53:46.200057+00:00"
+}

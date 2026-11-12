@@ -1,0 +1,168 @@
+{
+  "kind": "independent_full_source_actual_stored_travel_joint_directional_tower",
+  "reviewer": "/root",
+  "status": "PASSED_STATIC_FULL_SOURCE_REVIEW_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTowerCandidateManifest.json",
+    "sha256": "76811d8aee7dc65de6d9a0c4cc5f49b9c94659ce58bbec01aa37d1ca2359c99f",
+    "blob": "e84eb22145ebfb28816b32c29d62726554e9e72d",
+    "lines": 144
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTower.lean",
+    "sha256": "b56f6a83992424a397bede0353ac43c6a34fa75e172f5b39e162d69228b39176",
+    "blob": "8defbd534dce0d43f28ad8ed155c8e684eea771a",
+    "lines": 119,
+    "target_path": "src/ContinuousFlexibility/Analysis/N04ActualTravelStripTower.lean"
+  },
+  "actual_providers_verified": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTower.lean",
+      "sha256": "c6453415ecbafbb9694be2295bd29bfcdee2b98a0a5ce5f53030dda9ceb7fea7",
+      "blob": "47ccd49cf14b4fc0f029020d8ead3bebc2474c7c",
+      "lines": 157,
+      "module": "ContinuousFlexibility.Analysis.N04MinusFirstIntegralStripTower",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04MinusFirstIntegralStripTower.lean",
+      "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTower.lean",
+      "source_ref": "LOCAL_HELD_REVIEWED_OR_CANDIDATE",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower",
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualTravelChart",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04bActualTravelChart.lean",
+      "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+      "blob": "a1b60844375f7e23349c24356cd300a76a6fd72e",
+      "sha256": "5c7da22817d01115c5837f791ed4ba939d9f097c5ad547cb4882d02e435fb30a",
+      "lines": 229,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFlowField",
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegralsChart",
+        "ContinuousFlexibility.Analysis.ReturnChartDifferentiation",
+        "ContinuousFlexibility.Analysis.TravelStripInverseSymmetry"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bFieldRegularity",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04bFieldRegularity.lean",
+      "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+      "blob": "0accc70bea719eb47f46bcde4989c99798027273",
+      "sha256": "e9785ca55354e5eb97a0243c085d2ddfefdd0d302b70fb9ee759fdde7591ca55",
+      "lines": 59,
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionPatching",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionPatching.lean",
+      "blob": "014d107ac4b0bc9705bca9a15d721f8de3f3a41d",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "ba7b54300dd771cef3ddf2f1645d2a73d61085974677bcbcc15a4d42b995b8c9",
+      "lines": 393,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectedFlow",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionCoefficients",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionCutoff"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameProductDirections",
+      "path": "src/ContinuousFlexibility/Analysis/TameProductDirections.lean",
+      "blob": "da7b331dbdf5958e0f9e2f18326085519ae35398",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "15f7e37725e1710ef8e56bb1e47a302afc070381b9a0fc5613345f6440f5f20f",
+      "lines": 48,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameJetLocalBounds",
+        "ContinuousFlexibility.Analysis.ProjectiveCurveIteratedChain"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SolveNewtonBridge",
+      "path": "src/ContinuousFlexibility/Analysis/SolveNewtonBridge.lean",
+      "blob": "af8c1aef7d93e7bfa47e87ae08272dfe46b0fa40",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "6f1c11fc500fee7b43ecf034f966e108f46feb38368ab517f9b8fb71b4cff07e",
+      "lines": 235,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameTransfer"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations",
+      "path": "src/ContinuousFlexibility/Analysis/CircleSmoothDirectionsOperations.lean",
+      "blob": "da4963869db936865516fc441a28967765a84b2f",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "e6e6157b0c663b15fbba3ab7b61374ae7ebd52ec7f465cc729d7b3dd9106d743",
+      "lines": 129,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame",
+        "ContinuousFlexibility.Analysis.NormedSmoothDirections"
+      ]
+    }
+  ],
+  "additional_actual_definition_providers": [
+    {
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "target_path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAffine.lean",
+      "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+      "blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+      "lines": 124
+    },
+    {
+      "selected_ref": "23d28b145e1361fd8c683ba77415226b82be7bb3",
+      "target_path": "src/ContinuousFlexibility/Analysis/CharacteristicPrincipalDensity.lean",
+      "sha256": "3558e594d7d6bfec1df3e481a0b23205bd18a1a2c45450ccf53b2a6110946d12",
+      "blob": "4e260140855bfeea59c06bbcafed7bf6d401589d",
+      "lines": 95
+    },
+    {
+      "selected_ref": "23d28b145e1361fd8c683ba77415226b82be7bb3",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04bCharacteristicFirstIntegralsTransport.lean",
+      "sha256": "eb3cbeac3eb2463402021ec59548168c68a9ace72a9ffdb4402999708c22dc69",
+      "blob": "7bb5c2cab5edb3cd43bcb31f700e34c61294cb35",
+      "lines": 158
+    }
+  ],
+  "selected_strip_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTowerReviewedManifest.json",
+    "sha256": "05a3ebe182d652972769f48b512eff164551ba90ca92d6cb5544b0c46d31f366",
+    "blob": "779238d7e76791d8c1894430112323306591f072",
+    "lines": 50
+  },
+  "selected_discriminant_peer": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/N04PreservedOpticalCorrectionWitnessIndependentReview.json",
+    "sha256": "71612b55c798dfb9b6dfcfabe14506ec10b5843b559cc7fc54800d172a3a46cf",
+    "blob": "18a766752e73fe3a5bfe22664863ab4fe2e753fa",
+    "lines": 98
+  },
+  "selected_closure_identity": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTowerClosureInventory.json",
+    "sha256": "117540f18878916a7b67d118012ab4d0cdff5fbddf72d88fd6c06363d6098f14",
+    "blob": "f26fcf415f30852372a4eb326c75a2ed3cb61d8e",
+    "lines": 7505
+  },
+  "read_scope": [
+    "Full119 source and complete manifest; full157 actual inverse-composition strip tower and its quantitative-route independent review; full59 raw field regularity.",
+    "Exact original-coefficient patching at zero cutoff derivative, radial coefficient identity, real plus/minus first-integral and stored travel definitions, full48 product tower, full129 circle operations, linear postcomposition and congrOn retaining the same jets."
+  ],
+  "checks": [
+    "The cutoff-derivative cases are exhaustive. In the nonzero case its support lies in tsupport and the retained original discriminant applies. In the zero case actual component disjointness prevents any other component from activating the patch, so b/c and the unchanged a are the original coefficients. The given same-L negative discriminant supplies strict positivity.",
+    "The derived positivity holds on the entire actual open negative component for admissible states. Lifted sector parameters lie in the same state neighborhood and satisfy the same state sector. Any interior strip therefore satisfies the genuine157 tower hypothesis.",
+    "The first-integral definition calls that exact157 tower and rewrites only L.minusFlow to the preserved corrected flow. No replacement inverse, independent coordinate choice or target directional tower is supplied.",
+    "The continuous linear reflection fixes state and radius and negates only angle, preserving the same open product domain. Product and postcomposition combine the one tower and its reflected pullback.",
+    "The half-sum and half-difference agree with the actual characteristicTravelChart of U=-V reflected and V. The literal stored travel vector is obtained by congrOn, which retains all multilinear jets, continuity and directional derivatives.",
+    "All seven provider source identities and the selected source/graph artifact identities were recomputed; the three new explicit names have no active collision. No resource changes, axioms, placeholders or unsafe primitives are present."
+  ],
+  "scope_limits": [
+    "Qualitative genuine joint state/radius/angle towers on each interior strip. Uniform material costs, common current-jet radii/losses and the final CurrentJets certificate remain downstream obligations.",
+    "The existing same-witness field regularity, literal coefficient/minusFlow equalities and retained cutoff discriminant remain explicit inputs. The new148 actual construction produces the latter identities; this review does not identify arbitrary Through03 records.",
+    "The547 selected inventory identity is preserved; this receipt independently checked invoked provider sources, not every transitive proof. Full selected integration and CI are still required.",
+    "No compiler, CI query/download or active source/index/ref action."
+  ],
+  "compiled": false,
+  "reviewed_at": "2026-11-12T16:46:22.410746+00:00"
+}

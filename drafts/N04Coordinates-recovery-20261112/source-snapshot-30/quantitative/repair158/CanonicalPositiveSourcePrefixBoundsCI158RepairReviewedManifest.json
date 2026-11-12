@@ -1,0 +1,39 @@
+{
+  "kind": "ci158_positive_source_prefix_abstract_state_family_reviewed_repair",
+  "owner": "/root/quantitative_route",
+  "status": "STATIC_INDEPENDENTLY_FULL_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair158/CanonicalPositiveSourcePrefixBounds.lean",
+    "sha256": "5e136c7f38ac3c8873a24184c87d890541070b81419788ddcedcc04778ec5646",
+    "blob": "e4069046d3eb91895d147fb67ebe34e75d2478db",
+    "lines": 130
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair158/CanonicalPositiveSourcePrefixBoundsCI158RepairCandidateManifest.json",
+    "sha256": "f0911b81a526e3bdb0cae8181c6d8da5829b55b5acd5ba288097cbc1c7b31fae",
+    "blob": "5e827f5d46afa85cda78f0ba382325a40ec01829",
+    "lines": 103
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI158CanonicalPositiveSourcePrefixBoundsIndependentReview.json",
+      "sha256": "2b0158d70083c4ecc5f935d87443a207f1cd15b4a814b02a6c39eefd713a85ae",
+      "blob": "a29d682618309ba20336b60a9956ec262e713dfa",
+      "lines": 130
+    }
+  ],
+  "actual_base": {
+    "head": "11d389a72308c6664091ed3e0bdc3cb5fa9b57bf",
+    "tree": "4e374af7313e759e434f04a940682f6ceea85511",
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalPositiveSourcePrefixBounds.lean"
+  },
+  "source_unchanged": true,
+  "compiled": false,
+  "default_limits_unchanged": true,
+  "scope_limits": [
+    "Prior CI158 source failed default-budget whnf; this candidate has not been compiled.",
+    "Same actual state grading, neighborhood, sector, source maps, heights, root radii and actual typed atlas are explicitly substituted in the unchanged public contract.",
+    "No local compiler, actual src/index/ref/CP write or CI query/download."
+  ],
+  "created_at": "2026-11-12T16:42:09.361344+00:00"
+}

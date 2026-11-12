@@ -1,0 +1,121 @@
+{
+  "kind": "independent_full_source_inverse_profile_material_point_and_same_retained_sample",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJetsCandidateManifest.json",
+    "sha256": "8a2c0e6f690e2499a64d18ee9b22a28dca7fef8df883d5f5148a1bd1d8a91a53",
+    "blob": "773da90602a2fdd7a69c0ff74b4b131b30e6fb7f",
+    "lines": 113
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJets.lean",
+    "sha256": "52e91e6500606231c499fcd3863d9b2f9ca99535348f52e9abc8f15b139b8e23",
+    "blob": "6fbfba9f7a349a6604eb28473b5098a5f45a3e1f",
+    "lines": 103
+  },
+  "actual_providers_verified": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialPointRadialPolynomial.lean",
+      "sha256": "8a1d72f57708d275956e28d42473591327f46078e409b85481e87e70372acef2",
+      "blob": "3832a300bde8548bfee21149583af3b08d843420",
+      "lines": 50
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialEndpointWeightTransport.lean",
+      "sha256": "0958852ab78ccab6e57d3f527fc0d636406325a7b8cadf998f934290ddb135ba",
+      "blob": "a76f8fb3a60c893939caf7ded03dfac717512e81",
+      "lines": 132
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RetainedPositiveIntervalEndpointX.lean",
+      "sha256": "3572e7229edacef05a53dcd4eabfd7db089a78769bff6626977423d0a173b51d",
+      "blob": "e402f2334a618778bc508d5247401d5fba093197",
+      "lines": 147
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/ReferenceCellL2.lean",
+      "sha256": "d46115fd30201884ec19ebfa4ccca0861600325d9f84648e8ef1efb7a4641616",
+      "blob": "33dc5ec8e39758e9c89e68fb83d51600a2fa7da9",
+      "lines": 195
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/CentralStatementBridges.lean",
+      "sha256": "88d75a47e258d72c14b798a4a6b55b61056f6dab6b9626407138904ac698cdc5",
+      "blob": "a127b83c3abdecbf70d6e6f4446e2d63e88ce445",
+      "lines": 341
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/MorseChainScales.lean",
+      "sha256": "3c3d927037ef85a00a412a14bb71e8588fe26eb8d45d6df91e735b8e69482a04",
+      "blob": "2b94c6bdedb9315807d66ae6e3b880fdb2112bb2",
+      "lines": 254
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Radial.lean",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352",
+      "blob": "473c530a1de50c672f2e54908d374f624f5955b0",
+      "lines": 874
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046",
+      "blob": "19becb59903b44c18c8f1afb72726b2f95952752",
+      "lines": 66
+    }
+  ],
+  "additional_actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/ScaleSlowVariation.lean",
+      "sha256": "79deadb845c84a84486d3250d9aad1b1b34349accb5576c79623c191466ea85e",
+      "blob": "7f546b50edd5a38e4ad2ccd7b487ff60287d4e60",
+      "lines": 465
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedPositiveComponentInteriorEndpoints.lean",
+      "sha256": "6ce75e11f89d534e25aa3147188dc1196a45d4ec692bbb46c2a313022b89a856",
+      "blob": "f5d74d7c6bd5230ac8af2e12548f9221fb8ea697",
+      "lines": 121
+    }
+  ],
+  "selected_provider_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/recovery/MaterialPointRadialPolynomialIndependentReview.json",
+      "sha256": "a75d28e4a650bc622e40ef67252764728eefc621ffbc6921c4aba0210f4a829d",
+      "blob": "eba431d6e9c5da9655c0e4c1a34d094aaad052a7",
+      "lines": 46
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RetainedPositiveIntervalEndpointXReviewedManifest.json",
+      "sha256": "ce9b2fdd015fc1a46cd824e6ded7dfdfca06a4891d04425410c9bd745282bedd",
+      "blob": "eb6117e3899e98106a2cf6a04229ac3e4a953ac3",
+      "lines": 41
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/MaterialEndpointWeightTransportReconstructionIndependentReview.json",
+      "sha256": "3be14105f1c1dce928993be2da2fcfc580c31fd90fafa297e41009bc4bb6a9ed",
+      "blob": "041ab44d9185fc21a2b9655f1b503d7bee100b6f",
+      "lines": 45
+    }
+  ],
+  "read_scope": [
+    "Full103 candidate and full candidate manifest; full50 actual point radial polynomial, full132 actual endpoint-weight transport, full147 whole-positive endpoint-coordinate transport, and full121 retained interior endpoint proofs.",
+    "Actual AccumulatingProfileBounds reciprocal clause and RadialPartition support/partition fields, exists_localizer_ne_zero, radialJet_eq_iteratedDeriv, radialQ_nonneg, and the actual material-sample membership contract."
+  ],
+  "checks": [
+    "The reciprocal jet comes from the tenth actual accumulating-profile clause. Its original cell and cellIndex are retained; the partition chooses a nonzero localizer at each point and its support lies in that cell.",
+    "A=1+sum(C k,k<=N) is positive and dominates each selected C k. Only the genuine radialE=exp(radialQ)>=1 is used for exponent enlargement; no E0>=1 premise appears.",
+    "The point50 theorem transfers the resulting fixed radialE power to E0 at that very point. K and P are selected before every point, cell and finite order.",
+    "The retained positive component has proved interior endpoints, so its entire closed interval lies in the open radial core where the reciprocal estimates are valid.",
+    "The actual whole-interval X estimate compares the original physical point with the original midpoint host sample. The132 weight theorem at gamma=eta=0 removes only zero powers and moves its E0 cost to the same sample.",
+    "The final product K*J and exponent A precede all positive components, host indices, closed-interval points and derivative orders. No entire positive component is assumed to lie in its midpoint cell.",
+    "Every listed source and review identity is exact. Both new public names are absent from active src. No project axiom, sorry, unsafe proof primitive, target weakening or resource-option increase is introduced."
+  ],
+  "scope_limits": [
+    "The retained P/Gamma coordinate evidence remains explicit and must come from the fixed actual construction; it is not projected from arbitrary Through03.",
+    "The open-core physical reciprocal bound is not an ambient compact reciprocal bound. The four transformed positive principal jet atoms and CurrentJets remain separate obligations.",
+    "Static source review only. No compiler, CI query, active source/index/ref mutation, or selected full import-closure claim."
+  ],
+  "reviewer": "/root",
+  "status": "PASSED_STATIC_FULL_SOURCE_REVIEW_HELD_UNCOMPILED",
+  "compiled": false,
+  "reviewed_at": "2026-11-12T16:31:08.631042+00:00"
+}

@@ -1,0 +1,45 @@
+{
+  "kind": "fixed_actual_correction_and_original_discriminant_reviewed_supersession",
+  "owner": "/root",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-optical/N04FixedCorrectionWitness.lean",
+    "sha256": "31cc9daa037d8704afa88ebb2d2ea93724450c94ade5e63ce8e0ce37a21e9a12",
+    "blob": "c6a002df0ac70f6b2bbb1d62186c97b0bd560e12",
+    "lines": 148,
+    "target_path": "src/ContinuousFlexibility/Analysis/N04FixedCorrectionWitness.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-optical/N04PreservedOpticalCorrectionWitnessCandidateManifest.json",
+    "sha256": "d43ce379e8058d1830fbc5d3ebc7eb35d65c7402d6d41ada16bf4a22d586df6e",
+    "blob": "1b6ff7abe088a931e13f4175ae2c32cf6b40852e",
+    "lines": 74
+  },
+  "independent_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/N04PreservedOpticalCorrectionWitnessIndependentReview.json",
+    "sha256": "71612b55c798dfb9b6dfcfabe14506ec10b5843b559cc7fc54800d172a3a46cf",
+    "blob": "18a766752e73fe3a5bfe22664863ab4fe2e753fa",
+    "lines": 98
+  },
+  "selected_main_graph": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/N04PreservedOpticalCorrectionWitnessSelectedMainGraph.json",
+    "sha256": "86ba423cc24ec858b3c9d9d5dba13d2b3b9ffa0cb38db4188c063aa495fd8b3f",
+    "blob": "82120459415a138701382c6d5c5f5ef17687713c",
+    "lines": 10057
+  },
+  "supersedes": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N04FixedCorrectionWitness.lean",
+    "sha256": "cf0ef6b6b5df83bfe4214f4540ad949e0d95731d92bc65b931e81c6425360bd0",
+    "blob": "14bd53d10d3bc8e31a0bdcf67169cf11e5aa717e",
+    "lines": 117
+  },
+  "retained_N03_record_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N03CorrectionAssembly.lean",
+    "sha256": "a699eb62ab13a137bf5e75ee7f27a8d8fb9d0449dee431b3980bdd015997efaa",
+    "blob": "fd48b7aea0616211039f84119dd4fb7f5d36a455",
+    "lines": 206
+  },
+  "scope": "The same fixed N03 construction retains its existing original-coefficient discriminant on the support of the same cutoff derivative. The original gateway contract remains an exact wrapper; all actual witnesses and previous proofs remain unchanged. This is a one-module selected-source supersession, held pending integration and CI.",
+  "compiled": false,
+  "created_at": "2026-11-12T16:37:43.328831+00:00"
+}

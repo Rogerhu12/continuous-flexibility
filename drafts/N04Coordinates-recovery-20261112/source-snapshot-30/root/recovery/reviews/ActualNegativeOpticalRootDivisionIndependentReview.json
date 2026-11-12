@@ -1,0 +1,154 @@
+{
+  "kind": "independent_full_source_actual_negative_optical_factor_entire_half",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeOpticalRootDivisionCandidateManifest.json",
+    "sha256": "265e76e881f007d1eaacca85e706d6549b6598abba2c3cb5b876b0ae79e32a58",
+    "blob": "12a86351c9649aaca5580404a3f985d04379c5d1",
+    "lines": 117
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeOpticalRootDivision.lean",
+    "sha256": "5b631337c20031a69fab824a07c73702556ae9b3532a784f29fd868b64270187",
+    "blob": "a7d083a6bd4b3f1cce55c2647117967dcbc5704b",
+    "lines": 238,
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeOpticalRootDivision.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.N01OpticalRootDivision",
+      "ContinuousFlexibility.Analysis.N01ReturnMargins",
+      "ContinuousFlexibility.Analysis.ActualNegativeLengthRadialBounds",
+      "ContinuousFlexibility.Analysis.ActualNegativeHostMaterialSamples"
+    ],
+    "public_names": [
+      "normalizedOpticalRootDivision_inverse_on_half",
+      "n04bActualTypedAtlas_negative_allHalf_inverse_material",
+      "n04bActualTypedAtlas_opticalRootDivision_half_material"
+    ]
+  },
+  "actual_providers_verified": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OpticalRootDivision.lean",
+      "sha256": "96170f08b3ebee938ed86ed8276be8018d9d0de565128560850fac989d8d1e75",
+      "blob": "1966ba3edb4375cc90aeb7795927723b1b1cd9f4",
+      "lines": 154
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeHostMaterialSamples.lean",
+      "sha256": "b2619246dbb66548907155805acab44c75e0b54bcff2726d6d8afe9c1221571a",
+      "blob": "7a62d6940288af5540f52f2017f595eaaa69e13e",
+      "lines": 90
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthRadialBounds.lean",
+      "sha256": "74cce6d13fa0dc9164c76261185ebdfbd2e51983e5f23a7513c8664e66fcd0cf",
+      "blob": "52c5db4b5505d31c2619ca37e13c133d0dc86109",
+      "lines": 192
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01ReturnMargins.lean",
+      "sha256": "f6837c40fe69a787217b9cac9af9388bfba17785c39c29bdcad83afca21f4fbb",
+      "blob": "f239b311b3a9f8428fb49177124e1289113a0512",
+      "lines": 103
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+      "sha256": "598b1d5f18c4a22eecd5108949d46b2ddca955d79ea66090b85ca6ba06ff8227",
+      "blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+      "lines": 96
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleRadialPolynomial.lean",
+      "sha256": "3e73e356a44a95ebefb4207a9aa54f418aa9d705e3c12fb4d24232363ba11582",
+      "blob": "06106cdba67bb37b503837a23da3911b670a77ce",
+      "lines": 76
+    }
+  ],
+  "provider_reviews_verified": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed-reviews/N01OpticalRootDivisionIndependentReview.json",
+      "sha256": "99342d8e45028f729352900300000a1273b6f350b94c2e1272c481c1104da764",
+      "blob": "f192c882b4cae5034d4f580a2f105ab7ff552436",
+      "lines": 17
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/ActualNegativeLengthRadialBoundsIndependentReview.json",
+      "sha256": "dacc2c6623fd8a5d4205014f3bfb536a8c402c8783ddc6cde783856bf430ff0f",
+      "blob": "59b5346f27133dae820a92b44777562d43ef5f74",
+      "lines": 139
+    }
+  ],
+  "new_sample_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeHostMaterialSamplesReviewedManifest.json",
+    "sha256": "7f7be4d881ab4cd071983590d1efdb63532ed0096b5ce17177c5f0e0b1a096e0",
+    "blob": "a2155a0393960eca94e2f07002720d451bbd1808",
+    "lines": 42
+  },
+  "new_sample_provider_full_peer": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/ActualNegativeHostMaterialSamplesIndependentReview.json",
+    "sha256": "967fb036321aac2b1aac24ebc87c2302077fe366fd02824fcbb434bbb919ff1d",
+    "blob": "5570694cc7b54ab1d8b98fbd18524e4cc602fadd",
+    "lines": 84
+  },
+  "pinned_api_refs_verified": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Order/GroupWithZero/Defs.lean",
+      "sha256": "01a908236dc99e5040cb487165c1a73fbd4e495d44183e6465f86b42f744dc02",
+      "blob": "40e8ee9d4c90cd7de002282692c26aff90da3ac2",
+      "lines": 472
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Order/Field/Basic.lean",
+      "sha256": "c8ac46d74034b9d4c7c92297a62340d5bde580b4b61474382c0e7a54e1decda7",
+      "blob": "9bf925a162dff33e3cbcedcc645a2c49c0c28a67",
+      "lines": 812
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/GroupWithZero/Units/Basic.lean",
+      "sha256": "7a7b5c40f914ff08c6d363d455aaba017714e7c23ae8d5ecdf898301a02c9429",
+      "blob": "b3148d9bd8bac8cbc1c64edf40b1c0bbb61f2916",
+      "lines": 531
+    }
+  ],
+  "additional_pinned_actual_providers": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Order/OrderClosed.lean",
+      "sha256": "e311dbc7fca744dc0f0d4a10e3c838eb4996c2fa8b63e833077c40f763f05444",
+      "blob": "9603945a9c797c1d1d695ddf79281f6887211098",
+      "lines": 764
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Order/GroupWithZero/Basic.lean",
+      "sha256": "6526bf3a919d5306c90daf75cf96cfe3bbfacc702f3858fb00f893f7346e2cbd",
+      "blob": "335ef50464487b5763d4ad885d55d83b00964f1b",
+      "lines": 1474
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Group/Basic.lean",
+      "sha256": "1de660ac794263d0363bc5bf9ce7b357409c2db36c0642521738103a0938fa84",
+      "blob": "87499371d701f92163612c570f82a76a74421462",
+      "lines": 1099
+    }
+  ],
+  "read_scope": [
+    "Full238 candidate and complete manifest; full154 original smooth optical division, full90 host-to-original-half sample transport, full192 actual radial length bounds, and full90 provider independent review.",
+    "Actual negative-component constructor, both negative-half endpoint definitions and inclusion/bounds, exact le_on_closure, le_of_mul_le_mul_left, inv_anti0, div_le_one and inv_div interfaces."
+  ],
+  "checks": [
+    "For 0<t<d<L the exact min-distance inequality dominates t*(L-d)/L. Cancelling the strictly positive t against the actual F=t*g identity proves the factor lower bound. Continuity extends it to both closed-half endpoints without differentiating an extension.",
+    "Both endpoint orientations use inwardComponentPoint exactly. The reciprocal cost is the full physical component width times kappa inverse times the opposite physical half-width inverse; the actual cut lies strictly between the same endpoints.",
+    "The true return-margin host supplies both half-width bounds. Its radialE loss is paid at that host sample, then the reviewed90 theorem transfers it to either original stored K.cell sample. There is no cell-identity claim.",
+    "The existing154 smooth division is selected once before every derivative order. Its full-component jets and one-derivative division cost survive unchanged; the per-order sample-transfer constants are selected globally before labels, sides, host and point.",
+    "The actual kappa inverse equals K0 times E0(hostsample)^K0 and is transferred to the same stored half sample. Only positive E0 is used when powers are inverted or added.",
+    "The common physical width is bounded by b-a using the real negative component interior endpoints. It is a fixed positive constant, independent of the component and derivative order.",
+    "All candidate/provider and additional sample-owner identities are exact. Three public names have no active collision. No new premise asks for final height, potential or coordinate bounds; no axiom, sorry, unsafe primitive or resource increase appears."
+  ],
+  "scope_limits": [
+    "The same raw optical lower inequality and genuine component host remain explicit construction inputs. The review does not infer them from arbitrary Through03.",
+    "This proves a true entire-half positive factor and reciprocal input. The actual fixed-integral height formula, its material tower and the final potential/current-jet bounds still require downstream proofs.",
+    "The90 sample provider was pending when the candidate froze and has since received the exact independently reviewed owner recorded above. The frozen candidate itself remains unchanged.",
+    "Static review only; no compiler, CI operation, active source/index/ref mutation or full integration-closure claim."
+  ],
+  "reviewer": "/root",
+  "status": "PASSED_STATIC_FULL_SOURCE_REVIEW_HELD_UNCOMPILED",
+  "compiled": false,
+  "reviewed_at": "2026-11-12T16:34:14.487439+00:00"
+}

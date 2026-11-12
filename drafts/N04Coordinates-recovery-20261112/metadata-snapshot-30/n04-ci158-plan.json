@@ -1,0 +1,61 @@
+{
+  "label": 158,
+  "head_before": "f44526b34baa27e45b8d32fe20d27deb52d24a80",
+  "base_tree": "83843ffdcc1539971cdedad2ba36e935da0ad729",
+  "tree": "4e374af7313e759e434f04a940682f6ceea85511",
+  "main_checked": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+  "main_integrated": "89e539ccf7e9c558467cf875f44dcff9490ce271",
+  "additional_parents": [],
+  "last_full_green": "03e526021c371413f03fc0ce052476b63e105361",
+  "owner_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair157/CanonicalPositiveSourcePrefixBoundsCI157RepairReviewedManifest.json",
+    "sha256": "12984b2f30138083268d6d72b48147e9c1b91a5618a39ef60b94f97d893cd0b5",
+    "blob": "a272cded2358ad661bebbfc8954f6ae5545baf24",
+    "lines": 33
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair157/CanonicalPositiveSourcePrefixBoundsCI157RepairCandidateManifest.json",
+    "sha256": "ef152d4f4b6af36b6eed0a12f7345b15a5bd301d442637cceb39402be71bcff4",
+    "blob": "4691650814082076cf1cff345beb6425687a0e40",
+    "lines": 113
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI157CanonicalPositiveSourcePrefixBoundsIndependentReview.json",
+    "sha256": "6af3bcc7b5136ebcf64478a13c1a116ba20b2e2407b74f20fbc1dfd3e5903867",
+    "blob": "4f777182f2d8ed38ebcfbe69def6f8757be41f34",
+    "lines": 135
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair157/CanonicalPositiveSourcePrefixBounds.lean",
+    "sha256": "2a534678b940aba00ec2272d791bf1f9475352bfc0f53472f483e1bd0504d2da",
+    "blob": "26b5c393ceed954ce93224a01c7c48ccfee2175e",
+    "lines": 122
+  },
+  "target": "src/ContinuousFlexibility/Analysis/CanonicalPositiveSourcePrefixBounds.lean",
+  "preimage": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair157/CanonicalPositiveSourcePrefixBounds.base.lean.txt",
+    "sha256": "c3d8637c9edeb45e7ef8982951afa9d8d9eaa111fca2e8c5d5bd8b1384a756ad",
+    "blob": "eb7384f7dfd8b4789393250c849af9f8a385a932",
+    "lines": 91
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair157/CanonicalPositiveSourcePrefixBounds.diff",
+    "sha256": "0cc2a0f8ae959195379002094f4e9ec7520b2b42adafaab6880a7c793fa8dd38",
+    "blob": "ba9f6509f566aa5582c12ee64124b837a31ec506",
+    "lines": 72
+  },
+  "main_workflow_file_integrated": {
+    "main": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+    "path": ".github/workflows/build.yml",
+    "sha256": "6e1b0a3c010b6988811399ec9a71c5f5f58ca7a83421e5cd3d28a3bbf5b8bb24",
+    "blob": "3152629f2ebb53a7af652218ea5bd2d64d16d493",
+    "method": "Exact workflow-only file copy; main ancestry remains pending dependency-complete source batches."
+  },
+  "added_lean_since_full_green": 3310,
+  "deleted_lean_since_full_green": 0,
+  "source_total": 4211,
+  "source_all_total": 4215,
+  "root_imports": 4152,
+  "scope": "Independently reviewed finite-prefix aggregation with an opaque CanonicalData parameter. Same actual atlas, complete source supplier, public contracts, grading envelope and common witnesses; the compiled309 source proof and default limits remain unchanged. Main source integration remains held for complete CI.",
+  "created_at": "2026-11-12T16:32:15.261494+00:00"
+}

@@ -1,0 +1,33 @@
+{
+  "kind": "RadialReferencePrincipalJetEnvelope_reviewed_candidate",
+  "owner": "/root/quantitative_route",
+  "status": "STATIC_INDEPENDENTLY_FULL_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RadialReferencePrincipalJetEnvelope.lean",
+    "sha256": "1be3a119508e3f1e6d234e82d258d4930b89df274277650dd17c66a79171d002",
+    "blob": "2acbfe2daade71e72ed7970ce21fe09f9f49c0b3",
+    "lines": 91
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RadialReferencePrincipalJetEnvelopeCandidateManifest.json",
+    "sha256": "c2f72f86f25e5922cc645dfd1cfaad98e3de298d561e6780397bdf81811c315c",
+    "blob": "6bc60935f5e2f48dc5199c8119e8fd827890c4e5",
+    "lines": 73
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/RadialReferencePrincipalJetEnvelopeIndependentReview.json",
+      "sha256": "214305d7e2add40819934269a080e071c1d53ae3b8037628e5ffdb779e99bfc0",
+      "blob": "bc09d74f145be7982cba8e7df7fe197eed36b4ef",
+      "lines": 82
+    }
+  ],
+  "source_unchanged": true,
+  "compiled": false,
+  "scope_limits": [
+    "Finite numerical adapter only; the subsequent actual material proof must supply all factors at the same C0/B/degree/width/Y/H/chi.",
+    "The reference reciprocal profile remains controlled by its true material-cell bounds, not a global compact inverse bound.",
+    "No local compilation, CI query/download, active src/index/ref/CP action."
+  ],
+  "created_at": "2026-11-12T16:37:46.302743+00:00"
+}

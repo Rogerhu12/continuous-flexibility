@@ -1,0 +1,20 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePotentialJetEnvelope.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/principal-envelope-visibility/RadialReferencePotentialJetEnvelope.lean
+@@ -16,7 +16,7 @@
+ open Set Filter
+ open scoped Topology ContDiff BigOperators
+ 
+-private theorem referencePotential_product_envelope (N : ℕ) :
++theorem referencePotential_product_envelope (N : ℕ) :
+     ∃ C : ℝ, 1 ≤ C ∧ ∀ {A B : ℝ}, 0 ≤ A → 0 ≤ B →
+       ∀ (f g : ℝ → ℝ) (x : ℝ), ContDiffAt ℝ ∞ f x → ContDiffAt ℝ ∞ g x →
+       (∀ j, j ≤ N → |iteratedDeriv j f x| ≤ A) →
+@@ -51,7 +51,7 @@
+     _ ≤ C * A * B := mul_le_mul_of_nonneg_right
+       (mul_le_mul_of_nonneg_right (hDC k hk) hA) hB
+ 
+-private theorem referencePotential_composition_envelope (N : ℕ) :
++theorem referencePotential_composition_envelope (N : ℕ) :
+     ∃ C : ℝ, 1 ≤ C ∧ ∀ {A B : ℝ}, 0 ≤ A → 1 ≤ B →
+       ∀ (f g : ℝ → ℝ) (x : ℝ),
+       ContDiffAt ℝ ∞ f (g x) → ContDiffAt ℝ ∞ g x →

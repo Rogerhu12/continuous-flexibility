@@ -1,0 +1,98 @@
+{
+  "kind": "preserved_actual_discriminant_gateway_full_source_and_selected_graph_independent_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_EXACT_SUPERSESSION_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-optical/N04FixedCorrectionWitness.lean",
+    "sha256": "31cc9daa037d8704afa88ebb2d2ea93724450c94ade5e63ce8e0ce37a21e9a12",
+    "blob": "c6a002df0ac70f6b2bbb1d62186c97b0bd560e12",
+    "lines": 148,
+    "target_path": "src/ContinuousFlexibility/Analysis/N04FixedCorrectionWitness.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-optical/N04PreservedOpticalCorrectionWitnessCandidateManifest.json",
+    "sha256": "d43ce379e8058d1830fbc5d3ebc7eb35d65c7402d6d41ada16bf4a22d586df6e",
+    "blob": "1b6ff7abe088a931e13f4175ae2c32cf6b40852e",
+    "lines": 74
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N04FixedCorrectionWitness.lean",
+    "sha256": "cf0ef6b6b5df83bfe4214f4540ad949e0d95731d92bc65b931e81c6425360bd0",
+    "blob": "14bd53d10d3bc8e31a0bdcf67169cf11e5aa717e",
+    "lines": 117
+  },
+  "base_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N04PreservedCorrectionWitnessReviewedManifest.json",
+    "sha256": "eec7b5a0a03df2c4a29c0249eec940c113f23af9d1e2e96235781726a89ced52",
+    "blob": "695afcd519fabd22dc82889b388d78ae57698a25",
+    "lines": 43
+  },
+  "base_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/N04PreservedCorrectionWitnessIndependentReview.json",
+    "sha256": "47aaed608c03fe5cf554a86613c0c7674076b73966d836a163f34bf30d156af9",
+    "blob": "5d4b866209decb64116f4226818bbcad08ff7cc0",
+    "lines": 257
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-optical/N04FixedCorrectionWitness.diff",
+    "sha256": "d262fd60c853f4187c6c6a025b670153547901bea22a8afe1da465934d635e5b",
+    "blob": "568a949e8ce4e9782370d28b53dae6848463e54a",
+    "lines": 59
+  },
+  "actual_discriminant_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-optical/ReturnCorrectionUniformNeighborhood.provider.lean.txt",
+    "sha256": "6076d8d95cfbc3ddda9c3238ace1f5365f7295cab7840d73a474695db45ad4c6",
+    "blob": "d93ffb039a87de62f1e5130351da1e974c43114c",
+    "lines": 146,
+    "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+    "target_path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionUniformNeighborhood.lean"
+  },
+  "actual_N03_record_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N03CorrectionAssembly.lean",
+    "sha256": "a699eb62ab13a137bf5e75ee7f27a8d8fb9d0449dee431b3980bdd015997efaa",
+    "blob": "fd48b7aea0616211039f84119dd4fb7f5d36a455",
+    "lines": 206
+  },
+  "selected_main_graph": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/N04PreservedOpticalCorrectionWitnessSelectedMainGraph.json",
+    "sha256": "86ba423cc24ec858b3c9d9d5dba13d2b3b9ffa0cb38db4188c063aa495fd8b3f",
+    "blob": "82120459415a138701382c6d5c5f5ef17687713c",
+    "lines": 10057
+  },
+  "selected_main_graph_gzip": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/N04PreservedOpticalCorrectionWitnessSelectedMainGraph.json.gz",
+    "sha256": "6e052f0dd0354ed42cdd1752d81cd0508993168b7fe15e309428284a88026cfe",
+    "bytes": 86099,
+    "decompresses_to_sha256": "86ba423cc24ec858b3c9d9d5dba13d2b3b9ffa0cb38db4188c063aa495fd8b3f"
+  },
+  "read_scope": [
+    "Complete new148, complete original117 and exact59-line diff. Complete true ReturnCorrectionUniformNeighborhood146 provider and all relevant returned tuple positions. Previously full-reviewed identical coefficient/source/N03 construction remains byte-for-byte, except for retaining the existing discriminant in the final tuple."
+  ],
+  "checks": [
+    "The strengthened result returns exactly the already-constructed original-coefficient discriminant on tsupport(deriv(chi m)), for all states in the same shortened stateNeighborhood. No stateSector restriction, derivative order or new radius is introduced.",
+    "The actual146 producer already restricts hdisc through the same neighborhood inclusion and carries it with the identical cutoff family. The final original117 construction proof is mechanically identical except for adding hdiscFull to the final tuple.",
+    "D,T,S,C,loss,R,L,chi,cell,base-prime and epsilon-prime are retained literally. The appended property is not inferred for an arbitrary preexisting Through03 witness.",
+    "The original public theorem complete header is byte-identical. Its new wrapper calls the stronger theorem once and returns the same witnesses, dropping only the last discriminant item. Imports, local instance, resource options and all original construction steps remain unchanged.",
+    "The exact705 selected graph is rebound at only N04FixedCorrectionWitness. Every selected source checksum/blob/line count and actual import list was revalidated; imports and topology edges are unchanged and the graph has no missing imports or cycles. The two explicit public names occur exactly once in the selected graph."
+  ],
+  "mechanical_checks": {
+    "old_public_header_byte_identical": true,
+    "strong_proof_prefix_byte_identical": true,
+    "only_existing_final_discriminant_added": true,
+    "selected_module_count": 705,
+    "changed_modules": [
+      "ContinuousFlexibility.Analysis.N04FixedCorrectionWitness"
+    ],
+    "missing_imports": [],
+    "cycles": [],
+    "new_public_name_collisions": []
+  },
+  "scope_limits": [
+    "A source/API and selected-import graph review only; no Lean typechecking or integration readiness is claimed.",
+    "The returned property is positivity on the actual cutoff-derivative support, not yet on every negative-component point. The downstream zero-derivative patching argument remains an actual consumer obligation.",
+    "No CurrentJets, final material bound or auxiliary optical lower certificate is asserted. No active source/index/ref/CI operation."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "reviewed_at": "2026-11-12T16:36:53.307198+00:00"
+}

@@ -1,0 +1,32 @@
+{
+  "kind": "actual_fixed_positive_reference_potential_atom_reviewed_owner",
+  "status": "FULL_SOURCE_INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeFixedPotentialReferenceJetsCandidateManifest.json",
+    "sha256": "8e6600bc0538fa127c0ddf7488ce4e3a6f863a951ddf28fc4028c824e7795c97",
+    "blob": "ae9d33121b07454f4e68c64de7f7b18381cf95c4",
+    "lines": 95
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/WholeReferenceGaugeFixedPotentialReferenceJetsIndependentReview.json",
+    "sha256": "87b5e8b8a8cce6ece341a6319e92a2e7e8756c20aa775db7f776030c2abd0f30",
+    "blob": "0d06d79205f1b209a9292a949293865ad16d9244",
+    "lines": 131
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeFixedPotentialReferenceJets.lean",
+    "sha256": "0dd9a3b48093074e943d596fa77a1a5393c2c13459e1ca50cf0c814596905084",
+    "blob": "339445c09e482ac242a370585a25f494c44c2182",
+    "lines": 173,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeFixedPotentialReferenceJets.lean"
+  },
+  "same_family_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedPositiveReferencePotentialMaterialJetsReviewedManifest.json",
+    "sha256": "320bf319872bdf8ad8732fb7589f93b9bc664197a71f78765ae06175e425057b",
+    "blob": "f4d273a0a22291e0617728399cb567d9b9885fb7",
+    "lines": 33
+  },
+  "scope": "The same given coordinate, height, original cell, literal inverse and single normalized T give the actual positive potential atom, its smoothness, pi-periodicity and all mixed material bounds. Only numerical constants are selected. Actual once-selected276 assembly is a separate consumer.",
+  "compiled": false,
+  "created_at": "2026-11-12T16:57:32.809970+00:00"
+}

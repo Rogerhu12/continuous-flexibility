@@ -1,0 +1,162 @@
+{
+  "kind": "actual_stored_travel_mixed_joint_and_parameter_towers_full_independent_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "PASSED_COMPLETE_STATIC_SOURCE_AND_ACTUAL_PROVIDER_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelMixedTowers.lean",
+    "sha256": "cb1aa5f610ab01e37b6b8fb99c0b64f1fb0b6d31e4a5cdee275aa5e8083b9813",
+    "blob": "661b921baf14f0bd058105116fbcc2e647bcc999",
+    "lines": 145
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelMixedTowersCandidateManifest.json",
+    "sha256": "068acf301a5163ade33a261a76df5548bbb38a74a78af625d9eb0b52e102f947",
+    "blob": "c14b0d62afd4d979600ad38a851fb9c0e47fc938",
+    "lines": 148
+  },
+  "selected_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelMixedTowersClosureInventory.json",
+    "sha256": "5d67e4cdeb8ef7273c8ce7aa7750c3d8395a44e5a0a6dcc8a11ee6bd75f9e181",
+    "blob": "f6bd709b8e99fbfbb274c5c16084761b93f97fae",
+    "lines": 7633
+  },
+  "selected_actual119_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTowerReviewedManifest.json",
+    "sha256": "dd13090289d452733a130ed72139ff5a05deff14cbac6e90be81015ecfc3d0bb",
+    "blob": "5c2f241012afa2dc284b63dbaefc529c35111409",
+    "lines": 33
+  },
+  "selected_actual119_full_peer": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/N04ActualTravelStripTowerIndependentReview.json",
+    "sha256": "a6e65c0d34fcc978f42f7d088b6383a17f92d2451e0f5de5bfe059cb5926c7ce",
+    "blob": "8cb8b8722023a195fa6682b5dcbbf533c5c90b50",
+    "lines": 168
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTower.lean",
+      "sha256": "b56f6a83992424a397bede0353ac43c6a34fa75e172f5b39e162d69228b39176",
+      "blob": "8defbd534dce0d43f28ad8ed155c8e684eea771a",
+      "lines": 119,
+      "module": "ContinuousFlexibility.Analysis.N04ActualTravelStripTower",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04ActualTravelStripTower.lean",
+      "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelStripTower.lean",
+      "source_ref": "LOCAL_HELD_REVIEWED_OR_CANDIDATE",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04MinusFirstIntegralStripTower",
+        "ContinuousFlexibility.Analysis.N04bActualTravelChart",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionPatching",
+        "ContinuousFlexibility.Analysis.TameProductDirections",
+        "ContinuousFlexibility.Analysis.SolveNewtonBridge"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.JointMixedTransportCalculus",
+      "path": "src/ContinuousFlexibility/Analysis/JointMixedTransportCalculus.lean",
+      "blob": "b9db709bafbaaf513229374bac8a370f6919e733",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "fa32b4a1c91ed3926f4e132234aaa4860363fac1a81508ee05dc67707e63f9cf",
+      "lines": 250,
+      "imports": [
+        "ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus",
+      "path": "src/ContinuousFlexibility/Analysis/JointMixedDiagonalCalculus.lean",
+      "blob": "030159292b3d6ecfffb207ffb7f515c8b07f78aa",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "fdb7dd2f331e36b1e50679a50e972ffb7891aa7742221447eb25a9f04feb4b40",
+      "lines": 295,
+      "imports": [
+        "ContinuousFlexibility.Analysis.JointJetSpatialRegularity",
+        "ContinuousFlexibility.Analysis.PhysicalJetLinearity",
+        "ContinuousFlexibility.Analysis.MaterialMixedMultiplier"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.JointJetSpatialRegularity",
+      "path": "src/ContinuousFlexibility/Analysis/JointJetSpatialRegularity.lean",
+      "blob": "8121ae30ba3505ef7020d759d0686257bea6fff6",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "17c9b148bc6658c5acfb75e1b476b73e403d09263d6fe291747aa7ffb27a9dd1",
+      "lines": 249,
+      "imports": [
+        "ContinuousFlexibility.Analysis.SmoothDirectionsFixedLast",
+        "ContinuousFlexibility.Analysis.ScalarPlaneJetRegularity",
+        "ContinuousFlexibility.Analysis.MixedDerivativeLocality",
+        "ContinuousFlexibility.Analysis.MixedDerivativeHierarchy",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsAffine"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MixedDerivativeHierarchy",
+      "path": "src/ContinuousFlexibility/Analysis/MixedDerivativeHierarchy.lean",
+      "blob": "b67fc3dc8858f56c715ad95b680a07b873399f75",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "e9db31f132dda5a403eadd732849efc5516f7f9261e02f4ca48351ce47bfc8c8",
+      "lines": 96,
+      "imports": [
+        "ContinuousFlexibility.Analysis.MixedDerivativeLocality"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SectorParameterGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/SectorParameterGeometry.lean",
+      "blob": "2aedeefa0b7cecd1a972ac5b9fbf48bb538b6490",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "0daae8b9f4f8b63e4bd6af764ca24973c63ce45fea2cc894a6b1678d35d42415",
+      "lines": 105,
+      "imports": [
+        "ContinuousFlexibility.Analysis.SolveStateSpaces",
+        "ContinuousFlexibility.Analysis.SolveReturnEquations",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsAffine"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SolveNewtonBridge",
+      "path": "src/ContinuousFlexibility/Analysis/SolveNewtonBridge.lean",
+      "blob": "af8c1aef7d93e7bfa47e87ae08272dfe46b0fa40",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "6f1c11fc500fee7b43ecf034f966e108f46feb38368ab517f9b8fb71b4cff07e",
+      "lines": 235,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameTransfer"
+      ]
+    }
+  ],
+  "read_scope": [
+    "All145 candidate lines and complete candidate manifest; all119 actual stored-travel tower source lines and its current full peer/owner.",
+    "All250 JointMixedTransportCalculus,295 JointMixedDiagonalCalculus,249 JointJetSpatialRegularity,96 MixedDerivativeHierarchy,105 SectorParameterGeometry and235 SolveNewtonBridge lines at the pinned c5 selected objects.",
+    "The actual157 first-integral strip provider and inverse-composition construction were fully reviewed previously in the independently bound strip157 receipt; current119 consumes that unchanged source."
+  ],
+  "checks": [
+    "The fixed CLM A is applied by the actual solveSmoothDirectionsPostcomp construction, preserving the same stored travel chart and all original construction identities. Taking fst/snd is a specialization, not an independently chosen scalar chart.",
+    "The base joint tower gives ordinary spatial smoothness on the same open strip. Sector seminorm sublevels and the strip are convex, satisfying precisely the existing fixedLast/Schwarz assumptions.",
+    "Angular induction at radial order zero uses spatialAngularTower followed by the exact angularPartial_mixedDerivative identity. Radial induction then uses spatialRadialTower and the exact radialPartial_mixedDerivative identity. Both congrOn directions match the providers, and a=b=0 reduces to the same base value.",
+    "freezeSpatial restricts the same mixed tower to the actual fixed physical point. pointTower_eq_jointJet gives equality for every multilinear parameter slot, with the original sector neighborhood and point retained.",
+    "Both diagonal expressions equal the same actual parameter-line iterated derivative at t=0. The original k,a,b and mixed scalar are retained; the equality direction is hK.symm.trans hJ, matching the selected provider.",
+    "All theorem section arguments are explicitly present through the referenced concrete tower definitions. The definitions retain their body-used evidence; no proof-only theorem binder is silently omitted.",
+    "All555 selected source hashes, Git blob identities, line counts and import lists were recomputed independently. The selected graph has no missing project import or cycle, and all five new public names occur only in this candidate."
+  ],
+  "mechanical_checks": {
+    "selected_module_count": 555,
+    "selected_graph_source_identities_exact": true,
+    "missing_imports": [],
+    "cycles": [],
+    "public_name_collisions": [],
+    "resource_options": [],
+    "forbidden_tokens": []
+  },
+  "findings": [],
+  "metadata_note": "The candidate historically said actual119 was pending. Its exact unchanged source now has root full peer a6e65c0d and the explicitly bound current owner; the historical candidate is not rewritten.",
+  "scope_limits": [
+    "Genuine qualitative mixed spatial and parameter towers, not numerical uniform CurrentJets bounds. Same-witness correction identities, cutoff-support discriminant and raw field regularity remain actual inputs.",
+    "The selected mixed-pin integration still requires authorized CI; a static graph check is not elaboration.",
+    "No source edit, compiler/elaborator, CI query/download or active checkout/index/ref action."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "reviewed_at": "2026-11-12T16:50:27.122479+00:00"
+}

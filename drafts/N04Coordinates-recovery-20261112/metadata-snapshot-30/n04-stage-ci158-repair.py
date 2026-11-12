@@ -1,0 +1,95 @@
+import hashlib
+import json
+import re
+import subprocess
+from datetime import datetime, timezone
+from pathlib import Path
+
+ROOT = Path('/workspace/scratch/bbbea77e4163')
+REPO = ROOT / 'continuous-flexibility'
+BASE = 'f44526b34baa27e45b8d32fe20d27deb52d24a80'
+BASE_TREE = '83843ffdcc1539971cdedad2ba36e935da0ad729'
+MAIN = '2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d'
+GREEN = '03e526021c371413f03fc0ce052476b63e105361'
+TARGET = 'src/ContinuousFlexibility/Analysis/CanonicalPositiveSourcePrefixBounds.lean'
+
+def git(*args):
+    return subprocess.check_output(['git', *args], cwd=REPO)
+
+def identity(path):
+    path = Path(path)
+    data = path.read_bytes()
+    return {'path': str(path), 'sha256': hashlib.sha256(data).hexdigest(),
+            'blob': hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest(),
+            'lines': len(data.splitlines())}
+
+def verify(item):
+    actual = identity(item['path'])
+    assert all(actual[k] == item[k] for k in ('sha256', 'blob', 'lines')), item['path']
+    return Path(item['path']).read_bytes()
+
+assert git('rev-parse', 'HEAD').decode().strip() == BASE
+assert git('rev-parse', 'HEAD^{tree}').decode().strip() == BASE_TREE
+assert git('rev-parse', 'origin/main').decode().strip() == MAIN
+assert not git('status', '--porcelain')
+cp = json.loads((ROOT / 'n04-active-checkpoint.json').read_text())
+assert cp['current_ci']['label'] == 157 and cp['current_ci']['status'] == 'failure'
+assert cp['last_full_green']['sha'] == GREEN
+op = ROOT / 'n04-drafts/quantitative/repair157/CanonicalPositiveSourcePrefixBoundsCI157RepairReviewedManifest.json'
+oi = identity(op)
+assert oi['sha256'] == '12984b2f30138083268d6d72b48147e9c1b91a5618a39ef60b94f97d893cd0b5'
+owner = json.loads(op.read_text())
+candidate = json.loads(verify(owner['candidate_manifest']))
+peer = owner['independent_reviews'][0]
+review = json.loads(verify(peer))
+assert owner['candidate_manifest']['sha256'] == 'ef152d4f4b6af36b6eed0a12f7345b15a5bd301d442637cceb39402be71bcff4'
+assert peer['sha256'] == '6af3bcc7b5136ebcf64478a13c1a116ba20b2e2407b74f20fbc1dfd3e5903867'
+assert candidate['actual_base'] == review['actual_base'] == {'head': BASE, 'tree': BASE_TREE, 'target': TARGET}
+assert candidate['source'] == owner['source'] == review['source']
+new = verify(candidate['source'])
+old = verify(candidate['base'])
+assert old == git('show', BASE + ':' + TARGET) == (REPO / TARGET).read_bytes()
+public_marker = b'/-- One sequence of finite-prefix coefficients'
+assert new.startswith(old[:old.index(public_marker)])
+tail = "  refine ⟨newBase, outLoss, ε', hb, hl, hε', hε'ε, ?_⟩".encode()
+assert new[new.index(tail):new.index(public_marker)].rstrip() == old[old.index(tail):old.index(b'\n\nend ContinuousFlexibility.Analysis')].rstrip()
+for match in re.finditer(rb'(?m)^theorem ([^\s]+)', old):
+    begin = match.start()
+    assert old[begin:old.index(b' := by', begin)] in new
+assert re.findall(rb'(?m)^import .+$', old) == re.findall(rb'(?m)^import .+$', new)
+assert re.findall(rb'(?m)^set_option .+$', old) == re.findall(rb'(?m)^set_option .+$', new)
+assert not re.search(rb'\b(?:sorry|axiom|native_decide|unsafe|maxHeartbeats|maxRecDepth)\b', new)
+for item in [candidate['diff'], candidate['cached_log'], candidate['previous_exact_source_review'], candidate['actual_supplier_review']] + candidate['providers'] + review['actual_providers'] + review['additional_actual_grading_providers']:
+    verify(item)
+assert (REPO / '.github/workflows/build.yml').read_bytes() == git('show', MAIN + ':.github/workflows/build.yml')
+(REPO / TARGET).write_bytes(new)
+subprocess.run(['python3', 'scripts/gen_root.py'], cwd=REPO, check=True)
+paths = [TARGET]
+git('add', '--', *paths)
+subprocess.run(['git', 'diff', '--cached', '--check'], cwd=REPO, check=True)
+assert not git('diff')
+assert git('diff', '--cached', '--name-only').decode().splitlines() == paths
+tree = git('write-tree').decode().strip()
+numstat = git('diff', '--numstat', GREEN, tree, '--', '*.lean').decode().splitlines()
+added = sum(int(x.split()[0]) for x in numstat)
+deleted = sum(int(x.split()[1]) for x in numstat)
+assert added <= 20000
+imports = sum(line.startswith('import ') for line in (REPO / 'src/ContinuousFlexibility.lean').read_text().splitlines())
+assert imports == cp['current_ci']['root_imports'] == 4152
+plan = {'label': 158, 'head_before': BASE, 'base_tree': BASE_TREE, 'tree': tree,
+    'main_checked': MAIN, 'main_integrated': '89e539ccf7e9c558467cf875f44dcff9490ce271',
+    'additional_parents': [], 'last_full_green': GREEN,
+    'owner_manifest': oi, 'candidate_manifest': owner['candidate_manifest'],
+    'independent_review': peer, 'source': candidate['source'],
+    'target': TARGET, 'preimage': candidate['base'], 'diff': candidate['diff'],
+    'main_workflow_file_integrated': cp['current_ci']['main_workflow_file_integrated'],
+    'added_lean_since_full_green': added, 'deleted_lean_since_full_green': deleted,
+    'source_total': cp['current_ci']['source_total'], 'source_all_total': cp['current_ci']['source_all_total'], 'root_imports': imports,
+    'scope': 'Independently reviewed finite-prefix aggregation with an opaque CanonicalData parameter. Same actual atlas, complete source supplier, public contracts, grading envelope and common witnesses; the compiled309 source proof and default limits remain unchanged. Main source integration remains held for complete CI.',
+    'created_at': datetime.now(timezone.utc).isoformat()}
+(ROOT / 'n04-ci158-plan.json').write_text(json.dumps(plan, ensure_ascii=False, indent=2) + '\n')
+payload = [{'path': p, 'mode': '100644', 'type': 'blob', 'content': (REPO / p).read_text()} for p in paths]
+text = json.dumps(payload, ensure_ascii=False)
+(ROOT / 'n04-ci158-tree-payload.json').write_text(text)
+print(json.dumps({'tree': tree, 'added_lean_since_full_green': added, 'paths': paths,
+                  'payload_codepoints': len(text), 'payload_sha256': hashlib.sha256(text.encode()).hexdigest()}))

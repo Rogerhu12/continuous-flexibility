@@ -1,0 +1,103 @@
+{
+  "kind": "ci158_positive_source_prefix_abstract_state_and_source_family_repair",
+  "owner": "/root/quantitative_route",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_INDEPENDENT_FULL_REVIEW",
+  "actual_base": {
+    "head": "11d389a72308c6664091ed3e0bdc3cb5fa9b57bf",
+    "tree": "4e374af7313e759e434f04a940682f6ceea85511",
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalPositiveSourcePrefixBounds.lean"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair158/CanonicalPositiveSourcePrefixBounds.lean",
+    "sha256": "5e136c7f38ac3c8873a24184c87d890541070b81419788ddcedcc04778ec5646",
+    "blob": "e4069046d3eb91895d147fb67ebe34e75d2478db",
+    "lines": 130
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair158/CanonicalPositiveSourcePrefixBounds.base.lean.txt",
+    "sha256": "2a534678b940aba00ec2272d791bf1f9475352bfc0f53472f483e1bd0504d2da",
+    "blob": "26b5c393ceed954ce93224a01c7c48ccfee2175e",
+    "lines": 122
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair158/CanonicalPositiveSourcePrefixBounds.diff",
+    "sha256": "ae80c1144777f5ce19aeb15ae9d6dc14bdf8eb7162a9bb587aac329c1af7553f",
+    "blob": "0acebfef89bf1dca9575544840784cf19e19aaa1",
+    "lines": 86
+  },
+  "cached_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-158.log",
+    "sha256": "adf17f55873176ea4cc00d8b8cd8e9d8c3ab162513face7d5e68f757468c3f0d",
+    "blob": "4e7be93872ff6a70e804d389ced290e85f1a17f1",
+    "lines": 740
+  },
+  "diagnostics": [
+    {
+      "line": 52,
+      "column": 0,
+      "message": "private whole aggregation declaration whnf timeout at default200000"
+    },
+    {
+      "line": 94,
+      "column": 8,
+      "message": "unknown private helper constant in the public wrapper is a downstream cascade"
+    }
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalPositiveSourceJetBounds.lean",
+      "sha256": "74a5f486c095cd171fbb56c0270827cd89c7616aaa1f86fc701ba5e4e466a127",
+      "blob": "4ab2ef388753fd779280571b22abcfd7db544684",
+      "lines": 309
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveEndpointFields.lean",
+      "sha256": "c024651329c6b725f61097116a892f032b80b1f2ef363c920e37ac7e007c0587",
+      "blob": "d5ac37d8aae450523577552e3fb13815cd0a0468",
+      "lines": 132
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalNeighborhoodRestriction.lean",
+      "sha256": "af2577f18d3d3af94162ce3415e3d0b96c054901827b5ea1db6d36be994d407c",
+      "blob": "7888f021746c6faf5ae5f0b149ed2fd17830c6e2",
+      "lines": 187
+    }
+  ],
+  "previous_exact_source_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI157CanonicalPositiveSourcePrefixBoundsIndependentReview.json",
+    "sha256": "6af3bcc7b5136ebcf64478a13c1a116ba20b2e2407b74f20fbc1dfd3e5903867",
+    "blob": "4f777182f2d8ed38ebcfbe69def6f8757be41f34",
+    "lines": 135
+  },
+  "actual_supplier_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI156CanonicalPositiveSourceJetBoundsIndependentReview.json",
+    "sha256": "be8adebde7d9570023ef3ff87e78b6a5921c1fabe0b7c1890cbb9e5e6dc7d05b",
+    "blob": "174e33ee8dea808c232824f7d69b4e34db5002dd",
+    "lines": 139
+  },
+  "change_summary": [
+    "Generalize the private aggregation to an independent module E, seminorm grading p, parameterized domain U, sector predicate and centering map; component indices I, dependent source indices J and source F/q/r are now arbitrary function parameters.",
+    "The private declaration contains no PhysicalSpacesData, stateGrading, NonlinearGeometryData, CanonicalData, certified endpoint subtype or actual constructed atlas. It calls the already compiled generic finite-sum theorem in the same abstract E.",
+    "The actual public wrapper explicitly instantiates every generic object with the original E/state grading/neighborhood/sector/reference shift/positive sources/endpoints and the original actual typed atlas.",
+    "The two complete public headers and the original numerical finite-sum theorem remain byte-identical. Common base/outLoss/radius, B-before-state/order data, all actual objects and default limits are unchanged."
+  ],
+  "static_checks": {
+    "base_exact_actual_head": true,
+    "both_public_headers_exact": true,
+    "existing_generic_finite_sum_theorem_exact": true,
+    "private_aggregation_has_no_physical_structure_or_source_subtype": true,
+    "same_choices_and_finite_sum_tail": true,
+    "imports_options_open_context_exact": true,
+    "added_lines": 33,
+    "deleted_lines": 25,
+    "forbidden_tokens": [],
+    "default_resource_limits_unchanged": true
+  },
+  "scope_limits": [
+    "Static repair only; future authorized CI must establish default-budget performance.",
+    "No uniform material envelope, state-directional bound, altered constant or new mathematical hypothesis is introduced.",
+    "No local compiler/elaborator, active source/index/ref/CP mutation or CI query/download."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T16:39:59.255491+00:00"
+}

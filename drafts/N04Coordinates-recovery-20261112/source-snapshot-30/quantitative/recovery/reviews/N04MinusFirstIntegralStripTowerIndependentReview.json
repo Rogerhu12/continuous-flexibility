@@ -1,0 +1,201 @@
+{
+  "kind": "actual_minus_first_integral_strip_joint_tower_independent_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "PASSED_FULL_FINAL_SOURCE_AND_EXACT_SECTION_BINDER_SUPERSESSION_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTower.lean",
+    "sha256": "c6453415ecbafbb9694be2295bd29bfcdee2b98a0a5ce5f53030dda9ceb7fea7",
+    "blob": "47ccd49cf14b4fc0f029020d8ead3bebc2474c7c",
+    "lines": 157
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTowerSectionCandidateManifest.json",
+    "sha256": "5ad97020ad11cd28db2e703d0c52658d116c1389f57a5568a11ea5a8d4ac1ec1",
+    "blob": "10245cf1d196528c0ac6bc7c9c810e11dc066c92",
+    "lines": 204
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04MinusFirstIntegralStripTower.lean",
+    "sha256": "e49929c25d4503c9d23fdb55b16ef26bcec02f9bdc3e4b01c69ec0d1ddfd781f",
+    "blob": "ca0e5c21e47271bea2e6f83490425caceb0b95a4",
+    "lines": 156
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTower.diff",
+    "sha256": "41c5e78ba56b6e6a1a4aec6e5861236d459c30ead910a8e07ce2889d4980b0f4",
+    "blob": "06a19e2d1527f4565375aa05308961059d7b226f",
+    "lines": 10
+  },
+  "actual_provider_identities": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnVelocitySpatialTower.lean",
+      "blob": "198e815b49f723edca476ad56ec173040e11edfe",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "b05abee5a782c5621c8bfae80b66ef323eed66e0476e7d865fd0517757ac623d",
+      "lines": 421,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01SingleComponentInterpolation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01SingleComponentFlow",
+      "path": "src/ContinuousFlexibility/Analysis/N01SingleComponentFlow.lean",
+      "blob": "73fda03ff2dd73df268be15c9569429eaabd1f0f",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "53c0456a4801295ad3a213601e995c3d628e080dbad30d819d86ad0a89422720",
+      "lines": 307,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowSpatialJets",
+        "ContinuousFlexibility.Analysis.CircleSingleComponentJets",
+        "ContinuousFlexibility.Analysis.N01SelectorInverse",
+        "ContinuousFlexibility.Analysis.NormedSmoothDirections"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01SingleComponentInterpolation",
+      "path": "src/ContinuousFlexibility/Analysis/N01SingleComponentInterpolation.lean",
+      "blob": "02a20ae3324142b01bcbe22836f7cd001ae4d197",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "12a6b0964ffa7b47c4f0771eff693f4308afe58aa8a391eec709898116d7ac4f",
+      "lines": 186,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01SingleComponentFlow",
+        "ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations",
+      "path": "src/ContinuousFlexibility/Analysis/CircleSmoothDirectionsOperations.lean",
+      "blob": "da4963869db936865516fc441a28967765a84b2f",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "e6e6157b0c663b15fbba3ab7b61374ae7ebd52ec7f465cc729d7b3dd9106d743",
+      "lines": 129,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame",
+        "ContinuousFlexibility.Analysis.NormedSmoothDirections"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleInverseModel",
+      "path": "src/ContinuousFlexibility/Analysis/CircleInverseModel.lean",
+      "blob": "d4cd16420a70111439856a3685e292a7ee34b17b",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "b04e3cdfd2af3aa8309bd62abe082df5bb0b58364680e6a56b7b0dc5aeecd95a",
+      "lines": 244,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleInverseCompositionGrowth",
+        "ContinuousFlexibility.Analysis.CircleCompositionJetModels"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CirclePositiveInverseModel",
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInverseModel.lean",
+      "blob": "6f2c793893f51f1fd72c6201f149a0e527458994",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "a6767f0378b48caf72404311675e416be98e8d1bad81800d134190a0a7d9d34d",
+      "lines": 81,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CirclePositiveLiftDomain"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleJointEvaluation",
+      "path": "src/ContinuousFlexibility/Analysis/CircleJointEvaluation.lean",
+      "blob": "b18010ba5d5c86d247e70d32e8ffd134434e126b",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "5110f4d8cf53b34ed33b6221317e9421d876d9add22dca234e95493edcc33ba6",
+      "lines": 216,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleAngularJetLinear",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsJointAngular",
+        "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+        "ContinuousFlexibility.Analysis.SolveNewtonBridge"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CircleLinearTame",
+      "path": "src/ContinuousFlexibility/Analysis/N01CircleLinearTame.lean",
+      "blob": "60cb27e73d5bac0102e5436d7fad54ae47740532",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "18f9059ced21bc434aec9f75840a1dbb7842444192939afd4755dc1ed105ef7a",
+      "lines": 99,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N02ChartError",
+        "ContinuousFlexibility.Analysis.TameElementaryCalculus"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals",
+      "path": "src/ContinuousFlexibility/Analysis/N04bCharacteristicFirstIntegrals.lean",
+      "selected_ref": "34a496f78ec2c9f35f74d2eb3dfd48a1d4190909",
+      "sha256": "cabf5a4f7de74c1e3c2c16c765bf7c67052841cda2582da16b669141e3839a27",
+      "blob": "6fc2f9eca3e1203e2d5598cc92ac6604f848c3ef",
+      "lines": 202,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TravelStripAngularInverse",
+        "ContinuousFlexibility.Scalar.Conservation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ParameterizedCircleInverse",
+      "path": "src/ContinuousFlexibility/Analysis/ParameterizedCircleInverse.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "7131aaca76e59f2dff2ceb3c1216e9bcff6e7f0bd999afaea55255cf86ce6e7d",
+      "blob": "d0823bcdb7716e3d9a179d6783c051509c5a6681",
+      "lines": 156,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ParameterizedScalarInverse",
+        "ContinuousFlexibility.Analysis.PeriodicScalarFlow",
+        "Mathlib.Topology.Order.IntermediateValue",
+        "Mathlib.Logic.Function.Basic",
+        "Mathlib.Tactic.Linarith",
+        "Mathlib.Tactic.Ring"
+      ]
+    }
+  ],
+  "pinned_inverse_api": {
+    "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Logic/Function/Basic.lean",
+    "sha256": "b22aa6fb06d95095ae8e239d2d96f611a7f53707a4cfbc4bc334446a4cc9f966",
+    "blob": "b30902e8eb9831f07f5e859a9db0ae72d8c9180d",
+    "lines": 1258
+  },
+  "selected_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/strip-tower-section-binders/N04MinusFirstIntegralStripTowerClosureInventory.json",
+    "sha256": "1dfe3267c9ea9dd58557ac752b696570146e58657756bc59bc6d1eb612814d07",
+    "blob": "2722d4d9d9ca47f8f4bb45e42caf001886a6921d",
+    "lines": 6695
+  },
+  "checks": [
+    "Read the complete156 body and final157 source, the exact include-only delta, both literal inverse/first-integral definitions and every actual invoked circle lift/inverse/compose/tower contract.",
+    "The corrected flow is literally ordinaryFlow composed with the given cutoff interpolation. Positive circle lifts supply injectivity and actual surjectivity. The small inverse composition proof uses the pinned invFun_eq_of_injective_of_rightInverse in its correct orientation, so the inverse is the same stored invFun.",
+    "The original private theorem omitted proof-only hN/hS/hT/hchiRange section binders. Exactly one include command now retains them; deleting it recovers the original156 byte-for-byte. The public def header/body, source functions and all imports/options are unchanged.",
+    "The left-chart displacement tower is pulled through the actual interpolation inverse first, then through the actual ordinary inverse. Adding their true inverse displacements and decoding cancels theta/u/v exactly to stateLeftChart(I_inverse(Phi_inverse(theta))).",
+    "Every strip-domain coercion uses C.left<l and h<C.right. Interpolation positivity uses the original cutoff range on the same closed component, and the genuine flow tower alone consumes the explicit raw original-coefficient discriminant. No inverse regularity or supplied target tower is assumed.",
+    "The final continuous linear parameterSpatialAssociation only reassociates (state,(radius,angle)) to ((state,radius),angle). A single genuine SmoothDirections value is returned before all jet orders.",
+    "Recomputed all487 selected source blob/SHA/line identities and actual import edges, including the selected parameter-order ports. The selected import graph has no missing project modules/cycles/new public name collision. This is static evidence, not a compilation claim."
+  ],
+  "resolved_findings": [
+    {
+      "location": "private correctedFlow_inverse_comp",
+      "original_source": "ca0e5c21e47271bea2e6f83490425caceb0b95a4",
+      "issue": "Proof-only section hypotheses were not explicitly included.",
+      "resolution": "The final157 source inserts include hN hS hT hχrange in before that private theorem only."
+    }
+  ],
+  "unresolved_findings": [],
+  "static_graph": {
+    "modules": 487,
+    "missing_project_imports": [],
+    "cycles": [],
+    "new_public_collisions": []
+  },
+  "scope_limits": [
+    "The result is qualitative joint state/radius/angle regularity on a supplied interior strip, not global canonical CurrentJets or uniform material estimates.",
+    "The raw strip discriminant remains explicit and must come from the same retained actual construction.",
+    "No local compiler/elaborator, source editing, active checkout/index/ref/CP mutation or CI query/download."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "reviewed_at": "2026-11-12T16:37:46.284925+00:00"
+}

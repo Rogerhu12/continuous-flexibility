@@ -1,0 +1,40 @@
+{
+  "kind": "four_actual_positive_principal_reference_atoms_fixed_family_reviewed_candidate",
+  "owner": "/root/quantitative_route",
+  "status": "STATIC_INDEPENDENTLY_FULL_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositivePrincipalJets.lean",
+    "sha256": "b8e9fe14a443cf93d04a9643633566b731268408fc8ce38131639eced6887540",
+    "blob": "b926843c192aa175dd25404f005a55ddb46ac874",
+    "lines": 290
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeReferenceGaugePositivePrincipalJetsCandidateManifest.json",
+    "sha256": "91e4b1675467cc69ed1770b53e382c3d222d91b56d43fa48a06d251a766b15e7",
+    "blob": "7a62aded11e71ca9e4359d0f6d52f35094ac3acb",
+    "lines": 116
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/WholeReferenceGaugePositivePrincipalJetsIndependentReview.json",
+      "sha256": "077839286d30a91d349623f038bfad27a40c70ddb06b1979d405012f3deaf5b4",
+      "blob": "545837960cde9f89c6897f4e9c0651b7d215d8f7",
+      "lines": 127
+    }
+  ],
+  "selected_fixed_material_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/FixedPositiveReferencePrincipalMaterialJetsReviewedManifest.json",
+    "sha256": "ce106bcb05cdd1c9e058e9a565f0fead5f7e1a7f2a9a6f5c83bd75abc157e5cf",
+    "blob": "2e42a98346c62bc7a7f7e995199a718539ce92a7",
+    "lines": 33
+  },
+  "source_unchanged": true,
+  "compiled": false,
+  "metadata_note": "The original candidate listed fixed163 as pending; its exact unchanged source is now explicitly selected through the complete independent peer and owner. The historical candidate remains unchanged.",
+  "scope_limits": [
+    "Same normalized T/C0/cell/Y/H/chi used for actual V and its estimates. Only numerical bounds are chosen.",
+    "Raw optical, host and same-retained inputs to the actual family producer remain explicit obligations.",
+    "No compiler/elaborator, CI query/download or active src/index/ref/CP action."
+  ],
+  "created_at": "2026-11-12T16:51:28.125550+00:00"
+}
