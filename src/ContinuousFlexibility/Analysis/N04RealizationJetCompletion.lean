@@ -2,6 +2,7 @@ import ContinuousFlexibility.Analysis.N04RealizationAtomJets
 import ContinuousFlexibility.Analysis.N04RealizationPrimitiveNormalization
 import ContinuousFlexibility.Analysis.CanonicalCoordinateCompletion
 import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
+import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # Completing the quantitative coordinate clause from its primitive jets
@@ -38,14 +39,7 @@ private theorem n04Realization_dividedComponent_unit_identity
         (if i = 0 then .dividedA else if i = 1 then .dividedB else .dividedC))
       unitStrip := by
   intro p _
-  by_cases h0 : i = 0
-  · simp only [Function.comp_apply, canonicalCoefficientComponent, h0, ite_true,
-      atom, hm, ite_true]
-  · by_cases h1 : i = 1
-    · simp only [Function.comp_apply, canonicalCoefficientComponent, h0, h1,
-        ite_false, ite_true, atom, hm, ite_true]
-    · simp only [Function.comp_apply, canonicalCoefficientComponent, h0, h1,
-        ite_false, atom, hm, ite_true]
+  fin_cases i <;> simp [Function.comp_apply, canonicalCoefficientComponent, atom, hm]
 
 private theorem n04Realization_sectorJetBound_fixed_order
     (hfloor : ∀ m, 1 ≤ T.E0 (T.sample (K.cell m)))
@@ -73,15 +67,15 @@ private theorem n04Realization_sectorJetBound_fixed_order
         (canonicalCoefficientComponent v (K.dividedDifference z m))
         (n04Realization_dividedComponent_unit_identity z m hm v) i j hij p hp
     have ha : |mixedDerivative i j (K.dividedDifference z m).a p| ≤ B * E ^ B * rho := by
-      simpa only [canonicalCoefficientComponent, ↓reduceIte] using hdiv 0
+      simpa [canonicalCoefficientComponent] using hdiv 0
     have hb' : |mixedDerivative i j (K.dividedDifference z m).b p| ≤ B * E ^ B * rho := by
-      simpa only [canonicalCoefficientComponent, ↓reduceIte] using hdiv 1
+      simpa [canonicalCoefficientComponent] using hdiv 1
     have hc : |mixedDerivative i j (K.dividedDifference z m).c p| ≤ B * E ^ B * rho := by
-      simpa only [canonicalCoefficientComponent, ↓reduceIte] using hdiv 2
+      simpa [canonicalCoefficientComponent] using hdiv 2
     simp only [hm, ite_true]
     apply le_trans _ hfinal
     linarith only [hpotential, ha, hb', hc]
-  · simp only [hm, ite_false, add_zero]
+  · simp only [hm, Bool.false_eq_true, ite_false, add_zero]
     apply le_trans _ hfinal
     linarith only [hpotential, hweight]
 

@@ -112,7 +112,8 @@ theorem n04WholeCanonicalAtlasData_actual_cutOperator_restricted
     { smooth_coefficients := fun z hz => hfield.smooth_coefficients z (hsubState hz)
       periodic_coefficients := fun z hz => hfield.periodic_coefficients z (hsubState hz)
       positive_a := fun z hz => hfield.positive_a z (hsubState hz)
-      negative_discriminant := fun z hz => hfield.negative_discriminant z (hsubState hz) }
+      negative_discriminant := fun z hz => hfield.negative_discriminant z (hsubState hz)
+      reference_flow := hfield.reference_flow }
   have hcut := n04bActualTypedAtlas_cutGeometry hT hS hN hfield e₀
   refine ⟨?_, ?_, ?_, ?_, ?_⟩
   · exact n04WholeCanonicalAtlasData_cutGeometry C L K e cell F G Q N

@@ -390,7 +390,8 @@ theorem n04b_exists_common_root_endpoint_fields
     { smooth_coefficients := fun z hz => hfield.smooth_coefficients z (hsub hz)
       periodic_coefficients := fun z hz => hfield.periodic_coefficients z (hsub hz)
       positive_a := fun z hz => hfield.positive_a z (hsub hz)
-      negative_discriminant := fun z hz => hfield.negative_discriminant z (hsub hz) }
+      negative_discriminant := fun z hz => hfield.negative_discriminant z (hsub hz)
+      reference_flow := hfield.reference_flow }
   obtain ⟨low, outLoss, hout, hbound⟩ :=
     n03_controlledRoot_endpoint_physicalJets hS hT hN' hfield' hA' hB' hflow flowLoss
   refine ⟨max rootBase low, outLoss, min η (1 / 2 : ℝ),
