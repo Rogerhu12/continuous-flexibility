@@ -19,6 +19,10 @@ local instance n01EndpointOneHighStateSMul (S : PhysicalSpacesData) :
 open Set ContinuousFlexibility.Analysis
 open scoped BigOperators
 
+private theorem real_mul_four_reassociate (K N a b : ℝ) :
+    K * (N * a * b) = (K * N) * a * b := by
+  simp only [mul_assoc]
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -36,10 +40,14 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform
         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) ≤
         K * oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
           B (s + L) z v := by
-  obtain ⟨B, L, hB, hbound⟩ :=
-    hN.endpointFlowScalarJets_positive_circleNorm_local_growth_uniform_radius hS hT
+  let data := hN.endpointFlowScalarJets_positive_circleNorm_local_growth_uniform_radius hS hT
+  let B : ℕ := data.choose
+  let L : ℕ := data.choose_spec.choose
+  have hB : base ≤ B := data.choose_spec.choose_spec.1
   refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
-  obtain ⟨K, hK, hk⟩ := hbound n R hR s hs
+  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
+  let K : ℝ := orderData.choose
+  have hK : 0 ≤ K := orderData.choose_spec.1
   refine ⟨K, hK, ?_⟩
   intro rsel hrsel z hz hzb v
   let p := pairGrading (sectorGrading S) realGrading
@@ -51,22 +59,25 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform
   let F := coordinate.toLinearMap.compMultilinearMap M
   have hnorm (w : Fin (n + 1) → (StateDirections S × ℝ)) :
       ‖F w‖ = circleNorm T (3 / 4 : ℝ) s (A w) := by
-    change ‖(M w).val s‖ = _
-    rw [(hS.2.1 (3 / 4 : ℝ)).2.2.2.2.2.2.2, liftCircleMultilinear_decode]
+    have hlevel : ‖(M w).val s‖ =
+        circleNorm T (3 / 4 : ℝ) s ((S.circle (3 / 4 : ℝ)).decode (M w)) :=
+      (hS.2.1 (3 / 4 : ℝ)).2.2.2.2.2.2.2 (M w) s
+    have hdecode : (S.circle (3 / 4 : ℝ)).decode (M w) = A w :=
+      liftCircleMultilinear_decode (hS.2.1 (3 / 4 : ℝ)) A
+        (hN.endpointFlowScalarJets_positive_circleMember hS hT rsel hrsel n z hz) w
+    exact (show ‖F w‖ = ‖(M w).val s‖ from rfl).trans
+      (hlevel.trans (congrArg (circleNorm T (3 / 4 : ℝ) s) hdecode))
   have hunit : ∀ w : Fin (n + 1) → (StateDirections S × ℝ),
       (∀ i, p B (w i) < 1) →
       (normSeminorm ℝ ((S.circle (3 / 4 : ℝ)).level s)) (F w) ≤
         K * ((1 + p (s + L) z) + ∑ i, p (s + L) (w i)) := by
     intro w hw
-    change ‖F w‖ ≤ _
-    rw [hnorm]
-    exact hk rsel hrsel z hz hzb w (fun i => (hw i).le)
+    exact (hnorm w).trans_le
+      (orderData.choose_spec.2 rsel hrsel z hz hzb w (fun i => (hw i).le))
   have h := multilinearMap_bound_of_unitBall F
     (normSeminorm ℝ ((S.circle (3 / 4 : ℝ)).level s))
     (p B) (p (s + L)) hK hunit v
-  change ‖F v‖ ≤ _ at h
-  rw [hnorm] at h
-  simpa only [multilinearTameSize, oneHighVariationWeight, p] using h
+  exact (hnorm v).symm.trans_le h
 
 theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_oneHigh
     (hN : N01Properties D T S C base loss ε)
@@ -81,10 +92,13 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_oneHigh
         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) ≤
         K * oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
           B (s + L) z v := by
-  obtain ⟨B, L, hB, hbound⟩ := hN.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform_radius hS hT
+  let data := hN.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform_radius hS hT
+  let B : ℕ := data.choose
+  let L : ℕ := data.choose_spec.choose
+  have hB : base ≤ B := data.choose_spec.choose_spec.1
   refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
-  obtain ⟨K, hK, hk⟩ := hbound n R hR s hs
-  exact ⟨K, hK, hk rsel hrsel⟩
+  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
+  exact ⟨orderData.choose, orderData.choose_spec.1, orderData.choose_spec.2 rsel hrsel⟩
 
 /-- Product estimates for genuine continuity on a bounded low-order
 box. The sharper one-high theorem remains available for tame bounds. -/
@@ -101,11 +115,15 @@ theorem N01Properties.endpointFlowScalarJets_positive_norm_bounds_on_box
         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) ≤
         K * (1 + pairGrading (sectorGrading S) realGrading j z) *
           ∏ i, pairGrading (sectorGrading S) realGrading j (v i) := by
-  obtain ⟨B, L, hB, hbound⟩ :=
-    hN.endpointFlowScalarJets_positive_circleNorm_oneHigh hS hT rsel hrsel
+  let data := hN.endpointFlowScalarJets_positive_circleNorm_oneHigh hS hT rsel hrsel
+  let B : ℕ := data.choose
+  let L : ℕ := data.choose_spec.choose
+  have hB : base ≤ B := data.choose_spec.choose_spec.1
   refine ⟨B, hB, fun R hR n s => ?_⟩
   let t : ℕ := max s B
-  obtain ⟨K, hK, hk⟩ := hbound n R hR t (le_max_right _ _)
+  let orderData := data.choose_spec.choose_spec.2 n R hR t (le_max_right _ _)
+  let K : ℝ := orderData.choose
+  have hK : 0 ≤ K := orderData.choose_spec.1
   let p := pairGrading (sectorGrading S) realGrading
   have hp : Monotone p := sectorPairGrading_monotone S
   refine ⟨t + L, K * (((n + 1 : ℕ) : ℝ) + 1),
@@ -117,9 +135,10 @@ theorem N01Properties.endpointFlowScalarJets_positive_norm_bounds_on_box
     _ ≤ circleNorm T (3 / 4 : ℝ) t (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) :=
       circleNorm_monotone_of_member
         (hN.endpointFlowScalarJets_positive_circleMember hS hT rsel hrsel n z hz v) (le_max_left _ _)
-    _ ≤ K * oneHighVariationWeight p B (t + L) z v := hk z hz hzb v
+    _ ≤ K * oneHighVariationWeight p B (t + L) z v := orderData.choose_spec.2 z hz hzb v
     _ ≤ K * ((((n + 1 : ℕ) : ℝ) + 1) * (1 + p (t + L) z) * ∏ i, p (t + L) (v i)) :=
       mul_le_mul_of_nonneg_left hW hK
-    _ = _ := by dsimp only [p]; ring
+    _ = _ := real_mul_four_reassociate K (((n + 1 : ℕ) : ℝ) + 1)
+      (1 + p (t + L) z) (∏ i, p (t + L) (v i))
 
 end ContinuousFlexibility.Statements
