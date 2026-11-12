@@ -71,8 +71,8 @@ theorem n05_canonicalNormalizedSingleJet_reference_bound :
   let lam := n05CanonicalAuxiliaryScalar D S C K (Pi.single m (v.val m 0))
   let W := radialE (D.cellIndex (K.cell m)) ^ (As + Ad) *
     Real.exp (2 * σ * radialS (D.cellIndex (K.cell m))) * ‖v.val m‖ ^ 2
-  have hW : 0 ≤ W := by dsimp only [W]; positivity
   have hEpos : 0 < radialE (D.cellIndex (K.cell m)) := Real.exp_pos _
+  have hW : 0 ≤ W := by dsimp only [W]; positivity
   have hE : 1 ≤ radialE (D.cellIndex (K.cell m)) :=
     Real.one_le_exp (radialQ_nonneg _)
   have hrow (a b : ℝ) (ha : 0 ≤ a) (hb : b ≤ As + Ad) (i : Fin (s + 1)) :

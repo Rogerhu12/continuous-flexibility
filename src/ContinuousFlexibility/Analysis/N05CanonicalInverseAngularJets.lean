@@ -128,6 +128,7 @@ theorem n05CanonicalGlobalInverse_angularJet_endpoint_piece_bound :
     (n05CanonicalAngularJetSequence S K (n05CanonicalGlobalInverse D S C K G F).1 j k)
     hc hsout (hrep k)
   rw [he] at hp
+  have hEk : 0 < radialE (D.cellIndex (K.cell k)) := Real.exp_pos _
   calc
     _ ≤ Cp * radialE (D.cellIndex (K.cell k)) ^ A * outputNormSquare D γ M1 0 (d, 0) := hp
     _ ≤ Cp * radialE (D.cellIndex (K.cell k)) ^ A * (Cj *
