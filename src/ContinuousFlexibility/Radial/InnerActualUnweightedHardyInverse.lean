@@ -81,7 +81,7 @@ theorem exists_unweighted_inverse_of_local_bounds_hardy (hw : ContDiff ℝ ∞ D
       (innerInterfaceInverseSqrt A.referenceMatrix)‖ ≤ Real.sqrt cost := by
     have h := (A.weighted_poisson_norm_le_ambient hw (fun _ => 1) measurable_const 1
       (by simp) (fun _ => 1)).trans hPambient
-    simpa only [inv_one, innerSupportedWeightMultiplier_one, innerBorderFieldMap_weight_one,
+    simpa only [inv_one, innerSupportedWeightMultiplier_one_unit, innerBorderFieldMap_weight_one,
       innerBoundaryDiagonal_one, ContinuousLinearMap.id_comp, ContinuousLinearMap.comp_id]
       using h
   have hD : ‖A.dirichlet hw‖ ≤ d := by
@@ -91,7 +91,7 @@ theorem exists_unweighted_inverse_of_local_bounds_hardy (hw : ContDiff ℝ ∞ D
       (fun _ => zero_le_one) (fun _ => zero_le_one) (fun _ => zero_lt_one)
       (by norm_num) (by norm_num) (by simp) (by simp) hd
       (by simpa only [one_pow, one_mul] using hdirichlet)
-    simpa only [innerRadialSupportedMultiplier, innerSupportedWeightMultiplier_one,
+    simpa only [innerRadialSupportedMultiplier, innerSupportedWeightMultiplier_one_unit,
       ContinuousLinearMap.id_comp, ContinuousLinearMap.comp_id] using h
   have hself : IsSelfAdjoint (ContinuousLinearEquiv.refl ℝ H : H →L[ℝ] H) := by
     apply ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mpr
