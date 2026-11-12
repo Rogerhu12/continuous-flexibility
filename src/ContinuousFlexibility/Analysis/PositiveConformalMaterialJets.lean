@@ -160,15 +160,20 @@ theorem positiveConformalInputs_fixed_loss_bound
     have hM : 0 ≤ A n * (1 + p (n + inputLoss) z) :=
       mul_nonneg (zero_le_one.trans (hA n)) (add_nonneg zero_le_one (apply_nonneg _ _))
     have hn := norm_iteratedFDeriv_coefficientValues_le hU hC hq n hM (hraw n)
-    simpa only [Real.one_rpow, mul_one, mul_assoc] using hn.trans
-      (by simpa only [mul_assoc] using mul_le_mul_of_nonneg_right (hAR n)
-        (add_nonneg zero_le_one (apply_nonneg (p (n + inputLoss)) z)))
+    have hstep : (2 : ℝ) ^ n * (A n * (1 + p (n + inputLoss) z)) ≤
+        R n * (1 + p (n + inputLoss) z) := by
+      simpa only [mul_assoc] using
+        (mul_le_mul_of_nonneg_right (hAR n)
+          (add_nonneg zero_le_one (apply_nonneg (p (n + inputLoss)) z)))
+    simpa only [Real.one_rpow, mul_one] using hn.trans hstep
   have hnorm (i : Fin 4) (n : ℕ) :
       ‖iteratedFDeriv ℝ n (positiveConformalInputField i C) q‖ ≤
         B n * (1 + p (n + loss) z) := by
     have he : positiveConformalInputField i C = positiveConformalValue i ∘ v := by
       funext x
-      rfl
+      simp only [Function.comp_apply]
+      unfold positiveConformalInputField positiveConformalValue
+      split_ifs <;> rfl
     rw [he]
     cases n with
     | zero =>
@@ -199,7 +204,9 @@ theorem positiveConformalInputs_fixed_loss_bound
     intro x hx
     have he : positiveConformalInputField i C = positiveConformalValue i ∘ v := by
       funext y
-      rfl
+      simp only [Function.comp_apply]
+      unfold positiveConformalInputField positiveConformalValue
+      split_ifs <;> rfl
     rw [he]
     exact (ContDiffAt.comp (f := v) (g := positiveConformalValue i) x
       (positiveConformalValue_contDiffAt i hx.2)

@@ -167,9 +167,12 @@ theorem negativeCharacteristic_fixed_loss_bound
     have hM : 0 ≤ A n * (1 + p (n + inputLoss) z) :=
       mul_nonneg (zero_le_one.trans (hA n)) (add_nonneg zero_le_one (apply_nonneg _ _))
     have hn := norm_iteratedFDeriv_coefficientValues_le hU hC hq n hM (hraw n)
-    simpa only [Real.one_rpow, mul_one, mul_assoc] using hn.trans
-      (by simpa only [mul_assoc] using mul_le_mul_of_nonneg_right (hAR n)
-        (add_nonneg zero_le_one (apply_nonneg (p (n + inputLoss)) z)))
+    have hstep : (2 : ℝ) ^ n * (A n * (1 + p (n + inputLoss) z)) ≤
+        R n * (1 + p (n + inputLoss) z) := by
+      simpa only [mul_assoc] using
+        (mul_le_mul_of_nonneg_right (hAR n)
+          (add_nonneg zero_le_one (apply_nonneg (p (n + inputLoss)) z)))
+    simpa only [Real.one_rpow, mul_one] using hn.trans hstep
   have he (plus : Bool) :
       negativeCharacteristicField plus C = negativeCharacteristicValue plus ∘ v := by
     cases plus <;> rfl

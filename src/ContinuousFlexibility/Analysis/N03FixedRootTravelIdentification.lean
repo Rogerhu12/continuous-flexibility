@@ -35,9 +35,8 @@ private theorem rootTravelAndAngle_eq_of_reflected_footpoint_values
         p.1 ^ (3 / 2 : ℝ) * rootOddCoefficient G p ∧
       (V + U) / 2 = rootEven G p := by
   have ht := congrArg Prod.fst (characteristicTravelChart_rootCharacteristicCoordinate G hp)
-  change (G (p.1, -(p.1 ^ (3 / 2 : ℝ)), p.2) -
-    G (p.1, p.1 ^ (3 / 2 : ℝ), p.2)) / 2 =
-      p.1 ^ (3 / 2 : ℝ) * rootOddCoefficient G p at ht
+  simp only [characteristicTravelChart, rootCharacteristicCoordinate,
+    one_mul, neg_one_mul] at ht
   have he : (G (p.1, p.1 ^ (3 / 2 : ℝ), p.2) +
       G (p.1, -(p.1 ^ (3 / 2 : ℝ)), p.2)) / 2 = rootEven G p := rfl
   cases rightEnd with
@@ -120,9 +119,13 @@ theorem n03_rootTravel_eq_controlledRootTravel_on_band
   have hodd : stateLeftChart S z.1 m (-φ) = -stateLeftChart S z.1 m φ :=
     (hN.2.2.2.2.2.2.2.1 z hz hs m φ).2.2.2
   have hU : U = -stateLeftChart S z.1 m φ := by
-    simpa only [neg_neg, hφ, hodd] using
-      (canonicalGluedAiryIntegral_on_n03Flows
-        hS hT hN hE hL hA hB hz hs m hphysical (-φ)).2
+    have hflow : canonicalGluedAiryIntegral S K z m (-1)
+        (p.1, -L.minusFlow z m p.1 φ) = -stateLeftChart S z.1 m φ := by
+      simpa only [neg_neg, hodd] using
+        (canonicalGluedAiryIntegral_on_n03Flows
+          hS hT hN hE hL hA hB hz hs m hphysical (-φ)).2
+    rw [hφ, neg_neg] at hflow
+    exact hflow
   have hσ : -σ = if rightEnd then (1 : ℝ) else -1 := by
     cases rightEnd <;> norm_num [σ, n01ComponentRootOrientation]
   have hV' : G (x, (if rightEnd then (1 : ℝ) else -1) * x ^ (3 / 2 : ℝ), θ) =

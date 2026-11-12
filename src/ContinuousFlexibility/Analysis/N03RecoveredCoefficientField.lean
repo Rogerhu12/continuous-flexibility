@@ -125,8 +125,8 @@ theorem n03ProbeRecoveredCoefficients_eq_closed
       (subset_closure hq)).2.2.continuousAt.continuousWithinAt)
     (fun q hq => n03CoefficientProbe_closed_identities hS hT hN01 hN03 hA hB hz hs m
       hχ hone hηr hηc hηrc hηcc side (subset_closure hq) (hsub hq))
-  have hAp := n03ProbeRecoveredCoefficients_contDiffAt hS hT hN01 hz hs hχ
-    ηr ηc ηrc ηcc hpAnn
+  have hAp := n03ProbeRecoveredCoefficients_contDiffAt (R := R) (L := L)
+    hS hT hN01 hz hs hχ ηr ηc ηrc ηcc hpAnn
   have hBp := negativeCanonicalClosedCoefficients_contDiffAt hA hz hs i hp
   refine ⟨?_, ?_, ?_⟩
   · exact (negativeCanonicalClosedCoefficients_radial_eq_original_on_closure
@@ -187,8 +187,8 @@ theorem n03_storedCoefficients_contDiffAt_negativeComponent
   have hbounds := hN01.2.2.2.1.1 m
   have hpAnn : p ∈ annularOpen D :=
     ⟨⟨hbounds.1.trans hp.1.1, hp.1.2.trans hbounds.2.2⟩, mem_univ _⟩
-  have hregular := n03ProbeRecoveredCoefficients_contDiffAt hS hT hN01 hz hs hχ
-    ηr ηc ηrc ηcc hpAnn
+  have hregular := n03ProbeRecoveredCoefficients_contDiffAt (R := R) (L := L)
+    hS hT hN01 hz hs hχ ηr ηc ηrc ηcc hpAnn
   have he : ∀ᶠ q in 𝓝 p, (L.coefficients z).a q = A.a q ∧
       (L.coefficients z).b q = A.b q ∧ (L.coefficients z).c q = A.c q := by
     filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds hp] with q hq
