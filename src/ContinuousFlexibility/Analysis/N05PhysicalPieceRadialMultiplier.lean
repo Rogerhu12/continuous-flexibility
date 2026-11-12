@@ -28,8 +28,9 @@ theorem n05PhysicalPieceRadialMultiplier_measurable
   intro m
   simpa only [piecewise_eq_indicator] using
     (hb m).measurable_piecewise
-      (show ContinuousOn (fun _ : ℝ => (0 : ℝ))
-        (Ioo (K.physicalLeft m) (K.physicalRight m))ᶜ from continuousOn_const)
+      (show ContinuousOn (0 : ℝ → ℝ)
+        (Ioo (K.physicalLeft m) (K.physicalRight m))ᶜ from
+          continuous_zero.continuousOn)
       measurableSet_Ioo
 
 theorem n05PhysicalPieceRadialMultiplier_eq

@@ -154,6 +154,5 @@ theorem n05CanonicalRadialTestTransport_radial (m : ℕ) {φ : PolarPoint → �
       (|J p| / J p * (φ (Φ p) / H p))
   dsimp only [σ]
   field_simp [hJ0, hH0]
-  ring
 
 end ContinuousFlexibility.Statements

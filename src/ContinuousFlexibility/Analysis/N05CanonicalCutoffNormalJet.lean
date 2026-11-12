@@ -112,10 +112,19 @@ theorem n05_weakNormalDerivative_sub_leftCutoff {D : ReferenceData}
     simpa only [mul_neg] using hcut
   have huCut : MemLp (fun p : PolarPoint => u p - a * χ p.1) 2
       (radialPhysicalMeasure D) := by
-    simpa only [Pi.sub_apply] using hu.sub (hc.const_mul a)
+    have heq : (u - fun p => a * χ p.1) = (fun p => u p - a * χ p.1) := by
+      funext p
+      rw [Pi.sub_apply]
+    rw [← heq]
+    exact hu.sub (hc.const_mul a)
   have hurCut : MemLp (fun p : PolarPoint => ur p - a * deriv χ p.1) 2
       (radialPhysicalMeasure D) := by
-    simpa only [Pi.sub_apply] using hur.sub (hd.const_mul a)
+    have heq : (ur - fun p => a * deriv χ p.1) =
+        (fun p => ur p - a * deriv χ p.1) := by
+      funext p
+      rw [Pi.sub_apply]
+    rw [← heq]
+    exact hur.sub (hd.const_mul a)
   rw [r11b_integral_angularMean_mul_eq hab.le huCut hφrLp,
     r11b_integral_angularMean_mul_eq hab.le hurCut hφLp]
   simp_rw [sub_mul, mul_assoc]
