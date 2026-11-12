@@ -47,7 +47,9 @@ theorem n04Coordinates_unitAtom_absolute_iteratedFDeriv_envelope
             (2 : ℝ) ^ N * A * T.E0 (T.sample (K.cell m)) ^ B *
               (1 + CanonicalGeometry.parameterGrading S (N + loss) z) := by
   obtain ⟨loss, hbound⟩ :=
-    n04Coordinates_unitAtom_absolute_envelope hD hT hfloor href hcur
+    n04Coordinates_unitAtom_absolute_envelope
+      (D := D) (T := T) (S := S) (C := C) (L := L) (K := K)
+      (base := base) (ε := ε) hD hT hfloor href hcur
   refine ⟨loss, fun N => ?_⟩
   obtain ⟨A, B, hA, hB, hb⟩ := hbound N
   refine ⟨A, B, hA, hB, ?_⟩
