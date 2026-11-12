@@ -165,7 +165,10 @@ theorem n06_primitivePrincipal_difference_reflection
     (K.coefficients (liftSectorParameter S C z) m).c (p.1, Real.pi - p.2) -
       (K.coefficients (C.referenceState, 0) m).c (p.1, Real.pi - p.2) = _
   rw [hs.1, hs.2.1, hs.2.2, hs₀.1, hs₀.2.1, hs₀.2.2]
-  exact ⟨rfl, by ring, rfl⟩
+  refine ⟨rfl, ?_, rfl⟩
+  change _ = -((K.coefficients (liftSectorParameter S C z) m).b p -
+    (K.coefficients (C.referenceState, 0) m).b p)
+  ring
 
 theorem n06_primitiveReferenceInverse_reflection
     (h05 : N05Properties D T S C K V b B)

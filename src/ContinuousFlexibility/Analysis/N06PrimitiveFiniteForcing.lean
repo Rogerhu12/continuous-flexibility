@@ -194,8 +194,10 @@ theorem n06_positive_forcing_eq_finite_C1
         apply integral_congr_ae
         filter_upwards [hG] with p hp
         rw [hp]
-  exact hF₀.symm.trans ((Eventually.of_forall fun p =>
-    congrArg (fun v : CanonicalL2 S K m => v p) he).trans hG)
+  have he_ae : (F₀ : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m]
+      (G : PolarPoint → ℝ) :=
+    Eventually.of_forall fun p => congrArg (fun v : CanonicalL2 S K m => v p) he
+  exact hF₀.symm.trans (he_ae.trans hG)
 
 variable {Vol : VolumeModelData S K} {b : ℕ} {B : CanonicalDomainData S K Vol b}
 

@@ -206,14 +206,14 @@ private theorem intervalCutoff_operator_tendsto
     apply hJ.of_le_mul ((n06_divergenceOperator_measurable L _).aestronglyMeasurable.sub
       (n06CanonicalIntervalTestCut_memLp hL n).aestronglyMeasurable)
     filter_upwards [herror n] with p hp
-    simpa only [Real.norm_eq_abs, abs_of_nonneg (hJpos p)] using hp
+    simpa only [Pi.sub_apply, Real.norm_eq_abs, abs_of_nonneg (hJpos p)] using hp
   have hLn (n : ℕ) : MemLp (divergenceOperator L (n06CanonicalIntervalTestCut K m n φ))
       2 (canonicalMeasure S K m) := by
     have hsum := (n06CanonicalIntervalTestCut_memLp hL n).add (hE n)
     have he : n06CanonicalIntervalTestCut K m n (divergenceOperator L φ) + E n =
         divergenceOperator L (n06CanonicalIntervalTestCut K m n φ) := by
       funext p
-      change _ + (_ - _) = _
+      simp only [Pi.add_apply, E]
       ring
     rw [he] at hsum
     exact hsum
