@@ -30,7 +30,7 @@ def n04Realization_jointMixedTower
   induction a with
   | zero =>
       induction b with
-      | zero => exact J.congrOn (fun _ _ => by simp only [spaces_mixedDerivative_zero])
+      | zero => exact J.congrOn (fun _ _ => by simp only [mixedDerivative, iteratedDeriv_zero])
       | succ b ih =>
           exact (ih.spatialAngularTower hV hc).congrOn (fun z hz =>
             angularPartial_mixedDerivative_of_contDiffOn hV
@@ -51,7 +51,7 @@ theorem n04Realization_jointMixedTower_apply
       induction b generalizing n with
       | zero =>
           change J.D n (x, q) v = _
-          simp only [spaces_mixedDerivative_zero]
+          simp only [mixedDerivative, iteratedDeriv_zero]
       | succ b ih =>
           change ((n04Realization_jointMixedTower J hV hc 0 b).fixedLast
             (0, (0, 1))).D n (x, q) v = _
