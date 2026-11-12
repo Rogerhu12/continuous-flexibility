@@ -82,10 +82,7 @@ theorem N01Properties.endpointFlowCircle_zero
 private theorem convex_seminorm_strict_sublevel
     {E : Type*} [AddCommGroup E] [Module ℝ E]
     (p : Seminorm ℝ E) (R : ℝ) : Convex ℝ {x : E | p x < R} := by
-  intro x hx y hy a b ha hb hab
-  have hx' : x ∈ p.ball 0 R := by simpa only [Seminorm.mem_ball_zero] using hx
-  have hy' : y ∈ p.ball 0 R := by simpa only [Seminorm.mem_ball_zero] using hy
-  simpa only [Seminorm.mem_ball_zero] using p.convex_ball 0 R hx' hy' ha hb hab
+  simpa only [Seminorm.ball_zero_eq] using (p.convex_ball (0 : E) R)
 
 theorem N01Properties.exists_endpointFlowCircle_smoothDirections
     (hN : N01Properties D T S C base loss ε)
@@ -110,7 +107,8 @@ theorem N01Properties.exists_endpointFlowCircle_smoothDirections
   have hsub (i : U) : V i ⊆ U := inter_subset_left
   have hcover : ∀ x ∈ U, ∃ i : U, x ∈ V i := by
     intro x hx
-    exact ⟨⟨x, hx⟩, hx, lt_add_of_pos_right _ zero_lt_one⟩
+    refine ⟨⟨x, hx⟩, hx, ?_⟩
+    exact Set.mem_ofPred.mpr (lt_add_of_pos_right (p B x) zero_lt_one)
   have hs (m : ℕ) := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
   have hM (m : ℕ) : 0 ≤ T.M (T.sample m) := zero_le_one.trans (hT.2.1 _ (hs m)).2.2.2
   have hH (m : ℕ) : 0 ≤ T.H (T.sample m) := (hT.2.1 _ (hs m)).2.1.le
