@@ -26,6 +26,56 @@ local instance n01ReturnDisplacementCircleStateSMul (S : PhysicalSpacesData) :
 open Set Filter MeasureTheory ContinuousFlexibility.Analysis
 open scoped Topology ContDiff
 
+private theorem returnCircle_affine_reassemble {value angle travel displacement : ℝ}
+    (h : displacement = value - (angle - travel)) :
+    angle + -travel + displacement = value := by
+  linarith only [h]
+
+private theorem returnCircle_sum_reassemble {a b forward value angle travel : ℝ}
+    (ha : a = forward - (angle - travel)) (hb : forward + b = value) :
+    a + b = value - (angle - travel) := by
+  linarith only [ha, hb]
+
+private theorem returnCircle_decode_add_point
+    {V : Type*} [AddCommGroup V] [Module ℝ V]
+    (decode : V →ₗ[ℝ] (ℕ → ℝ → ℝ)) (u v : V) (m : ℕ) (θ : ℝ) :
+    decode (u + v) m θ = decode u m θ + decode v m θ :=
+  congrFun (congrFun (decode.map_add u v) m) θ
+
+private theorem returnCircle_integral_dslope
+    (G : ℝ → ℝ) (hG : ContDiff ℝ 1 G) (θ d : ℝ)
+    (f : ℝ → ℝ) (hf : Continuous f)
+    (hderiv : ∀ t, f t = deriv G (θ + t * d) - 1) :
+    (∫ t in (0 : ℝ)..1, f t) = dslope G θ (θ + d) - 1 := by
+  have hi : (∫ t in (0 : ℝ)..1, deriv G (θ + t * d)) =
+      1 + ∫ t in (0 : ℝ)..1, f t := by
+    calc
+      _ = ∫ t in (0 : ℝ)..1, (1 + f t) := by
+        apply intervalIntegral.integral_congr
+        intro t ht
+        have hd := hderiv t
+        linarith only [hd]
+      _ = _ := by
+        rw [intervalIntegral.integral_add
+          ((continuous_const : Continuous (fun _ : ℝ => (1 : ℝ))).intervalIntegrable 0 1)
+          (hf.intervalIntegrable 0 1), intervalIntegral.integral_const]
+        simp only [sub_zero, one_smul]
+  rw [returnCorrection_dslope_integral hG θ d, hi]
+  ring
+
+private theorem returnCircle_average_substitute
+    (g : ℝ → ℝ) (θ r d : ℝ) (hr : r = d) :
+    (∫ t in (0 : ℝ)..1, g (θ + 0 + t * r)) =
+      ∫ t in (0 : ℝ)..1, g (θ + t * d) := by
+  rw [hr]
+  simp only [add_zero]
+
+private theorem returnCircle_product_reassemble {a slope q : ℝ}
+    (ha : a = slope - 1) :
+    q + a * q = slope * q := by
+  rw [ha]
+  ring
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -48,19 +98,27 @@ theorem N01Properties.rightReturnChartCircle_decode
     (S.circle (3 / 4 : ℝ)).decode (hN.rightReturnChartCircle hS hT z) m θ =
       rightChartCandidate S C (liftSectorParameter S C z) m
         (C.minusFlow (liftSectorParameter S C z) m (C.right m) θ) - (θ - C.travel m) := by
+  let e : CircleSpace S := hN.returnFlowCircle hS hT z
+  let u : CircleSpace S :=
+    circleOddLinear (hS.2.1 (3 / 4 : ℝ)) (hN.sectorReturnTransportCircle hS hT z)
+  let v : CircleSpace S := circleShiftedChartComposeLinear
+    (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num) (fun m => -C.travel m) e u
   have ha := hN.returnFlowCircle_decode hS hT z hz m θ
-  have heval : θ + -C.travel m + (S.circle (3 / 4 : ℝ)).decode
-      (hN.returnFlowCircle hS hT z) m θ =
-        C.minusFlow (liftSectorParameter S C z) m (C.right m) θ := by
-    linarith only [ha]
+  have heval : θ + -C.travel m + (S.circle (3 / 4 : ℝ)).decode e m θ =
+      C.minusFlow (liftSectorParameter S C z) m (C.right m) θ :=
+    returnCircle_affine_reassemble ha
   have hk := congrFun (hN.sectorReturnTransportCircle_odd_lift hS hT z hz m)
     (C.minusFlow (liftSectorParameter S C z) m (C.right m) θ)
   simp only [circleAffineLift, add_zero, one_mul] at hk
-  unfold N01Properties.rightReturnChartCircle
-  rw [map_add]
-  simp only [Pi.add_apply]
-  rw [circleShiftedChartComposeLinear_decode, heval]
-  linarith only [ha, hk]
+  have hcomp : (S.circle (3 / 4 : ℝ)).decode v m θ =
+      (S.circle (3 / 4 : ℝ)).decode u m
+        (C.minusFlow (liftSectorParameter S C z) m (C.right m) θ) :=
+    (circleShiftedChartComposeLinear_decode (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1
+      (by norm_num) (fun m => -C.travel m) e u m θ).trans
+        (congrArg ((S.circle (3 / 4 : ℝ)).decode u m) heval)
+  exact (returnCircle_decode_add_point (S.circle (3 / 4 : ℝ)).decode e v m θ).trans
+    ((congrArg (fun a : ℝ => (S.circle (3 / 4 : ℝ)).decode e m θ + a) hcomp).trans
+      (returnCircle_sum_reassemble ha hk))
 
 theorem N01Properties.smoothTameOn_rightReturnChartCircle
     (hN : N01Properties D T S C base loss ε)
@@ -135,7 +193,7 @@ theorem N01Properties.returnCorrectionDslopeCircle_decode
   let G : ℝ → ℝ := fun t => C.minusReturnInverse (liftSectorParameter S C z) m
     (C.rightChartInverse (liftSectorParameter S C z) m t)
   let d : ℝ := returnResidualField S C (liftSectorParameter S C z) m θ
-  let u := circleDerivativeLinear (hS.2.1 (3 / 4 : ℝ))
+  let u : CircleSpace S := circleDerivativeLinear (hS.2.1 (3 / 4 : ℝ))
     (hN.returnTransportInverseCircle hS hT z)
   let f : ℝ → ℝ := fun t => (S.circle (3 / 4 : ℝ)).decode u m (θ + t * d)
   have hG : ContDiff ℝ ∞ G := hN.returnTransportInverse_contDiff hS hT
@@ -143,29 +201,16 @@ theorem N01Properties.returnCorrectionDslopeCircle_decode
     (hN.2.2.1.liftSectorParameter_sector z) m
   have hf : Continuous f := (((hS.2.1 (3 / 4 : ℝ)).2.2.2.1 u).1 m).1.continuous.comp
     (continuous_const.add (continuous_id.mul continuous_const))
-  have hi : (∫ t in (0 : ℝ)..1, deriv G (θ + t * d)) =
-      1 + ∫ t in (0 : ℝ)..1, f t := by
-    calc
-      _ = ∫ t in (0 : ℝ)..1, (1 + f t) := by
-        apply intervalIntegral.integral_congr
-        intro t ht
-        have hd := hN.returnTransportInverseCircle_derivative_decode hS hT z hz m (θ + t * d)
-        change f t = deriv G (θ + t * d) - 1 at hd
-        linarith only [hd]
-      _ = _ := by
-        rw [intervalIntegral.integral_add continuous_const.intervalIntegrable hf.intervalIntegrable,
-          intervalIntegral.integral_const]
-        simp only [sub_zero, one_smul]
-  have hds := returnCorrection_dslope_integral (hG.of_le (by simp)) θ d
+  have hderiv (t : ℝ) : f t = deriv G (θ + t * d) - 1 :=
+    hN.returnTransportInverseCircle_derivative_decode hS hT z hz m (θ + t * d)
   have havg : (S.circle (3 / 4 : ℝ)).decode
-      (hN.returnCorrectionDslopeCircle hS hT z) m θ = ∫ t in (0 : ℝ)..1, f t := by
-    unfold N01Properties.returnCorrectionDslopeCircle
-    rw [circleAverageComposeLinear_decode,
-      hN.sectorReturnResidualCircle_decode hS hT z hz m θ]
-    simp only [add_zero]
-  change _ = dslope G θ (θ + d) - 1
-  rw [havg, hds, hi]
-  ring
+      (hN.returnCorrectionDslopeCircle hS hT z) m θ = ∫ t in (0 : ℝ)..1, f t :=
+    (circleAverageComposeLinear_decode (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1
+      (by norm_num) (fun _ => 0) (hN.sectorReturnResidualCircle hS hT z) u m θ).trans
+        (returnCircle_average_substitute ((S.circle (3 / 4 : ℝ)).decode u m) θ
+          ((S.circle (3 / 4 : ℝ)).decode (hN.sectorReturnResidualCircle hS hT z) m θ) d
+          (hN.sectorReturnResidualCircle_decode hS hT z hz m θ))
+  exact havg.trans (returnCircle_integral_dslope G (hG.of_le (by simp)) θ d f hf hderiv)
 
 def N01Properties.returnCorrectionDisplacementCircleLinear
     (hN : N01Properties D T S C base loss ε)
@@ -184,25 +229,28 @@ theorem N01Properties.returnCorrectionDisplacementCircleLinear_decode
     (S.circle (3 / 4 : ℝ)).decode
         (hN.returnCorrectionDisplacementCircleLinear hS hT z ρ) m θ =
       returnCorrectionDisplacementLinear S C (liftSectorParameter S C z) m θ ρ := by
-  let y := rightChartCandidate S C (liftSectorParameter S C z) m
+  let y : ℝ := rightChartCandidate S C (liftSectorParameter S C z) m
     (C.minusFlow (liftSectorParameter S C z) m (C.right m) θ)
-  have heval : θ + -C.travel m + (S.circle (3 / 4 : ℝ)).decode
-      (hN.rightReturnChartCircle hS hT z) m θ = y := by
-    rw [hN.rightReturnChartCircle_decode hS hT z hz m θ]
-    dsimp only [y]
-    ring
-  unfold N01Properties.returnCorrectionDisplacementCircleLinear
-  rw [LinearMap.comp_apply, LinearMap.add_apply, LinearMap.id_apply,
-    circleShiftedChartComposeLinear_decode, heval, map_add]
-  simp only [Pi.add_apply]
-  rw [circleProductBilinear_decode,
-    hN.returnCorrectionDslopeCircle_decode hS hT z hz m y,
-    returnCorrectionDisplacementLinear_apply]
-  change (S.circle (3 / 4 : ℝ)).decode ρ m y +
-    (dslope _ y (y + returnResidualField S C (liftSectorParameter S C z) m y) - 1) *
-      (S.circle (3 / 4 : ℝ)).decode ρ m y =
-    dslope _ y (y + returnResidualField S C (liftSectorParameter S C z) m y) *
-      (S.circle (3 / 4 : ℝ)).decode ρ m y
-  ring
+  let e : CircleSpace S := hN.rightReturnChartCircle hS hT z
+  let a : CircleSpace S := hN.returnCorrectionDslopeCircle hS hT z
+  let v : CircleSpace S :=
+    circleProductBilinear (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num) a ρ
+  have heval : θ + -C.travel m + (S.circle (3 / 4 : ℝ)).decode e m θ = y :=
+    returnCircle_affine_reassemble (hN.rightReturnChartCircle_decode hS hT z hz m θ)
+  have hshift := (circleShiftedChartComposeLinear_decode
+    (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num)
+    (fun m => -C.travel m) e (ρ + v) m θ).trans
+      (congrArg ((S.circle (3 / 4 : ℝ)).decode (ρ + v) m) heval)
+  have hprod : (S.circle (3 / 4 : ℝ)).decode v m y =
+      (S.circle (3 / 4 : ℝ)).decode a m y * (S.circle (3 / 4 : ℝ)).decode ρ m y :=
+    congrFun (congrFun (circleProductBilinear_decode (hS.2.1 (3 / 4 : ℝ))
+      hT hN.1.1 (by norm_num) a ρ) m) y
+  have hadd := returnCircle_decode_add_point (S.circle (3 / 4 : ℝ)).decode ρ v m y
+  have hds := hN.returnCorrectionDslopeCircle_decode hS hT z hz m y
+  exact hshift.trans (hadd.trans
+    ((congrArg (fun b : ℝ => (S.circle (3 / 4 : ℝ)).decode ρ m y + b) hprod).trans
+      ((returnCircle_product_reassemble
+        (q := (S.circle (3 / 4 : ℝ)).decode ρ m y) hds).trans
+        (returnCorrectionDisplacementLinear_apply S C (liftSectorParameter S C z) m θ ρ).symm)))
 
 end ContinuousFlexibility.Statements

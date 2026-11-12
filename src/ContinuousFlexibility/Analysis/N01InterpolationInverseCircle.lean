@@ -22,6 +22,12 @@ local instance n01InterpolationInverseCircleStateSMul (S : PhysicalSpacesData) :
 
 open Set ContinuousFlexibility.Analysis
 
+private theorem interpolationInverse_jointValue_of_decode {value angle displacement : ℝ}
+    (h : displacement = value - angle) :
+    angle + 0 + displacement = value := by
+  rw [h]
+  ring
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -56,8 +62,11 @@ theorem N01Properties.interpolationSelectorCircle_decode
         (hN.interpolationSelectorCircle hS hT χ hχrange rsel hrsel z) m θ =
       χ m (rsel m) * (returnCorrectionInitialMap S C (liftSectorParameter S C z) m θ - θ) := by
   unfold N01Properties.interpolationSelectorCircle
-  rw [circleComponentContractionLinear_decode,
-    hN.returnCorrectionInitialCircle_decode hS hT z hz m θ]
+  rw [circleComponentContractionLinear_decode]
+  change χ m (rsel m) *
+    (S.circle (3 / 4 : ℝ)).decode (hN.returnCorrectionInitialCircle hS hT z) m θ = _
+  exact congrArg (fun u : ℝ => χ m (rsel m) * u)
+    (hN.returnCorrectionInitialCircle_decode hS hT z hz m θ)
 
 theorem N01Properties.interpolationSelectorCircle_lift
     (hN : N01Properties D T S C base loss ε)
@@ -184,12 +193,15 @@ def N01Properties.interpolationInverse_jointTower
       (fun p : (StateDirections S × ℝ) × ℝ =>
         Function.invFun (returnInterpolation (χ m (rsel m))
           (returnCorrectionInitialMap S C (liftSectorParameter S C p.1) m)) p.2) := by
-  let J := (hN.smoothTameOn_interpolationInverseCircle hS hT χ hχrange rsel hrsel).choose
+  let J : SmoothDirections (sectorNeighborhood S base ε ε)
+      (hN.interpolationInverseCircle hS hT χ hχrange rsel hrsel) :=
+    (hN.smoothTameOn_interpolationInverseCircle hS hT χ hχrange rsel hrsel).choose
   have hH (j : ℕ) : 0 < T.H (T.sample j) :=
     (hT.2.1 _ (materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 j)).2.1
-  apply (circleAffineLiftJointDirections (hS.2.1 (3 / 4 : ℝ)) hH J (fun _ => 0) m).congrOn
+  let K := circleAffineLiftJointDirections (hS.2.1 (3 / 4 : ℝ)) hH J (fun _ => 0) m
+  refine K.congrOn ?_
   intro p hp
-  rw [hN.interpolationInverseCircle_decode hS hT χ hχrange rsel hrsel p.1 hp.1 m p.2]
-  ring
+  exact interpolationInverse_jointValue_of_decode
+    (hN.interpolationInverseCircle_decode hS hT χ hχrange rsel hrsel p.1 hp.1 m p.2)
 
 end ContinuousFlexibility.Statements
