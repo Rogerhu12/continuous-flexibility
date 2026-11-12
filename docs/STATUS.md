@@ -178,6 +178,63 @@ Not yet checked against the readable manuscript: the kernel clause of the radial
 (`R12`). The 62-page version left "endpoint-flat kernel" undefined; the readable version defines it
 as the kernel on the weighted graph domain.
 
+### N04: actual physical pieces and boundary inverses (line/N04b and line/N04Coordinates, 2026-11-11)
+
+The old domain clause in `Statements/Nonlinear.lean` was
+
+```lean
+def physicalPieceOpen (S : PhysicalSpacesData) (K : CanonicalData S) (m : ℕ) : Set PolarPoint :=
+  Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ univ
+```
+
+For every state, the chart and inverse were required to map between this same
+physical rectangle and `canonicalOpen S K m`. The paired halves shared the fixed
+radius `K.physicalRight (K.cutPair m).1 = K.physicalLeft (K.cutPair m).2`.
+The readable manuscript instead splits a negative component at the travel level
+`σ = T/2` (`eq:fixed-strip-coordinates`, `eq:fixed-strip-cut`): its physical
+preimage is an inverse-chart curve, allowed to depend on the state and angle.
+The actual characteristic and return equations do not identify that curve with
+a state-independent physical radius. The old rectangle clause therefore does
+not express the manuscript construction without an additional, unproved
+identification. This records an unusable domain encoding for that construction;
+it does **not** assert a formalized negation of the entire old `N04bStatement`.
+
+The repaired `CanonicalData` has
+`physicalDomain : (AnnularState S × ℝ) → ℕ → Set PolarPoint`, and
+`physicalPieceOpen S K z m = K.physicalDomain z m`. The old rectangle remains
+`referencePhysicalPieceOpen`; the reference state and positive pieces retain
+it. `CanonicalGeometry` requires actual open, periodic, reflection-invariant
+domains, the appropriate sign, and unique coverage outside a planar null set.
+`CanonicalCurrentCutPair` requires the two negative domains to be disjoint and
+cover their component off the common curve
+`θ ↦ K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ)`, with the same curve
+from the right inverse and the correct two root-circle images.
+
+The old boundary clause prescribed smooth chart and height values, nonzero
+Jacobian and positive height on the radial closed rectangle, but specified the
+stored inverse identities only on open sets. The repaired boundary clause uses
+`closure (physicalPieceOpen S K z m)` and `canonicalClosed S K m`, includes
+both closed inverse identities and both closed mapping properties, and requires
+the stored inverse to agree on a full neighborhood with a genuine smooth local
+inverse at every boundary point (`CanonicalBoundaryInverseGerm`). Thus the
+ordinary boundary derivatives in the transmission equation refer to that
+inverse. Normalization retains chart/height equality and also fixes the actual
+domains on the normalization region; source pairing integrates over the actual
+physical piece.
+
+`N04PartA` and `N04PartB` now use the shared `CanonicalGeometry` and
+`CanonicalCutOperatorProperties` predicates. `N04Properties` combines these with
+the unchanged all-order quantitative clause and actual source pairing;
+`Blueprint/Assembly.lean:N04_of_nodes` passes these four parts to the same final
+target. The existential forms of `N04aStatement`, `N04bStatement` and
+`N04cStatement`, and the parent signature
+`N04Coordinates (hN04b : N04bStatement) : N04cStatement`, are unchanged. In
+particular, one neighborhood and one loss still precede every derivative order,
+the material bound is still uniform in the state and component, and the exact
+canonical operator, transmission and cubic-division conclusions are retained.
+This is an explicit repair of the geometric predicates, not a replacement of
+the all-order target by a conditional or finite-order result.
+
 ## Size estimate
 
 The readable manuscript has 6,890 lines of TeX in §2–§10 (62-page version: 4,460). With the playbook

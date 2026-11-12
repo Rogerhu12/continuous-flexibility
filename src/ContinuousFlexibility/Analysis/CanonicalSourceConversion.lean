@@ -1,13 +1,12 @@
-import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
+import ContinuousFlexibility.Analysis.OpenDomainSourcePairing
 import ContinuousFlexibility.Analysis.CanonicalStripGeometry
 
 /-!
-# Canonical source conversion on one angular period
+# Canonical source conversion on the actual physical domain
 
-The chart geometry in `N04PartA` already suffices for the source-pairing
-identity.  Reflection and periodicity identify the image of the open
-angular strip; null boundary lines then give the half-open period used
-by the physical and canonical integrals.
+The state-dependent open domain and the true inverse on the fixed
+canonical strip supply the planar change of variables. Intersecting an
+arbitrary physical set with an angular boundary line is still null.
 -/
 
 noncomputable section
@@ -18,52 +17,31 @@ open Set MeasureTheory
 open ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint
 open scoped ContDiff
 
-/-- The actual source conversion preserves the unknown-source pairing.
-No smoothness or integrability conditions on the paired functions are
-needed beyond the chart geometry, because change of variables preserves
-the totalized Bochner-integral convention as well. -/
+/-- The actual source conversion preserves the unknown-source pairing,
+including the totalized integral convention, on the current open domain. -/
 theorem canonicalSource_pairing_of_partA
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {K : CanonicalData S} {base : ℕ} {ε : ℝ}
     (hK : N04PartA D S C K base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hsector : stateSector S z.1) (m : ℕ) (u f : PolarPoint → ℝ) :
-    (∫ p in physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi), u p * f p) =
+    (∫ p in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi), u p * f p) =
       ∫ p in canonicalOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
         canonicalHeight S K z m u p * canonicalSource S K z m f p := by
-  have hphysicalOpen : IsOpen (physicalPieceOpen S K m) :=
-    isOpen_Ioo.prod isOpen_univ
-  have hphys_ae :
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) =ᵐ[volume]
-        (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) := by
-    simpa only [physicalPieceOpen, prod_inter_prod, inter_univ, univ_inter] using
-      polarStrip_Ioc_ae_eq_Ioo (K.physicalLeft m) (K.physicalRight m) 0 Real.pi
-  have hcanon_ae :
-      (canonicalOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) =ᵐ[volume]
-        (canonicalOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) := by
-    simpa only [canonicalOpen, prod_inter_prod, inter_univ, univ_inter] using
-      polarStrip_Ioc_ae_eq_Ioo (K.left m) (K.right m) 0 Real.pi
-  have himage := canonicalChart_image_openStrip hK hz hsector m
-  obtain ⟨_, _, _, _, _, _, _, hcharts, _, _, _⟩ := hK
-  obtain ⟨_, _, hinv, _, hsmooth, _, _, hnonzero⟩ := hcharts z hz hsector m
-  have hmeas : MeasurableSet
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) :=
-    (hphysicalOpen.inter (isOpen_univ.prod isOpen_Ioo)).measurableSet
-  have hdiff : ∀ p ∈ physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi),
+  have hdomains := hK.domains z hz hsector m
+  have hcharts := hK.charts z hz hsector m
+  have hdiff : ∀ p ∈ physicalPieceOpen S K z m,
       DifferentiableAt ℝ (K.chart z m) p := by
     intro p hp
-    exact ((hsmooth p hp.1).contDiffAt (hphysicalOpen.mem_nhds hp.1)).differentiableAt
-      (by simp)
-  have hconv := integral_pairing_eq_canonical_of_image hmeas hdiff
-    (fun p hp => hinv p hp.1) himage
-    (fun p hp => (hnonzero p hp.1).1.ne')
-    (fun p hp => (hnonzero p hp.1).2.1) u f
-  calc
-    _ = ∫ p in physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi), u p * f p :=
-      setIntegral_congr_set hphys_ae
-    _ = ∫ p in canonicalOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi),
-        canonicalHeight S K z m u p * canonicalSource S K z m f p := by
-      simpa only [canonicalHeight, canonicalSource] using hconv
-    _ = _ := setIntegral_congr_set hcanon_ae.symm
+    exact ((hcharts.2.2.2.2.1 p hp).contDiffAt
+      (hdomains.1.mem_nhds hp)).differentiableAt (by simp)
+  have hconv := integral_source_pairing_on_openDomain hdomains.1 Real.pi_ne_zero
+    hcharts.1 hcharts.2.1 hcharts.2.2.1 hcharts.2.2.2.1
+    hcharts.2.2.2.2.2.1.continuousOn
+    (fun p hp => canonicalInverse_periodic_on_open hK hz hsector m hp)
+    (hK.inverseReflection z hz hsector m) hdiff
+    (fun p hp => (hcharts.2.2.2.2.2.2.2 p hp).1.ne')
+    (fun p hp => (hcharts.2.2.2.2.2.2.2 p hp).2.1) u f
+  simpa only [canonicalHeight, canonicalSource] using hconv
 
 end ContinuousFlexibility.Analysis

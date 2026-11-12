@@ -116,7 +116,7 @@ theorem negativeCanonicalClosedCoefficients_radial_eq_original
     (hN03 : N03Properties D T S C R L base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hsector : stateSector S z.1) (m : ℕ) (hm : K.positive m = false)
-    {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m)
+    {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K z m)
     (hOriginal : DifferentiableAt ℝ (originalCoefficients D S C z).a p) :
     (negativeCanonicalClosedCoefficients S K z m).a p =
       (originalCoefficients D S C z).a p := by
@@ -127,10 +127,11 @@ theorem negativeCanonicalClosedCoefficients_radial_eq_original
     exact hOriginal
   have hBa : DifferentiableAt ℝ (negativeCanonicalClosedCoefficients S K z m).a p :=
     (negativeCanonicalClosedCoefficients_contDiffAt hA hz hsector m
-      (Ioo_subset_Icc_self hp.1)).1.differentiableAt (by simp)
+      (subset_closure hp)).1.differentiableAt (by simp)
   have hop := negativeCanonicalClosedOperator_of_parts hA hB hz hsector m hm
     (radialCenteredSquare p.1) (contDiff_radialCenteredSquare p.1).contDiffOn hp
   exact (radialCoefficient_eq_of_operator_action hLa hBa hop).trans
     (hN03.1 z hz hsector p)
 
 end ContinuousFlexibility.Analysis
+

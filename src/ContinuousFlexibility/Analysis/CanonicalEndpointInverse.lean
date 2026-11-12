@@ -7,12 +7,12 @@ import Mathlib.Topology.Algebra.Module.FiniteDimension
 /-!
 # Actual smooth local inverses at physical endpoints
 
-The closed-piece hypothesis supplies pointwise smoothness and an invertible
-actual derivative. The inverse function theorem therefore gives a local
-inverse smooth at the image point, including at a physical endpoint.
-The prescribed canonical inverse agrees with this inverse on the image
-of the physical interior in the local chart source. No value or
-continuity of the prescribed inverse at a canonical endpoint is assumed.
+The actual closed-domain contract supplies pointwise smoothness and an
+invertible derivative. The inverse function theorem gives a local inverse
+smooth at the image point, including on a curved physical boundary.
+The stored canonical inverse agrees with it on the image of the current
+physical interior in the local chart source. Generic radial-curve
+transport remains available when the physical boundary is a true circle.
 -/
 
 noncomputable section
@@ -47,22 +47,22 @@ theorem exists_smooth_localInverse_of_planeJacobian_ne_zero
     hF.mem_toOpenPartialHomeomorph_source hFD hn, ?_⟩
   exact hF.to_localInverse hFD hn
 
-/-- The local endpoint inverse agrees with the specified inverse on the
-actual image collar. This uses only the open-piece inverse identity. -/
+/-- The local inverse at any point of the actual physical closure agrees
+with the stored inverse on its current interior image collar. -/
 theorem canonicalChart_exists_smooth_endpointInverse
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {K : CanonicalData S} {base : ℕ} {ε : ℝ}
     (hK : Blueprint.N04PartA D S C K base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hsector : stateSector S z.1) (m : ℕ) (p : PolarPoint)
-    (hp : p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
+    (hp : p ∈ physicalPieceClosed S K z m) :
     ∃ e : OpenPartialHomeomorph PolarPoint PolarPoint,
       (e : PolarPoint → PolarPoint) = K.chart z m ∧ p ∈ e.source ∧
       ContDiffAt ℝ ∞ e.symm (K.chart z m p) ∧
       EqOn e.symm (K.inverseChart z m)
-        (K.chart z m '' (physicalPieceOpen S K m ∩ e.source)) := by
-  have hclosed := hK.2.2.2.2.2.2.2.2.1 z hz hsector m p hp
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hsector m
+        (K.chart z m '' (physicalPieceOpen S K z m ∩ e.source)) := by
+  have hclosed := (hK.boundary z hz hsector m).2.2.2.2.1 p hp
+  have hcharts := hK.charts z hz hsector m
   obtain ⟨e, he, hpe, hsmooth⟩ :=
     exists_smooth_localInverse_of_planeJacobian_ne_zero hclosed.1 hclosed.2.2.1
   refine ⟨e, he, hpe, hsmooth, ?_⟩

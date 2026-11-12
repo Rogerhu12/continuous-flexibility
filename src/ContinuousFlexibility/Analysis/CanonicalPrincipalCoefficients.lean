@@ -43,10 +43,10 @@ theorem canonicalPrincipalCoefficients_eq_density
         (coordinatePrincipalDensity (L.coefficients z) (K.chart z m) (K.height z m)).c
           (K.inverseChart z m p) := by
   let x := K.inverseChart z m p
-  have hcharts := hA.2.2.2.2.2.2.2.1 z hz hs m
-  have hx : x ∈ physicalPieceOpen S K m := hcharts.2.1 hp
+  have hcharts := hA.charts z hz hs m
+  have hx : x ∈ physicalPieceOpen S K z m := hcharts.2.1 hp
   have hFx : K.chart z m x = p := hcharts.2.2.2.1 p hp
-  have hOpen : IsOpen (physicalPieceOpen S K m) := isOpen_Ioo.prod isOpen_univ
+  have hOpen : IsOpen (physicalPieceOpen S K z m) := (hA.domains z hz hs m).1
   have hF : ContDiffAt ℝ 2 (K.chart z m) x :=
     ((hcharts.2.2.2.2.1 x hx).contDiffAt (hOpen.mem_nhds hx)).of_le (by simp)
   have hh : ContDiffAt ℝ 2 (K.height z m) x :=
@@ -106,7 +106,7 @@ theorem negativePrincipalDensity_eq_normalForm
     (hA : N04PartA D S C K base ε) (hB : N04PartB S C L K base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ) (hm : K.positive m = false)
-    {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K m)
+    {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K z m)
     (ha : DifferentiableAt ℝ (L.coefficients z).a x)
     (hb : DifferentiableAt ℝ (L.coefficients z).b x)
     (hc : DifferentiableAt ℝ (L.coefficients z).c x) :
@@ -114,7 +114,7 @@ theorem negativePrincipalDensity_eq_normalForm
       (coordinatePrincipalDensity (L.coefficients z) (K.chart z m) (K.height z m)).b x = 0 ∧
       (coordinatePrincipalDensity (L.coefficients z) (K.chart z m) (K.height z m)).c x =
         -(K.chart z m x).1 := by
-  have hcharts := hA.2.2.2.2.2.2.2.1 z hz hs m
+  have hcharts := hA.charts z hz hs m
   have hp := hcharts.1 hx
   have hi := hcharts.2.2.1 x hx
   have hreg := differentiableAt_negativeCanonicalCoefficients hB hz hs m hm hp

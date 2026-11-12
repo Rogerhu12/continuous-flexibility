@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Blueprint.CanonicalParts
+import ContinuousFlexibility.Analysis.N04bGeometryPreservation
 
 /-!
 # Normalizing the unused canonical jets
@@ -111,8 +112,8 @@ theorem canonicalOpen_normalizedCanonicalData (S : PhysicalSpacesData)
     canonicalOpen S (normalizedCanonicalData S K) m = canonicalOpen S K m := rfl
 
 theorem physicalPieceOpen_normalizedCanonicalData (S : PhysicalSpacesData)
-    (K : CanonicalData S) (m : ℕ) :
-    physicalPieceOpen S (normalizedCanonicalData S K) m = physicalPieceOpen S K m := rfl
+    (K : CanonicalData S) (z : AnnularState S × ℝ) (m : ℕ) :
+    physicalPieceOpen S (normalizedCanonicalData S K) z m = physicalPieceOpen S K z m := rfl
 
 theorem canonicalHeight_normalizedCanonicalData (S : PhysicalSpacesData)
     (K : CanonicalData S) (z : AnnularState S × ℝ) (m : ℕ) (u : PolarPoint → ℝ) :
@@ -146,11 +147,17 @@ theorem normalizedCanonicalData_dividedDifference_of_sector_positive
     (normalizedCanonicalData S K).dividedDifference z m = K.dividedDifference z m := by
   simp only [normalizedCanonicalData, hz, hm, and_self, ite_true]
 
-/-- The qualitative coordinate properties are definitionally unchanged. -/
+/-- The actual-domain geometry is transported with the unchanged
+geometric fields of the indexed canonical data. -/
 theorem n04PartA_normalizedCanonicalData {D : ReferenceData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {K : CanonicalData S} {base : ℕ} {ε : ℝ}
     (h : N04PartA D S C K base ε) :
-    N04PartA D S C (normalizedCanonicalData S K) base ε := h
+    N04PartA D S C (normalizedCanonicalData S K) base ε := by
+  classical
+  exact h.withOperatorFields K.coefficients
+    (fun z => if stateSector S z.1 then K.potential z else fun _ _ => 0)
+    (fun z m => if stateSector S z.1 ∧ K.positive m = true then K.dividedDifference z m
+      else zeroCanonicalCoefficients)
 
 /-- The canonical identities use exactly the coefficients retained by normalization. -/
 theorem n04PartB_normalizedCanonicalData {S : PhysicalSpacesData}

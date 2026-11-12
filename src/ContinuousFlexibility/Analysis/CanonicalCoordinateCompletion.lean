@@ -30,19 +30,12 @@ theorem n04Properties_iff_parts_and_jetBounds
       N04PartA D S C K base ε ∧ N04PartB S C L K base ε ∧
         CanonicalJetBounds T S C K base loss ε := by
   constructor
-  · intro h
-    obtain ⟨h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11,
-      h12, h13, h14, h15, h16, h17, _⟩ := h
-    exact ⟨⟨h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11⟩,
-      ⟨h12, h13, h14, h15, h16⟩, h17⟩
+  · rintro ⟨hA, hB, hbound, _⟩
+    exact ⟨hA, hB, hbound⟩
   · rintro ⟨hA, hB, hbound⟩
-    have hgeometry := hA
-    obtain ⟨h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11⟩ := hA
-    obtain ⟨h12, h13, h14, h15, h16⟩ := hB
-    refine ⟨h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11,
-      h12, h13, h14, h15, h16, hbound, ?_⟩
+    refine ⟨hA, hB, hbound, ?_⟩
     intro z hz hs m u f _ _ _ _ _ _
-    exact canonicalSource_pairing_of_partA hgeometry hz hs m u f
+    exact canonicalSource_pairing_of_partA hA hz hs m u f
 
 /-- Assemble the exact canonical properties from their qualitative pieces
 and an independently proved uniform estimate. -/

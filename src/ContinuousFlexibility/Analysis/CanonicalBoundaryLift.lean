@@ -4,14 +4,14 @@ import Mathlib.Analysis.Calculus.Darboux
 import Mathlib.Analysis.Calculus.Deriv.MeanValue
 
 /-!
-# Genuine angular lifts on closed canonical boundaries
+# Genuine angular lifts on actual closed canonical boundaries
 
-The interior periodic identity extends to the physical closed strip by
-continuity. On a horizontal boundary mapped to a fixed canonical radial
-level, the nonzero actual planar Jacobian forces a nonzero angular
-derivative. Darboux's theorem and the positive period then force this
-derivative to be positive. The resulting genuine boundary angular map is
-a bijective degree-one lift; no value of the stored inverse is used.
+Periodicity of the current physical domain lets the interior lift law
+extend to its actual closure. On a true horizontal physical circle with
+constant canonical radial image, the nonzero Jacobian forces a positive
+angular derivative. The resulting boundary map is a genuine smooth
+increasing circle lift. Moving cut curves are not treated as fixed
+physical radial endpoints.
 -/
 
 noncomputable section
@@ -63,26 +63,25 @@ theorem periodic_lift_at_closure
   exact tendsto_nhds_unique_of_eventuallyEq
     (hl.mono_left nhdsWithin_le_nhds) (hr.mono_left nhdsWithin_le_nhds) he
 
-/-- The frozen interior periodicity holds on the actual physical closed
-piece by continuity of the forward chart. -/
+/-- The interior lift law extends to the closure of the actual current
+physical piece, using its angular translation invariance. -/
 theorem canonicalChart_periodic_on_closed
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {K : CanonicalData S} {base : ℕ} {ε : ℝ}
     (hA : N04PartA D S C K base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hsector : stateSector S z.1) (m : ℕ) {p : PolarPoint}
-    (hp : p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
+    (hp : p ∈ physicalPieceClosed S K z m) :
     K.chart z m (p + (0, Real.pi)) = K.chart z m p + (0, Real.pi) := by
-  have hpiece := hA.2.2.2.1 m
-  have hcharts := hA.2.2.2.2.2.2.2.1 z hz hsector m
-  have hclosed := hA.2.2.2.2.2.2.2.2.1 z hz hsector m
-  have hpv : (p + (0, Real.pi)).1 ∈
-      Icc (K.physicalLeft m) (K.physicalRight m) := by
-    simpa only [Prod.fst_add, add_zero] using hp
-  have hpcl : p ∈ closure (physicalPieceOpen S K m) := by
-    rw [physicalPieceOpen, closure_prod_eq, closure_Ioo hpiece.1.ne, closure_univ]
-    exact ⟨hp, mem_univ _⟩
-  exact periodic_lift_at_closure hpcl
+  have hdomains := hA.domains z hz hsector m
+  have hcharts := hA.charts z hz hsector m
+  have hclosed := (hA.boundary z hz hsector m).2.2.2.2.1
+  have hadd : ContinuousAt (fun q : PolarPoint => q + (0, Real.pi)) p :=
+    continuousAt_id.add continuousAt_const
+  have hpv : p + (0, Real.pi) ∈ physicalPieceClosed S K z m :=
+    hadd.continuousWithinAt.mem_closure hp
+      (fun q hq => (hdomains.2.2.2.1 q).2 hq)
+  exact periodic_lift_at_closure hp
     (hclosed p hp).1.continuousAt (hclosed (p + (0, Real.pi)) hpv).1.continuousAt
     (fun q hq => (hcharts.2.2.2.2.2.2.2 q hq).2.2.1)
 
@@ -123,40 +122,61 @@ theorem boundaryAngular_deriv_ne_zero
   apply hJ θ
   simp only [planeJacobian, hξ, hη, mul_zero, zero_mul, sub_zero]
 
-/-- Once the radial boundary image has been identified, the forward
-boundary angle is a genuine smooth increasing circle lift and bijection.
-This applies independently to the root and cut of each half. -/
+/-- Every true physical circle in the actual closed piece with constant
+canonical radial image has a smooth increasing bijective angular lift.
+The circle membership is supplied explicitly; it is not inferred from
+the reference radial endpoint fields of a moving negative cut. -/
 theorem canonicalBoundaryAngular_bijective
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {K : CanonicalData S} {base : ℕ} {ε : ℝ}
     (hA : N04PartA D S C K base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hsector : stateSector S z.1) (m : ℕ) {c α : ℝ}
-    (hc : c ∈ Icc (K.physicalLeft m) (K.physicalRight m))
+    (hc : ∀ θ : ℝ, (c, θ) ∈ physicalPieceClosed S K z m)
     (hradial : ∀ θ, (K.chart z m (c, θ)).1 = α) :
     ContDiff ℝ ∞ (fun θ => (K.chart z m (c, θ)).2) ∧
       (∀ θ, 0 < deriv (fun η => (K.chart z m (c, η)).2) θ) ∧
       Function.Bijective (fun θ => (K.chart z m (c, θ)).2) ∧
       (∀ θ, (K.chart z m (c, θ + Real.pi)).2 =
         (K.chart z m (c, θ)).2 + Real.pi) := by
-  have hclosed := hA.2.2.2.2.2.2.2.2.1 z hz hsector m
+  have hclosed := (hA.boundary z hz hsector m).2.2.2.2.1
   have hf : ContDiff ℝ ∞ (fun θ => (K.chart z m (c, θ)).2) := by
     apply contDiff_iff_contDiffAt.mpr
     intro θ
     have hline : ContDiffAt ℝ ∞ (fun η : ℝ => (c, η)) θ :=
       contDiffAt_const.prodMk contDiffAt_id
-    exact ((hclosed (c, θ) hc).1.comp θ hline).snd
+    exact ((hclosed (c, θ) (hc θ)).1.comp θ hline).snd
   have hne := boundaryAngular_deriv_ne_zero
-    (fun θ => (hclosed (c, θ) hc).1.differentiableAt (by simp))
-    (fun θ => (hclosed (c, θ) hc).2.2.1) hradial
+    (fun θ => (hclosed (c, θ) (hc θ)).1.differentiableAt (by simp))
+    (fun θ => (hclosed (c, θ) (hc θ)).2.2.1) hradial
   have hperiod (θ : ℝ) : (K.chart z m (c, θ + Real.pi)).2 =
       (K.chart z m (c, θ)).2 + Real.pi := by
     simpa only [Prod.mk_add_mk, add_zero, Prod.snd_add] using
-      congrArg Prod.snd (canonicalChart_periodic_on_closed hA hz hsector m (p := (c, θ)) hc)
+      congrArg Prod.snd
+        (canonicalChart_periodic_on_closed hA hz hsector m (p := (c, θ)) (hc θ))
   have hpos := deriv_pos_of_periodic_lift_of_ne_zero Real.pi_pos hperiod hne
   exact ⟨hf, hpos, ⟨(strictMono_of_deriv_pos
       (f := fun θ => (K.chart z m (c, θ)).2) hpos).injective,
     surjective_of_continuous_periodic_lift Real.pi_ne_zero hf.continuous hperiod⟩, hperiod⟩
 
-end ContinuousFlexibility.Analysis
+/-- On a positive piece the actual domain contract recovers the original
+fixed-rectangle input for a genuine boundary circle. -/
+theorem canonicalPositiveBoundaryAngular_bijective
+    {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
+    {K : CanonicalData S} {base : ℕ} {ε : ℝ}
+    (hA : N04PartA D S C K base ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hsector : stateSector S z.1) (m : ℕ) (hm : K.positive m = true)
+    {c α : ℝ} (hc : c ∈ Icc (K.physicalLeft m) (K.physicalRight m))
+    (hradial : ∀ θ, (K.chart z m (c, θ)).1 = α) :
+    ContDiff ℝ ∞ (fun θ => (K.chart z m (c, θ)).2) ∧
+      (∀ θ, 0 < deriv (fun η => (K.chart z m (c, η)).2) θ) ∧
+      Function.Bijective (fun θ => (K.chart z m (c, θ)).2) ∧
+      (∀ θ, (K.chart z m (c, θ + Real.pi)).2 =
+        (K.chart z m (c, θ)).2 + Real.pi) := by
+  apply canonicalBoundaryAngular_bijective hA hz hsector m _ hradial
+  intro θ
+  rw [canonicalPhysicalPieceClosed_of_positive hA hz hsector m hm]
+  exact ⟨hc, mem_univ _⟩
 
+end ContinuousFlexibility.Analysis

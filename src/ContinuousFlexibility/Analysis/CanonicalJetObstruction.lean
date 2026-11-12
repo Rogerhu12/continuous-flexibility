@@ -46,7 +46,10 @@ theorem n04PartA_unboundedNegativeDividedCanonicalData
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {K : CanonicalData S} {base : ℕ} {ε : ℝ}
     (h : N04PartA D S C K base ε) :
-    N04PartA D S C (unboundedNegativeDividedCanonicalData S K) base ε := h
+    N04PartA D S C (unboundedNegativeDividedCanonicalData S K) base ε :=
+  h.withOperatorFields K.coefficients K.potential
+    (fun z m => if K.positive m = true then K.dividedDifference z m
+      else angularCanonicalCoefficients)
 
 theorem n04PartB_unboundedNegativeDividedCanonicalData
     {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
@@ -102,6 +105,6 @@ theorem exists_qualitativeCanonicalData_without_jetBounds
     n04PartA_unboundedNegativeDividedCanonicalData hA,
     n04PartB_unboundedNegativeDividedCanonicalData hB, ?_⟩
   exact not_canonicalJetBounds_unboundedNegativeDividedCanonicalData K hε
-    (K.cutPair 0).1 (hB.1 0).1 (hA.2.2.2.1 (K.cutPair 0).1).2.1
+    (K.cutPair 0).1 (hB.1.1 0).1 (hA.referenceBounds (K.cutPair 0).1).2.1
 
 end ContinuousFlexibility.Analysis

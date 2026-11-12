@@ -153,14 +153,21 @@ theorem n04PartA_restrict
     (h : N04PartA D S C K base ε) (hb : base ≤ base') (hε : ε' ≤ ε) :
     N04PartA D S C K base' ε' := by
   have hsub := stateNeighborhood_mono S C hb hε
-  obtain ⟨hopen, hsupport, hnormalization, hpieces, hpositive, hnegative,
-    hcover, hcharts, hendpoints, hreflection, hinverse⟩ := h
-  exact ⟨hopen, hsupport, (fun z hz => hnormalization z (hsub hz)),
-    hpieces, hpositive, hnegative, hcover,
-    (fun z hz => hcharts z (hsub hz)),
-    (fun z hz => hendpoints z (hsub hz)),
-    (fun z hz => hreflection z (hsub hz)),
-    (fun z hz => hinverse z (hsub hz))⟩
+  exact
+    { normalizationOpen := h.normalizationOpen
+      normalizationSupport := h.normalizationSupport
+      normalization := fun z hz => h.normalization z (hsub hz)
+      referenceBounds := h.referenceBounds
+      referencePositive := h.referencePositive
+      referenceNegative := h.referenceNegative
+      referencePartition := h.referencePartition
+      referenceDomain := h.referenceDomain
+      domains := fun z hz => h.domains z (hsub hz)
+      partition := fun z hz => h.partition z (hsub hz)
+      charts := fun z hz => h.charts z (hsub hz)
+      boundary := fun z hz => h.boundary z (hsub hz)
+      reflection := fun z hz => h.reflection z (hsub hz)
+      inverseReflection := fun z hz => h.inverseReflection z (hsub hz) }
 
 theorem n04PartB_restrict
     {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
@@ -170,7 +177,8 @@ theorem n04PartB_restrict
     N04PartB S C L K base' ε' := by
   have hsub := stateNeighborhood_mono S C hb hε
   obtain ⟨hcuts, htransmission, hoperator, hnegative, hpositive⟩ := h
-  exact ⟨hcuts, (fun z hz => htransmission z (hsub hz)),
+  exact ⟨⟨hcuts.1, fun z hz => hcuts.2 z (hsub hz)⟩,
+    (fun z hz => htransmission z (hsub hz)),
     (fun z hz => hoperator z (hsub hz)),
     (fun z hz => hnegative z (hsub hz)),
     (fun z hz => hpositive z (hsub hz))⟩

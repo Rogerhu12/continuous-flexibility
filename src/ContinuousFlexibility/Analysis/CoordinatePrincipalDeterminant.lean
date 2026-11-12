@@ -84,14 +84,14 @@ theorem negativeCanonicalEffectiveCoefficients_determinant
     (hA : N04PartA D S C K base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hsector : stateSector S z.1) (m : ℕ) {p : PolarPoint}
-    (hp : p ∈ physicalPieceOpen S K m) :
+    (hp : p ∈ physicalPieceOpen S K z m) :
     (negativeCanonicalEffectiveCoefficients S K z m).a p *
           (negativeCanonicalEffectiveCoefficients S K z m).c p -
         (negativeCanonicalEffectiveCoefficients S K z m).b p ^ 2 =
       -(K.chart z m p).1 / K.height z m p ^ 4 := by
-  have hU : IsOpen (physicalPieceOpen S K m) := isOpen_Ioo.prod isOpen_univ
+  have hU : IsOpen (physicalPieceOpen S K z m) := (hA.domains z hz hsector m).1
   have hV : IsOpen (canonicalOpen S K m) := isOpen_Ioo.prod isOpen_univ
-  rcases hA.2.2.2.2.2.2.2.1 z hz hsector m with
+  rcases hA.charts z hz hsector m with
     ⟨hFV, hGU, hGF, hFG, hF, hG, hh, hpoint⟩
   have hFp : K.chart z m p ∈ canonicalOpen S K m := hFV hp
   have hinverse : K.inverseChart z m ∘ K.chart z m =ᶠ[𝓝 p]

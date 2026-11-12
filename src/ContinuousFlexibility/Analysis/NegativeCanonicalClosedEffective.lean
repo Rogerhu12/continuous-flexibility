@@ -4,8 +4,8 @@ import ContinuousFlexibility.Analysis.AdjugateInversePrincipalField
 # A genuine closed-endpoint effective field on a negative piece
 
 This field uses only the forward chart and height. PartA therefore gives
-its actual pointwise infinite smoothness on the closed physical piece,
-and the determinant identity holds there. In the interior it agrees with
+its actual pointwise infinite smoothness on the closure of the current
+physical piece, and the determinant identity holds there. In the interior it agrees with
 the previously reconstructed reverse field and has the stored physical
 operator's action. No boundary value of the total inverse is involved.
 -/
@@ -26,19 +26,19 @@ def negativeCanonicalClosedCoefficients
   adjugateCoordinatePrincipalCoefficients canonicalAiryPrincipalCoefficients
     (K.chart z m) (K.height z m)
 
-/-- Actual smoothness at both physical endpoints comes from the forward
-closed-piece assumptions, independently of the prescribed inverse. -/
+/-- Actual smoothness on the closure of the current physical domain comes
+from the forward boundary assumptions, independently of the prescribed inverse. -/
 theorem negativeCanonicalClosedCoefficients_contDiffAt
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {K : CanonicalData S} {base : ℕ} {ε : ℝ}
     (hA : N04PartA D S C K base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hsector : stateSector S z.1) (m : ℕ) {p : PolarPoint}
-    (hp : p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
+    (hp : p ∈ physicalPieceClosed S K z m) :
     ContDiffAt ℝ ∞ (negativeCanonicalClosedCoefficients S K z m).a p ∧
       ContDiffAt ℝ ∞ (negativeCanonicalClosedCoefficients S K z m).b p ∧
       ContDiffAt ℝ ∞ (negativeCanonicalClosedCoefficients S K z m).c p := by
-  have hs := hA.2.2.2.2.2.2.2.2.1 z hz hsector m p hp
+  have hs := (hA.boundary z hz hsector m).2.2.2.2.1 p hp
   exact contDiffAt_adjugateCoordinatePrincipalCoefficients
     (A := canonicalAiryPrincipalCoefficients) (F := K.chart z m) (h := K.height z m)
     contDiffAt_const contDiffAt_const contDiff_fst.neg.contDiffAt
@@ -51,12 +51,12 @@ theorem negativeCanonicalClosedCoefficients_determinant
     (hA : N04PartA D S C K base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hsector : stateSector S z.1) (m : ℕ) {p : PolarPoint}
-    (hp : p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
+    (hp : p ∈ physicalPieceClosed S K z m) :
     (negativeCanonicalClosedCoefficients S K z m).a p *
           (negativeCanonicalClosedCoefficients S K z m).c p -
         (negativeCanonicalClosedCoefficients S K z m).b p ^ 2 =
       -(K.chart z m p).1 / K.height z m p ^ 4 := by
-  have hs := hA.2.2.2.2.2.2.2.2.1 z hz hsector m p hp
+  have hs := (hA.boundary z hz hsector m).2.2.2.2.1 p hp
   simpa only [negativeCanonicalClosedCoefficients, canonicalAiryPrincipalCoefficients,
     one_mul, zero_pow two_ne_zero, sub_zero] using
       adjugateCoordinatePrincipalCoefficients_determinant
@@ -71,12 +71,12 @@ theorem negativeCanonicalClosedCoefficients_det_eq_zero_iff
     (hA : N04PartA D S C K base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hsector : stateSector S z.1) (m : ℕ) {p : PolarPoint}
-    (hp : p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
+    (hp : p ∈ physicalPieceClosed S K z m) :
     ((negativeCanonicalClosedCoefficients S K z m).a p *
           (negativeCanonicalClosedCoefficients S K z m).c p -
         (negativeCanonicalClosedCoefficients S K z m).b p ^ 2 = 0) ↔
       (K.chart z m p).1 = 0 := by
-  have hs := hA.2.2.2.2.2.2.2.2.1 z hz hsector m p hp
+  have hs := (hA.boundary z hz hsector m).2.2.2.2.1 p hp
   rw [negativeCanonicalClosedCoefficients_determinant hA hz hsector m hp]
   constructor
   · intro he
@@ -93,16 +93,16 @@ theorem negativeCanonicalEffectiveCoefficients_eq_closed
     (hA : N04PartA D S C K base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hsector : stateSector S z.1) (m : ℕ) {p : PolarPoint}
-    (hp : p ∈ physicalPieceOpen S K m) :
+    (hp : p ∈ physicalPieceOpen S K z m) :
     (negativeCanonicalEffectiveCoefficients S K z m).a p =
         (negativeCanonicalClosedCoefficients S K z m).a p ∧
       (negativeCanonicalEffectiveCoefficients S K z m).b p =
         (negativeCanonicalClosedCoefficients S K z m).b p ∧
       (negativeCanonicalEffectiveCoefficients S K z m).c p =
         (negativeCanonicalClosedCoefficients S K z m).c p := by
-  have hU : IsOpen (physicalPieceOpen S K m) := isOpen_Ioo.prod isOpen_univ
+  have hU : IsOpen (physicalPieceOpen S K z m) := (hA.domains z hz hsector m).1
   have hV : IsOpen (canonicalOpen S K m) := isOpen_Ioo.prod isOpen_univ
-  rcases hA.2.2.2.2.2.2.2.1 z hz hsector m with
+  rcases hA.charts z hz hsector m with
     ⟨hFV, hGU, hGF, hFG, hF, hG, hh, hpoint⟩
   have hFp : K.chart z m p ∈ canonicalOpen S K m := hFV hp
   have hinverse : K.inverseChart z m ∘ K.chart z m =ᶠ[𝓝 p]
@@ -123,11 +123,11 @@ theorem negativeCanonicalClosedOperator_of_parts
     (hA : N04PartA D S C K base ε) (hB : N04PartB S C L K base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hsector : stateSector S z.1) (m : ℕ) (hm : K.positive m = false)
-    (u : PolarPoint → ℝ) (hu : ContDiffOn ℝ ∞ u (physicalPieceOpen S K m))
-    {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    (u : PolarPoint → ℝ) (hu : ContDiffOn ℝ ∞ u (physicalPieceOpen S K z m))
+    {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K z m) :
     divergenceOperator (L.coefficients z) u p =
       divergenceOperator (negativeCanonicalClosedCoefficients S K z m) u p := by
-  have hU : IsOpen (physicalPieceOpen S K m) := isOpen_Ioo.prod isOpen_univ
+  have hU : IsOpen (physicalPieceOpen S K z m) := (hA.domains z hz hsector m).1
   have he : ∀ᶠ q in 𝓝 p,
       (negativeCanonicalEffectiveCoefficients S K z m).a q =
           (negativeCanonicalClosedCoefficients S K z m).a q ∧

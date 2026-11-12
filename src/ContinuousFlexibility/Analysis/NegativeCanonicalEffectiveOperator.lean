@@ -7,7 +7,8 @@ The frozen negative normal form supplies a smooth canonical principal
 field even though the stored physical coefficients have no regularity
 hypothesis. The reverse-coordinate theorem therefore gives an explicit
 smooth physical field with the same actual divergence action on every
-locally smooth physical test. Only open-piece inverse identities are used.
+locally smooth physical test on the actual current domain. Only open-piece
+inverse identities are used.
 -/
 
 noncomputable section
@@ -69,18 +70,18 @@ theorem negativeCanonicalEffectiveOperator_of_parts
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hsector : stateSector S z.1) (m : ℕ) (hm : K.positive m = false) :
     ContDiffOn ℝ ∞ (negativeCanonicalEffectiveCoefficients S K z m).a
-        (physicalPieceOpen S K m) ∧
+        (physicalPieceOpen S K z m) ∧
       ContDiffOn ℝ ∞ (negativeCanonicalEffectiveCoefficients S K z m).b
-        (physicalPieceOpen S K m) ∧
+        (physicalPieceOpen S K z m) ∧
       ContDiffOn ℝ ∞ (negativeCanonicalEffectiveCoefficients S K z m).c
-        (physicalPieceOpen S K m) ∧
-      ∀ u : PolarPoint → ℝ, ContDiffOn ℝ ∞ u (physicalPieceOpen S K m) →
-        ∀ p ∈ physicalPieceOpen S K m,
+        (physicalPieceOpen S K z m) ∧
+      ∀ u : PolarPoint → ℝ, ContDiffOn ℝ ∞ u (physicalPieceOpen S K z m) →
+        ∀ p ∈ physicalPieceOpen S K z m,
           divergenceOperator (L.coefficients z) u p =
             divergenceOperator (negativeCanonicalEffectiveCoefficients S K z m) u p := by
-  have hU : IsOpen (physicalPieceOpen S K m) := isOpen_Ioo.prod isOpen_univ
+  have hU : IsOpen (physicalPieceOpen S K z m) := (hA.domains z hz hsector m).1
   have hV : IsOpen (canonicalOpen S K m) := isOpen_Ioo.prod isOpen_univ
-  rcases hA.2.2.2.2.2.2.2.1 z hz hsector m with
+  rcases hA.charts z hz hsector m with
     ⟨hFV, hGU, hGF, hFG, hF, hG, hh, hpoint⟩
   have hmodel := hB.2.2.2.1 z hz hsector m hm
   have ha : ContDiffOn ℝ ∞ canonicalAiryPrincipalCoefficients.a
@@ -89,7 +90,7 @@ theorem negativeCanonicalEffectiveOperator_of_parts
       (canonicalOpen S K m) := contDiffOn_const
   have hc : ContDiffOn ℝ ∞ canonicalAiryPrincipalCoefficients.c
       (canonicalOpen S K m) := contDiff_fst.neg.contDiffOn
-  have hphysical (p : PolarPoint) (hp : p ∈ physicalPieceOpen S K m) :
+  have hphysical (p : PolarPoint) (hp : p ∈ physicalPieceOpen S K z m) :
       ContDiffAt ℝ ∞ (negativeCanonicalEffectiveCoefficients S K z m).a p ∧
         ContDiffAt ℝ ∞ (negativeCanonicalEffectiveCoefficients S K z m).b p ∧
         ContDiffAt ℝ ∞ (negativeCanonicalEffectiveCoefficients S K z m).c p ∧

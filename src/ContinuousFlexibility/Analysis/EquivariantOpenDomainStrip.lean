@@ -1,5 +1,5 @@
 import ContinuousFlexibility.Analysis.PeriodicLiftAxisIntervals
-import ContinuousFlexibility.Analysis.CanonicalStripGeometry
+import ContinuousFlexibility.Analysis.ReflectionStripGeometry
 
 /-!
 # A fundamental angular strip for a general physical domain
