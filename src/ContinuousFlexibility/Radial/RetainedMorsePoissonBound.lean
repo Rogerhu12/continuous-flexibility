@@ -90,7 +90,7 @@ theorem retainedMorseModelChart_column_bound (hj : 1 ≤ j) (hC : 0 < Cmodel)
   rw [retainedMorseModelChart_kappa]
   simpa only [A, retainedMorseModelChart,
     InnerRadialModelChart.column, one_pow, mul_one, one_mul,
-    innerBorderFieldMap_weight_one, ContinuousLinearMap.id_apply,
+    innerBorderFieldMap_weight_one_unit, ContinuousLinearMap.id_apply,
     innerMorsePoissonConstant] using hnorm
 
 end SeedRetainedPair

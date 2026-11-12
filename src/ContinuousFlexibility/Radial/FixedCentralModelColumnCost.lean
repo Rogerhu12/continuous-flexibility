@@ -118,7 +118,7 @@ theorem fixedCentralPhysicalModelChart_column_bound
     dsimp only [A]
     rw [fixedCentralPhysicalModelChart_kappa]
     simpa only [A, fixedCentralModelPhysicalKappa,
-      innerPhysicalCutKappa, one_mul, mul_one, innerBorderFieldMap_weight_one,
+      innerPhysicalCutKappa, one_mul, mul_one, innerBorderFieldMap_weight_one_unit,
       ContinuousLinearMap.id_apply, InnerRadialModelChart.column,
       fixedCentralPhysicalModelChart, fixedCentralModelColumnEnvelope] using h
   have hi : fixedCentralModelColumnEnvelope M i ≤

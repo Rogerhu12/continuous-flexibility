@@ -16,14 +16,14 @@ namespace ContinuousFlexibility.Radial
 open Set MeasureTheory
 
 /-- Constant cut weights have constant two-endpoint restrictions. -/
-theorem innerChainScalarRestriction_one (n : ℕ) (p : Fin (n + 1)) :
+theorem innerChainScalarRestriction_one_unit (n : ℕ) (p : Fin (n + 1)) :
     innerChainScalarRestriction n p (fun _ => (1 : ℝ)) 1 = fun _ => 1 := by
   funext i
   unfold innerChainScalarRestriction
   split_ifs <;> rfl
 
 /-- The unit diagonal is the identity on the same Euclidean cut space. -/
-theorem innerBoundaryDiagonal_one {ι : Type*} [Fintype ι] [DecidableEq ι] :
+theorem innerBoundaryDiagonal_one_unit {ι : Type*} [Fintype ι] [DecidableEq ι] :
     innerBoundaryDiagonal (fun _ : ι => (1 : ℝ)) =
       ContinuousLinearMap.id ℝ (EuclideanSpace ℝ ι) := by
   apply ContinuousLinearMap.ext
@@ -37,7 +37,7 @@ section Physical
 variable {α : Type*} [MeasurableSpace α] (μ : Measure α)
 
 /-- Unit multiplication fixes both the physical field and its scalar. -/
-theorem innerBorderFieldMap_weight_one :
+theorem innerBorderFieldMap_weight_one_unit :
     innerBorderFieldMap μ (innerWeightMultiplier μ (fun _ => (1 : ℝ))
       measurable_const 1 (fun _ => by norm_num)) =
         ContinuousLinearMap.id ℝ (InnerBorderL2 μ) := by
