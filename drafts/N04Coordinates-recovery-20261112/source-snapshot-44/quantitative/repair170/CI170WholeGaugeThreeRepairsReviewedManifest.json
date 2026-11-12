@@ -1,0 +1,119 @@
+{
+  "schema": "n04-ci-repair-reviewed-owner-v1",
+  "status": "INDEPENDENT_STATIC_REVIEW_PASSED_PENDING_CI",
+  "path": "quantitative/repair170/CI170WholeGaugeThreeRepairsReviewedManifest.json",
+  "owner": "/root/quantitative_route",
+  "candidate_manifest": {
+    "path": "quantitative/repair170/CI170WholeGaugeThreeRepairsCandidateManifest.json",
+    "blob": "cbdec7a34fe6e3ecbf151790ad25f1a2e3dad11b",
+    "sha256": "ab69f10a6892b288d3e555fdbce5dc1a5c1b8e34b1237bb54d920c54aa625f21",
+    "bytes": 21101
+  },
+  "independent_review": {
+    "blob": "adb3145018501109631d741b45473e3052a645a1",
+    "sha256": "20b7fbb2699ac022beae90917c5edf6dbb4397465985de60777dfef62b4ed801",
+    "bytes": 2378,
+    "reviewer": "/root",
+    "result": "pass before CI"
+  },
+  "base": {
+    "commit": "84f31a030a632f7d5ddba43b5a638d29da00af45",
+    "tree": "02cfcb14a87f07b6c9dbb379cebe3d1bcb3404dc",
+    "last_full_green": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "source_tree_matches": true
+  },
+  "sources": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean",
+      "preimage": {
+        "blob": "14acbf9b59c2fd57da53b0d7e0290c43f649331c",
+        "sha256": "71427dd3175ca9dcd9cdcc8de5ce4216f998587db175fdf55c74d24a5332ac01",
+        "bytes": 5396,
+        "lines": 102
+      },
+      "candidate": {
+        "name": "WholeReferenceGaugeAtlasCutOperator",
+        "kind": "after",
+        "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean",
+        "blob": "79a986c2a3dcd87523b2f123c517f9107a21a941",
+        "sha256": "96a7b8ce367af2b1fc725de8a5fbcc6b2c3b52f055e3c066ae5f96e98564d7e7",
+        "bytes": 5594,
+        "server_readback_exact": true
+      },
+      "diff": {
+        "name": "WholeReferenceGaugeAtlasCutOperator",
+        "kind": "diff",
+        "path": "quantitative/repair170/WholeReferenceGaugeAtlasCutOperator.diff",
+        "blob": "3db815fecbbe2a9fa2965d817442dd7a90a44530",
+        "sha256": "384db932d1e928aed9ef4348277966d1a05fabc1ac2cc3ab28e7e504feeb2629",
+        "bytes": 1479,
+        "server_readback_exact": true
+      },
+      "net_added": 4
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferenceRadial.lean",
+      "preimage": {
+        "blob": "4fb8973a3fbe0b887088e2d297b5ff0cb9cfd11d",
+        "sha256": "9c4fad098b505486080c3def2c38082db38c7655d857b95b8de1549f2b8596d8",
+        "bytes": 6600,
+        "lines": 138
+      },
+      "candidate": {
+        "name": "WholeReferenceGaugeReferenceRadial",
+        "kind": "after",
+        "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferenceRadial.lean",
+        "blob": "45264ac1203f286d286460b277daefbdcf3d1204",
+        "sha256": "a350813ccef8715ae28b346016a80660b810fe869f05b98ecd50f3080e19565b",
+        "bytes": 6700,
+        "server_readback_exact": true
+      },
+      "diff": {
+        "name": "WholeReferenceGaugeReferenceRadial",
+        "kind": "diff",
+        "path": "quantitative/repair170/WholeReferenceGaugeReferenceRadial.diff",
+        "blob": "92a8cb07d4c592831b649666c86a8fb4f9526613",
+        "sha256": "55b0a82abe5b5b6bbf2ddd4e5b3a9d240bd91a63d2750c23a45dbb9c53d4ac0a",
+        "bytes": 1102,
+        "server_readback_exact": true
+      },
+      "net_added": 3
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeGlobalTransport.lean",
+      "preimage": {
+        "blob": "9dd60b6e07fff54af9c9212383f8fddaa9eb3fdb",
+        "sha256": "17179bac21aa6863d3a35ec282d4e0420ca30d6444312149df3d06d78eae5f23",
+        "bytes": 4846,
+        "lines": 97
+      },
+      "candidate": {
+        "name": "WholeReferenceGaugeGlobalTransport",
+        "kind": "after",
+        "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeGlobalTransport.lean",
+        "blob": "0874680247b405fcbd3019c51f2b92f73df35b17",
+        "sha256": "761d25bffba6631ab996d7aa7e76c03ca1d55ac8f27b6946e435dc1f1dbba874",
+        "bytes": 5022,
+        "server_readback_exact": true
+      },
+      "diff": {
+        "name": "WholeReferenceGaugeGlobalTransport",
+        "kind": "diff",
+        "path": "quantitative/repair170/WholeReferenceGaugeGlobalTransport.diff",
+        "blob": "43dfa1a2fe81bbc8a0ce1e70c13f8c4a8bcd015a",
+        "sha256": "11e6828824c94c6eed05edb4513cbd34d953836c5e2973a8090fd80a39b67c9f",
+        "bytes": 1391,
+        "server_readback_exact": true
+      },
+      "net_added": 4
+    }
+  ],
+  "net_added_Lean": 11,
+  "public_headers_preserved": 5,
+  "source_unchanged_since_peer": true,
+  "no_additional_lean_archive": true,
+  "compiled": false,
+  "default_limits_unchanged": true,
+  "active_index_refs_or_ci_modified": false,
+  "gate": "The next actual remote CI must validate elaboration. Static review is not a compilation receipt."
+}

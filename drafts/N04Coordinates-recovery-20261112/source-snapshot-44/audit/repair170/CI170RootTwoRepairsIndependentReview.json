@@ -1,0 +1,356 @@
+{
+  "schema": "n04-independent-review/v1",
+  "path": "audit/repair170/CI170RootTwoRepairsIndependentReview.json",
+  "reviewer": "/root/audit_coordinates",
+  "owner": "/root",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "status": "passed_static_full_source_and_exact_delta_review",
+  "base": {
+    "commit": "84f31a030a632f7d5ddba43b5a638d29da00af45",
+    "tree": "02cfcb14a87f07b6c9dbb379cebe3d1bcb3404dc",
+    "ci": "CI170 failed; this receipt is not compilation evidence"
+  },
+  "scope": {
+    "before_lines": 317,
+    "after_lines": 328,
+    "added": 18,
+    "deleted": 7,
+    "net_added": 11,
+    "public_headers": 5,
+    "private_headers": 2,
+    "full_sources_read": true,
+    "original_sources_preserved": true
+  },
+  "sources": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ConstructedRootCutFirstJets.lean",
+      "module": "ConstructedRootCutFirstJets",
+      "before": {
+        "blob": "c351965626552621e295cf05b2295b8a07a5b29d",
+        "sha256": "a29f05ee93cfb524e474c635109158346645adf7cda4c0c36152b30b0c4412e4",
+        "bytes": 8598,
+        "lines": 174
+      },
+      "after": {
+        "blob": "c4d3b0f2acd4c41b48cd813908b02ca5dc8ca871",
+        "sha256": "abbd7ca852d2e5a16ad64934b3a57d6d42674396f281e5d6e2fa8089fc300143",
+        "bytes": 8892,
+        "lines": 179
+      },
+      "public_headers": [
+        {
+          "header": "theorem n04Coordinates_constructedRoot_cut_firstJets\n    (A : SymmetricCoefficients) (v : PolarPoint → ℝ)\n    (F : PolarPoint → PolarPoint) {T : ℝ} (hT : 0 < T)\n    {x : PolarPoint} {θ : ℝ} (hpoint : F x = (T / 2, θ))\n    (hF : ContDiffAt ℝ ∞ F x)\n    (hB : ContDiffAt ℝ ∞ (fun y => A.a y * v y) x)\n    (hBp : 0 < A.a x * v x) :\n    let ρ := n04bRootCutRadius T\n    let Fl := fun y : PolarPoint =>\n      ((n04bRootPhysicalChart F T false y).1 - ρ,\n        (n04bRootPhysicalChart F T false y).2)\n    let Fr := fun y : PolarPoint =>\n      (-((n04bRootPhysicalChart F T true y).1 - ρ),\n        (n04bRootPhysicalChart F T true y).2)\n    Fl x = (0, θ) ∧ Fr x = Fl x ∧\n      fderiv ℝ Fl x = fderiv ℝ Fr x ∧\n      n04bRootPhysicalHeight A v F T false x = n04bRootPhysicalHeight A v F T true x ∧\n      fderiv ℝ (n04bRootPhysicalHeight A v F T true) x -\n        fderiv ℝ (n04bRootPhysicalHeight A v F T false) x =\n          (-(n04bRootPhysicalHeight A v F T false x / (2 * ρ))) •\n            fderiv ℝ (fun y => (n04bRootPhysicalChart F T false y).1) x",
+          "sha256": "80a7abb587274df10ae3613dc58ae57b82191e2a79bbacdcbe1f1f9e554cc77a"
+        }
+      ],
+      "private_headers": [
+        {
+          "header_sha256": "d16efdd522d0e811f186656145b70370de2c547f0810d480aff88562f495acac"
+        },
+        {
+          "header_sha256": "48778b76df7b999419a93120f077c37525f4252acea2c2538a53efbc49dd7798"
+        }
+      ],
+      "complete_headers_identical": true,
+      "imports_options_identical": true,
+      "all_bytes_outside_exact_diff_identical": true,
+      "added": 9,
+      "deleted": 4,
+      "exact_changes": [
+        {
+          "op": "+",
+          "new": 70,
+          "text": "  apply mul_left_cancel₀ (show 2 * u x * B x ≠ 0 by positivity)"
+        },
+        {
+          "op": "-",
+          "old": 70,
+          "text": "  apply mul_left_cancel₀ (mul_ne_zero (mul_ne_zero (by norm_num) hup.ne') hBp.ne')"
+        },
+        {
+          "op": "+",
+          "new": 157,
+          "text": "  simp only [Pi.neg_apply] at hFr"
+        },
+        {
+          "op": "+",
+          "new": 159,
+          "text": "  · change ((X false x).1 - ρ, (X false x).2) = (0, θ)"
+        },
+        {
+          "op": "+",
+          "new": 160,
+          "text": "    simp only [hX, sub_self]"
+        },
+        {
+          "op": "+",
+          "new": 161,
+          "text": "  · change (-((X true x).1 - ρ), (X true x).2) = ((X false x).1 - ρ, (X false x).2)"
+        },
+        {
+          "op": "+",
+          "new": 162,
+          "text": "    simp only [hX, sub_self, neg_zero]"
+        },
+        {
+          "op": "+",
+          "new": 163,
+          "text": "  · change fderiv ℝ (fun y => ((X false y).1 - ρ, (X false y).2)) x ="
+        },
+        {
+          "op": "+",
+          "new": 164,
+          "text": "      fderiv ℝ (fun y => (-((X true y).1 - ρ), (X true y).2)) x"
+        },
+        {
+          "op": "+",
+          "new": 165,
+          "text": "    rw [hFl.fderiv, hFr.fderiv]"
+        },
+        {
+          "op": "-",
+          "old": 158,
+          "text": "  · simp only [hXraw, sub_self]"
+        },
+        {
+          "op": "-",
+          "old": 159,
+          "text": "  · simp only [hXraw, sub_self, neg_zero]"
+        },
+        {
+          "op": "-",
+          "old": 160,
+          "text": "  · rw [hFl.fderiv, hFr.fderiv]"
+        }
+      ],
+      "diff_reconstructs_both_full_sources": true
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/RadialReferencePotentialGerms.lean",
+      "module": "RadialReferencePotentialGerms",
+      "before": {
+        "blob": "ccd28495960875f494c654dc82d107ed67ba59a4",
+        "sha256": "1f3c55677ebfb7f954afd204318387084aa694a21a99c465d078465699012039",
+        "bytes": 7137,
+        "lines": 143
+      },
+      "after": {
+        "blob": "75822deb6024b8d807d072d42cee251446be7818",
+        "sha256": "2f813e09ed720bb30edb980b40bc0aaa8f54e7acea1df9dc2d33d6da92f63552",
+        "bytes": 7389,
+        "lines": 149
+      },
+      "public_headers": [
+        {
+          "header": "theorem radial_reference_chart_germ_on_strip\n    {F : PolarPoint → PolarPoint} {l r : ℝ} {x : PolarPoint}\n    (hF : ContDiffOn ℝ ∞ F (Ioo l r ×ˢ (univ : Set ℝ)))\n    (hshape : ∀ q ∈ Ioo l r ×ˢ (univ : Set ℝ),\n      F q = ((F (q.1, 0)).1, q.2))\n    (hx : x ∈ Ioo l r ×ˢ (univ : Set ℝ)) :\n    F =ᶠ[𝓝 x] positiveReferenceCylinderChart (fun t => (F (t, 0)).1) ∧\n      DifferentiableAt ℝ (fun t => (F (t, 0)).1) x.1",
+          "sha256": "17c2926219d26e112d91e26dd336b2b289e9d3a2367f1a215d4dcfeb29c6d914"
+        },
+        {
+          "header": "theorem physical_mixed_zero_of_radial_unit_density\n    {A : SymmetricCoefficients} {F : PolarPoint → PolarPoint} {h : PolarPoint → ℝ}\n    {l r : ℝ}\n    (hF : ContDiffOn ℝ ∞ F (Ioo l r ×ˢ (univ : Set ℝ)))\n    (hshape : ∀ q ∈ Ioo l r ×ˢ (univ : Set ℝ),\n      F q = ((F (q.1, 0)).1, q.2))\n    (hheight : ∀ q ∈ Ioo l r ×ˢ (univ : Set ℝ), h q = h (q.1, 0))\n    (hunit : ∀ q ∈ Ioo l r ×ˢ (univ : Set ℝ),\n      (coordinatePrincipalDensity A F h).a q = 1 ∧\n        (coordinatePrincipalDensity A F h).b q = 0)\n    {x : PolarPoint} (hx : x ∈ Ioo l r ×ˢ (univ : Set ℝ)) : A.b x = 0",
+          "sha256": "7631eeb6138fd120ef3cc8b991cc67069541f898b414a05bd7db39848ddf16fd"
+        },
+        {
+          "header": "theorem divergenceOperator_of_radial_germs\n    {A : SymmetricCoefficients} {h : PolarPoint → ℝ} {w H : ℝ → ℝ}\n    {x : PolarPoint}\n    (hh : h =ᶠ[𝓝 x] (fun q : PolarPoint => H q.1))\n    (ha : A.a =ᶠ[𝓝 x] (fun q : PolarPoint => w q.1))\n    (hb : A.b =ᶠ[𝓝 x] (fun _ : PolarPoint => (0 : ℝ))) :\n    divergenceOperator A h x = deriv (fun t => w t * deriv H t) x.1",
+          "sha256": "ec0c90f758c429ed6319ec0bc8415f146137329f399ee593ab4b6ffb1b4f8211"
+        },
+        {
+          "header": "theorem inverseChartPotential_radial_formula_on_strip\n    {A : SymmetricCoefficients} {F G : PolarPoint → PolarPoint} {h : PolarPoint → ℝ}\n    {w : ℝ → ℝ} {l r : ℝ}\n    (hF : ContDiffOn ℝ ∞ F (Ioo l r ×ˢ (univ : Set ℝ)))\n    (hshape : ∀ q ∈ Ioo l r ×ˢ (univ : Set ℝ),\n      F q = ((F (q.1, 0)).1, q.2))\n    (hheight : ∀ q ∈ Ioo l r ×ˢ (univ : Set ℝ), h q = h (q.1, 0))\n    (ha : ∀ q ∈ Ioo l r ×ˢ (univ : Set ℝ), A.a q = w q.1)\n    (hb : ∀ q ∈ Ioo l r ×ˢ (univ : Set ℝ), A.b q = 0)\n    {p : PolarPoint} (hp : G p ∈ Ioo l r ×ˢ (univ : Set ℝ)) :\n    inverseChartPotential A F G h p =\n      h ((G p).1, 0) *\n        deriv (fun t => w t * deriv (fun s => h (s, 0)) t) (G p).1 /\n          |deriv (fun t => (F (t, 0)).1) (G p).1|",
+          "sha256": "d07b879e45b2b14d2a50be525d8301caf5de0ac10ad232d5e1b8e3b29ef3d397"
+        }
+      ],
+      "private_headers": [],
+      "complete_headers_identical": true,
+      "imports_options_identical": true,
+      "all_bytes_outside_exact_diff_identical": true,
+      "added": 9,
+      "deleted": 3,
+      "exact_changes": [
+        {
+          "op": "+",
+          "new": 38,
+          "text": "    have hd : DifferentiableAt ℝ (fun t => F (t, 0)) x.1 :="
+        },
+        {
+          "op": "+",
+          "new": 39,
+          "text": "      hdF.comp x.1 hdline"
+        },
+        {
+          "op": "+",
+          "new": 40,
+          "text": "    exact hd.fst"
+        },
+        {
+          "op": "-",
+          "old": 38,
+          "text": "    exact hdF.fst.comp x.1 hdline"
+        },
+        {
+          "op": "+",
+          "new": 106,
+          "text": "      have hrad' := hrad.fderiv_eq (𝕜 := ℝ)"
+        },
+        {
+          "op": "+",
+          "new": 107,
+          "text": "      have hang' := hang.fderiv_eq (𝕜 := ℝ)"
+        },
+        {
+          "op": "+",
+          "new": 108,
+          "text": "      simp only [radialPartial, angularPartial] at hrad' hang'"
+        },
+        {
+          "op": "+",
+          "new": 110,
+          "text": "      rw [hrad', hang']"
+        },
+        {
+          "op": "-",
+          "old": 105,
+          "text": "      rw [hrad.fderiv_eq, hang.fderiv_eq]"
+        },
+        {
+          "op": "+",
+          "new": 146,
+          "text": "  rw [divergenceOperator_of_radial_germs (w := w) (H := fun t => h (t, 0))"
+        },
+        {
+          "op": "+",
+          "new": 147,
+          "text": "    hHg hag hbg, hJ, hHg.self_of_nhds]"
+        },
+        {
+          "op": "-",
+          "old": 141,
+          "text": "  rw [divergenceOperator_of_radial_germs hHg hag hbg, hJ, hHg.self_of_nhds]"
+        }
+      ],
+      "diff_reconstructs_both_full_sources": true
+    }
+  ],
+  "diagnostics": {
+    "log_blob": "da7ccf91bdc9aa7c2f7647e031f6b5781a2c0a53",
+    "log_sha256": "3e612b00e53e4a746c512a8193970fa1a45d08ae5b4f47e7bc56318a1cac8daf",
+    "log_bytes": 107440,
+    "cached_complete_blocks": {
+      "path": "/dev/shm/n04-ci170/errors.json",
+      "sha256": "afb1f5c069a03618acceff033fedaf5160c43ffda3dbcff10f6bf2057b5d3b4d",
+      "bytes": 202949,
+      "total": 16,
+      "reviewed": [
+        {
+          "header": "error: src/ContinuousFlexibility/Analysis/ConstructedRootCutFirstJets.lean:70:52: unsolved goals",
+          "body_sha256": "460c00b41fe11d040f8a4e1f2e36f90a2dc6c095286375507c06e058e7db28dd"
+        },
+        {
+          "header": "error: src/ContinuousFlexibility/Analysis/ConstructedRootCutFirstJets.lean:158:2: unsolved goals",
+          "body_sha256": "5a8cb30606502c3b304bef8f99abc95edf61cff2f96c0b018dd4b11186d14bee"
+        },
+        {
+          "header": "error: src/ContinuousFlexibility/Analysis/ConstructedRootCutFirstJets.lean:159:2: unsolved goals",
+          "body_sha256": "21c72ca024183f89d53c54f57edaa3974478722e31f09d06e6ba5d1e7e96f719"
+        },
+        {
+          "header": "error: src/ContinuousFlexibility/Analysis/ConstructedRootCutFirstJets.lean:160:20: Tactic `rewrite` failed: Did not find an occurrence of the pattern",
+          "body_sha256": "d7051434b89dad1de72dadba612fc6b5819426a614374350b39d82c69ec6b978"
+        },
+        {
+          "header": "error: src/ContinuousFlexibility/Analysis/RadialReferencePotentialGerms.lean:38:27: Application type mismatch: The argument",
+          "body_sha256": "c10d4f457bcf2f8a4fc0be0b4bec9a4f11a8e13d851d68b5a500de1c98692ead"
+        },
+        {
+          "header": "error: src/ContinuousFlexibility/Analysis/RadialReferencePotentialGerms.lean:38:10: Application type mismatch: The argument",
+          "body_sha256": "3ade97ea21e4a2545e18130741fe6d2a0efabf8e8bac7f98c427adc5c3e7b531"
+        },
+        {
+          "header": "error: src/ContinuousFlexibility/Analysis/RadialReferencePotentialGerms.lean:105:10: Tactic `rewrite` failed: Did not find an occurrence of the pattern",
+          "body_sha256": "9230178c8737bad21bed41fa20926b21a3d8b68f87bfbb969c610796f78d70f6"
+        },
+        {
+          "header": "error: src/ContinuousFlexibility/Analysis/RadialReferencePotentialGerms.lean:141:41: Application type mismatch: The argument",
+          "body_sha256": "59a2cb547fa99ea529cc16ac50da332add462435849842b21ff3093a37168931"
+        }
+      ]
+    },
+    "job_log_redownloaded": false
+  },
+  "actual_providers": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04bConstructedRootTransmission.lean",
+      "blob": "6a7d727819d0298af773209a3bd0d6a1c01a9c7e",
+      "sha256": "1076fbba3122f07dbbae57dc87e4268e096faeaa0dda7e0474aa774c68d4d342",
+      "lines": 165,
+      "review_scope": "Full relevant source and actual call contract reviewed"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04bRootInteriorRegularity.lean",
+      "blob": "dfaf1caaf070c2f3f127d5578f6223e78e10acb0",
+      "sha256": "5b940dc8d06b838873fab1ed874034e430ee410f74ba6b007819b9e7dcbabe37",
+      "lines": 151,
+      "review_scope": "Full relevant source and actual call contract reviewed"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04bOperatorGerms.lean",
+      "blob": "cb6ab75c9864f6834254f1ea732e2af907eaa268",
+      "sha256": "7b02363bc99bb4e77e528a607c809ceb448109bc5fb76a5e5821b2f922bb104a",
+      "lines": 97,
+      "review_scope": "Full relevant source and actual call contract reviewed"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+      "blob": "974c5b9bdcca6ca391d5c7f8d827deb43ba07130",
+      "sha256": "e0577144891075f5ab5a574763fe6ca9d83a4640969b90cd314d95a8fe69747c",
+      "lines": 108,
+      "review_scope": "Full relevant source and actual call contract reviewed"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ReferenceCircleFlow.lean",
+      "blob": "075cf3f59cf5176f3fb266e18ca57e5c8b8ec8ec",
+      "sha256": "a22b0e180dec080ec61ebefbd3ca8b3cca3e6864ec04e00d464c1a8a44544f1e",
+      "lines": 163,
+      "review_scope": "Exact actual identity and relevant inherited radial API; no claim of a fresh full review of all 163 lines"
+    }
+  ],
+  "findings_resolved": [
+    {
+      "module": "ConstructedRootCutFirstJets",
+      "finding": "Untyped multiplicative cancellation left the nonzero scalar unresolved.",
+      "resolution": "The scalar is explicitly 2 * u x * B x; positivity proves nonzero using the existing real positivity hypotheses. The jump identity and its coefficient are unchanged."
+    },
+    {
+      "module": "ConstructedRootCutFirstJets",
+      "finding": "Local X/rho aliases and pointwise function negation were not normalized for the value and derivative goals.",
+      "resolution": "Three project-definition changes expose the exact X/rho formulas; Pi.neg_apply normalizes the existing right derivative. Existing hX, hFl.fderiv and hFr.fderiv prove the same values and signed derivative equality."
+    },
+    {
+      "module": "RadialReferencePotentialGerms",
+      "finding": "Expected-type inference chose the wrong composition boundary for the first-coordinate slice.",
+      "resolution": "An explicit DifferentiableAt for t ↦ F(t,0) fixes the composition before taking fst. This is the original same radial slice."
+    },
+    {
+      "module": "RadialReferencePotentialGerms",
+      "finding": "EventualEq.fderiv_eq left the scalar field and partial-derivative presentation unmatched.",
+      "resolution": "The two actual germ derivatives explicitly use real scalars and unfold the project radial/angular partials before rewriting. The identical pattern is present in the compiled actual RadialReferencePrincipalFormulas provider."
+    },
+    {
+      "module": "RadialReferencePotentialGerms",
+      "finding": "The final divergence call did not infer the scalar radial height from the planar germ.",
+      "resolution": "The explicit H := fun t => h(t,0), with the original w, matches the given germ exactly. No domain, function, coefficient, sign, or hypothesis changes."
+    }
+  ],
+  "verification": {
+    "both_full_sources_reconstructed_from_diff": true,
+    "all_complete_public_and_private_headers_identical": true,
+    "imports_options_and_all_other_bytes_identical": true,
+    "actual_witnesses_points_domains_and_coefficients_preserved": true,
+    "no_sorry_axioms_or_limits_added": true,
+    "no_definitions_replaced": true,
+    "no_local_lean_or_ci_run": true,
+    "no_active_index_refs_or_other_sources_modified": true
+  },
+  "limitations": [
+    "Static independent review only; subsequent CI must validate elaboration at the unchanged default resource limits.",
+    "This receipt covers only these two root-owned sources, not the other five CI170 repairs."
+  ]
+}

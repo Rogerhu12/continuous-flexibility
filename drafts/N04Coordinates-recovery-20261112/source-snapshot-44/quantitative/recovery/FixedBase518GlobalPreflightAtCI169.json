@@ -1,0 +1,1317 @@
+{
+  "schema": "n04-fixed-base518-global-consumer-and-name-preflight-v1",
+  "status": "READONLY_BOUNDED_PREFLIGHT_COMPLETE_NOT_ACTIVATED_OR_COMPILED",
+  "author": "/root/quantitative_route",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "plan": {
+    "blob": "e8d048a62c7b0bbf695503818b5f9a13d0bc3b07",
+    "sha256": "ac34e182556c181d5cf745a2631638f4613234f4eaa12fbcdb6def5971b2dc7c"
+  },
+  "selected518": {
+    "blob": "f8548b858d40234fce54e77c5ff0702a6f4ed86a",
+    "sha256": "10ce1ad71024dfcd300f5c815eb7a5049f86c02f6a97b61495fb8b55df78792e"
+  },
+  "actual169_import_map": {
+    "blob": "9c50c8370e39154362ac6b35e7d045ebddcf04cd",
+    "sha256": "0dd675c42689c9b281546bc84637e34658004864e26bed50163b35bbe27c4543"
+  },
+  "actual169_baseline": {
+    "head": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "tree": "aedbc4ec6f58d05e07de2eefb318651f69077036",
+    "green_evidence": {
+      "reported_by": "/root",
+      "workflow_run": 43314424168,
+      "job": 131518582983,
+      "completed_utc": "2026-11-12 22:13:40 UTC",
+      "reported_result": "full success including full build/status/axiom steps",
+      "independently_queried_by_this_agent": false
+    }
+  },
+  "projected_global_graphs": {
+    "actual169": {
+      "nodes": 4417,
+      "project_children": 4413,
+      "internal_edges": 13504,
+      "project_child_edges": 9260,
+      "missing_imports": [],
+      "cycles": []
+    },
+    "after_fixed_batch1": {
+      "nodes": 4548,
+      "project_children": 4544,
+      "internal_edges": 13763,
+      "project_child_edges": 9519,
+      "missing_imports": [],
+      "cycles": []
+    },
+    "after_fixed_batch2": {
+      "nodes": 4644,
+      "project_children": 4640,
+      "internal_edges": 14001,
+      "project_child_edges": 9757,
+      "missing_imports": [],
+      "cycles": []
+    },
+    "after149_and_fixed_batch1": {
+      "nodes": 4697,
+      "project_children": 4693,
+      "internal_edges": 14067,
+      "project_child_edges": 9823,
+      "missing_imports": [],
+      "cycles": []
+    },
+    "after149_and_fixed_batch2": {
+      "nodes": 4793,
+      "project_children": 4789,
+      "internal_edges": 14305,
+      "project_child_edges": 10061,
+      "missing_imports": [],
+      "cycles": []
+    }
+  },
+  "generated_root_graph_checks": {
+    "one": {
+      "generated_root_imports": 4482,
+      "missing": [],
+      "cycles": []
+    },
+    "two": {
+      "generated_root_imports": 4578,
+      "missing": [],
+      "cycles": []
+    },
+    "plus149one": {
+      "generated_root_imports": 4629,
+      "missing": [],
+      "cycles": []
+    },
+    "plus149two": {
+      "generated_root_imports": 4725,
+      "missing": [],
+      "cycles": []
+    }
+  },
+  "with149": {
+    "plan_blob": "394db737d43724d8c5b39783fa7263419f89ada1",
+    "full_dag_addendum_blob": "9f5480dfc6e6e901e135b15d1d4424245b1e5ae1",
+    "fixed_source_path_overlap": [],
+    "new149_vs_fixed_explicit_name_collisions": [],
+    "new149_transitive_flow_consumers": [],
+    "caution": "This establishes static composability of the source selections; actual170 or later parent still needs fullgreen and exact blob preimages before each fixed batch."
+  },
+  "shared_provider_global_consumers": [
+    {
+      "provider": "ContinuousFlexibility.Analysis.CircleUnitIntegral",
+      "current169_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.CoupledCircleAverageSmooth",
+          "path": "src/ContinuousFlexibility/Analysis/CoupledCircleAverageSmooth.lean",
+          "blob": "e272a6a79d6904d1d955f27a6777fa1c6396533e"
+        }
+      ],
+      "after149_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.CoupledCircleAverageSmooth",
+          "path": "src/ContinuousFlexibility/Analysis/CoupledCircleAverageSmooth.lean",
+          "blob": "e272a6a79d6904d1d955f27a6777fa1c6396533e"
+        }
+      ],
+      "after_fixed2_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.CoupledCircleAverageSmooth",
+          "path": "src/ContinuousFlexibility/Analysis/CoupledCircleAverageSmooth.lean",
+          "blob": "e272a6a79d6904d1d955f27a6777fa1c6396533e"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.CircleAverageCompositionSmoothTame",
+          "path": "src/ContinuousFlexibility/Analysis/CircleAverageCompositionSmoothTame.lean",
+          "blob": "da25ed949924696c8c3f82e87ffc9e8117b20653"
+        }
+      ],
+      "current169_transitive": [
+        "AxiomAudit",
+        "ContinuousFlexibility",
+        "ContinuousFlexibility.Analysis.CoupledCircleAverageSmooth",
+        "ContinuousFlexibility.Analysis.CoupledCircleErrorSmooth",
+        "ContinuousFlexibility.Blueprint.Assembly",
+        "ContinuousFlexibility.Blueprint.N09N10",
+        "Solution.FlexibleSphereSolution"
+      ],
+      "after_fixed2_transitive": [
+        "AxiomAudit",
+        "ContinuousFlexibility",
+        "ContinuousFlexibility.Analysis.CircleAverageCompositionSmoothTame",
+        "ContinuousFlexibility.Analysis.CircleAverageCompositionUniformBounds",
+        "ContinuousFlexibility.Analysis.CircleUniformFamilyOperations",
+        "ContinuousFlexibility.Analysis.CoupledCircleAverageSmooth",
+        "ContinuousFlexibility.Analysis.CoupledCircleErrorSmooth",
+        "ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds",
+        "ContinuousFlexibility.Analysis.N01ReturnDisplacementSmoothTame",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocityCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame",
+        "ContinuousFlexibility.Analysis.N04SelectorInverseCircleFixedBaseBounds",
+        "ContinuousFlexibility.Blueprint.Assembly",
+        "ContinuousFlexibility.Blueprint.N09N10",
+        "Solution.FlexibleSphereSolution"
+      ]
+    },
+    {
+      "provider": "ContinuousFlexibility.Analysis.N01ControlFlowBounds",
+      "current169_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N01ControlWeightConstraint",
+          "path": "src/ContinuousFlexibility/Analysis/N01ControlWeightConstraint.lean",
+          "blob": "c0e13885832aa4b133e24e45ff76bc0ca3cc2495"
+        }
+      ],
+      "after149_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N01ControlWeightConstraint",
+          "path": "src/ContinuousFlexibility/Analysis/N01ControlWeightConstraint.lean",
+          "blob": "c0e13885832aa4b133e24e45ff76bc0ca3cc2495"
+        }
+      ],
+      "after_fixed2_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N01ControlWeightConstraint",
+          "path": "src/ContinuousFlexibility/Analysis/N01ControlWeightConstraint.lean",
+          "blob": "fc55c919e972c5529680464eba8dbb66c07afb37"
+        }
+      ],
+      "current169_transitive": [
+        "AxiomAudit",
+        "ContinuousFlexibility",
+        "ContinuousFlexibility.Analysis.N01ControlIndexBound",
+        "ContinuousFlexibility.Analysis.N01ControlWeightConstraint",
+        "ContinuousFlexibility.Analysis.N03InteriorAngularBounds",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralIdentification",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralJets",
+        "ContinuousFlexibility.Analysis.N03InteriorTravelBounds",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorFlows",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorJets",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorValues",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionReferenceLower",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap"
+      ],
+      "after_fixed2_transitive": [
+        "AxiomAudit",
+        "ContinuousFlexibility",
+        "ContinuousFlexibility.Analysis.N01ControlIndexBound",
+        "ContinuousFlexibility.Analysis.N01ControlWeightConstraint",
+        "ContinuousFlexibility.Analysis.N01InterpolationInverseCircle",
+        "ContinuousFlexibility.Analysis.N01OpticalCutoffCircleMultiplier",
+        "ContinuousFlexibility.Analysis.N01ResidualSmoothTame",
+        "ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds",
+        "ContinuousFlexibility.Analysis.N01ReturnDisplacementCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnDisplacementSmoothTame",
+        "ContinuousFlexibility.Analysis.N01ReturnInverseCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnLinearOperators",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocityCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame",
+        "ContinuousFlexibility.Analysis.N01UniformReturnMargins",
+        "ContinuousFlexibility.Analysis.N02ReturnAssembly",
+        "ContinuousFlexibility.Analysis.N03InteriorAngularBounds",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralIdentification",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralJets",
+        "ContinuousFlexibility.Analysis.N03InteriorTravelBounds",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorFlows",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorJets",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorValues",
+        "ContinuousFlexibility.Analysis.N04SelectorInverseCircleFixedBaseBounds",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionReferenceLower",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap"
+      ]
+    },
+    {
+      "provider": "ContinuousFlexibility.Analysis.N01ControlIndexBound",
+      "current169_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap",
+          "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionSpeedGap.lean",
+          "blob": "d1a81d60b31bf68689e99722e23fc8c594999b8b"
+        }
+      ],
+      "after149_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap",
+          "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionSpeedGap.lean",
+          "blob": "d1a81d60b31bf68689e99722e23fc8c594999b8b"
+        }
+      ],
+      "after_fixed2_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap",
+          "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionSpeedGap.lean",
+          "blob": "d1a81d60b31bf68689e99722e23fc8c594999b8b"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N01UniformReturnMargins",
+          "path": "src/ContinuousFlexibility/Analysis/N01UniformReturnMargins.lean",
+          "blob": "8f38338b2049d23253abdabe24ada109d0df09cf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N01OpticalCutoffCircleMultiplier",
+          "path": "src/ContinuousFlexibility/Analysis/N01OpticalCutoffCircleMultiplier.lean",
+          "blob": "2cc250891b684e1d33888806dd79200f00f81f9f"
+        }
+      ],
+      "current169_transitive": [
+        "AxiomAudit",
+        "ContinuousFlexibility",
+        "ContinuousFlexibility.Analysis.N03InteriorAngularBounds",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralIdentification",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralJets",
+        "ContinuousFlexibility.Analysis.N03InteriorTravelBounds",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorFlows",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorJets",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorValues",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionReferenceLower",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap"
+      ],
+      "after_fixed2_transitive": [
+        "AxiomAudit",
+        "ContinuousFlexibility",
+        "ContinuousFlexibility.Analysis.N01InterpolationInverseCircle",
+        "ContinuousFlexibility.Analysis.N01OpticalCutoffCircleMultiplier",
+        "ContinuousFlexibility.Analysis.N01ResidualSmoothTame",
+        "ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds",
+        "ContinuousFlexibility.Analysis.N01ReturnDisplacementCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnDisplacementSmoothTame",
+        "ContinuousFlexibility.Analysis.N01ReturnInverseCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnLinearOperators",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocityCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame",
+        "ContinuousFlexibility.Analysis.N01UniformReturnMargins",
+        "ContinuousFlexibility.Analysis.N02ReturnAssembly",
+        "ContinuousFlexibility.Analysis.N03InteriorAngularBounds",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralIdentification",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralJets",
+        "ContinuousFlexibility.Analysis.N03InteriorTravelBounds",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorFlows",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorJets",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorValues",
+        "ContinuousFlexibility.Analysis.N04SelectorInverseCircleFixedBaseBounds",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionReferenceLower",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap"
+      ]
+    },
+    {
+      "provider": "ContinuousFlexibility.Analysis.N01ControlWeightConstraint",
+      "current169_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N01ControlIndexBound",
+          "path": "src/ContinuousFlexibility/Analysis/N01ControlIndexBound.lean",
+          "blob": "1928f91ca23a5a0620ca958c0d83fc46b148e33a"
+        }
+      ],
+      "after149_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N01ControlIndexBound",
+          "path": "src/ContinuousFlexibility/Analysis/N01ControlIndexBound.lean",
+          "blob": "1928f91ca23a5a0620ca958c0d83fc46b148e33a"
+        }
+      ],
+      "after_fixed2_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N01ControlIndexBound",
+          "path": "src/ContinuousFlexibility/Analysis/N01ControlIndexBound.lean",
+          "blob": "e6ca03487e088a47f5869881ff0c1a7e6bf42d2a"
+        }
+      ],
+      "current169_transitive": [
+        "AxiomAudit",
+        "ContinuousFlexibility",
+        "ContinuousFlexibility.Analysis.N01ControlIndexBound",
+        "ContinuousFlexibility.Analysis.N03InteriorAngularBounds",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralIdentification",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralJets",
+        "ContinuousFlexibility.Analysis.N03InteriorTravelBounds",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorFlows",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorJets",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorValues",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionReferenceLower",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap"
+      ],
+      "after_fixed2_transitive": [
+        "AxiomAudit",
+        "ContinuousFlexibility",
+        "ContinuousFlexibility.Analysis.N01ControlIndexBound",
+        "ContinuousFlexibility.Analysis.N01InterpolationInverseCircle",
+        "ContinuousFlexibility.Analysis.N01OpticalCutoffCircleMultiplier",
+        "ContinuousFlexibility.Analysis.N01ResidualSmoothTame",
+        "ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds",
+        "ContinuousFlexibility.Analysis.N01ReturnDisplacementCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnDisplacementSmoothTame",
+        "ContinuousFlexibility.Analysis.N01ReturnInverseCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnLinearOperators",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocityCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame",
+        "ContinuousFlexibility.Analysis.N01UniformReturnMargins",
+        "ContinuousFlexibility.Analysis.N02ReturnAssembly",
+        "ContinuousFlexibility.Analysis.N03InteriorAngularBounds",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralIdentification",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralJets",
+        "ContinuousFlexibility.Analysis.N03InteriorTravelBounds",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorFlows",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorJets",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorValues",
+        "ContinuousFlexibility.Analysis.N04SelectorInverseCircleFixedBaseBounds",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionReferenceLower",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap"
+      ]
+    },
+    {
+      "provider": "ContinuousFlexibility.Analysis.N01FlowSmallness",
+      "current169_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.ReturnCorrectionSmallness",
+          "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionSmallness.lean",
+          "blob": "5e8807badcc8eaabf7aa3a31ecbc64d64a76cb56"
+        }
+      ],
+      "after149_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.ReturnCorrectionSmallness",
+          "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionSmallness.lean",
+          "blob": "5e8807badcc8eaabf7aa3a31ecbc64d64a76cb56"
+        }
+      ],
+      "after_fixed2_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.ReturnCorrectionSmallness",
+          "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionSmallness.lean",
+          "blob": "5e8807badcc8eaabf7aa3a31ecbc64d64a76cb56"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N01FlowInverseJetBounds",
+          "path": "src/ContinuousFlexibility/Analysis/N01FlowInverseJetBounds.lean",
+          "blob": "f598b3ee14ce332a7e194e8ef05a1616a8608dc5"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N01SelectorInverse",
+          "path": "src/ContinuousFlexibility/Analysis/N01SelectorInverse.lean",
+          "blob": "959be823f4a888cca1c45c2f0fa77ef627bbc8f9"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N01ResidualCircleModel",
+          "path": "src/ContinuousFlexibility/Analysis/N01ResidualCircleModel.lean",
+          "blob": "e7aeb751c99fbc50dbb5a0b1398b0afe061213b6"
+        }
+      ],
+      "current169_transitive": [
+        "AxiomAudit",
+        "ContinuousFlexibility",
+        "ContinuousFlexibility.Analysis.N03InteriorAngularBounds",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralIdentification",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralJets",
+        "ContinuousFlexibility.Analysis.N03InteriorTravelBounds",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorFlows",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorJets",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorValues",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionReferenceLower",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSmallness",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionVelocityBounds"
+      ],
+      "after_fixed2_transitive": [
+        "AxiomAudit",
+        "ContinuousFlexibility",
+        "ContinuousFlexibility.Analysis.N01FlowInverseJetBounds",
+        "ContinuousFlexibility.Analysis.N01InterpolationInverseCircle",
+        "ContinuousFlexibility.Analysis.N01ResidualCircleModel",
+        "ContinuousFlexibility.Analysis.N01ResidualSectorCoordinates",
+        "ContinuousFlexibility.Analysis.N01ResidualSmoothTame",
+        "ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds",
+        "ContinuousFlexibility.Analysis.N01ReturnDisplacementCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnDisplacementSmoothTame",
+        "ContinuousFlexibility.Analysis.N01ReturnInverseCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocityCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame",
+        "ContinuousFlexibility.Analysis.N01SelectorInverse",
+        "ContinuousFlexibility.Analysis.N03InteriorAngularBounds",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralIdentification",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralJets",
+        "ContinuousFlexibility.Analysis.N03InteriorTravelBounds",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorFlows",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorJets",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorValues",
+        "ContinuousFlexibility.Analysis.N04SelectorInverseCircleFixedBaseBounds",
+        "ContinuousFlexibility.Analysis.ReturnChartUniformBounds",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionReferenceLower",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSmallness",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionVelocityBounds"
+      ]
+    },
+    {
+      "provider": "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction",
+      "current169_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N01CoefficientSmallness",
+          "path": "src/ContinuousFlexibility/Analysis/N01CoefficientSmallness.lean",
+          "blob": "604ba19e39eaf655c47681ca38d6be1bbf16a54e"
+        }
+      ],
+      "after149_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N01CoefficientSmallness",
+          "path": "src/ContinuousFlexibility/Analysis/N01CoefficientSmallness.lean",
+          "blob": "604ba19e39eaf655c47681ca38d6be1bbf16a54e"
+        }
+      ],
+      "after_fixed2_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N01CoefficientSmallness",
+          "path": "src/ContinuousFlexibility/Analysis/N01CoefficientSmallness.lean",
+          "blob": "604ba19e39eaf655c47681ca38d6be1bbf16a54e"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.SmoothDirectionsGluing",
+          "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsGluing.lean",
+          "blob": "17c20b98c1e0789179039177e5d689bb9dd96dc9"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.NonlinearNeighborhoodRestriction",
+          "path": "src/ContinuousFlexibility/Analysis/NonlinearNeighborhoodRestriction.lean",
+          "blob": "3f231a86ea80d87d6f908ce36c27ad1855dafaf3"
+        }
+      ],
+      "current169_transitive": [
+        "AxiomAudit",
+        "ContinuousFlexibility",
+        "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+        "ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation",
+        "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+        "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+        "ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily",
+        "ContinuousFlexibility.Analysis.N01CoefficientSmallness",
+        "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "ContinuousFlexibility.Analysis.N01OpticalCollarPositivity",
+        "ContinuousFlexibility.Analysis.N03InteriorAngularBounds",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralIdentification",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralJets",
+        "ContinuousFlexibility.Analysis.N03InteriorTravelBounds",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorFlows",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorJets",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorValues",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionReferenceLower",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSmallness",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionVelocityBounds",
+        "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal"
+      ],
+      "after_fixed2_transitive": [
+        "AxiomAudit",
+        "ContinuousFlexibility",
+        "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+        "ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation",
+        "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+        "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+        "ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily",
+        "ContinuousFlexibility.Analysis.CircleAverageCompositionSmoothTame",
+        "ContinuousFlexibility.Analysis.CircleAverageCompositionUniformBounds",
+        "ContinuousFlexibility.Analysis.CircleCompositionLocalTame",
+        "ContinuousFlexibility.Analysis.CircleCompositionSmoothDirections",
+        "ContinuousFlexibility.Analysis.CircleCompositionSmoothTame",
+        "ContinuousFlexibility.Analysis.CircleCompositionUniformBounds",
+        "ContinuousFlexibility.Analysis.CircleInversePerturbation",
+        "ContinuousFlexibility.Analysis.CircleInverseSmoothTame",
+        "ContinuousFlexibility.Analysis.CirclePositiveInversePerturbation",
+        "ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame",
+        "ContinuousFlexibility.Analysis.CirclePositiveInverseUniformBounds",
+        "ContinuousFlexibility.Analysis.CircleTravelUniformJets",
+        "ContinuousFlexibility.Analysis.CircleUniformFamilyOperations",
+        "ContinuousFlexibility.Analysis.N01CoefficientSmallness",
+        "ContinuousFlexibility.Analysis.N01EndpointCircleTower",
+        "ContinuousFlexibility.Analysis.N01EndpointSmoothTame",
+        "ContinuousFlexibility.Analysis.N01EndpointZeroGrowth",
+        "ContinuousFlexibility.Analysis.N01FlowCircleUniformBounds",
+        "ContinuousFlexibility.Analysis.N01FlowInverseJetBounds",
+        "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "ContinuousFlexibility.Analysis.N01InterpolationInverseCircle",
+        "ContinuousFlexibility.Analysis.N01OpticalCollarPositivity",
+        "ContinuousFlexibility.Analysis.N01ResidualCircleModel",
+        "ContinuousFlexibility.Analysis.N01ResidualSectorCoordinates",
+        "ContinuousFlexibility.Analysis.N01ResidualSmoothTame",
+        "ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds",
+        "ContinuousFlexibility.Analysis.N01ReturnDisplacementCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnDisplacementSmoothTame",
+        "ContinuousFlexibility.Analysis.N01ReturnInverseCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocityCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame",
+        "ContinuousFlexibility.Analysis.N01SelectorInverse",
+        "ContinuousFlexibility.Analysis.N03InteriorAngularBounds",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralIdentification",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralJets",
+        "ContinuousFlexibility.Analysis.N03InteriorTravelBounds",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorFlows",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorJets",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorValues",
+        "ContinuousFlexibility.Analysis.N04EndpointCircleFixedBaseBounds",
+        "ContinuousFlexibility.Analysis.N04SelectorInverseCircleFixedBaseBounds",
+        "ContinuousFlexibility.Analysis.NonlinearNeighborhoodRestriction",
+        "ContinuousFlexibility.Analysis.ReturnChartUniformBounds",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionReferenceLower",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSmallness",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionVelocityBounds",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsGluing",
+        "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal"
+      ]
+    },
+    {
+      "provider": "ContinuousFlexibility.Analysis.OpticalControlRatio",
+      "current169_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.OpticalControlFullCurvature",
+          "path": "src/ContinuousFlexibility/Analysis/OpticalControlFullCurvature.lean",
+          "blob": "286fef0b534b762cbfacdae9a542f5b15643c1c8"
+        }
+      ],
+      "after149_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.OpticalControlFullCurvature",
+          "path": "src/ContinuousFlexibility/Analysis/OpticalControlFullCurvature.lean",
+          "blob": "286fef0b534b762cbfacdae9a542f5b15643c1c8"
+        }
+      ],
+      "after_fixed2_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.OpticalControlFullCurvature",
+          "path": "src/ContinuousFlexibility/Analysis/OpticalControlFullCurvature.lean",
+          "blob": "286fef0b534b762cbfacdae9a542f5b15643c1c8"
+        }
+      ],
+      "current169_transitive": [
+        "AxiomAudit",
+        "ContinuousFlexibility",
+        "ContinuousFlexibility.Analysis.N01ControlFlowBounds",
+        "ContinuousFlexibility.Analysis.N01ControlIndexBound",
+        "ContinuousFlexibility.Analysis.N01ControlWeightConstraint",
+        "ContinuousFlexibility.Analysis.N03InteriorAngularBounds",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralIdentification",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralJets",
+        "ContinuousFlexibility.Analysis.N03InteriorTravelBounds",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorFlows",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorJets",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorValues",
+        "ContinuousFlexibility.Analysis.OpticalControlFullCurvature",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionReferenceLower",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap"
+      ],
+      "after_fixed2_transitive": [
+        "AxiomAudit",
+        "ContinuousFlexibility",
+        "ContinuousFlexibility.Analysis.N01ControlFlowBounds",
+        "ContinuousFlexibility.Analysis.N01ControlIndexBound",
+        "ContinuousFlexibility.Analysis.N01ControlWeightConstraint",
+        "ContinuousFlexibility.Analysis.N01InterpolationInverseCircle",
+        "ContinuousFlexibility.Analysis.N01OpticalCutoffCircleMultiplier",
+        "ContinuousFlexibility.Analysis.N01ResidualSmoothTame",
+        "ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds",
+        "ContinuousFlexibility.Analysis.N01ReturnDisplacementCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnDisplacementSmoothTame",
+        "ContinuousFlexibility.Analysis.N01ReturnInverseCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnLinearOperators",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocityCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame",
+        "ContinuousFlexibility.Analysis.N01UniformReturnMargins",
+        "ContinuousFlexibility.Analysis.N02ReturnAssembly",
+        "ContinuousFlexibility.Analysis.N03InteriorAngularBounds",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralIdentification",
+        "ContinuousFlexibility.Analysis.N03InteriorFirstIntegralJets",
+        "ContinuousFlexibility.Analysis.N03InteriorTravelBounds",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorFlows",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorJets",
+        "ContinuousFlexibility.Analysis.N03NegativeInteriorValues",
+        "ContinuousFlexibility.Analysis.N04SelectorInverseCircleFixedBaseBounds",
+        "ContinuousFlexibility.Analysis.OpticalControlFullCurvature",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionReferenceLower",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap"
+      ]
+    },
+    {
+      "provider": "ContinuousFlexibility.Analysis.SmoothDirectionsUnitIntegral",
+      "current169_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily",
+          "path": "src/ContinuousFlexibility/Analysis/TameUnitIntegralLinearFamily.lean",
+          "blob": "d6fbe2afb25d83b302e606ecf0dbc4bf3763b7a2"
+        }
+      ],
+      "after149_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily",
+          "path": "src/ContinuousFlexibility/Analysis/TameUnitIntegralLinearFamily.lean",
+          "blob": "d6fbe2afb25d83b302e606ecf0dbc4bf3763b7a2"
+        }
+      ],
+      "after_fixed2_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily",
+          "path": "src/ContinuousFlexibility/Analysis/TameUnitIntegralLinearFamily.lean",
+          "blob": "f6269f9eb372fe9acaf71533c402bcd66d95e50d"
+        }
+      ],
+      "current169_transitive": [
+        "AxiomAudit",
+        "ContinuousFlexibility",
+        "ContinuousFlexibility.Analysis.CoupledCircleAverageSmooth",
+        "ContinuousFlexibility.Analysis.CoupledCircleErrorSmooth",
+        "ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily",
+        "ContinuousFlexibility.Blueprint.Assembly",
+        "ContinuousFlexibility.Blueprint.N09N10",
+        "Solution.FlexibleSphereSolution"
+      ],
+      "after_fixed2_transitive": [
+        "AxiomAudit",
+        "ContinuousFlexibility",
+        "ContinuousFlexibility.Analysis.CircleAverageCompositionSmoothTame",
+        "ContinuousFlexibility.Analysis.CircleAverageCompositionUniformBounds",
+        "ContinuousFlexibility.Analysis.CircleUniformFamilyOperations",
+        "ContinuousFlexibility.Analysis.CoupledCircleAverageSmooth",
+        "ContinuousFlexibility.Analysis.CoupledCircleErrorSmooth",
+        "ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds",
+        "ContinuousFlexibility.Analysis.N01ReturnDisplacementSmoothTame",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocityCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame",
+        "ContinuousFlexibility.Analysis.N04SelectorInverseCircleFixedBaseBounds",
+        "ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily",
+        "ContinuousFlexibility.Analysis.UniformUnitIntegralLinearFamily",
+        "ContinuousFlexibility.Blueprint.Assembly",
+        "ContinuousFlexibility.Blueprint.N09N10",
+        "Solution.FlexibleSphereSolution"
+      ]
+    },
+    {
+      "provider": "ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily",
+      "current169_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.CoupledCircleAverageSmooth",
+          "path": "src/ContinuousFlexibility/Analysis/CoupledCircleAverageSmooth.lean",
+          "blob": "e272a6a79d6904d1d955f27a6777fa1c6396533e"
+        }
+      ],
+      "after149_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.CoupledCircleAverageSmooth",
+          "path": "src/ContinuousFlexibility/Analysis/CoupledCircleAverageSmooth.lean",
+          "blob": "e272a6a79d6904d1d955f27a6777fa1c6396533e"
+        }
+      ],
+      "after_fixed2_direct": [
+        {
+          "module": "ContinuousFlexibility",
+          "path": "src/ContinuousFlexibility.lean",
+          "blob": "38c718d76599e9550272afe65276ffed72dc9caf"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.CoupledCircleAverageSmooth",
+          "path": "src/ContinuousFlexibility/Analysis/CoupledCircleAverageSmooth.lean",
+          "blob": "e272a6a79d6904d1d955f27a6777fa1c6396533e"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.CircleAverageCompositionSmoothTame",
+          "path": "src/ContinuousFlexibility/Analysis/CircleAverageCompositionSmoothTame.lean",
+          "blob": "da25ed949924696c8c3f82e87ffc9e8117b20653"
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.UniformUnitIntegralLinearFamily",
+          "path": "src/ContinuousFlexibility/Analysis/UniformUnitIntegralLinearFamily.lean",
+          "blob": "3e51d7f6493103f67acaa8f4755619f6978230a4"
+        }
+      ],
+      "current169_transitive": [
+        "AxiomAudit",
+        "ContinuousFlexibility",
+        "ContinuousFlexibility.Analysis.CoupledCircleAverageSmooth",
+        "ContinuousFlexibility.Analysis.CoupledCircleErrorSmooth",
+        "ContinuousFlexibility.Blueprint.Assembly",
+        "ContinuousFlexibility.Blueprint.N09N10",
+        "Solution.FlexibleSphereSolution"
+      ],
+      "after_fixed2_transitive": [
+        "AxiomAudit",
+        "ContinuousFlexibility",
+        "ContinuousFlexibility.Analysis.CircleAverageCompositionSmoothTame",
+        "ContinuousFlexibility.Analysis.CircleAverageCompositionUniformBounds",
+        "ContinuousFlexibility.Analysis.CircleUniformFamilyOperations",
+        "ContinuousFlexibility.Analysis.CoupledCircleAverageSmooth",
+        "ContinuousFlexibility.Analysis.CoupledCircleErrorSmooth",
+        "ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds",
+        "ContinuousFlexibility.Analysis.N01ReturnDisplacementSmoothTame",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocityCircle",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame",
+        "ContinuousFlexibility.Analysis.N04SelectorInverseCircleFixedBaseBounds",
+        "ContinuousFlexibility.Analysis.UniformUnitIntegralLinearFamily",
+        "ContinuousFlexibility.Blueprint.Assembly",
+        "ContinuousFlexibility.Blueprint.N09N10",
+        "Solution.FlexibleSphereSolution"
+      ]
+    }
+  ],
+  "fresh_shared_public_contract_checks": {
+    "source_pairs": [
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleUnitIntegral",
+        "source_before": "39a06c8ea216f77af837487b24e3e187841e08a7",
+        "source_after": "539887de9877614276395ffbbadb8a8ab8d8904c",
+        "before_count": 4,
+        "after_count": 4,
+        "removed": [],
+        "added": [],
+        "changed": [],
+        "warnings": []
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ControlFlowBounds",
+        "source_before": "da5a86231558708da484b96b350a925cd0fe50d4",
+        "source_after": "440c6c682d1e8e1ff6114d11aeec6411035e7789",
+        "before_count": 6,
+        "after_count": 6,
+        "removed": [],
+        "added": [],
+        "changed": [
+          {
+            "name": "ContinuousFlexibility.Statements.N01Properties.controlTravelPartial_second_bound",
+            "before": "theorem N01Properties.controlTravelPartial_second_bound\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :\n    ∃ parameterLoss : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m r, r ∈ Ioo (C.left m) (C.right m) →\n      |deriv (deriv (fun t => opticalTravel\n        (opticalLogPerturbation D.w (C.control m) t) (C.left m) r)) 0| ≤\n      B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *\n        T.E0 (T.sample (C.cell m)) ^ B *\n        oneHighVariationWeight (pairGrading (stateGrading S) realGrading)\n          base (loss + parameterLoss) 0 (fun _ : Fin 2 =>\n            (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ)))",
+            "after": "theorem N01Properties.controlTravelPartial_second_bound\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :\n    ∃ d₂ : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m r, r ∈ Ioo (C.left m) (C.right m) →\n      |deriv (deriv (fun t => opticalTravel\n        (opticalLogPerturbation D.w (C.control m) t) (C.left m) r)) 0| ≤\n      B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *\n        T.E0 (T.sample (C.cell m)) ^ B *\n        oneHighVariationWeight (pairGrading (stateGrading S) realGrading)\n          base (loss + d₂) 0 (fun _ : Fin 2 =>\n            (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ)))",
+            "before_line": 123,
+            "after_line": 73,
+            "alpha_or_whitespace_only": true
+          },
+          {
+            "name": "ContinuousFlexibility.Statements.N01Properties.controlTravel_second_bound",
+            "before": "theorem N01Properties.controlTravel_second_bound\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :\n    ∃ parameterLoss : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m,\n      |deriv (deriv (fun t => opticalTravel\n        (opticalLogPerturbation D.w (C.control m) t) (C.left m) (C.right m))) 0| ≤\n      B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *\n        T.E0 (T.sample (C.cell m)) ^ B *\n        oneHighVariationWeight (pairGrading (stateGrading S) realGrading)\n          base (loss + parameterLoss) 0 (fun _ : Fin 2 =>\n            (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ)))",
+            "after": "theorem N01Properties.controlTravel_second_bound\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :\n    ∃ d₂ : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m,\n      |deriv (deriv (fun t => opticalTravel\n        (opticalLogPerturbation D.w (C.control m) t) (C.left m) (C.right m))) 0| ≤\n      B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *\n        T.E0 (T.sample (C.cell m)) ^ B *\n        oneHighVariationWeight (pairGrading (stateGrading S) realGrading)\n          base (loss + d₂) 0 (fun _ : Fin 2 =>\n            (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ)))",
+            "before_line": 226,
+            "after_line": 199,
+            "alpha_or_whitespace_only": true
+          }
+        ],
+        "warnings": []
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ControlIndexBound",
+        "source_before": "1928f91ca23a5a0620ca958c0d83fc46b148e33a",
+        "source_after": "e6ca03487e088a47f5869881ff0c1a7e6bf42d2a",
+        "before_count": 3,
+        "after_count": 3,
+        "removed": [],
+        "added": [],
+        "changed": [],
+        "warnings": []
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ControlWeightConstraint",
+        "source_before": "c0e13885832aa4b133e24e45ff76bc0ca3cc2495",
+        "source_after": "fc55c919e972c5529680464eba8dbb66c07afb37",
+        "before_count": 4,
+        "after_count": 4,
+        "removed": [],
+        "added": [],
+        "changed": [
+          {
+            "name": "ContinuousFlexibility.Statements.N01Properties.controlTravel_second_weight_bound",
+            "before": "theorem N01Properties.controlTravel_second_weight_bound\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :\n    ∃ parameterLoss : ℕ, ∃ K B : ℝ, 0 < K ∧ 0 < B ∧ ∀ m,\n      |deriv (deriv (fun t => opticalTravel\n        (opticalLogPerturbation D.w (C.control m) t) (C.left m) (C.right m))) 0| ≤\n        K * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *\n          T.E0 (T.sample (C.cell m)) ^ B *\n          (T.M (T.sample m) ^ max base (loss + parameterLoss) *\n            T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2",
+            "after": "theorem N01Properties.controlTravel_second_weight_bound\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :\n    ∃ d₂ : ℕ, ∃ K B : ℝ, 0 < K ∧ 0 < B ∧ ∀ m,\n      |deriv (deriv (fun t => opticalTravel\n        (opticalLogPerturbation D.w (C.control m) t) (C.left m) (C.right m))) 0| ≤\n        K * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *\n          T.E0 (T.sample (C.cell m)) ^ B *\n          (T.M (T.sample m) ^ max base (loss + d₂) *\n            T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2",
+            "before_line": 58,
+            "after_line": 58,
+            "alpha_or_whitespace_only": true
+          },
+          {
+            "name": "ContinuousFlexibility.Statements.N01Properties.control_actual_cell_weight_constraint",
+            "before": "theorem N01Properties.control_actual_cell_weight_constraint\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :\n    ∃ parameterLoss : ℕ, ∃ K B A F : ℝ,\n      0 < K ∧ 0 < B ∧ 0 < A ∧ 0 < F ∧ ∀ m j,\n      Ioo (C.left m) (C.right m) ⊆ D.cells j →\n      1 ≤ K * T.H (T.sample j) ^ (3 / 4 : ℝ) * T.E0 (T.sample j) ^ B *\n        radialE (D.cellIndex j) ^ A *\n        T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ F *\n        ((T.M (T.sample m) ^ max base (1 + loss) *\n            T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *\n          (T.M (T.sample m) ^ max base (loss + parameterLoss) *\n            T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2)",
+            "after": "theorem N01Properties.control_actual_cell_weight_constraint\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :\n    ∃ d₂ : ℕ, ∃ K B A F : ℝ, 0 < K ∧ 0 < B ∧ 0 < A ∧ 0 < F ∧ ∀ m j,\n      Ioo (C.left m) (C.right m) ⊆ D.cells j →\n      1 ≤ K * T.H (T.sample j) ^ (3 / 4 : ℝ) * T.E0 (T.sample j) ^ B *\n        radialE (D.cellIndex j) ^ A *\n        T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ F *\n        ((T.M (T.sample m) ^ max base (1 + loss) *\n            T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *\n          (T.M (T.sample m) ^ max base (loss + d₂) *\n            T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2)",
+            "before_line": 107,
+            "after_line": 107,
+            "alpha_or_whitespace_only": true
+          }
+        ],
+        "warnings": []
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "source_before": "ca66bd0e3aa4056fdbdef013e16fe4825d066887",
+        "source_after": "128bbe1e44710de2eeb4e45e9570ddd2bbcbec52",
+        "before_count": 6,
+        "after_count": 6,
+        "removed": [],
+        "added": [],
+        "changed": [
+          {
+            "name": "ContinuousFlexibility.Statements.N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood",
+            "before": "theorem N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n    (hN : N01Properties D T S C base loss ε) (hT : IsMaterialData D T) :\n    ∃ parameterLoss : ℕ, ∀ s : ℕ,\n      ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → s + loss + parameterLoss ≤ base' →\n      ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →\n      ∀ z ∈ stateNeighborhood S C base' η, ∀ m b p,\n        b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →\n        |ordinaryFlowFamily S C m 0 b p z| ≤\n          6 * B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *\n            T.E0 (T.sample (C.cell m)) ^ B * η",
+            "after": "theorem N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n    (hN : N01Properties D T S C base loss ε) (hT : IsMaterialData D T) (s : ℕ) :\n    ∃ d₁ : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → s + loss + d₁ ≤ base' →\n      ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →\n      ∀ z ∈ stateNeighborhood S C base' η, ∀ m b p,\n        b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →\n        |ordinaryFlowFamily S C m 0 b p z| ≤\n          6 * B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *\n            T.E0 (T.sample (C.cell m)) ^ B * η",
+            "before_line": 35,
+            "after_line": 35,
+            "alpha_or_whitespace_only": false
+          },
+          {
+            "name": "ContinuousFlexibility.Statements.N01Properties.minusFlow_near_reference_weighted",
+            "before": "theorem N01Properties.minusFlow_near_reference_weighted\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :\n    ∃ parameterLoss : ℕ, ∃ B : ℝ, 0 < B ∧\n      ∀ base' : ℕ, base ≤ base' → 1 + loss + parameterLoss ≤ base' →\n      ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →\n      ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →\n      ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,\n      let M := 6 * B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *\n        T.E0 (T.sample (C.cell m)) ^ B * η\n      |C.minusFlow z m r θ - (θ - opticalTravel D.w (C.left m) r)| ≤ M ∧\n        |deriv (C.minusFlow z m r) θ - 1| ≤ M",
+            "after": "theorem N01Properties.minusFlow_near_reference_weighted\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :\n    ∃ d₁ : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → 1 + loss + d₁ ≤ base' →\n      ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →\n      ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →\n      ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,\n      let M := 6 * B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *\n        T.E0 (T.sample (C.cell m)) ^ B * η\n      |C.minusFlow z m r θ - (θ - opticalTravel D.w (C.left m) r)| ≤ M ∧\n        |deriv (C.minusFlow z m r) θ - 1| ≤ M",
+            "before_line": 127,
+            "after_line": 124,
+            "alpha_or_whitespace_only": true
+          },
+          {
+            "name": "ContinuousFlexibility.Statements.N01Properties.minusFlow_near_reference_uniform",
+            "before": "theorem N01Properties.minusFlow_near_reference_uniform\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :\n    ∃ parameterLoss : ℕ, ∃ K : ℝ, 0 < K ∧\n      ∀ base' : ℕ, base ≤ base' → 1 + loss + parameterLoss ≤ base' →\n      ∀ η : ℝ, 0 ≤ η → η ≤ ε → η ≤ 1 / 2 →\n      ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →\n      ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,\n      |C.minusFlow z m r θ - (θ - opticalTravel D.w (C.left m) r)| ≤ K * η ∧\n        |deriv (C.minusFlow z m r) θ - 1| ≤ K * η",
+            "after": "theorem N01Properties.minusFlow_near_reference_uniform\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :\n    ∃ d₁ : ℕ, ∃ K : ℝ, 0 < K ∧ ∀ base' : ℕ, base ≤ base' → 1 + loss + d₁ ≤ base' →\n      ∀ η : ℝ, 0 ≤ η → η ≤ ε → η ≤ 1 / 2 →\n      ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →\n      ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,\n      |C.minusFlow z m r θ - (θ - opticalTravel D.w (C.left m) r)| ≤ K * η ∧\n        |deriv (C.minusFlow z m r) θ - 1| ≤ K * η",
+            "before_line": 193,
+            "after_line": 188,
+            "alpha_or_whitespace_only": true
+          }
+        ],
+        "warnings": []
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction",
+        "source_before": "5150d77940daa6a3f95bd505bdb929b2e95db667",
+        "source_after": "cc38a6d2b17c7398b071a6b22a130668877f3204",
+        "before_count": 4,
+        "after_count": 4,
+        "removed": [],
+        "added": [],
+        "changed": [],
+        "warnings": []
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.OpticalControlRatio",
+        "source_before": "bd25720da42b672538f23d245d8c5890471d9a7e",
+        "source_after": "ebcd0da63d49616a822888fdfdb3add58ea433c5",
+        "before_count": 7,
+        "after_count": 7,
+        "removed": [],
+        "added": [],
+        "changed": [],
+        "warnings": []
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.SmoothDirectionsUnitIntegral",
+        "source_before": "db1f7cac84a057318f59c3d73a669948342193bd",
+        "source_after": "524d2fbeddf977df987df89dc5547e823629fdc6",
+        "before_count": 8,
+        "after_count": 8,
+        "removed": [],
+        "added": [],
+        "changed": [],
+        "warnings": []
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily",
+        "source_before": "d6fbe2afb25d83b302e606ecf0dbc4bf3763b7a2",
+        "source_after": "f6269f9eb372fe9acaf71533c402bcd66d95e50d",
+        "before_count": 2,
+        "after_count": 2,
+        "removed": [],
+        "added": [],
+        "changed": [],
+        "warnings": []
+      }
+    ],
+    "explicit_names_before": 44,
+    "explicit_names_after": 44,
+    "added_names": [],
+    "removed_names": [],
+    "sole_non_alpha_change": "ContinuousFlexibility.Statements.N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood",
+    "earlier_narrative_count_clarification": "The earlier plan's small public-header counts described selected theorem headers. This fresh namespace-aware table additionally counts public definitions/abbreviations, giving44 explicit named declarations across nine modules; no new or removed name was found.",
+    "all_source_pair_git_blobs_and_sha256_verified": true,
+    "actual_flow_call_sites": [
+      {
+        "version": "current",
+        "module": "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "blob": "ca66bd0e3aa4056fdbdef013e16fe4825d066887",
+        "line": 35,
+        "text": "theorem N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood"
+      },
+      {
+        "version": "current",
+        "module": "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "blob": "ca66bd0e3aa4056fdbdef013e16fe4825d066887",
+        "line": 127,
+        "text": "theorem N01Properties.minusFlow_near_reference_weighted"
+      },
+      {
+        "version": "current",
+        "module": "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "blob": "ca66bd0e3aa4056fdbdef013e16fe4825d066887",
+        "line": 141,
+        "text": "  obtain ⟨parameterLoss, horder⟩ := hN.ordinaryFlowFamily_angular_small_of_neighborhood hT"
+      },
+      {
+        "version": "current",
+        "module": "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "blob": "ca66bd0e3aa4056fdbdef013e16fe4825d066887",
+        "line": 193,
+        "text": "theorem N01Properties.minusFlow_near_reference_uniform"
+      },
+      {
+        "version": "current",
+        "module": "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "blob": "ca66bd0e3aa4056fdbdef013e16fe4825d066887",
+        "line": 205,
+        "text": "  obtain ⟨parameterLoss, B, hB, hb⟩ := hN.minusFlow_near_reference_weighted hS hT"
+      },
+      {
+        "version": "current",
+        "module": "ContinuousFlexibility.Analysis.ReturnCorrectionSmallness",
+        "blob": "5e8807badcc8eaabf7aa3a31ecbc64d64a76cb56",
+        "line": 177,
+        "text": "  obtain ⟨parameterLoss, B, hB, hb⟩ := hN.minusFlow_near_reference_weighted hS hT"
+      },
+      {
+        "version": "current",
+        "module": "ContinuousFlexibility.Analysis.ReturnCorrectionVelocityBounds",
+        "blob": "b6c7cefc7e6768f7a2c43b36e688d0e4bef28637",
+        "line": 124,
+        "text": "  obtain ⟨derivativeLoss, K, hK, hk⟩ := hN.minusFlow_near_reference_uniform hS hT"
+      },
+      {
+        "version": "after",
+        "module": "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "blob": "128bbe1e44710de2eeb4e45e9570ddd2bbcbec52",
+        "line": 35,
+        "text": "theorem N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood"
+      },
+      {
+        "version": "after",
+        "module": "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "blob": "128bbe1e44710de2eeb4e45e9570ddd2bbcbec52",
+        "line": 124,
+        "text": "theorem N01Properties.minusFlow_near_reference_weighted"
+      },
+      {
+        "version": "after",
+        "module": "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "blob": "128bbe1e44710de2eeb4e45e9570ddd2bbcbec52",
+        "line": 137,
+        "text": "  obtain ⟨d₁, B, hB, hb⟩ := hN.ordinaryFlowFamily_angular_small_of_neighborhood hT 1"
+      },
+      {
+        "version": "after",
+        "module": "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "blob": "128bbe1e44710de2eeb4e45e9570ddd2bbcbec52",
+        "line": 188,
+        "text": "theorem N01Properties.minusFlow_near_reference_uniform"
+      },
+      {
+        "version": "after",
+        "module": "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "blob": "128bbe1e44710de2eeb4e45e9570ddd2bbcbec52",
+        "line": 199,
+        "text": "  obtain ⟨d₁, B, hB, hb⟩ := hN.minusFlow_near_reference_weighted hS hT"
+      },
+      {
+        "version": "after",
+        "module": "ContinuousFlexibility.Analysis.N01FlowInverseJetBounds",
+        "blob": "f598b3ee14ce332a7e194e8ef05a1616a8608dc5",
+        "line": 153,
+        "text": "  obtain ⟨d₁, K, hK, hsmall⟩ := hN.minusFlow_near_reference_uniform hS hT"
+      },
+      {
+        "version": "after",
+        "module": "ContinuousFlexibility.Analysis.ReturnCorrectionSmallness",
+        "blob": "5e8807badcc8eaabf7aa3a31ecbc64d64a76cb56",
+        "line": 177,
+        "text": "  obtain ⟨parameterLoss, B, hB, hb⟩ := hN.minusFlow_near_reference_weighted hS hT"
+      },
+      {
+        "version": "after",
+        "module": "ContinuousFlexibility.Analysis.ReturnCorrectionVelocityBounds",
+        "blob": "b6c7cefc7e6768f7a2c43b36e688d0e4bef28637",
+        "line": 124,
+        "text": "  obtain ⟨derivativeLoss, K, hK, hk⟩ := hN.minusFlow_near_reference_uniform hS hT"
+      }
+    ],
+    "scope": "Read each of nine before/after modules, all current direct import consumers, and all current or projected FlowSmallness transitive Analysis consumers.44 previously uncached exact raw sources were fetched for this check.",
+    "consumer_result": "The changed angular helper is called only in its own module at fixed order1; that call is migrated with the module in batch2. Current external callers use weighted/uniform APIs whose complete headers are alpha/whitespace-equivalent. The new inverse consumer likewise uses unchanged uniform API. This does not upgrade the helper's weaker forall-s/exists-loss quantifiers into a fixed all-orders loss."
+  },
+  "name_checks": {
+    "new_source_index": {
+      "blob": "5c815b6f63a572455a89ef2cc2e778fb4ed717b6",
+      "sha256": "5f9fc6d9b1f83dc346a3b5193ee0979cfc565c990426c4a60b5f96a8b4625c76",
+      "bytes": 527799,
+      "path": "quantitative/recovery/FixedBase227ExplicitDeclarations.json"
+    },
+    "actual_nonmain_index": {
+      "blob": "9c3e8c742cbce4d8b019b5d7923b45af5f30dcba",
+      "sha256": "79a86b2a00a0b16fcb343221248cd6d1a271f94e9b09ba427018939695d88cb1",
+      "bytes": 987363,
+      "path": "quantitative/recovery/Actual169NonMainExplicitDeclarations.json"
+    },
+    "new_source_declarations": 1301,
+    "new_main_declarations": 1292,
+    "owned_declarations": 9,
+    "actual_nonmain_sources": 524,
+    "actual_nonmain_declarations": 1974,
+    "new_internal_collisions": [],
+    "cross_with_actual_nonmain": [],
+    "cross_with_future149": [],
+    "same_main_partition": {
+      "current_exact_main_source_blobs": 3893,
+      "new_main_source_blobs": 221,
+      "main_commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "main_tree": "d15c0a9504d0fc417bbcd7373995dbf85f1e2560",
+      "new221_all_outside_Blueprint_and_root_exclusions": true,
+      "scope": "These sources are literal objects of one main tree. Existing main compilation/source evidence is reused for this unchanged-main boundary; this audit did not re-read every3893 identical main body."
+    },
+    "owned_boundary_supplement": {
+      "default_branch_main_observed_commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "exact_token_searches": [
+        {
+          "module": "ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds",
+          "name": "ContinuousFlexibility.Statements.circlePositiveInverseComposeLinear_zero_fixedBase_value",
+          "token": "circlePositiveInverseComposeLinear_zero_fixedBase_value",
+          "total_count": 0,
+          "incomplete_results": false,
+          "items": []
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds",
+          "name": "ContinuousFlexibility.Statements.circlePositiveInverseComposeLinear_fixedBase_oneHigh",
+          "token": "circlePositiveInverseComposeLinear_fixedBase_oneHigh",
+          "total_count": 0,
+          "incomplete_results": false,
+          "items": []
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+          "name": "ContinuousFlexibility.Statements.circleShiftedChartCompose_orderedJet_eq_kernel",
+          "token": "circleShiftedChartCompose_orderedJet_eq_kernel",
+          "total_count": 0,
+          "incomplete_results": false,
+          "items": []
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+          "name": "ContinuousFlexibility.Statements.circleShiftedChartCompose_orderedJets_fixedBase_bound",
+          "token": "circleShiftedChartCompose_orderedJets_fixedBase_bound",
+          "total_count": 0,
+          "incomplete_results": false,
+          "items": []
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N04EndpointCircleFixedBaseBounds",
+          "name": "ContinuousFlexibility.Statements.N01Properties.endpointFlowCircle_fixedBase_oneHigh",
+          "token": "endpointFlowCircle_fixedBase_oneHigh",
+          "total_count": 0,
+          "incomplete_results": false,
+          "items": []
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N04SelectorInverseCircleFixedBaseBounds",
+          "name": "ContinuousFlexibility.Statements.N01Properties.selectorInverseCircle_fixedBase_oneHigh",
+          "token": "selectorInverseCircle_fixedBase_oneHigh",
+          "total_count": 0,
+          "incomplete_results": false,
+          "items": []
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds",
+          "name": "ContinuousFlexibility.Analysis.spaces_interpolation_affine_product_bound",
+          "token": "spaces_interpolation_affine_product_bound",
+          "total_count": 0,
+          "incomplete_results": false,
+          "items": []
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds",
+          "name": "ContinuousFlexibility.Analysis.projectiveCompositionJets_fixedBase_oneHigh",
+          "token": "projectiveCompositionJets_fixedBase_oneHigh",
+          "total_count": 0,
+          "incomplete_results": false,
+          "items": []
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds",
+          "name": "ContinuousFlexibility.Analysis.inverseFamilySmoothDirections_fixedBase_oneHigh",
+          "token": "inverseFamilySmoothDirections_fixedBase_oneHigh",
+          "total_count": 0,
+          "incomplete_results": false,
+          "items": []
+        }
+      ],
+      "scope": "Nine targeted default-main indexed searches returned zero hits and incomplete_results=false. This supplements the exact nonmain scan and prior owned-source peers; search absence is not described as a fresh exhaustive all-main source scan."
+    },
+    "limits": [
+      "Explicit declarations and named instances only; no elaborator-generated structure projections/constructors or export aliases.",
+      "No fresh4k body or all-name scan is claimed.",
+      "No Lean command was run; full CI remains the operational gate."
+    ]
+  },
+  "state_neighborhood": {
+    "selected_blob": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+    "excluded_main_blob": "71f6118a05293a2b49a121d77886443edbc81cb8",
+    "reason": "Retain actual Blueprint.CanonicalParts import and existing namespace availability while all theorem source bodies remain equivalent to main. Full current graph confirms CanonicalParts is reachable.",
+    "selected_graph_has518_nodes": true,
+    "source_changed": false
+  },
+  "budget": [
+    {
+      "batch": 1,
+      "changed_files": 131,
+      "new_main": 129,
+      "new_owned": 2,
+      "shared_updates": 0,
+      "new_modules": 131,
+      "new_source_lines": 19539,
+      "shared_full_after_lines_upper_bound": 0,
+      "source_added_upper_bound": 19539,
+      "conservative_generated_root_imports": 131,
+      "conservative_added_upper_bound": 19670,
+      "limit": 20000,
+      "repair_reserve": 330
+    },
+    {
+      "batch": 2,
+      "changed_files": 105,
+      "new_main": 92,
+      "new_owned": 4,
+      "shared_updates": 9,
+      "new_modules": 96,
+      "new_source_lines": 16565,
+      "shared_full_after_lines_upper_bound": 1447,
+      "source_added_upper_bound": 18012,
+      "conservative_generated_root_imports": 96,
+      "conservative_added_upper_bound": 18108,
+      "limit": 20000,
+      "repair_reserve": 1892
+    }
+  ],
+  "next_action": "Parent may stage the selected bounded batch only after the exact preceding fullgreen and a final preimage/ref/rules/root-count recheck. Shared nine updates belong together with second-batch selected consumers; do not silently replace retained StateNeighborhood or import the unrelated reference_flow contract.",
+  "no_new_lean": true,
+  "no_local_lean_or_build": true,
+  "no_active_index_refs_or_ci_changed": true
+}

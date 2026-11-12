@@ -1,0 +1,36 @@
+{
+  "kind": "independent_root_CI170_first_jet_repair_review",
+  "reviewer": "/root",
+  "owner_manifest": "9052d4b74590e6fdac622bfbe1cbe2ef66a3c9f4",
+  "actual_head": "84f31a030a632f7d5ddba43b5a638d29da00af45",
+  "result": "pass before CI",
+  "full_sources_read": true,
+  "complete_diagnostics_read_from_artifact": "826005f0cd329d220290e072ec12ab8837d274d6",
+  "files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceFirstJets.lean",
+      "before_blob": "76fa1a822a2df404ea31125c346670efa50b3010",
+      "after_blob": "64b2f7c0920d8cc7a5e99e7c1d296ca54607ad3e",
+      "sha256": "dc458af47a01bd625ef84bf2941f86e0f0381b36419021fb898b6b97cf17ec27",
+      "public_headers_byte_identical": true,
+      "reverse_single_replacement_byte_exact": true
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGaugeFirstJets.lean",
+      "before_blob": "65bb127b9dd24cee1d337794f1a01d8f12a54326",
+      "after_blob": "5f5a135d7d20bdd3a28dbed9c2712bab39352226",
+      "sha256": "7bc2f36e622f649e8178ad8e2f9763657e1ce6bf8a13579cca3450df8d764031",
+      "public_headers_byte_identical": true,
+      "reverse_single_replacement_byte_exact": true
+    }
+  ],
+  "mathematics": [
+    "The typed projection is applied to the original actual chart radial-pair identity before the EqOn expected type can force a stronger chart equality.",
+    "Both displayed scalar height lambdas are definitionally exactly the original wholePositiveReferenceGaugeHeight functions, using the unchanged wholePositiveChartHeight inverse scalar.",
+    "The original inverse germs and comp_match/div supply the same first jets at the same actual current point."
+  ],
+  "net_added_Lean_lines": 4,
+  "new_public_declarations": 0,
+  "local_compile": false,
+  "CI": false
+}

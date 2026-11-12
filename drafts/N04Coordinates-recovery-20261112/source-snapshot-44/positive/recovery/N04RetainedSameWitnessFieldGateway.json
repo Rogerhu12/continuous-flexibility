@@ -1,0 +1,471 @@
+{
+  "schema": "n04-retained-n01-through03-same-witness-field-gateway-v2",
+  "status": "EXACT_SOURCE_ROUTE_NOT_IMPLEMENTED_NOT_COMPILED",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "selected_main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "author": "/root/proof_inventory",
+  "intended_path": "positive/recovery/N04RetainedSameWitnessFieldGateway.json",
+  "decision": {
+    "entry": "Start with the already reviewed closed retained N01 producer. Do not destruct an arbitrary N04bStatement witness to obtain retained seed data.",
+    "logical_use": "The final N04cStatement is an existential theorem. Its hN04b argument may be unused while its entire witness is constructed by this closed route. No theorem deriving seed certificates from arbitrary Through03 is asserted.",
+    "same_object_rule": "After the retained N01 producer returns D=Gamma.reference,T,S,C, invoke numerical producer153 exactly once. Every later restriction keeps R,L,chi,j,x,delta and all literal functions unchanged.",
+    "strict_gap_correction": "The local hcorrected in153 is an ODE/initial/return tuple, not a strict gap. It cannot alone be returned as hfield.",
+    "smallest_repair": "Use the public existing-gap-neighborhood theorem on the same153 chi and actual closed-buffer data. It selects only a larger base and smaller epsilon; restrict the already selected R and L and construct N04bFieldRegularity. No buffered factory is run a second time."
+  },
+  "seed_to_n01": {
+    "source": {
+      "module": "N01RetainedPrimitiveConstruction",
+      "git_blob": "b4c99756ab69d37a0a3ce2c61570bed32f749885",
+      "sha256": "5e4823895fdf7f549d98d6cff9e1e0d8ef460e1dadc531892bf1ed957a2125f6",
+      "utf8_bytes": 3154,
+      "lines": 61,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ActualRetainedReference",
+        "ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext",
+        "ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry",
+        "ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction",
+        "ContinuousFlexibility.Analysis.N01cActualPrimitiveGeometry",
+        "ContinuousFlexibility.Analysis.N01cRetainedComponentEnumeration"
+      ],
+      "read_scope": "Complete exact source read; no Lean elaboration"
+    },
+    "original_review": {
+      "owner_blob": "bd3f2fd83df84a4d0d51248f38f67035ca7d926c",
+      "peer_blob": "6f58ab582852a0d2edc40fc0c15d6cce5f970cf3",
+      "peer_sha256": "28d8272692417a36a167470d5c588bc809f9c02466cfb9e1cf4a2b857c133430"
+    },
+    "exact_header": "theorem n01c_exists_retained_primitive_properties :\n    ∃ S₀ : SelectedTailData, ∃ K : SeedCentralCutoff,\n      ∃ Cstar : ℝ, ∃ requested : ℕ, ∃ length : ℝ,\n      ∃ metadata : R10aSelectedMetadata Cstar requested S₀,\n      ∃ P : SeedRetainedPair S₀ K 1 length, ∃ Γ : ConnectedReferenceGeometry,\n        4096 ≤ S₀.chain.index ∧ Γ.Realizes ∧\n        Γ.reference.w = P.pair.profile ∧\n        RadialConstructionGeometry Γ.reference ∧\n        R11aRetainedCoordinates P Γ ∧ IsRadialReference Γ.reference ∧\n        ∃ T : MaterialData, ∃ S : PhysicalSpacesData,\n          ∃ C : NonlinearGeometryData S, ∃ base loss : ℕ, ∃ ε : ℝ,\n            IsMaterialData Γ.reference T ∧ IsPhysicalSpaces Γ.reference T S ∧\n            N01Properties Γ.reference T S C base loss ε ∧\n            N01PrimitiveGeometry Γ.reference T S C ∧\n            (∀ r ∈ Ioo Γ.reference.a Γ.reference.b, 1 ≤ T.E0 r)",
+    "same_chain": [
+      "n01c_exists_actual_retained_reference uses n01c_actual_reference_with with Q explicitly retaining metadata/P/Gamma and reference equality; the chosen reference completion is on that same Gamma.reference.",
+      "P.n01c_radialPrimitiveGeometry uses metadata.selected, metadata.first_two, index4096>=100, q=1>0, hGamma, hw, construction and retained coordinates.",
+      "n01a_exists_fixedReference_primitive_context constructs actual T/S/C on D=<Gamma.reference,hD>, using the same primitive profile and retained enumeration.",
+      "exists_n01b_circleFlowGeometry selects Theta and installs only the three flow fields via circleFlowGeometry C Theta; PartA and N01PrimitiveGeometry survive definitionally.",
+      "n01Primitive_exists_fixedWitness_properties applies actual coefficient, speed and ordinary-flow factories and their neighborhood restrictions; it keeps D/T/S/the installed C literally fixed and returns N01 plus the same primitive certificate."
+    ],
+    "local_providers": [
+      {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01ActualRetainedReference.lean",
+        "sha256": "ca09ea2f1ddf4bed503b6ac152f0aa286089625f48a4be9e33e22030de1118a2",
+        "blob": "ca7674d50e07ae8fbccfff307348308327941342",
+        "lines": 45
+      },
+      {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01aFixedReferencePrimitiveContext.lean",
+        "sha256": "48542eac85fcd18116d018740b290ab9d57c41793d055e255d2b9791a9fe4c4c",
+        "blob": "41ee0aaa4a3971691bfdc8a8832a87300d97a863",
+        "lines": 64
+      },
+      {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01PrimitiveFixedWitnessConstruction.lean",
+        "sha256": "5a786c0686f89e5186e4f39dc748c644e2d433be5a06d0c95f9324e27b9a539b",
+        "blob": "fa468a78f48266fb1c0603e9b16988a50d5a4fb4",
+        "lines": 52
+      },
+      {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/NeighborhoodFlowRetainedGeometry.lean",
+        "sha256": "abdb8e16cd7f6a4163500e87c4f5d9dafe7cce08816d35f6f573df0b8036219a",
+        "blob": "1e5acd56f27b8dfe803c4ee990b470e839d47e0d",
+        "lines": 111
+      }
+    ],
+    "output_projection": {
+      "seed": "S0,K,Cstar,requested,length,metadata,P:SeedRetainedPair S0 K 1 length,Gamma, index4096, hGamma, hw, retained coordinates all retained.",
+      "selected_band": "metadata.selected and metadata.first_two are precisely the hSelected/hband assumptions of reference33 with q=1; q positivity is zero_lt_one.",
+      "host_and_optical": "N01PrimitiveGeometry.1 gives the actual C.cell host, and its final existential gives one positive kappa and the raw optical lower on that same host sample. The other component is tsupport D.chi inside Ioo D.a D.b. None is projected from bare N01Properties.",
+      "envelope_floor": "hE holds for every r in the radial core. materialSample_mem_radialCore hT hN.1.1 specializes it at each T.sample j; no replacement or normalization of T is needed for this floor.",
+      "no_erasure": "Keep the hG certificate and all seed fields in the outer context while passing only hN to153. The N01Properties conclusion by itself does not store these extra certificates."
+    }
+  },
+  "n01_to_same_R_L": {
+    "source": {
+      "module": "N04RetainedCorrectionNumericalWitness",
+      "git_blob": "6ba76a32edfe98908b3b1d44f9af3c7e3d72bfe5",
+      "sha256": "15cc71a282ea4b0aaf371c968dc37a627b41b1407dff8f25e61f613e70c71bea",
+      "utf8_bytes": 8858,
+      "lines": 153,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01CorrectionCoefficientMaterialTame",
+        "ContinuousFlexibility.Analysis.N01ResidualSmoothTame",
+        "ContinuousFlexibility.Analysis.N03CorrectionAssembly",
+        "ContinuousFlexibility.Analysis.N03SourceFromActualCoefficientJets",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionUniformNeighborhood"
+      ],
+      "read_scope": "Complete exact source read; no Lean elaboration"
+    },
+    "exact_header": "theorem N01Properties.n04_exists_through03_preserving_correction_numerical_data\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :\n    ∃ R : ReturnEquationData S, ∃ L : ReturnCorrectionData S,\n      ∃ χ : ℕ → ℝ → ℝ, ∃ cell : ℕ → ℕ, ∃ base' : ℕ, ∃ ε' : ℝ,\n        base ≤ base' ∧ 0 < ε' ∧ ε' ≤ ε ∧\n          NonlinearPropertiesThrough03 D T S C R L base' loss ε' ∧\n          L.coefficients = returnCorrectedCoefficients D S C χ ∧\n          L.minusFlow = returnCorrectedMinusFlow S C χ ∧\n          (∀ m, ContDiff ℝ ∞ (χ m)) ∧\n          (∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1) ∧\n          (∀ m, Function.support (deriv (χ m)) ⊆ Ioo (C.left m) (C.right m)) ∧\n          (∀ m, χ m =ᶠ[𝓝 (C.left m)] (fun _ => 0) ∧\n            χ m =ᶠ[𝓝 (C.right m)] (fun _ => 1)) ∧\n          (∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (cell m)) ∧\n          (∀ k : ℕ, ∃ B Q : ℝ, 0 ≤ B ∧ 0 ≤ Q ∧ ∀ m r,\n            |iteratedDeriv k (χ m) r| ≤ B * radialE (D.cellIndex (cell m)) ^ Q) ∧\n          (∀ z ∈ stateNeighborhood S C base' ε', ∀ m (p : PolarPoint),\n            p.1 ∈ tsupport (deriv (χ m)) →\n              0 < (originalCoefficients D S C z).b p ^ 2 -\n                (originalCoefficients D S C z).a p *\n                  (originalCoefficients D S C z).c p) ∧\n      (∃ x δ : ℕ → ℝ, ∃ K A B lam P : ℝ,\n        0 < K ∧ 0 < A ∧ 0 < B ∧ 0 < lam ∧ 0 < P ∧\n        (∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (cell m) ∧\n          0 < δ m ∧ C.left m < x m - δ m ∧ x m + δ m < C.right m ∧\n          (δ m)⁻¹ ≤ K * radialE (D.cellIndex (cell m)) ^ A ∧\n          ∀ r ∈ Icc (x m - δ m) (x m + δ m),\n            radialE (D.cellIndex (cell m)) ^ (-B) / (2 * (D.b - D.a)) ≤ opticalSpeed D.w r) ∧\n        (∀ m, χ m = returnOpticalCutoff (x m) (δ m / 2)) ∧\n        (∀ m, tsupport (deriv (χ m)) ⊆ Icc (x m - δ m / 2) (x m + δ m / 2)) ∧\n        (∀ m, tsupport (deriv (χ m)) ⊆ Ioo (x m - δ m) (x m + δ m)) ∧\n        (∀ n : ℕ, ∃ Kₙ : ℝ, 0 < Kₙ ∧ ∀ m r,\n          |iteratedDeriv n (χ m) r| ≤ Kₙ * radialE (D.cellIndex (cell m)) ^ (A * n)) ∧\n        ∀ z ∈ stateNeighborhood S C base' ε', ∀ m p,\n          p.1 ∈ Icc (x m - δ m) (x m + δ m) →\n          let d := lam * radialE (D.cellIndex (cell m)) ^ (-P) / 2\n          0 < d ∧ d ≤ (originalCoefficients D S C z).a p ∧\n          d ≤ -(originalCoefficients D S C z).c p ∧\n          d ^ 2 ≤ (originalCoefficients D S C z).b p ^ 2 -\n            (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p ∧\n          0 < (originalCoefficients D S C z).b p ^ 2 -\n            (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p) ∧\n      (∀ z ∈ stateNeighborhood S C base' ε', stateSector S z.1 →\n        ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,\n          1 / 2 ≤ deriv (C.minusFlow z m r) θ ∧\n          deriv (C.minusFlow z m r) θ ≤ 3 / 2) ∧\n      ∀ z ∈ sectorNeighborhood S base' ε' ε',\n        ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,\n          1 / 2 ≤ deriv (C.minusFlow (liftSectorParameter S C z) m r) θ ∧\n          deriv (C.minusFlow (liftSectorParameter S C z) m r) θ ≤ 3 / 2",
+    "order": "Select chi, host j and full buffer once by uniform buffered construction; choose R using hN'.exists_returnEquation, form actual coefficient estimates and error E using that same chi/buffer, then choose L using the retained-fields N03 constructor.",
+    "strong_N03_requirement": {
+      "selected_blob": "fd48b7aea0616211039f84119dd4fb7f5d36a455",
+      "sha256": "a699eb62ab13a137bf5e75ee7f27a8d8fb9d0449dee431b3980bdd015997efaa",
+      "stored_at": {
+        "ref": "34563c9cf53ad95b24e2c22d7f1c1c001559db99",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-29/root/compatibility/n03-preserved-fields/N03CorrectionAssembly.lean"
+      },
+      "declaration": "N01Properties.n04_exists_returnCorrection_preserving_fields",
+      "literal_record": "coefficients:=returnCorrectedCoefficients D S C chi; minusFlow:=returnCorrectedMinusFlow S C chi; error:=E",
+      "old_public_head": "exists_returnCorrection_of_smoothTame_source is retained as a wrapper that forgets two equalities.",
+      "scope": "Must explicitly select this reviewed replacement for main7e2daf38; no silent use of erased main constructor."
+    },
+    "literal_identities": [
+      "L.coefficients = returnCorrectedCoefficients D S C chi",
+      "L.minusFlow = returnCorrectedMinusFlow S C chi"
+    ],
+    "host_separation": "The full component host j in153 is independent of primitive C.cell. Both are retained with their own exact host proofs. They are not identified; all forcing H/E0 factors follow the actual j and its sample."
+  },
+  "same_witness_strict_gap": {
+    "supplier_header": "theorem exists_gap_neighborhood_for_positive_cutoff\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (hε : 0 < ε)\n    (χ : ℕ → ℝ → ℝ) (j : ℕ → ℕ) {J A lam P : ℝ}\n    (hJ : 0 < J) (hA : 0 ≤ A) (hlam : 0 < lam) (hP : 0 ≤ P)\n    (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))\n    (hcutoff : ∀ m r, |deriv (χ m) r| ≤ J * radialE (D.cellIndex (j m)) ^ A)\n    (hpositive : ∀ z ∈ stateNeighborhood S C base ε, ∀ m p,\n      p.1 ∈ tsupport (deriv (χ m)) →\n      let d := lam * radialE (D.cellIndex (j m)) ^ (-P) / 2\n      0 < d ∧ d ≤ (originalCoefficients D S C z).a p ∧\n      d ≤ -(originalCoefficients D S C z).c p ∧\n      d ^ 2 ≤ (originalCoefficients D S C z).b p ^ 2 -\n        (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p ∧\n      0 < (originalCoefficients D S C z).b p ^ 2 -\n        (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p) :\n    ∃ base' : ℕ, ∃ ε' : ℝ, base ≤ base' ∧ 0 < ε' ∧ ε' ≤ ε ∧\n      N01Properties D T S C base' loss ε' ∧\n      ∀ z ∈ stateNeighborhood S C base' ε', stateSector S z.1 →\n      ∀ m r, r ∈ Ioo (C.left m) (C.right m) → ∀ θ,\n        (deriv (χ m) r ≠ 0 →\n          0 < (-returnCorrectedMinusSpeed D S C χ z m (r, -θ) -\n            returnCorrectedMinusSpeed D S C χ z m (r, θ)) / 2) ∧\n        returnCorrectedMinusSpeed D S C χ z m (r, θ) ≤\n          -returnCorrectedMinusSpeed D S C χ z m (r, -θ)",
+    "input_extraction": [
+      "Destructure the153 output only once. From Through03 obtain hN1,hR1,hL1. Destructure its full buffer to x,delta,K,A,B,lam,P and hdata,hformula,hhalfSupport,hstripSupport,hjets,hpositive.",
+      "Take hjets 1: J>0 and the first derivative bound. simpa only [iteratedDeriv_one,Nat.cast_one,mul_one] gives the exact hcutoff required by the public gap theorem. A>0 and P>0 supply their nonnegative hypotheses.",
+      "For r in tsupport deriv chi, hstripSupport puts r in Ioo(x-delta,x+delta), hence in the closed buffer. Apply the SAME hpositive to get lam*radialE(cellIndex(jm))^(-P)/2 lower for a,-c,Delta.",
+      "Call exists_gap_neighborhood_for_positive_cutoff hN1 hS hT hepsilon1 chi j hJ hA.le hlam hP.le hcell hcutoff hpositiveSupport. Only base2/epsilon2 are selected; chi,j,x,delta,R,L are untouched."
+    ],
+    "exact_new_output_as_prose": "For this fixed R,L,chi,j and full buffer there exist base2,epsilon2 with base1<=base2, 0<epsilon2<=epsilon1, Through03 D T S C R L base2 loss epsilon2 and N04bFieldRegularity D S C L base2 epsilon2. Every state-quantified closed-buffer and original-flow bound is restricted by stateNeighborhood_mono or sectorNeighborhood_mono, while all state-free collar/sample/cutoff identities remain literally unchanged.",
+    "restriction_headers": [
+      "theorem N02Properties.restrict_neighborhood\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {base base' : ℕ} {ε ε' : ℝ}\n    (hR : N02Properties D T S C R base ε)\n    (hb : base ≤ base') (hε : ε' ≤ ε) :\n    N02Properties D T S C R base' ε'",
+      "theorem N03Properties.restrict_neighborhood\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {L : ReturnCorrectionData S} {base base' : ℕ} {ε ε' : ℝ}\n    (hL : N03Properties D T S C R L base ε)\n    (hb : base ≤ base') (hε : ε' ≤ ε) :\n    N03Properties D T S C R L base' ε'"
+    ],
+    "field_header": "theorem N01Properties.n04b_opticalFieldRegularity\n    (hN : N01Properties D T S C base loss ε)\n    (hR : N02Properties D T S C R base ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)\n    (χ : ℕ → ℝ → ℝ)\n    (hχ : ∀ m, ContDiff ℝ ∞ (χ m))\n    (hχrange : ∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1)\n    (hsupp : ∀ m, tsupport (deriv (χ m)) ⊆ Ioo (C.left m) (C.right m))\n    (hend : ∀ m, χ m =ᶠ[𝓝 (C.left m)] (fun _ => 0) ∧\n      χ m =ᶠ[𝓝 (C.right m)] (fun _ => 1))\n    (hgap : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →\n      ∀ m r, r ∈ Ioo (C.left m) (C.right m) → ∀ θ,\n        deriv (χ m) r ≠ 0 →\n          0 < (-returnCorrectedMinusSpeed D S C χ z m (r, -θ) -\n            returnCorrectedMinusSpeed D S C χ z m (r, θ)) / 2)\n    (L : ReturnCorrectionData S)\n    (hL : L.coefficients = returnCorrectedCoefficients D S C χ)\n    (hreference : ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,\n      L.minusFlow (C.referenceState, 0) m r θ =\n        θ - opticalTravel D.w (C.left m) r) :\n    N04bFieldRegularity D S C L base ε",
+    "field_proof": [
+      "Construct hsupp_ts from the retained hstripSupport and C.left<x-delta<x+delta<C.right; Function.support alone is not substituted for the required tsupport.",
+      "Take the first conjunct of the returned gap theorem for hgap; its second conjunct is only weak speed ordering.",
+      "Rewrite the retained literal L.minusFlow identity, then apply hN2.n04b_returnCorrectedMinusFlow_reference hS hT chi m hr theta. This supplies the reference_flow field without any extra witness selection.",
+      "Apply hN2.n04b_opticalFieldRegularity hR2 hS hT chi hchi hchiRange hsupp_ts hend hgap L hLcoeff hreference."
+    ],
+    "bounds_scope": "The quantitative a,-c,Delta floors remain confined to the actual closed buffer. The hfield theorem proves pointwise strict type on all negative interiors by original type off active support, but does not turn that into a uniform material floor there.",
+    "draft_size_estimate": "A standalone post153 restriction/regularity adapter with fixed R/L/chi and the actual localized inputs should require approximately90–140 Lean lines. A full existential header retaining every153 field would be longer. No new source or extra budget is consumed here.",
+    "budget_note": "Root currently reserves only <=250 lines for coefficientIncrement plus its own <=140 radius adapter. This additional adapter needs separate explicit allocation or exact compiled-ledger reclassification before writing."
+  },
+  "where_gap_is_erased": {
+    "source": "ReturnCorrectionBufferedCollars/e52779806ba4290ea6dc7af3864a2cb20455afbd",
+    "statement": "exists_opticalCorrection_flow_buffered internally obtains hgap. It uses hgap... .2 for returnCorrectedFlow_properties_of_physical and does not return hgap... .1.",
+    "uniform": "ReturnCorrectionUniformNeighborhood returns this corrected flow tuple and two original-flow slope estimates. Its hcorrected is unchanged in153.",
+    "actual_hcorrected_type": "forall z in stateNeighborhood S C base1 epsilon1, stateSector S z.1 -> forall m theta, returnCorrectedMinusFlow ... (C.left m) theta=theta AND ContinuousOn over Icc AND the actual HasDerivAt ODE on Ioo AND the two rightChartCandidate endpoint return identities.",
+    "not_a_solution": "Appending hcorrected to153 alone does not provide strict active half-gap. The public same-cutoff restriction route above supplies it without changing any selected data."
+  },
+  "downstream": {
+    "atlas": "Only after the last neighborhood shrink choose/build actual K. Blueprint.N04bCanonicalConstruction (blob e0c0ef1b...) uses n04b_exists_actual_typed_atlas and n04bActualTypedAtlas on the same D,T,S,C,R,L,h03,hfield. To feed reference33 choose its required actual whole-piece enumeration using the corresponding actual metadata providers; do not reconstruct K after a later incompatible domain choice.",
+    "reference33": "The retained seed/raw optical/host/E0 assumptions now come from the selected61 context and the same unchanged C/T. Feed the same Through03/hfield into the reference33 producer; its own documented same-Y/H and auxiliary/enlarged-T operations remain as in its reviewed contract.",
+    "remaining_geometric_choices": "The whole-piece equivalence e0, positive midpoint cell and endpoint source family must still be chosen using their existing actual component/enumeration providers for this D/C. Their proofs are not supplied by the seed clause itself; this route does not invent identities between these indices and j or C.cell.",
+    "Q_alternative": "Current main's Q.exists_field is another valid one-shot construction, but its public Q data do not by themselves retain every full-buffer field of153. Do not mix Q.field E from one construction with153's L. The selected route deliberately keeps153's original L."
+  },
+  "availability": {
+    "old_inventory": {
+      "git_blob": "897d0f2f5d1ea272e820ae62718654f450f8cf58",
+      "sha256": "159ad34e4d6532d0bb36f2b11f1158e0d97d61996760a322df1d2114bce91f9f",
+      "modules": 1937,
+      "old_pin": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7"
+    },
+    "quant_crosscheck_message": "2026-11-12: quantitative_route independently found1932 old upstreams all available at main1ece selection in actual169+149+cohort5+fixed518. Exact recursive new closure is1938 nodes=1933 upstream+5owned; extra CircleAngleEvaluation is already actual169. Actual169 supplies1890;149 supplies only43 additional main modules (6112 lines). After149 fullgreen only5owned sources333lines +5rootimports=338remain.",
+    "changed_upstream": [
+      "CircleJetEvaluation old6ff499a3 -> newb31c443b",
+      "TameMultilinearNormalization old04e7 -> newde78; seven preserved public heads independently reviewed"
+    ],
+    "scope": "Crosscheck is path/blob/import availability, not a typecheck or a new independent proof review of all1933 modules. Quantitative_route is preparing a separate formal receipt and153/strong-N03 closure.",
+    "selected_direct_imports": [
+      {
+        "module": "N01RetainedPrimitiveConstruction",
+        "git_blob": "b4c99756ab69d37a0a3ce2c61570bed32f749885",
+        "imports": [
+          "ContinuousFlexibility.Analysis.N01ActualRetainedReference",
+          "ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext",
+          "ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry",
+          "ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction",
+          "ContinuousFlexibility.Analysis.N01cActualPrimitiveGeometry",
+          "ContinuousFlexibility.Analysis.N01cRetainedComponentEnumeration"
+        ]
+      },
+      {
+        "module": "N04RetainedCorrectionNumericalWitness",
+        "git_blob": "6ba76a32edfe98908b3b1d44f9af3c7e3d72bfe5",
+        "imports": [
+          "ContinuousFlexibility.Analysis.N01CorrectionCoefficientMaterialTame",
+          "ContinuousFlexibility.Analysis.N01ResidualSmoothTame",
+          "ContinuousFlexibility.Analysis.N03CorrectionAssembly",
+          "ContinuousFlexibility.Analysis.N03SourceFromActualCoefficientJets",
+          "ContinuousFlexibility.Analysis.ReturnCorrectionUniformNeighborhood"
+        ]
+      },
+      {
+        "module": "ReturnCorrectionUniformNeighborhood",
+        "git_blob": "d93ffb039a87de62f1e5130351da1e974c43114c",
+        "imports": [
+          "ContinuousFlexibility.Analysis.ReturnCorrectionBufferedCollars",
+          "ContinuousFlexibility.Analysis.N01FlowInverseJetBounds",
+          "ContinuousFlexibility.Analysis.NonlinearNeighborhoodRestriction"
+        ]
+      },
+      {
+        "module": "ReturnCorrectionBufferedCollars",
+        "git_blob": "e52779806ba4290ea6dc7af3864a2cb20455afbd",
+        "imports": [
+          "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap"
+        ]
+      },
+      {
+        "module": "NonlinearNeighborhoodRestriction",
+        "git_blob": "3f231a86ea80d87d6f908ce36c27ad1855dafaf3",
+        "imports": [
+          "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction",
+          "ContinuousFlexibility.Analysis.SectorParameterGeometry"
+        ]
+      },
+      {
+        "module": "N04bOpticalFieldType",
+        "git_blob": "da2a788ce170da35a3c0f1d72849ab87187bbe15",
+        "imports": [
+          "ContinuousFlexibility.Analysis.N04bOriginalType",
+          "ContinuousFlexibility.Analysis.N04bCorrectedFieldFacts",
+          "ContinuousFlexibility.Analysis.N04bFieldRegularity"
+        ]
+      },
+      {
+        "module": "N04bReferenceCorrection",
+        "git_blob": "8de44e6b9b63d15c1bf36be0521c5358c37d2b01",
+        "imports": [
+          "ContinuousFlexibility.Analysis.N01RadialFlow",
+          "ContinuousFlexibility.Analysis.ReturnCorrectedFlow"
+        ]
+      }
+    ],
+    "numerical153_warning": "Quantitative_route's current recursive check finds at least195 missing nodes (~30188 source lines) for153 after149, because N01ResidualSmoothTame/N02ReturnAssembly reaches the circle chain. Four direct dependencies (N01CorrectionCoefficientMaterialTame, ReturnCorrectionOperatorComparison, N03SourceFromActualCoefficientJets, ReturnCorrectionUniformNeighborhood) also lie beyond the current actual+149+cohort5+fixed518 union. The exact dependency closure is still being completed. Thus the small338-line install estimate applies ONLY to retained N01 five-source gateway, NOT to153."
+  },
+  "sources": [
+    {
+      "module": "N01RetainedPrimitiveConstruction",
+      "git_blob": "b4c99756ab69d37a0a3ce2c61570bed32f749885",
+      "sha256": "5e4823895fdf7f549d98d6cff9e1e0d8ef460e1dadc531892bf1ed957a2125f6",
+      "utf8_bytes": 3154,
+      "lines": 61,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ActualRetainedReference",
+        "ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext",
+        "ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry",
+        "ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction",
+        "ContinuousFlexibility.Analysis.N01cActualPrimitiveGeometry",
+        "ContinuousFlexibility.Analysis.N01cRetainedComponentEnumeration"
+      ],
+      "read_scope": "Complete exact source read; no Lean elaboration"
+    },
+    {
+      "module": "N01ActualRetainedReference",
+      "git_blob": "ca7674d50e07ae8fbccfff307348308327941342",
+      "sha256": "ca09ea2f1ddf4bed503b6ac152f0aa286089625f48a4be9e33e22030de1118a2",
+      "utf8_bytes": 2241,
+      "lines": 45,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cActualReferenceWith"
+      ],
+      "read_scope": "Complete exact source read; no Lean elaboration"
+    },
+    {
+      "module": "N01cActualReferenceWith",
+      "git_blob": "5410a15bd4297b2f7d2c36b58554afc9b916da5d",
+      "sha256": "1e4d0fb6a6ca4b67cb77ef218c0491da1ef358ef2f7c513a8262f757346af59e",
+      "utf8_bytes": 7316,
+      "lines": 135,
+      "imports": [
+        "ContinuousFlexibility.Radial.R11aClosedInputs",
+        "ContinuousFlexibility.Radial.R11aRetainedFamily",
+        "ContinuousFlexibility.Radial.MatchedInnerCompletedFamily",
+        "ContinuousFlexibility.Radial.MatchedOuterCompletedFamily",
+        "ContinuousFlexibility.Analysis.N01cRetainedRegionalEnvelope"
+      ],
+      "read_scope": "Complete exact source read; no Lean elaboration"
+    },
+    {
+      "module": "N01cActualPrimitiveGeometry",
+      "git_blob": "799ecafd7c45f287d61fa23a8206352e74f23f63",
+      "sha256": "5971fe324efc7e9b4df6a5eb04eef13d4acb51bfcd5e570acdfcc5edaea21c0d",
+      "utf8_bytes": 7814,
+      "lines": 155,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cScaledMorseOpticalCover",
+        "ContinuousFlexibility.Analysis.N01cFiniteHeadOpticalBounds",
+        "ContinuousFlexibility.Radial.R11aRetainedFamily",
+        "ContinuousFlexibility.Radial.SeedCentralReturn"
+      ],
+      "read_scope": "Complete exact source read; no Lean elaboration"
+    },
+    {
+      "module": "N01cRetainedComponentEnumeration",
+      "git_blob": "bdd0d674c821041280d5f50776cf5d6e019c6cbf",
+      "sha256": "74cba95f8966416c78183bab6952abbaa05e1b8ed649fbb08f2a008e13b7f63b",
+      "utf8_bytes": 2718,
+      "lines": 53,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCanonicalComponentEnumeration",
+        "ContinuousFlexibility.Radial.R11aRetainedFamily"
+      ],
+      "read_scope": "Complete exact source read; no Lean elaboration"
+    },
+    {
+      "module": "N04RetainedCorrectionNumericalWitness",
+      "git_blob": "6ba76a32edfe98908b3b1d44f9af3c7e3d72bfe5",
+      "sha256": "15cc71a282ea4b0aaf371c968dc37a627b41b1407dff8f25e61f613e70c71bea",
+      "utf8_bytes": 8858,
+      "lines": 153,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01CorrectionCoefficientMaterialTame",
+        "ContinuousFlexibility.Analysis.N01ResidualSmoothTame",
+        "ContinuousFlexibility.Analysis.N03CorrectionAssembly",
+        "ContinuousFlexibility.Analysis.N03SourceFromActualCoefficientJets",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionUniformNeighborhood"
+      ],
+      "read_scope": "Complete exact source read; no Lean elaboration"
+    },
+    {
+      "module": "N01ResidualSmoothTame",
+      "git_blob": "ddef35ff6690d2ea86984e765305ed23e3708bc3",
+      "sha256": "6282bdb211d2ed494d7002fc23972918cdbe5bcadd71886268e90bb37682459c",
+      "utf8_bytes": 8992,
+      "lines": 169,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ResidualSectorCoordinates",
+        "ContinuousFlexibility.Analysis.N01CircleLinearTame",
+        "ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame",
+        "ContinuousFlexibility.Analysis.TameTopologicalComposition",
+        "ContinuousFlexibility.Analysis.TameProductDirections",
+        "ContinuousFlexibility.Analysis.N02ReturnAssembly"
+      ],
+      "read_scope": "Complete exact source read; no Lean elaboration"
+    },
+    {
+      "module": "ReturnCorrectionUniformNeighborhood",
+      "git_blob": "d93ffb039a87de62f1e5130351da1e974c43114c",
+      "sha256": "6076d8d95cfbc3ddda9c3238ace1f5365f7295cab7840d73a474695db45ad4c6",
+      "utf8_bytes": 7754,
+      "lines": 146,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectionBufferedCollars",
+        "ContinuousFlexibility.Analysis.N01FlowInverseJetBounds",
+        "ContinuousFlexibility.Analysis.NonlinearNeighborhoodRestriction"
+      ],
+      "read_scope": "Complete exact source read; no Lean elaboration"
+    },
+    {
+      "module": "ReturnCorrectionBufferedCollars",
+      "git_blob": "e52779806ba4290ea6dc7af3864a2cb20455afbd",
+      "sha256": "4c1f8954ac061a3e7e41696ae0e73974f61898982e1310efbfc4fc5fc08ae944",
+      "utf8_bytes": 17203,
+      "lines": 294,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap"
+      ],
+      "read_scope": "Complete exact source read; no Lean elaboration"
+    },
+    {
+      "module": "NonlinearNeighborhoodRestriction",
+      "git_blob": "3f231a86ea80d87d6f908ce36c27ad1855dafaf3",
+      "sha256": "e89345ab3ac88ba3fa718488e90ec923bb77e96b41b70fc8602ca1b8d242d647",
+      "utf8_bytes": 3483,
+      "lines": 85,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction",
+        "ContinuousFlexibility.Analysis.SectorParameterGeometry"
+      ],
+      "read_scope": "Complete exact source read; no Lean elaboration"
+    },
+    {
+      "module": "N04bOpticalFieldType",
+      "git_blob": "da2a788ce170da35a3c0f1d72849ab87187bbe15",
+      "sha256": "88891722dfa086127c946dc92a8e04bc53973df6a37cfb0c4beb013ba806ba08",
+      "utf8_bytes": 5042,
+      "lines": 109,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bOriginalType",
+        "ContinuousFlexibility.Analysis.N04bCorrectedFieldFacts",
+        "ContinuousFlexibility.Analysis.N04bFieldRegularity"
+      ],
+      "read_scope": "Complete exact source read; no Lean elaboration"
+    },
+    {
+      "module": "N04bReferenceCorrection",
+      "git_blob": "8de44e6b9b63d15c1bf36be0521c5358c37d2b01",
+      "sha256": "d40a5560d69b5f1c0addeb6da26b2032e3edef8b96af8c2e5ad6f521094fa64b",
+      "utf8_bytes": 6660,
+      "lines": 140,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01RadialFlow",
+        "ContinuousFlexibility.Analysis.ReturnCorrectedFlow"
+      ],
+      "read_scope": "Complete exact source read; no Lean elaboration"
+    },
+    {
+      "module": "N04bFieldRegularity",
+      "git_blob": "fc6a92f96c18e23d8b87eb0f3385909c90154194",
+      "sha256": "ba633ef11b1dd37d934e9ba3852ac3352c43e65cc79b629927abcccbd533abf7",
+      "utf8_bytes": 4008,
+      "lines": 80,
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ],
+      "read_scope": "Complete exact source read; no Lean elaboration"
+    },
+    {
+      "module": "Blueprint.N04b.CanonicalConstruction",
+      "git_blob": "e0c0ef1b0f1bd567afcde4aefee3880c90755250",
+      "sha256": "d8f589ce4d85b99dd211cfe0e7bfc9bb27e164c043890ed7eb191e79e4bf72c5",
+      "utf8_bytes": 3352,
+      "lines": 70,
+      "imports": [
+        "ContinuousFlexibility.Blueprint.Statements",
+        "ContinuousFlexibility.Analysis.N04bActualAtlasCuts",
+        "ContinuousFlexibility.Analysis.N04bActualRootDensity",
+        "ContinuousFlexibility.Analysis.N04bActualRootTransmission",
+        "ContinuousFlexibility.Analysis.N04bGeometricCompletion"
+      ],
+      "read_scope": "Complete exact source read; no Lean elaboration"
+    },
+    {
+      "module": "ActualWholeReferenceNonAuxiliaryJets",
+      "git_blob": "f92cac74d1a7d5f0f5906e27bb2d1aad8c37cdd5",
+      "sha256": "358d4e8fe47e1e83605184fe137d58f0045a1313923d3c30453b4ebb464c008e",
+      "utf8_bytes": 16447,
+      "lines": 294,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualPositiveReferenceFifteenAtoms",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugePositiveScalarColumnJets",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeGeometryJets",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativePrincipalJets",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativePotentialReferenceJets",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeScalarColumnJets",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeReferenceRegularity",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeStaticReferenceJets",
+        "ContinuousFlexibility.Analysis.CanonicalReferenceDividedJets",
+        "ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation"
+      ],
+      "read_scope": "Complete exact source read; no Lean elaboration"
+    },
+    {
+      "module": "ActualWholeReferenceJets",
+      "git_blob": "46844fab38919d0d3808cbf39a16e63aae173e2e",
+      "sha256": "18cd7ce0a25f111952bab72d8dd3c346997a5911921a8eff8002a6eb92d87a78",
+      "utf8_bytes": 8551,
+      "lines": 151,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualWholeReferenceNonAuxiliaryJets",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAuxiliaryPackage"
+      ],
+      "read_scope": "Complete exact source read; no Lean elaboration"
+    },
+    {
+      "module": "N03CorrectionAssembly-selected206",
+      "git_blob": "fd48b7aea0616211039f84119dd4fb7f5d36a455",
+      "sha256": "a699eb62ab13a137bf5e75ee7f27a8d8fb9d0449dee431b3980bdd015997efaa",
+      "utf8_bytes": 11218,
+      "lines": 206,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionOperatorComparison",
+        "ContinuousFlexibility.Analysis.N02ReturnAssembly"
+      ],
+      "read_scope": "Complete exact206 source read in this task; historical independent review retained."
+    }
+  ],
+  "next_action": "Persist this route now; then implement the separately authorized actual coefficient increment joint-gain producer <=250 new Lean lines. Do not expand the strict-gap adapter without separate budget or replace the existing tower.",
+  "supersedes": {
+    "git_blob": "abb61595e5c1936981c8a0c25a575082981638a9",
+    "reason": "Add recovered exact strong N03 source, correct actual CanonicalConstruction theorem name, record nontrivial153 deployment closure."
+  }
+}

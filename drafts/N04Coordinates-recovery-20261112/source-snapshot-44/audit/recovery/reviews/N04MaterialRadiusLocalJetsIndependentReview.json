@@ -1,0 +1,161 @@
+{
+  "schema": "N04_INDEPENDENT_FULL_SOURCE_REVIEW_V1",
+  "status": "PASS_STATIC_FULL_SOURCE_AND_ACTUAL_PROVIDER_REVIEW_NOT_COMPILED",
+  "proposed_backup_path": "audit/recovery/reviews/N04MaterialRadiusLocalJetsIndependentReview.json",
+  "reviewer": "/root/audit_coordinates",
+  "author": "/root",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "date": "2026-11-12",
+  "source": {
+    "path": "root/reconstructed/N04MaterialRadiusLocalJets.lean",
+    "target_path": "src/ContinuousFlexibility/Analysis/N04MaterialRadiusLocalJets.lean",
+    "blob": "c4ce6d627aecdad5dd13050f972c8b1e85e03ba6",
+    "sha256": "338a7ea23f75defa2ec38488ae5e6c7bb2b4ee3702214dad293c505012dc52e9",
+    "bytes": 4914,
+    "lines": 100,
+    "raw_read_full": true
+  },
+  "baseline": {
+    "head": "84f31a030a632f7d5ddba43b5a638d29da00af45",
+    "tree": "02cfcb14a87f07b6c9dbb379cebe3d1bcb3404dc",
+    "new_target_path_absent": true,
+    "CI170_not_certified_success": true,
+    "root_requested_new_leaf_not_part_of_CI170": true
+  },
+  "complete_public_headers": [
+    {
+      "name": "n04_materialRadiusPullback_mixedDerivative",
+      "line": 19,
+      "header": "theorem n04_materialRadiusPullback_mixedDerivative\n    {D : ReferenceData} {T : MaterialData} (hT : IsMaterialData D T)\n    {U : Set PolarPoint} (hU : IsOpen U) {f : PolarPoint → ℝ}\n    (hf : ContDiffOn ℝ ∞ f U) (a b : ℕ) {p : PolarPoint}\n    (hp : (T.radius p.1, p.2) ∈ U) :\n    mixedDerivative a b (fun q => f (T.radius q.1, q.2)) p =\n      ∑ c : OrderedFinpartition a,\n        mixedDerivative c.length b f (T.radius p.1, p.2) *\n          n07aRadiusJetCoefficient T c p.1",
+      "header_sha256": "c32b3bda0e75e7b67a7dc9bc7a6c823a84e1c53e6f6dc242c19247136de691e5"
+    },
+    {
+      "name": "n04_materialRadiusPullback_mixedDerivative_bound",
+      "line": 40,
+      "header": "theorem n04_materialRadiusPullback_mixedDerivative_bound\n    {D : ReferenceData} {T : MaterialData} (hT : IsMaterialData D T) (a : ℕ) :\n    ∃ K : ℝ, 0 ≤ K ∧ ∀ (U : Set PolarPoint), IsOpen U →\n      ∀ (f : PolarPoint → ℝ), ContDiffOn ℝ ∞ f U →\n      ∀ (b : ℕ) (p : PolarPoint), (T.radius p.1, p.2) ∈ U →\n      ∀ W : ℝ, 0 ≤ W →\n      (∀ j : ℕ, j ≤ a → |mixedDerivative j b f (T.radius p.1, p.2)| ≤ W) →\n      |mixedDerivative a b (fun q => f (T.radius q.1, q.2)) p| ≤ K * W",
+      "header_sha256": "e66c3c8442a163653952be96c15d0c9e1216c2cbf6fb4525f572fa93d9d2a8bd"
+    },
+    {
+      "name": "n04_materialRadiusPullback_iteratedFDeriv_bound",
+      "line": 60,
+      "header": "theorem n04_materialRadiusPullback_iteratedFDeriv_bound\n    {D : ReferenceData} {T : MaterialData} (hT : IsMaterialData D T) (N : ℕ) :\n    ∃ C : ℝ, 0 ≤ C ∧ ∀ (U : Set PolarPoint), IsOpen U →\n      ∀ (f : PolarPoint → ℝ), ContDiffOn ℝ ∞ f U →\n      ∀ (p : PolarPoint), (T.radius p.1, p.2) ∈ U →\n      ∀ W : ℝ, 0 ≤ W →\n      (∀ a b : ℕ, a + b ≤ N → |mixedDerivative a b f (T.radius p.1, p.2)| ≤ W) →\n      ∀ k : ℕ, k ≤ N →\n        ‖iteratedFDeriv ℝ k (fun q => f (T.radius q.1, q.2)) p‖ ≤ C * W",
+      "header_sha256": "49c5bcc34107c9d9d41e78c7f94298289436ae0f4d8169a0fbcc5bbe94fa7276"
+    }
+  ],
+  "project_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aMaterialPullbackJets",
+      "blob": "3162470bd6b9ac60c8abb8ce498955f590bf9cf9",
+      "sha256": "44867b7d37f5d7a5b7e23052ad386f56e597b035b51da1a5522844f017765217",
+      "lines": 99,
+      "full_source_read": true,
+      "actual84f_tree_blob_matches": true,
+      "used": [
+        "n07aRadiusJetCoefficient",
+        "n07aRadiusJetCoefficient_bounded"
+      ],
+      "proof_check": "The coefficient is literally the finite product of actual T.radius derivative jets. Its existing bound is global in the material-axis point and chosen before U/f/point/angular order. The unchanged hT smooth-radius projection is already used by this provider."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CylinderMixedJets",
+      "blob": "3dc20e779221e16f9be32dff13d22e978b5a048d",
+      "sha256": "ae19c58f66f0778411f64607f52acf0525aceb27036c9d1ac1825e0e46e3614d",
+      "lines": 253,
+      "full_source_read": true,
+      "actual84f_tree_blob_matches": true,
+      "used": [
+        "contDiffOn_mixedDerivative",
+        "norm_iteratedFDeriv_le_of_mixedDerivative"
+      ],
+      "proof_check": "The provider genuinely accepts an arbitrary open U, proves local mixed-derivative smoothness via slice germs, and gives the norm bound2^k*M in the product max norm, including k=0."
+    }
+  ],
+  "mathlib_api_checks": [
+    {
+      "role": "finite ordered chain formula",
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Analysis/Calculus/IteratedDeriv/FaaDiBruno.lean",
+      "blob": "3d2647ba30edffbe635c565a2c3f69724899c3e4",
+      "sha256": "2be57a970cda0aba46782b4ed07a46198354911da7a16bbd3ef6858f4ca06eb4",
+      "relevant_line": 206
+    },
+    {
+      "role": "point and open-set composition",
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Analysis/Calculus/ContDiff/Comp.lean",
+      "blob": "067d19883550ab5637d02f038d451c42ab16e4b7",
+      "sha256": "26495369d99d4815f99e8319623231a5fe25f0fdd1756c31162216323e27ed0f",
+      "bytes": 44705,
+      "relevant_lines": [
+        125,
+        223
+      ]
+    },
+    {
+      "role": "single_le_sum generated by to_additive from single_le_prod",
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Algebra/Order/BigOperators/Group/Finset.lean",
+      "blob": "9a2a19c62c65329f604f175559d556d6e45ec13a",
+      "sha256": "327dadef5af7180764c161be2418446b7950aa35210af24e98f099d2463139c3",
+      "relevant_line": 266
+    },
+    {
+      "role": "natural-power monotonicity",
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Algebra/Order/GroupWithZero/Basic.lean",
+      "blob": "335ef50464487b5763d4ad885d55d83b00964f1b",
+      "sha256": "6526bf3a919d5306c90daf75cf96cfe3bbfacc702f3858fb00f893f7346e2cbd",
+      "relevant_line": 501
+    }
+  ],
+  "mathematical_review": [
+    {
+      "theorem": "n04_materialRadiusPullback_mixedDerivative",
+      "checks": [
+        "At the actual physical image (T.radius p.1,p.2), open U and hp supply a neighborhood on which the actual mixedDerivative0 b field is smooth.",
+        "ContDiffAt.comp is called with x=T.radius p.1 and the genuine smooth radial slice r↦(r,p.2). Its output simplifies to the actual scalar g, without choosing a common infinity-smooth extension outside U.",
+        "The pinned ordered-partition formula uses the same actual global radius map and finite order a≤∞. The final simplification preserves the exact angular slice and physical image point.",
+        "The zero-order partition case is inherited from the exact finite-chain provider; no higher physical order than c.length≤a is used."
+      ]
+    },
+    {
+      "theorem": "n04_materialRadiusPullback_mixedDerivative_bound",
+      "checks": [
+        "For each fixed radial order a, coefficient bounds are chosen before every U/f/b/p/W. Sum of nonnegative coefficient bounds gives K≥0.",
+        "Termwise |physical mixed jet|≤W and |actual radius coefficient|≤B_c imply |product|≤W*B_c, then commutativity gives B_c*W.",
+        "Only W≥0 is used; no E0 floor, global smoothness of f, state estimate or domain-radius bound is inserted."
+      ]
+    },
+    {
+      "theorem": "n04_materialRadiusPullback_iteratedFDeriv_bound",
+      "checks": [
+        "All K_a are selected before U/f/p/W. A=sum_{a≤N}K_a is nonnegative and K_a≤A follows from the actual Finset.single_le_sum contract and a<N+1.",
+        "Φ(q)=(T.radius q.1,q.2) is globally smooth because the supplied radius is smooth. V=Φ⁻¹U is open, p∈V follows exactly from hp, and MapsTo Φ V U is definitional.",
+        "ContDiffOn.comp gives smoothness of the literal pullback on this actual preimage; no replacement function or enlarged physical domain is used.",
+        "For a+b=k≤N and j≤a, the input bound j+b≤N is valid. Every pullback mixed jet is bounded by A*W.",
+        "CylinderMixedJets supplies2^k*A*W; pinned pow_le_pow_right₀ with1≤2 and k≤N raises this to2^N*A*W. Associativity yields the stated C*W.",
+        "C_N=2^N*A depends only on D/T/hT and N, before U, f, evaluation point and W. The physical finite-order budget N and any material power inside W remain unchanged."
+      ]
+    }
+  ],
+  "scope": {
+    "all100_source_lines_and_two_full_project_provider_sources_read": true,
+    "exact_actual_provider_blobs_verified_against_CI170_tree": true,
+    "mathlib_signatures_read_at_fixed_pin": true,
+    "no_determined_mathematical_or_API_finding": true,
+    "no_local_Lean_or_resource_change": true,
+    "no_source_edit": true,
+    "no_CI_query": true,
+    "does_not_claim_elaboration_or_CI_success": true,
+    "does_not_supply_missing_actual_physical_jet_bound_inputs": true
+  },
+  "prior_readonly_route": {
+    "blob": "5e0f72e11013de2f3f08a3be7734de088ca3cb9e",
+    "sha256": "bbdb65ab6df2da830af8126ba1bb127321dc44c2ea6cde65971f89ae83a303f5",
+    "role": "Previously identified narrow interface; this review reads the actual new proof and providers, not just the route report."
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "schema": "retained-gateway-owner-binding-addendum-v1",
+  "status": "EXACT_HISTORICAL_REVIEW_BINDINGS_VERIFIED_STATIC_PLAN_NOT_COMPILED",
+  "path": "quantitative/recovery/RetainedPrimitiveFiveSourceMinimalPlanOwnerBindings.json",
+  "author": "/root/quantitative_route",
+  "original_plan": {
+    "path": "quantitative/recovery/RetainedPrimitiveFiveSourceMinimalPlanAfter149.json",
+    "blob": "b55da774bdeb5ea34f69842122fb20cf8ff969ce",
+    "sha256": "0816a918e8394e5ae5c8dc7ffb96313587cde5864e344af43bb9b9c84164e79e",
+    "bytes": 1518911
+  },
+  "plan_immutable": true,
+  "candidate_and_reviews": [
+    {
+      "kind": "combined_candidate",
+      "blob": "5a186eac3ad509a97617dfb8f31acfb55ba7d762",
+      "sha256": "b00fb88032f76cde352e512996b4a66aec519ea9ef47513661178796e2516324",
+      "bytes": 6320,
+      "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01RetainedPrimitiveConstruction.lean",
+      "static_status": "HELD_UNCOMPILED_PEER_REVIEW_PENDING",
+      "compiled": false
+    },
+    {
+      "kind": "combined_owner",
+      "blob": "bd3f2fd83df84a4d0d51248f38f67035ca7d926c",
+      "sha256": "46dd450a35a26bb3e041e9f00d500463293a0f7e8a5f29bca3e69a2293ad8f47",
+      "bytes": 2619,
+      "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01RetainedPrimitiveConstruction.lean",
+      "static_status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+      "compiled": false
+    },
+    {
+      "kind": "combined_peer",
+      "blob": "6f58ab582852a0d2edc40fc0c15d6cce5f970cf3",
+      "sha256": "28d8272692417a36a167470d5c588bc809f9c02466cfb9e1cf4a2b857c133430",
+      "bytes": 8003,
+      "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01RetainedPrimitiveConstruction.lean",
+      "static_status": "PASS_STATIC_REVIEW_UNCOMPILED",
+      "compiled": false
+    },
+    {
+      "kind": "owner45",
+      "blob": "43e16c8829d37ab8a04f52cd739c87fac0bda297",
+      "sha256": "95453dcad31705c849cb73e43dd9df60f15924377b2de5c26d4694569b4f0b2a",
+      "bytes": 1928,
+      "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01ActualRetainedReference.lean",
+      "static_status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED_AT_PINNED_UPSTREAM",
+      "compiled": false
+    },
+    {
+      "kind": "owner64",
+      "blob": "d3a12a7dca9c2e027b61d3adb40cb67e5fd6ef6d",
+      "sha256": "486949b4913e1131702923436c3ae5599de0dde98a1ee018dc8dcfbbd9946a22",
+      "bytes": 1376,
+      "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01aFixedReferencePrimitiveContext.lean",
+      "static_status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+      "compiled": false
+    },
+    {
+      "kind": "owner52",
+      "blob": "2c55e5a9ab92665ee63940c065ecf86c008b493e",
+      "sha256": "045ed9159495f51b233533e969638fa9a7792c9499dc51e1834603656479575a",
+      "bytes": 1721,
+      "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01PrimitiveFixedWitnessConstruction.lean",
+      "static_status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED_AT_PINNED_UPSTREAM",
+      "compiled": false
+    }
+  ],
+  "sources": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ActualRetainedReference",
+      "path": "src/ContinuousFlexibility/Analysis/N01ActualRetainedReference.lean",
+      "blob": "ca7674d50e07ae8fbccfff307348308327941342",
+      "sha256": "ca09ea2f1ddf4bed503b6ac152f0aa286089625f48a4be9e33e22030de1118a2",
+      "lines": 45
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction",
+      "path": "src/ContinuousFlexibility/Analysis/N01PrimitiveFixedWitnessConstruction.lean",
+      "blob": "fa468a78f48266fb1c0603e9b16988a50d5a4fb4",
+      "sha256": "5a786c0686f89e5186e4f39dc748c644e2d433be5a06d0c95f9324e27b9a539b",
+      "lines": 52
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01RetainedPrimitiveConstruction",
+      "path": "src/ContinuousFlexibility/Analysis/N01RetainedPrimitiveConstruction.lean",
+      "blob": "b4c99756ab69d37a0a3ce2c61570bed32f749885",
+      "sha256": "5e4823895fdf7f549d98d6cff9e1e0d8ef460e1dadc531892bf1ed957a2125f6",
+      "lines": 61
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext",
+      "path": "src/ContinuousFlexibility/Analysis/N01aFixedReferencePrimitiveContext.lean",
+      "blob": "41ee0aaa4a3971691bfdc8a8832a87300d97a863",
+      "sha256": "48542eac85fcd18116d018740b290ab9d57c41793d055e255d2b9791a9fe4c4c",
+      "lines": 64
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/NeighborhoodFlowRetainedGeometry.lean",
+      "blob": "1e5acd56f27b8dfe803c4ee990b470e839d47e0d",
+      "sha256": "abdb8e16cd7f6a4163500e87c4f5d9dafe7cce08816d35f6f573df0b8036219a",
+      "lines": 111
+    }
+  ],
+  "checks": {
+    "all_five_plan_sources_exactly_match_combined_candidate": true,
+    "combined_owner_binds_exact_candidate_and_peer": true,
+    "peer_covers_all_five_source_contracts_and_fixed_flow_body_comparison": true,
+    "three_individual_provider_owners_exactly_match_candidate": true,
+    "all_six_metadata_blobs_fetched_and_hash_checked": true
+  },
+  "scope": {
+    "historical_selected_pin": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+    "migration_authority": "The immutable new plan separately establishes the exact provider availability and bounded migration after the actual 149 source group. These historical reviews alone do not prove current combined elaboration.",
+    "fixed_flow111": "The complete 111-line mathematical body and documented wrapper-only extraction are covered by the combined independent peer; no new standalone 111 owner or compilation is invented.",
+    "current_149_gate": "CI170 on 84f31a0 failed. Activation still requires the 149 successor and its explicit repairs to complete full CI green. This addendum does not modify that gate.",
+    "math_review_repeated": false,
+    "source_modified": false,
+    "refs_or_ci_modified": false
+  }
+}

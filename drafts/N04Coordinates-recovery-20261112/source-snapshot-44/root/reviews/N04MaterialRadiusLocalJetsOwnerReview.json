@@ -1,0 +1,53 @@
+{
+  "kind": "owned_complete_new_source_review",
+  "source": {
+    "path": "src/ContinuousFlexibility/Analysis/N04MaterialRadiusLocalJets.lean",
+    "blob": "c4ce6d627aecdad5dd13050f972c8b1e85e03ba6",
+    "sha256": "338a7ea23f75defa2ec38488ae5e6c7bb2b4ee3702214dad293c505012dc52e9",
+    "bytes": 4914,
+    "lines": 100,
+    "source_path": "src/ContinuousFlexibility/Analysis/N04MaterialRadiusLocalJets.lean"
+  },
+  "owner": "/root",
+  "base": {
+    "head": "84f31a030a632f7d5ddba43b5a638d29da00af45",
+    "last_full_green": "836b039233920fa778d9747be7b5d5a9f953fea3"
+  },
+  "public_headers": [
+    "theorem n04_materialRadiusPullback_mixedDerivative\n    {D : ReferenceData} {T : MaterialData} (hT : IsMaterialData D T)\n    {U : Set PolarPoint} (hU : IsOpen U) {f : PolarPoint → ℝ}\n    (hf : ContDiffOn ℝ ∞ f U) (a b : ℕ) {p : PolarPoint}\n    (hp : (T.radius p.1, p.2) ∈ U) :\n    mixedDerivative a b (fun q => f (T.radius q.1, q.2)) p =\n      ∑ c : OrderedFinpartition a,\n        mixedDerivative c.length b f (T.radius p.1, p.2) *\n          n07aRadiusJetCoefficient T c p.1 := by",
+    "theorem n04_materialRadiusPullback_mixedDerivative_bound\n    {D : ReferenceData} {T : MaterialData} (hT : IsMaterialData D T) (a : ℕ) :\n    ∃ K : ℝ, 0 ≤ K ∧ ∀ (U : Set PolarPoint), IsOpen U →\n      ∀ (f : PolarPoint → ℝ), ContDiffOn ℝ ∞ f U →\n      ∀ (b : ℕ) (p : PolarPoint), (T.radius p.1, p.2) ∈ U →\n      ∀ W : ℝ, 0 ≤ W →\n      (∀ j : ℕ, j ≤ a → |mixedDerivative j b f (T.radius p.1, p.2)| ≤ W) →\n      |mixedDerivative a b (fun q => f (T.radius q.1, q.2)) p| ≤ K * W := by",
+    "theorem n04_materialRadiusPullback_iteratedFDeriv_bound\n    {D : ReferenceData} {T : MaterialData} (hT : IsMaterialData D T) (N : ℕ) :\n    ∃ C : ℝ, 0 ≤ C ∧ ∀ (U : Set PolarPoint), IsOpen U →\n      ∀ (f : PolarPoint → ℝ), ContDiffOn ℝ ∞ f U →\n      ∀ (p : PolarPoint), (T.radius p.1, p.2) ∈ U →\n      ∀ W : ℝ, 0 ≤ W →\n      (∀ a b : ℕ, a + b ≤ N → |mixedDerivative a b f (T.radius p.1, p.2)| ≤ W) →\n      ∀ k : ℕ, k ≤ N →\n        ‖iteratedFDeriv ℝ k (fun q => f (T.radius q.1, q.2)) p‖ ≤ C * W := by"
+  ],
+  "imports": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aMaterialPullbackJets",
+      "blob": "3162470bd6b9ac60c8abb8ce498955f590bf9cf9"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CylinderMixedJets",
+      "blob": "3dc20e779221e16f9be32dff13d22e978b5a048d"
+    }
+  ],
+  "proof_scope": [
+    "Literal pullback f(T.radius q.1,q.2) on preimage of arbitrary actual open U; original f unchanged.",
+    "Physical orders in each partition are no more than the requested radial order.",
+    "Bounds selected before U/f/b/p/W and full-order C before U/f/p/W.",
+    "No extension outside U, no smoothness or positive bounds at true roots, no growth assumption on W."
+  ],
+  "independent_review": {
+    "blob": "d2fb34c960d86f860a57aa27194e230b058384e9",
+    "sha256": "3b32dd9680231c3d944333e61f21c52f732969c1ddb1320bd078b2880dc6afe8",
+    "result": "pass before CI"
+  },
+  "name_check": {
+    "scope": "Exact reviewed actual nonmain1974 names,149 new703 names,fixed new1301 names; main tree filename",
+    "collisions": 0,
+    "whole_main_declaration_rescan": false
+  },
+  "validation": {
+    "local_Lean": false,
+    "CI": false,
+    "contains_sorry_or_axiom_or_unsafe": false
+  },
+  "activation": "Only after current pending repair batch has complete green CI; new source kept outside active src."
+}

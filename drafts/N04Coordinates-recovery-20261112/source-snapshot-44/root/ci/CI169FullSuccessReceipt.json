@@ -1,0 +1,120 @@
+{
+  "schema": "N04Coordinates.CIResult.v2",
+  "label": "CI169",
+  "head": "836b039233920fa778d9747be7b5d5a9f953fea3",
+  "tree": "aedbc4ec6f58d05e07de2eefb318651f69077036",
+  "parent": "3f7cac81c9952e98b4c2ab1bc3956d422b8988c9",
+  "run": 43314424168,
+  "run_number": 1841,
+  "job": 131518582983,
+  "status": "completed",
+  "conclusion": "success",
+  "completed_at": "2026-11-12T22:13:40Z",
+  "verified_at": "2026-11-12 22:14:56 UTC",
+  "log": {
+    "sha256": "987fb86ea4dda5113a2f89dce3b3f93806c9ceb1e527aae431a9644d17f0545a",
+    "bytes": 76826,
+    "lines": 921,
+    "run": 43314424168,
+    "job": 131518582983,
+    "blob": "a48e57754325a08a1b0504a792a3805dfb474983"
+  },
+  "quick_check": {
+    "conclusion": "success",
+    "compiled_project_modules": 1,
+    "changed_source": "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal"
+  },
+  "full_build": {
+    "conclusion": "success",
+    "completed_at": "2026-11-12T22:12:16.7366417Z",
+    "jobs": 8395,
+    "compiled_project_modules_during_step": 129,
+    "default_libraries": [
+      "ContinuousFlexibility",
+      "AxiomAudit",
+      "FlexibleSphereChallenge",
+      "FlexibleSphereSolution"
+    ]
+  },
+  "root_generation": {
+    "generated_imports": 4351,
+    "source_tree": "aedbc4ec6f58d05e07de2eefb318651f69077036",
+    "generator_blob": "8c4778a0260d7f7125f2deb16c15a89dc416d4f8",
+    "checked_in_root_unchanged": true
+  },
+  "coverage": {
+    "compiled_project": 4409,
+    "total_project": 4413,
+    "compiled_all_src": 4413,
+    "total_all_src": 4417,
+    "metadata_blob": "9c50c8370e39154362ac6b35e7d045ebddcf04cd",
+    "independent_replay_blob": "97744d6a5d9b0b4fa4d833946dfd104e02acb035",
+    "omitted_modules": [
+      {
+        "module": "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+        "path": "src/ContinuousFlexibility/Analysis/ProjectiveNewtonCommonOrbit.lean",
+        "blob": "a5ad392d126b4c78d4b5c1b740ab13be432d220f"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth",
+        "path": "src/ContinuousFlexibility/Analysis/ProjectiveNewtonParameterGrowth.lean",
+        "blob": "67a927fba191303480c51a86bae2b9cbb386339a"
+      },
+      {
+        "module": "ContinuousFlexibility.Blueprint.N01c.Coefficients",
+        "path": "src/ContinuousFlexibility/Blueprint/N01c/Coefficients.lean",
+        "blob": "d08bfe0f69de1d6f580d88bd542733d28d9475cc"
+      },
+      {
+        "module": "ContinuousFlexibility.Blueprint.N01c.Speeds",
+        "path": "src/ContinuousFlexibility/Blueprint/N01c/Speeds.lean",
+        "blob": "b9732984d9723e5a61b4448e56d2cca328dac0a2"
+      }
+    ],
+    "method": "Exact current-tree import map with the actual generated root, closure of all four default libraries, and complete successful build. Does not use stale cache counters."
+  },
+  "raw_cache_counter": {
+    "compiled": 5091,
+    "total": 4413,
+    "stale_inflated": true,
+    "not_coverage": true
+  },
+  "blueprint_status": {
+    "proved": 37,
+    "total": 42,
+    "open": [
+      "N01c",
+      "N02N03",
+      "N04b",
+      "N04Coordinates",
+      "N05"
+    ],
+    "status_and_axiom_step": "success"
+  },
+  "endpoint": {
+    "FlowJets": "proved in earlier exact receipt",
+    "Realization": "open",
+    "N04Coordinates": "open",
+    "completion_standard_met": false,
+    "whole_project_endpoint_axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "N04Coordinates_allowed_axiom_gate": false
+  },
+  "budget": {
+    "last_full_green_now": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "released": true,
+    "prior_added_conservative": 19936,
+    "next_batch_source_limit": 20000
+  },
+  "rule_observation": {
+    "latest_check_UTC": "2026-11-12 22:01:55 UTC",
+    "prior_check_UTC": "2026-11-12 22:00:58 UTC",
+    "interval_seconds": 57,
+    "correction": "All subsequent run/job status queries use current_time difference >=60 seconds guard, never manually estimated."
+  },
+  "no_further_log_download": true
+}

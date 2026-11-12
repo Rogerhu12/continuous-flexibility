@@ -1,0 +1,86 @@
+{
+  "kind": "CI170_failed_quick_check_receipt",
+  "head": "84f31a030a632f7d5ddba43b5a638d29da00af45",
+  "tree": "02cfcb14a87f07b6c9dbb379cebe3d1bcb3404dc",
+  "parent": "836b039233920fa778d9747be7b5d5a9f953fea3",
+  "run": 43318670243,
+  "workflow_number": 1843,
+  "job": 131533276094,
+  "pushed_and_verified": "2026-11-12 22:18:49 UTC",
+  "first_lookup": "2026-11-12 22:24:15 UTC",
+  "failure_verified": "2026-11-12 22:26:19 UTC",
+  "quick_check": "failure",
+  "quick_exit_at": "2026-11-12T22:24:56.2099650Z",
+  "full_build": "skipped",
+  "endpoint_axiom_report": "skipped",
+  "compiled_modules_during_quick": 53,
+  "compiled_total_coverage": "not established for this head",
+  "last_full_green": {
+    "head": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "receipt": "40f4094476659c1b052cd462cdfb119ca6032f44",
+    "project_compiled": 4409,
+    "project_total": 4413
+  },
+  "job_log": {
+    "blob": "da7ccf91bdc9aa7c2f7647e031f6b5781a2c0a53",
+    "sha256": "3e612b00e53e4a746c512a8193970fa1a45d08ae5b4f47e7bc56318a1cac8daf",
+    "bytes": 107440,
+    "lines": 1183,
+    "run": 43318670243,
+    "job": 131533276094,
+    "downloaded_once": true
+  },
+  "complete_error_blocks": {
+    "blob": "826005f0cd329d220290e072ec12ab8837d274d6",
+    "entries": 16,
+    "sha256": "afb1f5c069a03618acceff033fedaf5160c43ffda3dbcff10f6bf2057b5d3b4d",
+    "bytes": 202949,
+    "source_artifact": 13990835057,
+    "artifact_zip_sha256": "a9d12d5f269829b830214b989b6c93347bfceb8e2180257afeacbb2877ed81a4",
+    "complete_quick_log_sha256": "b533bfefa880764f6ae2118ecb9948ac2ee07a13a2cd9a8ef6860d13e1128d5c",
+    "reason": "The job summary truncates several elaborator goals; the one downloaded build-log artifact supplies every actual diagnostic."
+  },
+  "errors": [
+    "error: src/ContinuousFlexibility/Analysis/ActualPositiveReferenceFirstJets.lean:94:37: Application type mismatch: The argument",
+    "error: src/ContinuousFlexibility/Analysis/ConstructedRootCutFirstJets.lean:70:52: unsolved goals",
+    "error: src/ContinuousFlexibility/Analysis/ConstructedRootCutFirstJets.lean:158:2: unsolved goals",
+    "error: src/ContinuousFlexibility/Analysis/ConstructedRootCutFirstJets.lean:159:2: unsolved goals",
+    "error: src/ContinuousFlexibility/Analysis/ConstructedRootCutFirstJets.lean:160:20: Tactic `rewrite` failed: Did not find an occurrence of the pattern",
+    "error: src/ContinuousFlexibility/Analysis/WholePositiveReferenceGaugeFirstJets.lean:50:2: Type mismatch: After simplification, term",
+    "error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean:66:8: Type mismatch: After simplification, term",
+    "error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean:71:6: Type mismatch: After simplification, term",
+    "error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferenceRadial.lean:104:8: Type mismatch: After simplification, term",
+    "error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferenceRadial.lean:125:18: Tactic `rewrite` failed: Did not find an occurrence of the pattern",
+    "error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeGlobalTransport.lean:48:10: unsolved goals",
+    "error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeGlobalTransport.lean:91:6: Type mismatch: After simplification, term",
+    "error: src/ContinuousFlexibility/Analysis/RadialReferencePotentialGerms.lean:38:27: Application type mismatch: The argument",
+    "error: src/ContinuousFlexibility/Analysis/RadialReferencePotentialGerms.lean:38:10: Application type mismatch: The argument",
+    "error: src/ContinuousFlexibility/Analysis/RadialReferencePotentialGerms.lean:105:10: Tactic `rewrite` failed: Did not find an occurrence of the pattern",
+    "error: src/ContinuousFlexibility/Analysis/RadialReferencePotentialGerms.lean:141:41: Application type mismatch: The argument"
+  ],
+  "budget": {
+    "source_added": 19666,
+    "source_deleted": 0,
+    "paths": 149,
+    "marginal_generated_additions": 147,
+    "marginal_conservative": 19813,
+    "full_checked_in_root_lag": 257,
+    "full_lag_conservative": 19923,
+    "limit": 20000,
+    "remaining": 77
+  },
+  "endpoint_status": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open",
+    "proved": 37,
+    "total": 42,
+    "open": [
+      "N01c",
+      "N02N03",
+      "N04b",
+      "N04Coordinates",
+      "N05"
+    ]
+  }
+}

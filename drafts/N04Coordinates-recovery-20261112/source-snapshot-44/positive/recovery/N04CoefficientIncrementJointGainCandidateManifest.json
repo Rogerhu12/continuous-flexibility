@@ -1,0 +1,235 @@
+{
+  "schema": "n04-actual-coefficient-increment-joint-gain-candidate-v1",
+  "status": "FROZEN_CANDIDATE_SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "author": "/root/proof_inventory",
+  "selected_main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "mathlib_pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "source": {
+    "path": "positive/reconstructed/N04CoefficientIncrementJointGain.lean",
+    "target_module": "ContinuousFlexibility.Analysis.N04CoefficientIncrementJointGain",
+    "git_blob": "63073bc007f7945e905e6cb9237a96f2c463ff8a",
+    "sha256": "d94ade21f71bc1074689e67b3ef5922d24c9f15ed26b7c9d0490d0c8ef3a40e8",
+    "utf8_bytes": 10715,
+    "lines": 199
+  },
+  "imports": [
+    "ContinuousFlexibility.Analysis.N01CoefficientJointTower",
+    "ContinuousFlexibility.Analysis.N01CoefficientSpatialJets",
+    "ContinuousFlexibility.Analysis.MixedJointTameBounds",
+    "ContinuousFlexibility.Analysis.MaterialSampleShift",
+    "ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope",
+    "ContinuousFlexibility.Analysis.ActualRadialCellComparison",
+    "ContinuousFlexibility.Scalar.WeightedTowerCalculus"
+  ],
+  "declarations": [
+    {
+      "name": "n04_increment_sample_E0_power_bound",
+      "private": true,
+      "full_header": "private theorem n04_increment_sample_E0_power_bound\n    {D : ReferenceData} {T : MaterialData}\n    (hT : IsMaterialData D T) (hRef : IsAccumulatingProfile D)\n    {R : ℝ} (hR : 0 ≤ R) :\n    ∃ K Q : ℝ, 0 < K ∧ 0 ≤ Q ∧ ∀ j,\n      T.E0 (T.sample j) ^ R ≤ K * radialE (D.cellIndex j) ^ Q"
+    },
+    {
+      "name": "N01Properties.coefficientIncrement_parameterSpatialTower_parameterJet",
+      "private": false,
+      "full_header": "theorem N01Properties.coefficientIncrement_parameterSpatialTower_parameterJet\n    (m j : ℕ) (hcell : Ioo (C.left m) (C.right m) ⊆ D.cells j)\n    (i : Fin 3) (n : ℕ) (x : StateDirections S × ℝ)\n    (hx : x ∈ sectorNeighborhood S base ε ε) (v : Fin n → StateDirections S × ℝ)\n    {y : PolarPoint} (hy : y ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ)) :\n    hN.componentCoefficientScalarJet m j hcell i n x v y =\n      (hN.coefficientIncrement_parameterSpatialTower hS hT m j hcell i).D\n        n (x, y) (fun k => (v k, 0))"
+    },
+    {
+      "name": "N01Properties.coefficientIncrement_joint_unit_bound",
+      "private": false,
+      "full_header": "theorem N01Properties.coefficientIncrement_joint_unit_bound (n : ℕ) :\n    ∃ A Q : ℝ, 0 ≤ A ∧ 0 ≤ Q ∧\n      ∀ (m j : ℕ) (hcell : Ioo (C.left m) (C.right m) ⊆ D.cells j) (i : Fin 3),\n      ∀ x ∈ sectorNeighborhood S base ε ε,\n      ∀ y ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ),\n      ∀ v : Fin n → (StateDirections S × ℝ) × PolarPoint,\n      (∀ k, pairGrading (sectorGrading S) realGrading base (v k).1 + ‖(v k).2‖ ≤ 1) →\n      |(hN.coefficientIncrement_parameterSpatialTower hS hT m j hcell i).D n (x, y) v| ≤\n        A * T.H (T.sample j) ^ (3 / 4 : ℝ) * radialE (D.cellIndex j) ^ Q *\n          (1 + pairGrading (sectorGrading S) realGrading (n + loss) x +\n            ∑ k, pairGrading (sectorGrading S) realGrading (n + loss) (v k).1)"
+    },
+    {
+      "name": "N01Properties.coefficientIncrement_normalized_joint_growth",
+      "private": false,
+      "full_header": "theorem N01Properties.coefficientIncrement_normalized_joint_growth\n    (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))\n    (i : Fin 3) :\n    UniformWeightedJointGrowth (pairGrading (sectorGrading S) realGrading)\n      (fun m => radialE (D.cellIndex (j m)))\n      (fun m => smoothDirectionsScalarPostcompose\n        (hN.coefficientIncrement_parameterSpatialTower hS hT m (j m) (hcell m) i)\n        ((T.H (T.sample (j m)) ^ (3 / 4 : ℝ))⁻¹ • ContinuousLinearMap.id ℝ ℝ))\n      base loss"
+    }
+  ],
+  "actual_providers": [
+    {
+      "name": "N01CoefficientJointTower",
+      "module": "ContinuousFlexibility.Analysis.N01CoefficientJointTower",
+      "git_blob": "6a73e0d13b39b7cfda04fb0b22208e9c2e44fdb0",
+      "sha256": "082e10476e7067ac5bd8246dbce72aad825019fc196bd45d6191198abdd9b639",
+      "utf8_bytes": 4844,
+      "lines": 100,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01OriginalCoefficientSpatialJets",
+        "ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsSpatialJoint"
+      ],
+      "read_scope": "Full actual source read"
+    },
+    {
+      "name": "N01CoefficientSpatialJets",
+      "module": "ContinuousFlexibility.Analysis.N01CoefficientSpatialJets",
+      "git_blob": "0e038e131e20d709f5411f0c17637da9900b65e4",
+      "sha256": "5242b2bbb36f35525783b1941e73a51b0c6bbc0ff993b722a7b4f38040b16e12",
+      "utf8_bytes": 13967,
+      "lines": 249,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01CoefficientParameterTower",
+        "ContinuousFlexibility.Analysis.N01CoefficientMixedBounds",
+        "ContinuousFlexibility.Analysis.N01SectorFlowTower",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsSpatialJets",
+        "ContinuousFlexibility.Analysis.MixedDerivativeHierarchy"
+      ],
+      "read_scope": "Full actual source read"
+    },
+    {
+      "name": "MixedJointTameBounds",
+      "module": "ContinuousFlexibility.Analysis.MixedJointTameBounds",
+      "git_blob": "16fdec87b363c2eb4e9dbedda85a5d9a0298f3ac",
+      "sha256": "cf1f48dd90cf5adc2ec6889291a5bb7e50bf1ac76e658c53a564c60dfd995abc",
+      "utf8_bytes": 12586,
+      "lines": 245,
+      "imports": [
+        "ContinuousFlexibility.Analysis.JointJetSpatialRegularity",
+        "ContinuousFlexibility.Analysis.WeightedJointComposition",
+        "ContinuousFlexibility.Analysis.TameMultilinearNormalization"
+      ],
+      "read_scope": "Full actual source read"
+    },
+    {
+      "name": "MaterialSampleShift",
+      "module": "ContinuousFlexibility.Analysis.MaterialSampleShift",
+      "git_blob": "e79e27788e1c853bed9950e91d7d121995ab1508",
+      "sha256": "58b0285c60e26605a013ba3d580d17e37aef1fa450622b13c458227cb3aa8f74",
+      "utf8_bytes": 8706,
+      "lines": 175,
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialSampleGlobalModels",
+        "ContinuousFlexibility.Analysis.MaterialSampleRadialLoss",
+        "ContinuousFlexibility.Analysis.MaterialWeightShift"
+      ],
+      "read_scope": "Full actual source read"
+    },
+    {
+      "name": "MaterialSampleDiscreteEnvelope",
+      "module": "ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope",
+      "git_blob": "4b9de8d41ee0cac2a7f2cf3b1af9bede4dfbc437",
+      "sha256": "a1622572eafd1815a12c9851ba8ed8e12c0d6792694ffbf4fe75906ad6f2bfce",
+      "utf8_bytes": 5887,
+      "lines": 136,
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialSampleIndexModels",
+        "ContinuousFlexibility.Analysis.MaterialShiftedEnvelope"
+      ],
+      "read_scope": "Full actual source read"
+    },
+    {
+      "name": "ActualRadialCellComparison",
+      "module": "ContinuousFlexibility.Analysis.ActualRadialCellComparison",
+      "git_blob": "3348ac15c7a5b9f11d94cac0972eeddbebc2f6e5",
+      "sha256": "2742cf2727e450078cfebcf7363cc4b824846af5b25c3e11f304dddfebc726fa",
+      "utf8_bytes": 2568,
+      "lines": 61,
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialSampleShift"
+      ],
+      "read_scope": "Full actual source read"
+    },
+    {
+      "name": "WeightedTowerCalculus",
+      "module": "ContinuousFlexibility.Scalar.WeightedTowerCalculus",
+      "git_blob": "016523877104f642a44e572693b1b8b2251faa2c",
+      "sha256": "ca17c1326690271a54670c095d664693a6d5680fff254ea96a6937b83eec1b84",
+      "utf8_bytes": 14257,
+      "lines": 306,
+      "imports": [
+        "ContinuousFlexibility.Statements.ScalarWeighted",
+        "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+        "ContinuousFlexibility.Analysis.TameTransfer"
+      ],
+      "read_scope": "Full actual source read"
+    },
+    {
+      "name": "JointJetSpatialRegularity",
+      "module": "ContinuousFlexibility.Analysis.JointJetSpatialRegularity",
+      "git_blob": "8121ae30ba3505ef7020d759d0686257bea6fff6",
+      "sha256": "17c9b148bc6658c5acfb75e1b476b73e403d09263d6fe291747aa7ffb27a9dd1",
+      "utf8_bytes": 12920,
+      "lines": 249,
+      "imports": [
+        "ContinuousFlexibility.Analysis.SmoothDirectionsFixedLast",
+        "ContinuousFlexibility.Analysis.ScalarPlaneJetRegularity",
+        "ContinuousFlexibility.Analysis.MixedDerivativeLocality",
+        "ContinuousFlexibility.Analysis.MixedDerivativeHierarchy",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsAffine"
+      ],
+      "read_scope": "Full actual source read"
+    },
+    {
+      "name": "MaterialSampleGlobalModels",
+      "module": "ContinuousFlexibility.Analysis.MaterialSampleGlobalModels",
+      "git_blob": "f4c793c5cb6b7823ce77a593bfd2ba04c9cd2e9a",
+      "sha256": "ea918cd4e735448b5bef1b2ea10b45ba13e7ee8d8725333ac5d819c0bf9950f0",
+      "utf8_bytes": 4639,
+      "lines": 98,
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialSampleIndexModels"
+      ],
+      "read_scope": "Full actual source read"
+    },
+    {
+      "name": "TameMultilinearNormalization",
+      "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "git_blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "utf8_bytes": 9718,
+      "lines": 204,
+      "imports": [
+        "Mathlib.Analysis.Normed.Module.Seminorm.Basic",
+        "Mathlib.Topology.Algebra.Module.Multilinear.Basic",
+        "Mathlib.Topology.Order.OrderClosed",
+        "Mathlib.Topology.Instances.Real.Lemmas",
+        "Mathlib.Tactic.Positivity",
+        "Mathlib.Tactic.Ring"
+      ],
+      "read_scope": "Full actual source read; pure and continuous map APIs selected explicitly"
+    }
+  ],
+  "purpose": "Estimate the existing genuine coefficient increment joint tower with its actual sample H^(3/4) gain, then deterministically normalize that SAME tower by the inverse scalar. No final target estimate is an input.",
+  "actual_objects": {
+    "D_T_S_C": "The input N01 data are never reconstructed.",
+    "J": "hN.coefficientIncrement_parameterSpatialTower hS hT m j hcell i, literally",
+    "sample": "T.sample j where Ioo(C.left m)(C.right m) subset D.cells j; j is universally quantified and not replaced by C.cell or m.",
+    "weight": "radialE(D.cellIndex j)",
+    "normalized_J": "smoothDirectionsScalarPostcompose J ((T.H(T.sample j)^(3/4))^(-1) • ContinuousLinearMap.id ℝ ℝ)",
+    "low_base": "The literal input base, before every total joint order n.",
+    "loss": "The literal input loss. All high terms use n+loss.",
+    "domain": "sectorNeighborhood S base ε ε × (Ioo(C.left m)(C.right m) × univ). No discriminant/lower/buffer premise."
+  },
+  "proof_audit": [
+    "Pure-parameter slots of the joint J equal the existing sector coefficient jets through pointTower_eq_jointJet; no new choice of tower.",
+    "Raw componentCoefficientScalarJet_mixed_bound is transported on the genuine open component using mixedDerivative_congr_on_open.",
+    "Finite prefix k<=n has mixed cap n. Actual sample E0 powers are bounded by powers of the SAME radialE index using global endpoint models and the one-sided material shift. H is not involved in this comparison.",
+    "Finite constants/exponents are summed only after W>=1 is known. The number of terms can affect constants, not base/loss.",
+    "The mixed-to-joint C parameter is A*H_j*W_j^Q. Its separate affine H parameter is 1+p(n+loss)x. All three directional pieces therefore retain H_j.",
+    "The scalar postcompose applies H_j^(-1) to every layer, including n=0. Exact inverse cancellation retains the same constants and base/loss in UniformWeightedJointGrowth."
+  ],
+  "scope_limits": [
+    "Not CurrentJets or final forcing/PDE closure.",
+    "No extension of closed-buffer lower bounds to an entire negative half.",
+    "No local Lean/elaboration/build/CI query; imports/typed proof remain subject to peer and CI.",
+    "The complete transitive main1ece graph is pending quantitative_route's cached import-map extraction; this manifest presently pins direct/critical sources only."
+  ],
+  "checks": {
+    "source_lines": 199,
+    "authorized_new_source_limit": 250,
+    "no_sorry_admit_axiom": true,
+    "no_options_modified": true,
+    "public_names_search": "Two main distinctive new public names queried in repository code search; no hits. Full selected-graph namespace collision pass pending.",
+    "active_source_index_refs_CI_modified": false,
+    "compiled": false
+  },
+  "planning_records": [
+    {
+      "blob": "73ef768fc47c2c645de0998a585f41d095d34af9",
+      "sha256": "454202aec0b229b2723abcd8a2055bfc8b58223f737853d470b7448b09725afb"
+    },
+    {
+      "blob": "01d69c55e39ba7bc4a5ce288e42023ecca3a4210",
+      "sha256": "212d80d53fb45c0eca445f9f8bd53528053fa283d99610b201b10e33b7167c79"
+    }
+  ]
+}

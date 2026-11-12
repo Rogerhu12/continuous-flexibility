@@ -1,0 +1,84 @@
+{
+  "schema": "n04-reviewed-manifest/v1",
+  "path": "audit/repair170/CI170FirstJetTwoRepairsReviewedManifest.json",
+  "status": "independently_reviewed_held_until_root_integration_and_ci",
+  "owner": "/root/audit_coordinates",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "candidate": {
+    "blob": "9052d4b74590e6fdac622bfbe1cbe2ef66a3c9f4",
+    "sha256": "1197f2c3045e850aa2aa660e473284edabfd4a068df465299425f7e15ed31c7a"
+  },
+  "exact_diff": {
+    "blob": "6684a71dab423f115e1ab309e6f84836f51303f0",
+    "sha256": "9c90717e24492dc965174f8e167644ac893c9445e34a4ce5d324a840e4900780"
+  },
+  "baseline": {
+    "head": "84f31a030a632f7d5ddba43b5a638d29da00af45",
+    "tree": "02cfcb14a87f07b6c9dbb379cebe3d1bcb3404dc",
+    "preimages_verified_in_actual_nontruncated_tree": true,
+    "CI170_failed": true
+  },
+  "files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceFirstJets.lean",
+      "before_blob": "76fa1a822a2df404ea31125c346670efa50b3010",
+      "before_sha256": "dec4f15789b17a9ac6f6c196fb9e1c6f9929efa6b7a7866909bd2d6a9bf7ba05",
+      "after_blob": "64b2f7c0920d8cc7a5e99e7c1d296ca54607ad3e",
+      "after_sha256": "dc458af47a01bd625ef84bf2941f86e0f0381b36419021fb898b6b97cf17ec27",
+      "before_lines": 123,
+      "after_lines": 125,
+      "complete_public_headers": [
+        {
+          "text": "theorem n04Coordinates_actual_positive_reference_firstJets\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}\n    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)\n    (hN : NonlinearPropertiesThrough03 D T S C R L base loss ε)\n    (hfield : N04bFieldRegularity D S C L base ε) (e : ℕ ≃ N04PieceIndex D)\n    (i : N04PositiveComponent D.a D.b (deriv D.w))\n    (j : ∀ side, N04PositiveEndpointSource C i side) {Y H : ℝ → ℝ}\n    (hgeometry : PositiveChartRangeGeometry (positiveReferenceCylinderChart Y)\n      (positiveReferenceCylinderInverse Y) (fun p : PolarPoint => H p.1)\n      (n04PositiveLeft i) (n04PositiveRight i) 0 1)\n    (hYjets : ∀ side θ a, a ≤ 1 →\n      iteratedFDeriv ℝ a (fun p : PolarPoint => Y p.1)\n          (n04PositiveEndpoint i side, θ) =\n        iteratedFDeriv ℝ a (n04PositiveReferenceSourceCoordinate (j side)\n          (n04bActualTypedAtlas hT hS hN hfield e)) (n04PositiveEndpoint i side, θ))\n    (hHjets : ∀ side θ a, a ≤ 1 →\n      iteratedFDeriv ℝ a (fun p : PolarPoint => H p.1)\n          (n04PositiveEndpoint i side, θ) =\n        iteratedFDeriv ℝ a (n04PositiveReferenceSourceHeight (j side)\n          (n04bActualTypedAtlas hT hS hN hfield e)) (n04PositiveEndpoint i side, θ))\n    (m : ℕ) (side : Bool)\n    (hadj : n04PositiveEndpoint i (!side) = (if side then C.right m else C.left m)) :\n    let K := n04bActualTypedAtlas hT hS hN hfield e\n    let k := if side then (K.cutPair m).2 else (K.cutPair m).1\n    let c := if side then C.right m else C.left m\n    let v : ℝ := if !side then 1 else 0\n    let s : ℝ := if !side then 1 else -1\n    let A : PolarPoint → PolarPoint := fun p => (p.1 - v, p.2)\n    let B : PolarPoint → PolarPoint := fun p => (s * p.1, p.2)\n    ∀ θ, (A (positiveReferenceCylinderChart Y (c, θ))).1 = 0 ∧\n      FiniteFullJetMatch 1 (c, θ) (A ∘ positiveReferenceCylinderChart Y)\n        (B ∘ K.chart (C.referenceState, 0) k) ∧\n      FiniteFullJetMatch 1 (c, θ) (fun p : PolarPoint => H p.1)\n        (K.height (C.referenceState, 0) k)",
+          "sha256": "362c5be8607ca2c2e960fdce5b9f8c312bfd0bc4c6af58c71357a176a13377d6"
+        }
+      ],
+      "all_other_bytes_identical": true
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGaugeFirstJets.lean",
+      "before_blob": "65bb127b9dd24cee1d337794f1a01d8f12a54326",
+      "before_sha256": "eb26b1fa7b31c91e00d9671367cb8c80494714bd93053a41ae702f812780c3b4",
+      "after_blob": "5f5a135d7d20bdd3a28dbed9c2712bab39352226",
+      "after_sha256": "7bc2f36e622f649e8178ad8e2f9763657e1ce6bf8a13579cca3450df8d764031",
+      "before_lines": 53,
+      "after_lines": 55,
+      "complete_public_headers": [
+        {
+          "text": "theorem wholePositiveReferenceGauge_firstJets_of_transport\n    {p : PolarPoint} {τ T σ S ψ Ψ : PolarPoint → PolarPoint}\n    {h₀ g₀ Q q : PolarPoint → ℝ}\n    (hτ : FiniteFullJetMatch 1 p τ T)\n    (hσ : ContDiffAt ℝ ∞ σ (τ p)) (hS : ContDiffAt ℝ ∞ S (τ p))\n    (hστ : σ ∘ τ =ᶠ[𝓝 p] (id : PolarPoint → PolarPoint))\n    (hST : S ∘ T =ᶠ[𝓝 p] (id : PolarPoint → PolarPoint))\n    (hTS : T ∘ S =ᶠ[𝓝 (τ p)] (id : PolarPoint → PolarPoint))\n    (hψ : FiniteFullJetMatch 1 p ψ Ψ)\n    (hh₀ : FiniteFullJetMatch 1 p h₀ g₀)\n    (hQ : FiniteFullJetMatch 1 p Q q) (hQp : Q p ≠ 0) :\n    FiniteFullJetMatch 1 (τ p)\n        (wholePositiveReferenceGaugeChart ψ σ)\n        (wholePositiveReferenceGaugeChart Ψ S) ∧\n      FiniteFullJetMatch 1 (τ p)\n        (wholePositiveReferenceGaugeHeight h₀ σ Q)\n        (wholePositiveReferenceGaugeHeight g₀ S q)",
+          "sha256": "86c67645b6a4af1c706493367d0bdbc0bfa0a9fde7275d33f6f1b8b7bfca7395"
+        }
+      ],
+      "all_other_bytes_identical": true
+    }
+  ],
+  "independent_review": {
+    "reviewer": "/root",
+    "blob": "2314d673d36f4bb402f56afda2b3a0e5ab7fb493",
+    "sha256": "e1ab3dda35008a9256d0fbeeffbb45ab610a6c1178ad81983de61929181928f6",
+    "bytes": 1791,
+    "lines": 36,
+    "result": "pass before CI",
+    "server_readback_verified": true,
+    "all_file_fingerprints_match": true
+  },
+  "budget": {
+    "before_lines": 176,
+    "after_lines": 180,
+    "added": 7,
+    "deleted": 3,
+    "net": 4,
+    "requested_net_ceiling": 10,
+    "within_bound": true
+  },
+  "limitations": [
+    "No local Lean or new CI execution by this owner. CI170 failed at the actual preimages; repaired candidates require root-controlled integration and CI.",
+    "No Lean archive copies are created; the immutable before/after Git blobs and exact diff preserve all bytes."
+  ],
+  "invariants": {
+    "public_headers_imports_options_unchanged": true,
+    "same_witnesses_functions_points_germs_and_conclusions": true,
+    "no_resource_limit_changes": true,
+    "no_active_refs_index_or_other_sources_changed": true
+  }
+}

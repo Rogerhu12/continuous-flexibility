@@ -1,10 +1,10 @@
 {
   "kind": "metadata_only_recovery_snapshot",
-  "snapshot": 43,
-  "prior_commit": "cf20136dd181167c8347ac4bbb7ad794a3315d2b",
-  "line_head": "836b039233920fa778d9747be7b5d5a9f953fea3",
-  "line_tree": "aedbc4ec6f58d05e07de2eefb318651f69077036",
-  "frozen_at": "2026-11-12 22:06:54 UTC",
+  "snapshot": 44,
+  "prior_commit": "e0047023ad909f9a6942612b5aa14c9fe24e1b41",
+  "line_head": "fc5254a50811fac73c0fd24697c6342ff8585493",
+  "line_tree": "45d186b993824a8b3b30d407deb250844da4cfd6",
+  "frozen_at": "2026-11-12 22:39:29 UTC",
   "files": [
     {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/cut-first-jets-syntax/ConstructedRootCutFirstJets.base.lean.txt",
@@ -28031,7 +28031,7 @@
       "lines": 9176,
       "blob": "f8548b858d40234fce54e77c5ff0702a6f4ed86a",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "e0047023ad909f9a6942612b5aa14c9fe24e1b41",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-43/quantitative/recovery/FixedBase518SelectedProvidersAtCI169.json"
       }
     },
@@ -28042,7 +28042,7 @@
       "lines": 11663,
       "blob": "e8d048a62c7b0bbf695503818b5f9a13d0bc3b07",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "e0047023ad909f9a6942612b5aa14c9fe24e1b41",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-43/quantitative/recovery/FixedBase518MinimalTwoBatchPlanAtCI169.json"
       }
     },
@@ -28053,7 +28053,7 @@
       "lines": 94124,
       "blob": "9c50c8370e39154362ac6b35e7d045ebddcf04cd",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "e0047023ad909f9a6942612b5aa14c9fe24e1b41",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-43/quantitative/recovery/ActualCI169SourceImportMapAndCoverage.json"
       }
     },
@@ -28064,7 +28064,7 @@
       "lines": 7715,
       "blob": "85b9de7b007ad4bbacc6534f62b94ed6d5779da1",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "e0047023ad909f9a6942612b5aa14c9fe24e1b41",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-43/audit/recovery/Reference33Post149MissingImportClosureInventory.json"
       }
     },
@@ -28075,7 +28075,7 @@
       "lines": 80,
       "blob": "62777fd394ee80611d3de38d5bb4f4f2b9ff4046",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "e0047023ad909f9a6942612b5aa14c9fe24e1b41",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-43/audit/recovery/Reference33EnumerationScopeOwnerIndependentAddendum.json"
       }
     },
@@ -28086,7 +28086,7 @@
       "lines": 519,
       "blob": "01d69c55e39ba7bc4a5ce288e42023ecca3a4210",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "e0047023ad909f9a6942612b5aa14c9fe24e1b41",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-43/positive/recovery/N04ActualForcingFixedBaseRadialRouteMain1ece.json"
       }
     },
@@ -28097,7 +28097,7 @@
       "lines": 48,
       "blob": "1b0cc90b5b77a8a7fd73f4fff93faff845744073",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "e0047023ad909f9a6942612b5aa14c9fe24e1b41",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-43/root/reviews/RetainedReferenceComponentEnumerationScopeSelectionReviewed.json"
       }
     },
@@ -28108,12 +28108,408 @@
       "lines": 89,
       "blob": "97744d6a5d9b0b4fa4d833946dfd104e02acb035",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "e0047023ad909f9a6942612b5aa14c9fe24e1b41",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-43/root/reviews/CI164CI169ImportCoverageCorrectionReviewed.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/ci/CI169FullSuccessReceipt.json",
+      "sha256": "c1c290acddc083e1010bce8380bd2cd23bbcb39ff0e736f4c97899e9d8fafc64",
+      "bytes": 3995,
+      "lines": 120,
+      "blob": "40f4094476659c1b052cd462cdfb119ca6032f44",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/root/ci/CI169FullSuccessReceipt.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/ci/CI169-build.log",
+      "sha256": "987fb86ea4dda5113a2f89dce3b3f93806c9ceb1e527aae431a9644d17f0545a",
+      "bytes": 76826,
+      "lines": 921,
+      "blob": "a48e57754325a08a1b0504a792a3805dfb474983",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/root/ci/CI169-build.log"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/integration/Cohort4Reference25Green169StagingPlan.json",
+      "sha256": "3bfd504c061c3d6a71ba1a939671095087e61caca3f2cf4363b15ab48ab766ac",
+      "bytes": 348582,
+      "lines": 8996,
+      "blob": "d4cb0336fcfb766c083fd46fcf4bea39729b6db9",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/root/integration/Cohort4Reference25Green169StagingPlan.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/integration/Cohort4Reference25Green169ProviderGraph.json",
+      "sha256": "b37471517622679c3bb165d7708ae3afad94caa7210c0a57b88a5859eae5a33d",
+      "bytes": 1840702,
+      "lines": 41181,
+      "blob": "8d2aa82e28f0575edd9f69ac871029dc19bf6610",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/root/integration/Cohort4Reference25Green169ProviderGraph.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/Cohort4Reference25FullRepositoryDAGAtCI169.json",
+      "sha256": "96450d1aee09a131bda23b1ac99b77796dbac64e6b343b8c72d35fc8af0c65a7",
+      "bytes": 672781,
+      "lines": 13637,
+      "blob": "9f5480dfc6e6e901e135b15d1d4424245b1e5ae1",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/quantitative/recovery/Cohort4Reference25FullRepositoryDAGAtCI169.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/ci/CI170PushReceipt.json",
+      "sha256": "64d809d8964f62b84e02a0bea983f9d6f27811a13b66fbed6b7a03a26ce247b7",
+      "bytes": 1106,
+      "lines": 29,
+      "blob": "3d3f94ac9911d7018fab86bc17556d5251c55760",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/root/ci/CI170PushReceipt.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/ci/CI170FailureReceipt.json",
+      "sha256": "e83a714c7191337f9056a3c1c2a1334ddcd108d2cd4aea5954ca58627153b14e",
+      "bytes": 4398,
+      "lines": 86,
+      "blob": "105605ff6307d70ed990840b80ecd56a4e5ac576",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/root/ci/CI170FailureReceipt.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/ci/CI170-build.log",
+      "sha256": "3e612b00e53e4a746c512a8193970fa1a45d08ae5b4f47e7bc56318a1cac8daf",
+      "bytes": 107440,
+      "lines": 1183,
+      "blob": "da7ccf91bdc9aa7c2f7647e031f6b5781a2c0a53",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/root/ci/CI170-build.log"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/ci/CI170CompleteErrorBlocks.json",
+      "sha256": "afb1f5c069a03618acceff033fedaf5160c43ffda3dbcff10f6bf2057b5d3b4d",
+      "bytes": 202949,
+      "lines": 66,
+      "blob": "826005f0cd329d220290e072ec12ab8837d274d6",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/root/ci/CI170CompleteErrorBlocks.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/N04CoefficientIncrementJointGainImplementationPlan.json",
+      "sha256": "454202aec0b229b2723abcd8a2055bfc8b58223f737853d470b7448b09725afb",
+      "bytes": 13715,
+      "lines": 165,
+      "blob": "73ef768fc47c2c645de0998a585f41d095d34af9",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/positive/recovery/N04CoefficientIncrementJointGainImplementationPlan.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/N04RetainedSameWitnessFieldGateway.json",
+      "sha256": "9ddfd7d8932e6bf00ca9e61dc70e517c2adb22dd1606faacc73205a904cc2b53",
+      "bytes": 36871,
+      "lines": 471,
+      "blob": "fc631678cd227d3f2b34feeefe37bbf79fd3d20e",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/positive/recovery/N04RetainedSameWitnessFieldGateway.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/FixedBase518GlobalPreflightAtCI169.json",
+      "sha256": "8d7d7351a833f696cb806737041338d3cad43cdbbb123ab33d261fa46d587185",
+      "bytes": 70168,
+      "lines": 1317,
+      "blob": "da6cfb498fcfd4d13a87a453929383ff783e9306",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/quantitative/recovery/FixedBase518GlobalPreflightAtCI169.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/FixedBase227NewPublicDeclarationIndex.json",
+      "sha256": "5f9fc6d9b1f83dc346a3b5193ee0979cfc565c990426c4a60b5f96a8b4625c76",
+      "bytes": 527799,
+      "lines": 11973,
+      "blob": "5c815b6f63a572455a89ef2cc2e778fb4ed717b6",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/quantitative/recovery/FixedBase227NewPublicDeclarationIndex.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/recovery/Reference33Post149TwoBatchPlan.json",
+      "sha256": "34953dca629a7a8d608f65e63ca58c748df2bc902182906244df2e08e1e8b057",
+      "bytes": 11439,
+      "lines": 243,
+      "blob": "7d435900758e73116867b1a613efdc7b6fb1dfca",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/audit/recovery/Reference33Post149TwoBatchPlan.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/recovery/Reference33Post149Batch1SourcePlan.json",
+      "sha256": "0b8448bf7737af7ce43824b5870bc957a677fa5865352412d5618c48920c2e32",
+      "bytes": 222613,
+      "lines": 5003,
+      "blob": "9b395bc3b9c4aed7d27ab36fa612bc7c254b9191",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/audit/recovery/Reference33Post149Batch1SourcePlan.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/recovery/Reference33Post149Batch2SourcePlan.json",
+      "sha256": "e7e6ace05751d5b4978a5f19c05350d4aefd13074776dc7ee777398c318757b9",
+      "bytes": 204690,
+      "lines": 4566,
+      "blob": "ee3479fe27b020457c03dccab87f7f22417c956a",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/audit/recovery/Reference33Post149Batch2SourcePlan.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/recovery/Reference33Post149TwoBatchImportAndNamesCheck.json",
+      "sha256": "69c859ad141c271135e53984ff4033f3b535de58170ef4eeb32fb51f33cf961c",
+      "bytes": 209700,
+      "lines": 4453,
+      "blob": "170b0a0717f1275be27271a136533996c8f2584d",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/audit/recovery/Reference33Post149TwoBatchImportAndNamesCheck.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/recovery/Reference33Batch1CI170PreparedSourcePlan.json",
+      "sha256": "9c4b37ea980a30d4897f6ade50e4d65ad2b8db875c47354f527db5c3c952e99f",
+      "bytes": 236746,
+      "lines": 5217,
+      "blob": "ee8848ec9f6a1a339fd4ec2e8ab9e4d35f92c679",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/audit/recovery/Reference33Batch1CI170PreparedSourcePlan.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/RetainedPrimitiveFiveSourceMinimalPlanAfter149.json",
+      "sha256": "0816a918e8394e5ae5c8dc7ffb96313587cde5864e344af43bb9b9c84164e79e",
+      "bytes": 1518911,
+      "lines": 31538,
+      "blob": "b55da774bdeb5ea34f69842122fb20cf8ff969ce",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/quantitative/recovery/RetainedPrimitiveFiveSourceMinimalPlanAfter149.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/material/N04MaterialRadiusLocalJets.lean",
+      "sha256": "338a7ea23f75defa2ec38488ae5e6c7bb2b4ee3702214dad293c505012dc52e9",
+      "bytes": 4914,
+      "lines": 100,
+      "blob": "c4ce6d627aecdad5dd13050f972c8b1e85e03ba6",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/root/material/N04MaterialRadiusLocalJets.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/N04MaterialRadiusLocalJetsOwnerReview.json",
+      "sha256": "6f9870e1b0c0a059c3a83eace80af59f7a0764d7683675ffea9821dfbe11175b",
+      "bytes": 3563,
+      "lines": 53,
+      "blob": "2cacf3c230ea8ebf9faf5e8318a517ccbdb967a7",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/root/reviews/N04MaterialRadiusLocalJetsOwnerReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/recovery/reviews/N04MaterialRadiusLocalJetsIndependentReview.json",
+      "sha256": "3b32dd9680231c3d944333e61f21c52f732969c1ddb1320bd078b2880dc6afe8",
+      "bytes": 9556,
+      "lines": 161,
+      "blob": "d2fb34c960d86f860a57aa27194e230b058384e9",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/audit/recovery/reviews/N04MaterialRadiusLocalJetsIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04CoefficientIncrementJointGain.lean",
+      "sha256": "d94ade21f71bc1074689e67b3ef5922d24c9f15ed26b7c9d0490d0c8ef3a40e8",
+      "bytes": 10715,
+      "lines": 199,
+      "blob": "63073bc007f7945e905e6cb9237a96f2c463ff8a",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/positive/reconstructed/N04CoefficientIncrementJointGain.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/N04CoefficientIncrementJointGainCandidateManifest.json",
+      "sha256": "6fe82878bf5665d2ab1e1d8d6382bfdda9b40a246930c1898e3dd0bee68c7449",
+      "bytes": 13077,
+      "lines": 235,
+      "blob": "56b7b0d3176bae7805b3443b5e36710e51277699",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/positive/recovery/N04CoefficientIncrementJointGainCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair170/CI170RootTwoRepairsOwner.json",
+      "sha256": "008ad8c9c2e9e2cb2b4ce96df5cda91d95397b06474c987234e1222841d24331",
+      "bytes": 1922,
+      "lines": 42,
+      "blob": "ad1bfbbdef12f8cc55a483cbbc2fd9c982cfc1e8",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/root/repair170/CI170RootTwoRepairsOwner.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair170/CI170FirstJetTwoRepairsCandidateManifest.json",
+      "sha256": "1197f2c3045e850aa2aa660e473284edabfd4a068df465299425f7e15ed31c7a",
+      "bytes": 12389,
+      "lines": 186,
+      "blob": "9052d4b74590e6fdac622bfbe1cbe2ef66a3c9f4",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/audit/repair170/CI170FirstJetTwoRepairsCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair170/CI170FirstJetTwoRepairs.diff",
+      "sha256": "9c90717e24492dc965174f8e167644ac893c9445e34a4ce5d324a840e4900780",
+      "bytes": 1439,
+      "lines": 27,
+      "blob": "6684a71dab423f115e1ab309e6f84836f51303f0",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/audit/repair170/CI170FirstJetTwoRepairs.diff"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair170/CI170FirstJetTwoRepairsIndependentReview.json",
+      "sha256": "e1ab3dda35008a9256d0fbeeffbb45ab610a6c1178ad81983de61929181928f6",
+      "bytes": 1791,
+      "lines": 36,
+      "blob": "2314d673d36f4bb402f56afda2b3a0e5ab7fb493",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/root/repair170/CI170FirstJetTwoRepairsIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/RetainedPrimitiveFiveSourceMinimalPlanOwnerBindings.json",
+      "sha256": "b7814ce56bf30cb3918b5632ebebe9dafc91469ebf2d2e6875c8e296e82eca6b",
+      "bytes": 6122,
+      "lines": 122,
+      "blob": "8990a59ded6e06b4b68b6d2f86b380b66b7ad5ed",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/quantitative/recovery/RetainedPrimitiveFiveSourceMinimalPlanOwnerBindings.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair170/CI170WholeGaugeThreeRepairsCandidateManifest.json",
+      "sha256": "ab69f10a6892b288d3e555fdbce5dc1a5c1b8e34b1237bb54d920c54aa625f21",
+      "bytes": 21101,
+      "lines": 445,
+      "blob": "cbdec7a34fe6e3ecbf151790ad25f1a2e3dad11b",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/quantitative/repair170/CI170WholeGaugeThreeRepairsCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair170/CI170WholeGaugeThreeRepairsReviewedManifest.json",
+      "sha256": "fab875b8fd47ee8f1bf51b2f95ae35afd9a0261801faf05cc4ff18a5c90e7832",
+      "bytes": 4793,
+      "lines": 119,
+      "blob": "13ff896f59f3d48d1bcbe884ff1a316332cd493c",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/quantitative/repair170/CI170WholeGaugeThreeRepairsReviewedManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair170/CI170WholeGaugeThreeRepairsIndependentReview.json",
+      "sha256": "20b7fbb2699ac022beae90917c5edf6dbb4397465985de60777dfef62b4ed801",
+      "bytes": 2378,
+      "lines": 46,
+      "blob": "adb3145018501109631d741b45473e3052a645a1",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/root/repair170/CI170WholeGaugeThreeRepairsIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair170/CI170RootTwoRepairsIndependentReview.json",
+      "sha256": "bcada6a14c1967a1c097d924343d84e4a273ddba8ae36d198931d31b9cd0387f",
+      "bytes": 17012,
+      "lines": 356,
+      "blob": "2fac988736febc57ead59bb9ea60556f5d367462",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/audit/repair170/CI170RootTwoRepairsIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair170/CI170FirstJetTwoRepairsReviewedManifest.json",
+      "sha256": "f68012d5385cf22f4986bc5657c16d640b65759f49eadbf0cd849e8a88d0a38b",
+      "bytes": 6395,
+      "lines": 84,
+      "blob": "596824fd66f0a877670bb2da566f5812926cfc9b",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/audit/repair170/CI170FirstJetTwoRepairsReviewedManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/ci/CI171SourceOnlyRepairPlan.json",
+      "sha256": "66ce26450a33d921eac6a48ae36be83c41bdb37a86658379cf587e3809c1309c",
+      "bytes": 11119,
+      "lines": 270,
+      "blob": "5d29a30f40b0e1c8f9935a4b4075f9ae31c2f467",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/root/ci/CI171SourceOnlyRepairPlan.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/ci/CI171PushReceipt.json",
+      "sha256": "fb967d0c780c8c2c7a4be663d920c4502ce4f2bf95ae16ece0a8af6dbe13fbd9",
+      "bytes": 989,
+      "lines": 30,
+      "blob": "6437a230f4b4fd747a7a3c588877d4d69e84dbaf",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-44/root/ci/CI171PushReceipt.json"
       }
     }
   ],
-  "storage_note": "Read-only full import map and independent corrected coverage for CI164/CI169, complete Reference33 post149 closure and exact188 scope owner/peer, fixed-base518 minimal two-batch plan, and actual forcing fixed-base radial proof route. No new Lean archived, no source integration. CI169 quick check passed and full build remains in progress; no budget release or endpoint completion claim.",
-  "compiled_baseline": "c796387fb555392501c81f5b8bd834936251516c",
-  "compiled_baseline_tree": "08257c9406671ac1f094b739e4971c1eca108c66"
+  "storage_note": "Outside the recovery archive is the exact complete-green CI169 tree. Full CI169 evidence, CI170 failure and all16 complete error blocks, the seven reviewed source-only repairs and CI171 push, pinned remaining source plans, one100-line open-U radius lemma and one199-line coefficient joint-gain candidate are preserved. CI171 is pending; Realization and parent remain open. The seven repaired Lean files are retained through the CI171 additional parent at their actual src paths, without duplicate Lean archive copies. stored_at is authoritative; source labels are logical draft paths and local mirrors are transient.",
+  "compiled_baseline": "836b039233920fa778d9747be7b5d5a9f953fea3",
+  "compiled_baseline_tree": "aedbc4ec6f58d05e07de2eefb318651f69077036"
 }

@@ -1,0 +1,46 @@
+{
+  "kind": "independent_root_CI170_whole_gauge_repair_review",
+  "reviewer": "/root",
+  "owner_manifest": "cbdec7a34fe6e3ecbf151790ad25f1a2e3dad11b",
+  "actual_head": "84f31a030a632f7d5ddba43b5a638d29da00af45",
+  "result": "pass before CI",
+  "full_candidate_sources_read": true,
+  "actual_preimages_hash_checked": true,
+  "complete_public_headers_preserved": 5,
+  "exact_seven_replacements_reproduce_sources": true,
+  "imports_unchanged": true,
+  "full_error_blocks": "826005f0cd329d220290e072ec12ab8837d274d6",
+  "reason": [
+    "CanonicalCurrentCutPair retains partial canonicalCutPoint inside Set.range, and canonicalHeight occurs under radialPartial. Delta-reducing these local project definitions in source and target exposes the same retained negative field functions.",
+    "Membership explicitly uses the existing V abbreviation; k is expanded only in the exact index equation, after chart/height equalities expose that selector.",
+    "Pointwise extensionality proves the three original whole functions on the negative branch. The target is not weakened to interior agreement.",
+    "The W-relative height quotient uses the original hfields pair, with the same global F/q and actual canonical current point; no new global extension or witnesses."
+  ],
+  "files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean",
+      "old_blob": "14acbf9b59c2fd57da53b0d7e0290c43f649331c",
+      "new_blob": "79a986c2a3dcd87523b2f123c517f9107a21a941",
+      "sha256": "96a7b8ce367af2b1fc725de8a5fbcc6b2c3b52f055e3c066ae5f96e98564d7e7",
+      "net_added": 4
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferenceRadial.lean",
+      "old_blob": "4fb8973a3fbe0b887088e2d297b5ff0cb9cfd11d",
+      "new_blob": "45264ac1203f286d286460b277daefbdcf3d1204",
+      "sha256": "a350813ccef8715ae28b346016a80660b810fe869f05b98ecd50f3080e19565b",
+      "net_added": 3
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeGlobalTransport.lean",
+      "old_blob": "9dd60b6e07fff54af9c9212383f8fddaa9eb3fdb",
+      "new_blob": "0874680247b405fcbd3019c51f2b92f73df35b17",
+      "sha256": "761d25bffba6631ab996d7aa7e76c03ca1d55ac8f27b6946e435dc1f1dbba874",
+      "net_added": 4
+    }
+  ],
+  "net_added_Lean": 11,
+  "new_public_declarations": 0,
+  "local_Lean": false,
+  "CI": false
+}

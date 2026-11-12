@@ -1,0 +1,30 @@
+{
+  "head": "fc5254a50811fac73c0fd24697c6342ff8585493",
+  "tree": "45d186b993824a8b3b30d407deb250844da4cfd6",
+  "parent": "84f31a030a632f7d5ddba43b5a638d29da00af45",
+  "pushed_and_verified": "2026-11-12 22:38:28 UTC",
+  "main_rules_head": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "source_files_changed": 7,
+  "actual_patch": {
+    "added": 44,
+    "deleted": 18,
+    "net": 26
+  },
+  "budget": {
+    "last_full_green": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "source_added": 19692,
+    "source_deleted": 0,
+    "total_changed_paths_from_green": 149,
+    "net_repair_lines": 26,
+    "generated_root_new_since_green": 147,
+    "full_checked_in_root_lag": 257,
+    "conservative_added": 19949,
+    "limit": 20000,
+    "remaining": 51
+  },
+  "plan": "5d29a30f40b0e1c8f9935a4b4075f9ae31c2f467",
+  "force": false,
+  "CI_label": "CI171",
+  "first_lookup_rule": "At least five minutes after push readback; later checks no more often than once per minute.",
+  "root_unchanged": true
+}

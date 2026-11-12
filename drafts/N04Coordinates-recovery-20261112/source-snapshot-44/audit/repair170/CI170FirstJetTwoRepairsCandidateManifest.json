@@ -1,0 +1,186 @@
+{
+  "schema": "N04_CI170_AUDIT_TWO_FIRST_JET_REPAIRS_V1",
+  "status": "CANDIDATE_SELF_REVIEWED_WAIT_INDEPENDENT_PEER_NOT_COMPILED",
+  "proposed_backup_path": "audit/repair170/CI170FirstJetTwoRepairsCandidateManifest.json",
+  "author": "/root/audit_coordinates",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "date": "2026-11-12",
+  "baseline": {
+    "head": "84f31a030a632f7d5ddba43b5a638d29da00af45",
+    "tree": "02cfcb14a87f07b6c9dbb379cebe3d1bcb3404dc",
+    "preimages_verified_in_actual_nontruncated_tree": true,
+    "CI170_failed": true
+  },
+  "log": {
+    "blob": "da7ccf91bdc9aa7c2f7647e031f6b5781a2c0a53",
+    "sha256": "3e612b00e53e4a746c512a8193970fa1a45d08ae5b4f47e7bc56318a1cac8daf",
+    "bytes": 107440,
+    "lines": 1183,
+    "source": "Read the single previously downloaded root log blob; no job-log or CI query was made."
+  },
+  "diagnostics": [
+    {
+      "file": "ActualPositiveReferenceFirstJets.lean",
+      "location": "94:37",
+      "message": "Application type mismatch: untyped congrArg Prod.snd was forced toward full K.chart equality with p instead of its actual radial pair target.",
+      "actual_term": "hopen.2.2.1 p hp",
+      "actual_type": "actual K.chart reference k p = ((actual K.chart reference k (p.1,0)).1,p.2)",
+      "expected_in_bad_application": "K.chart reference k p = p"
+    },
+    {
+      "file": "WholePositiveReferenceGaugeFirstJets.lean",
+      "location": "50:2",
+      "message": "After simplification, comp_match gives the scalar lambda products but the expected function arguments remain partial wholePositiveReferenceGaugeHeight applications.",
+      "actual_functions": [
+        "fun x => h₀ (σ x) * (Q (σ x))⁻¹",
+        "fun x => g₀ (S x) * (q (S x))⁻¹"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "name": "ActualPositiveReferenceFirstJets",
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceFirstJets.lean",
+      "before_blob": "76fa1a822a2df404ea31125c346670efa50b3010",
+      "before_sha256": "dec4f15789b17a9ac6f6c196fb9e1c6f9929efa6b7a7866909bd2d6a9bf7ba05",
+      "before_lines": 123,
+      "before_bytes": 6300,
+      "after_sha256": "dc458af47a01bd625ef84bf2941f86e0f0381b36419021fb898b6b97cf17ec27",
+      "after_lines": 125,
+      "after_bytes": 6358,
+      "exact_old": "      (fun p hp => congrArg Prod.snd (hopen.2.2.1 p hp)) hcl",
+      "exact_new": "      (fun p hp => by\n        have he := congrArg (fun q : PolarPoint => q.2) (hopen.2.2.1 p hp)\n        exact he) hcl",
+      "reverse_byte_exact": true,
+      "header_count": 1,
+      "complete_public_headers": [
+        {
+          "text": "theorem n04Coordinates_actual_positive_reference_firstJets\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}\n    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)\n    (hN : NonlinearPropertiesThrough03 D T S C R L base loss ε)\n    (hfield : N04bFieldRegularity D S C L base ε) (e : ℕ ≃ N04PieceIndex D)\n    (i : N04PositiveComponent D.a D.b (deriv D.w))\n    (j : ∀ side, N04PositiveEndpointSource C i side) {Y H : ℝ → ℝ}\n    (hgeometry : PositiveChartRangeGeometry (positiveReferenceCylinderChart Y)\n      (positiveReferenceCylinderInverse Y) (fun p : PolarPoint => H p.1)\n      (n04PositiveLeft i) (n04PositiveRight i) 0 1)\n    (hYjets : ∀ side θ a, a ≤ 1 →\n      iteratedFDeriv ℝ a (fun p : PolarPoint => Y p.1)\n          (n04PositiveEndpoint i side, θ) =\n        iteratedFDeriv ℝ a (n04PositiveReferenceSourceCoordinate (j side)\n          (n04bActualTypedAtlas hT hS hN hfield e)) (n04PositiveEndpoint i side, θ))\n    (hHjets : ∀ side θ a, a ≤ 1 →\n      iteratedFDeriv ℝ a (fun p : PolarPoint => H p.1)\n          (n04PositiveEndpoint i side, θ) =\n        iteratedFDeriv ℝ a (n04PositiveReferenceSourceHeight (j side)\n          (n04bActualTypedAtlas hT hS hN hfield e)) (n04PositiveEndpoint i side, θ))\n    (m : ℕ) (side : Bool)\n    (hadj : n04PositiveEndpoint i (!side) = (if side then C.right m else C.left m)) :\n    let K := n04bActualTypedAtlas hT hS hN hfield e\n    let k := if side then (K.cutPair m).2 else (K.cutPair m).1\n    let c := if side then C.right m else C.left m\n    let v : ℝ := if !side then 1 else 0\n    let s : ℝ := if !side then 1 else -1\n    let A : PolarPoint → PolarPoint := fun p => (p.1 - v, p.2)\n    let B : PolarPoint → PolarPoint := fun p => (s * p.1, p.2)\n    ∀ θ, (A (positiveReferenceCylinderChart Y (c, θ))).1 = 0 ∧\n      FiniteFullJetMatch 1 (c, θ) (A ∘ positiveReferenceCylinderChart Y)\n        (B ∘ K.chart (C.referenceState, 0) k) ∧\n      FiniteFullJetMatch 1 (c, θ) (fun p : PolarPoint => H p.1)\n        (K.height (C.referenceState, 0) k)",
+          "sha256": "362c5be8607ca2c2e960fdce5b9f8c312bfd0bc4c6af58c71357a176a13377d6"
+        }
+      ],
+      "public_headers_imports_options_identical": true,
+      "added_lines": 3,
+      "deleted_lines": 1,
+      "after_blob": "64b2f7c0920d8cc7a5e99e7c1d296ca54607ad3e",
+      "after_readback_verified": true,
+      "archive_policy": "Keep the before and after Lean source as the referenced Git blobs only; do not duplicate Lean archive copies. Exact replacement and unified diff are sufficient to reconstruct both byte sequences."
+    },
+    {
+      "name": "WholePositiveReferenceGaugeFirstJets",
+      "target_path": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGaugeFirstJets.lean",
+      "before_blob": "65bb127b9dd24cee1d337794f1a01d8f12a54326",
+      "before_sha256": "eb26b1fa7b31c91e00d9671367cb8c80494714bd93053a41ae702f812780c3b4",
+      "before_lines": 53,
+      "before_bytes": 2243,
+      "after_sha256": "7bc2f36e622f649e8178ad8e2f9763657e1ce6bf8a13579cca3450df8d764031",
+      "after_lines": 55,
+      "after_bytes": 2329,
+      "exact_old": "  simpa only [wholePositiveReferenceGaugeHeight, wholePositiveChartHeight,\n    Function.comp_def, div_eq_mul_inv] using hinv.comp_match hquot",
+      "exact_new": "  change FiniteFullJetMatch 1 (τ p)\n    (fun x : PolarPoint => h₀ (σ x) * (Q (σ x))⁻¹)\n    (fun x : PolarPoint => g₀ (S x) * (q (S x))⁻¹)\n  simpa only [Function.comp_def, div_eq_mul_inv] using hinv.comp_match hquot",
+      "reverse_byte_exact": true,
+      "header_count": 1,
+      "complete_public_headers": [
+        {
+          "text": "theorem wholePositiveReferenceGauge_firstJets_of_transport\n    {p : PolarPoint} {τ T σ S ψ Ψ : PolarPoint → PolarPoint}\n    {h₀ g₀ Q q : PolarPoint → ℝ}\n    (hτ : FiniteFullJetMatch 1 p τ T)\n    (hσ : ContDiffAt ℝ ∞ σ (τ p)) (hS : ContDiffAt ℝ ∞ S (τ p))\n    (hστ : σ ∘ τ =ᶠ[𝓝 p] (id : PolarPoint → PolarPoint))\n    (hST : S ∘ T =ᶠ[𝓝 p] (id : PolarPoint → PolarPoint))\n    (hTS : T ∘ S =ᶠ[𝓝 (τ p)] (id : PolarPoint → PolarPoint))\n    (hψ : FiniteFullJetMatch 1 p ψ Ψ)\n    (hh₀ : FiniteFullJetMatch 1 p h₀ g₀)\n    (hQ : FiniteFullJetMatch 1 p Q q) (hQp : Q p ≠ 0) :\n    FiniteFullJetMatch 1 (τ p)\n        (wholePositiveReferenceGaugeChart ψ σ)\n        (wholePositiveReferenceGaugeChart Ψ S) ∧\n      FiniteFullJetMatch 1 (τ p)\n        (wholePositiveReferenceGaugeHeight h₀ σ Q)\n        (wholePositiveReferenceGaugeHeight g₀ S q)",
+          "sha256": "86c67645b6a4af1c706493367d0bdbc0bfa0a9fde7275d33f6f1b8b7bfca7395"
+        }
+      ],
+      "public_headers_imports_options_identical": true,
+      "added_lines": 4,
+      "deleted_lines": 2,
+      "after_blob": "5f5a135d7d20bdd3a28dbed9c2712bab39352226",
+      "after_readback_verified": true,
+      "archive_policy": "Keep the before and after Lean source as the referenced Git blobs only; do not duplicate Lean archive copies. Exact replacement and unified diff are sufficient to reconstruct both byte sequences."
+    }
+  ],
+  "combined_diff": {
+    "path": "audit/repair170/CI170FirstJetTwoRepairs.diff",
+    "blob": "6684a71dab423f115e1ab309e6f84836f51303f0",
+    "sha256": "9c90717e24492dc965174f8e167644ac893c9445e34a4ce5d324a840e4900780",
+    "bytes": 1439
+  },
+  "source_only_entries": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceFirstJets.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "64b2f7c0920d8cc7a5e99e7c1d296ca54607ad3e",
+      "expected_preimage": "76fa1a822a2df404ea31125c346670efa50b3010"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGaugeFirstJets.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5f5a135d7d20bdd3a28dbed9c2712bab39352226",
+      "expected_preimage": "65bb127b9dd24cee1d337794f1a01d8f12a54326"
+    }
+  ],
+  "budget": {
+    "before_lines": 176,
+    "after_lines": 180,
+    "added": 7,
+    "deleted": 3,
+    "net": 4,
+    "requested_net_ceiling": 10,
+    "within_bound": true
+  },
+  "actual_provider_bindings": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean",
+      "blob": "ef7e207e7d604dbb3a94cc389660e1d67894c958",
+      "sha256": "ac3d3070df56ad9a3d209e22ffb213ab44b0ad80294906f30b57b157100f261d",
+      "lines": 159
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean",
+      "blob": "9f240624bea6c815b9ceb64eb7eff050b4f51316",
+      "sha256": "89b8e10fee150ed5c3816f725f0bafa80352d4af749519948e3833ed0ca2af28",
+      "lines": 171
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholePositiveChartGeometry.lean",
+      "blob": "118c0019a784242b74c880166ee4dedc43e1dede",
+      "sha256": "b0f9f540c1d8bcdf0e5414b487f15df378e3b36e369697c012f8bc28bbba892c",
+      "lines": 146
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/FiniteFirstJetInverse.lean",
+      "blob": "bf09a201a95c1fbcfb1c956a58a2fc041e6a0051",
+      "sha256": "fe97f63f7fc52a74a7a2a45f96839fa479f0e156540bdaddc83976ae0fe390ca",
+      "lines": 104
+    }
+  ],
+  "mathematical_self_review": [
+    {
+      "file": "ActualPositiveReferenceFirstJets",
+      "change": "Use an explicitly typed PolarPoint second-coordinate projection, bind its equality before giving it the EqOn goal, then exact the equality.",
+      "reason": "The unchanged open-component producer says chart p=((chart(p.1,0)).1,p.2). Applying the fixed projection produces exactly (chart p).2=p.2. Pair projection, the local K abbreviation and hk are definitionally the same existing functions. The actual domain, root, side, source j, geometry and every endpoint jet remain unchanged.",
+      "review_scope": "Read both complete123/125 sources, cached exact diagnostic and actual radial-field provider contract; reversed the single replacement byte-for-byte."
+    },
+    {
+      "file": "WholePositiveReferenceGaugeFirstJets",
+      "change": "First change the remaining FiniteFullJetMatch target to its literal scalar function pair using only the two project height definitions; then simplify the already-existing quotient composition.",
+      "reason": "wholePositiveReferenceGaugeHeight h₀ σ Q p is defined as h₀(σp)*wholePositiveChartHeight σ Q p, and wholePositiveChartHeight σ Q p is defined as (Q(σp))⁻¹. Therefore the changed higher-order arguments are definitionally the original functions. The unchanged comp_match hquot term becomes precisely those functions by Function.comp_def and div_eq_mul_inv.",
+      "review_scope": "Read both complete53/55 sources and actual project height definitions plus FiniteFullJetMatch.comp_match/div/inverse-germ contracts. No equality is assumed, no new inverse is chosen, and no root point changes."
+    }
+  ],
+  "invariants": {
+    "complete_public_headers_unchanged": 2,
+    "imports_unchanged": true,
+    "options_unchanged": true,
+    "all_other_bytes_unchanged": true,
+    "new_public_declarations": 0,
+    "mathematical_hypotheses_or_conclusions_unchanged": true,
+    "same_witness_and_germs": true,
+    "no_limits_changed": true
+  },
+  "verification": {
+    "after_sources_server_readback_verified": true,
+    "diff_server_readback_verified": true,
+    "reverse_exact_replacements_pass": true,
+    "local_compile": false,
+    "CI_query": false,
+    "active_tree_index_refs_unchanged": true
+  },
+  "next_gate": "Independent root full-source/delta review, then root-controlled bounded CI repair; no compiled claim."
+}

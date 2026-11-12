@@ -1,0 +1,29 @@
+{
+  "head": "84f31a030a632f7d5ddba43b5a638d29da00af45",
+  "tree": "02cfcb14a87f07b6c9dbb379cebe3d1bcb3404dc",
+  "parent": "836b039233920fa778d9747be7b5d5a9f953fea3",
+  "pushed_and_verified": "2026-11-12 22:18:49 UTC",
+  "main_rules_head": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "source_files_added": 149,
+  "source_files_modified": 0,
+  "source_files_deleted": 0,
+  "budget": {
+    "source_added": 19666,
+    "source_deleted": 0,
+    "paths": 149,
+    "marginal_generated_additions": 147,
+    "marginal_conservative": 19813,
+    "full_checked_in_root_lag": 257,
+    "full_lag_conservative": 19923,
+    "limit": 20000,
+    "remaining": 77
+  },
+  "staging_plan": "d4cb0336fcfb766c083fd46fcf4bea39729b6db9",
+  "provider_graph": "8d2aa82e28f0575edd9f69ac871029dc19bf6610",
+  "full_repository_DAG": "9f5480dfc6e6e901e135b15d1d4424245b1e5ae1",
+  "baseline_full_green_receipt": "40f4094476659c1b052cd462cdfb119ca6032f44",
+  "force": false,
+  "CI_label": "CI170",
+  "first_lookup_rule": "At least five minutes after pushed_and_verified; later checks at least one minute apart.",
+  "root_not_edited": true
+}

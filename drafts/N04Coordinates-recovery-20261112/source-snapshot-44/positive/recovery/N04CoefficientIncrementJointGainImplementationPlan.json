@@ -1,0 +1,165 @@
+{
+  "schema": "n04-coefficient-increment-joint-gain-implementation-plan-v1",
+  "status": "READY_FOR_AUTHORIZED_IMPLEMENTATION_SOURCE_REVIEW_ONLY_NO_NEW_LEAN",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "selected_main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "author": "/root/proof_inventory",
+  "intended_path": "positive/recovery/N04CoefficientIncrementJointGainImplementationPlan.json",
+  "parent_route": {
+    "git_blob": "01d69c55e39ba7bc4a5ce288e42023ecca3a4210",
+    "sha256": "212d80d53fb45c0eca445f9f8bd53528053fa283d99610b201b10e33b7167c79"
+  },
+  "decision": {
+    "chosen_increment": "Actual coefficient-increment joint gain; no generic terminal-bound assumption.",
+    "proposed_module": "ContinuousFlexibility.Analysis.N04CoefficientIncrementJointGain (name provisional until normal final collision check)",
+    "target_size": "One source of approximately 210–250 lines. If formatting or required explicit types exceed 250, split the actual weighted mixed/pure-jet identity and the actual normalized joint bound into two sources, each ≤250. No source has been written.",
+    "mathematical_base": "The original hN base is used literally. The original hN loss is used literally. There is no new existential low base, no interpolation call and no parameter-order loss in this increment.",
+    "ordinary_domain": "U=sectorNeighborhood S base epsilon epsilon; V_m=Ioo(C.left m)(C.right m)×univ. The coefficient theorem holds on the whole actual open component; it does not need any optical/discriminant lower.",
+    "final_forcing_use": "Later restrict exactly this tower to the retained buffer and apply the finite forcing algebra from parent_route."
+  },
+  "exact_actual_objects": {
+    "data": "D,T,S,C,base,loss,epsilon,hN,hS,hT unchanged.",
+    "host": "j:Nat→Nat with hcell:forall m,Ioo(C.left m)(C.right m)⊆D.cells(j m). The scalar index i:Fin3 is the original coefficient entry.",
+    "J": "J_m := hN.coefficientIncrement_parameterSpatialTower hS hT m (j m) (hcell m) i",
+    "W": "W_m := radialE(D.cellIndex(j m))",
+    "h": "h_m := T.H(T.sample(j m))^(3/4)",
+    "normalized_J": "smoothDirectionsScalarPostcompose J_m (h_m^(-1) • ContinuousLinearMap.id ℝ ℝ). This is a deterministic scalar postcomposition, not a new choice.",
+    "normalized_value": "h_m^(-1)*coefficientFamily D S C i 0 0 y (liftSectorParameter S C z).",
+    "no_sample_change": "Every material factor uses the same actual j m throughout this producer. Neither C.cell m nor circle label m is substituted."
+  },
+  "proposed_outputs_as_prose": [
+    {
+      "name": "N01Properties.coefficientIncrement_parameterSpatialTower_parameterJet",
+      "contract": "For actual m,j,hcell,i,n,x∈U,v,p∈the component, componentCoefficientScalarJet ... n x v p = (coefficientIncrement_parameterSpatialTower ...).D n (x,p)(fun k=>(v k,0)).",
+      "role": "Short same-tower identity; may be private if no other consumer needs the name."
+    },
+    {
+      "name": "N01Properties.coefficientIncrement_joint_unit_bound",
+      "contract": "For every total order n there exist A,Q≥0, before m,j,hcell,i,x,y,v, such that x∈U,y∈the component and p base(v_k.state)+norm(v_k.spatial)≤1 imply |J.D n(x,y)v|≤A*h_j*W_j^Q*(1+p(n+loss)x+sum_k p(n+loss)(v_k.state)).",
+      "strength": "No low-ball radius is needed: raw N01 estimates already hold for all x∈U. Constants precede every host/component and physical point."
+    },
+    {
+      "name": "N01Properties.coefficientIncrement_normalized_joint_growth",
+      "contract": "UniformWeightedJointGrowth p W (fun m=>normalized_J_m) base loss for every actual j,hcell,i.",
+      "strength": "Unfold only the project definition, ignore its radius hypothesis, and use the preceding actual bound. This directly supplies the normalized real increment to the future forcing product chain."
+    }
+  ],
+  "complete_proof_steps": [
+    {
+      "stage": "actual parameter-slice identity",
+      "approx_lines": 20,
+      "details": "Let J be the genuine increment joint tower and K the same sectorCoefficientTower at p. componentCoefficientScalarJet_of_mem gives the local scalar jet=K.D. J.pointTower_eq_jointJet then gives K.D=J.D with zero spatial directions. All functions are the literal coefficientFamily increment; unlike the original-coefficient variant, no reference term is added."
+    },
+    {
+      "stage": "actual mixed bound on that J",
+      "approx_lines": 25,
+      "details": "For fixed state and slots, obtain EqOn localScalarJet (fun q=>J.D n(x,q)(v,0)) on the open component from the previous identity. mixedDerivative_congr_on_open transfers the raw componentCoefficientScalarJet_mixed_bound without changing constants, H, sample, base, loss or derivative order. The public 2882 original-field proof has the same actual locality pattern; do not use its absorbed-height estimate."
+    },
+    {
+      "stage": "same-sample E0 power helper",
+      "approx_lines": 40,
+      "details": "For exponent R≥0, use materialSample_global_endpoint_models hT hN.1.1. Its actual endpoint coordinate x_j≥0 differs from cellIndex j by at most L, and E0(sample j)≤KE*materialE0(x_j). Apply materialE0_rpow_oneSided_shift hR hL with y=cellIndex j. Rewrite materialE0(y)^P=exp(P)*radialE(y)^P using radialE_rpow_eq_materialE0. Output K_R>0,P_R≥0 uniform in j with E0(sample j)^R≤K_R*W_j^P_R. Obtain sample E0/H positivity from materialSample_mem_radialCore and hT.2.1 as in MaterialSampleGlobalModels/Shift."
+    },
+    {
+      "stage": "finite actual mixed-prefix packing",
+      "approx_lines": 35,
+      "details": "For fixed total n choose raw B_k>0 for k:Fin(n+1), with spatial cap n. Apply the previous helper at R=B_k. Put A=sum_k B_k*K_k and P=sum_k P_k. Since W_j≥1 and every P_k≥0, each B_k*E0(sample j)^B_k≤A*W_j^P. Never maximize E0 exponents before converting to W≥1."
+    },
+    {
+      "stage": "real mixed-to-joint conversion",
+      "approx_lines": 45,
+      "details": "For k+a+b≤n, use the mixed bound at k,cap n. multilinearTameSize_le_affine bounds oneHigh on parameter-unit slots. In jointJet_unit_bound_of_mixed_parameter_bounds choose C=h_j*A*W_j^P and affine H=1+p(n+loss)x. Product max-norm facts norm_fst_le/norm_snd_le convert p base(state)+norm(spatial)≤1 to its three unit conditions. Output coefficient 3^n*A and the intact h_j. This is the actual n-th joint jet, including n=0."
+    },
+    {
+      "stage": "actual scalar normalization",
+      "approx_lines": 25,
+      "details": "For h_j>0 use smoothDirectionsScalarPostcompose_apply. Its n-th value is h_j^(-1) times the same J.D n. Real scalar norm/absolute-value identities and h_j^(-1)*h_j=1 cancel the factor exactly. Do not call UniformWeightedJointGrowth.postLinear with a label-dependent map or charge an estimate for h_j^(-1). The resulting constants are the same 3^n*A,P for every m."
+    }
+  ],
+  "quantifier_and_regularity_audit": {
+    "low_base": "base from hN, literally unchanged before all n,R,s.",
+    "high_order": "n+loss for total joint order n; finite mixed inputs use their actual spatial cap n. There is no multiplication of loss by n.",
+    "constants": "B_k,K_k,P_k,A,P may depend on total n and fixed D,T,S,C data. They are selected before m,j,i,state,point,slots.",
+    "single_J": "Every equality is the existing actual J or its deterministic scalar CLM image. pointwise towers only identify J by uniqueness.",
+    "no_hidden_regularization": "mixedDerivative_congr_on_open requires only EqOn and openness. No all-space extension or extra ContDiff assumption is introduced.",
+    "no_H_absorption": "The material h_j multiplies the entire C parameter of the mixed-to-joint theorem. It is never confused with that theorem's affine H state term.",
+    "zero_order": "Fin(n+1) is nonempty at n=0; raw mixed bound includes order zero. No reference coefficient is restored into this increment tower.",
+    "topology": "Use the actual StateDirections S×ℝ topology and genuine CLM/tower. The 328 dummy-topology compatibility issue does not occur here.",
+    "elaboration_plan": "Keep the imported public towers opaque. Store each raw existential in an explicitly typed local data value, then use choose/choose_spec; avoid re-unfolding the full N01 record inside the finite-prefix proof."
+  },
+  "exact_additional_public_heads": [
+    {
+      "source": "N01OriginalCoefficientTameBounds/2882b8f1346b141ca00fc4a465fa14235e0abc57",
+      "declaration": "N01Properties.originalCoefficient_parameterSpatialTower_parameterJet",
+      "role": "Fully read existing actual identity pattern only. The new increment proof directly uses the public pointTower helper; no private proof is copied."
+    },
+    {
+      "source": "MixedDerivativeLocality/02386ba505db686f26f36abbdd2d9a98d537cf3b",
+      "header": "theorem mixedDerivative_congr_on_open\n    {U : Set PolarPoint} {f g : PolarPoint → ℝ} (hU : IsOpen U) (hfg : EqOn f g U)\n    (a b : ℕ) {p : PolarPoint} (hp : p ∈ U) :\n    mixedDerivative a b f p = mixedDerivative a b g p"
+    },
+    {
+      "source": "TameMultilinearNormalization/de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "header": "theorem multilinearTameSize_le_affine (low high : Seminorm ℝ E) (k : ℕ)\n    {a : ℝ} (ha : 0 ≤ a) (v : Fin k → E) (hv : ∀ i, low (v i) ≤ 1) :\n    multilinearTameSize low high k a v ≤ a + ∑ i, high (v i)"
+    },
+    {
+      "source": "MaterialSampleGlobalModels",
+      "header": "theorem materialSample_global_endpoint_models\n    {D : ReferenceData} {T : MaterialData}\n    (hT : IsMaterialData D T) (hRef : IsAccumulatingProfile D) :\n    ∃ d0 L KH KE KM : ℝ,\n      0 < d0 ∧ 0 ≤ L ∧ 1 ≤ KH ∧ 1 ≤ KE ∧ 1 ≤ KM ∧ ∀ m,\n      let x := endpointX d0 (endpointDistance D (T.sample m))\n      0 ≤ x ∧ |x - (D.cellIndex m : ℝ)| ≤ L ∧\n        T.H (T.sample m) ≤ KH * materialH x ∧\n        materialH x ≤ KH * T.H (T.sample m) ∧\n        T.E0 (T.sample m) ≤ KE * materialE0 x ∧\n        materialE0 x ≤ KE * T.E0 (T.sample m) ∧\n        T.M (T.sample m) ≤ KM * materialM x ∧\n        materialM x ≤ KM * T.M (T.sample m)"
+    },
+    {
+      "source": "MaterialSampleShift",
+      "header": "theorem materialE0_rpow_oneSided_shift\n    {R L : ℝ} (hR : 0 ≤ R) (hL : 0 ≤ L) :\n    ∃ K P : ℝ, 0 < K ∧ 0 ≤ P ∧ ∀ x y : ℝ,\n      0 ≤ x → 0 ≤ y → x ≤ y + L →\n      materialE0 x ^ R ≤ K * materialE0 y ^ P"
+    },
+    {
+      "source": "MaterialSampleDiscreteEnvelope",
+      "header": "theorem radialE_rpow_eq_materialE0 (n : ℕ) (A : ℝ) :\n    radialE n ^ A = Real.exp (-A) * materialE0 (n : ℝ) ^ A"
+    },
+    {
+      "source": "WeightedTowerCalculus",
+      "header": "theorem smoothDirectionsScalarPostcompose_apply\n    (J : SmoothDirections U f) (L : F →L[ℝ] G) (k : ℕ) (x : E) (v : Fin k → E) :\n    (smoothDirectionsScalarPostcompose J L).D k x v = L (J.D k x v)"
+    },
+    {
+      "source": "WeightedJointComposition",
+      "definition": "def UniformWeightedJointGrowth\n    (p : ℕ → Seminorm ℝ E) (W : I → ℝ)\n    {U : Set E} {V : I → Set P} {f : I → E × P → F}\n    (J : ∀ i, SmoothDirections (U ×ˢ V i) (f i)) (base loss : ℕ) : Prop :=\n  ∀ R : ℝ, 0 ≤ R → ∀ n : ℕ, ∃ C Q : ℝ, 0 ≤ C ∧ 0 ≤ Q ∧\n    ∀ i x, x ∈ U → p base x ≤ R → ∀ y ∈ V i, ∀ v : Fin n → E × P,\n      (∀ j, p base (v j).1 + ‖(v j).2‖ ≤ 1) →\n      ‖(J i).D n (x, y) v‖ ≤ C * W i ^ Q *\n        (1 + p (n + loss) x + ∑ j : Fin n, p (n + loss) (v j).1)\n"
+    }
+  ],
+  "exact_primary_heads": "The seven source-level declarations and 22 hashed actual sources in parent_route remain the base selection. This plan adds the exact locality and normalization heads above; it does not replace the parent route.",
+  "import_plan": [
+    "ContinuousFlexibility.Analysis.N01CoefficientJointTower",
+    "ContinuousFlexibility.Analysis.N01CoefficientSpatialJets",
+    "ContinuousFlexibility.Analysis.MixedJointTameBounds",
+    "ContinuousFlexibility.Analysis.MaterialSampleShift",
+    "ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope",
+    "ContinuousFlexibility.Scalar.WeightedTowerCalculus"
+  ],
+  "scope_of_review": "Complete relevant public contracts and the actual analogous source proof were read. No Lean elaboration, generated root, import-closure rebuild or active name-collision scan is asserted. Those mechanical gates belong to the eventual frozen candidate after root authorizes writing.",
+  "budget": "No new Lean line used for this plan. Await fullgreen and root's explicit source allocation.",
+  "additional_source_fingerprints": [
+    {
+      "name": "N01OriginalCoefficientTameBounds",
+      "git_blob": "2882b8f1346b141ca00fc4a465fa14235e0abc57",
+      "sha256": "be33de53e6b62482895e27484fa4812c68b1753446cf385242ec16f589efb03f",
+      "utf8_bytes": 12097,
+      "lines": 231,
+      "read_scope": "full exact source read",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac"
+    },
+    {
+      "name": "MixedDerivativeLocality",
+      "git_blob": "02386ba505db686f26f36abbdd2d9a98d537cf3b",
+      "sha256": "a893fbaeda475c4e9c2c34ac4aae2bfa905929cd82ff8ebc2ff86aa10b2e8ffd",
+      "utf8_bytes": 4325,
+      "lines": 89,
+      "read_scope": "full exact source read",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac"
+    },
+    {
+      "name": "TameMultilinearNormalization",
+      "git_blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "utf8_bytes": 9718,
+      "lines": 204,
+      "read_scope": "full exact source read",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac"
+    }
+  ]
+}

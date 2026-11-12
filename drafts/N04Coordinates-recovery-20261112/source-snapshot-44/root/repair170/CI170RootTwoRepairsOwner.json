@@ -1,0 +1,42 @@
+{
+  "kind": "CI170_two_owned_narrow_repairs",
+  "parent": "84f31a030a632f7d5ddba43b5a638d29da00af45",
+  "owner": "/root",
+  "complete_error_blocks": "826005f0cd329d220290e072ec12ab8837d274d6",
+  "files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ConstructedRootCutFirstJets.lean",
+      "old_blob": "c351965626552621e295cf05b2295b8a07a5b29d",
+      "new_blob": "c4d3b0f2acd4c41b48cd813908b02ca5dc8ca871",
+      "sha256": "abbd7ca852d2e5a16ad64934b3a57d6d42674396f281e5d6e2fa8089fc300143",
+      "lines": 179,
+      "net_added": 5,
+      "all_public_headers_byte_identical": true,
+      "imports_byte_identical": true
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/RadialReferencePotentialGerms.lean",
+      "old_blob": "ccd28495960875f494c654dc82d107ed67ba59a4",
+      "new_blob": "75822deb6024b8d807d072d42cee251446be7818",
+      "sha256": "2f813e09ed720bb30edb980b40bc0aaa8f54e7acea1df9dc2d33d6da92f63552",
+      "lines": 149,
+      "net_added": 6,
+      "all_public_headers_byte_identical": true,
+      "imports_byte_identical": true
+    }
+  ],
+  "reason": [
+    "Give mul_left_cancel a fully typed actual multiplier, avoiding the unresolved numeric metavariable.",
+    "Normalize the same local X and rho in value/derivative goals and expose pointwise function negation before the fderiv rewrite.",
+    "Compose the actual F with the radial line before projecting fst to avoid a misleading expected-type decomposition.",
+    "Apply the exact field-expanded, real-scalar eventual fderiv equalities already used in the compiled radial principal provider.",
+    "Specify the same original zero-angle height H explicitly at the final divergence theorem application."
+  ],
+  "axioms_added": false,
+  "limits_changed": false,
+  "mathematical_hypotheses_or_outputs_changed": false,
+  "net_Lean_lines": 11,
+  "independent_peer": "requested; pending",
+  "local_Lean": false,
+  "CI": "pending"
+}

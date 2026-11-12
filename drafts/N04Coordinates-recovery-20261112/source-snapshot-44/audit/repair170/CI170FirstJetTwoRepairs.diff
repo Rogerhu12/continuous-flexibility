@@ -1,0 +1,27 @@
+--- a/src/ContinuousFlexibility/Analysis/ActualPositiveReferenceFirstJets.lean
++++ b/src/ContinuousFlexibility/Analysis/ActualPositiveReferenceFirstJets.lean
+@@ -91,7 +91,9 @@
+       (fun p => (K.chart (C.referenceState, 0) k p).2) (Prod.snd : PolarPoint → ℝ) :=
+     finiteFullJetMatch_of_eqOn_closure (isOpen_Ioo.prod isOpen_univ)
+       (hroot.1 θ).1.snd contDiffAt_snd
+-      (fun p hp => congrArg Prod.snd (hopen.2.2.1 p hp)) hcl
++      (fun p hp => by
++        have he := congrArg (fun q : PolarPoint => q.2) (hopen.2.2.1 p hp)
++        exact he) hcl
+   have hy : FiniteFullJetMatch 1 (c, θ) (fun p : PolarPoint => Y p.1)
+       (fun p => v + s * (K.chart (C.referenceState, 0) k p).1) := by
+     refine ⟨hgeometry.chart_smooth.fst.contDiffAt,
+--- a/src/ContinuousFlexibility/Analysis/WholePositiveReferenceGaugeFirstJets.lean
++++ b/src/ContinuousFlexibility/Analysis/WholePositiveReferenceGaugeFirstJets.lean
+@@ -47,7 +47,9 @@
+     rw [hp]
+     exact hh₀.div hQ hQp
+   refine ⟨hinv.comp_match hψat, ?_⟩
+-  simpa only [wholePositiveReferenceGaugeHeight, wholePositiveChartHeight,
+-    Function.comp_def, div_eq_mul_inv] using hinv.comp_match hquot
++  change FiniteFullJetMatch 1 (τ p)
++    (fun x : PolarPoint => h₀ (σ x) * (Q (σ x))⁻¹)
++    (fun x : PolarPoint => g₀ (S x) * (q (S x))⁻¹)
++  simpa only [Function.comp_def, div_eq_mul_inv] using hinv.comp_match hquot
+ 
+ end ContinuousFlexibility.Analysis

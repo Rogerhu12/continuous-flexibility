@@ -1,0 +1,243 @@
+{
+  "schema": "N04_REFERENCE33_POST149_MINIMUM_TWO_BATCH_PLAN_V1",
+  "status": "FROZEN_READONLY_SOURCE_ONLY_PLAN_REQUIRES_PREDECESSOR_AND_PER_BATCH_FULL_CI",
+  "proposed_backup_path": "audit/recovery/Reference33Post149TwoBatchPlan.json",
+  "author": "/root/audit_coordinates",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "date": "2026-11-12",
+  "request": "Plan the exact161-module missing closure of the two reference certificate leaves after the existing149-source predecessor, in the minimum number of dependency-safe batches, with source-only changes and a20000-addition ceiling including generated imports and shared updates.",
+  "baseline": {
+    "actual_source_head": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "actual_source_tree": "aedbc4ec6f58d05e07de2eefb318651f69077036",
+    "module_map_blob": "9c50c8370e39154362ac6b35e7d045ebddcf04cd",
+    "module_map_sha256": "0dd675c42689c9b281546bc84637e34658004864e26bed50163b35bbe27c4543",
+    "ci169_full_success_reported_and_verified_by_parent": {
+      "run": 43314424168,
+      "job": 131518582983,
+      "completed_utc": "2026-11-12T22:13:40Z",
+      "verified_utc": "2026-11-12T22:14:56Z",
+      "this_agent_queried_ci": false
+    },
+    "prerequisite149": {
+      "blob": "394db737d43724d8c5b39783fa7263419f89ada1",
+      "sha256": "9ad7165978ba19924ac326eade24359169f3eda69dacf71b80f227e63280cac2",
+      "source_files": 149,
+      "source_identity_reused": true,
+      "historical_ea5914_gate_not_reused": true,
+      "root_is_responsible_for_current_rebind_installation_and_fullgreen": true
+    },
+    "future_parent_commit_for_each_batch": null,
+    "source_projection_only_not_a_created_tree": true
+  },
+  "frozen_inventory": {
+    "path": "audit/recovery/Reference33Post149MissingImportClosureInventory.json",
+    "blob": "85b9de7b007ad4bbacc6534f62b94ed6d5779da1",
+    "sha256": "83154652dd5b6dae69dc215eb9a585b06c61f07a584f8d528510464b96886ab6"
+  },
+  "independent_scope_selection_resolution": {
+    "owner_blob": "1b0cc90b5b77a8a7fd73f4fff93faff845744073",
+    "owner_sha256": "1319a49a51c54af08694063a4eed23aa5a5624600bdd6274f97d31b83ab099c2",
+    "addendum_blob": "62777fd394ee80611d3de38d5bb4f4f2b9ff4046",
+    "addendum_sha256": "91d9ec8137222dfbf15668cac1ee30617770358a2f1c993a79ef88a4884f7f9c",
+    "selected_source_blob": "4301dad4fd75a74de75f39d482504f83fd5776b4",
+    "no_inventory_or_source_modified": true
+  },
+  "common_static_check": {
+    "path": "audit/recovery/Reference33Post149TwoBatchImportAndNamesCheck.json",
+    "blob": "170b0a0717f1275be27271a136533996c8f2584d",
+    "sha256": "69c859ad141c271135e53984ff4033f3b535de58170ef4eeb32fb51f33cf961c",
+    "bytes": 209700,
+    "server_readback_verified": true
+  },
+  "batches": [
+    {
+      "batch": 1,
+      "path": "audit/recovery/Reference33Post149Batch1SourcePlan.json",
+      "blob": "9b395bc3b9c4aed7d27ab36fa612bc7c254b9191",
+      "sha256": "0b8448bf7737af7ce43824b5870bc957a677fa5865352412d5618c48920c2e32",
+      "bytes": 222613,
+      "server_readback_verified": true,
+      "source_files": 85,
+      "source_added_lines": 11573,
+      "source_deleted_lines": 0,
+      "shared_updates": 0,
+      "marginal_generated_imports": 85,
+      "marginal_source_plus_generated": 11658,
+      "full_generated_import_delta_from_checked_in_root": 342,
+      "conservative_added_total": 11915,
+      "conservative_headroom": 8085,
+      "explicit_public_names": 161,
+      "first_module": "ContinuousFlexibility.Analysis.ActualReferenceRootSlopeNormalization",
+      "last_module": "ContinuousFlexibility.Analysis.ReferenceInverseProfileMaterialJets",
+      "entries_are_exact_new_source_blobs": true
+    },
+    {
+      "batch": 2,
+      "path": "audit/recovery/Reference33Post149Batch2SourcePlan.json",
+      "blob": "ee3479fe27b020457c03dccab87f7f22417c956a",
+      "sha256": "e7e6ace05751d5b4978a5f19c05350d4aefd13074776dc7ee777398c318757b9",
+      "bytes": 204690,
+      "server_readback_verified": true,
+      "source_files": 76,
+      "source_added_lines": 11611,
+      "source_deleted_lines": 0,
+      "shared_updates": 0,
+      "marginal_generated_imports": 76,
+      "marginal_source_plus_generated": 11687,
+      "full_generated_import_delta_from_checked_in_root": 418,
+      "conservative_added_total": 12029,
+      "conservative_headroom": 7971,
+      "explicit_public_names": 157,
+      "first_module": "ContinuousFlexibility.Analysis.ReferencePrincipalPhysicalMaterialJets",
+      "last_module": "ContinuousFlexibility.Analysis.ActualWholeReferenceJets",
+      "entries_are_exact_new_source_blobs": true
+    }
+  ],
+  "minimality_and_dependency_argument": {
+    "exact_new_source_modules": 161,
+    "raw_source_lines": 23184,
+    "raw_source_bytes": 1189926,
+    "all_new_marginal_generated_imports": 161,
+    "total_marginal_additions": 23345,
+    "one_batch_impossible_under_cap": 20000,
+    "minimum_batches": 2,
+    "cut": "The dependency-first frozen order is cut after85 modules at ReferenceInverseProfileMaterialJets. The two exact batches fit with conservative totals11915 and12029.",
+    "batch1_imports_no_batch2_module": true,
+    "batch2_cross_edges_to_batch1": 24,
+    "batch2_distinct_batch1_dependencies": 14,
+    "all161_new_modules_reachable_from_the_two_original_roots": true,
+    "both_original_certificate_roots_in_batch2": true,
+    "no_extra_name_only_or_unreachable_modules": true
+  },
+  "budget_policy": {
+    "cap": 20000,
+    "inherited_checked_in_root_imports": 4241,
+    "actual169_expected_generated_imports": 4351,
+    "inherited_actual169_lag": 110,
+    "predecessor149_generated_imports": 147,
+    "post149_generated_imports": 4498,
+    "after_batch1_generated_imports": 4583,
+    "after_batch2_generated_imports": 4659,
+    "root_diff_is_counted_again_conservatively_in_each_batch_until_actual_checked_in_root_changes": true,
+    "root_file_is_not_staged_or_written_by_this_plan": true,
+    "shared_source_or_control_updates": 0,
+    "material_repair_headroom_is_not_pre_authorization_to_change_sources": true,
+    "recompute_on_actual_future_parent": true
+  },
+  "graph_results": {
+    "actual169_nodes": 4417,
+    "post149_nodes": 4566,
+    "after_batch1_nodes": 4651,
+    "after_batch2_nodes": 4727,
+    "each_projection_missing_internal_imports": 0,
+    "each_projection_cycles": 0,
+    "each_projection_duplicate_modules_or_paths": 0,
+    "original_missing_closure_import_edges": 452,
+    "all85_and76_batch_sources_directly_imported_by_generator": true,
+    "projected_default_target_reachable_after_batch1": 4645,
+    "projected_default_target_reachable_after_batch2": 4721,
+    "projected_six_unreached_modules": [
+      {
+        "module": "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+        "path": "src/ContinuousFlexibility/Analysis/ProjectiveNewtonCommonOrbit.lean",
+        "blob": "a5ad392d126b4c78d4b5c1b740ab13be432d220f"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth",
+        "path": "src/ContinuousFlexibility/Analysis/ProjectiveNewtonParameterGrowth.lean",
+        "blob": "67a927fba191303480c51a86bae2b9cbb386339a"
+      },
+      {
+        "module": "ContinuousFlexibility.Blueprint.N01c.Coefficients",
+        "path": "src/ContinuousFlexibility/Blueprint/N01c/Coefficients.lean",
+        "blob": "d08bfe0f69de1d6f580d88bd542733d28d9475cc"
+      },
+      {
+        "module": "ContinuousFlexibility.Blueprint.N01c.Speeds",
+        "path": "src/ContinuousFlexibility/Blueprint/N01c/Speeds.lean",
+        "blob": "b9732984d9723e5a61b4448e56d2cca328dac0a2"
+      },
+      {
+        "module": "ContinuousFlexibility.Blueprint.N01c.Flows",
+        "path": "src/ContinuousFlexibility/Blueprint/N01c/Flows.lean",
+        "blob": "8ffdf5e22b4f25374339bc63855bf9a3cc8ddda9"
+      },
+      {
+        "module": "ContinuousFlexibility.Blueprint.N05.VolumeModel",
+        "path": "src/ContinuousFlexibility/Blueprint/N05/VolumeModel.lean",
+        "blob": "fa6407895d1149e9c91577d389e5896315d8c4ee"
+      }
+    ],
+    "warning": "The six listed omissions include two excluded analysis files and four Blueprint files. Two of those Blueprint files come from the predecessor149 plan. No build-coverage claim is made for them; all161 reference additions are covered."
+  },
+  "name_results": {
+    "within161_collisions": 0,
+    "checked_against149_explicit_names": 703,
+    "collisions_with149": 0,
+    "checked_against_actual169_nonmain_sources": 524,
+    "nonmain_explicit_names": 1974,
+    "collisions_with_nonmain": 0,
+    "baseline_nonmain_source_hash_mismatches": 0,
+    "parser_warnings_on161": 0,
+    "source_metadata_patch_blob": "9c3e8c742cbce4d8b019b5d7923b45af5f30dcba",
+    "source_metadata_patch_sha256": "79a86b2a00a0b16fcb343221248cd6d1a271f94e9b09ba427018939695d88cb1",
+    "unscanned_main_identical_sources": 3893,
+    "old_fullscan_blob_is_not_a_per_name_table": true,
+    "unavailable_old_name_table_blob": "ebdd626e4ce78e27f9cd8280e9116c7379377f08",
+    "no_4000_source_rescan": true,
+    "full_repository_name_clearance_claimed": false,
+    "generated_declarations_and_aliases_not_expanded": true,
+    "required_validation": "Actual generated-root/full CI remains mandatory. Reuse any future available name tables only for exactly matching source blobs.",
+    "new_source_files_raw_checked": 161,
+    "new_explicit_public_declarations": 318
+  },
+  "semantic_limit": {
+    "no_new_Lean_or_changed_public_contract": true,
+    "only_source_selection_and_batch_planning_review": true,
+    "same_witness_existential_gateway_not_completed_by_this_inventory": true,
+    "extra_inputs_preserved": [
+      "SeedRetainedPair",
+      "Γ.Realizes",
+      "hw",
+      "R11aRetainedCoordinates",
+      "same Through03 and actual field regularity",
+      "sample floor",
+      "actual raw host inclusion",
+      "actual optical lower"
+    ],
+    "no_N04_final_completion_claim": true
+  },
+  "activation_sequence": [
+    "Root installs and obtains full green for the exact149 predecessor on its reviewed actual169 rebind.",
+    "Freshly resolve parent/main leases, compare provider fingerprints, and rebind any intervening repairs. Stage only batch1's85 new source entries; CI generates the root.",
+    "Require batch1 full green. Before batch2 revalidate actual parent fingerprints, all absent target paths, per-stage budget and the24 cross-batch edges.",
+    "Stage only batch2's76 new source entries and require full generated-root CI. Installation does not discharge the separate existential gateway."
+  ],
+  "final_selfcheck": {
+    "issues": [],
+    "files": 161,
+    "source_lines": 23184,
+    "source_bytes": 1189926,
+    "tree_entries_source_only": true
+  },
+  "prepublication_metadata_only_history": [
+    {
+      "plan_blob": "f9615ae62e4a6ffea1165cb00aa0c6913a7843ba",
+      "superseded_by": "9b395bc3b9c4aed7d27ab36fa612bc7c254b9191",
+      "reason": "Removed contradictory carried pending-owner wording while preserving it as historical metadata; no source changes."
+    },
+    {
+      "plan_blob": "4066d4f0358c39992c6e93d78a8557e32ba301c6",
+      "superseded_by": "ee3479fe27b020457c03dccab87f7f22417c956a",
+      "reason": "Rebound predecessor plan identity only; no source changes."
+    }
+  ],
+  "executed": {
+    "git_blob_metadata_created_and_read_back": true,
+    "no_new_Lean": true,
+    "no_active_tree_or_index_changes": true,
+    "no_refs_or_commits_or_git_tree_creation": true,
+    "no_CI_query": true,
+    "no_local_Lean": true
+  }
+}
