@@ -1,7 +1,6 @@
 import ContinuousFlexibility.Analysis.N07aParameterGrading
 import ContinuousFlexibility.Analysis.N07aForwardCoefficients
 import ContinuousFlexibility.Analysis.TameTransfer
-import ContinuousFlexibility.Statements.N07aCanonicalGeometry
 
 /-!
 # Restricting the actual construction to a stronger neighborhood

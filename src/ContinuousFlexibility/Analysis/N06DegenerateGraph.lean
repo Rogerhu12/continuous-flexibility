@@ -327,7 +327,7 @@ theorem n06_conjugate_energy_bound {a u c V q F : ℝ → ℝ} {j K : ℝ}
     (F₁ := F₁) (fun _ => rfl) hK ha₁ ha₂ ha₃ hc₁ hV₁ hqa
   have henergy := n06_dirichlet_weighted_square_bound hv hv0 hv1 hq
     (show 0 ≤ 1 / K ^ 2 by positivity) hKpos.le
-    (fun y hy => by simpa only [one_div, div_eq_mul_inv, mul_comm, mul_one] using hq₁ y hy)
+    (fun y hy => by simpa only [one_div, div_eq_mul_inv, mul_comm, mul_one, one_mul] using hq₁ y hy)
     hq₂ (F₁ := F₁) (fun _ => rfl)
   have hsmall := mul_le_mul_of_nonneg_left hvlow
     (show 0 ≤ j ^ 2 * K by positivity)
@@ -612,11 +612,10 @@ theorem n06_smooth_cubic_graph_bound {a u c V q F : ℝ → ℝ} {j K : ℝ}
       intro y _
       ring
     exact h.trans_eq heq
-  change G + (1 + j ^ 2) * L + D + (1 + j ^ 2) ^ 2 * B +
-      (1 + j ^ 2) * J ≤ 16384 * K ^ 10 * E
-  have hR : 16384 * K ^ 10 * E = 16384 * R := by dsimp [R]; ring
-  rw [hR]
-  nlinarith only [hRn, hUR, hGR, hLR, hDR, hJR, hB, hLU, hBL, hBLmul, hJG]
+  have hfinal : G + (1 + j ^ 2) * L + D + (1 + j ^ 2) ^ 2 * B +
+      (1 + j ^ 2) * J ≤ 16384 * R := by
+    nlinarith only [hRn, hUR, hGR, hLR, hDR, hJR, hB, hLU, hBL, hBLmul, hJG]
+  simpa only [G, L, D, B, J, R, E, mul_assoc] using hfinal
 
 end ContinuousFlexibility.Analysis
 

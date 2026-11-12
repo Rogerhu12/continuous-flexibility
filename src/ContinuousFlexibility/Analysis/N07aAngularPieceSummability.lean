@@ -2,11 +2,12 @@ import ContinuousFlexibility.Analysis.N07aAngularPieceCover
 import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
 
 /-!
-# Summability at the actual physical piece samples
+# Summability of the common piece samples from the reference partition
 
 The primitive inverse-length bound and the material envelope imply
-`M(sample(cell m))⁻¹ ≤ C * physicalLength m`. The true disjoint intervals
-have total length at most `b-a`. Hence the original sequence of pieces,
+`M(sample(cell m))⁻¹ ≤ C * physicalLength m`. The disjoint reference intervals
+have total length at most `b-a`. The current atlas has the same piece
+indices and samples, so the original sequence of pieces,
 without any grouping by `K.cell`, has a summable inverse material weight.
 -/
 
@@ -56,7 +57,7 @@ theorem n07a_physicalPiece_sampleInverse_le_length
     _ = ((A * B) * (K.physicalRight m - K.physicalLeft m)) *
         T.M (T.sample (K.cell m)) := by ring
 
-/-- The actual physical intervals have finite total length. -/
+/-- The fixed reference physical intervals have finite total length. -/
 theorem n07a_physicalPieces_length_summable
     (h04 : N04Properties D T S C L K base loss ε) :
     Summable (fun m => K.physicalRight m - K.physicalLeft m) ∧
@@ -85,7 +86,7 @@ theorem n07a_physicalPieces_length_summable
       ENNReal.toReal_ofReal (sub_nonneg.mpr hab.le)] at hr
     simpa only [he] using hr
 
-/-- One fixed material loss suffices to sum over every actual piece. -/
+/-- The reference partition controls the common samples of every current piece. -/
 theorem n07a_physicalPiece_sampleInverse_summable
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (h04 : N04Properties D T S C L K base loss ε)

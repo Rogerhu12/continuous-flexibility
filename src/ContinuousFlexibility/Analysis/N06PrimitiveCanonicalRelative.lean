@@ -114,7 +114,6 @@ private def N06CanonicalRelativeConclusion : Prop :=
         ‖n06RelativeOperator P z‖ ≤
           M * (stateGrading S order (z.1 - C.referenceState) + |z.2|))
 
-set_option diagnostics true in
 private theorem n06_canonicalRelative_physical_state
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)
@@ -140,7 +139,6 @@ private theorem n06_canonicalRelative_physical_state
         hT hS h hradial hAux href hcur hprincipal htransmission hz hs Mc M
         hfields.2.2.1 hfields.2.2.2.1 hfields.2.2.2.2⟩)
 
-set_option diagnostics true in
 private theorem n06_canonicalRelative_from_fixed_budget
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)
@@ -176,7 +174,6 @@ private theorem n06_canonicalRelative_from_fixed_budget
       (K := K) (V := V) (b := b) (B := B)
       (base := base) (loss := loss) (ε := ε) h order Q hstate)
 
-set_option diagnostics true in
 private theorem n06_canonicalRelative_uniform
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)
@@ -202,7 +199,6 @@ private theorem n06_canonicalRelative_uniform
       (base := base) (loss := loss) (ε := ε)
       hT hS h hradial hprincipal href hcur hAux htransmission order Q hbudget.1 hbudget.2)
 
-set_option diagnostics true in
 /-- The exact internal canonical-relative conclusion on the retained
 N05 construction, from the raw primitive construction properties. -/
 theorem n06_exists_canonicalRelative_of_primitiveGeometry

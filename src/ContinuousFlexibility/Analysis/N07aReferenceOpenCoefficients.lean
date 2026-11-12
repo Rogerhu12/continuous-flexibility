@@ -1,5 +1,4 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalScalarColumns
-import ContinuousFlexibility.Analysis.N07aCanonicalOpenLp
+import ContinuousFlexibility.Analysis.N07aCanonicalRepresentationPairing
 
 /-!
 # The actual reference coefficients as open bounded-jet functions
