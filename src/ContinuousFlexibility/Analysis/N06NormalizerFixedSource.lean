@@ -63,7 +63,7 @@ theorem n06_exists_fixed_normalizer_through05
   refine ⟨ψ, v, hv, hS', hthrough',
     n06Normalizer_controlledReferenceCoordinates ψ hcoordinates, ?_⟩
   have h01 := hthrough'.1.1.1.1
-  have h04 := hthrough'.1.2.2.2.2
+  have h04 := hthrough'.1.2.2.2.2.1
   have href : ((n06NormalizerGeometry C ψ).referenceState, 0) ∈
       stateNeighborhood (n06WithNormalizer S ψ) (n06NormalizerGeometry C ψ) base ε :=
     n05_referenceState_mem h01.2.1
