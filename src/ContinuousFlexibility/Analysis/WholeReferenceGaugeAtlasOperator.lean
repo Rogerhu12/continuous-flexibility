@@ -51,6 +51,7 @@ theorem n04WholeReferenceGaugeAtlasData_operatorFields
   | inr i =>
       simp only [n04WholeReferenceGaugeAtlasData, n04WholeCanonicalAtlasData,
         n04bWithInteriorDivision, n04WholePiecePositive, hi, ite_true, neg_one_mul]
+      exact ⟨True.intro, fun _ => True.intro⟩
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
