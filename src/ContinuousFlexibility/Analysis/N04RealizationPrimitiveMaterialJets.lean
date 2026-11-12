@@ -141,16 +141,28 @@ theorem n04Realization_materialDirection_envelopes
       (fun x y => (Y x (n07bMaterialRadiusChart T y)).1)
       (fun _ y => (T.ell (T.radius y.1))⁻¹)
       (fun x => (hYm x).fst) (fun _ => hellInv.contDiffAt) j
-      (fun k hk => by simpa only [Function.comp_def, ContinuousLinearMap.coe_fst'] using
-        hproj (ContinuousLinearMap.fst ℝ ℝ ℝ) k (hk.trans hj))
+      (fun k hk => by
+        simpa only [Function.comp_def, ContinuousLinearMap.coe_fst'] using
+          (hproj (ContinuousLinearMap.fst ℝ ℝ ℝ) k (hk.trans hj)))
       (fun k _ => n04Realization_materialEllInverse_envelope hT hW p hE k)
-    simpa only [V₁, n07bMaterialDirectionV1, n07bDirectionMaterialVector,
-      n07bMaterialRadiusChart, div_eq_mul_inv] using h
+    have he (x : X) :
+        (fun y => (Y x (n07bMaterialRadiusChart T y)).1 *
+          (T.ell (T.radius y.1))⁻¹) = V₁ x := by
+      funext y
+      simp only [V₁, n07bMaterialDirectionV1, n07bDirectionMaterialVector,
+        n07bMaterialRadiusChart, div_eq_mul_inv]
+    simp_rw [he] at h
+    exact h
   have hV₂j (j : ℕ) (hj : j ≤ n) : HasPositiveEnvelope W
       (fun x => ‖iteratedFDeriv ℝ j (V₂ x) (p x)‖) := by
-    simpa only [V₂, n07bMaterialDirectionV2, n07bDirectionMaterialVector,
-      Function.comp_def, ContinuousLinearMap.coe_snd'] using
-        hproj (ContinuousLinearMap.snd ℝ ℝ ℝ) j hj
+    have h := hproj (ContinuousLinearMap.snd ℝ ℝ ℝ) j hj
+    have he (x : X) :
+        (ContinuousLinearMap.snd ℝ ℝ ℝ ∘ Y x ∘ n07bMaterialRadiusChart T) = V₂ x := by
+      funext y
+      simp only [V₂, n07bMaterialDirectionV2, n07bDirectionMaterialVector,
+        Function.comp_apply, ContinuousLinearMap.coe_snd']
+    simp_rw [he] at h
+    exact h
   let Ω : X → PolarPoint → ℝ := fun x =>
     canonicalMaterialJacobian T K (z x) (m x) ∘ n07bMaterialRadiusChart T
   have hΩ (x : X) : ContDiffAt ℝ ∞ (Ω x) (p x) :=
@@ -218,8 +230,15 @@ theorem n04Realization_materialNormalizer_envelope
       (fun k hk => hΩj k (hk.trans hj)) hI)
     (fun j _ => n04Realization_materialHeightRatio_envelope hT hW p
       (fun x => T.sample (K.cell (m x))) hsample hRatio (by norm_num : (0 : ℝ) < 3 / 4) j)
-  simpa only [Ω, H, canonicalMaterialNormalizer, canonicalMaterialHeightRatio,
-    Function.comp_apply, n07bMaterialRadiusChart] using hj
+  have he (x : X) :
+      (fun y => (Real.sqrt ∘ Ω x) y * H x y) =
+        canonicalMaterialNormalizer T K (z x) (m x) (3 / 4 : ℝ) ∘
+          n07bMaterialRadiusChart T := by
+    funext y
+    simp only [Ω, H, canonicalMaterialNormalizer, canonicalMaterialHeightRatio,
+      Function.comp_apply, n07bMaterialRadiusChart]
+  simp_rw [he] at hj
+  exact hj
 
 /-- The reference multipliers use the same reference point as the chart
 transition. Compact profile jets cost no state order and no angle value. -/
