@@ -10,9 +10,9 @@ import ContinuousFlexibility.Radial.SeedReturnMargins
 
 The record keeps the data constructed before the existential R08 interface:
 one selected Morse family, the actual glued profile and field, and the
-coordinate and finite index floor of its final cells.  Its inhabitant is
-constructed below from R07.  The original R08 proof projects this same
-record rather than choosing a second reference.
+coordinate and finite index floor of its final cells. Its inhabitant is
+constructed below from R07, retaining the quantitative model and cell
+transport on the resulting reference for the downstream constructions.
 -/
 
 noncomputable section
@@ -54,8 +54,8 @@ structure SeedReferenceConstruction (q : ℝ) where
      else r ≤ selected.entry false selected.chain.index) →
     coordinate.symm r = (if side then glued.radiusR else glued.radiusL) * r
 
-/-- This is the actual choice made in the seed theorem, with the
-quantitative model and cell certificates still attached to its witness. -/
+/-- The seed construction with its quantitative model and cell certificates
+retained on the resulting witness. -/
 theorem exists_seedReferenceConstruction (hR07 : R07Statement)
     {q : ℝ} (hq : 0 < q) : Nonempty (SeedReferenceConstruction q) := by
   obtain ⟨S, hS, start, hstart, hseams, hentries, hentry⟩ :=
