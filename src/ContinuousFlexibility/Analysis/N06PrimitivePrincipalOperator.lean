@@ -115,7 +115,6 @@ private theorem n06PrincipalOperator_bind_budget
 
 /- Realize one actual state after the uniform block budget has been
 selected. This helper does not select an order or alter the tail sum. -/
-set_option diagnostics true in
 private theorem n06PrincipalOperator_realize_state
     (hV : IsVolumeModel T S K V)
     (href : ReferenceJets D T S C L K)
@@ -150,7 +149,6 @@ private theorem n06PrincipalOperator_realize_state
       hV hI f Q hQ (A₀ * parameterGrading S N z) (mul_nonneg hA₀ hρ) hblocks)
     (fun Mc hMc => ⟨hMc.1.trans_eq (by ring), hMc.2⟩)
 
-set_option diagnostics true in
 private theorem n06PrincipalOperator_band_budget
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)
@@ -165,7 +163,6 @@ private theorem n06PrincipalOperator_band_budget
     (K := K) (V := V) (b := b) (B := B) (base := base) (loss := loss) (ε := ε)
     hT hS h href hcur hprincipal hR hAux hI J
 
-set_option diagnostics true in
 private theorem n06PrincipalOperator_uniform_realizes
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)
@@ -189,7 +186,6 @@ private theorem n06PrincipalOperator_uniform_realizes
           (K := K) (V := V) (b := b) (B := B) (base := base) (ε := ε)
           h.2.2.1 href hcur hI J z hz N A hA.1 (hA.2 z hz)⟩)
 
-set_option diagnostics true in
 theorem n06_primitivePrincipal_operator_for_family
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)
@@ -232,7 +228,6 @@ private theorem n06PrincipalOperator_pairing_transport
 
 /- The positive compact-test equation is attached to the fixed source
 identity, before it is placed inside the uniform operator existence. -/
-set_option diagnostics true in
 private theorem n06PrincipalOperator_positive_of_realizes
     (h01 : N01Properties D T S C base loss ε)
     (h04 : N04Properties D T S C L K base loss ε)
@@ -267,7 +262,6 @@ private theorem n06PrincipalOperator_positive_of_realizes
         (K := K) (base := base) (loss := loss) (ε := ε)
         h01 h04 href hcur hI z hz hm φ hp)
 
-set_option diagnostics true in
 private theorem n06PrincipalOperator_negative_of_realizes
     (href : ReferenceJets D T S C L K)
     (hcur : CurrentJets D T S C L K base ε)
@@ -286,7 +280,6 @@ private theorem n06PrincipalOperator_negative_of_realizes
 
 /- A fixed state's realization is mapped to its physical test properties;
 the selected operator and its original norm estimate are retained. -/
-set_option diagnostics true in
 private theorem n06PrincipalOperator_physical_state
     (h01 : N01Properties D T S C base loss ε)
     (h04 : N04Properties D T S C L K base loss ε)
@@ -315,7 +308,6 @@ private theorem n06PrincipalOperator_physical_state
         (K := K) (V := V) (b := b) (B := B) (base := base) (ε := ε)
         href hcur hI J z hz Mc hMc.2⟩)
 
-set_option diagnostics true in
 private theorem n06PrincipalOperator_uniform_physical
     (h01 : N01Properties D T S C base loss ε)
     (h04 : N04Properties D T S C L K base loss ε)
@@ -332,7 +324,6 @@ private theorem n06PrincipalOperator_uniform_physical
         (K := K) (V := V) (b := b) (B := B) (base := base) (loss := loss) (ε := ε)
         h01 h04 href hcur hI J N A z hz (hA.2 z hz)⟩)
 
-set_option diagnostics true in
 theorem n06_primitivePrincipal_operator
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)
