@@ -1,0 +1,87 @@
+{
+  "kind": "actual_same_material_positive_midpoint_cell_candidate",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "author": "quantitative_route",
+  "files": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialOneSidedEndpointComparison.lean",
+      "sha256": "5c502ee08fdb1f063bc9b39badcf31647b0042373cccba4878059a97da4d513b",
+      "blob": "4004102ba3dae66f14faaca866f1e18e4ac76f87",
+      "lines": 100,
+      "module_path": "src/ContinuousFlexibility/Analysis/MaterialOneSidedEndpointComparison.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels"
+      ],
+      "compiled": false
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentMaterialCell.lean",
+      "sha256": "5f21c6b32b0c9241fb560d286690cb93199e0365a9d1314af1c8daab943f4368",
+      "blob": "9bd8135577563874f4fa614e1af047afd9982d94",
+      "lines": 131,
+      "module_path": "src/ContinuousFlexibility/Analysis/PositiveComponentMaterialCell.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialOneSidedEndpointComparison",
+        "ContinuousFlexibility.Analysis.N04PositiveComponents"
+      ],
+      "compiled": false
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialGlobalEndpointModels.lean",
+      "sha256": "2296624a6ce1501048acda5f6ba6a6779d9491bcccd8653db158d8ef9120b4fa",
+      "blob": "94856c92ba535db174db559d1ab2ddacdf77dfd5",
+      "lines": 65
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleShift.lean",
+      "sha256": "58b0285c60e26605a013ba3d580d17e37aef1fa450622b13c458227cb3aa8f74",
+      "blob": "e79e27788e1c853bed9950e91d7d121995ab1508",
+      "lines": 175
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialWeightShift.lean",
+      "sha256": "e46a00bf0a3bce8349e0362807495da8499023d4ad82d2c7a3122e25eb70be6c",
+      "blob": "7ab514c2a6f5af51a8bfcf2c89398cd387788c2e",
+      "lines": 116
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04PositiveComponents.lean",
+      "sha256": "5b7a7e28f279116415d8a3a23299294f8e5fc1858187ec00c3ea18a4d04757de",
+      "blob": "0d4de58a9b9ecd9f84e2f01da190847464669cc6",
+      "lines": 194
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "lines": 603
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Radial.lean",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352",
+      "blob": "473c530a1de50c672f2e54908d374f624f5955b0",
+      "lines": 874
+    }
+  ],
+  "mathematical_scope": [
+    "One-sided X(sample) ≤ X(point)+L implies actual H(point)/H(sample) and every fixed nonnegative E0(sample) power are bounded by fixed powers of actual E0(point), with constants before both points.",
+    "Choose a genuine partition cell containing each positive component midpoint, once before all orders and states. No assumption that a full component lies in one cell.",
+    "The elementary physical midpoint distance bound and actual cell-index comparison imply the one-sided X bound uniformly, including components with an ambient endpoint.",
+    "Retains the same actual D/T and original partition and samples; positive atlas cell may use this reference-only choice."
+  ],
+  "limits": [
+    "No reverse endpoint E0-to-sample bound is claimed. Such a bound for endpoint raw jets still requires actual decay or quantitative component-scale information.",
+    "Does not claim full CanonicalPrimitiveGeometry or a material bound for chart Jacobians.",
+    "No new Through03 witness is selected, and no transfer between different D/T/S/C is asserted."
+  ],
+  "verification": {
+    "source_API_read": true,
+    "exact_actual_material_18_fields_read": true,
+    "pinned_mathlib_sqrt_log_rpow_signatures_read": true,
+    "compiled": false,
+    "CI_queried": false,
+    "checkout_index_refs_CP_authority_or_active_plan_modified": false
+  }
+}

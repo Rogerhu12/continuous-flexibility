@@ -61,9 +61,9 @@ theorem exists_oneSidedEndpointHeight_family
     (hinverse : ∀ i side θ, (h i side (if side then r else l, θ))⁻¹ ≤ H)
     (hlog : ∀ i side j, 0 < j → j ≤ n → ∀ θ,
       |positiveHeightTaylorData l r (fun _ => 1) (h i) side j θ| ≤ M)
-    (hperiod : ∀ i side x ∈ Ioo (a side) (b side), ∀ θ,
+    (hperiod : ∀ i side, ∀ x ∈ Ioo (a side) (b side), ∀ θ,
       h i side (x, θ + Real.pi) = h i side (x, θ))
-    (heven : ∀ i side x ∈ Ioo (a side) (b side), ∀ θ,
+    (heven : ∀ i side, ∀ x ∈ Ioo (a side) (b side), ∀ θ,
       h i side (x, -θ) = h i side (x, θ)) :
     ∃ δ : ℝ, 0 < δ ∧ δ ≤ ρ ∧ δ ≤ 1 ∧
       δ⁻¹ = ρ⁻¹ + 1 + ((n + 1 : ℕ) : ℝ) * (M + 1) ∧
@@ -97,7 +97,9 @@ theorem exists_oneSidedEndpointHeight_family
     have hlogroot (η : ℝ) : ContDiffAt ℝ ∞
         (boundaryHeightLogRatio (fun _ => 1) (h i side))
         (if side then r else l, η) := by
-      simpa only [boundaryHeightLogRatio, div_one] using
+      change ContDiffAt ℝ ∞
+        (fun p : PolarPoint => Real.log (h i side p / 1)) _
+      simpa only [div_one] using
         (hroot i side η).log (hpositive i side η).ne'
     have heLog (x : ℝ) (hx : x ∈ Ioo (a side) (b side)) (η : ℝ) :
         boundaryHeightLogRatio (fun _ => 1) (h i side) (x, τ η) =

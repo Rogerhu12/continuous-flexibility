@@ -1,0 +1,20 @@
+{
+  "kind": "reviewed_same_material_positive_component_decay",
+  "status": "HELD_REVIEWED_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentMaterialDecayCandidateManifest.json",
+    "sha256": "0c28dd5f5bb4b79c8c93bd092856a3d27610142ea225bc1382dfcbd496a4d67e"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentMaterialDecay.lean",
+    "sha256": "2748a308d7dc5c5e11dea19aae1cde21dc4f30538abd971e3162195ca01b9ea7",
+    "blob": "08b2a45c190df02f2473786840818c395b9008df",
+    "lines": 89
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/PositiveComponentMaterialDecayIndependentReview.json",
+    "sha256": "1ac46939178a0e617e93404ca31a3e6886e6d13f65b56b63ef2888a293d7017c"
+  },
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

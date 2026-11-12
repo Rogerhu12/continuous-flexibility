@@ -1,0 +1,19 @@
+{
+  "label": 129,
+  "parent": "9120cd663b87b5dd70ecafd208690adfd4cb54fb",
+  "tree": "07f7446759824fb5ebe2c248f34d387e0344e329",
+  "base_tree": "f554bf96bcaedc6f8cc809ff404a4fdfe399733a",
+  "added": 2779,
+  "deleted": 0,
+  "new_sources": 20,
+  "new_source_lines": 2759,
+  "generated_imports": 3146,
+  "source_modules": 3200,
+  "current_main": "bb96c26fa8f49615fd0bc6848b57922832088a2b",
+  "proposal": "/workspace/scratch/bbbea77e4163/n04-next-positive-group-formatted.json",
+  "proposal_sha256": "8a191b300134acd8676b1b7d92797f67adebad7c3eaf3221da86a16f0f7b911b",
+  "payload": "/workspace/scratch/bbbea77e4163/n04-ci129-tree-payload.json",
+  "payload_chars": 333901,
+  "anchor_changes": [],
+  "status": "STAGED_UNCOMPILED"
+}

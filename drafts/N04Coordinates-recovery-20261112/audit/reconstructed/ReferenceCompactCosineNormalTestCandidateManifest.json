@@ -1,0 +1,87 @@
+{
+  "kind": "actual_same_reference_compact_cosine_first_normal_candidate",
+  "status": "UNCOMPILED_CANDIDATE_PENDING_PEER_REVIEW",
+  "author": "/root/audit_coordinates",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ReferenceCompactCosineNormalTest.lean",
+    "sha256": "4fdfa098ae79fcaa5a300c86aa78d464ade9c4e9380a56588c938e551a974bfd",
+    "blob": "9689b076e13abc3a2fa4f6c202109dcc7ad4c999",
+    "lines": 175
+  },
+  "observed_commit": "2cea6f265c01ff9f2dac2b0d9a7c80909c441ef4",
+  "imports": [
+    "ContinuousFlexibility.Analysis.N07bReferenceGraphFromDecay",
+    "ContinuousFlexibility.Analysis.N01aReferenceNormalWeighted",
+    "ContinuousFlexibility.Radial.ReferenceSmoothSourceCalculus",
+    "ContinuousFlexibility.Radial.ReferenceColumnSmooth",
+    "ContinuousFlexibility.Radial.R11bCompactSources"
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07bReferenceGraphFromDecay.lean",
+      "sha256": "bd1644493fe507a1c0fcbc242d81fb5ed43b310bbee85e6ee72fc5cd71a77e44",
+      "blob": "c3d9e40e399ff2edc9aa8869c0292da4cd497e26",
+      "lines": 176
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01aReferenceNormalWeighted.lean",
+      "sha256": "7f7f15929758dd17ca950b773b0d6d6da63b6264cacf53e392578440cb68c713",
+      "blob": "dd06d0fb68292dab81050d0aba5e4f2c6cd427b3",
+      "lines": 156
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01aReferenceModeAlgebra.lean",
+      "sha256": "1a90c06ccdbaca6642fcf1b456b7ecc3cb6faa9813c706d1a5135d3c5b617181",
+      "blob": "a9f65004e74668963c843fa92db5b91557fa4650",
+      "lines": 116
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01aReferenceNormalization.lean",
+      "sha256": "3038d402e40c00528a9e3b940d66df48204f379e28f786cde065bcd1d4f537cb",
+      "blob": "46d260786f53737b3ebe404ae1e5384d86f938c4",
+      "lines": 93
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/ReferenceSmoothSources.lean",
+      "sha256": "77ce6937c9635018c19489f6d59863a2dd52366c49e89664fe755e74014119af",
+      "blob": "0ce14b8f07e7837ae242a5edef061ddaf99266e0",
+      "lines": 184
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/ReferenceSmoothSourceCalculus.lean",
+      "sha256": "81bd3e79fb6b85aff008a9531298a791527974ba91680e5737096641914191d3",
+      "blob": "7427f8bb306f7ddd40fe3a3899f74e7847abe85c",
+      "lines": 151
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/ReferenceColumnSmooth.lean",
+      "sha256": "85178cd7a41043e2c2b022d7336d11f10aa04493523d3ec27b11caa4e5fa96c1",
+      "blob": "c32781e10f7d29db1d07210e66557a7defe6b411",
+      "lines": 90
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/R11bCompactSources.lean",
+      "sha256": "518ce2ed65b3789297858f5051ce786e6940cabeeb88b173d1dcae33409d7e8d",
+      "blob": "092c32d9f69c87ea7d4c4628145dd1861e4ec586",
+      "lines": 106
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Radial.lean",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352",
+      "blob": "473c530a1de50c672f2e54908d374f624f5955b0",
+      "lines": 874
+    }
+  ],
+  "mathematics": [
+    "Forcing is exactly radialJacobi 4 D.w u times cosineMode 2, with the actual referenceRow scalar datum.",
+    "Actual compact support and Green identity prove ReferenceGraph; graph membership is not a hypothesis.",
+    "Uniqueness identifies the same supplied G with the compact cosine field.",
+    "FirstNormalInverseEstimate supplies one constant before every compact test. Its original norm bound passes to the actual radial derivative by the existing second-mode dual inequality.",
+    "The auxiliary Dtest changes only phi for a pure projection lemma; all relevant fields are definitionally those of D. No alternate IsRadialReference, graph, inverse, or material witness is used."
+  ],
+  "limits": [
+    "This is a genuine uniform test inequality, not yet a uniform root kappa lower bound.",
+    "No compilation, checkout/index/ref/checkpoint/authority/CI changes."
+  ],
+  "compiled": false
+}

@@ -1,0 +1,71 @@
+{
+  "kind": "actual_one_sided_ambient_identity_interpolation",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientIdentity.lean",
+    "sha256": "fe0af9ffe60550c8a1418f567cc7b2c57172aa36596b1124a3d4904a7e3ddaef",
+    "blob": "14ed9b9e0f49258df140ec2cca44c02d464833f9",
+    "lines": 149
+  },
+  "module_path": "src/ContinuousFlexibility/Analysis/WholePositiveAmbientIdentity.lean",
+  "public_names": [
+    "positiveEndpointCutoff_opposite_zero_on_side",
+    "positiveAngularTaylorInterpolation_angle_on_identity_side",
+    "positiveHeightTaylorInterpolation_one_on_identity_side",
+    "oneSidedWholeComponentTransport_eq_on_identity_side",
+    "eventually_mem_positive_endpoint_side",
+    "wholePositiveFields_identity_germs_of_side"
+  ],
+  "exact_callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientRadialIdentity.lean",
+      "sha256": "5e5f5fc9f9f8b4ffeb09ed1a3abb489df98e35c0a9a9686457e929992faad3b2",
+      "blob": "0a39d374324401eca98e44da7633c49057349b56",
+      "lines": 105
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/OneSidedWholeComponentTransport.lean",
+      "sha256": "00b537bdb84ca4bebc735c7ef06bd9b804b9de9bb9203f8e3de09658ec41a70f",
+      "blob": "8de986a4b6772cbf403e9d60940eac2765a7a171",
+      "lines": 190
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/TaylorReferenceIdentity.lean",
+      "sha256": "afdff518350fd9ae40e1d8d555bd6e699358856d558e9960dc1f596ad1f1b344",
+      "blob": "638cb5421ada7cf2022cdcf415e0a230f7159624",
+      "lines": 103
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveEndpointCutoff.lean",
+      "sha256": "c74fe54b7fb3aee3b532e7d5c93fe93c37cc0055e4ccd56ab89e8b9465b51711",
+      "blob": "25ca16d4de4e07ae59c916e35b2c581bbf20f730",
+      "lines": 187
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveAngularTaylorInterpolation.lean",
+      "sha256": "d9332e671f0672a46260630ad75493220fed424ede1605a7407db65427d80f80",
+      "blob": "2e19908a7ce9d9d701010cdf75f2428f83db3565",
+      "lines": 207
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveHeightTaylorInterpolation.lean",
+      "sha256": "6fadddd6bf2cdefc752ca061f2c1db8a5ee38ab8e9c11ba833db7616d755b38a",
+      "blob": "5af54b2743a82ffa3a03796ab7bfe6b14c092812",
+      "lines": 205
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveCanonicalFields.lean",
+      "sha256": "8226260cf89a2ac8c4ba5964f2a0b5e569b021ff6d79d0c494112b0271afe7ce",
+      "blob": "a79f9987aafb83a59e1d9fb8ccb74bf5354585c1",
+      "lines": 170
+    }
+  ],
+  "scope": [
+    "Identity/one is required only of the selected raw endpoint source; the other endpoint remains arbitrary.",
+    "The opposite cutoff vanishes on the selected side of the actual middle interval; the own Taylor polynomial is the angular projection or zero logarithm.",
+    "The existing actual radial identity plus angular identity gives the full displayed transport, and its proved left inverse supplies the actual inverse identity.",
+    "The endpoint has a genuine ordinary identity/one germ for both coordinates, relative height and actual reciprocal height. No coefficient smoothness at an ambient point is assumed or asserted."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CI_authority_plan_modified": false
+}

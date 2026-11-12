@@ -1,0 +1,21 @@
+{
+  "kind": "independently_reviewed_held_source_manifest",
+  "status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/transport-angle-alias/WholeComponentTransportPolynomialAliasCandidateManifest.json",
+    "sha256": "90ede36028a2ff6522a48574ec96d203f1fc50933802eb3c28024635f426a4f3"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/transport-angle-alias/WholeComponentTransportPolynomial.lean",
+    "sha256": "008965675a87152c9d8bad8ab0d7fc58aaab2b8678b1705394e878bc95a8c8c8",
+    "blob": "3175a5bcc1ae0346f1ebb1b36491c102f642c635",
+    "lines": 109
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholeComponentTransportPolynomialAliasIndependentReview.json",
+    "sha256": "943b90eeb50c2b5019c70aacc4d5619de98b379100b65112aa7dfe4c76ef79e3"
+  },
+  "compiled": false,
+  "green_receipt_applies_to_candidate": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

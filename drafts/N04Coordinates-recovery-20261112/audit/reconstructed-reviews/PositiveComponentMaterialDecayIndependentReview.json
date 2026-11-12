@@ -1,0 +1,43 @@
+{
+  "kind": "independent_full_source_actual_positive_component_material_decay_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed; complete 89-line source and actual material absorption/sample providers checked",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentMaterialDecayCandidateManifest.json",
+    "sha256": "0c28dd5f5bb4b79c8c93bd092856a3d27610142ea225bc1382dfcbd496a4d67e"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentMaterialDecay.lean",
+    "sha256": "2748a308d7dc5c5e11dea19aae1cde21dc4f30538abd971e3162195ca01b9ea7",
+    "blob": "08b2a45c190df02f2473786840818c395b9008df",
+    "lines": 89
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentMaterialCell.lean",
+      "sha256": "5f21c6b32b0c9241fb560d286690cb93199e0365a9d1314af1c8daab943f4368"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialOneSidedEndpointComparison.lean",
+      "sha256": "5c502ee08fdb1f063bc9b39badcf31647b0042373cccba4878059a97da4d513b"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046"
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68"
+    }
+  ],
+  "checks": [
+    "The actual ratio is raised only to beta>0, using positivity of H at both actual core points. Multiplication and rpow_mul orientations were checked against the pinned Real power API.",
+    "The factorization gamma=(gamma-beta)+beta leaves a strictly positive height exponent. The existing actual material theorem accepts the arbitrary real exponent R+A*beta and bounds precisely the remaining H^(gamma-beta)*E0^(R+A*beta).",
+    "The output B=K^beta*C is positive and fixed before both physical points; no E0>=1 assumption or exponent monotonicity in the base is introduced.",
+    "The second theorem retains exactly the already chosen midpoint cell, its H normalizer and all sample-E0 comparisons. The new decay constant is chosen after gamma,beta,R but before component and physical point. Actual sample membership follows from the same hT/hRef.",
+    "The proof does not require the whole component to lie in its midpoint cell, change material data, claim reverse endpoint-to-sample bounds, or assert a final primitive estimate."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

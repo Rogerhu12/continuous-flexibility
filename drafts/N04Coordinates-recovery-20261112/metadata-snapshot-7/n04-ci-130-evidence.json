@@ -1,0 +1,23 @@
+{
+  "label": 130,
+  "head": "2cea6f265c01ff9f2dac2b0d9a7c80909c441ef4",
+  "tree": "a154fee8ae847d2fe66bbdd1d2a786385083e107",
+  "run": 43191653643,
+  "job": 131092203304,
+  "status": "failure",
+  "run_status": "completed",
+  "checked_at": "2026-11-12T09:33:54.245371+00:00",
+  "compiled_modules": 3185,
+  "total_modules": 3200,
+  "blueprint": "skipped",
+  "raw_log": "n04-ci-130.log",
+  "raw_sha256": "59480306f33b3cdcfdb6f9d79c009b7d29d9ba77de484ea9bc476ddff2f5e562",
+  "unique_errors": 5,
+  "errors_file": "n04-ci-130-errors.json",
+  "errors_sha256": "04df5d9046c541401d522ac84e2760e6634ac3d0be617849aecaf36b7479184e",
+  "failing_modules": [
+    "EndpointTransportGeometry",
+    "EndpointFiberInterpolation",
+    "OneSidedEndpointHeight"
+  ]
+}

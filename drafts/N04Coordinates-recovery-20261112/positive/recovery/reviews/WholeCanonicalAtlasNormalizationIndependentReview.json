@@ -1,0 +1,38 @@
+{
+  "kind": "independent_full_static_proof_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "passed",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasNormalization.lean",
+    "sha256": "5f216c3ff83f16ab1bb7b9870ac4f6f1c6bb3e61f9ef82276575888e4a85ad48",
+    "blob": "f0d642e624049f842d75388d4cb0545feb750348",
+    "lines": 83
+  },
+  "callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasData.lean",
+      "sha256": "41a32a066758dcfb8fe7da1ab9e73bee2f7ad451fa1f7057aee40c01092905d6"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholePositiveNormalizationGeometry.lean",
+      "sha256": "258e06700f5f0e84598e64fec5e4dee4a85fbbbc0a0828afa42e5d8d7b6c6003"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "d42c9da38be0475688417eb1b9d2abeae2f0f6c29009ddfde424fc654c560520"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bPositiveDivision.lean",
+      "sha256": "d274f19959dd831c45e7d0ee0374a4bf01132369e13d69e595beb71a60de39ee"
+    }
+  ],
+  "checks": [
+    "The complete 83-line source, the actual record constructor and the previously reviewed positive buffer lemma were read. The statement retains the same current and reference sector/neighborhood witnesses and a genuine subset B.region of the old normalization region.",
+    "For negative pieces, intersection with B.region restricts the actual old state-dependent domain equality; associativity plus inter_eq_right uses the explicitly established product-set inclusion. The chart/height equalities use the same old cut-pair side index and only strengthen membership through the subset inclusion.",
+    "For positive pieces, the actual record domains are the same whole open interval at each state. The actual buffer membership lemma places each normalization point in its own component middle, and the current/reference WholePositiveChartGeometry hypotheses provide true chart identity and height one there.",
+    "The final record simplifications preserve n04bWithInteriorDivision geometry fields. No partition, primitive estimate, global transport regularity or unproved target conclusion is introduced as a premise."
+  ],
+  "compiled": false,
+  "source_modified": false,
+  "checkout_index_refs_CI_authority_plan_modified": false
+}

@@ -1,0 +1,73 @@
+{
+  "kind": "actual_whole_positive_ambient_fields_independent_source_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed_static_source_review_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveAmbientFieldsCandidateManifest.json",
+    "sha256": "ac11fa6b88bf5df2f08273cbaa0fe71303a8a4e83e41d55914c987c90512fc01"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveAmbientFields.lean",
+    "sha256": "0ab1d6d0e58cd461af615da649bfe15231fd48e1f5f7b467ecf5f0cc120e6070",
+    "blob": "37da0ea5be5451ed56f3c40d9cca938ee41b5872",
+    "lines": 110
+  },
+  "exact_callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientIdentity.lean",
+      "sha256": "fe0af9ffe60550c8a1418f567cc7b2c57172aa36596b1124a3d4904a7e3ddaef",
+      "blob": "14ed9b9e0f49258df140ec2cca44c02d464833f9",
+      "lines": 149
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveAmbientSource.lean",
+      "sha256": "a6ed8815ca40302c184f0a714ad90d0cb929079b9263b6fad8e425601f7cf7c3",
+      "blob": "3e8da743d6e554470c1c63e08bc71c3a8d016a5f",
+      "lines": 71
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/EndpointAngularInterpolation.lean",
+      "sha256": "aff413399fc54e132b18f6b2e1a73ee2a7b4f46925826c6e793c58f387bea2a3",
+      "blob": "8d941ba54c1b69b0da90c4dd919247a53faf3ffd"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PrescribedEndpointWidth.lean",
+      "sha256": "47eaf19679711125095351bb27d7c65fc384c2a2c69d0225018a11edd0ab998c",
+      "blob": "a9219180dff663e0ee1bc9125078551a99faa308"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/EndpointFiberInterpolation.lean",
+      "sha256": "9ea8fc32601e7718bbb9775a77ba2b9f5d64bf5b61ac16058b80b20066fcab57",
+      "blob": "7c8dfa76185f653e9e043a23de074045862aaa79"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveTransportAssembly.lean",
+      "sha256": "3afe46da6de99746f176c1de348b4d0b54f2a82ded8be9ea3d097ce03d46b138",
+      "blob": "c48c9514699ff3ee2d292eb0aa0e32b2c70bc39c"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveEndpointFields.lean",
+      "sha256": "c024651329c6b725f61097116a892f032b80b1f2ef363c920e37ac7e007c0587",
+      "blob": "d5ac37d8aae450523577552e3fb13815cd0a0468"
+    }
+  ],
+  "checks": [
+    "The actual certified endpoint source is forced to none at the ambient boundary by the supplied control geometry. The resulting F=id and q=1 identities are used directly, with the same K/z/source family.",
+    "Local l/r/F/q/psi/X/tau/sigma/Q aliases are definitionally the exact fields in the public let-bound conclusion; dsimp only removes that conclusion before introducing the matching certificate and endpoint.",
+    "Angular margin projections select positivity and the two strict middle gaps in their actual tuple positions. Fiber margins instantiate the exact endpointFiberWidths displayed formula with the real selected side span and max slope bound.",
+    "The original height bound delta<=min(span/4,min(c-l,r-d)) is projected in the correct two directions; it supplies cutoff separation without changing delta or choosing another interpolation.",
+    "The previously reviewed actual identity-side theorem produces tau=p; the same matching.geometry.left_inverse gives sigma=p. The displayed reciprocal Q gauge is one, with no physical coefficient regularity premise.",
+    "The ordinary endpoint germs use the same l/r endpoint definition; no reference-state or source-family substitution is hidden."
+  ],
+  "public_name": "n04PositiveSource_ambient_interpolation_fields",
+  "installed_public_name_collision": false,
+  "limits": [
+    "This establishes only the actual positive fields and endpoint germs, not ambient smoothness of stored physical coefficients or primitive norm bounds."
+  ],
+  "verification": {
+    "compiled": false,
+    "source_edited": false,
+    "CI_queried": false,
+    "checkout_index_refs_CP_authority_or_plan_changed": false
+  }
+}

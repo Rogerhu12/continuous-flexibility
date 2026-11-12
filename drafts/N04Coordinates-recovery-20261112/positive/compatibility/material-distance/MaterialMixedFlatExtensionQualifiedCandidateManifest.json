@@ -1,0 +1,27 @@
+{
+  "kind": "explicit_material_endpoint_distance_namespace_supersession",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "before": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/MaterialMixedFlatExtension.lean",
+    "sha256": "046eb3cfb028db8d60e9a7ba7ff8abcc71172e0ac153d9128959a9e54ae5841c",
+    "blob": "021b95e472101a92a0924ecffdaa849aef45caff",
+    "lines": 89
+  },
+  "after": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/material-distance/MaterialMixedFlatExtension.lean",
+    "sha256": "3e4a2476095205a0af08428c80c88b366837f9c00e94f7c54c4c0db48f7bfe67",
+    "blob": "7c353489236385edabfadae37b6b299e07c3a698",
+    "lines": 89
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/material-distance/MaterialMixedFlatExtension.diff",
+    "sha256": "ce5416d98813789e216f7bf5a33a6d995dec8066c7441661efbc2cbf19ed7a4a",
+    "blob": "e8702fc93c18e5ba990e8e6db1461edf391d8122",
+    "lines": 67
+  },
+  "only_replacement": "endpointDistance D -> Statements.endpointDistance D",
+  "replacement_count": 13,
+  "reason": "Within Analysis the unqualified name resolves to Analysis.endpointDistance(d0,x), whereas this actual material proof requires Statements.endpointDistance(D,r).",
+  "compiled": false,
+  "checkout_index_refs_CI_authority_plan_modified": false
+}

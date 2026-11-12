@@ -1,0 +1,20 @@
+{
+  "kind": "reviewed_endpoint_fiber_binder_compatibility",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair131/CI131EndpointFiberPullbackRepairCandidateManifest.json",
+    "sha256": "89eaa0b33c0d8c80c8a7ef3abad849abe2655a193c9d02f2102439e3e317983f"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair131/EndpointFiberPullbackAssembly.lean",
+    "sha256": "0ef7574f9f3a53e87e5633058df582070b6ba8fd36c29fac18c026f13fccb2d5",
+    "blob": "21b1aefadff323d2a5804143ab522acc50c347a8",
+    "lines": 166
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/EndpointFiberPullbackAssemblyCI131IndependentReview.json",
+    "sha256": "b2b5a816facb38813120cdbc03fdad55fbf26b74e662c320d1105a96a6d4e5d3"
+  },
+  "compiled": false,
+  "checkout_index_refs_CI_authority_plan_modified": false
+}

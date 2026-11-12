@@ -1,0 +1,51 @@
+{
+  "kind": "actual_CI131_endpoint_fiber_pullback_binder_type_repair",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "base_commit": "09f1da15a4aeede7cf157c79418779bc25b04149",
+  "base_tree": "aec47694f28877fd27c9d56359db68d1d77fa549",
+  "module_path": "src/ContinuousFlexibility/Analysis/EndpointFiberPullbackAssembly.lean",
+  "before": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair131/EndpointFiberPullbackAssembly.base.lean.txt",
+    "sha256": "66d18ed04d24aa279a44e52949a887adf1091e83d84e1852c06a98266a88a1c3",
+    "blob": "0df5b32b91cbe14eef36d9838d8507b5bfe2938e",
+    "lines": 166
+  },
+  "after": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair131/EndpointFiberPullbackAssembly.lean",
+    "sha256": "0ef7574f9f3a53e87e5633058df582070b6ba8fd36c29fac18c026f13fccb2d5",
+    "blob": "21b1aefadff323d2a5804143ab522acc50c347a8",
+    "lines": 166
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair131/EndpointFiberPullbackAssembly.diff",
+    "sha256": "cdebfca08f109c9a63086e16dd447284a69299a582f3681392d556498a3f45d0",
+    "blob": "616122e1309d1e31546ccb0c55bebcfc09625cf1",
+    "lines": 20
+  },
+  "diagnostics": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-131-errors.json",
+    "sha256": "05eb8bded8b59c6a90d8160463fcbcaadf901a1d199a0f1dd495e10099f6bd27",
+    "blob": "986d25a386ffc1b1c268fdb85d387c99a4960f21",
+    "lines": 9
+  },
+  "changes": [
+    {
+      "old": "(hpositive : ∀ i p, 0 < deriv (fun θ => φ i (p.1, θ)) p.2)",
+      "new": "(hpositive : ∀ i (p : PolarPoint), 0 < deriv (fun θ => φ i (p.1, θ)) p.2)",
+      "purpose": "Fix the type of the genuine physical point before projecting its coordinates."
+    },
+    {
+      "old": "(hφraw : ∀ i side k, 1 ≤ k → k ≤ n + 1 → ∀ θ,",
+      "new": "(hφraw : ∀ i (side : Bool) k, 1 ≤ k → k ≤ n + 1 → ∀ θ,",
+      "purpose": "Fix the two-endpoint Boolean parameter before the standalone angular-field conditional, which otherwise elaborates as Prop."
+    }
+  ],
+  "surface": "Only two explicit binder annotations in two public theorem headers. No mathematical bound, hypothesis content, conclusion, definition, proof body, import or option is otherwise changed. The unannotated old headers failed elaboration; no claim that their original invalid Lean types were valid.",
+  "same_pattern_scan": [
+    "The rest of this 166-line source binds side first via X i side or via the typed endpoint widths. Its local hpositive and hangle already have explicit PolarPoint/Bool types.",
+    "Installed WholeComponentTransportFactory has explicit Bool in its derived angular-bound provider and all raw source families are Bool-typed before conditional use.",
+    "Held EndpointFiberPullbackPolynomial has the same standalone raw-angular side binder and is separately prepared as a held compatibility supersession, not part of this actual CI repair."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CI_authority_plan_modified": false
+}

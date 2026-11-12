@@ -67,7 +67,7 @@ theorem wholeComponentTransportGeometry_of_scalars
     (mul_pos hB hκ).trans_le (hJ p)
   have hbij := positiveFiberChart_bijOn_openStrip
     hφ hY hκ hB Real.pi_ne_zero hφLower hYLower hφPeriod hleft hright
-  have hclosed := positiveFiberChart_maps_closedStrip hY hB hYLower hleft hright
+  have hclosed := positiveFiberChart_maps_closedStrip (φ := φ) hY hB hYLower hleft hright
   have hperiod (p : PolarPoint) : τ (p + (0, Real.pi)) = τ p + (0, Real.pi) :=
     positiveFiberChart_period_add hφPeriod hYPeriod p
   have hreflect (p : PolarPoint) : τ (p.1, -p.2) = ((τ p).1, -(τ p).2) :=
@@ -104,6 +104,7 @@ theorem wholeComponentTransportGeometry_of_scalars
     exact hq
   · intro p
     apply hστ.injective
+    dsimp only [τ] at hperiod
     rw [hτσ, hperiod, hτσ]
   · intro x hx θ
     filter_upwards [hmiddle x hx θ] with p hp

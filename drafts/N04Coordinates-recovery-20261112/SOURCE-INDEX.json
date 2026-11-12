@@ -1,10 +1,10 @@
 {
   "kind": "incremental_source_preservation",
-  "snapshot": 6,
-  "prior_commit": "20854f91f48a59f7ba5f6f0ab592a0543c442141",
-  "line_head": "2cea6f265c01ff9f2dac2b0d9a7c80909c441ef4",
-  "line_tree": "a154fee8ae847d2fe66bbdd1d2a786385083e107",
-  "frozen_at": "2026-11-12T09:31:18.312664+00:00",
+  "snapshot": 7,
+  "prior_commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
+  "line_head": "33d9140d067221b1cbc3914af186a85f9c1a6b22",
+  "line_tree": "af99d2f66f3c8e8b994a7cbc268dd4bf19214a5c",
+  "frozen_at": "2026-11-12T10:00:36.658470+00:00",
   "files": [
     {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/height-width/OneSidedEndpointHeight.base.lean.txt",
@@ -56,7 +56,7 @@
       "sha256": "cedf21aa95f1d7831da1aee56fd5d464d867099a56d07bd68707ca88ce2e6b84",
       "lines": 189,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/pinned-api/DerivZPow.lean"
       }
     },
@@ -65,7 +65,7 @@
       "sha256": "112ea4e68025b92312a6518fe8e7c6b63689bd325162d6bbb967c55ebd10d1d9",
       "lines": 1100,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/pinned-api/GroupBasic.lean"
       }
     },
@@ -74,7 +74,7 @@
       "sha256": "673ac23a2e877c2d8f5b92ca470c0592d6f7311ba325c4c9e943a1d3cfd1cc6c",
       "lines": 425,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/pinned-api/LogDeriv.lean"
       }
     },
@@ -83,7 +83,7 @@
       "sha256": "7037c9985c1bcf65cba5742efe78a14d30d7d26669ec9fc1290b958574d789ef",
       "lines": 360,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/pinned-api/SetOperations.lean"
       }
     },
@@ -101,7 +101,7 @@
       "sha256": "e6d668ee9861551bf27fb4ec4f6ea0ee1e059fe8215056588b642c79d9aeb542",
       "lines": 122,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed/ActualNegativeRelativePrincipalCandidateManifest.json"
       }
     },
@@ -110,7 +110,7 @@
       "sha256": "794132db1d6dac1346fa87aa727d29dd939caf5bee5f2c34db930f6c03d68094",
       "lines": 133,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed/ActualNegativeRelativePrincipalReviewedManifest.json"
       }
     },
@@ -164,7 +164,7 @@
       "sha256": "4bdee6bc24043cd457cde00d4a51c13da16e192f50306271b0e3355e736b1a5c",
       "lines": 182,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed/CanonicalNegativeRelativeBoundaryJets.lean"
       }
     },
@@ -173,7 +173,7 @@
       "sha256": "2c9a4fc71baba10a3a151ee012af15a33f3e98083ce5293d33fe3335fa419676",
       "lines": 66,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed/CanonicalNegativeRelativeBoundaryJetsCandidateManifest.json"
       }
     },
@@ -182,7 +182,7 @@
       "sha256": "a729c501b2341bb431d2a63beaa198cbc5dd4a00f540f42a5884c7408bcc13bc",
       "lines": 77,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed/CanonicalNegativeRelativeBoundaryJetsReviewedManifest.json"
       }
     },
@@ -191,7 +191,7 @@
       "sha256": "422c162a9d9c0f8a5db1cd8a9cfa991411187992dbfc72dcc271af95211aeb9a",
       "lines": 142,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed/CanonicalNegativeRelativePrincipal.lean"
       }
     },
@@ -241,11 +241,38 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/N01CompactHeightStateTests.lean",
+      "sha256": "16d1f32d9dcf6b010a20cf4a49ab3fc523dd605b74561138a00c5d611f89d679",
+      "lines": 204,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed/N01CompactHeightStateTests.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/N01CompactHeightStateTestsCandidateManifest.json",
+      "sha256": "eb3eebf8559eb8fd5795a8ba228a52e6d1ed641b9c18ccd73ca15d59ba54366c",
+      "lines": 93,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed/N01CompactHeightStateTestsCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/N01CompactHeightStateTestsReviewedManifest.json",
+      "sha256": "315474e480cf7ce0907fe30d93cca91707c7b26b74e011bc76fc2e1773e3ee38",
+      "lines": 101,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed/N01CompactHeightStateTestsReviewedManifest.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/N01ProfileDirectionOpticalBound.lean",
       "sha256": "21ec6dc32918acc8ba134f4dc9b17d57e3b709769ac36ed21e049a105396bb3f",
       "lines": 59,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed/N01ProfileDirectionOpticalBound.lean"
       }
     },
@@ -254,7 +281,7 @@
       "sha256": "7137d0b2357b018c5eb978b326280cbd06c12e19d34b7278338fec2b283a632b",
       "lines": 24,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed/N01ProfileDirectionOpticalBoundCandidateManifest.json"
       }
     },
@@ -263,7 +290,7 @@
       "sha256": "9becf962d84f8ca1d42521604be82102b2e2bb6a2d3e796496c02f06f0f76f34",
       "lines": 27,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed/N01ProfileDirectionOpticalBoundReviewedManifest.json"
       }
     },
@@ -331,6 +358,42 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ReferenceAffineCutoffNormalTest.lean",
+      "sha256": "1cae74c1132bc5d0609593dd991a8b6c7c63f67957ec741a93e5df39d471f7ae",
+      "lines": 159,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed/ReferenceAffineCutoffNormalTest.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ReferenceCompactCosineNormalTest.lean",
+      "sha256": "4fdfa098ae79fcaa5a300c86aa78d464ade9c4e9380a56588c938e551a974bfd",
+      "lines": 175,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed/ReferenceCompactCosineNormalTest.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ReferenceCompactCosineNormalTestCandidateManifest.json",
+      "sha256": "d42161de5f67f04fb96240c49d8ceb7d0acf3c469b0c0b11bc00d0494c88dc2e",
+      "lines": 87,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed/ReferenceCompactCosineNormalTestCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ReferenceCompactCosineNormalTestReviewedManifest.json",
+      "sha256": "1b4b3fc39679ffb57ca031965bb1973d76701664ebb4d9b1ef722bc3efc9bcac",
+      "lines": 95,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed/ReferenceCompactCosineNormalTestReviewedManifest.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RelativePrincipalCoefficients.lean",
       "sha256": "3162241d9f98b0328f5e95d49e3ebe7772f279cf57a54b3e610d022bf92854ba",
       "lines": 185,
@@ -373,6 +436,15 @@
       "stored_at": {
         "commit": "20854f91f48a59f7ba5f6f0ab592a0543c442141",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed-reviews/CI121PositiveTopologyIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/CanonicalWholePositiveAmbientFieldsIndependentReview.json",
+      "sha256": "750a6f2867785d096636138656549ac0236ff3d52aa2a04868a2fc40f7f664bf",
+      "lines": 73,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed-reviews/CanonicalWholePositiveAmbientFieldsIndependentReview.json"
       }
     },
     {
@@ -529,6 +601,24 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/PositiveComponentMaterialCellIndependentReview.json",
+      "sha256": "256965445e6944bbc28dfeb3489392e7567718e74f22072f24244be0a0c31e7f",
+      "lines": 125,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed-reviews/PositiveComponentMaterialCellIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/PositiveComponentMaterialDecayIndependentReview.json",
+      "sha256": "1ac46939178a0e617e93404ca31a3e6886e6d13f65b56b63ef2888a293d7017c",
+      "lines": 43,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed-reviews/PositiveComponentMaterialDecayIndependentReview.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/PositiveOneSidedPolynomialAssemblyIndependentReview.json",
       "sha256": "acca1390596bccd898ab6e05f7be7e45b25c426075b93f5bcf979113c87b147d",
       "lines": 79,
@@ -551,8 +641,17 @@
       "sha256": "8287d802e9cfd0b19911edd7ca9817edfbd2906e8431cdc188459bc66a5353a6",
       "lines": 304,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed-reviews/SameWitnessOpticalTestingRouteAnalysis.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/WholeCanonicalReferenceAndGeometryIndependentReview.json",
+      "sha256": "7b1881b818570add9dec94132cfc2fdbcee6da46284704f50b8019b0d2669c90",
+      "lines": 171,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed-reviews/WholeCanonicalReferenceAndGeometryIndependentReview.json"
       }
     },
     {
@@ -583,6 +682,15 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/WholePositiveAmbientIdentityIndependentReview.json",
+      "sha256": "a5102ebf344357c8a5c7b3bc671a6c505f6b17bfc8d09a3429286ab4770a6765",
+      "lines": 97,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/reconstructed-reviews/WholePositiveAmbientIdentityIndependentReview.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/WholePositiveCollarPolynomialEnvelopeIndependentReview.json",
       "sha256": "d9224d89e24de108487a074dbdc8d2b73f54db6ce7f491d1d84b7e778cb2c9a0",
       "lines": 51,
@@ -596,7 +704,7 @@
       "sha256": "dacfdc467bbb1b776f9af5dd98be75d7d9deacdb35770996f91318c4b42b8830",
       "lines": 28,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/recovery/MathlibContDiffCompPinnedExcerpt.lean.txt"
       }
     },
@@ -803,7 +911,7 @@
       "sha256": "0177805851b4f4c36fc76d88523f4894a40259fcc4e0ea8feb13c0f9fa297fdc",
       "lines": 32,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/repair127/CanonicalWholeNegativeBoundaryCI127IndependentReview.json"
       }
     },
@@ -812,7 +920,7 @@
       "sha256": "7eb069cd7f297c997307063b878a77f401bfb6528680d1cc99c36d8c1b844f48",
       "lines": 65,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/repair129/CI129OwnedRepairsCandidateManifest.json"
       }
     },
@@ -821,7 +929,7 @@
       "sha256": "3ddc1c1b809e30cd5264ba5c82606829358ab1c659e6c606226acf0b3110746a",
       "lines": 77,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/repair129/CI129OwnedRepairsReviewedManifest.json"
       }
     },
@@ -839,7 +947,7 @@
       "sha256": "810d5a2ef7cc76f412bb4e8d6034ab0c3769ec29e82a6c0d8f6c22509f4c3db4",
       "lines": 20,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/repair129/EndpointHeightValueBounds.diff"
       }
     },
@@ -848,7 +956,7 @@
       "sha256": "9ef9a3b04d5f7f8c06371b1bb0021cd6c901aa6a4cf47d0811e48b49a0737090",
       "lines": 97,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/repair129/EndpointHeightValueBounds.lean"
       }
     },
@@ -866,7 +974,7 @@
       "sha256": "ae4b4b59cccb4d80ece13c23297506d90b4f8b47c8838202f0dee0f4fc8c98a7",
       "lines": 17,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/repair129/TaylorReferenceIdentity.diff"
       }
     },
@@ -875,8 +983,98 @@
       "sha256": "afdff518350fd9ae40e1d8d555bd6e699358856d558e9960dc1f596ad1f1b344",
       "lines": 103,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/audit/repair129/TaylorReferenceIdentity.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair130/OneSidedEndpointHeight.base.lean.txt",
+      "sha256": "3624a8ee5fa5cfc0e425f0ce2f01a37ef3faaff701575a1ceb392132ae044e9d",
+      "lines": 128,
+      "stored_at": {
+        "commit": "20854f91f48a59f7ba5f6f0ab592a0543c442141",
+        "path": "drafts/N04Coordinates-recovery-20261112/root/formatting-positive-group20/OneSidedEndpointHeight.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair130/OneSidedEndpointHeight.diff",
+      "sha256": "a601d0422ff8b4afbdc81dd378fe1902d3f7d165ac44fae3aabefd1690c20cdb",
+      "lines": 14,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/repair130/OneSidedEndpointHeight.diff"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair130/OneSidedEndpointHeight.lean",
+      "sha256": "370335da0eaef815f6f68a8a3db180289f5629d365c7fbfd40d430b056dc72cf",
+      "lines": 128,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/repair130/OneSidedEndpointHeight.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair130/OneSidedEndpointHeightCI130CandidateManifest.json",
+      "sha256": "c960c458e101016524a8c8ce1adbc641cabb463fcf2bfa2e3a5808ad3f249818",
+      "lines": 61,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/repair130/OneSidedEndpointHeightCI130CandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair130/OneSidedEndpointHeightCI130ReviewedManifest.json",
+      "sha256": "29b8814bed8642d72712c7bad9883001b1a675146bc4d96fbec2b86c293fef82",
+      "lines": 69,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/repair130/OneSidedEndpointHeightCI130ReviewedManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair131/OneSidedEndpointHeight.base.lean.txt",
+      "sha256": "370335da0eaef815f6f68a8a3db180289f5629d365c7fbfd40d430b056dc72cf",
+      "lines": 128,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/repair130/OneSidedEndpointHeight.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair131/OneSidedEndpointHeight.diff",
+      "sha256": "cce55cf0c90a8fc7a9b976d0c16743345311417519e16680ff05f439b4909104",
+      "lines": 13,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/repair131/OneSidedEndpointHeight.diff"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair131/OneSidedEndpointHeight.lean",
+      "sha256": "e0a567cc09e1b62bd7e3f8e86eb68b4553e54002cb136938706d579e4ddc603d",
+      "lines": 130,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/repair131/OneSidedEndpointHeight.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair131/OneSidedEndpointHeightCI131CandidateManifest.json",
+      "sha256": "5a69d13a81708989ac8208c055ea4f70ddff19927f2a7aabd7d5d5e5ecd74a46",
+      "lines": 59,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/repair131/OneSidedEndpointHeightCI131CandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair131/OneSidedEndpointHeightCI131ReviewedManifest.json",
+      "sha256": "5505e9fa93eb6f689f62d9c296c0fcd43843d04ed228fc0edac33bce75f1bd0c",
+      "lines": 67,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/audit/repair131/OneSidedEndpointHeightCI131ReviewedManifest.json"
       }
     },
     {
@@ -884,8 +1082,8 @@
       "sha256": "9f1fb0ff1c8e3a1370ae5f9b0f2ecc488a8a45f01e5e5281476a4ff9b6e6262b",
       "lines": 103,
       "stored_at": {
-        "snapshot": 6,
-        "path": "drafts/N04Coordinates-recovery-20261112/positive/compatibility/cubic-germs/IntervalCubicGermDivision.base.lean.txt"
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/IntervalCubicGermDivision.lean"
       }
     },
     {
@@ -893,7 +1091,7 @@
       "sha256": "810e7fb29834cbc9c3f31f03020f0f51677c8ac05e33b70de88de0bf3b5d22c5",
       "lines": 27,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/compatibility/cubic-germs/IntervalCubicGermDivision.diff"
       }
     },
@@ -902,7 +1100,7 @@
       "sha256": "9fdc1286df823061bbdf32d934a857a869e19e32520a5fc0a3a7ffc7f735ce8d",
       "lines": 102,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/compatibility/cubic-germs/IntervalCubicGermDivision.lean"
       }
     },
@@ -911,8 +1109,35 @@
       "sha256": "f572b4860bf8e22fee52190fcf8909898573e19f3949f97d750218a550e9c7fa",
       "lines": 26,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/compatibility/cubic-germs/IntervalCubicGermDivisionSharedEndpointCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/material-distance/MaterialMixedFlatExtension.diff",
+      "sha256": "ce5416d98813789e216f7bf5a33a6d995dec8066c7441661efbc2cbf19ed7a4a",
+      "lines": 67,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/compatibility/material-distance/MaterialMixedFlatExtension.diff"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/material-distance/MaterialMixedFlatExtension.lean",
+      "sha256": "3e4a2476095205a0af08428c80c88b366837f9c00e94f7c54c4c0db48f7bfe67",
+      "lines": 89,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/compatibility/material-distance/MaterialMixedFlatExtension.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/material-distance/MaterialMixedFlatExtensionQualifiedCandidateManifest.json",
+      "sha256": "c3d3e44490e13a70acde7b6b5ff3b464fcd39272de52ab08db470f2e2d3d8714",
+      "lines": 27,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/compatibility/material-distance/MaterialMixedFlatExtensionQualifiedCandidateManifest.json"
       }
     },
     {
@@ -985,6 +1210,87 @@
       "stored_at": {
         "commit": "20854f91f48a59f7ba5f6f0ab592a0543c442141",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/compatibility/negative-eqon/NegativeTransportEqOnCompatibilityReviewedManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/pullback-side/EndpointFiberPullbackPolynomial.diff",
+      "sha256": "c7a84a55c740bf703fdbb818721ba9e5d312ee5e9f099b6e85d87c23991307ec",
+      "lines": 11,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/compatibility/pullback-side/EndpointFiberPullbackPolynomial.diff"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/pullback-side/EndpointFiberPullbackPolynomial.lean",
+      "sha256": "5e46db0f238f963c1ba32f759a190cec6ba31f73166baa53e36bf6db609ab024",
+      "lines": 93,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/compatibility/pullback-side/EndpointFiberPullbackPolynomial.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/pullback-side/EndpointFiberPullbackPolynomialBoolCandidateManifest.json",
+      "sha256": "1116ef4002766ddeda4028dd5fa1335e6f86bdde2ef3cd77879d61187deebb90",
+      "lines": 31,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/compatibility/pullback-side/EndpointFiberPullbackPolynomialBoolCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/pullback-side/EndpointFiberPullbackPolynomialBoolReviewedManifest.json",
+      "sha256": "9d5eac370917c9607fae46619338592a1c586d739208883423f7bf0b94331146",
+      "lines": 20,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/compatibility/pullback-side/EndpointFiberPullbackPolynomialBoolReviewedManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/transport-angle-alias/WholeComponentTransportPolynomial.base.lean.txt",
+      "sha256": "0d13ae7e1107bd35fce75a739d492c9b7c78fa4cf1b6e70dff7e213d877b0b95",
+      "lines": 108,
+      "stored_at": {
+        "commit": "20854f91f48a59f7ba5f6f0ab592a0543c442141",
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/WholeComponentTransportPolynomial.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/transport-angle-alias/WholeComponentTransportPolynomial.diff",
+      "sha256": "7d0b809650d18a803a26688a7de43bfeea3aadb89dfe8aac04be42df2112af03",
+      "lines": 10,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/compatibility/transport-angle-alias/WholeComponentTransportPolynomial.diff"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/transport-angle-alias/WholeComponentTransportPolynomial.lean",
+      "sha256": "008965675a87152c9d8bad8ab0d7fc58aaab2b8678b1705394e878bc95a8c8c8",
+      "lines": 109,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/compatibility/transport-angle-alias/WholeComponentTransportPolynomial.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/transport-angle-alias/WholeComponentTransportPolynomialAliasCandidateManifest.json",
+      "sha256": "90ede36028a2ff6522a48574ec96d203f1fc50933802eb3c28024635f426a4f3",
+      "lines": 41,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/compatibility/transport-angle-alias/WholeComponentTransportPolynomialAliasCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/transport-angle-alias/WholeComponentTransportPolynomialAliasReviewedManifest.json",
+      "sha256": "9eb56138188f77de2f0a72a0c6b9d90ac33a3562bb0c5d93c96a3fb9c80839fd",
+      "lines": 21,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/compatibility/transport-angle-alias/WholeComponentTransportPolynomialAliasReviewedManifest.json"
       }
     },
     {
@@ -1141,11 +1447,56 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveAmbientCubicDifference.lean",
+      "sha256": "b8e40f0b9744f75b7564e616d3e3b7677f9c5aaf311cae7727042d8243eceb57",
+      "lines": 209,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/CanonicalWholePositiveAmbientCubicDifference.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveAmbientCubicDifferenceCandidateManifest.json",
+      "sha256": "580273059cc06a5422de202ea9f6b29f4aebadfd413299dba01cea9b0d9a113d",
+      "lines": 49,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/CanonicalWholePositiveAmbientCubicDifferenceCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveAmbientFields.lean",
+      "sha256": "0ab1d6d0e58cd461af615da649bfe15231fd48e1f5f7b467ecf5f0cc120e6070",
+      "lines": 110,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/CanonicalWholePositiveAmbientFields.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveAmbientFieldsCandidateManifest.json",
+      "sha256": "ac11fa6b88bf5df2f08273cbaa0fe71303a8a4e83e41d55914c987c90512fc01",
+      "lines": 27,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/CanonicalWholePositiveAmbientFieldsCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveAmbientFieldsReviewedManifest.json",
+      "sha256": "f16eabf14cccd20b6436a3f03d31a5bd67f7e094247ae4c25aa8c6c233654fac",
+      "lines": 17,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/CanonicalWholePositiveAmbientFieldsReviewedManifest.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveCubicDifference.lean",
       "sha256": "55f04a1e0308c127bc3dc00c3f936f948611c346e94e836455455437513a28ea",
       "lines": 102,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/CanonicalWholePositiveCubicDifference.lean"
       }
     },
@@ -1154,7 +1505,7 @@
       "sha256": "df5f9c4a0796ef2843e10ed85991659983432b9905222fe4a31d63637970642b",
       "lines": 44,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/CanonicalWholePositiveCubicDifferenceCandidateManifest.json"
       }
     },
@@ -1163,7 +1514,7 @@
       "sha256": "f073be472d15bb804ef90f2b2e800f9c5d11e850c35364149ec2152ff91ae5a9",
       "lines": 151,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/CanonicalWholePositiveReferenceJets.lean"
       }
     },
@@ -1172,7 +1523,7 @@
       "sha256": "1b677cb057c1c2d8d386c776ed77be34d975e5f25cd876c64ed051652b3eee16",
       "lines": 65,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/CanonicalWholePositiveReferenceJetsCandidateManifest.json"
       }
     },
@@ -1181,7 +1532,7 @@
       "sha256": "0a6d83c098b6663a01c4551e6059c6a2890eb98bac845e9a6dbcdb164ec88ca5",
       "lines": 77,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/CanonicalWholePositiveReferenceJetsReviewedManifest.json"
       }
     },
@@ -1280,7 +1631,7 @@
       "sha256": "9f1fb0ff1c8e3a1370ae5f9b0f2ecc488a8a45f01e5e5281476a4ff9b6e6262b",
       "lines": 103,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/IntervalCubicGermDivision.lean"
       }
     },
@@ -1289,8 +1640,53 @@
       "sha256": "6b65db78b57f43f34c1cc0bfe8515a76325701183c6308e3c6da34a34e8b729a",
       "lines": 37,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/IntervalCubicGermDivisionCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/MaterialMixedFlatExtension.lean",
+      "sha256": "046eb3cfb028db8d60e9a7ba7ff8abcc71172e0ac153d9128959a9e54ae5841c",
+      "lines": 89,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/MaterialMixedFlatExtension.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/MaterialMixedFlatExtensionCandidateManifest.json",
+      "sha256": "0936efffbdc05c722ed28a96f27424b6c27f425e7e509f5d0bdaa717bb582bb2",
+      "lines": 18,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/MaterialMixedFlatExtensionCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/MaterialN01DifferenceFlatExtensionReviewedManifest.json",
+      "sha256": "cbf4168986f7acea04dd24ead415c9714bd67ff5f6fa4237bc9a5796cdcaf3a1",
+      "lines": 31,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/MaterialN01DifferenceFlatExtensionReviewedManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N01CoefficientDifferenceFlatExtension.lean",
+      "sha256": "455bdb2354c991d08845ffc76cb31d877682e1a8d317793f740e2d465141db5f",
+      "lines": 119,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/N01CoefficientDifferenceFlatExtension.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N01CoefficientDifferenceFlatExtensionCandidateManifest.json",
+      "sha256": "359ccbcc3b6bb7393803b7585efbcf775373b20a562d34939142c9041b51be14",
+      "lines": 21,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/N01CoefficientDifferenceFlatExtensionCandidateManifest.json"
       }
     },
     {
@@ -1298,7 +1694,7 @@
       "sha256": "20c2aca5cd6e03b21386f3b389bfdc1b3d0d375b52586035a8144f61e37c1128",
       "lines": 70,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/PositiveCubicDifferenceReviewedManifest.json"
       }
     },
@@ -1393,6 +1789,78 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientBuffer.lean",
+      "sha256": "ee9971b2f20a215e7ec2542f410a221f341610ca7080293cabacaea4aba73bc5",
+      "lines": 148,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/WholePositiveAmbientBuffer.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientBufferCandidateManifest.json",
+      "sha256": "76c4912eb9f7a5f45a254c6a8ee2f2ead1b6a720f8d2c488c69d87728554fabc",
+      "lines": 17,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/WholePositiveAmbientBufferCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientBufferReviewedManifest.json",
+      "sha256": "9dcb289eaeeb169eb913601a6f27017e04c0b4f2de316c7a64b0b4d0119fba8f",
+      "lines": 21,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/WholePositiveAmbientBufferReviewedManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientIdentity.lean",
+      "sha256": "fe0af9ffe60550c8a1418f567cc7b2c57172aa36596b1124a3d4904a7e3ddaef",
+      "lines": 149,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/WholePositiveAmbientIdentity.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientIdentityCandidateManifest.json",
+      "sha256": "6e669bfb3398e607664b7a4cb5897ecbd161b45391df4d5ed7494772abfe568d",
+      "lines": 71,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/WholePositiveAmbientIdentityCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientIdentityReviewedManifest.json",
+      "sha256": "d8f4bb9f3675e979859dc71540f814874a14c9f69365553ee6f1df4bc8e60eb4",
+      "lines": 18,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/WholePositiveAmbientIdentityReviewedManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientPrincipal.lean",
+      "sha256": "b30636b6cb45bb56c15dc15c5a9025ba5ae7f592558a3cd91540aa8e861b853e",
+      "lines": 87,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/WholePositiveAmbientPrincipal.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientPrincipalCandidateManifest.json",
+      "sha256": "a719ad7e1504619b3fd09e6566683b6bd97336d80c0e195cf8cde88bc8f9adf6",
+      "lines": 18,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/WholePositiveAmbientPrincipalCandidateManifest.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientRadialIdentity.lean",
       "sha256": "5e5f5fc9f9f8b4ffeb09ed1a3abb489df98e35c0a9a9686457e929992faad3b2",
       "lines": 105,
@@ -1483,11 +1951,29 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveFlatPrincipalPatch.lean",
+      "sha256": "45d18b220bddd0ba6ddbcaa66ab12cb0ae85e853fe3d76c9cc5fa5d0cfc9ed16",
+      "lines": 157,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/WholePositiveFlatPrincipalPatch.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveFlatPrincipalPatchCandidateManifest.json",
+      "sha256": "2d2a0313c41ba195658ea630d6d2936e538bf81f8f250398a13e909fd6e91784",
+      "lines": 31,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/WholePositiveFlatPrincipalPatchCandidateManifest.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositivePrincipalExtension.lean",
       "sha256": "fca39fba34350c9038c61e3d01d0734115b645661c13459b66dcb072053c1539",
       "lines": 114,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/WholePositivePrincipalExtension.lean"
       }
     },
@@ -1496,7 +1982,7 @@
       "sha256": "2d9fe43bf2e5ffd519b8948da944aa902ab4aecc8c8cf01d248a561240e0854a",
       "lines": 42,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/WholePositivePrincipalExtensionCandidateManifest.json"
       }
     },
@@ -1505,7 +1991,7 @@
       "sha256": "419420794974629e0e02b95179634e2aa1e24f7bc018670ca038e796fe08fed9",
       "lines": 54,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/WholePositivePrincipalExtensionReviewedManifest.json"
       }
     },
@@ -1514,7 +2000,7 @@
       "sha256": "c1300032411e5cf278ddd96b7fb67d7cc2e26e8106cf3d505f7c09fb025e6779",
       "lines": 154,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/WholePositivePrincipalJetMatching.lean"
       }
     },
@@ -1523,7 +2009,7 @@
       "sha256": "09de7fd62fbc1a553c597465617d8996465088983189bb1e51a9c5212a2a5fbc",
       "lines": 78,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/WholePositivePrincipalJetMatchingCandidateManifest.json"
       }
     },
@@ -1532,7 +2018,7 @@
       "sha256": "0f3ad618c1d6285115d0ca8b1e1f63c5cbab2f30cf901b9ebaa850a8e5f5ebad",
       "lines": 22,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/WholePositivePrincipalJetMatchingReviewedManifest.json"
       }
     },
@@ -1577,7 +2063,7 @@
       "sha256": "5b347286969e01af8c115d24288fed7952c558a6fb357cd1176dbbf157239b79",
       "lines": 96,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/recovery/reviews/ActualNegativePrincipalAdaptersIndependentReview.json"
       }
     },
@@ -1613,7 +2099,7 @@
       "sha256": "16559caaf82946adce4e6c2eec501ffc70b12244aaab09a4196a355b6d4b9cb2",
       "lines": 91,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/recovery/reviews/CanonicalPositiveMaterialTransportIndependentReview.json"
       }
     },
@@ -1651,6 +2137,15 @@
       "stored_at": {
         "commit": "20854f91f48a59f7ba5f6f0ab592a0543c442141",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/recovery/reviews/FiniteFullJetBoundaryIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/IntervalCubicOpenGermDivisionIndependentReview.json",
+      "sha256": "6e02d861d795a4e4eb6fe891fd1ac1c38a60964c35f530f509c1a8c5aa4f3a02",
+      "lines": 38,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/recovery/reviews/IntervalCubicOpenGermDivisionIndependentReview.json"
       }
     },
     {
@@ -1699,12 +2194,30 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/PositiveComponentCoefficientSampleBoundsIndependentReview.json",
+      "sha256": "805da0f365a6601a63e8ed2d30f9b7e1d5f7105c8ee7486b0958b63ddc4af483",
+      "lines": 34,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/recovery/reviews/PositiveComponentCoefficientSampleBoundsIndependentReview.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/PositiveReferenceIdentityRecoveredIndependentReview.json",
       "sha256": "f2ff95c6dfd4e5b6d9c3e1c9f37b737af8e487c486cd704dfdfec33869da735b",
       "lines": 55,
       "stored_at": {
         "commit": "20854f91f48a59f7ba5f6f0ab592a0543c442141",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/recovery/reviews/PositiveReferenceIdentityRecoveredIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/PrincipalJetMatchingEOFSupersessionIndependentReview.json",
+      "sha256": "7719fc44c4cf190d40edbc7bac72c23cb47da35fc15c23ee43579e088f104ad0",
+      "lines": 27,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/recovery/reviews/PrincipalJetMatchingEOFSupersessionIndependentReview.json"
       }
     },
     {
@@ -1748,8 +2261,35 @@
       "sha256": "8e7d2dde34c25c003ecf5fd949556b428118dd7d8a2027165c7e80f776b16c5c",
       "lines": 53,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/recovery/reviews/WholeCanonicalAtlasDataIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/WholeCanonicalAtlasNormalizationIndependentReview.json",
+      "sha256": "c9001811f62c1ebdec3010335e5683d7f72b1d3652faac3edaef480e5ef9915a",
+      "lines": 38,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/recovery/reviews/WholeCanonicalAtlasNormalizationIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/WholeCanonicalDomainAndLetIntroIndependentReview.json",
+      "sha256": "ab7e77362a9960ae0578b1118d0aaabc84c2db5dc80ba09a1c5c89bf7f355e74",
+      "lines": 57,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/recovery/reviews/WholeCanonicalDomainAndLetIntroIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/WholeCanonicalLocalGeometryIndependentReview.json",
+      "sha256": "165ee4ceb657ea0fd7c6c39bc0da91623f13d6715e52dec3db8336e88e25fe0c",
+      "lines": 79,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/recovery/reviews/WholeCanonicalLocalGeometryIndependentReview.json"
       }
     },
     {
@@ -1757,7 +2297,7 @@
       "sha256": "085e6aa4b46bf3158bbf8157c47ef8bedd6d23bd0eba4180a2247046ffb31e89",
       "lines": 38,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/recovery/reviews/WholeComponentCollarInvarianceIndependentReview.json"
       }
     },
@@ -1771,11 +2311,20 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/WholeComponentMaterialTransportAliasIndependentReview.json",
+      "sha256": "8002abba2b5c3adabcbef3df2a6fcf81866d043faee030bb9de799edc04ffda4",
+      "lines": 28,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/recovery/reviews/WholeComponentMaterialTransportAliasIndependentReview.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/WholeComponentMaterialTransportIndependentReview.json",
       "sha256": "b1eb8dc9ea709c83ebfe8a0c4d269a35263b4c4e79f3c8834e83bf2514ca740a",
       "lines": 30,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/recovery/reviews/WholeComponentMaterialTransportIndependentReview.json"
       }
     },
@@ -2027,7 +2576,7 @@
       "sha256": "ddfa228aab10dd8217361bb619581e1a1c8c4b8cc9b6f65e4a1d1fc173518fa6",
       "lines": 24,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/repair127/CanonicalWholeNegativeBoundary.diff"
       }
     },
@@ -2036,7 +2585,7 @@
       "sha256": "c4119413eb89f0863549c945b0cd6956eb0bfd224e42a0e2192f9b0f26732ceb",
       "lines": 87,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/repair127/CanonicalWholeNegativeBoundary.lean"
       }
     },
@@ -2045,7 +2594,7 @@
       "sha256": "60a393afcf11d4fd35c3dce69e90b2c40fab780843de57858d6a756681525df0",
       "lines": 35,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/repair127/CanonicalWholeNegativeBoundaryCI127RepairCandidateManifest.json"
       }
     },
@@ -2054,7 +2603,7 @@
       "sha256": "d9f16234c1fb72cd33473e3c9d909e75942fce3d3a6adb80a2a06d97b941649a",
       "lines": 47,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/repair129/CI129PositiveFiberRepairsCandidateManifest.json"
       }
     },
@@ -2063,7 +2612,7 @@
       "sha256": "7a40c275adc4e624e6def928db5794efdf06e8366ded8617d9ebc3c0e1f23110",
       "lines": 55,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/repair129/CI129PositiveFiberRepairsReviewedManifest.json"
       }
     },
@@ -2081,7 +2630,7 @@
       "sha256": "c6cfbd47ec0a8dc71ea24dfa26e3d2b38aeb6eb7418aaa65b7fb4cfeec4e5a1a",
       "lines": 35,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/repair129/EndpointFiberInterpolation.diff"
       }
     },
@@ -2090,7 +2639,7 @@
       "sha256": "d71d32b2d6c20315921ee97c1170f8bc418471942adbac9c57eeddf7039d74db",
       "lines": 209,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/repair129/EndpointFiberInterpolation.lean"
       }
     },
@@ -2108,7 +2657,7 @@
       "sha256": "effbd0f642068f939d36dd0ab3a9125960efeb6340b6f737fa1836c2d6587197",
       "lines": 29,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/repair129/PositiveFiberClosedGeometry.diff"
       }
     },
@@ -2117,8 +2666,143 @@
       "sha256": "b55468080818cc2ec0ea2c872121541a0d7a74981fd30bd70feadbf78f4d005b",
       "lines": 132,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/positive/repair129/PositiveFiberClosedGeometry.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair130/CI130EndpointFiberRepairCandidateManifest.json",
+      "sha256": "ad9daa4dbe1e439ba222ed256bfdcc7dc58a053b4ad984b624ebd4f3959e2aa9",
+      "lines": 36,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/repair130/CI130EndpointFiberRepairCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair130/CI130EndpointFiberRepairReviewedManifest.json",
+      "sha256": "e01fb2b9692e5a20e7bd78a16c75552a0c774223f29511eaa31bf224d5b5cdc0",
+      "lines": 23,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/repair130/CI130EndpointFiberRepairReviewedManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair130/EndpointFiberInterpolation.base.lean.txt",
+      "sha256": "d71d32b2d6c20315921ee97c1170f8bc418471942adbac9c57eeddf7039d74db",
+      "lines": 209,
+      "stored_at": {
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/repair129/EndpointFiberInterpolation.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair130/EndpointFiberInterpolation.diff",
+      "sha256": "761294f525164b9fa1ab15d555099df678c3757f8ed728c81d137acd55f0939e",
+      "lines": 11,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/repair130/EndpointFiberInterpolation.diff"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair130/EndpointFiberInterpolation.lean",
+      "sha256": "9ea8fc32601e7718bbb9775a77ba2b9f5d64bf5b61ac16058b80b20066fcab57",
+      "lines": 209,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/repair130/EndpointFiberInterpolation.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair131/CI131EndpointFiberPullbackRepairCandidateManifest.json",
+      "sha256": "89eaa0b33c0d8c80c8a7ef3abad849abe2655a193c9d02f2102439e3e317983f",
+      "lines": 51,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/repair131/CI131EndpointFiberPullbackRepairCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair131/CI131EndpointFiberPullbackRepairReviewedManifest.json",
+      "sha256": "41d895f8e69f2aeddfb4e9764ec0a25fbe7554617b18ee5ba29711c8bb384dca",
+      "lines": 20,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/repair131/CI131EndpointFiberPullbackRepairReviewedManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair131/EndpointFiberPullbackAssembly.base.lean.txt",
+      "sha256": "66d18ed04d24aa279a44e52949a887adf1091e83d84e1852c06a98266a88a1c3",
+      "lines": 166,
+      "stored_at": {
+        "commit": "20854f91f48a59f7ba5f6f0ab592a0543c442141",
+        "path": "drafts/N04Coordinates-recovery-20261112/root/formatting-positive-group20/EndpointFiberPullbackAssembly.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair131/EndpointFiberPullbackAssembly.diff",
+      "sha256": "cdebfca08f109c9a63086e16dd447284a69299a582f3681392d556498a3f45d0",
+      "lines": 20,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/repair131/EndpointFiberPullbackAssembly.diff"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair131/EndpointFiberPullbackAssembly.lean",
+      "sha256": "0ef7574f9f3a53e87e5633058df582070b6ba8fd36c29fac18c026f13fccb2d5",
+      "lines": 166,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/repair131/EndpointFiberPullbackAssembly.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair132/WholeComponentTransportFactory.base.lean.txt",
+      "sha256": "ec4fda0b24556f2fd47782e74d3dbdcf0471f07c6d7a6ca627cc8380cda36362",
+      "lines": 102,
+      "stored_at": {
+        "commit": "20854f91f48a59f7ba5f6f0ab592a0543c442141",
+        "path": "drafts/N04Coordinates-recovery-20261112/root/formatting-positive-group20/WholeComponentTransportFactory.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair132/WholeComponentTransportFactory.diff",
+      "sha256": "5946b33068b544214ea1f3b2d476d77358c0fe77dce17eca5e54825a5bf88091",
+      "lines": 10,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/repair132/WholeComponentTransportFactory.diff"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair132/WholeComponentTransportFactory.lean",
+      "sha256": "715e0bd2a1052f9d7855dab883bfaafd914218d05d34044a70a293218871bd89",
+      "lines": 103,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/repair132/WholeComponentTransportFactory.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair132/WholeComponentTransportFactoryCI132RepairCandidateManifest.json",
+      "sha256": "1501c1d331c17437b9718d29d516b30d31f08d35761f930d85c7e9a6b29103c4",
+      "lines": 41,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/repair132/WholeComponentTransportFactoryCI132RepairCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair132/WholeComponentTransportFactoryCI132RepairReviewedManifest.json",
+      "sha256": "13327f892c9b094c8078db5b834e8a50153e6b3428bcba964b4c448914451f3c",
+      "lines": 21,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/repair132/WholeComponentTransportFactoryCI132RepairReviewedManifest.json"
       }
     },
     {
@@ -2333,8 +3017,44 @@
       "sha256": "91742a0b3438c76c114531d72d8e1835ffea7b6a16be775c4e87b2d14af29f01",
       "lines": 49,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/compatibility/positive-material-symmetry/PositiveMaterialSymmetryReviewedManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/whole-material-angle/WholeComponentMaterialTransport.base.lean.txt",
+      "sha256": "37ee3f5e08d4c6a647e7d81fda0364ed4b89ee806894e3886e7c9f581474ad3b",
+      "lines": 139,
+      "stored_at": {
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/WholeComponentMaterialTransport.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/whole-material-angle/WholeComponentMaterialTransport.diff",
+      "sha256": "f31c25c63789e49b650a99f201b166b9eeeb4e9f88495e411fc4ddb50e1e9eca",
+      "lines": 10,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/compatibility/whole-material-angle/WholeComponentMaterialTransport.diff"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/whole-material-angle/WholeComponentMaterialTransport.lean",
+      "sha256": "86c5ec4854e82ad34298dc6ba236a019a0b75232f230ef8ea09af4bc93fcf61b",
+      "lines": 140,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/compatibility/whole-material-angle/WholeComponentMaterialTransport.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/whole-material-angle/WholeComponentMaterialTransportAliasCandidateManifest.json",
+      "sha256": "90f8c3eecabeb4a1e1b9208d25ae43f33d7f4c7bac7c9ac7b790db3efb4fbfe2",
+      "lines": 49,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/compatibility/whole-material-angle/WholeComponentMaterialTransportAliasCandidateManifest.json"
       }
     },
     {
@@ -2360,7 +3080,7 @@
       "sha256": "a6ed8815ca40302c184f0a714ad90d0cb929079b9263b6fad8e425601f7cf7c3",
       "lines": 71,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/CanonicalPositiveAmbientSource.lean"
       }
     },
@@ -2369,7 +3089,7 @@
       "sha256": "1bd673e9aa236939b1309048b56292a6efe7e738137f29a14ad70d13bbb6ed48",
       "lines": 38,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/CanonicalPositiveAmbientSourceCandidateManifest.json"
       }
     },
@@ -2378,7 +3098,7 @@
       "sha256": "93a0da6d15845190cf46687e4fa834fae0b1a7fa12ee89726a9b93db94958390",
       "lines": 24,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/CanonicalPositiveAmbientSourceReviewedManifest.json"
       }
     },
@@ -2387,7 +3107,7 @@
       "sha256": "3e1c0d8569ff87bd34f422ae8766de5a06e67a893bf530579a9f34d73d78f8f4",
       "lines": 130,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/CanonicalPositiveMaterialTransport.lean"
       }
     },
@@ -2396,7 +3116,7 @@
       "sha256": "282d7bdc630fb9911cc6b3229b8556d8e22ca8d64b54b00859f60bcb738208d9",
       "lines": 56,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/CanonicalPositiveMaterialTransportCandidateManifest.json"
       }
     },
@@ -2405,7 +3125,7 @@
       "sha256": "9915cc13f70af034cc86917c36ba0d09df6bb6ec9332836248c2ca93abd1a0a6",
       "lines": 60,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/CanonicalPositiveMaterialTransportReviewedManifest.json"
       }
     },
@@ -2434,6 +3154,33 @@
       "stored_at": {
         "commit": "20854f91f48a59f7ba5f6f0ab592a0543c442141",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/EndpointDistanceMaterialTransportCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/IntervalCubicOpenGermDivision.lean",
+      "sha256": "f8ad97fd89a8ba208543fb93da7ac180b8398e9ff5740484856c544bacc61736",
+      "lines": 56,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/IntervalCubicOpenGermDivision.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/IntervalCubicOpenGermDivisionCandidateManifest.json",
+      "sha256": "3dcf34311621f020e933cbee7bd2516fe4ebc980d48a243d944909395d9a7a2b",
+      "lines": 36,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/IntervalCubicOpenGermDivisionCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/IntervalCubicOpenGermDivisionReviewedManifest.json",
+      "sha256": "d3bda50a576bbde047394e93f4eb5676a9e775a6bca7bcbdbc3816578f2c7dc4",
+      "lines": 20,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/IntervalCubicOpenGermDivisionReviewedManifest.json"
       }
     },
     {
@@ -2491,6 +3238,15 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialOneSidedEndpointComparison.lean",
+      "sha256": "5c502ee08fdb1f063bc9b39badcf31647b0042373cccba4878059a97da4d513b",
+      "lines": 100,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/MaterialOneSidedEndpointComparison.lean"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MorseOpticalComponentLower.lean",
       "sha256": "c98c9c6a8b5e20b267cbfe146be91a53c8e8c77161429d350a9cd91b8ffd980e",
       "lines": 180,
@@ -2513,7 +3269,7 @@
       "sha256": "180d86ad8b836b0457850a7ea2ff7f22010916a96114c6e4d84f7429a2540bfc",
       "lines": 104,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/N01ComponentMaterialWidth.before_inv_pow.lean.txt"
       }
     },
@@ -2617,6 +3373,87 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentCoefficientSampleBounds.lean",
+      "sha256": "a7cb8e55359ecd63e7b4bd1a9adac5e88102e4198bc0f2c21d72a15c14bdeca4",
+      "lines": 61,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/PositiveComponentCoefficientSampleBounds.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentCoefficientSampleBoundsCandidateManifest.json",
+      "sha256": "6e4ca2434890a4b8415e75ae0efb11148e84182dde1da3ec3e3cf26a66bd297e",
+      "lines": 32,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/PositiveComponentCoefficientSampleBoundsCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentCoefficientSampleBoundsReviewedManifest.json",
+      "sha256": "d6474fa36b0b777d6b83b58549820d07e6eadc96abf2cb7ae8af6ce72c40278e",
+      "lines": 20,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/PositiveComponentCoefficientSampleBoundsReviewedManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentMaterialCell.lean",
+      "sha256": "5f21c6b32b0c9241fb560d286690cb93199e0365a9d1314af1c8daab943f4368",
+      "lines": 131,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/PositiveComponentMaterialCell.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentMaterialCellCandidateManifest.json",
+      "sha256": "d1963f2bda9c8ecd5cfd26939a036a3b88ef69e137b30034c9f20a1b86be763f",
+      "lines": 87,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/PositiveComponentMaterialCellCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentMaterialCellReviewedManifest.json",
+      "sha256": "c34352775e14878dc03aaddeaf4ff5f9ae1f3e17f3afd6d91df4108f8b2bf230",
+      "lines": 50,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/PositiveComponentMaterialCellReviewedManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentMaterialDecay.lean",
+      "sha256": "2748a308d7dc5c5e11dea19aae1cde21dc4f30538abd971e3162195ca01b9ea7",
+      "lines": 89,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/PositiveComponentMaterialDecay.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentMaterialDecayCandidateManifest.json",
+      "sha256": "0c28dd5f5bb4b79c8c93bd092856a3d27610142ea225bc1382dfcbd496a4d67e",
+      "lines": 29,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/PositiveComponentMaterialDecayCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentMaterialDecayReviewedManifest.json",
+      "sha256": "7c6c82c1af961eeeafe0580d4c690d949a39ea4a61d1c5e17f3001473264caa9",
+      "lines": 20,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/PositiveComponentMaterialDecayReviewedManifest.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveFiberMaterialTransport.lean",
       "sha256": "5db4a4d45117041126dd5ca0145e5dd6491cd45ab0ce2284e821fda20cec2259",
       "lines": 129,
@@ -2684,7 +3521,7 @@
       "sha256": "33ae5d9e2855607c18f50e1d95bb6cacd39b216c1b156b80b36c451626055e3e",
       "lines": 102,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/WholeComponentCollarInvariance.lean"
       }
     },
@@ -2693,7 +3530,7 @@
       "sha256": "8f26f28dbc166f6763844fddbe1b6cee059be042732f60a9a087079640828e56",
       "lines": 30,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/WholeComponentCollarInvarianceCandidateManifest.json"
       }
     },
@@ -2702,7 +3539,7 @@
       "sha256": "2dfff655c5575a76da5387ca4969f9ccb8ca1c92556627ece0346e0e6a0acf2b",
       "lines": 102,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/WholeComponentMaterialRatios.lean"
       }
     },
@@ -2711,7 +3548,7 @@
       "sha256": "8477a51502ea2cbc18b3017fa4150aaf697e575ebde691a900eb596f5a886eca",
       "lines": 30,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/WholeComponentMaterialRatiosCandidateManifest.json"
       }
     },
@@ -2720,7 +3557,7 @@
       "sha256": "37ee3f5e08d4c6a647e7d81fda0364ed4b89ee806894e3886e7c9f581474ad3b",
       "lines": 139,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/WholeComponentMaterialTransport.lean"
       }
     },
@@ -2729,7 +3566,7 @@
       "sha256": "1ea9840ce1d3ad8fd3c25b23e9ef9bdaa70677f750f49708056c40033395027a",
       "lines": 60,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/WholeComponentMaterialTransportCandidateManifest.json"
       }
     },
@@ -2738,7 +3575,7 @@
       "sha256": "93d82aaf83c5dade0b880e7a342cf0cc2f981ca0429e119ba91ffbbbacc6d645",
       "lines": 24,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/WholeComponentMaterialTransportReviewedManifest.json"
       }
     },
@@ -2783,7 +3620,7 @@
       "sha256": "4919326db07a6907ce97fa0411d65da4f64f7e8234bf0442c98e9ab099cc19e1",
       "lines": 61,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/CI129AuditOwnedRepairsIndependentReview.json"
       }
     },
@@ -2792,7 +3629,7 @@
       "sha256": "ca7e11b745f141ac1496d9a401df607a296fd6194a60bad8d4977382c121e676",
       "lines": 63,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/CI129PositiveFiberRepairsIndependentReview.json"
       }
     },
@@ -2810,8 +3647,17 @@
       "sha256": "c67960b1f1f40ae8ba2eb2a0d003352cbbd3eca72afe6049cd11aac062aa6a7c",
       "lines": 64,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/CanonicalWholePositiveReferenceJetsIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/EndpointFiberInterpolationCI130IndependentReview.json",
+      "sha256": "f89e3311c1c30534d2761989b466b371a1cf0f25cead41b4654469e730305c77",
+      "lines": 32,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/EndpointFiberInterpolationCI130IndependentReview.json"
       }
     },
     {
@@ -2824,12 +3670,48 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/EndpointFiberPullbackAssemblyCI131IndependentReview.json",
+      "sha256": "b2b5a816facb38813120cdbc03fdad55fbf26b74e662c320d1105a96a6d4e5d3",
+      "lines": 30,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/EndpointFiberPullbackAssemblyCI131IndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/EndpointFiberPullbackPolynomialBoolIndependentReview.json",
+      "sha256": "ebef8a5e66cd550784ffae19dc3749432816bc00729d795fabe28228e682b26b",
+      "lines": 29,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/EndpointFiberPullbackPolynomialBoolIndependentReview.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/EndpointPullbackAndWholePolynomialReconstructionIndependentReview.json",
       "sha256": "99cf21c95fd01905c16561f01617c11a0e67e104bb7c180ddc58984c3461203d",
       "lines": 66,
       "stored_at": {
         "commit": "20854f91f48a59f7ba5f6f0ab592a0543c442141",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/EndpointPullbackAndWholePolynomialReconstructionIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/EndpointTransportGeometryCI130IndependentReview.json",
+      "sha256": "5f9cb7206e2bf6c3214f0115f615f37462712abd8a59c8fd506db2842eacb0cd",
+      "lines": 32,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/EndpointTransportGeometryCI130IndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/EndpointTransportGeometryCI131IndependentReview.json",
+      "sha256": "1e2717f934f1ae4db925b0572b89d626b411d4baab00c81bee97d40564ac5622",
+      "lines": 28,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/EndpointTransportGeometryCI131IndependentReview.json"
       }
     },
     {
@@ -2873,8 +3755,26 @@
       "sha256": "37df2dbcb50b3cf25c060a298bd9e42ef5dff4817041b7227c8357203ac8cb7c",
       "lines": 72,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/LogPolynomialEnvelopeCI129IndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/MaterialAndN01CoefficientFlatExtensionIndependentReview.json",
+      "sha256": "1d84f5f234fd12aa03979ae93d8e3c6f3e76123c8d55523be97abeb4bb43dfb7",
+      "lines": 113,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/MaterialAndN01CoefficientFlatExtensionIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/N01CompactHeightStateTestsIndependentReview.json",
+      "sha256": "5d37fe2a7379751f5433676a0b89504e549d665a08b93c0ea5c970e6fe0cef8b",
+      "lines": 90,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/N01CompactHeightStateTestsIndependentReview.json"
       }
     },
     {
@@ -2882,8 +3782,26 @@
       "sha256": "72c766bc6811766418c3afa0d00111fe9a6a3219ef59ec436cfbcdf820e7acc7",
       "lines": 29,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/N01ProfileDirectionOpticalBoundIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/OneSidedEndpointHeightCI130IndependentReview.json",
+      "sha256": "d6b2d2bc2b6dbfe57bacad757951cf2645946b736f657f80ee26b7093af82294",
+      "lines": 32,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/OneSidedEndpointHeightCI130IndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/OneSidedEndpointHeightCI131IndependentReview.json",
+      "sha256": "968197bc1120ddba611820c8b5bbeeaecf518cae5d1d301f046c66f3f0492f06",
+      "lines": 40,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/OneSidedEndpointHeightCI131IndependentReview.json"
       }
     },
     {
@@ -2900,7 +3818,7 @@
       "sha256": "f6efbe09543295c809209d86fddfe8ab9afb690ff87ee772d8e5bf284ac4a3cb",
       "lines": 95,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/PositiveCubicDifferenceIndependentReview.json"
       }
     },
@@ -2909,7 +3827,7 @@
       "sha256": "61798a306d4351b137f68493f12d62b1c25d9323b9b0ffdcbbbc3182583f33bd",
       "lines": 109,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/PositiveGeometryTerminalWhitespaceIndependentReview.json"
       }
     },
@@ -2918,7 +3836,7 @@
       "sha256": "285fc05fe228c1c163056f3c9228e87e3bdb42b166bcc48515a5034aa46a827a",
       "lines": 44,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/PositiveMaterialNormalizationBufferIndependentReview.json"
       }
     },
@@ -2950,6 +3868,15 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/ReferenceCompactCosineNormalTestIndependentReview.json",
+      "sha256": "7b18ed3794552a95ace16b47dde7dfccc90b3aca57f48a57531c311e24d3a5b5",
+      "lines": 89,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/ReferenceCompactCosineNormalTestIndependentReview.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/RelativePrincipalCoefficientsIndependentReview.json",
       "sha256": "e0ce39e7fc7fb4c5ad174eab3fed35ab9c01cf07750f56248a9224ac61e8758d",
       "lines": 53,
@@ -2977,6 +3904,42 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholeCanonicalAtlasCurrentPartitionIndependentReview.json",
+      "sha256": "81806af86fdd5851407208b6a2a26eb1b36b95244e4303951ced47fc50edd269",
+      "lines": 76,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/WholeCanonicalAtlasCurrentPartitionIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholeComponentTransportFactoryCI132IndependentReview.json",
+      "sha256": "d9dd355334ddef57a06bacb82254b3508eab114cdd04e398aa5a1cd15b07e1b6",
+      "lines": 40,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/WholeComponentTransportFactoryCI132IndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholeComponentTransportPolynomialAliasIndependentReview.json",
+      "sha256": "943b90eeb50c2b5019c70aacc4d5619de98b379100b65112aa7dfe4c76ef79e3",
+      "lines": 40,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/WholeComponentTransportPolynomialAliasIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholePositiveAmbientBufferIndependentReview.json",
+      "sha256": "d5566a82771eea5239265466617f9fa99ba2633684868b0461f5431485005049",
+      "lines": 26,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/WholePositiveAmbientBufferIndependentReview.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholePositiveAmbientRadialIdentityIndependentReview.json",
       "sha256": "6058db7f8a0b8be6195ed8e1ceaee4474ec917488efe5aecbdc028d0b49b09c8",
       "lines": 70,
@@ -2990,7 +3953,7 @@
       "sha256": "46c7ec1a5d1914f64286015d434a7808ff6b5f90eb362ff1c7b5008cbd8c1a0e",
       "lines": 58,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/WholePositivePrincipalExtensionIndependentReview.json"
       }
     },
@@ -2999,7 +3962,7 @@
       "sha256": "b7f109640cfde1e70c2935eb40db2c46436d511fb86907f5963287d0980c0a80",
       "lines": 76,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/quantitative/recovery/reviews/WholePositivePrincipalJetMatchingIndependentReview.json"
       }
     },
@@ -3260,7 +4223,7 @@
       "sha256": "4f7f2b3cf5b438c6f0b64386811abc726299be76a32450d145cd766b7123f5cb",
       "lines": 88,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/root/compatibility/normalization-explicit-reference/PositiveMaterialNormalizationBuffer.lean"
       }
     },
@@ -3269,8 +4232,53 @@
       "sha256": "fedb790833f254deed18d5dc0c64ca3f6567e4a72b247baac67cb09b42b166cb",
       "lines": 15,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/root/compatibility/normalization-explicit-reference/PositiveMaterialNormalizationBufferCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/whole-atlas-let-intros/WholeCanonicalAtlasChartGeometry.diff",
+      "sha256": "71ab0abd2680163b5f41c2fbbc1ff3f4a1c9b7ceb569b381875a75eff815d581",
+      "lines": 18,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/compatibility/whole-atlas-let-intros/WholeCanonicalAtlasChartGeometry.diff"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/whole-atlas-let-intros/WholeCanonicalAtlasChartGeometry.lean",
+      "sha256": "9d32251574e399a595c1de27c16c19ade45e73eb863a9d03f7c21866038c9794",
+      "lines": 132,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/compatibility/whole-atlas-let-intros/WholeCanonicalAtlasChartGeometry.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/whole-atlas-let-intros/WholeCanonicalAtlasDomainFields.diff",
+      "sha256": "61499bf453a88dbd2738c01525d4c5a841cd6ad38a2877968fbaa23ba388a380",
+      "lines": 18,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/compatibility/whole-atlas-let-intros/WholeCanonicalAtlasDomainFields.diff"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/whole-atlas-let-intros/WholeCanonicalAtlasDomainFields.lean",
+      "sha256": "195192190b40f5a5e4a34641bb748d516b4aed354b6004e982596e5c006f245e",
+      "lines": 133,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/compatibility/whole-atlas-let-intros/WholeCanonicalAtlasDomainFields.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/whole-atlas-let-intros/WholeCanonicalLetIntroCompatibilityCandidateManifest.json",
+      "sha256": "e4506a5252fc6c9f9a4de23fee357a7070610fae8f1d416d18cc4385aa1bd7e0",
+      "lines": 32,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/compatibility/whole-atlas-let-intros/WholeCanonicalLetIntroCompatibilityCandidateManifest.json"
       }
     },
     {
@@ -3373,6 +4381,24 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/formatting-principal-group/WholePositivePrincipalJetMatching.lean",
+      "sha256": "d9cd7c8a808e169bf0e60b8e9e5f7f5889a852313519019f0c24c07d7d470dac",
+      "lines": 153,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/formatting-principal-group/WholePositivePrincipalJetMatching.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/formatting-principal-group/WholePositivePrincipalJetMatchingTerminalWhitespaceCandidateManifest.json",
+      "sha256": "fdc02ac885c63924637721731233bc302c3bbccc1642cf8b6552cecf2d3aeeec",
+      "lines": 13,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/formatting-principal-group/WholePositivePrincipalJetMatchingTerminalWhitespaceCandidateManifest.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/formatting124/CI124TerminalWhitespaceCandidateManifest.json",
       "sha256": "15a0a521f93c552b9b6a1b5f97fd3b887fa2de156f6b418c4038af19a36ad95a",
       "lines": 136,
@@ -3442,6 +4468,15 @@
       "stored_at": {
         "commit": "20854f91f48a59f7ba5f6f0ab592a0543c442141",
         "path": "drafts/N04Coordinates-recovery-20261112/root/formatting124/RawEndpointAngularInterpolation.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualWholeAtlasTransmissionCandidateManifest.json",
+      "sha256": "2e98901f736140d8fdfe1c4a1951bc3d12982ad7dcdfda3737aae66864a5dd9a",
+      "lines": 21,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/ActualWholeAtlasTransmissionCandidateManifest.json"
       }
     },
     {
@@ -3571,11 +4606,20 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04ActualAtlasTransmission.lean",
+      "sha256": "f6f2745df97a6516eefabe160c0a0cfacac048e50bf19ef4a328cdee9a2689e8",
+      "lines": 70,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/N04ActualAtlasTransmission.lean"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/PositiveMaterialNormalizationBuffer.lean",
       "sha256": "880130c49e5e78174920abe82334219ee2f2a7c7e8f12adb17f8b07c87fcc9d0",
       "lines": 88,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/PositiveMaterialNormalizationBuffer.lean"
       }
     },
@@ -3584,7 +4628,7 @@
       "sha256": "4b306beca239c8fe0a43aaa400326807345db48a668c70f7daa291040311c2c0",
       "lines": 22,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/PositiveMaterialNormalizationBufferCandidateManifest.json"
       }
     },
@@ -3593,8 +4637,44 @@
       "sha256": "1123a04d8c8fe1651a26e87ee11f93dd0c3fcb35349932cfb6c23fec6723be17",
       "lines": 130,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholeCanonicalAtlasChartGeometry.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasCurrentPartition.lean",
+      "sha256": "96c133e1ee0aac5fdcc380da17fd6733f0e956249fd93076335e30836799d085",
+      "lines": 132,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholeCanonicalAtlasCurrentPartition.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasCurrentPartitionCandidateManifest.json",
+      "sha256": "47e491c34676852ad6328fc94d5774ba5b94f33401e5023ad002663103179462",
+      "lines": 11,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholeCanonicalAtlasCurrentPartitionCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasCutOperator.lean",
+      "sha256": "ec97d0b3260b7266b167fa4c0bf316dd74e899174a66251ad987a043ba6b7c43",
+      "lines": 68,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholeCanonicalAtlasCutOperator.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasCuts.lean",
+      "sha256": "7338f736192a450f99316748d9bdf7beb6eecdb631bdbdeeac6f27eb37746d0c",
+      "lines": 68,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholeCanonicalAtlasCuts.lean"
       }
     },
     {
@@ -3602,7 +4682,7 @@
       "sha256": "41a32a066758dcfb8fe7da1ab9e73bee2f7ad451fa1f7057aee40c01092905d6",
       "lines": 165,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholeCanonicalAtlasData.lean"
       }
     },
@@ -3611,8 +4691,89 @@
       "sha256": "bef75d95c8aaaf091d1f5ec8e7999df46889a19291271032a3a599acb111228b",
       "lines": 18,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholeCanonicalAtlasDataCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasDomainFields.lean",
+      "sha256": "b2964742f66e9aca18762e5cd4bbadf568144e984b072bc9bf1a28229232e0cb",
+      "lines": 131,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholeCanonicalAtlasDomainFields.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasDomainFieldsCandidateManifest.json",
+      "sha256": "be6f0c92af3d3f66bd1b99a4456506421609baf765f7c13f5ad06594dcc9c31b",
+      "lines": 11,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholeCanonicalAtlasDomainFieldsCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasGeometry.lean",
+      "sha256": "df7b7161ca3c5af9d5f798ffe2fd6f3ad5bc288597c208d68523dea5455818fc",
+      "lines": 87,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholeCanonicalAtlasGeometry.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasNormalization.lean",
+      "sha256": "5f216c3ff83f16ab1bb7b9870ac4f6f1c6bb3e61f9ef82276575888e4a85ad48",
+      "lines": 83,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholeCanonicalAtlasNormalization.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasNormalizationCandidateManifest.json",
+      "sha256": "84179afa7f382ce63d4d70315b01618d4b3811ce8c47429b4621f236d53562c6",
+      "lines": 11,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholeCanonicalAtlasNormalizationCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasOperator.lean",
+      "sha256": "d87df6c62654e5a9a426ba4d318291597cef3d6df3435ae17df91c47a2cb0990",
+      "lines": 112,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholeCanonicalAtlasOperator.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasPrincipalDensity.lean",
+      "sha256": "dd3c83318f103146413d018b7033e6d56c15b78e4601eae93333f6200bc93c6a",
+      "lines": 74,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholeCanonicalAtlasPrincipalDensity.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasReferencePartition.lean",
+      "sha256": "a228efd750b6144dc83f5848e1b081fbfff531ff42400ff2ffaecb13b9252f71",
+      "lines": 87,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholeCanonicalAtlasReferencePartition.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalCutOperatorCandidateManifest.json",
+      "sha256": "a484bc57f299bee1ad3fe8407b8009e7399c3edf54de98aa0c2ac70a38912de1",
+      "lines": 28,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholeCanonicalCutOperatorCandidateManifest.json"
       }
     },
     {
@@ -3620,8 +4781,17 @@
       "sha256": "aa3c82323ff1c987911aba28d1b5c9da76959f6875974bc9f36bb10431eef275",
       "lines": 26,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholeCanonicalLocalGeometryCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalReferenceAndGeometryCandidateManifest.json",
+      "sha256": "543b96440d294424c6f80ea822c5683d08c26030844add7af2ee96698de22507",
+      "lines": 23,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholeCanonicalReferenceAndGeometryCandidateManifest.json"
       }
     },
     {
@@ -3629,7 +4799,7 @@
       "sha256": "258e06700f5f0e84598e64fec5e4dee4a85fbbbc0a0828afa42e5d8d7b6c6003",
       "lines": 54,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed/WholePositiveNormalizationGeometry.lean"
       }
     },
@@ -3638,7 +4808,7 @@
       "sha256": "c40eda9978cefdec22a92ab35a1981cea95323ee73c7f45f4ba35afe47561366",
       "lines": 54,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed-reviews/ActualNegativeRelativePrincipalIndependentReview.json"
       }
     },
@@ -3665,7 +4835,7 @@
       "sha256": "f45d68a40e5a79570a245f05ac677787d14f75253e72b2b34e8ba10d45ba7141",
       "lines": 23,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed-reviews/CanonicalNegativeRelativeBoundaryJetsIndependentReview.json"
       }
     },
@@ -3674,7 +4844,7 @@
       "sha256": "a2bffaed3057244c1f258ef27eb0a9a02d3a0a6a92fdae04cdede243de60d448",
       "lines": 24,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/root/reconstructed-reviews/CanonicalPositiveAmbientSourceIndependentReview.json"
       }
     },
@@ -3980,7 +5150,7 @@
       "sha256": "589a935dfaf609c96339d087f1e8dc89e15d540759021c14d8a7bbb52274d06b",
       "lines": 22,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/root/repair127/CanonicalWholeNegativeBoundaryCI127IndependentReview.json"
       }
     },
@@ -3989,7 +5159,7 @@
       "sha256": "ab26484b3ff2796ae46722e02c577f1ad03e9b8ef1dba067135f28f033671367",
       "lines": 13,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/root/repair127/CanonicalWholeNegativeBoundaryCI127NormalizedStageManifest.json"
       }
     },
@@ -3998,7 +5168,7 @@
       "sha256": "a7919d63174f8d0e599a08106f52e8d434d507de651a67f877b6ea4922701f5d",
       "lines": 45,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/root/repair129/CI129PeerRepairsRootReview.json"
       }
     },
@@ -4016,7 +5186,7 @@
       "sha256": "d2575875f9ee7cd958dec18344c5a1619afae082c10b8d6075914d8ad88e7568",
       "lines": 22,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/root/repair129/LogPolynomialEnvelope.diff"
       }
     },
@@ -4025,7 +5195,7 @@
       "sha256": "ef34ada83b37b33b757b566d278be11ed1680acd8b6b8f40b47ab2de6d3cec42",
       "lines": 126,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/root/repair129/LogPolynomialEnvelope.lean"
       }
     },
@@ -4034,10 +5204,109 @@
       "sha256": "8269555d23e0628dd2414d9b1a0198f6c20d45f3261c5d3881d27d0e2ec57ea1",
       "lines": 22,
       "stored_at": {
-        "snapshot": 6,
+        "commit": "7e88cec8c751fe3c6f8421a39e4d2525a6e403b6",
         "path": "drafts/N04Coordinates-recovery-20261112/root/repair129/LogPolynomialEnvelopeCI129RepairCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair130/CI130PeerRepairsRootReview.json",
+      "sha256": "b9048ef1b6467bf5029d00b7c237283c60f06c47155199f2afc596275e776a4f",
+      "lines": 28,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/repair130/CI130PeerRepairsRootReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair130/EndpointTransportGeometry.diff",
+      "sha256": "550ac8b3da63c9bc8e99cb90cee64fe4e0800aca7a71eda4c13185e3a3f8017b",
+      "lines": 11,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/repair130/EndpointTransportGeometry.diff"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair130/EndpointTransportGeometry.lean",
+      "sha256": "8a2aca9005a7ddf9d08b920b6eb812be1cdb0fff7090b77b997c15c51ab7f930",
+      "lines": 112,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/repair130/EndpointTransportGeometry.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair130/EndpointTransportGeometry.lean.base.txt",
+      "sha256": "cdd4d3a6a4ab757e7f2dfff3d0ba1a7b1653aff00fdff4d74e44da10ab49fb97",
+      "lines": 112,
+      "stored_at": {
+        "commit": "20854f91f48a59f7ba5f6f0ab592a0543c442141",
+        "path": "drafts/N04Coordinates-recovery-20261112/positive/reconstructed/EndpointTransportGeometry.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair130/EndpointTransportGeometryCI130RepairCandidateManifest.json",
+      "sha256": "78e1b70ebf518b241a1c7308a2039ffed5f651ed57d0744c6b26a74aaea0f300",
+      "lines": 18,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/repair130/EndpointTransportGeometryCI130RepairCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair131/CI131PeerRepairsRootReview.json",
+      "sha256": "1340d5397c28af63b81918e9fd4960054562d2f7937ba62bad31edf951942997",
+      "lines": 30,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/repair131/CI131PeerRepairsRootReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair131/EndpointTransportGeometry.diff",
+      "sha256": "c81e86dccec8d1523b404f1dd37107086349421f5ef15ff333bd2e4cac2386c3",
+      "lines": 10,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/repair131/EndpointTransportGeometry.diff"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair131/EndpointTransportGeometry.lean",
+      "sha256": "d636a5279512477c862d9d2ec3f5e4f72ff1ae5db55040e0fb45de45fcbcae82",
+      "lines": 113,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/repair131/EndpointTransportGeometry.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair131/EndpointTransportGeometry.lean.base.txt",
+      "sha256": "8a2aca9005a7ddf9d08b920b6eb812be1cdb0fff7090b77b997c15c51ab7f930",
+      "lines": 112,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/repair130/EndpointTransportGeometry.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair131/EndpointTransportGeometryCI131RepairCandidateManifest.json",
+      "sha256": "ef239329f5832183123c0ba8d17b3f17cca1f823f052111c7f9ac765ad989f3b",
+      "lines": 18,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/repair131/EndpointTransportGeometryCI131RepairCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair132/WholeComponentTransportFactoryNormalizedManifest.json",
+      "sha256": "d17e5fd0328eec4b0d345dfe895ec7d11aab425542478810f272e56e794352b6",
+      "lines": 11,
+      "stored_at": {
+        "snapshot": 7,
+        "path": "drafts/N04Coordinates-recovery-20261112/root/repair132/WholeComponentTransportFactoryNormalizedManifest.json"
       }
     }
   ],
-  "status": "UNCOMPILED; historical source versions remain in the named earlier Git commits; no activation or completion claim."
+  "status": "UNCOMPILED; source preservation only. Prior exact versions remain in earlier backup commits. No CI activation or completion claim."
 }

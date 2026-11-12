@@ -1,0 +1,21 @@
+{
+  "kind": "independently_reviewed_held_source_manifest",
+  "status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair132/WholeComponentTransportFactoryCI132RepairCandidateManifest.json",
+    "sha256": "1501c1d331c17437b9718d29d516b30d31f08d35761f930d85c7e9a6b29103c4"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair132/WholeComponentTransportFactory.lean",
+    "sha256": "715e0bd2a1052f9d7855dab883bfaafd914218d05d34044a70a293218871bd89",
+    "blob": "ccb28306d57f7db5fd0e6b3551415e78ab084ef1",
+    "lines": 103
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholeComponentTransportFactoryCI132IndependentReview.json",
+    "sha256": "d9dd355334ddef57a06bacb82254b3508eab114cdd04e398aa5a1cd15b07e1b6"
+  },
+  "compiled": false,
+  "green_receipt_applies_to_candidate": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

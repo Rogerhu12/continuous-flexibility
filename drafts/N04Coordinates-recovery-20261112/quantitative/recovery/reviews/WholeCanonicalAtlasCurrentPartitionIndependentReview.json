@@ -1,0 +1,76 @@
+{
+  "kind": "independent_static_actual_whole_atlas_current_partition_review",
+  "reviewer": "quantitative_route",
+  "result": "passed; full 132-line source and complete atlas record/precise partition providers checked",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasCurrentPartitionCandidateManifest.json",
+    "sha256": "47e491c34676852ad6328fc94d5774ba5b94f33401e5023ad002663103179462"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasCurrentPartition.lean",
+    "sha256": "96c133e1ee0aac5fdcc380da17fd6733f0e956249fd93076335e30836799d085",
+    "blob": "25d843018ecbe916ac2eb71529d6b8c61cb0ec26",
+    "lines": 132
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasData.lean",
+      "sha256": "41a32a066758dcfb8fe7da1ab9e73bee2f7ad451fa1f7057aee40c01092905d6",
+      "blob": "c6abe2dcedd1974e7ec231275a17f869c0faed3b",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean",
+      "sha256": "91687b630205a380f137dcdb4cb32068d79582e09d17d4a4cd14317e21b9e19f",
+      "blob": "334d3c0c19727465e3afc75f988c79df1b8d7b8a",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+      "sha256": "166d48b590552637d5efedb29ce0b19d5963d02f33e7caebffe44a04b576fdf4",
+      "blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "lines": 142
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bCurrentPartition.lean",
+      "sha256": "4087433cb73325005c6677a09b43531b3f8abc469c95958a5c874d8bbe41a2cf",
+      "blob": "1005399b1097409b64312fd2994c23a7b69e5757",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualDomainGeometry.lean",
+      "sha256": "853eb7d9cc44e1ac4706ea8dc83e39a7a5356d21f5bd0ecd4e864a8ac88ef256",
+      "blob": "4ad5cbd7979d26b7e8f5733d9795df09f5d9ec9d",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualTravelChart.lean",
+      "sha256": "5c7da22817d01115c5837f791ed4ba939d9f097c5ad547cb4882d02e435fb30a",
+      "blob": "a1b60844375f7e23349c24356cd300a76a6fd72e",
+      "lines": 229
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04SignedPieces.lean",
+      "sha256": "9c19e2b88f5ce7b5e93a41aa13575c440677ebc8c20b68808b6ac48809cc8a00",
+      "blob": "cdc180b7d11337446407047fb5f88d9c1b26bd0c",
+      "lines": 220
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04PositiveComponents.lean",
+      "sha256": "5b7a7e28f279116415d8a3a23299294f8e5fc1858187ec00c3ea18a4d04757de",
+      "blob": "0d4de58a9b9ecd9f84e2f01da190847464669cc6",
+      "lines": 194
+    }
+  ],
+  "checks": [
+    "The domain formula is read from the fifth field of the actual negative/positive record equalities, not from a new domain definition. The old negative cutPair indices are e0.symm(inl(j,side)), and the compiled cutPair/domain formulas cancel e0 exactly.",
+    "Negative pieces therefore retain the actual state-dependent travel-half domains. Positive pieces are exactly their whole positive component Ioo interval times the real angular line. F/G/Q, cell, and normalization choices do not modify these domain fields.",
+    "Negative-negative uniqueness reuses the real travel chart MapsTo and existing typed-domain uniqueness. Positive-positive uniqueness uses the actual connected-component disjoint intervals. Cross-sign cases compare derivative D.w at the same physical radial coordinate, yielding a strict-sign contradiction.",
+    "The old typed planar partition is applied to the same D/T/S/C/R/L witness, same state neighborhood and sector. Every old negative half maps to its identical new negative index. Every positive subdivision is contained in its original positive component by the existing closed-subdivision inclusion.",
+    "The exact old null set E is retained; no new radial description of moving cuts is introduced. Existence is transported through the new equivalence, and the independently proved actual-domain uniqueness supplies ExistsUnique in the required orientation.",
+    "All used actual-domain/typed-partition/component providers are present in the two imports closure. No new final-domain hypothesis, new witness, final transport estimate, heartbeat or axiom is introduced."
+  ],
+  "scope": "Actual domain formula, index uniqueness, and planar null-set coverage only; this is not a certificate of all atlas geometry or material estimates.",
+  "compiled": false,
+  "checkout_index_refs_CP_authority_active_plan_or_CI_modified": false
+}

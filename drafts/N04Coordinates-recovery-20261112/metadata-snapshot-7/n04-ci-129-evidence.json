@@ -1,0 +1,26 @@
+{
+  "label": 129,
+  "head": "9f88931ad3308f43d350ba84f4c9b323ced92986",
+  "tree": "07f7446759824fb5ebe2c248f34d387e0344e329",
+  "run": 43190129153,
+  "job": 131087028838,
+  "status": "failure",
+  "run_status": "completed",
+  "completed_at": "2026-11-12T09:20:11Z",
+  "checked_at": "2026-11-12T09:23:28.405895+00:00",
+  "compiled_modules": 3181,
+  "total_modules": 3200,
+  "blueprint": "skipped",
+  "raw_log": "n04-ci-129.log",
+  "raw_sha256": "41971af4286244441018a2d6b09b7b8a0480885ce39e06dbe11d053aec7431e9",
+  "unique_errors": 16,
+  "errors_file": "n04-ci-129-errors.json",
+  "errors_sha256": "6ce12a690fa2911cdd06cb6fce6796b3e92d67a7616cede68c5b561dfb261409",
+  "failing_modules": [
+    "LogPolynomialEnvelope",
+    "PositiveFiberClosedGeometry",
+    "TaylorReferenceIdentity",
+    "EndpointHeightValueBounds",
+    "EndpointFiberInterpolation"
+  ]
+}

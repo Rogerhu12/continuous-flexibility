@@ -1,0 +1,29 @@
+{
+  "kind": "actual_same_material_midpoint_sample_positive_height_decay_candidate",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentMaterialDecay.lean",
+    "sha256": "2748a308d7dc5c5e11dea19aae1cde21dc4f30538abd971e3162195ca01b9ea7",
+    "blob": "08b2a45c190df02f2473786840818c395b9008df",
+    "lines": 89
+  },
+  "dependencies": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentMaterialCellReviewedManifest.json",
+      "sha256": "c34352775e14878dc03aaddeaf4ff5f9ae1f3e17f3afd6d91df4108f8b2bf230"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046"
+    }
+  ],
+  "mathematics": [
+    "Reuses the actual material_height_coefficient_power_bounded theorem, whose H exponent is strictly positive and whose E0 exponent may be any real number.",
+    "Raises the true point/sample H ratio to beta>0, factors gamma=(gamma-beta)+beta, and absorbs the remaining H^(gamma-beta) E0^(R+A beta).",
+    "One actual midpoint cell is selected before all gamma,beta,R, components, states and points. Its original H normalizer comparison and all sample E0 comparisons are retained.",
+    "For every 0<beta<gamma and every real R the actual point H^gamma E0^R is bounded by a constant times H(sample)^beta uniformly over the whole positive component within the core.",
+    "No E0>=1, whole-component common-cell, reverse endpoint-to-sample E0 comparison, material replacement, final primitive estimate or Through03 transfer is assumed."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

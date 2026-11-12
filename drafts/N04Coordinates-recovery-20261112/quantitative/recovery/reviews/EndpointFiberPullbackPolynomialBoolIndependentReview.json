@@ -1,0 +1,29 @@
+{
+  "reviewer": "quantitative_route",
+  "base_commit": "09f1da15a4aeede7cf157c79418779bc25b04149",
+  "diagnostics": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-131-errors.json",
+    "sha256": "05eb8bded8b59c6a90d8160463fcbcaadf901a1d199a0f1dd495e10099f6bd27"
+  },
+  "compiled": false,
+  "checkout_index_refs_CP_authority_active_plan_or_CI_modified": false,
+  "kind": "independent_static_held_confirmed_bool_binder_supersession",
+  "result": "passed; complete 93-line source and exact single binder annotation checked",
+  "status": "HELD_UNCOMPILED; not part of actual CI132 repair",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/pullback-side/EndpointFiberPullbackPolynomialBoolCandidateManifest.json",
+    "sha256": "1116ef4002766ddeda4028dd5fa1335e6f86bdde2ef3cd77879d61187deebb90"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/pullback-side/EndpointFiberPullbackPolynomial.lean",
+    "sha256": "5e46db0f238f963c1ba32f759a190cec6ba31f73166baa53e36bf6db609ab024",
+    "blob": "d6af41f37c273780c8c698257012dcbae91a576c",
+    "lines": 93,
+    "before_blob": "0b55d6c17b6b46f171b6455abec30044baee6a02"
+  },
+  "checks": [
+    "The raw-angular selector is unconstrained before its own conditional, precisely the pattern diagnosed in the actual pullback provider. Explicit Bool matches the true two-endpoint numerical envelope.",
+    "The shared interpolation and angular inverse polynomial providers use the same Bool endpoints; all constants, degrees, M, chosen M_sigma and formula remain unchanged.",
+    "The only difference is the one public binder annotation. All proof bodies, imports, options and remaining source bytes are identical. No claim of a direct CI diagnostic or successful compilation for this held source."
+  ]
+}

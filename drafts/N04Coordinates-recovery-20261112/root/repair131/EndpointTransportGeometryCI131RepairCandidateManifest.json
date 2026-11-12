@@ -1,0 +1,18 @@
+{
+  "kind": "ci131_actual_forward_map_period_rewrite",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "file": "src/ContinuousFlexibility/Analysis/EndpointTransportGeometry.lean",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair131/EndpointTransportGeometry.lean",
+  "sha256": "d636a5279512477c862d9d2ec3f5e4f72ff1ae5db55040e0fb45de45fcbcae82",
+  "before_blob": "5d7f10faccd7d0744b627eb7d9bc552c39aafa92",
+  "after_blob": "77e5e60cba5a0bc8e0336ae99218816d31119f26",
+  "lines": 113,
+  "base_commit": "09f1da15a4aeede7cf157c79418779bc25b04149",
+  "base_tree": "aec47694f28877fd27c9d56359db68d1d77fa549",
+  "diff": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair131/EndpointTransportGeometry.diff",
+  "diff_sha256": "c81e86dccec8d1523b404f1dd37107086349421f5ef15ff333bd2e4cac2386c3",
+  "diagnostics": "n04-ci-131-errors.json",
+  "diagnostics_sha256": "05eb8bded8b59c6a90d8160463fcbcaadf901a1d199a0f1dd495e10099f6bd27",
+  "scope": "Expand only the owned local \u03c4 alias in the already proved periodicity before rewriting the actual global inverse identity. No public statement, import, option, map choice or mathematical hypothesis changes.",
+  "compiled": false
+}

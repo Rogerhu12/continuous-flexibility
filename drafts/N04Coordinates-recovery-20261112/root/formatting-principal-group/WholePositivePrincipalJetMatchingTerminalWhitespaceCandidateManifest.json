@@ -1,0 +1,13 @@
+{
+  "kind": "single_terminal_blank_line_removal",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "before_source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositivePrincipalJetMatching.lean",
+  "after_source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/formatting-principal-group/WholePositivePrincipalJetMatching.lean",
+  "before_sha256": "c1300032411e5cf278ddd96b7fb67d7cc2e26e8106cf3d505f7c09fb025e6779",
+  "after_sha256": "d9cd7c8a808e169bf0e60b8e9e5f7f5889a852313519019f0c24c07d7d470dac",
+  "before_blob": "4529bcd20e507a0e69453a485b55fbce105a5a33",
+  "after_blob": "58036d5cce27a25aadf98164681688a21b8557ef",
+  "before_lines": 154,
+  "after_lines": 153,
+  "exact_relation": "before bytes = after bytes + one LF; every token/header/import unchanged"
+}

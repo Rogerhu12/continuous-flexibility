@@ -1,0 +1,10 @@
+--- src/ContinuousFlexibility/Analysis/EndpointTransportGeometry.lean@09f1da15
++++ /workspace/scratch/bbbea77e4163/n04-drafts/root/repair131/EndpointTransportGeometry.lean
+@@ -104,6 +104,7 @@
+     exact hq
+   · intro p
+     apply hστ.injective
++    dsimp only [τ] at hperiod
+     rw [hτσ, hperiod, hτσ]
+   · intro x hx θ
+     filter_upwards [hmiddle x hx θ] with p hp

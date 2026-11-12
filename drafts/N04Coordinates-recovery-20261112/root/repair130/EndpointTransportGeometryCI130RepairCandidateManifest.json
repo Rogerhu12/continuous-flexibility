@@ -1,0 +1,18 @@
+{
+  "kind": "ci130_explicit_actual_angle_in_closed_strip_provider",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "file": "src/ContinuousFlexibility/Analysis/EndpointTransportGeometry.lean",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair130/EndpointTransportGeometry.lean",
+  "sha256": "8a2aca9005a7ddf9d08b920b6eb812be1cdb0fff7090b77b997c15c51ab7f930",
+  "before_blob": "044df4f2d91b690695b2542a6c82dd77c6322844",
+  "after_blob": "5d7f10faccd7d0744b627eb7d9bc552c39aafa92",
+  "lines": 112,
+  "base_commit": "2cea6f265c01ff9f2dac2b0d9a7c80909c441ef4",
+  "base_tree": "a154fee8ae847d2fe66bbdd1d2a786385083e107",
+  "diff": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair130/EndpointTransportGeometry.diff",
+  "diff_sha256": "550ac8b3da63c9bc8e99cb90cee64fe4e0800aca7a71eda4c13185e3a3f8017b",
+  "diagnostics": "n04-ci-130-errors.json",
+  "diagnostics_sha256": "04df5d9046c541401d522ac84e2760e6634ac3d0be617849aecaf36b7479184e",
+  "scope": "Only explicitly supplies the existing \u03c6 at the single actual provider call. No public statement, import, option or proof choice changes.",
+  "compiled": false
+}

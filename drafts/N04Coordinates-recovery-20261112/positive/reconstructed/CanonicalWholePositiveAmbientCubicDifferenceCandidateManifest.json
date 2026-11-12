@@ -1,0 +1,49 @@
+{
+  "kind": "actual_whole_positive_all_components_cubic_candidate",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveAmbientCubicDifference.lean",
+    "sha256": "b8e40f0b9744f75b7564e616d3e3b7677f9c5aaf311cae7727042d8243eceb57",
+    "blob": "89faaca0829ba10a1347e8a15f6e88ba9ae3d3fd",
+    "lines": 209
+  },
+  "dependencies": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveCubicDifference.lean",
+      "sha256": "55f04a1e0308c127bc3dc00c3f936f948611c346e94e836455455437513a28ea"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveAmbientFields.lean",
+      "sha256": "0ab1d6d0e58cd461af615da649bfe15231fd48e1f5f7b467ecf5f0cc120e6070"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveFlatPrincipalPatch.lean",
+      "sha256": "45d18b220bddd0ba6ddbcaa66ab12cb0ae85e853fe3d76c9cc5fa5d0cfc9ed16"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientBuffer.lean",
+      "sha256": "ee9971b2f20a215e7ec2542f410a221f341610ca7080293cabacaea4aba73bc5"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/IntervalCubicOpenGermDivision.lean",
+      "sha256": "f8ad97fd89a8ba208543fb93da7ac180b8398e9ff5740484856c544bacc61736"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N01CoefficientDifferenceFlatExtension.lean",
+      "sha256": "455bdb2354c991d08845ffc76cb31d877682e1a8d317793f740e2d465141db5f"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveReferenceJets.lean",
+      "sha256": "f073be472d15bb804ef90f2b2e800f9c5d11e850c35364149ec2152ff91ae5a9"
+    }
+  ],
+  "mathematics": [
+    "The actual first lemma derives a smooth numerator representative from real N01 physical difference flatness, unchanged physical coefficient regularity, actual transport geometry and true ambient identity side fields.",
+    "Interior endpoint jets come from the already derived actual negative relative equation through true positive transport matching; ambient endpoint jets come from the same representative germ being the N01 flat zero extension.",
+    "The final theorem discharges all ambient identity fields from n04PositiveSource_ambient_interpolation_fields of the exact same K/tau/sigma/Q, matching certificate and delta. It works for both interior and ambient endpoints without selecting another interpolation.",
+    "The factorization is on the open physical component. The quotient is globally smooth and its closed-strip mixed estimate uses the actual numerator bound only on the open interval, with exactly six radial derivatives and constant 1/36.",
+    "No totalized ambient coefficient value, positive unit-principal equation, target vanishing jet or final coefficient estimate is an assumption."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

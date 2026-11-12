@@ -1,0 +1,97 @@
+{
+  "kind": "whole_positive_ambient_identity_independent_source_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed_static_source_review_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientIdentityCandidateManifest.json",
+    "sha256": "6e669bfb3398e607664b7a4cb5897ecbd161b45391df4d5ed7494772abfe568d"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientIdentity.lean",
+    "sha256": "fe0af9ffe60550c8a1418f567cc7b2c57172aa36596b1124a3d4904a7e3ddaef",
+    "blob": "14ed9b9e0f49258df140ec2cca44c02d464833f9",
+    "lines": 149
+  },
+  "public_names": [
+    "positiveEndpointCutoff_opposite_zero_on_side",
+    "positiveAngularTaylorInterpolation_angle_on_identity_side",
+    "positiveHeightTaylorInterpolation_one_on_identity_side",
+    "oneSidedWholeComponentTransport_eq_on_identity_side",
+    "eventually_mem_positive_endpoint_side",
+    "wholePositiveFields_identity_germs_of_side"
+  ],
+  "checks": [
+    {
+      "part": "opposite cutoff",
+      "finding": "On the left side p.1<=c<d, distance to r is at least r-d>=delta; the right side is symmetric. The explicit absolute-value inequalities use the correct direction."
+    },
+    {
+      "part": "actual angular interpolation",
+      "finding": "The selected endpoint Taylor polynomial is exactly Prod.snd. The opposite cutoff is zero; the displayed sum of two patches minus p.2 reduces to p.2 without imposing anything on the other raw endpoint."
+    },
+    {
+      "part": "actual height interpolation",
+      "finding": "A genuine q=1 joint germ yields log(q/1)=0 and hence every radial boundary coefficient zero. Only the selected data vanish; the opposite cutoff is zero on the selected side, so the actual exponential equals one."
+    },
+    {
+      "part": "full actual map",
+      "finding": "The already proved actual radial identity is combined with the displayed angular interpolation. The one-sided Taylor representative uses order n+2 for angle and the exact existing definition."
+    },
+    {
+      "part": "ordinary endpoint neighborhood",
+      "finding": "Strict l<c and d<r give an ordinary product neighborhood contained in the appropriate closed half-strip; no domain-relative germ is substituted."
+    },
+    {
+      "part": "inverse and gauge germs",
+      "finding": "From tau(p)=p and sigma(tau(p))=p, the proof obtains sigma(p)=p in the same neighborhood. Q=1 then makes the actual reciprocal gauge (Q∘sigma)^-1 equal one."
+    }
+  ],
+  "exact_callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientRadialIdentity.lean",
+      "sha256": "5e5f5fc9f9f8b4ffeb09ed1a3abb489df98e35c0a9a9686457e929992faad3b2",
+      "blob": "0a39d374324401eca98e44da7633c49057349b56"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/OneSidedWholeComponentTransport.lean",
+      "sha256": "00b537bdb84ca4bebc735c7ef06bd9b804b9de9bb9203f8e3de09658ec41a70f",
+      "blob": "8de986a4b6772cbf403e9d60940eac2765a7a171"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/TaylorReferenceIdentity.lean",
+      "sha256": "afdff518350fd9ae40e1d8d555bd6e699358856d558e9960dc1f596ad1f1b344",
+      "blob": "638cb5421ada7cf2022cdcf415e0a230f7159624"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveEndpointCutoff.lean",
+      "sha256": "c74fe54b7fb3aee3b532e7d5c93fe93c37cc0055e4ccd56ab89e8b9465b51711",
+      "blob": "25ca16d4de4e07ae59c916e35b2c581bbf20f730"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveAngularTaylorInterpolation.lean",
+      "sha256": "d9332e671f0672a46260630ad75493220fed424ede1605a7407db65427d80f80",
+      "blob": "2e19908a7ce9d9d701010cdf75f2428f83db3565"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveHeightTaylorInterpolation.lean",
+      "sha256": "6fadddd6bf2cdefc752ca061f2c1db8a5ee38ab8e9c11ba833db7616d755b38a",
+      "blob": "5af54b2743a82ffa3a03796ab7bfe6b14c092812"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveCanonicalFields.lean",
+      "sha256": "8226260cf89a2ac8c4ba5964f2a0b5e569b021ff6d79d0c494112b0271afe7ce",
+      "blob": "a79f9987aafb83a59e1d9fb8ccb74bf5354585c1"
+    }
+  ],
+  "public_name_collision_in_current_installed_sources": false,
+  "limits": [
+    "No smoothness or flatness of the physical coefficient field at an ambient endpoint is asserted.",
+    "This static review does not claim compilation or the final canonical operator/primitive estimates."
+  ],
+  "verification": {
+    "compiled": false,
+    "CI_queried": false,
+    "source_edited": false,
+    "checkout_index_refs_CP_authority_or_plan_changed": false
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "kind": "ci130_owned_minimal_parser_repair",
+  "status": "STATIC_REVIEWED_UNCOMPILED",
+  "author": "/root/audit_coordinates",
+  "before_commit": "2cea6f265c01ff9f2dac2b0d9a7c80909c441ef4",
+  "before_tree": "a154fee8ae847d2fe66bbdd1d2a786385083e107",
+  "cached_errors": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-130-errors.json",
+    "sha256": "04df5d9046c541401d522ac84e2760e6634ac3d0be617849aecaf36b7479184e"
+  },
+  "files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/OneSidedEndpointHeight.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair130/OneSidedEndpointHeight.lean",
+      "before_source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair130/OneSidedEndpointHeight.base.lean.txt",
+      "diff": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair130/OneSidedEndpointHeight.diff",
+      "before_blob": "3093f103057e643f03cf80f9b3dd5bd75996781c",
+      "after_blob": "3e25d96f307a1dfb4e69f6564f47c2f4f09b2361",
+      "before_sha256": "3624a8ee5fa5cfc0e425f0ce2f01a37ef3faaff701575a1ceb392132ae044e9d",
+      "after_sha256": "370335da0eaef815f6f68a8a3db180289f5629d365c7fbfd40d430b056dc72cf",
+      "before_lines": 128,
+      "after_lines": 128,
+      "public_declarations": 3,
+      "public_headers_byte_identical": false,
+      "changed_public_header": "exists_oneSidedEndpointHeight_family",
+      "header_change_kind": "parser-only: split i/side binders from bounded x binder in hperiod and heven; mathematical quantifier order unchanged",
+      "unchanged_public_headers": [
+        "oneSidedEndpointHeightWidth",
+        "oneSidedEndpointHeightWidth_margins"
+      ],
+      "proof_bodies_byte_identical": true,
+      "imports_byte_identical": true,
+      "namespace_open_options_byte_identical": true,
+      "all_other_bytes_recovered_by_exact_inverse_patch": true,
+      "reason": "Repair the diagnosed unexpected ∈ in hperiod and the immediately adjacent identical heven binder by changing exactly ∀ i side x ∈ to ∀ i side, ∀ x ∈. Existing uses hperiod i side and heven i side retain their intended types.",
+      "diagnostics": [
+        "error: src/ContinuousFlexibility/Analysis/OneSidedEndpointHeight.lean:64:25: unexpected token '∈'; expected ','\nSome required targets logged failures:\n- ContinuousFlexibility.Analysis.EndpointTransportGeometry\n- ContinuousFlexibility.Analysis.EndpointFiberInterpolation\n- ContinuousFlexibility.Analysis.OneSidedEndpointHeight"
+      ],
+      "same_form_syntax_audit": [
+        {
+          "line": 64,
+          "text": "(hperiod : ∀ i side, ∀ x ∈ Ioo (a side) (b side), ∀ θ,"
+        },
+        {
+          "line": 66,
+          "text": "(heven : ∀ i side, ∀ x ∈ Ioo (a side) (b side), ∀ θ,"
+        },
+        {
+          "line": 93,
+          "text": "(he : ∀ x ∈ Ioo (a side) (b side), ∀ θ, h i side (x, τ θ) = h i side (x, θ))"
+        }
+      ]
+    }
+  ],
+  "scope": "One current CI130 leaf; exactly two delimiter corrections, one diagnosed and the adjacent same-form binder. No mathematical hypotheses, proof bodies, imports, options, or heartbeat changes.",
+  "verification": {
+    "compiled": false,
+    "ci_queried": false,
+    "checkout_index_refs_CP_authority_or_active_plan_changed": false
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair130/OneSidedEndpointHeightCI130CandidateManifest.json",
+    "sha256": "c960c458e101016524a8c8ce1adbc641cabb463fcf2bfa2e3a5808ad3f249818"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/OneSidedEndpointHeightCI130IndependentReview.json",
+    "sha256": "d6b2d2bc2b6dbfe57bacad757951cf2645946b736f657f80ee26b7093af82294"
+  }
+}

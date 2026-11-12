@@ -1,0 +1,90 @@
+{
+  "kind": "independent_full_source_same_witness_height_test_review",
+  "reviewer": "quantitative_route",
+  "result": "passed; all 204 lines and actual provider contracts checked",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/N01CompactHeightStateTestsCandidateManifest.json",
+    "sha256": "eb3eebf8559eb8fd5795a8ba228a52e6d1ed641b9c18ccd73ca15d59ba54366c"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/N01CompactHeightStateTests.lean",
+    "target": "src/ContinuousFlexibility/Analysis/N01CompactHeightStateTests.lean",
+    "blob": "c5470728b57c91e6634534a41f2e6953d90dea18",
+    "sha256": "16d1f32d9dcf6b010a20cf4a49ab3fc523dd605b74561138a00c5d611f89d679",
+    "lines": 204,
+    "public_names": [
+      "referenceCompactCosine_heightPair",
+      "n04CoordinatesHeightTestState",
+      "n04CoordinatesHeightTestState_sector",
+      "n04CoordinatesHeightTestState_grading",
+      "n04CoordinatesHeightTestState_profile",
+      "n04CoordinatesHeightTestState_height",
+      "n04CoordinatesHeightTestState_mem",
+      "N01Properties.heightTest_denominator_bound",
+      "n04CoordinatesHeightTestState_root_determinant"
+    ],
+    "private_declarations": 1
+  },
+  "read_provider_files": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "d42c9da38be0475688417eb1b9d2abeae2f0f6c29009ddfde424fc654c560520"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Radial.lean",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Scalar/WeightedDecodeLift.lean",
+      "sha256": "5dda1876156de62d5d5b9e33037659a133d295cca0f83975d8db7a337186ea41"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CompactEvenHeightTests.lean",
+      "sha256": "2004599c20e7d0007de38c515b3bf2e0125d8ff76e681e39817fcc7c0c7d0c42"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CoupledStateScalarAction.lean",
+      "sha256": "cc18db31675d6bcdcccac26307ccde3afd36d391dde27dcfdfe910c2fef8ccec"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CoupledLogProfileCoefficientJets.lean",
+      "sha256": "ef1354c7cb87242bf1d6793879899dbb8afc36eea411214989caa857beff2c2c"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootCoefficientGerms.lean",
+      "sha256": "3ca2beee380af2fc1b9517a57fcfd89f12711bf041d375b93f6c60bb2bf1b62d"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bPositiveRegularity.lean",
+      "sha256": "43015d681c22ddbcfe322f6fcb57c612b1a548906ce56a21f5ad70a964d064c4"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Scalar/HeightVariation.lean",
+      "sha256": "d455c46769f752f8527812bf29e329b7e1647bf3f31a7ca4102b1f29444ed798"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialHeightRegularity.lean",
+      "sha256": "ceea0fa46732654e1ad5d3abe5e81fbd84f82227899a82dfa58a2fdbf445bba1"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CoupledScalarHeightDerivative.lean",
+      "sha256": "c17d793088d64828101f194be58845617761da1bb028466dc780ced2a3cdc817"
+    }
+  ],
+  "checks": [
+    "The true compact radial cosine-two test is even and pi-periodic. Actual compact-support HeightMember construction and the same S Sobolev decoder surjectivity give eta=(v,0), with equality of the entire decoded field and exact physical grading via the original norm identity.",
+    "The displayed state line changes only the HeightPair coordinate. The genuine sector and profile depend only on the unchanged circle/radial parameters, while the original pair grading gives exactly abs(t) times the height-pair grading.",
+    "The actual state height changes by q*t times the same decoded field; the owned scalar-action identities and linear decoder give this exact function equality. No alternate reference, geometry, space or Through03 witness is chosen.",
+    "The affine heightQ formula uses actual heightRadial and angularPartial(heightAngular) formulas at nonzero radius. Positivity of D.w and D.a comes from the same N01 reference geometry.",
+    "The exact tenth N01 clause yields both 7/8 and 9/8 denominator bounds for the two genuine states with parameters plus/minus t. Subtraction gives 8*q*t*abs(B)<=D.w with the correct constants and signs, without dividing by an optical root slope.",
+    "The final determinant theorem invokes the existing actual Through03 profile-germ and corrected-coefficient determinant theorem with the same state-ball and sector witnesses. It neither assumes nor proves vanishing of arbitrary height jets.",
+    "All six direct import hashes agree with the manifest. This review makes no claim of a new uniform root kappa estimate or of Lean compilation."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

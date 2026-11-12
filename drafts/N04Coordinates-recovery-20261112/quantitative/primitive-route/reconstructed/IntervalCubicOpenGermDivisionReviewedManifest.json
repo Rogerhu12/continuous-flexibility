@@ -1,0 +1,20 @@
+{
+  "kind": "reviewed_held_interior_germ_cubic_division",
+  "status": "HELD_REVIEWED_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/IntervalCubicOpenGermDivisionCandidateManifest.json",
+    "sha256": "3dcf34311621f020e933cbee7bd2516fe4ebc980d48a243d944909395d9a7a2b"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/IntervalCubicOpenGermDivision.lean",
+    "sha256": "f8ad97fd89a8ba208543fb93da7ac180b8398e9ff5740484856c544bacc61736",
+    "blob": "13f678882f0cc2a547f538dcf6f91e021909e25a",
+    "lines": 56
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/IntervalCubicOpenGermDivisionIndependentReview.json",
+    "sha256": "6e02d861d795a4e4eb6fe891fd1ac1c38a60964c35f530f509c1a8c5aa4f3a02"
+  },
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

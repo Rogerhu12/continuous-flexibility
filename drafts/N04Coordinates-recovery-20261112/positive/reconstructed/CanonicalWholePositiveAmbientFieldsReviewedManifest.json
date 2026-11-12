@@ -1,0 +1,17 @@
+{
+  "kind": "reviewed_actual_ambient_fields",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveAmbientFields.lean",
+    "sha256": "0ab1d6d0e58cd461af615da649bfe15231fd48e1f5f7b467ecf5f0cc120e6070"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveAmbientFieldsCandidateManifest.json",
+    "sha256": "ac11fa6b88bf5df2f08273cbaa0fe71303a8a4e83e41d55914c987c90512fc01"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/CanonicalWholePositiveAmbientFieldsIndependentReview.json",
+    "sha256": "750a6f2867785d096636138656549ac0236ff3d52aa2a04868a2fc40f7f664bf"
+  },
+  "compiled": false
+}

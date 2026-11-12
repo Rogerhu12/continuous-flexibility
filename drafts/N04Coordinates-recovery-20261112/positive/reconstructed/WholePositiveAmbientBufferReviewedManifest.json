@@ -1,0 +1,21 @@
+{
+  "kind": "independently_reviewed_held_source_manifest",
+  "status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientBufferCandidateManifest.json",
+    "sha256": "76c4912eb9f7a5f45a254c6a8ee2f2ead1b6a720f8d2c488c69d87728554fabc"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientBuffer.lean",
+    "sha256": "ee9971b2f20a215e7ec2542f410a221f341610ca7080293cabacaea4aba73bc5",
+    "blob": "581a9506db0dc512b1700f44a175630756f0d53b",
+    "lines": 148
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholePositiveAmbientBufferIndependentReview.json",
+    "sha256": "d5566a82771eea5239265466617f9fa99ba2633684868b0461f5431485005049"
+  },
+  "compiled": false,
+  "green_receipt_applies_to_candidate": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

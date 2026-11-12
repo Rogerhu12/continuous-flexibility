@@ -1,0 +1,17 @@
+{
+  "kind": "whole_positive_ambient_invariant_buffer_candidate",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientBuffer.lean",
+    "sha256": "ee9971b2f20a215e7ec2542f410a221f341610ca7080293cabacaea4aba73bc5",
+    "blob": "581a9506db0dc512b1700f44a175630756f0d53b",
+    "lines": 148
+  },
+  "mathematics": [
+    "One Bool half-plane lemma proves injectivity prevents entering the fixed half-plane from the opposite side; no transport target is assumed.",
+    "The left buffer endpoint is c precisely when l=a, otherwise l. The right buffer endpoint is d precisely when r=b, otherwise r. Hence both buffered endpoints are strictly inside the annulus.",
+    "Actual whole closed MapsTo plus the injective fixed-half-plane lemma prove the smaller buffer invariant. Interior true roots remain in the buffer. Every open component point outside the buffer has genuine identity germs of tau,sigma,Q from the actual ambient side field."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

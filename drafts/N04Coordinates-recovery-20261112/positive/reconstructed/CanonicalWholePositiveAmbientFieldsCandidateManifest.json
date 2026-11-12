@@ -1,0 +1,27 @@
+{
+  "kind": "actual_whole_positive_ambient_interpolation_candidate",
+  "status": "HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveAmbientFields.lean",
+    "sha256": "0ab1d6d0e58cd461af615da649bfe15231fd48e1f5f7b467ecf5f0cc120e6070",
+    "blob": "37da0ea5be5451ed56f3c40d9cca938ee41b5872",
+    "lines": 110
+  },
+  "prerequisites": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientIdentity.lean",
+      "sha256": "fe0af9ffe60550c8a1418f567cc7b2c57172aa36596b1124a3d4904a7e3ddaef",
+      "blob": "14ed9b9e0f49258df140ec2cca44c02d464833f9",
+      "lines": 149
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveAmbientSource.lean",
+      "sha256": "a6ed8815ca40302c184f0a714ad90d0cb929079b9263b6fad8e425601f7cf7c3",
+      "blob": "3e8da743d6e554470c1c63e08bc71c3a8d016a5f",
+      "lines": 71
+    }
+  ],
+  "scope": "Use the actual certified source, actual formulas and existing matching certificate. Derive angular/fiber margins from prescribed widths, and height cutoff separation from the original common height width. The same chosen tau/sigma/Q are identity/one on the ambient side and in ordinary endpoint germs. No new factory choice or physical ambient smoothness premise.",
+  "compiled": false,
+  "checkout_index_refs_CI_authority_plan_modified": false
+}

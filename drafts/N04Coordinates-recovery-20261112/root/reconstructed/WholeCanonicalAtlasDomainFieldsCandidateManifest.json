@@ -1,0 +1,11 @@
+{
+  "kind": "whole_atlas_actual_reference_signs_and_current_domains",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "file": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasDomainFields.lean",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasDomainFields.lean",
+  "lines": 131,
+  "sha256": "b2964742f66e9aca18762e5cd4bbadf568144e984b072bc9bf1a28229232e0cb",
+  "blob": "e17cd5f821bb5ac672e3a215dce0e74b9440b67e",
+  "compiled": false,
+  "scope": "Reuse negative cut-pair flags and actual old geometry; prove positive full-strip domain fields, reference bounds and signs, including ambient endpoints."
+}

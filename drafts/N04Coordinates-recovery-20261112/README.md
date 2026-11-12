@@ -1,7 +1,5 @@
-# Incremental recovery snapshot 6
+# N04Coordinates recovery snapshot 7
 
-This storage checkpoint contains the unchanged current line tree and newly saved candidate versions. Earlier sources and reviews are preserved in the previous backup commits. SOURCE-INDEX.json maps every current local candidate to its exact Git commit/path or this snapshot, with SHA256.
+UNCOMPILED; source preservation only. Prior exact versions remain in earlier backup commits. No CI activation or completion claim.
 
-The prior snapshot is 20854f91f48a59f7ba5f6f0ab592a0543c442141. It remains the first parent; the current actual line commit is the second parent. This avoids copying already preserved uncompiled sources into every tree. All newly added Lean lines and current line additions are still counted against the latest complete green baseline. No file extension is changed to avoid that limit.
-
-This branch is for recovery only. It is outside the active generated root, runs no line workflow and makes no compilation or theorem completion claim.
+This tree is based on line commit 33d9140d067221b1cbc3914af186a85f9c1a6b22. Its first parent is backup 7e88cec8c751fe3c6f8421a39e4d2525a6e403b6 and its second parent is the line commit. SOURCE-INDEX.json locates every frozen draft byte version by exact SHA-256, using a prior commit or this snapshot. Only new byte versions are repeated in this tree; older versions are retained in its Git parents. Metadata includes cached actual CI logs and receipts for runs 128–132 and the current pending CI133 plan. Parent N04Coordinates and Realization remain open.

@@ -1,0 +1,31 @@
+{
+  "kind": "whole_positive_flat_principal_patch_candidate",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveFlatPrincipalPatch.lean",
+    "sha256": "45d18b220bddd0ba6ddbcaa66ab12cb0ae85e853fe3d76c9cc5fa5d0cfc9ed16",
+    "blob": "ba96df9fb836cdcbc61242437386a48b5cb483e1",
+    "lines": 157
+  },
+  "dependencies": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientPrincipal.lean",
+      "sha256": "b30636b6cb45bb56c15dc15c5a9025ba5ae7f592558a3cd91540aa8e861b853e"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveCanonicalFields.lean",
+      "sha256": "8226260cf89a2ac8c4ba5964f2a0b5e569b021ff6d79d0c494112b0271afe7ce"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveConformalCanonicalExtension.lean",
+      "sha256": "79baa6e5a100a4f6fc709d4b0b24c54927c026ad90c74e9d5c0e176b0cb97c11"
+    }
+  ],
+  "math": [
+    "The cutoff is applied to A and Aref in physical coordinates before the genuine current chart, retaining the original transport/inverse/height.",
+    "The same global field is cut-principal minus cut-reference plus (1-chi) times E. Central buffer invariance gives the true actual principal germ.",
+    "Identity germs give a physical-difference germ by exact algebra. At a point outside the ambient annulus, compact support forces the patch germ to equal E, independent of totalized physical values."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

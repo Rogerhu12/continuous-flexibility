@@ -1,0 +1,21 @@
+{
+  "kind": "actual_material_flat_extension_candidate",
+  "status": "HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N01CoefficientDifferenceFlatExtension.lean",
+    "sha256": "455bdb2354c991d08845ffc76cb31d877682e1a8d317793f740e2d465141db5f",
+    "blob": "6fb4a953c54a909431fd57b39d2701e2408fd3e7",
+    "lines": 119
+  },
+  "public_names": [
+    "n01OriginalCoefficientDifference",
+    "n01OriginalCoefficientDifferenceExtension",
+    "n01OriginalCoefficientDifference_point_weight_bound",
+    "n01OriginalCoefficientDifferenceExtension_smooth_flat",
+    "n01OriginalCoefficientDifferenceExtension_germ"
+  ],
+  "scope": "Actual N01 current-minus-reference coefficient bounds, moved from the actual sample to the same-cell evaluation point with H exponent 3/4 unchanged; same original neighborhood/base/loss; smooth zero extension and all finite ordinary jets zero outside the annulus.",
+  "compiled": false,
+  "new_public_names_absent_from_installed_sources": true,
+  "checkout_index_refs_CI_authority_plan_modified": false
+}

@@ -1,0 +1,38 @@
+{
+  "kind": "independent_full_source_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "passed_static_review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/IntervalCubicOpenGermDivision.lean",
+    "sha256": "f8ad97fd89a8ba208543fb93da7ac180b8398e9ff5740484856c544bacc61736",
+    "blob": "13f678882f0cc2a547f538dcf6f91e021909e25a",
+    "lines": 56
+  },
+  "read_sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/cubic-germs/IntervalCubicGermDivision.lean",
+      "sha256": "9fdc1286df823061bbdf32d934a857a869e19e32520a5fc0a3a7ffc7f735ce8d"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/LocalMixedProductBounds.lean",
+      "sha256": "d0faf14d190ae8c14f16f80958e8c166183c0914f822815a8d98aa13a660dfd7"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialCylinderPointwise.lean",
+      "sha256": "40e4cf0e61f20ec3b1c043c59fc8cf18d15f5d3e6b595ea7b014c9074a141ae9"
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Order/OrderClosed.lean",
+      "sha256": "e311dbc7fca744dc0f0d4a10e3c838eb4996c2fa8b63e833077c40f763f05444"
+    }
+  ],
+  "findings": [
+    "Read all 56 lines and the exact closed-germ quotient theorem. Applying that theorem with f=F and reflexive germs preserves genuine zero radial jets of F, including order zero.",
+    "The actual f enters only through true joint germs on Ioo(l,r) times univ. The open factorization uses the correctly oriented equality f(p)=F(p) and the representative closed factorization. No actual f value or derivative is assumed at either endpoint.",
+    "For fixed a,b and angle, contDiff_mixedDerivative gives a globally continuous absolute mixed derivative of F. mixedDerivative_eq_of_germ transfers the open f bound; le_on_closure with its actual ContinuousOn(closure s) contract transfers the same M to both endpoints using closure_Ioo(hlr.ne).",
+    "The final call retains exactly six radial derivatives of loss, no angular loss, and constant 1/36. No coefficient estimate, material bound, or final transport property is assumed."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

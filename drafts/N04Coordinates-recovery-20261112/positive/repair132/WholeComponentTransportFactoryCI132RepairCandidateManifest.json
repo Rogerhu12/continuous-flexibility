@@ -1,0 +1,41 @@
+{
+  "kind": "actual_local_angle_alias_repair",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "scope": "actual_ci132",
+  "actual_base_commit": "58e1acbb8aec31963615c7146684968a15d69cfd",
+  "actual_base_tree": "92c7cf087bf7bc1c57920a80b4e1c5b301936b8c",
+  "target_path": "src/ContinuousFlexibility/Analysis/WholeComponentTransportFactory.lean",
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair132/WholeComponentTransportFactory.base.lean.txt",
+    "sha256": "ec4fda0b24556f2fd47782e74d3dbdcf0471f07c6d7a6ca627cc8380cda36362",
+    "blob": "3133049e6fab49a41e03b4cebed2e12730435c95",
+    "lines": 102
+  },
+  "candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair132/WholeComponentTransportFactory.lean",
+    "sha256": "715e0bd2a1052f9d7855dab883bfaafd914218d05d34044a70a293218871bd89",
+    "blob": "ccb28306d57f7db5fd0e6b3551415e78ab084ef1",
+    "lines": 103
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair132/WholeComponentTransportFactory.diff",
+    "sha256": "5946b33068b544214ea1f3b2d476d77358c0fe77dce17eca5e54825a5bf88091"
+  },
+  "exact_change": "Insert dsimp only [\u03c6, wholeComponentEndpointAngle] immediately before the existing full-derivative matching rewrite.",
+  "public_headers_byte_identical": true,
+  "proof_body_other_bytes_identical": true,
+  "imports_options_unchanged": true,
+  "default_heartbeat_unchanged": true,
+  "source_selection_unchanged": true,
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false,
+  "diagnostics": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-132-errors.json",
+    "sha256": "bf2416739a6c296919b64e75d0f8ebe774ba4a1bd8ba977dd3f94e9f28a53506"
+  },
+  "direct_consumer_scan": [
+    "Installed OneSidedWholeComponentTransport calls the repaired factory and has no duplicate local angle matching rewrite.",
+    "Held WholeComponentTransportPolynomial has the exact same rewrite and is captured in a separate compatibility candidate.",
+    "Peer-owned held WholeComponentMaterialTransport has the exact same rewrite; owner /root/quantitative_route notified, not edited."
+  ]
+}

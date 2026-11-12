@@ -1,0 +1,171 @@
+{
+  "kind": "independent_full_source_actual_whole_atlas_geometry_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed; both complete 87-line candidates and their actual geometry/partition contracts checked",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalReferenceAndGeometryCandidateManifest.json",
+    "sha256": "543b96440d294424c6f80ea822c5683d08c26030844add7af2ee96698de22507"
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasReferencePartition.lean",
+      "sha256": "a228efd750b6144dc83f5848e1b081fbfff531ff42400ff2ffaecb13b9252f71",
+      "blob": "c5e704c5f367c931fe0873999744fbe2a854f473",
+      "lines": 87
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasGeometry.lean",
+      "sha256": "df7b7161ca3c5af9d5f798ffe2fd6f3ad5bc288597c208d68523dea5455818fc",
+      "blob": "6a2db0dfacd7ca575277e46d3c05f7102bda8571",
+      "lines": 87
+    }
+  ],
+  "selected_compatibility_sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/whole-atlas-let-intros/WholeCanonicalAtlasChartGeometry.lean",
+      "sha256": "9d32251574e399a595c1de27c16c19ade45e73eb863a9d03f7c21866038c9794",
+      "blob": "9d1065f838e7acd0004bca1fab3c5d38a854ee50",
+      "lines": 132
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/whole-atlas-let-intros/WholeCanonicalAtlasDomainFields.lean",
+      "sha256": "195192190b40f5a5e4a34641bb748d516b4aed354b6004e982596e5c006f245e",
+      "blob": "b32d5a944c2dd224526210e2ab4c52447602ab0c",
+      "lines": 133
+    }
+  ],
+  "held_geometry_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasData.lean",
+      "sha256": "41a32a066758dcfb8fe7da1ab9e73bee2f7ad451fa1f7057aee40c01092905d6",
+      "blob": "c6abe2dcedd1974e7ec231275a17f869c0faed3b",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasNormalization.lean",
+      "sha256": "5f216c3ff83f16ab1bb7b9870ac4f6f1c6bb3e61f9ef82276575888e4a85ad48",
+      "blob": "f0d642e624049f842d75388d4cb0545feb750348",
+      "lines": 83
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasCurrentPartition.lean",
+      "sha256": "96c133e1ee0aac5fdcc380da17fd6733f0e956249fd93076335e30836799d085",
+      "blob": "25d843018ecbe916ac2eb71529d6b8c61cb0ec26",
+      "lines": 132
+    }
+  ],
+  "actual_contract_sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "d42c9da38be0475688417eb1b9d2abeae2f0f6c29009ddfde424fc654c560520",
+      "blob": "97aa466ceee79bd9e21887d8948042478820ca79",
+      "lines": 1430
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Radial.lean",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352",
+      "blob": "473c530a1de50c672f2e54908d374f624f5955b0",
+      "lines": 874
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04WholeComponentPieces.lean",
+      "sha256": "5d2d7e19dcb41ad41fc58f433b96e0180ccd3d15acb514fe34025878380bf822",
+      "blob": "31a07cd1ac849aaa1a42f559dcaa84fb4e7e94b8",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04PositiveNormalizationBuffer.lean",
+      "sha256": "c9cc82dcff9d6942d726424cee8b9d570094e26769636c2c702265d08d7e59fa",
+      "blob": "4d4d83bfb0bc2d619305e8906f904e194eec7689",
+      "lines": 114
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean",
+      "sha256": "91687b630205a380f137dcdb4cb32068d79582e09d17d4a4cd14317e21b9e19f",
+      "blob": "334d3c0c19727465e3afc75f988c79df1b8d7b8a",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasGeometry.lean",
+      "sha256": "9249ea8b23d4edc27fe5e9d405e32a3da2248556efb394db33faf279aefa1d0a",
+      "blob": "6e704770a6066c6279f7c3cdae96c1d695d554d3",
+      "lines": 101
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasCuts.lean",
+      "sha256": "1c1ca0be70e7134d99086b9d491732bc983447a8d9700cd17cfa4606e0f7c26e",
+      "blob": "3e6847f1dc053e029284c4f490ab351c5c310da2",
+      "lines": 97
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01NormalizationRootSeparation.lean",
+      "sha256": "388abc37cefa0115f966b799314571baecab42f0efa29f83097d61d3eac84956",
+      "blob": "2c030728060ae03a6348dd6d9e1a68f95a69c7aa",
+      "lines": 160
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+      "sha256": "598b1d5f18c4a22eecd5108949d46b2ddca955d79ea66090b85ca6ba06ff8227",
+      "blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+      "lines": 96
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferencePieces.lean",
+      "sha256": "0ae0b98aef8f688002cf783e7b129f6834a79b1502061bd123f90ffe59edf766",
+      "blob": "ba67b0a6776363ed4ebf616d7fd56c489baf2b25",
+      "lines": 174
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferenceMetadata.lean",
+      "sha256": "21d8319b313d567698500bb20354251130e9d1746ff414fdf5aad2adb94ee7c0",
+      "blob": "d2be1124da85939a9dfd1cba380a9ac303c61308",
+      "lines": 76
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+      "sha256": "166d48b590552637d5efedb29ce0b19d5963d02f33e7caebffe44a04b576fdf4",
+      "blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "lines": 142
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bCanonicalOperator.lean",
+      "sha256": "344c622b2232939712c784404953c53c3c7a35378b0b70002313dac5bfcfefe3",
+      "blob": "70b5abc70e06c225d31f98d6c38d5a379369bad7",
+      "lines": 156
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bPositiveDivision.lean",
+      "sha256": "d274f19959dd831c45e7d0ee0374a4bf01132369e13d69e595beb71a60de39ee",
+      "blob": "052cdea1dd1db004e3021e7100bf3b0704f1f472",
+      "lines": 110
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bNormalizationRegion.lean",
+      "sha256": "f4d758420817fd05c3b78dfb38279870228fb21f49672d6c4f3dcaee286f12ef",
+      "blob": "b96b5321549b4a6b90fe2906f745efed5291a1d6",
+      "lines": 71
+    }
+  ],
+  "public_names": [
+    "n04WholeCanonicalAtlasData_actual_reference_radii",
+    "n04WholeCanonicalAtlasData_actual_referencePartition",
+    "n04PositiveNormalizationBuffer_region_subset_actualNormalization",
+    "n04WholeCanonicalAtlasData_actual_geometry"
+  ],
+  "installed_public_name_collisions": [],
+  "checks": [
+    "The actual negative reference radii reduce through the same n04bActualTypedAtlas metadata, original equivalence and cut-pair index to the genuine optical reference cut. Both Boolean halves and whole positive endpoints were checked against their defining fields.",
+    "The radial exceptional set is precisely the countable critical set union the actual cut range. Existing whole-piece coverage gives existence and uniqueness; the displayed new equivalence transports both directions of uniqueness without changing any interval.",
+    "The buffered normalization region is contained in the strict positive derivative set. Continuity makes the closure of the negative set a subset of the nonpositive set, giving the actual old normalization complement inclusion.",
+    "The original Through03 witness supplies the actual old CanonicalGeometry, cut-pair geometry, profile continuity, reference-state validity and true-border support. The support-reference-column inclusion and buffer support certificate provide the required new normalization support.",
+    "All fourteen fields of the current CanonicalGeometry record were matched to their concrete providers, with the same K, reference cut, enumeration, cell map, F/G/Q family, neighborhood and normalization region.",
+    "The selected ChartGeometry and DomainFields sources are the explicit result-level let compatibility versions. Their hK/hcut/hf and state/sector arguments match the final assembly; the original unpatched held versions were not substituted.",
+    "Actual moving negative physical domains and both true partitions are retained. Positive whole components use the supplied actual positive transport geometry. No primitive estimate, final operator contract, new regularity conclusion or altered witness is assumed."
+  ],
+  "verification": {
+    "compiled": false,
+    "source_edited": false,
+    "ci_queried": false,
+    "checkout_index_refs_CP_authority_or_plan_changed": false
+  }
+}
