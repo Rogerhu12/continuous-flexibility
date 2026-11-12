@@ -84,7 +84,7 @@ theorem n06_reference_null_root_cut
     rw [n05_referencePhysicalPieceClosed_eq hA i]
     exact ⟨hroot, mem_univ _⟩
   have hβ : Continuous β := continuous_iff_continuousAt.mpr fun θ =>
-    ((n05_reference_boundary_regular hA href hs i (p := (root, θ)) (hrootClosed θ)).1.snd.continuousAt).comp
+    ((n05_reference_boundary_regular hA href hs i (p := (root, θ)) hroot).1.snd.continuousAt).comp
       (continuousAt_const.prodMk continuousAt_id)
   have hlift (θ : ℝ) : β (θ + Real.pi) = β θ + Real.pi := by
     simpa only [β, Ψ, Prod.mk_add_mk, Prod.snd_add, Prod.fst_add, add_zero] using

@@ -1,6 +1,8 @@
 import ContinuousFlexibility.Analysis.N06PhysicalRootLogHeight
 import ContinuousFlexibility.Analysis.N06PositiveLogFiniteJets
 import ContinuousFlexibility.Analysis.N06RootLabelJets
+import ContinuousFlexibility.Analysis.N06MaterialAbsorption
+import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # Weighted angular jets of the true root odd-field logarithm
@@ -96,21 +98,33 @@ theorem n06_physicalRootSpeedRatio_lower
   rw [he]
   exact (le_div_iff₀ hQpos).mpr (by nlinarith)
 
+def N06PhysicalRootLogSpeedAngularBound (D : ReferenceData) (T : MaterialData)
+    (S : PhysicalSpacesData) (C : NonlinearGeometryData S) (base n : ℕ) (ε Q : ℝ) : Prop :=
+  ∀ z : AnnularState S × ℝ, z ∈ stateNeighborhood S C base ε → stateSector S z.1 →
+    stateGrading S (n + 7) (z.1 - C.referenceState) + |z.2| ≤ 1 →
+    ∀ r ∈ radialCore D, deriv D.w r = 0 → ∀ θ : ℝ, ∀ k, k ≤ n →
+      |iteratedDeriv k (fun t => Real.log
+        (n06PhysicalRootFields D S C z (r, t)).2) θ| ≤
+          Q * n06RootJetWeight T (r, θ) * |z.2|
+
+def N06StateLeftChartLogDerivBound (T : MaterialData) (S : PhysicalSpacesData)
+    (C : NonlinearGeometryData S) (base n : ℕ) (ε Q : ℝ) : Prop :=
+  ∀ z : AnnularState S × ℝ, z ∈ stateNeighborhood S C base ε → stateSector S z.1 →
+    stateGrading S (n + 2) (z.1 - C.referenceState) ≤ 1 →
+    ∀ m θ k, k ≤ n →
+      |iteratedDeriv k (fun t => Real.log (deriv (stateLeftChart S z.1 m) t)) θ| ≤
+        Q * T.H (T.sample m) ^ (3 / 4 : ℝ) *
+          stateGrading S (n + 2) (z.1 - C.referenceState)
+
 /-- Every fixed angular log-speed jet is uniformly small at every actual
 turning root, with the physical material weight still present. -/
-theorem n06_physicalRootLogSpeed_angular_weighted_jets
+private theorem n06_physicalRootLogSpeed_named
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (hN : N01Properties D T S C base loss ε) (n : ℕ) :
-    ∃ Q : ℝ, 0 ≤ Q ∧ ∀ z : AnnularState S × ℝ,
-      z ∈ stateNeighborhood S C base ε → stateSector S z.1 →
-      stateGrading S (n + 7) (z.1 - C.referenceState) + |z.2| ≤ 1 →
-      ∀ r ∈ radialCore D, deriv D.w r = 0 → ∀ θ : ℝ, ∀ k, k ≤ n →
-        |iteratedDeriv k (fun t => Real.log
-          (n06PhysicalRootFields D S C z (r, t)).2) θ| ≤
-            Q * n06RootJetWeight T (r, θ) * |z.2| := by
+    ∃ Q : ℝ, 0 ≤ Q ∧ N06PhysicalRootLogSpeedAngularBound D T S C base n ε Q := by
   obtain ⟨A, hA, hphysical⟩ := n06_physicalRootFields_finite_weighted_jets hT hS hN n
-  obtain ⟨H, hH, hweight, _, _⟩ :=
-    hT.2.2.2.2.2.2.2.2.2.2.2.2.1 1 (3 / 4 : ℝ) (by norm_num)
+  obtain ⟨H, hH, hweight⟩ :=
+    n06_material_loss_absorb hT (3 / 4 : ℝ) 0 1 (by norm_num)
   obtain ⟨Q, hQ, hlog⟩ := n06_log_finite_jets_of_one_difference n (mul_nonneg hA hH.le)
   refine ⟨Q * A, mul_nonneg hQ hA, ?_⟩
   intro z hz hs hsmall r hr hroot θ k hk
@@ -120,7 +134,7 @@ theorem n06_physicalRootLogSpeed_angular_weighted_jets
       (contDiffAt_const.prodMk contDiffAt_id)
   have hW : 0 ≤ n06RootJetWeight T (r, θ) := n06_rootJetWeight_nonneg hT ⟨hr, mem_univ θ⟩
   have hWH : n06RootJetWeight T (r, θ) ≤ H := by
-    simpa only [n06RootJetWeight, Real.rpow_one] using hweight r hr
+    simpa only [n06RootJetWeight, Real.rpow_zero, Real.rpow_one, mul_one] using hweight r hr
   have hq : |z.2| ≤ 1 := (le_add_of_nonneg_left
     (apply_nonneg (stateGrading S (n + 7)) (z.1 - C.referenceState))).trans hsmall
   have hδ : 0 ≤ A * n06RootJetWeight T (r, θ) * |z.2| :=
@@ -144,20 +158,26 @@ theorem n06_physicalRootLogSpeed_angular_weighted_jets
     (n06_physicalRootSpeedRatio_lower hN hz hs hr hroot θ) hδ hδB hdiff k hk
   exact h.trans_eq (by ring)
 
-/-- The original left label, including all its finite angular jets,
-has a logarithmic derivative difference with its true sample weight. -/
-theorem n06_stateLeftChart_logDeriv_weighted_jets
+theorem n06_physicalRootLogSpeed_angular_weighted_jets
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (hN : N01Properties D T S C base loss ε) (n : ℕ) :
     ∃ Q : ℝ, 0 ≤ Q ∧ ∀ z : AnnularState S × ℝ,
       z ∈ stateNeighborhood S C base ε → stateSector S z.1 →
-      stateGrading S (n + 2) (z.1 - C.referenceState) ≤ 1 →
-      ∀ m θ k, k ≤ n →
-        |iteratedDeriv k (fun t => Real.log (deriv (stateLeftChart S z.1 m) t)) θ| ≤
-          Q * T.H (T.sample m) ^ (3 / 4 : ℝ) *
-            stateGrading S (n + 2) (z.1 - C.referenceState) := by
-  obtain ⟨H, hH, hweight, _, _⟩ :=
-    hT.2.2.2.2.2.2.2.2.2.2.2.2.1 0 (3 / 4 : ℝ) (by norm_num)
+      stateGrading S (n + 7) (z.1 - C.referenceState) + |z.2| ≤ 1 →
+      ∀ r ∈ radialCore D, deriv D.w r = 0 → ∀ θ : ℝ, ∀ k, k ≤ n →
+        |iteratedDeriv k (fun t => Real.log
+          (n06PhysicalRootFields D S C z (r, t)).2) θ| ≤
+            Q * n06RootJetWeight T (r, θ) * |z.2| := by
+  exact n06_physicalRootLogSpeed_named hT hS hN n
+
+/-- The original left label, including all its finite angular jets,
+has a logarithmic derivative difference with its true sample weight. -/
+private theorem n06_stateLeftChart_logDeriv_named
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε) (n : ℕ) :
+    ∃ Q : ℝ, 0 ≤ Q ∧ N06StateLeftChartLogDerivBound T S C base n ε Q := by
+  obtain ⟨H, hH, hweight⟩ :=
+    n06_material_loss_absorb hT (3 / 4 : ℝ) 0 0 (by norm_num)
   obtain ⟨Q, hQ, hlog⟩ := n06_log_finite_jets_of_one_difference n
     (mul_nonneg anglePairEvaluationConstant_nonneg hH.le)
   refine ⟨Q * anglePairEvaluationConstant,
@@ -198,14 +218,22 @@ theorem n06_stateLeftChart_logDeriv_weighted_jets
   have h := hlog f θ δ hf.contDiffAt hpositive hδ hδB hdiff k hk
   exact h.trans_eq (by dsimp only [δ]; ring)
 
+theorem n06_stateLeftChart_logDeriv_weighted_jets
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε) (n : ℕ) :
+    ∃ Q : ℝ, 0 ≤ Q ∧ ∀ z : AnnularState S × ℝ,
+      z ∈ stateNeighborhood S C base ε → stateSector S z.1 →
+      stateGrading S (n + 2) (z.1 - C.referenceState) ≤ 1 →
+      ∀ m θ k, k ≤ n →
+        |iteratedDeriv k (fun t => Real.log (deriv (stateLeftChart S z.1 m) t)) θ| ≤
+          Q * T.H (T.sample m) ^ (3 / 4 : ℝ) *
+            stateGrading S (n + 2) (z.1 - C.referenceState) := by
+  exact n06_stateLeftChart_logDeriv_named hT hS hN n
+
 private theorem n06_rootOdd_reference_neighborhood
     (hN : N01Properties D T S C base loss ε) :
-    (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
-  constructor
-  · have he : stateGrading S base (C.referenceState - C.referenceState) = 0 := by
-      rw [sub_self, map_zero]
-    exact he.trans_lt hN.2.1
-  · simpa only [abs_zero] using hN.2.1
+    (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
+  reference_mem_stateNeighborhood S C base hN.2.1
 
 /-- Exact cancellation for two actual root-coordinate witnesses.
 Their primitive speed germs need only be identified on the boundary.
@@ -281,13 +309,13 @@ def N06LeftRootOddLogBoundaryBound (D : ReferenceData) (T : MaterialData)
 
 /-- One constant precedes all states, roots, labels and actual flow
 witnesses. No reference speed-factor cost survives at radial order zero. -/
-theorem n06_N01_leftRootOdd_log_boundary_weighted_jets
+private theorem n06_leftRootOdd_log_boundary_from_bounds
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
-    (hN : N01Properties D T S C base loss ε) (n : ℕ) :
-    ∃ Q : ℝ, 0 ≤ Q ∧ N06LeftRootOddLogBoundaryBound D T S C base n ε Q := by
-  obtain ⟨A, hA, hspeed⟩ := n06_physicalRootLogSpeed_angular_weighted_jets hT hS hN n
-  obtain ⟨B, hB, hlabel⟩ := n06_stateLeftChart_logDeriv_weighted_jets hT hS hN n
-  refine ⟨A + B, add_nonneg hA hB, ?_⟩
+    (hN : N01Properties D T S C base loss ε) (n : ℕ) {A B : ℝ}
+    (hA : 0 ≤ A) (hB : 0 ≤ B)
+    (hspeed : N06PhysicalRootLogSpeedAngularBound D T S C base n ε A)
+    (hlabel : N06StateLeftChartLogDerivBound T S C base n ε B) :
+    N06LeftRootOddLogBoundaryBound D T S C base n ε (A + B) := by
   intro z hz hs hsmall r hr hroot m ι g hg d c d₀ c₀ Φ Φ₀ R R₀ σ σ₀ G G₀ P P₀ hc hc₀ θ k hk
   rw [n06_N01_leftRoot_logOdd_boundary_identity hT hS hN hz hs hr hroot m ι hg P P₀ hc hc₀]
   have hspeedSmooth : ContDiffAt ℝ ∞ (fun t => Real.log
@@ -329,5 +357,14 @@ theorem n06_N01_leftRootOdd_log_boundary_weighted_jets
     _ ≤ (A + B) * (n06RootJetWeight T (r, θ) * |z.2| +
         T.H (T.sample m) ^ (3 / 4 : ℝ) * stateGrading S (n + 7) (z.1 - C.referenceState)) := by
       nlinarith [mul_nonneg hA hlabelWeight, mul_nonneg hB hphysicalWeight]
+
+theorem n06_N01_leftRootOdd_log_boundary_weighted_jets
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε) (n : ℕ) :
+    ∃ Q : ℝ, 0 ≤ Q ∧ N06LeftRootOddLogBoundaryBound D T S C base n ε Q := by
+  obtain ⟨A, hA, hspeed⟩ := n06_physicalRootLogSpeed_named hT hS hN n
+  obtain ⟨B, hB, hlabel⟩ := n06_stateLeftChart_logDeriv_named hT hS hN n
+  exact ⟨A + B, add_nonneg hA hB,
+    n06_leftRootOdd_log_boundary_from_bounds hT hS hN n hA hB hspeed hlabel⟩
 
 end ContinuousFlexibility.Statements

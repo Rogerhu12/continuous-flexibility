@@ -132,7 +132,11 @@ theorem n06_canonicalHeight_firstJet_congr
     (hh.2.1.differentiableAt (by simp)).comp p hG
   have hInv : DifferentiableAt ℝ
       (fun q => (K.height z m (K.inverseChart z m q))⁻¹) p := by
-    simpa only [Pi.inv_apply] using hH.inv hh.2.2.2.ne'
+    exact hH.fun_inv hh.2.2.2.ne'
+  have hF : DifferentiableAt ℝ (fun q => f (K.inverseChart z m q)) p :=
+    hf.comp p hG
+  have hG' : DifferentiableAt ℝ (fun q => g (K.inverseChart z m q)) p :=
+    hg.comp p hG
   constructor
   · change f (K.inverseChart z m p) / K.height z m (K.inverseChart z m p) =
       g (K.inverseChart z m p) / K.height z m (K.inverseChart z m p)
@@ -142,7 +146,7 @@ theorem n06_canonicalHeight_firstJet_congr
       fderiv ℝ (fun q => g (K.inverseChart z m q) /
         K.height z m (K.inverseChart z m q)) p
     simp only [div_eq_mul_inv]
-    rw [fderiv_fun_mul (hf.comp p hG) hInv, fderiv_fun_mul (hg.comp p hG) hInv]
+    rw [fderiv_fun_mul hF hInv, fderiv_fun_mul hG' hInv]
     have hdf := fderiv_comp p hf hG
     have hdg := fderiv_comp p hg hG
     simp only [Function.comp_def] at hdf hdg

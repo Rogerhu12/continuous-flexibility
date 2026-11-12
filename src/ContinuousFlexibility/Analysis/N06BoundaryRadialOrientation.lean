@@ -123,7 +123,7 @@ theorem N06RootFirstJets.inverse_radial_firstJet
     have he := polarCLM_apply_decompose
       ((ContinuousLinearMap.fst ℝ ℝ ℝ).comp (fderiv ℝ F (r, θ))) v
     simpa only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
-      J.chart_radial θ, J.chart_angular θ, mul_zero, add_zero, mul_comm] using he
+      J.chart_radial θ, J.chart_angular θ, mul_zero, zero_mul, add_zero, mul_comm] using he
   have hderiv : HasDerivAt (fun t => (F (G (t, β θ))).1) ((σ * ρ θ) * v.1) y := by
     simpa only [hGF, hrow] using hcomp₁
   have hid : HasDerivWithinAt (fun t => (F (G (t, β θ))).1) 1 (Icc a b) y :=
@@ -192,7 +192,11 @@ theorem n06_current_boundary_radial_orientation
   have hG := (n04b_inverseChart_contDiffAt_closed h04.1 hz hs m
     (p := (y, β θ)) ⟨hy, mem_univ _⟩).differentiableAt (by simp)
   have hGF : K.inverseChart z m (y, β θ) = (r, θ) := by
-    simpa only [J.chart_value θ] using hb.2.2.1 (r, θ) (hx θ)
+    have hvalue : K.chart z m (r, θ) = (y, β θ) := J.chart_value θ
+    calc
+      K.inverseChart z m (y, β θ) = K.inverseChart z m (K.chart z m (r, θ)) :=
+        congrArg (K.inverseChart z m) hvalue.symm
+      _ = (r, θ) := hb.2.2.1 (r, θ) (hx θ)
   have hj := J.inverse_radial_firstJet (h04.1.referenceBounds m).2.1 hy θ hG hGF
     (fun t ht => hb.2.2.2.1 (t, β θ) ⟨ht, mem_univ _⟩)
   have htne : (fderiv ℝ (K.inverseChart z m) (y, β θ) (1, 0)).1 ≠ 0 := by
@@ -204,7 +208,8 @@ theorem n06_current_boundary_radial_orientation
   have hmap : MapsTo (fun t : ℝ => (K.inverseChart z m (t, β θ)).1)
       (Ioo (K.left m) (K.right m)) (Ioo a b) := by
     intro t ht
-    have hp := (h04.1.charts z hz hs m).2.1 ⟨ht, mem_univ _⟩
+    have htc : (t, β θ) ∈ canonicalOpen S K m := ⟨ht, mem_univ _⟩
+    have hp := (h04.1.charts z hz hs m).2.1 htc
     have hpD := (h04.1.domains z hz hs m).2.2.1 hp
     have hpSide := hside _ hp
     cases physicalUpper

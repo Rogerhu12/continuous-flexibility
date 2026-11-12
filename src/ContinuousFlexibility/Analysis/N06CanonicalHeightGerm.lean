@@ -45,6 +45,7 @@ theorem n06_exists_heightPair_canonicalHeight_germ
     · intro q
       simp only [φ, Prod.fst_add, add_zero]
     · intro r hr θ
+      change χ r = 0
       exact image_eq_zero_of_notMem_tsupport hr
   have hφeven : ∀ r θ, φ (r, -θ) = φ (r, θ) := fun _ _ => rfl
   have hcompactPhysical :

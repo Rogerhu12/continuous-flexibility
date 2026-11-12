@@ -244,6 +244,8 @@ theorem n06_positive_current_shifted_operatorTest_memLp
       divergenceOperator (L.coefficients z) φ (q + (0, (j : ℝ) * Real.pi))))
       2 (canonicalMeasure S K m) := by
   apply n06_current_canonicalSource_memLp h04 hz hs m
+  have hΩ := n06_positivePhysicalPiece_eq_reference h04.1 hz hs m hm
+  rw [n06_physicalPieceClosed_eq_reference_rectangle h04.1 m hΩ]
   have hc := (n06_positive_current_test_contDiffOn hT hS h01 h03 h04 hz hs m hm hφ).continuousOn
   exact hc.comp (continuous_id.add continuous_const).continuousOn
     (fun p hp => ⟨by simpa only [Prod.fst_add, add_zero] using hp.1, mem_univ _⟩)

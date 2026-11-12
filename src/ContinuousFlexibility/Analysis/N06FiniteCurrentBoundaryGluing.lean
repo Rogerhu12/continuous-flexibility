@@ -136,9 +136,12 @@ theorem n06_orientedCanonicalBoundary_zero_off_support
       n06OrientedCanonicalBoundary Q W a reverse physicalUpper θ) = 0 := by
   have hy : (if (if reverse then !physicalUpper else physicalUpper)
       then K.right m else K.left m) ∈ Icc (K.left m) (K.right m) := by
-    split
-    · exact ⟨(h04.1.referenceBounds m).2.1.le, le_rfl⟩
-    · exact ⟨le_rfl, (h04.1.referenceBounds m).2.1.le⟩
+    have he (upper : Bool) :
+        (if upper then K.right m else K.left m) ∈ Icc (K.left m) (K.right m) := by
+      cases upper
+      · exact ⟨le_rfl, (h04.1.referenceBounds m).2.1.le⟩
+      · exact ⟨(h04.1.referenceBounds m).2.1.le, le_rfl⟩
+    exact he (if reverse then !physicalUpper else physicalUpper)
   have hinverse : ∀ θ ∈ Icc (0 : ℝ) Real.pi,
       (K.inverseChart z m
         ((if (if reverse then !physicalUpper else physicalUpper) then K.right m else K.left m),
