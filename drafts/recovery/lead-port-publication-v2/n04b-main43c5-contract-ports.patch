@@ -1,0 +1,2590 @@
+diff --git a/src/ContinuousFlexibility/Analysis/CircleLocalPositiveJetAssembly.lean b/src/ContinuousFlexibility/Analysis/CircleLocalPositiveJetAssembly.lean
+new file mode 100644
+index 0000000000000000000000000000000000000000..4a82e89b1abd240e2d36c585a5bf77b25cdb4419
+--- /dev/null
++++ b/src/ContinuousFlexibility/Analysis/CircleLocalPositiveJetAssembly.lean
+@@ -0,0 +1,201 @@
++import ContinuousFlexibility.Analysis.CirclePositiveJetAssembly
++
++/-!
++# Circle towers from positive-order bounds on local neighbourhoods
++
++Each parameter order may use its own open convex neighbourhood of the
++base point. That neighbourhood is chosen before the circle output order.
++The lifted jets decode to the original scalar family everywhere on the
++given domain. Joint continuity at order n only uses a local bound at n+1;
++the original scalar derivatives and second envelopes give the same genuine
++projective line derivatives on the full domain.
++-/
++
++noncomputable section
++
++namespace ContinuousFlexibility.Analysis
++
++open Set Filter ContinuousFlexibility.Statements
++open scoped Topology BigOperators
++
++variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
++  [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
++  {F : ℕ → Type*} [∀ s, NormedAddCommGroup (F s)] [∀ s, NormedSpace ℝ (F s)]
++  {bond : ∀ s, F (s + 1) →L[ℝ] F s} {U : Set E}
++
++theorem continuousOn_projectiveJets_of_locally_positive_seminorm_bounds
++    (A : ∀ n : ℕ, E → E [×n]→L[ℝ] ProjectiveLimit F bond)
++    (hline : ∀ n x, x ∈ U → ∀ (v : Fin n → E) (w : E),
++      HasProjectiveLineDerivAt (fun y => A n y v) (A (n + 1) x (Fin.cons w v)) x w)
++    (hbound : ∀ n x, x ∈ U → ∃ V : Set E,
++      IsOpen V ∧ Convex ℝ V ∧ x ∈ V ∧ V ⊆ U ∧
++        ∀ s, ∃ p : Seminorm ℝ E, ∃ B : ℝ, Continuous p ∧ 0 ≤ B ∧
++          ∀ y ∈ V, ∀ v : Fin (n + 1) → E,
++            ‖(A (n + 1) y v).val s‖ ≤ B * (1 + p y) * ∏ i, p (v i))
++    (n : ℕ) :
++    ContinuousOn (fun z : E × (Fin n → E) => A n z.1 z.2) (U ×ˢ univ) := by
++  have hcoordinate (s : ℕ) :
++      ContinuousOn (fun z : E × (Fin n → E) => (A n z.1 z.2).val s) (U ×ˢ univ) := by
++    rintro ⟨x, v⟩ hx
++    obtain ⟨V, hV, hcV, hxV, hVU, hbounds⟩ := hbound n x hx.1
++    obtain ⟨p, B, hp, hB, hb⟩ := hbounds s
++    have hlineV : ∀ j y, y ∈ V → ∀ (v : Fin j → E) (w : E),
++        HasProjectiveLineDerivAt (fun z => A j z v)
++          (A (j + 1) y (Fin.cons w v)) y w :=
++      fun j y hy v w => hline j y (hVU hy) v w
++    apply ContinuousAt.continuousWithinAt
++    apply tendsto_iff_norm_sub_tendsto_zero.mpr
++    let err : E × (Fin n → E) → ℝ := fun z =>
++      B * (1 + p x + p (z.1 - x)) * (p (z.1 - x) * ∏ j, p (z.2 j)) +
++        ‖(A n x z.2).val s - (A n x v).val s‖
++    have hpbase : Continuous (fun z : E × (Fin n → E) => p (z.1 - x)) :=
++      hp.comp (continuous_fst.sub continuous_const)
++    have hpdirs : Continuous (fun z : E × (Fin n → E) => ∏ j, p (z.2 j)) :=
++      continuous_finsetProd _ (fun j _ => hp.comp ((continuous_apply j).comp continuous_snd))
++    have hfixed : Continuous (fun z : E × (Fin n → E) => (A n x z.2).val s) :=
++      (projectiveCoordinate F bond s).continuous.comp
++        ((A n x).cont.comp continuous_snd)
++    have herr : Continuous err :=
++      ((continuous_const.mul (continuous_const.add hpbase)).mul (hpbase.mul hpdirs)).add
++        (hfixed.sub continuous_const).norm
++    have herr0 : err (x, v) = 0 := by
++      simp only [err, sub_self, map_zero, mul_zero, zero_mul, norm_zero, add_zero]
++    have hmem : ∀ᶠ z : E × (Fin n → E) in 𝓝 (x, v), z.1 ∈ V :=
++      continuous_fst.continuousAt.eventually (hV.mem_nhds hxV)
++    have hupper : ∀ᶠ z : E × (Fin n → E) in 𝓝 (x, v),
++        ‖(A n z.1 z.2).val s - (A n x v).val s‖ ≤ err z := by
++      filter_upwards [hmem] with z hz
++      have hbase := projectiveJet_base_variation_le (U := V)
++        A hlineV hcV n s p hB hb hxV hz z.2
++      exact (norm_sub_le_norm_sub_add_norm_sub ((A n z.1 z.2).val s) ((A n x z.2).val s)
++        ((A n x v).val s)).trans (add_le_add hbase (le_refl _))
++    exact squeeze_zero' (Eventually.of_forall (fun _ => norm_nonneg _)) hupper
++      (by simpa only [herr0] using herr.tendsto (x, v))
++  intro z hz
++  rw [ContinuousWithinAt, tendsto_projectiveLimit_iff]
++  exact fun s => hcoordinate s z hz
++
++end ContinuousFlexibility.Analysis
++
++namespace ContinuousFlexibility.Statements
++
++open Set Filter ContinuousFlexibility.Analysis
++open scoped Topology ENNReal BigOperators
++
++variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
++  [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
++  {T : MaterialData} {γ : ℝ} {S : CircleModelData} {U : Set E}
++
++def CircleLocalPositiveJetNormBounds
++    (A : ∀ n : ℕ, E → MultilinearMap ℝ (fun _ : Fin n => E) (ℕ → ℝ → ℝ)) : Prop :=
++  ∀ n x, x ∈ U → ∃ V : Set E,
++    IsOpen V ∧ Convex ℝ V ∧ x ∈ V ∧ V ⊆ U ∧
++      ∀ s, ∃ p : Seminorm ℝ E, ∃ B : ℝ, Continuous p ∧ 0 ≤ B ∧
++        ∀ y ∈ V, ∀ v : Fin (n + 1) → E,
++          circleNorm T γ s (A (n + 1) y v) ≤ B * (1 + p y) * ∏ i, p (v i)
++
++def circleLocalPositiveJetLift (hS : IsCircleModel T γ S)
++    (A : ∀ n : ℕ, E → MultilinearMap ℝ (fun _ : Fin n => E) (ℕ → ℝ → ℝ))
++    (hmember : ∀ n x, x ∈ U → ∀ v, CircleMember T γ (A n x v))
++    (hbound : CircleLocalPositiveJetNormBounds (T := T) (γ := γ) (U := U) A) :
++    ∀ n : ℕ, E → E [×n]→L[ℝ] S.Space
++  | 0, x => by
++      classical
++      exact if hx : x ∈ U then
++        ContinuousMultilinearMap.constOfIsEmpty ℝ (fun _ : Fin 0 => E)
++          (circleRealize hS (A 0 x Fin.elim0) (hmember 0 x hx Fin.elim0))
++        else 0
++  | n + 1, x => by
++      classical
++      exact if hx : x ∈ U then
++        liftCircleContinuousMultilinear hS (A (n + 1) x) (hmember (n + 1) x hx) (by
++          intro s
++          obtain ⟨V, _hV, _hcV, hxV, _hVU, hbounds⟩ := hbound n x hx
++          obtain ⟨p, B, hp, _hB, hb⟩ := hbounds s
++          exact ⟨p, B * (1 + p x), hp, hb x hxV⟩)
++        else 0
++
++theorem circleLocalPositiveJetLift_decode (hS : IsCircleModel T γ S)
++    (A : ∀ n : ℕ, E → MultilinearMap ℝ (fun _ : Fin n => E) (ℕ → ℝ → ℝ))
++    (hmember : ∀ n x, x ∈ U → ∀ v, CircleMember T γ (A n x v))
++    (hbound : CircleLocalPositiveJetNormBounds (T := T) (γ := γ) (U := U) A)
++    (n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E) :
++    S.decode (circleLocalPositiveJetLift hS A hmember hbound n x v) = A n x v := by
++  classical
++  cases n with
++  | zero =>
++      have hv : v = Fin.elim0 := Subsingleton.elim _ _
++      rw [hv]
++      simp only [circleLocalPositiveJetLift, dif_pos hx,
++        ContinuousMultilinearMap.constOfIsEmpty_apply, circleRealize_decode]
++  | succ n =>
++      simp only [circleLocalPositiveJetLift, dif_pos hx]
++      exact liftCircleContinuousMultilinear_decode hS (A (n + 1) x)
++        (hmember (n + 1) x hx) _ v
++
++theorem circleLocalPositiveJetLift_coordinate_bound (hS : IsCircleModel T γ S)
++    (A : ∀ n : ℕ, E → MultilinearMap ℝ (fun _ : Fin n => E) (ℕ → ℝ → ℝ))
++    (hmember : ∀ n x, x ∈ U → ∀ v, CircleMember T γ (A n x v))
++    (hbound : CircleLocalPositiveJetNormBounds (T := T) (γ := γ) (U := U) A) :
++    ∀ n x, x ∈ U → ∃ V : Set E,
++      IsOpen V ∧ Convex ℝ V ∧ x ∈ V ∧ V ⊆ U ∧
++        ∀ s, ∃ p : Seminorm ℝ E, ∃ B : ℝ, Continuous p ∧ 0 ≤ B ∧
++          ∀ y ∈ V, ∀ v : Fin (n + 1) → E,
++            ‖(circleLocalPositiveJetLift hS A hmember hbound (n + 1) y v).val s‖ ≤
++              B * (1 + p y) * ∏ i, p (v i) := by
++  intro n x hx
++  obtain ⟨V, hV, hcV, hxV, hVU, hbounds⟩ := hbound n x hx
++  refine ⟨V, hV, hcV, hxV, hVU, ?_⟩
++  intro s
++  obtain ⟨p, B, hp, hB, hb⟩ := hbounds s
++  refine ⟨p, B, hp, hB, ?_⟩
++  intro y hy v
++  have hnorm :
++      ‖(circleLocalPositiveJetLift hS A hmember hbound (n + 1) y v).val s‖ =
++        circleNorm T γ s
++          (S.decode (circleLocalPositiveJetLift hS A hmember hbound (n + 1) y v)) :=
++    hS.2.2.2.2.2.2.2 _ s
++  have hdecode := circleLocalPositiveJetLift_decode hS A hmember hbound
++    (n + 1) y (hVU hy) v
++  exact (hnorm.trans (congrArg (circleNorm T γ s) hdecode)).trans_le (hb y hy v)
++
++/-- The actual scalar jets determine one global circle tower, while each
++positive parameter order may use a different local seminorm neighbourhood. -/
++theorem exists_circle_smoothDirections_of_locally_positive_scalar_jets
++    (hS : IsCircleModel T γ S)
++    (hM : ∀ m, 0 ≤ T.M (T.sample m)) (hH : ∀ m, 0 ≤ T.H (T.sample m))
++    (hU : IsOpen U) (f : E → S.Space)
++    (A : ∀ n : ℕ, E → MultilinearMap ℝ (fun _ : Fin n => E) (ℕ → ℝ → ℝ))
++    (hmember : ∀ n x, x ∈ U → ∀ v, CircleMember T γ (A n x v))
++    (hbound : CircleLocalPositiveJetNormBounds (T := T) (γ := γ) (U := U) A)
++    (hzero : ∀ x ∈ U, A 0 x Fin.elim0 = S.decode (f x))
++    (hscalar : ∀ n (x w : E) (v : Fin n → E) (t : ℝ), x + t • w ∈ U → ∀ m b θ,
++      HasDerivAt (fun u => iteratedDeriv b (A n (x + u • w) v m) θ)
++        (iteratedDeriv b (A (n + 1) (x + t • w) (Fin.cons w v) m) θ) t)
++    (henergy : CircleJetSecondEnvelopes (T := T) (γ := γ) (U := U) A) :
++    ∃ J : SmoothDirections U f, ∀ n x, x ∈ U → ∀ v : Fin n → E,
++      S.decode (J.D n x v) = A n x v := by
++  let L : ∀ n : ℕ, E → E [×n]→L[ℝ] S.Space :=
++    circleLocalPositiveJetLift hS A hmember hbound
++  have hzeroL : ∀ x ∈ U, L 0 x Fin.elim0 = f x := by
++    intro x hx
++    apply hS.2.2.2.2.2.1
++    exact (circleLocalPositiveJetLift_decode hS A hmember hbound 0 x hx Fin.elim0).trans
++      (hzero x hx)
++  have hline : ∀ n x, x ∈ U → ∀ (v : Fin n → E) (w : E),
++      HasProjectiveLineDerivAt (fun y => L n y v) (L (n + 1) x (Fin.cons w v)) x w :=
++    circleJetFamily_hasProjectiveLineDerivAt hS hM hH hU A L
++      (circleLocalPositiveJetLift_decode hS A hmember hbound) hscalar henergy
++  let J : SmoothDirections U f := {
++    open_domain := hU
++    D := L
++    zero := hzeroL
++    continuous := continuousOn_projectiveJets_of_locally_positive_seminorm_bounds
++      (F := fun s => S.level s) (bond := S.bond) L hline
++      (circleLocalPositiveJetLift_coordinate_bound hS A hmember hbound)
++    derivative := hline }
++  refine ⟨J, ?_⟩
++  intro n x hx v
++  exact circleLocalPositiveJetLift_decode hS A hmember hbound n x hx v
++
++end ContinuousFlexibility.Statements
+diff --git a/src/ContinuousFlexibility/Analysis/N01ActualCellMaterialOrder.lean b/src/ContinuousFlexibility/Analysis/N01ActualCellMaterialOrder.lean
+index a78a7316131957535a4f9cfe7137c8a77cf978ba..b7e6dec8ac31ac363acabdf4feffdf38bfd33e6e 100644
+--- a/src/ContinuousFlexibility/Analysis/N01ActualCellMaterialOrder.lean
++++ b/src/ContinuousFlexibility/Analysis/N01ActualCellMaterialOrder.lean
+@@ -30,14 +30,14 @@
+       1 ≤ K * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+         T.E0 (T.sample (C.cell m)) ^ A *
+         T.H (T.sample j) ^ (-(3 / 4 : ℝ)) * T.M (T.sample j) ^ N := by
+-  let n := max base loss
++  let n := max base (hN.ordinaryFlowLoss 2)
+   obtain ⟨K, A, R, hK, _, hR, htest⟩ :=
+     exists_referencePlateau_heightPair_norm_bound hN.1.1 hT hS n
+   have hgeom : RadialProfileGeometry D := (Classical.choose_spec hN.1.1).1
+   have hcontrol : controlGeometryConditions D S C := hN.2.2.2.1
+   apply hN.balanced_constraint_of_radialHeightTests hS hT
+     (referenceRadialPrimitive D) (referenceRadialPrimitive_hasDerivAt hgeom)
+-    (n := n) (Nat.le_max_left base loss) (Nat.le_max_right base loss)
++    (n := n) (Nat.le_max_left base (hN.ordinaryFlowLoss 2)) (Nat.le_max_right base (hN.ordinaryFlowLoss 2))
+     (K := K) (A := A) (R := R) hK hR
+   intro m j hj
+   exact htest j (C.left m) (C.right m)
+diff --git a/src/ContinuousFlexibility/Analysis/N01ControlFlowBounds.lean b/src/ContinuousFlexibility/Analysis/N01ControlFlowBounds.lean
+index 47f941ca2262147718c283cc9276eb0ed7b997af..261342846fadbe15a29e7d4dc6cdab794f9914f4 100644
+--- a/src/ContinuousFlexibility/Analysis/N01ControlFlowBounds.lean
++++ b/src/ContinuousFlexibility/Analysis/N01ControlFlowBounds.lean
+@@ -1,4 +1,5 @@
+ import ContinuousFlexibility.Analysis.N01ControlCoefficientVariation
++import ContinuousFlexibility.Analysis.N01OrdinaryFlowLoss
+ import ContinuousFlexibility.Analysis.OpticalControlFullCurvature
+ import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+ import Mathlib.MeasureTheory.Integral.DominatedConvergence
+@@ -79,9 +80,9 @@
+       B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+         T.E0 (T.sample (C.cell m)) ^ B *
+         oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+-          base loss 0 (fun _ : Fin 2 =>
+-            (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) := by
+-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 2 0
++          base (hN.ordinaryFlowLoss 2) 0 (fun _ : Fin 2 =>
++            (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) := by
++  let hdata := hN.ordinaryFlowFamily_bound 2 0
+   let B : ℝ := hdata.choose
+   have hB : 0 < B := hdata.choose_spec.1
+   have hpoint : ∀ (m : ℕ) (r : ℝ), r ∈ Ioo (C.left m) (C.right m) →
+@@ -90,7 +91,7 @@
+       B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+         T.E0 (T.sample (C.cell m)) ^ B *
+         oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+-          base loss 0 (fun _ : Fin 2 =>
++          base (hN.ordinaryFlowLoss 2) 0 (fun _ : Fin 2 =>
+             (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) := by
+     intro m r hr
+     let v : AnnularState S × ℝ :=
+@@ -125,7 +126,7 @@
+       (fun W : ℝ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+         T.E0 (T.sample (C.cell m)) ^ B * W)
+       (oneHigh_at_zero_offset (pairGrading (stateGrading S) realGrading)
+-        base loss (C.referenceState, (0 : ℝ)) (fun _ : Fin 2 => v)))
++        base (hN.ordinaryFlowLoss 2) (C.referenceState, (0 : ℝ)) (fun _ : Fin 2 => v)))
+   exact Exists.intro B (And.intro hB hpoint)
+ 
+ /-- The same fixed ratio on the full closed component gives the actual
+@@ -203,7 +204,7 @@
+       B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+         T.E0 (T.sample (C.cell m)) ^ B *
+         oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+-          base loss 0 (fun _ : Fin 2 =>
++          base (hN.ordinaryFlowLoss 2) 0 (fun _ : Fin 2 =>
+             (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) := by
+   let hdata := hN.controlTravelPartial_second_bound hS hT
+   let B : ℝ := hdata.choose
+@@ -214,13 +215,13 @@
+       B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+         T.E0 (T.sample (C.cell m)) ^ B *
+         oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+-          base loss 0 (fun _ : Fin 2 =>
++          base (hN.ordinaryFlowLoss 2) 0 (fun _ : Fin 2 =>
+             (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) := by
+     intro m
+     let K : ℝ := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+       T.E0 (T.sample (C.cell m)) ^ B *
+       oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+-        base loss 0 (fun _ : Fin 2 =>
++        base (hN.ordinaryFlowLoss 2) 0 (fun _ : Fin 2 =>
+           (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ)))
+     change |deriv (deriv (fun t => opticalTravel
+       (opticalLogPerturbation D.w (C.control m) t) (C.left m) (C.right m))) 0| ≤ K
+diff --git a/src/ContinuousFlexibility/Analysis/N01ControlIndexBound.lean b/src/ContinuousFlexibility/Analysis/N01ControlIndexBound.lean
+index 54ffc391d76e2dfc236daf5d39f4776da5962aa9..7421058c2cd6e2658c838d7f9aa08e31139d1101 100644
+--- a/src/ContinuousFlexibility/Analysis/N01ControlIndexBound.lean
++++ b/src/ContinuousFlexibility/Analysis/N01ControlIndexBound.lean
+@@ -82,7 +82,7 @@
+     materialSample_H_radialE_envelope hT hN.1.1 (γ := (3 / 8 : ℝ)) (by norm_num) A
+   obtain ⟨CC, hCC, hc⟩ :=
+     materialSample_H_E0_envelope hT hN.1.1 (γ := (3 / 4 : ℝ)) (by norm_num) F
+-  let d : ℕ := max base (1 + loss) + max base loss * 2
++  let d : ℕ := max base (1 + loss) + max base (hN.ordinaryFlowLoss 2) * 2
+   obtain ⟨CM, hCM, hm⟩ :=
+     materialSample_H_M_envelope hT hN.1.1 (γ := (3 / 4 : ℝ)) (by norm_num) (d : ℝ)
+   obtain ⟨CH, L, hCH, hL, hh⟩ :=
+@@ -108,7 +108,7 @@
+     simp only [Real.rpow_def_of_pos hHm, pow_two, ← Real.exp_add]
+     congr 1
+     ring
+-  have hMd : Mm ^ d = Mm ^ max base (1 + loss) * (Mm ^ max base loss) ^ 2 := by
++  have hMd : Mm ^ d = Mm ^ max base (1 + loss) * (Mm ^ max base (hN.ordinaryFlowLoss 2)) ^ 2 := by
+     simp only [d, pow_add, pow_mul]
+   have hm' : Hm ^ (3 / 4 : ℝ) * Mm ^ d ≤ CM := by
+     simpa only [Real.rpow_natCast] using hm m
+@@ -122,7 +122,7 @@
+         radialE (D.cellIndex j) ^ A *
+         T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ F *
+         ((Mm ^ max base (1 + loss) * Hm ^ (-(3 / 4 : ℝ))) *
+-          (Mm ^ max base loss * Hm ^ (-(3 / 4 : ℝ))) ^ 2) =
++          (Mm ^ max base (hN.ordinaryFlowLoss 2) * Hm ^ (-(3 / 4 : ℝ))) ^ 2) =
+       K * (Hj ^ (3 / 8 : ℝ) * T.E0 (T.sample j) ^ B) *
+         (Hj ^ (3 / 8 : ℝ) * radialE (D.cellIndex j) ^ A) *
+         (T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ F) *
+diff --git a/src/ContinuousFlexibility/Analysis/N01ControlWeightConstraint.lean b/src/ContinuousFlexibility/Analysis/N01ControlWeightConstraint.lean
+index f693ca1864b311b1fbe45943944930fb18497984..89016b91b373f0cefefcd080a4a62cfc5a56586f 100644
+--- a/src/ContinuousFlexibility/Analysis/N01ControlWeightConstraint.lean
++++ b/src/ContinuousFlexibility/Analysis/N01ControlWeightConstraint.lean
+@@ -63,16 +63,16 @@
+         (opticalLogPerturbation D.w (C.control m) t) (C.left m) (C.right m))) 0| ≤
+         K * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B *
+-          (T.M (T.sample m) ^ max base loss *
++          (T.M (T.sample m) ^ max base (hN.ordinaryFlowLoss 2) *
+             T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2 := by
+   let hdata := hN.controlTravel_second_bound hS hT
+   let B : ℝ := hdata.choose
+   have hB : 0 < B := hdata.choose_spec.1
+   obtain ⟨_, hgeom⟩ := hN.1.1
+-  let G := circleSingletonGradingConstant base + circleSingletonGradingConstant loss + 1
++  let G := circleSingletonGradingConstant base + circleSingletonGradingConstant (hN.ordinaryFlowLoss 2) + 1
+   have hG : 0 < G := by
+     have hb := circleSingletonGradingConstant_nonneg base
+-    have hl := circleSingletonGradingConstant_nonneg loss
++    have hl := circleSingletonGradingConstant_nonneg (hN.ordinaryFlowLoss 2)
+     dsimp only [G]
+     linarith
+   refine ⟨B * G ^ 2, B, mul_pos hB (sq_pos_of_pos hG), hB, fun m => ?_⟩
+@@ -82,15 +82,15 @@
+   have hpC := hT.2.1 (T.sample (C.cell m)) (hsample (C.cell m))
+   let v := singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m
+   have hgrade := singletonKappaDirection_two_grades_le
+-    (hS.2.1 (3 / 4 : ℝ)) m base loss hpM.2.2.2 hpM.2.1.le
+-  have hgrade0 : 0 ≤ stateGrading S base v + stateGrading S loss v :=
++    (hS.2.1 (3 / 4 : ℝ)) m base (hN.ordinaryFlowLoss 2) hpM.2.2.2 hpM.2.1.le
++  have hgrade0 : 0 ≤ stateGrading S base v + stateGrading S (hN.ordinaryFlowLoss 2) v :=
+     add_nonneg (apply_nonneg _ _) (apply_nonneg _ _)
+   have hweight :
+       oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+-        base loss 0 (fun _ : Fin 2 => (v, (0 : ℝ))) ≤
+-        G ^ 2 * (T.M (T.sample m) ^ max base loss *
++        base (hN.ordinaryFlowLoss 2) 0 (fun _ : Fin 2 => (v, (0 : ℝ))) ≤
++        G ^ 2 * (T.M (T.sample m) ^ max base (hN.ordinaryFlowLoss 2) *
+           T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2 := by
+-    refine (oneHighVariationWeight_state_pair_two_zero_le S base loss v).trans
++    refine (oneHighVariationWeight_state_pair_two_zero_le S base (hN.ordinaryFlowLoss 2) v).trans
+       ((pow_le_pow_left₀ hgrade0 hgrade 2).trans_eq ?_)
+     dsimp only [G]
+     ring
+@@ -114,7 +114,7 @@
+         T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ F *
+         ((T.M (T.sample m) ^ max base (1 + loss) *
+             T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
+-          (T.M (T.sample m) ^ max base loss *
++          (T.M (T.sample m) ^ max base (hN.ordinaryFlowLoss 2) *
+             T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2) := by
+   obtain ⟨Kχ, B, A, hKχ, hB, hA, hχ⟩ := hN.control_deriv_actual_cell_bound hS hT
+   obtain ⟨KF, F, hKF, hF, hsecond⟩ := hN.controlTravel_second_weight_bound hS hT
+@@ -130,7 +130,7 @@
+     (T.M (T.sample m) ^ max base (1 + loss) * T.H (T.sample m) ^ (-(3 / 4 : ℝ)))
+   let PF := KF * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+     T.E0 (T.sample (C.cell m)) ^ F *
+-    (T.M (T.sample m) ^ max base loss * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2
++    (T.M (T.sample m) ^ max base (hN.ordinaryFlowLoss 2) * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2
+   have hχbound : ∀ r ∈ Ioo (C.left m) (C.right m), |deriv (C.control m) r| ≤ Pχ :=
+     fun r hr => hχ m j r (hcell hr)
+   have hPχ : 0 ≤ Pχ := by
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointAngularJets.lean b/src/ContinuousFlexibility/Analysis/N01EndpointAngularJets.lean
+index ae50593139003ac178bbc4d14cc9d22e56a89a5c..f5496a33bc9e346f3e7cd2b03d7483b258df87d8 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointAngularJets.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointAngularJets.lean
+@@ -97,7 +97,7 @@
+         |(hN.sectorFlow_closed_angularTower hS hT m r hr b θ).D k z v| ≤
+           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
+             oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-              base (s + loss) z v := by
++              base (s + hN.ordinaryFlowLoss k) z v := by
+   let hdata := hN.sectorFlow_closed_tower hS hT k s
+   let B : ℝ := hdata.choose
+   have hB : 0 < B := hdata.choose_spec.1
+@@ -107,7 +107,7 @@
+         |(hN.sectorFlow_closed_angularTower hS hT m r hr b θ).D k z v| ≤
+           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
+             oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-              base (s + loss) z v := by
++              base (s + hN.ordinaryFlowLoss k) z v := by
+     intro m r hr b θ hb
+     exact scalarTower_bound_of_exists
+       (hN.sectorFlow_closed_angularTower hS hT m r hr b θ) k _
+@@ -122,7 +122,7 @@
+   apply uniformScalarJetSeminormBounds_of_oneHigh
+     (pairGrading (sectorGrading S) realGrading)
+     (sectorPairGrading_continuous S) (sectorPairGrading_monotone S)
+-    base (fun _ => b + loss)
++    base (fun n => b + hN.ordinaryFlowLoss n)
+   intro n
+   let hdata := hN.sectorFlow_closed_angularTower_bound hS hT n b
+   let B : ℝ := hdata.choose
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointCircleTower.lean b/src/ContinuousFlexibility/Analysis/N01EndpointCircleTower.lean
+index 8578d7ebfe38a33fd6db4db563b0599b635486bf..034eeb7ead0457d1357ecdddb343986e7fb64331 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointCircleTower.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointCircleTower.lean
+@@ -1,16 +1,16 @@
+ import ContinuousFlexibility.Analysis.N01EndpointOneHigh
+ import ContinuousFlexibility.Analysis.N01EndpointSecondEnvelope
+ import ContinuousFlexibility.Analysis.N01EndpointZeroCircleMember
+-import ContinuousFlexibility.Analysis.CirclePositiveJetAssembly
++import ContinuousFlexibility.Analysis.CircleLocalPositiveJetAssembly
+ import ContinuousFlexibility.Analysis.SmoothDirectionsGluing
+ 
+ /-!
+ # The actual endpoint flow in the physical circle topology
+ 
+-All scalar jets are realized in the supplied circle model. Uniform
+-weighted Taylor estimates give genuine projective line derivatives on
+-each bounded low-order box. Their unique towers agree on overlaps and
+-therefore give one smooth tower on the full original sector domain.
++All scalar jets are realized in the supplied circle model. At each
++parameter order, weighted Taylor estimates and a bounded low-order box
++give continuity of the actual jets. The resulting tower has genuine
++projective line derivatives on the full original sector domain.
+ -/
+ 
+ noncomputable section
+@@ -95,60 +95,46 @@
+       ∀ n x, x ∈ sectorNeighborhood S base ε ε → ∀ v : Fin n → (StateDirections S × ℝ),
+         (S.circle (3 / 4 : ℝ)).decode (J.D n x v) = hN.endpointFlowScalarJets hS hT rsel hrsel n x v := by
+   classical
+-  let bounds := hN.endpointFlowScalarJets_positive_norm_bounds_on_box hS hT rsel hrsel
+-  let B : ℕ := bounds.choose
+   let U : Set (StateDirections S × ℝ) := sectorNeighborhood S base ε ε
+-  let p := pairGrading (sectorGrading S) realGrading
+-  let V : U → Set (StateDirections S × ℝ) := fun i =>
+-    U ∩ {x | p B x < p B i.val + 1}
+-  have hVo (i : U) : IsOpen (V i) :=
+-    (sectorNeighborhood_isOpen S base ε ε).inter
++  let p : ℕ → Seminorm ℝ (StateDirections S × ℝ) :=
++    pairGrading (sectorGrading S) realGrading
++  have hU : IsOpen U := sectorNeighborhood_isOpen S base ε ε
++  have hlocal : ∀ n x, x ∈ U →
++      ∃ V : Set (StateDirections S × ℝ), IsOpen V ∧ Convex ℝ V ∧
++        x ∈ V ∧ V ⊆ U ∧
++        ∀ s, ∃ q : Seminorm ℝ (StateDirections S × ℝ), ∃ K : ℝ,
++          Continuous q ∧ 0 ≤ K ∧ ∀ y ∈ V, ∀ v : Fin (n + 1) → StateDirections S × ℝ,
++          circleNorm T (3 / 4 : ℝ) s
++            (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) y v) ≤
++            K * (1 + q y) * ∏ i, q (v i) := by
++    intro n x hx
++    obtain ⟨B, _hB, hbound⟩ :=
++      hN.endpointFlowScalarJets_positive_norm_bounds_on_box hS hT rsel hrsel n
++    let V : Set (StateDirections S × ℝ) := U ∩ {y | p B y < p B x + 1}
++    have hVo : IsOpen V := hU.inter
+       (isOpen_lt (sectorPairGrading_continuous S B) continuous_const)
+-  have hVc (i : U) : Convex ℝ (V i) :=
+-    (sectorNeighborhood_convex S base ε ε).inter
+-      (convex_seminorm_strict_sublevel (p B) (p B i.val + 1))
+-  have hsub (i : U) : V i ⊆ U := inter_subset_left
+-  have hcover : ∀ x ∈ U, ∃ i : U, x ∈ V i := by
+-    intro x hx
+-    refine ⟨⟨x, hx⟩, hx, ?_⟩
+-    exact Set.mem_ofPred.mpr (lt_add_of_pos_right (p B x) zero_lt_one)
++    have hVc : Convex ℝ V := (sectorNeighborhood_convex S base ε ε).inter
++      (convex_seminorm_strict_sublevel (p B) (p B x + 1))
++    have hxV : x ∈ V := ⟨hx,
++      Set.mem_ofPred.mpr (lt_add_of_pos_right (p B x) zero_lt_one)⟩
++    refine ⟨V, hVo, hVc, hxV, inter_subset_left, ?_⟩
++    intro s
++    have hR : 0 ≤ p B x + 1 := add_nonneg (apply_nonneg _ _) zero_le_one
++    obtain ⟨j, K, hK, hestimate⟩ := hbound (p B x + 1) hR s
++    exact ⟨p j, K, sectorPairGrading_continuous S j, hK,
++      fun y hy v => hestimate y hy.1 hy.2.le v⟩
+   have hs (m : ℕ) := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
+   have hM (m : ℕ) : 0 ≤ T.M (T.sample m) := zero_le_one.trans (hT.2.1 _ (hs m)).2.2.2
+   have hH (m : ℕ) : 0 ≤ T.H (T.sample m) := (hT.2.1 _ (hs m)).2.1.le
+-  have hlocal (i : U) : ∃ J : SmoothDirections (V i) (hN.endpointFlowCircle hS hT rsel hrsel),
+-      ∀ n x, x ∈ V i → ∀ v : Fin n → (StateDirections S × ℝ),
+-        (S.circle (3 / 4 : ℝ)).decode (J.D n x v) = hN.endpointFlowScalarJets hS hT rsel hrsel n x v := by
+-    have hR : 0 ≤ p B i.val + 1 := add_nonneg (apply_nonneg _ _) zero_le_one
+-    have hpositive : CirclePositiveJetNormBounds (T := T) (γ := (3 / 4 : ℝ))
+-        (U := V i) (hN.endpointFlowScalarJets hS hT rsel hrsel) := by
+-      intro n s
+-      let estimate := bounds.choose_spec.2 (p B i.val + 1) hR n s
+-      let j : ℕ := estimate.choose
+-      let K : ℝ := estimate.choose_spec.choose
+-      exact ⟨p j, K, sectorPairGrading_continuous S j,
+-        estimate.choose_spec.choose_spec.1,
+-        fun x hx v => estimate.choose_spec.choose_spec.2 x hx.1 hx.2.le v⟩
+-    exact exists_circle_smoothDirections_of_positive_scalar_jets
+-      (hS.2.1 (3 / 4 : ℝ)) hM hH (hVo i) (hVc i) (hN.endpointFlowCircle hS hT rsel hrsel)
+-      (hN.endpointFlowScalarJets hS hT rsel hrsel)
+-      (fun n x hx v => hN.endpointFlowScalarJets_circleMember hS hT rsel hrsel n x hx.1 v)
+-      hpositive
+-      (fun x hx => (hN.endpointFlowCircle_decode hS hT rsel hrsel x hx.1).symm)
+-      (fun n x w v t ht m b θ => hN.endpointFlowScalarJets_hasDerivAt_line hS hT rsel hrsel n x w v t ht.1 m b θ)
+-      (hN.endpointFlowScalarJets_second_envelopes hS hT rsel hrsel (hVo i) (hsub i))
+-  let J (i : U) : SmoothDirections (V i) (hN.endpointFlowCircle hS hT rsel hrsel) :=
+-    (hlocal i).choose
+-  let gluing := exists_smoothDirections_of_open_cover
+-    (sectorNeighborhood_isOpen S base ε ε) V J hsub hcover
+-  let K : SmoothDirections U (hN.endpointFlowCircle hS hT rsel hrsel) := gluing.choose
+-  refine ⟨K, ?_⟩
+-  intro n x hx v
+-  let covering := hcover x hx
+-  let i : U := covering.choose
+-  have hi : x ∈ V i := covering.choose_spec
+-  exact (congrArg (fun A : ContinuousMultilinearMap ℝ
+-      (fun _ : Fin n => StateDirections S × ℝ) (CircleSpace S) =>
+-      (S.circle (3 / 4 : ℝ)).decode (A v))
+-    (gluing.choose_spec i n x hi)).trans ((hlocal i).choose_spec n x hi v)
++  exact exists_circle_smoothDirections_of_locally_positive_scalar_jets
++    (hS.2.1 (3 / 4 : ℝ)) hM hH hU
++    (hN.endpointFlowCircle hS hT rsel hrsel)
++    (hN.endpointFlowScalarJets hS hT rsel hrsel)
++    (fun n x hx v => hN.endpointFlowScalarJets_circleMember hS hT rsel hrsel n x hx v)
++    hlocal
++    (fun x hx => (hN.endpointFlowCircle_decode hS hT rsel hrsel x hx).symm)
++    (fun n x w v t ht m b θ =>
++      hN.endpointFlowScalarJets_hasDerivAt_line hS hT rsel hrsel n x w v t ht m b θ)
++    (hN.endpointFlowScalarJets_second_envelopes hS hT rsel hrsel hU (fun _ hx => hx))
+ 
+ end ContinuousFlexibility.Statements
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointHeightLineEnvelope.lean b/src/ContinuousFlexibility/Analysis/N01EndpointHeightLineEnvelope.lean
+index 7d6fb5f0353fa8204c0c54cc71a9cdf6528c59a9..1f96e78065032778d821621fd1e181b2a99040ae 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointHeightLineEnvelope.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointHeightLineEnvelope.lean
+@@ -83,7 +83,7 @@
+   let η₁ : ℕ → HeightPair S := data₁.choose
+   have hlocal₁ := data₁.choose_spec.2.2.1
+   have henergy₁ := data₁.choose_spec.2.2.2
+-  let j : ℕ := max base (s + loss)
++  let j : ℕ := max base (s + hN.ordinaryFlowLoss (n + 2))
+   let p := pairGrading (sectorGrading S) realGrading
+   let E₀ : ℕ → ℝ≥0∞ := fun m =>
+     ENNReal.ofReal ((T.M (T.sample m) ^ (s + 1)) ^ 2) *
+@@ -174,26 +174,26 @@
+       _ ≤ 2 * Real.sqrt (E m).toReal :=
+         (add_le_add he₀ he₁).trans_eq (two_mul (Real.sqrt (E m).toReal)).symm
+   have hbase := hheight base (le_max_left _ _)
+-  have hhigh := hheight (s + loss) (le_max_right _ _)
+-  have hgrade : p (s + loss) (x + t • w) ≤ p j x + p j w :=
+-    (sectorPairGrading_monotone S (show s + loss ≤ j from le_max_right _ _) (x + t • w)).trans
++  have hhigh := hheight (s + hN.ordinaryFlowLoss (n + 2)) (le_max_right _ _)
++  have hgrade : p (s + hN.ordinaryFlowLoss (n + 2)) (x + t • w) ≤ p j x + p j w :=
++    (sectorPairGrading_monotone S (show s + hN.ordinaryFlowLoss (n + 2) ≤ j from le_max_right _ _) (x + t • w)).trans
+       (seminorm_line_le_of_abs_le_one (p j) x w ht)
+-  have hcoeff : (n : ℝ) + 2 + p (s + loss) (x + t • w) ≤ A :=
++  have hcoeff : (n : ℝ) + 2 + p (s + hN.ordinaryFlowLoss (n + 2)) (x + t • w) ≤ A :=
+     add_le_add (le_refl _) hgrade
+   have hp := hpoint m b c θ (by omega) (x + t • w) hz η hlocal
+   calc
+     _ ≤ K * T.M (T.sample m) ^ (c + 1) *
+-        (((n : ℝ) + 2 + p (s + loss) (x + t • w)) * heightPairGrading S base η +
+-          heightPairGrading S (s + loss) η) := hp
++        (((n : ℝ) + 2 + p (s + hN.ordinaryFlowLoss (n + 2)) (x + t • w)) * heightPairGrading S base η +
++          heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) := hp
+     _ ≤ K * T.M (T.sample m) ^ (c + 1) *
+-        (A * heightPairGrading S base η + heightPairGrading S (s + loss) η) :=
++        (A * heightPairGrading S base η + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) :=
+       mul_le_mul_of_nonneg_left
+         (add_le_add (mul_le_mul_of_nonneg_right hcoeff (apply_nonneg _ _)) (le_refl _))
+         (mul_nonneg hK.le (pow_nonneg hM0 _))
+     _ = K * (A * (T.M (T.sample m) ^ (c + 1) * heightPairGrading S base η) +
+-        T.M (T.sample m) ^ (c + 1) * heightPairGrading S (s + loss) η) :=
++        T.M (T.sample m) ^ (c + 1) * heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) :=
+       heightLine_factor_reorder K (T.M (T.sample m) ^ (c + 1)) A
+-        (heightPairGrading S base η) (heightPairGrading S (s + loss) η)
++        (heightPairGrading S base η) (heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η)
+     _ ≤ K * (A * (2 * Real.sqrt (E m).toReal) + 2 * Real.sqrt (E m).toReal) :=
+       mul_le_mul_of_nonneg_left
+         (add_le_add (mul_le_mul_of_nonneg_left hbase hA) hhigh) hK.le
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointJetLocalGrowth.lean b/src/ContinuousFlexibility/Analysis/N01EndpointJetLocalGrowth.lean
+index d1fbab167eaff152a3fa0a074870e8d14a613894..281f65d08acd2dbdcb385ba6c9b6f3ed78413a3d 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointJetLocalGrowth.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointJetLocalGrowth.lean
+@@ -8,7 +8,7 @@
+ The genuine multilinear jet is split into its pure scalar part and a
+ finite sum with one state slot. The exact decoder realizes this identity
+ in each Hilbert coordinate, where the triangle inequality applies.
+-One low order and one loss work for every parameter order.
++For each parameter order, the low order and loss precede the spatial order.
+ -/
+ 
+ noncomputable section
+@@ -131,7 +131,7 @@
+     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
++    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+       ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),
+       ∀ z ∈ sectorNeighborhood S base ε ε,
+@@ -142,12 +142,13 @@
+         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) ≤
+         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
+           ∑ i : Fin (n + 1), pairGrading (sectorGrading S) realGrading (s + L) (v i)) := by
++  intro n
+   classical
+-  let stateData := hN.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all_uniform_radius hS hT
++  let stateData := hN.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all_uniform_radius hS hT n
+   let Bₛ : ℕ := stateData.choose
+   let Lₛ : ℕ := stateData.choose_spec.choose
+   have hBₛ : base ≤ Bₛ := stateData.choose_spec.choose_spec.1
+-  let scalarData := hN.endpointFlow_pure_scalar_circleNorm_local_growth_all_uniform_radius hS hT
++  let scalarData := hN.endpointFlow_pure_scalar_circleNorm_local_growth_all_uniform_radius hS hT n
+   let Bq : ℕ := scalarData.choose
+   let Lq : ℕ := scalarData.choose_spec.choose
+   let B : ℕ := max Bₛ Bq
+@@ -159,11 +160,11 @@
+   let p := pairGrading (sectorGrading S) realGrading
+   have hp : Monotone p := sectorPairGrading_monotone S
+   refine ⟨B, L, hBₛ.trans hBs, ?_⟩
+-  intro n R hR s hs
+-  let stateOrder := stateData.choose_spec.choose_spec.2 n R hR s (hBs.trans hs)
++  intro R hR s hs
++  let stateOrder := stateData.choose_spec.choose_spec.2 R hR s (hBs.trans hs)
+   let Ks : ℝ := stateOrder.choose
+   have hKs : 0 ≤ Ks := stateOrder.choose_spec.1
+-  let scalarOrder := scalarData.choose_spec.choose_spec.2 n R hR s (hBq.trans hs)
++  let scalarOrder := scalarData.choose_spec.choose_spec.2 R hR s (hBq.trans hs)
+   let Kq : ℝ := scalarOrder.choose
+   have hKq : 0 ≤ Kq := scalarOrder.choose_spec.1
+   refine ⟨Kq + ((n + 1 : ℕ) : ℝ) * Ks,
+@@ -231,7 +232,7 @@
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+     (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
+-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
++    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+       ∀ z ∈ sectorNeighborhood S base ε ε,
+       pairGrading (sectorGrading S) realGrading B z ≤ R →
+@@ -241,12 +242,13 @@
+         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) ≤
+         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
+           ∑ i : Fin (n + 1), pairGrading (sectorGrading S) realGrading (s + L) (v i)) := by
+-  let data := hN.endpointFlowScalarJets_positive_circleNorm_local_growth_uniform_radius hS hT
++  intro n
++  let data := hN.endpointFlowScalarJets_positive_circleNorm_local_growth_uniform_radius hS hT n
+   let B : ℕ := data.choose
+   let L : ℕ := data.choose_spec.choose
+   have hB : base ≤ B := data.choose_spec.choose_spec.1
+-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
+-  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
++  refine ⟨B, L, hB, fun R hR s hs => ?_⟩
++  let orderData := data.choose_spec.choose_spec.2 R hR s hs
+   exact ⟨orderData.choose, orderData.choose_spec.1, orderData.choose_spec.2 rsel hrsel⟩
+ 
+ end ContinuousFlexibility.Statements
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointOneHigh.lean b/src/ContinuousFlexibility/Analysis/N01EndpointOneHigh.lean
+index c8a8ca4af3ae77626fef287d1f76bc0757b9c731..b097605f8f42326e1d035e9d1870865b47b54b8c 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointOneHigh.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointOneHigh.lean
+@@ -6,7 +6,7 @@
+ 
+ Algebraic multilinearity suffices for homogeneous normalization, so
+ continuity is proved from the estimates rather than assumed. The same
+-fixed low order and derivative loss work in all parameter orders.
++low order and derivative loss are fixed at each parameter order.
+ -/
+ 
+ noncomputable section
+@@ -30,7 +30,7 @@
+ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform_radius
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
++    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+       ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),
+       ∀ z ∈ sectorNeighborhood S base ε ε,
+@@ -40,12 +40,13 @@
+         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) ≤
+         K * oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+           B (s + L) z v := by
+-  let data := hN.endpointFlowScalarJets_positive_circleNorm_local_growth_uniform_radius hS hT
++  intro n
++  let data := hN.endpointFlowScalarJets_positive_circleNorm_local_growth_uniform_radius hS hT n
+   let B : ℕ := data.choose
+   let L : ℕ := data.choose_spec.choose
+   have hB : base ≤ B := data.choose_spec.choose_spec.1
+-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
+-  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
++  refine ⟨B, L, hB, fun R hR s hs => ?_⟩
++  let orderData := data.choose_spec.choose_spec.2 R hR s hs
+   let K : ℝ := orderData.choose
+   have hK : 0 ≤ K := orderData.choose_spec.1
+   refine ⟨K, hK, ?_⟩
+@@ -83,7 +84,7 @@
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+     (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
+-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
++    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+       ∀ z ∈ sectorNeighborhood S base ε ε,
+       pairGrading (sectorGrading S) realGrading B z ≤ R →
+@@ -92,12 +93,13 @@
+         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) ≤
+         K * oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+           B (s + L) z v := by
+-  let data := hN.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform_radius hS hT
++  intro n
++  let data := hN.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform_radius hS hT n
+   let B : ℕ := data.choose
+   let L : ℕ := data.choose_spec.choose
+   have hB : base ≤ B := data.choose_spec.choose_spec.1
+-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
+-  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
++  refine ⟨B, L, hB, fun R hR s hs => ?_⟩
++  let orderData := data.choose_spec.choose_spec.2 R hR s hs
+   exact ⟨orderData.choose, orderData.choose_spec.1, orderData.choose_spec.2 rsel hrsel⟩
+ 
+ /-- Product estimates for genuine continuity on a bounded low-order
+@@ -106,7 +108,7 @@
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+     (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
+-    ∃ B : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R → ∀ n s : ℕ,
++    ∀ n : ℕ, ∃ B : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R → ∀ s : ℕ,
+       ∃ j : ℕ, ∃ K : ℝ, 0 ≤ K ∧
+       ∀ z ∈ sectorNeighborhood S base ε ε,
+       pairGrading (sectorGrading S) realGrading B z ≤ R →
+@@ -115,13 +117,14 @@
+         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) ≤
+         K * (1 + pairGrading (sectorGrading S) realGrading j z) *
+           ∏ i, pairGrading (sectorGrading S) realGrading j (v i) := by
+-  let data := hN.endpointFlowScalarJets_positive_circleNorm_oneHigh hS hT rsel hrsel
++  intro n
++  let data := hN.endpointFlowScalarJets_positive_circleNorm_oneHigh hS hT rsel hrsel n
+   let B : ℕ := data.choose
+   let L : ℕ := data.choose_spec.choose
+   have hB : base ≤ B := data.choose_spec.choose_spec.1
+-  refine ⟨B, hB, fun R hR n s => ?_⟩
++  refine ⟨B, hB, fun R hR s => ?_⟩
+   let t : ℕ := max s B
+-  let orderData := data.choose_spec.choose_spec.2 n R hR t (le_max_right _ _)
++  let orderData := data.choose_spec.choose_spec.2 R hR t (le_max_right _ _)
+   let K : ℝ := orderData.choose
+   have hK : 0 ≤ K := orderData.choose_spec.1
+   let p := pairGrading (sectorGrading S) realGrading
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointParameterTower.lean b/src/ContinuousFlexibility/Analysis/N01EndpointParameterTower.lean
+index e7855eeb500ca5a0f188174db32e49d9d10f0b56..97502ae2f5c15c5c96a55757bc1515bc7269004c 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointParameterTower.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointParameterTower.lean
+@@ -98,7 +98,7 @@
+         |J.D k z v| ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B *
+           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-            base (s + loss) z v)
++            base (s + hN.ordinaryFlowLoss k) z v)
+     (m b : ℕ) (θ r : ℝ) (hb : b ≤ s) (hr : r ∈ Icc (C.left m) (C.right m)) :
+       ∃ J : SmoothDirections (sectorNeighborhood S base ε ε)
+         (fun z => ordinaryFlowFamily S C m 0 b (r, θ) (liftSectorParameter S C z)),
+@@ -106,7 +106,7 @@
+         |J.D k z v| ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B *
+           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-            base (s + loss) z v := by
++            base (s + hN.ordinaryFlowLoss k) z v := by
+   classical
+   have hsamples := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1
+   have hH (m : ℕ) : 0 < T.H (T.sample m) := (hT.2.1 _ (hsamples m)).2.1
+@@ -125,7 +125,7 @@
+       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ v : Fin n → (StateDirections S × ℝ),
+       |J.D n z v| ≤ A *
+         oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-          base (b + loss) z v := by
++          base (b + hN.ordinaryFlowLoss n) z v := by
+     intro n
+     let hraw := hN.sectorFlow_tower n b
+     let A : ℝ := hraw.choose
+@@ -138,10 +138,10 @@
+   exact closed_parameter_tower_of_interior_towers
+     (pairGrading (sectorGrading S) realGrading)
+     (sectorPairGrading_continuous S) (sectorPairGrading_monotone S)
+-    base (fun _ => b + loss) (sectorNeighborhood_isOpen S base ε ε)
++    base (fun n => b + hN.ordinaryFlowLoss n) (sectorNeighborhood_isOpen S base ε ε)
+     (sectorNeighborhood_convex S base ε ε) (hcontrol.1 m).2.1 hr
+     (fun t z => ordinaryFlowFamily S C m 0 b (t, θ) (liftSectorParameter S C z))
+-    hcontinuous hbounds k (s + loss)
++    hcontinuous hbounds k (s + hN.ordinaryFlowLoss k)
+     (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B)
+     (fun t ht => hdata m b θ t hb ht)
+ 
+@@ -157,7 +157,7 @@
+         |J.D k z v| ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B *
+           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-            base (s + loss) z v := by
++            base (s + hN.ordinaryFlowLoss k) z v := by
+   let hdata := hN.sectorFlow_tower k s
+   exact ⟨hdata.choose, hdata.choose_spec.1,
+     hN.sectorFlow_closed_tower_point hS hT k s hdata.choose hdata.choose_spec.2⟩
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointScalarCircleMember.lean b/src/ContinuousFlexibility/Analysis/N01EndpointScalarCircleMember.lean
+index 0b8226648aa05de0e1998f931cc9e855e349343b..78e565a258246cd6b0a9fc60e5f6295b3f6db0bd 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointScalarCircleMember.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointScalarCircleMember.lean
+@@ -64,12 +64,12 @@
+     hN hS hT rsel hrsel n s
+   let K : ℝ := data.choose
+   have hK : 0 < K := data.choose_spec.1
+-  let t : ℕ := max base (s + loss)
++  let t : ℕ := max base (s + hN.ordinaryFlowLoss (n + 2))
+   let E : ℕ → ℝ≥0∞ := fun m =>
+     ENNReal.ofReal ((T.M (T.sample m) ^ (s + 1)) ^ 2) *
+       physicalPlateauEnergy D T C (3 / 4 : ℝ) t
+         ((S.height (3 / 4 : ℝ)).decode ξ.1) m
+-  let A : ℝ := (n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z
++  let A : ℝ := (n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + hN.ordinaryFlowLoss (n + 2)) z
+   have hA : 0 ≤ A := add_nonneg (by positivity) (apply_nonneg _ _)
+   have hEt : (∑' m : ℕ, E m) < ⊤ :=
+     hN.physicalPlateauEnergy_weighted_tsum_lt_top hS hT (hS.1 (3 / 4 : ℝ)) ξ.1 t (s + 1)
+@@ -80,10 +80,10 @@
+   have he : 0 ≤ e := Real.sqrt_nonneg _
+   have hbase : heightPairGrading S base (η m) ≤ e :=
+     (hmono (le_max_left _ _) (η m)).trans (henergy t m)
+-  have hhigh : heightPairGrading S (s + loss) (η m) ≤ e :=
++  have hhigh : heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) (η m) ≤ e :=
+     (hmono (le_max_right _ _) (η m)).trans (henergy t m)
+   have hW : A * heightPairGrading S base (η m) +
+-      heightPairGrading S (s + loss) (η m) ≤ (A + 1) * e := by
++      heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) (η m) ≤ (A + 1) * e := by
+     calc
+       _ ≤ A * e + e := add_le_add (mul_le_mul_of_nonneg_left hbase hA) hhigh
+       _ = _ := by ring
+@@ -97,13 +97,13 @@
+           (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
+             (fun _ => scalarParameterDirection S) m) θ| ≤
+         K * T.M (T.sample m) ^ (c + 1) *
+-          (A * heightPairGrading S base (η m) + heightPairGrading S (s + loss) (η m)) :=
++          (A * heightPairGrading S base (η m) + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) (η m)) :=
+     data.choose_spec.2 m b c θ (by omega) z hz (η m) (hlocal m)
+   have hc : T.M (T.sample m) ^ (c + 1) ≤ T.M (T.sample m) ^ (s + 1) :=
+     pow_le_pow_right₀ (hM m) (by omega)
+   calc
+     _ ≤ K * T.M (T.sample m) ^ (c + 1) *
+-        (A * heightPairGrading S base (η m) + heightPairGrading S (s + loss) (η m)) := hp
++        (A * heightPairGrading S base (η m) + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) (η m)) := hp
+     _ ≤ K * T.M (T.sample m) ^ (c + 1) * ((A + 1) * e) :=
+       mul_le_mul_of_nonneg_left hW
+         (mul_nonneg hK.le (pow_nonneg (zero_le_one.trans (hM m)) _))
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointScalarHeightBounds.lean b/src/ContinuousFlexibility/Analysis/N01EndpointScalarHeightBounds.lean
+index 24644903e20f514ede346d14069b562369224232..ed2392eec4eed45141873a277154dc4b50dfd6d4 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointScalarHeightBounds.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointScalarHeightBounds.lean
+@@ -40,8 +40,8 @@
+           (fun _ => scalarParameterDirection S) m) θ| ≤
+         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B *
+-          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
+-            heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
++          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + hN.ordinaryFlowLoss (n + 2)) z) *
++            heightPairGrading S base η + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) := by
+   let data := hN.sectorFlow_pure_scalar_height_bound_mod_constant hS hT n s
+   let B : ℝ := data.choose
+   have hB : 0 < B := data.choose_spec.1
+@@ -71,8 +71,8 @@
+           (fun _ => scalarParameterDirection S) m) θ| ≤
+         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B *
+-          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
+-            heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
++          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + hN.ordinaryFlowLoss (n + 2)) z) *
++            heightPairGrading S base η + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) := by
+   let data := hN.endpointFlow_pure_scalar_height_bound_uniform_radius hS hT n s
+   exact Exists.intro data.choose
+     (And.intro data.choose_spec.1 (data.choose_spec.2 rsel hrsel))
+@@ -105,8 +105,8 @@
+           (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
+             (fun _ => scalarParameterDirection S) m) θ| ≤
+         K * T.M (T.sample m) ^ (c + 1) *
+-          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
+-            heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
++          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + hN.ordinaryFlowLoss (n + 2)) z) *
++            heightPairGrading S base η + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) := by
+   let data := hN.endpointFlow_pure_scalar_height_bound_uniform_radius hS hT n s
+   let B : ℝ := data.choose
+   have hB : 0 < B := data.choose_spec.1
+@@ -124,8 +124,8 @@
+   have hM : 0 ≤ T.M (T.sample m) := zero_le_one.trans (hT.2.1 _ hs).2.2.2
+   have hH : 0 ≤ T.H (T.sample m) := (hT.2.1 _ hs).2.1.le
+   have hW : 0 ≤
+-      (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
+-        heightPairGrading S base η + heightPairGrading S (s + loss) η) :=
++      (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + hN.ordinaryFlowLoss (n + 2)) z) *
++        heightPairGrading S base η + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) :=
+     add_nonneg (mul_nonneg
+       (add_nonneg (by positivity) (apply_nonneg _ _)) (apply_nonneg _ _))
+       (apply_nonneg _ _)
+@@ -145,8 +145,8 @@
+           (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
+             (fun _ => scalarParameterDirection S) m) θ| ≤
+         K * T.M (T.sample m) ^ (c + 1) *
+-          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
+-            heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
++          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + hN.ordinaryFlowLoss (n + 2)) z) *
++            heightPairGrading S base η + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) := by
+   let data := hN.endpointFlow_pure_scalar_weighted_height_bound_uniform_radius hS hT n s
+   exact Exists.intro data.choose
+     (And.intro data.choose_spec.1 (data.choose_spec.2 rsel hrsel))
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointScalarJetGrowth.lean b/src/ContinuousFlexibility/Analysis/N01EndpointScalarJetGrowth.lean
+index f7defda73e650e5f0bf50da2f4ed9554a916b6de..1c58fea1374c95abfa30d9c54334e754ef4ba33f 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointScalarJetGrowth.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointScalarJetGrowth.lean
+@@ -34,7 +34,7 @@
+     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
++    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+       ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),
+       ∀ z ∈ sectorNeighborhood S base ε ε,
+@@ -43,16 +43,17 @@
+         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
+           (fun _ => scalarParameterDirection S)) ≤
+         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z) := by
++  intro n
+   classical
+   let p := pairGrading (sectorGrading S) realGrading
+   have hp : Monotone p := sectorPairGrading_monotone S
+   have hI : HasInterpolation p := hasInterpolation_of_hasSmoothing hp
+     (hasSmoothing_pairGrading (solve_sector_hasSmoothing hS) hasSmoothing_realGrading)
+-  let interpolationData := hasInterpolation_quadratic_local_growth p hp hI base loss 6
++  let interpolationData := hasInterpolation_quadratic_local_growth p hp hI base (hN.ordinaryFlowLoss (n + 2)) 6
+   let B : ℕ := interpolationData.choose
+   let L : ℕ := interpolationData.choose_spec.choose
+   have hB : base ≤ B := interpolationData.choose_spec.choose_spec.1
+-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
++  refine ⟨B, L, hB, fun R hR s hs => ?_⟩
+   let orderData := interpolationData.choose_spec.choose_spec.2 R hR s hs
+   let I : ℝ := orderData.choose
+   have hI0 : 0 ≤ I := orderData.choose_spec.1
+@@ -82,7 +83,7 @@
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+     (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
+-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
++    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+       ∀ z ∈ sectorNeighborhood S base ε ε,
+       pairGrading (sectorGrading S) realGrading B z ≤ R →
+@@ -90,12 +91,13 @@
+         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
+           (fun _ => scalarParameterDirection S)) ≤
+         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z) := by
+-  let data := hN.endpointFlow_pure_scalar_circleNorm_local_growth_all_uniform_radius hS hT
++  intro n
++  let data := hN.endpointFlow_pure_scalar_circleNorm_local_growth_all_uniform_radius hS hT n
+   let B : ℕ := data.choose
+   let L : ℕ := data.choose_spec.choose
+   have hB : base ≤ B := data.choose_spec.choose_spec.1
+-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
+-  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
++  refine ⟨B, L, hB, fun R hR s hs => ?_⟩
++  let orderData := data.choose_spec.choose_spec.2 R hR s hs
+   exact ⟨orderData.choose, orderData.choose_spec.1, orderData.choose_spec.2 rsel hrsel⟩
+ 
+ end ContinuousFlexibility.Statements
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointScalarSplitNorm.lean b/src/ContinuousFlexibility/Analysis/N01EndpointScalarSplitNorm.lean
+index db89daf73bb64af442134c8cd8c394c5d4413038..2cb2fe0224d7d644c1483066dce7a82b1c4d7256 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointScalarSplitNorm.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointScalarSplitNorm.lean
+@@ -54,10 +54,10 @@
+       circleWeightedJetNorm T (3 / 4 : ℝ) b c
+         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
+           (fun _ => scalarParameterDirection S)) ≤
+-        K * (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (b + loss) z) *
++        K * (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 2)) z) *
+           (S.height (3 / 4 : ℝ)).grading (base + c + 6)
+             (liftSectorParameter S C z).1.1.1 +
+-          (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6)
++          (S.height (3 / 4 : ℝ)).grading (b + hN.ordinaryFlowLoss (n + 2) + c + 6)
+             (liftSectorParameter S C z).1.1.1) := by
+   let pointData := hN.endpointFlow_pure_scalar_weighted_height_bound_uniform_radius hS hT n b
+   let K : ℝ := pointData.choose
+@@ -67,7 +67,7 @@
+   let K₀ : ℝ := lowData.choose
+   have hK₀ : 0 ≤ K₀ := lowData.choose_spec.1
+   let highData := hN.physicalPlateauEnergy_weighted_tsum_le_grading_sq
+-    hS hT (hS.1 (3 / 4 : ℝ)) (b + loss) (c + 1)
++    hS hT (hS.1 (3 / 4 : ℝ)) (b + hN.ordinaryFlowLoss (n + 2)) (c + 1)
+   let K₁ : ℝ := highData.choose
+   have hK₁ : 0 ≤ K₁ := highData.choose_spec.1
+   let L : ℝ := Real.sqrt K₀ + Real.sqrt K₁
+@@ -78,7 +78,7 @@
+   let ξ : HeightPair S := (liftSectorParameter S C z).1.1
+   let directions := hN.exists_height_pair_plateau_directions hS hT ξ
+   let η : ℕ → HeightPair S := directions.choose
+-  let A : ℝ := (n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (b + loss) z
++  let A : ℝ := (n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 2)) z
+   have hA : 0 ≤ A := add_nonneg (by positivity) (apply_nonneg _ _)
+   let E : ℕ → ℕ → ℝ≥0∞ := fun j m =>
+     ENNReal.ofReal ((T.M (T.sample m) ^ (c + 1)) ^ 2) *
+@@ -90,9 +90,9 @@
+     exact (lowData.choose_spec.2 ξ.1).trans_eq
+       (congrArg (fun i : ℕ => ENNReal.ofReal
+         (K₀ * ((S.height (3 / 4 : ℝ)).grading i ξ.1) ^ 2)) hi)
+-  have hF : (∑' m, E (b + loss) m) ≤ ENNReal.ofReal
+-      (K₁ * ((S.height (3 / 4 : ℝ)).grading (b + loss + c + 6) ξ.1) ^ 2) := by
+-    have hi : b + loss + (c + 1) + 5 = b + loss + c + 6 := by omega
++  have hF : (∑' m, E (b + hN.ordinaryFlowLoss (n + 2)) m) ≤ ENNReal.ofReal
++      (K₁ * ((S.height (3 / 4 : ℝ)).grading (b + hN.ordinaryFlowLoss (n + 2) + c + 6) ξ.1) ^ 2) := by
++    have hi : b + hN.ordinaryFlowLoss (n + 2) + (c + 1) + 5 = b + hN.ordinaryFlowLoss (n + 2) + c + 6 := by omega
+     exact (highData.choose_spec.2 ξ.1).trans_eq
+       (congrArg (fun i : ℕ => ENNReal.ofReal
+         (K₁ * ((S.height (3 / 4 : ℝ)).grading i ξ.1) ^ 2)) hi)
+@@ -104,10 +104,10 @@
+         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
+           (fun _ => scalarParameterDirection S) m) θ| ≤
+         K * (A * Real.sqrt (E base m).toReal +
+-          Real.sqrt (E (b + loss) m).toReal) :=
++          Real.sqrt (E (b + hN.ordinaryFlowLoss (n + 2)) m).toReal) :=
+     scalar_height_scaled_energy_bound c (hM m) hK.le hA
+       ((directions.choose_spec.2.2.2 base).2 m)
+-      ((directions.choose_spec.2.2.2 (b + loss)).2 m)
++      ((directions.choose_spec.2.2.2 (b + hN.ordinaryFlowLoss (n + 2))).2 m)
+       (pointData.choose_spec.2 rsel hrsel m b c θ le_rfl z hz (η m)
+         (directions.choose_spec.2.2.1 m))
+   exact weightedJetNorm_le_scaled_two_envelopes
+@@ -123,10 +123,10 @@
+       circleWeightedJetNorm T (3 / 4 : ℝ) b c
+         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
+           (fun _ => scalarParameterDirection S)) ≤
+-        K * (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (b + loss) z) *
++        K * (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 2)) z) *
+           (S.height (3 / 4 : ℝ)).grading (base + c + 6)
+             (liftSectorParameter S C z).1.1.1 +
+-          (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6)
++          (S.height (3 / 4 : ℝ)).grading (b + hN.ordinaryFlowLoss (n + 2) + c + 6)
+             (liftSectorParameter S C z).1.1.1) := by
+   let data := hN.endpointFlow_pure_scalar_weightedJetNorm_height_bound_uniform_radius hS hT n b c
+   exact ⟨data.choose, data.choose_spec.1, data.choose_spec.2 rsel hrsel⟩
+@@ -191,18 +191,18 @@
+       circleWeightedJetNorm T (3 / 4 : ℝ) b c
+         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
+           (fun _ => scalarParameterDirection S)) ≤
+-        K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z) *
++        K * ((1 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 2)) z) *
+           (1 + pairGrading (sectorGrading S) realGrading (base + c + 6) z) +
+-          (1 + pairGrading (sectorGrading S) realGrading (b + loss + c + 6) z)) := by
++          (1 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 2) + c + 6) z)) := by
+   let normData := hN.endpointFlow_pure_scalar_weightedJetNorm_height_bound_uniform_radius hS hT n b c
+   let K : ℝ := normData.choose
+   have hK : 0 ≤ K := normData.choose_spec.1
+   let J : ℝ := 1 + (S.height (3 / 4 : ℝ)).grading (base + c + 6) C.referenceState.1.1 +
+-    (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6) C.referenceState.1.1
++    (S.height (3 / 4 : ℝ)).grading (b + hN.ordinaryFlowLoss (n + 2) + c + 6) C.referenceState.1.1
+   let N : ℝ := (n : ℝ) + 2
+   have hrefs := real_reference_budget_bounds
+     (apply_nonneg ((S.height (3 / 4 : ℝ)).grading (base + c + 6)) C.referenceState.1.1)
+-    (apply_nonneg ((S.height (3 / 4 : ℝ)).grading (b + loss + c + 6)) C.referenceState.1.1)
++    (apply_nonneg ((S.height (3 / 4 : ℝ)).grading (b + hN.ordinaryFlowLoss (n + 2) + c + 6)) C.referenceState.1.1)
+   have hJ : 1 ≤ J := hrefs.1
+   have hN₀ : 1 ≤ N := by
+     have hn : 0 ≤ (n : ℝ) := Nat.cast_nonneg n
+@@ -215,11 +215,11 @@
+   exact scalar_height_budget_transfer hK hN₀ hJ hrefs.2.1 hrefs.2.2
+     (apply_nonneg ((S.height (3 / 4 : ℝ)).grading (base + c + 6))
+       (liftSectorParameter S C z).1.1.1)
+-    (apply_nonneg (p (b + loss)) z)
++    (apply_nonneg (p (b + hN.ordinaryFlowLoss (n + 2))) z)
+     (apply_nonneg (p (base + c + 6)) z)
+-    (apply_nonneg (p (b + loss + c + 6)) z)
++    (apply_nonneg (p (b + hN.ordinaryFlowLoss (n + 2) + c + 6)) z)
+     (liftSectorParameter_physical_height_grading_le S C z (base + c + 6))
+-    (liftSectorParameter_physical_height_grading_le S C z (b + loss + c + 6))
++    (liftSectorParameter_physical_height_grading_le S C z (b + hN.ordinaryFlowLoss (n + 2) + c + 6))
+     (normData.choose_spec.2 rsel hrsel z hz)
+ 
+ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_budget_bound
+@@ -230,9 +230,9 @@
+       circleWeightedJetNorm T (3 / 4 : ℝ) b c
+         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
+           (fun _ => scalarParameterDirection S)) ≤
+-        K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z) *
++        K * ((1 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 2)) z) *
+           (1 + pairGrading (sectorGrading S) realGrading (base + c + 6) z) +
+-          (1 + pairGrading (sectorGrading S) realGrading (b + loss + c + 6) z)) := by
++          (1 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 2) + c + 6) z)) := by
+   let data := hN.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_uniform_radius hS hT n b c
+   exact ⟨data.choose, data.choose_spec.1, data.choose_spec.2 rsel hrsel⟩
+ 
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointSmoothTame.lean b/src/ContinuousFlexibility/Analysis/N01EndpointSmoothTame.lean
+index 3bb6cf971cfbc5942c10fa20153088e79b51194d..db33d6cf7df8e3aaed5cf75dc82d7f22b0f384aa 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointSmoothTame.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointSmoothTame.lean
+@@ -87,11 +87,11 @@
+       exact hnorm.trans_le ((orderData.choose_spec.2 x hx hxlow).trans_eq
+         (congrArg (fun a : ℝ => K * a) (endpoint_oneHigh_zero p B (s + L) x v).symm))
+     | succ n =>
+-      let data := hN.endpointFlowScalarJets_positive_circleNorm_oneHigh hS hT rsel hrsel
++      let data := hN.endpointFlowScalarJets_positive_circleNorm_oneHigh hS hT rsel hrsel n
+       let B : ℕ := data.choose
+       let L : ℕ := data.choose_spec.choose
+       refine ⟨B, L, fun R hR s hs => ?_⟩
+-      let orderData := data.choose_spec.choose_spec.2 n R hR s hs
++      let orderData := data.choose_spec.choose_spec.2 R hR s hs
+       let K : ℝ := orderData.choose
+       have hK : 0 ≤ K := orderData.choose_spec.1
+       exact ⟨K, hK, fun x hx hxlow v =>
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointSplitEnergy.lean b/src/ContinuousFlexibility/Analysis/N01EndpointSplitEnergy.lean
+index 2413d90b8fec0cb7c23437788056d9e67cd4877a..8f862f2b4e31c891cf7bc91b21da45255fbf1e09 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointSplitEnergy.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointSplitEnergy.lean
+@@ -77,19 +77,19 @@
+       ∀ v : StateDirections S × ℝ, v.2 = 0 → ∀ m θ,
+       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
+         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v) m) θ| ≤
+-        K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z +
+-          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss) (vs i)) *
++        K * ((1 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1)) z +
++          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1)) (vs i)) *
+             Real.sqrt (stateLocalizationEnergy D T C base (c + 1) v m).toReal +
+-          Real.sqrt (stateLocalizationEnergy D T C (b + loss) (c + 1) v m).toReal) := by
++          Real.sqrt (stateLocalizationEnergy D T C (b + hN.ordinaryFlowLoss (n + 1)) (c + 1) v m).toReal) := by
+   let boundData := N01Properties.endpointFlowScalarJets_weighted_bound_uniform_radius
+     (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+     hN hS hT (n + 1) b
+   let K : ℝ := boundData.choose
+   have hK : 0 < K := boundData.choose_spec.1
+   let L₀ : ℝ := 1 + circleSingletonGradingConstant base * (2 * circleSobolevConstant)
+-  let L₁ : ℝ := 1 + circleSingletonGradingConstant (b + loss) * (2 * circleSobolevConstant)
++  let L₁ : ℝ := 1 + circleSingletonGradingConstant (b + hN.ordinaryFlowLoss (n + 1)) * (2 * circleSobolevConstant)
+   have hL₀ : 0 < L₀ := singleton_energy_constant_pos base
+-  have hL₁ : 0 < L₁ := singleton_energy_constant_pos (b + loss)
++  have hL₁ : 0 < L₁ := singleton_energy_constant_pos (b + hN.ordinaryFlowLoss (n + 1))
+   refine ⟨K * (L₀ + L₁), mul_pos hK (add_pos hL₀ hL₁), ?_⟩
+   intro rsel hrsel z hz vs hvs v hvq
+   let localData := N01Properties.exists_localized_state_energy_directions
+@@ -117,14 +117,14 @@
+             z (Fin.snoc vs v) m) θ| ≤
+         K * T.M (T.sample m) ^ (c + 1) *
+           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-            base (b + loss) z (Fin.snoc vs (w m)) :=
++            base (b + hN.ordinaryFlowLoss (n + 1)) z (Fin.snoc vs (w m)) :=
+     (congrArg (fun a : ℝ =>
+       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) * |a|) heq).trans_le
+         (boundData.choose_spec.2 rsel hrsel m b c θ le_rfl z hz (Fin.snoc vs (w m)))
+   exact oneHigh_split_energy_bound (pairGrading (sectorGrading S) realGrading)
+-    base (b + loss) z vs (w m) hK.le (pow_nonneg hM (c + 1)) hL₀.le hL₁.le hvs
++    base (b + hN.ordinaryFlowLoss (n + 1)) z vs (w m) hK.le (pow_nonneg hM (c + 1)) hL₀.le hL₁.le hvs
+     hpoint (localData.choose_spec.2.2 m base (c + 1))
+-      (localData.choose_spec.2.2 m (b + loss) (c + 1))
++      (localData.choose_spec.2.2 m (b + hN.ordinaryFlowLoss (n + 1)) (c + 1))
+ 
+ theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound
+     (hN : N01Properties D T S C base loss ε)
+@@ -136,10 +136,10 @@
+       ∀ v : StateDirections S × ℝ, v.2 = 0 → ∀ m θ,
+       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
+         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v) m) θ| ≤
+-        K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z +
+-          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss) (vs i)) *
++        K * ((1 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1)) z +
++          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1)) (vs i)) *
+             Real.sqrt (stateLocalizationEnergy D T C base (c + 1) v m).toReal +
+-          Real.sqrt (stateLocalizationEnergy D T C (b + loss) (c + 1) v m).toReal) := by
++          Real.sqrt (stateLocalizationEnergy D T C (b + hN.ordinaryFlowLoss (n + 1)) (c + 1) v m).toReal) := by
+   let data := N01Properties.endpointFlowScalarJets_state_split_energy_bound_uniform_radius
+     (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+     hN hS hT n b c
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointSplitNorm.lean b/src/ContinuousFlexibility/Analysis/N01EndpointSplitNorm.lean
+index 4bbf37da0fbd1060e04343a84cb7683dc84914f7..1a1bf6c8d79cf55c228d1f5d0210e5bb442c321a 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointSplitNorm.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointSplitNorm.lean
+@@ -109,10 +109,10 @@
+       ∀ v : StateDirections S × ℝ, v.2 = 0 →
+       circleWeightedJetNorm T (3 / 4 : ℝ) b c
+         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v)) ≤
+-        K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z +
+-          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss) (vs i)) *
++        K * ((1 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1)) z +
++          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1)) (vs i)) *
+             pairGrading (sectorGrading S) realGrading (base + c + 6) v +
+-          pairGrading (sectorGrading S) realGrading (b + loss + c + 6) v) := by
++          pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1) + c + 6) v) := by
+   let pointData := N01Properties.endpointFlowScalarJets_state_split_energy_bound_uniform_radius
+     (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+     hN hS hT n b c
+@@ -125,7 +125,7 @@
+   have hK₀ : 0 ≤ K₀ := lowData.choose_spec.1
+   let highData := N01Properties.stateLocalizationEnergy_tsum_le_grading_sq
+     (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+-    hN hS hT (b + loss) (c + 1)
++    hN hS hT (b + hN.ordinaryFlowLoss (n + 1)) (c + 1)
+   let K₁ : ℝ := highData.choose
+   have hK₁ : 0 ≤ K₁ := highData.choose_spec.1
+   let L : ℝ := Real.sqrt K₀ + Real.sqrt K₁
+@@ -134,18 +134,18 @@
+     mul_nonneg (mul_nonneg (Real.sqrt_nonneg _) hK.le) hL, ?_⟩
+   intro rsel hrsel z hz vs hvs v hvq
+   let p := pairGrading (sectorGrading S) realGrading
+-  let A : ℝ := 1 + p (b + loss) z + ∑ i : Fin n, p (b + loss) (vs i)
++  let A : ℝ := 1 + p (b + hN.ordinaryFlowLoss (n + 1)) z + ∑ i : Fin n, p (b + hN.ordinaryFlowLoss (n + 1)) (vs i)
+   have hA : 0 ≤ A :=
+-    add_nonneg (add_nonneg zero_le_one (apply_nonneg (p (b + loss)) z))
+-      (Finset.sum_nonneg (fun i _ => apply_nonneg (p (b + loss)) (vs i)))
++    add_nonneg (add_nonneg zero_le_one (apply_nonneg (p (b + hN.ordinaryFlowLoss (n + 1))) z))
++      (Finset.sum_nonneg (fun i _ => apply_nonneg (p (b + hN.ordinaryFlowLoss (n + 1))) (vs i)))
+   have hlow : base + (c + 1) + 5 = base + c + 6 := by omega
+-  have hhigh : b + loss + (c + 1) + 5 = b + loss + c + 6 := by omega
++  have hhigh : b + hN.ordinaryFlowLoss (n + 1) + (c + 1) + 5 = b + hN.ordinaryFlowLoss (n + 1) + c + 6 := by omega
+   have hE : (∑' m, stateLocalizationEnergy D T C base (c + 1) v m) ≤
+       ENNReal.ofReal (K₀ * (p (base + c + 6) v) ^ 2) :=
+     (lowData.choose_spec.2 v).trans_eq
+       (congrArg (fun k : ℕ => ENNReal.ofReal (K₀ * (p k v) ^ 2)) hlow)
+-  have hF : (∑' m, stateLocalizationEnergy D T C (b + loss) (c + 1) v m) ≤
+-      ENNReal.ofReal (K₁ * (p (b + loss + c + 6) v) ^ 2) :=
++  have hF : (∑' m, stateLocalizationEnergy D T C (b + hN.ordinaryFlowLoss (n + 1)) (c + 1) v m) ≤
++      ENNReal.ofReal (K₁ * (p (b + hN.ordinaryFlowLoss (n + 1) + c + 6) v) ^ 2) :=
+     (highData.choose_spec.2 v).trans_eq
+       (congrArg (fun k : ℕ => ENNReal.ofReal (K₁ * (p k v) ^ 2)) hhigh)
+   have hs (m : ℕ) := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
+@@ -155,12 +155,12 @@
+     (T := T) (γ := (3 / 4 : ℝ))
+     (f := hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v))
+     (E := stateLocalizationEnergy D T C base (c + 1) v)
+-    (F := stateLocalizationEnergy D T C (b + loss) (c + 1) v)
++    (F := stateLocalizationEnergy D T C (b + hN.ordinaryFlowLoss (n + 1)) (c + 1) v)
+     (K := K) (A := A) (K₀ := K₀) (K₁ := K₁)
+-    (u := p (base + c + 6) v) (v := p (b + loss + c + 6) v)
++    (u := p (base + c + 6) v) (v := p (b + hN.ordinaryFlowLoss (n + 1) + c + 6) v)
+     hK.le hA hK₀ hK₁
+     (apply_nonneg (p (base + c + 6)) v)
+-    (apply_nonneg (p (b + loss + c + 6)) v) hE hF
++    (apply_nonneg (p (b + hN.ordinaryFlowLoss (n + 1) + c + 6)) v) hE hF
+     (fun m => (hN.endpointFlowScalarJets_regular hS hT rsel hrsel
+       (n + 1) z hz (Fin.snoc vs v) m).1)
+     hM hH b c (pointData.choose_spec.2 rsel hrsel z hz vs hvs v hvq)
+@@ -175,10 +175,10 @@
+       ∀ v : StateDirections S × ℝ, v.2 = 0 →
+       circleWeightedJetNorm T (3 / 4 : ℝ) b c
+         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v)) ≤
+-        K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z +
+-          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss) (vs i)) *
++        K * ((1 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1)) z +
++          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1)) (vs i)) *
+             pairGrading (sectorGrading S) realGrading (base + c + 6) v +
+-          pairGrading (sectorGrading S) realGrading (b + loss + c + 6) v) := by
++          pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1) + c + 6) v) := by
+   let data := N01Properties.endpointFlowScalarJets_state_weightedJetNorm_bound_uniform_radius
+     (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+     hN hS hT n b c
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointStateCircleMember.lean b/src/ContinuousFlexibility/Analysis/N01EndpointStateCircleMember.lean
+index 7de9694640d02fdc9bf3461f1b5548bebfe0d005..0e1c5a32f0cb5c5f499335fa3df17a8955173892 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointStateCircleMember.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointStateCircleMember.lean
+@@ -86,14 +86,14 @@
+       ∀ m b c, b + c ≤ s → ∀ θ,
+       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
+         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v) m) θ| ≤
+-        K * (1 + pairGrading (sectorGrading S) realGrading (max base (s + loss)) z) *
++        K * (1 + pairGrading (sectorGrading S) realGrading (max base (s + hN.ordinaryFlowLoss (n + 1))) z) *
+           (∏ i : Fin n, pairGrading (sectorGrading S) realGrading
+-            (max base (s + loss)) (vs i)) *
+-          Real.sqrt (stateLocalizationEnergy D T C (max base (s + loss)) (s + 1) v m).toReal := by
++            (max base (s + hN.ordinaryFlowLoss (n + 1))) (vs i)) *
++          Real.sqrt (stateLocalizationEnergy D T C (max base (s + hN.ordinaryFlowLoss (n + 1))) (s + 1) v m).toReal := by
+   let pointData := hN.endpointFlowScalarJets_weighted_bound hS hT rsel hrsel (n + 1) s
+   let K : ℝ := pointData.choose
+   have hK : 0 < K := pointData.choose_spec.1
+-  let t : ℕ := max base (s + loss)
++  let t : ℕ := max base (s + hN.ordinaryFlowLoss (n + 1))
+   let p := pairGrading (sectorGrading S) realGrading
+   let L : ℝ := 1 + circleSingletonGradingConstant t * (2 * circleSobolevConstant)
+   have hL : 0 < L := by
+@@ -123,7 +123,7 @@
+   let A : ℝ := (1 + p t z) * ∏ i : Fin n, p t (vs i)
+   have hA : 0 ≤ A := mul_nonneg (add_nonneg zero_le_one (apply_nonneg _ _))
+     (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _))
+-  have hW : oneHighVariationWeight p base (s + loss) z (Fin.snoc vs (w m)) ≤
++  have hW : oneHighVariationWeight p base (s + hN.ordinaryFlowLoss (n + 1)) z (Fin.snoc vs (w m)) ≤
+       ((n : ℝ) + 2) * A * p t (w m) :=
+     oneHigh_snoc_le_product p (sectorPairGrading_monotone S)
+       (le_max_left _ _) (le_max_right _ _) z vs (w m)
+@@ -153,9 +153,9 @@
+   have hH (m : ℕ) : 0 ≤ T.H (T.sample m) := (hT.2.1 _ (hs m)).2.1.le
+   apply circleMember_of_seminorm_energy_envelope
+     (hN.endpointFlowScalarJets_regular hS hT rsel hrsel (n + 1) z hz (Fin.snoc vs v)) hM hH
+-    (pairGrading (sectorGrading S) realGrading) (fun s => max base (s + loss)) z vs
+-    (fun s => stateLocalizationEnergy D T C (max base (s + loss)) (s + 1) v)
+-    (fun s => hN.stateLocalizationEnergy_tsum_lt_top hS hT (max base (s + loss)) (s + 1) v)
++    (pairGrading (sectorGrading S) realGrading) (fun s => max base (s + hN.ordinaryFlowLoss (n + 1))) z vs
++    (fun s => stateLocalizationEnergy D T C (max base (s + hN.ordinaryFlowLoss (n + 1))) (s + 1) v)
++    (fun s => hN.stateLocalizationEnergy_tsum_lt_top hS hT (max base (s + hN.ordinaryFlowLoss (n + 1))) (s + 1) v)
+   intro s
+   let data := hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel n s
+   exact ⟨data.choose, data.choose_spec.1.le, data.choose_spec.2 z hz vs v hvq⟩
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointStateEnvelope.lean b/src/ContinuousFlexibility/Analysis/N01EndpointStateEnvelope.lean
+index f3cce4ad05877d5577791c3ea1f764253163e176..e553b556cf2d1bd871329febc75e938ad7a00315 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointStateEnvelope.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointStateEnvelope.lean
+@@ -70,10 +70,10 @@
+       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m b c, b + c ≤ s → ∀ θ,
+       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
+         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v m) θ| ≤
+-        K * (1 + pairGrading (sectorGrading S) realGrading (max base (s + loss)) z) *
++        K * (1 + pairGrading (sectorGrading S) realGrading (max base (s + hN.ordinaryFlowLoss (n + 1))) z) *
+           Real.sqrt (E m).toReal := by
+   let p := pairGrading (sectorGrading S) realGrading
+-  let j : ℕ := max base (s + loss)
++  let j : ℕ := max base (s + hN.ordinaryFlowLoss (n + 1))
+   let boundData := N01Properties.endpointFlowScalarJets_state_energy_bound
+     (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+     hN hS hT rsel hrsel n s
+@@ -131,7 +131,7 @@
+   have hE : (∑' m, E m) < ⊤ := data.choose_spec.choose_spec.1
+   have hK : 0 ≤ K := data.choose_spec.choose_spec.2.1
+   let p := pairGrading (sectorGrading S) realGrading
+-  let j : ℕ := max base (s + loss)
++  let j : ℕ := max base (s + hN.ordinaryFlowLoss (n + 1))
+   refine ⟨E, K * (1 + (p j x + p j w)), hE,
+     mul_nonneg hK (add_nonneg zero_le_one
+       (add_nonneg (apply_nonneg (p j) x) (apply_nonneg (p j) w))), ?_⟩
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointStateIncrement.lean b/src/ContinuousFlexibility/Analysis/N01EndpointStateIncrement.lean
+index 3c3ad0b817baaee3773b627ebaa0447024b62780..53c46c06d72b379a716ba7a75c4b53e35e3e79bf 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointStateIncrement.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointStateIncrement.lean
+@@ -134,13 +134,13 @@
+   have hH (m : ℕ) : 0 ≤ T.H (T.sample m) := (hT.2.1 _ (hs m)).2.1.le
+   have hmem : CircleMember T (3 / 4 : ℝ) (fun m θ => F 1 m θ - F 0 m θ) := by
+     apply circleMember_sub_of_seminorm_curve_envelope
+-      (pairGrading (sectorGrading S) realGrading) (fun s => max base (s + loss)) u F G
++      (pairGrading (sectorGrading S) realGrading) (fun s => max base (s + hN.ordinaryFlowLoss 1)) u F G
+       (hN.endpointFlowScalarJets_regular hS hT rsel hrsel 0 (0 • u) (hpath 0 (by simp)) Fin.elim0)
+       (hN.endpointFlowScalarJets_regular hS hT rsel hrsel 0 (1 • u) (hpath 1 (by simp)) Fin.elim0)
+       hM hH hderiv
+-      (fun s => stateLocalizationEnergy D T C (max base (s + loss)) (s + 1) u)
++      (fun s => stateLocalizationEnergy D T C (max base (s + hN.ordinaryFlowLoss 1)) (s + 1) u)
+       (fun s => hN.stateLocalizationEnergy_tsum_lt_top hS hT
+-        (max base (s + loss)) (s + 1) u)
++        (max base (s + hN.ordinaryFlowLoss 1)) (s + 1) u)
+     intro s
+     let data := hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel 0 s
+     refine ⟨data.choose, data.choose_spec.1.le, ?_⟩
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointStateJetGrowth.lean b/src/ContinuousFlexibility/Analysis/N01EndpointStateJetGrowth.lean
+index d01948a79f7ea598a26116eb8c9256156dd85ed5..9c4105668a2dec2bd71e1bc29495b1e22d7cfed0 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointStateJetGrowth.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointStateJetGrowth.lean
+@@ -8,7 +8,7 @@
+ # Fixed-loss local growth of actual endpoint jets with a state slot
+ 
+ The N01 angular order and the material order are added before
+-interpolation. The low order and loss are fixed before the size of the
++interpolation. At each parameter order, the low order and loss are fixed before the size of the
+ base-point box and before the output order.
+ -/
+ 
+@@ -114,24 +114,25 @@
+     (p : ℕ → V → ℝ) (Q : V → Prop) (U : Set V) (base : ℕ)
+     (hrotate : ∀ n s r hr z, z ∈ U → ∀ w,
+       A n s r hr z w = A n s r hr z (Fin.snoc (Fin.tail w) (w 0)))
+-    (hbound : ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
++    (hbound : ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+       ∀ r hr, ∀ z ∈ U, p B z ≤ R →
+       ∀ vs : Fin n → V, (∀ i, p B (vs i) ≤ 1) →
+       ∀ u, p B u ≤ 1 → Q u →
+         A n s r hr z (Fin.snoc vs u) ≤
+           K * (1 + p (s + L) z + ∑ i : Fin n, p (s + L) (vs i) + p (s + L) u)) :
+-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
++    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+       ∀ r hr, ∀ z ∈ U, p B z ≤ R →
+       ∀ v : Fin (n + 1) → V, (∀ i, p B (v i) ≤ 1) → (∃ i, Q (v i)) →
+         A n s r hr z v ≤
+           K * (1 + p (s + L) z + ∑ i : Fin (n + 1), p (s + L) (v i)) := by
+-  let B : ℕ := hbound.choose
+-  let L : ℕ := hbound.choose_spec.choose
+-  have hB : base ≤ B := hbound.choose_spec.choose_spec.1
+-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
+-  let orderData := hbound.choose_spec.choose_spec.2 n R hR s hs
++  intro n
++  let B : ℕ := (hbound n).choose
++  let L : ℕ := (hbound n).choose_spec.choose
++  have hB : base ≤ B := (hbound n).choose_spec.choose_spec.1
++  refine ⟨B, L, hB, fun R hR s hs => ?_⟩
++  let orderData := (hbound n).choose_spec.choose_spec.2 R hR s hs
+   let K : ℝ := orderData.choose
+   have hK : 0 ≤ K := orderData.choose_spec.1
+   refine ⟨K, hK, ?_⟩
+@@ -149,7 +150,7 @@
+ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all_uniform_radius
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
++    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+       ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),
+       ∀ b c : ℕ, b + c ≤ s →
+@@ -164,17 +165,18 @@
+         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
+           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (s + L) (vs i) +
+           pairGrading (sectorGrading S) realGrading (s + L) v) := by
++  intro n
+   classical
+   let p := pairGrading (sectorGrading S) realGrading
+   have hp : Monotone p := sectorPairGrading_monotone S
+   have hI : HasInterpolation p := hasInterpolation_of_hasSmoothing hp
+     (hasSmoothing_pairGrading (solve_sector_hasSmoothing hS) hasSmoothing_realGrading)
+-  let interpolationData := hasInterpolation_localized_slot_growth_all p hp hI base loss 6
++  let interpolationData := hasInterpolation_localized_slot_growth_all p hp hI base (hN.ordinaryFlowLoss (n + 1)) 6
+   let B : ℕ := interpolationData.choose
+   let L : ℕ := interpolationData.choose_spec.choose
+   have hB : base ≤ B := interpolationData.choose_spec.choose_spec.1
+   refine ⟨B, L, hB, ?_⟩
+-  intro n R hR s hs
++  intro R hR s hs
+   let orderData := interpolationData.choose_spec.choose_spec.2 n R hR s hs
+   let I : ℝ := orderData.choose
+   have hI0 : 0 ≤ I := orderData.choose_spec.1
+@@ -191,8 +193,8 @@
+     (hp hB (vs i)).trans (hvs i)
+   have hKs : K b c ≤ K₀ :=
+     stateJet_entry_le_double_sum K hK s b c hbc
+-  let Q : ℝ := (1 + p (b + loss) z + ∑ i : Fin n, p (b + loss) (vs i)) *
+-    p (base + c + 6) v + p (b + loss + c + 6) v
++  let Q : ℝ := (1 + p (b + hN.ordinaryFlowLoss (n + 1)) z + ∑ i : Fin n, p (b + hN.ordinaryFlowLoss (n + 1)) (vs i)) *
++    p (base + c + 6) v + p (b + hN.ordinaryFlowLoss (n + 1) + c + 6) v
+   have hQ : 0 ≤ Q := by
+     dsimp only [Q]
+     exact add_nonneg (mul_nonneg
+@@ -211,7 +213,7 @@
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+     (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
+-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
++    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+       ∀ b c : ℕ, b + c ≤ s →
+       ∀ z ∈ sectorNeighborhood S base ε ε,
+@@ -225,19 +227,20 @@
+         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
+           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (s + L) (vs i) +
+           pairGrading (sectorGrading S) realGrading (s + L) v) := by
+-  let data := hN.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all_uniform_radius hS hT
++  intro n
++  let data := hN.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all_uniform_radius hS hT n
+   let B : ℕ := data.choose
+   let L : ℕ := data.choose_spec.choose
+   have hB : base ≤ B := data.choose_spec.choose_spec.1
+-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
+-  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
++  refine ⟨B, L, hB, fun R hR s hs => ?_⟩
++  let orderData := data.choose_spec.choose_spec.2 R hR s hs
+   exact ⟨orderData.choose, orderData.choose_spec.1, orderData.choose_spec.2 rsel hrsel⟩
+ 
+ /-- The constants are fixed before every choice of closed flow radii. -/
+ theorem N01Properties.endpointFlowScalarJets_state_circleNorm_local_growth_all_uniform_radius
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
++    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+       ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),
+       ∀ z ∈ sectorNeighborhood S base ε ε,
+@@ -251,13 +254,14 @@
+         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
+           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (s + L) (vs i) +
+           pairGrading (sectorGrading S) realGrading (s + L) v) := by
++  intro n
+   classical
+-  let data := hN.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all_uniform_radius hS hT
++  let data := hN.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all_uniform_radius hS hT n
+   let B : ℕ := data.choose
+   let L : ℕ := data.choose_spec.choose
+   have hB : base ≤ B := data.choose_spec.choose_spec.1
+-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
+-  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
++  refine ⟨B, L, hB, fun R hR s hs => ?_⟩
++  let orderData := data.choose_spec.choose_spec.2 R hR s hs
+   let K : ℝ := orderData.choose
+   have hK : 0 ≤ K := orderData.choose_spec.1
+   refine ⟨(Fintype.card (CircleJetIndex s) : ℝ) * K,
+@@ -275,7 +279,7 @@
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+     (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
+-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
++    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+       ∀ z ∈ sectorNeighborhood S base ε ε,
+       pairGrading (sectorGrading S) realGrading B z ≤ R →
+@@ -288,12 +292,13 @@
+         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
+           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (s + L) (vs i) +
+           pairGrading (sectorGrading S) realGrading (s + L) v) := by
+-  let data := hN.endpointFlowScalarJets_state_circleNorm_local_growth_all_uniform_radius hS hT
++  intro n
++  let data := hN.endpointFlowScalarJets_state_circleNorm_local_growth_all_uniform_radius hS hT n
+   let B : ℕ := data.choose
+   let L : ℕ := data.choose_spec.choose
+   have hB : base ≤ B := data.choose_spec.choose_spec.1
+-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
+-  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
++  refine ⟨B, L, hB, fun R hR s hs => ?_⟩
++  let orderData := data.choose_spec.choose_spec.2 R hR s hs
+   exact ⟨orderData.choose, orderData.choose_spec.1, orderData.choose_spec.2 rsel hrsel⟩
+ 
+ /-- The state slot may occur anywhere in the actual derivative tuple.
+@@ -302,7 +307,7 @@
+ theorem N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all_uniform_radius
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
++    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+       ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),
+       ∀ z ∈ sectorNeighborhood S base ε ε,
+@@ -330,7 +335,7 @@
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+     (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
+-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
++    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+       ∀ z ∈ sectorNeighborhood S base ε ε,
+       pairGrading (sectorGrading S) realGrading B z ≤ R →
+@@ -341,12 +346,13 @@
+         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) ≤
+         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
+           ∑ i : Fin (n + 1), pairGrading (sectorGrading S) realGrading (s + L) (v i)) := by
+-  let data := hN.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all_uniform_radius hS hT
++  intro n
++  let data := hN.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all_uniform_radius hS hT n
+   let B : ℕ := data.choose
+   let L : ℕ := data.choose_spec.choose
+   have hB : base ≤ B := data.choose_spec.choose_spec.1
+-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
+-  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
++  refine ⟨B, L, hB, fun R hR s hs => ?_⟩
++  let orderData := data.choose_spec.choose_spec.2 R hR s hs
+   exact ⟨orderData.choose, orderData.choose_spec.1, orderData.choose_spec.2 rsel hrsel⟩
+ 
+ end ContinuousFlexibility.Statements
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointWeightedJets.lean b/src/ContinuousFlexibility/Analysis/N01EndpointWeightedJets.lean
+index 6b6cc8a8ff64b7304b240a37a55899adbf588933..d04e8a5821f9e6615ce6544952e47999905a3061 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointWeightedJets.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointWeightedJets.lean
+@@ -51,7 +51,7 @@
+         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel k z v m) θ| ≤
+         K * T.M (T.sample m) ^ (c + 1) *
+           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-            base (s + loss) z v := by
++            base (s + hN.ordinaryFlowLoss k) z v := by
+   let hdata := hN.sectorFlow_closed_angularTower_bound hS hT k s
+   let B : ℝ := hdata.choose
+   have hB : 0 < B := hdata.choose_spec.1
+@@ -63,7 +63,7 @@
+   have hM : 0 ≤ T.M (T.sample m) := zero_le_one.trans (hT.2.1 _ hs).2.2.2
+   have hH : 0 ≤ T.H (T.sample m) := (hT.2.1 _ hs).2.1.le
+   have hW : 0 ≤ oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-      base (s + loss) z v :=
++      base (s + hN.ordinaryFlowLoss k) z v :=
+     ContinuousFlexibility.Analysis.multilinearTameSize_nonneg _ _ _
+       (add_nonneg zero_le_one (apply_nonneg _ _)) v
+   have hj : |iteratedDeriv b
+@@ -71,7 +71,7 @@
+       B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+         T.E0 (T.sample (C.cell m)) ^ B *
+         oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-          base (s + loss) z v :=
++          base (s + hN.ordinaryFlowLoss k) z v :=
+     (congrArg abs (hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel
+       k z hz v m b θ)).trans_le
+         (hdata.choose_spec.2 m (rsel m) (hrsel m) b θ hb z hz v)
+@@ -89,7 +89,7 @@
+         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel k z v m) θ| ≤
+         K * T.M (T.sample m) ^ (c + 1) *
+           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-            base (s + loss) z v := by
++            base (s + hN.ordinaryFlowLoss k) z v := by
+   let hdata := hN.endpointFlowScalarJets_weighted_bound_uniform_radius hS hT k s
+   exact ⟨hdata.choose, hdata.choose_spec.1, hdata.choose_spec.2 rsel hrsel⟩
+ 
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointZeroCircleMember.lean b/src/ContinuousFlexibility/Analysis/N01EndpointZeroCircleMember.lean
+index 657f32a688073100dbca95df519741e7e643a71d..ddcd1d6a472414f14ba5cb8e12ac7c34da293be2 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointZeroCircleMember.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointZeroCircleMember.lean
+@@ -164,12 +164,12 @@
+     let pointData := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT rsel hrsel 0 s
+     let K : ℝ := pointData.choose
+     have hK : 0 < K := pointData.choose_spec.1
+-    let j : ℕ := max base (s + loss)
++    let j : ℕ := max base (s + hN.ordinaryFlowLoss 2)
+     let E : ℕ → ℝ≥0∞ := fun m =>
+       ENNReal.ofReal ((T.M (T.sample m) ^ (s + 1)) ^ 2) *
+         physicalPlateauEnergy D T C (3 / 4 : ℝ) j
+           ((S.height (3 / 4 : ℝ)).decode ξ.1) m
+-    let A : ℝ := 2 + pairGrading (sectorGrading S) realGrading (s + loss) z
++    let A : ℝ := 2 + pairGrading (sectorGrading S) realGrading (s + hN.ordinaryFlowLoss 2) z
+     have hA : 0 ≤ A := add_nonneg (by norm_num) (apply_nonneg _ _)
+     refine ⟨E, |z.2| * K * (A + 1),
+       hN.physicalPlateauEnergy_weighted_tsum_lt_top hS hT (hS.1 (3 / 4 : ℝ)) ξ.1 j (s + 1),
+@@ -179,7 +179,7 @@
+       ((S.height (3 / 4 : ℝ)).decode ξ.1) m).toReal
+     have hbase : heightPairGrading S base (η m) ≤ e :=
+       (hmono (le_max_left _ _) (η m)).trans ((directions.choose_spec.2.2.2 j).2 m)
+-    have hhigh : heightPairGrading S (s + loss) (η m) ≤ e :=
++    have hhigh : heightPairGrading S (s + hN.ordinaryFlowLoss 2) (η m) ≤ e :=
+       (hmono (le_max_right _ _) (η m)).trans ((directions.choose_spec.2.2.2 j).2 m)
+     have hη : ∃ a : ℝ, ∀ r ∈ Ioo (C.left m) (C.right m), ∀ ψ,
+         heightPairField S (η m) (r, ψ) = stateU S (liftSectorParameter S C (path t)).1 (r, ψ) + a := by
+@@ -189,7 +189,7 @@
+         (congrArg (fun x : StateDirections S × ℝ =>
+           stateU S (liftSectorParameter S C x).1 (r, ψ) + a) (hpath_eq t)).symm
+     exact scalar_height_curve_energy_bound c s (hM m) (by omega) hK.le hA
+-      (add_le_add (le_refl 2) (hgrade (s + loss) t ht))
++      (add_le_add (le_refl 2) (hgrade (s + hN.ordinaryFlowLoss 2) t ht))
+       (apply_nonneg _ _) hbase hhigh
+       (pointData.choose_spec.2 m b c θ (by omega) (path t) (hpath t ht) (η m) hη)
+   have hp1 : path 1 = z :=
+diff --git a/src/ContinuousFlexibility/Analysis/N01EndpointZeroGrowth.lean b/src/ContinuousFlexibility/Analysis/N01EndpointZeroGrowth.lean
+index 4d7455c789b7b1e28f316ef822b92b084f42df80..05eb31ec753b585b43007bf612a45cb4b68bc418 100644
+--- a/src/ContinuousFlexibility/Analysis/N01EndpointZeroGrowth.lean
++++ b/src/ContinuousFlexibility/Analysis/N01EndpointZeroGrowth.lean
+@@ -61,7 +61,7 @@
+       circleNorm T (3 / 4 : ℝ) s ((S.circle (3 / 4 : ℝ)).decode (hN.endpointFlowCircle hS hT rsel hrsel x)) ≤
+         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) x) := by
+   let bounds := N01Properties.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform_radius
+-    (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε) hN hS hT
++    (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε) hN hS hT 0
+   let B : ℕ := bounds.choose
+   let L : ℕ := bounds.choose_spec.choose
+   have hB : base ≤ B := bounds.choose_spec.choose_spec.1
+@@ -70,7 +70,7 @@
+     ⟨(sectorGrading S base).map_zero'.trans_lt hN.2.1,
+       (abs_zero : |(0 : ℝ)| = 0).trans_lt hN.2.1⟩
+   refine ⟨B, L, hB, fun R hR s hs => ?_⟩
+-  let estimate := bounds.choose_spec.choose_spec.2 0 R hR s hs
++  let estimate := bounds.choose_spec.choose_spec.2 R hR s hs
+   let K : ℝ := estimate.choose
+   have hK : 0 ≤ K := estimate.choose_spec.1
+   refine ⟨K * (R + 1), mul_nonneg hK (add_nonneg hR zero_le_one), ?_⟩
+diff --git a/src/ContinuousFlexibility/Analysis/N01FlowCircleUniformBounds.lean b/src/ContinuousFlexibility/Analysis/N01FlowCircleUniformBounds.lean
+index 21eccc71887d2d4ddd11d195a684725df7a42c74..c10c2d46a997e6d248000f1e688c14afc28811ba 100644
+--- a/src/ContinuousFlexibility/Analysis/N01FlowCircleUniformBounds.lean
++++ b/src/ContinuousFlexibility/Analysis/N01FlowCircleUniformBounds.lean
+@@ -76,7 +76,7 @@
+       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+       ∀ (r : P) (hr : valid r) x, x ∈ U → p B x ≤ R →
+         measure s (decode (f r hr x)) ≤ K * (1 + p (s + L) x))
+-    (hpositive : ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
++    (hpositive : ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+       ∀ (r : P) (hr : valid r) x, x ∈ U → p B x ≤ R →
+       ∀ v : Fin (n + 1) → E,
+@@ -113,10 +113,10 @@
+       exact (congrArg (fun y : F => measure s (decode y)) hvalue).trans_le
+         (hbound.trans_eq (congrArg (fun a : ℝ => K * a) hweight.symm))
+   | succ n =>
+-      let B : ℕ := hpositive.choose
+-      let L : ℕ := hpositive.choose_spec.choose
++      let B : ℕ := (hpositive n).choose
++      let L : ℕ := (hpositive n).choose_spec.choose
+       refine ⟨B, L, fun R hR s hs => ?_⟩
+-      let orderData := hpositive.choose_spec.choose_spec.2 n R hR s hs
++      let orderData := (hpositive n).choose_spec.choose_spec.2 R hR s hs
+       let K : ℝ := orderData.choose
+       refine ⟨K, orderData.choose_spec.1, ?_⟩
+       intro i x hx hlow v
+diff --git a/src/ContinuousFlexibility/Analysis/N01FlowCollarJetBounds.lean b/src/ContinuousFlexibility/Analysis/N01FlowCollarJetBounds.lean
+index 39c22c2905c22c958de75f142fe959a3a6ee214f..63b3d2a8d22371c6baf9bb78e8fb20b42353f53f 100644
+--- a/src/ContinuousFlexibility/Analysis/N01FlowCollarJetBounds.lean
++++ b/src/ContinuousFlexibility/Analysis/N01FlowCollarJetBounds.lean
+@@ -97,7 +97,7 @@
+     hN.ordinaryFlowFamily_collar_bound j x δ hB₀ hcell hinside hspeed (a + b)
+   obtain ⟨V, hV, hweight⟩ := materialSample_H_E0_envelope hT hN.1.1
+     (γ := (3 / 4 : ℝ)) (by norm_num) B
+-  let Q : ℝ := 1 + pairGrading (stateGrading S) realGrading (a + b + loss)
++  let Q : ℝ := 1 + pairGrading (stateGrading S) realGrading (a + b + hN.ordinaryFlowLoss 0)
+     (z - (C.referenceState, 0))
+   have hQ : 0 ≤ Q := add_nonneg zero_le_one (apply_nonneg _ _)
+   let M : ℝ := B * V * Q
+diff --git a/src/ContinuousFlexibility/Analysis/N01FlowInverseJetBounds.lean b/src/ContinuousFlexibility/Analysis/N01FlowInverseJetBounds.lean
+index ba82810a9682e183e5203e9748eed9794ced2a6b..7885c51382ecc841fc1af46da9f6d94c90d326b7 100644
+--- a/src/ContinuousFlexibility/Analysis/N01FlowInverseJetBounds.lean
++++ b/src/ContinuousFlexibility/Analysis/N01FlowInverseJetBounds.lean
+@@ -1,4 +1,5 @@
+ import ContinuousFlexibility.Analysis.ScalarInverseJetBounds
++import ContinuousFlexibility.Analysis.N01OrdinaryFlowLoss
+ import ContinuousFlexibility.Analysis.N01FlowSmallness
+ import ContinuousFlexibility.Analysis.ReturnCorrectionResidualPeriodicity
+ 
+@@ -54,12 +55,12 @@
+     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε) (n : ℕ) :
+     ∃ K : ℝ, 0 ≤ K ∧ ∀ m r, r ∈ Ioo (C.left m) (C.right m) → ∀ θ,
+       |ordinaryFlowFamily S C m 0 n (r, θ) z| ≤ K := by
+-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 0 n
++  let hdata := hN.ordinaryFlowFamily_bound 0 n
+   let B : ℝ := hdata.choose
+   have hB : 0 < B := hdata.choose_spec.1
+   obtain ⟨A, hA, hweight⟩ :=
+     materialSample_H_E0_envelope hT hN.1.1 (γ := (3 / 4 : ℝ)) (by norm_num) B
+-  let Q := 1 + pairGrading (stateGrading S) realGrading (n + loss)
++  let Q := 1 + pairGrading (stateGrading S) realGrading (n + hN.ordinaryFlowLoss 0)
+     (z - (C.referenceState, 0))
+   have hQ : 0 ≤ Q := add_nonneg zero_le_one (apply_nonneg _ _)
+   have hpoint : ∀ m r, r ∈ Ioo (C.left m) (C.right m) → ∀ θ,
+@@ -150,10 +151,10 @@
+           |iteratedDeriv n (Function.invFun (C.minusFlow z m r)) θ| ≤ K) ∧
+         (∀ m θ, |iteratedDeriv n (C.minusReturnInverse z m) θ| ≤ K)) := by
+   obtain ⟨K, hK, hsmall⟩ := hN.minusFlow_near_reference_uniform hS hT
+-  let base' := max base (1 + loss)
++  let base' := max base (1 + hN.ordinaryFlowLoss 1)
+   let ε' := min ε (min (1 / 2) (1 / (2 * K)))
+   have hb : base ≤ base' := le_max_left _ _
+-  have hh : 1 + loss ≤ base' := le_max_right _ _
++  have hh : 1 + hN.ordinaryFlowLoss 1 ≤ base' := le_max_right _ _
+   have hε' : 0 < ε' := lt_min hN.2.1
+     (lt_min (by norm_num) (div_pos zero_lt_one (mul_pos (by norm_num) hK)))
+   have hεε : ε' ≤ ε := min_le_left _ _
+diff --git a/src/ContinuousFlexibility/Analysis/N01FlowMixedParameterBound.lean b/src/ContinuousFlexibility/Analysis/N01FlowMixedParameterBound.lean
+index c4e7412dd24d7e973b751fd6854cffe406228f1e..6fdf91246303db34aa10e0d9504c588f656659b2 100644
+--- a/src/ContinuousFlexibility/Analysis/N01FlowMixedParameterBound.lean
++++ b/src/ContinuousFlexibility/Analysis/N01FlowMixedParameterBound.lean
+@@ -1,4 +1,5 @@
+ import ContinuousFlexibility.Analysis.N01FlowParameterVariation
++import ContinuousFlexibility.Analysis.N01OrdinaryFlowLoss
+ 
+ /-!
+ # Mixed height and external-parameter bounds for the actual N01 flow
+@@ -109,8 +110,8 @@
+         C.minusFlow (C.referenceState + t • η, q) m r θ) 0) 0| ≤
+         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B *
+-          (2 * stateGrading S base η + stateGrading S loss η) := by
+-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 2 0
++          (2 * stateGrading S base η + stateGrading S (hN.ordinaryFlowLoss 2) η) := by
++  let hdata := hN.ordinaryFlowFamily_bound 2 0
+   let B : ℝ := hdata.choose
+   have hB : 0 < B := hdata.choose_spec.1
+   have hpoint : ∀ (η : AnnularState S) (m : ℕ) (r θ : ℝ),
+@@ -119,7 +120,7 @@
+         C.minusFlow (C.referenceState + t • η, q) m r θ) 0) 0| ≤
+         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B *
+-          (2 * stateGrading S base η + stateGrading S loss η) := by
++          (2 * stateGrading S base η + stateGrading S (hN.ordinaryFlowLoss 2) η) := by
+     intro η m r θ hr
+     let htower := hdata.choose_spec.2 m 0 0 (r, θ) (by norm_num) hr
+     have hz : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
+@@ -136,15 +137,15 @@
+         (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ))))
+     have hb' := le_of_zero_power_mul_le hbound
+     have hw : oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+-        base (0 + loss) ((C.referenceState, (0 : ℝ)) - (C.referenceState, 0))
++        base (0 + hN.ordinaryFlowLoss 2) ((C.referenceState, (0 : ℝ)) - (C.referenceState, 0))
+           (Fin.cons (η, (0 : ℝ)) (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))) =
+-        2 * stateGrading S base η + stateGrading S loss η := by
++        2 * stateGrading S base η + stateGrading S (hN.ordinaryFlowLoss 2) η := by
+       exact (congrArg₂ (fun (n : ℕ) (x : AnnularState S × ℝ) =>
+         oneHighVariationWeight (pairGrading (stateGrading S) realGrading) base n x
+           (Fin.cons (η, (0 : ℝ))
+             (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))))
+-        (Nat.zero_add loss) (sub_self (C.referenceState, (0 : ℝ)))).trans
+-          (oneHighVariationWeight_state_external_zero S base loss η)
++        (Nat.zero_add (hN.ordinaryFlowLoss 2)) (sub_self (C.referenceState, (0 : ℝ)))).trans
++          (oneHighVariationWeight_state_external_zero S base (hN.ordinaryFlowLoss 2) η)
+     exact (congrArg abs hd).trans_le (hb'.trans_eq (congrArg
+       (fun t : ℝ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+         T.E0 (T.sample (C.cell m)) ^ B * t) hw))
+diff --git a/src/ContinuousFlexibility/Analysis/N01FlowMixedParameterTower.lean b/src/ContinuousFlexibility/Analysis/N01FlowMixedParameterTower.lean
+index dd4764d693e986a5e4c818cc239e31a9dddb5dc0..4d73789f42c28ecab379f375cc86f214ec89c521 100644
+--- a/src/ContinuousFlexibility/Analysis/N01FlowMixedParameterTower.lean
++++ b/src/ContinuousFlexibility/Analysis/N01FlowMixedParameterTower.lean
+@@ -42,8 +42,8 @@
+           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+             T.E0 (T.sample (C.cell m)) ^ B *
+             oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-              base (s + loss) z v := by
+-  let data := hN.2.2.2.2.2.2.2.2.2.2.2.2 k s
++              base (s + hN.ordinaryFlowLoss k) z v := by
++  let data := hN.ordinaryFlowFamily_bound k s
+   let B : ℝ := data.choose
+   have hB : 0 < B := data.choose_spec.1
+   refine ⟨B, hB, ?_⟩
+@@ -75,7 +75,7 @@
+     (fun i => sectorParameterInclusion S (v i))
+   have hvalue := congrArg (fun y : ℝ =>
+     min (p.1 - C.left m) (C.right m - p.1) ^ a * |y|) heq
+-  have hweight := oneHighVariationWeight_sector_lift S C base (s + loss) z v
++  have hweight := oneHighVariationWeight_sector_lift S C base (s + hN.ordinaryFlowLoss k) z v
+   exact hvalue.trans_le (hraw.trans_eq (congrArg (fun W : ℝ =>
+     B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+       T.E0 (T.sample (C.cell m)) ^ B * W) hweight))
+@@ -97,7 +97,7 @@
+           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+             T.E0 (T.sample (C.cell m)) ^ B *
+             oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-              base (s + loss) z v := by
++              base (s + hN.ordinaryFlowLoss k) z v := by
+   let data := hN.sectorFlow_mixed_tower k s
+   refine ⟨data.choose, data.choose_spec.1, ?_⟩
+   intro m a b p hab hp z hz v
+@@ -121,7 +121,7 @@
+   let d : ℝ := min (l - C.left m) (C.right m - h)
+   have hd : 0 < d := lt_min (sub_pos.mpr hl) (sub_pos.mpr hh)
+   let q : Seminorm ℝ (StateDirections S × ℝ) :=
+-    pairGrading (sectorGrading S) realGrading (max base (a + b + loss))
++    pairGrading (sectorGrading S) realGrading (max base (a + b + hN.ordinaryFlowLoss n))
+   let W : ℝ := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+     T.E0 (T.sample (C.cell m)) ^ B
+   have hsample := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 (C.cell m)
+@@ -147,21 +147,21 @@
+       simpa only [Real.one_rpow, mul_one, one_div] using
+         (one_div_le_one_div_of_le hd hdist)) hraw
+   have hw := oneHighVariationWeight_le_seminorm_product
+-    (pairGrading (sectorGrading S) realGrading) q base (a + b + loss)
++    (pairGrading (sectorGrading S) realGrading) q base (a + b + hN.ordinaryFlowLoss n)
+     (sectorPairGrading_monotone S (le_max_left _ _))
+     (sectorPairGrading_monotone S (le_max_right _ _)) z v
+   have hbound' : |(hN.sectorFlowMixedTower m a b (p.1, p.2) hp).D n z v| ≤
+       d⁻¹ ^ a * (W * oneHighVariationWeight
+-        (pairGrading (sectorGrading S) realGrading) base (a + b + loss) z v) := by
++        (pairGrading (sectorGrading S) realGrading) base (a + b + hN.ordinaryFlowLoss n) z v) := by
+     simpa only [Real.one_rpow, mul_one, W, B] using hbound
+   apply hbound'.trans
+   have hmul := mul_le_mul_of_nonneg_left hw
+     (mul_nonneg (pow_nonneg (inv_nonneg.mpr hd.le) a) hW)
+   calc
+     d⁻¹ ^ a * (W * oneHighVariationWeight
+-        (pairGrading (sectorGrading S) realGrading) base (a + b + loss) z v) =
++        (pairGrading (sectorGrading S) realGrading) base (a + b + hN.ordinaryFlowLoss n) z v) =
+       (d⁻¹ ^ a * W) * oneHighVariationWeight
+-        (pairGrading (sectorGrading S) realGrading) base (a + b + loss) z v := by ring
++        (pairGrading (sectorGrading S) realGrading) base (a + b + hN.ordinaryFlowLoss n) z v := by ring
+     _ ≤ (d⁻¹ ^ a * W) * (((n : ℝ) + 1) * (1 + q z) * ∏ i, q (v i)) := hmul
+     _ = A * (1 + q z) * ∏ i, q (v i) := by dsimp only [A]; ring
+ 
+diff --git a/src/ContinuousFlexibility/Analysis/N01FlowParameterVariation.lean b/src/ContinuousFlexibility/Analysis/N01FlowParameterVariation.lean
+index 6e6e51d16c36f27ad8613e3025c202fed0c43f27..3e937994c6922ffc8addbace28987c4ca08d5cd6 100644
+--- a/src/ContinuousFlexibility/Analysis/N01FlowParameterVariation.lean
++++ b/src/ContinuousFlexibility/Analysis/N01FlowParameterVariation.lean
+@@ -1,4 +1,5 @@
+ import ContinuousFlexibility.Analysis.N01RadialFlow
++import ContinuousFlexibility.Analysis.N01OrdinaryFlowLoss
+ import ContinuousFlexibility.Analysis.SmoothDirectionsMixedScalarLine
+ import ContinuousFlexibility.Analysis.ScalarFlowParameterVariation
+ import ContinuousFlexibility.Analysis.TameLocalCalculus
+@@ -115,9 +116,7 @@
+     (m : ℕ) {r : ℝ} (hr : r ∈ Ioo (C.left m) (C.right m)) (θ : ℝ) :
+     HasDerivAt (fun t : ℝ => C.minusFlow (x, t) m r θ)
+       (deriv (fun t : ℝ => C.minusFlow (x, t) m r θ) q) q := by
+-  have hdata := hN
+-  rcases hdata with ⟨_, _, _, _, _, _, _, _, _, _, _, _, hflow⟩
+-  obtain ⟨_, _, hb⟩ := hflow 1 0
++  obtain ⟨_, _, hb⟩ := hN.ordinaryFlowFamily_bound 1 0
+   obtain ⟨J, _⟩ := hb m 0 0 (r, θ) (by norm_num) hr
+   exact (ordinaryFlow_q_hasDerivAt_of_tower J hxq).differentiableAt.hasDerivAt
+ 
+@@ -157,8 +156,8 @@
+       |deriv (fun t : ℝ => C.minusFlow (x, t) m r θ) q| ≤
+         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B *
+-          (2 + stateGrading S loss (x - C.referenceState) + |q|) := by
+-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 1 0
++          (2 + stateGrading S (hN.ordinaryFlowLoss 1) (x - C.referenceState) + |q|) := by
++  let hdata := hN.ordinaryFlowFamily_bound 1 0
+   let B : ℝ := hdata.choose
+   have hB : 0 < B := hdata.choose_spec.1
+   have hpoint : ∀ (x : AnnularState S) (q : ℝ),
+@@ -167,17 +166,17 @@
+       |deriv (fun t : ℝ => C.minusFlow (x, t) m r θ) q| ≤
+         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B *
+-          (2 + stateGrading S loss (x - C.referenceState) + |q|) := by
++          (2 + stateGrading S (hN.ordinaryFlowLoss 1) (x - C.referenceState) + |q|) := by
+     intro x q hxq m r θ hr
+     let htower := hdata.choose_spec.2 m 0 0 (r, θ) (by norm_num) hr
+     have hraw := htower.choose_spec (x, q) hxq
+       (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))
+     have hfinal := ordinaryFlow_q_derivative_bound_of_tower
+-      (high := 0 + loss) htower.choose hxq (le_of_zero_power_mul_le hraw)
++      (high := 0 + hN.ordinaryFlowLoss 1) htower.choose hxq (le_of_zero_power_mul_le hraw)
+     exact hfinal.trans_eq (congrArg
+       (fun n : ℕ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+         T.E0 (T.sample (C.cell m)) ^ B *
+-          (2 + stateGrading S n (x - C.referenceState) + |q|)) (Nat.zero_add loss))
++          (2 + stateGrading S n (x - C.referenceState) + |q|)) (Nat.zero_add (hN.ordinaryFlowLoss 1)))
+   exact Exists.intro B (And.intro hB hpoint)
+ 
+ /-- For a fixed state and component, the derivative bound is uniform in
+@@ -193,13 +192,13 @@
+   obtain ⟨B, _, hb⟩ := hN.minusFlow_q_derivative_weight_bound
+   let A := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+     T.E0 (T.sample (C.cell m)) ^ B
+-  let K := |A| * (2 + stateGrading S loss (x - C.referenceState) + ε)
+-  have hp : 0 ≤ stateGrading S loss (x - C.referenceState) :=
++  let K := |A| * (2 + stateGrading S (hN.ordinaryFlowLoss 1) (x - C.referenceState) + ε)
++  have hp : 0 ≤ stateGrading S (hN.ordinaryFlowLoss 1) (x - C.referenceState) :=
+     apply_nonneg _ _
+   have hε : 0 < ε := hN.2.1
+   have hK : 0 ≤ K := by dsimp only [K]; positivity
+   refine ⟨K, hK, fun q hq r θ hr => ?_⟩
+-  have hfactor : 0 ≤ 2 + stateGrading S loss (x - C.referenceState) + |q| := by
++  have hfactor : 0 ≤ 2 + stateGrading S (hN.ordinaryFlowLoss 1) (x - C.referenceState) + |q| := by
+     positivity
+   exact (hb x q ⟨hx, hq⟩ m r θ hr).trans
+     ((mul_le_mul_of_nonneg_right (le_abs_self A) hfactor).trans
+diff --git a/src/ContinuousFlexibility/Analysis/N01FlowScalarHeightBounds.lean b/src/ContinuousFlexibility/Analysis/N01FlowScalarHeightBounds.lean
+index 0ad0a5f7e6156a31b9ab6f9f8babd35ec7fd5d31..5f2fc983e2f537c18306f8df1bd25c19c983c686 100644
+--- a/src/ContinuousFlexibility/Analysis/N01FlowScalarHeightBounds.lean
++++ b/src/ContinuousFlexibility/Analysis/N01FlowScalarHeightBounds.lean
+@@ -117,8 +117,8 @@
+         |J.D (n + 1) z (fun _ => scalarParameterDirection S)| ≤
+           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+             T.E0 (T.sample (C.cell m)) ^ B *
+-            (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
+-              heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
++            (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + hN.ordinaryFlowLoss (n + 2)) z) *
++              heightPairGrading S base η + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) := by
+   let hdata := hN.sectorFlow_closed_tower hS hT (n + 2) s
+   let B : ℝ := hdata.choose
+   have hB : 0 < B := hdata.choose_spec.1
+@@ -146,7 +146,7 @@
+     exact (hN.ordinaryFlowFamily_first_height_jet_constant_locality hS hT hq η
+       (liftSectorParameter S C (z.1, q)).1.1 m b θ hr c hηq J).trans
+         (hN.ordinaryFlowFamily_height_scalar_jet hS hT hq m b θ hr J)
+-  exact scalar_height_bound_of_tower J (s + loss) n z hz η hP hJ hEuler
++  exact scalar_height_bound_of_tower J (s + hN.ordinaryFlowLoss (n + 2)) n z hz η hP hJ hEuler
+ 
+ 
+ theorem N01Properties.sectorFlow_pure_scalar_height_bound
+@@ -163,8 +163,8 @@
+         |J.D (n + 1) z (fun _ => scalarParameterDirection S)| ≤
+           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+             T.E0 (T.sample (C.cell m)) ^ B *
+-            (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
+-              heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
++            (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + hN.ordinaryFlowLoss (n + 2)) z) *
++              heightPairGrading S base η + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) := by
+   let hdata := hN.sectorFlow_pure_scalar_height_bound_mod_constant hS hT n s
+   let B : ℝ := hdata.choose
+   have hB : 0 < B := hdata.choose_spec.1
+diff --git a/src/ContinuousFlexibility/Analysis/N01FlowSmallness.lean b/src/ContinuousFlexibility/Analysis/N01FlowSmallness.lean
+index 75b478570fc5f1d2b449476a1c4b3a42d7ef3c1c..db8e181fa1478b1cb1b7e0310bf3358d8c0f7e6d 100644
+--- a/src/ContinuousFlexibility/Analysis/N01FlowSmallness.lean
++++ b/src/ContinuousFlexibility/Analysis/N01FlowSmallness.lean
+@@ -1,4 +1,5 @@
+ import ContinuousFlexibility.Analysis.N01CoefficientSmallness
++import ContinuousFlexibility.Analysis.N01OrdinaryFlowLoss
+ import ContinuousFlexibility.Analysis.N01FlowAngularSmoothness
+ import ContinuousFlexibility.Analysis.N01RadialFlow
+ import Mathlib.Topology.Order.OrderClosed
+@@ -36,17 +37,17 @@
+     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+     (hN : N01Properties D T S C base loss ε) (hT : IsMaterialData D T) (s : ℕ) :
+-    ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → s + loss ≤ base' →
++    ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → s + hN.ordinaryFlowLoss 1 ≤ base' →
+       ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →
+       ∀ z ∈ stateNeighborhood S C base' η, ∀ m b p,
+         b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
+         |ordinaryFlowFamily S C m 0 b p z| ≤
+           6 * B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+             T.E0 (T.sample (C.cell m)) ^ B * η := by
+-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 1 s
++  let hdata := hN.ordinaryFlowFamily_bound 1 s
+   let B : ℝ := hdata.choose
+   have hB : 0 < B := hdata.choose_spec.1
+-  have hpoint : ∀ base' : ℕ, base ≤ base' → s + loss ≤ base' →
++  have hpoint : ∀ base' : ℕ, base ≤ base' → s + hN.ordinaryFlowLoss 1 ≤ base' →
+       ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →
+       ∀ z ∈ stateNeighborhood S C base' η, ∀ m b p,
+         b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
+@@ -71,13 +72,13 @@
+         |J.D 1 ((C.referenceState, 0) + t • (z - (C.referenceState, 0)))
+           (fun _ => z - (C.referenceState, 0))| ≤
+           A * oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+-            base (s + loss)
++            base (s + hN.ordinaryFlowLoss 1)
+             (((C.referenceState, 0) + t • (z - (C.referenceState, 0))) -
+               (C.referenceState, 0)) (fun _ : Fin 1 => z - (C.referenceState, 0)) := by
+       simpa only [pow_zero, one_mul] using
+         hJ _ (hline t ht) (fun _ : Fin 1 => z - (C.referenceState, 0))
+     have hsmall := J.abs_le_of_first_variation_small
+-      (pairGrading (stateGrading S) realGrading) base (s + loss)
++      (pairGrading (stateGrading S) realGrading) base (s + hN.ordinaryFlowLoss 1)
+       (C.referenceState, 0) z hline (ordinaryFlowFamily_reference_zero S C m 0 b p)
+       hA hη₁ (stateNeighborhood_pairGrading_lt S C hb hz).le
+       (stateNeighborhood_pairGrading_lt S C hh hz).le hbound
+@@ -125,7 +126,7 @@
+     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+-    ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → 1 + loss ≤ base' →
++    ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → 1 + hN.ordinaryFlowLoss 1 ≤ base' →
+       ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →
+       ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →
+       ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,
+@@ -189,7 +190,7 @@
+     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+-    ∃ K : ℝ, 0 < K ∧ ∀ base' : ℕ, base ≤ base' → 1 + loss ≤ base' →
++    ∃ K : ℝ, 0 < K ∧ ∀ base' : ℕ, base ≤ base' → 1 + hN.ordinaryFlowLoss 1 ≤ base' →
+       ∀ η : ℝ, 0 ≤ η → η ≤ ε → η ≤ 1 / 2 →
+       ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →
+       ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,
+diff --git a/src/ContinuousFlexibility/Analysis/N01HeightResponseBound.lean b/src/ContinuousFlexibility/Analysis/N01HeightResponseBound.lean
+index d188418f80d3b00ea06821957a135629e8492213..db4e810c909b0a92b02736e1a2c4eb17a1535f03 100644
+--- a/src/ContinuousFlexibility/Analysis/N01HeightResponseBound.lean
++++ b/src/ContinuousFlexibility/Analysis/N01HeightResponseBound.lean
+@@ -85,7 +85,7 @@
+         (r, θ - opticalTravel D.w (C.left m) r)| ≤
+       B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+         T.E0 (T.sample (C.cell m)) ^ B *
+-        (2 * heightPairGrading S base η + heightPairGrading S loss η) := by
++        (2 * heightPairGrading S base η + heightPairGrading S (hN.ordinaryFlowLoss 2) η) := by
+   let hdata := hN.minusFlow_state_q_mixed_derivative_bound
+   let B : ℝ := hdata.choose
+   have hB : 0 < B := hdata.choose_spec.1
+@@ -110,7 +110,7 @@
+   have hbi := hbound ((η, 0) : AnnularState S) m b θ hb
+   have hd := (hN.minusFlow_height_q_mixed_hasDerivAt hS hT η m θ ⟨hb.1.le, hb.2.le⟩).deriv
+   have hg := congrArg₂ (fun a b : ℝ => 2 * a + b)
+-    (stateGrading_heightOnlyDirection S base η) (stateGrading_heightOnlyDirection S loss η)
++    (stateGrading_heightOnlyDirection S base η) (stateGrading_heightOnlyDirection S (hN.ordinaryFlowLoss 2) η)
+   exact ((congrArg abs hd).symm.trans_le hbi).trans_eq
+     (congrArg (fun q : ℝ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+       T.E0 (T.sample (C.cell m)) ^ B * q) hg)
+@@ -127,7 +127,7 @@
+       C.travel m ≤
+         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B *
+-          (2 * heightPairGrading S base η + heightPairGrading S loss η) := by
++          (2 * heightPairGrading S base η + heightPairGrading S (hN.ordinaryFlowLoss 2) η) := by
+   let hdata := hN.heightResponse_integral_bound hS hT
+   let B : ℝ := hdata.choose
+   have hB : 0 < B := hdata.choose_spec.1
+diff --git a/src/ContinuousFlexibility/Analysis/N01HeightTestWeightBridge.lean b/src/ContinuousFlexibility/Analysis/N01HeightTestWeightBridge.lean
+index 652f53e365a6eecc4cc001aaeb012b34f2995d60..aec111a2524b8de940108f91c445f19ac7b2463a 100644
+--- a/src/ContinuousFlexibility/Analysis/N01HeightTestWeightBridge.lean
++++ b/src/ContinuousFlexibility/Analysis/N01HeightTestWeightBridge.lean
+@@ -32,7 +32,7 @@
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+     (h : ℝ → ℝ) (hh : ∀ r, HasDerivAt h (D.w r) r)
+-    {n : ℕ} (hbase : base ≤ n) (hloss : loss ≤ n)
++    {n : ℕ} (hbase : base ≤ n) (hloss : hN.ordinaryFlowLoss 2 ≤ n)
+     {K A R : ℝ} (hK : 0 < K) (hR : 0 ≤ R)
+     (htest : ∀ m j : ℕ, Ioo (C.left m) (C.right m) ⊆ D.cells j →
+       ∃ η : HeightPair S,
+@@ -63,10 +63,10 @@
+       K * T.H (T.sample j) ^ (-(3 / 4 : ℝ)) * T.E0 (T.sample j) ^ A *
+         T.M (T.sample j) ^ N * radialE (D.cellIndex j) ^ R := by
+     simpa only [N, Real.rpow_natCast] using hnorm
+-  have hgrade : 2 * heightPairGrading S base η + heightPairGrading S loss η ≤
++  have hgrade : 2 * heightPairGrading S base η + heightPairGrading S (hN.ordinaryFlowLoss 2) η ≤
+       3 * (K * T.H (T.sample j) ^ (-(3 / 4 : ℝ)) * T.E0 (T.sample j) ^ A *
+         T.M (T.sample j) ^ N * radialE (D.cellIndex j) ^ R) := by
+-    have hle : 2 * heightPairGrading S base η + heightPairGrading S loss η ≤
++    have hle : 2 * heightPairGrading S base η + heightPairGrading S (hN.ordinaryFlowLoss 2) η ≤
+         3 * heightPairGrading S n η := by linarith only [hbase', hloss']
+     exact hle.trans (mul_le_mul_of_nonneg_left hnorm' (by norm_num))
+   have hE : 0 < radialE (D.cellIndex j) := Real.exp_pos _
+@@ -87,11 +87,11 @@
+     _ ≤ radialE (D.cellIndex j) ^ R0 *
+         (B0 * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B0 *
+-          (2 * heightPairGrading S base η + heightPairGrading S loss η)) :=
++          (2 * heightPairGrading S base η + heightPairGrading S (hN.ordinaryFlowLoss 2) η)) :=
+       hdetector η h hh hgerm
+     _ = (radialE (D.cellIndex j) ^ R0 *
+         (B0 * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B0)) *
+-          (2 * heightPairGrading S base η + heightPairGrading S loss η) := by ring
++          (2 * heightPairGrading S base η + heightPairGrading S (hN.ordinaryFlowLoss 2) η) := by ring
+     _ ≤ (radialE (D.cellIndex j) ^ R0 *
+         (B0 * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B0)) *
+           (3 * (K * T.H (T.sample j) ^ (-(3 / 4 : ℝ)) * T.E0 (T.sample j) ^ A *
+@@ -113,7 +113,7 @@
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+     (h : ℝ → ℝ) (hh : ∀ r, HasDerivAt h (D.w r) r)
+-    {n : ℕ} (hbase : base ≤ n) (hloss : loss ≤ n)
++    {n : ℕ} (hbase : base ≤ n) (hloss : hN.ordinaryFlowLoss 2 ≤ n)
+     {K A R : ℝ} (hK : 0 < K) (hR : 0 ≤ R)
+     (htest : ∀ m j : ℕ, Ioo (C.left m) (C.right m) ⊆ D.cells j →
+       ∃ η : HeightPair S,
+@@ -139,7 +139,7 @@
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+     (h : ℝ → ℝ) (hh : ∀ r, HasDerivAt h (D.w r) r)
+-    {n : ℕ} (hbase : base ≤ n) (hloss : loss ≤ n)
++    {n : ℕ} (hbase : base ≤ n) (hloss : hN.ordinaryFlowLoss 2 ≤ n)
+     {K A R : ℝ} (hK : 0 < K) (hR : 0 ≤ R)
+     (htest : ∀ m j : ℕ, Ioo (C.left m) (C.right m) ⊆ D.cells j →
+       ∃ η : HeightPair S,
+diff --git a/src/ContinuousFlexibility/Analysis/N01HeightWeightConstraint.lean b/src/ContinuousFlexibility/Analysis/N01HeightWeightConstraint.lean
+index b0e58d7541dcbe72c0e67a80b53a64b838c579ba..41a8b2eb72589ad65417c3eca42f44697bbe3017 100644
+--- a/src/ContinuousFlexibility/Analysis/N01HeightWeightConstraint.lean
++++ b/src/ContinuousFlexibility/Analysis/N01HeightWeightConstraint.lean
+@@ -37,7 +37,7 @@
+         1 ≤ radialE (D.cellIndex j) ^ R *
+           (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+             T.E0 (T.sample (C.cell m)) ^ B *
+-            (2 * heightPairGrading S base η + heightPairGrading S loss η)) := by
++            (2 * heightPairGrading S base η + heightPairGrading S (hN.ordinaryFlowLoss 2) η)) := by
+   obtain ⟨B, hB, hresponse⟩ :=
+     hN.opticalTravel_le_radialHeightDirection_weight hS hT
+   obtain ⟨R, hR, htravel⟩ := hN.actualCell_travel_lower_bound
+diff --git a/src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean b/src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean
+index 5beae92c80f829682b94ba3b58f5b97e75a39c01..1d975e64157caa6503c0bfc8104eab86d0e110d5 100644
+--- a/src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean
++++ b/src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean
+@@ -1,5 +1,6 @@
+ import ContinuousFlexibility.Analysis.SolveStateSpaces
+ import ContinuousFlexibility.Analysis.MaterialSampleCofinite
++import ContinuousFlexibility.Analysis.N01cStateSeminorms
+ 
+ /-!
+ # Restricting the common N01 neighborhood
+@@ -21,41 +22,6 @@
+ 
+ open Set ContinuousFlexibility.Analysis
+ open scoped Topology BigOperators
+-
+-section RestrictDirections
+-
+-variable {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+-  [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+-  {U V : Set E} {f : E → F}
+-
+-def SmoothDirections.restrict (J : SmoothDirections U f)
+-    (hV : IsOpen V) (hVU : V ⊆ U) : SmoothDirections V f where
+-  open_domain := hV
+-  D := J.D
+-  zero x hx := J.zero x (hVU hx)
+-  continuous n := (J.continuous n).mono (fun p hp => ⟨hVU hp.1, hp.2⟩)
+-  derivative n x hx v w := J.derivative n x (hVU hx) v w
+-
+-end RestrictDirections
+-
+-theorem oneHighVariationWeight_mono
+-    {E : Type*} [AddCommGroup E] [Module ℝ E]
+-    {p : ℕ → Seminorm ℝ E} (hp : Monotone p)
+-    {b₀ b₁ h₀ h₁ k : ℕ} (hb : b₀ ≤ b₁) (hh : h₀ ≤ h₁)
+-    (x : E) (v : Fin k → E) :
+-    oneHighVariationWeight p b₀ h₀ x v ≤ oneHighVariationWeight p b₁ h₁ x v := by
+-  have hprod (s : Finset (Fin k)) :
+-      (∏ i ∈ s, p b₀ (v i)) ≤ ∏ i ∈ s, p b₁ (v i) :=
+-    Finset.prod_le_prod₀ (fun i hi => apply_nonneg _ _) (fun i hi => hp hb (v i))
+-  unfold oneHighVariationWeight
+-  apply add_le_add
+-  · exact mul_le_mul (add_le_add_right (hp hh x) 1) (hprod Finset.univ)
+-      (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _))
+-      (add_nonneg zero_le_one (apply_nonneg _ _))
+-  · apply Finset.sum_le_sum
+-    intro i hi
+-    exact mul_le_mul (hp hh (v i)) (hprod (Finset.univ.erase i))
+-      (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _)) (apply_nonneg _ _)
+ 
+ theorem stateNeighborhood_isOpen (S : PhysicalSpacesData)
+     (C : NonlinearGeometryData S) (base : ℕ) (ε : ℝ) :
+@@ -131,8 +97,11 @@
+         (C.referenceState, (0 : ℝ)) hopen hsub hp hb hC
+           (hdata.choose_spec.2 m i a b p hab hpm)
+     exact Exists.intro B (And.intro hB hpoint)
+-  · intro k s
+-    let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 k s
++  · intro k
++    obtain ⟨parameterLoss, hflow⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 k
++    refine ⟨parameterLoss, ?_⟩
++    intro s
++    let hdata := hflow s
+     let B : ℝ := hdata.choose
+     have hB : 0 < B := hdata.choose_spec.1
+     have hpoint : ∀ m a b p, a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
+@@ -142,7 +111,7 @@
+             min (p.1 - C.left m) (C.right m - p.1) ^ a * |J.D k z v| ≤
+               B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
+                 oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+-                  base' (s + loss) (z - (C.referenceState, 0)) v := by
++                  base' (s + loss + parameterLoss) (z - (C.referenceState, 0)) v := by
+       intro m a b p hab hpm
+       have hC : 0 ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B :=
+diff --git a/src/ContinuousFlexibility/Analysis/N01OpticalCollarJetBounds.lean b/src/ContinuousFlexibility/Analysis/N01OpticalCollarJetBounds.lean
+index 82d54fac8fdf7a4c984792db45d68bbc82eda5ec..78a8b3f2a3f5fd8e3d38cd433afe8c8496af39ae 100644
+--- a/src/ContinuousFlexibility/Analysis/N01OpticalCollarJetBounds.lean
++++ b/src/ContinuousFlexibility/Analysis/N01OpticalCollarJetBounds.lean
+@@ -1,3 +1,4 @@
++import ContinuousFlexibility.Analysis.N01OrdinaryFlowLoss
+ import ContinuousFlexibility.Analysis.N01ReferenceOpticalCollars
+ import ContinuousFlexibility.Analysis.N01NeighborhoodRestriction
+ 
+@@ -194,9 +195,9 @@
+         |ordinaryFlowFamily S C m a b p z| ≤
+         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B *
+-          (1 + pairGrading (stateGrading S) realGrading (s + loss)
++          (1 + pairGrading (stateGrading S) realGrading (s + hN.ordinaryFlowLoss 0)
+             (z - (C.referenceState, 0))) := by
+-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 0 s
++  let hdata := hN.ordinaryFlowFamily_bound 0 s
+   let B : ℝ := hdata.choose
+   have hB : 0 < B := hdata.choose_spec.1
+   have hpoint : ∀ z ∈ stateNeighborhood S C base ε, ∀ m a b p,
+@@ -205,11 +206,11 @@
+         |ordinaryFlowFamily S C m a b p z| ≤
+         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B *
+-          (1 + pairGrading (stateGrading S) realGrading (s + loss)
++          (1 + pairGrading (stateGrading S) realGrading (s + hN.ordinaryFlowLoss 0)
+             (z - (C.referenceState, 0))) := by
+     intro z hz m a b p hab hp
+     exact smoothDirections_zeroth_spatialWeight_bound
+-      (pairGrading (stateGrading S) realGrading) base (s + loss)
++      (pairGrading (stateGrading S) realGrading) base (s + hN.ordinaryFlowLoss 0)
+       (C.referenceState, (0 : ℝ))
+       (min (p.1 - C.left m) (C.right m - p.1) ^ a)
+       (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B)
+@@ -237,7 +238,7 @@
+         |J.D k z v| ≤ K ^ a * radialE (D.cellIndex (j m)) ^ (A * a) *
+           (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
+             oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+-              base (s + loss) (z - (C.referenceState, 0)) v) := by
++              base (s + hN.ordinaryFlowLoss k) (z - (C.referenceState, 0)) v) := by
+   have hgeom : ∃ K A : ℝ, 0 < K ∧ 0 < A ∧ ∀ m r,
+       r ∈ Icc (x m - δ m) (x m + δ m) →
+       (min (r - C.left m) (C.right m - r))⁻¹ ≤
+@@ -246,7 +247,7 @@
+       D T S C base loss ε hN j x δ B₀ hB₀ hcell hinside hspeed
+   obtain ⟨K, A, hK, hA, hdist⟩ := hgeom
+   refine ⟨K, A, hK, hA, fun k s => ?_⟩
+-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 k s
++  let hdata := hN.ordinaryFlowFamily_bound k s
+   let B : ℝ := hdata.choose
+   have hB : 0 < B := hdata.choose_spec.1
+   have hpoint : ∀ m a b p,
+@@ -256,14 +257,14 @@
+         |J.D k z v| ≤ K ^ a * radialE (D.cellIndex (j m)) ^ (A * a) *
+           (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
+             oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+-              base (s + loss) (z - (C.referenceState, 0)) v) := by
++              base (s + hN.ordinaryFlowLoss k) (z - (C.referenceState, 0)) v) := by
+     intro m a b p hab hp
+     have hm : p.1 ∈ Ioo (C.left m) (C.right m) :=
+       ⟨(hinside m).1.trans_le hp.1, hp.2.trans_lt (hinside m).2⟩
+     have hd : 0 < min (p.1 - C.left m) (C.right m - p.1) :=
+       lt_min (sub_pos.mpr hm.1) (sub_pos.mpr hm.2)
+     exact smoothDirections_divide_spatialWeight_bound
+-      (pairGrading (stateGrading S) realGrading) base (s + loss) k a
++      (pairGrading (stateGrading S) realGrading) base (s + hN.ordinaryFlowLoss k) k a
+       (C.referenceState, (0 : ℝ))
+       (min (p.1 - C.left m) (C.right m - p.1)) K
+       (radialE (D.cellIndex (j m))) A
+@@ -293,7 +294,7 @@
+         K ^ a * radialE (D.cellIndex (j m)) ^ (A * a) *
+           (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+             T.E0 (T.sample (C.cell m)) ^ B *
+-            (1 + pairGrading (stateGrading S) realGrading (s + loss)
++            (1 + pairGrading (stateGrading S) realGrading (s + hN.ordinaryFlowLoss 0)
+               (z - (C.referenceState, 0)))) := by
+   let data :=
+     @N01Properties.ordinaryFlowFamily_collar_directional_bounds
+@@ -308,7 +309,7 @@
+   have hB : 0 < B := dataB.choose_spec.1
+   refine ⟨K, A, B, hK, hA, hB, fun z hz m a b p hab hp => ?_⟩
+   exact smoothDirections_zeroth_twoFactor_bound
+-    (pairGrading (stateGrading S) realGrading) base (s + loss)
++    (pairGrading (stateGrading S) realGrading) base (s + hN.ordinaryFlowLoss 0)
+     (C.referenceState, (0 : ℝ))
+     (K ^ a * radialE (D.cellIndex (j m)) ^ (A * a))
+     (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B)
+diff --git a/src/ContinuousFlexibility/Analysis/N01OrdinaryFlowLoss.lean b/src/ContinuousFlexibility/Analysis/N01OrdinaryFlowLoss.lean
+new file mode 100644
+index 0000000000000000000000000000000000000000..287a111747873412f0df0f1fb64fa52e592af5e1
+--- /dev/null
++++ b/src/ContinuousFlexibility/Analysis/N01OrdinaryFlowLoss.lean
+@@ -0,0 +1,55 @@
++import ContinuousFlexibility.Statements.Nonlinear
++
++/-!
++# The ordinary-flow loss at one parameter order
++
++The N01 certificate chooses this loss before every spatial order,
++component, point, state and direction.  These accessors retain that
++choice and the actual ordinary-flow family.
++-/
++
++noncomputable section
++
++namespace ContinuousFlexibility.Statements
++
++open Set
++
++local instance n01OrdinaryFlowLossStateSMul (S : PhysicalSpacesData) :
++    SMul ℝ (AnnularState S) := Prod.instSMul
++local instance n01OrdinaryFlowLossParameterSMul (S : PhysicalSpacesData) :
++    SMul ℝ (AnnularState S × ℝ) := Prod.instSMul
++
++variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
++  {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
++
++/-- The additional loss supplied by N01 at the fixed parameter order. -/
++def N01Properties.ordinaryFlowParameterLoss
++    (hN : N01Properties D T S C base loss ε) (k : ℕ) : ℕ :=
++  (hN.2.2.2.2.2.2.2.2.2.2.2.2 k).choose
++
++/-- The original loss together with the selected parameter-order loss. -/
++def N01Properties.ordinaryFlowLoss
++    (hN : N01Properties D T S C base loss ε) (k : ℕ) : ℕ :=
++  loss + hN.ordinaryFlowParameterLoss k
++
++theorem N01Properties.le_ordinaryFlowLoss
++    (hN : N01Properties D T S C base loss ε) (k : ℕ) :
++    loss ≤ hN.ordinaryFlowLoss k :=
++  Nat.le_add_right loss (hN.ordinaryFlowParameterLoss k)
++
++/-- The same chosen loss works for all spatial orders and labels. -/
++theorem N01Properties.ordinaryFlowFamily_bound
++    (hN : N01Properties D T S C base loss ε) (k s : ℕ) :
++    ∃ B : ℝ, 0 < B ∧ ∀ m a b p,
++      a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
++      ∃ J : SmoothDirections (stateNeighborhood S C base ε) (ordinaryFlowFamily S C m a b p),
++        ∀ z ∈ stateNeighborhood S C base ε, ∀ v : Fin k → (AnnularState S × ℝ),
++          min (p.1 - C.left m) (C.right m - p.1) ^ a * |J.D k z v| ≤
++            B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
++            T.E0 (T.sample (C.cell m)) ^ B *
++            oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
++              base (s + hN.ordinaryFlowLoss k) (z - (C.referenceState, 0)) v := by
++  simpa only [N01Properties.ordinaryFlowLoss, N01Properties.ordinaryFlowParameterLoss,
++    Nat.add_assoc] using (hN.2.2.2.2.2.2.2.2.2.2.2.2 k).choose_spec s
++
++end ContinuousFlexibility.Statements
+diff --git a/src/ContinuousFlexibility/Analysis/N01SectorFlowTower.lean b/src/ContinuousFlexibility/Analysis/N01SectorFlowTower.lean
+index b078e9b4f8b9ca5336dcf3a9e18d1f26376acd79..ab2220379cf327f2ce571e04b739481762291b4e 100644
+--- a/src/ContinuousFlexibility/Analysis/N01SectorFlowTower.lean
++++ b/src/ContinuousFlexibility/Analysis/N01SectorFlowTower.lean
+@@ -1,4 +1,5 @@
+ import ContinuousFlexibility.Analysis.SectorParameterGeometry
++import ContinuousFlexibility.Analysis.N01OrdinaryFlowLoss
+ import ContinuousFlexibility.Analysis.N01FlowAngularSmoothness
+ 
+ /-!
+@@ -38,8 +39,8 @@
+         |J.D k z v| ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B *
+           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-            base (s + loss) z v := by
+-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 k s
++            base (s + hN.ordinaryFlowLoss k) z v := by
++  let hdata := hN.ordinaryFlowFamily_bound k s
+   let B : ℝ := hdata.choose
+   have hB : 0 < B := hdata.choose_spec.1
+   have hpoint : ∀ (m b : ℕ) (θ r : ℝ), b ≤ s → r ∈ Ioo (C.left m) (C.right m) →
+@@ -49,7 +50,7 @@
+         |J.D k z v| ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+           T.E0 (T.sample (C.cell m)) ^ B *
+           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+-            base (s + loss) z v := by
++            base (s + hN.ordinaryFlowLoss k) z v := by
+     intro m b θ r hb hr
+     let htower := hdata.choose_spec.2 m 0 b (r, θ)
+       (by simpa only [zero_add] using hb) hr
+@@ -81,7 +82,7 @@
+     have hb' := (sector_drop_zero_power_factor hraw).trans_eq
+       (congrArg (fun W : ℝ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+         T.E0 (T.sample (C.cell m)) ^ B * W)
+-        (oneHighVariationWeight_sector_lift S C base (s + loss) z v))
++        (oneHighVariationWeight_sector_lift S C base (s + hN.ordinaryFlowLoss k) z v))
+     exact (congrArg abs heq).trans_le hb'
+   exact Exists.intro B (And.intro hB hpoint)
+ 
+diff --git a/src/ContinuousFlexibility/Analysis/N03SourceFromCoefficientJets.lean b/src/ContinuousFlexibility/Analysis/N03SourceFromCoefficientJets.lean
+index a4b15bef3b7c20f5cfd74a668c654bbee81d9d1c..a656bbafb44c80797f12d47a092427f6cd960084 100644
+--- a/src/ContinuousFlexibility/Analysis/N03SourceFromCoefficientJets.lean
++++ b/src/ContinuousFlexibility/Analysis/N03SourceFromCoefficientJets.lean
+@@ -117,7 +117,8 @@
+     (hasSmoothing_pairGrading (hS.2.2.2.1 (3 / 4 : ℝ)).2.1 hasSmoothing_realGrading)
+   have hheight (s : ℕ) (η : HeightPair S) : physicalNorm T (3 / 4 : ℝ) s
+       ((S.height (3 / 4 : ℝ)).decode η.1) ≤ q s η :=
+-    (sobolevModel_physicalNorm_le_grading (hS.1 (3 / 4 : ℝ)) η.1 s).trans
++    (sobolevModel_physicalNorm_le_grading (hS.1 (3 / 4 : ℝ)) η.1
++      (s := s) (t := s) le_rfl).trans
+       (le_add_of_nonneg_right (apply_nonneg (realGrading s) η.2))
+   exact ⟨hqcont, hq, hIq, hheight⟩
+ 
+diff --git a/src/ContinuousFlexibility/Analysis/N04bSingletonType.lean b/src/ContinuousFlexibility/Analysis/N04bSingletonType.lean
+index 62e4758d8d56b86a064970d0522912134a868dd9..a81e7d41c495269260306e03f286480b9e97e386 100644
+--- a/src/ContinuousFlexibility/Analysis/N04bSingletonType.lean
++++ b/src/ContinuousFlexibility/Analysis/N04bSingletonType.lean
+@@ -1,4 +1,5 @@
+ import ContinuousFlexibility.Analysis.N04bSqrtAffine
++import ContinuousFlexibility.Analysis.N01OrdinaryFlowLoss
+ import ContinuousFlexibility.Analysis.N01SingletonControl
+ import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
+ 
+@@ -214,7 +215,7 @@
+     DifferentiableAt ℝ
+       (fun s : ℝ => Real.sqrt
+         (-deriv D.w r / (r * D.w r) + (-deriv (C.control m) r / r) * s)) t := by
+-  obtain ⟨B, hB, htower⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 0 1
++  obtain ⟨B, hB, htower⟩ := hN.ordinaryFlowFamily_bound 0 1
+   obtain ⟨J, hJ⟩ := htower m 1 0 (r, 0) (by norm_num) hr
+   let v : AnnularState S × ℝ :=
+     (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, 0)
+diff --git a/src/ContinuousFlexibility/Analysis/N04bStateProfileType.lean b/src/ContinuousFlexibility/Analysis/N04bStateProfileType.lean
+index 32fc4ba24a0a404c220758c5ec64b4a0068c7471..06030d051d908c54040b159a8623488ea0cb452d 100644
+--- a/src/ContinuousFlexibility/Analysis/N04bStateProfileType.lean
++++ b/src/ContinuousFlexibility/Analysis/N04bStateProfileType.lean
+@@ -1,4 +1,5 @@
+ import ContinuousFlexibility.Analysis.N04bSingletonType
++import ContinuousFlexibility.Analysis.N01OrdinaryFlowLoss
+ import Mathlib.Topology.Algebra.InfiniteSum.Ring
+ import Mathlib.Tactic.Abel
+ 
+@@ -168,7 +169,7 @@
+     DifferentiableAt ℝ (fun s : ℝ => Real.sqrt
+       (-deriv D.w r / (r * D.w r) +
+         (-deriv (n04bStateLogExponent D S C v) r / r) * s)) t := by
+-  obtain ⟨B, hB, htower⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 0 1
++  obtain ⟨B, hB, htower⟩ := hN.ordinaryFlowFamily_bound 0 1
+   obtain ⟨J, hJ⟩ := htower m 1 0 (r, 0) (by norm_num) hr
+   have hmem : (C.referenceState, (0 : ℝ)) + t • (v, (0 : ℝ)) ∈
+       stateNeighborhood S C base ε := by
+diff --git a/src/ContinuousFlexibility/Analysis/PhysicalGradeEnergy.lean b/src/ContinuousFlexibility/Analysis/PhysicalGradeEnergy.lean
+index d2157bf57393588e55ea99e8fcc4c9ad3debdeef..f224901095fabc5af5e5bc31b3c63b2bc3109670 100644
+--- a/src/ContinuousFlexibility/Analysis/PhysicalGradeEnergy.lean
++++ b/src/ContinuousFlexibility/Analysis/PhysicalGradeEnergy.lean
+@@ -1,4 +1,5 @@
+ import ContinuousFlexibility.Analysis.MaterialComponentEnergy
++import ContinuousFlexibility.Analysis.N01cHeightSeminorms
+ 
+ /-!
+ # Exact physical jet energy and the supplied projective grading
+@@ -49,20 +50,13 @@
+   simpa only [j, physicalLevelEnergy, Matrix.cons_val_zero, Matrix.cons_val_one,
+     Matrix.cons_val_two, Matrix.head_cons, Matrix.tail_cons] using h
+ 
+-theorem sobolevModel_physicalNorm_le_grading
+-    {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : SobolevModelData}
+-    (hH : IsSobolevModel D T γ H) (u : H.Space) (s : ℕ) :
+-    physicalNorm T γ s (H.decode u) ≤ H.grading s u := by
+-  rw [← hH.2.2.2.2.2.2.2 u s]
+-  exact norm_coordinate_le_graded _ _ le_rfl u
+-
+ theorem sobolevModel_physicalLevelEnergy_le_grading_sq
+     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : SobolevModelData}
+     (hH : IsSobolevModel D T γ H) (u : H.Space) (s : ℕ) :
+     physicalLevelEnergy T γ s (H.decode u) ≤ ENNReal.ofReal (H.grading s u ^ 2) := by
+   rw [physicalLevelEnergy_eq_ofReal_norm_sq (hH.2.2.2.1 u)]
+   exact ENNReal.ofReal_le_ofReal
+-    (pow_le_pow_left₀ (Real.sqrt_nonneg _) (sobolevModel_physicalNorm_le_grading hH u s) 2)
++    (pow_le_pow_left₀ (Real.sqrt_nonneg _) (sobolevModel_physicalNorm_le_grading hH u (s := s) (t := s) le_rfl) 2)
+ 
+ theorem sobolevModel_weightedJet_energy_le_grading_sq
+     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : SobolevModelData}
+diff --git a/src/ContinuousFlexibility/Analysis/PhysicalJetLinearity.lean b/src/ContinuousFlexibility/Analysis/PhysicalJetLinearity.lean
+index a4c76b72ffedacf105cac0cd7f4df17a2aafc8a1..1bbe0e760e22a6765f602dbf7115348cb4035b74 100644
+--- a/src/ContinuousFlexibility/Analysis/PhysicalJetLinearity.lean
++++ b/src/ContinuousFlexibility/Analysis/PhysicalJetLinearity.lean
+@@ -1,5 +1,6 @@
+ import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+ import ContinuousFlexibility.Analysis.MixedDerivativeLocality
++import ContinuousFlexibility.Analysis.N01cHeightParameterJets
+ 
+ /-!
+ # Linearity of the actual material jets on the supplied height space
+@@ -16,12 +17,6 @@
+ 
+ open Set
+ open scoped ContDiff
+-
+-theorem mixedDerivative_const_mul (c : ℝ) (f : PolarPoint → ℝ)
+-    (a b : ℕ) (p : PolarPoint) :
+-    mixedDerivative a b (fun q => c * f q) p = c * mixedDerivative a b f p := by
+-  unfold mixedDerivative
+-  simp only [iteratedDeriv_const_mul_field]
+ 
+ theorem n02n03_mixedDerivative_add_of_contDiff {f g : PolarPoint → ℝ}
+     (hf : ContDiff ℝ ∞ f) (hg : ContDiff ℝ ∞ g) (a b : ℕ) (p : PolarPoint) :
+diff --git a/src/ContinuousFlexibility/Analysis/ReturnCorrectionBufferedCollars.lean b/src/ContinuousFlexibility/Analysis/ReturnCorrectionBufferedCollars.lean
+index 6c6d0417e092157d21d0d0883568b4e074e1864b..4521528faf6cecab9de1f88f76599ef962d566d5 100644
+--- a/src/ContinuousFlexibility/Analysis/ReturnCorrectionBufferedCollars.lean
++++ b/src/ContinuousFlexibility/Analysis/ReturnCorrectionBufferedCollars.lean
+@@ -128,7 +128,7 @@
+   obtain ⟨V, K, hV, hK, herror⟩ := hN.returnCorrectedMinusSpeed_error_radial_small
+     hS hT χ j hJ hA hP hcell hcutoff
+   obtain ⟨U, hU, hupper⟩ := hN.originalRadialCoefficient_uniform_upper
+-  let base' := max base (1 + loss)
++  let base' := max base (1 + hN.ordinaryFlowLoss 1)
+   let ε' := min ε (min (1 / 2) (min K⁻¹ (lam / (4 * U * V))))
+   have hε' : 0 < ε' := lt_min hε
+     (lt_min (by norm_num) (lt_min (inv_pos.mpr hK) (div_pos hlam (by positivity))))
+@@ -145,7 +145,7 @@
+     field_simp [hU.ne', hV.ne']
+     <;> ring
+   have hb : base ≤ base' := le_max_left _ _
+-  have hh : 1 + loss ≤ base' := le_max_right _ _
++  have hh : 1 + hN.ordinaryFlowLoss 1 ≤ base' := le_max_right _ _
+   have hnew := hN.restrict_neighborhood hT hb hε' hε'₀
+   refine ⟨base', ε', hb, hε', hε'₀, hnew, ?_⟩
+   intro z hz hsector m r hr θ
+diff --git a/src/ContinuousFlexibility/Analysis/ReturnCorrectionSmallness.lean b/src/ContinuousFlexibility/Analysis/ReturnCorrectionSmallness.lean
+index 284afc03d0352d45e827dcb59bc2d9698b1b925a..287e5dde58e907e7e81e5e7aaf60681b144d2d72 100644
+--- a/src/ContinuousFlexibility/Analysis/ReturnCorrectionSmallness.lean
++++ b/src/ContinuousFlexibility/Analysis/ReturnCorrectionSmallness.lean
+@@ -164,7 +164,7 @@
+     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+-    ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → 1 + loss ≤ base' →
++    ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → 1 + hN.ordinaryFlowLoss 1 ≤ base' →
+       ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →
+       ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →
+       ∀ m θ,
+diff --git a/src/ContinuousFlexibility/Analysis/ReturnCorrectionSpeedGap.lean b/src/ContinuousFlexibility/Analysis/ReturnCorrectionSpeedGap.lean
+index ca3b53e604578d1c156793a6c0bd31d2d2f19894..967ff258895ed2ef8598c6fb14d1866c7b9546ae 100644
+--- a/src/ContinuousFlexibility/Analysis/ReturnCorrectionSpeedGap.lean
++++ b/src/ContinuousFlexibility/Analysis/ReturnCorrectionSpeedGap.lean
+@@ -92,7 +92,7 @@
+     (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))
+     (hcutoff : ∀ m r, |deriv (χ m) r| ≤ J * radialE (D.cellIndex (j m)) ^ A) :
+     ∃ V K : ℝ, 0 < V ∧ 0 < K ∧
+-      ∀ base' : ℕ, base ≤ base' → 1 + loss ≤ base' →
++      ∀ base' : ℕ, base ≤ base' → 1 + hN.ordinaryFlowLoss 1 ≤ base' →
+       ∀ η : ℝ, 0 ≤ η → η ≤ ε → η ≤ 1 / 2 → K * η ≤ 1 →
+       ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →
+       ∀ m p, p.1 ∈ Icc (C.left m) (C.right m) →
+@@ -225,7 +225,7 @@
+   obtain ⟨V, K, hV, hK, herror⟩ := hN₀.returnCorrectedMinusSpeed_error_radial_small
+     hS hT χ j hJ hA.le hP.le hcell hcutoff
+   obtain ⟨U, hU, hupper⟩ := hN₀.originalRadialCoefficient_uniform_upper
+-  let base' := max b₀ (1 + loss)
++  let base' := max b₀ (1 + hN₀.ordinaryFlowLoss 1)
+   let ε' := min ε₀ (min (1 / 2) (min K⁻¹ (lam / (4 * U * V))))
+   have hε' : 0 < ε' := lt_min hε₀
+     (lt_min (by norm_num) (lt_min (inv_pos.mpr hK) (div_pos hlam (by positivity))))
+@@ -242,7 +242,7 @@
+     field_simp [hU.ne', hV.ne']
+     <;> ring
+   have hb : b₀ ≤ base' := le_max_left _ _
+-  have hh : 1 + loss ≤ base' := le_max_right _ _
++  have hh : 1 + hN₀.ordinaryFlowLoss 1 ≤ base' := le_max_right _ _
+   have hnew := hN₀.restrict_neighborhood hT hb hε' hε'₀
+   have hdisc : ∀ z ∈ stateNeighborhood S C base' ε', ∀ m p,
+       p.1 ∈ tsupport (deriv (χ m)) →
+diff --git a/src/ContinuousFlexibility/Analysis/ReturnCorrectionVelocityBounds.lean b/src/ContinuousFlexibility/Analysis/ReturnCorrectionVelocityBounds.lean
+index aa8be5bee1da32b4dd3c1607cb0ff564f2f3711f..7504b3efef04dd431d38be61d2b07e7bee3ccc1f 100644
+--- a/src/ContinuousFlexibility/Analysis/ReturnCorrectionVelocityBounds.lean
++++ b/src/ContinuousFlexibility/Analysis/ReturnCorrectionVelocityBounds.lean
+@@ -110,7 +110,7 @@
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+     ∃ B K : ℝ, 0 < B ∧ 0 < K ∧
+-      ∀ base' : ℕ, base ≤ base' → 1 + loss ≤ base' →
++      ∀ base' : ℕ, base ≤ base' → 1 + hN.ordinaryFlowLoss 1 ≤ base' →
+       ∀ η : ℝ, 0 ≤ η → η ≤ ε → η ≤ 1 / 2 → K * η ≤ 1 →
+       ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →
+       ∀ χ : ℕ → ℝ → ℝ, ∀ m p, p.1 ∈ Icc (C.left m) (C.right m) →
+diff --git a/src/ContinuousFlexibility/Analysis/N04bNegativeProfile.lean b/src/ContinuousFlexibility/Analysis/N04bNegativeProfile.lean
+index d2abd3d5c4656c59c96f21638256a5942f39a16e..e0282a1951759cec59c3958f612f05b6afb5ddeb 100644
+--- a/src/ContinuousFlexibility/Analysis/N04bNegativeProfile.lean
++++ b/src/ContinuousFlexibility/Analysis/N04bNegativeProfile.lean
+@@ -72,7 +72,8 @@
+       (fun s : ℝ => opticalSpeed (stateProfile D S C (n04bStateLine C x s)) r) t := by
+   have hNcopy := hN
+   rcases hNcopy with ⟨_, _, _, _, _, _, _, _, _, _, _, _, hTowers⟩
+-  obtain ⟨_, _, hJ⟩ := hTowers 0 1
++  obtain ⟨_parameterLoss, hparameter⟩ := hTowers 0
++  obtain ⟨_, _, hJ⟩ := hparameter 1
+   obtain ⟨J, _⟩ := hJ m 1 0 (r, 0) (by norm_num) hr
+   have ht' : (C.referenceState, (0 : ℝ)) +
+       t • (x - C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
