@@ -36,7 +36,7 @@ private theorem singleComponent_increment_add_reference
   by_cases hi : i = m
   · subst i
     simp only [Pi.add_apply, circleSingleComponentField, circleSingletonField,
-      if_pos rfl, mixedDerivative, iteratedDeriv_zero]
+      eq_self_iff_true, ite_true, mixedDerivative, iteratedDeriv_zero]
     rw [hG θ, hG 0]
     ring
   · simp only [Pi.add_apply, circleSingleComponentField, circleSingletonField,
