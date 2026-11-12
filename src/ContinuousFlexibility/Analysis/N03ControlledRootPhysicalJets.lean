@@ -44,6 +44,209 @@ private theorem rootFirstJet_le_twice {A t : ℝ} (hA : 0 ≤ A) (ht : t ≤ 1) 
   have he := mul_le_mul_of_nonneg_left (add_le_add (le_refl (1 : ℝ)) ht) hA
   nlinarith only [he]
 
+private def RootBandPhysicalGeometry
+    (r σ δ ρ : ℝ) (Ω Ωc : Set PolarPoint)
+    (F M : PolarPoint → PolarPoint) (H h : PolarPoint → ℝ) : Prop :=
+  ∀ q : PolarPoint, q.1 ∈ Icc (0 : ℝ) ρ →
+    rootProfileShift r (σ * δ) q ∈ Ωc ∧
+      (0 < q.1 → rootProfileShift r (σ * δ) q ∈ Ω) ∧
+      ContDiffAt ℝ ∞ F (rootProfileShift r (σ * δ) q) ∧
+      ContDiffAt ℝ ∞ H (rootProfileShift r (σ * δ) q) ∧
+      0 < H (rootProfileShift r (σ * δ) q) ∧
+      (∀ n : ℕ, iteratedFDeriv ℝ n (fun y => F (rootProfileShift r (σ * δ) y)) q =
+        iteratedFDeriv ℝ n M q) ∧
+      ∀ a : ℝ, ∀ n : ℕ,
+        iteratedFDeriv ℝ n (fun y => H (rootProfileShift r (σ * δ) y) ^ a) q =
+          iteratedFDeriv ℝ n (fun y => h y ^ a) q
+
+private theorem n03_rootBand_physicalGeometry
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {E : ReturnEquationData S}
+    {L : ReturnCorrectionData S} {K : CanonicalData S}
+    {base loss : ℕ} {ε : ℝ}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hN : N01Properties D T S C base loss ε)
+    (hL : N03Properties D T S C E L base ε)
+    (hA : N04PartA D S C K base ε) (hB : N04PartB S C L K base ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1) (m : ℕ) (rightEnd : Bool)
+    {g : ℝ → ℝ} {R δ ρ : ℝ} (hR : 0 < R) (hδ : 0 < δ) (hρ : 0 < ρ)
+    (hρR : δ * ρ ≤ R / 4)
+    (hstrip : RootCoefficientStripConditions D.w g (stateProfile D S C z.1)
+      (stateHeight D S C z) (n01ComponentRoot C m rightEnd)
+      (n01ComponentRootOrientation rightEnd) R)
+    (Θ : (ℝ × ℝ) → ℝ → ℝ → ℝ)
+    (hband : ControlledRootBandChartAgreement C K z m rightEnd δ ρ Θ)
+    (hcoeffOn : ∀ x ∈ Ioc (0 : ℝ) ρ, ∀ θ : ℝ,
+      let p : PolarPoint := (n01ComponentRoot C m rightEnd +
+        n01ComponentRootOrientation rightEnd * (δ * x), θ)
+      (L.coefficients z).a p = (originalCoefficients D S C z).a p ∧
+      (L.coefficients z).b p = (originalCoefficients D S C z).b p ∧
+      (L.coefficients z).c p = (originalCoefficients D S C z).c p)
+    (hG : ContDiff ℝ ∞
+      (rootScaledInverseCoordinate Θ (n01RootLabel S C z m rightEnd) (Real.sqrt δ)))
+    (hperiod : ∀ x ζ θ,
+      rootScaledInverseCoordinate Θ (n01RootLabel S C z m rightEnd) (Real.sqrt δ)
+          (x, ζ, θ + Real.pi) =
+        rootScaledInverseCoordinate Θ (n01RootLabel S C z m rightEnd) (Real.sqrt δ)
+          (x, ζ, θ) + Real.pi)
+    (hvalues : ∀ q : PolarPoint, q.1 ∈ Icc (0 : ℝ) ρ →
+      ContDiffAt ℝ ∞ (rootScaledDividedDiscriminant D S C z g
+        (n01ComponentRoot C m rightEnd) (n01ComponentRootOrientation rightEnd) δ) q ∧
+      0 < rootScaledDividedDiscriminant D S C z g
+        (n01ComponentRoot C m rightEnd) (n01ComponentRootOrientation rightEnd) δ q ∧
+      0 < extendedRootOddCoefficient
+        (rootScaledInverseCoordinate Θ (n01RootLabel S C z m rightEnd) (Real.sqrt δ)) q) :
+    RootBandPhysicalGeometry (n01ComponentRoot C m rightEnd)
+      (n01ComponentRootOrientation rightEnd) δ ρ
+      (physicalPieceOpen S K z (if rightEnd then (K.cutPair m).2 else (K.cutPair m).1))
+      (physicalPieceClosed S K z (if rightEnd then (K.cutPair m).2 else (K.cutPair m).1))
+      (K.chart z (if rightEnd then (K.cutPair m).2 else (K.cutPair m).1))
+      (extendedRootEvenOddChart
+        (rootScaledInverseCoordinate Θ (n01RootLabel S C z m rightEnd) (Real.sqrt δ)))
+      (K.height z (if rightEnd then (K.cutPair m).2 else (K.cutPair m).1))
+      (rootDividedHeight δ (rootScaledDividedDiscriminant D S C z g
+        (n01ComponentRoot C m rightEnd) (n01ComponentRootOrientation rightEnd) δ)
+        (rootScaledInverseCoordinate Θ (n01RootLabel S C z m rightEnd) (Real.sqrt δ))) := by
+  let r := n01ComponentRoot C m rightEnd
+  let σ := n01ComponentRootOrientation rightEnd
+  let i := if rightEnd then (K.cutPair m).2 else (K.cutPair m).1
+  dsimp only [RootBandPhysicalGeometry]
+  intro q hq
+  have hopen (hqp : 0 < q.1) :
+      rootProfileShift r (σ * δ) q ∈ physicalPieceOpen S K z i := by
+    simpa only [rootProfileShift, mul_assoc] using (hband q.1 ⟨hqp, hq.2⟩ q.2).1
+  have hclosed : rootProfileShift r (σ * δ) q ∈ physicalPieceClosed S K z i := by
+    by_cases hzero : q.1 = 0
+    · simpa only [rootProfileShift, r, i, n01ComponentRoot, hzero, mul_zero, add_zero] using
+        (canonicalCutPair_root_mem_closed_and_zero hA hB hz hs m rightEnd q.2).1
+    · exact subset_closure (hopen (lt_of_le_of_ne hq.1 (Ne.symm hzero)))
+  have hregular := (hA.boundary z hz hs i).2.2.2.2.1
+    (rootProfileShift r (σ * δ) q) hclosed
+  have hident := n03_fixedRoot_chart_height_ordinaryJets hS hT hN hL hA hB
+    hz hs m rightEnd hR hδ hρ hρR hstrip Θ hband hcoeffOn hG hperiod hq
+    (hvalues q hq).1 (hvalues q hq).2.1 (hvalues q hq).2.2
+  refine ⟨hclosed, hopen, hregular.1, hregular.2.1, hregular.2.2.2, ?_, ?_⟩
+  · intro n
+    simpa only [rootProfileShift, mul_assoc] using hident.2.2.1 n
+  · intro a n
+    simpa only [rootProfileShift, mul_assoc] using hident.2.2.2 a n
+
+private theorem rootBandPhysical_fields_of_model
+    {E : Type} [AddCommGroup E] [Module ℝ E]
+    {p : ℕ → Seminorm ℝ E} {loss : ℕ} {B : ℕ → ℝ} {z : E}
+    {r σ δ ρ J₀ : ℝ} {Ω Ωc : Set PolarPoint}
+    {F : PolarPoint → PolarPoint} {H V : PolarPoint → ℝ}
+    {G : ℝ × ℝ × ℝ → ℝ}
+    (hσ : σ = 1 ∨ σ = -1) (hδ : 0 < δ) (hB : ∀ n, 0 < B n)
+    (hG : ContDiff ℝ ∞ G)
+    (hperiod : ∀ x ζ θ, G (x, ζ, θ + Real.pi) = G (x, ζ, θ) + Real.pi)
+    (hVperiod : ∀ x θ, V (x, θ + Real.pi) = V (x, θ))
+    (hvalues : ∀ q : PolarPoint, q.1 ∈ Icc (0 : ℝ) ρ →
+      ContDiffAt ℝ ∞ V q ∧ 0 < V q ∧ 0 < extendedRootOddCoefficient G q ∧
+        J₀ ≤ planeJacobian (extendedRootEvenOddChart G) q)
+    (hjets : ∀ q : PolarPoint, q.1 ∈ Icc (0 : ℝ) ρ → q.2 ∈ Icc (-Real.pi) Real.pi →
+      RootDividedModelJetBound p loss B z δ V G q)
+    (hgeometry : RootBandPhysicalGeometry r σ δ ρ Ω Ωc F
+      (extendedRootEvenOddChart G) H (rootDividedHeight δ V G)) :
+    ∀ x ∈ Icc (0 : ℝ) (δ * ρ), ∀ θ : ℝ,
+      (r + σ * x, θ) ∈ Ωc ∧ (0 < x → (r + σ * x, θ) ∈ Ω) ∧
+      J₀ / δ ≤ |planeJacobian F (r + σ * x, θ)| ∧
+      RootPhysicalFieldJetBound p loss (rootAffineJetEnvelope (σ * δ) B) z
+        F H (r + σ * x, θ) := by
+  have hσne : σ ≠ 0 := by rcases hσ with h | h <;> rw [h] <;> norm_num
+  have hscaleNe : σ * δ ≠ 0 := mul_ne_zero hσne hδ.ne'
+  have hscaleAbs : |σ * δ| = δ := by
+    rcases hσ with h | h <;> rw [h] <;> simp only [one_mul, neg_one_mul, abs_neg,
+      abs_of_pos hδ]
+  intro x hx θ
+  let q : PolarPoint := (x / δ, θ)
+  have hq : q.1 ∈ Icc (0 : ℝ) ρ :=
+    ⟨div_nonneg hx.1 hδ.le,
+      (div_le_iff₀ hδ).mpr (by simpa only [mul_comm ρ δ] using hx.2)⟩
+  have hpoint : rootProfileShift r (σ * δ) q = (r + σ * x, θ) := by
+    ext <;> simp only [q, rootProfileShift] <;> field_simp [hδ.ne'] <;> ring
+  have hmodel : RootPhysicalFieldJetBound p loss B z
+      (extendedRootEvenOddChart G) (rootDividedHeight δ V G) q :=
+    rootDividedModel_jetBound_allAngles hδ hG hperiod hVperiod
+      (fun η => ⟨(hvalues (q.1, η) hq).1, (hvalues (q.1, η) hq).2.1,
+        (hvalues (q.1, η) hq).2.2.1⟩)
+      (fun η hη => hjets (q.1, η) hq hη) q.2
+  obtain ⟨hclosed, hopen, hF, hH, hHpos, hFjet, hHjet⟩ := hgeometry q hq
+  have htransfer := rootPhysicalFields_of_scaled_jet_model
+    (E := E) (p := p) (loss := loss) (B := B) (z := z)
+    r (σ * δ) hscaleNe (fun n => (hB n).le)
+    hF hH hHpos hmodel hFjet hHjet (hvalues q hq).2.2.2
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · simpa only [hpoint] using hclosed
+  · intro hxp
+    simpa only [hpoint] using hopen (div_pos hxp hδ)
+  · simpa only [hpoint, hscaleAbs] using htransfer.2
+  · simpa only [hpoint] using htransfer.1
+
+private theorem n03_rootBand_fields_of_model_at_state
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {E : ReturnEquationData S}
+    {L : ReturnCorrectionData S} {K : CanonicalData S}
+    {base loss flowLoss outLoss : ℕ} {ε : ℝ}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hN : N01Properties D T S C base loss ε)
+    (hL : N03Properties D T S C E L base ε)
+    (hA : N04PartA D S C K base ε) (hB : N04PartB S C L K base ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1) (m : ℕ) (rightEnd : Bool)
+    {g : ℝ → ℝ} {R δ ρ Λ J₀ : ℝ} (hR : 0 < R) (hδ : 0 < δ) (hρ : 0 < ρ)
+    (hρR : δ * ρ ≤ R / 4) {A B : ℕ → ℝ}
+    (hApos : ∀ n, 0 < A n) (hBpos : ∀ n, 0 < B n)
+    (hsmall : pairGrading (stateGrading S) realGrading (1 + flowLoss)
+      (z - (C.referenceState, 0)) ≤ 1)
+    (hstrip : RootCoefficientStripConditions D.w g (stateProfile D S C z.1)
+      (stateHeight D S C z) (n01ComponentRoot C m rightEnd)
+      (n01ComponentRootOrientation rightEnd) R)
+    (hband : ∀ Θ : (ℝ × ℝ) → ℝ → ℝ → ℝ,
+      N04FlowEquations (rootRescaledField
+        (localizedRootDrift D S C (n01ComponentRoot C m rightEnd)
+          (n01ComponentRootOrientation rightEnd) hR z)
+        (localizedRootSpeed D S C g (n01ComponentRoot C m rightEnd)
+          (n01ComponentRootOrientation rightEnd) hR z) δ) Θ →
+      CSBound 1 (Icc (0 : ℝ) 1 ×ˢ Icc (-1 : ℝ) 1 ×ˢ Icc (-Real.pi) Real.pi)
+        (rootScaledInverseCoordinate Θ (n01RootLabel S C z m rightEnd) (Real.sqrt δ))
+        (2 * A 1) → ControlledRootBandChartAgreement C K z m rightEnd δ ρ Θ)
+    (hcoeffOn : ∀ x ∈ Ioc (0 : ℝ) ρ, ∀ θ : ℝ,
+      let p : PolarPoint := (n01ComponentRoot C m rightEnd +
+        n01ComponentRootOrientation rightEnd * (δ * x), θ)
+      (L.coefficients z).a p = (originalCoefficients D S C z).a p ∧
+      (L.coefficients z).b p = (originalCoefficients D S C z).b p ∧
+      (L.coefficients z).c p = (originalCoefficients D S C z).c p)
+    (hmodel : N01ControlledRootModelAtState D S C m rightEnd g hR δ ρ Λ J₀
+      flowLoss outLoss A B z) :
+    let r := n01ComponentRoot C m rightEnd
+    let σ := n01ComponentRootOrientation rightEnd
+    let i := if rightEnd then (K.cutPair m).2 else (K.cutPair m).1
+    ∀ x ∈ Icc (0 : ℝ) (δ * ρ), ∀ θ : ℝ,
+      (r + σ * x, θ) ∈ physicalPieceClosed S K z i ∧
+      (0 < x → (r + σ * x, θ) ∈ physicalPieceOpen S K z i) ∧
+      J₀ / δ ≤ |planeJacobian (K.chart z i) (r + σ * x, θ)| ∧
+      RootPhysicalFieldJetBound (pairGrading (stateGrading S) realGrading)
+        outLoss (rootAffineJetEnvelope (σ * δ) B) (z - (C.referenceState, 0))
+        (K.chart z i) (K.height z i) (r + σ * x, θ) := by
+  obtain ⟨_hcontrol, Θ, hΘ, hG, hperiod, hCS, hvalues, hjets⟩ := hmodel
+  have hCS1 : CSBound 1
+      (Icc (0 : ℝ) 1 ×ˢ Icc (-1 : ℝ) 1 ×ˢ Icc (-Real.pi) Real.pi)
+      (rootScaledInverseCoordinate Θ (n01RootLabel S C z m rightEnd) (Real.sqrt δ))
+      (2 * A 1) :=
+    (hCS 1).mono_bound (rootFirstJet_le_twice (hApos 1).le hsmall)
+  have hgeometry := n03_rootBand_physicalGeometry hS hT hN hL hA hB hz hs m rightEnd
+    hR hδ hρ hρR hstrip Θ (hband Θ hΘ hCS1) hcoeffOn hG hperiod
+    (fun q hq => ⟨(hvalues q hq).1, (hvalues q hq).2.1, (hvalues q hq).2.2.1⟩)
+  exact rootBandPhysical_fields_of_model
+    (E := AnnularState S × ℝ) (p := pairGrading (stateGrading S) realGrading)
+    (loss := outLoss) (B := B) (z := z - (C.referenceState, 0))
+    (n01ComponentRootOrientation_eq rightEnd) hδ hBpos hG hperiod
+    (rootScaledDividedDiscriminant_period_add hS C z g
+      (n01ComponentRoot C m rightEnd) (n01ComponentRootOrientation rightEnd) δ)
+    hvalues hjets hgeometry
+
 /-- Every quantity in the conclusion is a field of the existing K.
 The supplied flow input is the previously proved actual N01 factory
 output; no canonical or inverse-field estimate is assumed. -/
@@ -92,12 +295,6 @@ theorem n03_fixedCutoff_controlledRoot_physicalJets
   let r := n01ComponentRoot C m rightEnd
   let σ := n01ComponentRootOrientation rightEnd
   let i := if rightEnd then (K.cutPair m).2 else (K.cutPair m).1
-  have hσ : σ = 1 ∨ σ = -1 := n01ComponentRootOrientation_eq rightEnd
-  have hσne : σ ≠ 0 := by rcases hσ with h | h <;> rw [h] <;> norm_num
-  have hscaleNe : σ * δ ≠ 0 := mul_ne_zero hσne hδ.ne'
-  have hscaleAbs : |σ * δ| = δ := by
-    rcases hσ with h | h <;> rw [h] <;> simp only [one_mul, neg_one_mul, abs_neg,
-      abs_of_pos hδ]
   obtain ⟨ηF, hηF, hηFone, hηFwidth, _hηFR, hfixed⟩ :=
     n03_exists_fixed_rootFlow_identification hS hT hN hL χ hend hcoeff
       m rightEnd hg hR hδ hδR hstrip
@@ -149,15 +346,6 @@ theorem n03_fixedCutoff_controlledRoot_physicalJets
     (pairGrading_displacement_le_two_mul_radius hzsmall).trans (by
       have he : min ε (1 / 2 : ℝ) ≤ 1 / 2 := min_le_right _ _
       linarith only [he])
-  obtain ⟨_hcontrol, Θ, hΘ, hG, hperiod, hCS, hvalues, hjets⟩ := hmodels z hzmodel hs
-  let G := rootScaledInverseCoordinate Θ (n01RootLabel S C z m rightEnd) (Real.sqrt δ)
-  let V := rootScaledDividedDiscriminant D S C z g r σ δ
-  have hCS1 : CSBound 1
-      (Icc (0 : ℝ) 1 ×ˢ Icc (-1 : ℝ) 1 ×ˢ Icc (-Real.pi) Real.pi) G (2 * A 1) :=
-    (hCS 1).mono_bound (rootFirstJet_le_twice (hApos 1).le hsmall)
-  have hbandG := hgeometry z hzold hs Θ hΘ hCS1
-  have hband : ControlledRootBandChartAgreement C K z m rightEnd δ ρ Θ :=
-    fun x hx θ => hbandG x ⟨hx.1, hx.2.trans hρG⟩ θ
   have hcoeffOn (x : ℝ) (hx : x ∈ Ioc (0 : ℝ) ρ) (θ : ℝ) :
       let p : PolarPoint := (r + σ * (δ * x), θ)
       (L.coefficients z).a p = (originalCoefficients D S C z).a p ∧
@@ -169,53 +357,10 @@ theorem n03_fixedCutoff_controlledRoot_physicalJets
     exact ⟨(congrArg (fun F => (F z).a p) hcoeff).trans he.1,
       (congrArg (fun F => (F z).b p) hcoeff).trans he.2.1,
       (congrArg (fun F => (F z).c p) hcoeff).trans he.2.2⟩
-  have hmodelAll (q : PolarPoint) (hq : q.1 ∈ Icc (0 : ℝ) ρ) :
-      RootPhysicalFieldJetBound (pairGrading (stateGrading S) realGrading)
-        outLoss B (z - (C.referenceState, 0))
-        (extendedRootEvenOddChart G) (rootDividedHeight δ V G) q := by
-    exact rootDividedModel_jetBound_allAngles hδ hG hperiod
-      (rootScaledDividedDiscriminant_period_add hS C z g r σ δ)
-      (fun θ => ⟨(hvalues (q.1, θ) hq).1, (hvalues (q.1, θ) hq).2.1,
-        (hvalues (q.1, θ) hq).2.2.1⟩)
-      (fun θ hθ => hjets (q.1, θ) hq hθ) q.2
-  intro x hx θ
-  dsimp only
-  let q : PolarPoint := (x / δ, θ)
-  have hq : q.1 ∈ Icc (0 : ℝ) ρ :=
-    ⟨div_nonneg hx.1 hδ.le,
-      (div_le_iff₀ hδ).mpr (by simpa only [w, mul_comm ρ δ] using hx.2)⟩
-  have hpoint : rootProfileShift r (σ * δ) q = (r + σ * x, θ) := by
-    ext <;> simp only [q, rootProfileShift] <;> field_simp [hδ.ne'] <;> ring
-  have hpoint' : rootProfileShift r (σ * δ) q = (r + σ * (δ * q.1), q.2) := by
-    simp only [rootProfileShift, mul_assoc]
-  have hopen (hxp : 0 < x) : (r + σ * x, θ) ∈ physicalPieceOpen S K z i := by
-    have he := (hband q.1 ⟨div_pos hxp hδ, hq.2⟩ q.2).1
-    simpa only [← hpoint', hpoint] using he
-  have hclosed : (r + σ * x, θ) ∈ physicalPieceClosed S K z i := by
-    by_cases hzero : x = 0
-    · simpa only [r, i, n01ComponentRoot, hzero, mul_zero, add_zero] using
-        (canonicalCutPair_root_mem_closed_and_zero hA hB hzold hs m rightEnd θ).1
-    · exact subset_closure (hopen (lt_of_le_of_ne hx.1 (Ne.symm hzero)))
-  have hregular := (hA.boundary z hzold hs i).2.2.2.2.1 (r + σ * x, θ) hclosed
-  have hident := n03_fixedRoot_chart_height_ordinaryJets hS hT hN hL hA hB
-    hzold hs m rightEnd hR hδ hρ hρR (hstrip z hzold hs) Θ hband hcoeffOn
-    hG hperiod hq (hvalues q hq).1 (hvalues q hq).2.1 (hvalues q hq).2.2.1
-  have hFjet (n : ℕ) :
-      iteratedFDeriv ℝ n (fun y => K.chart z i (rootProfileShift r (σ * δ) y)) q =
-        iteratedFDeriv ℝ n (extendedRootEvenOddChart G) q := by
-    simpa only [rootProfileShift, mul_assoc] using hident.2.2.1 n
-  have hHjet (a : ℝ) (n : ℕ) :
-      iteratedFDeriv ℝ n (fun y => K.height z i (rootProfileShift r (σ * δ) y) ^ a) q =
-        iteratedFDeriv ℝ n (fun y => rootDividedHeight δ V G y ^ a) q := by
-    simpa only [rootProfileShift, mul_assoc] using hident.2.2.2 a n
-  have htransfer := rootPhysicalFields_of_scaled_jet_model r (σ * δ) hscaleNe
-    (fun n => (hBpos n).le)
-    (by rw [hpoint]; exact hregular.1)
-    (by rw [hpoint]; exact hregular.2.1)
-    (by rw [hpoint]; exact hregular.2.2.2)
-    (hmodelAll q hq) hFjet hHjet (hvalues q hq).2.2.2
-  refine ⟨hclosed, hopen, ?_, ?_⟩
-  · simpa only [hpoint, hscaleAbs] using htransfer.2
-  · simpa only [hpoint] using htransfer.1
+  exact n03_rootBand_fields_of_model_at_state hS hT hN hL hA hB hzold hs m rightEnd
+    hR hδ hρ hρR hApos hBpos hsmall (hstrip z hzold hs)
+    (fun Θ hΘ hCS1 x hx θ =>
+      hgeometry z hzold hs Θ hΘ hCS1 x ⟨hx.1, hx.2.trans hρG⟩ θ)
+    hcoeffOn (hmodels z hzmodel hs)
 
 end ContinuousFlexibility.Analysis

@@ -23,6 +23,12 @@ open scoped ContDiff BigOperators
 
 set_option backward.isDefEq.respectTransparency false
 
+private theorem exists_lower_bound_map {P Q : ℝ → Prop} {lower : ℝ}
+    (h : ∃ B : ℝ, lower ≤ B ∧ P B) (hmap : ∀ B, P B → Q B) :
+    ∃ B : ℝ, lower ≤ B ∧ Q B := by
+  obtain ⟨B, hB, hP⟩ := h
+  exact ⟨B, hB, hmap B hP⟩
+
 private theorem mixed_jet_le_difference_add
     {U : Set PolarPoint} (hU : IsOpen U) {f g : PolarPoint → ℝ}
     (hf : ContDiffOn ℝ ∞ f U) (hg : ContDiffOn ℝ ∞ g U)
@@ -187,19 +193,23 @@ theorem n03_totalCoefficient_commonNeighborhood_fixed_loss
           (originalCoefficients D S C z)) q| ≤
           A * (1 + pairGrading (stateGrading S) realGrading (n + loss)
             (z - (C.referenceState, 0))) := by
-    obtain ⟨A, hA, hbound⟩ := n01_originalCoefficient_strip_fixed_loss_bound
-      (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
-      hS hT hN01 hends.2.1.le hρ hphysical (j m) (hcell m) n
-    exact ⟨A, hA, fun z hz => hbound z (hsub hz.1) hz.2⟩
-  obtain ⟨B, hB, hbound⟩ := coefficient_family_bound_of_difference
-    (p := fun n z => pairGrading (stateGrading S) realGrading n (z - (C.referenceState, 0)))
-    (fun _ _ hij z => tamePairGrading_monotone (stateGrading_monotone S)
-      (fun _ _ _ => le_rfl) hij (z - (C.referenceState, 0)))
-    (fun _ _ => apply_nonneg _ _) V (originalCoefficients D S C) L.coefficients hU
-    hOrig hC (fun z hz q _ => hN03.1 z (hsub hz.1) hz.2 q) loss corrLoss hinput
-    (fun a b => by
-      obtain ⟨B, hB, hbound⟩ := hdifference m a b
-      exact ⟨B, hB, fun z hz => hbound z hz.1 hz.2⟩) s
-  exact ⟨B, hB, fun z hz hs => hbound z ⟨hz, hs⟩⟩
+    exact exists_lower_bound_map
+      (P := N01OriginalCoefficientStripBoundAtOrder D S C base loss ε (C.left m) (C.right m) n)
+      (n01_originalCoefficient_strip_fixed_loss_bound
+        (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+        hS hT hN01 hends.2.1.le hρ hphysical (j m) (hcell m) n)
+      (fun A hbound z hz => hbound z (hsub hz.1) hz.2)
+  exact exists_lower_bound_map
+    (Q := N03TotalCoefficientBoundAtOrder S C L base' (max loss corrLoss) ε' m s)
+    (coefficient_family_bound_of_difference
+      (p := fun n z => pairGrading (stateGrading S) realGrading n (z - (C.referenceState, 0)))
+      (fun _ _ hij z => tamePairGrading_monotone (stateGrading_monotone S)
+        (fun _ _ _ => le_rfl) hij (z - (C.referenceState, 0)))
+      (fun _ _ => apply_nonneg _ _) V (originalCoefficients D S C) L.coefficients hU
+      hOrig hC (fun z hz q _ => hN03.1 z (hsub hz.1) hz.2 q) loss corrLoss hinput
+      (fun a b => exists_lower_bound_map
+        (P := N03CorrectedCoefficientStateBoundAtOrder D S C L base' corrLoss ε' m a b)
+        (hdifference m a b) (fun B hbound z hz => hbound z hz.1 hz.2)) s)
+    (fun B hbound z hz hs => hbound z ⟨hz, hs⟩)
 
 end ContinuousFlexibility.Analysis

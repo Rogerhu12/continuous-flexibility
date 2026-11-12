@@ -163,7 +163,9 @@ theorem n03_interiorPhysical_fixed_loss
       (hFpos n).le (hFM n) (Nat.add_le_add_left (le_max_right _ _) n) w)
   have hHjets := hHbound z hz hs hzH m side q hq hξvalue hdisc hcM hξM
   have haabs : |(L.coefficients z).a q| ≤ A 0 * (1 + p inputLoss w) := by
-    simpa [canonicalCoefficientComponent, norm_iteratedFDeriv_zero] using (hcoeff 0).2 0
+    have hzero := (hcoeff (0 : Fin 3)).2 0
+    rw [norm_iteratedFDeriv_zero, Real.norm_eq_abs, zero_add] at hzero
+    simpa only [canonicalCoefficientComponent, ↓reduceIte] using hzero
   have haUpper : (L.coefficients z).a q ≤ 2 * A 0 :=
     (le_abs_self _).trans (interior_zero_bound_le_twice (hApositive 0).le hzA haabs)
   have haPositive : 0 < (L.coefficients z).a q := by
