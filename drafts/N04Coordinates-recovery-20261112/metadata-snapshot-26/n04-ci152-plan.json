@@ -1,0 +1,49 @@
+{
+  "label": 152,
+  "head_before": "d3518effba4e07790e04e66cdf347cde1daa6f71",
+  "base_tree": "f42883129f85f117a2f5ab4ed3e4d5f951fbdcf2",
+  "tree": "634271261e070856b3c4bdb9fcc958d3b6d46ecf",
+  "main": "e32286d7722222933069431d785efd7904dd8e22",
+  "additional_parents": [
+    "e32286d7722222933069431d785efd7904dd8e22"
+  ],
+  "last_full_green": "03e526021c371413f03fc0ce052476b63e105361",
+  "owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair151/CanonicalRootHeightJetsCI151RepairReviewedManifest.json",
+    "sha256": "e3ce7d32eb81e07e718a9520f7e644fff85fa7c4bace4fa05384a81bfba2b230"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair151/CanonicalRootHeightJets.lean",
+    "sha256": "28419f4e1fab3de13761c4b1c889797c981bcb64cc7743a95579b2f2e23af6c5",
+    "blob": "6d38c1f135519afb293d8de4e11e44e59af3dcf9",
+    "lines": 214,
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalRootHeightJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.CanonicalRootRelativeJets"
+    ]
+  },
+  "target": "src/ContinuousFlexibility/Analysis/CanonicalRootHeightJets.lean",
+  "preimage": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair151/CanonicalRootHeightJets.base.lean.txt",
+    "sha256": "6f86bc698dd3e499afa78df302e204d4487e5d278d6c59da80316d7451caab72",
+    "blob": "4fba17c6059f79535bc36f8329de092beb0b9de3",
+    "lines": 184
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI151CanonicalRootHeightQuotientIndependentReview.json",
+    "sha256": "e96acd5c02ddf4ec983a8ad9a8fe5e95d7d87c6a9ff4f704d268ee91c9536920",
+    "blob": "4f40eda312c255beb4bb5fd641770f4b7bcbd145",
+    "lines": 118
+  },
+  "added_lean_since_full_green": 3077,
+  "deleted_lean_since_full_green": 0,
+  "delta": {
+    "added": 60,
+    "deleted": 30
+  },
+  "source_total": 4210,
+  "source_all_total": 4214,
+  "root_imports": 4151,
+  "created_at": "2026-11-12T15:02:47.597447+00:00",
+  "scope": "One independently reviewed generic quotient proof split and current-main documentation merge. Same actual geometry, public contracts and resource limits. Full CI required; 41 reference modules held."
+}

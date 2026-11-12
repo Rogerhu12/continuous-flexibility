@@ -1,0 +1,118 @@
+{
+  "kind": "independent_full_source_ci151_actual_height_quotient_specialization_review",
+  "status": "PASSED_STATIC_SOURCE_REVIEW_UNCOMPILED",
+  "reviewer": "/root/audit_coordinates",
+  "author": "/root/quantitative_route",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair151/CanonicalRootHeightJetsCI151RepairCandidateManifest.json",
+    "sha256": "ecf662a931810787d05e49b915752c20fc74d26b94a8244b9fc1e143d1a37976",
+    "blob": "9beac191d7f0d3eb6379a8dccb7a5306e089063d",
+    "lines": 101
+  },
+  "actual_base": {
+    "head": "d3518effba4e07790e04e66cdf347cde1daa6f71",
+    "tree": "f42883129f85f117a2f5ab4ed3e4d5f951fbdcf2",
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalRootHeightJets.lean"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair151/CanonicalRootHeightJets.lean",
+    "sha256": "28419f4e1fab3de13761c4b1c889797c981bcb64cc7743a95579b2f2e23af6c5",
+    "blob": "6d38c1f135519afb293d8de4e11e44e59af3dcf9",
+    "lines": 214,
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalRootHeightJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.CanonicalRootRelativeJets"
+    ]
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair151/CanonicalRootHeightJets.base.lean.txt",
+    "sha256": "6f86bc698dd3e499afa78df302e204d4487e5d278d6c59da80316d7451caab72",
+    "blob": "4fba17c6059f79535bc36f8329de092beb0b9de3",
+    "lines": 184
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair151/CanonicalRootHeightJets.diff",
+    "sha256": "17235ef541c6e11c61a88a2fa34d76f4f9fbef9ec713d027bf9004a0be247f38",
+    "blob": "1459010dc0efd7cb8c5c3bbd296ba89b0c52a032",
+    "lines": 121
+  },
+  "actual_cached_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-151.log",
+    "sha256": "b0cd9b8df9db0850a0d91eb998a543aaeb72c58bac8fb6ab229d847ce5ae8fd3",
+    "blob": "12c21d873f61af433496e6b0b2ec6074a3f3cded",
+    "lines": 734
+  },
+  "previous_reviewed_repair": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair150/CanonicalRootHeightJetsCI150RepairReviewedManifest.json",
+    "sha256": "bb2e35248bdc0330a466fbdb706eb4236c74b958df7edf97c4a4855ac569416f",
+    "blob": "d32203ea7d3a21f2d8f8dcdd85942340e91c3d97",
+    "lines": 56
+  },
+  "verified_actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RelativeRootJetBounds.lean",
+      "sha256": "7ff2f63bcb7e700e299e7000ddfbb0076fc2bc14621d9ec5dc50b0b0d1081c9b",
+      "blob": "e9b78a99bc8fc10e22a9eac79a7bd396400a6858",
+      "lines": 203
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PointwiseMaterialJetOperations.lean",
+      "sha256": "6d100022491b6a0858badce398873d75f9a1642dc309f11beaf9ad7e1c4eb14c",
+      "blob": "58f9546e8979123ef35e36a79ca56b54081c5312",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalClosedTransport.lean",
+      "sha256": "446db5702c1e574466bb9e66c14a7ad72b6b824df7ea950a642fec5c9d0beb53",
+      "blob": "4042a6df041abfdc7024a0d8ef5e26d98710b93a",
+      "lines": 90
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootModelAllAngleJets.lean",
+      "sha256": "215e71554553de5d621830c44ac1c3bdc4fc44ce9b9c041eea3f68cdbfdaaacf",
+      "blob": "77b79e8102023ae330aed05aa900f392b9fb5573",
+      "lines": 81
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalRootRelativeJets.lean",
+      "sha256": "1d153804a17ecfdf770509fe69ddab60c7ad5bcbaaacef233d5414e697876c2a",
+      "blob": "8934cb13451280c1f521ef5a5512ac37aad1f3b3",
+      "lines": 188
+    }
+  ],
+  "pinned_mathlib_apis": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Operations.lean",
+      "sha256": "2a5fd66cb597c253e023f1072948e1a591f64ba0ee747a6a89139fc7c8c980eb",
+      "blob": "80e898b98348cb111761430989137705f4a3cf63",
+      "lines": 1052
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Group/Basic.lean",
+      "sha256": "1de660ac794263d0363bc5bf9ce7b357409c2db36c0642521738103a0938fa84",
+      "blob": "87499371d701f92163612c570f82a76a74421462",
+      "lines": 1099
+    }
+  ],
+  "read_scope": [
+    "All 214 candidate lines, complete actual 184-line base, full 60+/30- diff and cached CI151 diagnostics.",
+    "The actual relativeHeightProduct_allJets_fixed_loss proof, PointwiseMaterialJetBound definition/operations, RootPhysicalFieldJetBound projections, current-height-ratio definition and closed smooth/positive provider were read and checked. Pinned inverse smoothness, inv_div and div_eq_mul_inv directions were checked."
+  ],
+  "checks": [
+    "The saved preimage is byte-identical to d3518effba4e07790e04e66cdf347cde1daa6f71 at the stated target, with actual tree f42883129f85f117a2f5ab4ed3e4d5f951fbdcf2. The cached log identifies the previous large-context Eq.mpr application at 166 and the resulting whole-theorem whnf failure; no new log was downloaded.",
+    "The new private generic theorem obtains base/loss/B directly from the existing product-composition supplier and applies the same B to both factor pairs. Constants still precede the actual component, all functions and states. No new loss, numerical envelope, root, sample or neighborhood is assumed.",
+    "At the generic point x, numerator f0 and denominator f at g x have genuine smoothness, nonzero values and all four original height/inverse-height jet bounds. The two product applications are exactly f0 times inverse(f composed g), and inverse(f0) times (f composed g), with the same actual positive-order g jets.",
+    "Both exact scalar function identities are proved over explicit abstract functions and parameters. Congruence only transports the function slot of a fixed PointwiseMaterialJetBound predicate, in the correct equality direction. The reciprocal identity uses the true inv_div then div_eq_mul_inv and commutativity, with no changed totalized quotient.",
+    "The main theorem supplies an explicitly typed conjunction at the real r/theta and current transport tau. Reference and current nonzero assumptions come from their original positive-height projections. Its last two goals expose the actual quotient and select the corresponding typed conjunction projection.",
+    "The complete public family definition, public theorem header, imports, namespace and existing options are unchanged. The main proof through tau jets is byte-identical after replacing only the supplier name. The previously successful explicit root-image transport remains exactly unchanged.",
+    "Every source/base/diff/log/previous-review/provider SHA256, Git blob and line count matches the candidate. The complete diff was recomputed; no placeholder, resource-limit increase or additional proof assumption appears."
+  ],
+  "scope_limits": [
+    "No Lean compiler/elaborator was run. Reducing elaboration cost is the intended effect and remains subject to the next actual CI result.",
+    "The previously failed 184 source and its reviews remain historical evidence; this review does not reclassify CI151 as green.",
+    "No candidate edits, active source/checkout/index/ref/CI/CP/authority or plan changes."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "created_at": "2026-11-12T15:01:43.360480+00:00"
+}

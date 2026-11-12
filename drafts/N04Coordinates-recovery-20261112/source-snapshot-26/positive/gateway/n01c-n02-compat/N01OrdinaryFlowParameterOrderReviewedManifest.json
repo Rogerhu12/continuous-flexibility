@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "kind": "actual_ordinary_flow_fixed_parameter_order_ports_reviewed",
+  "status": "STATIC_FULL_SOURCE_REVIEWED_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01OrdinaryFlowParameterOrderSelectedCandidateManifest.json",
+    "sha256": "a494711a4824ae753ea72b82abd218a6019581667d219addb1746df513b56509",
+    "blob": "8212abba209cf96250dfb9de5437da0e1caadb3a",
+    "lines": 132
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/ordinary-flow-formatting/N01FlowParameterVariation.lean",
+      "sha256": "416b357165b334db074e1045a4f6b085695d7f98760320bd1def6c336782848a",
+      "blob": "e47ea9f03ccc5f58b3d22b412bc2a13b2c3149fd",
+      "lines": 311,
+      "target": "src/ContinuousFlexibility/Analysis/N01FlowParameterVariation.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowParameterVariation.c5c48-base.lean.txt",
+        "sha256": "e90f5b891c766c3b3cea33b29b7cbef680cf883bbb0a6130b3d462bd5d159719",
+        "blob": "6e6e51d16c36f27ad8613e3025c202fed0c43f27",
+        "lines": 307,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "public_headers_changed": [
+        "N01Properties.minusFlow_q_derivative_weight_bound"
+      ],
+      "public_headers_preserved": [
+        "stateExternalParameterLine",
+        "oneHighVariationWeight_finOne",
+        "le_of_zero_power_mul_le",
+        "oneHighVariationWeight_externalParameter",
+        "hasDerivAt_composed_velocity_coprod",
+        "ordinaryFlow_q_hasDerivAt_of_tower",
+        "N01Properties.minusFlow_q_hasDerivAt",
+        "ordinaryFlow_q_derivative_bound_of_tower",
+        "N01Properties.minusFlow_q_derivative_bounded",
+        "N01Properties.minusFlow_q_zero_hasDerivAt_of_speed"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true,
+      "original_parameter_order_diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowParameterVariation.diff",
+        "sha256": "6dc3d712da3c7c18b805c544bb09f64f28e89de8d8686973bfe7f5c4ae7ff1e6",
+        "blob": "b386da048ab71d0e5870e8e9538444eb5233b94d",
+        "lines": 77
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/ordinary-flow-formatting/N01FlowParameterVariation.diff",
+        "sha256": "8a6c627fcade93fcbb8dc8b29180c8fed7d0f161ca485e9b75af30ab6b0aa87d",
+        "blob": "555358c1d39c8ad64255d193da89f295065e4caf",
+        "lines": 77
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowMixedParameterBound.lean",
+      "sha256": "fb4ee23443bc019b6eca3545e01ae26eb5849d46f05fc7af070896c3920c8542",
+      "blob": "36cc65de93419f34764b6b7ad23f889ec00de075",
+      "lines": 155,
+      "target": "src/ContinuousFlexibility/Analysis/N01FlowMixedParameterBound.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowMixedParameterBound.c5c48-base.lean.txt",
+        "sha256": "e8f43fd1bacca7994e4e95f17ffe53d2394c2a203a35f000c7af42fd38856bb5",
+        "blob": "c4e7412dd24d7e973b751fd6854cffe406228f1e",
+        "lines": 153,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowMixedParameterBound.diff",
+        "sha256": "82f34ada8a0757e916c3ed55ad12745019673407690cce21d9cd0c56cc0d1cc9",
+        "blob": "3f92c72ccfaa771157f5243fb67ee2fa8212f369",
+        "lines": 55
+      },
+      "public_headers_changed": [
+        "N01Properties.minusFlow_state_q_mixed_derivative_bound"
+      ],
+      "public_headers_preserved": [
+        "stateMixedExternalParameterLine",
+        "oneHighVariationWeight_finTwo_zero",
+        "oneHighVariationWeight_state_external_zero",
+        "ordinaryFlow_state_q_mixed_hasDerivAt_of_tower"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    }
+  ],
+  "source_lines": 466,
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/N01OrdinaryFlowParameterOrderIndependentReview.json",
+      "sha256": "e70eed94bac094861d79eaf2a8a67cf81b0a3d57e18f35cb1c2ab1ff5b3b2e7c",
+      "blob": "8c8ec7eff6f36a3b751ec4dd949a816edbf9c44e",
+      "lines": 206
+    }
+  ],
+  "downstream_candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01ActualHeightMaterialOrderParameterOrderCandidateManifest.json",
+    "sha256": "a918a015f906b85175829d3d3f77461ea842ab2ed4f1479c27ccd7bc0bdb6589",
+    "blob": "98c04ff78706c0f083cfa211652667c6334638e7",
+    "lines": 142
+  },
+  "new_static_selection_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowParameterOrderDependencyClosureInventory.json",
+    "sha256": "0f5a7d859556e285e9088648bad96209590e9cb8eb0b69f90423f9c702ce1bbd",
+    "blob": "bc6c6fe716310c18f68d7c3922dc6f19cf2a76b3",
+    "lines": 4357
+  },
+  "scope_limits": [
+    "Only these two exact source supersessions passed this independent review. Their quantitative heads retain explicit fixed-order parameterLoss; no numerical absorption or uniform all-k loss.",
+    "The actual downstream four-source port has a separate review obligation. Exact selected closure hashes/imports do not certify elaboration or final N02/N03.",
+    "No active source/index/ref/CI/authority/plan changes or compiler run. Historical sources and manifests are unchanged."
+  ],
+  "compiled": false,
+  "green_receipt_applies": false,
+  "created_at": "2026-11-12T15:13:32.500474+00:00"
+}

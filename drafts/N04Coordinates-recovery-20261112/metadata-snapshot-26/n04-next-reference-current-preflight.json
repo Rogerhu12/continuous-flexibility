@@ -1,0 +1,595 @@
+{
+  "kind": "reference_family_static_preflight",
+  "status": "HELD_NOT_ACTIVATED",
+  "checked_at": "2026-11-12T15:04:12.998896+00:00",
+  "head": "3b4844ce29629e230aa9feffb3ed4987a06d27a2",
+  "tree": "634271261e070856b3c4bdb9fcc958d3b6d46ecf",
+  "proposal": "/workspace/scratch/bbbea77e4163/n04-next-reference-group-held.json",
+  "proposal_sha256": "e3df495b387d253732915923b113924c74fef74b8dd51310d20bcdbe68408f50",
+  "files": 41,
+  "source_lines": 4902,
+  "project_closure": 865,
+  "providers": 824,
+  "public_names": 105,
+  "unique_reviews": 34,
+  "reviewed_provider_transition_graph": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-reviewed-provider-rebindings-ci152.json",
+    "sha256": "b931879c36d232753c8e5a8894854adcecfe3de3a2d6ab45285dee0377bda1ab"
+  },
+  "reviewed_provider_rebindings": {
+    "ContinuousFlexibility.Analysis.WholeCanonicalAtlasData": [
+      {
+        "before": "c6abe2dcedd1974e7ec231275a17f869c0faed3b",
+        "after": "c3a5f79617c7e583e16deb09c44e5679744ea092",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair141/WholeCanonicalAtlasData.base.lean.txt",
+          "sha256": "41a32a066758dcfb8fe7da1ab9e73bee2f7ad451fa1f7057aee40c01092905d6",
+          "blob": "c6abe2dcedd1974e7ec231275a17f869c0faed3b",
+          "lines": 165
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair141/WholeCanonicalAtlasData.lean",
+          "sha256": "a4a3c629dcde3b7c324291d5e65c6bc6ceacbbdf8968577f2abcc3f0472c9f1d",
+          "blob": "c3a5f79617c7e583e16deb09c44e5679744ea092",
+          "lines": 165
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/WholeCanonicalAtlasDataCI141IndependentReview.json",
+        "review_sha256": "a1d455a70183b3a907e1b3dea856af92665b54deede8b1573b5e7aaf2e548062",
+        "scope": "Reviewed proof-body repair; complete public headers unchanged"
+      }
+    ],
+    "ContinuousFlexibility.Analysis.FiniteFullJetBoundary": [
+      {
+        "before": "69e3303eff0b945230f7210da126b95c232669b3",
+        "after": "c2a1ce634f56db1bd806beda929f2feb62c15989",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/FiniteFullJetBoundary.base.lean.txt",
+          "sha256": "fd42cc1894c3ec16125e7c0ef89188c2b3df3ca8375eb9b417e7080cf4786c75",
+          "blob": "69e3303eff0b945230f7210da126b95c232669b3",
+          "lines": 82
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/FiniteFullJetBoundary.lean",
+          "sha256": "cc707c6e813eced9dd59ddc2c2916b6acd8278dadfdbca206a40203ac5fbfcd1",
+          "blob": "c2a1ce634f56db1bd806beda929f2feb62c15989",
+          "lines": 82
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CI141FiniteJetAndAdjugateIndependentReview.json",
+        "review_sha256": "09ffb5fdc7fe8be97d9e9d2c8b2d4599a6583e8ad2b674e1425137813f32eed9",
+        "scope": "Reviewed proof-body repair; complete public headers unchanged"
+      }
+    ],
+    "ContinuousFlexibility.Analysis.AdjugatePrincipalFiniteJets": [
+      {
+        "before": "3596dfced859852fd352f9c0fd551f034b93e56a",
+        "after": "f1b40b1987f10459cb329c662f2c954d3353449c",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/AdjugatePrincipalFiniteJets.base.lean.txt",
+          "sha256": "fdca723daf585cb3bc089ec0a107da4ec91c9cf8f125385d3af5dcaa37fd8527",
+          "blob": "3596dfced859852fd352f9c0fd551f034b93e56a",
+          "lines": 111
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/AdjugatePrincipalFiniteJets.lean",
+          "sha256": "c08a2cd0e8f49ad398af22ea9eb8b06f5a4e256c9c784c6c1dc3c2305315ca1b",
+          "blob": "f1b40b1987f10459cb329c662f2c954d3353449c",
+          "lines": 112
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CI141FiniteJetAndAdjugateIndependentReview.json",
+        "review_sha256": "09ffb5fdc7fe8be97d9e9d2c8b2d4599a6583e8ad2b674e1425137813f32eed9",
+        "scope": "Reviewed proof-body repair; complete public headers unchanged"
+      }
+    ],
+    "ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity": [
+      {
+        "before": "3ba8a57f4c89b91f24c918f32a8eea3d9460c910",
+        "after": "7a3122c1e2c2081375a7be7405a2a348706ed261",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair141/ActualNegativePrincipalDensity.base.lean.txt",
+          "sha256": "9623635a4a0d7766d72eb7b2d09213aa1bae3fb23385e0325304e60c97741181",
+          "blob": "3ba8a57f4c89b91f24c918f32a8eea3d9460c910",
+          "lines": 111
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair141/ActualNegativePrincipalDensity.lean",
+          "sha256": "79be096548f4222f5265dc93e1b7ad6aa1bf426954089f48bb78b423c23ee2a3",
+          "blob": "7a3122c1e2c2081375a7be7405a2a348706ed261",
+          "lines": 111
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CI141PrincipalScalarIndependentReview.json",
+        "review_sha256": "cb4e306610e43e259ed342b16bbcce47ced68551b050e831569753ed424e244d",
+        "scope": "Reviewed proof-body repair; complete public headers unchanged"
+      }
+    ],
+    "ContinuousFlexibility.Analysis.RelativePrincipalCoefficients": [
+      {
+        "before": "9bf310b3fa12f9185863b2730169faae74211bc6",
+        "after": "ca49daddabf4addd513c2ca95c1f6e93b4545268",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair141/RelativePrincipalCoefficients.base.lean.txt",
+          "sha256": "3162241d9f98b0328f5e95d49e3ebe7772f279cf57a54b3e610d022bf92854ba",
+          "blob": "9bf310b3fa12f9185863b2730169faae74211bc6",
+          "lines": 185
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair141/RelativePrincipalCoefficients.lean",
+          "sha256": "2e5e751fafc34c322e3baccd4b138b8e44fe66fc878ee6c9632b758b427b95c2",
+          "blob": "ca49daddabf4addd513c2ca95c1f6e93b4545268",
+          "lines": 185
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CI141PrincipalScalarIndependentReview.json",
+        "review_sha256": "cb4e306610e43e259ed342b16bbcce47ced68551b050e831569753ed424e244d",
+        "scope": "Reviewed proof-body repair; complete public headers unchanged"
+      }
+    ],
+    "ContinuousFlexibility.Analysis.WholePositivePrincipalJetMatching": [
+      {
+        "before": "58036d5cce27a25aadf98164681688a21b8557ef",
+        "after": "eb381248ee37bfe8051e32879410f5fc678deacc",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair142/WholePositivePrincipalJetMatching.base.lean.txt",
+          "sha256": "d9cd7c8a808e169bf0e60b8e9e5f7f5889a852313519019f0c24c07d7d470dac",
+          "blob": "58036d5cce27a25aadf98164681688a21b8557ef",
+          "lines": 153
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair142/WholePositivePrincipalJetMatching.lean",
+          "sha256": "222f8feb857b4ef07398e0bf78c96a554b3fd57779d28493614f1a4a6a28abf5",
+          "blob": "eb381248ee37bfe8051e32879410f5fc678deacc",
+          "lines": 156
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/WholePositivePrincipalJetMatchingCI142IndependentReview.json",
+        "review_sha256": "0309eed545bf2fc260c69e7ab1c0935ca5c6766b3c19de43601ac99d92dd4f91",
+        "scope": "Reviewed proof-body repair; complete public headers unchanged"
+      }
+    ],
+    "ContinuousFlexibility.Analysis.WholeCanonicalAtlasCuts": [
+      {
+        "before": "f7fb03e39c681fe28833d7b5aae54807c57fa0c8",
+        "after": "7806004198795023f90728e9f100dde0ab4d035f",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair142/WholeCanonicalAtlasCuts.base.lean.txt",
+          "sha256": "7338f736192a450f99316748d9bdf7beb6eecdb631bdbdeeac6f27eb37746d0c",
+          "blob": "f7fb03e39c681fe28833d7b5aae54807c57fa0c8",
+          "lines": 68
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair142/WholeCanonicalAtlasCuts.lean",
+          "sha256": "d60353a33b319ab316cc5eb7f0f37803c85e0a3ca5182c4b15e72dd3e001b46b",
+          "blob": "7806004198795023f90728e9f100dde0ab4d035f",
+          "lines": 70
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/CI142WholeAtlasTwoRepairsIndependentReview.json",
+        "review_sha256": "922df76b0d5e8e8660f76897faeaa438f52202f065d65c2135f278dfc32131ac",
+        "scope": "Reviewed proof-body repair; complete public headers unchanged"
+      },
+      {
+        "before": "7806004198795023f90728e9f100dde0ab4d035f",
+        "after": "8a0a0ea0915b84df510b40e284c8fceaec96b179",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair143/WholeCanonicalAtlasCuts.base.lean.txt",
+          "sha256": "d60353a33b319ab316cc5eb7f0f37803c85e0a3ca5182c4b15e72dd3e001b46b",
+          "blob": "7806004198795023f90728e9f100dde0ab4d035f",
+          "lines": 70
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair143/WholeCanonicalAtlasCuts.lean",
+          "sha256": "4bb1d9bdf307bb29e05c9ec8f7765aee320a5b0db39fcc12b8e04f22b97ebd96",
+          "blob": "8a0a0ea0915b84df510b40e284c8fceaec96b179",
+          "lines": 95
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI143WholeAtlasThreeRepairsIndependentReview.json",
+        "review_sha256": "a8f1b638e108c6a115a3cca9c0045d85a5b435978a32ffb0e4e5f2d1659b957b",
+        "scope": "Reviewed proof-body repair; complete public headers unchanged"
+      }
+    ],
+    "ContinuousFlexibility.Analysis.WholeCanonicalAtlasReferencePartition": [
+      {
+        "before": "c5e704c5f367c931fe0873999744fbe2a854f473",
+        "after": "5f68cbf1b0dafa6f237d9071b2ed912954b51123",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair142/WholeCanonicalAtlasReferencePartition.base.lean.txt",
+          "sha256": "a228efd750b6144dc83f5848e1b081fbfff531ff42400ff2ffaecb13b9252f71",
+          "blob": "c5e704c5f367c931fe0873999744fbe2a854f473",
+          "lines": 87
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair142/WholeCanonicalAtlasReferencePartition.lean",
+          "sha256": "ccb22e2134e8d8b62ff8fec06b31cc7f1356b853db42f48b67dcaed65bb2dd0a",
+          "blob": "5f68cbf1b0dafa6f237d9071b2ed912954b51123",
+          "lines": 92
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/CI142WholeAtlasTwoRepairsIndependentReview.json",
+        "review_sha256": "922df76b0d5e8e8660f76897faeaa438f52202f065d65c2135f278dfc32131ac",
+        "scope": "Reviewed proof-body repair; complete public headers unchanged"
+      },
+      {
+        "before": "5f68cbf1b0dafa6f237d9071b2ed912954b51123",
+        "after": "11142364a13b1664c4d627be253d52f47dcf5edf",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair143/WholeCanonicalAtlasReferencePartition.base.lean.txt",
+          "sha256": "ccb22e2134e8d8b62ff8fec06b31cc7f1356b853db42f48b67dcaed65bb2dd0a",
+          "blob": "5f68cbf1b0dafa6f237d9071b2ed912954b51123",
+          "lines": 92
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair143/WholeCanonicalAtlasReferencePartition.lean",
+          "sha256": "1208378855ce36f5185958a40b485ddd1f6faca3e4123ae3e6c6140acbf61207",
+          "blob": "11142364a13b1664c4d627be253d52f47dcf5edf",
+          "lines": 91
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI143WholeAtlasThreeRepairsIndependentReview.json",
+        "review_sha256": "a8f1b638e108c6a115a3cca9c0045d85a5b435978a32ffb0e4e5f2d1659b957b",
+        "scope": "Reviewed proof-body repair; complete public headers unchanged"
+      }
+    ],
+    "ContinuousFlexibility.Analysis.WholeCanonicalAtlasPrincipalDensity": [
+      {
+        "before": "052931f3d9b1717a4ac479ee6e88ec7e1d701b71",
+        "after": "a6e08b84cd66524d8f53399071d3a116adbf626e",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/WholeCanonicalAtlasPrincipalDensity.base.lean.txt",
+          "sha256": "dd3c83318f103146413d018b7033e6d56c15b78e4601eae93333f6200bc93c6a",
+          "blob": "052931f3d9b1717a4ac479ee6e88ec7e1d701b71"
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/WholeCanonicalAtlasPrincipalDensity.lean",
+          "sha256": "be4ce162e802d641ee1e37d7d9e125e9f45426ccf65b0b110ae7ade77b8ca7e9",
+          "blob": "a6e08b84cd66524d8f53399071d3a116adbf626e"
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CI142WholeAtlasFieldRepairsIndependentReview.json",
+        "review_sha256": "16f340575c7af3ce10995f159310bc3fc45dd4b110509bb231f34f51545ed870",
+        "scope": "Reviewed proof-body repair; complete public headers unchanged"
+      }
+    ],
+    "ContinuousFlexibility.Analysis.WholeCanonicalAtlasOperator": [
+      {
+        "before": "4e74be6d5d2495499be2d13f1b908e6a49b1226c",
+        "after": "7b18e1768744c85463cf9979c8a4d1a309a6033e",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/WholeCanonicalAtlasOperator.base.lean.txt",
+          "sha256": "d87df6c62654e5a9a426ba4d318291597cef3d6df3435ae17df91c47a2cb0990",
+          "blob": "4e74be6d5d2495499be2d13f1b908e6a49b1226c"
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/WholeCanonicalAtlasOperator.lean",
+          "sha256": "a45cf9cc9576c83d05f3b60849ba09c32429c03826a0aff78a9253f8fca48f2e",
+          "blob": "7b18e1768744c85463cf9979c8a4d1a309a6033e"
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CI142WholeAtlasFieldRepairsIndependentReview.json",
+        "review_sha256": "16f340575c7af3ce10995f159310bc3fc45dd4b110509bb231f34f51545ed870",
+        "scope": "Reviewed proof-body repair; complete public headers unchanged"
+      }
+    ],
+    "ContinuousFlexibility.Analysis.CanonicalWholePositiveReferenceJets": [
+      {
+        "before": "9c27d7e41b041b4b5d3787a181803642834f1479",
+        "after": "ffa931131ef09cea066a91b46f554d6240fefbae",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair143/CanonicalWholePositiveReferenceJets.base.lean.txt",
+          "sha256": "f073be472d15bb804ef90f2b2e800f9c5d11e850c35364149ec2152ff91ae5a9",
+          "blob": "9c27d7e41b041b4b5d3787a181803642834f1479",
+          "lines": 151
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair143/CanonicalWholePositiveReferenceJets.lean",
+          "sha256": "2b249412298b83bdf50d296b7585fbcca9f8f1c084b0cb05dba3ed711d907784",
+          "blob": "ffa931131ef09cea066a91b46f554d6240fefbae",
+          "lines": 153
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI143WholeAtlasThreeRepairsIndependentReview.json",
+        "review_sha256": "a8f1b638e108c6a115a3cca9c0045d85a5b435978a32ffb0e4e5f2d1659b957b",
+        "scope": "Reviewed proof-body repair; complete public headers unchanged"
+      }
+    ],
+    "ContinuousFlexibility.Analysis.WholeCanonicalAtlasCutOperator": [
+      {
+        "before": "0bbd8dfa6efe1702e6606ee6b5265adfae833421",
+        "after": "d6c615f8d1f701511481356e9443f98e550ff4d1",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair144/WholeCanonicalAtlasCutOperator.base.lean.txt",
+          "sha256": "ec97d0b3260b7266b167fa4c0bf316dd74e899174a66251ad987a043ba6b7c43",
+          "blob": "0bbd8dfa6efe1702e6606ee6b5265adfae833421",
+          "lines": 68
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair144/WholeCanonicalAtlasCutOperator.lean",
+          "sha256": "47d05fc14f1c0103a0bb528300a449b6720998da258d37d085b5e5e21230fd74",
+          "blob": "d6c615f8d1f701511481356e9443f98e550ff4d1",
+          "lines": 76
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CI144WholeCanonicalAtlasCutOperatorIndependentReview.json",
+        "review_sha256": "10476692c0b0f18728188dadb513bfbc32f1f70e7f95016b1ff802ca2b4fb1da",
+        "scope": "Reviewed proof-body repair; complete public headers unchanged"
+      }
+    ],
+    "ContinuousFlexibility.Analysis.CanonicalBoundaryImage": [
+      {
+        "before": "3234b236bcd07cbda8f5a3c58911b8451f6bf720",
+        "after": "aab2c515bfb3559cf3cdb4099664ee635ba55acf",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/CanonicalBoundaryImage.base.lean.txt",
+          "sha256": "a26253ee65f817ddaed12b91e57a6403ffec092a2f29c5f3b41b2ccf5d889a1d",
+          "blob": "3234b236bcd07cbda8f5a3c58911b8451f6bf720",
+          "lines": 146
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/CanonicalBoundaryImage.lean",
+          "sha256": "35891796295555767b93b96bf2b627825c07536daf7819c72ac4abb04719135d",
+          "blob": "aab2c515bfb3559cf3cdb4099664ee635ba55acf",
+          "lines": 148
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/MainN06CompatibilityIndependentReview.json",
+        "review_sha256": "ca74c6028f4668a8294d5afb35447bd35944ecbbb628a8016789ecbd516b3722",
+        "scope": "Reviewed upstream arbitrary-radial-set compatibility and exact boundary proof"
+      }
+    ],
+    "ContinuousFlexibility.Analysis.ReflectionStripGeometry": [
+      {
+        "before": "9a188ce86595bb07ca245ada4fa690f044e00451",
+        "after": "d28b9f63d2861a32f1968b21a0196953804daec4",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/ReflectionStripGeometry.base.lean.txt",
+          "sha256": "eb25f33bb571ac782b48284ed1933eb840285b804a13dc595eda132f772c96c0",
+          "blob": "9a188ce86595bb07ca245ada4fa690f044e00451",
+          "lines": 123
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/ReflectionStripGeometry.lean",
+          "sha256": "a79ab55763b9a98a684bd08389a1e9d65334819c206eb6e3b742cee317a3fdbb",
+          "blob": "d28b9f63d2861a32f1968b21a0196953804daec4",
+          "lines": 123
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/MainN06CompatibilityIndependentReview.json",
+        "review_sha256": "ca74c6028f4668a8294d5afb35447bd35944ecbbb628a8016789ecbd516b3722",
+        "scope": "Reviewed upstream arbitrary-radial-set compatibility and exact boundary proof"
+      }
+    ],
+    "ContinuousFlexibility.Analysis.EquivariantOpenDomainStrip": [
+      {
+        "before": "80381f2ebf7947e2be3a11ad948c40e748375dd4",
+        "after": "73dc6ec89993d66b87089de125fc9ee52aad2242",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/EquivariantOpenDomainStrip.base.lean.txt",
+          "sha256": "e7e291bc13e5a0f648a9de272da07b4bbf9ae3716f5d6753736847db0c5c9263",
+          "blob": "80381f2ebf7947e2be3a11ad948c40e748375dd4",
+          "lines": 118
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/EquivariantOpenDomainStrip.lean",
+          "sha256": "098bb1b8a28c8bf83b00d07a2738ac731df171a81ff9f03e97a252f6bcab7375",
+          "blob": "73dc6ec89993d66b87089de125fc9ee52aad2242",
+          "lines": 118
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/MainN06CompatibilityIndependentReview.json",
+        "review_sha256": "ca74c6028f4668a8294d5afb35447bd35944ecbbb628a8016789ecbd516b3722",
+        "scope": "Reviewed upstream arbitrary-radial-set compatibility and exact boundary proof"
+      }
+    ],
+    "ContinuousFlexibility.Analysis.CanonicalStripGeometry": [
+      {
+        "before": "e5f9d2ddce6e9251e057aafbadef0e11f6b59979",
+        "after": "8414a47460b602309aea49d2a58dfda9ed59867b",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/CanonicalStripGeometry.base.lean.txt",
+          "sha256": "b67db3461ba333fc48fb13b38105068d0222952ebd12e87fab2ec8b81b644733",
+          "blob": "e5f9d2ddce6e9251e057aafbadef0e11f6b59979",
+          "lines": 110
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/main-n06/CanonicalStripGeometry.lean",
+          "sha256": "b5cbf27a85c56302b0a7d29eb84dafac056fee6e5e61685d46d1b9ce6eba1277",
+          "blob": "8414a47460b602309aea49d2a58dfda9ed59867b",
+          "lines": 110
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/MainN06CompatibilityIndependentReview.json",
+        "review_sha256": "ca74c6028f4668a8294d5afb35447bd35944ecbbb628a8016789ecbd516b3722",
+        "scope": "Reviewed upstream arbitrary-radial-set compatibility and exact boundary proof"
+      }
+    ],
+    "ContinuousFlexibility.Analysis.N04bActualAtlasInteriorCompletion": [
+      {
+        "before": "fbb67b770132e53b204ae4270d1b30f98e01c8b7",
+        "after": "97a05cee066d07dee7a133440425f46f7fe6066e",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair147/N04bActualAtlasInteriorCompletion.base.lean.txt",
+          "sha256": "f189ff9f0ddd8a84bb6cb7a166f4463427f75a4ff994f3b2348dd48b7b2b9700",
+          "blob": "fbb67b770132e53b204ae4270d1b30f98e01c8b7",
+          "lines": 82
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair147/N04bActualAtlasInteriorCompletion.lean",
+          "sha256": "b9d241c8984d02af87a2d6486a9a7e991ad59d15b038ecbebc281a1820661d8e",
+          "blob": "97a05cee066d07dee7a133440425f46f7fe6066e",
+          "lines": 90
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/CI147AtlasAliasRepairsIndependentReview.json",
+        "review_sha256": "5701df482e834c59cfc6ed386ea8ee205db63dd19c2506ac1fe8e3405d59646e",
+        "scope": "Exact CI147 repair; all public contracts unchanged. One existing-provider import or private proof elaboration only."
+      }
+    ],
+    "ContinuousFlexibility.Analysis.WholeCanonicalAtlasRestrictedGeometry": [
+      {
+        "before": "701db6112228c64ffe09d6e04232fc1414f44785",
+        "after": "28407ce18ea7eabac9bbe62345fb9df591fd7b16",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair147/WholeCanonicalAtlasRestrictedGeometry.base.lean.txt",
+          "sha256": "9e2cee52afc2fc29fa1ed3680e24534bfef821312a865d2523d10e6351be9218",
+          "blob": "701db6112228c64ffe09d6e04232fc1414f44785",
+          "lines": 146
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair147/WholeCanonicalAtlasRestrictedGeometry.lean",
+          "sha256": "29c43eb81d8250a000e3b9c0b217672afb2be922736cf5a183bf025e18a4ccef",
+          "blob": "28407ce18ea7eabac9bbe62345fb9df591fd7b16",
+          "lines": 154
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/CI147AtlasAliasRepairsIndependentReview.json",
+        "review_sha256": "5701df482e834c59cfc6ed386ea8ee205db63dd19c2506ac1fe8e3405d59646e",
+        "scope": "Exact CI147 repair; all public contracts unchanged. One existing-provider import or private proof elaboration only."
+      }
+    ],
+    "ContinuousFlexibility.Analysis.CanonicalRootDiagonalLower": [
+      {
+        "before": "033539f899249ad18bf92732278519fecf47ce0b",
+        "after": "4033468ee34febb13d20d1e815e340c8018902ea",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair147/CanonicalRootDiagonalLower.base.lean.txt",
+          "sha256": "5f926ab21480a54b3f129a50cc99998a178965671c9f266f79c6d522622b4399",
+          "blob": "033539f899249ad18bf92732278519fecf47ce0b",
+          "lines": 112
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair147/CanonicalRootDiagonalLower.lean",
+          "sha256": "ec16cf8ed7c2a7150de60eb999301a936e4d89912c1f20c32ccbe425dce45a47",
+          "blob": "4033468ee34febb13d20d1e815e340c8018902ea",
+          "lines": 113
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/CI147TwoQuantitativeRepairsIndependentReview.json",
+        "review_sha256": "d62be9ded48dbaea465860517511696c8aaa79762ccd9fdc2bd682294fc5e7d5",
+        "scope": "Exact CI147 repair; all public contracts unchanged. One existing-provider import or private proof elaboration only."
+      }
+    ],
+    "ContinuousFlexibility.Analysis.RelativeRootJetBounds": [
+      {
+        "before": "37e7d9efa9f483a2f7edee5a5037bb611729583c",
+        "after": "e9b78a99bc8fc10e22a9eac79a7bd396400a6858",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair147/RelativeRootJetBounds.base.lean.txt",
+          "sha256": "04041d7f3ff5aa25e69fd8dde13e3895fefac9daee50044b720c530c58fc6af5",
+          "blob": "37e7d9efa9f483a2f7edee5a5037bb611729583c",
+          "lines": 199
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair147/RelativeRootJetBounds.lean",
+          "sha256": "7ff2f63bcb7e700e299e7000ddfbb0076fc2bc14621d9ec5dc50b0b0d1081c9b",
+          "blob": "e9b78a99bc8fc10e22a9eac79a7bd396400a6858",
+          "lines": 203
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/CI147TwoQuantitativeRepairsIndependentReview.json",
+        "review_sha256": "d62be9ded48dbaea465860517511696c8aaa79762ccd9fdc2bd682294fc5e7d5",
+        "scope": "Exact CI147 repair; all public contracts unchanged. One existing-provider import or private proof elaboration only."
+      }
+    ],
+    "ContinuousFlexibility.Analysis.N03RootEndpointPhysicalJets": [
+      {
+        "before": "b47919889191d8709da04bd63f75f24e90a064ef",
+        "after": "6dd741b196642f22a9461702306fe2755c352aa1",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair147/N03RootEndpointPhysicalJets.base.lean.txt",
+          "sha256": "2690e6c47e4557ba97eb37f91c00573f6d21cd18dd5dc6d40fbafb662861ad45",
+          "blob": "b47919889191d8709da04bd63f75f24e90a064ef",
+          "lines": 218
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair147/N03RootEndpointPhysicalJets.lean",
+          "sha256": "d5ba0977e2e650d2a7d51b89f8ddcf1cd10981311a3a15b9b141dae1720e829f",
+          "blob": "6dd741b196642f22a9461702306fe2755c352aa1",
+          "lines": 306
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/CI147RootEndpointProofSplitIndependentReview.json",
+        "review_sha256": "c186d8d2da3790a15347b7811dd218d41b13cf712a4d3e309e1613914dd8f6e7",
+        "scope": "Exact CI147 repair; all public contracts unchanged. One existing-provider import or private proof elaboration only."
+      },
+      {
+        "before": "6dd741b196642f22a9461702306fe2755c352aa1",
+        "after": "15ba9f4a5b2eefb7ae81d2d4a9e971148ca2fc45",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair148/N03RootEndpointPhysicalJets.base.lean.txt",
+          "sha256": "d5ba0977e2e650d2a7d51b89f8ddcf1cd10981311a3a15b9b141dae1720e829f",
+          "blob": "6dd741b196642f22a9461702306fe2755c352aa1",
+          "lines": 306
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair148/N03RootEndpointPhysicalJets.lean",
+          "sha256": "ef46dcdc6d0e03ddd94fc925199cc655cb8652117fc4c2256c36f4b8949ec066",
+          "blob": "15ba9f4a5b2eefb7ae81d2d4a9e971148ca2fc45",
+          "lines": 406
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/CI148RootEndpointProofSplitIndependentReview.json",
+        "review_sha256": "017625b2691a993458a4e09546a9062affdebcf8a7b92f47fd618f06e745dac5",
+        "scope": "Exact CI148 private proof specialization split; all public declarations and accepted helper prefix unchanged."
+      }
+    ],
+    "ContinuousFlexibility.Analysis.CanonicalRootHeightJets": [
+      {
+        "before": "39ccec5461527b3e3cd7e7fa07b86c34bd961a82",
+        "after": "4decaad9abcf27a2281d7965de59cff376a6a8f2",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair149/CanonicalRootHeightJets.base.lean.txt",
+          "sha256": "79167a67ec213c3cff6fbcad6db34eeac598ae2899e8a10c2a763c2da111c68a",
+          "blob": "39ccec5461527b3e3cd7e7fa07b86c34bd961a82",
+          "lines": 159
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair149/CanonicalRootHeightJets.lean",
+          "sha256": "788ab4cd62091dde2fe969ef357e5f7c1b961e9a80b24368ff085c9b8739a0bd",
+          "blob": "4decaad9abcf27a2281d7965de59cff376a6a8f2",
+          "lines": 166
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI149CanonicalRootHeightJetsIndependentReview.json",
+        "review_sha256": "4e9427944f0d64d6cca669c1140e83cfca7cf9448e92527e5ba1ca85bee8de8e",
+        "scope": "Exact CI149 typed physical-point transport; public declarations and all other proof bytes unchanged."
+      },
+      {
+        "before": "4decaad9abcf27a2281d7965de59cff376a6a8f2",
+        "after": "4fba17c6059f79535bc36f8329de092beb0b9de3",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair150/CanonicalRootHeightJets.base.lean.txt",
+          "sha256": "788ab4cd62091dde2fe969ef357e5f7c1b961e9a80b24368ff085c9b8739a0bd",
+          "blob": "4decaad9abcf27a2281d7965de59cff376a6a8f2",
+          "lines": 166
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair150/CanonicalRootHeightJets.lean",
+          "sha256": "6f86bc698dd3e499afa78df302e204d4487e5d278d6c59da80316d7451caab72",
+          "blob": "4fba17c6059f79535bc36f8329de092beb0b9de3",
+          "lines": 184
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI150CanonicalRootHeightJetsIndependentReview.json",
+        "review_sha256": "cebe90683bbae13aac92de8136ab07ada3beef6e32f17cb994a070a52f72a93e",
+        "scope": "Exact CI150 quotient and inverse function transport; public declarations and accepted first157 lines unchanged."
+      },
+      {
+        "before": "4fba17c6059f79535bc36f8329de092beb0b9de3",
+        "after": "6d38c1f135519afb293d8de4e11e44e59af3dcf9",
+        "before_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair151/CanonicalRootHeightJets.base.lean.txt",
+          "sha256": "6f86bc698dd3e499afa78df302e204d4487e5d278d6c59da80316d7451caab72",
+          "blob": "4fba17c6059f79535bc36f8329de092beb0b9de3",
+          "lines": 184
+        },
+        "after_source": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair151/CanonicalRootHeightJets.lean",
+          "sha256": "28419f4e1fab3de13761c4b1c889797c981bcb64cc7743a95579b2f2e23af6c5",
+          "blob": "6d38c1f135519afb293d8de4e11e44e59af3dcf9",
+          "lines": 214,
+          "target": "src/ContinuousFlexibility/Analysis/CanonicalRootHeightJets.lean",
+          "imports": [
+            "ContinuousFlexibility.Analysis.CanonicalRootRelativeJets"
+          ]
+        },
+        "review": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI151CanonicalRootHeightQuotientIndependentReview.json",
+        "review_sha256": "e96acd5c02ddf4ec983a8ad9a8fe5e95d7d87c6a9ff4f704d268ee91c9536920",
+        "scope": "Exact CI151 private generic quotient specialization; same product base/loss/envelope and public declarations."
+      }
+    ]
+  },
+  "missing_prerequisite_modules": [],
+  "current_ci": {
+    "label": 152,
+    "head": "3b4844ce29629e230aa9feffb3ed4987a06d27a2",
+    "tree": "634271261e070856b3c4bdb9fcc958d3b6d46ecf",
+    "main": "e32286d7722222933069431d785efd7904dd8e22",
+    "pushed": "2026-11-12 15:03:12 UTC",
+    "first_check_not_before": "2026-11-12 15:08:12 UTC",
+    "status": "pending",
+    "plan": "n04-ci152-plan.json",
+    "source_total": 4210,
+    "source_all_total": 4214,
+    "root_imports": 4151,
+    "added_lean_since_full_green": 3077,
+    "scope": "One independently reviewed generic quotient proof split and current-main documentation merge. Same actual geometry, public contracts and resource limits. Full CI required; 41 reference modules held.",
+    "repair_files": 1
+  }
+}

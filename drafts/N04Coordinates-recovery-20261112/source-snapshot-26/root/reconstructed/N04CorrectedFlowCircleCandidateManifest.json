@@ -1,0 +1,137 @@
+{
+  "kind": "actual_corrected_flow_circle_and_state_angle_tower",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW_AND_PROVIDER_PORTS",
+  "author": "/root",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowCircle.lean",
+    "sha256": "1c499c99875b12e8a7a7abf91ff9dec371dca9c4f0a7505c5d4dfc50ce236e62",
+    "blob": "5a0a53733562aeb135e5c543ba3b6f36e7e7ab02",
+    "lines": 118,
+    "target": "src/ContinuousFlexibility/Analysis/N04CorrectedFlowCircle.lean"
+  },
+  "public_names": [
+    "N01Properties.n04CorrectedFlowCircle",
+    "N01Properties.n04CorrectedFlowCircle_affineLift",
+    "N01Properties.smoothTameOn_n04CorrectedFlowCircle",
+    "N01Properties.n04CorrectedFlowSelector_jointTower"
+  ],
+  "input_candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointTameConsumersParameterOrderCandidateManifest.json",
+    "sha256": "6c30ab55157fad8e64945b0b1ac034fd193a89d003994827dc36fe1f3f4ab488",
+    "blob": "4b0b226f02ae0bada5be442d650e0c871515a35b",
+    "lines": 213
+  },
+  "closure_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowCircleClosureInventory.json",
+    "sha256": "3d9e342b5a21fa8fd602b737e4e03ba490e03362b3953e616f67f2935a3ffb72",
+    "blob": "28504e2c1b3d8b5b932788c386035df8f363765f",
+    "lines": 5363
+  },
+  "selected_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N01InterpolationInverseCircle",
+      "path": "src/ContinuousFlexibility/Analysis/N01InterpolationInverseCircle.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "e4ddcbab9a22add55fca82e01770a15b004ba6cdf42fa1a928f3ba7565f8052b",
+      "blob": "5d29709ce82e9e2d9eddd11f6812a25fcd2faf6f",
+      "lines": 215,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ReturnInverseCircle",
+        "ContinuousFlexibility.Analysis.CircleComponentContraction"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnInverseCircle",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnInverseCircle.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "4efcb2d32b0e23c51812bfe4b14add3e20ffd4356394f87a1f15ef5ab308c55e",
+      "blob": "e99a08956ffd3e0dcf86d6e1ed0a4421b5675a86",
+      "lines": 317,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01SelectorInverse",
+        "ContinuousFlexibility.Analysis.N01ResidualSmoothTame",
+        "ContinuousFlexibility.Analysis.CircleCompositionSmoothTame",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionDisplacementRegularity"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01SelectorInverse",
+      "path": "src/ContinuousFlexibility/Analysis/N01SelectorInverse.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "e1ce3b7b578a17168ac6a432d732e302033f8e65309bc20c88fa610de4190a9b",
+      "blob": "959be823f4a888cca1c45c2f0fa77ef627bbc8f9",
+      "lines": 173,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointSmoothTame",
+        "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame",
+        "ContinuousFlexibility.Analysis.CirclePositiveInversePerturbation",
+        "ContinuousFlexibility.Analysis.CircleJointEvaluation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleAveragedComposition",
+      "path": "src/ContinuousFlexibility/Analysis/CircleAveragedComposition.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "8a9f8865fe5010c9c2b51152881ba92db2264ecdaccfe7b55f1dbad4cdbd4215",
+      "blob": "c756172121da5a6009a0ea80270ce0f8dcf0026b",
+      "lines": 203,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleParameterIntegral",
+        "ContinuousFlexibility.Analysis.CircleWeightedProduct"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleJointEvaluation",
+      "path": "src/ContinuousFlexibility/Analysis/CircleJointEvaluation.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "5110f4d8cf53b34ed33b6221317e9421d876d9add22dca234e95493edcc33ba6",
+      "blob": "b18010ba5d5c86d247e70d32e8ffd134434e126b",
+      "lines": 216,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleAngularJetLinear",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsJointAngular",
+        "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+        "ContinuousFlexibility.Analysis.SolveNewtonBridge"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointSmoothTame",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointSmoothTame.lean",
+      "sha256": "80c1d63b655fd4fa1ee1dab48cf72c3740dbd3fb06b8bf20a313f305ebf79026",
+      "blob": "db33d6cf7df8e3aaed5cf75dc82d7f22b0f384aa",
+      "lines": 124,
+      "selected_ref": "LOCAL_HELD_PARAMETER_ORDER",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointZeroGrowth"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectedFlow",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectedFlow.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "9323567f5c4d710472b4d8b4f9ea52c5cdb5d16aa8d83b9661844f61f91b8763",
+      "blob": "36693b0d8102e289a31ebd012f8eeb6cf63f795c",
+      "lines": 343,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectionAlgebra",
+        "ContinuousFlexibility.Analysis.ReturnChartDifferentiation"
+      ]
+    }
+  ],
+  "checks": [
+    "The circle element is the actual interpolation displacement plus the original flow displacement composed with that same interpolation. No new flow or inverse witness is chosen.",
+    "The affine lift uses the original negative optical travel translation and is proved equal as a complete function to returnCorrectedMinusFlow at the actual closed radius selector.",
+    "Smooth tameness follows from the genuine interpolation and endpoint circle towers, the existing shifted circle composition theorem and addition on the same sector neighborhood.",
+    "The same circle tower supplies a genuine joint state-and-angle SmoothDirections tower through the existing joint decoder; a full function equality transports it to the actual corrected flow.",
+    "All exact selected import contents, source identities and acyclicity were checked. The selected parameter-order adapters replace the old all-arity uniform interfaces."
+  ],
+  "scope_limits": [
+    "A fixed closed radius selector is used; radial derivatives, quantitative height-gain bounds and moving canonical coordinates remain separate.",
+    "The complete selected graph is uncompiled. The two recorded c5 flow-variation providers still require their explicitly assigned parameter-loss ports; static import closure is not semantic or compiler closure.",
+    "No final CurrentJets premise, open Blueprint theorem, active source/index/ref or toolchain/resource-limit mutation is introduced."
+  ],
+  "compiled": false,
+  "independent_reviews": [],
+  "created_at": "2026-11-12T15:07:26.412609+00:00"
+}

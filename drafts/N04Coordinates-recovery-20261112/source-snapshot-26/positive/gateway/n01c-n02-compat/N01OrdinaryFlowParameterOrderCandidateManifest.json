@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "kind": "actual_ordinary_flow_fixed_parameter_order_ports",
+  "status": "HELD_UNCOMPILED_PEER_PENDING_WITH_DOWNSTREAM_PORTS_PENDING",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowParameterVariation.lean",
+      "sha256": "3c06d8b1da17a33a91e34399dc252c46c1d4f85108e121a04b947c7b50071769",
+      "blob": "9e1f025d46dd5839341db16861413726c07b3adf",
+      "lines": 311,
+      "target": "src/ContinuousFlexibility/Analysis/N01FlowParameterVariation.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowParameterVariation.c5c48-base.lean.txt",
+        "sha256": "e90f5b891c766c3b3cea33b29b7cbef680cf883bbb0a6130b3d462bd5d159719",
+        "blob": "6e6e51d16c36f27ad8613e3025c202fed0c43f27",
+        "lines": 307,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowParameterVariation.diff",
+        "sha256": "6dc3d712da3c7c18b805c544bb09f64f28e89de8d8686973bfe7f5c4ae7ff1e6",
+        "blob": "b386da048ab71d0e5870e8e9538444eb5233b94d",
+        "lines": 77
+      },
+      "public_headers_changed": [
+        "N01Properties.minusFlow_q_derivative_weight_bound"
+      ],
+      "public_headers_preserved": [
+        "stateExternalParameterLine",
+        "oneHighVariationWeight_finOne",
+        "le_of_zero_power_mul_le",
+        "oneHighVariationWeight_externalParameter",
+        "hasDerivAt_composed_velocity_coprod",
+        "ordinaryFlow_q_hasDerivAt_of_tower",
+        "N01Properties.minusFlow_q_hasDerivAt",
+        "ordinaryFlow_q_derivative_bound_of_tower",
+        "N01Properties.minusFlow_q_derivative_bounded",
+        "N01Properties.minusFlow_q_zero_hasDerivAt_of_speed"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowMixedParameterBound.lean",
+      "sha256": "fb4ee23443bc019b6eca3545e01ae26eb5849d46f05fc7af070896c3920c8542",
+      "blob": "36cc65de93419f34764b6b7ad23f889ec00de075",
+      "lines": 155,
+      "target": "src/ContinuousFlexibility/Analysis/N01FlowMixedParameterBound.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowMixedParameterBound.c5c48-base.lean.txt",
+        "sha256": "e8f43fd1bacca7994e4e95f17ffe53d2394c2a203a35f000c7af42fd38856bb5",
+        "blob": "c4e7412dd24d7e973b751fd6854cffe406228f1e",
+        "lines": 153,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowMixedParameterBound.diff",
+        "sha256": "82f34ada8a0757e916c3ed55ad12745019673407690cce21d9cd0c56cc0d1cc9",
+        "blob": "3f92c72ccfaa771157f5243fb67ee2fa8212f369",
+        "lines": 55
+      },
+      "public_headers_changed": [
+        "N01Properties.minusFlow_state_q_mixed_derivative_bound"
+      ],
+      "public_headers_preserved": [
+        "stateMixedExternalParameterLine",
+        "oneHighVariationWeight_finTwo_zero",
+        "oneHighVariationWeight_state_external_zero",
+        "ordinaryFlow_state_q_mixed_hasDerivAt_of_tower"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    }
+  ],
+  "source_lines": 466,
+  "selected_generic_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+  "selected_N01_contract_ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+  "mathlib_ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "changes": [
+    "Select the existential parameterLoss after fixing actual directional order one or two and before spatial order zero or any point/state/component.",
+    "Both quantitative conclusions expose the same parameterLoss and exact high grading loss + parameterLoss; no grading loss is absorbed into the numerical coefficient.",
+    "The actual first derivative, ordered mixed derivative, zero-spatial tower, exact H(sample)^.75 and E0(sample)^B, and same original flow are unchanged.",
+    "All qualitative derivative existence, domination and endpoint integral headers remain byte-identical; their proofs consume the genuine newly selected order-one loss."
+  ],
+  "required_downstream_ports": [
+    "N01HeightResponseBound",
+    "N01HeightWeightConstraint",
+    "N01HeightTestWeightBridge",
+    "N01ActualCellMaterialOrder"
+  ],
+  "scope_limits": [
+    "These two source candidates do not make the historical 279/328 mixed-pin closures ready. The quantitative actual height-response chain is still being ported and will have a separate exact selection.",
+    "No compilation, active source/index/CI/ref/authority/plan mutation."
+  ],
+  "independent_reviews": [],
+  "compiled": false,
+  "green_receipt_applies": false,
+  "created_at": "2026-11-12T15:08:52.809866+00:00"
+}

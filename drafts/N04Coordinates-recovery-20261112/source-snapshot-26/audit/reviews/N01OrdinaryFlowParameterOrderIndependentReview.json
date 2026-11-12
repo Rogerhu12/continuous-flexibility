@@ -1,0 +1,206 @@
+{
+  "kind": "actual_N01_fixed_parameter_order_flow_ports_independent_full_review",
+  "status": "PASSED_SELECTED_TWO_SOURCE_REVIEW_WITH_DOWNSTREAM_PORTS_HELD",
+  "reviewer": "/root/audit_coordinates",
+  "author": "/root/proof_inventory",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01OrdinaryFlowParameterOrderSelectedCandidateManifest.json",
+    "sha256": "a494711a4824ae753ea72b82abd218a6019581667d219addb1746df513b56509",
+    "blob": "8212abba209cf96250dfb9de5437da0e1caadb3a",
+    "lines": 132
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/ordinary-flow-formatting/N01FlowParameterVariation.lean",
+      "sha256": "416b357165b334db074e1045a4f6b085695d7f98760320bd1def6c336782848a",
+      "blob": "e47ea9f03ccc5f58b3d22b412bc2a13b2c3149fd",
+      "lines": 311,
+      "target": "src/ContinuousFlexibility/Analysis/N01FlowParameterVariation.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowParameterVariation.c5c48-base.lean.txt",
+        "sha256": "e90f5b891c766c3b3cea33b29b7cbef680cf883bbb0a6130b3d462bd5d159719",
+        "blob": "6e6e51d16c36f27ad8613e3025c202fed0c43f27",
+        "lines": 307,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "public_headers_changed": [
+        "N01Properties.minusFlow_q_derivative_weight_bound"
+      ],
+      "public_headers_preserved": [
+        "stateExternalParameterLine",
+        "oneHighVariationWeight_finOne",
+        "le_of_zero_power_mul_le",
+        "oneHighVariationWeight_externalParameter",
+        "hasDerivAt_composed_velocity_coprod",
+        "ordinaryFlow_q_hasDerivAt_of_tower",
+        "N01Properties.minusFlow_q_hasDerivAt",
+        "ordinaryFlow_q_derivative_bound_of_tower",
+        "N01Properties.minusFlow_q_derivative_bounded",
+        "N01Properties.minusFlow_q_zero_hasDerivAt_of_speed"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true,
+      "original_parameter_order_diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowParameterVariation.diff",
+        "sha256": "6dc3d712da3c7c18b805c544bb09f64f28e89de8d8686973bfe7f5c4ae7ff1e6",
+        "blob": "b386da048ab71d0e5870e8e9538444eb5233b94d",
+        "lines": 77
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/ordinary-flow-formatting/N01FlowParameterVariation.diff",
+        "sha256": "8a6c627fcade93fcbb8dc8b29180c8fed7d0f161ca485e9b75af30ab6b0aa87d",
+        "blob": "555358c1d39c8ad64255d193da89f295065e4caf",
+        "lines": 77
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowMixedParameterBound.lean",
+      "sha256": "fb4ee23443bc019b6eca3545e01ae26eb5849d46f05fc7af070896c3920c8542",
+      "blob": "36cc65de93419f34764b6b7ad23f889ec00de075",
+      "lines": 155,
+      "target": "src/ContinuousFlexibility/Analysis/N01FlowMixedParameterBound.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowMixedParameterBound.c5c48-base.lean.txt",
+        "sha256": "e8f43fd1bacca7994e4e95f17ffe53d2394c2a203a35f000c7af42fd38856bb5",
+        "blob": "c4e7412dd24d7e973b751fd6854cffe406228f1e",
+        "lines": 153,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowMixedParameterBound.diff",
+        "sha256": "82f34ada8a0757e916c3ed55ad12745019673407690cce21d9cd0c56cc0d1cc9",
+        "blob": "3f92c72ccfaa771157f5243fb67ee2fa8212f369",
+        "lines": 55
+      },
+      "public_headers_changed": [
+        "N01Properties.minusFlow_state_q_mixed_derivative_bound"
+      ],
+      "public_headers_preserved": [
+        "stateMixedExternalParameterLine",
+        "oneHighVariationWeight_finTwo_zero",
+        "oneHighVariationWeight_state_external_zero",
+        "ordinaryFlow_state_q_mixed_hasDerivAt_of_tower"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    }
+  ],
+  "source_lines_read": 466,
+  "provider_sources_verified": [
+    {
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsScalarLine.lean",
+      "sha256": "565509069ae721ae2805249702f29121a5c767f3b1c3d7c71ec0bf347e12c1c3",
+      "blob": "74c704f4b692872fed0c1cd89b6aaf2fec178e1b",
+      "lines": 78
+    },
+    {
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsMixedScalarLine.lean",
+      "sha256": "629738b395bbe87287c3da15bb7d1f930bacc7c54cb2cbada180c58e25a5fd65",
+      "blob": "fd9ce319319ed8c8cdf4d7be43cb6a27ce644ed4",
+      "lines": 70
+    },
+    {
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/ScalarFlowParameterVariation.lean",
+      "sha256": "f62ff834cf07ce56f7fdebc7d0fd4e8cf98c0a6a0c079a653eac0e0a5c6a29ca",
+      "blob": "1c1bf9250df13437ee0ef48f05abff67fcd1e3d4",
+      "lines": 114
+    },
+    {
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    }
+  ],
+  "pinned_mathlib_sources": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ParametricIntervalIntegral.lean",
+      "sha256": "7eaeac230485de75a4bffa12f306b73d6cfc40531679b4e989f0bf014e46a6bc",
+      "blob": "778e967eb411db0886d8fd7c2c1d854a0c9e2bd7",
+      "lines": 114
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+      "sha256": "78fca2cc5f69fe7f7cf42cb31480aa15068851dae795e1d5fad62f62a28c4145",
+      "blob": "afdc3e3a27aad5f24293a47dc82304dfab84979d",
+      "lines": 985
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Comp.lean",
+      "sha256": "16a41715830ec582c91cb5262e2defab08052d7e749bb91ee059905c0b0e1847",
+      "blob": "bca5a3ed558bd9f14be2a277d9e01bd025227307",
+      "lines": 415
+    }
+  ],
+  "mathlib_ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "formatting_supersession": {
+    "before": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowParameterVariation.lean",
+      "sha256": "3c06d8b1da17a33a91e34399dc252c46c1d4f85108e121a04b947c7b50071769",
+      "blob": "9e1f025d46dd5839341db16861413726c07b3adf",
+      "lines": 311
+    },
+    "after": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/ordinary-flow-formatting/N01FlowParameterVariation.lean",
+      "sha256": "416b357165b334db074e1045a4f6b085695d7f98760320bd1def6c336782848a",
+      "blob": "e47ea9f03ccc5f58b3d22b412bc2a13b2c3149fd",
+      "lines": 311
+    },
+    "diff": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/ordinary-flow-formatting/N01FlowParameterVariation.formatting.diff",
+      "sha256": "bda0acd2c831704d3426b5d77a2e0187465dce5e27b2dc7cef2bb7c8ff2ba965",
+      "blob": "afbf85976a7fbac471744f62b26a07eca01a2f50",
+      "lines": 11
+    },
+    "change": "Remove one trailing space only; all mathematical bytes unchanged."
+  },
+  "read_scope": [
+    "All selected 311 and 155 source lines; complete 77/55-line diffs against exact c5 source objects and the sole formatting cleanup. Both exact historical source bodies were already read while diagnosing the previous mixed-pin provider gap; all unchanged spans and complete headers were rechecked mechanically.",
+    "Full scalar-line, mixed-scalar-line and dominated actual endpoint-integral providers at the selected c5 ref; exact ordinaryFlowFamily, oneHighVariationWeight, OrdinaryFlowFamilyTameBounds, ordinaryFlowConditions and complete N01 conjunction at bb419. Pinned chain-rule/eventual-equality and parameter-integral declarations were read."
+  ],
+  "checks": [
+    "Recomputed all ten selected source/base/diff/history/supersession identities. Both bases are byte-identical to their exact c5 Git objects. Both diffs were regenerated byte-for-byte; the selected 311 differs from its initial candidate by removal of exactly one trailing space.",
+    "Only the two declared quantitative public headers change: each now returns an actual natural parameterLoss before B and every state/component/point, and the high grading is exactly loss+parameterLoss. Fourteen complete generic or qualitative public headers, both import lists, local instance lines and option lines are byte-identical.",
+    "The actual bb419 N01 tail is forall k, exists parameterLoss, forall s, exists B. The proof fixes k=1 or k=2, selects its genuine parameterLoss and only then specializes to s=0. The chosen tower belongs to the same ordinaryFlowFamily and original neighborhood; no common loss over all k is asserted.",
+    "For the external-parameter first derivative, the actual scalar-line theorem supplies the derivative of C.minusFlow rather than a formal proxy. The reference flow term is parameter constant and is restored by add_const. The exact one-high weight on (0,1) is 2+stateGrading(high)(x-reference)+abs(q), with high=0+loss+parameterLoss transported by explicit natural-number equality.",
+    "The zeroth spatial prefactor min-distance^0 is removed by the existing scalar lemma without rewriting a chosen directional tower. The original H(sample(C.cell m))^(3/4), E0(sample(C.cell m))^B, original component and original flow are all unchanged.",
+    "For the mixed derivative, the genuine ordered second jet has the state direction first and external direction second. The actual mixed-scalar-line theorem differentiates in precisely that order and does not exchange partials. At the reference point the explicit Fin2 one-high weight is 2*stateGrading(base)(eta)+stateGrading(loss+parameterLoss)(eta).",
+    "The qualitative uniform-in-radius derivative bound fixes the state and component and absorbs its finite high seminorm into K, as its unchanged statement permits. It does not absorb parameterLoss into B or claim a lower grading. Its absolute coefficient argument preserves validity without an extra sign premise.",
+    "The endpoint integral proof is unchanged after this qualitative bound: genuine continuous trajectories, actual ODE, local speed derivative, fixed parameter interval, and integrable KV*(1+KY) dominate the interior derivative. The null radial endpoint and actual Vtheta=0 reduction remain explicit, so no endpoint derivative is assumed.",
+    "The two source ports close exactly the previously recorded direct N01 tail calls. The historical 279/328 closures are not promoted to ready; the four quantitative height/actual-cell downstream consumers still require their separate exact ports. No compiler, active source/index/ref/CP/authority or CI operation was performed."
+  ],
+  "public_header_summary": {
+    "changed_quantitative_headers": [
+      "N01Properties.minusFlow_q_derivative_weight_bound",
+      "N01Properties.minusFlow_state_q_mixed_derivative_bound"
+    ],
+    "preserved_header_count": 14,
+    "imports_and_options_preserved": true
+  },
+  "required_downstream_ports": [
+    "N01HeightResponseBound",
+    "N01HeightWeightConstraint",
+    "N01HeightTestWeightBridge",
+    "N01ActualCellMaterialOrder"
+  ],
+  "prior_gap_notice": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/N01EndpointMixedPinFlowProviderCompatibilityFollowup.json",
+    "sha256": "9ad77f6d24a82b718a462e995612e776e56635420d6c74cd992d3748d5ad2261",
+    "blob": "6914655c46fc6d26104acd3938ff76b608b31c40",
+    "lines": 54
+  },
+  "scope_limits": [
+    "Full static mathematical/API review of these two selected replacements only. The additional loss is explicit in the two numerical contracts.",
+    "No assertion that the historical mixed-pin closure is now wholly compatible; downstream ports and their full selection are still held.",
+    "No Lean compiler/elaborator or CI success claim."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "active_checkout_index_refs_CP_authority_modified": false,
+  "ci_queried_or_downloaded": false,
+  "created_at": "2026-11-12T15:13:17.666940+00:00"
+}

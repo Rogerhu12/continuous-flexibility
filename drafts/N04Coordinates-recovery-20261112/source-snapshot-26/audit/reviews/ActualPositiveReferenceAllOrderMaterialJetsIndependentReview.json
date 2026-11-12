@@ -1,0 +1,128 @@
+{
+  "kind": "actual_positive_reference_same_width_all_order_material_jets_independent_full_review",
+  "status": "PASSED_STATIC_FULL_SOURCE_REVIEW_HELD_UNCOMPILED",
+  "reviewer": "/root/audit_coordinates",
+  "author": "/root/quantitative_route",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceAllOrderMaterialJetsCandidateManifest.json",
+    "sha256": "c1e27544660d492f6bfc46e5ab44dbfea5800412d9b4d27e21ab15afadeb1c5e",
+    "blob": "63451cd15ba8cdae16701341ea2d552075bc424e",
+    "lines": 87
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceAllOrderMaterialJets.lean",
+    "sha256": "357a6cd2b43e441c8fa7f495277b405545250abc4bdd17fe0b8073c5b11c2807",
+    "blob": "68fb6e0caf22c3154fbc316c22780f4dcbd9b643",
+    "lines": 165,
+    "target": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceAllOrderMaterialJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualPositiveReferenceMidpointMaterialData",
+      "ContinuousFlexibility.Analysis.PositiveReferenceTaylorAllOrderJets"
+    ],
+    "public_names": [
+      "n04Coordinates_retained_positive_reference_allOrder_material_jets"
+    ]
+  },
+  "providers_verified": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceMidpointMaterialData.lean",
+      "sha256": "56230c2eef444cc63f4a327f0f6f4383d6d6545eefc557dd853d60575b1bc03e",
+      "blob": "4bec9b285028e23a23bf5451913522251b942d6f",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/reference-taylor-allorder-target/PositiveReferenceTaylorAllOrderJets.lean",
+      "sha256": "746552dcbbe5c8e84f6b8e374fe4b55a881979e5057ba00322fed1e76413c9d1",
+      "blob": "7f7f56056f73d99812b07986bd0f5f5e0863f044",
+      "lines": 173
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceEndpointData.lean",
+      "sha256": "5996158db4711a93a40aeb62b7e21f9582b3da5c0959582efa48b6793ffa50bf",
+      "blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+      "lines": 160
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/radial-reference-bool/PositiveReferenceFiniteRadialJets.lean",
+      "sha256": "a515668c71f3895edfda3d1183a5c275f3758799de0d7ebb68d439d33095bc66",
+      "blob": "db60546bb34349a040955ace14facdf5b13dfa0d",
+      "lines": 167
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "lines": 1155
+    }
+  ],
+  "provider_reviews_verified": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceMidpointMaterialDataReviewedManifest.json",
+      "sha256": "31a2a2b85809c17de1468d96102a6485c8b966fa0168a3f0fbd5a9220b270999",
+      "blob": "325df700f798caf959353eab91a8ea706296a115",
+      "lines": 51
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/reference-taylor-allorder-target/PositiveReferenceTaylorAllOrderJetsReviewedManifest.json",
+      "sha256": "9d98307c4a95c0ba6fb3d15168a37b4e6eb14734549df9369170194a7b1f89ef",
+      "blob": "dd6b324fd999c32188348cb161e3face0cd8e86c",
+      "lines": 31
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolationReviewedManifest.json",
+      "sha256": "3828d5181d7559adea4d9dbb7e89ffbcb0ef9b452cb6d7a7c358fab84f736728",
+      "blob": "645b0b63b8f3dfd525b5366aaf648ef77d9b6229",
+      "lines": 74
+    }
+  ],
+  "additional_selected_provider_evidence": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/PositiveReferenceTaylorAllOrderJetsIndependentReview.json",
+      "sha256": "024c10d5d3ffa933ae3c109a4cc1537b1a3ada7540f497259dfb516aaf6625d7",
+      "blob": "0a67932a2f2549939754cd4295e8cb617caf191e",
+      "lines": 125
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ActualPositiveReferenceMidpointMaterialDataIndependentReview.json",
+      "sha256": "1c4239a39b4d70f29cd1efa3f6b43810aad3f26d9622b4ca87801039c6d000bc",
+      "blob": "19ab6376c46e64e02aa32483330a201c81e88bfd",
+      "lines": 80
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceHeightAllOrderJetsProviderSelectionManifest.json",
+      "sha256": "1b28a146fe7c2ff36d9e4faf4aa78124895c21e21313d2eb53ace03fc71be679",
+      "blob": "e7a859bcc6794a597aeb15d6461d7bf2e97d7f44",
+      "lines": 96
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-envelope-known-patterns/ExpPolynomialEnvelope.lean",
+      "sha256": "a37f901d2c9f83cd2e02d067b2d7f411729c6ca3e6379cf5f935679b92cfc463",
+      "blob": "f44f6f236af368d5092674e60ed1373864e60c9b",
+      "lines": 74
+    }
+  ],
+  "read_scope": [
+    "All 165 candidate lines, complete actual midpoint148, selected same-width173, actual certified endpoint160 and corrected finite-radial167 sources. Exact selected peer manifests and the transitive Exp74 selection were read.",
+    "Actual radialBoundaryJet and n04PositiveEndpoint definitions; actual Through03-to-profile and positive-component bounds contracts/proofs; pinned Real.rpow_mul_natCast and rpow_le_rpow_of_exponent_le."
+  ],
+  "checks": [
+    "Recomputed every source/provider/review SHA256, Git blob and line count recorded by the candidate. The single public name and two imports match the source; no installed declaration collision was found. The communicated short identifiers 357a6cd2 and 68fb6e0c are respectively the same source SHA256 and Git blob, not different revisions.",
+    "C0 and its scaled sample floor are obtained once before n. For each n the proof extracts exactly one B from the real midpoint finite-data theorem at order n+1, returns that exact hfinite as the first conjunct and only then introduces N. No independent existential numerical witness is identified with B.",
+    "The finite certificate retains the actual retained Gamma, original Through03 witness, original typed atlas A, same certified endpoint selectors, original C.cell host and true positive midpoint sample. The genuine optical lower and original host inclusion remain explicit inputs, rather than being inferred from arbitrary Through03.",
+    "The full source160 tuple was checked position by position. Its actual endpoint value is 0 or 1, so radialBoundaryJet order zero is bounded by 1<=U. The remaining positive coordinate coefficients and all height coefficients come from that exact hfinite. Its ordinary infinite-smoothness-at-root projections are the two inputs used by the numerical theorem.",
+    "The selected173 theorem is instantiated with fixed finite degree n+1, original U=B*W^B and exactly delta=positiveReferenceTaylorWidth n l r U^-1 U. The actual ys,hs,Y,H are unchanged for all N. Only its numerical coefficient J and d=2*((3*N+1)*N+2) depend on N. Typed hactual and the final explicit change preserve all local let-bound functions.",
+    "With W=C0*E0(sample j)>=1, the genuine identity J*(B*W^B)^d=(J*B^d)*W^(B*d) follows from mul_pow and the reverse pinned rpow_mul_natCast. coefficient=J*B^d is positive; exponent=B*d is nonnegative. M=1+coefficient+exponent bounds both, and monotonicity in the real exponent at W>=1 gives the common M*W^M bound. M is chosen before all components, cells, endpoint sources and physical points.",
+    "N=0 and k=0 are included. The coordinate conclusion concerns positive derivatives k+1; height and reciprocal include order zero. The proof never claims a uniform bound on the unbounded coordinate value itself.",
+    "The selected height provider continues to use the separately reviewed Exp74 compatibility source. No historical source or manifest was overwritten, and no compilation, active checkout/index/ref/CP/authority or CI operation was performed."
+  ],
+  "scope_limits": [
+    "Ordinary spatial jets of the same displayed finite reference interpolation only; no parameter-direction tame tower or complete primitive certificate.",
+    "The raw optical lower, same original host inclusion and retained-coordinate data are still explicit upstream hypotheses.",
+    "Static mathematical/API review only. No Lean compiler/elaborator or future CI success claim."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "active_checkout_index_refs_CP_authority_modified": false,
+  "ci_queried_or_downloaded": false,
+  "created_at": "2026-11-12T15:09:03.091496+00:00"
+}

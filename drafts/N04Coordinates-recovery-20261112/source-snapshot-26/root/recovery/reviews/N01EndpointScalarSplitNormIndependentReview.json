@@ -1,0 +1,142 @@
+{
+  "kind": "independent_full_source_actual_scalar_split_norm_parameter_order_review",
+  "status": "PASS_STATIC_REVIEW_UNCOMPILED",
+  "author": "/root/proof_inventory",
+  "reviewer": "/root",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarSplitNormCandidateManifest.json",
+    "sha256": "095fa35e6efd6572c3cd255ea13ba09eb7469cb094f0d69e6940c763b89121b9"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarSplitNorm.lean",
+    "sha256": "960092b0563f0ce75438e22e7dcf29b74de5c00f49fcd180809e4f4624fa0a11",
+    "blob": "64bcd22355621cab6040113cbeefef78e0d43fb5",
+    "lines": 253,
+    "target": "src/ContinuousFlexibility/Analysis/N01EndpointScalarSplitNorm.lean",
+    "base": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarSplitNorm.c5c48-base.lean.txt",
+      "sha256": "acef02557c306a5ffc12cfbbfc114a6389d92a5fccef1f5e90f9d6b8c2bbc70d",
+      "blob": "db89daf73bb64af442134c8cd8c394c5d4413038",
+      "lines": 239,
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+    },
+    "diff": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarSplitNorm.diff",
+      "sha256": "12317ebc56312140b5cf4ec3ff38bd1ae34f6eab326519345e801fdb03bcd61d",
+      "blob": "a96cdf5ebe88c28997e77c8a04f2e64fb616253e",
+      "lines": 179
+    }
+  },
+  "verified_selected_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointScalarHeightBounds",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarHeightBounds.lean",
+      "sha256": "bd727eb5c66f0d40ce5158437637d1a5cee3e28cc630e9eb7da68a130febd7f3",
+      "blob": "ff9355b9bfb65d5b2d2cb1e05dba3d2f26dbf382",
+      "lines": 169,
+      "selected_ref": "LOCAL_HELD_PARAMETER_ORDER",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointCircleJets",
+        "ContinuousFlexibility.Analysis.N01FlowScalarHeightBounds",
+        "ContinuousFlexibility.Analysis.N01FlowSamplePrefactor"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointScalarCircleMember",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarCircleMember.lean",
+      "sha256": "982eac1e60acf97ad1906422783a4cff5003905b2de516b616505edb5a919538",
+      "blob": "615ebbd2ffa65d62d8344671b90cf6167348d854",
+      "lines": 125,
+      "selected_ref": "LOCAL_HELD_PARAMETER_ORDER",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointScalarHeightBounds",
+        "ContinuousFlexibility.Analysis.N01HeightPlateauDirections",
+        "ContinuousFlexibility.Analysis.N01WeightedPlateauEnvelope",
+        "ContinuousFlexibility.Analysis.CircleEnergyEnvelope"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointSplitNorm",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointSplitNorm.lean",
+      "sha256": "246dff89ee519cb2adf83ccb3639de705246ac975cf92391177386561c4c9370",
+      "blob": "274f6f239d5c2ab2d270c5b5604760fb2099126c",
+      "lines": 159,
+      "selected_ref": "LOCAL_HELD_PARAMETER_ORDER",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointSplitEnergy",
+        "ContinuousFlexibility.Analysis.CircleTwoEnergyEnvelope"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01HeightPlateauDirections",
+      "path": "src/ContinuousFlexibility/Analysis/N01HeightPlateauDirections.lean",
+      "sha256": "cf2318f873369f3763e3b8b4844e482cbbf64abca132d5454279d41feeda3114",
+      "blob": "ca10a66d3477e0b3d244332bfe526aed6cfc3fa5",
+      "lines": 53,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowGermLocality",
+        "ContinuousFlexibility.Analysis.N01PlateauEnergyEnvelope"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01WeightedPlateauEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/N01WeightedPlateauEnvelope.lean",
+      "sha256": "1efedf87180cdb2763a957ae0fe5401bbca4e22b31ed31e00cdd208a177fcb12",
+      "blob": "cd0c5ae71892ff23d7ab99541bf0a066e3c3ec1f",
+      "lines": 99,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01WeightedPlateauEnergy",
+        "ContinuousFlexibility.Analysis.N01PlateauEnergyEnvelope",
+        "ContinuousFlexibility.Analysis.FinitePhysicalEnergyBounds"
+      ]
+    }
+  ],
+  "input_candidate_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01ScalarHeightParameterOrderCandidateManifest.json",
+      "sha256": "260e2ab29b61bf9a1c65745d1ee4ff7deb279b742f32005b121cb9556203c321",
+      "blob": "6e891fac8e45850286fba54cd7a01d61db27299e",
+      "lines": 183
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarCircleMemberCandidateManifest.json",
+      "sha256": "23ecfe5bdd9532c6e8308655dea7908264cf7006e754de7dc0f505a2f1aa9c41",
+      "blob": "e8d294c4d513ae06d4f742364417231a63e311f4",
+      "lines": 53
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointStateSplitParameterOrderCandidateManifest.json",
+      "sha256": "1fad2aa86c1308aa73db676a5b8d443b57807fa2318c8257224fae64ab8e3648",
+      "blob": "3c97788f9ee30d801d429fc3481041c3662038c5",
+      "lines": 153
+    }
+  ],
+  "closure_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarSplitNormClosureInventory.json",
+    "sha256": "a293015f8270479633e5caffc80d460caf0705b30d9e6a35211b2212411cb03f",
+    "blob": "15cf024ce80a7034023eca2e53b025b79d36e600",
+    "lines": 3739
+  },
+  "read_scope": [
+    "Entire253-line candidate; same159-line split-norm provider including full generic scaled two-envelope proof; pinned53-line HeightPlateauDirections,99-line WeightedPlateauEnvelope and the full CircleTwoEnergyEnvelope proof; selected scalar-height interface."
+  ],
+  "checks": [
+    "The genuine scalar Euler bound selects its parameterLoss at arity n+2 before b,c. The pure scalar jet remains arity n+1 of the same actual endpoint family, with no all-arity common loss.",
+    "The real lifted height is localized using the actual height-pair plateau directions. The original sample, trace-free localization and additive germ identity are retained; low/high energies remain separately indexed by base and b+loss+parameterLoss.",
+    "The scalar scaling lemma converts each factor M^(c+1) into the square root of the actual weighted energy using ENNReal.toReal_mul and nonnegativity. No finite pointwise majorant is substituted for the infinite component sum.",
+    "The actual weighted plateau sum theorem supplies orders base+c+6 and b+loss+parameterLoss+c+6, from d=c+1 and the genuine five-order localization cost. Their distinct constants feed the verified two-envelope circle L2 estimate.",
+    "The radius selector is introduced only after all norm constants. The resulting wrappers specialize that same bound without changing the actual flow, its smoothness or its pure scalar tuple.",
+    "The budget transfer uses the actual affine lifted physical height, its reference seminorms and the sector grading. J=1+the two actual reference seminorms and N=n+2 are nonnegative numerical constants chosen before states/radius selectors. The displayed inequality retains both distinct low/high orders.",
+    "All source/base/diff/provider/input records and all292 selected closure modules were independently checked by exact SHA256/Git blob/line counts. The advertised generic blocks are byte-identical; no missing project imports or old uniform-loss SectorFlowTower/EndpointParameterTower are selected."
+  ],
+  "scope_limits": [
+    "Static review only; the mixed-pin graph has not been compiled. Separate scalar-height, scalar-circle and state-split prerequisite receipts remain necessary.",
+    "This is the scalar split-energy/norm estimate, not the final endpoint tame theorem or final N02/N03 construction.",
+    "No compiler/elaborator or active source/index/ref/CI/contract mutation."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "created_at": "2026-11-12T14:59:41.720674+00:00"
+}

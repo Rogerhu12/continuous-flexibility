@@ -1,0 +1,11 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowParameterVariation.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/ordinary-flow-formatting/N01FlowParameterVariation.lean
+@@ -180,7 +180,7 @@
+     exact hfinal.trans_eq (congrArg
+       (fun n : ℕ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+         T.E0 (T.sample (C.cell m)) ^ B *
+-          (2 + stateGrading S n (x - C.referenceState) + |q|)) 
++          (2 + stateGrading S n (x - C.referenceState) + |q|))
+         (congrArg (fun n : ℕ => n + parameterLoss) (Nat.zero_add loss)))
+   exact ⟨parameterLoss, B, hB, hpoint⟩
+ 

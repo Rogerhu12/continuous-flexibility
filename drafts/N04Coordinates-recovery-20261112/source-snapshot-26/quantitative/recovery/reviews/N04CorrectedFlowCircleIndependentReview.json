@@ -1,0 +1,172 @@
+{
+  "kind": "actual_corrected_flow_circle_independent_full_source_review",
+  "status": "PASSED_STATIC_FULL_SOURCE_REVIEW_HELD_UNCOMPILED_WITH_EXPLICIT_PENDING_PROVIDER_PORTS",
+  "reviewer": "/root/quantitative_route",
+  "author": "/root",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowCircleCandidateManifest.json",
+    "sha256": "9a803d66689e38279db94e4dedca65ca3a8c0e9268a86861d7171c13b941c117",
+    "blob": "c5197fb214fa1d487c4fe8bac7624e80a5819a11",
+    "lines": 137
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowCircle.lean",
+    "sha256": "1c499c99875b12e8a7a7abf91ff9dec371dca9c4f0a7505c5d4dfc50ce236e62",
+    "blob": "5a0a53733562aeb135e5c543ba3b6f36e7e7ab02",
+    "lines": 118,
+    "target": "src/ContinuousFlexibility/Analysis/N04CorrectedFlowCircle.lean"
+  },
+  "closure_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CorrectedFlowCircleClosureInventory.json",
+    "sha256": "3d9e342b5a21fa8fd602b737e4e03ba490e03362b3953e616f67f2935a3ffb72",
+    "blob": "28504e2c1b3d8b5b932788c386035df8f363765f",
+    "lines": 5363
+  },
+  "providers_read": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N01InterpolationInverseCircle",
+      "path": "src/ContinuousFlexibility/Analysis/N01InterpolationInverseCircle.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "e4ddcbab9a22add55fca82e01770a15b004ba6cdf42fa1a928f3ba7565f8052b",
+      "blob": "5d29709ce82e9e2d9eddd11f6812a25fcd2faf6f",
+      "lines": 215,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ReturnInverseCircle",
+        "ContinuousFlexibility.Analysis.CircleComponentContraction"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnInverseCircle",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnInverseCircle.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "4efcb2d32b0e23c51812bfe4b14add3e20ffd4356394f87a1f15ef5ab308c55e",
+      "blob": "e99a08956ffd3e0dcf86d6e1ed0a4421b5675a86",
+      "lines": 317,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01SelectorInverse",
+        "ContinuousFlexibility.Analysis.N01ResidualSmoothTame",
+        "ContinuousFlexibility.Analysis.CircleCompositionSmoothTame",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionDisplacementRegularity"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01SelectorInverse",
+      "path": "src/ContinuousFlexibility/Analysis/N01SelectorInverse.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "e1ce3b7b578a17168ac6a432d732e302033f8e65309bc20c88fa610de4190a9b",
+      "blob": "959be823f4a888cca1c45c2f0fa77ef627bbc8f9",
+      "lines": 173,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointSmoothTame",
+        "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame",
+        "ContinuousFlexibility.Analysis.CirclePositiveInversePerturbation",
+        "ContinuousFlexibility.Analysis.CircleJointEvaluation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleAveragedComposition",
+      "path": "src/ContinuousFlexibility/Analysis/CircleAveragedComposition.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "8a9f8865fe5010c9c2b51152881ba92db2264ecdaccfe7b55f1dbad4cdbd4215",
+      "blob": "c756172121da5a6009a0ea80270ce0f8dcf0026b",
+      "lines": 203,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleParameterIntegral",
+        "ContinuousFlexibility.Analysis.CircleWeightedProduct"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleJointEvaluation",
+      "path": "src/ContinuousFlexibility/Analysis/CircleJointEvaluation.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "5110f4d8cf53b34ed33b6221317e9421d876d9add22dca234e95493edcc33ba6",
+      "blob": "b18010ba5d5c86d247e70d32e8ffd134434e126b",
+      "lines": 216,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleAngularJetLinear",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsJointAngular",
+        "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+        "ContinuousFlexibility.Analysis.SolveNewtonBridge"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsAffine",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAffine.lean",
+      "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+      "blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+      "lines": 124,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "ContinuousFlexibility.Analysis.ProjectiveJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointSmoothTame",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointSmoothTame.lean",
+      "sha256": "80c1d63b655fd4fa1ee1dab48cf72c3740dbd3fb06b8bf20a313f305ebf79026",
+      "blob": "db33d6cf7df8e3aaed5cf75dc82d7f22b0f384aa",
+      "lines": 124,
+      "selected_ref": "LOCAL_HELD_PARAMETER_ORDER",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointZeroGrowth"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectedFlow",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectedFlow.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "9323567f5c4d710472b4d8b4f9ea52c5cdb5d16aa8d83b9661844f61f91b8763",
+      "blob": "36693b0d8102e289a31ebd012f8eeb6cf63f795c",
+      "lines": 343,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectionAlgebra",
+        "ContinuousFlexibility.Analysis.ReturnChartDifferentiation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773,
+      "selected_ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Contracts.Annular",
+        "ContinuousFlexibility.Scalar.NormalizedConservation",
+        "ContinuousFlexibility.Scalar.TypeCorrection",
+        "ContinuousFlexibility.Scalar.FormPullback",
+        "Mathlib.Topology.OpenPartialHomeomorph.Defs"
+      ]
+    }
+  ],
+  "read_scope": [
+    "All 118 source lines; complete selected interpolation215, inverse-return317, averaged-composition203, joint-evaluation216 and parameter-order endpoint-tameness124 sources.",
+    "Exact endpointFlowCircle_affineLift in selected selector provider, SmoothDirections.congrOn and actual corrected-flow definition/application theorem; selected bb419 OrdinaryFlowFamilyTameBounds and N01Properties contracts."
+  ],
+  "checks": [
+    "Recomputed all 423 selected module SHA256, Git blob, line counts and import lists from the recorded local source or exact Git ref. No identity mismatch, missing project import or import cycle; both old all-arity uniform-loss modules remain excluded.",
+    "The definition uses the original interpolationSelectorCircle e and original endpointFlowCircle f. Its circle decode is exactly decode(e)(theta)+decode(f)(theta+decode(e)(theta)); shifted composition has zero translation and uses the same supplied circle model and unchanged N01 witness.",
+    "The actual interpolation lift gives theta+decode(e)(theta)=returnInterpolation(chi at the same radius)(returnCorrectionInitialMap)theta. The original endpoint affine lift evaluated at that argument has translation minus opticalTravel. Addition/reassociation thus gives the literal returnCorrectedMinusFlow at the original radius selector, with no replacement flow or inverse.",
+    "The local e/f/de abbreviations in the two typed lift bridges and decode identity denote precisely the same complete functions. The final rewrite uses the public actual returnCorrectedMinusFlow_apply. The statement is equality of full component-and-angle functions, not a pointwise surrogate at a different state or radius.",
+    "Tameness uses the genuine interpolation and endpoint circle towers and the existing smoothTameOn_circleShiftedChartCompose_maps with the same sector grading, open neighborhood, circle interpolation certificate and gamma=3/4. The final addition has the correct orientation and functions.",
+    "The joint tower chooses the same tame circle tower once, obtains positivity of each original sample H from IsMaterialData and the actual radial-core sample certificate, and uses circleAffineLiftJointDirections. Its congrOn only changes the zero field by the proven actual affine-lift equality; all projective directional derivatives and topology are retained.",
+    "The selected new OrdinaryFlowFamilyTameBounds has parameterLoss after k and before s. This leaf invokes the selected repaired endpoint SmoothTameOn contract and does not demand a loss uniform over all k. No final canonical CurrentJets assumption or radial derivative theorem is introduced.",
+    "All four public declarations and the two imports match the candidate manifest. No source, provider, active checkout, index, refs, checkpoint, authority or CI state was edited."
+  ],
+  "known_pending_provider_ports": [
+    "ContinuousFlexibility.Analysis.N01FlowParameterVariation",
+    "ContinuousFlexibility.Analysis.N01FlowMixedParameterBound"
+  ],
+  "scope_limits": [
+    "This is a static review of the new118 source and its precise public callee interfaces. The graph remains uncompiled; N01FlowParameterVariation and N01FlowMixedParameterBound still need their separately assigned parameter-order ports.",
+    "The radius selector is fixed independently of state and angle. The theorem proves actual joint state-and-angle smoothness only; radial derivatives, canonical moving-coordinate composition and uniform primitive material bounds remain separate.",
+    "No assertion of compiler/elaborator success, completed N02 port or final CurrentJets certificate."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "ci_queried_or_downloaded": false,
+  "created_at": "2026-11-12T15:10:29.795341+00:00"
+}

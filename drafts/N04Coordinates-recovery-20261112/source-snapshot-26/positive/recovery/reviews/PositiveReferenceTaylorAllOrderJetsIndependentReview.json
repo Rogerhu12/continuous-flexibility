@@ -1,0 +1,125 @@
+{
+  "kind": "independent_full_source_same_displayed_reference_taylor_all_order_jet_review",
+  "status": "PASSED_STATIC_FULL_SOURCE_REVIEW_HELD_UNCOMPILED",
+  "reviewer": "/root/proof_inventory",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/reference-taylor-allorder-target/PositiveReferenceTaylorAllOrderJetsTargetCandidateManifest.json",
+    "sha256": "28072f060df02969f8d516ef3e695bcb00b5c122ff60d858f882f18518b8b362",
+    "blob": "919cdf34d0f73f888a5d3b891b5d49ea7f1ca2d0",
+    "lines": 35
+  },
+  "historical_candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceTaylorAllOrderJetsCandidateManifest.json",
+    "sha256": "f2d4c90b065a22620fe63e30f019b8fdbaff935463d9f4cb329922f6a41b4672",
+    "blob": "46371ddd13f6e197095be7f34ca1ac4a58a70e4a",
+    "lines": 118
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/reference-taylor-allorder-target/PositiveReferenceTaylorAllOrderJets.lean",
+    "sha256": "746552dcbbe5c8e84f6b8e374fe4b55a881979e5057ba00322fed1e76413c9d1",
+    "blob": "7f7f56056f73d99812b07986bd0f5f5e0863f044",
+    "lines": 173
+  },
+  "verified_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RadialTaylorSliceJetEnvelope.lean",
+      "sha256": "bc3bf04b7552fdc0bdaab8ba88138040516890dce27afee2e93bb5fa3e74f0a6",
+      "blob": "0f6c507f1f6463830e5b0a179ad46fb3c21d9db7",
+      "lines": 94
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-taylor-triangle/PositiveReferenceTaylorPrescribedWidth.lean",
+      "sha256": "44bc853c9750ea6ef6125b7af5f878b7fd47d3ffb3175b521a3ba21be36059a4",
+      "blob": "6520aad4926928dba5080ffed052e7630f413668",
+      "lines": 147
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceSlopeAllOrderJets.lean",
+      "sha256": "675bdd7d913c69aec27edef3c59d9b65c97dcc3693e93158294147f41971f510",
+      "blob": "1b03ae7c2ad6603d9bf99d97086b35bc6309269a",
+      "lines": 99
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceHeightAllOrderJets.lean",
+      "sha256": "eafac43ea49cdc562e8fa6fbd61f679c24f24411c944753790782fbca211c09d",
+      "blob": "c17b5daa9ed75cb0a8e322bbc0c3612010de3d0c",
+      "lines": 144
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceValueEnvelope.lean",
+      "sha256": "267b575f81da274e9710fd4fbd0df574c7d527bfd78a5e5c867e749ce2698297",
+      "blob": "25205de05e190acb6ec954e7ec34ce73351c88be",
+      "lines": 145
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/radial-reference-bool/PositiveReferenceFiniteRadialJets.lean",
+      "sha256": "a515668c71f3895edfda3d1183a5c275f3758799de0d7ebb68d439d33095bc66",
+      "blob": "db60546bb34349a040955ace14facdf5b13dfa0d",
+      "lines": 167
+    }
+  ],
+  "verified_provider_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RadialTaylorSliceJetEnvelopeReviewedManifest.json",
+      "sha256": "2d96606b07feb1178b073844e6bc87683e49f42340b8812fa69c476416295e1b",
+      "blob": "6c72ecce67140a0c4bcb0df4eff1ab56c6f40bdb",
+      "lines": 42
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-taylor-triangle/PositiveReferenceTaylorPrescribedWidthReviewedManifest.json",
+      "sha256": "5c4fc51c98e2294683ea191ef2c7f6ca51ac2f76994cac83290b0e069b498091",
+      "blob": "21f1e5781b480a31dbad8b730ff72277fb6a3298",
+      "lines": 29
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceSlopeAllOrderJetsReviewedManifest.json",
+      "sha256": "9cd09c5d3d3ab67f13fb103c59f540d49e0603b3f71f52d29e73944ec0b8b2b6",
+      "blob": "4f68482ecb0f85e16413665b260964ecfca8d0c6",
+      "lines": 45
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceHeightAllOrderJetsReviewedManifest.json",
+      "sha256": "b900b15645ef5d6177f710c1c1c75274a83068578fb0b634139aeb4020bfe1d1",
+      "blob": "8cac3c8429dac9fe041c09d5ee83fda23a469e64",
+      "lines": 47
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceHeightAllOrderJetsProviderSelectionManifest.json",
+      "sha256": "1b28a146fe7c2ff36d9e4faf4aa78124895c21e21313d2eb53ace03fc71be679",
+      "blob": "e7a859bcc6794a597aeb15d6461d7bf2e97d7f44",
+      "lines": 96
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceValueEnvelopeReviewedManifest.json",
+      "sha256": "eec6cc0b6e73660e524dafd618b82785d5fe7eab4f855bf0ddbd1544a7603bd1",
+      "blob": "ba7ab1dd12be731d6b5cd5f09a5519b1ec2630d5",
+      "lines": 27
+    }
+  ],
+  "selected_transitive_exp_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-envelope-known-patterns/ExpPolynomialEnvelope.lean",
+    "sha256": "a37f901d2c9f83cd2e02d067b2d7f411729c6ca3e6379cf5f935679b92cfc463",
+    "blob": "f44f6f236af368d5092674e60ed1373864e60c9b",
+    "lines": 74
+  },
+  "read_scope": [
+    "All 165 original source lines and all eight inserted target lines of the final 173-line compatibility source; complete selected radial Taylor94, prescribed width147, slope99, height144, value145 and finite radial167 providers.",
+    "Pinned ContDiffAt.derivWithin and iteratedDeriv_succ' declarations, inverse order/division formulas, and the already independently reviewed polynomial/log/exp provider interfaces."
+  ],
+  "checks": [
+    "The finite degree n+1 and displayed width positiveReferenceTaylorWidth n l r U^-1 U remain fixed from the original finite endpoint data. N changes only the numerical envelope Ct/K/V and never the interpolation, width, endpoint slices or chosen Y/H.",
+    "The same Taylor slice bound at degree n+1 and output N+1 controls the required slope derivatives through N and height derivatives through N, including order zero, on the original collars. The derivative shift uses the actual pinned iteratedDeriv_succ' direction.",
+    "The exact smallness margins provide actual positive slope/height on both collars and the original endpoint mass bound. Inverse height <=2U follows by order reversal from U^-1/2; no continuity radius or globally positive raw field is assumed.",
+    "The actual mass-one normalizer obeys the selected two-sided scale theorem and is at most 2/(r-l)<=2U. The larger V=K*U^2 controls this scale, width inverse and same endpoint jets; V is only used in estimates.",
+    "The slope envelope gives Cy*V^(N+1); the height and reciprocal give Ch*V^((3N+1)N+2). N+1 is bounded by that common exponent, and the exact power identity yields C(n,N)*U^(2*((3N+1)N+2)). C is chosen before all actual interval, envelope and field data. N=0 remains covered.",
+    "The final explicit target exposes the same delta/a/hs functions and the unchanged coefficient before introducing k/hk/x. Removing exactly the eight inserted lines recovers ba45e6bf byte-for-byte; all complete public headers, imports/options and numerical proofs are unchanged. This records the target-let hazard and its explicit correction rather than silently replacing history.",
+    "Every source/base/diff/provider/owner identity was verified by SHA256, Git blob and line count. The selected Exp provider is the reviewed 74-line compatibility source. The single public name has no match in current installed sources."
+  ],
+  "scope_limits": [
+    "This is a numerical all-order spatial envelope for the same fixed finite interpolation. Material specialization and any state-direction tame bounds remain separate.",
+    "No Lean compiler/elaborator or CI result; no active checkout/index/ref/CP/authority/plan or candidate source was changed."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "created_at": "2026-11-12T15:02:50.719313+00:00"
+}

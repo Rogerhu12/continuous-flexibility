@@ -1,0 +1,199 @@
+{
+  "kind": "independent_full_source_actual_height_to_material_order_parameter_loss_review",
+  "status": "PASS_STATIC_REVIEW_UNCOMPILED",
+  "author": "/root/proof_inventory",
+  "reviewer": "/root",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01ActualHeightMaterialOrderParameterOrderCandidateManifest.json",
+    "sha256": "a918a015f906b85175829d3d3f77461ea842ab2ed4f1479c27ccd7bc0bdb6589",
+    "blob": "98c04ff78706c0f083cfa211652667c6334638e7",
+    "lines": 142
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01HeightResponseBound.lean",
+      "sha256": "3e415668d0c682939e0262305b4a653b64363175f1a65032695c438cad79fb43",
+      "blob": "a6f44a716f2cc401cc5b99e88606586714b13fd8",
+      "lines": 187,
+      "target": "src/ContinuousFlexibility/Analysis/N01HeightResponseBound.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01HeightResponseBound.c5c48-base.lean.txt",
+        "sha256": "0fa6a2519578e0ea403f63b2f44629603c76db599ccf36f1456278fd3b4a5287",
+        "blob": "d188418f80d3b00ea06821957a135629e8492213",
+        "lines": 183,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01HeightResponseBound.diff",
+        "sha256": "cf0cc2e39a367ed6f699c4e447760a0d478f9bd06bf9e8c3655f1c60c5ade2df",
+        "blob": "1974f0a043e4619fbce3882d12e336abbf011beb",
+        "lines": 61
+      },
+      "public_headers_changed": [
+        "N01Properties.heightResponse_integral_bound",
+        "N01Properties.opticalTravel_le_radialHeightDirection_weight"
+      ],
+      "public_headers_preserved": [
+        "stateGrading_heightOnlyDirection",
+        "heightSpeedVariation_congr_of_eventuallyEq"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01HeightWeightConstraint.lean",
+      "sha256": "e1524c073956b9e9031afa71a2a262c92f8cf2e889980e69e92fc5fef0e90350",
+      "blob": "0823e6446596fd34c66c66f307cc4597f199defa",
+      "lines": 52,
+      "target": "src/ContinuousFlexibility/Analysis/N01HeightWeightConstraint.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01HeightWeightConstraint.c5c48-base.lean.txt",
+        "sha256": "d14c9546e1295cf0f85914a7842474b8a1e4903380c7abc06fe856dbe3653206",
+        "blob": "b0e58d7541dcbe72c0e67a80b53a64b838c579ba",
+        "lines": 52,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01HeightWeightConstraint.diff",
+        "sha256": "400a66d0c8bf28e2a624dcf7300f509a9207464097037c43f46d419134d22bd7",
+        "blob": "b0b071627e25138ee6b0ea15821c003a6ce667d0",
+        "lines": 26
+      },
+      "public_headers_changed": [
+        "N01Properties.radialHeightDirection_weight_constraint"
+      ],
+      "public_headers_preserved": [],
+      "imports_preserved": true,
+      "options_preserved": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01HeightTestWeightBridge.lean",
+      "sha256": "597907805b5d44dbfd8222a3f0f0a656d8201962d246b2ed31d93a4deba371ae",
+      "blob": "08a9f88165c5495a1e3b4c63f0d53fdeed148016",
+      "lines": 172,
+      "target": "src/ContinuousFlexibility/Analysis/N01HeightTestWeightBridge.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01HeightTestWeightBridge.c5c48-base.lean.txt",
+        "sha256": "450c7a4dc7ab32b0803c92d3f52f5c6c87f8b7dc53d9941bac1185d102d1dc23",
+        "blob": "652f53e365a6eecc4cc001aaeb012b34f2995d60",
+        "lines": 158,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01HeightTestWeightBridge.diff",
+        "sha256": "45c88ac63a36f49a54cc964f7a5b148a5b6dc4237881c8bf03434dfc2a839ff9",
+        "blob": "86c46981275141c6e946fce265a87f668a841168",
+        "lines": 124
+      },
+      "public_headers_changed": [
+        "N01Properties.balanced_constraint_of_radialHeightTests",
+        "N01Properties.actualCell_materialOrder_from_radialHeightTests",
+        "N01Properties.every_actualCell_materialOrder_from_radialHeightTests"
+      ],
+      "public_headers_preserved": [
+        "heightPairGrading_monotone"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01ActualCellMaterialOrder.lean",
+      "sha256": "77573b65c000c34a42d59bc906062b0dc0ca38cc3bf3fd8b45a7ed51698dc0ba",
+      "blob": "7d948f9a0967e915cbac1eff559abb4561f3ad4b",
+      "lines": 73,
+      "target": "src/ContinuousFlexibility/Analysis/N01ActualCellMaterialOrder.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01ActualCellMaterialOrder.c5c48-base.lean.txt",
+        "sha256": "583e21541317b7b12fef492307834629d88d3e721721c4edd785697d5bc2cba2",
+        "blob": "a78a7316131957535a4f9cfe7137c8a77cf978ba",
+        "lines": 72,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01ActualCellMaterialOrder.diff",
+        "sha256": "a8ce11353d79f5e67d4ce86d115d02e5d3f9f327c4049aa23ded1cd1bed14f9f",
+        "blob": "3123c8bbf7660c30f6c44fbf03d192b40c69f1b5",
+        "lines": 23
+      },
+      "public_headers_changed": [],
+      "public_headers_preserved": [
+        "N01Properties.actualCell_balanced_height_constraint",
+        "N01Properties.actualCell_material_order_bound",
+        "N01Properties.actualCell_weighted_order_bound"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    }
+  ],
+  "flow_provider_candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01OrdinaryFlowParameterOrderSelectedCandidateManifest.json",
+    "sha256": "a494711a4824ae753ea72b82abd218a6019581667d219addb1746df513b56509",
+    "blob": "8212abba209cf96250dfb9de5437da0e1caadb3a",
+    "lines": 132
+  },
+  "closure_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowParameterOrderDependencyClosureInventory.json",
+    "sha256": "0f5a7d859556e285e9088648bad96209590e9cb8eb0b69f90423f9c702ce1bbd",
+    "blob": "bc6c6fe716310c18f68d7c3922dc6f19cf2a76b3",
+    "lines": 4357
+  },
+  "verified_selected_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowMixedParameterBound",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowMixedParameterBound.lean",
+      "sha256": "fb4ee23443bc019b6eca3545e01ae26eb5849d46f05fc7af070896c3920c8542",
+      "blob": "36cc65de93419f34764b6b7ad23f889ec00de075",
+      "lines": 155,
+      "selected_ref": "LOCAL_HELD_PARAMETER_ORDER",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowParameterVariation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01HeightLineResponse",
+      "path": "src/ContinuousFlexibility/Analysis/N01HeightLineResponse.lean",
+      "sha256": "60fa37cbfb458045ff594c17c626b82e3c1e52e8426d07efc612b7001b549f53",
+      "blob": "f24be0e5c4321713df507eccfa4d6b8b564d5bf8",
+      "lines": 245,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowHeightResponse",
+        "ContinuousFlexibility.Analysis.N01FlowMixedParameterBound"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReverseMaterialOrderActualCell",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReverseMaterialOrderActualCell.lean",
+      "sha256": "96ad532ea8fdd3d168a8767de90e2c401b27ec851e6d662b27ffebeadc664bcc",
+      "blob": "d9f054cb3a08d0529dd0a5311eed9e8ded847919",
+      "lines": 56,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ReverseMaterialOrder",
+        "ContinuousFlexibility.Analysis.ActualRadialCellComparison"
+      ]
+    }
+  ],
+  "read_scope": [
+    "All 484 lines of the four candidate sources and all corresponding diffs; the complete selected 155-line mixed-parameter bound and pinned actual height-line response; the actual compact-height plateau construction and final every-containing-cell material-order transfer.",
+    "Exact source/base/diff/provider fingerprints and complete public headers checked; all 328 selected closure modules checked independently for SHA256, Git blob, lines and imports in the preceding completed verification."
+  ],
+  "checks": [
+    "The genuine fixed k=2 flow bound selects parameterLoss before the spatial order and retains exactly loss+parameterLoss in the high grading. The same loss is propagated through the actual height response integral and optical-travel estimate.",
+    "The mixed height direction is identified from the genuine actual-flow tower, without assuming a Schwarz swap. The endpoint integral estimate follows actual continuity and closure of the interior interval.",
+    "The optical detector identity is used only on the actual open interval. Removing endpoints is justified by their null measure; the bound combines the genuine two low terms and one high term into 3 times the selected height grading.",
+    "Each test bridge selects parameterLoss before its order n and requires both base≤n and loss+parameterLoss≤n. No parameter loss is hidden in B or asserted common to all arities.",
+    "The final actual-cell proof selects n=max(base,loss+parameterLoss) before constructing the actual compact reference-height test. It uses the real plateau norm theorem and preserves the same D,T,S,C, actual C.cell and reference-height data.",
+    "All three final actual-cell public theorem headers are byte-identical to the pinned original. The balanced height constraint and two half-order estimates give the advertised order-one material bound, including every actual containing cell.",
+    "The selected combined closure replaces precisely the six fixed-order flow/height consumers and has no missing imports or cycles. This is static source selection evidence, not a compilation result."
+  ],
+  "scope_limits": [
+    "Static review only. No compiler or elaborator was invoked and this mixed-pin closure has not passed CI.",
+    "The two 466-line upstream ordinary-flow ports have their own independent review; this receipt reviews the four downstream actual-height/material-order sources.",
+    "The larger N02N03 construction has additional consumers outside this 328-module closure and remains held until separately ported and compiled.",
+    "No active checkout/index/ref, frozen statement, resource limit or CI configuration was changed."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "created_at": "2026-11-12T15:16:15.689659+00:00"
+}

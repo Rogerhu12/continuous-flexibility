@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "kind": "actual_height_response_to_actual_cell_material_order_parameter_loss_port",
+  "status": "HELD_UNCOMPILED_PEER_PENDING",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01HeightResponseBound.lean",
+      "sha256": "3e415668d0c682939e0262305b4a653b64363175f1a65032695c438cad79fb43",
+      "blob": "a6f44a716f2cc401cc5b99e88606586714b13fd8",
+      "lines": 187,
+      "target": "src/ContinuousFlexibility/Analysis/N01HeightResponseBound.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01HeightResponseBound.c5c48-base.lean.txt",
+        "sha256": "0fa6a2519578e0ea403f63b2f44629603c76db599ccf36f1456278fd3b4a5287",
+        "blob": "d188418f80d3b00ea06821957a135629e8492213",
+        "lines": 183,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01HeightResponseBound.diff",
+        "sha256": "cf0cc2e39a367ed6f699c4e447760a0d478f9bd06bf9e8c3655f1c60c5ade2df",
+        "blob": "1974f0a043e4619fbce3882d12e336abbf011beb",
+        "lines": 61
+      },
+      "public_headers_changed": [
+        "N01Properties.heightResponse_integral_bound",
+        "N01Properties.opticalTravel_le_radialHeightDirection_weight"
+      ],
+      "public_headers_preserved": [
+        "stateGrading_heightOnlyDirection",
+        "heightSpeedVariation_congr_of_eventuallyEq"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01HeightWeightConstraint.lean",
+      "sha256": "e1524c073956b9e9031afa71a2a262c92f8cf2e889980e69e92fc5fef0e90350",
+      "blob": "0823e6446596fd34c66c66f307cc4597f199defa",
+      "lines": 52,
+      "target": "src/ContinuousFlexibility/Analysis/N01HeightWeightConstraint.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01HeightWeightConstraint.c5c48-base.lean.txt",
+        "sha256": "d14c9546e1295cf0f85914a7842474b8a1e4903380c7abc06fe856dbe3653206",
+        "blob": "b0e58d7541dcbe72c0e67a80b53a64b838c579ba",
+        "lines": 52,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01HeightWeightConstraint.diff",
+        "sha256": "400a66d0c8bf28e2a624dcf7300f509a9207464097037c43f46d419134d22bd7",
+        "blob": "b0b071627e25138ee6b0ea15821c003a6ce667d0",
+        "lines": 26
+      },
+      "public_headers_changed": [
+        "N01Properties.radialHeightDirection_weight_constraint"
+      ],
+      "public_headers_preserved": [],
+      "imports_preserved": true,
+      "options_preserved": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01HeightTestWeightBridge.lean",
+      "sha256": "597907805b5d44dbfd8222a3f0f0a656d8201962d246b2ed31d93a4deba371ae",
+      "blob": "08a9f88165c5495a1e3b4c63f0d53fdeed148016",
+      "lines": 172,
+      "target": "src/ContinuousFlexibility/Analysis/N01HeightTestWeightBridge.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01HeightTestWeightBridge.c5c48-base.lean.txt",
+        "sha256": "450c7a4dc7ab32b0803c92d3f52f5c6c87f8b7dc53d9941bac1185d102d1dc23",
+        "blob": "652f53e365a6eecc4cc001aaeb012b34f2995d60",
+        "lines": 158,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01HeightTestWeightBridge.diff",
+        "sha256": "45c88ac63a36f49a54cc964f7a5b148a5b6dc4237881c8bf03434dfc2a839ff9",
+        "blob": "86c46981275141c6e946fce265a87f668a841168",
+        "lines": 124
+      },
+      "public_headers_changed": [
+        "N01Properties.balanced_constraint_of_radialHeightTests",
+        "N01Properties.actualCell_materialOrder_from_radialHeightTests",
+        "N01Properties.every_actualCell_materialOrder_from_radialHeightTests"
+      ],
+      "public_headers_preserved": [
+        "heightPairGrading_monotone"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01ActualCellMaterialOrder.lean",
+      "sha256": "77573b65c000c34a42d59bc906062b0dc0ca38cc3bf3fd8b45a7ed51698dc0ba",
+      "blob": "7d948f9a0967e915cbac1eff559abb4561f3ad4b",
+      "lines": 73,
+      "target": "src/ContinuousFlexibility/Analysis/N01ActualCellMaterialOrder.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01ActualCellMaterialOrder.c5c48-base.lean.txt",
+        "sha256": "583e21541317b7b12fef492307834629d88d3e721721c4edd785697d5bc2cba2",
+        "blob": "a78a7316131957535a4f9cfe7137c8a77cf978ba",
+        "lines": 72,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01ActualCellMaterialOrder.diff",
+        "sha256": "a8ce11353d79f5e67d4ce86d115d02e5d3f9f327c4049aa23ded1cd1bed14f9f",
+        "blob": "3123c8bbf7660c30f6c44fbf03d192b40c69f1b5",
+        "lines": 23
+      },
+      "public_headers_changed": [],
+      "public_headers_preserved": [
+        "N01Properties.actualCell_balanced_height_constraint",
+        "N01Properties.actualCell_material_order_bound",
+        "N01Properties.actualCell_weighted_order_bound"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    }
+  ],
+  "source_lines": 484,
+  "selected_generic_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+  "selected_N01_contract_ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+  "flow_provider_candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01OrdinaryFlowParameterOrderSelectedCandidateManifest.json",
+    "sha256": "a494711a4824ae753ea72b82abd218a6019581667d219addb1746df513b56509",
+    "blob": "8212abba209cf96250dfb9de5437da0e1caadb3a",
+    "lines": 132
+  },
+  "changes": [
+    "The same selected fixed k=2 parameterLoss is retained through the genuine actual height response integral, optical-travel detector and radial-cell constraint.",
+    "The three test-bridge helpers now select that parameterLoss before the test order n and require loss + parameterLoss ≤ n. No parameter loss is folded into B or assumed uniform across all k.",
+    "The actual compact reference-height test is constructed only after fixing n=max(base,loss+parameterLoss). The genuine plateau norm theorem then supplies the required test at that order.",
+    "All three final N01ActualCellMaterialOrder public headers are byte-identical to c5. They retain the actual C.cell and every actual containing cell, the fixed material-order conclusions and the same original D/T/S/C.",
+    "All actual integral/closure/response identities, material absorption algebra, graded monotonicity and final every-cell transfer arguments remain the original proofs aside from the explicit grading-order propagation."
+  ],
+  "required_closure_update": "The historical 279/328 graphs remain immutable. A new combined selected overlay for these four sources and the two fixed-order providers will be produced after static checks.",
+  "compiled": false,
+  "green_receipt_applies": false,
+  "independent_reviews": [],
+  "created_at": "2026-11-12T15:10:56.769985+00:00"
+}

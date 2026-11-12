@@ -1,0 +1,31 @@
+{
+  "kind": "same_displayed_reference_taylor_width_all_order_reviewed_source",
+  "status": "HELD_INDEPENDENTLY_REVIEWED_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/reference-taylor-allorder-target/PositiveReferenceTaylorAllOrderJets.lean",
+    "sha256": "746552dcbbe5c8e84f6b8e374fe4b55a881979e5057ba00322fed1e76413c9d1",
+    "blob": "7f7f56056f73d99812b07986bd0f5f5e0863f044",
+    "lines": 173
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/reference-taylor-allorder-target/PositiveReferenceTaylorAllOrderJetsTargetCandidateManifest.json",
+    "sha256": "28072f060df02969f8d516ef3e695bcb00b5c122ff60d858f882f18518b8b362",
+    "blob": "919cdf34d0f73f888a5d3b891b5d49ea7f1ca2d0",
+    "lines": 35
+  },
+  "historical_candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceTaylorAllOrderJetsCandidateManifest.json",
+    "sha256": "f2d4c90b065a22620fe63e30f019b8fdbaff935463d9f4cb329922f6a41b4672",
+    "blob": "46371ddd13f6e197095be7f34ca1ac4a58a70e4a",
+    "lines": 118
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/PositiveReferenceTaylorAllOrderJetsIndependentReview.json",
+    "sha256": "024c10d5d3ffa933ae3c109a4cc1537b1a3ada7540f497259dfb516aaf6625d7",
+    "blob": "0a67932a2f2549939754cd4295e8cb617caf191e",
+    "lines": 125
+  },
+  "scope": "Fixed degree and displayed delta before all derivative orders. Only the numerical bound grows with N; actual ys/hs/Y/H remain unchanged. Ordinary spatial jets only.",
+  "historical_source_preserved": true,
+  "compiled": false
+}

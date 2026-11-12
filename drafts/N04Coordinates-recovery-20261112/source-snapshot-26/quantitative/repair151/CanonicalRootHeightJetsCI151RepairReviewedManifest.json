@@ -1,0 +1,35 @@
+{
+  "kind": "ci151_canonical_root_height_quotient_repair_reviewed_source",
+  "status": "INDEPENDENTLY_REVIEWED_UNCOMPILED_READY_FOR_ROOT_CI_SELECTION",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair151/CanonicalRootHeightJets.lean",
+    "sha256": "28419f4e1fab3de13761c4b1c889797c981bcb64cc7743a95579b2f2e23af6c5",
+    "blob": "6d38c1f135519afb293d8de4e11e44e59af3dcf9",
+    "lines": 214,
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalRootHeightJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.CanonicalRootRelativeJets"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair151/CanonicalRootHeightJetsCI151RepairCandidateManifest.json",
+    "sha256": "ecf662a931810787d05e49b915752c20fc74d26b94a8244b9fc1e143d1a37976",
+    "blob": "9beac191d7f0d3eb6379a8dccb7a5306e089063d",
+    "lines": 101
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI151CanonicalRootHeightQuotientIndependentReview.json",
+    "sha256": "e96acd5c02ddf4ec983a8ad9a8fe5e95d7d87c6a9ff4f704d268ee91c9536920",
+    "blob": "4f40eda312c255beb4bb5fd641770f4b7bcbd145",
+    "lines": 118
+  },
+  "actual_base": {
+    "head": "d3518effba4e07790e04e66cdf347cde1daa6f71",
+    "tree": "f42883129f85f117a2f5ab4ed3e4d5f951fbdcf2",
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalRootHeightJets.lean"
+  },
+  "scope": "Private generic quotient specialization of the exact existing product supplier. Same selected low order/loss/envelope and original actual functions. Public headers/imports/options and actual root point retained.",
+  "prior_frozen_repairs_preserved": true,
+  "compiled": false,
+  "performance_confirmation": "Pending the next real CI; no local compiler/elaborator or CI query was run."
+}

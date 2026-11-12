@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "parameter_order_source_reviewed_manifest",
+  "status": "HELD_STATIC_REVIEWED_UNCOMPILED_MIXED_PIN",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarCircleMemberCandidateManifest.json",
+    "sha256": "23ecfe5bdd9532c6e8308655dea7908264cf7006e754de7dc0f505a2f1aa9c41",
+    "blob": "e8d294c4d513ae06d4f742364417231a63e311f4",
+    "lines": 53
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarCircleMember.lean",
+      "sha256": "982eac1e60acf97ad1906422783a4cff5003905b2de516b616505edb5a919538",
+      "blob": "615ebbd2ffa65d62d8344671b90cf6167348d854",
+      "lines": 125,
+      "target": "src/ContinuousFlexibility/Analysis/N01EndpointScalarCircleMember.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarCircleMember.c5c48-base.lean.txt",
+        "sha256": "b6cc40504a1967754b5ffbfd64b68363af2c248a31b067e478094984ba185c81",
+        "blob": "991fd54a8f83c2b1758ef1da8d00ea1a67d0104b",
+        "lines": 121,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarCircleMember.diff",
+        "sha256": "6017cd961f2cc6d6349372b5ab251bc0efdde0190fd2967ab5dd749b2146739b",
+        "blob": "8907bed2b5295434adfb822534ab1f8957222406",
+        "lines": 34
+      },
+      "unchanged_private_block_sha256": "bfef2ddd5d847333329088cac286485f5c805668851bf0a7a87e88dbb6f8e133",
+      "qualitative_public_header_identical": true
+    }
+  ],
+  "source_lines": 125,
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/N01EndpointScalarCircleMemberParameterOrderIndependentReview.json",
+    "sha256": "6110a690f4a798377b3cf725c95ff9edfb7928990df001815f1140a2024b2104",
+    "blob": "707cd1c330077cecd5a4a04c2099cfd5c311b723",
+    "lines": 101
+  },
+  "closure_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarCircleMemberClosureInventory.json",
+    "sha256": "a000af12bf0f6f9fc260a547f3498a3913ac2b75203b8bfa10aded4c5a0e26a1",
+    "blob": "6b073aa0f76b80347f103d599315d377c8410f47",
+    "lines": 3578
+  },
+  "reviewed_inputs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01ScalarHeightParameterOrderReviewedManifest.json",
+      "sha256": "4f40463cc770495fd34b5c425d15db1f7b0cd1c87854cca5e0fa78b0fa5108ff",
+      "blob": "3050ebb6d57b199f0d52711dafeec8ef3986d8c5",
+      "lines": 96
+    }
+  ],
+  "scope": [
+    "Full source and actual provider static independent review passed; candidate and all frozen predecessors remain unchanged.",
+    "Parameter-order loss remains selected after the actual fixed arity and before every spatial order or energy output.",
+    "This owner record is not compiled, installed or a complete N02/N03 fixed-witness result."
+  ],
+  "compiled": false,
+  "green_receipt_applies": false,
+  "active_source_index_refs_ci_untouched": true,
+  "created_at": "2026-11-12T15:01:24.095619+00:00"
+}
