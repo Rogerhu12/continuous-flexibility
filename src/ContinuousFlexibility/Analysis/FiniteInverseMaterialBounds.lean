@@ -126,7 +126,8 @@ theorem nonlinearInverse_finitePrefix_weighted_bound
     (hinverse z hz m x hx) (hforward z hz m x hx) (hgerm z hz m x hx)
     (fderiv ℝ (forward z m) x) (hleft z hz m x hx) hfirstM hraw
   have hb' : ‖iteratedFDeriv ℝ k (forward z m) x‖ ≤ c i * M ^ degree i := by
-    simpa only [hik] using hb
+    rw [← hik]
+    exact hb
   calc
     _ ≤ c i * M ^ degree i := hb'
     _ ≤ Cpoly * M ^ d :=

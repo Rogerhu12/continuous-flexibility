@@ -85,7 +85,8 @@ theorem material_oneSided_endpoint_comparison
         _ = _ := by ring
     exact (div_le_iff₀ hHspos).mpr (hpoint.trans_eq (by ring))
   · have hfirst : T.E0 s ^ R ≤ CE ^ R * materialE0 (X s) ^ R := by
-      have hp := Real.rpow_le_rpow hEspos.le hEs hR
+      have hEs' : T.E0 s ≤ CE * materialE0 (X s) := hEs
+      have hp := Real.rpow_le_rpow hEspos.le hEs' hR
       simpa only [Real.mul_rpow hCEpos.le (materialE0_pos (X s)).le] using hp
     calc
       _ ≤ CE ^ R * materialE0 (X s) ^ R := hfirst

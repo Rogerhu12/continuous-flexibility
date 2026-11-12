@@ -24,6 +24,16 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S}
   {K : CanonicalData S} {base : ℕ} {ε : ℝ}
 
+private theorem n04Realization_directional_bounds_congr
+    {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    {U : Set E} {f g : E → F}
+    {P : (∀ k : ℕ, E → E [×k]→L[ℝ] F) → Prop}
+    (hfg : f = g) (h : ∃ J : SmoothDirections U f, P J.D) :
+    ∃ J : SmoothDirections U g, P J.D := by
+  cases hfg
+  exact h
+
 /-- Each atom agrees as a complete spatial function on an admissible state.
 In particular, no equality of isolated values is used to transport jets. -/
 theorem n04Realization_atom_normalized_of_sector
@@ -33,7 +43,8 @@ theorem n04Realization_atom_normalized_of_sector
   classical
   funext p
   cases hm : K.positive m <;> cases a <;>
-    simp only [atom, normalizedCanonicalData, hz, hm, Bool.false_eq_true,
+    simp only [atom, normalizedCanonicalData, physicalUnitPoint, canonicalUnitPoint,
+      canonicalSource, hz, hm, Bool.false_eq_true,
       true_and, ite_true, ite_false]
 
 /-- The actual state-dependent difference-jet map is unchanged, including
@@ -77,8 +88,11 @@ theorem n04Realization_currentJets_normalized
     simpa only [n04Realization_atom_normalized_of_sector
       (z := liftSectorParameter S C z)
       (href.liftSectorParameter_sector z)] using h.1 z hz m a
-  · simpa only [n04Realization_differenceJets_normalized href,
-      normalizedCanonicalData_cell] using h.2
+  · constructor
+    · simpa only [n04Realization_differenceJets_normalized href,
+        normalizedCanonicalData_cell] using h.2.1
+    · exact n04Realization_directional_bounds_congr
+        (n04Realization_differenceJets_normalized href).symm h.2.2
 
 /-- Reference principal coefficients are not modified. The reference
 potential is retained because the reference state belongs to the sector. -/

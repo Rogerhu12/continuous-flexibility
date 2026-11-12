@@ -169,7 +169,7 @@ theorem n04Realization_materialDirection_envelopes
   filter_upwards [(n07bSourceMaterialPiece_isOpen hT hgeom (hz x) (hs x) (m x)).mem_nhds
     (hp x)] with y hy
   exact (n04Realization_materialDirectionDrift_eqOn hT hgeom
-    (hz x) (hs x) (m x) (Y x) y hy).symm
+    (hz x) (hs x) (m x) (Y x) hy).symm
 
 /-- The common normalizer keeps the same height-ratio power under every
 derivative. Only the reciprocal value of the positive density is needed

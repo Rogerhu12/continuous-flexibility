@@ -74,7 +74,7 @@ theorem n04Realization_envelope_of_product_bound
   have hB : 0 < B := by dsimp only [B]; positivity
   have hAB : A ≤ B := by
     dsimp only [B]
-    linarith only [Nat.cast_nonneg (R := ℝ) d]
+    linarith only [Nat.cast_nonneg (α := ℝ) d]
   have hdB : (d : ℝ) ≤ B := by dsimp only [B]; linarith only [hA]
   refine ⟨C + 1, B, by positivity, hB, fun x => ?_⟩
   have hE0 : 0 ≤ E x := zero_le_one.trans (hE x)

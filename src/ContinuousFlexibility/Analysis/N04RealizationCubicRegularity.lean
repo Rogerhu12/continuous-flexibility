@@ -57,10 +57,11 @@ def n04Realization_mixedJetRegularity_of_staticFactorization
   let P := F.mul W hU hΩ
   have heq : ∀ x ∈ U, EqOn (fun q => f x q * (d q)⁻¹) (g x) Ω := by
     intro x hx q hq
+    change f x q * (d q)⁻¹ = g x q
     rw [hfactor x hx q hq]
     field_simp [hne q hq] <;> ring
   exact P.congr hΩ
-    (fun x hx => (P.spatial x hx).congr (fun q hq => (heq x hx q hq).symm)) heq
+    (fun x hx => (P.spatial x hx).congr (fun q hq => (heq x hx hq).symm)) heq
 
 /-- Reflection maps the same open cylinder to itself. -/
 theorem n04Realization_reflect_mem_cylinder {R : ℝ} {p : PolarPoint}

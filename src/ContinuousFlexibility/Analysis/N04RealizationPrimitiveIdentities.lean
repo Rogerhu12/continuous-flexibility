@@ -54,7 +54,10 @@ theorem n04Realization_referenceDirection_eqOn
     exact (hc.2.2.2.2.2.1.contDiffAt
       ((isOpen_Ioo.prod isOpen_univ).mem_nhds hq)).differentiableAt (by simp)
   change fderiv ℝ (K.inverseChart z m ∘ K.chart (C.referenceState, 0) m)
-    (K.inverseChart (C.referenceState, 0) m (K.chart z m x)) e = _
+    (K.inverseChart (C.referenceState, 0) m (K.chart z m x)) e =
+      fderiv ℝ (K.inverseChart z m) (K.chart z m x)
+        (fderiv ℝ (K.chart (C.referenceState, 0) m)
+          (K.inverseChart (C.referenceState, 0) m (K.chart z m x)) e)
   rw [fderiv_comp _ hG hF, ContinuousLinearMap.comp_apply, he]
 
 /-- The current primitive direction is the angular column of the genuine
@@ -113,7 +116,9 @@ theorem n04Realization_materialJacobian_inverse_eqOn
   have hj := n07a_actual_inverseChart_jacobian_abs hgeom hz hs m (hc.1 hy)
   rw [hc.2.2.1 _ hy] at hj
   change (T.ell (T.radius y.1) *
-    |planeJacobian (K.chart z m) (n07bMaterialRadiusChart T y)|)⁻¹ = _
+    |planeJacobian (K.chart z m) (n07bMaterialRadiusChart T y)|)⁻¹ =
+      (T.ell (T.radius y.1))⁻¹ *
+        |planeJacobian (K.inverseChart z m) (K.chart z m (n07bMaterialRadiusChart T y))|
   rw [mul_inv_rev, hj, mul_comm]
 
 /-- The source factor is evaluated at the current canonical point. -/
@@ -187,9 +192,21 @@ theorem n04Realization_materialReferenceHeightRatio_eqOn
     exact (div_mul_cancel₀ _ hdet).symm
   change K.height (C.referenceState, 0) m
     (canonicalReferencePoint C K z m (n07bMaterialRadiusChart T y)) /
-      K.height z m (n07bMaterialRadiusChart T y) = _
+      K.height z m (n07bMaterialRadiusChart T y) =
+    canonicalSource S K (C.referenceState, 0) m (fun _ => 1)
+        (K.chart z m (n07bMaterialRadiusChart T y)) *
+      |planeJacobian (K.chart (C.referenceState, 0) m)
+        (canonicalReferencePoint C K z m (n07bMaterialRadiusChart T y))| *
+      (canonicalSource S K z m (fun _ => 1)
+        (K.chart z m (n07bMaterialRadiusChart T y)))⁻¹ *
+      |planeJacobian (K.inverseChart z m) (K.chart z m (n07bMaterialRadiusChart T y))|
+  have hInv : (K.height z m (n07bMaterialRadiusChart T y))⁻¹ =
+      (canonicalSource S K z m (fun _ => 1)
+        (K.chart z m (n07bMaterialRadiusChart T y)))⁻¹ *
+      |planeJacobian (K.inverseChart z m) (K.chart z m (n07bMaterialRadiusChart T y))| :=
+    n04Realization_materialHeightInverse_eqOn (T := T) hgeom hz hs m hy
   rw [div_eq_mul_inv, hheight,
-    n04Realization_materialHeightInverse_eqOn hgeom hz hs m y hy]
+    hInv]
   ring
 
 end ContinuousFlexibility.Analysis

@@ -69,11 +69,13 @@ theorem n04Realization_smoothDirections_integral_jets
         simpa only [zero_smul, add_zero] using hline.tendsto 0
       have hnear : ∀ᶠ t in 𝓝 (0 : ℝ), x + t • w ∈ U :=
         hline0.eventually (Q.open_domain.mem_nhds hx)
+      have hGlineContinuous : Continuous
+          (fun t : ℝ => G (k + 1) (x + t • w, Fin.cons w u)) :=
+        (hG (k + 1)).comp (hline.prodMk continuous_const)
       have hGline : Tendsto
           (fun t : ℝ => G (k + 1) (x + t • w, Fin.cons w u))
           (𝓝 0) (𝓝 (G (k + 1) (x, Fin.cons w u))) := by
-        simpa only [zero_smul, add_zero] using
-          ((hG (k + 1)).comp (hline.prodMk continuous_const)).tendsto 0
+        simpa only [zero_smul, add_zero] using hGlineContinuous.tendsto 0
       have hnearBound : ∀ᶠ t in 𝓝 (0 : ℝ),
           G (k + 1) (x + t • w, Fin.cons w u) ≤ B :=
         hGline.eventually_le_const ((le_abs_self _).trans_lt (lt_add_one _))
