@@ -55,7 +55,7 @@ theorem n05_reference_height_deriv_unitAtom
     have hscale : HasDerivAt (fun t : ℝ => (ell⁻¹ : ℝ) • (t - a))
         ((ell⁻¹ : ℝ) • (1 : ℝ)) r :=
       HasDerivAt.fun_const_smul (ell⁻¹ : ℝ) hsub
-    simpa only [smul_eq_mul, mul_one, div_eq_mul_inv, mul_comm] using hscale
+    simpa only [smul_eq_mul, mul_one, one_mul, div_eq_mul_inv, mul_comm] using hscale
   have hd : HasDerivAt (fun t => A ((t - a) / ell, 0))
       (deriv (fun t => A (t, 0)) x * ell⁻¹) r := by
     have houter : HasFDerivAt (fun t : ℝ => A (t, 0))
