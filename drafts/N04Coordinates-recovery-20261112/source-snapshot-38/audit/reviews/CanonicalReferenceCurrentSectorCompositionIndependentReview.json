@@ -1,0 +1,110 @@
+{
+  "kind": "independent_canonical_sector_composition_compatibility_review",
+  "owner": "/root/audit_coordinates",
+  "status": "PASSED_STATIC_EXACT_DELTA_AND_ACTUAL_REWRITE_REVIEW_UNCOMPILED",
+  "proposed_backup_path": "audit/reviews/CanonicalReferenceCurrentSectorCompositionIndependentReview.json",
+  "scope": "Read the complete original and final 182-line source, verify the exact four-token replacement, and independently check the actual higher-order atom/unit-inverse rewrite and pinned comp API. This receipt does not replace the owner quantitative_route's full mathematical review of the combined 109+182 source pair.",
+  "candidate_manifest": {
+    "blob": "e162ddb2845d9b3554f366d0081116a345bf41c7",
+    "sha256": "01da95d64b202ebdc9dbee93e89592f678e1b1afcc374943f347ee404ffa2905"
+  },
+  "original": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceCurrentSectorBounds.lean",
+    "sha256": "eb172cebbdc78d439c150c38aa23c945c488d614b5255f8d0736c928ddb94731",
+    "blob": "14715ca2fbc5ad6b63e18b324e88817c96e245b7",
+    "bytes": 9203,
+    "lines": 182
+  },
+  "selected": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/sector-atom-comp-def/CanonicalReferenceCurrentSectorBounds.lean",
+    "target_path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentSectorBounds.lean",
+    "sha256": "ee6719537036a2f020dc9355902c42c9ac1c2eecb6b16ce8739b38beceafaa51",
+    "blob": "8dcc2e224e6eb437764407ba8ae16c631106f685",
+    "bytes": 9195,
+    "lines": 182
+  },
+  "exact_delta": [
+    {
+      "line": 147,
+      "before": "    simpa only [n07aCanonicalAtomField, Function.comp_apply, CanonicalGeometry.atom,",
+      "after": "    simpa only [n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,"
+    },
+    {
+      "line": 157,
+      "before": "        simpa only [n07aCanonicalAtomField, Function.comp_apply, CanonicalGeometry.atom,",
+      "after": "        simpa only [n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,"
+    },
+    {
+      "line": 161,
+      "before": "        simpa only [n07aCanonicalAtomField, Function.comp_apply, CanonicalGeometry.atom,",
+      "after": "        simpa only [n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,"
+    },
+    {
+      "line": 165,
+      "before": "        simpa only [n07aCanonicalAtomField, Function.comp_apply, CanonicalGeometry.atom,",
+      "after": "        simpa only [n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,"
+    }
+  ],
+  "mechanical_checks": {
+    "four_replacements_only": true,
+    "reverse_replacement_recovers_exact_original": true,
+    "public_declaration_headers_identical": true,
+    "imports_identical": true,
+    "options_identical": true,
+    "all_other_bytes_identical": true,
+    "lines_original": 182,
+    "lines_final": 182,
+    "bytes_original": 9203,
+    "bytes_final": 9195
+  },
+  "actual_providers": [
+    {
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aCanonicalAtomBounds.lean",
+      "selected_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "reviewed_fetch_ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "blob": "7f58525255a1dd409689e8b21ba4bab30a4af3c5",
+      "sha256": "a162c68611e25b6851e7d0a582437100ddd24c28ec65acd32ee002975087b0e7",
+      "source_bytes": 4894,
+      "whole_source_read": true
+    },
+    {
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "selected_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "reviewed_fetch_ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "sha256": "bbec6c5ccb9e0d9bcf75516b8c9024e4f15c2e834119822ace6da3c4e70fd51c",
+      "source_bytes": 5638,
+      "whole_source_read": true
+    }
+  ],
+  "actual_atom_definition": {
+    "repo_path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+    "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+    "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+    "read_scope": "1000-1125, including all 33 actual atom clauses and canonicalUnitPoint"
+  },
+  "pinned_lean_api": {
+    "repository": "leanprover/lean4",
+    "ref": "v4.35.0-rc3",
+    "path": "src/Init/Core.lean",
+    "blob": "23e784c3806badcabd1e8f19c50946d66bc3c87a",
+    "sha256": "264a0b48fedc91fadf55fc5caac8d91003e3908a6e5e42736e2ac8bf1f7cdf99",
+    "comp_apply_line": 70,
+    "comp_def_line": 72,
+    "comp_apply": "Function.comp_apply : comp f g x = f (g x)",
+    "comp_def": "Function.comp_def (f : β → δ) (g : α → β) : f ∘ g = fun x => f (g x)"
+  },
+  "findings": [
+    "n07aCanonicalAtomField is literally the unapplied function CanonicalGeometry.atom ... ∘ n07aCanonicalUnitInversePoint K m. It is supplied as the higher-order function argument of mixedDerivative.",
+    "The pinned comp_def equality rewrites that entire composition to a lambda without requiring the application argument that occurs in comp_apply's left side.",
+    "After expanding the actual potential or divided atom clause, the lambda contains canonicalUnitPoint K m (n07aCanonicalUnitInversePoint K m p). The actual n07aCanonicalUnitPoint_inverse theorem holds for every p under the existing interval hypothesis, so the listed rewrite has the correct direction and needs no additional domain premise.",
+    "hwLift identifies the same actual state z in all four clauses. The divided clauses retain the same hpos Bool branch; no state, atlas, sample, constant, loss or derivative order changes.",
+    "The final lambda reduces to the original K.potential or selected dividedDifference coefficient as a function, so mixedDerivative receives the intended full function rather than only a point equality."
+  ],
+  "limitations": [
+    "The original comp_apply source was not compiled here. This is a static elaboration-risk correction, not a claim of an observed original compiler error.",
+    "No Lean/compiler/elaboration, CI API, exec, active source, index, ref or commit operation was performed.",
+    "The old selected graph does not by itself name the new root blob. The candidate explicitly requires a later exact selected-graph replacement before activation; no full-DAG typecheck is claimed.",
+    "The historical original source and full review remain immutable."
+  ]
+}

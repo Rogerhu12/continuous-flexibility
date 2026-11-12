@@ -1,0 +1,79 @@
+{
+  "kind": "exact_head_full_green_and_verified_default_import_coverage",
+  "run_id": 43285158817,
+  "job_id": 131416494593,
+  "head": "c796387fb555392501c81f5b8bd834936251516c",
+  "tree": "08257c9406671ac1f094b739e4971c1eca108c66",
+  "conclusion": "success",
+  "default_libraries": [
+    "ContinuousFlexibility",
+    "AxiomAudit",
+    "FlexibleSphereChallenge",
+    "FlexibleSphereSolution"
+  ],
+  "build_jobs": 8283,
+  "generated_root_imports": 4241,
+  "verified_current_project_module_coverage": 4297,
+  "current_project_modules": 4302,
+  "all_src_lean_modules": 4306,
+  "root_excluded_project_modules": [
+    "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+    "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth"
+  ],
+  "unlinked_Blueprint_modules_not_certified_by_this_count": [
+    "ContinuousFlexibility.Blueprint.CanonicalParts",
+    "ContinuousFlexibility.Blueprint.N01c.Coefficients",
+    "ContinuousFlexibility.Blueprint.N01c.Statements"
+  ],
+  "coverage_method": "Exact c796 tree and four lakefile srcDir mappings; source-based generator selection for counting, plus actual Blueprint/default-root import headers. This is verified current-source coverage through default roots, not a claim about every cached olean. No local scripts or Lean were run.",
+  "cached_olean_count": 4634,
+  "cached_olean_count_is_current_source_count": false,
+  "supersedes_unverified_coverage_estimate": 4300,
+  "blueprint": {
+    "proved": 37,
+    "total": 42,
+    "open": [
+      "N01c",
+      "N02N03",
+      "N04b",
+      "N04Coordinates",
+      "N05"
+    ]
+  },
+  "endpoint": {
+    "N04Coordinates": "OPEN",
+    "FlowJets": "PROVED",
+    "Realization": "OPEN"
+  },
+  "log": {
+    "blob": "38c62a4003e8ed2bbc2f9f16e5c7a66244fe1da6",
+    "sha256": "3bb765d233d26e322e293c78dbd7cec7e9fc597427ba58dd95de647f86852501",
+    "downloaded_once": true
+  },
+  "preserved_records": [
+    {
+      "name": "n04-ci-164.log",
+      "blob": "38c62a4003e8ed2bbc2f9f16e5c7a66244fe1da6",
+      "sha256": "3bb765d233d26e322e293c78dbd7cec7e9fc597427ba58dd95de647f86852501",
+      "bytes": 73483,
+      "lines": 885
+    },
+    {
+      "name": "n04-ci-164-run-complete.json",
+      "blob": "137dca9fe3e1f32a8a5a2c6070be1075cd577a28",
+      "sha256": "83be298deb4ddd788e48e3c1358abfc4f854c2884382c8a4231f3e183fc3dfd9",
+      "bytes": 15966,
+      "lines": 248
+    },
+    {
+      "name": "n04-ci-164-jobs-complete.json",
+      "blob": "05eac0590c824ddfa41f0a9a17d07b1bd0119b63",
+      "sha256": "5f7706688235917df710e4ee381378f40bbc7354b31edac9e711367004581059",
+      "bytes": 4045,
+      "lines": 152
+    }
+  ],
+  "coverage_sha256": "1ab3afcc1b5e40bb08fc6665bdddc3e7af3b5b8c1ffcb0561a7f3fdffb85d102",
+  "ci_iteration": 164,
+  "github_run_number": 1826
+}

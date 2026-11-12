@@ -1,0 +1,15 @@
+{
+  "pushed": true,
+  "head": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+  "parent": "c796387fb555392501c81f5b8bd834936251516c",
+  "tree": "49237cc2b902342c4a42b86d653fb00770d65d60",
+  "pushed_and_verified_at": "2026-11-12 20:46:21 UTC",
+  "main_rules_head": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "source_changes": 112,
+  "added_Lean": 19736,
+  "deleted_Lean": 6,
+  "with_CI_generated_imports": 19846,
+  "force": false,
+  "only_parent_c796": true,
+  "CI165_run_status": "not queried yet; wait at least five minutes"
+}

@@ -1,0 +1,1716 @@
+{
+  "kind": "remote_reviewed_CI165_source_only_tree_plan",
+  "created_at": "2026-11-12 20:42:00 UTC",
+  "branch": "line/N04Coordinates",
+  "baseline_head": "c796387fb555392501c81f5b8bd834936251516c",
+  "baseline_tree": "08257c9406671ac1f094b739e4971c1eca108c66",
+  "green_receipt": {
+    "blob": "44525c48c74a4b1637cb9c3c2ef5239ca01f916e",
+    "sha256": "9663e24ef1d3447942da9831960d288c8c3018a81b813ad2b0eed7a4453c681d"
+  },
+  "main_rules_head": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "rules": {
+    "AGENTS": "e6835ac7265ded9040e63ea60908e8f91f645f7d",
+    "tasksREADME": "57b252cad32de311bf2bd20390eab2b11e936006"
+  },
+  "files": [
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualNegativeOppositeRootFields",
+      "path": "src/ContinuousFlexibility/Analysis/ActualNegativeOppositeRootFields.lean",
+      "blob": "5b0d8327ff2054595a95f053d2f5e82afeabc2dd",
+      "sha256": "c0650b4a9db498e63f79036a37b29d1b97dbee449a3209fbf32290456faa4626",
+      "lines": 256,
+      "imports": [
+        "ContinuousFlexibility.Analysis.RootTravelOppositeCoordinates",
+        "ContinuousFlexibility.Analysis.N04bActualAtlasGerms"
+      ],
+      "kind": "reviewed_coordinate_leaf",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+      "path": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceEndpointData.lean",
+      "blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+      "sha256": "5996158db4711a93a40aeb62b7e21f9582b3da5c0959582efa48b6793ffa50bf",
+      "lines": 160,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+        "ContinuousFlexibility.Analysis.WholePositiveEndpointFields"
+      ],
+      "kind": "reviewed_reference_family_prefix",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation",
+      "path": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceInterpolation.lean",
+      "blob": "89bec50456142fde3eb21c28e397456a000b0548",
+      "sha256": "43b9332cf208881b0894b69379c7767dcbed46d00dd6d93ab7b580a6ea8c5ce5",
+      "lines": 80,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+        "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets"
+      ],
+      "kind": "reviewed_reference_family_prefix",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+      "path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean",
+      "blob": "7d2ff0fac9e08218174cd6870ba79b8529aa8a01",
+      "sha256": "f88706279e2902514c3bda2fdd618785c19d2be4f848d1eaf44758e2bdfd7f27",
+      "lines": 126,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+        "ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary",
+        "ContinuousFlexibility.Analysis.N04bActualAtlasCuts"
+      ],
+      "kind": "reviewed_reference_family_prefix",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+      "path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean",
+      "blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+      "sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+      "lines": 156,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity",
+        "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+        "ContinuousFlexibility.Analysis.N01OpticalCollarPositivity",
+        "ContinuousFlexibility.Analysis.N04bActualRootInterior"
+      ],
+      "kind": "reviewed_reference_family_prefix",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalCurrentUniformCloseness",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean",
+      "blob": "ca4ff618fbc4e869ccc7195c8244ee965e4f2bbc",
+      "sha256": "542b75aa28930a3e7303536ea2ff712e20c0b7a49689e1eaf9d857f400c90aa0",
+      "lines": 94,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aNeighborhood",
+        "ContinuousFlexibility.Analysis.MaterialSampleBounds"
+      ],
+      "kind": "reviewed_coordinate_leaf",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalPositiveReferenceFamily.lean",
+      "blob": "0a0206739fd3b542d87723155b08504317d2562e",
+      "sha256": "792a5148b96084a722578a9f25dbd9ed24b62691f9f31b0fbb2843311d0ae173",
+      "lines": 56,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation"
+      ],
+      "kind": "reviewed_reference_family_prefix",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalPrimitiveJetsNormalization",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean",
+      "blob": "19fbfbee2481dc3603bb1dcd55f479f55c256b97",
+      "sha256": "b930c8f21c01d5a534fc634a94bc354bc6dbeda3551d5995e8a9b711731233e5",
+      "lines": 85,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalJetNormalization",
+        "ContinuousFlexibility.Analysis.N07aGeometryJetBounds",
+        "ContinuousFlexibility.Analysis.SolveReturnEquations"
+      ],
+      "kind": "reviewed_coordinate_leaf",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean",
+      "blob": "74e009ae51c272ef758c21447a9f494156e3d6ec",
+      "sha256": "c1b05760d478ef2e0e480010ae0b985db327927ac4178153660f79ef6a15c699",
+      "lines": 109,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aGeometryJetBounds",
+        "ContinuousFlexibility.Analysis.MaterialSampleBounds"
+      ],
+      "kind": "reviewed_coordinate_leaf",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentSectorBounds",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentSectorBounds.lean",
+      "blob": "8dcc2e224e6eb437764407ba8ae16c631106f685",
+      "sha256": "ee6719537036a2f020dc9355902c42c9ac1c2eecb6b16ce8739b38beceafaa51",
+      "lines": 182,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets",
+        "ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds",
+        "ContinuousFlexibility.Analysis.N07aScalarSolution",
+        "ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization",
+        "ContinuousFlexibility.Analysis.CanonicalCoordinateCompletion"
+      ],
+      "kind": "reviewed_coordinate_leaf",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualFlowAngularInduction",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualFlowAngularInduction.lean",
+      "blob": "8877228eb4ddc86caac2fc2183df499fa0de8cc6",
+      "sha256": "39e5f8a650b1041d233882bf07d9ad341c55eccf67b96d1da556e2c7f56876e7",
+      "lines": 73,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cActualFlowVariationEnvelope",
+        "ContinuousFlexibility.Analysis.N01cActualFlowNormalization"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualFlowAngularPrefix",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualFlowAngularPrefix.lean",
+      "blob": "362d31e6740d6d33d29cee4cc6a87c5a76fdcecd",
+      "sha256": "7819dcb8d7128b7f68d3450cc144dad05e8e35f2cb685f01091270b8c8e92264",
+      "lines": 80,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cActualFlowAngularInduction"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualFlowCircleData",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualFlowCircleData.lean",
+      "blob": "6ca69223ad0f34b372199da53b5d419521de52c6",
+      "sha256": "6d8e08a641b34dce4310dc9afe67ff7122a74226450d5898578c6d713464175f",
+      "lines": 380,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cActualFlowSmoothDirections",
+        "ContinuousFlexibility.Analysis.N01cFlowVariationCircleData",
+        "ContinuousFlexibility.Analysis.N01cStateAngleIdentification"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualFlowCoefficientEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualFlowCoefficientEnvelope.lean",
+      "blob": "18e0a504231049694480f0826c4c8f5cc513bb52",
+      "sha256": "5c1aee04ead7f63e1948aed1bc6ab159f0fc6e8a848530c12d9a8999cda6fee8",
+      "lines": 74,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cActualFlowHeadBounds",
+        "ContinuousFlexibility.Analysis.N01cMaterialAbsorption"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualFlowDefectBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualFlowDefectBounds.lean",
+      "blob": "9ba00b8a508c46d0e1ce453141b32f62f339eff1",
+      "sha256": "599a43301ec93b251acdb4eb608484636acde1dca67408691d3548192d224a4f",
+      "lines": 132,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cActualFlowForcingComposition",
+        "ContinuousFlexibility.Analysis.N01cOrdinaryFlowZeroAngularBounds"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualFlowForcingBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualFlowForcingBounds.lean",
+      "blob": "f1e9b4a3efabb08fb50f7ff3e0316bf7eb593a65",
+      "sha256": "5711d6bc8b487abe9767ffa5ff0cd9b2fa2b7933d49a27ed3e675b3f094dfcc9",
+      "lines": 216,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cActualFlowCircleData",
+        "ContinuousFlexibility.Analysis.N01cFlowVariationForcingBounds"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualFlowForcingComposition",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualFlowForcingComposition.lean",
+      "blob": "be729d2d155fe3c978356a23de538e22aa7f1ee4",
+      "sha256": "d3443e75646a23a4447786d1b3c78aa55a4fa529999709dd479d769e7810121f",
+      "lines": 193,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cActualFlowForcingBounds",
+        "ContinuousFlexibility.Analysis.N01cActualFlowSpeedOuterBounds",
+        "ContinuousFlexibility.Analysis.OneHighCircleFourierComposition"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualFlowForcingEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualFlowForcingEnvelope.lean",
+      "blob": "06babb48923b0b2519cb610ab8fb6e1d54db39a5",
+      "sha256": "ffe382d76c86b1105cafd405a15431e89c86e39caba453624f3350000293d7fc",
+      "lines": 90,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cActualFlowLowerBounds",
+        "ContinuousFlexibility.Analysis.N01cActualFlowHeadBounds",
+        "ContinuousFlexibility.Analysis.N01cFlowForcingFamilyEnvelope"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualFlowHeadBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualFlowHeadBounds.lean",
+      "blob": "5f7df48ef867fc7881950d61b6e8f537a9c77405",
+      "sha256": "bd4224c134ec0d9b7cb948f8246ea3ef65f0b183f0c08b0a9bd17553b0d380bb",
+      "lines": 103,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowVariationInput",
+        "ContinuousFlexibility.Analysis.N01cActualFlowDefectBounds",
+        "ContinuousFlexibility.Analysis.N01cFlowHeadEnvelope"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualFlowLowerBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualFlowLowerBounds.lean",
+      "blob": "a266e8d1630cc10646c9f7c6b6c147a5142af631",
+      "sha256": "8b001c68d77b62f5f191695208bba776c47f6a36e20984229bad2b16e36d6750",
+      "lines": 157,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowVariationInput",
+        "ContinuousFlexibility.Analysis.N01cFlowOrderConstants",
+        "ContinuousFlexibility.Analysis.N01cMaterialAbsorption"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualFlowNormalization",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualFlowNormalization.lean",
+      "blob": "1de19179df88e3a6c45a44c00f3319ccebe5ee73",
+      "sha256": "59bbf4d1263ab8e09a9a892ac8fc804fc0d26f19f2193e883a082838cb18e66a",
+      "lines": 141,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cActualFlowUnitDirections",
+        "ContinuousFlexibility.Analysis.N01cFlowNormalizationProperty",
+        "ContinuousFlexibility.Analysis.N01cWeightAbsorption"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualFlowSmoothDirections",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualFlowSmoothDirections.lean",
+      "blob": "812a259c4239b76c9282015a5cad9ca7b9e5b6a3",
+      "sha256": "dcdea91ea3b6aef9caa583cc79c35d0bc351cb4487bf3d9f7eee221b1da0ccba",
+      "lines": 118,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowTopologicalContinuity",
+        "ContinuousFlexibility.Analysis.N01cFlowInitialAngleSmooth",
+        "ContinuousFlexibility.Analysis.N01cAngularJetTowers",
+        "ContinuousFlexibility.Analysis.N01cPhysicalFlowRegularity"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualFlowSpeedOuterBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualFlowSpeedOuterBounds.lean",
+      "blob": "d60c55fb21329649c68427a896ec432734b6f094",
+      "sha256": "819bd9d0635ae66a6c216e924ac4914e1e66f15cfed11e2affc5b0874ccedfa1",
+      "lines": 322,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cActualFlowCircleData",
+        "ContinuousFlexibility.Analysis.N01cFlowVariationForcingBounds",
+        "ContinuousFlexibility.Analysis.N01cCosineSpeedPrefixBounds",
+        "ContinuousFlexibility.Analysis.N01cSpeedLowBounds"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualFlowUnitDirections",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualFlowUnitDirections.lean",
+      "blob": "8312e38d6c353ceac475edec853b1be121507a30",
+      "sha256": "8caa8ac84f532af6ca25f519040ef8840ea5d25010f1f4909b0986c9e36caab9",
+      "lines": 123,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowVariationInput"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualFlowVariationEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualFlowVariationEnvelope.lean",
+      "blob": "872080bbe9e69e76573d0205a0d9e46c15c4b928",
+      "sha256": "f763e4e827b14513a041bc4f5e32a25d3506ff7d6105ac212b65de21d3c588be",
+      "lines": 82,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cActualFlowForcingEnvelope",
+        "ContinuousFlexibility.Analysis.N01cActualFlowCoefficientEnvelope",
+        "ContinuousFlexibility.Analysis.N01cFlowLinearFamilyEnvelope"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cAngularJetTowers",
+      "path": "src/ContinuousFlexibility/Analysis/N01cAngularJetTowers.lean",
+      "blob": "6de5b7492a5d48a5ec45fa4eae86a50dc94812fe",
+      "sha256": "375f046f28ef23fba94797fa7b21133b68a4bb77743a351e315a9d7c2c5be21d",
+      "lines": 202,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cParameterCalculus",
+        "Mathlib.Analysis.Calculus.IteratedDeriv.Defs"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCharacteristicSpeedTameBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cCharacteristicSpeedTameBounds.lean",
+      "blob": "b25a688fa034eeacbbccae57881718c85cccb686",
+      "sha256": "2998e4e4ce36d6b6b883035c7b85ad02027d37166ca208b5356c98c07963da91",
+      "lines": 198,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cWholeSpeedPowerBounds",
+        "ContinuousFlexibility.Analysis.N01cEndpointReferenceBounds",
+        "ContinuousFlexibility.Analysis.N01cEndpointSamplePowerBounds",
+        "ContinuousFlexibility.Analysis.N01cEndpointMixedPowerNormalization",
+        "ContinuousFlexibility.Analysis.N01cOpticalEndpointPowerBounds",
+        "ContinuousFlexibility.Analysis.N01cBoundsRestriction",
+        "ContinuousFlexibility.Analysis.N01cStateInterpolation",
+        "ContinuousFlexibility.Blueprint.N01c.Statements"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCircleForcingProducts",
+      "path": "src/ContinuousFlexibility/Analysis/N01cCircleForcingProducts.lean",
+      "blob": "e1c5753397a67b7393e8ee2fb192eb24c5dd29f8",
+      "sha256": "aee2df30566bfa2266529c1e030bddcc8edb67fa459b62b1718ba0ed0a6db087",
+      "lines": 190,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cDistributedRadialProducts",
+        "ContinuousFlexibility.Analysis.OneHighCircleFourierRealAlgebra"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCircleLinearVariationBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cCircleLinearVariationBounds.lean",
+      "blob": "b2c66f1a8b45f464917f8a33a1776c39ecfeaa8b",
+      "sha256": "be9da285540eb78940c7a7bc366a0fca4e4649a82499ece01a90403860c640a4",
+      "lines": 487,
+      "imports": [
+        "ContinuousFlexibility.Analysis.OneHighCircleFlowMinkowski",
+        "ContinuousFlexibility.Analysis.OneHighCircleFlowGronwall",
+        "ContinuousFlexibility.Analysis.OneHighCircleFourierRealAlgebra"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCircleLinearVariationEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/N01cCircleLinearVariationEnvelope.lean",
+      "blob": "71a979b1e8c2162b58bb99d33e141fa5be755cbc",
+      "sha256": "53139e7e47c94b69d5e9afbba360adea3c835bbfa7ceb246e3313ba3c09bcfa4",
+      "lines": 141,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCircleLinearVariationBounds"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCircleLinearVariationSmooth",
+      "path": "src/ContinuousFlexibility/Analysis/N01cCircleLinearVariationSmooth.lean",
+      "blob": "73d06e355d0646b70020a8e579c698fc7f878642",
+      "sha256": "3ee599da6a095aebae67b9c6d2483aa19347a7b5e4cc33ac7c9e0ca093979fdc",
+      "lines": 164,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCircleLinearVariationBounds",
+        "ContinuousFlexibility.Analysis.OneHighCircleFlowSpeedNorms"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCommonCosineGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/N01cCommonCosineGeometry.lean",
+      "blob": "4e8c2be4d70a2fd844b141d602b7101d68ed4f1d",
+      "sha256": "3be6b546618d5d82aa9ccc72b3a1f1ce137f630d4dc9564e2e0c7e76865efba8",
+      "lines": 89,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCosineLowGeometry"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cComponentCosineSpeed",
+      "path": "src/ContinuousFlexibility/Analysis/N01cComponentCosineSpeed.lean",
+      "blob": "8c2587b6cdf5cc7bcc63bd331d4d2a566dc6729b",
+      "sha256": "d3159d20b4015e4e4651515e9b7c98387dabb87425db294c83d0e639ca995a2c",
+      "lines": 133,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cComponentOpticalGeometry",
+        "ContinuousFlexibility.Analysis.N01cFiniteAffineSpeedFactors",
+        "ContinuousFlexibility.Analysis.N01cCosineRootPath"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cComponentOpticalGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/N01cComponentOpticalGeometry.lean",
+      "blob": "4a17352a92e97594b83dcd2e1bf27fc4ef1dc34a",
+      "sha256": "a2b3a1225ee0b833fcf34b606b03769cc779f496f30c07c5388e2768af17d1eb",
+      "lines": 139,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFiniteAffineInputs",
+        "ContinuousFlexibility.Analysis.N01cOpticalSquareBounds",
+        "ContinuousFlexibility.Analysis.N01cCommonType"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cComponentSpeedPeriodicity",
+      "path": "src/ContinuousFlexibility/Analysis/N01cComponentSpeedPeriodicity.lean",
+      "blob": "045b5d32fb1f8034582c5f183a114ad6550a9a95",
+      "sha256": "0a71dca5945412f51df02b9f55e65fde90d6c846dfe5f7d4d09d3c5af81899f1",
+      "lines": 86,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cComponentCosineSpeed",
+        "ContinuousFlexibility.Scalar.GreenIdentity"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCosineAngularJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01cCosineAngularJets.lean",
+      "blob": "1538ac7655f73e351ee430da97c2922b1c3cb416",
+      "sha256": "722d2ea200e50199a7631fd36db20eabccd1c772189c4077ad456f0ec961717e",
+      "lines": 93,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cComponentSpeedPeriodicity",
+        "ContinuousFlexibility.Blueprint.N01c.Statements"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCosineFlowIdentities",
+      "path": "src/ContinuousFlexibility/Analysis/N01cCosineFlowIdentities.lean",
+      "blob": "66324f567ccce60c2d6d1a832534bd110c0b2f7f",
+      "sha256": "7c896c6c676bd4ca5f3951a7cef5a3789f04578f223b8e0b00e9d4525db6cad4",
+      "lines": 41,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCosineAngularJets"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCosineLowGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/N01cCosineLowGeometry.lean",
+      "blob": "34ec1bfff92de090b18ae661c98566c6588987a4",
+      "sha256": "f953eaf7634af1488bf599914d3675e4b66e7553d928114c87dbfa64041781b3",
+      "lines": 169,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCosineAngularJets",
+        "ContinuousFlexibility.Analysis.N01cSpeedLowBounds",
+        "ContinuousFlexibility.Analysis.OneHighCircleFlowReferenceNorms"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCosineRootPath",
+      "path": "src/ContinuousFlexibility/Analysis/N01cCosineRootPath.lean",
+      "blob": "e4c98ec1d65706c6a4559dd648d34d0e2150a16d",
+      "sha256": "0b32f0daa985680f9530b7e33651cca31ac7f9ecefcb42dcdfc39b8cd74ba047",
+      "lines": 159,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cEndpointDivision",
+        "Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv",
+        "Mathlib.Analysis.SpecialFunctions.Sqrt"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCosineSpeedParameterBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cCosineSpeedParameterBounds.lean",
+      "blob": "79b079280ec223904cb5a10d85ac226ca8adb432",
+      "sha256": "b906f7463d6ea5449b5e88e54c994c63952c7def08807d07c2ab38ca2c72972c",
+      "lines": 257,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCosineAngularJets",
+        "ContinuousFlexibility.Analysis.N01cMixedPowerNormalization",
+        "ContinuousFlexibility.Analysis.N01cParameterCalculus",
+        "ContinuousFlexibility.Analysis.N01cWeightAbsorption"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCosineSpeedPrefixBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cCosineSpeedPrefixBounds.lean",
+      "blob": "a7c98ee2a841cb0968f56f6d8211504757c14e0f",
+      "sha256": "fd698f57eb73c0fbabfb4ec6b4ec59cd3460912083921cb4817c1696d4e41542",
+      "lines": 79,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCosineSpeedParameterBounds",
+        "ContinuousFlexibility.Analysis.N01cFlowSlotBounds"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cEndpointDivision",
+      "path": "src/ContinuousFlexibility/Analysis/N01cEndpointDivision.lean",
+      "blob": "05804d6ed44e39baddeca986eefb731c485e1fd8",
+      "sha256": "a9b87d9397493feb725c2493b93c76c3708b2b6026e95b4182163e3433d946cb",
+      "lines": 290,
+      "imports": [
+        "ContinuousFlexibility.Scalar.RectangleParameterIntegral",
+        "Mathlib.Analysis.Calculus.DSlope",
+        "Mathlib.Analysis.Calculus.ContDiff.Deriv",
+        "Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas",
+        "Mathlib.Analysis.Convex.Basic",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cEndpointReferenceBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cEndpointReferenceBounds.lean",
+      "blob": "999baa78fdc0054d72842e11b106b581258b241e",
+      "sha256": "150ba88c17d937f673da984620763d3a99c7811d18071a306d360f48d54adb7c",
+      "lines": 90,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cWholeSpeedPowerBounds",
+        "ContinuousFlexibility.Analysis.N01cEndpointMixedPowerNormalization"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFiniteAffineInputs",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFiniteAffineInputs.lean",
+      "blob": "f346a457ad90f8d47e3573302aa26a4780c6e2e4",
+      "sha256": "16e61af180c380d1fece0278af782e6d092c3f1b0bfdc4c8baedfa2386f56d9b",
+      "lines": 102,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCoefficientMixedParameterJets",
+        "ContinuousFlexibility.Analysis.N01cParametricEndpointDivision",
+        "Mathlib.Algebra.BigOperators.Pi"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFiniteAffineJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFiniteAffineJets.lean",
+      "blob": "11b49ca976af4ed7711545e3997a141f9ff0a218",
+      "sha256": "bacde7dc12f4b928a22cc628ae05d5727e1833bdf18e476c1617836e14139c8e",
+      "lines": 190,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cParameterCalculus",
+        "ContinuousFlexibility.Analysis.ProjectiveJetSchwarz",
+        "Mathlib.Analysis.Calculus.ContDiff.FiniteDimension"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFiniteAffineMixedJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFiniteAffineMixedJets.lean",
+      "blob": "e80743b5f134c3c833972dec004633fec0e821cb",
+      "sha256": "c37f04d8d9e26214254bc2791ea20add4c901af2b560979351d5050fd84dd247",
+      "lines": 415,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFiniteAffineJets",
+        "ContinuousFlexibility.Analysis.N01cOpticalMixedJets"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFiniteAffineSpeedFactors",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFiniteAffineSpeedFactors.lean",
+      "blob": "1463bf479157371325fc350484be0824d2cf27d8",
+      "sha256": "fc6b282b9326a69d4a2d121f93a014c7a981d609823a5fc917ea05ddc64ca37e",
+      "lines": 217,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFiniteAffineInputs",
+        "ContinuousFlexibility.Analysis.N01cNormalizedSpeedPowerBounds"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowAffineCompression",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowAffineCompression.lean",
+      "blob": "bc19f8ecbdd7c2a90bb75d1eea9140bcaa10fd6f",
+      "sha256": "e6d0e5ec7f423399e700279762f7fb1171471b1527a739e988bb73babc86b18d",
+      "lines": 193,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cVolterraNaturality",
+        "Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowCompactStateSmooth",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowCompactStateSmooth.lean",
+      "blob": "e187f85e7e6e79636c42405379278dd215a45076",
+      "sha256": "9edac65ed0b6eadd2ea1bd6793a7a7739853ac80cf4a4ca8b8d494c133fba66d",
+      "lines": 131,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowStateSmooth"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowForcingEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowForcingEnvelope.lean",
+      "blob": "d4da679f327121e58ab6f6809f14ff6996a1f4e5",
+      "sha256": "16c845afbc97a9fbbbe83a15f4fa46c4eca103f0d33f785cc4e8fd3312bcaffa",
+      "lines": 187,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCircleForcingProducts",
+        "ContinuousFlexibility.Analysis.N01cFlowForcingSobolev"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowForcingExpansion",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowForcingExpansion.lean",
+      "blob": "1e66a3317b7d10d29044ee2b7360ea76fdfa676a",
+      "sha256": "4383f05071fb03dc6a4566c29a375c11e17ccbf6a690ae9b2a7420abe7fa5a06",
+      "lines": 175,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cVolterraStateJets"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowForcingFamilyEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowForcingFamilyEnvelope.lean",
+      "blob": "133a46cdc6c915a148ea04ef7bc02174079412a3",
+      "sha256": "18ee265d28ab891f759b7051a569686cffb326bf80d25d026f64d4fc5f8ea79c",
+      "lines": 129,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowForcingEnvelope",
+        "ContinuousFlexibility.Analysis.N01cFlowHeadEnvelope"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowForcingSobolev",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowForcingSobolev.lean",
+      "blob": "1eef1dd6656eae5eb3d8a5ef7d4108c56a52d80c",
+      "sha256": "161a19f1942cca20c8dd80f07ed01d595ebbc223665cbb74da5cfd517d84726e",
+      "lines": 170,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCircleForcingProducts",
+        "ContinuousFlexibility.Analysis.N01cFlowForcingExpansion"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowFrechetContinuity",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowFrechetContinuity.lean",
+      "blob": "1df3302bc3bc2a33ad0cd63ef73da284a94a4387",
+      "sha256": "a8ec33d60926897d1c9efdede9acdc199ce588989e4f4e3972e220017d1cc976",
+      "lines": 229,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowFrechetParameters"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowFrechetParameters",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowFrechetParameters.lean",
+      "blob": "6b42e40ad2e647c631b360c429fa4ca9dc8ad2fc",
+      "sha256": "0ed983232247830ae44a7cab866ceff147a3e6a34bd07867e0831ba0dd9e849b",
+      "lines": 335,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowParameterSmooth"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowHeadEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowHeadEnvelope.lean",
+      "blob": "a659fdad3d0e9c0fde68a8eb8769d4705c50df55",
+      "sha256": "e3da7ff997e75e64da8e5d2321e1904cb97c83e1afdd0df0e976c9dd63daa66f",
+      "lines": 123,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cWeightAbsorption"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowHighestVariation",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowHighestVariation.lean",
+      "blob": "3491173585a2e4a9678f271c65d50c5eb7e3cca9",
+      "sha256": "fb504d96421c52d591f37e6bd13de556e0dd022001d2215eba9157f75ba125c9",
+      "lines": 177,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cVolterraStateJets",
+        "Mathlib.Order.Preorder.Finite"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowInitialAngleSmooth",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowInitialAngleSmooth.lean",
+      "blob": "176cbfb42275fc39d8547f24d0d607d85f3e6bb4",
+      "sha256": "879d239cdc6d632be619835376b82b4be44b5c0b07028e92446c9dd5b7706795",
+      "lines": 109,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowCompactStateSmooth"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowJetIdentification",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowJetIdentification.lean",
+      "blob": "5eb1bc4d551cef9a07e7036c292499df84e34b6f",
+      "sha256": "03686f455ea34f548fd17c6614724d58dc67c821387928c6dc1e457f1ee37124",
+      "lines": 198,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowHighestVariation",
+        "ContinuousFlexibility.Analysis.N01cFlowParameterJetEquations"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowLinearFamilyEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowLinearFamilyEnvelope.lean",
+      "blob": "9783f9f4668a7a2839b5dc69f93e81f8ed6144db",
+      "sha256": "2b3978be1611480606ec65b1f42b7fae50ea31634aa5bcc1fa63841da9bccccc",
+      "lines": 106,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCircleLinearVariationEnvelope",
+        "ContinuousFlexibility.Analysis.N01cFlowHeadEnvelope"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowNormalizationProperty",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowNormalizationProperty.lean",
+      "blob": "f42fffb6dca90400474ef829617ed03274f17fe2",
+      "sha256": "ff0fb58f68881fb3cecd070a291a8867b99668cd98afba0a0d32ec6042add234",
+      "lines": 65,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowParameterNormalization",
+        "ContinuousFlexibility.Analysis.N01cFlowOrderConstants",
+        "ContinuousFlexibility.Analysis.N01cStateInterpolation"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowNumericConstants",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowNumericConstants.lean",
+      "blob": "20cd01bc96e85d7e1143f218e92614be7cbf0ed0",
+      "sha256": "0ddea529862b10cd19ade7126b50a8664e7440d8aae0a6dfbf65b97f359ef27e",
+      "lines": 133,
+      "imports": [
+        "ContinuousFlexibility.Analysis.OneHighCircleFlowSobolevBounds",
+        "Mathlib.Analysis.Normed.Group.Bounded"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowOrderConstants",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowOrderConstants.lean",
+      "blob": "d374c998cd6e2ee382edee7f18247b4b50794c76",
+      "sha256": "f2a46e9da2da68cf132a22ee5e0ae02356b45e6e2fa1340e0d1b950a0046065f",
+      "lines": 131,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCosineSpeedPrefixBounds",
+        "ContinuousFlexibility.Analysis.N01cActualFlowSmoothDirections"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowParameterContinuity",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowParameterContinuity.lean",
+      "blob": "9bef6b0850f75764256afaf9a22d695e5a88e501",
+      "sha256": "0cb5bcdec0c2a327f67e1e4720db9e681b29a25f4b16738d6405e884f34481b7",
+      "lines": 315,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowVariation",
+        "ContinuousFlexibility.Analysis.OneHighCircleFlowContinuity"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowParameterJetEquations",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowParameterJetEquations.lean",
+      "blob": "cd385bdc58832cf08ffa30ede0ec8ef042d4d14b",
+      "sha256": "7c1e80eedc6e0b756ab7679f74039e2595e8dd2518de4d0a85ad953ea0913ba2",
+      "lines": 182,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFiniteAffineJets",
+        "ContinuousFlexibility.Analysis.N01cFlowFrechetContinuity"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowParameterNormalization",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowParameterNormalization.lean",
+      "blob": "3410d556ab9875a31a5c8a3e2e2c2029f803494a",
+      "sha256": "5c5bce7936f80968dea3dbdd399a767343fc8d3e5555bcf0b46d93a9c21428be",
+      "lines": 168,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cOneHighProducts",
+        "ContinuousFlexibility.Analysis.N01cStateSeminorms"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowParameterSmooth",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowParameterSmooth.lean",
+      "blob": "b89232c1d05b4d61481ea4e304b6ee486742c631",
+      "sha256": "a0d6300e1a8fa1bf6345c75e41dd0bb9b0297629c2925ae5d8cace8f17507de9",
+      "lines": 291,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowParameterContinuity",
+        "ContinuousFlexibility.Analysis.OneHighCircleFlowTimeChange"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowSlotBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowSlotBounds.lean",
+      "blob": "d37e1c99bcf930e6fda7b306c278481e42750df5",
+      "sha256": "2ee6a1c2f4f83709ca71c82cb6fd00d25ef3cb00fc544aad7f2ca5600180d4e4",
+      "lines": 163,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cStateAngleSelections",
+        "ContinuousFlexibility.Analysis.N01cFlowForcingExpansion",
+        "ContinuousFlexibility.Analysis.N01cFlowForcingSobolev",
+        "ContinuousFlexibility.Analysis.N01cStateSeminorms"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowStateSmooth",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowStateSmooth.lean",
+      "blob": "d067a9d6f31ec57fb7bcb55028ddb95cf4b47477",
+      "sha256": "346288ffc0e7f947e11503efd2f2fa2e661b1204a041535b8091e8e1d4da8acc",
+      "lines": 173,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowAffineCompression"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowTopologicalContinuity",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowTopologicalContinuity.lean",
+      "blob": "5eaed7e6a6d28d5cc3973c92d8b3eb30ec53b9c8",
+      "sha256": "25e213570376ba396a65e50c8cbc3cb3131864a396f2c5822866111a3e34a4d8",
+      "lines": 193,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowParameterContinuity",
+        "Mathlib.Topology.UniformSpace.HeineCantor"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowVariation",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowVariation.lean",
+      "blob": "e72083c0fa4524ef923ed999cc33dbadc002a10f",
+      "sha256": "ba0569a1160d2d05b6eca1f35e1009552a7be56c9c51fed3b056d25df8479e8c",
+      "lines": 305,
+      "imports": [
+        "ContinuousFlexibility.Analysis.OneHighCircleFlowVariational"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowVariationCircleData",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowVariationCircleData.lean",
+      "blob": "1205ed3731a73d0b4009dab7b1c1ff3c0b806612",
+      "sha256": "a80631e393ed09d7f3f9979bea2bcbc6d45998e72d7971f189005a220693eedc",
+      "lines": 316,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowAffineCompression",
+        "ContinuousFlexibility.Analysis.N01cAngularJetTowers",
+        "ContinuousFlexibility.Analysis.N01cCircleLinearVariationSmooth",
+        "ContinuousFlexibility.Analysis.OneHighCircleFourierCompositionCalculus"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowVariationForcingBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowVariationForcingBounds.lean",
+      "blob": "01172bb3e8ab20390efa2b80a8cd8aa950a71258",
+      "sha256": "5c5ac66fb33325674ff7399928bf6e3e8cd38d44cf03da388dd0de1855484163",
+      "lines": 282,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowVariationCircleData",
+        "ContinuousFlexibility.Analysis.N01cFlowForcingSobolev"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowVariationInput",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowVariationInput.lean",
+      "blob": "b1eb30eba3fde913eb640565f79e7eebb7755333",
+      "sha256": "82887d0ab14c700823e8565307b63b7bc0f5e771aaac3fb66b6f6c59d9a9193b",
+      "lines": 158,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cActualFlowForcingComposition",
+        "ContinuousFlexibility.Analysis.N01cFlowSlotBounds"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFlowZeroAngularGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/N01cFlowZeroAngularGrowth.lean",
+      "blob": "8b33f5a47a9ec4107848f8f97752bebb6a9acc30",
+      "sha256": "9a5615a63d7c865cc472d31eb8253c560ec5a1f5846b437bfac09bca605db8f3",
+      "lines": 190,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowNumericConstants",
+        "ContinuousFlexibility.Analysis.OneHighCircleFlowReferenceNorms",
+        "ContinuousFlexibility.Analysis.OneHighCircleFourierLiftBounds"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cJointJetContinuity",
+      "path": "src/ContinuousFlexibility/Analysis/N01cJointJetContinuity.lean",
+      "blob": "8561c42e7950af814cab8a09e8f3507c4143afde",
+      "sha256": "b07bdcb8eb01134496f9fd5b4431ef2e2574fb6ab9e62326bb66e76bf71bbcda",
+      "lines": 243,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cReferenceDifferenceBounds",
+        "ContinuousFlexibility.Analysis.ProjectiveMultilinearCalculus"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOpticalEndpointPowerBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cOpticalEndpointPowerBounds.lean",
+      "blob": "bb258c840c3a37878cee8e35a20f4c1356adb301",
+      "sha256": "687c69f3f734ec34c08d0f61995ef008dd7d4f21675aaea22ef6a368a94c23b7",
+      "lines": 278,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cOpticalMaterialBounds",
+        "ContinuousFlexibility.Analysis.N01cEndpointMixedPowerAlgebra",
+        "ContinuousFlexibility.Analysis.N01cStateHeightJets"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOpticalMaterialBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cOpticalMaterialBounds.lean",
+      "blob": "5b77fc6719a9874c3b586d0dbf13d71ef64feb44",
+      "sha256": "633ee59b4785a1936ff5811e41ee0ced7d3da0dee54cfa06654faeeea51a372b",
+      "lines": 574,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cOpticalNumericEnvelopes",
+        "ContinuousFlexibility.Analysis.N01cMixedPowerAlgebra",
+        "ContinuousFlexibility.Analysis.N01cCommonType"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOpticalMixedJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01cOpticalMixedJets.lean",
+      "blob": "5e93c1b6a6c44c5bd027cf877428a3dec837c691",
+      "sha256": "b0df51588d7bb1d3b9f9637807b0ae90f873cecc0ff055f42fdb81698336b4d5",
+      "lines": 316,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cOpticalSquareBounds",
+        "ContinuousFlexibility.Analysis.N01cSpatialParameterComposition",
+        "Mathlib.Analysis.Calculus.Deriv.CompMul",
+        "Mathlib.Analysis.Calculus.Deriv.Shift"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOpticalNumericEnvelopes",
+      "path": "src/ContinuousFlexibility/Analysis/N01cOpticalNumericEnvelopes.lean",
+      "blob": "bc18b21e4580771cce6b6e5c4e25219b7d99b4d0",
+      "sha256": "d554b4130d102a22c8d82373427ab111a2f6cda9ad29b0625d312efc0f581f31",
+      "lines": 160,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cOpticalRootProducts"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOpticalRootProducts",
+      "path": "src/ContinuousFlexibility/Analysis/N01cOpticalRootProducts.lean",
+      "blob": "4163476566c6a025d25d5dfda3c12bd5e1c32842",
+      "sha256": "41c2186d51a49a0f39e8bd2cf20a8a2e02a78f040be9395e60cdecabf8a9d110",
+      "lines": 185,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cOpticalMixedJets",
+        "ContinuousFlexibility.Analysis.N01cProfileMajorantWeights"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOpticalSquareBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cOpticalSquareBounds.lean",
+      "blob": "c3e626afe6ceaad07b1b9c1ca80b6b75a5387a90",
+      "sha256": "8a06c0594c41bb5203047190d8cdc60861f0fda2484f35ee19bd83320d8fa168",
+      "lines": 641,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cOpticalSquareRootJets",
+        "ContinuousFlexibility.Analysis.N01cInverseProfileBounds",
+        "ContinuousFlexibility.Analysis.N01cRelativeControl",
+        "ContinuousFlexibility.Analysis.N01cControlJetWeights"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOpticalSquareRootJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01cOpticalSquareRootJets.lean",
+      "blob": "62a28af2fa7996c0384062f294f9a50481e587d5",
+      "sha256": "e9c967a6beb9db8821d02ce67b14ab937e7f2bd995bed9259d9ce1b88ba68dd7",
+      "lines": 302,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cDistributedRadialProducts",
+        "ContinuousFlexibility.Analysis.N01cStateParameterJets",
+        "ContinuousFlexibility.Analysis.RootPowerJets"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOrdinaryFlowZeroAngularBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cOrdinaryFlowZeroAngularBounds.lean",
+      "blob": "4a5067050179455adf34d6ca0146ced249dd9a24",
+      "sha256": "819671d2bddc00d5fb77ab8808ef1df7246d6bcc5560e57cf5fad33ee7b4cc6b",
+      "lines": 174,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cSpeedAngularGrowth",
+        "ContinuousFlexibility.Analysis.N01cFlowZeroAngularGrowth",
+        "ContinuousFlexibility.Analysis.N01cCommonCosineGeometry",
+        "ContinuousFlexibility.Analysis.N01cPhysicalFlowRegularity"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cParametricEndpointDivision",
+      "path": "src/ContinuousFlexibility/Analysis/N01cParametricEndpointDivision.lean",
+      "blob": "9946a6a9bdec3f1074f29182256cf16fc1591637",
+      "sha256": "7e5683381e2218a98dfce7769dba1a107b41e2ed3aea07e3e21be7b52927b8f5",
+      "lines": 81,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cEndpointDivision"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalFlowRegularity",
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalFlowRegularity.lean",
+      "blob": "9fc34165ae40409a47af851418995d928350ae6a",
+      "sha256": "804607f5673029d8dca06ce46f192e91ca613d7721315b953e7101405c72eea4",
+      "lines": 115,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCosineFlowIdentities",
+        "ContinuousFlexibility.Analysis.OneHighCircleFlowInterior",
+        "Mathlib.Analysis.SpecialFunctions.Trigonometric.InverseDeriv"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cSpeedAngularGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/N01cSpeedAngularGrowth.lean",
+      "blob": "a01dc9419b7f192bb72ad29c2b421835749296f0",
+      "sha256": "08c2ec4893ded5a62ae7b2841a43f6ecc9ba9805280d6588c17d06834c168f8b",
+      "lines": 89,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cSpeedLowBounds"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cSpeedBoundsRestriction",
+      "path": "src/ContinuousFlexibility/Analysis/N01cSpeedBoundsRestriction.lean",
+      "blob": "44118f0c1d11a1a093472bddd6c3effcfad9a67c",
+      "sha256": "5e2e48275bf564b252499d659764c965f9b83be64645afb157d00538cf0f7f3c",
+      "lines": 42,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cBoundsRestriction",
+        "ContinuousFlexibility.Blueprint.N01c.Statements"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cSpeedLowBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cSpeedLowBounds.lean",
+      "blob": "243e8d0ca95a4d874eef40c7878b9bf8713af8d8",
+      "sha256": "66e3b213198e54a637906cdcb0d3465b410911ab68b1ddcae63a29e1e982b33a",
+      "lines": 125,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cSpeedBoundsRestriction",
+        "ContinuousFlexibility.Analysis.N01cStateInterpolation",
+        "ContinuousFlexibility.Analysis.N01cMaterialAbsorption",
+        "ContinuousFlexibility.Analysis.OneHighCircleRealSobolev",
+        "ContinuousFlexibility.Analysis.OneHighCircleFourierRealAlgebra"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cSpeedTowerRestriction",
+      "path": "src/ContinuousFlexibility/Analysis/N01cSpeedTowerRestriction.lean",
+      "blob": "7cac9a0077313add56a9386139dc0724a72a1838",
+      "sha256": "f13bce7325b705ff84066cda38ee8bce7bbb2ea506e932d85623df05035c1ccd",
+      "lines": 36,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cVolterraStateJets",
+        "ContinuousFlexibility.Analysis.N01cStateSeminorms"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cStateAngleIdentification",
+      "path": "src/ContinuousFlexibility/Analysis/N01cStateAngleIdentification.lean",
+      "blob": "6c9442c49dc42c208a93ce38f37cac5384ee2831",
+      "sha256": "be1fd9b862a39a562b3cd85c25faf77870c5c08b27eb83c475d831f24425b688",
+      "lines": 108,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cStateAngleSmoothDirections"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cStateAngleJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01cStateAngleJets.lean",
+      "blob": "53f6a12b34ef3c1436a0bbe6dcd9c8b908a15ce2",
+      "sha256": "90556b15c9c24f36defed2169c9bcc3908427469c2378ed3f3ec78ea1cc6856b",
+      "lines": 299,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cJointJetContinuity",
+        "Mathlib.LinearAlgebra.Multilinear.Curry"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cStateAngleSelections",
+      "path": "src/ContinuousFlexibility/Analysis/N01cStateAngleSelections.lean",
+      "blob": "94b5e565fc3c9400e2fc498024773e0f99fa24bb",
+      "sha256": "d396e6fb43702a2f6b6e986a956fce9e0d3a1d75a5b97bdfba110d6704126e64",
+      "lines": 300,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cStateAngleIdentification",
+        "Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cStateAngleSmoothDirections",
+      "path": "src/ContinuousFlexibility/Analysis/N01cStateAngleSmoothDirections.lean",
+      "blob": "5cdb2f318cd4f246fddbbdd26df432cfa0dfb3ae",
+      "sha256": "8e9be830b8f96a496e4b62747cbf3fcdad82265c86c336ba1cb7e169d0146cdf",
+      "lines": 199,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFiniteParameterProducts",
+        "ContinuousFlexibility.Analysis.N01cFiniteAffineMixedJets",
+        "ContinuousFlexibility.Analysis.N01cStateAngleJets",
+        "ContinuousFlexibility.Analysis.N01cVolterraStateJets",
+        "ContinuousFlexibility.Analysis.N01cSpatialParameterComposition"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cTopologicalParameterIntegral",
+      "path": "src/ContinuousFlexibility/Analysis/N01cTopologicalParameterIntegral.lean",
+      "blob": "fa071cdbc063266bec8501ae2c487be83c9d1811",
+      "sha256": "938cc965fc5a1275aa7a3b8d8bde32a7400fa436ca94e0c7e4bf312861a677da",
+      "lines": 75,
+      "imports": [
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic",
+        "Mathlib.Topology.UniformSpace.HeineCantor"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cVolterraMultilinear",
+      "path": "src/ContinuousFlexibility/Analysis/N01cVolterraMultilinear.lean",
+      "blob": "071458fb97a4d332f611ddfb869cc161ae375107",
+      "sha256": "56ffdcddc7082c40fe58a1c07e28017810280dd93e5a1c180fc252c781dc5bdf",
+      "lines": 333,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cTopologicalParameterIntegral",
+        "ContinuousFlexibility.Analysis.N01cFlowParameterSmooth",
+        "ContinuousFlexibility.Analysis.TameJetComposition"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cVolterraNaturality",
+      "path": "src/ContinuousFlexibility/Analysis/N01cVolterraNaturality.lean",
+      "blob": "fc182cf271d23e5c09c7e5099d5931ab50b5eb39",
+      "sha256": "e3b4eb8a544b4697b6ec61378eb055ef96fe5bffdc21dc6bfb76ddfba00a923d",
+      "lines": 118,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFlowJetIdentification"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cVolterraStateJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01cVolterraStateJets.lean",
+      "blob": "f93918a2df7f5972e309407db336c636d95d40bf",
+      "sha256": "fb503fa8257954c88a144d83cec7de5e8e47060a8b29476acb9267cd351eef43",
+      "lines": 318,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cVolterraMultilinear",
+        "ContinuousFlexibility.Analysis.N01cFlowTopologicalContinuity",
+        "ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cWholeSpeedPowerBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01cWholeSpeedPowerBounds.lean",
+      "blob": "57c594144356d93faa5c0d68c3a0b39c8326c49b",
+      "sha256": "b7c33450359c671b4a29c77d6b2f23aedb79166aab6a7a3b35caf566729b5706",
+      "lines": 192,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cNormalizedSpeedPowerBounds",
+        "ContinuousFlexibility.Analysis.N01cEndpointSamplePowerBounds",
+        "ContinuousFlexibility.Analysis.N01cOpticalEndpointPowerBounds"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ReferenceOutputWeightInclusion",
+      "path": "src/ContinuousFlexibility/Analysis/N05ReferenceOutputWeightInclusion.lean",
+      "blob": "e839e69db6381054f665847240d7f3056dd95130",
+      "sha256": "0a61ee06f09371505fb01cbe79c8daf366a343e0052564c849b6432c3d1ac3d8",
+      "lines": 37,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder",
+        "ContinuousFlexibility.Radial.ReferenceWeightedMeasure",
+        "ContinuousFlexibility.Radial.ReferenceExponentComparison"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean",
+      "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "lines": 168,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholePositiveCanonicalFields",
+        "ContinuousFlexibility.Analysis.PositiveReferenceCylinder"
+      ],
+      "kind": "reviewed_reference_family_prefix",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+      "path": "src/ContinuousFlexibility/Analysis/PositiveReferenceFiniteRadialJets.lean",
+      "blob": "db60546bb34349a040955ace14facdf5b13dfa0d",
+      "sha256": "a515668c71f3895edfda3d1183a5c275f3758799de0d7ebb68d439d33095bc66",
+      "lines": 167,
+      "imports": [
+        "ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative",
+        "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+      ],
+      "kind": "reviewed_reference_family_prefix",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+      "path": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+      "blob": "096b420be6425f39b2f5e73e4a0f60cbd9113ced",
+      "sha256": "fc2eb15c0da7e37fda9f227b906a75c801d0d628064e17e5bca4e63dae75e910",
+      "lines": 100,
+      "imports": [
+        "ContinuousFlexibility.Analysis.PositiveReferenceCylinder",
+        "ContinuousFlexibility.Analysis.CoordinateOperatorConstruction",
+        "ContinuousFlexibility.Radial.RadialHeight"
+      ],
+      "kind": "reviewed_reference_family_prefix",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RootTravelOppositeCoordinates",
+      "path": "src/ContinuousFlexibility/Analysis/RootTravelOppositeCoordinates.lean",
+      "blob": "398cf5d4c3207cc9e9dd31cbe09887007d9aff2c",
+      "sha256": "ecd653a3b8f6817b590d1b385f1fc495fb4612b46fdb6e9398e8d798fd11ff9e",
+      "lines": 197,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bRootInteriorRegularity"
+      ],
+      "kind": "reviewed_coordinate_leaf",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "path": "src/ContinuousFlexibility/Analysis/TameMultilinearNormalization.lean",
+      "blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "lines": 204,
+      "preimage": "04e7e732ab5f0d16ba232b561bd612f93dff4c51",
+      "numstat": {
+        "added": 25,
+        "deleted": 6
+      },
+      "kind": "explicit_reviewed_main_pure_normalizer_API_restore"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+      "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean",
+      "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+      "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+      "lines": 171,
+      "imports": [
+        "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+      ],
+      "kind": "reviewed_reference_family_prefix",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+      "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean",
+      "blob": "fcb65801fb0da7c1ccbf3e7a0bf826f303bf9a3b",
+      "sha256": "3e3daeb4e127d77150c85fe2cf205ae2564a86da1a7b92a54d16f447a62cc3fc",
+      "lines": 195,
+      "imports": [
+        "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+        "ContinuousFlexibility.Analysis.N01OpticalCollarPositivity"
+      ],
+      "kind": "reviewed_reference_family_prefix",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasData.lean",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "lines": 131,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeCanonicalAtlasData",
+        "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge"
+      ],
+      "kind": "reviewed_reference_family_prefix",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasGeometry.lean",
+      "blob": "e349394e51c8caef8a751f9b4e6c4900f13f8d0d",
+      "sha256": "41ac14bc8261391998aeb4e6d2c290171bba36baea4dec40a665449fa72c8299",
+      "lines": 163,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData"
+      ],
+      "kind": "reviewed_reference_family_prefix",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasOperator.lean",
+      "blob": "de3ff006b2c03592d7c5489ed41c4b73adad8c73",
+      "sha256": "2fddaf7a9418556a1915a1691b7ed4396740b227d269b8f84c78d6217f388c57",
+      "lines": 106,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+        "ContinuousFlexibility.Analysis.WholeCanonicalAtlasOperator"
+      ],
+      "kind": "reviewed_reference_family_prefix",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRelativeFields.lean",
+      "blob": "ba1d43881f06ffb76d0d658ed762dd435a668d0b",
+      "sha256": "4b34db7f7514160c2f86a8fe0ecb0c8d0a653ea4c1a4bdfc34b27ef862319dec",
+      "lines": 101,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData"
+      ],
+      "kind": "reviewed_reference_family_prefix",
+      "preimage": null
+    },
+    {
+      "module": "ContinuousFlexibility.Blueprint.N01c.Speeds",
+      "path": "src/ContinuousFlexibility/Blueprint/N01c/Speeds.lean",
+      "blob": "b9732984d9723e5a61b4448e56d2cca328dac0a2",
+      "sha256": "1f23c236995dca93731911dfebfa0b9cf05b525cb4cf1bb49b19b690256a8780",
+      "lines": 26,
+      "imports": [
+        "ContinuousFlexibility.Blueprint.N01c.Statements",
+        "ContinuousFlexibility.Analysis.N01cCharacteristicSpeedTameBounds"
+      ],
+      "kind": "exact_upstream_cohort3",
+      "preimage": null
+    }
+  ],
+  "counts": {
+    "changed_sources": 112,
+    "new_modules": 111,
+    "upstream_new_modules": 91,
+    "coordinate_proof_leaves": 6,
+    "reference_prefix_modules": 14,
+    "merged_leaf_provider_graph_nodes": 755,
+    "project_sources_after": 4413,
+    "all_src_Lean_after": 4417,
+    "CI_generated_root_imports_after": 4351
+  },
+  "budget": {
+    "source_added": 19736,
+    "source_deleted": 6,
+    "generated_root_added": 110,
+    "conservative_added": 19846,
+    "limit": 20000
+  },
+  "controls": [
+    {
+      "path": ".github/workflows/build.yml",
+      "blob": "3152629f2ebb53a7af652218ea5bd2d64d16d493",
+      "changed": false
+    },
+    {
+      "path": "scripts/gen_root.py",
+      "blob": "8c4778a0260d7f7125f2deb16c15a89dc416d4f8",
+      "changed": false
+    },
+    {
+      "path": "scripts/root_exclude.txt",
+      "blob": "fb280f584a48220180a18c65ab9a6883cbba800c",
+      "changed": false
+    },
+    {
+      "path": "lakefile.toml",
+      "blob": "e5a1f0b7f675184f10cbc5bed03f252c438de494",
+      "changed": false
+    },
+    {
+      "path": "lean-toolchain",
+      "blob": "f0e00b3338bac0d6f050d9a64e277314a9f7830f",
+      "changed": false
+    },
+    {
+      "path": "lake-manifest.json",
+      "blob": "67156a1517d5fa6b4cd5e3adb52354c7eba69bc8",
+      "changed": false
+    }
+  ],
+  "source_checks": {
+    "all_selected_new_source_contents_fetched": true,
+    "all_sha256_and_lines_and_imports_recomputed": true,
+    "all_target_paths_absent_from_base": true,
+    "all_91_upstream_blobs_equal_latest_main": true,
+    "all_direct_project_imports_exist_in_final_tree": true,
+    "new_module_import_DAG_acyclic": true,
+    "leaf_provider_graphs_unify_without_blob_or_import_conflict": true,
+    "all_nonselected_leaf_graph_providers_match_c796": true,
+    "only_provider_override": "TameMultilinearNormalization exact de78",
+    "declaration_checks": "Six leaves/91 exact source declarations checked in root; fourteen-prefix 48 names checked against all 541 closure providers, 91 cohort sources, normalizer additions and six-leaf 32 names in independent proposal dfa280. Historical full-project 105-name scan aae17 is explicitly reused, not claimed rerun."
+  },
+  "review_bindings": {
+    "reference_prefix_proposal": "dfa280484b9f2153aad4cc13910d317e0508237f",
+    "reference_prefix_graph": "da8fec85b3efe14f66bf39f04a13428a22232e72",
+    "opposite_pair_migration": "59508af66a7635c4bdb3461cdecccd183dd84560",
+    "opposite_pair_graph": "5bc8e40368c175fa239e31fc23a6051ecf98d989",
+    "sector_and_normalizer_full_review": "70dff750330a8243935b3a095d4d786a55d1701b",
+    "sector_final_graph": "da69d80f36c4df7f6df0a8aa8d22ffcf39a256fa",
+    "sector_delta_review": "7381eb6cfde01cee0c1bdf92cd2539446a32e9ce",
+    "outage_review_identity_facts": "ad5f59c6986b8f29313670662bea1e495a0c4ac9",
+    "old_full41_gate_unchanged": "0ae5d8a1d49a64c412183757910c6ff25507260c"
+  },
+  "remote_execution_policy": {
+    "reason": "Executor became unavailable; use Git objects and existing CI without pretending local scripts ran.",
+    "local_133_stager_executed": false,
+    "local_Lean_executed": false,
+    "local_gen_root_executed": false,
+    "generated_root_blob_unchanged": true,
+    "CI_existing_gen_root_will_execute": true,
+    "no_workflow_or_limit_changes": true,
+    "commit_parent_only": "c796387fb555392501c81f5b8bd834936251516c",
+    "no_main_merge_claim": true,
+    "lease_expected_head": "c796387fb555392501c81f5b8bd834936251516c"
+  },
+  "endpoint_status": "N04Coordinates Realization remains OPEN; this is a bounded dependency/proof group for first elaboration, not task completion.",
+  "installation_topological_order": [
+    "ContinuousFlexibility.Analysis.N01cOpticalSquareRootJets",
+    "ContinuousFlexibility.Analysis.N01cOpticalSquareBounds",
+    "ContinuousFlexibility.Analysis.N01cOpticalMixedJets",
+    "ContinuousFlexibility.Analysis.N01cOpticalRootProducts",
+    "ContinuousFlexibility.Analysis.N01cOpticalNumericEnvelopes",
+    "ContinuousFlexibility.Analysis.N01cOpticalMaterialBounds",
+    "ContinuousFlexibility.Analysis.N01cOpticalEndpointPowerBounds",
+    "ContinuousFlexibility.Analysis.N01cWholeSpeedPowerBounds",
+    "ContinuousFlexibility.Analysis.N01cEndpointReferenceBounds",
+    "ContinuousFlexibility.Analysis.N01cCharacteristicSpeedTameBounds",
+    "ContinuousFlexibility.Blueprint.N01c.Speeds",
+    "ContinuousFlexibility.Analysis.N01cFlowVariation",
+    "ContinuousFlexibility.Analysis.N01cFlowParameterContinuity",
+    "ContinuousFlexibility.Analysis.N01cFlowTopologicalContinuity",
+    "ContinuousFlexibility.Analysis.N01cTopologicalParameterIntegral",
+    "ContinuousFlexibility.Analysis.N01cFlowParameterSmooth",
+    "ContinuousFlexibility.Analysis.N01cVolterraMultilinear",
+    "ContinuousFlexibility.Analysis.N01cVolterraStateJets",
+    "ContinuousFlexibility.Analysis.N01cFlowHighestVariation",
+    "ContinuousFlexibility.Analysis.N01cFiniteAffineJets",
+    "ContinuousFlexibility.Analysis.N01cFlowFrechetParameters",
+    "ContinuousFlexibility.Analysis.N01cFlowFrechetContinuity",
+    "ContinuousFlexibility.Analysis.N01cFlowParameterJetEquations",
+    "ContinuousFlexibility.Analysis.N01cFlowJetIdentification",
+    "ContinuousFlexibility.Analysis.N01cVolterraNaturality",
+    "ContinuousFlexibility.Analysis.N01cFlowAffineCompression",
+    "ContinuousFlexibility.Analysis.N01cFlowStateSmooth",
+    "ContinuousFlexibility.Analysis.N01cFlowCompactStateSmooth",
+    "ContinuousFlexibility.Analysis.N01cFlowInitialAngleSmooth",
+    "ContinuousFlexibility.Analysis.N01cAngularJetTowers",
+    "ContinuousFlexibility.Analysis.N01cEndpointDivision",
+    "ContinuousFlexibility.Analysis.N01cParametricEndpointDivision",
+    "ContinuousFlexibility.Analysis.N01cFiniteAffineInputs",
+    "ContinuousFlexibility.Analysis.N01cComponentOpticalGeometry",
+    "ContinuousFlexibility.Analysis.N01cFiniteAffineSpeedFactors",
+    "ContinuousFlexibility.Analysis.N01cCosineRootPath",
+    "ContinuousFlexibility.Analysis.N01cComponentCosineSpeed",
+    "ContinuousFlexibility.Analysis.N01cComponentSpeedPeriodicity",
+    "ContinuousFlexibility.Analysis.N01cCosineAngularJets",
+    "ContinuousFlexibility.Analysis.N01cCosineFlowIdentities",
+    "ContinuousFlexibility.Analysis.N01cPhysicalFlowRegularity",
+    "ContinuousFlexibility.Analysis.N01cActualFlowSmoothDirections",
+    "ContinuousFlexibility.Analysis.N01cCircleLinearVariationBounds",
+    "ContinuousFlexibility.Analysis.N01cCircleLinearVariationSmooth",
+    "ContinuousFlexibility.Analysis.N01cFlowVariationCircleData",
+    "ContinuousFlexibility.Analysis.N01cFiniteAffineMixedJets",
+    "ContinuousFlexibility.Analysis.N01cJointJetContinuity",
+    "ContinuousFlexibility.Analysis.N01cStateAngleJets",
+    "ContinuousFlexibility.Analysis.N01cStateAngleSmoothDirections",
+    "ContinuousFlexibility.Analysis.N01cStateAngleIdentification",
+    "ContinuousFlexibility.Analysis.N01cActualFlowCircleData",
+    "ContinuousFlexibility.Analysis.N01cCircleForcingProducts",
+    "ContinuousFlexibility.Analysis.N01cFlowForcingExpansion",
+    "ContinuousFlexibility.Analysis.N01cFlowForcingSobolev",
+    "ContinuousFlexibility.Analysis.N01cFlowVariationForcingBounds",
+    "ContinuousFlexibility.Analysis.N01cActualFlowForcingBounds",
+    "ContinuousFlexibility.Analysis.N01cCosineSpeedParameterBounds",
+    "ContinuousFlexibility.Analysis.N01cStateAngleSelections",
+    "ContinuousFlexibility.Analysis.N01cFlowSlotBounds",
+    "ContinuousFlexibility.Analysis.N01cCosineSpeedPrefixBounds",
+    "ContinuousFlexibility.Analysis.N01cSpeedBoundsRestriction",
+    "ContinuousFlexibility.Analysis.N01cSpeedLowBounds",
+    "ContinuousFlexibility.Analysis.N01cActualFlowSpeedOuterBounds",
+    "ContinuousFlexibility.Analysis.N01cActualFlowForcingComposition",
+    "ContinuousFlexibility.Analysis.N01cFlowVariationInput",
+    "ContinuousFlexibility.Analysis.N01cFlowOrderConstants",
+    "ContinuousFlexibility.Analysis.N01cActualFlowLowerBounds",
+    "ContinuousFlexibility.Analysis.N01cSpeedAngularGrowth",
+    "ContinuousFlexibility.Analysis.N01cFlowNumericConstants",
+    "ContinuousFlexibility.Analysis.N01cFlowZeroAngularGrowth",
+    "ContinuousFlexibility.Analysis.N01cCosineLowGeometry",
+    "ContinuousFlexibility.Analysis.N01cCommonCosineGeometry",
+    "ContinuousFlexibility.Analysis.N01cOrdinaryFlowZeroAngularBounds",
+    "ContinuousFlexibility.Analysis.N01cActualFlowDefectBounds",
+    "ContinuousFlexibility.Analysis.N01cFlowHeadEnvelope",
+    "ContinuousFlexibility.Analysis.N01cActualFlowHeadBounds",
+    "ContinuousFlexibility.Analysis.N01cFlowForcingEnvelope",
+    "ContinuousFlexibility.Analysis.N01cFlowForcingFamilyEnvelope",
+    "ContinuousFlexibility.Analysis.N01cActualFlowForcingEnvelope",
+    "ContinuousFlexibility.Analysis.N01cActualFlowCoefficientEnvelope",
+    "ContinuousFlexibility.Analysis.N01cCircleLinearVariationEnvelope",
+    "ContinuousFlexibility.Analysis.N01cFlowLinearFamilyEnvelope",
+    "ContinuousFlexibility.Analysis.N01cActualFlowVariationEnvelope",
+    "ContinuousFlexibility.Analysis.N01cActualFlowUnitDirections",
+    "ContinuousFlexibility.Analysis.N01cFlowParameterNormalization",
+    "ContinuousFlexibility.Analysis.N01cFlowNormalizationProperty",
+    "ContinuousFlexibility.Analysis.N01cActualFlowNormalization",
+    "ContinuousFlexibility.Analysis.N01cActualFlowAngularInduction",
+    "ContinuousFlexibility.Analysis.N01cActualFlowAngularPrefix",
+    "ContinuousFlexibility.Analysis.N01cSpeedTowerRestriction",
+    "ContinuousFlexibility.Analysis.N05ReferenceOutputWeightInclusion",
+    "ContinuousFlexibility.Analysis.CanonicalPrimitiveJetsNormalization",
+    "ContinuousFlexibility.Analysis.RootTravelOppositeCoordinates",
+    "ContinuousFlexibility.Analysis.ActualNegativeOppositeRootFields",
+    "ContinuousFlexibility.Analysis.CanonicalCurrentUniformCloseness",
+    "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets",
+    "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentSectorBounds",
+    "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+    "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+    "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+    "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry",
+    "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+    "ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation",
+    "ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily",
+    "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+    "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+    "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasGeometry"
+  ]
+}

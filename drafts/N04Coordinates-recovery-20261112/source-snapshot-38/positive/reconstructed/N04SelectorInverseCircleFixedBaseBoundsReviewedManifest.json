@@ -1,0 +1,126 @@
+{
+  "schema": "n04-reviewed-source-manifest-v1",
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "selected_source": {
+    "module": "ContinuousFlexibility.Analysis.N04SelectorInverseCircleFixedBaseBounds",
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04SelectorInverseCircleFixedBaseBounds.lean",
+    "bytes": 8461,
+    "sha256": "93154c0937eac430488bc4927b7d5e5f42d026df05959e430686c650ddd79fd4",
+    "git_blob": "054e86dbc3a61f36df0ff4fd7ddf71aefeacb117",
+    "lines": 152,
+    "eof_lf": true,
+    "imports": [
+      "ContinuousFlexibility.Analysis.N04EndpointCircleFixedBaseBounds",
+      "ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds",
+      "ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds",
+      "ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds",
+      "ContinuousFlexibility.Analysis.TameProductDirections"
+    ],
+    "selection": "owned-frozen-candidate-uncompiled"
+  },
+  "candidate_manifest": {
+    "path": "positive/reconstructed/N04SelectorInverseCircleFixedBaseBoundsCandidateManifest.json",
+    "git_blob": "803c8dc182e4de0e68fb129891c30cf99d45f8e0",
+    "sha256": "91d733acb671c04e90f34c126050d6f2e33c4837d6973ea2fb9fba1f3102489d",
+    "bytes": 23528
+  },
+  "selected_provider_graph": {
+    "path": "positive/reconstructed/N04SelectorInverseCircleFixedBaseBoundsSelectedProviders.json",
+    "git_blob": "212dc2c6c64d807827ad916c8eadd312df2fa273",
+    "sha256": "40188216c7dc445d1fb5a70ff4ce8d10ee1c3ad0fca955e7f42bd1312fef5ff7",
+    "bytes": 320677,
+    "project_modules": 517,
+    "main_pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "main_nodes": 510,
+    "explicit_non_main_nodes": 7,
+    "missing_imports": [],
+    "cycles": [],
+    "scope": "Exact source selection and import closure; no typecheck is inferred."
+  },
+  "independent_review": {
+    "reviewer": "/root/audit_coordinates",
+    "path": "audit/reviews/N04SelectorInverseCircleFixedBaseBoundsIndependentReview.json",
+    "git_blob": "d248e692dba26bf04ff60447ef2dc77b6383a1f8",
+    "sha256": "76f08fd2b3be38c225b7de7e1a862f3b7fb2aad6f97a672c18d683981b6e367e",
+    "bytes": 20220,
+    "status": "PASSED_FULL_STATIC_REVIEW_NOT_COMPILED",
+    "full_source_review": true,
+    "actual_provider_fingerprints_checked": 18,
+    "pinned_mathlib_fingerprints_checked": 3,
+    "source_fetched_and_readback_verified": true,
+    "open_findings": []
+  },
+  "public_contract": {
+    "name": "ContinuousFlexibility.Statements.N01Properties.selectorInverseCircle_fixedBase_oneHigh",
+    "header_sha256": "b1527d4076afe35ee832fabf8863ae774d8ce9b17ae7e72db73b3330f719218e",
+    "scope": "exists B >= base, for every parameter order n exists loss L, for every R >= 0 and output order s exists K >= 0, uniformly before the radius selector, any genuine tower J of the literal selectorInverseCircle, the original sector point x with p B x <= R, and all multilinear variations.",
+    "circle_weight": "The same S.circle (3/4), original selectorInverseCircle and original sector neighborhood.",
+    "upstream_premise": "The actual all-closed-component hflow derivative bounds [1/2,3/2] remain explicit; no final jet bound is assumed."
+  },
+  "exact_delta": {
+    "before": "rw [heq, map_neg]",
+    "after": "rw [heq, map_neg_eq_map]",
+    "occurrences": 1,
+    "reverse_reconstructs_original": true,
+    "full_public_header_unchanged": true,
+    "imports_unchanged": true,
+    "all_other_bytes_unchanged": true,
+    "reason": "H.grading s is a Seminorm; its evenness uses map_neg_eq_map. map_neg is an additive-map rewrite and is not the matching API."
+  },
+  "historical_working_source": {
+    "git_blob": "a356bf3400337bfb9b84728e10f255367a3123cb",
+    "sha256": "3ba7ae80da8399eb9c88fa77676846449e90207d182044733939c8da9626643a",
+    "bytes": 8454,
+    "lines": 152,
+    "status": "UNFROZEN_WORKING_CHECKPOINT_WITH_CONFIRMED_SEMINORM_API_FINDING"
+  },
+  "prerequisite_selection": {
+    "composition_final328": {
+      "source_git_blob": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+      "source_sha256": "f70497231b60b5c0a59e8de16cb534f1820e2bd9d6469ed8c86643b88f428b80",
+      "peer_git_blob": "b903f1c2c0e0d0596757977b99bc0ee05b8723f1",
+      "peer_sha256": "5f4f4ab535e429f578c8b64555c6a52da46a5dc916f63b458b66bc4ad0aad2ca",
+      "owner_git_blob": "186312bc05765159d2d4311d51e7c54d27b609d7",
+      "owner_sha256": "d55f9f1672ec1724b5cb642319514cea2b81d80e02bd607bbb0cf80a917ca98c",
+      "owner_readback_verified": true
+    },
+    "endpoint115": {
+      "source_git_blob": "09a1696b57c7fe3678cc6e10e419bb8fa22c0c11",
+      "prior_peer_sha256": "7ce9720a1e7c07b711e045e82856113420dd10cc1885365874b8788b610dcf44",
+      "scope": "Source and currently used contract re-read; prior receipt identity retained, no reserialization claim."
+    },
+    "inverse301": {
+      "source_git_blob": "1f55edbb185fe33327757a087479196cc8565e4f",
+      "prior_peer_sha256": "9dae94366bfd280d36301f52715857cd69c72a35ccc438c90c10caddf0b07ad6",
+      "scope": "Source retained from full prior review and current genuine inverse bound re-read."
+    },
+    "no_silent_pin_change": "The graph explicitly selects the main1ece de78 normalization and the green163 CanonicalStateInterpolation fallback. All 510 main objects were matched against the exact main1ece Git tree; all seven exceptions are named. Older selected graphs and receipts are not rewritten."
+  },
+  "selection_decision": "Select only final152 blob054e86; the prior a356 working checkpoint is preserved in Git history and does not inherit reviewed readiness. Final328 f7492e is selected, not historical326.",
+  "budget": {
+    "group_limit_lines": 1222,
+    "selected_or_frozen301": 301,
+    "selected115": 115,
+    "historical326": 326,
+    "selected328": 328,
+    "this_unfrozen_working_path_now_frozen": 152,
+    "total": 1222,
+    "remaining_new_lean_lines": 0,
+    "no_duplicate_152_lean_path": true
+  },
+  "persistence": {
+    "repository": "Rogerhu12/continuous-flexibility",
+    "mechanism": "Authorized no-ref GitHub blobs during unavailable filesystem; exact source, manifest, graph and peer bytes fetched and verified.",
+    "source_path": "positive/reconstructed/N04SelectorInverseCircleFixedBaseBounds.lean"
+  },
+  "limitations": [
+    "Full static source/provider/quantifier review only; not compiled.",
+    "This establishes the actual ordinary selector inverse circle bound, not the full corrected-flow operation chain or final CurrentJets.",
+    "No claim of a repository-wide public-name collision scan beyond the stated source review.",
+    "The 152 working file is updated in place at its intended backup path; no duplicate Lean version is added to the current source budget."
+  ],
+  "source_mutated_since_review": false,
+  "compilation_performed": false,
+  "active_tree_changed": false,
+  "index_or_refs_changed": false
+}

@@ -1,0 +1,1492 @@
+{
+  "kind": "CI165RemoteTreeStagingIndependentReview",
+  "reviewer": "audit_coordinates",
+  "reviewed_at_utc": "2026-11-12 20:46:50 UTC",
+  "status": "STATIC_REMOTE_STAGING_REVIEW_PASSED_NOT_A_COMPILATION_RESULT",
+  "proposed_path": "audit/reviews/CI165RemoteTreeStagingIndependentReview.json",
+  "scope": "Independent read-only audit of the Git-tree substitute for the unavailable local staging executor; exact candidate identities, source contents, provider selections, rules, CI generation semantics and budget. Existing complete mathematical reviews remain their own authority.",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "branch": "line/N04Coordinates",
+  "candidate": {
+    "commit": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+    "tree": "49237cc2b902342c4a42b86d653fb00770d65d60",
+    "sole_parent": "c796387fb555392501c81f5b8bd834936251516c",
+    "main_compared": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "main_is_not_a_merge_parent": true,
+    "full_main_merge_claim": false
+  },
+  "evidence": [
+    {
+      "name": "plan",
+      "blob": "3cf29e144e857988cd88ea1fc3536d84c1cf6195",
+      "sha256": "2db4134c228c8e6ac341f2d94033924c6e7f26ca57c90bfae5334de5df9eb929",
+      "bytes": 77463
+    },
+    {
+      "name": "green164_receipt",
+      "blob": "44525c48c74a4b1637cb9c3c2ef5239ca01f916e",
+      "sha256": "9663e24ef1d3447942da9831960d288c8c3018a81b813ad2b0eed7a4453c681d",
+      "bytes": 2721
+    },
+    {
+      "name": "opposite_graph",
+      "blob": "5bc8e40368c175fa239e31fc23a6051ecf98d989",
+      "sha256": "e68f17701ee16b6ada52135445681a16b1a8ba7e0581884910df997e60bb69ee",
+      "bytes": 445100
+    },
+    {
+      "name": "sector_graph",
+      "blob": "da69d80f36c4df7f6df0a8aa8d22ffcf39a256fa",
+      "sha256": "9fcf206f43f0b107cb01ea7184249a503a7b1511c3238975143c01acef2e306b",
+      "bytes": 330260
+    },
+    {
+      "name": "prefix_graph",
+      "blob": "da8fec85b3efe14f66bf39f04a13428a22232e72",
+      "sha256": "02ae664aa07bb6746786b41d97b7c8d21cd48a54e1fc40f8836088f6ff7d7a90",
+      "bytes": 582277
+    },
+    {
+      "name": "prefix_proposal",
+      "blob": "dfa280484b9f2153aad4cc13910d317e0508237f",
+      "sha256": "0914bc8829e0780a78db7d6969c5c1951e4587e29a62900fba36473339617d62",
+      "bytes": 47354
+    }
+  ],
+  "baseline_and_rules": {
+    "exact_baseline": "c796387fb555392501c81f5b8bd834936251516c",
+    "exact_baseline_tree": "08257c9406671ac1f094b739e4971c1eca108c66",
+    "full_green_evidence": "44525c48c74a4b1637cb9c3c2ef5239ca01f916e",
+    "green_source_coverage_corrected": {
+      "verified_project_modules": 4297,
+      "total_project_modules": 4302,
+      "all_src_lean": 4306,
+      "excluded": 2,
+      "three_blueprint_modules_without_source_build_evidence": [
+        "ContinuousFlexibility.Blueprint.CanonicalParts",
+        "ContinuousFlexibility.Blueprint.N01c.Coefficients",
+        "ContinuousFlexibility.Blueprint.N01c.Statements"
+      ],
+      "old_4300_estimate_not_used": true,
+      "cached_olean_4634_not_a_source_coverage_count": true
+    },
+    "rule_blobs_equal_baseline_and_main": [
+      "AGENTS.md:e6835ac7265ded9040e63ea60908e8f91f645f7d",
+      "docs/tasks/README.md:57b252cad32de311bf2bd20390eab2b11e936006",
+      "docs/tasks/N04Coordinates.md:94d52f529bea6b9e2b4aabd26783de4ee101b6ce"
+    ],
+    "same_lean_toolchain": "leanprover/lean4:v4.35.0-rc3",
+    "same_mathlib": "c55e6e786f49471c72fbddbec5415808896aec1e"
+  },
+  "tree_checks": {
+    "baseline": "c796387fb555392501c81f5b8bd834936251516c",
+    "baseline_tree": "08257c9406671ac1f094b739e4971c1eca108c66",
+    "candidate_commit": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+    "candidate_tree": "49237cc2b902342c4a42b86d653fb00770d65d60",
+    "counts": {
+      "treeChanges": 112,
+      "new": 111,
+      "modified": 1,
+      "deleted": 0,
+      "compareFiles": 112,
+      "additions": 19736,
+      "deletions": 6
+    },
+    "sourceOnly": true,
+    "controls": [
+      {
+        "path": "AGENTS.md",
+        "base": "e6835ac7265ded9040e63ea60908e8f91f645f7d",
+        "candidate": "e6835ac7265ded9040e63ea60908e8f91f645f7d",
+        "same": true
+      },
+      {
+        "path": "docs/tasks/README.md",
+        "base": "57b252cad32de311bf2bd20390eab2b11e936006",
+        "candidate": "57b252cad32de311bf2bd20390eab2b11e936006",
+        "same": true
+      },
+      {
+        "path": "docs/tasks/N04Coordinates.md",
+        "base": "94d52f529bea6b9e2b4aabd26783de4ee101b6ce",
+        "candidate": "94d52f529bea6b9e2b4aabd26783de4ee101b6ce",
+        "same": true
+      },
+      {
+        "path": ".github/workflows/build.yml",
+        "base": "3152629f2ebb53a7af652218ea5bd2d64d16d493",
+        "candidate": "3152629f2ebb53a7af652218ea5bd2d64d16d493",
+        "same": true
+      },
+      {
+        "path": "scripts/gen_root.py",
+        "base": "8c4778a0260d7f7125f2deb16c15a89dc416d4f8",
+        "candidate": "8c4778a0260d7f7125f2deb16c15a89dc416d4f8",
+        "same": true
+      },
+      {
+        "path": "scripts/root_exclude.txt",
+        "base": "fb280f584a48220180a18c65ab9a6883cbba800c",
+        "candidate": "fb280f584a48220180a18c65ab9a6883cbba800c",
+        "same": true
+      },
+      {
+        "path": "lakefile.toml",
+        "base": "e5a1f0b7f675184f10cbc5bed03f252c438de494",
+        "candidate": "e5a1f0b7f675184f10cbc5bed03f252c438de494",
+        "same": true
+      },
+      {
+        "path": "scripts/ci/changed_modules.sh",
+        "base": "a1a34bc7993b4e7aa813da544a50149643c8b4a2",
+        "candidate": "a1a34bc7993b4e7aa813da544a50149643c8b4a2",
+        "same": true
+      },
+      {
+        "path": "lean-toolchain",
+        "base": "f0e00b3338bac0d6f050d9a64e277314a9f7830f",
+        "candidate": "f0e00b3338bac0d6f050d9a64e277314a9f7830f",
+        "same": true
+      },
+      {
+        "path": "lake-manifest.json",
+        "base": "67156a1517d5fa6b4cd5e3adb52354c7eba69bc8",
+        "candidate": "67156a1517d5fa6b4cd5e3adb52354c7eba69bc8",
+        "same": true
+      },
+      {
+        "path": "src/ContinuousFlexibility.lean",
+        "base": "38c718d76599e9550272afe65276ffed72dc9caf",
+        "candidate": "38c718d76599e9550272afe65276ffed72dc9caf",
+        "same": true
+      }
+    ],
+    "failures": []
+  },
+  "readonly_generator_and_source_graph": {
+    "readonly_root_model": {
+      "generator_blob": "8c4778a0260d7f7125f2deb16c15a89dc416d4f8",
+      "exclude_blob": "fb280f584a48220180a18c65ab9a6883cbba800c",
+      "baseline_import_count": 4241,
+      "candidate_import_count": 4351,
+      "added": 110,
+      "deleted": 0,
+      "excludes": [
+        "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+        "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth"
+      ],
+      "not_generated_blueprint_additions": [
+        "ContinuousFlexibility.Blueprint.N01c.Speeds"
+      ],
+      "not_executed": true
+    },
+    "project_sources": {
+      "base": 4302,
+      "candidate": 4413,
+      "all_src_lean": 4417
+    },
+    "cohort91": {
+      "count": 91,
+      "errors": []
+    },
+    "source_graph": {
+      "new_and_modified_nodes": 112,
+      "directMissing": [],
+      "cycles": [],
+      "topoCount": 111,
+      "topoErrors": []
+    },
+    "budget": {
+      "source_added": 19736,
+      "modeled_root_added": 110,
+      "conservative": 19846,
+      "under20k": true
+    }
+  },
+  "provider_graphs": {
+    "imported_graph_checks": {
+      "graph_sizes": [
+        {
+          "key": "CI165_audit_opposite_graph_json",
+          "nodes": 426,
+          "reachable": 426
+        },
+        {
+          "key": "CI165_audit_sector_graph_json",
+          "nodes": 359,
+          "reachable": 359
+        },
+        {
+          "key": "CI165_readonly_quant14_graph_json",
+          "nodes": 555,
+          "reachable": 555
+        }
+      ],
+      "unified_nodes": 753,
+      "conflicts": [],
+      "missing": [],
+      "cycles": [],
+      "pinMismatches": [],
+      "metaMissingEdges": [],
+      "metaExtraEdges": [],
+      "selected_reach_count": 19,
+      "unselected_all_baseline_exact": true,
+      "normalizer": {
+        "old": "04e7e732ab5f0d16ba232b561bd612f93dff4c51",
+        "new": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+        "target": "de78e2674d4a5cf3574364b6cc1b589b478c7915"
+      }
+    },
+    "two_independent_roots_added": {
+      "nodes": 755,
+      "added_independent_coordinate_roots": [
+        {
+          "module": "ContinuousFlexibility.Analysis.CanonicalCurrentUniformCloseness",
+          "blob": "ca4ff618fbc4e869ccc7195c8244ee965e4f2bbc",
+          "imports": [
+            "ContinuousFlexibility.Analysis.N07aNeighborhood",
+            "ContinuousFlexibility.Analysis.MaterialSampleBounds"
+          ]
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.CanonicalPrimitiveJetsNormalization",
+          "blob": "19fbfbee2481dc3603bb1dcd55f479f55c256b97",
+          "imports": [
+            "ContinuousFlexibility.Analysis.CanonicalJetNormalization",
+            "ContinuousFlexibility.Analysis.N07aGeometryJetBounds",
+            "ContinuousFlexibility.Analysis.SolveReturnEquations"
+          ]
+        }
+      ],
+      "missing": []
+    },
+    "final_union_nodes": 755,
+    "note": "The three stored graphs alone have 753 distinct nodes. The independently reviewed CanonicalCurrentUniformCloseness and CanonicalPrimitiveJetsNormalization roots contribute exactly two more; all their direct dependencies already lie in that union.",
+    "all_final_graph_nodes_match_candidate_tree": true,
+    "no_silent_main_N04b_provider_upgrade": true,
+    "sole_existing_source_override": {
+      "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "before": "04e7e732ab5f0d16ba232b561bd612f93dff4c51",
+      "after": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "full_review_binding": "70dff750330a8243935b3a095d4d786a55d1701b"
+    },
+    "unchanged_old41_gate": "0ae5d8a1d49a64c412183757910c6ff25507260c",
+    "atomic_14_source_selection": true
+  },
+  "source_validation": {
+    "independently_fetched_selected_raw_sources": 112,
+    "all_sha256_linecounts_and_imports_match": true,
+    "all_91_upstream_sources_match_original_frozen_cohort3_and_main1ece": true,
+    "all_111_new_paths_absent_in_baseline": true,
+    "no_prohibited_proof_tokens_or_limit_changes_found_in_selected_sources": true,
+    "normalizer_import_note": "The compact plan's normalizer row omits an inline imports field. Its actual six Mathlib imports were checked against the exact selected-provider graph instead; there are no project imports.",
+    "rows": [
+      {
+        "module": "ContinuousFlexibility.Analysis.ActualNegativeOppositeRootFields",
+        "blob": "5b0d8327ff2054595a95f053d2f5e82afeabc2dd",
+        "sha256": "c0650b4a9db498e63f79036a37b29d1b97dbee449a3209fbf32290456faa4626",
+        "sha_ok": true,
+        "lines": 256,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CanonicalCurrentUniformCloseness",
+        "blob": "ca4ff618fbc4e869ccc7195c8244ee965e4f2bbc",
+        "sha256": "542b75aa28930a3e7303536ea2ff712e20c0b7a49689e1eaf9d857f400c90aa0",
+        "sha_ok": true,
+        "lines": 94,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CanonicalPrimitiveJetsNormalization",
+        "blob": "19fbfbee2481dc3603bb1dcd55f479f55c256b97",
+        "sha256": "b930c8f21c01d5a534fc634a94bc354bc6dbeda3551d5995e8a9b711731233e5",
+        "sha_ok": true,
+        "lines": 85,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets",
+        "blob": "74e009ae51c272ef758c21447a9f494156e3d6ec",
+        "sha256": "c1b05760d478ef2e0e480010ae0b985db327927ac4178153660f79ef6a15c699",
+        "sha_ok": true,
+        "lines": 109,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentSectorBounds",
+        "blob": "8dcc2e224e6eb437764407ba8ae16c631106f685",
+        "sha256": "ee6719537036a2f020dc9355902c42c9ac1c2eecb6b16ce8739b38beceafaa51",
+        "sha_ok": true,
+        "lines": 182,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cActualFlowAngularInduction",
+        "blob": "8877228eb4ddc86caac2fc2183df499fa0de8cc6",
+        "sha256": "39e5f8a650b1041d233882bf07d9ad341c55eccf67b96d1da556e2c7f56876e7",
+        "sha_ok": true,
+        "lines": 73,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cActualFlowAngularPrefix",
+        "blob": "362d31e6740d6d33d29cee4cc6a87c5a76fdcecd",
+        "sha256": "7819dcb8d7128b7f68d3450cc144dad05e8e35f2cb685f01091270b8c8e92264",
+        "sha_ok": true,
+        "lines": 80,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cActualFlowCircleData",
+        "blob": "6ca69223ad0f34b372199da53b5d419521de52c6",
+        "sha256": "6d8e08a641b34dce4310dc9afe67ff7122a74226450d5898578c6d713464175f",
+        "sha_ok": true,
+        "lines": 380,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cActualFlowCoefficientEnvelope",
+        "blob": "18e0a504231049694480f0826c4c8f5cc513bb52",
+        "sha256": "5c1aee04ead7f63e1948aed1bc6ab159f0fc6e8a848530c12d9a8999cda6fee8",
+        "sha_ok": true,
+        "lines": 74,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cActualFlowDefectBounds",
+        "blob": "9ba00b8a508c46d0e1ce453141b32f62f339eff1",
+        "sha256": "599a43301ec93b251acdb4eb608484636acde1dca67408691d3548192d224a4f",
+        "sha_ok": true,
+        "lines": 132,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cActualFlowForcingBounds",
+        "blob": "f1e9b4a3efabb08fb50f7ff3e0316bf7eb593a65",
+        "sha256": "5711d6bc8b487abe9767ffa5ff0cd9b2fa2b7933d49a27ed3e675b3f094dfcc9",
+        "sha_ok": true,
+        "lines": 216,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cActualFlowForcingComposition",
+        "blob": "be729d2d155fe3c978356a23de538e22aa7f1ee4",
+        "sha256": "d3443e75646a23a4447786d1b3c78aa55a4fa529999709dd479d769e7810121f",
+        "sha_ok": true,
+        "lines": 193,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cActualFlowForcingEnvelope",
+        "blob": "06babb48923b0b2519cb610ab8fb6e1d54db39a5",
+        "sha256": "ffe382d76c86b1105cafd405a15431e89c86e39caba453624f3350000293d7fc",
+        "sha_ok": true,
+        "lines": 90,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cActualFlowHeadBounds",
+        "blob": "5f7df48ef867fc7881950d61b6e8f537a9c77405",
+        "sha256": "bd4224c134ec0d9b7cb948f8246ea3ef65f0b183f0c08b0a9bd17553b0d380bb",
+        "sha_ok": true,
+        "lines": 103,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cActualFlowLowerBounds",
+        "blob": "a266e8d1630cc10646c9f7c6b6c147a5142af631",
+        "sha256": "8b001c68d77b62f5f191695208bba776c47f6a36e20984229bad2b16e36d6750",
+        "sha_ok": true,
+        "lines": 157,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cActualFlowNormalization",
+        "blob": "1de19179df88e3a6c45a44c00f3319ccebe5ee73",
+        "sha256": "59bbf4d1263ab8e09a9a892ac8fc804fc0d26f19f2193e883a082838cb18e66a",
+        "sha_ok": true,
+        "lines": 141,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cActualFlowSmoothDirections",
+        "blob": "812a259c4239b76c9282015a5cad9ca7b9e5b6a3",
+        "sha256": "dcdea91ea3b6aef9caa583cc79c35d0bc351cb4487bf3d9f7eee221b1da0ccba",
+        "sha_ok": true,
+        "lines": 118,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cActualFlowSpeedOuterBounds",
+        "blob": "d60c55fb21329649c68427a896ec432734b6f094",
+        "sha256": "819bd9d0635ae66a6c216e924ac4914e1e66f15cfed11e2affc5b0874ccedfa1",
+        "sha_ok": true,
+        "lines": 322,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cActualFlowUnitDirections",
+        "blob": "8312e38d6c353ceac475edec853b1be121507a30",
+        "sha256": "8caa8ac84f532af6ca25f519040ef8840ea5d25010f1f4909b0986c9e36caab9",
+        "sha_ok": true,
+        "lines": 123,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cActualFlowVariationEnvelope",
+        "blob": "872080bbe9e69e76573d0205a0d9e46c15c4b928",
+        "sha256": "f763e4e827b14513a041bc4f5e32a25d3506ff7d6105ac212b65de21d3c588be",
+        "sha_ok": true,
+        "lines": 82,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cAngularJetTowers",
+        "blob": "6de5b7492a5d48a5ec45fa4eae86a50dc94812fe",
+        "sha256": "375f046f28ef23fba94797fa7b21133b68a4bb77743a351e315a9d7c2c5be21d",
+        "sha_ok": true,
+        "lines": 202,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cCharacteristicSpeedTameBounds",
+        "blob": "b25a688fa034eeacbbccae57881718c85cccb686",
+        "sha256": "2998e4e4ce36d6b6b883035c7b85ad02027d37166ca208b5356c98c07963da91",
+        "sha_ok": true,
+        "lines": 198,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cCircleForcingProducts",
+        "blob": "e1c5753397a67b7393e8ee2fb192eb24c5dd29f8",
+        "sha256": "aee2df30566bfa2266529c1e030bddcc8edb67fa459b62b1718ba0ed0a6db087",
+        "sha_ok": true,
+        "lines": 190,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cCircleLinearVariationBounds",
+        "blob": "b2c66f1a8b45f464917f8a33a1776c39ecfeaa8b",
+        "sha256": "be9da285540eb78940c7a7bc366a0fca4e4649a82499ece01a90403860c640a4",
+        "sha_ok": true,
+        "lines": 487,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cCircleLinearVariationEnvelope",
+        "blob": "71a979b1e8c2162b58bb99d33e141fa5be755cbc",
+        "sha256": "53139e7e47c94b69d5e9afbba360adea3c835bbfa7ceb246e3313ba3c09bcfa4",
+        "sha_ok": true,
+        "lines": 141,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cCircleLinearVariationSmooth",
+        "blob": "73d06e355d0646b70020a8e579c698fc7f878642",
+        "sha256": "3ee599da6a095aebae67b9c6d2483aa19347a7b5e4cc33ac7c9e0ca093979fdc",
+        "sha_ok": true,
+        "lines": 164,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cCommonCosineGeometry",
+        "blob": "4e8c2be4d70a2fd844b141d602b7101d68ed4f1d",
+        "sha256": "3be6b546618d5d82aa9ccc72b3a1f1ce137f630d4dc9564e2e0c7e76865efba8",
+        "sha_ok": true,
+        "lines": 89,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cComponentCosineSpeed",
+        "blob": "8c2587b6cdf5cc7bcc63bd331d4d2a566dc6729b",
+        "sha256": "d3159d20b4015e4e4651515e9b7c98387dabb87425db294c83d0e639ca995a2c",
+        "sha_ok": true,
+        "lines": 133,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cComponentOpticalGeometry",
+        "blob": "4a17352a92e97594b83dcd2e1bf27fc4ef1dc34a",
+        "sha256": "a2b3a1225ee0b833fcf34b606b03769cc779f496f30c07c5388e2768af17d1eb",
+        "sha_ok": true,
+        "lines": 139,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cComponentSpeedPeriodicity",
+        "blob": "045b5d32fb1f8034582c5f183a114ad6550a9a95",
+        "sha256": "0a71dca5945412f51df02b9f55e65fde90d6c846dfe5f7d4d09d3c5af81899f1",
+        "sha_ok": true,
+        "lines": 86,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cCosineAngularJets",
+        "blob": "1538ac7655f73e351ee430da97c2922b1c3cb416",
+        "sha256": "722d2ea200e50199a7631fd36db20eabccd1c772189c4077ad456f0ec961717e",
+        "sha_ok": true,
+        "lines": 93,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cCosineFlowIdentities",
+        "blob": "66324f567ccce60c2d6d1a832534bd110c0b2f7f",
+        "sha256": "7c896c6c676bd4ca5f3951a7cef5a3789f04578f223b8e0b00e9d4525db6cad4",
+        "sha_ok": true,
+        "lines": 41,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cCosineLowGeometry",
+        "blob": "34ec1bfff92de090b18ae661c98566c6588987a4",
+        "sha256": "f953eaf7634af1488bf599914d3675e4b66e7553d928114c87dbfa64041781b3",
+        "sha_ok": true,
+        "lines": 169,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cCosineRootPath",
+        "blob": "e4c98ec1d65706c6a4559dd648d34d0e2150a16d",
+        "sha256": "0b32f0daa985680f9530b7e33651cca31ac7f9ecefcb42dcdfc39b8cd74ba047",
+        "sha_ok": true,
+        "lines": 159,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cCosineSpeedParameterBounds",
+        "blob": "79b079280ec223904cb5a10d85ac226ca8adb432",
+        "sha256": "b906f7463d6ea5449b5e88e54c994c63952c7def08807d07c2ab38ca2c72972c",
+        "sha_ok": true,
+        "lines": 257,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cCosineSpeedPrefixBounds",
+        "blob": "a7c98ee2a841cb0968f56f6d8211504757c14e0f",
+        "sha256": "fd698f57eb73c0fbabfb4ec6b4ec59cd3460912083921cb4817c1696d4e41542",
+        "sha_ok": true,
+        "lines": 79,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cEndpointDivision",
+        "blob": "05804d6ed44e39baddeca986eefb731c485e1fd8",
+        "sha256": "a9b87d9397493feb725c2493b93c76c3708b2b6026e95b4182163e3433d946cb",
+        "sha_ok": true,
+        "lines": 290,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cEndpointReferenceBounds",
+        "blob": "999baa78fdc0054d72842e11b106b581258b241e",
+        "sha256": "150ba88c17d937f673da984620763d3a99c7811d18071a306d360f48d54adb7c",
+        "sha_ok": true,
+        "lines": 90,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFiniteAffineInputs",
+        "blob": "f346a457ad90f8d47e3573302aa26a4780c6e2e4",
+        "sha256": "16e61af180c380d1fece0278af782e6d092c3f1b0bfdc4c8baedfa2386f56d9b",
+        "sha_ok": true,
+        "lines": 102,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFiniteAffineJets",
+        "blob": "11b49ca976af4ed7711545e3997a141f9ff0a218",
+        "sha256": "bacde7dc12f4b928a22cc628ae05d5727e1833bdf18e476c1617836e14139c8e",
+        "sha_ok": true,
+        "lines": 190,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFiniteAffineMixedJets",
+        "blob": "e80743b5f134c3c833972dec004633fec0e821cb",
+        "sha256": "c37f04d8d9e26214254bc2791ea20add4c901af2b560979351d5050fd84dd247",
+        "sha_ok": true,
+        "lines": 415,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFiniteAffineSpeedFactors",
+        "blob": "1463bf479157371325fc350484be0824d2cf27d8",
+        "sha256": "fc6b282b9326a69d4a2d121f93a014c7a981d609823a5fc917ea05ddc64ca37e",
+        "sha_ok": true,
+        "lines": 217,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowAffineCompression",
+        "blob": "bc19f8ecbdd7c2a90bb75d1eea9140bcaa10fd6f",
+        "sha256": "e6d0e5ec7f423399e700279762f7fb1171471b1527a739e988bb73babc86b18d",
+        "sha_ok": true,
+        "lines": 193,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowCompactStateSmooth",
+        "blob": "e187f85e7e6e79636c42405379278dd215a45076",
+        "sha256": "9edac65ed0b6eadd2ea1bd6793a7a7739853ac80cf4a4ca8b8d494c133fba66d",
+        "sha_ok": true,
+        "lines": 131,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowForcingEnvelope",
+        "blob": "d4da679f327121e58ab6f6809f14ff6996a1f4e5",
+        "sha256": "16c845afbc97a9fbbbe83a15f4fa46c4eca103f0d33f785cc4e8fd3312bcaffa",
+        "sha_ok": true,
+        "lines": 187,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowForcingExpansion",
+        "blob": "1e66a3317b7d10d29044ee2b7360ea76fdfa676a",
+        "sha256": "4383f05071fb03dc6a4566c29a375c11e17ccbf6a690ae9b2a7420abe7fa5a06",
+        "sha_ok": true,
+        "lines": 175,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowForcingFamilyEnvelope",
+        "blob": "133a46cdc6c915a148ea04ef7bc02174079412a3",
+        "sha256": "18ee265d28ab891f759b7051a569686cffb326bf80d25d026f64d4fc5f8ea79c",
+        "sha_ok": true,
+        "lines": 129,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowForcingSobolev",
+        "blob": "1eef1dd6656eae5eb3d8a5ef7d4108c56a52d80c",
+        "sha256": "161a19f1942cca20c8dd80f07ed01d595ebbc223665cbb74da5cfd517d84726e",
+        "sha_ok": true,
+        "lines": 170,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowFrechetContinuity",
+        "blob": "1df3302bc3bc2a33ad0cd63ef73da284a94a4387",
+        "sha256": "a8ec33d60926897d1c9efdede9acdc199ce588989e4f4e3972e220017d1cc976",
+        "sha_ok": true,
+        "lines": 229,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowFrechetParameters",
+        "blob": "6b42e40ad2e647c631b360c429fa4ca9dc8ad2fc",
+        "sha256": "0ed983232247830ae44a7cab866ceff147a3e6a34bd07867e0831ba0dd9e849b",
+        "sha_ok": true,
+        "lines": 335,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowHeadEnvelope",
+        "blob": "a659fdad3d0e9c0fde68a8eb8769d4705c50df55",
+        "sha256": "e3da7ff997e75e64da8e5d2321e1904cb97c83e1afdd0df0e976c9dd63daa66f",
+        "sha_ok": true,
+        "lines": 123,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowHighestVariation",
+        "blob": "3491173585a2e4a9678f271c65d50c5eb7e3cca9",
+        "sha256": "fb504d96421c52d591f37e6bd13de556e0dd022001d2215eba9157f75ba125c9",
+        "sha_ok": true,
+        "lines": 177,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowInitialAngleSmooth",
+        "blob": "176cbfb42275fc39d8547f24d0d607d85f3e6bb4",
+        "sha256": "879d239cdc6d632be619835376b82b4be44b5c0b07028e92446c9dd5b7706795",
+        "sha_ok": true,
+        "lines": 109,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowJetIdentification",
+        "blob": "5eb1bc4d551cef9a07e7036c292499df84e34b6f",
+        "sha256": "03686f455ea34f548fd17c6614724d58dc67c821387928c6dc1e457f1ee37124",
+        "sha_ok": true,
+        "lines": 198,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowLinearFamilyEnvelope",
+        "blob": "9783f9f4668a7a2839b5dc69f93e81f8ed6144db",
+        "sha256": "2b3978be1611480606ec65b1f42b7fae50ea31634aa5bcc1fa63841da9bccccc",
+        "sha_ok": true,
+        "lines": 106,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowNormalizationProperty",
+        "blob": "f42fffb6dca90400474ef829617ed03274f17fe2",
+        "sha256": "ff0fb58f68881fb3cecd070a291a8867b99668cd98afba0a0d32ec6042add234",
+        "sha_ok": true,
+        "lines": 65,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowNumericConstants",
+        "blob": "20cd01bc96e85d7e1143f218e92614be7cbf0ed0",
+        "sha256": "0ddea529862b10cd19ade7126b50a8664e7440d8aae0a6dfbf65b97f359ef27e",
+        "sha_ok": true,
+        "lines": 133,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowOrderConstants",
+        "blob": "d374c998cd6e2ee382edee7f18247b4b50794c76",
+        "sha256": "f2a46e9da2da68cf132a22ee5e0ae02356b45e6e2fa1340e0d1b950a0046065f",
+        "sha_ok": true,
+        "lines": 131,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowParameterContinuity",
+        "blob": "9bef6b0850f75764256afaf9a22d695e5a88e501",
+        "sha256": "0cb5bcdec0c2a327f67e1e4720db9e681b29a25f4b16738d6405e884f34481b7",
+        "sha_ok": true,
+        "lines": 315,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowParameterJetEquations",
+        "blob": "cd385bdc58832cf08ffa30ede0ec8ef042d4d14b",
+        "sha256": "7c1e80eedc6e0b756ab7679f74039e2595e8dd2518de4d0a85ad953ea0913ba2",
+        "sha_ok": true,
+        "lines": 182,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowParameterNormalization",
+        "blob": "3410d556ab9875a31a5c8a3e2e2c2029f803494a",
+        "sha256": "5c5bce7936f80968dea3dbdd399a767343fc8d3e5555bcf0b46d93a9c21428be",
+        "sha_ok": true,
+        "lines": 168,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowParameterSmooth",
+        "blob": "b89232c1d05b4d61481ea4e304b6ee486742c631",
+        "sha256": "a0d6300e1a8fa1bf6345c75e41dd0bb9b0297629c2925ae5d8cace8f17507de9",
+        "sha_ok": true,
+        "lines": 291,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowSlotBounds",
+        "blob": "d37e1c99bcf930e6fda7b306c278481e42750df5",
+        "sha256": "2ee6a1c2f4f83709ca71c82cb6fd00d25ef3cb00fc544aad7f2ca5600180d4e4",
+        "sha_ok": true,
+        "lines": 163,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowStateSmooth",
+        "blob": "d067a9d6f31ec57fb7bcb55028ddb95cf4b47477",
+        "sha256": "346288ffc0e7f947e11503efd2f2fa2e661b1204a041535b8091e8e1d4da8acc",
+        "sha_ok": true,
+        "lines": 173,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowTopologicalContinuity",
+        "blob": "5eaed7e6a6d28d5cc3973c92d8b3eb30ec53b9c8",
+        "sha256": "25e213570376ba396a65e50c8cbc3cb3131864a396f2c5822866111a3e34a4d8",
+        "sha_ok": true,
+        "lines": 193,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowVariation",
+        "blob": "e72083c0fa4524ef923ed999cc33dbadc002a10f",
+        "sha256": "ba0569a1160d2d05b6eca1f35e1009552a7be56c9c51fed3b056d25df8479e8c",
+        "sha_ok": true,
+        "lines": 305,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowVariationCircleData",
+        "blob": "1205ed3731a73d0b4009dab7b1c1ff3c0b806612",
+        "sha256": "a80631e393ed09d7f3f9979bea2bcbc6d45998e72d7971f189005a220693eedc",
+        "sha_ok": true,
+        "lines": 316,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowVariationForcingBounds",
+        "blob": "01172bb3e8ab20390efa2b80a8cd8aa950a71258",
+        "sha256": "5c5ac66fb33325674ff7399928bf6e3e8cd38d44cf03da388dd0de1855484163",
+        "sha_ok": true,
+        "lines": 282,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowVariationInput",
+        "blob": "b1eb30eba3fde913eb640565f79e7eebb7755333",
+        "sha256": "82887d0ab14c700823e8565307b63b7bc0f5e771aaac3fb66b6f6c59d9a9193b",
+        "sha_ok": true,
+        "lines": 158,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cFlowZeroAngularGrowth",
+        "blob": "8b33f5a47a9ec4107848f8f97752bebb6a9acc30",
+        "sha256": "9a5615a63d7c865cc472d31eb8253c560ec5a1f5846b437bfac09bca605db8f3",
+        "sha_ok": true,
+        "lines": 190,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cJointJetContinuity",
+        "blob": "8561c42e7950af814cab8a09e8f3507c4143afde",
+        "sha256": "b07bdcb8eb01134496f9fd5b4431ef2e2574fb6ab9e62326bb66e76bf71bbcda",
+        "sha_ok": true,
+        "lines": 243,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cOpticalEndpointPowerBounds",
+        "blob": "bb258c840c3a37878cee8e35a20f4c1356adb301",
+        "sha256": "687c69f3f734ec34c08d0f61995ef008dd7d4f21675aaea22ef6a368a94c23b7",
+        "sha_ok": true,
+        "lines": 278,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cOpticalMaterialBounds",
+        "blob": "5b77fc6719a9874c3b586d0dbf13d71ef64feb44",
+        "sha256": "633ee59b4785a1936ff5811e41ee0ced7d3da0dee54cfa06654faeeea51a372b",
+        "sha_ok": true,
+        "lines": 574,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cOpticalMixedJets",
+        "blob": "5e93c1b6a6c44c5bd027cf877428a3dec837c691",
+        "sha256": "b0df51588d7bb1d3b9f9637807b0ae90f873cecc0ff055f42fdb81698336b4d5",
+        "sha_ok": true,
+        "lines": 316,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cOpticalNumericEnvelopes",
+        "blob": "bc18b21e4580771cce6b6e5c4e25219b7d99b4d0",
+        "sha256": "d554b4130d102a22c8d82373427ab111a2f6cda9ad29b0625d312efc0f581f31",
+        "sha_ok": true,
+        "lines": 160,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cOpticalRootProducts",
+        "blob": "4163476566c6a025d25d5dfda3c12bd5e1c32842",
+        "sha256": "41c2186d51a49a0f39e8bd2cf20a8a2e02a78f040be9395e60cdecabf8a9d110",
+        "sha_ok": true,
+        "lines": 185,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cOpticalSquareBounds",
+        "blob": "c3e626afe6ceaad07b1b9c1ca80b6b75a5387a90",
+        "sha256": "8a06c0594c41bb5203047190d8cdc60861f0fda2484f35ee19bd83320d8fa168",
+        "sha_ok": true,
+        "lines": 641,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cOpticalSquareRootJets",
+        "blob": "62a28af2fa7996c0384062f294f9a50481e587d5",
+        "sha256": "e9c967a6beb9db8821d02ce67b14ab937e7f2bd995bed9259d9ce1b88ba68dd7",
+        "sha_ok": true,
+        "lines": 302,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cOrdinaryFlowZeroAngularBounds",
+        "blob": "4a5067050179455adf34d6ca0146ced249dd9a24",
+        "sha256": "819671d2bddc00d5fb77ab8808ef1df7246d6bcc5560e57cf5fad33ee7b4cc6b",
+        "sha_ok": true,
+        "lines": 174,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cParametricEndpointDivision",
+        "blob": "9946a6a9bdec3f1074f29182256cf16fc1591637",
+        "sha256": "7e5683381e2218a98dfce7769dba1a107b41e2ed3aea07e3e21be7b52927b8f5",
+        "sha_ok": true,
+        "lines": 81,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cPhysicalFlowRegularity",
+        "blob": "9fc34165ae40409a47af851418995d928350ae6a",
+        "sha256": "804607f5673029d8dca06ce46f192e91ca613d7721315b953e7101405c72eea4",
+        "sha_ok": true,
+        "lines": 115,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cSpeedAngularGrowth",
+        "blob": "a01dc9419b7f192bb72ad29c2b421835749296f0",
+        "sha256": "08c2ec4893ded5a62ae7b2841a43f6ecc9ba9805280d6588c17d06834c168f8b",
+        "sha_ok": true,
+        "lines": 89,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cSpeedBoundsRestriction",
+        "blob": "44118f0c1d11a1a093472bddd6c3effcfad9a67c",
+        "sha256": "5e2e48275bf564b252499d659764c965f9b83be64645afb157d00538cf0f7f3c",
+        "sha_ok": true,
+        "lines": 42,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cSpeedLowBounds",
+        "blob": "243e8d0ca95a4d874eef40c7878b9bf8713af8d8",
+        "sha256": "66e3b213198e54a637906cdcb0d3465b410911ab68b1ddcae63a29e1e982b33a",
+        "sha_ok": true,
+        "lines": 125,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cSpeedTowerRestriction",
+        "blob": "7cac9a0077313add56a9386139dc0724a72a1838",
+        "sha256": "f13bce7325b705ff84066cda38ee8bce7bbb2ea506e932d85623df05035c1ccd",
+        "sha_ok": true,
+        "lines": 36,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cStateAngleIdentification",
+        "blob": "6c9442c49dc42c208a93ce38f37cac5384ee2831",
+        "sha256": "be1fd9b862a39a562b3cd85c25faf77870c5c08b27eb83c475d831f24425b688",
+        "sha_ok": true,
+        "lines": 108,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cStateAngleJets",
+        "blob": "53f6a12b34ef3c1436a0bbe6dcd9c8b908a15ce2",
+        "sha256": "90556b15c9c24f36defed2169c9bcc3908427469c2378ed3f3ec78ea1cc6856b",
+        "sha_ok": true,
+        "lines": 299,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cStateAngleSelections",
+        "blob": "94b5e565fc3c9400e2fc498024773e0f99fa24bb",
+        "sha256": "d396e6fb43702a2f6b6e986a956fce9e0d3a1d75a5b97bdfba110d6704126e64",
+        "sha_ok": true,
+        "lines": 300,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cStateAngleSmoothDirections",
+        "blob": "5cdb2f318cd4f246fddbbdd26df432cfa0dfb3ae",
+        "sha256": "8e9be830b8f96a496e4b62747cbf3fcdad82265c86c336ba1cb7e169d0146cdf",
+        "sha_ok": true,
+        "lines": 199,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cTopologicalParameterIntegral",
+        "blob": "fa071cdbc063266bec8501ae2c487be83c9d1811",
+        "sha256": "938cc965fc5a1275aa7a3b8d8bde32a7400fa436ca94e0c7e4bf312861a677da",
+        "sha_ok": true,
+        "lines": 75,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cVolterraMultilinear",
+        "blob": "071458fb97a4d332f611ddfb869cc161ae375107",
+        "sha256": "56ffdcddc7082c40fe58a1c07e28017810280dd93e5a1c180fc252c781dc5bdf",
+        "sha_ok": true,
+        "lines": 333,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cVolterraNaturality",
+        "blob": "fc182cf271d23e5c09c7e5099d5931ab50b5eb39",
+        "sha256": "e3b4eb8a544b4697b6ec61378eb055ef96fe5bffdc21dc6bfb76ddfba00a923d",
+        "sha_ok": true,
+        "lines": 118,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cVolterraStateJets",
+        "blob": "f93918a2df7f5972e309407db336c636d95d40bf",
+        "sha256": "fb503fa8257954c88a144d83cec7de5e8e47060a8b29476acb9267cd351eef43",
+        "sha_ok": true,
+        "lines": 318,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01cWholeSpeedPowerBounds",
+        "blob": "57c594144356d93faa5c0d68c3a0b39c8326c49b",
+        "sha256": "b7c33450359c671b4a29c77d6b2f23aedb79166aab6a7a3b35caf566729b5706",
+        "sha_ok": true,
+        "lines": 192,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N05ReferenceOutputWeightInclusion",
+        "blob": "e839e69db6381054f665847240d7f3056dd95130",
+        "sha256": "0a61ee06f09371505fb01cbe79c8daf366a343e0052564c849b6432c3d1ac3d8",
+        "sha_ok": true,
+        "lines": 37,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.RootTravelOppositeCoordinates",
+        "blob": "398cf5d4c3207cc9e9dd31cbe09887007d9aff2c",
+        "sha256": "ecd653a3b8f6817b590d1b385f1fc495fb4612b46fdb6e9398e8d798fd11ff9e",
+        "sha_ok": true,
+        "lines": 197,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+        "blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+        "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+        "sha_ok": true,
+        "lines": 204,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false,
+        "import_ledger": "Selected-provider graph; compact plan row intentionally omits imports"
+      },
+      {
+        "module": "ContinuousFlexibility.Blueprint.N01c.Speeds",
+        "blob": "b9732984d9723e5a61b4448e56d2cca328dac0a2",
+        "sha256": "1f23c236995dca93731911dfebfa0b9cf05b525cb4cf1bb49b19b690256a8780",
+        "sha_ok": true,
+        "lines": 26,
+        "lines_ok": true,
+        "imports_ok": true,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily",
+        "blob": "0a0206739fd3b542d87723155b08504317d2562e",
+        "sha256": "792a5148b96084a722578a9f25dbd9ed24b62691f9f31b0fbb2843311d0ae173",
+        "sha_ok": true,
+        "lines": 56,
+        "lines_ok": true,
+        "imports_ok": true,
+        "bytes": 2685,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation",
+        "blob": "89bec50456142fde3eb21c28e397456a000b0548",
+        "sha256": "43b9332cf208881b0894b69379c7767dcbed46d00dd6d93ab7b580a6ea8c5ce5",
+        "sha_ok": true,
+        "lines": 80,
+        "lines_ok": true,
+        "imports_ok": true,
+        "bytes": 3671,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+        "blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+        "sha256": "5996158db4711a93a40aeb62b7e21f9582b3da5c0959582efa48b6793ffa50bf",
+        "sha_ok": true,
+        "lines": 160,
+        "lines_ok": true,
+        "imports_ok": true,
+        "bytes": 7183,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+        "blob": "7d2ff0fac9e08218174cd6870ba79b8529aa8a01",
+        "sha256": "f88706279e2902514c3bda2fdd618785c19d2be4f848d1eaf44758e2bdfd7f27",
+        "sha_ok": true,
+        "lines": 126,
+        "lines_ok": true,
+        "imports_ok": true,
+        "bytes": 6166,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+        "blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+        "sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+        "sha_ok": true,
+        "lines": 156,
+        "lines_ok": true,
+        "imports_ok": true,
+        "bytes": 7450,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+        "blob": "db60546bb34349a040955ace14facdf5b13dfa0d",
+        "sha256": "a515668c71f3895edfda3d1183a5c275f3758799de0d7ebb68d439d33095bc66",
+        "sha_ok": true,
+        "lines": 167,
+        "lines_ok": true,
+        "imports_ok": true,
+        "bytes": 8416,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry",
+        "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+        "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+        "sha_ok": true,
+        "lines": 168,
+        "lines_ok": true,
+        "imports_ok": true,
+        "bytes": 7575,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+        "blob": "fcb65801fb0da7c1ccbf3e7a0bf826f303bf9a3b",
+        "sha256": "3e3daeb4e127d77150c85fe2cf205ae2564a86da1a7b92a54d16f447a62cc3fc",
+        "sha_ok": true,
+        "lines": 195,
+        "lines_ok": true,
+        "imports_ok": true,
+        "bytes": 10621,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+        "blob": "096b420be6425f39b2f5e73e4a0f60cbd9113ced",
+        "sha256": "fc2eb15c0da7e37fda9f227b906a75c801d0d628064e17e5bca4e63dae75e910",
+        "sha_ok": true,
+        "lines": 100,
+        "lines_ok": true,
+        "imports_ok": true,
+        "bytes": 5021,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+        "blob": "de3ff006b2c03592d7c5489ed41c4b73adad8c73",
+        "sha256": "2fddaf7a9418556a1915a1691b7ed4396740b227d269b8f84c78d6217f388c57",
+        "sha_ok": true,
+        "lines": 106,
+        "lines_ok": true,
+        "imports_ok": true,
+        "bytes": 5494,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+        "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+        "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+        "sha_ok": true,
+        "lines": 131,
+        "lines_ok": true,
+        "imports_ok": true,
+        "bytes": 6809,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+        "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+        "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+        "sha_ok": true,
+        "lines": 171,
+        "lines_ok": true,
+        "imports_ok": true,
+        "bytes": 8097,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+        "blob": "ba1d43881f06ffb76d0d658ed762dd435a668d0b",
+        "sha256": "4b34db7f7514160c2f86a8fe0ecb0c8d0a653ea4c1a4bdfc34b27ef862319dec",
+        "sha_ok": true,
+        "lines": 101,
+        "lines_ok": true,
+        "imports_ok": true,
+        "bytes": 4979,
+        "forbidden": false
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasGeometry",
+        "blob": "e349394e51c8caef8a751f9b4e6c4900f13f8d0d",
+        "sha256": "41ac14bc8261391998aeb4e6d2c290171bba36baea4dec40a665449fa72c8299",
+        "sha_ok": true,
+        "lines": 163,
+        "lines_ok": true,
+        "imports_ok": true,
+        "bytes": 8111,
+        "forbidden": false
+      }
+    ]
+  },
+  "collision_evidence": {
+    "independently_checked_scope_and_binding": true,
+    "selected_prefix_public_names": 48,
+    "six_coordinate_leaf_public_names": 32,
+    "prefix_check_against": "All 541 actual closure providers, 91 exact cohort3 sources, two added algebraic normalizer declarations and all 32 six-leaf declarations; the frozen proposal reports empty collisions.",
+    "historical_broader_scan": {
+      "review_blob": "6b820fd901e274990396072d1569676ee82018bb",
+      "review_sha256": "aae17c62ec1956b8ffe5d2037e3f2d8450eb56fdfbb9b45df93d252c361cb070",
+      "scan_sha256": "b2f88e3c7be9085d2b12aa72aa5cf7bb7b06ce9cfbe177ceb5c9264d71be818b",
+      "scope": "105 exact original held41 public names against 4638 projected c9+line modules; the present 48 names are an unchanged subset. Six new roots and normalizer additions are separately covered."
+    },
+    "fresh_full_4306_source_name_scan_claim": false,
+    "elaborator_generated_names_claim": false,
+    "prior_full_source_mathematical_reviews_not_repeated": true
+  },
+  "remote_substitution_assessment": {
+    "local_stager_blob_read_in_full": "e6a9e4251898f6a55e1a568e3c5294c469c7f9e0",
+    "local_stager_executed": false,
+    "local_Lean_executed": false,
+    "local_generator_executed": false,
+    "preserves_semantic_staging_gates": [
+      "Frozen source and review identities",
+      "Exact green baseline and main rule identity",
+      "Complete source-only tree delta",
+      "No existing source replacement except explicitly reviewed normalizer",
+      "Actual source SHA256, length and imports",
+      "Exact provider selection and dependency availability",
+      "Selected dependency graph acyclicity",
+      "Declaration collision evidence with stated scope",
+      "Added Lean line budget from actual compare plus modeled CI generation",
+      "Unchanged rules, exclusions, workflow, mathlib and Lean toolchain",
+      "Single-parent candidate and final branch/main lease"
+    ],
+    "unavailable_local_git_diff_check": "Not represented as executed; immutable raw source identity and exact remote compare were checked instead.",
+    "generator_handling": "Committed src/ContinuousFlexibility.lean remains baseline blob 38c718d76599e9550272afe65276ffed72dc9caf. Existing build.yml runs scripts/gen_root.py before both changed-module quick checking and the full default-target build. The independent JavaScript enumeration is a read-only projection of that unchanged script, not a claim that Python ran.",
+    "workflow_failure_propagation": "The unchanged workflow preserves the 300-second per-file watchdog, pipefail and final exit status. A quick-check or full-build failure is not represented as green.",
+    "quick_check_note": "changed_modules.sh uses the current main merge-base and may enumerate more than this 112-file delta; the unchanged full default-target build follows independently.",
+    "source_coverage_note": "Generated imports exclude Blueprint and exactly two listed unfinished analysis modules. The newly added Blueprint.N01c.Speeds is therefore not a generated-root line; no blanket claim that every Blueprint source was already built is made.",
+    "actual_compare": {
+      "files": 112,
+      "added": 19736,
+      "deleted": 6,
+      "ahead": 1,
+      "behind": 0
+    },
+    "budget": {
+      "modeled_generated_root_added": 110,
+      "conservative_total_added": 19846,
+      "limit": 20000,
+      "remaining": 154
+    },
+    "no_new_blocking_findings": true
+  },
+  "publication_boundary": {
+    "reviewer_did_not_update_refs_or_commits": true,
+    "prepush_requirement": "Root must freshly confirm branch c796 and main1ece, then update the branch only to candidate794 with force=false; any changed lease requires stopping and revalidating.",
+    "root_report_after_readonly_checks": "Root reports fresh main1ece/activec796 checks followed by force=false push at 2026-11-12 20:46:21 UTC and exact remote readback of 794d5d0e. This is an attributed root report, not an independent CI observation.",
+    "candidate_CI_not_queried_or_downloaded": true,
+    "candidate_not_claimed_compiled": true,
+    "next_CI_query_root_only_not_before_utc": "2026-11-12 20:51:21 UTC"
+  },
+  "immutable_evidence_policy": "This receipt adds independent process evidence. It does not overwrite any source, prior mathematical review, old full41 gate, original batch plan, checkpoint or authority record.",
+  "restrictions_respected": {
+    "no_executor_retry": true,
+    "no_local_compile": true,
+    "no_active_checkout_edits": true,
+    "no_ref_write": true,
+    "no_CI_query": true,
+    "no_limit_increase": true,
+    "only_this_JSON_blob_created": true
+  }
+}

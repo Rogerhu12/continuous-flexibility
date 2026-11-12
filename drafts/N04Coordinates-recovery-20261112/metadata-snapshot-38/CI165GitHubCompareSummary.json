@@ -1,0 +1,916 @@
+{
+  "kind": "GitHub_compare_metadata_and_exact_per_file_statistics",
+  "base": "c796387fb555392501c81f5b8bd834936251516c",
+  "head": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+  "tree": "49237cc2b902342c4a42b86d653fb00770d65d60",
+  "audit": {
+    "passed": true,
+    "head": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+    "base": "c796387fb555392501c81f5b8bd834936251516c",
+    "files": 112,
+    "added": 19736,
+    "deleted": 6,
+    "ahead_by": 1,
+    "behind_by": 0,
+    "only_expected_source_files": true
+  },
+  "files": [
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/ActualNegativeOppositeRootFields.lean",
+      "sha": "5b0d8327ff2054595a95f053d2f5e82afeabc2dd",
+      "status": "added",
+      "additions": 256,
+      "deletions": 0,
+      "changes": 256
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceEndpointData.lean",
+      "sha": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+      "status": "added",
+      "additions": 160,
+      "deletions": 0,
+      "changes": 160
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceInterpolation.lean",
+      "sha": "89bec50456142fde3eb21c28e397456a000b0548",
+      "status": "added",
+      "additions": 80,
+      "deletions": 0,
+      "changes": 80
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean",
+      "sha": "7d2ff0fac9e08218174cd6870ba79b8529aa8a01",
+      "status": "added",
+      "additions": 126,
+      "deletions": 0,
+      "changes": 126
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean",
+      "sha": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+      "status": "added",
+      "additions": 156,
+      "deletions": 0,
+      "changes": 156
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean",
+      "sha": "ca4ff618fbc4e869ccc7195c8244ee965e4f2bbc",
+      "status": "added",
+      "additions": 94,
+      "deletions": 0,
+      "changes": 94
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/CanonicalPositiveReferenceFamily.lean",
+      "sha": "0a0206739fd3b542d87723155b08504317d2562e",
+      "status": "added",
+      "additions": 56,
+      "deletions": 0,
+      "changes": 56
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean",
+      "sha": "19fbfbee2481dc3603bb1dcd55f479f55c256b97",
+      "status": "added",
+      "additions": 85,
+      "deletions": 0,
+      "changes": 85
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean",
+      "sha": "74e009ae51c272ef758c21447a9f494156e3d6ec",
+      "status": "added",
+      "additions": 109,
+      "deletions": 0,
+      "changes": 109
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentSectorBounds.lean",
+      "sha": "8dcc2e224e6eb437764407ba8ae16c631106f685",
+      "status": "added",
+      "additions": 182,
+      "deletions": 0,
+      "changes": 182
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cActualFlowAngularInduction.lean",
+      "sha": "8877228eb4ddc86caac2fc2183df499fa0de8cc6",
+      "status": "added",
+      "additions": 73,
+      "deletions": 0,
+      "changes": 73
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cActualFlowAngularPrefix.lean",
+      "sha": "362d31e6740d6d33d29cee4cc6a87c5a76fdcecd",
+      "status": "added",
+      "additions": 80,
+      "deletions": 0,
+      "changes": 80
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cActualFlowCircleData.lean",
+      "sha": "6ca69223ad0f34b372199da53b5d419521de52c6",
+      "status": "added",
+      "additions": 380,
+      "deletions": 0,
+      "changes": 380
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cActualFlowCoefficientEnvelope.lean",
+      "sha": "18e0a504231049694480f0826c4c8f5cc513bb52",
+      "status": "added",
+      "additions": 74,
+      "deletions": 0,
+      "changes": 74
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cActualFlowDefectBounds.lean",
+      "sha": "9ba00b8a508c46d0e1ce453141b32f62f339eff1",
+      "status": "added",
+      "additions": 132,
+      "deletions": 0,
+      "changes": 132
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cActualFlowForcingBounds.lean",
+      "sha": "f1e9b4a3efabb08fb50f7ff3e0316bf7eb593a65",
+      "status": "added",
+      "additions": 216,
+      "deletions": 0,
+      "changes": 216
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cActualFlowForcingComposition.lean",
+      "sha": "be729d2d155fe3c978356a23de538e22aa7f1ee4",
+      "status": "added",
+      "additions": 193,
+      "deletions": 0,
+      "changes": 193
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cActualFlowForcingEnvelope.lean",
+      "sha": "06babb48923b0b2519cb610ab8fb6e1d54db39a5",
+      "status": "added",
+      "additions": 90,
+      "deletions": 0,
+      "changes": 90
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cActualFlowHeadBounds.lean",
+      "sha": "5f7df48ef867fc7881950d61b6e8f537a9c77405",
+      "status": "added",
+      "additions": 103,
+      "deletions": 0,
+      "changes": 103
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cActualFlowLowerBounds.lean",
+      "sha": "a266e8d1630cc10646c9f7c6b6c147a5142af631",
+      "status": "added",
+      "additions": 157,
+      "deletions": 0,
+      "changes": 157
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cActualFlowNormalization.lean",
+      "sha": "1de19179df88e3a6c45a44c00f3319ccebe5ee73",
+      "status": "added",
+      "additions": 141,
+      "deletions": 0,
+      "changes": 141
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cActualFlowSmoothDirections.lean",
+      "sha": "812a259c4239b76c9282015a5cad9ca7b9e5b6a3",
+      "status": "added",
+      "additions": 118,
+      "deletions": 0,
+      "changes": 118
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cActualFlowSpeedOuterBounds.lean",
+      "sha": "d60c55fb21329649c68427a896ec432734b6f094",
+      "status": "added",
+      "additions": 322,
+      "deletions": 0,
+      "changes": 322
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cActualFlowUnitDirections.lean",
+      "sha": "8312e38d6c353ceac475edec853b1be121507a30",
+      "status": "added",
+      "additions": 123,
+      "deletions": 0,
+      "changes": 123
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cActualFlowVariationEnvelope.lean",
+      "sha": "872080bbe9e69e76573d0205a0d9e46c15c4b928",
+      "status": "added",
+      "additions": 82,
+      "deletions": 0,
+      "changes": 82
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cAngularJetTowers.lean",
+      "sha": "6de5b7492a5d48a5ec45fa4eae86a50dc94812fe",
+      "status": "added",
+      "additions": 202,
+      "deletions": 0,
+      "changes": 202
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cCharacteristicSpeedTameBounds.lean",
+      "sha": "b25a688fa034eeacbbccae57881718c85cccb686",
+      "status": "added",
+      "additions": 198,
+      "deletions": 0,
+      "changes": 198
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cCircleForcingProducts.lean",
+      "sha": "e1c5753397a67b7393e8ee2fb192eb24c5dd29f8",
+      "status": "added",
+      "additions": 190,
+      "deletions": 0,
+      "changes": 190
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cCircleLinearVariationBounds.lean",
+      "sha": "b2c66f1a8b45f464917f8a33a1776c39ecfeaa8b",
+      "status": "added",
+      "additions": 487,
+      "deletions": 0,
+      "changes": 487
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cCircleLinearVariationEnvelope.lean",
+      "sha": "71a979b1e8c2162b58bb99d33e141fa5be755cbc",
+      "status": "added",
+      "additions": 141,
+      "deletions": 0,
+      "changes": 141
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cCircleLinearVariationSmooth.lean",
+      "sha": "73d06e355d0646b70020a8e579c698fc7f878642",
+      "status": "added",
+      "additions": 164,
+      "deletions": 0,
+      "changes": 164
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cCommonCosineGeometry.lean",
+      "sha": "4e8c2be4d70a2fd844b141d602b7101d68ed4f1d",
+      "status": "added",
+      "additions": 89,
+      "deletions": 0,
+      "changes": 89
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cComponentCosineSpeed.lean",
+      "sha": "8c2587b6cdf5cc7bcc63bd331d4d2a566dc6729b",
+      "status": "added",
+      "additions": 133,
+      "deletions": 0,
+      "changes": 133
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cComponentOpticalGeometry.lean",
+      "sha": "4a17352a92e97594b83dcd2e1bf27fc4ef1dc34a",
+      "status": "added",
+      "additions": 139,
+      "deletions": 0,
+      "changes": 139
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cComponentSpeedPeriodicity.lean",
+      "sha": "045b5d32fb1f8034582c5f183a114ad6550a9a95",
+      "status": "added",
+      "additions": 86,
+      "deletions": 0,
+      "changes": 86
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cCosineAngularJets.lean",
+      "sha": "1538ac7655f73e351ee430da97c2922b1c3cb416",
+      "status": "added",
+      "additions": 93,
+      "deletions": 0,
+      "changes": 93
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cCosineFlowIdentities.lean",
+      "sha": "66324f567ccce60c2d6d1a832534bd110c0b2f7f",
+      "status": "added",
+      "additions": 41,
+      "deletions": 0,
+      "changes": 41
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cCosineLowGeometry.lean",
+      "sha": "34ec1bfff92de090b18ae661c98566c6588987a4",
+      "status": "added",
+      "additions": 169,
+      "deletions": 0,
+      "changes": 169
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cCosineRootPath.lean",
+      "sha": "e4c98ec1d65706c6a4559dd648d34d0e2150a16d",
+      "status": "added",
+      "additions": 159,
+      "deletions": 0,
+      "changes": 159
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cCosineSpeedParameterBounds.lean",
+      "sha": "79b079280ec223904cb5a10d85ac226ca8adb432",
+      "status": "added",
+      "additions": 257,
+      "deletions": 0,
+      "changes": 257
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cCosineSpeedPrefixBounds.lean",
+      "sha": "a7c98ee2a841cb0968f56f6d8211504757c14e0f",
+      "status": "added",
+      "additions": 79,
+      "deletions": 0,
+      "changes": 79
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cEndpointDivision.lean",
+      "sha": "05804d6ed44e39baddeca986eefb731c485e1fd8",
+      "status": "added",
+      "additions": 290,
+      "deletions": 0,
+      "changes": 290
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cEndpointReferenceBounds.lean",
+      "sha": "999baa78fdc0054d72842e11b106b581258b241e",
+      "status": "added",
+      "additions": 90,
+      "deletions": 0,
+      "changes": 90
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFiniteAffineInputs.lean",
+      "sha": "f346a457ad90f8d47e3573302aa26a4780c6e2e4",
+      "status": "added",
+      "additions": 102,
+      "deletions": 0,
+      "changes": 102
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFiniteAffineJets.lean",
+      "sha": "11b49ca976af4ed7711545e3997a141f9ff0a218",
+      "status": "added",
+      "additions": 190,
+      "deletions": 0,
+      "changes": 190
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFiniteAffineMixedJets.lean",
+      "sha": "e80743b5f134c3c833972dec004633fec0e821cb",
+      "status": "added",
+      "additions": 415,
+      "deletions": 0,
+      "changes": 415
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFiniteAffineSpeedFactors.lean",
+      "sha": "1463bf479157371325fc350484be0824d2cf27d8",
+      "status": "added",
+      "additions": 217,
+      "deletions": 0,
+      "changes": 217
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowAffineCompression.lean",
+      "sha": "bc19f8ecbdd7c2a90bb75d1eea9140bcaa10fd6f",
+      "status": "added",
+      "additions": 193,
+      "deletions": 0,
+      "changes": 193
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowCompactStateSmooth.lean",
+      "sha": "e187f85e7e6e79636c42405379278dd215a45076",
+      "status": "added",
+      "additions": 131,
+      "deletions": 0,
+      "changes": 131
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowForcingEnvelope.lean",
+      "sha": "d4da679f327121e58ab6f6809f14ff6996a1f4e5",
+      "status": "added",
+      "additions": 187,
+      "deletions": 0,
+      "changes": 187
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowForcingExpansion.lean",
+      "sha": "1e66a3317b7d10d29044ee2b7360ea76fdfa676a",
+      "status": "added",
+      "additions": 175,
+      "deletions": 0,
+      "changes": 175
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowForcingFamilyEnvelope.lean",
+      "sha": "133a46cdc6c915a148ea04ef7bc02174079412a3",
+      "status": "added",
+      "additions": 129,
+      "deletions": 0,
+      "changes": 129
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowForcingSobolev.lean",
+      "sha": "1eef1dd6656eae5eb3d8a5ef7d4108c56a52d80c",
+      "status": "added",
+      "additions": 170,
+      "deletions": 0,
+      "changes": 170
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowFrechetContinuity.lean",
+      "sha": "1df3302bc3bc2a33ad0cd63ef73da284a94a4387",
+      "status": "added",
+      "additions": 229,
+      "deletions": 0,
+      "changes": 229
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowFrechetParameters.lean",
+      "sha": "6b42e40ad2e647c631b360c429fa4ca9dc8ad2fc",
+      "status": "added",
+      "additions": 335,
+      "deletions": 0,
+      "changes": 335
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowHeadEnvelope.lean",
+      "sha": "a659fdad3d0e9c0fde68a8eb8769d4705c50df55",
+      "status": "added",
+      "additions": 123,
+      "deletions": 0,
+      "changes": 123
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowHighestVariation.lean",
+      "sha": "3491173585a2e4a9678f271c65d50c5eb7e3cca9",
+      "status": "added",
+      "additions": 177,
+      "deletions": 0,
+      "changes": 177
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowInitialAngleSmooth.lean",
+      "sha": "176cbfb42275fc39d8547f24d0d607d85f3e6bb4",
+      "status": "added",
+      "additions": 109,
+      "deletions": 0,
+      "changes": 109
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowJetIdentification.lean",
+      "sha": "5eb1bc4d551cef9a07e7036c292499df84e34b6f",
+      "status": "added",
+      "additions": 198,
+      "deletions": 0,
+      "changes": 198
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowLinearFamilyEnvelope.lean",
+      "sha": "9783f9f4668a7a2839b5dc69f93e81f8ed6144db",
+      "status": "added",
+      "additions": 106,
+      "deletions": 0,
+      "changes": 106
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowNormalizationProperty.lean",
+      "sha": "f42fffb6dca90400474ef829617ed03274f17fe2",
+      "status": "added",
+      "additions": 65,
+      "deletions": 0,
+      "changes": 65
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowNumericConstants.lean",
+      "sha": "20cd01bc96e85d7e1143f218e92614be7cbf0ed0",
+      "status": "added",
+      "additions": 133,
+      "deletions": 0,
+      "changes": 133
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowOrderConstants.lean",
+      "sha": "d374c998cd6e2ee382edee7f18247b4b50794c76",
+      "status": "added",
+      "additions": 131,
+      "deletions": 0,
+      "changes": 131
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowParameterContinuity.lean",
+      "sha": "9bef6b0850f75764256afaf9a22d695e5a88e501",
+      "status": "added",
+      "additions": 315,
+      "deletions": 0,
+      "changes": 315
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowParameterJetEquations.lean",
+      "sha": "cd385bdc58832cf08ffa30ede0ec8ef042d4d14b",
+      "status": "added",
+      "additions": 182,
+      "deletions": 0,
+      "changes": 182
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowParameterNormalization.lean",
+      "sha": "3410d556ab9875a31a5c8a3e2e2c2029f803494a",
+      "status": "added",
+      "additions": 168,
+      "deletions": 0,
+      "changes": 168
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowParameterSmooth.lean",
+      "sha": "b89232c1d05b4d61481ea4e304b6ee486742c631",
+      "status": "added",
+      "additions": 291,
+      "deletions": 0,
+      "changes": 291
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowSlotBounds.lean",
+      "sha": "d37e1c99bcf930e6fda7b306c278481e42750df5",
+      "status": "added",
+      "additions": 163,
+      "deletions": 0,
+      "changes": 163
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowStateSmooth.lean",
+      "sha": "d067a9d6f31ec57fb7bcb55028ddb95cf4b47477",
+      "status": "added",
+      "additions": 173,
+      "deletions": 0,
+      "changes": 173
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowTopologicalContinuity.lean",
+      "sha": "5eaed7e6a6d28d5cc3973c92d8b3eb30ec53b9c8",
+      "status": "added",
+      "additions": 193,
+      "deletions": 0,
+      "changes": 193
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowVariation.lean",
+      "sha": "e72083c0fa4524ef923ed999cc33dbadc002a10f",
+      "status": "added",
+      "additions": 305,
+      "deletions": 0,
+      "changes": 305
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowVariationCircleData.lean",
+      "sha": "1205ed3731a73d0b4009dab7b1c1ff3c0b806612",
+      "status": "added",
+      "additions": 316,
+      "deletions": 0,
+      "changes": 316
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowVariationForcingBounds.lean",
+      "sha": "01172bb3e8ab20390efa2b80a8cd8aa950a71258",
+      "status": "added",
+      "additions": 282,
+      "deletions": 0,
+      "changes": 282
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowVariationInput.lean",
+      "sha": "b1eb30eba3fde913eb640565f79e7eebb7755333",
+      "status": "added",
+      "additions": 158,
+      "deletions": 0,
+      "changes": 158
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cFlowZeroAngularGrowth.lean",
+      "sha": "8b33f5a47a9ec4107848f8f97752bebb6a9acc30",
+      "status": "added",
+      "additions": 190,
+      "deletions": 0,
+      "changes": 190
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cJointJetContinuity.lean",
+      "sha": "8561c42e7950af814cab8a09e8f3507c4143afde",
+      "status": "added",
+      "additions": 243,
+      "deletions": 0,
+      "changes": 243
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cOpticalEndpointPowerBounds.lean",
+      "sha": "bb258c840c3a37878cee8e35a20f4c1356adb301",
+      "status": "added",
+      "additions": 278,
+      "deletions": 0,
+      "changes": 278
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cOpticalMaterialBounds.lean",
+      "sha": "5b77fc6719a9874c3b586d0dbf13d71ef64feb44",
+      "status": "added",
+      "additions": 574,
+      "deletions": 0,
+      "changes": 574
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cOpticalMixedJets.lean",
+      "sha": "5e93c1b6a6c44c5bd027cf877428a3dec837c691",
+      "status": "added",
+      "additions": 316,
+      "deletions": 0,
+      "changes": 316
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cOpticalNumericEnvelopes.lean",
+      "sha": "bc18b21e4580771cce6b6e5c4e25219b7d99b4d0",
+      "status": "added",
+      "additions": 160,
+      "deletions": 0,
+      "changes": 160
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cOpticalRootProducts.lean",
+      "sha": "4163476566c6a025d25d5dfda3c12bd5e1c32842",
+      "status": "added",
+      "additions": 185,
+      "deletions": 0,
+      "changes": 185
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cOpticalSquareBounds.lean",
+      "sha": "c3e626afe6ceaad07b1b9c1ca80b6b75a5387a90",
+      "status": "added",
+      "additions": 641,
+      "deletions": 0,
+      "changes": 641
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cOpticalSquareRootJets.lean",
+      "sha": "62a28af2fa7996c0384062f294f9a50481e587d5",
+      "status": "added",
+      "additions": 302,
+      "deletions": 0,
+      "changes": 302
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cOrdinaryFlowZeroAngularBounds.lean",
+      "sha": "4a5067050179455adf34d6ca0146ced249dd9a24",
+      "status": "added",
+      "additions": 174,
+      "deletions": 0,
+      "changes": 174
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cParametricEndpointDivision.lean",
+      "sha": "9946a6a9bdec3f1074f29182256cf16fc1591637",
+      "status": "added",
+      "additions": 81,
+      "deletions": 0,
+      "changes": 81
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cPhysicalFlowRegularity.lean",
+      "sha": "9fc34165ae40409a47af851418995d928350ae6a",
+      "status": "added",
+      "additions": 115,
+      "deletions": 0,
+      "changes": 115
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cSpeedAngularGrowth.lean",
+      "sha": "a01dc9419b7f192bb72ad29c2b421835749296f0",
+      "status": "added",
+      "additions": 89,
+      "deletions": 0,
+      "changes": 89
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cSpeedBoundsRestriction.lean",
+      "sha": "44118f0c1d11a1a093472bddd6c3effcfad9a67c",
+      "status": "added",
+      "additions": 42,
+      "deletions": 0,
+      "changes": 42
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cSpeedLowBounds.lean",
+      "sha": "243e8d0ca95a4d874eef40c7878b9bf8713af8d8",
+      "status": "added",
+      "additions": 125,
+      "deletions": 0,
+      "changes": 125
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cSpeedTowerRestriction.lean",
+      "sha": "7cac9a0077313add56a9386139dc0724a72a1838",
+      "status": "added",
+      "additions": 36,
+      "deletions": 0,
+      "changes": 36
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cStateAngleIdentification.lean",
+      "sha": "6c9442c49dc42c208a93ce38f37cac5384ee2831",
+      "status": "added",
+      "additions": 108,
+      "deletions": 0,
+      "changes": 108
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cStateAngleJets.lean",
+      "sha": "53f6a12b34ef3c1436a0bbe6dcd9c8b908a15ce2",
+      "status": "added",
+      "additions": 299,
+      "deletions": 0,
+      "changes": 299
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cStateAngleSelections.lean",
+      "sha": "94b5e565fc3c9400e2fc498024773e0f99fa24bb",
+      "status": "added",
+      "additions": 300,
+      "deletions": 0,
+      "changes": 300
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cStateAngleSmoothDirections.lean",
+      "sha": "5cdb2f318cd4f246fddbbdd26df432cfa0dfb3ae",
+      "status": "added",
+      "additions": 199,
+      "deletions": 0,
+      "changes": 199
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cTopologicalParameterIntegral.lean",
+      "sha": "fa071cdbc063266bec8501ae2c487be83c9d1811",
+      "status": "added",
+      "additions": 75,
+      "deletions": 0,
+      "changes": 75
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cVolterraMultilinear.lean",
+      "sha": "071458fb97a4d332f611ddfb869cc161ae375107",
+      "status": "added",
+      "additions": 333,
+      "deletions": 0,
+      "changes": 333
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cVolterraNaturality.lean",
+      "sha": "fc182cf271d23e5c09c7e5099d5931ab50b5eb39",
+      "status": "added",
+      "additions": 118,
+      "deletions": 0,
+      "changes": 118
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cVolterraStateJets.lean",
+      "sha": "f93918a2df7f5972e309407db336c636d95d40bf",
+      "status": "added",
+      "additions": 318,
+      "deletions": 0,
+      "changes": 318
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N01cWholeSpeedPowerBounds.lean",
+      "sha": "57c594144356d93faa5c0d68c3a0b39c8326c49b",
+      "status": "added",
+      "additions": 192,
+      "deletions": 0,
+      "changes": 192
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/N05ReferenceOutputWeightInclusion.lean",
+      "sha": "e839e69db6381054f665847240d7f3056dd95130",
+      "status": "added",
+      "additions": 37,
+      "deletions": 0,
+      "changes": 37
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean",
+      "sha": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "status": "added",
+      "additions": 168,
+      "deletions": 0,
+      "changes": 168
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/PositiveReferenceFiniteRadialJets.lean",
+      "sha": "db60546bb34349a040955ace14facdf5b13dfa0d",
+      "status": "added",
+      "additions": 167,
+      "deletions": 0,
+      "changes": 167
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+      "sha": "096b420be6425f39b2f5e73e4a0f60cbd9113ced",
+      "status": "added",
+      "additions": 100,
+      "deletions": 0,
+      "changes": 100
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/RootTravelOppositeCoordinates.lean",
+      "sha": "398cf5d4c3207cc9e9dd31cbe09887007d9aff2c",
+      "status": "added",
+      "additions": 197,
+      "deletions": 0,
+      "changes": 197
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/TameMultilinearNormalization.lean",
+      "sha": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "status": "modified",
+      "additions": 25,
+      "deletions": 6,
+      "changes": 31
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean",
+      "sha": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+      "status": "added",
+      "additions": 171,
+      "deletions": 0,
+      "changes": 171
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean",
+      "sha": "fcb65801fb0da7c1ccbf3e7a0bf826f303bf9a3b",
+      "status": "added",
+      "additions": 195,
+      "deletions": 0,
+      "changes": 195
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasData.lean",
+      "sha": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "status": "added",
+      "additions": 131,
+      "deletions": 0,
+      "changes": 131
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasGeometry.lean",
+      "sha": "e349394e51c8caef8a751f9b4e6c4900f13f8d0d",
+      "status": "added",
+      "additions": 163,
+      "deletions": 0,
+      "changes": 163
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasOperator.lean",
+      "sha": "de3ff006b2c03592d7c5489ed41c4b73adad8c73",
+      "status": "added",
+      "additions": 106,
+      "deletions": 0,
+      "changes": 106
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRelativeFields.lean",
+      "sha": "ba1d43881f06ffb76d0d658ed762dd435a668d0b",
+      "status": "added",
+      "additions": 101,
+      "deletions": 0,
+      "changes": 101
+    },
+    {
+      "filename": "src/ContinuousFlexibility/Blueprint/N01c/Speeds.lean",
+      "sha": "b9732984d9723e5a61b4448e56d2cca328dac0a2",
+      "status": "added",
+      "additions": 26,
+      "deletions": 0,
+      "changes": 26
+    }
+  ],
+  "patches_omitted": true
+}

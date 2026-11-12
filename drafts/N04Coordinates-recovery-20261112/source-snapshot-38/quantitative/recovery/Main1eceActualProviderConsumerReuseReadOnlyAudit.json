@@ -1,0 +1,921 @@
+{
+  "kind": "Main1eceActualProviderConsumerReuseReadOnlyAudit",
+  "status": "source-backed migration matrix; not an activation or compilation certificate",
+  "date": "2026-11-12",
+  "author": "/root/quantitative_route",
+  "refs": {
+    "repository": "Rogerhu12/continuous-flexibility",
+    "current": "c796387fb555392501c81f5b8bd834936251516c",
+    "main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "old_plan_main": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+    "green163": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+    "mathlib": "c55e6e786f49471c72fbddbec5415808896aec1e"
+  },
+  "inputs": [
+    {
+      "kind": "original 41-module frozen proposal",
+      "blob": "0ae5d8a1d49a64c412183757910c6ff25507260c",
+      "sha256": "e3df495b387d253732915923b113924c74fef74b8dd51310d20bcdbe68408f50"
+    },
+    {
+      "kind": "current provider rebindings",
+      "blob": "fbe3d483cc2243748761ee79b6d45b52e72a8727",
+      "sha256": "2899e402e186f17117eba07797edddc8c077dc3d4e5b55023fc056bd6bd567a7"
+    },
+    {
+      "kind": "earlier c9 projected-main review, retained historical",
+      "blob": "6b820fd901e274990396072d1569676ee82018bb",
+      "sha256": "aae17c62ec1956b8ffe5d2037e3f2d8450eb56fdfbb9b45df93d252c361cb070"
+    },
+    {
+      "kind": "batch 2–5 c9/1ece source-equality audit",
+      "blob": "70df1c1e296c5c6d9aa6059a991f72663d8d59d6",
+      "sha256": "e180ff4b0292124aade3ea84b6a48231abecbe97f86a49b99f9d34e43158b286"
+    },
+    {
+      "kind": "independent positive fixed-base endpoint selection",
+      "blob": "96b9c975201f9dabf8ae7295e9b58954b60b7f6d",
+      "sha256": "1d76fced054ba60b64a0fe05c52127790760def4e946502b479a1f5e2f700b5e"
+    },
+    {
+      "kind": "new separate c796 14-source prefix proposal",
+      "blob": "dfa280484b9f2153aad4cc13910d317e0508237f",
+      "sha256": "0914bc8829e0780a78db7d6969c5c1951e4587e29a62900fba36473339617d62"
+    },
+    {
+      "kind": "14-source 555-provider exact source graph",
+      "blob": "da8fec85b3efe14f66bf39f04a13428a22232e72",
+      "sha256": "02ae664aa07bb6746786b41d97b7c8d21cd48a54e1fc40f8836088f6ff7d7a90"
+    }
+  ],
+  "scope": {
+    "counts": {
+      "selected_baseline_providers": 826,
+      "held_sources": 41,
+      "total_projected_closure": 867,
+      "baseline_same_as_main": 525,
+      "baseline_changed_in_main": 11,
+      "baseline_line_only": 290
+    },
+    "all_826_baseline_blobs_equal_current": true,
+    "baseline_mismatches": [],
+    "selected_nodes_fetched_and_git_sha256_verified": 867,
+    "last_additional_read_count": 307,
+    "source_fingerprint_sequence_digest": {
+      "sha256": "6effaa870d3c5854218c6de4a3ae57e9d1e4db79356b6e2f75d6eeb1aa819c98",
+      "blob": "595d74eb17a199d484a6f725595bf2d1f5381fd6",
+      "bytes": 205341,
+      "lines": 1
+    },
+    "selected_scope_definition": "Original 824-provider baseline, followed by the explicit 29 rebindings/additions in the current ledger, plus the unchanged 41 frozen sources. The resulting 826 baseline providers exactly equal c796. All source text was cached and scanned; this is not a scan of all repository source.",
+    "scan_queries": [
+      "seven exact reference-flow/domain declaration names",
+      "N04bFieldRegularity",
+      "negative_discriminant :=",
+      "reference_flow :=",
+      "ordinaryFlowFamily_angular_small_of_neighborhood"
+    ],
+    "source_scan_result": {
+      "matching_reference_calls_and_declarations": 17,
+      "field_mentions": 129,
+      "explicit_record_construction_sites": 3,
+      "held41_direct_reference_call_sites": 1
+    },
+    "line_only_meaning": "290 baseline modules have no same-path file at 1ece. They remain valid line-owned providers in this selection; absence is not evidence to delete them.",
+    "no_new_broad_fetches_after_parent_stop": true
+  },
+  "changed_common_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalBoundaryImage",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalBoundaryImage.lean",
+      "selected": "aab2c515bfb3559cf3cdb4099664ee635ba55acf",
+      "main": "eb562126e28ea2a391e5e736b2fa109b68732083",
+      "current_fingerprint": {
+        "sha256": "35891796295555767b93b96bf2b627825c07536daf7819c72ac4abb04719135d",
+        "blob": "aab2c515bfb3559cf3cdb4099664ee635ba55acf",
+        "bytes": 6803,
+        "lines": 148
+      },
+      "main_fingerprint": {
+        "sha256": "ca0598466a5f37d9d5953360ca9cadd5b8e05787a33df671d3cb7929e1a2eca4",
+        "blob": "eb562126e28ea2a391e5e736b2fa109b68732083",
+        "bytes": 4553,
+        "lines": 102
+      },
+      "classification": "same three common public headers; two line-only public lemmas must be retained",
+      "action": "Preserve canonicalPhysicalPieceClosed_of_positive and canonicalChart_positive_endpoint_radial_eq_boundary. Do not overwrite the current file with the smaller main file.",
+      "public_header_comparison": {
+        "name": "CanonicalBoundaryImage",
+        "current_blob": "aab2c515bfb3559cf3cdb4099664ee635ba55acf",
+        "main_blob": "eb562126e28ea2a391e5e736b2fa109b68732083",
+        "common_headers_same": [
+          "image_not_mem_open_of_boundary_leftInverse",
+          "endpoint_image_mem_boundary_of_openStrip_inverse",
+          "canonicalChart_endpoint_radial_eq_boundary"
+        ],
+        "changed_headers": [],
+        "line_only_names": [
+          "canonicalPhysicalPieceClosed_of_positive",
+          "canonicalChart_positive_endpoint_radial_eq_boundary"
+        ],
+        "main_only_names": []
+      }
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalEndpointInverse",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalEndpointInverse.lean",
+      "selected": "73b93023dbcd3dfb1fa7521317a6a7da7f9c02da",
+      "main": "54f7a10a52c4d32ec9556ef16364979e41617e58",
+      "current_fingerprint": {
+        "sha256": "5b625a5464325b5fbb155eee50a9afeb7aa1fcefc846d256f7693a337f7f4e5d",
+        "blob": "73b93023dbcd3dfb1fa7521317a6a7da7f9c02da",
+        "bytes": 4648,
+        "lines": 98
+      },
+      "main_fingerprint": {
+        "sha256": "839f18b1c1766b0e1fc496b675ba521adbfded4d6dd612ddf8565c49e78beafb",
+        "blob": "54f7a10a52c4d32ec9556ef16364979e41617e58",
+        "bytes": 4657,
+        "lines": 98
+      },
+      "classification": "all three common public headers unchanged",
+      "action": "A proof/comment-only replacement can be reviewed independently; no known call-argument port is required.",
+      "public_header_comparison": {
+        "name": "CanonicalEndpointInverse",
+        "current_blob": "73b93023dbcd3dfb1fa7521317a6a7da7f9c02da",
+        "main_blob": "54f7a10a52c4d32ec9556ef16364979e41617e58",
+        "common_headers_same": [
+          "exists_smooth_localInverse_of_planeJacobian_ne_zero",
+          "canonicalChart_exists_smooth_endpointInverse",
+          "iteratedDeriv_localInverse_radialCurve_eq_zero"
+        ],
+        "changed_headers": [],
+        "line_only_names": [],
+        "main_only_names": []
+      }
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalSourceConversion",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalSourceConversion.lean",
+      "selected": "82fad205b331910136373ef94fccd6598caead5d",
+      "main": "afe935b448de4d5183e3bd24b89a89b40a3afd84",
+      "current_fingerprint": {
+        "sha256": "d27b8960c5b3ca3b9fbab35d9854135204681df40c346da83b0f932565a219bc",
+        "blob": "82fad205b331910136373ef94fccd6598caead5d",
+        "bytes": 2206,
+        "lines": 48
+      },
+      "main_fingerprint": {
+        "sha256": "4ee5102ecb59070df2d1cfeea0ee07c005114b51610b4e6250d389f068a761a2",
+        "blob": "afe935b448de4d5183e3bd24b89a89b40a3afd84",
+        "bytes": 3353,
+        "lines": 67
+      },
+      "classification": "same canonicalSource_pairing_of_partA header; proof/import implementation changed",
+      "action": "Main uses canonicalChart_image_openStrip and integral_pairing_eq_canonical_of_image. Retain the genuine source/pairing statement and review its chosen dependencies; do not silently replace the current open-domain implementation.",
+      "public_header_comparison": {
+        "name": "CanonicalSourceConversion",
+        "current_blob": "82fad205b331910136373ef94fccd6598caead5d",
+        "main_blob": "afe935b448de4d5183e3bd24b89a89b40a3afd84",
+        "common_headers_same": [
+          "canonicalSource_pairing_of_partA"
+        ],
+        "changed_headers": [],
+        "line_only_names": [],
+        "main_only_names": []
+      }
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalStripGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalStripGeometry.lean",
+      "selected": "8414a47460b602309aea49d2a58dfda9ed59867b",
+      "main": "4a4576400511f993c49f9cbd4e1b3831853b112d",
+      "current_fingerprint": {
+        "sha256": "b5cbf27a85c56302b0a7d29eb84dafac056fee6e5e61685d46d1b9ce6eba1277",
+        "blob": "8414a47460b602309aea49d2a58dfda9ed59867b",
+        "bytes": 5283,
+        "lines": 110
+      },
+      "main_fingerprint": {
+        "sha256": "c4ed6b73238b5d8365fb8148777f0b6cb7882fc5d6a74829f679b39c7ea93147",
+        "blob": "4a4576400511f993c49f9cbd4e1b3831853b112d",
+        "bytes": 12359,
+        "lines": 269
+      },
+      "classification": "same five common public headers; main monolithic helper definitions conflict with line split modules",
+      "action": "Keep the split representation or make an explicit merged successor. Four public helper definitions are already provided by ReflectionStripGeometry; preserve canonicalInverse_periodic_on_open. EquivariantOpenDomainStrip and ReflectionStripGeometry are line-only modules, not absent dependencies to delete.",
+      "public_header_comparison": {
+        "name": "CanonicalStripGeometry",
+        "current_blob": "8414a47460b602309aea49d2a58dfda9ed59867b",
+        "main_blob": "4a4576400511f993c49f9cbd4e1b3831853b112d",
+        "common_headers_same": [
+          "inverseChart_periodic_of_chart_periodic_on",
+          "chart_angle_mem_openInterval_iff",
+          "chart_mapsTo_openAngularStrip_target",
+          "canonicalChart_injOn",
+          "canonicalChart_image_openStrip"
+        ],
+        "changed_headers": [],
+        "line_only_names": [
+          "canonicalInverse_periodic_on_open"
+        ],
+        "main_only_names": [
+          "mapsTo_openInterval_of_boundary_fibers",
+          "mem_openInterval_iff_of_periodic_boundary_fibers",
+          "chart_angle_eq_zero_of_reflection",
+          "inverseChart_periodic_of_chart_periodic",
+          "chart_mapsTo_openAngularStrip"
+        ]
+      }
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction",
+      "path": "src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean",
+      "selected": "5150d77940daa6a3f95bd505bdb929b2e95db667",
+      "main": "cc38a6d2b17c7398b071a6b22a130668877f3204",
+      "current_fingerprint": {
+        "sha256": "e49b0d271a6a1633dce24a1a2ac1c6b2c4ca33f73be8191d59fb827b6e30e8f4",
+        "blob": "5150d77940daa6a3f95bd505bdb929b2e95db667",
+        "bytes": 7509,
+        "lines": 143
+      },
+      "main_fingerprint": {
+        "sha256": "ed4140a4a2a1c10d90e5e3d970a232b717ad8a46faf8556b0e886ba6ceb56f45",
+        "blob": "cc38a6d2b17c7398b071a6b22a130668877f3204",
+        "bytes": 3400,
+        "lines": 70
+      },
+      "classification": "four common public headers unchanged; current proof includes a private flow-restriction helper",
+      "action": "Both statements preserve the same per-parameter-order loss. Main is shorter; do not label removal of the private helper as a public API break. The current CI repair and main proof remain separately pinned.",
+      "public_header_comparison": {
+        "name": "N01NeighborhoodRestriction",
+        "current_blob": "5150d77940daa6a3f95bd505bdb929b2e95db667",
+        "main_blob": "cc38a6d2b17c7398b071a6b22a130668877f3204",
+        "common_headers_same": [
+          "stateNeighborhood_isOpen",
+          "smoothDirections_restrict_oneHigh_bound",
+          "stateNeighborhood_mono",
+          "N01Properties.restrict_neighborhood"
+        ],
+        "changed_headers": [],
+        "line_only_names": [
+          "ordinaryFlowFamilyTameBounds_restrict_neighborhood"
+        ],
+        "main_only_names": []
+      }
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualAtlasGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualAtlasGeometry.lean",
+      "selected": "6e704770a6066c6279f7c3cdae96c1d695d554d3",
+      "main": "150a2f0f851b9a43adf868ea34de06d60d3ff6e7",
+      "current_fingerprint": {
+        "sha256": "9249ea8b23d4edc27fe5e9d405e32a3da2248556efb394db33faf279aefa1d0a",
+        "blob": "6e704770a6066c6279f7c3cdae96c1d695d554d3",
+        "bytes": 4277,
+        "lines": 101
+      },
+      "main_fingerprint": {
+        "sha256": "58f58d148d5731dcf37b67991b7c12ecdfcc26b2e5fa0f0ad9c3e7a57aec424e",
+        "blob": "150a2f0f851b9a43adf868ea34de06d60d3ff6e7",
+        "bytes": 4268,
+        "lines": 101
+      },
+      "classification": "public geometry statement preserved; reference-domain call adapted in main",
+      "action": "When explicitly selecting the main domain contract, drop hT hS hN from the n04bTypedAtlasData_referenceDomain application at current line 63. Keep all actual atlas witnesses.",
+      "public_header_comparison": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bFieldRegularity",
+      "path": "src/ContinuousFlexibility/Analysis/N04bFieldRegularity.lean",
+      "selected": "0accc70bea719eb47f46bcde4989c99798027273",
+      "main": "fc6a92f96c18e23d8b87eb0f3385909c90154194",
+      "current_fingerprint": {
+        "sha256": "e9785ca55354e5eb97a0243c085d2ddfefdd0d302b70fb9ee759fdde7591ca55",
+        "blob": "0accc70bea719eb47f46bcde4989c99798027273",
+        "bytes": 2927,
+        "lines": 59
+      },
+      "main_fingerprint": {
+        "sha256": "ba633ef11b1dd37d934e9ba3852ac3352c43e65cc79b629927abcccbd533abf7",
+        "blob": "fc6a92f96c18e23d8b87eb0f3385909c90154194",
+        "bytes": 4008,
+        "lines": 80
+      },
+      "classification": "Prop structure strengthened from four fields to five by reference_flow",
+      "action": "Every explicit record reconstruction needs reference_flow := hfield.reference_flow. At an existential gateway, prove the new field for the same literal corrected flow; do not treat an old field witness as the new structure or reselect an arbitrary L/K silently.",
+      "public_header_comparison": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualDomains",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualDomains.lean",
+      "selected": "22dba872c605b5168d156c01f6d0e5bdeeb554d9",
+      "main": "931eb276cefd15a4a8e390968b252f040c7f52a1",
+      "current_fingerprint": {
+        "sha256": "8d34d189917cf632f50a004e6c2a44e245113972caa933f893e5f6e531c728b9",
+        "blob": "22dba872c605b5168d156c01f6d0e5bdeeb554d9",
+        "bytes": 5799,
+        "lines": 124
+      },
+      "main_fingerprint": {
+        "sha256": "94ae09d670c25202ae6e13198088a09d8e3d65d4fb4e80c10ed7586b64c5dc9a",
+        "blob": "931eb276cefd15a4a8e390968b252f040c7f52a1",
+        "bytes": 5412,
+        "lines": 118
+      },
+      "classification": "two reference-domain public signatures shortened",
+      "action": "n04b_reference_negative_domain and n04b_reference_typed_domain retain hD hC href hfield but remove hT hS hN and their unused T/R/loss parameters. Internal reference-travel calls must use the same shortened interface.",
+      "public_header_comparison": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualTravel.lean",
+      "selected": "07661eae46124d0a5550bf4f6de16a5874838d3c",
+      "main": "dcaa59739ff527e45fea4ac96940666548b1a1e6",
+      "current_fingerprint": {
+        "sha256": "4307b8b206489be492e33a3f12198e4af5271c45a5db821b85ac2db0133ce7eb",
+        "blob": "07661eae46124d0a5550bf4f6de16a5874838d3c",
+        "bytes": 12681,
+        "lines": 243
+      },
+      "main_fingerprint": {
+        "sha256": "9f3edfdad1a4db67e239c9fa87357c35c28bc60686bb84eb9f70012fbcb1f961",
+        "blob": "dcaa59739ff527e45fea4ac96940666548b1a1e6",
+        "bytes": 5265,
+        "lines": 119
+      },
+      "classification": "four reference-flow/first-integral/travel signatures shortened; their former proof work is now a raw field",
+      "action": "Remove hT hS hN only after selecting and supplying the strengthened hfield. The actual function and whole closed-component reference formula remain unchanged.",
+      "public_header_comparison": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bTypedAtlasDomains",
+      "path": "src/ContinuousFlexibility/Analysis/N04bTypedAtlasDomains.lean",
+      "selected": "4114c475e0bda07b9674ea1f5127fc56507695fc",
+      "main": "ec96177b67f80bddf842b5089bc4e94798e00e58",
+      "current_fingerprint": {
+        "sha256": "8032ce84bf016719e83ee02e2d6d11ab3869314b5de2aae207935b757ef121b9",
+        "blob": "4114c475e0bda07b9674ea1f5127fc56507695fc",
+        "bytes": 7788,
+        "lines": 155
+      },
+      "main_fingerprint": {
+        "sha256": "69dd99b66086373d3a2b7bf6d123615e78aeb1ae2c31941eeee786d38f1154e1",
+        "blob": "ec96177b67f80bddf842b5089bc4e94798e00e58",
+        "bytes": 7589,
+        "lines": 152
+      },
+      "classification": "referenceDomain signature shortened; domains proof calls shortened reference_typed_domain",
+      "action": "n04bTypedAtlasData_referenceDomain keeps e F h J hD hC href hfield m; remove its unused T/R/loss and hT/hS/hN. Current domains line 131 also uses the old reference_typed_domain argument list.",
+      "public_header_comparison": null
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateNeighborhood",
+      "path": "src/ContinuousFlexibility/Analysis/StateNeighborhood.lean",
+      "selected": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+      "main": "71f6118a05293a2b49a121d77886443edbc81cb8",
+      "current_fingerprint": {
+        "sha256": "d69d61889ad31640933f00a39c70c7ff33eeb0df52df51a509df97850d1399b6",
+        "blob": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+        "bytes": 6647,
+        "lines": 143
+      },
+      "main_fingerprint": {
+        "sha256": "700c7f45ce35b0f3a7ba9b5e875ecb0d12018deab9bff5f11be0aee740257246",
+        "blob": "71f6118a05293a2b49a121d77886443edbc81cb8",
+        "bytes": 6611,
+        "lines": 143
+      },
+      "classification": "all sixteen common public headers identical",
+      "action": "No public callsite signature migration found; retain explicit provider identity during a source replacement.",
+      "public_header_comparison": {
+        "name": "StateNeighborhood",
+        "current_blob": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+        "main_blob": "71f6118a05293a2b49a121d77886443edbc81cb8",
+        "common_headers_same": [
+          "heightPairGrading_monotone",
+          "stateGrading_monotone",
+          "sectorGrading_monotone",
+          "continuous_pairGrading_apply",
+          "continuous_heightPairGrading",
+          "continuous_stateGrading",
+          "continuous_sectorGrading",
+          "isOpen_stateNeighborhood",
+          "isOpen_sectorNeighborhood",
+          "convex_seminorm_parameterNeighborhood",
+          "convex_stateNeighborhood",
+          "seminorm_reference_mem_parameterNeighborhood",
+          "reference_mem_stateNeighborhood",
+          "stateNeighborhood_mono",
+          "sectorNeighborhood_mono",
+          "oneHighVariationWeight_mono"
+        ],
+        "changed_headers": [],
+        "line_only_names": [],
+        "main_only_names": []
+      }
+    }
+  ],
+  "reference_flow_contract": {
+    "new_field": "∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ, L.minusFlow (C.referenceState, 0) m r θ = θ - ∫ s in C.left m..r, Real.sqrt (-deriv D.w s / (s * D.w s))",
+    "genuine_supplier": "N01Properties.n04b_returnCorrectedMinusFlow_reference proves the formula for the actual returnCorrectedMinusFlow and the same arbitrary cutoff. N01Properties.n04b_opticalFieldRegularity then consumes the actual L.coefficients equality and an actual reference-flow equality, without constructing a canonical atlas.",
+    "same_witness_limit": "Blueprint.N04bFieldRealization deliberately discards the old _L/_K and chooses Q.field E. It is an existential realization for the same A/T/S/C/R, not a drop-in theorem preserving an arbitrary already chosen L/K. A same-witness migration must use the literal-field identities and retained cutoff."
+  },
+  "selected_explicit_record_repairs": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N03RootEndpointPhysicalJets",
+      "path": "src/ContinuousFlexibility/Analysis/N03RootEndpointPhysicalJets.lean",
+      "kind": "baseline",
+      "blob": "15ba9f4a5b2eefb7ae81d2d4a9e971148ca2fc45",
+      "sha256": "ef46dcdc6d0e03ddd94fc925199cc655cb8652117fc4c2256c36f4b8949ec066",
+      "start_line": 389,
+      "end_line": 393,
+      "current_exact_block": "  have hfield' : N04bFieldRegularity D S C L rootBase η :=\n    { smooth_coefficients := fun z hz => hfield.smooth_coefficients z (hsub hz)\n      periodic_coefficients := fun z hz => hfield.periodic_coefficients z (hsub hz)\n      positive_a := fun z hz => hfield.positive_a z (hsub hz)\n      negative_discriminant := fun z hz => hfield.negative_discriminant z (hsub hz) }",
+      "required_new_field": "reference_flow := hfield.reference_flow",
+      "reason": "This field is independent of the restricted state neighborhood and is inherited unchanged."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeCanonicalAtlasRestrictedGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasRestrictedGeometry.lean",
+      "kind": "baseline",
+      "blob": "28407ce18ea7eabac9bbe62345fb9df591fd7b16",
+      "sha256": "29c43eb81d8250a000e3b9c0b217672afb2be922736cf5a183bf025e18a4ccef",
+      "start_line": 111,
+      "end_line": 115,
+      "current_exact_block": "  have hfield' : N04bFieldRegularity D S C L newBase ε' :=\n    { smooth_coefficients := fun z hz => hfield.smooth_coefficients z (hsubState hz)\n      periodic_coefficients := fun z hz => hfield.periodic_coefficients z (hsubState hz)\n      positive_a := fun z hz => hfield.positive_a z (hsubState hz)\n      negative_discriminant := fun z hz => hfield.negative_discriminant z (hsubState hz) }",
+      "required_new_field": "reference_flow := hfield.reference_flow",
+      "reason": "This field is independent of the restricted state neighborhood and is inherited unchanged."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasCutOperator",
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/reference-gauge-restriction/WholeReferenceGaugeAtlasCutOperator.lean",
+      "kind": "held41",
+      "blob": "14acbf9b59c2fd57da53b0d7e0290c43f649331c",
+      "sha256": "71427dd3175ca9dcd9cdcc8de5ce4216f998587db175fdf55c74d24a5332ac01",
+      "start_line": 53,
+      "end_line": 57,
+      "current_exact_block": "  have hfield' : N04bFieldRegularity D S C L newBase ε' :=\n    { smooth_coefficients := fun z hz => hfield.smooth_coefficients z (hsub hz)\n      periodic_coefficients := fun z hz => hfield.periodic_coefficients z (hsub hz)\n      positive_a := fun z hz => hfield.positive_a z (hsub hz)\n      negative_discriminant := fun z hz => hfield.negative_discriminant z (hsub hz) }",
+      "required_new_field": "reference_flow := hfield.reference_flow",
+      "reason": "This field is independent of the restricted state neighborhood and is inherited unchanged."
+    }
+  ],
+  "all_selected_reference_name_hits": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualAtlasGeometry",
+      "kind": "baseline",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualAtlasGeometry.lean",
+      "blob": "6e704770a6066c6279f7c3cdae96c1d695d554d3",
+      "line": 63,
+      "name": "n04bTypedAtlasData_referenceDomain",
+      "text": "  · exact n04bTypedAtlasData_referencePartition e F h J hD hC cut hcut\n  · exact n04bTypedAtlasData_referenceDomain e F h J hD hC hN.1.1.2.2.1 hT hS hN hfield\n  · intro z hz hs m\n    exact n04bTypedAtlasData_domains e F h J hT hS hN hfield hD hC hz hs m\n  · intro z hz hs",
+      "declaration": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualDomains",
+      "kind": "baseline",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualDomains.lean",
+      "blob": "22dba872c605b5168d156c01f6d0e5bdeeb554d9",
+      "line": 74,
+      "name": "n04b_reference_negative_domain",
+      "text": "/-- The actual reference half-domain is the optical-cut radial interval. -/\ntheorem n04b_reference_negative_domain\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}",
+      "declaration": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualDomains",
+      "kind": "baseline",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualDomains.lean",
+      "blob": "22dba872c605b5168d156c01f6d0e5bdeeb554d9",
+      "line": 91,
+      "name": "n04b_reference_actualTravelChart",
+      "text": "    have hm := mem_n04bTravelDomain.mp hp\n    have he := n04b_reference_actualTravelChart href hT hS hN hfield m\n      ⟨hm.1.1.1.le, hm.1.1.2.le⟩ p.2\n    have ht : opticalTravel D.w (C.left m) p.1 ∈\n        n04bTravelHalfInterval (C.travel m) side := by",
+      "declaration": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualDomains",
+      "kind": "baseline",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualDomains.lean",
+      "blob": "22dba872c605b5168d156c01f6d0e5bdeeb554d9",
+      "line": 103,
+      "name": "n04b_reference_actualTravelChart",
+      "text": "    refine ⟨⟨hr, mem_univ _⟩, ?_⟩\n    rw [n04b_reference_actualTravelChart href hT hS hN hfield m ⟨hr.1.le, hr.2.le⟩ p.2]\n    exact (n04b_referenceTravel_mem_half_iff hD hC m side hr).mpr hp.1\n\n/-- The same typed index identifies the actual reference physical domain",
+      "declaration": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualDomains",
+      "kind": "baseline",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualDomains.lean",
+      "blob": "22dba872c605b5168d156c01f6d0e5bdeeb554d9",
+      "line": 108,
+      "name": "n04b_reference_typed_domain",
+      "text": "with its stored radial endpoints, for both negative and positive pieces. -/\ntheorem n04b_reference_typed_domain\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}",
+      "declaration": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualDomains",
+      "kind": "baseline",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualDomains.lean",
+      "blob": "22dba872c605b5168d156c01f6d0e5bdeeb554d9",
+      "line": 121,
+      "name": "n04b_reference_negative_domain",
+      "text": "  cases i with\n  | inl i => exact n04b_reference_negative_domain hD hC href hT hS hN hfield i.1 i.2\n  | inr i => rfl\n\nend ContinuousFlexibility.Analysis",
+      "declaration": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+      "kind": "baseline",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualTravel.lean",
+      "blob": "07661eae46124d0a5550bf4f6de16a5874838d3c",
+      "line": 127,
+      "name": "n04b_referenceMinusFlow_eq_optical",
+      "text": "travel, including both physical component endpoints. -/\ntheorem n04b_referenceMinusFlow_eq_optical\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}",
+      "declaration": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+      "kind": "baseline",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualTravel.lean",
+      "blob": "07661eae46124d0a5550bf4f6de16a5874838d3c",
+      "line": 170,
+      "name": "n04b_referenceMinusFlow_inverse",
+      "text": "opposite optical translation. -/\ntheorem n04b_referenceMinusFlow_inverse\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}",
+      "declaration": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+      "kind": "baseline",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualTravel.lean",
+      "blob": "07661eae46124d0a5550bf4f6de16a5874838d3c",
+      "line": 182,
+      "name": "n04b_referenceMinusFlow_eq_optical",
+      "text": "  have hf (η : ℝ) : f η = η - opticalTravel D.w (C.left m) r :=\n    n04b_referenceMinusFlow_eq_optical hT hS hN hfield m hr η\n  have hinj : Function.Injective f := by\n    intro a b hab\n    rw [hf a, hf b] at hab",
+      "declaration": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+      "kind": "baseline",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualTravel.lean",
+      "blob": "07661eae46124d0a5550bf4f6de16a5874838d3c",
+      "line": 195,
+      "name": "n04b_reference_firstIntegrals",
+      "text": "\ntheorem n04b_reference_firstIntegrals\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}",
+      "declaration": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+      "kind": "baseline",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualTravel.lean",
+      "blob": "07661eae46124d0a5550bf4f6de16a5874838d3c",
+      "line": 216,
+      "name": "n04b_referenceMinusFlow_inverse",
+      "text": "      (Function.invFun (L.minusFlow (C.referenceState, 0) m r) η) = _\n    rw [n04b_referenceMinusFlow_inverse hT hS hN hfield m hr η,\n      n04b_referenceState_leftChart href]\n  refine ⟨hm θ, ?_⟩\n  change -n04bMinusFirstIntegral",
+      "declaration": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+      "kind": "baseline",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualTravel.lean",
+      "blob": "07661eae46124d0a5550bf4f6de16a5874838d3c",
+      "line": 227,
+      "name": "n04b_reference_actualTravelChart",
+      "text": "specializes to the actual radial optical travel at the reference state. -/\ntheorem n04b_reference_actualTravelChart\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}",
+      "declaration": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+      "kind": "baseline",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualTravel.lean",
+      "blob": "07661eae46124d0a5550bf4f6de16a5874838d3c",
+      "line": 238,
+      "name": "n04b_reference_firstIntegrals",
+      "text": "      (opticalTravel D.w (C.left m) r, θ) := by\n  have h := n04b_reference_firstIntegrals href hT hS hN hfield m hr θ\n  simp only [n04bActualTravelChart, n04bCharacteristicTravelChart,\n    characteristicTravelChart, h.1, h.2]\n  apply Prod.ext <;> dsimp only <;> ring",
+      "declaration": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bTypedAtlasDomains",
+      "kind": "baseline",
+      "path": "src/ContinuousFlexibility/Analysis/N04bTypedAtlasDomains.lean",
+      "blob": "4114c475e0bda07b9674ea1f5127fc56507695fc",
+      "line": 99,
+      "name": "n04bTypedAtlasData_referenceDomain",
+      "text": "the radial endpoint fields merely record their optical-cut intervals. -/\ntheorem n04bTypedAtlasData_referenceDomain\n    (hD : RadialProfileGeometry D) (hC : controlGeometryConditions D S C)\n    (href : referenceStateConditions D S C)\n    {T : MaterialData} {R : ReturnEquationData S} {base loss : ℕ} {ε : ℝ}",
+      "declaration": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bTypedAtlasDomains",
+      "kind": "baseline",
+      "path": "src/ContinuousFlexibility/Analysis/N04bTypedAtlasDomains.lean",
+      "blob": "4114c475e0bda07b9674ea1f5127fc56507695fc",
+      "line": 108,
+      "name": "n04b_reference_typed_domain",
+      "text": "    physicalPieceOpen S K (C.referenceState, 0) m = referencePhysicalPieceOpen S K m :=\n  n04b_reference_typed_domain hD hC href hT hS hN hfield (e m)\n\ntheorem n04bTypedAtlasData_domains\n    {T : MaterialData} {R : ReturnEquationData S} {base loss : ℕ} {ε : ℝ}",
+      "declaration": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bTypedAtlasDomains",
+      "kind": "baseline",
+      "path": "src/ContinuousFlexibility/Analysis/N04bTypedAtlasDomains.lean",
+      "blob": "4114c475e0bda07b9674ea1f5127fc56507695fc",
+      "line": 131,
+      "name": "n04b_reference_typed_domain",
+      "text": "  exact (hfixed hpositive).trans\n    (n04b_reference_typed_domain hD hC h03.1.1.2.2.1 hT hS h03 hfield (e m))\n\ntheorem n04bTypedAtlasData_partition\n    {T : MaterialData} {R : ReturnEquationData S} {base loss : ℕ} {ε : ℝ}",
+      "declaration": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+      "kind": "held41",
+      "path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeRadialFields.lean",
+      "blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+      "line": 135,
+      "name": "n04b_reference_actualTravelChart",
+      "text": "      (n04bActualTravelChart S C L z₀ m p) = _\n    rw [n04b_reference_actualTravelChart hN.1.1.2.2.1 hT hS hN hfield m\n      ⟨hp.1.1.le, hp.1.2.le⟩ p.2]\n    rfl\n  have hshape (p : PolarPoint) (hp : p ∈ Ω) :",
+      "declaration": false
+    }
+  ],
+  "additional_frozen_draft_repairs": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelDifferenceAngularBounds.lean",
+      "blob": "d201f14194e6df9c339b3e9b0ea0ae9ecf626f5c",
+      "sha256": "eaa14196be78e7434d780cb537c878193906d23b8b35da4d424265897e63ba4c",
+      "hits": [
+        {
+          "line": 133,
+          "text": "    ((material_circle_sample_weights_pos hT hN.1.1.1.1).2) l h rsel hcover J _ nmax\n  intro i m hr x hx θ\n  have href := (n04b_reference_firstIntegrals hN.1.1.2.2.1 hT hS hN hfield\n    m (hrsel i m) θ).1\n  rw [href]\n  have hd := hN.1.1.n04MinusFirstIntegralCircle_decode"
+        }
+      ],
+      "scope": "additional already frozen draft outside this 867-node selection",
+      "action": "When and only when selecting the new reference-flow contract, remove the old hT hS hN positional arguments."
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03RootEndpointMaterialJets.lean",
+      "blob": "67909442f863f93ac90079022eeb473feee7e722",
+      "sha256": "dcdb96e62937189c4e819ec7c9d9055f6629b1b329e69721b4be5100a5358001",
+      "hits": [
+        {
+          "line": 92,
+          "text": "  have hB' := n04PartB_restrict hB hb hηε\n  have hfield' : N04bFieldRegularity D S C L rootBase η :=\n    { smooth_coefficients := fun z hz => hfield.smooth_coefficients z (hsub hz)\n      periodic_coefficients := fun z hz => hfield.periodic_coefficients z (hsub hz)\n      positive_a := fun z hz => hfield.positive_a z (hsub hz)\n      negative_discriminant := fun z hz => hfield.negative_discriminant z (hsub hz) }"
+        },
+        {
+          "line": 95,
+          "text": "      periodic_coefficients := fun z hz => hfield.periodic_coefficients z (hsub hz)\n      positive_a := fun z hz => hfield.positive_a z (hsub hz)\n      negative_discriminant := fun z hz => hfield.negative_discriminant z (hsub hz) }\n  obtain ⟨CF, lowF, lossF, hCF, hfloorF, BF, hBF, hchart⟩ :=\n    n01_rootChart_unit_positive_material_jets_of_component_optical hS hT hN'.1.1 hflow hK\n  obtain ⟨CH, lowH, lossH, hCH, hfloorH, hheights⟩ :="
+        }
+      ],
+      "scope": "additional already frozen draft outside this 867-node selection",
+      "action": "Add reference_flow := hfield.reference_flow to the restricted record."
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceDerivativeSourceBounds.lean",
+      "blob": "5adeff1258a17595c84851d6cb875915dfebb4ad",
+      "sha256": "740df37b72d5ffbbb057f6c5c15274478cbf3815c342a1b7fcfceb5bdc59e4ad",
+      "hits": [
+        {
+          "line": 138,
+          "text": "  have htime : opticalTravel D.w (C.left m) p.1 ∈ Ioo (0 : ℝ) (C.travel m) := by\n    have hm := (n04b_actualTravelChart_bijOn hN hS hT hfield href hsref m).mapsTo hp\n    simpa only [n04b_reference_actualTravelChart hN.1.1.2.2.1 hT hS hN hfield m\n      ⟨hp.1.1.le, hp.1.2.le⟩ p.2] using hm.1\n  have htpos : 0 < t := n04b_travelOrientation_pos_of_fullStrip side htime\n  have htT : t ≤ C.travel m := by"
+        }
+      ],
+      "scope": "additional already frozen draft outside this 867-node selection",
+      "action": "When and only when selecting the new reference-flow contract, remove the old hT hS hN positional arguments."
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceAiryCoordinate.lean",
+      "blob": "b5d3ecd7b7260eb69b418da9ddcb0d6279986653",
+      "sha256": "8f7b0552ef8d8001432a74d11359cec6a51263dd84a51711853bf414b381bdce",
+      "hits": [
+        {
+          "line": 126,
+          "text": "  rw [hg.1.self_of_nhds]\n  change n04bRootStripChart (C.travel m) side (n04bActualTravelChart S C L z₀ m p) = _\n  rw [n04b_reference_actualTravelChart hN.1.1.2.2.1 hT hS hN hfield m\n    ⟨hp.1.1.le, hp.1.2.le⟩ θ]\n  change (n04bRootHalfCoordinate (C.travel m) side\n    (opticalTravel D.w (C.left m) p.1), θ) = _"
+        }
+      ],
+      "scope": "additional already frozen draft outside this 867-node selection",
+      "action": "When and only when selecting the new reference-flow contract, remove the old hT hS hN positional arguments."
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceSourceSquares.lean",
+      "blob": "7791aa8d49e87108052f185a0af3d09773d986b0",
+      "sha256": "5e46d450a5d7766cec6832979b607b224fa7a1e263006ca091156d9a8b3d0c62",
+      "hits": [
+        {
+          "line": 103,
+          "text": "      (fun q : PolarPoint => (opticalTravel D.w (C.left m) q.1, q.2)) := by\n    filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds hp] with q hq\n    exact n04b_reference_actualTravelChart hN.1.1.2.2.1 hT hS hN hfield m\n      ⟨hq.1.1.le, hq.1.2.le⟩ q.2\n  have hd := ((n04b_referenceTravel_hasDerivAt hD hC m hp.1).comp_hasFDerivAt\n    (f := fun q : PolarPoint => q.1) p"
+        }
+      ],
+      "scope": "additional already frozen draft outside this 867-node selection",
+      "action": "When and only when selecting the new reference-flow contract, remove the old hT hS hN positional arguments."
+    }
+  ],
+  "split_module_collision_evidence": [
+    {
+      "name": "mapsTo_openInterval_of_boundary_fibers",
+      "current_module": "ReflectionStripGeometry",
+      "current_blob": "d28b9f63d2861a32f1968b21a0196953804daec4",
+      "current_line": 19,
+      "main_blob": "4a4576400511f993c49f9cbd4e1b3831853b112d",
+      "main_line": 22,
+      "complete_header_identical": true
+    },
+    {
+      "name": "chart_angle_eq_zero_of_reflection",
+      "current_module": "ReflectionStripGeometry",
+      "current_blob": "d28b9f63d2861a32f1968b21a0196953804daec4",
+      "current_line": 45,
+      "main_blob": "4a4576400511f993c49f9cbd4e1b3831853b112d",
+      "main_line": 103,
+      "complete_header_identical": true
+    },
+    {
+      "name": "inverseChart_periodic_of_chart_periodic",
+      "current_module": "ReflectionStripGeometry",
+      "current_blob": "d28b9f63d2861a32f1968b21a0196953804daec4",
+      "current_line": 63,
+      "main_blob": "4a4576400511f993c49f9cbd4e1b3831853b112d",
+      "main_line": 139,
+      "complete_header_identical": true
+    },
+    {
+      "name": "chart_mapsTo_openAngularStrip",
+      "current_module": "ReflectionStripGeometry",
+      "current_blob": "d28b9f63d2861a32f1968b21a0196953804daec4",
+      "current_line": 82,
+      "main_blob": "4a4576400511f993c49f9cbd4e1b3831853b112d",
+      "main_line": 196,
+      "complete_header_identical": true
+    }
+  ],
+  "smallness_quantifier_change": {
+    "path": "src/ContinuousFlexibility/Analysis/N01FlowSmallness.lean",
+    "current": {
+      "blob": "ca66bd0e3aa4056fdbdef013e16fe4825d066887",
+      "sha256": "ad6648090847d20aeef9eff20176e398fab2c8a288f1650bc400040be8e57b39",
+      "bytes": 12028,
+      "lines": 219
+    },
+    "main": {
+      "blob": "128bbe1e44710de2eeb4e45e9570ddd2bbcbec52",
+      "sha256": "6ed46a0fb554a5874ae148554ba5d6561ba5e8db927a36713800507f5095763a",
+      "bytes": 11799,
+      "lines": 213
+    },
+    "declaration": "N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood",
+    "main_line": 35,
+    "current_order": "(hN) (hT) : ∃ parameterLoss, ∀ s, ∃ B > 0, ...",
+    "main_order": "(hN) (hT) (s : ℕ) : ∃ d₁, ∃ B > 0, ...",
+    "obligation": "Pass s explicitly and destruct the returned d₁/B at that s. Do not claim the current stronger ordering is definitionally the main signature. The downstream weighted s=1 theorem still provides one fixed first-variation loss."
+  },
+  "actual_reuse": {
+    "sources": [
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N01EndpointOneHigh.lean",
+        "blob": "89d524bcc7934390eecae7a0c60d0790cbfc16f0",
+        "sha256": "44dd0ae23cc8ee854f2b7e20bc20ced0104cf7c354b3aded8c96034e65e15ec2",
+        "bytes": 7505,
+        "lines": 150
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N01EndpointJetLocalGrowth.lean",
+        "blob": "6ffd056b6f856a2caf27a44a440dcbf3cd8eb1b5",
+        "sha256": "3363b3e290ec7614e7db1ec315fe8c3cd8eafe2e515087dc9efd91e160824995",
+        "bytes": 13318,
+        "lines": 259
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/LocalizedJetInterpolation.lean",
+        "blob": "6c35cc9c69be4ffc631bf2d62fb9a5b0edac95ab",
+        "sha256": "ac2eed346e919bf2cba88b9f4b0738bc71600b2aa3877e8a5f44847c7d40d2d1",
+        "bytes": 12001,
+        "lines": 246
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N01FlowCircleUniformBounds.lean",
+        "blob": "84dfd97594ecb91e64c204b89d82625d8fddfd08",
+        "sha256": "a01b24b0bdd84a50f60524da297a4d9e93a1b608d8c4dbfba8328ad494c845d6",
+        "bytes": 6368,
+        "lines": 128
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/CoupledCircleCompositionRealization.lean",
+        "blob": "c0b4ada33ad03e522aed5a3a52d8ef461bec9be3",
+        "sha256": "08ae5c8b3e993e1db595d5a4ee79e5711910bfac1f89a7871d7a42ced29223f0",
+        "bytes": 7809,
+        "lines": 151
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/CircleCompositionUniformBounds.lean",
+        "blob": "c106d144ed51f41df90902c42a30c657ae361a33",
+        "sha256": "f054df7da7c0049e544541ca3c54b6231602dee260dccb35f1d46b9a55595fe4",
+        "bytes": 13856,
+        "lines": 266
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInverseUniformBounds.lean",
+        "blob": "ac025f689b8ad75193d681ed756ff66e164f157f",
+        "sha256": "6c739cf0a3ba3a38e2397e879987f2b441a796d990121dc0919305401a71d85f",
+        "bytes": 9841,
+        "lines": 176
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N04bReferenceCorrection.lean",
+        "blob": "8de44e6b9b63d15c1bf36be0521c5358c37d2b01",
+        "sha256": "d40a5560d69b5f1c0addeb6da26b2032e3edef8b96af8c2e5ad6f521094fa64b",
+        "bytes": 6660,
+        "lines": 140
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N04bOpticalFieldType.lean",
+        "blob": "da2a788ce170da35a3c0f1d72849ab87187bbe15",
+        "sha256": "88891722dfa086127c946dc92a8e04bc53973df6a37cfb0c4beb013ba806ba08",
+        "bytes": 5042,
+        "lines": 109
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N04bOpticalFieldRealization.lean",
+        "blob": "22f6c8bf62a9c4daa2f3774a3117e7664e49da63",
+        "sha256": "5d2a33c5d3d637caa7602878ae57b0a3ab916e0cebf8e02093ef147f17b302f4",
+        "bytes": 2506,
+        "lines": 60
+      },
+      {
+        "path": "src/ContinuousFlexibility/Blueprint/N02N03.lean",
+        "blob": "47b721ce618b7edc4606e475bd90c5bf036aaf42",
+        "sha256": "5a1b9cde0866557bcb20f32c4836c8957ccb8c656438381b494913a8c0dd4c7e",
+        "bytes": 5157,
+        "lines": 100
+      },
+      {
+        "path": "src/ContinuousFlexibility/Blueprint/N04b/FieldRealization.lean",
+        "blob": "ec8eb0c7dce4a4d76f0cd3c33dcc239f368fdbf3",
+        "sha256": "f455023b6e054030ba2e9a499688aede95cbf51c62c000a60c4a612afd236804",
+        "bytes": 1916,
+        "lines": 45
+      },
+      {
+        "path": "src/ContinuousFlexibility/Blueprint/N04b/CanonicalConstruction.lean",
+        "blob": "e0c0ef1b0f1bd567afcde4aefee3880c90755250",
+        "sha256": "d8f589ce4d85b99dd211cfe0e7bfc9bb27e164c043890ed7eb191e79e4bf72c5",
+        "bytes": 3352,
+        "lines": 70
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N04bActualRootDensity.lean",
+        "blob": "9bfcc42a8b0c92614ec4994a26ae0055c0d6e30e",
+        "sha256": "164fcde0474d8bebc7375228984a55805e039a5e90af48004c23c1d3c7b61f1e",
+        "bytes": 6224,
+        "lines": 119
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N04bActualRootTransmission.lean",
+        "blob": "9cdd03b7749744079bf37f797ed6f29617669f79",
+        "sha256": "1c9ee0a9f70eda2d6bc009a8c0db62018ca6be9005aeee7515b8bc465f937c4b",
+        "bytes": 3756,
+        "lines": 76
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N04bConstructedRootRegularity.lean",
+        "blob": "6aea8b7eaf213d910e80d4c546721bc04a8cd1ba",
+        "sha256": "704ebd9f19f79dcc498897aa55a0a704d9cc52e800e419c078e49248f43e6b4e",
+        "bytes": 4877,
+        "lines": 110
+      },
+      {
+        "path": "src/ContinuousFlexibility/Blueprint/N04Coordinates.lean",
+        "blob": "fd748e4bae42f596ff359e2377508472ef8443e3",
+        "sha256": "9852a60b4cb4823c5f7988a570936b192f67a5e7b5f09e94a92c287060028582",
+        "bytes": 587,
+        "lines": 20
+      }
+    ],
+    "fixed_base_endpoint": {
+      "declaration": "N01Properties.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform_radius",
+      "line": 31,
+      "quantifier_order": "∃ B ≥ base, ∀ n, ∃ L, ∀ R ≥ 0, ∀ s ≥ B, ∃ K ≥ 0, ∀ rsel/hrsel, ∀ z in the same sector neighborhood with grading B z ≤ R, ∀ v : Fin (n+1), actual circleNorm ≤ K * oneHighVariationWeight ... B (s+L) z v",
+      "finding": "This is a genuine low seminorm order fixed before all parameter orders and all closed-radius selectors. The upstream localized interpolation proves a common low base before the varying loss offset.",
+      "remaining": "N01FlowCircleUniformBounds.endpointFlowCircle_uniformFamilyJetBounds packages only ∀ n ∃ base; use the stronger supplier directly for the same actual circle jet family. Do not promote a per-n packaged base to one global base."
+    },
+    "composition": {
+      "declaration": "coupled_circle_kernel_grading_bounds",
+      "line": 54,
+      "quantifier_order": "∃ base loss, ∀ r k s, ∀ R ≥ 1, ∃ C ≥ 0, ... actual coupled kernel ...",
+      "finding": "A genuine fixed-base kernel bound is available; the generic CircleCompositionUniformBounds and CirclePositiveInverseUniformBounds wrappers still select bases after n. An actual forward/inverse-family bridge remains distinct work owned by proof_inventory."
+    },
+    "actual_n02_n03": "Blueprint.N02N03 constructs a genuine corrected flow using one cutoff and retained N01 witnesses. Its final Through03 existential does not expose every construction witness or add an optical primitive-geometry field to N01Properties.",
+    "actual_n04b": "Blueprint.N04bCanonicalConstruction produces actual N04PartA and N04PartB from the genuine strengthened field. Actual root density, cut transmission, and ordinary root regularity are reusable lower-level facts.",
+    "not_completed": "The inspected Blueprint.N04Coordinates declaration remains sorry. The inspected N04b constructors do not output CurrentJets, all fifteen CanonicalPrimitiveGeometry material fields, or complete TransmissionGeometry. Searches of the relevant Analysis/Blueprint contracts found target definitions and later consumers, not an actual final N04 producer; this is a scoped source conclusion, not a universal nonexistence claim."
+  },
+  "next_actions": [
+    "Keep CI165 on its explicitly approved c796 graph plus de78 and the separate 14-source prefix; this does not select the eleven changed 1ece contracts.",
+    "Finish old source-identical c9 cohorts under the separate equality gates. Preserve their exact predecessor and generated-root budgets.",
+    "Before a later full-main field migration, add the inherited reference_flow field at the explicit record sites and select a real same-L reference-flow supplier.",
+    "Port the four travel/first-integral and three domain argument lists together with their provider files. Preserve line-only strip helpers and the two positive boundary lemmas.",
+    "Reuse the actual fixed-base endpoint supplier for the same jet family; do not assume CurrentJets follows from a weaker UniformFamilyJetBounds wrapper.",
+    "Plan the remaining 27/41 reference sources by exact dependency closure under a separate post-CI165 current pin, without changing the historical full-main gate."
+  ],
+  "limitations": {
+    "no_local_lean_or_elaboration": true,
+    "no_active_index_refs_or_ci_mutation": true,
+    "new_Lean_lines": 0,
+    "read_only_source_audit_not_compilation": true,
+    "full_repository_consumer_scan": false,
+    "full_selected_867_source_scan": true,
+    "no_currentJets_or_finalN04_claim": true
+  }
+}

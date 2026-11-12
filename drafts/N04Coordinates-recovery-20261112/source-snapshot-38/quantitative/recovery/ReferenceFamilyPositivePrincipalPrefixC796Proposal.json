@@ -1,0 +1,940 @@
+{
+  "kind": "independent_c796_closed_reference_family_positive_principal_prefix_proposal",
+  "owner": "/root/quantitative_route",
+  "status": "STATIC_SOURCE_CLOSURE_AND_SYMBOL_CHECKS_PASSED_AWAITING_ROOT_STAGING",
+  "proposed_backup_path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/ReferenceFamilyPositivePrincipalPrefixC796Proposal.json",
+  "baseline": {
+    "head": "c796387fb555392501c81f5b8bd834936251516c",
+    "tree": "08257c9406671ac1f094b739e4971c1eca108c66",
+    "main_compared": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac"
+  },
+  "authorization": "Parent requested an independent <=1900-source-line prefix under the current c796 contracts, separate from the original full-main gate, after CI164 full green.",
+  "old_full41_gate": {
+    "manifest": {
+      "sha256": "e3df495b387d253732915923b113924c74fef74b8dd51310d20bcdbe68408f50",
+      "blob": "0ae5d8a1d49a64c412183757910c6ff25507260c",
+      "bytes": 156860,
+      "lines": 2102
+    },
+    "gate_kept_unchanged": true,
+    "source_bytes_kept_unchanged": true,
+    "not_reinterpreted_as_main1ece_approval": true
+  },
+  "current_provider_ledger": {
+    "sha256": "2899e402e186f17117eba07797edddc8c077dc3d4e5b55023fc056bd6bd567a7",
+    "blob": "fbe3d483cc2243748761ee79b6d45b52e72a8727",
+    "bytes": 90542,
+    "lines": 1643
+  },
+  "exact_old_migration_review": {
+    "sha256": "aae17c62ec1956b8ffe5d2037e3f2d8450eb56fdfbb9b45df93d252c361cb070",
+    "blob": "6b820fd901e274990396072d1569676ee82018bb",
+    "bytes": 22261,
+    "lines": 470
+  },
+  "roots": [
+    "ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily",
+    "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasGeometry"
+  ],
+  "counts": {
+    "sources": 14,
+    "source_Lean_lines": 1880,
+    "explicit_public_names": 48,
+    "project_closure": 555,
+    "baseline_providers": 541,
+    "project_edges": 968
+  },
+  "files": [
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalPositiveReferenceFamily.lean",
+      "file": "src/ContinuousFlexibility/Analysis/CanonicalPositiveReferenceFamily.lean",
+      "sha256": "792a5148b96084a722578a9f25dbd9ed24b62691f9f31b0fbb2843311d0ae173",
+      "blob": "0a0206739fd3b542d87723155b08504317d2562e",
+      "lines": 56,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation"
+      ],
+      "public_names": [
+        "N04PositiveReferenceFamily",
+        "n04Coordinates_exists_positive_reference_family"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalPositiveReferenceFamilyReviewedManifest.json",
+        "sha256": "5fff12bfcf721722076f03f62f6d7a9e857334f4bc9815f34713c3b8036724a0"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CanonicalPositiveReferenceFamilyIndependentReview.json",
+        "sha256": "ccd360ca93a7149e84e08cb6c4bd165785016c450aee94bf26074142967d3d6c"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolation.lean",
+      "file": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceInterpolation.lean",
+      "sha256": "43b9332cf208881b0894b69379c7767dcbed46d00dd6d93ab7b580a6ea8c5ce5",
+      "blob": "89bec50456142fde3eb21c28e397456a000b0548",
+      "lines": 80,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+        "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets"
+      ],
+      "public_names": [
+        "n04Coordinates_exists_actual_positive_reference_interpolation"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolationReviewedManifest.json",
+        "sha256": "3828d5181d7559adea4d9dbb7e89ffbcb0ef9b452cb6d7a7c358fab84f736728"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/ActualPositiveReferenceInterpolationIndependentReview.json",
+        "sha256": "92efa3a237516ae54b82378617db040db946dc55883ba6827c3d5dfcdc6719a4"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceEndpointData.lean",
+      "file": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceEndpointData.lean",
+      "sha256": "5996158db4711a93a40aeb62b7e21f9582b3da5c0959582efa48b6793ffa50bf",
+      "blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+      "lines": 160,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+        "ContinuousFlexibility.Analysis.WholePositiveEndpointFields"
+      ],
+      "public_names": [
+        "n04PositiveReferenceSourceCoordinate",
+        "n04PositiveReferenceSourceHeight",
+        "n04Coordinates_actual_positive_reference_source_data"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolationReviewedManifest.json",
+        "sha256": "3828d5181d7559adea4d9dbb7e89ffbcb0ef9b452cb6d7a7c358fab84f736728"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/ActualPositiveReferenceInterpolationIndependentReview.json",
+        "sha256": "92efa3a237516ae54b82378617db040db946dc55883ba6827c3d5dfcdc6719a4"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeEndpointData.lean",
+      "file": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean",
+      "sha256": "f88706279e2902514c3bda2fdd618785c19d2be4f848d1eaf44758e2bdfd7f27",
+      "blob": "7d2ff0fac9e08218174cd6870ba79b8529aa8a01",
+      "lines": 126,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+        "ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary",
+        "ContinuousFlexibility.Analysis.N04bActualAtlasCuts"
+      ],
+      "public_names": [
+        "n04Coordinates_actual_reference_negative_endpoint_data"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeEndpointDataReviewedManifest.json",
+        "sha256": "f5792f65df07694fa330cdc669d7ebd446577e0cffef75b61e0f4edf4f845c8f"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/ActualReferenceNegativeEndpointDataIndependentReview.json",
+        "sha256": "f0df341ae691152526445e6fc561a7b7536f3521942b3fd5270d47137a82686a"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeRadialFields.lean",
+      "file": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean",
+      "sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+      "blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+      "lines": 156,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity",
+        "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+        "ContinuousFlexibility.Analysis.N01OpticalCollarPositivity",
+        "ContinuousFlexibility.Analysis.N04bActualRootInterior"
+      ],
+      "public_names": [
+        "n04Coordinates_actual_reference_negative_radial_fields"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeEndpointDataReviewedManifest.json",
+        "sha256": "f5792f65df07694fa330cdc669d7ebd446577e0cffef75b61e0f4edf4f845c8f"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/ActualReferenceNegativeEndpointDataIndependentReview.json",
+        "sha256": "f0df341ae691152526445e6fc561a7b7536f3521942b3fd5270d47137a82686a"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/radial-reference-bool/PositiveReferenceFiniteRadialJets.lean",
+      "file": "src/ContinuousFlexibility/Analysis/PositiveReferenceFiniteRadialJets.lean",
+      "sha256": "a515668c71f3895edfda3d1183a5c275f3758799de0d7ebb68d439d33095bc66",
+      "blob": "db60546bb34349a040955ace14facdf5b13dfa0d",
+      "lines": 167,
+      "imports": [
+        "ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative",
+        "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+      ],
+      "public_names": [
+        "radialEndpointTaylorSlice",
+        "contDiff_radialEndpointTaylorSlice",
+        "radialEndpointTaylorSlice_value",
+        "radialEndpointTaylorSlice_deriv",
+        "radialEndpointTaylorSlice_lift",
+        "radialEndpointTaylorSlice_fullJets",
+        "exists_positiveReferenceFiniteRadialJets"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/radial-reference-bool/PositiveReferenceFiniteRadialJetsReviewedManifest.json",
+        "sha256": "7ef9f39d393ba5882a57fa5996c4418917611af7a17f6544f0cd6ff05f0b1879"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/PositiveReferenceFiniteRadialJetsIndependentReview.json",
+        "sha256": "97effed219d273a938cbdf9c39b93491807e84ef0299ffadb1bec42d572d73e0"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "file": "src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "lines": 168,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholePositiveCanonicalFields",
+        "ContinuousFlexibility.Analysis.PositiveReferenceCylinder"
+      ],
+      "public_names": [
+        "PositiveChartRangeGeometry",
+        "PositiveChartRangeGeometry.bijOn",
+        "PositiveChartRangeGeometry.inverse_germs",
+        "PositiveChartRangeGeometry.boundary_fields",
+        "PositiveChartRangeGeometry.jacobian_even",
+        "positiveReferenceCylinder_rangeGeometry"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometryReviewedManifest.json",
+        "sha256": "97cd4ecb74836bca17a67d6e413f437e2019c6449037d66e23b788e2525e70b3"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/PositiveChartRangeGeometryIndependentReview.json",
+        "sha256": "38ecf2152b8106f04be17fb04df6e4722faf2f16ac631815201939f320dff92d"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholePositiveReferencePrincipal.lean",
+      "file": "src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean",
+      "sha256": "3e3daeb4e127d77150c85fe2cf205ae2564a86da1a7b92a54d16f447a62cc3fc",
+      "blob": "fcb65801fb0da7c1ccbf3e7a0bf826f303bf9a3b",
+      "lines": 195,
+      "imports": [
+        "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+        "ContinuousFlexibility.Analysis.N01OpticalCollarPositivity"
+      ],
+      "public_names": [
+        "n04Coordinates_reference_positive_coefficient_germs",
+        "n04WholeReferenceGaugeAtlasData_positive_reference_formulas",
+        "n04WholeReferenceGaugeAtlasData_positive_reference_qualitative"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholePositiveReferencePrincipalReviewedManifest.json",
+        "sha256": "ce850327465e1d0660aa6f109c29578f00353722b9842339e511cea95e944ca3"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/WholePositiveReferencePrincipalIndependentReview.json",
+        "sha256": "cf9bc51dedbe4eeb1f96310e95566ea4aff98d2d87bbe0eb2f66e905ce066e56"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePrincipalFormulas.lean",
+      "file": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+      "sha256": "fc2eb15c0da7e37fda9f227b906a75c801d0d628064e17e5bca4e63dae75e910",
+      "blob": "096b420be6425f39b2f5e73e4a0f60cbd9113ced",
+      "lines": 100,
+      "imports": [
+        "ContinuousFlexibility.Analysis.PositiveReferenceCylinder",
+        "ContinuousFlexibility.Analysis.CoordinateOperatorConstruction",
+        "ContinuousFlexibility.Radial.RadialHeight"
+      ],
+      "public_names": [
+        "coordinatePrincipalDensity_radial_cylinder",
+        "divergenceOperator_radial_height_of_coefficient_germs",
+        "inverseChartPotential_radial_cylinder"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholePositiveReferencePrincipalReviewedManifest.json",
+        "sha256": "ce850327465e1d0660aa6f109c29578f00353722b9842339e511cea95e944ca3"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/WholePositiveReferencePrincipalIndependentReview.json",
+        "sha256": "cf9bc51dedbe4eeb1f96310e95566ea4aff98d2d87bbe0eb2f66e905ce066e56"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasOperator.lean",
+      "file": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasOperator.lean",
+      "sha256": "2fddaf7a9418556a1915a1691b7ed4396740b227d269b8f84c78d6217f388c57",
+      "blob": "de3ff006b2c03592d7c5489ed41c4b73adad8c73",
+      "lines": 106,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+        "ContinuousFlexibility.Analysis.WholeCanonicalAtlasOperator"
+      ],
+      "public_names": [
+        "n04WholeReferenceGaugeAtlasData_operatorFields",
+        "n04WholeReferenceGaugeAtlasData_actual_operatorFields",
+        "n04WholeReferenceGaugeAtlasData_actual_operator"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasOperatorReviewedManifest.json",
+        "sha256": "fa97fcb6417b534498826a84699b8ac2c4ff5b9f7ac6b13a2706b3d7d3e141ee"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/WholeReferenceGaugeAtlasOperatorIndependentReview.json",
+        "sha256": "3ed6ba618c9edd217939b9ec08d5213066c50efff8bddf04163f1c05587307cd"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "file": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeCanonicalAtlasData",
+        "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge"
+      ],
+      "public_names": [
+        "n04WholeReferenceGaugeAtlasData",
+        "n04WholeReferenceGaugeAtlasData_physical_fields",
+        "n04WholeReferenceGaugeAtlasData_negative_fields",
+        "n04WholeReferenceGaugeAtlasData_positive_fields",
+        "n04WholeReferenceGaugeAtlasData_factorization"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasDataReviewedManifest.json",
+        "sha256": "701abf400f31e9d5bd990eff6d782e8878b3bb25e17a721750de8d04a4e319d7"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/WholeReferenceGaugeAtlasDataIndependentReview.json",
+        "sha256": "b1a632492a5d1c2199c1f446ca138af4a7571ba57c6d79c7bd533ac4003c530d"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGauge.lean",
+      "file": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean",
+      "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+      "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+      "lines": 171,
+      "imports": [
+        "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+      ],
+      "public_names": [
+        "wholePositiveReferenceGaugeChart",
+        "wholePositiveReferenceGaugeInverse",
+        "wholePositiveReferenceGaugeHeight",
+        "wholePositiveReferenceGaugeHeight_eq",
+        "wholePositiveReferenceGauge_geometry",
+        "wholePositiveReferenceGauge_middle_germs",
+        "wholePositiveReferenceGauge_reference",
+        "wholePositiveReferenceGauge_relative_fields"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGaugeReviewedManifest.json",
+        "sha256": "c840e5892621bb0d24bc16a65ce264898a538ecafb8c82b4728ee5760b11d6c2"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/WholePositiveReferenceGaugeDistinctRangeIndependentReview.json",
+        "sha256": "eef770e8c9cc00fb617823950a2e0ab679444a6802f83b9dab743e5d44764137"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeRelativeFields.lean",
+      "file": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRelativeFields.lean",
+      "sha256": "4b34db7f7514160c2f86a8fe0ecb0c8d0a653ea4c1a4bdfc34b27ef862319dec",
+      "blob": "ba1d43881f06ffb76d0d658ed762dd435a668d0b",
+      "lines": 101,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData"
+      ],
+      "public_names": [
+        "n04WholeReferenceGaugeAtlasData_positive_reference_fields",
+        "n04WholeReferenceGaugeAtlasData_positive_relative_fields",
+        "n04WholeReferenceGaugeAtlasData_negative_relative_fields"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeRelativeFieldsReviewedManifest.json",
+        "sha256": "6d48aab93f9ac35c31649f9cfef52a25c5a253f1d0eeced51ff11f011e240e82"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/WholeReferenceGaugeRelativeFieldsIndependentReview.json",
+        "sha256": "e5b0941ddb21d4331bff37e82bfc0b9a16568f95629d3d0223c574bf2267a311"
+      },
+      "supplemental_reviews": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasGeometry",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasGeometry.lean",
+      "file": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasGeometry.lean",
+      "sha256": "41ac14bc8261391998aeb4e6d2c290171bba36baea4dec40a665449fa72c8299",
+      "blob": "e349394e51c8caef8a751f9b4e6c4900f13f8d0d",
+      "lines": 163,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData"
+      ],
+      "public_names": [
+        "PositiveChartRangeGeometry.open_fields",
+        "n04WholeReferenceGaugeAtlasData_geometry"
+      ],
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasGeometryReviewedManifest.json",
+        "sha256": "8d624dafe17b76df6ddd73e50c1fb56e6723cc2e81f2d2ccf534ad71a954e6c1"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/WholeReferenceGaugeAtlasGeometryIndependentReview.json",
+        "sha256": "78c1f3a9a80062453ca3b024db663f448368f73f290213b1279f5096c2c92b22"
+      },
+      "supplemental_reviews": []
+    }
+  ],
+  "installation_topological_order": [
+    "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+    "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+    "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+    "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry",
+    "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+    "ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation",
+    "ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily",
+    "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+    "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+    "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasGeometry"
+  ],
+  "selected_graph": {
+    "proposed_path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/ReferenceFamilyPositivePrincipalPrefixC796SelectedProviders.json",
+    "sha256": "02ae664aa07bb6746786b41d97b7c8d21cd48a54e1fc40f8836088f6ff7d7a90",
+    "blob": "da8fec85b3efe14f66bf39f04a13428a22232e72",
+    "bytes": 582277,
+    "lines": 12667
+  },
+  "source_checks": {
+    "every_selected_file_retrieved_from_its_exact_Git_blob": true,
+    "every_source_sha256_blob_bytes_lines_checked": true,
+    "every_555_node_source_sha256_blob_bytes_lines_recomputed": true,
+    "every_555_node_full_imports_reparsed": true,
+    "every_nonselected_import_supplied_by_actual_c796_except_explicit_normalizer": true,
+    "no_import_of_an_unselected_held41_module": true,
+    "every_public_name_in_original14_inventory_present_in_its_actual_source": true,
+    "cohort3_91_module_intersection_with_555_node_closure": [],
+    "missing": [],
+    "cycles": []
+  },
+  "explicit_normalizer_selection": {
+    "before": "04e7e732ab5f0d16ba232b561bd612f93dff4c51",
+    "after": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+    "historical_peer_sha256": "68eb3a9c3b1787e69830f30a837a6825dd7150b1f3a4e1c881d505a7cce756e7",
+    "renewed_full_source_headers_peer": {
+      "blob": "70dff750330a8243935b3a095d4d786a55d1701b",
+      "sha256": "2e31dd313d5c3acb462cee23b38bcfde98e6821f46de97ddcbd6cba16e92a33b"
+    }
+  },
+  "symbols": {
+    "direct_namespace_aware_lexical_checks": {
+      "candidate_duplicates": [],
+      "baseline_closure_collisions": [],
+      "cohort3_collisions": [],
+      "six_leaf_collisions": [],
+      "six_leaf_names": 32,
+      "six_leaf_unread": [],
+      "parser_warnings": [],
+      "parser_errors": []
+    },
+    "direct_scope": "The 48 selected public names were checked against all 541 actual closure providers, all 91 exact cohort3 source blobs, the two new pure normalizer declarations, and all 32 public declarations of the six already-reviewed proof leaves. All checks returned empty collisions.",
+    "broader_current_project_check_reused": {
+      "review_sha256": "aae17c62ec1956b8ffe5d2037e3f2d8450eb56fdfbb9b45df93d252c361cb070",
+      "review_blob": "6b820fd901e274990396072d1569676ee82018bb",
+      "scan_sha256": "b2f88e3c7be9085d2b12aa72aa5cf7bb7b06ce9cfbe177ceb5c9264d71be818b",
+      "scope": "Historical full-41 explicit-declaration scan covered all 105 names against 4638 projected c9+line modules, including cohorts2-5. This proposal selects an unchanged 48-name subset. The newly appended six leaves and explicit normalizer addon are separately checked above; no fresh scan of all 4306 c796 modules is claimed."
+    },
+    "elaborator_generated_names_claim": false,
+    "declaration_rows": [
+      {
+        "name": "ContinuousFlexibility.Analysis.N04PositiveReferenceFamily",
+        "short": "N04PositiveReferenceFamily",
+        "line": 18,
+        "kind": "def",
+        "module": "ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily",
+        "blob": "0a0206739fd3b542d87723155b08504317d2562e"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04Coordinates_exists_positive_reference_family",
+        "short": "n04Coordinates_exists_positive_reference_family",
+        "line": 37,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily",
+        "blob": "0a0206739fd3b542d87723155b08504317d2562e"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04Coordinates_exists_actual_positive_reference_interpolation",
+        "short": "n04Coordinates_exists_actual_positive_reference_interpolation",
+        "line": 25,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation",
+        "blob": "89bec50456142fde3eb21c28e397456a000b0548"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04PositiveReferenceSourceCoordinate",
+        "short": "n04PositiveReferenceSourceCoordinate",
+        "line": 24,
+        "kind": "def",
+        "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+        "blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04PositiveReferenceSourceHeight",
+        "short": "n04PositiveReferenceSourceHeight",
+        "line": 37,
+        "kind": "def",
+        "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+        "blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04Coordinates_actual_positive_reference_source_data",
+        "short": "n04Coordinates_actual_positive_reference_source_data",
+        "line": 49,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+        "blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04Coordinates_actual_reference_negative_endpoint_data",
+        "short": "n04Coordinates_actual_reference_negative_endpoint_data",
+        "line": 28,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+        "blob": "7d2ff0fac9e08218174cd6870ba79b8529aa8a01"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04Coordinates_actual_reference_negative_radial_fields",
+        "short": "n04Coordinates_actual_reference_negative_radial_fields",
+        "line": 91,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+        "blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.radialEndpointTaylorSlice",
+        "short": "radialEndpointTaylorSlice",
+        "line": 24,
+        "kind": "def",
+        "module": "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+        "blob": "db60546bb34349a040955ace14facdf5b13dfa0d"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.contDiff_radialEndpointTaylorSlice",
+        "short": "contDiff_radialEndpointTaylorSlice",
+        "line": 28,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+        "blob": "db60546bb34349a040955ace14facdf5b13dfa0d"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.radialEndpointTaylorSlice_value",
+        "short": "radialEndpointTaylorSlice_value",
+        "line": 35,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+        "blob": "db60546bb34349a040955ace14facdf5b13dfa0d"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.radialEndpointTaylorSlice_deriv",
+        "short": "radialEndpointTaylorSlice_deriv",
+        "line": 41,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+        "blob": "db60546bb34349a040955ace14facdf5b13dfa0d"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.radialEndpointTaylorSlice_lift",
+        "short": "radialEndpointTaylorSlice_lift",
+        "line": 50,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+        "blob": "db60546bb34349a040955ace14facdf5b13dfa0d"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.radialEndpointTaylorSlice_fullJets",
+        "short": "radialEndpointTaylorSlice_fullJets",
+        "line": 62,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+        "blob": "db60546bb34349a040955ace14facdf5b13dfa0d"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.exists_positiveReferenceFiniteRadialJets",
+        "short": "exists_positiveReferenceFiniteRadialJets",
+        "line": 78,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+        "blob": "db60546bb34349a040955ace14facdf5b13dfa0d"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry",
+        "short": "PositiveChartRangeGeometry",
+        "line": 21,
+        "kind": "structure",
+        "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry",
+        "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry.bijOn",
+        "short": "PositiveChartRangeGeometry.bijOn",
+        "line": 42,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry",
+        "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry.inverse_germs",
+        "short": "PositiveChartRangeGeometry.inverse_germs",
+        "line": 49,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry",
+        "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry.boundary_fields",
+        "short": "PositiveChartRangeGeometry.boundary_fields",
+        "line": 67,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry",
+        "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry.jacobian_even",
+        "short": "PositiveChartRangeGeometry.jacobian_even",
+        "line": 89,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry",
+        "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.positiveReferenceCylinder_rangeGeometry",
+        "short": "positiveReferenceCylinder_rangeGeometry",
+        "line": 99,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry",
+        "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04Coordinates_reference_positive_coefficient_germs",
+        "short": "n04Coordinates_reference_positive_coefficient_germs",
+        "line": 23,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+        "blob": "fcb65801fb0da7c1ccbf3e7a0bf826f303bf9a3b"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_positive_reference_formulas",
+        "short": "n04WholeReferenceGaugeAtlasData_positive_reference_formulas",
+        "line": 61,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+        "blob": "fcb65801fb0da7c1ccbf3e7a0bf826f303bf9a3b"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_positive_reference_qualitative",
+        "short": "n04WholeReferenceGaugeAtlasData_positive_reference_qualitative",
+        "line": 161,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+        "blob": "fcb65801fb0da7c1ccbf3e7a0bf826f303bf9a3b"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.coordinatePrincipalDensity_radial_cylinder",
+        "short": "coordinatePrincipalDensity_radial_cylinder",
+        "line": 21,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+        "blob": "096b420be6425f39b2f5e73e4a0f60cbd9113ced"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.divergenceOperator_radial_height_of_coefficient_germs",
+        "short": "divergenceOperator_radial_height_of_coefficient_germs",
+        "line": 43,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+        "blob": "096b420be6425f39b2f5e73e4a0f60cbd9113ced"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.inverseChartPotential_radial_cylinder",
+        "short": "inverseChartPotential_radial_cylinder",
+        "line": 82,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+        "blob": "096b420be6425f39b2f5e73e4a0f60cbd9113ced"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_operatorFields",
+        "short": "n04WholeReferenceGaugeAtlasData_operatorFields",
+        "line": 21,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+        "blob": "de3ff006b2c03592d7c5489ed41c4b73adad8c73"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_actual_operatorFields",
+        "short": "n04WholeReferenceGaugeAtlasData_actual_operatorFields",
+        "line": 71,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+        "blob": "de3ff006b2c03592d7c5489ed41c4b73adad8c73"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_actual_operator",
+        "short": "n04WholeReferenceGaugeAtlasData_actual_operator",
+        "line": 84,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+        "blob": "de3ff006b2c03592d7c5489ed41c4b73adad8c73"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData",
+        "short": "n04WholeReferenceGaugeAtlasData",
+        "line": 21,
+        "kind": "def",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+        "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_physical_fields",
+        "short": "n04WholeReferenceGaugeAtlasData_physical_fields",
+        "line": 73,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+        "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_negative_fields",
+        "short": "n04WholeReferenceGaugeAtlasData_negative_fields",
+        "line": 82,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+        "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_positive_fields",
+        "short": "n04WholeReferenceGaugeAtlasData_positive_fields",
+        "line": 96,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+        "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_factorization",
+        "short": "n04WholeReferenceGaugeAtlasData_factorization",
+        "line": 116,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+        "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.wholePositiveReferenceGaugeChart",
+        "short": "wholePositiveReferenceGaugeChart",
+        "line": 22,
+        "kind": "def",
+        "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+        "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.wholePositiveReferenceGaugeInverse",
+        "short": "wholePositiveReferenceGaugeInverse",
+        "line": 25,
+        "kind": "def",
+        "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+        "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.wholePositiveReferenceGaugeHeight",
+        "short": "wholePositiveReferenceGaugeHeight",
+        "line": 28,
+        "kind": "def",
+        "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+        "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.wholePositiveReferenceGaugeHeight_eq",
+        "short": "wholePositiveReferenceGaugeHeight_eq",
+        "line": 32,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+        "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.wholePositiveReferenceGauge_geometry",
+        "short": "wholePositiveReferenceGauge_geometry",
+        "line": 40,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+        "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.wholePositiveReferenceGauge_middle_germs",
+        "short": "wholePositiveReferenceGauge_middle_germs",
+        "line": 107,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+        "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.wholePositiveReferenceGauge_reference",
+        "short": "wholePositiveReferenceGauge_reference",
+        "line": 130,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+        "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.wholePositiveReferenceGauge_relative_fields",
+        "short": "wholePositiveReferenceGauge_relative_fields",
+        "line": 152,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+        "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_positive_reference_fields",
+        "short": "n04WholeReferenceGaugeAtlasData_positive_reference_fields",
+        "line": 29,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+        "blob": "ba1d43881f06ffb76d0d658ed762dd435a668d0b"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_positive_relative_fields",
+        "short": "n04WholeReferenceGaugeAtlasData_positive_relative_fields",
+        "line": 45,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+        "blob": "ba1d43881f06ffb76d0d658ed762dd435a668d0b"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_negative_relative_fields",
+        "short": "n04WholeReferenceGaugeAtlasData_negative_relative_fields",
+        "line": 81,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+        "blob": "ba1d43881f06ffb76d0d658ed762dd435a668d0b"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry.open_fields",
+        "short": "PositiveChartRangeGeometry.open_fields",
+        "line": 21,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasGeometry",
+        "blob": "e349394e51c8caef8a751f9b4e6c4900f13f8d0d"
+      },
+      {
+        "name": "ContinuousFlexibility.Analysis.n04WholeReferenceGaugeAtlasData_geometry",
+        "short": "n04WholeReferenceGaugeAtlasData_geometry",
+        "line": 40,
+        "kind": "theorem",
+        "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasGeometry",
+        "blob": "e349394e51c8caef8a751f9b4e6c4900f13f8d0d"
+      }
+    ]
+  },
+  "mathematical_value": [
+    "The complete seven-source endpoint/interpolation chain produces one actual finite radial reference family from the original typed atlas and the same actual endpoint-source assignment.",
+    "N04PositiveReferenceFamily retains the true physical/canonical range and exact endpoint jets for that single Y/H pair. The candidate adds no replacement representative or new choice.",
+    "The same generic whole-reference data, relative fields and operator formulas are present, together with the full reference-gauge geometry transformation.",
+    "The actual positive reference coefficient germs, principal coefficients, potential formula and strict positivity are proved for the same actual Y/H and original stored field under their original hypotheses.",
+    "This is a meaningful complete compile unit for reference construction and positive principal mathematics. It does not claim the full 15-field primitive certificate, all-piece ReferencePrincipal, CurrentJets, material width estimates, or the final N04 theorem."
+  ],
+  "excluded_alternatives": [
+    {
+      "roots": [
+        "CanonicalPositiveReferenceFamily",
+        "WholeReferenceGaugeReferencePrincipal"
+      ],
+      "source_lines": 2173,
+      "reason": "Exceeds the requested 1900-line source allowance."
+    },
+    {
+      "roots": [
+        "CanonicalPositiveReferenceFamily",
+        "ActualPositiveGaugeRootFirstJets"
+      ],
+      "source_lines": 1847,
+      "reason": "A valid separate closed unit, but the chosen 1880-line unit directly validates the reference family, whole-reference geometry and positive principal formulas requested by the parent; no unrelated roots are added for budget filling."
+    }
+  ],
+  "witness_scope": {
+    "original_K_T_C_L_and_endpoint_assignment_preserved": true,
+    "same_Y_H_for_family_and_consumers": true,
+    "no_new_Lean_or_changed_source": true,
+    "no_material_E0_floor_assumed_by_this_selection": true,
+    "actual_hfield_pin": "0accc70bea719eb47f46bcde4989c99798027273",
+    "future_main1ece_field_port_separate": "ActualReferenceNegativeRadialFields still uses the original n04b_reference_actualTravelChart header. A later full-main switch to dcaa5973/fc6a92f9 requires an explicit successor and the new reference_flow field; this prefix does not perform that switch."
+  },
+  "budget": {
+    "parent_reported_planned_next_CI_added_Lean_lines_before_prefix": 17952,
+    "prefix_source_lines": 1880,
+    "conservative_generated_root_import_lines": 14,
+    "conservative_next_CI_total_added_Lean_lines": 19846,
+    "cap": 20000,
+    "reserved_remaining": 154,
+    "actual_diff_must_be_rechecked_by_root_before_submission": true,
+    "generated_root_hand_edited": false
+  },
+  "CI164": {
+    "independently_queried": false,
+    "parent_reported_status": "FULL_SUCCESS",
+    "exact_head": "c796387fb555392501c81f5b8bd834936251516c",
+    "run_id": "43285158817",
+    "job_id": "131416494593",
+    "completion_utc": "2026-11-12 20:28:42 UTC",
+    "parent_cached_log_sha256": "3bb765d233d26e322e293c78dbd7cec7e9fc597427ba58dd95de647f86852501",
+    "recorded_parent_build_jobs": 8283,
+    "gate": "Root must bind its exact full-green receipt for this head before staging; this proposal performs no CI lookup or mutation."
+  },
+  "final_staging_requirements": [
+    "Preserve the original full41 manifest and full-main gate as historical authority; select only these 14 exact sources through this new explicit current-contract proposal.",
+    "Use the exact c796 baseline plus already-reviewed cohort3, normalizer and six-leaf selection; verify complete final-tree import closure, names and actual added/deleted Lean line totals.",
+    "Use all 14 sources atomically with their original full-source review bindings. Do not silently substitute a newer main field/reference-flow provider.",
+    "Allow the existing CI generator to create real root imports. Do not claim local scripts or Lean were run.",
+    "Remote compilation is the first actual elaboration test of this held source prefix."
+  ],
+  "execution": {
+    "active_source_index_refs_commits_changed": false,
+    "local_files_written": false,
+    "Lean_elaboration_or_compile": false,
+    "CI_queried_or_modified": false,
+    "storage": "Immutable Git blobs and session stores only"
+  }
+}

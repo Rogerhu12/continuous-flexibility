@@ -1,0 +1,247 @@
+{
+  "kind": "independent_tame_fixed_base_actual_partition_composition_review",
+  "owner": "/root/audit_coordinates",
+  "status": "PASSED_FULL_SOURCE_MATHEMATICS_AND_PINNED_API_STATIC_REVIEW_UNCOMPILED",
+  "proposed_backup_path": "audit/reviews/TameFixedBaseCompositionBoundsIndependentReview.json",
+  "source": {
+    "module": "ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds",
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBounds.lean",
+    "bytes": 17787,
+    "sha256": "f70497231b60b5c0a59e8de16cb534f1820e2bd9d6469ed8c86643b88f428b80",
+    "git_blob": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+    "lines": 328,
+    "eof_lf": true,
+    "imports": [
+      "ContinuousFlexibility.Analysis.SpacesInterpolationProducts",
+      "ContinuousFlexibility.Analysis.TameTopologicalComposition",
+      "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "ContinuousFlexibility.Analysis.SmoothDirectionsAffine"
+    ],
+    "selection": "owned-scratch"
+  },
+  "candidate": {
+    "blob": "a9fdc706461e767e53fad58f96dd16ba988509e7",
+    "sha256": "72cd2002689083a854ee454b12a9b06382d6b27620ed3a0b558ed139393e20e7",
+    "bytes": 8107
+  },
+  "selected_graph": {
+    "blob": "4fb2c432397d4a7b36518ddf565d40c3d39c6f87",
+    "sha256": "718d1b5a5d72865d6b73acd3123213180d29a986919045b65476423e94102e3a",
+    "nodes": 83,
+    "upstream_nodes": 82,
+    "root_nodes": 1,
+    "all_82_upstream_git_blobs_independently_matched_exact_main_tree": true,
+    "main_tree_ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "main_recursive_tree_entries": 4908,
+    "main_tree_truncated": false,
+    "reachable_exactly_83": true,
+    "missing_project_imports": [],
+    "cycles": [],
+    "topological_order_valid": true,
+    "only_root_node_changed_from_326_graph": true,
+    "all_project_import_edges_unchanged": true
+  },
+  "source_mechanical_checks": {
+    "bytes": 17787,
+    "lines": 328,
+    "sha256": "f70497231b60b5c0a59e8de16cb534f1820e2bd9d6469ed8c86643b88f428b80",
+    "public_headers_unchanged": true,
+    "imports_unchanged": true,
+    "options_unchanged": true,
+    "deleting_two_exact_letI_lines_recovers_original_326": true,
+    "new_public_declarations": [
+      "spaces_interpolation_affine_product_bound",
+      "projectiveCompositionJets_fixedBase_oneHigh"
+    ],
+    "whole_repository_name_collision_scan_performed": false
+  },
+  "superseded_findings": {
+    "original_source_blob": "7e8ed357c9a53ad2c888da6e401b0084e3f9f142",
+    "original_source_sha256": "85080c53cdff94fa40ecea646d300ffe3b549bf614e5a1eede073a8f3842379b",
+    "reason": "The algebraic statements omitted TopologicalSpace E, while called theorem declarations in existing sections carry that automatically included instance.",
+    "calls": [
+      "tamePairGrading_monotone",
+      "pairGrading_apply",
+      "multilinearTameSize_le_affine"
+    ],
+    "repairs": [
+      {
+        "line": 32,
+        "statement": "spaces_interpolation_affine_product_bound",
+        "added": "letI : TopologicalSpace E := ⊥"
+      },
+      {
+        "line": 110,
+        "statement": "tameJetSize_selected_unit_le",
+        "added": "letI : TopologicalSpace E := ⊥"
+      }
+    ],
+    "justification": "Both affected conclusions, seminorm data and estimates are independent of topology. The local instance supplies the existing declaration's section binder without adding a public premise, changing a map, or changing any genuine tower.",
+    "pinned_rule": {
+      "repository": "leanprover/lean4",
+      "ref": "v4.35.0-rc3",
+      "path": "src/Lean/Elab/MutualDef.lean",
+      "blob": "81f3d84a62a9cfc1ef4502eb8c2e6b69618d9b2f",
+      "read_lines": "445-490",
+      "rule": "withHeaderSecVars includes instance-implicit variables whose free variables are already included, unless explicitly omitted."
+    },
+    "original_preserved": true
+  },
+  "providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.SpacesInterpolationProducts",
+      "path": "src/ContinuousFlexibility/Analysis/SpacesInterpolationProducts.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "blob": "bef566d963e0bafb656cca8fb64d118d2c396162",
+      "sha256": "302248ce14c8d3ef488a6a46d8cb80cb72b374f89da308baac7012fa92f8fd58",
+      "scope": "Complete source read"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameTopologicalComposition",
+      "path": "src/ContinuousFlexibility/Analysis/TameTopologicalComposition.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "blob": "55b7375931ca80f58ae6dd8b82e28ab9da80f5e4",
+      "sha256": "5efa594a0a0b44d12427f42e759ca575e5bf69a05743a8d4326e1d81d2b197a0",
+      "scope": "Complete source read"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "path": "src/ContinuousFlexibility/Analysis/TameMultilinearNormalization.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "scope": "Complete source read"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsAffine",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAffine.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+      "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+      "scope": "Complete source read"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameJetComposition",
+      "path": "src/ContinuousFlexibility/Analysis/TameJetComposition.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "blob": "0beb73d391faac1b0cbce07a5c1e6321663fccf7",
+      "sha256": "92c2136183ae3552216e6248785e0364cc6360f3f0ffe20a4164f1af46296f7e",
+      "scope": "Complete source read"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+      "path": "src/ContinuousFlexibility/Analysis/TameElementaryCalculus.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "blob": "bc38b3601334a7b76a3eda9f3602c4d3b2440423",
+      "sha256": "8970cb3def322b3ecaf1d4c717754fc68f57d4a63d4ed82023a7d4fae5ac9b09",
+      "scope": "Actual used definitions, declarations and proofs; surrounding unrelated sections not re-audited"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameLocalCalculus",
+      "path": "src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+      "sha256": "6952ac2501bd38f0f6d51b1633f52d30ed1820f9380bd6dd58ebc24c601e1991",
+      "scope": "Actual used definitions, declarations and proofs; surrounding unrelated sections not re-audited"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameJetLocalBounds",
+      "path": "src/ContinuousFlexibility/Analysis/TameJetLocalBounds.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "blob": "af44988e9b25134eaeb1ae6505691d755d8bc228",
+      "sha256": "0cdfa8c38f6ff5e84cc7d486946ca4c96a7574ec929185edfa7397204374a184",
+      "scope": "Actual used definitions, declarations and proofs; surrounding unrelated sections not re-audited"
+    }
+  ],
+  "pinned_mathlib_api_sources": [
+    {
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Algebra/Order/BigOperators/GroupWithZero/Finset.lean",
+      "blob": "733982dfc2bdded1908b0f3926e5d03e4af80a2f",
+      "sha256": "a2f4be025a6f8863af1ded0c330ab72f94602d60e808cd24699bb1cd1f1d3263"
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Data/Finset/Max.lean",
+      "blob": "a6735d1f9cdcb1f6a9f78925a565d9ab7b48781b",
+      "sha256": "f9381a30f98377e15faa35c02d19d3fa0d6576c1709460ed699f4616e4d2539e"
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Algebra/BigOperators/Fin.lean",
+      "blob": "95092dd72334eb133dfc410d6d796b4cacc0fdfc",
+      "sha256": "8ec6ee70bae9af42db59b82a1b7e8f1b3056d5e9dd358d9f7cc8c58746ca7dd2"
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Analysis/Calculus/ContDiff/FaaDiBruno.lean",
+      "blob": "633c4dec60f69dbd0b32039b833bf205dd58a07f",
+      "sha256": "79b3216e965f032554197e51cb6d4dbcfb35e8a801b3dde1228f0eacbbb64aaf"
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Algebra/Group/Action/Defs.lean",
+      "blob": "7b0a3e2cb77287558f463c9d186c63d2b6e1d837",
+      "sha256": "ffecdd8214bad55eab6c631352ec37254a3459a674362fc43681ebfef8ede9b9"
+    }
+  ],
+  "mathematical_checks": [
+    {
+      "part": "affine finite-product interpolation",
+      "finding": "The source tuple has k+1 entries, hence a maximum exists for each factor. Pair grading evaluates (1,x) as 1+p(x). Each affine sum is at most (k+1) times the maximum pair seminorm, then monotonicity pays the provider's +2. The public interpolation base and loss precede k,m,order,s,R. The m=0 case is separate. Repeated maximizing slots are valid because the provider accepts any tuple."
+    },
+    {
+      "part": "low-factor costs",
+      "finding": "Each chosen pair low seminorm is at most 1+R. Products over erased subsets are bounded by the full (m+1)-fold product because 1+R is at least one. The high sum is bounded by (m+1)*P. All scalar prefactors are nonnegative and may depend only on already fixed finite orders/radius."
+    },
+    {
+      "part": "selected increment bound",
+      "finding": "The private selected-unit lemma allows arbitrary slot maps, including repetitions. It bounds the original tameJetSize by (m+1) times the single affine high sum over Fin.cons x v. The j=0 case is valid."
+    },
+    {
+      "part": "uniform outer slots",
+      "finding": "The second private lemma bounds the actual outer tame expression by (n+2)*H*A^n under H,A>=1, retaining all erased products and the base-point term."
+    },
+    {
+      "part": "fixed low base",
+      "finding": "B=max BJ (max BP (BK+d(0))) is chosen before n. The hJ order-zero estimate and genuine J.zero give q BK (f_i x)<=C0*(1+R), using only p B x<=R. No d(n), e(n), partition or output order is smuggled into B."
+    },
+    {
+      "part": "per-order finite loss",
+      "finding": "For fixed n, delta=sum_{j<=n}d(j) controls every block order using partSize_le. The finite supremum of e(length)+delta+length*(BK+delta)+LP gives L before R and s. No monotonicity of d/e is assumed."
+    },
+    {
+      "part": "one-high product",
+      "finding": "For each true ordered partition, exactly one affine factor contains s. The other length-many factors have order BK+delta. The total order is s+e(length)+delta+length*(BK+delta), so interpolation gives high index at most s+L."
+    },
+    {
+      "part": "natural arithmetic API",
+      "finding": "Fin.sum_univ_succ and the constant Nat sum reduce htotal to the same natural multiplication using pinned smul_eq_mul. The remaining equality is associative arithmetic; no illicit Nat/Real coercion or order-dependent base is introduced."
+    },
+    {
+      "part": "actual partition fields",
+      "finding": "Each term is the exact projectiveCompositionTerm of the supplied J_i,K_i on the same family index. hmap supplies the actual outer domain. The finite sum is the exact projectiveCompositionJets, with no new representative or abstract target estimate."
+    },
+    {
+      "part": "normalization",
+      "finding": "projectiveCompositionJets is a genuine continuous multilinear map under the supplied topological hypotheses. The public multilinear_bound_of_unitBall converts the unit-direction affine estimate to the claimed homogeneous tameJetSize for arbitrary increments, including seminorm kernels and n=0."
+    },
+    {
+      "part": "quantifiers",
+      "finding": "Final order is exists B before all n; for each n exists L before R,s; for each n,R,s exists C before i,x,v. Actual hJ/hK fixed-base premises are retained exactly. The theorem is a numerical partition bound; equality to an arbitrary actual composition tower remains the immediate consumer's comp_topological/uniqueness step."
+    }
+  ],
+  "remaining_findings": [],
+  "limitations": [
+    "Static review only; no local or remote Lean compilation/elaboration was run.",
+    "The 83-node graph verification establishes exact selection/reachability, not a typecheck of the entire graph.",
+    "No final CurrentJets or selector-inverse certificate is claimed by this source.",
+    "No active file, index, ref, CI, commit or compiler-limit operation occurred. Original 326 and its manifest remain immutable."
+  ],
+  "storage": "Exact review content retained in functions store and a new immutable Git blob; filesystem is unavailable."
+}

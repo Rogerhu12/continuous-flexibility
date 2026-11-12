@@ -26,7 +26,7 @@ open scoped ContDiff
 to build the actual ordinary flows and the common neighborhood. -/
 theorem n01bStatement_of_n01a (hN01a : N01aStatement) : N01bStatement := by
   classical
-  obtain ⟨A, T, S, C, hT, hS, hPartA⟩ := hN01a
+  obtain ⟨A, T, S, C, hT, hS, hPartA, hPrimitive⟩ := hN01a
   have hD : IsAccumulatingProfile A.val := hPartA.1.1
   have hControl : controlGeometryConditions A.val S C := hPartA.2.2.1
   obtain ⟨ε, hε, _, hsmooth, hprofile, hden, hchart, hparity⟩ :=
@@ -74,7 +74,8 @@ theorem n01bStatement_of_n01a (hN01a : N01aStatement) : N01bStatement := by
     · exact ⟨fun _ θ => θ, fun hz' => (hz hz').elim⟩
   choose Θ hΘ using hflows
   let C' : NonlinearGeometryData S := circleFlowGeometry C Θ
-  refine ⟨A, T, S, C', 4, ε, hT, hS, circleFlowGeometry_partA hPartA Θ, hε, ?_⟩
+  refine ⟨A, T, S, C', 4, ε, hT, hS, circleFlowGeometry_partA hPartA Θ,
+    hε, ?_, hPrimitive⟩
   refine ⟨?_, ?_, ?_, ?_, ?_⟩
   · intro z hz m θ
     exact hΘ z m hz θ

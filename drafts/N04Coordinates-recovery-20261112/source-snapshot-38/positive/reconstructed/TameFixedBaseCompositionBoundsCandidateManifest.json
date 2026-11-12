@@ -1,0 +1,152 @@
+{
+  "schema": "n04-candidate-source-manifest-v1",
+  "status": "CANDIDATE_SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "source": {
+    "module": "ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds",
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/TameFixedBaseCompositionBounds.lean",
+    "bytes": 17717,
+    "sha256": "85080c53cdff94fa40ecea646d300ffe3b549bf614e5a1eede073a8f3842379b",
+    "git_blob": "7e8ed357c9a53ad2c888da6e401b0084e3f9f142",
+    "lines": 326,
+    "eof_lf": true,
+    "imports": [
+      "ContinuousFlexibility.Analysis.SpacesInterpolationProducts",
+      "ContinuousFlexibility.Analysis.TameTopologicalComposition",
+      "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "ContinuousFlexibility.Analysis.SmoothDirectionsAffine"
+    ],
+    "selection": "owned-scratch"
+  },
+  "proposed_backup_path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/positive/reconstructed/TameFixedBaseCompositionBounds.lean",
+  "previous_unfrozen_checkpoint": {
+    "git_blob": "488ba86a344330a738c1e2e0e5a943ce7645ddc4",
+    "sha256": "59060520523b6611f91c76db1d198950d65f3ce7073dfdcb5f078b0e00f91a83",
+    "bytes": 8094,
+    "lines": 153,
+    "scope": "Earlier partial working version; retained in backup parent history, not another selected source."
+  },
+  "selected_upstream": {
+    "repository_full_name": "Rogerhu12/continuous-flexibility",
+    "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac"
+  },
+  "selected_graph": {
+    "git_blob": "dd6be6a6b6fd4248ee49e0c9e0c3e5b7ef706fd9",
+    "sha256": "b1c1768965ef06b1a6433f1e8674cd1dbb16db52b5b5185e6a420c83a634e0f2",
+    "bytes": 44281,
+    "project_modules": 83,
+    "missing_imports": [],
+    "cycles": [],
+    "verification": "Read-only exact-pin graph; metadata for unchanged reachable nodes reused from the already checked 322-node single-pin endpoint graph, five absent transitive files and direct providers fetched at this pin."
+  },
+  "direct_and_numerical_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsAffine",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAffine.lean",
+      "bytes": 5346,
+      "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+      "git_blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+      "lines": 124,
+      "eof_lf": true,
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "ContinuousFlexibility.Analysis.ProjectiveJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SpacesInterpolationProducts",
+      "path": "src/ContinuousFlexibility/Analysis/SpacesInterpolationProducts.lean",
+      "bytes": 10818,
+      "sha256": "302248ce14c8d3ef488a6a46d8cb80cb72b374f89da308baac7012fa92f8fd58",
+      "git_blob": "bef566d963e0bafb656cca8fb64d118d2c396162",
+      "lines": 212,
+      "eof_lf": true,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameJetComposition",
+      "path": "src/ContinuousFlexibility/Analysis/TameJetComposition.lean",
+      "bytes": 13234,
+      "sha256": "92c2136183ae3552216e6248785e0364cc6360f3f0ffe20a4164f1af46296f7e",
+      "git_blob": "0beb73d391faac1b0cbce07a5c1e6321663fccf7",
+      "lines": 287,
+      "eof_lf": true,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ProjectiveJetCompositionTwo"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "path": "src/ContinuousFlexibility/Analysis/TameMultilinearNormalization.lean",
+      "bytes": 9718,
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "git_blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "lines": 204,
+      "eof_lf": true,
+      "imports": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameTopologicalComposition",
+      "path": "src/ContinuousFlexibility/Analysis/TameTopologicalComposition.lean",
+      "bytes": 5010,
+      "sha256": "5efa594a0a0b44d12427f42e759ca575e5bf69a05743a8d4326e1d81d2b197a0",
+      "git_blob": "55b7375931ca80f58ae6dd8b82e28ab9da80f5e4",
+      "lines": 103,
+      "eof_lf": true,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameComposition",
+        "ContinuousFlexibility.Analysis.ProjectiveCurveIteratedChain"
+      ]
+    }
+  ],
+  "pinned_mathlib": {
+    "repository_full_name": "leanprover-community/mathlib4",
+    "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "apis": [
+      "OrderedFinpartition.partSize_le",
+      "Finset.exists_max_image",
+      "Finset.prod_le_prod_of_subset_of_one_le₀",
+      "Fin.sum_univ_succ",
+      "Fin.prod_univ_succ",
+      "ContinuousMultilinearMap.sum_apply"
+    ],
+    "scope": "API source checks only; no Lean execution."
+  },
+  "public_declarations": [
+    "spaces_interpolation_affine_product_bound",
+    "projectiveCompositionJets_fixedBase_oneHigh"
+  ],
+  "reasoning": [
+    "Use the existing public spaces_interpolation_product_bound on the original tuple, with q(real,x)=abs(real)+p(x). The interpolation base and loss precede both finite arities and every assigned factor order.",
+    "B=max BJ (max BP (BK+d(0))) is selected before n. The last entry pays for the image's fixed low BK seminorm using only the zero jet.",
+    "For fixed n, delta=sum_{j<=n}d(j). For each ordered partition c, its factor-order budget is e(length(c))+delta+length(c)*(BK+delta); only one factor contains spatial s.",
+    "Loss is the finite supremum of those partition budgets plus the public interpolation loss. It is selected before s, R and the family index.",
+    "The proof estimates actual projectiveCompositionTerm and projectiveCompositionJets, then normalizes their genuine continuous multilinear maps with the current public API. No private inverse-input product helper is copied.",
+    "The theorem estimates the actual partition tower; genuine composition and equality to a given actual tower must be connected by existing comp_topological and uniqueness in the immediate consumer."
+  ],
+  "scopes_not_claimed": [
+    "No compilation/elaboration or active-tree change.",
+    "No final CurrentJets certificate.",
+    "No fixed-base inference from a per-order-base supplier.",
+    "No new inverse or endpoint representative.",
+    "No whole-repository name-collision claim; peer may separately check declarations."
+  ],
+  "authorized_budget": {
+    "group_limit_lines": 1200,
+    "prior_selected_lines": 416,
+    "source_lines": 326,
+    "selected_total_lines": 742,
+    "remaining_lines": 458,
+    "earlier_checkpoint_only_in_history": true
+  },
+  "preservation": {
+    "source_blob_fetch_equal": true,
+    "sha256_helper_blob": "422074f39e207031b28b67d0c287a5f96dfd76fb",
+    "sha256_standard_test_vectors": [
+      "empty",
+      "abc"
+    ],
+    "local_filesystem": "unavailable; exact strings held in functions store and GitHub blobs; no exec retry"
+  }
+}

@@ -1,0 +1,358 @@
+{
+  "kind": "incremental_outage_preservation_and_full_green_baseline_refresh",
+  "snapshot": 38,
+  "created_at": "2026-11-12 20:48:52 UTC",
+  "parent": "c68a539084f96c90ee3f46d74a4c41d06713afc5",
+  "additional_parent": "c796387fb555392501c81f5b8bd834936251516c",
+  "compiled_baseline": "c796387fb555392501c81f5b8bd834936251516c",
+  "compiled_baseline_tree": "08257c9406671ac1f094b739e4971c1eca108c66",
+  "active_head": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+  "active_tree": "49237cc2b902342c4a42b86d653fb00770d65d60",
+  "main_rules_head": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "source_index_entries": 2973,
+  "new_index_entries": 22,
+  "updated_working_source_entries": 1,
+  "source_index_blob": "9d31bc34469e6788e5f9560fbbc7d5956fc5a4ba",
+  "changes": [
+    {
+      "name": "positive/reconstructed/TameFixedBaseCompositionBounds.lean",
+      "dest": "drafts/N04Coordinates-recovery-20261112/working/positive/reconstructed/TameFixedBaseCompositionBounds.lean",
+      "blob": "7e8ed357c9a53ad2c888da6e401b0084e3f9f142",
+      "sha256": "85080c53cdff94fa40ecea646d300ffe3b549bf614e5a1eede073a8f3842379b",
+      "bytes": 17717,
+      "lines": 326
+    },
+    {
+      "name": "positive/reconstructed/TameFixedBaseCompositionBoundsCandidateManifest.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/positive/reconstructed/TameFixedBaseCompositionBoundsCandidateManifest.json",
+      "blob": "406d8c1526574ecedd136c24f6cb3d23ad2e6bdf",
+      "sha256": "9f8740dace34bca6b9ecbc7a512805f80daa387dd9feae5d0c234d2f9d7d655f",
+      "bytes": 6965,
+      "lines": 152
+    },
+    {
+      "name": "positive/reconstructed/TameFixedBaseCompositionBoundsSelectedProviders.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/positive/reconstructed/TameFixedBaseCompositionBoundsSelectedProviders.json",
+      "blob": "dd6be6a6b6fd4248ee49e0c9e0c3e5b7ef706fd9",
+      "sha256": "b1c1768965ef06b1a6433f1e8674cd1dbb16db52b5b5185e6a420c83a634e0f2",
+      "bytes": 44281,
+      "lines": 1124
+    },
+    {
+      "name": "positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBounds.lean",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBounds.lean",
+      "blob": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+      "sha256": "f70497231b60b5c0a59e8de16cb534f1820e2bd9d6469ed8c86643b88f428b80",
+      "bytes": 17787,
+      "lines": 328
+    },
+    {
+      "name": "positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBoundsCandidateManifest.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBoundsCandidateManifest.json",
+      "blob": "a9fdc706461e767e53fad58f96dd16ba988509e7",
+      "sha256": "72cd2002689083a854ee454b12a9b06382d6b27620ed3a0b558ed139393e20e7",
+      "bytes": 8107,
+      "lines": 167
+    },
+    {
+      "name": "positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBoundsSelectedProviders.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBoundsSelectedProviders.json",
+      "blob": "4fb2c432397d4a7b36518ddf565d40c3d39c6f87",
+      "sha256": "718d1b5a5d72865d6b73acd3123213180d29a986919045b65476423e94102e3a",
+      "bytes": 44660,
+      "lines": 1130
+    },
+    {
+      "name": "audit/reviews/TameFixedBaseCompositionBoundsIndependentReview.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/audit/reviews/TameFixedBaseCompositionBoundsIndependentReview.json",
+      "blob": "b903f1c2c0e0d0596757977b99bc0ee05b8723f1",
+      "sha256": "5f4f4ab535e429f578c8b64555c6a52da46a5dc916f63b458b66bc4ad0aad2ca",
+      "bytes": 13191,
+      "lines": 247
+    },
+    {
+      "name": "positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBoundsReviewedManifest.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBoundsReviewedManifest.json",
+      "blob": "186312bc05765159d2d4311d51e7c54d27b609d7",
+      "sha256": "d55f9f1672ec1724b5cb642319514cea2b81d80e02bd607bbb0cf80a917ca98c",
+      "bytes": 4191,
+      "lines": 73
+    },
+    {
+      "name": "positive/reconstructed/N04SelectorInverseCircleFixedBaseBounds.lean",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/positive/reconstructed/N04SelectorInverseCircleFixedBaseBounds.lean",
+      "blob": "054e86dbc3a61f36df0ff4fd7ddf71aefeacb117",
+      "sha256": "93154c0937eac430488bc4927b7d5e5f42d026df05959e430686c650ddd79fd4",
+      "bytes": 8461,
+      "lines": 152
+    },
+    {
+      "name": "positive/reconstructed/N04SelectorInverseCircleFixedBaseBoundsCandidateManifest.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/positive/reconstructed/N04SelectorInverseCircleFixedBaseBoundsCandidateManifest.json",
+      "blob": "803c8dc182e4de0e68fb129891c30cf99d45f8e0",
+      "sha256": "91d733acb671c04e90f34c126050d6f2e33c4837d6973ea2fb9fba1f3102489d",
+      "bytes": 23528,
+      "lines": 476
+    },
+    {
+      "name": "positive/reconstructed/N04SelectorInverseCircleFixedBaseBoundsSelectedProviders.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/positive/reconstructed/N04SelectorInverseCircleFixedBaseBoundsSelectedProviders.json",
+      "blob": "212dc2c6c64d807827ad916c8eadd312df2fa273",
+      "sha256": "40188216c7dc445d1fb5a70ff4ce8d10ee1c3ad0fca955e7f42bd1312fef5ff7",
+      "bytes": 320677,
+      "lines": 7574
+    },
+    {
+      "name": "audit/reviews/N04SelectorInverseCircleFixedBaseBoundsIndependentReview.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/audit/reviews/N04SelectorInverseCircleFixedBaseBoundsIndependentReview.json",
+      "blob": "d248e692dba26bf04ff60447ef2dc77b6383a1f8",
+      "sha256": "76f08fd2b3be38c225b7de7e1a862f3b7fb2aad6f97a672c18d683981b6e367e",
+      "bytes": 20220,
+      "lines": 345
+    },
+    {
+      "name": "positive/reconstructed/N04SelectorInverseCircleFixedBaseBoundsReviewedManifest.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/positive/reconstructed/N04SelectorInverseCircleFixedBaseBoundsReviewedManifest.json",
+      "blob": "5dd7e2c487ecc063f6a1033d25a314c721a79acb",
+      "sha256": "69c6eb5bafb51eb40c0f84727c858a466b4460d1d0d0967f51adb6ca1207e4c5",
+      "bytes": 6836,
+      "lines": 126
+    },
+    {
+      "name": "quantitative/recovery/OppositeRootPairCI164SelectedProvidersRecovered.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/quantitative/recovery/OppositeRootPairCI164SelectedProvidersRecovered.json",
+      "blob": "5bc8e40368c175fa239e31fc23a6051ecf98d989",
+      "sha256": "e68f17701ee16b6ada52135445681a16b1a8ba7e0581884910df997e60bb69ee",
+      "bytes": 445100,
+      "lines": 9796
+    },
+    {
+      "name": "quantitative/recovery/reviews/OppositeRootPairCI164ProviderMigrationAndAppendIndependentReview.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/quantitative/recovery/reviews/OppositeRootPairCI164ProviderMigrationAndAppendIndependentReview.json",
+      "blob": "59508af66a7635c4bdb3461cdecccd183dd84560",
+      "sha256": "0e173f4deff1d7b2e768babf680aa91f5ad17c706fd453178aa297c1b77742a5",
+      "bytes": 11393,
+      "lines": 222
+    },
+    {
+      "name": "quantitative/recovery/reviews/CanonicalReferenceCurrentSectorBoundsIndependentReview.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/quantitative/recovery/reviews/CanonicalReferenceCurrentSectorBoundsIndependentReview.json",
+      "blob": "70dff750330a8243935b3a095d4d786a55d1701b",
+      "sha256": "2e31dd313d5c3acb462cee23b38bcfde98e6821f46de97ddcbd6cba16e92a33b",
+      "bytes": 27587,
+      "lines": 514
+    },
+    {
+      "name": "quantitative/compatibility/sector-atom-comp-def/CanonicalReferenceCurrentSectorBoundsNormalizationSelectedProviders.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/quantitative/compatibility/sector-atom-comp-def/CanonicalReferenceCurrentSectorBoundsNormalizationSelectedProviders.json",
+      "blob": "da69d80f36c4df7f6df0a8aa8d22ffcf39a256fa",
+      "sha256": "9fcf206f43f0b107cb01ea7184249a503a7b1511c3238975143c01acef2e306b",
+      "bytes": 330260,
+      "lines": 6482
+    },
+    {
+      "name": "audit/reviews/CanonicalReferenceCurrentSectorCompositionIndependentReview.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/audit/reviews/CanonicalReferenceCurrentSectorCompositionIndependentReview.json",
+      "blob": "7381eb6cfde01cee0c1bdf92cd2539446a32e9ce",
+      "sha256": "48a33ad610d3039a7430c295af07deab969a985c5fbcfedf42318cb4af4ffbab",
+      "bytes": 6322,
+      "lines": 110
+    },
+    {
+      "name": "quantitative/recovery/ReferenceFamilyPositivePrincipalPrefixC796Proposal.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/quantitative/recovery/ReferenceFamilyPositivePrincipalPrefixC796Proposal.json",
+      "blob": "dfa280484b9f2153aad4cc13910d317e0508237f",
+      "sha256": "0914bc8829e0780a78db7d6969c5c1951e4587e29a62900fba36473339617d62",
+      "bytes": 47354,
+      "lines": 940
+    },
+    {
+      "name": "quantitative/recovery/ReferenceFamilyPositivePrincipalPrefixC796SelectedProviders.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/quantitative/recovery/ReferenceFamilyPositivePrincipalPrefixC796SelectedProviders.json",
+      "blob": "da8fec85b3efe14f66bf39f04a13428a22232e72",
+      "sha256": "02ae664aa07bb6746786b41d97b7c8d21cd48a54e1fc40f8836088f6ff7d7a90",
+      "bytes": 582277,
+      "lines": 12667
+    },
+    {
+      "name": "positive/history/N04SelectorInverseCircleFixedBaseBounds.before-seminorm-fix.lean.txt",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/positive/history/N04SelectorInverseCircleFixedBaseBounds.before-seminorm-fix.lean.txt",
+      "blob": "a356bf3400337bfb9b84728e10f255367a3123cb",
+      "sha256": "3ba7ae80da8399eb9c88fa77676846449e90207d182044733939c8da9626643a",
+      "bytes": 8454,
+      "lines": 152,
+      "state": "HISTORICAL_UNFROZEN_API_FINDING_NOT_SELECTED"
+    },
+    {
+      "name": "audit/reviews/CI165RemoteTreeStagingIndependentReview.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/audit/reviews/CI165RemoteTreeStagingIndependentReview.json",
+      "blob": "4dc31a48a23ad26f1fa3a67e9641988cb1a6a9e1",
+      "sha256": "eedae3952264b86ff7baa4f2c2e53b3081808137bab34cc6e6df40a079b9c7fd",
+      "bytes": 56994,
+      "lines": 1492
+    },
+    {
+      "name": "quantitative/recovery/Main1eceActualProviderConsumerReuseReadOnlyAudit.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/quantitative/recovery/Main1eceActualProviderConsumerReuseReadOnlyAudit.json",
+      "blob": "e7589c3732c96b25028cfc2a0a8434fe83a98798",
+      "sha256": "407d1737da048dd4aab43f7842f6db99c2af4d784afa616852ebfd343e4e5216",
+      "bytes": 50995,
+      "lines": 921
+    }
+  ],
+  "metadata": [
+    {
+      "name": "CI165RemoteTreePlan.json",
+      "blob": "3cf29e144e857988cd88ea1fc3536d84c1cf6195",
+      "sha256": "2db4134c228c8e6ac341f2d94033924c6e7f26ca57c90bfae5334de5df9eb929",
+      "bytes": 77463,
+      "lines": 1716
+    },
+    {
+      "name": "CI165CombinedLeafProviders.json",
+      "blob": "0644be2daa1017996190f5152d7e3cbf2759a044",
+      "sha256": "e53f68fe0987dccb943c42900d85c3586147c9e61715c94e2f445a800e0bf575",
+      "bytes": 584499,
+      "lines": 11469
+    },
+    {
+      "name": "CI165GitHubCompareSummary.json",
+      "blob": "10fa274ba0935d35854e8dacebd7963283315984",
+      "sha256": "28439d279f7a26933053ff1f98fb279d71800e902fb4db6090e19419937b0d47",
+      "bytes": 28600,
+      "lines": 916
+    },
+    {
+      "name": "CI164GreenReceipt.original-label.json",
+      "blob": "44525c48c74a4b1637cb9c3c2ef5239ca01f916e",
+      "sha256": "9663e24ef1d3447942da9831960d288c8c3018a81b813ad2b0eed7a4453c681d",
+      "bytes": 2721,
+      "lines": 78
+    },
+    {
+      "name": "CI164GreenReceipt.json",
+      "blob": "013f867ad3cd2a60b3acd2c1b8dab83040496a76",
+      "sha256": "7756d0cb10ea76f104193a56b707e89c20a114005ab8c64ec411dc1d9cc48779",
+      "bytes": 2752,
+      "lines": 79
+    },
+    {
+      "name": "CI165PushReceipt.json",
+      "blob": "fc084d63fb0b3fb17f1842013c32f7e709276b1a",
+      "sha256": "fe045dec34f173677ef5b4c80f5bda510357ee2d5e91591f9b2011a37a6c2537",
+      "bytes": 527,
+      "lines": 15
+    }
+  ],
+  "CI164": {
+    "label": "internal iteration 164",
+    "github_run_number": 1826,
+    "run_id": 43285158817,
+    "job_id": 131416494593,
+    "conclusion": "success",
+    "completed": "2026-11-12T20:28:42Z",
+    "verified_current_project_modules": 4297,
+    "total_current_project_modules": 4302,
+    "unlinked_blueprint_not_certified_by_import_count": [
+      "CanonicalParts",
+      "N01c.Coefficients",
+      "N01c.Statements"
+    ],
+    "generator_imports": 4241,
+    "build_jobs": 8283,
+    "blueprint_proved": 37,
+    "blueprint_total": 42,
+    "open": [
+      "N01c",
+      "N02N03",
+      "N04b",
+      "N04Coordinates",
+      "N05"
+    ],
+    "preserved_logs": [
+      {
+        "name": "n04-ci-164.log",
+        "blob": "38c62a4003e8ed2bbc2f9f16e5c7a66244fe1da6",
+        "sha256": "3bb765d233d26e322e293c78dbd7cec7e9fc597427ba58dd95de647f86852501",
+        "bytes": 73483,
+        "lines": 885
+      },
+      {
+        "name": "n04-ci-164-run-complete.json",
+        "blob": "137dca9fe3e1f32a8a5a2c6070be1075cd577a28",
+        "sha256": "83be298deb4ddd788e48e3c1358abfc4f854c2884382c8a4231f3e183fc3dfd9",
+        "bytes": 15966,
+        "lines": 248
+      },
+      {
+        "name": "n04-ci-164-jobs-complete.json",
+        "blob": "05eac0590c824ddfa41f0a9a17d07b1bd0119b63",
+        "sha256": "5f7706688235917df710e4ee381378f40bbc7354b31edac9e711367004581059",
+        "bytes": 4045,
+        "lines": 152
+      }
+    ]
+  },
+  "CI165": {
+    "pushed": true,
+    "head": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+    "parent": "c796387fb555392501c81f5b8bd834936251516c",
+    "tree": "49237cc2b902342c4a42b86d653fb00770d65d60",
+    "pushed_and_verified_at": "2026-11-12 20:46:21 UTC",
+    "main_rules_head": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "source_changes": 112,
+    "added_Lean": 19736,
+    "deleted_Lean": 6,
+    "with_CI_generated_imports": 19846,
+    "force": false,
+    "only_parent_c796": true,
+    "CI165_run_status": "not queried yet; wait at least five minutes"
+  },
+  "budget": {
+    "snapshot_added_Lean_lines_conservative": 654,
+    "snapshot_deleted_Lean_lines": 1,
+    "working_source_diff": {
+      "added": 174,
+      "deleted": 1,
+      "old_lines": 153,
+      "new_lines": 326
+    },
+    "prior_preserved_uncompiled_upper_bound": 18872,
+    "current_preserved_uncompiled_upper_bound": 19526,
+    "hard_limit": 20000,
+    "quantitative_unspent_allocation": 325,
+    "remaining_unallocated": 149,
+    "active_CI_source_additions": 19736,
+    "active_CI_conservative_with_generated_root": 19846
+  },
+  "history": {
+    "old153": {
+      "commit": "c68a539084f96c90ee3f46d74a4c41d06713afc5",
+      "path": "drafts/N04Coordinates-recovery-20261112/working/positive/reconstructed/TameFixedBaseCompositionBounds.lean",
+      "blob": "488ba86a344330a738c1e2e0e5a943ce7645ddc4"
+    },
+    "original326_retained": true,
+    "selected328": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+    "selected152": "054e86dbc3a61f36df0ff4fd7ddf71aefeacb117",
+    "historical152_archival_text": "a356bf3400337bfb9b84728e10f255367a3123cb"
+  },
+  "execution": {
+    "executor_unavailable": true,
+    "local_Lean_or_scripts_run": false,
+    "existing_CI_generates_root": true,
+    "active_branch_push_verified": true,
+    "backup_keeps_exact_green_compiled_source_bytes_outside_archive": true
+  },
+  "limitations": [
+    "CI165 is first compilation of the selected coordinate proof group; no success is claimed yet.",
+    "Fixed-base composition and actual selector-inverse sources are independently reviewed but not compiled or installed by this snapshot.",
+    "The original full41 gate and source bytes remain preserved; the separate14 selection is governed by the exact-c796 proposal.",
+    "Coverage 4300 was an unfinished estimate and is superseded by the explicit4297 default-root closure; the raw4634 cached oleans are not a current source count.",
+    "The older receipt named run_number164 as an internal iteration; clarified receipt distinguishes it from GitHub workflow run_number1826."
+  ],
+  "endpoint_status": {
+    "N04Coordinates": "OPEN",
+    "Realization": "OPEN",
+    "FlowJets": "PROVED"
+  }
+}

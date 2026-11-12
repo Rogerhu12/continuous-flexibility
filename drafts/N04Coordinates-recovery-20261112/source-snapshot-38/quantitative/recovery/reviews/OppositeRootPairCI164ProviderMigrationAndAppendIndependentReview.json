@@ -1,0 +1,222 @@
+{
+  "kind": "independent_full_provider_migration_and_append_script_review",
+  "reviewer": "/root/quantitative_route",
+  "reviewed_at_utc": "2026-11-12T20:20:29Z",
+  "status": "STATIC_MIGRATION_AND_SCRIPT_REVIEW_PASSED_WITH_EXPLICIT_ACTIVATION_GATES",
+  "proposed_path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/OppositeRootPairCI164ProviderMigrationAndAppendIndependentReview.json",
+  "scope": {
+    "source_pair_lines": 453,
+    "source_pair_full_peer_sha256": "612d4bea593af602d295a45662d0d58502a9416c1f95fbc61f2f9486f710504b",
+    "algebra_api_addendum_sha256": "6b7d9b37f0b9808784237436a642ef07549ca51e661c36707aec9a85fb81af48",
+    "this_review": "Full five-provider semantic migration and full 133-line append script, plus a newly recovered exact 426-node provider graph. This does not repeat a compilation claim for the source pair."
+  },
+  "proposal_reviewed": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/OppositeRootPairCI164ProviderMigrationProposal.json",
+    "sha256": "483658f67ab4a8856927a3384db72c063edbaacceee632d8134689f1d767a307",
+    "retrieval": "Full local successful read before environment loss; not claiming recovery of its full original bytes."
+  },
+  "append_script": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-append-reviewed-leaves-to-main-cohort.py",
+    "sha256": "f8aa1e3a88fd86536e12970eb5a8e72c6b8bade56e215a33445203de8fca9562",
+    "blob": "e6a9e4251898f6a55e1a568e3c5294c469c7f9e0",
+    "bytes": 7321,
+    "lines": 133,
+    "exact_original_bytes_recovered": true,
+    "full_source_read": true,
+    "script_executed": false
+  },
+  "selected_provider_graph": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/OppositeRootPairCI164SelectedProvidersRecovered.json",
+    "sha256": "e68f17701ee16b6ada52135445681a16b1a8ba7e0581884910df997e60bb69ee",
+    "blob": "5bc8e40368c175fa239e31fc23a6051ecf98d989",
+    "bytes": 445100,
+    "lines": 9796,
+    "supersedes_selection_metadata_only": true,
+    "not_identical_to_unavailable_local_e8c9_graph": true
+  },
+  "baseline": {
+    "previous": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+    "current": "c796387fb555392501c81f5b8bd834936251516c",
+    "current_tree": "08257c9406671ac1f094b739e4971c1eca108c66",
+    "main_compared": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac"
+  },
+  "changed_provider_fingerprints": [
+    {
+      "key": "blueprint",
+      "old": {
+        "sha256": "4eff8f3724ee80268cebe29904e817efa068f6e398d6ab7d1ebb05bcebe09eda",
+        "blob": "af5ba9dacc2c7b026d6535f09e886ce22ca2e673",
+        "bytes": 15051,
+        "lines": 275
+      },
+      "selected": {
+        "sha256": "c5ceb29deb95dde0f00563392d37d33d9f62a725d118c9540435911349de41e1",
+        "blob": "4d426c2990d6d685eec9b270469f440b40c9ccce",
+        "bytes": 15797,
+        "lines": 289
+      }
+    },
+    {
+      "key": "radial",
+      "old": {
+        "sha256": "6296bf88e2c368206d1ec39dad5647a768016d10d5f574a0d58d65064c9285d2",
+        "blob": "7b2ba6641046904003f09f9c708a7e8538de3c4d",
+        "bytes": 25425,
+        "lines": 492
+      },
+      "selected": {
+        "sha256": "f5dba6b42ece090f87fcde22a79c39f974974d81c60ad07e9120181c15aee774",
+        "blob": "ef93a18d36336489f4e605beddd8e14d582e2008",
+        "bytes": 26032,
+        "lines": 504
+      }
+    },
+    {
+      "key": "cofinite",
+      "old": {
+        "sha256": "594be12f48eed4685e285afe820230da00556688a54d2b0291729ad4776e065c",
+        "blob": "9be6b468ce6f015dc8984e2566542dc73f69409e",
+        "bytes": 6922,
+        "lines": 133
+      },
+      "selected": {
+        "sha256": "77e15f29870bcc1c5dae23ab9406f9518041e65baa0c976ba423c85becd047b6",
+        "blob": "18b869aaefe1e6aece49ab9fd4920e1ef2cf0751",
+        "bytes": 8666,
+        "lines": 166
+      }
+    },
+    {
+      "key": "decay",
+      "old": {
+        "sha256": "cf7b1d844dfb305001d3ede15f1c96962f8cbf3beba259e9e55f02c002485273",
+        "blob": "772c0d473322327b2c8b80eecaab53d262d24f42",
+        "bytes": 6715,
+        "lines": 142
+      },
+      "selected": {
+        "sha256": "1c88acbb587efbc846bbd77f38229e7fcc300999e1d510cb785998a90a3b7a47",
+        "blob": "2cbf277337cd0667b2f645f0ffa5149afba7e95a",
+        "bytes": 6793,
+        "lines": 143
+      }
+    },
+    {
+      "key": "control",
+      "old": {
+        "sha256": "9c9c1fd4bb08d7a0f757285ccb015919aca0362996626912e4b1ec773debbcdd",
+        "blob": "931608eb0a7c8d6913aafcd28727724eae13467a",
+        "bytes": 10037,
+        "lines": 192
+      },
+      "selected": {
+        "sha256": "8587d9ff32ae46f1bd767f3d359c2cdb56f51f9ab6a8b6e8618b7abc0655d289",
+        "blob": "69d80e2dd714b0d65fcceff8b5dee84880bb3078",
+        "bytes": 11446,
+        "lines": 216
+      }
+    }
+  ],
+  "contract_findings": [
+    {
+      "module": "ContinuousFlexibility.Analysis.ControlCellEndpointBounds",
+      "result": "Old materialSample_endpoint_weight_bound full public header and final stateKappa_controlJet_endpoint_bound source are byte-identical. A genuine same-sample endpoint-coordinate comparison was extracted; the former bound now applies that result to the existing material_bounded_shift_envelope. Full 216-line successor was read. No new endpoint placement or final estimate premise is introduced."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateControlCofiniteClosure",
+      "result": "The entire old source prefix is byte-identical. Only two wrappers are appended; their calls use the unchanged actual control bounds and the real IsRadialReference projections."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateControlDecay",
+      "result": "The exact sole source change replaces the private marker on iteratedDeriv_zero_off_open_interval with public visibility plus its doc comment. The complete proof and all old public declarations are unchanged. Both old and new raw sources already contain the Mathlib iterated-derivative import."
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.RadialTargets",
+      "result": "Removing the single new N01RadialPrimitiveGeometry declaration restores the old file byte for byte. All old definitions are unchanged."
+    },
+    {
+      "module": "ContinuousFlexibility.Blueprint.Statements",
+      "result": "Removing N01PrimitiveGeometry and undoing the two new final conjunctions in N01aStatement/N01bStatement restores the old file byte for byte. N01PartA, N01PartB, N04PartA/B/a/b and their same-data contracts are unchanged."
+    }
+  ],
+  "selected_contract_scan": {
+    "refs": {
+      "N01aStatement": [
+        "ContinuousFlexibility.Blueprint.Statements"
+      ],
+      "N01bStatement": [
+        "ContinuousFlexibility.Blueprint.Statements"
+      ],
+      "N01PrimitiveGeometry": [
+        "ContinuousFlexibility.Blueprint.Statements"
+      ],
+      "N01RadialPrimitiveGeometry": [
+        "ContinuousFlexibility.Statements.RadialTargets"
+      ]
+    },
+    "blueprint_exact_reversal": true
+  },
+  "same_witness_contracts": [
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "result": "NonlinearPropertiesThrough03 and its underlying N01/N02/N03 contracts remain the original selected bytes."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bFieldRegularity",
+      "blob": "0accc70bea719eb47f46bcde4989c99798027273",
+      "result": "The selected c796 field structure remains old 0accc70b; this migration does not silently select main1ece's added reference_flow field or shortened reference calls."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualAtlasGerms",
+      "blob": "0bf89b2339f60ac8ba2cf9678637f4bf96830a66",
+      "result": "The exact actual full-component root-germ provider remains unchanged."
+    }
+  ],
+  "graph_verification": {
+    "all_nodes": 426,
+    "baseline_nodes": 424,
+    "source_pair_nodes": 2,
+    "all_source_blobs_independently_fetched": true,
+    "all_git_sha1_sha256_bytes_recomputed": true,
+    "all_baseline_blobs_equal_exact_c796_tree": true,
+    "changed_baseline_blobs_exactly": 5,
+    "project_edges": 713,
+    "project_edges_unchanged": true,
+    "missing": [],
+    "cycles": [],
+    "complete_import_metadata_rows_different_from_old_project_only_format": 204,
+    "new_selected_public_names": 24,
+    "duplicates_within_pair": [],
+    "collisions_with_selected_baseline_closure": [],
+    "source_pair_math_and_public_headers_unchanged": true
+  },
+  "import_metadata_correction": "The old graph uniformly stored project imports only. The new graph uniformly stores all imports, including Mathlib, as required by append script line 72. The differing StateControlDecay import lists in the prior migration proposal are metadata format conversion, not a source import change or a newly observed proof failure.",
+  "append_script_checks": [
+    "Full-green current_ci status/label, last_full_green SHA, exact HEAD and main pin are required before any source write.",
+    "Already staged main cohort plan must match current HEAD, main source batch, exact index tree and exact staged paths; no unstaged or untracked changes are allowed.",
+    "Selection and every review/source/graph fingerprint are checked; each new target path must be exact and absent; forbidden placeholders, native_decide and raised resource limits are rejected.",
+    "Every graph provider is compared against the actual projected worktree or the selected immutable candidate, including complete import lists. Stale 18f graphs correctly fail for the five changed providers.",
+    "After writes, only the authorized union of cohort paths and selected leaves may be staged; root generation, whitespace check, exact added/deleted line arithmetic, <=20000 budget and complete project import-cycle/missing checks run before final plan/payload replacement.",
+    "The original main-only plan and payload are preserved before the finalized proposal is written. The script itself contains no commit, push, ref update, CI query or Lean invocation.",
+    "Public-name scanning in this 133-line version is baseline-only. It is sufficient only with an additional exact-selection review that checks selected names against each other and all newly staged cohort declarations; that scope is not inferred from the generic script."
+  ],
+  "remaining_activation_gates": [
+    "Complete successful CI164 for exact c796 must be observed by root; this review did not query CI.",
+    "Final immutable activation selection must explicitly name the recovered graph and the reviewed compatibility source blobs, not the unavailable original local successor graph by assumption.",
+    "Before execution, all newly selected leaves, including any root94/root85 leaves, need complete projected-tree name-collision checks; this report independently checked the pair and its 424 baseline providers only.",
+    "Run-time script checks must still pass on the exact next staged cohort. Static approval does not certify the later active state or Lean elaboration."
+  ],
+  "storage": {
+    "new_receipt": true,
+    "exact_old_receipt_recovery_claimed": false,
+    "filesystem_written": false,
+    "immutable_git_blob_only": true
+  },
+  "restrictions_respected": {
+    "no_lean_or_elaboration": true,
+    "no_active_index_refs_or_CI_changes": true,
+    "max_parallel_blob_reads": 12,
+    "no_environment_retry_after_disconnect": true
+  }
+}

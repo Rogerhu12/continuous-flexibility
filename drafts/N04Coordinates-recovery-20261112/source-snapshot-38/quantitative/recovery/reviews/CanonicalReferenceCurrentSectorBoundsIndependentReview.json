@@ -1,0 +1,514 @@
+{
+  "kind": "independent_actual_reference_current_to_sector_canonical_bounds_review",
+  "reviewer": "/root/quantitative_route",
+  "status": "PASSED_FULL_STATIC_SOURCE_PROVIDER_AND_PINNED_API_REVIEW_UNCOMPILED",
+  "proposed_backup_path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/CanonicalReferenceCurrentSectorBoundsIndependentReview.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "source_pins": {
+    "active_base": "c796387fb555392501c81f5b8bd834936251516c",
+    "green163": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+    "explicitly_selected_normalizer_main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "mathlib": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "lean": "v4.35.0-rc3"
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceCurrentAbsoluteJets.lean",
+      "target_path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean",
+      "sha256": "c1b05760d478ef2e0e480010ae0b985db327927ac4178153660f79ef6a15c699",
+      "blob": "74e009ae51c272ef758c21447a9f494156e3d6ec",
+      "bytes": 5173,
+      "lines": 109,
+      "whole_source_read": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/sector-atom-comp-def/CanonicalReferenceCurrentSectorBounds.lean",
+      "target_path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentSectorBounds.lean",
+      "sha256": "ee6719537036a2f020dc9355902c42c9ac1c2eecb6b16ce8739b38beceafaa51",
+      "blob": "8dcc2e224e6eb437764407ba8ae16c631106f685",
+      "bytes": 9195,
+      "lines": 182,
+      "whole_source_read": true
+    }
+  ],
+  "original_candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceCurrentSectorBoundsCandidateManifest.json",
+    "sha256": "d780b5cdd83667e02f5299061b2d169127fb7e9603c81010d5ef68bcc21e5667",
+    "blob": "be09239f2cbe934c12a9bf611f00040cb384b75e",
+    "bytes": 13961,
+    "lines": 284
+  },
+  "original_sector_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceCurrentSectorBounds.lean",
+    "sha256": "eb172cebbdc78d439c150c38aa23c945c488d614b5255f8d0736c928ddb94731",
+    "blob": "14715ca2fbc5ad6b63e18b324e88817c96e245b7",
+    "bytes": 9203,
+    "lines": 182,
+    "target_path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentSectorBounds.lean"
+  },
+  "composition_successor": {
+    "candidate_manifest": {
+      "sha256": "01da95d64b202ebdc9dbee93e89592f678e1b1afcc374943f347ee404ffa2905",
+      "blob": "e162ddb2845d9b3554f366d0081116a345bf41c7",
+      "bytes": 3913,
+      "lines": 77
+    },
+    "delta_peer": {
+      "path": "audit/reviews/CanonicalReferenceCurrentSectorCompositionIndependentReview.json",
+      "sha256": "48a33ad610d3039a7430c295af07deab969a985c5fbcfedf42318cb4af4ffbab",
+      "blob": "7381eb6cfde01cee0c1bdf92cd2539446a32e9ce",
+      "bytes": 6322,
+      "lines": 110
+    },
+    "exact_changes": [
+      {
+        "line": 147,
+        "before": "    simpa only [n07aCanonicalAtomField, Function.comp_apply, CanonicalGeometry.atom,",
+        "after": "    simpa only [n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,"
+      },
+      {
+        "line": 157,
+        "before": "        simpa only [n07aCanonicalAtomField, Function.comp_apply, CanonicalGeometry.atom,",
+        "after": "        simpa only [n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,"
+      },
+      {
+        "line": 161,
+        "before": "        simpa only [n07aCanonicalAtomField, Function.comp_apply, CanonicalGeometry.atom,",
+        "after": "        simpa only [n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,"
+      },
+      {
+        "line": 165,
+        "before": "        simpa only [n07aCanonicalAtomField, Function.comp_apply, CanonicalGeometry.atom,",
+        "after": "        simpa only [n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,"
+      }
+    ],
+    "reverse_replacement_restores_original": true,
+    "all_public_headers_imports_options_and_other_bytes_identical": true,
+    "reason": "The higher-order mixedDerivative argument is the unapplied atom composition. Function.comp_def exposes its lambda, after which the actual literal atom and canonical-unit inverse equality rewrite the full function.",
+    "original_failure_claim": false
+  },
+  "selected_graph": {
+    "proposed_path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/sector-atom-comp-def/CanonicalReferenceCurrentSectorBoundsNormalizationSelectedProviders.json",
+    "sha256": "9fcf206f43f0b107cb01ea7184249a503a7b1511c3238975143c01acef2e306b",
+    "blob": "da69d80f36c4df7f6df0a8aa8d22ffcf39a256fa",
+    "bytes": 330260,
+    "lines": 6482,
+    "original_exact_graph": {
+      "sha256": "f7df61bf5ca885b8a5df42e774396d44811f9d2568928131247177b01f4750ec",
+      "blob": "7944d5287f3f222e82adebf9b3fa4648ed40619c",
+      "bytes": 324808,
+      "lines": 6344
+    },
+    "project_modules": 359,
+    "project_edges": 652,
+    "exactly_two_node_changes": [
+      {
+        "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentSectorBounds",
+        "before": "14715ca2fbc5ad6b63e18b324e88817c96e245b7",
+        "after": "8dcc2e224e6eb437764407ba8ae16c631106f685"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+        "before": "04e7e732ab5f0d16ba232b561bd612f93dff4c51",
+        "after": "de78e2674d4a5cf3574364b6cc1b589b478c7915"
+      }
+    ],
+    "all_other_node_records_and_project_edges_identical": true,
+    "all_baseline_git_blobs_except_explicit_normalizer_match_c796": true,
+    "missing": [],
+    "cycles": [],
+    "cohort3_original_91_module_intersection": [],
+    "checks_scope": "The exact historical graph was recovered from the backup36 gzip and verified by original SHA256/Git blob. This successor was checked against the fixed c796 tree and the two explicitly selected sources; this is a source-selection check, not a Lean typecheck of every node."
+  },
+  "normalizer_compatibility": {
+    "prior_full_review": {
+      "path": "quantitative/recovery/reviews/Main1eceCohortStagersAndNormalizationIndependentReview.json",
+      "sha256": "68eb3a9c3b1787e69830f30a837a6825dd7150b1f3a4e1c881d505a7cce756e7",
+      "git_blob": "2d92a1fedd38e06242ec9ce37569f18ac96e0b53"
+    },
+    "prior_body_recovered_during_current_remote_session": false,
+    "renewed_exact_source_review": {
+      "old": {
+        "sha256": "1f6c08d38555fdb2135b8622216b86cb0aa89ab367c5fe2443854f5e079b361d",
+        "blob": "04e7e732ab5f0d16ba232b561bd612f93dff4c51",
+        "bytes": 8563,
+        "lines": 185
+      },
+      "selected": {
+        "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+        "blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+        "bytes": 9718,
+        "lines": 204
+      },
+      "old_public_headers": [
+        {
+          "name": "multilinearTameSize",
+          "byte_identical": true
+        },
+        {
+          "name": "multilinearTameSize_nonneg",
+          "byte_identical": true
+        },
+        {
+          "name": "multilinearTameSize_le_affine",
+          "byte_identical": true
+        },
+        {
+          "name": "multilinear_bound_of_unitBall",
+          "byte_identical": true
+        },
+        {
+          "name": "multilinearNormalizationConstant",
+          "byte_identical": true
+        },
+        {
+          "name": "multilinearNormalizationConstant_nonneg",
+          "byte_identical": true
+        },
+        {
+          "name": "multilinear_oneHighFactor_of_local",
+          "byte_identical": true
+        }
+      ],
+      "new_public_names": [
+        "multilinearMap_bound_of_unitBall",
+        "multilinearMap_oneHighFactor_of_local"
+      ],
+      "whole_sources_reread": true,
+      "prior_review_body_retrieved_in_remote_session": false
+    },
+    "findings": [
+      "The seven existing public headers and unchanged section assumptions remain byte-identical.",
+      "The original algebraic unit-ball normalization proof is generalized to MultilinearMap. It uses multilinearity and a continuous real polynomial bound in delta, not continuity of the multilinear map.",
+      "The existing continuous-multilinear API is supplied by toMultilinearMap wrappers with its original public contract and explicit normalization constant.",
+      "The pure local normalization retains the same positive radius scaling, high-factor sum and constant C/(min(epsilon/2,1))^k.",
+      "The explicit early-addon selection changes only this dependency node. It is not a claim that the current c796 checkout already contains the main version."
+    ]
+  },
+  "declarations_reviewed": [
+    "n04Coordinates_reference_canonicalLengthInverse_envelope",
+    "n04Coordinates_unitAtom_absolute_envelope",
+    "n04Coordinates_canonicalAtom_absolute_envelope",
+    "n04Coordinates_sectorParameterOfState_grading",
+    "n04Coordinates_sectorCanonicalJetBounds_of_reference_current"
+  ],
+  "full_source_findings": [
+    {
+      "declaration": "n04Coordinates_reference_canonicalLengthInverse_envelope",
+      "findings": [
+        "ReferenceJets is applied at spatial order zero and the genuine unit point (1/2,0).",
+        "The canonicalLengthInverse atom is exactly the reciprocal K.right m-K.left m; no extra numerical length premise is substituted.",
+        "The resulting B is chosen before every component and refers to the unchanged T.sample(K.cell m)."
+      ]
+    },
+    {
+      "declaration": "n04Coordinates_unitAtom_absolute_envelope",
+      "findings": [
+        "The one fixed spatial state loss is selected from CurrentJets clause 2 before any spatial order.",
+        "The actual material sample theorem with beta=3/4 and exponent zero gives a single positive CH for H(sample)^3/4, uniformly over K.cell.",
+        "Reference and difference envelopes are chosen at the same spatial order. B=max(B0,B1) and A=B0+B1*CH are chosen before states, atoms, components, points or derivative indices.",
+        "Raising the E0 exponents uses only the explicit sample floor hfloor. IsMaterialData is not treated as implying E0>=1.",
+        "The genuine mixed-derivative difference decomposition is applied with its actual smoothness clauses. The triangle inequality and the explicitly nonnegative extra product yield A*E0^B*(1+parameterGrading).",
+        "The same K, T, sample, state lift and derivative loss are retained. The parameter SmoothDirections tower is not reconstructed or asserted by this lemma."
+      ]
+    },
+    {
+      "declaration": "n04Coordinates_inverse_affine_power_cost",
+      "findings": [
+        "For nonnegative c and E>=1, W=(1+B)*E^B is at least one; c^i<=W^i<=W^s when i<=s.",
+        "The pinned natural-power and real-power APIs have the required direction, including Real.rpow_mul_natCast.",
+        "The resulting factor (1+B)^s*E^(B*s) covers s=0 and introduces no state derivative loss."
+      ]
+    },
+    {
+      "declaration": "n04Coordinates_canonicalAtom_absolute_envelope",
+      "findings": [
+        "The actual canonical interval positivity supplies both the inverse-affine MapsTo property and nonnegativity of its radial scale.",
+        "The existing inverse-affine mixed derivative formula gives precisely (K.right m-K.left m)^(-i), with no angular scale.",
+        "The canonicalLengthInverse reference atom pays this factor using the actual sample. The envelope exponent becomes BL*s+B and the coefficient becomes (1+BL)^s*A.",
+        "Only numerical material costs depend on s; the fixed loss selected from CurrentJets is unchanged.",
+        "The full actual CanonicalGeometry.atom composed with n07aCanonicalUnitInversePoint is the target n07aCanonicalAtomField, not an independently chosen representative."
+      ]
+    },
+    {
+      "declaration": "n04Coordinates_sectorParameterOfState_grading",
+      "findings": [
+        "The actual sector parameter is the subtype of z.state-referenceState together with the original scalar parameter.",
+        "The pair grading and subtype grading expand to stateGrading(s)(z.state-referenceState)+abs(z.parameter).",
+        "No comparison constant, new low base or altered parameter neighborhood is introduced."
+      ]
+    },
+    {
+      "declaration": "n04Coordinates_sectorCanonicalJetBounds_of_reference_current",
+      "findings": [
+        "The same loss is retained and coefficientEnvelope_pack(4*A,B) is selected for each spatial order before every state and component.",
+        "The actual state-to-sector map satisfies both the original neighborhood membership and the literal lift equality.",
+        "The four literal atoms are potential, dividedA, dividedB and dividedC. The positive-piece Bool condition is preserved; on negative pieces only the potential is required.",
+        "The four corrected comp_def rewrites expose the actual unit-point/inverse-point cancellation as a function equality under mixedDerivative.",
+        "The sum of the four bounds is at most 4*V. The explicit E0 floor justifies coefficient packing, and the exact grading identity gives the frozen SectorCanonicalJetBounds.",
+        "The conclusion includes spatial order zero, keeps the original base and epsilon, and assumes actual ReferenceJets and CurrentJets rather than a final estimate surrogate."
+      ]
+    }
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aGeometryJetBounds.lean",
+      "sha256": "5eb75a3b06a90cf2611b95ca8ce9098ba95c057e7627a4bcf1a8d756bc02c498",
+      "blob": "e1e7c43bac69e82dbd72c609763521ad1472682b",
+      "bytes": 5954,
+      "lines": 119,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aMaterialProductBounds",
+        "ContinuousFlexibility.Analysis.N07aMixedLocalCalculus",
+        "ContinuousFlexibility.Analysis.N07aNeighborhood"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aGeometryJetBounds.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "e1e7c43bac69e82dbd72c609763521ad1472682b",
+      "main_1ece_comparison": "same",
+      "review_scope": "Complete source read; used public contracts and actual definitions checked against the above source pair."
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046",
+      "blob": "19becb59903b44c18c8f1afb72726b2f95952752",
+      "bytes": 2965,
+      "lines": 66,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "green163_equal": true,
+      "main_1ece_blob": null,
+      "main_1ece_comparison": "absent",
+      "review_scope": "Complete source read; used public contracts and actual definitions checked against the above source pair."
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aCanonicalAtomBounds.lean",
+      "sha256": "a162c68611e25b6851e7d0a582437100ddd24c28ec65acd32ee002975087b0e7",
+      "blob": "7f58525255a1dd409689e8b21ba4bab30a4af3c5",
+      "bytes": 4894,
+      "lines": 102,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aGeometryLengthBounds",
+        "ContinuousFlexibility.Analysis.N07aSampleJetBounds"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aCanonicalAtomBounds.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "7f58525255a1dd409689e8b21ba4bab30a4af3c5",
+      "main_1ece_comparison": "same",
+      "review_scope": "Complete source read; used public contracts and actual definitions checked against the above source pair."
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aGeometryLengthBounds.lean",
+      "sha256": "31f0cce08f7612f3fdee200cc3f077796510bd12534af8287a6b866ba0b2c47b",
+      "blob": "2c336c9315bc5aa70efc149544448e30a2be0967",
+      "bytes": 4072,
+      "lines": 89,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aGeometryJetBounds",
+        "ContinuousFlexibility.Analysis.N07aSampleEnvelopes",
+        "ContinuousFlexibility.Analysis.N07aCurrentPrincipalBounds"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aGeometryLengthBounds.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "2c336c9315bc5aa70efc149544448e30a2be0967",
+      "main_1ece_comparison": "same",
+      "review_scope": "Complete source read; used public contracts and actual definitions checked against the above source pair."
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "sha256": "bbec6c5ccb9e0d9bcf75516b8c9024e4f15c2e834119822ace6da3c4e70fd51c",
+      "blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "bytes": 5638,
+      "lines": 128,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients",
+        "ContinuousFlexibility.Statements.N07aCanonicalGeometry",
+        "Mathlib.Analysis.Calculus.Deriv.CompMul",
+        "Mathlib.Analysis.Calculus.Deriv.Shift"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "main_1ece_comparison": "same",
+      "review_scope": "Complete source read; used public contracts and actual definitions checked against the above source pair."
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aScalarSolution.lean",
+      "sha256": "89bc0865e47eb789bc7ccf457ca841b403df0752e62b463a700cbd94c21209fe",
+      "blob": "a77ae6ed52b89b6c4edd7b2bc9521f9406889f52",
+      "bytes": 9198,
+      "lines": 183,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aCorrectedForward",
+        "ContinuousFlexibility.Analysis.N07aNormalizedSpaces",
+        "ContinuousFlexibility.Analysis.SolveReturnEquations"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aScalarSolution.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "a77ae6ed52b89b6c4edd7b2bc9521f9406889f52",
+      "main_1ece_comparison": "same",
+      "review_scope": "Complete source read; used public contracts and actual definitions checked against the above source pair."
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "bytes": 14988,
+      "lines": 311,
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "ContinuousFlexibility.Analysis.MaterialSampleBounds",
+        "ContinuousFlexibility.Analysis.N01JetBounds"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "green163_equal": true,
+      "main_1ece_blob": null,
+      "main_1ece_comparison": "absent",
+      "review_scope": "Complete source read; used public contracts and actual definitions checked against the above source pair."
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalJetNormalization.lean",
+      "sha256": "376dea5b9a6281f63b21f6aeefd9273dc4aadc8a13629ad39d22c88320353288",
+      "blob": "d2373f98afac2769d0ae67daa6b56d8bbadebb40",
+      "bytes": 14499,
+      "lines": 276,
+      "imports": [
+        "ContinuousFlexibility.Blueprint.CanonicalParts",
+        "ContinuousFlexibility.Analysis.N04bGeometryPreservation"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/CanonicalJetNormalization.lean",
+      "green163_equal": true,
+      "main_1ece_blob": null,
+      "main_1ece_comparison": "absent",
+      "review_scope": "Complete source read; used public contracts and actual definitions checked against the above source pair."
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalCoordinateCompletion.lean",
+      "sha256": "a9e912be4e6ce2a2904363acbe65c11386d212e63bab041a80e83a7f8242cf79",
+      "blob": "f5f28f3b222a19598d19053d75314972fbc6c104",
+      "bytes": 3099,
+      "lines": 65,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalJetNormalization",
+        "ContinuousFlexibility.Analysis.CanonicalSourceConversion"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/CanonicalCoordinateCompletion.lean",
+      "green163_equal": true,
+      "main_1ece_blob": null,
+      "main_1ece_comparison": "absent",
+      "review_scope": "Complete source read; used public contracts and actual definitions checked against the above source pair."
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+      "sha256": "6952ac2501bd38f0f6d51b1633f52d30ed1820f9380bd6dd58ebc24c601e1991",
+      "blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+      "bytes": 11512,
+      "lines": 250,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Analysis.TameLinear"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+      "main_1ece_comparison": "same",
+      "review_scope": "Complete source read; used public contracts and actual definitions checked against the above source pair."
+    }
+  ],
+  "frozen_definitions": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "bytes": 101197,
+      "lines": 1773,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Contracts.Annular",
+        "ContinuousFlexibility.Scalar.NormalizedConservation",
+        "ContinuousFlexibility.Scalar.TypeCorrection",
+        "ContinuousFlexibility.Scalar.FormPullback",
+        "Mathlib.Topology.OpenPartialHomeomorph.Defs"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "main_1ece_comparison": "same",
+      "review_scope": "Actual atom clauses, unitStrip, differenceJets, ReferenceJets, CurrentJets, sector parameter and canonical geometry definitions read in full; no claim of a new constructor."
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "bytes": 30441,
+      "lines": 603,
+      "imports": [
+        "ContinuousFlexibility.Statements.Radial",
+        "ContinuousFlexibility.Analysis.BastianiCurveChain",
+        "ContinuousFlexibility.Analysis.ExponentialSequenceSpace",
+        "ContinuousFlexibility.Analysis.MaterialIntervalWeights",
+        "ContinuousFlexibility.Analysis.TameLinear",
+        "Mathlib.Analysis.InnerProductSpace.PiL2",
+        "Mathlib.MeasureTheory.Function.L2Space",
+        "Mathlib.Topology.Algebra.Module.Multilinear.Basic"
+      ],
+      "source_ref": "c796387fb555392501c81f5b8bd834936251516c",
+      "repo_path": "src/ContinuousFlexibility/Statements/Analysis.lean",
+      "green163_equal": true,
+      "main_1ece_blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "main_1ece_comparison": "same",
+      "review_scope": "Actual material and state grading contracts read and matched to the callers."
+    }
+  ],
+  "pinned_mathlib_signature_sources": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "bytes": 50432,
+      "lines": 1155
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Order/GroupWithZero/Basic.lean",
+      "sha256": "6526bf3a919d5306c90daf75cf96cfe3bbfacc702f3858fb00f893f7346e2cbd",
+      "blob": "335ef50464487b5763d4ad885d55d83b00964f1b",
+      "bytes": 64250,
+      "lines": 1474
+    }
+  ],
+  "pinned_api_checks": [
+    "Real.rpow_nonneg, Real.rpow_add, Real.one_le_rpow, Real.rpow_le_rpow_of_exponent_le and Real.rpow_mul_natCast checked in the fixed Real.lean.",
+    "pow_le_pow_left_0 (Unicode subscript spelling in source) and pow_le_pow_right_0 checked in the fixed Algebra/Order/GroupWithZero/Basic.lean with their actual premise order.",
+    "The independently checked Lean Init/Core comp_def/comp_apply distinction is bound by the exact 48a33ad6 delta receipt."
+  ],
+  "limitations": [
+    "Static full-source and actual-provider review only; neither source pair nor the successor selection graph was compiled or elaborated in this review.",
+    "The original four comp_apply sites were not observed failing in CI; their successor is a justified static visibility correction.",
+    "This is a strict downstream implication from actual ReferenceJets and CurrentJets. It does not construct CurrentJets, CanonicalPrimitiveGeometry, the final N04 atlas, or the final theorem.",
+    "It requires genuine canonical interval positivity and an explicit sample E0 floor, which must be supplied on the same data.",
+    "Five baseline providers belong to CI164's pending cohort. Successful remote compilation and the parent's complete staging gates remain separate.",
+    "The original normalizer review body was not restored from its Git blob during this session; its previously recorded identity is preserved, while the two exact normalizer sources and all seven old headers were independently reread and rechecked here.",
+    "Only immutable Git objects and session stores were written; proposed local paths have not been created while the filesystem is unavailable."
+  ],
+  "execution": {
+    "local_lean": false,
+    "local_elaboration": false,
+    "resource_limit_change": false,
+    "exec_or_filesystem_retry": false,
+    "CI_queries_or_actions": false,
+    "active_source_index_refs_commits_changed": false
+  }
+}

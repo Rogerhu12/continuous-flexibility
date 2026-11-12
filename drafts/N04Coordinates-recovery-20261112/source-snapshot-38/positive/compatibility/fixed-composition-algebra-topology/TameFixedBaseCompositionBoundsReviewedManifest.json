@@ -1,0 +1,73 @@
+{
+  "schema": "n04-reviewed-source-manifest-v1",
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "selected_source": {
+    "module": "ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds",
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBounds.lean",
+    "bytes": 17787,
+    "sha256": "f70497231b60b5c0a59e8de16cb534f1820e2bd9d6469ed8c86643b88f428b80",
+    "git_blob": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+    "lines": 328,
+    "eof_lf": true,
+    "imports": [
+      "ContinuousFlexibility.Analysis.SpacesInterpolationProducts",
+      "ContinuousFlexibility.Analysis.TameTopologicalComposition",
+      "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "ContinuousFlexibility.Analysis.SmoothDirectionsAffine"
+    ],
+    "selection": "owned-scratch"
+  },
+  "candidate_manifest": {
+    "git_blob": "a9fdc706461e767e53fad58f96dd16ba988509e7",
+    "sha256": "72cd2002689083a854ee454b12a9b06382d6b27620ed3a0b558ed139393e20e7"
+  },
+  "selected_provider_graph": {
+    "git_blob": "4fb2c432397d4a7b36518ddf565d40c3d39c6f87",
+    "sha256": "718d1b5a5d72865d6b73acd3123213180d29a986919045b65476423e94102e3a",
+    "bytes": 44660,
+    "project_modules": 83,
+    "missing_imports": [],
+    "cycles": [],
+    "verification": "Exactly one root node changed from the already complete 83-node main1ece graph; all 82 upstream nodes and import edges unchanged."
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/TameFixedBaseCompositionBoundsIndependentReview.json",
+    "git_blob": "b903f1c2c0e0d0596757977b99bc0ee05b8723f1",
+    "sha256": "5f4f4ab535e429f578c8b64555c6a52da46a5dc916f63b458b66bc4ad0aad2ca",
+    "bytes": 13191,
+    "reviewer": "/root/audit_coordinates",
+    "scope": "Full original326, exact final two-letI correction, genuine partition numerical proof, public quantifier order, direct providers and pinned mathlib, 83 selected modules, no local compilation."
+  },
+  "preserved_history": {
+    "source": {
+      "git_blob": "7e8ed357c9a53ad2c888da6e401b0084e3f9f142",
+      "sha256": "85080c53cdff94fa40ecea646d300ffe3b549bf614e5a1eede073a8f3842379b",
+      "lines": 326,
+      "scope": "Frozen historical candidate retained; two hidden section-instance findings superseded only by this explicit proof-local compatibility version."
+    },
+    "candidate_manifest": {
+      "git_blob": "406d8c1526574ecedd136c24f6cb3d23ad2e6bdf",
+      "sha256": "9f8740dace34bca6b9ecbc7a512805f80daa387dd9feae5d0c234d2f9d7d655f"
+    },
+    "change": "Exactly two proof-local letI : TopologicalSpace E := ⊥ lines. Full public headers, formulas, other proofs and imports unchanged; deleting the two exact lines byte-reconstructs the frozen 326 source.",
+    "reason": "Pinned Lean section instance inclusion makes the existing algebraic helper declarations carry topological-space instances. Their conclusions and this source's two pure algebraic proofs do not depend on topology.",
+    "root_authorization": "Root explicitly authorized an additional immutable 328 version and 22-line group budget extension, before creation."
+  },
+  "selection_decision": "Select only the exact final328 f7492e92 source for future staging. The original326 is retained as historical candidate with two explicit section-instance findings; its readiness is not inherited.",
+  "budget": {
+    "group_limit_lines": 1222,
+    "prior_selected_or_frozen_lines": 894,
+    "source_lines": 328,
+    "total_with_actual_consumer152": 1222,
+    "remaining_lines": 0
+  },
+  "source_mutated_since_review": false,
+  "compilation_performed": false,
+  "active_tree_changed": false,
+  "notes": [
+    "One low input base before every parameter order; finite delta and partition loss before R and s.",
+    "Uses public spaces_interpolation_product_bound and genuine projectiveCompositionJets.",
+    "Existing actual numerical consumer152 is separately pending full peer, with its initial map_neg self-check to correct before freezing.",
+    "All persistence in this outage is through authorized no-ref GitHub blobs; this owner receipt is a new exact serialization."
+  ]
+}
