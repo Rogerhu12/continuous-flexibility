@@ -8,8 +8,9 @@ import ContinuousFlexibility.Analysis.RootChartExtension
 The two genuine smooth fields φ and χ determine the radial power and
 the root chart. Their actual ordinary jets and a positive value range
 for χ imply fixed-loss jets for the chart and its actual Jacobian.
-The statement is pointwise at the root; it does not assert a uniform
-negative-side collar from a pointwise smoothness hypothesis.
+The estimate is pointwise on the unit radial strip. The positive value
+interval remains an explicit input; a separate genuine derivative
+estimate selects a uniform collar for a family.
 -/
 
 noncomputable section
@@ -31,7 +32,7 @@ def RootChartPointwiseJetBound
     PointwiseMaterialJetBound p loss B z (extendedRootEvenOddChart G) x ∧
     PointwiseMaterialJetBound p loss B z (planeJacobian (extendedRootEvenOddChart G)) x
 
-theorem rootChart_pointwise_fixed_loss_material_bound
+theorem rootChart_unitStrip_fixed_loss_material_bound
     {E : Type} [AddCommGroup E] [Module ℝ E]
     {p : ℕ → Seminorm ℝ E} (hp : Monotone p) (hI : HasInterpolation p)
     (inputLoss : ℕ) :
@@ -40,13 +41,13 @@ theorem rootChart_pointwise_fixed_loss_material_bound
       ∃ B : ℕ → ℝ, (∀ n, 0 < B n) ∧
       ∀ z : E, p base z ≤ 1 → ∀ G : ℝ × ℝ × ℝ → ℝ, ∀ x : PolarPoint,
       ContDiffAt ℝ ∞ (extendedRootEven G) x →
-      ContDiffAt ℝ ∞ (extendedRootOddCoefficient G) x → x.1 = 0 →
+      ContDiffAt ℝ ∞ (extendedRootOddCoefficient G) x → |x.1| ≤ 1 →
       extendedRootOddCoefficient G x ∈ Icc l u →
       PointwiseMaterialJetBound p inputLoss A z (extendedRootEven G) x →
       PointwiseMaterialJetBound p inputLoss A z (extendedRootOddCoefficient G) x →
       RootChartPointwiseJetBound p loss B z G x := by
   obtain ⟨radialBase, radialLoss, hradial⟩ :=
-    rootRadialPower_fixed_loss_material_bound hp hI inputLoss
+    rootRadialPower_unitStrip_fixed_loss_material_bound hp hI inputLoss
   let pairLoss := max inputLoss radialLoss
   obtain ⟨jacobianBase, jacobianLoss, hJacobian⟩ :=
     planeJacobian_fixed_loss_material_bound hp hI pairLoss
@@ -99,5 +100,29 @@ theorem rootChart_pointwise_fixed_loss_material_bound
       (fun n => le_add_of_nonneg_right (hQ n).le),
     hJ.mono hp (le_max_right _ _) (fun n => (hQ n).le)
       (fun n => le_add_of_nonneg_left (hD n).le)⟩
+
+/-- Compatibility with the original boundary statement. -/
+theorem rootChart_pointwise_fixed_loss_material_bound
+    {E : Type} [AddCommGroup E] [Module ℝ E]
+    {p : ℕ → Seminorm ℝ E} (hp : Monotone p) (hI : HasInterpolation p)
+    (inputLoss : ℕ) :
+    ∃ base loss : ℕ, ∀ A : ℕ → ℝ, (∀ n, 0 < A n) →
+      ∀ l u : ℝ, 0 < l → l ≤ u →
+      ∃ B : ℕ → ℝ, (∀ n, 0 < B n) ∧
+      ∀ z : E, p base z ≤ 1 → ∀ G : ℝ × ℝ × ℝ → ℝ, ∀ x : PolarPoint,
+      ContDiffAt ℝ ∞ (extendedRootEven G) x →
+      ContDiffAt ℝ ∞ (extendedRootOddCoefficient G) x → x.1 = 0 →
+      extendedRootOddCoefficient G x ∈ Icc l u →
+      PointwiseMaterialJetBound p inputLoss A z (extendedRootEven G) x →
+      PointwiseMaterialJetBound p inputLoss A z (extendedRootOddCoefficient G) x →
+      RootChartPointwiseJetBound p loss B z G x := by
+  obtain ⟨base, loss, hbound⟩ := rootChart_unitStrip_fixed_loss_material_bound hp hI inputLoss
+  refine ⟨base, loss, ?_⟩
+  intro A hA l u hl hlu
+  obtain ⟨B, hB, hpoint⟩ := hbound A hA l u hl hlu
+  refine ⟨B, hB, ?_⟩
+  intro z hz G x hφ hχ hx hvalue hφjet hχjet
+  exact hpoint z hz G x hφ hχ (by rw [hx, abs_zero]; exact zero_le_one)
+    hvalue hφjet hχjet
 
 end ContinuousFlexibility.Analysis

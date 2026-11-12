@@ -3,7 +3,7 @@ import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
 import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
-# Actual radial power jets at a root
+# Actual radial power jets on a unit radial strip
 
 For a positive odd coefficient, the two actual functions
 `((3/2) χ)^(2/3)` and `x ((3/2) χ)^(2/3)` inherit one common
@@ -21,7 +21,7 @@ open scoped ContDiff
 
 set_option backward.isDefEq.respectTransparency false
 
-theorem rootRadialPower_fixed_loss_material_bound
+theorem rootRadialPower_unitStrip_fixed_loss_material_bound
     {E : Type} [AddCommGroup E] [Module ℝ E]
     {p : ℕ → Seminorm ℝ E} (hp : Monotone p) (hI : HasInterpolation p)
     (inputLoss : ℕ) :
@@ -29,7 +29,7 @@ theorem rootRadialPower_fixed_loss_material_bound
       ∀ l u : ℝ, 0 < l → l ≤ u →
       ∃ B : ℕ → ℝ, (∀ n, 0 < B n) ∧
       ∀ z : E, p base z ≤ 1 → ∀ χ : ℝ × ℝ → ℝ, ∀ x : ℝ × ℝ,
-      ContDiffAt ℝ ∞ χ x → x.1 = 0 → χ x ∈ Icc l u →
+      ContDiffAt ℝ ∞ χ x → |x.1| ≤ 1 → χ x ∈ Icc l u →
       PointwiseMaterialJetBound p inputLoss A z χ x →
       PointwiseMaterialJetBound p loss B z
           (fun y => ((3 / 2 : ℝ) * χ y) ^ (2 / 3 : ℝ)) x ∧
@@ -80,8 +80,7 @@ theorem rootRadialPower_fixed_loss_material_bound
       (ContinuousLinearMap.fst ℝ ℝ ℝ) x zero_le_one
       (ContinuousLinearMap.norm_fst_le ℝ ℝ ℝ)
     change |x.1| ≤ 1
-    rw [hx, abs_zero]
-    exact zero_le_one
+    exact hx
   have hfirstP : PointwiseMaterialJetBound p powerLoss P z
       (fun y : ℝ × ℝ => y.1) x :=
     hfirst.mono hp le_rfl (fun _ => zero_le_one)
@@ -97,5 +96,28 @@ theorem rootRadialPower_fixed_loss_material_bound
       (fun n => le_add_of_nonneg_right (hQ n).le),
     hradialJet.mono hp (le_max_right _ _) (fun n => (hQ n).le)
       (fun n => le_add_of_nonneg_left (hD n).le)⟩
+
+/-- The original boundary interface is the zero-radius special case. -/
+theorem rootRadialPower_fixed_loss_material_bound
+    {E : Type} [AddCommGroup E] [Module ℝ E]
+    {p : ℕ → Seminorm ℝ E} (hp : Monotone p) (hI : HasInterpolation p)
+    (inputLoss : ℕ) :
+    ∃ base loss : ℕ, ∀ A : ℕ → ℝ, (∀ n, 0 < A n) →
+      ∀ l u : ℝ, 0 < l → l ≤ u →
+      ∃ B : ℕ → ℝ, (∀ n, 0 < B n) ∧
+      ∀ z : E, p base z ≤ 1 → ∀ χ : ℝ × ℝ → ℝ, ∀ x : ℝ × ℝ,
+      ContDiffAt ℝ ∞ χ x → x.1 = 0 → χ x ∈ Icc l u →
+      PointwiseMaterialJetBound p inputLoss A z χ x →
+      PointwiseMaterialJetBound p loss B z
+          (fun y => ((3 / 2 : ℝ) * χ y) ^ (2 / 3 : ℝ)) x ∧
+        PointwiseMaterialJetBound p loss B z
+          (fun y => y.1 * ((3 / 2 : ℝ) * χ y) ^ (2 / 3 : ℝ)) x := by
+  obtain ⟨base, loss, hbound⟩ := rootRadialPower_unitStrip_fixed_loss_material_bound hp hI inputLoss
+  refine ⟨base, loss, ?_⟩
+  intro A hA l u hl hlu
+  obtain ⟨B, hB, hpoint⟩ := hbound A hA l u hl hlu
+  refine ⟨B, hB, ?_⟩
+  intro z hz χ x hχ hx hvalue hjets
+  exact hpoint z hz χ x hχ (by rw [hx, abs_zero]; exact zero_le_one) hvalue hjets
 
 end ContinuousFlexibility.Analysis
