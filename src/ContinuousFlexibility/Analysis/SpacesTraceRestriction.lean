@@ -136,7 +136,7 @@ private theorem spaces_circle_jet_energy_eq {T : MaterialData} {γ : ℝ}
     eLpNorm_const_smul, mul_pow, Real.enorm_eq_ofReal_abs,
     ← ENNReal.ofReal_pow (abs_nonneg c), sq_abs]
 
-private theorem spaces_circle_energy_le_of_weighted_bound
+theorem spaces_circle_energy_le_of_weighted_bound
     {T : MaterialData} {γ : ℝ} {v : ℕ → ℝ → ℝ}
     (hv : ∀ m, ContDiff ℝ ∞ (v m)) (s : ℕ)
     {A : ℝ} (hA : 0 ≤ A) {w : ℕ → ℝ} (hw : ∀ m, 0 ≤ w m)
@@ -182,7 +182,7 @@ private theorem spaces_circle_energy_le_of_weighted_bound
       (ENNReal.ofReal_tsum_of_nonneg (fun _ => mul_nonneg hR (sq_nonneg _)) (hwsum.mul_left R)).symm
     _ = _ := by rw [tsum_mul_left]
 
-private theorem spaces_circleNorm_le_of_weighted_bound
+theorem spaces_circleNorm_le_of_weighted_bound
     {T : MaterialData} {γ : ℝ} {v : ℕ → ℝ → ℝ}
     (hv : ∀ m, ContDiff ℝ ∞ (v m)) (s : ℕ)
     {A : ℝ} (hA : 0 ≤ A) {w : ℕ → ℝ} (hw : ∀ m, 0 ≤ w m)
