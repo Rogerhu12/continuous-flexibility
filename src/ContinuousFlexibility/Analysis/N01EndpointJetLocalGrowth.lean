@@ -54,8 +54,10 @@ private theorem endpointJet_mixed_norm_bound
   classical
   have hidentity : A v = A q + ∑ i : Fin k, A (multilinearDifferenceTuple q v i) := by
     have heq : A v - A q = ∑ i : Fin k, A (multilinearDifferenceTuple q v i) := by
-      simpa only [Finset.piecewise_univ, Finset.mem_univ, true_implies,
-        multilinearDifferenceTuple] using A.map_sub_map_piecewise v q Finset.univ
+      change A v - A q = ∑ i : Fin k,
+        A (fun j => if j < i then v j else if i = j then v j - q j else q j)
+      simpa only [Finset.piecewise_univ, Finset.mem_univ, true_implies] using
+        A.map_sub_map_piecewise v q Finset.univ
     calc
       A v = A q + (A v - A q) := by abel
       _ = _ := congrArg (fun y : F => A q + y) heq

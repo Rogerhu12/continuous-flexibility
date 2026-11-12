@@ -20,8 +20,14 @@ theorem mixedDerivative_reflect_angle (f : PolarPoint → ℝ)
     (a b : ℕ) (p : PolarPoint) :
     mixedDerivative a b (fun q => f (q.1, -q.2)) p =
       (-1 : ℝ) ^ b * mixedDerivative a b f (p.1, -p.2) := by
-  simp only [mixedDerivative, iteratedDeriv_comp_neg, smul_eq_mul,
-    iteratedDeriv_const_mul_field]
+  have hangle (r : ℝ) :
+      iteratedDeriv b (fun θ : ℝ => f (r, -θ)) p.2 =
+        (-1 : ℝ) ^ b * iteratedDeriv b (fun θ : ℝ => f (r, θ)) (-p.2) := by
+    simpa only [smul_eq_mul] using
+      iteratedDeriv_comp_neg b (fun θ : ℝ => f (r, θ)) p.2
+  exact (congrArg (fun g : ℝ → ℝ => iteratedDeriv a g p.1) (funext hangle)).trans
+    (iteratedDeriv_const_mul_field (n := a) (x := p.1) ((-1 : ℝ) ^ b)
+      (fun r : ℝ => iteratedDeriv b (fun θ : ℝ => f (r, θ)) (-p.2)))
 
 end ContinuousFlexibility.Statements
 
@@ -146,10 +152,11 @@ theorem jointMixedDiagonal_reflect_angle
   have hP (z : E) (q : PolarPoint) : P (z, q) = (z, (q.1, -q.2)) := rfl
   have hPzero : P (w, (0 : PolarPoint)) = (w, (0 : PolarPoint)) := by
     rw [hP]
-    simp only [Prod.fst_zero, Prod.snd_zero, neg_zero]
+    simp only [Prod.fst_zero, Prod.snd_zero, neg_zero, Prod.mk_zero_zero]
   have hmaps : MapsTo (fun z => (0 : E × PolarPoint) + P z) (U ×ˢ V₀) (U ×ˢ V₀) := by
-    intro z hz
-    simpa only [zero_add, hP] using And.intro hz.1 (hmap z.2 hz.2)
+    rintro ⟨z, q⟩ hz
+    rw [zero_add, hP]
+    exact ⟨hz.1, hmap q hz.2⟩
   let M := J.compAffine P 0 (hU.prod hV) hmaps
   have hMK : EqOn (fun z => f ((0 : E × PolarPoint) + P z)) g (U ×ˢ V₀) := by
     intro z hz
@@ -162,7 +169,13 @@ theorem jointMixedDiagonal_reflect_angle
     have heq' : J.D n ((0 : E × PolarPoint) + P (x, q))
         (fun _ : Fin n => P (w, (0 : PolarPoint))) =
       K.D n (x, q) (fun _ => (w, (0 : PolarPoint))) := heq
-    simpa only [zero_add, hP, hPzero] using heq'.symm
+    have hpoint : (0 : E × PolarPoint) + P (x, q) = (x, (q.1, -q.2)) :=
+      (zero_add (P (x, q))).trans (hP x q)
+    have hdirs : (fun _ : Fin n => P (w, (0 : PolarPoint))) =
+        (fun _ : Fin n => (w, (0 : PolarPoint))) := funext (fun _ => hPzero)
+    exact heq'.symm.trans (congrArg₂
+      (fun z : E × PolarPoint => fun v : Fin n → E × PolarPoint => J.D n z v)
+      hpoint hdirs)
   exact (mixedDerivative_congr_on_open hV hjet a b hy).trans
     (mixedDerivative_reflect_angle (fun q => J.D n (x, q) (fun _ => (w, 0))) a b y)
 

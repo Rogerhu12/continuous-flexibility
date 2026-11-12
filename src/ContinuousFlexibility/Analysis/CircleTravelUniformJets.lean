@@ -19,6 +19,42 @@ namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
 
+private theorem travel_constant_family_of_global_oneHigh
+    {I E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F)
+    {U : Set E} {f : E → F} (J : SmoothDirections U f)
+    (hb : ∀ n, ∃ base loss : ℕ, ∀ R : ℝ, 0 ≤ R → ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧
+      ∀ x, p base x ≤ R → ∀ v : Fin n → E,
+        q s (J.D n x v) ≤ C * tameJetSize p n s loss base x v) :
+    UniformFamilyJetBounds p q (fun _ : I => J) := by
+  intro n
+  refine uniformFamilyLowGrowthOn_of_oneHigh (p := p) (q := q) (U := U)
+    (fun (_ : I) (x : E) (v : Fin n → E) => J.D n x v) ?_
+  obtain ⟨base, loss, hbound⟩ := hb n
+  refine ⟨base, loss, fun R hR s => ?_⟩
+  obtain ⟨C, hC, hc⟩ := hbound R hR s
+  exact ⟨C, hC, fun _ x _ hx v => hc x hx v⟩
+
+private theorem travel_restricted_constant_family_of_oneHigh
+    {I E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F)
+    {U V : Set E} {f : E → F} (J : SmoothDirections U f)
+    (hV : IsOpen V) (hVU : V ⊆ U) (A : E → Prop) (hVA : ∀ x ∈ V, A x)
+    (hb : ∀ n, ∃ base loss : ℕ, ∀ R : ℝ, 0 ≤ R → ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧
+      ∀ x, A x → p base x ≤ R → ∀ v : Fin n → E,
+        q s (J.D n x v) ≤ C * tameJetSize p n s loss base x v) :
+    UniformFamilyJetBounds p q
+      (fun _ : I => smoothDirectionsRestrict J hV hVU) := by
+  intro n
+  refine uniformFamilyLowGrowthOn_of_oneHigh (p := p) (q := q) (U := V)
+    (fun (_ : I) (x : E) (v : Fin n → E) => J.D n x v) ?_
+  obtain ⟨base, loss, hbound⟩ := hb n
+  refine ⟨base, loss, fun R hR s => ?_⟩
+  obtain ⟨C, hC, hc⟩ := hbound R hR s
+  exact ⟨C, hC, fun _ x hx hlow v => hc x (hVA x hx) hlow v⟩
+
 variable {I : Type*} {D : ReferenceData} {T : MaterialData} {γ : ℝ} {S : CircleModelData}
 
 def circleUniformInverseDomain (S : CircleModelData) (a : ℝ) : Set S.Space :=
@@ -50,18 +86,15 @@ theorem circleComposition_uniformFamilyJetBounds
     UniformFamilyJetBounds (pairGrading S.grading S.grading) S.grading J := by
   letI : ∀ n, CompleteSpace (S.level n) :=
     fun n => (hS.2.1 n).isComplete.completeSpace_coe
-  let p := pairGrading S.grading S.grading
+  let p : ℕ → Seminorm ℝ (S.Space × S.Space) := pairGrading S.grading S.grading
   have hm := gradedSeminorm_monotone (fun n => S.level n) S.bond
   have hp : Monotone p := tamePairGrading_monotone hm hm
   let hz := exists_circleChartComposition_uniform_oneHigh hS hT hD hγ hi (fun _ => 0)
-  let J₀ := hz.choose
-  have hJ₀ : UniformFamilyJetBounds p S.grading (fun _ : I => J₀) := by
-    intro n
-    apply uniformFamilyLowGrowthOn_of_oneHigh
-    obtain ⟨base, loss, hb⟩ := hz.choose_spec.2 n
-    refine ⟨base, loss, fun R hR s => ?_⟩
-    obtain ⟨C, hC, hc⟩ := hb R hR s
-    exact ⟨C, hC, fun _ x _ hx v => hc x hx v⟩
+  let J₀ : SmoothDirections univ (fun x : S.Space × S.Space =>
+      circleShiftedChartComposeContinuousLinear hS hT hD hγ (fun _ => 0) x.1 x.2) :=
+    hz.choose
+  have hJ₀ : UniformFamilyJetBounds p S.grading (fun _ : I => J₀) :=
+    travel_constant_family_of_global_oneHigh p S.grading J₀ hz.choose_spec.2
   let L : I → (S.Space × S.Space) →L[ℝ] S.Space × S.Space := fun i =>
     (ContinuousLinearMap.fst ℝ S.Space S.Space).prod
       ((circleTranslationContinuousLinear hS hT hD hγ (travel i)).comp
@@ -74,13 +107,17 @@ theorem circleComposition_uniformFamilyJetBounds
   have hlin := uniformFamilyJetBounds_linear (p := p) (q := p) isOpen_univ hp L 0
     (fun s => ⟨1, zero_le_one, fun i x => by
       simpa only [Nat.add_zero, one_mul] using hL s i x⟩)
-  apply hlin.comp_of_eq hp isOpen_univ isOpen_univ hJ₀
-    (fun _ _ _ => mem_univ _) J
-  intro i x hx
-  change circleShiftedChartComposeContinuousLinear hS hT hD hγ (fun _ => 0) x.1
-    (circleTranslationContinuousLinear hS hT hD hγ (travel i) x.2) = _
-  rw [circleShiftedChartComposeContinuousLinear_apply]
-  exact (circleShiftedChartComposeLinear_eq_zero_travel hS hT hD hγ (travel i) x.1 x.2).symm
+  have heq (i : I) (x : S.Space × S.Space) (_hx : x ∈ (univ : Set (S.Space × S.Space))) :
+      circleShiftedChartComposeContinuousLinear hS hT hD hγ (fun _ => 0)
+        (L i x).1 (L i x).2 =
+      circleShiftedChartComposeLinear hS hT hD hγ (travel i) x.1 x.2 :=
+    (circleShiftedChartComposeContinuousLinear_apply
+      (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ (fun _ => 0) x.1
+      (circleTranslationContinuousLinear hS hT hD hγ (travel i) x.2)).trans
+      (circleShiftedChartComposeLinear_eq_zero_travel
+        hS hT hD hγ (travel i) x.1 x.2).symm
+  exact hlin.comp_of_eq hp isOpen_univ isOpen_univ hJ₀
+    (fun _ _ _ => mem_univ _) J heq
 
 theorem circlePositiveInverse_uniformFamilyJetBounds
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
@@ -94,27 +131,33 @@ theorem circlePositiveInverse_uniformFamilyJetBounds
       (fun i => smoothDirectionsRestrict (JP i)
         ((circleUniformInverseDomain_isOpen S a).prod isOpen_univ)
         (fun _ hx => ⟨circleUniformInverseDomain_subset_positive ha hx.1, hx.2⟩)) := by
-  let p := pairGrading S.grading S.grading
+  let p : ℕ → Seminorm ℝ (S.Space × S.Space) := pairGrading S.grading S.grading
   have hm := gradedSeminorm_monotone (fun n => S.level n) S.bond
   have hp : Monotone p := tamePairGrading_monotone hm hm
-  let W := circleUniformInverseDomain S a
+  let W : Set S.Space := circleUniformInverseDomain S a
   have hW : IsOpen W := circleUniformInverseDomain_isOpen S a
   have hsub : W ⊆ circlePositiveLiftDomain S := circleUniformInverseDomain_subset_positive ha
   let hzero := smoothTameOn_circlePositiveInverseComposeLinear hS hT hD hγ hi (fun _ => 0)
-  let J₀ := hzero.choose
-  let K₀ := smoothDirectionsRestrict J₀ (hW.prod isOpen_univ)
-    (fun _ hx => ⟨hsub hx.1, hx.2⟩)
-  have hK₀ : UniformFamilyJetBounds p S.grading (fun _ : I => K₀) := by
-    intro n
-    apply uniformFamilyLowGrowthOn_of_oneHigh
-    obtain ⟨base, loss, hb⟩ := circlePositiveInverseComposeLinear_uniform_oneHigh
-      hS hT hD hγ hi (fun _ => 0) J₀ (a / 2) (half_pos ha) n
-    refine ⟨base, loss, fun R hR s => ?_⟩
-    obtain ⟨C, hC, hc⟩ := hb R hR s
-    refine ⟨C, hC, fun i x hx hlow v => ?_⟩
-    exact hc x (fun m θ => by
-      rw [circleAffineLift_deriv hS]
-      exact interior_subset hx.1 m θ) hlow v
+  let J₀ : SmoothDirections (circlePositiveLiftDomain S ×ˢ univ)
+      (fun x : S.Space × S.Space =>
+        circlePositiveInverseComposeLinear hS hT hD hγ (fun _ => 0) x.1 x.2) :=
+    hzero.choose
+  let K₀ : SmoothDirections (W ×ˢ univ)
+      (fun x : S.Space × S.Space =>
+        circlePositiveInverseComposeLinear hS hT hD hγ (fun _ => 0) x.1 x.2) :=
+    smoothDirectionsRestrict J₀ (hW.prod isOpen_univ)
+      (fun _ hx => ⟨hsub hx.1, hx.2⟩)
+  have hlower (x : S.Space × S.Space) (hx : x ∈ W ×ˢ univ) (m : ℕ) (θ : ℝ) :
+      a / 2 ≤ deriv (circleAffineLift (fun _ => 0) (S.decode x.1) 1 m) θ :=
+    (interior_subset hx.1 m θ).trans_eq
+      (circleAffineLift_deriv hS (fun _ => 0) x.1 m θ).symm
+  have hK₀ : UniformFamilyJetBounds p S.grading (fun _ : I => K₀) :=
+    travel_restricted_constant_family_of_oneHigh p S.grading J₀
+      (hW.prod isOpen_univ) (fun _ hx => ⟨hsub hx.1, hx.2⟩)
+      (fun x => ∀ m θ,
+        a / 2 ≤ deriv (circleAffineLift (fun _ => 0) (S.decode x.1) 1 m) θ)
+      hlower (circlePositiveInverseComposeLinear_uniform_oneHigh
+        hS hT hD hγ hi (fun _ => 0) J₀ (a / 2) (half_pos ha))
   let L : I → S.Space →L[ℝ] S.Space := fun i =>
     circleTranslationContinuousLinear hS hT hD hγ (fun m => -travel i m)
   have hpost := hK₀.postContinuousLinear hp L 0

@@ -33,8 +33,9 @@ private theorem weighted_abs_multilinear_scalar_split
   have hidentity : F v = F q + ∑ i : Fin k, F (multilinearDifferenceTuple q v i) := by
     have h := F.map_sub_map_piecewise v q Finset.univ
     have heq : F v - F q = ∑ i : Fin k, F (multilinearDifferenceTuple q v i) := by
-      simpa only [Finset.piecewise_univ, Finset.mem_univ, true_implies,
-        multilinearDifferenceTuple] using h
+      change F v - F q = ∑ i : Fin k,
+        F (fun j => if j < i then v j else if i = j then v j - q j else q j)
+      simpa only [Finset.piecewise_univ, Finset.mem_univ, true_implies] using h
     calc
       F v = F q + (F v - F q) := by ring
       _ = _ := congrArg (fun z => F q + z) heq
@@ -46,6 +47,38 @@ private theorem weighted_abs_multilinear_scalar_split
       mul_le_mul_of_nonneg_left
         ((abs_add_le _ _).trans (add_le_add (le_refl _) (Finset.abs_sum_le_sum_abs _ _))) hw
     _ = _ := by rw [hq, abs_mul, mul_add, Finset.mul_sum]; ring
+
+private theorem scalar_split_difference_snd_zero
+    {E : Type*} [AddCommGroup E] [Module ℝ E] {k : ℕ}
+    (u : E × ℝ) (hu : u.2 = 1) (v : Fin k → E × ℝ) (i : Fin k) :
+    (multilinearDifferenceTuple (fun j => (v j).2 • u) v i i).2 = 0 := by
+  simp only [multilinearDifferenceTuple, lt_self_iff_false, if_false, if_true]
+  change (v i).2 - (v i).2 * u.2 = 0
+  rw [hu, mul_one, sub_self]
+
+private theorem scalar_add_fin_successor_sum (n : ℕ) (R : ℝ) :
+    R + (∑ _i : Fin (n + 1), R) = ((n : ℝ) + 2) * R := by
+  rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
+  simp only [Nat.cast_add, Nat.cast_one]
+  ring
+
+private theorem exists_open_line_radius_le_one
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} (hU : IsOpen U) {x : E} (hx : x ∈ U) (w : E) :
+    ∃ δ : ℝ, 0 < δ ∧ δ ≤ 1 ∧ ∀ t : ℝ, |t| < δ → x + t • w ∈ U := by
+  have hline : Continuous (fun t : ℝ => x + t • w) :=
+    continuous_const.add (continuous_id.smul continuous_const)
+  have hstart : x + (0 : ℝ) • w ∈ U := by
+    simpa only [zero_smul, add_zero] using hx
+  have hnear : {t : ℝ | x + t • w ∈ U} ∈ 𝓝 (0 : ℝ) :=
+    (hline.continuousAt : ContinuousAt (fun t : ℝ => x + t • w) (0 : ℝ)).preimage_mem_nhds
+      (hU.mem_nhds hstart)
+  obtain ⟨δ, hδ, hball⟩ := Metric.mem_nhds_iff.mp hnear
+  refine ⟨min δ 1, lt_min hδ zero_lt_one, min_le_right δ 1, ?_⟩
+  intro t ht
+  apply hball
+  simpa only [Metric.mem_ball, Real.dist_eq, sub_zero] using ht.trans_le (min_le_left δ 1)
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -65,14 +98,20 @@ theorem N01Properties.endpointFlowScalarJets_line_energy_envelope
   classical
   let q : Fin (n + 1) → (StateDirections S × ℝ) := fun i =>
     (v i).2 • scalarParameterDirection S
-  have hstate (i : Fin (n + 1)) :=
+  let stateData (i : Fin (n + 1)) :=
     hN.endpointFlowScalarJets_state_slot_line_energy_envelope hS hT rsel hrsel n s x w
-      (multilinearDifferenceTuple q v i) i (by
-        simp only [multilinearDifferenceTuple, lt_self_iff_false, if_false, if_true]
-        change (v i).2 - (v i).2 * 1 = 0
-        rw [mul_one, sub_self])
-  choose Es Ks hEs hKs hs using hstate
-  obtain ⟨Eq, Kq, hEq, hKq, hq⟩ := hN.endpointFlow_pure_scalar_line_energy_envelope hS hT rsel hrsel n s x w
+      (multilinearDifferenceTuple q v i) i
+      (scalar_split_difference_snd_zero (scalarParameterDirection S) rfl v i)
+  let Es (i : Fin (n + 1)) : ℕ → ℝ≥0∞ := (stateData i).choose
+  let Ks (i : Fin (n + 1)) : ℝ := (stateData i).choose_spec.choose
+  have hEs (i : Fin (n + 1)) : (∑' m, Es i m) < ⊤ :=
+    (stateData i).choose_spec.choose_spec.1
+  have hKs (i : Fin (n + 1)) : 0 ≤ Ks i := (stateData i).choose_spec.choose_spec.2.1
+  let scalarData := hN.endpointFlow_pure_scalar_line_energy_envelope hS hT rsel hrsel n s x w
+  let Eq : ℕ → ℝ≥0∞ := scalarData.choose
+  let Kq : ℝ := scalarData.choose_spec.choose
+  have hEq : (∑' m, Eq m) < ⊤ := scalarData.choose_spec.choose_spec.1
+  have hKq : 0 ≤ Kq := scalarData.choose_spec.choose_spec.2.1
   let ι := Option (Fin (n + 1))
   let E : ι → ℕ → ℝ≥0∞
     | none => Eq
@@ -109,16 +148,19 @@ theorem N01Properties.endpointFlowScalarJets_line_energy_envelope
       (fun j => (ENNReal.le_tsum (f := E j) m).trans_lt (hE j)) i
   have hpure : |∏ i : Fin (n + 1), (v i).2| *
       (weight * |F (fun _ => scalarParameterDirection S)|) ≤ R := by
-    have hb := hq t ht hz m b c hbc θ
-    rw [hjet] at hb
+    have hb : weight * |F (fun _ => scalarParameterDirection S)| ≤
+        Kq * Real.sqrt (Eq m).toReal :=
+      (congrArg (fun y : ℝ => weight * |y|)
+        (hjet (fun _ => scalarParameterDirection S))).symm.trans_le
+          (scalarData.choose_spec.choose_spec.2.2 t ht hz m b c hbc θ)
     exact (mul_le_mul_of_nonneg_left hb (abs_nonneg _)).trans
       ((mul_assoc _ _ _).symm.trans_le (hpoint none))
-  have hterm (i : Fin (n + 1)) : weight * |F (multilinearDifferenceTuple q v i)| ≤ R := by
-    have hb := hs i t ht hz m b c hbc θ
-    rw [hjet] at hb
-    exact hb.trans (hpoint (some i))
-  rw [hjet]
-  calc
+  have hterm (i : Fin (n + 1)) : weight * |F (multilinearDifferenceTuple q v i)| ≤ R :=
+    (congrArg (fun y : ℝ => weight * |y|)
+      (hjet (multilinearDifferenceTuple q v i))).symm.trans_le
+        (((stateData i).choose_spec.choose_spec.2.2 t ht hz m b c hbc θ).trans
+          (hpoint (some i)))
+  have hbound : weight * |F v| ≤ ((n : ℝ) + 2) * R := calc
     _ ≤ |∏ i : Fin (n + 1), (v i).2| *
         (weight * |F (fun _ => scalarParameterDirection S)|) +
         ∑ i : Fin (n + 1), weight * |F (multilinearDifferenceTuple q v i)| :=
@@ -126,11 +168,8 @@ theorem N01Properties.endpointFlowScalarJets_line_energy_envelope
         (fun i => (v i).2) v hweight
     _ ≤ R + ∑ _i : Fin (n + 1), R :=
       add_le_add hpure (Finset.sum_le_sum (fun i _ => hterm i))
-    _ = _ := by
-      rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
-      simp only [Nat.cast_add, Nat.cast_one]
-      dsimp only [R]
-      ring
+    _ = _ := scalar_add_fin_successor_sum n R
+  exact (congrArg (fun y : ℝ => weight * |y|) (hjet v)).trans_le hbound
 
 theorem N01Properties.endpointFlowScalarJets_second_envelopes
     (hN : N01Properties D T S C base loss ε)
@@ -141,21 +180,19 @@ theorem N01Properties.endpointFlowScalarJets_second_envelopes
     CircleJetSecondEnvelopes (T := T) (γ := (3 / 4 : ℝ)) (U := U)
       (hN.endpointFlowScalarJets hS hT rsel hrsel) := by
   intro n x hx v w
-  have hline : Continuous (fun t : ℝ => x + t • w) :=
-    continuous_const.add (continuous_id.smul continuous_const)
-  have hnear : {t : ℝ | x + t • w ∈ U} ∈ 𝓝 (0 : ℝ) :=
-    hline.continuousAt.preimage_mem_nhds (by
-      simpa only [zero_smul, add_zero] using hU.mem_nhds hx)
-  obtain ⟨δ, hδ, hball⟩ := Metric.mem_nhds_iff.mp hnear
-  have hmem (t : ℝ) (ht : |t| < min δ 1) : x + t • w ∈ U := by
-    apply hball
-    simpa only [Metric.mem_ball, Real.dist_eq, sub_zero] using ht.trans_le (min_le_left δ 1)
-  refine ⟨min δ 1, lt_min hδ zero_lt_one, hmem, ?_⟩
+  let radiusData := exists_open_line_radius_le_one hU hx w
+  let δ : ℝ := radiusData.choose
+  have hδ : 0 < δ := radiusData.choose_spec.1
+  have hδone : δ ≤ 1 := radiusData.choose_spec.2.1
+  have hmem : ∀ t : ℝ, |t| < δ → x + t • w ∈ U := radiusData.choose_spec.2.2
+  refine ⟨δ, hδ, hmem, ?_⟩
   intro s
-  obtain ⟨E, K, hE, hK, hb⟩ :=
+  let energyData :=
     hN.endpointFlowScalarJets_line_energy_envelope hS hT rsel hrsel (n + 1) s x w
       (Fin.cons w (Fin.cons w v))
-  exact ⟨E, K, hE, hK, fun t ht =>
-    hb t (ht.trans_le (min_le_right δ 1)).le (hsub (hmem t ht))⟩
+  exact ⟨energyData.choose, energyData.choose_spec.choose,
+    energyData.choose_spec.choose_spec.1, energyData.choose_spec.choose_spec.2.1,
+    fun t ht => energyData.choose_spec.choose_spec.2.2
+      t (ht.trans_le hδone).le (hsub (hmem t ht))⟩
 
 end ContinuousFlexibility.Statements

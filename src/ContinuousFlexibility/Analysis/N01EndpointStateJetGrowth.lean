@@ -109,6 +109,35 @@ private theorem cyclic_slot_sum_bound
           (congrArg (fun r : ℝ => K * (c + r)) hsum))
   exact haux i.val v i rfl hi hv
 
+private theorem cyclic_slot_norm_growth_uniform
+    {V W I : Type*} (H : I → Prop) (U : Set V) (p : ℕ → V → ℝ) (Q : V → Prop)
+    (A : ∀ i, H i → ∀ n : ℕ, V → (Fin (n + 1) → V) → W)
+    (N : ℕ → W → ℝ) (base : ℕ)
+    (hrotate : ∀ i hi n z, z ∈ U → ∀ w,
+      A i hi n z w = A i hi n z (Fin.snoc (Fin.tail w) (w 0)))
+    (hbound : ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+      ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧ ∀ i hi,
+      ∀ z ∈ U, p B z ≤ R → ∀ vs : Fin n → V,
+      (∀ j, p B (vs j) ≤ 1) → ∀ u : V, p B u ≤ 1 → Q u →
+      N s (A i hi n z (Fin.snoc vs u)) ≤
+        K * (1 + p (s + L) z + ∑ j : Fin n, p (s + L) (vs j) + p (s + L) u)) :
+    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+      ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧ ∀ i hi,
+      ∀ z ∈ U, p B z ≤ R → ∀ v : Fin (n + 1) → V,
+      (∀ j, p B (v j) ≤ 1) → (∃ j, Q (v j)) →
+      N s (A i hi n z v) ≤
+        K * (1 + p (s + L) z + ∑ j : Fin (n + 1), p (s + L) (v j)) := by
+  obtain ⟨B, L, hB, hbound⟩ := hbound
+  refine ⟨B, L, hB, ?_⟩
+  intro n R hR s hs
+  obtain ⟨K, hK, hKbound⟩ := hbound n R hR s hs
+  refine ⟨K, hK, ?_⟩
+  intro a ha z hz hzb v hv ⟨j, hj⟩
+  exact cyclic_slot_sum_bound n (fun w => N s (A a ha n z w))
+    (p B) (p (s + L)) Q K (1 + p (s + L) z)
+    (fun w => congrArg (N s) (hrotate a ha n z hz w))
+    (hKbound a ha z hz hzb) v hv j hj
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -280,27 +309,18 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_
         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) ≤
         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
           ∑ i : Fin (n + 1), pairGrading (sectorGrading S) realGrading (s + L) (v i)) := by
-  let data := hN.endpointFlowScalarJets_state_circleNorm_local_growth_all_uniform_radius hS hT
-  let B : ℕ := data.choose
-  let L : ℕ := data.choose_spec.choose
-  have hB : base ≤ B := data.choose_spec.choose_spec.1
-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
-  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
-  let K : ℝ := orderData.choose
-  have hK : 0 ≤ K := orderData.choose_spec.1
-  refine ⟨K, hK, ?_⟩
-  intro rsel hrsel z hz hzb v hv ⟨i, hi⟩
-  let p := pairGrading (sectorGrading S) realGrading
-  refine cyclic_slot_sum_bound n
-    (fun w => circleNorm T (3 / 4 : ℝ) s
-      (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z w))
-    (p B) (p (s + L)) (fun u : StateDirections S × ℝ => u.2 = 0)
-    K (1 + p (s + L) z) ?_ ?_ v hv i hi
-  · intro w
-    exact congrArg (circleNorm T (3 / 4 : ℝ) s)
-      (hN.endpointFlowScalarJets_rotate hS hT rsel hrsel n z hz w)
-  · intro vs hvs u hu huq
-    exact orderData.choose_spec.2 rsel hrsel z hz hzb vs hvs u hu huq
+  exact cyclic_slot_norm_growth_uniform
+    (V := StateDirections S × ℝ) (W := ℕ → ℝ → ℝ)
+    (fun rsel : ℕ → ℝ => ∀ m, rsel m ∈ Icc (C.left m) (C.right m))
+    (sectorNeighborhood S base ε ε)
+    (fun s z => pairGrading (sectorGrading S) realGrading s z)
+    (fun u : StateDirections S × ℝ => u.2 = 0)
+    (fun rsel hrsel n z w =>
+      hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z w)
+    (circleNorm T (3 / 4 : ℝ)) base
+    (fun rsel hrsel n z hz w =>
+      hN.endpointFlowScalarJets_rotate hS hT rsel hrsel n z hz w)
+    (hN.endpointFlowScalarJets_state_circleNorm_local_growth_all_uniform_radius hS hT)
 
 theorem N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all
     (hN : N01Properties D T S C base loss ε)
