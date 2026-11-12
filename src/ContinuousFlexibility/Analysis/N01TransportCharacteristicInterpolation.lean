@@ -35,10 +35,27 @@ theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.fstParameter_ap
     (n : ℕ) (x : E × F) (y : P) (v : Fin n → (E × F) × P) :
     (J.fstParameter (F := F) hU hV).D n (x, y) v =
       J.D n (x.1, y) (fun i => ((v i).1.1, (v i).2)) := by
-  simp only [SmoothDirections.fstParameter, SmoothDirections.compLinear,
-    SmoothDirections.congrOn, SmoothDirections.compAffine_apply, zero_add,
-    ContinuousLinearMap.prod_apply, ContinuousLinearMap.comp_apply,
-    ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd']
+  let L : (E × F) × P →L[ℝ] E × P :=
+    ((ContinuousLinearMap.fst ℝ E F).comp
+      (ContinuousLinearMap.fst ℝ (E × F) P)).prod
+        (ContinuousLinearMap.snd ℝ (E × F) P)
+  have hL (z : (E × F) × P) : L z = (z.1.1, z.2) := by
+    simp only [L, ContinuousLinearMap.prod_apply, ContinuousLinearMap.comp_apply,
+      ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd']
+  have hW : IsOpen ((U ×ˢ (univ : Set F)) ×ˢ V) := (hU.prod isOpen_univ).prod hV
+  have hmap : MapsTo (fun z => (0 : E × P) + L z)
+      ((U ×ˢ (univ : Set F)) ×ˢ V) (U ×ˢ V) := by
+    intro z hz
+    have hz' : (z.1.1, z.2) ∈ U ×ˢ V := ⟨hz.1.1, hz.2⟩
+    simpa only [zero_add, hL] using hz'
+  have hD : (J.compAffine L 0 hW hmap).D n (x, y) v =
+      J.D n (0 + L (x, y)) (fun i => L (v i)) :=
+    SmoothDirections.compAffine_apply
+      (E := (E × F) × P) (F := E × P) (G := G)
+      (U := U ×ˢ V) (V := (U ×ˢ (univ : Set F)) ×ˢ V) (f := f)
+      J L 0 hW hmap n (x, y) v
+  simpa only [SmoothDirections.fstParameter, SmoothDirections.compLinear,
+    SmoothDirections.congrOn, zero_add, hL] using hD
 
 /-- Adding an independent parameter keeps the original constants, base,
 loss, and spatial directions. -/

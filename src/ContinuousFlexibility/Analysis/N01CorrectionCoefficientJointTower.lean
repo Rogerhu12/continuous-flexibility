@@ -14,8 +14,6 @@ where the cutoff derivative vanishes.
 
 noncomputable section
 
-set_option backward.isDefEq.respectTransparency false
-
 namespace ContinuousFlexibility.Statements
 
 local instance n01CorrectionCoefficientJointTowerStateSMul (S : PhysicalSpacesData) :
@@ -49,7 +47,7 @@ private theorem parameterAngularReflection_apply (E : Type*)
     parameterAngularReflection E x = (x.1, (x.2.1, -x.2.2)) := by
   simp only [parameterAngularReflection, ContinuousLinearMap.prod_apply,
     ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
-    ContinuousLinearMap.neg_apply]
+    neg_apply]
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}

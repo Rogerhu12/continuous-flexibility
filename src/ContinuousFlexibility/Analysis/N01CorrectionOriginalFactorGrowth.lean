@@ -81,7 +81,7 @@ theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
       (sectorNeighborhood_isOpen S base ε ε) hV
     apply hb.congr Ja
     intro m x hx
-    simp only [originalCoefficientEntry, if_pos rfl]
+    simp only [originalCoefficientEntry, eq_self_iff_true, ite_true]
   have hb₀ : UniformWeightedJointGrowth p (fun _ => 1) Jb base loss := by
     have hb := (hN.originalCoefficient_strip_joint_growth hS hT j hcell l h hl hh 1).fstParameter
       (S.circle (3 / 4 : ℝ)).grading (fun _ => zero_le_one)
