@@ -77,7 +77,9 @@ theorem n07aNuSectorProjectionCLM_grading_le (S : PhysicalSpacesData) (n : ℕ)
     (S.circle (3 / 4 : ℝ)).grading n z.1.val.2.2
   have hcommon : scalarCommonHeightGrading S n z.1.val.1 = height := by
     simp only [height, scalarCommonHeightGrading, scalarHeightGrading,
-      scalarBeta, heightPairGrading]
+      scalarBeta, heightPairGrading, pairGrading_apply]
+    exact pairGrading_apply (E := (S.height (3 / 4 : ℝ)).Space) (F := ℝ)
+      (S.height (3 / 4 : ℝ)).grading realGrading n z.1.val.1
   have hinner : pairGrading (scalarCommonHeightGrading S) realGrading n
       (z.1.val.1, z.1.val.2.1) = height + nu :=
     (pairGrading_apply (scalarCommonHeightGrading S) realGrading n
@@ -117,7 +119,7 @@ theorem n07aNuSectorProjectionCLM_grading_le (S : PhysicalSpacesData) (n : ℕ)
       (S.circle (3 / 4 : ℝ)).grading n) z.1.val.2.2
   have hnu : nu ≤ nu + controls := le_add_of_nonneg_right hc
   have hnum : (height + nu) + outer ≤ (height + (nu + controls)) + outer :=
-    add_le_add_right (add_le_add_left hnu height) outer
+    add_le_add (add_le_add (le_refl height) hnu) (le_refl outer)
   exact hprojection.le.trans (hnum.trans htarget.symm.le)
 
 theorem n07aNuSectorProjectionCLM_center
