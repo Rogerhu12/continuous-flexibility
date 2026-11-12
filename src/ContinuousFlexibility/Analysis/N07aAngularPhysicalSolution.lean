@@ -89,11 +89,13 @@ theorem n07a_perturbedCanonical_smooth_solution
   have hψ := ((hS.1 (3 / 4 : ℝ)).2.2.2.1 S.psi)
   exact n07a_physicalWeak_smooth_classical hab (L.coefficients x)
     ⟨ha, hspace.2.1, hspace.2.2.1⟩
-    (fun p hp => ⟨hap p hp,
-      by simpa only [Prod.fst_add, Prod.snd_add, add_zero] using
-        hspace.2.2.2.1 p.1 hp.1 p.2,
-      by simpa only [Prod.fst_add, Prod.snd_add, add_zero] using
-        hspace.2.2.2.2 p.1 hp.1 p.2⟩)
+    (by
+      rintro ⟨s, θ⟩ hp
+      refine ⟨hap (s, θ) hp, ?_, ?_⟩
+      · simpa only [Prod.mk_add_mk, add_zero] using
+          hspace.2.2.2.1 s hp.1 θ
+      · simpa only [Prod.mk_add_mk, add_zero] using
+          hspace.2.2.2.2 s hp.1 θ)
     η f v ((S.height (3 / 4 : ℝ)).decode f₀.val)
     (nuColumnField D S C x) ((S.height (3 / 4 : ℝ)).decode S.psi)
     U.2.2.1 U.2.2.2 hηp hfp hv hf₀.1
