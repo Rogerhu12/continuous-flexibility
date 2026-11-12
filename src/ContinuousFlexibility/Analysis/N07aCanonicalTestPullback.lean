@@ -51,9 +51,10 @@ private theorem n07a_domain_compact_radial_preimage {a b c d : ℝ}
   exact hreduced.symm.trans (congrArg Prod.fst (hgf p hp))
 
 def n07aPhysicalTestPullback (S : PhysicalSpacesData) (K : CanonicalData S)
-    (z : AnnularState S × ℝ) (m : ℕ) (W : PolarPoint → ℝ) (p : PolarPoint) : ℝ :=
-  if p ∈ physicalPieceOpen S K z m
-  then K.height z m p * W (K.chart z m p) else 0
+    (z : AnnularState S × ℝ) (m : ℕ) (W : PolarPoint → ℝ) (p : PolarPoint) : ℝ := by
+  classical
+  exact if p ∈ physicalPieceOpen S K z m
+    then K.height z m p * W (K.chart z m p) else 0
 
 theorem n07aPhysicalTestPullback_germ {S : PhysicalSpacesData} {K : CanonicalData S}
     (z : AnnularState S × ℝ) (m : ℕ) (W : PolarPoint → ℝ) {p : PolarPoint}
@@ -61,7 +62,7 @@ theorem n07aPhysicalTestPullback_germ {S : PhysicalSpacesData} {K : CanonicalDat
     n07aPhysicalTestPullback S K z m W =ᶠ[𝓝 p]
       fun q => K.height z m q * W (K.chart z m q) := by
   filter_upwards [hOmega.mem_nhds hp] with q hq
-  exact ite_eq_left hq
+  simp only [n07aPhysicalTestPullback, if_pos hq]
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
@@ -96,7 +97,7 @@ theorem n07aPhysicalTestPullback_zero_germ
   · have hnear : ∀ᶠ q : PolarPoint in 𝓝 p, q ∉ physicalPieceClosed S K z m :=
       isClosed_closure.isOpen_compl.mem_nhds hpcl
     filter_upwards [hnear] with q hq
-    exact ite_eq_right (fun h => hq (subset_closure h))
+    simp only [n07aPhysicalTestPullback, if_neg (fun h => hq (subset_closure h))]
 
 /-- The gauge pullback is a smooth physical test. Its radial support is
 compact inside the annulus; the supporting physical piece may move. -/

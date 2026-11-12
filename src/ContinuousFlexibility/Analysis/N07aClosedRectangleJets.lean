@@ -152,10 +152,12 @@ theorem mixed_angular_hasDerivAt (hlr : l < r) (hab : a < b)
     rw [hv]
     have hwr : (∑ k : Fin (n + 1), if w k = 0 then 1 else 0) = i := by
       simp only [w, Fin.sum_univ_succ, Fin.cons_zero, Fin.cons_succ,
-        ite_eq_right (by decide : (1 : Fin 2) ≠ 0), word_radial_sum, zero_add]
+        ite_eq_right (by decide : (1 : Fin 2) ≠ 0), zero_add]
+      exact word_radial_sum i j
     have hwt : (∑ k : Fin (n + 1), if w k = 0 then 0 else 1) = j + 1 := by
       simp only [w, Fin.sum_univ_succ, Fin.cons_zero, Fin.cons_succ,
-        ite_eq_right (by decide : (1 : Fin 2) ≠ 0), word_angular_sum, Nat.add_comm]
+        ite_eq_right (by decide : (1 : Fin 2) ≠ 0)]
+      exact (congrArg (1 + ·) (word_angular_sum i j)).trans (Nat.add_comm 1 j)
     have h := word_eq_mixed hlr hab hu (n + 1) w hx
     rw [hwr, hwt] at h
     exact h

@@ -59,7 +59,7 @@ theorem n07a_inverseJet_budget
                 ∏ j, ‖iteratedFDeriv ℝ (c.partSize j) (G z m) y‖) ≤ e.eval p d z m := by
       by_cases hc : c = OrderedFinpartition.atomic n
       · refine ⟨N07aJetBudgetExpression.zero T K (n - 1), fun z hz m y hy => ?_⟩
-        simp only [hc, if_pos rfl, N07aJetBudgetExpression.eval_zero, le_refl]
+        simp only [if_pos hc, N07aJetBudgetExpression.eval_zero, le_refl]
       obtain ⟨eF, heF⟩ := ih c.length (n07a_orderedPartition_length_lt c hc) (c.length_pos hn)
       choose eG heG heG0 heGb using fun j : Fin c.length => hInv (c.partSize j) (c.partSize_pos j)
       let coeff : ℕ → ℝ := fun m => b m ^ n * ∏ j, eG j m

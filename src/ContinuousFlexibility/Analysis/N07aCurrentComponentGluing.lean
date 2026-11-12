@@ -214,12 +214,12 @@ theorem n07a_currentComponent_angular_field
     simpa only [hNP] using
       n07a_memLp_twoPieces hA.measurableSet hB.measurableSet hN.measurableSet hP
         hdis hcover hZ hLa hLb
-  · have hea : W =ᵐ[volume.restrict (A ∩ P)] η :=
-      ((n07aPhysicalMeasure_ae h04 hz hs (K.cutPair k).1).mono
-        (fun p hpA => hWA hpA)).trans (he (K.cutPair k).1)
-    have heb : W =ᵐ[volume.restrict (B ∩ P)] η :=
-      ((n07aPhysicalMeasure_ae h04 hz hs (K.cutPair k).2).mono
-        (fun p hpB => hWB hpB)).trans (he (K.cutPair k).2)
+  · have hWae (m : ℕ) (hWm : EqOn W (w m) (physicalPieceOpen S K z m)) :
+        W =ᵐ[n07aPhysicalMeasure S K z m] η := by
+      filter_upwards [n07aPhysicalMeasure_ae h04 hz hs m, he m] with p hpm hη
+      exact (hWm hpm).trans hη
+    have hea : W =ᵐ[volume.restrict (A ∩ P)] η := hWae (K.cutPair k).1 hWA
+    have heb : W =ᵐ[volume.restrict (B ∩ P)] η := hWae (K.cutPair k).2 hWB
     simpa only [hNP] using
       n07a_ae_twoPieces hA.measurableSet hB.measurableSet hN.measurableSet hP
         hcover hZ hea heb

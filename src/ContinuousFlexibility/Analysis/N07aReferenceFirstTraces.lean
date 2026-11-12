@@ -26,8 +26,10 @@ private theorem n07a_trace_mean_sub_pair {f g β : ℝ → ℝ}
       radialAngularMean (fun θ => f θ * β θ) -
         radialAngularMean (fun θ => g θ * β θ) := by
   have hT : (0 : ℝ) ≤ 2 * Real.pi := by positivity
-  have hfi := (hf.mul hβ.continuousOn).intervalIntegrable_of_Icc hT
-  have hgi := (hg.mul hβ.continuousOn).intervalIntegrable_of_Icc hT
+  have hfi : IntervalIntegrable (fun θ => f θ * β θ) volume 0 (2 * Real.pi) :=
+    (hf.mul hβ.continuousOn).intervalIntegrable_of_Icc hT
+  have hgi : IntervalIntegrable (fun θ => g θ * β θ) volume 0 (2 * Real.pi) :=
+    (hg.mul hβ.continuousOn).intervalIntegrable_of_Icc hT
   unfold radialAngularMean
   simp_rw [sub_mul]
   rw [intervalIntegral.integral_sub hfi hgi]

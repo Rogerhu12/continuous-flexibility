@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N07aActualChartDifferentials
 import ContinuousFlexibility.Analysis.N07aCoordinateJetNorms
 import ContinuousFlexibility.Analysis.N07aInverseChartDisplacement
+import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # First inverse-chart differences on the canonical strip
@@ -40,10 +41,9 @@ private theorem n07a_fderiv_scaled_pair_bound
     (hf : DifferentiableAt ℝ f x) (hg : DifferentiableAt ℝ g x) (c : ℝ) :
     ‖fderiv ℝ (fun y => (c * f y, g y)) x‖ ≤
       |c| * ‖fderiv ℝ f x‖ + ‖fderiv ℝ g x‖ := by
-  have h := (hf.hasFDerivAt.const_smul c).prodMk hg.hasFDerivAt
   have he : fderiv ℝ (fun y => (c * f y, g y)) x =
-      (c • fderiv ℝ f x).prod (fderiv ℝ g x) := by
-    simpa only [smul_eq_mul] using h.fderiv
+      (c • fderiv ℝ f x).prod (fderiv ℝ g x) :=
+    ((hf.hasFDerivAt.const_mul c).prodMk hg.hasFDerivAt).fderiv
   rw [he, ContinuousLinearMap.opNorm_prod, Prod.norm_def, norm_smul, Real.norm_eq_abs]
   exact max_le (le_add_of_nonneg_right (norm_nonneg _))
     (le_add_of_nonneg_left (mul_nonneg (abs_nonneg _) (norm_nonneg _)))
@@ -145,12 +145,24 @@ theorem n07a_inverseChart_fderiv_difference_bound
       fun q => ((K.physicalRight m - K.physicalLeft m) * J .inverseRadial q,
         J .inverseAngleDefect q) := by
     funext q
-    have hq := n07aCanonicalUnitPoint_inverse (hgeom.referenceBounds m).2.1 q
-    simp only [J, Function.comp_apply, Pi.sub_apply, CanonicalGeometry.atom, hq]
+    let q' := CanonicalGeometry.canonicalUnitPoint K m (n07aCanonicalUnitInversePoint K m q)
+    have hq : q' = q :=
+      n07aCanonicalUnitPoint_inverse (hgeom.referenceBounds m).2.1 q
     apply Prod.ext
-    · dsimp only
+    · change (K.inverseChart (liftSectorParameter S C z) m q).1 -
+          (K.inverseChart (C.referenceState, 0) m q).1 =
+        (K.physicalRight m - K.physicalLeft m) *
+          (((K.inverseChart (liftSectorParameter S C z) m q').1 - K.physicalLeft m) /
+              (K.physicalRight m - K.physicalLeft m) -
+            ((K.inverseChart (C.referenceState, 0) m q').1 - K.physicalLeft m) /
+              (K.physicalRight m - K.physicalLeft m))
+      rw [hq]
       field_simp [hL.ne'] <;> ring
-    · dsimp only
+    · change (K.inverseChart (liftSectorParameter S C z) m q).2 -
+          (K.inverseChart (C.referenceState, 0) m q).2 =
+        ((K.inverseChart (liftSectorParameter S C z) m q').2 - q'.2) -
+          ((K.inverseChart (C.referenceState, 0) m q').2 - q'.2)
+      rw [hq]
       ring
   have hzstate := liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) hz le_rfl
   have hc := hgeom.charts (liftSectorParameter S C z) hzstate

@@ -62,8 +62,10 @@ theorem n07a_canonical_pairing_integrable_iff
     IntegrableOn (fun p => u p * f p)
       (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) := by
   obtain ⟨himage, hinj, hderiv, hpoint⟩ := n07a_physicalHalfGeometry h04 hz hs m
-  have hQ := ((h04.1.domains z hz hs m).1.inter
-    (isOpen_univ.prod isOpen_Ioo)).measurableSet
+  have hQ : MeasurableSet
+      (physicalPieceOpen S K z m ∩ ((univ : Set ℝ) ×ˢ Ioo (0 : ℝ) Real.pi)) :=
+    ((h04.1.domains z hz hs m).1.inter
+      (isOpen_univ.prod isOpen_Ioo)).measurableSet
   have hcov := integrableOn_image_iff_integrableOn_abs_det_fderiv_smul volume
     hQ hderiv hinj
     (fun p => canonicalHeight S K z m u p * canonicalSource S K z m f p)
