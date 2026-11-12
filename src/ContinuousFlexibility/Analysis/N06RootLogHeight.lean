@@ -74,7 +74,8 @@ theorem n06_rootHeightFactor_eq_regular
   have hVr : radialPartial (rootCharacteristicCoordinate G (-1)) p =
       -(d p - Real.sqrt p.1 * c₀ p) *
         angularPartial (rootCharacteristicCoordinate G (-1)) p := by
-    simpa only [rootPhysicalSpeed, neg_one_mul, neg_mul, sub_eq_add_neg] using
+    simpa only [rootPhysicalSpeed, neg_one_mul, neg_mul, sub_eq_add_neg, one_mul,
+      Prod.eta] using
       P.transport (-1) p.1 p.2 hp
   have he := rootHeightFactor_eq_characteristicFactor (p := p) a P.smooth Real.pi_ne_zero
     (fun r _ => P.odd_period r) (fun r _ => P.even_period r) hp hOraw hUr hVr
