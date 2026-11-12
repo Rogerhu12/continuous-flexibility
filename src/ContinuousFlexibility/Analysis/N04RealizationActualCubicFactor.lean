@@ -79,7 +79,7 @@ theorem n04Realization_unitDifference_cubic_factor
           (canonicalUnitPoint K m p) := by
     rw [n07aUnitDifferenceAtom, hatom, hatom, hm]
     simp only [↓reduceIte, hzero, sub_zero]
-  rw [hprincipal, hfactor, hdivided]
+  simp only [hprincipal, hfactor, hdivided]
   congr 1
   change (((K.left m + (K.right m - K.left m) * p.1) - K.left m) *
       (K.right m - (K.left m + (K.right m - K.left m) * p.1))) ^ 3 =
