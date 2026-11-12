@@ -1,0 +1,188 @@
+{
+  "kind": "CI167_eight_focused_repairs_source_only_plan",
+  "parent": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+  "base_tree": "d6e6c25c9742129f9a50a929914845940b001761",
+  "candidate_commit": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+  "candidate_tree": "1d18001a5ed8b3ef7093f4fee6ac215494c7dfac",
+  "last_full_green": "c796387fb555392501c81f5b8bd834936251516c",
+  "failure_receipt": {
+    "blob": "e2b73d4145b99a7cf8c4aef516b23aa9f8ab045d",
+    "log": {
+      "sha256": "e31097de662da4b2dac4b5bb1fb092fae301ca4ea78d03c8f529bccdb5165474",
+      "bytes": 144991,
+      "lines": 1219,
+      "run": 43307122021,
+      "job": 131493233395,
+      "blob": "923cb8a210ecbde6676288e6e1e99e73096f8229"
+    }
+  },
+  "files": [
+    {
+      "name": "CanonicalReferenceCurrentAbsoluteJets.lean",
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean",
+      "old_blob": "5f8c8a6087e0446d2c54ef35b532b404f0b092f2",
+      "old_sha256": "59a80a8100cb69b80d010175760bfb073bd91f03813d02c2ea72671329a1ebc5",
+      "old_lines": 118,
+      "blob": "4a0f2095b9c16558d889f814750f1fa648590e52",
+      "sha256": "cf481c45cf6ab2b1d5c1b3e9b9588bd3189291fe79e122a60cf355c4a07a1152",
+      "lines": 118,
+      "public_headers_unchanged": true,
+      "imports_unchanged": true,
+      "bytes": 5518,
+      "diff": {
+        "removed": "simpa only [Real.rpow_zero, mul_one] using hHb m",
+        "added": "simpa only [CH, Real.rpow_zero, mul_one] using hHb m"
+      }
+    },
+    {
+      "name": "CanonicalCurrentUniformCloseness.lean",
+      "module": "ContinuousFlexibility.Analysis.CanonicalCurrentUniformCloseness",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean",
+      "old_blob": "e5b4919994abd7e7ddcde0bb83665c224d9e53fe",
+      "old_sha256": "34065e8e1044d6f5292ed1b0ad4ecce653c00c28fe5514e43bddae49e58b39c5",
+      "old_lines": 101,
+      "blob": "f5b40e8f0c2af008aebf74066a8ef36d82c761fb",
+      "sha256": "fa10773294a616aae51226c5e6ea735a5b87727afca8ae2de81d3bc84094543f",
+      "lines": 101,
+      "public_headers_unchanged": true,
+      "imports_unchanged": true,
+      "bytes": 4926,
+      "diff": {
+        "removed": "simpa only [CanonicalGeometry.differenceJets, mixedDerivative, iteratedDeriv_zero, Prod.eta,",
+        "added": "simpa only [B, loss, CanonicalGeometry.differenceJets, mixedDerivative, iteratedDeriv_zero, Prod.eta,"
+      }
+    },
+    {
+      "name": "ActualReferenceNegativeEndpointData.lean",
+      "module": "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+      "path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean",
+      "old_blob": "7d2ff0fac9e08218174cd6870ba79b8529aa8a01",
+      "old_sha256": "f88706279e2902514c3bda2fdd618785c19d2be4f848d1eaf44758e2bdfd7f27",
+      "old_lines": 126,
+      "blob": "306df0ed5468912267708e86f7a9198f03655f0a",
+      "sha256": "7b594a18eec05800da02553065d0e7eb656242bad272eadbf1ec0aca52376b84",
+      "lines": 130,
+      "bytes": 6349
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualNegativeOppositeRootFields",
+      "name": "ActualNegativeOppositeRootFields.lean",
+      "path": "src/ContinuousFlexibility/Analysis/ActualNegativeOppositeRootFields.lean",
+      "old_blob": "5b0d8327ff2054595a95f053d2f5e82afeabc2dd",
+      "old_sha256": "c0650b4a9db498e63f79036a37b29d1b97dbee449a3209fbf32290456faa4626",
+      "old_lines": 256,
+      "blob": "2741a227986d3479a7ced38469e19133966a0d35",
+      "sha256": "ff81af86365dfcd2fa3c5eaa7b58e41dbbf49828cf4eab328dc8ed8101f44689",
+      "bytes": 12929,
+      "lines": 268
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalPrimitiveJetsNormalization",
+      "name": "CanonicalPrimitiveJetsNormalization.lean",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean",
+      "old_blob": "fcb1277422b54ea7f0dd44a618c8e154a797c947",
+      "old_sha256": "c0f106ce7b46c65cbf19cbd2815f43aa4deeda6cbde00b513e3e1b9c9cbbfe93",
+      "old_lines": 102,
+      "blob": "3d6b21ddcae9a7fb11cf365d1602add8a01f70cb",
+      "sha256": "8632dc69c7bbeff63f65e83965de4fa21ce494e175c45a7690b6988d51168ea2",
+      "bytes": 4716,
+      "lines": 97
+    },
+    {
+      "name": "PositiveReferenceFiniteRadialJets.lean",
+      "module": "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+      "path": "src/ContinuousFlexibility/Analysis/PositiveReferenceFiniteRadialJets.lean",
+      "old_blob": "db60546bb34349a040955ace14facdf5b13dfa0d",
+      "old_sha256": "a515668c71f3895edfda3d1183a5c275f3758799de0d7ebb68d439d33095bc66",
+      "old_lines": 167,
+      "blob": "9c5a4df8f5adf3a7d388c331d2b76c203f11ac84",
+      "sha256": "19226e6ea9763d0d842239e0bb4986e85d78d90949b9aae4677fd00ad1ad298e",
+      "lines": 169,
+      "bytes": 8513
+    },
+    {
+      "name": "RadialReferencePrincipalFormulas.lean",
+      "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+      "path": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+      "old_blob": "1292702418d040830307436014b493ae656ab469",
+      "old_sha256": "eb7f1e15a3e006b588861993260128b4d93045c27eedc159f75f2b3a8c5e0aa2",
+      "old_lines": 105,
+      "blob": "974c5b9bdcca6ca391d5c7f8d827deb43ba07130",
+      "sha256": "e0577144891075f5ab5a574763fe6ca9d83a4640969b90cd314d95a8fe69747c",
+      "lines": 108,
+      "bytes": 5355
+    },
+    {
+      "name": "WholePositiveReferenceGauge.lean",
+      "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+      "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean",
+      "old_blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+      "old_sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+      "old_lines": 171,
+      "blob": "9f240624bea6c815b9ceb64eb7eff050b4f51316",
+      "sha256": "89b8e10fee150ed5c3816f725f0bafa80352d4af749519948e3833ed0ca2af28",
+      "lines": 171,
+      "bytes": 8095
+    }
+  ],
+  "budget": {
+    "source_added": 19796,
+    "source_deleted": 6,
+    "generated_root_additions": 110,
+    "conservative_added": 19906,
+    "limit": 20000,
+    "remaining": 94,
+    "net": 16
+  },
+  "validation": {
+    "actual_GitHub_compare": {
+      "files": 112,
+      "added": 19796,
+      "deleted": 6,
+      "leanOnly": true,
+      "expected": {
+        "source_added": 19796,
+        "source_deleted": 6,
+        "generated_root_additions": 110,
+        "conservative_added": 19906,
+        "limit": 20000,
+        "remaining": 94,
+        "net": 16
+      }
+    },
+    "tree": {
+      "tree": "1d18001a5ed8b3ef7093f4fee6ac215494c7dfac",
+      "changed_blob_paths": 8,
+      "no_extra_or_deleted_paths": true,
+      "source_counts_unchanged": true,
+      "unchanged_controls": true
+    },
+    "provider_nodes": 755,
+    "import_edges_unchanged": true,
+    "all_public_headers_unchanged": true,
+    "limits_unchanged": true,
+    "local_source_mirror_verified": true,
+    "local_compile": false,
+    "local_generator": false
+  },
+  "peers": {
+    "root_alias": "00192e6551eb7f9807f707e62aa2ddf1759f380c",
+    "endpoint": "91ee25c5caddc252c407bd7f03d53ab5aa9ea994",
+    "audit_pair": "e6f554fa49aa8cb76b5378530844bcab4b4c2a01",
+    "positive_three": "d8bdf37ac09b7763887f5d57b79ffbb52dc107bd"
+  },
+  "rules_checked": "2026-11-12 21:22:09 UTC",
+  "main_rules_head": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "unchanged": [
+    "root",
+    "workflow",
+    "generator",
+    "toolchain",
+    "lockfile",
+    "resource_limits",
+    "all_selected_upstream_providers",
+    "all_public_contracts"
+  ],
+  "endpoint": "N04CoordinatesRealization and N04Coordinates remain open. This CI must pass quick checking and the full default build."
+}

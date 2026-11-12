@@ -1,0 +1,21 @@
+--- a/src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean
++++ b/src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean
+@@ -88,1 +88,2 @@
+-        exact congrArg Prod.snd (hopen.2.2.1 p hp))
++        have hs := congrArg (fun q : PolarPoint => q.2) (hopen.2.2.1 p hp)
++        exact hs)
+@@ -95,1 +96,2 @@
+-      (hreg 0).2.1.continuousAt.comp hzero
++      (hreg 0).2.1.continuousAt.comp
++        (f := fun p : PolarPoint => (p.1, (0 : ℝ))) (x := (c, θ)) hzero
+@@ -120,4 +122,6 @@
+-  · simpa only [σ, Bool.false_eq_true, ↓reduceIte, one_mul] using
+-      hsign.1 (c, 0) (hroot 0).1
+-  · simpa only [σ, Bool.true_eq_true, ↓reduceIte, neg_one_mul, neg_pos] using
+-      hsign.2 (c, 0) (hroot 0).1
++  · have hi' : (K.cutPair m).1 = k := hi
++    simpa only [σ, Bool.false_eq_true, ↓reduceIte, one_mul, hi'] using
++      hsign.1 (c, 0) (hroot 0).1
++  · have hi' : (K.cutPair m).2 = k := hi
++    simpa only [σ, ↓reduceIte, neg_one_mul, neg_pos, hi'] using
++      hsign.2 (c, 0) (hroot 0).1

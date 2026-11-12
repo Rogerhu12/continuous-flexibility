@@ -1,0 +1,106 @@
+{
+  "kind": "CI166 root proof-local alias repairs independent delta review",
+  "status": "PASS_STATIC_EXACT_TWO_LINE_REPAIR_NOT_COMPILED",
+  "reviewer": "quantitative_route",
+  "intended_backup_path": "quantitative/recovery/reviews/CI166RootAliasRepairsIndependentReview.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "actual_head": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+  "actual_tree": "d6e6c25c9742129f9a50a929914845940b001761",
+  "candidate_manifest": {
+    "sha256": "1cd090e47dceb70923992f29d3ed633ad4bfc4b2c0ce46cb5bfa58944af8442c",
+    "blob": "aab1120336755e1e12b0f7c39be5e96985b02783",
+    "bytes": 2595,
+    "lines": 56
+  },
+  "cached_log": {
+    "sha256": "e31097de662da4b2dac4b5bb1fb092fae301ca4ea78d03c8f529bccdb5165474",
+    "blob": "923cb8a210ecbde6676288e6e1e99e73096f8229",
+    "bytes": 144991,
+    "lines": 1218
+  },
+  "previous_elaboration_repair_review": {
+    "sha256": "cc9a86de415c054098761c83c58bb9639d4e986effb3738218c8bbd78555ea51",
+    "blob": "50f4eac5e564f9275c588198c3ed1ccc472f3aa6",
+    "bytes": 10630,
+    "lines": 182
+  },
+  "files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean",
+      "before": {
+        "sha256": "59a80a8100cb69b80d010175760bfb073bd91f03813d02c2ea72671329a1ebc5",
+        "blob": "5f8c8a6087e0446d2c54ef35b532b404f0b092f2",
+        "bytes": 5514,
+        "lines": 118
+      },
+      "after": {
+        "sha256": "cf481c45cf6ab2b1d5c1b3e9b9588bd3189291fe79e122a60cf355c4a07a1152",
+        "blob": "4a0f2095b9c16558d889f814750f1fa648590e52",
+        "bytes": 5518,
+        "lines": 118
+      },
+      "exact_replacement": {
+        "removed": "simpa only [Real.rpow_zero, mul_one] using hHb m",
+        "added": "simpa only [CH, Real.rpow_zero, mul_one] using hHb m"
+      },
+      "full_source_read": true,
+      "complete_public_headers": [
+        "theorem n04Coordinates_reference_canonicalLengthInverse_envelope\n    (href : CanonicalGeometry.ReferenceJets D T S C L K) :\n    ∃ B : ℝ, 0 < B ∧ ∀ m,\n      |(K.right m - K.left m)⁻¹| ≤ B * T.E0 (T.sample (K.cell m)) ^ B := by",
+        "theorem n04Coordinates_unitAtom_absolute_envelope\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (hfloor : ∀ m, 1 ≤ T.E0 (T.sample (K.cell m)))\n    (href : CanonicalGeometry.ReferenceJets D T S C L K)\n    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε) :\n    ∃ loss : ℕ, ∀ s : ℕ, ∃ A B : ℝ, 0 < A ∧ 0 < B ∧\n      ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m v p,\n        p ∈ CanonicalGeometry.unitStrip → ∀ i j : ℕ, i + j ≤ s →\n          |mixedDerivative i j\n            (CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m v) p| ≤\n            A * T.E0 (T.sample (K.cell m)) ^ B *\n              (1 + CanonicalGeometry.parameterGrading S (s + loss) z) := by"
+      ],
+      "all_other_bytes_identical": true,
+      "imports_options_resources_identical": true
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean",
+      "before": {
+        "sha256": "34065e8e1044d6f5292ed1b0ad4ecce653c00c28fe5514e43bddae49e58b39c5",
+        "blob": "e5b4919994abd7e7ddcde0bb83665c224d9e53fe",
+        "bytes": 4917,
+        "lines": 101
+      },
+      "after": {
+        "sha256": "fa10773294a616aae51226c5e6ea735a5b87727afca8ae2de81d3bc84094543f",
+        "blob": "f5b40e8f0c2af008aebf74066a8ef36d82c761fb",
+        "bytes": 4926,
+        "lines": 101
+      },
+      "exact_replacement": {
+        "removed": "simpa only [CanonicalGeometry.differenceJets, mixedDerivative, iteratedDeriv_zero, Prod.eta,",
+        "added": "simpa only [B, loss, CanonicalGeometry.differenceJets, mixedDerivative, iteratedDeriv_zero, Prod.eta,"
+      },
+      "full_source_read": true,
+      "complete_public_headers": [
+        "theorem n04Coordinates_currentAtoms_uniformly_close\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}\n    {base : ℕ} {ε δ : ℝ}\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)\n    (hε : 0 < ε) (hδ : 0 < δ) :\n    ∃ base' : ℕ, base ≤ base' ∧ ∃ ε' : ℝ, 0 < ε' ∧ ε' ≤ ε ∧\n      sectorNeighborhood S base' ε' ε' ⊆ sectorNeighborhood S base ε ε ∧\n      CanonicalGeometry.CurrentJets D T S C L K base' ε' ∧\n      ∀ z ∈ sectorNeighborhood S base' ε' ε', ∀ m v p,\n        p ∈ CanonicalGeometry.unitStrip →\n          |CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m v p -\n            CanonicalGeometry.atom D T S C L K (C.referenceState, 0) m v p| < δ := by"
+      ],
+      "all_other_bytes_identical": true,
+      "imports_options_resources_identical": true
+    }
+  ],
+  "findings": [
+    {
+      "file": "CanonicalReferenceCurrentAbsoluteJets",
+      "actual_error": "67:4; source RHS is hheight.choose, target RHS is its local let CH.",
+      "repair": "Adding CH to this exact simpa unfolds only that witness alias. The same hHb m and same H^(3/4) bound remain, with no re-choice or new premise."
+    },
+    {
+      "file": "CanonicalCurrentUniformCloseness",
+      "actual_error": "95:4; source RHS contains chosen B and chosen loss while the target uses local B/loss.",
+      "repair": "Adding B and loss to this exact simpa unfolds their definitions to the identical existing hdiff 0 / hcur.2.1 choice. All sample, state, function, grading and radius expressions remain unchanged."
+    }
+  ],
+  "checks": {
+    "two_complete_final_sources_and_actual_preimages_read": true,
+    "all_three_full_public_headers_byte_equal": true,
+    "two_exact_replacements_reverse_to_actual_base": true,
+    "no_import_option_resource_change": true,
+    "net_added_lines": 0,
+    "preserve_transparency_true": true,
+    "preserve_actual_same_tower": true,
+    "no_lean_or_elaboration_run": true,
+    "no_ci_query_or_log_redownload": true,
+    "no_source_active_index_refs_mutation": true
+  },
+  "metadata_note": "Candidate log.lines=1219 counts the trailing empty split entry; the exact 144991-byte cached content has 1218 LF-terminated lines. Blob and SHA match exactly. This counting convention has no source or diagnostic impact.",
+  "conclusion": "The two additions expose precisely the aliases shown by the complete cached CI166 type mismatches. Accept exact candidate bytes for the next CI; successful elaboration remains unverified."
+}

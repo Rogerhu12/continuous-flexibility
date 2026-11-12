@@ -1,0 +1,134 @@
+{
+  "schema": "n04-owned-reviewed-repair-v1",
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "owner": "proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "backup_path": "positive/repair166/CI166PositiveThreeRepairsReviewedManifest.json",
+  "baseline": {
+    "head": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+    "tree": "d6e6c25c9742129f9a50a929914845940b001761",
+    "tree_evidence": "Independent peer exact-tree verification",
+    "ci_round": 166
+  },
+  "selected_candidate": {
+    "path": "positive/repair166/CI166PositiveThreeRepairsCandidateManifest.json",
+    "blob": "329c2096bbee77bf557213ff1e621d9db40d2e7b",
+    "sha256": "89de92748d418b595b1a60d77886ff11e3fe374c6677a6c2d4ec160d3be10e85",
+    "bytes": 26093
+  },
+  "independent_review": {
+    "path": "quantitative/recovery/reviews/CI166PositiveThreeRepairsIndependentReview.json",
+    "blob": "d8bdf37ac09b7763887f5d57b79ffbb52dc107bd",
+    "sha256": "dfc7701f68dbe557c5495c81f10b40017a52bfc37c7d9b6ad6124ded00747161",
+    "utf8_bytes": 17696,
+    "status": "PASS_STATIC_FULL_SOURCE_AND_EXACT_REPAIR_REVIEW_NOT_COMPILED",
+    "read_in_full_and_sha_verified": true
+  },
+  "sources": [
+    {
+      "module": "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+      "path": "src/ContinuousFlexibility/Analysis/PositiveReferenceFiniteRadialJets.lean",
+      "before": {
+        "blob": "db60546bb34349a040955ace14facdf5b13dfa0d",
+        "sha256": "a515668c71f3895edfda3d1183a5c275f3758799de0d7ebb68d439d33095bc66",
+        "lines": 167
+      },
+      "selected": {
+        "blob": "9c5a4df8f5adf3a7d388c331d2b76c203f11ac84",
+        "sha256": "19226e6ea9763d0d842239e0bb4986e85d78d90949b9aae4677fd00ad1ad298e",
+        "lines": 169,
+        "utf8_bytes": 8513,
+        "ends_with_newline": true
+      },
+      "diff": {
+        "blob": "21c7d7098a8f3a78777b14324cc0b374a8e6bb46",
+        "sha256": "0b22563484e673175ca5139bae8bda7ed7f83663788011a4548020ef61d7f094",
+        "added": 3,
+        "deleted": 1,
+        "net": 2
+      },
+      "public_header_count": 7,
+      "public_headers_preserved": true,
+      "imports_options_unchanged": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+      "path": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+      "before": {
+        "blob": "1292702418d040830307436014b493ae656ab469",
+        "sha256": "eb7f1e15a3e006b588861993260128b4d93045c27eedc159f75f2b3a8c5e0aa2",
+        "lines": 105
+      },
+      "selected": {
+        "blob": "974c5b9bdcca6ca391d5c7f8d827deb43ba07130",
+        "sha256": "e0577144891075f5ab5a574763fe6ca9d83a4640969b90cd314d95a8fe69747c",
+        "lines": 108,
+        "utf8_bytes": 5355,
+        "ends_with_newline": true
+      },
+      "diff": {
+        "blob": "9e5af12c98914dca0bfcf811b644fe11bc3d06d4",
+        "sha256": "dc64c83188e82813e9cd9dc8a3f8167d18ee6c766db94cbca59b1387bbea734e",
+        "added": 6,
+        "deleted": 3,
+        "net": 3
+      },
+      "public_header_count": 3,
+      "public_headers_preserved": true,
+      "imports_options_unchanged": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+      "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean",
+      "before": {
+        "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+        "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+        "lines": 171
+      },
+      "selected": {
+        "blob": "9f240624bea6c815b9ceb64eb7eff050b4f51316",
+        "sha256": "89b8e10fee150ed5c3816f725f0bafa80352d4af749519948e3833ed0ca2af28",
+        "lines": 171,
+        "utf8_bytes": 8095,
+        "ends_with_newline": true
+      },
+      "diff": {
+        "blob": "fdd7dd6efa20c55f8bcb93a471efea5ebd47cff5",
+        "sha256": "3ae1444a6b5bd1e5c764878601d1ebf296589620d0e1b131c4da5c03de970bb5",
+        "added": 10,
+        "deleted": 10,
+        "net": 0
+      },
+      "public_header_count": 8,
+      "public_headers_preserved": true,
+      "imports_options_unchanged": true
+    }
+  ],
+  "diagnostics": {
+    "blob": "7b37c96ce91717905335f28cb6898aa39db2b91a",
+    "sha256": "efd55bad3f26692c8ed92f2d1d1fa1bdc6e4de4bc1cc8d8b85db726e202d4764",
+    "bytes": 5056,
+    "backup_path": "positive/repair166/CI166PositiveThreeRepairsDiagnostics.json",
+    "raw_log_blob": "923cb8a210ecbde6676288e6e1e99e73096f8229",
+    "raw_log_sha256": "e31097de662da4b2dac4b5bb1fb092fae301ca4ea78d03c8f529bccdb5165474",
+    "unique_errors": 8,
+    "limitation": "Workflow head400 stops after Gauge right_inverse context. Gauge lines117/119/122/168 have exact summary diagnostics but no preserved detailed goal context; repairs for these use the complete actual source and its genuine providers."
+  },
+  "verification": {
+    "exact_source_server_readback": true,
+    "all_eight_replacements_reversed_exactly": true,
+    "all_18_complete_public_header_hashes_match_independent_peer": true,
+    "added": 19,
+    "deleted": 14,
+    "net_added": 5,
+    "local_lean_or_elaboration_run": false,
+    "active_index_refs_ci_modified": false,
+    "new_ci_log_downloaded": false
+  },
+  "preservation": "The original files are already retained by the immutable active baseline commit. Repaired files are immutable Git blobs for parent-controlled integration; do not duplicate Lean repair archives in the conservative source budget. Candidate, diff, diagnostics, peer and owner metadata may be backed up.",
+  "limitations": [
+    "This is static independent review, not successful Lean compilation or a full-green CI certificate.",
+    "Detailed cached goal contexts exist for FiniteRadial45, Radial98 and Gauge55/59. The workflow head400 truncation leaves only error headers for Gauge117/119/122/168; the latter repairs are justified here by full actual source and exact provider contracts.",
+    "No broader main1ece provider migration, endpoint fixed-base producer, CurrentJets conclusion or final N04 theorem is certified by this receipt."
+  ]
+}

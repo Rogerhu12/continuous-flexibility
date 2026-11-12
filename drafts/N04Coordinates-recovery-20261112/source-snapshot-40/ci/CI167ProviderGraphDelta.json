@@ -1,0 +1,173 @@
+{
+  "kind": "exact_eight_node_fingerprint_delta",
+  "baseline_graph": {
+    "commit": "ccf9d09d10d7e8b581e18a0fa41f80dc10f22a4f",
+    "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-39/ci/CI166CombinedLeafProviders.json",
+    "blob": "b3401fcf5b18c0ea5704660c0862ccd0b361c8ea"
+  },
+  "head": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+  "total_nodes": 755,
+  "unchanged_nodes": 747,
+  "all_imports_edges_unchanged": true,
+  "replacements": {
+    "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceCurrentAbsoluteJets.lean",
+      "sha256": "cf481c45cf6ab2b1d5c1b3e9b9588bd3189291fe79e122a60cf355c4a07a1152",
+      "blob": "4a0f2095b9c16558d889f814750f1fa648590e52",
+      "bytes": 5518,
+      "lines": 118,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aGeometryJetBounds",
+        "ContinuousFlexibility.Analysis.MaterialSampleBounds"
+      ],
+      "source_ref": "CI167_CANDIDATE_SOURCE_REPAIR",
+      "target_path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean",
+      "preimage": {
+        "commit": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+        "blob": "5f8c8a6087e0446d2c54ef35b532b404f0b092f2",
+        "sha256": "59a80a8100cb69b80d010175760bfb073bd91f03813d02c2ea72671329a1ebc5",
+        "lines": 118
+      }
+    },
+    "ContinuousFlexibility.Analysis.CanonicalCurrentUniformCloseness": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/current-uniform-zero-jet/CanonicalCurrentUniformCloseness.lean",
+      "sha256": "fa10773294a616aae51226c5e6ea735a5b87727afca8ae2de81d3bc84094543f",
+      "blob": "f5b40e8f0c2af008aebf74066a8ef36d82c761fb",
+      "bytes": 4926,
+      "lines": 101,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N07aNeighborhood",
+        "ContinuousFlexibility.Analysis.MaterialSampleBounds"
+      ],
+      "source_ref": "CI167_CANDIDATE_SOURCE_REPAIR",
+      "target_path": "src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean",
+      "preimage": {
+        "commit": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+        "blob": "e5b4919994abd7e7ddcde0bb83665c224d9e53fe",
+        "sha256": "34065e8e1044d6f5292ed1b0ad4ecce653c00c28fe5514e43bddae49e58b39c5",
+        "lines": 101
+      }
+    },
+    "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData": {
+      "kind": "held41_prefix",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeEndpointData.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean",
+      "sha256": "7b594a18eec05800da02553065d0e7eb656242bad272eadbf1ec0aca52376b84",
+      "blob": "306df0ed5468912267708e86f7a9198f03655f0a",
+      "bytes": 6349,
+      "lines": 130,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+        "ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary",
+        "ContinuousFlexibility.Analysis.N04bActualAtlasCuts"
+      ],
+      "source_ref": "CI167_CANDIDATE_SOURCE_REPAIR",
+      "preimage": {
+        "commit": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+        "blob": "7d2ff0fac9e08218174cd6870ba79b8529aa8a01",
+        "sha256": "f88706279e2902514c3bda2fdd618785c19d2be4f848d1eaf44758e2bdfd7f27",
+        "lines": 126
+      }
+    },
+    "ContinuousFlexibility.Analysis.ActualNegativeOppositeRootFields": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/opposite-root-div-eq-iff/ActualNegativeOppositeRootFields.lean",
+      "sha256": "ff81af86365dfcd2fa3c5eaa7b58e41dbbf49828cf4eab328dc8ed8101f44689",
+      "blob": "2741a227986d3479a7ced38469e19133966a0d35",
+      "bytes": 12929,
+      "lines": 268,
+      "imports": [
+        "ContinuousFlexibility.Analysis.RootTravelOppositeCoordinates",
+        "ContinuousFlexibility.Analysis.N04bActualAtlasGerms"
+      ],
+      "source_ref": "CI167_CANDIDATE_SOURCE_REPAIR",
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeOppositeRootFields.lean",
+      "preimage": {
+        "commit": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+        "blob": "5b0d8327ff2054595a95f053d2f5e82afeabc2dd",
+        "sha256": "c0650b4a9db498e63f79036a37b29d1b97dbee449a3209fbf32290456faa4626",
+        "lines": 256
+      }
+    },
+    "ContinuousFlexibility.Analysis.CanonicalPrimitiveJetsNormalization": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalPrimitiveJetsNormalization.lean",
+      "sha256": "8632dc69c7bbeff63f65e83965de4fa21ce494e175c45a7690b6988d51168ea2",
+      "blob": "3d6b21ddcae9a7fb11cf365d1602add8a01f70cb",
+      "bytes": 4716,
+      "lines": 97,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalJetNormalization",
+        "ContinuousFlexibility.Analysis.N07aGeometryJetBounds",
+        "ContinuousFlexibility.Analysis.SolveReturnEquations"
+      ],
+      "source_ref": "CI167_CANDIDATE_SOURCE_REPAIR",
+      "target_path": "src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean",
+      "preimage": {
+        "commit": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+        "blob": "fcb1277422b54ea7f0dd44a618c8e154a797c947",
+        "sha256": "c0f106ce7b46c65cbf19cbd2815f43aa4deeda6cbde00b513e3e1b9c9cbbfe93",
+        "lines": 102
+      }
+    },
+    "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets": {
+      "kind": "held41_prefix",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/radial-reference-bool/PositiveReferenceFiniteRadialJets.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/PositiveReferenceFiniteRadialJets.lean",
+      "sha256": "19226e6ea9763d0d842239e0bb4986e85d78d90949b9aae4677fd00ad1ad298e",
+      "blob": "9c5a4df8f5adf3a7d388c331d2b76c203f11ac84",
+      "bytes": 8513,
+      "lines": 169,
+      "imports": [
+        "ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative",
+        "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+      ],
+      "source_ref": "CI167_CANDIDATE_SOURCE_REPAIR",
+      "preimage": {
+        "commit": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+        "blob": "db60546bb34349a040955ace14facdf5b13dfa0d",
+        "sha256": "a515668c71f3895edfda3d1183a5c275f3758799de0d7ebb68d439d33095bc66",
+        "lines": 167
+      }
+    },
+    "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas": {
+      "kind": "held41_prefix",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePrincipalFormulas.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+      "sha256": "e0577144891075f5ab5a574763fe6ca9d83a4640969b90cd314d95a8fe69747c",
+      "blob": "974c5b9bdcca6ca391d5c7f8d827deb43ba07130",
+      "bytes": 5355,
+      "lines": 108,
+      "imports": [
+        "ContinuousFlexibility.Analysis.PositiveReferenceCylinder",
+        "ContinuousFlexibility.Analysis.CoordinateOperatorConstruction",
+        "ContinuousFlexibility.Radial.RadialHeight"
+      ],
+      "source_ref": "CI167_CANDIDATE_SOURCE_REPAIR",
+      "preimage": {
+        "commit": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+        "blob": "1292702418d040830307436014b493ae656ab469",
+        "sha256": "eb7f1e15a3e006b588861993260128b4d93045c27eedc159f75f2b3a8c5e0aa2",
+        "lines": 105
+      }
+    },
+    "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge": {
+      "kind": "held41_prefix",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGauge.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean",
+      "sha256": "89b8e10fee150ed5c3816f725f0bafa80352d4af749519948e3833ed0ca2af28",
+      "blob": "9f240624bea6c815b9ceb64eb7eff050b4f51316",
+      "bytes": 8095,
+      "lines": 171,
+      "imports": [
+        "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+      ],
+      "source_ref": "CI167_CANDIDATE_SOURCE_REPAIR",
+      "preimage": {
+        "commit": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+        "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+        "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+        "lines": 171
+      }
+    }
+  },
+  "activation": "CI167_PENDING_NO_SUCCESS_CLAIM"
+}

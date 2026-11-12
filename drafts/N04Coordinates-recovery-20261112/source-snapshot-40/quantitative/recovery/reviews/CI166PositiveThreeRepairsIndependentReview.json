@@ -1,0 +1,384 @@
+{
+  "schema": "n04-independent-source-review-v1",
+  "status": "PASS_STATIC_FULL_SOURCE_AND_EXACT_REPAIR_REVIEW_NOT_COMPILED",
+  "reviewer": "quantitative_route",
+  "owner": "proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "backup_path": "quantitative/recovery/reviews/CI166PositiveThreeRepairsIndependentReview.json",
+  "baseline": {
+    "head": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+    "tree": "d6e6c25c9742129f9a50a929914845940b001761",
+    "ci": 166,
+    "last_full_green": "c796387fb555392501c81f5b8bd834936251516c"
+  },
+  "candidate_manifest": {
+    "sha256": "89de92748d418b595b1a60d77886ff11e3fe374c6677a6c2d4ec160d3be10e85",
+    "blob": "329c2096bbee77bf557213ff1e621d9db40d2e7b",
+    "bytes": 26093,
+    "lines": 398,
+    "backup_path": "positive/repair166/CI166PositiveThreeRepairsCandidateManifest.json"
+  },
+  "cached_diagnostics": {
+    "raw_log": {
+      "blob": "923cb8a210ecbde6676288e6e1e99e73096f8229",
+      "sha256": "e31097de662da4b2dac4b5bb1fb092fae301ca4ea78d03c8f529bccdb5165474",
+      "bytes": 144991,
+      "lines": 1218
+    },
+    "extraction": {
+      "sha256": "efd55bad3f26692c8ed92f2d1d1fa1bdc6e4de4bc1cc8d8b85db726e202d4764",
+      "blob": "7b37c96ce91717905335f28cb6898aa39db2b91a",
+      "bytes": 5056,
+      "lines": 66
+    },
+    "unique_error_locations": 8,
+    "limitation": "Workflow head400 stops after Gauge right_inverse context. Gauge lines117/119/122/168 have exact summary diagnostics but no preserved detailed goal context; repairs for these use the complete actual source and its genuine providers.",
+    "no_new_ci_query": true
+  },
+  "sources": [
+    {
+      "module": "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+      "target_path": "src/ContinuousFlexibility/Analysis/PositiveReferenceFiniteRadialJets.lean",
+      "before": {
+        "sha256": "a515668c71f3895edfda3d1183a5c275f3758799de0d7ebb68d439d33095bc66",
+        "blob": "db60546bb34349a040955ace14facdf5b13dfa0d",
+        "bytes": 8416,
+        "lines": 167
+      },
+      "after": {
+        "sha256": "19226e6ea9763d0d842239e0bb4986e85d78d90949b9aae4677fd00ad1ad298e",
+        "blob": "9c5a4df8f5adf3a7d388c331d2b76c203f11ac84",
+        "bytes": 8513,
+        "lines": 169
+      },
+      "diff": {
+        "sha256": "0b22563484e673175ca5139bae8bda7ed7f83663788011a4548020ef61d7f094",
+        "blob": "21c7d7098a8f3a78777b14324cc0b374a8e6bb46",
+        "bytes": 758,
+        "lines": 13
+      },
+      "added": 3,
+      "deleted": 1,
+      "complete_public_headers": [
+        {
+          "name": "radialEndpointTaylorSlice",
+          "sha256": "23d0a33208c9068259e1beae3012048f0c8540f5f695a07bc5515a8dc93f4601",
+          "before_exact": true,
+          "after_exact": true
+        },
+        {
+          "name": "contDiff_radialEndpointTaylorSlice",
+          "sha256": "15bc14d928c16288091c8f294de5221ddb7da931d9091c75aaca62d848b9e132",
+          "before_exact": true,
+          "after_exact": true
+        },
+        {
+          "name": "radialEndpointTaylorSlice_value",
+          "sha256": "a1c4b189ea35c292bf76d3b9f0d9055478c32cc7849a2d4ad32dbe18d34c4b02",
+          "before_exact": true,
+          "after_exact": true
+        },
+        {
+          "name": "radialEndpointTaylorSlice_deriv",
+          "sha256": "b3e5a532be6d9ff4a2450c3d50fce847c1b66d0a1a321081bf327c007975c138",
+          "before_exact": true,
+          "after_exact": true
+        },
+        {
+          "name": "radialEndpointTaylorSlice_lift",
+          "sha256": "67f4236c5b2fffd9dcb2c5b98752aa20fd7e2b84f33d287b36d7b86c90d988a3",
+          "before_exact": true,
+          "after_exact": true
+        },
+        {
+          "name": "radialEndpointTaylorSlice_fullJets",
+          "sha256": "bd86c45313894f2419d32594de8a2a55618c7229477d14d19fdf375f4b9ceeb5",
+          "before_exact": true,
+          "after_exact": true
+        },
+        {
+          "name": "exists_positiveReferenceFiniteRadialJets",
+          "sha256": "7392504d4f1ce3c4d3db68d2fc131a3e0c25357aa1231dda4d285e18976c2272",
+          "before_exact": true,
+          "after_exact": true
+        }
+      ],
+      "imports": [
+        "import ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative",
+        "import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+      ],
+      "options": [
+        "set_option backward.isDefEq.respectTransparency false"
+      ],
+      "actual_baseline_path_blob_match": true,
+      "all_exact_replacements_forward_and_reverse": true,
+      "complete_before_and_after_read": true,
+      "scope": "Only the eight frozen proof substitutions; all other bytes match the actual preimage."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+      "target_path": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+      "before": {
+        "sha256": "eb7f1e15a3e006b588861993260128b4d93045c27eedc159f75f2b3a8c5e0aa2",
+        "blob": "1292702418d040830307436014b493ae656ab469",
+        "bytes": 5250,
+        "lines": 105
+      },
+      "after": {
+        "sha256": "e0577144891075f5ab5a574763fe6ca9d83a4640969b90cd314d95a8fe69747c",
+        "blob": "974c5b9bdcca6ca391d5c7f8d827deb43ba07130",
+        "bytes": 5355,
+        "lines": 108
+      },
+      "diff": {
+        "sha256": "dc64c83188e82813e9cd9dc8a3f8167d18ee6c766db94cbca59b1387bbea734e",
+        "blob": "9e5af12c98914dca0bfcf811b644fe11bc3d06d4",
+        "bytes": 838,
+        "lines": 17
+      },
+      "added": 6,
+      "deleted": 3,
+      "complete_public_headers": [
+        {
+          "name": "coordinatePrincipalDensity_radial_cylinder",
+          "sha256": "bc9dca0e9f199fcd5b72722f4d31cc8d94881c42143969ea6b99ba1424180fd7",
+          "before_exact": true,
+          "after_exact": true
+        },
+        {
+          "name": "divergenceOperator_radial_height_of_coefficient_germs",
+          "sha256": "b74c475dee316c39fe0355e1c79e3e3c813d25f6192fc64371d91c4c9fa981ec",
+          "before_exact": true,
+          "after_exact": true
+        },
+        {
+          "name": "inverseChartPotential_radial_cylinder",
+          "sha256": "f66f1cfc46bf707dac1e0e345c4f95c44fed1d09d208fc8e179a08bad6a5f7f8",
+          "before_exact": true,
+          "after_exact": true
+        }
+      ],
+      "imports": [
+        "import ContinuousFlexibility.Analysis.PositiveReferenceCylinder",
+        "import ContinuousFlexibility.Analysis.CoordinateOperatorConstruction",
+        "import ContinuousFlexibility.Radial.RadialHeight"
+      ],
+      "options": [],
+      "actual_baseline_path_blob_match": true,
+      "all_exact_replacements_forward_and_reverse": true,
+      "complete_before_and_after_read": true,
+      "scope": "Only the eight frozen proof substitutions; all other bytes match the actual preimage."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+      "target_path": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean",
+      "before": {
+        "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+        "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+        "bytes": 8097,
+        "lines": 171
+      },
+      "after": {
+        "sha256": "89b8e10fee150ed5c3816f725f0bafa80352d4af749519948e3833ed0ca2af28",
+        "blob": "9f240624bea6c815b9ceb64eb7eff050b4f51316",
+        "bytes": 8095,
+        "lines": 171
+      },
+      "diff": {
+        "sha256": "3ae1444a6b5bd1e5c764878601d1ebf296589620d0e1b131c4da5c03de970bb5",
+        "blob": "fdd7dd6efa20c55f8bcb93a471efea5ebd47cff5",
+        "bytes": 2565,
+        "lines": 48
+      },
+      "added": 10,
+      "deleted": 10,
+      "complete_public_headers": [
+        {
+          "name": "wholePositiveReferenceGaugeChart",
+          "sha256": "1acdea927109aa70aff0a8d2817876c982fd9f714a332a032a9231f0184497d0",
+          "before_exact": true,
+          "after_exact": true
+        },
+        {
+          "name": "wholePositiveReferenceGaugeInverse",
+          "sha256": "7fc6fb428f55cfcd4cd71bfbfc0b96cd47d01a32e3d826a9401c4ace8deee0b6",
+          "before_exact": true,
+          "after_exact": true
+        },
+        {
+          "name": "wholePositiveReferenceGaugeHeight",
+          "sha256": "d8ad08a99362b5a2d3c4036aed3f5972eaf0058e39960aa818c5cd4f16094eca",
+          "before_exact": true,
+          "after_exact": true
+        },
+        {
+          "name": "wholePositiveReferenceGaugeHeight_eq",
+          "sha256": "164bca44551266ff6fa172aeafca30370b61579438f59dfe6c8411f98f35b57c",
+          "before_exact": true,
+          "after_exact": true
+        },
+        {
+          "name": "wholePositiveReferenceGauge_geometry",
+          "sha256": "bb18cf06fb6d9e05421f132be449c322e7f0276903d860fddec310afd211606c",
+          "before_exact": true,
+          "after_exact": true
+        },
+        {
+          "name": "wholePositiveReferenceGauge_middle_germs",
+          "sha256": "d34c981782a26801c9acea242c902515811ac7a5675cce00d6786762efd2a6d6",
+          "before_exact": true,
+          "after_exact": true
+        },
+        {
+          "name": "wholePositiveReferenceGauge_reference",
+          "sha256": "a0c3681eb6ca301ddfb59b57becbb3273c3fcac0d43afc8defede91c78041a7a",
+          "before_exact": true,
+          "after_exact": true
+        },
+        {
+          "name": "wholePositiveReferenceGauge_relative_fields",
+          "sha256": "ce8c387019b4709e29859d5a4243efcbd6c7fc4c9cd41fdbd01bb0a711a581e5",
+          "before_exact": true,
+          "after_exact": true
+        }
+      ],
+      "imports": [
+        "import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+      ],
+      "options": [],
+      "actual_baseline_path_blob_match": true,
+      "all_exact_replacements_forward_and_reverse": true,
+      "complete_before_and_after_read": true,
+      "scope": "Only the eight frozen proof substitutions; all other bytes match the actual preimage."
+    }
+  ],
+  "actual_provider_reads": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean",
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+      "sha256": "75ced3f23a0d0ff26ccae06abb8695ca6af7d59322daa975d04bacd53a0caddd",
+      "blob": "37c324a711fd04efbc92d5df436ea670ce0dbfd9",
+      "bytes": 7887,
+      "lines": 169,
+      "scope": "Complete exact source read; source blob verified against the complete immutable CI166 Git tree."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/OneSidedBoundaryTaylorRepresentative.lean",
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+      "sha256": "50d11b8070524604511c037a38d04be1517f5802548d963ac93184c165787b76",
+      "blob": "3a3cfa0ce1db7be51420bcaa2ceb6dedd4e86855",
+      "bytes": 6182,
+      "lines": 130,
+      "scope": "Complete exact source read; source blob verified against the complete immutable CI166 Git tree."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/PositiveReferenceCylinder.lean",
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+      "sha256": "6ececb96b06c704d8672c58cbe2b395bf3ce8967a667b046cd09466249b5c4de",
+      "blob": "c1c59b1c3240feeec1539a65ce0c8a8a4ec7ba48",
+      "bytes": 5441,
+      "lines": 128,
+      "scope": "Complete exact source read; source blob verified against the complete immutable CI166 Git tree."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CoordinateOperatorConstruction.lean",
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+      "sha256": "ffbecb5ae9d0d9e40a5fd193592dde632989d3c4fb2382b118be5180f9d7f1c1",
+      "blob": "aef71ea652edabf9d9c4788e2c6aba6780f6c1fe",
+      "bytes": 3769,
+      "lines": 76,
+      "scope": "Complete exact source read; source blob verified against the complete immutable CI166 Git tree."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Radial/RadialHeight.lean",
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+      "sha256": "c08c761f0560d5039bfbd50969fb241c0279bb95562c3ebb6cc0fc93697e860e",
+      "blob": "8b8dfa86c48003f5b492049d8c2aa38e09f68263",
+      "bytes": 9987,
+      "lines": 202,
+      "scope": "Complete exact source read; source blob verified against the complete immutable CI166 Git tree."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholePositiveCanonicalFields.lean",
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+      "sha256": "c26cd518553a29e68647291f463bbd0b271500dd9620ea0735280f2d0a8773b2",
+      "blob": "0fb940e74988b8ccf40f317447993147847713eb",
+      "bytes": 8391,
+      "lines": 169,
+      "scope": "Complete exact source read; source blob verified against the complete immutable CI166 Git tree."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholePositiveChartGeometry.lean",
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+      "sha256": "b0f9f540c1d8bcdf0e5414b487f15df378e3b36e369697c012f8bc28bbba892c",
+      "blob": "118c0019a784242b74c880166ee4dedc43e1dede",
+      "bytes": 7224,
+      "lines": 146,
+      "scope": "Complete exact source read; source blob verified against the complete immutable CI166 Git tree."
+    }
+  ],
+  "pinned_api": {
+    "repository": "leanprover-community/mathlib4",
+    "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "path": "Mathlib/Topology/Defs/Filter.lean",
+    "sha256": "3b2ffc8154a531b4f0d3b36aa75ee08635c0df31884ba83baf1b0b0283c13748",
+    "blob": "343fd3e5f576a8e0f0f040eb2df8e5c309106655",
+    "bytes": 15801,
+    "lines": 359,
+    "scope": "ContinuousAt definition at lines 179-180 read directly: Tendsto f (nhds x) (nhds (f x)); no claim of a new full-file mathlib review."
+  },
+  "proof_review": [
+    {
+      "module": "PositiveReferenceFiniteRadialJets",
+      "result": "PASS",
+      "details": [
+        "The new typed change exposes exactly the scalar function x ↦ oneSidedBoundaryTaylorRepresentative n c f (x, 0) under deriv. This is the defining lambda of the original radialEndpointTaylorSlice, not a different representative.",
+        "The unchanged radialBoundaryJet_oneSidedBoundaryTaylorRepresentative theorem specializes k=1 from hn and theta=0. Reducing radialBoundaryJet and iteratedDeriv_one gives exactly the changed target.",
+        "The global smoothness, original-side radiality, finite full jets and actual positive interpolation factory proof remain byte identical. n, hn, c, endpoint data and the single chosen interpolation are unchanged."
+      ]
+    },
+    {
+      "module": "RadialReferencePrincipalFormulas",
+      "result": "PASS",
+      "details": [
+        "The actual inverseChartPotential formula evaluates height, divergence and Jacobian at the literal positiveReferenceCylinderInverse Y p.",
+        "The staged rw applies the already proved hdiv and actual planeJacobian_positiveReferenceCylinderChart equality before exposing that inverse point. Both equalities refer to the same displayed point and original hY.",
+        "The typed change then reduces the actual inverse pair to (invFun Y p.1, p.2). abs_of_pos uses the original hYpos to remove precisely the denominator absolute value.",
+        "Both earlier principal-density and divergence proofs and all three complete public headers, including the internal let B, remain byte identical."
+      ]
+    },
+    {
+      "module": "WholePositiveReferenceGauge",
+      "result": "PASS",
+      "details": [
+        "The left-inverse reduction uses H0.left_inverse (sigma p) then H.left_inverse p; the right-inverse reduction uses H.right_inverse (chi p) then H0.right_inverse p. These are the actual globally supplied inverse equations with the correct composition order.",
+        "The two middle-germ branches add only id_eq to reduce the original sigma p = id p witness. The original height_middle_germ is still the supplied relative-height witness at the same point.",
+        "The hchi proof exposes ContinuousAt as its exact Tendsto definition at psi (x, theta), then transports its target neighborhood via the original H0.left_inverse (x, theta). No new inverse or neighborhood is chosen.",
+        "The relative-height proof first uses the same-file public wholePositiveReferenceGaugeHeight_eq and the original sigma(tau p)=p. The resulting scalar identity h0(p)/(h0(p)/Q(p))=Q(p) retains Q(p)=0 as a separate branch; the nonzero branch uses precisely hh0 p and hQ.",
+        "All smoothness, Jacobian, true physical/canonical range, periodicity/reflection and reference-member arguments remain unchanged outside those six explicit repair blocks."
+      ]
+    }
+  ],
+  "mechanical_verification": {
+    "source_count": 3,
+    "complete_public_header_count": 18,
+    "exact_replacement_count": 8,
+    "added": 19,
+    "deleted": 14,
+    "net_added": 5,
+    "imports_and_options_unchanged": true,
+    "all_public_names_and_declaration_kinds_unchanged": true,
+    "all_remaining_source_bytes_unchanged": true,
+    "all_provider_and_candidate_fingerprints_recomputed": true,
+    "all_cached_error_locations_verified": true,
+    "forbidden_resource_limit_increases": false,
+    "local_lean_or_elaboration_run": false,
+    "active_index_refs_or_ci_modified": false,
+    "source_files_edited_by_reviewer": false
+  },
+  "limitations": [
+    "This is static independent review, not successful Lean compilation or a full-green CI certificate.",
+    "Detailed cached goal contexts exist for FiniteRadial45, Radial98 and Gauge55/59. The workflow head400 truncation leaves only error headers for Gauge117/119/122/168; the latter repairs are justified here by full actual source and exact provider contracts.",
+    "No broader main1ece provider migration, endpoint fixed-base producer, CurrentJets conclusion or final N04 theorem is certified by this receipt."
+  ]
+}

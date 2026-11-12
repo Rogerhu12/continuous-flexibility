@@ -1,0 +1,149 @@
+{
+  "kind": "CI166 ActualReferenceNegativeEndpointData minimal repair candidate",
+  "status": "FROZEN_STATIC_CANDIDATE_PENDING_PEER_AND_CI",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "base": {
+    "commit": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+    "tree": "d6e6c25c9742129f9a50a929914845940b001761"
+  },
+  "path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean",
+  "planned_backup_path": "quantitative/repair166/ActualReferenceNegativeEndpointDataCI166RepairCandidateManifest.json",
+  "before": {
+    "sha256": "f88706279e2902514c3bda2fdd618785c19d2be4f848d1eaf44758e2bdfd7f27",
+    "blob": "7d2ff0fac9e08218174cd6870ba79b8529aa8a01",
+    "bytes": 6166,
+    "lines": 126
+  },
+  "after": {
+    "sha256": "7b594a18eec05800da02553065d0e7eb656242bad272eadbf1ec0aca52376b84",
+    "blob": "306df0ed5468912267708e86f7a9198f03655f0a",
+    "bytes": 6349,
+    "lines": 130
+  },
+  "exact_diff": {
+    "sha256": "bf27c4630c473f74f760e4a27bd5995c4bed9d94d424105220fa7c37bf9ae9bd",
+    "blob": "72acb71b8ca9fb80063f850190f31e252a9fdf31",
+    "bytes": 1045,
+    "lines": 21
+  },
+  "net_added_lines": 4,
+  "exact_replacements": [
+    [
+      "        exact congrArg Prod.snd (hopen.2.2.1 p hp))",
+      "        have hs := congrArg (fun q : PolarPoint => q.2) (hopen.2.2.1 p hp)\n        exact hs)"
+    ],
+    [
+      "      (hreg 0).2.1.continuousAt.comp hzero",
+      "      (hreg 0).2.1.continuousAt.comp\n        (f := fun p : PolarPoint => (p.1, (0 : ℝ))) (x := (c, θ)) hzero"
+    ],
+    [
+      "  · simpa only [σ, Bool.false_eq_true, ↓reduceIte, one_mul] using\n      hsign.1 (c, 0) (hroot 0).1\n  · simpa only [σ, Bool.true_eq_true, ↓reduceIte, neg_one_mul, neg_pos] using\n      hsign.2 (c, 0) (hroot 0).1",
+      "  · have hi' : (K.cutPair m).1 = k := hi\n    simpa only [σ, Bool.false_eq_true, ↓reduceIte, one_mul, hi'] using\n      hsign.1 (c, 0) (hroot 0).1\n  · have hi' : (K.cutPair m).2 = k := hi\n    simpa only [σ, ↓reduceIte, neg_one_mul, neg_pos, hi'] using\n      hsign.2 (c, 0) (hroot 0).1"
+    ]
+  ],
+  "public_header": "theorem n04Coordinates_actual_reference_negative_endpoint_data\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}\n    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)\n    (hN : NonlinearPropertiesThrough03 D T S C R L base loss ε)\n    (hfield : N04bFieldRegularity D S C L base ε)\n    (e : ℕ ≃ N04PieceIndex D) (m : ℕ) (side : Bool) :\n    let K := n04bActualTypedAtlas hT hS hN hfield e\n    let k := e.symm (.inl (m, side))\n    let z₀ : AnnularState S × ℝ := (C.referenceState, 0)\n    let c := if side then C.right m else C.left m\n    let σ : ℝ := if side then -1 else 1\n    (∀ θ : ℝ, ContDiffAt ℝ ∞ (K.chart z₀ k) (c, θ) ∧\n      ContDiffAt ℝ ∞ (K.height z₀ k) (c, θ) ∧\n      K.chart z₀ k (c, θ) = (0, θ) ∧\n      0 < K.height z₀ k (c, θ) ∧\n      K.height z₀ k (c, θ) = K.height z₀ k (c, 0)) ∧\n    0 < σ * deriv (fun r : ℝ => (K.chart z₀ k (r, 0)).1) c := by",
+  "public_header_unchanged": true,
+  "imports_unchanged": true,
+  "options_unchanged": true,
+  "all_unlisted_bytes_reverse_exact": true,
+  "cached_failure_log": {
+    "sha256": "e31097de662da4b2dac4b5bb1fb092fae301ca4ea78d03c8f529bccdb5165474",
+    "blob": "923cb8a210ecbde6676288e6e1e99e73096f8229",
+    "bytes": 144991,
+    "lines": 1218
+  },
+  "reported_errors": [
+    {
+      "line": 88,
+      "column": 32,
+      "issue": "Backward expected-type inference for congrArg Prod.snd incorrectly requests equality of full chart and p.",
+      "repair": "Infer scalar projection equality independently in a typed-lambda local hs, then supply hs."
+    },
+    {
+      "line": 95,
+      "column": 37,
+      "issue": "ContinuousAt.comp infers inner map Prod.mk c and scalar base point 0.",
+      "repair": "Explicitly set inner f to the actual map p↦(p.1,0) and x=(c,theta); same outer height and hzero."
+    },
+    {
+      "line": 120,
+      "column": 4,
+      "issue": "Cut pair left index differs syntactically from local k after simplification.",
+      "repair": "Specialize existing hi at false to typed cutPair.fst=k and rewrite that equality."
+    },
+    {
+      "line": 122,
+      "column": 19,
+      "issue": "Bool.true_eq_true is not a declaration.",
+      "repair": "Remove it; reduceIte computes the true conditional."
+    },
+    {
+      "line": 122,
+      "column": 4,
+      "issue": "Cut pair right index differs syntactically from local k.",
+      "repair": "Specialize existing hi at true to typed cutPair.snd=k and rewrite that equality."
+    }
+  ],
+  "actual_direct_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+      "path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean",
+      "blob": "ef7e207e7d604dbb3a94cc389660e1d67894c958",
+      "sha256": "ac3d3070df56ad9a3d209e22ffb213ab44b0ad80294906f30b57b157100f261d",
+      "bytes": 7672,
+      "lines": 159
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalRootTransportBoundary.lean",
+      "blob": "c68a526e559104ca8b71c64c708ee8526bcd67b1",
+      "sha256": "061f9debff039902b318f9adb1478337bc0c0f00936a73a02314db9b8836eb8e",
+      "bytes": 7690,
+      "lines": 152
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualAtlasCuts",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualAtlasCuts.lean",
+      "blob": "3e6847f1dc053e029284c4f490ab351c5c310da2",
+      "sha256": "1c1ca0be70e7134d99086b9d491732bc983447a8d9700cd17cfa4606e0f7c26e",
+      "bytes": 4433,
+      "lines": 97
+    }
+  ],
+  "sign_provider": {
+    "path": "src/ContinuousFlexibility/Analysis/CanonicalCutOrientation.lean",
+    "sha256": "c536ac6d71accab008265c7fd6cae7b8398cc89607a4f56abee52788a807e755",
+    "blob": "036e1277737b1441ead7382702aaf665f2169794",
+    "bytes": 11382,
+    "lines": 228,
+    "declaration": "canonicalCutPair_planeJacobian_signs",
+    "scope": "Same actual cut pair supplies positive left / negative right Jacobian on the closed physical pieces."
+  },
+  "mathlib_provider": {
+    "repository": "leanprover-community/mathlib4",
+    "commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "path": "Mathlib/Topology/Continuous.lean",
+    "sha256": "14b6c26b5d22be63134a1bed41bcd9ae7720b1b3fc1c0798a42d71e33feb615c",
+    "blob": "620526f00d25f19d30d07ba5cad2b7a3370ba6bb",
+    "bytes": 20685,
+    "lines": 459,
+    "declaration": "ContinuousAt.comp",
+    "actual_signature": "{g : Y → Z} (hg : ContinuousAt g (f x)) (hf : ContinuousAt f x) : ContinuousAt (g ∘ f) x",
+    "verification": "Named inner f and source x match the pinned variables. At (c,theta), f evaluates definitionally to (c,0)."
+  },
+  "invariants": {
+    "same_K_e_m_side_root_and_height": true,
+    "same_open_to_closed_continuity_proof": true,
+    "same_sign_and_derivative_math": true,
+    "no_main_reference_flow_port": true,
+    "no_new_hypothesis": true,
+    "no_resource_limit_change": true,
+    "no_lean_elaboration_or_compile": true,
+    "no_active_index_refs_or_ci_changes": true,
+    "no_new_lean_archive_copy": true
+  },
+  "limitations": [
+    "This is a static source repair, not a successful typecheck claim.",
+    "All frozen preimages and source-selection pins remain unchanged except this one candidate."
+  ]
+}

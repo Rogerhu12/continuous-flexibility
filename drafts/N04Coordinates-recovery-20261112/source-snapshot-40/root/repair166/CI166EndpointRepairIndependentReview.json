@@ -1,0 +1,51 @@
+{
+  "kind": "CI166_endpoint_repair_independent_review",
+  "status": "PASS_STATIC_SOURCE_REVIEW_PENDING_CI",
+  "intended_backup_path": "root/repair166/CI166EndpointRepairIndependentReview.json",
+  "reviewer": "root",
+  "owner": "quantitative_route",
+  "baseline": {
+    "commit": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+    "tree": "d6e6c25c9742129f9a50a929914845940b001761"
+  },
+  "candidate": {
+    "blob": "0cf96f579afa200aba167f7d94f1a3fd5b799166",
+    "sha256": "2d0d0ae305b2a4847bee298a22a73d4b2eb4bd054b543339cab6184210d0c0f3"
+  },
+  "before": {
+    "sha256": "f88706279e2902514c3bda2fdd618785c19d2be4f848d1eaf44758e2bdfd7f27",
+    "blob": "7d2ff0fac9e08218174cd6870ba79b8529aa8a01",
+    "bytes": 6166,
+    "lines": 126
+  },
+  "after": {
+    "sha256": "7b594a18eec05800da02553065d0e7eb656242bad272eadbf1ec0aca52376b84",
+    "blob": "306df0ed5468912267708e86f7a9198f03655f0a",
+    "bytes": 6349,
+    "lines": 130
+  },
+  "checks": {
+    "full_sources_read": true,
+    "exact_reverse_bytes": true,
+    "public_header_unchanged": true,
+    "imports_unchanged": true,
+    "options_unchanged": true,
+    "net_added_lines": 4,
+    "cached_CI166_errors_read": true,
+    "actual_CanonicalRootTransportBoundary_source_read": "c68a526e559104ca8b71c64c708ee8526bcd67b1",
+    "actual_CanonicalCutOrientation_source_read": "036e1277737b1441ead7382702aaf665f2169794"
+  },
+  "reasoning": [
+    "Independent typed scalar projection avoids backward inference of the full chart target, while retaining the same open radial equality.",
+    "Explicit ContinuousAt.comp inner map sends (c,theta) to the already established (c,0) height point; no extension or common collar is introduced.",
+    "The existing side-general index equality hi is specialized in each Bool branch and rewrites only the two actual cutPair indices. The established closed-piece signs and radial derivative identity are unchanged."
+  ],
+  "limits": [
+    "No local elaboration or CI success is claimed.",
+    "No public contract, family, material sample, hypothesis, import or resource limit changes."
+  ],
+  "log": {
+    "blob": "923cb8a210ecbde6676288e6e1e99e73096f8229",
+    "sha256": "e31097de662da4b2dac4b5bb1fb092fae301ca4ea78d03c8f529bccdb5165474"
+  }
+}

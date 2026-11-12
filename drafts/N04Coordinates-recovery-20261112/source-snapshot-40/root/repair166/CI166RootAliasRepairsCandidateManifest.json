@@ -1,0 +1,56 @@
+{
+  "kind": "CI166_two_proof_local_alias_repairs",
+  "baseline": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+  "intended_backup_path": "root/repair166/CI166RootAliasRepairsCandidateManifest.json",
+  "log": {
+    "sha256": "e31097de662da4b2dac4b5bb1fb092fae301ca4ea78d03c8f529bccdb5165474",
+    "bytes": 144991,
+    "lines": 1219,
+    "run": 43307122021,
+    "job": 131493233395,
+    "blob": "923cb8a210ecbde6676288e6e1e99e73096f8229"
+  },
+  "files": [
+    {
+      "name": "CanonicalReferenceCurrentAbsoluteJets.lean",
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean",
+      "old_blob": "5f8c8a6087e0446d2c54ef35b532b404f0b092f2",
+      "old_sha256": "59a80a8100cb69b80d010175760bfb073bd91f03813d02c2ea72671329a1ebc5",
+      "old_lines": 118,
+      "blob": "4a0f2095b9c16558d889f814750f1fa648590e52",
+      "sha256": "cf481c45cf6ab2b1d5c1b3e9b9588bd3189291fe79e122a60cf355c4a07a1152",
+      "lines": 118,
+      "public_headers_unchanged": true,
+      "imports_unchanged": true,
+      "bytes": 5518,
+      "diff": {
+        "removed": "simpa only [Real.rpow_zero, mul_one] using hHb m",
+        "added": "simpa only [CH, Real.rpow_zero, mul_one] using hHb m"
+      }
+    },
+    {
+      "name": "CanonicalCurrentUniformCloseness.lean",
+      "module": "ContinuousFlexibility.Analysis.CanonicalCurrentUniformCloseness",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean",
+      "old_blob": "e5b4919994abd7e7ddcde0bb83665c224d9e53fe",
+      "old_sha256": "34065e8e1044d6f5292ed1b0ad4ecce653c00c28fe5514e43bddae49e58b39c5",
+      "old_lines": 101,
+      "blob": "f5b40e8f0c2af008aebf74066a8ef36d82c761fb",
+      "sha256": "fa10773294a616aae51226c5e6ea735a5b87727afca8ae2de81d3bc84094543f",
+      "lines": 101,
+      "public_headers_unchanged": true,
+      "imports_unchanged": true,
+      "bytes": 4926,
+      "diff": {
+        "removed": "simpa only [CanonicalGeometry.differenceJets, mixedDerivative, iteratedDeriv_zero, Prod.eta,",
+        "added": "simpa only [B, loss, CanonicalGeometry.differenceJets, mixedDerivative, iteratedDeriv_zero, Prod.eta,"
+      }
+    }
+  ],
+  "repair": "Explicitly unfold CH in the height comparison and B, loss in the zero-order atom estimate after adopting respectTransparency=true. All uses are the original local choose witnesses; no re-choice.",
+  "public_headers_and_imports": "unchanged",
+  "resources": "unchanged",
+  "net_added_lines": 0,
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED"
+}

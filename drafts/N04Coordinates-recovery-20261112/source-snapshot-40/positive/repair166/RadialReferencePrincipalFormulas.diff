@@ -1,0 +1,17 @@
+--- a/src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean
++++ b/src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean
+@@ -98,8 +98,11 @@
+             deriv Y (Function.invFun Y p.1) := by
+   have hdiv := divergenceOperator_radial_height_of_coefficient_germs hw hH ha hb
+   unfold inverseChartPotential
+-  simp only [hdiv, planeJacobian_positiveReferenceCylinderChart
+-    (p := positiveReferenceCylinderInverse Y p) hY,
+-    positiveReferenceCylinderInverse, abs_of_pos hYpos]
++  rw [hdiv, planeJacobian_positiveReferenceCylinderChart
++    (p := positiveReferenceCylinderInverse Y p) hY]
++  change H (Function.invFun Y p.1) *
++    deriv (fun r => w r * deriv H r) (Function.invFun Y p.1) /
++      |deriv Y (Function.invFun Y p.1)| = _
++  rw [abs_of_pos hYpos]
+ 
+ end ContinuousFlexibility.Analysis

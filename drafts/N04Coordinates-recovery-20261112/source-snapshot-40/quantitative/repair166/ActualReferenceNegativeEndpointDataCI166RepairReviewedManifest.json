@@ -1,0 +1,61 @@
+{
+  "kind": "CI166 ActualReferenceNegativeEndpointData reviewed repair owner",
+  "status": "INDEPENDENT_STATIC_REVIEW_PASSED_CI_PENDING",
+  "owner": "quantitative_route",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "intended_backup_path": "quantitative/repair166/ActualReferenceNegativeEndpointDataCI166RepairReviewedManifest.json",
+  "actual_base": {
+    "commit": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+    "tree": "d6e6c25c9742129f9a50a929914845940b001761"
+  },
+  "source": {
+    "path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean",
+    "sha256": "7b594a18eec05800da02553065d0e7eb656242bad272eadbf1ec0aca52376b84",
+    "blob": "306df0ed5468912267708e86f7a9198f03655f0a",
+    "bytes": 6349,
+    "lines": 130
+  },
+  "preimage": {
+    "sha256": "f88706279e2902514c3bda2fdd618785c19d2be4f848d1eaf44758e2bdfd7f27",
+    "blob": "7d2ff0fac9e08218174cd6870ba79b8529aa8a01",
+    "bytes": 6166,
+    "lines": 126
+  },
+  "candidate_manifest": {
+    "sha256": "2d0d0ae305b2a4847bee298a22a73d4b2eb4bd054b543339cab6184210d0c0f3",
+    "blob": "0cf96f579afa200aba167f7d94f1a3fd5b799166",
+    "bytes": 7561,
+    "lines": 149
+  },
+  "exact_diff": {
+    "sha256": "bf27c4630c473f74f760e4a27bd5995c4bed9d94d424105220fa7c37bf9ae9bd",
+    "blob": "72acb71b8ca9fb80063f850190f31e252a9fdf31",
+    "bytes": 1045,
+    "lines": 21
+  },
+  "independent_review": {
+    "reviewer": "root",
+    "path": "root/repair166/CI166EndpointRepairIndependentReview.json",
+    "sha256": "27c4e415d80d5cd28d161ae139acbd9415899334c12b9a188435d5b15f3aa595",
+    "blob": "91ee25c5caddc252c407bd7f03d53ab5aa9ea994",
+    "bytes": 2223,
+    "lines": 51
+  },
+  "net_added_lines": 4,
+  "invariants": {
+    "one_complete_public_header_unchanged": true,
+    "imports_options_unchanged": true,
+    "same_K_e_m_side_root_and_height": true,
+    "only_three_replacement_blocks": true,
+    "all_unlisted_bytes_reverse_exact": true,
+    "no_new_hypothesis_or_resource_limit": true
+  },
+  "limits": {
+    "compiled_claim": false,
+    "lean_run": false,
+    "active_or_index_mutation": false,
+    "refs_or_ci_mutation": false,
+    "lean_archive_copy": false,
+    "staging_owned_by": "root"
+  }
+}

@@ -1,0 +1,285 @@
+{
+  "kind": "metadata_only_CI167_repair_preservation",
+  "snapshot": 40,
+  "created_at": "2026-11-12 21:25:18 UTC",
+  "parent": "ccf9d09d10d7e8b581e18a0fa41f80dc10f22a4f",
+  "additional_parent": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+  "compiled_baseline": "c796387fb555392501c81f5b8bd834936251516c",
+  "compiled_baseline_tree": "08257c9406671ac1f094b739e4971c1eca108c66",
+  "source_index_blob": "8505b3b47a91b6549d245169a9a7e0c75f0f6ff7",
+  "source_index": {
+    "total": 3041,
+    "added": 24,
+    "updated": 4
+  },
+  "source_versions": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean",
+      "sha256": "cf481c45cf6ab2b1d5c1b3e9b9588bd3189291fe79e122a60cf355c4a07a1152",
+      "lines": 118,
+      "bytes": 5518,
+      "blob": "4a0f2095b9c16558d889f814750f1fa648590e52",
+      "stored_at": {
+        "commit": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+        "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean",
+      "sha256": "fa10773294a616aae51226c5e6ea735a5b87727afca8ae2de81d3bc84094543f",
+      "lines": 101,
+      "bytes": 4926,
+      "blob": "f5b40e8f0c2af008aebf74066a8ef36d82c761fb",
+      "stored_at": {
+        "commit": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+        "path": "src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean",
+      "sha256": "7b594a18eec05800da02553065d0e7eb656242bad272eadbf1ec0aca52376b84",
+      "lines": 130,
+      "bytes": 6349,
+      "blob": "306df0ed5468912267708e86f7a9198f03655f0a",
+      "stored_at": {
+        "commit": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+        "path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ActualNegativeOppositeRootFields.lean",
+      "sha256": "ff81af86365dfcd2fa3c5eaa7b58e41dbbf49828cf4eab328dc8ed8101f44689",
+      "lines": 268,
+      "bytes": 12929,
+      "blob": "2741a227986d3479a7ced38469e19133966a0d35",
+      "stored_at": {
+        "commit": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+        "path": "src/ContinuousFlexibility/Analysis/ActualNegativeOppositeRootFields.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean",
+      "sha256": "8632dc69c7bbeff63f65e83965de4fa21ce494e175c45a7690b6988d51168ea2",
+      "lines": 97,
+      "bytes": 4716,
+      "blob": "3d6b21ddcae9a7fb11cf365d1602add8a01f70cb",
+      "stored_at": {
+        "commit": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+        "path": "src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceFiniteRadialJets.lean",
+      "sha256": "19226e6ea9763d0d842239e0bb4986e85d78d90949b9aae4677fd00ad1ad298e",
+      "lines": 169,
+      "bytes": 8513,
+      "blob": "9c5a4df8f5adf3a7d388c331d2b76c203f11ac84",
+      "stored_at": {
+        "commit": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+        "path": "src/ContinuousFlexibility/Analysis/PositiveReferenceFiniteRadialJets.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+      "sha256": "e0577144891075f5ab5a574763fe6ca9d83a4640969b90cd314d95a8fe69747c",
+      "lines": 108,
+      "bytes": 5355,
+      "blob": "974c5b9bdcca6ca391d5c7f8d827deb43ba07130",
+      "stored_at": {
+        "commit": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+        "path": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean",
+      "sha256": "89b8e10fee150ed5c3816f725f0bafa80352d4af749519948e3833ed0ca2af28",
+      "lines": 171,
+      "bytes": 8095,
+      "blob": "9f240624bea6c815b9ceb64eb7eff050b4f51316",
+      "stored_at": {
+        "commit": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+        "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean"
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "root/repair166/CI166RootAliasRepairsCandidateManifest.json",
+      "blob": "aab1120336755e1e12b0f7c39be5e96985b02783",
+      "sha256": "1cd090e47dceb70923992f29d3ed633ad4bfc4b2c0ce46cb5bfa58944af8442c",
+      "bytes": 2595,
+      "lines": 56
+    },
+    {
+      "name": "quantitative/recovery/reviews/CI166RootAliasRepairsIndependentReview.json",
+      "blob": "00192e6551eb7f9807f707e62aa2ddf1759f380c",
+      "sha256": "00197a72cb9dbf70b45099b75359a66f49a04c28ad159d9eebb9d8fba450af95",
+      "bytes": 6556,
+      "lines": 106
+    },
+    {
+      "name": "quantitative/repair166/ActualReferenceNegativeEndpointDataCI166RepairCandidateManifest.json",
+      "blob": "0cf96f579afa200aba167f7d94f1a3fd5b799166",
+      "sha256": "2d0d0ae305b2a4847bee298a22a73d4b2eb4bd054b543339cab6184210d0c0f3",
+      "bytes": 7561,
+      "lines": 149
+    },
+    {
+      "name": "quantitative/repair166/ActualReferenceNegativeEndpointDataCI166Repair.diff",
+      "blob": "72acb71b8ca9fb80063f850190f31e252a9fdf31",
+      "sha256": "bf27c4630c473f74f760e4a27bd5995c4bed9d94d424105220fa7c37bf9ae9bd",
+      "bytes": 1045,
+      "lines": 21
+    },
+    {
+      "name": "root/repair166/CI166EndpointRepairIndependentReview.json",
+      "blob": "91ee25c5caddc252c407bd7f03d53ab5aa9ea994",
+      "sha256": "27c4e415d80d5cd28d161ae139acbd9415899334c12b9a188435d5b15f3aa595",
+      "bytes": 2223,
+      "lines": 51
+    },
+    {
+      "name": "quantitative/repair166/ActualReferenceNegativeEndpointDataCI166RepairReviewedManifest.json",
+      "blob": "3fe7f414552c85f002984fc44d87ad12c4309d40",
+      "sha256": "eed482ec51d652d845438d63aa02bb67a5bd614f4db2c3d869e155d041da219f",
+      "bytes": 2186,
+      "lines": 61
+    },
+    {
+      "name": "audit/repair166/CI166AuditCoordinatesRepairsCandidateManifest.json",
+      "blob": "332446239eda39d5967d6707d2676ee421a7ba95",
+      "sha256": "3b5b97956f103f11caf191aed2ce6ace22f993d7cda8e889b4bb75f9962233e6",
+      "bytes": 20903,
+      "lines": 369
+    },
+    {
+      "name": "audit/repair166/CI166AuditCoordinatesRepairs.diff",
+      "blob": "0576a70660008ac7e2d7a5a387fbb5f3d471e6f0",
+      "sha256": "1c2a5f3027a4c787344adfb4f213fa4065e04445714a2bbfe712d50e667eb9d1",
+      "bytes": 3555,
+      "lines": 79
+    },
+    {
+      "name": "root/repair166/CI166AuditPairIndependentReview.json",
+      "blob": "e6f554fa49aa8cb76b5378530844bcab4b4c2a01",
+      "sha256": "df3fef574e54f94734bafb2364057b5a02a0e058c88672e2f5bda283c12344d4",
+      "bytes": 4087,
+      "lines": 87
+    },
+    {
+      "name": "audit/repair166/CI166AuditCoordinatesRepairsReviewedManifest.json",
+      "blob": "bb892793ee01bc67587f062966fae6e6c7158b88",
+      "sha256": "a7655a6d9a7d10ec2624a79c2bb71a5702aec288cf3f2a43fc1cb7158250a92c",
+      "bytes": 3875,
+      "lines": 92
+    },
+    {
+      "name": "positive/repair166/CI166PositiveThreeRepairsCandidateManifest.json",
+      "blob": "329c2096bbee77bf557213ff1e621d9db40d2e7b",
+      "sha256": "89de92748d418b595b1a60d77886ff11e3fe374c6677a6c2d4ec160d3be10e85",
+      "bytes": 26093,
+      "lines": 398
+    },
+    {
+      "name": "quantitative/recovery/reviews/CI166PositiveThreeRepairsIndependentReview.json",
+      "blob": "d8bdf37ac09b7763887f5d57b79ffbb52dc107bd",
+      "sha256": "dfc7701f68dbe557c5495c81f10b40017a52bfc37c7d9b6ad6124ded00747161",
+      "bytes": 17696,
+      "lines": 384
+    },
+    {
+      "name": "positive/repair166/CI166PositiveThreeRepairsReviewedManifest.json",
+      "blob": "23933636a003c06d81ca3817b34605cb5a5cb4b2",
+      "sha256": "b18981eeffbfe9bc84aea50b9ccb3c6619532b71b1088480c7fc29dcf090ac05",
+      "bytes": 6042,
+      "lines": 134
+    },
+    {
+      "name": "ci/CI167StagingPlan.json",
+      "blob": "45b012f4a4a775854144a6c8406730b53133d024",
+      "sha256": "3283639ee75cd64db828bb773882ade27efc9b7b3510df417d2be6d380021b69",
+      "bytes": 7837,
+      "lines": 188
+    },
+    {
+      "name": "positive/repair166/PositiveReferenceFiniteRadialJets.diff",
+      "blob": "21c7d7098a8f3a78777b14324cc0b374a8e6bb46",
+      "sha256": "0b22563484e673175ca5139bae8bda7ed7f83663788011a4548020ef61d7f094",
+      "bytes": 758,
+      "lines": 13
+    },
+    {
+      "name": "positive/repair166/RadialReferencePrincipalFormulas.diff",
+      "blob": "9e5af12c98914dca0bfcf811b644fe11bc3d06d4",
+      "sha256": "dc64c83188e82813e9cd9dc8a3f8167d18ee6c766db94cbca59b1387bbea734e",
+      "bytes": 838,
+      "lines": 17
+    },
+    {
+      "name": "positive/repair166/WholePositiveReferenceGauge.diff",
+      "blob": "fdd7dd6efa20c55f8bcb93a471efea5ebd47cff5",
+      "sha256": "3ae1444a6b5bd1e5c764878601d1ebf296589620d0e1b131c4da5c03de970bb5",
+      "bytes": 2565,
+      "lines": 48
+    },
+    {
+      "name": "ci/CI167PushReceipt.json",
+      "blob": "87e9c4a840f6d4013104011e46dc8f0318e41e31",
+      "sha256": "794f2927e593448ed5ad7aa2328533deb25b86f12983510bc683bb65524dec38",
+      "bytes": 624,
+      "lines": 16
+    },
+    {
+      "name": "ci/CI167ProviderGraphDelta.json",
+      "blob": "37e4af5f7c745c7f6601cd8031de1c1ad8f08228",
+      "sha256": "8f14326da2fc4490a25b4eeec3e7ad29f668e73adc9f665c12b1748ad4202db2",
+      "bytes": 8469,
+      "lines": 173
+    },
+    {
+      "name": "ci/CI167GitHubCompareSummary.json",
+      "blob": "423aaab09c034648e307c7a3cc0c923b26b4877d",
+      "sha256": "1ecf488eaa834b9935535826b0dfe1f93da07531be0d8add802193f6ee3ae8ee",
+      "bytes": 26039,
+      "lines": 805
+    }
+  ],
+  "active": {
+    "head": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+    "tree": "1d18001a5ed8b3ef7093f4fee6ac215494c7dfac",
+    "parent": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+    "pushed_and_verified": "2026-11-12 21:22:45 UTC",
+    "main_rules_head": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "source_files_changed": 8,
+    "net_Lean_lines": 16,
+    "actual_added_from_green": 19796,
+    "actual_deleted_from_green": 6,
+    "conservative_added_from_green": 19906,
+    "force": false,
+    "CI_label": "CI167",
+    "first_lookup": "wait at least five minutes after this timestamp",
+    "last_full_green": "c796387fb555392501c81f5b8bd834936251516c"
+  },
+  "CI167": "Not queried yet. Earliest first lookup21:27:45UTC. No green claim.",
+  "budget": {
+    "new_archived_Lean_lines": 0,
+    "preserved_uncompiled_upper_bound": 19526,
+    "active": {
+      "source_added": 19796,
+      "source_deleted": 6,
+      "generated_root_additions": 110,
+      "conservative_added": 19906,
+      "limit": 20000,
+      "remaining": 94,
+      "net": 16
+    }
+  },
+  "limits_unchanged": true,
+  "root_not_edited": true,
+  "outside_archive_expected": "exact c796",
+  "endpoint_status": {
+    "FlowJets": "PROVED",
+    "Realization": "OPEN",
+    "N04Coordinates": "OPEN"
+  }
+}

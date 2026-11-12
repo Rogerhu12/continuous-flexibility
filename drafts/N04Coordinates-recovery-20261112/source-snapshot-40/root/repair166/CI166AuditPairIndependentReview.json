@@ -1,0 +1,87 @@
+{
+  "kind": "CI166_audit_pair_independent_review",
+  "status": "PASS_STATIC_REVIEW_PENDING_CI",
+  "intended_backup_path": "root/repair166/CI166AuditPairIndependentReview.json",
+  "reviewer": "root",
+  "owner": "audit_coordinates",
+  "baseline": {
+    "commit": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+    "tree": "d6e6c25c9742129f9a50a929914845940b001761",
+    "tree_nontruncated": true
+  },
+  "candidate": {
+    "blob": "332446239eda39d5967d6707d2676ee421a7ba95",
+    "sha256": "3b5b97956f103f11caf191aed2ce6ace22f993d7cda8e889b4bb75f9962233e6"
+  },
+  "files": [
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualNegativeOppositeRootFields",
+      "name": "ActualNegativeOppositeRootFields.lean",
+      "path": "src/ContinuousFlexibility/Analysis/ActualNegativeOppositeRootFields.lean",
+      "old_blob": "5b0d8327ff2054595a95f053d2f5e82afeabc2dd",
+      "old_sha256": "c0650b4a9db498e63f79036a37b29d1b97dbee449a3209fbf32290456faa4626",
+      "old_lines": 256,
+      "blob": "2741a227986d3479a7ced38469e19133966a0d35",
+      "sha256": "ff81af86365dfcd2fa3c5eaa7b58e41dbbf49828cf4eab328dc8ed8101f44689",
+      "bytes": 12929,
+      "lines": 268
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalPrimitiveJetsNormalization",
+      "name": "CanonicalPrimitiveJetsNormalization.lean",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean",
+      "old_blob": "fcb1277422b54ea7f0dd44a618c8e154a797c947",
+      "old_sha256": "c0f106ce7b46c65cbf19cbd2815f43aa4deeda6cbde00b513e3e1b9c9cbbfe93",
+      "old_lines": 102,
+      "blob": "3d6b21ddcae9a7fb11cf365d1602add8a01f70cb",
+      "sha256": "8632dc69c7bbeff63f65e83965de4fa21ce494e175c45a7690b6988d51168ea2",
+      "bytes": 4716,
+      "lines": 97
+    }
+  ],
+  "exact_diff": {
+    "intended_backup_path": "audit/repair166/CI166AuditCoordinatesRepairs.diff",
+    "blob": "0576a70660008ac7e2d7a5a387fbb5f3d471e6f0",
+    "sha256": "1c2a5f3027a4c787344adfb4f213fa4065e04445714a2bbfe712d50e667eb9d1",
+    "additions": 21,
+    "deletions": 14,
+    "net_added_lines": 7,
+    "requested_net_target": 30,
+    "server_readback_exact": true
+  },
+  "checks": {
+    "full_old_new_sources_read": true,
+    "unified_diff_applies_exactly": true,
+    "public_header_differences": 0,
+    "import_differences": 0,
+    "old_selected755_graph_verified": true,
+    "full_parameter_and_geometric_families_unchanged": true,
+    "limits_unchanged": true,
+    "net_added_lines": 7
+  },
+  "reasoning": [
+    "Typed full fderiv equalities of the actual stored charts let the project planeJacobian determinant rewrite both rows without unfolding the atlas record or relying on simplifier transparency.",
+    "The differential identity rewrites the actual opposite chart value and the target radius before Real.sqrt_div'; the exact same API and positivity argument occur in the compiled RootTravelOppositeCoordinates supplier.",
+    "SmoothDirections.congr is already visible through the pinned import chain. Its actual definition preserves J.D, open_domain, continuous and derivative literally. The old-to-normalized equality is congrFun hdifference.symm, and only the zero equality is transported.",
+    "The genuine current tower and all high/low-order constants are unchanged. respectTransparency=true matches existing compiled N07a providers; no numerical elaboration limit is raised."
+  ],
+  "provider_sources_read": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameElementaryCalculus.lean",
+      "blob": "bc38b3601334a7b76a3eda9f3602c4d3b2440423",
+      "declaration": "SmoothDirections.congr"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/RootTravelOppositeCoordinates.lean",
+      "blob": "e573bf412782f3cd9d51fccc619367c3fc8fcd40",
+      "declarations": [
+        "n04b_fderiv_rootPhysicalChart_opposite",
+        "n04b_abs_planeJacobian_rootPhysicalChart_opposite"
+      ]
+    }
+  ],
+  "limitations": [
+    "Source review cannot establish elaboration performance. Full CI remains required.",
+    "The frozen parent theorem and Realization remain open."
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "schema": "n04-owner-reviewed-manifest-v1",
+  "intended_backup_path": "audit/repair166/CI166AuditCoordinatesRepairsReviewedManifest.json",
+  "owner": "/root/audit_coordinates",
+  "status": "Independently reviewed frozen candidates; not compiled or installed by this owner",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "baseline": {
+    "commit": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+    "tree": "d6e6c25c9742129f9a50a929914845940b001761",
+    "tree_nontruncated": true
+  },
+  "candidate": {
+    "blob": "332446239eda39d5967d6707d2676ee421a7ba95",
+    "sha256": "3b5b97956f103f11caf191aed2ce6ace22f993d7cda8e889b4bb75f9962233e6",
+    "intended_backup_path": "audit/repair166/CI166AuditCoordinatesRepairsCandidateManifest.json"
+  },
+  "independent_review": {
+    "reviewer": "/root",
+    "blob": "e6f554fa49aa8cb76b5378530844bcab4b4c2a01",
+    "sha256": "df3fef574e54f94734bafb2364057b5a02a0e058c88672e2f5bda283c12344d4",
+    "intended_backup_path": "root/repair166/CI166AuditPairIndependentReview.json",
+    "status": "PASS_STATIC_REVIEW_PENDING_CI",
+    "full_text_read_and_exact_hash_verified": true
+  },
+  "selected_sources": [
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualNegativeOppositeRootFields",
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeOppositeRootFields.lean",
+      "preimage": {
+        "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+        "blob": "5b0d8327ff2054595a95f053d2f5e82afeabc2dd",
+        "sha256": "c0650b4a9db498e63f79036a37b29d1b97dbee449a3209fbf32290456faa4626",
+        "bytes": 12571,
+        "lines": 256
+      },
+      "candidate": {
+        "blob": "2741a227986d3479a7ced38469e19133966a0d35",
+        "sha256": "ff81af86365dfcd2fa3c5eaa7b58e41dbbf49828cf4eab328dc8ed8101f44689",
+        "bytes": 12929,
+        "lines": 268,
+        "server_readback_exact": true
+      }
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalPrimitiveJetsNormalization",
+      "target_path": "src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean",
+      "preimage": {
+        "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+        "blob": "fcb1277422b54ea7f0dd44a618c8e154a797c947",
+        "sha256": "c0f106ce7b46c65cbf19cbd2815f43aa4deeda6cbde00b513e3e1b9c9cbbfe93",
+        "bytes": 4818,
+        "lines": 102
+      },
+      "candidate": {
+        "blob": "3d6b21ddcae9a7fb11cf365d1602add8a01f70cb",
+        "sha256": "8632dc69c7bbeff63f65e83965de4fa21ce494e175c45a7690b6988d51168ea2",
+        "bytes": 4716,
+        "lines": 97,
+        "server_readback_exact": true
+      }
+    }
+  ],
+  "exact_diff": {
+    "intended_backup_path": "audit/repair166/CI166AuditCoordinatesRepairs.diff",
+    "blob": "0576a70660008ac7e2d7a5a387fbb5f3d471e6f0",
+    "sha256": "1c2a5f3027a4c787344adfb4f213fa4065e04445714a2bbfe712d50e667eb9d1",
+    "additions": 21,
+    "deletions": 14,
+    "net_added_lines": 7,
+    "requested_net_target": 30,
+    "server_readback_exact": true
+  },
+  "preserved": {
+    "complete_public_headers": 10,
+    "imports": true,
+    "genuine_tower_D": true,
+    "all_mathematical_assumptions": true,
+    "all_quantifier_order_and_constants": true,
+    "numeric_resource_limits": true
+  },
+  "option_change": "Only backward.isDefEq.respectTransparency=true; this is not a numerical resource-limit increase.",
+  "source_preservation": "Original sources remain immutable in ea5914 Git history; final candidates are immutable Git blobs. This owner receipt creates metadata only and no duplicate Lean archive.",
+  "execution": {
+    "compiled": false,
+    "local_Lean": false,
+    "active_changed": false,
+    "index_changed": false,
+    "refs_changed": false,
+    "CI_queried": false
+  },
+  "next_gate": "Root may install exactly the reviewed blobs for bounded CI repair. A successful compile or timing result has not been established."
+}

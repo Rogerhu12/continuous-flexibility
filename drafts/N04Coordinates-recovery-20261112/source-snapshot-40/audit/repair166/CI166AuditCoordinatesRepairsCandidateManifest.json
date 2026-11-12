@@ -1,0 +1,369 @@
+{
+  "schema": "n04-ci-repair-candidate-v1",
+  "intended_backup_path": "audit/repair166/CI166AuditCoordinatesRepairsCandidateManifest.json",
+  "author": "/root/audit_coordinates",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "status": "Frozen source candidates; owner self-check completed; independent root review and CI still required",
+  "baseline": {
+    "commit": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+    "tree": "d6e6c25c9742129f9a50a929914845940b001761",
+    "tree_nontruncated": true
+  },
+  "cached_log": {
+    "blob": "923cb8a210ecbde6676288e6e1e99e73096f8229",
+    "sha256": "e31097de662da4b2dac4b5bb1fb092fae301ca4ea78d03c8f529bccdb5165474",
+    "bytes": 144991,
+    "retrieval": "Fetched the root's immutable cached blob; no job-log or CI request",
+    "limitations": "The workflow grep excerpt truncates the three unsolved-goal contexts after 40 lines; the derivative type mismatch is visible in full. No missing goal text is fabricated."
+  },
+  "diagnostics": [
+    {
+      "module": "ActualNegativeOppositeRootFields",
+      "line": 84,
+      "column": 69,
+      "kind": "unsolved goals",
+      "repair": "Typed equality of the complete real Frechet derivative, then unfold only the project planeJacobian and rewrite."
+    },
+    {
+      "module": "ActualNegativeOppositeRootFields",
+      "line": 87,
+      "column": 72,
+      "kind": "unsolved goals",
+      "repair": "The same typed derivative equality for the opposite actual stored chart."
+    },
+    {
+      "module": "ActualNegativeOppositeRootFields",
+      "line": 126,
+      "column": 4,
+      "kind": "type mismatch",
+      "repair": "Rewrite the two typed actual derivative identities and the actual opposite-point value before expanding the explicit factor; rewrite the radial relation and Real.sqrt_div' using the proven positive target radius."
+    },
+    {
+      "module": "ActualNegativeOppositeRootFields",
+      "line": 196,
+      "column": 37,
+      "kind": "unsolved goals",
+      "repair": "A local typed derivative identity feeds the same exact determinant expression in the nonvanishing proof."
+    },
+    {
+      "module": "CanonicalPrimitiveJetsNormalization",
+      "line": 86,
+      "column": 18,
+      "kind": "default 200000 whnf timeout",
+      "repair": "Replace the inline dependent SmoothDirections record by the existing compiled SmoothDirections.congr adapter; its D is definitionally the original J.D."
+    },
+    {
+      "module": "CanonicalPrimitiveJetsNormalization",
+      "line": 47,
+      "column": 0,
+      "kind": "default 200000 whnf timeout at enclosing declaration",
+      "repair": "Use the same transparency option as the compiled N07aGeometryJetBounds/N07aNeighborhood and avoid constructing the zero equality over expanded canonical records."
+    }
+  ],
+  "sources": [
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualNegativeOppositeRootFields",
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeOppositeRootFields.lean",
+      "preimage": {
+        "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+        "blob": "5b0d8327ff2054595a95f053d2f5e82afeabc2dd",
+        "sha256": "c0650b4a9db498e63f79036a37b29d1b97dbee449a3209fbf32290456faa4626",
+        "bytes": 12571,
+        "lines": 256
+      },
+      "candidate": {
+        "blob": "2741a227986d3479a7ced38469e19133966a0d35",
+        "sha256": "ff81af86365dfcd2fa3c5eaa7b58e41dbbf49828cf4eab328dc8ed8101f44689",
+        "bytes": 12929,
+        "lines": 268,
+        "server_readback_exact": true
+      },
+      "literal_replacements": [
+        {
+          "before": "  have hHk' := hg'.2.eq_of_nhds\n",
+          "after": "  have hHk' := hg'.2.eq_of_nhds\n  have hDk : fderiv ℝ (K.chart z k) p =\n      fderiv ℝ (n04bRootPhysicalChart F (C.travel m) side) p :=\n    hg.1.fderiv_eq (𝕜 := ℝ)\n  have hDk' : fderiv ℝ (K.chart z k') p =\n      fderiv ℝ (n04bRootPhysicalChart F (C.travel m) (!side)) p :=\n    hg'.1.fderiv_eq (𝕜 := ℝ)\n"
+        },
+        {
+          "before": "\n    simp only [planeJacobian, hg.1.fderiv_eq (𝕜 := ℝ)]\n",
+          "after": "\n    unfold planeJacobian\n    rw [hDk]\n"
+        },
+        {
+          "before": "\n    simp only [planeJacobian, hg'.1.fderiv_eq (𝕜 := ℝ)]\n",
+          "after": "\n    unfold planeJacobian\n    rw [hDk']\n"
+        },
+        {
+          "before": "    simp only [hg.1.fderiv_eq (𝕜 := ℝ), hg'.1.fderiv_eq (𝕜 := ℝ), hFk',\n      n04bOppositeRootJacobianFactor, ← hrad, Real.sqrt_div' _ hx.le]\n",
+          "after": "    rw [hDk, hDk', hFk', n04bOppositeRootJacobianFactor, ← hrad,\n      Real.sqrt_div' _ hx.le]\n"
+        },
+        {
+          "before": "      simp only [planeJacobian, hg.1.fderiv_eq (𝕜 := ℝ)]\n",
+          "after": "      have hd : fderiv ℝ (K.chart z k') p =\n          fderiv ℝ (n04bRootPhysicalChart (n04bActualTravelChart S C L z m)\n            (C.travel m) (!side)) p := hg.1.fderiv_eq (𝕜 := ℝ)\n      unfold planeJacobian\n      rw [hd]\n"
+        }
+      ],
+      "invariants": {
+        "literal_inverse_reconstructs_exact_preimage": true,
+        "imports_byte_identical": true,
+        "public_headers_byte_identical": true,
+        "complete_public_headers": [
+          {
+            "name": "n04bOppositeRootHeightFactor",
+            "header": "def n04bOppositeRootHeightFactor (T ξ : ℝ) : ℝ",
+            "sha256": "83eb7d172a4f85904fc0c80934251bf7ac7998ba430ac25fa35c3645076aa2d4"
+          },
+          {
+            "name": "n04bOppositeRootJacobianFactor",
+            "header": "def n04bOppositeRootJacobianFactor (T ξ : ℝ) : ℝ",
+            "sha256": "6756b3fcf0a371a66e720d33f7f4a91c88762bc4061bb2a9d3890e5af5a15f20"
+          },
+          {
+            "name": "n04b_contDiffAt_oppositeRootFactors",
+            "header": "theorem n04b_contDiffAt_oppositeRootFactors {T ξ : ℝ}\n    (hξ : 0 < ξ) (htravel : n04bRootTravel ξ < T) :\n    ContDiffAt ℝ ∞ (n04bOppositeRootHeightFactor T) ξ ∧\n      ContDiffAt ℝ ∞ (n04bOppositeRootJacobianFactor T) ξ",
+            "sha256": "7283e1c843c2d51b6e44c2ee3347d382c6ae1d2fb95127c16da072a9ad3835ec"
+          },
+          {
+            "name": "n04bActualTypedAtlas_negative_opposite_fields_at",
+            "header": "theorem n04bActualTypedAtlas_negative_opposite_fields_at\n    (k k' m : ℕ) (side : Bool)\n    (hk : e k = .inl (m, side)) (hk' : e k' = .inl (m, !side))\n    {p : PolarPoint} (hp : p ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ)) :\n    let K := n04bActualTypedAtlas hT hS hN hfield e\n    0 < (K.chart z k p).1 ∧ 0 < (K.chart z k' p).1 ∧\n      K.chart z k p = n04bOppositeRootMap (C.travel m) (K.chart z k' p) ∧\n      K.height z k p = K.height z k' p *\n        n04bOppositeRootHeightFactor (C.travel m) (K.chart z k' p).1 ∧\n      |planeJacobian (K.chart z k) p| = |planeJacobian (K.chart z k') p| *\n        n04bOppositeRootJacobianFactor (C.travel m) (K.chart z k' p).1 ∧\n      ∀ v : PolarPoint, fderiv ℝ (K.chart z k) p v =\n        (-n04bOppositeRootJacobianFactor (C.travel m) (K.chart z k' p).1 *\n            (fderiv ℝ (K.chart z k') p v).1,\n          (fderiv ℝ (K.chart z k') p v).2)",
+            "sha256": "931b072dc3d23339cba1a9d3a28c308ce74a184220a742ff7d347af1e79bbc88"
+          },
+          {
+            "name": "n04bActualTypedAtlas_negative_opposite_germs",
+            "header": "theorem n04bActualTypedAtlas_negative_opposite_germs\n    (k k' m : ℕ) (side : Bool)\n    (hk : e k = .inl (m, side)) (hk' : e k' = .inl (m, !side))\n    {p : PolarPoint} (hp : p ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ)) :\n    let K := n04bActualTypedAtlas hT hS hN hfield e\n    (K.chart z k =ᶠ[𝓝 p]\n      fun x => n04bOppositeRootMap (C.travel m) (K.chart z k' x)) ∧\n    (K.height z k =ᶠ[𝓝 p]\n      fun x => K.height z k' x *\n        n04bOppositeRootHeightFactor (C.travel m) (K.chart z k' x).1) ∧\n    ((fun x => |planeJacobian (K.chart z k) x|) =ᶠ[𝓝 p]\n      fun x => |planeJacobian (K.chart z k') x| *\n        n04bOppositeRootJacobianFactor (C.travel m) (K.chart z k' x).1)",
+            "sha256": "3b4f3b19c65f27dc866af5a52ae3e7bb5e336c3b19e24d40d6a2bfce34438288"
+          },
+          {
+            "name": "n04bActualTypedAtlas_negative_opposite_firstJets",
+            "header": "theorem n04bActualTypedAtlas_negative_opposite_firstJets\n    (k k' m : ℕ) (side : Bool)\n    (hk : e k = .inl (m, side)) (hk' : e k' = .inl (m, !side))\n    {p : PolarPoint} (hp : p ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ)) :\n    let K := n04bActualTypedAtlas hT hS hN hfield e\n    fderiv ℝ (K.chart z k) p =\n      fderiv ℝ (fun x => n04bOppositeRootMap (C.travel m) (K.chart z k' x)) p ∧\n    fderiv ℝ (K.height z k) p =\n      fderiv ℝ (fun x => K.height z k' x *\n        n04bOppositeRootHeightFactor (C.travel m) (K.chart z k' x).1) p ∧\n    fderiv ℝ (fun x => |planeJacobian (K.chart z k) x|) p =\n      fderiv ℝ (fun x => |planeJacobian (K.chart z k') x| *\n        n04bOppositeRootJacobianFactor (C.travel m) (K.chart z k' x).1) p",
+            "sha256": "fdce5452309d31334af1ab6961958fe5dc1ab20bf26f0354a670391e5cb89015"
+          },
+          {
+            "name": "n04bActualTypedAtlas_negative_opposite_ratios",
+            "header": "theorem n04bActualTypedAtlas_negative_opposite_ratios\n    (k k' m : ℕ) (side : Bool)\n    (hk : e k = .inl (m, side)) (hk' : e k' = .inl (m, !side))\n    {p : PolarPoint} (hp : p ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ)) :\n    let K := n04bActualTypedAtlas hT hS hN hfield e\n    K.height z k p / K.height z k' p =\n        n04bOppositeRootHeightFactor (C.travel m) (K.chart z k' p).1 ∧\n      |planeJacobian (K.chart z k) p| / |planeJacobian (K.chart z k') p| =\n        n04bOppositeRootJacobianFactor (C.travel m) (K.chart z k' p).1",
+            "sha256": "53d577677462ed35d75c247ffbb97c1775ea3960142e681428ba89d4d0183c4c"
+          },
+          {
+            "name": "n04bActualTypedAtlas_negative_opposite_normalized",
+            "header": "theorem n04bActualTypedAtlas_negative_opposite_normalized\n    (k k' m : ℕ) (side : Bool)\n    (hk : e k = .inl (m, side)) (hk' : e k' = .inl (m, !side))\n    {p : PolarPoint} (hp : p ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ)) :\n    let K := n04bActualTypedAtlas hT hS hN hfield e\n    let ρ := n04bRootCutRadius (C.travel m)\n    let u := (K.chart z k' p).1 / ρ\n    let v := (K.chart z k p).1 / ρ\n    0 < u ∧ 0 < v ∧ v ^ (3 / 2 : ℝ) + u ^ (3 / 2 : ℝ) = 2 ∧\n      v = (2 - u ^ (3 / 2 : ℝ)) ^ (2 / 3 : ℝ) ∧\n      K.height z k p / K.height z k' p = (v / u) ^ (1 / 4 : ℝ) ∧\n      |planeJacobian (K.chart z k) p| / |planeJacobian (K.chart z k') p| =\n        Real.sqrt (u / v)",
+            "sha256": "4bb9d2e4ea90b362bc7bea7ecf672fa0578a4eb7604854b843c50450edfdf308"
+          }
+        ],
+        "no_added_assumption": true,
+        "no_added_public_declaration": true
+      },
+      "option_delta": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalPrimitiveJetsNormalization",
+      "target_path": "src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean",
+      "preimage": {
+        "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+        "blob": "fcb1277422b54ea7f0dd44a618c8e154a797c947",
+        "sha256": "c0f106ce7b46c65cbf19cbd2815f43aa4deeda6cbde00b513e3e1b9c9cbbfe93",
+        "bytes": 4818,
+        "lines": 102
+      },
+      "candidate": {
+        "blob": "3d6b21ddcae9a7fb11cf365d1602add8a01f70cb",
+        "sha256": "8632dc69c7bbeff63f65e83965de4fa21ce494e175c45a7690b6988d51168ea2",
+        "bytes": 4716,
+        "lines": 97,
+        "server_readback_exact": true
+      },
+      "literal_replacements": [
+        {
+          "before": "open Set ContinuousFlexibility.Statements\n\n",
+          "after": "open Set ContinuousFlexibility.Statements\n\nset_option backward.isDefEq.respectTransparency true\n\n"
+        },
+        {
+          "before": "        { open_domain := J.open_domain\n          D := J.D\n          zero := by\n            intro z hz\n            rw [hdifference]\n            exact J.zero z hz\n          continuous := J.continuous\n          derivative := J.derivative }\n",
+          "after": "        J.congr (fun z _ => congrFun hdifference.symm z)\n"
+        },
+        {
+          "before": "      simpa only [J', normalizedCanonicalData_cell] using hJ\n",
+          "after": "      simpa only [J', SmoothDirections.congr, normalizedCanonicalData_cell] using hJ\n"
+        }
+      ],
+      "invariants": {
+        "literal_inverse_reconstructs_exact_preimage": true,
+        "imports_byte_identical": true,
+        "public_headers_byte_identical": true,
+        "complete_public_headers": [
+          {
+            "name": "n04Coordinates_atom_normalized_of_sector",
+            "header": "theorem n04Coordinates_atom_normalized_of_sector\n    {z : AnnularState S × ℝ} (hz : stateSector S z.1)\n    (m : ℕ) (v : CanonicalGeometry.Atom) :\n    CanonicalGeometry.atom D T S C L (normalizedCanonicalData S K) z m v =\n      CanonicalGeometry.atom D T S C L K z m v",
+            "sha256": "57288def198bf5a13c9d5f64208128dd888c44069f8e3550c47a47da9d3ca845"
+          },
+          {
+            "name": "n04Coordinates_primitiveGeometryProperties_normalized",
+            "header": "theorem n04Coordinates_primitiveGeometryProperties_normalized\n    {base : ℕ} {ε : ℝ} (hstate : referenceStateConditions D S C)\n    (h : CanonicalGeometry.PrimitiveGeometryProperties D T S C L K base ε) :\n    CanonicalGeometry.PrimitiveGeometryProperties D T S C L\n      (normalizedCanonicalData S K) base ε",
+            "sha256": "5b3950aec4cac7ce044d2504052b1a9bc3a7665a64e4290b1aa282d790d16406"
+          }
+        ],
+        "no_added_assumption": true,
+        "no_added_public_declaration": true
+      },
+      "option_delta": [
+        "set_option backward.isDefEq.respectTransparency true"
+      ]
+    }
+  ],
+  "combined_diff": {
+    "intended_backup_path": "audit/repair166/CI166AuditCoordinatesRepairs.diff",
+    "blob": "0576a70660008ac7e2d7a5a387fbb5f3d471e6f0",
+    "sha256": "1c2a5f3027a4c787344adfb4f213fa4065e04445714a2bbfe712d50e667eb9d1",
+    "additions": 21,
+    "deletions": 14,
+    "net_added_lines": 7,
+    "requested_net_target": 30,
+    "server_readback_exact": true
+  },
+  "providers": [
+    {
+      "name": "RootTravelOppositeCoordinates",
+      "blob": "e573bf412782f3cd9d51fccc619367c3fc8fcd40",
+      "sha256": "52ea40ea85ce5a873754a4a39a44d0b5d39c792a18a1e1a487b37bf5bcfe80ce",
+      "lines": 199,
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6"
+    },
+    {
+      "name": "N04bActualAtlasGerms",
+      "blob": "0bf89b2339f60ac8ba2cf9678637f4bf96830a66",
+      "sha256": "5abee83c1a68e2b04a6d733f7e51473a15453d5debda0e8526106462e3b4d73e",
+      "lines": 94,
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6"
+    },
+    {
+      "name": "N04bRootInteriorRegularity",
+      "blob": "dfaf1caaf070c2f3f127d5578f6223e78e10acb0",
+      "sha256": "5b940dc8d06b838873fab1ed874034e430ee410f74ba6b007819b9e7dcbabe37",
+      "lines": 151,
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6"
+    },
+    {
+      "name": "TameElementaryCalculus",
+      "blob": "bc38b3601334a7b76a3eda9f3602c4d3b2440423",
+      "sha256": "8970cb3def322b3ecaf1d4c717754fc68f57d4a63d4ed82023a7d4fae5ac9b09",
+      "lines": 512,
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6"
+    },
+    {
+      "name": "N07aGeometryJetBounds",
+      "blob": "e1e7c43bac69e82dbd72c609763521ad1472682b",
+      "sha256": "5eb75a3b06a90cf2611b95ca8ce9098ba95c057e7627a4bcf1a8d756bc02c498",
+      "lines": 119,
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6"
+    },
+    {
+      "name": "N07aForwardCoefficients",
+      "blob": "592ad14b0a5c0418a95f1be62442c3608ca4c6a3",
+      "sha256": "6c968af49986579600e3e1ced9bb4b53bb70c3708e9abbc3e45dc4ff8852d877",
+      "lines": 380,
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6"
+    },
+    {
+      "name": "N07aNeighborhood",
+      "blob": "86b20bbbcad3781f00b90d3b7562ab700f99eef3",
+      "sha256": "814ee5af91417d6b4e109bde34d8460e476d0b211c26a36fa60714df6dd83409",
+      "lines": 218,
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6"
+    },
+    {
+      "name": "AnalysisStatements",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "lines": 603,
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6"
+    },
+    {
+      "name": "Nonlinear",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "lines": 1773,
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6"
+    },
+    {
+      "name": "FormPullback",
+      "blob": "6238095a75eb06479071372465a41701824657c8",
+      "sha256": "09885fd35b2086a984883f723c5bce94fed1d3987a71485a2fa7185108083a50",
+      "lines": 137,
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6"
+    },
+    {
+      "name": "CanonicalJetNormalization",
+      "blob": "d2373f98afac2769d0ae67daa6b56d8bbadebb40",
+      "sha256": "376dea5b9a6281f63b21f6aeefd9273dc4aadc8a13629ad39d22c88320353288",
+      "lines": 276,
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6"
+    }
+  ],
+  "actual_api_checks": [
+    {
+      "provider": "TameElementaryCalculus",
+      "line": 424,
+      "name": "SmoothDirections.congr",
+      "contract": "Given J : SmoothDirections U f and pointwise f = g on U, returns SmoothDirections U g. open_domain, D, continuous and derivative are literally the original fields; zero is J.zero.trans hfg.",
+      "application": "f is the original differenceJets, g is normalized differenceJets; hdifference has g=f, so congrFun hdifference.symm supplies f x=g x."
+    },
+    {
+      "provider": "TameElementaryCalculus",
+      "line": 428,
+      "name": "SmoothDirections.congr.D",
+      "contract": "D := J.D; no replacement tower, base, loss, sample, state neighborhood or constants.",
+      "tail": "simpa only [J', SmoothDirections.congr, normalizedCanonicalData_cell] using hJ"
+    },
+    {
+      "provider": "FormPullback",
+      "line": 22,
+      "name": "planeJacobian",
+      "contract": "The exact 2x2 determinant of fderiv real F p on (1,0) and (0,1). Rewriting a typed full linear-map equality changes both rows at the identical point."
+    },
+    {
+      "provider": "RootTravelOppositeCoordinates",
+      "name": "n04b_fderiv_rootPhysicalChart_opposite",
+      "contract": "Both rows at the same physical point, coefficient -(sqrt oppositeRadius / sqrt targetRadius). The new rewrite reduces the stored factor sqrt(oppositeRadius/targetRadius) using hx.le."
+    },
+    {
+      "provider": "N04bActualAtlasGerms",
+      "name": "n04bActualTypedAtlas_negative_component_germs",
+      "contract": "Actual chart and height germs on the full open negative component for the same typed K, z, component, enumeration and side."
+    }
+  ],
+  "congr_import_visibility": {
+    "new_imports": [],
+    "path": [
+      "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+      "ContinuousFlexibility.Analysis.N07aForwardCoefficients",
+      "ContinuousFlexibility.Analysis.N07aNeighborhood",
+      "ContinuousFlexibility.Analysis.N07aGeometryJetBounds",
+      "ContinuousFlexibility.Analysis.CanonicalPrimitiveJetsNormalization"
+    ],
+    "all_four_provider_blobs_equal_green_c796": true
+  },
+  "pinned_mathlib": {
+    "commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "fderiv_eq": {
+      "path": "Mathlib/Analysis/Calculus/FDeriv/Congr.lean",
+      "blob": "da599f75bd35b874f08b3fb7b326c2679500eefb",
+      "review_basis": "Exact real-scalar EventualEq.fderiv_eq interface already verified in CI165 independent review 3fba8049d12fb9fe7f9f1ef8a44cd6574a14f3a8; all uses retain (𝕜 := ℝ)."
+    },
+    "sqrt_div_basis": "The identical Real.sqrt_div' _ hx.le call is used by the current compiled RootTravelOppositeCoordinates determinant lemma; mathematical denominator is positive."
+  },
+  "limits": {
+    "numeric_resource_options_changed": false,
+    "heartbeats_increased": false,
+    "recursion_limits_increased": false,
+    "only_option_delta": "backward.isDefEq.respectTransparency := true"
+  },
+  "execution": {
+    "local_Lean": false,
+    "local_compilation": false,
+    "CI_queries": false,
+    "CI_log_download": false,
+    "filesystem_writes": false,
+    "active_repo_changes": false,
+    "git_ref_changes": false,
+    "commits_created": false,
+    "source_archival_copies": false,
+    "only_Git_blobs_created": true
+  },
+  "recommendation": "Independently review these two full sources and exact differences; if accepted root can install exactly these blobs for the next bounded CI repair. Static review makes no compilation or timing-success claim."
+}

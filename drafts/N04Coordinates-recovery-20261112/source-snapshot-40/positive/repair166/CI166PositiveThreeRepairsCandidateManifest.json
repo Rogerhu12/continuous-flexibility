@@ -1,0 +1,398 @@
+{
+  "schema": "n04-ci-proof-repair-candidate-v1",
+  "status": "FROZEN_CANDIDATE_SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "owner": "proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "baseline": {
+    "head": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+    "tree_prefix_supplied_by_root": "d6e6c25",
+    "ci_round": 166
+  },
+  "candidate_manifest_backup_path": "positive/repair166/CI166PositiveThreeRepairsCandidateManifest.json",
+  "diagnostics": {
+    "blob": "7b37c96ce91717905335f28cb6898aa39db2b91a",
+    "sha256": "efd55bad3f26692c8ed92f2d1d1fa1bdc6e4de4bc1cc8d8b85db726e202d4764",
+    "bytes": 5056,
+    "backup_path": "positive/repair166/CI166PositiveThreeRepairsDiagnostics.json",
+    "raw_log_blob": "923cb8a210ecbde6676288e6e1e99e73096f8229",
+    "raw_log_sha256": "e31097de662da4b2dac4b5bb1fb092fae301ca4ea78d03c8f529bccdb5165474",
+    "unique_errors": 8,
+    "limitation": "Workflow head400 stops after Gauge right_inverse context. Gauge lines117/119/122/168 have exact summary diagnostics but no preserved detailed goal context; repairs for these use the complete actual source and its genuine providers."
+  },
+  "sources": [
+    {
+      "module": "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+      "target_path": "src/ContinuousFlexibility/Analysis/PositiveReferenceFiniteRadialJets.lean",
+      "candidate_backup_path": "positive/repair166/PositiveReferenceFiniteRadialJets.lean",
+      "storage_note": "Exact immutable Git blob. No local file or duplicate backup Lean copy claimed; parent may preserve source through actual integration commit.",
+      "before": {
+        "blob": "db60546bb34349a040955ace14facdf5b13dfa0d",
+        "sha256": "a515668c71f3895edfda3d1183a5c275f3758799de0d7ebb68d439d33095bc66",
+        "lines": 167
+      },
+      "after": {
+        "blob": "9c5a4df8f5adf3a7d388c331d2b76c203f11ac84",
+        "sha256": "19226e6ea9763d0d842239e0bb4986e85d78d90949b9aae4677fd00ad1ad298e",
+        "lines": 169,
+        "utf8_bytes": 8513,
+        "ends_with_newline": true
+      },
+      "diff": {
+        "blob": "21c7d7098a8f3a78777b14324cc0b374a8e6bb46",
+        "sha256": "0b22563484e673175ca5139bae8bda7ed7f83663788011a4548020ef61d7f094",
+        "added": 3,
+        "deleted": 1,
+        "net": 2
+      },
+      "exact_replacements": [
+        {
+          "before": "  simpa only [radialEndpointTaylorSlice, radialBoundaryJet, iteratedDeriv_one] using\n    radialBoundaryJet_oneSidedBoundaryTaylorRepresentative f n c hn 0",
+          "after": "  change deriv (fun x : ℝ => oneSidedBoundaryTaylorRepresentative n c f (x, 0)) c =\n    deriv (fun x : ℝ => f (x, 0)) c\n  simpa only [radialBoundaryJet, iteratedDeriv_one] using\n    radialBoundaryJet_oneSidedBoundaryTaylorRepresentative f n c hn 0"
+        }
+      ],
+      "reverse_reconstruction_exact": true,
+      "public_headers_preserved": [
+        {
+          "name": "radialEndpointTaylorSlice",
+          "header": "def radialEndpointTaylorSlice (n : ℕ) (c : ℝ)\n    (f : PolarPoint → ℝ) (x : ℝ) : ℝ ",
+          "sha256": "23d0a33208c9068259e1beae3012048f0c8540f5f695a07bc5515a8dc93f4601"
+        },
+        {
+          "name": "contDiff_radialEndpointTaylorSlice",
+          "header": "theorem contDiff_radialEndpointTaylorSlice\n    {f : PolarPoint → ℝ} (c : ℝ)\n    (hf : ∀ θ, ContDiffAt ℝ ∞ f (c, θ)) (n : ℕ) :\n    ContDiff ℝ ∞ (radialEndpointTaylorSlice n c f) ",
+          "sha256": "15bc14d928c16288091c8f294de5221ddb7da931d9091c75aaca62d848b9e132"
+        },
+        {
+          "name": "radialEndpointTaylorSlice_value",
+          "header": "theorem radialEndpointTaylorSlice_value\n    (f : PolarPoint → ℝ) (n : ℕ) (c : ℝ) :\n    radialEndpointTaylorSlice n c f c = f (c, 0) ",
+          "sha256": "a1c4b189ea35c292bf76d3b9f0d9055478c32cc7849a2d4ad32dbe18d34c4b02"
+        },
+        {
+          "name": "radialEndpointTaylorSlice_deriv",
+          "header": "theorem radialEndpointTaylorSlice_deriv\n    (f : PolarPoint → ℝ) {n : ℕ} (hn : 1 ≤ n) (c : ℝ) :\n    deriv (radialEndpointTaylorSlice n c f) c =\n      deriv (fun x : ℝ => f (x, 0)) c ",
+          "sha256": "b3e5a532be6d9ff4a2450c3d50fce847c1b66d0a1a321081bf327c007975c138"
+        },
+        {
+          "name": "radialEndpointTaylorSlice_lift",
+          "header": "theorem radialEndpointTaylorSlice_lift\n    {f : PolarPoint → ℝ} {a b c : ℝ}\n    (hab : a < b) (hc : c ∈ Icc a b)\n    (hfc : ∀ θ, ContDiffAt ℝ ∞ f (c, θ))\n    (hradial : ∀ x ∈ Ioo a b, ∀ θ, f (x, θ) = f (x, 0)) (n : ℕ) :\n    (fun p : PolarPoint => radialEndpointTaylorSlice n c f p.1) =\n      oneSidedBoundaryTaylorRepresentative n c f ",
+          "sha256": "67f4236c5b2fffd9dcb2c5b98752aa20fd7e2b84f33d287b36d7b86c90d988a3"
+        },
+        {
+          "name": "radialEndpointTaylorSlice_fullJets",
+          "header": "theorem radialEndpointTaylorSlice_fullJets\n    {f : PolarPoint → ℝ} {a b c : ℝ}\n    (hab : a < b) (hc : c ∈ Icc a b)\n    (hf : ContDiffOn ℝ ∞ f (Ioo a b ×ˢ (univ : Set ℝ)))\n    (hfc : ∀ θ, ContDiffAt ℝ ∞ f (c, θ))\n    (hradial : ∀ x ∈ Ioo a b, ∀ θ, f (x, θ) = f (x, 0))\n    (n : ℕ) {k : ℕ} (hk : k ≤ n) (θ : ℝ) :\n    iteratedFDeriv ℝ k (fun p : PolarPoint => radialEndpointTaylorSlice n c f p.1)\n        (c, θ) = iteratedFDeriv ℝ k f (c, θ) ",
+          "sha256": "bd86c45313894f2419d32594de8a2a55618c7229477d14d19fdf375f4b9ceeb5"
+        },
+        {
+          "name": "exists_positiveReferenceFiniteRadialJets",
+          "header": "theorem exists_positiveReferenceFiniteRadialJets\n    {F : Set ℝ} (hF : IsClosed F) {l r : ℝ}\n    (hl : l ∉ F) (hr : r ∉ F) (hlr : l < r)\n    {a b : Bool → ℝ} {y h : Bool → PolarPoint → ℝ}\n    (hab : ∀ side, a side < b side)\n    (hc : ∀ side, (if side then r else l) ∈ Icc (a side) (b side))\n    (hy : ∀ side, ContDiffOn ℝ ∞ (y side)\n      (Ioo (a side) (b side) ×ˢ (univ : Set ℝ)))\n    (hh : ∀ side, ContDiffOn ℝ ∞ (h side)\n      (Ioo (a side) (b side) ×ˢ (univ : Set ℝ)))\n    (hyc : ∀ side θ, ContDiffAt ℝ ∞ (y side) (if side then r else l, θ))\n    (hhc : ∀ side θ, ContDiffAt ℝ ∞ (h side) (if side then r else l, θ))\n    (hyr : ∀ side x, x ∈ Ioo (a side) (b side) → ∀ θ,\n      y side (x, θ) = y side (x, 0))\n    (hhr : ∀ side x, x ∈ Ioo (a side) (b side) → ∀ θ,\n      h side (x, θ) = h side (x, 0))\n    (hyvalue : ∀ side, y side (if side then r else l, 0) =\n      (if side then (1 : ℝ) else 0))\n    (hyslope : ∀ side, 0 < deriv (fun x : ℝ => y side (x, 0))\n      (if side then r else l))\n    (hhpositive : ∀ side, 0 < h side (if side then r else l, 0))\n    {n : ℕ} (hn : 1 ≤ n) :\n    ∃ Y H : ℝ → ℝ,\n      PositiveChartRangeGeometry (positiveReferenceCylinderChart Y)\n        (positiveReferenceCylinderInverse Y) (fun p : PolarPoint => H p.1) l r 0 1 ∧\n      (∀ x ∈ F, H x = 1) ∧\n      (∀ side θ k, k ≤ n →\n        iteratedFDeriv ℝ k (fun p : PolarPoint => Y p.1)\n            (if side then r else l, θ) =\n          iteratedFDeriv ℝ k (y side) (if side then r else l, θ)) ∧\n      (∀ side θ k, k ≤ n →\n        iteratedFDeriv ℝ k (fun p : PolarPoint => H p.1)\n            (if side then r else l, θ) =\n          iteratedFDeriv ℝ k (h side) (if side then r else l, θ)) ",
+          "sha256": "7392504d4f1ce3c4d3db68d2fc131a3e0c25357aa1231dda4d285e18976c2272"
+        }
+      ],
+      "imports_preserved": [
+        "import ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative",
+        "import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+      ],
+      "options_preserved": [
+        "set_option backward.isDefEq.respectTransparency false"
+      ],
+      "diagnostics": [
+        45
+      ],
+      "proof_change": "Expose the actual scalar Taylor slice as a whole lambda under deriv using typed change, then use the unchanged genuine one-sided first radial jet identity.",
+      "preserved": "n, hn, c, f, complete public header and all remaining proofs; the zero-order value proof is untouched."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+      "target_path": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+      "candidate_backup_path": "positive/repair166/RadialReferencePrincipalFormulas.lean",
+      "storage_note": "Exact immutable Git blob. No local file or duplicate backup Lean copy claimed; parent may preserve source through actual integration commit.",
+      "before": {
+        "blob": "1292702418d040830307436014b493ae656ab469",
+        "sha256": "eb7f1e15a3e006b588861993260128b4d93045c27eedc159f75f2b3a8c5e0aa2",
+        "lines": 105
+      },
+      "after": {
+        "blob": "974c5b9bdcca6ca391d5c7f8d827deb43ba07130",
+        "sha256": "e0577144891075f5ab5a574763fe6ca9d83a4640969b90cd314d95a8fe69747c",
+        "lines": 108,
+        "utf8_bytes": 5355,
+        "ends_with_newline": true
+      },
+      "diff": {
+        "blob": "9e5af12c98914dca0bfcf811b644fe11bc3d06d4",
+        "sha256": "dc64c83188e82813e9cd9dc8a3f8167d18ee6c766db94cbca59b1387bbea734e",
+        "added": 6,
+        "deleted": 3,
+        "net": 3
+      },
+      "exact_replacements": [
+        {
+          "before": "  simp only [hdiv, planeJacobian_positiveReferenceCylinderChart\n    (p := positiveReferenceCylinderInverse Y p) hY,\n    positiveReferenceCylinderInverse, abs_of_pos hYpos]",
+          "after": "  rw [hdiv, planeJacobian_positiveReferenceCylinderChart\n    (p := positiveReferenceCylinderInverse Y p) hY]\n  change H (Function.invFun Y p.1) *\n    deriv (fun r => w r * deriv H r) (Function.invFun Y p.1) /\n      |deriv Y (Function.invFun Y p.1)| = _\n  rw [abs_of_pos hYpos]"
+        }
+      ],
+      "reverse_reconstruction_exact": true,
+      "public_headers_preserved": [
+        {
+          "name": "coordinatePrincipalDensity_radial_cylinder",
+          "header": "theorem coordinatePrincipalDensity_radial_cylinder\n    {A : SymmetricCoefficients} {Y H : ℝ → ℝ} {p : PolarPoint}\n    (hY : DifferentiableAt ℝ Y p.1) :\n    let B := coordinatePrincipalDensity A (positiveReferenceCylinderChart Y)\n      (fun q : PolarPoint => H q.1)\n    B.a p = H p.1 ^ 2 / |deriv Y p.1| * (A.a p * deriv Y p.1 ^ 2) ∧\n      B.b p = H p.1 ^ 2 / |deriv Y p.1| * (A.b p * deriv Y p.1) ∧\n      B.c p = H p.1 ^ 2 / |deriv Y p.1| * A.c p ",
+          "sha256": "bc9dca0e9f199fcd5b72722f4d31cc8d94881c42143969ea6b99ba1424180fd7"
+        },
+        {
+          "name": "divergenceOperator_radial_height_of_coefficient_germs",
+          "header": "theorem divergenceOperator_radial_height_of_coefficient_germs\n    {A : SymmetricCoefficients} {w H : ℝ → ℝ} {p : PolarPoint}\n    (hw : ContDiff ℝ ∞ w) (hH : ContDiff ℝ ∞ H)\n    (ha : A.a =ᶠ[𝓝 p] (fun q : PolarPoint => w q.1))\n    (hb : A.b =ᶠ[𝓝 p] (fun _ : PolarPoint => (0 : ℝ))) :\n    divergenceOperator A (fun q : PolarPoint => H q.1) p =\n      deriv (fun r => w r * deriv H r) p.1 ",
+          "sha256": "b74c475dee316c39fe0355e1c79e3e3c813d25f6192fc64371d91c4c9fa981ec"
+        },
+        {
+          "name": "inverseChartPotential_radial_cylinder",
+          "header": "theorem inverseChartPotential_radial_cylinder\n    {A : SymmetricCoefficients} {w Y H : ℝ → ℝ} {p : PolarPoint}\n    (hw : ContDiff ℝ ∞ w) (hH : ContDiff ℝ ∞ H)\n    (hY : DifferentiableAt ℝ Y (Function.invFun Y p.1))\n    (hYpos : 0 < deriv Y (Function.invFun Y p.1))\n    (ha : A.a =ᶠ[𝓝 (positiveReferenceCylinderInverse Y p)]\n      (fun q : PolarPoint => w q.1))\n    (hb : A.b =ᶠ[𝓝 (positiveReferenceCylinderInverse Y p)]\n      (fun _ : PolarPoint => (0 : ℝ))) :\n    inverseChartPotential A (positiveReferenceCylinderChart Y)\n      (positiveReferenceCylinderInverse Y) (fun q : PolarPoint => H q.1) p =\n        H (Function.invFun Y p.1) *\n          deriv (fun r => w r * deriv H r) (Function.invFun Y p.1) /\n            deriv Y (Function.invFun Y p.1) ",
+          "sha256": "f66f1cfc46bf707dac1e0e345c4f95c44fed1d09d208fc8e179a08bad6a5f7f8"
+        }
+      ],
+      "imports_preserved": [
+        "import ContinuousFlexibility.Analysis.PositiveReferenceCylinder",
+        "import ContinuousFlexibility.Analysis.CoordinateOperatorConstruction",
+        "import ContinuousFlexibility.Radial.RadialHeight"
+      ],
+      "options_preserved": [],
+      "diagnostics": [
+        98
+      ],
+      "proof_change": "Rewrite hdiv and the actual Jacobian at the literal positiveReferenceCylinderInverse point before reducing that point. Typed change then exposes the scalar denominator, and abs_of_pos uses the original hYpos.",
+      "preserved": "All three public headers including the internal let B; successful principal-density and divergence proofs unchanged byte for byte."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+      "target_path": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean",
+      "candidate_backup_path": "positive/repair166/WholePositiveReferenceGauge.lean",
+      "storage_note": "Exact immutable Git blob. No local file or duplicate backup Lean copy claimed; parent may preserve source through actual integration commit.",
+      "before": {
+        "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+        "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+        "lines": 171
+      },
+      "after": {
+        "blob": "9f240624bea6c815b9ceb64eb7eff050b4f51316",
+        "sha256": "89b8e10fee150ed5c3816f725f0bafa80352d4af749519948e3833ed0ca2af28",
+        "lines": 171,
+        "utf8_bytes": 8095,
+        "ends_with_newline": true
+      },
+      "diff": {
+        "blob": "fdd7dd6efa20c55f8bcb93a471efea5ebd47cff5",
+        "sha256": "3ae1444a6b5bd1e5c764878601d1ebf296589620d0e1b131c4da5c03de970bb5",
+        "added": 10,
+        "deleted": 10,
+        "net": 0
+      },
+      "exact_replacements": [
+        {
+          "before": "      Function.comp_apply, H₀.left_inverse, H.left_inverse]",
+          "after": "      Function.comp_apply, H₀.left_inverse (σ p), H.left_inverse p]"
+        },
+        {
+          "before": "      Function.comp_apply, H.right_inverse, H₀.right_inverse]",
+          "after": "      Function.comp_apply, H.right_inverse (χ p), H₀.right_inverse p]"
+        },
+        {
+          "before": "    simp only [wholePositiveReferenceGaugeChart, Function.comp_apply, hp]",
+          "after": "    simp only [wholePositiveReferenceGaugeChart, Function.comp_apply, hp, id_eq]"
+        },
+        {
+          "before": "    simp only [wholePositiveReferenceGaugeHeight, hp, hph, mul_one]",
+          "after": "    simp only [wholePositiveReferenceGaugeHeight, hp, hph, id_eq, mul_one]"
+        },
+        {
+          "before": "      simpa only [H₀.left_inverse (x, θ)] using\n        H₀.inverse_smooth.continuous.continuousAt (x := ψ (x, θ))",
+          "after": "      have hc := H₀.inverse_smooth.continuous.continuousAt (x := ψ (x, θ))\n      change Tendsto χ (𝓝 (ψ (x, θ))) (𝓝 (χ (ψ (x, θ)))) at hc\n      simpa only [H₀.left_inverse (x, θ)] using hc"
+        },
+        {
+          "before": "    by_cases hQ : Q p = 0\n    · simp only [wholePositiveReferenceGaugeHeight, wholePositiveChartHeight,\n        hστ p, hQ, inv_zero, mul_zero, div_zero]\n    · field_simp [wholePositiveReferenceGaugeHeight, wholePositiveChartHeight,\n        hστ p, hh₀ p, hQ] <;> ring",
+          "after": "    rw [wholePositiveReferenceGaugeHeight_eq, hστ p]\n    by_cases hQ : Q p = 0\n    · simp only [hQ, div_zero]\n    · field_simp [hh₀ p, hQ] <;> ring"
+        }
+      ],
+      "reverse_reconstruction_exact": true,
+      "public_headers_preserved": [
+        {
+          "name": "wholePositiveReferenceGaugeChart",
+          "header": "def wholePositiveReferenceGaugeChart\n    (ψ σ : PolarPoint → PolarPoint) : PolarPoint → PolarPoint ",
+          "sha256": "1acdea927109aa70aff0a8d2817876c982fd9f714a332a032a9231f0184497d0"
+        },
+        {
+          "name": "wholePositiveReferenceGaugeInverse",
+          "header": "def wholePositiveReferenceGaugeInverse\n    (τ χ : PolarPoint → PolarPoint) : PolarPoint → PolarPoint ",
+          "sha256": "7fc6fb428f55cfcd4cd71bfbfc0b96cd47d01a32e3d826a9401c4ace8deee0b6"
+        },
+        {
+          "name": "wholePositiveReferenceGaugeHeight",
+          "header": "def wholePositiveReferenceGaugeHeight\n    (h₀ : PolarPoint → ℝ) (σ : PolarPoint → PolarPoint) (Q : PolarPoint → ℝ)\n    (p : PolarPoint) : ℝ ",
+          "sha256": "d8ad08a99362b5a2d3c4036aed3f5972eaf0058e39960aa818c5cd4f16094eca"
+        },
+        {
+          "name": "wholePositiveReferenceGaugeHeight_eq",
+          "header": "theorem wholePositiveReferenceGaugeHeight_eq\n    (h₀ : PolarPoint → ℝ) (σ : PolarPoint → PolarPoint) (Q : PolarPoint → ℝ)\n    (p : PolarPoint) :\n    wholePositiveReferenceGaugeHeight h₀ σ Q p = h₀ (σ p) / Q (σ p) ",
+          "sha256": "164bca44551266ff6fa172aeafca30370b61579438f59dfe6c8411f98f35b57c"
+        },
+        {
+          "name": "wholePositiveReferenceGauge_geometry",
+          "header": "theorem wholePositiveReferenceGauge_geometry\n    {ψ χ τ σ : PolarPoint → PolarPoint} {h₀ Q : PolarPoint → ℝ}\n    {l r u v c d : ℝ}\n    (H₀ : PositiveChartRangeGeometry ψ χ h₀ l r u v)\n    (H : WholePositiveChartGeometry σ τ (wholePositiveChartHeight σ Q) l r c d) :\n    PositiveChartRangeGeometry (wholePositiveReferenceGaugeChart ψ σ)\n      (wholePositiveReferenceGaugeInverse τ χ)\n      (wholePositiveReferenceGaugeHeight h₀ σ Q) l r u v ",
+          "sha256": "bb18cf06fb6d9e05421f132be449c322e7f0276903d860fddec310afd211606c"
+        },
+        {
+          "name": "wholePositiveReferenceGauge_middle_germs",
+          "header": "theorem wholePositiveReferenceGauge_middle_germs\n    {ψ χ τ σ : PolarPoint → PolarPoint} {h₀ Q : PolarPoint → ℝ}\n    {l r u v c d : ℝ}\n    (H₀ : PositiveChartRangeGeometry ψ χ h₀ l r u v)\n    (H : WholePositiveChartGeometry σ τ (wholePositiveChartHeight σ Q) l r c d)\n    {x : ℝ} (hx : x ∈ Icc c d) (θ : ℝ) :\n    (wholePositiveReferenceGaugeChart ψ σ =ᶠ[𝓝 (x, θ)] ψ) ∧\n      (wholePositiveReferenceGaugeHeight h₀ σ Q =ᶠ[𝓝 (x, θ)] h₀) ∧\n      (wholePositiveReferenceGaugeInverse τ χ =ᶠ[𝓝 (ψ (x, θ))] χ) ",
+          "sha256": "d34c981782a26801c9acea242c902515811ac7a5675cce00d6786762efd2a6d6"
+        },
+        {
+          "name": "wholePositiveReferenceGauge_reference",
+          "header": "theorem wholePositiveReferenceGauge_reference\n    (ψ χ : PolarPoint → PolarPoint) (h₀ : PolarPoint → ℝ)\n    {τ σ : PolarPoint → PolarPoint} {Q : PolarPoint → ℝ}\n    (hτ : τ = id) (hσ : σ = id) (hQ : Q = (fun _ => 1)) :\n    wholePositiveReferenceGaugeChart ψ σ = ψ ∧\n      wholePositiveReferenceGaugeInverse τ χ = χ ∧\n      wholePositiveReferenceGaugeHeight h₀ σ Q = h₀ ",
+          "sha256": "a0c3681eb6ca301ddfb59b57becbb3273c3fcac0d43afc8defede91c78041a7a"
+        },
+        {
+          "name": "wholePositiveReferenceGauge_relative_fields",
+          "header": "theorem wholePositiveReferenceGauge_relative_fields\n    {ψ χ τ σ : PolarPoint → PolarPoint} {h₀ Q : PolarPoint → ℝ}\n    (hχψ : Function.LeftInverse χ ψ) (hστ : Function.LeftInverse σ τ)\n    (hh₀ : ∀ p, h₀ p ≠ 0) :\n    wholePositiveReferenceGaugeInverse τ χ ∘ ψ = τ ∧\n      χ ∘ wholePositiveReferenceGaugeChart ψ σ = σ ∧\n      ∀ p, h₀ p / wholePositiveReferenceGaugeHeight h₀ σ Q (τ p) = Q p ",
+          "sha256": "ce8c387019b4709e29859d5a4243efcbd6c7fc4c9cd41fdbd01bb0a711a581e5"
+        }
+      ],
+      "imports_preserved": [
+        "import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+      ],
+      "options_preserved": [],
+      "diagnostics": [
+        55,
+        59,
+        117,
+        119,
+        122,
+        168
+      ],
+      "proof_change": "Specialize true inverse equations at sigma p/chi p and p; add id_eq to the two actual middle germ reductions; explicitly expose ContinuousAt as its Tendsto definition before inverse-point rewriting; use the same-file public height_eq before canceling h0/Q, keeping the Q=0 branch.",
+      "preserved": "The same psi/chi/tau/sigma/Q/h0 and true domains; all definitions, eight public headers, imports, normalization and global geometry assertions unchanged."
+    }
+  ],
+  "actual_providers": [
+    {
+      "name": "WholePositiveChartGeometry",
+      "repository": "Rogerhu12/continuous-flexibility",
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+      "path": "src/ContinuousFlexibility/Analysis/WholePositiveChartGeometry.lean",
+      "blob": "118c0019a784242b74c880166ee4dedc43e1dede",
+      "sha256": "b0f9f540c1d8bcdf0e5414b487f15df378e3b36e369697c012f8bc28bbba892c",
+      "bytes": 7224,
+      "lines": 146,
+      "read_scope": "Complete actual source read"
+    },
+    {
+      "name": "OneSidedBoundaryTaylorRepresentative",
+      "repository": "Rogerhu12/continuous-flexibility",
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+      "path": "src/ContinuousFlexibility/Analysis/OneSidedBoundaryTaylorRepresentative.lean",
+      "blob": "3a3cfa0ce1db7be51420bcaa2ceb6dedd4e86855",
+      "sha256": "50d11b8070524604511c037a38d04be1517f5802548d963ac93184c165787b76",
+      "bytes": 6182,
+      "lines": 130,
+      "read_scope": "Complete actual source read"
+    },
+    {
+      "name": "PositiveChartRangeGeometry",
+      "repository": "Rogerhu12/continuous-flexibility",
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+      "path": "src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean",
+      "blob": "37c324a711fd04efbc92d5df436ea670ce0dbfd9",
+      "sha256": "75ced3f23a0d0ff26ccae06abb8695ca6af7d59322daa975d04bacd53a0caddd",
+      "bytes": 7887,
+      "lines": 169,
+      "read_scope": "Complete actual source read"
+    },
+    {
+      "name": "PositiveReferenceCylinder",
+      "repository": "Rogerhu12/continuous-flexibility",
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+      "path": "src/ContinuousFlexibility/Analysis/PositiveReferenceCylinder.lean",
+      "blob": "c1c59b1c3240feeec1539a65ce0c8a8a4ec7ba48",
+      "sha256": "6ececb96b06c704d8672c58cbe2b395bf3ce8967a667b046cd09466249b5c4de",
+      "bytes": 5441,
+      "lines": 128,
+      "read_scope": "Complete actual source read"
+    },
+    {
+      "name": "CoordinateOperatorConstruction",
+      "repository": "Rogerhu12/continuous-flexibility",
+      "ref": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+      "path": "src/ContinuousFlexibility/Analysis/CoordinateOperatorConstruction.lean",
+      "blob": "aef71ea652edabf9d9c4788e2c6aba6780f6c1fe",
+      "sha256": "ffbecb5ae9d0d9e40a5fd193592dde632989d3c4fb2382b118be5180f9d7f1c1",
+      "bytes": 3769,
+      "lines": 76,
+      "read_scope": "Complete actual source read"
+    },
+    {
+      "name": "PinnedTopologyDefsFilter",
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Topology/Defs/Filter.lean",
+      "blob": "343fd3e5f576a8e0f0f040eb2df8e5c309106655",
+      "sha256": "3b2ffc8154a531b4f0d3b36aa75ee08635c0df31884ba83baf1b0b0283c13748",
+      "bytes": 15801,
+      "lines": 359,
+      "read_scope": "Exact ContinuousAt definition read, not claiming full mathlib-file review"
+    }
+  ],
+  "verification": {
+    "full_sources_read": true,
+    "all_18_complete_public_headers_byte_identical": true,
+    "imports_options_unchanged": true,
+    "all_8_replacements_reversed_to_exact_actual_before": true,
+    "server_exact_readbacks": [
+      {
+        "name": "PositiveReferenceFiniteRadialJets.lean",
+        "blob": "9c5a4df8f5adf3a7d388c331d2b76c203f11ac84",
+        "sha256": "19226e6ea9763d0d842239e0bb4986e85d78d90949b9aae4677fd00ad1ad298e",
+        "exact_utf8_readback": true
+      },
+      {
+        "name": "PositiveReferenceFiniteRadialJets.diff",
+        "blob": "21c7d7098a8f3a78777b14324cc0b374a8e6bb46",
+        "sha256": "0b22563484e673175ca5139bae8bda7ed7f83663788011a4548020ef61d7f094",
+        "exact_utf8_readback": true
+      },
+      {
+        "name": "RadialReferencePrincipalFormulas.lean",
+        "blob": "974c5b9bdcca6ca391d5c7f8d827deb43ba07130",
+        "sha256": "e0577144891075f5ab5a574763fe6ca9d83a4640969b90cd314d95a8fe69747c",
+        "exact_utf8_readback": true
+      },
+      {
+        "name": "RadialReferencePrincipalFormulas.diff",
+        "blob": "9e5af12c98914dca0bfcf811b644fe11bc3d06d4",
+        "sha256": "dc64c83188e82813e9cd9dc8a3f8167d18ee6c766db94cbca59b1387bbea734e",
+        "exact_utf8_readback": true
+      },
+      {
+        "name": "WholePositiveReferenceGauge.lean",
+        "blob": "9f240624bea6c815b9ceb64eb7eff050b4f51316",
+        "sha256": "89b8e10fee150ed5c3816f725f0bafa80352d4af749519948e3833ed0ca2af28",
+        "exact_utf8_readback": true
+      },
+      {
+        "name": "WholePositiveReferenceGauge.diff",
+        "blob": "fdd7dd6efa20c55f8bcb93a471efea5ebd47cff5",
+        "sha256": "3ae1444a6b5bd1e5c764878601d1ebf296589620d0e1b131c4da5c03de970bb5",
+        "exact_utf8_readback": true
+      },
+      {
+        "name": "diagnostics.json",
+        "blob": "7b37c96ce91717905335f28cb6898aa39db2b91a",
+        "sha256": "efd55bad3f26692c8ed92f2d1d1fa1bdc6e4de4bc1cc8d8b85db726e202d4764",
+        "exact_utf8_readback": true
+      }
+    ],
+    "added": 19,
+    "deleted": 14,
+    "net_added": 5,
+    "local_lean_or_elaboration_run": false,
+    "active_index_refs_ci_modified": false,
+    "new_ci_log_downloaded": false
+  },
+  "scope": "Three actual CI166 source-level compatibility repairs only. No change to mathematical hypotheses, family choices, limits, public contracts or theorem statements. Independent peer and actual CI remain separate gates."
+}
