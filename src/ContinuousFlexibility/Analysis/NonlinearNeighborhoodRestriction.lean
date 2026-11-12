@@ -68,14 +68,15 @@ theorem N03Properties.restrict_neighborhood
     (hb : base ≤ base') (hε : ε' ≤ ε) :
     N03Properties D T S C R L base' ε' := by
   have hsub := stateNeighborhood_mono S C hb hε
-  rcases hL with ⟨ha, hp, hr, hsym, hf, hd, hi, ht⟩
+  rcases hL with ⟨ha, hp, hr, hsym, hf, hd, hi, ht, hspatial⟩
   refine ⟨fun z hz hs => ha z (hsub hz) hs,
     fun z hz hs => hp z (hsub hz) hs,
     fun z hz hs => hr z (hsub hz) hs,
     fun z hz hs => hsym z (hsub hz) hs,
     fun z hz hs => hf z (hsub hz) hs,
     fun z hz hs => hd z (hsub hz) hs,
-    fun z hz hs => hi z (hsub hz) hs, ?_⟩
+    fun z hz hs => hi z (hsub hz) hs, ?_,
+    fun z hz hs => hspatial z (hsub hz) hs⟩
   apply smoothTameOn_restrict_open ht
     (((sectorNeighborhood_isOpen S base' ε' ε').prod isOpen_univ).prod isOpen_univ)
   intro z hz
