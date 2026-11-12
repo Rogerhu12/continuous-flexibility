@@ -101,7 +101,8 @@ theorem n04WholeReferenceGaugeAtlasData_actual_referenceRadial
         rcases j with ⟨m, side⟩
         cases side <;> rfl
       have hpK : p ∈ referencePhysicalPieceOpen S K k := by
-        simpa only [referencePhysicalPieceOpen, hl, hr] using hp
+        change p ∈ referencePhysicalPieceOpen S V m at hp
+        simpa only [referencePhysicalPieceOpen, V, hl, hr] using hp
       rw [hk] at hpK
       have hpI : p ∈ Ioo (if j.2 then n04bActualReferenceCut hN j.1 else C.left j.1)
           (if j.2 then C.right j.1 else n04bActualReferenceCut hN j.1) ×ˢ
@@ -122,7 +123,9 @@ theorem n04WholeReferenceGaugeAtlasData_actual_referenceRadial
       change V.chart (C.referenceState, 0) m p =
         ((V.chart (C.referenceState, 0) m (p.1, 0)).1, p.2) ∧
         V.height (C.referenceState, 0) m p = V.height (C.referenceState, 0) m (p.1, 0)
-      rw [hF, hh, hk]
+      rw [hF, hh]
+      dsimp only [k] at hk
+      rw [hk]
       exact ⟨hn.2.2.1 p hpΩ, hn.2.2.2.1 p hpΩ⟩
   | inr i =>
       obtain ⟨hF, _, hh⟩ :=

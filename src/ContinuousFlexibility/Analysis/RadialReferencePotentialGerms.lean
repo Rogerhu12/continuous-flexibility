@@ -35,7 +35,9 @@ theorem radial_reference_chart_germ_on_strip
     have hdF := (hF.contDiffAt (hU.mem_nhds hx₀)).differentiableAt (by simp)
     have hdline : DifferentiableAt ℝ (fun t : ℝ => (t, (0 : ℝ))) x.1 :=
       differentiableAt_id.prodMk (differentiableAt_const _)
-    exact hdF.fst.comp x.1 hdline
+    have hd : DifferentiableAt ℝ (fun t => F (t, 0)) x.1 :=
+      hdF.comp x.1 hdline
+    exact hd.fst
 
 theorem physical_mixed_zero_of_radial_unit_density
     {A : SymmetricCoefficients} {F : PolarPoint → PolarPoint} {h : PolarPoint → ℝ}
@@ -101,8 +103,11 @@ theorem divergenceOperator_of_radial_germs
       n04b_divergenceOperator_congr_germ hh
     _ = radialPartial (Radial.radialHeightField (fun t => w t * deriv H t)) x +
         angularPartial (fun _ : PolarPoint => (0 : ℝ)) x := by
+      have hrad' := hrad.fderiv_eq (𝕜 := ℝ)
+      have hang' := hang.fderiv_eq (𝕜 := ℝ)
+      simp only [radialPartial, angularPartial] at hrad' hang'
       unfold divergenceOperator radialPartial angularPartial
-      rw [hrad.fderiv_eq, hang.fderiv_eq]
+      rw [hrad', hang']
     _ = deriv (fun t => w t * deriv H t) x.1 := by
       rw [radialPartial_radialHeightField_total]
       simp only [angularPartial_const, add_zero]
@@ -138,6 +143,7 @@ theorem inverseChartPotential_radial_formula_on_strip
           (G p) := by simp only [planeJacobian, hFg.fderiv_eq]
       _ = _ := planeJacobian_positiveReferenceCylinderChart hY
   unfold inverseChartPotential
-  rw [divergenceOperator_of_radial_germs hHg hag hbg, hJ, hHg.self_of_nhds]
+  rw [divergenceOperator_of_radial_germs (w := w) (H := fun t => h (t, 0))
+    hHg hag hbg, hJ, hHg.self_of_nhds]
 
 end ContinuousFlexibility.Analysis

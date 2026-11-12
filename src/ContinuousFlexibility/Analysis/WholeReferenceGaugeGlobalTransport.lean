@@ -46,9 +46,10 @@ theorem n04WholeReferenceGaugeAtlasData_relative_fields_eq
   intro m
   cases hi : e m with
   | inl j =>
-      simp [canonicalCurrentPoint, canonicalReferencePoint,
-        n04CoordinatesCurrentHeightRatio, n04WholeReferenceGaugeAtlasData,
-        n04WholeCanonicalAtlasData, n04bWithInteriorDivision, hi]
+      refine ⟨?_, ?_, ?_⟩ <;> funext p <;>
+        simp [canonicalCurrentPoint, canonicalReferencePoint,
+          n04CoordinatesCurrentHeightRatio, n04WholeReferenceGaugeAtlasData,
+          n04WholeCanonicalAtlasData, n04bWithInteriorDivision, hi]
   | inr i =>
       have hv := n04WholeReferenceGaugeAtlasData_positive_relative_fields
         C L K e cell ψ χ h₀ τ σ Q N z m i hi
@@ -88,7 +89,10 @@ theorem n04WholeReferenceGaugeAtlasData_global_transport
   refine ⟨hcurrent, ?_⟩
   calc
     q p = n04CoordinatesCurrentHeightRatio C W z m p := by
-      simpa only [n04CoordinatesCurrentHeightRatio, ← hf.1] using hf.2
+      change q p = W.height (C.referenceState, 0) m p /
+        W.height z m (canonicalCurrentPoint C W z m p)
+      rw [← show F p = canonicalCurrentPoint C W z m p from hf.1]
+      exact hf.2
     _ = n04CoordinatesCurrentHeightRatio C V z m p :=
       (congrFun (hrelative m).2.2 p).symm
     _ = V.height (C.referenceState, 0) m p / V.height z m (F p) := by

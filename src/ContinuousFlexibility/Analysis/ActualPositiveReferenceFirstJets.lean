@@ -91,7 +91,9 @@ theorem n04Coordinates_actual_positive_reference_firstJets
       (fun p => (K.chart (C.referenceState, 0) k p).2) (Prod.snd : PolarPoint → ℝ) :=
     finiteFullJetMatch_of_eqOn_closure (isOpen_Ioo.prod isOpen_univ)
       (hroot.1 θ).1.snd contDiffAt_snd
-      (fun p hp => congrArg Prod.snd (hopen.2.2.1 p hp)) hcl
+      (fun p hp => by
+        have he := congrArg (fun q : PolarPoint => q.2) (hopen.2.2.1 p hp)
+        exact he) hcl
   have hy : FiniteFullJetMatch 1 (c, θ) (fun p : PolarPoint => Y p.1)
       (fun p => v + s * (K.chart (C.referenceState, 0) k p).1) := by
     refine ⟨hgeometry.chart_smooth.fst.contDiffAt,
