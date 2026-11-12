@@ -134,7 +134,6 @@ private def N06ActualRelativeSourceBudget (order : ℕ) (Q : ℝ) : Prop :=
                 (V.forget (3 / 4 : ℝ) 0 b F)
                 (V.forget (3 / 4 : ℝ) 0 b (Mc F)) m)
 
-set_option diagnostics true in
 private theorem n06_actualOperator_principal_state
     (hrefstate : referenceStateConditions D S C) (N : ℕ) (A : ℝ)
     (hp : N06ActualParameterPrincipalBudget (C := C) (B := B)
@@ -152,7 +151,6 @@ private theorem n06_actualOperator_principal_state
   · intro F m hm
     exact hnegative F m (Bool.eq_false_of_not_eq_true hm)
 
-set_option diagnostics true in
 theorem n06_primitiveActual_principal_sources
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)
@@ -343,7 +341,6 @@ private theorem n06_actualOperator_assemble_state
           (D := D) (S := S) (C := C) (L := L) (K := K) (V := V) (b := b) (B := B)
           Nc Nl Qc Qp Qcol hQc hQp hQcol z Mc Mp columns hc hl⟩)
 
-set_option diagnostics true in
 private theorem n06_actualOperator_assemble
     (Nc : ℕ) (Qc : ℝ)
     (hc : N06ActualStatePrincipalBudget (C := C) (B := B)
@@ -361,7 +358,6 @@ private theorem n06_actualOperator_assemble
     (D := D) (S := S) (C := C) (L := L) (K := K) (V := V) (b := b) (B := B)
     Nc Nl Qc Qp Qcol hc.1 hl.1 hl.2.1 z (hc.2 z hz hs) (hl.2.2 z hz hs)
 
-set_option diagnostics true in
 /-- This is a pointwise analytic source package. Its weak principal
 pairing and full source identity are the inputs to the physical closure;
 no perturbed physical relation is assumed in its construction. -/
