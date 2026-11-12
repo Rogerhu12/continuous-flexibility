@@ -30,7 +30,7 @@ theorem n04Realization_potential_shifted_parameter_bound (k a b : ℕ) (RH : ℝ
       ∀ q (hq : q ∈ Ω), ∀ J : SmoothDirections U
         (fun x => mixedDerivative a b
           (fun p => H x p * divergenceOperator (A x) (Q x) p) q),
-      ∀ x ∈ U, ∀ v : Fin k → X, ∀ s λ : ℕ, a + b + 2 ≤ s →
+      ∀ x ∈ U, ∀ v : Fin k → X, ∀ s shift : ℕ, a + b + 2 ≤ s →
       ∀ W E C P R : ℝ, 0 ≤ W → W ≤ RH → 1 ≤ E → 1 ≤ C → 0 ≤ P → 1 ≤ R →
       (∀ i : Fin 5, ∀ u w : ℕ, u + w ≤ a + b + 2 →
         ‖mixedDerivative u w (n04RealizationPotentialInputs (A x) (H x) (Q x) i) q‖ ≤
@@ -39,15 +39,15 @@ theorem n04Realization_potential_shifted_parameter_bound (k a b : ℕ) (RH : ℝ
         (d : OrderedFinpartition k) (j : Fin d.length),
         ‖((RF i).parameter u w q hq).D (d.partSize j) x (v ∘ d.emb j)‖ ≤
           W * (C * E ^ P *
-            R ^ (((u + w + λ * d.partSize j : ℕ) : ℝ) / ((s : ℝ) + 1)))) →
+            R ^ (((u + w + shift * d.partSize j : ℕ) : ℝ) / ((s : ℝ) + 1)))) →
       ‖J.D k x v‖ ≤ B * C ^ 3 * E ^ (P * 3) * parameterHeightWeight W k *
-        R ^ (((a + b + 2 + λ * k : ℕ) : ℝ) / ((s : ℝ) + 1)) := by
+        R ^ (((a + b + 2 + shift * k : ℕ) : ℝ) / ((s : ℝ) + 1)) := by
   obtain ⟨B, hB, hb⟩ := n04Realization_potential_parameter_bound (X := X) k a b RH
   refine ⟨B, hB, ?_⟩
-  intro U hU Ω hΩ A H Q RF q hq J x hx v s λ hs W E C P R
+  intro U hU Ω hΩ A H Q RF q hq J x hx v s shift hs W E C P R
     hW hWR hE hC hP hR hbase hjet
   have hRpos : 0 < R := zero_lt_one.trans_le hR
-  let α : ℝ := (λ : ℝ) / ((s : ℝ) + 1)
+  let α : ℝ := (shift : ℝ) / ((s : ℝ) + 1)
   let v' : Fin k → X := fun i => R ^ (-α) • v i
   let ρ : ℝ := R ^ ((((a + b + 2 : ℕ) : ℝ) + 1) / ((s : ℝ) + 1))
   have hρ : 1 ≤ ρ := Real.one_le_rpow hR (by positivity)
@@ -66,7 +66,7 @@ theorem n04Realization_potential_shifted_parameter_bound (k a b : ℕ) (RH : ℝ
         W * (C * E ^ P *
           ρ ^ (((u + w : ℕ) : ℝ) / (((a + b + 2 : ℕ) : ℝ) + 1))) := by
     rw [hρpow]
-    have hexp : (((u + w + λ * d.partSize j : ℕ) : ℝ) / ((s : ℝ) + 1)) =
+    have hexp : (((u + w + shift * d.partSize j : ℕ) : ℝ) / ((s : ℝ) + 1)) =
         (((u + w : ℕ) : ℝ) / ((s : ℝ) + 1)) + α * (d.partSize j : ℝ) := by
       dsimp only [α]
       push_cast
@@ -91,7 +91,7 @@ theorem n04Realization_potential_shifted_parameter_bound (k a b : ℕ) (RH : ℝ
   have h := n04Realization_parameter_unscale_bound (J.D k x) v hRpos α
     (((a + b + 2 : ℕ) : ℝ) / ((s : ℝ) + 1)) M hraw'
   have hexp : (((a + b + 2 : ℕ) : ℝ) / ((s : ℝ) + 1)) + α * (k : ℝ) =
-      (((a + b + 2 + λ * k : ℕ) : ℝ) / ((s : ℝ) + 1)) := by
+      (((a + b + 2 + shift * k : ℕ) : ℝ) / ((s : ℝ) + 1)) := by
     dsimp only [α]
     push_cast
     ring
