@@ -93,7 +93,7 @@ theorem n06_controlledReferenceHeight_congr_ae_physical
   apply (n05_canonicalChart_ae_iff h04 href hs m hangle
     (fun p => canonicalHeight S K (C.referenceState, 0) m f p =
       canonicalHeight S K (C.referenceState, 0) m g p)).mpr
-  simp only [h04.1.referenceDomain m, referencePhysicalPieceOpen,
+  simp only [n05PhysicalPieceHalfPeriod, h04.1.referenceDomain m, referencePhysicalPieceOpen,
     prod_inter_prod, inter_univ, univ_inter]
   filter_upwards [hhalf,
     ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp hpU

@@ -42,6 +42,7 @@ theorem n06_reference_inverseChart_aestronglyMeasurable
   have hpull : (fun p => f (K.inverseChart z m p)) =ᵐ[canonicalMeasure S K m]
       (fun p => hf.mk f (K.inverseChart z m p)) := by
     apply (n05_canonicalChart_ae_iff h04 hz hs m hangle _).mpr
+    simp only [n05PhysicalPieceHalfPeriod]
     filter_upwards [hf.ae_eq_mk,
       ae_restrict_mem hmeas] with p hp hpU
     rw [hcharts.2.2.1 p hpU.1]
@@ -123,11 +124,11 @@ theorem n06_reference_radial_multiplier_lp
     simp only [g, hcharts.2.2.1 p hpo, n06_reference_radial_jacobian hY hchart hpo]
   have hgSq : Integrable (fun p => g p ^ 2) (canonicalMeasure S K m) :=
     (n05_canonicalChart_integrable_iff h04 hz hs m hangle (fun p => g p ^ 2)).mpr
-      (by simpa only [hmeasure] using hweight.congr heq.symm)
+      (by simpa only [n05PhysicalPieceHalfPeriod, hmeasure] using hweight.congr heq.symm)
   refine ⟨(memLp_two_iff_integrable_sq hg).mpr hgSq, ?_⟩
   calc
     _ = ∫ p, |planeJacobian (K.chart z m) p| * g (K.chart z m p) ^ 2 ∂μ := by
-      simpa only [hmeasure] using
+      simpa only [n05PhysicalPieceHalfPeriod, hmeasure] using
         n05_canonicalChart_integral h04 hz hs m hangle (fun p => g p ^ 2)
     _ = ∫ p, |deriv Y p.1| * (a p.1 * f p) ^ 2 ∂μ := integral_congr_ae heq
     _ ≤ ∫ p, B * f p ^ 2 ∂μ :=
