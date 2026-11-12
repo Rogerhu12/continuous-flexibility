@@ -1,0 +1,87 @@
+{
+  "snapshot": 16,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "parent": "71fd2c8ba445c4fa595f823339912f3d55744631",
+  "base_tree": "9b1a1ffb24e835c3f590ee213711eacc1c69db2b",
+  "line_head": "7a9eaacbc01e206ab2a91cc1d538cc48505130d9",
+  "line_tree": "eec840200ef0966dae0fe4cca32e132532c7d7e2",
+  "frozen_at": "2026-11-12T12:34:07.085266+00:00",
+  "indexed_files": 1129,
+  "new_sources": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/BufferedAuxiliaryColumnWitness.lean",
+      "sha256": "81a2dc394820b074a3d70336184f668c9c4fc830d7a1cfaa57b2cf6cc3af5b74",
+      "lines": 104
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalAuxiliaryDifferenceJets.lean",
+      "sha256": "28ab0392f4b5c9e30292253f24ccae662594bc514ebe3a3dd750d9117c8d59e5",
+      "lines": 105
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalAuxiliaryNormalization.lean",
+      "sha256": "7d52319c94ee0b0a9473a85c057ad628e8fe551d85e199187f3bea44912b32cb",
+      "lines": 107
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair141/ActualNegativePrincipalDensity.lean",
+      "sha256": "79be096548f4222f5265dc93e1b7ad6aa1bf426954089f48bb78b423c23ee2a3",
+      "lines": 111
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair141/RelativePrincipalCoefficients.lean",
+      "sha256": "2e5e751fafc34c322e3baccd4b138b8e44fe66fc878ee6c9632b758b427b95c2",
+      "lines": 185
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedPositiveComponentInteriorEndpoints.lean",
+      "sha256": "6ce75e11f89d534e25aa3147188dc1196a45d4ec692bbb46c2a313022b89a856",
+      "lines": 121
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootFactorPowerMaterialJets.lean",
+      "sha256": "8c70f3441a4902db3d13787131cdaa69f46013ef4810da44f6f351f1abe9337b",
+      "lines": 148
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootSpeedPowerMaterialJets.lean",
+      "sha256": "e5188b246d4ca0b1f6d623d2d9c2a2236eae755eda0877b28e66be31776666db",
+      "lines": 204
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootStationaryFlowMaterialJets.lean",
+      "sha256": "86ddbbd0c31d96d6b7b4d0422cfbea34030b5e974792fb298ada0e17f969152e",
+      "lines": 178
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/AdjugatePrincipalFiniteJets.lean",
+      "sha256": "c08a2cd0e8f49ad398af22ea9eb8b06f5a4e256c9c784c6c1dc3c2305315ca1b",
+      "lines": 112
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/FiniteFullJetBoundary.lean",
+      "sha256": "cc707c6e813eced9dd59ddc2c2916b6acd8278dadfdbca206a40203ac5fbfcd1",
+      "lines": 82
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalFiniteJets.lean",
+      "sha256": "80cdd212e2e550da19280ac5eec2011695831fa4f43f64dcacd701c63a985e29",
+      "lines": 105
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalTransformation.lean",
+      "sha256": "44e09082aa8264a616f69e1c6d0e12e93d35ffb4c68983462ca2fe569b2872a1",
+      "lines": 87
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair141/WholeCanonicalAtlasData.lean",
+      "sha256": "a4a3c629dcde3b7c324291d5e65c6bc6ceacbbdf8968577f2abcc3f0472c9f1d",
+      "lines": 165
+    }
+  ],
+  "new_source_lines": 1814,
+  "existing_added_lean_from_green128": 14385,
+  "projected_added_lean_from_green128": 16199,
+  "status": "Source preservation only; outside src, no CI activation or completion claim.",
+  "entries": 67
+}

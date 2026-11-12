@@ -1,0 +1,24 @@
+{
+  "label": 141,
+  "head": "51f748cb71b876e4664d9d750240c7522d0cf92f",
+  "run": 43216379595,
+  "job": 131176561268,
+  "status": "failure",
+  "quick_check": "failure",
+  "full_build": "skipped",
+  "blueprint": "skipped",
+  "compiled_project_modules": 4,
+  "raw_olean_counter": 3658,
+  "source_all_total": 3681,
+  "raw_olean_counter_caveat": "Raw cache count; no completed full build at this head.",
+  "log": "n04-ci-141.log",
+  "log_sha256": "19d64724771413a5c364078a7f0fbb2e78a2160ae4c40e12873d1ecaf6fa06b2",
+  "diagnostic_blocks": [
+    "error: src/ContinuousFlexibility/Analysis/ActualNegativePrincipalDensity.lean:105:13: typeclass instance problem is stuck\n  Module ?m.671 PolarPoint\n\nNote: Lean will not try to resolve this typeclass instance problem because the first and third type arguments to `Module` contain metavariables. These arguments must be fully determined before Lean will try to resolve the typeclass.\n\nHint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.",
+    "error: src/ContinuousFlexibility/Analysis/AdjugatePrincipalFiniteJets.lean:101:47: Application type mismatch: The argument\n  hJ\nhas type\n  planeJacobian F p \u2260 0\nbut is expected to have type\n  (?m.138.2.1 (1, 0)).1 * (?m.138.2.1 (0, 1)).2 - (?m.138.2.1 (1, 0)).2 * (?m.138.2.1 (0, 1)).1 \u2260 0\nin the application\n  contDiffAt_principalJetFormula ?m.139 ?m.140 ?m.141 ?m.142 hJ",
+    "error: src/ContinuousFlexibility/Analysis/RelativePrincipalCoefficients.lean:158:13: typeclass instance problem is stuck\n  Module ?m.141 PolarPoint\n\nNote: Lean will not try to resolve this typeclass instance problem because the first and third type arguments to `Module` contain metavariables. These arguments must be fully determined before Lean will try to resolve the typeclass.\n\nHint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.",
+    "error: src/ContinuousFlexibility/Analysis/FiniteFullJetBoundary.lean:78:23: Application type mismatch: The argument\n  hl\nhas type\n  ContDiffAt \u211d \u221e (fun r => (r, \u03b8)) c\nbut is expected to have type\n  ContDiffAt \u211d \u221e (Prod.mk c) \u03b8\nin the application\n  FiniteFullJetMatch.precomp h hl",
+    "error: src/ContinuousFlexibility/Analysis/FiniteFullJetBoundary.lean:80:2: Type mismatch: After simplification, term\n  he\n has type\n  ((iteratedFDeriv \u211d k (fun x => f (c, x)) \u03b8) fun x => 1) = (iteratedFDeriv \u211d k (fun x => g (c, x)) \u03b8) fun x => 1\nbut is expected to have type\n  ((iteratedFDeriv \u211d k (fun x => f (x, \u03b8)) c) fun x => 1) = (iteratedFDeriv \u211d k (fun x => g (x, \u03b8)) c) fun x => 1",
+    "error: src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasData.lean:159:2: unsolved goals\ncase right\nD : ReferenceData\nS : PhysicalSpacesData\nC : NonlinearGeometryData S\nL : ReturnCorrectionData S\nK : CanonicalData S\ne : \u2115 \u2243 N04WholePieceIndex D\ncell : N04PositiveComponent D.a D.b (deriv D.w) \u2192 \u2115\nF G : AnnularState S \u00d7 \u211d \u2192 N04PositiveComponent D.a D.b (deriv D.w) \u2192 PolarPoint \u2192 PolarPoint\nQ : AnnularState S \u00d7 \u211d \u2192 N04PositiveComponent D.a D.b (deriv D.w) \u2192 PolarPoint \u2192 \u211d\nN : Set \u211d\nz : AnnularState S \u00d7 \u211d\nm : \u2115\ni : N04PositiveComponent D.a D.b (deriv D.w)\nhi : e m = Sum.inr i\nhFref : F (C.referenceState, 0) i = id\nhQref : Q (C.referenceState, 0) i = fun x => 1\nhleft : Function.LeftInverse (F z i) (G z i)\np : PolarPoint\n\u22a2 Q z i (F z i (G z i p)) = Q z i p"
+  ]
+}

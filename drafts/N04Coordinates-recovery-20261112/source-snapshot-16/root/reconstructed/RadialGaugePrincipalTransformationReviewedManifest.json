@@ -1,0 +1,26 @@
+{
+  "status": "HELD_UNCOMPILED_FULLY_INDEPENDENTLY_REVIEWED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalTransformation.lean",
+    "sha256": "44e09082aa8264a616f69e1c6d0e12e93d35ffb4c68983462ca2fe569b2872a1",
+    "blob": "283d5dc38c2658787f5f410bdeb55d42d4bb1dd7",
+    "lines": 87
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalTransformationCandidateManifest.json",
+    "sha256": "2555e9fa715fba29eeabb9d02a95f36b9ef17fc85aee1c7487a3e43c263bccec",
+    "blob": "0a233a246cc3e8c3894c22c0e704726464b42a33",
+    "lines": 54
+  },
+  "independent_full_source_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/RadialGaugePrincipalTransformationIndependentReview.json",
+    "sha256": "aeba91db686eeb94161fd26fcbe4acfdd7188a76675a16c964599165a333c014",
+    "blob": "79f403cd3c2cd8b324e456d40dbd93e829d9277c",
+    "lines": 106
+  },
+  "compiled": false,
+  "scope_limits": [
+    "Actual principal transformation only; no finite-jet or cubic bound yet."
+  ],
+  "source_changed_after_review": false
+}

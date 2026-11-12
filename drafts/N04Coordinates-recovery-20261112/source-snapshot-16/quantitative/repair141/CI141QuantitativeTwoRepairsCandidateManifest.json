@@ -1,0 +1,124 @@
+{
+  "kind": "ci141_quantitative_two_repairs_candidate",
+  "owner": "/root/quantitative_route",
+  "status": "candidate_static_self_reviewed_not_compiled_independent_review_pending",
+  "baseline": {
+    "head": "51f748cb71b876e4664d9d750240c7522d0cf92f",
+    "tree": "44e29d2eafa37456221914df1e33e73f16ecba1a"
+  },
+  "actual_ci_evidence": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-141-evidence.json",
+    "sha256": "b91e44f9d027286831cb243901bfc8d559a5cbd848f8a5f7e8639658108b44c0",
+    "blob": "acb4f19911772ef1749bd77dded924f0db4331bb",
+    "lines": 24
+  },
+  "actual_ci_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-141.log",
+    "sha256": "19d64724771413a5c364078a7f0fbb2e78a2160ae4c40e12873d1ecaf6fa06b2",
+    "blob": "2b91ca3a1436450fe5d6c5ca6b1e10ecf7686312",
+    "lines": 870
+  },
+  "diagnostics": [
+    "error: src/ContinuousFlexibility/Analysis/AdjugatePrincipalFiniteJets.lean:101:47: Application type mismatch: The argument\n  hJ\nhas type\n  planeJacobian F p ≠ 0\nbut is expected to have type\n  (?m.138.2.1 (1, 0)).1 * (?m.138.2.1 (0, 1)).2 - (?m.138.2.1 (1, 0)).2 * (?m.138.2.1 (0, 1)).1 ≠ 0\nin the application\n  contDiffAt_principalJetFormula ?m.139 ?m.140 ?m.141 ?m.142 hJ",
+    "error: src/ContinuousFlexibility/Analysis/FiniteFullJetBoundary.lean:78:23: Application type mismatch: The argument\n  hl\nhas type\n  ContDiffAt ℝ ∞ (fun r => (r, θ)) c\nbut is expected to have type\n  ContDiffAt ℝ ∞ (Prod.mk c) θ\nin the application\n  FiniteFullJetMatch.precomp h hl",
+    "error: src/ContinuousFlexibility/Analysis/FiniteFullJetBoundary.lean:80:2: Type mismatch: After simplification, term\n  he\n has type\n  ((iteratedFDeriv ℝ k (fun x => f (c, x)) θ) fun x => 1) = (iteratedFDeriv ℝ k (fun x => g (c, x)) θ) fun x => 1\nbut is expected to have type\n  ((iteratedFDeriv ℝ k (fun x => f (x, θ)) c) fun x => 1) = (iteratedFDeriv ℝ k (fun x => g (x, θ)) c) fun x => 1"
+  ],
+  "files": [
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/FiniteFullJetBoundary.lean",
+      "before": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/FiniteFullJetBoundary.base.lean.txt",
+        "sha256": "fd42cc1894c3ec16125e7c0ef89188c2b3df3ca8375eb9b417e7080cf4786c75",
+        "blob": "69e3303eff0b945230f7210da126b95c232669b3",
+        "lines": 82
+      },
+      "after": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/FiniteFullJetBoundary.lean",
+        "sha256": "cc707c6e813eced9dd59ddc2c2916b6acd8278dadfdbca206a40203ac5fbfcd1",
+        "blob": "c2a1ce634f56db1bd806beda929f2feb62c15989",
+        "lines": 82
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/FiniteFullJetBoundary.diff",
+        "sha256": "77aa674fa9f140a30fe7112987632910c9e2fbecc53e5e631347ad79a7552f9d",
+        "blob": "bbfc356baaa7e5875d622e912e36047409ad1369",
+        "lines": 11
+      },
+      "reason": "Fix the precomposition to the actual radial curve r ↦ (r, θ), evaluated at c; the unannotated application inferred the angular curve θ ↦ (c, θ).",
+      "reverse_exact": true,
+      "all_declaration_headers_byte_identical": true,
+      "imports_context_options_byte_identical": true,
+      "added": 1,
+      "deleted": 1
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/AdjugatePrincipalFiniteJets.lean",
+      "before": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/AdjugatePrincipalFiniteJets.base.lean.txt",
+        "sha256": "fdca723daf585cb3bc089ec0a107da4ec91c9cf8f125385d3af5dcaa37fd8527",
+        "blob": "3596dfced859852fd352f9c0fd551f034b93e56a",
+        "lines": 111
+      },
+      "after": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/AdjugatePrincipalFiniteJets.lean",
+        "sha256": "c08a2cd0e8f49ad398af22ea9eb8b06f5a4e256c9c784c6c1dc3c2305315ca1b",
+        "blob": "f1b40b1987f10459cb329c662f2c954d3353449c",
+        "lines": 112
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/AdjugatePrincipalFiniteJets.diff",
+        "sha256": "f6dc04b54a27302b712aadbf770a1bf2e236bba3262cbd64d448347e83a47f7a",
+        "blob": "0ff9b0c3aabf3917054575c74cfaafeaabd5ebc2",
+        "lines": 12
+      },
+      "reason": "Fix the outer smooth formula input to the actual triple (F p, (DF p, h p)), so its determinant premise is definitionally the supplied actual planeJacobian F p. No field or point is changed.",
+      "reverse_exact": true,
+      "all_declaration_headers_byte_identical": true,
+      "imports_context_options_byte_identical": true,
+      "added": 2,
+      "deleted": 1
+    }
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/FiniteFullJetMatching.lean",
+      "sha256": "45dfa31bbf202202959876a3140c805d0143112fcedd7405ebffd34ca3b703df",
+      "blob": "9baca93c394dae0092c356505a301df65635e749",
+      "lines": 82
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/BoundaryTaylorExtension.lean",
+      "sha256": "569766332fa55b39cf1aea1a437366cd44591818758530f2dafffde49bdcd1da",
+      "blob": "5c7b80c9ff8255850e05bb3308a30579b035a8d6",
+      "lines": 223
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Scalar/FormPullback.lean",
+      "sha256": "09885fd35b2086a984883f723c5bce94fed1d3987a71485a2fa7185108083a50",
+      "blob": "6238095a75eb06479071372465a41701824657c8",
+      "lines": 137
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalFieldJetReduction.lean",
+      "sha256": "60a88163fb98cf3e12f42e240377136f5faf788378fa3c055312cbdba4aafbd3",
+      "blob": "d26a665de5f06590fc30615bdb376120761cd6bd",
+      "lines": 155
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/AdjugatePrincipalField.lean",
+      "sha256": "9d94bba862b903c77f1574afeb97cb6d40cb6298cb339740a54b1c58f1d43882",
+      "blob": "b6c851a0c2d19f15fecb07a3f8638a3ce5fa792e",
+      "lines": 103
+    }
+  ],
+  "scope": {
+    "source_mutations": false,
+    "index_mutations": false,
+    "refs_mutations": false,
+    "cp_or_authority_mutations": false,
+    "ci_queries": false,
+    "lean_compilation_or_elaboration": false,
+    "budget_changes": false
+  },
+  "validation": "Full source and actual provider signatures read; exact replacements and inverse substitutions verified; imports/options/complete declaration headers unchanged. This is not a compiled result."
+}

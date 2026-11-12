@@ -1,0 +1,90 @@
+{
+  "kind": "independent_full_source_actual_provider_review",
+  "reviewer": "quantitative_route",
+  "result": "passed_static_review_uncompiled",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceValueEnvelope.lean",
+    "sha256": "267b575f81da274e9710fd4fbd0df574c7d527bfd78a5e5c867e749ce2698297",
+    "blob": "25205de05e190acb6ec954e7ec34ce73351c88be",
+    "lines": 145
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceValueEnvelopeCandidateManifest.json",
+    "sha256": "aca6f66e5934483ddc514a809a4180d13ce2c3ef83c4c2173177b5d44cf39746",
+    "blob": "c79c5616bff562ab05725aafe857b06b4b7fd100",
+    "lines": 60
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceIdentity.lean",
+      "sha256": "bea24325424288605021e73c8a7340b822333a25acbcdfbd824bc372a9ae8be2",
+      "blob": "0fe36f57855093a4274f44dc6a2d79ae9dcc67ae",
+      "lines": 128
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceHeight.lean",
+      "sha256": "fdb3c55006eff4e326ad0caa486565818edf872d739ade5269496a950d88e276",
+      "blob": "2241295ddd81a72783eb627023362b326c54fad6",
+      "lines": 91
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceCoordinate.lean",
+      "sha256": "64f15c330a043cd80bde15d122b4e16c3295493df67199dc95fb0d79fade23de",
+      "blob": "08de005c626e3d6e963a27a6588f1082ac8c3335",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceBlend.lean",
+      "sha256": "dae6f930520d471225ec804a00cfedecc452d1b147a4298f0cb3a1f4ca58da54",
+      "blob": "e386806876fb9d07d3b384593ec42119b636b348",
+      "lines": 157
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveEndpointCutoffIntegral.lean",
+      "sha256": "4b1428d006b01306a363d5b972e1f219a15ea5cf1d1a17b4fe8c570143ebef63",
+      "blob": "bdf32637985f33c796c08b8a87936ae4895d6201",
+      "lines": 126
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveEndpointCutoff.lean",
+      "sha256": "c74fe54b7fb3aee3b532e7d5c93fe93c37cc0055e4ccd56ab89e8b9465b51711",
+      "blob": "25ca16d4de4e07ae59c916e35b2c581bbf20f730",
+      "lines": 187
+    }
+  ],
+  "pinned_api_sources": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Order/GroupWithZero/Basic.lean",
+      "sha256": "6526bf3a919d5306c90daf75cf96cfe3bbfacc702f3858fb00f893f7346e2cbd",
+      "blob": "335ef50464487b5763d4ad885d55d83b00964f1b",
+      "lines": 1474
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean",
+      "sha256": "31d57d81e75cc6b42ea50dbbb0a6856f4c760c422b41e6691d3660dfc876711d",
+      "blob": "bcf4a893f0a46471ec5f14a6dde0a960b739560a",
+      "lines": 1473
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Log/Basic.lean",
+      "sha256": "5c3ecb5112d5d46df46d3dff3efa1548095356259633b34885db8ab4275340a2",
+      "blob": "0ed3c957d0d1f37094a8da10e42e6d2c2807e7be",
+      "lines": 713
+    }
+  ],
+  "full_review_checks": [
+    "Read all 145 source lines and the actual positiveReferenceScale/MiddleMass/EndMass/Slope/Coordinate/Height definitions and called cutoff APIs.",
+    "The genuine endpoint mass is nonnegative by the cutoff lower bound and positive endpoint slopes, and is at most 1/2 by the explicit 2*M*delta margin. The actual middle mass lies between half the component width and its full width, giving exactly the displayed two-sided scale bounds.",
+    "The derivative is the actual globally defined slope. Its lower bound uses the existing minimum bound, and its upper bound uses one Bool-indexed clipped endpoint estimate plus the nonnegative middle cutoff. There is no condition on endpoint data outside their collars.",
+    "For the same exp-of-clipped-log height, positive collar values and reciprocal values bounded by U imply absolute logarithms <=log U. Each clipped logarithm has that same global bound. The sum therefore has absolute value <=2*log U, so the actual height and its inverse are <=U^2. No exponential of a polynomial derivative bound is used.",
+    "Checked fixed mathlib directions for div_le_div_of_nonneg_left/right, intervalIntegral.integral_nonneg, Real.log_le_log and Real.log_nonneg, and the true derivative provider signature.",
+    "Both endpoint families are handled by Bool parameters; all three public declarations have no name collision with current installed sources."
+  ],
+  "scope_caveats": [
+    "The data are explicit numerical collar bounds and a fixed selected delta. This review does not derive their uniform material-E0 cost.",
+    "The proof uses the same actual scale, coordinate, and height; no new reference, inverse, or material sample is chosen.",
+    "Static review only: no Lean import, elaboration, or compilation."
+  ],
+  "source_bytes_unchanged": true,
+  "checkout_index_refs_CP_authority_plan_unchanged": true
+}

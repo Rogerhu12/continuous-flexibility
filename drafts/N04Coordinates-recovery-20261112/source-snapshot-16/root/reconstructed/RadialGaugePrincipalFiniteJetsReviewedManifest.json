@@ -1,0 +1,46 @@
+{
+  "kind": "reviewed_actual_radial_gauge_principal_finite_jets",
+  "status": "HELD_REVIEWED_UNCOMPILED",
+  "author": "/root",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalFiniteJets.lean",
+    "sha256": "80cdd212e2e550da19280ac5eec2011695831fa4f43f64dcacd701c63a985e29",
+    "blob": "3a43ccceb3f82270ebdde43087111bd569cdab5f",
+    "lines": 105
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalFiniteJetsCandidateManifest.json",
+    "sha256": "90c4805d2eb50f3528ea8f50306700a2cdbdb6282b801dfaa849d7424619b7c6"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/RadialGaugePrincipalFiniteJetsIndependentReview.json",
+    "sha256": "94a28d382bafaedf2f56840eee6dc3854d275cb39360c6ac1878b872e621ae3d"
+  },
+  "provider_repair_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CI141FiniteJetAndAdjugateIndependentReview.json",
+    "sha256": "09ffb5fdc7fe8be97d9e9d2c8b2d4599a6583e8ad2b674e1425137813f32eed9"
+  },
+  "provider_compatibility": {
+    "original_imported_boundary": {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/FiniteFullJetBoundary.lean",
+      "sha256": "fd42cc1894c3ec16125e7c0ef89188c2b3df3ca8375eb9b417e7080cf4786c75",
+      "blob": "69e3303eff0b945230f7210da126b95c232669b3",
+      "lines": 82
+    },
+    "ci141_repair_candidate": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/FiniteFullJetBoundary.lean",
+      "sha256": "cc707c6e813eced9dd59ddc2c2916b6acd8278dadfdbca206a40203ac5fbfcd1",
+      "blob": "c2a1ce634f56db1bd806beda929f2feb62c15989",
+      "lines": 82
+    },
+    "consumed_precomp_declaration_byte_identical_across_repair": true,
+    "description": "CI141 diagnosed inference only in the separate radialBoundaryJet application. Its pending explicit-curve repair leaves the precomp declaration consumed here byte-identical; this review does not claim that the original imported module compiled."
+  },
+  "scope": [
+    "The same true fixed inverse and the actual three principal multipliers transfer ordinary finite jets of the actual current and reference fields.",
+    "Multiplication is proved by pairing and common smooth multiplication; precomposition uses the existing actual finite jet lemma.",
+    "No loss of finite order or independently prescribed inverse jets enter."
+  ],
+  "compiled": false,
+  "checkout_index_refs_modified": false
+}

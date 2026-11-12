@@ -1,0 +1,87 @@
+{
+  "status": "HELD_STATIC_REVIEWED_UNCOMPILED",
+  "owner": "/root/proof_inventory",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedPositiveComponentInteriorEndpoints.lean",
+    "sha256": "6ce75e11f89d534e25aa3147188dc1196a45d4ec692bbb46c2a313022b89a856",
+    "blob": "f5d74d7c6bd5230ac8af2e12548f9221fb8ea697",
+    "lines": 121
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedPositiveComponentInteriorEndpointsCandidateManifest.json",
+    "sha256": "b89573e298c66ef8faca54c1956327e81019936dd622628fe854853140654e06",
+    "blob": "376961783755df3ba55dfc2d9c2842df2478f6db",
+    "lines": 71
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/RetainedPositiveComponentInteriorEndpointsIndependentReview.json",
+    "sha256": "2921345bd5a29cbb28a6090f92d03d409b3fd8c82fce5a285c746d8aa689def6",
+    "blob": "66f0664e3f67fdf8e40957ec6ed6d53845912a3e",
+    "lines": 103
+  },
+  "selected_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/RetainedReferenceComponentEnumeration.lean",
+      "sha256": "e3ff3a2a35ea5e809c4271786587d21b715f26616ff1764ea0bd3874d34afc08",
+      "blob": "4301dad4fd75a74de75f39d482504f83fd5776b4",
+      "lines": 188
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/RetainedNegativeComponentIdentification.lean",
+      "sha256": "086a4a2c663a3ecbe7417c175ac7a54d9251eff990678d1e5d3b3520ab5482bc",
+      "blob": "f59b4b9ecb97a4d5de73da6344c66b8561ed1f55",
+      "lines": 183
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveComponentEndpoints.lean",
+      "sha256": "182e98b328b82c6feb5be57b16a1b6536a55b4e5f4af01ab51a27b7b01adb19d",
+      "blob": "85ac7d7b23c9e63f59e25e0d0281fd5106fb7527",
+      "lines": 79
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01aNegativeComponentGeometry.lean",
+      "sha256": "b47de312bb261cdb25a061a7b0544ba26ec7a9a0ebcc33aa6f1d462105a41183",
+      "blob": "c77faefb31b0acdadd219676a96cfdcf0916e3bb",
+      "lines": 322
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/MorseModelReturn.lean",
+      "sha256": "d541564563c3d3c87e0e670e688f62bfc590625e37875d04972bce850c06efe6",
+      "blob": "6460835c61b957be1a4df82fcc5c58a6c70e5195",
+      "lines": 228
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/MorseRealizationBasic.lean",
+      "sha256": "41806a9e7c27ebc25d5c031e2146d8cc52e455e1b2e15208dfb9c346ce44575a",
+      "blob": "9e94607827b2105a1e40f4c3d668defbc7c8fb1e",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/R11aRetainedFamily.lean",
+      "sha256": "bdc03c5491b02dce0e424a173dee779093fe11f70b5b9e5ea947e7c9093b298f",
+      "blob": "57d911ff1afebf3bb0f775372630fc552f1a2681",
+      "lines": 221
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Radial.lean",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352",
+      "blob": "473c530a1de50c672f2e54908d374f624f5955b0",
+      "lines": 874
+    }
+  ],
+  "scope": [
+    "The same retained P/Γ and its existing exact component enumeration are used; no reference, flow, atlas or material sample is changed.",
+    "The two model-endpoint Tendsto clauses are actual fields of MorseChainRealization. The scaled true turning interval lies between those endpoints. Its midpoint gives a negative derivative point in each endpoint neighborhood.",
+    "Every whole positive component of that same retained Γ consequently has two interior simple-root endpoints, by the already proved ambient-or-simple-root classification."
+  ],
+  "limitations": [
+    "R11aRetainedCoordinates P Γ and the exact retained-profile identity are explicit actual construction inputs. No extraction of these certificates from arbitrary Through03 or arbitrary N04b is claimed.",
+    "This excludes ambient positive components only for the displayed retained witness. It is not a counterexample to any complete nonlinear statement.",
+    "No new material-E0 estimate or quantitative positive principal bound is claimed.",
+    "No compilation, checkout/index/ref/CI or authority modification."
+  ],
+  "source_changed_after_review": false,
+  "green_receipt_applies": false,
+  "compiled": false,
+  "active_source_index_refs_CI_authority_changed": false
+}

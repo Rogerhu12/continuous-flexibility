@@ -1,0 +1,70 @@
+{
+  "kind": "candidate_actual_root_factor_power_material_jets",
+  "status": "HELD_UNCOMPILED_REVIEW_PENDING",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootFactorPowerMaterialJets.lean",
+    "sha256": "8c70f3441a4902db3d13787131cdaa69f46013ef4810da44f6f351f1abe9337b",
+    "blob": "aedbff50a4eb54bd08f26c95d85919ea2fd5d3b5",
+    "lines": 148
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootFactorAxisGlobalJets.lean",
+      "sha256": "89cd2dee6113b08b7524b2f2b34f63f4ab5129b6614da8b59371934538ab7a39",
+      "blob": "bb630b104d353a5f39a2138ee70f446e5df95ecb",
+      "lines": 64
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootFactorAxisMaterialInverse.lean",
+      "sha256": "ba2815b77efb2303f1e5e40cdffb9b23a816965983c51ba742e9b45bddc13fc1",
+      "blob": "752db04b3a64673ce8cf3dea02c1fc06053c6477",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositivePowerPolynomialMaterialJets.lean",
+      "sha256": "8179be21858b3703e4997fc8d8773527c5a56c856d6aab0659b8497177796c1c",
+      "blob": "b96ab8e2242b762952bf571b0583abcc010dcc00",
+      "lines": 137
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialGlobalEndpointModels.lean",
+      "sha256": "2296624a6ce1501048acda5f6ba6a6779d9491bcccd8653db158d8ef9120b4fa",
+      "blob": "94856c92ba535db174db559d1ab2ddacdf77dfd5",
+      "lines": 65
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalStateInterpolation.lean",
+      "sha256": "6c31333851353e661b0c5177ad6239387154ebde3557e8a343a633671622cc2b",
+      "blob": "3b016eb8f2348a15d6d9d926ed03881ddc47b747",
+      "lines": 173
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootCoefficientFactorization.lean",
+      "sha256": "7517b6ad668e1433bde3b4d3a2a2de646d86c554d27c1a9d4131bbba8c12c653",
+      "blob": "756feea98dedb9141e1dc34eac4336704cd133d7",
+      "lines": 111
+    }
+  ],
+  "pending_provider_candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootFactorAxisMaterialInverseCandidateManifest.json",
+    "sha256": "cd9f920afc88fd7d4db00b3302814a0d2890be67ffcb287c81bee57e3013b7e1",
+    "blob": "ab1fe56e26b473c301866bc6834b2c4d4d597d53",
+    "lines": 69
+  },
+  "public_declarations": [
+    "n01_rootFactor_axis_rpow_material_jets_of_component_optical"
+  ],
+  "new_private_declarations": 0,
+  "new_options": [],
+  "mathematical_scope": [
+    "The actual uniform divided-factor upper tower and raw-optical-derived reciprocal bound are evaluated at the same physical root, current state, and root factor g.",
+    "The low order is max(factorLow,max(powerLow,factorLoss)); the last term controls the factor zero value without absorbing a high-order seminorm into a low constant.",
+    "Only a fixed scaling C0 of the same T.E0 is used to achieve W>=1. E0 itself is not assumed >=1; reciprocal coefficient and exponent are both explicitly dominated by K0.",
+    "The existing positive-power polynomial theorem supplies all ordinary derivatives, including zero, for every real power gamma, with common low order and loss chosen before gamma.",
+    "All constants precede state, component, host, side, factor g, strip radius, point and derivative order; no chosen-radius inverse appears."
+  ],
+  "scope_caveat": "Conditional on the explicit same-component optical min lower. Current N01Properties and Through03 are not claimed to supply that raw certificate. The direct reciprocal provider is still independently review-pending.",
+  "same_witness": true,
+  "compiled": false,
+  "checkout_index_refs_CP_authority_plan_modified": false
+}

@@ -1,0 +1,11 @@
+--- src/ContinuousFlexibility/Analysis/ActualNegativePrincipalDensity.lean@51f748cb71b876e4664d9d750240c7522d0cf92f
++++ /workspace/scratch/bbbea77e4163/n04-drafts/audit/repair141/ActualNegativePrincipalDensity.lean
+@@ -102,7 +102,7 @@
+       (C.travel m) side hU hV hUr hVr hbc.1 hbc.2 ha hv hUθ hVθ horient
+   have hg := n04bActualTypedAtlas_negative_component_germs
+     hT hS hN hfield e hz hs k m side hi hp
+-  have hD := hg.1.fderiv_eq
++  have hD := hg.1.fderiv_eq (𝕜 := ℝ)
+   have hh := hg.2.self_of_nhds
+   have hpoint := hg.1.self_of_nhds
+   simpa only [coordinatePrincipalDensity, coefficientQuadratic, planeJacobian,

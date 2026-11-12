@@ -1,0 +1,81 @@
+{
+  "kind": "independent_full_source_actual_root_factor_reciprocal_review",
+  "reviewer": "/root",
+  "author": "/root/quantitative_route",
+  "result": "passed_static_full_source_and_same_witness_provider_review",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootFactorAxisMaterialInverseCandidateManifest.json",
+    "sha256": "cd9f920afc88fd7d4db00b3302814a0d2890be67ffcb287c81bee57e3013b7e1",
+    "blob": "ab1fe56e26b473c301866bc6834b2c4d4d597d53",
+    "lines": 69
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootFactorAxisMaterialInverse.lean",
+      "sha256": "ba2815b77efb2303f1e5e40cdffb9b23a816965983c51ba742e9b45bddc13fc1",
+      "blob": "752db04b3a64673ce8cf3dea02c1fc06053c6477",
+      "lines": 143
+    }
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RadialCoefficientMaterialInverse.lean",
+      "sha256": "a28a6319b276e4ad7b078b844ae122d9fa1b2bd8fffcabce6ba1b914185f7221",
+      "blob": "4aced4b7ac973d750dcf4c206c78fea2b9322150",
+      "lines": 145
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/root-optical-limit-closure/RootOpticalEndpointLower.lean",
+      "sha256": "0cc267ad4d4417357f798507f9acbb2bee427d836c3f4f9b7c11a8e727157481",
+      "blob": "a128488bcd037bac244c3011dbe641a27e38969b",
+      "lines": 123
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01ActualRootGeometry.lean",
+      "sha256": "df838bf216d8d2f594b6b1b27587fdab83bf622658925a03268b25f8c7f18d05",
+      "blob": "309106cea183b863c056a9c150aea5a6f688252d",
+      "lines": 100
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootCharacteristicFactor.lean",
+      "sha256": "05fdcf51d1959bc6900ed1fc56309a32d61f8cfed73818deb4e929d16d69f46a",
+      "blob": "3d6cd21e82be41b65116fc559c74ca8dbe8d6f99",
+      "lines": 264
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootCoefficientFactorization.lean",
+      "sha256": "7517b6ad668e1433bde3b4d3a2a2de646d86c554d27c1a9d4131bbba8c12c653",
+      "blob": "756feea98dedb9141e1dc34eac4336704cd133d7",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootCoefficientDivision.lean",
+      "sha256": "0605885b335d31a76c1b840f60e8821d1898a613f9b29cbc8aa55e5dde4aaf2d",
+      "blob": "96648e09b56b2a141c3a10ced82b7776d26648fd",
+      "lines": 105
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "65fcde6ae1e43bf6fd2a5f56a2121cde66dea71c44357cd45b833e6bc3358ec1",
+      "blob": "7a05b947965738dcb91957059e102f9ea813e52b",
+      "lines": 1756
+    }
+  ],
+  "checks": [
+    "Read all 143 lines and the actual optical one-sided limit, reference speed ratio, radial inverse and divided-factor definitions.",
+    "The raw optical lower is explicitly an upstream hypothesis for the same reference D, component and genuine material host. It is not projected from the current N01 certificate.",
+    "The one-sided limit is taken after cancelling the actual signed distance, in one Bool orientation for both roots. It gives a lower bound for the actual reference squared speed.",
+    "The actual root belongs to the original open annulus and closed component. The strip radius is used solely to place (0,theta) in the raw-field strip and contributes no inverse cost.",
+    "N01 denominator/discriminant ratios and the strip profile identity compare the actual factored speed to the same reference speed by one half.",
+    "The pointwise algebra retains G=a^2*c^2 and gives G inverse at most 4*kappa inverse*A^2. The same-host inverse radial bound then yields the displayed K0=4*Ka^2*K and P=Pa+Pa+K.",
+    "All material constants precede component, host, root orientation, divided profile g, radius, state and angle. The final power conversion uses positive E0 at the actual material sample.",
+    "Every recorded hash matches; the new public name is absent from installed sources."
+  ],
+  "limitations": [
+    "Static review only; uncompiled.",
+    "A uniform actual component optical lower for the chosen reference remains to be constructed; this conditional leaf alone does not complete the N04 primitive certificate."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_modified": false
+}

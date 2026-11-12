@@ -1,0 +1,32 @@
+{
+  "kind": "reviewed_actual_root_factor_power_material_tower",
+  "status": "HELD_STATICALLY_REVIEWED_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootFactorPowerMaterialJets.lean",
+    "sha256": "8c70f3441a4902db3d13787131cdaa69f46013ef4810da44f6f351f1abe9337b",
+    "blob": "aedbff50a4eb54bd08f26c95d85919ea2fd5d3b5",
+    "lines": 148
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootFactorPowerMaterialJetsCandidateManifest.json",
+    "sha256": "8f1e815e7fec7ec6d2982965103225f4016502fe08bbbc0a44f2d809e57e98d4",
+    "blob": "cb30521c66283b4802a1b3b632fba8a7f75c3094",
+    "lines": 70
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/N01RootFactorPowerMaterialJetsIndependentReview.json",
+    "sha256": "85ea028d55bf1133fc283afe3fc1c5c1ecb5baf27fc1f7fc94d3211a9e8a844e",
+    "blob": "0e2b4a8a62fbc9a2593d8a15d26e18589182abe4",
+    "lines": 81
+  },
+  "same_witness": true,
+  "compiled": false,
+  "scope_caveat": "The raw component optical lower is an explicit same-witness upstream input, not a projection of the current N01Properties or Through03. This source bounds actual ordinary spatial root jets; it does not establish the upstream certificate, state-parameter derivatives or the final N04c estimates.",
+  "checkout_index_refs_CP_authority_plan_modified": false,
+  "reviewed_reciprocal": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootFactorAxisMaterialInverseReviewedManifest.json",
+    "sha256": "40cafbbcd15eae99ab30aee2aa39e5d8c9329382ccadfe4eb65da76a8578f06b",
+    "blob": "161f37c320a6bb90fcf776b891928d6ff6fd22cd",
+    "lines": 26
+  }
+}

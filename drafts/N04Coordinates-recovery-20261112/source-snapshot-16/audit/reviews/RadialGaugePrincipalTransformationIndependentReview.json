@@ -1,0 +1,106 @@
+{
+  "kind": "actual_radial_gauge_principal_transformation_independent_full_review",
+  "status": "passed_static_independent_full_source_and_actual_provider_review",
+  "reviewer": "/root/audit_coordinates",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalTransformationCandidateManifest.json",
+    "sha256": "2555e9fa715fba29eeabb9d02a95f36b9ef17fc85aee1c7487a3e43c263bccec",
+    "git_blob": "0a233a246cc3e8c3894c22c0e704726464b42a33",
+    "lines": 54
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalTransformation.lean",
+    "sha256": "44e09082aa8264a616f69e1c6d0e12e93d35ffb4c68983462ca2fe569b2872a1",
+    "git_blob": "283d5dc38c2658787f5f410bdeb55d42d4bb1dd7",
+    "lines": 87
+  },
+  "provider_refs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceCylinder.lean",
+      "sha256": "6ececb96b06c704d8672c58cbe2b395bf3ce8967a667b046cd09466249b5c4de",
+      "git_blob": "c1c59b1c3240feeec1539a65ce0c8a8a4ec7ba48",
+      "lines": 128
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveCanonicalFields.lean",
+      "sha256": "c26cd518553a29e68647291f463bbd0b271500dd9620ea0735280f2d0a8773b2",
+      "git_blob": "0fb940e74988b8ccf40f317447993147847713eb",
+      "lines": 169
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGauge.lean",
+      "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+      "git_blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+      "lines": 171
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PrincipalCoefficientPullback.lean",
+      "sha256": "88ccf751162a22460c15d8bfdedcdd558328b0e56f51a145dc74bd343114e3f0",
+      "git_blob": "19262a1834a49fdb7958b07352f409bb0940de19",
+      "lines": 160
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Geometry/PlanarOrientation.lean",
+      "sha256": "c73471d5d28712ed2670631e41869c73a41996d1bb90238b74f7922f36501621",
+      "git_blob": "80b0e204ff31ec795e624ed14e2951aa8c905076",
+      "lines": 139
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CoordinateOperatorConstruction.lean",
+      "sha256": "ffbecb5ae9d0d9e40a5fd193592dde632989d3c4fb2382b118be5180f9d7f1c1",
+      "git_blob": "aef71ea652edabf9d9c4788e2c6aba6780f6c1fe",
+      "lines": 76
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveChartGeometry.lean",
+      "sha256": "b0f9f540c1d8bcdf0e5414b487f15df378e3b36e369697c012f8bc28bbba892c",
+      "git_blob": "118c0019a784242b74c880166ee4dedc43e1dede",
+      "lines": 146
+    }
+  ],
+  "pinned_mathlib_refs": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/FDeriv/Comp.lean",
+      "sha256": "b25791b5363ec250130d10d34fd77b9c2b24af63bfd89479b9b3c8443ebf74ed",
+      "git_blob": "d7dee1ff3320db9442853106989cda47b2c0a221",
+      "lines": 269
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/FDeriv/Prod.lean",
+      "sha256": "d9edeab4ca3671820dd56f6bb5d12a875cbda846eded02c4aeac125112a892e5",
+      "git_blob": "411b5f2f6a95bdce18d85ba51f9f21e78f36e770",
+      "lines": 661
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Comp.lean",
+      "sha256": "16a41715830ec582c91cb5262e2defab08052d7e749bb91ee059905c0b0e1847",
+      "git_blob": "bca5a3ed558bd9f14be2a277d9e01bd025227307",
+      "lines": 415
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/FDeriv/Basic.lean",
+      "sha256": "1038ebcf5e5440f9f47890fc5fc8cff8de7933bacd9a492180f33b2d42a03f22",
+      "git_blob": "12ef16d4a4c2af8dae91ce67d279a1738a69c25c",
+      "lines": 979
+    }
+  ],
+  "pinned_mathlib_revision": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "checks": [
+    "The complete 87-line source and all five frozen candidate providers were read and their SHA256/Git blob/line identities checked exactly; CoordinateOperatorConstruction and WholePositiveChartGeometry were also read at the definitions and certificate fields used.",
+    "The actual cylindrical derivative is diag(Yprime,1) at F(p), obtained by HasDerivAt.comp_hasFDerivAt and the product derivative, then composed with the actual derivative of F.",
+    "The project planeJacobian_comp order gives J(psi o F)=Yprime(F(p).fst)*J(F). Since Yprime is strictly positive, the absolute Jacobian factor is Yprime*abs(J(F)).",
+    "Expanding the actual coordinatePrincipalDensity gives H^2*Yprime, H^2 and H^2/Yprime for the a,b,c entries. Both denominator nonzero facts required by field_simp are present; no regularity or matching of an independent coefficient field is presumed.",
+    "The second theorem evaluates once at tau(chi(p)) and uses the genuine global sigma(tau(q))=q from WholePositiveChartGeometry.right_inverse. The same original coordinate density is exactly wholePositiveCanonicalCoefficients at chi(p).",
+    "The height in the new gauge is definitionally H(sigma(x).fst)*wholePositiveChartHeight(sigma,Q)(x), matching the first theorem exactly; no unrelated height or inverse is substituted.",
+    "The pinned derivative composition/product/fderiv APIs and argument order match the source. Public let-bindings reduce before the final formula comparison, and hgeometry.right_inverse is used in its correct direction.",
+    "The two public declarations have no installed name collision. No definite mathematical or Lean API mismatch was found in this static review."
+  ],
+  "scope_limits": [
+    "This proves the actual coefficient transformation formula. It does not itself prove surjectivity of Y or a range certificate for chi; those stronger geometric properties are separate inputs in the intended atlas construction.",
+    "No coefficient jet agreement, cubic vanishing, uniform material estimate, or final PrimitiveGeometryProperties is inferred by this source."
+  ],
+  "source_edited": false,
+  "compiled": false,
+  "ci_queried": false,
+  "checkout_index_refs_cp_changed": false
+}

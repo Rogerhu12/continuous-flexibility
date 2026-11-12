@@ -1,0 +1,167 @@
+{
+  "label": 142,
+  "parent": "51f748cb71b876e4664d9d750240c7522d0cf92f",
+  "additional_parents": [
+    "8cebde34f6668c523facece3312949e9dbec3444"
+  ],
+  "base_tree": "44e29d2eafa37456221914df1e33e73f16ecba1a",
+  "tree": "eec840200ef0966dae0fe4cca32e132532c7d7e2",
+  "current_main": "8cebde34f6668c523facece3312949e9dbec3444",
+  "added_since_green": 2808,
+  "deleted_since_green": 0,
+  "payload": "/workspace/scratch/bbbea77e4163/n04-ci142-tree-payload.json",
+  "payload_sha256": "afd7ab9e729a47e2ab187ddf8d72224100465b78746f556bc14a759705aecf06",
+  "payload_codepoints": 44039,
+  "files": [
+    {
+      "name": "WholeCanonicalAtlasData",
+      "target_path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasData.lean",
+      "before": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair141/WholeCanonicalAtlasData.base.lean.txt",
+        "sha256": "41a32a066758dcfb8fe7da1ab9e73bee2f7ad451fa1f7057aee40c01092905d6",
+        "blob": "c6abe2dcedd1974e7ec231275a17f869c0faed3b",
+        "lines": 165
+      },
+      "after": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair141/WholeCanonicalAtlasData.lean",
+        "sha256": "a4a3c629dcde3b7c324291d5e65c6bc6ceacbbdf8968577f2abcc3f0472c9f1d",
+        "blob": "c3a5f79617c7e583e16deb09c44e5679744ea092",
+        "lines": 165
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair141/WholeCanonicalAtlasData.diff",
+        "sha256": "3fb03143392edd64d84f5bc05de7e976a85767cc02217884c1a77d45520d1a4a",
+        "blob": "80b02722d5d0b2802fe6b0c79ec1d1c94e7490ab",
+        "lines": 11
+      },
+      "verified_actual_git_preimage": true,
+      "verified_exact_single_substitution": true,
+      "complete_declaration_headers_imports_options_other_bytes_unchanged": true
+    },
+    {
+      "name": "FiniteFullJetBoundary",
+      "target_path": "src/ContinuousFlexibility/Analysis/FiniteFullJetBoundary.lean",
+      "before": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/FiniteFullJetBoundary.base.lean.txt",
+        "sha256": "fd42cc1894c3ec16125e7c0ef89188c2b3df3ca8375eb9b417e7080cf4786c75",
+        "blob": "69e3303eff0b945230f7210da126b95c232669b3",
+        "lines": 82
+      },
+      "after": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/FiniteFullJetBoundary.lean",
+        "sha256": "cc707c6e813eced9dd59ddc2c2916b6acd8278dadfdbca206a40203ac5fbfcd1",
+        "blob": "c2a1ce634f56db1bd806beda929f2feb62c15989",
+        "lines": 82
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/FiniteFullJetBoundary.diff",
+        "sha256": "77aa674fa9f140a30fe7112987632910c9e2fbecc53e5e631347ad79a7552f9d",
+        "blob": "bbfc356baaa7e5875d622e912e36047409ad1369",
+        "lines": 11
+      },
+      "verified_actual_git_preimage": true,
+      "verified_exact_single_substitution": true,
+      "complete_declaration_headers_imports_options_other_bytes_unchanged": true
+    },
+    {
+      "name": "AdjugatePrincipalFiniteJets",
+      "target_path": "src/ContinuousFlexibility/Analysis/AdjugatePrincipalFiniteJets.lean",
+      "before": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/AdjugatePrincipalFiniteJets.base.lean.txt",
+        "sha256": "fdca723daf585cb3bc089ec0a107da4ec91c9cf8f125385d3af5dcaa37fd8527",
+        "blob": "3596dfced859852fd352f9c0fd551f034b93e56a",
+        "lines": 111
+      },
+      "after": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/AdjugatePrincipalFiniteJets.lean",
+        "sha256": "c08a2cd0e8f49ad398af22ea9eb8b06f5a4e256c9c784c6c1dc3c2305315ca1b",
+        "blob": "f1b40b1987f10459cb329c662f2c954d3353449c",
+        "lines": 112
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/AdjugatePrincipalFiniteJets.diff",
+        "sha256": "f6dc04b54a27302b712aadbf770a1bf2e236bba3262cbd64d448347e83a47f7a",
+        "blob": "0ff9b0c3aabf3917054575c74cfaafeaabd5ebc2",
+        "lines": 12
+      },
+      "verified_actual_git_preimage": true,
+      "verified_exact_single_substitution": true,
+      "complete_declaration_headers_imports_options_other_bytes_unchanged": true
+    },
+    {
+      "name": "ActualNegativePrincipalDensity",
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativePrincipalDensity.lean",
+      "before": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair141/ActualNegativePrincipalDensity.base.lean.txt",
+        "sha256": "9623635a4a0d7766d72eb7b2d09213aa1bae3fb23385e0325304e60c97741181",
+        "blob": "3ba8a57f4c89b91f24c918f32a8eea3d9460c910",
+        "lines": 111
+      },
+      "after": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair141/ActualNegativePrincipalDensity.lean",
+        "sha256": "79be096548f4222f5265dc93e1b7ad6aa1bf426954089f48bb78b423c23ee2a3",
+        "blob": "7a3122c1e2c2081375a7be7405a2a348706ed261",
+        "lines": 111
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair141/ActualNegativePrincipalDensity.diff",
+        "sha256": "d1ff8e63bc30f853e2068508a950781da5f2bb89cef59eb2520c1c75ac20b293",
+        "blob": "48f70df8fd3c079cbdfecdb7ef225b4e67aedd11",
+        "lines": 11
+      },
+      "verified_actual_git_preimage": true,
+      "verified_exact_single_substitution": true,
+      "complete_declaration_headers_imports_options_other_bytes_unchanged": true
+    },
+    {
+      "name": "RelativePrincipalCoefficients",
+      "target_path": "src/ContinuousFlexibility/Analysis/RelativePrincipalCoefficients.lean",
+      "before": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair141/RelativePrincipalCoefficients.base.lean.txt",
+        "sha256": "3162241d9f98b0328f5e95d49e3ebe7772f279cf57a54b3e610d022bf92854ba",
+        "blob": "9bf310b3fa12f9185863b2730169faae74211bc6",
+        "lines": 185
+      },
+      "after": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair141/RelativePrincipalCoefficients.lean",
+        "sha256": "2e5e751fafc34c322e3baccd4b138b8e44fe66fc878ee6c9632b758b427b95c2",
+        "blob": "ca49daddabf4addd513c2ca95c1f6e93b4545268",
+        "lines": 185
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair141/RelativePrincipalCoefficients.diff",
+        "sha256": "5188396305a6ce9f2ca3b9d0a81b4d1c32b24a8546fd34573f8205cd25fa87d2",
+        "blob": "1c4009dc84b7da682dc326e68e6cc110f741f743",
+        "lines": 11
+      },
+      "verified_actual_git_preimage": true,
+      "verified_exact_single_substitution": true,
+      "complete_declaration_headers_imports_options_other_bytes_unchanged": true
+    }
+  ],
+  "reviews": [
+    [
+      "WholeCanonicalAtlasDataCI141IndependentReview.json",
+      "a1d455a70183b3a907e1b3dea856af92665b54deede8b1573b5e7aaf2e548062"
+    ],
+    [
+      "CI141FiniteJetAndAdjugateIndependentReview.json",
+      "09ffb5fdc7fe8be97d9e9d2c8b2d4599a6583e8ad2b674e1425137813f32eed9"
+    ],
+    [
+      "CI141PrincipalScalarIndependentReview.json",
+      "cb4e306610e43e259ed342b16bbcce47ced68551b050e831569753ed424e244d"
+    ]
+  ],
+  "paths": [
+    ".github/workflows/build.yml",
+    "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasData.lean",
+    "src/ContinuousFlexibility/Analysis/FiniteFullJetBoundary.lean",
+    "src/ContinuousFlexibility/Analysis/AdjugatePrincipalFiniteJets.lean",
+    "src/ContinuousFlexibility/Analysis/ActualNegativePrincipalDensity.lean",
+    "src/ContinuousFlexibility/Analysis/RelativePrincipalCoefficients.lean"
+  ],
+  "source_all_total": 3681,
+  "generated_root_imports": 3624,
+  "status": "Staged precise repairs; not compiled."
+}

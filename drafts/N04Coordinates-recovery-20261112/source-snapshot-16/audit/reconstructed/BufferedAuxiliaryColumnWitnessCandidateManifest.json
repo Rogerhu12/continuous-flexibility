@@ -1,0 +1,73 @@
+{
+  "kind": "actual_single_positive_component_auxiliary_column_witness",
+  "status": "CANDIDATE_UNCOMPILED_INDEPENDENT_REVIEW_PENDING",
+  "author": "/root/audit_coordinates",
+  "sources": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/BufferedAuxiliaryColumnWitness.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/BufferedAuxiliaryColumnWitness.lean",
+      "blob": "0c7fdb43f9427a38602e91da42f8c0fe272f3f67",
+      "sha256": "81a2dc394820b074a3d70336184f668c9c4fc830d7a1cfaa57b2cf6cc3af5b74",
+      "lines": 104,
+      "imports": [
+        "ContinuousFlexibility.Analysis.BufferedRadialAuxiliaryColumn"
+      ],
+      "public_declarations": [
+        "exists_radial_auxiliaryColumn_single_positive_buffer",
+        "exists_buffered_auxiliaryColumn_replacement_with_witness"
+      ]
+    }
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/BufferedRadialAuxiliaryColumn.lean",
+      "sha256": "35dbcac716ecd0568795cc8510ee7eeed5d1cb47b5ef20ba784e4dd9d0d8d3ee",
+      "blob": "6bc85192cefb26fff23cca0845fdfa7296ed161e"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/PhysicalSpacesAuxiliaryColumn.lean",
+      "sha256": "b2848268baf18c447dccbfc7275b74ea927c679351768d214ede503f31424160",
+      "blob": "f51d3dac4fa34bdb9cd36c4588b5a490437d10b5"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/BufferedRadialAuxiliaryColumnReviewedManifest.json",
+      "sha256": "e41b8670ddd1f4646b96ca9613e73aaf83ad372c333b9a0c7f1e40e67b63d533",
+      "blob": "45a8c44e591e319d568ca6a2a33f5961db06d3fd"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04PositiveNormalizationBuffer.lean",
+      "sha256": "c9cc82dcff9d6942d726424cee8b9d570094e26769636c2c702265d08d7e59fa",
+      "blob": "4d4d83bfb0bc2d619305e8906f904e194eec7689"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04PositiveComponents.lean",
+      "sha256": "5b7a7e28f279116415d8a3a23299294f8e5fc1858187ec00c3ea18a4d04757de",
+      "blob": "0d4de58a9b9ecd9f84e2f01da190847464669cc6"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SpacesCutoff.lean",
+      "sha256": "afa9a7f4a999636d90ee43a80f0bfc2087dd9b94170a4a1945decdcbe6b4bb82",
+      "blob": "6a6806e25f6134deaee357f7c184960c01568a9b"
+    }
+  ],
+  "scope": [
+    "Select one actual positive component and one closed interval strictly inside its normalization buffer.",
+    "Use the already reviewed interval column theorem with its support parameter equal to that exact closed interval.",
+    "The same fixed encoded column, unchanged Q/height model, and fieldwise copies simultaneously retain IsPhysicalSpaces, Through03, CanonicalGeometry, AuxiliaryColumnGauge and Q(new psi)=1.",
+    "Retain support both in the fixed closed interval and in the same positive component."
+  ],
+  "static_checks": {
+    "new_public_name_collisions": [],
+    "same_selected_psi_in_all_conclusions": true,
+    "original_122_and_134_sources_unchanged": true
+  },
+  "not_claimed": [
+    "Canonical atom all-order finite or material estimates; this source retains the actual witness needed for that next proof.",
+    "Compilation or installation."
+  ],
+  "verification": {
+    "compiled": false,
+    "ci_queried": false,
+    "checkout_index_refs_CP_authority_changed": false
+  }
+}

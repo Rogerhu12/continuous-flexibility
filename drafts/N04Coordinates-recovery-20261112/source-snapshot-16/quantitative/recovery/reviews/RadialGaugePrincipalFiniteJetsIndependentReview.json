@@ -1,0 +1,87 @@
+{
+  "kind": "independent_full_source_actual_radial_gauge_principal_finite_jets_review",
+  "reviewer": "/root/quantitative_route",
+  "author": "/root",
+  "result": "passed_static_full_source_and_actual_provider_review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalFiniteJets.lean",
+    "sha256": "80cdd212e2e550da19280ac5eec2011695831fa4f43f64dcacd701c63a985e29",
+    "blob": "3a43ccceb3f82270ebdde43087111bd569cdab5f",
+    "lines": 105
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalFiniteJetsCandidateManifest.json",
+    "sha256": "90c4805d2eb50f3528ea8f50306700a2cdbdb6282b801dfaa849d7424619b7c6",
+    "blob": "ae6bd16d9fd71044b5b8af9add3c2b657ae16dfe",
+    "lines": 50
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalTransformation.lean",
+      "sha256": "44e09082aa8264a616f69e1c6d0e12e93d35ffb4c68983462ca2fe569b2872a1",
+      "blob": "283d5dc38c2658787f5f410bdeb55d42d4bb1dd7",
+      "lines": 87
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/FiniteFullJetMatching.lean",
+      "sha256": "45dfa31bbf202202959876a3140c805d0143112fcedd7405ebffd34ca3b703df",
+      "blob": "9baca93c394dae0092c356505a301df65635e749",
+      "lines": 82
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/FiniteFullJetBoundary.lean",
+      "sha256": "fd42cc1894c3ec16125e7c0ef89188c2b3df3ca8375eb9b417e7080cf4786c75",
+      "blob": "69e3303eff0b945230f7210da126b95c232669b3",
+      "lines": 82
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceCylinder.lean",
+      "sha256": "6ececb96b06c704d8672c58cbe2b395bf3ce8967a667b046cd09466249b5c4de",
+      "blob": "c1c59b1c3240feeec1539a65ce0c8a8a4ec7ba48",
+      "lines": 128
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalFieldJetReduction.lean",
+      "sha256": "60a88163fb98cf3e12f42e240377136f5faf788378fa3c055312cbdba4aafbd3",
+      "blob": "d26a665de5f06590fc30615bdb376120761cd6bd",
+      "lines": 155
+    }
+  ],
+  "reviewed_input": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalTransformationReviewedManifest.json",
+    "sha256": "9cf696dc96c790e4067e854cb7439a911e2dfd3d6df51272811c840be4b87a07",
+    "blob": "70a741ec39034713c46027343ec6bd2d3c3dc55f",
+    "lines": 26
+  },
+  "checks": [
+    "Read the complete 105-line source, complete 87-line actual radial-gauge formula, complete finite matching and precomposition providers, and actual cylinder inverse and coefficient selector definitions.",
+    "The multiplication lemma is pairing followed by the same ordinary smooth real multiplication, so value and every order through n are retained.",
+    "The multiplier is evaluated at the actual inverse radial point, with the three exact factors H^2*Yprime, H^2, and H^2/Yprime. Strict positivity of Yprime supplies the only denominator nonvanishing premise.",
+    "The public function equality unfolds the coefficient selector at function application and uses the corresponding three actual principal formulas, with no independent coefficient fields.",
+    "Both current and reference use the same fixed inverse chi and the same multiplier. Precomposition is at the true chi(p), then multiplication preserves order n with no inverse-jet comparison or derivative loss.",
+    "All source/provider pins match the candidate manifest. A read-only exact public-name scan found no installed collision. No source, checkout, index, ref, CP or CI operation was performed for this review."
+  ],
+  "dependency_note": {
+    "original_imported_boundary": {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/FiniteFullJetBoundary.lean",
+      "sha256": "fd42cc1894c3ec16125e7c0ef89188c2b3df3ca8375eb9b417e7080cf4786c75",
+      "blob": "69e3303eff0b945230f7210da126b95c232669b3",
+      "lines": 82
+    },
+    "ci141_repair_candidate": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair141/FiniteFullJetBoundary.lean",
+      "sha256": "cc707c6e813eced9dd59ddc2c2916b6acd8278dadfdbca206a40203ac5fbfcd1",
+      "blob": "c2a1ce634f56db1bd806beda929f2feb62c15989",
+      "lines": 82
+    },
+    "consumed_precomp_declaration_byte_identical_across_repair": true,
+    "description": "CI141 diagnosed inference only in the separate radialBoundaryJet application. Its pending explicit-curve repair leaves the precomp declaration consumed here byte-identical; this review does not claim that the original imported module compiled."
+  },
+  "limitations": [
+    "Static review only; no Lean compilation or elaboration.",
+    "No material bound or same-witness raw optical lower is asserted by this finite-order algebraic transfer."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_modified": false
+}

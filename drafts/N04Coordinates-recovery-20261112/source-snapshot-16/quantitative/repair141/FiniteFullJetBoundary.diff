@@ -1,0 +1,11 @@
+--- a/src/ContinuousFlexibility/Analysis/FiniteFullJetBoundary.lean
++++ b/src/ContinuousFlexibility/Analysis/FiniteFullJetBoundary.lean
+@@ -75,7 +75,7 @@
+     radialBoundaryJet f c k θ = radialBoundaryJet g c k θ := by
+   have hl : ContDiffAt ℝ ∞ (fun r : ℝ => (r, θ)) c :=
+     contDiffAt_id.prodMk contDiffAt_const
+-  have hm := h.precomp hl
++  have hm := h.precomp (γ := fun r : ℝ => (r, θ)) (y := c) hl
+   have he := congrArg (fun A : ℝ [×k]→L[ℝ] ℝ => A (fun _ => 1)) (hm.jets k hk)
+   simpa only [radialBoundaryJet, iteratedDeriv_eq_iteratedFDeriv, Function.comp_def] using he
+ 
