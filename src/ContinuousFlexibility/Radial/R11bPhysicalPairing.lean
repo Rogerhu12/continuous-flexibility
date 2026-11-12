@@ -48,15 +48,37 @@ theorem r11b_referenceCellSquare_eq_integral {D : ReferenceData} (hab : D.a ≤ 
       (2 * Real.pi)⁻¹ * ∫ x, (D.localizer m x.1 * f x) ^ 2 ∂radialPhysicalMeasure D :=
   r11b_integral_angularMean_eq hab (hf m).integrable_sq
 
-/-- Equality of physical representatives preserves an integrable mean pairing. -/
+/-- A.e. equality preserves the iterated mean pairing without an
+integrability hypothesis. This uses a.e. equality of almost every angular
+section, not an identification of the iterated integral with a product
+integral. -/
+theorem r11b_iteratedAngularMean_congr_ae {D : ReferenceData} (hab : D.a ≤ D.b)
+    {f g : PolarPoint → ℝ} (hfg : f =ᵐ[radialPhysicalMeasure D] g) :
+    (∫ r in D.a..D.b, radialAngularMean (fun θ => f (r, θ))) =
+      ∫ r in D.a..D.b, radialAngularMean (fun θ => g (r, θ)) := by
+  rw [r11b_radialPhysicalMeasure_eq_prod] at hfg
+  have hrows := Measure.ae_ae_of_ae_prod hfg
+  have hrad : (volume : Measure ℝ).restrict (radialCore D) =
+      (volume : Measure ℝ).restrict (Ioc D.a D.b) :=
+    Measure.restrict_congr_set Ioo_ae_eq_Ioc
+  rw [hrad] at hrows
+  rw [intervalIntegral.integral_of_le hab, intervalIntegral.integral_of_le hab]
+  apply integral_congr_ae
+  filter_upwards [hrows] with r hr
+  unfold radialAngularMean
+  congr 1
+  rw [intervalIntegral.integral_of_le (show (0 : ℝ) ≤ 2 * Real.pi by positivity),
+    intervalIntegral.integral_of_le (show (0 : ℝ) ≤ 2 * Real.pi by positivity)]
+  exact integral_congr_ae hr
+
+/-- The original integrable-pairing API, retained for existing callers. -/
 theorem r11b_integral_angularMean_congr_ae {D : ReferenceData} (hab : D.a ≤ D.b)
     {f g : PolarPoint → ℝ} (hf : Integrable f (radialPhysicalMeasure D))
     (hg : Integrable g (radialPhysicalMeasure D))
     (hfg : f =ᵐ[radialPhysicalMeasure D] g) :
     (∫ r in D.a..D.b, radialAngularMean (fun θ => f (r, θ))) =
-      ∫ r in D.a..D.b, radialAngularMean (fun θ => g (r, θ)) := by
-  rw [r11b_integral_angularMean_eq hab hf, r11b_integral_angularMean_eq hab hg,
-    integral_congr_ae hfg]
+      ∫ r in D.a..D.b, radialAngularMean (fun θ => g (r, θ)) :=
+  r11b_iteratedAngularMean_congr_ae hab hfg
 
 
 /-- The physical pairing formula with its original pointwise product. -/
