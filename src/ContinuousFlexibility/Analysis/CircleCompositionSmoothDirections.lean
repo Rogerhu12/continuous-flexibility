@@ -29,32 +29,17 @@ private theorem circleChartCompositionJets_zero_decode
     (travel : ℕ → ℝ) (x : S.Space × S.Space) :
     circleChartCompositionJets hS travel 0 x Fin.elim0 =
       S.decode (circleShiftedChartComposeContinuousLinear hS hT hD hγ travel x.1 x.2) := by
-  refine (circleChartCompositionJets_zero hS travel x).trans ?_
-  funext m θ
-  exact ((congrArg (fun u : S.Space => S.decode u m θ)
-    (circleShiftedChartComposeContinuousLinear_apply hS hT hD hγ travel x.1 x.2)).trans
-      (circleShiftedChartComposeLinear_decode hS hT hD hγ travel x.1 x.2 m θ)).symm
-
-private theorem exists_decoded_smoothDirections_of_cover
-    {E F G : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
-    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
-    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F] [T2Space F]
-    (f : E → F) (decode : F → G)
-    (value : ∀ n : ℕ, E → (Fin n → E) → G) (V : E → Set E)
-    (hself : ∀ x, x ∈ V x)
-    (hlocal : ∀ i, ∃ J : SmoothDirections (V i) f,
-      ∀ n x, x ∈ V i → ∀ v : Fin n → E, decode (J.D n x v) = value n x v) :
-    ∃ K : SmoothDirections univ f,
-      ∀ n x (v : Fin n → E), decode (K.D n x v) = value n x v := by
-  classical
-  choose J hJ using hlocal
-  obtain ⟨K, hK⟩ := exists_smoothDirections_of_open_cover
-    (U := (univ : Set E)) isOpen_univ V J
-    (fun i x hx => mem_univ x) (fun x hx => ⟨x, hself x⟩)
-  refine ⟨K, ?_⟩
-  intro n x v
-  exact (congrArg (fun L : E [×n]→L[ℝ] F => decode (L v))
-    (hK x n x (hself x))).trans (hJ x n x (hself x) v)
+  have hdecode :
+      S.decode (circleShiftedChartComposeContinuousLinear hS hT hD hγ travel x.1 x.2) =
+        fun m θ => S.decode x.2 m (circleCompositionPhase travel x m θ) := by
+    funext m θ
+    exact (congrArg (fun u : S.Space => S.decode u m θ)
+      (circleShiftedChartComposeContinuousLinear_apply
+        (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ travel x.1 x.2)).trans
+      (circleShiftedChartComposeLinear_decode
+        (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ travel x.1 x.2 m θ)
+  exact (circleChartCompositionJets_zero
+    (T := T) (γ := γ) (S := S) hS travel x).trans hdecode.symm
 
 theorem exists_circleChartComposition_smoothDirections
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
@@ -97,14 +82,31 @@ theorem exists_circleChartComposition_smoothDirections
       exact circleChartCompositionJets_member hS hT hD hγ travel n x v
     · exact hbounds (1 + p base x₀) (by positivity)
     · intro x hx
-      exact circleChartCompositionJets_zero_decode hS hT hD hγ travel x
+      exact circleChartCompositionJets_zero_decode
+        (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ travel x
     · intro n x w v t ht m b θ
       exact circleChartCompositionJets_angular_line_hasDerivAt hS travel n x w v t m b θ
     · exact circleChartCompositionJets_secondEnvelopes hS hT hD hγ travel (hVopen x₀)
+  let J : ∀ x₀ : S.Space × S.Space, SmoothDirections (V x₀) f :=
+    fun x₀ => (hlocal x₀).choose
+  have hJ (x₀ : S.Space × S.Space) (n : ℕ) (x : S.Space × S.Space)
+      (hx : x ∈ V x₀) (v : Fin n → S.Space × S.Space) :
+      S.decode ((J x₀).D n x v) = circleChartCompositionJets hS travel n x v :=
+    (hlocal x₀).choose_spec n x hx v
   have hself (x : S.Space × S.Space) : x ∈ V x := by
     change p base x < 1 + p base x
     linarith
-  exact exists_decoded_smoothDirections_of_cover f (fun u : S.Space => S.decode u)
-    (fun n x v => circleChartCompositionJets hS travel n x v) V hself hlocal
+  let coverData := exists_smoothDirections_of_open_cover
+    (E := S.Space × S.Space) (F := S.Space) (f := f)
+    (U := (univ : Set (S.Space × S.Space))) isOpen_univ V J
+    (fun i x hx => mem_univ x) (fun x hx => ⟨x, hself x⟩)
+  let K : SmoothDirections (univ : Set (S.Space × S.Space)) f := coverData.choose
+  have hK (x₀ : S.Space × S.Space) (n : ℕ) (x : S.Space × S.Space)
+      (hx : x ∈ V x₀) : K.D n x = (J x₀).D n x :=
+    coverData.choose_spec x₀ n x hx
+  refine ⟨K, ?_⟩
+  intro n x v
+  exact (congrArg (fun L : (S.Space × S.Space) [×n]→L[ℝ] S.Space => S.decode (L v))
+    (hK x n x (hself x))).trans (hJ x n x (hself x) v)
 
 end ContinuousFlexibility.Statements

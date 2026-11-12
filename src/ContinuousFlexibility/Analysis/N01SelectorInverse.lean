@@ -27,12 +27,6 @@ local instance n01SelectorInverseStateSMul (S : PhysicalSpacesData) :
 open Set Filter ContinuousFlexibility.Analysis
 open scoped Topology
 
-private theorem selectorInverse_jointValue_of_decode {value angle travel displacement : ℝ}
-    (h : displacement = value - (angle + travel)) :
-    angle + travel + displacement = value := by
-  rw [h]
-  ring
-
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -72,7 +66,8 @@ theorem N01Properties.endpointFlowCircle_mem_positiveLiftDomain
   rw [hN.endpointFlowCircle_affineLift hS hT rsel hrsel z hz]
   have hflow : ordinaryFlowConditions D S C (stateNeighborhood S C base ε) :=
     hN.2.2.2.2.2.2.1
-  have hmem := liftSectorParameter_mem_stateNeighborhood (C := C) hz (le_refl ε)
+  have hmem : liftSectorParameter S C z ∈ stateNeighborhood S C base ε :=
+    liftSectorParameter_mem_stateNeighborhood (C := C) hz (le_refl ε)
   exact fun m θ => ((hflow _ hmem m θ).2.2.2 (rsel m) (hrsel m)).1
 
 theorem N01Properties.endpointFlowCircle_affineInverse
@@ -158,12 +153,21 @@ def N01Properties.selectorInverse_jointTower
     (hN.smoothTameOn_selectorInverseCircle hS hT rsel hrsel).choose
   have hH (j : ℕ) : 0 < T.H (T.sample j) :=
     (hT.2.1 _ (materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 j)).2.1
-  let K := circleAffineLiftJointDirections (hS.2.1 (3 / 4 : ℝ)) hH J
-    (fun j => opticalTravel D.w (C.left j) (rsel j)) m
-  refine K.congrOn ?_
+  let travel : ℕ → ℝ := fun j => opticalTravel D.w (C.left j) (rsel j)
+  let K : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
+      (fun p : (StateDirections S × ℝ) × ℝ => p.2 + travel m +
+        (S.circle (3 / 4 : ℝ)).decode
+          (hN.selectorInverseCircle hS hT rsel hrsel p.1) m p.2) :=
+    circleAffineLiftJointDirections (hS.2.1 (3 / 4 : ℝ)) hH J travel m
+  apply K.congr
   intro p hp
-  exact selectorInverse_jointValue_of_decode
-    (congrFun (congrFun
-      (hN.selectorInverseCircle_decode hS hT rsel hrsel p.1 hp.1) m) p.2)
+  let a : ℝ := p.2 + travel m
+  let b : ℝ := Function.invFun (C.minusFlow (liftSectorParameter S C p.1) m (rsel m)) p.2
+  have hd : (S.circle (3 / 4 : ℝ)).decode
+      (hN.selectorInverseCircle hS hT rsel hrsel p.1) m p.2 = b - a :=
+    congrArg (fun u : ℕ → ℝ → ℝ => u m p.2)
+      (hN.selectorInverseCircle_decode hS hT rsel hrsel p.1 hp.1)
+  exact (congrArg (fun y : ℝ => a + y) hd).trans
+    ((add_comm a (b - a)).trans (sub_add_cancel b a))
 
 end ContinuousFlexibility.Statements

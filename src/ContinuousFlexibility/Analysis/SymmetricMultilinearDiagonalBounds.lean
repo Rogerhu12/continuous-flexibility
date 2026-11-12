@@ -107,13 +107,10 @@ private theorem parameterDiagonalMap_injective (n : ℕ) :
       exact_mod_cast (Fintype.card_ne_zero (α := Equiv.Perm (Fin n)))
     exact (mul_eq_zero.mp h.symm).resolve_left hcard
   intro A B hAB
-  apply sub_eq_zero.mp
-  apply hzero
-  calc
-    parameterDiagonalMap n (A - B) =
-        parameterDiagonalMap n A - parameterDiagonalMap n B :=
-      _root_.map_sub (parameterDiagonalMap n) A B
-    _ = 0 := sub_eq_zero.mpr hAB
+  have hmap : parameterDiagonalMap n (A - B) =
+      parameterDiagonalMap n A - parameterDiagonalMap n B :=
+    map_sub (parameterDiagonalMap n) A B
+  exact sub_eq_zero.mp (hzero (A - B) (hmap.trans (sub_eq_zero.mpr hAB)))
 
 /-- The diagonal unit-ball estimate controls every unit tuple in the
 fixed finite-dimensional model, with a constant chosen before the form. -/

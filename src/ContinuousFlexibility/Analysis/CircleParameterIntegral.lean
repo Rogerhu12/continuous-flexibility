@@ -1,6 +1,5 @@
 import ContinuousFlexibility.Analysis.AngularRegularityIntegral
 import ContinuousFlexibility.Analysis.CircleEnergyPointwiseBounds
-import ContinuousFlexibility.Analysis.ReturnCorrectionDisplacementRegularity
 
 /-!
 # Parameter integrals of actual weighted circle fields
@@ -19,6 +18,21 @@ namespace ContinuousFlexibility.Analysis
 
 open Set Filter MeasureTheory
 open scoped Topology ContDiff
+
+theorem angularRegular_of_contDiff
+    {F : PolarPoint → ℝ} (hF : ContDiff ℝ ∞ F) (n : ℕ) :
+    AngularRegular n (fun a θ => F (a, θ)) := by
+  induction n generalizing F with
+  | zero => exact hF.continuous
+  | succ n ih =>
+    have hd (a θ : ℝ) :
+        HasDerivAt (fun x => F (a, x)) (angularPartial F (a, θ)) θ :=
+      hasDerivAt_angular_slice (hF.differentiable (by simp) (a, θ))
+    have hpartial : ContDiff ℝ ∞ (angularPartial F) :=
+      contDiff_iff_contDiffAt.mpr fun p =>
+        contDiffAt_angularPartial hF.contDiffAt (m := ∞) (by simp)
+    refine ⟨hF.continuous, fun a θ => (hd a θ).differentiableAt, ?_⟩
+    exact (ih hpartial).congr fun a θ => (hd a θ).deriv
 
 theorem contDiff_unitParameterIntegral
     {F : ℝ → ℝ → ℝ} (hF : ∀ n, AngularRegular n F) :

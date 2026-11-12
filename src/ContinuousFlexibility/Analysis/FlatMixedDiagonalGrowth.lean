@@ -110,47 +110,25 @@ private theorem mixedLeibnizMass_nonneg (n a b : ℕ) : 0 ≤ mixedLeibnizMass n
   unfold mixedLeibnizMass
   positivity
 
-private theorem nonnegative_entry_le_triple_sum
-    (M : ℕ → ℕ → ℕ → ℝ) (hM : ∀ i j k, 0 ≤ M i j k)
-    {n s k a b : ℕ} (hk : k ≤ n) (hab : a + b ≤ s) :
-    M k a b ≤
-      ∑ t : Fin (n + 1), ∑ u : Fin (s + 1), ∑ v : Fin (s + 1),
-        M t.val u.val v.val := by
+private theorem flatMixed_triple_sum_bound
+    {ι₁ ι₂ ι₃ : Type*} [Fintype ι₁] [Fintype ι₂] [Fintype ι₃]
+    (f : ι₁ → ι₂ → ι₃ → ℝ) (hf : ∀ i j k, 0 ≤ f i j k)
+    (i : ι₁) (j : ι₂) (k : ι₃) :
+    f i j k ≤ ∑ i', ∑ j', ∑ k', f i' j' k' := by
   classical
-  let kn : Fin (n + 1) := ⟨k, by omega⟩
-  let an : Fin (s + 1) := ⟨a, by omega⟩
-  let bn : Fin (s + 1) := ⟨b, by omega⟩
-  calc
-    M k a b ≤
-        ∑ v : Fin (s + 1), M k a v.val :=
-      Finset.single_le_sum
-        (f := fun v : Fin (s + 1) => M k a v.val)
-        (fun v _ => hM k a v.val) (Finset.mem_univ bn)
-    _ ≤ ∑ u : Fin (s + 1), ∑ v : Fin (s + 1),
-        M k u.val v.val :=
-      Finset.single_le_sum
-        (f := fun u : Fin (s + 1) =>
-          ∑ v : Fin (s + 1), M k u.val v.val)
-        (fun u _ => Finset.sum_nonneg
-          (fun v _ => hM k u.val v.val)) (Finset.mem_univ an)
-    _ ≤ ∑ t : Fin (n + 1), ∑ u : Fin (s + 1), ∑ v : Fin (s + 1),
-        M t.val u.val v.val :=
-      Finset.single_le_sum
-        (f := fun t : Fin (n + 1) =>
-          ∑ u : Fin (s + 1), ∑ v : Fin (s + 1),
-            M t.val u.val v.val)
-        (fun t _ => Finset.sum_nonneg (fun u _ => Finset.sum_nonneg
-          (fun v _ => hM t.val u.val v.val)))
-        (Finset.mem_univ kn)
-
-
-private theorem mixedLeibnizMass_le_total
-    {n s k a b : ℕ} (hk : k ≤ n) (hab : a + b ≤ s) :
-    mixedLeibnizMass k a b ≤
-      ∑ t : Fin (n + 1), ∑ u : Fin (s + 1), ∑ v : Fin (s + 1),
-        mixedLeibnizMass t.val u.val v.val := by
-  exact nonnegative_entry_le_triple_sum mixedLeibnizMass
-    mixedLeibnizMass_nonneg (n := n) (s := s) (k := k) (a := a) (b := b) hk hab
+  have h₁ : f i j k ≤ ∑ k', f i j k' :=
+    Finset.single_le_sum (f := fun k' => f i j k')
+      (fun k' _ => hf i j k') (Finset.mem_univ k)
+  have h₂ : (∑ k', f i j k') ≤ ∑ j', ∑ k', f i j' k' :=
+    Finset.single_le_sum (f := fun j' => ∑ k', f i j' k')
+      (fun j' _ => Finset.sum_nonneg (fun k' _ => hf i j' k'))
+      (Finset.mem_univ j)
+  have h₃ : (∑ j', ∑ k', f i j' k') ≤ ∑ i', ∑ j', ∑ k', f i' j' k' :=
+    Finset.single_le_sum (f := fun i' => ∑ j', ∑ k', f i' j' k')
+      (fun i' _ => Finset.sum_nonneg (fun j' _ =>
+        Finset.sum_nonneg (fun k' _ => hf i' j' k')))
+      (Finset.mem_univ i)
+  exact (h₁.trans h₂).trans h₃
 
 private theorem jointMixedDiagonal_mul_le
     {f g h : E × PolarPoint → ℝ} {V₀ : Set PolarPoint}
@@ -262,8 +240,14 @@ theorem FlatMixedDiagonalGrowth.mul
       _ = Z := by dsimp only [Z]; ring
   have hpoint := jointMixedDiagonal_mul_le (J i) (K i) (L i) hU (hV i) (hc i)
     (hprod i) k a b x w hx hy Z hterm
+  let kn : Fin (n + 1) := ⟨k, by omega⟩
+  let an : Fin (s + 1) := ⟨a, by omega⟩
+  let bn : Fin (s + 1) := ⟨b, by omega⟩
   have hmass : mixedLeibnizMass k a b ≤ N :=
-    mixedLeibnizMass_le_total (n := n) (s := s) (k := k) (a := a) (b := b) hk hab
+    flatMixed_triple_sum_bound
+      (fun (k' : Fin (n + 1)) (a' b' : Fin (s + 1)) =>
+        mixedLeibnizMass k'.val a'.val b'.val)
+      (fun k' a' b' => mixedLeibnizMass_nonneg k'.val a'.val b'.val) kn an bn
   exact hpoint.trans ((mul_le_mul_of_nonneg_right hmass hZ).trans_eq
     (by dsimp only [Z, H]; ring))
 

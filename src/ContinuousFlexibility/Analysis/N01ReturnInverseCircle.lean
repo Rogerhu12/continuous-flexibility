@@ -39,12 +39,12 @@ theorem smoothTameOn_circleShiftedChartCompose_maps
   have htop : WithSeminorms H.grading :=
     withSeminorms_graded (fun n => H.level n) H.bond
   exact smoothTameOn_comp_topological
-    (X := E) (Y := H.Space × H.Space)
     (G := fun n => H.level n) (g := H.bond)
     (p := p) (q := pairGrading H.grading H.grading) (r := H.grading)
-    (U := U) (V := univ) (u := fun x => (f x, g x))
-    (v := fun x : H.Space × H.Space =>
-      circleShiftedChartComposeLinear hH hT hD hγ travel x.1 x.2)
+    (U := U) (V := (univ : Set (H.Space × H.Space)))
+    (u := fun x : E => (f x, g x))
+    (v := fun y : H.Space × H.Space =>
+      circleShiftedChartComposeLinear hH hT hD hγ travel y.1 y.2)
     hp ht (withSeminorms_pairGrading htop htop)
     hU isOpen_univ (fun _ _ => mem_univ _)
     (smoothTameOn_prodMk hp ht hf hg)

@@ -82,10 +82,7 @@ theorem N01Properties.endpointFlowCircle_zero
 private theorem convex_seminorm_strict_sublevel
     {E : Type*} [AddCommGroup E] [Module ℝ E]
     (p : Seminorm ℝ E) (R : ℝ) : Convex ℝ {x : E | p x < R} := by
-  intro x hx y hy a b ha hb hab
-  have hx' : x ∈ p.ball 0 R := by simpa only [Set.mem_ofPred_eq, Seminorm.mem_ball_zero] using hx
-  have hy' : y ∈ p.ball 0 R := by simpa only [Set.mem_ofPred_eq, Seminorm.mem_ball_zero] using hy
-  simpa only [Set.mem_ofPred_eq, Seminorm.mem_ball_zero] using p.convex_ball 0 R hx' hy' ha hb hab
+  simpa only [Seminorm.ball_zero_eq] using (p.convex_ball (0 : E) R)
 
 theorem N01Properties.exists_endpointFlowCircle_smoothDirections
     (hN : N01Properties D T S C base loss ε)

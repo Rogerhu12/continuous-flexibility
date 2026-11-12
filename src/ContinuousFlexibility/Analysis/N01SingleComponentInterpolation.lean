@@ -22,28 +22,26 @@ local instance n01SingleComponentInterpolationStateSMul (S : PhysicalSpacesData)
 open Set ContinuousFlexibility.Analysis
 open scoped ContDiff Topology
 
-private theorem singleInterpolation_product_field
-    (m : ℕ) (c : ℝ) (u : ℕ → ℝ → ℝ) (f : ℝ → ℝ)
-    (hu : ∀ θ, u m θ = f θ - θ) :
-    (fun i θ => circleSingletonField m c i θ * u i θ) =
-      circleSingleComponentField m (fun θ => c * (f θ - θ)) := by
+private theorem singleComponentInterpolation_product_field
+    (m : ℕ) (c : ℝ) (f : ℕ → ℝ → ℝ) (g : ℝ → ℝ)
+    (hfm : ∀ θ, f m θ = g θ) :
+    (fun i θ => circleSingletonField m c i θ * f i θ) =
+      circleSingleComponentField m (fun θ => c * g θ) := by
   funext i θ
   by_cases hi : i = m
   · subst i
-    simp only [circleSingletonField, circleSingleComponentField, if_pos rfl, ite_true]
-    rw [hu θ]
+    simp only [circleSingletonField, circleSingleComponentField, eq_self_iff_true, ite_true]
+    exact congrArg (fun y : ℝ => c * y) (hfm θ)
   · simp only [circleSingletonField, circleSingleComponentField, if_neg hi, zero_mul]
 
-private theorem singleInterpolation_lift_of_field
-    (u : ℕ → ℝ → ℝ) (m : ℕ) (c : ℝ) (f : ℝ → ℝ)
-    (hu : u = circleSingleComponentField m (fun θ => c * (f θ - θ))) :
-    circleAffineLift (fun _ => 0) u 1 m = returnInterpolation c f := by
+private theorem singleComponentInterpolation_affineLift
+    (m : ℕ) (c : ℝ) (f : ℝ → ℝ) :
+    circleAffineLift (fun _ => 0)
+      (circleSingleComponentField m (fun θ => c * (f θ - θ))) 1 m =
+        returnInterpolation c f := by
   funext θ
-  have hpoint : u m θ = c * (f θ - θ) :=
-    (congrFun (congrFun hu m) θ).trans (if_pos rfl)
-  change θ + 0 + 1 * u m θ = returnInterpolation c f θ
-  rw [hpoint]
-  simp only [one_mul, add_zero, returnInterpolation_apply]
+  simp only [circleAffineLift, circleSingleComponentField, eq_self_iff_true, ite_true,
+    one_mul, add_zero, returnInterpolation_apply]
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -64,17 +62,24 @@ theorem N01Properties.singleComponentInterpolationCircle_decode
         (hN.singleComponentInterpolationCircle hS hT χ m x) =
       circleSingleComponentField m (fun θ =>
         χ m x.2 * (returnCorrectionInitialMap S C (liftSectorParameter S C x.1) m θ - θ)) := by
-  let a : CircleSpace S := circleSingletonLinear (hS.2.1 (3 / 4 : ℝ)) m (χ m x.2)
-  let u : CircleSpace S := hN.returnCorrectionInitialCircle hS hT x.1
-  have hprod := circleProductBilinear_decode (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1
-    (by norm_num) a u
-  have ha := circleSingletonLinear_decode (hS.2.1 (3 / 4 : ℝ)) m (χ m x.2)
-  exact hprod.trans
-    ((congrArg (fun v : ℕ → ℝ → ℝ =>
-      fun i θ => v i θ * (S.circle (3 / 4 : ℝ)).decode u i θ) ha).trans
-      (singleInterpolation_product_field m (χ m x.2) ((S.circle (3 / 4 : ℝ)).decode u)
-        (returnCorrectionInitialMap S C (liftSectorParameter S C x.1) m)
-        (fun θ => hN.returnCorrectionInitialCircle_decode hS hT x.1 hx m θ)))
+  let u : CircleSpace S := circleSingletonLinear (hS.2.1 (3 / 4 : ℝ)) m (χ m x.2)
+  let v : CircleSpace S := hN.returnCorrectionInitialCircle hS hT x.1
+  have hprod : (S.circle (3 / 4 : ℝ)).decode
+      (hN.singleComponentInterpolationCircle hS hT χ m x) =
+        fun i θ => (S.circle (3 / 4 : ℝ)).decode u i θ *
+          (S.circle (3 / 4 : ℝ)).decode v i θ :=
+    circleProductBilinear_decode (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num) u v
+  have hu : (S.circle (3 / 4 : ℝ)).decode u = circleSingletonField m (χ m x.2) :=
+    circleSingletonLinear_decode (hS.2.1 (3 / 4 : ℝ)) m (χ m x.2)
+  have hv (θ : ℝ) : (S.circle (3 / 4 : ℝ)).decode v m θ =
+      returnCorrectionInitialMap S C (liftSectorParameter S C x.1) m θ - θ :=
+    hN.returnCorrectionInitialCircle_decode hS hT x.1 hx m θ
+  have hfield := congrArg
+    (fun f : ℕ → ℝ → ℝ => fun i θ => f i θ * (S.circle (3 / 4 : ℝ)).decode v i θ) hu
+  exact hprod.trans (hfield.trans
+    (singleComponentInterpolation_product_field m (χ m x.2)
+      ((S.circle (3 / 4 : ℝ)).decode v)
+      (fun θ => returnCorrectionInitialMap S C (liftSectorParameter S C x.1) m θ - θ) hv))
 
 theorem N01Properties.singleComponentInterpolationCircle_lift
     (m : ℕ) (x : (StateDirections S × ℝ) × ℝ)
@@ -84,10 +89,10 @@ theorem N01Properties.singleComponentInterpolationCircle_lift
           (hN.singleComponentInterpolationCircle hS hT χ m x)) 1 m =
       returnInterpolation (χ m x.2)
         (returnCorrectionInitialMap S C (liftSectorParameter S C x.1) m) := by
-  exact singleInterpolation_lift_of_field
-    ((S.circle (3 / 4 : ℝ)).decode (hN.singleComponentInterpolationCircle hS hT χ m x))
-    m (χ m x.2) (returnCorrectionInitialMap S C (liftSectorParameter S C x.1) m)
-    (hN.singleComponentInterpolationCircle_decode hS hT χ m x hx)
+  exact (congrArg (fun e : ℕ → ℝ → ℝ => circleAffineLift (fun _ => 0) e 1 m)
+    (hN.singleComponentInterpolationCircle_decode hS hT χ m x hx)).trans
+      (singleComponentInterpolation_affineLift m (χ m x.2)
+        (returnCorrectionInitialMap S C (liftSectorParameter S C x.1) m))
 
 theorem N01Properties.singleComponentInterpolationCircle_positive
     (hχrange : ∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1)
@@ -149,18 +154,22 @@ theorem N01Properties.singleComponentInterpolationInverseCircle_decode
         (hN.singleComponentInterpolationInverseCircle hS hT χ m x) m θ =
       Function.invFun (returnInterpolation (χ m x.2)
         (returnCorrectionInitialMap S C (liftSectorParameter S C x.1) m)) θ - θ := by
-  have hd := congrFun (congrFun (circlePositiveInversePerturbation_decode
-    (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num) (fun _ => 0)
-    (hN.singleComponentInterpolationCircle hS hT χ m x)
-    (hN.singleComponentInterpolationCircle_positive hS hT χ hχrange m x hx hr)) m) θ
+  have hd : (S.circle (3 / 4 : ℝ)).decode
+      (hN.singleComponentInterpolationInverseCircle hS hT χ m x) m θ =
+        circleAffineInverse (fun _ => 0)
+          (hN.singleComponentInterpolationCircle hS hT χ m x) m θ - (θ - 0) :=
+    congrArg (fun f : ℕ → ℝ → ℝ => f m θ)
+      (circlePositiveInversePerturbation_decode
+        (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num) (fun _ => 0)
+        (hN.singleComponentInterpolationCircle hS hT χ m x)
+        (hN.singleComponentInterpolationCircle_positive hS hT χ hχrange m x hx hr))
   have heq : circleAffineInverse (fun _ => 0)
-      (hN.singleComponentInterpolationCircle hS hT χ m x) m =
+      (hN.singleComponentInterpolationCircle hS hT χ m x) m θ =
       Function.invFun (returnInterpolation (χ m x.2)
-        (returnCorrectionInitialMap S C (liftSectorParameter S C x.1) m)) :=
-    congrArg (fun f : ℝ → ℝ => Function.invFun f)
+        (returnCorrectionInitialMap S C (liftSectorParameter S C x.1) m)) θ :=
+    congrArg (fun f : ℝ → ℝ => Function.invFun f θ)
       (hN.singleComponentInterpolationCircle_lift hS hT χ m x hx)
-  exact hd.trans (congrArg₂ (fun a b : ℝ => a - b)
-    (congrFun heq θ) (sub_zero θ))
+  exact hd.trans (congrArg₂ (fun a b : ℝ => a - b) heq (sub_zero θ))
 
 def N01Properties.singleComponentInterpolationInverseTower
     (hχ : ∀ m, ContDiff ℝ ∞ (χ m))

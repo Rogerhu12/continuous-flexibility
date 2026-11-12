@@ -38,14 +38,12 @@ private theorem residual_sectorPair_withSeminorms (S : PhysicalSpacesData) :
 private theorem smoothTameOn_circle_sub
     {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
     [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
-    {H : CircleModelData} {T : MaterialData} {γ : ℝ}
-    (hB : IsCircleModel T γ H) {p : ℕ → Seminorm ℝ E}
+    {H : CircleModelData} [∀ n, CompleteSpace (H.level n)]
+    {p : ℕ → Seminorm ℝ E}
     (hp : Monotone p) (ht : WithSeminorms p) {U : Set E} (hU : IsOpen U)
     {f g : E → H.Space}
     (hf : SmoothTameOn p H.grading U f) (hg : SmoothTameOn p H.grading U g) :
     SmoothTameOn p H.grading U (fun x => f x - g x) := by
-  letI : ∀ n, CompleteSpace (H.level n) :=
-    fun n => (hB.2.1 n).isComplete.completeSpace_coe
   let L : H.Space × H.Space →L[ℝ] H.Space :=
     ContinuousLinearMap.fst ℝ H.Space H.Space - ContinuousLinearMap.snd ℝ H.Space H.Space
   have hL : IsTameLinear (pairGrading H.grading H.grading) H.grading L.toLinearMap 0 0 := by
@@ -96,7 +94,7 @@ theorem N01Properties.smoothTameOn_sectorReturnTransportCircle
     smoothTameOn_restrict_open (smoothTameOn_sectorChart S) hU (subset_univ _)
   have hdiff : SmoothTameOn p q U
       (fun z : StateDirections S × ℝ => z.1.val.2.2.2 - hN.returnFlowCircle hS hT z) :=
-    smoothTameOn_circle_sub hCircle hp ht hU hchart hflow
+    smoothTameOn_circle_sub hp ht hU hchart hflow
   have hpair := smoothTameOn_prodMk hp ht hflow hdiff
   have hmap : MapsTo
       (fun z : StateDirections S × ℝ =>

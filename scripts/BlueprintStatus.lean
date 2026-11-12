@@ -100,3 +100,5 @@ run_cmd do
     for ax in axioms do
       unless ax == ``propext || ax == ``Classical.choice || ax == ``Quot.sound do
         throwError "N06 completion audit: unexpected axiom {ax} in {name}"
+
+#print axioms ContinuousFlexibility.Blueprint.N02N03

@@ -47,14 +47,15 @@ private theorem seminorm_product_bound_on_larger_first_ball
           (add_le_add (add_le_add (le_refl 1) hhigh) (le_refl _)) hC) hκpos.le
     _ = _ := by ring
 
-/-- A fixed angular-material budget gives affine growth in one high
-seminorm on a low-order box. The chosen base and loss do not depend on
-the size of that box or on the output order. -/
-theorem hasInterpolation_localized_slot_growth_all
+/-- One low-order box works for every localized derivative loss. Each
+loss gives a high-order budget uniform in the number of slots and the
+size of the box. -/
+theorem hasInterpolation_localized_slot_growth_common_base
     {E : Type*} [AddCommGroup E] [Module ℝ E]
     (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (hI : HasInterpolation p)
-    (oldBase oldLoss extra : ℕ) :
-    ∃ B L : ℕ, oldBase ≤ B ∧ ∀ n : ℕ, ∀ K : ℝ, 0 ≤ K →
+    (oldBase extra : ℕ) :
+    ∃ B : ℕ, oldBase ≤ B ∧ ∀ oldLoss : ℕ, ∃ L : ℕ,
+      ∀ n : ℕ, ∀ K : ℝ, 0 ≤ K →
       ∀ s : ℕ, B ≤ s → ∃ C : ℝ, 0 ≤ C ∧
       ∀ b c : ℕ, b + c ≤ s → ∀ (x : E) (v : Fin n → E) (w : E),
         p B x ≤ K → (∀ i, p B (v i) ≤ 1) → p B w ≤ 1 →
@@ -62,15 +63,18 @@ theorem hasInterpolation_localized_slot_growth_all
           p (oldBase + c + extra) w + p (b + oldLoss + c + extra) w) ≤
         C * (1 + p (s + L) x + ∑ i : Fin n, p (s + L) (v i) + p (s + L) w) := by
   classical
-  obtain ⟨B, ℓ, hB, hinterp⟩ := hasInterpolation_mul_local_growth
-    p p hp hp hI hI (oldBase + oldLoss + extra) oldBase 1 1 zero_le_one zero_le_one
+  obtain ⟨B, hB, hcommon⟩ :=
+    hasInterpolation_mul_local_growth_common_base p p hp hp hI hI oldBase
+  refine ⟨B, hB, ?_⟩
+  intro oldLoss
+  obtain ⟨ℓ, hinterp⟩ := hcommon (oldBase + oldLoss + extra)
   let L : ℕ := max ℓ (max (oldBase + extra) (oldLoss + extra))
   have hℓ : ℓ ≤ L := le_max_left _ _
   have hbase : oldBase + extra ≤ L := (le_max_left _ _).trans (le_max_right _ _)
   have hloss : oldLoss + extra ≤ L := (le_max_right _ _).trans (le_max_right _ _)
-  refine ⟨B, L, hB, ?_⟩
+  refine ⟨L, ?_⟩
   intro n K hK s hs
-  obtain ⟨C₀, hC₀, hunit⟩ := hinterp s hs
+  obtain ⟨C₀, hC₀, hunit⟩ := hinterp 1 1 zero_le_one zero_le_one s hs
   let κ : ℝ := max K 1
   let C₁ : ℝ := κ * C₀
   have hκ : 1 ≤ κ := le_max_right _ _
@@ -124,6 +128,25 @@ theorem hasInterpolation_localized_slot_growth_all
       add_le_add (add_le_add (add_le_add hloww hpx) hsum) hhighw
     _ = _ := by dsimp only [R]; ring
 
+/-- A fixed angular-material budget gives affine growth in one high
+seminorm on a low-order box. The chosen base and loss do not depend on
+the size of that box or on the output order. -/
+theorem hasInterpolation_localized_slot_growth_all
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (hI : HasInterpolation p)
+    (oldBase oldLoss extra : ℕ) :
+    ∃ B L : ℕ, oldBase ≤ B ∧ ∀ n : ℕ, ∀ K : ℝ, 0 ≤ K →
+      ∀ s : ℕ, B ≤ s → ∃ C : ℝ, 0 ≤ C ∧
+      ∀ b c : ℕ, b + c ≤ s → ∀ (x : E) (v : Fin n → E) (w : E),
+        p B x ≤ K → (∀ i, p B (v i) ≤ 1) → p B w ≤ 1 →
+        ((1 + p (b + oldLoss) x + ∑ i : Fin n, p (b + oldLoss) (v i)) *
+          p (oldBase + c + extra) w + p (b + oldLoss + c + extra) w) ≤
+        C * (1 + p (s + L) x + ∑ i : Fin n, p (s + L) (v i) + p (s + L) w) := by
+  obtain ⟨B, hB, hcommon⟩ :=
+    hasInterpolation_localized_slot_growth_common_base p hp hI oldBase extra
+  obtain ⟨L, hbound⟩ := hcommon oldLoss
+  exact ⟨B, L, hB, hbound⟩
+
 theorem hasInterpolation_localized_slot_growth
     {E : Type*} [AddCommGroup E] [Module ℝ E]
     (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (hI : HasInterpolation p)
@@ -138,23 +161,26 @@ theorem hasInterpolation_localized_slot_growth
   obtain ⟨B, L, hB, h⟩ := hasInterpolation_localized_slot_growth_all p hp hI oldBase oldLoss extra
   exact ⟨B, L, hB, h n⟩
 
-/-- The same fixed derivative budget controls the quadratic expression
-which occurs when a localized direction is the actual base height.
-Both input occurrences are controlled on one low-order box. -/
-theorem hasInterpolation_quadratic_local_growth
+/-- The quadratic localized expression uses the same low order for
+every derivative loss. Both input occurrences stay on one fixed box. -/
+theorem hasInterpolation_quadratic_local_growth_common_base
     {E : Type*} [AddCommGroup E] [Module ℝ E]
     (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (hI : HasInterpolation p)
-    (oldBase oldLoss extra : ℕ) :
-    ∃ B L : ℕ, oldBase ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+    (oldBase extra : ℕ) :
+    ∃ B : ℕ, oldBase ≤ B ∧ ∀ oldLoss : ℕ, ∃ L : ℕ,
+      ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ C : ℝ, 0 ≤ C ∧
       ∀ b c : ℕ, b + c ≤ s → ∀ x : E, p B x ≤ R →
         ((1 + p (b + oldLoss) x) * (1 + p (oldBase + c + extra) x) +
           (1 + p (b + oldLoss + c + extra) x)) ≤ C * (1 + p (s + L) x) := by
-  obtain ⟨B, L, hB, hlocal⟩ :=
-    hasInterpolation_localized_slot_growth p hp hI oldBase oldLoss extra 0
-  refine ⟨B, L + oldLoss, hB, ?_⟩
+  obtain ⟨B, hB, hcommon⟩ :=
+    hasInterpolation_localized_slot_growth_common_base p hp hI oldBase extra
+  refine ⟨B, hB, ?_⟩
+  intro oldLoss
+  obtain ⟨L, hlocal⟩ := hcommon oldLoss
+  refine ⟨L + oldLoss, ?_⟩
   intro R hR s hs
-  obtain ⟨I, hI0, hi⟩ := hlocal R hR s hs
+  obtain ⟨I, hI0, hi⟩ := hlocal 0 R hR s hs
   let κ : ℝ := max R 1
   have hκ : 1 ≤ κ := le_max_right _ _
   have hκpos : 0 < κ := zero_lt_one.trans_le hκ
@@ -198,6 +224,23 @@ theorem hasInterpolation_quadratic_local_growth
         2 * κ * I * (1 + p (s + (L + oldLoss)) x) :=
       add_le_add (by linarith only [ha, hx0]) hproduct
     _ = _ := by ring
+
+/-- The same fixed derivative budget controls the quadratic expression
+which occurs when a localized direction is the actual base height.
+Both input occurrences are controlled on one low-order box. -/
+theorem hasInterpolation_quadratic_local_growth
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (hI : HasInterpolation p)
+    (oldBase oldLoss extra : ℕ) :
+    ∃ B L : ℕ, oldBase ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+      ∀ s : ℕ, B ≤ s → ∃ C : ℝ, 0 ≤ C ∧
+      ∀ b c : ℕ, b + c ≤ s → ∀ x : E, p B x ≤ R →
+        ((1 + p (b + oldLoss) x) * (1 + p (oldBase + c + extra) x) +
+          (1 + p (b + oldLoss + c + extra) x)) ≤ C * (1 + p (s + L) x) := by
+  obtain ⟨B, hB, hcommon⟩ :=
+    hasInterpolation_quadratic_local_growth_common_base p hp hI oldBase extra
+  obtain ⟨L, hbound⟩ := hcommon oldLoss
+  exact ⟨B, L, hB, hbound⟩
 
 end ContinuousFlexibility.Statements
 

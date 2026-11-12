@@ -266,12 +266,7 @@ theorem N01Properties.exists_opticalCorrection_error_compatible
       χ m =ᶠ[𝓝 (C.right m)] (fun _ => 1) ∧
       tsupport (deriv (χ m)) ⊆ Ioo (C.left m) (C.right m) :=
     dataP.choose_spec.2.2.2.2.2.2.2.2.2.1
-  have hpositive : ∀ z ∈ stateNeighborhood S C base' ε', ∀ m (p : PolarPoint),
-      p.1 ∈ tsupport (deriv (χ m)) →
-        0 < (originalCoefficients D S C z).b p ^ 2 -
-          (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p := by
-    intro z hz m p hp
-    exact (dataP.choose_spec.2.2.2.2.2.2.2.2.2.2.2 z hz m p hp).2.2.2.2
+  have hpositive := dataP.choose_spec.2.2.2.2.2.2.2.2.2.2.2
   refine ⟨base', ε', χ, hbase, hε', hεε, hnew, hχ, hend, ?_⟩
   intro R z hz hsector
   have hsupp (m : ℕ) : Function.support (deriv (χ m)) ⊆ Ioo (C.left m) (C.right m) :=
@@ -281,7 +276,7 @@ theorem N01Properties.exists_opticalCorrection_error_compatible
   have hdisc (m : ℕ) (p : PolarPoint) (hp : p.1 ∈ tsupport (deriv (χ m))) :
       0 < (originalCoefficients D S C z).b p ^ 2 -
         (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p :=
-    hpositive z hz m p hp
+    (hpositive z hz m p hp).2.2.2.2
   let E := returnCorrectionResidualErrorBilinearOfCutoffs
     hnew hS hT R hz hsector χ (fun m => (hχ m).1) hχrange hsupp
     (fun m => ⟨(hend m).1, (hend m).2.1⟩) hdisc

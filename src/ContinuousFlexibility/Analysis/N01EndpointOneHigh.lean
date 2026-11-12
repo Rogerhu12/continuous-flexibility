@@ -6,7 +6,8 @@ import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 
 Algebraic multilinearity suffices for homogeneous normalization, so
 continuity is proved from the estimates rather than assumed. The same
-fixed low order and derivative loss work in all parameter orders.
+fixed low order works in all parameter orders; the derivative loss may
+depend on that order.
 -/
 
 noncomputable section
@@ -30,7 +31,7 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform_radius
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+    ∃ B : ℕ, base ≤ B ∧ ∀ n : ℕ, ∃ L : ℕ, ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),
       ∀ z ∈ sectorNeighborhood S base ε ε,
@@ -42,10 +43,12 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform
           B (s + L) z v := by
   let data := hN.endpointFlowScalarJets_positive_circleNorm_local_growth_uniform_radius hS hT
   let B : ℕ := data.choose
-  let L : ℕ := data.choose_spec.choose
-  have hB : base ≤ B := data.choose_spec.choose_spec.1
-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
-  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
+  have hB : base ≤ B := data.choose_spec.1
+  refine ⟨B, hB, fun n => ?_⟩
+  let lossData := data.choose_spec.2 n
+  let L : ℕ := lossData.choose
+  refine ⟨L, fun R hR s hs => ?_⟩
+  let orderData := lossData.choose_spec R hR s hs
   let K : ℝ := orderData.choose
   have hK : 0 ≤ K := orderData.choose_spec.1
   refine ⟨K, hK, ?_⟩
@@ -83,7 +86,7 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_oneHigh
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
     (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+    ∃ B : ℕ, base ≤ B ∧ ∀ n : ℕ, ∃ L : ℕ, ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ z ∈ sectorNeighborhood S base ε ε,
       pairGrading (sectorGrading S) realGrading B z ≤ R →
@@ -94,10 +97,12 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_oneHigh
           B (s + L) z v := by
   let data := hN.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform_radius hS hT
   let B : ℕ := data.choose
-  let L : ℕ := data.choose_spec.choose
-  have hB : base ≤ B := data.choose_spec.choose_spec.1
-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
-  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
+  have hB : base ≤ B := data.choose_spec.1
+  refine ⟨B, hB, fun n => ?_⟩
+  let lossData := data.choose_spec.2 n
+  let L : ℕ := lossData.choose
+  refine ⟨L, fun R hR s hs => ?_⟩
+  let orderData := lossData.choose_spec R hR s hs
   exact ⟨orderData.choose, orderData.choose_spec.1, orderData.choose_spec.2 rsel hrsel⟩
 
 /-- Product estimates for genuine continuity on a bounded low-order
@@ -117,11 +122,12 @@ theorem N01Properties.endpointFlowScalarJets_positive_norm_bounds_on_box
           ∏ i, pairGrading (sectorGrading S) realGrading j (v i) := by
   let data := hN.endpointFlowScalarJets_positive_circleNorm_oneHigh hS hT rsel hrsel
   let B : ℕ := data.choose
-  let L : ℕ := data.choose_spec.choose
-  have hB : base ≤ B := data.choose_spec.choose_spec.1
+  have hB : base ≤ B := data.choose_spec.1
   refine ⟨B, hB, fun R hR n s => ?_⟩
+  let lossData := data.choose_spec.2 n
+  let L : ℕ := lossData.choose
   let t : ℕ := max s B
-  let orderData := data.choose_spec.choose_spec.2 n R hR t (le_max_right _ _)
+  let orderData := lossData.choose_spec R hR t (le_max_right _ _)
   let K : ℝ := orderData.choose
   have hK : 0 ≤ K := orderData.choose_spec.1
   let p := pairGrading (sectorGrading S) realGrading

@@ -93,11 +93,11 @@ theorem N01Properties.minusFlow_collar_mixed_jets (a b : ℕ) (hab : 1 ≤ a + b
       p.1 ∈ Ioo (x m - δ m) (x m + δ m) →
       |mixedDerivative a b (fun q : PolarPoint => C.minusFlow z m q.1 q.2) p| ≤
         A * radialE (D.cellIndex (j m)) ^ P := by
-  obtain ⟨K, R, B, hK, hR, hB, hraw⟩ :=
+  obtain ⟨d₀, K, R, B, hK, hR, hB, hraw⟩ :=
     hN.ordinaryFlowFamily_collar_bound j x δ hB₀ hcell hinside hspeed (a + b)
   obtain ⟨V, hV, hweight⟩ := materialSample_H_E0_envelope hT hN.1.1
     (γ := (3 / 4 : ℝ)) (by norm_num) B
-  let Q : ℝ := 1 + pairGrading (stateGrading S) realGrading (a + b + loss)
+  let Q : ℝ := 1 + pairGrading (stateGrading S) realGrading (a + b + loss + d₀)
     (z - (C.referenceState, 0))
   have hQ : 0 ≤ Q := add_nonneg zero_le_one (apply_nonneg _ _)
   let M : ℝ := B * V * Q

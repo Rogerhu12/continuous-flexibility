@@ -24,7 +24,7 @@ open scoped ContDiff
 
 set_option backward.isDefEq.respectTransparency false
 
-theorem angularRegular_of_contDiff {H : PolarPoint → ℝ}
+theorem n02n03_angularRegular_of_contDiff {H : PolarPoint → ℝ}
     (hH : ContDiff ℝ ∞ H) (n : ℕ) :
     AngularRegular n (fun r θ => H (r, θ)) := by
   induction n generalizing H with
@@ -42,7 +42,7 @@ theorem smooth_scalar_parameter_intervalIntegral {H : PolarPoint → ℝ}
     ContDiff ℝ ∞ (fun θ => ∫ t in a..b, H (t, θ)) := by
   apply contDiff_infty.mpr
   intro n
-  exact ((angularRegular_of_contDiff hH n).radial_primitive a).contDiff b
+  exact ((n02n03_angularRegular_of_contDiff hH n).radial_primitive a).contDiff b
 
 end ContinuousFlexibility.Analysis
 

@@ -107,8 +107,8 @@ theorem N01Properties.sectorFlow_pure_scalar_height_bound_mod_constant
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n s : ℕ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ m b θ r, b ≤ s → r ∈ Icc (C.left m) (C.right m) →
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n : ℕ) :
+    ∃ d : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m b θ r, b ≤ s → r ∈ Icc (C.left m) (C.right m) →
       ∃ J : SmoothDirections (sectorNeighborhood S base ε ε)
         (fun y => ordinaryFlowFamily S C m 0 b (r, θ) (liftSectorParameter S C y)),
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ η : HeightPair S,
@@ -117,9 +117,14 @@ theorem N01Properties.sectorFlow_pure_scalar_height_bound_mod_constant
         |J.D (n + 1) z (fun _ => scalarParameterDirection S)| ≤
           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
             T.E0 (T.sample (C.cell m)) ^ B *
-            (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
-              heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
-  let hdata := hN.sectorFlow_closed_tower hS hT (n + 2) s
+            (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss + d) z) *
+              heightPairGrading S base η + heightPairGrading S (s + loss + d) η) := by
+  let lossData := hN.sectorFlow_closed_tower hS hT (n + 2)
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
+  refine ⟨d, ?_⟩
+  intro s
+  let hdata := horders s
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   refine ⟨B, hB, fun m b θ r hb hr => ?_⟩
@@ -146,15 +151,15 @@ theorem N01Properties.sectorFlow_pure_scalar_height_bound_mod_constant
     exact (hN.ordinaryFlowFamily_first_height_jet_constant_locality hS hT hq η
       (liftSectorParameter S C (z.1, q)).1.1 m b θ hr c hηq J).trans
         (hN.ordinaryFlowFamily_height_scalar_jet hS hT hq m b θ hr J)
-  exact scalar_height_bound_of_tower J (s + loss) n z hz η hP hJ hEuler
+  exact scalar_height_bound_of_tower J (s + loss + d) n z hz η hP hJ hEuler
 
 
 theorem N01Properties.sectorFlow_pure_scalar_height_bound
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n s : ℕ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ m b θ r, b ≤ s → r ∈ Icc (C.left m) (C.right m) →
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n : ℕ) :
+    ∃ d : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m b θ r, b ≤ s → r ∈ Icc (C.left m) (C.right m) →
       ∃ J : SmoothDirections (sectorNeighborhood S base ε ε)
         (fun y => ordinaryFlowFamily S C m 0 b (r, θ) (liftSectorParameter S C y)),
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ η : HeightPair S,
@@ -163,9 +168,14 @@ theorem N01Properties.sectorFlow_pure_scalar_height_bound
         |J.D (n + 1) z (fun _ => scalarParameterDirection S)| ≤
           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
             T.E0 (T.sample (C.cell m)) ^ B *
-            (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
-              heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
-  let hdata := hN.sectorFlow_pure_scalar_height_bound_mod_constant hS hT n s
+            (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss + d) z) *
+              heightPairGrading S base η + heightPairGrading S (s + loss + d) η) := by
+  let lossData := hN.sectorFlow_pure_scalar_height_bound_mod_constant hS hT n
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
+  refine ⟨d, ?_⟩
+  intro s
+  let hdata := horders s
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   refine ⟨B, hB, fun m b θ r hb hr => ?_⟩

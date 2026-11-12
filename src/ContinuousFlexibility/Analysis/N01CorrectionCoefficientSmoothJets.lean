@@ -18,10 +18,6 @@ namespace ContinuousFlexibility.Statements
 
 local instance n01CorrectionCoefficientSmoothJetsStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
-
-local instance n01CorrectionCoefficientSmoothJetsSectorSMul (S : PhysicalSpacesData) :
-    SMul ℝ (StateDirections S × ℝ) := Prod.instSMul
-
 local instance n01CorrectionCoefficientSmoothJetsParameterSMul (S : PhysicalSpacesData) :
     SMul ℝ ((StateDirections S × ℝ) × CircleSpace S) := Prod.instSMul
 
@@ -123,6 +119,8 @@ theorem N01Properties.returnCorrectionSmoothCoefficientJets_mixedJetHasDerivAt
         hcutoff hdisc hχ hsupp hend l h hl hh hstripSupport hstripDisc
           (n + 1) (x + t • w) (Fin.cons w v)).val (T.radius r.1, r.2)).2) t :=
   smoothCoefficientJetRestriction_hasDerivAt_line
+    (E := (StateDirections S × ℝ) × CircleSpace S) (D := D) (T := T)
+    (U := sectorNeighborhood S base ε ε ×ˢ univ)
     ((sectorNeighborhood_isOpen S base ε ε).prod isOpen_univ)
     (hN.returnCorrectionCoefficientScalarJets hS hT hR j hcell χ hχrange hcutoff hdisc)
     (hN.returnCorrectionCoefficientScalarJets_contDiffOn hS hT hR j hcell χ hχrange

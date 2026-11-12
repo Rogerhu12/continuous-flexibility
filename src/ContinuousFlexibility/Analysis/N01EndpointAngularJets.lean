@@ -84,21 +84,27 @@ def N01Properties.sectorFlow_closed_angularTower
     (m : ℕ) (r : ℝ) (hr : r ∈ Icc (C.left m) (C.right m)) (b : ℕ) (θ : ℝ) :
     SmoothDirections (sectorNeighborhood S base ε ε)
       (fun z => ordinaryFlowFamily S C m 0 b (r, θ) (liftSectorParameter S C z)) :=
-  ((hN.sectorFlow_closed_tower hS hT 0 b).choose_spec.2 m b θ r le_rfl hr).choose
+  (((hN.sectorFlow_closed_tower hS hT 0).choose_spec b).choose_spec.2 m b θ r le_rfl hr).choose
 
 /-- The chosen towers retain the full original bound, simultaneously
 for every component, closed radial point and angle. -/
 theorem N01Properties.sectorFlow_closed_angularTower_bound
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (k s : ℕ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ m r (hr : r ∈ Icc (C.left m) (C.right m)) b θ,
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (k : ℕ) :
+    ∃ d : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+      ∀ m r (hr : r ∈ Icc (C.left m) (C.right m)) b θ,
       b ≤ s → ∀ z ∈ sectorNeighborhood S base ε ε,
       ∀ v : Fin k → (StateDirections S × ℝ),
         |(hN.sectorFlow_closed_angularTower hS hT m r hr b θ).D k z v| ≤
           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
             oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-              base (s + loss) z v := by
-  let hdata := hN.sectorFlow_closed_tower hS hT k s
+              base (s + loss + d) z v := by
+  let lossData := hN.sectorFlow_closed_tower hS hT k
+  let d : ℕ := lossData.choose
+  let horders := lossData.choose_spec
+  refine ⟨d, ?_⟩
+  intro s
+  let hdata := horders s
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ (m : ℕ) (r : ℝ) (hr : r ∈ Icc (C.left m) (C.right m)) (b : ℕ) (θ : ℝ),
@@ -107,7 +113,7 @@ theorem N01Properties.sectorFlow_closed_angularTower_bound
         |(hN.sectorFlow_closed_angularTower hS hT m r hr b θ).D k z v| ≤
           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
             oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-              base (s + loss) z v := by
+              base (s + loss + d) z v := by
     intro m r hr b θ hb
     exact scalarTower_bound_of_exists
       (hN.sectorFlow_closed_angularTower hS hT m r hr b θ) k _
@@ -119,12 +125,13 @@ theorem N01Properties.sectorFlow_closed_angularTower_uniformBounds
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
     (m : ℕ) (r : ℝ) (hr : r ∈ Icc (C.left m) (C.right m)) (b : ℕ) :
     UniformScalarJetSeminormBounds (hN.sectorFlow_closed_angularTower hS hT m r hr b) := by
+  let δ : ℕ → ℕ := fun n => (hN.sectorFlow_closed_angularTower_bound hS hT n).choose
   apply uniformScalarJetSeminormBounds_of_oneHigh
     (pairGrading (sectorGrading S) realGrading)
     (sectorPairGrading_continuous S) (sectorPairGrading_monotone S)
-    base (fun _ => b + loss)
+    base (fun n => b + loss + δ n)
   intro n
-  let hdata := hN.sectorFlow_closed_angularTower_bound hS hT n b
+  let hdata := (hN.sectorFlow_closed_angularTower_bound hS hT n).choose_spec b
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hsample := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 (C.cell m)

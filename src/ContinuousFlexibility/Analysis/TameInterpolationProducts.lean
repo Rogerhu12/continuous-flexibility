@@ -209,15 +209,15 @@ theorem two_factor_interpolation_bound
         (Real.rpow_le_rpow_of_exponent_le hQ hsum) (mul_nonneg hCp hCq)
     _ = (Cp * Cq) * (1 + p high x + q high y) := by rw [Real.rpow_one]
 
-/-- The frozen interpolation hypotheses give a loss independent of the
-output order and one constant uniform over all splits of that order.
-The requested low order can be imposed before choosing the neighborhood. -/
-theorem hasInterpolation_mul_local_growth
+/-- One low order works for every derivative offset and every low-order
+box. The offset changes only the high-order loss. -/
+theorem hasInterpolation_mul_local_growth_common_base
     (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F)
     (hp : Monotone p) (hq : Monotone q)
     (hIp : HasInterpolation p) (hIq : HasInterpolation q)
-    (offset requestedBase : ℕ) (Kp Kq : ℝ) (hKp : 0 ≤ Kp) (hKq : 0 ≤ Kq) :
-    ∃ base loss : ℕ, requestedBase ≤ base ∧
+    (requestedBase : ℕ) :
+    ∃ base : ℕ, requestedBase ≤ base ∧ ∀ offset : ℕ, ∃ loss : ℕ,
+      ∀ Kp Kq : ℝ, 0 ≤ Kp → 0 ≤ Kq →
       ∀ s : ℕ, base ≤ s → ∃ C : ℝ, 0 ≤ C ∧
         ∀ a b : ℕ, a + b ≤ s + offset → ∀ x y,
           p base x ≤ Kp → q base y ≤ Kq →
@@ -226,11 +226,13 @@ theorem hasInterpolation_mul_local_growth
   obtain ⟨bp, lp, hIp⟩ := hIp
   obtain ⟨bq, lq, hIq⟩ := hIq
   let base : ℕ := max requestedBase (max bp bq)
-  let loss : ℕ := offset + lp + lq + 1
   have hbp : bp ≤ base := (le_max_left bp bq).trans (le_max_right _ _)
   have hbq : bq ≤ base := (le_max_right bp bq).trans (le_max_right _ _)
-  refine ⟨base, loss, le_max_left _ _, ?_⟩
-  intro s hs
+  refine ⟨base, le_max_left _ _, ?_⟩
+  intro offset
+  let loss : ℕ := offset + lp + lq + 1
+  refine ⟨loss, ?_⟩
+  intro Kp Kq hKp hKq s hs
   have hhigh : base < s + loss := by dsimp [loss]; omega
   have hsingle (a b : ℕ) (hab : a + b ≤ s + offset) :
       ∃ C : ℝ, 0 ≤ C ∧ ∀ x y, p base x ≤ Kp → q base y ≤ Kq →
@@ -263,6 +265,24 @@ theorem hasInterpolation_mul_local_growth
     Finset.single_le_sum (fun j _ => hC j) (Finset.mem_univ i)
   exact (hbound i x y hx hy).trans
     (mul_le_mul_of_nonneg_right hi (by positivity))
+
+/-- The frozen interpolation hypotheses give a loss independent of the
+output order and one constant uniform over all splits of that order.
+The requested low order can be imposed before choosing the neighborhood. -/
+theorem hasInterpolation_mul_local_growth
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F)
+    (hp : Monotone p) (hq : Monotone q)
+    (hIp : HasInterpolation p) (hIq : HasInterpolation q)
+    (offset requestedBase : ℕ) (Kp Kq : ℝ) (hKp : 0 ≤ Kp) (hKq : 0 ≤ Kq) :
+    ∃ base loss : ℕ, requestedBase ≤ base ∧
+      ∀ s : ℕ, base ≤ s → ∃ C : ℝ, 0 ≤ C ∧
+        ∀ a b : ℕ, a + b ≤ s + offset → ∀ x y,
+          p base x ≤ Kp → q base y ≤ Kq →
+          p a x * q b y ≤ C * (1 + p (s + loss) x + q (s + loss) y) := by
+  obtain ⟨base, hbase, hcommon⟩ :=
+    hasInterpolation_mul_local_growth_common_base p q hp hq hIp hIq requestedBase
+  obtain ⟨loss, hbound⟩ := hcommon offset
+  exact ⟨base, loss, hbase, hbound Kp Kq hKp hKq⟩
 
 end TwoFactors
 

@@ -80,17 +80,17 @@ actual height direction. -/
 theorem N01Properties.heightResponse_integral_bound
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
-    ∃ B : ℝ, 0 < B ∧ ∀ η : HeightPair S, ∀ m θ,
+    ∃ d₂ : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ η : HeightPair S, ∀ m θ,
       |∫ r in C.left m..C.right m, heightSpeedVariation D.w (heightPairField S η)
         (r, θ - opticalTravel D.w (C.left m) r)| ≤
       B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B *
-        (2 * heightPairGrading S base η + heightPairGrading S loss η) := by
-  let hdata := hN.minusFlow_state_q_mixed_derivative_bound
+        (2 * heightPairGrading S base η + heightPairGrading S (loss + d₂) η) := by
+  obtain ⟨d₂, hdata⟩ := hN.minusFlow_state_q_mixed_derivative_bound
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hbound := hdata.choose_spec.2
-  refine ⟨B, hB, fun η m θ => ?_⟩
+  refine ⟨d₂, B, hB, fun η m θ => ?_⟩
   have hcontrol : controlGeometryConditions D S C := hN.2.2.2.1
   have hgeom := hN.1.1.choose_spec
   have hlh : C.left m < C.right m := (hcontrol.1 m).2.1
@@ -110,7 +110,8 @@ theorem N01Properties.heightResponse_integral_bound
   have hbi := hbound ((η, 0) : AnnularState S) m b θ hb
   have hd := (hN.minusFlow_height_q_mixed_hasDerivAt hS hT η m θ ⟨hb.1.le, hb.2.le⟩).deriv
   have hg := congrArg₂ (fun a b : ℝ => 2 * a + b)
-    (stateGrading_heightOnlyDirection S base η) (stateGrading_heightOnlyDirection S loss η)
+    (stateGrading_heightOnlyDirection S base η)
+    (stateGrading_heightOnlyDirection S (loss + d₂) η)
   exact ((congrArg abs hd).symm.trans_le hbi).trans_eq
     (congrArg (fun q : ℝ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
       T.E0 (T.sample (C.cell m)) ^ B * q) hg)
@@ -120,19 +121,19 @@ endpoints are removed as null singletons when identifying the integral. -/
 theorem N01Properties.opticalTravel_le_radialHeightDirection_weight
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
-    ∃ B : ℝ, 0 < B ∧ ∀ η : HeightPair S, ∀ m (h : ℝ → ℝ),
+    ∃ d₂ : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ η : HeightPair S, ∀ m (h : ℝ → ℝ),
       (∀ r, HasDerivAt h (D.w r) r) →
       (∀ r ∈ Ioo (C.left m) (C.right m), ∀ θ : ℝ,
         heightPairField S η =ᶠ[𝓝 (r, θ)] Radial.radialHeightField h) →
       C.travel m ≤
         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
-          (2 * heightPairGrading S base η + heightPairGrading S loss η) := by
-  let hdata := hN.heightResponse_integral_bound hS hT
+          (2 * heightPairGrading S base η + heightPairGrading S (loss + d₂) η) := by
+  obtain ⟨d₂, hdata⟩ := hN.heightResponse_integral_bound hS hT
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hbound := hdata.choose_spec.2
-  refine ⟨B, hB, fun η m h hhw hgerm => ?_⟩
+  refine ⟨d₂, B, hB, fun η m h hhw hgerm => ?_⟩
   have hcontrol : controlGeometryConditions D S C := hN.2.2.2.1
   have hgeom := hN.1.1.choose_spec
   have hlh : C.left m < C.right m := (hcontrol.1 m).2.1

@@ -152,38 +152,46 @@ private theorem circleOuterJetCompose_decode_comp
       (congrFun (congrFun hder m)
         (circleAffineLift travel (S.decode e) 1 m θ)).symm)
 
-private theorem circle_product_comp_point_bound
-    {u z φ f : ℕ → ℝ → ℝ}
-    (hu : CircleMember T γ u) (hzMember : CircleMember T γ z)
-    (hz : z = circleComposeField u φ)
-    (hφ : ∀ m, ContDiff ℝ ∞ (φ m)) (hf : ∀ m, ContDiff ℝ ∞ (f m))
+private theorem circleField_mul_comp_line_envelope
+    (u v : ℕ → ℝ → ℝ) (z φ f : ℝ → ℕ → ℝ → ℝ) (s : ℕ)
+    (hu : CircleMember T γ u) (hz : ∀ t, CircleMember T γ (z t))
     (hM : ∀ m, 0 < T.M (T.sample m)) (hH : ∀ m, 0 < T.H (T.sample m))
-    (s : ℕ) {L V : ℝ} (hL : 0 ≤ L) (hV : 0 ≤ V)
-    (hLjets : ∀ m i θ, i ≤ s → |iteratedDeriv i (f m) θ| ≤ L)
-    (hVjets : ∀ m i θ, 1 ≤ i → i ≤ s + 1 → |iteratedDeriv i (φ m) θ| ≤ V ^ i)
-    (m b k : ℕ) (horder : b + k ≤ s) (θ : ℝ) :
-    (T.M (T.sample m) ^ k * T.H (T.sample m) ^ (-γ)) *
-      |iteratedDeriv b (fun y => f m y * z m y) θ| ≤
-        (circleProductJetConstant s L *
-          Real.sqrt ((Fintype.card (CircleJetIndex (s + 1)) : ℝ) *
-            (Real.pi * circleCompositionJetConstant (s + 1) V ^ 2))) *
-          Real.sqrt (circleComponentEnergy T γ (s + 2) u m).toReal := by
+    (hv : ∀ m, ContDiff ℝ ∞ (v m)) (hφ : ∀ t m, ContDiff ℝ ∞ (φ t m))
+    (hcomp : ∀ t, z t = circleComposeField u (φ t))
+    (hfield : ∀ t m, f t m = fun θ => v m θ * z t m θ)
+    (hmultiplier : ∃ L : ℝ, 0 ≤ L ∧ ∀ m i θ, i ≤ s →
+      |iteratedDeriv i (v m) θ| ≤ L)
+    (hchart : ∃ V : ℝ, 0 ≤ V ∧ ∀ t : ℝ, |t| ≤ 1 → ∀ m i θ,
+      1 ≤ i → i ≤ s + 1 → |iteratedDeriv i (φ t m) θ| ≤ V ^ i) :
+    ∃ energy : ℕ → ℝ≥0∞, ∃ B : ℝ,
+      (∑' m, energy m) < ⊤ ∧ 0 ≤ B ∧
+      ∀ t : ℝ, |t| ≤ 1 → ∀ m b k, b + k ≤ s → ∀ θ,
+        (T.M (T.sample m) ^ k * T.H (T.sample m) ^ (-γ)) *
+          |iteratedDeriv b (f t m) θ| ≤ B * Real.sqrt (energy m).toReal := by
+  obtain ⟨L, hL, hLjets⟩ := hmultiplier
+  obtain ⟨V, hV, hVjets⟩ := hchart
+  let energy : ℕ → ℝ≥0∞ := circleComponentEnergy T γ (s + 2) u
   let Q : ℝ := (Fintype.card (CircleJetIndex (s + 1)) : ℝ) *
     (Real.pi * circleCompositionJetConstant (s + 1) V ^ 2)
   have hQ : 0 ≤ Q := by dsimp only [Q]; positivity
-  have hcomponent := circleComponentEnergy_comp_le hu hM hH hφ (s + 1) hV hVjets m
-  have hfinite : ENNReal.ofReal Q * circleComponentEnergy T γ (s + 2) u m < ⊤ :=
+  let B : ℝ := circleProductJetConstant s L * Real.sqrt Q
+  have hB : 0 ≤ B := mul_nonneg (circleProductJetConstant_nonneg s hL) (Real.sqrt_nonneg _)
+  refine ⟨energy, B, hu.2.2 (s + 2), hB, ?_⟩
+  intro t ht m b k horder θ
+  have hcomponent := circleComponentEnergy_comp_le hu hM hH (hφ t)
+    (s + 1) hV (hVjets t ht) m
+  have hfinite : ENNReal.ofReal Q * energy m < ⊤ :=
     ENNReal.mul_lt_top ENNReal.ofReal_lt_top (circleComponentEnergy_lt_top hu (s + 2) m)
-  have hsqrt : Real.sqrt (circleComponentEnergy T γ (s + 1) z m).toReal ≤
-      Real.sqrt Q * Real.sqrt (circleComponentEnergy T γ (s + 2) u m).toReal := by
-    rw [hz]
+  have hsqrt : Real.sqrt (circleComponentEnergy T γ (s + 1) (z t) m).toReal ≤
+      Real.sqrt Q * Real.sqrt (energy m).toReal := by
+    rw [hcomp t]
     have h := Real.sqrt_le_sqrt (ENNReal.toReal_mono hfinite.ne hcomponent)
     simpa only [ENNReal.toReal_mul, ENNReal.toReal_ofReal hQ, Real.sqrt_mul hQ] using h
-  have hb := circleWeighted_product_iteratedDeriv_abs_le hzMember hf
+  have hb := circleWeighted_product_iteratedDeriv_abs_le (hz t) hv
     (hM m).le (hH m).le horder hL (fun i y hi => hLjets m i y hi) θ
+  rw [hfield t m]
   exact hb.trans ((mul_le_mul_of_nonneg_left hsqrt
-    (circleProductJetConstant_nonneg s hL)).trans_eq
-      (mul_assoc (circleProductJetConstant s L) (Real.sqrt Q) _).symm)
+    (circleProductJetConstant_nonneg s hL)).trans_eq (by dsimp only [B]; ring))
 
 /-- One product term of a parameter jet has a fixed summable envelope
 as the chart moves on an affine parameter interval. -/
@@ -201,44 +209,29 @@ theorem circleFiniteProductWith_comp_line_envelope
             (S.decode (circleFiniteProductWith hS hT hD hγ
               (circleOuterJetComposeContinuousLinear hS hT hD hγ travel n (e + t • w) u)
               v I) m) θ| ≤ B * Real.sqrt (energy m).toReal := by
-  classical
-  let U := circleAngularDerivativeIterate hS n u
-  let energy : ℕ → ℝ≥0∞ := circleComponentEnergy T γ (s + 2) (S.decode U)
-  let hmultiplier := circleFiniteProduct_multiplier_uniform_jets
-    (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ v I s
-  let L : ℝ := hmultiplier.choose
-  have hL : 0 ≤ L := hmultiplier.choose_spec.1
-  have hLjets := hmultiplier.choose_spec.2
-  let hchart := circleShiftedChart_uniform_jets_affineLine
-    (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ travel e w (s + 1)
-  let V : ℝ := hchart.choose
-  have hV : 0 ≤ V := hchart.choose_spec.1
-  have hVjets := hchart.choose_spec.2
-  let Q : ℝ := (Fintype.card (CircleJetIndex (s + 1)) : ℝ) *
-    (Real.pi * circleCompositionJetConstant (s + 1) V ^ 2)
-  let B : ℝ := circleProductJetConstant s L * Real.sqrt Q
-  have hB : 0 ≤ B := mul_nonneg (circleProductJetConstant_nonneg s hL) (Real.sqrt_nonneg _)
-  refine ⟨energy, B, (hS.2.2.2.1 U).2.2 (s + 2), hB, ?_⟩
-  intro t ht m b k horder θ
-  let φ := circleAffineLift travel (S.decode (e + t • w)) 1
-  let z := circleOuterJetComposeContinuousLinear hS hT hD hγ travel n (e + t • w) u
-  have hz : S.decode z = circleComposeField (S.decode U) φ :=
-    circleOuterJetCompose_decode_comp hS hT hD hγ travel n (e + t • w) u
-  have hφ (j : ℕ) : ContDiff ℝ ∞ (φ j) :=
-    circleAffineLift_contDiff (fun l => ((hS.2.2.2.1 (e + t • w)).1 l).1) travel 1 j
-  have hmult (j : ℕ) :
-      ContDiff ℝ ∞ (fun y => ∏ i ∈ I, S.decode (v i) j y) :=
-    contDiff_prod (fun i hi => ((hS.2.2.2.1 (v i)).1 j).1)
-  have heq :
-      S.decode (circleFiniteProductWith hS hT hD hγ z v I) m =
-      (fun y => (∏ i ∈ I, S.decode (v i) m y) * S.decode z m y) := by
-    rw [circleFiniteProductWith_decode]
-    funext y
-    exact mul_comm _ _
-  rw [heq]
-  exact circle_product_comp_point_bound (hS.2.2.2.1 U) (hS.2.2.2.1 z) hz hφ hmult
+  let U : S.Space := circleAngularDerivativeIterate hS n u
+  let Z : ℝ → S.Space := fun t =>
+    circleOuterJetComposeContinuousLinear hS hT hD hγ travel n (e + t • w) u
+  let F : ℝ → ℕ → ℝ → ℝ := fun t =>
+    S.decode (circleFiniteProductWith hS hT hD hγ (Z t) v I)
+  have hfield (t : ℝ) (m : ℕ) :
+      F t m = fun θ => (∏ i ∈ I, S.decode (v i) m θ) * S.decode (Z t) m θ := by
+    have hdecode := circleFiniteProductWith_decode
+      (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ (Z t) v I
+    exact (congrFun hdecode m).trans (funext fun θ => mul_comm _ _)
+  exact circleField_mul_comp_line_envelope (S.decode U)
+    (fun m θ => ∏ i ∈ I, S.decode (v i) m θ)
+    (fun t => S.decode (Z t))
+    (fun t => circleAffineLift travel (S.decode (e + t • w)) 1) F s
+    (hS.2.2.2.1 U) (fun t => hS.2.2.2.1 (Z t))
     (material_circle_sample_weights_pos hT hD).1
-    (material_circle_sample_weights_pos hT hD).2 s hL hV hLjets (hVjets t ht)
-    m b k horder θ
+    (material_circle_sample_weights_pos hT hD).2
+    (fun m => contDiff_prod (fun i _ => ((hS.2.2.2.1 (v i)).1 m).1))
+    (fun t m => circleAffineLift_contDiff
+      (fun j => ((hS.2.2.2.1 (e + t • w)).1 j).1) travel 1 m)
+    (fun t => circleOuterJetCompose_decode_comp hS hT hD hγ travel n (e + t • w) u)
+    hfield
+    (circleFiniteProduct_multiplier_uniform_jets hS hT hD hγ v I s)
+    (circleShiftedChart_uniform_jets_affineLine hS hT hD hγ travel e w (s + 1))
 
 end ContinuousFlexibility.Statements
