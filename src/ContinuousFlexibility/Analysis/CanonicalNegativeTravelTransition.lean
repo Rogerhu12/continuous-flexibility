@@ -111,7 +111,11 @@ theorem n04CoordinatesNegativeTravelHeightRatio_smooth_pos :
               (n04CoordinatesNegativeTravelTransition S C L z m y)) /
           ((L.coefficients (C.referenceState, 0)).a y *
             n04bCharacteristicHalfGap (L.coefficients (C.referenceState, 0)) y)) p :=
-      (hproduct.comp p hτAt).div (ha₀.mul hv₀) hden.ne'
+      (ContDiffAt.fun_comp
+        (f := n04CoordinatesNegativeTravelTransition S C L z m)
+        (g := fun y : PolarPoint =>
+          (L.coefficients z).a y * n04bCharacteristicHalfGap (L.coefficients z) y)
+        p hproduct hτAt).fun_div (ha₀.mul hv₀) hden.ne'
     exact hratioAt.sqrt hratio.ne'
   exact ⟨fun p hp => (hpoint p hp).1.contDiffWithinAt, fun p hp => (hpoint p hp).2⟩
 
