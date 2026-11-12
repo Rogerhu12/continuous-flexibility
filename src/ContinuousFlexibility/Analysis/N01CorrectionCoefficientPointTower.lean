@@ -38,10 +38,10 @@ def SmoothDirections.fstProduct (J : SmoothDirections U f) :
   let L : (E × F) →L[ℝ] E := ContinuousLinearMap.fst ℝ E F
   have hmap : MapsTo (fun x : E × F => (0 : E) + L x) (U ×ˢ univ) U := by
     intro x hx
-    simpa only [zero_add, L, ContinuousLinearMap.fst_apply] using hx.1
+    simpa only [zero_add, L, ContinuousLinearMap.coe_fst'] using hx.1
   apply (J.compAffine L 0 (J.open_domain.prod isOpen_univ) hmap).congrOn
   intro x hx
-  simp only [zero_add, L, ContinuousLinearMap.fst_apply]
+  simp only [zero_add, L, ContinuousLinearMap.coe_fst']
 
 def reflectedVelocityDirections {f g : E → ℝ}
     (J : SmoothDirections U f) (K : SmoothDirections U g) :
