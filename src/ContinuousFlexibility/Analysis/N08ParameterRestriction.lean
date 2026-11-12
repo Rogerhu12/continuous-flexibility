@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N08Neighborhoods
 import ContinuousFlexibility.Analysis.StateKappaBounds
+import ContinuousFlexibility.Analysis.N06Neighborhood
 
 /-!
 # Retaining the nonlinear construction on a common smaller neighborhood
@@ -268,8 +269,9 @@ private theorem n08_canonicalCoefficientBounds_mono
     (solve_stateGrading_monotone S) hl (n08_stateNeighborhood_mono hb hε)
     (fun A hA m => mul_nonneg hA.le (Real.rpow_nonneg (hE (K.cell m)) _)) h
 
-/-- Only the displayed state grading changes in the coordinate estimates;
-all charts, source transforms, cuts and transmission identities are retained. -/
+/-- Restrict all state-dependent geometry using N07b's proved neighborhood
+lemma, then enlarge only the displayed coefficient loss. All physical
+domains and both charts retain their original state argument. -/
 theorem n08_n04Properties_mono
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
@@ -278,20 +280,11 @@ theorem n08_n04Properties_mono
     (h : N04Properties D T S C L K base loss ε)
     (hb : base ≤ base') (hl : loss ≤ loss') (hε : ε' ≤ ε) :
     N04Properties D T S C L K base' loss' ε' := by
-  obtain ⟨hopen, hsupport, hfixed, hinterval, hpositive, hnegative, hcover,
-    hcharts, hboundary, hparity, hinverse, hcuts, htransmission, hoperator,
-    hnormal, hcubic, hbound, hintegral⟩ := h
-  have hsub : stateNeighborhood S C base' ε' ⊆ stateNeighborhood S C base ε :=
-    n08_stateNeighborhood_mono hb hε
+  obtain ⟨hgeometry, hoperator, hbound, hpairing⟩ :=
+    n06_N04Properties_mono h hb hε
   have hbound' : n08CanonicalCoefficientBounds S T C K base' loss' ε' :=
-    n08_canonicalCoefficientBounds_mono hE hbound hb hl hε
-  exact ⟨hopen, hsupport, (fun z hz => hfixed z (hsub hz)),
-    hinterval, hpositive, hnegative, hcover,
-    (fun z hz => hcharts z (hsub hz)), (fun z hz => hboundary z (hsub hz)),
-    (fun z hz => hparity z (hsub hz)), (fun z hz => hinverse z (hsub hz)), hcuts,
-    (fun z hz => htransmission z (hsub hz)), (fun z hz => hoperator z (hsub hz)),
-    (fun z hz => hnormal z (hsub hz)), (fun z hz => hcubic z (hsub hz)), hbound',
-    (fun z hz => hintegral z (hsub hz))⟩
+    n08_canonicalCoefficientBounds_mono hE hbound le_rfl hl le_rfl
+  exact ⟨hgeometry, hoperator, hbound', hpairing⟩
 
 /-- The Banach inverse is unchanged; only its state neighborhood is restricted. -/
 theorem n08_n06Properties_mono
@@ -366,11 +359,12 @@ theorem n08_through04_mono (hT : IsMaterialData D T)
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     (hb : base ≤ base') (hl : loss ≤ loss') (hεpos : 0 < ε') (hε : ε' ≤ ε) :
     NonlinearPropertiesThrough04 D T S C R L K base' loss' ε' := by
-  obtain ⟨hprev, hroot, hcubic, htransmission, hcoordinates⟩ := h
+  obtain ⟨hprev, hroot, hcubic, htransmission, hcoordinates, hprimitive⟩ := h
   have hN01 : N01Properties D T S C base loss ε := hprev.1.1
   have hweights := n08_sample_weights_nonneg hT hN01.1.1
   exact ⟨n08_through03_mono hT hprev hb hl hεpos hε, hroot, hcubic, htransmission,
-    n08_n04Properties_mono (fun m => (hweights m).2) hcoordinates hb hl hε⟩
+    n08_n04Properties_mono (fun m => (hweights m).2) hcoordinates hb hl hε,
+    n06_CanonicalPrimitiveGeometry_mono hprimitive hb hε⟩
 
 theorem n08_through05_mono (hT : IsMaterialData D T)
     (h : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)

@@ -17,7 +17,7 @@ open Real Set Filter
 open scoped Topology ContDiff
 open ContinuousFlexibility.Statements
 
-theorem exists_seedRetainedFixedBorderGeometry (B : FixedCentralBorder)
+theorem exists_seedRetainedFixedBorderGeometry_with_transport (B : FixedCentralBorder)
     {S : SelectedTailData} (hS : IsSelectedTail S)
     (hentries : S.entry false S.chain.index < S.entry true S.chain.index)
     (hband : radialFrequencyBand S.chain S.Cstar S.chain.index 2)
@@ -36,14 +36,23 @@ theorem exists_seedRetainedFixedBorderGeometry (B : FixedCentralBorder)
         EqOn Γ.reference.w (centralRadialProfile 1)
           (Ioo Γ.centralLeft Γ.centralRight) ∧
         EqOn Γ.reference.phi centralKernelHeight
-          (Ioo Γ.centralLeft Γ.centralRight) ∧ RadialConstructionGeometry Γ.reference := by
+          (Ioo Γ.centralLeft Γ.centralRight) ∧ RadialConstructionGeometry Γ.reference ∧
+        ∃ e : ℝ ≃o ℝ, ∃ N : ℕ, 1 ≤ N ∧
+          Γ.reference.cellIndex = (fun m => max ((S.family S.sigma).cellIndex m) N) ∧
+          (∀ m, e ⁻¹' (S.family S.sigma).cells m ⊆ Γ.reference.cells m) ∧
+          Γ.reference.localizer = (fun m r => (S.family S.sigma).localizer m (e r)) ∧
+          (∀ r, r ≤ S.entry false S.chain.index → e.symm r = P.pair.radiusL * r) ∧
+          (∀ r, S.entry true S.chain.index ≤ r → e.symm r = P.pair.radiusR * r) ∧
+          Γ.reference.a = P.pair.radiusL * (S.family S.sigma).a ∧
+          Γ.reference.b = P.pair.radiusR * (S.family S.sigma).b := by
   obtain ⟨K, hleft, hright, _⟩ := exists_seedCentralCutoff_model_window T
   obtain ⟨P⟩ := exists_seedRetainedPair hS hband hbridge K hq hlength
   have hentry (right : Bool) :
       S.entry right S.chain.index ∈ radialCore (S.family S.sigma) :=
     (hS.2.2.2.2.2 right S.chain.index 2 le_rfl (by decide) hband).2.1
-  obtain ⟨D, hconstruction, hDw, hDφ, hacc, hw, hφ, hkernel, hpatch, hheads, htails⟩ :=
-    exists_seedControlledReference_with_construction hS hentries hentry hband K hq
+  obtain ⟨D, hconstruction, hDw, hDφ, hacc, hw, hφ, hkernel, hpatch, hheads, htails, hDa, hDb,
+      e, N, hN, hindex, hcells, hlocalizer, hleftDilation, hrightDilation⟩ :=
+    exists_seedControlledReference_with_construction_transport hS hentries hentry hband K hq
       (P.toEntryPair hS hband)
   have hDw' : D.w = P.pair.profile := by
     simpa only [SeedRetainedPair.toEntryPair_profile] using hDw
@@ -82,7 +91,35 @@ theorem exists_seedRetainedFixedBorderGeometry (B : FixedCentralBorder)
       intro r hr
       have hi := B.column_support hr
       exact ⟨fixedCentralCap_order.2.1.trans hi.1, hi.2.trans hrightcap⟩
-  exact ⟨K, P, Γ, rfl, rfl, hreal, hDw', hDφ', rfl, rfl, hleft, hright, hcol, hw, hφ, hconstruction⟩
+  exact ⟨K, P, Γ, rfl, rfl, hreal, hDw', hDφ', rfl, rfl, hleft, hright, hcol, hw, hφ, hconstruction,
+    e, N, hN, hindex, hcells, hlocalizer, hleftDilation, hrightDilation, hDa, hDb⟩
+
+/-- The original closed constructor keeps its public signature. -/
+theorem exists_seedRetainedFixedBorderGeometry (B : FixedCentralBorder)
+    {S : SelectedTailData} (hS : IsSelectedTail S)
+    (hentries : S.entry false S.chain.index < S.entry true S.chain.index)
+    (hband : radialFrequencyBand S.chain S.Cstar S.chain.index 2)
+    (hbridge : ∀ side r,
+      r ∈ uIcc (S.cut side S.chain.index) (S.entry side S.chain.index) →
+        0 < deriv (S.family S.sigma).w r)
+    {T q length : ℝ} (hT : sqrt centralOscillatorA + 2 ≤ T)
+    (hq : 0 < q) (hlength : 0 < length) :
+    ∃ K : SeedCentralCutoff, ∃ P : SeedRetainedPair S K q length,
+      ∃ Γ : ConnectedReferenceGeometry,
+        Γ.selected = S ∧ Γ.headLength = q ∧ Γ.Realizes ∧
+        Γ.reference.w = P.pair.profile ∧ Γ.reference.phi = P.pair.height ∧
+        Γ.centralLeft = exp K.left ∧ Γ.centralRight = exp K.right ∧
+        Γ.centralLeft < centralRadius (-T) ∧ centralRadius T < Γ.centralRight ∧
+        referenceColumn Γ.reference = fixedCentralColumn B.chi ∧
+        EqOn Γ.reference.w (centralRadialProfile 1)
+          (Ioo Γ.centralLeft Γ.centralRight) ∧
+        EqOn Γ.reference.phi centralKernelHeight
+          (Ioo Γ.centralLeft Γ.centralRight) ∧ RadialConstructionGeometry Γ.reference := by
+  obtain ⟨K, P, Γ, hselected, hhead, hreal, hw, hphi, hleft, hright,
+      hTL, hTR, hcolumn, hmodel, hheight, hconstruction, _⟩ :=
+    exists_seedRetainedFixedBorderGeometry_with_transport B hS hentries hband hbridge hT hq hlength
+  exact ⟨K, P, Γ, hselected, hhead, hreal, hw, hphi, hleft, hright,
+    hTL, hTR, hcolumn, hmodel, hheight, hconstruction⟩
 
 /-- Nonvanishing of the actual profile locates the cap in the core; no
 unrecorded inequality concerning the gluing radii is needed. -/

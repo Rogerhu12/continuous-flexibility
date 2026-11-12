@@ -24,9 +24,8 @@ private theorem inverseRadius_embedding {κ : ℝ} (hκ : κ ≠ 0) :
   (Homeomorph.mulLeft₀ κ hκ).toMeasurableEquiv.measurableEmbedding
 
 private theorem inverseRadius_leftInverse {κ : ℝ} (hκ : κ ≠ 0) :
-    Function.LeftInverse (fun r : ℝ => r / κ) (fun r => κ * r) := by
-  intro r
-  field_simp [hκ] <;> ring
+    Function.LeftInverse (fun r : ℝ => r / κ) (fun r => κ * r) :=
+  fun r => mul_div_cancel_left₀ r hκ
 
 private theorem inverseRadius_square_measure {μ ν : Measure ℝ} {κ β : ℝ}
     (hκ : κ ≠ 0) (hβ : 0 < β)
@@ -40,66 +39,72 @@ theorem inverseRadius_ae_iff {μ ν : Measure ℝ} {κ β : ℝ}
     (hκ : κ ≠ 0) (hβ : 0 < β)
     (hm : ν = ENNReal.ofReal β • μ.map (fun r => κ * r)) {p : ℝ → Prop} :
     (∀ᵐ x ∂ν, p x) ↔ ∀ᵐ r ∂μ, p (κ * r) := by
-  have hβ0 : ENNReal.ofReal β ≠ 0 := (ENNReal.ofReal_pos.mpr hβ).ne'
-  rw [hm]
-  simp only [ae_iff, Measure.smul_apply, smul_eq_mul,
-    (inverseRadius_embedding hκ).map_apply, mul_eq_zero, hβ0, false_or]
-  rfl
+  rw [hm, Measure.ae_ennreal_smul_measure_iff (ne_of_gt (ENNReal.ofReal_pos.mpr hβ))]
+  exact (inverseRadius_embedding hκ).ae_map_iff
 
-/-- Eliminate the measure equality before supplying any physical measure
-identity. The coordinate map and its representative formula are then
-selected together, without reducing a concrete equality cast. -/
-private theorem exists_inverseRadiusCoordinateEquiv_ae {μ ν : Measure ℝ}
-    (R X : ℝ → ℝ) (hR : MeasurableEmbedding R)
-    (hX : Function.LeftInverse X R) (hm : ν = Measure.map R μ) :
-    ∃ E : Lp ℝ 2 ν ≃ₗᵢ[ℝ] Lp ℝ 2 μ,
-      ∀ f : Lp ℝ 2 ν, (E f : ℝ → ℝ) =ᵐ[μ] fun r => f (R r) := by
+/-- Eliminate the measure equality before substituting physical data. -/
+private theorem inverseRadius_coordinate_cast_ae {μ ν : Measure ℝ}
+    (R X : ℝ → ℝ) (hR : MeasurableEmbedding R) (hX : Function.LeftInverse X R)
+    (h : ν = Measure.map R μ) (f : Lp ℝ 2 ν) :
+    (l2EquivSeal ((l2MeasureCongr h).trans (coordinateL2Equiv μ R X hR hX)) f
+      : ℝ → ℝ) =ᵐ[μ] fun x => f (R x) := by
   subst ν
-  exact ⟨coordinateL2Equiv μ R X hR hX, coordinateL2Equiv_ae μ R X hR hX⟩
+  rw [l2EquivSeal_eq]
+  exact coordinateL2Equiv_ae μ R X hR hX f
 
+/-- The original coordinate factor, sealed with its exact equality
+certificate so later kernel checks do not reduce its measure cast. -/
 private def inverseRadiusCoordinateEquiv {μ ν : Measure ℝ} {κ β : ℝ}
     (hκ : κ ≠ 0) (hβ : 0 < β)
     (hm : ν = ENNReal.ofReal β • μ.map (fun r => κ * r)) :
     Lp ℝ 2 ν ≃ₗᵢ[ℝ] Lp ℝ 2 (squareDensityMeasure μ (fun _ => sqrt β)) :=
-  Classical.choose (exists_inverseRadiusCoordinateEquiv_ae
-    (fun r => κ * r) (fun r => r / κ) (inverseRadius_embedding hκ)
-    (inverseRadius_leftInverse hκ) (inverseRadius_square_measure hκ hβ hm).symm)
+  l2EquivSeal
+    ((l2MeasureCongr (inverseRadius_square_measure hκ hβ hm).symm).trans
+      (coordinateL2Equiv (squareDensityMeasure μ (fun _ => sqrt β))
+        (fun r => κ * r) (fun r => r / κ) (inverseRadius_embedding hκ)
+        (inverseRadius_leftInverse hκ)))
 
 private theorem inverseRadiusCoordinateEquiv_ae {μ ν : Measure ℝ} {κ β : ℝ}
     (hκ : κ ≠ 0) (hβ : 0 < β)
     (hm : ν = ENNReal.ofReal β • μ.map (fun r => κ * r)) (f : Lp ℝ 2 ν) :
-    (inverseRadiusCoordinateEquiv hκ hβ hm f : ℝ → ℝ) =ᵐ[
-      squareDensityMeasure μ (fun _ => sqrt β)] fun r => f (κ * r) :=
-  Classical.choose_spec (exists_inverseRadiusCoordinateEquiv_ae
+    (inverseRadiusCoordinateEquiv hκ hβ hm f : ℝ → ℝ)
+      =ᵐ[squareDensityMeasure μ (fun _ => sqrt β)] fun r => f (κ * r) :=
+  inverseRadius_coordinate_cast_ae
+    (μ := squareDensityMeasure μ (fun _ => sqrt β)) (ν := ν)
     (fun r => κ * r) (fun r => r / κ) (inverseRadius_embedding hκ)
-    (inverseRadius_leftInverse hκ) (inverseRadius_square_measure hκ hβ hm).symm) f
+    (inverseRadius_leftInverse hκ) (inverseRadius_square_measure hκ hβ hm).symm f
 
-private def inverseRadiusGaugeEquiv (μ : Measure ℝ) {β : ℝ} (hβ : 0 < β) :
+/-- The original positive square-density factor with the same equality
+certificate used by the physical tail gauge isometry. -/
+private def inverseRadiusDensityEquiv (μ : Measure ℝ) {β : ℝ} (hβ : 0 < β) :
     Lp ℝ 2 (squareDensityMeasure μ (fun _ => sqrt β)) ≃ₗᵢ[ℝ] Lp ℝ 2 μ :=
   l2EquivSeal (squareDensityEquiv μ measurable_const (fun _ => sqrt_pos.mpr hβ))
 
-private theorem inverseRadiusGaugeEquiv_ae (μ : Measure ℝ) {β : ℝ} (hβ : 0 < β)
+private theorem inverseRadiusDensityEquiv_ae (μ : Measure ℝ) {β : ℝ} (hβ : 0 < β)
     (f : Lp ℝ 2 (squareDensityMeasure μ (fun _ => sqrt β))) :
-    (inverseRadiusGaugeEquiv μ hβ f : ℝ → ℝ) =ᵐ[μ] fun r => sqrt β * f r := by
-  rw [inverseRadiusGaugeEquiv, l2EquivSeal_eq]
+    (inverseRadiusDensityEquiv μ hβ f : ℝ → ℝ) =ᵐ[μ] fun r => sqrt β * f r := by
+  rw [inverseRadiusDensityEquiv, l2EquivSeal_eq]
   exact squareDensityEquiv_ae μ measurable_const (fun _ => sqrt_pos.mpr hβ) f
 
 /-- The coordinate and square-density maps are genuine isometries on the
-actual L² classes; neither a source representative nor an inverse is assumed. -/
+actual L² classes. Their exact composition certificate keeps the concrete
+measure casts out of subsequent application and inverse calculations. -/
 def inverseRadiusEquiv {μ ν : Measure ℝ} {κ β : ℝ}
     (hκ : κ ≠ 0) (hβ : 0 < β)
     (hm : ν = ENNReal.ofReal β • μ.map (fun r => κ * r)) :
     Lp ℝ 2 ν ≃ₗᵢ[ℝ] Lp ℝ 2 μ :=
   Classical.choose (exists_l2EquivCompose_apply
-    (inverseRadiusCoordinateEquiv hκ hβ hm) (inverseRadiusGaugeEquiv μ hβ))
+    (μ := ν) (ν := squareDensityMeasure μ (fun _ => sqrt β)) (κ := μ)
+    (inverseRadiusCoordinateEquiv hκ hβ hm) (inverseRadiusDensityEquiv μ hβ))
 
 private theorem inverseRadiusEquiv_apply {μ ν : Measure ℝ} {κ β : ℝ}
     (hκ : κ ≠ 0) (hβ : 0 < β)
     (hm : ν = ENNReal.ofReal β • μ.map (fun r => κ * r)) (f : Lp ℝ 2 ν) :
     inverseRadiusEquiv hκ hβ hm f =
-      inverseRadiusGaugeEquiv μ hβ (inverseRadiusCoordinateEquiv hκ hβ hm f) :=
+      inverseRadiusDensityEquiv μ hβ (inverseRadiusCoordinateEquiv hκ hβ hm f) :=
   Classical.choose_spec (exists_l2EquivCompose_apply
-    (inverseRadiusCoordinateEquiv hκ hβ hm) (inverseRadiusGaugeEquiv μ hβ)) f
+    (μ := ν) (ν := squareDensityMeasure μ (fun _ => sqrt β)) (κ := μ)
+    (inverseRadiusCoordinateEquiv hκ hβ hm) (inverseRadiusDensityEquiv μ hβ)) f
 
 theorem inverseRadiusEquiv_ae {μ ν : Measure ℝ} {κ β : ℝ}
     (hκ : κ ≠ 0) (hβ : 0 < β)
@@ -107,11 +112,11 @@ theorem inverseRadiusEquiv_ae {μ ν : Measure ℝ} {κ β : ℝ}
     (inverseRadiusEquiv hκ hβ hm f : ℝ → ℝ) =ᵐ[μ]
       fun r => sqrt β * f (κ * r) := by
   rw [inverseRadiusEquiv_apply]
-  have hC := inverseRadiusCoordinateEquiv_ae hκ hβ hm f
-  have hC' := squareDensity_ae_eq μ measurable_const (fun _ => sqrt_pos.mpr hβ) hC
-  have hG := inverseRadiusGaugeEquiv_ae μ hβ (inverseRadiusCoordinateEquiv hκ hβ hm f)
-  filter_upwards [hG, hC'] with r hr hc
-  rw [hr, hc]
+  have hc := squareDensity_ae_eq μ measurable_const (fun _ => sqrt_pos.mpr hβ)
+    (inverseRadiusCoordinateEquiv_ae hκ hβ hm f)
+  have hg := inverseRadiusDensityEquiv_ae μ hβ (inverseRadiusCoordinateEquiv hκ hβ hm f)
+  filter_upwards [hc, hg] with r hr hs
+  exact hs.trans (congrArg (fun t => sqrt β * t) hr)
 
 theorem inverseRadiusEquiv_ae_of_ae {μ ν : Measure ℝ} {κ β : ℝ}
     (hκ : κ ≠ 0) (hβ : 0 < β)
@@ -128,12 +133,15 @@ theorem inverseRadiusEquiv_symm_ae {μ ν : Measure ℝ} {κ β : ℝ}
     (hm : ν = ENNReal.ofReal β • μ.map (fun r => κ * r)) (f : Lp ℝ 2 μ) :
     ((inverseRadiusEquiv hκ hβ hm).symm f : ℝ → ℝ) =ᵐ[ν]
       radialRadiusScale κ (1 / sqrt β) (f : ℝ → ℝ) := by
-  apply (inverseRadius_ae_iff hκ hβ hm).mpr
-  have he := inverseRadiusEquiv_ae hκ hβ hm ((inverseRadiusEquiv hκ hβ hm).symm f)
-  rw [LinearIsometryEquiv.apply_symm_apply] at he
-  filter_upwards [he] with r hr
-  rw [radialRadiusScale_apply_mul hκ, hr]
-  field_simp [(sqrt_pos.mpr hβ).ne']
+  let E := inverseRadiusEquiv hκ hβ hm
+  have he := inverseRadiusEquiv_ae hκ hβ hm (E.symm f)
+  rw [show inverseRadiusEquiv hκ hβ hm = E from rfl, E.apply_symm_apply] at he
+  have halong : (fun r => E.symm f (κ * r)) =ᵐ[μ]
+      fun r => radialRadiusScale κ (1 / sqrt β) (f : ℝ → ℝ) (κ * r) := by
+    filter_upwards [he] with r hr
+    rw [radialRadiusScale_apply_mul hκ, hr]
+    field_simp [(sqrt_pos.mpr hβ).ne']
+  exact (inverseRadius_ae_iff hκ hβ hm).mpr halong
 
 theorem inverseRadiusEquiv_symm_ae_of_ae {μ ν : Measure ℝ} {κ β : ℝ}
     (hκ : κ ≠ 0) (hβ : 0 < β)
@@ -151,17 +159,23 @@ def inverseRadiusOperator {μ ν : Measure ℝ} {κ β : ℝ}
     (hκ : κ ≠ 0) (hβ : 0 < β)
     (hm : ν = ENNReal.ofReal β • μ.map (fun r => κ * r))
     (R : Lp ℝ 2 μ →L[ℝ] Lp ℝ 2 μ) : Lp ℝ 2 ν →L[ℝ] Lp ℝ 2 ν :=
-  (inverseRadiusEquiv hκ hβ hm).symm.toLinearIsometry.toContinuousLinearMap.comp
-    (R.comp (inverseRadiusEquiv hκ hβ hm).toLinearIsometry.toContinuousLinearMap)
+  (inverseRadiusEquiv hκ hβ hm).symm.toContinuousLinearEquiv.toContinuousLinearMap.comp
+    (R.comp (inverseRadiusEquiv hκ hβ hm).toContinuousLinearEquiv.toContinuousLinearMap)
+
+private theorem inverseRadius_conjugate_apply {μ ν : Measure ℝ}
+    (E : Lp ℝ 2 ν ≃ₗᵢ[ℝ] Lp ℝ 2 μ)
+    (R : Lp ℝ 2 μ →L[ℝ] Lp ℝ 2 μ) (f : Lp ℝ 2 ν) :
+    (E.symm.toContinuousLinearEquiv.toContinuousLinearMap.comp
+      (R.comp E.toContinuousLinearEquiv.toContinuousLinearMap)) f =
+        E.symm (R (E f)) := rfl
 
 theorem inverseRadiusOperator_apply {μ ν : Measure ℝ} {κ β : ℝ}
     (hκ : κ ≠ 0) (hβ : 0 < β)
     (hm : ν = ENNReal.ofReal β • μ.map (fun r => κ * r))
     (R : Lp ℝ 2 μ →L[ℝ] Lp ℝ 2 μ) (f : Lp ℝ 2 ν) :
     inverseRadiusOperator hκ hβ hm R f =
-      (inverseRadiusEquiv hκ hβ hm).symm (R (inverseRadiusEquiv hκ hβ hm f)) := by
-  simp only [inverseRadiusOperator, ContinuousLinearMap.comp_apply,
-    LinearIsometry.coe_toContinuousLinearMap, LinearIsometryEquiv.coe_toLinearIsometry]
+      (inverseRadiusEquiv hκ hβ hm).symm (R (inverseRadiusEquiv hκ hβ hm f)) :=
+  inverseRadius_conjugate_apply (inverseRadiusEquiv hκ hβ hm) R f
 
 def selectedTailRadiusEquiv {D E : ReferenceData} {κ β cut : ℝ} {right : Bool}
     (hκ : 0 < κ) (hβ : 0 < β) (hD : cut ∈ radialCore D)

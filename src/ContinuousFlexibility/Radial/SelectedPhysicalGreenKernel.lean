@@ -51,27 +51,25 @@ theorem physical_kernel_memLp_row (hD : IsAccumulatingProfile D)
   have hQc : ContinuousOn F.Q (Icc c x) :=
     hQ.mono (fun y hy => ⟨hy.1, hy.2.trans_lt hx.2⟩)
   obtain ⟨C, hC⟩ := isCompact_Icc.bddAbove_image hQc.norm
-  have hQLp : MemLp F.Q 2 ((μ).restrict (Icc c x)) := by
+  have hQLp : MemLp F.Q 2 (Measure.restrict μ (Icc c x)) := by
     apply MemLp.of_bound (hQc.aestronglyMeasurable measurableSet_Icc) C
     filter_upwards [ae_restrict_mem measurableSet_Icc] with y hy
     exact hC (mem_image_of_mem _ hy)
   have hP : MemLp F.P 2 μ :=
     morsePhysicalDeepTail_outward_lift_memLp (matchingProfileGeometry hD) hentry hT F.P_natural
-  have hleft : MemLp ((Icc c x).indicator (fun y => F.P x * F.Q y)) 2 μ :=
-    (memLp_indicator_iff_restrict measurableSet_Icc).mpr
+  have hleft := (memLp_indicator_iff_restrict measurableSet_Icc).mpr
     (hQLp.const_mul (F.P x))
   have hright : MemLp ((Ioi x).indicator (fun y => F.Q x * F.P y)) 2 μ :=
     (hP.const_mul (F.Q x)).indicator measurableSet_Ioi
   have hfull : ∀ᵐ y ∂μ, y ∈ Ioo c b := by
-    rw [outerOutwardTailMeasure_eq_density hD hphysical]
     have her : tailPhysicalRadius right (T).entrance = entrance := tailPhysicalRadius_log right hentry
-    simp only [her, outerOutwardRadius_eq_sign]
+    rw [outerOutwardTailMeasure_eq_density hD hphysical, her]
+    simp only [outerOutwardRadius_eq_sign]
     exact (withDensity_absolutelyContinuous _ _).ae_le
       (ae_restrict_mem measurableSet_Ioo)
   apply (memLp_congr_ae ?_).mp (hleft.add hright)
   filter_upwards [hfull] with y hy
-  change (Icc c x).indicator (fun t => F.P x * F.Q t) y +
-      (Ioi x).indicator (fun t => F.Q x * F.P t) y = F.Q (min x y) * F.P (max x y)
+  simp only [Pi.add_apply]
   by_cases hyx : y ≤ x
   · have hyL : y ∈ Icc c x := ⟨hy.1.le, hyx⟩
     have hyR : y ∉ Ioi x := not_lt.mpr hyx
@@ -80,7 +78,8 @@ theorem physical_kernel_memLp_row (hD : IsAccumulatingProfile D)
     exact mul_comm _ _
   · have hxy : x < y := lt_of_not_ge hyx
     have hyL : y ∉ Icc c x := fun h => hyx h.2
-    rw [indicator_of_notMem hyL, indicator_of_mem (s := Ioi x) hxy,
+    have hyR : y ∈ Ioi x := hxy
+    rw [indicator_of_notMem hyL, indicator_of_mem hyR,
       min_eq_left hxy.le, max_eq_right hxy.le, zero_add]
 
 /-- The deep physical inverse is constructed, with an actual kernel

@@ -11,6 +11,13 @@ The rules below are the same for every line.
 
 Read this section every time you check the rules. A notice is removed when it is done.
 
+- **N02N03, N04b, N04Coordinates, N05, N06: merge `origin/main` now.** N07b's statement repair is on
+  `main` (`docs/STATUS.md`, "Statement repairs"): `physicalPieceOpen` takes the state, the old fixed
+  interval is `referencePhysicalPieceOpen`, and the N04 output also carries
+  `CanonicalPrimitiveGeometry`, which the N04 producers must prove. Two more repairs will follow
+  (N07a: `CanonicalGeometry.PrimitiveGeometryProperties` in the N04 output and raw `b/c` outputs in
+  N03; N01c: `N01PrimitiveGeometry` in the N01a output and new flow-loss quantifiers). Merge `main`
+  each time one lands.
 - **N07a and N08 are taken over by new sessions (2026-11-12).** The earlier sessions on `line/N07a`
   and `line/N08` must not push to those branches any more. The new sessions continue on the same
   branches: N07a ports to N07b's state-dependent physical domains (instructions in the last comment

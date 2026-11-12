@@ -64,9 +64,9 @@ theorem fixedCentralModelColumnEnvelope_polynomial_bound
   have hmass (k : Fin 2) : 1 ≤ (B.modelBuffer q T B₀).mass k := hm1
   have hinv (k : Fin 2) : ((B.modelBuffer q T B₀).mass k)⁻¹ ≤ coeff := by
     have h := one_div_le_one_div_of_le zero_lt_one (hmass k)
-    have hi : ((B.modelBuffer q T B₀).mass k)⁻¹ ≤ 1 := by
+    have hinvOne : ((B.modelBuffer q T B₀).mass k)⁻¹ ≤ 1 := by
       simpa only [one_div, inv_one] using h
-    exact hi.trans hc.1
+    exact hinvOne.trans hc.1
   have hupper (k : Fin 2) : (B.modelBuffer q T B₀).mass k ≤ coeff * (1 + j) := by
     change j * T / 4 ≤ coeff * (1 + j)
     have hprod := mul_le_mul_of_nonneg_left hc.2.2.2.1 hj0

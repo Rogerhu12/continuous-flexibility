@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.TerminalPoissonFluxIdentity
+import ContinuousFlexibility.Radial.TerminalCapLift
 import ContinuousFlexibility.Radial.StandInBoundarySlope
 
 /-!

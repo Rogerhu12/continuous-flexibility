@@ -64,15 +64,9 @@ local notation "MF" => P.retainedMorseModelFamily hw hS G₀ hfirst H bordered j
 local notation "QF" => P.retainedMorseGapChart hD hw hS G₀ hfirst hq hT
   hleft hright hTL hTR k hk hbridge hmodel hwindow j hj
 
-include hB models centralModel in
 def retainedMorseActualChain :
     InnerRadialActualChain Γ.reference H bordered j center column :=
-  innerActualChainOfModelsAndGaps H bordered j (innerMorseInnerCenter k) column
-    (P.retainedMorseModelFamily hw hS G₀ hfirst H bordered j column
-      (P.retainedMorseInnerGeometry_tail hD hw hS G₀ hfirst hq hT
-        hleft hright hTL hTR k hk) hB models centralModel)
-    (P.retainedMorseGapChart hD hw hS G₀ hfirst hq hT
-      hleft hright hTL hTR k hk hbridge hmodel hwindow j hj)
+  innerActualChainOfModelsAndGaps H bordered j (innerMorseInnerCenter k) column MF QF
 
 local notation "A" => P.retainedMorseActualChain hD hw hS G₀ hfirst hq hT
   hleft hright hTL hTR k hk hbridge hmodel hwindow bordered j hj column hB models centralModel

@@ -80,17 +80,17 @@ theorem exists_selectedWholeGreenOperator
   have hm := outerOutwardRegion_restrict_deep hD hphysical horder
   simp only [her, outerOutwardRadius_eq_sign] at hm
   let Rdeep := l2OperatorMeasureCongr hm.symm Ddeep
-  have hRd : ∀ f : Lp ℝ 2 ((μ).restrict (Icc a c)ᶜ),
-      (Rdeep f : ℝ → ℝ) =ᵐ[(μ).restrict (Icc a c)ᶜ] fun x =>
+  have hRd : ∀ f : Lp ℝ 2 (Measure.restrict μ (Icc a c)ᶜ),
+      (Rdeep f : ℝ → ℝ) =ᵐ[Measure.restrict μ (Icc a c)ᶜ] fun x =>
         ∫ y in (Icc a c)ᶜ, F.Q (min x y) * F.P (max x y) * f y ∂μ :=
     l2OperatorMeasureCongr_kernel hm.symm Ddeep
       (fun x y => F.Q (min x y) * F.P (max x y)) hDdeep
   have hrows : ∀ x ∈ Ico c b,
-      MemLp (fun y => F.Q (min x y) * F.P (max x y)) 2 ((μ).restrict (Icc a c)ᶜ) := by
+      MemLp (fun y => F.Q (min x y) * F.P (max x y)) 2 (Measure.restrict μ (Icc a c)ᶜ) := by
     intro x hx
     rw [hm]
     exact hrow x hx
-  have hP : MemLp F.P 2 ((μ).restrict (Icc a c)ᶜ) := by
+  have hP : MemLp F.P 2 (Measure.restrict μ (Icc a c)ᶜ) := by
     rw [hm]
     exact morsePhysicalDeepTail_outward_lift_memLp hg hep hT F.P_natural
   let p := hP.toLp F.P

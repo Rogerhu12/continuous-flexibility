@@ -52,7 +52,7 @@ private theorem scalar_bounds_of_sum_le {F c M : ℝ}
 
 /-- Construct the complete accumulating reference with the prescribed
 new profile, field and independently rescaled endpoints. -/
-theorem exists_accumulating_reference_of_two_tail_surgery_with_cells
+theorem exists_accumulating_reference_of_two_tail_surgery_with_transport
     {D : ReferenceData} {W Phi : ℝ → ℝ} {A B HL HR c d : ℝ}
     (hD : IsAccumulatingProfile D)
     (hA : 0 < A) (hAB : A ≤ B) (hHL : 0 < HL) (hHR : 0 < HR)
@@ -66,6 +66,7 @@ theorem exists_accumulating_reference_of_two_tail_surgery_with_cells
       IsAccumulatingProfile E ∧
       ∃ e : ℝ ≃o ℝ, E.cells = (fun m => e ⁻¹' D.cells m) ∧
         E.cellIndex = (fun m => max (D.cellIndex m) 1) ∧
+        E.localizer = (fun m r => D.localizer m (e r)) ∧
         (∀ r, r ≤ c → e.symm r = A * r) ∧
         (∀ r, d ≤ r → e.symm r = B * r) := by
   rcases hD with ⟨C, hDb⟩
@@ -127,7 +128,29 @@ theorem exists_accumulating_reference_of_two_tail_surgery_with_cells
       (isAccumulatingProfile_positiveIndexReference ⟨C, hDb⟩)
       (positiveIndexReference_index_pos D) he hL hforward hbackward
       hNew hK hKcore hM hTail
-  exact ⟨E, hEa, hEb, rfl, rfl, hAccum, e, rfl, rfl, heLeft, heRight⟩
+  exact ⟨E, hEa, hEb, rfl, rfl, hAccum, e, rfl, rfl, rfl, heLeft, heRight⟩
+
+/-- The existing cell interface forgets only the localizer identity. -/
+theorem exists_accumulating_reference_of_two_tail_surgery_with_cells
+    {D : ReferenceData} {W Phi : ℝ → ℝ} {A B HL HR c d : ℝ}
+    (hD : IsAccumulatingProfile D)
+    (hA : 0 < A) (hAB : A ≤ B) (hHL : 0 < HL) (hHR : 0 < HR)
+    (hac : D.a < c) (hcd : c < d) (hdb : d < D.b)
+    (hGeo : RadialProfileGeometry
+      { D with a := A * D.a, b := B * D.b, w := W, phi := Phi })
+    (hleft : ∀ r ∈ Ioo D.a c, W (A * r) = HL * A * D.w r)
+    (hright : ∀ r ∈ Ioo d D.b, W (B * r) = HR * B * D.w r) :
+    ∃ E : ReferenceData,
+      E.a = A * D.a ∧ E.b = B * D.b ∧ E.w = W ∧ E.phi = Phi ∧
+      IsAccumulatingProfile E ∧
+      ∃ e : ℝ ≃o ℝ, E.cells = (fun m => e ⁻¹' D.cells m) ∧
+        E.cellIndex = (fun m => max (D.cellIndex m) 1) ∧
+        (∀ r, r ≤ c → e.symm r = A * r) ∧
+        (∀ r, d ≤ r → e.symm r = B * r) := by
+  obtain ⟨E, ha, hb, hw, hPhi, hE, e, hc, hi, _, hL, hR⟩ :=
+    exists_accumulating_reference_of_two_tail_surgery_with_transport hD hA hAB hHL hHR
+      hac hcd hdb hGeo hleft hright
+  exact ⟨E, ha, hb, hw, hPhi, hE, e, hc, hi, hL, hR⟩
 
 /-- The original surgery API follows by forgetting the retained coordinate. -/
 theorem exists_accumulating_reference_of_two_tail_surgery
