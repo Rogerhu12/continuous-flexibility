@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.CanonicalActualEndpointFields
 import ContinuousFlexibility.Analysis.PlanarInverseDerivativeBound
+import ContinuousFlexibility.Analysis.N01ActualRootGeometry
 
 /-!
 # Quantitative diagonal bounds at actual fixed root circles
