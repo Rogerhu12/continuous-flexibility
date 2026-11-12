@@ -2,6 +2,7 @@ import ContinuousFlexibility.Radial.SeedPureTail
 import ContinuousFlexibility.Radial.ConeModeCutoff
 import ContinuousFlexibility.Radial.SeedOrientedGluing
 import ContinuousFlexibility.Radial.SeedConnectorReconstruction
+import ContinuousFlexibility.Radial.SeedLogSlopeLower
 
 /-!
 # Continuing a mixed cone tail to a pure cone mode
@@ -104,9 +105,16 @@ theorem connectorProfile_eq_cone_on_const {k : ℝ → ℝ} {J : Set ℝ} {p : �
 
 /-- Every actual mixed cone tail admits an inward pure-mode continuation.
 The original natural tail, endpoint and critical points are retained. -/
-theorem SeedConeTail.toPureTail {D : ReferenceData} {right : Bool} {entry : ℝ} {u : ℝ → ℝ}
+theorem SeedConeTail.toPureTail_retaining_logSlope {D : ReferenceData} {right : Bool}
+    {entry : ℝ} {u : ℝ → ℝ}
     (T : SeedConeTail D right entry u) (hentry : entry ∈ radialCore D) :
-    Nonempty (SeedPureTail D right entry u) := by
+    ∃ P : SeedPureTail D right entry u,
+      (if right then P.cut < T.cut else T.cut < P.cut) ∧
+      (∀ r, (if right then T.cut ≤ r else r ≤ T.cut) →
+        P.profile =ᶠ[𝓝 r] T.profile ∧ P.height =ᶠ[𝓝 r] T.height) ∧
+      (∀ r, 0 < r → 0 < deriv T.profile r → 0 < deriv P.profile r) ∧
+      ∀ r, 0 < r → (3 / 4 : ℝ) * T.profile r ≤ r * deriv T.profile r →
+        (3 / 4 : ℝ) * P.profile r ≤ r * deriv P.profile r := by
   let s : ℝ := seedConeFrequency right
   let A : ℝ := if right then T.coneB else T.coneA
   let B : ℝ := if right then T.coneA else T.coneB
@@ -289,7 +297,7 @@ theorem SeedConeTail.toPureTail {D : ReferenceData} {right : Bool} {entry : ℝ}
     scale_pos := hC₁
     amplitude_ne_zero := hA₁
     mode_sq := P.mode_sq
-    pure_eq := ?_ }⟩
+    pure_eq := ?_ }, ?_, ?_, ?_, ?_⟩
   · intro r hr
     have hs : if right then r₀ ≤ r else r ≤ r₀ := by
       cases right with
@@ -331,5 +339,46 @@ theorem SeedConeTail.toPureTail {D : ReferenceData} {right : Bool} {entry : ℝ}
       | true => exact (hi.trans hr₃r₀).le
     rw [(hin r hi₀).1.eq_of_nhds, (hin r hi₀).2.eq_of_nhds]
     exact hPure r hr hi
+  · cases right
+    · exact hr₀cut.trans hr₃r₀
+    · exact hr₃r₀.trans hr₀cut
+  · intro r hr
+    apply hout r
+    cases right
+    · exact hr.trans hr₀cut.le
+    · exact hr₀cut.le.trans hr
+  · intro r hp hd
+    rcases seedOrientedGlue_sides right r₀ r with hi | ho
+    · rw [(hin r hi).1.deriv_eq]
+      exact hWdpos r hp
+    · rw [(hout r ho).1.deriv_eq]
+      exact hd
+  · intro r hp hd
+    rcases seedOrientedGlue_sides right r₀ r with hi | ho
+    · apply logSlope_lower_of_germ (hin r hi).1
+      exact connectorProfile_logSlope_lower P.smooth P.below_four P.base f₀ hp
+        (P.positive (log r))
+    · exact logSlope_lower_of_germ (hout r ho).1 hd
+
+/-- The retained-germ interface, with the quantitative companion available
+separately for the uniform inverse budget. -/
+theorem SeedConeTail.toPureTail_retaining {D : ReferenceData} {right : Bool}
+    {entry : ℝ} {u : ℝ → ℝ}
+    (T : SeedConeTail D right entry u) (hentry : entry ∈ radialCore D) :
+    ∃ P : SeedPureTail D right entry u,
+      (if right then P.cut < T.cut else T.cut < P.cut) ∧
+      (∀ r, (if right then T.cut ≤ r else r ≤ T.cut) →
+        P.profile =ᶠ[𝓝 r] T.profile ∧ P.height =ᶠ[𝓝 r] T.height) ∧
+      ∀ r, 0 < r → 0 < deriv T.profile r → 0 < deriv P.profile r := by
+  obtain ⟨P, hc, hg, hp, _⟩ := T.toPureTail_retaining_logSlope hentry
+  exact ⟨P, hc, hg, hp⟩
+
+/-- The original cone-to-pure interface, retaining its statement. -/
+theorem SeedConeTail.toPureTail {D : ReferenceData} {right : Bool}
+    {entry : ℝ} {u : ℝ → ℝ}
+    (T : SeedConeTail D right entry u) (hentry : entry ∈ radialCore D) :
+    Nonempty (SeedPureTail D right entry u) := by
+  obtain ⟨P, _, _, _⟩ := T.toPureTail_retaining hentry
+  exact ⟨P⟩
 
 end ContinuousFlexibility.Radial

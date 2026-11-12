@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.SeedGluedPair
+import ContinuousFlexibility.Radial.SeedLogSlopeLower
 
 /-!
 # Construction of the global seed from two canonical pure tails
@@ -17,12 +18,32 @@ open Real Set Filter
 open scoped Topology ContDiff
 open Statements
 
-theorem exists_seedGluedPair {D : ReferenceData} {c d : ℝ} {uL uR : ℝ → ℝ}
+theorem exists_seedGluedPair_retaining_logSlope {D : ReferenceData} {c d : ℝ} {uL uR : ℝ → ℝ}
     (hD : RadialProfileGeometry D) (hc : c ∈ radialCore D) (hd : d ∈ radialCore D)
     (TL : SeedPureTail D false c uL) (TR : SeedPureTail D true d uR)
     (hTL : TL.mode = 2) (hTR : TR.mode = -2)
     (K : SeedCentralCutoff) {q : ℝ} (hq : 0 < q) :
-    Nonempty (SeedGluedPair D c d uL uR K q) := by
+    ∃ G : SeedGluedPair D c d uL uR K q,
+      (∀ r, 0 < r → r ≤ G.radiusL * TL.cut →
+        G.profile =ᶠ[𝓝 r] seedRescale G.radiusL (G.heightL * G.radiusL) TL.profile ∧
+        G.height =ᶠ[𝓝 r] seedRescale G.radiusL G.amplitudeL TL.height) ∧
+      (∀ r, G.radiusR * TR.cut ≤ r →
+        G.profile =ᶠ[𝓝 r] seedRescale G.radiusR (G.heightR * G.radiusR) TR.profile ∧
+        G.height =ᶠ[𝓝 r] seedRescale G.radiusR G.amplitudeR TR.height) ∧
+      G.radiusL * TL.cut < exp (K.left - q - 4) ∧
+      exp (K.right + q + 4) < G.radiusR * TR.cut ∧
+      ((∀ r, 0 < r → c ≤ r → 0 < deriv TL.profile r) →
+        ∀ r ∈ Icc (G.radiusL * c) (exp K.left), 0 < deriv G.profile r) ∧
+      ((∀ r, 0 < r → r ≤ d → 0 < deriv TR.profile r) →
+        ∀ r ∈ Icc (exp K.right) (G.radiusR * d), 0 < deriv G.profile r) ∧
+      ((∀ r, 0 < r → c ≤ r →
+          (3 / 4 : ℝ) * TL.profile r ≤ r * deriv TL.profile r) →
+        ∀ r ∈ Icc (G.radiusL * c) (exp K.left),
+          (3 / 4 : ℝ) * G.profile r ≤ r * deriv G.profile r) ∧
+      ((∀ r, 0 < r → r ≤ d →
+          (3 / 4 : ℝ) * TR.profile r ≤ r * deriv TR.profile r) →
+        ∀ r ∈ Icc (exp K.right) (G.radiusR * d),
+          (3 / 4 : ℝ) * G.profile r ≤ r * deriv G.profile r) := by
   obtain ⟨cL, cR, aL, aR, hcL, hcR, haL, haR, hconeL, hconeR⟩ := K.exact_cones
   let zL := exp (K.left - q - 4)
   let zR := exp (K.right + q + 4)
@@ -316,7 +337,7 @@ theorem exists_seedGluedPair {D : ReferenceData} {c d : ℝ} {uL uR : ℝ → �
         exact K.profile_deriv_pos hp (Or.inr ((le_log_iff_exp_le hp).mpr hretained))
     left_tail := ?_
     right_tail := ?_
-  }⟩
+  }, ?_, ?_, hcutL, hcutR, ?_, ?_, ?_, ?_⟩
   · refine ⟨ha, (hbefore.trans hzLR).trans hafter,
       ⟨hWs, fun r hr => (hflat r hr).1⟩,
       ⟨hUs, fun r hr => (hflat r hr).2⟩,
@@ -357,5 +378,113 @@ theorem exists_seedGluedPair {D : ReferenceData} {c d : ℝ} {uL uR : ℝ → �
         U (RR * r) = UR (RR * r) := hg.2.eq_of_nhds
         _ = AR * TR.height r := seedRescale_at_scaled hRR.ne' _ _ _
         _ = AR * uR r := by rw [ht.2]
+  · intro r hp hr
+    exact hleft r hp (hr.trans hcutL.le)
+  · intro r hr
+    exact hright r (hcutR.le.trans hr)
+  · intro hTLder r hr
+    have hp : 0 < r := (mul_pos hRL (hD.1.trans hc.1)).trans_le hr.1
+    by_cases hl : r ≤ zL
+    · rw [(hleft r hp hl).1.deriv_eq]
+      apply seedRescale_deriv_pos hRL (mul_pos hHL hRL)
+      apply hTLder _ (mul_pos (inv_pos.mpr hRL) hp)
+      have hx : c ≤ r / RL := (le_div_iff₀ hRL).mpr
+        (by simpa only [mul_comm] using hr.1)
+      simpa only [div_eq_mul_inv, mul_comm] using hx
+    · have hLzR : exp K.left < zR := by
+        change exp K.left < exp (K.right + q + 4)
+        apply exp_lt_exp.mpr
+        linarith [K.left_neg, K.right_pos]
+      rw [(hmiddle r ⟨(lt_of_not_ge hl).le, hr.2.trans hLzR.le⟩).1.deriv_eq]
+      apply K.profile_deriv_pos hp
+      left
+      simpa only [log_exp] using log_le_log hp hr.2
+  · intro hTRder r hr
+    have hp : 0 < r := (exp_pos K.right).trans_le hr.1
+    by_cases hh : zR ≤ r
+    · rw [(hright r hh).1.deriv_eq]
+      apply seedRescale_deriv_pos hRR (mul_pos hHR hRR)
+      apply hTRder _ (mul_pos (inv_pos.mpr hRR) hp)
+      have hx : r / RR ≤ d := (div_le_iff₀ hRR).mpr
+        (by simpa only [mul_comm] using hr.2)
+      simpa only [div_eq_mul_inv, mul_comm] using hx
+    · have hzLH : zL < exp K.right := by
+        change exp (K.left - q - 4) < exp K.right
+        apply exp_lt_exp.mpr
+        linarith [K.left_neg, K.right_pos]
+      rw [(hmiddle r ⟨hzLH.le.trans hr.1, (lt_of_not_ge hh).le⟩).1.deriv_eq]
+      apply K.profile_deriv_pos hp
+      right
+      simpa only [log_exp] using log_le_log (exp_pos K.right) hr.1
+  · intro hTLlower r hr
+    have hp : 0 < r := (mul_pos hRL (hD.1.trans hc.1)).trans_le hr.1
+    by_cases hl : r ≤ zL
+    · apply logSlope_lower_of_germ (hleft r hp hl).1
+      apply seedRescale_logSlope_lower (mul_pos hHL hRL).le
+      apply hTLlower _ (mul_pos (inv_pos.mpr hRL) hp)
+      have hx : c ≤ r / RL := (le_div_iff₀ hRL).mpr
+        (by simpa only [mul_comm] using hr.1)
+      simpa only [div_eq_mul_inv, mul_comm] using hx
+    · have hLzR : exp K.left < zR := by
+        change exp K.left < exp (K.right + q + 4)
+        apply exp_lt_exp.mpr
+        linarith [K.left_neg, K.right_pos]
+      apply logSlope_lower_of_germ
+        (hmiddle r ⟨(lt_of_not_ge hl).le, hr.2.trans hLzR.le⟩).1
+      apply K.profile_logSlope_lower hp
+      left
+      simpa only [log_exp] using log_le_log hp hr.2
+  · intro hTRlower r hr
+    have hp : 0 < r := (exp_pos K.right).trans_le hr.1
+    by_cases hh : zR ≤ r
+    · apply logSlope_lower_of_germ (hright r hh).1
+      apply seedRescale_logSlope_lower (mul_pos hHR hRR).le
+      apply hTRlower _ (mul_pos (inv_pos.mpr hRR) hp)
+      have hx : r / RR ≤ d := (div_le_iff₀ hRR).mpr
+        (by simpa only [mul_comm] using hr.2)
+      simpa only [div_eq_mul_inv, mul_comm] using hx
+    · have hzLH : zL < exp K.right := by
+        change exp (K.left - q - 4) < exp K.right
+        apply exp_lt_exp.mpr
+        linarith [K.left_neg, K.right_pos]
+      apply logSlope_lower_of_germ
+        (hmiddle r ⟨hzLH.le.trans hr.1, (lt_of_not_ge hh).le⟩).1
+      apply K.profile_logSlope_lower hp
+      right
+      simpa only [log_exp] using log_le_log (exp_pos K.right) hr.1
+
+/-- The original retained pair interface. -/
+theorem exists_seedGluedPair_retaining {D : ReferenceData} {c d : ℝ} {uL uR : ℝ → ℝ}
+    (hD : RadialProfileGeometry D) (hc : c ∈ radialCore D) (hd : d ∈ radialCore D)
+    (TL : SeedPureTail D false c uL) (TR : SeedPureTail D true d uR)
+    (hTL : TL.mode = 2) (hTR : TR.mode = -2)
+    (K : SeedCentralCutoff) {q : ℝ} (hq : 0 < q) :
+    ∃ G : SeedGluedPair D c d uL uR K q,
+      (∀ r, 0 < r → r ≤ G.radiusL * TL.cut →
+        G.profile =ᶠ[𝓝 r] seedRescale G.radiusL (G.heightL * G.radiusL) TL.profile ∧
+        G.height =ᶠ[𝓝 r] seedRescale G.radiusL G.amplitudeL TL.height) ∧
+      (∀ r, G.radiusR * TR.cut ≤ r →
+        G.profile =ᶠ[𝓝 r] seedRescale G.radiusR (G.heightR * G.radiusR) TR.profile ∧
+        G.height =ᶠ[𝓝 r] seedRescale G.radiusR G.amplitudeR TR.height) ∧
+      G.radiusL * TL.cut < exp (K.left - q - 4) ∧
+      exp (K.right + q + 4) < G.radiusR * TR.cut ∧
+      ((∀ r, 0 < r → c ≤ r → 0 < deriv TL.profile r) →
+        ∀ r ∈ Icc (G.radiusL * c) (exp K.left), 0 < deriv G.profile r) ∧
+      ((∀ r, 0 < r → r ≤ d → 0 < deriv TR.profile r) →
+        ∀ r ∈ Icc (exp K.right) (G.radiusR * d), 0 < deriv G.profile r) := by
+  obtain ⟨G, hL, hR, hb, ha, hdL, hdR, _, _⟩ :=
+    exists_seedGluedPair_retaining_logSlope hD hc hd TL TR hTL hTR K hq
+  exact ⟨G, hL, hR, hb, ha, hdL, hdR⟩
+
+/-- The original global-seed interface. The stronger construction also
+records that every outward germ of the two pure tails is retained. -/
+theorem exists_seedGluedPair {D : ReferenceData} {c d : ℝ} {uL uR : ℝ → ℝ}
+    (hD : RadialProfileGeometry D) (hc : c ∈ radialCore D) (hd : d ∈ radialCore D)
+    (TL : SeedPureTail D false c uL) (TR : SeedPureTail D true d uR)
+    (hTL : TL.mode = 2) (hTR : TR.mode = -2)
+    (K : SeedCentralCutoff) {q : ℝ} (hq : 0 < q) :
+    Nonempty (SeedGluedPair D c d uL uR K q) := by
+  obtain ⟨G, _, _, _, _, _, _⟩ := exists_seedGluedPair_retaining hD hc hd TL TR hTL hTR K hq
+  exact ⟨G⟩
 
 end ContinuousFlexibility.Radial
