@@ -1,0 +1,17 @@
+{
+  "kind": "fresh_independent_full_source_review",
+  "reviewer": "/root",
+  "compiled": false,
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/WholePositiveEndpointFields.lean",
+  "blob": "d5ac37d8aae450523577552e3fb13815cd0a0468",
+  "sha256": "c024651329c6b725f61097116a892f032b80b1f2ef363c920e37ac7e007c0587",
+  "lines": 132,
+  "checked_at": "2026-11-12T08:30:57.913788+00:00",
+  "result": "pass static actual-source and current-interface review",
+  "checks": [
+    "Read all132 lines and the freshly reviewed actual endpoint222 and positive adjacency contracts.",
+    "The Option source subtype certifies either the actual ambient endpoint or the opposite endpoint of a true negative neighbor. The source is fixed before the state.",
+    "The identity/one branch uses the true positive component interval. The neighbor branch applies the actual endpoint factory to the opposite Boolean side and rewrites only the certified physical endpoint.",
+    "No raw derivative estimate, final transport, or material primitive geometry is an input. All target ordinary root, smooth interior and symmetry fields are supplied by the existing actual atlas."
+  ]
+}

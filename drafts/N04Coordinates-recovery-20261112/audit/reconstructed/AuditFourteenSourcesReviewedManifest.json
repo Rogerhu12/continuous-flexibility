@@ -1,0 +1,246 @@
+{
+  "author": "/root/audit_coordinates",
+  "status": "independently reviewed current reconstructed/recovered sources; UNCOMPILED",
+  "compiled": false,
+  "source_count": 14,
+  "source_lines": 1692,
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OneSidedBoundaryJets.lean",
+      "sha256": "bee7f78864fa762a6b127b9de4a014bad91912664ac04249ff343ff76c6c5851",
+      "blob": "ef7eb6158ac785566cb2050b3b3146e596a40b7d",
+      "lines": 168,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/OneSidedBoundaryJetsReconstructionIndependentReview.json",
+        "sha256": "857f4060dbfe526592e6ed580a11d1750f7206cd6bd3284c5079a707a684e1d6"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/OneSidedBoundaryJets.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.BoundaryMixedJets",
+        "ContinuousFlexibility.Analysis.BoundaryJetClosure",
+        "ContinuousFlexibility.Analysis.PointwiseCylinderJets",
+        "Mathlib.Algebra.BigOperators.Fin"
+      ],
+      "source_provenance": "reconstructed"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OneSidedBoundaryTaylorRepresentative.lean",
+      "sha256": "677ea1b587d6712cb83bdbab0daf03550ca703146100e419f038314a325335df",
+      "blob": "cd997377cfa76b9df158f44291d6b8d021ef629f",
+      "lines": 130,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/OneSidedBoundaryTaylorRepresentativeReconstructionIndependentReview.json",
+        "sha256": "4c0b4278f6a49cd5cfd7c79c48614b479686bbc9caf62899744a271477ceb64f"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/OneSidedBoundaryTaylorRepresentative.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.OneSidedBoundaryJets",
+        "ContinuousFlexibility.Analysis.PositiveFiberInterpolationSymmetry",
+        "ContinuousFlexibility.Analysis.AngularTaylorPolynomial"
+      ],
+      "source_provenance": "reconstructed"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/EndpointAngularInterpolation.lean",
+      "sha256": "6115ae397369477e62a73a2d85ebb8d8dba434065b4342459e1caba58bb0eab7",
+      "blob": "0009c60442714e1d5191075b8cb3a74e19a63378",
+      "lines": 85,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/EndpointAngularReconstructionIndependentReview.json",
+        "sha256": "e9b036083b1a52ca5e6a3c700d0bc912377f89edde3665f647c5dfc85137106f"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/EndpointAngularInterpolation.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.PrescribedEndpointWidth",
+        "ContinuousFlexibility.Analysis.PositiveSymmetricFiberFactory"
+      ],
+      "source_provenance": "reconstructed"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RawEndpointAngularInterpolation.lean",
+      "sha256": "4a093259e01887f55777ace5671a4ca2ab53c27721f7631d69f096527940fdd6",
+      "blob": "fa2b7b2497dfe553d4c57efa079eae8ccb7617d8",
+      "lines": 113,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/EndpointAngularReconstructionIndependentReview.json",
+        "sha256": "e9b036083b1a52ca5e6a3c700d0bc912377f89edde3665f647c5dfc85137106f"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/RawEndpointAngularInterpolation.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.EndpointAngularInterpolation",
+        "ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative",
+        "ContinuousFlexibility.Analysis.BoundaryRadialFrechetJets",
+        "ContinuousFlexibility.Analysis.CylinderMixedJetNorms"
+      ],
+      "source_provenance": "reconstructed"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/EndpointHeightValueBounds.lean",
+      "sha256": "fa5dafb25717276bf70b6c7a7e55fda40335dd2aa678de6d81cd7d34f12d71b9",
+      "blob": "e192a07ef9476bd6de179deb4782a7980b6aba66",
+      "lines": 98,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/EndpointHeightReconstructionIndependentReview.json",
+        "sha256": "b37afe1346e8925147b10dff0d14876de2b32ea70924c5b18dcb7b64d4b36403"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/EndpointHeightValueBounds.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.PositiveHeightTaylorInterpolation",
+        "ContinuousFlexibility.Analysis.AngularTaylorPolynomial"
+      ],
+      "source_provenance": "reconstructed"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OneSidedEndpointHeight.lean",
+      "sha256": "29cbabf52918e73745455ed4f8e4a868f36dc5106558681a40492a52d4ee5258",
+      "blob": "e468cb78b23e667311524d42fb41139f633a2da2",
+      "lines": 127,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/EndpointHeightReconstructionIndependentReview.json",
+        "sha256": "b37afe1346e8925147b10dff0d14876de2b32ea70924c5b18dcb7b64d4b36403"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/OneSidedEndpointHeight.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative",
+        "ContinuousFlexibility.Analysis.EndpointHeightValueBounds"
+      ],
+      "source_provenance": "reconstructed"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/TaylorReferenceIdentity.lean",
+      "sha256": "3c963026e4a7fa58a4131616d6c8bc11518dbdb01ac52793b9d9da4921c0aca5",
+      "blob": "0741d84d8c3a0cb3904de531e26f21fc7a7821ae",
+      "lines": 104,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/TaylorAndWholeReferenceIdentityReconstructionIndependentReview.json",
+        "sha256": "5b85620c31c6471580f275b27acffac147de58ec2fb18ca96a6a000a1529e22d"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/TaylorReferenceIdentity.lean",
+      "source_provenance": "reconstructed",
+      "imports": [
+        "ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative",
+        "ContinuousFlexibility.Analysis.PositiveHeightTaylorInterpolation"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeComponentReferenceIdentity.lean",
+      "sha256": "18f7bbbb2badc224d46306b20a3180101cbf543978284c5ad23c8142c7a42788",
+      "blob": "f4238ef1b6755d62fc3fe275749932f4dbc3cc92",
+      "lines": 125,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/TaylorAndWholeReferenceIdentityReconstructionIndependentReview.json",
+        "sha256": "5b85620c31c6471580f275b27acffac147de58ec2fb18ca96a6a000a1529e22d"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/WholeComponentReferenceIdentity.lean",
+      "source_provenance": "reconstructed",
+      "imports": [
+        "ContinuousFlexibility.Analysis.OneSidedWholeComponentTransport",
+        "ContinuousFlexibility.Analysis.TaylorReferenceIdentity",
+        "ContinuousFlexibility.Analysis.PositiveReferenceIdentity"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/EndpointHeightLogJets.lean",
+      "sha256": "392b13be25ea3b4d63dbf2a5a0e4dee715185241c52c28288f49ee997b5f6ee1",
+      "blob": "209f01c1d7d797d3ec0e37535e2eb3e4a28e2458",
+      "lines": 52,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed-reviews/EndpointHeightLogJetsIndependentReview.json",
+        "sha256": "5dad48507ced8eedba239e34a8f431f22080ca3dc0e570be347426a7e2896037"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/EndpointHeightLogJets.lean",
+      "source_provenance": "reconstructed",
+      "imports": [
+        "ContinuousFlexibility.Analysis.LogPolynomialEnvelope",
+        "ContinuousFlexibility.Analysis.OneSidedEndpointHeight"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalRootTransportBoundary.lean",
+      "sha256": "52cdc1b47174f1cc2f543fad031505a555d9623563a2fb779ce511eb3889a2f2",
+      "blob": "aae8931c23fab77b192a81e81e7ccd2802a929f8",
+      "lines": 152,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/CanonicalRootTransportBoundaryReconstructionIndependentReview.json",
+        "sha256": "09596a3153e3df4b635d2966ce23395715ea13f2628c750fe22a552f61a7e400"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/CanonicalRootTransportBoundary.lean",
+      "source_provenance": "reconstructed",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalClosedTransport",
+        "ContinuousFlexibility.Analysis.CanonicalClosedSymmetry",
+        "ContinuousFlexibility.Analysis.CanonicalCutOrientation",
+        "ContinuousFlexibility.Analysis.N04bRootHeightSymmetry"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalActualEndpointFields.lean",
+      "sha256": "ef75f35237546986aace929c1fda60fc529105db2adc0b6a2742a3d0edf67437",
+      "blob": "ddfb3b5d8b87dfb427bc3a32b8938fdf0a7092da",
+      "lines": 222,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed-reviews/CanonicalActualEndpointAndCutsIndependentReview.json",
+        "sha256": "1b9fa4c96aaa3b042a35646e53c4aaa4c2a7e17f2d5985dfe39c1ceb204eeefa"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/CanonicalActualEndpointFields.lean",
+      "source_provenance": "reconstructed",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary",
+        "ContinuousFlexibility.Analysis.CanonicalNegativeTravelSymmetries",
+        "ContinuousFlexibility.Analysis.N04bActualAtlasCuts"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/recovery/N04bActualAtlasCuts.lean",
+      "sha256": "1c1ca0be70e7134d99086b9d491732bc983447a8d9700cd17cfa4606e0f7c26e",
+      "blob": "3e6847f1dc053e029284c4f490ab351c5c310da2",
+      "lines": 97,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed-reviews/CanonicalActualEndpointAndCutsIndependentReview.json",
+        "sha256": "1b9fa4c96aaa3b042a35646e53c4aaa4c2a7e17f2d5985dfe39c1ceb204eeefa"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/N04bActualAtlasCuts.lean",
+      "source_provenance": "recovery",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bActualAtlasGerms"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/recovery/PositiveFiberClosedGeometry.lean",
+      "sha256": "b5f36c8cdac592b0979009b507fe4d686efeea6ee74d2f8d00fa8dd075289d61",
+      "blob": "d47fadef22e92459f5076bca61124019eee8902e",
+      "lines": 129,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed-reviews/PositiveFiberClosedGeometryIndependentReview.json",
+        "sha256": "ef50ec6b9e00e0f3dabd365ab45644ba816f05c2d3b2e81ad0a2c5d28f33ca4b"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/PositiveFiberClosedGeometry.lean",
+      "source_provenance": "recovery",
+      "imports": [
+        "ContinuousFlexibility.Analysis.PositiveFiberCoordinates",
+        "ContinuousFlexibility.Analysis.CanonicalEndpointInverse"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalReferenceTransportGerms.lean",
+      "sha256": "f9b098e471410d8a76c7e579f5b9b6d8de5e8a55fc573abfa33b176a5d92828d",
+      "blob": "f890f14c02f8aacd51c56b87c1d60311e0756790",
+      "lines": 90,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/CanonicalReferenceTransportGermsReconstructionIndependentReview.json",
+        "sha256": "4830a0d7e11a91eced2da8c713a21635d6c9e3c13df871f593d40ec488108bed"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceTransportGerms.lean",
+      "source_provenance": "reconstructed",
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholePositiveEndpointFields"
+      ]
+    }
+  ],
+  "prior_manifest_preserved": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/AuditThirteenSourcesReviewedManifest.json",
+    "sha256": "c72fe4765374fee0923c9fbb68237680e85855707abd953dbe11a35d635ebbd4"
+  },
+  "provenance": "Twelve sources are newly reconstructed bytes after the reset. Two providers are exact recovered sources with fresh independent whole-source review. No historical compilation result is asserted.",
+  "active_mutations": false
+}

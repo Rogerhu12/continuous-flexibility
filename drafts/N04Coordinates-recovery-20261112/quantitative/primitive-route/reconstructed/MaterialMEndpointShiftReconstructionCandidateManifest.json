@@ -1,0 +1,40 @@
+{
+  "kind": "reconstructed_material_M_exact_power_bounded_endpoint_shift",
+  "status": "UNCOMPILED_CANDIDATE",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialMEndpointShift.lean",
+  "lines": 185,
+  "blob": "796e8337567171116166da62812b6e90a034a28e",
+  "sha256": "553c3658549be043206387ee34785e2b805cbb19eec1c9368e1d0b9944f1ed09",
+  "recovery_status": "New reconstruction; old 185-line source and its lost bytes are not claimed recovered.",
+  "mathematical_scope": "For every real gamma and nonnegative displacement L, a nonnegative exponent A is selected before x,y. Actual model materialM(x)^gamma <= materialM(y)^gamma * materialE0(y)^A for nonnegative x,y with abs(x-y)<=L. No extra M exponent and no change of material witness.",
+  "proof_outline": [
+    "Explicit actual M exponent derivative, valid also at x=0 because 5/2>=1.",
+    "The derivative is at most ((5/2)*(exp(1)+1)^2+2) times the actual E0 exponent.",
+    "The existing one-sided E0 comparison, followed by log, bounds the E0 exponent throughout the actual segment.",
+    "The convex mean value theorem bounds the M exponent difference; absolute gamma gives every real power with its original exponent."
+  ],
+  "dependencies_read": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleShift.lean",
+      "blob": "e79e27788e1c853bed9950e91d7d121995ab1508",
+      "sha256": "58b0285c60e26605a013ba3d580d17e37aef1fa450622b13c458227cb3aa8f74"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialWeights.lean",
+      "blob": "4788cd70cd81842326a4e1cedde510d2c302f1cd",
+      "sha256": "e4998fa3dc7afe79fb5fc68d4b37a9df11d8c4be01fc7a51cf8015acc214dd51"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialWeightShift.lean",
+      "blob": "7ab514c2a6f5af51a8bfcf2c89398cd387788c2e",
+      "sha256": "e46a00bf0a3bce8349e0362807495da8499023d4ad82d2c7a3122e25eb70be6c"
+    }
+  ],
+  "public_theorems": [
+    "materialM_rpow_bounded_shift_E0"
+  ],
+  "private_theorems": 4,
+  "source_options_added": false,
+  "compiled": false,
+  "checkout_modified": false
+}

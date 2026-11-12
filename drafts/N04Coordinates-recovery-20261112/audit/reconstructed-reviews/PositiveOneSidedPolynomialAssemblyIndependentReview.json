@@ -1,0 +1,79 @@
+{
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed independent complete-source and reconstructed-callee review; UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/RemainingPositivePolynomialCandidateManifest.json",
+    "sha256": "ddc8b73e9a72eeca46247804c4509a67016b675aff7c15d78f3a86e565f7b11c"
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/OneSidedWholeComponentTransportPolynomial.lean",
+      "blob": "c1a0998de3bebf4fbf4fcf10ec0e871e47e8247e",
+      "sha256": "0ae780cb662e8ecff763a06c3b4765773fa2b388a2d659bd277c1e969eaf4de9",
+      "lines": 185
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/WholePositiveTransportPolynomialAssembly.lean",
+      "blob": "38183c65d2553465ee8e4c47b743a44b73ee2b7e",
+      "sha256": "06d270ae78749525cfe1fecdf6707bc9af3bdcedfcaf36d1399e4fc4f0759cec",
+      "lines": 196
+    }
+  ],
+  "callees_read": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeComponentTransportPolynomial.lean",
+      "blob": "33110da205efdf81ad4235f1458c7231b6b45b0f",
+      "sha256": "0d13ae7e1107bd35fce75a739d492c9b7c78fa4cf1b6e70dff7e213d877b0b95",
+      "lines": 108
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OneSidedBoundaryJets.lean",
+      "blob": "ef7eb6158ac785566cb2050b3b3146e596a40b7d",
+      "sha256": "bee7f78864fa762a6b127b9de4a014bad91912664ac04249ff343ff76c6c5851",
+      "lines": 168
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OneSidedBoundaryTaylorRepresentative.lean",
+      "blob": "cd997377cfa76b9df158f44291d6b8d021ef629f",
+      "sha256": "677ea1b587d6712cb83bdbab0daf03550ca703146100e419f038314a325335df",
+      "lines": 130
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/EndpointHeightLogJets.lean",
+      "blob": "209f01c1d7d797d3ec0e37535e2eb3e4a28e2458",
+      "sha256": "392b13be25ea3b4d63dbf2a5a0e4dee715185241c52c28288f49ee997b5f6ee1",
+      "lines": 52
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OneSidedEndpointHeight.lean",
+      "blob": "e468cb78b23e667311524d42fb41139f633a2da2",
+      "sha256": "29cbabf52918e73745455ed4f8e4a868f36dc5106558681a40492a52d4ee5258",
+      "lines": 127
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeComponentReferenceIdentity.lean",
+      "blob": "f4238ef1b6755d62fc3fe275749932f4dbc3cc92",
+      "sha256": "18f7bbbb2badc224d46306b20a3180101cbf543978284c5ad23c8142c7a42788",
+      "lines": 125
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalActualEndpointFields.lean",
+      "blob": "ddfb3b5d8b87dfb427bc3a32b8938fdf0a7092da",
+      "sha256": "ef75f35237546986aace929c1fda60fc529105db2adc0b6a2742a3d0edf67437",
+      "lines": 222
+    }
+  ],
+  "checks": [
+    "Read all 185 and 196 lines, including both actual full-vector matching conclusions and the reference-state identity branch.",
+    "The fixed coefficient and natural degree are selected before the family type, geometry, numerical bounds and states. The one-sided adapters preserve the same actual interpolation and inverse parameter M_sigma.",
+    "One-sided representatives of degrees n+2 and n+1 preserve the required angular and radial ordinary jets. First derivatives are obtained from ordinary order-one jets, and raw root symmetries pass through the proved one-sided representative APIs.",
+    "The actual scalar radial matches become full ordinary jets through n+1 using the reconstructed closed-strip mixed-to-ordinary result. The two coordinate jets combine via the true product iterated derivative formula and the actual vector eta identity.",
+    "The family assembly projects actual coordinate jets with continuous-linear maps of norm at most one. It requires no global zero-order bound for the angular lift.",
+    "The height collar uses the same explicit reciprocal formula with the polynomial boundary-log envelope. The height and reciprocal amplitude stay exp(2)*H^2; the higher-jet envelope is not exponentiated.",
+    "Both closed middle-region inequalities follow from the actual nested-min width bounds, and reference germs feed the reconstructed actual coordinate and height identity theorems.",
+    "Explicit point arguments to structure period/reflection fields are correct: those fields quantify points explicitly. Product additions here have literal tuple inputs, matching the used simplification rule."
+  ],
+  "compiled": false,
+  "source_modified": false,
+  "checkout_index_refs_modified": false
+}

@@ -1,0 +1,70 @@
+{
+  "kind": "localized_whole_component_and_actual_closed_negative_symmetry_candidate",
+  "status": "HELD_UNCOMPILED_AWAITING_INDEPENDENT_REVIEW",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeComponentLocalSymmetries.lean",
+      "sha256": "cc5015c9685ae947ee345960d559036fe47463e3e975d309060001587ad681d3",
+      "git_blob": "603b3c1b2d88f783ca0a693ffeb0adee1fe387fc",
+      "lines": 38,
+      "module_path": "src/ContinuousFlexibility/Analysis/WholeComponentLocalSymmetries.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeComponentFieldSelection"
+      ],
+      "public_declarations": [
+        "n04WholeComponentField_equivariant_on_components"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholeNegativeSymmetries.lean",
+      "sha256": "d7c95a7779e1285682e1f679b367fe733a92c23ac0cc610e78030c7f49f595e9",
+      "git_blob": "52ca0a34a1f304554fc5e8196ee9c3ef9b5f0916",
+      "lines": 129,
+      "module_path": "src/ContinuousFlexibility/Analysis/CanonicalWholeNegativeSymmetries.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalWholeNegativeTransport",
+        "ContinuousFlexibility.Analysis.CanonicalNegativeTravelSymmetries"
+      ],
+      "public_declarations": [
+        "canonicalWholeNegativeTransport_symmetries_closed",
+        "canonicalWholeNegativeHeightRatio_symmetries_closed"
+      ]
+    }
+  ],
+  "exact_callee_sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholeComponentFieldSelection.lean",
+      "sha256": "050dcc988f8a554f03195aa4151d835adcd6b4fe4ceb8713f7e542a84e9f29ba",
+      "git_blob": "3bb8a56527fd0159374834d2bb96c4be8e776959",
+      "lines": 125
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalNegativeTravelSymmetries.lean",
+      "sha256": "1a93e3fe31f9e53d49e71091130c4a04edba9db71e6fb2a4a9c2193f99fd5c87",
+      "git_blob": "49363860e4a632846194526915e29b148e96b118",
+      "lines": 97
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalClosedSymmetry.lean",
+      "sha256": "3a302d2bdbaad60177114cb33c422fabc339dcadd032f130f86030aa64b167a8",
+      "git_blob": "a2190d12ac9034b0b102329b1f436cd3504e891c",
+      "lines": 157
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/negative-eqon/CanonicalWholeNegativeTransport.lean",
+      "sha256": "0bef20fc204519001f22a8387d08ec8ff59b6be0b513129a43bcda751214120b",
+      "git_blob": "9c80ce0926164854906280ff067e64cf7e49758f",
+      "lines": 174
+    }
+  ],
+  "selection_note": "CanonicalWholeNegativeTransport must use the explicit six-EqOn compatibility selection (9c80ce09), not the historical 429c2442 source. Its actual endpoint provider is the separately reviewed reconstructed 222-line leaf.",
+  "proof_facts": [
+    "The selector needs equivariance only on the closed negative or open positive interval selected at the radius; choose_spec supplies the exact membership.",
+    "The actual whole negative transport and height equal actual travel formulas on the true open interval. Ordinary continuity of both sides at every closed point and NeBot of the within-open filter extend the equalities to the two actual roots.",
+    "All EqOn calls pass membership only. No symmetry of stored endpoint fields at arbitrary exterior points and no root value of the totalized travel inverse is used."
+  ],
+  "options_added": [],
+  "no_compilation": true,
+  "checkout_index_refs_modified": false,
+  "old_reviewed_sources_modified": false
+}

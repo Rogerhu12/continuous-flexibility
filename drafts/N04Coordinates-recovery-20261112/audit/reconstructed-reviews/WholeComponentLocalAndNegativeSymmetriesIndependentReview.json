@@ -1,0 +1,63 @@
+{
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed independent full-source static review",
+  "compiled": false,
+  "edited_source": false,
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeComponentLocalSymmetries.lean",
+      "blob": "603b3c1b2d88f783ca0a693ffeb0adee1fe387fc",
+      "sha256": "cc5015c9685ae947ee345960d559036fe47463e3e975d309060001587ad681d3",
+      "lines": 38
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholeNegativeSymmetries.lean",
+      "blob": "52ca0a34a1f304554fc5e8196ee9c3ef9b5f0916",
+      "sha256": "d7c95a7779e1285682e1f679b367fe733a92c23ac0cc610e78030c7f49f595e9",
+      "lines": 129
+    }
+  ],
+  "callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholeComponentFieldSelection.lean",
+      "blob": "3bb8a56527fd0159374834d2bb96c4be8e776959",
+      "sha256": "050dcc988f8a554f03195aa4151d835adcd6b4fe4ceb8713f7e542a84e9f29ba",
+      "lines": 125
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalNegativeTravelSymmetries.lean",
+      "blob": "49363860e4a632846194526915e29b148e96b118",
+      "sha256": "1a93e3fe31f9e53d49e71091130c4a04edba9db71e6fb2a4a9c2193f99fd5c87",
+      "lines": 97
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalClosedSymmetry.lean",
+      "blob": "a2190d12ac9034b0b102329b1f436cd3504e891c",
+      "sha256": "3a302d2bdbaad60177114cb33c422fabc339dcadd032f130f86030aa64b167a8",
+      "lines": 157
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/BoundaryJetClosure.lean",
+      "blob": "7cc95a817bb8de0b1856d6504918f4c1a2c36a5e",
+      "sha256": "1154aa089d8c6680602242383a2df70fe45d4e0ab16c758f5dadd7106606e66c",
+      "lines": 80
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/negative-eqon/CanonicalWholeNegativeTransport.lean",
+      "blob": "9c80ce0926164854906280ff067e64cf7e49758f",
+      "sha256": "0bef20fc204519001f22a8387d08ec8ff59b6be0b513129a43bcda751214120b",
+      "lines": 174
+    }
+  ],
+  "checks": [
+    "Read all 38+129 lines and the exact selector, actual travel symmetries, closed regularity and EqOn interfaces.",
+    "The radius-preserving map leaves both selector predicates unchanged. Classical.choose_spec supplies the selected closed-negative/open-positive membership, so only component-local equivariance is used.",
+    "The generic closed-strip helper uses closure(Ioo a b times univ)=Icc a b times univ, the genuine nontrivial within-open filter, and ordinary continuity at p and sigma(p). Its limit argument matches the already installed closure API.",
+    "The negative transport and height are first rewritten to the actual travel formulas at points strictly inside the same component and their radius-preserving images. Every EqOn call supplies membership only, in accordance with the fixed Set.EqOn implicit point binder.",
+    "The closed-root identities then follow by continuity of the stored whole-component fields. No root value or exterior symmetry of the totalized travel inverse is assumed.",
+    "The dependency selection is explicitly CanonicalWholeNegativeTransport blob9c80ce0926164854906280ff067e64cf7e49758f, the reviewed six-point EqOn compatibility source."
+  ],
+  "limitations": [
+    "Static review only; no elaboration or CI run."
+  ]
+}

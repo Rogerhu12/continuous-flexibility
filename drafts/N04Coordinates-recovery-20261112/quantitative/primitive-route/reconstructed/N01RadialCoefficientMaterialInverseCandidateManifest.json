@@ -1,0 +1,11 @@
+{
+  "kind": "same_witness_actual_radial_coefficient_material_inverse_candidate",
+  "status": "UNCOMPILED; no checkout changes",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RadialCoefficientMaterialInverse.lean",
+  "blob": "4aced4b7ac973d750dcf4c206c78fea2b9322150",
+  "sha256": "a28a6319b276e4ad7b078b844ae122d9fa1b2bd8fffcabce6ba1b914185f7221",
+  "lines": 145,
+  "scope": "Directly from current N01 denominator ratios and the actual inverse-profile cell bound; extends to both real component endpoints; N03 actual coefficient identity preserves exactly the same D/T/S/C/R/L. No Morse certificate, optical root lower, new target estimate or witness transfer input.",
+  "review_requested": "root or audit_coordinates",
+  "compiled": false
+}

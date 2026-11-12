@@ -1,0 +1,55 @@
+{
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed independent full-source static review",
+  "compiled": false,
+  "edited_source": false,
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/EndpointTaylorPolynomialEnvelope.lean",
+    "blob": "900c3e8c443e8a073425dcc296092209e5cf453b",
+    "sha256": "c39d2124a408c68094fc9ca9b1cb448da1add16a210ba9b557593be506251240",
+    "lines": 138
+  },
+  "callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/BoundaryTaylorExtension.lean",
+      "blob": "5c7b80c9ff8255850e05bb3308a30579b035a8d6",
+      "sha256": "569766332fa55b39cf1aea1a437366cd44591818758530f2dafffde49bdcd1da",
+      "lines": 223
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/BoundaryTaylorBounds.lean",
+      "blob": "55cb023ca0aab4f23e9a19f1d422c5ee50f54025",
+      "sha256": "75f4c39420744a25ee50f3e159072f390a757a290718524f78829b9d2be1f40a",
+      "lines": 279
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CylinderMixedJets.lean",
+      "blob": "3dc20e779221e16f9be32dff13d22e978b5a048d",
+      "sha256": "ae19c58f66f0778411f64607f52acf0525aceb27036c9d1ac1825e0e46e3614d",
+      "lines": 253
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveEndpointCutoff.lean",
+      "blob": "25ca16d4de4e07ae59c916e35b2c581bbf20f730",
+      "sha256": "c74fe54b7fb3aee3b532e7d5c93fe93c37cc0055e4ccd56ab89e8b9465b51711",
+      "lines": 187
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveHeightTaylorInterpolation.lean",
+      "blob": "5af54b2743a82ffa3a03796ab7bfe6b14c092812",
+      "sha256": "6fadddd6bf2cdefc752ca061f2c1db8a5ee38ab8e9c11ba833db7616d755b38a",
+      "lines": 205
+    }
+  ],
+  "checks": [
+    "Read all 138 source lines and the exact definitions of boundaryTaylorPolynomial, boundaryTaylorExtension, positiveEndpointCutoff and endpointTaylorCorrection.",
+    "The auxiliary endpoint c+delta is used only in a pointwise identity: the second Taylor polynomial is zero, and |c+delta-c|=delta for delta>0. It does not replace the physical interval or the selected collar.",
+    "The constants K(a), B=1+sum_{a<=N}K(a), and C=1+2*2^N*B*(n+1) are selected before M, delta, l, r, and the boundary data; C>=1 follows from genuine nonnegative factors.",
+    "For a+b=k<=N, delta^-a<=M^N and delta^j<=1 give the coefficient-linear mixed derivative bound B*(n+1)*M^(N+1). Both order zero and n=0 are covered; no positive angular-order restriction is silently used.",
+    "The actual existing mixed-to-full-jet theorem applies on univ to the globally smooth extension and contributes 2^k<=2^N. The finite two-patch sum is the original endpointTaylorCorrection by function equality.",
+    "All multiplication comparisons supply the required nonnegativity arguments; the final exponent is N+1 and is independent of n except for the coefficient C. No output jet bound or final transport is assumed."
+  ],
+  "limitations": [
+    "Static proof/API review only; elaboration and default-budget behavior await CI."
+  ]
+}

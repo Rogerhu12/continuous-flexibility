@@ -1,0 +1,45 @@
+{
+  "reviewer": "/root/proof_inventory",
+  "result": "passed independent full-source and exact-callee static review",
+  "compiled": false,
+  "edited_source": false,
+  "source": {
+    "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialEndpointWeightTransport.lean",
+    "blob": "a76f8fb3a60c893939caf7ded03dfac717512e81",
+    "sha256": "0958852ab78ccab6e57d3f527fc0d636406325a7b8cadf998f934290ddb135ba",
+    "lines": 132
+  },
+  "dependencies": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialGlobalEndpointModels.lean",
+      "blob": "94856c92ba535db174db559d1ab2ddacdf77dfd5",
+      "sha256": "2296624a6ce1501048acda5f6ba6a6779d9491bcccd8653db158d8ef9120b4fa"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialMEndpointShift.lean",
+      "blob": "796e8337567171116166da62812b6e90a034a28e",
+      "sha256": "553c3658549be043206387ee34785e2b805cbb19eec1c9368e1d0b9944f1ed09"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialWeightShift.lean",
+      "blob": "7ab514c2a6f5af51a8bfcf2c89398cd387788c2e",
+      "sha256": "e46a00bf0a3bce8349e0362807495da8499023d4ad82d2c7a3122e25eb70be6c"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleShift.lean",
+      "blob": "e79e27788e1c853bed9950e91d7d121995ab1508",
+      "sha256": "58b0285c60e26605a013ba3d580d17e37aef1fa450622b13c458227cb3aa8f74"
+    }
+  ],
+  "checks": [
+    "Read all 132 new lines and the actual global endpoint-model, two-sided rpow, H-shift, E0-shift and independently reviewed M-shift signatures. This is a new reconstruction review, not recovery of the earlier lost sources.",
+    "The same d0, model constants and actual material data are retained at both physical points. Two actual endpoint-coordinate model errors plus the supplied distance L give exactly 2*L0+L. No same-cell or altered host assumption occurs.",
+    "All real H and M exponents, including negative exponents, are transferred in both directions using positive bases and the two-sided comparison lemma with constants KH^abs(gamma) and KM^abs(eta).",
+    "R and the output A are nonnegative, so the E0 comparison directions are correct. The proof uses positivity of actual E0 and never assumes the unscaled E0 is at least one.",
+    "The model powers combine with A=AH+AM+P through the exact real-rpow addition identity. All factors used in the multiplication inequalities are explicitly nonnegative.",
+    "The final constant KF*K*KG is positive and is selected before r,s. The final inequality preserves H(s)^gamma and M(s)^eta exactly; the only exponent loss is in E0(s)."
+  ],
+  "limitations": [
+    "Static proof/API review only. Actual Lean elaboration and CI have not been run."
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "reviewer": "/root/proof_inventory",
+  "result": "passed independent full-source static review",
+  "compiled": false,
+  "edited_source": false,
+  "notes": [
+    "Read all 185 newly reconstructed lines; this review does not reuse the lost historical source review.",
+    "Checked the exact current material M and E0 exponent definitions. The derivative formula includes x=0 using the pinned rpow derivative hypothesis 1 <= 5/2.",
+    "Checked both x <= 1 and x >= 1 bounds on the first derivative term, the reciprocal bound on the second term, and the explicit constant ((5/2)*(exp(1)+1)^2+2).",
+    "The existing one-sided E0 shift estimate is logarithmically converted to a bound over the entire [min x y,max x y] segment. Absolute log K and E0Exponent y >= 1 control K even if K < 1.",
+    "The pinned convex mean-value theorem has the exact closed-segment differentiability hypotheses and the endpoint order y then x used by this source.",
+    "The final absolute-gamma argument preserves any real power gamma, including negative powers, and charges only the nonnegative E0 exponent |gamma|*B. No additional material M exponent or replacement witness is introduced."
+  ],
+  "pinned_mathlib": {
+    "commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "read_only_provider_checks": [
+      {
+        "url": "https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Analysis/SpecialFunctions/Pow/Deriv.lean",
+        "git_blob": "5c4314cbc0f51719245bc3b268948275c4a21812",
+        "provider": "Real.hasDerivAt_rpow_const"
+      },
+      {
+        "url": "https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+        "git_blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+        "provider": "Real.rpow_add_one"
+      },
+      {
+        "url": "https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Analysis/Calculus/MeanValue.lean",
+        "git_blob": "de2f76a7db82e1d758e5e4fda851f7f474e5a38a",
+        "provider": "Convex.norm_image_sub_le_of_norm_deriv_le"
+      }
+    ]
+  },
+  "limitations": [
+    "Static source/API verification only; Lean elaboration and CI have not been run."
+  ],
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialMEndpointShift.lean",
+    "sha256": "553c3658549be043206387ee34785e2b805cbb19eec1c9368e1d0b9944f1ed09",
+    "git_blob": "796e8337567171116166da62812b6e90a034a28e",
+    "lines": 185
+  },
+  "actual_project_callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialWeights.lean",
+      "sha256": "e4998fa3dc7afe79fb5fc68d4b37a9df11d8c4be01fc7a51cf8015acc214dd51",
+      "git_blob": "4788cd70cd81842326a4e1cedde510d2c302f1cd",
+      "lines": 262
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleShift.lean",
+      "sha256": "58b0285c60e26605a013ba3d580d17e37aef1fa450622b13c458227cb3aa8f74",
+      "git_blob": "e79e27788e1c853bed9950e91d7d121995ab1508",
+      "lines": 175
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialLocalComparison.lean",
+      "sha256": "f272d744ef81e02306ea075b8ca7778f0320ed845172f4b51f33243d3f2d91d2",
+      "git_blob": "dffeba7b26c79c6ad740cae118b82dde36779dc7",
+      "lines": 84
+    }
+  ]
+}

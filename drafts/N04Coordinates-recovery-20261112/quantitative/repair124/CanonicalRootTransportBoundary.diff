@@ -1,0 +1,19 @@
+--- a/src/ContinuousFlexibility/Analysis/CanonicalRootTransportBoundary.lean
++++ b/src/ContinuousFlexibility/Analysis/CanonicalRootTransportBoundary.lean
+@@ -102,6 +102,7 @@
+     change planeJacobian (K.inverseChart z i ∘ K.chart (C.referenceState, 0) i) p = _
+     rw [planeJacobian_comp (hF.differentiableAt (by simp))
+       (hG.differentiableAt (by simp)), canonicalClosed_inverse_planeJacobian hA hz hs i hq]
++    rfl
+   have href := canonicalCutPair_planeJacobian_signs hA hcut hz₀ hs₀ m
+   have hcur := canonicalCutPair_planeJacobian_signs hA hcut hz hs m
+   change 0 < planeJacobian (canonicalCurrentPoint C K z i) p
+@@ -110,7 +111,7 @@
+   · exact mul_pos (inv_pos.mpr (hcur.1 _ hx)) (href.1 _ hp)
+   · have h := mul_pos (inv_pos.mpr (neg_pos.mpr (hcur.2 _ hx)))
+       (neg_pos.mpr (href.2 _ hp))
+-    simpa only [inv_neg, neg_mul_neg] using h
++    simpa only [i, p, c, ↓reduceIte, inv_neg, neg_mul_neg] using h
+ 
+ theorem canonicalCurrentPoint_root_positive_diagonal (θ : ℝ) :
+     let i := if side then (K.cutPair m).2 else (K.cutPair m).1

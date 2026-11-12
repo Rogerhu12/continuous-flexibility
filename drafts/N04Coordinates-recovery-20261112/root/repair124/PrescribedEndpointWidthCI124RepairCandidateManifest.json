@@ -1,0 +1,12 @@
+{
+  "base_commit": "d09c88935eb44cd0dcf9f181e2eeb40811475ae2",
+  "base_tree": "29de9ff5ac364164bb92c896dd6b1a2cdda7fa1c",
+  "file": "src/ContinuousFlexibility/Analysis/PrescribedEndpointWidth.lean",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair124/PrescribedEndpointWidth.lean",
+  "before_blob": "fb42f03831d21ec0a0e803b6fcafcbde09d720f7",
+  "after_blob": "a9219180dff663e0ee1bc9125078551a99faa308",
+  "sha256": "47eaf19679711125095351bb27d7c65fc384c2a2c69d0225018a11edd0ab998c",
+  "lines": 67,
+  "scope": "CI124 only: mark the real division definition noncomputable; expose local real N before exact_mod_cast. All public type statements, formulas, imports and other proof bytes unchanged.",
+  "compiled": false
+}

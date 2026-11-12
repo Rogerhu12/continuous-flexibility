@@ -1,0 +1,44 @@
+{
+  "kind": "reconstructed_actual_material_endpoint_weight_transport",
+  "status": "UNCOMPILED_CANDIDATE",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialEndpointWeightTransport.lean",
+  "blob": "a76f8fb3a60c893939caf7ded03dfac717512e81",
+  "sha256": "0958852ab78ccab6e57d3f527fc0d636406325a7b8cadf998f934290ddb135ba",
+  "lines": 132,
+  "reconstruction_status": "New combined H/M/E0 proof; no claim that lost 145/105 source bytes were recovered.",
+  "scope": "Same actual IsMaterialData/IsAccumulatingProfile; all real H/M exponents preserved. Bounded endpointX 1 displacement controls physical weights for any two core points, including different cells. No new or relabeled host input.",
+  "statement_parameters_before_points": [
+    "gamma: real",
+    "eta: real",
+    "R: nonnegative real",
+    "L: nonnegative real"
+  ],
+  "conclusion": "exists K>0,A>=0 before r,s; H(r)^gamma*M(r)^eta*E0(r)^R <= K*(H(s)^gamma*M(s)^eta*E0(s)^A)",
+  "dependencies": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialGlobalEndpointModels.lean",
+      "blob": "94856c92ba535db174db559d1ab2ddacdf77dfd5",
+      "sha256": "2296624a6ce1501048acda5f6ba6a6779d9491bcccd8653db158d8ef9120b4fa"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialMEndpointShift.lean",
+      "blob": "796e8337567171116166da62812b6e90a034a28e",
+      "sha256": "553c3658549be043206387ee34785e2b805cbb19eec1c9368e1d0b9944f1ed09"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialWeightShift.lean",
+      "blob": "7ab514c2a6f5af51a8bfcf2c89398cd387788c2e",
+      "sha256": "e46a00bf0a3bce8349e0362807495da8499023d4ad82d2c7a3122e25eb70be6c"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleShift.lean",
+      "blob": "e79e27788e1c853bed9950e91d7d121995ab1508",
+      "sha256": "58b0285c60e26605a013ba3d580d17e37aef1fa450622b13c458227cb3aa8f74"
+    }
+  ],
+  "public_theorems": [
+    "material_global_H_M_E0_rpow_bounded_X_shift"
+  ],
+  "compiled": false,
+  "checkout_index_refs_changed": false
+}

@@ -1,0 +1,20 @@
+{
+  "status": "independently reviewed; UNCOMPILED and not installed",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OneSidedLogAngularJets.lean",
+    "blob": "7b267aad8e68ce70d6c7cb21e07f4aaf3e5c56ca",
+    "sha256": "fc60ae2676d6df6025edf532830bba3a886fe2b9581432d8b4c8e4a0d79e36e1",
+    "lines": 91
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OneSidedLogAngularJetsCandidateManifest.json",
+    "sha256": "83eb05ca25bf19b94b38418b14f232464bed0ed98bb68b0a0930bed144663136"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed-reviews/OneSidedLogAngularJetsIndependentReview.json",
+    "sha256": "a64f95aa8e1e06292d09eb64477d527cac95815fdfbc02805b0695cdb9261bd3"
+  },
+  "reviewer": "/root",
+  "compiled": false,
+  "existing_sources_modified": false
+}

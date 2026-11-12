@@ -1,0 +1,79 @@
+{
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed independent full-source static review",
+  "compiled": false,
+  "edited_source": false,
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RadialCoefficientMaterialInverse.lean",
+    "blob": "4aced4b7ac973d750dcf4c206c78fea2b9322150",
+    "sha256": "a28a6319b276e4ad7b078b844ae122d9fa1b2bd8fffcabce6ba1b914185f7221",
+    "lines": 145
+  },
+  "callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ReturnCorrectionVelocityBounds.lean",
+      "blob": "aa8be5bee1da32b4dd3c1607cb0ff564f2f3711f",
+      "sha256": "9d923982708c79ceec3ed3a4a79a078d8c3cf5502e0198916b09d023ac9ef40f",
+      "lines": 139
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01ReferenceOpticalCollars.lean",
+      "blob": "1f5847b70eefda6e0665e3101b24de4671aa53aa",
+      "sha256": "3b61562bde1d81e3c2361b6d33b66417dc6d47f1287248df49805cc20bdcb283",
+      "lines": 195
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01ControlCellBounds.lean",
+      "blob": "439483adedbf9a80843479f92faacee072d3317f",
+      "sha256": "c1ba60a898e98485be3923dc0b5cb78ce55fe922857c8bbb84e4d456593c53ba",
+      "lines": 212
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "blob": "97aa466ceee79bd9e21887d8948042478820ca79",
+      "sha256": "d42c9da38be0475688417eb1b9d2abeae2f0f6c29009ddfde424fc654c560520",
+      "lines": 1430
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Radial.lean",
+      "blob": "473c530a1de50c672f2e54908d374f624f5955b0",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352",
+      "lines": 874
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Scalar/Linearization.lean",
+      "blob": "453262b76f1edee0f1e9fd3ea22424e2d55da967",
+      "sha256": "dd3c6eda3a906801e19df493bc436d62d6b2e29a3d4fa04f7608456b9b79e7bb",
+      "lines": 402
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Scalar/Determinant.lean",
+      "blob": "fe0c72f6a7eb6c2251cb9c850c51a114f24d2b67",
+      "sha256": "ee227d182326377abc45e2f81f083bc63403cf9d3af76d028f7d98dcccc0f436",
+      "lines": 202
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/MaterialSampleRadialPolynomial.lean",
+      "blob": "06106cdba67bb37b503837a23da3911b670a77ce",
+      "sha256": "3e73e356a44a95ebefb4207a9aa54f418aa9d705e3c12fb4d24232363ba11582",
+      "lines": 76
+    }
+  ],
+  "fixed_pin_api": {
+    "commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "url": "https://raw.githubusercontent.com/leanprover-community/mathlib4/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Topology/Order/OrderClosed.lean",
+    "declaration": "le_on_closure",
+    "verified": "Implicit binder names f/g/s, inequality-on-open argument, two ContinuousOn closure arguments, and implicit point followed by closure membership exactly match this source."
+  },
+  "checks": [
+    "Read all 145 lines and the actual N01 ratio clause, scalar coefficient formula, negative component geometry, reference inverse first-jet bound and sampled radial-power theorem.",
+    "The existing N01 lower ratios give W>=w/2 and Q>=7W/8, hence Q>=w/4. For 1/2<=d<=3/2, d*sqrt(d) is positive and at most four, giving w/16<=Q/(d*sqrt(d)). The actual coefficient unfolds to exactly this quotient.",
+    "The hcoeff tuple projections are the lower bounds in the actual tenth N01 conjunct; the proof mirrors the installed nine-times-profile upper estimate with the correct lower coordinates.",
+    "The inverse-profile bound is first used on the genuine host cell for interior points. Continuity and positivity on the physical radial core extend that same bound to both component endpoints via le_on_closure; endpoint membership in the cell itself is not assumed.",
+    "Taking reciprocals uses the positive lower bound w/16, so the inverse coefficient is at most 16/w. The sampled E0 power conversion keeps the actual containing host j unchanged.",
+    "K=16*A*Q and P>=0 are fixed before z, m, j and the point. N03 uses its exact first radial-coefficient identity and retains the same D/T/S/C/R/L and neighborhood; no Morse or host-existence hypothesis is introduced."
+  ],
+  "limitations": [
+    "Static proof/API review only; no Lean elaboration or CI was run."
+  ]
+}

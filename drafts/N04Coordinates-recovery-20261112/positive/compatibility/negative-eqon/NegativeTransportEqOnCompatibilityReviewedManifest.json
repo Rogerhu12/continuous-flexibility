@@ -1,0 +1,86 @@
+{
+  "kind": "held_negative_transport_eqon_compatibility_candidate",
+  "status": "HELD_UNCOMPILED_STATIC_DELTA_REVIEWED",
+  "finding": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/HeldNegativeEqOnPointFinding.json",
+    "sha256": "10aef742cb7f9875e22f5362513a054b8dd8a9f754184fe7fd1ade8892f06e91"
+  },
+  "sources": [
+    {
+      "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/negative-eqon/CanonicalWholeNegativeTransport.lean",
+      "module_path": "src/ContinuousFlexibility/Analysis/CanonicalWholeNegativeTransport.lean",
+      "before_source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/CanonicalWholeNegativeTransport.lean",
+      "before": {
+        "git_blob": "429c2442678eb5094e0fc65718cff8f05b084f27",
+        "sha256": "2ef43db01541e6e9e518b1b987d4e9d72cc158e51ab8d5a56893d42e8d15c3f1",
+        "lines": 174
+      },
+      "after": {
+        "git_blob": "9c80ce0926164854906280ff067e64cf7e49758f",
+        "sha256": "0bef20fc204519001f22a8387d08ec8ff59b6be0b513129a43bcda751214120b",
+        "lines": 174
+      },
+      "base_copy": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/negative-eqon/CanonicalWholeNegativeTransport.lean.base.txt",
+      "diff_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/negative-eqon/CanonicalWholeNegativeTransport.lean.diff",
+      "exact_replacements": [
+        {
+          "before": "split_ifs <;> exact hF _ p hp",
+          "after": "split_ifs <;> exact hF _ hp"
+        },
+        {
+          "before": "exact closedComponentField_eqOn hF q hq",
+          "after": "exact closedComponentField_eqOn hF hq"
+        },
+        {
+          "before": "rw [hτ side p hp]",
+          "after": "rw [hτ side hp]"
+        },
+        {
+          "before": "rw [hτ side x hx]",
+          "after": "rw [hτ side hx]"
+        },
+        {
+          "before": "(closedComponentField_eqOn hq p hpin).symm",
+          "after": "(closedComponentField_eqOn hq hpin).symm"
+        }
+      ]
+    },
+    {
+      "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/negative-eqon/CanonicalWholeNegativeBoundary.lean",
+      "module_path": "src/ContinuousFlexibility/Analysis/CanonicalWholeNegativeBoundary.lean",
+      "before_source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/CanonicalWholeNegativeBoundary.lean",
+      "before": {
+        "git_blob": "321249b424b451e986bc0356d668e183703cd2ff",
+        "sha256": "54b9aac3ba40d51a5a2bc8d69c4eb4870c9d79b4ca7af283181753ca7aa88a79",
+        "lines": 78
+      },
+      "after": {
+        "git_blob": "068acb0fcb71a3b64c16004ceb7d8ffb20f1ac1d",
+        "sha256": "1683fdf85217d00d1dae1c3e3f0f57c37dd2cd65ccea9a611ffc7c70f7853a1c",
+        "lines": 78
+      },
+      "base_copy": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/negative-eqon/CanonicalWholeNegativeBoundary.lean.base.txt",
+      "diff_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/negative-eqon/CanonicalWholeNegativeBoundary.lean.diff",
+      "exact_replacements": [
+        {
+          "before": "(canonicalWholeNegativeTransport_eq_travel hT hS hN hfield e hz hs m).1 p hpin",
+          "after": "(canonicalWholeNegativeTransport_eq_travel hT hS hN hfield e hz hs m).1 hpin"
+        }
+      ]
+    }
+  ],
+  "proof_change": "Remove the six explicit point arguments from Set.EqOn applications; each point is inferred from the unchanged domain membership proof. Explicit point binders in the smooth-positive theorem are retained.",
+  "public_and_private_headers_imports_options": "unchanged; exact inverse of all six literal replacements recovers both originals byte for byte",
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/NegativeTransportEqOnCompatibilityIndependentReview.json",
+    "sha256": "3f5a1bbf62d5588d326a29a238b89f052ac5c076f667e9354826297ea9966332"
+  },
+  "no_compilation": true,
+  "original_sources_modified": false,
+  "checkout_index_refs_modified": false,
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/negative-eqon/NegativeTransportEqOnCompatibilityCandidateManifest.json",
+    "sha256": "477605d002c0a7f525133f7fe253dcc5b31ebee5efa8d9314b25f183e84f8cb6"
+  },
+  "parent_status": "Parent authorized freezing this reviewed six-replacement delta; current whole-source re-read by parent remains separate."
+}

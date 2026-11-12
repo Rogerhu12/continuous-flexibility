@@ -1,0 +1,44 @@
+{
+  "kind": "held_positive_polynomial_candidates",
+  "status": "HELD_UNCOMPILED_INDEPENDENTLY_STATIC_REVIEWED",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/EndpointFiberPolynomialMargins.lean",
+      "git_blob": "a146711e1499655e0bc601feb55893808b379dcd",
+      "sha256": "c9b5d85d1515f1994b9b47fdc241bbea4101fcf452a9c1aae2b233f4da170c2b",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/OneSidedWholeComponentTransportPolynomial.lean",
+      "git_blob": "c1a0998de3bebf4fbf4fcf10ec0e871e47e8247e",
+      "sha256": "0ae780cb662e8ecff763a06c3b4765773fa2b388a2d659bd277c1e969eaf4de9",
+      "lines": 185
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/WholePositiveTransportPolynomialAssembly.lean",
+      "git_blob": "38183c65d2553465ee8e4c47b743a44b73ee2b7e",
+      "sha256": "06d270ae78749525cfe1fecdf6707bc9af3bdcedfcaf36d1399e4fc4f0759cec",
+      "lines": 196
+    }
+  ],
+  "compatibility_check": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/RemainingPositivePolynomialReconstructedCalleeCompatibility.json",
+    "sha256": "16b30f990bd77f5e684c48a000070c87ea95944b7d64f65435fd647a0d6ecae2"
+  },
+  "source_changes_this_check": 0,
+  "final_target_or_global_transport_assumed": false,
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/RemainingPositivePolynomialCandidateManifest.json",
+    "sha256": "ddc8b73e9a72eeca46247804c4509a67016b675aff7c15d78f3a86e565f7b11c"
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/EndpointFiberPolynomialMarginsIndependentReview.json",
+      "sha256": "4b53ea8302fa4281ca332e2829f276868d8c7d4770441ee5406c68591f9a0e8a"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/PositiveOneSidedPolynomialAssemblyIndependentReview.json",
+      "sha256": "acca1390596bccd898ab6e05f7be7e45b25c426075b93f5bcf979113c87b147d"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed independent full-source static review",
+  "compiled": false,
+  "edited_source": false,
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/EndpointHeightPolynomialEnvelope.lean",
+    "blob": "25ffa3beb3bd3272b28d2925608e2da2e0a13546",
+    "sha256": "6dd7f2b227919326c4e5c430474bd4d0d9365b66150c2f7817a612c7e89fed7e",
+    "lines": 113
+  },
+  "callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/EndpointTaylorPolynomialEnvelope.lean",
+      "blob": "900c3e8c443e8a073425dcc296092209e5cf453b",
+      "sha256": "c39d2124a408c68094fc9ca9b1cb448da1add16a210ba9b557593be506251240",
+      "lines": 138
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ExpPolynomialEnvelope.lean",
+      "blob": "2dc311c8fad74e6a15ccd2a181afa8b39b9d7092",
+      "sha256": "86c0ec3bd35ade371e0960659f21060c7398df4eecfc6ce57d3249f23f75702b",
+      "lines": 72
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/EndpointHeightValueBounds.lean",
+      "blob": "e192a07ef9476bd6de179deb4782a7980b6aba66",
+      "sha256": "fa5dafb25717276bf70b6c7a7e55fda40335dd2aa678de6d81cd7d34f12d71b9",
+      "lines": 98
+    }
+  ],
+  "checks": [
+    "Read the full 113-line source and all three exact envelope/amplitude callees.",
+    "The smallness parameter M0 is used only for (n+1)*M0*delta<=1 and the actual amplitude. The larger M independently controls delta inverse, all coefficient angular jets and H; no incompatible n*M*delta<=1 condition is introduced.",
+    "The actual exponent E is the original endpointTaylorCorrection. The literal constructed Q is exp(E), and its reciprocal is exp(-E); both function identities were checked against the actual positiveHeightTaylorInterpolation definition.",
+    "Taylor gives B=CT*M^(N+1)>=1 for all needed positive-order jets. Negating E preserves their norms, so the same B is valid for the inverse.",
+    "Exp uses the actual amplitude exp(2)*H^2, never exp(M) or exp(B). H<=M and B^N produce exponent (N+1)*N+2.",
+    "The coefficient 1+CE*exp(2)*CT^N is fixed before M/H/M0/delta/l/r/q and is at least one. The argument includes N=0 and requires no physical gap beyond what the numerical amplitude theorem uses."
+  ],
+  "limitations": [
+    "Static review only; no elaboration or CI run."
+  ]
+}

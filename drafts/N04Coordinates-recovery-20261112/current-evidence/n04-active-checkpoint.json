@@ -1,21 +1,21 @@
 {
-  "head": "4761192340a1d84d7d1efbfd5390ca038ac127e1",
-  "tree": "fa049a26c73d4b0a0ebd3ede0a052680f4331ae5",
+  "head": "6a2609c3dbd1e5600eee05b70ffb82b738b1e915",
+  "tree": "7c0c3ff810559c7c44127d46bba89e8aacc42a34",
   "current_ci": {
-    "label": 123,
-    "pushed": "2026-11-12 08:24:22 UTC",
-    "first_check_not_before": "2026-11-12 08:29:22 UTC",
+    "label": 125,
+    "pushed": "2026-11-12 08:44:10 UTC",
+    "first_check_not_before": "2026-11-12 08:49:10 UTC",
     "status": "pending",
-    "added_lean_since_last_green": 974,
-    "plan": "n04-ci123-plan.json"
+    "added_lean_since_last_green": 1739,
+    "plan": "n04-ci125-plan.json"
   },
   "last_full_green": {
-    "sha": "241f2cef3391fbcc213fca41a0a0c29714836bdb",
-    "tree": "edc1326287749a15e743a8f5a394cdeefaf455b2",
-    "run": 43179197248,
-    "job": 131050747642,
-    "source_all_compiled": 3156,
-    "source_all_total": 3158,
+    "tree": "fa049a26c73d4b0a0ebd3ede0a052680f4331ae5",
+    "run": 43182664029,
+    "job": 131062189468,
+    "source_all_compiled": 3164,
+    "source_all_total": 3166,
+    "build_jobs": 7148,
     "blueprint_proved": 35,
     "blueprint_total": 42,
     "open": 7,
@@ -28,11 +28,11 @@
       "N06",
       "N07a"
     ],
-    "log": "n04-ci-120.log",
-    "build_jobs": 7140,
-    "checked_at": "2026-11-12T08:05:29.551235+00:00",
-    "receipt": "n04-ci-120-green-receipt.json",
-    "receipt_sha256": "d75317c952089e7b1356b7c362ae0e79ea3c52069d9691882ab83746a38eee16"
+    "log": "n04-ci-123.log",
+    "checked_at": "2026-11-12T08:30:24.515449+00:00",
+    "sha": "4761192340a1d84d7d1efbfd5390ca038ac127e1",
+    "receipt": "n04-ci-123-green-receipt.json",
+    "receipt_sha256": "b21fec059516fba8cc3d9d4c39a8ae80d928765358aee9db84c6fd3867c8e5e7"
   },
   "failed_ci": [
     {
@@ -113,6 +113,21 @@
       "source_all_total": 3166,
       "checked_at": "2026-11-12T08:22:55.023466+00:00",
       "head": "0f4cf5b3ca51175a295ae60676833b2435809dca"
+    },
+    {
+      "label": 124,
+      "pushed": "2026-11-12 08:34:54 UTC",
+      "first_check_not_before": "2026-11-12 08:39:54 UTC",
+      "status": "failure",
+      "added_lean_since_last_green": 1733,
+      "plan": "n04-ci124-plan.json",
+      "run": 43184125449,
+      "job": 131066987569,
+      "log": "n04-ci-124.log",
+      "source_all_compiled": 3168,
+      "source_all_total": 3180,
+      "checked_at": "2026-11-12T08:41:13.882622+00:00",
+      "head": "d09c88935eb44cd0dcf9f181e2eeb40811475ae2"
     }
   ],
   "recovery": {
@@ -144,6 +159,31 @@
         "N07a"
       ],
       "log": "n04-ci-114.log"
+    },
+    {
+      "sha": "241f2cef3391fbcc213fca41a0a0c29714836bdb",
+      "tree": "edc1326287749a15e743a8f5a394cdeefaf455b2",
+      "run": 43179197248,
+      "job": 131050747642,
+      "source_all_compiled": 3156,
+      "source_all_total": 3158,
+      "blueprint_proved": 35,
+      "blueprint_total": 42,
+      "open": 7,
+      "open_nodes": [
+        "N01c",
+        "N02N03",
+        "N04b",
+        "N04Coordinates",
+        "N05",
+        "N06",
+        "N07a"
+      ],
+      "log": "n04-ci-120.log",
+      "build_jobs": 7140,
+      "checked_at": "2026-11-12T08:05:29.551235+00:00",
+      "receipt": "n04-ci-120-green-receipt.json",
+      "receipt_sha256": "d75317c952089e7b1356b7c362ae0e79ea3c52069d9691882ab83746a38eee16"
     }
   ]
 }

@@ -1,0 +1,51 @@
+{
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed independent full-source static review",
+  "compiled": false,
+  "edited_source": false,
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveCollarPolynomialEnvelope.lean",
+    "blob": "72eae0dc47368301c6e04bd5711e6c8f08af8143",
+    "sha256": "826dd21d5fd3b03e15f66ae67684c031e6ed61ee9d84bb14abacdba89a3d560d",
+    "lines": 176
+  },
+  "callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/EndpointFiberPolynomialMargins.lean",
+      "blob": "a146711e1499655e0bc601feb55893808b379dcd",
+      "sha256": "c9b5d85d1515f1994b9b47fdc241bbea4101fcf452a9c1aae2b233f4da170c2b",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/PrescribedEndpointWidth.lean",
+      "blob": "fb42f03831d21ec0a0e803b6fcafcbde09d720f7",
+      "sha256": "51240d5236188f6e4c41caa5289a0fc597f1d21a5344c25897a3bb5be22557a3",
+      "lines": 63
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/EndpointAngularInterpolation.lean",
+      "blob": "0009c60442714e1d5191075b8cb3a74e19a63378",
+      "sha256": "6115ae397369477e62a73a2d85ebb8d8dba434065b4342459e1caba58bb0eab7",
+      "lines": 85
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OneSidedEndpointHeight.lean",
+      "blob": "e468cb78b23e667311524d42fb41139f633a2da2",
+      "sha256": "29cbabf52918e73745455ed4f8e4a868f36dc5106558681a40492a52d4ee5258",
+      "lines": 127
+    }
+  ],
+  "checks": [
+    "Read all 176 source lines and the actual displayed width definitions and three reciprocal-envelope callees.",
+    "The positive core helper uses c-l and r-d to control the full span, their minimum, and min((r-l)/4,min(c-l,r-d)); the reciprocal inequalities have the correct order and positive denominators.",
+    "The angular bound substitutes Mslope=0 and m=1 into the actual prescribed width. Its constant terms total 10, and the full coefficient is 16+8*(n+1), multiplying U^2.",
+    "The height width is the exact reciprocal of rho^-1+1+(n+1)*(Clog*H^(2n+1)+1); rho^-1<=4U gives the displayed coefficient 5+(n+1)*(Clog+1). The n=0 case remains valid.",
+    "W=C_sigma*U^(degree+1) simultaneously controls M_sigma, the reciprocal radial slope and the geometric margins. Applying the actual fiber-width bound gives exponent 2*(degree+1), with coefficient (24+16*(n+1))*C_sigma^2.",
+    "The actual determinant lower bound remains positive and its reciprocal is controlled by 8*U^2 via the genuine reference-mass lower estimate; it is not an assumed output bound.",
+    "The four nested maximum inequalities were checked against A=max(1,max(Aa,max(Af,max(Ah,8)))). The common exponent max(2*(degree+1),2*n+1) dominates both two and the height exponent.",
+    "A and outDegree are chosen before all radii, state-family envelopes and numerical variables. The source is a numerical estimate for the actual stored widths and does not introduce a bound on a future global transport."
+  ],
+  "limitations": [
+    "Static proof/API review only; no Lean elaboration or CI was run."
+  ]
+}

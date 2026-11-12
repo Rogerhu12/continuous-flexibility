@@ -1,0 +1,49 @@
+{
+  "label": 125,
+  "base_commit": "d09c88935eb44cd0dcf9f181e2eeb40811475ae2",
+  "base_tree": "29de9ff5ac364164bb92c896dd6b1a2cdda7fa1c",
+  "tree": "7c0c3ff810559c7c44127d46bba89e8aacc42a34",
+  "main": "bb96c26fa8f49615fd0bc6848b57922832088a2b",
+  "files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalRootTransportBoundary.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair124/CanonicalRootTransportBoundary.lean",
+      "before_blob": "edf68fa478b8d3cec12962651a82619815c0687d",
+      "after_blob": "c68a526e559104ca8b71c64c708ee8526bcd67b1",
+      "sha256": "061f9debff039902b318f9adb1478337bc0c0f00936a73a02314db9b8836eb8e",
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair124/CanonicalRootTransportBoundaryCI124IndependentReview.json",
+        "sha256": "2211ddd3f2f99282e2f95ff94d7c0625647a7c4171da349e053427690a14bb2e"
+      }
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/OneSidedBoundaryTaylorRepresentative.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair124/OneSidedBoundaryTaylorRepresentative.lean",
+      "before_blob": "d52990e7552f9bb91cae5339da20fbfdf10e6827",
+      "after_blob": "3a3cfa0ce1db7be51420bcaa2ceb6dedd4e86855",
+      "sha256": "50d11b8070524604511c037a38d04be1517f5802548d963ac93184c165787b76",
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair124/OneSidedBoundaryTaylorRepresentativeCI124IndependentReview.json",
+        "sha256": "bf2cc0949eaa48e42c4bb73d156ef59b4f5eb2fb3dca122566ec926b59bbfc63"
+      }
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/PrescribedEndpointWidth.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair124/PrescribedEndpointWidth.lean",
+      "before_blob": "fb42f03831d21ec0a0e803b6fcafcbde09d720f7",
+      "after_blob": "a9219180dff663e0ee1bc9125078551a99faa308",
+      "sha256": "47eaf19679711125095351bb27d7c65fc384c2a2c69d0225018a11edd0ab998c",
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/CI124PrescribedEndpointWidthIndependentReview.json",
+        "sha256": "590a82b26301be39ac87c2a6af3731ecb238375401a658dee56841481bfe0a10"
+      }
+    }
+  ],
+  "last_full_green": "4761192340a1d84d7d1efbfd5390ca038ac127e1",
+  "added_lean": 1739,
+  "deleted_lean": 0,
+  "scope": "Only the exact CI124 errors and the identical zero-order immediate consumer. Parent and Blueprint statements unchanged.",
+  "payload": "/workspace/scratch/bbbea77e4163/n04-ci125-payload.json",
+  "root_imports": 3126,
+  "source_modules": 3180
+}

@@ -1,0 +1,46 @@
+{
+  "kind": "reconstructed_actual_material_endpoint_weight_chain_reviewed_manifest",
+  "owner": "/root/quantitative_route",
+  "status": "REVIEWED_UNCOMPILED; scratch only; not installed",
+  "files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialMEndpointShift.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialMEndpointShift.lean",
+      "blob": "796e8337567171116166da62812b6e90a034a28e",
+      "sha256": "553c3658549be043206387ee34785e2b805cbb19eec1c9368e1d0b9944f1ed09",
+      "lines": 185,
+      "candidate_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialMEndpointShiftReconstructionCandidateManifest.json",
+        "sha256": "8f16f5ba9f962ddf10630f46d8ef48e7f7b4a151c40d8619f5bbe48666fd6dc5"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/MaterialMEndpointShiftReconstructionIndependentReview.json",
+        "sha256": "7c41a02430e0ae6175a4ec00c86cc302271b5ed95a58dec4d2688cba9098baf5"
+      },
+      "status": "REVIEWED_UNCOMPILED",
+      "reconstruction": "new source; not a claim of byte recovery of the lost historical source"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialEndpointWeightTransport.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialEndpointWeightTransport.lean",
+      "blob": "a76f8fb3a60c893939caf7ded03dfac717512e81",
+      "sha256": "0958852ab78ccab6e57d3f527fc0d636406325a7b8cadf998f934290ddb135ba",
+      "lines": 132,
+      "candidate_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialEndpointWeightTransportReconstructionCandidateManifest.json",
+        "sha256": "b38b3d226cb25aff27642d3da475bf6627bb33513e22e19f934deba8dabd30a3"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/MaterialEndpointWeightTransportReconstructionIndependentReview.json",
+        "sha256": "3be14105f1c1dce928993be2da2fcfc580c31fd90fafa297e41009bc4bb6a9ed"
+      },
+      "status": "REVIEWED_UNCOMPILED",
+      "reconstruction": "new source; not a claim of byte recovery of the lost historical source"
+    }
+  ],
+  "source_lines": 317,
+  "scope": "Same actual material witness; bounded endpointX displacement; preserve arbitrary real H and M exponents and charge only nonnegative E0 powers. No change of host, cell, T or Through03 witness.",
+  "dependencies": "Exact candidate manifests bind the current actual provider sources and the independently reviewed global endpoint models.",
+  "compiled": false,
+  "checkout_index_refs_authority_or_plan_changed": false
+}

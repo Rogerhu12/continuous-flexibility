@@ -1,0 +1,30 @@
+{
+  "kind": "fresh_independent_full_source_review",
+  "reviewer": "/root",
+  "compiled": false,
+  "sources": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/negative-eqon/CanonicalWholeNegativeTransport.lean",
+      "blob": "9c80ce0926164854906280ff067e64cf7e49758f",
+      "sha256": "0bef20fc204519001f22a8387d08ec8ff59b6be0b513129a43bcda751214120b",
+      "lines": 174
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/negative-eqon/CanonicalWholeNegativeBoundary.lean",
+      "blob": "068acb0fcb71a3b64c16004ceb7d8ffb20f1ac1d",
+      "sha256": "1683fdf85217d00d1dae1c3e3f0f57c37dd2cd65ccea9a611ffc7c70f7853a1c",
+      "lines": 78
+    }
+  ],
+  "checks": [
+    "Read the complete 174-line and 78-line compatible sources, after the earlier full review of CanonicalActualEndpointFields222 and its actual travel and closed-root providers.",
+    "The single midpoint selector retains the exact left and right ordinary root germs; in the open component both stored formulas equal the same actual travel map, including the artificial cut.",
+    "Closed regularity requires ordinary infinite differentiability only at the chosen true endpoint and genuine smoothness of the common interior map; no common all-order collar is extracted.",
+    "The actual height ratio is positive on the closed component using the same root values and common interior travel ratio.",
+    "Root radial values come from the actual endpoint theorem. Closed-strip range follows from those two genuine roots and the open travel MapsTo theorem.",
+    "The six EqOn calls correctly use implicit points. Explicit point binders of the interior smooth-positive theorem remain explicit. Public signatures and mathematical hypotheses are unchanged from the recovered construction."
+  ],
+  "result": "pass static mathematical and current-interface review",
+  "checked_at": "2026-11-12T08:28:09.821746+00:00",
+  "provenance": "Fresh complete read of the exact source; not a reconstruction of a missing historical receipt."
+}

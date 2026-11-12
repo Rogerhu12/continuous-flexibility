@@ -1,0 +1,22 @@
+{
+  "kind": "fresh_independent_full_source_review",
+  "reviewer": "/root",
+  "compiled": false,
+  "sources": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/PrescribedEndpointWidth.lean",
+      "blob": "fb42f03831d21ec0a0e803b6fcafcbde09d720f7",
+      "sha256": "51240d5236188f6e4c41caa5289a0fc597f1d21a5344c25897a3bb5be22557a3",
+      "lines": 63
+    }
+  ],
+  "checks": [
+    "Read all 63 lines, including the full finite minimum definition and all six margin proofs.",
+    "The actual width is a finite minimum of strictly positive expressions. No nonconstructive compactness radius is used.",
+    "Half-collar inclusion, unit bound, strict component separation, Taylor slope margin and integral mass margin follow from the exact selected minimum and nonnegative raw envelopes.",
+    "One numerical theorem is shared by both physical endpoints; the width inverse is not yet bounded by this file."
+  ],
+  "result": "pass static mathematical and current-interface review",
+  "checked_at": "2026-11-12T08:28:09.855917+00:00",
+  "provenance": "Fresh complete read of the exact source; not a reconstruction of a missing historical receipt."
+}

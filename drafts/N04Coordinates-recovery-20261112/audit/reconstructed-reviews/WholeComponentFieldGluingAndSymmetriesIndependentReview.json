@@ -1,0 +1,37 @@
+{
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed independent complete-source review with the two explicit MapsTo point repairs",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/WholeComponentFieldGluing.lean",
+      "blob": "e705f35a0ca0d1a422c0ce742fb01cc8352549ae",
+      "sha256": "0cacf73ab45c4928bd27866acbeb120766875c873384c71fed9227cf86626dbd",
+      "lines": 154
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/WholeComponentFieldSymmetries.lean",
+      "blob": "3f9278b79b90cf1a4ae572930dff449e173ba43c",
+      "sha256": "fe7fa1521b924abedbed72caf0a1e62a0666ec116195c0345c9a7c0e0eae302d",
+      "lines": 68
+    }
+  ],
+  "original_symmetry_source_preserved": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/WholeComponentFieldSymmetries.lean",
+    "blob": "bf1b39f948e754732133f834dabb93694213916a",
+    "sha256": "1a69e8aaa3f6d8b6530a474ccbfc583203f098bb9ec14c8136d176801ea101cc",
+    "lines": 68
+  },
+  "checks": [
+    "Read the complete current gluing and symmetry sources and the actual radius selector, root-neighbor and finite radial-gluing interfaces.",
+    "At each negative root the genuine neighboring positive component supplies an open two-sided strip. The zero-th ordinary jet yields the actual shared value at the selected root, and finite full jets through n give the required radial piecewise matching.",
+    "The two Boolean orientations put the correct negative and positive fields on their respective closed half-strips. Selector equality at the interface uses the genuine closed-negative value and the zero-order matching equation.",
+    "The whole-component cover reduces every annular point to a negative interior, a true shared root, or a positive interior. Ordinary ContDiffAt n follows locally and hence gives ContDiffOn n on the actual annular domain.",
+    "The finite radial adapter has domain PolarPoint at universe zero; the corrected finite gluing codomain universe therefore supports the arbitrary normed codomain used here.",
+    "Radius-preserving actions keep both selector predicates and their choice values unchanged; component equivariance transfers to the stored field.",
+    "The maps-to proof uses the actual component cover and each actual component range. Its two MapsTo applications now explicitly fix x:=p, removing the underconstrained angular-coordinate risk identified during this review.",
+    "The symmetry candidate differs from the preserved original by exactly those two explicit point annotations; all theorem headers, mathematical assumptions and remaining proof bytes are unchanged."
+  ],
+  "compiled": false,
+  "source_modified_by_reviewer": false,
+  "checkout_index_refs_modified": false
+}

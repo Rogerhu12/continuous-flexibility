@@ -1,0 +1,52 @@
+{
+  "kind": "n04_ci124_owned_proof_repair_candidate",
+  "status": "candidate_pending_independent_review_UNCOMPILED",
+  "author": "/root/audit_coordinates",
+  "base_commit": "d09c88935eb44cd0dcf9f181e2eeb40811475ae2",
+  "base_tree": "29de9ff5ac364164bb92c896dd6b1a2cdda7fa1c",
+  "path": "src/ContinuousFlexibility/Analysis/OneSidedBoundaryTaylorRepresentative.lean",
+  "before_blob": "d52990e7552f9bb91cae5339da20fbfdf10e6827",
+  "after_blob": "3a3cfa0ce1db7be51420bcaa2ceb6dedd4e86855",
+  "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair124/OneSidedBoundaryTaylorRepresentative.lean",
+  "source_sha256": "50d11b8070524604511c037a38d04be1517f5802548d963ac93184c165787b76",
+  "source_lines": 130,
+  "base_path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair124/OneSidedBoundaryTaylorRepresentative.base.lean.txt",
+  "base_sha256": "9cdf2daa6c333d9a5405563850c93275465712737ae661b8c7c1bab583953d97",
+  "diff_path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair124/OneSidedBoundaryTaylorRepresentative.diff",
+  "diff_sha256": "8ef0411f1162dc47059e41ea9c49ba3b09c41eee0bb923392d0458ba71d667f6",
+  "cached_diagnostics": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-124-errors.json",
+    "sha256": "d4ac7eee18000a30a3fde0ca539510b2b089374a0653777bb16d86f69548855c",
+    "diagnostic_lines": [
+      77,
+      107
+    ]
+  },
+  "changes": [
+    {
+      "base_line": 77,
+      "reason": "Reduce the residual if True in the zero-order branch, exactly matching the cached mismatch."
+    },
+    {
+      "base_line": 105,
+      "reason": "Fix the actual affine angle map to fun t : ℝ => t + Real.pi before smoothness and equation elaboration; eliminates the unconstrained offset shown in the cached mismatch."
+    },
+    {
+      "base_line": 110,
+      "reason": "Apply the same explicit ite reduction to the same zero-order conditional in the immediate consumer; no new mathematical step."
+    }
+  ],
+  "verification": {
+    "actual_git_base_exact": true,
+    "reverse_replacements_restore_exact_base": true,
+    "public_declaration_count": 8,
+    "public_complete_headers_byte_identical": true,
+    "imports_options_namespace_byte_identical": true,
+    "default_heartbeat_unchanged": true,
+    "new_public_declarations": [],
+    "new_private_declarations": [],
+    "no_new_hypotheses": true,
+    "no_compilation_or_checkout_index_refs_changes": true
+  },
+  "independent_review": null
+}
