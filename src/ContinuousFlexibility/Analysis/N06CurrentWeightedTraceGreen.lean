@@ -106,7 +106,7 @@ theorem N06CurrentHeightTestTraces.weighted_radial_slice_green
         v (K.right m) * P.radial (K.right m, θ)) -
       a (K.left m) * (P.value (K.left m, θ) * deriv v (K.left m) -
         v (K.left m) * P.radial (K.left m, θ)) := by
-  have hab : K.left m ≤ K.right m := (h04.2.2.2.1 m).2.1.le
+  have hab : K.left m ≤ K.right m := (h04.1.referenceBounds m).2.1.le
   have hvalAC := n06_lipschitz_radial_slice_ac P.value_lipschitz θ (K.left m) (K.right m)
   have hradAC := n06_lipschitz_radial_slice_ac P.radial_lipschitz θ (K.left m) (K.right m)
   have haAC : AbsolutelyContinuousOnInterval a (K.left m) (K.right m) :=
@@ -161,7 +161,7 @@ theorem N06CurrentHeightTestTraces.tensor_weighted_radial_green
           v (K.right m) * P.radial (K.right m, θ)) -
         a (K.left m) * (P.value (K.left m, θ) * deriv v (K.left m) -
           v (K.left m) * P.radial (K.left m, θ))) := by
-  have hab : K.left m ≤ K.right m := (h04.2.2.2.1 m).2.1.le
+  have hab : K.left m ≤ K.right m := (h04.1.referenceBounds m).2.1.le
   have hW := n06_current_canonicalHeight_memLp h04 hz hs m hφ.continuous.continuousOn
   have hfluxW := n06_currentHeight_weighted_radial_memLp h04 hz hs hφ ha (m := m)
   have hI : Integrable (fun p : PolarPoint =>

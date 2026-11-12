@@ -41,8 +41,7 @@ theorem n06_currentRemainderSource_full_pairing
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (u : CanonicalUnknown S K) (F : CanonicalSequence S K)
     {J : Set ℝ}
-    (hfinite : {m : ℕ |
-      (Ioo (K.physicalLeft m) (K.physicalRight m) ∩ J).Nonempty}.Finite)
+    (hfinite : (n06PhysicalSupportPieces K z J).Finite)
     {φ : PolarPoint → ℝ} (hφ : RadialTest D φ)
     (hsupport : ∀ r, r ∉ J → ∀ θ, φ (r, θ) = 0) :
     (Real.pi⁻¹ * ∑ m ∈ hfinite.toFinset,
@@ -94,8 +93,7 @@ theorem n06_current_physicalResidual_eq_finiteGreen
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (u : CanonicalUnknown S K) (F : CanonicalSequence S K)
     {J : Set ℝ} (hJ : IsClosed J)
-    (hfinite : {m : ℕ |
-      (Ioo (K.physicalLeft m) (K.physicalRight m) ∩ J).Nonempty}.Finite)
+    (hfinite : (n06PhysicalSupportPieces K z J).Finite)
     {φ : PolarPoint → ℝ} (hφ : RadialTest D φ)
     (hsupport : ∀ r, r ∉ J → ∀ θ, φ (r, θ) = 0) :
     ((∫ r in D.a..D.b, radialAngularMean (fun θ =>

@@ -27,7 +27,7 @@ theorem n06PhysicalHeight_periodic
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (W : ℕ → PolarPoint → ℝ) (aL : ℝ) :
     Function.Periodic (n06PhysicalHeight K z W aL) (0, Real.pi) := by
-  have hcharts := hN04.2.2.2.2.2.2.2.1
+  have hcharts := hN04.1.charts
   have hperiod := n06PhysicalReconstruct_periodic hN04 hz hs W (K.height z)
     (fun m p hp => ((hcharts z hz hs m).2.2.2.2.2.2.2 p hp).2.2.2)
   intro p
@@ -43,15 +43,30 @@ theorem n06PhysicalHeight_on_normalization
     n06PhysicalHeight K z W aL p =
       n06PhysicalHeight K (C.referenceState, 0) W aL p := by
   classical
-  by_cases hex : ∃ m, p.1 ∈ Ioo (K.physicalLeft m) (K.physicalRight m)
+  by_cases hex : ∃ m, p ∈ physicalPieceOpen S K z m
   · obtain ⟨m, hm⟩ := hex
-    have hp : p ∈ physicalPieceOpen S K m := ⟨hm, mem_univ _⟩
-    have hnormal := hN04.2.2.1 z hz hs m p hp hpN
+    have hnormal := hN04.1.normalization z hz hs m
+    have hpref : p ∈ physicalPieceOpen S K (C.referenceState, 0) m := by
+      have hp' : p ∈ physicalPieceOpen S K (C.referenceState, 0) m ∩
+          (K.normalizationRegion ×ˢ univ) := by
+        rw [← hnormal.1]
+        exact ⟨hm, hpN, mem_univ _⟩
+      exact hp'.1
+    have hsame := hnormal.2 p hm hpN
     simp only [n06PhysicalHeight]
-    rw [n06PhysicalReconstruct_on_piece hN04 z W (K.height z) hp,
-      n06PhysicalReconstruct_on_piece hN04 (C.referenceState, 0) W
-        (K.height (C.referenceState, 0)) hp, hnormal.1, hnormal.2]
-  · simp only [n06PhysicalHeight, n06PhysicalReconstruct, ite_eq_right hex]
+    rw [n06PhysicalReconstruct_on_piece hN04 hz hs W (K.height z) hm,
+      n06PhysicalReconstruct_on_piece_of_disjoint
+        (n06_referencePhysicalPiece_pairwiseDisjoint hN04) W
+        (K.height (C.referenceState, 0)) hpref, hsame.1, hsame.2]
+  · have hexref : ¬ ∃ m, p ∈ physicalPieceOpen S K (C.referenceState, 0) m := by
+      rintro ⟨m, hm⟩
+      apply hex
+      refine ⟨m, ?_⟩
+      have hp' : p ∈ physicalPieceOpen S K z m ∩ (K.normalizationRegion ×ˢ univ) := by
+        rw [(hN04.1.normalization z hz hs m).1]
+        exact ⟨hm, hpN, mem_univ _⟩
+      exact hp'.1
+    simp only [n06PhysicalHeight, n06PhysicalReconstruct, if_neg hex, if_neg hexref]
 
 /-- The normalization row is identical to its value at the reference state;
 no change of representative or unproved transmission rule is used here. -/
@@ -66,7 +81,8 @@ theorem n06PhysicalHeight_referenceRow
   intro r _
   by_cases hr : referenceColumn D r = 0
   · simp only [hr, zero_mul]
-  · have hrN : r ∈ K.normalizationRegion := hN04.2.1 (Function.mem_support.mpr hr)
+  · have hrN : r ∈ K.normalizationRegion :=
+      hN04.1.normalizationSupport (Function.mem_support.mpr hr)
     have hm : referenceMode (n06PhysicalHeight K z W aL) 2 r =
         referenceMode (n06PhysicalHeight K (C.referenceState, 0) W aL) 2 r := by
       unfold referenceMode

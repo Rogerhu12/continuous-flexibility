@@ -1,5 +1,5 @@
 import ContinuousFlexibility.Analysis.N06CurrentSourceJets
-import ContinuousFlexibility.Analysis.N06ControlledPieceFiniteness
+import ContinuousFlexibility.Analysis.N06FinitePhysicalPartition
 import ContinuousFlexibility.Analysis.N06NuPhysicalRegularity
 
 /-!
@@ -57,7 +57,8 @@ theorem n06_currentSource_finiteJets_bounded
 belongs, after the actual current source transformation, to every fixed
 level of the same chosen volume model. No jet bound is an input. -/
 theorem n06Volume_exists_current_compact_source
-    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (hD : IsAccumulatingProfile D) (hC : controlGeometryConditions D S C)
+    (hT : IsMaterialData D T)
     (hV : IsVolumeModel T S K V)
     (h04 : N04Properties D T S C L K base loss ε)
     (hcoordinates : N05ControlledReferenceCoordinates D S C K)
@@ -71,7 +72,7 @@ theorem n06Volume_exists_current_compact_source
       ∀ m, (V.forget γ t b F m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m]
         canonicalSource S K z m f := by
   obtain ⟨J, hJ, hJD, hzero⟩ := hsupport
-  have hfinite := n06_controlledReferencePieces_finite_on_compact hD hcoordinates hJ hJD
+  have hfinite := n06_currentPieces_finite_on_compact hD hC hcoordinates h04 hz hs hJ hJD
   obtain ⟨δ, hδ, hbound⟩ := n06_currentSource_finiteJets_bounded
     h04 hz hs hf hp b hfinite.toFinset
   obtain ⟨F, hF, _⟩ := n06Volume_exists_finite_canonical_source hD hT hV
@@ -94,7 +95,8 @@ theorem n06Volume_exists_current_nuSource
       ∀ m, (V.forget γ t b F m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m]
         canonicalSource S K z m (nuColumnField D S C z) := by
   obtain ⟨hJ, hJD, hzero⟩ := n06_nuColumns_common_radialSupport hT hS h01
-  exact n06Volume_exists_current_compact_source h01.1.1 hT hV h04 hcoordinates hz hs
+  exact n06Volume_exists_current_compact_source h01.1.1 h01.2.2.2.1
+    hT hV h04 hcoordinates hz hs
     γ t b (n06_nuColumn_contDiff hT hS h01 hz hs)
     (n06_nuColumn_periodic hT hS h01 z) (n06_nuColumn_even hT hS h01 z)
     ⟨tsupport D.chi, hJ, hJD, hzero z⟩
@@ -103,7 +105,8 @@ theorem n06Volume_exists_current_nuSource
 level in the actual current coordinates, with no fixed-chart support
 condition. -/
 theorem n06Volume_exists_current_compatibilitySource
-    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (hD : IsAccumulatingProfile D) (hC : controlGeometryConditions D S C)
+    (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (hV : IsVolumeModel T S K V)
     (h04 : N04Properties D T S C L K base loss ε)
     (hcoordinates : N05ControlledReferenceCoordinates D S C K)
@@ -113,7 +116,7 @@ theorem n06Volume_exists_current_compatibilitySource
       ∀ m, (V.forget γ t b F m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m]
         canonicalSource S K z m ((S.height (3 / 4 : ℝ)).decode S.psi) := by
   have hψ := (hS.1 (3 / 4 : ℝ)).2.2.2.1 S.psi
-  exact n06Volume_exists_current_compact_source hD hT hV h04 hcoordinates hz hs γ t b
+  exact n06Volume_exists_current_compact_source hD hC hT hV h04 hcoordinates hz hs γ t b
     (physical_height_contDiff_and_flatJets hT hS
       (by norm_num : (0 : ℝ) < 3 / 4) S.psi).1 hψ.2.2.1
     (fun p => hψ.2.1 p.1 p.2) hS.2.2.2.2.2.2.2.2.1

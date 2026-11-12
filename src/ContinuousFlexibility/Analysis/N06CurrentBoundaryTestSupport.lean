@@ -1,5 +1,5 @@
-import ContinuousFlexibility.Analysis.N06RootBoundaryCancellation
-import ContinuousFlexibility.Analysis.N06BoundaryAngularImage
+import ContinuousFlexibility.Analysis.N06CurrentTestTraces
+import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
 
 /-!
 # The original radial support removes the outer Green terms
@@ -7,12 +7,15 @@ import ContinuousFlexibility.Analysis.N06BoundaryAngularImage
 Outside the original closed radial support of a physical test, its
 quotient by the actual height is the zero germ. Consequently the genuine
 current value and both first traces vanish on the forward image of every
-physical boundary point. The actual angular image theorem then gives
-vanishing on the whole canonical endpoint circle.
+point in the actual closed physical domain. The genuine closed inverse
+then gives vanishing on a canonical endpoint circle whose physical inverse
+image misses the support. The original negative-root image clauses supply
+this condition at both true root circles.
 
 The conclusions apply to either endpoint and to arbitrary first-jet
-fields in the Green density. No trace convergence, boundary inverse, or
-extra zero-boundary condition is used.
+fields in the Green density. Artificial moving cuts are not tested against
+their reference radial coordinates; their terms are cancelled separately
+by the actual canonical transmission law.
 -/
 
 noncomputable section
@@ -37,7 +40,7 @@ theorem N06CurrentHeightTestTraces.physical_zero_off_support
     {J : Set ℝ} (hJ : IsClosed J)
     (hzero : ∀ r, r ∉ J → ∀ θ, φ (r, θ) = 0)
     {x : PolarPoint}
-    (hx : x ∈ Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ Icc (0 : ℝ) Real.pi)
+    (hx : x ∈ physicalPieceClosed S K z m ∩ (univ ×ˢ Icc (0 : ℝ) Real.pi))
     (hxJ : x.1 ∉ J) :
     Q.value (K.chart z m x) = 0 ∧ Q.radial (K.chart z m x) = 0 ∧
       Q.angular (K.chart z m x) = 0 := by
@@ -61,31 +64,100 @@ theorem N06CurrentHeightTestTraces.physicalDensity_zero_off_support
     {J : Set ℝ} (hJ : IsClosed J)
     (hzero : ∀ r, r ∉ J → ∀ θ, φ (r, θ) = 0)
     {x : PolarPoint}
-    (hx : x ∈ Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ Icc (0 : ℝ) Real.pi)
+    (hx : x ∈ physicalPieceClosed S K z m ∩ (univ ×ˢ Icc (0 : ℝ) Real.pi))
     (hxJ : x.1 ∉ J) (A : SymmetricCoefficients) (W : PolarPoint → ℝ) :
-    n06RootBoundaryDensity A (K.chart z m) (K.height z m)
-      Q.value Q.radial Q.angular W x (K.chart z m x) = 0 := by
+    (coordinatePrincipalDensity A (K.chart z m) (K.height z m)).a x *
+        (Q.value (K.chart z m x) * radialPartial W (K.chart z m x) -
+          W (K.chart z m x) * Q.radial (K.chart z m x)) +
+      (coordinatePrincipalDensity A (K.chart z m) (K.height z m)).b x *
+        (Q.value (K.chart z m x) * angularPartial W (K.chart z m x) -
+          W (K.chart z m x) * Q.angular (K.chart z m x)) = 0 := by
   obtain ⟨hv, hr, ht⟩ := Q.physical_zero_off_support hJ hzero hx hxJ
-  simp only [n06RootBoundaryDensity, hv, hr, ht, zero_mul, mul_zero, sub_self, add_zero]
+  simp only [hv, hr, ht, zero_mul, mul_zero, sub_self, add_zero]
 
-/-- The genuine forward angular map covers the endpoint circle, so
-support vanishing holds at every canonical angle, not only at selected
-forward images. This statement treats both radial endpoints uniformly. -/
+/-- The genuine closed inverse identifies the trace at a canonical
+point with the physical zero germ at its actual inverse image. -/
+theorem N06CurrentHeightTestTraces.canonical_zero_off_support
+    (Q : N06CurrentHeightTestTraces S K z m φ)
+    (h04 : N04Properties D T S C L K base loss ε)
+    (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    {p : PolarPoint}
+    (hp : p ∈ Icc (K.left m) (K.right m) ×ˢ Icc (0 : ℝ) Real.pi)
+    {J : Set ℝ} (hJ : IsClosed J)
+    (hzero : ∀ t, t ∉ J → ∀ θ, φ (t, θ) = 0)
+    (hout : (K.inverseChart z m p).1 ∉ J) :
+    Q.value p = 0 ∧ Q.radial p = 0 ∧ Q.angular p = 0 := by
+  have hx := (n05_canonicalChart_closedAngular_maps h04 hz hs m).2 hp
+  have hq := Q.physical_zero_off_support hJ hzero hx hout
+  rw [(h04.1.boundary z hz hs m).2.2.2.1 p ⟨hp.1, mem_univ _⟩] at hq
+  exact hq
+
+/-- All endpoint traces vanish when the actual closed inverse circle
+misses the physical support. This does not identify a moving cut with any
+reference radial endpoint. -/
 theorem N06CurrentHeightTestTraces.boundary_zero_off_support
     (Q : N06CurrentHeightTestTraces S K z m φ)
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
-    {r y σ : ℝ} {β H ρ κ Hr : ℝ → ℝ}
-    (Jroot : N06RootFirstJets (K.chart z m) (K.height z m) r y σ β H ρ κ Hr)
-    (hr : r ∈ Icc (K.physicalLeft m) (K.physicalRight m))
+    {y : ℝ} (hy : y ∈ Icc (K.left m) (K.right m))
     {J : Set ℝ} (hJ : IsClosed J)
-    (hzero : ∀ t, t ∉ J → ∀ θ, φ (t, θ) = 0) (hrJ : r ∉ J)
+    (hzero : ∀ t, t ∉ J → ∀ θ, φ (t, θ) = 0)
+    (hout : ∀ θ ∈ Icc (0 : ℝ) Real.pi, (K.inverseChart z m (y, θ)).1 ∉ J)
     {θ : ℝ} (hθ : θ ∈ Icc (0 : ℝ) Real.pi) :
-    Q.value (y, θ) = 0 ∧ Q.radial (y, θ) = 0 ∧ Q.angular (y, θ) = 0 := by
-  obtain ⟨η, hη, he⟩ :=
-    (n06_current_boundary_angular_surjOn Jroot h04 hz hs hr).2.2 hθ
-  have hq := Q.physical_zero_off_support hJ hzero (x := (r, η)) ⟨hr, hη⟩ hrJ
-  simpa only [Jroot.chart_value η, he] using hq
+    Q.value (y, θ) = 0 ∧ Q.radial (y, θ) = 0 ∧ Q.angular (y, θ) = 0 :=
+  Q.canonical_zero_off_support h04 hz hs ⟨hy, hθ⟩ hJ hzero (hout θ hθ)
+
+/-- The original current-cut geometry fixes the physical radii of both
+true root circles. Their moving middle curve does not occur here. -/
+theorem n06_cutRoot_inverse_radius
+    (h04 : N04Properties D T S C L K base loss ε)
+    (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1) (n : ℕ) :
+    (∀ θ, (K.inverseChart z (K.cutPair n).1 (0, θ)).1 = C.left n) ∧
+      (∀ θ, (K.inverseChart z (K.cutPair n).2 (0, θ)).1 = C.right n) := by
+  have hcut := h04.2.1.1.2 z hz hs n
+  constructor
+  · intro θ
+    have hx : K.inverseChart z (K.cutPair n).1 (0, θ) ∈
+        ({C.left n} ×ˢ (univ : Set ℝ)) := by
+      rw [← hcut.2.2.2.2.1]
+      exact ⟨(0, θ), ⟨rfl, mem_univ _⟩, rfl⟩
+    exact hx.1
+  · intro θ
+    have hx : K.inverseChart z (K.cutPair n).2 (0, θ) ∈
+        ({C.right n} ×ˢ (univ : Set ℝ)) := by
+      rw [← hcut.2.2.2.2.2]
+      exact ⟨(0, θ), ⟨rfl, mem_univ _⟩, rfl⟩
+    exact hx.1
+
+/-- For either negative half, the actual root circle is off support
+whenever its original component endpoint is off support. This is derived
+from the N04 image clause, not an additional endpoint condition. -/
+theorem N06CurrentHeightTestTraces.negativeRoot_zero_off_support
+    (Q : N06CurrentHeightTestTraces S K z m φ)
+    (h04 : N04Properties D T S C L K base loss ε)
+    (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (n : ℕ) {r : ℝ}
+    (hside : (m = (K.cutPair n).1 ∧ r = C.left n) ∨
+      (m = (K.cutPair n).2 ∧ r = C.right n))
+    {J : Set ℝ} (hJ : IsClosed J)
+    (hzero : ∀ t, t ∉ J → ∀ θ, φ (t, θ) = 0) (hout : r ∉ J)
+    {θ : ℝ} (hθ : θ ∈ Icc (0 : ℝ) Real.pi) :
+    Q.value (0, θ) = 0 ∧ Q.radial (0, θ) = 0 ∧ Q.angular (0, θ) = 0 := by
+  obtain ⟨_, _, _, _, _, hR, hl, hr, hRl, hRr⟩ := h04.2.1.1.1 n
+  have hy : (0 : ℝ) ∈ Icc (K.left m) (K.right m) := by
+    rcases hside with ⟨rfl, _⟩ | ⟨rfl, _⟩
+    · rw [hl, hRl]
+      exact ⟨le_rfl, hR.le⟩
+    · rw [hr, hRr]
+      exact ⟨le_rfl, hR.le⟩
+  have hrad : ∀ η, (K.inverseChart z m (0, η)).1 = r := by
+    rcases hside with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩
+    · exact (n06_cutRoot_inverse_radius h04 hz hs n).1
+    · exact (n06_cutRoot_inverse_radius h04 hz hs n).2
+  apply Q.boundary_zero_off_support h04 hz hs hy hJ hzero ?_ hθ
+  intro η _
+  rw [hrad η]
+  exact hout
 
 /-- Every endpoint Green row vanishes off support. The two coefficient
 functions may include the actual principal row and either orientation;
@@ -94,11 +166,10 @@ theorem N06CurrentHeightTestTraces.boundaryIntegral_zero_off_support
     (Q : N06CurrentHeightTestTraces S K z m φ)
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
-    {r y σ : ℝ} {β H ρ κ Hr : ℝ → ℝ}
-    (Jroot : N06RootFirstJets (K.chart z m) (K.height z m) r y σ β H ρ κ Hr)
-    (hr : r ∈ Icc (K.physicalLeft m) (K.physicalRight m))
+    {y : ℝ} (hy : y ∈ Icc (K.left m) (K.right m))
     {J : Set ℝ} (hJ : IsClosed J)
-    (hzero : ∀ t, t ∉ J → ∀ θ, φ (t, θ) = 0) (hrJ : r ∉ J)
+    (hzero : ∀ t, t ∉ J → ∀ θ, φ (t, θ) = 0)
+    (hout : ∀ θ ∈ Icc (0 : ℝ) Real.pi, (K.inverseChart z m (y, θ)).1 ∉ J)
     (a b : ℝ → ℝ) (W : PolarPoint → ℝ) :
     (∫ θ in (0 : ℝ)..Real.pi,
       a θ * (Q.value (y, θ) * radialPartial W (y, θ) - W (y, θ) * Q.radial (y, θ)) +
@@ -107,7 +178,7 @@ theorem N06CurrentHeightTestTraces.boundaryIntegral_zero_off_support
     _ = ∫ _θ in (0 : ℝ)..Real.pi, (0 : ℝ) := by
       apply intervalIntegral.integral_congr
       intro θ hθ
-      obtain ⟨hv, hrad, hang⟩ := Q.boundary_zero_off_support h04 hz hs Jroot hr hJ hzero hrJ
+      obtain ⟨hv, hrad, hang⟩ := Q.boundary_zero_off_support h04 hz hs hy hJ hzero hout
         (by simpa only [uIcc_of_le Real.pi_pos.le] using hθ)
       simp only [hv, hrad, hang, zero_mul, mul_zero, sub_self, add_zero]
     _ = 0 := by simp
@@ -118,16 +189,15 @@ theorem N06CurrentHeightTestTraces.wronskianIntegral_zero_off_support
     (Q : N06CurrentHeightTestTraces S K z m φ)
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
-    {r y σ : ℝ} {β H ρ κ Hr : ℝ → ℝ}
-    (Jroot : N06RootFirstJets (K.chart z m) (K.height z m) r y σ β H ρ κ Hr)
-    (hr : r ∈ Icc (K.physicalLeft m) (K.physicalRight m))
+    {y : ℝ} (hy : y ∈ Icc (K.left m) (K.right m))
     {J : Set ℝ} (hJ : IsClosed J)
-    (hzero : ∀ t, t ∉ J → ∀ θ, φ (t, θ) = 0) (hrJ : r ∉ J)
+    (hzero : ∀ t, t ∉ J → ∀ θ, φ (t, θ) = 0)
+    (hout : ∀ θ ∈ Icc (0 : ℝ) Real.pi, (K.inverseChart z m (y, θ)).1 ∉ J)
     (W : PolarPoint → ℝ) :
     (∫ θ in (0 : ℝ)..Real.pi,
       Q.value (y, θ) * radialPartial W (y, θ) - W (y, θ) * Q.radial (y, θ)) = 0 := by
   simpa only [one_mul, zero_mul, add_zero] using
-    Q.boundaryIntegral_zero_off_support h04 hz hs Jroot hr hJ hzero hrJ
+    Q.boundaryIntegral_zero_off_support h04 hz hs hy hJ hzero hout
       (fun _ => 1) (fun _ => 0) W
 
 end ContinuousFlexibility.Statements

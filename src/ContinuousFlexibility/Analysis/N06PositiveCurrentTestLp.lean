@@ -122,9 +122,9 @@ theorem n06_positivePiece_closed_slope_nonneg
   have hw : ContDiff ℝ ∞ D.w := h01.1.1.choose_spec.1.2.2.1.1
   have hc : Continuous (deriv D.w) := (contDiff_infty_iff_deriv.mp hw).2.continuous
   have hrcl : r ∈ closure (Ioo (K.physicalLeft m) (K.physicalRight m)) := by
-    rw [closure_Ioo (h04.2.2.2.1 m).1.ne]
+    rw [closure_Ioo (h04.1.referenceBounds m).1.ne]
     exact hr
-  exact le_on_closure (fun s hs => (h04.2.2.2.2.1 m hm s hs).le)
+  exact le_on_closure (fun s hs => (h04.1.referencePositive m hm s hs).le)
     continuousOn_const hc.continuousOn hrcl
 
 /-- Every original physical RadialTest has a smooth actual corrected
@@ -169,7 +169,8 @@ theorem n06_positive_current_operatorTest_memLp
     MemLp (canonicalSource S K z m (divergenceOperator (L.coefficients z) φ))
       2 (canonicalMeasure S K m) := by
   apply n06_current_canonicalSource_memLp h04 hz hs m
-  exact (n06_positive_current_test_contDiffOn hT hS h01 h03 h04 hz hs m hm hφ).continuousOn.mono
-    (fun _ hp => ⟨hp.1, mem_univ _⟩)
+  have hΩ := n06_positivePhysicalPiece_eq_reference h04.1 hz hs m hm
+  rw [n06_physicalPieceClosed_eq_reference_rectangle h04.1 m hΩ]
+  exact (n06_positive_current_test_contDiffOn hT hS h01 h03 h04 hz hs m hm hφ).continuousOn
 
 end ContinuousFlexibility.Statements

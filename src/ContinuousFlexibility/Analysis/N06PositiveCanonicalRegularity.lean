@@ -88,15 +88,15 @@ theorem n06_positive_canonical_coefficients_differentiableAt
       DifferentiableAt ℝ (K.coefficients z m).c p := by
   let x := K.inverseChart z m p
   have hparts := n06_N04_qualitative_parts h04
-  have hcharts := hparts.1.2.2.2.2.2.2.2.1 z hz hs m
-  have hx : x ∈ physicalPieceOpen S K m := hcharts.2.1 hp
+  have hcharts := hparts.1.charts z hz hs m
+  have hx : x ∈ physicalPieceOpen S K z m := hcharts.2.1 hp
   have hFx : K.chart z m x = p := hcharts.2.2.2.1 p hp
-  have hpa : x ∈ annularOpen D := ⟨(h04.2.2.2.1 m).2.2 hx.1, mem_univ _⟩
-  have hpos : 0 < deriv D.w x.1 := h04.2.2.2.2.1 m hm x.1 hx.1
+  have hpa : x ∈ annularOpen D := (h04.1.domains z hz hs m).2.2.1 hx
+  have hpos : 0 < deriv D.w x.1 := (h04.1.domains z hz hs m).2.2.2.2.2.2.1 x hx hm
   have hphys := n06_correctedCoefficients_contDiffAt_of_nonneg hT hS h01 h03
     hz hs hpa hpos.le
-  have hF := hcharts.2.2.2.2.1.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hx)
-  have hH := hcharts.2.2.2.2.2.2.1.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hx)
+  have hF := hcharts.2.2.2.2.1.contDiffAt ((h04.1.domains z hz hs m).1.mem_nhds hx)
+  have hH := hcharts.2.2.2.2.2.2.1.contDiffAt ((h04.1.domains z hz hs m).1.mem_nhds hx)
   have hgood := hcharts.2.2.2.2.2.2.2 x hx
   have hresponse := n06_principalPair_coordinates_pos hprincipal.1 hprincipal.2
     (hF.differentiableAt (by simp)) hgood.2.1
@@ -139,11 +139,11 @@ theorem n06_positive_canonical_coefficients_eq_density
         (coordinatePrincipalDensity (L.coefficients z) (K.chart z m) (K.height z m)).c
           (K.inverseChart z m p) := by
   have hparts := n06_N04_qualitative_parts h04
-  have hcharts := hparts.1.2.2.2.2.2.2.2.1 z hz hs m
+  have hcharts := hparts.1.charts z hz hs m
   have hx := hcharts.2.1 hp
   have hpa : K.inverseChart z m p ∈ annularOpen D :=
-    ⟨(h04.2.2.2.1 m).2.2 hx.1, mem_univ _⟩
-  have hpos := h04.2.2.2.2.1 m hm _ hx.1
+    (h04.1.domains z hz hs m).2.2.1 hx
+  have hpos := (h04.1.domains z hz hs m).2.2.2.2.2.2.1 _ hx hm
   have hphys := n06_correctedCoefficients_contDiffAt_of_nonneg hT hS h01 h03
     hz hs hpa hpos.le
   have hd := n06_positive_canonical_coefficients_differentiableAt hT hS h01 h03 h04
@@ -161,26 +161,26 @@ theorem n06_positive_canonical_coefficients_contDiffOn
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (m : ℕ) (hm : K.positive m = true)
-    (hprincipal : ∀ x ∈ physicalPieceOpen S K m,
+    (hprincipal : ∀ x ∈ physicalPieceOpen S K z m,
       0 < (L.coefficients z).a x ∧
         0 < (L.coefficients z).a x * (L.coefficients z).c x - (L.coefficients z).b x ^ 2) :
     ContDiffOn ℝ ∞ (K.coefficients z m).a (canonicalOpen S K m) ∧
       ContDiffOn ℝ ∞ (K.coefficients z m).b (canonicalOpen S K m) ∧
       ContDiffOn ℝ ∞ (K.coefficients z m).c (canonicalOpen S K m) := by
   have hparts := n06_N04_qualitative_parts h04
-  have hcharts := hparts.1.2.2.2.2.2.2.2.1 z hz hs m
+  have hcharts := hparts.1.charts z hz hs m
   have hloc (p : PolarPoint) (hp : p ∈ canonicalOpen S K m) :
       ContDiffAt ℝ ∞ (K.coefficients z m).a p ∧
         ContDiffAt ℝ ∞ (K.coefficients z m).b p ∧
         ContDiffAt ℝ ∞ (K.coefficients z m).c p := by
     let x := K.inverseChart z m p
-    have hx : x ∈ physicalPieceOpen S K m := hcharts.2.1 hp
-    have hpa : x ∈ annularOpen D := ⟨(h04.2.2.2.1 m).2.2 hx.1, mem_univ _⟩
-    have hpos := h04.2.2.2.2.1 m hm x.1 hx.1
+    have hx : x ∈ physicalPieceOpen S K z m := hcharts.2.1 hp
+    have hpa : x ∈ annularOpen D := (h04.1.domains z hz hs m).2.2.1 hx
+    have hpos := (h04.1.domains z hz hs m).2.2.2.2.2.2.1 x hx hm
     have hphys := n06_correctedCoefficients_contDiffAt_of_nonneg hT hS h01 h03
       hz hs hpa hpos.le
-    have hF := hcharts.2.2.2.2.1.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hx)
-    have hH := hcharts.2.2.2.2.2.2.1.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hx)
+    have hF := hcharts.2.2.2.2.1.contDiffAt ((h04.1.domains z hz hs m).1.mem_nhds hx)
+    have hH := hcharts.2.2.2.2.2.2.1.contDiffAt ((h04.1.domains z hz hs m).1.mem_nhds hx)
     have hG := hcharts.2.2.2.2.2.1.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp)
     have hJ := (hcharts.2.2.2.2.2.2.2 x hx).2.1
     have hden := n06_coordinatePrincipalDensity_contDiffAt
@@ -225,7 +225,7 @@ theorem n06_exists_positive_canonical_regular_neighborhood
     ⟨hz.1.trans_le hle, hz.2.trans_le hle⟩
   apply n06_positive_canonical_coefficients_contDiffOn hT hS h01 h03 h04 hzold hs m hm
   intro x hx
-  exact hpos z hz hs x ⟨(h04.2.2.2.1 m).2.2 hx.1, mem_univ _⟩
-    (h04.2.2.2.2.1 m hm x.1 hx.1)
+  exact hpos z hz hs x ((h04.1.domains z hzold hs m).2.2.1 hx)
+    ((h04.1.domains z hzold hs m).2.2.2.2.2.2.1 x hx hm)
 
 end ContinuousFlexibility.Statements

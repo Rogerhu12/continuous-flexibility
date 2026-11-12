@@ -71,8 +71,7 @@ theorem n06_fullCanonical_height_pairing
     (hab : D.a ≤ D.b) (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {J : Set ℝ}
-    (hfinite : {m : ℕ |
-      (Ioo (K.physicalLeft m) (K.physicalRight m) ∩ J).Nonempty}.Finite)
+    (hfinite : (n06PhysicalSupportPieces K z J).Finite)
     (W : CanonicalSequence S K) {η φ : PolarPoint → ℝ}
     (hrep : ∀ m, (W m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m]
       canonicalHeight S K z m η)
@@ -98,8 +97,7 @@ theorem n06_fullCanonical_source_pairing
     (hab : D.a ≤ D.b) (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {J : Set ℝ}
-    (hfinite : {m : ℕ |
-      (Ioo (K.physicalLeft m) (K.physicalRight m) ∩ J).Nonempty}.Finite)
+    (hfinite : (n06PhysicalSupportPieces K z J).Finite)
     (F : CanonicalSequence S K) {f φ : PolarPoint → ℝ}
     (hrep : ∀ m, (F m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m]
       canonicalSource S K z m f)

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CanonicalTestTransport
+import ContinuousFlexibility.Analysis.CanonicalStripGeometry
+import ContinuousFlexibility.Analysis.N06CanonicalProperties
+import Mathlib.Algebra.Field.Periodic
 import ContinuousFlexibility.Radial.R11bRadialTests
 import Mathlib.Analysis.Calculus.Deriv.Slope
 import Mathlib.Topology.Order.IntermediateValue
@@ -27,7 +29,7 @@ def n06ReferenceWeightedTest (S : PhysicalSpacesData) (K : CanonicalData S)
     (z : AnnularState S × ℝ) (m : ℕ) (a : ℝ → ℝ)
     (φ : PolarPoint → ℝ) : PolarPoint → ℝ := by
   classical
-  exact fun p => if p ∈ physicalPieceOpen S K m then
+  exact fun p => if p ∈ referencePhysicalPieceOpen S K m then
     a p.1 * φ (K.chart z m p) else 0
 
 variable {D : ReferenceData} {S : PhysicalSpacesData}
@@ -36,17 +38,17 @@ variable {D : ReferenceData} {S : PhysicalSpacesData}
   {a Y : ℝ → ℝ} {φ : PolarPoint → ℝ}
 
 theorem n06ReferenceWeightedTest_of_mem {p : PolarPoint}
-    (hp : p ∈ physicalPieceOpen S K m) :
+    (hp : p ∈ referencePhysicalPieceOpen S K m) :
     n06ReferenceWeightedTest S K z m a φ p = a p.1 * φ (K.chart z m p) := by
   simp only [n06ReferenceWeightedTest, if_pos hp]
 
 theorem n06ReferenceWeightedTest_of_not_mem {p : PolarPoint}
-    (hp : p ∉ physicalPieceOpen S K m) :
+    (hp : p ∉ referencePhysicalPieceOpen S K m) :
     n06ReferenceWeightedTest S K z m a φ p = 0 := by
   simp only [n06ReferenceWeightedTest, if_neg hp]
 
 theorem n06ReferenceWeightedTest_germ {p : PolarPoint}
-    (hp : p ∈ physicalPieceOpen S K m) :
+    (hp : p ∈ referencePhysicalPieceOpen S K m) :
     n06ReferenceWeightedTest S K z m a φ =ᶠ[𝓝 p]
       (fun q => a q.1 * φ (K.chart z m q)) := by
   filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds hp] with q hq
@@ -55,28 +57,51 @@ theorem n06ReferenceWeightedTest_germ {p : PolarPoint}
 theorem n06ReferenceWeightedTest_support
     (hK : N04PartA D S C K base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (hφ : CanonicalTest S K m φ) :
     ∃ J : Set ℝ, IsCompact J ∧ J ⊆ Ioo (K.physicalLeft m) (K.physicalRight m) ∧
       ∀ r, r ∉ J → ∀ θ, n06ReferenceWeightedTest S K z m a φ (r, θ) = 0 := by
-  obtain ⟨J, hJ, hJI, hzero⟩ := n06CanonicalTestPullback_radialSupport hK hz hs hφ
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hs m
-  refine ⟨J, hJ, hJI, fun r hr θ => ?_⟩
-  by_cases hp : (r, θ) ∈ physicalPieceOpen S K m
-  · have he := hzero r hr θ
-    rw [n06CanonicalTestPullback_eq_of_mem hp] at he
-    have hh : K.height z m (r, θ) ≠ 0 :=
-      (hcharts.2.2.2.2.2.2.2 (r, θ) hp).1.ne'
-    have hφzero : φ (K.chart z m (r, θ)) = 0 := (mul_eq_zero.mp he).resolve_left hh
-    rw [n06ReferenceWeightedTest_of_mem hp, hφzero, mul_zero]
+  obtain ⟨J, hJ, hJK, hzero⟩ := hφ.2.2
+  have hcharts := hK.charts z hz hs m
+  rw [hΩ] at hcharts
+  let Jp : Set ℝ :=
+    (fun p : PolarPoint => (K.inverseChart z m p).1) '' (J ×ˢ Icc (0 : ℝ) Real.pi)
+  have hJp : IsCompact Jp := (hJ.prod isCompact_Icc).image_of_continuousOn
+    (hcharts.2.2.2.2.2.1.continuousOn.fst.mono
+      (fun p hp => ⟨hJK hp.1, mem_univ _⟩))
+  have hJpK : Jp ⊆ Ioo (K.physicalLeft m) (K.physicalRight m) := by
+    rintro r ⟨p, hp, rfl⟩
+    exact (hcharts.2.1 ⟨hJK hp.1, mem_univ _⟩).1
+  have hGperiod (r : ℝ) (hr : r ∈ Ioo (K.left m) (K.right m)) :
+      Function.Periodic (fun θ => (K.inverseChart z m (r, θ)).1) Real.pi := by
+    intro θ
+    have he := inverseChart_periodic_of_chart_periodic hcharts.2.1 hcharts.2.2.1
+      hcharts.2.2.2.1 (fun p hp => (hcharts.2.2.2.2.2.2.2 p hp).2.2.1)
+      (p := (r, θ)) ⟨hr, mem_univ _⟩
+    simpa only [Prod.mk_add_mk, Prod.fst_add, add_zero] using congrArg Prod.fst he
+  refine ⟨Jp, hJp, hJpK, ?_⟩
+  intro r hr θ
+  by_cases hp : (r, θ) ∈ referencePhysicalPieceOpen S K m
+  · have hFJ : (K.chart z m (r, θ)).1 ∉ J := by
+      intro hmem
+      obtain ⟨η, hη, he⟩ := (hGperiod (K.chart z m (r, θ)).1
+        (hcharts.1 hp).1).exists_mem_Ico₀ Real.pi_pos (K.chart z m (r, θ)).2
+      apply hr
+      refine ⟨((K.chart z m (r, θ)).1, η), ⟨hmem, hη.1, hη.2.le⟩, ?_⟩
+      exact he.symm.trans (congrArg Prod.fst (hcharts.2.2.1 (r, θ) hp))
+    have hzφ : φ (K.chart z m (r, θ)) = 0 :=
+      hzero (K.chart z m (r, θ)).1 hFJ (K.chart z m (r, θ)).2
+    rw [n06ReferenceWeightedTest_of_mem hp, hzφ, mul_zero]
   · exact n06ReferenceWeightedTest_of_not_mem hp
 
 theorem n06ReferenceWeightedTest_zero_germ
     (hK : N04PartA D S C K base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (hφ : CanonicalTest S K m φ) {p : PolarPoint}
-    (hp : p ∉ physicalPieceOpen S K m) :
+    (hp : p ∉ referencePhysicalPieceOpen S K m) :
     n06ReferenceWeightedTest S K z m a φ =ᶠ[𝓝 p] (0 : PolarPoint → ℝ) := by
-  obtain ⟨J, hJ, hJI, hzero⟩ := n06ReferenceWeightedTest_support (a := a) hK hz hs hφ
+  obtain ⟨J, hJ, hJI, hzero⟩ := n06ReferenceWeightedTest_support (a := a) hK hz hs hΩ hφ
   have hpJ : p.1 ∉ J := fun h => hp ⟨hJI h, mem_univ _⟩
   have hnear : ∀ᶠ r : ℝ in 𝓝 p.1, r ∉ J := hJ.isClosed.isOpen_compl.mem_nhds hpJ
   filter_upwards [(continuous_fst.tendsto p).eventually hnear] with q hq
@@ -85,32 +110,36 @@ theorem n06ReferenceWeightedTest_zero_germ
 theorem n06ReferenceWeightedTest_contDiff
     (hK : N04PartA D S C K base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (ha : ContDiffOn ℝ ∞ a (Ioo (K.physicalLeft m) (K.physicalRight m)))
     (hφ : CanonicalTest S K m φ) :
     ContDiff ℝ ∞ (n06ReferenceWeightedTest S K z m a φ) := by
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hs m
+  have hcharts := hK.charts z hz hs m
+  rw [hΩ] at hcharts
   apply contDiff_iff_contDiffAt.mpr
   intro p
-  by_cases hp : p ∈ physicalPieceOpen S K m
+  by_cases hp : p ∈ referencePhysicalPieceOpen S K m
   · have haAt := (ha.contDiffAt (isOpen_Ioo.mem_nhds hp.1)).comp p contDiffAt_fst
     have hF := hcharts.2.2.2.2.1.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp)
     exact (haAt.mul (hφ.1.contDiffAt.comp p hF)).congr_of_eventuallyEq
       (n06ReferenceWeightedTest_germ hp)
   · have hzero : ContDiffAt ℝ ∞ (fun _ : PolarPoint => (0 : ℝ)) p := contDiffAt_const
     exact hzero.congr_of_eventuallyEq
-      (n06ReferenceWeightedTest_zero_germ hK hz hs hφ hp)
+      (n06ReferenceWeightedTest_zero_germ hK hz hs hΩ hφ hp)
 
 theorem n06ReferenceWeightedTest_periodic
     (hK : N04PartA D S C K base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (hφ : CanonicalTest S K m φ) :
     Function.Periodic (n06ReferenceWeightedTest S K z m a φ) (0, Real.pi) := by
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hs m
+  have hcharts := hK.charts z hz hs m
+  rw [hΩ] at hcharts
   intro p
-  have hshift : p + (0, Real.pi) ∈ physicalPieceOpen S K m ↔
-      p ∈ physicalPieceOpen S K m := by
-    simp only [physicalPieceOpen, mem_prod, Prod.fst_add, add_zero, mem_univ, and_true]
-  by_cases hp : p ∈ physicalPieceOpen S K m
+  have hshift : p + (0, Real.pi) ∈ referencePhysicalPieceOpen S K m ↔
+      p ∈ referencePhysicalPieceOpen S K m := by
+    simp only [referencePhysicalPieceOpen, mem_prod, Prod.fst_add, add_zero, mem_univ, and_true]
+  by_cases hp : p ∈ referencePhysicalPieceOpen S K m
   · rw [n06ReferenceWeightedTest_of_mem (hshift.mpr hp),
       n06ReferenceWeightedTest_of_mem hp,
       (hcharts.2.2.2.2.2.2.2 p hp).2.2.1, hφ.2.1 (K.chart z m p)]
@@ -121,13 +150,14 @@ theorem n06ReferenceWeightedTest_periodic
 theorem n06ReferenceWeightedTest_radialTest
     (hK : N04PartA D S C K base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (ha : ContDiffOn ℝ ∞ a (Ioo (K.physicalLeft m) (K.physicalRight m)))
     (hφ : CanonicalTest S K m φ) :
     RadialTest D (n06ReferenceWeightedTest S K z m a φ) := by
-  obtain ⟨J, hJ, hJI, hzero⟩ := n06ReferenceWeightedTest_support (a := a) hK hz hs hφ
-  have hp := n06ReferenceWeightedTest_periodic (a := a) hK hz hs hφ
-  refine ⟨n06ReferenceWeightedTest_contDiff hK hz hs ha hφ, ?_,
-    J, hJ, hJI.trans (hK.2.2.2.1 m).2.2, hzero⟩
+  obtain ⟨J, hJ, hJI, hzero⟩ := n06ReferenceWeightedTest_support (a := a) hK hz hs hΩ hφ
+  have hp := n06ReferenceWeightedTest_periodic (a := a) hK hz hs hΩ hφ
+  refine ⟨n06ReferenceWeightedTest_contDiff hK hz hs hΩ ha hφ, ?_,
+    J, hJ, hJI.trans (hK.referenceBounds m).2.2, hzero⟩
   have hperiod : ((0 : ℝ), Real.pi) + (0, Real.pi) = (0, 2 * Real.pi) := by
     apply Prod.ext <;> simp only [Prod.fst_add, Prod.snd_add, zero_add] <;> ring
   rw [← hperiod]
@@ -136,10 +166,11 @@ theorem n06ReferenceWeightedTest_radialTest
 theorem n06ReferenceWeightedTest_radialPartial_zero
     (hK : N04PartA D S C K base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (hφ : CanonicalTest S K m φ) {p : PolarPoint}
-    (hp : p ∉ physicalPieceOpen S K m) :
+    (hp : p ∉ referencePhysicalPieceOpen S K m) :
     radialPartial (n06ReferenceWeightedTest S K z m a φ) p = 0 := by
-  have he := n06ReferenceWeightedTest_zero_germ (a := a) hK hz hs hφ hp
+  have he := n06ReferenceWeightedTest_zero_germ (a := a) hK hz hs hΩ hφ hp
   unfold radialPartial
   rw [he.fderiv_eq (𝕜 := ℝ)]
   exact radialPartial_const (x := p) 0
@@ -147,11 +178,12 @@ theorem n06ReferenceWeightedTest_radialPartial_zero
 theorem n06ReferenceWeightedTest_radialPartial
     (hK : N04PartA D S C K base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (ha : ContDiffOn ℝ ∞ a (Ioo (K.physicalLeft m) (K.physicalRight m)))
     (hY : ContDiffOn ℝ ∞ Y (Ioo (K.physicalLeft m) (K.physicalRight m)))
-    (hchart : ∀ q ∈ physicalPieceOpen S K m, K.chart z m q = (Y q.1, q.2))
+    (hchart : ∀ q ∈ referencePhysicalPieceOpen S K m, K.chart z m q = (Y q.1, q.2))
     (hφ : CanonicalTest S K m φ) {p : PolarPoint}
-    (hp : p ∈ physicalPieceOpen S K m) :
+    (hp : p ∈ referencePhysicalPieceOpen S K m) :
     radialPartial (n06ReferenceWeightedTest S K z m a φ) p =
       deriv a p.1 * φ (K.chart z m p) +
         a p.1 * (deriv Y p.1 * radialPartial φ (K.chart z m p)) := by
@@ -166,7 +198,7 @@ theorem n06ReferenceWeightedTest_radialPartial
     rw [n06ReferenceWeightedTest_of_mem ⟨hr, mem_univ _⟩,
       hchart (r, p.2) ⟨hr, mem_univ _⟩]
   have hslice := hasDerivAt_radialSlice
-    ((n06ReferenceWeightedTest_contDiff hK hz hs ha hφ).differentiable (by simp) p)
+    ((n06ReferenceWeightedTest_contDiff hK hz hs hΩ ha hφ).differentiable (by simp) p)
   have heq := hslice.unique (hder.congr_of_eventuallyEq he)
   rw [hchart p hp]
   simpa only [Function.comp_apply, mul_comm] using heq
@@ -174,8 +206,8 @@ theorem n06ReferenceWeightedTest_radialPartial
 /-- The actual planar Jacobian of a radial chart is its signed radial derivative. -/
 theorem n06_reference_radial_jacobian
     (hY : ContDiffOn ℝ ∞ Y (Ioo (K.physicalLeft m) (K.physicalRight m)))
-    (hchart : ∀ q ∈ physicalPieceOpen S K m, K.chart z m q = (Y q.1, q.2))
-    {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    (hchart : ∀ q ∈ referencePhysicalPieceOpen S K m, K.chart z m q = (Y q.1, q.2))
+    {p : PolarPoint} (hp : p ∈ referencePhysicalPieceOpen S K m) :
     planeJacobian (K.chart z m) p = deriv Y p.1 := by
   have hd := (hY.contDiffAt (isOpen_Ioo.mem_nhds hp.1)).differentiableAt (by simp)
   have hFD : HasFDerivAt (fun q : PolarPoint => (Y q.1, q.2))
@@ -195,11 +227,13 @@ theorem n06_reference_radial_jacobian
 theorem n06_reference_radial_orientation
     (hK : N04PartA D S C K base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (hY : ContDiffOn ℝ ∞ Y (Ioo (K.physicalLeft m) (K.physicalRight m)))
-    (hchart : ∀ q ∈ physicalPieceOpen S K m, K.chart z m q = (Y q.1, q.2)) :
+    (hchart : ∀ q ∈ referencePhysicalPieceOpen S K m, K.chart z m q = (Y q.1, q.2)) :
     ∃ σ : ℝ, (σ = 1 ∨ σ = -1) ∧
       ∀ r ∈ Ioo (K.physicalLeft m) (K.physicalRight m), |deriv Y r| = σ * deriv Y r := by
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hs m
+  have hcharts := hK.charts z hz hs m
+  rw [hΩ] at hcharts
   have hinj : InjOn Y (Ioo (K.physicalLeft m) (K.physicalRight m)) := by
     intro r hr t ht he
     have hchartEq : K.chart z m (r, 0) = K.chart z m (t, 0) := by
@@ -207,7 +241,7 @@ theorem n06_reference_radial_orientation
     exact congrArg Prod.fst ((hcharts.2.2.1 (r, 0) ⟨hr, mem_univ _⟩).symm.trans
       ((congrArg (K.inverseChart z m) hchartEq).trans
         (hcharts.2.2.1 (t, 0) ⟨ht, mem_univ _⟩)))
-  rcases hY.continuousOn.strictMonoOn_of_injOn_Ioo (hK.2.2.2.1 m).1 hinj with hm | hm
+  rcases hY.continuousOn.strictMonoOn_of_injOn_Ioo (hK.referenceBounds m).1 hinj with hm | hm
   · refine ⟨1, Or.inl rfl, fun r hr => ?_⟩
     have hd : 0 ≤ deriv Y r := by
       simpa only [derivWithin_of_isOpen isOpen_Ioo hr] using

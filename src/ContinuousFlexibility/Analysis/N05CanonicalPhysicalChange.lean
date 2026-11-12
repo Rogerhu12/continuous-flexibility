@@ -6,7 +6,7 @@ import Mathlib.LinearAlgebra.Basis.Fin
 
 The coordinate determinant used by N04 is the determinant of its actual
 Fréchet derivative. The change-of-variables theorem therefore applies to
-the exact half-period rectangles and their actual source measures. At the
+the actual physical half-period tiles and their source measures. At the
 controlled reference chart this determinant is the real radial derivative.
 -/
 
@@ -29,7 +29,7 @@ theorem n05_planeJacobian_eq_det (Φ : PolarPoint → PolarPoint) (p : PolarPoin
     Matrix.cons_val_zero, Matrix.cons_val_one, ContinuousLinearMap.coe_coe]
   simp only [planeJacobian, mul_comm]
 
-/-- The actual reference chart maps the physical half-period rectangle
+/-- An angle-preserving actual chart maps the physical half-period tile
 bijectively onto the frozen canonical rectangle. -/
 theorem n05_canonicalChart_halfPeriod_bijOn
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -38,19 +38,18 @@ theorem n05_canonicalChart_halfPeriod_bijOn
     (h04 : N04Properties D T S C L K base loss ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ)
-    (hangle : ∀ p ∈ physicalPieceOpen S K m, (K.chart z m p).2 = p.2) :
+    (hangle : ∀ p ∈ physicalPieceOpen S K z m, (K.chart z m p).2 = p.2) :
     BijOn (K.chart z m)
-      (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))
       (Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi) := by
-  rcases h04 with ⟨_, _, _, _, _, _, _, hcharts, _⟩
-  obtain ⟨hΦ, hΨ, hleft, hright, _⟩ := hcharts z hz hs m
+  obtain ⟨hΦ, hΨ, hleft, hright, _⟩ := h04.1.charts z hz hs m
   refine ⟨?_, ?_, ?_⟩
   · intro p hp
-    have hpopen : p ∈ physicalPieceOpen S K m := ⟨hp.1, mem_univ _⟩
-    exact ⟨(hΦ hpopen).1, by simpa only [hangle p hpopen] using hp.2⟩
+    have hpopen : p ∈ physicalPieceOpen S K z m := hp.1
+    exact ⟨(hΦ hpopen).1, by simpa only [hangle p hpopen] using hp.2.2⟩
   · intro p hp q hq he
-    have hip := hleft p ⟨hp.1, mem_univ _⟩
-    have hiq := hleft q ⟨hq.1, mem_univ _⟩
+    have hip := hleft p hp.1
+    have hiq := hleft q hq.1
     exact hip.symm.trans ((congrArg (K.inverseChart z m) he).trans hiq)
   · intro p hp
     have hpopen : p ∈ canonicalOpen S K m := ⟨hp.1, mem_univ _⟩
@@ -58,11 +57,11 @@ theorem n05_canonicalChart_halfPeriod_bijOn
       have he := congrArg Prod.snd (hright p hpopen)
       simpa only [hangle _ (hΨ hpopen)] using he
     exact ⟨K.inverseChart z m p,
-      ⟨(hΨ hpopen).1, by simpa only [hsecond] using hp.2⟩,
+      ⟨hΨ hpopen, mem_univ _, by simpa only [hsecond] using hp.2⟩,
       hright p hpopen⟩
 
 /-- Actual differentiability on the open piece gives the derivative required
-on its half-period rectangle, including the angular boundary. -/
+on its half-period tile, including the angular boundary. -/
 theorem n05_canonicalChart_hasFDerivWithin
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
@@ -70,14 +69,13 @@ theorem n05_canonicalChart_hasFDerivWithin
     (h04 : N04Properties D T S C L K base loss ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ) :
-    ∀ p ∈ Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi,
+    ∀ p ∈ physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
       HasFDerivWithinAt (K.chart z m) (fderiv ℝ (K.chart z m) p)
-        (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi) p := by
-  rcases h04 with ⟨_, _, _, _, _, _, _, hcharts, _⟩
-  have hc := (hcharts z hz hs m).2.2.2.2.1
+        (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) p := by
+  have hc := (h04.1.charts z hz hs m).2.2.2.2.1
   intro p hp
   exact ((hc.differentiableOn (by simp)).hasFDerivAt
-    ((isOpen_Ioo.prod isOpen_univ).mem_nhds ⟨hp.1, mem_univ _⟩)).hasFDerivWithinAt
+    ((h04.1.domains z hz hs m).1.mem_nhds hp.1)).hasFDerivWithinAt
 
 /-- Integrability under the actual canonical coordinate change. -/
 theorem n05_canonicalChart_integrable_iff
@@ -87,15 +85,16 @@ theorem n05_canonicalChart_integrable_iff
     (h04 : N04Properties D T S C L K base loss ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ)
-    (hangle : ∀ p ∈ physicalPieceOpen S K m, (K.chart z m p).2 = p.2)
+    (hangle : ∀ p ∈ physicalPieceOpen S K z m, (K.chart z m p).2 = p.2)
     (g : PolarPoint → ℝ) :
     Integrable g (canonicalMeasure S K m) ↔
       Integrable (fun p => |planeJacobian (K.chart z m) p| * g (K.chart z m p))
         (volume.restrict
-          (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)) := by
+          (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))) := by
   have hb := n05_canonicalChart_halfPeriod_bijOn h04 hz hs m hangle
   have he := integrableOn_image_iff_integrableOn_abs_det_fderiv_smul volume
-    (measurableSet_Ioo.prod measurableSet_Ioc)
+    ((h04.1.domains z hz hs m).1.measurableSet.inter
+      (MeasurableSet.univ.prod measurableSet_Ioc))
     (n05_canonicalChart_hasFDerivWithin h04 hz hs m) hb.injOn g
   rw [hb.image_eq] at he
   simpa only [IntegrableOn, canonicalMeasure, ← n05_planeJacobian_eq_det,
@@ -110,15 +109,16 @@ theorem n05_canonicalChart_integral
     (h04 : N04Properties D T S C L K base loss ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ)
-    (hangle : ∀ p ∈ physicalPieceOpen S K m, (K.chart z m p).2 = p.2)
+    (hangle : ∀ p ∈ physicalPieceOpen S K z m, (K.chart z m p).2 = p.2)
     (g : PolarPoint → ℝ) :
     (∫ p, g p ∂canonicalMeasure S K m) =
       ∫ p, |planeJacobian (K.chart z m) p| * g (K.chart z m p)
         ∂volume.restrict
-          (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi) := by
+          (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) := by
   have hb := n05_canonicalChart_halfPeriod_bijOn h04 hz hs m hangle
   have he := integral_image_eq_integral_abs_det_fderiv_smul volume
-    (measurableSet_Ioo.prod measurableSet_Ioc)
+    ((h04.1.domains z hz hs m).1.measurableSet.inter
+      (MeasurableSet.univ.prod measurableSet_Ioc))
     (n05_canonicalChart_hasFDerivWithin h04 hz hs m) hb.injOn g
   rw [hb.image_eq] at he
   simpa only [canonicalMeasure, ← n05_planeJacobian_eq_det, smul_eq_mul] using he
@@ -132,15 +132,16 @@ theorem n05_canonicalChart_lintegral
     (h04 : N04Properties D T S C L K base loss ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ)
-    (hangle : ∀ p ∈ physicalPieceOpen S K m, (K.chart z m p).2 = p.2)
+    (hangle : ∀ p ∈ physicalPieceOpen S K z m, (K.chart z m p).2 = p.2)
     (g : PolarPoint → ENNReal) :
     (∫⁻ p, g p ∂canonicalMeasure S K m) =
       ∫⁻ p, ENNReal.ofReal |planeJacobian (K.chart z m) p| * g (K.chart z m p)
         ∂volume.restrict
-          (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi) := by
+          (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) := by
   have hb := n05_canonicalChart_halfPeriod_bijOn h04 hz hs m hangle
   have he := lintegral_image_eq_lintegral_abs_det_fderiv_mul volume
-    (measurableSet_Ioo.prod measurableSet_Ioc)
+    ((h04.1.domains z hz hs m).1.measurableSet.inter
+      (MeasurableSet.univ.prod measurableSet_Ioc))
     (n05_canonicalChart_hasFDerivWithin h04 hz hs m) hb.injOn g
   rw [hb.image_eq] at he
   simpa only [canonicalMeasure, ← n05_planeJacobian_eq_det] using he
@@ -154,18 +155,20 @@ theorem n05_reference_planeJacobian_radial
     {base loss : ℕ} {ε : ℝ}
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     (hcoordinates : N05ControlledReferenceCoordinates D S C K)
-    (m : ℕ) {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    (m : ℕ) {p : PolarPoint} (hp : p ∈ referencePhysicalPieceOpen S K m) :
     planeJacobian (K.chart (C.referenceState, 0) m) p =
       deriv (fun r => (K.chart (C.referenceState, 0) m (r, 0)).1) p.1 := by
   have h01 := h.1.1.1
-  rcases h.2.2.2.2 with ⟨_, _, _, _, _, _, _, hcharts, _⟩
-  have hc := (hcharts (C.referenceState, 0)
+  have hcActual := (h.2.2.2.2.1.charts (C.referenceState, 0)
     (n05_referenceState_mem h01.2.1)
     (n05_referenceState_sector h01.2.2.1) m).2.2.2.2.1
+  have hc : ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m)
+      (referencePhysicalPieceOpen S K m) := by
+    simpa only [h.2.2.2.2.1.referenceDomain m] using hcActual
   let ξ : ℝ → ℝ := fun r => (K.chart (C.referenceState, 0) m (r, 0)).1
   have hline : ContDiff ℝ ∞ (fun r : ℝ => (r, (0 : ℝ))) :=
     contDiff_id.prodMk contDiff_const
-  have hp0 : (p.1, (0 : ℝ)) ∈ physicalPieceOpen S K m :=
+  have hp0 : (p.1, (0 : ℝ)) ∈ referencePhysicalPieceOpen S K m :=
     ⟨hp.1, mem_univ (0 : ℝ)⟩
   have hc0 : ContDiffAt ℝ ∞ (K.chart (C.referenceState, 0) m) (p.1, 0) :=
     hc.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp0)

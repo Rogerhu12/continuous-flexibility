@@ -71,7 +71,7 @@ theorem n06_positive_physical_density_of_regular_coefficients
     (hreg : ContDiffOn ℝ ∞ (K.coefficients z m).a (canonicalOpen S K m) ∧
       ContDiffOn ℝ ∞ (K.coefficients z m).b (canonicalOpen S K m) ∧
       ContDiffOn ℝ ∞ (K.coefficients z m).c (canonicalOpen S K m))
-    {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K m) :
+    {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K z m) :
     (K.coefficients z m).a (K.chart z m x) =
         (coordinatePrincipalDensity (L.coefficients z) (K.chart z m) (K.height z m)).a x ∧
       (K.coefficients z m).b (K.chart z m x) =
@@ -79,12 +79,12 @@ theorem n06_positive_physical_density_of_regular_coefficients
       (K.coefficients z m).c (K.chart z m x) =
         (coordinatePrincipalDensity (L.coefficients z) (K.chart z m) (K.height z m)).c x := by
   have hparts := n06_N04_qualitative_parts h04
-  have hcharts := hparts.1.2.2.2.2.2.2.2.1 z hz hs m
+  have hcharts := hparts.1.charts z hz hs m
   have hp := hcharts.1 hx
   have hi := hcharts.2.2.1 x hx
-  have hpa : x ∈ annularOpen D := ⟨(h04.2.2.2.1 m).2.2 hx.1, mem_univ _⟩
+  have hpa : x ∈ annularOpen D := (h04.1.domains z hz hs m).2.2.1 hx
   have hphys := n06_correctedCoefficients_contDiffAt_of_nonneg hT hS h01 h03 hz hs hpa
-    (h04.2.2.2.2.1 m hm x.1 hx.1).le
+    ((h04.1.domains z hz hs m).2.2.2.2.2.2.1 x hx hm).le
   have hregAt := fun {f : PolarPoint → ℝ}
       (hf : ContDiffOn ℝ ∞ f (canonicalOpen S K m)) =>
     (hf.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp)).differentiableAt (by simp)

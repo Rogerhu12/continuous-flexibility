@@ -65,8 +65,7 @@ theorem n06_actual_dividedCoefficients_bounded
       |(K.dividedDifference z m).a p| ≤ Q ∧
         |(K.dividedDifference z m).b p| ≤ Q ∧
         |(K.dividedDifference z m).c p| ≤ Q := by
-  obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, hjets, _⟩ := h04
-  obtain ⟨B, _, hB⟩ := hjets 0
+  obtain ⟨B, _, hB⟩ := h04.2.2.1 0
   let Q := B * T.E0 (T.sample (K.cell m)) ^ B *
     (1 + stateGrading S loss (z.1 - C.referenceState) + |z.2|)
   refine ⟨|Q|, abs_nonneg Q, fun p hp => ?_⟩
@@ -100,13 +99,13 @@ theorem n06_positive_boundary_normalDensity
       (fun p => a p.1) (canonicalOpen S K m))
     (heb : EqOn (K.coefficients (C.referenceState, 0) m).b
       (fun _ => 0) (canonicalOpen S K m))
-    (hprincipal : ∀ q ∈ physicalPieceOpen S K m,
+    (hprincipal : ∀ q ∈ physicalPieceOpen S K z m,
       (K.coefficients z m).a (K.chart z m q) =
         (coordinatePrincipalDensity (L.coefficients z) (K.chart z m) (K.height z m)).a q ∧
       (K.coefficients z m).b (K.chart z m q) =
         (coordinatePrincipalDensity (L.coefficients z) (K.chart z m) (K.height z m)).b q)
     (canonicalUpper : Bool) {x : PolarPoint}
-    (hx : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m))
+    (hx : x ∈ physicalPieceClosed S K z m)
     (hp : x ∈ annularOpen D)
     (hboundary : (K.chart z m x).1 = n06Endpoint (K.left m) (K.right m) canonicalUpper) :
     (coordinatePrincipalDensity (L.coefficients z) (K.chart z m) (K.height z m)).a x =
@@ -115,54 +114,54 @@ theorem n06_positive_boundary_normalDensity
   let P := coordinatePrincipalDensity (L.coefficients z) (K.chart z m) (K.height z m)
   let d (q : PolarPoint) := ((K.chart z m q).1 - K.left m) *
     (K.right m - (K.chart z m q).1)
+  have hΩ := n06_positivePhysicalPiece_eq_reference h04.1 hz hs m hm
+  have hxrad : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) := by
+    have hx' := hx
+    rw [n06_physicalPieceClosed_eq_reference_rectangle h04.1 m hΩ] at hx'
+    exact hx'.1
   have hreg := n06_correctedCoefficients_contDiffAt_of_nonneg hT hS h01 h03 hz hs hp
-    (n06_positivePiece_closed_slope_nonneg h01 h04 m hm hx)
-  have hclosed := h04.2.2.2.2.2.2.2.2.1 z hz hs m x hx
+    (n06_positivePiece_closed_slope_nonneg h01 h04 m hm hxrad)
+  have hclosed := (h04.1.boundary z hz hs m).2.2.2.2.1 x hx
   have hcont : ContinuousAt P.a x ∧ ContinuousAt P.b x :=
     n06_coordinatePrincipalDensity_normal_continuousAt
       hreg.1.continuousAt hreg.2.1.continuousAt hreg.2.2.continuousAt
       hclosed.1 hclosed.2.1.continuousAt hclosed.2.2.1
-  have hmap := (h04.2.2.2.2.2.2.2.1 z hz hs m).1
-  have hclosure : x ∈ closure (physicalPieceOpen S K m) := by
-    simpa only [physicalPieceOpen, closure_prod_eq,
-      closure_Ioo (h04.2.2.2.1 m).1.ne, closure_univ] using
-      (show x ∈ Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ (univ : Set ℝ) from
-        ⟨hx, mem_univ _⟩)
-  haveI : NeBot (𝓝[physicalPieceOpen S K m] x) :=
-    mem_closure_iff_nhdsWithin_neBot.mp hclosure
+  have hmap := (h04.1.charts z hz hs m).1
+  haveI : NeBot (𝓝[physicalPieceOpen S K z m] x) :=
+    mem_closure_iff_nhdsWithin_neBot.mp hx
   have hzero : d x = 0 := by
     dsimp only [d]
     rw [hboundary]
     cases canonicalUpper <;> simp [n06Endpoint]
-  have hd : Tendsto d (𝓝[physicalPieceOpen S K m] x) (𝓝 0) := by
+  have hd : Tendsto d (𝓝[physicalPieceOpen S K z m] x) (𝓝 0) := by
     have hdy : ContinuousAt (fun q => (K.chart z m q).1) x := hclosed.1.continuousAt.fst
     have hc : ContinuousAt d x :=
       (hdy.sub continuousAt_const).mul (continuousAt_const.sub hdy)
     simpa only [hzero] using hc.tendsto.mono_left nhdsWithin_le_nhds
   obtain ⟨Q, _, hbound⟩ := n06_actual_dividedCoefficients_bounded h04 hz m
-  have hboundA : ∀ᶠ q in 𝓝[physicalPieceOpen S K m] x,
+  have hboundA : ∀ᶠ q in 𝓝[physicalPieceOpen S K z m] x,
       |(K.dividedDifference z m).a (K.chart z m q)| ≤ Q := by
     filter_upwards [self_mem_nhdsWithin] with q hq
     exact (hbound _ (hmap hq)).1
-  have hboundB : ∀ᶠ q in 𝓝[physicalPieceOpen S K m] x,
+  have hboundB : ∀ᶠ q in 𝓝[physicalPieceOpen S K z m] x,
       |(K.dividedDifference z m).b (K.chart z m q)| ≤ Q := by
     filter_upwards [self_mem_nhdsWithin] with q hq
     exact (hbound _ (hmap hq)).2.1
   have hprodA := n06_tendsto_cube_mul_of_bounded hd hboundA
   have hprodB := n06_tendsto_cube_mul_of_bounded hd hboundB
-  have hrow : ∀ᶠ q in 𝓝[physicalPieceOpen S K m] x,
+  have hrow : ∀ᶠ q in 𝓝[physicalPieceOpen S K z m] x,
       P.a q - a (K.chart z m q).1 = d q ^ 3 * (K.dividedDifference z m).a (K.chart z m q) ∧
       P.b q = d q ^ 3 * (K.dividedDifference z m).b (K.chart z m q) := by
-    obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, hcubic, _, _⟩ := h04
+    have hcubic := h04.2.1.2.2.2.2
     filter_upwards [self_mem_nhdsWithin] with q hq
     have hqC := hmap hq
     have he := hcubic z hz hs m hm (K.chart z m q) hqC
     rw [(hprincipal q hq).1, (hprincipal q hq).2, hea hqC, heb hqC, sub_zero] at he
     exact ⟨he.1, he.2.1⟩
   have hdiff : Tendsto (fun q => P.a q - a (K.chart z m q).1)
-      (𝓝[physicalPieceOpen S K m] x) (𝓝 0) :=
+      (𝓝[physicalPieceOpen S K z m] x) (𝓝 0) :=
     hprodA.congr' (hrow.mono (fun _ hq => hq.1.symm))
-  have hbzero : Tendsto P.b (𝓝[physicalPieceOpen S K m] x) (𝓝 0) :=
+  have hbzero : Tendsto P.b (𝓝[physicalPieceOpen S K z m] x) (𝓝 0) :=
     hprodB.congr' (hrow.mono (fun _ hq => hq.2.symm))
   have haF : ContinuousAt (fun q => a (K.chart z m q).1) x :=
     ContinuousAt.comp (f := fun q : PolarPoint => (K.chart z m q).1) (x := x)
@@ -188,7 +187,7 @@ theorem n06_positive_root_boundaryDensity
       (fun p => a p.1) (canonicalOpen S K m))
     (heb : EqOn (K.coefficients (C.referenceState, 0) m).b
       (fun _ => 0) (canonicalOpen S K m))
-    (hprincipal : ∀ q ∈ physicalPieceOpen S K m,
+    (hprincipal : ∀ q ∈ physicalPieceOpen S K z m,
       (K.coefficients z m).a (K.chart z m q) =
         (coordinatePrincipalDensity (L.coefficients z) (K.chart z m) (K.height z m)).a q ∧
       (K.coefficients z m).b (K.chart z m q) =
@@ -196,7 +195,7 @@ theorem n06_positive_root_boundaryDensity
     (canonicalUpper : Bool) {r σ : ℝ} {β H ρ κ Hr : ℝ → ℝ}
     (J : N06RootFirstJets (K.chart z m) (K.height z m) r
       (n06Endpoint (K.left m) (K.right m) canonicalUpper) σ β H ρ κ Hr)
-    (hr : r ∈ Icc (K.physicalLeft m) (K.physicalRight m))
+    (hx : ∀ θ : ℝ, (r, θ) ∈ physicalPieceClosed S K z m)
     (hp : r ∈ Ioo D.a D.b) (θ : ℝ) (Q Qr Qt W : PolarPoint → ℝ) :
     n06RootBoundaryDensity (L.coefficients z) (K.chart z m) (K.height z m)
       Q Qr Qt W (r, θ) (n06Endpoint (K.left m) (K.right m) canonicalUpper, β θ) =
@@ -209,7 +208,7 @@ theorem n06_positive_root_boundaryDensity
       n06Endpoint (K.left m) (K.right m) canonicalUpper :=
     congrArg Prod.fst (J.chart_value θ)
   have hrow := n06_positive_boundary_normalDensity hT hS h01 h03 h04 hz hs hm ha hea heb
-    hprincipal canonicalUpper hr ⟨hp, mem_univ _⟩ hboundary
+    hprincipal canonicalUpper (hx θ) ⟨hp, mem_univ _⟩ hboundary
   simp only [n06RootBoundaryDensity, hrow.1, hrow.2, zero_mul, add_zero]
 
 end ContinuousFlexibility.Statements

@@ -120,16 +120,17 @@ theorem n06_controlledReference_inverse_circle
       ((K.inverseChart (C.referenceState, 0) m p).1, θ) := by
   have h01 : N01Properties D T S C base loss ε := h.1.1.1
   have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2
-  have hc := h04.2.2.2.2.2.2.2.1
+  have hc := h04.1.charts
     (C.referenceState, 0) (n05_referenceState_mem h01.2.1)
     (n05_referenceState_sector h01.2.2.1) m
+  rw [h04.1.referenceDomain m] at hc
   let x := K.inverseChart (C.referenceState, 0) m p
-  have hx : x ∈ physicalPieceOpen S K m := hc.2.1 hp
+  have hx : x ∈ referencePhysicalPieceOpen S K m := hc.2.1 hp
   have hy : (K.chart (C.referenceState, 0) m (x.1, 0)).1 = p.1 := by
     have he := congrArg Prod.fst (hc.2.2.2.1 p hp)
     rw [(hcoordinates.1 m x hx).1] at he
     exact he
-  have hq : (x.1, θ) ∈ physicalPieceOpen S K m := ⟨hx.1, mem_univ _⟩
+  have hq : (x.1, θ) ∈ referencePhysicalPieceOpen S K m := ⟨hx.1, mem_univ _⟩
   have he := (hcoordinates.1 m (x.1, θ) hq).1
   rw [hy] at he
   exact (congrArg (K.inverseChart (C.referenceState, 0) m) he).symm.trans
@@ -147,10 +148,11 @@ theorem n06_controlledReferenceHeight_circle
       (K.height (C.referenceState, 0) m (x.1, 0))⁻¹ * f (x.1, θ) := by
   have h01 : N01Properties D T S C base loss ε := h.1.1.1
   have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2
-  have hx := (h04.2.2.2.2.2.2.2.1 (C.referenceState, 0)
+  have hx := (h04.1.charts (C.referenceState, 0)
     (n05_referenceState_mem h01.2.1) (n05_referenceState_sector h01.2.2.1) m).2.1 hp
+  rw [h04.1.referenceDomain m] at hx
   have hq : ((K.inverseChart (C.referenceState, 0) m p).1, θ) ∈
-      physicalPieceOpen S K m := ⟨hx.1, mem_univ _⟩
+      referencePhysicalPieceOpen S K m := ⟨hx.1, mem_univ _⟩
   dsimp only [canonicalHeight]
   rw [n06_controlledReference_inverse_circle h hcoordinates m hp θ,
     (hcoordinates.1 m _ hq).2]

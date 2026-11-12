@@ -4,11 +4,11 @@ import ContinuousFlexibility.Analysis.N06PhysicalReconstruction
 /-!
 # Local finiteness of the actual negative canonical pieces
 
-N04's two half-pieces cover each actual negative component retained by
-N01. Disjointness of the open physical pieces leaves no additional
-negative pieces. Compact finiteness of the natural components therefore
-gives compact finiteness of the actual negative pieces, with no extra
-assumption on the canonical atlas.
+The reference partition identifies every negative index with one of the
+two prescribed halves of an original N01 component.  At a current state
+the actual two-dimensional halves remain inside that same component,
+even when their middle cut moves. Compact finiteness of the original
+components therefore controls the actual current piece closures.
 -/
 
 noncomputable section
@@ -35,8 +35,9 @@ theorem n06_negativePiece_is_cutHalf
     (hN04 : N04Properties D T S C L K base loss ε)
     (hC : controlGeometryConditions D S C) {m : ℕ} (hm : K.positive m = false) :
     ∃ n, m = (K.cutPair n).1 ∨ m = (K.cutPair n).2 := by
-  have hfull := hN04
-  obtain ⟨_, _, _, hpieces, _, hnegative, _, _, _, _, _, hcut, _⟩ := hfull
+  have hpieces := hN04.1.referenceBounds
+  have hnegative := hN04.1.referenceNegative
+  have hcut := hN04.2.1.1.1
   obtain ⟨r, hr⟩ := Set.nonempty_Ioo.mpr (hpieces m).1
   obtain ⟨n, hn⟩ := hC.2.2.2.2.1 r ((hpieces m).2.2 hr) (hnegative m hm r hr)
   obtain ⟨_, _, hleft, hright, hmid, _⟩ := hcut n
@@ -64,7 +65,8 @@ theorem n06_cutHalf_closed_subset_component
       Icc (C.left n) (C.right n) ∧
     Icc (K.physicalLeft (K.cutPair n).2) (K.physicalRight (K.cutPair n).2) ⊆
       Icc (C.left n) (C.right n) := by
-  obtain ⟨_, _, _, hpieces, _, _, _, _, _, _, _, hcut, _⟩ := hN04
+  have hpieces := hN04.1.referenceBounds
+  have hcut := hN04.2.1.1.1
   obtain ⟨_, _, hleft, hright, hmid, _⟩ := hcut n
   have hl := (hpieces (K.cutPair n).1).1
   have hr := (hpieces (K.cutPair n).2).1
@@ -78,8 +80,8 @@ theorem n06_cutHalf_closed_subset_component
     rw [hright] at hx
     exact ⟨hl.le.trans hx.1, hx.2⟩
 
-/-- The actual negative piece closures meet a compact interior support
-only finitely often. This follows from the existing N01/N04 contracts. -/
+/-- The reference negative interval closures meet a compact support only
+finitely often. Current moving domains are treated separately below. -/
 theorem n06_negativePieces_finite_on_compact
     (hD : RadialProfileGeometry D) (hC : controlGeometryConditions D S C)
     (hN04 : N04Properties D T S C L K base loss ε)
@@ -101,5 +103,79 @@ theorem n06_negativePieces_finite_on_compact
     obtain ⟨x, hx, hxJ⟩ := hm.2
     rw [hmn] at hx
     exact ⟨x, (n06_cutHalf_closed_subset_component hN04 n).2 hx, hxJ⟩
+
+/-- The two current halves lie in their original negative component.
+This uses the literal planar union clause, not the reference middle radius. -/
+theorem n06_currentCutHalf_subset_component
+    (hN04 : N04Properties D T S C L K base loss ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1) (n : ℕ) :
+    physicalPieceOpen S K z (K.cutPair n).1 ⊆
+        Ioo (C.left n) (C.right n) ×ˢ (univ : Set ℝ) ∧
+      physicalPieceOpen S K z (K.cutPair n).2 ⊆
+        Ioo (C.left n) (C.right n) ×ˢ (univ : Set ℝ) := by
+  have hcut := hN04.2.1.1.2 z hz hs n
+  have hunion := hcut.2.2.2.1
+  constructor
+  · intro p hp
+    have hu : p ∈ physicalPieceOpen S K z (K.cutPair n).1 ∪
+        physicalPieceOpen S K z (K.cutPair n).2 := Or.inl hp
+    rw [hunion] at hu
+    exact hu.1
+  · intro p hp
+    have hu : p ∈ physicalPieceOpen S K z (K.cutPair n).1 ∪
+        physicalPieceOpen S K z (K.cutPair n).2 := Or.inr hp
+    rw [hunion] at hu
+    exact hu.1
+
+/-- The closure of either moving half stays in the closed original
+component, including its two genuine root circles. -/
+theorem n06_currentCutHalf_closed_subset_component
+    (hN04 : N04Properties D T S C L K base loss ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1) (n : ℕ) :
+    physicalPieceClosed S K z (K.cutPair n).1 ⊆
+        Icc (C.left n) (C.right n) ×ˢ (univ : Set ℝ) ∧
+      physicalPieceClosed S K z (K.cutPair n).2 ⊆
+        Icc (C.left n) (C.right n) ×ˢ (univ : Set ℝ) := by
+  have hsub := n06_currentCutHalf_subset_component hN04 hz hs n
+  constructor
+  · apply closure_minimal ?_ (isClosed_Icc.prod isClosed_univ)
+    intro p hp
+    have h := hsub.1 hp
+    exact ⟨⟨h.1.1.le, h.1.2.le⟩, mem_univ _⟩
+  · apply closure_minimal ?_ (isClosed_Icc.prod isClosed_univ)
+    intro p hp
+    have h := hsub.2 hp
+    exact ⟨⟨h.1.1.le, h.1.2.le⟩, mem_univ _⟩
+
+/-- A compact radial support meets only finitely many actual current
+negative closures. Both moving halves are charged to their fixed original
+component; no radial shape of the middle cut is assumed. -/
+theorem n06_currentNegativePieces_finite_on_compact
+    (hD : RadialProfileGeometry D) (hC : controlGeometryConditions D S C)
+    (hN04 : N04Properties D T S C L K base loss ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1)
+    {J : Set ℝ} (hJ : IsCompact J) (hJD : J ⊆ radialCore D) :
+    {m | K.positive m = false ∧
+      (physicalPieceClosed S K z m ∩ (J ×ˢ (univ : Set ℝ))).Nonempty}.Finite := by
+  have hfinite := n06_controlComponents_finite_on_compact hD hC hJ hJD
+  apply ((hfinite.image (fun n => (K.cutPair n).1)).union
+    (hfinite.image (fun n => (K.cutPair n).2))).subset
+  intro m hm
+  obtain ⟨n, hmn | hmn⟩ := n06_negativePiece_is_cutHalf hN04 hC hm.1
+  · left
+    refine ⟨n, ?_, hmn.symm⟩
+    obtain ⟨p, hp, hpJ⟩ := hm.2
+    rw [hmn] at hp
+    have hpC := (n06_currentCutHalf_closed_subset_component hN04 hz hs n).1 hp
+    exact ⟨p.1, hpC.1, hpJ.1⟩
+  · right
+    refine ⟨n, ?_, hmn.symm⟩
+    obtain ⟨p, hp, hpJ⟩ := hm.2
+    rw [hmn] at hp
+    have hpC := (n06_currentCutHalf_closed_subset_component hN04 hz hs n).2 hp
+    exact ⟨p.1, hpC.1, hpJ.1⟩
 
 end ContinuousFlexibility.Statements

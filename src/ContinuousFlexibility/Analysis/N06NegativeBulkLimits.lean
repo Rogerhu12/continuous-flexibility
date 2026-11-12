@@ -165,7 +165,7 @@ theorem n06N05_negative_graphApproximation
       (hQN N).toLp (n06NegativeFinitePrincipal v N) = (hGN N).toLp (n06CylinderCosineCut N G) :=
     (hQN N).toLp_congr (hGN N) (hQeq N)
   refine ⟨G, hG, ⟨{
-    left_lt_right := (h04.2.2.2.1 m).2.1
+    left_lt_right := (h04.1.referenceBounds m).2.1
     modes := v
     coefficient := fun i => (hv i).1
     contDiff := fun i => (hv i).2.1

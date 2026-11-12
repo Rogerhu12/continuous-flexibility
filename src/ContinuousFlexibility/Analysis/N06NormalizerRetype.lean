@@ -92,6 +92,7 @@ def n06NormalizerCanonical {S : PhysicalSpacesData}
   right := K.right
   physicalLeft := K.physicalLeft
   physicalRight := K.physicalRight
+  physicalDomain := K.physicalDomain
   cell := K.cell
   positive := K.positive
   chart := K.chart

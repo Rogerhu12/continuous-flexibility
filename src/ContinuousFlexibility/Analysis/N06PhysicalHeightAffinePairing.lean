@@ -32,8 +32,7 @@ theorem n06_chiLeft_half_pairing_integrable
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {J : Set ℝ}
-    (hfinite : {m : ℕ |
-      (Ioo (K.physicalLeft m) (K.physicalRight m) ∩ J).Nonempty}.Finite)
+    (hfinite : (n06PhysicalSupportPieces K z J).Finite)
     {g : PolarPoint → ℝ}
     (hg : ∀ m, MemLp (canonicalSource S K z m g) 2 (canonicalMeasure S K m))
     (hsupport : ∀ r, r ∉ J → ∀ θ, g (r, θ) = 0) :
@@ -44,7 +43,7 @@ theorem n06_chiLeft_half_pairing_integrable
       2 (canonicalMeasure S K m) :=
     n06_current_canonicalHeight_memLp h04 hz hs m
       (hS.2.2.1.1.continuous.comp continuous_fst).continuousOn
-  exact (n06_finitePhysicalPartition_integral h04 measurableSet_Ioc hfinite
+  exact (n06_finitePhysicalPartition_integral h04 hz hs measurableSet_Ioc hfinite
     (g := fun p : PolarPoint => S.chiLeft p.1 * g p)
     (fun r hr θ => by rw [hsupport r hr θ, mul_zero])
     (fun m _ => (n06_current_pairing_integrable h04 hz hs m (hχ m) (hg m)).1)).1
@@ -58,8 +57,7 @@ theorem n06_physicalHeight_affine_pairing
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (W : CanonicalL2Sequence S K) (aL : ℝ)
     {J : Set ℝ}
-    (hfinite : {m : ℕ |
-      (Ioo (K.physicalLeft m) (K.physicalRight m) ∩ J).Nonempty}.Finite)
+    (hfinite : (n06PhysicalSupportPieces K z J).Finite)
     {g : PolarPoint → ℝ}
     (h₀ : ∀ m, MemLp (canonicalSource S K z m g) 2 (canonicalMeasure S K m))
     (h₁ : ∀ m, MemLp (canonicalSource S K z m (fun q => g (q + (0, Real.pi))))
@@ -77,8 +75,8 @@ theorem n06_physicalHeight_affine_pairing
   let R : PolarPoint → ℝ := fun p => η p - aL * χ p
   let Q : Set PolarPoint := radialCore D ×ˢ Ioc (0 : ℝ) Real.pi
   have hab : D.a ≤ D.b := by
-    obtain ⟨x, hxL, hxR⟩ := exists_between (h04.2.2.2.1 0).1
-    have hx := (h04.2.2.2.1 0).2.2 ⟨hxL, hxR⟩
+    obtain ⟨x, hxL, hxR⟩ := exists_between (h04.1.referenceBounds 0).1
+    have hx := (h04.1.referenceBounds 0).2.2 ⟨hxL, hxR⟩
     exact (hx.1.trans hx.2).le
   have hnamed := n06_physical_representation h04 hz hs
     (W, aL, 0, 0) (0 : CanonicalSequence S K)

@@ -39,7 +39,7 @@ private theorem n06_adjacent_continuous_representatives
     cauchyData_eq_of_eqOn_Ioo_right hrs hdr hdv heR
   exact ⟨hleft.1.trans hright.1.symm, hleft.2.trans hright.2.symm⟩
 
-private theorem n06_radial_mode_pullback_contDiffAt
+theorem n06_radial_mode_pullback_contDiffAt
     {F : PolarPoint → PolarPoint} {H : PolarPoint → ℝ} {v : ℝ → ℝ} {x : ℝ}
     (hF : ContDiffAt ℝ ∞ F (x, 0)) (hH : ContDiffAt ℝ ∞ H (x, 0))
     (hv : ContDiff ℝ 1 v) :
@@ -53,7 +53,7 @@ private theorem n06_radial_mode_pullback_contDiffAt
   have hf : ContDiffAt ℝ 1 (fun r => (F (r, 0)).1) x := hFline.fst
   exact hh.mul (hv.contDiffAt.comp x hf)
 
-private theorem n06_remainder_mode_C1_representative
+theorem n06_remainder_mode_C1_representative
     {D : ReferenceData} (hD : IsAccumulatingProfile D) (hb : RadialTrueBorder D)
     {γ M₀ M₁ : ℝ} (hγ : 0 < γ) {U : RadialUnknown} {F : RadialSource}
     (hgraph : ReferenceGraph D γ M₀ M₁ U F)
@@ -122,9 +122,9 @@ theorem n06N05_canonicalModes_physical_traces_local
   let fr : ℝ → ℝ := fun x => K.height (C.referenceState, 0) mr (x, 0) *
     vr ((K.chart (C.referenceState, 0) mr (x, 0)).1)
   let rem : PolarPoint → ℝ := n06ReferenceRemainder S.chiLeft η u.val.1.2.1
-  have hleft : K.physicalLeft ml < K.physicalRight ml := (h04.2.2.2.1 ml).1
+  have hleft : K.physicalLeft ml < K.physicalRight ml := (h04.1.referenceBounds ml).1
   have hright : K.physicalRight ml < K.physicalRight mr :=
-    hjoin.trans_lt (h04.2.2.2.1 mr).1
+    hjoin.trans_lt (h04.1.referenceBounds mr).1
   have hη : MemLp η 2 (radialPhysicalMeasure D) :=
     r11b_output_memLp h01.1.1 h01.1.2.2.2.1 h.2.2.2.1 hgraph.1
   have hχ : MemLp (fun p : PolarPoint => u.val.1.2.1 * S.chiLeft p.1) 2
@@ -152,13 +152,12 @@ theorem n06N05_canonicalModes_physical_traces_local
       ContDiffAt ℝ 1
         (fun r => K.height (C.referenceState, 0) m (r, 0) *
           v ((K.chart (C.referenceState, 0) m (r, 0)).1)) x := by
-    exact n06_radial_mode_pullback_contDiffAt
-      (h04.2.2.2.2.2.2.2.2.1 (C.referenceState, 0) href hs m (x, 0) hx).1
-      (h04.2.2.2.2.2.2.2.2.1 (C.referenceState, 0) href hs m (x, 0) hx).2.1 hv
+    have hregular := n05_reference_boundary_regular h04.1 href hs m (p := (x, 0)) hx
+    exact n06_radial_mode_pullback_contDiffAt hregular.1 hregular.2.1 hv
   have hsubL : Ioo (K.physicalLeft ml) (K.physicalRight ml) ⊆ radialCore D :=
-    (h04.2.2.2.1 ml).2.2
+    (h04.1.referenceBounds ml).2.2
   have hsubR : Ioo (K.physicalLeft mr) (K.physicalRight mr) ⊆ radialCore D :=
-    (h04.2.2.2.1 mr).2.2
+    (h04.1.referenceBounds mr).2.2
   have heL : fl =ᵐ[volume.restrict (Ioo (K.physicalLeft ml) (K.physicalRight ml))] w :=
     hL.symm.trans (ae_restrict_of_ae_restrict_of_subset hsubL hcommon)
   have heR : fr =ᵐ[volume.restrict (Ioo (K.physicalRight ml) (K.physicalRight mr))] w := by

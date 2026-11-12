@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N05ReferenceCoefficients
 import ContinuousFlexibility.Analysis.N05ReferenceQuadraticTests
+import ContinuousFlexibility.Analysis.N05ReferenceInterface
 
 /-!
 # The frozen negative canonical identity determines the reference symbol
@@ -45,15 +46,16 @@ theorem n05_negative_conjugation_from_N04
     (h04 : N04Properties D T S C L K base loss ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) {m : ℕ} (hm : K.positive m = false)
-    {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K m)
+    {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K z m)
     (W : PolarPoint → ℝ) (hW : ContDiff ℝ ∞ W) :
     K.height z m x / |planeJacobian (K.chart z m) x| *
         divergenceOperator (L.coefficients z)
           (fun y => K.height z m y * W (K.chart z m y)) x =
       divergenceOperator n05TricomiCoefficients W (K.chart z m x) +
         K.potential z m (K.chart z m x) * W (K.chart z m x) := by
-  rcases h04 with ⟨_, _, _, _, _, _, _, hcharts, _, _, _, _, _, hop, hcoeff, _⟩
-  have hchart := hcharts z hz hs m
+  have hchart := h04.1.charts z hz hs m
+  have hop := h04.2.1.2.2.1
+  have hcoeff := h04.2.1.2.2.2.1
   have hy := hchart.1 hx
   have hinv := hchart.2.2.1 x hx
   have hnear : ∀ᶠ q in 𝓝 (K.chart z m x), q ∈ canonicalOpen S K m :=
@@ -82,13 +84,14 @@ theorem n05_negative_reference_determinant_nonreflection
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     {m : ℕ} (hm : K.positive m = false)
-    {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K m)
+    {x : PolarPoint} (hx : x ∈ referencePhysicalPieceOpen S K m)
     (hθ : x.2 ∉ Set.range (fun n : ℤ => (n : ℝ) * (Real.pi / 2))) :
     K.height (C.referenceState, 0) m x ^ 4 *
         (D.w x.1 * (deriv D.w x.1 / x.1)) =
       -(K.chart (C.referenceState, 0) m x).1 := by
   have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _, hnegative, _, _, hclosed, _⟩
+  have hpieces := h04.1.referenceBounds
+  have hnegative := h04.1.referenceNegative
   have hxD : x ∈ annularOpen D := ⟨(hpieces m).2.2 hx.1, mem_univ _⟩
   have hd : deriv D.w x.1 ≠ 0 := (hnegative m hm x.1 hx.1).ne
   have h01 := h.1.1.1
@@ -96,11 +99,12 @@ theorem n05_negative_reference_determinant_nonreflection
     n05_referenceState_mem h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
   obtain ⟨hΨ, hh, hJ, _⟩ :=
-    hclosed (C.referenceState, 0) hmem hsector m x ⟨hx.1.1.le, hx.1.2.le⟩
+    n05_reference_boundary_regular h04.1 hmem hsector m (p := x) ⟨hx.1.1.le, hx.1.2.le⟩
   obtain ⟨ha, hb, hc⟩ :=
     n05_reference_coefficients_contDiffAt hT hS h.1 hxD hd hθ
   have hdet := n05_negative_height_determinant ha hb hc hh hΨ hJ
-    (n05_negative_conjugation_from_N04 h.2.2.2.2 hmem hsector hm hx)
+    (n05_negative_conjugation_from_N04 h.2.2.2.2 hmem hsector hm
+      (by simpa only [h04.1.referenceDomain m] using hx))
   have hcoeff := n05_reference_coefficients_nonreflection hT hS h.1 hxD hd hθ
   have hLa : (L.coefficients (C.referenceState, 0)).a x = D.w x.1 :=
     (h.1.2.1 (C.referenceState, 0) hmem hsector x).trans
@@ -116,7 +120,7 @@ theorem n05_negative_reference_symbol_nonreflection
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     {m : ℕ} (hm : K.positive m = false)
-    {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K m)
+    {x : PolarPoint} (hx : x ∈ referencePhysicalPieceOpen S K m)
     (hθ : x.2 ∉ Set.range (fun n : ℤ => (n : ℝ) * (Real.pi / 2))) :
     let z := (C.referenceState, 0)
     let ξ := fun y => (K.chart z m y).1
@@ -128,7 +132,8 @@ theorem n05_negative_reference_symbol_nonreflection
         |planeJacobian (K.chart z m) x| * (-ξ x) := by
   dsimp only
   have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _, hnegative, _, _, hclosed, _⟩
+  have hpieces := h04.1.referenceBounds
+  have hnegative := h04.1.referenceNegative
   have hxD : x ∈ annularOpen D := ⟨(hpieces m).2.2 hx.1, mem_univ _⟩
   have hd : deriv D.w x.1 ≠ 0 := (hnegative m hm x.1 hx.1).ne
   have h01 := h.1.1.1
@@ -136,7 +141,7 @@ theorem n05_negative_reference_symbol_nonreflection
     n05_referenceState_mem h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
   obtain ⟨hΨ, hh, hJ, _⟩ :=
-    hclosed (C.referenceState, 0) hmem hsector m x ⟨hx.1.1.le, hx.1.2.le⟩
+    n05_reference_boundary_regular h04.1 hmem hsector m (p := x) ⟨hx.1.1.le, hx.1.2.le⟩
   obtain ⟨ha, hb, hc⟩ := n05_reference_coefficients_contDiffAt hT hS h.1 hxD hd hθ
   have hAa : ContDiffAt ℝ ∞ n05TricomiCoefficients.a (K.chart (C.referenceState, 0) m x) :=
     contDiffAt_const
@@ -145,7 +150,8 @@ theorem n05_negative_reference_symbol_nonreflection
   have hAc : ContDiffAt ℝ ∞ n05TricomiCoefficients.c (K.chart (C.referenceState, 0) m x) :=
     contDiffAt_fst.neg
   have hprincipal := n05_principal_coefficients_of_conjugation ha hb hc hAa hAb hAc hh hΨ hJ
-    (n05_negative_conjugation_from_N04 h.2.2.2.2 hmem hsector hm hx)
+    (n05_negative_conjugation_from_N04 h.2.2.2.2 hmem hsector hm
+      (by simpa only [h04.1.referenceDomain m] using hx))
   have hcoeff := n05_reference_coefficients_nonreflection hT hS h.1 hxD hd hθ
   have hLa : (L.coefficients (C.referenceState, 0)).a x = D.w x.1 :=
     (h.1.2.1 (C.referenceState, 0) hmem hsector x).trans

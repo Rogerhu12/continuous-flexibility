@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N06ReferenceSourceJets
 import ContinuousFlexibility.Analysis.N06CanonicalProperties
+import ContinuousFlexibility.Analysis.N06ControlledPieceFiniteness
 
 /-!
 # Constructing the three reference columns in the selected source scale
@@ -63,14 +64,19 @@ theorem n06Volume_exists_controlled_reference_source
       ∀ m, (V.forget γ t b F m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m]
         canonicalSource S K (C.referenceState, 0) m f := by
   obtain ⟨J, hJ, hJD, hzero⟩ := hsupport
-  have hfinite := n06_controlledReferencePieces_finite_on_compact hD hcoordinates hJ hJD
+  have h01 := h.1.1.1
+  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2
+  have hfinite : Set.Finite {m : ℕ |
+      (physicalPieceOpen S K (C.referenceState, 0) m ∩
+        (J ×ˢ (univ : Set ℝ))).Nonempty} := by
+    rw [n06_referenceSourcePieces_eq_referenceIntervals h04.1 J]
+    exact n06_controlledReferencePieces_finite_on_compact hD hcoordinates hJ hJD
   obtain ⟨δ, hδ, hbound⟩ := n06_controlledReferenceSource_finiteJets_bounded
     h hcoordinates hf hp b hfinite.toFinset
-  have h01 := h.1.1.1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
   obtain ⟨F, hF, _⟩ := n06Volume_exists_finite_canonical_source hD hT hV
-    (n06_N04_qualitative_parts h.2.2.2.2).1 href hs γ t b hfinite hf.contDiffOn
+    h04.1 href hs γ t b hfinite hf.contDiffOn
     (fun p _ => hp p) (fun p _ => he p) hzero hδ hbound
   exact ⟨F, hF⟩
 

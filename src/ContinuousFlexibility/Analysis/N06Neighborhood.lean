@@ -238,18 +238,29 @@ theorem n06_N04Properties_mono {D : ReferenceData} {T : MaterialData}
     (h : N04Properties D T S C L K base loss ε)
     (hb : base ≤ base') (hε : ε' ≤ ε) :
     N04Properties D T S C L K base' loss ε' := by
-  rcases h with ⟨hopen, hsupport, hnormalization, hpieces, hpositive, hnegative,
-    hcover, hcharts, hboundary, hparity, hinverseParity, hcuts, htransmission,
-    hoperator, hnegativeCoefficients, hpositiveDifference, hbounds, hpairing⟩
+  rcases h with ⟨hgeometry, ⟨hcuts, htransmission,
+    hoperator, hnegativeCoefficients, hpositiveDifference⟩, hbounds, hpairing⟩
   have hU := n06_stateNeighborhood_mono (C := C) hb hε
-  exact ⟨hopen, hsupport, n06_forall_mem_mono hU hnormalization,
-    hpieces, hpositive, hnegative, hcover, n06_forall_mem_mono hU hcharts,
-    n06_forall_mem_mono hU hboundary, n06_forall_mem_mono hU hparity,
-    n06_forall_mem_mono hU hinverseParity, hcuts,
+  refine ⟨?_, ⟨⟨hcuts.1, n06_forall_mem_mono hU hcuts.2⟩,
     n06_forall_mem_mono hU htransmission, n06_forall_mem_mono hU hoperator,
     n06_forall_mem_mono hU hnegativeCoefficients,
-    n06_forall_mem_mono hU hpositiveDifference, n06_uniform_bound_mono hU hbounds,
-    n06_forall_mem_mono hU hpairing⟩
+    n06_forall_mem_mono hU hpositiveDifference⟩,
+    n06_uniform_bound_mono hU hbounds, n06_forall_mem_mono hU hpairing⟩
+  exact {
+    normalizationOpen := hgeometry.normalizationOpen
+    normalizationSupport := hgeometry.normalizationSupport
+    normalization := n06_forall_mem_mono hU hgeometry.normalization
+    referenceBounds := hgeometry.referenceBounds
+    referencePositive := hgeometry.referencePositive
+    referenceNegative := hgeometry.referenceNegative
+    referencePartition := hgeometry.referencePartition
+    referenceDomain := hgeometry.referenceDomain
+    domains := n06_forall_mem_mono hU hgeometry.domains
+    partition := n06_forall_mem_mono hU hgeometry.partition
+    charts := n06_forall_mem_mono hU hgeometry.charts
+    boundary := n06_forall_mem_mono hU hgeometry.boundary
+    reflection := n06_forall_mem_mono hU hgeometry.reflection
+    inverseReflection := n06_forall_mem_mono hU hgeometry.inverseReflection }
 
 /-- Raising the low order and reducing the radius retains the complete
 construction through N05, on the very same source space and reference graph. -/

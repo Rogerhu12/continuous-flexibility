@@ -68,8 +68,8 @@ theorem n06N05_canonicalModes_physical_traces
     hrem hp mr n (hrep.1 mr) hmodeR
   rw [← hjoin] at hR
   have hright : K.physicalRight ml < K.physicalRight mr :=
-    hjoin.trans_lt (h04.2.2.2.1 mr).1
+    hjoin.trans_lt (h04.1.referenceBounds mr).1
   exact htrace n (K.physicalLeft ml) (K.physicalRight ml) (K.physicalRight mr)
-    (h04.2.2.2.1 ml).1 hright hcore _ _ hvl hvr hL hR
+    (h04.1.referenceBounds ml).1 hright hcore _ _ hvl hvr hL hR
 
 end ContinuousFlexibility.Statements

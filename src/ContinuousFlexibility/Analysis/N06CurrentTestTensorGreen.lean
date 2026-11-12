@@ -116,7 +116,7 @@ theorem N06CurrentHeightTestTraces.tensor_radial_green
           v (K.right m) * P.radial (K.right m, θ)) -
         (P.value (K.left m, θ) * deriv v (K.left m) -
           v (K.left m) * P.radial (K.left m, θ))) := by
-  have hab : K.left m ≤ K.right m := (h04.2.2.2.1 m).2.1.le
+  have hab : K.left m ≤ K.right m := (h04.1.referenceBounds m).2.1.le
   have hW := n06_current_canonicalHeight_memLp h04 hz hs m hφ.continuous.continuousOn
   have hWrr := (n06_current_canonicalHeight_second_memLp h04 hz hs m hφ).1
   have hI : Integrable (fun p : PolarPoint =>

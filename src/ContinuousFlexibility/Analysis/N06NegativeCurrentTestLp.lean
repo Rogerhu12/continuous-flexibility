@@ -101,9 +101,9 @@ theorem n06_current_canonicalHeight_contDiffOn
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (m : ℕ) {φ : PolarPoint → ℝ} (hφ : ContDiff ℝ ∞ φ) :
     ContDiffOn ℝ ∞ (canonicalHeight S K z m φ) (canonicalOpen S K m) := by
-  have hc := h04.2.2.2.2.2.2.2.1 z hz hs m
+  have hc := h04.1.charts z hz hs m
   have hdiv : ContDiffOn ℝ ∞ (fun x => φ x / K.height z m x)
-      (physicalPieceOpen S K m) :=
+      (physicalPieceOpen S K z m) :=
     hφ.contDiffOn.div hc.2.2.2.2.2.2.1
       (fun x hx => (hc.2.2.2.2.2.2.2 x hx).1.ne')
   exact hdiv.comp hc.2.2.2.2.2.1 hc.2.1
@@ -115,17 +115,15 @@ theorem n06_current_canonicalSource_aestronglyMeasurable
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (m : ℕ) {f : PolarPoint → ℝ} (hf : Measurable f) :
     AEStronglyMeasurable (canonicalSource S K z m f) (canonicalMeasure S K m) := by
-  have hc := h04.2.2.2.2.2.2.2.1 z hz hs m
-  let Q : Set PolarPoint :=
-    Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ Icc (0 : ℝ) Real.pi
+  have hc := h04.1.charts z hz hs m
+  let Q : Set PolarPoint := physicalPieceClosed S K z m
   let U : Set PolarPoint := Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi
   have hsub : U ⊆ canonicalOpen S K m := fun _ hp => ⟨hp.1, mem_univ _⟩
   have hG : ContinuousOn (K.inverseChart z m) U :=
     hc.2.2.2.2.2.1.continuousOn.mono hsub
   have hGQ : MapsTo (K.inverseChart z m) U Q := by
     intro p hp
-    have h := (n06_canonicalChart_halfPeriod_maps h04 hz hs m).2 hp
-    exact ⟨mem_Icc_of_Ioo h.1, h.2.1.le, h.2.2⟩
+    exact subset_closure (hc.2.1 (hsub hp))
   have hw := n06_currentChart_closed_weights h04 hz hs m
   have hH : AEMeasurable (fun p => K.height z m (K.inverseChart z m p))
       (canonicalMeasure S K m) :=
@@ -146,7 +144,7 @@ theorem n06_actual_canonicalPotential_bounded
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (m : ℕ) :
     ∃ Q : ℝ, 0 ≤ Q ∧ ∀ p ∈ canonicalOpen S K m, |K.potential z m p| ≤ Q := by
-  obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, hjets, _⟩ := h04
+  have hjets := h04.2.2.1
   obtain ⟨B, _, hB⟩ := hjets 0
   let Q := B * T.E0 (T.sample (K.cell m)) ^ B *
     (1 + stateGrading S loss (z.1 - C.referenceState) + |z.2|)
@@ -177,16 +175,16 @@ theorem n06_negative_current_operatorTest_eq
   obtain ⟨g, hg, hgW⟩ := n06_exists_smooth_strip_germ hW hp
   have hA := (n06_N04_qualitative_parts h04).1
   have hB := (n06_N04_qualitative_parts h04).2
-  have hc := hA.2.2.2.2.2.2.2.1 z hz hs m
+  have hc := hA.charts z hz hs m
   let x := K.inverseChart z m p
-  have hx : x ∈ physicalPieceOpen S K m := hc.2.1 hp
+  have hx : x ∈ physicalPieceOpen S K z m := hc.2.1 hp
   have hFx : K.chart z m x = p := hc.2.2.2.1 p hp
   have hF : ContinuousAt (K.chart z m) x :=
-    hc.2.2.2.2.1.continuousOn.continuousAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hx)
+    hc.2.2.2.2.1.continuousOn.continuousAt ((hA.domains z hz hs m).1.mem_nhds hx)
   have hnear : ∀ᶠ q in 𝓝 x, g (K.chart z m q) = W (K.chart z m q) := by
     exact (hFx ▸ hF.tendsto).eventually hgW
   have hphys : φ =ᶠ[𝓝 x] (fun q => K.height z m q * g (K.chart z m q)) := by
-    filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds hx, hnear] with q hq hqg
+    filter_upwards [(hA.domains z hz hs m).1.mem_nhds hx, hnear] with q hq hqg
     rw [hqg]
     change φ q = K.height z m q * (φ (K.inverseChart z m (K.chart z m q)) /
       K.height z m (K.inverseChart z m (K.chart z m q)))

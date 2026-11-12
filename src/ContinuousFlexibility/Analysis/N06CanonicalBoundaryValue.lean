@@ -45,24 +45,18 @@ theorem n06_canonicalBoundary_radial_eq_zeroAngle
     (hA : N04PartA D S C K base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ) {c : ℝ}
-    (hc : c = K.physicalLeft m ∨ c = K.physicalRight m) (θ : ℝ) :
+    (hc : ∀ η : ℝ, (c, η) ∈ frontier (physicalPieceOpen S K z m)) (θ : ℝ) :
     (K.chart z m (c, θ)).1 = (K.chart z m (c, 0)).1 := by
-  have hpiece := hA.2.2.2.1 m
-  have hcc : c ∈ Icc (K.physicalLeft m) (K.physicalRight m) := by
-    rcases hc with h | h
-    · rw [h]
-      exact ⟨le_rfl, hpiece.1.le⟩
-    · rw [h]
-      exact ⟨hpiece.1.le, le_rfl⟩
-  have hclosed := hA.2.2.2.2.2.2.2.2.1 z hz hs m
+  have hpiece := hA.referenceBounds m
+  have hclosed := (hA.boundary z hz hs m).2.2.2.2.1
   have hf : Continuous (fun η : ℝ => (K.chart z m (c, η)).1) := by
     apply continuous_iff_continuousAt.mpr
     intro η
     have hline : ContinuousAt (fun t : ℝ => (c, t)) η :=
       (continuous_const.prodMk continuous_id).continuousAt
-    exact ((hclosed (c, η) hcc).1.continuousAt.comp hline).fst
+    exact ((hclosed (c, η) (frontier_subset_closure (hc η))).1.continuousAt.comp hline).fst
   exact continuous_two_values_constant hpiece.2.1 hf
-    (fun η => canonicalChart_endpoint_radial_eq_boundary hA hz hs m (c, η) hc) θ 0
+    (fun η => canonicalChart_endpoint_radial_eq_boundary hA hz hs m (c, η) (hc η)) θ 0
 
 /-- Each entire physical boundary maps to one canonical boundary. The
 two alternatives are uniform in the angle, rather than a separate choice
@@ -73,11 +67,11 @@ theorem n06_canonicalBoundary_radial_dichotomy
     (hA : N04PartA D S C K base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ) {c : ℝ}
-    (hc : c = K.physicalLeft m ∨ c = K.physicalRight m) :
+    (hc : ∀ η : ℝ, (c, η) ∈ frontier (physicalPieceOpen S K z m)) :
     (∀ θ : ℝ, (K.chart z m (c, θ)).1 = K.left m) ∨
       (∀ θ : ℝ, (K.chart z m (c, θ)).1 = K.right m) := by
   have he := n06_canonicalBoundary_radial_eq_zeroAngle hA hz hs m hc
-  rcases canonicalChart_endpoint_radial_eq_boundary hA hz hs m (c, 0) hc with h | h
+  rcases canonicalChart_endpoint_radial_eq_boundary hA hz hs m (c, 0) (hc 0) with h | h
   · exact Or.inl (fun θ => (he θ).trans h)
   · exact Or.inr (fun θ => (he θ).trans h)
 

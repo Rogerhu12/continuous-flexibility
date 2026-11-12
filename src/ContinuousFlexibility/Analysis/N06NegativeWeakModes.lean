@@ -208,7 +208,7 @@ theorem n06N05_negative_modes_regular
     filter_upwards [hG] with p hp
     rw [hp]
   choose v hv using fun i => n06_negative_canonical_mode_regular
-    (h04.2.2.2.1 m).2.1 (u.val.1.1 m) G hweak i
+    (h04.1.referenceBounds m).2.1 (u.val.1.1 m) G hweak i
   exact ⟨G, hG, v, hv⟩
 
 end ContinuousFlexibility.Analysis

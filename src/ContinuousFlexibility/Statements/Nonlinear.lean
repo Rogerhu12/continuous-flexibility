@@ -3,6 +3,7 @@ import ContinuousFlexibility.Contracts.Annular
 import ContinuousFlexibility.Scalar.NormalizedConservation
 import ContinuousFlexibility.Scalar.TypeCorrection
 import ContinuousFlexibility.Scalar.FormPullback
+import Mathlib.Topology.OpenPartialHomeomorph.Defs
 
 /-!
 # Concrete nonlinear targets N01--N12 and X02
@@ -534,6 +535,8 @@ structure CanonicalData (S : PhysicalSpacesData) where
   right : ℕ → ℝ
   physicalLeft : ℕ → ℝ
   physicalRight : ℕ → ℝ
+  /-- Actual physical pieces; the radial endpoint fields describe their reference state. -/
+  physicalDomain : (AnnularState S × ℝ) → ℕ → Set PolarPoint
   cell : ℕ → ℕ
   positive : ℕ → Bool
   chart : AnnularState S × ℝ → ℕ → PolarPoint → PolarPoint
@@ -549,8 +552,26 @@ structure CanonicalData (S : PhysicalSpacesData) where
 def canonicalOpen (S : PhysicalSpacesData) (K : CanonicalData S) (m : ℕ) : Set PolarPoint :=
   Ioo (K.left m) (K.right m) ×ˢ univ
 
-def physicalPieceOpen (S : PhysicalSpacesData) (K : CanonicalData S) (m : ℕ) : Set PolarPoint :=
+def referencePhysicalPieceOpen (S : PhysicalSpacesData) (K : CanonicalData S)
+    (m : ℕ) : Set PolarPoint :=
   Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ univ
+
+def physicalPieceOpen (S : PhysicalSpacesData) (K : CanonicalData S)
+    (z : AnnularState S × ℝ) (m : ℕ) : Set PolarPoint :=
+  K.physicalDomain z m
+
+def physicalPieceClosed (S : PhysicalSpacesData) (K : CanonicalData S)
+    (z : AnnularState S × ℝ) (m : ℕ) : Set PolarPoint :=
+  closure (physicalPieceOpen S K z m)
+
+def canonicalClosed (S : PhysicalSpacesData) (K : CanonicalData S)
+    (m : ℕ) : Set PolarPoint :=
+  Icc (K.left m) (K.right m) ×ˢ univ
+
+/-- The physical cut is the actual left inverse image of the fixed canonical boundary. -/
+def canonicalCutPoint (S : PhysicalSpacesData) (K : CanonicalData S)
+    (z : AnnularState S × ℝ) (m : ℕ) (θ : ℝ) : PolarPoint :=
+  K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ)
 
 def canonicalHeight (S : PhysicalSpacesData) (K : CanonicalData S)
     (z : AnnularState S × ℝ) (m : ℕ) (u : PolarPoint → ℝ) (p : PolarPoint) : ℝ :=
@@ -568,52 +589,124 @@ def canonicalOperator (S : PhysicalSpacesData) (K : CanonicalData S)
     (fun x => K.height z m x * W (K.chart z m x))
   (if K.positive m then -1 else (1 : ℝ)) * canonicalSource S K z m f p
 
-def N04Properties (D : ReferenceData) (T : MaterialData) (S : PhysicalSpacesData)
-    (C : NonlinearGeometryData S) (L : ReturnCorrectionData S)
-    (K : CanonicalData S) (base loss : ℕ) (ε : ℝ) : Prop :=
-  let U := stateNeighborhood S C base ε
-  IsOpen K.normalizationRegion ∧
-  Function.support (referenceColumn D) ⊆ K.normalizationRegion ∧
-  (∀ z ∈ U, stateSector S z.1 → ∀ m, ∀ p ∈ physicalPieceOpen S K m, p.1 ∈ K.normalizationRegion →
-    K.chart z m p = K.chart (C.referenceState, 0) m p ∧
-    K.height z m p = K.height (C.referenceState, 0) m p) ∧
-  (∀ m, K.physicalLeft m < K.physicalRight m ∧ K.left m < K.right m ∧
-    Ioo (K.physicalLeft m) (K.physicalRight m) ⊆ Ioo D.a D.b) ∧
-  (∀ m, K.positive m = true → ∀ r ∈ Ioo (K.physicalLeft m) (K.physicalRight m),
-    0 < deriv D.w r) ∧
-  (∀ m, K.positive m = false → ∀ r ∈ Ioo (K.physicalLeft m) (K.physicalRight m),
-    deriv D.w r < 0) ∧
-  (∃ E : Set ℝ, volume E = 0 ∧ ∀ r ∈ Ioo D.a D.b \ E,
-    ∃! m, r ∈ Ioo (K.physicalLeft m) (K.physicalRight m)) ∧
-  (∀ z ∈ U, stateSector S z.1 → ∀ m,
-    MapsTo (K.chart z m) (physicalPieceOpen S K m) (canonicalOpen S K m) ∧
-    MapsTo (K.inverseChart z m) (canonicalOpen S K m) (physicalPieceOpen S K m) ∧
-    (∀ p ∈ physicalPieceOpen S K m, K.inverseChart z m (K.chart z m p) = p) ∧
+/-- A stored inverse agrees on a full neighborhood with a genuine local inverse.
+This fixes the boundary jets used by the canonical transmission equation. -/
+def CanonicalBoundaryInverseGerm
+    (F G : PolarPoint → PolarPoint) (p : PolarPoint) : Prop :=
+  ∃ e : OpenPartialHomeomorph PolarPoint PolarPoint,
+    (e : PolarPoint → PolarPoint) = F ∧ p ∈ e.source ∧
+      ContDiffAt ℝ ∞ e.symm (F p) ∧ G =ᶠ[𝓝 (F p)] e.symm
+
+/-- Geometric data on the actual state-dependent physical pieces.
+The reference endpoint fields retain their radial meaning; artificial
+negative cuts may move as curves under the actual travel coordinates. -/
+structure CanonicalGeometry (D : ReferenceData) (S : PhysicalSpacesData)
+    (C : NonlinearGeometryData S) (K : CanonicalData S)
+    (base : ℕ) (ε : ℝ) : Prop where
+  normalizationOpen : IsOpen K.normalizationRegion
+  normalizationSupport : Function.support (referenceColumn D) ⊆ K.normalizationRegion
+  normalization : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 → ∀ m,
+    physicalPieceOpen S K z m ∩ (K.normalizationRegion ×ˢ univ) =
+      physicalPieceOpen S K (C.referenceState, 0) m ∩ (K.normalizationRegion ×ˢ univ) ∧
+    ∀ p ∈ physicalPieceOpen S K z m, p.1 ∈ K.normalizationRegion →
+      K.chart z m p = K.chart (C.referenceState, 0) m p ∧
+      K.height z m p = K.height (C.referenceState, 0) m p
+  referenceBounds : ∀ m,
+    K.physicalLeft m < K.physicalRight m ∧ K.left m < K.right m ∧
+      Ioo (K.physicalLeft m) (K.physicalRight m) ⊆ Ioo D.a D.b
+  referencePositive : ∀ m, K.positive m = true →
+    ∀ r ∈ Ioo (K.physicalLeft m) (K.physicalRight m), 0 < deriv D.w r
+  referenceNegative : ∀ m, K.positive m = false →
+    ∀ r ∈ Ioo (K.physicalLeft m) (K.physicalRight m), deriv D.w r < 0
+  referencePartition : ∃ E : Set ℝ, volume E = 0 ∧ ∀ r ∈ Ioo D.a D.b \ E,
+    ∃! m, r ∈ Ioo (K.physicalLeft m) (K.physicalRight m)
+  referenceDomain : ∀ m, physicalPieceOpen S K (C.referenceState, 0) m =
+    referencePhysicalPieceOpen S K m
+  domains : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 → ∀ m,
+    let Ω := physicalPieceOpen S K z m
+    IsOpen Ω ∧ Ω.Nonempty ∧ Ω ⊆ annularOpen D ∧
+    (∀ p : PolarPoint, p + (0, Real.pi) ∈ Ω ↔ p ∈ Ω) ∧
+    (∀ p : PolarPoint, (p.1, -p.2) ∈ Ω ↔ p ∈ Ω) ∧
+    (K.positive m = true → Ω = referencePhysicalPieceOpen S K m) ∧
+    (∀ p ∈ Ω, K.positive m = true → 0 < deriv D.w p.1) ∧
+    (∀ p ∈ Ω, K.positive m = false → deriv D.w p.1 < 0)
+  partition : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
+    ∃ E : Set PolarPoint, volume E = 0 ∧ ∀ p ∈ annularOpen D \ E,
+      ∃! m, p ∈ physicalPieceOpen S K z m
+  charts : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 → ∀ m,
+    MapsTo (K.chart z m) (physicalPieceOpen S K z m) (canonicalOpen S K m) ∧
+    MapsTo (K.inverseChart z m) (canonicalOpen S K m) (physicalPieceOpen S K z m) ∧
+    (∀ p ∈ physicalPieceOpen S K z m, K.inverseChart z m (K.chart z m p) = p) ∧
     (∀ p ∈ canonicalOpen S K m, K.chart z m (K.inverseChart z m p) = p) ∧
-    ContDiffOn ℝ ∞ (K.chart z m) (physicalPieceOpen S K m) ∧
+    ContDiffOn ℝ ∞ (K.chart z m) (physicalPieceOpen S K z m) ∧
     ContDiffOn ℝ ∞ (K.inverseChart z m) (canonicalOpen S K m) ∧
-    ContDiffOn ℝ ∞ (K.height z m) (physicalPieceOpen S K m) ∧
-    (∀ p ∈ physicalPieceOpen S K m,
+    ContDiffOn ℝ ∞ (K.height z m) (physicalPieceOpen S K z m) ∧
+    (∀ p ∈ physicalPieceOpen S K z m,
       0 < K.height z m p ∧ planeJacobian (K.chart z m) p ≠ 0 ∧
       K.chart z m (p + (0, Real.pi)) = K.chart z m p + (0, Real.pi) ∧
-      K.height z m (p + (0, Real.pi)) = K.height z m p)) ∧
-  (∀ z ∈ U, stateSector S z.1 → ∀ m p, p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) →
-    ContDiffAt ℝ ∞ (K.chart z m) p ∧ ContDiffAt ℝ ∞ (K.height z m) p ∧
-    planeJacobian (K.chart z m) p ≠ 0 ∧ 0 < K.height z m p) ∧
-  (∀ z ∈ U, stateSector S z.1 → ∀ m, ∀ p ∈ physicalPieceOpen S K m,
-    K.chart z m (p.1, -p.2) = ((K.chart z m p).1, -(K.chart z m p).2) ∧
-    K.height z m (p.1, -p.2) = K.height z m p ∧
-    planeJacobian (K.chart z m) (p.1, -p.2) = planeJacobian (K.chart z m) p) ∧
-  (∀ z ∈ U, stateSector S z.1 → ∀ m, ∀ p ∈ canonicalOpen S K m,
-    K.inverseChart z m (p.1, -p.2) =
-      ((K.inverseChart z m p).1, -(K.inverseChart z m p).2)) ∧
+      K.height z m (p + (0, Real.pi)) = K.height z m p)
+  boundary : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 → ∀ m,
+    MapsTo (K.chart z m) (physicalPieceClosed S K z m) (canonicalClosed S K m) ∧
+    MapsTo (K.inverseChart z m) (canonicalClosed S K m) (physicalPieceClosed S K z m) ∧
+    (∀ p ∈ physicalPieceClosed S K z m, K.inverseChart z m (K.chart z m p) = p) ∧
+    (∀ p ∈ canonicalClosed S K m, K.chart z m (K.inverseChart z m p) = p) ∧
+    (∀ p ∈ physicalPieceClosed S K z m,
+      ContDiffAt ℝ ∞ (K.chart z m) p ∧ ContDiffAt ℝ ∞ (K.height z m) p ∧
+        planeJacobian (K.chart z m) p ≠ 0 ∧ 0 < K.height z m p) ∧
+    (∀ p ∈ frontier (physicalPieceOpen S K z m),
+      CanonicalBoundaryInverseGerm (K.chart z m) (K.inverseChart z m) p)
+  reflection : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 → ∀ m,
+    ∀ p ∈ physicalPieceOpen S K z m,
+      K.chart z m (p.1, -p.2) = ((K.chart z m p).1, -(K.chart z m p).2) ∧
+      K.height z m (p.1, -p.2) = K.height z m p ∧
+      planeJacobian (K.chart z m) (p.1, -p.2) = planeJacobian (K.chart z m) p
+  inverseReflection : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 → ∀ m,
+    ∀ p ∈ canonicalOpen S K m,
+      K.inverseChart z m (p.1, -p.2) =
+        ((K.inverseChart z m p).1, -(K.inverseChart z m p).2)
+
+/-- The paired reference pieces have the actual component endpoints and
+one fixed positive canonical radius. -/
+def CanonicalReferenceCutPairs (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (K : CanonicalData S) : Prop :=
   (∀ m,
     K.positive (K.cutPair m).1 = false ∧ K.positive (K.cutPair m).2 = false ∧
     K.physicalLeft (K.cutPair m).1 = C.left m ∧
     K.physicalRight (K.cutPair m).2 = C.right m ∧
     K.physicalRight (K.cutPair m).1 = K.physicalLeft (K.cutPair m).2 ∧
     0 < K.cutRadius m ∧ K.left (K.cutPair m).1 = 0 ∧ K.left (K.cutPair m).2 = 0 ∧
-    K.right (K.cutPair m).1 = K.cutRadius m ∧ K.right (K.cutPair m).2 = K.cutRadius m) ∧
+    K.right (K.cutPair m).1 = K.cutRadius m ∧ K.right (K.cutPair m).2 = K.cutRadius m)
+
+/-- Both actual negative halves meet along the same genuine inverse-chart
+curve, cover their component off that curve, and retain the true root circles. -/
+def CanonicalCurrentCutPair (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (K : CanonicalData S) (z : AnnularState S × ℝ) (m : ℕ) : Prop :=
+  let iL := (K.cutPair m).1
+  let iR := (K.cutPair m).2
+  let R := K.cutRadius m
+  let ΩL := physicalPieceOpen S K z iL
+  let ΩR := physicalPieceOpen S K z iR
+  let Γ := canonicalCutPoint S K z m
+  let N := Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ)
+  (∀ θ, K.inverseChart z iR (R, θ) = Γ θ) ∧
+  Set.range Γ ⊆ N ∧ Disjoint ΩL ΩR ∧ ΩL ∪ ΩR = N \ Set.range Γ ∧
+  K.inverseChart z iL '' ({(0 : ℝ)} ×ˢ (univ : Set ℝ)) =
+    ({C.left m} ×ˢ (univ : Set ℝ)) ∧
+  K.inverseChart z iR '' ({(0 : ℝ)} ×ˢ (univ : Set ℝ)) =
+    ({C.right m} ×ˢ (univ : Set ℝ))
+
+/-- Reference cut metadata and current two-dimensional cut geometry. -/
+def CanonicalCutGeometry (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (K : CanonicalData S) (base : ℕ) (ε : ℝ) : Prop :=
+  CanonicalReferenceCutPairs S C K ∧
+    ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
+      ∀ m, CanonicalCurrentCutPair S C K z m
+
+/-- Cut geometry and the unchanged actual canonical operator identities. -/
+def CanonicalCutOperatorProperties (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (L : ReturnCorrectionData S) (K : CanonicalData S) (base : ℕ) (ε : ℝ) : Prop :=
+  let U := stateNeighborhood S C base ε
+  CanonicalCutGeometry S C K base ε ∧
   (∀ z ∈ U, stateSector S z.1 → ∀ u : PolarPoint → ℝ, ContDiff ℝ ∞ u → ∀ m θ,
     let Wl := canonicalHeight S K z (K.cutPair m).1 u
     let Wr := canonicalHeight S K z (K.cutPair m).2 u
@@ -634,7 +727,28 @@ def N04Properties (D : ReferenceData) (T : MaterialData) (S : PhysicalSpacesData
     (K.coefficients z m).b p - (K.coefficients (C.referenceState, 0) m).b p =
       d ^ 3 * (K.dividedDifference z m).b p ∧
     (K.coefficients z m).c p - (K.coefficients (C.referenceState, 0) m).c p =
-      d ^ 3 * (K.dividedDifference z m).c p) ∧
+      d ^ 3 * (K.dividedDifference z m).c p)
+
+/-- Actual physical/canonical source pairing on the current physical domain. -/
+def CanonicalSourcePairing (D : ReferenceData) (S : PhysicalSpacesData)
+    (C : NonlinearGeometryData S) (K : CanonicalData S)
+    (base : ℕ) (ε : ℝ) : Prop :=
+  let U := stateNeighborhood S C base ε
+  (∀ z ∈ U, stateSector S z.1 → ∀ m u f, ContDiff ℝ ∞ u → ContDiff ℝ ∞ f →
+    Function.Periodic u (0, Real.pi) → Function.Periodic f (0, Real.pi) →
+    HasCompactRadialSupport D u → HasCompactRadialSupport D f →
+    (∫ p in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi), u p * f p) =
+      ∫ p in canonicalOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
+        canonicalHeight S K z m u p * canonicalSource S K z m f p)
+
+/-- The same geometry and operator predicates used by the blueprint,
+together with the quantitative bounds and actual source pairing. -/
+def N04Properties (D : ReferenceData) (T : MaterialData) (S : PhysicalSpacesData)
+    (C : NonlinearGeometryData S) (L : ReturnCorrectionData S)
+    (K : CanonicalData S) (base loss : ℕ) (ε : ℝ) : Prop :=
+  let U := stateNeighborhood S C base ε
+  CanonicalGeometry D S C K base ε ∧
+  CanonicalCutOperatorProperties S C L K base ε ∧
   (∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ z ∈ U, ∀ m p,
     p ∈ canonicalOpen S K m → ∀ a b : ℕ, a + b ≤ s →
       |mixedDerivative a b (K.potential z m) p| +
@@ -643,12 +757,7 @@ def N04Properties (D : ReferenceData) (T : MaterialData) (S : PhysicalSpacesData
       |mixedDerivative a b (K.dividedDifference z m).c p| ≤
         B * T.E0 (T.sample (K.cell m)) ^ B *
           (1 + stateGrading S (s + loss) (z.1 - C.referenceState) + |z.2|)) ∧
-  (∀ z ∈ U, stateSector S z.1 → ∀ m u f, ContDiff ℝ ∞ u → ContDiff ℝ ∞ f →
-    Function.Periodic u (0, Real.pi) → Function.Periodic f (0, Real.pi) →
-    HasCompactRadialSupport D u → HasCompactRadialSupport D f →
-    (∫ p in physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi), u p * f p) =
-      ∫ p in canonicalOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
-        canonicalHeight S K z m u p * canonicalSource S K z m f p)
+  CanonicalSourcePairing D S C K base ε
 
 /-- The coordinate stage retains the three independent calculus targets as
 well as every preceding property on the same final neighborhood. -/

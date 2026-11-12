@@ -51,7 +51,8 @@ theorem n06Volume_exists_compact_height_source
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
   have hu := (hS.1 (3 / 4 : ℝ)).2.2.2.1 u
-  exact n06Volume_exists_current_compact_source h01.1.1 hT hV h04 hcoordinates href hsector
+  exact n06Volume_exists_current_compact_source h01.1.1 h01.2.2.2.1
+    hT hV h04 hcoordinates href hsector
     γ t s (physical_height_contDiff_and_flatJets hT hS
       (by norm_num : (0 : ℝ) < 3 / 4) u).1 hu.2.2.1 (fun p => hu.2.1 p.1 p.2) hcompact
 

@@ -38,10 +38,15 @@ theorem n06_current_boundary_radialSign_eq_reverse
       (n06Endpoint (K.left m) (K.right m)
         (if reverse then !physicalUpper else physicalUpper)) σ β H ρ κ Hr)
     (h04 : N04Properties D T S C L K base loss ε)
-    (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1) (θ : ℝ) :
+    (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (hx : ∀ η, (n06Endpoint (K.physicalLeft m) (K.physicalRight m) physicalUpper, η) ∈
+      physicalPieceClosed S K z m)
+    (hside : ∀ p ∈ physicalPieceOpen S K z m,
+      if physicalUpper then p.1 < K.physicalRight m else K.physicalLeft m < p.1)
+    (θ : ℝ) :
     (σ * ρ θ) / |σ * ρ θ| = if reverse then (-1 : ℝ) else 1 := by
   have he := (n06_current_boundary_radial_orientation physicalUpper
-    (if reverse then !physicalUpper else physicalUpper) J h04 hz hs θ).2
+    (if reverse then !physicalUpper else physicalUpper) J h04 hz hs hx hside θ).2
   cases reverse <;> cases physicalUpper <;>
     simp only [n06EndpointSign, Bool.false_eq_true, if_false, if_true,
       Bool.not_false, Bool.not_true, one_mul, neg_one_mul] at he ⊢ <;>
@@ -69,7 +74,7 @@ theorem n06_nonnegative_boundaryDensity
     (canonicalUpper : Bool) {r σ : ℝ} {β H ρ κ Hr : ℝ → ℝ}
     (J : N06RootFirstJets (K.chart z m) (K.height z m) r
       (n06Endpoint (K.left m) (K.right m) canonicalUpper) σ β H ρ κ Hr)
-    (hr : r ∈ Icc (K.physicalLeft m) (K.physicalRight m))
+    (hx : ∀ η, (r, η) ∈ physicalPieceClosed S K z m)
     (hp : r ∈ radialCore D) (hpos : 0 ≤ deriv D.w r)
     (θ : ℝ) (Q Qr Qt W : PolarPoint → ℝ) :
     n06RootBoundaryDensity (L.coefficients z) (K.chart z m) (K.height z m)
@@ -83,13 +88,13 @@ theorem n06_nonnegative_boundaryDensity
   by_cases hm : K.positive m = true
   · rw [if_pos hm]
     apply n06_positive_root_boundaryDensity hT hS h01 h03 h04 hz hs hm
-      (ha m hm) (hea m hm) (heb m hm) ?_ canonicalUpper J hr hp θ Q Qr Qt W
+      (ha m hm) (hea m hm) (heb m hm) ?_ canonicalUpper J hx hp θ Q Qr Qt W
     intro x hx
     have he := n06_positive_physical_density_of_regular_coefficients
       hT hS h01 h03 h04 hz hs m hm (hreg m hm) hx
     exact ⟨he.1, he.2.1⟩
   · have hrow := n06_negative_closed_normalDensity_of_nonneg hT hS h01 h03 h04 hz hs
-      m (Bool.eq_false_of_not_eq_true hm) (x := (r, θ)) hr ⟨hp, mem_univ _⟩ hpos
+      m (Bool.eq_false_of_not_eq_true hm) (x := (r, θ)) (hx θ) ⟨hp, mem_univ _⟩ hpos
     simp only [n06RootBoundaryDensity, hrow.1, hrow.2, if_neg hm,
       one_mul, zero_mul, add_zero]
 

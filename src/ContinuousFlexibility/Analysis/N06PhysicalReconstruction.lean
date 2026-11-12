@@ -5,8 +5,8 @@ import Mathlib.MeasureTheory.Measure.OpenPos
 /-!
 # Actual physical representatives of canonical L² data
 
-The almost-everywhere unique interval cover in N04 already implies that
-distinct physical piece interiors are disjoint. A periodic representative
+The almost-everywhere unique planar cover in N04 implies that distinct
+current physical piece interiors are disjoint. A periodic representative
 on each canonical cylinder can therefore be reconstructed on the physical
 pieces without ambiguity. These formulas verify the actual canonical
 height and source identities. No physical differential equation or
@@ -48,13 +48,15 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
   {base loss : ℕ} {ε : ℝ}
 
-/-- Uniqueness off a null set rules out overlap of two open physical pieces. -/
+/-- The reference radial partition has disjoint open intervals.  This
+metadata statement does not identify current physical pieces with strips. -/
 theorem n06_physicalPiece_pairwiseDisjoint
     (hN04 : N04Properties D T S C L K base loss ε) :
     Pairwise (fun m n : ℕ =>
       Disjoint (Ioo (K.physicalLeft m) (K.physicalRight m))
         (Ioo (K.physicalLeft n) (K.physicalRight n))) := by
-  obtain ⟨_, _, _, hpieces, _, _, ⟨E, hE, hcover⟩, _⟩ := hN04
+  have hpieces := hN04.1.referenceBounds
+  obtain ⟨E, hE, hcover⟩ := hN04.1.referencePartition
   intro m n hmn
   apply Set.disjoint_left.mpr
   intro r hrm hrn
@@ -70,42 +72,105 @@ theorem n06_physicalPiece_pairwiseDisjoint
     (isOpen_Ioo.inter isOpen_Ioo).measure_ne_zero volume ⟨r, hrm, hrn⟩
   exact hpos hzero
 
-/-- The selected piece depends only on the physical radial coordinate. -/
-def n06PhysicalPieceIndex (K : CanonicalData S) (r : ℝ) : ℕ := by
+/-- Planar a.e. uniqueness and openness rule out overlap of actual current
+physical pieces, including the two moving halves of a negative component. -/
+theorem n06_currentPhysicalPiece_pairwiseDisjoint
+    (hN04 : N04Properties D T S C L K base loss ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1) :
+    Pairwise (fun m n : ℕ =>
+      Disjoint (physicalPieceOpen S K z m) (physicalPieceOpen S K z n)) := by
+  obtain ⟨E, hE, hcover⟩ := hN04.1.partition z hz hs
+  intro m n hmn
+  apply Set.disjoint_left.mpr
+  intro p hpm hpn
+  let O : Set PolarPoint := physicalPieceOpen S K z m ∩ physicalPieceOpen S K z n
+  have hOE : O ⊆ E := by
+    intro q hq
+    by_contra hqE
+    obtain ⟨k, hk, huniq⟩ := hcover q
+      ⟨(hN04.1.domains z hz hs m).2.2.1 hq.1, hqE⟩
+    exact hmn ((huniq m hq.1).trans (huniq n hq.2).symm)
+  have hzero : volume O = 0 := measure_mono_null hOE hE
+  have hopen : IsOpen O :=
+    (hN04.1.domains z hz hs m).1.inter (hN04.1.domains z hz hs n).1
+  have hpos : volume O ≠ 0 :=
+    hopen.measure_ne_zero volume ⟨p, hpm, hpn⟩
+  exact hpos hzero
+
+/-- The reference-domain identity gives planar disjointness at the
+reference state without requiring that state to lie in a neighborhood. -/
+theorem n06_referencePhysicalPiece_pairwiseDisjoint
+    (hN04 : N04Properties D T S C L K base loss ε) :
+    Pairwise (fun m n : ℕ => Disjoint
+      (physicalPieceOpen S K (C.referenceState, 0) m)
+      (physicalPieceOpen S K (C.referenceState, 0) n)) := by
+  intro m n hmn
+  rw [hN04.1.referenceDomain m, hN04.1.referenceDomain n]
+  apply Set.disjoint_left.mpr
+  intro p hpm hpn
+  exact Set.disjoint_left.mp (n06_physicalPiece_pairwiseDisjoint hN04 hmn) hpm.1 hpn.1
+
+/-- Select a piece using its actual state-dependent physical domain. -/
+def n06PhysicalPieceIndex (K : CanonicalData S) (z : AnnularState S × ℝ)
+    (p : PolarPoint) : ℕ := by
   classical
-  exact if h : ∃ m, r ∈ Ioo (K.physicalLeft m) (K.physicalRight m) then
+  exact if h : ∃ m, p ∈ physicalPieceOpen S K z m then
     h.choose else 0
+
+theorem n06PhysicalPieceIndex_eq_of_disjoint
+    {z : AnnularState S × ℝ}
+    (hdisjoint : Pairwise (fun m n : ℕ =>
+      Disjoint (physicalPieceOpen S K z m) (physicalPieceOpen S K z n)))
+    {p : PolarPoint} {m : ℕ} (hp : p ∈ physicalPieceOpen S K z m) :
+    n06PhysicalPieceIndex K z p = m := by
+  classical
+  have hex : ∃ n, p ∈ physicalPieceOpen S K z n := ⟨m, hp⟩
+  simp only [n06PhysicalPieceIndex, dif_pos hex]
+  by_contra hne
+  exact (Set.disjoint_left.mp (hdisjoint hne)) hex.choose_spec hp
 
 theorem n06PhysicalPieceIndex_eq
     (hN04 : N04Properties D T S C L K base loss ε)
-    {r : ℝ} {m : ℕ} (hr : r ∈ Ioo (K.physicalLeft m) (K.physicalRight m)) :
-    n06PhysicalPieceIndex K r = m := by
-  classical
-  have hex : ∃ n, r ∈ Ioo (K.physicalLeft n) (K.physicalRight n) := ⟨m, hr⟩
-  simp only [n06PhysicalPieceIndex, dite_eq_left hex]
-  by_contra hne
-  exact (Set.disjoint_left.mp (n06_physicalPiece_pairwiseDisjoint hN04 hne))
-    hex.choose_spec hr
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1)
+    {p : PolarPoint} {m : ℕ} (hp : p ∈ physicalPieceOpen S K z m) :
+    n06PhysicalPieceIndex K z p = m :=
+  n06PhysicalPieceIndex_eq_of_disjoint
+    (n06_currentPhysicalPiece_pairwiseDisjoint hN04 hz hs) hp
 
 /-- Reconstruct a family of actual canonical fields with a specified physical
 weight, and set it to zero off the union of the open physical pieces. -/
 def n06PhysicalReconstruct (K : CanonicalData S) (z : AnnularState S × ℝ)
     (f : ℕ → PolarPoint → ℝ) (w : ℕ → PolarPoint → ℝ) (p : PolarPoint) : ℝ := by
   classical
-  exact if ∃ m, p.1 ∈ Ioo (K.physicalLeft m) (K.physicalRight m) then
-    let m := n06PhysicalPieceIndex K p.1
+  exact if ∃ m, p ∈ physicalPieceOpen S K z m then
+    let m := n06PhysicalPieceIndex K z p
     w m p * n06CanonicalPeriodize (f m) (K.chart z m p)
   else 0
 
-theorem n06PhysicalReconstruct_on_piece
-    (hN04 : N04Properties D T S C L K base loss ε)
-    (z : AnnularState S × ℝ) (f w : ℕ → PolarPoint → ℝ)
-    {m : ℕ} {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+theorem n06PhysicalReconstruct_on_piece_of_disjoint
+    {z : AnnularState S × ℝ}
+    (hdisjoint : Pairwise (fun m n : ℕ =>
+      Disjoint (physicalPieceOpen S K z m) (physicalPieceOpen S K z n)))
+    (f w : ℕ → PolarPoint → ℝ)
+    {m : ℕ} {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K z m) :
     n06PhysicalReconstruct K z f w p =
       w m p * n06CanonicalPeriodize (f m) (K.chart z m p) := by
   classical
-  have hex : ∃ n, p.1 ∈ Ioo (K.physicalLeft n) (K.physicalRight n) := ⟨m, hp.1⟩
-  simp only [n06PhysicalReconstruct, ite_eq_left hex, n06PhysicalPieceIndex_eq hN04 hp.1]
+  have hex : ∃ n, p ∈ physicalPieceOpen S K z n := ⟨m, hp⟩
+  simp only [n06PhysicalReconstruct, if_pos hex,
+    n06PhysicalPieceIndex_eq_of_disjoint hdisjoint hp]
+
+theorem n06PhysicalReconstruct_on_piece
+    (hN04 : N04Properties D T S C L K base loss ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1) (f w : ℕ → PolarPoint → ℝ)
+    {m : ℕ} {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K z m) :
+    n06PhysicalReconstruct K z f w p =
+      w m p * n06CanonicalPeriodize (f m) (K.chart z m p) :=
+  n06PhysicalReconstruct_on_piece_of_disjoint
+    (n06_currentPhysicalPiece_pairwiseDisjoint hN04 hz hs) f w hp
 
 /-- The reconstruction has the expected value on the actual inverse chart. -/
 theorem n06PhysicalReconstruct_inverseChart
@@ -116,10 +181,9 @@ theorem n06PhysicalReconstruct_inverseChart
     (hθ : p.2 ∈ Ioc (0 : ℝ) Real.pi) :
     n06PhysicalReconstruct K z f w (K.inverseChart z m p) =
       w m (K.inverseChart z m p) * f m p := by
-  have hfull := hN04
-  obtain ⟨_, _, _, _, _, _, _, hcharts, _⟩ := hfull
+  have hcharts := hN04.1.charts
   obtain ⟨_, himap, _, hright, _, _, _, _⟩ := hcharts z hz hs m
-  rw [n06PhysicalReconstruct_on_piece hN04 z f w (himap hp), hright p hp,
+  rw [n06PhysicalReconstruct_on_piece hN04 hz hs f w (himap hp), hright p hp,
     n06CanonicalPeriodize_eq _ hθ]
 
 /-- Periodic weights give a periodic physical reconstruction; the chosen
@@ -128,22 +192,23 @@ theorem n06PhysicalReconstruct_periodic
     (hN04 : N04Properties D T S C L K base loss ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (f w : ℕ → PolarPoint → ℝ)
-    (hw : ∀ m p, p ∈ physicalPieceOpen S K m → w m (p + (0, Real.pi)) = w m p) :
+    (hw : ∀ m p, p ∈ physicalPieceOpen S K z m → w m (p + (0, Real.pi)) = w m p) :
     Function.Periodic (n06PhysicalReconstruct K z f w) (0, Real.pi) := by
   classical
-  have hfull := hN04
-  obtain ⟨_, _, _, _, _, _, _, hcharts, _⟩ := hfull
+  have hcharts := hN04.1.charts
   intro p
-  by_cases hex : ∃ m, p.1 ∈ Ioo (K.physicalLeft m) (K.physicalRight m)
+  by_cases hex : ∃ m, p ∈ physicalPieceOpen S K z m
   · obtain ⟨m, hm⟩ := hex
-    have hp : p ∈ physicalPieceOpen S K m := ⟨hm, mem_univ _⟩
-    have hp' : p + (0, Real.pi) ∈ physicalPieceOpen S K m := by
-      exact ⟨by simpa only [Prod.fst_add, add_zero] using hm, mem_univ _⟩
+    have hp' : p + (0, Real.pi) ∈ physicalPieceOpen S K z m :=
+      ((hN04.1.domains z hz hs m).2.2.2.1 p).mpr hm
     obtain ⟨_, _, _, _, _, _, _, hchart⟩ := hcharts z hz hs m
-    rw [n06PhysicalReconstruct_on_piece hN04 z f w hp',
-      n06PhysicalReconstruct_on_piece hN04 z f w hp, hw m p hp,
-      (hchart p hp).2.2.1, n06CanonicalPeriodize_periodic]
-  · simp only [n06PhysicalReconstruct, Prod.fst_add, add_zero, ite_eq_right hex]
+    rw [n06PhysicalReconstruct_on_piece hN04 hz hs f w hp',
+      n06PhysicalReconstruct_on_piece hN04 hz hs f w hm, hw m p hm,
+      (hchart p hm).2.2.1, n06CanonicalPeriodize_periodic]
+  · have hex' : ¬ ∃ m, p + (0, Real.pi) ∈ physicalPieceOpen S K z m := by
+      rintro ⟨m, hm⟩
+      exact hex ⟨m, ((hN04.1.domains z hz hs m).2.2.2.1 p).mp hm⟩
+    simp only [n06PhysicalReconstruct, if_neg hex, if_neg hex']
 
 /-- The actual reconstructed height, including its left constant tail. -/
 def n06PhysicalHeight (K : CanonicalData S) (z : AnnularState S × ℝ)
@@ -174,8 +239,7 @@ theorem n06_physical_representation
     n06PhysicalReconstruct K z W (K.height z) p + U.2.1 * S.chiLeft p.1
   let f : PolarPoint → ℝ := n06PhysicalReconstruct K z G
     (fun m p => |planeJacobian (K.chart z m) p| / K.height z m p)
-  have hfull := hN04
-  obtain ⟨_, _, _, _, _, _, _, hcharts, _⟩ := hfull
+  have hcharts := hN04.1.charts
   have hηperiod : Function.Periodic η (0, Real.pi) := by
     have hWperiod := n06PhysicalReconstruct_periodic hN04 hz hs W (K.height z)
       (fun m p hp => ((hcharts z hz hs m).2.2.2.2.2.2.2 p hp).2.2.2)

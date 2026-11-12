@@ -29,18 +29,22 @@ physical L2 representative; pointwise measurability is not required. -/
 theorem n06_reference_inverseChart_aestronglyMeasurable
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
-    (hangle : ∀ p ∈ physicalPieceOpen S K m, (K.chart z m p).2 = p.2)
+    (hangle : ∀ p ∈ physicalPieceOpen S K z m, (K.chart z m p).2 = p.2)
     {f : PolarPoint → ℝ}
     (hf : AEStronglyMeasurable f (volume.restrict
-      (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi))) :
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)))) :
     AEStronglyMeasurable (fun p => f (K.inverseChart z m p)) (canonicalMeasure S K m) := by
-  have hcharts := h04.2.2.2.2.2.2.2.1 z hz hs m
+  have hcharts := h04.1.charts z hz hs m
+  have hmeas : MeasurableSet
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) :=
+    (h04.1.domains z hz hs m).1.measurableSet.inter
+      (MeasurableSet.univ.prod measurableSet_Ioc)
   have hpull : (fun p => f (K.inverseChart z m p)) =ᵐ[canonicalMeasure S K m]
       (fun p => hf.mk f (K.inverseChart z m p)) := by
     apply (n05_canonicalChart_ae_iff h04 hz hs m hangle _).mpr
     filter_upwards [hf.ae_eq_mk,
-      ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp hpU
-    rw [hcharts.2.2.1 p ⟨hpU.1, mem_univ _⟩]
+      ae_restrict_mem hmeas] with p hp hpU
+    rw [hcharts.2.2.1 p hpU.1]
     exact hp
   have hinverse : AEMeasurable (K.inverseChart z m) (canonicalMeasure S K m) :=
     (hcharts.2.2.2.2.2.1.continuousOn.mono
@@ -54,9 +58,10 @@ not an assumed bound on the transported L2 function. -/
 theorem n06_reference_radial_multiplier_lp
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     {Y a : ℝ → ℝ}
     (hY : ContDiffOn ℝ ∞ Y (Ioo (K.physicalLeft m) (K.physicalRight m)))
-    (hchart : ∀ p ∈ physicalPieceOpen S K m, K.chart z m p = (Y p.1, p.2))
+    (hchart : ∀ p ∈ referencePhysicalPieceOpen S K m, K.chart z m p = (Y p.1, p.2))
     (ha : ContinuousOn a (Ioo (K.physicalLeft m) (K.physicalRight m)))
     {B : ℝ} (hB : 0 ≤ B)
     (hbound : ∀ r ∈ Ioo (K.physicalLeft m) (K.physicalRight m),
@@ -73,10 +78,15 @@ theorem n06_reference_radial_multiplier_lp
   let μ : Measure PolarPoint := volume.restrict
     (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)
   let g : PolarPoint → ℝ := fun p => a (K.inverseChart z m p).1 * f (K.inverseChart z m p)
-  have hcharts := h04.2.2.2.2.2.2.2.1 z hz hs m
-  have hangle (p : PolarPoint) (hp : p ∈ physicalPieceOpen S K m) :
+  have hcharts := h04.1.charts z hz hs m
+  rw [hΩ] at hcharts
+  have hangle (p : PolarPoint) (hp : p ∈ physicalPieceOpen S K z m) :
       (K.chart z m p).2 = p.2 := by
-    simpa only using (congrArg (fun q : PolarPoint => q.2) (hchart p hp))
+    have hpRef : p ∈ referencePhysicalPieceOpen S K m := by simpa only [hΩ] using hp
+    simpa only using (congrArg (fun q : PolarPoint => q.2) (hchart p hpRef))
+  have hmeasure : volume.restrict
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) = μ := by
+    simp only [hΩ, referencePhysicalPieceOpen, prod_inter_prod, inter_univ, univ_inter, μ]
   have haComp : ContinuousOn (fun p => a (K.inverseChart z m p).1) (canonicalOpen S K m) :=
     ha.comp' hcharts.2.2.2.2.2.1.continuousOn.fst (fun p hp => (hcharts.2.1 hp).1)
   have haCan : AEStronglyMeasurable (fun p => a (K.inverseChart z m p).1)
@@ -84,7 +94,8 @@ theorem n06_reference_radial_multiplier_lp
     (haComp.mono (fun p hp => ⟨hp.1, mem_univ _⟩)).aestronglyMeasurable
       (measurableSet_Ioo.prod measurableSet_Ioc)
   have hg : AEStronglyMeasurable g (canonicalMeasure S K m) := haCan.mul
-    (n06_reference_inverseChart_aestronglyMeasurable h04 hz hs hangle hf.aestronglyMeasurable)
+    (n06_reference_inverseChart_aestronglyMeasurable h04 hz hs hangle
+      (by simpa only [hmeasure] using hf.aestronglyMeasurable))
   have haPhys : AEStronglyMeasurable (fun p : PolarPoint => a p.1) μ :=
     (ha.comp' continuous_fst.continuousOn (fun p hp => hp.1)).aestronglyMeasurable
       (measurableSet_Ioo.prod measurableSet_Ioc)
@@ -108,15 +119,16 @@ theorem n06_reference_radial_multiplier_lp
   have heq : (fun p => |planeJacobian (K.chart z m) p| * g (K.chart z m p) ^ 2)
       =ᵐ[μ] (fun p => |deriv Y p.1| * (a p.1 * f p) ^ 2) := by
     filter_upwards [ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp
-    have hpo : p ∈ physicalPieceOpen S K m := ⟨hp.1, mem_univ _⟩
+    have hpo : p ∈ referencePhysicalPieceOpen S K m := ⟨hp.1, mem_univ _⟩
     simp only [g, hcharts.2.2.1 p hpo, n06_reference_radial_jacobian hY hchart hpo]
   have hgSq : Integrable (fun p => g p ^ 2) (canonicalMeasure S K m) :=
     (n05_canonicalChart_integrable_iff h04 hz hs m hangle (fun p => g p ^ 2)).mpr
-      (hweight.congr heq.symm)
+      (by simpa only [hmeasure] using hweight.congr heq.symm)
   refine ⟨(memLp_two_iff_integrable_sq hg).mpr hgSq, ?_⟩
   calc
-    _ = ∫ p, |planeJacobian (K.chart z m) p| * g (K.chart z m p) ^ 2 ∂μ :=
-      n05_canonicalChart_integral h04 hz hs m hangle (fun p => g p ^ 2)
+    _ = ∫ p, |planeJacobian (K.chart z m) p| * g (K.chart z m p) ^ 2 ∂μ := by
+      simpa only [hmeasure] using
+        n05_canonicalChart_integral h04 hz hs m hangle (fun p => g p ^ 2)
     _ = ∫ p, |deriv Y p.1| * (a p.1 * f p) ^ 2 ∂μ := integral_congr_ae heq
     _ ≤ ∫ p, B * f p ^ 2 ∂μ :=
       integral_mono_ae hweight (hf.integrable_sq.const_mul B) hdom
@@ -165,11 +177,12 @@ functions. The constants use precisely the primitive first-jet bounds. -/
 theorem n06_reference_height_normal_lp
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     {Y h : ℝ → ℝ}
     (hY : ContDiffOn ℝ ∞ Y (Ioo (K.physicalLeft m) (K.physicalRight m)))
     (hh : ContDiffOn ℝ ∞ h (Ioo (K.physicalLeft m) (K.physicalRight m)))
-    (hchart : ∀ p ∈ physicalPieceOpen S K m, K.chart z m p = (Y p.1, p.2))
-    (hheight : ∀ p ∈ physicalPieceOpen S K m, K.height z m p = h p.1)
+    (hchart : ∀ p ∈ referencePhysicalPieceOpen S K m, K.chart z m p = (Y p.1, p.2))
+    (hheight : ∀ p ∈ referencePhysicalPieceOpen S K m, K.height z m p = h p.1)
     {B : ℝ} (hB : 0 ≤ B)
     (hcoeff : ∀ r ∈ Ioo (K.physicalLeft m) (K.physicalRight m),
       |h r| + |(h r)⁻¹| + |deriv h r| + |deriv Y r| + |(deriv Y r)⁻¹| ≤ B)
@@ -188,13 +201,14 @@ theorem n06_reference_height_normal_lp
             (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)) +
           B ^ 7 * ∫ p, w p ^ 2 ∂volume.restrict
             (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi))) := by
-  have hcharts := h04.2.2.2.2.2.2.2.1 z hz hs m
+  have hcharts := h04.1.charts z hz hs m
+  rw [hΩ] at hcharts
   have hh0 (r : ℝ) (hr : r ∈ Ioo (K.physicalLeft m) (K.physicalRight m)) : h r ≠ 0 := by
     have he := (hcharts.2.2.2.2.2.2.2 (r, 0) ⟨hr, mem_univ _⟩).1.ne'
     rwa [hheight (r, 0) ⟨hr, mem_univ _⟩] at he
   have hY0 (r : ℝ) (hr : r ∈ Ioo (K.physicalLeft m) (K.physicalRight m)) :
       deriv Y r ≠ 0 := by
-    have hp : (r, (0 : ℝ)) ∈ physicalPieceOpen S K m := ⟨hr, mem_univ _⟩
+    have hp : (r, (0 : ℝ)) ∈ referencePhysicalPieceOpen S K m := ⟨hr, mem_univ _⟩
     have he := (hcharts.2.2.2.2.2.2.2 (r, 0) hp).2.1
     rwa [n06_reference_radial_jacobian hY hchart hp] at he
   have hc (r : ℝ) (hr : r ∈ Ioo (K.physicalLeft m) (K.physicalRight m)) :
@@ -234,7 +248,7 @@ theorem n06_reference_height_normal_lp
     calc
       _ ≤ B * B ^ 2 := mul_le_mul (hc r hr).2.2.1 hsquare (sq_nonneg _) hB
       _ = _ := by ring
-  obtain ⟨hZ, hZbound⟩ := n06_reference_radial_multiplier_lp h04 hz hs hY hchart hhi
+  obtain ⟨hZ, hZbound⟩ := n06_reference_radial_multiplier_lp h04 hz hs hΩ hY hchart hhi
     (by positivity : 0 ≤ B ^ 3) hheightWeight hw
   have hWrep : (fun p => (h (K.inverseChart z m p).1)⁻¹ * w (K.inverseChart z m p))
       =ᵐ[canonicalMeasure S K m] canonicalHeight S K z m w := by
@@ -249,9 +263,9 @@ theorem n06_reference_height_normal_lp
     refine (integral_congr_ae ?_).trans_le hZbound
     filter_upwards [hWrep] with p hp
     rw [hp]
-  obtain ⟨hA, hAbound⟩ := n06_reference_radial_multiplier_lp h04 hz hs hY hchart ha
+  obtain ⟨hA, hAbound⟩ := n06_reference_radial_multiplier_lp h04 hz hs hΩ hY hchart ha
     (by positivity : 0 ≤ B ^ 3) (fun r hr => (hweight r hr).1) hdw
-  obtain ⟨hBfield, hBbound⟩ := n06_reference_radial_multiplier_lp h04 hz hs hY hchart hb
+  obtain ⟨hBfield, hBbound⟩ := n06_reference_radial_multiplier_lp h04 hz hs hΩ hY hchart hb
     (by positivity : 0 ≤ B ^ 7) (fun r hr => (hweight r hr).2) hw
   let A : PolarPoint → ℝ := fun p => a (K.inverseChart z m p).1 * dw (K.inverseChart z m p)
   let F : PolarPoint → ℝ := fun p => b (K.inverseChart z m p).1 * w (K.inverseChart z m p)
@@ -294,11 +308,12 @@ to belong to L2. The unknown still has only its original physical weak derivativ
 theorem n06_reference_normal_transport_of_bounds
     (h04 : N04Properties D T S C L K base loss ε) (hab : D.a ≤ D.b)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     {Y h : ℝ → ℝ}
     (hY : ContDiffOn ℝ ∞ Y (Ioo (K.physicalLeft m) (K.physicalRight m)))
     (hh : ContDiffOn ℝ ∞ h (Ioo (K.physicalLeft m) (K.physicalRight m)))
-    (hchart : ∀ p ∈ physicalPieceOpen S K m, K.chart z m p = (Y p.1, p.2))
-    (hheight : ∀ p ∈ physicalPieceOpen S K m, K.height z m p = h p.1)
+    (hchart : ∀ p ∈ referencePhysicalPieceOpen S K m, K.chart z m p = (Y p.1, p.2))
+    (hheight : ∀ p ∈ referencePhysicalPieceOpen S K m, K.height z m p = h p.1)
     {B : ℝ} (hB : 0 ≤ B)
     (hcoeff : ∀ r ∈ Ioo (K.physicalLeft m) (K.physicalRight m),
       |h r| + |(h r)⁻¹| + |deriv h r| + |deriv Y r| + |(deriv Y r)⁻¹| ≤ B)
@@ -316,13 +331,13 @@ theorem n06_reference_normal_transport_of_bounds
   have hsub : Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi ⊆
       radialCore D ×ˢ Ioc (0 : ℝ) (2 * Real.pi) := by
     intro p hp
-    exact ⟨(hK.2.2.2.1 m).2.2 hp.1, hp.2.1,
+    exact ⟨(hK.referenceBounds m).2.2 hp.1, hp.2.1,
       hp.2.2.trans (by linarith [Real.pi_pos])⟩
   have hwPiece := MemLp.mono_measure (Measure.restrict_mono hsub le_rfl) hw
   have hdwPiece := MemLp.mono_measure (Measure.restrict_mono hsub le_rfl) hdw
   obtain ⟨⟨hW, _⟩, hG, _⟩ :=
-    n06_reference_height_normal_lp h04 hz hs hY hh hchart hheight hB hcoeff hwPiece hdwPiece
-  exact ⟨hG, n06_reference_normal_transport hK hab hz hs hY hh hchart hheight
+    n06_reference_height_normal_lp h04 hz hs hΩ hY hh hchart hheight hB hcoeff hwPiece hdwPiece
+  exact ⟨hG, n06_reference_normal_transport hK hab hz hs hΩ hY hh hchart hheight
     hweak hw hdw hwp hdwp hW hG⟩
 
 end ContinuousFlexibility.Analysis

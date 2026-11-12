@@ -146,7 +146,9 @@ theorem n06_canonicalReference_coefficients_radial
       (K.coefficients (C.referenceState, 0) m).b p = 0 ∧
       (K.coefficients (C.referenceState, 0) m).c p = n06RadialReferenceC D.w H Y R p.1 := by
   let x := K.inverseChart (C.referenceState, 0) m p
-  have hx : x ∈ physicalPieceOpen S K m := (hA.2.2.2.2.2.2.2.1 _ hz hs m).2.1 hp
+  have hx : x ∈ referencePhysicalPieceOpen S K m := by
+    have hxActual := (hA.charts (C.referenceState, 0) hz hs m).2.1 hp
+    simpa only [hA.referenceDomain m] using hxActual
   have hxi : x.1 = R p.1 := congrArg Prod.fst hi
   have hg := n06_correctedReference_positivePiece_germ hN03 hA hw href hz hs m hm hx
   have hwa : DifferentiableAt ℝ (fun q : PolarPoint => D.w q.1) x :=
@@ -191,7 +193,9 @@ theorem n06_canonicalReference_potential_radial
     (hYpos : 0 < deriv Y (R p.1)) :
     K.potential (C.referenceState, 0) m p = n06RadialReferenceV D.w H Y R p.1 := by
   let x := K.inverseChart (C.referenceState, 0) m p
-  have hx : x ∈ physicalPieceOpen S K m := (hA.2.2.2.2.2.2.2.1 _ hz hs m).2.1 hp
+  have hx : x ∈ referencePhysicalPieceOpen S K m := by
+    have hxActual := (hA.charts (C.referenceState, 0) hz hs m).2.1 hp
+    simpa only [hA.referenceDomain m] using hxActual
   have hxi : x.1 = R p.1 := congrArg Prod.fst hi
   have hg := n06_correctedReference_positivePiece_germ hN03 hA hw href hz hs m hm hx
   have hdiv := n06_divergence_radialHeight_of_germs hg.1 hg.2.1 hheight

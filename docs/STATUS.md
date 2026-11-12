@@ -215,6 +215,42 @@ relative norm bound, and two-sided inverse conclusions are unchanged.
 This is a statement-layer repair proposed in PR #36; its merge is subject
 to the approval rule below. This entry does not declare N06 proved.
 
+### N06 / N04: actual physical domains at moving cuts (line/N06, 2026-11-12)
+
+The previous shared definition was
+
+```lean
+def physicalPieceOpen (S : PhysicalSpacesData) (K : CanonicalData S)
+    (m : ℕ) : Set PolarPoint :=
+  Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ univ
+```
+
+The chart, inverse-chart, and source-pairing clauses used this same fixed
+radial rectangle for every perturbed state. In the actual N04b travel
+construction the artificial cut is the inverse image of the fixed canonical
+cut radius; that physical curve can depend on both the state and the angle.
+The resulting negative half-domains therefore cannot be identified with
+those fixed reference rectangles. This makes the old domain clauses unusable
+for that construction; it is not a proof that the entire old existential
+statement is false.
+
+The repair, shared with N04b's actual-domain predicates, stores
+`CanonicalData.physicalDomain z m` and defines `physicalPieceOpen S K z m`
+from it. The old radial endpoints retain their reference meaning, with an
+explicit reference-domain equality. Positive pieces retain their original
+radial domains. Each negative pair covers its original negative component
+away from the common inverse-chart cut curve. The partition and source
+pairing now use the actual two-dimensional domains. Closed-domain inverse
+laws and genuine local inverse germs fix the boundary derivatives of the
+stored inverse used in the transmission law.
+
+`Blueprint/Assembly.lean` assembles these same shared predicates. The N05
+reference graph, canonical source spaces, final N06 relative norm estimate,
+and two-sided inverse conclusions retain their definitions. Downstream
+finite-support, change-of-variables, and Green identities are migrated to
+these actual domains; no fixed artificial physical cut is assumed. This
+repair is proposed in PR #36 and does not declare N06 proved.
+
 ## Size estimate
 
 The readable manuscript has 6,890 lines of TeX in §2–§10 (62-page version: 4,460). With the playbook

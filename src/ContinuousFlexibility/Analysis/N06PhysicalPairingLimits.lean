@@ -59,8 +59,7 @@ theorem n06_tendsto_physicalHeight_pairing
     (hW : ∀ m, Tendsto (fun n => W n m) atTop (𝓝 (w m)))
     (ha : Tendsto a atTop (𝓝 aL))
     {J : Set ℝ}
-    (hfinite : {m : ℕ |
-      (Ioo (K.physicalLeft m) (K.physicalRight m) ∩ J).Nonempty}.Finite)
+    (hfinite : (n06PhysicalSupportPieces K z J).Finite)
     {g : PolarPoint → ℝ}
     (h₀ : ∀ m, MemLp (canonicalSource S K z m g) 2 (canonicalMeasure S K m))
     (h₁ : ∀ m, MemLp (canonicalSource S K z m (fun q => g (q + (0, Real.pi))))
@@ -92,8 +91,7 @@ theorem n06_tendsto_physicalSource_pairing
     {F : ℕ → CanonicalSequence S K} {f : CanonicalSequence S K}
     (hF : ∀ m, Tendsto (fun n => F n m) atTop (𝓝 (f m)))
     {J : Set ℝ}
-    (hfinite : {m : ℕ |
-      (Ioo (K.physicalLeft m) (K.physicalRight m) ∩ J).Nonempty}.Finite)
+    (hfinite : (n06PhysicalSupportPieces K z J).Finite)
     {φ : PolarPoint → ℝ}
     (h₀ : ∀ m, MemLp (canonicalHeight S K z m φ) 2 (canonicalMeasure S K m))
     (h₁ : ∀ m, MemLp (canonicalHeight S K z m (fun q => φ (q + (0, Real.pi))))

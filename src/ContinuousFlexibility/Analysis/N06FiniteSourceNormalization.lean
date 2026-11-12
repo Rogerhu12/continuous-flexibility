@@ -31,12 +31,12 @@ theorem n06_chartJacobian_on_normalization
     (hN04 : N04Properties D T S C L K base loss ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) {m : ℕ} {p : PolarPoint}
-    (hp : p ∈ physicalPieceOpen S K m) (hpN : p.1 ∈ K.normalizationRegion) :
+    (hp : p ∈ physicalPieceOpen S K z m) (hpN : p.1 ∈ K.normalizationRegion) :
     planeJacobian (K.chart z m) p = planeJacobian (K.chart (C.referenceState, 0) m) p := by
   have heq : K.chart z m =ᶠ[𝓝 p] K.chart (C.referenceState, 0) m := by
-    filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds hp,
-      (hN04.1.preimage continuous_fst).mem_nhds hpN] with q hq hqN
-    exact (hN04.2.2.1 z hz hs m q hq hqN).1
+    filter_upwards [(hN04.1.domains z hz hs m).1.mem_nhds hp,
+      (hN04.1.normalizationOpen.preimage continuous_fst).mem_nhds hpN] with q hq hqN
+    exact ((hN04.1.normalization z hz hs m).2 q hq hqN).1
   unfold planeJacobian
   rw [heq.fderiv_eq (𝕜 := ℝ)]
 
@@ -52,10 +52,17 @@ theorem n06_inverseChart_of_reference_normalization
     (hp : p ∈ canonicalOpen S K m)
     (hpN : (K.inverseChart (C.referenceState, 0) m p).1 ∈ K.normalizationRegion) :
     K.inverseChart z m p = K.inverseChart (C.referenceState, 0) m p := by
-  have hc := hN04.2.2.2.2.2.2.2.1 z hz hs m
-  have hr := hN04.2.2.2.2.2.2.2.1 (C.referenceState, 0) href hsector m
-  have hq := hr.2.1 hp
-  have hfixed := hN04.2.2.1 z hz hs m _ hq hpN
+  have hc := hN04.1.charts z hz hs m
+  have hr := hN04.1.charts (C.referenceState, 0) href hsector m
+  have hq0 := hr.2.1 hp
+  have hnormalization := hN04.1.normalization z hz hs m
+  have hq : K.inverseChart (C.referenceState, 0) m p ∈ physicalPieceOpen S K z m := by
+    have hmem : K.inverseChart (C.referenceState, 0) m p ∈
+        physicalPieceOpen S K (C.referenceState, 0) m ∩
+          (K.normalizationRegion ×ˢ (univ : Set ℝ)) := ⟨hq0, hpN, mem_univ _⟩
+    rw [← hnormalization.1] at hmem
+    exact hmem.1
+  have hfixed := hnormalization.2 _ hq hpN
   have hchart : K.chart z m (K.inverseChart (C.referenceState, 0) m p) = p :=
     hfixed.1.trans (hr.2.2.2.1 p hp)
   calc
@@ -85,7 +92,7 @@ theorem n06_canonicalSource_normalization_fixed
     simp only [canonicalSource, hzero, hrefzero, mul_zero, zero_div]
   · have hpN := hsupport _ hzero
     have hi := n06_inverseChart_on_normalization hN04 href hsector hz hs hp hpN
-    have hq := (hN04.2.2.2.2.2.2.2.1 z hz hs m).2.1 hp
+    have hq := (hN04.1.charts z hz hs m).2.1 hp
     have hJ := n06_chartJacobian_on_normalization hN04 hz hs hq hpN
     dsimp only [canonicalSource]
     rw [hi.2, hJ, hi.1]
@@ -119,7 +126,7 @@ theorem n06_canonicalReferenceNu_fixed
       canonicalSource S K (C.referenceState, 0) m (n06ReferenceNuField D) p := by
   apply n06_canonicalSource_normalization_fixed hN04 href hsector hz hs _ m hp
   intro q hq
-  apply hN04.2.1
+  apply hN04.1.normalizationSupport
   apply Function.mem_support.mpr
   intro hzero
   exact hq (by simp only [n06ReferenceNuField, hzero, zero_mul])
@@ -155,8 +162,8 @@ theorem n06_canonicalNuDifference_eq_physicalDifference
           (nuColumnField D S C (C.referenceState, 0)) p =
       canonicalSource S K z m (fun q => nuColumnField D S C z q - n06ReferenceNuField D q) p := by
   have hgeom : RadialProfileGeometry D := hD.choose_spec.1
-  have hq := (hN04.2.2.2.2.2.2.2.1 (C.referenceState, 0) href hsector m).2.1 hp
-  have hqD := (hN04.2.2.2.1 m).2.2 hq.1
+  have hq := (hN04.1.charts (C.referenceState, 0) href hsector m).2.1 hp
+  have hqD := ((hN04.1.domains (C.referenceState, 0) href hsector m).2.2.1 hq).1
   have hnu := n06_nuColumn_reference
     (p := K.inverseChart (C.referenceState, 0) m p)
     hgeom.2.2.1.1 hb.1 hgeom.2.2.2.1.1 hrefState

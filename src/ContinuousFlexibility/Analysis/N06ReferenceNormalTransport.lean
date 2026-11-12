@@ -45,10 +45,11 @@ derivative identity; no pointwise derivative of the physical unknown is used. -/
 theorem n06_reference_normal_transport
     (hK : N04PartA D S C K base ε) (hab : D.a ≤ D.b)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (hY : ContDiffOn ℝ ∞ Y (Ioo (K.physicalLeft m) (K.physicalRight m)))
     (hh : ContDiffOn ℝ ∞ h (Ioo (K.physicalLeft m) (K.physicalRight m)))
-    (hchart : ∀ p ∈ physicalPieceOpen S K m, K.chart z m p = (Y p.1, p.2))
-    (hheight : ∀ p ∈ physicalPieceOpen S K m, K.height z m p = h p.1)
+    (hchart : ∀ p ∈ referencePhysicalPieceOpen S K m, K.chart z m p = (Y p.1, p.2))
+    (hheight : ∀ p ∈ referencePhysicalPieceOpen S K m, K.height z m p = h p.1)
     {w dw : PolarPoint → ℝ} (hweak : WeakNormalDerivative D w dw)
     (hw : MemLp w 2 (radialPhysicalMeasure D))
     (hdw : MemLp dw 2 (radialPhysicalMeasure D))
@@ -62,13 +63,14 @@ theorem n06_reference_normal_transport
         ∂canonicalMeasure S K m) =
       -(∫ p, canonicalHeight S K z m w p * mixedDerivative 1 0 φ p
         ∂canonicalMeasure S K m) := by
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hs m
+  have hcharts := hK.charts z hz hs m
+  rw [hΩ] at hcharts
   have hh0 (r : ℝ) (hr : r ∈ Ioo (K.physicalLeft m) (K.physicalRight m)) : h r ≠ 0 := by
     have he := (hcharts.2.2.2.2.2.2.2 (r, 0) ⟨hr, mem_univ _⟩).1.ne'
     rwa [hheight (r, 0) ⟨hr, mem_univ _⟩] at he
   have ha : ContDiffOn ℝ ∞ (fun r => (h r)⁻¹)
       (Ioo (K.physicalLeft m) (K.physicalRight m)) := hh.inv hh0
-  obtain ⟨σ, hσ, horient⟩ := n06_reference_radial_orientation hK hz hs hY hchart
+  obtain ⟨σ, hσ, horient⟩ := n06_reference_radial_orientation hK hz hs hΩ hY hchart
   have hσ0 : σ ≠ 0 := by rcases hσ with rfl | rfl <;> norm_num
   intro φ hφ
   have hmix : mixedDerivative 1 0 φ = radialPartial φ := by
@@ -76,9 +78,9 @@ theorem n06_reference_normal_transport
       (radialPartial_mixedDerivative hφ.1 0 0).symm
   rw [hmix]
   let Φ : PolarPoint → ℝ := n06ReferenceWeightedTest S K z m (fun r => (h r)⁻¹) φ
-  have hΦ : RadialTest D Φ := n06ReferenceWeightedTest_radialTest hK hz hs ha hφ
+  have hΦ : RadialTest D Φ := n06ReferenceWeightedTest_radialTest hK hz hs hΩ ha hφ
   have hΦp : Function.Periodic Φ (0, Real.pi) :=
-    n06ReferenceWeightedTest_periodic hK hz hs hφ
+    n06ReferenceWeightedTest_periodic hK hz hs hΩ hφ
   have hΦrp : Function.Periodic (radialPartial Φ) (0, Real.pi) :=
     r11b_periodic_directionalPartial hΦ.1 hΦp (1, 0)
   have hΦL : MemLp Φ 2 (radialPhysicalMeasure D) := r11b_continuous_memLp hΦ.1.continuous
@@ -110,9 +112,11 @@ theorem n06_reference_normal_transport
         (radialCore D ×ˢ Ioc (0 : ℝ) (2 * Real.pi)) volume := hiq
     exact hiqFull.mono_set (fun p hp =>
       ⟨hp.1, hp.2.1, hp.2.2.trans (by linarith [Real.pi_pos])⟩)
-  have hqzero (p : PolarPoint) (hp : p ∉ physicalPieceOpen S K m) : q p = 0 := by
-    have h0 : Φ p = 0 := n06ReferenceWeightedTest_of_not_mem hp
-    have h1 : radialPartial Φ p = 0 := n06ReferenceWeightedTest_radialPartial_zero hK hz hs hφ hp
+  have hqzero (p : PolarPoint) (hp : p ∉ physicalPieceOpen S K z m) : q p = 0 := by
+    have hpRef : p ∉ referencePhysicalPieceOpen S K m := by simpa only [hΩ] using hp
+    have h0 : Φ p = 0 := n06ReferenceWeightedTest_of_not_mem hpRef
+    have h1 : radialPartial Φ p = 0 :=
+      n06ReferenceWeightedTest_radialPartial_zero hK hz hs hΩ hφ hpRef
     simp only [q, h0, h1, mul_zero, add_zero]
   have hconvert := n06_physicalMean_pairing_eq_canonical hK hab hz hs m (fun _ => 1) q
     (by simpa only [one_mul] using hqp)
@@ -130,7 +134,7 @@ theorem n06_reference_normal_transport
     filter_upwards [ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp
     have hpc : p ∈ canonicalOpen S K m := ⟨hp.1, mem_univ _⟩
     let x : PolarPoint := K.inverseChart z m p
-    have hx : x ∈ physicalPieceOpen S K m := hcharts.2.1 hpc
+    have hx : x ∈ referencePhysicalPieceOpen S K m := hcharts.2.1 hpc
     have hFx : K.chart z m x = p := hcharts.2.2.2.1 p hpc
     have hJ : planeJacobian (K.chart z m) x = deriv Y x.1 :=
       n06_reference_radial_jacobian hY hchart hx
@@ -146,7 +150,7 @@ theorem n06_reference_normal_transport
     have hΦrx : radialPartial Φ x =
         (-deriv h x.1 / h x.1 ^ 2) * φ p +
           (h x.1)⁻¹ * (deriv Y x.1 * radialPartial φ p) := by
-      rw [n06ReferenceWeightedTest_radialPartial hK hz hs ha hY hchart hφ hx, hdhi, hFx]
+      rw [n06ReferenceWeightedTest_radialPartial hK hz hs hΩ ha hY hchart hφ hx, hdhi, hFx]
     change (1 / K.height z m x) *
       (K.height z m x * (w x * radialPartial Φ x + dw x * Φ x) /
         |planeJacobian (K.chart z m) x|) =
@@ -249,10 +253,11 @@ this cutoff with the different cutoff in the radial inverse norm. -/
 theorem n06_reference_remainder_normal_transport
     (hK : N04PartA D S C K base ε) (hab : D.a < D.b)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (hY : ContDiffOn ℝ ∞ Y (Ioo (K.physicalLeft m) (K.physicalRight m)))
     (hh : ContDiffOn ℝ ∞ h (Ioo (K.physicalLeft m) (K.physicalRight m)))
-    (hchart : ∀ p ∈ physicalPieceOpen S K m, K.chart z m p = (Y p.1, p.2))
-    (hheight : ∀ p ∈ physicalPieceOpen S K m, K.height z m p = h p.1)
+    (hchart : ∀ p ∈ referencePhysicalPieceOpen S K m, K.chart z m p = (Y p.1, p.2))
+    (hheight : ∀ p ∈ referencePhysicalPieceOpen S K m, K.height z m p = h p.1)
     {χ : ℝ → ℝ} (hχ : ContDiff ℝ ∞ χ) {η ur : PolarPoint → ℝ} (aL : ℝ)
     (hweak : WeakNormalDerivative D η ur)
     (hη : MemLp η 2 (radialPhysicalMeasure D))
@@ -287,7 +292,7 @@ theorem n06_reference_remainder_normal_transport
   have hremrp : Function.Periodic (fun p => ur p - aL * deriv χ p.1) (0, Real.pi) := by
     intro p
     simp only [hurp p, Prod.fst_add, add_zero]
-  exact n06_reference_normal_transport hK hab.le hz hs hY hh hchart hheight
+  exact n06_reference_normal_transport hK hab.le hz hs hΩ hY hh hchart hheight
     hrem hremL hremrL hremp hremrp hW hG
 
 end ContinuousFlexibility.Analysis

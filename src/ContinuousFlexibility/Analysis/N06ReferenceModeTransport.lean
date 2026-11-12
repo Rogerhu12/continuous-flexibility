@@ -99,17 +99,18 @@ theorem n06_controlledReferenceHeight_mode
   have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
-  have hcharts := h04.2.2.2.2.2.2.2.1 (C.referenceState, 0) href hs m
+  have hcharts := h04.1.charts (C.referenceState, 0) href hs m
+  rw [h04.1.referenceDomain m] at hcharts
   have hleft := hcharts.2.2.1
   let y := (K.chart (C.referenceState, 0) m (r, 0)).1
   let H := K.height (C.referenceState, 0) m (r, 0)
   have hinverse (θ : ℝ) : K.inverseChart (C.referenceState, 0) m (y, θ) = (r, θ) := by
-    have hq : (r, θ) ∈ physicalPieceOpen S K m := ⟨hr, mem_univ θ⟩
+    have hq : (r, θ) ∈ referencePhysicalPieceOpen S K m := ⟨hr, mem_univ θ⟩
     have hchart := (hcoordinates.1 m (r, θ) hq).1
     simpa only [hchart] using hleft (r, θ) hq
   have hheight (θ : ℝ) : canonicalHeight S K (C.referenceState, 0) m η (y, θ) =
       H⁻¹ * η (r, θ) := by
-    have hq : (r, θ) ∈ physicalPieceOpen S K m := ⟨hr, mem_univ θ⟩
+    have hq : (r, θ) ∈ referencePhysicalPieceOpen S K m := ⟨hr, mem_univ θ⟩
     simp only [canonicalHeight, hinverse θ, (hcoordinates.1 m (r, θ) hq).2]
     exact div_eq_inv_mul _ _
   change n06HalfCosineCoefficient (canonicalHeight S K (C.referenceState, 0) m η) n y =

@@ -72,8 +72,8 @@ private theorem n06_n05_named_relation_implies
   have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
-  obtain ⟨x, hxl, hxr⟩ := exists_between (h04.2.2.2.1 0).1
-  have hx := (h04.2.2.2.1 0).2.2 ⟨hxl, hxr⟩
+  obtain ⟨x, hxl, hxr⟩ := exists_between (h04.1.referenceBounds 0).1
+  have hx := (h04.1.referenceBounds 0).2.2 ⟨hxl, hxr⟩
   exact n06_namedPhysicalWeakRelation_implies (hx.1.trans hx.2).le
     h04 h.2 href hsector hz hs u F hweak
 

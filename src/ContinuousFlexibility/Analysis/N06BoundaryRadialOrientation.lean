@@ -4,11 +4,12 @@ import Mathlib.Analysis.Calculus.Deriv.Slope
 /-!
 # Radial endpoint orientation of the actual current chart
 
-A chart takes the physical open interval into the canonical open
-interval. At either recorded endpoint its actual nonzero radial first
-jet must therefore have the sign determined by the two endpoint choices.
-This follows by taking the one-sided limit of the true scalar slopes;
-monotonicity of a radial slice is not an input.
+The true inverse takes the canonical open interval to the correct side
+of a physical root circle. Its endpoint derivative and the forward root
+first jets are reciprocal. Their signs therefore agree, even when the
+other boundary of a negative piece is a moving cut. This uses only the
+one-sided location of the actual domain, without an inward radial collar
+or monotonicity of a physical slice.
 
 The final identity converts the physical outward sign and the signed
 radial Jacobian into the canonical outward sign in the Green formula.
@@ -89,6 +90,64 @@ theorem n06_endpoint_sign_div_abs
   · have hs : 0 < s := by simpa [n06EndpointSign] using h
     simp [n06EndpointSign, abs_of_pos hs, hs.ne']
 
+/-- The true closed inverse identity determines its radial derivative
+from the forward first jets. Equality is differentiated within the
+nondegenerate closed canonical interval. -/
+theorem N06RootFirstJets.inverse_radial_firstJet
+    {F G : PolarPoint → PolarPoint} {h : PolarPoint → ℝ}
+    {r y σ a b : ℝ} {β H ρ κ Hr : ℝ → ℝ}
+    (J : N06RootFirstJets F h r y σ β H ρ κ Hr)
+    (hab : a < b) (hy : y ∈ Icc a b) (θ : ℝ)
+    (hG : DifferentiableAt ℝ G (y, β θ))
+    (hGF : G (y, β θ) = (r, θ))
+    (hFG : ∀ t ∈ Icc a b, F (G (t, β θ)) = (t, β θ)) :
+    HasDerivAt (fun t => (G (t, β θ)).1)
+        (fderiv ℝ G (y, β θ) (1, 0)).1 y ∧
+      (σ * ρ θ) * (fderiv ℝ G (y, β θ) (1, 0)).1 = 1 := by
+  let v : PolarPoint := fderiv ℝ G (y, β θ) (1, 0)
+  have hpath : HasDerivAt (fun t => G (t, β θ)) v y :=
+    hG.hasFDerivAt.comp_hasDerivAt y
+      ((hasDerivAt_id y).prodMk (hasDerivAt_const y (β θ)))
+  have hradial : HasDerivAt (fun t => (G (t, β θ)).1) v.1 y :=
+    (ContinuousLinearMap.fst ℝ ℝ ℝ).hasFDerivAt.comp_hasDerivAt y hpath
+  have hF : DifferentiableAt ℝ F (G (y, β θ)) := by
+    rw [hGF]
+    exact J.chart_differentiable θ
+  have hcomp : HasDerivAt (fun t => F (G (t, β θ)))
+      (fderiv ℝ F (G (y, β θ)) v) y :=
+    hF.hasFDerivAt.comp_hasDerivAt y hpath
+  have hcomp₁ : HasDerivAt (fun t => (F (G (t, β θ))).1)
+      (fderiv ℝ F (G (y, β θ)) v).1 y :=
+    (ContinuousLinearMap.fst ℝ ℝ ℝ).hasFDerivAt.comp_hasDerivAt y hcomp
+  have hrow : (fderiv ℝ F (r, θ) v).1 = (σ * ρ θ) * v.1 := by
+    have he := polarCLM_apply_decompose
+      ((ContinuousLinearMap.fst ℝ ℝ ℝ).comp (fderiv ℝ F (r, θ))) v
+    simpa only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
+      J.chart_radial θ, J.chart_angular θ, mul_zero, add_zero, mul_comm] using he
+  have hderiv : HasDerivAt (fun t => (F (G (t, β θ))).1) ((σ * ρ θ) * v.1) y := by
+    simpa only [hGF, hrow] using hcomp₁
+  have hid : HasDerivWithinAt (fun t => (F (G (t, β θ))).1) 1 (Icc a b) y :=
+    (hasDerivAt_id y).hasDerivWithinAt.congr_of_mem
+      (fun t ht => congrArg Prod.fst (hFG t ht)) hy
+  exact ⟨hradial,
+    (hderiv.hasDerivWithinAt.derivWithin (uniqueDiffOn_Icc hab y hy)).symm.trans
+      (hid.derivWithin (uniqueDiffOn_Icc hab y hy))⟩
+
+private theorem n06_orientation_of_inverse_orientation
+    (physicalUpper canonicalUpper : Bool) {s t : ℝ} (hunit : s * t = 1)
+    (ht : 0 < n06EndpointSign canonicalUpper * n06EndpointSign physicalUpper * t) :
+    0 < n06EndpointSign physicalUpper * n06EndpointSign canonicalUpper * s := by
+  have hsign : (n06EndpointSign physicalUpper * n06EndpointSign canonicalUpper) *
+      (n06EndpointSign canonicalUpper * n06EndpointSign physicalUpper) = 1 := by
+    cases physicalUpper <;> cases canonicalUpper <;> norm_num [n06EndpointSign]
+  have hproduct : (n06EndpointSign physicalUpper * n06EndpointSign canonicalUpper * s) *
+      (n06EndpointSign canonicalUpper * n06EndpointSign physicalUpper * t) = 1 := by
+    calc
+      _ = ((n06EndpointSign physicalUpper * n06EndpointSign canonicalUpper) *
+        (n06EndpointSign canonicalUpper * n06EndpointSign physicalUpper)) * (s * t) := by ring
+      _ = 1 := by rw [hsign, hunit, one_mul]
+  exact (mul_pos_iff_of_pos_right ht).mp (by rw [hproduct]; norm_num)
+
 end ContinuousFlexibility.Analysis
 
 namespace ContinuousFlexibility.Statements
@@ -99,9 +158,10 @@ open scoped ContDiff Topology
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- The original chart map and closed Jacobian fix the endpoint sign of
-its true radial first jet. This one statement covers all four choices of
-physical and canonical endpoint; no extra orientation hypothesis occurs. -/
+/-- The true root circle and the actual domain's one-sided location fix
+the radial first-jet sign. The one-sided location follows from the fixed
+positive domain or the original component containing a negative half;
+it does not assert that a moving-cut half is a rectangle. -/
 theorem n06_current_boundary_radial_orientation
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
@@ -112,32 +172,51 @@ theorem n06_current_boundary_radial_orientation
       (n06Endpoint (K.physicalLeft m) (K.physicalRight m) physicalUpper)
       (n06Endpoint (K.left m) (K.right m) canonicalUpper) σ β H ρ κ Hr)
     (h04 : N04Properties D T S C L K base loss ε)
-    (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1) (θ : ℝ) :
+    (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (hx : ∀ θ : ℝ,
+      (n06Endpoint (K.physicalLeft m) (K.physicalRight m) physicalUpper, θ) ∈
+        physicalPieceClosed S K z m)
+    (hside : ∀ p ∈ physicalPieceOpen S K z m,
+      if physicalUpper then p.1 < K.physicalRight m else K.physicalLeft m < p.1)
+    (θ : ℝ) :
     0 < n06EndpointSign physicalUpper * n06EndpointSign canonicalUpper * (σ * ρ θ) ∧
       n06EndpointSign physicalUpper * ((σ * ρ θ) / |σ * ρ θ|) =
         n06EndpointSign canonicalUpper := by
   let r := n06Endpoint (K.physicalLeft m) (K.physicalRight m) physicalUpper
   let y := n06Endpoint (K.left m) (K.right m) canonicalUpper
-  have hr : r ∈ Icc (K.physicalLeft m) (K.physicalRight m) := by
-    cases physicalUpper <;> simp [r, n06Endpoint, (h04.2.2.2.1 m).1.le]
-  have hmap : MapsTo (fun x : ℝ => (K.chart z m (x, θ)).1)
-      (Ioo (K.physicalLeft m) (K.physicalRight m)) (Ioo (K.left m) (K.right m)) :=
-    fun _ hx => ((h04.2.2.2.2.2.2.2.1 z hz hs m).1 ⟨hx, mem_univ _⟩).1
-  have hvalue : (K.chart z m (r, θ)).1 = y := congrArg Prod.fst (J.chart_value θ)
-  have hline : HasDerivAt (fun x : ℝ => (x, θ)) (1, 0) r :=
-    (hasDerivAt_id r).prodMk (hasDerivAt_const r θ)
-  have hd : HasDerivAt (fun x : ℝ => (K.chart z m (x, θ)).1) (σ * ρ θ) r := by
-    have he := (J.chart_differentiable θ).hasFDerivAt.fst.comp_hasDerivAt r hline
-    simpa only [Function.comp_def, id_eq, ContinuousLinearMap.comp_apply,
-      ContinuousLinearMap.coe_fst', J.chart_radial θ] using he
-  have hJ := (h04.2.2.2.2.2.2.2.2.1 z hz hs m (r, θ) hr).2.2.1
-  change planeJacobian (K.chart z m)
-    (n06Endpoint (K.physicalLeft m) (K.physicalRight m) physicalUpper, θ) ≠ 0 at hJ
-  rw [J.jacobian θ] at hJ
-  have hscale : σ * ρ θ ≠ 0 := (mul_ne_zero_iff.mp
-    (show (σ * ρ θ) * deriv β θ ≠ 0 from hJ)).1
-  have hp := n06_hasDerivAt_endpoint_orientation physicalUpper canonicalUpper
-    (h04.2.2.2.1 m).1 hmap hvalue hd hscale
+  let a : ℝ := if physicalUpper then D.a else r
+  let b : ℝ := if physicalUpper then r else D.b
+  have hy : y ∈ Icc (K.left m) (K.right m) := by
+    cases canonicalUpper <;> simp [y, n06Endpoint, (h04.1.referenceBounds m).2.1.le]
+  have hb := h04.1.boundary z hz hs m
+  have hG := (n04b_inverseChart_contDiffAt_closed h04.1 hz hs m
+    (p := (y, β θ)) ⟨hy, mem_univ _⟩).differentiableAt (by simp)
+  have hGF : K.inverseChart z m (y, β θ) = (r, θ) := by
+    simpa only [J.chart_value θ] using hb.2.2.1 (r, θ) (hx θ)
+  have hj := J.inverse_radial_firstJet (h04.1.referenceBounds m).2.1 hy θ hG hGF
+    (fun t ht => hb.2.2.2.1 (t, β θ) ⟨ht, mem_univ _⟩)
+  have htne : (fderiv ℝ (K.inverseChart z m) (y, β θ) (1, 0)).1 ≠ 0 := by
+    have hprod : (σ * ρ θ) *
+        (fderiv ℝ (K.inverseChart z m) (y, β θ) (1, 0)).1 ≠ 0 := by
+      rw [hj.2]
+      exact one_ne_zero
+    exact (mul_ne_zero_iff.mp hprod).2
+  have hmap : MapsTo (fun t : ℝ => (K.inverseChart z m (t, β θ)).1)
+      (Ioo (K.left m) (K.right m)) (Ioo a b) := by
+    intro t ht
+    have hp := (h04.1.charts z hz hs m).2.1 ⟨ht, mem_univ _⟩
+    have hpD := (h04.1.domains z hz hs m).2.2.1 hp
+    have hpSide := hside _ hp
+    cases physicalUpper
+    · exact ⟨hpSide, hpD.1.2⟩
+    · exact ⟨hpD.1.1, hpSide⟩
+  have he : n06Endpoint a b physicalUpper = r := by
+    cases physicalUpper <;> rfl
+  have hvalue : (K.inverseChart z m (y, β θ)).1 = n06Endpoint a b physicalUpper :=
+    (congrArg Prod.fst hGF).trans he.symm
+  have hinverse := n06_hasDerivAt_endpoint_orientation canonicalUpper physicalUpper
+    (h04.1.referenceBounds m).2.1 hmap hvalue hj.1 htne
+  have hp := n06_orientation_of_inverse_orientation physicalUpper canonicalUpper hj.2 hinverse
   exact ⟨hp, n06_endpoint_sign_div_abs physicalUpper canonicalUpper hp⟩
 
 end ContinuousFlexibility.Statements

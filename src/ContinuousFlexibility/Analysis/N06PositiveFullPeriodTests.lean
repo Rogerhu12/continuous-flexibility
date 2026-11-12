@@ -156,10 +156,10 @@ theorem n06_positive_current_source_average
     canonicalSource S K z m (n06_radialTestAverage (divergenceOperator (L.coefficients z) φ)) p =
       canonicalSource S K z m
         (divergenceOperator (L.coefficients z) (n06_radialTestAverage φ)) p := by
-  have hq := (h04.2.2.2.2.2.2.2.1 z hz hs m).2.1 hp
+  have hq := (h04.1.charts z hz hs m).2.1 hp
   have hqa : K.inverseChart z m p ∈ annularOpen D :=
-    ⟨(h04.2.2.2.1 m).2.2 hq.1, mem_univ _⟩
-  have hw := (h04.2.2.2.2.1 m hm _ hq.1).le
+    (h04.1.domains z hz hs m).2.2.1 hq
+  have hw := ((h04.1.domains z hz hs m).2.2.2.2.2.2.1 _ hq hm).le
   dsimp only [canonicalSource]
   rw [n06_positiveDivergence_average hT hS h01 h03 hz hs hqa hw hφ]
 

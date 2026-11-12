@@ -102,7 +102,7 @@ theorem N06CurrentHeightTestTraces.radial_slice_green
         v (K.right m) * P.radial (K.right m, θ)) -
       (P.value (K.left m, θ) * deriv v (K.left m) -
         v (K.left m) * P.radial (K.left m, θ)) := by
-  have hab : K.left m ≤ K.right m := (h04.2.2.2.1 m).2.1.le
+  have hab : K.left m ≤ K.right m := (h04.1.referenceBounds m).2.1.le
   have hvalAC := n06_lipschitz_radial_slice_ac P.value_lipschitz θ (K.left m) (K.right m)
   have hradAC := n06_lipschitz_radial_slice_ac P.radial_lipschitz θ (K.left m) (K.right m)
   have hpu : ∀ᵐ y ∂volume, y ∈ uIcc (K.left m) (K.right m) →

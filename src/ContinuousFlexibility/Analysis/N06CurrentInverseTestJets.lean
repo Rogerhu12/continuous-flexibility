@@ -1,7 +1,7 @@
 import ContinuousFlexibility.Analysis.N06CurrentTestLp
 
 /-!
-# Actual inverse-coordinate test jets without boundary inverse values
+# Actual inverse-coordinate test jets on the closed canonical strip
 
 The adjugate of the genuine forward derivative gives two physical vector
 fields for differentiating a pullback through the current inverse chart.
@@ -9,8 +9,8 @@ They are smooth at every physical boundary point because N04 gives the
 actual forward chart smoothness and a nonzero Jacobian there. Iterating
 these physical vector fields expresses the first two canonical test jets
 as pullbacks of continuous functions on the compact physical tile.
-Consequently they lie in the original canonical L2 space. The totalized
-inverse chart is used only on its recorded open domain.
+Consequently they lie in the original canonical L2 space. The genuine boundary inverse germs also give smoothness on the full closed
+canonical strip, which supplies the finite-measure bounds for the actual tests.
 -/
 
 noncomputable section
@@ -108,18 +108,18 @@ theorem n06_current_inverseChart_fderiv_apply
     fderiv ℝ (K.inverseChart z m) p v =
       n06InverseChartVector (K.chart z m) v (K.inverseChart z m p) := by
   let x := K.inverseChart z m p
-  have hc := h04.2.2.2.2.2.2.2.1 z hz hs m
-  have hx : x ∈ physicalPieceOpen S K m := hc.2.1 hp
+  have hc := h04.1.charts z hz hs m
+  have hx : x ∈ physicalPieceOpen S K z m := hc.2.1 hp
   have hFx : K.chart z m x = p := hc.2.2.2.1 p hp
   have hF : DifferentiableAt ℝ (K.chart z m) x :=
-    (hc.2.2.2.2.1.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hx)).differentiableAt
+    (hc.2.2.2.2.1.contDiffAt ((h04.1.domains z hz hs m).1.mem_nhds hx)).differentiableAt
       (by simp)
   have hG : DifferentiableAt ℝ (K.inverseChart z m) (K.chart z m x) := by
     rw [hFx]
     exact (hc.2.2.2.2.2.1.contDiffAt
       ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp)).differentiableAt (by simp)
   have he : K.inverseChart z m ∘ K.chart z m =ᶠ[𝓝 x] id := by
-    filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds hx] with q hq
+    filter_upwards [(h04.1.domains z hz hs m).1.mem_nhds hx] with q hq
     exact hc.2.2.1 q hq
   have hd := he.fderiv_eq (𝕜 := ℝ)
   rw [fderiv_comp x hG hF, fderiv_id, hFx] at hd
@@ -138,7 +138,7 @@ theorem n06_current_inverseChart_comp_fderiv
     (hf : DifferentiableAt ℝ f (K.inverseChart z m p)) :
     fderiv ℝ (fun q => f (K.inverseChart z m q)) p v =
       n06InverseChartDerivative (K.chart z m) v f (K.inverseChart z m p) := by
-  have hc := h04.2.2.2.2.2.2.2.1 z hz hs m
+  have hc := h04.1.charts z hz hs m
   have hG : DifferentiableAt ℝ (K.inverseChart z m) p :=
     (hc.2.2.2.2.2.1.contDiffAt
       ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp)).differentiableAt (by simp)
@@ -153,21 +153,21 @@ theorem n06_current_inverseChart_comp_second
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (m : ℕ) (v w : PolarPoint) {f : PolarPoint → ℝ}
-    (hf : ∀ x : PolarPoint, x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) →
+    (hf : ∀ x : PolarPoint, x ∈ physicalPieceClosed S K z m →
       ContDiffAt ℝ ∞ f x)
     {p : PolarPoint} (hp : p ∈ canonicalOpen S K m) :
     fderiv ℝ (fun q => fderiv ℝ (fun t => f (K.inverseChart z m t)) q v) p w =
       n06InverseChartDerivative (K.chart z m) w
         (n06InverseChartDerivative (K.chart z m) v f) (K.inverseChart z m p) := by
-  have hc := h04.2.2.2.2.2.2.2.1 z hz hs m
-  have hb := h04.2.2.2.2.2.2.2.2.1 z hz hs m
+  have hc := h04.1.charts z hz hs m
+  have hb := (h04.1.boundary z hz hs m).2.2.2.2.1
   have hfirst : (fun q => fderiv ℝ (fun t => f (K.inverseChart z m t)) q v)
       =ᶠ[𝓝 p] fun q =>
         n06InverseChartDerivative (K.chart z m) v f (K.inverseChart z m q) := by
     filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds hp] with q hq
     exact n06_current_inverseChart_comp_fderiv h04 hz hs m v hq
-      ((hf _ (mem_Icc_of_Ioo (hc.2.1 hq).1)).differentiableAt (by simp))
-  have hx := mem_Icc_of_Ioo (hc.2.1 hp).1
+      ((hf _ (subset_closure (hc.2.1 hq))).differentiableAt (by simp))
+  have hx := subset_closure (hc.2.1 hp)
   have hjet := n06InverseChartDerivative_contDiffAt v
     (hb _ hx).1 (hb _ hx).2.2.1 (hf _ hx)
   calc
@@ -189,34 +189,21 @@ theorem n06_current_canonicalHeight_directionalJets_memLp
     MemLp (fun p => fderiv ℝ
       (fun q => fderiv ℝ (canonicalHeight S K z m φ) q v) p w)
       2 (canonicalMeasure S K m) := by
-  let f : PolarPoint → ℝ := fun x => φ x / K.height z m x
-  let f₁ := n06InverseChartDerivative (K.chart z m) v f
-  let f₂ := n06InverseChartDerivative (K.chart z m) w f₁
-  have hb := h04.2.2.2.2.2.2.2.2.1 z hz hs m
-  have hc := h04.2.2.2.2.2.2.2.1 z hz hs m
-  have hf (x : PolarPoint) (hx : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
-      ContDiffAt ℝ ∞ f x := hφ.contDiffAt.div (hb x hx).2.1 (hb x hx).2.2.2.ne'
-  have hf₁ (x : PolarPoint) (hx : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
-      ContDiffAt ℝ ∞ f₁ x :=
-    n06InverseChartDerivative_contDiffAt v (hb x hx).1 (hb x hx).2.2.1 (hf x hx)
-  have hf₂ (x : PolarPoint) (hx : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
-      ContDiffAt ℝ ∞ f₂ x :=
-    n06InverseChartDerivative_contDiffAt w (hb x hx).1 (hb x hx).2.2.1 (hf₁ x hx)
-  have h₁ : MemLp (fun p => f₁ (K.inverseChart z m p)) 2 (canonicalMeasure S K m) :=
-    n06_inverseChart_comp_memLp h04 hz hs m
-      (fun x hx => (hf₁ x hx.1).continuousAt.continuousWithinAt)
-  have h₂ : MemLp (fun p => f₂ (K.inverseChart z m p)) 2 (canonicalMeasure S K m) :=
-    n06_inverseChart_comp_memLp h04 hz hs m
-      (fun x hx => (hf₂ x hx.1).continuousAt.continuousWithinAt)
+  have hH (p : PolarPoint) (hp : p ∈ canonicalClosed S K m) :
+      ContDiffAt ℝ ∞ (canonicalHeight S K z m φ) p :=
+    n04b_canonicalHeight_contDiffAt_closed h04.1 hz hs m hp hφ
+  have hfirst (p : PolarPoint) (hp : p ∈ canonicalClosed S K m) :
+      ContDiffAt ℝ ∞
+        (fun q => fderiv ℝ (canonicalHeight S K z m φ) q v) p :=
+    ((hH p hp).fderiv_right (m := ∞) (by simp)).clm_apply contDiffAt_const
   constructor
-  · apply (memLp_congr_ae ?_).mpr h₁
-    filter_upwards [ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp
-    exact n06_current_inverseChart_comp_fderiv h04 hz hs m v
-      ⟨hp.1, mem_univ _⟩ ((hf _ (mem_Icc_of_Ioo (hc.2.1 ⟨hp.1, mem_univ _⟩).1)).differentiableAt
-        (by simp))
-  · apply (memLp_congr_ae ?_).mpr h₂
-    filter_upwards [ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp
-    exact n06_current_inverseChart_comp_second h04 hz hs m v w hf ⟨hp.1, mem_univ _⟩
+  · apply n06_memLp_canonical_of_continuousOn_closed m
+    intro p hp
+    exact (hfirst p ⟨hp.1, mem_univ _⟩).continuousAt.continuousWithinAt
+  · apply n06_memLp_canonical_of_continuousOn_closed m
+    intro p hp
+    exact (((hfirst p ⟨hp.1, mem_univ _⟩).fderiv_right (m := ∞) (by simp)).clm_apply
+      contDiffAt_const).continuousAt.continuousWithinAt
 
 theorem n06_current_canonicalHeight_second_memLp
     (h04 : N04Properties D T S C L K base loss ε)

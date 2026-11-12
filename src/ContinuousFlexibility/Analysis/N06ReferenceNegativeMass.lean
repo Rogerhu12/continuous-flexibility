@@ -108,7 +108,7 @@ theorem N06ReferenceNegativeInverseData.reciprocal_mass_le_physical
     rintro r ⟨y, hy, rfl⟩
     exact P.mapsTo (hsub hy)
   rw [P.reciprocal_mass_change hT hS h hi hab hsub,
-    intervalIntegral.integral_of_le (h.2.2.2.2.2.2.2.1 i).1.le,
+    intervalIntegral.integral_of_le (h.2.2.2.2.1.referenceBounds i).1.le,
     ← integral_Icc_eq_integral_Ioc]
   exact setIntegral_mono_set hcont.integrableOn_Icc hnonneg himage.eventuallySubset
 

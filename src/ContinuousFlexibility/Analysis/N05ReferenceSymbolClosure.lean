@@ -119,7 +119,7 @@ theorem n05_physical_closed_radius_pos
     (hD : IsAccumulatingProfile D) (h04 : N04Properties D T S C L K base loss ε)
     {m : ℕ} {r : ℝ} (hr : r ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
     0 < r := by
-  rcases h04 with ⟨_, _, _, hpieces, _⟩
+  have hpieces := h04.1.referenceBounds
   obtain ⟨B, hB⟩ := hD
   have hsub := closure_mono (hpieces m).2.2
   rw [closure_Ioo (hpieces m).1.ne, closure_Ioo hB.1.2.1.ne] at hsub
@@ -139,7 +139,7 @@ theorem n05_negative_reference_determinant_closed
         (D.w x.1 * (deriv D.w x.1 / x.1)) =
       -(K.chart (C.referenceState, 0) m x).1 := by
   have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _, _, _, _, hclosed, _⟩
+  have hpieces := h04.1.referenceBounds
   have h01 := h.1.1.1
   have hmem : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h01.2.1
@@ -149,14 +149,14 @@ theorem n05_negative_reference_determinant_closed
       ContinuousAt (fun q : PolarPoint =>
         K.height (C.referenceState, 0) m q ^ 4 *
           (D.w q.1 * (deriv D.w q.1 / q.1))) p := by
-    obtain ⟨_, hh, _, _⟩ := hclosed (C.referenceState, 0) hmem hsector m p hp
+    obtain ⟨_, hh, _, _⟩ := n05_reference_boundary_regular h04.1 hmem hsector m (p := p) hp
     obtain ⟨ha, _, hc⟩ := n05_radialReference_contDiffAt_of_ne_zero h01.1.1 (p := p)
       (n05_physical_closed_radius_pos h01.1.1 h.2.2.2.2 hp).ne'
     exact ((hh.pow 4).mul (ha.mul hc)).continuousAt
   have hG (p : PolarPoint)
       (hp : p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
       ContinuousAt (fun q : PolarPoint => -(K.chart (C.referenceState, 0) m q).1) p :=
-    (hclosed (C.referenceState, 0) hmem hsector m p hp).1.fst.neg.continuousAt
+    (n05_reference_boundary_regular h04.1 hmem hsector m (p := p) hp).1.fst.neg.continuousAt
   exact n05_eqOn_closed_strip_of_nonreflection (hpieces m).1 hF hG
     (fun p hp hθ => n05_negative_reference_determinant_nonreflection hT hS h hm
       (x := p) ⟨hp, mem_univ _⟩ hθ) x hx
@@ -189,13 +189,14 @@ theorem n05_negative_reference_symbol_closed
     K.height z m x ^ 2 * n05PrincipalPair (n05RadialReferenceCoefficients D) φ φ x =
       |planeJacobian Ψ x| * (-ξ x)
   have h04 := h.2.2.2.2
-  rcases h04 with ⟨_, _, _, hpieces, _, _, _, _, hclosed, _⟩
+  have hpieces := h04.1.referenceBounds
   have h01 := h.1.1.1
   have hmem : z ∈ stateNeighborhood S C base ε := n05_referenceState_mem h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
   have hΨ (p : PolarPoint)
       (hp : p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
-      ContDiffAt ℝ ∞ Ψ p := (hclosed z hmem hsector m p hp).1
+      ContDiffAt ℝ ∞ Ψ p :=
+    (n05_reference_boundary_regular h04.1 hmem hsector m (p := p) hp).1
   have hξ (p : PolarPoint)
       (hp : p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
       ContDiffAt ℝ ∞ ξ p := (hΨ p hp).fst
@@ -210,7 +211,7 @@ theorem n05_negative_reference_symbol_closed
       (p : PolarPoint) (hp : p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
       ContinuousAt (fun q : PolarPoint => K.height z m q ^ 2 *
         n05PrincipalPair (n05RadialReferenceCoefficients D) f g q) p := by
-    have hh := (hclosed z hmem hsector m p hp).2.1
+    have hh := (n05_reference_boundary_regular h04.1 hmem hsector m (p := p) hp).2.1
     obtain ⟨ha, hb, hc⟩ := n05_radialReference_contDiffAt_of_ne_zero h01.1.1 (p := p)
       (n05_physical_closed_radius_pos h01.1.1 h.2.2.2.2 hp).ne'
     exact ((hh.pow 2).mul

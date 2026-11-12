@@ -1,5 +1,4 @@
 import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
-import ContinuousFlexibility.Analysis.N06ControlledPieceFiniteness
 
 /-!
 # Actual angular jets of controlled reference sources
@@ -76,19 +75,21 @@ theorem n06_controlledReferenceSource_angularJet
         |deriv (fun r => (K.chart (C.referenceState, 0) m (r, 0)).1) x.1|) *
         mixedDerivative 0 j f (x.1, p.2) := by
   have h01 := h.1.1.1
-  obtain ⟨_, _, _, _, _, _, _, hcharts, _⟩ := h.2.2.2.2
+  have hA := h.2.2.2.2.1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
-  obtain ⟨hΦ, hΨ, hleft, hright, _⟩ := hcharts (C.referenceState, 0) href hs m
+  have hcharts := hA.charts (C.referenceState, 0) href hs m
+  rw [hA.referenceDomain m] at hcharts
+  obtain ⟨hΦ, hΨ, hleft, hright, _⟩ := hcharts
   let x := K.inverseChart (C.referenceState, 0) m p
-  have hx : x ∈ physicalPieceOpen S K m := hΨ hp
+  have hx : x ∈ referencePhysicalPieceOpen S K m := hΨ hp
   have hradial : (K.chart (C.referenceState, 0) m (x.1, 0)).1 = p.1 := by
     have he := congrArg (fun q : PolarPoint => q.1) (hright p hp)
     rw [(hcoordinates.1 m x hx).1] at he
     exact he
   have hinverse (θ : ℝ) :
       K.inverseChart (C.referenceState, 0) m (p.1, θ) = (x.1, θ) := by
-    have hq : (x.1, θ) ∈ physicalPieceOpen S K m := ⟨hx.1, mem_univ θ⟩
+    have hq : (x.1, θ) ∈ referencePhysicalPieceOpen S K m := ⟨hx.1, mem_univ θ⟩
     have he : K.chart (C.referenceState, 0) m (x.1, θ) = (p.1, θ) := by
       rw [(hcoordinates.1 m (x.1, θ) hq).1, hradial]
     simpa only [he] using hleft (x.1, θ) hq
@@ -98,7 +99,7 @@ theorem n06_controlledReferenceSource_angularJet
           |deriv (fun r => (K.chart (C.referenceState, 0) m (r, 0)).1) x.1|) *
         f (x.1, θ) := by
     funext θ
-    have hq : (x.1, θ) ∈ physicalPieceOpen S K m := ⟨hx.1, mem_univ θ⟩
+    have hq : (x.1, θ) ∈ referencePhysicalPieceOpen S K m := ⟨hx.1, mem_univ θ⟩
     dsimp only [canonicalSource]
     rw [hinverse θ, (hcoordinates.1 m (x.1, θ) hq).2,
       n05_reference_planeJacobian_radial h hcoordinates m hq]
@@ -125,11 +126,14 @@ theorem n06_controlledReferenceSource_angularJet_bound
   refine ⟨A, hA, ?_⟩
   intro f b B hB hf m j hj p hp
   have h01 := h.1.1.1
-  obtain ⟨_, _, _, hpieces, _, _, _, hcharts, _⟩ := h.2.2.2.2
+  have hA := h.2.2.2.2.1
+  have hpieces := hA.referenceBounds
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
   let x := K.inverseChart (C.referenceState, 0) m p
-  have hx : x ∈ physicalPieceOpen S K m := (hcharts _ href hs m).2.1 hp
+  have hx : x ∈ referencePhysicalPieceOpen S K m := by
+    have hxActual := (hA.charts (C.referenceState, 0) href hs m).2.1 hp
+    simpa only [hA.referenceDomain m] using hxActual
   have hcoeff := hbounds m x.1 hx.1
   let E : ℝ := A * radialE (D.cellIndex (K.cell m)) ^ A
   have hheight : |K.height (C.referenceState, 0) m (x.1, 0)| ≤ E := by

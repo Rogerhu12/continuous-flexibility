@@ -112,7 +112,8 @@ theorem n06_cutPiece_closed_subset
     (m : ℕ) {i : ℕ} (hi : i = (K.cutPair m).1 ∨ i = (K.cutPair m).2) :
     Icc (K.physicalLeft i) (K.physicalRight i) ⊆ radialCore D := by
   have hg : controlGeometryConditions D S C := h.1.1.1.2.2.2.1
-  rcases h.2.2.2.2 with ⟨_, _, _, hpieces, _, _, _, _, _, _, _, hcuts, _⟩
+  have hpieces := h.2.2.2.2.1.referenceBounds
+  have hcuts := h.2.2.2.2.2.1.1.1
   obtain ⟨_, _, hl, hr, hmeet, _⟩ := hcuts m
   intro r hri
   rcases hi with rfl | rfl
@@ -155,7 +156,9 @@ theorem n06_negative_reference_null_transport
   have hw : ContDiff ℝ ∞ D.w := hB.1.2.2.1.1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
-  rcases h.2.2.2.2 with ⟨_, _, _, hpieces, _, hnegative, _, _, hclosed, _⟩
+  have hA := h.2.2.2.2.1
+  have hpieces := hA.referenceBounds
+  have hnegative := hA.referenceNegative
   have hab : a < b := (hpieces m).1
   have hpos (r : ℝ) (hr : r ∈ Icc a b) : 0 < D.w r :=
     hB.1.2.2.2.2.1 r (hinside hr)
@@ -164,7 +167,7 @@ theorem n06_negative_reference_null_transport
   have hv : ContinuousOn (opticalSpeed D.w) (Icc a b) :=
     continuousOn_opticalSpeed_of_profile hw (hrad a ⟨le_rfl, hab.le⟩) hpos
   have hΨ (p : PolarPoint) (hp : p.1 ∈ Icc a b) : ContDiffAt ℝ ∞ Ψ p :=
-    (hclosed (C.referenceState, 0) href hsector m p hp).1
+    (n05_reference_boundary_regular hA href hsector m (p := p) hp).1
   have hNc : ContinuousOn N (Icc a b ×ˢ (univ : Set ℝ)) := by
     intro p hp
     have hc := (hΨ p hp.1).continuousAt

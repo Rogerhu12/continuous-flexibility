@@ -66,7 +66,8 @@ theorem n06_current_root_green_signedDensity
     (Q : N06CurrentHeightTestTraces S K z m φ)
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
-    (hφ : ContDiff ℝ ∞ φ) (hr : r ∈ Icc (K.physicalLeft m) (K.physicalRight m))
+    (hφ : ContDiff ℝ ∞ φ)
+    (hx : ∀ θ : ℝ, (r, θ) ∈ physicalPieceClosed S K z m)
     {θ : ℝ} (hθ : θ ∈ Icc (0 : ℝ) Real.pi)
     (A : SymmetricCoefficients) {W : PolarPoint → ℝ}
     (hW : DifferentiableAt ℝ W (y, β θ)) :
@@ -74,11 +75,11 @@ theorem n06_current_root_green_signedDensity
       ((σ * ρ θ) / |σ * ρ θ|) * |deriv β θ| *
         n06RootBoundaryDensity A (K.chart z m) (K.height z m)
           Q.value Q.radial Q.angular W (r, θ) (y, β θ) := by
-  have hJ := (h04.2.2.2.2.2.2.2.2.1 z hz hs m (r, θ) hr).2.2.1
+  have hJ := ((h04.1.boundary z hz hs m).2.2.2.2.1 (r, θ) (hx θ)).2.2.1
   have hprod : (σ * ρ θ) * deriv β θ ≠ 0 := by
     simpa only [J.jacobian θ] using hJ
   have ha : σ * ρ θ ≠ 0 := (mul_ne_zero_iff.mp hprod).1
-  have he := n06_current_root_green_density J Q h04 hz hs hφ hr hθ A hW
+  have he := n06_current_root_green_density J Q h04 hz hs hφ hx hθ A hW
   change (σ * ρ θ) *
     greenNormalFlux A.a A.b φ (fun p => K.height z m p * W (K.chart z m p)) (r, θ) =
     |planeJacobian (K.chart z m) (r, θ)| *
@@ -108,8 +109,8 @@ theorem n06_current_root_boundaryDensity_eq_of_value_conormal
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (hφ : ContDiff ℝ ∞ φ)
-    (hrl : r ∈ Icc (K.physicalLeft ml) (K.physicalRight ml))
-    (hrr : r ∈ Icc (K.physicalLeft mr) (K.physicalRight mr))
+    (hxL : ∀ θ : ℝ, (r, θ) ∈ physicalPieceClosed S K z ml)
+    (hxR : ∀ θ : ℝ, (r, θ) ∈ physicalPieceClosed S K z mr)
     {θ : ℝ} (hθ : θ ∈ Icc (0 : ℝ) Real.pi)
     (A : SymmetricCoefficients) {Wl Wr : PolarPoint → ℝ}
     (hWl : DifferentiableAt ℝ Wl (yl, β θ))
@@ -126,12 +127,12 @@ theorem n06_current_root_boundaryDensity_eq_of_value_conormal
     ((σr * ρ θ) / |σr * ρ θ|) *
       n06RootBoundaryDensity A (K.chart z mr) (K.height z mr)
         Qr.value Qr.radial Qr.angular Wr (r, θ) (yr, β θ) := by
-  have hJ := (h04.2.2.2.2.2.2.2.2.1 z hz hs ml (r, θ) hrl).2.2.1
+  have hJ := ((h04.1.boundary z hz hs ml).2.2.2.2.1 (r, θ) (hxL θ)).2.2.1
   have hβ : deriv β θ ≠ 0 := (mul_ne_zero_iff.mp
     (show (σl * ρ θ) * deriv β θ ≠ 0 by simpa only [Jl.jacobian θ] using hJ)).2
   have hg := n06_greenNormalFlux_eq_of_value_conormal hvalue hflux φ
-  rw [n06_current_root_green_signedDensity Jl Ql h04 hz hs hφ hrl hθ A hWl,
-    n06_current_root_green_signedDensity Jr Qr h04 hz hs hφ hrr hθ A hWr] at hg
+  rw [n06_current_root_green_signedDensity Jl Ql h04 hz hs hφ hxL hθ A hWl,
+    n06_current_root_green_signedDensity Jr Qr h04 hz hs hφ hxR hθ A hWr] at hg
   apply mul_left_cancel₀ (abs_ne_zero.mpr hβ)
   linear_combination hg
 
@@ -171,6 +172,8 @@ theorem n06N05_finite_current_root_boundaryDensity
       (K.physicalRight ml) yl σl β H ρ κ Hr)
     (Jr : N06RootFirstJets (K.chart z mr) (K.height z mr)
       (K.physicalRight ml) yr σr β H ρ κ Hr)
+    (hxL : ∀ θ : ℝ, (K.physicalRight ml, θ) ∈ physicalPieceClosed S K z ml)
+    (hxR : ∀ θ : ℝ, (K.physicalRight ml, θ) ∈ physicalPieceClosed S K z mr)
     (Ql : N06CurrentHeightTestTraces S K z ml φ)
     (Qr : N06CurrentHeightTestTraces S K z mr φ)
     (hφ : ContDiff ℝ ∞ φ)
@@ -190,11 +193,6 @@ theorem n06N05_finite_current_root_boundaryDensity
         Qr.value Qr.radial Qr.angular (r11bFiniteSynthesis s vr referenceAngularBasis)
           (K.physicalRight ml, θ) (yr, β θ) := by
   have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
-  have hrl : K.physicalRight ml ∈ Icc (K.physicalLeft ml) (K.physicalRight ml) :=
-    ⟨(h04.2.2.2.1 ml).1.le, le_rfl⟩
-  have hrr : K.physicalRight ml ∈ Icc (K.physicalLeft mr) (K.physicalRight mr) := by
-    rw [hjoin]
-    exact ⟨le_rfl, (h04.2.2.2.1 mr).1.le⟩
   have hWl : ContDiff ℝ 1 (r11bFiniteSynthesis s vl referenceAngularBasis) :=
     ContDiff.sum (fun n hn => ((hvl n hn).comp contDiff_fst).mul
       (((contDiff_referenceAngularBasis n).of_le (by simp)).comp contDiff_snd))
@@ -204,7 +202,7 @@ theorem n06N05_finite_current_root_boundaryDensity
   have hmatch := n06N05_finite_current_root_conormal hS h hcoordinates u ml mr s vl vr
     hjoin hroot Jl₀ Jr₀ hH₀ hρ₀ Jl Jr hvl hvr hmodeL hmodeR A.a A.b θ
   exact n06_current_root_boundaryDensity_eq_of_value_conormal Jl Jr Ql Qr h04 hz hs hφ
-    hrl hrr hθ A (hWl.differentiable (by norm_num) _) (hWr.differentiable (by norm_num) _)
+    hxL hxR hθ A (hWl.differentiable (by norm_num) _) (hWr.differentiable (by norm_num) _)
     hmatch.1 hmatch.2
 
 end ContinuousFlexibility.Analysis

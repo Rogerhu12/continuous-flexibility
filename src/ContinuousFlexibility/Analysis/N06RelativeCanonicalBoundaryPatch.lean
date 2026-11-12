@@ -1,13 +1,14 @@
 import ContinuousFlexibility.Analysis.N06RelativeChartHeightPatch
-import ContinuousFlexibility.Blueprint.CanonicalParts
+import ContinuousFlexibility.Analysis.N06CanonicalProperties
 
 /-!
 # Relative patches of the actual N04 coordinate witness
 
-The explicit fields below use the original reference chart and the true
-current chart of the same indexed physical piece. The boundary derivatives
-are extracted from the existing closed-piece N04 clause. No freely assigned
-jet data or global extension is assumed.
+The explicit fields below use the original reference endpoints. Their
+current boundary assertions require that the actual physical domain is
+that reference rectangle. This follows from the original geometry for
+positive pieces, and at the reference state. A moving negative cut is not
+identified with a reference endpoint circle.
 
 For a piece whose endpoints are true turning radii, one radius is selected
 before the state so that the correction avoids the entire closed support
@@ -50,23 +51,35 @@ variable {D : ReferenceData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {K : CanonicalData S}
   {base : ℕ} {ε : ℝ} {z : AnnularState S × ℝ}
 
-private theorem n06_actualCanonical_boundary_data
+/-- The closed geometric data on a piece that is actually rectangular. -/
+theorem n06_actualCanonical_rectangle_data
     (hA : N04PartA D S C K base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1) (m : ℕ)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
+    {p : PolarPoint} (hp : p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
+    ContDiffAt ℝ ∞ (K.chart z m) p ∧ ContDiffAt ℝ ∞ (K.height z m) p ∧
+      planeJacobian (K.chart z m) p ≠ 0 ∧ 0 < K.height z m p := by
+  apply (hA.boundary z hz hs m).2.2.2.2.1 p
+  exact n06_mem_physicalPieceClosed_of_reference_rectangle hA m hΩ hp
+
+theorem n06_actualCanonical_boundary_data
+    (hA : N04PartA D S C K base ε)
+    (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1) (m : ℕ)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (side : Bool) (θ : ℝ) :
     ContDiffAt ℝ ∞ (K.chart z m)
         (if side then K.physicalRight m else K.physicalLeft m, θ) ∧
       ContDiffAt ℝ ∞ (K.height z m)
         (if side then K.physicalRight m else K.physicalLeft m, θ) ∧
       0 < K.height z m (if side then K.physicalRight m else K.physicalLeft m, θ) := by
-  have hle := (hA.2.2.2.1 m).1.le
+  have hle := (hA.referenceBounds m).1.le
   have hp : (if side then K.physicalRight m else K.physicalLeft m) ∈
       Icc (K.physicalLeft m) (K.physicalRight m) := by
     cases side
     · exact ⟨le_rfl, hle⟩
     · exact ⟨hle, le_rfl⟩
-  have h := hA.2.2.2.2.2.2.2.2.1 z hz hs m
-    (if side then K.physicalRight m else K.physicalLeft m, θ) hp
+  have h := n06_actualCanonical_rectangle_data hA hz hs m hΩ
+    (p := (if side then K.physicalRight m else K.physicalLeft m, θ)) hp
   exact ⟨h.1, h.2.1, h.2.2.2⟩
 
 /-- The new fields are smooth on the original closed physical piece and
@@ -76,14 +89,15 @@ theorem n06_relativeCanonicalPatch_closed
     (href : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)
     (hsref : stateSector S C.referenceState)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
-    (δ : ℝ) (m : ℕ) {p : PolarPoint}
+    (δ : ℝ) (m : ℕ)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m) {p : PolarPoint}
     (hp : p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
     ContDiffAt ℝ ∞ (n06RelativeCanonicalChart C K δ z m) p ∧
       ContDiffAt ℝ ∞ (n06RelativeCanonicalHeight C K δ z m) p ∧
       0 < n06RelativeCanonicalHeight C K δ z m p := by
-  have h₀ := n06_actualCanonical_boundary_data hA href hsref m
-  have hc := n06_actualCanonical_boundary_data hA hz hs m
-  have hp₀ := hA.2.2.2.2.2.2.2.2.1 (C.referenceState, 0) href hsref m p hp
+  have h₀ := n06_actualCanonical_boundary_data hA href hsref m (hA.referenceDomain m)
+  have hc := n06_actualCanonical_boundary_data hA hz hs m hΩ
+  have hp₀ := n06_actualCanonical_rectangle_data hA href hsref m (hA.referenceDomain m) hp
   refine ⟨?_, ?_, n06RelativeHeightPatch_pos _ _ _ _ _ p⟩
   · exact n06RelativeChartPatch_contDiffAt (fun side θ => (h₀ side θ).1)
       (fun side θ => (hc side θ).1) hp₀.1
@@ -99,6 +113,7 @@ theorem n06_relativeCanonicalChart_boundary_jets
     (hsref : stateSector S C.referenceState)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {δ : ℝ} (hδ : 0 < δ) (m : ℕ)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (hgap : 2 * δ ≤ K.physicalRight m - K.physicalLeft m)
     (side : Bool) {j : ℕ} (hj : j ≤ 4) (θ : ℝ) :
     radialBoundaryJet (fun p => (n06RelativeCanonicalChart C K δ z m p).1)
@@ -110,8 +125,9 @@ theorem n06_relativeCanonicalChart_boundary_jets
       radialBoundaryJet (fun p => (K.chart z m p).2)
         (if side then K.physicalRight m else K.physicalLeft m) j θ :=
   n06RelativeChartPatch_boundary_jets hδ hgap
-    (fun side θ => (n06_actualCanonical_boundary_data hA href hsref m side θ).1)
-    (fun side θ => (n06_actualCanonical_boundary_data hA hz hs m side θ).1) side hj θ
+    (fun side θ => (n06_actualCanonical_boundary_data hA href hsref m
+      (hA.referenceDomain m) side θ).1)
+    (fun side θ => (n06_actualCanonical_boundary_data hA hz hs m hΩ side θ).1) side hj θ
 
 /-- The three actual radial jets of the logarithm of the constructed
 height coincide with the original current logarithmic-height jets. -/
@@ -121,14 +137,15 @@ theorem n06_relativeCanonicalHeight_log_boundary_jets
     (hsref : stateSector S C.referenceState)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {δ : ℝ} (hδ : 0 < δ) (m : ℕ)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (hgap : 2 * δ ≤ K.physicalRight m - K.physicalLeft m)
     (side : Bool) {j : ℕ} (hj : j ≤ 3) (θ : ℝ) :
     radialBoundaryJet (fun p => Real.log (n06RelativeCanonicalHeight C K δ z m p))
         (if side then K.physicalRight m else K.physicalLeft m) j θ =
       radialBoundaryJet (fun p => Real.log (K.height z m p))
         (if side then K.physicalRight m else K.physicalLeft m) j θ := by
-  have h₀ := n06_actualCanonical_boundary_data hA href hsref m
-  have hc := n06_actualCanonical_boundary_data hA hz hs m
+  have h₀ := n06_actualCanonical_boundary_data hA href hsref m (hA.referenceDomain m)
+  have hc := n06_actualCanonical_boundary_data hA hz hs m hΩ
   have he := n06RelativeLogHeightPatch_boundary_jets hδ hgap
     (fun side θ => (h₀ side θ).2.1) (fun side θ => (hc side θ).2.1)
     (fun side θ => (h₀ side θ).2.2) (fun side θ => (hc side θ).2.2) side hj θ
@@ -150,7 +167,7 @@ theorem n06_relativeCanonicalHeight_reference
     n06RelativeCanonicalHeight C K δ (C.referenceState, 0) m p =
       K.height (C.referenceState, 0) m p :=
   n06RelativeHeightPatch_self
-    (hA.2.2.2.2.2.2.2.2.1 (C.referenceState, 0) href hsref m p hp).2.2.2
+    (n06_actualCanonical_rectangle_data hA href hsref m (hA.referenceDomain m) hp).2.2.2
 
 /-- A true turning radius cannot lie in the closed support of chi. -/
 theorem n06_turningRadius_notMem_tsupport_chi (hD : RadialTrueBorder D)
@@ -180,10 +197,10 @@ theorem n06_exists_relativeCanonicalPatch_avoiding_chi
         n06RelativeCanonicalHeight C K δ z m =ᶠ[𝓝 p] K.height (C.referenceState, 0) m := by
   obtain ⟨δ, hδ, hδρ, hgap, hL, hR⟩ := exists_positiveEndpoint_collars_avoiding
     (isClosed_tsupport D.chi) (n06_turningRadius_notMem_tsupport_chi hD hrootL)
-    (n06_turningRadius_notMem_tsupport_chi hD hrootR) (hA.2.2.2.1 m).1 hρ
+    (n06_turningRadius_notMem_tsupport_chi hD hrootR) (hA.referenceBounds m).1 hρ
   refine ⟨δ, hδ, hδρ, hgap, ?_⟩
   intro z p hp hpχ
-  have hp₀ := hA.2.2.2.2.2.2.2.2.1 (C.referenceState, 0) href hsref m p hp
+  have hp₀ := n06_actualCanonical_rectangle_data hA href hsref m (hA.referenceDomain m) hp
   exact ⟨n06RelativeChartPatch_fixed_germ hδ _ _ hL hR hpχ,
     n06RelativeHeightPatch_fixed_germ hδ _ _ hL hR hpχ hp₀.2.1.continuousAt hp₀.2.2.2⟩
 

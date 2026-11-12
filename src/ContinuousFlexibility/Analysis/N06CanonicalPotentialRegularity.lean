@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N06CanonicalPotentialPeriodicity
 import ContinuousFlexibility.Analysis.N06CurrentOperatorRegularity
 import ContinuousFlexibility.Analysis.N06CurrentOperatorReflection
+import ContinuousFlexibility.Analysis.N06FiniteSourceGeometry
 
 /-!
 # Smoothness and reflection of the actual current potential
@@ -32,12 +33,12 @@ theorem n06_canonicalSource_contDiffOn_piece
     (hA : N04PartA D S C K base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (m : ℕ) {f : PolarPoint → ℝ}
-    (hf : ContDiffOn ℝ ∞ f (physicalPieceOpen S K m)) :
+    (hf : ContDiffOn ℝ ∞ f (physicalPieceOpen S K z m)) :
     ContDiffOn ℝ ∞ (canonicalSource S K z m f) (canonicalOpen S K m) := by
   obtain ⟨_, hGmap, _, _, hF, hG, hH, hgood⟩ :=
-    hA.2.2.2.2.2.2.2.1 z hz hs m
-  have hJ := n06_contDiffOn_planeJacobian (isOpen_Ioo.prod isOpen_univ) hF
-  have hJne : ∀ p ∈ physicalPieceOpen S K m, planeJacobian (K.chart z m) p ≠ 0 :=
+    hA.charts z hz hs m
+  have hJ := n06_contDiffOn_planeJacobian (hA.domains z hz hs m).1 hF
+  have hJne : ∀ p ∈ physicalPieceOpen S K z m, planeJacobian (K.chart z m) p ≠ 0 :=
     fun p hp => (hgood p hp).2.1
   exact ((hH.mul hf).div (hJ.abs hJne)
     (fun p hp => abs_ne_zero.mpr (hJne p hp))).comp hG hGmap
@@ -65,13 +66,12 @@ theorem n06_canonicalSource_evenOn_piece
     (hA : N04PartA D S C K base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (m : ℕ) {f : PolarPoint → ℝ}
-    (hf : ∀ q ∈ physicalPieceOpen S K m, f (q.1, -q.2) = f q)
+    (hf : ∀ q ∈ physicalPieceOpen S K z m, f (q.1, -q.2) = f q)
     {p : PolarPoint} (hp : p ∈ canonicalOpen S K m) :
     canonicalSource S K z m f (p.1, -p.2) = canonicalSource S K z m f p := by
-  obtain ⟨_, _, _, _, _, _, _, hcharts, _, hparity, hinverse⟩ := hA
-  have hq := (hcharts z hz hs m).2.1 hp
-  have hsym := hparity z hz hs m _ hq
-  have hG := hinverse z hz hs m p hp
+  have hq := (hA.charts z hz hs m).2.1 hp
+  have hsym := hA.reflection z hz hs m _ hq
+  have hG := hA.inverseReflection z hz hs m p hp
   change K.height z m (K.inverseChart z m (p.1, -p.2)) *
       f (K.inverseChart z m (p.1, -p.2)) /
       |planeJacobian (K.chart z m) (K.inverseChart z m (p.1, -p.2))| = _
@@ -83,14 +83,18 @@ theorem n06_correctedHeightDivergence_evenOn_piece
     (h03 : N03Properties D T S C R L base ε)
     (hA : N04PartA D S C K base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
-    (m : ℕ) {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    (m : ℕ) {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K z m) :
     divergenceOperator (L.coefficients z) (K.height z m) (p.1, -p.2) =
       divergenceOperator (L.coefficients z) (K.height z m) p := by
-  obtain ⟨_, _, _, hpieces, _, _, _, hcharts, _, hparity, _⟩ := hA
-  obtain ⟨_, _, _, _, _, _, hH, hgood⟩ := hcharts z hz hs m
-  exact n06_correctedDivergence_evenOn_strip hT hS h03 hz hs (hpieces m).2.2 hp.1 hH
-    (fun q hq => (hgood q hq).2.2.2)
-    (fun q hq => (hparity z hz hs m q hq).2.1) p.2
+  obtain ⟨η, hη⟩ := n06_exists_heightPair_canonicalHeight_germ hT hS hA hz hs m hp
+  have hp' : (p.1, -p.2) ∈ physicalPieceOpen S K z m :=
+    ((hA.domains z hz hs m).2.2.2.2.1 p).mpr hp
+  have hradial : (K.chart z m (p.1, -p.2)).1 = (K.chart z m p).1 := by
+    simpa only [] using congrArg Prod.fst (hA.reflection z hz hs m p hp).1
+  exact (n05_divergenceOperator_congr (L.coefficients z)
+    (hη _ hp' hradial)).symm.trans
+      ((n06_correctedDivergence_heightPair_even hS h03 hz hs η p).trans
+        (n05_divergenceOperator_congr (L.coefficients z) (hη p hp rfl)))
 
 /-- Actual N03 signs and actual N04 reflected coordinates force the even
 symmetry of the potential, including at reflection fixed points. -/

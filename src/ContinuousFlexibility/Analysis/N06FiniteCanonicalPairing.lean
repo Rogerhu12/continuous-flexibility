@@ -29,8 +29,7 @@ theorem n06_finiteCanonical_height_pairing
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {J : Set ℝ}
-    (hfinite : {m : ℕ |
-      (Ioo (K.physicalLeft m) (K.physicalRight m) ∩ J).Nonempty}.Finite)
+    (hfinite : (n06PhysicalSupportPieces K z J).Finite)
     (W : CanonicalSequence S K) {η φ : PolarPoint → ℝ}
     (hrep : ∀ m, (W m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m]
       canonicalHeight S K z m η)
@@ -41,7 +40,7 @@ theorem n06_finiteCanonical_height_pairing
       ∑ m ∈ hfinite.toFinset,
         ∫ p, W m p * canonicalSource S K z m φ p ∂canonicalMeasure S K m := by
   have hpiece (m : ℕ) := n06_current_heightLpTest_pairing h04 hz hs m (W m) (hrep m) (hφ m)
-  have h := n06_finitePhysicalPartition_integral h04 measurableSet_Ioc hfinite
+  have h := n06_finitePhysicalPartition_integral h04 hz hs measurableSet_Ioc hfinite
     (fun r hr θ => by rw [hsupport r hr θ, mul_zero]) (fun m _ => (hpiece m).1)
   exact ⟨h.1, h.2.trans (Finset.sum_congr rfl fun m _ => (hpiece m).2)⟩
 
@@ -51,8 +50,7 @@ theorem n06_finiteCanonical_source_pairing
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {J : Set ℝ}
-    (hfinite : {m : ℕ |
-      (Ioo (K.physicalLeft m) (K.physicalRight m) ∩ J).Nonempty}.Finite)
+    (hfinite : (n06PhysicalSupportPieces K z J).Finite)
     (F : CanonicalSequence S K) {f φ : PolarPoint → ℝ}
     (hrep : ∀ m, (F m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m]
       canonicalSource S K z m f)
@@ -63,7 +61,7 @@ theorem n06_finiteCanonical_source_pairing
       ∑ m ∈ hfinite.toFinset,
         ∫ p, F m p * canonicalHeight S K z m φ p ∂canonicalMeasure S K m := by
   have hpiece (m : ℕ) := n06_current_sourceLpTest_pairing h04 hz hs m (F m) (hrep m) (hφ m)
-  have h := n06_finitePhysicalPartition_integral h04 measurableSet_Ioc hfinite
+  have h := n06_finitePhysicalPartition_integral h04 hz hs measurableSet_Ioc hfinite
     (fun r hr θ => by rw [hsupport r hr θ, mul_zero]) (fun m _ => (hpiece m).1)
   exact ⟨h.1, h.2.trans (Finset.sum_congr rfl fun m _ => (hpiece m).2)⟩
 

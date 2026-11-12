@@ -74,7 +74,8 @@ private theorem n06_rootCollar_cutHalf_closed_subset
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     (m : ℕ) {i : ℕ} (hi : i = (K.cutPair m).1 ∨ i = (K.cutPair m).2) :
     Icc (K.physicalLeft i) (K.physicalRight i) ⊆ Icc (C.left m) (C.right m) := by
-  rcases h.2.2.2.2 with ⟨_, _, _, hpieces, _, _, _, _, _, _, _, hcut, _⟩
+  have hpieces := h.2.2.2.2.1.referenceBounds
+  have hcut := h.2.2.2.2.2.1.1.1
   obtain ⟨_, _, hleft, hright, hmeet, _⟩ := hcut m
   have hlcut : C.left m ≤ K.physicalRight (K.cutPair m).1 := by
     rw [← hleft]

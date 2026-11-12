@@ -112,13 +112,13 @@ theorem n06_correctedReference_positivePiece_germ
     (hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)
     (hs : stateSector S C.referenceState)
     (m : ℕ) (hm : K.positive m = true)
-    {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    {p : PolarPoint} (hp : p ∈ referencePhysicalPieceOpen S K m) :
     (L.coefficients (C.referenceState, 0)).a =ᶠ[𝓝 p] (fun q => D.w q.1) ∧
       (L.coefficients (C.referenceState, 0)).b =ᶠ[𝓝 p] (fun _ => 0) ∧
       (L.coefficients (C.referenceState, 0)).c =ᶠ[𝓝 p]
         (fun q => deriv D.w q.1 / q.1) := by
   apply n06_correctedReference_coefficients_germ hN03 hw href hz hs
-  · exact ⟨(hA.2.2.2.1 m).2.2 hp.1, mem_univ _⟩
-  · exact hA.2.2.2.2.1 m hm p.1 hp.1
+  · exact ⟨(hA.referenceBounds m).2.2 hp.1, mem_univ _⟩
+  · exact hA.referencePositive m hm p.1 hp.1
 
 end ContinuousFlexibility.Analysis

@@ -5,8 +5,9 @@ import ContinuousFlexibility.Analysis.N06RelativeCanonicalBoundaryPatch
 
 The boundary value as a function of angle determines the tangential
 derivative. Together with the matched first radial jet it determines the
-whole ordinary derivative, hence its true Jacobian. Thus the relative
-construction retains the original N04 nonzero Jacobian at both endpoints.
+whole ordinary derivative, hence its true Jacobian. On a piece whose
+actual domain is its reference rectangle, the relative construction
+retains the original N04 nonzero Jacobian at both endpoints.
 -/
 
 noncomputable section
@@ -81,32 +82,33 @@ theorem n06_relativeCanonicalChart_boundary_fderiv
     (hsref : stateSector S C.referenceState)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {δ : ℝ} (hδ : 0 < δ) (m : ℕ)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (hgap : 2 * δ ≤ K.physicalRight m - K.physicalLeft m)
     (side : Bool) (θ : ℝ) :
     fderiv ℝ (n06RelativeCanonicalChart C K δ z m)
         (if side then K.physicalRight m else K.physicalLeft m, θ) =
       fderiv ℝ (K.chart z m)
         (if side then K.physicalRight m else K.physicalLeft m, θ) := by
-  have hle := (hA.2.2.2.1 m).1.le
+  have hle := (hA.referenceBounds m).1.le
   have hp : (if side then K.physicalRight m else K.physicalLeft m) ∈
       Icc (K.physicalLeft m) (K.physicalRight m) := by
     cases side
     · exact ⟨le_rfl, hle⟩
     · exact ⟨hle, le_rfl⟩
-  have hnew := (n06_relativeCanonicalPatch_closed hA href hsref hz hs δ m
+  have hnew := (n06_relativeCanonicalPatch_closed hA href hsref hz hs δ m hΩ
     (p := (if side then K.physicalRight m else K.physicalLeft m, θ)) hp).1
-  have hold := (hA.2.2.2.2.2.2.2.2.1 z hz hs m
-    (if side then K.physicalRight m else K.physicalLeft m, θ) hp).1
+  have hold := (n06_actualCanonical_rectangle_data hA hz hs m hΩ
+    (p := (if side then K.physicalRight m else K.physicalLeft m, θ)) hp).1
   have htrace (η : ℝ) :
       n06RelativeCanonicalChart C K δ z m
           (if side then K.physicalRight m else K.physicalLeft m, η) =
         K.chart z m (if side then K.physicalRight m else K.physicalLeft m, η) := by
-    have hj := n06_relativeCanonicalChart_boundary_jets hA href hsref hz hs hδ m hgap
+    have hj := n06_relativeCanonicalChart_boundary_jets hA href hsref hz hs hδ m hΩ hgap
       side (j := 0) (by norm_num) η
     apply Prod.ext
     · simpa only [radialBoundaryJet, iteratedDeriv_zero] using hj.1
     · simpa only [radialBoundaryJet, iteratedDeriv_zero] using hj.2
-  have hj := n06_relativeCanonicalChart_boundary_jets hA href hsref hz hs hδ m hgap
+  have hj := n06_relativeCanonicalChart_boundary_jets hA href hsref hz hs hδ m hΩ hgap
     side (j := 1) (by norm_num) θ
   apply n06_fderiv_eq_of_axis_trace_and_radial_jets
     (hnew.differentiableAt (by simp)) (hold.differentiableAt (by simp)) htrace
@@ -120,6 +122,7 @@ theorem n06_relativeCanonicalChart_boundary_jacobian
     (hsref : stateSector S C.referenceState)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {δ : ℝ} (hδ : 0 < δ) (m : ℕ)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (hgap : 2 * δ ≤ K.physicalRight m - K.physicalLeft m)
     (side : Bool) (θ : ℝ) :
     planeJacobian (n06RelativeCanonicalChart C K δ z m)
@@ -133,16 +136,16 @@ theorem n06_relativeCanonicalChart_boundary_jacobian
       planeJacobian (K.chart z m)
         (if side then K.physicalRight m else K.physicalLeft m, θ) := by
     simp only [planeJacobian,
-      n06_relativeCanonicalChart_boundary_fderiv hA href hsref hz hs hδ m hgap side θ]
+      n06_relativeCanonicalChart_boundary_fderiv hA href hsref hz hs hδ m hΩ hgap side θ]
   refine ⟨he, ?_⟩
   rw [he]
-  have hle := (hA.2.2.2.1 m).1.le
+  have hle := (hA.referenceBounds m).1.le
   have hp : (if side then K.physicalRight m else K.physicalLeft m) ∈
       Icc (K.physicalLeft m) (K.physicalRight m) := by
     cases side
     · exact ⟨le_rfl, hle⟩
     · exact ⟨hle, le_rfl⟩
-  exact (hA.2.2.2.2.2.2.2.2.1 z hz hs m
-    (if side then K.physicalRight m else K.physicalLeft m, θ) hp).2.2.1
+  exact (n06_actualCanonical_rectangle_data hA hz hs m hΩ
+    (p := (if side then K.physicalRight m else K.physicalLeft m, θ)) hp).2.2.1
 
 end ContinuousFlexibility.Statements

@@ -78,7 +78,8 @@ theorem n06_positive_canonicalOperator_difference
           (K.dividedDifference z m).a (K.dividedDifference z m).b
           (K.dividedDifference z m).c) W p +
         (K.potential z m p - K.potential (C.referenceState, 0) m p) * W p := by
-  obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, hop, _, hcubic, _, _⟩ := hN04
+  have hop := hN04.2.1.2.2.1
+  have hcubic := hN04.2.1.2.2.2.2
   have hnear : ∀ᶠ q : PolarPoint in 𝓝 p, q ∈ canonicalOpen S K m :=
     (isOpen_Ioo.prod isOpen_univ).mem_nhds hp
   have hg := hnear.mono (fun q hq => hcubic z hz hsector m hm q hq)

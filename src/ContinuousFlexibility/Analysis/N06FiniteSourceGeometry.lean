@@ -44,13 +44,12 @@ theorem n06_canonicalSource_contDiffOn
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {f : PolarPoint → ℝ} (hf : ContDiffOn ℝ ∞ f (annularOpen D)) (m : ℕ) :
     ContDiffOn ℝ ∞ (canonicalSource S K z m f) (canonicalOpen S K m) := by
-  have hpieces := hK.2.2.2.1
+  have hdomains := hK.domains z hz hs m
   obtain ⟨_, hGmap, _, _, hF, hG, hH, hgood⟩ :=
-    hK.2.2.2.2.2.2.2.1 z hz hs m
-  have hsub : physicalPieceOpen S K m ⊆ annularOpen D :=
-    fun p hp => ⟨(hpieces m).2.2 hp.1, mem_univ _⟩
-  have hJ := n06_contDiffOn_planeJacobian (isOpen_Ioo.prod isOpen_univ) hF
-  have hJne : ∀ p ∈ physicalPieceOpen S K m, planeJacobian (K.chart z m) p ≠ 0 :=
+    hK.charts z hz hs m
+  have hsub : physicalPieceOpen S K z m ⊆ annularOpen D := hdomains.2.2.1
+  have hJ := n06_contDiffOn_planeJacobian hdomains.1 hF
+  have hJne : ∀ p ∈ physicalPieceOpen S K z m, planeJacobian (K.chart z m) p ≠ 0 :=
     fun p hp => (hgood p hp).2.1
   have hweight := (hH.mul (hf.mono hsub)).div (hJ.abs hJne)
     (fun p hp => abs_ne_zero.mpr (hJne p hp))
@@ -63,14 +62,16 @@ theorem n06_canonicalSource_periodicOn
     (hf : ∀ p ∈ annularOpen D, f (p + (0, Real.pi)) = f p)
     (m : ℕ) {p : PolarPoint} (hp : p ∈ canonicalOpen S K m) :
     canonicalSource S K z m f (p + (0, Real.pi)) = canonicalSource S K z m f p := by
-  have hc := hK.2.2.2.2.2.2.2.1 z hz hs m
+  have hc := hK.charts z hz hs m
+  have hd := hK.domains z hz hs m
   have hq := hc.2.1 hp
-  have hqD : K.inverseChart z m p ∈ annularOpen D :=
-    ⟨(hK.2.2.2.1 m).2.2 hq.1, mem_univ _⟩
-  have hG := inverseChart_periodic_of_chart_periodic hc.2.1 hc.2.2.1
+  have hqD : K.inverseChart z m p ∈ annularOpen D := hd.2.2.1 hq
+  have hshift : ∀ q ∈ physicalPieceOpen S K z m, q + (0, Real.pi) ∈
+      physicalPieceOpen S K z m := fun q hq => (hd.2.2.2.1 q).mpr hq
+  have hG := inverseChart_periodic_of_chart_periodic_on hc.2.1 hshift hc.2.2.1
     hc.2.2.2.1 (fun q hq => (hc.2.2.2.2.2.2.2 q hq).2.2.1) hp
   have hH := (hc.2.2.2.2.2.2.2 _ hq).2.2.2
-  have hJ := n06_planeJacobian_chart_lift hc.2.2.2.2.1
+  have hJ := n06_planeJacobian_chart_lift_on hd.1 hc.2.2.2.2.1 hshift
     (fun q hq => (hc.2.2.2.2.2.2.2 q hq).2.2.1) hq
   change K.height z m (K.inverseChart z m (p + (0, Real.pi))) *
       f (K.inverseChart z m (p + (0, Real.pi))) /
@@ -85,12 +86,11 @@ theorem n06_canonicalSource_evenOn
     (hf : ∀ p ∈ annularOpen D, f (p.1, -p.2) = f p)
     (m : ℕ) {p : PolarPoint} (hp : p ∈ canonicalOpen S K m) :
     canonicalSource S K z m f (p.1, -p.2) = canonicalSource S K z m f p := by
-  obtain ⟨_, _, _, hpieces, _, _, _, hcharts, _, hparity, hinverse⟩ := hK
-  have hq := (hcharts z hz hs m).2.1 hp
+  have hq := (hK.charts z hz hs m).2.1 hp
   have hqD : K.inverseChart z m p ∈ annularOpen D :=
-    ⟨(hpieces m).2.2 hq.1, mem_univ _⟩
-  have hsym := hparity z hz hs m _ hq
-  have hG := hinverse z hz hs m p hp
+    (hK.domains z hz hs m).2.2.1 hq
+  have hsym := hK.reflection z hz hs m _ hq
+  have hG := hK.inverseReflection z hz hs m p hp
   change K.height z m (K.inverseChart z m (p.1, -p.2)) *
       f (K.inverseChart z m (p.1, -p.2)) /
       |planeJacobian (K.chart z m) (K.inverseChart z m (p.1, -p.2))| = _
@@ -121,16 +121,38 @@ theorem n06_canonicalSource_zero_of_disjoint_radialSupport
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {J : Set ℝ} {f : PolarPoint → ℝ}
     (hf : ∀ r, r ∉ J → ∀ θ, f (r, θ) = 0)
-    {m : ℕ} (hm : ¬(Ioo (K.physicalLeft m) (K.physicalRight m) ∩ J).Nonempty)
+    {m : ℕ}
+    (hm : ¬(physicalPieceOpen S K z m ∩ (J ×ˢ (univ : Set ℝ))).Nonempty)
     {p : PolarPoint} (hp : p ∈ canonicalOpen S K m) :
     canonicalSource S K z m f p = 0 := by
-  have hq := (hK.2.2.2.2.2.2.2.1 z hz hs m).2.1 hp
-  have hnot : (K.inverseChart z m p).1 ∉ J := fun hJ => hm ⟨_, hq.1, hJ⟩
+  have hq := (hK.charts z hz hs m).2.1 hp
+  have hnot : (K.inverseChart z m p).1 ∉ J :=
+    fun hJ => hm ⟨_, hq, hJ, mem_univ _⟩
   have hzero := hf _ hnot (K.inverseChart z m p).2
   simp only [canonicalSource, Prod.eta] at hzero ⊢
   rw [hzero, mul_zero, zero_div]
 
 end CanonicalSource
+
+/-- At the reference state the actual support-piece set is exactly the
+original set of intersecting radial intervals. This only uses the
+reference-domain clause; no current domain is identified with a strip. -/
+theorem n06_referenceSourcePieces_eq_referenceIntervals
+    {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
+    {K : CanonicalData S} {base : ℕ} {ε : ℝ}
+    (hK : N04PartA D S C K base ε) (J : Set ℝ) :
+    {m : ℕ | (physicalPieceOpen S K (C.referenceState, 0) m ∩
+        (J ×ˢ (univ : Set ℝ))).Nonempty} =
+      {m : ℕ | (Ioo (K.physicalLeft m) (K.physicalRight m) ∩ J).Nonempty} := by
+  ext m
+  change (physicalPieceOpen S K (C.referenceState, 0) m ∩
+    (J ×ˢ (univ : Set ℝ))).Nonempty ↔ _
+  rw [hK.referenceDomain m]
+  constructor
+  · rintro ⟨p, hp, hpJ⟩
+    exact ⟨p.1, hp.1, hpJ.1⟩
+  · rintro ⟨r, hr, hrJ⟩
+    exact ⟨(r, 0), ⟨hr, mem_univ _⟩, hrJ, mem_univ _⟩
 
 /-- The finite-index hypothesis records exactly the physical pieces met
 by J. All remaining inputs concern actual fields and their finite angular
@@ -144,7 +166,7 @@ theorem n06Volume_exists_finite_canonical_source
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (γ t : ℝ) (b : ℕ) {J : Set ℝ}
     (hfinite : Set.Finite {m : ℕ |
-      (Ioo (K.physicalLeft m) (K.physicalRight m) ∩ J).Nonempty})
+      (physicalPieceOpen S K z m ∩ (J ×ˢ (univ : Set ℝ))).Nonempty})
     {f : PolarPoint → ℝ} (hf : ContDiffOn ℝ ∞ f (annularOpen D))
     (hp : ∀ p ∈ annularOpen D, f (p + (0, Real.pi)) = f p)
     (he : ∀ p ∈ annularOpen D, f (p.1, -p.2) = f p)

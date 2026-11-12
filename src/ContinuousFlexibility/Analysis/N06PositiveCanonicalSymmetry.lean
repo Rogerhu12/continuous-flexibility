@@ -61,11 +61,11 @@ theorem n06_positive_canonical_coefficients_periodicOn
       (K.coefficients z m).b (p + (0, Real.pi)) = (K.coefficients z m).b p ∧
       (K.coefficients z m).c (p + (0, Real.pi)) = (K.coefficients z m).c p := by
   have hA := (n06_N04_qualitative_parts h04).1
-  have hc := hA.2.2.2.2.2.2.2.1 z hz hs m
+  have hc := hA.charts z hz hs m
   let x := K.inverseChart z m p
-  have hx : x ∈ physicalPieceOpen S K m := hc.2.1 hp
-  have hx' : x + (0, Real.pi) ∈ physicalPieceOpen S K m :=
-    ⟨by simpa only [Prod.fst_add, add_zero] using hx.1, mem_univ _⟩
+  have hx : x ∈ physicalPieceOpen S K z m := hc.2.1 hp
+  have hx' : x + (0, Real.pi) ∈ physicalPieceOpen S K z m :=
+    ((hA.domains z hz hs m).2.2.2.1 x).mpr hx
   have hFx : K.chart z m x = p := hc.2.2.2.1 p hp
   have hgood := hc.2.2.2.2.2.2.2
   have hFshift : K.chart z m (x + (0, Real.pi)) = p + (0, Real.pi) :=
@@ -75,10 +75,17 @@ theorem n06_positive_canonical_coefficients_periodicOn
   have hden' := n06_positive_physical_density_of_regular_coefficients
     hT hS h01 h03 h04 hz hs m hm hreg hx'
   have hper := n06_correctedCoefficients_periodic_on_positive hS h03 hz hs
-    (show x ∈ annularOpen D from ⟨(h04.2.2.2.1 m).2.2 hx.1, mem_univ _⟩)
-    (h04.2.2.2.2.1 m hm x.1 hx.1)
-  have hdp := n06_coordinatePrincipalDensity_periodicOn hc.2.2.2.2.1
-    (fun q hq => (hgood q hq).2.2.1) hx hper.1 hper.2.1 hper.2.2
+    (show x ∈ annularOpen D from (hA.domains z hz hs m).2.2.1 hx)
+    ((hA.domains z hz hs m).2.2.2.2.2.2.1 x hx hm)
+  have hΩ := n06_positivePhysicalPiece_eq_reference hA hz hs m hm
+  have hFrect : ContDiffOn ℝ ∞ (K.chart z m)
+      (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ (univ : Set ℝ)) := by
+    simpa only [hΩ, referencePhysicalPieceOpen] using hc.2.2.2.2.1
+  have hxrect : x ∈ Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ (univ : Set ℝ) := by
+    simpa only [hΩ, referencePhysicalPieceOpen] using hx
+  have hdp := n06_coordinatePrincipalDensity_periodicOn hFrect
+    (fun q hq => (hgood q (by simpa only [hΩ, referencePhysicalPieceOpen] using hq)).2.2.1)
+    hxrect hper.1 hper.2.1 hper.2.2
     (hgood x hx).2.2.2
   rw [hFx] at hden
   rw [hFshift] at hden'
@@ -103,11 +110,13 @@ theorem n06_positive_canonical_coefficients_evenOddOn
       (K.coefficients z m).b (p.1, -p.2) = -(K.coefficients z m).b p ∧
       (K.coefficients z m).c (p.1, -p.2) = (K.coefficients z m).c p := by
   have hA := (n06_N04_qualitative_parts h04).1
-  obtain ⟨_, _, _, _, _, _, _, hcharts, _, hparity, _⟩ := hA
+  have hcharts := hA.charts
+  have hparity := hA.reflection
   have hc := hcharts z hz hs m
   let x := K.inverseChart z m p
-  have hx : x ∈ physicalPieceOpen S K m := hc.2.1 hp
-  have hx' : (x.1, -x.2) ∈ physicalPieceOpen S K m := ⟨hx.1, mem_univ _⟩
+  have hx : x ∈ physicalPieceOpen S K z m := hc.2.1 hp
+  have hx' : (x.1, -x.2) ∈ physicalPieceOpen S K z m :=
+    ((hA.domains z hz hs m).2.2.2.2.1 x).mpr hx
   have hFx : K.chart z m x = p := hc.2.2.2.1 p hp
   have hFsym : K.chart z m (x.1, -x.2) = (p.1, -p.2) := by
     rw [(hparity z hz hs m x hx).1, hFx]
@@ -116,8 +125,16 @@ theorem n06_positive_canonical_coefficients_evenOddOn
   have hden' := n06_positive_physical_density_of_regular_coefficients
     hT hS h01 h03 h04 hz hs m hm hreg hx'
   have hsign := h03.2.2.2.1 z hz hs x.1 x.2
-  have hdp := n06_coordinatePrincipalDensity_reflectionOn hc.2.2.2.2.1
-    (fun q hq => (hparity z hz hs m q hq).1) hx hsign.1 hsign.2.1 hsign.2.2
+  have hΩ := n06_positivePhysicalPiece_eq_reference hA hz hs m hm
+  have hFrect : ContDiffOn ℝ ∞ (K.chart z m)
+      (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ (univ : Set ℝ)) := by
+    simpa only [hΩ, referencePhysicalPieceOpen] using hc.2.2.2.2.1
+  have hxrect : x ∈ Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ (univ : Set ℝ) := by
+    simpa only [hΩ, referencePhysicalPieceOpen] using hx
+  have hdp := n06_coordinatePrincipalDensity_reflectionOn hFrect
+    (fun q hq => (hparity z hz hs m q
+      (by simpa only [hΩ, referencePhysicalPieceOpen] using hq)).1)
+    hxrect hsign.1 hsign.2.1 hsign.2.2
     (hparity z hz hs m x hx).2.1 (hparity z hz hs m x hx).2.2
   rw [hFx] at hden
   rw [hFsym] at hden'

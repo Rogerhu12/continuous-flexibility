@@ -8,7 +8,9 @@ The local positive and negative Green formulas both have the displayed
 canonical right-minus-left form. Their finite fields represent the same
 original canonical unknown almost everywhere. Actual endpoint jets and
 the explicit two-sided density identities cancel the boundary sum on the
-original atlas; no global PDE or zero-total-boundary hypothesis is used.
+cut-saturated reference index envelope; no global PDE or vanishing total
+boundary sum is assumed. The physical pairing starts on the actual moving
+support pieces, and the additional envelope pieces have zero test pairing.
 
 After the genuine full-period change of variables, only the separately
 identified left-cutoff scalar Green defect remains. This construction
@@ -86,11 +88,11 @@ theorem n06_current_finiteGreen_assembly
     (W : ℕ → PolarPoint → ℝ) (a : ℕ → ℝ → ℝ) (reverse : ℕ → Bool)
     (hW : ∀ m, ContDiff ℝ 1 (W m))
     (hvalue : ∀ m, (u.1 m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m] W m)
-    (hends : ∀ m, ∀ side : Bool, ∃ σ : ℝ, ∃ β H ρ κ Hr : ℝ → ℝ,
-      Nonempty (N06RootFirstJets (K.chart z m) (K.height z m)
-        (n06Endpoint (K.physicalLeft m) (K.physicalRight m) side)
-        (n06Endpoint (K.left m) (K.right m) (if reverse m then !side else side))
-          σ β H ρ κ Hr))
+    (hends : ∀ m, ∀ side : Bool, ¬n06ArtificialCutSide K m side →
+      ∀ θ ∈ Icc (0 : ℝ) Real.pi,
+        (K.inverseChart z m
+          ((if (if reverse m then !side else side) then K.right m else K.left m), θ)).1 =
+            if side then K.physicalRight m else K.physicalLeft m)
     (hgreen : ∀ m,
       (∫ p, n06CurrentRemainderSource D S C L K z u F m p *
         canonicalHeight S K z m (n06_radialTestAverage φ) p ∂canonicalMeasure S K m) -
@@ -121,7 +123,7 @@ theorem n06_current_finiteGreen_assembly
           n06CurrentLeftColumn S L z (r, θ) * φ (r, θ))) := by
   obtain ⟨J, l, r, hJ, _hlr, hJwindow, hwindow, hsupport⟩ :=
     n06_radialTest_supportWindow h01.1.1 hφ
-  obtain ⟨hfinite, hboundary⟩ := n06_current_finiteAtlas_boundary_sum h01.1.1 hcoords h04 hz hs
+  obtain ⟨hfinite, hboundary⟩ := n06_current_finiteAtlas_boundary_sum h01.1.1 h01.2.2.2.1 hcoords h04 hz hs
     hJ.isClosed hJwindow hwindow (n06_average_radial_support hsupport) Q W a reverse hends hmatch
   have hzero : (∑ m ∈ hfinite.toFinset,
       ((∫ p, n06CurrentRemainderSource D S C L K z u F m p *
@@ -135,7 +137,33 @@ theorem n06_current_finiteGreen_assembly
   have hsupportWindow : ∀ x, x ∉ Icc l r → ∀ θ, φ (x, θ) = 0 := by
     intro x hx θ
     exact hsupport x (fun hxJ => hx (Ioo_subset_Icc_self (hJwindow hxJ))) θ
+  have hactual := n06_currentPieces_finite_on_compact h01.1.1 h01.2.2.2.1 hcoords
+    h04 hz hs isCompact_Icc hwindow
+  have hsub : ∀ m ∈ n06PhysicalSupportPieces K z (Icc l r), m ∈ hfinite.toFinset := by
+    intro m hm
+    exact hfinite.mem_toFinset.mpr
+      (n06_physicalSupportPieces_subset_cutSaturatedSupport h01.2.2.2.1 h04 hz hs
+        (Icc l r) hm)
+  have hLsupport : ∀ x, x ∉ Icc l r → ∀ θ,
+      divergenceOperator (L.coefficients z) φ (x, θ) = 0 :=
+    fun x hx θ => n06_divergenceOperator_zero_off_radial_support
+      (L.coefficients z) isClosed_Icc hsupportWindow hx θ
+  have hsumHeight := (n06_canonicalPairing_sums_eq_of_support_subset h04 hz hs
+    hactual hfinite.toFinset hsub
+    (fun m => n06CurrentRemainderSource D S C L K z u F m)
+    (n06_average_radial_support hsupportWindow)).1
+  have hsumSource := (n06_canonicalPairing_sums_eq_of_support_subset h04 hz hs
+    hactual hfinite.toFinset hsub (fun m => (u.1 m : PolarPoint → ℝ))
+    (n06_average_radial_support hLsupport)).2
+  have hzeroActual : (∑ m ∈ hactual.toFinset,
+      ((∫ p, n06CurrentRemainderSource D S C L K z u F m p *
+        canonicalHeight S K z m (n06_radialTestAverage φ) p ∂canonicalMeasure S K m) -
+      ∫ p, u.1 m p * canonicalSource S K z m
+        (n06_radialTestAverage (divergenceOperator (L.coefficients z) φ)) p
+          ∂canonicalMeasure S K m)) = 0 := by
+    rw [Finset.sum_sub_distrib, hsumHeight, hsumSource, ← Finset.sum_sub_distrib]
+    exact hzero
   rw [n06_current_physicalResidual_eq_finiteGreen hT hS h01 h03 h04 hz hs u F
-    isClosed_Icc hfinite hφ hsupportWindow, hzero, mul_zero, zero_add]
+    isClosed_Icc hactual hφ hsupportWindow, hzeroActual, mul_zero, zero_add]
 
 end ContinuousFlexibility.Statements

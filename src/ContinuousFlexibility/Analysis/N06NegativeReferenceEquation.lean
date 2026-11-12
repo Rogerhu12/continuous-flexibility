@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N06NegativeFiniteGreen
 import ContinuousFlexibility.Analysis.N06ReferenceWeakIdentity
 import ContinuousFlexibility.Analysis.N06ReferenceRemainderEquation
+import ContinuousFlexibility.Analysis.N06ReferenceTestOperator
 import ContinuousFlexibility.Analysis.N06CanonicalWeakTransport
 import ContinuousFlexibility.Analysis.N06CurrentChartChange
 
@@ -49,7 +50,8 @@ theorem n06_reference_source_test_ae
   have h01 : N01Properties D T S C base loss ε := h.1.1.1
   have hD : IsAccumulatingProfile D := h01.1.1
   have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2
-  have hc := h04.2.2.2.2.2.2.2.1 (C.referenceState, 0) hz hs m
+  have hc := h04.1.charts (C.referenceState, 0) hz hs m
+  have hd := h04.1.domains (C.referenceState, 0) hz hs m
   have hangle : ∀ᵐ p : PolarPoint ∂volume,
       p.2 ∉ Set.range (fun n : ℤ => (n : ℝ) * (Real.pi / 2)) := by
     change ∀ᵐ p ∂((volume : Measure ℝ).prod volume),
@@ -57,15 +59,16 @@ theorem n06_reference_source_test_ae
     exact Measure.quasiMeasurePreserving_snd.ae n06_ae_nonreflection_angle
   apply (n06_canonicalChart_ae_iff h04 hz hs m _).mpr
   filter_upwards [ae_restrict_of_ae hangle,
-    ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hθ hp
-  have hrad : p.1 ∈ radialCore D := (h04.2.2.2.1 m).2.2 hp.1
+    ae_restrict_mem (hd.1.measurableSet.inter
+      (MeasurableSet.univ.prod measurableSet_Ioc))] with p hθ hp
+  have hrad : p.1 ∈ radialCore D := (hd.2.2.1 hp.1).1
   have hlocal := n05_reference_correctionOperator_eq_local hT hS h.1
     isOpen_univ hφ.contDiffOn (mem_univ p) ⟨hrad, mem_univ _⟩ hθ
   have heq : divergenceOperator (L.coefficients (C.referenceState, 0)) φ p =
       n06ReferenceTestOperator D φ p := hlocal.symm.trans
     (n06_originalReference_testOperator hD h01.2.2.1 hφ
       (hD.choose_spec.1.1.trans hrad.1).ne')
-  simp only [canonicalSource, hc.2.2.1 p ⟨hp.1, mem_univ _⟩, heq]
+  simp only [canonicalSource, hc.2.2.1 p hp.1, heq]
 
 /-- Compact tests transport the genuine reference graph equation on
 either cylinder type. The type sign is retained throughout. -/
@@ -117,13 +120,13 @@ theorem n06_referenceGraph_canonicalWeakPairing_all
       (radialCore D ×ˢ Ioc (0 : ℝ) Real.pi) volume :=
     (show IntegrableOn (fun p => f p * Φ p)
       (radialCore D ×ˢ Ioc (0 : ℝ) (2 * Real.pi)) volume from hIR).mono_set hhalf
-  have hzero : ∀ p, p ∉ physicalPieceOpen S K m →
+  have hzero : ∀ p, p ∉ physicalPieceOpen S K (C.referenceState, 0) m →
       w p * n06ReferenceTestOperator D Φ p = 0 := by
-    obtain ⟨J, hJ, hJsub, hJzero⟩ := n06CanonicalTestPullback_radialSupport hA hz hs hφ
     intro p hp
-    have hpJ : p.1 ∉ J := fun hpJ => hp ⟨hJsub hpJ, mem_univ _⟩
     have hz0 : n06ReferenceTestOperator D Φ p = 0 :=
-      r11b_radialPDE_test_zero_outside hgeom hΦ.1 hJ.isClosed hJzero hpJ p.2
+      n06_referenceTestOperator_zero_of_germ
+        (hgeom.2.2.1.1.differentiable (by simp) p.1) hΦ.1
+        (n06CanonicalTestPullback_eventually_zero_of_not_mem hA hz hs hφ hp)
     rw [hz0, mul_zero]
   have hmean := n06_physicalMean_pairing_eq_canonical hA hgeom.2.1.le hz hs m w
     (n06ReferenceTestOperator D Φ) (hwperiod.mul hPperiod) hILhalf hzero

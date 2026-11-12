@@ -8,8 +8,8 @@ import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
 Reflection and equivariance fix the two angular seams. The established
 intermediate-value argument for the open angular strip then gives the
 actual half-open tile in both directions. The original chart is
-therefore a bijection of the measured physical and canonical rectangles,
-even when its angular coordinate is not the original angle. All measure
+therefore a bijection from the actual physical half-period domain to
+the canonical rectangle, even when the physical cut moves with angle. All measure
 formulas use its genuine Frechet derivative and the frozen Jacobian.
 -/
 
@@ -63,6 +63,46 @@ theorem n06_chart_mapsTo_halfPeriod
       ⟨hp.1, hp.2.1, lt_of_le_of_ne hp.2.2 htop⟩)
     exact ⟨hi.1, hi.2.1, hi.2.2.le⟩
 
+/-- The half-open angular tile is characterized in both directions on
+a genuine source cylinder. The image may be an arbitrary moving domain. -/
+theorem n06_chart_angle_mem_halfPeriod_iff
+    {a b P : ℝ} {F : PolarPoint → PolarPoint} (hP : 0 < P)
+    (hinj : InjOn F (Ioo a b ×ˢ (univ : Set ℝ)))
+    (hcont : ContinuousOn F (Ioo a b ×ˢ (univ : Set ℝ)))
+    (hperiod : ∀ p ∈ Ioo a b ×ˢ (univ : Set ℝ), F (p + (0, P)) = F p + (0, P))
+    (hreflect : ∀ p ∈ Ioo a b ×ˢ (univ : Set ℝ),
+      F (p.1, -p.2) = ((F p).1, -(F p).2))
+    {p : PolarPoint} (hp : p ∈ Ioo a b ×ˢ (univ : Set ℝ)) :
+    (F p).2 ∈ Ioc 0 P ↔ p.2 ∈ Ioc 0 P := by
+  have hiff := chart_angle_mem_openInterval_iff hP hinj hcont hperiod hreflect hp
+  have hfiber : (F p).2 = P → p.2 = P := by
+    intro he
+    let q : PolarPoint := (p.1, p.2 - P)
+    have hq : q ∈ Ioo a b ×ˢ (univ : Set ℝ) := ⟨hp.1, mem_univ _⟩
+    have hqp : q + (0, P) = p := by
+      apply Prod.ext <;> simp only [q, Prod.fst_add, Prod.snd_add, add_zero,
+        sub_add_cancel]
+    have ht := congrArg Prod.snd (hperiod q hq)
+    rw [hqp, he] at ht
+    have hz : (F q).2 = 0 := by
+      simp only [Prod.snd_add] at ht
+      linarith
+    have hqzero := chart_angle_eq_zero_of_reflection hinj hreflect hq hz
+    change p.2 - P = 0 at hqzero
+    exact sub_eq_zero.mp hqzero
+  constructor
+  · intro ht
+    by_cases he : (F p).2 = P
+    · rw [hfiber he]
+      exact ⟨hP, le_rfl⟩
+    · exact mem_Ioc_of_Ioo (hiff.mp ⟨ht.1, lt_of_le_of_ne ht.2 he⟩)
+  · intro ht
+    by_cases he : p.2 = P
+    · have hp' : p = (p.1, P) := Prod.ext rfl he
+      rw [hp', (n06_chart_angle_seams hperiod hreflect hp.1).2]
+      exact ⟨hP, le_rfl⟩
+    · exact mem_Ioc_of_Ioo (hiff.mpr ⟨ht.1, lt_of_le_of_ne ht.2 he⟩)
+
 end ContinuousFlexibility.Analysis
 
 namespace ContinuousFlexibility.Statements
@@ -83,49 +123,71 @@ theorem n06_canonicalChart_halfPeriod_maps
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1) (m : ℕ) :
     MapsTo (K.chart z m)
-      (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))
       (Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi) ∧
     MapsTo (K.inverseChart z m)
       (Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi)
-      (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi) := by
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) := by
   have hK := (n06_N04_qualitative_parts h04).1
-  have hc := hK.2.2.2.2.2.2.2.1 z hz hs m
-  have hreflection := hK.2.2.2.2.2.2.2.2.2.1 z hz hs m
-  have hinverseReflection := hK.2.2.2.2.2.2.2.2.2.2 z hz hs m
-  have hpF : ∀ p ∈ physicalPieceOpen S K m,
+  have hc := hK.charts z hz hs m
+  have hd := hK.domains z hz hs m
+  have hinverseReflection := hK.inverseReflection z hz hs m
+  have hpF : ∀ p ∈ physicalPieceOpen S K z m,
       K.chart z m (p + (0, Real.pi)) = K.chart z m p + (0, Real.pi) :=
     fun p hp => (hc.2.2.2.2.2.2.2 p hp).2.2.1
   have hpG : ∀ p ∈ canonicalOpen S K m,
       K.inverseChart z m (p + (0, Real.pi)) = K.inverseChart z m p + (0, Real.pi) :=
-    fun _ hp => inverseChart_periodic_of_chart_periodic
-      hc.2.1 hc.2.2.1 hc.2.2.2.1 hpF hp
+    fun _ hp => inverseChart_periodic_of_chart_periodic_on hc.2.1
+      (fun p hp => (hd.2.2.2.1 p).mpr hp) hc.2.2.1 hc.2.2.2.1 hpF hp
   have hinjG : InjOn (K.inverseChart z m) (canonicalOpen S K m) := by
     intro p hp q hq heq
     exact (hc.2.2.2.1 p hp).symm.trans
       ((congrArg (K.chart z m) heq).trans (hc.2.2.2.1 q hq))
-  exact ⟨n06_chart_mapsTo_halfPeriod Real.pi_pos hc.1
-      (canonicalChart_injOn hK hz hs m) hc.2.2.2.2.1.continuousOn hpF
-      (fun p hp => (hreflection p hp).1),
-    n06_chart_mapsTo_halfPeriod Real.pi_pos hc.2.1 hinjG
-      hc.2.2.2.2.2.1.continuousOn hpG hinverseReflection⟩
+  have hangle (p : PolarPoint) (hp : p ∈ canonicalOpen S K m) :
+      (K.inverseChart z m p).2 ∈ Ioc (0 : ℝ) Real.pi ↔
+        p.2 ∈ Ioc (0 : ℝ) Real.pi :=
+    n06_chart_angle_mem_halfPeriod_iff Real.pi_pos hinjG
+      hc.2.2.2.2.2.1.continuousOn hpG hinverseReflection hp
+  constructor
+  · intro p hp
+    have hFp := hc.1 hp.1
+    refine ⟨hFp.1, (hangle _ hFp).mp ?_⟩
+    rw [hc.2.2.1 p hp.1]
+    exact hp.2.2
+  · intro p hp
+    have hpfull : p ∈ canonicalOpen S K m := ⟨hp.1, mem_univ _⟩
+    exact ⟨hc.2.1 hpfull, mem_univ _, (hangle p hpfull).mpr hp.2⟩
 
-/-- The actual current chart is a bijection of the original measured
-rectangles. Its angular coordinate is allowed to vary with both inputs. -/
+/-- The current chart is a bijection from its actual measured physical
+domain to the fixed canonical rectangle. -/
 theorem n06_canonicalChart_halfPeriod_bijOn
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1) (m : ℕ) :
     BijOn (K.chart z m)
-      (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))
       (Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi) := by
   obtain ⟨hF, hG⟩ := n06_canonicalChart_halfPeriod_maps h04 hz hs m
   have hK := (n06_N04_qualitative_parts h04).1
-  have hc := hK.2.2.2.2.2.2.2.1 z hz hs m
-  have hsub : Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi ⊆
-      physicalPieceOpen S K m := fun _ hp => ⟨hp.1, mem_univ _⟩
+  have hc := hK.charts z hz hs m
+  have hsub : physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi) ⊆
+      physicalPieceOpen S K z m := inter_subset_left
   refine ⟨hF, ?_, ?_⟩
   · exact (canonicalChart_injOn hK hz hs m).mono hsub
   · intro p hp
     exact ⟨K.inverseChart z m p, hG hp, hc.2.2.2.1 p ⟨hp.1, mem_univ _⟩⟩
+
+/-- The derivative used in change of variables is the genuine full
+derivative at each point of the open current physical domain. -/
+theorem n06_canonicalChart_halfPeriod_hasFDerivWithin
+    (h04 : N04Properties D T S C L K base loss ε)
+    (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1) (m : ℕ) :
+    ∀ p ∈ physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
+      HasFDerivWithinAt (K.chart z m) (fderiv ℝ (K.chart z m) p)
+        (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) p := by
+  intro p hp
+  have hc := (h04.1.charts z hz hs m).2.2.2.2.1 p hp.1
+  have hnhds := (h04.1.domains z hz hs m).1.mem_nhds hp.1
+  exact ((hc.contDiffAt hnhds).differentiableAt (by simp)).hasFDerivAt.hasFDerivWithinAt
 
 /-- Null-set transport through the actual current chart on precisely the
 same half-period measures; no angular-identity premise is present. -/
@@ -135,15 +197,16 @@ theorem n06_canonicalChart_ae_iff
     (P : PolarPoint → Prop) :
     (∀ᵐ y ∂canonicalMeasure S K m, P y) ↔
       ∀ᵐ x ∂volume.restrict
-        (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi),
+        (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)),
         P (K.chart z m x) := by
   obtain ⟨hF, hG⟩ := n06_canonicalChart_halfPeriod_maps h04 hz hs m
-  have hc := h04.2.2.2.2.2.2.2.1 z hz hs m
+  have hc := h04.1.charts z hz hs m
   exact n05_diffeomorphism_ae_iff
-    (measurableSet_Ioo.prod measurableSet_Ioc) (measurableSet_Ioo.prod measurableSet_Ioc)
-    hF hG (fun p hp => hc.2.2.1 p ⟨hp.1, mem_univ _⟩)
+    ((h04.1.domains z hz hs m).1.measurableSet.inter
+      (MeasurableSet.univ.prod measurableSet_Ioc)) (measurableSet_Ioo.prod measurableSet_Ioc)
+    hF hG (fun p hp => hc.2.2.1 p hp.1)
     (fun p hp => hc.2.2.2.1 p ⟨hp.1, mem_univ _⟩)
-    ((hc.2.2.2.2.1.differentiableOn (by simp)).mono (fun _ hp => ⟨hp.1, mem_univ _⟩))
+    ((hc.2.2.2.2.1.differentiableOn (by simp)).mono inter_subset_left)
     ((hc.2.2.2.2.2.1.differentiableOn (by simp)).mono (fun _ hp => ⟨hp.1, mem_univ _⟩)) P
 
 /-- Integrability under the genuine current change of coordinates. -/
@@ -154,11 +217,12 @@ theorem n06_canonicalChart_integrable_iff
     Integrable g (canonicalMeasure S K m) ↔
       Integrable (fun p => |planeJacobian (K.chart z m) p| * g (K.chart z m p))
         (volume.restrict
-          (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)) := by
+          (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))) := by
   have hb := n06_canonicalChart_halfPeriod_bijOn h04 hz hs m
   have he := integrableOn_image_iff_integrableOn_abs_det_fderiv_smul volume
-    (measurableSet_Ioo.prod measurableSet_Ioc)
-    (n05_canonicalChart_hasFDerivWithin h04 hz hs m) hb.injOn g
+    ((h04.1.domains z hz hs m).1.measurableSet.inter
+      (MeasurableSet.univ.prod measurableSet_Ioc))
+    (n06_canonicalChart_halfPeriod_hasFDerivWithin h04 hz hs m) hb.injOn g
   rw [hb.image_eq] at he
   simpa only [IntegrableOn, canonicalMeasure, ← n05_planeJacobian_eq_det, smul_eq_mul] using he
 
@@ -171,11 +235,12 @@ theorem n06_canonicalChart_integral
     (∫ p, g p ∂canonicalMeasure S K m) =
       ∫ p, |planeJacobian (K.chart z m) p| * g (K.chart z m p)
         ∂volume.restrict
-          (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi) := by
+          (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) := by
   have hb := n06_canonicalChart_halfPeriod_bijOn h04 hz hs m
   have he := integral_image_eq_integral_abs_det_fderiv_smul volume
-    (measurableSet_Ioo.prod measurableSet_Ioc)
-    (n05_canonicalChart_hasFDerivWithin h04 hz hs m) hb.injOn g
+    ((h04.1.domains z hz hs m).1.measurableSet.inter
+      (MeasurableSet.univ.prod measurableSet_Ioc))
+    (n06_canonicalChart_halfPeriod_hasFDerivWithin h04 hz hs m) hb.injOn g
   rw [hb.image_eq] at he
   simpa only [canonicalMeasure, ← n05_planeJacobian_eq_det, smul_eq_mul] using he
 
@@ -188,11 +253,12 @@ theorem n06_canonicalChart_lintegral
     (∫⁻ p, g p ∂canonicalMeasure S K m) =
       ∫⁻ p, ENNReal.ofReal |planeJacobian (K.chart z m) p| * g (K.chart z m p)
         ∂volume.restrict
-          (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi) := by
+          (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) := by
   have hb := n06_canonicalChart_halfPeriod_bijOn h04 hz hs m
   have he := lintegral_image_eq_lintegral_abs_det_fderiv_mul volume
-    (measurableSet_Ioo.prod measurableSet_Ioc)
-    (n05_canonicalChart_hasFDerivWithin h04 hz hs m) hb.injOn g
+    ((h04.1.domains z hz hs m).1.measurableSet.inter
+      (MeasurableSet.univ.prod measurableSet_Ioc))
+    (n06_canonicalChart_halfPeriod_hasFDerivWithin h04 hz hs m) hb.injOn g
   rw [hb.image_eq] at he
   simpa only [canonicalMeasure, ← n05_planeJacobian_eq_det] using he
 

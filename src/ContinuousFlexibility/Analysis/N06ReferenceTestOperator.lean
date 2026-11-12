@@ -23,6 +23,27 @@ open ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint
 
 set_option backward.isDefEq.respectTransparency false
 
+/-- The true radial differential expression vanishes on a zero input
+germ, including points on the boundary of a nonradial physical piece. -/
+theorem n06_referenceTestOperator_zero_of_germ
+    {D : ReferenceData} {φ : PolarPoint → ℝ} {p : PolarPoint}
+    (hw : DifferentiableAt ℝ D.w p.1) (hφ : ContDiff ℝ ∞ φ)
+    (hzero : φ =ᶠ[𝓝 p] (0 : PolarPoint → ℝ)) :
+    n06ReferenceTestOperator D φ p = 0 := by
+  have hr : radialPartial φ =ᶠ[𝓝 p] fun _ => (0 : ℝ) := by
+    filter_upwards [hzero.fderiv (𝕜 := ℝ)] with q hq
+    simp [radialPartial, hq]
+  have ht : angularPartial φ =ᶠ[𝓝 p] fun _ => (0 : ℝ) := by
+    filter_upwards [hzero.fderiv (𝕜 := ℝ)] with q hq
+    simp [angularPartial, hq]
+  have hrr : radialPartial (radialPartial φ) p = 0 := by
+    simp [radialPartial, hr.fderiv_eq (𝕜 := ℝ)]
+  have htt : angularPartial (angularPartial φ) p = 0 := by
+    simp [angularPartial, ht.fderiv_eq (𝕜 := ℝ)]
+  change Radial.radialPDE D.w (fun r θ => φ (r, θ)) p.1 p.2 = 0
+  rw [Radial.radialPDE_eq_polar_jets hw hφ, hr.eq_of_nhds, hrr, htt]
+  simp only [mul_zero, add_zero]
+
 theorem n06CanonicalTestPullback_reference_operator
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {R : ReturnEquationData S}
@@ -41,14 +62,14 @@ theorem n06CanonicalTestPullback_reference_operator
         (n06CanonicalTestPullback S K (C.referenceState, 0) m φ) := by
   have hΦ := n06CanonicalTestPullback_contDiff hA hz hs hφ
   have hw : ContDiff ℝ ∞ D.w := hgeom.2.2.1.1
-  obtain ⟨J, hJ, hJsub, hJzero⟩ :=
-    n06CanonicalTestPullback_radialSupport hA hz hs hφ
   funext p
-  by_cases hp : p ∈ physicalPieceOpen S K m
-  · have hcore : p.1 ∈ radialCore D := (hA.2.2.2.1 m).2.2 hp.1
+  by_cases hp : p ∈ physicalPieceOpen S K (C.referenceState, 0) m
+  · have hpref : p ∈ referencePhysicalPieceOpen S K m := by
+      simpa only [hA.referenceDomain m] using hp
+    have hcore : p.1 ∈ radialCore D := (hA.referenceBounds m).2.2 hpref.1
     have hr : p.1 ≠ 0 := (hgeom.1.trans hcore.1).ne'
     obtain ⟨ha, hb, hc⟩ := n06_correctedReference_positivePiece_germ
-      hN03 hA hw href hz hs m hm hp
+      hN03 hA hw href hz hs m hm hpref
     let A0 : SymmetricCoefficients :=
       ⟨fun q => D.w q.1, fun _ => 0, fun q => deriv D.w q.1 / q.1⟩
     calc
@@ -58,10 +79,8 @@ theorem n06CanonicalTestPullback_reference_operator
       _ = _ := by
         exact Radial.reference_divergence_eq_radialPDE hw hΦ hr
   · rw [n06CanonicalTestPullback_divergence_zero_of_not_mem hA hz hs hφ _ hp]
-    have hpJ : p.1 ∉ J := by
-      intro h
-      exact hp ⟨hJsub h, mem_univ _⟩
-    exact (Radial.r11b_radialPDE_test_zero_outside hgeom hΦ hJ.isClosed
-      hJzero hpJ p.2).symm
+    exact (n06_referenceTestOperator_zero_of_germ
+      (hw.differentiable (by simp) p.1) hΦ
+      (n06CanonicalTestPullback_eventually_zero_of_not_mem hA hz hs hφ hp)).symm
 
 end ContinuousFlexibility.Analysis

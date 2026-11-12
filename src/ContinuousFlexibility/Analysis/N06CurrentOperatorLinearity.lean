@@ -133,10 +133,10 @@ theorem n06_current_divergence_add_smul_on_piece
       ContDiffOn ℝ ∞ (K.coefficients z m).b (canonicalOpen S K m) ∧
       ContDiffOn ℝ ∞ (K.coefficients z m).c (canonicalOpen S K m))
     {f g : PolarPoint → ℝ} (hf : ContDiff ℝ ∞ f) (hg : ContDiff ℝ ∞ g) (s : ℝ)
-    {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K z m) :
     divergenceOperator (L.coefficients z) (fun q => f q + s * g q) p =
       divergenceOperator (L.coefficients z) f p + s * divergenceOperator (L.coefficients z) g p := by
-  have hc := h04.2.2.2.2.2.2.2.1 z hz hs m
+  have hc := h04.1.charts z hz hs m
   have he := n06_current_source_divergence_add_smul h04 hz hs hpositive hf hg s (hc.1 hp)
   let w : ℝ := K.height z m p / |planeJacobian (K.chart z m) p|
   have hw : w ≠ 0 := div_ne_zero (hc.2.2.2.2.2.2.2 p hp).1.ne'
@@ -162,7 +162,7 @@ theorem n06_current_divergence_reflectionAverage_on_piece
       ContDiffOn ℝ ∞ (K.coefficients z m).b (canonicalOpen S K m) ∧
       ContDiffOn ℝ ∞ (K.coefficients z m).c (canonicalOpen S K m))
     {f : PolarPoint → ℝ} (hf : ContDiff ℝ ∞ f)
-    {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K z m) :
     divergenceOperator (L.coefficients z) (fun q => (f q + f (q.1, -q.2)) / 2) p =
       (divergenceOperator (L.coefficients z) f p +
         divergenceOperator (L.coefficients z) f (p.1, -p.2)) / 2 := by

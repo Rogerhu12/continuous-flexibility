@@ -35,16 +35,22 @@ theorem n06_inverseChart_on_normalization
     K.inverseChart z m p = K.inverseChart (C.referenceState, 0) m p ∧
       K.height z m (K.inverseChart z m p) =
         K.height (C.referenceState, 0) m (K.inverseChart (C.referenceState, 0) m p) := by
-  have hcharts := hN04.2.2.2.2.2.2.2.1
+  have hcharts := hN04.1.charts
   have hc := hcharts z hz hs m
   have hr := hcharts (C.referenceState, 0) href hsector m
   have hphys := hc.2.1 hp
-  have hnorm := hN04.2.2.1 z hz hs m (K.inverseChart z m p) hphys hpN
+  have hnormalization := hN04.1.normalization z hz hs m
+  have hphys0 : K.inverseChart z m p ∈ physicalPieceOpen S K (C.referenceState, 0) m := by
+    have hmem : K.inverseChart z m p ∈ physicalPieceOpen S K z m ∩
+        (K.normalizationRegion ×ˢ (univ : Set ℝ)) := ⟨hphys, hpN, mem_univ _⟩
+    rw [hnormalization.1] at hmem
+    exact hmem.1
+  have hnorm := hnormalization.2 (K.inverseChart z m p) hphys hpN
   have hi : K.inverseChart z m p = K.inverseChart (C.referenceState, 0) m p := by
     calc
       K.inverseChart z m p = K.inverseChart (C.referenceState, 0) m
           (K.chart (C.referenceState, 0) m (K.inverseChart z m p)) :=
-        (hr.2.2.1 _ hphys).symm
+        (hr.2.2.1 _ hphys0).symm
       _ = K.inverseChart (C.referenceState, 0) m p := by
         rw [← hnorm.1, hc.2.2.2.1 p hp]
   exact ⟨hi, hnorm.2.trans (congrArg (K.height (C.referenceState, 0) m) hi)⟩
@@ -90,7 +96,7 @@ theorem n06_exists_normalized_physical_representation
       intro r _
       by_cases hr : referenceColumn D r = 0
       · simp only [hr, zero_mul]
-      · have hrN : r ∈ K.normalizationRegion := hN04.2.1 (Function.mem_support.mpr hr)
+      · have hrN : r ∈ K.normalizationRegion := hN04.1.normalizationSupport (Function.mem_support.mpr hr)
         have hm : referenceMode η 2 r = referenceMode ηref 2 r := by
           unfold referenceMode
           apply congrArg (fun g : ℝ → ℝ => radialAngularMean g)

@@ -60,22 +60,30 @@ theorem n06_reference_root_cut_radial
   have h01 := h.1.1.1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
-  rcases h.2.2.2.2 with ⟨_, _, _, hpieces, _, hnegative, _, _, hclosed, _⟩
+  have hA := h.2.2.2.2.1
+  have hpieces := hA.referenceBounds
+  have hnegative := hA.referenceNegative
+  have hclosed (p : PolarPoint)
+      (hp : p.1 ∈ Icc (K.physicalLeft i) (K.physicalRight i)) :=
+    n05_reference_boundary_regular hA href hs i (p := p) hp
+  have hrootClosed (θ : ℝ) : (root, θ) ∈ physicalPieceClosed S K (C.referenceState, 0) i := by
+    rw [n05_referencePhysicalPieceClosed_eq hA i]
+    exact ⟨hroot, mem_univ _⟩
   have hΨ (p : PolarPoint) (hp : p.1 ∈ Icc (K.physicalLeft i) (K.physicalRight i)) :
-      ContDiffAt ℝ ∞ Ψ p := (hclosed (C.referenceState, 0) href hs i p hp).1
+      ContDiffAt ℝ ∞ Ψ p := (hclosed p hp).1
   have hH (p : PolarPoint) (hp : p.1 ∈ Icc (K.physicalLeft i) (K.physicalRight i)) :
-      ContDiffAt ℝ ∞ H p := (hclosed (C.referenceState, 0) href hs i p hp).2.1
+      ContDiffAt ℝ ∞ H p := (hclosed p hp).2.1
   have hβ : Continuous β := continuous_iff_continuousAt.mpr fun θ =>
     (hΨ (root, θ) hroot).continuousAt.snd.comp
       (continuousAt_const.prodMk continuousAt_id)
   have hlift (θ : ℝ) : β (θ + Real.pi) = β θ + Real.pi := by
     simpa only [β, Ψ, Prod.mk_add_mk, Prod.snd_add, Prod.fst_add, add_zero] using
       congrArg Prod.snd (n05_canonical_closed_periodicity h.2.2.2.2 href hs i
-        (p := (root, θ)) hroot).1
+        (p := (root, θ)) (hrootClosed θ)).1
   have hodd : Function.Odd β := by
     intro θ
     exact congrArg Prod.snd (n05_canonical_closed_reflection h.2.2.2.2 href hs i
-      (p := (root, θ)) hroot).1
+      (p := (root, θ)) (hrootClosed θ)).1
   obtain ⟨τ, hτ, htravel, hperiod, hformula⟩ :=
     n06_reference_null_root_cut hT hS h hi hinside hroot hcut hwroot hy hcutImage
   have hβid : β = id := n06_circleLift_eq_id_of_irrational hβ hlift hodd hperiod hirr
@@ -127,8 +135,8 @@ theorem n06_reference_root_cut_radial
     have hpow : H p ^ 4 = H (p.1, 0) ^ 4 := by
       apply mul_right_cancel₀ hcoef
       exact he₁.trans ((congrArg (fun q : PolarPoint => -q.1) (hchartOpen p hp)).trans he₂.symm)
-    exact (pow_left_inj₀ (hclosed (C.referenceState, 0) href hs i p hpc).2.2.2.le
-      (hclosed (C.referenceState, 0) href hs i (p.1, 0) hpc).2.2.2.le
+    exact (pow_left_inj₀ (hclosed p hpc).2.2.2.le
+      (hclosed (p.1, 0) hpc).2.2.2.le
       (by norm_num : (4 : ℕ) ≠ 0)).mp hpow
   have hheightClosed (p : PolarPoint)
       (hp : p.1 ∈ Icc (K.physicalLeft i) (K.physicalRight i)) : H p = H (p.1, 0) := by
@@ -163,7 +171,8 @@ theorem n06_reference_cutPair_radial
   have hirr : Irrational ((2 * n05TricomiTime (K.cutRadius m)) / Real.pi) := by
     rw [← (n06_reference_cut_travel hT hS h m).2.2]
     exact (hreturn (C.left m) (C.right m) hneg).1.1
-  rcases h.2.2.2.2 with ⟨_, _, _, hpieces, _, _, _, _, _, _, _, hcuts, _⟩
+  have hpieces := h.2.2.2.2.1.referenceBounds
+  have hcuts := h.2.2.2.2.2.1.1.1
   obtain ⟨hnegL, hnegR, hl, hr, hmeet, hy, _, _, _, _⟩ := hcuts m
   let c := K.physicalRight (K.cutPair m).1
   have hrootL : C.left m ∈ Icc (K.physicalLeft (K.cutPair m).1)

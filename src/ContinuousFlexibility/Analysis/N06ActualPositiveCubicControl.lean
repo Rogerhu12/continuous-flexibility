@@ -48,7 +48,7 @@ theorem n06_actual_dividedMixedJets_bound
         |mixedDerivative a j (K.dividedDifference z m).c p| ≤
           (M * (1 + stateGrading S (s + loss) (z.1 - C.referenceState) + |z.2|)) *
             T.E0 (T.sample (K.cell m)) ^ M := by
-  have hbound := h04.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have hbound := h04.2.2.1
   let M : ℝ := (hbound s).choose
   have hM : 0 < M := (hbound s).choose_spec.1
   have hjet := (hbound s).choose_spec.2

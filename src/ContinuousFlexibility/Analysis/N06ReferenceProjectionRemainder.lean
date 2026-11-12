@@ -78,20 +78,29 @@ theorem n06_controlledReferenceHeight_congr_ae_physical
   have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
-  have hc := h04.2.2.2.2.2.2.2.1 (C.referenceState, 0) href hs m
+  have hc := h04.1.charts (C.referenceState, 0) href hs m
   have hhalf : f =ᵐ[volume.restrict
       (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)] g := by
     apply ae_restrict_of_ae_restrict_of_subset _ hfg
     intro p hp
-    exact ⟨(h04.2.2.2.1 m).2.2 hp.1, hp.2.1,
+    exact ⟨(h04.1.referenceBounds m).2.2 hp.1, hp.2.1,
       hp.2.2.trans (by linarith [Real.pi_pos])⟩
-  apply (n05_canonicalChart_ae_iff h04 href hs m
-    (fun _ hp => n05_controlledReference_chart_second hcoordinates m hp)
+  have hangle : ∀ p ∈ physicalPieceOpen S K (C.referenceState, 0) m,
+      (K.chart (C.referenceState, 0) m p).2 = p.2 := by
+    intro p hp
+    apply n05_controlledReference_chart_second hcoordinates m
+    simpa only [h04.1.referenceDomain m] using hp
+  apply (n05_canonicalChart_ae_iff h04 href hs m hangle
     (fun p => canonicalHeight S K (C.referenceState, 0) m f p =
       canonicalHeight S K (C.referenceState, 0) m g p)).mpr
+  simp only [h04.1.referenceDomain m, referencePhysicalPieceOpen,
+    prod_inter_prod, inter_univ, univ_inter]
   filter_upwards [hhalf,
     ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp hpU
-  simp only [canonicalHeight, hc.2.2.1 p ⟨hpU.1, mem_univ _⟩, hp]
+  have hpo : p ∈ physicalPieceOpen S K (C.referenceState, 0) m := by
+    rw [h04.1.referenceDomain m]
+    exact ⟨hpU.1, mem_univ _⟩
+  simp only [canonicalHeight, hc.2.2.1 p hpo, hp]
 
 /-- The projected L2 remainder represents the projected physical height
 with its original left scalar and its actual space cutoff unchanged. -/

@@ -10,8 +10,9 @@ retains the height itself and its genuine first derivative. Together with
 the already proved full chart derivative identity, this transfers an
 actual root first-jet record to the explicitly constructed relative patch.
 
-Only endpoint data of the actual forward functions are used. No inverse
-boundary value or reconstructed-field transmission is assumed.
+Only endpoint data of the actual forward functions are used, on pieces
+whose actual domain is the reference rectangle. No inverse boundary value
+or reconstructed-field transmission is assumed.
 -/
 
 noncomputable section
@@ -66,6 +67,7 @@ theorem n06_relativeCanonicalHeight_boundary_firstJets
     (hsref : stateSector S C.referenceState)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {δ : ℝ} (hδ : 0 < δ) (m : ℕ)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (hgap : 2 * δ ≤ K.physicalRight m - K.physicalLeft m)
     (side : Bool) (θ : ℝ) :
     n06RelativeCanonicalHeight C K δ z m
@@ -78,16 +80,16 @@ theorem n06_relativeCanonicalHeight_boundary_firstJets
   have hp : (if side then K.physicalRight m else K.physicalLeft m) ∈
       Icc (K.physicalLeft m) (K.physicalRight m) := by
     cases side
-    · exact ⟨le_rfl, (hA.2.2.2.1 m).1.le⟩
-    · exact ⟨(hA.2.2.2.1 m).1.le, le_rfl⟩
-  have hnew := n06_relativeCanonicalPatch_closed hA href hsref hz hs δ m
+    · exact ⟨le_rfl, (hA.referenceBounds m).1.le⟩
+    · exact ⟨(hA.referenceBounds m).1.le, le_rfl⟩
+  have hnew := n06_relativeCanonicalPatch_closed hA href hsref hz hs δ m hΩ
     (p := (if side then K.physicalRight m else K.physicalLeft m, θ)) hp
-  have hold := hA.2.2.2.2.2.2.2.2.1 z hz hs m
-    (if side then K.physicalRight m else K.physicalLeft m, θ) hp
+  have hold := n06_actualCanonical_rectangle_data hA hz hs m hΩ
+    (p := (if side then K.physicalRight m else K.physicalLeft m, θ)) hp
   have hlog₀ := n06_relativeCanonicalHeight_log_boundary_jets hA href hsref hz hs
-    hδ m hgap side (j := 0) (by norm_num) θ
+    hδ m hΩ hgap side (j := 0) (by norm_num) θ
   have hlog₁ := n06_relativeCanonicalHeight_log_boundary_jets hA href hsref hz hs
-    hδ m hgap side (j := 1) (by norm_num) θ
+    hδ m hΩ hgap side (j := 1) (by norm_num) θ
   apply n06_positive_height_firstJets_of_log_jets
     (hnew.2.1.differentiableAt (by simp)) (hold.2.1.differentiableAt (by simp))
     hnew.2.2 hold.2.2.2
@@ -103,6 +105,7 @@ theorem n06_relativeCanonicalPatch_firstJets
     (hsref : stateSector S C.referenceState)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {δ : ℝ} (hδ : 0 < δ) (m : ℕ)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (hgap : 2 * δ ≤ K.physicalRight m - K.physicalLeft m)
     (side : Bool) {y σ : ℝ} {β H ρ κ Hr : ℝ → ℝ}
     (J : N06RootFirstJets (K.chart z m) (K.height z m)
@@ -113,15 +116,15 @@ theorem n06_relativeCanonicalPatch_firstJets
   have hp : (if side then K.physicalRight m else K.physicalLeft m) ∈
       Icc (K.physicalLeft m) (K.physicalRight m) := by
     cases side
-    · exact ⟨le_rfl, (hA.2.2.2.1 m).1.le⟩
-    · exact ⟨(hA.2.2.2.1 m).1.le, le_rfl⟩
-  have hnew (θ : ℝ) := n06_relativeCanonicalPatch_closed hA href hsref hz hs δ m
+    · exact ⟨le_rfl, (hA.referenceBounds m).1.le⟩
+    · exact ⟨(hA.referenceBounds m).1.le, le_rfl⟩
+  have hnew (θ : ℝ) := n06_relativeCanonicalPatch_closed hA href hsref hz hs δ m hΩ
     (p := (if side then K.physicalRight m else K.physicalLeft m, θ)) hp
   refine ⟨fun θ => (hnew θ).1.differentiableAt (by simp),
     fun θ => (hnew θ).2.1.differentiableAt (by simp), ?_, ?_, ?_, ?_⟩
   · intro θ
     have hj := n06_relativeCanonicalChart_boundary_jets hA href hsref hz hs
-      hδ m hgap side (j := 0) (by norm_num) θ
+      hδ m hΩ hgap side (j := 0) (by norm_num) θ
     have he : n06RelativeCanonicalChart C K δ z m
         (if side then K.physicalRight m else K.physicalLeft m, θ) =
       K.chart z m (if side then K.physicalRight m else K.physicalLeft m, θ) := by
@@ -131,12 +134,12 @@ theorem n06_relativeCanonicalPatch_firstJets
     exact he.trans (J.chart_value θ)
   · intro θ
     exact (n06_relativeCanonicalHeight_boundary_firstJets hA href hsref hz hs
-      hδ m hgap side θ).1.trans (J.height_value θ)
+      hδ m hΩ hgap side θ).1.trans (J.height_value θ)
   · intro θ
-    rw [n06_relativeCanonicalChart_boundary_fderiv hA href hsref hz hs hδ m hgap side θ]
+    rw [n06_relativeCanonicalChart_boundary_fderiv hA href hsref hz hs hδ m hΩ hgap side θ]
     exact J.chart_radial θ
   · intro θ
     exact (n06_relativeCanonicalHeight_boundary_firstJets hA href hsref hz hs
-      hδ m hgap side θ).2.trans (J.height_radial θ)
+      hδ m hΩ hgap side θ).2.trans (J.height_radial θ)
 
 end ContinuousFlexibility.Statements

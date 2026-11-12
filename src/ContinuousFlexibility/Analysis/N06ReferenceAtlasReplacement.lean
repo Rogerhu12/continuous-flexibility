@@ -5,13 +5,13 @@ import Mathlib.Analysis.Calculus.FDeriv.Congr
 /-!
 # Replacing current charts while retaining the original reference graph
 
-The canonical intervals, physical pieces, material labels and reference
-coordinate germs determine the original N05 spaces and graph. Replacing
-only the current coordinate fields preserves that same graph and inverse,
-including every weighted estimate. Equality is needed only on the open
-reference pieces; arbitrary values of inverse charts at endpoints are not
-used. The construction of the replacement's N04 properties remains a
-separate obligation.
+The canonical intervals, physical reference endpoints, material labels and
+reference coordinate germs determine the original N05 spaces and graph.
+Replacing the current coordinate fields and their actual physical domains
+preserves that same graph and inverse, including every weighted estimate.
+Equality is needed only on the open reference pieces; arbitrary values of
+inverse charts at endpoints are not used. The construction of the
+replacement's N04 properties remains a separate obligation.
 -/
 
 noncomputable section
@@ -24,10 +24,12 @@ open scoped ContDiff Topology
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- Use the new current fields on exactly the old indexed cylinders. -/
+/-- Use the new current fields and actual domains, retaining the old
+canonical intervals, physical reference endpoints and material labels. -/
 def n06CurrentAtlasReplacement {S : PhysicalSpacesData}
     (K J : CanonicalData S) : CanonicalData S :=
   { K with
+    physicalDomain := J.physicalDomain
     chart := J.chart
     inverseChart := J.inverseChart
     height := J.height
@@ -65,18 +67,21 @@ theorem n06_retainedVolumeModel_isVolumeModel {V : VolumeModelData S K}
     IsVolumeModel T S (n06CurrentAtlasReplacement K J)
       (n06RetainedVolumeModel J V) := hV
 
-/-- The actual open inverses agree because the two forward charts agree.
-No identification of endpoint values is required. -/
+/-- On equal actual domains, the open inverses agree because the two forward
+charts agree. No identification of endpoint values is required. -/
 theorem n06_currentAtlasReplacement_inverse_eq
     (hK : N04PartA D S C K base ε)
     (hJ : N04PartA D S C (n06CurrentAtlasReplacement K J) base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
-    (hchart : ∀ m, EqOn (J.chart z m) (K.chart z m) (physicalPieceOpen S K m))
+    (hdomains : ∀ m, physicalPieceOpen S (n06CurrentAtlasReplacement K J) z m =
+      physicalPieceOpen S K z m)
+    (hchart : ∀ m, EqOn (J.chart z m) (K.chart z m) (physicalPieceOpen S K z m))
     (m : ℕ) {p : PolarPoint} (hp : p ∈ canonicalOpen S K m) :
     J.inverseChart z m p = K.inverseChart z m p := by
-  obtain ⟨_, _, hleft, _, _, _, _, _⟩ := hK.2.2.2.2.2.2.2.1 z hz hs m
-  obtain ⟨_, hmap, _, hright, _, _, _, _⟩ := hJ.2.2.2.2.2.2.2.1 z hz hs m
-  have hq : J.inverseChart z m p ∈ physicalPieceOpen S K m := hmap hp
+  obtain ⟨_, _, hleft, _, _, _, _, _⟩ := hK.charts z hz hs m
+  obtain ⟨_, hmap, _, hright, _, _, _, _⟩ := hJ.charts z hz hs m
+  have hq : J.inverseChart z m p ∈ physicalPieceOpen S K z m := by
+    simpa only [hdomains m] using hmap hp
   have he : K.chart z m (J.inverseChart z m p) = p :=
     (hchart m hq).symm.trans (hright p hp)
   have hi := hleft _ hq
@@ -90,18 +95,20 @@ theorem n06_currentAtlasReplacement_transforms_eq
     (hK : N04PartA D S C K base ε)
     (hJ : N04PartA D S C (n06CurrentAtlasReplacement K J) base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
-    (hchart : ∀ m, EqOn (J.chart z m) (K.chart z m) (physicalPieceOpen S K m))
-    (hheight : ∀ m, EqOn (J.height z m) (K.height z m) (physicalPieceOpen S K m))
+    (hdomains : ∀ m, physicalPieceOpen S (n06CurrentAtlasReplacement K J) z m =
+      physicalPieceOpen S K z m)
+    (hchart : ∀ m, EqOn (J.chart z m) (K.chart z m) (physicalPieceOpen S K z m))
+    (hheight : ∀ m, EqOn (J.height z m) (K.height z m) (physicalPieceOpen S K z m))
     (m : ℕ) (f : PolarPoint → ℝ) {p : PolarPoint} (hp : p ∈ canonicalOpen S K m) :
     canonicalHeight S (n06CurrentAtlasReplacement K J) z m f p =
         canonicalHeight S K z m f p ∧
       canonicalSource S (n06CurrentAtlasReplacement K J) z m f p =
         canonicalSource S K z m f p := by
-  have hG := n06_currentAtlasReplacement_inverse_eq hK hJ hz hs hchart m hp
-  have hq : K.inverseChart z m p ∈ physicalPieceOpen S K m :=
-    (hK.2.2.2.2.2.2.2.1 z hz hs m).2.1 hp
+  have hG := n06_currentAtlasReplacement_inverse_eq hK hJ hz hs hdomains hchart m hp
+  have hq : K.inverseChart z m p ∈ physicalPieceOpen S K z m :=
+    (hK.charts z hz hs m).2.1 hp
   have hnear : J.chart z m =ᶠ[𝓝 (K.inverseChart z m p)] K.chart z m := by
-    filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds hq] with x hx
+    filter_upwards [(hK.domains z hz hs m).1.mem_nhds hq] with x hx
     exact hchart m hx
   have hd : fderiv ℝ (J.chart z m) (K.inverseChart z m p) =
       fderiv ℝ (K.chart z m) (K.inverseChart z m p) := hnear.fderiv_eq
@@ -121,8 +128,10 @@ theorem n06_currentAtlasReplacement_representation_iff
     (hK : N04PartA D S C K base ε)
     (hJ : N04PartA D S C (n06CurrentAtlasReplacement K J) base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
-    (hchart : ∀ m, EqOn (J.chart z m) (K.chart z m) (physicalPieceOpen S K m))
-    (hheight : ∀ m, EqOn (J.height z m) (K.height z m) (physicalPieceOpen S K m))
+    (hdomains : ∀ m, physicalPieceOpen S (n06CurrentAtlasReplacement K J) z m =
+      physicalPieceOpen S K z m)
+    (hchart : ∀ m, EqOn (J.chart z m) (K.chart z m) (physicalPieceOpen S K z m))
+    (hheight : ∀ m, EqOn (J.height z m) (K.height z m) (physicalPieceOpen S K z m))
     (U : CanonicalUnknown S K) (F : CanonicalSequence S K) (η f : PolarPoint → ℝ) :
     HasCanonicalRepresentation D S C (n06CurrentAtlasReplacement K J) z U F η f ↔
       HasCanonicalRepresentation D S C K z U F η f := by
@@ -137,7 +146,7 @@ theorem n06_currentAtlasReplacement_representation_iff
           canonicalSource S (n06CurrentAtlasReplacement K J) z m g p =
             canonicalSource S K z m g p := by
       filter_upwards [ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp
-      exact n06_currentAtlasReplacement_transforms_eq hK hJ hz hs hchart hheight
+      exact n06_currentAtlasReplacement_transforms_eq hK hJ hz hs hdomains hchart hheight
         m g ⟨hp.1, mem_univ _⟩
     exact ⟨hpair.mono (fun _ hp => hp.1), hpair.mono (fun _ hp => hp.2)⟩
   constructor
@@ -155,20 +164,37 @@ theorem n06_currentAtlasReplacement_referenceRelation_iff {V : VolumeModelData S
     (hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)
     (hs : stateSector S C.referenceState)
     (hchart : ∀ m, EqOn (J.chart (C.referenceState, 0) m)
-      (K.chart (C.referenceState, 0) m) (physicalPieceOpen S K m))
+      (K.chart (C.referenceState, 0) m) (referencePhysicalPieceOpen S K m))
     (hheight : ∀ m, EqOn (J.height (C.referenceState, 0) m)
-      (K.height (C.referenceState, 0) m) (physicalPieceOpen S K m))
+      (K.height (C.referenceState, 0) m) (referencePhysicalPieceOpen S K m))
     (γ M₀ M₁ ell : ℝ) (U : CanonicalUnknown S K) (F : CanonicalSequence S K) :
     ReferenceCanonicalRelation D T S C (n06CurrentAtlasReplacement K J)
         (n06RetainedVolumeModel J V) γ M₀ M₁ ell U F ↔
       ReferenceCanonicalRelation D T S C K V γ M₀ M₁ ell U F := by
+  have hdomains : ∀ m,
+      physicalPieceOpen S (n06CurrentAtlasReplacement K J) (C.referenceState, 0) m =
+        physicalPieceOpen S K (C.referenceState, 0) m := by
+    intro m
+    calc
+      _ = referencePhysicalPieceOpen S (n06CurrentAtlasReplacement K J) m :=
+        hJ.referenceDomain m
+      _ = referencePhysicalPieceOpen S K m := rfl
+      _ = _ := (hK.referenceDomain m).symm
+  have hchart' : ∀ m, EqOn (J.chart (C.referenceState, 0) m)
+      (K.chart (C.referenceState, 0) m) (physicalPieceOpen S K (C.referenceState, 0) m) := by
+    intro m p hp
+    exact hchart m (by simpa only [hK.referenceDomain m] using hp)
+  have hheight' : ∀ m, EqOn (J.height (C.referenceState, 0) m)
+      (K.height (C.referenceState, 0) m) (physicalPieceOpen S K (C.referenceState, 0) m) := by
+    intro m p hp
+    exact hheight m (by simpa only [hK.referenceDomain m] using hp)
   constructor
   · rintro ⟨hU, η, f, hrep, hgraph⟩
     exact ⟨hU, η, f, (n06_currentAtlasReplacement_representation_iff hK hJ hz hs
-      hchart hheight U F η f).mp hrep, hgraph⟩
+      hdomains hchart' hheight' U F η f).mp hrep, hgraph⟩
   · rintro ⟨hU, η, f, hrep, hgraph⟩
     exact ⟨hU, η, f, (n06_currentAtlasReplacement_representation_iff hK hJ hz hs
-      hchart hheight U F η f).mpr hrep, hgraph⟩
+      hdomains hchart' hheight' U F η f).mpr hrep, hgraph⟩
 
 /-- All N05 clauses retain the same source level, graph and inverse. In
 particular, this transports the all-exponent estimates and the weak first
@@ -180,9 +206,9 @@ theorem n06_currentAtlasReplacement_N05
     (hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)
     (hs : stateSector S C.referenceState)
     (hchart : ∀ m, EqOn (J.chart (C.referenceState, 0) m)
-      (K.chart (C.referenceState, 0) m) (physicalPieceOpen S K m))
+      (K.chart (C.referenceState, 0) m) (referencePhysicalPieceOpen S K m))
     (hheight : ∀ m, EqOn (J.height (C.referenceState, 0) m)
-      (K.height (C.referenceState, 0) m) (physicalPieceOpen S K m))
+      (K.height (C.referenceState, 0) m) (referencePhysicalPieceOpen S K m))
     (h05 : N05Properties D T S C K V b B) :
     N05Properties D T S C (n06CurrentAtlasReplacement K J)
       (n06RetainedVolumeModel J V) b (n06RetainedCanonicalDomain J B) := by
@@ -205,9 +231,9 @@ theorem n06_currentAtlasReplacement_through05
     (h04 : NonlinearPropertiesThrough04 D T S C R L
       (n06CurrentAtlasReplacement K J) base loss ε)
     (hchart : ∀ m, EqOn (J.chart (C.referenceState, 0) m)
-      (K.chart (C.referenceState, 0) m) (physicalPieceOpen S K m))
+      (K.chart (C.referenceState, 0) m) (referencePhysicalPieceOpen S K m))
     (hheight : ∀ m, EqOn (J.height (C.referenceState, 0) m)
-      (K.height (C.referenceState, 0) m) (physicalPieceOpen S K m)) :
+      (K.height (C.referenceState, 0) m) (referencePhysicalPieceOpen S K m)) :
     NonlinearPropertiesThrough05 D T S C R L (n06CurrentAtlasReplacement K J)
       (n06RetainedVolumeModel J V) b (n06RetainedCanonicalDomain J B) base loss ε := by
   have h01 : N01Properties D T S C base loss ε := h05.1.1.1.1

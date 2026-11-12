@@ -59,15 +59,16 @@ theorem n06_physicalMean_eq_halfIntegral
 
 theorem n06_physicalHalfIntegral_eq_piece
     {D : ReferenceData} {S : PhysicalSpacesData} {K : CanonicalData S}
-    (m : ℕ) (hpiece : Ioo (K.physicalLeft m) (K.physicalRight m) ⊆ radialCore D)
+    {z : AnnularState S × ℝ}
+    (m : ℕ) (hpiece : physicalPieceOpen S K z m ⊆ annularOpen D)
     {f : PolarPoint → ℝ}
-    (hzero : ∀ p, p ∉ physicalPieceOpen S K m → f p = 0) :
+    (hzero : ∀ p, p ∉ physicalPieceOpen S K z m → f p = 0) :
     (∫ p in radialCore D ×ˢ Ioc (0 : ℝ) Real.pi, f p) =
-      ∫ p in physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi), f p := by
+      ∫ p in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi), f p := by
   apply setIntegral_eq_of_subset_of_forall_sdiff_eq_zero
     (measurableSet_Ioo.prod measurableSet_Ioc)
   · intro p hp
-    exact ⟨hpiece hp.1.1, hp.2.2⟩
+    exact ⟨(hpiece hp.1).1, hp.2.2⟩
   · intro p hp
     apply hzero p
     intro hpm
@@ -84,12 +85,12 @@ theorem n06_physicalMean_pairing_eq_canonical
     (hperiod : Function.Periodic (fun p => u p * f p) (0, Real.pi))
     (hint : IntegrableOn (fun p => u p * f p)
       (radialCore D ×ˢ Ioc (0 : ℝ) Real.pi))
-    (hzero : ∀ p, p ∉ physicalPieceOpen S K m → u p * f p = 0) :
+    (hzero : ∀ p, p ∉ physicalPieceOpen S K z m → u p * f p = 0) :
     (∫ r in D.a..D.b, radialAngularMean (fun θ => u (r, θ) * f (r, θ))) =
       Real.pi⁻¹ * ∫ p, canonicalHeight S K z m u p * canonicalSource S K z m f p
         ∂canonicalMeasure S K m := by
   rw [n06_physicalMean_eq_halfIntegral hab hperiod hint,
-    n06_physicalHalfIntegral_eq_piece m (hK.2.2.2.1 m).2.2 hzero,
+    n06_physicalHalfIntegral_eq_piece m (hK.domains z hz hs m).2.2.1 hzero,
     canonicalSource_pairing_of_partA hK hz hs m u f]
   simp only [canonicalMeasure, canonicalOpen, prod_inter_prod, inter_univ, univ_inter]
 

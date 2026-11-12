@@ -7,7 +7,8 @@ import ContinuousFlexibility.Analysis.N06CurrentFiniteGreenRelation
 
 The original N05 graph supplies a common finite set of actual H2 modal
 representatives and both signed local Green formulas. Genuine forward
-atlas first jets then give every endpoint matching condition. The current
+atlas first jets at true roots, together with the original moving-cut
+transmission law, give every endpoint matching condition. The current
 test traces are constructed from the original N04 forward chart itself.
 
 Thus the existing finite Green data are obtained without taking modes,
@@ -78,6 +79,7 @@ theorem n06N05_finiteCore_greenData
     n06N05_finiteCore_pieceGreen hT hS h hcoordinates hz hs a c pot q κ Cref
       hgeometry hea heb hec hepot hcd hcoeff u hu G Fcur hsource hweak
   intro φ hφ
+  have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
   have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
   have havg : ContDiff ℝ ∞ (n06_radialTestAverage φ) :=
     (n06_radialTestAverage_test hφ).1
@@ -90,7 +92,7 @@ theorem n06N05_finiteCore_greenData
     reverse := reverse
     regular := hregular
     represents := hvalue
-    endpointJets := J.endpoints
+    endpointCircles := J.endpointInverseRadius h01.2.2.2.1 h04 hz hs
     green := hgreen φ hφ Q
     matching := ?_
   }⟩

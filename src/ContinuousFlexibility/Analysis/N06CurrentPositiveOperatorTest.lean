@@ -84,16 +84,16 @@ theorem n06_current_source_operatorTest_eq
   obtain ⟨g, hg, hgW⟩ := n06_exists_smooth_strip_germ hW hp
   have hA := (n06_N04_qualitative_parts h04).1
   have hB := (n06_N04_qualitative_parts h04).2
-  have hc := hA.2.2.2.2.2.2.2.1 z hz hs m
+  have hc := hA.charts z hz hs m
   let x := K.inverseChart z m p
-  have hx : x ∈ physicalPieceOpen S K m := hc.2.1 hp
+  have hx : x ∈ physicalPieceOpen S K z m := hc.2.1 hp
   have hFx : K.chart z m x = p := hc.2.2.2.1 p hp
   have hF : ContinuousAt (K.chart z m) x :=
-    hc.2.2.2.2.1.continuousOn.continuousAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hx)
+    hc.2.2.2.2.1.continuousOn.continuousAt ((hA.domains z hz hs m).1.mem_nhds hx)
   have hnear : ∀ᶠ q in 𝓝 x, g (K.chart z m q) = W (K.chart z m q) :=
     (hFx ▸ hF.tendsto).eventually hgW
   have hphys : φ =ᶠ[𝓝 x] (fun q => K.height z m q * g (K.chart z m q)) := by
-    filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds hx, hnear] with q hq hqg
+    filter_upwards [(hA.domains z hz hs m).1.mem_nhds hx, hnear] with q hq hqg
     rw [hqg]
     change φ q = K.height z m q * (φ (K.inverseChart z m (K.chart z m q)) /
       K.height z m (K.inverseChart z m (K.chart z m q)))
@@ -199,7 +199,7 @@ theorem n06_positive_current_operatorTest_difference
     differentiableAt_fst.mul ((differentiableAt_const (1 : ℝ)).sub differentiableAt_fst)
   have hcur := n06_current_source_operatorTest_eq h04 hz hs hφ hp
   have href := n06_divergence_radial_coefficients_germ_at hga hgb hgc hcd hW
-  obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, hcubic, _, _⟩ := h04
+  have hcubic := h04.2.1.2.2.2.2
   have hg : ∀ᶠ q : PolarPoint in 𝓝 p,
       (K.coefficients z m).a q - (K.coefficients (C.referenceState, 0) m).a q =
         cylinderWeight q.1 ^ 3 * (K.dividedDifference z m).a q ∧

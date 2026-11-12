@@ -70,7 +70,8 @@ private theorem n06_cutHalf_open_subset_component
     (m : ℕ) {i : ℕ} (hi : i = (K.cutPair m).1 ∨ i = (K.cutPair m).2) :
     K.positive i = false ∧
       Ioo (K.physicalLeft i) (K.physicalRight i) ⊆ Ioo (C.left m) (C.right m) := by
-  rcases h.2.2.2.2 with ⟨_, _, _, hpieces, _, _, _, _, _, _, _, hcut, _⟩
+  have hpieces := h.2.2.2.2.1.referenceBounds
+  have hcut := h.2.2.2.2.2.1.1.1
   obtain ⟨hnegL, hnegR, hleft, hright, hmeet, _⟩ := hcut m
   have hlcut : C.left m < K.physicalRight (K.cutPair m).1 := by
     rw [← hleft]
@@ -117,7 +118,7 @@ theorem n06_referenceNegative_cut_mass_bounds
       (by norm_num : (0 : ℝ) ≤ 1 / 2)).trans hradius
   · obtain ⟨hineg, hisub⟩ := n06_cutHalf_open_subset_component h m hi
     have hphys := hmass j (K.physicalLeft i) (K.physicalRight i)
-      (h.2.2.2.2.2.2.2.1 i).1 (n06_cutPiece_closed_subset h m hi) (hisub.trans hcell)
+      (h.2.2.2.2.1.referenceBounds i).1 (n06_cutPiece_closed_subset h m hi) (hisub.trans hcell)
     exact (P.reciprocal_mass_le_physical hT hS h hineg hab hsub).trans
       (hphys.trans (mul_le_mul_of_nonneg_left
         (Real.rpow_le_rpow_of_exponent_le hE (le_max_left _ _)) hQ.le))

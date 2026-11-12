@@ -48,8 +48,11 @@ theorem n06Volume_controlled_reference_source_norm
   have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
-  have hfinite := n06_controlledReferencePieces_finite_on_compact h01.1.1
-    hcoordinates hJ hJD
+  have hfinite : Set.Finite {m : ℕ |
+      (physicalPieceOpen S K (C.referenceState, 0) m ∩
+        (J ×ˢ (univ : Set ℝ))).Nonempty} := by
+    rw [n06_referenceSourcePieces_eq_referenceIntervals h04.1 J]
+    exact n06_controlledReferencePieces_finite_on_compact h01.1.1 hcoordinates hJ hJD
   let I : Finset ℕ := hfinite.toFinset
   obtain ⟨A, _hA, hsource⟩ := n06_controlledReferenceSource_angularJet_bound h hcoordinates
   let cost : ℕ → ℝ := fun m => (A * radialE (D.cellIndex (K.cell m)) ^ A) ^ 2

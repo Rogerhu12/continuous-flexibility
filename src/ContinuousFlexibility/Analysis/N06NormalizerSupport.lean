@@ -79,7 +79,7 @@ theorem n06_normalizationRegion_meets_core
   obtain ⟨r, hr⟩ := hnz
   have hrχ : r ∈ tsupport D.chi :=
     referenceColumn_tsupport_subset (subset_tsupport (referenceColumn D) hr)
-  exact ⟨r, h04.2.1 hr, (hborder.2.2.1 hrχ).1⟩
+  exact ⟨r, h04.1.normalizationSupport hr, (hborder.2.2.1 hrχ).1⟩
 
 /-- The new normalizer belongs to the old height space and is normalized
 by the unchanged compatibility functional. Its compact support is proved
@@ -96,7 +96,7 @@ theorem n06_exists_normalizer_in_normalizationRegion
         J ⊆ K.normalizationRegion ∧ (∀ r, r ∉ J → g r = 0) ∧
         (S.height (3 / 4 : ℝ)).decode ψ = fun p : PolarPoint => g p.1 := by
   obtain ⟨g, J, hg, hJ, hJD, hJU, hzero, hunit⟩ :=
-    n06_exists_radial_unit_source_on_open h04.1 (n06_normalizationRegion_meets_core hborder h04)
+    n06_exists_radial_unit_source_on_open h04.1.normalizationOpen (n06_normalizationRegion_meets_core hborder h04)
   have hm : HeightMember D T (3 / 4 : ℝ) (fun p : PolarPoint => g p.1) :=
     spaces_heightMember_of_compact_radial hT hg hJ hJD hzero (3 / 4 : ℝ)
   obtain ⟨ψ, hψ⟩ := (hS.1 (3 / 4 : ℝ)).2.2.2.2.1 (fun p : PolarPoint => g p.1) hm

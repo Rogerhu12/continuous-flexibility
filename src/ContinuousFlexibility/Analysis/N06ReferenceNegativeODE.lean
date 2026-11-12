@@ -88,8 +88,9 @@ theorem N06ReferenceNegativeInverseData.reciprocalHeight_ode
   have hz := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
   have hA := (n06_N04_qualitative_parts h.2.2.2.2).1
-  have hc := hA.2.2.2.2.2.2.2.1 (C.referenceState, 0) hz hs i
-  have hx : x ∈ physicalPieceOpen S K i := hc.2.1 hp
+  have hc := hA.charts (C.referenceState, 0) hz hs i
+  rw [hA.referenceDomain i] at hc
+  have hx : x ∈ referencePhysicalPieceOpen S K i := hc.2.1 hp
   have hxp : K.chart (C.referenceState, 0) i x = (y, θ) := hc.2.2.2.1 _ hp
   have hchart : ContinuousAt (K.chart (C.referenceState, 0) i) x :=
     (hc.2.2.2.2.1.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hx)).continuousAt
@@ -165,7 +166,7 @@ theorem N06ReferenceNegativeInverseData.secondDerivative_bound_closed
   have hW₂ : ContDiffAt ℝ ∞ (deriv (deriv P.reciprocalHeight)) y :=
     (hreg.1.derivWithin (m := ∞) (by simp)).derivWithin (m := ∞) (by simp)
   have hclosure : y ∈ closure (Ioo (K.left i) (K.right i)) := by
-    rw [closure_Ioo (h.2.2.2.2.2.2.2.1 i).2.1.ne]
+    rw [closure_Ioo (h.2.2.2.2.1.referenceBounds i).2.1.ne]
     exact hy
   haveI : NeBot (𝓝[Ioo (K.left i) (K.right i)] y) :=
     mem_closure_iff_nhdsWithin_neBot.mp hclosure
@@ -192,7 +193,7 @@ theorem n06_referenceNegative_reciprocalHeight_secondDerivative_bound
           (M * T.E0 (T.sample (K.cell i)) ^ M) * P.reciprocalHeight y := by
   have h01 := h.1.1.1
   have hz := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
-  rcases h.2.2.2.2 with ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, hbounds, _⟩
+  have hbounds := h.2.2.2.2.2.2.1
   obtain ⟨M, hM, hbound⟩ := hbounds 0
   refine ⟨M, hM, fun i hi P y hy => P.secondDerivative_bound_closed hT hS h hi ?_ hy⟩
   intro t ht

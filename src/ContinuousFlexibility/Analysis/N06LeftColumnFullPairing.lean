@@ -60,7 +60,8 @@ theorem n06_chiLeft_operator_twoHalf_integrable
       divergenceOperator (L.coefficients z) φ (p + (0, Real.pi)))
         (radialCore D ×ˢ Ioc (0 : ℝ) Real.pi) := by
   obtain ⟨J, hJ, hJD, hzero⟩ := hφ.2.2
-  have hfinite := n06_controlledReferencePieces_finite_on_compact h01.1.1 hcoords hJ hJD
+  have hfinite := n06_currentPieces_finite_on_compact h01.1.1 h01.2.2.2.1
+    hcoords h04 hz hs hJ hJD
   have hLzero : ∀ r, r ∉ J → ∀ θ,
       divergenceOperator (L.coefficients z) φ (r, θ) = 0 :=
     fun r hr θ => n06_divergenceOperator_zero_off_radial_support
@@ -103,9 +104,9 @@ theorem n06_chiLeft_full_pairing_eq_half_average
   refine hmean.trans (n06_sourceMean_congr_radial_ae hab ?_)
   filter_upwards [n06_current_divergence_average_radial_ae hT hS h01 h03 h04 hz hs hφ]
     with r hr
-  apply congrArg angularMean
-  funext θ
-  rw [hr θ]
+  apply n06_angularMean_congr_ae
+  filter_upwards [hr] with θ hθ
+  rw [hθ]
 
 /-- The actual operator pairing of a half-period test is unchanged by
 its even projection. The angular integrability follows from N04 and the
@@ -135,11 +136,11 @@ theorem n06_chiLeft_half_pairing_evenPart
     change ((volume : Measure ℝ).prod volume).restrict _ = _
     rw [← Measure.prod_restrict]
   rw [IntegrableOn, hmeasure] at hI
-  have hreflect : ∀ᵐ r ∂volume.restrict (radialCore D), ∀ θ,
+  have hreflect : ∀ᵐ r ∂volume.restrict (radialCore D), ∀ᵐ θ ∂volume,
       divergenceOperator (L.coefficients z) (n06EvenPart φ) (r, θ) =
         (divergenceOperator (L.coefficients z) φ (r, θ) +
           divergenceOperator (L.coefficients z) φ (r, -θ)) / 2 :=
-    n06_physicalPieces_radial_ae h04 (fun m _ hp =>
+    n06_physicalPieces_radial_ae h04 hz hs (fun m _ hp =>
       n06_current_divergence_reflectionAverage_on_piece h03 h04 hz hs (hpositive m) hφ.1 hp)
   apply n06_sourceMean_congr_radial_ae h01.1.1.choose_spec.1.2.1.le
   filter_upwards [hI.prod_right_ae,
@@ -148,19 +149,20 @@ theorem n06_chiLeft_half_pairing_evenPart
   have hint' : IntervalIntegrable (fun θ => S.chiLeft r *
       divergenceOperator (L.coefficients z) φ (r, θ)) volume 0 Real.pi :=
     (intervalIntegrable_iff_integrableOn_Ioc_of_le Real.pi_pos.le).mpr hint
-  have hperiod' : Function.Periodic (fun θ => S.chiLeft r *
-      divergenceOperator (L.coefficients z) φ (r, θ)) Real.pi := by
-    intro θ
-    exact congrArg (fun t : ℝ => S.chiLeft r * t) (hperiod θ)
+  have hperiod' : (fun θ => S.chiLeft r *
+      divergenceOperator (L.coefficients z) φ (r, θ + Real.pi)) =ᵐ[volume]
+        (fun θ => S.chiLeft r * divergenceOperator (L.coefficients z) φ (r, θ)) := by
+    filter_upwards [hperiod] with θ hθ
+    exact congrArg (fun t : ℝ => S.chiLeft r * t) hθ
   symm
   calc
     _ = angularMean (fun θ => (S.chiLeft r * divergenceOperator (L.coefficients z) φ (r, θ) +
         S.chiLeft r * divergenceOperator (L.coefficients z) φ (r, -θ)) / 2) := by
-      apply congrArg angularMean
-      funext θ
-      rw [heven θ]
+      apply n06_angularMean_congr_ae
+      filter_upwards [heven] with θ hθ
+      rw [hθ]
       ring
-    _ = _ := n06_angularMean_reflectionAverage hperiod' hint'
+    _ = _ := n06_angularMean_reflectionAverage_ae hperiod' hint'
 
 /-- The exact full-period physical left-column identity for every
 original RadialTest. Positive canonical regularity is the qualitative

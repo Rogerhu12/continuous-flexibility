@@ -11,8 +11,9 @@ with the true first jets of the reconstructed finite field identifies its
 physical Green flux with the existing coordinate principal density.
 
 One arbitrary root radius, canonical endpoint, and orientation are used
-throughout. No value of the totalized inverse chart at a boundary is used,
-and no smoothness of the physical coefficient fields is assumed.
+throughout. The physical root circle belongs to the actual closed domain;
+no fixed radial shape of a moving negative half is required. No smoothness
+of the physical coefficient fields is assumed.
 -/
 
 noncomputable section
@@ -131,26 +132,27 @@ theorem n06_current_root_test_firstJets
     (Q : N06CurrentHeightTestTraces S K z m φ)
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
-    (hφ : ContDiff ℝ ∞ φ) (hr : r ∈ Icc (K.physicalLeft m) (K.physicalRight m))
+    (hφ : ContDiff ℝ ∞ φ)
+    (hx : ∀ θ : ℝ, (r, θ) ∈ physicalPieceClosed S K z m)
     {θ : ℝ} (hθ : θ ∈ Icc (0 : ℝ) Real.pi) :
     φ (r, θ) = H θ * Q.value (y, β θ) ∧
       radialPartial φ (r, θ) = Hr θ * Q.value (y, β θ) +
         H θ * ((σ * ρ θ) * Q.radial (y, β θ) + κ θ * Q.angular (y, β θ)) ∧
       angularPartial φ (r, θ) = deriv H θ * Q.value (y, β θ) +
         H θ * deriv β θ * Q.angular (y, β θ) := by
-  have hb := h04.2.2.2.2.2.2.2.2.1 z hz hs m (r, θ) hr
+  have hb := (h04.1.boundary z hz hs m).2.2.2.2.1 (r, θ) (hx θ)
   have hJ : planeJacobian (K.chart z m) (r, θ) ≠ 0 := hb.2.2.1
   have hh : K.height z m (r, θ) ≠ 0 := hb.2.2.2.ne'
   have hH : H θ ≠ 0 := by simpa only [J.height_value θ] using hh
   have hvalue : Q.value (y, β θ) = φ (r, θ) / H θ := by
     simpa only [J.chart_value θ, J.height_value θ] using
-      Q.physical_value (r, θ) ⟨hr, hθ⟩
+      Q.physical_value (r, θ) ⟨hx θ, mem_univ _, hθ⟩
   have hrad : Q.radial (y, β θ) = n06InverseChartDerivative (K.chart z m) (1, 0)
       (fun q => φ q / K.height z m q) (r, θ) := by
-    simpa only [J.chart_value θ] using Q.physical_radial (r, θ) ⟨hr, hθ⟩
+    simpa only [J.chart_value θ] using Q.physical_radial (r, θ) ⟨hx θ, mem_univ _, hθ⟩
   have hang : Q.angular (y, β θ) = n06InverseChartDerivative (K.chart z m) (0, 1)
       (fun q => φ q / K.height z m q) (r, θ) := by
-    simpa only [J.chart_value θ] using Q.physical_angular (r, θ) ⟨hr, hθ⟩
+    simpa only [J.chart_value θ] using Q.physical_angular (r, θ) ⟨hx θ, mem_univ _, hθ⟩
   have hfr := n06_fderiv_from_inverseChartDerivatives (K.chart z m)
     (fun q => φ q / K.height z m q) (1, 0) hJ
   have hft := n06_fderiv_from_inverseChartDerivatives (K.chart z m)
@@ -183,7 +185,8 @@ theorem n06_current_root_green_firstJets
     (Q : N06CurrentHeightTestTraces S K z m φ)
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
-    (hφ : ContDiff ℝ ∞ φ) (hr : r ∈ Icc (K.physicalLeft m) (K.physicalRight m))
+    (hφ : ContDiff ℝ ∞ φ)
+    (hx : ∀ θ : ℝ, (r, θ) ∈ physicalPieceClosed S K z m)
     {θ : ℝ} (hθ : θ ∈ Icc (0 : ℝ) Real.pi)
     (A : SymmetricCoefficients) {W : PolarPoint → ℝ}
     (hW : DifferentiableAt ℝ W (y, β θ)) :
@@ -193,7 +196,7 @@ theorem n06_current_root_green_firstJets
           (Q.value (y, β θ) * radialPartial W (y, β θ) - W (y, β θ) * Q.radial (y, β θ)) +
         (A.a (r, θ) * κ θ + A.b (r, θ) * deriv β θ) *
           (Q.value (y, β θ) * angularPartial W (y, β θ) - W (y, β θ) * Q.angular (y, β θ))) := by
-  have ht := n06_current_root_test_firstJets J Q h04 hz hs hφ hr hθ
+  have ht := n06_current_root_test_firstJets J Q h04 hz hs hφ hx hθ
   unfold greenNormalFlux symmetricNormalFlux
   rw [J.reconstruction_radial θ hW, J.reconstruction_angular θ hW,
     ht.1, ht.2.1, ht.2.2]
@@ -209,7 +212,8 @@ theorem n06_current_root_green_density
     (Q : N06CurrentHeightTestTraces S K z m φ)
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
-    (hφ : ContDiff ℝ ∞ φ) (hr : r ∈ Icc (K.physicalLeft m) (K.physicalRight m))
+    (hφ : ContDiff ℝ ∞ φ)
+    (hx : ∀ θ : ℝ, (r, θ) ∈ physicalPieceClosed S K z m)
     {θ : ℝ} (hθ : θ ∈ Icc (0 : ℝ) Real.pi)
     (A : SymmetricCoefficients) {W : PolarPoint → ℝ}
     (hW : DifferentiableAt ℝ W (y, β θ)) :
@@ -220,8 +224,8 @@ theorem n06_current_root_green_density
           (Q.value (y, β θ) * radialPartial W (y, β θ) - W (y, β θ) * Q.radial (y, β θ)) +
         (coordinatePrincipalDensity A (K.chart z m) (K.height z m)).b (r, θ) *
           (Q.value (y, β θ) * angularPartial W (y, β θ) - W (y, β θ) * Q.angular (y, β θ))) := by
-  have hJ := (h04.2.2.2.2.2.2.2.2.1 z hz hs m (r, θ) hr).2.2.1
-  rw [n06_current_root_green_firstJets J Q h04 hz hs hφ hr hθ A hW,
+  have hJ := ((h04.1.boundary z hz hs m).2.2.2.2.1 (r, θ) (hx θ)).2.2.1
+  rw [n06_current_root_green_firstJets J Q h04 hz hs hφ hx hθ A hW,
     (J.principal_density_row A θ).1, (J.principal_density_row A θ).2]
   field_simp [abs_ne_zero.mpr hJ] <;> ring
 

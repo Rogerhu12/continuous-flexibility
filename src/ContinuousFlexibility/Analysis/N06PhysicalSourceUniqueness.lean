@@ -32,11 +32,10 @@ theorem n06_canonicalSource_periodic_slice
     Function.Periodic (fun θ => canonicalSource S K z m f (y, θ)) Real.pi := by
   intro θ
   have hp : (y, θ) ∈ canonicalOpen S K m := ⟨hy, mem_univ _⟩
-  have hc := hN04.2.2.2.2.2.2.2.1 z hz hs m
+  have hc := hN04.1.charts z hz hs m
   have hpI := hc.2.1 hp
   have hh := (hc.2.2.2.2.2.2.2 _ hpI).2.2.2
-  have hj := n06_planeJacobian_chart_lift hc.2.2.2.2.1
-    (fun q hq => (hc.2.2.2.2.2.2.2 q hq).2.2.1) hpI
+  have hj := n06_planeJacobian_currentChart_lift hN04 hz hs m hpI
   have hlift : K.inverseChart z m (y, θ + Real.pi) =
       K.inverseChart z m (y, θ) + (0, Real.pi) := by
     simpa only [Prod.mk_add_mk, add_zero] using
@@ -54,14 +53,14 @@ theorem n06_canonicalSource_ae_injective_piece
     (hf : Function.Periodic f (0, Real.pi)) (hg : Function.Periodic g (0, Real.pi))
     (heq : canonicalSource S K z m f =ᵐ[canonicalMeasure S K m]
       canonicalSource S K z m g) :
-    f =ᵐ[volume.restrict (physicalPieceOpen S K m)] g := by
+    f =ᵐ[volume.restrict (physicalPieceOpen S K z m)] g := by
   have hall := n06_periodic_ae_eq_on_strip
     (fun y hy => n06_canonicalSource_periodic_slice hN04 hz hs m hf hy)
     (fun y hy => n06_canonicalSource_periodic_slice hN04 hz hs m hg hy) heq
   have hphysical := n06_canonical_ae_pullback hN04 hz hs m hall
-  have hc := hN04.2.2.2.2.2.2.2.1 z hz hs m
+  have hc := hN04.1.charts z hz hs m
   filter_upwards [hphysical,
-    ae_restrict_mem (measurableSet_Ioo.prod MeasurableSet.univ)] with p hp hpU
+    ae_restrict_mem (hN04.1.domains z hz hs m).1.measurableSet] with p hp hpU
   have hleft := hc.2.2.1 p hpU
   have hh := (hc.2.2.2.2.2.2.2 p hpU).1.ne'
   have hj := abs_ne_zero.mpr (hc.2.2.2.2.2.2.2 p hpU).2.1
@@ -75,17 +74,19 @@ theorem n06_canonicalSource_ae_injective_piece
   exact (mul_right_inj' hh).mp ((div_left_inj' hj).mp hp)
 
 theorem n06_physical_ae_eq_of_pieces
-    (hN04 : N04Properties D T S C L K base loss ε) {f g : PolarPoint → ℝ}
-    (heq : ∀ m, f =ᵐ[volume.restrict (physicalPieceOpen S K m)] g) :
+    (hN04 : N04Properties D T S C L K base loss ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1) {f g : PolarPoint → ℝ}
+    (heq : ∀ m, f =ᵐ[volume.restrict (physicalPieceOpen S K z m)] g) :
     f =ᵐ[volume.restrict (annularOpen D)] g := by
-  have hall : ∀ᵐ p ∂volume, ∀ m, p ∈ physicalPieceOpen S K m → f p = g p := by
+  have hall : ∀ᵐ p ∂volume, ∀ m, p ∈ physicalPieceOpen S K z m → f p = g p := by
     apply ae_all_iff.mpr
     intro m
-    exact (ae_restrict_iff' (measurableSet_Ioo.prod MeasurableSet.univ)).mp (heq m)
+    exact (ae_restrict_iff' (hN04.1.domains z hz hs m).1.measurableSet).mp (heq m)
   have hall' : ∀ᵐ p ∂volume.restrict (annularOpen D),
-      ∀ m, p ∈ physicalPieceOpen S K m → f p = g p :=
+      ∀ m, p ∈ physicalPieceOpen S K z m → f p = g p :=
     hall.filter_mono ae_restrict_le
-  filter_upwards [hall', n06_physical_piece_cover_ae hN04] with p hp hcover
+  filter_upwards [hall', n06_physical_piece_cover_ae hN04 hz hs] with p hp hcover
   obtain ⟨m, hm⟩ := hcover
   exact hp m hm
 
@@ -96,7 +97,7 @@ theorem n06_canonicalSource_ae_injective
     (hf : Function.Periodic f (0, Real.pi)) (hg : Function.Periodic g (0, Real.pi))
     (heq : ∀ m, canonicalSource S K z m f =ᵐ[canonicalMeasure S K m]
       canonicalSource S K z m g) : f =ᵐ[volume.restrict (annularOpen D)] g :=
-  n06_physical_ae_eq_of_pieces hN04
+  n06_physical_ae_eq_of_pieces hN04 hz hs
     (fun m => n06_canonicalSource_ae_injective_piece hN04 hz hs m hf hg (heq m))
 
 /-- The named source reconstructed from the original canonical L² source

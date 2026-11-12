@@ -87,7 +87,8 @@ theorem n06Volume_exists_current_leftColumnSource
         canonicalSource S K z m (n06CurrentLeftColumn S L z) := by
   obtain ⟨J, hJ, hJD, _hpos, hzero⟩ :=
     n06_currentLeftColumns_commonSupport (L := L) hS
-  exact n06Volume_exists_current_compact_source h01.1.1 hT hV h04 hcoordinates hz hs
+  exact n06Volume_exists_current_compact_source h01.1.1 h01.2.2.2.1
+    hT hV h04 hcoordinates hz hs
     γ t b (n06_currentLeftColumn_contDiff hT hS h01 h03 hz hs)
     (n06_currentLeftColumn_periodic hS h03 hz hs)
     (n06_currentLeftColumn_even hT hS h01 h03 hz hs)
@@ -110,7 +111,8 @@ theorem n06Volume_exists_current_leftDifferenceSource
         canonicalSource S K z m (n06LeftColumnDifference D S L z) := by
   obtain ⟨J, hJ, hJD, hzero⟩ := n06_leftColumnDifferences_commonSupport hS h01 h03
   have hf := n06_leftColumnDifference_regular hT hS h01 h03 hz hs
-  exact n06Volume_exists_current_compact_source h01.1.1 hT hV h04 hcoordinates hz hs
+  exact n06Volume_exists_current_compact_source h01.1.1 h01.2.2.2.1
+    hT hV h04 hcoordinates hz hs
     γ t b hf.1 hf.2.1 hf.2.2 ⟨J, hJ, hJD, hzero z⟩
 
 /-- The unestimated term is exactly the current coordinate transform of

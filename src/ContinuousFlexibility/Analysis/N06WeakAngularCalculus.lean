@@ -180,9 +180,11 @@ theorem WeakCanonicalAngularDerivative.n06_successive
 
 /-- A continuous field is square-integrable on each actual finite
 canonical cylinder, irrespective of its behavior off that cylinder. -/
-theorem n06_memLp_canonical_of_continuous
+theorem n06_memLp_canonical_of_continuousOn_closed
     {S : PhysicalSpacesData} {K : CanonicalData S} (m : ℕ)
-    {φ : PolarPoint → ℝ} (hφ : Continuous φ) :
+    {φ : PolarPoint → ℝ}
+    (hφ : ContinuousOn φ
+      (Icc (K.left m) (K.right m) ×ˢ Icc (0 : ℝ) Real.pi)) :
     MemLp φ 2 (canonicalMeasure S K m) := by
   let Q : Set PolarPoint := Icc (K.left m) (K.right m) ×ˢ Icc (0 : ℝ) Real.pi
   have hQ : IsCompact Q := isCompact_Icc.prod isCompact_Icc
@@ -191,10 +193,18 @@ theorem n06_memLp_canonical_of_continuous
   letI : IsFiniteMeasure (canonicalMeasure S K m) := ⟨by
     rw [canonicalMeasure, Measure.restrict_apply_univ]
     exact (measure_mono hsubset).trans_lt hQ.measure_lt_top⟩
-  obtain ⟨M, hM⟩ := hQ.bddAbove_image hφ.norm.continuousOn
-  apply MemLp.of_bound hφ.aestronglyMeasurable M
+  obtain ⟨M, hM⟩ := hQ.bddAbove_image hφ.norm
+  have hmeas : AEStronglyMeasurable φ (canonicalMeasure S K m) :=
+    (hφ.mono hsubset).aestronglyMeasurable (measurableSet_Ioo.prod measurableSet_Ioc)
+  apply MemLp.of_bound hmeas M
   filter_upwards [ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp
   exact hM ⟨p, hsubset hp, rfl⟩
+
+theorem n06_memLp_canonical_of_continuous
+    {S : PhysicalSpacesData} {K : CanonicalData S} (m : ℕ)
+    {φ : PolarPoint → ℝ} (hφ : Continuous φ) :
+    MemLp φ 2 (canonicalMeasure S K m) :=
+  n06_memLp_canonical_of_continuousOn_closed m hφ.continuousOn
 
 theorem CanonicalTest.n06_memLp
     {S : PhysicalSpacesData} {K : CanonicalData S} {m : ℕ}

@@ -63,8 +63,8 @@ theorem n06_canonicalNuDifference_eq_currentDifference
         nuColumnField D S C (C.referenceState, 0) q) p := by
   have hb : RadialTrueBorder D := h01.1.2.2.2.1
   have hgeom : RadialProfileGeometry D := h01.1.1.choose_spec.1
-  have hx := (h04.2.2.2.2.2.2.2.1 z hz hs m).2.1 hp
-  have hxD := (h04.2.2.2.1 m).2.2 hx.1
+  have hx := (h04.1.charts z hz hs m).2.1 hp
+  have hxD := ((h04.1.domains z hz hs m).2.2.1 hx).1
   have hν := n06_nuColumn_reference
     (p := K.inverseChart z m p) hgeom.2.2.1.1 hb.1 hgeom.2.2.2.1.1 h01.2.2.1
     (hgeom.1.trans hxD.1).ne'
@@ -110,7 +110,7 @@ def N06CurrentNuSpatialGeometryBound (D : ReferenceData) (S : PhysicalSpacesData
   ∀ z : AnnularState S × ℝ,
     z ∈ stateNeighborhood S C base ε → stateSector S z.1 →
     stateGrading S (n + 4) (z.1 - C.referenceState) + |z.2| ≤ 1 →
-    ∀ m x, x ∈ physicalPieceOpen S K m → x.1 ∈ tsupport D.chi →
+    ∀ m x, x ∈ physicalPieceOpen S K z m → x.1 ∈ tsupport D.chi →
     ∀ k, k ≤ n →
       ‖iteratedFDeriv ℝ k
         (fun y => K.height z m y / |planeJacobian (K.chart z m) y|) x‖ ≤ B ∧
@@ -147,25 +147,24 @@ theorem n06_currentNuDifference_angularJets_bound_of_spatial_geometry
   let x : PolarPoint := K.inverseChart z m p
   let δ : ℝ := stateGrading S (n + 4) (z.1 - C.referenceState) + |z.2|
   have hδ : 0 ≤ δ := add_nonneg (apply_nonneg _ _) (abs_nonneg _)
-  have hx : x ∈ physicalPieceOpen S K m := (h04.2.2.2.2.2.2.2.1 z hz hs m).2.1 hp
-  have hxp : x ∈ annularOpen D := ⟨(h04.2.2.2.1 m).2.2 hx.1, mem_univ _⟩
+  have hc := h04.1.charts z hz hs m
+  have hd := h04.1.domains z hz hs m
+  have hx : x ∈ physicalPieceOpen S K z m := hc.2.1 hp
+  have hxp : x ∈ annularOpen D := hd.2.2.1 hx
   have hid := n06_currentNuDifference_angularJet_eq_physical hT hS h01 h04 hz hs m j hp
   by_cases hborder : x.1 ∈ tsupport D.chi
-  · have hb := h04.2.2.2.2.2.2.2.2.1 z hz hs m
-    have hF : ContDiffOn ℝ ∞ (K.chart z m) (physicalPieceOpen S K m) := by
-      intro y hy
-      exact (hb y (mem_Icc_of_Ioo hy.1)).1.contDiffWithinAt
-    have hH : ContDiffOn ℝ ∞ (K.height z m) (physicalPieceOpen S K m) := by
-      intro y hy
-      exact (hb y (mem_Icc_of_Ioo hy.1)).2.1.contDiffWithinAt
-    have hJ : ∀ y ∈ physicalPieceOpen S K m, planeJacobian (K.chart z m) y ≠ 0 :=
-      fun y hy => (hb y (mem_Icc_of_Ioo hy.1)).2.2.1
+  · have hF : ContDiffOn ℝ ∞ (K.chart z m) (physicalPieceOpen S K z m) :=
+      hc.2.2.2.2.1
+    have hH : ContDiffOn ℝ ∞ (K.height z m) (physicalPieceOpen S K z m) :=
+      hc.2.2.2.2.2.2.1
+    have hJ : ∀ y ∈ physicalPieceOpen S K z m, planeJacobian (K.chart z m) y ≠ 0 :=
+      fun y hy => (hc.2.2.2.2.2.2.2 y hy).2.1
     have hf : ContDiff ℝ ∞ f :=
       (n06_nuColumn_contDiff hT hS h01 hz hs).sub
         (n06_nuColumn_contDiff hT hS h01
           (n05_referenceState_mem h01.2.1) (n05_referenceState_sector h01.2.2.1))
     have hg := hgeometry z hz hs hsmall m x hx hborder
-    have h := n06PhysicalSourceAngularJet_spatial_bound (isOpen_Ioo.prod isOpen_univ)
+    have h := n06PhysicalSourceAngularJet_spatial_bound hd.1
       hF hH hJ hf.contDiffOn n hx hB (mul_nonneg hQ hδ)
       (fun k hk => (hg k hk).1) (fun k hk => (hg k hk).2)
       (fun k hk => hphysical z hz hs hsmall k hk x hxp) j hj

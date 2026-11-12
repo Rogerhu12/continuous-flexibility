@@ -57,14 +57,14 @@ theorem n06_namedPhysicalWeakRelation_of_piecewise_limit
   have h01 : N01Properties D T S C base loss ε := hThrough.1.1.1
   have h04 : N04Properties D T S C L K base loss ε := hThrough.2.2.2.2
   have hab : D.a ≤ D.b := by
-    obtain ⟨x, hxL, hxR⟩ := exists_between (h04.2.2.2.1 0).1
-    have hx := (h04.2.2.2.1 0).2.2 ⟨hxL, hxR⟩
+    obtain ⟨x, hxL, hxR⟩ := exists_between (h04.1.referenceBounds 0).1
+    have hx := (h04.1.referenceBounds 0).2.2 ⟨hxL, hxR⟩
     exact (hx.1.trans hx.2).le
   obtain ⟨J, hJ, hJD, hφsupport, hLsupport, htests⟩ :=
     n06_current_physical_tests hT hS hThrough hz hs hφ
-  have hfinite : {m : ℕ |
-      (Ioo (K.physicalLeft m) (K.physicalRight m) ∩ J).Nonempty}.Finite :=
-    n06_controlledReferencePieces_finite_on_compact h01.1.1 hcoordinates hJ hJD
+  have hfinite : (n06PhysicalSupportPieces K z J).Finite :=
+    n06_currentPieces_finite_on_compact h01.1.1 h01.2.2.2.1 hcoordinates
+      h04 hz hs hJ hJD
   have hheight := n06_tendsto_physicalHeight_pairing hS h04 hz hs
     hU hleft hfinite (g := divergenceOperator (L.coefficients z) φ)
     (fun m => (htests m).1) (fun m => (htests m).2.1) hLsupport

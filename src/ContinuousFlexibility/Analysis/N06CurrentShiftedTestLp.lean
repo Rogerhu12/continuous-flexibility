@@ -85,12 +85,14 @@ private theorem canonicalTransforms_shift_pi
       canonicalHeight S K z m f (p + (0, Real.pi)) ∧
     canonicalSource S K z m (fun q => f (q + (0, Real.pi))) p =
       canonicalSource S K z m f (p + (0, Real.pi)) := by
-  have hc := h04.2.2.2.2.2.2.2.1 z hz hs m
+  have hc := h04.1.charts z hz hs m
   have hx := hc.2.1 hp
-  have hG := inverseChart_periodic_of_chart_periodic hc.2.1 hc.2.2.1 hc.2.2.2.1
+  have hG := inverseChart_periodic_of_chart_periodic_on hc.2.1
+    (fun q hq => ((h04.1.domains z hz hs m).2.2.2.1 q).mpr hq) hc.2.2.1 hc.2.2.2.1
     (fun q hq => (hc.2.2.2.2.2.2.2 q hq).2.2.1) hp
   have hH := (hc.2.2.2.2.2.2.2 _ hx).2.2.2
-  have hJ := n06_planeJacobian_chart_lift hc.2.2.2.2.1
+  have hJ := n06_planeJacobian_chart_lift_on (h04.1.domains z hz hs m).1 hc.2.2.2.2.1
+    (fun q hq => ((h04.1.domains z hz hs m).2.2.2.1 q).mpr hq)
     (fun q hq => (hc.2.2.2.2.2.2.2 q hq).2.2.1) hx
   constructor <;> simp only [canonicalHeight, canonicalSource, hG, hH, hJ]
 

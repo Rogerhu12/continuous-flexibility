@@ -165,7 +165,7 @@ theorem n06Volume_referenceScalarColumns
     (γ t : ℝ) (b : ℕ) :
     ∃ J : Set ℝ, IsCompact J ∧ J ⊆ radialCore D ∧
       ∀ hfinite : Set.Finite {m : ℕ |
-        (Ioo (K.physicalLeft m) (K.physicalRight m) ∩ J).Nonempty},
+        (physicalPieceOpen S K z m ∩ (J ×ˢ (univ : Set ℝ))).Nonempty},
       ∀ δ : ℝ, 0 ≤ δ →
       (∀ i : Fin 3, ∀ m ∈ hfinite.toFinset, ∀ j, j ≤ b →
         ∀ p ∈ canonicalOpen S K m,

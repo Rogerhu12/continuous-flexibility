@@ -100,7 +100,7 @@ theorem N06CurrentHeightTestTraces.compactPullback_closed
   let F : Set PolarPoint := Icc (K.left m) (K.right m) ×ˢ Icc (0 : ℝ) Real.pi
   have hsub : O ⊆ F := fun _ hp => ⟨mem_Icc_of_Ioo hp.1, hp.2.1.le, hp.2.2⟩
   have hcl : F ⊆ closure O := by
-    simpa only [O, F, closure_prod_eq, closure_Ioo (h04.2.2.2.1 m).2.1.ne,
+    simpa only [O, F, closure_prod_eq, closure_Ioo (h04.1.referenceBounds m).2.1.ne,
       closure_Ioc Real.pi_pos.ne] using (Subset.rfl : F ⊆ F)
   have hval : EqOn Q.value φ O := by
     intro p hp

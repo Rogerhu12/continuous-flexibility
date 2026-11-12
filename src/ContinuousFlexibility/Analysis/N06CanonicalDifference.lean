@@ -58,7 +58,7 @@ theorem n06_positive_dividedDifference_reference
     (K.dividedDifference (C.referenceState, 0) m).a p = 0 ∧
     (K.dividedDifference (C.referenceState, 0) m).b p = 0 ∧
     (K.dividedDifference (C.referenceState, 0) m).c p = 0 := by
-  obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, hcubic, _, _⟩ := hN04
+  have hcubic := hN04.2.1.2.2.2.2
   obtain ⟨ha, hb, hc⟩ := hcubic (C.referenceState, 0)
     (n06_reference_neighborhood C base hε) href m hm p hp
   have hd : ((p.1 - K.left m) * (K.right m - p.1)) ^ 3 ≠ 0 :=
@@ -100,7 +100,8 @@ theorem n06_negative_canonicalOperator_difference
     canonicalOperator S K L z m W p -
         canonicalOperator S K L (C.referenceState, 0) m W p =
       (K.potential z m p - K.potential (C.referenceState, 0) m p) * W p := by
-  obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, hop, hneg, _, _, _⟩ := hN04
+  have hop := hN04.2.1.2.2.1
+  have hneg := hN04.2.1.2.2.2.1
   have hzero := n06_reference_neighborhood C base hε
   have hnear : ∀ᶠ q : PolarPoint in 𝓝 p, q ∈ canonicalOpen S K m :=
     (isOpen_Ioo.prod isOpen_univ).mem_nhds hp

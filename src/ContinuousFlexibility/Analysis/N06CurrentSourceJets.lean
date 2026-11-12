@@ -2,6 +2,7 @@ import ContinuousFlexibility.Analysis.N06CurrentInverseTestJets
 import ContinuousFlexibility.Analysis.N06FiniteSourceGeometry
 import ContinuousFlexibility.Analysis.N06WeakAngularLeibniz
 import ContinuousFlexibility.Analysis.N06CanonicalProperties
+import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
 
 /-!
 # Actual angular source jets in the current coordinates
@@ -9,14 +10,14 @@ import ContinuousFlexibility.Analysis.N06CanonicalProperties
 The angular inverse derivative is the adjugate vector field of the actual
 forward chart. Iterating that physical vector field on `H * f / |J|`
 produces the actual angular jets of the current canonical source. N04
-gives smoothness of every one of these physical fields at the closed
-physical piece, including its endpoints. Compactness therefore bounds
-their pullbacks on the measured half-period tile. For a periodic source,
-the same bound holds at every angle in the open canonical cylinder.
+gives smoothness of every one of these physical fields on the actual
+closed physical domain. The genuine boundary inverse germs make their
+pullbacks continuous on a fixed compact canonical tile. For a periodic
+source, the same bound holds at every angle in the open canonical cylinder.
 
-No value or regularity of the totalized inverse at a canonical boundary
-is used. The constants here may depend on the current state, the piece,
-the source and the finite angular order; no uniform smallness is claimed.
+The actual inverse on the closed canonical cylinder is used throughout.
+The constants here may depend on the current state, the piece, the source
+and the finite angular order; no uniform smallness is claimed.
 -/
 
 noncomputable section
@@ -82,8 +83,8 @@ theorem n06_current_canonicalSource_angularJet
     mixedDerivative 0 j (canonicalSource S K z m f) p =
       n06PhysicalSourceAngularJet (K.chart z m) (K.height z m) f j
         (K.inverseChart z m p) := by
-  have hc := h04.2.2.2.2.2.2.2.1 z hz hs m
-  have hb := h04.2.2.2.2.2.2.2.2.1 z hz hs m
+  have hc := h04.1.charts z hz hs m
+  have hb := (h04.1.boundary z hz hs m).2.2.2.2.1
   have hsource : ContDiffOn ℝ ∞ (canonicalSource S K z m f)
       (canonicalOpen S K m) :=
     n06_canonicalSource_contDiffOn (n06_N04_qualitative_parts h04).1
@@ -98,9 +99,8 @@ theorem n06_current_canonicalSource_angularJet
             (K.inverseChart z m q)) := by
         filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds hp] with q hq
         exact ih hq
-      have hx : (K.inverseChart z m p).1 ∈
-          Icc (K.physicalLeft m) (K.physicalRight m) :=
-        mem_Icc_of_Ioo (hc.2.1 hp).1
+      have hx : K.inverseChart z m p ∈ physicalPieceClosed S K z m :=
+        subset_closure (hc.2.1 hp)
       have hg := n06PhysicalSourceAngularJet_contDiffAt
         (hb _ hx).1 (hb _ hx).2.1 (hb _ hx).2.2.1 hf.contDiffAt j
       calc
@@ -128,16 +128,22 @@ theorem n06_current_canonicalSource_angularJets_half_bounded
         |mixedDerivative 0 j (canonicalSource S K z m f) p| ≤ B := by
   classical
   let Q : Set PolarPoint :=
-    Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ Icc (0 : ℝ) Real.pi
+    Icc (K.left m) (K.right m) ×ˢ Icc (0 : ℝ) Real.pi
   have hQ : IsCompact Q := isCompact_Icc.prod isCompact_Icc
-  have hb := h04.2.2.2.2.2.2.2.2.1 z hz hs m
+  have hb := h04.1.boundary z hz hs m
   have hcontinuous (j : ℕ) :
-      ContinuousOn (n06PhysicalSourceAngularJet (K.chart z m) (K.height z m) f j) Q := by
-    intro x hx
-    exact (n06PhysicalSourceAngularJet_contDiffAt
-      (hb x hx.1).1 (hb x hx.1).2.1 (hb x hx.1).2.2.1 hf.contDiffAt j).continuousAt.continuousWithinAt
-  have hbound : ∀ j : Fin (b + 1), ∃ c : ℝ, ∀ x ∈ Q,
-      |n06PhysicalSourceAngularJet (K.chart z m) (K.height z m) f j.val x| ≤ c := by
+      ContinuousOn (fun p => n06PhysicalSourceAngularJet
+        (K.chart z m) (K.height z m) f j (K.inverseChart z m p)) Q := by
+    intro p hp
+    have hpclosed : p ∈ canonicalClosed S K m := ⟨hp.1, mem_univ _⟩
+    have hx := hb.2.1 hpclosed
+    have hxdata := hb.2.2.2.2.1 _ hx
+    have hG := n04b_inverseChart_contDiffAt_closed h04.1 hz hs m hpclosed
+    exact ((n06PhysicalSourceAngularJet_contDiffAt hxdata.1 hxdata.2.1
+      hxdata.2.2.1 hf.contDiffAt j).comp p hG).continuousAt.continuousWithinAt
+  have hbound : ∀ j : Fin (b + 1), ∃ c : ℝ, ∀ p ∈ Q,
+      |n06PhysicalSourceAngularJet (K.chart z m) (K.height z m) f j.val
+        (K.inverseChart z m p)| ≤ c := by
     intro j
     obtain ⟨c, hc⟩ := hQ.bddAbove_image (hcontinuous j.val).abs
     exact ⟨c, fun x hx => hc ⟨x, hx, rfl⟩⟩
@@ -148,9 +154,7 @@ theorem n06_current_canonicalSource_angularJets_half_bounded
   refine ⟨B, by dsimp only [B]; linarith, ?_⟩
   intro j hj p hp
   let j' : Fin (b + 1) := ⟨j, Nat.lt_succ_of_le hj⟩
-  have hx := (n06_canonicalChart_halfPeriod_maps h04 hz hs m).2 hp
-  have hxQ : K.inverseChart z m p ∈ Q :=
-    ⟨mem_Icc_of_Ioo hx.1, hx.2.1.le, hx.2.2⟩
+  have hpQ : p ∈ Q := ⟨mem_Icc_of_Ioo hp.1, hp.2.1.le, hp.2.2⟩
   have hterm : |c j'| ≤ ∑ i : Fin (b + 1), |c i| :=
     Finset.single_le_sum (fun i _ => abs_nonneg (c i)) (Finset.mem_univ j')
   calc
@@ -158,7 +162,7 @@ theorem n06_current_canonicalSource_angularJets_half_bounded
         |n06PhysicalSourceAngularJet (K.chart z m) (K.height z m) f j
           (K.inverseChart z m p)| := by
       rw [n06_current_canonicalSource_angularJet h04 hz hs hf m j ⟨hp.1, mem_univ _⟩]
-    _ ≤ c j' := hc j' _ hxQ
+    _ ≤ c j' := hc j' p hpQ
     _ ≤ |c j'| := le_abs_self _
     _ ≤ B := by dsimp only [B]; linarith
 

@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N06CurrentOperatorPeriodicity
 import ContinuousFlexibility.Analysis.N06PositiveCurrentTestLp
+import ContinuousFlexibility.Analysis.N06CanonicalHeightGerm
 
 /-!
 # Local smoothness of the actual corrected operator on even fields
@@ -88,11 +89,13 @@ theorem n06_correctedHeightDivergence_contDiffOn_piece
     (hA : N04PartA D S C K base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1) (m : ℕ) :
     ContDiffOn ℝ ∞ (divergenceOperator (L.coefficients z) (K.height z m))
-      (physicalPieceOpen S K m) := by
-  obtain ⟨_, _, _, hpieces, _, _, _, hcharts, _, hparity, _⟩ := hA
-  obtain ⟨_, _, _, _, _, _, hH, hgood⟩ := hcharts z hz hs m
-  exact n06_correctedDivergence_contDiffOn_strip hT hS h01 h03 hz hs
-    (hpieces m).2.2 hH (fun q hq => (hgood q hq).2.2.2)
-      (fun q hq => (hparity z hz hs m q hq).2.1)
+      (physicalPieceOpen S K z m) := by
+  intro p hp
+  obtain ⟨η, hη⟩ := n06_exists_heightPair_canonicalHeight_germ hT hS hA hz hs m hp
+  have hreg := n06_correctedDivergence_heightPair_contDiffAt hT hS h01 h03 hz hs η
+    ((hA.domains z hz hs m).2.2.1 hp)
+  exact (hreg.congr_of_eventuallyEq
+    (n06_divergenceOperator_congr_eventually (L.coefficients z)
+      (hη p hp rfl).symm)).contDiffWithinAt
 
 end ContinuousFlexibility.Statements

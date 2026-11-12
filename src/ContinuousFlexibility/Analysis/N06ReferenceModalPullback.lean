@@ -51,9 +51,18 @@ theorem n06_controlledReference_radial_ae_pullback
   have hp : ∀ᵐ p ∂canonicalMeasure S K m, P p.1 := by
     rw [n06_canonicalMeasure_eq_radial_prod]
     exact Measure.quasiMeasurePreserving_fst.ae hP
-  have hx := (n05_canonicalChart_ae_iff h04 href hs m
-    (fun p hp => n05_controlledReference_chart_second hcoordinates m hp)
+  have hangle : ∀ p ∈ physicalPieceOpen S K (C.referenceState, 0) m,
+      (K.chart (C.referenceState, 0) m p).2 = p.2 := by
+    intro p hp
+    apply n05_controlledReference_chart_second hcoordinates m
+    simpa only [h04.1.referenceDomain m] using hp
+  have hxActual := (n05_canonicalChart_ae_iff h04 href hs m hangle
     (fun p => P p.1)).mp hp
+  have hx : ∀ᵐ p ∂volume.restrict
+      (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi),
+      P (K.chart (C.referenceState, 0) m p).1 := by
+    simpa only [h04.1.referenceDomain m, referencePhysicalPieceOpen,
+      prod_inter_prod, inter_univ, univ_inter] using hxActual
   have hprod : (volume : Measure PolarPoint).restrict
       (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi) =
       (volume.restrict (Ioo (K.physicalLeft m) (K.physicalRight m))).prod angleMeasure := by
@@ -105,7 +114,7 @@ theorem n06_controlledReference_modal_representation
   have hcoef := (n06_canonical_halfCosineCoefficient_congr_ae hrep n).symm.trans hmode
   have hpull := n06_controlledReference_radial_ae_pullback h hcoordinates m hcoef
   have hsub : Ioo (K.physicalLeft m) (K.physicalRight m) ⊆ radialCore D :=
-    (h04.2.2.2.1 m).2.2
+    (h04.1.referenceBounds m).2.2
   have hi := ae_restrict_of_ae_restrict_of_subset hsub (n06_physical_halfMode_integrable_ae hη n)
   filter_upwards [hpull, hi, ae_restrict_mem measurableSet_Ioo] with r hr hir hrI
   have hper : Function.Periodic (fun θ => η (r, θ)) Real.pi := by
@@ -113,7 +122,8 @@ theorem n06_controlledReference_modal_representation
     simpa only [Prod.mk_add_mk, add_zero] using hperiod (r, θ)
   have he := n06_controlledReferenceHeight_mode h hcoordinates η m n hrI hper hir
   have hH : 0 < K.height (C.referenceState, 0) m (r, 0) :=
-    ((h04.2.2.2.2.2.2.2.1 _ href hs m).2.2.2.2.2.2.2 (r, 0) ⟨hrI, mem_univ _⟩).1
+    (n05_reference_boundary_regular h04.1 href hs m (p := (r, 0))
+      ⟨hrI.1.le, hrI.2.le⟩).2.2.2
   have hv : evenFourierCoefficient η n r / K.height (C.referenceState, 0) m (r, 0) =
       v ((K.chart (C.referenceState, 0) m (r, 0)).1) := he.symm.trans hr
   exact (div_eq_iff hH.ne').mp hv |>.trans (mul_comm _ _)

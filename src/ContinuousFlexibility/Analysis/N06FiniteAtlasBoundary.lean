@@ -4,16 +4,17 @@ import Mathlib.MeasureTheory.Measure.OpenPos
 import Mathlib.Order.Interval.Set.Disjoint
 
 /-!
-# Endpoint cancellation for the actual finite atlas
+# Endpoint cancellation in the reference atlas index order
 
 The a.e. interval cover and compact finiteness force genuine adjacent
 pieces on both sides of every interior endpoint. Disjointness makes each
 neighbor unique. Reindexing right endpoints by their actual left neighbors
 then cancels a finite boundary sum from the two-sided boundary identities.
 
-The final theorem applies this construction to the original N04 physical
-pieces. It does not assume an ordering of the atlas, an extra interval
-partition, or vanishing of the total boundary sum.
+The final theorem applies this construction to the original N04 reference
+interval metadata. These intervals supply an index order, not the shape of
+the current moving physical domains. No extra interval partition or
+vanishing total boundary sum is assumed.
 -/
 
 noncomputable section
@@ -216,8 +217,8 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
   {base loss : ℕ} {ε : ℝ}
 
-/-- The actual N04 a.e. cover restricts to the precise finite collection
-of original pieces meeting a compact physical window. -/
+/-- The N04 reference a.e. cover restricts to the precise finite collection
+of reference intervals meeting a compact radial window. -/
 theorem n06_finitePhysicalWindow_cover_ae
     (h04 : N04Properties D T S C L K base loss ε)
     {a b : ℝ} (hwindow : Icc a b ⊆ radialCore D)
@@ -225,7 +226,7 @@ theorem n06_finitePhysicalWindow_cover_ae
       (Ioo (K.physicalLeft m) (K.physicalRight m) ∩ Icc a b).Nonempty}.Finite) :
     ∀ᵐ r ∂volume, r ∈ Ioo a b → ∃ m ∈ hfinite.toFinset,
       r ∈ Ioo (K.physicalLeft m) (K.physicalRight m) := by
-  obtain ⟨_, _, _, _, _, _, ⟨E, hE, hcover⟩, _⟩ := h04
+  obtain ⟨E, hE, hcover⟩ := h04.1.referencePartition
   have havoid : ∀ᵐ r ∂volume, r ∉ E := by
     apply ae_iff.mpr
     exact measure_mono_null (fun _ hr => Classical.not_not.mp hr) hE
@@ -233,9 +234,9 @@ theorem n06_finitePhysicalWindow_cover_ae
   obtain ⟨m, hm, _⟩ := hcover r ⟨hwindow (Ioo_subset_Icc_self hri), hr⟩
   exact ⟨m, hfinite.mem_toFinset.mpr ⟨r, hm, Ioo_subset_Icc_self hri⟩, hm⟩
 
-/-- The original finite physical atlas has a vanishing boundary sum
-whenever the actual densities match on adjacent sides. The cover supplies
-those sides and their uniqueness; no total-sum hypothesis is used. -/
+/-- A finite set of reference intervals has a vanishing boundary sum
+whenever its rows match on adjacent indices. The reference cover supplies
+those indices and their uniqueness; no current rectangular domain is used. -/
 theorem n06_finitePhysicalWindow_boundary_sum
     {G : Type*} [AddCommGroup G]
     (h04 : N04Properties D T S C L K base loss ε)
@@ -249,7 +250,7 @@ theorem n06_finitePhysicalWindow_boundary_sum
     (hRzero : ∀ i ∈ hfinite.toFinset, K.physicalRight i ∉ Ioo a b → BR i = 0) :
     (∑ i ∈ hfinite.toFinset, (BR i - BL i)) = 0 :=
   n06_finite_atlas_boundary_sum hfinite.toFinset K.physicalLeft K.physicalRight
-    (fun i => (h04.2.2.2.1 i).1) (n06_physicalPiece_pairwiseDisjoint h04)
+    (fun i => (h04.1.referenceBounds i).1) (n06_physicalPiece_pairwiseDisjoint h04)
     (n06_finitePhysicalWindow_cover_ae h04 hwindow hfinite) BL BR hmatch hLzero hRzero
 
 /-- Compact finiteness is obtained from the original accumulating profile

@@ -36,10 +36,11 @@ physical L2 and the primitive coordinate bounds. -/
 theorem n06_reference_remainder_normal_of_bounds
     (h04 : N04Properties D T S C L K base loss ε) (hab : D.a < D.b)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (hΩ : physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (hY : ContDiffOn ℝ ∞ Y (Ioo (K.physicalLeft m) (K.physicalRight m)))
     (hh : ContDiffOn ℝ ∞ h (Ioo (K.physicalLeft m) (K.physicalRight m)))
-    (hchart : ∀ p ∈ physicalPieceOpen S K m, K.chart z m p = (Y p.1, p.2))
-    (hheight : ∀ p ∈ physicalPieceOpen S K m, K.height z m p = h p.1)
+    (hchart : ∀ p ∈ referencePhysicalPieceOpen S K m, K.chart z m p = (Y p.1, p.2))
+    (hheight : ∀ p ∈ referencePhysicalPieceOpen S K m, K.height z m p = h p.1)
     {B : ℝ} (hB : 0 ≤ B)
     (hcoeff : ∀ r ∈ Ioo (K.physicalLeft m) (K.physicalRight m),
       |h r| + |(h r)⁻¹| + |deriv h r| + |deriv Y r| + |(deriv Y r)⁻¹| ≤ B)
@@ -71,13 +72,13 @@ theorem n06_reference_remainder_normal_of_bounds
   have hsub : Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi ⊆
       radialCore D ×ˢ Ioc (0 : ℝ) (2 * Real.pi) := by
     intro p hp
-    exact ⟨(hK.2.2.2.1 m).2.2 hp.1, hp.2.1,
+    exact ⟨(hK.referenceBounds m).2.2 hp.1, hp.2.1,
       hp.2.2.trans (by linarith [Real.pi_pos])⟩
   have hwPiece := MemLp.mono_measure (Measure.restrict_mono hsub le_rfl) hremL
   have hdwPiece := MemLp.mono_measure (Measure.restrict_mono hsub le_rfl) hremrL
   obtain ⟨⟨hW, _⟩, hG, _⟩ :=
-    n06_reference_height_normal_lp h04 hz hs hY hh hchart hheight hB hcoeff hwPiece hdwPiece
-  exact ⟨hW, hG, n06_reference_remainder_normal_transport hK hab hz hs hY hh
+    n06_reference_height_normal_lp h04 hz hs hΩ hY hh hchart hheight hB hcoeff hwPiece hdwPiece
+  exact ⟨hW, hG, n06_reference_remainder_normal_transport hK hab hz hs hΩ hY hh
     hchart hheight hχ aL hweak hη hur hηp hurp hW hG⟩
 
 /-- The original physical inverse and its original first-normal estimate
@@ -89,11 +90,12 @@ theorem n06_reference_firstNormal_transport
     (hA : IsRadialReference D)
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (hΩ : ∀ m, physicalPieceOpen S K z m = referencePhysicalPieceOpen S K m)
     (Y h : ℕ → ℝ → ℝ)
     (hY : ∀ m, ContDiffOn ℝ ∞ (Y m) (Ioo (K.physicalLeft m) (K.physicalRight m)))
     (hh : ∀ m, ContDiffOn ℝ ∞ (h m) (Ioo (K.physicalLeft m) (K.physicalRight m)))
-    (hchart : ∀ m p, p ∈ physicalPieceOpen S K m → K.chart z m p = (Y m p.1, p.2))
-    (hheight : ∀ m p, p ∈ physicalPieceOpen S K m → K.height z m p = h m p.1)
+    (hchart : ∀ m p, p ∈ referencePhysicalPieceOpen S K m → K.chart z m p = (Y m p.1, p.2))
+    (hheight : ∀ m p, p ∈ referencePhysicalPieceOpen S K m → K.height z m p = h m p.1)
     (B : ℕ → ℝ) (hB : ∀ m, 0 ≤ B m)
     (hcoeff : ∀ m r, r ∈ Ioo (K.physicalLeft m) (K.physicalRight m) →
       |h m r| + |(h m r)⁻¹| + |deriv (h m) r| + |deriv (Y m) r| +
@@ -144,7 +146,7 @@ theorem n06_reference_firstNormal_transport
   have hurp : Function.Periodic ur (0, Real.pi) := houtput.2.2.1
   refine ⟨ur, hweak, houtput, hbound, ?_⟩
   intro aL m
-  exact n06_reference_remainder_normal_of_bounds h04 hD.choose_spec.1.2.1 hz hs
+  exact n06_reference_remainder_normal_of_bounds h04 hD.choose_spec.1.2.1 hz hs (hΩ m)
     (hY m) (hh m) (hchart m) (hheight m) (hB m) (hcoeff m) hχ aL hweak hη hur hηp hurp
 
 end ContinuousFlexibility.Analysis

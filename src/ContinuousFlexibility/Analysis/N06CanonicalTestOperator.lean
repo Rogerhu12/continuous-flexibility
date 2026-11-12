@@ -49,17 +49,19 @@ variable {D : ReferenceData} {S : PhysicalSpacesData}
   {base m : ℕ} {ε : ℝ} {z : AnnularState S × ℝ} {φ : PolarPoint → ℝ}
 
 theorem n06CanonicalTestPullback_divergence_eq_of_mem
-    (A : SymmetricCoefficients) {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    (hK : N04PartA D S C K base ε)
+    (hz : z ∈ stateNeighborhood S C base ε) (hsector : stateSector S z.1)
+    (A : SymmetricCoefficients) {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K z m) :
     divergenceOperator A (n06CanonicalTestPullback S K z m φ) p =
       divergenceOperator A (fun q => K.height z m q * φ (K.chart z m q)) p :=
   n06_divergenceOperator_input_congr_germ A
-    (n06CanonicalTestPullback_eventuallyEq_of_mem hp)
+    (n06CanonicalTestPullback_eventuallyEq_of_mem hK hz hsector hp)
 
 theorem n06CanonicalTestPullback_divergence_zero_of_not_mem
     (hK : N04PartA D S C K base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hsector : stateSector S z.1)
     (hφ : CanonicalTest S K m φ) (A : SymmetricCoefficients)
-    {p : PolarPoint} (hp : p ∉ physicalPieceOpen S K m) :
+    {p : PolarPoint} (hp : p ∉ physicalPieceOpen S K z m) :
     divergenceOperator A (n06CanonicalTestPullback S K z m φ) p = 0 := by
   exact (n06_divergenceOperator_input_congr_germ A
     (n06CanonicalTestPullback_eventually_zero_of_not_mem hK hz hsector hφ hp)).trans
@@ -75,9 +77,9 @@ theorem n06CanonicalTestPullback_operator
         canonicalSource S K z m
           (divergenceOperator (L.coefficients z) (n06CanonicalTestPullback S K z m φ)) p =
       canonicalOperator S K L z m φ p := by
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hsector m
+  have hcharts := hK.charts z hz hsector m
   simp only [canonicalOperator, canonicalSource]
-  rw [n06CanonicalTestPullback_divergence_eq_of_mem _ (hcharts.2.1 hp)]
+  rw [n06CanonicalTestPullback_divergence_eq_of_mem hK hz hsector _ (hcharts.2.1 hp)]
 
 /-- In source coordinates the same identity is the actual canonical
 divergence plus the correctly signed potential term. -/

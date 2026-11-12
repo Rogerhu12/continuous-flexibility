@@ -161,8 +161,9 @@ theorem n06_referenceNegativeInverseData_nonempty
   have h01 := h.1.1.1
   have hz := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
-  rcases h.2.2.2.2 with ⟨_, _, _, hpieces, _, _, _, hcharts, _⟩
-  have hc := hcharts (C.referenceState, 0) hz hs i
+  have hpieces := h.2.2.2.2.1.referenceBounds
+  have hc := h.2.2.2.2.1.charts (C.referenceState, 0) hz hs i
+  rw [h.2.2.2.2.1.referenceDomain i] at hc
   have hY (r : ℝ) (hr : r ∈ P) : ContDiffAt ℝ ∞ Y r :=
     (n06_reference_negative_height_normalization hT hS h hi hr).1
   have hne (r : ℝ) (hr : r ∈ P) : deriv Y r ≠ 0 :=
@@ -173,7 +174,7 @@ theorem n06_referenceNegativeInverseData_nonempty
       x.1 ∈ P ∧ Y x.1 = p.1 ∧ x.2 = p.2 := by
     let x := K.inverseChart (C.referenceState, 0) i p
     change x.1 ∈ P ∧ Y x.1 = p.1 ∧ x.2 = p.2
-    have hx : x ∈ physicalPieceOpen S K i := hc.2.1 hp
+    have hx : x ∈ referencePhysicalPieceOpen S K i := hc.2.1 hp
     have hxp : x.1 ∈ P := ⟨hx.1.1.le, hx.1.2.le⟩
     have hshape := (n06_reference_negative_radial hT hS h hi x.1 hxp x.2).1
     have hinv := hc.2.2.2.1 p hp

@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.SolveStateSpaces
+import ContinuousFlexibility.Analysis.N06Neighborhood
 import ContinuousFlexibility.Analysis.StateKappaBounds
 import ContinuousFlexibility.Analysis.TameElementaryCalculus
 import ContinuousFlexibility.Analysis.TameTransfer
@@ -217,25 +218,8 @@ theorem coupled_N03Properties_restrict (h : N03Properties D T S C R L base ε)
         (subset_refl _)) (subset_refl _))⟩
 
 theorem coupled_N04Properties_restrict (h : N04Properties D T S C L K base loss ε)
-    (hb : base ≤ base') (hε : ε' ≤ ε) : N04Properties D T S C L K base' loss ε' := by
-  have hsub := coupled_stateNeighborhood_mono (S := S) (C := C) hb hε
-  refine And.imp id ?_ h
-  refine And.imp id ?_
-  refine And.imp (coupled_forall_mem_mono hsub) ?_
-  refine And.imp id ?_
-  refine And.imp id ?_
-  refine And.imp id ?_
-  refine And.imp id ?_
-  refine And.imp (coupled_forall_mem_mono hsub) ?_
-  refine And.imp (coupled_forall_mem_mono hsub) ?_
-  refine And.imp (coupled_forall_mem_mono hsub) ?_
-  refine And.imp (coupled_forall_mem_mono hsub) ?_
-  refine And.imp id ?_
-  refine And.imp (coupled_forall_mem_mono hsub) ?_
-  refine And.imp (coupled_forall_mem_mono hsub) ?_
-  refine And.imp (coupled_forall_mem_mono hsub) ?_
-  refine And.imp (coupled_forall_mem_mono hsub) ?_
-  exact And.imp (coupled_orderedBounds_mono hsub) (coupled_forall_mem_mono hsub)
+    (hb : base ≤ base') (hε : ε' ≤ ε) : N04Properties D T S C L K base' loss ε' :=
+  n06_N04Properties_mono h hb hε
 
 variable {Vol : VolumeModelData S K} {b : ℕ}
   {Domain : CanonicalDomainData S K Vol b}

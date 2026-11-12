@@ -76,12 +76,12 @@ theorem n06_negative_closed_normalDensity_of_nonneg
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (m : ℕ) (hm : K.positive m = false) {x : PolarPoint}
-    (hx : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m))
+    (hx : x ∈ physicalPieceClosed S K z m)
     (hp : x ∈ annularOpen D) (hpos : 0 ≤ deriv D.w x.1) :
     (coordinatePrincipalDensity (L.coefficients z) (K.chart z m) (K.height z m)).a x = 1 ∧
       (coordinatePrincipalDensity (L.coefficients z) (K.chart z m) (K.height z m)).b x = 0 := by
   have hreg := n06_correctedCoefficients_contDiffAt_of_nonneg hT hS h01 h03 hz hs hp hpos
-  have hcharts := h04.2.2.2.2.2.2.2.2.1 z hz hs m x hx
+  have hcharts := (h04.1.boundary z hz hs m).2.2.2.2.1 x hx
   have hcont := n06_coordinatePrincipalDensity_normal_continuousAt
     hreg.1.continuousAt hreg.2.1.continuousAt hreg.2.2.continuousAt
     hcharts.1 hcharts.2.1.continuousAt hcharts.2.2.1
@@ -94,14 +94,9 @@ theorem n06_negative_closed_normalDensity_of_nonneg
       ((hreg.2.2.of_le (m := 1) (by simp)).eventually (by simp))] with q hqa hqb hqc
     exact ⟨hqa.differentiableAt (by norm_num), hqb.differentiableAt (by norm_num),
       hqc.differentiableAt (by norm_num)⟩
-  have hclosure : x ∈ closure (physicalPieceOpen S K m) := by
-    simpa only [physicalPieceOpen, closure_prod_eq,
-      closure_Ioo (h04.2.2.2.1 m).1.ne, closure_univ] using
-      (show x ∈ Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ (univ : Set ℝ) from
-        ⟨hx, mem_univ _⟩)
-  haveI : NeBot (𝓝[physicalPieceOpen S K m] x) :=
-    mem_closure_iff_nhdsWithin_neBot.mp hclosure
-  have hrow : ∀ᶠ q in 𝓝[physicalPieceOpen S K m] x,
+  haveI : NeBot (𝓝[physicalPieceOpen S K z m] x) :=
+    mem_closure_iff_nhdsWithin_neBot.mp hx
+  have hrow : ∀ᶠ q in 𝓝[physicalPieceOpen S K z m] x,
       (coordinatePrincipalDensity (L.coefficients z) (K.chart z m) (K.height z m)).a q = 1 ∧
         (coordinatePrincipalDensity (L.coefficients z) (K.chart z m) (K.height z m)).b q = 0 := by
     filter_upwards [hnear.filter_mono nhdsWithin_le_nhds, self_mem_nhdsWithin] with q hq hmem
@@ -125,7 +120,7 @@ theorem n06_negative_turningRoot_normalDensity
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (m : ℕ) (hm : K.positive m = false) {x : PolarPoint}
-    (hx : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m))
+    (hx : x ∈ physicalPieceClosed S K z m)
     (hp : x ∈ annularOpen D) (hroot : deriv D.w x.1 = 0) :
     (coordinatePrincipalDensity (L.coefficients z) (K.chart z m) (K.height z m)).a x = 1 ∧
       (coordinatePrincipalDensity (L.coefficients z) (K.chart z m) (K.height z m)).b x = 0 :=

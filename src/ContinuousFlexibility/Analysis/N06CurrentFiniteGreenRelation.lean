@@ -26,7 +26,8 @@ set_option backward.isDefEq.respectTransparency false
 
 /-- The explicit local data used in finite Green gluing. Boundary values
 are true traces, and the matching condition is pointwise between adjacent
-physical pieces. The physical equation is not a field of this structure. -/
+reference indices. Actual inverse endpoint circles are required only at
+true sides; artificial cuts are handled by their common canonical radius. The physical equation is not a field of this structure. -/
 structure N06CurrentFiniteGreenData
     (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
     (L : ReturnCorrectionData S) (K : CanonicalData S) (z : AnnularState S × ℝ)
@@ -37,11 +38,11 @@ structure N06CurrentFiniteGreenData
   reverse : ℕ → Bool
   regular : ∀ m, ContDiff ℝ 1 (value m)
   represents : ∀ m, (u.1 m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m] value m
-  endpointJets : ∀ m, ∀ side : Bool, ∃ σ : ℝ, ∃ β H ρ κ Hr : ℝ → ℝ,
-    Nonempty (N06RootFirstJets (K.chart z m) (K.height z m)
-      (n06Endpoint (K.physicalLeft m) (K.physicalRight m) side)
-      (n06Endpoint (K.left m) (K.right m) (if reverse m then !side else side))
-        σ β H ρ κ Hr)
+  endpointCircles : ∀ m, ∀ side : Bool, ¬n06ArtificialCutSide K m side →
+    ∀ θ ∈ Icc (0 : ℝ) Real.pi,
+      (K.inverseChart z m
+        ((if (if reverse m then !side else side) then K.right m else K.left m), θ)).1 =
+          if side then K.physicalRight m else K.physicalLeft m
   green : ∀ m,
     (∫ p, n06CurrentRemainderSource D S C L K z u F m p *
       canonicalHeight S K z m (n06_radialTestAverage φ) p ∂canonicalMeasure S K m) -
@@ -87,7 +88,7 @@ theorem n06_namedPhysicalWeakRelation_of_finiteGreen
   obtain ⟨P⟩ := hdata φ hφ
   have he := n06_current_finiteGreen_assembly hT hS h01 h03 h04 hcoords hz hs
     u.val.1 (V.forget (3 / 4 : ℝ) 0 b F) hφ P.test P.value P.radialCoefficient P.reverse
-    P.regular P.represents P.endpointJets P.green P.matching
+    P.regular P.represents P.endpointCircles P.green P.matching
   rw [n06_currentLeftColumn_full_pairing hT hS h01 h03 h04 hcoords hz hs hpositive hφ,
     sub_self, mul_zero] at he
   exact sub_eq_zero.mp he

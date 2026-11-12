@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N06FullPeriodOperatorTests
+import ContinuousFlexibility.Analysis.N06PhysicalRepresentativeUniqueness
 
 /-!
 # Actual current test averaging on the physical pieces
@@ -9,8 +10,8 @@ Consequently the current operator sends a half-periodic physical test to
 a half-periodic function on each actual physical piece. No periodicity or
 global smoothness of the bare corrected coefficients is assumed.
 
-The original radial a.e. cover gives a single full-measure radial set on
-which these identities hold for every angle.
+The actual planar a.e. cover gives the identities for almost every radial
+coordinate and almost every angle, exactly as required by the integrals.
 -/
 
 noncomputable section
@@ -33,10 +34,10 @@ theorem n06_current_source_eq_iff_on_piece
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {f g : PolarPoint → ℝ} {p : PolarPoint}
-    (hp : p ∈ physicalPieceOpen S K m) :
+    (hp : p ∈ physicalPieceOpen S K z m) :
     canonicalSource S K z m f (K.chart z m p) =
         canonicalSource S K z m g (K.chart z m p) ↔ f p = g p := by
-  have hc := h04.2.2.2.2.2.2.2.1 z hz hs m
+  have hc := h04.1.charts z hz hs m
   let w : ℝ := K.height z m p / |planeJacobian (K.chart z m) p|
   have hw : w ≠ 0 := div_ne_zero (hc.2.2.2.2.2.2.2 p hp).1.ne'
     (abs_ne_zero.mpr (hc.2.2.2.2.2.2.2 p hp).2.1)
@@ -59,11 +60,11 @@ theorem n06_current_divergence_average_on_piece
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {φ : PolarPoint → ℝ} (hφ : RadialTest D φ)
-    {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K z m) :
     n06_radialTestAverage (divergenceOperator (L.coefficients z) φ) p =
       divergenceOperator (L.coefficients z) (n06_radialTestAverage φ) p := by
   apply (n06_current_source_eq_iff_on_piece h04 hz hs hp).mp
-  have hq := (h04.2.2.2.2.2.2.2.1 z hz hs m).1 hp
+  have hq := (h04.1.charts z hz hs m).1 hp
   cases hm : K.positive m
   · exact n06_negative_current_source_average hT hS h03 h04 hz hs hm hφ hq
   · exact n06_positive_current_source_average hT hS h01 h03 h04 hz hs m hm hφ.1 hq
@@ -78,7 +79,7 @@ theorem n06_current_divergence_periodic_on_piece
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {φ : PolarPoint → ℝ} (hφ : RadialTest D φ)
     (hπ : Function.Periodic φ (0, Real.pi))
-    {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K z m) :
     divergenceOperator (L.coefficients z) φ (p + (0, Real.pi)) =
       divergenceOperator (L.coefficients z) φ p := by
   have havg : n06_radialTestAverage φ = φ := by
@@ -98,28 +99,31 @@ theorem n06_current_divergence_periodic_slice
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {φ : PolarPoint → ℝ} (hφ : RadialTest D φ)
     (hπ : Function.Periodic φ (0, Real.pi))
-    {r : ℝ} (hr : r ∈ Ioo (K.physicalLeft m) (K.physicalRight m)) :
+    {r : ℝ} (hr : ∀ θ, (r, θ) ∈ physicalPieceOpen S K z m) :
     Function.Periodic (fun θ => divergenceOperator (L.coefficients z) φ (r, θ)) Real.pi := by
   intro θ
   simpa only [Prod.mk_add_mk, add_zero] using
     n06_current_divergence_periodic_on_piece hT hS h01 h03 h04 hz hs hφ hπ
-      (show (r, θ) ∈ physicalPieceOpen S K m from ⟨hr, mem_univ _⟩)
+      (hr θ)
 
-/-- The radial exceptional set in the original atlas is independent
-of the angle, so pointwise piece properties hold for all angles a.e. in r. -/
+/-- The actual planar cover gives the iterated almost-everywhere statement.
+It does not assert an angle-independent exceptional set for moving cuts. -/
 theorem n06_physicalPieces_radial_ae
     (h04 : N04Properties D T S C L K base loss ε)
+    (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {P : PolarPoint → Prop}
-    (hP : ∀ m p, p ∈ physicalPieceOpen S K m → P p) :
-    ∀ᵐ r ∂volume.restrict (radialCore D), ∀ θ, P (r, θ) := by
-  obtain ⟨_, _, _, _, _, _, ⟨E, hE, hcover⟩, _⟩ := h04
-  apply (ae_restrict_iff' measurableSet_Ioo).mpr
-  have havoid : ∀ᵐ r ∂volume, r ∉ E := by
-    apply ae_iff.mpr
-    exact measure_mono_null (fun _ hr => Classical.not_not.mp hr) hE
-  filter_upwards [havoid] with r hr hrU θ
-  obtain ⟨m, hm, _⟩ := hcover r ⟨hrU, hr⟩
-  exact hP m (r, θ) ⟨hm, mem_univ _⟩
+    (hP : ∀ m p, p ∈ physicalPieceOpen S K z m → P p) :
+    ∀ᵐ r ∂volume.restrict (radialCore D), ∀ᵐ θ ∂volume, P (r, θ) := by
+  have hmeasure : (volume : Measure PolarPoint).restrict (annularOpen D) =
+      (volume.restrict (radialCore D)).prod volume := by
+    change ((volume : Measure ℝ).prod volume).restrict
+      (radialCore D ×ˢ (univ : Set ℝ)) = _
+    rw [← Measure.prod_restrict, Measure.restrict_univ]
+  apply Measure.ae_ae_of_ae_prod
+  rw [← hmeasure]
+  filter_upwards [n06_physical_piece_cover_ae h04 hz hs] with p hp
+  obtain ⟨m, hm⟩ := hp
+  exact hP m p hm
 
 theorem n06_current_divergence_average_radial_ae
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -128,10 +132,10 @@ theorem n06_current_divergence_average_radial_ae
     (h04 : N04Properties D T S C L K base loss ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {φ : PolarPoint → ℝ} (hφ : RadialTest D φ) :
-    ∀ᵐ r ∂volume.restrict (radialCore D), ∀ θ,
+    ∀ᵐ r ∂volume.restrict (radialCore D), ∀ᵐ θ ∂volume,
       n06_radialTestAverage (divergenceOperator (L.coefficients z) φ) (r, θ) =
         divergenceOperator (L.coefficients z) (n06_radialTestAverage φ) (r, θ) :=
-  n06_physicalPieces_radial_ae h04 fun _ _ hp =>
+  n06_physicalPieces_radial_ae h04 hz hs fun _ _ hp =>
     n06_current_divergence_average_on_piece hT hS h01 h03 h04 hz hs hφ hp
 
 theorem n06_current_divergence_periodic_radial_ae
@@ -142,11 +146,13 @@ theorem n06_current_divergence_periodic_radial_ae
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     {φ : PolarPoint → ℝ} (hφ : RadialTest D φ)
     (hπ : Function.Periodic φ (0, Real.pi)) :
-    ∀ᵐ r ∂volume.restrict (radialCore D),
-      Function.Periodic (fun θ => divergenceOperator (L.coefficients z) φ (r, θ)) Real.pi := by
-  have he := n06_physicalPieces_radial_ae h04 fun _ _ hp =>
+    ∀ᵐ r ∂volume.restrict (radialCore D), ∀ᵐ θ ∂volume,
+      divergenceOperator (L.coefficients z) φ (r, θ + Real.pi) =
+        divergenceOperator (L.coefficients z) φ (r, θ) := by
+  have he := n06_physicalPieces_radial_ae h04 hz hs fun _ _ hp =>
     n06_current_divergence_periodic_on_piece hT hS h01 h03 h04 hz hs hφ hπ hp
-  filter_upwards [he] with r hr θ
-  simpa only [Prod.mk_add_mk, add_zero] using hr θ
+  filter_upwards [he] with r hr
+  filter_upwards [hr] with θ hθ
+  simpa only [Prod.mk_add_mk, add_zero] using hθ
 
 end ContinuousFlexibility.Statements

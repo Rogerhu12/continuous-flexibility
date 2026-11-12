@@ -55,11 +55,11 @@ theorem n06_canonical_ae_pullback
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ) {P : PolarPoint → Prop}
     (hP : ∀ᵐ y ∂volume.restrict (canonicalOpen S K m), P y) :
-    ∀ᵐ x ∂volume.restrict (physicalPieceOpen S K m), P (K.chart z m x) := by
-  obtain ⟨_, _, _, _, _, _, _, hcharts, _⟩ := hN04
+    ∀ᵐ x ∂volume.restrict (physicalPieceOpen S K z m), P (K.chart z m x) := by
+  have hcharts := hN04.1.charts
   obtain ⟨hmap, _, hleft, _, _, hinverse, _, _⟩ := hcharts z hz hs m
   exact n06_ae_comp_of_smooth_leftInverse
-    (measurableSet_Ioo.prod MeasurableSet.univ)
+    (hN04.1.domains z hz hs m).1.measurableSet
     (measurableSet_Ioo.prod MeasurableSet.univ)
     (hinverse.differentiableOn (by simp)) hmap hleft hP
 
@@ -69,13 +69,13 @@ theorem n06_physical_ae_pushforward
     (hN04 : N04Properties D T S C L K base loss ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ) {P : PolarPoint → Prop}
-    (hP : ∀ᵐ x ∂volume.restrict (physicalPieceOpen S K m), P x) :
+    (hP : ∀ᵐ x ∂volume.restrict (physicalPieceOpen S K z m), P x) :
     ∀ᵐ y ∂volume.restrict (canonicalOpen S K m), P (K.inverseChart z m y) := by
-  obtain ⟨_, _, _, _, _, _, _, hcharts, _⟩ := hN04
+  have hcharts := hN04.1.charts
   obtain ⟨_, hmap, _, hright, hchart, _, _, _⟩ := hcharts z hz hs m
   exact n06_ae_comp_of_smooth_leftInverse
     (measurableSet_Ioo.prod MeasurableSet.univ)
-    (measurableSet_Ioo.prod MeasurableSet.univ)
+    (hN04.1.domains z hz hs m).1.measurableSet
     (hchart.differentiableOn (by simp)) hmap hright hP
 
 end ContinuousFlexibility.Statements

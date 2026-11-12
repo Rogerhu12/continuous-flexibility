@@ -79,14 +79,17 @@ theorem n06_reference_null_root_cut
   have h01 := h.1.1.1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
-  rcases h.2.2.2.2 with ⟨_, _, _, _, _, _, _, _, hclosed, _⟩
+  have hA := h.2.2.2.2.1
+  have hrootClosed (θ : ℝ) : (root, θ) ∈ physicalPieceClosed S K (C.referenceState, 0) i := by
+    rw [n05_referencePhysicalPieceClosed_eq hA i]
+    exact ⟨hroot, mem_univ _⟩
   have hβ : Continuous β := continuous_iff_continuousAt.mpr fun θ =>
-    ((hclosed (C.referenceState, 0) href hs i (root, θ) hroot).1.snd.continuousAt).comp
+    ((n05_reference_boundary_regular hA href hs i (p := (root, θ)) (hrootClosed θ)).1.snd.continuousAt).comp
       (continuousAt_const.prodMk continuousAt_id)
   have hlift (θ : ℝ) : β (θ + Real.pi) = β θ + Real.pi := by
     simpa only [β, Ψ, Prod.mk_add_mk, Prod.snd_add, Prod.fst_add, add_zero] using
       congrArg Prod.snd (n05_canonical_closed_periodicity h.2.2.2.2 href hs i
-        (p := (root, θ)) hroot).1
+        (p := (root, θ)) (hrootClosed θ)).1
   have hrootImage (θ : ℝ) : (Ψ (root, θ)).1 = 0 :=
     n05_negative_reference_root_image hT hS h hi (x := (root, θ)) hroot hwroot
   have hrootN (σ θ : ℝ) : n05NullCoordinate Ψ σ (root, θ) = β θ := by
@@ -127,7 +130,8 @@ theorem n06_reference_cut_travel
       radialTravel D (C.left m) (C.right m) = 2 * n05TricomiTime (K.cutRadius m) := by
   have h01 := h.1.1.1
   have hg : controlGeometryConditions D S C := h01.2.2.2.1
-  rcases h.2.2.2.2 with ⟨_, _, _, hpieces, _, _, _, _, _, _, _, hcuts, _⟩
+  have hpieces := h.2.2.2.2.1.referenceBounds
+  have hcuts := h.2.2.2.2.2.1.1.1
   obtain ⟨hnegL, hnegR, hl, hr, hmeet, hy, _, _, _, _⟩ := hcuts m
   let c := K.physicalRight (K.cutPair m).1
   let t := n05TricomiTime (K.cutRadius m)

@@ -1,5 +1,4 @@
 import ContinuousFlexibility.Statements.Milestones
-import ContinuousFlexibility.Blueprint.CanonicalParts
 
 /-!
 # Statements of blueprint v3
@@ -242,6 +241,16 @@ def N01bStatement : Prop :=
         0 < ε ∧ N01PartB A.val S C base ε
 
 /-! ## N04: pieces and charts, then the canonical form, then bounds and sources -/
+
+/-- The exact common geometry predicate on the actual current physical domains. -/
+def N04PartA (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (K : CanonicalData S) (base : ℕ) (ε : ℝ) : Prop :=
+  CanonicalGeometry D S C K base ε
+
+/-- The exact common cut and actual canonical operator predicate. -/
+def N04PartB (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (L : ReturnCorrectionData S) (K : CanonicalData S) (base : ℕ) (ε : ℝ) : Prop :=
+  CanonicalCutOperatorProperties S C L K base ε
 
 def N04aStatement : Prop :=
   ∃ A : RadialReference, ∃ T : MaterialData, ∃ S : PhysicalSpacesData,

@@ -101,7 +101,7 @@ theorem n06_reference_negative_root_slope_cube
   have hY := (n06_reference_negative_height_normalization hT hS h hi hr).1
   have hYzero : n06ReferenceNegativeY C K i r = 0 :=
     n05_negative_reference_root_image hT hS h hi (x := (r, 0)) hr hroot
-  exact n06_scalar_airy_root_slope (h.2.2.2.2.2.2.2.1 i).1 hr
+  exact n06_scalar_airy_root_slope (h.2.2.2.2.1.referenceBounds i).1 hr
     (hgeom.1.trans hcore.1) (hgeom.2.2.2.2.1 r hcore) hgeom.2.2.1.1 hY hYzero hroot
     (fun s hs => n06_reference_negative_airy_identity hT hS h hi hs)
 

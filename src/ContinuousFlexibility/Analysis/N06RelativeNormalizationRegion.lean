@@ -8,8 +8,10 @@ import Mathlib.Topology.MetricSpace.Thickening
 The true border has compact support in the strictly positive-type region.
 Its closed support and the closed nonpositive-type set have disjoint
 uniform thickenings. This constructs one open normalization region before
-any state or piece is considered. A concrete radius on every physical
+any state or piece is considered. A concrete radius on every reference
 interval then keeps the two actual relative corrections out of that region.
+The conclusions identify field germs on the reference rectangle; equality
+of the current and reference domains there is a separate geometry clause.
 -/
 
 noncomputable section
@@ -88,14 +90,15 @@ theorem n06_exists_relativeCanonical_common_normalization
   intro m hleft hright
   dsimp only
   let δ := n06RootSeparatedPatchRadius ρ (K.physicalLeft m) (K.physicalRight m)
-  have hδ := n06RootSeparatedPatchRadius_properties hρ (hA.2.2.2.1 m).1
+  have hδ := n06RootSeparatedPatchRadius_properties hρ (hA.referenceBounds m).1
   refine ⟨hδ.1, hδ.2.1, hδ.2.2, ?_⟩
   have hL : Disjoint (Metric.ball (K.physicalLeft m) δ) U :=
     (hsep _ hleft).mono_left (Metric.ball_subset_ball hδ.2.1.le)
   have hR : Disjoint (Metric.ball (K.physicalRight m) δ) U :=
     (hsep _ hright).mono_left (Metric.ball_subset_ball hδ.2.1.le)
   intro z p hp hpU
-  have hp₀ := hA.2.2.2.2.2.2.2.2.1 (C.referenceState, 0) href hsref m p hp
+  have hp₀ := n06_actualCanonical_rectangle_data hA href hsref m
+    (hA.referenceDomain m) (p := p) hp
   exact ⟨n06RelativeChartPatch_fixed_germ hδ.1 _ _ hL hR hpU,
     n06RelativeHeightPatch_fixed_germ hδ.1 _ _ hL hR hpU hp₀.2.1.continuousAt hp₀.2.2.2⟩
 

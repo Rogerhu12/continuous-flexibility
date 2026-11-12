@@ -3,7 +3,7 @@ import ContinuousFlexibility.Analysis.N06FiniteAtlasBoundary
 import Mathlib.Analysis.Calculus.LocalExtr.Basic
 
 /-!
-# Every adjacent negative pair is the actual prescribed cut pair
+# Every adjacent negative reference pair is the prescribed cut pair
 
 At a common endpoint of two negative pieces the reference slope cannot
 vanish: it would have a local maximum there, contradicting the original
@@ -12,7 +12,8 @@ negative component. The two prescribed half-pieces fill that component,
 and disjointness forces the endpoint to be its prescribed cut.
 
 Thus the ordinary root and affine-cut matching theorems exhaust all
-adjacent pieces of the original atlas, with no new classification premise.
+adjacent reference indices, with no new classification premise. Current
+physical domains are not asserted to be these radial intervals.
 -/
 
 noncomputable section
@@ -26,14 +27,14 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
   {base loss : ℕ} {ε : ℝ}
 
-/-- Disjoint nonempty physical pieces cannot contain another piece's
+/-- Disjoint nonempty reference intervals cannot contain another piece's
 right endpoint in their own open interval. -/
 theorem n06_physicalRight_not_mem_piece
     (h04 : N04Properties D T S C L K base loss ε) (m n : ℕ) :
     K.physicalRight m ∉ Ioo (K.physicalLeft n) (K.physicalRight n) := by
   intro hr
   obtain ⟨x, hxl, hxr⟩ := exists_between
-    (max_lt (h04.2.2.2.1 m).1 hr.1)
+    (max_lt (h04.1.referenceBounds m).1 hr.1)
   have hxm : x ∈ Ioo (K.physicalLeft m) (K.physicalRight m) :=
     ⟨(le_max_left _ _).trans_lt hxl, hxr⟩
   have hxn : x ∈ Ioo (K.physicalLeft n) (K.physicalRight n) :=
@@ -43,21 +44,21 @@ theorem n06_physicalRight_not_mem_piece
     simpa only [← he] using hr.2
   exact lt_irrefl _ hbad
 
-/-- Any interface between two genuine nonempty pieces lies in the open
+/-- Any interface between two nonempty reference intervals lies in the open
 annulus, even though a single outer piece may have an exterior endpoint. -/
 theorem n06_adjacentInterface_mem_core
     (h04 : N04Properties D T S C L K base loss ε)
     {ml mr : ℕ} (hjoin : K.physicalRight ml = K.physicalLeft mr) :
     K.physicalRight ml ∈ radialCore D := by
-  obtain ⟨x, hxl, hxr⟩ := exists_between (h04.2.2.2.1 ml).1
-  obtain ⟨y, hyl, hyr⟩ := exists_between (h04.2.2.2.1 mr).1
-  have hx := (h04.2.2.2.1 ml).2.2 ⟨hxl, hxr⟩
-  have hy := (h04.2.2.2.1 mr).2.2 ⟨hyl, hyr⟩
+  obtain ⟨x, hxl, hxr⟩ := exists_between (h04.1.referenceBounds ml).1
+  obtain ⟨y, hyl, hyr⟩ := exists_between (h04.1.referenceBounds mr).1
+  have hx := (h04.1.referenceBounds ml).2.2 ⟨hxl, hxr⟩
+  have hy := (h04.1.referenceBounds mr).2.2 ⟨hyl, hyr⟩
   refine ⟨hx.1.trans hxr, ?_⟩
   rw [hjoin]
   exact hyl.trans hy.2
 
-/-- Two adjacent negative open pieces have strictly negative slope
+/-- Two adjacent negative reference intervals have strictly negative slope
 at the common endpoint. A zero would violate the original simple-root
 condition by Fermat's theorem. -/
 theorem n06_adjacent_negative_slope_lt
@@ -68,14 +69,14 @@ theorem n06_adjacent_negative_slope_lt
     deriv D.w (K.physicalRight ml) < 0 := by
   have hnegative : ∀ m, K.positive m = false →
       ∀ r ∈ Ioo (K.physicalLeft m) (K.physicalRight m), deriv D.w r < 0 :=
-    h04.2.2.2.2.2.1
+    h04.1.referenceNegative
   have hw : ContDiff ℝ 2 D.w := hD.2.2.1.1.of_le (by simp)
   have hdw : ContDiff ℝ 1 (deriv D.w) := hw.deriv'
   have hc : Continuous (deriv D.w) := hdw.continuous
   have hclosure : K.physicalRight ml ∈
       closure (Ioo (K.physicalLeft ml) (K.physicalRight ml)) := by
-    rw [closure_Ioo (h04.2.2.2.1 ml).1.ne]
-    exact ⟨(h04.2.2.2.1 ml).1.le, le_rfl⟩
+    rw [closure_Ioo (h04.1.referenceBounds ml).1.ne]
+    exact ⟨(h04.1.referenceBounds ml).1.le, le_rfl⟩
   have hle : deriv D.w (K.physicalRight ml) ≤ 0 :=
     le_on_closure (fun r hr => (hnegative ml hml r hr).le)
       hc.continuousOn continuousOn_const hclosure
@@ -85,9 +86,9 @@ theorem n06_adjacent_negative_slope_lt
       change ∀ᶠ x in 𝓝 (K.physicalRight ml), deriv D.w x ≤ deriv D.w (K.physicalRight ml)
       have hmem : K.physicalRight ml ∈
           Ioo (K.physicalLeft ml) (K.physicalRight mr) := by
-        refine ⟨(h04.2.2.2.1 ml).1, ?_⟩
+        refine ⟨(h04.1.referenceBounds ml).1, ?_⟩
         rw [hjoin]
-        exact (h04.2.2.2.1 mr).1
+        exact (h04.1.referenceBounds mr).1
       filter_upwards [isOpen_Ioo.mem_nhds hmem] with x hx
       rw [hzero]
       rcases lt_trichotomy x (K.physicalRight ml) with hxl | hxe | hxr
@@ -97,7 +98,7 @@ theorem n06_adjacent_negative_slope_lt
     exact False.elim ((hD.2.2.2.2.2.2 (K.physicalRight ml)
       (n06_adjacentInterface_mem_core h04 hjoin) hzero) hmax.deriv_eq_zero)
 
-/-- The original atlas has no unlisted negative/negative interface.
+/-- The reference index order has no unlisted negative/negative interface.
 Every such pair is exactly the ordered pair in `K.cutPair`. -/
 theorem n06_adjacent_negative_eq_cutPair
     (h01 : N01Properties D T S C base loss ε)
@@ -110,8 +111,8 @@ theorem n06_adjacent_negative_eq_cutPair
   have hneg := n06_adjacent_negative_slope_lt hD h04 hml hmr hjoin
   obtain ⟨n, hn⟩ := hC.2.2.2.2.1 (K.physicalRight ml)
     (n06_adjacentInterface_mem_core h04 hjoin) hneg
-  have hfull := h04
-  obtain ⟨_, _, _, hpieces, _, _, _, _, _, _, _, hcut, _⟩ := hfull
+  have hpieces := h04.1.referenceBounds
+  have hcut := h04.2.1.1.1
   obtain ⟨_, _, hleft, hright, hcutjoin, _⟩ := hcut n
   have hmid : K.physicalRight ml = K.physicalRight (K.cutPair n).1 := by
     rcases lt_trichotomy (K.physicalRight ml) (K.physicalRight (K.cutPair n).1) with
@@ -129,7 +130,7 @@ theorem n06_adjacent_negative_eq_cutPair
   exact ⟨n, heL, heR⟩
 
 /-- The two already proved transmission mechanisms exhaust every
-neighbor in the actual finite atlas. -/
+neighbor in the reference atlas index order. -/
 theorem n06_adjacentPiece_positive_or_cutPair
     (h01 : N01Properties D T S C base loss ε)
     (h04 : N04Properties D T S C L K base loss ε)
