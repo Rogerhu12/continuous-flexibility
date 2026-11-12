@@ -1,0 +1,40 @@
+{
+  "kind": "reviewed_positive_reference_gauge_two_source_bundle",
+  "status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED",
+  "sources": [
+    {
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+        "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+        "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+        "lines": 168
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean",
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometryReviewedManifest.json",
+        "sha256": "97cd4ecb74836bca17a67d6e413f437e2019c6449037d66e23b788e2525e70b3"
+      }
+    },
+    {
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGauge.lean",
+        "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+        "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+        "lines": 171
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean",
+      "reviewed_manifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGaugeReviewedManifest.json",
+        "sha256": "c840e5892621bb0d24bc16a65ce264898a538ecafb8c82b4728ee5760b11d6c2"
+      }
+    }
+  ],
+  "scope": [
+    "Actual physical and canonical intervals remain distinct.",
+    "The fixed reference scalar factory supplies the geometric range certificate; composite raw fields retain the same relative tau/sigma/Q.",
+    "Raw root first-jet matching and final material estimates remain separate obligations."
+  ],
+  "compiled": false,
+  "green_receipt_applies": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

@@ -1,0 +1,67 @@
+{
+  "kind": "independent_full_source_and_actual_provider_review",
+  "reviewer": "/root",
+  "result": "passed static full-source and actual-provider review",
+  "reviewed_at": "2026-11-12T11:16:47.447179+00:00",
+  "actual_installed_head": "1ceec0b0a72a356c3ed08740438cbc84f0fffdec",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootStationaryFlowJetPolynomial.lean",
+      "sha256": "a2498a4d8e4c48a741e28c460060185df1a82ed00248d6dcfcfb5f318d879dd1",
+      "git_blob": "51bd8708147723a1a0aa8b92b8b4a5f309f37a8a",
+      "lines": 223
+    }
+  ],
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootStationaryMaterialRouteCandidateManifest.json",
+    "sha256": "b0efe1a05ea3bc70b865448aa5c5204cb71ec9f3b56b71bc3f3326945c9db0bf",
+    "git_blob": "c014e264c1efce2b41a334c6e0681527771e5815",
+    "lines": 89
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04FlowPolynomialBounds.lean",
+      "sha256": "524486388fad415c089d98b418a6f2fd7450041ed713ff42e76066615961a36f",
+      "git_blob": "bb5aace50e6a71e29acbc61e899194c2cfbe9610",
+      "lines": 194
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04FlowJetGronwall.lean",
+      "sha256": "be7703b5a9f61a90e03273c0dfa38a8fc1ccc190b5aa0edf64aedd32292646c6",
+      "git_blob": "5c4643f21b99a3469b4e9aa691494a570a9ba038",
+      "lines": 51
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootFlowSymmetry.lean",
+      "sha256": "0aa98d0d5d51dc57893e9250b42503b23385c1454ead2e7118e3ebc25c5065df",
+      "git_blob": "2c8e6ab2bd1626a48627b1c0d6d87bd97f89db44",
+      "lines": 119
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/FlowJetPartitionPolynomial.lean",
+      "sha256": "267d47d5b19a7fc05fee341082b5153793740871c3ea31186be904280a77d225",
+      "git_blob": "50921c82a96186ad0e1e33d53e9267fae06ab5c7",
+      "lines": 126
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ScalarFlowTriangularJets.lean",
+      "sha256": "799bf86f041da7b358259491c6ad07b4b7691b4d0721a4cb19a4070e8b6decef",
+      "git_blob": "02b07274685145bd873ad3eae8151bdb451381b4",
+      "lines": 197
+    }
+  ],
+  "checks": [
+    "Read all 223 source lines and compared the complete induction with the actual installed 194-line polynomial theorem. The new majorant is pointwise along a genuine stationary trajectory, with zero angular linearization; neither is treated as a conclusion without proof.",
+    "At first order the actual augmented composition derivative is bounded by M0, and the genuine jet integral theorem with alpha=0 and Lambda=0 gives 1+M0. Its weighted degree is zero, since M0 has weight zero.",
+    "At higher order the same genuine ordered-partition forcing is bounded using the lower-order polynomials at the same q and the stationary identity. The part-size minus one is strictly below n; all original weights and product nonnegativity are retained.",
+    "The existing partition polynomial gives weighted degree n. The highest angular linearization term vanishes, so no uncontrolled Gronwall exponential or parameter-box radius is introduced. Initial higher derivatives of the angular projection vanish.",
+    "The actual root equation at zero parameters supplies stationarity by rootRegularizedFlow_zero_parameters. Its field is identically zero as a function of angle at zero parameters, so the required angular derivative vanishes. Smoothness, periodicity and the original N04FlowEquations remain actual inputs.",
+    "The polynomial is chosen before every raw bound sequence, field, flow, point and time. No definite mathematical or local API problem was found."
+  ],
+  "limitations": [
+    "Uncompiled. This proves a pointwise stationary-flow estimate, not material bounds for the raw coefficients or final actual-coordinate jets."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_checkpoint_authority_plan_modified": false
+}

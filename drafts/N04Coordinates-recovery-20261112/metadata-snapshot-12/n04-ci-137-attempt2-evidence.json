@@ -1,0 +1,23 @@
+{
+  "label": 137,
+  "attempt": 2,
+  "head": "1128dfa9f256a358227759001b9f13fabc21f971",
+  "run": 43201549606,
+  "job": 131128829125,
+  "status": "cancelled",
+  "checked_at": "2026-11-12 11:14:40 UTC",
+  "raw_log": "n04-ci-137-attempt2.log",
+  "raw_sha256": "10caabd211db708d2412ba48136e82abbc04a1474c2784ebd6a65443836762cf",
+  "blueprint": "skipped",
+  "reason": "Cancelled during Build every library at 11:11:52 UTC, before the new main-merge push at 11:12:41 UTC. The cancelling actor is not identified by this log. The mandatory main-merge run supersedes this unfinished run; no green receipt.",
+  "diagnostic_lines": [
+    "2026-11-12T10:40:12.1908001Z   submodules: false",
+    "2026-11-12T10:40:12.6591672Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +1128dfa9f256a358227759001b9f13fabc21f971:refs/remotes/origin/line/N04Coordinates",
+    "2026-11-12T10:42:10.3265860Z   awk '/^error:|^\u2716/ { remaining = 60 }",
+    "2026-11-12T10:42:10.3267140Z     /Build completed|Some required targets logged failures|error: build failed/ || remaining > 0 {",
+    "2026-11-12T11:12:46.6869147Z ##[warning]Failed to save: \"/usr/bin/tar\" failed with error: The process '/usr/bin/tar' failed with exit code 1",
+    "2026-11-12T11:12:46.8281804Z echo \"modules compiled / total: $built / $total\"",
+    "2026-11-12T11:12:46.9128152Z modules compiled / total: 3528 / 3200"
+  ],
+  "raw_counter_warning": "The raw olean counter printed 3528 / 3200 after restoring a newer main cache. Extra cached modules prevent interpreting it as the number of this head source modules compiled."
+}

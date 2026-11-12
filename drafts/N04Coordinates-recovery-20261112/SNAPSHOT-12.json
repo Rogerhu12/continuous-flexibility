@@ -1,0 +1,77 @@
+{
+  "snapshot": 12,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "parent": "a578d9c02b4eff7772950a5488f35a99cb970211",
+  "base_tree": "a63b9873868e818d6a649274833fbbee6d240e2f",
+  "line_head": "1ceec0b0a72a356c3ed08740438cbc84f0fffdec",
+  "line_tree": "a11bbe227cca307c247ed8f8e27dbd3c309b18b4",
+  "frozen_at": "2026-11-12T11:24:50.705445+00:00",
+  "indexed_files": 870,
+  "new_sources": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/cut-first-jets-syntax/ConstructedRootCutFirstJets.lean",
+      "sha256": "a29f05ee93cfb524e474c635109158346645adf7cda4c0c36152b30b0c4412e4",
+      "lines": 174
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualAtlasCutFirstJets.lean",
+      "sha256": "8b9f98c22ddbad6a4c7244f7bd5ce061a14594d77926e7bc48d01d6d4a07c35c",
+      "lines": 146
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeCanonicalInterfaceClassification.lean",
+      "sha256": "4e258e62d63ad210d6d8e39ebf3e5b0f3dfe1a507134d77aceda3c3b7ac770bc",
+      "lines": 122
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGauge.lean",
+      "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+      "lines": 171
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/OneSidedEndpointAngularRootJets.lean",
+      "sha256": "a79a6432e59e900ab9ab3786ce0d1104fc276cee5eb6b8b366122e54c3e3308a",
+      "lines": 89
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "lines": 168
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveReferenceGauge.lean",
+      "sha256": "dcb5eb3bd694ee95af4247d255bdc86e8253f2e18756857ffcf46563ee26ccc9",
+      "lines": 171
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03RootUnitScaleIdentification.lean",
+      "sha256": "0a0e49b8ba1a95dd28a9409f264cc4ff0ae20e90a4e89f9dd669df99a2ba4594",
+      "lines": 166
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootParameterUnscaleRegularity.lean",
+      "sha256": "7fe3e42f4b9f474de98c984f6be9f6c96f47f899b65c9b6a7967d6709b33e6bc",
+      "lines": 134
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootPhysicalModelParameterUnscale.lean",
+      "sha256": "d184dc5ff283399395a1bc1269010fb7c5fba1a6f663e76b651c1c4645f99ed9",
+      "lines": 196
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootStationaryInverseMaterialJets.lean",
+      "sha256": "7f8ab88170b90dbfd13cae60b4b8d5ccc4fe2573df1a0a5da9ee41380215b688",
+      "lines": 163
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootStationaryMaterialJets.lean",
+      "sha256": "1c35d45253dabe29dd6772f42867d808c61d7df204dedefd5d36ebbbb0619ce4",
+      "lines": 158
+    }
+  ],
+  "new_source_lines": 1858,
+  "existing_added_lean_from_green128": 5606,
+  "projected_added_lean_from_green128": 7464,
+  "status": "Source preservation only; outside src, no CI activation or completion claim.",
+  "entries": 59
+}

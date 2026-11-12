@@ -1,0 +1,104 @@
+{
+  "kind": "independent_full_source_and_actual_provider_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "passed static full-source and actual-provider review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceSourceSquares.lean",
+    "sha256": "5e46d450a5d7766cec6832979b607b224fa7a1e263006ca091156d9a8b3d0c62",
+    "git_blob": "7791aa8d49e87108052f185a0af3d09773d986b0",
+    "lines": 170
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceDerivativeSourcesCandidateManifest.json",
+    "sha256": "549221a8914c6843e4bb913d13fa8befbbc5c12887c7642adb4567ddaef70bba",
+    "git_blob": "5495256f2ff8c6001fc62f5bcf2cc2ad9c40833c"
+  },
+  "actual_installed_ref": "1128dfa9f256a358227759001b9f13fabc21f971",
+  "read_scope": "Complete 170-line source and complete held ActualNegativePrincipalDensity111; complete installed actual-reference-travel243, closed reference travel136, root differential129, actual atlas germs94, and root reparametrization; exact coefficient, density, Jacobian and pinned calculus API definitions.",
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativePrincipalDensity.lean",
+      "sha256": "9623635a4a0d7766d72eb7b2d09213aa1bae3fb23385e0325304e60c97741181",
+      "git_blob": "3ba8a57f4c89b91f24c918f32a8eea3d9460c910",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferenceActualTravel.lean",
+      "sha256": "4307b8b206489be492e33a3f12198e4af5271c45a5db821b85ac2db0133ce7eb",
+      "git_blob": "07661eae46124d0a5550bf4f6de16a5874838d3c",
+      "lines": 243
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferenceTravelCut.lean",
+      "sha256": "9e9116e69a649d72eb4d05aa5989c2a10aedae8025568972437c1fc00f0b5030",
+      "git_blob": "d0abf85548b22ac21260636b709f3f01ea25482a",
+      "lines": 136
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootTravelDifferential.lean",
+      "sha256": "dec3f7fdccef46e0d43db9eed699626ae5e6a8a7567b2b20fc3def18283413ed",
+      "git_blob": "bd67589bb9af176fa7c25f9c7b1664bd47ed6d1b",
+      "lines": 129
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasGerms.lean",
+      "sha256": "5abee83c1a68e2b04a6d733f7e51473a15453d5debda0e8526106462e3b4d73e",
+      "git_blob": "0bf89b2339f60ac8ba2cf9678637f4bf96830a66",
+      "lines": 94
+    }
+  ],
+  "additional_definition_objects": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/PrincipalCoefficientPullback.lean",
+      "git_blob": "19262a1834a49fdb7958b07352f409bb0940de19",
+      "read": "coefficientQuadratic and coordinatePrincipalDensity exact definitions"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Scalar/FormPullback.lean",
+      "git_blob": "6238095a75eb06479071372465a41701824657c8",
+      "read": "actual planeJacobian definition"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04bRootReparametrization.lean",
+      "git_blob": "91426bc1389ab3ddaf66195c3676966fd03f9432",
+      "read": "complete source and genuine root inverse identities"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01OpticalCollarPositivity.lean",
+      "git_blob": "c392ff0cc2bba65c52097c72e879e2f90dd2dbec",
+      "read": "reference_coefficients and profile_mul_opticalSpeed_sq"
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Analysis/Calculus/FDeriv/Congr.lean",
+      "git_blob": "da599f75bd35b874f08b3fb7b326c2679500eefb",
+      "read": "DifferentiableAt.congr_of_eventuallyEq and Filter.EventuallyEq.fderiv_eq exact directions"
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Tactic/FieldSimp.lean",
+      "git_blob": "9622a688c192e987bac24cf48545b909fdae00b2",
+      "read": "normalization and certified-nonzero cancellation behavior"
+    }
+  ],
+  "checks": [
+    "The private scalar identity starts with the genuine unit density h^2/|j|*(w*j^2)=1 and |j|=v/s. Positive w,v,s prove every required denominator nonzero. It derives h^2=s/(w*v) and then the squared source exactly w*v*s^3.",
+    "At the actual reference state, the stored travel chart has a true joint germ equal to (opticalTravel(r),theta) on the full open negative component. The genuine derivative is therefore (v*q.1,q.2), using the pinned eventual-equality direction correctly.",
+    "The actual stored root-chart germ and the existing differential theorem give (j*q.1,q.2). The signed side factor remains in j, and the actual planeJacobian is j; its absolute value is v/s on either Bool side.",
+    "The density input is the already proved first component of ActualNegativePrincipalDensity111 for the SAME typed atlas, state, piece and physical point. Expanding the actual quadratic and density definitions yields precisely h^2/|j|*(w*j^2)=1.",
+    "N03 preserves the original radial coefficient a, and N01's exact reference-coefficient theorem identifies it with D.w. The optical speed square gives deriv(w)/r=-w*v^2 with genuine positive physical radius and profile.",
+    "The actual root travel inverse identity and sqrt-square identity imply s^3=(3/2)*orientedTravel. The first source then has one additional physical r^2 factor; both target constants and powers are exact.",
+    "The final t is rewritten to the actual optical travel value using the same local chart germ. No midpoint substitution, new normalization, different witness, host or target-estimate assumption is introduced.",
+    "The whole calculation uses a single Bool-side proof, including orientation sign, rather than separate near-duplicate endpoint arguments. No definite mathematical or pinned-API issue was found."
+  ],
+  "limitations": [
+    "Static independent review only; no Lean compilation or CI action.",
+    "This receipt covers ActualNegativeReferenceSourceSquares170 only, not the paired derivative-source bound219.",
+    "The identity deliberately does not estimate the middle source multiplier containing w, higher spatial jets, or the final CanonicalPrimitiveGeometry."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_checkpoint_authority_plan_modified": false
+}

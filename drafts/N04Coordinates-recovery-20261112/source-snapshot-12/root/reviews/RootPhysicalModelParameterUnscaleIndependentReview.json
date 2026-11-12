@@ -1,0 +1,65 @@
+{
+  "kind": "independent_full_source_and_actual_provider_review",
+  "reviewer": "/root",
+  "result": "passed static full-source and actual-provider review",
+  "reviewed_at": "2026-11-12T11:23:05.215414+00:00",
+  "actual_installed_head": "1ceec0b0a72a356c3ed08740438cbc84f0fffdec",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootPhysicalModelParameterUnscale.lean",
+    "sha256": "d184dc5ff283399395a1bc1269010fb7c5fba1a6f663e76b651c1c4645f99ed9",
+    "git_blob": "1faa730ba2eeb817ca0eade159949a05200e7d63",
+    "lines": 196
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootFlowParameterUnscale.lean",
+      "sha256": "82dc658872bd77c11d77ff9a4d3554ebcd11968c186ea22bb3dd88d8de790a34",
+      "git_blob": "99e5175e3bc217ba0ec1c34e4d444e1b7bfe81e0",
+      "lines": 81
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootScaledInverseCoordinate.lean",
+      "sha256": "3fe76b6261306ff11370464a45640286fbe08eef786b5dd11a5ea108e9d0bd99",
+      "git_blob": "7a7d706f7d60df8fb322230ed1ce49a67932b873",
+      "lines": 245
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootChartExtension.lean",
+      "sha256": "22b2dd9f082c968c8718ef3aa5686c3527faf5059077ef4dd0a04f48b43acf39",
+      "git_blob": "a9f27b63df8f3a8479b2cd4563336e2469cbfc73",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootDividedHeight.lean",
+      "sha256": "a9cc1f82ebbe96b6c6e9d95931004ab18ea4232d7d219910885cf682d352f42f",
+      "git_blob": "131ceed99f120ec82b3d878f85910e1160c626fe",
+      "lines": 72
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/OpenGermBoundaryJets.lean",
+      "sha256": "05b52b716681a024e31314ae49912488e7fb3d137e6c648d79e763b1ab6cc1ec",
+      "git_blob": "e78ad1c540d10874c7395c8fc16142170b57e5a8",
+      "lines": 47
+    }
+  ],
+  "checks": [
+    "Read all 196 lines and the exact actual inverse-coordinate, divided-height and open-boundary-jet providers. Source remains blob 1faa730ba2eeb817ca0eade159949a05200e7d63.",
+    "Both signed physical parameters use the same chosen flow. The even identity is exact; division by the true positive radial three-halves power gives the delta^(3/2) odd-coordinate factor.",
+    "The positive left multiplication real-power lemma explicitly covers a negative right factor via the pinned mathlib Real.rpow_def_of_neg and log_mul formulas. It does not incorrectly assume the total real power is restricted to nonnegative factors.",
+    "The delta^(3/2) factor raised to 2/3 is exactly delta. The scalar radial factor therefore cancels with the same delta in the original divided height, without bounding an arbitrary delta inverse.",
+    "The smooth rescaling (x,theta) -> (x/delta,theta) identifies the displayed model on the physical open half-plane. Equality of each ordinary jet at the true root follows from the existing open-side closure theorem; there is no asserted global commutation of Seeley extension or a common infinite-smoothness neighborhood.",
+    "Every real power of height is treated by actual pointwise nonvanishing of both models and the same physical-side equality. No quantitative collar radius or new model/flow selection appears. No definite mathematical or local API issue was found."
+  ],
+  "limitations": [
+    "Static review only, not compilation. Actual old-K model identification and genuine original material envelopes remain separate obligations."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_checkpoint_authority_plan_modified": false,
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootPhysicalModelParameterUnscaleCandidateManifest.json",
+    "sha256": "712d74d15a2821e360eb31f1201e4f7fadff37161e3e14f855df6186d36ba283",
+    "git_blob": "6fd24c82ab86f2a1d88d13687a9f8d6d6fd7d26c",
+    "lines": 62
+  }
+}

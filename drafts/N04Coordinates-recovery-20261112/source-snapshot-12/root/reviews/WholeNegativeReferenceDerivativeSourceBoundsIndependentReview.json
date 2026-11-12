@@ -1,0 +1,64 @@
+{
+  "kind": "independent_full_source_and_actual_provider_review",
+  "reviewer": "/root",
+  "result": "passed static full-source and actual-provider review",
+  "reviewed_at": "2026-11-12T11:10:39.812142+00:00",
+  "actual_worktree_head": "caf160fd957e0d6150a4a25bc9871726e9de1fa9",
+  "compiled": false,
+  "source_edited": false,
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-rescue11/audit/WholeNegativeReferenceDerivativeSourceBounds.lean",
+    "sha256": "bab84d5bbb7dde72c821e8d122687ce912626ab50230e40061a57c397de76d54",
+    "git_blob": "429764943018ee15197534f4b45ce075eb30c2fd",
+    "lines": 109
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-rescue11/audit/ActualNegativeReferenceDerivativeSourceBounds.lean",
+      "sha256": "740df37b72d5ffbbb057f6c5c15274478cbf3815c342a1b7fcfceb5bdc59e4ad",
+      "git_blob": "5adeff1258a17595c84851d6cb875915dfebb4ad",
+      "lines": 219
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasData.lean",
+      "sha256": "41a32a066758dcfb8fe7da1ab9e73bee2f7ad451fa1f7057aee40c01092905d6",
+      "git_blob": "c6abe2dcedd1974e7ec231275a17f869c0faed3b",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bCurrentPartition.lean",
+      "sha256": "4087433cb73325005c6677a09b43531b3f8abc469c95958a5c874d8bbe41a2cf",
+      "git_blob": "1005399b1097409b64312fd2994c23a7b69e5757",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+      "sha256": "166d48b590552637d5efedb29ce0b19d5963d02f33e7caebffe44a04b576fdf4",
+      "git_blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "lines": 142
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean",
+      "sha256": "91687b630205a380f137dcdb4cb32068d79582e09d17d4a4cd14317e21b9e19f",
+      "git_blob": "334d3c0c19727465e3afc75f988c79df1b8d7b8a",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01ReturnMargins.lean",
+      "sha256": "f6837c40fe69a787217b9cac9af9388bfba17785c39c29bdcad83afca21f4fbb",
+      "git_blob": "f239b311b3a9f8428fb49177124e1289113a0512",
+      "lines": 103
+    }
+  ],
+  "checks": [
+    "Read all 109 source lines and the exact actual maps/domain/source definitions. The retained negative fields identify the same W chart, inverse, height and moving physical domain with the original typed K piece.",
+    "The Bool cut-pair choice gives the original enumeration equation e0 k=inl(m,side); no component or host is replaced.",
+    "Current x maps through the actual old chart to its canonical open set. The actual reference inverse MapsTo puts y=canonicalReferencePoint W x in the old reference moving domain. Both typed domains lie in the same complete negative component.",
+    "The genuine host supplied by n01Properties_returnMargins contains the actual current radius x.1. The 219 material theorem allows this radius independently of reference y while retaining the same component host.",
+    "The W reference source factor rewrites to the actual original reference height divided by its actual Jacobian at y. Exactly primitive indices 0 and 2 reduce to the two terms of the 219 conclusion.",
+    "Constants B/P precede the state, component, host and points. No reference-point agreement, guessed cell equality, quantitative bound on an inverse map, or final geometry predicate is a premise."
+  ],
+  "limits": [
+    "Uncompiled. This covers only the two derivative source fields on negative pieces, not the middle w multiplier, higher jets, other primitive atoms or the final theorem."
+  ]
+}

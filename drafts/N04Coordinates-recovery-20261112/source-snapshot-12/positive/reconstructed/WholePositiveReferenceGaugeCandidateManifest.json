@@ -1,0 +1,66 @@
+{
+  "kind": "fixed_reference_positive_raw_fields_generalization",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveReferenceGauge.lean",
+    "sha256": "dcb5eb3bd694ee95af4247d255bdc86e8253f2e18756857ffcf46563ee26ccc9",
+    "blob": "de708f3a6b8139a3b1b0c995c270c576f7e451b4",
+    "lines": 171
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean",
+  "public_declarations": [
+    "wholePositiveReferenceGaugeChart",
+    "wholePositiveReferenceGaugeInverse",
+    "wholePositiveReferenceGaugeHeight",
+    "wholePositiveReferenceGaugeHeight_eq",
+    "wholePositiveReferenceGauge_geometry",
+    "wholePositiveReferenceGauge_reference",
+    "wholePositiveReferenceGauge_relative_fields"
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveCanonicalFields.lean",
+      "sha256": "8226260cf89a2ac8c4ba5964f2a0b5e569b021ff6d79d0c494112b0271afe7ce",
+      "blob": "a79f9987aafb83a59e1d9fb8ccb74bf5354585c1",
+      "lines": 170
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveChartGeometry.lean",
+      "sha256": "0a887d435df1b2c5df634e6dddf6ae5454a87d28039427d44651672d61c795ef",
+      "blob": "f11dc361f30a5d74ff1b836728f535abc0f79a6a",
+      "lines": 144
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveFiberClosedGeometry.lean",
+      "sha256": "b55468080818cc2ec0ea2c872121541a0d7a74981fd30bd70feadbf78f4d005b",
+      "blob": "1890b41ca0797e6577010bc9f27975d475036a6e",
+      "lines": 132
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Geometry/PlanarOrientation.lean",
+      "sha256": "c73471d5d28712ed2670631e41869c73a41996d1bb90238b74f7922f36501621",
+      "blob": "80b0e204ff31ec795e624ed14e2951aa8c905076",
+      "lines": 139
+    }
+  ],
+  "source_contract": {
+    "reference": "WholePositiveChartGeometry psi chi h0 l r c d",
+    "relative": "WholePositiveChartGeometry sigma tau (wholePositiveChartHeight sigma Q) l r c d"
+  },
+  "claims": [
+    "The actual raw chart is psi composed with sigma, the inverse is tau composed with chi, and the height is h0(sigma p)/Q(sigma p).",
+    "The existing WholePositiveChartGeometry representation is reused. Its actual open/closed maps, genuine inverse germs, positive Jacobian, periodicity/reflection and middle normalization are proved for the displayed composite fields.",
+    "At the reference member the raw fields are exactly psi, chi and h0; no unit reference height or identity reference chart is asserted.",
+    "The actual relative current map, reference map and height ratio remain tau, sigma and Q by the original true inverses and nonzero reference height.",
+    "No transport, width, endpoint source, cell or parameter is reselected."
+  ],
+  "limitations": [
+    "The fixed reference geometry is an input to this general composition lemma. Its construction and raw root-jet matching are separate tasks.",
+    "This source does not claim PrimitiveGeometryProperties, final uniform material estimates, or a completed canonical atlas.",
+    "Not compiled."
+  ],
+  "installed_public_collisions": [],
+  "compiled": false,
+  "green_receipt_applies": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

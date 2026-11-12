@@ -1,0 +1,32 @@
+{
+  "label": 138,
+  "kind": "mandatory current-main merge and minimal N03 interface port",
+  "local_source_commit": "caf160fd957e0d6150a4a25bc9871726e9de1fa9",
+  "expected_tree": "a11bbe227cca307c247ed8f8e27dbd3c309b18b4",
+  "parent": "1128dfa9f256a358227759001b9f13fabc21f971",
+  "additional_parent": "40242eae88c48c0d7edf55177c1bbb84798a10cb",
+  "base_tree": "31f999251097e7e11fbd53becc7c5693077990fa",
+  "entries": 489,
+  "content_entries": [
+    "docs/STATUS.md",
+    "docs/tasks/N04Coordinates-Realization.md",
+    "src/ContinuousFlexibility.lean",
+    "src/ContinuousFlexibility/Analysis/CanonicalNeighborhoodRestriction.lean",
+    "src/ContinuousFlexibility/Analysis/N03ErrorHomogeneousBounds.lean",
+    "src/ContinuousFlexibility/Blueprint/N04Coordinates.lean",
+    "src/ContinuousFlexibility/Blueprint/N04Coordinates/Realization.lean"
+  ],
+  "payload_chars": 346741,
+  "payload_sha256": "2a3d1dbaa88710fc8aac1c0c63396982f47cd54d856fff67f7ae137f74cb51e8",
+  "imports": 3599,
+  "source_total": 3656,
+  "status": "pushed; pending CI",
+  "independent_review": "n04-drafts/audit/interface-main40242/Main40242N03MechanicalRepairsIndependentReview.json",
+  "review_sha256": "6f95a8bbec6652a626b327bbd1f86d630881e921301e44f5a25f8e5413c03050",
+  "whitespace": "Only unchanged upstream N06DegenerateGraph.lean line621 has a trailing blank line; all own changes pass git diff --check.",
+  "reason": "Latest main rules require merging the primitive-geometry interface repair and layered cache/quick CI. This supersedes the still-running old-workflow137 without claiming its result.",
+  "published_head": "1ceec0b0a72a356c3ed08740438cbc84f0fffdec",
+  "published_tree": "a11bbe227cca307c247ed8f8e27dbd3c309b18b4",
+  "pushed": "2026-11-12 11:12:41 UTC",
+  "first_check_not_before": "2026-11-12 11:17:41 UTC"
+}

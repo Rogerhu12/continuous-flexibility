@@ -1,0 +1,35 @@
+{
+  "kind": "n04_main40242_n03_payload_mechanical_independent_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed",
+  "baseline_commit": "1128dfa9f256a358227759001b9f13fabc21f971",
+  "target_main": "40242eae88c48c0d7edf55177c1bbb84798a10cb",
+  "definition_path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+  "definition_sha256": "65fcde6ae1e43bf6fd2a5f56a2121cde66dea71c44357cd45b833e6bc3358ec1",
+  "files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalNeighborhoodRestriction.lean",
+      "before_blob": "d6d7feceb34bf34e2fa7a068176a386c5650e687",
+      "after_blob": "7888f021746c6faf5ae5f0b149ed2fd17830c6e2",
+      "after_sha256": "af2577f18d3d3af94162ce3415e3d0b96c054901827b5ea1db6d36be994d407c",
+      "exact_authorized_replacements_only": true,
+      "public_declaration_headers_unchanged": true,
+      "imports_and_options_unchanged": true
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N03ErrorHomogeneousBounds.lean",
+      "before_blob": "30582f932b4b42556d7b84c96dc88158130d44e2",
+      "after_blob": "31f58a914d4088baa254985d964f0bec30c303a4",
+      "after_sha256": "caf0b8d402d0324a35dd46a7deba61c3dc14a0669696d30057344d77e45a6c03",
+      "exact_authorized_replacements_only": true,
+      "public_declaration_headers_unchanged": true,
+      "imports_and_options_unchanged": true
+    }
+  ],
+  "findings": [
+    "N03Properties now has nine conjuncts: old terminal SmoothTameOn followed by ReturnCorrectionSpatialProperties.",
+    "Restriction preserves the additional spatial payload by applying the original hypothesis on the same smaller state neighborhood; all sector and physical-point quantifiers are unchanged.",
+    "The extra .1 selects the original smooth-tame conjunct and leaves the homogeneous estimate proof unchanged."
+  ],
+  "validation": "Independent full affected-source and exact-diff static review; no Lean execution, checkout edits, staging, ref updates or CI queries."
+}

@@ -1,0 +1,77 @@
+{
+  "kind": "independent_full_source_and_actual_provider_review",
+  "reviewer": "/root",
+  "result": "passed static full-source and actual-provider review",
+  "reviewed_at": "2026-11-12T11:23:05.286350+00:00",
+  "actual_installed_head": "1ceec0b0a72a356c3ed08740438cbc84f0fffdec",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootStationaryInverseMaterialJets.lean",
+    "sha256": "7f8ab88170b90dbfd13cae60b4b8d5ccc4fe2573df1a0a5da9ee41380215b688",
+    "git_blob": "33272bc9a03295ba5d7a255bc07b40b565923877",
+    "lines": 163
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootStationaryMaterialJets.lean",
+      "sha256": "1c35d45253dabe29dd6772f42867d808c61d7df204dedefd5d36ebbbb0619ce4",
+      "git_blob": "3e1dc27c0215f94a11692248df292d1594e6cc57",
+      "lines": 158
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ParameterizedInverseStateJets.lean",
+      "sha256": "72422f72539b0d1431fe761d394913cde6538091328f80ca7d8a3a4ed918e9cb",
+      "git_blob": "cf898e59ac9f0eb9cd45d8abd3bec84accc5d209",
+      "lines": 116
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ParameterizedInverseFirstDerivative.lean",
+      "sha256": "7603aee52b0f3b2d541a9a831b3e68dbb3087b2973fe72f51ef0b59b529a5d25",
+      "git_blob": "d5a389394aeb131a0e91ab09168cbeae5ced98a7",
+      "lines": 134
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04FlowInverseGeometry.lean",
+      "sha256": "bbe6d22713fce6fa92b5ca0cc2ca663bacbdf02909e06607c83fd8ca493415ee",
+      "git_blob": "c08e6f21401ecf53990e3f6f68c062368c6eaa2c",
+      "lines": 88
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/NonlinearInverseMaterialBounds.lean",
+      "sha256": "25ebb60e7cee5193219345b2f12a4591d1194614dd71d5219ffb2dcc8ce231e7",
+      "git_blob": "1d9f7c20419746a3f844205fe79d4a55550920a6",
+      "lines": 94
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ScalarFlowTriangularJets.lean",
+      "sha256": "799bf86f041da7b358259491c6ad07b4b7691b4d0721a4cb19a4070e8b6decef",
+      "git_blob": "02b07274685145bd873ad3eae8151bdb451381b4",
+      "lines": 197
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootFlowSymmetry.lean",
+      "sha256": "0aa98d0d5d51dc57893e9250b42503b23385c1454ead2e7118e3ebc25c5065df",
+      "git_blob": "2c8e6ab2bd1626a48627b1c0d6d87bd97f89db44",
+      "lines": 119
+    }
+  ],
+  "checks": [
+    "Read all 163 source lines. The zero-parameter stationary flow identity gives the actual chosen inverse value g((0,0),theta)=theta via its genuine right-inverse equation; it also makes the original angular derivative exactly one.",
+    "The parameter-preserving maps F/G use the same original family and its parameterizedCircleInverse. Their two actual inverse identities supply the derivative left inverse required by nonlinearInverse_positiveJets_le_material.",
+    "The first inverse differential is bounded by the existing parameterizedCircleInverse_lift_fderiv_norm_le with kappa=1, and the forward first derivative is the genuine stationary estimate at the same fixed root point.",
+    "The envelope C(j)=3+D(j) absorbs 2+D(j)*W^D(j)*S using W,S>=1 and D(j)>0. Higher augmented jets include the parameter identity contribution, and the order indices j+1+flowLoss=j+flowLoss+1 align exactly.",
+    "The common low order is max(flowBase,inverseBase), selected with the common losses before A. B is chosen before the state, material weight, coefficients, chosen flow, angle and time. Projecting the true augmented inverse to its second coordinate costs at most one.",
+    "No inverse-jet estimate, arbitrary collar lower bound, delta inverse, or separate material angular lower bound is supplied. No definite mathematical or local API issue was found."
+  ],
+  "limitations": [
+    "Static review only, not compilation. Original raw coefficient envelopes, composition with the root label, and same-K chart/height transfer remain separate obligations."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_checkpoint_authority_plan_modified": false,
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootStationaryInverseMaterialJetsCandidateManifest.json",
+    "sha256": "137d4f60126ff265fbdbf9d9f4346dffe31b8af0127a427d35523650bcfbd073",
+    "git_blob": "de4b5af0a26fc2f756f1e56edc27db80093f5f1b",
+    "lines": 75
+  }
+}

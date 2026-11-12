@@ -1,0 +1,74 @@
+{
+  "kind": "independent_full_source_and_actual_provider_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed static full-source and actual-provider review",
+  "reviewed_at": "2026-11-12T11:21:40.145219+00:00",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGauge.lean",
+    "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+    "git_blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+    "lines": 171
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGaugeCandidateManifest.json",
+    "sha256": "cdef19b12017be5396397dd3994d5367404089b323e7ece29d722b8edbd9b13d",
+    "git_blob": "12793279d02bc5cbe684dc4cc6ca60b869f697bb",
+    "lines": 79
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "git_blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "lines": 168
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveChartGeometry.lean",
+      "sha256": "0a887d435df1b2c5df634e6dddf6ae5454a87d28039427d44651672d61c795ef",
+      "git_blob": "f11dc361f30a5d74ff1b836728f535abc0f79a6a",
+      "lines": 144
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveCanonicalFields.lean",
+      "sha256": "8226260cf89a2ac8c4ba5964f2a0b5e569b021ff6d79d0c494112b0271afe7ce",
+      "git_blob": "a79f9987aafb83a59e1d9fb8ccb74bf5354585c1",
+      "lines": 170
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Geometry/PlanarOrientation.lean",
+      "sha256": "c73471d5d28712ed2670631e41869c73a41996d1bb90238b74f7922f36501621",
+      "git_blob": "80b0e204ff31ec795e624ed14e2951aa8c905076",
+      "lines": 139
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Defs/Filter.lean",
+      "sha256": "3b2ffc8154a531b4f0d3b36aa75ee08635c0df31884ba83baf1b0b0283c13748",
+      "git_blob": "343fd3e5f576a8e0f0f040eb2df8e5c309106655",
+      "lines": 359
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Continuous.lean",
+      "sha256": "14b6c26b5d22be63134a1bed41bcd9ae7720b1b3fc1c0798a42d71e33feb615c",
+      "git_blob": "620526f00d25f19d30d07ba5cad2b7a3370ba6bb",
+      "lines": 459
+    }
+  ],
+  "checks": [
+    "Read the complete 171-line distinct-range candidate and exact delta against the preserved 171-line same-strip special case. All three displayed raw field definitions and reference/relative identities are unchanged.",
+    "The physical self-map sigma/tau is composed with the fixed physical(l,r)-to-canonical(u,v) reference chart psi/chi. Both global inverse identities use the actual inverses in the correct order; all four open/closed maps retain their respective distinct ranges.",
+    "The true Jacobian chain rule has planeJacobian(psi compose sigma)=planeJacobian psi(sigma p)*planeJacobian sigma p, and both actual factors are positive. Height smoothness and positivity use h0(sigma p) times the original reciprocal-relative-height field.",
+    "Periodicity and reflection are inherited from those same displayed fields, including the actual reciprocal-height field; no new map, width or family member is selected.",
+    "The physical middle germs of the current chart and height equal psi and h0. The inverse middle germ is at psi(x,theta); continuity of chi and its actual left-inverse value transport the original tau identity germ to that exact point. Pinned ContinuousAt is definitionally the required Tendsto.",
+    "At the reference state sigma=tau=id and Q=1 give exactly psi/chi/h0. The relative current/reference maps remain tau/sigma, and h0 divided by the displayed current height at tau(p) is exactly Q(p), including the total Q(p)=0 branch.",
+    "No definite mathematical, binder or local API mismatch was found. No installed public declaration collision was found for the eight named declarations."
+  ],
+  "limits": [
+    "Uncompiled; static review does not certify elaboration or budget.",
+    "The fixed reference range certificate must still be constructed from actual endpoint data.",
+    "This lemma does not prove RootFirstJetMatching, primitive material bounds or the final output.",
+    "The older same-strip candidate is preserved and is not used to identify the actual physical and canonical intervals."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

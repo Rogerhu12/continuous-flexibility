@@ -1,0 +1,75 @@
+{
+  "kind": "independent_full_source_and_actual_provider_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "passed static full-source and exact syntax-supersession review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/cut-first-jets-syntax/ConstructedRootCutFirstJets.lean",
+    "sha256": "a29f05ee93cfb524e474c635109158346645adf7cda4c0c36152b30b0c4412e4",
+    "git_blob": "c351965626552621e295cf05b2295b8a07a5b29d",
+    "lines": 174
+  },
+  "superseded_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ConstructedRootCutFirstJets.lean",
+    "sha256": "154f918bd056e937541738b405de1265c930e2657f3fad75f0bfbd5e407cb52d",
+    "git_blob": "72e0274a019236834d80f60e62140151d37bf63d",
+    "lines": 174
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bConstructedRootTransmission.lean",
+      "sha256": "1076fbba3122f07dbbae57dc87e4268e096faeaa0dda7e0474aa774c68d4d342",
+      "git_blob": "6a7d727819d0298af773209a3bd0d6a1c01a9c7e",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootInteriorRegularity.lean",
+      "sha256": "5b940dc8d06b838873fab1ed874034e430ee410f74ba6b007819b9e7dcbabe37",
+      "git_blob": "dfaf1caaf070c2f3f127d5578f6223e78e10acb0",
+      "lines": 151
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootTravelDifferential.lean",
+      "sha256": "dec3f7fdccef46e0d43db9eed699626ae5e6a8a7567b2b20fc3def18283413ed",
+      "git_blob": "bd67589bb9af176fa7c25f9c7b1664bd47ed6d1b",
+      "lines": 129
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bConstructedRootDensity.lean",
+      "sha256": "b59f3fe82209f565c6470c3c666e24680a45964c598d76e344649e141ba58f4c",
+      "git_blob": "32bb22fc7e17a99cf7273062ef7045f7f56bd859",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootReparametrization.lean",
+      "sha256": "446966afde9bbb675d2416f5918d1f167cd44af6dfff82daa9c50bb378a117e8",
+      "git_blob": "91426bc1389ab3ddaf66195c3676966fd03f9432",
+      "lines": 115
+    }
+  ],
+  "pinned_calculus_providers": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/FDeriv/Pow.lean",
+      "sha256": "1dcf65c8ea7778a6ecd23b33c451f9deaac459a250401fe1c6886135569df43d",
+      "git_blob": "23f424a5eab9182689a3401e61eaaabae2c9ebe8",
+      "lines": 220
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Sqrt.lean",
+      "sha256": "38c916b763ade8ed7174488bad31aee40735d03877a1bf9e540c1cf0107ec1ab",
+      "git_blob": "97eb457d12cd8d572257fca6f330c5b3788f7dd9",
+      "lines": 167
+    }
+  ],
+  "finding_and_resolution": "The original private coefficient calc contained the malformed tactic separator ; <;>. The separate candidate deletes exactly that semicolon. Inserting it back restores all original bytes; all public declarations and other proof text are unchanged.",
+  "checks": [
+    "Read the full 174-line source and the actual root chart, signed differential scale, root height, cut value and smoothness providers.",
+    "The scalar identity is the actual root height formula H=(sqrt(B/sqrt(xi)))^-1, and H^2 B=sqrt(xi) follows with genuine positive denominators.",
+    "The exact pinned HasFDerivAt.pow derivative is (n smul f^(n-1)) smul Df; sqrt contributes (1/(2 sqrt(f))) smul Df. Applying these to the two genuine local identities and the equal cut heights gives 2 H B (DHright-DHleft)=-(1/sqrt(rho)) DxiLeft.",
+    "The scalar cancellation uses H^2 B=sqrt(rho) and rho=(sqrt(rho))^2, giving the stated coefficient -H/(2 rho), with nonzero 2 H B proved from positivity.",
+    "The true signed root-chart differential yields opposite radial derivatives and equal angular derivatives. Reversing the right shifted radial coordinate therefore matches the entire two-dimensional first differential.",
+    "Cut positivity and ordinary chart/height smoothness are derived at the actual middle travel point. The identities hold on actual open neighborhoods; no final transmission, inverse derivative trace or matching estimate is supplied as an input."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

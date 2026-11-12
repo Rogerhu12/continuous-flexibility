@@ -1,0 +1,89 @@
+{
+  "kind": "same_chosen_root_flow_stationary_material_candidate",
+  "author": "/root/quantitative_route",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootFlowParameterUnscale.lean",
+      "sha256": "82dc658872bd77c11d77ff9a4d3554ebcd11968c186ea22bb3dd88d8de790a34",
+      "git_blob": "99e5175e3bc217ba0ec1c34e4d444e1b7bfe81e0",
+      "lines": 81
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootStationaryFlowJetPolynomial.lean",
+      "sha256": "a2498a4d8e4c48a741e28c460060185df1a82ed00248d6dcfcfb5f318d879dd1",
+      "git_blob": "51bd8708147723a1a0aa8b92b8b4a5f309f37a8a",
+      "lines": 223
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootStationaryMaterialJets.lean",
+      "sha256": "1c35d45253dabe29dd6772f42867d808c61d7df204dedefd5d36ebbbb0619ce4",
+      "git_blob": "3e1dc27c0215f94a11692248df292d1594e6cc57",
+      "lines": 158
+    }
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootScaledInverseCoordinate.lean",
+      "sha256": "3fe76b6261306ff11370464a45640286fbe08eef786b5dd11a5ea108e9d0bd99",
+      "git_blob": "7a7d706f7d60df8fb322230ed1ce49a67932b873",
+      "lines": 245
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootRescaledAngularControl.lean",
+      "sha256": "a4af591bf756b50f7b09d1308aa2fd5e9321badc67e7f1b1c6eb2d7680a5e0df",
+      "git_blob": "4ca222fe71548d8538c08c5d0ba37b48ca12034a",
+      "lines": 142
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootFlowSymmetry.lean",
+      "sha256": "0aa98d0d5d51dc57893e9250b42503b23385c1454ead2e7118e3ebc25c5065df",
+      "git_blob": "2c8e6ab2bd1626a48627b1c0d6d87bd97f89db44",
+      "lines": 119
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootRescaledFieldJets.lean",
+      "sha256": "a2f5a866b628b9b89689171893874512762c44992897375877944ae8b2b45f36",
+      "git_blob": "fed379debf732d6da171b3363b9e98bac126d1f6",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootRescaledMaterialJets.lean",
+      "sha256": "bcae6a765108ae0990a14aa57b983f537d32c5c6e56b7fcfe498b72397194a56",
+      "git_blob": "b36b8e169748dfe58e9d647447e8659cff954d25",
+      "lines": 87
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04FlowPolynomialBounds.lean",
+      "sha256": "524486388fad415c089d98b418a6f2fd7450041ed713ff42e76066615961a36f",
+      "git_blob": "bb5aace50e6a71e29acbc61e899194c2cfbe9610",
+      "lines": 194
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04FlowJetGronwall.lean",
+      "sha256": "be7703b5a9f61a90e03273c0dfa38a8fc1ccc190b5aa0edf64aedd32292646c6",
+      "git_blob": "5c4643f21b99a3469b4e9aa691494a570a9ba038",
+      "lines": 51
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/FlowJetMaterialClosure.lean",
+      "sha256": "73064778e3932bb04d20dd2bf0a8cb069432e69f2c64fac705c05689f3bf2e7e",
+      "git_blob": "34ac6e592d6bea481efe6403e83906e0b94f51b6",
+      "lines": 155
+    }
+  ],
+  "derived": [
+    "The same chosen scaled flow reparametrizes exactly to the unscaled equation, preserving both physical inverse-coordinate parameters.",
+    "The actual root stationary trajectory and zero angular linearization admit a polynomial jet estimate of the original weighted degree using raw jets only at the root.",
+    "The genuine root-axis raw field jets follow from the existing pointwise raw-field theorem at scale one, and the existing polynomial closure gives one common low order and state loss."
+  ],
+  "quantifier_order": "Common base/loss precede raw coefficient envelope A; output B precedes state z, material W, coefficients, chosen flow, angle and time.",
+  "not_claimed": [
+    "Uniform E0 bounds for the raw drift/speed tower have not yet been derived here.",
+    "No arbitrary profile-germ, parameter-box, or localization radius is claimed to have a material inverse bound.",
+    "The exact inverse-coordinate reparametrization has not yet been propagated through the full extended-root-chart and height jets of old K.",
+    "No additional N01PrimitiveGeometry is projected from current Through03."
+  ],
+  "compiled": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

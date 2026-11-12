@@ -1,0 +1,8 @@
+{
+  "restored_at": "2026-11-12T11:05:30.074453+00:00",
+  "snapshot": "121a8cc85e0fae7ab1f20e849432bbfbe362f65a",
+  "indexed_files_verified": 799,
+  "metadata_files": 53,
+  "active_head": "1128dfa9f256a358227759001b9f13fabc21f971",
+  "method": "git show exact stored_at commit:path, SHA256 matched every indexed source"
+}
