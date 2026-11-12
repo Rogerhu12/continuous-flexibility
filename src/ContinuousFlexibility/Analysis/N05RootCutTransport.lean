@@ -127,8 +127,9 @@ theorem n05_cut_reference_root_transport
   change (Ψ (root, θ + σ * travel)).1 = 0 at hroot
   calc
     _ = n05NullCoordinate Ψ σ (root, θ + σ * travel) := ht
-    _ = _ := by
+    _ = (Ψ (root, θ + σ * travel)).2 := by
       simp only [n05NullCoordinate, hroot, n05TricomiTime_zero, mul_zero, add_zero]
+    _ = _ := rfl
 
 /-- The actual angular chart at either root satisfies the exact symmetric
 finite-difference identity determined by the common canonical cut radius. -/
