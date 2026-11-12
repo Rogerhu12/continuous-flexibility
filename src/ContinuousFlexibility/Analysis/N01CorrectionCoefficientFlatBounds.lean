@@ -142,7 +142,9 @@ private theorem correctionCoefficient_local_bounds_of_sublevels
   refine ⟨K, hK, fun x hx v a b hab q => hKb x ⟨hx.1, ?_⟩ v a b hab q⟩
   have htriangle := map_add_le_add (p B) (x - x₀) x₀
   rw [sub_add_cancel] at htriangle
-  linarith only [htriangle, hx.2]
+  have hnear : p B (x - x₀) < 1 := hx.2
+  show p B x ≤ p B x₀ + 1
+  linarith only [htriangle, hnear]
 
 local instance n01CorrectionCoefficientFlatBoundsStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
