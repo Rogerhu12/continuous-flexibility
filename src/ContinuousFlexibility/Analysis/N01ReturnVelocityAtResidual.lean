@@ -49,6 +49,8 @@ theorem N01Properties.smoothTameOn_returnCorrectionVelocity_at_residual
   have ht : WithSeminorms p := sectorPairGrading_withSeminorms S
   have htop : WithSeminorms H.grading :=
     withSeminorms_graded (fun n => H.level n) H.bond
+  letI : LocallyConvexSpace ℝ ((StateDirections S × ℝ) × H.Space) :=
+    (withSeminorms_pairGrading ht htop).toLocallyConvexSpace
   have hU : IsOpen U := sectorNeighborhood_isOpen S base ε ε
   have hid : SmoothTameOn p p U (fun z : StateDirections S × ℝ => z) :=
     smoothTameOn_restrict_open
@@ -61,11 +63,10 @@ theorem N01Properties.smoothTameOn_returnCorrectionVelocity_at_residual
   have hv := hN.smoothTameOn_returnCorrectionVelocityCircleLinear
     hS hT j hcell χ hχrange hcutoff rsel hrsel
   exact smoothTameOn_comp_topological
-    (X := StateDirections S × ℝ) (Y := (StateDirections S × ℝ) × H.Space)
     (G := fun n => H.level n) (g := H.bond)
     (p := p) (q := pairGrading p H.grading) (r := H.grading)
-    (U := U) (V := U ×ˢ univ)
-    (u := fun z => (z, R.residual (liftSectorParameter S C z)))
+    (U := U) (V := U ×ˢ (univ : Set H.Space))
+    (u := fun z : StateDirections S × ℝ => (z, R.residual (liftSectorParameter S C z)))
     (v := fun x : (StateDirections S × ℝ) × H.Space =>
       hN.returnCorrectionVelocityCircleLinear hS hT j hcell χ hχrange hcutoff rsel hrsel
         x.1 x.2)

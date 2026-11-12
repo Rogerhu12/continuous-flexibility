@@ -36,6 +36,18 @@ def field
   minusFlow := returnCorrectedMinusFlow S C Q.cutoff
   error := E
 
+theorem field_regular
+    (hN : N01Properties D T S C base loss ε)
+    (hR : N02Properties D T S C R base ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (E : AnnularState S × ℝ → CircleSpace S →ₗ[ℝ] HeightPair S →ₗ[ℝ] S.Source) :
+    N04bFieldRegularity D S C (Q.field E) base ε :=
+  hN.n04b_opticalFieldRegularity hR hS hT
+    Q.cutoff Q.cutoff_smooth Q.range_on_component Q.tsupport_interior Q.endpoint_germs
+    (fun z hz hs m r hr θ => (Q.corrected_speeds z hz hs m r hr θ).1)
+    (Q.field E) rfl
+    (fun m r hr θ => hN.n04b_returnCorrectedMinusFlow_reference hS hT Q.cutoff m hr θ)
+
 theorem field_n03
     (hN : N01Properties D T S C base loss ε)
     (hR : N02Properties D T S C R base ε)
@@ -51,7 +63,8 @@ theorem field_n03
       (fun z : ((StateDirections S × ℝ) × CircleSpace S) × HeightPair S =>
         E (liftSectorParameter S C z.1.1) z.1.2 z.2)) :
     N03Properties D T S C R (Q.field E) base ε := by
-  refine ⟨?_, ?_, ?_, ?_, Q.corrected_flow hN hS hT, ?_, ?_, htame⟩
+  refine ⟨?_, ?_, ?_, ?_, Q.corrected_flow hN hS hT, ?_, ?_, htame,
+    (Q.field_regular hN hR hS hT E).toReturnCorrectionSpatialProperties⟩
   · intro z hz hs p
     rfl
   · intro z hz hs p hp hpositive
@@ -74,18 +87,6 @@ theorem field_n03
         (hE z hz hs (R.residual z) η p).symm
   · intro z hz hs ρ η
     exact physicalSourceIntegral_decode_source_eq_zero hS (E z ρ η)
-
-theorem field_regular
-    (hN : N01Properties D T S C base loss ε)
-    (hR : N02Properties D T S C R base ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
-    (E : AnnularState S × ℝ → CircleSpace S →ₗ[ℝ] HeightPair S →ₗ[ℝ] S.Source) :
-    N04bFieldRegularity D S C (Q.field E) base ε :=
-  hN.n04b_opticalFieldRegularity hR hS hT
-    Q.cutoff Q.cutoff_smooth Q.range_on_component Q.tsupport_interior Q.endpoint_germs
-    (fun z hz hs m r hr θ => (Q.corrected_speeds z hz hs m r hr θ).1)
-    (Q.field E) rfl
-    (fun m r hr θ => hN.n04b_returnCorrectedMinusFlow_reference hS hT Q.cutoff m hr θ)
 
 end N04bOpticalCutoffData
 
