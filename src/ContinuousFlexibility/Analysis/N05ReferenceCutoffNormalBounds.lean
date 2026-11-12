@@ -32,6 +32,7 @@ theorem n05_leftCutoff_normal_weighted_bound {D : ReferenceData}
     memLp_referenceWeightedMeasure hab hpart hc (by simpa only [sourceCellSquare_neg_fun] using hs)
   let Z : ℝ := outputNormSquare D γ M 0 (d, 0)
   have hZ : 0 ≤ Z := by
+    dsimp only [Z]
     rw [n05_referenceZeroOutputNormSquare_eq_integral hab hpart hd]
     exact integral_nonneg (fun _ => sq_nonneg _)
   refine ⟨2 * (1 + Z), by positivity, fun a ur hur => ?_⟩
