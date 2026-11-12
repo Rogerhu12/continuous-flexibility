@@ -50,7 +50,8 @@ theorem n05CanonicalGlobalInverse_base_relation
   funext m
   calc
     _ = (n05CanonicalVolumeModel T S K).forget (3 / 4 : ℝ) (0 - 4) 0 W m := by
-      rw [n05CanonicalVolumeModel_forget, n05CanonicalVolumeModel_forget]
+      rw [n05CanonicalVolumeModel_forget T S K (3 / 4) (-4) 0 W m,
+        n05CanonicalVolumeModel_forget T S K (3 / 4) (0 - 4) 0 W m]
       norm_num
     _ = _ := congrFun hW m
 
