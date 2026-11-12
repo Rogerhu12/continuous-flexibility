@@ -37,10 +37,11 @@ theorem n04WholeCanonicalAtlasData_cutGeometry
       n04WholeCutPair, Equiv.apply_symm_apply, n04WholePiecePositive,
       Bool.false_eq_true, ite_false, ite_true, h.1, h.2.1] using h
   · intro z hz hs m
-    simpa only [CanonicalCurrentCutPair, canonicalCutPoint,
-      physicalPieceOpen, n04WholeCanonicalAtlasData, n04bWithInteriorDivision,
+    have h := hcut.2 z hz hs m
+    dsimp only [CanonicalCurrentCutPair, canonicalCutPoint] at h ⊢
+    simpa only [physicalPieceOpen, n04WholeCanonicalAtlasData, n04bWithInteriorDivision,
       n04WholeCutPair, Equiv.apply_symm_apply,
-      Bool.false_eq_true, ite_false, ite_true] using hcut.2 z hz hs m
+      Bool.false_eq_true, ite_false, ite_true] using h
 
 theorem n04WholeCanonicalAtlasData_transmission
     (htrans : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
@@ -61,8 +62,9 @@ theorem n04WholeCanonicalAtlasData_transmission
       radialPartial Wr (W.cutRadius m, θ) =
         -radialPartial Wl (W.cutRadius m, θ) -
           Wl (W.cutRadius m, θ) / (2 * W.cutRadius m) := by
-  simpa only [canonicalHeight, n04WholeCanonicalAtlasData, n04bWithInteriorDivision,
-    n04WholeCutPair, Equiv.apply_symm_apply, Bool.false_eq_true, ite_false, ite_true] using
-    htrans z hz hs u hu m θ
+  have h := htrans z hz hs u hu m θ
+  dsimp only [canonicalHeight] at h ⊢
+  simpa only [n04WholeCanonicalAtlasData, n04bWithInteriorDivision,
+    n04WholeCutPair, Equiv.apply_symm_apply, Bool.false_eq_true, ite_false, ite_true] using h
 
 end ContinuousFlexibility.Analysis

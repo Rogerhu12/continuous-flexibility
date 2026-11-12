@@ -27,8 +27,11 @@ theorem wholePositiveCanonicalCoefficients_eq_reverse
     (Q : PolarPoint → ℝ) :
     wholePositiveCanonicalCoefficients A τ σ Q =
       reverseCoordinatePrincipalCoefficients A τ σ Q := by
+  have hh : wholePositiveChartHeight σ Q = (fun y : PolarPoint => (Q (σ y))⁻¹) := by
+    funext y
+    rfl
   simp only [wholePositiveCanonicalCoefficients, reverseCoordinatePrincipalCoefficients,
-    wholePositiveChartHeight, one_div]
+    hh, one_div]
 
 theorem wholePositiveCanonicalCoefficient_component_eq_adjugate
     (A : SymmetricCoefficients) {τ σ : PolarPoint → PolarPoint}

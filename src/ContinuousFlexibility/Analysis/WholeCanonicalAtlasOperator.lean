@@ -57,6 +57,7 @@ theorem n04WholeCanonicalAtlasData_operatorFields
       simp only [n04WholeCanonicalAtlasData, n04bWithInteriorDivision, hi,
         n04WholePiecePositive, ite_true, wholePositiveCanonicalCoefficients,
         wholePositiveCanonicalPotential, neg_one_mul]
+      exact ⟨True.intro, fun _ => True.intro⟩
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
