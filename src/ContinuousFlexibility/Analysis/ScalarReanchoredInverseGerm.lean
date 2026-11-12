@@ -60,7 +60,8 @@ theorem invFun_reanchored_eq_eventually
     (hinj : ∀ᶠ p in l, Function.Injective (f p.1)) :
     ∀ᶠ p in l, H (Function.invFun (f p.1) p.2) = J p := by
   have hlimit : Tendsto (fun p => Function.invFun H (J p)) l (𝓝 ι) := by
-    simpa only [Function.leftInverse_invFun hH.1 ι] using hHinv.tendsto.comp hJ
+    simpa only [Function.comp_def, Function.leftInverse_invFun hH.1 ι] using
+      hHinv.tendsto.comp hJ
   filter_upwards [heq, hright, hinj, hlimit.eventually hV] with p hp hr hi hv
   have hHright := Function.rightInverse_invFun hH.2 (J p)
   have hmatch : g p.1 (J p) = f p.1 (Function.invFun H (J p)) := by

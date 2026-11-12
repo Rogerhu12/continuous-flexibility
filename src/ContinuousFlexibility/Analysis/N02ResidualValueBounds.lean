@@ -46,7 +46,8 @@ theorem exists_tameValueBoundAtOrder_zero
     _ ≤ B * (1 + p (max s low + loss) z) := hv
     _ ≤ B * (1 + p (s + (low + loss)) z) :=
       mul_le_mul_of_nonneg_left
-        (add_le_add_left (hp (by omega : max s low + loss ≤ s + (low + loss)) z) 1) hB
+        (add_le_add (le_refl (1 : ℝ))
+          (hp (by omega : max s low + loss ≤ s + (low + loss)) z)) hB
 
 def N02ResidualValueBoundAtOrder
     (S : PhysicalSpacesData) (C : NonlinearGeometryData S) (R : ReturnEquationData S)

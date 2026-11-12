@@ -61,6 +61,24 @@ theorem root_fderiv_eq_of_firstJet_eq
     simpa only [norm_iteratedFDeriv_one, hd.fderiv, norm_zero] using congrArg norm hz
   exact sub_eq_zero.mp (norm_eq_zero.mp hn)
 
+private theorem rootProfileShift_inverse_affine
+    (r ℓ : ℝ) (hℓ : ℓ ≠ 0) (y : PolarPoint) :
+    rootProfileShift r ℓ ((-r / ℓ, 0) + rootProfileInverseLinear ℓ y) = y := by
+  ext <;> simp only [rootProfileInverseLinear, rootProfileShift,
+    ContinuousLinearMap.prod_apply, ContinuousLinearMap.smul_apply,
+    ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
+    Prod.fst_add, Prod.snd_add, Prod.fst, Prod.snd, smul_eq_mul, zero_add] <;>
+    field_simp [hℓ] <;> ring
+
+private theorem rootProfile_inverse_affine_shift
+    (r ℓ : ℝ) (hℓ : ℓ ≠ 0) (q : PolarPoint) :
+    (-r / ℓ, 0) + rootProfileInverseLinear ℓ (rootProfileShift r ℓ q) = q := by
+  ext <;> simp only [rootProfileInverseLinear, rootProfileShift,
+    ContinuousLinearMap.prod_apply, ContinuousLinearMap.smul_apply,
+    ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
+    Prod.fst_add, Prod.snd_add, Prod.fst, Prod.snd, smul_eq_mul, zero_add] <;>
+    field_simp [hℓ] <;> ring
+
 theorem PointwiseMaterialJetBound.unscale_rootProfile
     {E : Type} [AddCommGroup E] [Module ℝ E]
     {Y : Type*} [NormedAddCommGroup Y] [NormedSpace ℝ Y]
@@ -74,18 +92,10 @@ theorem PointwiseMaterialJetBound.unscale_rootProfile
       f (rootProfileShift r ℓ q) := by
   let a : PolarPoint := (-r / ℓ, 0)
   let L := rootProfileInverseLinear ℓ
-  have hback (y : PolarPoint) : rootProfileShift r ℓ (a + L y) = y := by
-    ext <;> simp only [a, L, rootProfileInverseLinear, rootProfileShift,
-      ContinuousLinearMap.prod_apply, ContinuousLinearMap.smul_apply,
-      ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
-      Prod.fst_add, Prod.snd_add, Prod.fst, Prod.snd, smul_eq_mul, zero_add] <;>
-      field_simp [hℓ] <;> ring
-  have harg : a + L (rootProfileShift r ℓ q) = q := by
-    ext <;> simp only [a, L, rootProfileInverseLinear, rootProfileShift,
-      ContinuousLinearMap.prod_apply, ContinuousLinearMap.smul_apply,
-      ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
-      Prod.fst_add, Prod.snd_add, Prod.fst, Prod.snd, smul_eq_mul, zero_add] <;>
-      field_simp [hℓ] <;> ring
+  have hback (y : PolarPoint) : rootProfileShift r ℓ (a + L y) = y :=
+    rootProfileShift_inverse_affine r ℓ hℓ y
+  have harg : a + L (rootProfileShift r ℓ q) = q :=
+    rootProfile_inverse_affine_shift r ℓ hℓ q
   have hs : ContDiffAt ℝ ∞ (fun y => f (rootProfileShift r ℓ y))
       (a + L (rootProfileShift r ℓ q)) := by rw [harg]; exact hf
   have hj : PointwiseMaterialJetBound p loss A z
@@ -94,7 +104,11 @@ theorem PointwiseMaterialJetBound.unscale_rootProfile
     exact hb
   have ha : PointwiseMaterialJetBound p loss (fun n => ‖L‖ ^ n * A n) z
       (fun y => f (rootProfileShift r ℓ (a + L y))) (rootProfileShift r ℓ q) :=
-    PointwiseMaterialJetBound.affine_comp L a hs hj
+    PointwiseMaterialJetBound.affine_comp
+      (E := E) (X := PolarPoint) (Y := PolarPoint) (Z := Y)
+      (p := p) (loss := loss) (A := A) (z := z)
+      (f := fun y => f (rootProfileShift r ℓ y))
+      (x := rootProfileShift r ℓ q) L a hs hj
   have he : (fun y => f (rootProfileShift r ℓ (a + L y))) = f := by
     funext y
     rw [hback y]

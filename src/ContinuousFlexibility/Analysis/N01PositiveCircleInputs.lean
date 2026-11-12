@@ -163,7 +163,8 @@ private theorem positiveInput_metricSlope_lower
   let f : ℝ → ℝ := fun ν =>
     Real.exp (ν * χ r) * (deriv w r + ν * w r * deriv χ r)
   have hf : Continuous f :=
-    (continuous_id.mul continuous_const).exp.mul
+    (Real.continuous_exp.comp
+      (show Continuous (fun ν : ℝ => ν * χ r) from continuous_id.mul continuous_const)).mul
       (continuous_const.add ((continuous_id.mul continuous_const).mul continuous_const))
   have he (ν : ℝ) : f ν = deriv (fun t => w t * Real.exp (ν * χ t)) r := by
     have hd := ((hw.differentiable (by simp) r).hasDerivAt.fun_mul

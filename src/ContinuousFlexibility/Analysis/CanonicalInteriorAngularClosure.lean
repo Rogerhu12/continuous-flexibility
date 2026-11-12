@@ -44,7 +44,8 @@ theorem canonicalGluedAiryIntegral_angular_bounds_closedStrip
       (fun s : ℝ => angularPartial (canonicalGluedAiryIntegral S K z m σ) (s, θ))
       (𝓝[Ioo a b] r)
       (𝓝 (angularPartial (canonicalGluedAiryIntegral S K z m σ) (r, θ))) :=
-    (hc.comp hline).mono_left nhdsWithin_le_nhds
+    (ContinuousAt.comp (f := fun s : ℝ => (s, θ)) (x := r) hc hline).mono_left
+      nhdsWithin_le_nhds
   have he : ∀ᶠ s in 𝓝[Ioo a b] r,
       angularPartial (canonicalGluedAiryIntegral S K z m σ) (s, θ) ∈ Icc l u := by
     filter_upwards [self_mem_nhdsWithin] with s hss

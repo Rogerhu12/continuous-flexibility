@@ -41,7 +41,8 @@ private theorem characteristicHalfLinear_norm (difference : Bool) :
   have h2 : |x.2| ≤ ‖x‖ := by simpa only [Real.norm_eq_abs] using norm_snd_le x
   have hh := abs_add_le x.1 ((if difference then (-1 : ℝ) else 1) * x.2)
   rw [he] at hh
-  norm_num only [abs_ofNat, one_mul]
+  rw [abs_of_pos (by norm_num : (0 : ℝ) < 2)]
+  simp only [one_mul]
   nlinarith only [hh, h1, h2]
 
 theorem characteristicPair_material_jets

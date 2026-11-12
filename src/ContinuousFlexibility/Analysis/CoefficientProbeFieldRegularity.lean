@@ -53,7 +53,8 @@ theorem coefficientErrorCrossNumerator_fieldRegularity
   · intro p
     change Erc (p + (0, Real.pi)) - radialLinearProbe χ (p + (0, Real.pi)) *
         Ec (p + (0, Real.pi)) - radialCosineProbe χ (p + (0, Real.pi)) *
-          Er (p + (0, Real.pi)) = _
+          Er (p + (0, Real.pi)) =
+        Erc p - radialLinearProbe χ p * Ec p - radialCosineProbe χ p * Er p
     rw [hrc.2.2.1 p, radialLinearProbe_periodic χ p, hc.2.2.1 p,
       radialCosineProbe_periodic χ p, hr.2.2.1 p]
   · intro p hp
@@ -72,7 +73,7 @@ theorem coefficientErrorSquareNumerator_fieldRegularity
       hc.2.1 r θ, hcc.2.1 r θ]
   · intro p
     change Ecc (p + (0, Real.pi)) - 2 * radialCosineProbe χ (p + (0, Real.pi)) *
-      Ec (p + (0, Real.pi)) = _
+      Ec (p + (0, Real.pi)) = Ecc p - 2 * radialCosineProbe χ p * Ec p
     rw [hcc.2.2.1 p, radialCosineProbe_periodic χ p, hc.2.2.1 p]
   · intro p hp
     simp only [coefficientErrorSquareNumerator, hc.2.2.2 p hp,

@@ -47,7 +47,6 @@ private theorem n04Coordinates_scaled_gap_square_lower
     calc
       _ = a * ((Real.sqrt d / a) / 2) := by
         field_simp [ha.ne']
-        ring
       _ ≤ a * v := mul_le_mul_of_nonneg_left hv ha.le
   have hsquare := pow_le_pow_left₀
     (div_nonneg (Real.sqrt_nonneg d) (by norm_num : (0 : ℝ) ≤ 2)) hscaled 2

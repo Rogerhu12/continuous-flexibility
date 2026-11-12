@@ -107,7 +107,14 @@ private theorem rootStoredFlowAgreement_of_fixed_band
         simp only [r, σ, n01ComponentRoot, n01ComponentRootOrientation,
           Bool.false_eq_true, ite_false, ite_true, one_mul, neg_one_mul] <;>
         constructor <;> linarith only [ht.1, htwidth]
-    have hv := hcoeff t (Ioo_subset_Icc_self ht) (f t)
+    have hv :
+        (L.coefficients z).a (r + σ * t, f t) =
+            (originalCoefficients D S C z).a (r + σ * t, f t) ∧
+          (L.coefficients z).b (r + σ * t, f t) =
+            (originalCoefficients D S C z).b (r + σ * t, f t) ∧
+          (L.coefficients z).c (r + σ * t, f t) =
+            (originalCoefficients D S C z).c (r + σ * t, f t) :=
+      hcoeff t (Ioo_subset_Icc_self ht) (f t)
     have heq : minusCharacteristicSpeed (L.coefficients z) (r + σ * t, f t) =
         minusCharacteristicSpeed (originalCoefficients D S C z) (r + σ * t, f t) := by
       simp only [minusCharacteristicSpeed, hv.1, hv.2.1, hv.2.2]
@@ -115,6 +122,10 @@ private theorem rootStoredFlowAgreement_of_fixed_band
       (contDiff_stateProfile_of_n01 hS hT hN z.1)
       (contDiff_stateHeight_of_n01 hS hT hN z) hR hstrip
       (p := (t, f t)) ⟨ht.1.le, ht.2.le.trans hρR⟩
+    have hraw' : rootPhysicalSpeed (localizedRootDrift D S C r σ hR z)
+        (localizedRootSpeed D S C g r σ hR z) (-σ) (t, f t) =
+        σ * minusCharacteristicSpeed (originalCoefficients D S C z) (r + σ * t, f t) :=
+      hraw
     have hlin : HasDerivAt (fun s : ℝ => r + σ * s) σ t := by
       simpa only [mul_one, id_eq] using ((hasDerivAt_id t).const_mul σ).const_add r
     have hd := (hstored.2.2.1 (r + σ * t) hp).comp t hlin
@@ -125,7 +136,7 @@ private theorem rootStoredFlowAgreement_of_fixed_band
     change HasDerivAt f
       (minusCharacteristicSpeed (L.coefficients z) (r + σ * t, f t) * σ) t at hd
     apply hd.congr_deriv
-    rw [hraw, heq]
+    rw [hraw', heq]
     ring
   have hinit : f 0 = L.minusFlow z m r ι := by simp only [f, mul_zero, add_zero]
   exact rootRescaledFlow_eq_storedTrajectory (f := f) hη hδ Real.pi_ne_zero

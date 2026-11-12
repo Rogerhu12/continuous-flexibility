@@ -25,7 +25,8 @@ theorem iteratedFDeriv_snd_periodic_of_periodic
     Function.Periodic (fun θ => iteratedFDeriv ℝ n f (r, θ)) T := by
   have he : (fun q : PolarPoint => f ((0, T) + q)) = f := by
     funext q
-    simpa only [Prod.mk_add_mk, zero_add, add_comm T q.2] using hperiod q.1 q.2
+    rcases q with ⟨x, θ⟩
+    simpa only [Prod.mk_add_mk, zero_add, add_comm T θ] using hperiod x θ
   intro θ
   have ht := iteratedFDeriv_comp_add_left (𝕜 := ℝ) (f := f) n (0, T) (r, θ)
   rw [he] at ht
@@ -39,7 +40,8 @@ theorem iteratedFDeriv_snd_periodic_of_lift
     Function.Periodic (fun θ => iteratedFDeriv ℝ n f (r, θ)) T := by
   have he : (fun q : PolarPoint => f ((0, T) + q)) = f + (fun _ => v) := by
     funext q
-    simpa only [Prod.mk_add_mk, zero_add, add_comm T q.2, Pi.add_apply] using hperiod q.1 q.2
+    rcases q with ⟨x, θ⟩
+    simpa only [Prod.mk_add_mk, zero_add, add_comm T θ, Pi.add_apply] using hperiod x θ
   obtain ⟨k, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (by omega : n ≠ 0)
   intro θ
   have ht := iteratedFDeriv_comp_add_left (𝕜 := ℝ) (f := f) (k + 1) (0, T) (r, θ)

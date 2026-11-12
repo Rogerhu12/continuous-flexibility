@@ -45,6 +45,44 @@ private theorem sqrt_div_lower_of_rectangle
     _ ≤ Real.sqrt V / a :=
       div_le_div_of_nonneg_left (Real.sqrt_nonneg V) ha hau
 
+private theorem dividedRoot_scaled_band_membership
+    {R R₀ δ ρ : ℝ} (hR : 0 < R) (hR₀ : 0 < R₀) (hδ : 0 < δ)
+    (hscale : δ * ρ ≤ R₀ / 2) (hscaleR : δ * ρ ≤ R / 4)
+    {q : PolarPoint} (hq : q.1 ∈ Icc 0 ρ) :
+    δ * q.1 ∈ Ioo (-R₀) R₀ ∧
+      (δ * q.1, q.2) ∈ Ioo (-R - R) (R + R) ×ˢ (univ : Set ℝ) ∧
+      (δ * q.1, q.2) ∈ Ioo (-(R / 2)) (R / 2) ×ˢ (univ : Set ℝ) := by
+  have hnonneg : 0 ≤ δ * q.1 := mul_nonneg hδ.le hq.1
+  have hupper : δ * q.1 ≤ R₀ / 2 :=
+    (mul_le_mul_of_nonneg_left hq.2 hδ.le).trans hscale
+  have hquarter : δ * q.1 ≤ R / 4 :=
+    (mul_le_mul_of_nonneg_left hq.2 hδ.le).trans hscaleR
+  refine ⟨?_, ?_, ?_⟩
+  · constructor <;> linarith only [hR₀, hnonneg, hupper]
+  · refine ⟨⟨?_, ?_⟩, mem_univ _⟩ <;> linarith only [hR, hnonneg, hquarter]
+  · refine ⟨⟨?_, ?_⟩, mem_univ _⟩ <;> linarith only [hR, hnonneg, hquarter]
+
+private theorem dividedRoot_localizedSpeed_lower
+    {wref g w : ℝ → ℝ} {k : PolarPoint → ℝ}
+    {r σ R lV uV la ua : ℝ} {p : PolarPoint}
+    (hR : 0 < R) (hla : 0 < la)
+    (houter : p ∈ Ioo (-R - R) (R + R) ×ˢ (univ : Set ℝ))
+    (hhalf : p ∈ Ioo (-(R / 2)) (R / 2) ×ˢ (univ : Set ℝ))
+    (hstrip : RootCoefficientStripConditions wref g w k r σ R)
+    (hvalue : (rootCoefficientRadialFactor wref g w k r σ p,
+      polarLinearA w k (rootProfileShift r σ p)) ∈ Icc lV uV ×ˢ Icc la ua) :
+    Real.sqrt lV / ua ≤
+      rootFieldLocalization (factoredCharacteristicSpeed wref g w k r σ) hR p := by
+  obtain ⟨hr, hw, hg, hD, hQ, _, _⟩ := hstrip p houter
+  have ha : 0 < polarLinearA w k (rootProfileShift r σ p) :=
+    hla.trans_le hvalue.2.1
+  have hc : Real.sqrt lV / ua ≤ factoredCharacteristicSpeed wref g w k r σ p := by
+    rw [factoredCharacteristicSpeed_eq_sqrt_div_coefficient hr hw hg hD hQ]
+    exact sqrt_div_lower_of_rectangle hvalue.1.1 ha hvalue.2.2
+  exact hc.trans_eq
+    (rootFieldLocalization_eqOn (F := factoredCharacteristicSpeed wref g w k r σ)
+      hR hhalf).symm
+
 private theorem n01_dividedRootBand_of_rectangle
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {base low loss : ℕ} {ε r σ R R₀ δ ρ lV uV la ua : ℝ} {g : ℝ → ℝ}
@@ -65,32 +103,15 @@ private theorem n01_dividedRootBand_of_rectangle
     N01DividedRootBandBound D S C base low loss ε r σ g hR δ ρ lV uV
       (Real.sqrt lV / ua) B := by
   intro z hz hs hlow q hq
-  have hnonneg : 0 ≤ δ * q.1 := mul_nonneg hδ.le hq.1
-  have hupper : δ * q.1 ≤ R₀ / 2 :=
-    (mul_le_mul_of_nonneg_left hq.2 hδ.le).trans hscale
-  have hq₀ : δ * q.1 ∈ Ioo (-R₀) R₀ := by
-    constructor <;> linarith
-  have hquarter : δ * q.1 ≤ R / 4 :=
-    (mul_le_mul_of_nonneg_left hq.2 hδ.le).trans hscaleR
-  have houter : (δ * q.1, q.2) ∈ Ioo (-R - R) (R + R) ×ˢ (univ : Set ℝ) := by
-    refine ⟨⟨?_, ?_⟩, mem_univ _⟩ <;> linarith
-  have hhalf : (δ * q.1, q.2) ∈ Ioo (-(R / 2)) (R / 2) ×ˢ (univ : Set ℝ) := by
-    refine ⟨⟨?_, ?_⟩, mem_univ _⟩ <;> linarith
+  obtain ⟨hq₀, houter, hhalf⟩ :=
+    dividedRoot_scaled_band_membership hR hR₀ hδ hscale hscaleR hq
   have hvalue := hvalues z hz hs (δ * q.1, q.2) ⟨hq₀, mem_univ _⟩
   have hjet := hjets z hz hs hlow q hq₀
-  obtain ⟨hr, hw, hg, hD, hQ, _, _⟩ := hstrip z hz hs _ houter
-  have ha : 0 < polarLinearA (stateProfile D S C z.1) (stateHeight D S C z)
-      (rootProfileShift r σ (δ * q.1, q.2)) := hla.trans_le hvalue.2.1
-  have hc : Real.sqrt lV / ua ≤
-      factoredCharacteristicSpeed D.w g (stateProfile D S C z.1)
-        (stateHeight D S C z) r σ (δ * q.1, q.2) := by
-    rw [factoredCharacteristicSpeed_eq_sqrt_div_coefficient hr hw hg hD hQ]
-    exact sqrt_div_lower_of_rectangle hvalue.1.1 ha hvalue.2.2
-  have he : localizedRootSpeed D S C g r σ hR z (δ * q.1, q.2) =
-      factoredCharacteristicSpeed D.w g (stateProfile D S C z.1)
-        (stateHeight D S C z) r σ (δ * q.1, q.2) :=
-    rootFieldLocalization_eqOn hR hhalf
-  exact ⟨hjet.1, hjet.2, hvalue.1, hc.trans_eq he.symm⟩
+  refine ⟨hjet.1, hjet.2, hvalue.1, ?_⟩
+  exact dividedRoot_localizedSpeed_lower
+    (wref := D.w) (g := g) (w := stateProfile D S C z.1)
+    (k := stateHeight D S C z) (r := r) (σ := σ)
+    hR hla houter hhalf (hstrip z hz hs) hvalue
 
 /-- Any previously selected positive scale and band can be retained.
 Only a smaller band is chosen, uniformly over all states and angles. -/

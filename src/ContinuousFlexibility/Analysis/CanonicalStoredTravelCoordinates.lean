@@ -52,6 +52,7 @@ theorem canonicalCutPair_chartValues_of_gluedIntegrals
         change canonicalGluedAiryIntegral S K z m (-1) p =
           airyFirstIntegral (K.chart z (K.cutPair m).1) (-1) p
         exact piecewise_eq_of_mem _ _ _ hp
+      simp only [Bool.false_eq_true, ↓reduceIte]
       constructor <;> linarith only [hm, hp']
   | true =>
       have hn : p ∉ physicalPieceOpen S K z (K.cutPair m).1 :=
@@ -72,6 +73,7 @@ theorem canonicalCutPair_chartValues_of_gluedIntegrals
           airyFirstIntegral (K.chart z (K.cutPair m).2) (-(-1)) p +
             2 * (-1 : ℝ) * airyTravelPrimitive (K.cutRadius m)
         exact piecewise_eq_of_notMem _ _ _ hn
+      simp only [Bool.false_eq_true, ↓reduceIte]
       constructor <;> linarith only [hm, hp']
 
 /-- The existing negative chart has the actual stored-footpoint formula

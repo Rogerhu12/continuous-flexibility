@@ -55,6 +55,7 @@ theorem negativeCutPair_height_eq_fourthRoot
         ((L.coefficients z).b p ^ 2 -
           (L.coefficients z).a p * (L.coefficients z).c p)) ^ (1 / 4 : ℝ) := by
   let i := if side then (K.cutPair m).2 else (K.cutPair m).1
+  dsimp only
   intro p hp
   obtain ⟨_, _, _, _, _, _, hleftL, hleftR, _, _⟩ := hB.1.1 m
   have hleft : K.left i = 0 := by

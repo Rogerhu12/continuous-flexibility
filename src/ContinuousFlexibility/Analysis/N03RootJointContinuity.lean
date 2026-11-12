@@ -55,7 +55,10 @@ theorem n03_minusFlow_tendsto_root_joint
     (fun θ => (hleft θ).1) (fun θ => (hleft θ).2)
   have hG : StrictMono G := by
     intro θ η hθη
-    exact add_lt_add_right ((strictMono_of_deriv_pos hb.2.1) hθη) _
+    have hh : (K.chart z i (c, θ)).2 < (K.chart z i (c, η)).2 :=
+      (strictMono_of_deriv_pos hb.2.1) hθη
+    dsimp only [G]
+    linarith only [hh]
   have hfst : Tendsto (fun p : PolarPoint => p.1) l
       (𝓝[Ioo (C.left m) (C.right m)] c) := by
     apply tendsto_nhdsWithin_iff.mpr
