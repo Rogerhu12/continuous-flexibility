@@ -126,6 +126,160 @@ private theorem n06_modeBound_from_energy
       dsimp only [n06ModeBoundEnvelope, n07aDifferenceBlockBudget]
       ring
 
+private def N06ModeBoundRootBudget
+    (hI : ∀ m, K.left m < K.right m) (A P Q : ℝ) : Prop :=
+  ∀ m, K.positive m = true → ∀ u ur urr G : CanonicalL2 S K m,
+    N07aWeakCanonicalMixedDerivative S K m u ur 1 0 →
+    N07aWeakCanonicalMixedDerivative S K m ur urr 1 0 →
+    N07aCanonicalDistributionEquation S K m (K.coefficients (C.referenceState, 0) m) u G →
+    ∀ j : ℕ,
+      Real.sqrt (n07aScaledModeEnergy (K.right m - K.left m) (2 * (j : ℝ))
+        (n07aCanonicalUnitMode (hI m) u j) (n07aCanonicalUnitMode (hI m) ur j)
+        (n07aCanonicalUnitMode (hI m) urr j)) ≤
+      Real.sqrt (n07aReferenceModeBudget A P Q (K.right m - K.left m)
+        (T.E0 (T.sample (K.cell m)))) * (‖u‖ + ‖G‖)
+
+private def N06ModeBoundRawBlocks
+    (href : ReferenceJets D T S C L K) (hcur : CurrentJets D T S C L K base ε)
+    (hI : ∀ m, K.left m < K.right m) (d s : ℕ) (B₀ : ℝ) : Prop :=
+  ∀ z (hz : z ∈ sectorNeighborhood S base ε ε) m, K.positive m = true →
+    ∀ (u : CanonicalL2 S K m) (jets : N06PrimitivePositiveJets u),
+    n07aAngularReflection m u = u → ∀ j l : ℕ,
+    n07aAngularBand m (hI m) j u = u →
+      ‖((1 + |(((j : ℤ) - l : ℤ) : ℝ)|) ^ s) •
+        n07aCanonicalUnitMode (hI m)
+          (n07aRelativePrincipalJet href hcur z hz m (hI m)
+            jets.radial jets.angular jets.secondRadial jets.radialAngular jets.angularAngular) l‖ ≤
+      112 * (1 + (K.right m - K.left m)) ^ 6 *
+        n07aDifferenceBlockBudget T S K d s B₀ z m * n07aAngularTail ((j : ℤ) - l) *
+          Real.sqrt (n07aScaledModeEnergy (K.right m - K.left m) (2 * (j : ℝ))
+            (n07aCanonicalUnitMode (hI m) u j) (n07aCanonicalUnitMode (hI m) jets.radial j)
+            (n07aCanonicalUnitMode (hI m) jets.secondRadial j))
+
+private def N06ModeBoundEstimate
+    (href : ReferenceJets D T S C L K) (hcur : CurrentJets D T S C L K base ε)
+    (hI : ∀ m, K.left m < K.right m) (J : N06PrimitiveReferenceJetFamily B)
+    (d s : ℕ) (e : ℕ → ℝ) : Prop :=
+  ∀ z (hz : z ∈ sectorNeighborhood S base ε ε)
+    (F : V.level (3 / 4 : ℝ) 0 b) m, K.positive m = true → ∀ j l : ℕ,
+    n07aAngularBand m (hI m) j (n07aReferenceInverseField (B := B) F m) =
+      n07aReferenceInverseField (B := B) F m →
+    n07aAngularGap j l ^ s *
+      ‖n07aAngularBand m (hI m) l
+        (n06PrimitivePrincipalSource href hcur hI J z hz F m)‖ ≤
+    e m * T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) *
+      parameterGrading S (s + 4 + d) z * n07aAngularTail ((j : ℤ) - l) *
+        (‖n07aReferenceInverseField (B := B) F m‖ +
+          ‖n07aReferenceCanonicalRhs href m (hI m) (B.inverse F).val.1
+            (V.forget (3 / 4 : ℝ) 0 b F)‖)
+
+set_option diagnostics true in
+private theorem n06_modeBound_root_budget
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (href : ReferenceJets D T S C L K) (hprincipal : ReferencePrincipal T S C K)
+    (hI : ∀ m, K.left m < K.right m) :
+    ∃ A P Q : ℝ, N06ModeBoundRootBudget (T := T) (C := C) hI A P Q := by
+  obtain ⟨A, P, Q, _, _, _, henergy⟩ := n07a_reference_actualMode_root_bound
+    href hprincipal (fun m => (n06_modeBound_sample_pos (K := K) hD hT m).1) hI
+  exact ⟨A, P, Q, henergy⟩
+
+set_option diagnostics true in
+private theorem n06_modeBound_raw_blocks
+    (h01 : N01Properties D T S C base loss ε)
+    (h04 : N04Properties D T S C L K base loss ε)
+    (href : ReferenceJets D T S C L K) (hcur : CurrentJets D T S C L K base ε)
+    (hI : ∀ m, K.left m < K.right m) :
+    ∃ d : ℕ, ∀ s : ℕ, ∃ B₀ : ℝ, 0 < B₀ ∧ N06ModeBoundRawBlocks href hcur hI d s B₀ := by
+  obtain ⟨d, hd⟩ := n07a_actualPrincipal_block_bound h01 h04 href hcur
+  refine ⟨d, fun s => ?_⟩
+  obtain ⟨B₀, hB₀, hblock⟩ := hd s
+  refine ⟨B₀, hB₀, ?_⟩
+  intro z hz m hm u jets hu j l hband
+  simpa only [Bool.false_eq_true, ite_false, mul_one] using
+    hblock z hz m hm (hI m) u jets.radial jets.angular jets.secondRadial
+      jets.radialAngular jets.angularAngular hu j l hband jets.radial_weak
+      jets.angular_weak jets.secondRadial_weak jets.radialAngular_weak
+      jets.angularAngular_weak false
+
+set_option diagnostics true in
+private theorem n06_modeBound_pointwise
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (h01 : N01Properties D T S C base loss ε)
+    (h03 : N03Properties D T S C R L base ε)
+    (h04 : N04Properties D T S C L K base loss ε)
+    (h05 : N05Properties D T S C K V b B)
+    (href : ReferenceJets D T S C L K) (hcur : CurrentJets D T S C L K base ε)
+    (hI : ∀ m, K.left m < K.right m) (J : N06PrimitiveReferenceJetFamily B)
+    (A P Q : ℝ) (d s : ℕ) (B₀ : ℝ) (hB₀ : 0 < B₀)
+    (henergy : N06ModeBoundRootBudget (T := T) (C := C) hI A P Q)
+    (hblock : N06ModeBoundRawBlocks href hcur hI d s B₀) :
+    N06ModeBoundEstimate href hcur hI J d s (n06ModeBoundEnvelope T K A P Q B₀) := by
+  intro z hz F m hm j l hband
+  let u : CanonicalL2 S K m := n07aReferenceInverseField (B := B) F m
+  let G : CanonicalL2 S K m := n07aReferenceCanonicalRhs href m (hI m)
+    (B.inverse F).val.1 (V.forget (3 / 4 : ℝ) 0 b F)
+  let jets : N06PrimitivePositiveJets u := J F m hm
+  let v : CanonicalL2 S K m := n06PrimitivePrincipalSource href hcur hI J z hz F m
+  have hu : n07aAngularReflection m u = u := n06_primitiveReferenceInverse_reflection h05 F m
+  have hv : n07aAngularReflection m v = v :=
+    n06PrimitivePrincipalSource_reflection hT hS h01 h03 h04 h05 href hcur hI J z hz F m
+  have heq : N07aCanonicalDistributionEquation S K m
+      (K.coefficients (C.referenceState, 0) m) u G :=
+    n06_primitiveReferenceInverse_positive_distribution hS h01 h03 h04 h05 href F m hm
+  have hen := henergy m hm u jets.radial jets.secondRadial G
+    jets.radial_weak jets.secondRadial_weak heq j
+  have hbl := hblock z hz m hm u jets hu j l hband
+  have hvdef : v = n07aRelativePrincipalJet href hcur z hz m (hI m)
+      jets.radial jets.angular jets.secondRadial jets.radialAngular jets.angularAngular :=
+    n06PrimitivePrincipalSource_positive href hcur hI J z hz F m hm
+  rw [← hvdef] at hbl
+  have hpos := n06_modeBound_sample_pos (K := K) h01.1.1 hT m
+  exact n06_modeBound_from_energy (hI m) d s j l A P Q B₀ z hB₀.le hpos.1 hpos.2
+    u jets.radial jets.secondRadial G v hv hen hbl
+
+set_option diagnostics true in
+private theorem n06_modeBound_fixed_order
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (h01 : N01Properties D T S C base loss ε)
+    (h03 : N03Properties D T S C R L base ε)
+    (h04 : N04Properties D T S C L K base loss ε)
+    (h05 : N05Properties D T S C K V b B)
+    (href : ReferenceJets D T S C L K) (hcur : CurrentJets D T S C L K base ε)
+    (hI : ∀ m, K.left m < K.right m) (J : N06PrimitiveReferenceJetFamily B)
+    (A P Q : ℝ) (d s : ℕ) (B₀ : ℝ) (hB₀ : 0 < B₀)
+    (henergy : N06ModeBoundRootBudget (T := T) (C := C) hI A P Q)
+    (hblock : N06ModeBoundRawBlocks href hcur hI d s B₀) :
+    ∃ e : ℕ → ℝ, N07aSampleSubpower T K e ∧ (∀ m, 0 ≤ e m) ∧
+      N06ModeBoundEstimate href hcur hI J d s e := by
+  refine ⟨n06ModeBoundEnvelope T K A P Q B₀,
+    n07a_principalModeEnvelope_subpower h01.1.1 hT href A P Q B₀, ?_, ?_⟩
+  · exact fun m => n06_modeBound_envelope_nonneg A P Q B₀ m hB₀.le
+      (n06_modeBound_sample_pos (K := K) h01.1.1 hT m).1
+  · exact n06_modeBound_pointwise hT hS h01 h03 h04 h05 href hcur hI J
+      A P Q d s B₀ hB₀ henergy hblock
+
+set_option diagnostics true in
+private theorem n06_modeBound_uniform
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (h01 : N01Properties D T S C base loss ε)
+    (h03 : N03Properties D T S C R L base ε)
+    (h04 : N04Properties D T S C L K base loss ε)
+    (h05 : N05Properties D T S C K V b B)
+    (href : ReferenceJets D T S C L K) (hcur : CurrentJets D T S C L K base ε)
+    (hprincipal : ReferencePrincipal T S C K)
+    (hI : ∀ m, K.left m < K.right m) (J : N06PrimitiveReferenceJetFamily B) :
+    ∃ d : ℕ, ∀ s : ℕ, ∃ e : ℕ → ℝ,
+      N07aSampleSubpower T K e ∧ (∀ m, 0 ≤ e m) ∧
+        N06ModeBoundEstimate href hcur hI J d s e := by
+  obtain ⟨A, P, Q, henergy⟩ :=
+    n06_modeBound_root_budget h01.1.1 hT href hprincipal hI
+  obtain ⟨d, hblocks⟩ := n06_modeBound_raw_blocks h01 h04 href hcur hI
+  refine ⟨d, fun s => ?_⟩
+  exact (hblocks s).elim (fun B₀ hB₀ =>
+    n06_modeBound_fixed_order hT hS h01 h03 h04 h05 href hcur hI J
+      A P Q d s B₀ hB₀.1 henergy hB₀.2)
+
+set_option diagnostics true in
 theorem n06_primitivePrincipal_mode_bound
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h01 : N01Properties D T S C base loss ε)
@@ -150,44 +304,6 @@ theorem n06_primitivePrincipal_mode_bound
             (‖n07aReferenceInverseField (B := B) F m‖ +
               ‖n07aReferenceCanonicalRhs href m (hI m) (B.inverse F).val.1
                 (V.forget (3 / 4 : ℝ) 0 b F)‖) := by
-  have hD : IsAccumulatingProfile D := h01.1.1
-  have hE (m : ℕ) : 0 < T.E0 (T.sample (K.cell m)) :=
-    (n06_modeBound_sample_pos (K := K) hD hT m).1
-  have hH (m : ℕ) : 0 < T.H (T.sample (K.cell m)) :=
-    (n06_modeBound_sample_pos (K := K) hD hT m).2
-  obtain ⟨A, P, Q, hA, hP, hQ, henergy⟩ :=
-    n07a_reference_actualMode_root_bound href hprincipal hE hI
-  obtain ⟨d, hblocks⟩ := n07a_actualPrincipal_block_bound h01 h04 href hcur
-  refine ⟨d, fun s => ?_⟩
-  obtain ⟨B₀, hB₀, hblock⟩ := hblocks s
-  have he : N07aSampleSubpower T K (n06ModeBoundEnvelope T K A P Q B₀) :=
-    n07a_principalModeEnvelope_subpower hD hT href A P Q B₀
-  refine ⟨n06ModeBoundEnvelope T K A P Q B₀, he,
-    fun m => n06_modeBound_envelope_nonneg A P Q B₀ m hB₀.le (hE m), ?_⟩
-  intro z hz F m hm j l hband
-  let u : CanonicalL2 S K m := n07aReferenceInverseField (B := B) F m
-  let G : CanonicalL2 S K m := n07aReferenceCanonicalRhs href m (hI m)
-    (B.inverse F).val.1 (V.forget (3 / 4 : ℝ) 0 b F)
-  let jets : N06PrimitivePositiveJets u := J F m hm
-  let v : CanonicalL2 S K m := n06PrimitivePrincipalSource href hcur hI J z hz F m
-  have hu : n07aAngularReflection m u = u := n06_primitiveReferenceInverse_reflection h05 F m
-  have hv : n07aAngularReflection m v = v :=
-    n06PrimitivePrincipalSource_reflection hT hS h01 h03 h04 h05 href hcur hI J z hz F m
-  have heq : N07aCanonicalDistributionEquation S K m
-      (K.coefficients (C.referenceState, 0) m) u G :=
-    n06_primitiveReferenceInverse_positive_distribution hS h01 h03 h04 h05 href F m hm
-  have hen := henergy m hm u jets.radial jets.secondRadial G
-    jets.radial_weak jets.secondRadial_weak heq j
-  have hbl := hblock z hz m hm (hI m) u jets.radial jets.angular jets.secondRadial
-    jets.radialAngular jets.angularAngular hu j l hband jets.radial_weak
-    jets.angular_weak jets.secondRadial_weak jets.radialAngular_weak
-    jets.angularAngular_weak false
-  have hvdef : v = n07aRelativePrincipalJet href hcur z hz m (hI m)
-      jets.radial jets.angular jets.secondRadial jets.radialAngular jets.angularAngular :=
-    n06PrimitivePrincipalSource_positive href hcur hI J z hz F m hm
-  rw [← hvdef] at hbl
-  simp only [Bool.false_eq_true, ite_false, mul_one] at hbl
-  exact n06_modeBound_from_energy (hI m) d s j l A P Q B₀ z hB₀.le (hE m) (hH m)
-    u jets.radial jets.secondRadial G v hv hen hbl
+  exact n06_modeBound_uniform hT hS h01 h03 h04 h05 href hcur hprincipal hI J
 
 end ContinuousFlexibility.Analysis
