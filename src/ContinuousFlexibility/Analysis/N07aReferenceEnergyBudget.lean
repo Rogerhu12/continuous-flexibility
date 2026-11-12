@@ -1,6 +1,6 @@
 import ContinuousFlexibility.Analysis.N07aReferenceBandBudget
-import ContinuousFlexibility.Analysis.N07aAngularReferenceInverse
 import ContinuousFlexibility.Analysis.N07aReferenceSourceBudget
+import ContinuousFlexibility.Analysis.N07aReferenceScalarMaps
 import ContinuousFlexibility.Analysis.N07aVolumeWeightBounds
 
 /-!
