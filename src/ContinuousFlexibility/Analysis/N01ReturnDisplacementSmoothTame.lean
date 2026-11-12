@@ -160,7 +160,8 @@ theorem N01Properties.smoothTameOn_returnCorrectionDisplacementCircleLinear
     (hS.2.2.2.2.1 (3 / 4 : ℝ)).2.2 (fun m => -C.travel m) hp ht hU hchart hamp
   apply smoothTameOn_congr hcomp
   intro x hx
-  rfl
+  simp only [N01Properties.returnCorrectionDisplacementCircleLinear,
+    Function.comp_apply, LinearMap.comp_apply, LinearMap.add_apply, LinearMap.id_apply] <;> rfl
 
 def N01Properties.returnCorrectionDisplacement_jointTower
     (hN : N01Properties D T S C base loss ε)

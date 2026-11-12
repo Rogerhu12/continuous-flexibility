@@ -21,7 +21,36 @@ namespace ContinuousFlexibility.Statements
 local instance n01CorrectionCoefficientJetsStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
+local instance n01CorrectionCoefficientJetsSectorSMul (S : PhysicalSpacesData) :
+    SMul ℝ (StateDirections S × ℝ) := Prod.instSMul
+
+local instance n01CorrectionCoefficientJetsParameterSMul (S : PhysicalSpacesData) :
+    SMul ℝ ((StateDirections S × ℝ) × CircleSpace S) := Prod.instSMul
+
 open Set ContinuousFlexibility.Analysis
+
+private theorem coefficientPairJets_hasDerivAt
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} {f : E → ℝ × ℝ} (J : SmoothDirections U f)
+    (A : ∀ n : ℕ, E → (Fin n → E) → ℝ × ℝ)
+    (hA : ∀ n x (v : Fin n → E), A n x v = J.D n x v)
+    (n : ℕ) (x w : E) (v : Fin n → E)
+    (t : ℝ) (ht : x + t • w ∈ U) :
+    HasDerivAt (fun s => (A n (x + s • w) v).1)
+      (A (n + 1) (x + t • w) (Fin.cons w v)).1 t ∧
+    HasDerivAt (fun s => (A n (x + s • w) v).2)
+      (A (n + 1) (x + t • w) (Fin.cons w v)).2 t := by
+  have h :
+      HasDerivAt (fun s => (J.D n (x + s • w) v).1)
+        (J.D (n + 1) (x + t • w) (Fin.cons w v)).1 t ∧
+      HasDerivAt (fun s => (J.D n (x + s • w) v).2)
+        (J.D (n + 1) (x + t • w) (Fin.cons w v)).2 t :=
+    ⟨(solveSmoothDirectionsPostcomp J (ContinuousLinearMap.fst ℝ ℝ ℝ)).hasDerivAt_line_jet
+      x w n v ht,
+      (solveSmoothDirectionsPostcomp J (ContinuousLinearMap.snd ℝ ℝ ℝ)).hasDerivAt_line_jet
+      x w n v ht⟩
+  simpa only [hA] using h
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
@@ -76,11 +105,16 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_hasDerivAt
       hχrange hcutoff hdisc n (x + s • w) v p).2)
       (hN.returnCorrectionCoefficientScalarJets hS hT hR j hcell χ hχrange hcutoff hdisc
         (n + 1) (x + t • w) (Fin.cons w v) p).2 t := by
-  let J := hN.returnCorrectionCoefficient_pointTower hS hT hR j hcell χ hχrange hcutoff hdisc p
-  exact ⟨(solveSmoothDirectionsPostcomp J (ContinuousLinearMap.fst ℝ ℝ ℝ)).hasDerivAt_line_jet
-    x w n v ht,
-    (solveSmoothDirectionsPostcomp J (ContinuousLinearMap.snd ℝ ℝ ℝ)).hasDerivAt_line_jet
-    x w n v ht⟩
+  let J : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S)))
+      (fun y : (StateDirections S × ℝ) × CircleSpace S =>
+        returnCorrectionCoefficientError D S C R χ (liftSectorParameter S C y.1) p y.2) :=
+    hN.returnCorrectionCoefficient_pointTower hS hT hR j hcell χ hχrange hcutoff hdisc p
+  exact coefficientPairJets_hasDerivAt J
+    (fun k y u => hN.returnCorrectionCoefficientScalarJets
+      hS hT hR j hcell χ hχrange hcutoff hdisc k y u p)
+    (fun k y u => hN.returnCorrectionCoefficientScalarJets_apply
+      hS hT hR j hcell χ hχrange hcutoff hdisc k y u p)
+    n x w v t ht
 
 theorem N01Properties.returnCorrectionCoefficientScalarJets_reflection
     (n : ℕ) (x : (StateDirections S × ℝ) × CircleSpace S)
@@ -91,11 +125,22 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_reflection
       (-(hN.returnCorrectionCoefficientScalarJets hS hT hR j hcell χ hχrange hcutoff hdisc
           n x v (r, θ)).1,
         (hN.returnCorrectionCoefficientScalarJets hS hT hR j hcell χ hχrange hcutoff hdisc
-          n x v (r, θ)).2) :=
-  returnCorrectionCoefficientError_jets_reflection hS R χ
-    (fun y => liftSectorParameter S C y.1) (fun y => y.2)
-    (hN.returnCorrectionCoefficient_pointTower hS hT hR j hcell χ hχrange hcutoff hdisc)
-    n x hx v r θ
+          n x v (r, θ)).2) := by
+  let J : ∀ p : PolarPoint,
+      SmoothDirections (sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S)))
+        (fun y : (StateDirections S × ℝ) × CircleSpace S =>
+          returnCorrectionCoefficientError D S C R χ (liftSectorParameter S C y.1) p y.2) :=
+    hN.returnCorrectionCoefficient_pointTower hS hT hR j hcell χ hχrange hcutoff hdisc
+  have hjet := returnCorrectionCoefficientError_jets_reflection
+    (E := (StateDirections S × ℝ) × CircleSpace S)
+    (D := D) (T := T) (S := S) (C := C)
+    (U := sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S)))
+    hS R χ (fun y => liftSectorParameter S C y.1) (fun y => y.2) J n x hx v r θ
+  exact (hN.returnCorrectionCoefficientScalarJets_apply
+    hS hT hR j hcell χ hχrange hcutoff hdisc n x v (r, -θ)).trans
+    (hjet.trans (congrArg (fun q : ℝ × ℝ => (-q.1, q.2))
+      (hN.returnCorrectionCoefficientScalarJets_apply
+        hS hT hR j hcell χ hχrange hcutoff hdisc n x v (r, θ)).symm))
 
 theorem N01Properties.returnCorrectionCoefficientScalarJets_periodic
     (n : ℕ) (x : (StateDirections S × ℝ) × CircleSpace S)
@@ -104,12 +149,21 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_periodic
     hN.returnCorrectionCoefficientScalarJets hS hT hR j hcell χ hχrange hcutoff hdisc
         n x v (r, θ + Real.pi) =
       hN.returnCorrectionCoefficientScalarJets hS hT hR j hcell χ hχrange hcutoff hdisc
-        n x v (r, θ) :=
-  hN.returnCorrectionCoefficientError_jets_periodic hS R χ hχrange
-    (fun y => liftSectorParameter S C y.1) (fun y => y.2)
-    (fun y hy => liftSectorParameter_mem_stateNeighborhood hy.1 le_rfl)
-    (fun y hy => hN.2.2.1.liftSectorParameter_sector y.1)
-    (hN.returnCorrectionCoefficient_pointTower hS hT hR j hcell χ hχrange hcutoff hdisc)
-    n x hx v r θ
+        n x v (r, θ) := by
+  let J : ∀ p : PolarPoint,
+      SmoothDirections (sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S)))
+        (fun y : (StateDirections S × ℝ) × CircleSpace S =>
+          returnCorrectionCoefficientError D S C R χ (liftSectorParameter S C y.1) p y.2) :=
+    hN.returnCorrectionCoefficient_pointTower hS hT hR j hcell χ hχrange hcutoff hdisc
+  have hjet := hN.returnCorrectionCoefficientError_jets_periodic
+    (E := (StateDirections S × ℝ) × CircleSpace S)
+    (U := sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S)))
+    hS R χ hχrange (fun y => liftSectorParameter S C y.1) (fun y => y.2)
+    (fun y hy => liftSectorParameter_mem_stateNeighborhood (C := C) hy.1 (le_refl ε))
+    (fun y hy => hN.2.2.1.liftSectorParameter_sector y.1) J n x hx v r θ
+  exact (hN.returnCorrectionCoefficientScalarJets_apply
+    hS hT hR j hcell χ hχrange hcutoff hdisc n x v (r, θ + Real.pi)).trans
+    (hjet.trans (hN.returnCorrectionCoefficientScalarJets_apply
+      hS hT hR j hcell χ hχrange hcutoff hdisc n x v (r, θ)).symm)
 
 end ContinuousFlexibility.Statements

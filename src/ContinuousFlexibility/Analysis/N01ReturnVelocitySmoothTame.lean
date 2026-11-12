@@ -116,7 +116,8 @@ theorem N01Properties.smoothTameOn_returnCorrectionPulledDisplacementCircleLinea
     hflow hfirst
   apply smoothTameOn_congr hsecond
   intro x hx
-  rfl
+  simp only [N01Properties.returnCorrectionPulledDisplacementCircleLinear,
+    Function.comp_apply, LinearMap.comp_apply] <;> rfl
 
 theorem N01Properties.smoothTameOn_returnCorrectionVelocityCircleLinear
     (hN : N01Properties D T S C base loss ε)
@@ -153,7 +154,8 @@ theorem N01Properties.smoothTameOn_returnCorrectionVelocityCircleLinear
     hsum (hN.smoothTameOn_opticalCutoffJetCircleLinear hS hT j hcell χ hcutoff 1 rsel)
   apply smoothTameOn_congr hscaled
   intro x hx
-  rfl
+  simp only [N01Properties.returnCorrectionVelocityCircleLinear,
+    Function.comp_apply, LinearMap.comp_apply, LinearMap.add_apply, LinearMap.id_apply] <;> rfl
 
 def N01Properties.returnCorrectionVelocity_jointTower
     (hN : N01Properties D T S C base loss ε)

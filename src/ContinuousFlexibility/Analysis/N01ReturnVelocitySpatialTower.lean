@@ -112,9 +112,9 @@ theorem N01Properties.singleComponentFlow_derivative_decode
       deriv (C.minusFlow (liftSectorParameter S C x.1) m x.2) θ - 1 := by
   have heq : (S.circle (3 / 4 : ℝ)).decode
       (hN.singleComponentFlowCircle hS hT m x) m =
-      fun t => C.minusFlow (liftSectorParameter S C x.1) m x.2 t - t := by
-    rw [hN.singleComponentFlowCircle_decode hS hT m x hx hr]
-    exact circleSingleComponentField_self m _
+      fun t => C.minusFlow (liftSectorParameter S C x.1) m x.2 t - t :=
+    (congrFun (hN.singleComponentFlowCircle_decode hS hT m x hx hr) m).trans
+      (circleSingleComponentField_self m _)
   have hf := hN.minusFlow_angular_contDiff hS hT
     (liftSectorParameter_mem_stateNeighborhood hx le_rfl)
     (hN.2.2.1.liftSectorParameter_sector x.1) m ⟨hr.1.le, hr.2.le⟩
@@ -169,9 +169,11 @@ theorem N01Properties.singleComponentInverseSlopeCircle_decode
         (hN.singleComponentInverseSlopeCircle hS hT m x) m θ =
       deriv (C.minusFlow (liftSectorParameter S C x.1) m x.2)
         (Function.invFun (C.minusFlow (liftSectorParameter S C x.1) m x.2) θ) - 1 := by
-  unfold N01Properties.singleComponentInverseSlopeCircle
-  rw [hN.singleComponentFlowInverseCompose_decode hS hT m x hx hr,
-    hN.singleComponentFlow_derivative_decode hS hT m x hx hr]
+  let u : CircleSpace S := circleDerivativeLinear (hS.2.1 (3 / 4 : ℝ))
+    (hN.singleComponentFlowCircle hS hT m x)
+  let y : ℝ := Function.invFun (C.minusFlow (liftSectorParameter S C x.1) m x.2) θ
+  exact (hN.singleComponentFlowInverseCompose_decode hS hT m x hx hr u θ).trans
+    (hN.singleComponentFlow_derivative_decode hS hT m x hx hr y)
 
 def N01Properties.singleComponentVelocityCircle
     (m : ℕ) (x : ((StateDirections S × ℝ) × CircleSpace S) × ℝ) : CircleSpace S :=
@@ -323,6 +325,11 @@ def N01Properties.singleComponentVelocityCircleAtResidualTower
   let J := smoothDirectionsProd
     (smoothDirectionsProd (smoothDirectionsLinearOn F hU) JR)
     (smoothDirectionsLinearOn G hU)
+  letI : LocallyConvexSpace ℝ ((StateDirections S × ℝ) × H.Space) :=
+    (withSeminorms_pairGrading (sectorPairGrading_withSeminorms S)
+      (withSeminorms_graded (fun n => H.level n) H.bond)).toLocallyConvexSpace
+  letI : LocallyConvexSpace ℝ (((StateDirections S × ℝ) × H.Space) × ℝ) :=
+    Prod.locallyConvexSpace
   exact J.compCircle hH
     (hN.singleComponentVelocityCircleTower hS hT χ hχrange hχ m l h hl hh hdisc)
     (fun x hx => ⟨⟨hx.1, mem_univ _⟩, hx.2⟩)
