@@ -201,15 +201,16 @@ jobs:
             echo "::warning::release lake-cache does not exist; the compiled build was not published"
           fi
       - name: Pack this line's build for main
-        # Main downloads it when it merges this exact head (see above).
-        if: startsWith(github.ref_name, 'line/') && success()
+        # Main downloads it (green runs only) when it merges this exact head; the build of a
+        # failed run is kept too, so the lead can download it and compile files locally.
+        if: startsWith(github.ref_name, 'line/') && !cancelled()
         shell: bash
         run: |
           find .lake/build/ir -name '*.setup.json' -delete 2>/dev/null || true
           tar --zstd -cf lake-build.tar.zst .lake/build
           ls -lh lake-build.tar.zst
       - uses: actions/upload-artifact@v4
-        if: startsWith(github.ref_name, 'line/') && success()
+        if: startsWith(github.ref_name, 'line/') && !cancelled()
         with:
           name: lake-build-line
           path: lake-build.tar.zst
