@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N01ControlCoefficientVariation
+import ContinuousFlexibility.Analysis.N01JetBounds
 import ContinuousFlexibility.Analysis.OpticalControlFullCurvature
 import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 import Mathlib.MeasureTheory.Integral.DominatedConvergence
@@ -82,7 +83,12 @@ theorem N01Properties.controlTravelPartial_second_bound
         oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
           base (loss + parameterLoss) 0 (fun _ : Fin 2 =>
             (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) := by
-  obtain ⟨parameterLoss, hparameter⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 2
+  have hflow : Analysis.N01FlowJetBounds T S C base loss ε :=
+    Analysis.n01FlowJetBounds_of_properties hN
+  let parameterLoss : ℕ := (hflow 2).choose
+  have hparameter : ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+      Analysis.N01FlowJetBoundAtOrder T S C base loss parameterLoss ε 2 s B :=
+    (hflow 2).choose_spec
   let hdata := hparameter 0
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
@@ -207,7 +213,8 @@ theorem N01Properties.controlTravel_second_bound
         oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
           base (loss + parameterLoss) 0 (fun _ : Fin 2 =>
             (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) := by
-  obtain ⟨parameterLoss, hdata⟩ := hN.controlTravelPartial_second_bound hS hT
+  let parameterLoss : ℕ := (hN.controlTravelPartial_second_bound hS hT).choose
+  have hdata := (hN.controlTravelPartial_second_bound hS hT).choose_spec
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ m : ℕ,

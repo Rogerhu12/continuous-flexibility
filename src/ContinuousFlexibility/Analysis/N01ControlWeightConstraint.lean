@@ -65,7 +65,8 @@ theorem N01Properties.controlTravel_second_weight_bound
           T.E0 (T.sample (C.cell m)) ^ B *
           (T.M (T.sample m) ^ max base (loss + parameterLoss) *
             T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2 := by
-  obtain ⟨parameterLoss, hdata⟩ := hN.controlTravel_second_bound hS hT
+  let parameterLoss : ℕ := (hN.controlTravel_second_bound hS hT).choose
+  have hdata := (hN.controlTravel_second_bound hS hT).choose_spec
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   obtain ⟨_, hgeom⟩ := hN.1.1

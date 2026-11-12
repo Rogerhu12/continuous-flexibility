@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.SolveStateSpaces
 import ContinuousFlexibility.Analysis.MaterialSampleCofinite
 import ContinuousFlexibility.Analysis.N01cStateSeminorms
+import ContinuousFlexibility.Analysis.N01cBoundsRestriction
 
 /-!
 # Restricting the common N01 neighborhood
@@ -65,62 +66,8 @@ theorem N01Properties.restrict_neighborhood
     (hN : N01Properties D T S C base loss ε) (hT : IsMaterialData D T)
     (hb : base ≤ base') (hε' : 0 < ε') (hε : ε' ≤ ε) :
     N01Properties D T S C base' loss ε' := by
-  have hsub := stateNeighborhood_mono S C hb hε
-  have hopen := stateNeighborhood_isOpen S C base' ε'
-  have hsamples := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1
-  have hH (m : ℕ) : 0 < T.H (T.sample m) := (hT.2.1 _ (hsamples m)).2.1
-  have hE (m : ℕ) : 0 < T.E0 (T.sample m) := (hT.2.1 _ (hsamples m)).2.2.1
-  have hp : Monotone (pairGrading (stateGrading S) realGrading) :=
-    pairGrading_monotone (solve_stateGrading_monotone S) (fun _ _ _ _ => le_rfl)
-  refine ⟨hN.1, hε', hN.2.2.1, hN.2.2.2.1, hN.2.2.2.2.1, hN.2.2.2.2.2.1,
-    (fun z hz => hN.2.2.2.2.2.2.1 z (hsub hz)),
-    (fun z hz => hN.2.2.2.2.2.2.2.1 z (hsub hz)),
-    (fun z hz => hN.2.2.2.2.2.2.2.2.1 z (hsub hz)),
-    (fun z hz => hN.2.2.2.2.2.2.2.2.2.1 z (hsub hz)),
-    (fun z hz => hN.2.2.2.2.2.2.2.2.2.2.1 z (hsub hz)), ?_, ?_⟩
-  · intro k s
-    let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.1 k s
-    let B : ℝ := hdata.choose
-    have hB : 0 < B := hdata.choose_spec.1
-    have hpoint : ∀ m i a b p, a + b ≤ s → p.1 ∈ D.cells m →
-        ∃ J : SmoothDirections (stateNeighborhood S C base' ε')
-          (coefficientFamily D S C i a b p),
-          ∀ z ∈ stateNeighborhood S C base' ε', ∀ v : Fin k → (AnnularState S × ℝ),
-            |J.D k z v| ≤ B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B *
-              oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-                base' (s + loss) (z - (C.referenceState, 0)) v := by
-      intro m i a b p hab hpm
-      have hC : 0 ≤ B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B :=
-        mul_nonneg (mul_nonneg hB.le (Real.rpow_nonneg (hH m).le _))
-          (Real.rpow_nonneg (hE m).le _)
-      exact smoothDirections_restrict_oneHigh_bound (fun y : ℝ => |y|)
-        (C.referenceState, (0 : ℝ)) hopen hsub hp hb hC
-          (hdata.choose_spec.2 m i a b p hab hpm)
-    exact Exists.intro B (And.intro hB hpoint)
-  · intro k
-    obtain ⟨parameterLoss, horder⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 k
-    refine ⟨parameterLoss, ?_⟩
-    intro s
-    let hdata := horder s
-    let B : ℝ := hdata.choose
-    have hB : 0 < B := hdata.choose_spec.1
-    have hpoint : ∀ m a b p, a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
-        ∃ J : SmoothDirections (stateNeighborhood S C base' ε')
-          (ordinaryFlowFamily S C m a b p),
-          ∀ z ∈ stateNeighborhood S C base' ε', ∀ v : Fin k → (AnnularState S × ℝ),
-            min (p.1 - C.left m) (C.right m - p.1) ^ a * |J.D k z v| ≤
-              B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
-                oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-                  base' (s + loss + parameterLoss) (z - (C.referenceState, 0)) v := by
-      intro m a b p hab hpm
-      have hC : 0 ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-          T.E0 (T.sample (C.cell m)) ^ B :=
-        mul_nonneg (mul_nonneg hB.le (Real.rpow_nonneg (hH (C.cell m)).le _))
-          (Real.rpow_nonneg (hE (C.cell m)).le _)
-      exact smoothDirections_restrict_oneHigh_bound
-        (fun y : ℝ => min (p.1 - C.left m) (C.right m - p.1) ^ a * |y|)
-        (C.referenceState, (0 : ℝ)) hopen hsub hp hb hC
-          (hdata.choose_spec.2 m a b p hab hpm)
-    exact Exists.intro B (And.intro hB hpoint)
+  exact n01Properties_mono
+    (base := base) (base' := base') (loss := loss) (loss' := loss)
+    (ε := ε) (ε' := ε') hT hN hb le_rfl hε hε'
 
 end ContinuousFlexibility.Statements

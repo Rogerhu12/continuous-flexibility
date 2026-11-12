@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N01CoefficientSmallness
 import ContinuousFlexibility.Analysis.N01FlowAngularSmoothness
+import ContinuousFlexibility.Analysis.N01JetBounds
 import ContinuousFlexibility.Analysis.N01RadialFlow
 import Mathlib.Topology.Order.OrderClosed
 
@@ -44,7 +45,12 @@ theorem N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood
         |ordinaryFlowFamily S C m 0 b p z| ≤
           6 * B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
             T.E0 (T.sample (C.cell m)) ^ B * η := by
-  obtain ⟨parameterLoss, horder⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 1
+  have hflow : N01FlowJetBounds T S C base loss ε :=
+    n01FlowJetBounds_of_properties hN
+  let parameterLoss : ℕ := (hflow 1).choose
+  have horder : ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+      N01FlowJetBoundAtOrder T S C base loss parameterLoss ε 1 s B :=
+    (hflow 1).choose_spec
   refine ⟨parameterLoss, ?_⟩
   intro s
   let hdata := horder s
