@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N07aNeighborhood
+import ContinuousFlexibility.Analysis.N06Neighborhood
 
 /-!
 # The same cumulative construction on a smaller neighborhood
@@ -159,20 +160,8 @@ theorem n07a_N03_restrict (h : N03Properties D T S C R L base ε)
 
 theorem n07a_N04_restrict (h : N04Properties D T S C L K base loss ε)
     (hb : base ≤ base') (he : ε' ≤ ε) :
-    N04Properties D T S C L K base' loss ε' := by
-  have hU := n07a_stateNeighborhood_mono (S := S) (C := C) hb he
-  obtain ⟨hregion, hsupport, hfrozen, hinterval, hpos, hneg, hcover,
-    hchart, hboundary, hsym, hinvsym, hcut, htrace, hop, hnegative,
-    hdivided, hjets, hpair⟩ := h
-  refine ⟨hregion, hsupport, fun z hz => hfrozen z (hU hz), hinterval, hpos, hneg,
-    hcover, fun z hz => hchart z (hU hz), fun z hz => hboundary z (hU hz),
-    fun z hz => hsym z (hU hz), fun z hz => hinvsym z (hU hz), hcut,
-    fun z hz => htrace z (hU hz), fun z hz => hop z (hU hz),
-    fun z hz => hnegative z (hU hz), fun z hz => hdivided z (hU hz), ?_,
-    fun z hz => hpair z (hU hz)⟩
-  intro s
-  obtain ⟨B, hB, hBb⟩ := hjets s
-  exact ⟨B, hB, fun z hz => hBb z (hU hz)⟩
+    N04Properties D T S C L K base' loss ε' :=
+  n06_N04Properties_mono h hb he
 
 theorem n07a_through03_restrict
     (hT : IsMaterialData D T)
@@ -189,7 +178,8 @@ theorem n07a_through04_restrict
     NonlinearPropertiesThrough04 D T S C R L K base' loss ε' :=
   ⟨n07a_through03_restrict hT h.1 hb he he', h.2.1, h.2.2.1, h.2.2.2.1,
     n07a_N04_restrict h.2.2.2.2.1 hb he,
-    n07a_primitiveGeometry_restrict h.1.1.1.1.1 hT h.2.2.2.2.2 hb he⟩
+    n07a_primitiveGeometry_restrict h.1.1.1.1.1 hT h.2.2.2.2.2.1 hb he,
+    n06_CanonicalPrimitiveGeometry_mono h.2.2.2.2.2.2 hb he⟩
 
 variable {V : VolumeModelData S K} {b : ℕ} {B : CanonicalDomainData S K V b}
   {P : RelativeInverseData S K V b B}

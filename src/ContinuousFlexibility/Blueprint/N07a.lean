@@ -32,4 +32,6 @@ theorem N07a (hN06 : N06Statement) (hTame : H01Statement ∧ H02Statement) : N07
   have h06₃ := n07a_through06_restrict hT h06₂ hb₃ he₃ε he₃
   exact ⟨A, T, S, C, R, L, K, V, b, B, P, G, base₃, loss, ε₃, hT, hS, h06₃, hSmooth⟩
 
+#print axioms N07a
+
 end ContinuousFlexibility.Blueprint

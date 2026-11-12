@@ -31,7 +31,7 @@ theorem N07aLinear
   have h01 : N01Properties A.val T S C base loss ε := h06.1.1.1.1.1
   have h04 : N04Properties A.val T S C L K base loss ε := h06.1.1.2.2.2.2.1
   have hprimitive : CanonicalGeometry.PrimitiveGeometryProperties A.val T S C L K base ε :=
-    h06.1.1.2.2.2.2.2
+    h06.1.1.2.2.2.2.2.1
   let canonical := n07a_exists_actualCanonicalSolutionData A.property.1 hT hS h01 h04
     hprimitive.2.2.1 hprimitive.2.1 hprimitive.2.2.2.1 h06.1.2 h06.2 hAngular
   let base₁ : ℕ := canonical.choose
@@ -48,7 +48,7 @@ theorem N07aLinear
   have h03₁ : N03Properties A.val T S C R L base₁ ε₁ := h06₁.1.1.1.2
   have h04₁ : N04Properties A.val T S C L K base₁ loss ε₁ := h06₁.1.1.2.2.2.2.1
   have hprimitive₁ : CanonicalGeometry.PrimitiveGeometryProperties A.val T S C L K
-      base₁ ε₁ := h06₁.1.1.2.2.2.2.2
+      base₁ ε₁ := h06₁.1.1.2.2.2.2.2.1
   let candidate := n07a_exists_boundedPhysicalCandidate A.property.1 hT hS
     h01₁ h02₁ h03₁ h04₁ hprimitive₁.2.2.1 hprimitive₁.2.2.2.1 data
   let base₂ : ℕ := candidate.choose
@@ -74,7 +74,7 @@ theorem N07aLinear
   have h03₂ : N03Properties A.val T S C R L base₂ ε₂ := h06₂.1.1.1.2
   have h04₂ : N04Properties A.val T S C L K base₂ loss ε₂ := h06₂.1.1.2.2.2.2.1
   have hprimitive₂ : CanonicalGeometry.PrimitiveGeometryProperties A.val T S C L K
-      base₂ ε₂ := h06₂.1.1.2.2.2.2.2
+      base₂ ε₂ := h06₂.1.1.2.2.2.2.2.1
   let inverse := n07a_exists_scalarLinearInverse_of_boundedCandidate
     hS hT h01₂ h02₂ h03₂ u hsol hbound
     (fun z hz hs f v w hv hw => n07a_scalarSolution_unique A.property.1 hT hS

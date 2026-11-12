@@ -11,6 +11,20 @@ The rules below are the same for every line.
 
 Read this section every time you check the rules. A notice is removed when it is done.
 
+- **N02N03, N04b, N04Coordinates, N05, N06: merge `origin/main` now.** N07b's statement repair is on
+  `main` (`docs/STATUS.md`, "Statement repairs"): `physicalPieceOpen` takes the state, the old fixed
+  interval is `referencePhysicalPieceOpen`, and the N04 output also carries
+  `CanonicalPrimitiveGeometry`, which the N04 producers must prove. Two more repairs will follow
+  (N07a: `CanonicalGeometry.PrimitiveGeometryProperties` in the N04 output and raw `b/c` outputs in
+  N03; N01c: `N01PrimitiveGeometry` in the N01a output and new flow-loss quantifiers). Merge `main`
+  each time one lands.
+- **N07a and N08 are taken over by new sessions (2026-11-12).** The earlier sessions on `line/N07a`
+  and `line/N08` must not push to those branches any more. The new sessions continue on the same
+  branches: N07a ports to N07b's state-dependent physical domains (instructions in the last comment
+  of PR #37); N08 continues from its last push (PR #39), whose CI is red.
+- **R10a, R11a, N07a, N07b, N09N10: your math-research access check was wrong, not your access.**
+  `git ls-remote` on a bare URL has no credentials. Use the URL derived from your `origin` remote
+  (step 4 of "When you finish" below), and take the next reserved topic.
 - **N01a (PR #31): do not mark ready yet; merge `origin/main` and port to R12's definitions.**
   R12 (merged) changed two definitions in `Statements/Radial.lean`:
   `RadialCellIntegrable D f` is now `∀ m, MemLp (fun x => D.localizer m x.1 * f x) 2
@@ -212,10 +226,13 @@ Then open a draft pull request into `main` titled `<Task>`.
    `topics/primes-n2-plus-1`, `topics/primes-4x3-27y2`, `topics/hodge-abelian-varieties`,
    `topics/abelian-surface-torsion-uniform`, `topics/selberg-eigenvalue-conjecture`,
    `topics/ramsey-r55`.
-   - Check access first: `git ls-remote https://github.com/Rogerhu12/math-research.git HEAD`. If it
-     fails, your credentials do not cover that repository: write "no access to math-research" at the
-     end of your pull request's final report and stop; the lead will tell the author.
-   - Clone it and pull `main`. Read its root `README.md` in full, including the authorization section
+   - You have access with the credentials you already push with. Reuse them: derive the
+     math-research URL from your `origin` URL, which carries them, instead of typing a bare URL (a
+     bare URL has no credentials and fails with "could not read Username"):
+     `MR=$(git remote get-url origin | sed 's#continuous-flexibility#math-research#')`, then
+     `git ls-remote "$MR" HEAD` and `git clone "$MR"`. Never print `$MR` or write it to a file.
+     Only if that fails too, write the exact error at the end of your pull request's final report.
+   - Clone it with that URL and pull `main`. Read its root `README.md` in full, including the authorization section
      and every rule, and the topic's `README.md`. Change the topic's row in `QUEUE.md` to
      进行中（会话名/日期）, push, and start the research. From then on follow that repository's rules,
      not these.

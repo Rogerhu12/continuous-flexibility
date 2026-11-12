@@ -27,7 +27,7 @@ theorem N07aAngular
   have h03 : N03Properties A.val T S C R L base ε := h06.1.1.1.2
   have h04 : N04Properties A.val T S C L K base loss ε := h06.1.1.2.2.2.2.1
   have hprimitive : CanonicalGeometry.PrimitiveGeometryProperties A.val T S C L K base ε :=
-    h06.1.1.2.2.2.2.2
+    h06.1.1.2.2.2.2.2.1
   exact n07a_angular_construction A.property.1 A.property.2.2.2.1 hS hT
     h01 h02 h03 h04 hprimitive.2.2.1 hprimitive.2.2.2.1
     hprimitive.2.1 hprimitive.1 hprimitive.2.2.2.2.1 h06.1.2 h06.2

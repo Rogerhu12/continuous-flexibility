@@ -126,7 +126,7 @@ def InnerMorsePhysicalPoissonBound {T : MorseChainData} {σ : ℕ → ℝ}
             (innerMorsePhysicalPoissonColumn hreal side hindex hm hB M i)‖ ≤
               innerMorsePoissonConstant / j
 
-private theorem physical_bound_of_remainder {T : MorseChainData} {σ : ℕ → ℝ}
+theorem innerMorsePhysicalPoissonBound_of_remainder {T : MorseChainData} {σ : ℕ → ℝ}
     {D : ReferenceData} {cost : ℕ → ℝ} (hreal : MorseChainRealization T σ D cost)
     (N : ℕ) {a : ℝ} (ha : 0 ≤ a) (hN : 4096 ≤ N) (hNa : 64 * a ≤ (N : ℝ))
     {m : ℕ} (hmN : N ≤ m) {j C K : ℝ} (hj : 1 ≤ j) (hC : 0 < C)
@@ -224,7 +224,7 @@ theorem exists_innerMorsePhysicalChoices (hR09 : R09Statement) {a : ℝ} (ha : 0
   have hr : ∀ i, innerMorseModelNormalizedRemainder M i ≤ 1 / (j : ℝ) :=
     fun i => (hrem i).le.trans (div_le_div_of_nonneg_right (min_le_left 1 η) hj0)
   exact ⟨hB, M, hr,
-    physical_bound_of_remainder hreal N ha (hlarge.trans hNfloor)
+    innerMorsePhysicalPoissonBound_of_remainder hreal N ha (hlarge.trans hNfloor)
       (hweight.trans (Nat.cast_le.mpr hNfloor)) hm hj1 hC M hr, herror⟩
 
 end ContinuousFlexibility.Radial
