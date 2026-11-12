@@ -1,0 +1,1240 @@
+﻿2026-11-12T22:45:32.8165699Z Current runner version: '2.338.2'
+2026-11-12T22:45:32.8187403Z ##[group]Runner Image Provisioner
+2026-11-12T22:45:32.8188260Z Hosted Compute Agent
+2026-11-12T22:45:32.8188843Z Version: 20261103.629
+2026-11-12T22:45:32.8189398Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+2026-11-12T22:45:32.8189984Z Build Date: 2026-11-03T17:26:59Z
+2026-11-12T22:45:32.8190594Z Worker ID: {fc08a611-4c43-4562-8675-3a0577875bf2}
+2026-11-12T22:45:32.8191304Z Region: westus3
+2026-11-12T22:45:32.8191795Z Cloud: Azure
+2026-11-12T22:45:32.8192282Z ##[endgroup]
+2026-11-12T22:45:32.8193382Z ##[group]Operating System
+2026-11-12T22:45:32.8193952Z Ubuntu
+2026-11-12T22:45:32.8194393Z 26.04.1
+2026-11-12T22:45:32.8194888Z LTS
+2026-11-12T22:45:32.8195363Z ##[endgroup]
+2026-11-12T22:45:32.8195821Z ##[group]Runner Image
+2026-11-12T22:45:32.8196363Z Image: ubuntu-26.04
+2026-11-12T22:45:32.8196843Z Version: 20261111.196.1
+2026-11-12T22:45:32.8197950Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261111.196/images/ubuntu/Ubuntu2604-Readme.md
+2026-11-12T22:45:32.8199148Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261111.196
+2026-11-12T22:45:32.8199967Z ##[endgroup]
+2026-11-12T22:45:32.8201113Z ##[group]GITHUB_TOKEN Permissions
+2026-11-12T22:45:32.8202991Z Actions: write
+2026-11-12T22:45:32.8203479Z Contents: write
+2026-11-12T22:45:32.8203927Z Metadata: read
+2026-11-12T22:45:32.8204453Z ##[endgroup]
+2026-11-12T22:45:32.8206179Z Secret source: Actions
+2026-11-12T22:45:32.8207064Z Cache mode: write
+2026-11-12T22:45:32.8207642Z Prepare workflow directory
+2026-11-12T22:45:32.8561061Z Prepare all required actions
+2026-11-12T22:45:32.8600112Z Getting action download info
+2026-11-12T22:45:33.2363950Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-11-12T22:45:33.3481263Z Download action repository 'leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64' (SHA:fe408643ea7367d8c0404a8be3975bb145f5fb64)
+2026-11-12T22:45:33.6961028Z Download action repository 'actions/cache@v4' (SHA:0057852bfaa89a56745cba8c7296529d2fc39830)
+2026-11-12T22:45:33.8440205Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-11-12T22:45:34.0666075Z Getting action download info
+2026-11-12T22:45:34.1862933Z Download action repository 'actions/cache@caa296126883cff596d87d8935842f9db880ef25' (SHA:caa296126883cff596d87d8935842f9db880ef25)
+2026-11-12T22:45:34.4344601Z Complete job name: build
+2026-11-12T22:45:34.5254938Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+2026-11-12T22:45:34.5256264Z with:
+2026-11-12T22:45:34.5256950Z   persist-credentials: false
+2026-11-12T22:45:34.5257745Z   fetch-depth: 400
+2026-11-12T22:45:34.5258515Z   repository: Rogerhu12/continuous-flexibility
+2026-11-12T22:45:34.5265020Z   token: ***
+2026-11-12T22:45:34.5265675Z   ssh-strict: true
+2026-11-12T22:45:34.5266355Z   ssh-user: git
+2026-11-12T22:45:34.5267019Z   clean: true
+2026-11-12T22:45:34.5267764Z   sparse-checkout-cone-mode: true
+2026-11-12T22:45:34.5268575Z   fetch-tags: false
+2026-11-12T22:45:34.5269252Z   show-progress: true
+2026-11-12T22:45:34.5269948Z   lfs: false
+2026-11-12T22:45:34.5270591Z   submodules: false
+2026-11-12T22:45:34.5271379Z   set-safe-directory: true
+2026-11-12T22:45:34.5272174Z   allow-unsafe-pr-checkout: false
+2026-11-12T22:45:34.5273152Z env:
+2026-11-12T22:45:34.5273776Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:45:34.5274484Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:45:34.5275258Z ##[endgroup]
+2026-11-12T22:45:34.7764303Z Syncing repository: Rogerhu12/continuous-flexibility
+2026-11-12T22:45:34.7767127Z ##[group]Getting Git version info
+2026-11-12T22:45:34.7768664Z Working directory is '/home/runner/work/continuous-flexibility/continuous-flexibility'
+2026-11-12T22:45:34.7771255Z [command]/usr/bin/git version
+2026-11-12T22:45:34.7772115Z git version 2.56.1
+2026-11-12T22:45:34.7782957Z ##[endgroup]
+2026-11-12T22:45:34.7794940Z Temporarily overriding HOME='/home/runner/work/_temp/51589df5-a08e-42bf-976e-9c2e4c10a8f7' before making global git config changes
+2026-11-12T22:45:34.7798921Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-12T22:45:34.7802166Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/continuous-flexibility/continuous-flexibility
+2026-11-12T22:45:34.7863307Z Deleting the contents of '/home/runner/work/continuous-flexibility/continuous-flexibility'
+2026-11-12T22:45:34.7872657Z ##[group]Initializing the repository
+2026-11-12T22:45:34.7874267Z [command]/usr/bin/git init /home/runner/work/continuous-flexibility/continuous-flexibility
+2026-11-12T22:45:34.7995636Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-12T22:45:34.7998117Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-12T22:45:34.8000409Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-12T22:45:34.8002416Z hint: call:
+2026-11-12T22:45:34.8003298Z hint:
+2026-11-12T22:45:34.8004422Z hint: 	git config --global init.defaultBranch <name>
+2026-11-12T22:45:34.8005776Z hint:
+2026-11-12T22:45:34.8007065Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-12T22:45:34.8009148Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-12T22:45:34.8010807Z hint:
+2026-11-12T22:45:34.8012057Z hint: 	git branch -m <name>
+2026-11-12T22:45:34.8013098Z hint:
+2026-11-12T22:45:34.8014514Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-12T22:45:34.8017514Z Initialized empty Git repository in /home/runner/work/continuous-flexibility/continuous-flexibility/.git/
+2026-11-12T22:45:34.8022109Z [command]/usr/bin/git remote add origin https://github.com/Rogerhu12/continuous-flexibility
+2026-11-12T22:45:34.8132796Z ##[endgroup]
+2026-11-12T22:45:34.8134554Z ##[group]Disabling automatic garbage collection
+2026-11-12T22:45:34.8136568Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-12T22:45:34.8172885Z ##[endgroup]
+2026-11-12T22:45:34.8174913Z ##[group]Setting up auth
+2026-11-12T22:45:34.8178839Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-12T22:45:34.8214903Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-12T22:45:34.8622893Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-12T22:45:34.8657366Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-12T22:45:34.8917048Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-12T22:45:34.8957327Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-12T22:45:34.9224901Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-12T22:45:34.9268742Z ##[endgroup]
+2026-11-12T22:45:34.9270386Z ##[group]Fetching the repository
+2026-11-12T22:45:34.9283890Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=400 origin +465caa1ba4e791cb763ea9946f547fe37ed338f8:refs/remotes/origin/line/N04Coordinates-Realization
+2026-11-12T22:45:37.3122700Z From https://github.com/Rogerhu12/continuous-flexibility
+2026-11-12T22:45:37.3123620Z  * [new ref]           465caa1ba4e791cb763ea9946f547fe37ed338f8 -> origin/line/N04Coordinates-Realization
+2026-11-12T22:45:37.3125530Z ##[endgroup]
+2026-11-12T22:45:37.3126110Z ##[group]Determining the checkout info
+2026-11-12T22:45:37.3152116Z ##[endgroup]
+2026-11-12T22:45:37.3152998Z [command]/usr/bin/git sparse-checkout disable
+2026-11-12T22:45:37.3194446Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-12T22:45:37.3221060Z ##[group]Checking out the ref
+2026-11-12T22:45:37.3224407Z [command]/usr/bin/git checkout --progress --force -B line/N04Coordinates-Realization refs/remotes/origin/line/N04Coordinates-Realization
+2026-11-12T22:45:37.6936635Z Switched to a new branch 'line/N04Coordinates-Realization'
+2026-11-12T22:45:37.6939568Z branch 'line/N04Coordinates-Realization' set up to track 'origin/line/N04Coordinates-Realization'.
+2026-11-12T22:45:37.6965168Z ##[endgroup]
+2026-11-12T22:45:37.7014768Z [command]/usr/bin/git log -1 --format=%H
+2026-11-12T22:45:37.7042351Z 465caa1ba4e791cb763ea9946f547fe37ed338f8
+2026-11-12T22:45:37.7051969Z ##[group]Removing auth
+2026-11-12T22:45:37.7055103Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-12T22:45:37.7084912Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-12T22:45:37.7336758Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-12T22:45:37.7359241Z http.https://github.com/.extraheader
+2026-11-12T22:45:37.7366091Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-11-12T22:45:37.7395864Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-12T22:45:37.7639936Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-12T22:45:37.7670007Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-12T22:45:37.7915100Z ##[endgroup]
+2026-11-12T22:45:37.8110440Z ##[group]Run df -h /
+2026-11-12T22:45:37.8110725Z [36;1mdf -h /[0m
+2026-11-12T22:45:37.8160735Z shell: /usr/bin/bash -e {0}
+2026-11-12T22:45:37.8161184Z env:
+2026-11-12T22:45:37.8161378Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:45:37.8161616Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:45:37.8161857Z ##[endgroup]
+2026-11-12T22:45:37.8265379Z Filesystem      Size  Used Avail Use% Mounted on
+2026-11-12T22:45:37.8265842Z /dev/root       145G   58G   88G  40% /
+2026-11-12T22:45:37.8575376Z ##[group]Run leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+2026-11-12T22:45:37.8575732Z with:
+2026-11-12T22:45:37.8575919Z   auto-config: false
+2026-11-12T22:45:37.8576104Z   build: false
+2026-11-12T22:45:37.8576271Z   test: false
+2026-11-12T22:45:37.8576437Z   lint: false
+2026-11-12T22:45:37.8576621Z   use-mathlib-cache: true
+2026-11-12T22:45:37.8576830Z   use-github-cache: false
+2026-11-12T22:45:37.8577021Z   mk_all-check: false
+2026-11-12T22:45:37.8577226Z   check-reservoir-eligibility: false
+2026-11-12T22:45:37.8577452Z   leanchecker: false
+2026-11-12T22:45:37.8577665Z   lean4checker: false
+2026-11-12T22:45:37.8577845Z   nanoda: false
+2026-11-12T22:45:37.8578033Z   nanoda-allow-sorry: true
+2026-11-12T22:45:37.8578229Z   axiom-audit: false
+2026-11-12T22:45:37.8578461Z   axiom-audit-allow: propext,Classical.choice,Quot.sound
+2026-11-12T22:45:37.8578740Z   lake-package-directory: .
+2026-11-12T22:45:37.8578963Z   reinstall-transient-toolchain: false
+2026-11-12T22:45:37.8579225Z env:
+2026-11-12T22:45:37.8579390Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:45:37.8579575Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:45:37.8579763Z ##[endgroup]
+2026-11-12T22:45:37.8634253Z ##[start-action display=install elan;id=__leanprover_lean-action.__run]
+2026-11-12T22:45:37.8666927Z ##[group]Run : Install Elan
+2026-11-12T22:45:37.8667202Z [36;1m: Install Elan[0m
+2026-11-12T22:45:37.8667464Z [36;1m${GITHUB_ACTION_PATH}/scripts/install_elan.sh[0m
+2026-11-12T22:45:37.8716177Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-12T22:45:37.8716493Z env:
+2026-11-12T22:45:37.8716667Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:45:37.8717036Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:45:37.8717230Z ##[endgroup]
+2026-11-12T22:45:37.8827960Z ##[group]Elan Installation Output
+2026-11-12T22:45:37.9244204Z info: downloading installer
+2026-11-12T22:45:39.2492896Z info: downloading https://releases.lean-lang.org/lean4/v4.35.0-rc3/lean-4.35.0-rc3-linux.tar.zst
+2026-11-12T22:45:46.1454019Z info: installing /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3
+2026-11-12T22:45:54.4305180Z Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)
+2026-11-12T22:45:54.4670318Z Lake version 5.0.0-src+470d5ce (Lean version 4.35.0-rc3)
+2026-11-12T22:45:54.4706224Z ##[endgroup]
+2026-11-12T22:45:54.4706397Z 
+2026-11-12T22:45:54.4724046Z ##[end-action id=__leanprover_lean-action.__run;outcome=success;conclusion=success;duration_ms=16608]
+2026-11-12T22:45:54.4728738Z ##[start-action display=configure `lean-action`;id=__leanprover_lean-action.config]
+2026-11-12T22:45:54.5032706Z ##[group]Run : Configure Lean Action
+2026-11-12T22:45:54.5033002Z [36;1m: Configure Lean Action[0m
+2026-11-12T22:45:54.5033269Z [36;1m${GITHUB_ACTION_PATH}/scripts/config.sh[0m
+2026-11-12T22:45:54.5081340Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-12T22:45:54.5081640Z env:
+2026-11-12T22:45:54.5081820Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:45:54.5082033Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:45:54.5082233Z   AUTO_CONFIG: false
+2026-11-12T22:45:54.5082418Z   BUILD: false
+2026-11-12T22:45:54.5082584Z   TEST: false
+2026-11-12T22:45:54.5082748Z   LINT: false
+2026-11-12T22:45:54.5082919Z ##[endgroup]
+2026-11-12T22:45:54.5584087Z ##[group]Configure lean-action
+2026-11-12T22:45:54.5662269Z ##[end-action id=__leanprover_lean-action.config;outcome=success;conclusion=success;duration_ms=93]
+2026-11-12T22:45:54.5666235Z ##[start-action display=reinstall transient toolchain;id=__leanprover_lean-action.__run_2]
+2026-11-12T22:45:54.5681141Z ##[end-action id=__leanprover_lean-action.__run_2;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-12T22:45:54.5683735Z ##[start-action display=ensure all files are imported;id=__leanprover_lean-action.mk_all]
+2026-11-12T22:45:54.5686808Z ##[end-action id=__leanprover_lean-action.mk_all;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-12T22:45:54.5688792Z ##[start-action display=Run actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25;id=__leanprover_lean-action.cache-restore]
+2026-11-12T22:45:54.5692078Z ##[end-action id=__leanprover_lean-action.cache-restore;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-12T22:45:54.5693579Z ##[start-action display=detect mathlib;id=__leanprover_lean-action.detect-mathlib]
+2026-11-12T22:45:54.5696389Z ##[end-action id=__leanprover_lean-action.detect-mathlib;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-12T22:45:54.5697829Z ##[start-action display=get mathlib cache;id=__leanprover_lean-action.__run_3]
+2026-11-12T22:45:54.5822042Z ##[group]Run : Get Mathlib Cache
+2026-11-12T22:45:54.5822338Z [36;1m: Get Mathlib Cache[0m
+2026-11-12T22:45:54.5822554Z [36;1mecho "::group::Mathlib Cache"[0m
+2026-11-12T22:45:54.5822880Z [36;1m# Use cache.mathlib.org unless the workflow sets `MATHLIB_CACHE_GET_URL`.[0m
+2026-11-12T22:45:54.5823348Z [36;1m# The cache client reads an empty value as a URL, so unset it to get the client's default.[0m
+2026-11-12T22:45:54.5823772Z [36;1mif [ -z "${MATHLIB_CACHE_GET_URL+x}" ]; then[0m
+2026-11-12T22:45:54.5824121Z [36;1m  export MATHLIB_CACHE_GET_URL="https://cache.mathlib.org/mathlib4"[0m
+2026-11-12T22:45:54.5824466Z [36;1melif [ -z "$MATHLIB_CACHE_GET_URL" ]; then[0m
+2026-11-12T22:45:54.5824715Z [36;1m  unset MATHLIB_CACHE_GET_URL[0m
+2026-11-12T22:45:54.5824926Z [36;1mfi[0m
+2026-11-12T22:45:54.5825102Z [36;1mlake exe cache get[0m
+2026-11-12T22:45:54.5825309Z [36;1mecho "::endgroup::"[0m
+2026-11-12T22:45:54.5825513Z [36;1mecho[0m
+2026-11-12T22:45:54.5869790Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-12T22:45:54.5870272Z env:
+2026-11-12T22:45:54.5870446Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:45:54.5870634Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:45:54.5870829Z ##[endgroup]
+2026-11-12T22:45:54.6038872Z ##[group]Mathlib Cache
+2026-11-12T22:45:54.6389456Z info: mathlib: materializing new dependency
+2026-11-12T22:45:54.6925395Z info: mathlib: fetching revision 'c55e6e786f49471c72fbddbec5415808896aec1e' from https://github.com/leanprover-community/mathlib4.git
+2026-11-12T22:45:57.0337293Z info: mathlib: checking out revision 'c55e6e786f49471c72fbddbec5415808896aec1e'
+2026-11-12T22:46:10.0577139Z info: plausible: materializing new dependency
+2026-11-12T22:46:10.2059813Z info: plausible: fetching revision 'fb13df72ecefd8ddbf9291021d7f33a8673eb57b' from https://github.com/leanprover-community/plausible
+2026-11-12T22:46:11.2448843Z info: plausible: checking out revision 'fb13df72ecefd8ddbf9291021d7f33a8673eb57b'
+2026-11-12T22:46:12.9531345Z info: LeanSearchClient: materializing new dependency
+2026-11-12T22:46:12.9729910Z info: LeanSearchClient: fetching revision '29ff470276c725ae01505d55b17148c18fc7dfd3' from https://github.com/leanprover-community/LeanSearchClient
+2026-11-12T22:46:13.4269500Z info: LeanSearchClient: checking out revision '29ff470276c725ae01505d55b17148c18fc7dfd3'
+2026-11-12T22:46:14.4004952Z info: importGraph: materializing new dependency
+2026-11-12T22:46:14.4170710Z info: importGraph: fetching revision '7e81a29bda33a6b257bd37557a6aa6aebe175d96' from https://github.com/leanprover-community/import-graph
+2026-11-12T22:46:15.0233029Z info: importGraph: checking out revision '7e81a29bda33a6b257bd37557a6aa6aebe175d96'
+2026-11-12T22:46:16.2060314Z info: proofwidgets: materializing new dependency
+2026-11-12T22:46:16.2242337Z info: proofwidgets: fetching revision 'c643bbb3c24f8a25f9c14e3a6b1ceb13d01f3de1' from https://github.com/leanprover-community/ProofWidgets4
+2026-11-12T22:46:16.8384549Z info: proofwidgets: checking out revision 'c643bbb3c24f8a25f9c14e3a6b1ceb13d01f3de1'
+2026-11-12T22:46:18.7778401Z info: aesop: materializing new dependency
+2026-11-12T22:46:18.7984065Z info: aesop: fetching revision 'a90fbf7b02ff06a0deebf74088dff9e5fe02c9ea' from https://github.com/leanprover-community/aesop
+2026-11-12T22:46:19.4500449Z info: aesop: checking out revision 'a90fbf7b02ff06a0deebf74088dff9e5fe02c9ea'
+2026-11-12T22:46:20.6182867Z info: Qq: materializing new dependency
+2026-11-12T22:46:20.6369597Z info: Qq: fetching revision '37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9' from https://github.com/leanprover-community/quote4
+2026-11-12T22:46:21.2414622Z info: Qq: checking out revision '37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9'
+2026-11-12T22:46:22.2700157Z info: batteries: materializing new dependency
+2026-11-12T22:46:22.2864493Z info: batteries: fetching revision '3b7c8101932390d60e92a3f3d917901d5b5a773b' from https://github.com/leanprover-community/batteries
+2026-11-12T22:46:23.4915723Z info: batteries: checking out revision '3b7c8101932390d60e92a3f3d917901d5b5a773b'
+2026-11-12T22:46:25.1438164Z info: Cli: materializing new dependency
+2026-11-12T22:46:25.1609689Z info: Cli: fetching revision '843844fa601dd56767b1eb22b7ada5b64d5e567a' from https://github.com/leanprover/lean4-cli
+2026-11-12T22:46:25.7076596Z info: Cli: checking out revision '843844fa601dd56767b1eb22b7ada5b64d5e567a'
+2026-11-12T22:46:27.0276404Z ✔ [1/5] Built Cache.Cli (262ms)
+2026-11-12T22:46:27.3305046Z ✔ [4/12] Built Cache.Lean (334ms)
+2026-11-12T22:46:27.6298437Z ✔ [5/12] Built Cache.Env (291ms)
+2026-11-12T22:46:27.9303769Z ✔ [6/12] Built Batteries.Tactic.OpenPrivate (708ms)
+2026-11-12T22:46:28.0308088Z ✔ [8/42] Built Cache.Infra (351ms)
+2026-11-12T22:46:28.1309835Z ✔ [9/42] Built Cache.Cli:c.o (95ms)
+2026-11-12T22:46:28.2311903Z ✔ [10/42] Built Cache.Lean:c.o (113ms)
+2026-11-12T22:46:29.0311506Z ✔ [11/42] Built Cache.IO (1.1s)
+2026-11-12T22:46:29.1313543Z ✔ [12/42] Built Batteries.Tactic.OpenPrivate:c.o (893ms)
+2026-11-12T22:46:29.1314559Z ✔ [13/42] Built Cache.Env:c.o (109ms)
+2026-11-12T22:46:29.2332527Z ✔ [14/42] Built Cache.Infra:c.o (154ms)
+2026-11-12T22:46:29.9314202Z ✔ [15/42] Built Cache.Hashing (643ms)
+2026-11-12T22:46:30.2318250Z ✔ [16/42] Built Cache.IO:c.o (1.1s)
+2026-11-12T22:46:30.2318747Z ✔ [17/42] Built Cache.Hashing:c.o (293ms)
+2026-11-12T22:46:31.5334630Z ✔ [18/42] Built Cache.Requests (1.3s)
+2026-11-12T22:46:32.0338332Z ✔ [19/42] Built Cache.Marker (493ms)
+2026-11-12T22:46:32.1340559Z ✔ [20/42] Built Cache.Marker:c.o (82ms)
+2026-11-12T22:46:32.7348003Z ✔ [21/42] Built Cache.Query (602ms)
+2026-11-12T22:46:33.2354118Z ✔ [22/42] Built Cache.Upload.Dest (516ms)
+2026-11-12T22:46:33.4357401Z ✔ [23/42] Built Cache.Requests:c.o (1.9s)
+2026-11-12T22:46:33.4358252Z ✔ [24/42] Built Cache.Query:c.o (198ms)
+2026-11-12T22:46:33.5362309Z ✔ [25/42] Built Cache.Upload.Dest:c.o (89ms)
+2026-11-12T22:46:34.0365774Z ✔ [26/42] Built Cache.Warning (588ms)
+2026-11-12T22:46:34.1367375Z ✔ [27/42] Built Cache.Upload.Rclone (560ms)
+2026-11-12T22:46:34.2369083Z ✔ [28/42] Built Cache.Warning:c.o (184ms)
+2026-11-12T22:46:34.4371102Z ✔ [29/42] Built Cache.Upload.Rclone:c.o (125ms)
+2026-11-12T22:46:34.5373713Z ✔ [30/42] Built Cache.Upload.Curl (522ms)
+2026-11-12T22:46:34.7365530Z ✔ [31/42] Built Cache.Upload.Curl:c.o (137ms)
+2026-11-12T22:46:35.0371318Z ✔ [32/42] Built Cache.Upload.Azure (514ms)
+2026-11-12T22:46:35.1373058Z ✔ [33/42] Built Cache.Upload.Azure:c.o (99ms)
+2026-11-12T22:46:35.3365739Z ✔ [34/42] Built Cache.Upload.S3 (597ms)
+2026-11-12T22:46:35.5368455Z ✔ [35/42] Built Cache.Upload.S3:c.o (224ms)
+2026-11-12T22:46:35.8371938Z ✔ [36/42] Built Cache.Upload.Defs (496ms)
+2026-11-12T22:46:35.9372572Z ✔ [37/42] Built Cache.Upload.Defs:c.o (107ms)
+2026-11-12T22:46:36.2392422Z ✔ [38/42] Built Cache.Upload (466ms)
+2026-11-12T22:46:36.3385002Z ✔ [39/42] Built Cache.Upload:c.o (94ms)
+2026-11-12T22:46:37.1392824Z ✔ [40/42] Built Cache.Main (867ms)
+2026-11-12T22:46:37.7389629Z ✔ [41/42] Built Cache.Main:c.o (623ms)
+2026-11-12T22:46:38.2401146Z ✔ [42/42] Built cache:exe (529ms)
+2026-11-12T22:46:40.6778231Z Current branch: HEAD
+2026-11-12T22:46:40.6778742Z Using cache from origin: (some leanprover-community/mathlib4)
+2026-11-12T22:46:40.6779642Z Attempting to download 8943 file(s) from leanprover-community/mathlib4 cache at https://cache.mathlib.org/mathlib4
+2026-11-12T22:46:40.8362883Z 
+2026-11-12T22:46:40.9370461Z Downloaded: 1 file(s) [attempted 1/8943 = 0%, 504 KB/s], Decompressed: 0
+2026-11-12T22:46:41.0376057Z Downloaded: 60 file(s) [attempted 60/8943 = 0%, 5497 KB/s], Decompressed: 16
+2026-11-12T22:46:41.1411882Z Downloaded: 134 file(s) [attempted 134/8943 = 1%, 265 KB/s], Decompressed: 16
+2026-11-12T22:46:41.2412164Z Downloaded: 215 file(s) [attempted 215/8943 = 2%, 2750 KB/s], Decompressed: 58
+2026-11-12T22:46:41.3521979Z Downloaded: 310 file(s) [attempted 310/8943 = 3%, 221 KB/s], Decompressed: 58
+2026-11-12T22:46:41.5027867Z Downloaded: 417 file(s) [attempted 417/8943 = 4%, 196 KB/s], Decompressed: 58
+2026-11-12T22:46:41.6042486Z Downloaded: 516 file(s) [attempted 516/8943 = 5%, 181 KB/s], Decompressed: 58
+2026-11-12T22:46:41.7124104Z Downloaded: 603 file(s) [attempted 603/8943 = 6%, 37 KB/s], Decompressed: 184
+2026-11-12T22:46:41.8132190Z Downloaded: 687 file(s) [attempted 687/8943 = 7%, 223 KB/s], Decompressed: 184
+2026-11-12T22:46:41.9334790Z Downloaded: 745 file(s) [attempted 745/8943 = 8%, 366 KB/s], Decompressed: 184
+2026-11-12T22:46:42.0302056Z Downloaded: 805 file(s) [attempted 805/8943 = 9%, 463 KB/s], Decompressed: 184
+2026-11-12T22:46:42.1312283Z Downloaded: 873 file(s) [attempted 873/8943 = 9%, 400 KB/s], Decompressed: 184
+2026-11-12T22:46:42.2342282Z Downloaded: 964 file(s) [attempted 964/8943 = 10%, 264 KB/s], Decompressed: 184
+2026-11-12T22:46:42.3340669Z Downloaded: 1037 file(s) [attempted 1037/8943 = 11%, 2817 KB/s], Decompressed: 184
+2026-11-12T22:46:42.4732174Z Downloaded: 1141 file(s) [attempted 1141/8943 = 12%, 4423 KB/s], Decompressed: 184
+2026-11-12T22:46:42.5752257Z Downloaded: 1242 file(s) [attempted 1242/8943 = 13%, 1285 KB/s], Decompressed: 184
+2026-11-12T22:46:42.6759184Z Downloaded: 1323 file(s) [attempted 1323/8943 = 14%, 257 KB/s], Decompressed: 184
+2026-11-12T22:46:42.7792697Z Downloaded: 1409 file(s) [attempted 1409/8943 = 15%, 524 KB/s], Decompressed: 184
+2026-11-12T22:46:42.8850270Z Downloaded: 1471 file(s) [attempted 1471/8943 = 16%, 105 KB/s], Decompressed: 184
+2026-11-12T22:46:42.9854476Z Downloaded: 1571 file(s) [attempted 1571/8943 = 17%, 679 KB/s], Decompressed: 184
+2026-11-12T22:46:43.0873887Z Downloaded: 1675 file(s) [attempted 1675/8943 = 18%, 693 KB/s], Decompressed: 184
+2026-11-12T22:46:43.1872067Z Downloaded: 1760 file(s) [attempted 1760/8943 = 19%, 875 KB/s], Decompressed: 567
+2026-11-12T22:46:43.2912696Z Downloaded: 1853 file(s) [attempted 1853/8943 = 20%, 650 KB/s], Decompressed: 567
+2026-11-12T22:46:43.3954800Z Downloaded: 1940 file(s) [attempted 1940/8943 = 21%, 628 KB/s], Decompressed: 567
+2026-11-12T22:46:43.4982994Z Downloaded: 2072 file(s) [attempted 2072/8943 = 23%, 9945 KB/s], Decompressed: 567
+2026-11-12T22:46:43.5993265Z Downloaded: 2176 file(s) [attempted 2176/8943 = 24%, 1057 KB/s], Decompressed: 567
+2026-11-12T22:46:43.7189260Z Downloaded: 2285 file(s) [attempted 2285/8943 = 25%, 500 KB/s], Decompressed: 567
+2026-11-12T22:46:43.8464478Z Downloaded: 2396 file(s) [attempted 2396/8943 = 26%, 2150 KB/s], Decompressed: 567
+2026-11-12T22:46:43.9446807Z Downloaded: 2518 file(s) [attempted 2518/8943 = 28%, 832 KB/s], Decompressed: 567
+2026-11-12T22:46:44.0452865Z Downloaded: 2655 file(s) [attempted 2655/8943 = 29%, 895 KB/s], Decompressed: 567
+2026-11-12T22:46:44.1453418Z Downloaded: 2803 file(s) [attempted 2803/8943 = 31%, 252 KB/s], Decompressed: 567
+2026-11-12T22:46:44.2462280Z Downloaded: 2950 file(s) [attempted 2950/8943 = 32%, 906 KB/s], Decompressed: 567
+2026-11-12T22:46:44.3482291Z Downloaded: 3096 file(s) [attempted 3096/8943 = 34%, 3030 KB/s], Decompressed: 567
+2026-11-12T22:46:44.4588525Z Downloaded: 3246 file(s) [attempted 3246/8943 = 36%, 1000 KB/s], Decompressed: 567
+2026-11-12T22:46:44.5795946Z Downloaded: 3348 file(s) [attempted 3348/8943 = 37%, 211 KB/s], Decompressed: 567
+2026-11-12T22:46:44.6791710Z Downloaded: 3450 file(s) [attempted 3450/8943 = 38%, 1180 KB/s], Decompressed: 567
+2026-11-12T22:46:44.7892528Z Downloaded: 3554 file(s) [attempted 3554/8943 = 39%, 480 KB/s], Decompressed: 567
+2026-11-12T22:46:44.8924731Z Downloaded: 3669 file(s) [attempted 3669/8943 = 41%, 1154 KB/s], Decompressed: 567
+2026-11-12T22:46:45.0113668Z Downloaded: 3782 file(s) [attempted 3782/8943 = 42%, 2963 KB/s], Decompressed: 567
+2026-11-12T22:46:45.1132525Z Downloaded: 3923 file(s) [attempted 3923/8943 = 43%, 358 KB/s], Decompressed: 567
+2026-11-12T22:46:45.2169632Z Downloaded: 4020 file(s) [attempted 4020/8943 = 44%, 902 KB/s], Decompressed: 567
+2026-11-12T22:46:45.3512824Z Downloaded: 4138 file(s) [attempted 4138/8943 = 46%, 1100 KB/s], Decompressed: 567
+2026-11-12T22:46:45.4555552Z Downloaded: 4235 file(s) [attempted 4235/8943 = 47%, 627 KB/s], Decompressed: 567
+2026-11-12T22:46:45.5979809Z Downloaded: 4337 file(s) [attempted 4337/8943 = 48%, 8976 KB/s], Decompressed: 567
+2026-11-12T22:46:45.7062568Z Downloaded: 4448 file(s) [attempted 4448/8943 = 49%, 169 KB/s], Decompressed: 567
+2026-11-12T22:46:45.8442516Z Downloaded: 4554 file(s) [attempted 4554/8943 = 50%, 1341 KB/s], Decompressed: 567
+2026-11-12T22:46:45.9611795Z Downloaded: 4702 file(s) [attempted 4702/8943 = 52%, 702 KB/s], Decompressed: 567
+2026-11-12T22:46:46.0632492Z Downloaded: 4804 file(s) [attempted 4804/8943 = 53%, 123 KB/s], Decompressed: 567
+2026-11-12T22:46:46.2123873Z Downloaded: 4862 file(s) [attempted 4862/8943 = 54%, 1457 KB/s], Decompressed: 567
+2026-11-12T22:46:46.3130520Z Downloaded: 4924 file(s) [attempted 4924/8943 = 55%, 143 KB/s], Decompressed: 567
+2026-11-12T22:46:46.4117751Z Downloaded: 5035 file(s) [attempted 5035/8943 = 56%, 426 KB/s], Decompressed: 567
+2026-11-12T22:46:46.5442225Z Downloaded: 5146 file(s) [attempted 5146/8943 = 57%, 4164 KB/s], Decompressed: 1682
+2026-11-12T22:46:46.6402298Z Downloaded: 5248 file(s) [attempted 5248/8943 = 58%, 1018 KB/s], Decompressed: 1682
+2026-11-12T22:46:46.7413994Z Downloaded: 5359 file(s) [attempted 5359/8943 = 59%, 799 KB/s], Decompressed: 1682
+2026-11-12T22:46:46.8454208Z Downloaded: 5467 file(s) [attempted 5467/8943 = 61%, 227 KB/s], Decompressed: 1682
+2026-11-12T22:46:46.9623024Z Downloaded: 5569 file(s) [attempted 5569/8943 = 62%, 769 KB/s], Decompressed: 1682
+2026-11-12T22:46:47.0967060Z Downloaded: 5650 file(s) [attempted 5650/8943 = 63%, 851 KB/s], Decompressed: 1682
+2026-11-12T22:46:47.1949094Z Downloaded: 5731 file(s) [attempted 5731/8943 = 64%, 124 KB/s], Decompressed: 1682
+2026-11-12T22:46:47.2962651Z Downloaded: 5830 file(s) [attempted 5830/8943 = 65%, 374 KB/s], Decompressed: 1682
+2026-11-12T22:46:47.4078894Z Downloaded: 5910 file(s) [attempted 5910/8943 = 66%, 2155 KB/s], Decompressed: 1682
+2026-11-12T22:46:47.5462197Z Downloaded: 5978 file(s) [attempted 5978/8943 = 66%, 647 KB/s], Decompressed: 1682
+2026-11-12T22:46:47.6448001Z Downloaded: 6045 file(s) [attempted 6045/8943 = 67%, 1177 KB/s], Decompressed: 1682
+2026-11-12T22:46:47.7546213Z Downloaded: 6098 file(s) [attempted 6098/8943 = 68%, 425 KB/s], Decompressed: 1682
+2026-11-12T22:46:47.8610191Z Downloaded: 6165 file(s) [attempted 6165/8943 = 68%, 187 KB/s], Decompressed: 1682
+2026-11-12T22:46:47.9640437Z Downloaded: 6209 file(s) [attempted 6209/8943 = 69%, 599 KB/s], Decompressed: 1682
+2026-11-12T22:46:48.0651306Z Downloaded: 6299 file(s) [attempted 6299/8943 = 70%, 1263 KB/s], Decompressed: 1682
+2026-11-12T22:46:48.2102165Z Downloaded: 6339 file(s) [attempted 6339/8943 = 70%, 37 KB/s], Decompressed: 1682
+2026-11-12T22:46:48.3162164Z Downloaded: 6387 file(s) [attempted 6387/8943 = 71%, 547 KB/s], Decompressed: 1682
+2026-11-12T22:46:48.4123130Z Downloaded: 6498 file(s) [attempted 6498/8943 = 72%, 844 KB/s], Decompressed: 1682
+2026-11-12T22:46:48.5152414Z Downloaded: 6575 file(s) [attempted 6575/8943 = 73%, 776 KB/s], Decompressed: 1682
+2026-11-12T22:46:48.6254594Z Downloaded: 6655 file(s) [attempted 6655/8943 = 74%, 128 KB/s], Decompressed: 1682
+2026-11-12T22:46:48.7467241Z Downloaded: 6743 file(s) [attempted 6743/8943 = 75%, 513 KB/s], Decompressed: 1682
+2026-11-12T22:46:48.8468703Z Downloaded: 6849 file(s) [attempted 6849/8943 = 76%, 40 KB/s], Decompressed: 1682
+2026-11-12T22:46:48.9529419Z Downloaded: 6988 file(s) [attempted 6988/8943 = 78%, 1834 KB/s], Decompressed: 1682
+2026-11-12T22:46:49.0829116Z Downloaded: 7051 file(s) [attempted 7051/8943 = 78%, 914 KB/s], Decompressed: 1682
+2026-11-12T22:46:49.2582597Z Downloaded: 7159 file(s) [attempted 7159/8943 = 80%, 944 KB/s], Decompressed: 1682
+2026-11-12T22:46:49.3841466Z Downloaded: 7265 file(s) [attempted 7265/8943 = 81%, 186 KB/s], Decompressed: 1682
+2026-11-12T22:46:49.4891825Z Downloaded: 7369 file(s) [attempted 7369/8943 = 82%, 3046 KB/s], Decompressed: 1682
+2026-11-12T22:46:49.5884638Z Downloaded: 7480 file(s) [attempted 7480/8943 = 83%, 661 KB/s], Decompressed: 1682
+2026-11-12T22:46:49.6987361Z Downloaded: 7584 file(s) [attempted 7584/8943 = 84%, 312 KB/s], Decompressed: 1682
+2026-11-12T22:46:49.8283113Z Downloaded: 7688 file(s) [attempted 7688/8943 = 85%, 931 KB/s], Decompressed: 1682
+2026-11-12T22:46:49.9272329Z Downloaded: 7822 file(s) [attempted 7822/8943 = 87%, 2056 KB/s], Decompressed: 1682
+2026-11-12T22:46:50.0369444Z Downloaded: 7924 file(s) [attempted 7924/8943 = 88%, 1969 KB/s], Decompressed: 1682
+2026-11-12T22:46:50.1429687Z Downloaded: 8024 file(s) [attempted 8024/8943 = 89%, 223 KB/s], Decompressed: 1682
+2026-11-12T22:46:50.2443560Z Downloaded: 8123 file(s) [attempted 8123/8943 = 90%, 124 KB/s], Decompressed: 1682
+2026-11-12T22:46:50.3446622Z Downloaded: 8232 file(s) [attempted 8232/8943 = 92%, 471 KB/s], Decompressed: 1682
+2026-11-12T22:46:50.4505441Z Downloaded: 8338 file(s) [attempted 8338/8943 = 93%, 3941 KB/s], Decompressed: 1682
+2026-11-12T22:46:50.5547362Z Downloaded: 8444 file(s) [attempted 8444/8943 = 94%, 6598 KB/s], Decompressed: 1682
+2026-11-12T22:46:50.6586667Z Downloaded: 8569 file(s) [attempted 8569/8943 = 95%, 2169 KB/s], Decompressed: 1682
+2026-11-12T22:46:50.7759430Z Downloaded: 8654 file(s) [attempted 8654/8943 = 96%, 4793 KB/s], Decompressed: 1682
+2026-11-12T22:46:50.8775084Z Downloaded: 8751 file(s) [attempted 8751/8943 = 97%, 469 KB/s], Decompressed: 1682
+2026-11-12T22:46:50.9778042Z Downloaded: 8816 file(s) [attempted 8816/8943 = 98%, 410 KB/s], Decompressed: 1682
+2026-11-12T22:46:53.1170022Z Downloaded: 8906 file(s) [attempted 8906/8943 = 99%, 524 KB/s], Decompressed: 1682
+2026-11-12T22:46:53.1232740Z Downloaded: 8941 file(s) [attempted 8941/8943 = 99%, 1146 KB/s], Decompressed: 1682
+2026-11-12T22:46:53.1252113Z Downloaded: 8943 file(s) [attempted 8943/8943 = 100%, 1146 KB/s], Decompressed: 1682
+2026-11-12T22:47:19.5914154Z Decompressed 8943 file(s)
+2026-11-12T22:47:19.5914561Z Already decompressed 8943 file(s)
+2026-11-12T22:47:19.6458326Z ##[endgroup]
+2026-11-12T22:47:19.6458482Z 
+2026-11-12T22:47:19.6465319Z ##[end-action id=__leanprover_lean-action.__run_3;outcome=success;conclusion=success;duration_ms=85076]
+2026-11-12T22:47:19.6497998Z ##[start-action display=build Rogerhu12/continuous-flexibility;id=__leanprover_lean-action.build]
+2026-11-12T22:47:19.6502347Z ##[end-action id=__leanprover_lean-action.build;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-12T22:47:19.6505134Z ##[start-action display=test Rogerhu12/continuous-flexibility;id=__leanprover_lean-action.test]
+2026-11-12T22:47:19.6508721Z ##[end-action id=__leanprover_lean-action.test;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-12T22:47:19.6510774Z ##[start-action display=lint Rogerhu12/continuous-flexibility;id=__leanprover_lean-action.lint]
+2026-11-12T22:47:19.6514659Z ##[end-action id=__leanprover_lean-action.lint;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-12T22:47:19.6516430Z ##[start-action display=Run actions/cache/save@caa296126883cff596d87d8935842f9db880ef25;id=__leanprover_lean-action.__actions_cache]
+2026-11-12T22:47:19.6525913Z ##[end-action id=__leanprover_lean-action.__actions_cache;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-12T22:47:19.6527565Z ##[start-action display=check reservoir eligibility;id=__leanprover_lean-action.__run_4]
+2026-11-12T22:47:19.6530391Z ##[end-action id=__leanprover_lean-action.__run_4;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-12T22:47:19.6532819Z ##[start-action display=check environment with leanchecker;id=__leanprover_lean-action.__run_5]
+2026-11-12T22:47:19.6536598Z ##[end-action id=__leanprover_lean-action.__run_5;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-12T22:47:19.6538478Z ##[start-action display=check environment with nanoda;id=__leanprover_lean-action.nanoda]
+2026-11-12T22:47:19.6541260Z ##[end-action id=__leanprover_lean-action.nanoda;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-12T22:47:19.6543065Z ##[start-action display=audit axioms with axiom-audit;id=__leanprover_lean-action.axiom-audit]
+2026-11-12T22:47:19.6545647Z ##[end-action id=__leanprover_lean-action.axiom-audit;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-12T22:47:19.8578835Z ##[group]Run actions/cache/restore@v4
+2026-11-12T22:47:19.8579079Z with:
+2026-11-12T22:47:19.8579247Z   path: .lake/build
+2026-11-12T22:47:19.8579705Z   key: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-main~465caa1ba4e791cb763ea9946f547fe37ed338f8
+2026-11-12T22:47:19.8580359Z   restore-keys: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-main~
+
+2026-11-12T22:47:19.8580761Z   enableCrossOsArchive: false
+2026-11-12T22:47:19.8581230Z   fail-on-cache-miss: false
+2026-11-12T22:47:19.8581436Z   lookup-only: false
+2026-11-12T22:47:19.8581616Z env:
+2026-11-12T22:47:19.8581780Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:47:19.8581966Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:47:19.8582154Z ##[endgroup]
+2026-11-12T22:47:19.9435775Z (node:3229) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-12T22:47:19.9436555Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-12T22:47:20.1963043Z Cache hit for restore-key: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-main~0f979ad40b004572c26deb5cfe6c73bf2675217d
+2026-11-12T22:47:20.2043963Z (node:3229) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-12T22:47:21.4532393Z Received 33554432 of 977475220 (3.4%), 32.0 MBs/sec
+2026-11-12T22:47:23.3670227Z Received 134217728 of 977475220 (13.7%), 43.9 MBs/sec
+2026-11-12T22:47:24.3674364Z Received 301989888 of 977475220 (30.9%), 73.6 MBs/sec
+2026-11-12T22:47:25.3684261Z Received 524288000 of 977475220 (53.6%), 101.7 MBs/sec
+2026-11-12T22:47:26.4741755Z Received 671088640 of 977475220 (68.7%), 106.3 MBs/sec
+2026-11-12T22:47:27.4749684Z Received 851443712 of 977475220 (87.1%), 115.6 MBs/sec
+2026-11-12T22:47:28.2666788Z Received 977475220 of 977475220 (100.0%), 119.3 MBs/sec
+2026-11-12T22:47:28.2668742Z Cache Size: ~932 MB (977475220 B)
+2026-11-12T22:47:28.2773804Z [command]/usr/bin/tar -xf /home/runner/work/_temp/32c91bbd-3462-4d19-883c-02c231de1e52/cache.tzst -P -C /home/runner/work/continuous-flexibility/continuous-flexibility --use-compress-program unzstd
+2026-11-12T22:48:19.0781503Z Cache restored successfully
+2026-11-12T22:48:19.1254736Z Cache restored from key: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-main~0f979ad40b004572c26deb5cfe6c73bf2675217d
+2026-11-12T22:48:19.4239875Z ##[group]Run own=$(gh cache list -R "$GITHUB_REPOSITORY" --key "$PREFIX" --limit 1 --json key --jq '.[0].key // empty' || true)
+2026-11-12T22:48:19.4241137Z [36;1mown=$(gh cache list -R "$GITHUB_REPOSITORY" --key "$PREFIX" --limit 1 --json key --jq '.[0].key // empty' || true)[0m
+2026-11-12T22:48:19.4241915Z [36;1mif [ -n "$own" ]; then echo "own cache entry exists ($own)"; exit 0; fi[0m
+2026-11-12T22:48:19.4242414Z [36;1mfor sha in $(git log -60 --format=%H); do[0m
+2026-11-12T22:48:19.4243596Z [36;1m  id=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$sha&per_page=30"               --jq '[.workflow_runs[] | select(.name == "Build" and .status == "completed" and .conclusion != "cancelled" and (.head_branch | startswith("line/")))][0].id // empty' || true)[0m
+2026-11-12T22:48:19.4244781Z [36;1m  [ -n "$id" ] || continue[0m
+2026-11-12T22:48:19.4245155Z [36;1m  dir="$RUNNER_TEMP/line-build-$id"[0m
+2026-11-12T22:48:19.4245524Z [36;1m  for try in 1 2 3; do[0m
+2026-11-12T22:48:19.4245939Z [36;1m    [ -f "$dir/lake-build.tar.zst" ] && break[0m
+2026-11-12T22:48:19.4246319Z [36;1m    rm -rf "$dir"[0m
+2026-11-12T22:48:19.4246826Z [36;1m    gh run download "$id" -R "$GITHUB_REPOSITORY" -n lake-build-line -D "$dir" || sleep 10[0m
+2026-11-12T22:48:19.4247372Z [36;1m  done[0m
+2026-11-12T22:48:19.4247814Z [36;1m  if [ -f "$dir/lake-build.tar.zst" ] && tar --zstd -xf "$dir/lake-build.tar.zst"; then[0m
+2026-11-12T22:48:19.4248376Z [36;1m    echo "reused the build of run $id (head ${sha:0:8})"[0m
+2026-11-12T22:48:19.4248648Z [36;1m    exit 0[0m
+2026-11-12T22:48:19.4248845Z [36;1m  fi[0m
+2026-11-12T22:48:19.4249094Z [36;1m  echo "run $id (head ${sha:0:8}) has no usable build artifact"[0m
+2026-11-12T22:48:19.4249487Z [36;1mdone[0m
+2026-11-12T22:48:19.4249799Z [36;1mecho "no line build among the last 60 commits"[0m
+2026-11-12T22:48:19.6521906Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-12T22:48:19.6522228Z env:
+2026-11-12T22:48:19.6522432Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:48:19.6522634Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:48:19.6637413Z   GH_TOKEN: ***
+2026-11-12T22:48:19.6638177Z   PREFIX: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates-Realization~
+2026-11-12T22:48:19.6638931Z ##[endgroup]
+2026-11-12T22:48:20.3581471Z own cache entry exists (lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates-Realization~26cd93252efbec5ade904bc1a7e8ab02dfab7c00)
+2026-11-12T22:48:20.5087628Z ##[group]Run actions/cache/restore@v4
+2026-11-12T22:48:20.5087893Z with:
+2026-11-12T22:48:20.5088068Z   path: .lake/build
+2026-11-12T22:48:20.5088782Z   key: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates-Realization~465caa1ba4e791cb763ea9946f547fe37ed338f8
+2026-11-12T22:48:20.5089600Z   restore-keys: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates-Realization~
+
+2026-11-12T22:48:20.5090075Z   enableCrossOsArchive: false
+2026-11-12T22:48:20.5090299Z   fail-on-cache-miss: false
+2026-11-12T22:48:20.5090509Z   lookup-only: false
+2026-11-12T22:48:20.5090699Z env:
+2026-11-12T22:48:20.5091120Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:48:20.5091381Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:48:20.5091590Z ##[endgroup]
+2026-11-12T22:48:20.6624446Z (node:3302) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-12T22:48:20.6625248Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-12T22:48:20.8813932Z Cache hit for restore-key: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates-Realization~26cd93252efbec5ade904bc1a7e8ab02dfab7c00
+2026-11-12T22:48:20.8893384Z (node:3302) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-12T22:48:22.1697033Z Received 37748736 of 1090466602 (3.5%), 36.0 MBs/sec
+2026-11-12T22:48:23.1699974Z Received 192937984 of 1090466602 (17.7%), 92.0 MBs/sec
+2026-11-12T22:48:24.1696641Z Received 398458880 of 1090466602 (36.5%), 126.7 MBs/sec
+2026-11-12T22:48:25.1710221Z Received 578813952 of 1090466602 (53.1%), 138.0 MBs/sec
+2026-11-12T22:48:26.1710219Z Received 780140544 of 1090466602 (71.5%), 148.8 MBs/sec
+2026-11-12T22:48:27.1712835Z Received 952107008 of 1090466602 (87.3%), 151.3 MBs/sec
+2026-11-12T22:48:27.9717538Z Received 1090466602 of 1090466602 (100.0%), 152.9 MBs/sec
+2026-11-12T22:48:27.9718627Z Cache Size: ~1040 MB (1090466602 B)
+2026-11-12T22:48:27.9813103Z [command]/usr/bin/tar -xf /home/runner/work/_temp/b1485041-cc8a-411f-ab4d-8dfafdca062c/cache.tzst -P -C /home/runner/work/continuous-flexibility/continuous-flexibility --use-compress-program unzstd
+2026-11-12T22:49:10.9414215Z Cache restored successfully
+2026-11-12T22:49:10.9933666Z Cache restored from key: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates-Realization~26cd93252efbec5ade904bc1a7e8ab02dfab7c00
+2026-11-12T22:49:11.0170696Z ##[group]Run echo "main layer = lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-main~0f979ad40b004572c26deb5cfe6c73bf2675217d"
+2026-11-12T22:49:11.0172513Z [36;1mecho "main layer = lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-main~0f979ad40b004572c26deb5cfe6c73bf2675217d"[0m
+2026-11-12T22:49:11.0173596Z [36;1mecho "matched key = lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates-Realization~26cd93252efbec5ade904bc1a7e8ab02dfab7c00"[0m
+2026-11-12T22:49:11.0218704Z shell: /usr/bin/bash -e {0}
+2026-11-12T22:49:11.0218943Z env:
+2026-11-12T22:49:11.0219127Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:49:11.0219337Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:49:11.0219541Z ##[endgroup]
+2026-11-12T22:49:11.0285725Z main layer = lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-main~0f979ad40b004572c26deb5cfe6c73bf2675217d
+2026-11-12T22:49:11.0287028Z matched key = lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates-Realization~26cd93252efbec5ade904bc1a7e8ab02dfab7c00
+2026-11-12T22:49:11.0570351Z ##[group]Run python3 scripts/gen_root.py
+2026-11-12T22:49:11.0570662Z [36;1mpython3 scripts/gen_root.py[0m
+2026-11-12T22:49:11.0613208Z shell: /usr/bin/bash -e {0}
+2026-11-12T22:49:11.0613438Z env:
+2026-11-12T22:49:11.0613619Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:49:11.0613822Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:49:11.0614202Z ##[endgroup]
+2026-11-12T22:49:11.2465943Z src/ContinuousFlexibility.lean: 5145 imports
+2026-11-12T22:49:11.2568846Z ##[group]Run bash scripts/ci/changed_modules.sh > changed_modules.txt || true
+2026-11-12T22:49:11.2569552Z [36;1mbash scripts/ci/changed_modules.sh > changed_modules.txt || true[0m
+2026-11-12T22:49:11.2570184Z [36;1mecho "count=$(wc -l < changed_modules.txt | tr -d ' ')" >> "$GITHUB_OUTPUT"[0m
+2026-11-12T22:49:11.2570848Z [36;1mecho "$(wc -l < changed_modules.txt) changed modules"; head -40 changed_modules.txt[0m
+2026-11-12T22:49:11.2616907Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-12T22:49:11.2617213Z env:
+2026-11-12T22:49:11.2617400Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:49:11.2617606Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:49:11.2617820Z ##[endgroup]
+2026-11-12T22:49:12.4701997Z 605 changed modules
+2026-11-12T22:49:12.4721580Z ContinuousFlexibility.Analysis.AbsoluteReciprocalJetBounds
+2026-11-12T22:49:12.4722249Z ContinuousFlexibility.Analysis.ActualAtlasCutFirstJets
+2026-11-12T22:49:12.4722974Z ContinuousFlexibility.Analysis.ActualNegativeOppositeRootFields
+2026-11-12T22:49:12.4723633Z ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity
+2026-11-12T22:49:12.4724278Z ContinuousFlexibility.Analysis.ActualPositiveGaugeRootFirstJets
+2026-11-12T22:49:12.4724957Z ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData
+2026-11-12T22:49:12.4725379Z ContinuousFlexibility.Analysis.ActualPositiveReferenceFirstJets
+2026-11-12T22:49:12.4725804Z ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation
+2026-11-12T22:49:12.4726253Z ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData
+2026-11-12T22:49:12.4726725Z ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields
+2026-11-12T22:49:12.4727297Z ContinuousFlexibility.Analysis.AdjugateAiryTransport
+2026-11-12T22:49:12.4727877Z ContinuousFlexibility.Analysis.AdjugateInversePrincipalField
+2026-11-12T22:49:12.4728455Z ContinuousFlexibility.Analysis.AdjugatePrincipalField
+2026-11-12T22:49:12.4729002Z ContinuousFlexibility.Analysis.AdjugatePrincipalFiniteJets
+2026-11-12T22:49:12.4729460Z ContinuousFlexibility.Analysis.AffineWeightedCompositionJets
+2026-11-12T22:49:12.4729821Z ContinuousFlexibility.Analysis.AiryFirstJetMatching
+2026-11-12T22:49:12.4730144Z ContinuousFlexibility.Analysis.AiryHalfHolonomy
+2026-11-12T22:49:12.4730495Z ContinuousFlexibility.Analysis.AiryInteriorChartMaterialJets
+2026-11-12T22:49:12.4730985Z ContinuousFlexibility.Analysis.AngularFiberEndpointJets
+2026-11-12T22:49:12.4731390Z ContinuousFlexibility.Analysis.AngularFiberFiniteJetBounds
+2026-11-12T22:49:12.4731755Z ContinuousFlexibility.Analysis.AngularInverseFirstDerivative
+2026-11-12T22:49:12.4732114Z ContinuousFlexibility.Analysis.AngularSimpleDivisionBounds
+2026-11-12T22:49:12.4732464Z ContinuousFlexibility.Analysis.AngularSineMixedBounds
+2026-11-12T22:49:12.4732781Z ContinuousFlexibility.Analysis.AngularSineQuotient
+2026-11-12T22:49:12.4733097Z ContinuousFlexibility.Analysis.AngularTaylorDivision
+2026-11-12T22:49:12.4733437Z ContinuousFlexibility.Analysis.AngularTaylorPolynomial
+2026-11-12T22:49:12.4733758Z ContinuousFlexibility.Analysis.BoundaryJetClosure
+2026-11-12T22:49:12.4734090Z ContinuousFlexibility.Analysis.BoundaryRadialFrechetJets
+2026-11-12T22:49:12.4734421Z ContinuousFlexibility.Analysis.BoundaryTaylorBounds
+2026-11-12T22:49:12.4734776Z ContinuousFlexibility.Analysis.BoundaryTaylorCanonicalExtension
+2026-11-12T22:49:12.4735138Z ContinuousFlexibility.Analysis.BoundaryTaylorDensity
+2026-11-12T22:49:12.4735450Z ContinuousFlexibility.Analysis.BoundaryTaylorHeight
+2026-11-12T22:49:12.4735786Z ContinuousFlexibility.Analysis.BoundaryTaylorMatching
+2026-11-12T22:49:12.4736142Z ContinuousFlexibility.Analysis.BoundaryTaylorPrincipalRemainder
+2026-11-12T22:49:12.4736534Z ContinuousFlexibility.Analysis.BufferedRadialAuxiliaryColumn
+2026-11-12T22:49:12.4736933Z ContinuousFlexibility.Analysis.CanonicalActualEndpointFields
+2026-11-12T22:49:12.4737340Z ContinuousFlexibility.Analysis.CanonicalActualPositiveFiniteFactory
+2026-11-12T22:49:12.4738090Z ContinuousFlexibility.Analysis.CanonicalActualReferenceGeometry
+2026-11-12T22:49:12.4738488Z ContinuousFlexibility.Analysis.CanonicalActualWholeGeometry
+2026-11-12T22:49:12.4738839Z ContinuousFlexibility.Analysis.CanonicalBoundaryImage
+2026-11-12T22:49:12.4770108Z ##[group]Run bash scripts/ci/watchdog.sh changed_modules.txt "$FILE_LIMIT_SECONDS" &
+2026-11-12T22:49:12.4770597Z [36;1mbash scripts/ci/watchdog.sh changed_modules.txt "$FILE_LIMIT_SECONDS" &[0m
+2026-11-12T22:49:12.4771116Z [36;1mwd=$![0m
+2026-11-12T22:49:12.4771374Z [36;1mset +e[0m
+2026-11-12T22:49:12.4771777Z [36;1mtimeout --signal=TERM --kill-after=60s 240m lake build -v $(cat changed_modules.txt) > quick.log 2>&1[0m
+2026-11-12T22:49:12.4772397Z [36;1mstatus=$?[0m
+2026-11-12T22:49:12.4772657Z [36;1mkill "$wd" 2>/dev/null[0m
+2026-11-12T22:49:12.4772921Z [36;1mgrep -E '^(error|✖)' quick.log | head -100[0m
+2026-11-12T22:49:12.4773212Z [36;1mgrep -E '^error' -A40 quick.log | head -400[0m
+2026-11-12T22:49:12.4773496Z [36;1mbash scripts/ci/slowest.sh quick.log[0m
+2026-11-12T22:49:12.4773754Z [36;1mif [ -s slow_files.txt ]; then[0m
+2026-11-12T22:49:12.4773990Z [36;1m  while read -r m s; do[0m
+2026-11-12T22:49:12.4774468Z [36;1m    echo "::error::$m compiled for more than $FILE_LIMIT_SECONDS seconds and was stopped; split the file or find the slow declaration"[0m
+2026-11-12T22:49:12.4774938Z [36;1m  done < slow_files.txt[0m
+2026-11-12T22:49:12.4775152Z [36;1m  status=1[0m
+2026-11-12T22:49:12.4775344Z [36;1mfi[0m
+2026-11-12T22:49:12.4775519Z [36;1mexit "$status"[0m
+2026-11-12T22:49:12.4819019Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-12T22:49:12.4819315Z env:
+2026-11-12T22:49:12.4819493Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:49:12.4819690Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:49:12.4819899Z ##[endgroup]
+2026-11-12T22:51:21.4708943Z ✖ [4006/4062] Building ContinuousFlexibility.Analysis.CanonicalReferenceGaugeReconstruction (2.1s)
+2026-11-12T22:51:21.4710015Z error: src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeReconstruction.lean:56:4: Type mismatch: After simplification, term
+2026-11-12T22:51:21.4711047Z error: src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeReconstruction.lean:102:4: Type mismatch: After simplification, term
+2026-11-12T22:51:21.4711911Z ✖ [4315/4318] Building ContinuousFlexibility.Analysis.ActualAtlasCutFirstJets (2.3s)
+2026-11-12T22:51:21.4712593Z error: src/ContinuousFlexibility/Analysis/ActualAtlasCutFirstJets.lean:141:2: Type mismatch: After simplification, term
+2026-11-12T22:51:21.4713553Z ✖ [4337/4373] Building ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasCutOperator (3.5s)
+2026-11-12T22:51:21.4714333Z error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean:69:8: Type mismatch: After simplification, term
+2026-11-12T22:51:21.4715803Z error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean:76:6: Type mismatch: After simplification, term
+2026-11-12T22:51:21.4716991Z ✖ [4785/4791] Building ContinuousFlexibility.Analysis.N04RealizationActualCubicFactor (2.0s)
+2026-11-12T22:51:21.4718050Z error: src/ContinuousFlexibility/Analysis/N04RealizationActualCubicFactor.lean:47:16: failed to synthesize instance of type class
+2026-11-12T22:51:21.4719289Z error: src/ContinuousFlexibility/Analysis/N04RealizationActualCubicFactor.lean:55:5: Unknown identifier `reference_mem_stateNeighborhood`
+2026-11-12T22:51:21.4720626Z ✖ [5721/5776] Building ContinuousFlexibility.Analysis.N04RealizationCubicOneHighBounds (2.2s)
+2026-11-12T22:51:21.4722066Z error: src/ContinuousFlexibility/Analysis/N04RealizationCubicOneHighBounds.lean:110:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+2026-11-12T22:51:21.4723226Z error: src/ContinuousFlexibility/Analysis/N04RealizationCubicOneHighBounds.lean:124:55: unsolved goals
+2026-11-12T22:51:21.4724321Z ✖ [5796/5810] Building ContinuousFlexibility.Analysis.N04RealizationPhysicalJointBounds (2.8s)
+2026-11-12T22:51:21.4725503Z error: src/ContinuousFlexibility/Analysis/N04RealizationPhysicalJointBounds.lean:82:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+2026-11-12T22:51:21.4727228Z ✖ [5804/5813] Building ContinuousFlexibility.Analysis.N04RealizationJointMixedSlotBounds (1.9s)
+2026-11-12T22:51:21.4728616Z error: src/ContinuousFlexibility/Analysis/N04RealizationJointMixedSlotBounds.lean:50:20: Unknown identifier `spaces_mixedDerivative_zero`
+2026-11-12T22:51:21.4729876Z error: src/ContinuousFlexibility/Analysis/N04RealizationJointMixedSlotBounds.lean:50:8: Type mismatch: After simplification, term
+2026-11-12T22:51:21.4731283Z error: src/ContinuousFlexibility/Analysis/N04RealizationJointMixedSlotBounds.lean:63:28: Unknown identifier `spaces_mixedDerivative_zero`
+2026-11-12T22:51:21.4732522Z error: src/ContinuousFlexibility/Analysis/N04RealizationJointMixedSlotBounds.lean:63:16: Type mismatch: After simplification, term
+2026-11-12T22:51:21.4733734Z ✖ [5850/5902] Building ContinuousFlexibility.Analysis.N04RealizationMixedSlotBudget (2.1s)
+2026-11-12T22:51:21.4734667Z error: src/ContinuousFlexibility/Analysis/N04RealizationMixedSlotBudget.lean:91:40: Unknown identifier `i`
+2026-11-12T22:51:21.4735845Z ✖ [5982/5987] Building ContinuousFlexibility.Analysis.N04RealizationPositiveCoefficientPowerBounds (44s)
+2026-11-12T22:51:21.4737081Z error: src/ContinuousFlexibility/Analysis/N04RealizationPositiveCoefficientPowerBounds.lean:67:4: Unknown identifier `mixedDerivative_congr_on_open`
+2026-11-12T22:51:21.4738608Z error: src/ContinuousFlexibility/Analysis/N04RealizationPositiveCoefficientPowerBounds.lean:134:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+2026-11-12T22:51:21.4740219Z error: src/ContinuousFlexibility/Analysis/N04RealizationPositiveCoefficientPowerBounds.lean:112:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached
+2026-11-12T22:51:21.4742273Z error: src/ContinuousFlexibility/Analysis/N04RealizationPositiveCoefficientPowerBounds.lean:166:8: (kernel) unknown constant '_private.ContinuousFlexibility.Analysis.N04RealizationPositiveCoefficientPowerBounds.0.ContinuousFlexibility.Analysis.n04Realization_positiveCoefficient_of_original'
+2026-11-12T22:51:21.4744044Z ✖ [5993/6056] Building ContinuousFlexibility.Analysis.N04RealizationTaylorCorrectionBounds (2.2s)
+2026-11-12T22:51:21.4744853Z error: src/ContinuousFlexibility/Analysis/N04RealizationTaylorCorrectionBounds.lean:56:11: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+2026-11-12T22:51:21.4745747Z ✖ [7494/7515] Building ContinuousFlexibility.Analysis.N04RealizationNuColumnTower (82s)
+2026-11-12T22:51:21.4746604Z error: src/ContinuousFlexibility/Analysis/N04RealizationNuColumnTower.lean:34:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached
+2026-11-12T22:51:21.4747997Z error: src/ContinuousFlexibility/Analysis/N04RealizationNuColumnTower.lean:65:8: (kernel) unknown constant '_private.ContinuousFlexibility.Analysis.N04RealizationNuColumnTower.0.ContinuousFlexibility.Analysis.n04Realization_nuColumn_affineDecoder'
+2026-11-12T22:51:21.4749394Z ✖ [7522/7527] Building ContinuousFlexibility.Analysis.WholeReferenceGaugeReferencePrincipal (2.5s)
+2026-11-12T22:51:21.4750170Z error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean:62:4: Type mismatch: After simplification, term
+2026-11-12T22:51:21.4751131Z error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean:82:4: Type mismatch: After simplification, term
+2026-11-12T22:51:21.4752008Z error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean:85:58: Application type mismatch: The argument
+2026-11-12T22:51:21.4752818Z error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean:173:8: Type mismatch: After simplification, term
+2026-11-12T22:51:21.4753351Z error: build failed
+2026-11-12T22:51:21.4756181Z error: src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeReconstruction.lean:56:4: Type mismatch: After simplification, term
+2026-11-12T22:51:21.4757348Z   ContinuousAt.tendsto (ContDiffAt.continuousAt hinv.left)
+2026-11-12T22:51:21.4757723Z  has type
+2026-11-12T22:51:21.4758275Z   Tendsto (canonicalReferencePoint C K z m) (𝓝 (canonicalCurrentPoint C K z m p))
+2026-11-12T22:51:21.4759202Z     (𝓝 (canonicalReferencePoint C K z m (canonicalCurrentPoint C K z m p)))
+2026-11-12T22:51:21.4759760Z but is expected to have type
+2026-11-12T22:51:21.4760225Z   Tendsto (canonicalReferencePoint C K z m) (𝓝 x) (𝓝 p)
+2026-11-12T22:51:21.4761318Z error: src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeReconstruction.lean:102:4: Type mismatch: After simplification, term
+2026-11-12T22:51:21.4762157Z   ContDiffAt.comp x hquot hinv.left
+2026-11-12T22:51:21.4762465Z  has type
+2026-11-12T22:51:21.4763059Z   @ContDiffAt ℝ DenselyNormedField.toNontriviallyNormedField PolarPoint Prod.normedAddCommGroup Prod.normedSpace ℝ
+2026-11-12T22:51:21.4763900Z     Real.normedAddCommGroup RCLike.toInnerProductSpaceReal.toNormedSpace ∞
+2026-11-12T22:51:21.4764282Z     (fun x =>
+2026-11-12T22:51:21.4764598Z       K.height (C.referenceState, 0) m (canonicalReferencePoint C K z m x) *
+2026-11-12T22:51:21.4765149Z         (n04CoordinatesCurrentHeightRatio C K z m (canonicalReferencePoint C K z m x))⁻¹)
+2026-11-12T22:51:21.4765525Z     x
+2026-11-12T22:51:21.4765720Z but is expected to have type
+2026-11-12T22:51:21.4766270Z   @ContDiffAt ℝ DenselyNormedField.toNontriviallyNormedField PolarPoint Prod.normedAddCommGroup Prod.normedSpace ℝ
+2026-11-12T22:51:21.4766906Z     Real.normedAddCommGroup RCLike.toInnerProductSpaceReal.toNormedSpace ∞
+2026-11-12T22:51:21.4767480Z     (wholePositiveReferenceGaugeHeight (K.height (C.referenceState, 0) m) (canonicalReferencePoint C K z m)
+2026-11-12T22:51:21.4767954Z       (n04CoordinatesCurrentHeightRatio C K z m))
+2026-11-12T22:51:21.4768220Z     x
+2026-11-12T22:51:21.4768655Z ✔ [4007/4062] Ran ContinuousFlexibility.Analysis.CanonicalReferenceGaugeFirstJetTransfer
+2026-11-12T22:51:21.4769333Z ✔ [4008/4062] Ran ContinuousFlexibility.Analysis.CanonicalReferenceGaugeRootCircleJets
+2026-11-12T22:51:21.4769972Z ✔ [4009/4062] Ran ContinuousFlexibility.Analysis.WholePositiveActualRootFirstJets
+2026-11-12T22:51:21.4770571Z ✔ [4010/4062] Ran ContinuousFlexibility.Analysis.ActualPositiveGaugeRootFirstJets
+2026-11-12T22:51:21.4771420Z ℹ [4011/4062] Replayed ContinuousFlexibility.Analysis.AdjugatePrincipalFiniteJets
+2026-11-12T22:51:21.4771898Z grep: write error: Broken pipe
+2026-11-12T22:51:21.4777668Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/AdjugatePrincipalFiniteJets.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/AdjugatePrincipalFiniteJets.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/AdjugatePrincipalFiniteJets.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/AdjugatePrincipalFiniteJets.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/AdjugatePrincipalFiniteJets.setup.json --json
+2026-11-12T22:51:21.4787593Z ⚠ [4012/4062] Replayed ContinuousFlexibility.Analysis.LinearWeightedCompositionJets
+2026-11-12T22:51:21.4794513Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/LinearWeightedCompositionJets.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/LinearWeightedCompositionJets.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/LinearWeightedCompositionJets.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/LinearWeightedCompositionJets.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/LinearWeightedCompositionJets.setup.json --json
+2026-11-12T22:51:21.4800548Z warning: src/ContinuousFlexibility/Analysis/LinearWeightedCompositionJets.lean:37:28: Variable name `hM` is not explicitly referenced.
+2026-11-12T22:51:21.4801146Z 
+2026-11-12T22:51:21.4801492Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-12T22:51:21.4801998Z   [apply] _hM
+2026-11-12T22:51:21.4802158Z 
+2026-11-12T22:51:21.4802449Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-12T22:51:21.4803323Z ⚠ [4013/4062] Replayed ContinuousFlexibility.Analysis.AffineWeightedCompositionJets
+2026-11-12T22:51:21.4812890Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/AffineWeightedCompositionJets.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/AffineWeightedCompositionJets.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/AffineWeightedCompositionJets.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/AffineWeightedCompositionJets.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/AffineWeightedCompositionJets.setup.json --json
+2026-11-12T22:51:21.4822783Z warning: src/ContinuousFlexibility/Analysis/AffineWeightedCompositionJets.lean:57:43: Variable name `hM` is not explicitly referenced.
+2026-11-12T22:51:21.4823470Z 
+2026-11-12T22:51:21.4823984Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-12T22:51:21.4824744Z   [apply] _hM
+2026-11-12T22:51:21.4824908Z 
+2026-11-12T22:51:21.4825203Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-12T22:51:21.4826015Z ℹ [4014/4062] Replayed ContinuousFlexibility.Analysis.AiryFirstJetMatching
+2026-11-12T22:51:21.4834942Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/AiryFirstJetMatching.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/AiryFirstJetMatching.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/AiryFirstJetMatching.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/AiryFirstJetMatching.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/AiryFirstJetMatching.setup.json --json
+2026-11-12T22:51:21.4844087Z ℹ [4015/4062] Replayed ContinuousFlexibility.Analysis.AiryHalfHolonomy
+2026-11-12T22:51:21.4850265Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/AiryHalfHolonomy.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/AiryHalfHolonomy.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/AiryHalfHolonomy.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/AiryHalfHolonomy.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/AiryHalfHolonomy.setup.json --json
+2026-11-12T22:51:21.4856059Z --
+2026-11-12T22:51:21.4856505Z error: src/ContinuousFlexibility/Analysis/ActualAtlasCutFirstJets.lean:141:2: Type mismatch: After simplification, term
+2026-11-12T22:51:21.4857016Z   hcut m z hz θ
+2026-11-12T22:51:21.4857213Z  has type
+2026-11-12T22:51:21.4857629Z   1 * ((K.chart z (K.cutPair m).1 (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ))).1 - K.cutRadius m) = 0 ∧
+2026-11-12T22:51:21.4858228Z     (1 * ((K.chart z (K.cutPair m).1 (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ))).1 - K.cutRadius m),
+2026-11-12T22:51:21.4858777Z           (K.chart z (K.cutPair m).1 (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ))).2) =
+2026-11-12T22:51:21.4859381Z         (-1 * ((K.chart z (K.cutPair m).2 (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ))).1 - K.cutRadius m),
+2026-11-12T22:51:21.4859938Z           (K.chart z (K.cutPair m).2 (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ))).2) ∧
+2026-11-12T22:51:21.4860506Z       fderiv ℝ (CanonicalGeometry.endpointAlignedChart K z (K.cutPair m).1 (K.cutRadius m) 1)
+2026-11-12T22:51:21.4861199Z             (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ)) =
+2026-11-12T22:51:21.4861712Z           fderiv ℝ (CanonicalGeometry.endpointAlignedChart K z (K.cutPair m).2 (K.cutRadius m) (-1))
+2026-11-12T22:51:21.4862198Z             (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ)) ∧
+2026-11-12T22:51:21.4862629Z         K.height z (K.cutPair m).1 (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ)) =
+2026-11-12T22:51:21.4863122Z             K.height z (K.cutPair m).2 (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ)) ∧
+2026-11-12T22:51:21.4863663Z           fderiv ℝ (K.height z (K.cutPair m).2) (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ)) -
+2026-11-12T22:51:21.4864242Z               fderiv ℝ (K.height z (K.cutPair m).1) (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ)) =
+2026-11-12T22:51:21.4864883Z             -(K.height z (K.cutPair m).1 (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ)) / (2 * K.cutRadius m)) •
+2026-11-12T22:51:21.4865491Z               fderiv ℝ (fun q => (K.chart z (K.cutPair m).1 q).1) (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ))
+2026-11-12T22:51:21.4865871Z but is expected to have type
+2026-11-12T22:51:21.4866317Z   1 * ((K.chart z (K.cutPair m).1 (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ))).1 - K.cutRadius m) = 0 ∧
+2026-11-12T22:51:21.4866896Z     (1 * ((K.chart z (K.cutPair m).1 (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ))).1 - K.cutRadius m),
+2026-11-12T22:51:21.4867433Z           (K.chart z (K.cutPair m).1 (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ))).2) =
+2026-11-12T22:51:21.4867982Z         (-1 * ((K.chart z (K.cutPair m).2 (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ))).1 - K.cutRadius m),
+2026-11-12T22:51:21.4868665Z           (K.chart z (K.cutPair m).2 (K.inverseChart z (K.cutPair m).1 (K.cutRadius m, θ))).2) ∧
+2026-11-12T22:51:21.4869023Z       fderiv ℝ
+2026-11-12T22:51:21.4869361Z             (CanonicalGeometry.endpointAlignedChart
+2026-11-12T22:51:21.4869640Z               {
+2026-11-12T22:51:21.4869832Z                 left := fun m =>
+2026-11-12T22:51:21.4870049Z                   match e m with
+2026-11-12T22:51:21.4870373Z                   | Sum.inl j => K.left (if j.2 = true then (K.cutPair j.1).2 else (K.cutPair j.1).1)
+2026-11-12T22:51:21.4870724Z                   | Sum.inr i => n04PositiveLeft i,
+2026-11-12T22:51:21.4871127Z                 right := fun m =>
+2026-11-12T22:51:21.4871345Z                   match e m with
+2026-11-12T22:51:21.4871658Z                   | Sum.inl j => K.right (if j.2 = true then (K.cutPair j.1).2 else (K.cutPair j.1).1)
+2026-11-12T22:51:21.4872019Z                   | Sum.inr i => n04PositiveRight i,
+2026-11-12T22:51:21.4872296Z                 physicalLeft := fun m =>
+2026-11-12T22:51:21.4872524Z                   match e m with
+2026-11-12T22:51:21.4872864Z                   | Sum.inl j => K.physicalLeft (if j.2 = true then (K.cutPair j.1).2 else (K.cutPair j.1).1)
+2026-11-12T22:51:21.4873235Z                   | Sum.inr i => n04PositiveLeft i,
+2026-11-12T22:51:21.4873492Z                 physicalRight := fun m =>
+2026-11-12T22:51:21.4873731Z                   match e m with
+2026-11-12T22:51:21.4873933Z --
+2026-11-12T22:51:21.4874413Z error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean:69:8: Type mismatch: After simplification, term
+2026-11-12T22:51:21.4874924Z   hcut
+2026-11-12T22:51:21.4875099Z  has type
+2026-11-12T22:51:21.4875299Z   (∀ (θ : ℝ),
+2026-11-12T22:51:21.4876023Z       (n04bActualTypedAtlas hT hS hN hfield e₀).inverseChart z ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair m).2
+2026-11-12T22:51:21.4876589Z           ((n04bActualTypedAtlas hT hS hN hfield e₀).cutRadius m, θ) =
+2026-11-12T22:51:21.4877154Z         (n04bActualTypedAtlas hT hS hN hfield e₀).inverseChart z ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair m).1
+2026-11-12T22:51:21.4877700Z           ((n04bActualTypedAtlas hT hS hN hfield e₀).cutRadius m, θ)) ∧
+2026-11-12T22:51:21.4878020Z     range
+2026-11-12T22:51:21.4878204Z           (canonicalCutPoint S
+2026-11-12T22:51:21.4878418Z             {
+2026-11-12T22:51:21.4878600Z               left := fun m =>
+2026-11-12T22:51:21.4878810Z                 match e m with
+2026-11-12T22:51:21.4879021Z                 | Sum.inl j =>
+2026-11-12T22:51:21.4879315Z                   (n04bActualTypedAtlas hT hS hN hfield e₀).left
+2026-11-12T22:51:21.4879758Z                     (if j.2 = true then ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair j.1).2
+2026-11-12T22:51:21.4880226Z                     else ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair j.1).1)
+2026-11-12T22:51:21.4880555Z                 | Sum.inr i => n04PositiveLeft i,
+2026-11-12T22:51:21.4880824Z               right := fun m =>
+2026-11-12T22:51:21.4881181Z                 match e m with
+2026-11-12T22:51:21.4881392Z                 | Sum.inl j =>
+2026-11-12T22:51:21.4881695Z                   (n04bActualTypedAtlas hT hS hN hfield e₀).right
+2026-11-12T22:51:21.4882113Z                     (if j.2 = true then ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair j.1).2
+2026-11-12T22:51:21.4882564Z                     else ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair j.1).1)
+2026-11-12T22:51:21.4882886Z                 | Sum.inr i => n04PositiveRight i,
+2026-11-12T22:51:21.4883153Z               physicalLeft := fun m =>
+2026-11-12T22:51:21.4883378Z                 match e m with
+2026-11-12T22:51:21.4883574Z                 | Sum.inl j =>
+2026-11-12T22:51:21.4883883Z                   (n04bActualTypedAtlas hT hS hN hfield e₀).physicalLeft
+2026-11-12T22:51:21.4884318Z                     (if j.2 = true then ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair j.1).2
+2026-11-12T22:51:21.4884975Z                     else ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair j.1).1)
+2026-11-12T22:51:21.4885305Z                 | Sum.inr i => n04PositiveLeft i,
+2026-11-12T22:51:21.4885556Z               physicalRight := fun m =>
+2026-11-12T22:51:21.4885904Z                 match e m with
+2026-11-12T22:51:21.4886109Z                 | Sum.inl j =>
+2026-11-12T22:51:21.4886422Z                   (n04bActualTypedAtlas hT hS hN hfield e₀).physicalRight
+2026-11-12T22:51:21.4886868Z                     (if j.2 = true then ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair j.1).2
+2026-11-12T22:51:21.4887314Z                     else ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair j.1).1)
+2026-11-12T22:51:21.4887645Z                 | Sum.inr i => n04PositiveRight i,
+2026-11-12T22:51:21.4887902Z               physicalDomain := fun z m =>
+2026-11-12T22:51:21.4888136Z                 match e m with
+2026-11-12T22:51:21.4888336Z --
+2026-11-12T22:51:21.4888806Z error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean:76:6: Type mismatch: After simplification, term
+2026-11-12T22:51:21.4889333Z   htrans
+2026-11-12T22:51:21.4889503Z  has type
+2026-11-12T22:51:21.4889666Z   u
+2026-11-12T22:51:21.4889961Z           ((n04bActualTypedAtlas hT hS hN hfield e₀).inverseChart z
+2026-11-12T22:51:21.4890343Z             ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair m).2
+2026-11-12T22:51:21.4890727Z             ((n04bActualTypedAtlas hT hS hN hfield e₀).cutRadius m, θ)) /
+2026-11-12T22:51:21.4891427Z         (n04bActualTypedAtlas hT hS hN hfield e₀).height z ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair m).2
+2026-11-12T22:51:21.4891933Z           ((n04bActualTypedAtlas hT hS hN hfield e₀).inverseChart z
+2026-11-12T22:51:21.4892318Z             ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair m).2
+2026-11-12T22:51:21.4892712Z             ((n04bActualTypedAtlas hT hS hN hfield e₀).cutRadius m, θ)) =
+2026-11-12T22:51:21.4893005Z       u
+2026-11-12T22:51:21.4893295Z           ((n04bActualTypedAtlas hT hS hN hfield e₀).inverseChart z
+2026-11-12T22:51:21.4893688Z             ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair m).1
+2026-11-12T22:51:21.4894081Z             ((n04bActualTypedAtlas hT hS hN hfield e₀).cutRadius m, θ)) /
+2026-11-12T22:51:21.4894623Z         (n04bActualTypedAtlas hT hS hN hfield e₀).height z ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair m).1
+2026-11-12T22:51:21.4895121Z           ((n04bActualTypedAtlas hT hS hN hfield e₀).inverseChart z
+2026-11-12T22:51:21.4895493Z             ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair m).1
+2026-11-12T22:51:21.4895872Z             ((n04bActualTypedAtlas hT hS hN hfield e₀).cutRadius m, θ)) ∧
+2026-11-12T22:51:21.4896166Z     radialPartial
+2026-11-12T22:51:21.4896364Z         (canonicalHeight S
+2026-11-12T22:51:21.4896567Z           {
+2026-11-12T22:51:21.4896752Z             left := fun m =>
+2026-11-12T22:51:21.4896962Z               match e m with
+2026-11-12T22:51:21.4897185Z               | Sum.inl j =>
+2026-11-12T22:51:21.4897475Z                 (n04bActualTypedAtlas hT hS hN hfield e₀).left
+2026-11-12T22:51:21.4897912Z                   (if j.2 = true then ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair j.1).2
+2026-11-12T22:51:21.4898376Z                   else ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair j.1).1)
+2026-11-12T22:51:21.4898709Z               | Sum.inr i => n04PositiveLeft i,
+2026-11-12T22:51:21.4898955Z             right := fun m =>
+2026-11-12T22:51:21.4899163Z               match e m with
+2026-11-12T22:51:21.4899367Z               | Sum.inl j =>
+2026-11-12T22:51:21.4899651Z                 (n04bActualTypedAtlas hT hS hN hfield e₀).right
+2026-11-12T22:51:21.4900068Z                   (if j.2 = true then ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair j.1).2
+2026-11-12T22:51:21.4900519Z                   else ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair j.1).1)
+2026-11-12T22:51:21.4900844Z               | Sum.inr i => n04PositiveRight i,
+2026-11-12T22:51:21.4901265Z             physicalLeft := fun m =>
+2026-11-12T22:51:21.4901613Z               match e m with
+2026-11-12T22:51:21.4901811Z               | Sum.inl j =>
+2026-11-12T22:51:21.4902124Z                 (n04bActualTypedAtlas hT hS hN hfield e₀).physicalLeft
+2026-11-12T22:51:21.4902645Z                   (if j.2 = true then ((n04bActualTypedAtlas hT hS hN hfield e₀).cutPair j.1).2
+2026-11-12T22:51:21.4902968Z --
+2026-11-12T22:51:21.4903421Z error: src/ContinuousFlexibility/Analysis/N04RealizationActualCubicFactor.lean:47:16: failed to synthesize instance of type class
+2026-11-12T22:51:21.4903961Z   HMul ℝ (PolarPoint → ℝ) ℝ
+2026-11-12T22:51:21.4904101Z 
+2026-11-12T22:51:21.4904404Z Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+2026-11-12T22:51:21.4905139Z error: src/ContinuousFlexibility/Analysis/N04RealizationActualCubicFactor.lean:55:5: Unknown identifier `reference_mem_stateNeighborhood`
+2026-11-12T22:51:21.4905898Z ⚠ [4786/4791] Replayed ContinuousFlexibility.Analysis.N04RealizationPotentialIdentity
+2026-11-12T22:51:21.4911968Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04RealizationPotentialIdentity.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N04RealizationPotentialIdentity.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N04RealizationPotentialIdentity.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N04RealizationPotentialIdentity.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N04RealizationPotentialIdentity.setup.json --json
+2026-11-12T22:51:21.4918037Z warning: src/ContinuousFlexibility/Analysis/N04RealizationPotentialIdentity.lean:81:9: Variable name `q` is not explicitly referenced.
+2026-11-12T22:51:21.4918482Z 
+2026-11-12T22:51:21.4918821Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-12T22:51:21.4919286Z   [apply] _q
+2026-11-12T22:51:21.4919393Z 
+2026-11-12T22:51:21.4919577Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-12T22:51:21.4920204Z ℹ [4787/4810] Built ContinuousFlexibility.Analysis.WholeReferenceGaugeGlobalTransport (2.7s)
+2026-11-12T22:51:21.4926369Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholeReferenceGaugeGlobalTransport.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/WholeReferenceGaugeGlobalTransport.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/WholeReferenceGaugeGlobalTransport.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/WholeReferenceGaugeGlobalTransport.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/WholeReferenceGaugeGlobalTransport.setup.json --json
+2026-11-12T22:51:21.4933164Z ✔ [4788/4810] Ran ContinuousFlexibility.Analysis.CanonicalActualReferenceGeometry
+2026-11-12T22:51:21.4933748Z ℹ [4789/4810] Replayed ContinuousFlexibility.Analysis.N01cOneHighProducts
+2026-11-12T22:51:21.4939274Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01cOneHighProducts.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N01cOneHighProducts.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N01cOneHighProducts.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N01cOneHighProducts.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N01cOneHighProducts.setup.json --json
+2026-11-12T22:51:21.4945002Z ⚠ [4790/4810] Replayed ContinuousFlexibility.Analysis.N01cSectorProjection
+2026-11-12T22:51:21.4950615Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01cSectorProjection.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N01cSectorProjection.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N01cSectorProjection.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N01cSectorProjection.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N01cSectorProjection.setup.json --json
+2026-11-12T22:51:21.4956655Z warning: src/ContinuousFlexibility/Analysis/N01cSectorProjection.lean:23:35: Unused tactic linter: `ring` does nothing
+2026-11-12T22:51:21.4957050Z 
+2026-11-12T22:51:21.4957233Z Note: This linter can be disabled with `set_option linter.unusedTactic false`
+2026-11-12T22:51:21.4957927Z warning: src/ContinuousFlexibility/Analysis/N01cSectorProjection.lean:23:35: this tactic is never executed
+2026-11-12T22:51:21.4958447Z 
+2026-11-12T22:51:21.4958700Z Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+2026-11-12T22:51:21.4959404Z ℹ [4791/4810] Replayed ContinuousFlexibility.Analysis.N01cFullNeighborhood
+2026-11-12T22:51:21.4967810Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01cFullNeighborhood.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N01cFullNeighborhood.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N01cFullNeighborhood.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N01cFullNeighborhood.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N01cFullNeighborhood.setup.json --json
+2026-11-12T22:51:21.4975772Z ℹ [4792/4810] Replayed ContinuousFlexibility.Analysis.N01cOuterDenominatorJets
+2026-11-12T22:51:21.4981852Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01cOuterDenominatorJets.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N01cOuterDenominatorJets.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N01cOuterDenominatorJets.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N01cOuterDenominatorJets.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N01cOuterDenominatorJets.setup.json --json
+2026-11-12T22:51:21.4987667Z ⚠ [4793/4810] Replayed ContinuousFlexibility.Analysis.N01cCompositionJetBounds
+2026-11-12T22:51:21.4993464Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01cCompositionJetBounds.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N01cCompositionJetBounds.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N01cCompositionJetBounds.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N01cCompositionJetBounds.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N01cCompositionJetBounds.setup.json --json
+2026-11-12T22:51:21.4999690Z warning: src/ContinuousFlexibility/Analysis/N01cCompositionJetBounds.lean:40:0: automatically included section variable(s) unused in theorem `ContinuousFlexibility.Analysis.norm_projectiveCompositionTerm_le`:
+2026-11-12T22:51:21.5000516Z   [IsTopologicalAddGroup X]
+2026-11-12T22:51:21.5000783Z   [ContinuousSMul ℝ X]
+2026-11-12T22:51:21.5001340Z consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+2026-11-12T22:51:21.5001907Z   omit [IsTopologicalAddGroup X] [ContinuousSMul ℝ X] in theorem ...
+2026-11-12T22:51:21.5002153Z 
+2026-11-12T22:51:21.5002356Z Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+2026-11-12T22:51:21.5002878Z ℹ [4794/4810] Replayed ContinuousFlexibility.Analysis.N01cWeightAbsorption
+2026-11-12T22:51:21.5008401Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01cWeightAbsorption.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N01cWeightAbsorption.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N01cWeightAbsorption.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N01cWeightAbsorption.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N01cWeightAbsorption.setup.json --json
+2026-11-12T22:51:21.5014274Z ℹ [4795/4810] Replayed ContinuousFlexibility.Analysis.N01cMaterialAbsorption
+2026-11-12T22:51:21.5019915Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01cMaterialAbsorption.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N01cMaterialAbsorption.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N01cMaterialAbsorption.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N01cMaterialAbsorption.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N01cMaterialAbsorption.setup.json --json
+2026-11-12T22:51:21.5025924Z ⚠ [4796/4810] Replayed ContinuousFlexibility.Analysis.N01cFiniteParameterProducts
+2026-11-12T22:51:21.5031807Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01cFiniteParameterProducts.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N01cFiniteParameterProducts.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N01cFiniteParameterProducts.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N01cFiniteParameterProducts.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N01cFiniteParameterProducts.setup.json --json
+2026-11-12T22:51:21.5037439Z --
+2026-11-12T22:51:21.5037965Z error: src/ContinuousFlexibility/Analysis/N04RealizationCubicOneHighBounds.lean:110:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+2026-11-12T22:51:21.5038570Z   ?a⁻¹ ^ ?n
+2026-11-12T22:51:21.5038768Z in the target expression
+2026-11-12T22:51:21.5039034Z   (width m ^ 6)⁻¹ ≤ bw ^ 6 * E m ^ (bw * 6)
+2026-11-12T22:51:21.5039199Z 
+2026-11-12T22:51:21.5039280Z X : Type u_1
+2026-11-12T22:51:21.5039456Z I : Type u_2
+2026-11-12T22:51:21.5039675Z inst✝⁴ : TopologicalSpace X
+2026-11-12T22:51:21.5039923Z inst✝³ : AddCommGroup X
+2026-11-12T22:51:21.5040153Z inst✝² : Module ℝ X
+2026-11-12T22:51:21.5040394Z inst✝¹ : IsTopologicalAddGroup X
+2026-11-12T22:51:21.5040658Z inst✝ : ContinuousSMul ℝ X
+2026-11-12T22:51:21.5040991Z U : Set X
+2026-11-12T22:51:21.5041179Z hU : IsOpen U
+2026-11-12T22:51:21.5041389Z p : ℕ → Seminorm ℝ X
+2026-11-12T22:51:21.5041601Z hp : WithSeminorms p
+2026-11-12T22:51:21.5041800Z hmono : Monotone p
+2026-11-12T22:51:21.5041991Z base : ℕ
+2026-11-12T22:51:21.5042184Z E H width : I → ℝ
+2026-11-12T22:51:21.5042393Z hE : ∀ (m : I), 1 ≤ E m
+2026-11-12T22:51:21.5042613Z hH : ∀ (m : I), 0 ≤ H m
+2026-11-12T22:51:21.5042832Z hwidth : ∀ (m : I), 0 < width m
+2026-11-12T22:51:21.5043053Z bw : ℝ
+2026-11-12T22:51:21.5043243Z hbw : 0 < bw
+2026-11-12T22:51:21.5043502Z hwidthBound : ∀ (m : I), (width m)⁻¹ ≤ bw * E m ^ bw
+2026-11-12T22:51:21.5043940Z N e : I → X → PolarPoint → ℝ
+2026-11-12T22:51:21.5044259Z RN : (m : I) → MixedJetRegularity U (Ioo 0 1 ×ˢ univ) (N m)
+2026-11-12T22:51:21.5044531Z hrep :
+2026-11-12T22:51:21.5044718Z   ∀ (m : I),
+2026-11-12T22:51:21.5045013Z     ∀ x ∈ U,
+2026-11-12T22:51:21.5045209Z       ∃ F,
+2026-11-12T22:51:21.5045420Z         ContDiff ℝ ∞ F ∧
+2026-11-12T22:51:21.5045680Z           EqOn F (N m x) (Ioo 0 1 ×ˢ univ) ∧
+2026-11-12T22:51:21.5046116Z             ∀ (c : Bool) (θ : ℝ), ∀ i ≤ 2, iteratedDeriv i (fun t => F (t, θ)) (if c = true then 1 else 0) = 0
+2026-11-12T22:51:21.5046667Z hfactor : ∀ (m : I), ∀ x ∈ U, ∀ q ∈ Ioo 0 1 ×ˢ univ, N m x q = width m ^ 6 * (q.1 * (1 - q.1)) ^ 3 * e m x q
+2026-11-12T22:51:21.5047019Z loss : ℕ → ℕ
+2026-11-12T22:51:21.5047208Z B : ℕ → ℕ → ℝ
+2026-11-12T22:51:21.5047422Z hB : ∀ (k s : ℕ), 0 < B k s
+2026-11-12T22:51:21.5047613Z hb :
+2026-11-12T22:51:21.5047812Z   ∀ (k s : ℕ) (m : I) (a b : ℕ),
+2026-11-12T22:51:21.5048053Z     a + b ≤ s →
+2026-11-12T22:51:21.5048245Z --
+2026-11-12T22:51:21.5048640Z error: src/ContinuousFlexibility/Analysis/N04RealizationCubicOneHighBounds.lean:124:55: unsolved goals
+2026-11-12T22:51:21.5049077Z X : Type u_1
+2026-11-12T22:51:21.5049252Z I : Type u_2
+2026-11-12T22:51:21.5049482Z inst✝⁴ : TopologicalSpace X
+2026-11-12T22:51:21.5049735Z inst✝³ : AddCommGroup X
+2026-11-12T22:51:21.5049960Z inst✝² : Module ℝ X
+2026-11-12T22:51:21.5050206Z inst✝¹ : IsTopologicalAddGroup X
+2026-11-12T22:51:21.5050465Z inst✝ : ContinuousSMul ℝ X
+2026-11-12T22:51:21.5050680Z U : Set X
+2026-11-12T22:51:21.5050855Z hU : IsOpen U
+2026-11-12T22:51:21.5051248Z p : ℕ → Seminorm ℝ X
+2026-11-12T22:51:21.5051451Z hp : WithSeminorms p
+2026-11-12T22:51:21.5051650Z hmono : Monotone p
+2026-11-12T22:51:21.5051845Z base : ℕ
+2026-11-12T22:51:21.5052051Z E H width : I → ℝ
+2026-11-12T22:51:21.5052263Z hE : ∀ (m : I), 1 ≤ E m
+2026-11-12T22:51:21.5052476Z hH : ∀ (m : I), 0 ≤ H m
+2026-11-12T22:51:21.5052706Z hwidth : ∀ (m : I), 0 < width m
+2026-11-12T22:51:21.5052933Z bw : ℝ
+2026-11-12T22:51:21.5053106Z hbw : 0 < bw
+2026-11-12T22:51:21.5053348Z hwidthBound : ∀ (m : I), (width m)⁻¹ ≤ bw * E m ^ bw
+2026-11-12T22:51:21.5053643Z N e : I → X → PolarPoint → ℝ
+2026-11-12T22:51:21.5053952Z RN : (m : I) → MixedJetRegularity U (Ioo 0 1 ×ˢ univ) (N m)
+2026-11-12T22:51:21.5054218Z hrep :
+2026-11-12T22:51:21.5054397Z   ∀ (m : I),
+2026-11-12T22:51:21.5054593Z     ∀ x ∈ U,
+2026-11-12T22:51:21.5054774Z       ∃ F,
+2026-11-12T22:51:21.5054973Z         ContDiff ℝ ∞ F ∧
+2026-11-12T22:51:21.5055224Z           EqOn F (N m x) (Ioo 0 1 ×ˢ univ) ∧
+2026-11-12T22:51:21.5055646Z             ∀ (c : Bool) (θ : ℝ), ∀ i ≤ 2, iteratedDeriv i (fun t => F (t, θ)) (if c = true then 1 else 0) = 0
+2026-11-12T22:51:21.5056174Z hfactor : ∀ (m : I), ∀ x ∈ U, ∀ q ∈ Ioo 0 1 ×ˢ univ, N m x q = width m ^ 6 * (q.1 * (1 - q.1)) ^ 3 * e m x q
+2026-11-12T22:51:21.5056524Z loss : ℕ → ℕ
+2026-11-12T22:51:21.5056715Z B : ℕ → ℕ → ℝ
+2026-11-12T22:51:21.5056928Z hB : ∀ (k s : ℕ), 0 < B k s
+2026-11-12T22:51:21.5057139Z hb :
+2026-11-12T22:51:21.5057343Z   ∀ (k s : ℕ) (m : I) (a b : ℕ),
+2026-11-12T22:51:21.5057573Z     a + b ≤ s →
+2026-11-12T22:51:21.5057804Z       ∀ (q : ℝ × ℝ) (hq : q ∈ Ioo 0 1 ×ˢ univ),
+2026-11-12T22:51:21.5058064Z         ∀ x ∈ U,
+2026-11-12T22:51:21.5058294Z           ∀ (v : Fin k → X),
+2026-11-12T22:51:21.5058549Z             |(((RN m).parameter a b q hq).D k x) v| ≤
+2026-11-12T22:51:21.5058802Z --
+2026-11-12T22:51:21.5059323Z error: src/ContinuousFlexibility/Analysis/N04RealizationPhysicalJointBounds.lean:82:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+2026-11-12T22:51:21.5059937Z   (localScalarJetMap ?J ?n ?x ?θ) ?v
+2026-11-12T22:51:21.5060183Z in the target expression
+2026-11-12T22:51:21.5060625Z   (localScalarJetMap (fun θ x => mixedScalarRadialJointDirections J hU hcU hI hf hb hr b θ) k (x, q.1)
+2026-11-12T22:51:21.5061226Z           q.2).toMultilinearMap
+2026-11-12T22:51:21.5061447Z       u =
+2026-11-12T22:51:21.5061745Z     ((scalarAngularExpansion k) fun a j => ((J a b q hq).D j x).toMultilinearMap) u
+2026-11-12T22:51:21.5062147Z 
+2026-11-12T22:51:21.5062232Z E : Type u_1
+2026-11-12T22:51:21.5062456Z inst✝⁴ : TopologicalSpace E
+2026-11-12T22:51:21.5062701Z inst✝³ : AddCommGroup E
+2026-11-12T22:51:21.5062919Z inst✝² : Module ℝ E
+2026-11-12T22:51:21.5063257Z inst✝¹ : IsTopologicalAddGroup E
+2026-11-12T22:51:21.5063540Z inst✝ : ContinuousSMul ℝ E
+2026-11-12T22:51:21.5063749Z U : Set E
+2026-11-12T22:51:21.5063930Z I : Set ℝ
+2026-11-12T22:51:21.5064142Z F : ℕ → ℕ → PolarPoint → E → ℝ
+2026-11-12T22:51:21.5064493Z J : (a b : ℕ) → (q : ℝ × ℝ) → q ∈ I ×ˢ univ → SmoothDirections U (F a b q)
+2026-11-12T22:51:21.5064781Z hU : IsOpen U
+2026-11-12T22:51:21.5064994Z hcU : Convex ℝ U
+2026-11-12T22:51:21.5065179Z hI : IsOpen I
+2026-11-12T22:51:21.5065470Z hf : ∀ (a b : ℕ), ∀ x ∈ U, ContinuousOn (fun q => F a b q x) (I ×ˢ univ)
+2026-11-12T22:51:21.5065870Z hb : ∀ (a b : ℕ), UniformScalarJetSeminormBounds fun q => J a b ↑q ⋯
+2026-11-12T22:51:21.5066345Z hr : ∀ (a b : ℕ), ∀ q ∈ I ×ˢ univ, ∀ x ∈ U, HasDerivAt (fun r => F a b (r, q.2) x) (F (a + 1) b q x) q.1
+2026-11-12T22:51:21.5066862Z ha : ∀ (a b : ℕ), ∀ q ∈ I ×ˢ univ, ∀ x ∈ U, HasDerivAt (fun θ => F a b (q.1, θ) x) (F a (b + 1) q x) q.2
+2026-11-12T22:51:21.5067205Z hcI : Convex ℝ I
+2026-11-12T22:51:21.5067410Z n : ℕ
+2026-11-12T22:51:21.5067579Z x : E
+2026-11-12T22:51:21.5067743Z q : PolarPoint
+2026-11-12T22:51:21.5067960Z hq : q ∈ I ×ˢ univ
+2026-11-12T22:51:21.5068169Z v : Fin n → (E × ℝ) × ℝ
+2026-11-12T22:51:21.5068377Z b k : ℕ
+2026-11-12T22:51:21.5068565Z u : Fin k → E × ℝ
+2026-11-12T22:51:21.5068992Z ⊢ (localScalarJetMap (fun θ x => mixedScalarRadialJointDirections J hU hcU hI hf hb hr b θ) k (x, q.1)
+2026-11-12T22:51:21.5069417Z           q.2).toMultilinearMap
+2026-11-12T22:51:21.5069634Z       u =
+2026-11-12T22:51:21.5069924Z     ((scalarAngularExpansion k) fun a j => ((J a b q hq).D j x).toMultilinearMap) u
+2026-11-12T22:51:21.5070494Z ✔ [5797/5810] Ran ContinuousFlexibility.Analysis.N04RealizationMovingGraphBounds
+2026-11-12T22:51:21.5071253Z ✔ [5798/5810] Ran ContinuousFlexibility.Analysis.N04RealizationHeightGraphComposition
+2026-11-12T22:51:21.5071892Z ℹ [5799/5810] Replayed ContinuousFlexibility.Analysis.N04RealizationJetCompletion
+2026-11-12T22:51:21.5077633Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04RealizationJetCompletion.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N04RealizationJetCompletion.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N04RealizationJetCompletion.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N04RealizationJetCompletion.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N04RealizationJetCompletion.setup.json --json
+2026-11-12T22:51:21.5083546Z --
+2026-11-12T22:51:21.5084134Z error: src/ContinuousFlexibility/Analysis/N04RealizationJointMixedSlotBounds.lean:50:20: Unknown identifier `spaces_mixedDerivative_zero`
+2026-11-12T22:51:21.5084970Z error: src/ContinuousFlexibility/Analysis/N04RealizationJointMixedSlotBounds.lean:50:8: Type mismatch: After simplification, term
+2026-11-12T22:51:21.5085668Z   hb n (Decidable.byContradiction fun a => n04Realization_jointMixed_bound_of_stableSlots._proof_1_3 n a) v hv
+2026-11-12T22:51:21.5086087Z  has type
+2026-11-12T22:51:21.5086332Z   @LE.le ℝ Real.instLE |(Jg.D n (x, q)) v| B
+2026-11-12T22:51:21.5086592Z but is expected to have type
+2026-11-12T22:51:21.5086957Z   @LE.le ℝ Real.instLE |mixedDerivative 0 0 (fun p => (Jg.D n (x, p)) v) q| B
+2026-11-12T22:51:21.5087572Z error: src/ContinuousFlexibility/Analysis/N04RealizationJointMixedSlotBounds.lean:63:28: Unknown identifier `spaces_mixedDerivative_zero`
+2026-11-12T22:51:21.5088389Z error: src/ContinuousFlexibility/Analysis/N04RealizationJointMixedSlotBounds.lean:63:16: Type mismatch: After simplification, term
+2026-11-12T22:51:21.5089085Z   hb n (Decidable.byContradiction fun a => n04Realization_jointMixed_bound_of_stableSlots._proof_1_6 r n a) v hv
+2026-11-12T22:51:21.5089489Z  has type
+2026-11-12T22:51:21.5089721Z   @LE.le ℝ Real.instLE |(Jg.D n (x, q)) v| B
+2026-11-12T22:51:21.5089974Z but is expected to have type
+2026-11-12T22:51:21.5090321Z   @LE.le ℝ Real.instLE |mixedDerivative 0 0 (fun p => (Jg.D n (x, p)) v) q| B
+2026-11-12T22:51:21.5090846Z ⚠ [5805/5813] Replayed ContinuousFlexibility.Analysis.JointMixedTransportCalculus
+2026-11-12T22:51:21.5096837Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/JointMixedTransportCalculus.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/JointMixedTransportCalculus.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/JointMixedTransportCalculus.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/JointMixedTransportCalculus.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/JointMixedTransportCalculus.setup.json --json
+2026-11-12T22:51:21.5103068Z warning: src/ContinuousFlexibility/Analysis/JointMixedTransportCalculus.lean:48:57: `ContinuousMultilinearMap.add_apply` has been deprecated: Use `add_apply` instead
+2026-11-12T22:51:21.5103595Z 
+2026-11-12T22:51:21.5103917Z Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.add_apply` to `add_apply x`).
+2026-11-12T22:51:21.5104295Z 
+2026-11-12T22:51:21.5104531Z Hint: Replace the deprecated name:
+2026-11-12T22:51:21.5104945Z   C̵o̵n̵t̵i̵n̵u̵o̵u̵s̵M̵u̵l̵t̵i̵l̵i̵n̵e̵a̵r̵M̵a̵p̵.̵a̵d̵d̵_̵a̵p̵p̵l̵y̵a̲d̲d̲_̲a̲p̲p̲l̲y̲
+2026-11-12T22:51:21.5105508Z ✔ [5806/5813] Ran ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
+2026-11-12T22:51:21.5106248Z ⚠ [5807/5813] Built ContinuousFlexibility.Analysis.N04RealizationLogScalarBounds (1.9s)
+2026-11-12T22:51:21.5112255Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04RealizationLogScalarBounds.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N04RealizationLogScalarBounds.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N04RealizationLogScalarBounds.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N04RealizationLogScalarBounds.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N04RealizationLogScalarBounds.setup.json --json
+2026-11-12T22:51:21.5118507Z warning: src/ContinuousFlexibility/Analysis/N04RealizationLogScalarBounds.lean:30:32: `if_neg` has been deprecated: Use `ite_eq_right` instead
+2026-11-12T22:51:21.5118961Z 
+2026-11-12T22:51:21.5119055Z Hint: Replace the deprecated name:
+2026-11-12T22:51:21.5119353Z   i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+2026-11-12T22:51:21.5119852Z ℹ [5808/5813] Built ContinuousFlexibility.Analysis.N04RealizationLogCompositionBounds (2.2s)
+2026-11-12T22:51:21.5126054Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04RealizationLogCompositionBounds.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N04RealizationLogCompositionBounds.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N04RealizationLogCompositionBounds.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N04RealizationLogCompositionBounds.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N04RealizationLogCompositionBounds.setup.json --json
+2026-11-12T22:51:21.5132382Z ℹ [5809/5816] Built ContinuousFlexibility.Analysis.N04RealizationLogHeightTraceBounds (2.5s)
+2026-11-12T22:51:21.5138284Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04RealizationLogHeightTraceBounds.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N04RealizationLogHeightTraceBounds.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N04RealizationLogHeightTraceBounds.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N04RealizationLogHeightTraceBounds.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N04RealizationLogHeightTraceBounds.setup.json --json
+2026-11-12T22:51:21.5144414Z ℹ [5810/5816] Replayed ContinuousFlexibility.Analysis.N04RealizationPrimitiveJetAlgebra
+2026-11-12T22:51:21.5150339Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04RealizationPrimitiveJetAlgebra.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N04RealizationPrimitiveJetAlgebra.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N04RealizationPrimitiveJetAlgebra.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N04RealizationPrimitiveJetAlgebra.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N04RealizationPrimitiveJetAlgebra.setup.json --json
+2026-11-12T22:51:21.5156518Z ℹ [5811/5855] Replayed ContinuousFlexibility.Analysis.N07bCanonicalInverseAngle
+2026-11-12T22:51:21.5162251Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07bCanonicalInverseAngle.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N07bCanonicalInverseAngle.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N07bCanonicalInverseAngle.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N07bCanonicalInverseAngle.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N07bCanonicalInverseAngle.setup.json --json
+2026-11-12T22:51:21.5168070Z ℹ [5812/5855] Replayed ContinuousFlexibility.Analysis.N07bInverseDirection
+2026-11-12T22:51:21.5173804Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07bInverseDirection.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N07bInverseDirection.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N07bInverseDirection.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N07bInverseDirection.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N07bInverseDirection.setup.json --json
+2026-11-12T22:51:21.5179610Z ℹ [5813/5855] Replayed ContinuousFlexibility.Analysis.N07bCanonicalSourceRecursion
+2026-11-12T22:51:21.5185395Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07bCanonicalSourceRecursion.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N07bCanonicalSourceRecursion.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N07bCanonicalSourceRecursion.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N07bCanonicalSourceRecursion.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N07bCanonicalSourceRecursion.setup.json --json
+2026-11-12T22:51:21.5191320Z ⚠ [5814/5855] Replayed ContinuousFlexibility.Analysis.N07bMaterialCoordinateMeasure
+2026-11-12T22:51:21.5197147Z trace: .> LEAN_PATH=/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3/bin/lean /home/runner/work/continuous-flexibility/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07bMaterialCoordinateMeasure.lean -o /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N07bMaterialCoordinateMeasure.olean -i /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/lib/lean/ContinuousFlexibility/Analysis/N07bMaterialCoordinateMeasure.ilean -c /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N07bMaterialCoordinateMeasure.c --setup /home/runner/work/continuous-flexibility/continuous-flexibility/.lake/build/ir/ContinuousFlexibility/Analysis/N07bMaterialCoordinateMeasure.setup.json --json
+2026-11-12T22:51:21.5203238Z warning: src/ContinuousFlexibility/Analysis/N07bMaterialCoordinateMeasure.lean:53:36: This simp argument is unused:
+2026-11-12T22:51:21.5203711Z   zero_mul
+2026-11-12T22:51:21.5203813Z 
+2026-11-12T22:51:21.5203916Z Hint: Omit it from the simp argument list.
+2026-11-12T22:51:21.5204365Z   [apply] simp only [planeJacobian, (n07bMaterialChart_hasFDerivAt hT hp).fderiv, ContinuousLinearMap.prod_apply,
+2026-11-12T22:51:21.5205015Z     smul_apply, ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd', smul_eq_mul, mul_one, mul_zero, sub_zero]
+2026-11-12T22:51:21.5205434Z --
+2026-11-12T22:51:21.5205824Z error: src/ContinuousFlexibility/Analysis/N04RealizationMixedSlotBudget.lean:91:40: Unknown identifier `i`
+2026-11-12T22:51:21.5206179Z 
+2026-11-12T22:51:21.5206480Z Note: It is not possible to treat `i` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+2026-11-12T22:51:21.5206962Z compiled project modules: 20; slowest:
+2026-11-12T22:51:21.5207326Z      0.3 min  ContinuousFlexibility.Analysis.ConstructedRootCutFirstJets
+2026-11-12T22:51:21.5207832Z      0.3 min  ContinuousFlexibility.Analysis.ActualPositiveReferenceFirstJets
+2026-11-12T22:51:21.5208335Z      0.2 min  ContinuousFlexibility.Analysis.N04RealizationRetainedStart
+2026-11-12T22:51:21.5208810Z      0.1 min  ContinuousFlexibility.Analysis.N04RealizationLeftColumnTower
+2026-11-12T22:51:21.5209349Z      0.1 min  ContinuousFlexibility.Analysis.N04RealizationCanonicalSourceProduct
+2026-11-12T22:51:21.5209905Z      0.0 min  ContinuousFlexibility.Analysis.WholeReferenceGaugeGlobalTransport
+2026-11-12T22:51:21.5210453Z      0.0 min  ContinuousFlexibility.Analysis.N04RealizationLogHeightTraceBounds
+2026-11-12T22:51:21.5211074Z      0.0 min  ContinuousFlexibility.Analysis.N04RealizationFullWeightProduct
+2026-11-12T22:51:21.5211627Z      0.0 min  ContinuousFlexibility.Analysis.N04RealizationFullWeightProductOneHigh
+2026-11-12T22:51:21.5212190Z      0.0 min  ContinuousFlexibility.Analysis.WholeReferenceGaugeReferenceRadial
+2026-11-12T22:51:21.5212722Z      0.0 min  ContinuousFlexibility.Analysis.N04RealizationLogCompositionBounds
+2026-11-12T22:51:21.5213294Z      0.0 min  ContinuousFlexibility.Analysis.N04RealizationActualPositiveGaugeFields
+2026-11-12T22:51:21.5213853Z      0.0 min  ContinuousFlexibility.Analysis.N04RealizationAngularTraceBounds
+2026-11-12T22:51:21.5214382Z      0.0 min  ContinuousFlexibility.Analysis.N04RealizationFiniteProductScale
+2026-11-12T22:51:21.5214901Z      0.0 min  ContinuousFlexibility.Analysis.RadialReferencePotentialGerms
+2026-11-12T22:51:23.3594051Z ##[error]Process completed with exit code 1.
+2026-11-12T22:51:23.4193787Z ##[group]Run actions/cache/save@v4
+2026-11-12T22:51:23.4201231Z with:
+2026-11-12T22:51:23.4201472Z   path: .lake/build
+2026-11-12T22:51:23.4202012Z   key: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates-Realization~465caa1ba4e791cb763ea9946f547fe37ed338f8
+2026-11-12T22:51:23.4202597Z   enableCrossOsArchive: false
+2026-11-12T22:51:23.4202812Z env:
+2026-11-12T22:51:23.4202985Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:51:23.4203187Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:51:23.4203382Z ##[endgroup]
+2026-11-12T22:51:23.5199296Z (node:3836) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-12T22:51:23.5200660Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-12T22:51:23.5361450Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/continuous-flexibility/continuous-flexibility --files-from manifest.txt --use-compress-program zstdmt
+2026-11-12T22:51:54.8343948Z (node:3836) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-12T22:51:55.8254568Z Sent 0 of 1094416242 (0.0%), 0.0 MBs/sec
+2026-11-12T22:51:56.8215753Z Sent 536870912 of 1094416242 (49.1%), 255.9 MBs/sec
+2026-11-12T22:51:57.8223379Z Sent 1073741824 of 1094416242 (98.1%), 341.1 MBs/sec
+2026-11-12T22:51:57.9637962Z Sent 1094416242 of 1094416242 (100.0%), 332.1 MBs/sec
+2026-11-12T22:51:58.3908847Z Cache saved with key: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates-Realization~465caa1ba4e791cb763ea9946f547fe37ed338f8
+2026-11-12T22:51:58.5000300Z ##[group]Run gh cache list -R "$GITHUB_REPOSITORY" --key "$PREFIX" --limit 100 --json id,key             --jq '.[] | select(.key != $ENV.KEEP) | .id' |
+2026-11-12T22:51:58.5001371Z [36;1mgh cache list -R "$GITHUB_REPOSITORY" --key "$PREFIX" --limit 100 --json id,key             --jq '.[] | select(.key != $ENV.KEEP) | .id' |[0m
+2026-11-12T22:51:58.5001950Z [36;1m  while read -r id; do gh cache delete "$id" -R "$GITHUB_REPOSITORY" || true; done[0m
+2026-11-12T22:51:58.5381780Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-12T22:51:58.5382093Z env:
+2026-11-12T22:51:58.5382281Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:51:58.5382492Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:51:58.5385105Z   GH_TOKEN: ***
+2026-11-12T22:51:58.5385598Z   PREFIX: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates-Realization~
+2026-11-12T22:51:58.5386488Z   KEEP: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates-Realization~465caa1ba4e791cb763ea9946f547fe37ed338f8
+2026-11-12T22:51:58.5387071Z ##[endgroup]
+2026-11-12T22:51:59.2806742Z ##[group]Run total=$(find src/ContinuousFlexibility -name '*.lean' | wc -l)
+2026-11-12T22:51:59.2807472Z [36;1mtotal=$(find src/ContinuousFlexibility -name '*.lean' | wc -l)[0m
+2026-11-12T22:51:59.2808378Z [36;1mbuilt=$(find .lake/build/lib/lean/ContinuousFlexibility -name '*.olean' ! -name '*.server.olean' ! -name '*.private.olean' | wc -l)[0m
+2026-11-12T22:51:59.2809230Z [36;1mecho "modules compiled / total: $built / $total"[0m
+2026-11-12T22:51:59.2870023Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-12T22:51:59.2870488Z env:
+2026-11-12T22:51:59.2870753Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:51:59.2871255Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:51:59.2871570Z ##[endgroup]
+2026-11-12T22:51:59.3248811Z modules compiled / total: 5197 / 5212
+2026-11-12T22:51:59.3285369Z ##[group]Run find .lake/build/ir -name '*.setup.json' -delete 2>/dev/null || true
+2026-11-12T22:51:59.3285845Z [36;1mfind .lake/build/ir -name '*.setup.json' -delete 2>/dev/null || true[0m
+2026-11-12T22:51:59.3286207Z [36;1mtar --zstd -cf lake-build.tar.zst .lake/build[0m
+2026-11-12T22:51:59.3286484Z [36;1mls -lh lake-build.tar.zst[0m
+2026-11-12T22:51:59.3330491Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-12T22:51:59.3330792Z env:
+2026-11-12T22:51:59.3331130Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:51:59.3331347Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:51:59.3331552Z ##[endgroup]
+2026-11-12T22:52:09.4406776Z -rw-r--r-- 1 runner runner 709M Nov 12 22:52 lake-build.tar.zst
+2026-11-12T22:52:09.4458565Z ##[group]Run actions/upload-artifact@v4
+2026-11-12T22:52:09.4458833Z with:
+2026-11-12T22:52:09.4459021Z   name: lake-build-line
+2026-11-12T22:52:09.4459241Z   path: lake-build.tar.zst
+2026-11-12T22:52:09.4459453Z   retention-days: 3
+2026-11-12T22:52:09.4459650Z   compression-level: 0
+2026-11-12T22:52:09.4460007Z   if-no-files-found: warn
+2026-11-12T22:52:09.4460222Z   overwrite: false
+2026-11-12T22:52:09.4460421Z   include-hidden-files: false
+2026-11-12T22:52:09.4460635Z env:
+2026-11-12T22:52:09.4460804Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:52:09.4461216Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:52:09.4461418Z ##[endgroup]
+2026-11-12T22:52:09.5838836Z (node:3924) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-12T22:52:09.5839770Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-12T22:52:09.5896189Z With the provided path, there will be 1 file uploaded
+2026-11-12T22:52:09.5951415Z Artifact name is valid!
+2026-11-12T22:52:09.5951783Z Root directory input is valid!
+2026-11-12T22:52:09.9521528Z Beginning upload of artifact content to blob storage
+2026-11-12T22:52:09.9899647Z (node:3924) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-12T22:52:10.8081770Z Uploaded bytes 8388608
+2026-11-12T22:52:10.8831424Z Uploaded bytes 16777216
+2026-11-12T22:52:10.8942237Z Uploaded bytes 25165824
+2026-11-12T22:52:10.9328809Z Uploaded bytes 33554432
+2026-11-12T22:52:11.0722450Z Uploaded bytes 41943040
+2026-11-12T22:52:11.1492770Z Uploaded bytes 50331648
+2026-11-12T22:52:11.1637903Z Uploaded bytes 58720256
+2026-11-12T22:52:11.3035874Z Uploaded bytes 67108864
+2026-11-12T22:52:11.3210335Z Uploaded bytes 75497472
+2026-11-12T22:52:11.3969554Z Uploaded bytes 83886080
+2026-11-12T22:52:11.4399634Z Uploaded bytes 92274688
+2026-11-12T22:52:11.5588620Z Uploaded bytes 100663296
+2026-11-12T22:52:11.5990339Z Uploaded bytes 109051904
+2026-11-12T22:52:11.6339466Z Uploaded bytes 117440512
+2026-11-12T22:52:11.7366502Z Uploaded bytes 125829120
+2026-11-12T22:52:11.8706543Z Uploaded bytes 134217728
+2026-11-12T22:52:11.9239253Z Uploaded bytes 142606336
+2026-11-12T22:52:11.9679127Z Uploaded bytes 150994944
+2026-11-12T22:52:12.0970063Z Uploaded bytes 159383552
+2026-11-12T22:52:12.1899587Z Uploaded bytes 167772160
+2026-11-12T22:52:12.1968263Z Uploaded bytes 176160768
+2026-11-12T22:52:12.2731842Z Uploaded bytes 184549376
+2026-11-12T22:52:12.3900738Z Uploaded bytes 192937984
+2026-11-12T22:52:12.5422187Z Uploaded bytes 201326592
+2026-11-12T22:52:12.5710553Z Uploaded bytes 209715200
+2026-11-12T22:52:12.5939049Z Uploaded bytes 218103808
+2026-11-12T22:52:12.6575668Z Uploaded bytes 226492416
+2026-11-12T22:52:12.8237946Z Uploaded bytes 234881024
+2026-11-12T22:52:12.8372636Z Uploaded bytes 243269632
+2026-11-12T22:52:12.8824817Z Uploaded bytes 251658240
+2026-11-12T22:52:12.9330184Z Uploaded bytes 260046848
+2026-11-12T22:52:13.1052866Z Uploaded bytes 268435456
+2026-11-12T22:52:13.1511956Z Uploaded bytes 276824064
+2026-11-12T22:52:13.1582065Z Uploaded bytes 285212672
+2026-11-12T22:52:13.2621819Z Uploaded bytes 293601280
+2026-11-12T22:52:13.3741227Z Uploaded bytes 301989888
+2026-11-12T22:52:13.4102270Z Uploaded bytes 310378496
+2026-11-12T22:52:13.4556688Z Uploaded bytes 318767104
+2026-11-12T22:52:13.5149858Z Uploaded bytes 327155712
+2026-11-12T22:52:13.6534297Z Uploaded bytes 335544320
+2026-11-12T22:52:13.6908446Z Uploaded bytes 343932928
+2026-11-12T22:52:13.7199849Z Uploaded bytes 352321536
+2026-11-12T22:52:13.7738262Z Uploaded bytes 360710144
+2026-11-12T22:52:13.9350488Z Uploaded bytes 369098752
+2026-11-12T22:52:13.9604914Z Uploaded bytes 377487360
+2026-11-12T22:52:14.0272633Z Uploaded bytes 385875968
+2026-11-12T22:52:14.1089882Z Uploaded bytes 394264576
+2026-11-12T22:52:14.2073937Z Uploaded bytes 402653184
+2026-11-12T22:52:14.2201886Z Uploaded bytes 411041792
+2026-11-12T22:52:14.2902165Z Uploaded bytes 419430400
+2026-11-12T22:52:14.4036905Z Uploaded bytes 427819008
+2026-11-12T22:52:14.4729124Z Uploaded bytes 436207616
+2026-11-12T22:52:14.4904385Z Uploaded bytes 444596224
+2026-11-12T22:52:14.6381324Z Uploaded bytes 452984832
+2026-11-12T22:52:14.7390551Z Uploaded bytes 461373440
+2026-11-12T22:52:14.7457477Z Uploaded bytes 469762048
+2026-11-12T22:52:14.8277468Z Uploaded bytes 478150656
+2026-11-12T22:52:14.8848670Z Uploaded bytes 486539264
+2026-11-12T22:52:15.0114438Z Uploaded bytes 494927872
+2026-11-12T22:52:15.0933149Z Uploaded bytes 503316480
+2026-11-12T22:52:15.1034528Z Uploaded bytes 511705088
+2026-11-12T22:52:15.1524731Z Uploaded bytes 520093696
+2026-11-12T22:52:15.2861597Z Uploaded bytes 528482304
+2026-11-12T22:52:15.3802107Z Uploaded bytes 536870912
+2026-11-12T22:52:15.3998838Z Uploaded bytes 545259520
+2026-11-12T22:52:15.4821838Z Uploaded bytes 553648128
+2026-11-12T22:52:15.6123910Z Uploaded bytes 562036736
+2026-11-12T22:52:15.6604199Z Uploaded bytes 570425344
+2026-11-12T22:52:15.6671435Z Uploaded bytes 578813952
+2026-11-12T22:52:15.7444008Z Uploaded bytes 587202560
+2026-11-12T22:52:15.8621388Z Uploaded bytes 595591168
+2026-11-12T22:52:15.9163167Z Uploaded bytes 603979776
+2026-11-12T22:52:15.9680760Z Uploaded bytes 612368384
+2026-11-12T22:52:16.0253742Z Uploaded bytes 620756992
+2026-11-12T22:52:16.1489069Z Uploaded bytes 629145600
+2026-11-12T22:52:16.1918562Z Uploaded bytes 637534208
+2026-11-12T22:52:16.2963455Z Uploaded bytes 645922816
+2026-11-12T22:52:16.3035666Z Uploaded bytes 654311424
+2026-11-12T22:52:16.4251271Z Uploaded bytes 662700032
+2026-11-12T22:52:16.5017974Z Uploaded bytes 671088640
+2026-11-12T22:52:16.5811839Z Uploaded bytes 679477248
+2026-11-12T22:52:16.6035589Z Uploaded bytes 687865856
+2026-11-12T22:52:16.7640220Z Uploaded bytes 696254464
+2026-11-12T22:52:16.8058256Z Uploaded bytes 704643072
+2026-11-12T22:52:16.9126176Z Uploaded bytes 713031680
+2026-11-12T22:52:16.9404373Z Uploaded bytes 721420288
+2026-11-12T22:52:17.0608053Z Uploaded bytes 729808896
+2026-11-12T22:52:17.0707619Z Uploaded bytes 738197504
+2026-11-12T22:52:17.3628278Z Uploaded bytes 743436550
+2026-11-12T22:52:17.4344572Z Finished uploading artifact content to blob storage!
+2026-11-12T22:52:17.4346664Z SHA256 digest of uploaded artifact zip is d02b2cb6e54782c933487fc9b75fdac9c0e5dfec9ca9548b31618f84ff38ab18
+2026-11-12T22:52:17.4348243Z Finalizing artifact upload
+2026-11-12T22:52:17.9359072Z Artifact lake-build-line.zip successfully finalized. Artifact ID 13992430627
+2026-11-12T22:52:17.9359705Z Artifact lake-build-line has been successfully uploaded! Final size is 743436550 bytes. Artifact ID is 13992430627
+2026-11-12T22:52:17.9366389Z Artifact download URL: https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43322832928/artifacts/13992430627
+2026-11-12T22:52:17.9615958Z ##[group]Run actions/upload-artifact@v4
+2026-11-12T22:52:17.9616229Z with:
+2026-11-12T22:52:17.9616414Z   name: build-log
+2026-11-12T22:52:17.9616626Z   path: build.log
+quick.log
+
+2026-11-12T22:52:17.9616859Z   if-no-files-found: warn
+2026-11-12T22:52:17.9617073Z   compression-level: 6
+2026-11-12T22:52:17.9617284Z   overwrite: false
+2026-11-12T22:52:17.9617495Z   include-hidden-files: false
+2026-11-12T22:52:17.9617714Z env:
+2026-11-12T22:52:17.9617901Z   LEAN_NUM_THREADS: 2
+2026-11-12T22:52:17.9618112Z   FILE_LIMIT_SECONDS: 300
+2026-11-12T22:52:17.9618332Z ##[endgroup]
+2026-11-12T22:52:18.0954719Z (node:3938) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-12T22:52:18.0955653Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-12T22:52:18.0997171Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-11-12T22:52:18.1005615Z The least common ancestor is /home/runner/work/continuous-flexibility/continuous-flexibility. This will be the root directory of the artifact
+2026-11-12T22:52:18.1006607Z With the provided path, there will be 1 file uploaded
+2026-11-12T22:52:18.1007532Z Artifact name is valid!
+2026-11-12T22:52:18.1008142Z Root directory input is valid!
+2026-11-12T22:52:18.4715791Z Beginning upload of artifact content to blob storage
+2026-11-12T22:52:18.5383191Z (node:3938) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-12T22:52:19.0327775Z Uploaded bytes 356509
+2026-11-12T22:52:19.1025278Z Finished uploading artifact content to blob storage!
+2026-11-12T22:52:19.1026244Z SHA256 digest of uploaded artifact zip is b5e604a916fa8f8efe5b381fa830b119968cffed9f073f9a206f83f197092b67
+2026-11-12T22:52:19.1026955Z Finalizing artifact upload
+2026-11-12T22:52:19.4873948Z Artifact build-log.zip successfully finalized. Artifact ID 13991671950
+2026-11-12T22:52:19.4874831Z Artifact build-log has been successfully uploaded! Final size is 356509 bytes. Artifact ID is 13991671950
+2026-11-12T22:52:19.4879513Z Artifact download URL: https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43322832928/artifacts/13991671950
+2026-11-12T22:52:19.5073847Z Post job cleanup.
+2026-11-12T22:52:19.5813448Z [command]/usr/bin/git version
+2026-11-12T22:52:19.5851657Z git version 2.56.1
+2026-11-12T22:52:19.5882589Z Temporarily overriding HOME='/home/runner/work/_temp/ef4d5a46-0116-4dc6-bd8c-af770b5361d9' before making global git config changes
+2026-11-12T22:52:19.5883903Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-12T22:52:19.5885707Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/continuous-flexibility/continuous-flexibility
+2026-11-12T22:52:19.5918724Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-12T22:52:19.5948314Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-12T22:52:19.6225653Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-12T22:52:19.6293806Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-12T22:52:19.6563393Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-12T22:52:19.6593146Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-12T22:52:19.6968662Z Cleaning up orphan processes
+2026-11-12T22:52:19.7350372Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/cache/restore@v4, actions/cache/save@v4, actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
