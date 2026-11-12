@@ -86,8 +86,8 @@ theorem n05_referenceCanonicalSource_weight_bound
         n05CanonicalSampleWeight T S K γ t m ^ 2 ≤ B := by
   obtain ⟨C0, A, hC0, hA, hcoefficient⟩ :=
     n05_referenceCanonicalHeight_density_piece_bound h hcoordinates
-  obtain ⟨window, hwindow, hindex⟩ := n05_referencePiece_cell_index_bound hT hcoordinates
-  obtain ⟨B, hB, hweight⟩ := n05_referenceSourceWeight_sample_gap_bound hD hT
+  obtain ⟨window, hwindow, hindex⟩ := n05_referencePiece_cell_swindow hT hcoordinates
+  obtain ⟨B, hB, hweight⟩ := n05_referenceSourceWeight_sample_gap_swindow hD hT
     hwindow.le hγw hgap hA.le t M
   refine ⟨C0 * B, mul_pos hC0 hB, fun m j p hp hrj => ?_⟩
   let E : ℝ := radialE (D.cellIndex (K.cell m))

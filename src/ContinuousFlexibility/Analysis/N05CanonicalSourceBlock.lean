@@ -62,9 +62,9 @@ theorem n05_canonicalSourceBlock_reference_bound
   classical
   obtain ⟨Bc, Ac, hBc, hAc, hc⟩ :=
     n05_referenceCanonicalHeight_density_piece_bound h hcoordinates
-  obtain ⟨window, hwindow, hindex⟩ := n05_referencePiece_cell_index_bound hT hcoordinates
+  obtain ⟨window, hwindow, hindex⟩ := n05_referencePiece_cell_swindow hT hcoordinates
   obtain ⟨Bw, Aw, hBw, hAw, hw⟩ :=
-    n05_referenceSourceWeight_index_window hwindow.le hγ M
+    n05_referenceSourceWeight_swindow hwindow.le hγ M
   refine ⟨(2 * Real.pi)⁻¹ * (2 * (Bc * Bw)), Ac + Aw, by positivity,
     add_pos_of_pos_of_nonneg hAc hAw, fun m u => ?_⟩
   let e := n05CanonicalEvenProjection S K m u

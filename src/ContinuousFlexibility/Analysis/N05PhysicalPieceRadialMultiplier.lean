@@ -75,21 +75,19 @@ theorem n05PhysicalPieceRadialMultiplier_cell_bound
         |n05PhysicalPieceRadialMultiplier S K b p.1| ^ 2 ≤
           C0 * Real.exp (L0 * radialQ (D.cellIndex j)) := by
   classical
-  obtain ⟨window, _, hindex⟩ := n05_referencePiece_cell_index_bound hT hcoordinates
-  obtain ⟨C0, hC0, hweight⟩ := n05_radialE_power_index_window A window hA
+  obtain ⟨window, hwindow, hindex⟩ := n05_referencePiece_cell_swindow hT hcoordinates
+  obtain ⟨C0, hC0, hweight⟩ := n05_radialE_power_swindow_reverse A window hA hwindow.le
   refine ⟨B * C0, C0, mul_pos hB hC0, hC0, fun j p hpj => ?_⟩
   have hrj : p.1 ∈ D.cells j := hD.choose_spec.2.1.2.2.1 j hpj
   by_cases hp : ∃ m, p.1 ∈ Ioo (K.physicalLeft m) (K.physicalRight m)
   · obtain ⟨m, hm⟩ := hp
     rw [n05PhysicalPieceRadialMultiplier_eq h04 _ hm]
-    have hwindow : |(D.cellIndex (K.cell m) : ℝ) - (D.cellIndex j : ℝ)| ≤ window := by
-      rw [abs_sub_comm]
-      exact hindex m j p.1 hm hrj
     calc
       _ ≤ B * radialE (D.cellIndex (K.cell m)) ^ A := hb m p.1 hm
       _ ≤ B * (C0 * radialE (D.cellIndex j) ^ C0) :=
         mul_le_mul_of_nonneg_left
-          (hweight (D.cellIndex (K.cell m)) (D.cellIndex j) hwindow) hB.le
+          (hweight (D.cellIndex j) (D.cellIndex (K.cell m))
+            (hindex m j p.1 hm hrj)) hB.le
       _ = _ := by
         rw [radialE, ← Real.exp_mul]
         rw [mul_comm (radialQ (D.cellIndex j)) C0]

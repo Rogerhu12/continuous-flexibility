@@ -1,14 +1,15 @@
 import ContinuousFlexibility.Analysis.N05ReferenceInterface
+import ContinuousFlexibility.Analysis.N05ReferenceSWindow
 import ContinuousFlexibility.Radial.DeepTailPhysicalWeights
 import Mathlib.Algebra.Order.Floor.Semiring
 
 /-!
 # Reference reciprocal coefficients on actual canonical pieces
 
-A bounded difference of reference cell indices costs one fixed coefficient
-power. The controlled reference coordinates place every point of each actual
-piece in such a nearby cell, so the original reciprocal-jet bounds transfer
-to the index attached to that piece.
+The endpoint-exponent window costs one fixed coefficient power. The controlled
+reference coordinates associate each point with an actual cell satisfying
+that window, so reciprocal-jet bounds transfer to the piece index. The stronger
+bounded-index helper remains available for explicit seed constructions.
 -/
 
 noncomputable section
@@ -37,8 +38,8 @@ theorem n05_radialE_power_index_window (A B : ℝ) (hA : 0 ≤ A) :
   exact (Real.rpow_le_rpow (Real.exp_pos _).le hE hA).trans (hshift n)
 
 /-- Every actual piece inherits the reciprocal-jet coefficient bound from
-a genuine reference cell meeting that point. No coefficient envelope for
-the pieces is assumed. -/
+a genuine reference cell meeting that point. Only its endpoint-exponent
+window is used; no coefficient envelope for the pieces is assumed. -/
 theorem n05_referenceInverseJet_piece_bound {D : ReferenceData}
     {S : PhysicalSpacesData} {G : NonlinearGeometryData S} {K : CanonicalData S}
     (hD : IsAccumulatingProfile D)
@@ -50,9 +51,9 @@ theorem n05_referenceInverseJet_piece_bound {D : ReferenceData}
   obtain ⟨bounds, hbounds⟩ := hD
   have hpositive : 0 < bounds s := hbounds.2.2.1 s
   have hjets := hbounds.2.2.2.2.2.2.2.2.2.1
-  obtain ⟨B, _, hassociation, _, _⟩ := hcoordinates.2
+  obtain ⟨B, hB, hassociation, _, _⟩ := hcoordinates.2
   obtain ⟨C, hC, hwindow⟩ :=
-    n05_radialE_power_index_window (bounds s) B hpositive.le
+    n05_radialE_power_swindow (bounds s) B hpositive.le hB.le
   refine ⟨bounds s * C, C, mul_pos hpositive hC, hC, fun m r hr => ?_⟩
   obtain ⟨j, hrj, hindex⟩ := hassociation m r hr
   calc
@@ -77,4 +78,3 @@ theorem n05_referenceReciprocal_piece_bound {D : ReferenceData}
   exact (le_abs_self _).trans (hbound m r hr)
 
 end ContinuousFlexibility.Statements
-

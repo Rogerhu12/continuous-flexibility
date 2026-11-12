@@ -1,12 +1,13 @@
 import ContinuousFlexibility.Analysis.N05ReferenceWeightComparisons
 import ContinuousFlexibility.Analysis.N05MaterialWeights
+import ContinuousFlexibility.Analysis.N05ReferenceSWindow
 
 /-!
 # A strict endpoint gap absorbs the actual source weights
 
-A bounded reference-index window changes the physical reference weight by
-a fixed coefficient power. The actual sample endpoint weight then leaves
-the strictly positive exponent twice the endpoint gap. The prescribed
+A controlled difference of the cubic endpoint exponents changes the physical
+reference weight by a fixed coefficient power. The actual sample endpoint
+weight then leaves twice the strictly positive endpoint gap. The prescribed
 material envelope absorbs every remaining fixed material power.
 -/
 
@@ -28,40 +29,26 @@ theorem n05_radialS_index_window {B : ℝ} (hB : 0 ≤ B) (i n : ℕ)
     abs_neg] at h
   exact h
 
-/-- The source exponential at a nearby cell has a uniformly controlled
-coefficient loss at the piece's prescribed reference index. -/
-theorem n05_referenceSourceWeight_index_window {B γw : ℝ}
+/-- The physical source weight retains exactly the same endpoint exponent
+under a coefficient-sized endpoint-exponent window. -/
+theorem n05_referenceSourceWeight_swindow {B γw : ℝ}
     (hB : 0 ≤ B) (hγw : 0 ≤ γw) (M : ℝ) :
     ∃ C A : ℝ, 0 < C ∧ 0 ≤ A ∧ ∀ i n : ℕ,
-      |(i : ℝ) - (n : ℝ)| ≤ B →
+      |radialS i - radialS n| ≤ B * (radialQ n + 1) →
         Real.exp (2 * M * radialQ i + 2 * γw * radialS i) ≤
           C * radialE n ^ A * Real.exp (2 * γw * radialS n) := by
-  obtain ⟨L, hL⟩ := Radial.radialQ_sub_le 1 zero_lt_one
-  let P : ℝ := 6 * B * (B ^ 2 + 1)
-  let Q : ℝ := P + |L| + 1
-  let A : ℝ := 2 * |M| * Q + 2 * γw * P
-  have hP : 0 ≤ P := by dsimp only [P]; positivity
-  have hQ : 0 ≤ Q := by dsimp only [Q]; positivity
+  obtain ⟨Q, hQ, hq⟩ := n05_radialQ_swindow_bound hB
+  let A : ℝ := 2 * |M| * Q + 2 * γw * B
   have hA : 0 ≤ A := by dsimp only [A]; positivity
   refine ⟨Real.exp A, A, Real.exp_pos _, hA, fun i n hwindow => ?_⟩
-  have hs : |radialS i - radialS n| ≤ P * (radialQ n + 1) :=
-    n05_radialS_index_window hB i n hwindow
-  have hdiff : radialQ i - radialQ n ≤ P * (radialQ n + 1) + |L| := by
-    calc
-      _ ≤ |radialQ i - radialQ n| := le_abs_self _
-      _ ≤ |radialS i - radialS n| + L := by simpa only [one_mul] using hL i n
-      _ ≤ P * (radialQ n + 1) + |L| := add_le_add hs (le_abs_self L)
-  have hn : 0 ≤ radialQ n := Radial.radialQ_nonneg n
-  have hi : 0 ≤ radialQ i := Radial.radialQ_nonneg i
-  have hqbound : radialQ i ≤ Q * (radialQ n + 1) := by
-    dsimp only [Q]
-    nlinarith only [hdiff, mul_nonneg (abs_nonneg L) hn]
-  have hsbound : radialS i ≤ radialS n + P * (radialQ n + 1) := by
-    have hd := (le_abs_self (radialS i - radialS n)).trans hs
+  have hqbound := hq i n hwindow
+  have hsbound : radialS i ≤ radialS n + B * (radialQ n + 1) := by
+    have hd := (le_abs_self (radialS i - radialS n)).trans hwindow
     linarith only [hd]
   have hm : 2 * M * radialQ i ≤ 2 * |M| * radialQ i :=
     mul_le_mul_of_nonneg_right
-      (mul_le_mul_of_nonneg_left (le_abs_self M) (by norm_num)) hi
+      (mul_le_mul_of_nonneg_left (le_abs_self M) (by norm_num))
+      (Radial.radialQ_nonneg i)
   have hexp : 2 * M * radialQ i + 2 * γw * radialS i ≤
       A * (radialQ n + 1) + 2 * γw * radialS n := by
     have hmq := mul_le_mul_of_nonneg_left hqbound (by positivity : 0 ≤ 2 * |M|)
@@ -76,21 +63,35 @@ theorem n05_referenceSourceWeight_index_window {B γw : ℝ}
       congr 1
       ring
 
+/-- The old bounded-index estimate remains available for the explicit
+seed geometry. It is a special case of the endpoint-exponent estimate. -/
+theorem n05_referenceSourceWeight_index_window {B γw : ℝ}
+    (hB : 0 ≤ B) (hγw : 0 ≤ γw) (M : ℝ) :
+    ∃ C A : ℝ, 0 < C ∧ 0 ≤ A ∧ ∀ i n : ℕ,
+      |(i : ℝ) - (n : ℝ)| ≤ B →
+        Real.exp (2 * M * radialQ i + 2 * γw * radialS i) ≤
+          C * radialE n ^ A * Real.exp (2 * γw * radialS n) := by
+  obtain ⟨C, A, hC, hA, hw⟩ :=
+    n05_referenceSourceWeight_swindow
+      (show 0 ≤ 6 * B * (B ^ 2 + 1) by positivity) hγw M
+  exact ⟨C, A, hC, hA, fun i n hi => hw i n (n05_radialS_index_window hB i n hi)⟩
+
 /-- The actual sample weights absorb every fixed source coefficient loss
 whenever the physical reference exponent is strictly below the canonical
 endpoint exponent. -/
-theorem n05_referenceSourceWeight_sample_gap_bound
+theorem n05_referenceSourceWeight_sample_gap_swindow
     {D : ReferenceData} {T : MaterialData} (hD : IsAccumulatingProfile D)
     (hT : IsMaterialData D T) {B γw γ A : ℝ}
     (hB : 0 ≤ B) (hγw : 0 ≤ γw) (hgap : γw < γ) (hA : 0 ≤ A)
     (t M : ℝ) :
     ∃ C : ℝ, 0 < C ∧ ∀ j i : ℕ,
-      |(i : ℝ) - (D.cellIndex j : ℝ)| ≤ B →
+      |radialS i - radialS (D.cellIndex j)| ≤
+        B * (radialQ (D.cellIndex j) + 1) →
         Real.exp (2 * M * radialQ i + 2 * γw * radialS i) *
           radialE (D.cellIndex j) ^ A *
           (T.M (T.sample j) ^ (-t) * T.H (T.sample j) ^ γ) ^ 2 ≤ C := by
   obtain ⟨C0, A0, hC0, hA0, hindex⟩ :=
-    n05_referenceSourceWeight_index_window hB hγw M
+    n05_referenceSourceWeight_swindow hB hγw M
   obtain ⟨CH, hCH, hHcompare⟩ :=
     n05_materialH_reference_exponential_comparison hD hT (-(2 * γw))
   obtain ⟨CE, hCE, hcoefficient⟩ :=
@@ -154,5 +155,22 @@ theorem n05_referenceSourceWeight_sample_gap_bound
       rw [hMpow, hHpow]
     _ ≤ (C0 * CH * CE) * CM :=
       mul_le_mul_of_nonneg_left henv (by positivity)
+
+/-- Compatibility with the bounded-index source-gap estimate used by
+explicit cell constructions. The endpoint gap and material orders are unchanged. -/
+theorem n05_referenceSourceWeight_sample_gap_bound
+    {D : ReferenceData} {T : MaterialData} (hD : IsAccumulatingProfile D)
+    (hT : IsMaterialData D T) {B γw γ A : ℝ}
+    (hB : 0 ≤ B) (hγw : 0 ≤ γw) (hgap : γw < γ) (hA : 0 ≤ A)
+    (t M : ℝ) :
+    ∃ C : ℝ, 0 < C ∧ ∀ j i : ℕ,
+      |(i : ℝ) - (D.cellIndex j : ℝ)| ≤ B →
+        Real.exp (2 * M * radialQ i + 2 * γw * radialS i) *
+          radialE (D.cellIndex j) ^ A *
+          (T.M (T.sample j) ^ (-t) * T.H (T.sample j) ^ γ) ^ 2 ≤ C := by
+  obtain ⟨C, hC, hw⟩ := n05_referenceSourceWeight_sample_gap_swindow hD hT
+    (show 0 ≤ 6 * B * (B ^ 2 + 1) by positivity) hγw hgap hA t M
+  exact ⟨C, hC, fun j i hi => hw j i
+    (n05_radialS_index_window hB i (D.cellIndex j) hi)⟩
 
 end ContinuousFlexibility.Statements

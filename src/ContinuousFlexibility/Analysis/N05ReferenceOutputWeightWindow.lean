@@ -4,15 +4,55 @@ import ContinuousFlexibility.Analysis.N05ReferencePieceCoefficients
 /-!
 # The output endpoint factor on a nearby actual cell
 
-The endpoint exponential attached to a piece is retained explicitly. Moving
-it to a reference cell containing the same physical point costs a fixed
-coefficient power, including the prescribed output material exponent.
+The endpoint exponential attached to a piece is retained explicitly. The
+endpoint-exponent window moves it to an actual reference cell at the cost of
+a coefficient power, including any prescribed output material exponent.
 -/
 
 noncomputable section
 
 namespace ContinuousFlexibility.Statements
 
+/-- The output endpoint exponential is transferred to an actual cell
+without changing its endpoint exponent. Only a coefficient power is spent. -/
+theorem n05_referenceOutputWeight_swindow {B γ : ℝ}
+    (hB : 0 ≤ B) (hγ : 0 ≤ γ) (M : ℝ) :
+    ∃ C A : ℝ, 0 < C ∧ 0 < A ∧ ∀ i n : ℕ,
+      |radialS i - radialS n| ≤ B * (radialQ n + 1) →
+        Real.exp (2 * γ * radialS n) ≤
+          C * radialE n ^ A *
+            Real.exp (-2 * M * radialQ i + 2 * γ * radialS i) := by
+  obtain ⟨Q, hQ, hq⟩ := n05_radialQ_swindow_bound hB
+  let A : ℝ := 2 * γ * B + 2 * |M| * Q + 1
+  have hA : 0 < A := by dsimp only [A]; positivity
+  refine ⟨Real.exp A, A, Real.exp_pos _, hA, fun i n hwindow => ?_⟩
+  have hs : radialS n - radialS i ≤ B * (radialQ n + 1) := by
+    calc
+      _ ≤ |radialS n - radialS i| := le_abs_self _
+      _ = |radialS i - radialS n| := abs_sub_comm _ _
+      _ ≤ _ := hwindow
+  have hsg := mul_le_mul_of_nonneg_left hs (by positivity : 0 ≤ 2 * γ)
+  have hm : 2 * M * radialQ i ≤ 2 * |M| * radialQ i :=
+    mul_le_mul_of_nonneg_right
+      (mul_le_mul_of_nonneg_left (le_abs_self M) (by norm_num))
+      (Radial.radialQ_nonneg i)
+  have hmq := mul_le_mul_of_nonneg_left (hq i n hwindow)
+    (by positivity : 0 ≤ 2 * |M|)
+  have hexp : 2 * γ * radialS n ≤ A * (radialQ n + 1) +
+      (-2 * M * radialQ i + 2 * γ * radialS i) := by
+    have hn := Radial.radialQ_nonneg n
+    dsimp only [A]
+    nlinarith only [hsg, hm, hmq, hn]
+  calc
+    _ ≤ Real.exp (A * (radialQ n + 1) +
+        (-2 * M * radialQ i + 2 * γ * radialS i)) := Real.exp_le_exp.mpr hexp
+    _ = _ := by
+      rw [radialE, ← Real.exp_mul, ← Real.exp_add, ← Real.exp_add]
+      congr 1
+      ring
+
+/-- The old bounded-index output estimate remains available for explicit
+seed geometry and is implied by the endpoint-exponent estimate. -/
 theorem n05_referenceOutputWeight_index_window {B γ : ℝ}
     (hB : 0 ≤ B) (hγ : 0 ≤ γ) (M : ℝ) :
     ∃ C A : ℝ, 0 < C ∧ 0 < A ∧ ∀ i n : ℕ,
@@ -20,38 +60,8 @@ theorem n05_referenceOutputWeight_index_window {B γ : ℝ}
         Real.exp (2 * γ * radialS n) ≤
           C * radialE n ^ A *
             Real.exp (-2 * M * radialQ i + 2 * γ * radialS i) := by
-  obtain ⟨C0, A0, hC0, hA0, hsource⟩ :=
-    n05_referenceSourceWeight_index_window hB hγ 0
-  have hA : 0 ≤ A0 + 2 * |M| := by positivity
-  obtain ⟨C1, hC1, hcoefficient⟩ :=
-    n05_radialE_power_index_window (A0 + 2 * |M|) B hA
-  refine ⟨C0 * C1, C1, mul_pos hC0 hC1, hC1, fun i n hwindow => ?_⟩
-  have hreverse : |(n : ℝ) - (i : ℝ)| ≤ B := by
-    rw [abs_sub_comm]
-    exact hwindow
-  have hfirst : Real.exp (2 * γ * radialS n) ≤
-      C0 * radialE i ^ A0 * Real.exp (2 * γ * radialS i) := by
-    simpa only [mul_zero, zero_mul, zero_add] using hsource n i hreverse
-  have hweight : radialE i ^ A0 * Real.exp (2 * γ * radialS i) ≤
-      radialE i ^ (A0 + 2 * |M|) *
-        Real.exp (-2 * M * radialQ i + 2 * γ * radialS i) := by
-    rw [radialE, ← Real.exp_mul, ← Real.exp_mul,
-      ← Real.exp_add, ← Real.exp_add]
-    apply Real.exp_le_exp.mpr
-    have hm := le_abs_self M
-    have hq := Radial.radialQ_nonneg i
-    nlinarith only [mul_nonneg (sub_nonneg.mpr hm) hq]
-  calc
-    _ ≤ C0 * radialE i ^ A0 * Real.exp (2 * γ * radialS i) := hfirst
-    _ ≤ C0 * (radialE i ^ (A0 + 2 * |M|) *
-        Real.exp (-2 * M * radialQ i + 2 * γ * radialS i)) := by
-      rw [mul_assoc]
-      exact mul_le_mul_of_nonneg_left hweight hC0.le
-    _ ≤ C0 * ((C1 * radialE n ^ C1) *
-        Real.exp (-2 * M * radialQ i + 2 * γ * radialS i)) :=
-      mul_le_mul_of_nonneg_left
-        (mul_le_mul_of_nonneg_right (hcoefficient i n hwindow)
-          (Real.exp_pos _).le) hC0.le
-    _ = _ := by ring
+  obtain ⟨C, A, hC, hA, hw⟩ := n05_referenceOutputWeight_swindow
+    (show 0 ≤ 6 * B * (B ^ 2 + 1) by positivity) hγ M
+  exact ⟨C, A, hC, hA, fun i n hi => hw i n (n05_radialS_index_window hB i n hi)⟩
 
 end ContinuousFlexibility.Statements

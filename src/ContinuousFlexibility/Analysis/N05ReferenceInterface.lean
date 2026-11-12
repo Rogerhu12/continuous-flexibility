@@ -19,8 +19,10 @@ open Set MeasureTheory
 inverse. The chosen construction must retain all of `Through04`. In particular,
 this is an existence obligation, not an additional hypothesis of `N05`.
 
-The number of pieces over an index may grow by a coefficient power. This is
-weaker than bounded multiplicity and is absorbed by the fixed material loss. -/
+The association controls the difference of cubic endpoint exponents by a
+coefficient exponent; no uniformly bounded difference of indices is required.
+The number of pieces over an index may grow by a coefficient power, which
+is absorbed by the fixed material loss. -/
 def N05ControlledReferenceCoordinates (D : ReferenceData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (K : CanonicalData S) : Prop :=
   (∀ m p, p ∈ physicalPieceOpen S K m →
@@ -30,7 +32,8 @@ def N05ControlledReferenceCoordinates (D : ReferenceData) (S : PhysicalSpacesDat
   ∃ B : ℝ, 0 < B ∧
     (∀ m r, r ∈ Ioo (K.physicalLeft m) (K.physicalRight m) →
       ∃ j, r ∈ D.cells j ∧
-        |(D.cellIndex j : ℝ) - (D.cellIndex (K.cell m) : ℝ)| ≤ B) ∧
+        |radialS (D.cellIndex j) - radialS (D.cellIndex (K.cell m))| ≤
+          B * (radialQ (D.cellIndex (K.cell m)) + 1)) ∧
     (∀ n : ℕ, {m | D.cellIndex (K.cell m) = n}.Finite ∧
       ({m | D.cellIndex (K.cell m) = n}.ncard : ℝ) ≤ B * radialE n ^ B) ∧
     (∀ m r, r ∈ Ioo (K.physicalLeft m) (K.physicalRight m) →

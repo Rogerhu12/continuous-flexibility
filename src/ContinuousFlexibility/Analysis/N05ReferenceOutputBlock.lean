@@ -36,9 +36,9 @@ theorem n05_referenceOutput_piece_square_bound
           (Ioo (K.physicalLeft k) (K.physicalRight k) ×ˢ Ioc (0 : ℝ) Real.pi)) ≤
         C0 * radialE (D.cellIndex (K.cell k)) ^ A *
           ∑' j, outputCellSquare D γ M f j := by
-  obtain ⟨window, hwindow, hindex⟩ := n05_referencePiece_cell_index_bound hT hcoordinates
+  obtain ⟨window, hwindow, hindex⟩ := n05_referencePiece_cell_swindow hT hcoordinates
   obtain ⟨C0, A, hC0, hA, hweight⟩ :=
-    n05_referenceOutputWeight_index_window hwindow.le hγ M
+    n05_referenceOutputWeight_swindow hwindow.le hγ M
   have hpart := hD.choose_spec.2.1
   have hab := hD.choose_spec.1.2.1.le
   obtain ⟨B, hB⟩ := hpart.2.2.2.2.2
