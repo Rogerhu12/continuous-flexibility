@@ -96,7 +96,7 @@ theorem N01Properties.exists_positive_opticalCorrectionCollars_buffered
     exact ⟨returnOpticalCutoff_eventually_zero (hhalf m) hl,
       returnOpticalCutoff_eventually_one (hhalf m) hr, hsupp m⟩
 
-private theorem exists_gap_neighborhood_for_positive_cutoff
+theorem exists_gap_neighborhood_for_positive_cutoff
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)

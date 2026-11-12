@@ -70,10 +70,11 @@ theorem n04b_opticalSpeed_stateLine_differentiableAt
     (ht : (n04bStateLine C x t, (0 : ℝ)) ∈ stateNeighborhood S C base ε) :
     DifferentiableAt ℝ
       (fun s : ℝ => opticalSpeed (stateProfile D S C (n04bStateLine C x s)) r) t := by
-  have hNcopy := hN
-  rcases hNcopy with ⟨_, _, _, _, _, _, _, _, _, _, _, _, hTowers⟩
-  obtain ⟨_, _, hJ⟩ := hTowers 0 1
-  obtain ⟨J, _⟩ := hJ m 1 0 (r, 0) (by norm_num) hr
+  -- N01's flow clause chooses the loss after the parameter order; `obtain` on
+  -- these existentials is very slow, so the witnesses are selected.
+  let orderData := hN.2.2.2.2.2.2.2.2.2.2.2.2 0
+  let hJ := (orderData.choose_spec 1).choose_spec.2
+  let J := (hJ m 1 0 (r, 0) (by norm_num) hr).choose
   have ht' : (C.referenceState, (0 : ℝ)) +
       t • (x - C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
     rw [n04bStateLine_joint]
