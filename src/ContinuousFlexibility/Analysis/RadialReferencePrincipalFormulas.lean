@@ -103,5 +103,6 @@ theorem inverseChartPotential_radial_cylinder
       (p := positiveReferenceCylinderInverse Y p) hY
   unfold inverseChartPotential
   rw [hdiv, hJ, abs_of_pos hYpos]
+  simp only [positiveReferenceCylinderInverse]
 
 end ContinuousFlexibility.Analysis
