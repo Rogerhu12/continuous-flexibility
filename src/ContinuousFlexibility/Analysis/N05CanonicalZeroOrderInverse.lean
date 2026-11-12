@@ -23,9 +23,9 @@ def n05CanonicalZeroJetSequence (S : PhysicalSpacesData) (K : CanonicalData S)
 theorem n05CanonicalZeroJetSequence_apply (S : PhysicalSpacesData) (K : CanonicalData S)
     (w : CanonicalL2Sequence S K) (m : ℕ) (j : Fin 1) :
     n05CanonicalZeroJetSequence S K w m j = w m := by
-  have hj : j = 0 := Subsingleton.elim _ _
+  have hj : j = 0 := Fin.eq_zero j
   subst j
-  exact PiLp.single_eq_same 2 0 (w m)
+  exact PiLp.single_eq_same (β := fun _ : Fin 1 => CanonicalL2 S K m) 2 0 (w m)
 
 theorem n05CanonicalZeroJetSequence_bound (S : PhysicalSpacesData) (K : CanonicalData S)
     (w : CanonicalL2Sequence S K) : ‖n05CanonicalZeroJetSequence S K w‖ ≤ ‖w‖ := by
@@ -44,7 +44,7 @@ theorem n05CanonicalZeroJetSequence_mem_graph (S : PhysicalSpacesData)
     simpa only [n05CanonicalZeroJetSequence_apply] using
       (n05CanonicalReflection_fixed_iff S K m (w m)).mp (hw m)
   · intro m j
-    have hj : j = 0 := Subsingleton.elim _ _
+    have hj : j = 0 := Fin.eq_zero j
     subst j
     intro φ hφ
     simp only [n05CanonicalZeroJetSequence_apply, Fin.val_zero, pow_zero, one_mul,
