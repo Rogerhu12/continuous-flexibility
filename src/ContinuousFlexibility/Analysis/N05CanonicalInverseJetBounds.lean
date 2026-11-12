@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N05CanonicalInverseAngularJets
 import ContinuousFlexibility.Analysis.N05CanonicalNormalizedAngularJets
 import ContinuousFlexibility.Analysis.N05CanonicalInverseLinearity
+import ContinuousFlexibility.Radial.R11bAngularFrequencySource
 
 /-!
 # Genuine bounded jets of the fixed inverse on each source level
