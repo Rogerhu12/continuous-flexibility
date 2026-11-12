@@ -39,8 +39,8 @@ theorem rawEndpointAngularInterpolation_family
     (hodd : ∀ i side x θ, ψ i side (x, -θ) = -ψ i side (x, θ)) :
     let δ := endpointAngularWidth n l r c d κ M
     0 < δ ∧ δ ≤ 1 ∧ 2 * δ < r - l ∧ δ < c - l ∧ δ < r - d ∧
-      ∀ i, let φ := positiveAngularTaylorInterpolation n l r δ
-        (rawEndpointAngularData l r (ψ i))
+      ∀ i, let φ := (positiveAngularTaylorInterpolation n l r δ
+        (rawEndpointAngularData l r (ψ i)))
       ContDiff ℝ ∞ φ ∧
       (∀ x θ, κ / 2 ≤ deriv (fun η => φ (x, η)) θ) ∧
       (∀ side k, k ≤ n → ∀ θ,
