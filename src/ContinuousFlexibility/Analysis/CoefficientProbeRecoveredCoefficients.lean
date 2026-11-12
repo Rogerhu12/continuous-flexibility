@@ -85,6 +85,7 @@ theorem coefficientProbeRecoveredCoefficients_eq_on_open
       square p = 8 * (A.c p - B.c p) * Real.sin (2 * p.2) ^ 2) :
     let R := coefficientProbeRecoveredCoefficients A cross square
     ∀ p ∈ U, R.b p = B.b p ∧ R.c p = B.c p := by
+  dsimp only
   intro p hp
   have hRcross : ContinuousAt
       (coefficientProbeRecoveredCoefficients A cross square).b p :=

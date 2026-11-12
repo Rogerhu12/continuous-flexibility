@@ -154,7 +154,9 @@ theorem exists_positiveConformal_threeJet_bound
   have hp' : p ∈ V := ⟨hp, hpV⟩
   have he : positiveConformalInputField i A = positiveConformalValue i ∘ v := by
     funext q
-    rfl
+    simp only [Function.comp_apply]
+    unfold positiveConformalInputField positiveConformalValue
+    split_ifs <;> rfl
   have hfield : ContDiffOn ℝ ∞ (positiveConformalInputField i A) V := by
     rw [he]
     intro q hq
@@ -169,10 +171,11 @@ theorem exists_positiveConformal_threeJet_bound
   have hvjets (k : ℕ) (hk : k ≤ 3) :
       ‖iteratedFDeriv ℝ k v p‖ ≤ (2 : ℝ) ^ k * M := by
     have hj (j : Fin 3) :
-        ‖iteratedFDeriv ℝ k (canonicalCoefficientComponent j A) p‖ ≤ (2 : ℝ) ^ k * M :=
-      norm_iteratedFDeriv_le_of_mixedDerivative hU (hA j) k hp hM
-        (fun s t hst => by simpa only [Real.norm_eq_abs] using
-          hraw j s t (hst.trans_le hk))
+        ‖iteratedFDeriv ℝ k (canonicalCoefficientComponent j A) p‖ ≤ (2 : ℝ) ^ k * M := by
+      apply norm_iteratedFDeriv_le_of_mixedDerivative hU (hA j) k hp hM
+      intro s t hst
+      rw [Real.norm_eq_abs]
+      exact hraw j s t (hst.le.trans hk)
     have haj : ‖iteratedFDeriv ℝ k A.a p‖ ≤ (2 : ℝ) ^ k * M := by
       simpa [canonicalCoefficientComponent] using hj 0
     have hbj : ‖iteratedFDeriv ℝ k A.b p‖ ≤ (2 : ℝ) ^ k * M := by

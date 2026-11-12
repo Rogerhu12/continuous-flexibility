@@ -83,6 +83,39 @@ private theorem dividedRoot_localizedSpeed_lower
     (rootFieldLocalization_eqOn (F := factoredCharacteristicSpeed wref g w k r σ)
       hR hhalf).symm
 
+private theorem dividedRootBand_family_of_rectangle
+    {Z : Type} {U : Set Z} {sector small : Z → Prop}
+    {wref g : ℝ → ℝ} {w : Z → ℝ → ℝ} {k : Z → PolarPoint → ℝ}
+    {J₁ J₂ : Z → PolarPoint → Prop}
+    {r σ R R₀ δ ρ lV uV la ua : ℝ}
+    (hR : 0 < R) (hR₀ : 0 < R₀) (hδ : 0 < δ)
+    (hscale : δ * ρ ≤ R₀ / 2) (hscaleR : δ * ρ ≤ R / 4)
+    (hla : 0 < la)
+    (hstrip : ∀ z ∈ U, sector z →
+      RootCoefficientStripConditions wref g (w z) (k z) r σ R)
+    (hjets : ∀ z ∈ U, sector z → small z → ∀ q : PolarPoint,
+      δ * q.1 ∈ Ioo (-R₀) R₀ → J₁ z q ∧ J₂ z q)
+    (hvalues : ∀ z ∈ U, sector z →
+      ∀ p ∈ Ioo (-R₀) R₀ ×ˢ (univ : Set ℝ),
+        (rootCoefficientRadialFactor wref g (w z) (k z) r σ p,
+          polarLinearA (w z) (k z) (rootProfileShift r σ p)) ∈
+            Icc lV uV ×ˢ Icc la ua) :
+    ∀ z ∈ U, sector z → small z → ∀ q : PolarPoint, q.1 ∈ Icc 0 ρ →
+      J₁ z q ∧ J₂ z q ∧
+        rootCoefficientRadialFactor wref g (w z) (k z) r σ (δ * q.1, q.2) ∈
+          Icc lV uV ∧
+        Real.sqrt lV / ua ≤ rootFieldLocalization
+          (factoredCharacteristicSpeed wref g (w z) (k z) r σ) hR (δ * q.1, q.2) := by
+  intro z hz hs hsmall q hq
+  obtain ⟨hq₀, houter, hhalf⟩ :=
+    dividedRoot_scaled_band_membership hR hR₀ hδ hscale hscaleR hq
+  have hvalue := hvalues z hz hs (δ * q.1, q.2) ⟨hq₀, mem_univ _⟩
+  have hjet := hjets z hz hs hsmall q hq₀
+  exact ⟨hjet.1, hjet.2, hvalue.1,
+    dividedRoot_localizedSpeed_lower
+      (wref := wref) (g := g) (w := w z) (k := k z) (r := r) (σ := σ)
+      hR hla houter hhalf (hstrip z hz hs) hvalue⟩
+
 private theorem n01_dividedRootBand_of_rectangle
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {base low loss : ℕ} {ε r σ R R₀ δ ρ lV uV la ua : ℝ} {g : ℝ → ℝ}
@@ -102,16 +135,21 @@ private theorem n01_dividedRootBand_of_rectangle
             (rootProfileShift r σ p)) ∈ Icc lV uV ×ˢ Icc la ua) :
     N01DividedRootBandBound D S C base low loss ε r σ g hR δ ρ lV uV
       (Real.sqrt lV / ua) B := by
-  intro z hz hs hlow q hq
-  obtain ⟨hq₀, houter, hhalf⟩ :=
-    dividedRoot_scaled_band_membership hR hR₀ hδ hscale hscaleR hq
-  have hvalue := hvalues z hz hs (δ * q.1, q.2) ⟨hq₀, mem_univ _⟩
-  have hjet := hjets z hz hs hlow q hq₀
-  refine ⟨hjet.1, hjet.2, hvalue.1, ?_⟩
-  exact dividedRoot_localizedSpeed_lower
-    (wref := D.w) (g := g) (w := stateProfile D S C z.1)
-    (k := stateHeight D S C z) (r := r) (σ := σ)
-    hR hla houter hhalf (hstrip z hz hs) hvalue
+  exact dividedRootBand_family_of_rectangle
+    (Z := AnnularState S × ℝ) (U := stateNeighborhood S C base ε)
+    (sector := fun z => stateSector S z.1)
+    (small := fun z =>
+      pairGrading (stateGrading S) realGrading low (z - (C.referenceState, 0)) ≤ 1)
+    (wref := D.w) (g := g) (w := fun z => stateProfile D S C z.1)
+    (k := fun z => stateHeight D S C z)
+    (J₁ := fun z q =>
+      ContDiffAt ℝ ∞ (rootScaledDividedDiscriminant D S C z g r σ δ) q)
+    (J₂ := fun z q =>
+      PointwiseMaterialJetBound (pairGrading (stateGrading S) realGrading) loss B
+        (z - (C.referenceState, 0)) (rootScaledDividedDiscriminant D S C z g r σ δ) q)
+    (r := r) (σ := σ) (R := R) (R₀ := R₀) (δ := δ) (ρ := ρ)
+    (lV := lV) (uV := uV) (la := la) (ua := ua)
+    hR hR₀ hδ hscale hscaleR hla hstrip hjets hvalues
 
 /-- Any previously selected positive scale and band can be retained.
 Only a smaller band is chosen, uniformly over all states and angles. -/

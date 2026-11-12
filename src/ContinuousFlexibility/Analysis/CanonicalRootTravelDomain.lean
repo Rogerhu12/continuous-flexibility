@@ -46,8 +46,10 @@ theorem canonicalGluedAiryIntegral_on_cut
       airyFirstIntegral (K.chart z (K.cutPair m).2) (-σ)
         (canonicalCutPoint S K z m θ) + 2 * σ * airyTravelPrimitive (K.cutRadius m) :=
     piecewise_eq_of_notMem _ _ _ hn
+  have hcut : K.chart z (K.cutPair m).2 (canonicalCutPoint S K z m θ) =
+      (K.cutRadius m, θ) := (canonicalCut_closed_and_chart hA hB hz hs m true θ).2
   rw [he]
-  simp only [airyFirstIntegral, (canonicalCut_closed_and_chart hA hB hz hs m true θ).2]
+  simp only [airyFirstIntegral, hcut]
   ring
 
 private theorem airyTravelPrimitive_le_of_nonneg_le

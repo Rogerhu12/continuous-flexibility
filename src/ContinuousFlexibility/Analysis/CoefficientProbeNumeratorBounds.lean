@@ -84,7 +84,7 @@ theorem exists_coefficientProbe_numerator_constant
       _ ≤ (|mixedDerivative a b Erc p| +
             |mixedDerivative a b (fun q => radialLinearProbe χ q * Ec q) p|) +
               |mixedDerivative a b (fun q => radialCosineProbe χ q * Er q) p| :=
-                add_le_add_right (abs_sub _ _) _
+                add_le_add (abs_sub _ _) (le_refl _)
       _ ≤ M + Cr * M + Cc * M := add_le_add (add_le_add hrc hREc) hCEr
   have hsquare : |mixedDerivative a b (coefficientErrorSquareNumerator χ Ec Ecc) p| ≤
       M + 2 * (Cc * M) := by

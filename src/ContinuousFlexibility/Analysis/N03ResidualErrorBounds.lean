@@ -103,7 +103,7 @@ private theorem weighted_error_after_residual_bound
     (hpn (i + j + le) z) (hp (by omega : i + j + le ≤ i + j + (le + lr)) z)
     (hqn be (f z)) (show 0 ≤ 2 * R by positivity)
     (hqn (i + j + le) (f z)) hQ (htn be v) (htn (i + j + le) v)
-    hrlo hrhi (ht (by dsimp only [low]; omega) v)
+    hrlo hrhi (ht ((Nat.le_add_right be lr).trans (le_max_right br (be + lr))) v)
     (ht (by omega : i + j + le ≤ i + j + (le + lr)) v)
   calc
     _ ≤ B * H x * M x *

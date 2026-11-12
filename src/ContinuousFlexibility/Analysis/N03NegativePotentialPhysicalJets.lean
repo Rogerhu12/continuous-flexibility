@@ -106,6 +106,62 @@ private theorem inversePotential_mixedDerivative_le_of_physicalJets
   exact (congrArg abs (mixedDerivative_eqOn_of_isOpen hV hv a b hq)).trans_le
     ((abs_mixedDerivative_le_norm_iteratedFDeriv hV hsmooth a b hq).trans hjets.1)
 
+private def PotentialChartGeometry
+    (P : SymmetricCoefficients) (F G : PolarPoint → PolarPoint)
+    (h v : PolarPoint → ℝ) (U V : Set PolarPoint) : Prop :=
+  IsOpen U ∧ IsOpen V ∧
+    (∀ i : Fin 3, ContDiffOn ℝ ∞ (canonicalCoefficientComponent i P) U) ∧
+    ContDiffOn ℝ ∞ F U ∧ ContDiffOn ℝ ∞ G V ∧ ContDiffOn ℝ ∞ h U ∧
+    (∀ y ∈ U, planeJacobian F y ≠ 0) ∧ MapsTo G V U ∧
+    (∀ y ∈ U, G (F y) = y) ∧ (∀ y ∈ V, F (G y) = y) ∧
+    EqOn v (inverseChartPotential P F G h) V
+
+private theorem n03_negativePotential_chartGeometry
+    {D : ReferenceData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
+    {base : ℕ} {ε : ℝ}
+    (hA : N04PartA D S C K base ε) (hB : N04PartB S C L K base ε)
+    (hfield : N04bFieldRegularity D S C L base ε) :
+    ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
+      ∀ m : ℕ, K.positive m = false →
+        PotentialChartGeometry (L.coefficients z) (K.chart z m) (K.inverseChart z m)
+          (K.height z m) (K.potential z m) (physicalPieceOpen S K z m)
+          (canonicalOpen S K m) := by
+  intro z hz hs m hm
+  rcases hA.charts z hz hs m with ⟨_hFV, hGU, hGF, hFG, hF, hG, hh, hpoint⟩
+  exact ⟨(hA.domains z hz hs m).1, isOpen_Ioo.prod isOpen_univ,
+    coefficientComponents_contDiffOn_of_subset (hA.domains z hz hs m).2.2.1
+      (hfield.smooth_coefficients z hz hs), hF, hG, hh,
+    fun y hy => (hpoint y hy).2.1, hGU, hGF, hFG,
+    negativeCanonicalPotential_eqOn_inverseChartPotential hB hz hs m hm⟩
+
+private theorem negativePotential_physicalJets_of_family
+    {E Z : Type} [AddCommGroup E] [Module ℝ E]
+    {p : ℕ → Seminorm ℝ E} {low inputLoss outLoss : ℕ}
+    {A B : ℕ → ℝ} {κ : ℝ}
+    (hbound : InverseFieldsFromPhysicalJetsEstimate p low inputLoss outLoss A κ B)
+    (shift : Z → E) (states : Set Z) (sector : Z → Prop) (positive : ℕ → Bool)
+    (P : Z → SymmetricCoefficients) (F G : Z → ℕ → PolarPoint → PolarPoint)
+    (h v : Z → ℕ → PolarPoint → ℝ) (U V : Z → ℕ → Set PolarPoint)
+    (hgeometry : ∀ z ∈ states, sector z → ∀ m : ℕ, positive m = false →
+      PotentialChartGeometry (P z) (F z m) (G z m) (h z m) (v z m) (U z m) (V z m)) :
+    ∀ z ∈ states, sector z → p low (shift z) ≤ 1 →
+      ∀ m : ℕ, positive m = false → ∀ q ∈ V z m,
+      κ ≤ |planeJacobian (F z m) (G z m q)| →
+      (∀ i : Fin 3, PointwiseMaterialJetBound p inputLoss A (shift z)
+        (canonicalCoefficientComponent i (P z)) (G z m q)) →
+      PointwiseMaterialJetBound p inputLoss A (shift z) (h z m) (G z m q) →
+      (∀ n : ℕ, 1 ≤ n → ‖iteratedFDeriv ℝ n (F z m) (G z m q)‖ ≤
+        A n * (1 + p (n + inputLoss) (shift z))) →
+      ∀ a b : ℕ, |mixedDerivative a b (v z m) q| ≤
+        B (a + b) * (1 + p (a + b + outLoss) (shift z)) := by
+  intro z hz hs hlow m hm q hq hJlower hcoeffjets hhjets hFjets a b
+  rcases hgeometry z hz hs m hm with
+    ⟨hU, hV, hP, hF, hG, hh, hJ, hGU, hGF, hFG, hv⟩
+  exact inversePotential_mixedDerivative_le_of_physicalJets hbound (shift z) hlow
+    (P z) (F z m) (G z m) (h z m) (v z m) (U z m) (V z m)
+    hU hV hP hF hG hh hJ hGU hGF hFG hv q hq hJlower hcoeffjets hhjets hFjets a b
+
 private theorem n03_negativePotential_physicalJets_of_bound
     {D : ReferenceData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
@@ -115,19 +171,13 @@ private theorem n03_negativePotential_physicalJets_of_bound
     (hbound : InverseFieldsFromPhysicalJetsEstimate (pairGrading (stateGrading S) realGrading)
       low inputLoss outLoss A κ B) :
     NegativePotentialPhysicalJetEstimate S C L K base low inputLoss outLoss ε κ A B := by
-  intro z hz hs hlow m hm q hq hJlower hcoeffjets hhjets hFjets a b
-  rcases hA.charts z hz hs m with ⟨_hFV, hGU, hGF, hFG, hF, hG, hh, hpoint⟩
-  exact inversePotential_mixedDerivative_le_of_physicalJets
-    (E := AnnularState S × ℝ) (p := pairGrading (stateGrading S) realGrading)
-    hbound (z - (C.referenceState, 0)) hlow (L.coefficients z)
-    (K.chart z m) (K.inverseChart z m) (K.height z m) (K.potential z m)
-    (physicalPieceOpen S K z m) (canonicalOpen S K m)
-    (hA.domains z hz hs m).1 (isOpen_Ioo.prod isOpen_univ)
-    (coefficientComponents_contDiffOn_of_subset (hA.domains z hz hs m).2.2.1
-      (hfield.smooth_coefficients z hz hs))
-    hF hG hh (fun y hy => (hpoint y hy).2.1) hGU hGF hFG
-    (negativeCanonicalPotential_eqOn_inverseChartPotential hB hz hs m hm)
-    q hq hJlower hcoeffjets hhjets hFjets a b
+  exact negativePotential_physicalJets_of_family
+    (E := AnnularState S × ℝ) (Z := AnnularState S × ℝ)
+    (p := pairGrading (stateGrading S) realGrading) hbound
+    (fun z => z - (C.referenceState, 0)) (stateNeighborhood S C base ε)
+    (fun z => stateSector S z.1) K.positive L.coefficients K.chart K.inverseChart
+    K.height K.potential (physicalPieceOpen S K) (fun _ m => canonicalOpen S K m)
+    (n03_negativePotential_chartGeometry hA hB hfield)
 
 theorem n03_negativePotential_from_physicalJets_fixed_loss
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

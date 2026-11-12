@@ -174,6 +174,7 @@ theorem n03CoefficientProbe_stored_identities
           8 * ((originalCoefficients D S C z).c p - (L.coefficients z).c p) * Real.sin (2 * p.2) ^ 2 := by
     have h := n03CoefficientProbe_closed_identities hS hT hN01 hN03 hA hB hz hs m
       hχ hone hηr hηc hηrc hηcc side hclosed hpAnn
+    dsimp only at h
     rw [← hb, ← hc] at h
     exact h
   by_cases hcut : p ∈ Set.range (canonicalCutPoint S K z m)

@@ -127,9 +127,18 @@ theorem n03_rootScaledInverseCoordinate_eq_storedFootpoint_on_band
         stateLeftChart S z.1 m ι - 0
       rw [(hL.2.2.2.2.1 z hz hs m ι).1, sub_zero]
     · exact (hL.2.2.2.2.1 z hz hs m ι).2.2.2.1
-  have he := n03_controlledInverse_eq_storedRootFootpoint_on_band
-    hS hT hN hL hA hB hz hs m rightEnd hg hR hstrip hΘ hmatch hx θ
-  rw [rootScaledInverseCoordinate_eq_signed_sample, ← he]
+  have he : L.minusFlow z m r
+      (Function.invFun (L.minusFlow z m (r + σ * (δ * x))) θ) =
+      rootRescaledInverseSample Θ ((-σ) * Real.sqrt δ) (x, θ) :=
+    n03_controlledInverse_eq_storedRootFootpoint_on_band
+      hS hT hN hL hA hB hz hs m rightEnd hg hR hstrip hΘ hmatch hx θ
+  change rootScaledInverseCoordinate Θ (n01RootLabel S C z m rightEnd) (Real.sqrt δ)
+      (x, (-σ) * x ^ (3 / 2 : ℝ), θ) =
+    stateLeftChart S z.1 m
+        (Function.invFun (L.minusFlow z m (r + σ * (δ * x))) θ) -
+      if rightEnd then C.travel m else 0
+  rw [rootScaledInverseCoordinate_eq_signed_sample Θ
+    (n01RootLabel S C z m rightEnd) (Real.sqrt δ) (-σ) (x, θ), ← he]
   exact hlabel _
 
 end ContinuousFlexibility.Analysis
