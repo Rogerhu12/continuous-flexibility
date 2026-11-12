@@ -1,0 +1,65 @@
+{
+  "kind": "actual_negative_length_material_bounds_reviewed_manifest",
+  "status": "INDEPENDENTLY_STATIC_REVIEWED_UNCOMPILED",
+  "owner": "/root/audit_coordinates",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthMaterialBoundsCandidateManifest.json",
+    "sha256": "1421ca412171f7ae7ff3823b83cde77d149b72330ba120a7be1964049d254520",
+    "blob": "e272523b93c602dcb24dd17fc79eb8940bb5e46d",
+    "lines": 128
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthRadialBounds.lean",
+      "sha256": "74cce6d13fa0dc9164c76261185ebdfbd2e51983e5f23a7513c8664e66fcd0cf",
+      "blob": "52c5db4b5505d31c2619ca37e13c133d0dc86109",
+      "lines": 192,
+      "target": "src/ContinuousFlexibility/Analysis/ActualNegativeLengthRadialBounds.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N06ReferenceTravelBounds",
+        "ContinuousFlexibility.Analysis.N04bActualTypedAtlas"
+      ],
+      "public_names": [
+        "n04b_actual_negative_radial_length_bounds"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthMaterialBounds.lean",
+      "sha256": "a1355b681442efbae6b424f142b2841024bf85d37c7f16c3127339eb926a907c",
+      "blob": "97ba75908af68271cfed29233a7043de7af28ab4",
+      "lines": 86,
+      "target": "src/ContinuousFlexibility/Analysis/ActualNegativeLengthMaterialBounds.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualNegativeLengthRadialBounds",
+        "ContinuousFlexibility.Analysis.MaterialPointRadialPolynomial",
+        "ContinuousFlexibility.Analysis.ActualNegativeMaterialSamples"
+      ],
+      "public_names": [
+        "n04bActualTypedAtlas_negative_length_material_bounds"
+      ]
+    }
+  ],
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/ActualNegativeLengthRadialBoundsIndependentReview.json",
+      "sha256": "dacc2c6623fd8a5d4205014f3bfb536a8c402c8783ddc6cde783856bf430ff0f",
+      "blob": "59b5346f27133dae820a92b44777562d43ef5f74",
+      "lines": 139,
+      "covers": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthRadialBounds.lean"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ActualNegativeLengthMaterialBoundsIndependentReview.json",
+      "sha256": "d003a238d11fd0de965d863a745fc08150019a7ab66593ff5e8c5cede956fa8e",
+      "blob": "68b42cccabe286de7584f9381aebe61b31d971dd",
+      "lines": 119,
+      "covers": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthMaterialBounds.lean"
+    }
+  ],
+  "scope": [
+    "Same actual Through03 return-margin host and same chosen optical cut; four physical/canonical half-length costs.",
+    "Actual optical-half midpoint transfers the return-host radial cost through its true material point to the original stored K.cell sample. No equality of hosts is asserted.",
+    "No Through04/final primitive certificate, no new optical lower hypothesis, no original E0 floor, and no changed data/atlas."
+  ],
+  "compiled": false,
+  "active_state_modified": false
+}

@@ -1,0 +1,118 @@
+{
+  "kind": "same_displayed_reference_taylor_width_all_order_numerical_jet_bounds",
+  "status": "HELD_UNCOMPILED_AWAITING_INDEPENDENT_FULL_REVIEW",
+  "author": "/root/quantitative_route",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceTaylorAllOrderJets.lean",
+    "sha256": "c1ed853c75f2472f7d54da00302300eecf0450a244e351a52201d2ac2fefc9e8",
+    "blob": "ba45e6bf8b0bb0183107b01a732c565d9c1c07c8",
+    "lines": 165,
+    "target": "src/ContinuousFlexibility/Analysis/PositiveReferenceTaylorAllOrderJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.RadialTaylorSliceJetEnvelope",
+      "ContinuousFlexibility.Analysis.PositiveReferenceTaylorPrescribedWidth",
+      "ContinuousFlexibility.Analysis.PositiveReferenceSlopeAllOrderJets",
+      "ContinuousFlexibility.Analysis.PositiveReferenceHeightAllOrderJets"
+    ],
+    "public_names": [
+      "exists_positiveReferenceTaylor_allOrder_jet_envelope"
+    ]
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RadialTaylorSliceJetEnvelope.lean",
+      "sha256": "bc3bf04b7552fdc0bdaab8ba88138040516890dce27afee2e93bb5fa3e74f0a6",
+      "blob": "0f6c507f1f6463830e5b0a179ad46fb3c21d9db7",
+      "lines": 94
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-taylor-triangle/PositiveReferenceTaylorPrescribedWidth.lean",
+      "sha256": "44bc853c9750ea6ef6125b7af5f878b7fd47d3ffb3175b521a3ba21be36059a4",
+      "blob": "6520aad4926928dba5080ffed052e7630f413668",
+      "lines": 147
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceSlopeAllOrderJets.lean",
+      "sha256": "675bdd7d913c69aec27edef3c59d9b65c97dcc3693e93158294147f41971f510",
+      "blob": "1b03ae7c2ad6603d9bf99d97086b35bc6309269a",
+      "lines": 99
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceHeightAllOrderJets.lean",
+      "sha256": "eafac43ea49cdc562e8fa6fbd61f679c24f24411c944753790782fbca211c09d",
+      "blob": "c17b5daa9ed75cb0a8e322bbc0c3612010de3d0c",
+      "lines": 144
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceValueEnvelope.lean",
+      "sha256": "267b575f81da274e9710fd4fbd0df574c7d527bfd78a5e5c867e749ce2698297",
+      "blob": "25205de05e190acb6ec954e7ec34ce73351c88be",
+      "lines": 145
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/radial-reference-bool/PositiveReferenceFiniteRadialJets.lean",
+      "sha256": "a515668c71f3895edfda3d1183a5c275f3758799de0d7ebb68d439d33095bc66",
+      "blob": "db60546bb34349a040955ace14facdf5b13dfa0d",
+      "lines": 167
+    }
+  ],
+  "provider_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RadialTaylorSliceJetEnvelopeReviewedManifest.json",
+      "sha256": "2d96606b07feb1178b073844e6bc87683e49f42340b8812fa69c476416295e1b",
+      "blob": "6c72ecce67140a0c4bcb0df4eff1ab56c6f40bdb",
+      "lines": 42
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-taylor-triangle/PositiveReferenceTaylorPrescribedWidthReviewedManifest.json",
+      "sha256": "5c4fc51c98e2294683ea191ef2c7f6ca51ac2f76994cac83290b0e069b498091",
+      "blob": "21f1e5781b480a31dbad8b730ff72277fb6a3298",
+      "lines": 29
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceSlopeAllOrderJetsReviewedManifest.json",
+      "sha256": "9cd09c5d3d3ab67f13fb103c59f540d49e0603b3f71f52d29e73944ec0b8b2b6",
+      "blob": "4f68482ecb0f85e16413665b260964ecfca8d0c6",
+      "lines": 45
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceHeightAllOrderJetsReviewedManifest.json",
+      "sha256": "b900b15645ef5d6177f710c1c1c75274a83068578fb0b634139aeb4020bfe1d1",
+      "blob": "8cac3c8429dac9fe041c09d5ee83fda23a469e64",
+      "lines": 47
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceHeightAllOrderJetsProviderSelectionManifest.json",
+      "sha256": "1b28a146fe7c2ff36d9e4faf4aa78124895c21e21313d2eb53ace03fc71be679",
+      "blob": "e7a859bcc6794a597aeb15d6461d7bf2e97d7f44",
+      "lines": 96
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceValueEnvelopeReviewedManifest.json",
+      "sha256": "eec6cc0b6e73660e524dafd618b82785d5fe7eab4f855bf0ddbd1544a7603bd1",
+      "blob": "ba7ab1dd12be731d6b5cd5f09a5519b1ec2630d5",
+      "lines": 27
+    }
+  ],
+  "selected_transitive_exp_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-envelope-known-patterns/ExpPolynomialEnvelope.lean",
+    "sha256": "a37f901d2c9f83cd2e02d067b2d7f411729c6ca3e6379cf5f935679b92cfc463",
+    "blob": "f44f6f236af368d5092674e60ed1373864e60c9b",
+    "lines": 74
+  },
+  "checks": [
+    "The fixed degree n+1 and width positiveReferenceTaylorWidth(n,l,r,U^-1,U) depend only on the original finite data envelope U and geometry. The later order N never changes that width, the scalar Taylor representatives or the actual coordinate/height.",
+    "The exact finite-polynomial theorem at degree n+1 controls every needed derivative through N+1 linearly in U, including order zero. The true same-width collar bounds give slope and height positivity and the inverse height bound 2*U.",
+    "The actual mass-one normalizer is bounded using positiveReferenceScale_two_sided and the original reciprocal gap. Its absolute value is at most 2*U; no arbitrary normalizer or final bound is assumed.",
+    "The enlarged numerical upper bound V=(24+16*(n+2)+Ct+2)*U^2 controls inverse width and the same endpoint derivatives. It is used only in estimates, never in the width definition.",
+    "The coordinate positive jets cost V^(N+1); the actual height and reciprocal cost V^((3*N+1)*N+2). The common output is C(n,N)*U^(2*((3*N+1)*N+2)), with C fixed before l,r,U,y,h. N=0 is included.",
+    "The one Bool-side argument handles both endpoints. Public-name search found no installed collision. The selected transitive Exp provider is the separately reviewed 74-line compatibility version, not historical Exp72."
+  ],
+  "scope_limits": [
+    "Numerical all-order spatial bounds for the original finite representative. No state SmoothDirections or automatic same-witness/raw-optical certificate is asserted.",
+    "The actual same-midpoint material specialization is the next step and must retain this original U and delta.",
+    "No compiler/elaborator, CI query, active checkout/index/ref/CP/authority/plan mutation."
+  ],
+  "compiled": false,
+  "independent_reviews": []
+}

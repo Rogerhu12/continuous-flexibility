@@ -1,0 +1,68 @@
+{
+  "kind": "same_actual_whole_reference_gauge_four_length_reference_jets_reviewed_manifest",
+  "status": "STATICALLY_INDEPENDENTLY_REVIEWED_HELD_UNCOMPILED",
+  "owner": "/root/audit_coordinates",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeLengthReferenceJetsCandidateManifest.json",
+    "sha256": "6c6c072cc8220bf87d689f79391e2b8fd9251360a46a02a584aa8c2356ef905f",
+    "blob": "e2936e22bc134eaabf218452d4915f7e3ebdddc9",
+    "lines": 110
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeLengthReferenceJets.lean",
+    "sha256": "dc56b5a2fdbc646dca9e061ebf3ee892e649721c96768cba0536fcd6f46ee73f",
+    "blob": "5b71545435e803b678150420e08ca0447583662d",
+    "lines": 215,
+    "target": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeLengthReferenceJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds",
+      "ContinuousFlexibility.Analysis.RetainedPositiveComponentMaterialWidth",
+      "ContinuousFlexibility.Analysis.WholeReferenceGaugeUnitMaterialGeometry",
+      "ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization"
+    ],
+    "public_names": [
+      "canonicalLengthSelector",
+      "canonicalLengthSelector_eq_const",
+      "n04WholeReferenceGauge_length_values_enlargedMaterialData",
+      "n04WholeReferenceGauge_lengthReferenceJets_enlargedMaterialData"
+    ]
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/WholeReferenceGaugeLengthReferenceJetsIndependentReview.json",
+      "sha256": "a371ba0e47612806db61c37f834cc14ba9f0dd250aca05fefbdc05abc5c61d61",
+      "blob": "a4438c0c88ffd6f2fef397c2971a62bfe9e1200c",
+      "lines": 161
+    }
+  ],
+  "reviewed_inputs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthMaterialBoundsReviewedManifest.json",
+      "sha256": "e21b63e0ec60e432f4924b97056edbba72a0725b77090a538524a390ab89507c",
+      "blob": "62d50e6ed5412e8ef5c4d63d1a387c0d3906275d",
+      "lines": 65
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RetainedPositiveComponentMaterialWidthReviewedManifest.json",
+      "sha256": "389d814ef2b2e62b791f8c6389e9cf14a2ab8a5b79352cab0a25d3aee46e576c",
+      "blob": "36c30b652e1f95ca4828022c27c00ed9c404082f",
+      "lines": 39
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeUnitMaterialGeometryReviewedManifest.json",
+      "sha256": "a51fd15fff4cd1e8997e5e66da32b1f26e91450d1d0631409af5450269e606f8",
+      "blob": "da5287476d1f3eb1c04836ef9bf444f308d84ecb",
+      "lines": 39
+    }
+  ],
+  "scope": [
+    "Same actual V and original K, four physical/canonical length and inverse-length atoms.",
+    "Actual negative return host is related to original K.cell through a common midpoint and true material point/sample bounds; it is not identified with K.cell.",
+    "Positive canonical lengths are exactly one; the physical width bounds use the same retained component and its real midpoint host.",
+    "One explicit enlargedMaterialData T supplies the E0 floor and keeps the original sample. All positive-order mixed jets of these actual constant atoms vanish."
+  ],
+  "compiled": false,
+  "source_changed_after_review": false,
+  "active_state_modified": false,
+  "created_at": "2026-11-12T14:56:31.763557+00:00"
+}

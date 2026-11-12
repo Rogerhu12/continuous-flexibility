@@ -1,0 +1,102 @@
+{
+  "snapshot": 25,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "parent": "d286be7c492ef26d1008b0b0adbeb3a679687090",
+  "base_tree": "805e34c11bc08c67b9af1feb3b7c17096cc5fbd7",
+  "line_head": "d3518effba4e07790e04e66cdf347cde1daa6f71",
+  "line_tree": "f42883129f85f117a2f5ab4ed3e4d5f951fbdcf2",
+  "frozen_at": "2026-11-12T14:59:25.716871+00:00",
+  "indexed_files": 1661,
+  "new_sources": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeLengthReferenceJets.lean",
+      "sha256": "dc56b5a2fdbc646dca9e061ebf3ee892e649721c96768cba0536fcd6f46ee73f",
+      "lines": 215
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/CircleLocalJetAssembly.lean",
+      "sha256": "6413289ba434e01699588ce6ee2d8d8b81475dd003394bd291f5de7405c54d58",
+      "lines": 148
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointCircleTower.lean",
+      "sha256": "1e9e014301e77d01118c4b2a1fbfb766f989ccf30195656bd11f858be897c346",
+      "lines": 131
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointHeightLineEnvelope.lean",
+      "sha256": "905ac0dd9df934be51831462fb53dc6b2d1743bd7cd9168859934d7372331713",
+      "lines": 206
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointJetLocalGrowth.lean",
+      "sha256": "36e24f465df5e89982fde68fb9d316b91f6d3550b624a08f475c02d4681754d7",
+      "lines": 253
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointOneHigh.lean",
+      "sha256": "041f3e6e348f32e0a78d3639b134e1ec860b6371301a25762c48813400dd2f4d",
+      "lines": 145
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarJetGrowth.lean",
+      "sha256": "231857303e7f8502e3edb40e6ecbbde4136b0ade150c8d9b845c8e9c3f4c3eca",
+      "lines": 106
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointSmoothTame.lean",
+      "sha256": "80c1d63b655fd4fa1ee1dab48cf72c3740dbd3fb06b8bf20a313f305ebf79026",
+      "lines": 124
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointStateEnvelope.lean",
+      "sha256": "8eb56355d6680cb2ae7869553e396350bad1d71ba0e3900722278bfae8aa6b8d",
+      "lines": 162
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointStateIncrement.lean",
+      "sha256": "626e1f82c49cb58d1afbadde7ff806f0ab00874542d9b827d328ab509bf34bfe",
+      "lines": 141
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointZeroCircleMember.lean",
+      "sha256": "e9c40bc9e8fd735cf37bafa3d78cf980251afde8f086f0260b04a6a37d06a44b",
+      "lines": 248
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointZeroGrowth.lean",
+      "sha256": "84cc77d988279c1b348be135d6493c4831cc1619b9f5f0217aacd97cf721b255",
+      "lines": 163
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowCircleUniformBounds.lean",
+      "sha256": "b4e1e9c2a63d88c62d9b8bfd9264529fb04cbf8b40b073479d68163e1d976a57",
+      "lines": 127
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceTaylorAllOrderJets.lean",
+      "sha256": "c1ed853c75f2472f7d54da00302300eecf0450a244e351a52201d2ac2fefc9e8",
+      "lines": 165
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair150/CanonicalRootHeightJets.lean",
+      "sha256": "6f86bc698dd3e499afa78df302e204d4487e5d278d6c59da80316d7451caab72",
+      "lines": 184
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair151/CanonicalRootHeightJets.lean",
+      "sha256": "28419f4e1fab3de13761c4b1c889797c981bcb64cc7743a95579b2f2e23af6c5",
+      "lines": 214
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04CoefficientSampleJetTower.lean",
+      "sha256": "fcd459e313ce644226ac291ce1b27f32536c8e5223f4f4d5bf240c0154deaf4f",
+      "lines": 141
+    }
+  ],
+  "new_source_lines": 2873,
+  "existing_added_lean_from_compiled_baseline140": 11957,
+  "projected_added_lean_from_compiled_baseline140": 14830,
+  "status": "Source preservation only; outside src, no CI activation or completion claim.",
+  "entries": 88
+}

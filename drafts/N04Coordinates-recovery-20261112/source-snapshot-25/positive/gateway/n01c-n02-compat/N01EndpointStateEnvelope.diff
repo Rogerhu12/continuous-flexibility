@@ -1,0 +1,60 @@
+--- N01EndpointStateEnvelope@c5c48
++++ N01EndpointStateEnvelope@parameter-order
+@@ -5,7 +5,8 @@
+ 
+ The localized input is fixed while the base point varies. Cyclic
+ symmetry moves any state slot to the last slot without changing the
+-actual scalar field or its angular derivatives.
++actual scalar field or its angular derivatives. The parameter loss is
++selected at fixed arity before the output order.
+ -/
+ 
+ noncomputable section
+@@ -92,17 +93,22 @@
+ theorem N01Properties.endpointFlowScalarJets_state_slot_energy_envelope
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+-    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (n s : ℕ)
+-    (v : Fin (n + 1) → (StateDirections S × ℝ)) (i : Fin (n + 1)) (hi : (v i).2 = 0) :
+-    ∃ E : ℕ → ℝ≥0∞, ∃ K : ℝ, (∑' m, E m) < ⊤ ∧ 0 ≤ K ∧
++    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (n : ℕ) :
++    ∃ parameterLoss : ℕ, ∀ s : ℕ,
++      ∀ (v : Fin (n + 1) → (StateDirections S × ℝ)) (i : Fin (n + 1)), (v i).2 = 0 →
++      ∃ E : ℕ → ℝ≥0∞, ∃ K : ℝ, (∑' m, E m) < ⊤ ∧ 0 ≤ K ∧
+       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m b c, b + c ≤ s → ∀ θ,
+       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
+         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v m) θ| ≤
+-        K * (1 + pairGrading (sectorGrading S) realGrading (max base (s + loss)) z) *
++        K * (1 + pairGrading (sectorGrading S) realGrading (max base (s + loss + parameterLoss)) z) *
+           Real.sqrt (E m).toReal := by
++  obtain ⟨parameterLoss, horder⟩ :=
++    hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel n
++  refine ⟨parameterLoss, ?_⟩
++  intro s v i hi
+   let p : ℕ → Seminorm ℝ (StateDirections S × ℝ) := pairGrading (sectorGrading S) realGrading
+-  let j : ℕ := max base (s + loss)
+-  let pointData := hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel n s
++  let j : ℕ := max base (s + loss + parameterLoss)
++  let pointData := horder s
+   let K : ℝ := pointData.choose
+   have hK : 0 < K := pointData.choose_spec.1
+   refine cyclic_energy_envelope n s (sectorNeighborhood S base ε ε) (p j)
+@@ -137,14 +143,16 @@
+       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
+         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) (x + t • w) v m) θ| ≤
+         K * Real.sqrt (E m).toReal := by
+-  let data := hN.endpointFlowScalarJets_state_slot_energy_envelope hS hT rsel hrsel n s v i hi
++  obtain ⟨parameterLoss, horder⟩ :=
++    hN.endpointFlowScalarJets_state_slot_energy_envelope hS hT rsel hrsel n
++  let data := horder s v i hi
+   let energy : ℕ → ℝ≥0∞ := data.choose
+   let constantData := data.choose_spec
+   let K : ℝ := constantData.choose
+   have henergy : (∑' m, energy m) < ⊤ := constantData.choose_spec.1
+   have hK : 0 ≤ K := constantData.choose_spec.2.1
+   let p : ℕ → Seminorm ℝ (StateDirections S × ℝ) := pairGrading (sectorGrading S) realGrading
+-  let j : ℕ := max base (s + loss)
++  let j : ℕ := max base (s + loss + parameterLoss)
+   refine ⟨energy, K * (1 + (p j x + p j w)), henergy,
+     mul_nonneg hK (add_nonneg zero_le_one (add_nonneg (apply_nonneg _ _) (apply_nonneg _ _))), ?_⟩
+   intro t ht hz m b c hbc θ

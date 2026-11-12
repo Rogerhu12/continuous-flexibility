@@ -1,0 +1,47 @@
+{
+  "kind": "actual_fixed_width_reference_height_all_order_jets_reviewed_source",
+  "status": "HELD_INDEPENDENTLY_REVIEWED_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceHeightAllOrderJets.lean",
+    "sha256": "eafac43ea49cdc562e8fa6fbd61f679c24f24411c944753790782fbca211c09d",
+    "blob": "c17b5daa9ed75cb0a8e322bbc0c3612010de3d0c",
+    "lines": 144,
+    "target": "src/ContinuousFlexibility/Analysis/PositiveReferenceHeightAllOrderJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.PositiveCutoffAllOrderJets",
+      "ContinuousFlexibility.Analysis.PositiveReferenceValueEnvelope",
+      "ContinuousFlexibility.Analysis.LogPolynomialEnvelope",
+      "ContinuousFlexibility.Analysis.ExpPolynomialEnvelope"
+    ],
+    "public_names": [
+      "exists_positiveReferenceHeight_allOrder_jet_envelope"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceHeightAllOrderJetsCandidateManifest.json",
+    "sha256": "0af9820b5454e319166bd210462e4898ef0b4cc31347e2f76c5b771e0bbfe2db",
+    "blob": "4322d1d9bf912af71f37784a986afab96c60f113",
+    "lines": 106
+  },
+  "provider_selection_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceHeightAllOrderJetsProviderSelectionManifest.json",
+    "sha256": "1b28a146fe7c2ff36d9e4faf4aa78124895c21e21313d2eb53ace03fc71be679",
+    "blob": "e7a859bcc6794a597aeb15d6461d7bf2e97d7f44",
+    "lines": 96
+  },
+  "selected_exp_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-envelope-known-patterns/ExpPolynomialEnvelope.lean",
+    "sha256": "a37f901d2c9f83cd2e02d067b2d7f411729c6ca3e6379cf5f935679b92cfc463",
+    "blob": "f44f6f236af368d5092674e60ed1373864e60c9b",
+    "lines": 74
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/PositiveReferenceHeightAllOrderJetsIndependentReview.json",
+    "sha256": "c4807dc8ebf74eb34823fac46fd89d82ef5bf1b825d1acdf418c56a7eab53446",
+    "blob": "1f886b50e1c0590fb509ef14e0c4410dbab8426a",
+    "lines": 149
+  },
+  "scope": "Same supplied delta and endpoint data; true height/reciprocal amplitude U^2 with ordinary all-order spatial jets. No width re-selection, state SmoothDirections or terminal primitive estimate is claimed.",
+  "historical_source_and_candidate_preserved": true,
+  "compiled": false
+}

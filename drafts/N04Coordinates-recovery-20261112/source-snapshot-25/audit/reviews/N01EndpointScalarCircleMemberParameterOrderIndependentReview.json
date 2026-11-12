@@ -1,0 +1,101 @@
+{
+  "kind": "independent_full_source_scalar_circle_member_parameter_order_review",
+  "status": "PASSED_STATIC_FULL_SOURCE_REVIEW_HELD_UNCOMPILED",
+  "reviewer": "/root/audit_coordinates",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarCircleMemberCandidateManifest.json",
+    "sha256": "23ecfe5bdd9532c6e8308655dea7908264cf7006e754de7dc0f505a2f1aa9c41",
+    "blob": "e8d294c4d513ae06d4f742364417231a63e311f4",
+    "lines": 53
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarCircleMember.lean",
+    "sha256": "982eac1e60acf97ad1906422783a4cff5003905b2de516b616505edb5a919538",
+    "blob": "615ebbd2ffa65d62d8344671b90cf6167348d854",
+    "lines": 125,
+    "target": "src/ContinuousFlexibility/Analysis/N01EndpointScalarCircleMember.lean",
+    "base": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarCircleMember.c5c48-base.lean.txt",
+      "sha256": "b6cc40504a1967754b5ffbfd64b68363af2c248a31b067e478094984ba185c81",
+      "blob": "991fd54a8f83c2b1758ef1da8d00ea1a67d0104b",
+      "lines": 121,
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+    },
+    "diff": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarCircleMember.diff",
+      "sha256": "6017cd961f2cc6d6349372b5ab251bc0efdde0190fd2967ab5dd749b2146739b",
+      "blob": "8907bed2b5295434adfb822534ab1f8957222406",
+      "lines": 34
+    },
+    "unchanged_private_block_sha256": "bfef2ddd5d847333329088cac286485f5c805668851bf0a7a87e88dbb6f8e133",
+    "qualitative_public_header_identical": true
+  },
+  "scalar_height_input_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/N01ScalarHeightParameterOrderIndependentReview.json",
+    "sha256": "0249ea67f83cf3443da5f7b876604051ae5157068bb9cc1087a5dda0f45b9415",
+    "blob": "de6ac010ded132640c523ed3b814191be17e4d2b",
+    "lines": 216
+  },
+  "verified_additional_actual_providers": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01HeightPlateauDirections.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "cf2318f873369f3763e3b8b4844e482cbbf64abca132d5454279d41feeda3114",
+      "blob": "ca10a66d3477e0b3d244332bfe526aed6cfc3fa5",
+      "lines": 53
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01WeightedPlateauEnvelope.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "1efedf87180cdb2763a957ae0fe5401bbca4e22b31ed31e00cdd208a177fcb12",
+      "blob": "cd0c5ae71892ff23d7ab99541bf0a066e3c3ec1f",
+      "lines": 99
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleEnergyEnvelope.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "a3ff50dbed1c22ace70eef83e92d0239caf028caab1dc647fd514a50a04fc313",
+      "blob": "0e0147a741014a634c384188612caadf19d2d51b",
+      "lines": 102
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointCircleJets.lean",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "a619259b26db86a20e42940210547023f7ffe255a53d833d54e4b1b42186bae8",
+      "blob": "55157d7700a12a33d2c630e287c6501468b4f51a",
+      "lines": 120
+    }
+  ],
+  "verified_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarCircleMemberClosureInventory.json",
+    "sha256": "a000af12bf0f6f9fc260a547f3498a3913ac2b75203b8bfa10aded4c5a0e26a1",
+    "blob": "6b073aa0f76b80347f103d599315d377c8410f47",
+    "lines": 3578,
+    "recomputed_module_count": 279,
+    "recomputed_local_count": 6,
+    "missing": [],
+    "cycles": [],
+    "all_selected_remote_ref_path_identities_verified": true,
+    "all_local_sha256_blob_lines_and_actual_imports_verified": true,
+    "obsolete_uniform_loss_modules_absent": true
+  },
+  "read_scope": [
+    "All 125 candidate lines, the exact 121-line c5 base and complete diff. Full actual plateau-direction, weighted plateau-energy, circle-energy and selected endpoint angular/circle providers; full preceding 185+169 scalar estimates."
+  ],
+  "checks": [
+    "The complete qualitative public header and actual endpointFlowScalarJets function remain byte-identical to c5. The generic private circleMember_of_local_height_envelope proof is also byte-identical; this is a compatibility change in its actual quantitative input.",
+    "For the fixed scalar order n, the real arity n+2 Euler-height estimate supplies parameterLoss before all s. The generic lemma receives loss+parameterLoss; explicit Nat.add_assoc reconciles s+(loss+parameterLoss) with the provider high grade (s+loss)+parameterLoss.",
+    "Actual physical plateau directions of the same lifted height have the necessary local field equality modulo a constant and genuine component energy. Monotonicity moves both base and high height grades to max(base,s+(loss+parameterLoss)).",
+    "The infinite weighted component-energy sum uses the true physicalPlateauEnergy_weighted_tsum_lt_top at that same order with material weight degree s+1. The proof does not replace summability by a pointwise bound; the ENNReal multiplication and real square-root reduction are the original genuine energy argument.",
+    "M>=1 comes from actual IsMaterialData at the original sample; c+1<=s+1 follows from b+c<=s. The ordinary smooth/periodic circle fields are the existing selected endpoint fields, not new chosen representatives.",
+    "All source/base/diff identities, exact complete public header, private bytes and recorded diff were independently checked. All 279 selected modules and import edges were recomputed at their exact mixed pins/local candidates, including six local supersessions; no missing import, cycle or obsolete uniform-loss module appears."
+  ],
+  "scope_limits": [
+    "This proves only qualitative CircleMember for each genuine positive pure scalar order, using order-dependent quantitative losses.",
+    "No compiled mixed-pin construction, all-order uniform loss, all-N02/N03 conclusion or new CI result is asserted.",
+    "No candidate/source/active/index/ref/CI/CP/authority mutation."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "created_at": "2026-11-12T14:58:25.856532+00:00"
+}
