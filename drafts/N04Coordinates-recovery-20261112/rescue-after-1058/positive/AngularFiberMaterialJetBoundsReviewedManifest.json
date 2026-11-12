@@ -1,0 +1,28 @@
+{
+  "kind": "reviewed_actual_angular_pullback_material_bounds",
+  "status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/angular-material-positive-coefficient/AngularFiberMaterialJetBounds.lean",
+    "sha256": "a36e69a058a8763a6be6a79aee40c460a943e7b3c28fe7ae78a98349f6232a3e",
+    "blob": "7f144f0f140ffae830fac923078ace53320a16d5",
+    "lines": 222
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/AngularFiberMaterialJetBounds.lean",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/angular-material-positive-coefficient/AngularFiberMaterialJetBoundsCoefficientCandidateManifest.json",
+    "sha256": "e79e55c0f02650ea638b1fac16f2bcec73a68d0bbccd83a5dae7a895626c3452"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/AngularFiberMaterialJetBoundsIndependentReview.json",
+    "sha256": "e12b88f16eccc9bb818c2caa40ef1077c68b56a510a0938f6cc4b040a6003683"
+  },
+  "supersedes_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/AngularFiberMaterialJetBounds.lean",
+    "sha256": "4eae055e33a2bd0c8d0dcb309c5e7a91b19cbd00e3d96255672ed7e5184892eb",
+    "blob": "aec8614239c6f051a49e86743826a461bd83006b",
+    "lines": 220
+  },
+  "compiled": false,
+  "green_receipt_applies": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

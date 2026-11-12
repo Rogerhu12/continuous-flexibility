@@ -1,0 +1,32 @@
+{
+  "kind": "reviewed_fixed_width_actual_radial_material_jet_assembly",
+  "status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberPullbackMaterialJets.lean",
+    "sha256": "a49fe5226bafabbeb494adf0fafa5ef2efabfdb226f08620004c7c8f9ecec405",
+    "blob": "04250c019b3bb5a3e4b702371621e78d87362cef",
+    "lines": 152
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/EndpointFiberPullbackMaterialJets.lean",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberPullbackMaterialJetsCandidateManifest.json",
+    "sha256": "1f0d7822ef980263c26d23c6bfcdbc1b0d38375a73aabbfdad4ca3c22681877b"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/EndpointFiberPullbackMaterialJetsIndependentReview.json",
+    "sha256": "065d5d5b64c9c9a0b24f2e8dfaf048dc0df2d3e861c288a0315235c746238846"
+  },
+  "reviewed_provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/angular-material-positive-coefficient/AngularFiberMaterialJetBoundsReviewedManifest.json",
+      "sha256": "301d4c6a5c5321a1bdace288c289ee00df90719873851d492852b7e4727c12ad"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberLinearJetEnvelopeReviewedManifest.json",
+      "sha256": "c701306c3a96ab64e4f542ee4a35e00621c4f31f552f1c2ea4345649771ff8b4"
+    }
+  ],
+  "compiled": false,
+  "green_receipt_applies": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

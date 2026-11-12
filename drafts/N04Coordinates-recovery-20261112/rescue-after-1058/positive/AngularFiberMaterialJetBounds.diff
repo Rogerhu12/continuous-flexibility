@@ -1,0 +1,13 @@
+--- reviewed-candidate/AngularFiberMaterialJetBounds.lean
++++ compatibility/AngularFiberMaterialJetBounds.lean
+@@ -188,7 +188,9 @@
+         mul_le_mul_of_nonneg_right
+           (mul_le_mul hcoeff
+             (Real.rpow_le_rpow_of_exponent_le hW (by linarith only [hK0]))
+-            (Real.rpow_nonneg hW0.le _) (by positivity)) (zero_le_one.trans hH)
++            (Real.rpow_nonneg hW0.le _)
++            (mul_nonneg (mul_nonneg (by norm_num) hK0)
++              (zero_le_one.trans (hA (j + 1))))) (zero_le_one.trans hH)
+       _ ≤ _ := hpack j hW (zero_le_one.trans hH)
+   have hginv := hIBound z hzI W hW PolarPoint PolarPoint f g x
+     hf.contDiffAt hg.contDiffAt (Filter.Eventually.of_forall fun q => congrFun hfg q)

@@ -1,0 +1,108 @@
+{
+  "kind": "proof_inventory_post_snapshot10_api_rescue",
+  "status": "server_objects_saved_without_ref_mutation",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "owner": "/root/proof_inventory",
+  "predecessor_snapshot10_frozen_at": "2026-11-12 10:52:01 UTC",
+  "source_only_server_tree": "90a1a41493c0c366c376ed7e7286238a7424a64c",
+  "recovery_method": "Retained functions store source text and faithful reconstruction of serialized JSON; every historically hashed file was matched to its previously recorded SHA256 before upload. GitHub returned the two reviewed source blobs exactly.",
+  "files": [
+    {
+      "tree_path": "AngularFiberMaterialJetBounds.lean",
+      "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/angular-material-positive-coefficient/AngularFiberMaterialJetBounds.lean",
+      "sha256": "a36e69a058a8763a6be6a79aee40c460a943e7b3c28fe7ae78a98349f6232a3e",
+      "git_blob": "7f144f0f140ffae830fac923078ace53320a16d5",
+      "utf8_bytes": 11139,
+      "lines": 222,
+      "status": "exact reviewed source; uncompiled"
+    },
+    {
+      "tree_path": "EndpointFiberPullbackMaterialJets.lean",
+      "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberPullbackMaterialJets.lean",
+      "sha256": "a49fe5226bafabbeb494adf0fafa5ef2efabfdb226f08620004c7c8f9ecec405",
+      "git_blob": "04250c019b3bb5a3e4b702371621e78d87362cef",
+      "utf8_bytes": 8018,
+      "lines": 152,
+      "status": "exact reviewed source; uncompiled"
+    },
+    {
+      "tree_path": "OneSidedTaylorHighJets.lean",
+      "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/OneSidedTaylorHighJets.lean",
+      "sha256": "3e13548a93be384f001e42957aa6561ff107af926f3b00a964b0dc37d29cbb09",
+      "git_blob": "de128adb0242ad1f9fb9ef151297df108fb70b38",
+      "utf8_bytes": 5174,
+      "lines": 114,
+      "status": "unreviewed latest intended draft; final local write was not confirmed"
+    },
+    {
+      "tree_path": "OneSidedTaylorHighJets.pre-unconfirmed-edit.lean.txt",
+      "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/OneSidedTaylorHighJets.lean",
+      "sha256": "a4ce1386d0e727160e5bc4f2629708daaa8574d4610fe960fd180e072a6fd1b0",
+      "git_blob": "8bc0efdea8da60067ec1f1619f1dd8538371474f",
+      "utf8_bytes": 5079,
+      "lines": 111,
+      "status": "unreviewed prior confirmed apply_patch text; preserved separately"
+    },
+    {
+      "tree_path": "AngularFiberMaterialJetBoundsCoefficientCandidateManifest.json",
+      "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/angular-material-positive-coefficient/AngularFiberMaterialJetBoundsCoefficientCandidateManifest.json",
+      "sha256": "e79e55c0f02650ea638b1fac16f2bcec73a68d0bbccd83a5dae7a895626c3452",
+      "utf8_bytes": 1683,
+      "status": "exact original bytes recovered; independently recorded prior SHA256 matched"
+    },
+    {
+      "tree_path": "AngularFiberMaterialJetBoundsReviewedManifest.json",
+      "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/angular-material-positive-coefficient/AngularFiberMaterialJetBoundsReviewedManifest.json",
+      "sha256": "301d4c6a5c5321a1bdace288c289ee00df90719873851d492852b7e4727c12ad",
+      "utf8_bytes": 1499,
+      "status": "exact original bytes recovered; independently recorded prior SHA256 matched"
+    },
+    {
+      "tree_path": "AngularFiberMaterialJetBounds.diff",
+      "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/angular-material-positive-coefficient/AngularFiberMaterialJetBounds.diff",
+      "sha256": "a3104d71c2d2a255756c761154c4ccb89fcb71e76426ea943d1873227a97f8c2",
+      "utf8_bytes": 727,
+      "status": "exact original bytes recovered; independently recorded prior SHA256 matched"
+    },
+    {
+      "tree_path": "EndpointFiberPullbackMaterialJetsCandidateManifest.json",
+      "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberPullbackMaterialJetsCandidateManifest.json",
+      "sha256": "1f0d7822ef980263c26d23c6bfcdbc1b0d38375a73aabbfdad4ca3c22681877b",
+      "utf8_bytes": 4538,
+      "status": "exact original bytes recovered; independently recorded prior SHA256 matched"
+    },
+    {
+      "tree_path": "EndpointFiberPullbackMaterialJetsReviewedManifest.json",
+      "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberPullbackMaterialJetsReviewedManifest.json",
+      "sha256": "02a0d98e5f08937a8b1808dfe2ab16ccf4a37d646058628a0ba9254b508e5b70",
+      "utf8_bytes": 1664,
+      "status": "exact original bytes recovered; independently recorded prior SHA256 matched"
+    },
+    {
+      "tree_path": "CanonicalActualWholeGeometryIndependentReview.json",
+      "original_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CanonicalActualWholeGeometryIndependentReview.json",
+      "sha256": "cd9afbd2f1d1c3c3a40f826978a7ef367ee98d5759516f5a0113327e364460c9",
+      "utf8_bytes": 5710,
+      "status": "exact original bytes recovered; independently recorded prior SHA256 matched"
+    }
+  ],
+  "external_reviews_not_embedded": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/AngularFiberMaterialJetBoundsIndependentReview.json",
+      "sha256": "e12b88f16eccc9bb818c2caa40ef1077c68b56a510a0938f6cc4b040a6003683"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/EndpointFiberPullbackMaterialJetsIndependentReview.json",
+      "sha256": "065d5d5b64c9c9a0b24f2e8dfaf048dc0df2d3e861c288a0315235c746238846"
+    }
+  ],
+  "draft_limitations": [
+    "OneSidedTaylorHighJets.lean is an unreviewed new draft. Its last local write was not confirmed after the environment failure; the latest intended text and the prior confirmed patch are both preserved.",
+    "No source in this rescue is claimed compiled or covered by a green receipt.",
+    "The recovered reviewed manifests retain original absolute paths and original immutable references without rewriting their contents."
+  ],
+  "exec_retries": false,
+  "checkout_index_checkpoint_authority_plan_CI_modified": false,
+  "git_branch_or_ref_modified": false,
+  "root_will_attach_tree_to_recovery_backup": true
+}

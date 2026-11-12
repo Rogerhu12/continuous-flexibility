@@ -1,0 +1,46 @@
+{
+  "kind": "independent_full_source_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "passed static full-source and actual-provider review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialPointRadialPolynomial.lean",
+    "sha256": "8a1d72f57708d275956e28d42473591327f46078e409b85481e87e70372acef2",
+    "git_blob": "3832a300bde8548bfee21149583af3b08d843420",
+    "lines": 50
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialPointRadialPolynomialCandidateManifest.json",
+    "sha256": "f8a2692e64f13fb4b108e209c4b3de6109360a05854831ccd9e56c45bb99a43e"
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialCellEndpointModels.lean",
+      "sha256": "fbcef0e54e80091110431dae6b4a96ff49575acfbbc114dad1a9d08d8c499a3c",
+      "git_blob": "c91660140fe19221f98b95b599d2db5685e3bf68",
+      "lines": 147
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleRadialPolynomial.lean",
+      "sha256": "3e73e356a44a95ebefb4207a9aa54f418aa9d705e3c12fb4d24232363ba11582",
+      "git_blob": "06106cdba67bb37b503837a23da3911b670a77ce",
+      "lines": 76
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleShift.lean",
+      "sha256": "58b0285c60e26605a013ba3d580d17e37aef1fa450622b13c458227cb3aa8f74",
+      "git_blob": "e79e27788e1c853bed9950e91d7d121995ab1508",
+      "lines": 175
+    }
+  ],
+  "checks": [
+    "The complete50-line proof uses the all-point material cell model, without replacing the actual physical point by its sample.",
+    "The lower half of abs(x-cellIndex)<=L gives cellIndex<=x+L with the correct direction for the one-sided shift theorem. Constants are selected before j and r.",
+    "The exact IsAccumulatingProfile projection is the same cell-subset-core projection already used by compiled MaterialCellEndpointModels. It supplies the actual E0 positivity from IsMaterialData.",
+    "The reverse model inequality materialE0(x)<=KE*E0(r), P>=0, and Real.mul_rpow give coefficient K*KE^P. No E0>=1 or reverse index comparison is assumed.",
+    "The radialE-to-materialE0 bridge and existing one-sided shift use nonnegative index and x exactly as required; final ring reassociation preserves the exponent."
+  ],
+  "findings": [],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

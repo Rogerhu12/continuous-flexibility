@@ -1,0 +1,48 @@
+{
+  "kind": "quantitative_post_snapshot10_flat_rescue",
+  "owner": "/root/quantitative_route",
+  "source_environment": "unavailable_at_creation",
+  "recovery_method": "Exact receipt reconstructed from the complete prior read and checked against its pre-existing SHA256; new drafts written in functions store and saved as new Git objects.",
+  "authorization": "Root requested an empty-base flat Git tree only; no branch/ref update.",
+  "entries": [
+    {
+      "flat_path": "AngularFiberMaterialJetBoundsIndependentReview.json",
+      "restore_path": "n04-drafts/quantitative/recovery/reviews/AngularFiberMaterialJetBoundsIndependentReview.json",
+      "status": "EXACT_RECOVERED_REVIEW_RECEIPT",
+      "expected_sha256": "e12b88f16eccc9bb818c2caa40ef1077c68b56a510a0938f6cc4b040a6003683",
+      "sha256": "e12b88f16eccc9bb818c2caa40ef1077c68b56a510a0938f6cc4b040a6003683",
+      "lines": 102
+    },
+    {
+      "flat_path": "RootStationaryFlowJetPolynomial.lean",
+      "restore_path": "n04-drafts/quantitative/primitive-route/reconstructed/RootStationaryFlowJetPolynomial.lean",
+      "status": "NEW_DRAFT_UNREVIEWED_UNCOMPILED",
+      "sha256": "a2498a4d8e4c48a741e28c460060185df1a82ed00248d6dcfcfb5f318d879dd1",
+      "lines": 223
+    },
+    {
+      "flat_path": "RootFlowParameterUnscale.lean",
+      "restore_path": "n04-drafts/quantitative/primitive-route/reconstructed/RootFlowParameterUnscale.lean",
+      "status": "NEW_DRAFT_UNREVIEWED_UNCOMPILED",
+      "sha256": "82dc658872bd77c11d77ff9a4d3554ebcd11968c186ea22bb3dd88d8de790a34",
+      "lines": 81
+    },
+    {
+      "flat_path": "RootOnlyQuantitativeCostResearch.json",
+      "restore_path": "n04-drafts/quantitative/primitive-route/reconstructed/RootOnlyQuantitativeCostResearch.json",
+      "status": "READ_ONLY_RESEARCH_CHECKPOINT",
+      "sha256": "2115dc48b342687dfd504a3ce3dd7e521ecd2b402bedbd6ec180cacef74d8117",
+      "lines": 129
+    }
+  ],
+  "review_source_identity": {
+    "blob": "7f144f0f140ffae830fac923078ace53320a16d5",
+    "sha256": "a36e69a058a8763a6be6a79aee40c460a943e7b3c28fe7ae78a98349f6232a3e",
+    "candidate_manifest_sha256": "e79e55c0f02650ea638b1fac16f2bcec73a68d0bbccd83a5dae7a895626c3452"
+  },
+  "no_passed_170_review_created": true,
+  "previous_original_files_overwritten": false,
+  "no_local_filesystem_write_in_outage": true,
+  "compiled": false,
+  "branch_or_ref_modified": false
+}
