@@ -572,7 +572,8 @@ private theorem transportVelocity_actualGrowth
       hN hS hT hflow l h hl hh χ hχrange J₁ nmax)
     hcutoff hAr hZr
     (fun m x _ => by
-      simpa only [fA, fZ, f₀, f₁, Fin.cases_succ, Fin.cases_zero] using
+      simpa only [fA, fZ, f₀, f₁, ← Fin.succ_zero_eq_one,
+        Fin.cases_succ, Fin.cases_zero] using
         (returnCorrectionVelocityLinear_eq_transportProduct D S C χ
           (liftSectorParameter S C x.1.1) m x.2 x.1.2).symm)
     (fun m x _ => by
