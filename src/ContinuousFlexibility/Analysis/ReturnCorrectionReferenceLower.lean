@@ -52,10 +52,10 @@ theorem N01Properties.n04Coordinates_returnCorrected_reference_lower
     ∃ base' : ℕ, ∃ ε' : ℝ, base ≤ base' ∧ 0 < ε' ∧ ε' ≤ ε / 2 ∧
       N01Properties D T S C base' loss ε' ∧
       N04ReturnReferenceDiscriminantBound D S C χ base' ε' := by
-  obtain ⟨V, K, hV, hK, herror⟩ :=
+  obtain ⟨lossV, V, K, hV, hK, herror⟩ :=
     hN.returnCorrectedMinusSpeed_error_radial_small hS hT χ j hJ hA hP hcell hcutoff
   obtain ⟨U, hU, hupper⟩ := hN.originalRadialCoefficient_uniform_upper
-  let base' := max base (1 + loss)
+  let base' := max base (1 + loss + lossV)
   let ε' := min (ε / 2) (min (1 / 2) (min K⁻¹ (lam / (4 * U * V))))
   have hε' : 0 < ε' := lt_min (half_pos hN.2.1)
     (lt_min (by norm_num) (lt_min (inv_pos.mpr hK) (div_pos hlam (by positivity))))
@@ -73,7 +73,7 @@ theorem N01Properties.n04Coordinates_returnCorrected_reference_lower
     field_simp [hU.ne', hV.ne']
     <;> ring
   have hb : base ≤ base' := le_max_left _ _
-  have hh : 1 + loss ≤ base' := le_max_right _ _
+  have hh : 1 + loss + lossV ≤ base' := le_max_right _ _
   refine ⟨base', ε', hb, hε', hεhalf,
     hN.restrict_neighborhood hT hb hε' hεold, ?_⟩
   intro z hz hs m p hp
