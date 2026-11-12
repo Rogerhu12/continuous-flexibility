@@ -52,11 +52,12 @@ theorem n05_referenceHighAngularJet_output_norm {D : ReferenceData}
           n05_referenceHighOutputSquare D γ M U n := by
   have hab : D.a ≤ D.b := hD.choose_spec.1.2.1.le
   have hpart : RadialPartition D := hD.choose_spec.2.1
+  have hzero (v : PolarPoint → ℝ) : outputRemainder D 0 (v, 0) = v := by
+    funext p
+    change v p - 0 * D.chiLeft p.1 = v p
+    rw [zero_mul, sub_zero]
   have hcell := r11b_cellIntegrable_of_global_memLp hpart
     (r11b_output_memLp hD hborder hγ ⟨a, hU⟩)
-  have hzero (f : PolarPoint → ℝ) : outputRemainder D 0 (f, 0) = f := by
-    funext p
-    simp only [outputRemainder, zero_mul, sub_zero]
   have hs (n : ℕ) (_hn : n ∈ J) :
       Summable (outputCellSquare D γ M (referenceBasisProjection {n + 2} U.1)) := by
     have hI : ∀ k ∈ ({n + 2} : Finset ℕ), 2 ≤ k := by

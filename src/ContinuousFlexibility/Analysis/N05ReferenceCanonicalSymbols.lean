@@ -1,6 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05ReferenceCoefficients
 import ContinuousFlexibility.Analysis.N05ReferenceQuadraticTests
+import ContinuousFlexibility.Analysis.N05ReferenceInterface
 
 /-!
 # The frozen negative canonical identity determines the reference symbol
@@ -53,10 +53,9 @@ theorem n05_negative_conjugation_from_N04
           (fun y => K.height z m y * W (K.chart z m y)) x =
       divergenceOperator n05TricomiCoefficients W (K.chart z m x) +
         K.potential z m (K.chart z m x) * W (K.chart z m x) := by
-  have hcharts := h04.1.charts
+  have hchart := h04.1.charts z hz hs m
   have hop := h04.2.1.2.2.1
   have hcoeff := h04.2.1.2.2.2.1
-  have hchart := hcharts z hz hs m
   have hy := hchart.1 hx
   have hinv := hchart.2.2.1 x hx
   have hnear : ∀ᶠ q in 𝓝 (K.chart z m x), q ∈ canonicalOpen S K m :=
@@ -93,7 +92,6 @@ theorem n05_negative_reference_determinant_nonreflection
   have h04 := h.2.2.2.2.1
   have hpieces := h04.1.referenceBounds
   have hnegative := h04.1.referenceNegative
-  have hclosed := n05_reference_closed_properties h04
   have hxD : x ∈ annularOpen D := ⟨(hpieces m).2.2 hx.1, mem_univ _⟩
   have hd : deriv D.w x.1 ≠ 0 := (hnegative m hm x.1 hx.1).ne
   have h01 := h.1.1.1
@@ -101,7 +99,7 @@ theorem n05_negative_reference_determinant_nonreflection
     n05_referenceState_mem h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
   obtain ⟨hΨ, hh, hJ, _⟩ :=
-    hclosed hmem hsector m x ⟨hx.1.1.le, hx.1.2.le⟩
+    n05_reference_boundary_regular h04.1 hmem hsector m (p := x) ⟨hx.1.1.le, hx.1.2.le⟩
   obtain ⟨ha, hb, hc⟩ :=
     n05_reference_coefficients_contDiffAt hT hS h.1 hxD hd hθ
   have hdet := n05_negative_height_determinant ha hb hc hh hΨ hJ
@@ -136,7 +134,6 @@ theorem n05_negative_reference_symbol_nonreflection
   have h04 := h.2.2.2.2.1
   have hpieces := h04.1.referenceBounds
   have hnegative := h04.1.referenceNegative
-  have hclosed := n05_reference_closed_properties h04
   have hxD : x ∈ annularOpen D := ⟨(hpieces m).2.2 hx.1, mem_univ _⟩
   have hd : deriv D.w x.1 ≠ 0 := (hnegative m hm x.1 hx.1).ne
   have h01 := h.1.1.1
@@ -144,7 +141,7 @@ theorem n05_negative_reference_symbol_nonreflection
     n05_referenceState_mem h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
   obtain ⟨hΨ, hh, hJ, _⟩ :=
-    hclosed hmem hsector m x ⟨hx.1.1.le, hx.1.2.le⟩
+    n05_reference_boundary_regular h04.1 hmem hsector m (p := x) ⟨hx.1.1.le, hx.1.2.le⟩
   obtain ⟨ha, hb, hc⟩ := n05_reference_coefficients_contDiffAt hT hS h.1 hxD hd hθ
   have hAa : ContDiffAt ℝ ∞ n05TricomiCoefficients.a (K.chart (C.referenceState, 0) m x) :=
     contDiffAt_const
@@ -163,3 +160,4 @@ theorem n05_negative_reference_symbol_nonreflection
     hLa, hcoeff.2.2.1, hcoeff.2.2.2, zero_mul, mul_zero, add_zero, mul_one] using hprincipal
 
 end ContinuousFlexibility.Statements
+

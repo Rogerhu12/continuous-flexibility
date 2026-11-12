@@ -131,7 +131,9 @@ theorem n05_referenceLowAngularJet_output_bound {D : ReferenceData}
     have hzero : outputRemainder D 0 (n05_referenceLowAngularJet b U.1, 0) =
         n05_referenceLowAngularJet b U.1 := by
       funext p
-      simp only [outputRemainder, zero_mul, sub_zero]
+      change n05_referenceLowAngularJet b U.1 p - 0 * D.chiLeft p.1 =
+        n05_referenceLowAngularJet b U.1 p
+      rw [zero_mul, sub_zero]
     simp only [outputNormSquare, hzero,
       zero_pow (by decide : (2 : ℕ) ≠ 0), zero_add, outputCellSquare]
     rw [← tsum_mul_left]

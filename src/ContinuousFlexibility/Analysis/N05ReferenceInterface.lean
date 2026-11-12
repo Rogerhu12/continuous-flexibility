@@ -1,4 +1,3 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
@@ -15,15 +14,44 @@ noncomputable section
 namespace ContinuousFlexibility.Statements
 
 open Set MeasureTheory
+open scoped ContDiff
+
+/-- Only the reference physical domain is the fixed radial strip. Its closed
+domain is recovered from the explicit reference-domain clause. -/
+theorem n05_referencePhysicalPieceClosed_eq
+    {D : ReferenceData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {K : CanonicalData S}
+    {base : ℕ} {ε : ℝ}
+    (hA : CanonicalGeometry D S C K base ε) (m : ℕ) :
+    physicalPieceClosed S K (C.referenceState, 0) m =
+      Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ (univ : Set ℝ) := by
+  rw [physicalPieceClosed, hA.referenceDomain m, referencePhysicalPieceOpen,
+    closure_prod_eq, closure_Ioo (hA.referenceBounds m).1.ne, closure_univ]
+
+/-- Closed-strip regularity at the reference is a consequence of the actual
+closed-domain clause, not an assertion about a current radial boundary. -/
+theorem n05_reference_boundary_regular
+    {D : ReferenceData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {K : CanonicalData S}
+    {base : ℕ} {ε : ℝ}
+    (hA : CanonicalGeometry D S C K base ε)
+    (hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S C.referenceState) (m : ℕ)
+    {p : PolarPoint} (hp : p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
+    ContDiffAt ℝ ∞ (K.chart (C.referenceState, 0) m) p ∧
+      ContDiffAt ℝ ∞ (K.height (C.referenceState, 0) m) p ∧
+      planeJacobian (K.chart (C.referenceState, 0) m) p ≠ 0 ∧
+      0 < K.height (C.referenceState, 0) m p := by
+  apply (hA.boundary (C.referenceState, 0) hz hs m).2.2.2.2.1 p
+  rw [n05_referencePhysicalPieceClosed_eq hA m]
+  exact ⟨hp, mem_univ _⟩
 
 /-- Quantitative reference coordinates sufficient for transporting the radial
 inverse. The chosen construction must retain all of `Through04`. In particular,
 this is an existence obligation, not an additional hypothesis of `N05`.
 
-The association controls the difference of cubic endpoint exponents by a
-coefficient exponent; no uniformly bounded difference of indices is required.
-The number of pieces over an index may grow by a coefficient power, which
-is absorbed by the fixed material loss. -/
+The number of pieces over an index may grow by a coefficient power. This is
+weaker than bounded multiplicity and is absorbed by the fixed material loss. -/
 def N05ControlledReferenceCoordinates (D : ReferenceData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (K : CanonicalData S) : Prop :=
   (∀ m p, p ∈ referencePhysicalPieceOpen S K m →
@@ -33,8 +61,7 @@ def N05ControlledReferenceCoordinates (D : ReferenceData) (S : PhysicalSpacesDat
   ∃ B : ℝ, 0 < B ∧
     (∀ m r, r ∈ Ioo (K.physicalLeft m) (K.physicalRight m) →
       ∃ j, r ∈ D.cells j ∧
-        |radialS (D.cellIndex j) - radialS (D.cellIndex (K.cell m))| ≤
-          B * (radialQ (D.cellIndex (K.cell m)) + 1)) ∧
+        |(D.cellIndex j : ℝ) - (D.cellIndex (K.cell m) : ℝ)| ≤ B) ∧
     (∀ n : ℕ, {m | D.cellIndex (K.cell m) = n}.Finite ∧
       ({m | D.cellIndex (K.cell m) = n}.ncard : ℝ) ≤ B * radialE n ^ B) ∧
     (∀ m r, r ∈ Ioo (K.physicalLeft m) (K.physicalRight m) →

@@ -70,7 +70,6 @@ theorem n05_referenceLowAngularJet_periodic
     simpa only [Prod.mk_add_mk, add_zero] using
       referenceBasisProjection_periodic {0, 1} f (p.1, θ)
   simpa only [n05_referenceLowAngularJet, mixedDerivative, iteratedDeriv_zero,
-    Prod.fst_add, Prod.snd_add, add_zero] using
-    n05_periodic_iteratedDeriv hp b p.2
+    Prod.fst_add, Prod.snd_add, add_zero] using n05_periodic_iteratedDeriv hp b p.2
 
 end ContinuousFlexibility.Radial

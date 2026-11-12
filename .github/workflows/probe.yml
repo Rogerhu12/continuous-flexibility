@@ -1,0 +1,76 @@
+name: Probe
+
+# Try several variants of one Lean file in parallel, one job per variant, on the
+# branch that owns the file (so its build cache is readable). Each variant is a
+# directory `probes/<name>/` on the probe branch whose contents are copied over the
+# checkout, e.g. `probes/v1/src/ContinuousFlexibility/Analysis/Foo.lean`.
+#   gh workflow run probe.yml --ref line/X -f probes=probe/X -f variants='["v1","v2"]' \
+#     -f file=src/ContinuousFlexibility/Analysis/Foo.lean
+on:
+  workflow_dispatch:
+    inputs:
+      probes:
+        description: Branch that holds probes/<variant>/ directories
+        required: true
+      variants:
+        description: JSON list of variant names
+        required: true
+      file:
+        description: Lean file to check with `lake env lean`
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: ${{ fromJSON(inputs.variants) }}
+    env:
+      LEAN_NUM_THREADS: "4"
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Set up the pinned Lean and Mathlib environment
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          auto-config: "false"
+          build: "false"
+          test: "false"
+          lint: "false"
+          use-mathlib-cache: "true"
+          use-github-cache: "false"
+      - name: Restore main's build
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-main~${{ github.sha }}
+          restore-keys: |
+            lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-main~
+      - name: Restore this branch's build
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~${{ github.sha }}
+          restore-keys: |
+            lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~
+      - name: Apply variant ${{ matrix.variant }}
+        shell: bash
+        run: |
+          git fetch -q --depth=1 "https://github.com/${GITHUB_REPOSITORY}.git" "${{ inputs.probes }}"
+          git checkout FETCH_HEAD -- "probes/${{ matrix.variant }}"
+          cp -r "probes/${{ matrix.variant }}/." .
+          git status --short | head -20
+      - name: Check ${{ inputs.file }}
+        shell: bash
+        run: |
+          start=$(date +%s)
+          timeout 900 lake env lean "${{ inputs.file }}" 2>&1 | tee probe.log | grep -E '^[^ ]*error' -A25 | head -200
+          status=${PIPESTATUS[0]}
+          echo "variant ${{ matrix.variant }}: exit $status after $(( $(date +%s) - start )) s"
+          exit "$status"
