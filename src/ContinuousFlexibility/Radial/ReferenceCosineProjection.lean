@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.ReferenceGraphNorms
+import ContinuousFlexibility.Radial.ReferenceWeightedRadialBase
 import Mathlib.Analysis.InnerProductSpace.Orthonormal
 
 /-!
@@ -20,15 +21,12 @@ open ContinuousFlexibility.Statements
 noncomputable section
 
 /-- Normalized angular measure on the same full period as the frozen norms. -/
-def referenceAngularProbability : Measure ℝ :=
-  ENNReal.ofReal ((2 * Real.pi)⁻¹) •
-    volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))
+abbrev referenceAngularProbability : Measure ℝ :=
+  ContinuousFlexibility.Statements.referenceAngularMeasure
 
 theorem integral_referenceAngularProbability (f : ℝ → ℝ) :
-    (∫ θ, f θ ∂referenceAngularProbability) = radialAngularMean f := by
-  unfold referenceAngularProbability radialAngularMean
-  rw [integral_smul_measure, ENNReal.toReal_ofReal (by positivity), smul_eq_mul,
-    intervalIntegral.integral_of_le (by positivity)]
+    (∫ θ, f θ ∂referenceAngularProbability) = radialAngularMean f :=
+  ContinuousFlexibility.Statements.integral_referenceAngularMeasure f
 
 theorem memLp_referenceAngular_interval_of_continuous {f : ℝ → ℝ} (hf : Continuous f) :
     MemLp f 2 (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))) := by

@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Radial.SeedPositiveBridge
 import ContinuousFlexibility.Radial.SeedConnectorReconstruction
+import ContinuousFlexibility.Radial.SeedLogSlopeLower
 
 /-! # A positive bridge between the two pure cone modes -/
 
@@ -35,7 +36,9 @@ structure SeedBridgePair where
   right_eq : ∀ r, right < r →
     profile r = rightScale * r ∧ height r = rightHeight * r ^ (2 : ℝ)
 
-theorem exists_seedBridgePair : Nonempty SeedBridgePair := by
+theorem exists_seedBridgePair_logSlope :
+    ∃ B : SeedBridgePair, ∀ r, 0 < r →
+      (3 / 4 : ℝ) * B.profile r ≤ r * deriv B.profile r := by
   obtain ⟨K⟩ := exists_positiveSeedBridge
   let W := connectorProfile K.slope 0 0
   let U := connectorHeight K.slope 0 0
@@ -50,7 +53,7 @@ theorem exists_seedBridgePair : Nonempty SeedBridgePair := by
     fun r hr => connectorProfile_pos _ _ _ hr,
     fun r hr => K.positive_bridge_profile_deriv 0 0 hr,
     fun r hr => radialJacobi_connector K.smooth K.below_four 0 0 0 hr,
-    cL, cR, aL, aR, exp_pos _, exp_pos _, exp_pos _, exp_pos _, ?_, ?_⟩⟩
+    cL, cR, aL, aR, exp_pos _, exp_pos _, exp_pos _, exp_pos _, ?_, ?_⟩, ?_⟩
   · intro r hr hrl
     have hlog : log r < K.left - 1 := by
       simpa only [log_exp] using log_lt_log hr hrl
@@ -78,5 +81,12 @@ theorem exists_seedBridgePair : Nonempty SeedBridgePair := by
     · exact connectorHeight_eq_power_of_const K.smooth isOpen_Ioi
         (convex_Ioi (K.right + 1)).isPreconnected (fun y hy => K.right_cone y hy.le)
         0 0 (show K.right + 1 < K.right + 2 by linarith) hr hlog
+  · intro r hr
+    exact connectorProfile_logSlope_lower K.smooth K.below_four 0 0 hr
+      (K.positive_bridge (log r))
+
+theorem exists_seedBridgePair : Nonempty SeedBridgePair := by
+  obtain ⟨B, _⟩ := exists_seedBridgePair_logSlope
+  exact ⟨B⟩
 
 end ContinuousFlexibility.Radial
