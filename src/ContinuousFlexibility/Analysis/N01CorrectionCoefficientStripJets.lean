@@ -28,6 +28,15 @@ local instance n01CorrectionCoefficientStripJetsParameterSMul (S : PhysicalSpace
 open Set Filter ContinuousFlexibility.Analysis
 open scoped ContDiff Topology
 
+private theorem correctionCoefficient_pureParameter_cons
+    {E : Type*} {n : ℕ} (w : E) (v : Fin n → E) :
+    (fun i : Fin (n + 1) =>
+      ((Fin.cons (α := fun _ : Fin (n + 1) => E) w v) i, (0 : PolarPoint))) =
+      Fin.cons (α := fun _ : Fin (n + 1) => E × PolarPoint)
+        (w, (0 : PolarPoint)) (fun i : Fin n => (v i, (0 : PolarPoint))) := by
+  funext i
+  cases i using Fin.cases <;> simp only [Fin.cons_zero, Fin.cons_succ]
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {base loss : ℕ} {ε : ℝ}
@@ -141,10 +150,8 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_component_mixed_hasD
           w v) i, (0 : PolarPoint))) =
       Fin.cons (α := fun _ : Fin (n + 1) =>
         ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint)
-        (w, (0 : PolarPoint)) (fun i : Fin n => (v i, (0 : PolarPoint))) := by
-    simpa only [Function.comp_def] using
-      (Fin.comp_cons (fun z : (StateDirections S × ℝ) × CircleSpace S =>
-        (z, (0 : PolarPoint))) w v)
+        (w, (0 : PolarPoint)) (fun i : Fin n => (v i, (0 : PolarPoint))) :=
+    correctionCoefficient_pureParameter_cons w v
   have hd := J.jointJet_mixed_hasDerivAt_line hU hV hc a b n x w ht
     (fun i => (v i, 0)) hp
   have hvalue := heq (n + 1) (x + t • w) ht (Fin.cons w v)
