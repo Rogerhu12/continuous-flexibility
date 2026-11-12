@@ -87,6 +87,76 @@ private theorem convex_seminorm_strict_sublevel
   have hy' : y ∈ p.ball 0 R := by simpa only [Set.mem_ofPred_eq, Seminorm.mem_ball_zero] using hy
   simpa only [Set.mem_ofPred_eq, Seminorm.mem_ball_zero] using p.convex_ball 0 R hx' hy' ha hb hab
 
+/-- A complete per-order box certificate gives a neighbourhood at each
+parameter order and point, before choosing the output-order seminorm. -/
+private theorem circleTower_localBounds_of_boxBounds
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {T : MaterialData} {γ : ℝ} {U : Set E} {base : ℕ}
+    (p : ℕ → Seminorm ℝ E) (hp : ∀ j, Continuous (p j))
+    (hU : IsOpen U) (hcU : Convex ℝ U)
+    (A : ∀ n : ℕ, E → MultilinearMap ℝ (fun _ : Fin n => E) (ℕ → ℝ → ℝ))
+    (hbox : ∀ n : ℕ, ∃ B : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R → ∀ s : ℕ,
+      ∃ j : ℕ, ∃ K : ℝ, 0 ≤ K ∧ ∀ y ∈ U, p B y ≤ R →
+        ∀ v : Fin (n + 1) → E,
+          circleNorm T γ s (A (n + 1) y v) ≤
+            K * (1 + p j y) * ∏ i, p j (v i)) :
+    CircleLocalPositiveJetNormBounds (T := T) (γ := γ) (U := U) A := by
+  intro n x hx
+  obtain ⟨B, _hB, hbound⟩ := hbox n
+  let V : Set E := U ∩ {y | p B y < p B x + 1}
+  have hVo : IsOpen V := hU.inter (isOpen_lt (hp B) continuous_const)
+  have hVc : Convex ℝ V := hcU.inter
+    (convex_seminorm_strict_sublevel (p B) (p B x + 1))
+  have hxV : x ∈ V := ⟨hx,
+    Set.mem_ofPred.mpr (lt_add_of_pos_right (p B x) zero_lt_one)⟩
+  refine ⟨V, hVo, hVc, hxV, inter_subset_left, ?_⟩
+  intro s
+  have hR : 0 ≤ p B x + 1 := add_nonneg (apply_nonneg _ _) zero_le_one
+  obtain ⟨j, K, hK, hestimate⟩ := hbound (p B x + 1) hR s
+  exact ⟨p j, K, hp j, hK, fun y hy v => hestimate y hy.1 hy.2.le v⟩
+
+/-- Fix the actual parameter and circle types before supplying the model's
+families and certificates to the generic assembly theorem. -/
+private theorem circleTower_parameter_assembly
+    (T : MaterialData) (S : PhysicalSpacesData)
+    {U : Set (StateDirections S × ℝ)}
+    (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
+    (hM : ∀ m, 0 ≤ T.M (T.sample m)) (hH : ∀ m, 0 ≤ T.H (T.sample m))
+    (hU : IsOpen U) (f : StateDirections S × ℝ → CircleSpace S)
+    (A : ∀ n : ℕ, (StateDirections S × ℝ) →
+      MultilinearMap ℝ (fun _ : Fin n => StateDirections S × ℝ) (ℕ → ℝ → ℝ))
+    (hmember : ∀ n x, x ∈ U → ∀ v, CircleMember T (3 / 4 : ℝ) (A n x v))
+    (hbound : CircleLocalPositiveJetNormBounds (T := T) (γ := (3 / 4 : ℝ)) (U := U) A)
+    (hzero : ∀ x ∈ U, A 0 x Fin.elim0 = (S.circle (3 / 4 : ℝ)).decode (f x))
+    (hscalar : ∀ n (x w : StateDirections S × ℝ)
+      (v : Fin n → StateDirections S × ℝ) (t : ℝ), x + t • w ∈ U → ∀ m b θ,
+      HasDerivAt (fun u => iteratedDeriv b (A n (x + u • w) v m) θ)
+        (iteratedDeriv b (A (n + 1) (x + t • w) (Fin.cons w v) m) θ) t)
+    (henergy : CircleJetSecondEnvelopes (T := T) (γ := (3 / 4 : ℝ)) (U := U) A) :
+    ∃ J : SmoothDirections U f, ∀ n x, x ∈ U →
+      ∀ v : Fin n → StateDirections S × ℝ,
+        (S.circle (3 / 4 : ℝ)).decode (J.D n x v) = A n x v := by
+  exact exists_circle_smoothDirections_of_locally_positive_scalar_jets
+    (E := StateDirections S × ℝ) (T := T) (γ := (3 / 4 : ℝ))
+    (S := S.circle (3 / 4 : ℝ)) (U := U)
+    hS hM hH hU f A hmember hbound hzero hscalar henergy
+
+private theorem circleTower_endpoint_localBounds
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
+    CircleLocalPositiveJetNormBounds (T := T) (γ := (3 / 4 : ℝ))
+      (U := sectorNeighborhood S base ε ε)
+      (hN.endpointFlowScalarJets hS hT rsel hrsel) := by
+  exact circleTower_localBounds_of_boxBounds
+    (E := StateDirections S × ℝ) (T := T) (γ := (3 / 4 : ℝ))
+    (U := sectorNeighborhood S base ε ε) (base := base)
+    (pairGrading (sectorGrading S) realGrading) (sectorPairGrading_continuous S)
+    (sectorNeighborhood_isOpen S base ε ε) (sectorNeighborhood_convex S base ε ε)
+    (hN.endpointFlowScalarJets hS hT rsel hrsel)
+    (hN.endpointFlowScalarJets_positive_norm_bounds_on_box hS hT rsel hrsel)
+
 theorem N01Properties.exists_endpointFlowCircle_smoothDirections
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
@@ -94,44 +164,18 @@ theorem N01Properties.exists_endpointFlowCircle_smoothDirections
     ∃ J : SmoothDirections (sectorNeighborhood S base ε ε) (hN.endpointFlowCircle hS hT rsel hrsel),
       ∀ n x, x ∈ sectorNeighborhood S base ε ε → ∀ v : Fin n → (StateDirections S × ℝ),
         (S.circle (3 / 4 : ℝ)).decode (J.D n x v) = hN.endpointFlowScalarJets hS hT rsel hrsel n x v := by
-  classical
-  let U : Set (StateDirections S × ℝ) := sectorNeighborhood S base ε ε
-  let p : ℕ → Seminorm ℝ (StateDirections S × ℝ) :=
-    pairGrading (sectorGrading S) realGrading
-  have hU : IsOpen U := sectorNeighborhood_isOpen S base ε ε
-  have hlocal : ∀ n x, x ∈ U →
-      ∃ V : Set (StateDirections S × ℝ), IsOpen V ∧ Convex ℝ V ∧
-        x ∈ V ∧ V ⊆ U ∧
-        ∀ s, ∃ q : Seminorm ℝ (StateDirections S × ℝ), ∃ K : ℝ,
-          Continuous q ∧ 0 ≤ K ∧ ∀ y ∈ V, ∀ v : Fin (n + 1) → StateDirections S × ℝ,
-          circleNorm T (3 / 4 : ℝ) s
-            (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) y v) ≤
-            K * (1 + q y) * ∏ i, q (v i) := by
-    intro n x hx
-    obtain ⟨B, _hB, hbound⟩ :=
-      hN.endpointFlowScalarJets_positive_norm_bounds_on_box hS hT rsel hrsel n
-    let V : Set (StateDirections S × ℝ) := U ∩ {y | p B y < p B x + 1}
-    have hVo : IsOpen V := hU.inter
-      (isOpen_lt (sectorPairGrading_continuous S B) continuous_const)
-    have hVc : Convex ℝ V := (sectorNeighborhood_convex S base ε ε).inter
-      (convex_seminorm_strict_sublevel (p B) (p B x + 1))
-    have hxV : x ∈ V := ⟨hx,
-      Set.mem_ofPred.mpr (lt_add_of_pos_right (p B x) zero_lt_one)⟩
-    refine ⟨V, hVo, hVc, hxV, inter_subset_left, ?_⟩
-    intro s
-    have hR : 0 ≤ p B x + 1 := add_nonneg (apply_nonneg _ _) zero_le_one
-    obtain ⟨j, K, hK, hestimate⟩ := hbound (p B x + 1) hR s
-    exact ⟨p j, K, sectorPairGrading_continuous S j, hK,
-      fun y hy v => hestimate y hy.1 hy.2.le v⟩
+  have hU : IsOpen (sectorNeighborhood S base ε ε) :=
+    sectorNeighborhood_isOpen S base ε ε
   have hs (m : ℕ) := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
   have hM (m : ℕ) : 0 ≤ T.M (T.sample m) := zero_le_one.trans (hT.2.1 _ (hs m)).2.2.2
   have hH (m : ℕ) : 0 ≤ T.H (T.sample m) := (hT.2.1 _ (hs m)).2.1.le
-  exact exists_circle_smoothDirections_of_locally_positive_scalar_jets
+  exact circleTower_parameter_assembly
+    (T := T) (S := S) (U := sectorNeighborhood S base ε ε)
     (hS.2.1 (3 / 4 : ℝ)) hM hH hU
     (hN.endpointFlowCircle hS hT rsel hrsel)
     (hN.endpointFlowScalarJets hS hT rsel hrsel)
     (fun n x hx v => hN.endpointFlowScalarJets_circleMember hS hT rsel hrsel n x hx v)
-    hlocal
+    (circleTower_endpoint_localBounds hN hS hT rsel hrsel)
     (fun x hx => (hN.endpointFlowCircle_decode hS hT rsel hrsel x hx).symm)
     (fun n x w v t ht m b θ =>
       hN.endpointFlowScalarJets_hasDerivAt_line hS hT rsel hrsel n x w v t ht m b θ)
