@@ -1,0 +1,51 @@
+{
+  "kind": "reviewed_whole_reference_gauge_negative_atom_transport",
+  "owner": "/root",
+  "status": "FULL_SOURCE_PEER_PASSED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeNegativeAtomTransport.lean",
+    "sha256": "e79db2343fd6934f29ace44a13f3906346c712f241f191f87d5fa7c0d603a8ad",
+    "blob": "1cdaaae680c7761e79e670aa79e5eb033f9384fa",
+    "lines": 60,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeNegativeAtomTransport.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeNegativeAtomTransportCandidateManifest.json",
+    "sha256": "8383d58f2a5979ccd6cca3c72f90de0a0305a56d8f88ad59ce0bcf45a6ba44db",
+    "blob": "f3c8ed15477b3b99ba17a43b7aaa1b13052048bf",
+    "lines": 56
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholeReferenceGaugeNegativeAtomTransportIndependentReview.json",
+    "sha256": "b16953053f939e442061965fe47ec46ac89fb5b99f38fd747ac3a4cc428758e6",
+    "blob": "84ed64f590340eb771683c1cd421c8ed4309e73f",
+    "lines": 69
+  },
+  "selected_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    }
+  ],
+  "selected_provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasDataReviewedManifest.json",
+      "sha256": "701abf400f31e9d5bd990eff6d782e8878b3bb25e17a721750de8d04a4e319d7",
+      "blob": "89a4780b10a4d508b9d5ac33dd3abdf393efa901",
+      "lines": 23
+    }
+  ],
+  "scope": "Equality of all33 literal atom functions for every state and point, on the same selected old negative half and arbitrary one fixed material record. No numerical/qualitative/current-jet completion is asserted.",
+  "compiled": false,
+  "local_lean_execution": false,
+  "active_src_index_refs_changed": false,
+  "created_at_utc": "2026-11-12T18:42:10.325827+00:00"
+}

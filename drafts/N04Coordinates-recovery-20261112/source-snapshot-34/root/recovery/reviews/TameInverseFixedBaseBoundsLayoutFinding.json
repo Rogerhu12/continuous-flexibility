@@ -1,0 +1,38 @@
+{
+  "kind": "superseding_readiness_finding_for_fixed_base_inverse_doc_include_layout",
+  "status": "CHANGES_REQUIRED_BEFORE_ACTIVATION",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBounds.lean",
+    "sha256": "5e099aae8613c8f52bfefb6caf3e952e8153a1e95f8f34cadb7cf222fdb89864",
+    "blob": "708038714ee89624264cb7f7d3ddb0c9f9720124",
+    "lines": 349
+  },
+  "prior_independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/TameInverseFixedBaseBoundsIndependentReview.json",
+    "sha256": "bdb98adabaa5cc1414614f4b2af5ac137a62e4981bef7704c4d8ff341899caf2",
+    "blob": "706ce6315030904ddda7d96d0c9a6c14c6fd8cc5",
+    "lines": 67
+  },
+  "prior_owner_record": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-forward-indent/TameInverseFixedBaseBoundsReviewedManifest.json",
+    "sha256": "258b8ceedf552222afc9233e0daf79a46fef6c9dbcdd229f916ec4bcebee62d5",
+    "blob": "652e93b3eeb709efc6bc7ef1125aff98ccc2150a",
+    "lines": 91
+  },
+  "finding": "The declaration documentation is immediately followed by include hq hV hF in. A declaration doc modifier must attach to the theorem; include is a command wrapper and must precede that documentation, matching the previously reviewed RetainedPositiveMaterialRatioJets layout repair. The prior full-source review missed this parser-layout issue.",
+  "scope": "This finding supersedes readiness of the selected349 source but does not invalidate the recorded recurrence/quantifier mathematics or change active src. It does not affect the independent new159 forward-family theorem.",
+  "minimal_repair": {
+    "before": "/-- A single low base controls every order of the same inverse tower.\nThe two inputs are value estimates for the inverse operator and for the\nactual ordered forward jets, not estimates for the desired inverse jets. -/\ninclude hq hV hF in\ntheorem inverseFamilySmoothDirections_fixedBase_oneHigh",
+    "after": "include hq hV hF in\n/-- A single low base controls every order of the same inverse tower.\nThe two inputs are value estimates for the inverse operator and for the\nactual ordered forward jets, not estimates for the desired inverse jets. -/\ntheorem inverseFamilySmoothDirections_fixedBase_oneHigh",
+    "expected_source_sha256": "7e79129c9a9df8e2d74c353106685db461089a05ec1141f333211d5a257c6aac",
+    "expected_source_blob": "45fae56b12e755379fcf3e4aa3e211ba0cfe9c7a",
+    "lines_unchanged": 349,
+    "all_other_bytes_unchanged": true
+  },
+  "repair_applied": false,
+  "reason_not_written_yet": "Keep the conservative 20000 added Lean source budget while the exact active full CI is running; no additional full349 archival source version has been created. Apply and re-review the exact layout repair before source activation.",
+  "compiled": false,
+  "local_lean_execution": false,
+  "active_src_index_refs_changed": false,
+  "created_at_utc": "2026-11-12T18:46:46.763936+00:00"
+}

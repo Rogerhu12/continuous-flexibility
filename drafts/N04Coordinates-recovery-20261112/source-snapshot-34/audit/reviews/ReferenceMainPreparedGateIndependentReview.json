@@ -1,0 +1,82 @@
+{
+  "kind": "independent_static_review_of_prepared_reference_main_rebindings_and_gate",
+  "reviewer": "/root/audit_coordinates",
+  "status": "PASSED_STATIC_ONLY_NOT_EXECUTED_NOT_ACTIVATED",
+  "inputs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-prepare-reference-main-rebindings.py",
+      "sha256": "37c3f2e3b1042677151cf200f68b051fcb3ca793dab1c91fb8c51c3110dd0b3c",
+      "blob": "dbff967807240058902ed1abe34d13c27fb2ad4b",
+      "bytes": 7246
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-reviewed-provider-rebindings-current-main.json",
+      "sha256": "2899e402e186f17117eba07797edddc8c077dc3d4e5b55023fc056bd6bd567a7",
+      "blob": "fbe3d483cc2243748761ee79b6d45b52e72a8727",
+      "bytes": 90542
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-preflight-reference-family-main.py",
+      "sha256": "19a15cfcfbee38826f558d48ae87b86a0f62755a4ca9e0e1f2d2b35b41936f07",
+      "blob": "db25d5decc7b51bcf01344f16f16285adad8b905",
+      "bytes": 9551
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-reviewed-provider-rebindings-ci154.json",
+      "sha256": "cd182acade817706cc4ccfce1bef581ef977580e0b7c98505d48c33d573e97b9",
+      "blob": "f0fd4a71a6a900035104a9ffcc815b985384d193",
+      "bytes": 39835
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-preflight-reference-family-ci154.py",
+      "sha256": "e4af20ef156b24911dad245c6813cc41c41fa6ef9d3eeae8ca67f12e1ced2a15",
+      "blob": "06bac6f6d97fd8f27c2860b9660649ad89cb7274",
+      "bytes": 8705
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/ReferenceGroupProjectedMainProviderMigrationCI163ReadOnly.json",
+      "sha256": "aae17c62ec1956b8ffe5d2037e3f2d8450eb56fdfbb9b45df93d252c361cb070",
+      "blob": "6b820fd901e274990396072d1569676ee82018bb",
+      "bytes": 22261
+    }
+  ],
+  "scope": "Full preparation script and full generated preflight source read; exact old/new gate diff and independent ledger/object/receipt checks. No execution of either preparation or preflight script.",
+  "checks": {
+    "new_edges_exact": 23,
+    "changed_original_provider_modules": 15,
+    "additional_prerequisite_only_module_chains": 2,
+    "unique_new_edge_git_objects_verified": 40,
+    "unique_additional_review_records_verified": 13,
+    "existing_transition_prefixes_preserved": true,
+    "reviews_equal_old_plus_exact_migration_receipt": true,
+    "all_new_edge_sources_have_exact_blob_sha256_and_line_count": true,
+    "all_new_edge_additional_reviews_match_migration_registry": true,
+    "git_object_separator_ast_verified_as_single_null_byte": true,
+    "old_and_new_activation_block_byte_identical": true,
+    "new_graph_predicate": "seen == original_nodes | set(delta[added_nodes])",
+    "original_nodes_exact_count": 865,
+    "projected_nodes_exact_count": 867,
+    "exact_added_nodes": [
+      "ContinuousFlexibility.Analysis.CanonicalPositiveSourceInteriorDivision",
+      "ContinuousFlexibility.Analysis.N01cStateSeminorms"
+    ],
+    "main_ancestry_guard_retained": true,
+    "clean_head_tree_checkpoint_guards_retained": true,
+    "full_green_status_and_exact_head_guards_retained": true,
+    "next_label_and_preexisting_plan_payload_guards_retained": true,
+    "exact_staged_paths_no_unstaged_changes_and_diff_check_retained": true,
+    "exact_4943_additions_zero_deletions_and_20000_cap_retained": true,
+    "public_name_collision_guard_retained": true,
+    "checkpoint_bytes_unchanged_guard_retained": true
+  },
+  "limitations": [
+    "Five future provider transitions remain prospective; this review does not assert their installation.",
+    "The preflight remains unexecuted and no CI status is asserted.",
+    "Static source and graph checks do not substitute for Lean elaboration.",
+    "Additional linked receipts were hash-verified during preparation and again in this independent review; the generated gate directly pins the migration review and exact source objects."
+  ],
+  "modified_lean": false,
+  "modified_active_index_refs_checkpoint": false,
+  "compiled": false,
+  "created_at_utc": "2026-11-12T18:42:59.378072+00:00"
+}

@@ -1,0 +1,1149 @@
+{
+  "kind": "read_only_source_backed_route_from_same_reference_and_current_jets_to_sector_canonical_bounds",
+  "owner": "/root/quantitative_route",
+  "status": "MATHEMATICAL_ROUTE_CHECKED_AGAINST_ACTUAL_CONTRACTS_NOT_IMPLEMENTED_OR_COMPILED",
+  "repository_snapshot": {
+    "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility",
+    "head": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+    "tree": "64a18c3f510156a0386b5601f7c26fe575e6f958",
+    "clean_at_capture": true,
+    "rule_file": "rules",
+    "rule_read_in_full": true
+  },
+  "requested_scope": "Same D/T/S/C/R/L/K; ReferenceJets plus CurrentJets plus the actual canonical inverse-length estimate to SectorCanonicalJetBounds, then the existing normalization to N04Properties. No new Lean, active-tree change, elaborator, resource override, CI query or ref operation.",
+  "conclusion": {
+    "sufficient_as_an_implication": true,
+    "statement": "On the same final material data and same K, complete ReferenceJets and CurrentJets imply an existential single loss for SectorCanonicalJetBounds. Sample E0 >= 1 is explicit. Actual positive canonical lengths and reference-state sector membership are supplied by the already required qualitative geometry/Through03. Complete ReferenceJets already contains the inverse canonical-length estimate at order zero.",
+    "not_completed": "There is no implemented theorem in the inspected tree completing this exact E0-polynomial route. This report does not construct complete ReferenceJets or CurrentJets for the final atlas, and does not prove actualN04Coordinates/N04Statement.",
+    "no_additional_analytic_target_assumed": "The missing implication is numeric aggregation and exact reindexing/transport. It does not require a new final potential/divided-coefficient estimate as an input.",
+    "sources": [
+      {
+        "source": "nonlinear",
+        "declaration": "ReferenceJets, CurrentJets, N04Properties"
+      },
+      {
+        "source": "sector_normalization",
+        "declaration": "SectorCanonicalJetBounds"
+      },
+      {
+        "source": "completion",
+        "declaration": "n04Properties_normalized_of_sector_jetBounds"
+      }
+    ]
+  },
+  "inputs": [
+    {
+      "id": "data",
+      "requirement": "Fix D,T,S,C,L,K,base,epsilon before every spatial order. Every ReferenceJets/CurrentJets/sample/interval below refers to exactly these objects."
+    },
+    {
+      "id": "material",
+      "requirement": "IsAccumulatingProfile D and IsMaterialData D T.",
+      "sources": [
+        {
+          "source": "material_absorption",
+          "declaration": "materialSample_mem_interval; material_sample_height_coefficient_power_bounded"
+        }
+      ]
+    },
+    {
+      "id": "floor",
+      "requirement": "For all m, 1 <= T.E0(T.sample(K.cell m)). It is enough to require this sampled floor; no original IsMaterialData clause provides E0 >= 1.",
+      "sources": [
+        {
+          "source": "envelope_normalization",
+          "declaration": "one_le_enlargedMaterialData_E0; coefficientEnvelope_pack"
+        }
+      ]
+    },
+    {
+      "id": "reference_sector",
+      "requirement": "referenceStateConditions D S C, or just the sector membership needed for centering. The actual Through03 witness supplies hN.1.1.2.2.1; its .stateSector is the exact theorem.",
+      "sources": [
+        {
+          "source": "nonlinear",
+          "declaration": "N01Properties; NonlinearPropertiesThrough03"
+        },
+        {
+          "source": "reference_sector",
+          "declaration": "referenceStateConditions.stateSector"
+        }
+      ]
+    },
+    {
+      "id": "interval",
+      "requirement": "For all m, K.left m < K.right m, supplied by (hA.referenceBounds m).2.1 for actual N04PartA hA. Alternatively, a target point in canonicalOpen already implies the local inequality; the convenient global input is not a new geometric assumption.",
+      "sources": [
+        {
+          "source": "nonlinear",
+          "declaration": "CanonicalGeometry.referenceBounds"
+        },
+        {
+          "source": "blueprint",
+          "declaration": "N04PartA"
+        }
+      ]
+    },
+    {
+      "id": "jets",
+      "requirement": "The complete actual ReferenceJets and CurrentJets predicates on the same data and sectorNeighborhood S base epsilon epsilon. CurrentJets clause 1 and clause 2 suffice for this implication; clause 3 is retained for the separate full primitive target.",
+      "sources": [
+        {
+          "source": "nonlinear",
+          "declaration": "ReferenceJets; CurrentJets"
+        }
+      ]
+    }
+  ],
+  "notation": {
+    "sample_m": "r_m = T.sample(K.cell m)",
+    "E_m": "E_m = T.E0(r_m), with E_m >= 1",
+    "H_m": "H_m = T.H(r_m), positive by IsMaterialData and sample membership",
+    "canonical_length": "rho_m = K.right m - K.left m",
+    "physical_length": "lambda_m = K.physicalRight m - K.physicalLeft m",
+    "sector_parameter": "For a sector state z=(x,q), w=(<x-C.referenceState, sector proof>,q).",
+    "grading": "G_s(w) = CanonicalGeometry.parameterGrading S (s+ell) w",
+    "selected_atoms": [
+      "potential",
+      "dividedA",
+      "dividedB",
+      "dividedC"
+    ]
+  },
+  "coordinate_scopes": {
+    "physical_map": {
+      "formula": "physicalUnitPoint K m (u,theta) = (K.physicalLeft m + lambda_m*u,theta)",
+      "exact_derivative": "D_unit^(a,b)[f o physicalUnitPoint](u,theta) = lambda_m^a * D_physical^(a,b) f (physicalUnitPoint K m (u,theta)).",
+      "provider": {
+        "source": "affine_jets",
+        "declaration": "n07a_mixedDerivative_radialAffine"
+      },
+      "scope": "This is the fixed reference physical interval, independent of z. It is not the current state-dependent physicalPieceOpen for arbitrary z."
+    },
+    "canonical_map": {
+      "formula": "canonicalUnitPoint K m (u,theta) = (K.left m + rho_m*u,theta)",
+      "inverse": "p = n07aCanonicalUnitInversePoint K m y = ((y.1-K.left m)/rho_m,y.2)",
+      "membership": "n07aCanonicalUnitInversePoint_maps maps canonicalOpen to unitStrip when rho_m>0.",
+      "exact_inverse_derivative": "D_canonical^(a,b) f(y) = rho_m^(-a) * D_unit^(a,b)[f o canonicalUnitPoint K m](p). The cost depends on a, not on a+b.",
+      "providers": [
+        {
+          "source": "affine_jets",
+          "declaration": "n07aCanonicalUnitInversePoint_maps; n07aCanonicalUnitPoint_inverse"
+        },
+        {
+          "source": "length_and_inverse_scale",
+          "declaration": "n07aCanonicalUnit_jet_inverse"
+        }
+      ],
+      "scope": "The target potential and divided fields are the canonical-map atoms, so the final SectorCanonicalJetBounds transfer pays rho_m^(-a), not lambda_m^(-a)."
+    },
+    "actual_half_metadata": {
+      "negative": "The held whole-reference record uses the original negative half's K.left/right, physicalLeft/right, cell, chart/inverse/height/potential. The exact index is k = if side then (K.cutPair component).2 else (K.cutPair component).1.",
+      "positive": "The same whole-reference record has positive canonical endpoints 0 and 1, so rho=1 on positive pieces. A generic proof may still use the uniform inverse-length atom.",
+      "providers": [
+        {
+          "source": "whole_reference_fields",
+          "declaration": "n04WholeReferenceGaugeAtlasData_negative_fields; n04WholeReferenceGaugeAtlasData_positive_fields"
+        },
+        {
+          "source": "negative_length",
+          "declaration": "n04bActualTypedAtlas_negative_length_material_bounds"
+        }
+      ],
+      "caveat": "The held actual negative reference shape theorem is at (C.referenceState,0), not all current states. Its reference radiality/identity cannot be silently used as a CurrentJets assertion.",
+      "reference_only_provider": {
+        "source": "negative_reference_fields",
+        "declaration": "n04Coordinates_actual_reference_negative_geometry_fields"
+      }
+    },
+    "current_domain_obligation": "CurrentJets is about literal atom values at fixed physicalUnitPoint/canonicalUnitPoint on all unitStrip. An estimate only on the moving current physicalPieceOpen, or only on a compact sub-half/collar, does not by itself meet that predicate. For the four target atoms, complete CurrentJets directly supplies the needed fixed canonical-unit domain, so this implication introduces no additional physical-domain extension step.",
+    "endpoint_scope": "SectorCanonicalJetBounds is an open canonical-piece estimate. The rescaling step uses only interior points; it adds no arbitrary boundary trace or closed-endpoint hypothesis.",
+    "sources": [
+      {
+        "source": "nonlinear",
+        "declaration": "physicalUnitPoint; canonicalUnitPoint; atom; CurrentJets; CanonicalGeometry.referenceDomain; CanonicalPrimitiveGeometry"
+      }
+    ]
+  },
+  "route": [
+    {
+      "step": 1,
+      "title": "Keep the zero-direction loss before every spatial order",
+      "construction": "Choose ell := hcur.2.1.choose and hdiff := hcur.2.1.choose_spec once. For each s choose b0>0 from href.2 s and b1>0 from hdiff s. These choices precede every state, piece, atom and point.",
+      "quantifiers": "exists ell, forall s, exists b0,b1>0, forall state/piece/point and a+b<=s.",
+      "sources": [
+        {
+          "source": "nonlinear",
+          "declaration": "CurrentJets clause 2"
+        },
+        {
+          "source": "atom_decomposition",
+          "declaration": "n07a_geometryAtom_absolute_jet_bound, first choice lines"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "title": "Extract explicit inverse-length E0 cost at zero order",
+      "construction": "Choose bL>0 from href.2 0. Apply its bound to atom .canonicalLengthInverse at (1/2,0), orders 0,0. spaces_mixedDerivative_zero and the atom definition give |rho_m^(-1)| <= bL*E_m^bL for every m.",
+      "positivity": "rho_m>0 removes the absolute value when needed.",
+      "important": "The existing n07a_canonicalLengthInverse_subpower wraps this projection into an M-subpower predicate. Reuse the projection argument or add a tiny explicit-bound lemma, not that weaker output.",
+      "sources": [
+        {
+          "source": "nonlinear",
+          "declaration": "ReferenceJets; atom .canonicalLengthInverse"
+        },
+        {
+          "source": "mixed_zero",
+          "declaration": "spaces_mixedDerivative_zero"
+        },
+        {
+          "source": "length_and_inverse_scale",
+          "declaration": "n07a_referenceAtom_center_subpower; n07a_canonicalLengthInverse_subpower"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "title": "Add the reference and true current-minus-reference jets",
+      "construction": "At any unitStrip point p and sector parameter w, n07a_geometryAtom_jet_decomposition identifies the actual current jet with differenceJets plus the reference jet. Apply the two actual bounds and abs_add_le.",
+      "bound": "|D_unit^(a,b) atom(current)| <= b0*E_m^b0 + b1*E_m^b1*H_m^(3/4)*G_s(w), for a+b<=s.",
+      "regularity": "The decomposition uses the actual open-unit ContDiffOn clauses of href and hcur. It is not a formal linearity rule for arbitrary nondifferentiable total derivatives.",
+      "sources": [
+        {
+          "source": "atom_decomposition",
+          "declaration": "n07a_geometryAtom_jet_decomposition"
+        },
+        {
+          "source": "nonlinear",
+          "declaration": "ReferenceJets clauses 1/2; CurrentJets clauses 1/2"
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "title": "Undo only the canonical affine radial scale",
+      "construction": "Let L=1+bL. Since E_m>=1 and a<=s, rho_m^(-a) <= L^s*E_m^(bL*s). Use the exact inverse affine identity on the actual potential or gated divided scalar field at y in canonicalOpen.",
+      "bound": "Each target scalar has |D_canonical^(a,b) f(y)| <= L^s * [b0*E_m^(b0+bL*s) + b1*H_m^(3/4)*E_m^(b1+bL*s)*G_s(w)].",
+      "no_loss_change": "The affine map is fixed for each piece and independent of state. Its radial factor changes only a numeric material exponent. It neither increases spatial order nor changes ell.",
+      "sources": [
+        {
+          "source": "length_and_inverse_scale",
+          "declaration": "n07aCanonicalUnit_jet_inverse"
+        },
+        {
+          "source": "affine_jets",
+          "declaration": "n07aCanonicalUnitInversePoint_maps"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "title": "Absorb the material height gain at the exact stored sample",
+      "construction": "Invoke material_sample_height_coefficient_power_bounded hD hT K.cell (b1+bL*s) with beta=3/4. This chooses Ds>0 before m and yields H_m^(3/4)*E_m^(b1+bL*s) <= Ds.",
+      "sample_scope": "The theorem works for every fixed cell map K.cell. No equality with C.cell, no whole-component common-cell assertion and no replacement sample is needed.",
+      "result": "With Rs=b0+bL*s>0 and Cs=L^s*(b0+b1*Ds)>0, the bound is <= Cs*E_m^Rs*(1+G_s(w)); E_m^Rs>=1 absorbs the pure current term.",
+      "sources": [
+        {
+          "source": "material_absorption",
+          "declaration": "material_sample_height_coefficient_power_bounded; materialSample_mem_interval"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "title": "Use the four literal target atoms and pack one constant",
+      "construction": "For potential, the unit atom is exactly K.potential(current,m) o canonicalUnitPoint. On K.positive m=true the divided atoms are the three actual divided fields composed with the same map; on false pieces their unit atoms and the target's gated sum vanish. One Bool split on the piece suffices.",
+      "bound": "The SectorCanonicalJetBoundAtOrder left side is <= 4*Cs*E_m^Rs*(1+G_s(w)).",
+      "packing": "coefficientEnvelope_pack (4*Cs) Rs returns Bs>0 with 4*Cs*t^Rs <= Bs*t^Bs for t>=1. Apply at t=E_m and multiply by the nonnegative grading factor.",
+      "zero_order": "s=0 is included: the affine factor is 1, the selected derivative orders are 0, and the reference/current zero-order atom bounds are already present.",
+      "sources": [
+        {
+          "source": "nonlinear",
+          "declaration": "atom potential/dividedA/dividedB/dividedC"
+        },
+        {
+          "source": "sector_normalization",
+          "declaration": "SectorCanonicalJetBoundAtOrder"
+        },
+        {
+          "source": "envelope_normalization",
+          "declaration": "coefficientEnvelope_pack"
+        }
+      ]
+    },
+    {
+      "step": 7,
+      "title": "Return from sector parameters to the original state without changing the grading",
+      "construction": "For z in stateNeighborhood with stateSector S z.1, use n07aSectorParameterOfState hrefState z hs. Its membership lemma gives the exact same sectorNeighborhood base epsilon epsilon and its lift lemma gives literal z.",
+      "exact_grading": "parameterGrading S n (n07aSectorParameterOfState hrefState z hs) = stateGrading S n (z.1-C.referenceState) + |z.2|.",
+      "implementation": "The exact grading identity is pairGrading_apply plus sectorGrading's subtype composition and realGrading=normSeminorm. The inspected N08 center/grading lemmas provide an existing alternative with the same identity.",
+      "result": "1+G_s = 1+stateGrading S (s+ell)(z.1-C.referenceState)+|z.2| up to add_assoc; no factor, derivative shift or neighborhood reduction is introduced.",
+      "sources": [
+        {
+          "source": "sector_center",
+          "declaration": "n07aSectorParameterOfState; lift_n07aSectorParameterOfState; n07aSectorParameterOfState_mem"
+        },
+        {
+          "source": "pair_grading",
+          "declaration": "pairGrading_apply"
+        },
+        {
+          "source": "analysis_definitions",
+          "declaration": "pairGrading; realGrading"
+        },
+        {
+          "source": "sector_center_alternative",
+          "declaration": "n08SectorParameterCenter_grading"
+        }
+      ]
+    },
+    {
+      "step": 8,
+      "title": "Synchronize the cumulative loss if N01--N03 already uses another loss",
+      "construction": "For oldLoss from the same Through03 witness, set finalLoss=max oldLoss ell, once before s. The just-derived Sector bound increases its state grading by stateGrading_monotone; all numerical constants remain valid.",
+      "through03": "nonlinearPropertiesThrough03_restrict hT hN with base'=base, epsilon'=epsilon and loss'=finalLoss retains exactly D/T/S/C/R/L. Epsilon positivity is already in N01.",
+      "result": "The final N04Properties and preceding Through03 can use one common base, finalLoss and epsilon without rebuilding K, changing a cell, or choosing a new family.",
+      "sources": [
+        {
+          "source": "grading_mono",
+          "declaration": "stateGrading_monotone"
+        },
+        {
+          "source": "neighborhood_restriction",
+          "declaration": "nonlinearPropertiesThrough03_restrict"
+        }
+      ]
+    },
+    {
+      "step": 9,
+      "title": "Apply the existing exact completion only after the sector bound is proved",
+      "construction": "Given same-K hA:N04PartA and hB:N04PartB, n04Properties_normalized_of_sector_jetBounds hT hD hA hB hsector proves N04Properties for normalizedCanonicalData S K at the same base/loss/epsilon.",
+      "preserved": "The charts, inverse charts, height, coefficients, endpoints, cell, physical domains and source pairing are retained. The normalization only sets unused off-sector potential and off-sector/nonpositive divided fields to zero.",
+      "not_full_statement": "This is N04Properties, not the entire NonlinearPropertiesThrough04 or N04Statement. Other retained primitive and standalone calculus targets are still required.",
+      "sources": [
+        {
+          "source": "completion",
+          "declaration": "n04Properties_normalized_of_sector_jetBounds; n04Properties_iff_parts_and_jetBounds"
+        },
+        {
+          "source": "sector_normalization",
+          "declaration": "normalizedCanonicalData; n04PartA_normalizedCanonicalData; n04PartB_normalizedCanonicalData"
+        },
+        {
+          "source": "nonlinear",
+          "declaration": "NonlinearPropertiesThrough04"
+        }
+      ]
+    }
+  ],
+  "missing_implementation_obligations": [
+    {
+      "id": "explicit_e0_aggregation",
+      "status": "not found in active tree",
+      "proposed_declaration": "sectorCanonicalJetBounds_of_reference_current",
+      "obligation": "Implement the above explicit E0-polynomial estimate and the exact four-atom/center specialization. All numeric inputs are existing href/hcur projections and material absorption. Do not weaken the output to N07aSampleSubpower.",
+      "not_an_additional_assumption": true
+    },
+    {
+      "id": "explicit_inverse_length_projection",
+      "status": "tiny optional helper, existing public output is only subpower",
+      "proposed_declaration": "referenceJets_canonicalLengthInverse_E0_bound",
+      "obligation": "Expose the href.2 0 projection as exists bL>0 forall m |rho_m^-1|<=bL*E_m^bL, or keep it local. No new length geometry theorem is needed."
+    },
+    {
+      "id": "grading_center_identity",
+      "status": "available through existing N08 exact API; a direct local N07a proof avoids unrelated imports",
+      "obligation": "Use pairGrading_apply to expose the exact sum, or the inspected n08SectorParameterCenter_grading plus n08StateParameterGrading. Do not replace it with a norm-comparison estimate."
+    },
+    {
+      "id": "loss_mono_for_sector",
+      "status": "simple numeric transport; no named direct SectorCanonicalJetBounds mono wrapper found",
+      "obligation": "Use stateGrading_monotone at s+ell<=s+finalLoss. The material factor is nonnegative by hT. No change to base/epsilon/Bs."
+    },
+    {
+      "id": "full_primitive_normalization",
+      "status": "not required for N04Properties alone; required if finishing the current full N04 statement with normalized K",
+      "obligation": "An exact transport of CanonicalGeometry.PrimitiveGeometryProperties through normalizedCanonicalData is still needed in the inspected tree. The existing CanonicalPrimitivePreservation theorem covers the distinct structure CanonicalPrimitiveGeometry only.",
+      "route": "Prove full atom equality for every sector state and for the reference state (divided false branches were already zero in atom). Then differenceJets for every sector parameter are equal; SmoothDirections.congr retains the same J.D and all its estimates. ReferenceRadial, AuxiliaryColumnGauge and TransmissionGeometry use unchanged fields; ReferencePrincipal's potential at reference uses reference-state sector membership.",
+      "sources": [
+        {
+          "source": "primitive_normalization",
+          "declaration": "n04Coordinates_primitiveGeometry_normalized"
+        },
+        {
+          "source": "tower_congruence",
+          "declaration": "SmoothDirections.congr"
+        },
+        {
+          "source": "reference_sector",
+          "declaration": "referenceStateConditions.liftSectorParameter_sector"
+        },
+        {
+          "source": "nonlinear",
+          "declaration": "PrimitiveGeometryProperties; CanonicalPrimitiveGeometry"
+        }
+      ]
+    }
+  ],
+  "material_normalization": {
+    "safe_order": "Use explicitly enlarged final material data before the final reference-family choice, or prove exact transfer on the fixed old K. The route starts only after href and hcur are statements over that same final T.",
+    "existing_transports": [
+      {
+        "source": "envelope_normalization",
+        "declaration": "isMaterialData_enlargedMaterialData"
+      },
+      {
+        "source": "envelope_normalization",
+        "declaration": "isPhysicalSpaces_enlargedMaterialData"
+      },
+      {
+        "source": "envelope_normalization",
+        "declaration": "nonlinearPropertiesThrough03_enlargedMaterialData"
+      },
+      {
+        "source": "envelope_normalization",
+        "declaration": "one_le_enlargedMaterialData_E0"
+      }
+    ],
+    "why_floor_must_be_explicit": "IsMaterialData gives E0>0, not E0>=1. For 0<t<1, raising the exponent decreases t^A; coefficientEnvelope_pack is explicitly conditional on t>=1. A scaled C0*E0 floor is not permission to silently drop C0 from a single-B E0-only target.",
+    "full_atom_caveat": "Changing T.E0 also changes the literal ratioE0 and ratioE0Inverse atom functions. The existing Through03 enlargement theorem is not a blanket ReferenceJets/CurrentJets transport theorem. Complete jets must be established for the final same-T atoms; the four potential/divided atom functions themselves do not depend on T.E0.",
+    "same_sample": "enlargedMaterialData preserves sample, H, M, ell, radius and all geometry fields. No sample is reselected."
+  },
+  "quantifier_audit": {
+    "fixed_order": [
+      "final data D/T/S/C/L/K and base/epsilon",
+      "ell from CurrentJets second conjunct",
+      "bL from ReferenceJets order zero",
+      "for each spatial s: b0(s), b1(s), Ds, Cs, Rs, Bs",
+      "all sector states, all pieces/atoms, all canonical points, all a+b<=s"
+    ],
+    "single_loss": "ell is independent of s,m,z,theta and of the derivative split. finalLoss=max oldLoss ell is also chosen before s.",
+    "base": "The implication keeps the already fixed base and epsilon. Per-order low-box controls requiring a new base(s) or smaller epsilon(s) do not meet CurrentJets clause 2 and cannot be used here.",
+    "directional_loss": "The separate forall k exists loss(k) third clause of CurrentJets is not used in this implication. Its genuine SmoothDirections tower is still required by the full PrimitiveGeometryProperties target; ordinary spatial jets or a qualitative circle tower cannot replace it.",
+    "spatial_vs_parameter": "The natural a,b in the rescaling are spatial derivative orders. They are not state-directional k and do not cause a new parameterLoss."
+  },
+  "do_not_use_as_substitutes": [
+    {
+      "provider": {
+        "source": "atom_decomposition",
+        "declaration": "n07a_geometryAtom_absolute_jet_bound"
+      },
+      "reason": "Its result is an M-subpower envelope, not an explicit E0 polynomial. Reuse its exact decomposition/raw projections, not the weakened final envelope."
+    },
+    {
+      "provider": {
+        "source": "canonical_atom_fields",
+        "declaration": "n07a_canonicalAtomFields_sampleJetBounds"
+      },
+      "reason": "This also exposes sampled subpower. It is useful downstream for weighted spaces but does not prove the frozen single-B E0 estimate by itself."
+    },
+    {
+      "provider": {
+        "source": "nonlinear",
+        "declaration": "CanonicalPrimitiveGeometry.materialJets"
+      },
+      "reason": "It allows an N-dependent low order and a polynomial power of state size on current physical domains. That is different from one fixed loss and linear state size on the fixed unit atoms."
+    },
+    {
+      "provider": {
+        "source": "negative_reference_fields",
+        "declaration": "n04Coordinates_actual_reference_negative_geometry_fields"
+      },
+      "reason": "It is a reference-state identity. It supplies no current-state bound or state-directional tower."
+    }
+  ],
+  "schematic_interfaces_not_implemented": [
+    {
+      "name": "sectorCanonicalJetBounds_of_reference_current",
+      "signature": "{D T S C L K base epsilon} (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hrefState : referenceStateConditions D S C) (hinterval : forall m, K.left m < K.right m) (hfloor : forall m, 1 <= T.E0 (T.sample (K.cell m))) (href : CanonicalGeometry.ReferenceJets D T S C L K) (hcur : CanonicalGeometry.CurrentJets D T S C L K base epsilon) : exists loss : Nat, SectorCanonicalJetBounds T S C K base loss epsilon",
+      "status": "Interface sketch only; no Lean source or elaboration was produced."
+    },
+    {
+      "name": "same_data_n04Properties_of_primitive_jets",
+      "signature": "Given the same hN:NonlinearPropertiesThrough03, hA:N04PartA, hB:N04PartB, hT, hfloor, href and hcur: exists finalLoss, NonlinearPropertiesThrough03 D T S C R L base finalLoss epsilon and N04Properties D T S C L (normalizedCanonicalData S K) base finalLoss epsilon.",
+      "status": "Composition plan using finalLoss=max oldLoss ell and the existing exact completion. It is not the full unconditional N04 theorem."
+    }
+  ],
+  "completion_boundary": [
+    "The route establishes sufficiency of the supplied complete ReferenceJets/CurrentJets predicates; it does not assert they have already been produced for the final actual atlas.",
+    "The actual construction still must retain the same upstream witness, all required raw optical/host certificates, the same reference family and all atom scopes. This report adds none of those as completed results.",
+    "NonlinearPropertiesThrough04 additionally retains Through03, RootCompositionTarget, CubicDivisionTarget, PhysicalTransmissionTarget, complete CanonicalGeometry.PrimitiveGeometryProperties and CanonicalPrimitiveGeometry. No frozen statement is relaxed.",
+    "All source and declaration fingerprints below are exact local bytes at the captured head. Contracts were inspected read-only; no CI success or local typechecking is claimed."
+  ],
+  "pending210_bookkeeping": {
+    "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualNegativeReferenceScalarSourceData.lean",
+    "source_sha256": "dcd9c44b21cf5f415f2f86491ddaf806782120d61ea8869db3f5a1c2e778a4cb",
+    "peer_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/ActualNegativeReferenceScalarSourceDataIndependentReview.json",
+    "peer_sha256": "ef63217d2bcbe3a0cb9b2c7ce6fcd0fea916d0c89d085f646a476e4fc3af4c8e",
+    "owner_path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualNegativeReferenceScalarSourceDataReviewedManifest.json",
+    "owner_sha256": "8f9693a3a9a8ae4a8ff6e8656ead40133f444ffde66178151b69adcb4a656c4b",
+    "status": "Owner frozen only after the complete independent peer, source unchanged, held uncompiled. Remaining 90 lines stayed on hold.",
+    "pinned_api_addendum": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/ActualNegativeReferenceScalarSourceDataPinnedApiAddendum.json",
+    "pinned_api_addendum_sha256": "523141c1fc11a80a3c9912c1194eca03e3a7b8d1732c664f49d78db07d49e98d"
+  },
+  "evidence_catalog": [
+    {
+      "id": "rules",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/AGENTS.md",
+      "repo_path": "AGENTS.md",
+      "sha256": "c93fb4ff25e2109e6d06cd0a2139fa6cdbdd97d4f33ea0dcbe45f8432aee39ac",
+      "blob": "e6835ac7265ded9040e63ea60908e8f91f645f7d",
+      "lines": 49,
+      "declarations": [],
+      "selection_status": "repository_rules"
+    },
+    {
+      "id": "nonlinear",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "repo_path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773,
+      "declarations": [
+        {
+          "selector": "def stateNeighborhood",
+          "line": 230
+        },
+        {
+          "selector": "def sectorGrading",
+          "line": 234
+        },
+        {
+          "selector": "def liftSectorParameter",
+          "line": 237
+        },
+        {
+          "selector": "def sectorNeighborhood",
+          "line": 241
+        },
+        {
+          "selector": "def referenceStateConditions",
+          "line": 249
+        },
+        {
+          "selector": "def N01Properties",
+          "line": 344
+        },
+        {
+          "selector": "def NonlinearPropertiesThrough03",
+          "line": 547
+        },
+        {
+          "selector": "structure CanonicalPrimitiveGeometry",
+          "line": 765
+        },
+        {
+          "selector": "structure CanonicalGeometry",
+          "line": 818
+        },
+        {
+          "selector": "def N04Properties",
+          "line": 961
+        },
+        {
+          "selector": "abbrev Parameter",
+          "line": 992
+        },
+        {
+          "selector": "def parameterGrading",
+          "line": 994
+        },
+        {
+          "selector": "def unitStrip",
+          "line": 997
+        },
+        {
+          "selector": "def physicalUnitPoint",
+          "line": 999
+        },
+        {
+          "selector": "def canonicalUnitPoint",
+          "line": 1003
+        },
+        {
+          "selector": "inductive Atom",
+          "line": 1010
+        },
+        {
+          "selector": "def atom",
+          "line": 1024
+        },
+        {
+          "selector": "def ReferenceJets",
+          "line": 1099
+        },
+        {
+          "selector": "def differenceJets",
+          "line": 1113
+        },
+        {
+          "selector": "def CurrentJets",
+          "line": 1123
+        },
+        {
+          "selector": "def PrimitiveGeometryProperties",
+          "line": 1232
+        },
+        {
+          "selector": "def NonlinearPropertiesThrough04",
+          "line": 1245
+        },
+        {
+          "selector": "def N04Statement",
+          "line": 1257
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "analysis_definitions",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "repo_path": "src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "lines": 603,
+      "declarations": [
+        {
+          "selector": "def pairGrading",
+          "line": 295
+        },
+        {
+          "selector": "def realGrading",
+          "line": 299
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "blueprint",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Blueprint/Statements.lean",
+      "repo_path": "src/ContinuousFlexibility/Blueprint/Statements.lean",
+      "sha256": "4eff8f3724ee80268cebe29904e817efa068f6e398d6ab7d1ebb05bcebe09eda",
+      "blob": "af5ba9dacc2c7b026d6535f09e886ce22ca2e673",
+      "lines": 275,
+      "declarations": [
+        {
+          "selector": "def N04PartA",
+          "line": 248
+        },
+        {
+          "selector": "def N04PartB",
+          "line": 253
+        },
+        {
+          "selector": "def N04cStatement",
+          "line": 140
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "sector_normalization",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalJetNormalization.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/CanonicalJetNormalization.lean",
+      "sha256": "376dea5b9a6281f63b21f6aeefd9273dc4aadc8a13629ad39d22c88320353288",
+      "blob": "d2373f98afac2769d0ae67daa6b56d8bbadebb40",
+      "lines": 276,
+      "declarations": [
+        {
+          "selector": "def SectorCanonicalJetBoundAtOrder",
+          "line": 51
+        },
+        {
+          "selector": "def SectorCanonicalJetBounds",
+          "line": 66
+        },
+        {
+          "selector": "def normalizedCanonicalData",
+          "line": 77
+        },
+        {
+          "selector": "theorem n04PartA_normalizedCanonicalData",
+          "line": 152
+        },
+        {
+          "selector": "theorem n04PartB_normalizedCanonicalData",
+          "line": 163
+        },
+        {
+          "selector": "theorem canonicalJetBounds_normalized_of_sector",
+          "line": 250
+        },
+        {
+          "selector": "theorem canonicalJetBounds_normalized_of_sector_of_material",
+          "line": 260
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "completion",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalCoordinateCompletion.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/CanonicalCoordinateCompletion.lean",
+      "sha256": "a9e912be4e6ce2a2904363acbe65c11386d212e63bab041a80e83a7f8242cf79",
+      "blob": "f5f28f3b222a19598d19053d75314972fbc6c104",
+      "lines": 65,
+      "declarations": [
+        {
+          "selector": "theorem n04Properties_iff_parts_and_jetBounds",
+          "line": 25
+        },
+        {
+          "selector": "theorem n04Properties_of_parts_of_jetBounds",
+          "line": 42
+        },
+        {
+          "selector": "theorem n04Properties_normalized_of_sector_jetBounds",
+          "line": 53
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "primitive_normalization",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalPrimitivePreservation.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/CanonicalPrimitivePreservation.lean",
+      "sha256": "d30e0dde1407b59ea139014f5715d3cff6e08ef02218dfbf8d5714d1dfcd510d",
+      "blob": "9baf771b7e16079913a1e7f6acfa5e228ff8b063",
+      "lines": 51,
+      "declarations": [
+        {
+          "selector": "theorem n04Coordinates_primitiveGeometry_normalized",
+          "line": 20
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "atom_decomposition",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aGeometryJetBounds.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aGeometryJetBounds.lean",
+      "sha256": "5eb75a3b06a90cf2611b95ca8ce9098ba95c057e7627a4bcf1a8d756bc02c498",
+      "blob": "e1e7c43bac69e82dbd72c609763521ad1472682b",
+      "lines": 119,
+      "declarations": [
+        {
+          "selector": "theorem n07a_geometryAtom_jet_decomposition",
+          "line": 50
+        },
+        {
+          "selector": "theorem n07a_geometryAtom_absolute_jet_bound",
+          "line": 78
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "length_and_inverse_scale",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aGeometryLengthBounds.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aGeometryLengthBounds.lean",
+      "sha256": "31f0cce08f7612f3fdee200cc3f077796510bd12534af8287a6b866ba0b2c47b",
+      "blob": "2c336c9315bc5aa70efc149544448e30a2be0967",
+      "lines": 89,
+      "declarations": [
+        {
+          "selector": "theorem n07a_referenceAtom_center_subpower",
+          "line": 21
+        },
+        {
+          "selector": "theorem n07a_canonicalLengthInverse_subpower",
+          "line": 49
+        },
+        {
+          "selector": "theorem n07aCanonicalUnit_jet_inverse",
+          "line": 70
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "affine_jets",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "sha256": "bbec6c5ccb9e0d9bcf75516b8c9024e4f15c2e834119822ace6da3c4e70fd51c",
+      "blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "lines": 128,
+      "declarations": [
+        {
+          "selector": "theorem n07a_iteratedDeriv_comp_affine",
+          "line": 34
+        },
+        {
+          "selector": "theorem n07a_mixedDerivative_radialAffine",
+          "line": 40
+        },
+        {
+          "selector": "def n07aCanonicalUnitInversePoint",
+          "line": 49
+        },
+        {
+          "selector": "theorem n07aCanonicalUnitInversePoint_maps",
+          "line": 53
+        },
+        {
+          "selector": "theorem n07aCanonicalUnitPoint_inverse",
+          "line": 65
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "canonical_atom_fields",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aCanonicalAtomBounds.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aCanonicalAtomBounds.lean",
+      "sha256": "a162c68611e25b6851e7d0a582437100ddd24c28ec65acd32ee002975087b0e7",
+      "blob": "7f58525255a1dd409689e8b21ba4bab30a4af3c5",
+      "lines": 102,
+      "declarations": [
+        {
+          "selector": "theorem n07a_mixedDerivative_unitInverse",
+          "line": 36
+        },
+        {
+          "selector": "theorem n07a_canonicalAtomFields_sampleJetBounds",
+          "line": 70
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "material_absorption",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046",
+      "blob": "19becb59903b44c18c8f1afb72726b2f95952752",
+      "lines": 66,
+      "declarations": [
+        {
+          "selector": "theorem materialSample_mem_interval",
+          "line": 20
+        },
+        {
+          "selector": "theorem material_height_coefficient_power_bounded",
+          "line": 39
+        },
+        {
+          "selector": "theorem material_sample_height_coefficient_power_bounded",
+          "line": 59
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "envelope_normalization",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "lines": 311,
+      "declarations": [
+        {
+          "selector": "theorem coefficientEnvelope_pack",
+          "line": 88
+        },
+        {
+          "selector": "def enlargedMaterialData",
+          "line": 100
+        },
+        {
+          "selector": "theorem one_le_enlargedMaterialData_E0",
+          "line": 109
+        },
+        {
+          "selector": "theorem isMaterialData_enlargedMaterialData",
+          "line": 116
+        },
+        {
+          "selector": "theorem isPhysicalSpaces_enlargedMaterialData",
+          "line": 203
+        },
+        {
+          "selector": "theorem nonlinearPropertiesThrough03_enlargedMaterialData",
+          "line": 302
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "sector_center",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aScalarSolution.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aScalarSolution.lean",
+      "sha256": "89bc0865e47eb789bc7ccf457ca841b403df0752e62b463a700cbd94c21209fe",
+      "blob": "a77ae6ed52b89b6c4edd7b2bc9521f9406889f52",
+      "lines": 183,
+      "declarations": [
+        {
+          "selector": "def n07aSectorParameterOfState",
+          "line": 43
+        },
+        {
+          "selector": "theorem lift_n07aSectorParameterOfState",
+          "line": 50
+        },
+        {
+          "selector": "theorem n07aSectorParameterOfState_mem",
+          "line": 60
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "pair_grading",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+      "sha256": "6952ac2501bd38f0f6d51b1633f52d30ed1820f9380bd6dd58ebc24c601e1991",
+      "blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+      "lines": 250,
+      "declarations": [
+        {
+          "selector": "theorem pairGrading_apply",
+          "line": 167
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "reference_sector",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/SolveReturnEquations.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/SolveReturnEquations.lean",
+      "sha256": "936751f4227d524f93ee0daa0d620fb309e98bd78888b0b7cefed8da06e82d6c",
+      "blob": "79f7407854a3dea4f22ebf924f1a074265e878dc",
+      "lines": 145,
+      "declarations": [
+        {
+          "selector": "theorem referenceStateConditions.stateSector",
+          "line": 20
+        },
+        {
+          "selector": "theorem referenceStateConditions.liftSectorParameter_sector",
+          "line": 31
+        },
+        {
+          "selector": "theorem liftSectorParameter_mem_stateNeighborhood",
+          "line": 38
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "neighborhood_restriction",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalNeighborhoodRestriction.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/CanonicalNeighborhoodRestriction.lean",
+      "sha256": "f0333edb08700ba86b4db979edc64251ce86f32106635ac476e8ed910a8c1eef",
+      "blob": "99481854fcfc00bfd242fdccf388996297f83bd0",
+      "lines": 192,
+      "declarations": [
+        {
+          "selector": "theorem n01Properties_restrict",
+          "line": 83
+        },
+        {
+          "selector": "theorem nonlinearPropertiesThrough03_restrict",
+          "line": 144
+        },
+        {
+          "selector": "theorem n04PartA_restrict",
+          "line": 155
+        },
+        {
+          "selector": "theorem n04PartB_restrict",
+          "line": 178
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "grading_mono",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/StateNeighborhood.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/StateNeighborhood.lean",
+      "sha256": "d69d61889ad31640933f00a39c70c7ff33eeb0df52df51a509df97850d1399b6",
+      "blob": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+      "lines": 143,
+      "declarations": [
+        {
+          "selector": "theorem stateGrading_monotone",
+          "line": 31
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "current_restriction",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aNeighborhood.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aNeighborhood.lean",
+      "sha256": "814ee5af91417d6b4e109bde34d8460e476d0b211c26a36fa60714df6dd83409",
+      "blob": "86b20bbbcad3781f00b90d3b7562ab700f99eef3",
+      "lines": 218,
+      "declarations": [
+        {
+          "selector": "theorem n07a_currentJets_restrict",
+          "line": 172
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "subpower",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aMaterialProductBounds.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N07aMaterialProductBounds.lean",
+      "sha256": "cb6614c253d91ae45cc383551456cd0b345acd5e78ad2e4117a549560c84bf90",
+      "blob": "705984daec9322d629166432628ecd887534171f",
+      "lines": 134,
+      "declarations": [
+        {
+          "selector": "def N07aSampleSubpower",
+          "line": 23
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "sector_center_alternative",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N08SectorControlColumn.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N08SectorControlColumn.lean",
+      "sha256": "2942c3e08bf34693749befa412b8be1aea82ef8b22726732c895ce3f22f608c2",
+      "blob": "1ec0cbcf5cd968661168b5eb5f203692fcf0e24b",
+      "lines": 209,
+      "declarations": [
+        {
+          "selector": "def n08SectorParameterCenter",
+          "line": 154
+        },
+        {
+          "selector": "theorem n08SectorParameterCenter_lift",
+          "line": 160
+        },
+        {
+          "selector": "theorem n08SectorParameterCenter_grading",
+          "line": 169
+        },
+        {
+          "selector": "theorem n08SectorParameterCenter_mem",
+          "line": 179
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "sector_chart_alternative",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N08SectorParameterChart.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N08SectorParameterChart.lean",
+      "sha256": "5723f64ade791a81f712c536007a9609a8bbda139d5cea39ec9cf30dacae7ee6",
+      "blob": "af40d3fddcfe85fc2e9969abe6a9ce0ec24e296d",
+      "lines": 131,
+      "declarations": [
+        {
+          "selector": "theorem n08_liftSectorParameter_difference",
+          "line": 88
+        },
+        {
+          "selector": "theorem n08_liftSectorParameter_mem",
+          "line": 96
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "raw_grading_alternative",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N08ExtendedLogProfile.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/N08ExtendedLogProfile.lean",
+      "sha256": "6da2c4ff05d9ed291d26d52aeab5a85eb794a118de0c14eac36c7cf4cad9e1fc",
+      "blob": "19f92b743f4a328cb9e4cbb27e99939b0b447875",
+      "lines": 171,
+      "declarations": [
+        {
+          "selector": "def n08StateParameterGrading",
+          "line": 22
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "tower_congruence",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/TameElementaryCalculus.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/TameElementaryCalculus.lean",
+      "sha256": "8970cb3def322b3ecaf1d4c717754fc68f57d4a63d4ed82023a7d4fae5ac9b09",
+      "blob": "bc38b3601334a7b76a3eda9f3602c4d3b2440423",
+      "lines": 512,
+      "declarations": [
+        {
+          "selector": "def _root_.ContinuousFlexibility.Statements.SmoothDirections.congr",
+          "line": 424
+        }
+      ],
+      "selection_status": "active_source_contract_inspected_no_local_compilation"
+    },
+    {
+      "id": "mixed_zero",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/SpacesCylinderIntegration.lean",
+      "sha256": "7270debf576c5799a1e3ad2583444b4d35b545b4b1d5fa825a1308d84612e3ff",
+      "blob": "2dafc07552ad4c2c2ad9af34bb53abd2ac8ead8b",
+      "lines": 213,
+      "declarations": [
+        {
+          "selector": "@[simp] theorem spaces_mixedDerivative_zero",
+          "line": 22
+        }
+      ],
+      "selection_status": "active_source"
+    },
+    {
+      "id": "whole_reference_fields",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131,
+      "declarations": [
+        {
+          "selector": "theorem n04WholeReferenceGaugeAtlasData_physical_fields",
+          "line": 73
+        },
+        {
+          "selector": "theorem n04WholeReferenceGaugeAtlasData_negative_fields",
+          "line": 82
+        },
+        {
+          "selector": "theorem n04WholeReferenceGaugeAtlasData_positive_fields",
+          "line": 96
+        }
+      ],
+      "selection_status": "held_candidate_provider_contract_only"
+    },
+    {
+      "id": "negative_length",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthMaterialBounds.lean",
+      "sha256": "a1355b681442efbae6b424f142b2841024bf85d37c7f16c3127339eb926a907c",
+      "blob": "97ba75908af68271cfed29233a7043de7af28ab4",
+      "lines": 86,
+      "declarations": [
+        {
+          "selector": "theorem n04bActualTypedAtlas_negative_length_material_bounds",
+          "line": 22
+        }
+      ],
+      "selection_status": "held_candidate_provider_contract_only"
+    },
+    {
+      "id": "negative_reference_fields",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceGeometryFields.lean",
+      "sha256": "17eb137b0c746f4ff44388b842b068a2745a96e99940de71667b75ffc8abbb52",
+      "blob": "9f46123e9067e42a31444649e6392ba3d0bae493",
+      "lines": 124,
+      "declarations": [
+        {
+          "selector": "theorem n04Coordinates_actual_reference_negative_geometry_fields",
+          "line": 22
+        }
+      ],
+      "selection_status": "held_candidate_provider_contract_only"
+    }
+  ],
+  "new_lean_files": 0,
+  "new_lean_lines": 0,
+  "active_src_index_refs_changed": false,
+  "local_lean_or_elaboration": false,
+  "ci_actions": false,
+  "compiled": false,
+  "created_at_utc": "2026-11-12T18:36:21.183Z"
+}

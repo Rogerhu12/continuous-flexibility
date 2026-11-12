@@ -1,0 +1,56 @@
+{
+  "kind": "same_whole_negative_half_all_atom_function_transport",
+  "owner": "/root",
+  "status": "HELD_UNCOMPILED_AWAITING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeNegativeAtomTransport.lean",
+    "sha256": "e79db2343fd6934f29ace44a13f3906346c712f241f191f87d5fa7c0d603a8ad",
+    "blob": "1cdaaae680c7761e79e670aa79e5eb033f9384fa",
+    "lines": 60,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeNegativeAtomTransport.lean"
+  },
+  "public_declarations": [
+    "n04WholeReferenceGaugeAtlasData_negative_atom"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    }
+  ],
+  "provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasDataReviewedManifest.json",
+      "sha256": "701abf400f31e9d5bd990eff6d782e8878b3bb25e17a721750de8d04a4e319d7",
+      "blob": "89a4780b10a4d508b9d5ac33dd3abdf393efa901",
+      "lines": 23
+    }
+  ],
+  "checks": [
+    "Actual negative-field theorem supplies both endpoint pairs, stored cell, actual chart/inverse/height/principal field/potential and V.positive=false for the exact selected k.",
+    "K.positive k=false remains an explicit required input. It is necessary because the three divided atoms are defined by each atlas positive flag; all other fields are copied directly.",
+    "Every physicalUnitPoint and canonicalUnitPoint agrees as a function, with no domain, regularity, numerical, optical-host or material-sample equality assumption. Every canonicalSource agrees for any physical source f because it uses only the same chart/inverse/height.",
+    "Case analysis of the existing33 Atom constructors transfers literal functions on the entire plane. Original cutPair k is not reselected; T is arbitrary, so enlargedMaterialData T may be used directly. No new field representation is introduced.",
+    "This exact function equality is the required whole-V adapter for the already-reviewed210 actual negative scalar-source data and for subsequent mixed derivative or current difference congruence. Those estimates/towers are not asserted by this source."
+  ],
+  "source_budget": {
+    "lines": 60,
+    "backup33_verified_added_lean": 19585,
+    "total_before_other_pending_sources": 19645,
+    "other_agent_max_allocated": 300,
+    "maximum_including_that_allocation": 19945
+  },
+  "source_modified_after_freeze": false,
+  "compiled": false,
+  "local_lean_execution": false,
+  "active_src_index_refs_changed": false,
+  "created_at_utc": "2026-11-12T18:38:54.100057+00:00"
+}

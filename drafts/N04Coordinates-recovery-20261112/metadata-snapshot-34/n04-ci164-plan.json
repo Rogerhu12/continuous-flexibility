@@ -1,0 +1,2386 @@
+{
+  "label": 164,
+  "head_before": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+  "base_tree": "64a18c3f510156a0386b5601f7c26fe575e6f958",
+  "tree": "08257c9406671ac1f094b739e4971c1eca108c66",
+  "main_checked": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+  "main_integrated": "89e539ccf7e9c558467cf875f44dcff9490ce271",
+  "main_workflow_file_integrated": {
+    "main": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+    "path": ".github/workflows/build.yml",
+    "sha256": "6e1b0a3c010b6988811399ec9a71c5f5f58ca7a83421e5cd3d28a3bbf5b8bb24",
+    "blob": "3152629f2ebb53a7af652218ea5bd2d64d16d493",
+    "method": "Exact workflow-only file copy; main ancestry remains pending dependency-complete source batches."
+  },
+  "main_source_batch": 2,
+  "main_source_batch_count": 5,
+  "last_full_green": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+  "green_receipt": {
+    "tree": "64a18c3f510156a0386b5601f7c26fe575e6f958",
+    "main": "89e539ccf7e9c558467cf875f44dcff9490ce271",
+    "main_checked": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+    "main_source_batch": 1,
+    "run": 43274946283,
+    "job": 131380759534,
+    "job_head_binding": "Normalized job.run_id equals the ID of the exact-head workflow run",
+    "source_all_compiled": 4212,
+    "source_all_total": 4214,
+    "all_src_lean_files": 4218,
+    "root_imports": 4155,
+    "source_coverage_basis": "Exact current source import graph of all successful default library targets",
+    "excluded_project_modules": [
+      "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+      "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth"
+    ],
+    "default_targets": [
+      "ContinuousFlexibility",
+      "AxiomAudit",
+      "FlexibleSphereChallenge",
+      "FlexibleSphereSolution"
+    ],
+    "covered_names_sha256": "36d5260bb73118251cec33b9862ab31fc9729ed619c32bf4ee8b1b3f5854330f",
+    "raw_cached_olean_compiled": 4634,
+    "raw_ci_reported_source_total": 4214,
+    "raw_count_caution": "Restored caches may retain .olean files for deleted modules; use current source coverage above.",
+    "build_jobs": 8197,
+    "blueprint_proved": 37,
+    "blueprint_total": 42,
+    "open": 5,
+    "open_nodes": [
+      "N01c",
+      "N02N03",
+      "N04b",
+      "N04Coordinates",
+      "N05"
+    ],
+    "log": "n04-ci-163.log",
+    "log_sha256": "f3852670e86bbf73bc05a0dfc97c4c8b62c163dde445ed5a1f5ee901fe0eac88",
+    "saved_run": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-ci-163-run-complete.json",
+      "sha256": "e1bfa61e5f5dcbd1163fb856d3ac25bac3531ccab38b5cf4178927eb26bdb4f5",
+      "blob": "c17e5d664b9bced3e0a416b079705723d33c2b90",
+      "bytes": 15553
+    },
+    "saved_jobs": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-ci-163-jobs-complete.json",
+      "sha256": "db3ee3be284a80629a735c9b11cbadd98b9577bbb21e6feae5a30069fee6f5a2",
+      "blob": "e4575050bacbced464327ab679db69ec240e3c0c",
+      "bytes": 4045
+    },
+    "completed_run_updated_at": "2026-11-12T18:52:55Z",
+    "checked_at": "2026-11-12T18:55:48.758502+00:00",
+    "sha": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+    "receipt": "n04-ci-163-green-receipt.json",
+    "receipt_sha256": "03997f656c7cb4daea3bd80686ac4dd3a01132e8ece0120ec54f8ff82901bedd"
+  },
+  "source_proposal": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/upstream-main-c9/MainC9BoundedIntegrationBatchProposalCI155.json",
+    "sha256": "3d4897a11c85b1601f624161a61d38f1633aff3a388ff1fdc90812aec9e757c1",
+    "blob": "b87153f6e7d7f2db1b79c04c2d1f1a5eeed8ae94",
+    "lines": 11536
+  },
+  "local_owner_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-mixed-provider/LocalMixedCommonProviderReviewedManifest.json",
+      "sha256": "2cef7b61a512517876af4d475804bfa81518307d633ea996d3262d1d4c14fc83",
+      "blob": "f2b19f3352adab36ff1442f34c5b4cd13c0a1131",
+      "lines": 37
+    }
+  ],
+  "sources": [
+    {
+      "module": "ContinuousFlexibility.Statements.RadialTargets",
+      "target_path": "src/ContinuousFlexibility/Statements/RadialTargets.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "ef93a18d36336489f4e605beddd8e14d582e2008",
+      "sha256": "f5dba6b42ece090f87fcde22a79c39f974974d81c60ad07e9120181c15aee774",
+      "lines": 504,
+      "imports": [
+        "ContinuousFlexibility.Statements.Radial"
+      ],
+      "preimage": {
+        "module": "ContinuousFlexibility.Statements.RadialTargets",
+        "target_path": "src/ContinuousFlexibility/Statements/RadialTargets.lean",
+        "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+        "blob": "7b2ba6641046904003f09f9c708a7e8538de3c4d",
+        "sha256": "6296bf88e2c368206d1ec39dad5647a768016d10d5f574a0d58d65064c9285d2",
+        "lines": 492,
+        "imports": [
+          "ContinuousFlexibility.Statements.Radial"
+        ]
+      },
+      "numstat": {
+        "source_added": 12,
+        "source_deleted": 0,
+        "generated_root_added": 0,
+        "budget_added": 12
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Blueprint.Statements",
+      "target_path": "src/ContinuousFlexibility/Blueprint/Statements.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "4d426c2990d6d685eec9b270469f440b40c9ccce",
+      "sha256": "c5ceb29deb95dde0f00563392d37d33d9f62a725d118c9540435911349de41e1",
+      "lines": 289,
+      "imports": [
+        "ContinuousFlexibility.Statements.Milestones"
+      ],
+      "preimage": {
+        "module": "ContinuousFlexibility.Blueprint.Statements",
+        "target_path": "src/ContinuousFlexibility/Blueprint/Statements.lean",
+        "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+        "blob": "af5ba9dacc2c7b026d6535f09e886ce22ca2e673",
+        "sha256": "4eff8f3724ee80268cebe29904e817efa068f6e398d6ab7d1ebb05bcebe09eda",
+        "lines": 275,
+        "imports": [
+          "ContinuousFlexibility.Statements.Milestones"
+        ]
+      },
+      "numstat": {
+        "source_added": 16,
+        "source_deleted": 2,
+        "generated_root_added": 0,
+        "budget_added": 16
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ControlCellEndpointBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/ControlCellEndpointBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "69d80e2dd714b0d65fcceff8b5dee84880bb3078",
+      "sha256": "8587d9ff32ae46f1bd767f3d359c2cdb56f51f9ab6a8b6e8618b7abc0655d289",
+      "lines": 216,
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialShiftedEnvelope",
+        "ContinuousFlexibility.Analysis.StateKappaBounds"
+      ],
+      "preimage": {
+        "module": "ContinuousFlexibility.Analysis.ControlCellEndpointBounds",
+        "target_path": "src/ContinuousFlexibility/Analysis/ControlCellEndpointBounds.lean",
+        "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+        "blob": "931608eb0a7c8d6913aafcd28727724eae13467a",
+        "sha256": "9c9c1fd4bb08d7a0f757285ccb015919aca0362996626912e4b1ec773debbcdd",
+        "lines": 192,
+        "imports": [
+          "ContinuousFlexibility.Analysis.MaterialShiftedEnvelope",
+          "ContinuousFlexibility.Analysis.StateKappaBounds"
+        ]
+      },
+      "numstat": {
+        "source_added": 35,
+        "source_deleted": 11,
+        "generated_root_added": 0,
+        "budget_added": 35
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateControlDecay",
+      "target_path": "src/ContinuousFlexibility/Analysis/StateControlDecay.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "2cbf277337cd0667b2f645f0ffa5149afba7e95a",
+      "sha256": "1c88acbb587efbc846bbd77f38229e7fcc300999e1d510cb785998a90a3b7a47",
+      "lines": 143,
+      "imports": [
+        "ContinuousFlexibility.Analysis.StateProfileRegularity",
+        "Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas"
+      ],
+      "preimage": {
+        "module": "ContinuousFlexibility.Analysis.StateControlDecay",
+        "target_path": "src/ContinuousFlexibility/Analysis/StateControlDecay.lean",
+        "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+        "blob": "772c0d473322327b2c8b80eecaab53d262d24f42",
+        "sha256": "cf7b1d844dfb305001d3ede15f1c96962f8cbf3beba259e9e55f02c002485273",
+        "lines": 142,
+        "imports": [
+          "ContinuousFlexibility.Analysis.StateProfileRegularity",
+          "Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas"
+        ]
+      },
+      "numstat": {
+        "source_added": 2,
+        "source_deleted": 1,
+        "generated_root_added": 0,
+        "budget_added": 2
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateControlCofiniteClosure",
+      "target_path": "src/ContinuousFlexibility/Analysis/StateControlCofiniteClosure.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "18b869aaefe1e6aece49ab9fd4920e1ef2cf0751",
+      "sha256": "77e15f29870bcc1c5dae23ab9406f9518041e65baa0c976ba423c85becd047b6",
+      "lines": 166,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ControlCellEndpointBounds",
+        "ContinuousFlexibility.Analysis.MaterialSampleCofinite",
+        "ContinuousFlexibility.Analysis.StateControlCofiniteJets"
+      ],
+      "preimage": {
+        "module": "ContinuousFlexibility.Analysis.StateControlCofiniteClosure",
+        "target_path": "src/ContinuousFlexibility/Analysis/StateControlCofiniteClosure.lean",
+        "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+        "blob": "9be6b468ce6f015dc8984e2566542dc73f69409e",
+        "sha256": "594be12f48eed4685e285afe820230da00556688a54d2b0291729ad4776e065c",
+        "lines": 133,
+        "imports": [
+          "ContinuousFlexibility.Analysis.ControlCellEndpointBounds",
+          "ContinuousFlexibility.Analysis.MaterialSampleCofinite",
+          "ContinuousFlexibility.Analysis.StateControlCofiniteJets"
+        ]
+      },
+      "numstat": {
+        "source_added": 33,
+        "source_deleted": 0,
+        "generated_root_added": 0,
+        "budget_added": 33
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.AffineMaterialSampling",
+      "target_path": "src/ContinuousFlexibility/Analysis/AffineMaterialSampling.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "90fe443e7becec26b19adcedcf9bb89125dc0f16",
+      "sha256": "b46e1cb5f17f5a12128737b604ba59ec414845bb746c918e51efd6525e4c46b6",
+      "lines": 404,
+      "imports": [
+        "ContinuousFlexibility.Analysis.AffineMaterialData"
+      ],
+      "preimage": {
+        "module": "ContinuousFlexibility.Analysis.AffineMaterialSampling",
+        "target_path": "src/ContinuousFlexibility/Analysis/AffineMaterialSampling.lean",
+        "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+        "blob": "4e8ecae202ca9bbb565d56c82ee983bfc7f7ef83",
+        "sha256": "8dff2655b252bc6eba3ddbfb45ae8bf5ab8d4600f581f5860fd435e8233567bb",
+        "lines": 404,
+        "imports": [
+          "ContinuousFlexibility.Analysis.AffineMaterialData"
+        ]
+      },
+      "numstat": {
+        "source_added": 3,
+        "source_deleted": 3,
+        "generated_root_added": 0,
+        "budget_added": 3
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cCoefficientJetCalculus.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "7c0db6efa755062e80444ef332dfd2b24411bacc",
+      "sha256": "e48d0a64ed24a00022789ce65bd5fb8259f209fb0ecf96b75d76875c3cf35baf",
+      "lines": 392,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameJetComposition",
+        "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "Mathlib.Analysis.SpecialFunctions.Sqrt"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 392,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 393
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cParameterCalculus",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cParameterCalculus.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "c6f542e479c058823ee63f92427c6e122b243af6",
+      "sha256": "66689d83271834d953e5b12cb42416eb37c2ceeb673d8920254c7b9f79d5f7d9",
+      "lines": 138,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 138,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 139
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cSpatialParameterComposition",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cSpatialParameterComposition.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "ce04614f58db40ae959540cb3b33b510de3d2821",
+      "sha256": "f58d4725b89a813711465a4c05ce60f953dbcbc20ace49f85e60152313cc5d1d",
+      "lines": 355,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cParameterCalculus",
+        "ContinuousFlexibility.Analysis.N01cStateSeminorms",
+        "ContinuousFlexibility.Analysis.CylinderMixedJets",
+        "Mathlib.Analysis.Calculus.ContDiff.CPolynomial"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 355,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 356
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-mixed-provider/LocalMixedProductBounds.lean",
+      "blob": "6ad4d36756cad99a57f625d0f9092d118f46e76f",
+      "sha256": "edc7fc2508fe231f3b18bfc7e52da8c004cf32e501c5ea48f3044b351d01a556",
+      "lines": 105,
+      "module": "ContinuousFlexibility.Analysis.LocalMixedProductBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/LocalMixedProductBounds.lean",
+      "source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-mixed-provider/LocalMixedProductBounds.lean",
+      "source_ref": "LOCAL_HELD_MAIN_CONTRACT_COMPATIBILITY",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cSpatialParameterComposition",
+        "ContinuousFlexibility.Analysis.ReverseCoordinateOperator",
+        "ContinuousFlexibility.Analysis.PhysicalTransmissionTrace",
+        "ContinuousFlexibility.Analysis.SpacesHeightAlgebra",
+        "ContinuousFlexibility.Analysis.SpacesCylinderEvenJets",
+        "ContinuousFlexibility.Analysis.PeriodicScalarFlow"
+      ],
+      "preimage": {
+        "module": "ContinuousFlexibility.Analysis.LocalMixedProductBounds",
+        "target_path": "src/ContinuousFlexibility/Analysis/LocalMixedProductBounds.lean",
+        "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+        "blob": "cd30f2f9bb0efbb186788c4010cfaeef58befd57",
+        "sha256": "d0faf14d190ae8c14f16f80958e8c166183c0914f822815a8d98aa13a660dfd7",
+        "lines": 125,
+        "imports": [
+          "ContinuousFlexibility.Analysis.ReverseCoordinateOperator",
+          "ContinuousFlexibility.Analysis.PhysicalTransmissionTrace",
+          "ContinuousFlexibility.Analysis.SpacesHeightAlgebra",
+          "ContinuousFlexibility.Analysis.SpacesCylinderEvenJets",
+          "ContinuousFlexibility.Analysis.PeriodicScalarFlow"
+        ]
+      },
+      "numstat": {
+        "source_added": 1,
+        "source_deleted": 21,
+        "generated_root_added": 0,
+        "budget_added": 1
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cMaterialShiftComparison",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cMaterialShiftComparison.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "c04fb0d0ab7ead1e47ac35465093ab09d6e87008",
+      "sha256": "a3d20d3264bbccb4f468928fac39720bdea940818a2d8fa6aa0ebe0756b58a71",
+      "lines": 241,
+      "imports": [
+        "ContinuousFlexibility.Analysis.AffineMaterialSampling",
+        "ContinuousFlexibility.Analysis.ControlCellEndpointBounds"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 241,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 242
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cReferenceJetBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cReferenceJetBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "2e32edf4979e58db5e4a922ff637e45a1db17530",
+      "sha256": "6810f56806d35a6f7dd2b77a0512afbc1823581baccf77c7a8c76c2db81cf1d0",
+      "lines": 222,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cMaterialShiftComparison",
+        "Mathlib.Analysis.Calculus.ContDiff.Deriv"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 222,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 223
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cMaterialNormalization",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cMaterialNormalization.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "8198d0f8062d72c7f8485cf2b6ca34eaaa58ddb5",
+      "sha256": "6e6aebc7319ceb3a1dbd44ff2b58f68fa466b8bc327b2e034eb845f29fee25de",
+      "lines": 263,
+      "imports": [
+        "ContinuousFlexibility.Analysis.StateKappaBounds",
+        "ContinuousFlexibility.Blueprint.Statements",
+        "Mathlib.Analysis.SpecialFunctions.SmoothTransition"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 263,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 264
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPrimitiveGeometry",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cPrimitiveGeometry.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "670747f62b8057cc47516a4e5f0a364af5102e11",
+      "sha256": "103725ce22dafa71ff38a7490a4c51a29649c3785f0ec2df4bc2dd3235656c29",
+      "lines": 89,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cReferenceJetBounds",
+        "ContinuousFlexibility.Analysis.N01cMaterialNormalization"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 89,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 90
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOneHighProducts",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cOneHighProducts.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "97df8ec906f295102d30454e03f368297bf7c530",
+      "sha256": "8657867540c0a27cc92d35063ac9970bd56876092c3cef3f4348e282e91b98ae",
+      "lines": 270,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+        "Mathlib.Analysis.SpecialFunctions.Pow.Real"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 270,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 271
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cSectorProjection",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cSectorProjection.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "18a4d2affcc5e2e2ee508de254c7074feb49fd12",
+      "sha256": "281322b43fb8c328ffbc0f82ca2bd092a5ccecfc3a64eba95ce912582dc00151",
+      "lines": 144,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cStateSeminorms",
+        "ContinuousFlexibility.Analysis.SolveCircleProjection"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 144,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 145
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFullNeighborhood",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cFullNeighborhood.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "f77cffa470646b6872c787bcb7254c45096749ca",
+      "sha256": "f6800dce7155225453bf9994c30f70c0fea2ed5a033dab8fa2552c94e6e1949d",
+      "lines": 120,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cSectorProjection",
+        "ContinuousFlexibility.Blueprint.Statements"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 120,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 121
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOuterDenominatorJets",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cOuterDenominatorJets.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "a02914ce64f0228fd8388ed07881f87768538d88",
+      "sha256": "065f485c3b7d7b959b4f506689c20e989516267082e1a6726a4db6a4d0ce91d2",
+      "lines": 124,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFullNeighborhood",
+        "Mathlib.Analysis.Calculus.ContDiff.Comp",
+        "Mathlib.Analysis.Calculus.ContDiff.Operations"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 124,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 125
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCompositionJetBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cCompositionJetBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "00eabdd8a24edeed2c3956ce3a88fc5d5f05f0ef",
+      "sha256": "a8b04f68474608be1591f5a9a616b85503fddbfac0cab7c810eeb25a8ded6be3",
+      "lines": 284,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus",
+        "ContinuousFlexibility.Analysis.N01cOneHighProducts",
+        "ContinuousFlexibility.Analysis.N01cOuterDenominatorJets"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 284,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 285
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cWeightAbsorption",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cWeightAbsorption.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "01cd8154cee34b68f4fe22310aef58068eae5885",
+      "sha256": "3f823f6fd2130ca8f7f8394cc2cb0b143ecde5b0c55dbd4f074a15a85cda4abc",
+      "lines": 40,
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 40,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 41
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cMaterialAbsorption",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cMaterialAbsorption.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "6c5096b8dd85372f61d977f767d5d788d97c6556",
+      "sha256": "222b4a22f2066391282d4ad88495afbf8d12a9d15af7dbad14c6cd90df9e3b27",
+      "lines": 88,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cWeightAbsorption"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 88,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 89
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFiniteParameterProducts",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cFiniteParameterProducts.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "fa0a6002dd13e7f7daa287d51307f90d33960cff",
+      "sha256": "d662abe4f67a38a48bed3e677e61daa9da29a02f2deba75aa28d81ecd69940e6",
+      "lines": 245,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cParameterCalculus",
+        "ContinuousFlexibility.Analysis.N01cCompositionJetBounds",
+        "ContinuousFlexibility.Analysis.N01cMaterialAbsorption",
+        "ContinuousFlexibility.Analysis.N01cSpatialParameterComposition"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 245,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 246
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cLinearContinuity",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cLinearContinuity.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "cad933a01811df33f104946fd5bd47a05bdb958e",
+      "sha256": "3719aae0baf74832814cf29b73d63931ae3ab810fcaced80d24571656a9acf50",
+      "lines": 33,
+      "imports": [
+        "Mathlib.Analysis.Normed.Module.Seminorm.Basic",
+        "Mathlib.Analysis.Normed.Module.Basic",
+        "Mathlib.Analysis.Normed.Group.Continuity",
+        "Mathlib.Topology.Algebra.Group.Neighborhood"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 33,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 34
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cStateParameterJets",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cStateParameterJets.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "598e735abd6a9c2af4c6a5517896798e3aec018a",
+      "sha256": "2ed57949531dd99b44cd5e03559e938c7f076646d33a9c8c150f827eb0369da3",
+      "lines": 712,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cStateSeminorms",
+        "ContinuousFlexibility.Analysis.N01cLinearContinuity",
+        "ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus",
+        "ContinuousFlexibility.Analysis.StateProfileRegularity",
+        "Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas",
+        "Mathlib.Analysis.SpecialFunctions.ExpDeriv"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 712,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 713
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cProfileMixedDerivatives",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cProfileMixedDerivatives.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "f4ed6cd99ab9c2f2aabba9005a15c6cf32c1d8ed",
+      "sha256": "e5a15720336043682c3feb6cd5a79cbe60a4128d0df5ac3a5f4d508fb6b94015",
+      "lines": 371,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cStateParameterJets",
+        "ContinuousFlexibility.Analysis.CylinderMixedJets",
+        "ContinuousFlexibility.Radial.RadialHeight",
+        "Mathlib.Order.Filter.Finite"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 371,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 372
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cDistributedRadialProducts",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cDistributedRadialProducts.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "598c130f5d17afe0d8d78ff7eaa285cdd97b537f",
+      "sha256": "eb19cebc692ba5956c8a85c94bc6524d88f79ab2198d66b6684d031faed9c7a1",
+      "lines": 303,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cProfileMixedDerivatives",
+        "Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno",
+        "Mathlib.Algebra.BigOperators.Fin"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 303,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 304
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cMixedPowerBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cMixedPowerBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "11e7cf18ea857e0b7ba890bdc7a53f3408d6ec47",
+      "sha256": "49f84663f17ebe370cf6fc3664309bf8855e724101ccff11be7590feb2fc6835",
+      "lines": 238,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFiniteParameterProducts",
+        "ContinuousFlexibility.Analysis.N01cOneHighProducts",
+        "ContinuousFlexibility.Analysis.N01cDistributedRadialProducts"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 238,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 239
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cMixedPowerAlgebra",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cMixedPowerAlgebra.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "027bb1a2025e38413ade2d65e62cecdffa59aafe",
+      "sha256": "54007c727c78549a2ba9c2bbb16d1de1d799125a723bc3070707bfe2f4b92df3",
+      "lines": 352,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cMixedPowerBounds",
+        "Mathlib.Data.Nat.Choose.Sum"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 352,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 353
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cMixedPowerComposition",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cMixedPowerComposition.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "f4fe9d824ff96dbe7fe402fd29a725b5c78af482",
+      "sha256": "93eecbe75a7db2dcfd6da863e4a0773d4e60e6ee0a30f808a1658dbeb7d122a9",
+      "lines": 362,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cMixedPowerAlgebra"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 362,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 363
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cHeightSeminorms",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cHeightSeminorms.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "db0eba8047a8416fc2f80267269f2b1dc4a835a8",
+      "sha256": "4a8114d6c23a83443f866d24f2fb9eaa08727a6abb749e9be5666fd8c1edee8e",
+      "lines": 161,
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialCylinderPointwise"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 161,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 162
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cHeightParameterJets",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cHeightParameterJets.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "0c7d3864cce92ddf4fbf223d0c7b607720e9b76e",
+      "sha256": "e7ce490234bd10bf0400d6f45a4b25c26b98a419e50fe760cdb345b85be910d3",
+      "lines": 133,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cHeightSeminorms",
+        "ContinuousFlexibility.Analysis.N01cLinearContinuity",
+        "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+        "ContinuousFlexibility.Scalar.WeightedFieldRegularity"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 133,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 134
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalHeightJets",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cPhysicalHeightJets.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "de59a7407e479791d326f106f71b635d6b42ee50",
+      "sha256": "0a4daa91a8ad1b0f27bbdd1238bdba534d84c5201de763fcaaa0c120b4bb95a4",
+      "lines": 157,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cHeightParameterJets",
+        "ContinuousFlexibility.Analysis.MaterialOrdinaryJets"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 157,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 158
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cStateHeightJets",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cStateHeightJets.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "d3356b72e516848bd995878d972e858f42e3c5c9",
+      "sha256": "fe21ade7080201bba1e521707888b772fb0347191faf7f0d8d5608b3b67f259b",
+      "lines": 363,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cPhysicalHeightJets",
+        "ContinuousFlexibility.Analysis.MaterialHeightRegularity"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 363,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 364
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cRadialPowerInputs",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cRadialPowerInputs.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "0c88f6949fc55e72359c3d00c1073fc6d51cbbd9",
+      "sha256": "726329d2323495215549d845b63c86a71f5d03792841c251ff7f8632a3229168",
+      "lines": 153,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cMixedPowerComposition",
+        "ContinuousFlexibility.Analysis.N01cStateHeightJets"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 153,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 154
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cStateProfileProductBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cStateProfileProductBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "329b4e5a605fabcb42c72a83630557061af46d61",
+      "sha256": "77e955d7e8d0a30cbd7c7ce80a32276d4634e29ac1241fb89e1cb2fb35b38120",
+      "lines": 379,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cStateParameterJets",
+        "ContinuousFlexibility.Analysis.N01cFullNeighborhood",
+        "Mathlib.Algebra.Order.BigOperators.Ring.Finset"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 379,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 380
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cProfileRadialBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cProfileRadialBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "0dbd2aa07db896ba6f269271bf65ac5a7d7898d7",
+      "sha256": "84118788cb23018a20d62c288552dc09d9b480819d732b7d4c5ef758383a449b",
+      "lines": 179,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cDistributedRadialProducts",
+        "ContinuousFlexibility.Analysis.N01cStateProfileProductBounds"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 179,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 180
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cInverseProfileParameters",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cInverseProfileParameters.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "bb93d4a153831160b9f8f970041a21d343f7eac9",
+      "sha256": "9e0030119518ee374d9eab24735ed604ba8c7960d2b602945ea80475f7ed4d47",
+      "lines": 216,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cProfileRadialBounds",
+        "ContinuousFlexibility.Analysis.N01cSpatialParameterComposition"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 216,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 217
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cProfileMajorantWeights",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cProfileMajorantWeights.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "13542e54e4fa3dc0097d6133181ccce9b6010e70",
+      "sha256": "a5f78815c2016eb0be1fc4ab1b32a6bddd12a30a116984ea56910c27838d26c1",
+      "lines": 187,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cDistributedRadialProducts",
+        "Mathlib.Analysis.SpecialFunctions.Pow.Real"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 187,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 188
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cShiftedSampleWeights",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cShiftedSampleWeights.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "87bf3568816bfaff0d62b24bd86123e3498b0b7b",
+      "sha256": "a7c47f8d1f7c2eeb23c0eece5321701c5ce977ad352af916c19a12a839719226",
+      "lines": 143,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cMaterialShiftComparison",
+        "ContinuousFlexibility.Analysis.N01cMaterialAbsorption",
+        "ContinuousFlexibility.Analysis.MaterialSampleCofinite"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 143,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 144
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cControlJetWeights",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cControlJetWeights.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "10c58a5fc030186bf5d9472e0c30c1d82fb92a6d",
+      "sha256": "4367947c184f5b96c2a877c34a98fdfa58730f1d790cbdd4305806bf43254ccd",
+      "lines": 224,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cStateProfileProductBounds",
+        "ContinuousFlexibility.Analysis.N01cShiftedSampleWeights",
+        "ContinuousFlexibility.Analysis.StateControlDecay"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 224,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 225
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cReferenceDifferenceBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cReferenceDifferenceBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "914ee653ee7df2f05c331179478abf9aa5d5d332",
+      "sha256": "811a0a323029d328b7028df0ace431b401368a7d90c7ee63f92aec160b38b234",
+      "lines": 164,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cStateSeminorms",
+        "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+        "ContinuousFlexibility.Analysis.ProjectiveJetEvaluation",
+        "Mathlib.Analysis.Calculus.MeanValue",
+        "Mathlib.Tactic.Abel"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 164,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 165
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cProfileDifferenceBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cProfileDifferenceBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "ed253f47e7f1197f4b5cb164c78dea50a0d3e759",
+      "sha256": "5df09bd2f80357529ff07a1c5f09a581e538490871f243862ad4fe0da939d963",
+      "lines": 135,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cProfileRadialBounds",
+        "ContinuousFlexibility.Analysis.N01cReferenceDifferenceBounds"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 135,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 136
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cProfileMaterialBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cProfileMaterialBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "84cecd0fc9b76ba2374f1fb7835d34a0048faa4b",
+      "sha256": "e8f5e9568b1545708662d62d30cc5565008f2dd685ec356ed25ba1f179c50bf4",
+      "lines": 275,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cProfileMajorantWeights",
+        "ContinuousFlexibility.Analysis.N01cControlJetWeights",
+        "ContinuousFlexibility.Analysis.N01cReferenceJetBounds",
+        "ContinuousFlexibility.Analysis.N01cProfileDifferenceBounds"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 275,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 276
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cProfileBaseBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cProfileBaseBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "5acaa417e3dfad4d750a51d72091ed58ca84d332",
+      "sha256": "3bd528c5ca629c700dc5b2b018d6e1eb9abfd578a7495f13ad851a29ac643581",
+      "lines": 181,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cProfileMaterialBounds"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 181,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 182
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cInverseProfileBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cInverseProfileBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "12df55575458683d19ac7d2ac0aa64c1303055d5",
+      "sha256": "de3a5fa6ca63c5453c18939233408cfca9b4e26ee0d756424e0ab223bd0c89cd",
+      "lines": 458,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cInverseProfileParameters",
+        "ContinuousFlexibility.Analysis.N01cProfileBaseBounds"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 458,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 459
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cHeightGeometry",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cHeightGeometry.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "b7833483d32b385581ea8ae7f7be54de9df07c04",
+      "sha256": "e2985a6987d84e99c046fcecd40ff552b5a10c35412b65bd8952ac15178319e5",
+      "lines": 156,
+      "imports": [
+        "ContinuousFlexibility.Analysis.StateControlCofiniteClosure",
+        "ContinuousFlexibility.Analysis.MaterialHeightRegularity",
+        "ContinuousFlexibility.Blueprint.Statements",
+        "Mathlib.Analysis.Calculus.ContDiff.Deriv",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 156,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 157
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCoefficientParameters",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cCoefficientParameters.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "8079d28a845f998a936d9363df20d61ed42e31af",
+      "sha256": "7fa536de854f9d6ad2872ff704f171ce80f1350fce502d3c505bdfebf1161894",
+      "lines": 144,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cParameterCalculus",
+        "ContinuousFlexibility.Analysis.N01cStateParameterJets",
+        "ContinuousFlexibility.Analysis.N01cStateHeightJets",
+        "ContinuousFlexibility.Analysis.N01cHeightGeometry",
+        "ContinuousFlexibility.Analysis.N01cFullNeighborhood"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 144,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 145
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cLinearProductJets",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cLinearProductJets.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "d7e80ae483e64fc82eff2e02a4498acbaaedac67",
+      "sha256": "3058996dfe62fba3d3a40ee83a62178737deb7e24ea6a394846310df762cd850",
+      "lines": 129,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameElementaryCalculus"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 129,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 130
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPhysicalHeightBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cPhysicalHeightBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "d843c7c24cb9aab04e3bd670ce3b7154dd93bb43",
+      "sha256": "7ad1e698f333f494cb6bc29b1a8104c7131278bfb306fa5d10a2785056fe53c3",
+      "lines": 212,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cPhysicalHeightJets"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 212,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 213
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCutoffJetBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cCutoffJetBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "783f19ad801af767e140d43aa057115cfd4b0104",
+      "sha256": "01c87507a3a16b7d62b4e34f965bbfc8b0763d727e23c017155b2b79e6a2f42d",
+      "lines": 70,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cPhysicalHeightBounds"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 70,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 71
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cStateHeightBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cStateHeightBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "258ae37a5b5731284c546dd7a0539255dc97180e",
+      "sha256": "b553dde7aa44ddb187916e5b81360d4e24c5411d077e767e2cd1b403d5c26118",
+      "lines": 158,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCutoffJetBounds",
+        "ContinuousFlexibility.Analysis.N01cStateHeightJets",
+        "ContinuousFlexibility.Analysis.N01cStateSeminorms"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 158,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 159
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPolarJetBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cPolarJetBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "ad8c3af86687c222f2a067076abf2f25a874fd7a",
+      "sha256": "282b5e7b95ebb00dcca713f9d1fdaff713d5c157cc9aec0357119c99e9d65859",
+      "lines": 231,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cStateHeightBounds",
+        "ContinuousFlexibility.Analysis.FlatExtension"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 231,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 232
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cHeightProductBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cHeightProductBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "c0e423ef065fac7652cedd967c77f59bd99e86ea",
+      "sha256": "291748e870f24a3426b391661fc383a86bb241c778eed78c047f52157e28e893",
+      "lines": 430,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cLinearProductJets",
+        "ContinuousFlexibility.Analysis.N01cPolarJetBounds"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 430,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 431
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cPolarMixedParameterJets",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cPolarMixedParameterJets.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "35e943e0e6ec0a0502503e17d02ebbc06d22c94f",
+      "sha256": "ea0d74ceec3e74fa4881fdec8fa277496869e7c14329802c6eec2f91f1becb3b",
+      "lines": 260,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cHeightProductBounds"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 260,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 261
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cSpatialCoefficients",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cSpatialCoefficients.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "7b87a899746af09050833c3af5190a5de85d754b",
+      "sha256": "a91265976d213fd47a8a1be2e4220ffc6f3dbcae9ace66c1c64bc8b339436268",
+      "lines": 159,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cFullNeighborhood",
+        "ContinuousFlexibility.Analysis.N01cHeightGeometry",
+        "ContinuousFlexibility.Scalar.TypeCorrection"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 159,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 160
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCoefficientMixedParameterJets",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cCoefficientMixedParameterJets.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "223af7143d214d111dfdc4b854e8ed5fa099bc9e",
+      "sha256": "be44e102ee4f98241a1b69038de84a0a95b5a94b7574207b08f3233a3d0266dc",
+      "lines": 455,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cSpatialParameterComposition",
+        "ContinuousFlexibility.Analysis.N01cCoefficientParameters",
+        "ContinuousFlexibility.Analysis.N01cPolarMixedParameterJets",
+        "ContinuousFlexibility.Analysis.N01cProfileMixedDerivatives",
+        "ContinuousFlexibility.Analysis.N01cSpatialCoefficients"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 455,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 456
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cStateInterpolation",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cStateInterpolation.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "78bc0bafc2d5b73917c87e6e1913ec5f33b8fdf7",
+      "sha256": "f77d9194271b2cfcc1dc03503cb291b74dda829bd63098cc1298de9de65b1a51",
+      "lines": 166,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cOneHighProducts",
+        "ContinuousFlexibility.Analysis.N01cStateSeminorms",
+        "ContinuousFlexibility.Analysis.TameTransfer",
+        "ContinuousFlexibility.Analysis.TameSmoothingCalculus"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 166,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 167
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCoefficientRadialPowerInputs",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cCoefficientRadialPowerInputs.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "41d42105728d3157eacfedd269824fedfd903e3a",
+      "sha256": "0b3e08ee9180bab4434b460540a10162ec33f95f87ca008ca790323834db95c2",
+      "lines": 307,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cRadialPowerInputs",
+        "ContinuousFlexibility.Analysis.N01cInverseProfileBounds",
+        "ContinuousFlexibility.Analysis.N01cProfileBaseBounds",
+        "ContinuousFlexibility.Analysis.N01cCoefficientMixedParameterJets",
+        "ContinuousFlexibility.Analysis.N01cStateInterpolation"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 307,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 308
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualControlAssembly",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cActualControlAssembly.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "119d410c2be9e6571c6e7d0a6d88fa1173929b49",
+      "sha256": "c95a91343949ff18a709e340124d3827363054315e183771d7a3eab66909bca5",
+      "lines": 80,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01aControlGeometryAssembly",
+        "ContinuousFlexibility.Analysis.N01cPrimitiveGeometry",
+        "ContinuousFlexibility.Analysis.N01cCoefficientRadialPowerInputs"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 80,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 81
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01aFinalAssembly",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01aFinalAssembly.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "12fe61fda080d71d5d14fce29367dcebc3216705",
+      "sha256": "b636fd17c2c522298186a8e32cbdcd675f9af06272c98ac6113e4cd34474e0c4",
+      "lines": 61,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cActualControlAssembly",
+        "ContinuousFlexibility.Analysis.N01aMaterialContext",
+        "ContinuousFlexibility.Analysis.N01aOpticalProfile"
+      ],
+      "preimage": {
+        "module": "ContinuousFlexibility.Analysis.N01aFinalAssembly",
+        "target_path": "src/ContinuousFlexibility/Analysis/N01aFinalAssembly.lean",
+        "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+        "blob": "809716d54b79e1d0adfe1da6ab5de3f9c3bc93a9",
+        "sha256": "0307bee8b0a57f781b2fcf8ff518a5de08ee993e68c95663e23248c03ee3fc3d",
+        "lines": 65,
+        "imports": [
+          "ContinuousFlexibility.Analysis.N01aComponentEnumeration",
+          "ContinuousFlexibility.Analysis.N01aControlGeometryAssembly",
+          "ContinuousFlexibility.Analysis.N01aControlMaterialWeights",
+          "ContinuousFlexibility.Analysis.N01aMaterialContext",
+          "ContinuousFlexibility.Analysis.N01aOpticalProfile"
+        ]
+      },
+      "numstat": {
+        "source_added": 25,
+        "source_deleted": 29,
+        "generated_root_added": 0,
+        "budget_added": 25
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess",
+      "target_path": "src/ContinuousFlexibility/Analysis/N05CanonicalGeometryAccess.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "9e595d77c0a1983dcc4d4830baebd256975a8591",
+      "sha256": "b03c32c4f6cc6ba2fe16f99a7df485711b71cbe84fade9cc9134894dcfacc4d4",
+      "lines": 97,
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "Mathlib.Topology.Constructions.SumProd"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 97,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 98
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder",
+      "target_path": "src/ContinuousFlexibility/Analysis/N05ReferenceZeroRemainder.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "7a1b98d6ad9f3114467ab5b4ed50afbf655aacd7",
+      "sha256": "ee64b4d70fc3cca68585a0f5013b692270b6b514cdfe4eda90610ad2f9392085",
+      "lines": 14,
+      "imports": [
+        "ContinuousFlexibility.Statements.Radial"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 14,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 15
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N05ReferenceSWindow",
+      "target_path": "src/ContinuousFlexibility/Analysis/N05ReferenceSWindow.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "92d2a8310c69c8953683386f683fdce9549847c9",
+      "sha256": "ceb877c26b64c0ee5d89e50a7f59f148768ae121895cb16c377dee16d835d545",
+      "lines": 110,
+      "imports": [
+        "ContinuousFlexibility.Radial.DeepTailPhysicalWeights"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 110,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 111
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.NeighborhoodConstruction",
+      "target_path": "src/ContinuousFlexibility/Analysis/NeighborhoodConstruction.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "62ef3dd8c7d97a2e9d1a75ea631a6f74f4bdd625",
+      "sha256": "c0e8b8108ca2966bb6ec0b32804414612a64e1b6becfdc3801dc941b32bd7af7",
+      "lines": 112,
+      "imports": [
+        "ContinuousFlexibility.Analysis.NeighborhoodCommonBounds",
+        "ContinuousFlexibility.Analysis.NeighborhoodCharacteristicSpeedExtension",
+        "ContinuousFlexibility.Analysis.NeighborhoodCircleFlowRegularity",
+        "ContinuousFlexibility.Analysis.NeighborhoodFlowGeometry",
+        "ContinuousFlexibility.Analysis.NeighborhoodRootGerms"
+      ],
+      "preimage": {
+        "module": "ContinuousFlexibility.Analysis.NeighborhoodConstruction",
+        "target_path": "src/ContinuousFlexibility/Analysis/NeighborhoodConstruction.lean",
+        "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+        "blob": "5f58c45cc9578408781597cdd0b12d61c316c25e",
+        "sha256": "221e9ae468067d239179a0b627c18ca3137e719caf25253ae031cd65e465ccc8",
+        "lines": 111,
+        "imports": [
+          "ContinuousFlexibility.Analysis.NeighborhoodCommonBounds",
+          "ContinuousFlexibility.Analysis.NeighborhoodCharacteristicSpeedExtension",
+          "ContinuousFlexibility.Analysis.NeighborhoodCircleFlowRegularity",
+          "ContinuousFlexibility.Analysis.NeighborhoodFlowGeometry",
+          "ContinuousFlexibility.Analysis.NeighborhoodRootGerms"
+        ]
+      },
+      "numstat": {
+        "source_added": 3,
+        "source_deleted": 2,
+        "generated_root_added": 0,
+        "budget_added": 3
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.MorseNegativeCover",
+      "target_path": "src/ContinuousFlexibility/Radial/MorseNegativeCover.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "def59d94f823d33cd6f70b109236b276de41440a",
+      "sha256": "143ddb8c4fd46016504e720a77d88e73a255a4fc1fbf5eedb5ea1462e8448351",
+      "lines": 220,
+      "imports": [
+        "ContinuousFlexibility.Radial.MorseModelReturn",
+        "ContinuousFlexibility.Radial.ReferenceReturnComponents",
+        "Lean.Elab.Tactic.Omega"
+      ],
+      "preimage": {
+        "module": "ContinuousFlexibility.Radial.MorseNegativeCover",
+        "target_path": "src/ContinuousFlexibility/Radial/MorseNegativeCover.lean",
+        "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+        "blob": "d9c75aad1386413c479ea90f8ed994f0b06ff47a",
+        "sha256": "f9d1e42f4a252c7f301b4dcc66954133b8d64264e039c0e74a449881122ef16c",
+        "lines": 208,
+        "imports": [
+          "ContinuousFlexibility.Radial.MorseModelReturn",
+          "ContinuousFlexibility.Radial.ReferenceReturnComponents",
+          "Lean.Elab.Tactic.Omega"
+        ]
+      },
+      "numstat": {
+        "source_added": 15,
+        "source_deleted": 3,
+        "generated_root_added": 0,
+        "budget_added": 15
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cRetainedReferenceCompletion",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cRetainedReferenceCompletion.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "a9e9b32933a44609a50b9a42cbddc7fcaf61eb40",
+      "sha256": "b5930c2b8e756f704f4d3fa0a8b995488a19430b5c20ebf2cd98e5a667f0305d",
+      "lines": 98,
+      "imports": [
+        "ContinuousFlexibility.Blueprint.R11b",
+        "ContinuousFlexibility.Blueprint.R12",
+        "ContinuousFlexibility.Radial.ReferenceMatchedFamily"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 98,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 99
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cRetainedRegionalEnvelope",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cRetainedRegionalEnvelope.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "a21b7d1acadf46c97fe5dbf711c9c48d8ba4732c",
+      "sha256": "368685b728f576f9ac783605306cc8e96943b0e956f11f21a474fa190d16a286",
+      "lines": 113,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cRetainedReferenceCompletion",
+        "ContinuousFlexibility.Radial.MatchedChannelEnvelope",
+        "ContinuousFlexibility.Radial.MatchedFiniteEnvelope",
+        "ContinuousFlexibility.Radial.MatchedFlooredRawEnvelope",
+        "ContinuousFlexibility.Radial.MatchingInverseTheorem"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 113,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 114
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualReferenceWith",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cActualReferenceWith.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "5410a15bd4297b2f7d2c36b58554afc9b916da5d",
+      "sha256": "1e4d0fb6a6ca4b67cb77ef218c0491da1ef358ef2f7c513a8262f757346af59e",
+      "lines": 135,
+      "imports": [
+        "ContinuousFlexibility.Radial.R11aClosedInputs",
+        "ContinuousFlexibility.Radial.R11aRetainedFamily",
+        "ContinuousFlexibility.Radial.MatchedInnerCompletedFamily",
+        "ContinuousFlexibility.Radial.MatchedOuterCompletedFamily",
+        "ContinuousFlexibility.Analysis.N01cRetainedRegionalEnvelope"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 135,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 136
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cMorseOpticalLowerBound",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cMorseOpticalLowerBound.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "bcac3863f1ef62634bb7dd7d78767384ad1859f6",
+      "sha256": "994cefc5f1ee10575724ccddff41f5e5a658c01ce86e8098e0f7e5a1ba9d1695",
+      "lines": 402,
+      "imports": [
+        "ContinuousFlexibility.Radial.MorseRealizationBasic",
+        "ContinuousFlexibility.Radial.MorseRetainedRadiusModelBounds",
+        "Mathlib.Analysis.Calculus.Deriv.MeanValue",
+        "Mathlib.Topology.Order.IntermediateValue"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 402,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 403
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cMorseOpticalEnvelope",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cMorseOpticalEnvelope.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "ea3b5e6b2e1774a4c182e9b5f0aaf32f9c0b06d6",
+      "sha256": "2b6abdf64ee99d9fa2262c43d828fbd9d39ca0b3a2df2c381617bdbb69183dea",
+      "lines": 111,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cMorseOpticalLowerBound"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 111,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 112
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cMorseComponentClassification",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cMorseComponentClassification.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "ab126620a3d378b90b9c7b19eba1adac28aa9085",
+      "sha256": "8f482a8ea0456246c9f02d58b24e01e83c6c49ce48e1f2d6cdb306d288222d62",
+      "lines": 50,
+      "imports": [
+        "ContinuousFlexibility.Radial.MorseNegativeCover"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 50,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 51
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOpticalCellComparison",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cOpticalCellComparison.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "9cf2ec07993fb9a8e9834c5642c0fbe36a984563",
+      "sha256": "215289180d6c5367d59a81761197f714bdc46147ea4b0161dd82c30141d11088",
+      "lines": 90,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01aMaterialContext",
+        "ContinuousFlexibility.Analysis.N01aControlMaterialWeights"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 90,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 91
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOpticalPointCover",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cOpticalPointCover.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "e083f40d889584ac4769d40bef0520828de4dcea",
+      "sha256": "210673d62a49cee169dd8c29785c46598e9aa2e138d0e3ccc1c5b4a61f30da71",
+      "lines": 70,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cOpticalCellComparison",
+        "ContinuousFlexibility.Statements.RadialTargets",
+        "ContinuousFlexibility.Radial.ReferenceReturnComponents"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 70,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 71
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cScaledMorseOpticalCover",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cScaledMorseOpticalCover.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "cb7b2677dfd8d5a664e921f3844aaced0b0de151",
+      "sha256": "14a9ab02cd81d98f261d7ace61d84bdf34fe4a73124332c295542387b3fb6094",
+      "lines": 117,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cMorseOpticalEnvelope",
+        "ContinuousFlexibility.Analysis.N01cMorseComponentClassification",
+        "ContinuousFlexibility.Analysis.N01cOpticalPointCover",
+        "ContinuousFlexibility.Radial.OpenComponentTransport"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 117,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 118
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cFiniteHeadOpticalBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cFiniteHeadOpticalBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "74597708af62378add6e1f667d342d030628d541",
+      "sha256": "d66a29598fa1fa2ef50efe6ee44752b5713e3bdd563943d0e715d64954160077",
+      "lines": 276,
+      "imports": [
+        "ContinuousFlexibility.Statements.Radial",
+        "Mathlib.Analysis.Calculus.DSlope",
+        "Mathlib.Topology.Order.Compact",
+        "Mathlib.Topology.DiscreteSubset"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 276,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 277
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualPrimitiveGeometry",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cActualPrimitiveGeometry.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "799ecafd7c45f287d61fa23a8206352e74f23f63",
+      "sha256": "5971fe324efc7e9b4df6a5eb04eef13d4acb51bfcd5e570acdfcc5edaea21c0d",
+      "lines": 155,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cScaledMorseOpticalCover",
+        "ContinuousFlexibility.Analysis.N01cFiniteHeadOpticalBounds",
+        "ContinuousFlexibility.Radial.R11aRetainedFamily",
+        "ContinuousFlexibility.Radial.SeedCentralReturn"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 155,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 156
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCanonicalComponentEnumeration",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cCanonicalComponentEnumeration.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "97f421916b8d4c1f85119f2503c9ef89728b6fd2",
+      "sha256": "bd5cfb524ddb83d6d32e702970fe756640304d9bf5bcc488798582e9dceb61af",
+      "lines": 256,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01aNegativeComponentGeometry",
+        "ContinuousFlexibility.Analysis.N01cMorseComponentClassification",
+        "ContinuousFlexibility.Analysis.N01cOpticalCellComparison",
+        "ContinuousFlexibility.Radial.SeedCentralReturn",
+        "ContinuousFlexibility.Radial.MorseChainPartitionData",
+        "ContinuousFlexibility.Radial.MorseSecondModeGeometry"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 256,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 257
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cRetainedComponentEnumeration",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cRetainedComponentEnumeration.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "bdd0d674c821041280d5f50776cf5d6e019c6cbf",
+      "sha256": "74cba95f8966416c78183bab6952abbaa05e1b8ed649fbb08f2a008e13b7f63b",
+      "lines": 53,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCanonicalComponentEnumeration",
+        "ContinuousFlexibility.Radial.R11aRetainedFamily"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 53,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 54
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cActualN01aReference",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cActualN01aReference.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "cc7467f5a94cbea27a9388f0e9bdcd3a8d10848e",
+      "sha256": "a92cd9bdcc0314b3d05d48d72ba2b066d17089ffc8a0cd6b6bd53672211986bc",
+      "lines": 33,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cActualReferenceWith",
+        "ContinuousFlexibility.Analysis.N01cActualPrimitiveGeometry",
+        "ContinuousFlexibility.Analysis.N01cRetainedComponentEnumeration"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 33,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 34
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Blueprint.N01a",
+      "target_path": "src/ContinuousFlexibility/Blueprint/N01a.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "33cb9f1b17815478e0c69337d686eb4a18f66176",
+      "sha256": "2d3af45fec576b58ad27cfd3be708823691b87f8a341d1d25e59907c0af44558",
+      "lines": 30,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01aFinalAssembly",
+        "ContinuousFlexibility.Analysis.N01cActualN01aReference",
+        "ContinuousFlexibility.Analysis.N01aReferenceHeight"
+      ],
+      "preimage": {
+        "module": "ContinuousFlexibility.Blueprint.N01a",
+        "target_path": "src/ContinuousFlexibility/Blueprint/N01a.lean",
+        "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+        "blob": "c7dd2850e26f4c5e5b3bb7c8ecad99bb4e0177ce",
+        "sha256": "aa087aa6b53d08bf4b38b86bda853ab71cca5b518bcd0fb2dfe42e09bea396a3",
+        "lines": 37,
+        "imports": [
+          "ContinuousFlexibility.Analysis.N01aFinalAssembly",
+          "ContinuousFlexibility.Analysis.N01aGroupedReference",
+          "ContinuousFlexibility.Analysis.N01aReferenceGoodPoints",
+          "ContinuousFlexibility.Analysis.N01aReferenceHeight"
+        ]
+      },
+      "numstat": {
+        "source_added": 7,
+        "source_deleted": 14,
+        "generated_root_added": 0,
+        "budget_added": 7
+      },
+      "batch_role": "mandatory_cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Blueprint.N01c.Statements",
+      "target_path": "src/ContinuousFlexibility/Blueprint/N01c/Statements.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "b7abdda1dad31c62dfcf1645dc3ab0be038179fe",
+      "sha256": "49d76ec1fa211866d2385488604f02b2a7b21309f52058611fbddf59b1e5db14",
+      "lines": 75,
+      "imports": [
+        "ContinuousFlexibility.Blueprint.Statements"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 75,
+        "source_deleted": 0,
+        "generated_root_added": 0,
+        "budget_added": 75
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCoefficientBaseSelection",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cCoefficientBaseSelection.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "e77e22abf9ac113753d367362873fc94a42be8e6",
+      "sha256": "1a3db3d9db54a88bbb822062dc744a20dd7cf65fec9db944d087360cb6afdfb2",
+      "lines": 41,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cMixedPowerBounds"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 41,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 42
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cMixedPowerNormalization",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cMixedPowerNormalization.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "7b2aa3229d7384513b5f95b08d3db888a88e0ace",
+      "sha256": "d4316b36b207ad1870c34580dd1f9ae0b5a9f68e02b528416453d0750eb2aa85",
+      "lines": 96,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cMixedPowerBounds",
+        "ContinuousFlexibility.Analysis.N01cReferenceDifferenceBounds"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 96,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 97
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCoefficientSampleBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cCoefficientSampleBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "81d4bf94debf7edf593eacfc2dc3169f991ceab2",
+      "sha256": "2bc5e37133aafadbf0a409fde5702a4720adf330ea822e2ac450571c6429cc30",
+      "lines": 95,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cMaterialShiftComparison",
+        "ContinuousFlexibility.Analysis.N01cWeightAbsorption",
+        "ContinuousFlexibility.Analysis.N01cMixedPowerNormalization"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 95,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 96
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCoefficientPolarPowerInputs",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cCoefficientPolarPowerInputs.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "c66b41f8287cd2d85380535c454bd77e1ac1e679",
+      "sha256": "35c860950c0ad78a9856cdb61ca6112f902c4db018158c0dfc5a790d25ee6ad8",
+      "lines": 207,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCoefficientRadialPowerInputs"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 207,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 208
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cControlledFields",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cControlledFields.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "7f2858a4cd020a90147dcaeb5d94ed8ce25cf771",
+      "sha256": "1a54e2948776af1d4039ca0dcbc1c59d7d206ca67b0a018a00b2e69c1cc74dfa",
+      "lines": 107,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCoefficientPolarPowerInputs"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 107,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 108
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cNormalizedCoefficients",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cNormalizedCoefficients.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "21b7f84076f8ed06e82fefc863571bb432c41210",
+      "sha256": "45206c15152006141291085c00aac614d3fcb8686724efc0280d010b11f82475",
+      "lines": 129,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cHeightGeometry",
+        "ContinuousFlexibility.Analysis.N01cFullNeighborhood"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 129,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 130
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cOriginalCoefficientPowerBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cOriginalCoefficientPowerBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "4e292b4f21f7911ae5aa3bebfe6053bc3c66cf3c",
+      "sha256": "a8e8cfd1e23e20f68709a51a5933aa1c503fb78b4eaeb9ed48d49567a9997ee9",
+      "lines": 359,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cControlledFields",
+        "ContinuousFlexibility.Analysis.N01cNormalizedCoefficients"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 359,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 360
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCoefficientPointBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cCoefficientPointBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "ad3dd9c4d2de32c39c63727a6d912dda086c5848",
+      "sha256": "37d3bf6dc038dc014333d747bf4520be5a64624eb9cacf4e86fae96057900c9a",
+      "lines": 69,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cMixedPowerNormalization",
+        "ContinuousFlexibility.Analysis.N01cSpatialParameterComposition"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 69,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 70
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCoefficientTameBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cCoefficientTameBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "0b73f6865edfbf1f704b47b540efa76b9a67414b",
+      "sha256": "46836735cbdffae67128147407f8eb47014c7498fdab154cb514a6443ed359a1",
+      "lines": 118,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cCoefficientBaseSelection",
+        "ContinuousFlexibility.Analysis.N01cCoefficientSampleBounds",
+        "ContinuousFlexibility.Analysis.N01cOriginalCoefficientPowerBounds",
+        "ContinuousFlexibility.Analysis.N01cCoefficientPointBounds",
+        "ContinuousFlexibility.Analysis.N01cMixedPowerNormalization",
+        "ContinuousFlexibility.Analysis.N01cMaterialShiftComparison",
+        "ContinuousFlexibility.Analysis.N01cWeightAbsorption",
+        "ContinuousFlexibility.Analysis.N01cBoundsRestriction"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 118,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 119
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Blueprint.N01c.Coefficients",
+      "target_path": "src/ContinuousFlexibility/Blueprint/N01c/Coefficients.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "d08bfe0f69de1d6f580d88bd542733d28d9475cc",
+      "sha256": "f787af679a19e0b389200b0dd45da4b665e28bf72ff4829e68047fec09774c68",
+      "lines": 28,
+      "imports": [
+        "ContinuousFlexibility.Blueprint.N01c.Statements",
+        "ContinuousFlexibility.Analysis.N01cCoefficientTameBounds",
+        "ContinuousFlexibility.Analysis.N01cMaterialNormalization"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 28,
+        "source_deleted": 0,
+        "generated_root_added": 0,
+        "budget_added": 28
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cControlEndpointFactor",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cControlEndpointFactor.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "d68b3a92769d3a57e88728db598ba4dde8bd7b8c",
+      "sha256": "96a465641a7adc119b63fe415b12d548038bc40211acdbde86e5930373ee77f9",
+      "lines": 87,
+      "imports": [
+        "ContinuousFlexibility.Analysis.StateControlDecay",
+        "ContinuousFlexibility.Analysis.StateKappaBounds",
+        "ContinuousFlexibility.Blueprint.Statements",
+        "Mathlib.Analysis.Calculus.MeanValue"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 87,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 88
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cRelativeControl",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cRelativeControl.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "35600e599031fb1ae6b05632266ff29db756366c",
+      "sha256": "cd71ff56f2d4cde18727f3342502aedf4fec3b3f5c5c79901a84c7820444052d",
+      "lines": 157,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cSpatialCoefficients",
+        "ContinuousFlexibility.Analysis.N01cControlEndpointFactor"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 157,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 158
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cCommonType",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cCommonType.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "f17ec76ef14bd298b061dcdf1b58da20c8cd44ac",
+      "sha256": "c52811df2c275f4e926a4511e3d0d6f3cc55aea5c8d938c187233752aeffd520",
+      "lines": 151,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cRelativeControl",
+        "ContinuousFlexibility.Analysis.N01cShiftedSampleWeights",
+        "ContinuousFlexibility.Analysis.N01cStateSeminorms"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 151,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 152
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cSpeedNormalization",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cSpeedNormalization.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "3d6f76257d270dec0bebde2d5e38d64ee075f7d5",
+      "sha256": "3c90404afeeaf22ebf99abde687fb4966cffe3640554fcb15a8ad82e5aa90c78",
+      "lines": 109,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cNormalizedCoefficients",
+        "ContinuousFlexibility.Analysis.N01cCommonType"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 109,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 110
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cNormalizedSpeedPowerBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cNormalizedSpeedPowerBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "13aa4e4b9eed55bec650ec81c90e84e0e39c4a04",
+      "sha256": "497c371fe68ba91efb48eb19c05c93c5f93015a85525ec5d58cf05a392e7c4ce",
+      "lines": 327,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cOriginalCoefficientPowerBounds",
+        "ContinuousFlexibility.Analysis.N01cSpeedNormalization"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 327,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 328
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cEndpointMixedPowerAlgebra",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cEndpointMixedPowerAlgebra.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "53864cc81b6709baf117d7eb997d1960e68e472b",
+      "sha256": "7fa7b1daeb2418e8f0a018280b816129a5ab154ea6941e130a2c376491918758",
+      "lines": 334,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cMixedPowerAlgebra",
+        "ContinuousFlexibility.Analysis.N01cHeightParameterJets"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 334,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 335
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cEndpointSamplePowerBounds",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cEndpointSamplePowerBounds.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "5017d2174f659f5ac4cb71dd95b6d20afdbf3e30",
+      "sha256": "4ed18a4e868500a3d820e731833d92f01643b9bca158185b70a1eabe4c8a1ffe",
+      "lines": 117,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cEndpointMixedPowerAlgebra",
+        "ContinuousFlexibility.Analysis.N01cMaterialShiftComparison"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 117,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 118
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cEndpointMixedPowerNormalization",
+      "target_path": "src/ContinuousFlexibility/Analysis/N01cEndpointMixedPowerNormalization.lean",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "blob": "dfde99991166eea53189a370940aaec6b3c42bc1",
+      "sha256": "9bbe678754c790d44c6532e719316ac912388e73052fe5732bce09ccd9c2bd37",
+      "lines": 117,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01cEndpointMixedPowerAlgebra",
+        "ContinuousFlexibility.Analysis.N01cMixedPowerNormalization"
+      ],
+      "preimage": null,
+      "numstat": {
+        "source_added": 117,
+        "source_deleted": 0,
+        "generated_root_added": 1,
+        "budget_added": 118
+      },
+      "batch_role": "dependency_safe_budget_fill"
+    }
+  ],
+  "other_Lean_files": [],
+  "paths": [
+    "src/ContinuousFlexibility.lean",
+    "src/ContinuousFlexibility/Analysis/AffineMaterialSampling.lean",
+    "src/ContinuousFlexibility/Analysis/ControlCellEndpointBounds.lean",
+    "src/ContinuousFlexibility/Analysis/LocalMixedProductBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01aFinalAssembly.lean",
+    "src/ContinuousFlexibility/Analysis/N01cActualControlAssembly.lean",
+    "src/ContinuousFlexibility/Analysis/N01cActualN01aReference.lean",
+    "src/ContinuousFlexibility/Analysis/N01cActualPrimitiveGeometry.lean",
+    "src/ContinuousFlexibility/Analysis/N01cActualReferenceWith.lean",
+    "src/ContinuousFlexibility/Analysis/N01cCanonicalComponentEnumeration.lean",
+    "src/ContinuousFlexibility/Analysis/N01cCoefficientBaseSelection.lean",
+    "src/ContinuousFlexibility/Analysis/N01cCoefficientJetCalculus.lean",
+    "src/ContinuousFlexibility/Analysis/N01cCoefficientMixedParameterJets.lean",
+    "src/ContinuousFlexibility/Analysis/N01cCoefficientParameters.lean",
+    "src/ContinuousFlexibility/Analysis/N01cCoefficientPointBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cCoefficientPolarPowerInputs.lean",
+    "src/ContinuousFlexibility/Analysis/N01cCoefficientRadialPowerInputs.lean",
+    "src/ContinuousFlexibility/Analysis/N01cCoefficientSampleBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cCoefficientTameBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cCommonType.lean",
+    "src/ContinuousFlexibility/Analysis/N01cCompositionJetBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cControlEndpointFactor.lean",
+    "src/ContinuousFlexibility/Analysis/N01cControlJetWeights.lean",
+    "src/ContinuousFlexibility/Analysis/N01cControlledFields.lean",
+    "src/ContinuousFlexibility/Analysis/N01cCutoffJetBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cDistributedRadialProducts.lean",
+    "src/ContinuousFlexibility/Analysis/N01cEndpointMixedPowerAlgebra.lean",
+    "src/ContinuousFlexibility/Analysis/N01cEndpointMixedPowerNormalization.lean",
+    "src/ContinuousFlexibility/Analysis/N01cEndpointSamplePowerBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cFiniteHeadOpticalBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cFiniteParameterProducts.lean",
+    "src/ContinuousFlexibility/Analysis/N01cFullNeighborhood.lean",
+    "src/ContinuousFlexibility/Analysis/N01cHeightGeometry.lean",
+    "src/ContinuousFlexibility/Analysis/N01cHeightParameterJets.lean",
+    "src/ContinuousFlexibility/Analysis/N01cHeightProductBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cHeightSeminorms.lean",
+    "src/ContinuousFlexibility/Analysis/N01cInverseProfileBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cInverseProfileParameters.lean",
+    "src/ContinuousFlexibility/Analysis/N01cLinearContinuity.lean",
+    "src/ContinuousFlexibility/Analysis/N01cLinearProductJets.lean",
+    "src/ContinuousFlexibility/Analysis/N01cMaterialAbsorption.lean",
+    "src/ContinuousFlexibility/Analysis/N01cMaterialNormalization.lean",
+    "src/ContinuousFlexibility/Analysis/N01cMaterialShiftComparison.lean",
+    "src/ContinuousFlexibility/Analysis/N01cMixedPowerAlgebra.lean",
+    "src/ContinuousFlexibility/Analysis/N01cMixedPowerBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cMixedPowerComposition.lean",
+    "src/ContinuousFlexibility/Analysis/N01cMixedPowerNormalization.lean",
+    "src/ContinuousFlexibility/Analysis/N01cMorseComponentClassification.lean",
+    "src/ContinuousFlexibility/Analysis/N01cMorseOpticalEnvelope.lean",
+    "src/ContinuousFlexibility/Analysis/N01cMorseOpticalLowerBound.lean",
+    "src/ContinuousFlexibility/Analysis/N01cNormalizedCoefficients.lean",
+    "src/ContinuousFlexibility/Analysis/N01cNormalizedSpeedPowerBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cOneHighProducts.lean",
+    "src/ContinuousFlexibility/Analysis/N01cOpticalCellComparison.lean",
+    "src/ContinuousFlexibility/Analysis/N01cOpticalPointCover.lean",
+    "src/ContinuousFlexibility/Analysis/N01cOriginalCoefficientPowerBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cOuterDenominatorJets.lean",
+    "src/ContinuousFlexibility/Analysis/N01cParameterCalculus.lean",
+    "src/ContinuousFlexibility/Analysis/N01cPhysicalHeightBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cPhysicalHeightJets.lean",
+    "src/ContinuousFlexibility/Analysis/N01cPolarJetBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cPolarMixedParameterJets.lean",
+    "src/ContinuousFlexibility/Analysis/N01cPrimitiveGeometry.lean",
+    "src/ContinuousFlexibility/Analysis/N01cProfileBaseBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cProfileDifferenceBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cProfileMajorantWeights.lean",
+    "src/ContinuousFlexibility/Analysis/N01cProfileMaterialBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cProfileMixedDerivatives.lean",
+    "src/ContinuousFlexibility/Analysis/N01cProfileRadialBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cRadialPowerInputs.lean",
+    "src/ContinuousFlexibility/Analysis/N01cReferenceDifferenceBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cReferenceJetBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cRelativeControl.lean",
+    "src/ContinuousFlexibility/Analysis/N01cRetainedComponentEnumeration.lean",
+    "src/ContinuousFlexibility/Analysis/N01cRetainedReferenceCompletion.lean",
+    "src/ContinuousFlexibility/Analysis/N01cRetainedRegionalEnvelope.lean",
+    "src/ContinuousFlexibility/Analysis/N01cScaledMorseOpticalCover.lean",
+    "src/ContinuousFlexibility/Analysis/N01cSectorProjection.lean",
+    "src/ContinuousFlexibility/Analysis/N01cShiftedSampleWeights.lean",
+    "src/ContinuousFlexibility/Analysis/N01cSpatialCoefficients.lean",
+    "src/ContinuousFlexibility/Analysis/N01cSpatialParameterComposition.lean",
+    "src/ContinuousFlexibility/Analysis/N01cSpeedNormalization.lean",
+    "src/ContinuousFlexibility/Analysis/N01cStateHeightBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cStateHeightJets.lean",
+    "src/ContinuousFlexibility/Analysis/N01cStateInterpolation.lean",
+    "src/ContinuousFlexibility/Analysis/N01cStateParameterJets.lean",
+    "src/ContinuousFlexibility/Analysis/N01cStateProfileProductBounds.lean",
+    "src/ContinuousFlexibility/Analysis/N01cWeightAbsorption.lean",
+    "src/ContinuousFlexibility/Analysis/N05CanonicalGeometryAccess.lean",
+    "src/ContinuousFlexibility/Analysis/N05ReferenceSWindow.lean",
+    "src/ContinuousFlexibility/Analysis/N05ReferenceZeroRemainder.lean",
+    "src/ContinuousFlexibility/Analysis/NeighborhoodConstruction.lean",
+    "src/ContinuousFlexibility/Analysis/StateControlCofiniteClosure.lean",
+    "src/ContinuousFlexibility/Analysis/StateControlDecay.lean",
+    "src/ContinuousFlexibility/Blueprint/N01a.lean",
+    "src/ContinuousFlexibility/Blueprint/N01c/Coefficients.lean",
+    "src/ContinuousFlexibility/Blueprint/N01c/Statements.lean",
+    "src/ContinuousFlexibility/Blueprint/Statements.lean",
+    "src/ContinuousFlexibility/Radial/MorseNegativeCover.lean",
+    "src/ContinuousFlexibility/Statements/RadialTargets.lean"
+  ],
+  "additional_parents": [],
+  "added_lean_since_full_green": 16992,
+  "deleted_lean_since_full_green": 86,
+  "line_count_method": "git diff --numstat --no-renames against the exact complete-green parent",
+  "source_total": 4302,
+  "source_all_total": 4306,
+  "root_imports": 4241,
+  "scope": "Current-main source cohort 2/5: primitive_reference_and_preserved_N01a_N01b_witness. Exact upstream sources with the independently reviewed common-provider port where applicable. All preimages and full import graph revalidated; no main ancestry claim yet. Complete CI is required before further activation.",
+  "created_at": "2026-11-12T18:56:33.295002+00:00"
+}

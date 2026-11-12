@@ -1,0 +1,470 @@
+{
+  "kind": "held_reference41_projected_main_provider_migration_read_only",
+  "owner": "/root/audit_coordinates",
+  "status": "READ_ONLY_SOURCE_AND_INTERFACE_AUDIT_NOT_AUTHORITY_NOT_COMPILED",
+  "active_head": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+  "active_tree": "64a18c3f510156a0386b5601f7c26fe575e6f958",
+  "projected_upstream": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+  "projected_batches": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "inputs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-next-reference-group-held.json",
+      "sha256": "e3df495b387d253732915923b113924c74fef74b8dd51310d20bcdbe68408f50",
+      "blob": "0ae5d8a1d49a64c412183757910c6ff25507260c",
+      "lines": 2102
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-reviewed-provider-rebindings-ci154.json",
+      "sha256": "cd182acade817706cc4ccfce1bef581ef977580e0b7c98505d48c33d573e97b9",
+      "blob": "f0fd4a71a6a900035104a9ffcc815b985384d193",
+      "lines": 694
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/upstream-main-c9/MainC9BoundedIntegrationBatchProposalCI155.json",
+      "sha256": "3d4897a11c85b1601f624161a61d38f1633aff3a388ff1fdc90812aec9e757c1",
+      "blob": "b87153f6e7d7f2db1b79c04c2d1f1a5eeed8ae94",
+      "lines": 11536
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-stage-main-next-cohort.py",
+      "sha256": "4d1eb840eeb45e1ddb21a9ef9304444e90d644a57dbada9223ef73ba92de97e4",
+      "blob": "bcb04ec39fe3e1c2cd378411effe15e2f9254344",
+      "lines": 176
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/upstream-main-c9/scan_selected_public_ci155.py",
+      "sha256": "d24d00c78111067500e94d6ee655f63a08b0d5bcea05b6f8693feb0b866cb34c",
+      "blob": "d7310df591c67109244e65dc19536f5eb842c597",
+      "lines": 132
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-preflight-reference-family-ci154.py",
+      "sha256": "e4af20ef156b24911dad245c6813cc41c41fa6ef9d3eeae8ca67f12e1ced2a15",
+      "blob": "06bac6f6d97fd8f27c2860b9660649ad89cb7274",
+      "lines": 183
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-next-actual-family-group-reconstructed-held.json",
+      "sha256": "bd2804ba63b06e66d551b46bd47b887deb7147972c11e1c6f927bdfd9668fd8c",
+      "blob": "46c40c221da3aa7c4df67ea358f9aa6065761aba",
+      "lines": 1383
+    }
+  ],
+  "exact_projection_scan": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/ReferenceGroupProjectedMainProviderScanCI163.json",
+    "sha256": "b2f88e3c7be9085d2b12aa72aa5cf7bb7b06ce9cfbe177ceb5c9264d71be818b",
+    "blob": "1b89bb783fa414151fbcc9d23feb0ef20e355e5e",
+    "lines": 242
+  },
+  "counts": {
+    "held_sources": 41,
+    "source_lines": 4902,
+    "public_names": 105,
+    "original_providers": 824,
+    "unchanged_original_providers": 802,
+    "changed_original_providers": 22,
+    "already_covered_by_ci154_ledger": 7,
+    "additional_provider_rebindings": 15,
+    "current_provider_rebindings": 10,
+    "future_batch2_rebindings": 5,
+    "additional_prerequisite_only_rebindings": 2,
+    "old_closure": 865,
+    "projected_closure": 867,
+    "new_graph_nodes": 2
+  },
+  "required_current_provider_rebindings": [
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalActualPositiveFiniteFactory",
+      "old": "cda98a7e3251f9bd9b5568e54eb48e19b031f76a",
+      "active": "c10212e520142c34a32d0ef19f960bd85992dd64",
+      "projected": "c10212e520142c34a32d0ef19f960bd85992dd64",
+      "batch": null,
+      "ledger_covers_projected": false,
+      "receipt_keys": [
+        "factory"
+      ],
+      "semantic_scope": "Complete public headers preserved; proof uses the new40 source-function equalities instead of unfolding partial function fields."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalNeighborhoodRestriction",
+      "old": "7888f021746c6faf5ae5f0b149ed2fd17830c6e2",
+      "active": "99481854fcfc00bfd242fdccf388996297f83bd0",
+      "projected": "99481854fcfc00bfd242fdccf388996297f83bd0",
+      "batch": null,
+      "ledger_covers_projected": false,
+      "receipt_keys": [
+        "core",
+        "core_review"
+      ],
+      "semantic_scope": "Private flow restriction now selects parameterLoss(k) before s and retains it; public headers preserved."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalVariationBounds",
+      "old": "5aa5832885ac903ee016e7a8f0e6f3e11fc04b0d",
+      "active": "1559b564891a9e89bbc16c6106b71d49d1ad295f",
+      "projected": "1559b564891a9e89bbc16c6106b71d49d1ad295f",
+      "batch": null,
+      "ledger_covers_projected": false,
+      "receipt_keys": [
+        "values"
+      ],
+      "semantic_scope": "Semantic public change: ordinaryFlowFamily_le_displacement_of_n01 and ordinaryFlowFamily_le_linear_high_of_n01 return exists parameterLoss before forall s, and use loss+parameterLoss."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization",
+      "old": "4523f8385550033058d8f7593f8a397a33157576",
+      "active": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "projected": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "batch": null,
+      "ledger_covers_projected": false,
+      "receipt_keys": [
+        "core",
+        "core_review"
+      ],
+      "semantic_scope": "Private flow enlargement retains the selected parameterLoss(k) at every s. Public enlargement headers and same data are preserved."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01JetBounds",
+      "old": "e83ef353a0337ed0f23fc1224529bc00c8fd2e72",
+      "active": "1e4f04ef7acf1b6050f63c7af3826a9dc6105ef2",
+      "projected": "1e4f04ef7acf1b6050f63c7af3826a9dc6105ef2",
+      "batch": null,
+      "ledger_covers_projected": false,
+      "receipt_keys": [
+        "core",
+        "core_review"
+      ],
+      "semantic_scope": "Semantic public change: N01FlowJetBoundAtOrder gains explicit parameterLoss; N01FlowJetBounds becomes forall k exists parameterLoss forall s exists B. Coefficient contracts unchanged."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction",
+      "old": "5beae92c80f829682b94ba3b58f5b97e75a39c01",
+      "active": "5150d77940daa6a3f95bd505bdb929b2e95db667",
+      "projected": "5150d77940daa6a3f95bd505bdb929b2e95db667",
+      "batch": null,
+      "ledger_covers_projected": false,
+      "receipt_keys": [
+        "neighborhood_loss",
+        "neighborhood_common",
+        "neighborhood160",
+        "neighborhood161"
+      ],
+      "semantic_scope": "Keep all four transitions: loss-order port; unique public common-provider move; opaque flow restriction helper; typed Nat choice. Do not select obsolete126 instead of actual143.",
+      "exact_chain": [
+        "5beae92c80f829682b94ba3b58f5b97e75a39c01",
+        "78c3c5118a8a1e28eb1d4480a3c2b8f7ab46594a",
+        "551267986278d6717642c54f98f85ece2d4d4eb0",
+        "4c615b70f2ab1b3e44ba228e2c578d00f2b748c1",
+        "5150d77940daa6a3f95bd505bdb929b2e95db667"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01OrdinaryFlowClosedJets",
+      "old": "5fae35e4402030b5b12e2f82f7d0b2201f2c3075",
+      "active": "60f16193c9d55dc55507972d1c50625fed81877e",
+      "projected": "60f16193c9d55dc55507972d1c50625fed81877e",
+      "batch": null,
+      "ledger_covers_projected": false,
+      "receipt_keys": [
+        "values"
+      ],
+      "semantic_scope": "Semantic public change: ordinaryFlowFamily_le_linear_high_on_closed_of_n01 returns one parameterLoss before every angular order; its high loss is loss+parameterLoss."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnInverseJets",
+      "old": "b4c575ba02b72a10dba094d4e5c71c979e971dec",
+      "active": "be782379d17ff730f0f70a55e37be1ad99ba773a",
+      "projected": "be782379d17ff730f0f70a55e37be1ad99ba773a",
+      "batch": null,
+      "ledger_covers_projected": false,
+      "receipt_keys": [
+        "values"
+      ],
+      "semantic_scope": "Public fixed-loss existence header preserved. Select the forward parameterLoss once, pass base+(loss+parameterLoss) to the inverse estimate, then choose output low/outLoss."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.OrdinaryFlowJacobianBounds",
+      "old": "2f092038cbfc102f1f927b49ef0ba050ebba961b",
+      "active": "310242cadb1925df8f87887fd6b31d3cb7ac1e29",
+      "projected": "310242cadb1925df8f87887fd6b31d3cb7ac1e29",
+      "batch": null,
+      "ledger_covers_projected": false,
+      "receipt_keys": [
+        "values"
+      ],
+      "semantic_scope": "Public headers preserved; actual smallness uses max base (1+(loss+parameterLoss))."
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "old": "7a05b947965738dcb91957059e102f9ea813e52b",
+      "active": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "projected": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "batch": null,
+      "ledger_covers_projected": false,
+      "receipt_keys": [
+        "core_review",
+        "values"
+      ],
+      "semantic_scope": "Semantic contract edge, not a proof-only repair: coefficient tail is a definitionally equal alias; ordinary-flow tail becomes forall k exists parameterLoss forall s with s+loss+parameterLoss. Exact diff changes no N04 contract."
+    }
+  ],
+  "required_future_provider_rebindings": [
+    {
+      "module": "ContinuousFlexibility.Analysis.ControlCellEndpointBounds",
+      "old": "931608eb0a7c8d6913aafcd28727724eae13467a",
+      "active": "931608eb0a7c8d6913aafcd28727724eae13467a",
+      "projected": "69d80e2dd714b0d65fcceff8b5dee84880bb3078",
+      "batch": 2,
+      "ledger_covers_projected": false,
+      "semantic_scope": "At line68 add materialSample_endpoint_coordinate_comparison and reuse it in the old endpoint weight proof. Every pre-existing public header is byte-identical, including materialSample_endpoint_weight_bound at167.",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateControlCofiniteClosure",
+      "old": "9be6b468ce6f015dc8984e2566542dc73f69409e",
+      "active": "9be6b468ce6f015dc8984e2566542dc73f69409e",
+      "projected": "18b869aaefe1e6aece49ab9fd4920e1ef2cf0751",
+      "batch": 2,
+      "ledger_covers_projected": false,
+      "semantic_scope": "Only append stateKappa_controlJet_eventually_small_of_controlData at135 and contDiff_stateProfile_of_controlData at152. All preceding proofs and existing public headers remain unchanged.",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateControlDecay",
+      "old": "772c0d473322327b2c8b80eecaab53d262d24f42",
+      "active": "772c0d473322327b2c8b80eecaab53d262d24f42",
+      "projected": "2cbf277337cd0667b2f645f0ffa5149afba7e95a",
+      "batch": 2,
+      "ledger_covers_projected": false,
+      "semantic_scope": "At21 make iteratedDeriv_zero_off_open_interval public and add its documentation; full mathematical header/proof are unchanged.",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42"
+    },
+    {
+      "module": "ContinuousFlexibility.Blueprint.Statements",
+      "old": "af5ba9dacc2c7b026d6535f09e886ce22ca2e673",
+      "active": "af5ba9dacc2c7b026d6535f09e886ce22ca2e673",
+      "projected": "4d426c2990d6d685eec9b270469f440b40c9ccce",
+      "batch": 2,
+      "ledger_covers_projected": false,
+      "semantic_scope": "At204 add N01PrimitiveGeometry; strengthen only N01a/N01b existential conclusions at247/253 by retaining that certificate on the same witnesses. N01PartA/B and all N04 definition blocks checked below are byte-identical.",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42"
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.RadialTargets",
+      "old": "7b2ba6641046904003f09f9c708a7e8538de3c4d",
+      "active": "7b2ba6641046904003f09f9c708a7e8538de3c4d",
+      "projected": "ef93a18d36336489f4e605beddd8e14d582e2008",
+      "batch": 2,
+      "ledger_covers_projected": false,
+      "semantic_scope": "At473 add N01RadialPrimitiveGeometry, with support and raw optical lower data. Existing definitions, including R12, remain unchanged.",
+      "source_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42"
+    }
+  ],
+  "additional_prerequisite_gate_rebindings": [
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalPositiveSourceJetBounds",
+      "in_original824": false,
+      "exact_chain": [
+        "adddc89d2a9b11bf2ad84130508e5f4e1ca72c07",
+        "fef324c95be64fdf45018ba2255201c88b6ae81b",
+        "1ccbe0cacdfd56f116580b61f27310ea65636ceb",
+        "4ab2ef388753fd779280571b22abcfd7db544684"
+      ],
+      "receipt_keys": [
+        "source154",
+        "source155",
+        "source156"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalPositiveSourcePrefixBounds",
+      "in_original824": false,
+      "exact_chain": [
+        "eb7384f7dfd8b4789393250c849af9f8a385a932",
+        "26b5c393ceed954ce93224a01c7c48ccfee2175e",
+        "e4069046d3eb91895d147fb67ebe34e75d2478db"
+      ],
+      "receipt_keys": [
+        "prefix157",
+        "prefix158"
+      ]
+    }
+  ],
+  "new_graph_nodes": [
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalPositiveSourceInteriorDivision",
+      "blob": "1578500670d565ad7ddd08d0345ae0fea8179346",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalPositiveSourceInteriorDivision.lean",
+      "source_ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cStateSeminorms",
+      "blob": "f96fa185722d12bab8545de1d59ea100a0556417",
+      "path": "src/ContinuousFlexibility/Analysis/N01cStateSeminorms.lean",
+      "source_ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67"
+    }
+  ],
+  "receipt_registry": {
+    "factory": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI154PositiveSourceInteriorDivisionIndependentReview.json",
+      "sha256": "1239ee94e1673a1c12c84038289f5dd20e9376d857b7b9bba45c610182de8b3d",
+      "blob": "16c9d990d11fd00c10bd22750993c802d0211811",
+      "lines": 111
+    },
+    "core": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/N01ParameterOrderCorePortsReviewedManifest.json",
+      "sha256": "fb5f2f94e949515723cba8bd40549e47461693b8ae613313f568d5cf0c1aee18",
+      "blob": "8c880f0446ec9edb494782270177407dac82a580",
+      "lines": 74
+    },
+    "core_review": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/N01ParameterOrderCorePortsIndependentReview.json",
+      "sha256": "95f55482a3bb7e9e7848c3523f078484730fb880bc17b6f80e8424c3e3865a43",
+      "blob": "3991ed964295471751bfdf2381870fa5617b6d25",
+      "lines": 203
+    },
+    "values": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-flow-values/CanonicalFlowValuesParameterOrderReviewedManifest.json",
+      "sha256": "a2d3aad56d0394efa0897a4cc7c903549321048570a7dcc5a65b6cee2bdceae1",
+      "blob": "b908d75e72ff9d20c213860da56d73c359880104",
+      "lines": 51
+    },
+    "neighborhood_loss": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowSmallnessNeighborhoodParameterOrderReviewedManifest.json",
+      "sha256": "8c585220de1df66ca2df32de5f642dc3cbe8d62189e3a42ea6a4e9e1ee4c7dbf",
+      "blob": "fe5fa8f67a6597c71745c9d1a78c53e2b65ad303",
+      "lines": 122
+    },
+    "neighborhood_common": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-neighborhood-provider/N01NeighborhoodCommonProviderReviewedManifest.json",
+      "sha256": "69a9f868278d613621390e403d8b9f82301c33d95b0c5f6c19fe1e66e1f84a67",
+      "blob": "3e8ec0821ca94114a0018dcfed6ccd6a16578a7e",
+      "lines": 37
+    },
+    "neighborhood160": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair160/flow-opaque/N01NeighborhoodRestrictionCI160RepairReviewedManifest.json",
+      "sha256": "3e07c84e408796717e7c1fc92d6f56bd99f0b6de456264a2591a9921ccdae6b6",
+      "blob": "9c2c9683497750c1b17ba94e6e0798356a14f6af",
+      "lines": 46
+    },
+    "neighborhood161": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair161/N01NeighborhoodRestrictionCI161RepairReviewedManifest.json",
+      "sha256": "4dba1684f7f844118ee9b5f0b3d51ec3473a40a02a371f441eb664aa997bae11",
+      "blob": "c8bb310adfa6dd8aba32f12acc6829fdcad02473",
+      "lines": 40
+    },
+    "source154": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair154/CanonicalPositiveSourceJetBoundsCI154RepairReviewedManifest.json",
+      "sha256": "6555989ce3412a99a89eee4351ff76ef54297ee773bdc1de83bf93d5f6c0bf76",
+      "blob": "57805edcf7ca883796593e0da2d93b95cd65d2fc",
+      "lines": 41
+    },
+    "source155": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair155/CanonicalPositiveSourceJetBoundsCI155RepairReviewedManifest.json",
+      "sha256": "e0dd141fff5b9f194a322d6f7e36a1cc1b7bcc52edcad0339425b354d15d0bdf",
+      "blob": "462d80d769a581887f47b7531486b782d5d204f8",
+      "lines": 36
+    },
+    "source156": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair156/CanonicalPositiveSourceJetBoundsCI156RepairReviewedManifest.json",
+      "sha256": "8d265fd91f28a61d7a727c09d55c0085329d68f6093c943358d9bdda010840a2",
+      "blob": "cb5568410bb98e157085b27485f99384e6f62371",
+      "lines": 37
+    },
+    "prefix157": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair157/CanonicalPositiveSourcePrefixBoundsCI157RepairReviewedManifest.json",
+      "sha256": "12984b2f30138083268d6d72b48147e9c1b91a5618a39ef60b94f97d893cd0b5",
+      "blob": "a272cded2358ad661bebbfc8954f6ae5545baf24",
+      "lines": 33
+    },
+    "prefix158": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair158/CanonicalPositiveSourcePrefixBoundsCI158RepairReviewedManifest.json",
+      "sha256": "b52ee86e22d9f18c56f430711b2f2dfe2b4fd00da75b2be640a9ad72b9b2fb66",
+      "blob": "1d8a1dd823437c5b855bf7b9565d345e26330d9d",
+      "lines": 39
+    }
+  },
+  "linked_source_candidate_base_review_records_verified": 54,
+  "unchanged_blueprint_definition_blocks": [
+    {
+      "name": "N01PartA",
+      "complete_definition_bytes_equal": true,
+      "sha256": "77808d79b5fdfabf529d8056141a23200d1200cc4656e257d33baafc3eb761d6"
+    },
+    {
+      "name": "N01PartB",
+      "complete_definition_bytes_equal": true,
+      "sha256": "c6465af035f791a06c0b1e68aaaf7bef9682de1d9cb6da7249b86015537cfb25"
+    },
+    {
+      "name": "N04PartA",
+      "complete_definition_bytes_equal": true,
+      "sha256": "03d865a0df3f93cc3c929e8050494669cf2e9f856fa3f94261b5acdc0f1e1f14"
+    },
+    {
+      "name": "N04PartB",
+      "complete_definition_bytes_equal": true,
+      "sha256": "db59a0250f94cde030325900109e33a41b8f4042866d5becaa67e4c64f7ff873"
+    },
+    {
+      "name": "N04aStatement",
+      "complete_definition_bytes_equal": true,
+      "sha256": "d615ceb11b602758cfc09aabb3c79474893e250ec96be94c5677f317857e500c"
+    },
+    {
+      "name": "N04bStatement",
+      "complete_definition_bytes_equal": true,
+      "sha256": "d54e26c5f3141702f3855f9b7563bb848386577236caf64fb80a44686e1d3162"
+    },
+    {
+      "name": "N04cStatement",
+      "complete_definition_bytes_equal": true,
+      "sha256": "8c8f677e2fb5866b3aba0a2f97fb284f0394862384699fc65a3f48f1b3411afc"
+    }
+  ],
+  "closure_checks": {
+    "old": {
+      "count": 865,
+      "missing": [],
+      "cycles": [],
+      "held_order_matches": true
+    },
+    "current": {
+      "count": 867,
+      "missing": [],
+      "cycles": [],
+      "held_order_matches": true
+    },
+    "projected": {
+      "count": 867,
+      "missing": [],
+      "cycles": [],
+      "held_order_matches": true
+    }
+  },
+  "public_name_checks": {
+    "qualified": {},
+    "old_preflight_short_name": {},
+    "parser_warnings": [],
+    "scope": "Same unchanged namespace-aware explicit-declaration parser and old preflight lexical check; all105 names against4638 projected modules. No elaborator-generated-name or compilation claim."
+  },
+  "conclusions": [
+    "All41 frozen source fingerprints and105 names are unchanged; no source edit or collision-driven rename is indicated by this projection. The41 contain no direct textual call of the changed flow heads or the long ordinary-flow tail projection.",
+    "All five future version changes among the824 occur in batch2. Batches3..5 introduce neither further824-provider changes nor further dependencies into this867 closure.",
+    "The new two dependencies are CanonicalPositiveSourceInteriorDivision (1578500670d565ad7ddd08d0345ae0fea8179346) and N01cStateSeminorms (f96fa185722d12bab8545de1d59ea100a0556417). Both arise from already-reviewed current provider transitions.",
+    "The original preflight separately verifies all19 prerequisite sources. Its two SourceJet/Prefix modules remain necessary repair-chain bindings although neither lies in the824 reference-provider map.",
+    "The old CI154 ledger and proposal remain immutable. An independently checked extension must bind the15 mapped changes,2 added graph nodes,and2 prerequisite-only chains. Its old exact865 assertion is intentionally not relaxed; this receipt establishes the exact865+2=867 delta for a new reviewed record.",
+    "The projection preserves all current repairs not selected by later cohorts, including the latest source/prefix and neighbourhood repairs. No future source is claimed installed, no CI status was queried, and no main ancestry or full-green claim is made.",
+    "LocalMixedProductBounds/common spatial provider is outside this particular867 closure. It still needs its separately reviewed selection when the new negative321 numerical leaf is later selected.",
+    "Activation still requires the root-controlled exact green baseline and all existing preimage,collision,closure,budget and CI gates. This read-only receipt does not authorize staging or weaken those gates."
+  ],
+  "source_modified": false,
+  "active_index_refs_cp_modified": false,
+  "compiled": false,
+  "created_at_utc": "2026-11-12T18:35:09.814634+00:00"
+}

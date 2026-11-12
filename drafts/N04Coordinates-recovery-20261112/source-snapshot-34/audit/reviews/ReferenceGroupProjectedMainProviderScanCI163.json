@@ -1,0 +1,242 @@
+{
+  "kind": "held_reference41_exact_projected_provider_scan",
+  "status": "READ_ONLY_NOT_AUTHORITY_NOT_COMPILED",
+  "head": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+  "tree": "64a18c3f510156a0386b5601f7c26fe575e6f958",
+  "original_providers": 824,
+  "held_files": 41,
+  "held_source_lines": 4902,
+  "old105": 105,
+  "qualified_names": 105,
+  "active_modules": 4217,
+  "projected_modules": 4638,
+  "changed_original_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalActualPositiveFiniteFactory",
+      "old": "cda98a7e3251f9bd9b5568e54eb48e19b031f76a",
+      "active": "c10212e520142c34a32d0ef19f960bd85992dd64",
+      "projected": "c10212e520142c34a32d0ef19f960bd85992dd64",
+      "batch": null,
+      "ledger_covers_projected": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalNeighborhoodRestriction",
+      "old": "7888f021746c6faf5ae5f0b149ed2fd17830c6e2",
+      "active": "99481854fcfc00bfd242fdccf388996297f83bd0",
+      "projected": "99481854fcfc00bfd242fdccf388996297f83bd0",
+      "batch": null,
+      "ledger_covers_projected": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalRootDiagonalLower",
+      "old": "033539f899249ad18bf92732278519fecf47ce0b",
+      "active": "4033468ee34febb13d20d1e815e340c8018902ea",
+      "projected": "4033468ee34febb13d20d1e815e340c8018902ea",
+      "batch": null,
+      "ledger_covers_projected": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalRootFiniteEndpointBounds",
+      "old": "13749c41ebf01d6f887885d882429d7ee0d7d735",
+      "active": "2f138709e5a2993b87ead4c6cc01c6a0b34a6d7c",
+      "projected": "2f138709e5a2993b87ead4c6cc01c6a0b34a6d7c",
+      "batch": null,
+      "ledger_covers_projected": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalRootHeightJets",
+      "old": "39ccec5461527b3e3cd7e7fa07b86c34bd961a82",
+      "active": "0dc0308b5f440e5a5e0dd37af47de32d6aba250b",
+      "projected": "0dc0308b5f440e5a5e0dd37af47de32d6aba250b",
+      "batch": null,
+      "ledger_covers_projected": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalVariationBounds",
+      "old": "5aa5832885ac903ee016e7a8f0e6f3e11fc04b0d",
+      "active": "1559b564891a9e89bbc16c6106b71d49d1ad295f",
+      "projected": "1559b564891a9e89bbc16c6106b71d49d1ad295f",
+      "batch": null,
+      "ledger_covers_projected": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ControlCellEndpointBounds",
+      "old": "931608eb0a7c8d6913aafcd28727724eae13467a",
+      "active": "931608eb0a7c8d6913aafcd28727724eae13467a",
+      "projected": "69d80e2dd714b0d65fcceff8b5dee84880bb3078",
+      "batch": 2,
+      "ledger_covers_projected": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization",
+      "old": "4523f8385550033058d8f7593f8a397a33157576",
+      "active": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "projected": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "batch": null,
+      "ledger_covers_projected": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01JetBounds",
+      "old": "e83ef353a0337ed0f23fc1224529bc00c8fd2e72",
+      "active": "1e4f04ef7acf1b6050f63c7af3826a9dc6105ef2",
+      "projected": "1e4f04ef7acf1b6050f63c7af3826a9dc6105ef2",
+      "batch": null,
+      "ledger_covers_projected": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction",
+      "old": "5beae92c80f829682b94ba3b58f5b97e75a39c01",
+      "active": "5150d77940daa6a3f95bd505bdb929b2e95db667",
+      "projected": "5150d77940daa6a3f95bd505bdb929b2e95db667",
+      "batch": null,
+      "ledger_covers_projected": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01OrdinaryFlowClosedJets",
+      "old": "5fae35e4402030b5b12e2f82f7d0b2201f2c3075",
+      "active": "60f16193c9d55dc55507972d1c50625fed81877e",
+      "projected": "60f16193c9d55dc55507972d1c50625fed81877e",
+      "batch": null,
+      "ledger_covers_projected": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnInverseJets",
+      "old": "b4c575ba02b72a10dba094d4e5c71c979e971dec",
+      "active": "be782379d17ff730f0f70a55e37be1ad99ba773a",
+      "projected": "be782379d17ff730f0f70a55e37be1ad99ba773a",
+      "batch": null,
+      "ledger_covers_projected": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N03RootEndpointPhysicalJets",
+      "old": "b47919889191d8709da04bd63f75f24e90a064ef",
+      "active": "15ba9f4a5b2eefb7ae81d2d4a9e971148ca2fc45",
+      "projected": "15ba9f4a5b2eefb7ae81d2d4a9e971148ca2fc45",
+      "batch": null,
+      "ledger_covers_projected": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualAtlasInteriorCompletion",
+      "old": "fbb67b770132e53b204ae4270d1b30f98e01c8b7",
+      "active": "97a05cee066d07dee7a133440425f46f7fe6066e",
+      "projected": "97a05cee066d07dee7a133440425f46f7fe6066e",
+      "batch": null,
+      "ledger_covers_projected": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.OrdinaryFlowJacobianBounds",
+      "old": "2f092038cbfc102f1f927b49ef0ba050ebba961b",
+      "active": "310242cadb1925df8f87887fd6b31d3cb7ac1e29",
+      "projected": "310242cadb1925df8f87887fd6b31d3cb7ac1e29",
+      "batch": null,
+      "ledger_covers_projected": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RelativeRootJetBounds",
+      "old": "37e7d9efa9f483a2f7edee5a5037bb611729583c",
+      "active": "e9b78a99bc8fc10e22a9eac79a7bd396400a6858",
+      "projected": "e9b78a99bc8fc10e22a9eac79a7bd396400a6858",
+      "batch": null,
+      "ledger_covers_projected": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateControlCofiniteClosure",
+      "old": "9be6b468ce6f015dc8984e2566542dc73f69409e",
+      "active": "9be6b468ce6f015dc8984e2566542dc73f69409e",
+      "projected": "18b869aaefe1e6aece49ab9fd4920e1ef2cf0751",
+      "batch": 2,
+      "ledger_covers_projected": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateControlDecay",
+      "old": "772c0d473322327b2c8b80eecaab53d262d24f42",
+      "active": "772c0d473322327b2c8b80eecaab53d262d24f42",
+      "projected": "2cbf277337cd0667b2f645f0ffa5149afba7e95a",
+      "batch": 2,
+      "ledger_covers_projected": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeCanonicalAtlasRestrictedGeometry",
+      "old": "701db6112228c64ffe09d6e04232fc1414f44785",
+      "active": "28407ce18ea7eabac9bbe62345fb9df591fd7b16",
+      "projected": "28407ce18ea7eabac9bbe62345fb9df591fd7b16",
+      "batch": null,
+      "ledger_covers_projected": true
+    },
+    {
+      "module": "ContinuousFlexibility.Blueprint.Statements",
+      "old": "af5ba9dacc2c7b026d6535f09e886ce22ca2e673",
+      "active": "af5ba9dacc2c7b026d6535f09e886ce22ca2e673",
+      "projected": "4d426c2990d6d685eec9b270469f440b40c9ccce",
+      "batch": 2,
+      "ledger_covers_projected": false
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "old": "7a05b947965738dcb91957059e102f9ea813e52b",
+      "active": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "projected": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "batch": null,
+      "ledger_covers_projected": false
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.RadialTargets",
+      "old": "7b2ba6641046904003f09f9c708a7e8538de3c4d",
+      "active": "7b2ba6641046904003f09f9c708a7e8538de3c4d",
+      "projected": "ef93a18d36336489f4e605beddd8e14d582e2008",
+      "batch": 2,
+      "ledger_covers_projected": false
+    }
+  ],
+  "new_current_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalPositiveSourceInteriorDivision",
+      "blob": "1578500670d565ad7ddd08d0345ae0fea8179346",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalPositiveSourceInteriorDivision.lean",
+      "source_ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cStateSeminorms",
+      "blob": "f96fa185722d12bab8545de1d59ea100a0556417",
+      "path": "src/ContinuousFlexibility/Analysis/N01cStateSeminorms.lean",
+      "source_ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67"
+    }
+  ],
+  "new_projected_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalPositiveSourceInteriorDivision",
+      "blob": "1578500670d565ad7ddd08d0345ae0fea8179346",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalPositiveSourceInteriorDivision.lean",
+      "source_ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cStateSeminorms",
+      "blob": "f96fa185722d12bab8545de1d59ea100a0556417",
+      "path": "src/ContinuousFlexibility/Analysis/N01cStateSeminorms.lean",
+      "source_ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67"
+    }
+  ],
+  "old_closure": {
+    "count": 865,
+    "missing": [],
+    "cycles": [],
+    "held_order_matches": true
+  },
+  "current_closure": {
+    "count": 867,
+    "missing": [],
+    "cycles": [],
+    "held_order_matches": true
+  },
+  "projected_closure": {
+    "count": 867,
+    "missing": [],
+    "cycles": [],
+    "held_order_matches": true
+  },
+  "qualified_collisions": {},
+  "old_gate_short_name_collisions": {},
+  "parser_warnings": [],
+  "active_modified": false,
+  "compiled": false
+}

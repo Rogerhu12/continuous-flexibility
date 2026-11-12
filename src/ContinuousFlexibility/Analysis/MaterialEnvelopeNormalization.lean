@@ -262,12 +262,15 @@ private theorem n01FlowJetBounds_enlargedMaterialData
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (h : N01FlowJetBounds T S C base loss ε) :
     N01FlowJetBounds (enlargedMaterialData T) S C base loss ε := by
-  intro k s
-  obtain ⟨B, hB, hb⟩ := h k s
+  intro k
+  obtain ⟨parameterLoss, horder⟩ := h k
+  refine ⟨parameterLoss, ?_⟩
+  intro s
+  obtain ⟨B, hB, hb⟩ := horder s
   refine ⟨B, hB, ?_⟩
   intro m a b p hab hp
   exact enlarge_directional_bound
-    (p := pairGrading (stateGrading S) realGrading) base (s + loss)
+    (p := pairGrading (stateGrading S) realGrading) base (s + loss + parameterLoss)
     (C.referenceState, 0) k
     (materialSample_factor_le_enlarged hD hT hB.le (C.cell m))
     (hb m a b p hab hp)

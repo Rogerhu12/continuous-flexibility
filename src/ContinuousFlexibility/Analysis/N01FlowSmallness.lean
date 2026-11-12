@@ -35,18 +35,22 @@ theorem ordinaryFlowFamily_reference_zero
 theorem N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
-    (hN : N01Properties D T S C base loss ε) (hT : IsMaterialData D T) (s : ℕ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → s + loss ≤ base' →
+    (hN : N01Properties D T S C base loss ε) (hT : IsMaterialData D T) :
+    ∃ parameterLoss : ℕ, ∀ s : ℕ,
+      ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → s + loss + parameterLoss ≤ base' →
       ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →
       ∀ z ∈ stateNeighborhood S C base' η, ∀ m b p,
         b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
         |ordinaryFlowFamily S C m 0 b p z| ≤
           6 * B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
             T.E0 (T.sample (C.cell m)) ^ B * η := by
-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 1 s
+  obtain ⟨parameterLoss, horder⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 1
+  refine ⟨parameterLoss, ?_⟩
+  intro s
+  let hdata := horder s
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
-  have hpoint : ∀ base' : ℕ, base ≤ base' → s + loss ≤ base' →
+  have hpoint : ∀ base' : ℕ, base ≤ base' → s + loss + parameterLoss ≤ base' →
       ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →
       ∀ z ∈ stateNeighborhood S C base' η, ∀ m b p,
         b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
@@ -71,13 +75,13 @@ theorem N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood
         |J.D 1 ((C.referenceState, 0) + t • (z - (C.referenceState, 0)))
           (fun _ => z - (C.referenceState, 0))| ≤
           A * oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-            base (s + loss)
+            base (s + loss + parameterLoss)
             (((C.referenceState, 0) + t • (z - (C.referenceState, 0))) -
               (C.referenceState, 0)) (fun _ : Fin 1 => z - (C.referenceState, 0)) := by
       simpa only [pow_zero, one_mul] using
         hJ _ (hline t ht) (fun _ : Fin 1 => z - (C.referenceState, 0))
     have hsmall := J.abs_le_of_first_variation_small
-      (pairGrading (stateGrading S) realGrading) base (s + loss)
+      (pairGrading (stateGrading S) realGrading) base (s + loss + parameterLoss)
       (C.referenceState, 0) z hline (ordinaryFlowFamily_reference_zero S C m 0 b p)
       hA hη₁ (stateNeighborhood_pairGrading_lt S C hb hz).le
       (stateNeighborhood_pairGrading_lt S C hh hz).le hbound
@@ -125,7 +129,8 @@ theorem N01Properties.minusFlow_near_reference_weighted
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
-    ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → 1 + loss ≤ base' →
+    ∃ parameterLoss : ℕ, ∃ B : ℝ, 0 < B ∧
+      ∀ base' : ℕ, base ≤ base' → 1 + loss + parameterLoss ≤ base' →
       ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →
       ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →
       ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,
@@ -133,8 +138,9 @@ theorem N01Properties.minusFlow_near_reference_weighted
         T.E0 (T.sample (C.cell m)) ^ B * η
       |C.minusFlow z m r θ - (θ - opticalTravel D.w (C.left m) r)| ≤ M ∧
         |deriv (C.minusFlow z m r) θ - 1| ≤ M := by
-  obtain ⟨B, hB, hb⟩ := hN.ordinaryFlowFamily_angular_small_of_neighborhood hT 1
-  refine ⟨B, hB, fun base' hbase hhigh η hηε hη₁ z hz hsector m r hr θ => ?_⟩
+  obtain ⟨parameterLoss, horder⟩ := hN.ordinaryFlowFamily_angular_small_of_neighborhood hT
+  obtain ⟨B, hB, hb⟩ := horder 1
+  refine ⟨parameterLoss, B, hB, fun base' hbase hhigh η hηε hη₁ z hz hsector m r hr θ => ?_⟩
   have hzold := stateNeighborhood_mono S C hbase hηε hz
   have hz₀ : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
     constructor
@@ -189,16 +195,17 @@ theorem N01Properties.minusFlow_near_reference_uniform
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
-    ∃ K : ℝ, 0 < K ∧ ∀ base' : ℕ, base ≤ base' → 1 + loss ≤ base' →
+    ∃ parameterLoss : ℕ, ∃ K : ℝ, 0 < K ∧
+      ∀ base' : ℕ, base ≤ base' → 1 + loss + parameterLoss ≤ base' →
       ∀ η : ℝ, 0 ≤ η → η ≤ ε → η ≤ 1 / 2 →
       ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →
       ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,
       |C.minusFlow z m r θ - (θ - opticalTravel D.w (C.left m) r)| ≤ K * η ∧
         |deriv (C.minusFlow z m r) θ - 1| ≤ K * η := by
-  obtain ⟨B, hB, hb⟩ := hN.minusFlow_near_reference_weighted hS hT
+  obtain ⟨parameterLoss, B, hB, hb⟩ := hN.minusFlow_near_reference_weighted hS hT
   obtain ⟨K, hK, he⟩ := materialSample_H_E0_envelope hT hN.1.1
     (γ := (3 / 4 : ℝ)) (by norm_num) B
-  refine ⟨6 * B * K, mul_pos (mul_pos (by norm_num) hB) hK,
+  refine ⟨parameterLoss, 6 * B * K, mul_pos (mul_pos (by norm_num) hB) hK,
     fun base' hbase hhigh η hη hηε hη₁ z hz hsector m r hr θ => ?_⟩
   have h := hb base' hbase hhigh η hηε hη₁ z hz hsector m r hr θ
   have he' := mul_le_mul_of_nonneg_left (he (C.cell m))

@@ -1,0 +1,100 @@
+{
+  "schema": "n04-source-candidate-v1",
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED_PENDING_INDEPENDENT_PEER",
+  "scope": "Actual shifted circle forward family; two public lemmas discharge the hF input of selected349. No inverse-J estimate or CurrentJets conclusion.",
+  "owner": "/root/proof_inventory",
+  "authorization": "Parent authorized one complete actual Lean leaf, at most 300 new Lean lines including repairs, after the read-only blueprint task.",
+  "new_lean_lines_this_authorization": 159,
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CircleShiftedForwardFixedBaseBounds.lean",
+    "bytes": 8219,
+    "lines": 159,
+    "sha256": "c1b41d4794c898a89f78b1bd0eeaaee62889caf75bb9ae6639e81bd8867ae0a3",
+    "git_blob": "13cf8216a32a9fdd1d8db9d80c765c08c70eb2b5",
+    "eof_lf": true,
+    "declarations": [
+      "circleShiftedChartCompose_orderedJet_eq_kernel",
+      "circleShiftedChartCompose_orderedJets_fixedBase_bound"
+    ]
+  },
+  "pins": {
+    "active": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+    "main_read_only": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+    "external_circle_objects": "c5c48d262157a11a76604113c40d2438d480433f",
+    "mathlib": "c55e6e786f49471c72fbddbec5415808896aec1e"
+  },
+  "direct_providers": {
+    "ContinuousFlexibility.Analysis.TameInverseExpressions": {
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseExpressions.lean",
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "origin": "active",
+      "blob": "14ad46cae7d92dca46f5efd006f5260873046713",
+      "sha256": "5f19c405b830b56e9ad43319b2e9b306af3a27d840167fc29d592e9b9edaec56",
+      "lines": 490
+    },
+    "ContinuousFlexibility.Analysis.CoupledCircleCompositionCurveDerivative": {
+      "path": "src/ContinuousFlexibility/Analysis/CoupledCircleCompositionCurveDerivative.lean",
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "origin": "active",
+      "blob": "8ea11ac34960b5ebec1df0085ef1237cda8a8a56",
+      "sha256": "c66b2304951e6d0e2e94b9d83e289447032aa34deed51b27edd537815647980c",
+      "lines": 166
+    },
+    "ContinuousFlexibility.Analysis.CircleTranslationUniformBounds": {
+      "path": "src/ContinuousFlexibility/Analysis/CircleTranslationUniformBounds.lean",
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "origin": "c5",
+      "blob": "29683e9c974fecbcd03fef36251ebb8b0061c485",
+      "sha256": "7ef561296693115b33d9daa18e66efb1778b028ac5d558696449a73af322b79f",
+      "lines": 144
+    },
+    "ContinuousFlexibility.Analysis.TameMultilinearNormalization": {
+      "path": "src/ContinuousFlexibility/Analysis/TameMultilinearNormalization.lean",
+      "ref": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "origin": "active",
+      "blob": "04e7e732ab5f0d16ba232b561bd612f93dff4c51",
+      "sha256": "1f6c08d38555fdb2135b8622216b86cb0aa89ab367c5fe2443854f5e079b361d",
+      "lines": 185
+    }
+  },
+  "selected_import_check": {
+    "selection_policy": "For each project import choose exact active module if present, otherwise exact main if present, otherwise exact c5. All choices are read-only Git blobs.",
+    "project_modules": 210,
+    "origin_counts": {
+      "active": 167,
+      "main": 0,
+      "c5": 43
+    },
+    "missing_project_imports": [],
+    "excluded_old_family_modules": {},
+    "evidence_scope": "Import reachability and source identity only; this is not a Lean typecheck or complete semantic review of the 210-module graph."
+  },
+  "public_headers": [
+    "theorem circleShiftedChartCompose_orderedJet_eq_kernel\n    (travel : ℕ → ℝ) {U : Set M.Space} (hU : IsOpen U)\n    (J : SmoothDirections (U ×ˢ univ) (fun z : M.Space × M.Space =>\n      circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2))\n    (n : ℕ) :\n    ∀ e ∈ U, ∀ (v : Fin n → M.Space) (y : M.Space),\n      inverseForwardJet J n e v y =\n        coupledCircleKernel hD hT hγ hM hI n n e\n          (circleTranslationContinuousLinear hM hT hD hγ travel y) v",
+    "theorem circleShiftedChartCompose_orderedJets_fixedBase_bound :\n    ∃ base loss : ℕ, ∀ (n : ℕ) (R : ℝ), 1 ≤ R →\n      ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧\n        ∀ (travel : ℕ → ℝ) (U : Set M.Space) (hU : IsOpen U)\n          (J : SmoothDirections (U ×ˢ univ) (fun z : M.Space × M.Space =>\n            circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2)),\n          ∀ e ∈ U, M.grading base e ≤ R → ∀ v : Fin n → M.Space,\n            (∀ i, M.grading base (v i) ≤ R) → ∀ y : M.Space,\n              M.grading s (inverseForwardJet J n e v y) ≤ C *\n                ((1 + M.grading (s + (n + loss)) e +\n                    ∑ i, M.grading (s + (n + loss)) (v i)) * M.grading base y +\n                  M.grading (s + (n + loss)) y)"
+  ],
+  "mathematics": {
+    "identity": "For the given genuine J and e in U, inverseForwardJet J n e v y is kernel(n,n,e,Translation(travel)y,v). The source remains the final Fin.snoc slot; parameter derivatives prepend in the same order as the kernel.",
+    "induction": "Order zero uses the literal decoder and its injectivity. The successor compares actual projective line derivatives on an nhds germ inside U and uses derivative uniqueness, with Fin.cons_self_tail.",
+    "low_orders": "Choose base and loss once from coupled_circle_kernel_grading_bounds before all n, R, s, travel, U and J.",
+    "numerical_bound": "At n and s the only high index is s+(n+loss). On a source unit ball all low products in kernelMajorant are at most R^(n+1); the same kernel C times R^(n+1) is independent of travel/U/J/e/v/y.",
+    "normalization": "Use inverseForwardJetLinear as the actual continuous source map, turn it into a Fin 1 continuous multilinear map with ContinuousMultilinearMap.ofSubsingleton, and apply current multilinear_bound_of_unitBall. No norm/separation of the low seminorm is assumed.",
+    "translation": "All grading orders contract under the actual componentwise translation, with its forward positive sign. The fields and directional increments are unchanged.",
+    "retained_weight": "The kernel is in the original IsCircleModel T gamma M, retaining the same H^gamma material weight; gamma=3/4 is a later direct specialization."
+  },
+  "boundaries": {
+    "no_compilation_or_elaboration": true,
+    "no_active_source_index_refs_or_ci_changes": true,
+    "no_new_inverse_or_global_tower": true,
+    "no_old_Family160_import": true,
+    "no_implicit_low_base_dependence_on_n": true,
+    "remaining_actual_hV": "Use zero-travel CircleInverseCompositionGrowth numeric bounds, finite prefix grading aggregation and current continuous one-slot normalization. Not assumed or proved by this source.",
+    "remaining_application": "Apply selected349 once to zero travel and identify existing inverse towers by uniqueness; uniform travel follows by postcomposition with the genuine translation contraction.",
+    "no_final_CurrentJets_claim": true
+  },
+  "independent_review": {
+    "assigned_to": "/root/audit_coordinates",
+    "state": "pending_full_candidate_review"
+  },
+  "before_freeze_self_check": "Added include hI in immediately before the second theorem's documentation because its explicit conclusion mentions the actual map but hI is needed only in its proof. This correction preceded release to the independent reviewer; the selected candidate is 159 lines."
+}

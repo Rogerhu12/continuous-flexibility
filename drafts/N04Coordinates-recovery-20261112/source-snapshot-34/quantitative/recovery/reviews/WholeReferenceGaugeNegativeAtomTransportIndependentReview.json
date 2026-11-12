@@ -1,0 +1,69 @@
+{
+  "kind": "whole_reference_gauge_negative_atom_transport_independent_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "PASSED_FULL_SOURCE_STATIC_REVIEW_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeNegativeAtomTransport.lean",
+    "sha256": "e79db2343fd6934f29ace44a13f3906346c712f241f191f87d5fa7c0d603a8ad",
+    "git_blob": "1cdaaae680c7761e79e670aa79e5eb033f9384fa",
+    "lines": 60
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeNegativeAtomTransportCandidateManifest.json",
+    "sha256": "8383d58f2a5979ccd6cca3c72f90de0a0305a56d8f88ad59ce0bcf45a6ba44db",
+    "git_blob": "f3c8ed15477b3b99ba17a43b7aaa1b13052048bf",
+    "lines": 56
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "git_blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "git_blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773
+    }
+  ],
+  "provider_owners": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasDataReviewedManifest.json",
+      "sha256": "701abf400f31e9d5bd990eff6d782e8878b3bb25e17a721750de8d04a4e319d7",
+      "git_blob": "89a4780b10a4d508b9d5ac33dd3abdf393efa901",
+      "lines": 23
+    }
+  ],
+  "provider_independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/WholeReferenceGaugeAtlasDataIndependentReview.json",
+    "sha256": "b1a632492a5d1c2199c1f446ca138af4a7571ba57c6d79c7bd533ac4003c530d",
+    "git_blob": "0b56a1350539b6fdad06455816d48d632db97a63",
+    "lines": 66
+  },
+  "rules_read": {
+    "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/AGENTS.md",
+    "sha256": "c93fb4ff25e2109e6d06cd0a2139fa6cdbdd97d4f33ea0dcbe45f8432aee39ac",
+    "git_blob": "e6835ac7265ded9040e63ea60908e8f91f645f7d",
+    "lines": 49
+  },
+  "source_review_scope": "Read all 60 source lines, all 131 lines of the selected whole-atlas provider, its owner and prior independent review; read exact current Nonlinear canonicalSource/physicalUnitPoint/canonicalUnitPoint/Atom/atom definitions.",
+  "checks": [
+    "The negative_fields provider returns exactly twelve conjuncts. The fifth physical-domain equality is intentionally unused; all remaining endpoint, cell, sign, chart, inverse, height, principal and potential equalities bind the original k selected from K.cutPair j.1 and j.2.",
+    "Physical and canonical unit points agree as whole functions by the two appropriate endpoint equalities. The simp targets are applied project definitions, and no external mathlib definition is unfolded.",
+    "The canonicalSource equality is extensional in p and uniform in the physical source f. Unfolding the applied project canonicalSource exposes the stored inverse, height and chart, exactly matched by hG, hH and hF, including the function argument of planeJacobian.",
+    "All 33 Atom constructors were checked against the current definition: ten chart/height/Jacobian/source atoms, five principal/potential atoms, three divided atoms, three source columns, four lengths, two material-ell atoms and six material ratios.",
+    "The divided fields themselves are not asserted equal. hneg and the explicit hnegative reduce both Bool guards to false, making each divided atom zero. This hypothesis is necessary for arbitrary K and is not silently inferred from the whole-atlas sign.",
+    "The physical column functions use the same L, S, C, D and z. The hsource equality therefore transfers leftColumn, nuColumn and auxiliaryColumn without a new PDE, source estimate or state hypothesis.",
+    "The same stored cell equality transfers all six sample ratios. T is an arbitrary input, so the statement is valid with a preselected enlarged material record without comparing two different T values.",
+    "The final case analysis and function extensionality require only the displayed project-definition rewrites and false-guard simplification. The local V/k definitions are definitionally the provider let-bindings. No extra branch, endpoint, regularity or positivity assumptions are inserted.",
+    "The conclusion is equality of literal atom functions at arbitrary state and point; it supplies subsequent ordinary/mixed derivative congruence but does not itself establish any material bound or SmoothDirections tower."
+  ],
+  "findings": [],
+  "compiled": false,
+  "local_lean_execution": false,
+  "source_modified": false,
+  "active_src_index_refs_CI_modified": false,
+  "created_at_utc": "2026-11-12T18:41:30.114623+00:00"
+}

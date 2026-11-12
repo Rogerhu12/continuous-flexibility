@@ -78,7 +78,7 @@ private theorem n07a_n01_coefficient_bound
 
 private def n07aFlowVariationBound (_D : ReferenceData) (T : MaterialData)
     (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
-    (base loss : ℕ) (ε : ℝ) (k s : ℕ) (A : ℝ) : Prop :=
+    (base loss parameterLoss : ℕ) (ε : ℝ) (k s : ℕ) (A : ℝ) : Prop :=
   ∀ (m : ℕ) (a b : ℕ) (p : PolarPoint),
     a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
     ∃ J : SmoothDirections (E := AnnularState S × ℝ) (F := ℝ)
@@ -89,14 +89,15 @@ private def n07aFlowVariationBound (_D : ReferenceData) (T : MaterialData)
           A * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ A *
             oneHighVariationWeight (E := AnnularState S × ℝ)
               (pairGrading (E := AnnularState S) (F := ℝ) (stateGrading S) realGrading)
-              base (s + loss) (z - (C.referenceState, 0) : AnnularState S × ℝ) v
+              base (s + loss + parameterLoss) (z - (C.referenceState, 0) : AnnularState S × ℝ) v
 
 private theorem n07a_n01_flow_bound
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
-    (h01 : N01Properties D T S C base loss ε) (k s : ℕ) :
-    ∃ A : ℝ, 0 < A ∧ n07aFlowVariationBound D T S C base loss ε k s A :=
-  h01.2.2.2.2.2.2.2.2.2.2.2.2 k s
+    (h01 : N01Properties D T S C base loss ε) (k : ℕ) :
+    ∃ parameterLoss : ℕ, ∀ s : ℕ, ∃ A : ℝ, 0 < A ∧
+      n07aFlowVariationBound D T S C base loss parameterLoss ε k s A :=
+  h01.2.2.2.2.2.2.2.2.2.2.2.2 k
 
 /-- The actual original-coefficient variations have arbitrarily small
 material growth, with their original height decay left intact. -/
@@ -141,13 +142,12 @@ theorem n07a_coefficientFamily_subpower
     base (s + loss) (z - (C.referenceState, 0) : AnnularState S × ℝ) v
   exact n07a_absorb_material_factor hA.le hH hweight (hKb _ hm) (hJ z hz v)
 
-/-- The actual characteristic-flow variations obey the same material
-bound, including the radial endpoint factor already supplied by N01. -/
-theorem n07a_ordinaryFlowFamily_subpower
+private theorem n07a_flowVariation_subpower
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
-    {C : NonlinearGeometryData S} {base loss : ℕ} {ε δ : ℝ}
-    (hT : IsMaterialData D T) (h01 : N01Properties D T S C base loss ε)
-    (hδ : 0 < δ) (k s : ℕ) :
+    {C : NonlinearGeometryData S} {base loss parameterLoss k s : ℕ} {ε δ A : ℝ}
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (hδ : 0 < δ) (hA : 0 < A)
+    (hAj : n07aFlowVariationBound D T S C base loss parameterLoss ε k s A) :
     ∃ B : ℝ, 0 < B ∧ ∀ (m : ℕ) (a b : ℕ) (p : PolarPoint),
       a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
       ∃ J : SmoothDirections (E := AnnularState S × ℝ) (F := ℝ) (stateNeighborhood S C base ε)
@@ -158,13 +158,7 @@ theorem n07a_ordinaryFlowFamily_subpower
             B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
               T.M (T.sample (C.cell m)) ^ δ *
               oneHighVariationWeight (E := AnnularState S × ℝ) (pairGrading (E := AnnularState S) (F := ℝ) (stateGrading S) realGrading)
-                base (s + loss) (z - (C.referenceState, 0) : AnnularState S × ℝ) v := by
-  have hD := h01.1
-  let bound := n07a_n01_flow_bound (D := D) (T := T) (S := S)
-    (C := C) (base := base) (loss := loss) (ε := ε) h01 k s
-  let A : ℝ := bound.choose
-  have hA : 0 < A := bound.choose_spec.1
-  have hAj : n07aFlowVariationBound D T S C base loss ε k s A := bound.choose_spec.2
+                base (s + loss + parameterLoss) (z - (C.referenceState, 0) : AnnularState S × ℝ) v := by
   let material := materialE0_rpow_le_subpowerM hT A hδ
   let K0 : ℝ := material.choose
   have hK0 : 0 < K0 := material.choose_spec.1
@@ -172,18 +166,53 @@ theorem n07a_ordinaryFlowFamily_subpower
     material.choose_spec.2
   refine ⟨A * K0, mul_pos hA hK0, ?_⟩
   intro m a b p hab hp
-  let J := (hAj m a b p hab hp).choose
+  let J : SmoothDirections (E := AnnularState S × ℝ) (F := ℝ)
+      (stateNeighborhood S C base ε) (ordinaryFlowFamily S C m a b p) :=
+    (hAj m a b p hab hp).choose
   have hJ := (hAj m a b p hab hp).choose_spec
   refine ⟨J, ?_⟩
   intro z hz v
-  have hm := spaces_trace_sample_mem hD.1 hT (C.cell m)
+  have hm := spaces_trace_sample_mem hD hT (C.cell m)
   have hH : 0 ≤ T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) :=
     (Real.rpow_pos_of_pos (hT.2.1 _ hm).2.1 _).le
   have hweight := n07a_oneHighVariationWeight_nonneg
     (E := AnnularState S × ℝ)
     (pairGrading (E := AnnularState S) (F := ℝ) (stateGrading S) realGrading)
-    base (s + loss) (z - (C.referenceState, 0) : AnnularState S × ℝ) v
+    base (s + loss + parameterLoss) (z - (C.referenceState, 0) : AnnularState S × ℝ) v
   exact n07a_absorb_material_factor hA.le hH hweight (hKb _ hm) (hJ z hz v)
+
+/-- The actual characteristic-flow variations obey the same material
+bound, including the radial endpoint factor already supplied by N01.
+The parameter-order loss is chosen before every spatial order. -/
+theorem n07a_ordinaryFlowFamily_subpower
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε δ : ℝ}
+    (hT : IsMaterialData D T) (h01 : N01Properties D T S C base loss ε)
+    (hδ : 0 < δ) (k : ℕ) :
+    ∃ parameterLoss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ (m : ℕ) (a b : ℕ) (p : PolarPoint),
+      a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
+      ∃ J : SmoothDirections (E := AnnularState S × ℝ) (F := ℝ) (stateNeighborhood S C base ε)
+          (ordinaryFlowFamily S C m a b p),
+        ∀ z : AnnularState S × ℝ, z ∈ stateNeighborhood S C base ε →
+          ∀ v : Fin k → (AnnularState S × ℝ),
+          min (p.1 - C.left m) (C.right m - p.1) ^ a * |J.D k z v| ≤
+            B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+              T.M (T.sample (C.cell m)) ^ δ *
+              oneHighVariationWeight (E := AnnularState S × ℝ) (pairGrading (E := AnnularState S) (F := ℝ) (stateGrading S) realGrading)
+                base (s + loss + parameterLoss) (z - (C.referenceState, 0) : AnnularState S × ℝ) v := by
+  let bound := n07a_n01_flow_bound (D := D) (T := T) (S := S)
+    (C := C) (base := base) (loss := loss) (ε := ε) h01 k
+  let parameterLoss : ℕ := bound.choose
+  have hparameter : ∀ s : ℕ, ∃ A : ℝ, 0 < A ∧
+      n07aFlowVariationBound D T S C base loss parameterLoss ε k s A :=
+    bound.choose_spec
+  refine ⟨parameterLoss, fun s => ?_⟩
+  let spatialBound := hparameter s
+  let A : ℝ := spatialBound.choose
+  have hA : 0 < A := spatialBound.choose_spec.1
+  have hAj : n07aFlowVariationBound D T S C base loss parameterLoss ε k s A :=
+    spatialBound.choose_spec.2
+  exact n07a_flowVariation_subpower h01.1.1 hT hδ hA hAj
 
 private def n07aCanonicalJetsBound (T : MaterialData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (K : CanonicalData S)

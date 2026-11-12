@@ -168,7 +168,8 @@ theorem N01Properties.n04b_sqrt_stateLine_differentiableAt
     DifferentiableAt ℝ (fun s : ℝ => Real.sqrt
       (-deriv D.w r / (r * D.w r) +
         (-deriv (n04bStateLogExponent D S C v) r / r) * s)) t := by
-  obtain ⟨B, hB, htower⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 0 1
+  obtain ⟨parameterLoss, horder⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 0
+  obtain ⟨B, hB, htower⟩ := horder 1
   obtain ⟨J, hJ⟩ := htower m 1 0 (r, 0) (by norm_num) hr
   have hmem : (C.referenceState, (0 : ℝ)) + t • (v, (0 : ℝ)) ∈
       stateNeighborhood S C base ε := by
