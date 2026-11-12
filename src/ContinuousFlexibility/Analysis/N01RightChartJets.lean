@@ -31,6 +31,7 @@ theorem oddPart_lift_displacement_jet_le
       (fun η => oddPart (fun ξ => f ξ - T) η - η) θ‖ ≤ M := by
   let u : ℝ → ℝ := fun η => f η - η
   have hu : ContDiff ℝ ∞ u := hf.sub contDiff_id
+  have huNeg : ContDiff ℝ ∞ (fun η : ℝ => u (-η)) := hu.comp contDiff_neg
   have he : (fun η => oddPart (fun ξ => f ξ - T) η - η) =
       (fun η => (u η - u (-η)) / 2) := by
     funext η
@@ -46,8 +47,9 @@ theorem oddPart_lift_displacement_jet_le
     simp only [smul_eq_mul, abs_mul, abs_pow, abs_neg, abs_one, one_pow, one_mul]
   rw [he, norm_iteratedFDeriv_eq_norm_iteratedDeriv, Real.norm_eq_abs,
     iteratedDeriv_div_const,
-    iteratedDeriv_fun_sub (hu.contDiffAt.of_le (by simp : (n : ℕ∞ω) ≤ ∞))
-      ((hu.comp contDiff_neg).contDiffAt.of_le (by simp : (n : ℕ∞ω) ≤ ∞)), abs_div]
+    iteratedDeriv_fun_sub (n := n) (x := θ)
+      (hu.contDiffAt.of_le (by simp : (n : ℕ∞ω) ≤ ∞))
+      (huNeg.contDiffAt.of_le (by simp : (n : ℕ∞ω) ≤ ∞)), abs_div]
   norm_num only [abs_ofNat]
   apply (div_le_iff₀ (by norm_num : (0 : ℝ) < 2)).2
   exact (abs_sub_le _ _).trans (by rw [href]; linarith)
@@ -146,7 +148,8 @@ private theorem n01_rightChart_bound_of_circleReturn
         lossR B x (oddPart (fun θ => l (g θ) - t))) :
     N01RightChartJetBound S C base (max lowI lowR) lossR ε m B := by
   intro z hz hs hlow
-  have hp := tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
+  have hp : Monotone (pairGrading (stateGrading S) realGrading) :=
+    tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
   have hlowI := (hp (le_max_left lowI lowR) (z - (C.referenceState, 0))).trans hlow
   have hlowR := (hp (le_max_right lowI lowR) (z - (C.referenceState, 0))).trans hlow
   exact hreturn (z - (C.referenceState, 0)) hlowR
@@ -168,7 +171,8 @@ theorem n01_rightChartCandidate_displacement_fixed_loss
     (hflow : OrdinaryFlowJacobianBounds S C base ε) :
     ∃ low outLoss : ℕ, ∀ m : ℕ, ∃ B : ℕ → ℝ, (∀ n, 0 < B n) ∧
       N01RightChartJetBound S C base low outLoss ε m B := by
-  have hp := tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
+  have hp : Monotone (pairGrading (stateGrading S) realGrading) :=
+    tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
   have hI := coordinate_hasInterpolation_pair (stateGrading_monotone S)
     (fun _ _ _ => le_rfl) (coordinate_hasInterpolation_stateGrading hS)
     coordinate_hasInterpolation_realGrading

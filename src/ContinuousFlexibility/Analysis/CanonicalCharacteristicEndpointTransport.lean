@@ -74,6 +74,7 @@ theorem canonicalGluedAiryIntegral_endpoint_of_actual_ode
     have he : U ∘ (fun t : ℝ => (t, u t)) = (fun t : ℝ => U (t, u t)) := by
       funext t
       exact Function.comp_apply
+    simp only [id_eq] at hh
     rw [he] at hh
     apply hh.congr_deriv
     rw [polarCLM_apply_decompose]

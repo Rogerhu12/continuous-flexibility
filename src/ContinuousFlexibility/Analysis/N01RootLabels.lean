@@ -145,7 +145,8 @@ private theorem n01RootLabelJetBound_of_left_right
     (hleft : N01LeftChartPairJetBound S C L)
     (hright : N01RightChartJetBound S C base low loss ε m A) :
     N01RootLabelJetBound S C base low (max 1 loss) ε m (fun n => L + A n) := by
-  have hp := tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
+  have hp : Monotone (pairGrading (stateGrading S) realGrading) :=
+    tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
   intro z hz hs hlow rightEnd
   cases rightEnd with
   | false =>

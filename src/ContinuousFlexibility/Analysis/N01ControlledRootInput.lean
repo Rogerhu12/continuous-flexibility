@@ -147,7 +147,8 @@ private theorem n01_exists_common_root_inputs_of_flowBound
       OrdinaryFlowJacobianBounds S C newBase ε' ∧
       ∀ m : ℕ, ∀ rightEnd : Bool,
         N01ControlledRootInputData D S C newBase outLoss ε' m rightEnd := by
-  have hp := tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
+  have hp : Monotone (pairGrading (stateGrading S) realGrading) :=
+    tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
   have hI := coordinate_hasInterpolation_pair (stateGrading_monotone S)
     (fun _ _ _ => le_rfl) (coordinate_hasInterpolation_stateGrading hS)
     coordinate_hasInterpolation_realGrading
