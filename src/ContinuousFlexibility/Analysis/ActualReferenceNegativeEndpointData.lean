@@ -52,7 +52,7 @@ theorem n04Coordinates_actual_reference_negative_endpoint_data
   let Ω := Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ)
   have hz₀ : z₀ ∈ stateNeighborhood S C base ε :=
     reference_mem_stateNeighborhood S C base hN.1.1.2.1
-  have hs₀ : stateSector S z₀.1 := hN.1.1.2.2.1.stateSector
+  have hs₀ : stateSector S z₀.1 := n04b_referenceState_sector hN.1.1.2.2.1
   have hA : CanonicalGeometry D S C K base ε :=
     n04b_actualTypedAtlas_partA hT hS hN hfield e
   have hcut : CanonicalCutGeometry S C K base ε :=
