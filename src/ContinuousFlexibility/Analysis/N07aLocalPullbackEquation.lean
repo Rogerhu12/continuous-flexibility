@@ -264,8 +264,9 @@ theorem n07a_localPullback_divergence_chain
     n07a_localPullback_radial_chain hdF hdvr, n07a_localPullback_radial_chain hdF hdvt,
     n07a_localPullback_angular_chain hdF hdvr, n07a_localPullback_angular_chain hdF hdvt,
     radial_angular_commute ((hv.contDiffAt (hV.mem_nhds (hmap hx))).of_le (by simp)),
-    hrr, hrt, htt,
-    radialPartial_eq_mixedDerivative_on hV hv (hmap hx),
+    hrr, hrt, htt]
+  simp only [Function.comp_apply]
+  rw [radialPartial_eq_mixedDerivative_on hV hv (hmap hx),
     angularPartial_eq_mixedDerivative_on hV hv (hmap hx)]
   dsimp only [Function.comp_apply, n07aPullbackPrincipal, divergenceOperator, Nr, Nt, Ar, At, R, T]
   ring
@@ -320,6 +321,6 @@ theorem n07a_localPullback_normal_equation
   have hsource := hchain.symm.trans (hdiv.trans (heq (hGmap hy)))
   have hn := n07a_localPullback_normal_algebra (r := v y) (hne y hy) hsource
   simpa [n07aNormalRhs, n07aPullbackNormalCoefficients, n07aNormalShift,
-    Fin.sum_univ_succ, spaces_mixedDerivative_zero, Function.comp_apply, v] using hn
+    Fin.sum_univ_succ, spaces_mixedDerivative_zero, Function.comp_apply, v, add_assoc] using hn
 
 end ContinuousFlexibility.Analysis

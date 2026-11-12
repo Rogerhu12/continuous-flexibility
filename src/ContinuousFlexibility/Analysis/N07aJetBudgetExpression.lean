@@ -75,7 +75,7 @@ def zero (T : MaterialData) {S : PhysicalSpacesData} (K : CanonicalData S) (a : 
 @[simp] theorem eval_zero {E : Type*} [AddCommGroup E] [Module ℝ E]
     (p : ℕ → Seminorm ℝ E) (d : ℕ) (z : E) (m : ℕ) :
     (zero T K a).eval p d z m = 0 := by
-  change Finset.sum (Finset.univ : Finset Empty) _ = 0
+  change Finset.sum (Finset.univ : Finset Empty) _ = (0 : ℝ)
   exact Finset.sum_eq_zero fun i _ => Empty.elim i
 
 def constant (e : ℕ → ℝ) (he : N07aSampleSubpower T K e) (he0 : ∀ m, 0 ≤ e m) :
@@ -154,7 +154,8 @@ theorem eval_sum {E : Type*} [AddCommGroup E] [Module ℝ E]
       ∏ j, (1 + p ((e i.1).order i.2 j + d) z)) =
     ∑ i : ι, ∑ j : (e i).Index, (e i).coeff j m *
       ∏ k, (1 + p ((e i).order j k + d) z)
-  exact Fintype.sum_sigma _
+  exact Fintype.sum_sigma (fun i : Σ j, (e j).Index => (e i.1).coeff i.2 m *
+    ∏ j, (1 + p ((e i.1).order i.2 j + d) z))
 
 /-- One common low order and loss estimate every finite expression at
 every budget. The number of monomials enters only the sampled envelope. -/

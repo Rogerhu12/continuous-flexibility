@@ -129,7 +129,8 @@ theorem n07a_angularIntegral_ae_of_ae
   apply congrArg (fun y : ℝ => (2 * Real.pi)⁻¹ * y)
   apply intervalIntegral.integral_congr_ae_restrict
   have hT : (0 : ℝ) ≤ 2 * Real.pi := by positivity
-  simpa only [uIoc_of_le hT] using
-    hx.mono (fun θ hθ => congrArg (fun y : ℝ => y * β θ) hθ)
+  rw [uIoc_of_le hT]
+  filter_upwards [hx] with θ hθ
+  exact congrArg (fun y : ℝ => y * β θ) hθ
 
 end ContinuousFlexibility.Analysis

@@ -4,8 +4,10 @@
 
 The uniform bounds of the potential and of the divided differences, and the conversion of sources (rest of Proposition 7.8).
 
-The same chosen coordinates and neighborhood also carry
-`CanonicalGeometry.PrimitiveGeometryProperties`: the radial reference gauge,
+The same chosen coordinates and neighborhood carry both
+`CanonicalGeometry.PrimitiveGeometryProperties` and `CanonicalPrimitiveGeometry`.
+The latter is N07b's state-dependent chart, closed-domain, height, Jacobian and
+material-sample certificate. The former retains the radial reference gauge,
 reference positivity and unit-piece jets, genuine current-minus-reference
 spatial/parameter jets, and the radial compatibility source supported in the
 frozen normalization region. These are construction-stage facts about the
@@ -23,8 +25,10 @@ The primitive coordinate payload includes `CanonicalGeometry.TransmissionGeometr
 classify actual adjacent interfaces as roots or designated middle cuts, prove the
 actual forward chart/height values and first derivatives match at roots after the
 fixed endpoint orientations are aligned, and prove the forward-jet middle-cut
-Robin identity. These are construction-stage facts from the fixed transmission
-domain in §7. Boundary values of an unconstrained `inverseChart` are not substitutes
+Robin identity at `canonicalCutPoint S K z k θ`. This point is on the actual
+state-dependent physical cut; only the canonical cut radius is fixed.
+These are construction-stage facts from the transmission domain in §7.
+Boundary values of an unconstrained `inverseChart` are not substitutes
 for the traces of its actual interior inverse.
 
 ## Completion standard

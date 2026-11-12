@@ -150,8 +150,15 @@ theorem mixed_angular_hasDerivAt (hlr : l < r) (hab : a < b)
   have hsort : iteratedFDerivWithin ℝ (n + 1) u (closedRect l r a b) (t, θ)
       (Fin.cons (0, 1) v) = mixed l r a b u i (j + 1) (t, θ) := by
     rw [hv]
+    have hwr : (∑ k : Fin (n + 1), if w k = 0 then 1 else 0) = i := by
+      simp only [w, Fin.sum_univ_succ, Fin.cons_zero, Fin.cons_succ,
+        ite_eq_right (by decide : (1 : Fin 2) ≠ 0), word_radial_sum, zero_add]
+    have hwt : (∑ k : Fin (n + 1), if w k = 0 then 0 else 1) = j + 1 := by
+      simp only [w, Fin.sum_univ_succ, Fin.cons_zero, Fin.cons_succ,
+        ite_eq_right (by decide : (1 : Fin 2) ≠ 0), word_angular_sum, Nat.add_comm]
     have h := word_eq_mixed hlr hab hu (n + 1) w hx
-    simpa [w, Fin.sum_univ_succ, word, Fin.sum_univ_add, Nat.add_comm] using h
+    rw [hwr, hwt] at h
+    exact h
   rw [hsort] at hangle
   exact hangle.hasDerivAt (Icc_mem_nhds hθ.1 hθ.2)
 

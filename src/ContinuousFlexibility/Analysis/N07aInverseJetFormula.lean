@@ -32,12 +32,11 @@ theorem n07a_orderedPartition_eq_atomic_of_length_eq
   dsimp only at h hs
   subst l
   obtain rfl : size = fun _ : Fin n => 1 := funext hs
-  have hzero (i : Fin n) :
-      (⟨1 - 1, Nat.sub_one_lt_of_lt (hpos i)⟩ : Fin 1) = 0 :=
-    Subsingleton.elim _ _
   have hmono : StrictMono (fun i : Fin n => emb i 0) := by
     intro i j hij
-    simpa only [hzero] using hparts hij
+    exact (congrArg (emb i) (Subsingleton.elim (0 : Fin 1) _)).trans_lt
+      ((hparts hij).trans_eq
+        (congrArg (emb j) (Subsingleton.elim _ (0 : Fin 1))))
   have he (i : Fin n) (j : Fin 1) : emb i j = i := by
     have hj : j = 0 := Subsingleton.elim _ _
     simpa only [hj] using hmono.apply_eq (x := i)

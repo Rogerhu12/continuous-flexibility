@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.CanonicalSourceConversion
 import ContinuousFlexibility.Analysis.N07bCanonicalSourceJets
 import ContinuousFlexibility.Analysis.N07aCanonicalHalfStrip
+import ContinuousFlexibility.Analysis.SpacesCylinderIntegration
 
 /-!
 # The actual current physical measure and closed-piece bounds

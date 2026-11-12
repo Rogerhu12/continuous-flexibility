@@ -32,6 +32,18 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
   {base : ℕ} {ε : ℝ}
 
+/-- Keep existential elimination independent of the large geometric predicate. -/
+private theorem n07a_displacement_with_loss {Condition : ℕ → Prop} {P : Prop}
+    (h : ∃ n, Condition n) (hP : ∀ n, Condition n → P) : P := by
+  obtain ⟨n, hn⟩ := h
+  exact hP n hn
+
+private theorem n07a_displacement_with_positive_bound {Condition : ℝ → Prop} {P : Prop}
+    (h : ∃ B, 0 < B ∧ Condition B)
+    (hP : ∀ B, 0 < B → Condition B → P) : P := by
+  obtain ⟨B, hB, hbound⟩ := h
+  exact hP B hB hbound
+
 theorem n07a_parameterGrading_lt_twice_radius
     {b s : ℕ} {η : ℝ} {z : CanonicalGeometry.Parameter S}
     (hs : s ≤ b) (hz : z ∈ sectorNeighborhood S b η η) :
@@ -42,7 +54,7 @@ theorem n07a_parameterGrading_lt_twice_radius
   have he : CanonicalGeometry.parameterGrading S s z =
       sectorGrading S s z.1 + |z.2| :=
     pairGrading_apply (E := StateDirections S) (F := ℝ) (sectorGrading S) realGrading s z
-  exact he.le.trans_lt (by linarith only [h₁, h₂])
+  exact he.trans_lt ((add_lt_add h₁ h₂).trans_eq (two_mul η).symm)
 
 theorem n07a_inverseChart_radial_displacement
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
@@ -57,8 +69,10 @@ theorem n07a_inverseChart_radial_displacement
               (K.inverseChart (C.referenceState, 0) m y).1| ≤
             e m * T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) *
               CanonicalGeometry.parameterGrading S low z := by
-  obtain ⟨low, hdiff⟩ := hcur.2.1
-  obtain ⟨B, hB, hBb⟩ := hdiff 0
+  refine n07a_displacement_with_loss hcur.2.1 ?_
+  intro low hdiff
+  refine n07a_displacement_with_positive_bound (hdiff 0) ?_
+  intro B hB hBb
   let e : ℕ → ℝ := fun m =>
     (K.physicalRight m - K.physicalLeft m) * (B * T.E0 (T.sample (K.cell m)) ^ B)
   have he : N07aSampleSubpower T K e := N07aSampleSubpower.mul hD hT
