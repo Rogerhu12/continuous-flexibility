@@ -196,4 +196,3 @@ theorem volterraStateVariation_eq_iteratedFDeriv
 end GlobalTrajectory
 
 end ContinuousFlexibility.Analysis
-

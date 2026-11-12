@@ -168,4 +168,3 @@ theorem truncatedFlowForcing_sobolev_le
 end Forcing
 
 end ContinuousFlexibility.Analysis
-

@@ -173,4 +173,3 @@ theorem volterra_truncatedFlowForcing_eq_selected_products
   truncatedFlowForcing_eq_selected_products J Θ _ p v
 
 end ContinuousFlexibility.Analysis
-

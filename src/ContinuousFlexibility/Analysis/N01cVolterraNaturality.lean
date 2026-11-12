@@ -116,4 +116,3 @@ theorem volterraStateVariation_natural_at
         (fun i => L (v i)) hy0 hy t
 
 end ContinuousFlexibility.Analysis
-

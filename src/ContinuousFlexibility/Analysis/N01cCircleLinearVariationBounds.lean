@@ -485,4 +485,3 @@ theorem angular_value_le (n : ℕ) {t : ℝ} (ht : t ∈ Icc a b) (θ : AddCircl
 end CircleLinearVariationData
 
 end ContinuousFlexibility.Analysis
-

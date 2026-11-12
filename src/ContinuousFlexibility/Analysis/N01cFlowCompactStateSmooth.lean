@@ -129,4 +129,3 @@ def topologicalCircleTrajectoryCompactSmoothDirections
   exact K.congr (fun x _ => by rw [hs])
 
 end ContinuousFlexibility.Analysis
-

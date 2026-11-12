@@ -1,8 +1,8 @@
 # N01c geometric interfaces and ordinary-flow dependencies
 
-Sections 1–10 audit the original interfaces; section 11 records the explicit
-repair of the information they discarded. Section 12 records main's later
-strict-support repair and proved N01b construction. This is not a counterexample to the
+Sections 1–9 audit the original interfaces; section 10 records the construction
+evidence and its status at that audit update. Section 11 records the explicit
+repair and the later strict-support compatibility changes. This is not a counterexample to the
 existential `N01Statement`: the input and output witnesses may differ. The repair
 retains primitive reference geometry, never a coefficient, speed or flow tame
 conclusion. Completion of N01c still requires its three actual proof stages.
@@ -28,7 +28,7 @@ spatially `ContDiffOn` on the whole open annulus, identifies the exact negative
 type domain, and proves the actual minus characteristic speed smooth there.
 It does not infer type preservation on a reference component without a premise.
 
-## 2. What the present upstream predicates say
+## 2. What the original upstream predicates recorded
 
 `N01PartA` contains reference negativity on `(C.left m,C.right m)`, endpoint
 simple zeros, compactly supported smooth controls in those intervals,
@@ -117,7 +117,7 @@ work is:
 The second assertion is quantitative simple-root nondegeneracy on the whole
 component, not a bound for a perturbed coefficient or flow.  It packages the
 root-collar lower bound and the interior lower bound from the manuscript.
-The present hypotheses do not give it by a routine compactness argument:
+The original hypotheses do not give it by a routine compactness argument:
 compactness gives a different positive constant in each component, while the
 theorem requires a controlled coefficient power uniformly in the component.
 
@@ -388,9 +388,10 @@ Likewise, replacing `C.cell` by an arbitrary containing-cell choice would
 require rechecking the index-shift and all control-weight clauses.  This
 audit identifies the information needed by the same-witness proof. Section 10
 records the necessary construction route; section 11 records the explicit
-interface repair. `IsRadialReference` itself
-is unchanged, and no counterexample to the full existential N01 statement is
-claimed.
+interface repair. No quantitative optical or nonlinear tame conclusion is
+added to `IsRadialReference`. Its border support was subsequently strengthened
+by the main-compatible strict-support change described in section 11. No
+counterexample to the full existential N01 statement is claimed.
 
 Finally, the small scales remain distinct:
 \(w_0\) has the recorded
@@ -401,15 +402,19 @@ The actual designated-cell localization remains necessary in the coefficient
 estimates as well as the flow estimates.
 
 
-## 8. The compact true border is another primitive geometric datum
+## 8. The original missing closed-support certificate
 
-The current `RadialTrueBorder`
-(`Statements/Radial.lean`, lines 555–561) asserts
+The original `RadialTrueBorder` in `Statements/Radial.lean` asserted
 `HasCompactSupport D.chi` and
 
 ```lean
 Function.support D.chi ⊆ {r | r ∈ radialCore D ∧ 0 < deriv D.w r}.
 ```
+
+The current contract instead requires this inclusion for `tsupport D.chi`,
+as retained from main's strict-support repair. The argument below explains
+why the former ordinary-support clause was insufficient; it is no longer
+an unresolved closed-support gap in the current `IsRadialReference`.
 
 These assertions do not imply that the closed support is contained in the
 open core.  A globally smooth flat function can be nonzero arbitrarily
@@ -427,8 +432,8 @@ There is no such finite reduction for a support that accumulates at an
 endpoint.  The recorded upper estimates for `w` cannot replace the missing
 `H^(3/4)` factor: their scales are different, as recorded in section 7.
 
-The construction has the right stronger input already, before it is
-forgotten by the interface.  In
+The construction already had the right stronger input before the original
+interface discarded it. In
 `Radial/BorderNormalization.lean`, `border_pairing_neg` (lines 112–119)
 and `border_normalized` (lines 162–181) require
 
@@ -542,9 +547,9 @@ their retained data from the additional primitive certificate needed here.
    its original properties; merely choosing another geometric witness does
    not establish that requirement.
 6. N01a must construct its controls and their designated cells together
-   with the additional primitive certificate on the same data. Main's actual
-   N01b construction is ported to retain this certificate. The N01a construction
-   obligation is not proved by the transport theorem below or by closing N01c.
+   with the additional primitive certificate on the same data. N01b then
+   retains it. Neither step is proved by the transport theorem below or by
+   closing the N01c implication.
 
 R08, R12 and R11b are proved on main. R10a and R11a remain open at this
 audit update. The stronger common-reference construction required by the
@@ -601,10 +606,25 @@ supply it.
 the same closed border support, and the corresponding lower bound with
 `T.E0 (T.sample (C.cell m))`. N01a constructs it together with its controls;
 N01b preserves it. The coefficient and speed stages retain it on the same
-existential data. No tame estimate is added to `N01PartA`, `N01PartB` or
-`IsRadialReference`. Main's subsequent strict-support repair is retained as
-explained in section 12. The separate parameter-order flow-loss correction is recorded
-in `docs/N01c-loss-audit.md`.
+existential data, with proved transport when the material envelope is
+normalized. No coefficient, speed or flow tame estimate is added to the
+predecessor hypotheses. The separate parameter-order flow-loss correction
+is recorded in `docs/N01c-loss-audit.md`.
+
+The later main-compatible support update also changes two underlying
+primitive clauses: `controlGeometryConditions` requires
+`tsupport (C.control m) ⊆ Ioo (C.left m) (C.right m)`, and
+`RadialTrueBorder` requires
+`tsupport D.chi ⊆ {r | r ∈ radialCore D ∧ 0 < deriv D.w r}`.
+These are genuine strengthenings of `N01PartA` and `IsRadialReference`
+through their constituent predicates; `N01PartB` itself is unchanged.
+The public R12 conclusion retains its existing type constructor and its
+proof uses the strengthened border certificate, with no new admission.
+In particular, the closed-core support conjunct of `N01PrimitiveGeometry`
+now follows from `IsRadialReference`; it remains in the bundle for its
+transport interfaces. Designated-cell containment and the quantitative
+optical lower bound remain the additional same-reference construction
+obligations. Closing the N01c implication does not construct them.
 
 The ordinary theorem `n01PrimitiveGeometry_of_radialConstruction`
 converts a supplied `N01RadialPrimitiveGeometry` certificate to the sampled
@@ -617,42 +637,9 @@ powers. Neither theorem assumes a nonlinear tame estimate.
 enriched N01a/N01b outputs along the same dependency chain. The N01a and
 N01b task files state the retained construction obligations. Closing the
 N01c axiom gate proves its implication under this repaired predecessor
-contract; it does not construct the additional N01a reference certificate. The coefficient, speed and flow
-estimates still have to be derived from their actual definitions on one
-common neighborhood.
-
-## 12. Integration of main's actual N01b and strict-support repair
-
-Main at `2549895eb550b142243bd9c9cd73d66cb6c3421b` includes the
-proved N01b construction from `93035914c21cf27b59440645e5517d106c8d0509`.
-That work repairs two ordinary-support clauses independently of this audit:
-
-```lean
-tsupport (C.control m) ⊆ Ioo (C.left m) (C.right m)
-tsupport D.chi ⊆ {r | r ∈ radialCore D ∧ 0 < deriv D.w r}
-```
-
-Both strict inclusions are retained in this integration. Their existing
-ordinary-support consequences use `subset_tsupport`, including the three
-N01c endpoint/control consumers. Main's compatibility lemmas
-`controlGeometryConditions.support_subset` and
-`RadialTrueBorder.support_subset` remain available. See main's separate
-`docs/notes/N01b-support-interface.md` for the precise old clauses and its
-existential-witness qualification.
-
-Consequently, closed support of the true border is now already retained by
-`IsRadialReference`. Its occurrence in `N01RadialPrimitiveGeometry` and
-`N01PrimitiveGeometry` is redundant bookkeeping; it is no longer an extra
-unproved assertion beyond main's reference interface. The additional N01a
-work that remains specific to this branch is the uniform optical lower bound
-and the association with the controls' designated cells on the same data.
-
-The genuine N01b proof constructs the ordinary circle flows and replaces
-only the flow and inverse entries of the geometry by `circleFlowGeometry`.
-Its controls, endpoints, selected cells, reference state, material data and
-spaces are unchanged by definition. `NeighborhoodConstruction.lean` therefore
-threads the supplied `N01PrimitiveGeometry` certificate to that exact output;
-it does not select a new reference or assume any coefficient, speed or flow
-estimate. The existing N01b leaf calls this actual construction, and the
-assembly retains that proof. The additional N01a certificate remains an
-explicit predecessor construction obligation.
+contract; it does not itself discharge the N01a construction obligation or
+prove N01b. The implemented proof chain `N01cCoefficients`, `N01cSpeeds`,
+`N01cFlows`, and `N01c` derives the coefficient, speed and flow estimates
+from their actual definitions on one common neighborhood. Final acceptance
+separately requires complete main integration and a successful build and
+strict axiom audit at that final head.

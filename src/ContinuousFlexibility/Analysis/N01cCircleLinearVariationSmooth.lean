@@ -162,4 +162,3 @@ theorem circleLinearVariationOfSmooth_angular_le
     circleLinearVariationOfSmooth, Nat.cast_one, circleFlowSpeedJet_coe_apply] using h
 
 end ContinuousFlexibility.Analysis
-

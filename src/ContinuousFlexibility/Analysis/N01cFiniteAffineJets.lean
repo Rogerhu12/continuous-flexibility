@@ -188,4 +188,3 @@ theorem smoothDirections_iteratedFDeriv_finiteAffine
 end FiniteAffinePullback
 
 end ContinuousFlexibility.Analysis
-

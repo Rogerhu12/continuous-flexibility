@@ -175,4 +175,3 @@ theorem flowJetComposition_eq_linear_add_truncated
 end Flow
 
 end ContinuousFlexibility.Analysis
-

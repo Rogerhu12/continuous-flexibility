@@ -171,4 +171,3 @@ theorem topologicalCircleTrajectorySmoothDirections_D_apply
       (volterraStateVariation J hΘ n).value (x, t) v := rfl
 
 end ContinuousFlexibility.Analysis
-

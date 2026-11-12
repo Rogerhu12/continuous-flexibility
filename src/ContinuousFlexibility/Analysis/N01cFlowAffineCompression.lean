@@ -191,4 +191,3 @@ theorem flow_finiteAffine_germ_jets
 end AffineGerm
 
 end ContinuousFlexibility.Analysis
-

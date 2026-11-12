@@ -166,4 +166,3 @@ theorem exists_flowVariationPolynomialNormalization
 end MultilinearNormalization
 
 end ContinuousFlexibility.Analysis
-

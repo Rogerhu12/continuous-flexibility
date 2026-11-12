@@ -188,4 +188,3 @@ theorem circleProductJet_sobolev_le {k : ℕ} (f : Fin (k + 1) → ℝ → ℝ)
     _ ≤ _ := mul_le_mul_of_nonneg_right (le_max_right 1 (C * E ^ k)) hQ
 
 end ContinuousFlexibility.Analysis
-
