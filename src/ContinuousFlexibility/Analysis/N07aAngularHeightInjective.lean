@@ -37,7 +37,11 @@ theorem n07a_height_eq_zero_of_canonical
     apply (n07b_canonicalHeights_ae_iff h04.1 hz hs
       ((S.height (3 / 4 : ℝ)).decode u) (fun _ => 0)).mp
     intro m
-    simpa only [canonicalHeight, zero_div] using hU m
+    have hzero : canonicalHeight S K z m (fun _ => 0) = fun _ => 0 := by
+      funext p
+      simp only [canonicalHeight, zero_div]
+    rw [hzero]
+    exact hU m
   have he : EqOn ((S.height (3 / 4 : ℝ)).decode u) (fun _ => 0) (annularOpen D) :=
     n07a_canonical_periodicOn_eqOn_of_ae_eq (S := S) (K := J) (m := 0)
       hd.1.continuousOn continuousOn_const

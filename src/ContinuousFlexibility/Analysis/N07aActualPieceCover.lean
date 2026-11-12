@@ -46,6 +46,56 @@ theorem n07a_actualPhysicalPiece_bound
     ((continuous_fst.min continuous_snd).comp_continuousOn (hf.prodMk hB)) hp
   exact hpoint.trans_le (min_le_right _ _)
 
+private theorem n07a_actualPieceCover_with_exists {α : Type*} {Condition : α → Prop}
+    {P : Prop} (h : ∃ a, Condition a) (hP : ∀ a, Condition a → P) : P := by
+  obtain ⟨a, ha⟩ := h
+  exact hP a ha
+
+private theorem n07a_actualPieceCover_inverseLength
+    {d e Ms Mx A : ℝ} (hd : 0 < d) (he : 0 < e) (hMx : 0 < Mx)
+    (hA : 0 ≤ A) (hratio : Ms / Mx ≤ e) (henvelope : |d * e| ≤ A * Ms) :
+    d ≤ A * Mx := by
+  have hMs : Ms ≤ e * Mx := (div_le_iff₀ hMx).mp hratio
+  have hprod : d * e ≤ (A * Mx) * e := by
+    calc
+      _ = |d * e| := (abs_of_pos (mul_pos hd he)).symm
+      _ ≤ A * Ms := henvelope
+      _ ≤ A * (e * Mx) := mul_le_mul_of_nonneg_left hMs hA
+      _ = _ := by ring
+  exact (mul_le_mul_iff_of_pos_right he).mp hprod
+
+private theorem n07a_actualPieceCover_count
+    {left right : ℕ → ℝ} {a b : ℝ} {M : ℝ → ℝ} {J : Set ℝ}
+    (hJ : IsCompact J) (hM : ContinuousOn M J)
+    (hinterval : ∀ m, left m < right m)
+    (hsub : ∀ m, Ioo (left m) (right m) ⊆ Ioo a b)
+    (hdisjoint : Pairwise (fun m n => Disjoint
+      (Ioo (left m) (right m)) (Ioo (left n) (right n))))
+    {A : ℝ} (hA : 0 < A) {P : ℕ → Prop}
+    (hlength : ∀ m, P m → ∃ x ∈ J, (right m - left m)⁻¹ ≤ A * M x) :
+    Set.Finite {m : ℕ | P m} := by
+  obtain ⟨B, hB⟩ := hJ.bddAbove_image hM
+  let B' : ℝ := max 1 B
+  have hB' : 0 < B' := zero_lt_one.trans_le (le_max_left _ _)
+  have hAB : 0 < A * B' := mul_pos hA hB'
+  have hfinite : volume (⋃ m, Ioo (left m) (right m)) ≠ ∞ := by
+    apply ne_top_of_le_ne_top (show volume (Ioo a b) ≠ ∞ by
+      rw [Real.volume_Ioo]
+      exact ENNReal.ofReal_ne_top)
+    exact measure_mono (iUnion_subset hsub)
+  have hlarge := Measure.finite_const_le_meas_of_disjoint_iUnion volume
+    (ENNReal.ofReal_pos.mpr (inv_pos.mpr hAB))
+    (fun _ : ℕ => measurableSet_Ioo) hdisjoint hfinite
+  apply hlarge.subset
+  intro m hm
+  obtain ⟨x, hx, hlengthx⟩ := hlength m hm
+  have hMp : M x ≤ B' := (hB ⟨x, hx, rfl⟩).trans (le_max_right _ _)
+  have hlen : 0 < right m - left m := sub_pos.mpr (hinterval m)
+  have hbound : (A * B')⁻¹ ≤ right m - left m :=
+    (inv_le_comm₀ hlen hAB).mp (hlengthx.trans
+      (mul_le_mul_of_nonneg_left hMp hA.le))
+  simpa only [Set.mem_ofPred_eq, Real.volume_Ioo] using ENNReal.ofReal_le_ofReal hbound
+
 /-- The reference length controls the number of current pieces meeting a
 compact set; the material comparison is evaluated at the actual point. -/
 theorem n07a_actualPhysicalPieces_finite_inter_compact
@@ -56,46 +106,29 @@ theorem n07a_actualPhysicalPieces_finite_inter_compact
     {J : Set ℝ} (hJ : IsCompact J) (hJcore : J ⊆ Ioo D.a D.b) :
     Set.Finite {m : ℕ | ∃ z ∈ sectorNeighborhood S base ε ε,
       ∃ p ∈ physicalPieceOpen S K (liftSectorParameter S C z) m, p.1 ∈ J} := by
-  obtain ⟨e, he, he1, heb⟩ := hRatio
+  refine n07a_actualPieceCover_with_exists hRatio ?_
+  intro e heall
+  have he : N07aSampleSubpower T K e := heall.1
+  have he1 : ∀ m, 1 ≤ e m := heall.2.1
+  have heb := heall.2.2
   let d : ℕ → ℝ := fun m => (K.physicalRight m - K.physicalLeft m)⁻¹
   have hd : N07aSampleSubpower T K d := n07a_physicalLengthInverse_subpower hD hT href
-  obtain ⟨A, hA, hAb⟩ := (N07aSampleSubpower.mul hD hT hd he).one_power
-  have hlength (z : CanonicalGeometry.Parameter S)
-      (hz : z ∈ sectorNeighborhood S base ε ε) (m : ℕ) (p : PolarPoint)
-      (hp : p ∈ physicalPieceOpen S K (liftSectorParameter S C z) m)
-      (hpJ : p.1 ∈ J) : d m ≤ A * T.M p.1 := by
-    have hM : 0 < T.M p.1 := zero_lt_one.trans_le (hT.2.1 p.1 (hJcore hpJ)).2.2.2
-    have hd0 : 0 < d m := inv_pos.mpr (sub_pos.mpr (h04.1.referenceBounds m).1)
-    have he0 : 0 < e m := zero_lt_one.trans_le (he1 m)
-    have hratio : T.M (T.sample (K.cell m)) ≤ e m * T.M p.1 :=
-      (div_le_iff₀ hM).mp (heb z hz m p hp).2.2.2
-    have hprod : d m * e m ≤ (A * T.M p.1) * e m := by
-      calc
-        _ = |d m * e m| := (abs_of_pos (mul_pos hd0 he0)).symm
-        _ ≤ A * T.M (T.sample (K.cell m)) := hAb m
-        _ ≤ A * (e m * T.M p.1) := mul_le_mul_of_nonneg_left hratio hA.le
-        _ = _ := by ring
-    exact (mul_le_mul_iff_of_pos_right he0).mp hprod
-  obtain ⟨B, hB⟩ := hJ.bddAbove_image ((hT.1 T.M (by simp)).continuousOn.mono hJcore)
-  let B' : ℝ := max 1 B
-  have hB' : 0 < B' := zero_lt_one.trans_le (le_max_left _ _)
-  have hAB : 0 < A * B' := mul_pos hA hB'
-  have hfinite : volume (⋃ m, Ioo (K.physicalLeft m) (K.physicalRight m)) ≠ ∞ := by
-    apply ne_top_of_le_ne_top (show volume (Ioo D.a D.b) ≠ ∞ by
-      rw [Real.volume_Ioo]
-      exact ENNReal.ofReal_ne_top)
-    exact measure_mono (iUnion_subset fun m => (h04.1.referenceBounds m).2.2)
-  have hlarge := Measure.finite_const_le_meas_of_disjoint_iUnion volume
-    (ENNReal.ofReal_pos.mpr (inv_pos.mpr hAB))
-    (fun _ : ℕ => measurableSet_Ioo) (n07a_physicalPieces_pairwise_disjoint h04) hfinite
-  apply hlarge.subset
+  refine n07a_actualPieceCover_with_exists (N07aSampleSubpower.mul hD hT hd he).one_power ?_
+  intro A hAall
+  have hA : 0 < A := hAall.1
+  have hAb := hAall.2
+  apply n07a_actualPieceCover_count (left := K.physicalLeft) (right := K.physicalRight)
+    (a := D.a) (b := D.b) (M := T.M) hJ
+    ((hT.1 T.M (by simp)).continuousOn.mono hJcore)
+    (fun m => (h04.1.referenceBounds m).1)
+    (fun m => (h04.1.referenceBounds m).2.2)
+    (n07a_physicalPieces_pairwise_disjoint h04) hA
   rintro m ⟨z, hz, p, hp, hpJ⟩
-  have hMp : T.M p.1 ≤ B' := (hB ⟨p.1, hpJ, rfl⟩).trans (le_max_right _ _)
-  have hlen : 0 < K.physicalRight m - K.physicalLeft m :=
-    sub_pos.mpr (h04.1.referenceBounds m).1
-  have hbound : (A * B')⁻¹ ≤ K.physicalRight m - K.physicalLeft m :=
-    (inv_le_comm₀ hlen hAB).mp ((hlength z hz m p hp hpJ).trans
-      (mul_le_mul_of_nonneg_left hMp hA.le))
-  simpa only [Set.mem_ofPred_eq, Real.volume_Ioo] using ENNReal.ofReal_le_ofReal hbound
+  refine ⟨p.1, hpJ, ?_⟩
+  exact n07a_actualPieceCover_inverseLength
+    (inv_pos.mpr (sub_pos.mpr (h04.1.referenceBounds m).1))
+    (zero_lt_one.trans_le (he1 m))
+    (zero_lt_one.trans_le (hT.2.1 p.1 (hJcore hpJ)).2.2.2)
+    hA.le (heb z hz m p hp).2.2.2 (hAb m)
 
 end ContinuousFlexibility.Analysis

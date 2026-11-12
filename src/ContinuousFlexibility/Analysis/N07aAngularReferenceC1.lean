@@ -111,7 +111,7 @@ theorem n07a_exists_referenceTransport_C1
     exact tendsto_nhds_unique_of_eventuallyEq
       ((hv.contDiffAt (hU.mem_nhds hpD)).continuousAt.tendsto.mono_left nhdsWithin_le_nhds)
       ((hWclosed m p hp).continuousAt.tendsto.mono_left nhdsWithin_le_nhds)
-      (self_mem_nhdsWithin.mono fun x hx => hvpiece m hx)
+      ((hvpiece m).eventuallyEq_of_mem self_mem_nhdsWithin)
   have hFπ : Function.Periodic F (0, Real.pi) :=
     n07bReferenceTransport_periodic hτπ hqπ hηπ aL
   have hvπ : Function.Periodic v (0, Real.pi) := by

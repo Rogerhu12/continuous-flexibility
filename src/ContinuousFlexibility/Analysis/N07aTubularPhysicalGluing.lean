@@ -142,7 +142,10 @@ theorem n07a_tubular_physical_gluing
     have hGW : MapsTo B.e W X := by
       intro y hy
       have hys := hYsource (hWY hy)
-      exact ⟨B.e.map_source hys, by simpa only [B.e.left_inv hys] using hy⟩
+      refine ⟨B.e.map_source hys, ?_⟩
+      change B.e.symm (B.e y) ∈ W
+      rw [B.e.left_inv hys]
+      exact hy
     exact n07a_localPullback_normal_equation hX hW
       (ha.mono (hXP.trans inter_subset_right))
       (hb.mono (hXP.trans inter_subset_right))
@@ -181,8 +184,10 @@ theorem n07a_tubular_physical_gluing
   have hcenter : (R, θ₀) ∈ Y := ⟨⟨hlR, hRr⟩, ⟨haθ, hθb⟩⟩
   have hcutO : canonicalCutPoint S K z k θ₀ ∈ O := by
     rw [← B.cut_eq θ₀]
-    exact ⟨B.e.map_source (hYsource hcenter),
-      by simpa only [B.e.left_inv (hYsource hcenter)] using hcenter⟩
+    refine ⟨B.e.map_source (hYsource hcenter), ?_⟩
+    change B.e.symm (B.e (R, θ₀)) ∈ Y
+    rw [B.e.left_inv (hYsource hcenter)]
+    exact hcenter
   refine ⟨O, hO, hcutO, w,
     hglue.comp (B.inverse_smooth.mono inter_subset_left) (fun _ hx => hx.2), ?_, ?_⟩
   · intro x hx

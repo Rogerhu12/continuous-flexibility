@@ -39,9 +39,8 @@ theorem n07aClosedReferenceHeight_firstJet
   rw [n07a_referencePhysicalPieceClosed h04 m] at hd
   have hχ : ContDiff ℝ ∞ (fun x : PolarPoint => aL * S.chiLeft x.1) :=
     contDiff_const.mul (hS.2.2.1.1.comp contDiff_fst)
-  exact (hd.add ((hχ.differentiable (by simp) p).hasFDerivAt.hasFDerivWithinAt)).
-    fderivWithin
-      (((uniqueDiffOn_Icc (h04.1.referenceBounds m).1).prod uniqueDiffOn_univ) p hp)
+  exact (hd.add ((hχ.differentiable (by simp) p).hasFDerivAt.hasFDerivWithinAt)).fderivWithin
+    (((uniqueDiffOn_Icc (h04.1.referenceBounds m).1).prod uniqueDiffOn_univ) p hp)
 
 /-- The common physical scalar column contributes the same first jet on
 both reference sides and cancels before transport. -/
@@ -152,6 +151,9 @@ theorem n07a_currentRepresentation_cut_firstJets
   change τ p = K.inverseChart z i (K.chart (C.referenceState, 0) i p) at hτp
   change K.chart (C.referenceState, 0) i p = (K.cutRadius k, θ) at hFp
   rw [hFp] at hτp
-  simpa only [hτp, i, j, canonicalCutPoint] using hcur
+  change τ (canonicalCutPoint S K (C.referenceState, 0) k θ) =
+    canonicalCutPoint S K z k θ at hτp
+  rw [hτp] at hcur
+  exact hcur
 
 end ContinuousFlexibility.Analysis
