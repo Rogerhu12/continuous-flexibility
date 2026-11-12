@@ -32,6 +32,173 @@ private def radialCutoffScalarTower
   exact (smoothDirectionsOfContDiffOn isOpen_univ hd.contDiffOn).compLinear L
     (hU.prod hV) (fun _ _ => mem_univ _)
 
+private theorem transportVelocity_commonGrowth
+    {I E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} (l h : I → ℝ)
+    (p : ℕ → Seminorm ℝ E) (W H : I → ℝ)
+    (hp : Monotone p) (hW : ∀ i, 0 ≤ W i) (hH : ∀ i, 0 ≤ H i)
+    {fL fA : I → E × PolarPoint → ℝ} {fZ : Fin 2 → I → E × PolarPoint → ℝ}
+    (JL : ∀ i, SmoothDirections (U ×ˢ (Ioo (l i) (h i) ×ˢ univ)) (fL i))
+    (JA : ∀ i, SmoothDirections (U ×ˢ (Ioo (l i) (h i) ×ˢ univ)) (fA i))
+    (JZ : ∀ c i, SmoothDirections (U ×ˢ (Ioo (l i) (h i) ×ˢ univ)) (fZ c i))
+    (nmax BL BA B₀ B₁ B : ℕ)
+    (hbL : BL ≤ B) (hbA : BA ≤ B) (hb0 : B₀ ≤ B) (hb1 : B₁ ≤ B)
+    (hBL : ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ a b : ℕ, a + b ≤ N →
+      ∃ K Q : ℝ, 0 ≤ K ∧ 0 ≤ Q ∧
+        ∀ i (x : E), x ∈ U → ∀ w : E, p BL x ≤ A → p BL w ≤ 1 →
+          ∀ y : PolarPoint, y.1 ∈ Ioo (l i) (h i) →
+            |jointMixedDiagonal (JL i) n a b x w y| ≤ K * W i ^ Q *
+              (1 + p (N + BL + 1) x + p (N + BL + 1) w) ^
+                (((a + b : ℕ) : ℝ) / ((N : ℝ) + 1)))
+    (hBA : ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ b : ℕ, b ≤ N →
+      ∃ K : ℝ, 0 ≤ K ∧ ∀ i (x : E), x ∈ U → ∀ w : E,
+        p BA x ≤ A → p BA w ≤ 1 → ∀ y : PolarPoint, y.1 ∈ Ioo (l i) (h i) →
+          |jointMixedDiagonal (JA i) n 0 b x w y| ≤ K *
+            (1 + p (N + BA + 1) x + p (N + BA + 1) w) ^
+              ((b : ℝ) / ((N : ℝ) + 1)))
+    (hB₀ : ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ b : ℕ, b ≤ N →
+      ∃ K : ℝ, 0 ≤ K ∧ ∀ i (x : E), x ∈ U → ∀ w : E,
+        p B₀ x ≤ A → p B₀ w ≤ 1 → ∀ y : PolarPoint, y.1 ∈ Ioo (l i) (h i) →
+          |jointMixedDiagonal (JZ 0 i) n 0 b x w y| ≤ K *
+            (1 + p (N + B₀ + 1) x + p (N + B₀ + 1) w) ^
+              ((b : ℝ) / ((N : ℝ) + 1)))
+    (hB₁ : ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ b : ℕ, b ≤ N →
+      ∃ K : ℝ, 0 ≤ K ∧ ∀ i (x : E), x ∈ U → ∀ w : E,
+        p B₁ x ≤ A → p B₁ w ≤ 1 → ∀ y : PolarPoint, y.1 ∈ Ioo (l i) (h i) →
+          |jointMixedDiagonal (JZ 1 i) n 0 b x w y| ≤ K * H i *
+            (1 + p (N + B₁ + 1) x + p (N + B₁ + 1) w) ^
+              ((b : ℝ) / ((N : ℝ) + 1))) :
+    MixedDiagonalPowerGrowth p W (fun _ => 1) JL nmax B ∧
+      AngularDiagonalPowerGrowth p (fun _ => 1) JA nmax B ∧
+      ∀ c : Fin 2, AngularDiagonalPowerGrowth p (fun i => H i ^ c.val) (JZ c) nmax B := by
+  let V : I → Set PolarPoint := fun i => Ioo (l i) (h i) ×ˢ univ
+  have hgL₀ : MixedDiagonalPowerGrowth p W (fun _ => 1) JL nmax BL := by
+    intro A hA N n hn a b hab
+    obtain ⟨K, Q, hK, hQ, hbnd⟩ := hBL A hA N n hn a b hab
+    refine ⟨K, Q, hK, hQ, fun i x hx hxB w hw y hy => ?_⟩
+    simpa only [mul_one] using hbnd i x hx w hxB hw y hy.1
+  have hgL : MixedDiagonalPowerGrowth p W (fun _ => 1) JL nmax B :=
+    MixedDiagonalPowerGrowth.mono_base
+      (I := I) (E := E) (U := U) (V := V) (p := p) (W := W) (F := fun _ => 1)
+      (f := fL) (J := JL) (nmax := nmax) (B := BL) (B' := B)
+      hp hW (fun _ => zero_le_one) hgL₀ hbL
+  have hgA₀ : AngularDiagonalPowerGrowth p (fun _ => 1) JA nmax BA := by
+    intro A hA N n hn b hb
+    obtain ⟨K, hK, hbnd⟩ := hBA A hA N n hn b hb
+    refine ⟨K, hK, fun i x hx hxB w hw y hy => ?_⟩
+    simpa only [mul_one] using hbnd i x hx w hxB hw y hy.1
+  have hgA : AngularDiagonalPowerGrowth p (fun _ => 1) JA nmax B :=
+    AngularDiagonalPowerGrowth.mono_base
+      (I := I) (E := E) (U := U) (V := V) (p := p) (F := fun _ => 1)
+      (f := fA) (J := JA) (nmax := nmax) (B := BA) (B' := B)
+      hp (fun _ => zero_le_one) hgA₀ hbA
+  have hg0base : AngularDiagonalPowerGrowth p (fun _ => 1) (JZ 0) nmax B₀ := by
+    intro A hA N n hn b hb
+    obtain ⟨K, hK, hbnd⟩ := hB₀ A hA N n hn b hb
+    refine ⟨K, hK, fun i x hx hxB w hw y hy => ?_⟩
+    simpa only [mul_one] using hbnd i x hx w hxB hw y hy.1
+  have hg0 : AngularDiagonalPowerGrowth p (fun _ => 1) (JZ 0) nmax B :=
+    AngularDiagonalPowerGrowth.mono_base
+      (I := I) (E := E) (U := U) (V := V) (p := p) (F := fun _ => 1)
+      (f := fZ 0) (J := JZ 0) (nmax := nmax) (B := B₀) (B' := B)
+      hp (fun _ => zero_le_one) hg0base hb0
+  have hg1base : AngularDiagonalPowerGrowth p H (JZ 1) nmax B₁ := by
+    intro A hA N n hn b hb
+    obtain ⟨K, hK, hbnd⟩ := hB₁ A hA N n hn b hb
+    exact ⟨K, hK, fun i x hx hxB w hw y hy => hbnd i x hx w hxB hw y hy.1⟩
+  have hg1 : AngularDiagonalPowerGrowth p H (JZ 1) nmax B :=
+    AngularDiagonalPowerGrowth.mono_base
+      (I := I) (E := E) (U := U) (V := V) (p := p) (F := H)
+      (f := fZ 1) (J := JZ 1) (nmax := nmax) (B := B₁) (B' := B)
+      hp hH hg1base hb1
+  refine ⟨hgL, hgA, ?_⟩
+  intro c
+  fin_cases c
+  · simpa only [pow_zero] using hg0
+  · simpa only [pow_one] using hg1
+
+private theorem transportVelocity_flatOfGrowth
+    {I E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} {V : I → Set PolarPoint}
+    (p : ℕ → Seminorm ℝ E) (W H : I → ℝ)
+    (hW : ∀ i, 1 ≤ W i) (hH : ∀ i, 0 ≤ H i)
+    (hU : IsOpen U) (hV : ∀ i, IsOpen (V i)) (hc : ∀ i, Convex ℝ (U ×ˢ V i))
+    {fL fC fA fV fE : I → E × PolarPoint → ℝ}
+    {fZ : Fin 2 → I → E × PolarPoint → ℝ}
+    (JL : ∀ i, SmoothDirections (U ×ˢ V i) (fL i))
+    (JC : ∀ i, SmoothDirections (U ×ˢ V i) (fC i))
+    (JA : ∀ i, SmoothDirections (U ×ˢ V i) (fA i))
+    (JZ : ∀ c i, SmoothDirections (U ×ˢ V i) (fZ c i))
+    (JV : ∀ i, SmoothDirections (U ×ˢ V i) (fV i))
+    (JE : ∀ i, SmoothDirections (U ×ˢ V i) (fE i))
+    (nmax B : ℕ)
+    (hL : MixedDiagonalPowerGrowth p W (fun _ => 1) JL nmax B)
+    (hC : ∀ n a b, ∃ K Q : ℝ, 0 ≤ K ∧ 0 ≤ Q ∧
+      ∀ i x, x ∈ U → ∀ w, ∀ y ∈ V i,
+        |jointMixedDiagonal (JC i) n a b x w y| ≤ K * W i ^ Q)
+    (hA : AngularDiagonalPowerGrowth p (fun _ => 1) JA nmax B)
+    (hZ : ∀ c : Fin 2,
+      AngularDiagonalPowerGrowth p (fun i => H i ^ c.val) (JZ c) nmax B)
+    (hAr : ∀ i x, x ∈ U → ∀ y ∈ V i,
+      radialPartial (fun q => fA i (x, q)) y =
+        angularPartial (fun q => fL i (x, q)) y * fA i (x, y) -
+          fL i (x, y) * angularPartial (fun q => fA i (x, q)) y)
+    (hZr : ∀ c i x, x ∈ U → ∀ y ∈ V i,
+      radialPartial (fun q => fZ c i (x, q)) y =
+        -((fL i (x, y) + fC i (x, y) * fA i (x, y) * fZ 0 i (x, y)) *
+          angularPartial (fun q => fZ c i (x, q)) y))
+    (hVeq : ∀ i, EqOn (fun x => fC i x * fA i x * fZ 1 i x) (fV i) (U ×ˢ V i))
+    (hEeq : ∀ i, EqOn (fun x => fC i x * fA i x * fZ 0 i x) (fE i) (U ×ˢ V i)) :
+    FlatMixedDiagonalGrowth p W H JV nmax B (B + 1) ∧
+      FlatMixedDiagonalGrowth p W (fun _ => 1) JE nmax B (B + 1) := by
+  let fvel : Fin 2 → I → E × PolarPoint → ℝ :=
+    fun c i x => fC i x * fA i x * fZ c i x
+  let Jvel : ∀ c i, SmoothDirections (U ×ˢ V i) (fvel c i) := fun c i =>
+    SmoothDirections.mul
+      (E := E × PolarPoint) (U := U ×ˢ V i)
+      (f := fun x => fC i x * fA i x) (g := fZ c i)
+      (SmoothDirections.mul (E := E × PolarPoint) (U := U ×ˢ V i)
+        (f := fC i) (g := fA i) (JC i) (JA i)) (JZ c i)
+  have hvel : ∀ c : Fin 2,
+      MixedDiagonalPowerGrowth p W (fun i => H i ^ c.val) (Jvel c) nmax B :=
+    jointTransport_velocity_mixedPowerGrowth
+      (I := I) (E := E) (U := U) (V := V)
+      (fL := fL) (fC := fC) (fA := fA) (fZ := fZ)
+      p W H hW hH hU hV hc JL JC JA JZ nmax B hL hC hA hZ hAr hZr
+  have hflat1 : FlatMixedDiagonalGrowth p W (fun i => H i ^ (1 : Fin 2).val)
+      (Jvel 1) nmax B (B + 1) :=
+    MixedDiagonalPowerGrowth.flat
+      (I := I) (E := E) (U := U) (V := V)
+      (p := p) (W := W) (F := fun i => H i ^ (1 : Fin 2).val)
+      (f := fvel 1) (J := Jvel 1) (nmax := nmax) (B := B)
+      hW (fun i => pow_nonneg (hH i) (1 : Fin 2).val) (hvel 1)
+  have hflat0 : FlatMixedDiagonalGrowth p W (fun i => H i ^ (0 : Fin 2).val)
+      (Jvel 0) nmax B (B + 1) :=
+    MixedDiagonalPowerGrowth.flat
+      (I := I) (E := E) (U := U) (V := V)
+      (p := p) (W := W) (F := fun i => H i ^ (0 : Fin 2).val)
+      (f := fvel 0) (J := Jvel 0) (nmax := nmax) (B := B)
+      hW (fun i => pow_nonneg (hH i) (0 : Fin 2).val) (hvel 0)
+  constructor
+  · have hsame : FlatMixedDiagonalGrowth p W (fun i => H i ^ (1 : Fin 2).val)
+        JV nmax B (B + 1) :=
+      FlatMixedDiagonalGrowth.congr
+        (I := I) (E := E) (U := U) (V := V)
+        (p := p) (W := W) (F := fun i => H i ^ (1 : Fin 2).val)
+        (f := fvel 1) (g := fV) (J := Jvel 1) (n := nmax) (low := B) (loss := B + 1)
+        hflat1 JV hV hVeq
+    simpa only [pow_one] using hsame
+  · have hsame : FlatMixedDiagonalGrowth p W (fun i => H i ^ (0 : Fin 2).val)
+        JE nmax B (B + 1) :=
+      FlatMixedDiagonalGrowth.congr
+        (I := I) (E := E) (U := U) (V := V)
+        (p := p) (W := W) (F := fun i => H i ^ (0 : Fin 2).val)
+        (f := fvel 0) (g := fE) (J := Jvel 0) (n := nmax) (low := B) (loss := B + 1)
+        hflat0 JE hV hEeq
+    simpa only [pow_zero] using hsame
+
 end ContinuousFlexibility.Analysis
 
 namespace ContinuousFlexibility.Statements
@@ -249,51 +416,15 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
   have hbA : BA ≤ B := by dsimp only [B]; omega
   have hb0 : B₀ ≤ B := by dsimp only [B]; omega
   have hb1 : B₁ ≤ B := by dsimp only [B]; omega
-  have hgL₀ : MixedDiagonalPowerGrowth p W (fun _ => 1) JL nmax BL := by
-    intro A hA N n hn a b hab
-    obtain ⟨K, Q, hK, hQ, hbnd⟩ := hBL A hA N n hn a b hab
-    refine ⟨K, Q, hK, hQ, fun m x hx hxB w hw y hy => ?_⟩
-    simpa only [mul_one] using hbnd m x hx w hxB hw y hy.1
-  have hgL : MixedDiagonalPowerGrowth p W (fun _ => 1) JL nmax B :=
-    MixedDiagonalPowerGrowth.mono_base
-      (I := ℕ) (E := E) (U := U) (V := V) (p := p) (W := W) (F := fun _ => 1)
-      (f := fL) (J := JL) (nmax := nmax) (B := BL) (B' := B)
-      hp hW0 (fun _ => zero_le_one) hgL₀ hbL
-  have hgA₀ : AngularDiagonalPowerGrowth p (fun _ => 1) JA nmax BA := by
-    intro A hA N n hn b hb
-    obtain ⟨K, hK, hbnd⟩ := hBA A hA N n hn b hb
-    refine ⟨K, hK, fun m x hx hxB w hw y hy => ?_⟩
-    simpa only [mul_one] using hbnd m x hx w hxB hw y hy.1
-  have hgA : AngularDiagonalPowerGrowth p (fun _ => 1) JA nmax B :=
-    AngularDiagonalPowerGrowth.mono_base
-      (I := ℕ) (E := E) (U := U) (V := V) (p := p) (F := fun _ => 1)
-      (f := fA) (J := JA) (nmax := nmax) (B := BA) (B' := B)
-      hp (fun _ => zero_le_one) hgA₀ hbA
-  have hg0base : AngularDiagonalPowerGrowth p (fun _ => 1) J₀ nmax B₀ := by
-    intro A hA N n hn b hb
-    obtain ⟨K, hK, hbnd⟩ := hB₀ A hA N n hn b hb
-    refine ⟨K, hK, fun m x hx hxB w hw y hy => ?_⟩
-    simpa only [mul_one] using hbnd m x hx w hxB hw y hy.1
-  have hg0 : AngularDiagonalPowerGrowth p (fun _ => 1) J₀ nmax B :=
-    AngularDiagonalPowerGrowth.mono_base
-      (I := ℕ) (E := E) (U := U) (V := V) (p := p) (F := fun _ => 1)
-      (f := f₀) (J := J₀) (nmax := nmax) (B := B₀) (B' := B)
-      hp (fun _ => zero_le_one) hg0base hb0
-  have hg1base : AngularDiagonalPowerGrowth p H J₁ nmax B₁ := by
-    intro A hA N n hn b hb
-    obtain ⟨K, hK, hbnd⟩ := hB₁ A hA N n hn b hb
-    exact ⟨K, hK, fun m x hx hxB w hw y hy => hbnd m x hx w hxB hw y hy.1⟩
-  have hg1 : AngularDiagonalPowerGrowth p H J₁ nmax B :=
-    AngularDiagonalPowerGrowth.mono_base
-      (I := ℕ) (E := E) (U := U) (V := V) (p := p) (F := H)
-      (f := f₁) (J := J₁) (nmax := nmax) (B := B₁) (B' := B)
-      hp hH hg1base hb1
-  have hgZ (c : Fin 2) : AngularDiagonalPowerGrowth p (fun m => H m ^ c.val) (JZ c) nmax B := by
-    fin_cases c
-    · change AngularDiagonalPowerGrowth p (fun m => H m ^ 0) J₀ nmax B
-      simpa only [pow_zero] using hg0
-    · change AngularDiagonalPowerGrowth p (fun m => H m ^ 1) J₁ nmax B
-      simpa only [pow_one] using hg1
+  have hcommon :
+      MixedDiagonalPowerGrowth p W (fun _ => 1) JL nmax B ∧
+        AngularDiagonalPowerGrowth p (fun _ => 1) JA nmax B ∧
+        ∀ c : Fin 2,
+          AngularDiagonalPowerGrowth p (fun m => H m ^ c.val) (JZ c) nmax B :=
+    transportVelocity_commonGrowth
+      (I := ℕ) (E := E) (U := U) (fL := fL) (fA := fA) (fZ := fZ)
+      l h p W H hp hW0 hH JL JA JZ nmax BL BA B₀ B₁ B
+      hbL hbA hb0 hb1 hBL hBA hB₀ hB₁
   have hgC (n a b : ℕ) : ∃ K Q : ℝ, 0 ≤ K ∧ 0 ≤ Q ∧
       ∀ m x, x ∈ U → ∀ w, ∀ y ∈ V m,
         |jointMixedDiagonal (JC m) n a b x w y| ≤ K * W m ^ Q := by
@@ -341,60 +472,23 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
     · simpa only [fZ, Fin.cases_zero, neg_mul] using
         hrec (R.residual (liftSectorParameter S C x.1))
     · simpa only [fZ, Fin.cases_succ, Fin.cases_zero, neg_mul] using hrec x.2
-  let fvel : Fin 2 → ℕ → E × PolarPoint → ℝ :=
-    fun c m x => fC m x * fA m x * fZ c m x
-  let Jvel : ∀ c m, SmoothDirections (U ×ˢ V m) (fvel c m) := fun c m =>
-    SmoothDirections.mul
-      (E := E × PolarPoint) (U := U ×ˢ V m)
-      (f := fun x => fC m x * fA m x) (g := fZ c m)
-      (SmoothDirections.mul (E := E × PolarPoint) (U := U ×ˢ V m)
-        (f := fC m) (g := fA m) (JC m) (JA m)) (JZ c m)
-  have hvel : ∀ c : Fin 2,
-      MixedDiagonalPowerGrowth p W (fun m => H m ^ c.val) (Jvel c) nmax B :=
-    jointTransport_velocity_mixedPowerGrowth
-      (I := ℕ) (E := E) (U := U) (V := V)
-      (fL := fL) (fC := fC) (fA := fA) (fZ := fZ)
-      p W H hW hH hU hV hc JL JC JA JZ nmax B hgL hgC hgA hgZ hAr hZr
-  have hflat1 : FlatMixedDiagonalGrowth p W (fun m => H m ^ (1 : Fin 2).val)
-      (Jvel 1) nmax B (B + 1) :=
-    MixedDiagonalPowerGrowth.flat
-      (I := ℕ) (E := E) (U := U) (V := V)
-      (p := p) (W := W) (F := fun m => H m ^ (1 : Fin 2).val)
-      (f := fvel 1) (J := Jvel 1) (nmax := nmax) (B := B)
-      hW (fun m => pow_nonneg (hH m) (1 : Fin 2).val) (hvel 1)
-  have hflat0 : FlatMixedDiagonalGrowth p W (fun m => H m ^ (0 : Fin 2).val)
-      (Jvel 0) nmax B (B + 1) :=
-    MixedDiagonalPowerGrowth.flat
-      (I := ℕ) (E := E) (U := U) (V := V)
-      (p := p) (W := W) (F := fun m => H m ^ (0 : Fin 2).val)
-      (f := fvel 0) (J := Jvel 0) (nmax := nmax) (B := B)
-      hW (fun m => pow_nonneg (hH m) (0 : Fin 2).val) (hvel 0)
-  refine ⟨B, ?_, ?_⟩
-  · have hsame : FlatMixedDiagonalGrowth p W (fun m => H m ^ (1 : Fin 2).val)
-        JV nmax B (B + 1) :=
-      FlatMixedDiagonalGrowth.congr
-        (I := ℕ) (E := E) (U := U) (V := V)
-        (p := p) (W := W) (F := fun m => H m ^ (1 : Fin 2).val)
-        (f := fvel 1) (g := fun m x => returnCorrectionVelocityLinear D S C χ
-          (liftSectorParameter S C x.1.1) m x.2 x.1.2)
-        (J := Jvel 1) (n := nmax) (low := B) (loss := B + 1)
-        hflat1 JV hV (fun m x _ =>
-          (returnCorrectionVelocityLinear_eq_transportProduct D S C χ
-            (liftSectorParameter S C x.1.1) m x.2 x.1.2).symm)
-    simpa only [pow_one] using hsame
-  · have hsame : FlatMixedDiagonalGrowth p W (fun m => H m ^ (0 : Fin 2).val)
-        JE nmax B (B + 1) :=
-      FlatMixedDiagonalGrowth.congr
-        (I := ℕ) (E := E) (U := U) (V := V)
-        (p := p) (W := W) (F := fun m => H m ^ (0 : Fin 2).val)
-        (f := fvel 0) (g := fun m x => returnCorrectionVelocityLinear D S C χ
-          (liftSectorParameter S C x.1.1) m x.2
-            (R.residual (liftSectorParameter S C x.1.1)))
-        (J := Jvel 0) (n := nmax) (low := B) (loss := B + 1)
-        hflat0 JE hV (fun m x _ =>
-          (returnCorrectionVelocityLinear_eq_transportProduct D S C χ
-            (liftSectorParameter S C x.1.1) m x.2
-              (R.residual (liftSectorParameter S C x.1.1))).symm)
-    simpa only [pow_zero] using hsame
+  refine ⟨B, ?_⟩
+  exact transportVelocity_flatOfGrowth
+    (I := ℕ) (E := E) (U := U) (V := V)
+    (fL := fL) (fC := fC) (fA := fA) (fZ := fZ)
+    (fV := fun m x => returnCorrectionVelocityLinear D S C χ
+      (liftSectorParameter S C x.1.1) m x.2 x.1.2)
+    (fE := fun m x => returnCorrectionVelocityLinear D S C χ
+      (liftSectorParameter S C x.1.1) m x.2
+        (R.residual (liftSectorParameter S C x.1.1)))
+    p W H hW hH hU hV hc JL JC JA JZ JV JE nmax B
+    hcommon.1 hgC hcommon.2.1 hcommon.2.2 hAr hZr
+    (fun m x _ =>
+      (returnCorrectionVelocityLinear_eq_transportProduct D S C χ
+        (liftSectorParameter S C x.1.1) m x.2 x.1.2).symm)
+    (fun m x _ =>
+      (returnCorrectionVelocityLinear_eq_transportProduct D S C χ
+        (liftSectorParameter S C x.1.1) m x.2
+          (R.residual (liftSectorParameter S C x.1.1))).symm)
 
 end ContinuousFlexibility.Statements
