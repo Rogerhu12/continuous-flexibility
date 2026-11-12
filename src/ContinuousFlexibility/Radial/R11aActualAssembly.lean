@@ -64,8 +64,10 @@ theorem r11a_actual_assembly : R11aStatement := by
       RadialNaturalTail D side (M q).frequency
         (if side then (M q).innerRight else (M q).innerLeft) (vscaled q side) := by
     cases side
-    · simpa only [M, hfrequency q, hleft q] using (hv q false).2.2.2
-    · simpa only [M, hfrequency q, hright q] using (hv q true).2.2.2
+    · simpa only [M, hfrequency q, hleft q, Bool.false_eq_true, ite_false]
+        using (hv q false).2.2.2
+    · simpa only [M, hfrequency q, hright q, eq_self_iff_true, ite_true]
+        using (hv q true).2.2.2
   have hAB' (q : ℕ) (side : Bool) :
       (M q).A (if side then 1 else 0) (if side then 1 else 0) =
         (outerUnitState (selectedBoundaryState D (M q).frequency (r07OutwardSign side)
@@ -74,8 +76,8 @@ theorem r11a_actual_assembly : R11aStatement := by
         (outerUnitState (selectedBoundaryState D (M q).frequency (r07OutwardSign side)
           (if side then (M q).innerRight else (M q).innerLeft) (vscaled q side))).2 := by
     cases side
-    · simpa only [M, hfrequency q, hleft q, selectedTerminalSide, ↓reduceIte]
-        using hAB q 0
+    · simpa only [M, hfrequency q, hleft q, selectedTerminalSide, Bool.false_eq_true,
+        ite_false, ↓reduceIte] using hAB q 0
     · simpa only [M, hfrequency q, hright q, selectedTerminalSide,
         show (1 : Fin 2) ≠ 0 by decide, ↓reduceIte] using hAB q 1
   obtain ⟨CO, aO, CPO, bO, hCO, haO, hCPO, hbO, houter, hPo⟩ :=
