@@ -72,7 +72,7 @@ def coefficientPolynomialDirections
     (smoothDirectionsProd Jq (smoothDirectionsProd Je Jρ)))).comp_contDiff
       isOpen_univ hP.contDiffOn (fun _ _ => mem_univ _)
 
-private def coefficientPolynomialSqrtDirections
+def coefficientPolynomialSqrtDirections
     {a b c : E → ℝ} {e ρ : E → ℝ × ℝ}
     (Ja : SmoothDirections U a) (Jb : SmoothDirections U b) (Jc : SmoothDirections U c)
     (Je : SmoothDirections U e) (Jρ : SmoothDirections U ρ)

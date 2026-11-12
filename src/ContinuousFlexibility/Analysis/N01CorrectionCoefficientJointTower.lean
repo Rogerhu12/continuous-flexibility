@@ -218,39 +218,6 @@ private theorem returnCorrectionLocalCoefficient_parameterSpatialTower_nonempty 
         intro x hx
         simp only [originalCoefficientEntry, show (2 : Fin 3) ≠ 0 by decide,
           show (2 : Fin 3) ≠ 1 by decide, ite_false])
-  let Jdisc : SmoothDirections
-      ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
-      (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
-        (originalCoefficients D S C (liftSectorParameter S C x.1.1)).b x.2 ^ 2 -
-          (originalCoefficients D S C (liftSectorParameter S C x.1.1)).a x.2 *
-            (originalCoefficients D S C (liftSectorParameter S C x.1.1)).c x.2) :=
-    ((smoothDirectionsProd
-      (E := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint) (F := ℝ) (G := ℝ)
-      (U := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
-      (JB.mul (E := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint)
-        (U := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ)) JB)
-      (JA.mul (E := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint)
-        (U := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ)) JC)).comp_contDiff
-      (E := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint)
-      (F := ℝ × ℝ) (G := ℝ)
-      (U := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
-      (g := fun y : ℝ × ℝ => y.1 - y.2) (V := univ) isOpen_univ
-      (contDiff_fst.sub contDiff_snd).contDiffOn (fun _ _ => mem_univ _)).congrOn
-      (F := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint) (G := ℝ)
-      (U := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
-      (by intro x hx; simp only [pow_two])
-  let JQ : SmoothDirections
-      ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
-      (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
-        Real.sqrt ((originalCoefficients D S C (liftSectorParameter S C x.1.1)).b x.2 ^ 2 -
-          (originalCoefficients D S C (liftSectorParameter S C x.1.1)).a x.2 *
-            (originalCoefficients D S C (liftSectorParameter S C x.1.1)).c x.2)) :=
-    Jdisc.comp_contDiff
-      (E := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint) (F := ℝ) (G := ℝ)
-      (U := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
-      (g := Real.sqrt) (V := Ioi (0 : ℝ)) isOpen_Ioi
-      (contDiffOn_id.sqrt (fun q hq => ne_of_gt hq))
-      (fun x hx => hdisc x.1.1 hx.1.1 x.2 hx.2.1)
   let F : (((StateDirections S × ℝ) × CircleSpace S) × PolarPoint) → ℝ × ℝ := fun x =>
     (-(originalCoefficients D S C (liftSectorParameter S C x.1.1)).a x.2 *
         returnCorrectionDriftLinear D S C χ (liftSectorParameter S C x.1.1) m x.2 x.1.2,
@@ -270,9 +237,10 @@ private theorem returnCorrectionLocalCoefficient_parameterSpatialTower_nonempty 
           returnCorrectionSpeedLinear D S C χ (liftSectorParameter S C x.1.1) m x.2 x.1.2)
   let K : SmoothDirections
       ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ)) F :=
-    coefficientPolynomialDirections
+    coefficientPolynomialSqrtDirections
       (E := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint)
-      (U := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ)) JA JB JQ JE JD
+      (U := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ)) JA JB JC JE JD
+      (fun x hx => hdisc x.1.1 hx.1.1 x.2 hx.2.1)
   have hF : EqOn F
       (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
         returnCorrectionLocalCoefficientError D S C R χ (liftSectorParameter S C x.1.1)

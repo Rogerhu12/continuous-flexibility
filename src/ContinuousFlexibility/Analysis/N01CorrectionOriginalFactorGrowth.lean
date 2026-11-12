@@ -25,6 +25,39 @@ private theorem sqrt_discriminant_from_minus_speed {a b c : ℝ} (ha : a ≠ 0) 
     b - a * (b / a - Real.sqrt (b ^ 2 - a * c) / a) = Real.sqrt (b ^ 2 - a * c) := by
   field_simp [ha] <;> ring
 
+private theorem fstParameter_jointGrowth_congr
+    {E F : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    [IsTopologicalAddGroup F] [ContinuousSMul ℝ F]
+    {p : ℕ → Seminorm ℝ E} (q : ℕ → Seminorm ℝ F)
+    {W : ℕ → ℝ} (hW : ∀ m, 0 ≤ W m)
+    {U : Set E} {V : ℕ → Set PolarPoint}
+    {f : ℕ → E × PolarPoint → ℝ} {g : ℕ → (E × F) × PolarPoint → ℝ}
+    {J : ∀ m, SmoothDirections (U ×ˢ V m) (f m)} {base loss : ℕ}
+    (hJ : UniformWeightedJointGrowth p W J base loss)
+    (hU : IsOpen U) (hV : ∀ m, IsOpen (V m))
+    (K : ∀ m, SmoothDirections ((U ×ˢ (univ : Set F)) ×ˢ V m) (g m))
+    (heq : ∀ m x, x ∈ (U ×ˢ (univ : Set F)) ×ˢ V m →
+      f m (x.1.1, x.2) = g m x) :
+    UniformWeightedJointGrowth (pairGrading p q) W K base loss := by
+  let Jlift : ∀ m, SmoothDirections ((U ×ˢ (univ : Set F)) ×ˢ V m)
+      (fun x : (E × F) × PolarPoint => f m (x.1.1, x.2)) :=
+    fun m => SmoothDirections.fstParameter
+      (E := E) (F := F) (P := PolarPoint) (G := ℝ)
+      (U := U) (V := V m) (f := f m) (J m) hU (hV m)
+  have hlift : UniformWeightedJointGrowth (pairGrading p q) W Jlift base loss :=
+    UniformWeightedJointGrowth.fstParameter
+      (I := ℕ) (E := E) (F := F) (P := PolarPoint) (G := ℝ)
+      (p := p) (W := W) (U := U) (V := V) (f := f) (J := J)
+      (base := base) (loss := loss) q hW hJ hU hV
+  exact UniformWeightedJointGrowth.congr
+    (I := ℕ) (E := E × F) (P := PolarPoint) (F := ℝ)
+    (p := pairGrading p q) (W := W) (U := U ×ˢ (univ : Set F)) (V := V)
+    (f := fun m x => f m (x.1.1, x.2)) (g := g) (J := Jlift)
+    (base := base) (loss := loss) hlift K heq
+
 set_option diagnostics true in
 theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -92,39 +125,26 @@ theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
     fun i m => hN.originalCoefficient_stripTower
       (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
       hS hT j hcell l h hl hh i m
-  let K : ∀ (i : Fin 3) (m : ℕ), SmoothDirections (U ×ˢ V m)
-      (fun x : E × PolarPoint => entry i m (x.1.1, x.2)) :=
-    fun i m => SmoothDirections.fstParameter
-      (E := E₀) (F := CircleSpace S) (P := PolarPoint) (G := ℝ)
-      (U := U₀) (V := V m) (f := entry i m) (K₀ i m) hU₀ (hV m)
   have hK₀ (i : Fin 3) : UniformWeightedJointGrowth p₀ (fun _ => 1) (K₀ i) base loss :=
     hN.originalCoefficient_strip_joint_growth
       (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
       hS hT j hcell l h hl hh i
-  have hK (i : Fin 3) : UniformWeightedJointGrowth p (fun _ => 1) (K i) base loss :=
-    UniformWeightedJointGrowth.fstParameter
-      (I := ℕ) (E := E₀) (F := CircleSpace S) (P := PolarPoint) (G := ℝ)
-      (p := p₀) (W := fun _ => 1) (U := U₀) (V := V) (f := entry i)
-      (J := K₀ i) (base := base) (loss := loss) pc (fun _ => zero_le_one)
-      (hK₀ i) hU₀ hV
-  have ha₀ : UniformWeightedJointGrowth p (fun _ => 1) Ja base loss := by
-    apply UniformWeightedJointGrowth.congr
-      (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ)
-      (p := p) (W := fun _ => 1) (U := U) (V := V)
-      (f := fun m x => entry 0 m (x.1.1, x.2)) (g := fa)
-      (J := K 0) (base := base) (loss := loss) (hK 0) Ja
-    intro m x hx
-    simp only [entry, fa, originalCoefficientEntry, eq_self_iff_true, ite_true]
-  have hb₀ : UniformWeightedJointGrowth p (fun _ => 1) Jb base loss := by
-    apply UniformWeightedJointGrowth.congr
-      (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ)
-      (p := p) (W := fun _ => 1) (U := U) (V := V)
-      (f := fun m x => entry 1 m (x.1.1, x.2)) (g := fb)
-      (J := K 1) (base := base) (loss := loss) (hK 1) Jb
-    intro m x hx
-    have h10 : (1 : Fin 3) ≠ 0 := by decide
-    simp only [entry, fb, originalCoefficientEntry, h10, eq_self_iff_true,
-      ite_false, ite_true]
+  have ha₀ : UniformWeightedJointGrowth p (fun _ => 1) Ja base loss :=
+    fstParameter_jointGrowth_congr
+      (E := E₀) (F := CircleSpace S) (p := p₀) (W := fun _ => 1)
+      (U := U₀) (V := V) (f := entry 0) (g := fa) (J := K₀ 0)
+      (base := base) (loss := loss) pc (fun _ => zero_le_one) (hK₀ 0) hU₀ hV Ja (by
+        intro m x hx
+        simp only [entry, fa, originalCoefficientEntry, eq_self_iff_true, ite_true])
+  have hb₀ : UniformWeightedJointGrowth p (fun _ => 1) Jb base loss :=
+    fstParameter_jointGrowth_congr
+      (E := E₀) (F := CircleSpace S) (p := p₀) (W := fun _ => 1)
+      (U := U₀) (V := V) (f := entry 1) (g := fb) (J := K₀ 1)
+      (base := base) (loss := loss) pc (fun _ => zero_le_one) (hK₀ 1) hU₀ hV Jb (by
+        intro m x hx
+        have h10 : (1 : Fin 3) ≠ 0 := by decide
+        simp only [entry, fb, originalCoefficientEntry, h10, eq_self_iff_true,
+          ite_false, ite_true])
   have ha : UniformWeightedJointGrowth p W Ja base loss :=
     UniformWeightedJointGrowth.withWeight
       (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ) (p := p)
