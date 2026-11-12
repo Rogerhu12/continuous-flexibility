@@ -125,9 +125,100 @@ private theorem coupled_circleError_ignore_right
   rw [hd] at h
   exact h
 
+private theorem coupled_circleError_product_smoothTameOn
+    {D : ReferenceData} {T : MaterialData} {γ : ℝ} {M : CircleModelData}
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    {p : ℕ → Seminorm ℝ E} {U : Set E} {f : E → M.Space}
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (hγ : 0 < γ) (hM : IsCircleModel T γ M) (hI : HasInterpolation M.grading)
+    (travel : ℕ → ℝ) (hp : Monotone p) (htp : WithSeminorms p)
+    (hf : SmoothTameOn p M.grading U f) :
+    SmoothTameOn (pairGrading (pairGrading p M.grading) M.grading) M.grading
+      ((U ×ˢ univ) ×ˢ univ)
+      (fun z : (E × M.Space) × M.Space =>
+        coupledCircleErrorFormula hD hT hγ hM hI travel (f z.1.1) z.1.2 z.2) := by
+  let c := M.grading
+  let a := pairGrading p c
+  let b := pairGrading a c
+  let W : Set ((E × M.Space) × M.Space) := (U ×ˢ univ) ×ˢ univ
+  have hW : IsOpen W := (hf.choose.open_domain.prod isOpen_univ).prod isOpen_univ
+  have hc : Monotone c := gradedSeminorm_monotone _ _
+  have htc : WithSeminorms c := withSeminorms_graded _ _
+  have hb : Monotone b := tamePairGrading_monotone (tamePairGrading_monotone hp hc) hc
+  have htb : WithSeminorms b :=
+    withSeminorms_pairGrading (withSeminorms_pairGrading htp htc) htc
+  have he : SmoothTameOn b c W (fun z : (E × M.Space) × M.Space => f z.1.1) :=
+    coupled_circleError_ignore_right c (coupled_circleError_ignore_right c hf)
+  have hfst : SmoothTameOn b a W
+      (fun z : (E × M.Space) × M.Space => z.1) :=
+    smoothTameOn_continuousLinear_on hW
+      (ContinuousLinearMap.fst ℝ (E × M.Space) M.Space)
+      (scalar_pair_fst_isTame a c)
+  have hr : SmoothTameOn b c W
+      (fun z : (E × M.Space) × M.Space => z.1.2) :=
+    solve_smoothTameOn_postcomp hfst (ContinuousLinearMap.snd ℝ E M.Space)
+      (r := c) (B := 1) zero_le_one (fun n z => by
+        change c n z.2 ≤ 1 * (p n z.1 + c n z.2)
+        simpa only [one_mul] using le_add_of_nonneg_left (apply_nonneg (p n) z.1))
+  have hv : SmoothTameOn b c W
+      (fun z : (E × M.Space) × M.Space => z.2) :=
+    smoothTameOn_continuousLinear_on hW
+      (ContinuousLinearMap.snd ℝ (E × M.Space) M.Space)
+      (scalar_pair_snd_isTame a c)
+  exact coupledCircleErrorFormula_smoothTameOn
+    (X := (E × M.Space) × M.Space) (p := b) (U := W)
+    (e := fun z => f z.1.1) (r := fun z => z.1.2) (v := fun z => z.2)
+    hD hT hγ hM hI travel hb htb he hr hv
+
+private abbrev coupledReturnErrorParameterGrading (S : PhysicalSpacesData) :=
+  pairGrading (sectorGrading S) realGrading
+
+private abbrev coupledReturnErrorInputGrading (S : PhysicalSpacesData) :=
+  pairGrading
+    (pairGrading (coupledReturnErrorParameterGrading S) (S.circle (3 / 4 : ℝ)).grading)
+    (S.circle (3 / 4 : ℝ)).grading
+
+private theorem coupled_returnError_parameter_grading_facts (S : PhysicalSpacesData) :
+    Monotone (coupledReturnErrorParameterGrading S) ∧
+      WithSeminorms (coupledReturnErrorParameterGrading S) :=
+  ⟨tamePairGrading_monotone (solve_sectorGrading_monotone S) weighted_realGrading_monotone,
+    withSeminorms_pairGrading (solve_sectorGrading_withSeminorms S)
+      weighted_realGrading_withSeminorms⟩
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {base loss : ℕ} {ε : ℝ}
+
+private theorem coupled_returnError_eq_formula
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (hγ : (0 : ℝ) < 3 / 4)
+    (hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
+    (hI : HasInterpolation (S.circle (3 / 4 : ℝ)).grading)
+    (hRef : referenceStateConditions D S C)
+    (h2 : N02Properties D T S C R base ε)
+    (z : StateDirections S × ℝ) (hz : z ∈ sectorNeighborhood S base ε ε)
+    (r v : CircleSpace S) :
+    coupledCircleErrorFormula hD hT hγ hM hI C.travel
+        (R.residual (liftSectorParameter S C z)) r v =
+      R.error (liftSectorParameter S C z) r v := by
+  have hz' := liftSectorParameter_mem_stateNeighborhood (C := C) hz le_rfl
+  have hs := hRef.liftSectorParameter_sector z
+  have hdecode : (S.circle (3 / 4 : ℝ)).decode
+      (R.residual (liftSectorParameter S C z)) =
+      returnResidualField S C (liftSectorParameter S C z) := by
+    funext m θ
+    exact h2.2.1 _ hz' hs m θ
+  apply hM.2.2.2.2.2.1
+  funext m θ
+  have hd := coupledCircleErrorFormula_decode hD hT hγ hM hI C.travel
+    (R.residual (liftSectorParameter S C z)) r v m θ
+  have heq := h2.2.2.2.2.1 (liftSectorParameter S C z) hz' hs r v m θ
+  have hd' : (S.circle (3 / 4 : ℝ)).decode
+      (coupledCircleErrorFormula hD hT hγ hM hI C.travel
+        (R.residual (liftSectorParameter S C z)) r v) m θ =
+      circleChartError S C (liftSectorParameter S C z) r v m θ := by
+    simpa only [hdecode, circleChartError] using hd
+  exact hd'.trans heq.symm
 
 /-- N02 determines a genuine joint tower for its original independent
 return error, on the same sector neighborhood and with the same data. -/
@@ -136,74 +227,33 @@ theorem coupled_returnError_smoothTameOn
     (hS : IsPhysicalSpaces D T S)
     (h1 : N01Properties D T S C base loss ε)
     (h2 : N02Properties D T S C R base ε) :
-    SmoothTameOn
-      (pairGrading (pairGrading (pairGrading (sectorGrading S) realGrading)
-        (S.circle (3 / 4 : ℝ)).grading) (S.circle (3 / 4 : ℝ)).grading)
+    SmoothTameOn (coupledReturnErrorInputGrading S)
       (S.circle (3 / 4 : ℝ)).grading
       ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ univ)
       (fun z : ((StateDirections S × ℝ) × CircleSpace S) × CircleSpace S =>
         R.error (liftSectorParameter S C z.1.1) z.1.2 z.2) := by
-  let p := pairGrading (sectorGrading S) realGrading
-  let c := (S.circle (3 / 4 : ℝ)).grading
-  let a := pairGrading p c
-  let b := pairGrading a c
-  let U := sectorNeighborhood S base ε ε
-  let W : Set (((StateDirections S × ℝ) × CircleSpace S) × CircleSpace S) :=
-    (U ×ˢ univ) ×ˢ univ
-  have hres : SmoothTameOn p c U (fun z => R.residual (liftSectorParameter S C z)) :=
-    h2.2.2.2.2.2.2.2.2.2.2
-  have hW : IsOpen W := (hres.choose.open_domain.prod isOpen_univ).prod isOpen_univ
-  have hp : Monotone p := tamePairGrading_monotone
-    (solve_sectorGrading_monotone S) weighted_realGrading_monotone
-  have htp : WithSeminorms p := withSeminorms_pairGrading
-    (solve_sectorGrading_withSeminorms S) weighted_realGrading_withSeminorms
-  have hc : Monotone c := gradedSeminorm_monotone _ _
-  have htc : WithSeminorms c := withSeminorms_graded _ _
-  have hb : Monotone b := tamePairGrading_monotone (tamePairGrading_monotone hp hc) hc
-  have htb : WithSeminorms b :=
-    withSeminorms_pairGrading (withSeminorms_pairGrading htp htc) htc
-  have he := coupled_circleError_ignore_right c (coupled_circleError_ignore_right c hres)
-  have hfst : SmoothTameOn b a W
-      (fun z : ((StateDirections S × ℝ) × CircleSpace S) × CircleSpace S => z.1) :=
-    smoothTameOn_continuousLinear_on hW
-      (ContinuousLinearMap.fst ℝ ((StateDirections S × ℝ) × CircleSpace S) (CircleSpace S))
-      (scalar_pair_fst_isTame a c)
-  have hr := solve_smoothTameOn_postcomp hfst
-    (ContinuousLinearMap.snd ℝ (StateDirections S × ℝ) (CircleSpace S))
-    (r := c) (B := 1) zero_le_one (fun n z => by
-      change c n z.2 ≤ 1 * (p n z.1 + c n z.2)
-      simpa only [one_mul] using le_add_of_nonneg_left (apply_nonneg (p n) z.1))
-  have hv : SmoothTameOn b c W
-      (fun z : ((StateDirections S × ℝ) × CircleSpace S) × CircleSpace S => z.2) :=
-    smoothTameOn_continuousLinear_on hW
-      (ContinuousLinearMap.snd ℝ ((StateDirections S × ℝ) × CircleSpace S) (CircleSpace S))
-      (scalar_pair_snd_isTame a c)
-  let hM := hS.2.1 (3 / 4 : ℝ)
+  let hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)) := hS.2.1 (3 / 4 : ℝ)
   have hγ : (0 : ℝ) < 3 / 4 := by norm_num
   have hI : HasInterpolation (S.circle (3 / 4 : ℝ)).grading :=
     (hS.2.2.2.2.1 (3 / 4 : ℝ)).2.2
-  have hformula := coupledCircleErrorFormula_smoothTameOn hD hT hγ hM hI C.travel hb htb
-    he hr hv
-  apply smoothTameOn_congr hformula
-  intro z hz
-  have hz' := liftSectorParameter_mem_stateNeighborhood (C := C) hz.1.1 le_rfl
-  have hRef : referenceStateConditions D S C := h1.2.2.1
-  have hs := hRef.liftSectorParameter_sector z.1.1
-  have hdecode : (S.circle (3 / 4 : ℝ)).decode
-      (R.residual (liftSectorParameter S C z.1.1)) =
-      returnResidualField S C (liftSectorParameter S C z.1.1) := by
-    funext m θ
-    exact h2.2.1 _ hz' hs m θ
-  apply hM.2.2.2.2.2.1
-  funext m θ
-  have hd := coupledCircleErrorFormula_decode hD hT hγ hM hI C.travel
-    (R.residual (liftSectorParameter S C z.1.1)) z.1.2 z.2 m θ
-  have heq := h2.2.2.2.2.1 (liftSectorParameter S C z.1.1) hz' hs z.1.2 z.2 m θ
-  have hd' : (S.circle (3 / 4 : ℝ)).decode
-      (coupledCircleErrorFormula hD hT hγ hM hI C.travel
-        (R.residual (liftSectorParameter S C z.1.1)) z.1.2 z.2) m θ =
-      circleChartError S C (liftSectorParameter S C z.1.1) z.1.2 z.2 m θ := by
-    simpa only [hdecode, circleChartError] using hd
-  exact hd'.trans heq.symm
+  have hg := coupled_returnError_parameter_grading_facts S
+  have hres : SmoothTameOn (coupledReturnErrorParameterGrading S)
+      (S.circle (3 / 4 : ℝ)).grading (sectorNeighborhood S base ε ε)
+      (fun z : StateDirections S × ℝ => R.residual (liftSectorParameter S C z)) :=
+    h2.2.2.2.2.2.2.2.2.2.2
+  have hformula := coupled_circleError_product_smoothTameOn
+    (E := StateDirections S × ℝ) (M := S.circle (3 / 4 : ℝ))
+    (p := coupledReturnErrorParameterGrading S) (U := sectorNeighborhood S base ε ε)
+    (f := fun z : StateDirections S × ℝ => R.residual (liftSectorParameter S C z))
+    hD hT hγ hM hI C.travel hg.1 hg.2 hres
+  have h := smoothTameOn_congr
+    (f := fun z : ((StateDirections S × ℝ) × CircleSpace S) × CircleSpace S =>
+      coupledCircleErrorFormula hD hT hγ hM hI C.travel
+        (R.residual (liftSectorParameter S C z.1.1)) z.1.2 z.2)
+    (g := fun z : ((StateDirections S × ℝ) × CircleSpace S) × CircleSpace S =>
+      R.error (liftSectorParameter S C z.1.1) z.1.2 z.2)
+    hformula (fun z hz => coupled_returnError_eq_formula (S := S)
+      hD hT hγ hM hI h1.2.2.1 h2 z.1.1 hz.1.1 z.1.2 z.2)
+  exact h
 
 end ContinuousFlexibility.Statements
