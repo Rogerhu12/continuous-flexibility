@@ -4,6 +4,7 @@ import ContinuousFlexibility.Analysis.N07aLocalPullbackEquation
 import ContinuousFlexibility.Analysis.N07aClosedPhysicalHeight
 import ContinuousFlexibility.Analysis.N07aScalarSourceTerminal
 import ContinuousFlexibility.Analysis.N07aAngularNuRegularity
+import ContinuousFlexibility.Analysis.N07aSampleJetAlgebra
 
 /-!
 # The physical equation of the genuine closed negative-piece height
@@ -60,6 +61,7 @@ theorem n07a_physicalHeight_source_operator_on
         (divergenceOperator (L.coefficients z) (n07aPhysicalHeightRepresentative K z m v)) p := by
     simp only [canonicalSource, hd]
   have he := n07aPhysicalTestPullback_source_operator h04 hz hs hW hp
+  dsimp only at he
   rw [hsource, n07a_divergenceOperator_unknown_germ (K.coefficients z m) hWv,
     hWv.self_of_nhds] at he
   exact he
@@ -97,7 +99,10 @@ theorem n07a_negative_canonical_divergence_on
   change radialPartial (fun q => 1 * radialPartial v q + 0 * angularPartial v q) p +
     angularPartial (fun q => 0 * radialPartial v q + -q.1 * angularPartial v q) p = _
   simp only [one_mul, zero_mul, add_zero, zero_add]
-  rw [angularPartial_mul differentiableAt_fst.neg
+  change radialPartial (radialPartial v) p +
+    angularPartial (fun q : PolarPoint => -q.1 * angularPartial v q) p =
+      mixedDerivative 2 0 v p - p.1 * mixedDerivative 0 2 v p
+  rw [angularPartial_mul (f := fun q : PolarPoint => -q.1) differentiableAt_fst.neg
     ((hvt.contDiffAt (hopen.mem_nhds hp)).differentiableAt (by simp)), hneg, hrr, htt]
   ring
 
@@ -154,6 +159,8 @@ theorem n07a_negative_normalEquation_divergence
   have hn := heq hp
   simp [n07aNormalRhs, hcoeff, n07aNormalShift, Fin.sum_univ_succ,
     spaces_mixedDerivative_zero] at hn
+  change divergenceOperator (K.coefficients (ζ e) m) v p +
+    K.potential (ζ e) m p * v p = f p
   rw [n07a_negative_canonical_divergence_on h04 hz hs m hm hv hp]
   linarith
 
