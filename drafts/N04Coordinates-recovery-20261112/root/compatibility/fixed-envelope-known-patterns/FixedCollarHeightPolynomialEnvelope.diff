@@ -1,0 +1,11 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-height-nonnegative/FixedCollarHeightPolynomialEnvelope.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-envelope-known-patterns/FixedCollarHeightPolynomialEnvelope.lean
+@@ -28,7 +28,7 @@
+         (Ioo (a side) (b side) ×ˢ (univ : Set ℝ))) →
+       (∀ side, (if side then r else l) ∈ Icc (a side) (b side)) →
+       (∀ i side θ, ContDiffAt ℝ ∞ (q i side) (if side then r else l, θ)) →
+-      (∀ i side p ∈ Ioo (a side) (b side) ×ˢ (univ : Set ℝ), 0 < q i side p) →
++      (∀ i side, ∀ p ∈ Ioo (a side) (b side) ×ˢ (univ : Set ℝ), 0 < q i side p) →
+       (∀ i side θ, 0 < q i side (if side then r else l, θ)) →
+       (∀ i side θ, q i side (if side then r else l, θ) ≤ H₀) →
+       (∀ i side θ, (q i side (if side then r else l, θ))⁻¹ ≤ H₀) →

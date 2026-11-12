@@ -1,0 +1,25 @@
+{
+  "kind": "independent_full_source_actual_common_root_endpoint_jets_review",
+  "reviewer": "root",
+  "result": "passed static full-source and exact-provider review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03RootEndpointPhysicalJets.lean",
+    "sha256": "2690e6c47e4557ba97eb37f91c00573f6d21cd18dd5dc6d40fbafb662861ad45",
+    "blob": "b47919889191d8709da04bd63f75f24e90a064ef",
+    "lines": 218
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03RootEndpointPhysicalJetsCandidateManifest.json",
+    "sha256": "e237605897d1885fe9c904360db5513cbd8e03fddea0f79f028508caad87e929"
+  },
+  "checks": [
+    "Read all 218 lines and complete N01ControlledRootModel, N01ControlledRootInput, RootPhysicalJetTransfer and RootModelAllAngleJets providers. N03FixedRootOrdinaryJets and the new 276-line actual state-band identification were fully reviewed in the immediately preceding review.",
+    "The actual N01 common-root-input factory is invoked with the proved n04FlowJetsTarget_proof. The final theorem introduces no unproved model, flow bound or endpoint bound premise.",
+    "One common base and loss are chosen before components. J0, delta and all envelopes are selected before the state. The additional state-dependent identification band eta is used only to obtain full ordinary jets at normalized radial coordinate zero and never appears in the resulting envelope or Jacobian lower.",
+    "The same supplied controlled flow and actual stored chart/height are identified by true open-band equalities. Full jets transfer to physical coordinates with the original orientation sigma and scale delta; absolute scale is exactly delta at either endpoint.",
+    "The chart bound is correctly restricted to positive derivative orders. Height and inverse-height towers include order zero. Periodic derivatives extend the bounded-period estimates to every real angle without bounding the unbounded angular lift itself.",
+    "Only the original neighborhood is restricted, preserving D/T/S/C/E/L/K and all Through03, field, PartA and PartB hypotheses. This is per-component numerical control and makes no uniform material-growth or final relative-transport estimate claim."
+  ],
+  "compiled": false,
+  "source_edited": false
+}

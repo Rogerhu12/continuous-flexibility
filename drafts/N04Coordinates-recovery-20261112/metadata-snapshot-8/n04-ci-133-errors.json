@@ -1,0 +1,4 @@
+[
+  "error: src/ContinuousFlexibility/Analysis/OneSidedWholeComponentTransport.lean:49:60: Unknown identifier `v`",
+  "error: src/ContinuousFlexibility/Analysis/OneSidedWholeComponentTransport.lean:64:26: unexpected token '∈'; expected ','"
+]

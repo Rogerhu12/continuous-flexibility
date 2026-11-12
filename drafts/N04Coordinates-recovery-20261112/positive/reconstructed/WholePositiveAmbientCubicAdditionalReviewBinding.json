@@ -1,0 +1,14 @@
+{
+  "kind": "additional_independent_review_binding",
+  "existing_frozen_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientCubicChainReviewedManifest.json",
+    "sha256": "fa7be3e776dfc01a590911740df86fae7dfb3edf2088fe429b52029eaa2075bf"
+  },
+  "additional_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/WholePositiveAmbientPrincipalAndFlatPatchIndependentReview.json",
+    "sha256": "c2c5bd5157e317f8c00e280a9f96936ef0532dae72c6d873f7a2efd0faa6b1ac"
+  },
+  "source_bytes_unchanged": true,
+  "scope": "The additional audit review covers the unchanged AmbientPrincipal87 and FlatPatch157 already selected by the frozen four-source manifest.",
+  "compiled": false
+}

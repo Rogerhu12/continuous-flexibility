@@ -1,0 +1,22 @@
+{
+  "label": 134,
+  "parent": "33d9140d067221b1cbc3914af186a85f9c1a6b22",
+  "tree": "bc8b645bb2c43777f0c748866367a669300a4fb2",
+  "added": 2791,
+  "deleted": 0,
+  "changed_lean_files": 21,
+  "payload": "/workspace/scratch/bbbea77e4163/n04-ci134-tree-payload.json",
+  "manifest": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair133/OneSidedWholeComponentTransportNormalizedManifest.json",
+  "review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/OneSidedWholeComponentTransportCI133IndependentReview.json",
+    "sha256": "d1bf3be34f5e2bf89278f2d39619452954cfcf16b6f897e165a4ebc7d6fcb97a"
+  },
+  "current_main": "bb96c26fa8f49615fd0bc6848b57922832088a2b",
+  "public_statements_all_unchanged": false,
+  "public_mathematical_binders_hypotheses_conclusions_unchanged": true,
+  "public_header_parser_corrections": "Four previously invalid bounded quantifier prefixes gain the required delimiter after family index and Bool side.",
+  "root_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair133/OneSidedWholeComponentTransportCI133RootReview.json",
+    "sha256": "bda8a30ab19b6ac0905f0d2fac280784c312675fa7045b4ec7588bcbd60f7464"
+  }
+}

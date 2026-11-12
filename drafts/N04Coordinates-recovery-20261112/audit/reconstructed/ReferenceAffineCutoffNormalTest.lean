@@ -83,12 +83,12 @@ theorem referenceAffineCutoffForcing_abs_le {D : ReferenceData}
     calc
       _ = |r - c| * |deriv χ r| := abs_mul _ _
       _ ≤ δ * (B / δ) := mul_le_mul hrc hχ1 (abs_nonneg _) hδ.le
-      _ = B := by field_simp
+      _ = B := by field_simp [hδ.ne']
   have hsecond : |(r - c) * deriv (deriv χ) r| ≤ B / δ := by
     calc
       _ = |r - c| * |deriv (deriv χ) r| := abs_mul _ _
       _ ≤ δ * (B / δ ^ 2) := mul_le_mul hrc hχ2 (abs_nonneg _) hδ.le
-      _ = B / δ := by field_simp; ring
+      _ = B / δ := by field_simp [hδ.ne']; ring
   have hlow : |(r - c) * χ r| ≤ δ := by
     calc
       _ = |r - c| * |χ r| := abs_mul _ _
@@ -111,8 +111,14 @@ theorem referenceAffineCutoffForcing_abs_le {D : ReferenceData}
       _ = _ := by ring
   have h1 : |χ r + (r - c) * deriv χ r - (4 / r) * ((r - c) * χ r)| ≤
       1 + B + 4 * δ / a := by
-    exact (abs_sub_le _ _).trans ((add_le_add
-      ((abs_add_le _ _).trans (add_le_add hχ0 hfirst)) hpotential))
+    have ht : |χ r + (r - c) * deriv χ r - (4 / r) * ((r - c) * χ r)| ≤
+        |χ r + (r - c) * deriv χ r| + |(4 / r) * ((r - c) * χ r)| := by
+      simpa only [sub_zero, zero_sub, abs_neg] using
+        abs_sub_le (χ r + (r - c) * deriv χ r) (0 : ℝ)
+          ((4 / r) * ((r - c) * χ r))
+    exact ht.trans (add_le_add
+      ((abs_add_le _ _).trans (add_le_add hχ0 hfirst)) hpotential)
+  unfold referenceAffineCutoffForcing
   exact (abs_add_le _ _).trans (by
     rw [abs_mul, abs_mul]
     exact add_le_add (mul_le_mul_of_nonneg_left h2 (abs_nonneg _))
@@ -138,7 +144,7 @@ theorem FirstNormalInverseEstimate.compactAffineCutoff_bound {D : ReferenceData}
         (referenceCompactCosine (fun r => χ r + (r - c) * deriv χ r), 0) ≤
         C ^ 2 * (sourceNormSquare D γ M₀ F +
           sourceNormSquare D γ M₀ (angularPartial F.1, 0)) := by
-  obtain ⟨C, hC, htest⟩ := hNormal.compactCosine_bound hD hborder hG
+  obtain ⟨C, hC, htest⟩ := FirstNormalInverseEstimate.compactCosine_bound hD hborder hG hNormal
   refine ⟨C, hC, ?_⟩
   intro c χ hχ hc hs
   have hu : ContDiff ℝ ∞ (referenceAffineCutoff c χ) :=

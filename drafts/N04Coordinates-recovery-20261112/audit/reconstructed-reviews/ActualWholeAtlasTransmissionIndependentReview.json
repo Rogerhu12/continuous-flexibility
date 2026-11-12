@@ -1,0 +1,123 @@
+{
+  "kind": "independent_static_review_actual_transmission_and_whole_cut_transfer",
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed_static_source_and_exact_provider_review",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualWholeAtlasTransmissionCandidateManifest.json",
+    "sha256": "2e98901f736140d8fdfe1c4a1951bc3d12982ad7dcdfda3737aae66864a5dd9a"
+  },
+  "files": [
+    {
+      "file": "src/ContinuousFlexibility/Analysis/N04ActualAtlasTransmission.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04ActualAtlasTransmission.lean",
+      "lines": 70,
+      "sha256": "f6f2745df97a6516eefabe160c0a0cfacac048e50bf19ef4a328cdee9a2689e8",
+      "blob": "5d1f0aabf801623c4e4f984aa54ce7d693e4b307",
+      "reviewed_complete_source": true
+    },
+    {
+      "file": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasCuts.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasCuts.lean",
+      "lines": 68,
+      "sha256": "7338f736192a450f99316748d9bdf7beb6eecdb631bdbdeeac6f27eb37746d0c",
+      "blob": "f7fb03e39c681fe28833d7b5aae54807c57fa0c8",
+      "reviewed_complete_source": true
+    }
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bConstructedRootTransmission.lean",
+      "sha256": "1076fbba3122f07dbbae57dc87e4268e096faeaa0dda7e0474aa774c68d4d342",
+      "blob": "6a7d727819d0298af773209a3bd0d6a1c01a9c7e",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualTravelChart.lean",
+      "sha256": "5c7da22817d01115c5837f791ed4ba939d9f097c5ad547cb4882d02e435fb30a",
+      "blob": "a1b60844375f7e23349c24356cd300a76a6fd72e",
+      "lines": 229
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualCharacteristics.lean",
+      "sha256": "da8388b36ca405be529ba7c8aed772ea675175c20a1b84deaac61de8c3bc821b",
+      "blob": "35b5c40473937d26dc724aae8503d94aac191c6d",
+      "lines": 135
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasGerms.lean",
+      "sha256": "5abee83c1a68e2b04a6d733f7e51473a15453d5debda0e8526106462e3b4d73e",
+      "blob": "0bf89b2339f60ac8ba2cf9678637f4bf96830a66",
+      "lines": 94
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasCuts.lean",
+      "sha256": "1c1ca0be70e7134d99086b9d491732bc983447a8d9700cd17cfa4606e0f7c26e",
+      "blob": "3e6847f1dc053e029284c4f490ab351c5c310da2",
+      "lines": 97
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+      "sha256": "166d48b590552637d5efedb29ce0b19d5963d02f33e7caebffe44a04b576fdf4",
+      "blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "lines": 142
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean",
+      "sha256": "91687b630205a380f137dcdb4cb32068d79582e09d17d4a4cd14317e21b9e19f",
+      "blob": "334d3c0c19727465e3afc75f988c79df1b8d7b8a",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04WholeComponentPieces.lean",
+      "sha256": "5d2d7e19dcb41ad41fc58f433b96e0180ccd3d15acb514fe34025878380bf822",
+      "blob": "31a07cd1ac849aaa1a42f559dcaa84fb4e7e94b8",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bPositiveDivision.lean",
+      "sha256": "d274f19959dd831c45e7d0ee0374a4bf01132369e13d69e595beb71a60de39ee",
+      "blob": "052cdea1dd1db004e3021e7100bf3b0704f1f472",
+      "lines": 110
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "d42c9da38be0475688417eb1b9d2abeae2f0f6c29009ddfde424fc654c560520",
+      "blob": "97aa466ceee79bd9e21887d8948042478820ca79",
+      "lines": 1430
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasData.lean",
+      "sha256": "41a32a066758dcfb8fe7da1ab9e73bee2f7ad451fa1f7057aee40c01092905d6",
+      "blob": "c6abe2dcedd1974e7ec231275a17f869c0faed3b",
+      "lines": 165
+    }
+  ],
+  "public_declarations": [
+    "n04ActualAtlas_transmission",
+    "n04WholeCanonicalAtlasData_cutGeometry",
+    "n04WholeCanonicalAtlasData_transmission"
+  ],
+  "public_name_collision_in_current_checkout": false,
+  "checks": [
+    "Complete 70-line and 68-line candidate sources read; every candidate hash, blob, and line count matches the frozen manifest.",
+    "The true middle travel point lies in the open strip by positive travel. MapsTo is hX.1; the right-inverse on that strip is hX.2.2.1; smooth inverse is hX.2.2.2. These are the exact current n04b_actualTravelInverse_spec conjuncts.",
+    "The actual controlGeometryConditions projection hN.1.1.2.2.2.1 gives both component endpoints in the annulus. The smooth actual a and actual characteristic half-gap are therefore supplied at the same X(T/2,theta); half-gap is exactly conjunct .2.1 of n04b_corrected_characteristics_contDiffAt.",
+    "The generic constructedRoot cut theorem receives the actual F=n04bActualTravelChart, X=n04bActualTravelInverse, T=C.travel m, coefficient field L.coefficients z, and its half-gap. hFX, hXa and the two actual germs consistently constrain these same functions and point. No desired transmission premise is supplied.",
+    "The two actual atlas cut germs are full neighborhood identities for the same enumeration and same physical moving cut. The existing generic theorem proves both height and derivative traces, including the sign and the exact 1/(2*cutRadius) term.",
+    "Actual typed cutPair and cutRadius are the two exact current metadata equations, so the final simpa changes only local atlas aliases and these definitions.",
+    "The whole atlas retains original negative fields, radius and current inverse curves. Its new cut pair reindexes false and true through one equivalence; the explicit Boolean simplifications and original false flags in reference metadata cover both reference and current cut clauses.",
+    "Whole-atlas transmission unfolds canonicalHeight and retained negative inverse/height fields only. n04bWithInteriorDivision changes the coefficient quotient, not these trace fields.",
+    "No final PartB, primitive bound, target transport identity, changed public hypothesis, or increased budget is introduced."
+  ],
+  "findings": [],
+  "limitations": [
+    "Static independent review only; no Lean elaboration or compilation was run.",
+    "The declarations and held WholeCanonicalAtlasData dependency are not claimed compiled by this review."
+  ],
+  "actions": {
+    "edited_candidate_sources": false,
+    "compiled": false,
+    "queried_ci": false,
+    "changed_checkout_index_refs_checkpoint_authority": false
+  }
+}

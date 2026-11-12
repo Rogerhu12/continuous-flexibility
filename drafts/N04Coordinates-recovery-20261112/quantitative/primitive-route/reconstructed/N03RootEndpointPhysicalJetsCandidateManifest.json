@@ -1,0 +1,87 @@
+{
+  "kind": "actual_same_witness_common_root_endpoint_field_bounds_candidate",
+  "status": "HELD_UNCOMPILED_REVIEW_PENDING",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03RootEndpointPhysicalJets.lean",
+    "sha256": "2690e6c47e4557ba97eb37f91c00573f6d21cd18dd5dc6d40fbafb662861ad45",
+    "blob": "b47919889191d8709da04bd63f75f24e90a064ef",
+    "lines": 218
+  },
+  "imports": [
+    "ContinuousFlexibility.Analysis.N03StateRootBandIdentification",
+    "ContinuousFlexibility.Analysis.N01ControlledRootModel",
+    "ContinuousFlexibility.Analysis.RootPhysicalJetTransfer",
+    "ContinuousFlexibility.Analysis.N04FlowJetsProof"
+  ],
+  "public_declarations": [
+    "N03RootEndpointFieldFamily",
+    "n03_controlledRoot_endpoint_physicalJets",
+    "n04b_exists_common_root_endpoint_fields"
+  ],
+  "new_identification_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03StateRootBandIdentification.lean",
+    "sha256": "2576a244ea300f4feec052993826c29fa9cb4d74b01633ef2d39a4558a372b3c",
+    "blob": "ea28c3037e0f40edd2d8be74d94e17e083b942aa",
+    "lines": 276
+  },
+  "new_identification_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03StateRootBandIdentificationReviewedManifest.json",
+    "sha256": "5bb4cd31012393c191e14c2cb60ce832a76c5e48bb5ea9623444b9d33ad56be6",
+    "blob": "5e0896dbd0647a21912bdadbd71135c304e11c00",
+    "lines": 24
+  },
+  "provider_sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01ControlledRootModel.lean",
+      "sha256": "2653d936141ff71cb49323bc493c229a4da83e9e5a36088b6aa52a90a24d1a57",
+      "blob": "a90ecc600e910d489f86c1f4fe54657abf672fba",
+      "lines": 195
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01ControlledRootInput.lean",
+      "sha256": "89277caf50bb3cf87824ca875f3252002cccb0157f6b0dab2475a1e4ef0e633d",
+      "blob": "a2fc02c86308d5868cf22f486b06d4de6b1ed844",
+      "lines": 216
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N03FixedRootOrdinaryJets.lean",
+      "sha256": "6e5a8bae77dc08a20c027030362c89e93dd960f7697f590175401105d90f2c96",
+      "blob": "565cf163c03dcb56db87096f69c30beafd8293d8",
+      "lines": 140
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootPhysicalJetTransfer.lean",
+      "sha256": "59965f4769148462b4cf526e64dbdca0fc8d8f764f77631bfbf0a58273a2442a",
+      "blob": "0f0f934377269572355ee7d3fbcedaa1aef759c0",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootModelAllAngleJets.lean",
+      "sha256": "215e71554553de5d621830c44ac1c3bdc4fc44ce9b9c041eea3f68cdbfdaaacf",
+      "blob": "77b79e8102023ae330aed05aa900f392b9fb5573",
+      "lines": 81
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04FlowJetsProof.lean",
+      "sha256": "a32b912e8afcee50fbe76ec8f86519d5d4d5a84675400cab5f2ea855e1bd51ce",
+      "blob": "acb5b0fd374b5304c79e39f3412a50c7921a616f",
+      "lines": 121
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalNeighborhoodRestriction.lean",
+      "sha256": "c97d71f767b6527d4522c35c6720a66711f8a78076405e3927f61b5420c3c1fd",
+      "blob": "d6d7feceb34bf34e2fa7a068176a386c5650e687",
+      "lines": 186
+    }
+  ],
+  "mathematical_scope": [
+    "Actual stored K.chart/K.height and inverse-height jets of all orders at every real angle of each physical root.",
+    "One common base and loss precede every component; positive Jacobian lower and envelopes precede every state.",
+    "The actual N01 chosen-flow factory and proved n04FlowJetsTarget_proof supply all raw model inputs in the final theorem.",
+    "N03 state-dependent identification radius is discarded after evaluating at root coordinate zero; it never enters the envelope or Jacobian lower.",
+    "Same D/T/S/C/E/L/K and Through03 survive only neighborhood restriction. No fixed-cutoff global L equality, replacement witness, or final endpoint-bound assumption.",
+    "This result is per-component numerical control. It does not yet assert uniform component-to-material growth or relative transport/height-gauge endpoint bounds."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

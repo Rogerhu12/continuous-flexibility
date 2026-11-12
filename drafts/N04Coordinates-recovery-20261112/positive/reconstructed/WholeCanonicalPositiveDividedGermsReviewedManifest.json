@@ -1,0 +1,21 @@
+{
+  "kind": "actual_stored_positive_divided_field_reviewed_source",
+  "status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeCanonicalPositiveDividedGerms.lean",
+    "sha256": "2f2738bcac5940098e21d077300e56790cc252e3755939bd9dc9be584ccbe960",
+    "blob": "99ba0e594336882841cad5c7b0317f5c9884500f",
+    "lines": 87
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed-reviews/WholeCanonicalPositiveDividedGermsIndependentReview.json",
+    "sha256": "46ece9cd782bb590095d3a1c68f3ab6eb2292ba0401a62b884ae3930057bce09"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeCanonicalPositiveDividedGermsCandidateManifest.json",
+    "sha256": "57635b0ebef8189f7a7fea2e6a56d77a4de4d800666410ee6438049093203096"
+  },
+  "compiled": false,
+  "green_receipt_applies_to_source": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

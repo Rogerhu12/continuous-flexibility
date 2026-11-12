@@ -1,0 +1,35 @@
+{
+  "kind": "actual_whole_canonical_positive_divided_field_germ_candidate",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeCanonicalPositiveDividedGerms.lean",
+    "sha256": "2f2738bcac5940098e21d077300e56790cc252e3755939bd9dc9be584ccbe960",
+    "blob": "99ba0e594336882841cad5c7b0317f5c9884500f",
+    "lines": 87
+  },
+  "dependencies": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasData.lean",
+      "sha256": "41a32a066758dcfb8fe7da1ab9e73bee2f7ad451fa1f7057aee40c01092905d6"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveCanonicalFields.lean",
+      "sha256": "8226260cf89a2ac8c4ba5964f2a0b5e569b021ff6d79d0c494112b0271afe7ce"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveAmbientCubicDifference.lean",
+      "sha256": "b8e40f0b9744f75b7564e616d3e3b7677f9c5aaf311cae7727042d8243eceb57"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/LocalMixedProductBounds.lean",
+      "sha256": "d0faf14d190ae8c14f16f80958e8c166183c0914f822815a8d98aa13a660dfd7"
+    }
+  ],
+  "mathematics": [
+    "Reference chart/inverse/height identity identifies the selected record reference positive coefficient with the original physical reference field.",
+    "On the genuine open piece, the actual record factorization and the constructed smooth quotient factorization have the same numerator and strictly positive cubed boundary factor. Nonzero cancellation identifies the stored quotient pointwise on an open neighborhood.",
+    "The genuine germ proves ordinary local smoothness and equality of all actual mixed derivatives of the stored dividedDifference. The record and its ambient totalized values are unchanged."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

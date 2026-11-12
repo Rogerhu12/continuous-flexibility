@@ -1,0 +1,13 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ExpPolynomialEnvelope.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-envelope-known-patterns/ExpPolynomialEnvelope.lean
+@@ -46,7 +46,9 @@
+           ∏ j, ‖iteratedFDeriv ℝ (π.partSize j) f x‖ ≤ A * M ^ N := by
+     have hprod : (∏ j, ‖iteratedFDeriv ℝ (π.partSize j) f x‖) ≤ M ^ π.length := by
+       simpa only [Finset.prod_const, Finset.card_univ, Fintype.card_fin] using
+-        (Finset.prod_le_prod₀ (fun _ _ => norm_nonneg _)
++        (Finset.prod_le_prod₀ (s := Finset.univ)
++          (f := fun j : Fin π.length => ‖iteratedFDeriv ℝ (π.partSize j) f x‖)
++          (g := fun _ : Fin π.length => M) (fun _ _ => norm_nonneg _)
+           (fun j _ => hraw (π.partSize j) (π.partSize_pos j)
+             ((π.partSize_le j).trans hk)))
+     exact (mul_le_mul (hout π.length) hprod

@@ -1,0 +1,78 @@
+{
+  "kind": "fixed_envelopes_known_parser_and_product_inference_delta_independent_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed_static_exact_delta_review",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-envelope-known-patterns/FixedEnvelopeKnownPatternsCandidateManifest.json",
+    "sha256": "a509b2ed3131174e13c72d84d73fcb1c6e1def676ccf81ecbfb959fd65171484"
+  },
+  "files": [
+    {
+      "target": "src/ContinuousFlexibility/Analysis/FixedCollarHeightPolynomialEnvelope.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-height-nonnegative/FixedCollarHeightPolynomialEnvelope.lean",
+        "sha256": "be1141bbc4bf89d03c14681e14ee16478adda6a359e3685993e3f2e9a59aa6e2",
+        "blob": "af9f051e5fb6691977c4c208e7ec565f21ed9d4b",
+        "lines": 112
+      },
+      "candidate": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-envelope-known-patterns/FixedCollarHeightPolynomialEnvelope.lean",
+        "sha256": "c1c3d03bf2e15bc587703221a44edca4002121574922e84f4083508841ddf67a",
+        "blob": "3b45c3ad2120eb057ee3ba262db9735df047d47d",
+        "lines": 112
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-envelope-known-patterns/FixedCollarHeightPolynomialEnvelope.diff",
+        "sha256": "a1166ccda233170680ad17786d939e3cce98e0e3190ffd6cd5ec4a1a22ef5559",
+        "blob": "03b1b73972111ac6be8e99999e1883777c29c8a1",
+        "lines": 11
+      }
+    },
+    {
+      "target": "src/ContinuousFlexibility/Analysis/ExpPolynomialEnvelope.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ExpPolynomialEnvelope.lean",
+        "sha256": "86c0ec3bd35ade371e0960659f21060c7398df4eecfc6ce57d3249f23f75702b",
+        "blob": "2dc311c8fad74e6a15ccd2a181afa8b39b9d7092",
+        "lines": 72
+      },
+      "candidate": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-envelope-known-patterns/ExpPolynomialEnvelope.lean",
+        "sha256": "a37f901d2c9f83cd2e02d067b2d7f411729c6ca3e6379cf5f935679b92cfc463",
+        "blob": "f44f6f236af368d5092674e60ed1373864e60c9b",
+        "lines": 74
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-envelope-known-patterns/ExpPolynomialEnvelope.diff",
+        "sha256": "ec6b48cb6cae295ff2ed80c668ef6304c892a36dbe997228dc3726a93774d4c3",
+        "blob": "a4e098890b42d3852025696d058dc55548005b26",
+        "lines": 13
+      }
+    }
+  ],
+  "prior_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/FixedCollarHeightPolynomialEnvelopeIndependentReview.json",
+      "sha256": "cbd26aa12ab6c3feff38666476cc0fc7e07fd9c29005c3da0e3b63b384f0299f"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/FixedCollarHeightNonnegativeCompatibilityIndependentReview.json",
+      "sha256": "9e15d84f03379ea5162dcf97ab4ca4c82ccfc045d04b0d550b1db6ae473a883a"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/ExpPolynomialEnvelopeIndependentReview.json",
+      "sha256": "e653563cc15d5e1e1946a00f79fccb317211a15a8c9bf1c0d6039ac93a48f171"
+    }
+  ],
+  "checks": [
+    "Both current full candidates and their exact one-block differences were read; reversing each literal replacement gives the original reviewed source bytes exactly. Original files and reviews are unchanged.",
+    "Height: the explicit comma and second forall separate the family/side binders from the bounded physical-point binder. The intended family, strip, positivity hypothesis, all other hypotheses, fixed low-order width, high-order exponent and entire proof body are unchanged. Public header is deliberately not claimed byte-identical because it contains this parser correction.",
+    "Exponential: Finset.prod_le_prod₀ is specialized to univ over Fin pi.length, with exactly the actual derivative-norm factor and constant M. Its actual pinned two proof premises remain norm_nonneg and the same positive-order raw jet estimate; the original product, exponent comparison and amplitude A are unchanged. Public header and every other proof byte are unchanged.",
+    "The base source SHA values match their existing independent reviews. The Exp review source record correctly identifies 72 lines; the older narrative phrase 78-line is merely a stale line-count description, not a source identity. The new reviewed file has 74 lines.",
+    "These are held source compatibility candidates. No CI134 repair, source installation, frozen authority, or active plan was changed."
+  ],
+  "findings": [],
+  "compiled": false,
+  "source_edited_by_reviewer": false,
+  "checkout_index_refs_checkpoint_authority_or_ci_modified_or_queried": false
+}

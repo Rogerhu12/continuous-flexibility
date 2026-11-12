@@ -1,0 +1,31 @@
+{
+  "kind": "independent_actual_ci135_root_review",
+  "reviewer": "root",
+  "result": "passed full124 source and exact delta static review",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair135/WholeComponentReferenceIdentityCI135RepairCandidateManifest.json",
+    "sha256": "6bbdcdfe74f5e82b9c3ff406935813f49f072dad0ffe7c791856a94daa45bc0d"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair135/WholeComponentReferenceIdentity.lean",
+    "sha256": "d490df2bf958a9aaaded98a46ed42ef7595e55608a7a14d9546549bf79809c36",
+    "blob": "2ee9d541738dddf81c5e1c40288850ae337ee0c2",
+    "lines": 124
+  },
+  "before": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair135/WholeComponentReferenceIdentity.base.lean.txt",
+    "sha256": "47bc0609ccc9340d630eea22d680b9bd2e7e20e339e41927d0e13bce6cb4b4c9",
+    "blob": "9ec6ff71dd12429ac90af05b1ad52bb2bb774dc3",
+    "lines": 124
+  },
+  "diagnostics": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-135-errors.json",
+    "sha256": "6ec99bcf1ca85055dd506d2beb1b833a07a7e7d1118d51dc3b0610bbc499f1ad"
+  },
+  "checks": [
+    "Read the full actual 124-line source and the exact diff. Equal branches are eliminated with ite_self after the genuine Taylor reconstruction.",
+    "Both Bool branches use the identical previously supplied n, positive width, gap and root arguments; the complete exact term is now parsed under its own indented branch.",
+    "All five public declaration headers, imports, options, formulas and remaining proof bytes are unchanged. The old transport source already passed this part of CI135."
+  ],
+  "compiled": false
+}

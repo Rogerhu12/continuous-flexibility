@@ -1,0 +1,105 @@
+{
+  "kind": "independent_complete_source_review_positive_ambient_principal_and_flat_patch",
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed_static_source_and_provider_review",
+  "candidate_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientPrincipalCandidateManifest.json",
+      "sha256": "a719ad7e1504619b3fd09e6566683b6bd97336d80c0e195cf8cde88bc8f9adf6"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveFlatPrincipalPatchCandidateManifest.json",
+      "sha256": "2d2a0313c41ba195658ea630d6d2936e538bf81f8f250398a13e909fd6e91784"
+    }
+  ],
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientPrincipal.lean",
+      "sha256": "b30636b6cb45bb56c15dc15c5a9025ba5ae7f592558a3cd91540aa8e861b853e",
+      "blob": "4ef9560d350442eb1de62517cf13eb5054800f70",
+      "lines": 87
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveFlatPrincipalPatch.lean",
+      "sha256": "45d18b220bddd0ba6ddbcaa66ab12cb0ae85e853fe3d76c9cc5fa5d0cfc9ed16",
+      "blob": "ba96df9fb836cdcbc61242437386a48b5cb483e1",
+      "lines": 157
+    }
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N01CoefficientDifferenceFlatExtension.lean",
+      "sha256": "455bdb2354c991d08845ffc76cb31d877682e1a8d317793f740e2d465141db5f",
+      "blob": "6fb4a953c54a909431fd57b39d2701e2408fd3e7",
+      "lines": 119
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveCanonicalFields.lean",
+      "sha256": "c26cd518553a29e68647291f463bbd0b271500dd9620ea0735280f2d0a8773b2",
+      "blob": "0fb940e74988b8ccf40f317447993147847713eb",
+      "lines": 169
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveChartGeometry.lean",
+      "sha256": "0a887d435df1b2c5df634e6dddf6ae5454a87d28039427d44651672d61c795ef",
+      "blob": "f11dc361f30a5d74ff1b836728f535abc0f79a6a",
+      "lines": 144
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveConformalCanonicalExtension.lean",
+      "sha256": "79baa6e5a100a4f6fc709d4b0b24c54927c026ad90c74e9d5c0e176b0cb97c11",
+      "blob": "ea3da0af44225ee0b1617fc71aa3fcf532664957",
+      "lines": 190
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CoordinateOperatorConstruction.lean",
+      "sha256": "ffbecb5ae9d0d9e40a5fd193592dde632989d3c4fb2382b118be5180f9d7f1c1",
+      "blob": "aef71ea652edabf9d9c4788e2c6aba6780f6c1fe",
+      "lines": 76
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PrincipalCoefficientPullback.lean",
+      "sha256": "88ccf751162a22460c15d8bfdedcdd558328b0e56f51a145dc74bd343114e3f0",
+      "blob": "19262a1834a49fdb7958b07352f409bb0940de19",
+      "lines": 160
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PrincipalDensityBoundaryJets.lean",
+      "sha256": "67aeef19bd06d7fb3ad15190c54231f04faa4a876dff55a360dd121b7c571e50",
+      "blob": "e3a80839f54e580850893544d0425abe7e2ff4d1",
+      "lines": 319
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "d42c9da38be0475688417eb1b9d2abeae2f0f6c29009ddfde424fc654c560520",
+      "blob": "97aa466ceee79bd9e21887d8948042478820ca79",
+      "lines": 1430
+    }
+  ],
+  "public_names": [
+    "wholePositiveCanonicalCoefficient_identity_germ",
+    "n03CoefficientComponent_positive_germ",
+    "n03PositivePrincipalDifference_flat_representative_germ",
+    "exists_wholePositivePrincipal_flat_patch"
+  ],
+  "public_names_absent_in_current_checkout": true,
+  "checks": [
+    "Complete 87-line and 157-line sources read and hashes bound to the two frozen candidate manifests; no candidate edits.",
+    "Identity germs for tau, sigma and Q imply a germ for the true height (Q composed with sigma)^-1 and for fderiv sigma. The inverse-chart formula evaluates at tau(q); tau(q)=q aligns both derivative and height germs at q. No differentiability of A is assumed for this identity.",
+    "At a true positive annular point N03 gives the actual current and reference b/c germs; its first conjunct gives exact a. The same reference state is valid by the genuine N01 epsilon and reference-sector clauses. Subtraction is therefore the literal original N01 difference, and the zero-extension germ is used with the correct orientation.",
+    "The global patch cuts physical A and Aref before coordinate pullback. Its cutoff-supported coefficients are globally smooth because physical coefficients are smooth on the actual containing annulus and the cutoff vanishes on a full neighborhood outside its support.",
+    "The actual chart sigma, inverse tau, height and nonzero Jacobian supplied by WholePositiveChartGeometry make the cut principal field globally smooth. These are the current structure fields and exact contDiffAt_coordinatePrincipalDensity inputs; composition is with tau.",
+    "On the closed middle buffer, the actual MapsTo tau hypothesis puts tau(p) inside the same buffer, so chi=1 as a neighborhood germ at both p and tau(p). This yields the actual numerator germ, not merely equality at one point.",
+    "Where tau/sigma/Q are identity germs and E is the physical difference germ, the algebra chi*A-chi*Aref+(1-chi)*(A-Aref)=A-Aref restores the same actual numerator.",
+    "At an ambient point outside the open containing interval, chi=0 on a full neighborhood. Identity germs then reduce the cut principal to zero, and the same global patch is genuinely equal to E nearby; no value or smoothness of totalized physical A at the ambient point is inferred.",
+    "All four new public names were absent from the current checkout. This review supplies no positive unit-density, final cubic estimate, primitive bound, or compilation claim."
+  ],
+  "findings": [],
+  "limitations": [
+    "Independent static review only; no Lean compilation or elaboration was run.",
+    "The patch theorem deliberately makes its central, identity-region and ambient germ conclusions conditional on their genuine stated geometric inputs."
+  ],
+  "compiled": false,
+  "edited_candidate_sources": false,
+  "checkout_index_refs_checkpoint_authority_or_ci_modified_or_queried": false
+}

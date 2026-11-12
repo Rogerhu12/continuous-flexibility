@@ -1,0 +1,24 @@
+{
+  "kind": "independent_full_source_same_witness_state_root_band_review",
+  "reviewer": "root",
+  "result": "passed static full-source and actual-provider review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03StateRootBandIdentification.lean",
+    "lines": 276,
+    "sha256": "2576a244ea300f4feec052993826c29fa9cb4d74b01633ef2d39a4558a372b3c",
+    "blob": "ea28c3037e0f40edd2d8be74d94e17e083b942aa"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03StateRootBandIdentificationCandidateManifest.json",
+    "sha256": "e2aa52bb895926c246a2771b2c57034675f9a34ce4298ee98b11780d63f00fd3"
+  },
+  "checks": [
+    "Read the complete 276-line source and complete N04bRootGermCollar, N03FixedRootOrdinaryJets, N03FixedRootTravelIdentification and RootTravelUniformBounds providers. Mechanically verified that both private helper proof blocks differ from their already compiled providers only in the theorem names.",
+    "The actual hN/hfield coefficient germ theorem supplies one full-angle collar for the fixed state and root. The positive minimum a stays below delta, the component width, R/4, and that collar. This supplies true coefficient equality for every angle on the closed oriented interval.",
+    "The stored characteristic curve is identified by ODE uniqueness with the same supplied Theta and delta. The subsequent travel smallness keeps the genuine stored point in the appropriate moving canonical half; the actual travel and angular values identify that stored chart.",
+    "Both endpoints follow the single Bool orientation. The actual prior C, E, L, K and state are retained; no fixed correction cutoff or new Through03 witness is introduced.",
+    "The output rho is state-dependent and is used only for germ identification. No numerical lower bound on rho, uniform state collar, endpoint quantitative bound, or final N04 estimate is assumed or claimed."
+  ],
+  "compiled": false,
+  "source_edited": false
+}

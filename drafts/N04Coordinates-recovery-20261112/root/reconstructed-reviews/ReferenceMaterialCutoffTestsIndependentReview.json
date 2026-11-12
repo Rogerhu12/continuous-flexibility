@@ -1,0 +1,30 @@
+{
+  "kind": "independent_full_source_actual_reference_cutoff_review",
+  "reviewer": "root",
+  "result": "passed static full-source and provider review",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ReferenceAffineCutoffNormalTest.lean",
+      "sha256": "096d467751dd3ec995ca9331abccb52bce704569ab10c2a421809586e793c47a",
+      "blob": "42ee40f6a9305ef936f4a9312f770ea4e7b97639",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ReferenceMaterialRootCutoff.lean",
+      "sha256": "d4195345402a78d021011d62c0306ff23c398d5f259510cd685ea53de0bf6867",
+      "blob": "fa32bf57c16a904163d43ec4f8a1d81983db3540",
+      "lines": 189
+    }
+  ],
+  "checks": [
+    "The displayed Jacobi forcing differentiates w times the actual affine-cutoff derivative, retaining both cutoff derivatives. At a true w-prime root it reduces to 2w chi-prime and does not imply a lower bound on w-double-prime.",
+    "Every absolute-value estimate retains the w times 3B/delta transition cost and the w-prime times (1+B+4delta/a) term. Positivity and the real division directions are checked.",
+    "The same original ReferenceInverseProperties and FirstNormalInverseEstimate apply to the actual compact cosine source, with its original border row and angular forcing source norm. No term of the right-hand side is removed.",
+    "The two smooth transitions yield a real compact plateau at radius endpointDistance(c)/2. Support is strictly inside the radial core, without assuming the support fits a cell. The pinned iteratedDeriv_fun_sub and optical cutoff APIs match the proof.",
+    "All cutoff derivative costs are fixed before the center and evaluation point. Existing actual material inverse-distance and same-cell E0 power comparisons transfer these costs to the original containing cell sample, with no assumption E0 >= 1.",
+    "Both sources live in Statements, so endpointDistance is the original physical distance, not the Analysis material coordinate function of the same short name.",
+    "No optical turning-slope lower bound, primitive uniform estimate or final blueprint completion is claimed."
+  ],
+  "compiled": false,
+  "source_edited": false
+}

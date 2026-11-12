@@ -1,0 +1,60 @@
+{
+  "kind": "held_fixed_envelope_known_parser_and_product_inference_patterns",
+  "status": "HELD_INDEPENDENTLY_REVIEWED_UNCOMPILED",
+  "files": [
+    {
+      "target": "src/ContinuousFlexibility/Analysis/FixedCollarHeightPolynomialEnvelope.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-height-nonnegative/FixedCollarHeightPolynomialEnvelope.lean",
+        "sha256": "be1141bbc4bf89d03c14681e14ee16478adda6a359e3685993e3f2e9a59aa6e2",
+        "blob": "af9f051e5fb6691977c4c208e7ec565f21ed9d4b",
+        "lines": 112
+      },
+      "candidate": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-envelope-known-patterns/FixedCollarHeightPolynomialEnvelope.lean",
+        "sha256": "c1c3d03bf2e15bc587703221a44edca4002121574922e84f4083508841ddf67a",
+        "blob": "3b45c3ad2120eb057ee3ba262db9735df047d47d",
+        "lines": 112
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-envelope-known-patterns/FixedCollarHeightPolynomialEnvelope.diff",
+        "sha256": "a1166ccda233170680ad17786d939e3cce98e0e3190ffd6cd5ec4a1a22ef5559",
+        "blob": "03b1b73972111ac6be8e99999e1883777c29c8a1",
+        "lines": 11
+      }
+    },
+    {
+      "target": "src/ContinuousFlexibility/Analysis/ExpPolynomialEnvelope.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ExpPolynomialEnvelope.lean",
+        "sha256": "86c0ec3bd35ade371e0960659f21060c7398df4eecfc6ce57d3249f23f75702b",
+        "blob": "2dc311c8fad74e6a15ccd2a181afa8b39b9d7092",
+        "lines": 72
+      },
+      "candidate": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-envelope-known-patterns/ExpPolynomialEnvelope.lean",
+        "sha256": "a37f901d2c9f83cd2e02d067b2d7f411729c6ca3e6379cf5f935679b92cfc463",
+        "blob": "f44f6f236af368d5092674e60ed1373864e60c9b",
+        "lines": 74
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-envelope-known-patterns/ExpPolynomialEnvelope.diff",
+        "sha256": "ec6b48cb6cae295ff2ed80c668ef6304c892a36dbe997228dc3726a93774d4c3",
+        "blob": "a4e098890b42d3852025696d058dc55548005b26",
+        "lines": 13
+      }
+    }
+  ],
+  "scope": "Same already diagnosed multi-name bounded-binder parser pattern as actual CI133; same product Finset inference pattern as actual CI129 LogPolynomialEnvelope. These are held independent consumers and are not added to actual CI134 repairs.",
+  "mathematical_hypotheses_conclusions_unchanged": true,
+  "fixed_matching_order_and_low_width_quantifiers_unchanged": true,
+  "new_tests_or_compilation_claim": false,
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-envelope-known-patterns/FixedEnvelopeKnownPatternsCandidateManifest.json",
+    "sha256": "a509b2ed3131174e13c72d84d73fcb1c6e1def676ccf81ecbfb959fd65171484"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/FixedEnvelopeKnownPatternsIndependentReview.json",
+    "sha256": "711b649689dcfa7e39397462b4220b6f58d7d3938173ee84163baee1d508db41"
+  }
+}

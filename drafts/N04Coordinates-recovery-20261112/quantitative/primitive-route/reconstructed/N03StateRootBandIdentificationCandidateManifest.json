@@ -1,0 +1,75 @@
+{
+  "kind": "same_Through03_state_root_band_identification_candidate",
+  "status": "HELD_UNCOMPILED_REVIEW_PENDING",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03StateRootBandIdentification.lean",
+    "sha256": "2576a244ea300f4feec052993826c29fa9cb4d74b01633ef2d39a4558a372b3c",
+    "blob": "ea28c3037e0f40edd2d8be74d94e17e083b942aa",
+    "lines": 276
+  },
+  "imports": [
+    "ContinuousFlexibility.Analysis.N04bRootGermCollar",
+    "ContinuousFlexibility.Analysis.N03FixedRootOrdinaryJets"
+  ],
+  "public_declarations": [
+    "n03_exists_state_controlledRoot_band"
+  ],
+  "copied_compiled_proof_helpers": [
+    {
+      "new_name": "stateRoot_storedFlow_of_coefficient_band",
+      "prior_private_name": "rootStoredFlowAgreement_of_fixed_band",
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N03FixedRootFlowIdentification.lean",
+        "sha256": "784fc197a7501ab36c4521a912fb19862f22f30459eee6ef0ff252e91d2d4737",
+        "blob": "01ef7ebee0b403d2a13595be5a5d8fc37c811143",
+        "lines": 189
+      },
+      "exact_only_rename": true
+    },
+    {
+      "new_name": "stateRoot_chart_of_glued_values",
+      "prior_private_name": "canonical_chart_eq_rootChart_of_glued_values",
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N03UniformRootBandGeometry.lean",
+        "sha256": "cc008bcae7cde98219b307c60b3f4d0dde2aa23e666e74d89f75e4f7f3247cf1",
+        "blob": "ab0205004de65ccaf3a2fcd96a57a0c4a5c40ffc",
+        "lines": 133
+      },
+      "exact_only_rename": true
+    }
+  ],
+  "provider_sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bRootGermCollar.lean",
+      "sha256": "fcb7047b3c7a15e1174c055220f247832d61d42b5ee1e5413e2c35bf6c2c5713",
+      "blob": "02b1dddba9773b310357f3c2e3e532a6dfb1fccf",
+      "lines": 108
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N03FixedRootOrdinaryJets.lean",
+      "sha256": "6e5a8bae77dc08a20c027030362c89e93dd960f7697f590175401105d90f2c96",
+      "blob": "565cf163c03dcb56db87096f69c30beafd8293d8",
+      "lines": 140
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N03FixedRootTravelIdentification.lean",
+      "sha256": "212abd2d5b03c00b7fbaa891b14511a8cab86c9977d0e33b518bab518e92fda4",
+      "blob": "1419467c874a04c22d2e6b6b58dc0d56dec8723e",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootTravelUniformBounds.lean",
+      "sha256": "fe2f7918e54fa45d11efa832da97b6f2a6949ef79116258649f235ae372296c4",
+      "blob": "b86f4b8b20e9b71215e1441c6581b231be8bd534",
+      "lines": 92
+    }
+  ],
+  "proof_scope": [
+    "Same D/T/S/C/E/L/K and original Through03 witness.",
+    "A state-dependent full-angle coefficient collar is obtained from actual N03 germs, not a fixed correction cutoff assumption.",
+    "The supplied controlled flow and scale are preserved. The state-dependent identification radius enters no jet-bound constant.",
+    "Actual ODE uniqueness, travel smallness, and stored chart identification are used."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

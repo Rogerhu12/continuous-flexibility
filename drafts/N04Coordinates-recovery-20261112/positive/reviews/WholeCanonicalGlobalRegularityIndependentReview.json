@@ -1,0 +1,72 @@
+{
+  "kind": "whole_canonical_global_actual_field_regular_independent_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "passed static full-source and exact-provider review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalGlobalRegularity.lean",
+    "sha256": "ba6f284df91e959724ac50d3ee1a11703b697bd76a11d5ad78aa5b1a12fe4513",
+    "blob": "4ee5e602015799f1e34226f8f15967639f6fa08c",
+    "lines": 103
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalGlobalRegularityCandidateManifest.json",
+    "sha256": "67abbafa897df32f83b6d800b83be532ebba09bfe996d6248e127b9cae5e4d6e"
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalWholePositiveRootMatching.lean",
+      "sha256": "42b7d1c827797240afb1f189a316d8e5537754f948c861e81c040c19d7e2a2b9",
+      "blob": "7752be209bc875730633f6502880b2889a345679"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalWholeNegativeBoundary.lean",
+      "sha256": "c4119413eb89f0863549c945b0cd6956eb0bfd224e42a0e2192f9b0f26732ceb",
+      "blob": "4d38764eaebc7458cd29faf4cfc205f40db19dbb"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalWholeNegativeTransport.lean",
+      "sha256": "b904744b4a2ca98616fc0b1681fdd563be7471776ab8aadafbc063177aa71b3f",
+      "blob": "c432ff8163f525d6273ebb8e671426a92992eab5"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholeComponentFieldGluing.lean",
+      "sha256": "0cacf73ab45c4928bd27866acbeb120766875c873384c71fed9227cf86626dbd",
+      "blob": "e705f35a0ca0d1a422c0ce742fb01cc8352549ae"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholeComponentFieldSymmetries.lean",
+      "sha256": "fe7fa1521b924abedbed72caf0a1e62a0666ec116195c0345c9a7c0e0eae302d",
+      "blob": "3f9278b79b90cf1a4ae572930dff449e173ba43c"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveTransportAssembly.lean",
+      "sha256": "3afe46da6de99746f176c1de348b4d0b54f2a82ded8be9ea3d097ce03d46b138",
+      "blob": "c48c9514699ff3ee2d292eb0aa0e32b2c70bc39c"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/EndpointTransportGeometry.lean",
+      "sha256": "d636a5279512477c862d9d2ec3f5e4f72ff1ae5db55040e0fb45de45fcbcae82",
+      "blob": "77e5e60cba5a0bc8e0336ae99218816d31119f26"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "d42c9da38be0475688417eb1b9d2abeae2f0f6c29009ddfde424fc654c560520",
+      "blob": "97aa466ceee79bd9e21887d8948042478820ca79"
+    }
+  ],
+  "checks": [
+    "Read all 103 lines and the exact installed gluing, selector range, actual negative closed regularity, actual root matching, and Matching/geometry signatures.",
+    "Through03.1.1 is precisely the same N01Properties. The radial profile and control geometry projections in the positive-height proof are consistent with the actual cumulative definition.",
+    "The local K is the same n04bActualTypedAtlas, with identical hT/hS/hN/hfield/e and actual state z. wholePositiveTransportMatching_negative_root_jets derives the two finite matching statements from the same certified j and Matching family, with the true opposite-side adjacency.",
+    "The coordinate gluing uses negative ordinary closed-point smoothness reduced to order n+1, positive geometry.smooth reduced to n+1, and actual full root jets through n+1. The height gluing uses exactly order n and the same source/germ proof.",
+    "The gluing provider requires only genuine closed negative membership and each positive field smoothness. The body first eliminates its output lets before constructing the four conclusions; no let-intro or unresolved pair point pattern was found.",
+    "The annulus range conclusion uses actual closed negative maps-to and positive open maps-to. The provider places negative endpoints strictly inside the radial core and handles possibly ambient positive endpoints via open positive membership.",
+    "Positive height follows the true radius cover. In the negative branch it uses the same closed regularity positive-height clause; in the positive branch it uses the same Matching.height_positive, after the actual selector equality.",
+    "No global Cn conclusion, final material bound, or final primitive predicate is assumed. The Matching family is an explicit intermediate output of the existing actual construction; the theorem does not reselect coordinates, heights, widths, or state witnesses.",
+    "No new budget or options raise is introduced. This static review does not constitute Lean compilation."
+  ],
+  "findings": [],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

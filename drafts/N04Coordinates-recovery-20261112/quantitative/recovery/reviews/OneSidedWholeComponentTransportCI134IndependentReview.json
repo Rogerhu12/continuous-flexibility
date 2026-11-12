@@ -1,0 +1,51 @@
+{
+  "kind": "independent_full_source_and_exact_vector_alias_delta_review",
+  "reviewer": "quantitative_route",
+  "result": "passed_static_review",
+  "status": "HELD_UNCOMPILED",
+  "scope": "actual_ci134",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair134/OneSidedWholeComponentTransportCI134RepairCandidateManifest.json",
+    "sha256": "134107917ad5c750f3d4ec7baf3aa22765d8beebb0f6e2375f672b7d3a6fc4c0",
+    "blob": "c44e38ef6ada2bdd21f24f7d2582fc4950bf7319",
+    "lines": 40
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair134/OneSidedWholeComponentTransport.lean",
+    "sha256": "52648a5be5552f3e1e4be00517425ad97590a9f656bbcff6433b4bd7839d4a9c",
+    "blob": "59c088961e44cc8c2f265831f64c71700c8f9dcb",
+    "lines": 192
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair134/OneSidedWholeComponentTransport.base.lean.txt",
+    "sha256": "011aba3014687b86a3281948e7785be1c7c2bd05320a14c5cdb4604afd9ce18a",
+    "blob": "5dce3683121cbe14c1668fe8af8a29ee5efdb23d",
+    "lines": 191
+  },
+  "actual_base": {
+    "commit": "18d8867cba4f8f3686aa3c6db22d35023d279e2d",
+    "tree": "bc8b645bb2c43777f0c748866367a669300a4fb2",
+    "path": "src/ContinuousFlexibility/Analysis/OneSidedWholeComponentTransport.lean",
+    "actual_git_blob_matches_base": true
+  },
+  "previous_full_source_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/OneSidedWholeComponentTransportCI133IndependentReview.json",
+    "sha256": "d1bf3be34f5e2bf89278f2d39619452954cfcf16b6f897e165a4ebc7d6fcb97a",
+    "blob": "96c9e857ed7a256dacde15c7d2b74b816dc1f40c",
+    "lines": 57
+  },
+  "diagnostics": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-134-errors.json",
+    "sha256": "2c138a4419e515ee87a8657a090b8a60a5479fed282f0241e5c83d84bb9972c6"
+  },
+  "checks": [
+    "Read complete candidate and actual cached CI134 diagnostic.",
+    "Removing exactly the one new change line restores all prior bytes; public/private declarations, assumptions, imports, options and budgets are unchanged.",
+    "The local tau is defined as exactly the oneSidedWholeComponentTransport function displayed in the actual diagnostic. change therefore gives the exact syntactic target of hTauPair without changing the goal.",
+    "The following product derivative identities preserve k, the endpoint and the raw X/psi order; actual smoothness at that endpoint and the two already-proved coordinate jet equalities supply the same inputs.",
+    "Checked pinned mathlib ContDiff/Basic.lean iteratedFDeriv_prodMk and the prior complete representative/factory proof. Same transport, inverse, original widths and M_sigma remain."
+  ],
+  "exact_single_line_supersession": true,
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

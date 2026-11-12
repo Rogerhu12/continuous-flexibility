@@ -1,0 +1,58 @@
+{
+  "kind": "relative_root_actual_inverse_composition_height_fixed_loss_adapters",
+  "status": "HELD_UNCOMPILED_REVIEW_PENDING",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RelativeRootJetBounds.lean",
+    "sha256": "04041d7f3ff5aa25e69fd8dde13e3895fefac9daee50044b720c530c58fc6af5",
+    "blob": "37e7d9efa9f483a2f7edee5a5037bb611729583c",
+    "lines": 199
+  },
+  "imports": [
+    "ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds",
+    "ContinuousFlexibility.Analysis.PlanarInverseJacobianMaterialJets",
+    "ContinuousFlexibility.Analysis.PointwiseProductMaterialJets",
+    "ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations"
+  ],
+  "public_declarations": [
+    "coordinateComposition_positiveJets_fixed_loss",
+    "pointwiseComposition_allJets_fixed_loss",
+    "relativeChart_positiveJets_fixed_loss",
+    "relativeHeightProduct_allJets_fixed_loss"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CoordinateCompositionMaterialBounds.lean",
+      "sha256": "9c5be75d75c6014baf98250769c1636eb10aceb0ca0b3330606498ac2d2f0a61",
+      "blob": "3dbe4b94ae8039d7b35ac5cb945b144b45c1d48d",
+      "lines": 119
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PlanarInverseJacobianMaterialJets.lean",
+      "sha256": "efad97efa9ab04f04101c8d1a64afe44305a3fa7fb6cf47cca5a1754c871052b",
+      "blob": "6a415ab790c50f989d558fc465cf1ad236e0539b",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PointwiseProductMaterialJets.lean",
+      "sha256": "2b27d9381160a9df94c2579c965d5ef26be7b496607e31a5ad2b32ce50b35fb0",
+      "blob": "fd26eeb587536423ad1223940ee11b9f089b60ae",
+      "lines": 119
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PointwiseMaterialJetOperations.lean",
+      "sha256": "6d100022491b6a0858badce398873d75f9a1642dc309f11beaf9ad7e1c4eb14c",
+      "blob": "58f9546e8979123ef35e36a79ca56b54081c5312",
+      "lines": 165
+    }
+  ],
+  "scope": [
+    "Actual local inverse germs and forward Jacobian lower; no quantitative inverse input.",
+    "Positive-order composition never needs an absolute angular lift bound.",
+    "Scalar composition handles zero order from the actual value bound.",
+    "One product-composition lemma applies to both actual height/reciprocal factor pairs.",
+    "All low orders and losses precede component numerical envelopes and Jacobian constants.",
+    "No actual atlas or geometry assumptions are added by these plain calculus adapters."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

@@ -1,5 +1,12 @@
-# N04Coordinates recovery snapshot 7
+# N04Coordinates source preservation, snapshot 8
 
-UNCOMPILED; source preservation only. Prior exact versions remain in earlier backup commits. No CI activation or completion claim.
+Frozen at 2026-11-12T10:25:07.957852+00:00. The active line parent is `3dbed841d8a8b62feaab8dc4572626a2dacf7cca`; its tree is `d9f34bf84b160803691e784164e492ef38a08aef`.
+The previous preservation commit is `e4b82376e12db310ee127046f40548b0caa94df7`.
 
-This tree is based on line commit 33d9140d067221b1cbc3914af186a85f9c1a6b22. Its first parent is backup 7e88cec8c751fe3c6f8421a39e4d2525a6e403b6 and its second parent is the line commit. SOURCE-INDEX.json locates every frozen draft byte version by exact SHA-256, using a prior commit or this snapshot. Only new byte versions are repeated in this tree; older versions are retained in its Git parents. Metadata includes cached actual CI logs and receipts for runs 128–132 and the current pending CI133 plan. Parent N04Coordinates and Realization remain open.
+This snapshot stores 20 new Lean source versions and indexes 697 exact
+draft and review files. SOURCE-INDEX.json resolves unchanged bytes to their earlier immutable
+commit/path; THIS_SNAPSHOT resolves to this commit. Earlier source versions remain in the parents.
+
+All saved drafts are UNCOMPILED unless separate exact CI evidence explicitly names them.
+Nothing under this directory is activated by the generated project root. This snapshot does
+not close N04Coordinates or its realization subnode and is not a merge request.

@@ -1,0 +1,31 @@
+{
+  "kind": "reviewed_held_material_transport_alias_compatibility",
+  "status": "HELD_REVIEWED_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/whole-material-angle/WholeComponentMaterialTransportAliasCandidateManifest.json",
+    "sha256": "90f8c3eecabeb4a1e1b9208d25ae43f33d7f4c7bac7c9ac7b790db3efb4fbfe2"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/whole-material-angle/WholeComponentMaterialTransport.lean",
+    "sha256": "86c5ec4854e82ad34298dc6ba236a019a0b75232f230ef8ea09af4bc93fcf61b",
+    "blob": "585be2904acdf5dd5da8346899f99670d2f173bf",
+    "lines": 140,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeComponentMaterialTransport.lean"
+  },
+  "supersedes_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeComponentMaterialTransport.lean",
+    "sha256": "37ee3f5e08d4c6a647e7d81fda0364ed4b89ee806894e3886e7c9f581474ad3b",
+    "blob": "37a8239458e0744265a853c70aca0138abbea481",
+    "lines": 139
+  },
+  "historical_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/WholeComponentMaterialTransportIndependentReview.json",
+    "sha256": "b1eb8dc9ea709c83ebfe8a0c4d269a35263b4c4e79f3c8834e83bf2514ca740a"
+  },
+  "independent_delta_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/WholeComponentMaterialTransportAliasIndependentReview.json",
+    "sha256": "8002abba2b5c3adabcbef3df2a6fcf81866d043faee030bb9de799edc04ffda4"
+  },
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

@@ -1,0 +1,11 @@
+{
+  "base_commit": "18d8867cba4f8f3686aa3c6db22d35023d279e2d",
+  "base_tree": "bc8b645bb2c43777f0c748866367a669300a4fb2",
+  "file": "src/ContinuousFlexibility/Analysis/OneSidedWholeComponentTransport.lean",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair134/OneSidedWholeComponentTransport.lean",
+  "sha256": "52648a5be5552f3e1e4be00517425ad97590a9f656bbcff6433b4bd7839d4a9c",
+  "before_blob": "5dce3683121cbe14c1668fe8af8a29ee5efdb23d",
+  "after_blob": "59c088961e44cc8c2f265831f64c71700c8f9dcb",
+  "original_manifest": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair134/OneSidedWholeComponentTransportCI134RepairCandidateManifest.json",
+  "original_manifest_sha256": "134107917ad5c750f3d4ec7baf3aa22765d8beebb0f6e2375f672b7d3a6fc4c0"
+}

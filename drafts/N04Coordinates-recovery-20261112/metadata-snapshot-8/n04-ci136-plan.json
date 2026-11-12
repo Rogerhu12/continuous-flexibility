@@ -1,0 +1,16 @@
+{
+  "label": 136,
+  "parent": "62e0f8c65df501487cada7f92771a13e76d05f6e",
+  "tree": "d9f34bf84b160803691e784164e492ef38a08aef",
+  "added": 2792,
+  "deleted": 0,
+  "changed_lean_files": 21,
+  "payload": "/workspace/scratch/bbbea77e4163/n04-ci136-tree-payload.json",
+  "manifest": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair135/WholeComponentReferenceIdentityNormalizedManifest.json",
+  "review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholeComponentReferenceIdentityCI135IndependentReview.json",
+    "sha256": "4114f3ec3c15a19574552188e2fe5cc8348d711661e88920ce90340d5910e961"
+  },
+  "current_main": "bb96c26fa8f49615fd0bc6848b57922832088a2b",
+  "public_statements_all_unchanged": true
+}

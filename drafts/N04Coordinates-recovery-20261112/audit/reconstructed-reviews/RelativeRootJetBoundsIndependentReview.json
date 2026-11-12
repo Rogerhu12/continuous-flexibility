@@ -1,0 +1,68 @@
+{
+  "kind": "independent_relative_root_fixed_loss_actual_calculus_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed static full-source and exact-provider review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RelativeRootJetBounds.lean",
+    "sha256": "04041d7f3ff5aa25e69fd8dde13e3895fefac9daee50044b720c530c58fc6af5",
+    "blob": "37e7d9efa9f483a2f7edee5a5037bb611729583c",
+    "lines": 199
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RelativeRootJetBoundsCandidateManifest.json",
+    "sha256": "6ca86c99c3e7c16acbd37b1cc5f43712257e64018b6090369b81757c9ef324c0"
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CoordinateCompositionMaterialBounds.lean",
+      "sha256": "9c5be75d75c6014baf98250769c1636eb10aceb0ca0b3330606498ac2d2f0a61",
+      "blob": "3dbe4b94ae8039d7b35ac5cb945b144b45c1d48d",
+      "lines": 119
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PlanarInverseJacobianMaterialJets.lean",
+      "sha256": "efad97efa9ab04f04101c8d1a64afe44305a3fa7fb6cf47cca5a1754c871052b",
+      "blob": "6a415ab790c50f989d558fc465cf1ad236e0539b",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PointwiseProductMaterialJets.lean",
+      "sha256": "2b27d9381160a9df94c2579c965d5ef26be7b496607e31a5ad2b32ce50b35fb0",
+      "blob": "fd26eeb587536423ad1223940ee11b9f089b60ae",
+      "lines": 119
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PointwiseMaterialJetOperations.lean",
+      "sha256": "6d100022491b6a0858badce398873d75f9a1642dc309f11beaf9ad7e1c4eb14c",
+      "blob": "58f9546e8979123ef35e36a79ca56b54081c5312",
+      "lines": 165
+    }
+  ],
+  "checks": [
+    "Read all 199 candidate lines and all four direct installed providers (119,111,119,165 lines). Their actual signatures and exact file hashes match the candidate manifest.",
+    "The private monotonicity lemma increases both the numerical coefficient and the state loss using Monotone p. All multiplication side conditions follow from nonnegative seminorms and positive coefficients.",
+    "coordinateComposition_positiveJets_fixed_loss applies the actual ordered-partition composition theorem at W=1 and envelope 1+A. Reindexing its order n-1 returns exactly the requested n>=1, and B(n-1) remains positive. Neither input needs a zeroth-order coordinate bound.",
+    "pointwiseComposition_allJets_fixed_loss handles n=0 directly from the outer actual scalar value; positive orders use the previous theorem. max(inputLoss,lossC) and A+B simultaneously dominate the two cases.",
+    "relativeChart_positiveJets_fixed_loss evaluates the actual inverse at F0(x). Both inverse germs have exactly the required base points, the Jacobian lower bound concerns F at G(F0(x)), and only forward F/F0 positive jets are quantitative inputs.",
+    "The installed planar inverse theorem obtains the first inverse derivative from the actual derivative matrix and determinant, and all higher inverse jets from the genuine inverse identity. The candidate then composes G with F0; no inverse derivative estimate is silently assumed.",
+    "Every low threshold and loss is chosen before A and kappa. max lowI lowC and max inputLoss lossI provide both hypotheses by seminorm monotonicity; Q=1+A+I dominates both forward and derived inverse envelopes.",
+    "relativeHeightProduct_allJets_fixed_loss first composes the true scalar f with g and then uses the installed local product inequality. It includes order zero of both scalar factors while retaining only positive coordinate jets.",
+    "The scalar composition smoothness has explicit target f composed with g, so its point and function parameters agree with hf/hg. The final Function.comp_apply reduction gives precisely y -> f0(y)*f(g(y)).",
+    "The four public names have no declaration collision in the current installed source tree. Candidate source, provider files, checkout/index/refs/checkpoint and CI were not modified."
+  ],
+  "public_declarations": [
+    "coordinateComposition_positiveJets_fixed_loss",
+    "pointwiseComposition_allJets_fixed_loss",
+    "relativeChart_positiveJets_fixed_loss",
+    "relativeHeightProduct_allJets_fixed_loss"
+  ],
+  "installed_public_name_collisions": [],
+  "findings": [],
+  "limitations": [
+    "The pointwise adapters require the stated actual forward jet bounds and positive Jacobian lower bound. They do not supply those geometric inputs or complete material/primitive bounds.",
+    "The static review does not establish Lean compilation or runtime heartbeat behavior."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

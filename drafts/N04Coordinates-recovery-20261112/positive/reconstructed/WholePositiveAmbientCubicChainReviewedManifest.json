@@ -1,0 +1,71 @@
+{
+  "kind": "actual_whole_positive_ambient_cubic_reviewed_sources",
+  "status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientPrincipal.lean",
+      "sha256": "b30636b6cb45bb56c15dc15c5a9025ba5ae7f592558a3cd91540aa8e861b853e",
+      "blob": "4ef9560d350442eb1de62517cf13eb5054800f70",
+      "lines": 87
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveFlatPrincipalPatch.lean",
+      "sha256": "45d18b220bddd0ba6ddbcaa66ab12cb0ae85e853fe3d76c9cc5fa5d0cfc9ed16",
+      "blob": "ba96df9fb836cdcbc61242437386a48b5cb483e1",
+      "lines": 157
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientBuffer.lean",
+      "sha256": "ee9971b2f20a215e7ec2542f410a221f341610ca7080293cabacaea4aba73bc5",
+      "blob": "581a9506db0dc512b1700f44a175630756f0d53b",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveAmbientCubicDifference.lean",
+      "sha256": "b8e40f0b9744f75b7564e616d3e3b7677f9c5aaf311cae7727042d8243eceb57",
+      "blob": "89faaca0829ba10a1347e8a15f6e88ba9ae3d3fd",
+      "lines": 209
+    }
+  ],
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed-reviews/CanonicalWholePositiveAmbientCubicIndependentReview.json",
+      "sha256": "5ca38cbe2041ac6226c15ce06a27cc25516c9a0d2b7ca67ff96a988d43cc31ef"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholePositiveAmbientCubicChainIndependentReview.json",
+      "sha256": "fb34cf16f4016ea0993d2f4c78927b1fee2b6fba22d6d8786aa45ce6ea3d6d2f"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholePositiveAmbientBufferIndependentReview.json",
+      "sha256": "d5566a82771eea5239265466617f9fa99ba2633684868b0461f5431485005049"
+    }
+  ],
+  "supporting_reviewed_sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/MaterialN01DifferenceFlatExtensionReviewedManifest.json",
+      "sha256": "cbf4168986f7acea04dd24ead415c9714bd67ff5f6fa4237bc9a5796cdcaf3a1"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveAmbientFieldsReviewedManifest.json",
+      "sha256": "f16eabf14cccd20b6436a3f03d31a5bd67f7e094247ae4c25aa8c6c233654fac"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/IntervalCubicOpenGermDivisionIndependentReview.json",
+      "sha256": "6e02d861d795a4e4eb6fe891fd1ac1c38a60964c35f530f509c1a8c5aa4f3a02"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveReferenceJetsReviewedManifest.json",
+      "sha256": "0a6d83c098b6663a01c4551e6059c6a2890eb98bac845e9a6dbcdb164ec88ca5"
+    }
+  ],
+  "scope": [
+    "Actual same transport/inverse/height and delta, no additional ambient identity assumption in the final theorem.",
+    "Global smooth representative with genuine interior principal germs; true negative-reference jets at interior endpoints and actual N01 flat-extension jets at ambient endpoints.",
+    "Actual open-component cubic factorization; quotient estimate on the closed strip from the actual numerator bound only on the open interval, loss six and constant 1/36.",
+    "No all-order uniform material estimate for the actual transformed numerator is claimed yet."
+  ],
+  "compiled": false,
+  "green_receipt_applies_to_sources": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

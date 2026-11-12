@@ -1,0 +1,22 @@
+{
+  "kind": "actual_whole_global_relative_symmetries_candidate",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalGlobalSymmetries.lean",
+    "sha256": "19f127a098fefcabab27d04b36c42b9dcaa8382517938a1a96f2fb8d44ea86a9",
+    "blob": "8baab739f63450a7b3650005261f226bb88312c0",
+    "lines": 106
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/WholeCanonicalGlobalSymmetries.lean",
+  "public_declarations": [
+    "n04WholeComponentField_equivariant_on_pieces",
+    "n04WholeCanonical_global_relative_symmetries"
+  ],
+  "proof_scope": [
+    "Uses the existing actual global selector from the reviewed global-regularity theorem. No extra global field representation.",
+    "Only evaluates each negative field on its true closed component and each positive field on its open component; no constraints on irrelevant totalized inverse values.",
+    "Actual closed-negative and whole-positive Matching symmetries imply global period and reflection with the identity/one fallback."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

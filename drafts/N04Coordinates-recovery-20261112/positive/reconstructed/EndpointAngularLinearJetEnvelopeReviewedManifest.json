@@ -1,0 +1,51 @@
+{
+  "kind": "new_actual_one_sided_angular_linear_high_jet_envelope",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointAngularLinearJetEnvelope.lean",
+    "sha256": "7b1bc4b7aab9c78e95ba44c113fbf437e32cf496eaf0c57ffd0d0e6088d52aee",
+    "blob": "fd62ad0254435e956368ff68c9aa4c6edfe77dc4",
+    "lines": 160
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/EndpointAngularLinearJetEnvelope.lean",
+  "public_declarations": [
+    "abs_monotone_periodicLift_displacement_le",
+    "positiveAngularTaylorInterpolation_sub_snd_eq_correction",
+    "exists_rawEndpointAngular_displacement_linear_jet_envelope"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointTaylorLinearJetEnvelope.lean",
+      "sha256": "ba9eceb2b4904c075af92caa90a5d7ecba8e5a70b0fa9dd11e05c98c24df4ee4"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/OneSidedBoundaryJets.lean",
+      "sha256": "55ca849c044062473814de49d14d942fa829dc9d4b500e4707c88f6651fa8662"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/TaylorReferenceIdentity.lean",
+      "sha256": "afdff518350fd9ae40e1d8d555bd6e699358856d558e9960dc1f596ad1f1b344"
+    }
+  ],
+  "claims": [
+    "Normalized monotone degree-one real lifts have displacement bounded by their positive period, uniformly over the lift.",
+    "The actual angular interpolation minus the angular projection equals the actual endpoint Taylor correction of displacement traces.",
+    "At any already selected delta with inverse at most U, raw positive endpoint jets through n+N bounded by B produce every full displacement jet through N bounded by C(n,N) U^(N+1) B.",
+    "Raw endpoint fields need only genuine one-sided strip smoothness and ordinary pointwise smoothness at the root circle. The chosen width and Taylor degree remain fixed."
+  ],
+  "limitations": [
+    "The raw high-jet bound is an intermediate input awaiting the actual N01 root production estimate; this file does not assert a completed material or primitive bound.",
+    "No bound on the unbounded angular lift itself is assumed.",
+    "No common infinite-order collar is inferred from pointwise root smoothness."
+  ],
+  "compiled": false,
+  "checkpoint_checkout_index_refs_CI_authority_plan_modified": false,
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointAngularLinearJetEnvelopeCandidateManifest.json",
+    "sha256": "44aad6fb0ecda85015882aa36844913290d659d9133a7c58c2b074c7bd70fa39"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/EndpointAngularLinearJetEnvelopeIndependentReview.json",
+    "sha256": "f172c2b54d00de850a195c501018666021a8e411193d1f30caa795ce93d57c22"
+  }
+}

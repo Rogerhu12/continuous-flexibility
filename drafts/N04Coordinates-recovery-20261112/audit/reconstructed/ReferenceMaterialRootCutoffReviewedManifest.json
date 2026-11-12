@@ -1,0 +1,54 @@
+{
+  "kind": "reviewed_actual_same_material_root_centered_cutoff_family",
+  "status": "HELD_UNCOMPILED_INDEPENDENTLY_REVIEWED",
+  "author": "/root/audit_coordinates",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ReferenceMaterialRootCutoff.lean",
+    "sha256": "d4195345402a78d021011d62c0306ff23c398d5f259510cd685ea53de0bf6867",
+    "blob": "fa32bf57c16a904163d43ec4f8a1d81983db3540",
+    "lines": 189,
+    "target": "src/ContinuousFlexibility/Analysis/ReferenceMaterialRootCutoff.lean"
+  },
+  "direct_imports": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ReferenceAffineCutoffNormalTest.lean",
+      "sha256": "096d467751dd3ec995ca9331abccb52bce704569ab10c2a421809586e793c47a"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/OpticalCollarCutoff.lean",
+      "sha256": "3421f842b921661ef9d576a5d1b89285f982f78d83408310687976a9333e381e"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N08EndpointDistanceEnvelope.lean",
+      "sha256": "46a5a1ddbbff83dc3c4932736e5ce00c6a42b35bd87cde331577d39cdee75171"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialCellHeightTransport.lean",
+      "sha256": "f3e248ee2e2cc780fc90f5f89e02f1214da6eadca83a7377c2a2342a9ce793d9"
+    }
+  ],
+  "mathematics": [
+    "A difference of the two actual returnOpticalCutoff functions is compactly supported in [c-delta,c+delta], equals one near c, and has absolute value at most one.",
+    "At each derivative order n a fixed constant is chosen before c/delta/r and bounds the true derivative by K*delta^(-n).",
+    "The chosen radius is exactly half of endpointDistance D c. Its closed support stays in the actual core, regardless of the distance to other turning roots.",
+    "The installed N08 endpoint-distance estimate gives cutoff jets <=K*E0(c)^A with K/A fixed before c and evaluation r. No unscaled E0>=1 premise is used.",
+    "For every genuine containing cell m, the same uniform derivative cost transfers to the original T.sample m via the actual materialCell_E0_rpow_same_cell theorem. No whole component or cutoff support is assumed contained in m.",
+    "The displayed actual family is passed directly to the original same-G first-normal estimate and retains the entire weighted forcing, angular derivative and border row."
+  ],
+  "limits": [
+    "No absolute optical root lower bound is claimed.",
+    "The L2 coercive inequality still requires an additional genuinely justified comparison to the desired root/primitive quantity; cutoff costs are not discarded.",
+    "No change of D/T/S/G, cell labels, sampling map, or active proof source occurs."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false,
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ReferenceMaterialRootCutoffCandidateManifest.json",
+    "sha256": "087f9194929bbea0f205fa58ec56b92970559016ab1d2991f18da126abf14f57"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed-reviews/ReferenceMaterialCutoffTestsIndependentReview.json",
+    "sha256": "6102fa8cb426ebb803ec20a86fb813146c8912b60bf02ff71358969a93ab1855"
+  },
+  "scope_note": "Actual same-G forcing, cutoff and material/sample costs only; no uniform inverse turning slope or final primitive bound is asserted."
+}

@@ -1,0 +1,19 @@
+{
+  "kind": "reviewed_actual_whole_global_regularity_source",
+  "status": "HELD_REVIEWED_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalGlobalRegularityCandidateManifest.json",
+    "sha256": "67abbafa897df32f83b6d800b83be532ebba09bfe996d6248e127b9cae5e4d6e"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalGlobalRegularity.lean",
+    "sha256": "ba6f284df91e959724ac50d3ee1a11703b697bd76a11d5ad78aa5b1a12fe4513",
+    "blob": "4ee5e602015799f1e34226f8f15967639f6fa08c",
+    "lines": 103
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/WholeCanonicalGlobalRegularityIndependentReview.json",
+    "sha256": "d2f7c310d84a66bb5d681cf10ff5327bae643ddebc91453931b1fb881f905b5f"
+  },
+  "compiled": false
+}

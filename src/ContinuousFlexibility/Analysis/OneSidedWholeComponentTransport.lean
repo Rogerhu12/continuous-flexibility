@@ -44,7 +44,8 @@ private theorem endpointRepresentative_fderiv_eq
     fderiv ℝ (oneSidedBoundaryTaylorRepresentative n x F) (x, θ) =
       fderiv ℝ F (x, θ) := by
   have he := iteratedFDeriv_oneSidedBoundaryTaylorRepresentative hab hF hx hFx n hn θ
-  ext v
+  apply ContinuousLinearMap.ext
+  intro v
   simpa only [iteratedFDeriv_one_apply] using
     congrArg (fun T : PolarPoint [×1]→L[ℝ] ℝ => T (fun _ => v)) he
 
@@ -61,9 +62,9 @@ theorem exists_oneSidedWholeComponentTransport_family
     (hψangle : ∀ i side θ, κφ ≤ angularPartial (ψ i side) (if side then r else l, θ))
     (hψjets : ∀ i side k, 1 ≤ k → k ≤ n + 2 → ∀ θ,
       ‖iteratedFDeriv ℝ k (ψ i side) (if side then r else l, θ)‖ ≤ M)
-    (hψperiod : ∀ i side x ∈ Ioo (a side) (b side), ∀ θ,
+    (hψperiod : ∀ i side, ∀ x ∈ Ioo (a side) (b side), ∀ θ,
       ψ i side (x, θ + Real.pi) = ψ i side (x, θ) + Real.pi)
-    (hψodd : ∀ i side x ∈ Ioo (a side) (b side), ∀ θ,
+    (hψodd : ∀ i side, ∀ x ∈ Ioo (a side) (b side), ∀ θ,
       ψ i side (x, -θ) = -ψ i side (x, θ))
     (hX : ∀ i side, ContDiffOn ℝ ∞ (X i side)
       (Ioo (a side) (b side) ×ˢ (univ : Set ℝ)))
@@ -72,9 +73,9 @@ theorem exists_oneSidedWholeComponentTransport_family
     (hXlow : ∀ i side θ, κX ≤ radialPartial (X i side) (if side then r else l, θ))
     (hXjets : ∀ i side k, 1 ≤ k → k ≤ n + 1 → ∀ θ,
       ‖iteratedFDeriv ℝ k (X i side) (if side then r else l, θ)‖ ≤ M)
-    (hXperiod : ∀ i side x ∈ Ioo (a side) (b side), ∀ θ,
+    (hXperiod : ∀ i side, ∀ x ∈ Ioo (a side) (b side), ∀ θ,
       X i side (x, θ + Real.pi) = X i side (x, θ))
-    (hXeven : ∀ i side x ∈ Ioo (a side) (b side), ∀ θ,
+    (hXeven : ∀ i side, ∀ x ∈ Ioo (a side) (b side), ∀ θ,
       X i side (x, -θ) = X i side (x, θ)) :
     let δ := endpointAngularWidth (n + 1) l r c d κφ M
     0 < δ ∧ δ ≤ 1 ∧ 2 * δ < r - l ∧ δ < c - l ∧ δ < r - d ∧
@@ -181,6 +182,7 @@ theorem exists_oneSidedWholeComponentTransport_family
   intro side k hk θ
   have hτpair : τ = fun p => ((τ p).1, (τ p).2) :=
     funext (fun p => (Prod.eta (τ p)).symm)
+  change iteratedFDeriv ℝ k τ (if side then r else l, θ) = _
   conv_lhs => rw [hτpair]
   rw [iteratedFDeriv_prodMk hτ.fst.contDiffAt hτ.snd.contDiffAt
       (by simp : (k : ℕ∞ω) ≤ ∞),
