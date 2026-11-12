@@ -182,6 +182,7 @@ theorem exists_oneSidedWholeComponentTransport_family
   intro side k hk θ
   have hτpair : τ = fun p => ((τ p).1, (τ p).2) :=
     funext (fun p => (Prod.eta (τ p)).symm)
+  change iteratedFDeriv ℝ k τ (if side then r else l, θ) = _
   conv_lhs => rw [hτpair]
   rw [iteratedFDeriv_prodMk hτ.fst.contDiffAt hτ.snd.contDiffAt
       (by simp : (k : ℕ∞ω) ≤ ∞),
