@@ -56,7 +56,7 @@ theorem n04Realization_intervalCubic_parameterJets
     obtain ⟨F, hF, he, hz⟩ := hrep x hx
     refine ⟨translateRadialField l F,
       hF.comp ((contDiff_const.add contDiff_fst).prodMk contDiff_snd),
-      (fun q hq => he _ (hmap q hq)), ?_⟩
+      (fun q hq => he (hmap q hq)), ?_⟩
     intro c θ i hi
     have hendpoint : l + (if c then r - l else 0) = if c then r else l := by
       cases c <;> simp <;> ring

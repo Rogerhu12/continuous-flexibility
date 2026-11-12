@@ -80,8 +80,8 @@ theorem n04Realization_forwardChart_finite_E0_jets
   have hrhoMono (z : AnnularState S × ℝ) (_hz : z ∈ U) :
       Monotone (fun r => rho r z) := by
     intro a b hab
-    exact add_le_add_right
-      (add_le_add_left (stateGrading_monotone S hab (z.1 - C.referenceState)) 1) |z.2|
+    dsimp only [rho]
+    linarith only [stateGrading_monotone S hab (z.1 - C.referenceState)]
   have hforward : ∀ z ∈ U, ∀ m x, x ∈ Ω z m →
       ContDiffAt ℝ ∞ (K.chart z m) x := by
     intro z hz m x hx

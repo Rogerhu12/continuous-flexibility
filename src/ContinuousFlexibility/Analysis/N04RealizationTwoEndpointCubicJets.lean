@@ -99,7 +99,7 @@ theorem n04Realization_twoEndpointCubic_parameterJets
       radialCubicQuotient F (R - q.1, q.2) * (R - q.1) ^ 3 =
           F (R - q.1, q.2) := by
         simpa only [mul_comm] using cube_mul_cubicQuotient (h0 q.2) (R - q.1)
-      _ = N x (R - q.1, q.2) := he _ hqr
+      _ = N x (R - q.1, q.2) := he hqr
   have hf₂ : ∀ x ∈ U, ∀ q ∈ Ω, e₂ x q = q.1 ^ 3 * er x q := by
     intro x hx q hq
     have hqr := n04Realization_reflect_mem_cylinder hq

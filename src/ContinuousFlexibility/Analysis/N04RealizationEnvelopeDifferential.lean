@@ -71,7 +71,10 @@ theorem n04Realization_envelope_add_jets
   rw [← iteratedFDeriv_add_apply
     ((hf x).of_le (by simp : (n : ℕ∞ω) ≤ ∞))
     ((hg x).of_le (by simp : (n : ℕ∞ω) ≤ ∞))] at h
-  simpa only [Pi.add_apply] using h
+  have heq : f x + g x = (fun y => f x y + g x y) :=
+    funext (fun y => Pi.add_apply (f x) (g x) y)
+  rw [heq] at h
+  exact h
 
 theorem n04Realization_norm_iteratedFDeriv_sqrt_le
     {t : ℝ} (ht : 0 < t) (n : ℕ) :

@@ -27,8 +27,8 @@ theorem n04Realization_material_sample_value_envelopes
     (hs : ∀ x, sample x ∈ Ioo D.a D.b)
     (hE : ∀ x, 1 ≤ T.E0 (point x))
     {L : ℝ} (hL : 0 ≤ L)
-    (hshift : ∀ x, endpointX 1 (endpointDistance D (sample x)) ≤
-      endpointX 1 (endpointDistance D (point x)) + L) :
+    (hshift : ∀ x, endpointX 1 (Statements.endpointDistance D (sample x)) ≤
+      endpointX 1 (Statements.endpointDistance D (point x)) + L) :
     HasPositiveEnvelope (fun x => T.E0 (point x))
       (fun x => T.H (point x) / T.H (sample x)) ∧
     HasPositiveEnvelope (fun x => T.E0 (point x)) (fun x => T.E0 (sample x)) := by
@@ -63,7 +63,8 @@ theorem n04Realization_sample_point_envelope_to_point
   have hsampleQ : HasPositiveEnvelope Q sample :=
     hcost.base_mono (fun x => zero_le_one.trans (hpoint x)) hpQ
   have hself : HasPositiveEnvelope Q Q :=
-    ⟨1, 1, zero_lt_one, zero_lt_one, fun x => by simp only [Real.rpow_one, one_mul]⟩
+    ⟨1, 1, zero_lt_one, zero_lt_one, fun x => by
+      simpa only [Real.rpow_one, one_mul] using (le_refl (Q x))⟩
   have hbase : HasPositiveEnvelope Q (fun x => sample x * point x * state x) := by
     simpa only [Q, mul_assoc] using
       hsampleQ.mul hQ hself (fun x => zero_le_one.trans (hQ x))

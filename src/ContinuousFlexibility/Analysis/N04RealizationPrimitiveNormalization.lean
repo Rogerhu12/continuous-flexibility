@@ -16,7 +16,7 @@ noncomputable section
 namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements CanonicalGeometry
-open scoped ContDiff
+open scoped ContDiff BigOperators
 
 set_option backward.isDefEq.respectTransparency false
 
@@ -92,6 +92,16 @@ theorem n04Realization_currentJets_normalized
     · simpa only [n04Realization_differenceJets_normalized href,
         normalizedCanonicalData_cell] using h.2.1
     · exact n04Realization_directional_bounds_congr
+        (P := fun J => ∀ k : ℕ, ∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+          ∀ z ∈ sectorNeighborhood S base ε ε, ∀ v : Fin k → Parameter S,
+            ∀ m a (p : unitStrip) i j, i + j ≤ s →
+              |J k z v a m i j p| ≤
+                B * T.E0 (T.sample (K.cell m)) ^ B *
+                  T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) *
+                  ((1 + parameterGrading S (s + loss) z) *
+                      ∏ l, parameterGrading S base (v l) +
+                    ∑ l : Fin k, parameterGrading S (s + loss) (v l) *
+                      ∏ q ∈ Finset.univ.erase l, parameterGrading S base (v q)))
         (n04Realization_differenceJets_normalized href).symm h.2.2
 
 /-- Reference principal coefficients are not modified. The reference

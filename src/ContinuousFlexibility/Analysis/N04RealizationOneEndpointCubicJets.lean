@@ -32,7 +32,7 @@ private theorem n04Realization_cubicTaylorWeight_bounds
   have hpow : t ^ a ≤ 1 := pow_le_one₀ ht.1.le ht.2.le
   have hmul := mul_le_mul hsq hpow (pow_nonneg ht.1.le a) (by norm_num : (0 : ℝ) ≤ 1)
   constructor
-  · positivity
+  · exact mul_nonneg (mul_nonneg (by norm_num) (sq_nonneg _)) (pow_nonneg ht.1.le a)
   · nlinarith
 
 /-- All actual parameter jets of an actual cubic quotient lose exactly
@@ -69,10 +69,10 @@ theorem n04Realization_oneEndpointCubic_parameterJets
     if t ∈ Ioo (0 : ℝ) 1 then c t * mixedDerivative (a + 3) b (N x) (q t) else 0
   let J : ∀ t : ℝ, SmoothDirections U (fun x => f x t) := fun t => by
     by_cases ht : t ∈ Ioo (0 : ℝ) 1
-    · simpa only [f, if_pos ht, Function.comp_apply, smul_apply,
-        ContinuousLinearMap.id_apply, smul_eq_mul] using
-        smoothDirections_postcompCLM (RN.parameter (a + 3) b (q t) (hq t ht))
-          (c t • ContinuousLinearMap.id ℝ ℝ)
+    · exact (smoothDirections_postcompCLM (RN.parameter (a + 3) b (q t) (hq t ht))
+        (c t • ContinuousLinearMap.id ℝ ℝ)).congr (fun x _ => by
+          simp only [Function.comp_apply, smul_apply, ContinuousLinearMap.id_apply,
+            smul_eq_mul, f, if_pos ht])
     · simpa only [f, if_neg ht] using smoothDirections_constant Q.open_domain (0 : ℝ)
   have hJD (k : ℕ) (x : E) (hx : x ∈ U) (v : Fin k → E)
       (t : ℝ) (ht : t ∈ Ioo (0 : ℝ) 1) :
@@ -109,7 +109,8 @@ theorem n04Realization_oneEndpointCubic_parameterJets
     have hn := (contDiffOn_mixedDerivative (isOpen_Ioo.prod isOpen_univ)
       (RN.spatial x hx) (a + 3) b).continuousOn.comp hcoord.continuousOn hq
     have hfOn : ContinuousOn (f x) (Ioo (0 : ℝ) 1) :=
-      (hc.continuousOn.mul hn).congr (fun t ht => by simp only [f, if_pos ht])
+      (hc.continuousOn.mul hn).congr (fun t ht => by
+        simp only [f, if_pos ht, Function.comp_apply])
     exact hfOn.aestronglyMeasurable measurableSet_Ioo
   have hvalue (x : E) (hx : x ∈ U) :
       mixedDerivative a b (e x) p = ∫ t, f x t ∂μ := by
@@ -122,7 +123,7 @@ theorem n04Realization_oneEndpointCubic_parameterJets
       calc
         r ^ 3 * e x (r, θ) = N x (r, θ) :=
           (hfactor x hx (r, θ) ⟨hr, mem_univ _⟩).symm
-        _ = F (r, θ) := (he (r, θ) ⟨hr, mem_univ _⟩).symm
+        _ = F (r, θ) := (@he (r, θ) ⟨hr, mem_univ _⟩).symm
         _ = r ^ 3 * radialCubicQuotient F (r, θ) :=
           (cube_mul_cubicQuotient (h0 θ) r).symm
     rw [mixedDerivative_eq_of_eqOn_radialCylinder heq a b hp.1,
@@ -132,7 +133,7 @@ theorem n04Realization_oneEndpointCubic_parameterJets
     apply integral_congr_ae
     filter_upwards [ae_restrict_mem measurableSet_Ioo] with t ht
     have hd := mixedDerivative_eq_of_eqOn_radialCylinder
-      (p := q t) (fun r hr θ => he (r, θ) ⟨hr, mem_univ _⟩)
+      (p := q t) (fun r hr θ => @he (r, θ) ⟨hr, mem_univ _⟩)
       (a + 3) b (hq t ht).1
     simpa only [f, if_pos ht, c, q, mul_assoc] using
       congrArg (fun w : ℝ => (1 / 2 : ℝ) * (1 - t) ^ 2 * t ^ a * w) hd
