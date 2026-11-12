@@ -81,6 +81,7 @@ local instance n01TransportCharacteristicInterpolationStateSMul (S : PhysicalSpa
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
+set_option diagnostics true in
 /-- The same actual characteristic bound on the parameter space that
 also contains the independent residual. -/
 theorem N01Properties.minusCharacteristicSpeed_correction_joint_growth
@@ -105,21 +106,49 @@ theorem N01Properties.minusCharacteristicSpeed_correction_joint_growth
         (pairGrading (pairGrading (sectorGrading S) realGrading)
           (S.circle (3 / 4 : ℝ)).grading)
         (fun m => radialE (D.cellIndex (j m))) J B L := by
-  let data := hN.exists_minusCharacteristicSpeed_strip_joint_growth
-    hS hT j hcell l h hl hh hlam hP hpositive
-  let K := data.choose
-  let B := data.choose_spec.choose
-  let L := data.choose_spec.choose_spec.choose
+  let p : ℕ → Seminorm ℝ (StateDirections S × ℝ) :=
+    pairGrading (sectorGrading S) realGrading
+  let q : ℕ → Seminorm ℝ (CircleSpace S) := (S.circle (3 / 4 : ℝ)).grading
+  let U : Set (StateDirections S × ℝ) := sectorNeighborhood S base ε ε
+  let V : ℕ → Set PolarPoint := fun m => Ioo (l m) (h m) ×ˢ univ
+  let f : ℕ → (StateDirections S × ℝ) × PolarPoint → ℝ := fun _ x =>
+    minusCharacteristicSpeed (originalCoefficients D S C (liftSectorParameter S C x.1)) x.2
+  let W : ℕ → ℝ := fun m => radialE (D.cellIndex (j m))
+  let data : ∃ K : ∀ m, SmoothDirections (U ×ˢ V m) (f m),
+      ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧ UniformWeightedJointGrowth p W K B L :=
+    hN.exists_minusCharacteristicSpeed_strip_joint_growth
+      (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+      hS hT j hcell l h hl hh hlam hP hpositive
+  let K : ∀ m, SmoothDirections (U ×ˢ V m) (f m) := data.choose
+  let B : ℕ := data.choose_spec.choose
+  let L : ℕ := data.choose_spec.choose_spec.choose
   have hb : base ≤ B := data.choose_spec.choose_spec.choose_spec.1
   have hloss : loss ≤ B := data.choose_spec.choose_spec.choose_spec.2.1
-  have hg : UniformWeightedJointGrowth (pairGrading (sectorGrading S) realGrading)
-      (fun m => radialE (D.cellIndex (j m))) K B L :=
+  have hg : UniformWeightedJointGrowth p W K B L :=
     data.choose_spec.choose_spec.choose_spec.2.2
-  have hlift := hg.fstParameter (S.circle (3 / 4 : ℝ)).grading
-    (fun m => zero_le_one.trans (one_le_radialE_of_nat _))
-    (sectorNeighborhood_isOpen S base ε ε) (fun _ => isOpen_Ioo.prod isOpen_univ)
-  exact ⟨B, L, hb, hloss, hlift.congr J (fun _ _ _ => rfl)⟩
+  have hU : IsOpen U := sectorNeighborhood_isOpen S base ε ε
+  have hV (m : ℕ) : IsOpen (V m) := isOpen_Ioo.prod isOpen_univ
+  let K' : ∀ m, SmoothDirections ((U ×ˢ (univ : Set (CircleSpace S))) ×ˢ V m)
+      (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+        f m (x.1.1, x.2)) :=
+    fun m => SmoothDirections.fstParameter
+      (E := StateDirections S × ℝ) (F := CircleSpace S) (P := PolarPoint) (G := ℝ)
+      (U := U) (V := V m) (f := f m) (K m) hU (hV m)
+  have hlift : UniformWeightedJointGrowth (pairGrading p q) W K' B L :=
+    UniformWeightedJointGrowth.fstParameter
+      (I := ℕ) (E := StateDirections S × ℝ) (F := CircleSpace S)
+      (P := PolarPoint) (G := ℝ) (p := p) (W := W) (U := U) (V := V)
+      (f := f) (J := K) (base := B) (loss := L) q
+      (fun m => zero_le_one.trans (one_le_radialE_of_nat (D.cellIndex (j m)))) hg hU hV
+  exact ⟨B, L, hb, hloss, UniformWeightedJointGrowth.congr
+    (I := ℕ) (E := (StateDirections S × ℝ) × CircleSpace S) (P := PolarPoint) (F := ℝ)
+    (p := pairGrading p q) (W := W) (U := U ×ˢ univ) (V := V)
+    (f := fun m x => f m (x.1.1, x.2))
+    (g := fun _ x => minusCharacteristicSpeed
+      (originalCoefficients D S C (liftSectorParameter S C x.1.1)) x.2)
+    (J := K') (base := B) (loss := L) hlift J (fun _ _ _ => rfl)⟩
 
+set_option diagnostics true in
 /-- Primitive characteristic jets have exactly the total spatial order
 as their exponent budget on the same high scale as the angular fields. -/
 theorem N01Properties.minusCharacteristicSpeed_correction_mixed_interpolation
@@ -150,26 +179,54 @@ theorem N01Properties.minusCharacteristicSpeed_correction_mixed_interpolation
           K * radialE (D.cellIndex (j m)) ^ Q *
             (1 + p (N + B + 1) x + p (N + B + 1) w) ^
               (((a + b : ℕ) : ℝ) / ((N : ℝ) + 1)) := by
-  let data := hN.minusCharacteristicSpeed_correction_joint_growth
-    hS hT j hcell l h hl hh hlam hP hpositive J
-  let B₀ := data.choose
-  let L := data.choose_spec.choose
-  have hg : UniformWeightedJointGrowth
-      (pairGrading (pairGrading (sectorGrading S) realGrading)
-        (S.circle (3 / 4 : ℝ)).grading)
-      (fun m => radialE (D.cellIndex (j m))) J B₀ L :=
+  let p : ℕ → Seminorm ℝ ((StateDirections S × ℝ) × CircleSpace S) :=
+    pairGrading (pairGrading (sectorGrading S) realGrading) (S.circle (3 / 4 : ℝ)).grading
+  let U : Set ((StateDirections S × ℝ) × CircleSpace S) :=
+    sectorNeighborhood S base ε ε ×ˢ univ
+  let V : ℕ → Set PolarPoint := fun m => Ioo (l m) (h m) ×ˢ univ
+  let f : ℕ → (((StateDirections S × ℝ) × CircleSpace S) × PolarPoint) → ℝ :=
+    fun _ x => minusCharacteristicSpeed
+      (originalCoefficients D S C (liftSectorParameter S C x.1.1)) x.2
+  let W : ℕ → ℝ := fun m => radialE (D.cellIndex (j m))
+  let data : ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧ UniformWeightedJointGrowth p W J B L :=
+    hN.minusCharacteristicSpeed_correction_joint_growth
+      (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+      hS hT j hcell l h hl hh hlam hP hpositive J
+  let B₀ : ℕ := data.choose
+  let L : ℕ := data.choose_spec.choose
+  have hg : UniformWeightedJointGrowth p W J B₀ L :=
     data.choose_spec.choose_spec.2.2
-  have hdomain (m : ℕ) : Convex ℝ
-      ((sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) ×ˢ
-        (Ioo (l m) (h m) ×ˢ (univ : Set ℝ))) :=
+  have hdomain (m : ℕ) : Convex ℝ (U ×ˢ V m) :=
     ((sectorNeighborhood_convex S base ε ε).prod convex_univ).prod
       ((convex_Ioo (l m) (h m)).prod convex_univ)
-  let bound := hg.mixed_diagonal_spatial_interpolation
-    (correctionParameterGrading_monotone S) (correctionParameterGrading_hasInterpolation hS)
-    (fun m => one_le_radialE_of_nat _) (fun _ => isOpen_Ioo.prod isOpen_univ) hdomain nmax
-  refine ⟨bound.choose, fun A hA N n hn a b hab => ?_⟩
-  obtain ⟨K, Q, hK, hQ, hb⟩ := bound.choose_spec.2 A hA N n hn a b hab
+  let bound : ∃ B : ℕ, B₀ ≤ B ∧ ∀ A : ℝ, 0 ≤ A →
+      ∀ N n : ℕ, n ≤ nmax → ∀ a b : ℕ, a + b ≤ N →
+      ∃ K Q : ℝ, 0 ≤ K ∧ 0 ≤ Q ∧
+        ∀ m x, x ∈ U → ∀ w : (StateDirections S × ℝ) × CircleSpace S,
+          p B x ≤ A → p B w ≤ 1 → ∀ y ∈ V m,
+          |jointMixedDiagonal (J m) n a b x w y| ≤
+            K * W m ^ Q * (1 + p (N + B + 1) x + p (N + B + 1) w) ^
+              (((a + b : ℕ) : ℝ) / ((N : ℝ) + 1)) :=
+    UniformWeightedJointGrowth.mixed_diagonal_spatial_interpolation
+      (I := ℕ) (E := (StateDirections S × ℝ) × CircleSpace S)
+      (p := p) (W := W) (U := U) (V := V) (f := f) (J := J) (base := B₀) (loss := L)
+      hg (correctionParameterGrading_monotone S) (correctionParameterGrading_hasInterpolation hS)
+      (fun m => one_le_radialE_of_nat (D.cellIndex (j m)))
+      (fun _ => isOpen_Ioo.prod isOpen_univ) hdomain nmax
+  let B : ℕ := bound.choose
+  refine ⟨B, fun A hA N n hn a b hab => ?_⟩
+  let scaleData : ∃ K Q : ℝ, 0 ≤ K ∧ 0 ≤ Q ∧
+      ∀ m x, x ∈ U → ∀ w : (StateDirections S × ℝ) × CircleSpace S,
+        p B x ≤ A → p B w ≤ 1 → ∀ y ∈ V m,
+        |jointMixedDiagonal (J m) n a b x w y| ≤
+          K * W m ^ Q * (1 + p (N + B + 1) x + p (N + B + 1) w) ^
+            (((a + b : ℕ) : ℝ) / ((N : ℝ) + 1)) :=
+    bound.choose_spec.2 A hA N n hn a b hab
+  let K : ℝ := scaleData.choose
+  let Q : ℝ := scaleData.choose_spec.choose
+  have hK : 0 ≤ K := scaleData.choose_spec.choose_spec.1
+  have hQ : 0 ≤ Q := scaleData.choose_spec.choose_spec.2.1
   exact ⟨K, Q, hK, hQ, fun m x hx w hxlow hwlow y hy =>
-    hb m x hx w hxlow hwlow y ⟨hy, mem_univ _⟩⟩
+    scaleData.choose_spec.choose_spec.2.2 m x hx w hxlow hwlow y ⟨hy, mem_univ _⟩⟩
 
 end ContinuousFlexibility.Statements
