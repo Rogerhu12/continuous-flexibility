@@ -70,10 +70,11 @@ theorem coupledCircleShiftedCompose_decode
     (travel : ℕ → ℝ) (ψ v : M.Space) (m : ℕ) (θ : ℝ) :
     M.decode (coupledCircleShiftedCompose hD hT hγ hM hI travel ψ v) m θ =
       M.decode v m (θ + travel m + M.decode ψ m θ) := by
-  rw [coupledCircleShiftedCompose, coupledCircleKernel_decode_apply]
-  simp only [iteratedDeriv_zero, Fin.prod_univ_zero, mul_one,
-    coupledCircleTranslation_decode]
-  exact congrArg (M.decode v m) (add_right_comm θ (M.decode ψ m θ) (travel m))
+  have hcomp := coupled_circleComposition_decode hD hT hγ hM hI ψ
+    (coupledCircleTranslation hM travel v) m θ
+  have htranslation := coupledCircleTranslation_decode hM travel v m (θ + M.decode ψ m θ)
+  exact hcomp.trans (htranslation.trans
+    (congrArg (M.decode v m) (add_right_comm θ (M.decode ψ m θ) (travel m))))
 
 private theorem coupled_circle_decode_smul (a : ℝ) (ψ : M.Space) (m : ℕ) (θ : ℝ) :
     M.decode (a • ψ) m θ = a * M.decode ψ m θ := by
