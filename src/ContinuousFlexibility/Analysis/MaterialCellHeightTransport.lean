@@ -89,7 +89,7 @@ theorem materialCell_height_ratio
   have hp : 0 < T.H s := (hT.2.1 s (hRef.choose_spec.2.1.2.2.2.1 m hs)).2.1
   apply (div_le_iff₀ hp).mpr
   have h := hb m r s hr hs
-  simpa only [Real.rpow_one, Real.rpow_zero, mul_one, mul_assoc, mul_comm, mul_left_comm] using h
+  simpa only [Real.rpow_one, Real.rpow_zero, mul_one, one_mul, mul_assoc, mul_comm, mul_left_comm] using h
 
 /-- The coefficient envelope itself can be moved to the physical source
 point; no uniform lower bound of E0 by one is needed. -/

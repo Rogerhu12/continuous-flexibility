@@ -31,6 +31,7 @@ variable {D : ReferenceData} {S : PhysicalSpacesData}
   {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
   (hs : stateSector S z.1) (m : ℕ)
 
+include hA in
 theorem n04Coordinates_referenceClosed_eq_interval :
     physicalPieceClosed S K (C.referenceState, 0) m =
       Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ (univ : Set ℝ) := by

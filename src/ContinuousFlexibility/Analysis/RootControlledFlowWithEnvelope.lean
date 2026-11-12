@@ -39,6 +39,7 @@ theorem rootPolynomialControlRadius_bounds {ρ M : ℝ}
     have h := (le_div_iff₀ hden).mp hδbound
     nlinarith only [h, hδ.le]
   refine ⟨hδ, hδρ, hδone, hsmall, ?_⟩
+  change δ⁻¹ ≤ ρ⁻¹ + 1 + 4 * (M + 1)
   have hρinv : 0 ≤ ρ⁻¹ := inv_nonneg.mpr hρ.le
   by_cases hr : ρ ≤ min 1 (1 / (4 * (M + 1)))
   · have he : δ = ρ := min_eq_left hr
@@ -104,7 +105,7 @@ theorem exists_rootRescaledFlow_material_family
       A 1 * W ^ (A 1) * (1 + p (1 + inputLoss) (w i)) ≤ M := by
     have h := mul_le_mul_of_nonneg_left
       (show 1 + p (1 + inputLoss) (w i) ≤ 2 by linarith only [hfirst i hi])
-      (mul_nonneg hA0 (Real.rpow_nonneg hW0 _))
+      (mul_nonneg hA0 (Real.rpow_nonneg hW0 (A 1)))
     exact h.trans_eq (by dsimp only [M]; ring)
   have hfirstD (i : ι) (hi : i ∈ V) (r : ℝ) (hr : |r| ≤ δ) (θ : ℝ) :
       |deriv (fun η => d i (r, η)) θ| ≤ M :=

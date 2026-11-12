@@ -72,10 +72,13 @@ theorem n04b_referenceTravel_mem_half_iff
 
 /-- The actual reference half-domain is the optical-cut radial interval. -/
 theorem n04b_reference_negative_domain
-    {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
-    {L : ReturnCorrectionData S} {base : ℕ} {ε : ℝ}
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {R : ReturnEquationData S}
+    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}
     (hD : RadialProfileGeometry D) (hC : controlGeometryConditions D S C)
     (href : referenceStateConditions D S C)
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : NonlinearPropertiesThrough03 D T S C R L base loss ε)
     (hfield : N04bFieldRegularity D S C L base ε) (m : ℕ) (side : Bool) :
     n04bTravelHalfDomain (Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ))
         (n04bActualTravelChart S C L (C.referenceState, 0) m) (C.travel m) side =
@@ -85,7 +88,7 @@ theorem n04b_reference_negative_domain
   constructor
   · intro hp
     have hm := mem_n04bTravelDomain.mp hp
-    have he := n04b_reference_actualTravelChart href hfield m
+    have he := n04b_reference_actualTravelChart href hT hS hN hfield m
       ⟨hm.1.1.1.le, hm.1.1.2.le⟩ p.2
     have ht : opticalTravel D.w (C.left m) p.1 ∈
         n04bTravelHalfInterval (C.travel m) side := by
@@ -97,22 +100,25 @@ theorem n04b_reference_negative_domain
         (fun n => (n04bReferenceTravelCut_spec hD hC n).1) (m, side) hp.1
     apply mem_n04bTravelDomain.mpr
     refine ⟨⟨hr, mem_univ _⟩, ?_⟩
-    rw [n04b_reference_actualTravelChart href hfield m ⟨hr.1.le, hr.2.le⟩ p.2]
+    rw [n04b_reference_actualTravelChart href hT hS hN hfield m ⟨hr.1.le, hr.2.le⟩ p.2]
     exact (n04b_referenceTravel_mem_half_iff hD hC m side hr).mpr hp.1
 
 /-- The same typed index identifies the actual reference physical domain
 with its stored radial endpoints, for both negative and positive pieces. -/
 theorem n04b_reference_typed_domain
-    {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
-    {L : ReturnCorrectionData S} {base : ℕ} {ε : ℝ}
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {R : ReturnEquationData S}
+    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}
     (hD : RadialProfileGeometry D) (hC : controlGeometryConditions D S C)
     (href : referenceStateConditions D S C)
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : NonlinearPropertiesThrough03 D T S C R L base loss ε)
     (hfield : N04bFieldRegularity D S C L base ε) (i : N04PieceIndex D) :
     n04bTypedPhysicalDomain C (n04bActualTravelChart S C L (C.referenceState, 0)) i =
       Ioo (n04bReferenceTypedLeft C (n04bReferenceTravelCut hD hC) i)
         (n04bReferenceTypedRight C (n04bReferenceTravelCut hD hC) i) ×ˢ univ := by
   cases i with
-  | inl i => exact n04b_reference_negative_domain hD hC href hfield i.1 i.2
+  | inl i => exact n04b_reference_negative_domain hD hC href hT hS hN hfield i.1 i.2
   | inr i => rfl
 
 end ContinuousFlexibility.Analysis

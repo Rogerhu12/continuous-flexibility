@@ -15,6 +15,7 @@ noncomputable section
 namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements
+open scoped ContDiff
 
 theorem n04Coordinates_primitiveGeometry_normalized
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
