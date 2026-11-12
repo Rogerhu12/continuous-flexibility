@@ -255,8 +255,8 @@ private theorem n06_actualOperator_grading_max (Nc Nl : ℕ)
     (x : AnnularState S) (t : ℝ) :
     (stateGrading S Nc x + t ≤ stateGrading S (max Nc Nl) x + t) ∧
     (stateGrading S Nl x + t ≤ stateGrading S (max Nc Nl) x + t) :=
-  ⟨add_le_add_right (solve_stateGrading_monotone S (le_max_left Nc Nl) x) t,
-    add_le_add_right (solve_stateGrading_monotone S (le_max_right Nc Nl) x) t⟩
+  ⟨add_le_add (solve_stateGrading_monotone S (le_max_left Nc Nl) x) (le_rfl : t ≤ t),
+    add_le_add (solve_stateGrading_monotone S (le_max_right Nc Nl) x) (le_rfl : t ≤ t)⟩
 
 private theorem n06_actualOperator_map_norm
     (Mc Mp : V.level (3 / 4 : ℝ) 0 b →L[ℝ] V.level (3 / 4 : ℝ) 0 b)
