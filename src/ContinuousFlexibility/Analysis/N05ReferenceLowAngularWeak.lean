@@ -71,9 +71,9 @@ theorem n05_referenceMeanPairing_add {D : ReferenceData} (hab : D.a ≤ D.b)
     r11b_integral_angularMean_mul_eq hab hf hk,
     r11b_integral_angularMean_mul_eq hab hg hk]
   simp only [Pi.add_apply, add_mul]
-  have hfk : Integrable (fun x => f x * k x) (radialPhysicalMeasure D) :=
+  have hfk : Integrable (fun x : PolarPoint => f x * k x) (radialPhysicalMeasure D) :=
     hf.integrable_mul hk
-  have hgk : Integrable (fun x => g x * k x) (radialPhysicalMeasure D) :=
+  have hgk : Integrable (fun x : PolarPoint => g x * k x) (radialPhysicalMeasure D) :=
     hg.integrable_mul hk
   rw [integral_add hfk hgk, mul_add]
 

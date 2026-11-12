@@ -1,0 +1,44 @@
+[
+  {
+    "variant": "pre-N07b",
+    "patch": "CoupledNeighborhoodRestriction-pre-N07b.patch",
+    "git_apply_check_exit": 0,
+    "stderr": ""
+  },
+  {
+    "variant": "post-N07b",
+    "patch": "CoupledNeighborhoodRestriction.patch",
+    "git_apply_check_exit": 0,
+    "stderr": ""
+  },
+  {
+    "variant": "post-N07b",
+    "patch": "N06Neighborhood.patch",
+    "git_apply_check_exit": 0,
+    "stderr": ""
+  },
+  {
+    "variant": "pre",
+    "project_import_closure_modules": 132,
+    "missing_project_imports": [],
+    "import_cycles": []
+  },
+  {
+    "variant": "post",
+    "project_import_closure_modules": 133,
+    "missing_project_imports": [],
+    "import_cycles": []
+  },
+  {
+    "declaration": "ordinaryFlowBounds_restrict",
+    "present": true
+  },
+  {
+    "declaration": "n06_N04Properties_mono",
+    "present": true
+  },
+  {
+    "declaration": "n06_NonlinearPropertiesThrough05_mono",
+    "present": true
+  }
+]

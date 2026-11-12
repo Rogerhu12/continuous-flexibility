@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05ReferenceInterface
 import ContinuousFlexibility.Analysis.N05ReferenceResidual
 import ContinuousFlexibility.Analysis.SpacesMollifierL1
@@ -66,7 +67,7 @@ theorem n05_diffeomorphism_ae_iff
     filter_upwards [hpull, ae_restrict_mem hV] with y hy hyV
     simpa only [hright y hyV] using hy
 
-/-- The N04 charts preserve null sets on the actual physical half-period tiles
+/-- The N04 charts preserve null sets on the actual half-period domains
 whenever their angular coordinate is unchanged. This applies to the controlled
 reference coordinates without assuming a pushforward-measure identity. -/
 theorem n05_canonicalChart_ae_iff
@@ -79,15 +80,13 @@ theorem n05_canonicalChart_ae_iff
     (hangle : ∀ p ∈ physicalPieceOpen S K z m, (K.chart z m p).2 = p.2)
     (P : PolarPoint → Prop) :
     (∀ᵐ y ∂canonicalMeasure S K m, P y) ↔
-      ∀ᵐ x ∂volume.restrict
-        (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)),
+      ∀ᵐ x ∂volume.restrict (n05PhysicalPieceHalfPeriod S K z m),
         P (K.chart z m x) := by
   obtain ⟨hΦ, hΨ, hleft, hright, hΦc, hΨc, _, _⟩ := h04.1.charts z hz hs m
-  let U : Set PolarPoint :=
-    physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)
+  let U : Set PolarPoint := n05PhysicalPieceHalfPeriod S K z m
   let V : Set PolarPoint :=
     Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi
-  have hUopen : U ⊆ physicalPieceOpen S K z m := inter_subset_left
+  have hUopen : U ⊆ physicalPieceOpen S K z m := fun _ hp => hp.1
   have hVopen : V ⊆ canonicalOpen S K m :=
     fun _ hp => ⟨hp.1, mem_univ _⟩
   have hΦUV : MapsTo (K.chart z m) U V := by
@@ -102,8 +101,7 @@ theorem n05_canonicalChart_ae_iff
       simpa only [hangle _ (hΨ hpopen)] using he
     exact ⟨hΨ hpopen, mem_univ _, by simpa only [hsecond] using hp.2⟩
   exact n05_diffeomorphism_ae_iff
-    ((h04.1.domains z hz hs m).1.measurableSet.inter
-      (MeasurableSet.univ.prod measurableSet_Ioc))
+    (n05_physicalPieceHalfPeriod_measurable h04 hz hs m)
     (measurableSet_Ioo.prod measurableSet_Ioc)
     hΦUV hΨVU (fun p hp => hleft p (hUopen hp))
     (fun p hp => hright p (hVopen hp))
@@ -123,20 +121,15 @@ theorem n05_canonicalSource_ae_iff_physicalPiece
     (hangle : ∀ p ∈ physicalPieceOpen S K z m, (K.chart z m p).2 = p.2)
     (f g : PolarPoint → ℝ) :
     canonicalSource S K z m f =ᵐ[canonicalMeasure S K m] canonicalSource S K z m g ↔
-      f =ᵐ[volume.restrict
-        (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))] g := by
+      f =ᵐ[volume.restrict (n05PhysicalPieceHalfPeriod S K z m)] g := by
   have htransport := n05_canonicalChart_ae_iff h04 hz hs m hangle
     (fun p => canonicalSource S K z m f p = canonicalSource S K z m g p)
   obtain ⟨_, _, hleft, _, _, _, _, hnonzero⟩ := h04.1.charts z hz hs m
-  have hmeas : MeasurableSet
-      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) :=
-    (h04.1.domains z hz hs m).1.measurableSet.inter
-      (MeasurableSet.univ.prod measurableSet_Ioc)
   refine htransport.trans ?_
   constructor
   · intro hfg
     filter_upwards [hfg,
-      ae_restrict_mem hmeas] with p hp hpU
+      ae_restrict_mem (n05_physicalPieceHalfPeriod_measurable h04 hz hs m)] with p hp hpU
     have hpopen : p ∈ physicalPieceOpen S K z m := hpU.1
     have hpos := hnonzero p hpopen
     simp only [canonicalSource, hleft p hpopen] at hp
@@ -144,9 +137,47 @@ theorem n05_canonicalSource_ae_iff_physicalPiece
       ((div_left_inj' (abs_ne_zero.mpr hpos.2.1)).mp hp)
   · intro hfg
     filter_upwards [hfg,
-      ae_restrict_mem hmeas] with p hp hpU
+      ae_restrict_mem (n05_physicalPieceHalfPeriod_measurable h04 hz hs m)] with p hp hpU
     have hpopen : p ∈ physicalPieceOpen S K z m := hpU.1
     simp only [canonicalSource, hleft p hpopen, hp]
+
+/-- The reference rectangle is recovered from the actual reference-domain
+identity; it is not imposed on current negative pieces. -/
+theorem n05_referenceCanonicalChart_ae_iff
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
+    {base loss : ℕ} {ε : ℝ} (h04 : N04Properties D T S C L K base loss ε)
+    (hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S C.referenceState) (m : ℕ)
+    (hangle : ∀ p ∈ referencePhysicalPieceOpen S K m,
+      (K.chart (C.referenceState, 0) m p).2 = p.2) (P : PolarPoint → Prop) :
+    (∀ᵐ y ∂canonicalMeasure S K m, P y) ↔
+      ∀ᵐ x ∂volume.restrict
+        (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi),
+        P (K.chart (C.referenceState, 0) m x) := by
+  have ha : ∀ p ∈ physicalPieceOpen S K (C.referenceState, 0) m,
+      (K.chart (C.referenceState, 0) m p).2 = p.2 := by
+    simpa only [h04.1.referenceDomain m] using hangle
+  simpa only [n05_reference_physicalHalfPeriod_eq h04 m] using
+    n05_canonicalChart_ae_iff h04 hz hs m ha P
+
+theorem n05_referenceCanonicalSource_ae_iff_physicalPiece
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
+    {base loss : ℕ} {ε : ℝ} (h04 : N04Properties D T S C L K base loss ε)
+    (hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S C.referenceState) (m : ℕ)
+    (hangle : ∀ p ∈ referencePhysicalPieceOpen S K m,
+      (K.chart (C.referenceState, 0) m p).2 = p.2) (f g : PolarPoint → ℝ) :
+    canonicalSource S K (C.referenceState, 0) m f =ᵐ[canonicalMeasure S K m]
+        canonicalSource S K (C.referenceState, 0) m g ↔
+      f =ᵐ[volume.restrict
+        (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)] g := by
+  have ha : ∀ p ∈ physicalPieceOpen S K (C.referenceState, 0) m,
+      (K.chart (C.referenceState, 0) m p).2 = p.2 := by
+    simpa only [h04.1.referenceDomain m] using hangle
+  simpa only [n05_reference_physicalHalfPeriod_eq h04 m] using
+    n05_canonicalSource_ae_iff_physicalPiece h04 hz hs m ha f g
 
 /-- Translating a genuine π-periodic field backwards by one period preserves
 its value. The equality is stated with the actual product addition. -/
@@ -212,15 +243,9 @@ theorem n05_referenceCanonicalSource_ae_physical
     intro m
     apply ae_imp_of_ae_restrict
     apply n05_piPeriodic_ae_eq_fullPeriod measurableSet_Ioo hf hg
-    have hangle : ∀ p ∈ physicalPieceOpen S K (C.referenceState, 0) m,
-        (K.chart (C.referenceState, 0) m p).2 = p.2 := by
-      intro p hp
-      apply n05_controlledReference_chart_second hcoordinates m
-      simpa only [h.2.2.2.2.1.1.referenceDomain m] using hp
-    have hp := (n05_canonicalSource_ae_iff_physicalPiece h.2.2.2.2.1 hz hs m
-      hangle f g).mp (hfg m)
-    simpa only [h.2.2.2.2.1.1.referenceDomain m, referencePhysicalPieceOpen,
-      prod_inter_prod, inter_univ, univ_inter] using hp
+    apply (n05_referenceCanonicalSource_ae_iff_physicalPiece h.2.2.2.2.1 hz hs m
+      (fun _ hp => n05_controlledReference_chart_second hcoordinates m hp) f g).mp
+    exact hfg m
   obtain ⟨E, hE, hcover⟩ := h.2.2.2.2.1.1.referencePartition
   have hEplane : ∀ᵐ p : PolarPoint ∂volume, p.1 ∉ E := by
     rw [Measure.volume_eq_prod]

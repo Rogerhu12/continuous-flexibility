@@ -3,6 +3,7 @@ import ContinuousFlexibility.Analysis.N06Neighborhood
 import ContinuousFlexibility.Analysis.StateKappaBounds
 import ContinuousFlexibility.Analysis.TameElementaryCalculus
 import ContinuousFlexibility.Analysis.TameTransfer
+import ContinuousFlexibility.Analysis.N01cBoundsRestriction
 import ContinuousFlexibility.Analysis.N06Neighborhood
 
 /-!
@@ -140,35 +141,20 @@ private theorem coupled_flowBounds_restrict
     (hsub : stateNeighborhood S C base' ε' ⊆ stateNeighborhood S C base ε)
     (hb : base ≤ base')
     (hpos : ∀ m, 0 ≤ T.H (T.sample m) ∧ 0 ≤ T.E0 (T.sample m))
-    (hFlow : ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b p,
-      a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
-      ∃ J : SmoothDirections (stateNeighborhood S C base ε)
-        (ordinaryFlowFamily S C m a b p),
-        ∀ z ∈ stateNeighborhood S C base ε, ∀ v : Fin k → (AnnularState S × ℝ),
-          min (p.1 - C.left m) (C.right m - p.1) ^ a * |J.D k z v| ≤
-            B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-            T.E0 (T.sample (C.cell m)) ^ B *
-            oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-              base (s + loss) (z - (C.referenceState, 0)) v) :
-    ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b p,
-      a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
-      ∃ J : SmoothDirections (stateNeighborhood S C base' ε')
-        (ordinaryFlowFamily S C m a b p),
-        ∀ z ∈ stateNeighborhood S C base' ε', ∀ v : Fin k → (AnnularState S × ℝ),
-          min (p.1 - C.left m) (C.right m - p.1) ^ a * |J.D k z v| ≤
-            B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-            T.E0 (T.sample (C.cell m)) ^ B *
-            oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-              base' (s + loss) (z - (C.referenceState, 0)) v := by
-  intro k s
-  let c : ℝ := (hFlow k s).choose
-  have hc : 0 < c := (hFlow k s).choose_spec.1
-  refine ⟨c, hc, fun m a b p hab hpm => ?_⟩
-  exact coupled_weightedTower_restrict hp hopen hsub hb (C.referenceState, 0)
-    (fun t => min (p.1 - C.left m) (C.right m - p.1) ^ a * |t|)
-    (mul_nonneg (mul_nonneg hc.le (Real.rpow_nonneg (hpos (C.cell m)).1 _))
-      (Real.rpow_nonneg (hpos (C.cell m)).2 _))
-        ((hFlow k s).choose_spec.2 m a b p hab hpm)
+    (hFlow : OrdinaryFlowFamilyTameBounds T S C base loss ε) :
+    OrdinaryFlowFamilyTameBounds T S C base' loss ε' := by
+  exact ordinaryFlowBounds_restrict
+    (E := AnnularState S × ℝ)
+    (U := stateNeighborhood S C base ε) (V := stateNeighborhood S C base' ε')
+    (grading := pairGrading (stateGrading S) realGrading)
+    (center := (C.referenceState, 0)) (family := ordinaryFlowFamily S C)
+    (left := C.left) (right := C.right)
+    (weight := fun B m => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+      T.E0 (T.sample (C.cell m)) ^ B)
+    hopen hsub hp hb (le_refl loss)
+    (fun B hB m => mul_nonneg
+      (mul_nonneg hB.le (Real.rpow_nonneg (hpos (C.cell m)).1 _))
+      (Real.rpow_nonneg (hpos (C.cell m)).2 _)) hFlow
 
 theorem coupled_N01Properties_restrict (hT : IsMaterialData D T)
     (h : N01Properties D T S C base loss ε)

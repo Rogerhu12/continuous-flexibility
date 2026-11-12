@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N06ReferenceModeTransport
 import ContinuousFlexibility.Analysis.N06ReferenceRemainderTraces
+import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # The actual canonical modes pull back to the physical reference modes
@@ -61,7 +62,7 @@ theorem n06_controlledReference_radial_ae_pullback
   have hx : ∀ᵐ p ∂volume.restrict
       (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi),
       P (K.chart (C.referenceState, 0) m p).1 := by
-    simpa only [h04.1.referenceDomain m, referencePhysicalPieceOpen,
+    simpa only [n05PhysicalPieceHalfPeriod, h04.1.referenceDomain m, referencePhysicalPieceOpen,
       prod_inter_prod, inter_univ, univ_inter] using hxActual
   have hprod : (volume : Measure PolarPoint).restrict
       (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi) =

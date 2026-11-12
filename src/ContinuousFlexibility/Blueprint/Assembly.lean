@@ -80,9 +80,12 @@ theorem R10_of_nodes (hA : R10aStatement) (hB : R10bStatement) : R10Statement :=
 
 theorem N04_of_nodes (hc : N04cStatement) (hroot : RootCompositionTarget)
     (hcubic : CubicDivisionTarget) (htrans : PhysicalTransmissionTarget) : N04Statement := by
-  obtain ⟨A, T, S, C, R, L, K, base, loss, ε, h1, h2, h3, h4, hgeometry⟩ := hc
+  obtain ⟨A, T, S, C, R, L, K, base, loss, ε, h1, h2, h3, h04,
+    hgeometry, hprimitive⟩ := hc
+  -- The common geometry/operator predicate and both primitive certificates
+  -- retain the same coordinate data and the same neighborhood.
   exact ⟨A, T, S, C, R, L, K, base, loss, ε, h1, h2, h3, hroot, hcubic, htrans,
-    h4, hgeometry⟩
+    h04, hgeometry, hprimitive⟩
 
 /-- The analytic existence statement, assembled from the blueprint nodes. -/
 theorem flatAnnularCore_nonempty : Nonempty FlatAnnularCore := by
@@ -108,10 +111,13 @@ theorem flatAnnularCore_nonempty : Nonempty FlatAnnularCore := by
   have hR12 : R12Statement := R12 hR06 hR08 hR10 hR11
   have hW01 : W01Statement := W01
   have hSpaces : W02Statement ∧ W03Statement := Spaces hW01 hTame
-  -- Retain the strict support certificates through the reference/control
-  -- construction and the common-neighbourhood flow construction.
+  -- The main construction retains strict closed supports. N01a additionally
+  -- supplies the designated cells and quantitative reference optical geometry.
+  -- The actual N01b flow construction keeps those same primitive data.
   have hN01a : N01aStatement := N01a hR12 hW01 hSpaces.1
   have hN01b : N01bStatement := N01b hN01a hS05
+  -- N01 retains one common neighbourhood.  Its ordinary-flow clause allows
+  -- a parameter-order loss, as in the manuscript's eq:tame-derivative-shape.
   have hN01 : N01Statement := N01c hN01b
   -- N02N03 retains the actual corrected b/c coefficients' open smoothness
   -- and angular periodicity, including the artificial negative-piece cuts.

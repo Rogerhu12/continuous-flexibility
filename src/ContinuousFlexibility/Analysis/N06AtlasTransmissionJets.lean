@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N06FiniteBoundaryMatching
+import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # Genuine atlas jets give every finite modal matching condition

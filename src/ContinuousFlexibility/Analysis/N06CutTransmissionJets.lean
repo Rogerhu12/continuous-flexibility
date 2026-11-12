@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N06N05CurrentRootTransmission
 import ContinuousFlexibility.Analysis.N06CurrentClosedTestJets
+import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # Actual first jets at a negative middle cut

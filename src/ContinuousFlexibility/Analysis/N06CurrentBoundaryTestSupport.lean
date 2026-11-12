@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N06CurrentTestTraces
 import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
+import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # The original radial support removes the outer Green terms
