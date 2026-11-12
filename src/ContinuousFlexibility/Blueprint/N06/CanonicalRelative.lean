@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Statements.N06Parts
+import ContinuousFlexibility.Analysis.N06PrimitiveCanonicalRelative
 
 /-!
 # N06: the actual canonical relative operator
@@ -14,6 +15,11 @@ open ContinuousFlexibility.Statements
 
 theorem N06CanonicalRelative (hN05 : N05Statement)
     (hgraph : N06WeakGraphStatement) : N06CanonicalRelativeStatement := by
-  sorry
+  obtain ⟨A, T, S, C, R, L, K, V, b, B, base, loss, ε,
+    hT, hS, hThrough05⟩ := hN05
+  exact ⟨A, T, S, C, R, L, K, V, b, B, base, loss, ε,
+    hT, hS, hThrough05,
+    n06_exists_canonicalRelative_of_primitiveGeometry hT hS hThrough05
+      hThrough05.1.2.2.2.2.2.1⟩
 
 end ContinuousFlexibility.Blueprint

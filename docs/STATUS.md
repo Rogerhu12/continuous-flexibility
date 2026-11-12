@@ -241,6 +241,41 @@ only after the user agrees. Statement repairs merged so far:
      `CanonicalPrimitiveGeometry`: the chart, height, Jacobian and material-sample estimates used
      by the manuscript's source and closed-domain conversion.
 
+### Announced N07a construction interface carried by the N06 proof branch
+
+The N06 proof branch ports the announced N07a interface from
+`438e5d40c0de8d0a0f22bdccadd4feb820ba44bd`, together with its N04 assembly
+and affected clients. This is a statement-layer proposal for review, not an
+additional merged repair. The exact public N06 theorem remains
+`theorem N06 (hN05 : N05Statement) : N06Statement`.
+
+The exact former Through04 tail on current main was
+`N04Properties D T S C L K base loss ε ∧ CanonicalPrimitiveGeometry D T S C L K base ε`.
+It now retains `CanonicalGeometry.PrimitiveGeometryProperties D T S C L K base ε`
+between those two clauses, on the same objects. The former qualitative chart
+identities and one-plus-state coefficient bounds did not retain the actual
+reference radial gauge, current-minus-reference H^(3/4) jet gain, chosen
+auxiliary-source gauge, or forward first-jet transmission data used by this
+proof. These are raw coordinate-construction obligations, not inverse bounds
+or solution-regularity premises. N04c and `N04_of_nodes` preserve the entire
+new and existing geometry pair.
+
+The former final `N03Properties` clause was only `SmoothTameOn ... L.error`.
+It now also retains `ReturnCorrectionSpatialProperties`, the actual corrected
+b/c coefficients' open-annulus smoothness and π-periodicity. The former
+physical witness clause was
+`HasCanonicalRepresentation D S C K z U F η f ∧ referenceRow D η = 0 ∧ ...`;
+it now retains both actual η/f π-periods before the same normalization and
+full-period weak equation. N06 constructs these period witnesses from the
+original graph and named reconstruction.
+
+This records missing construction outputs of the intended proof and the
+corresponding producer obligations; it does not claim a counterexample to the
+former complete existential N05-to-N06 proposition. Details and manuscript
+locations: `docs/notes/N07a-interface-repair.md` and
+`docs/notes/N06-original-atlas-interface.md`. The final N06 proof retains the
+original K, V, b, graph, inverse and ψ, with the actual interval lengths.
+
 Integration repairs (no statement changed):
 
 - R08 and R06b/R06c both generalized the Morse radius ODE to an arbitrary coefficient

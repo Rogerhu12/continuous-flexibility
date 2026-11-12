@@ -36,8 +36,8 @@ theorem n07b_perturbedCanonicalRelation_right_unique
     {U : CanonicalUnknown S K} {F G : CanonicalSequence S K}
     (hF : PerturbedCanonicalRelation D S C K L z U F)
     (hG : PerturbedCanonicalRelation D S C K L z U G) : F = G := by
-  obtain ⟨η, f, hηrep, _, hηweak⟩ := hF
-  obtain ⟨ξ, g, hξrep, _, hξweak⟩ := hG
+  obtain ⟨η, f, hηrep, _, _, _, hηweak⟩ := hF
+  obtain ⟨ξ, g, hξrep, _, _, _, hξweak⟩ := hG
   funext m
   apply Lp.ext
   let A : Set PolarPoint :=

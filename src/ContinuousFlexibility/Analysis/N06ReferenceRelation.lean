@@ -75,7 +75,19 @@ theorem n06_referenceCanonicalRelation_perturbed
     (hrel : ReferenceCanonicalRelation D T S C K V γ M₀ M₁ lossMaterial U F) :
     PerturbedCanonicalRelation D S C K L (C.referenceState, 0) U F := by
   obtain ⟨_, η, f, hrep, hgraph⟩ := hrel
-  refine ⟨η, f, hrep, hgraph.2.2.1, ?_⟩
+  obtain ⟨aL, haL⟩ := hgraph.1
+  have hηperiod : Function.Periodic η (0, Real.pi) := haL.2.2.1
+  have hψperiod : Function.Periodic ((S.height (3 / 4 : ℝ)).decode S.psi)
+      (0, Real.pi) := ((hS.1 (3 / 4 : ℝ)).2.2.2.1 S.psi).2.2.1
+  have hfperiod : Function.Periodic f (0, Real.pi) := by
+    intro p
+    have hred := hgraph.2.1.2.2.1 p
+    change f (p + (0, Real.pi)) - U.2.2.2 *
+        (S.height (3 / 4 : ℝ)).decode S.psi (p + (0, Real.pi)) =
+      f p - U.2.2.2 * (S.height (3 / 4 : ℝ)).decode S.psi p at hred
+    rw [hψperiod p] at hred
+    exact sub_left_inj.mp hred
+  refine ⟨η, f, hrep, hηperiod, hfperiod, hgraph.2.2.1, ?_⟩
   intro φ hφ
   have h01 : N01Properties D T S C base loss ε := h.1.1
   have hD : IsAccumulatingProfile D := h01.1.1

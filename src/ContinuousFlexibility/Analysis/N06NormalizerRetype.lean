@@ -154,19 +154,11 @@ theorem n06Normalizer_N04 (ψ : (S.height (3 / 4 : ℝ)).Space)
     reflection := h.1.reflection
     inverseReflection := h.1.inverseReflection }
 
-/-- Through04 keeps the same physical construction, with only its unused
-normalizer parameter retyped. The full N05 graph is transported separately. -/
-theorem n06Normalizer_through04 (ψ : (S.height (3 / 4 : ℝ)).Space)
-    (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε) :
-    NonlinearPropertiesThrough04 D T (n06WithNormalizer S ψ)
-      (n06NormalizerGeometry C ψ) (n06NormalizerReturns R ψ)
-      (n06NormalizerCorrection L ψ) (n06NormalizerCanonical K ψ) base loss ε := by
-  exact ⟨⟨⟨n06Normalizer_N01 ψ h.1.1.1, n06Normalizer_N02 ψ h.1.1.2⟩,
-    n06Normalizer_N03 ψ h.1.2⟩, h.2.1, h.2.2.1, h.2.2.2.1,
-    n06Normalizer_N04 ψ h.2.2.2.2.1,
-    { materialJets := h.2.2.2.2.2.materialJets
-      transport := h.2.2.2.2.2.transport
-      physicalCoefficients := h.2.2.2.2.2.physicalCoefficients }⟩
+/- The cumulative arbitrary-normalizer transport is intentionally retired.
+The shared primitive geometry constrains the actual chosen psi through its
+auxiliary-column gauge and jets. Those facts are not preserved by an arbitrary
+replacement. The original-K proof retains psi; the independent data and N05
+graph transports in this module remain available. -/
 
 theorem n06Normalizer_isVolumeModel (ψ : (S.height (3 / 4 : ℝ)).Space)
     (h : IsVolumeModel T S K V) :

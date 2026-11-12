@@ -59,52 +59,10 @@ theorem n06Normalizer_controlledReferenceCoordinates
     N05ControlledReferenceCoordinates D (n06WithNormalizer S ψ)
       (n06NormalizerGeometry C ψ) (n06NormalizerCanonical K ψ) := h
 
-/-- Reselecting the actual normalizer preserves the complete Through05
-witness. The explicitly retained coordinate hypothesis is only used to
-construct the compact change source in every original weighted level. -/
-theorem n06_exists_supported_normalizer_through05
-    {B : CanonicalDomainData S K V b}
-    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
-    (hthrough : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)
-    (hcoordinates : N05ControlledReferenceCoordinates D S C K) :
-    ∃ ψ : (S.height (3 / 4 : ℝ)).Space, S.Q ψ = 1 ∧
-      ∃ v : B.Space, ∃ hv : n06NormalizerLambda S K v.val.1 = 0,
-        IsPhysicalSpaces D T (n06WithNormalizer S ψ) ∧
-        NonlinearPropertiesThrough05 D T (n06WithNormalizer S ψ)
-          (n06NormalizerGeometry C ψ) (n06NormalizerReturns R ψ)
-          (n06NormalizerCorrection L ψ) (n06NormalizerCanonical K ψ)
-          (n06NormalizerVolume V ψ) b (n06NormalizerDomain B ψ v hv) base loss ε ∧
-        ∃ g : ℝ → ℝ, ∃ J : Set ℝ,
-          ContDiff ℝ ∞ g ∧ IsCompact J ∧ J ⊆ radialCore D ∧
-          J ⊆ K.normalizationRegion ∧ (∀ r, r ∉ J → g r = 0) ∧
-          (S.height (3 / 4 : ℝ)).decode ψ = fun p : PolarPoint => g p.1 := by
-  have h01 : N01Properties D T S C base loss ε := hthrough.1.1.1.1
-  have h04 : N04Properties D T S C L K base loss ε := hthrough.1.2.2.2.2.1
-  have h05 : N05Properties D T S C K V b B := hthrough.2
-  obtain ⟨ψ, hunit, g, J, hg, hJ, hJD, hJK, hzero, hψ⟩ :=
-    n06_exists_normalizer_in_normalizationRegion hT hS h01.1.2.2.2.1 h04
-  have hcompact : HasCompactRadialSupport D ((S.height (3 / 4 : ℝ)).decode ψ) := by
-    refine ⟨J, hJ, hJD, ?_⟩
-    intro r hr θ
-    exact (congrFun hψ (r, θ)).trans (hzero r hr)
-  obtain ⟨d, hd, hzeroLambda, hlevels⟩ :=
-    n06_exists_normalizer_change_source hT hS h01 h04 h05 hcoordinates ψ hcompact hunit
-  let v : B.Space := B.inverse d
-  have hv : n06NormalizerLambda S K v.val.1 = 0 :=
-    (n06NormalizerLambda_apply v.val.1).trans hzeroLambda
-  have hvs : v.val.2 = d := h05.2.2.2.2.2.2.2.1 d
-  have hvsource : ∀ m, (V.forget (3 / 4 : ℝ) 0 b v.val.2 m : PolarPoint → ℝ)
-      =ᵐ[canonicalMeasure S K m] canonicalSource S K (C.referenceState, 0) m
-        ((S.height (3 / 4 : ℝ)).decode (S.psi - ψ)) := by
-    rw [hvs]
-    exact hd
-  have hvlevels : ∀ γ t : ℝ, ∀ s : ℕ,
-      VolumeMember S K V γ t s (V.forget (3 / 4 : ℝ) 0 b v.val.2) := by
-    rw [hvs]
-    exact hlevels
-  refine ⟨ψ, hunit, v, hv, n06WithNormalizer_isPhysical hT hS ψ hcompact hunit,
-    ⟨n06Normalizer_through04 ψ hthrough.1,
-      n06Normalizer_N05 h05 ψ v hv hvsource hvlevels⟩,
-    g, J, hg, hJ, hJD, hJK, hzero, hψ⟩
+/- The cumulative arbitrary-normalizer transport is intentionally retired.
+The shared primitive geometry constrains the actual chosen psi through its
+auxiliary-column gauge and jets. Those facts are not preserved by an arbitrary
+replacement. The original-K proof retains psi; the independent data and N05
+graph transports in this module remain available. -/
 
 end ContinuousFlexibility.Statements

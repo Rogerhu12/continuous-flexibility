@@ -54,8 +54,8 @@ theorem n06_namedPhysicalWeakRelation_implies
     (hweak : N06NamedPhysicalWeakRelation D C L B z u F) :
     PerturbedCanonicalRelation D S C K L z u.val.1
       (V.forget (3 / 4 : ℝ) 0 b F) := by
-  obtain ⟨hrep, _, hrow⟩ := n06_graph_periodic_normalized_representation
+  obtain ⟨hrep, hperiod, hrow⟩ := n06_graph_periodic_normalized_representation
     hab h04 h05 href hsector hz hs u (V.forget (3 / 4 : ℝ) 0 b F)
-  exact ⟨_, _, hrep, hrow, hweak⟩
+  exact ⟨_, _, hrep, hperiod, n06PhysicalSource_periodic h04 hz hs _, hrow, hweak⟩
 
 end ContinuousFlexibility.Statements

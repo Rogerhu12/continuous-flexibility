@@ -1,10 +1,9 @@
-import ContinuousFlexibility.Statements.N06PrimitiveGeometryBridge
+import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
-# Primitive canonical geometry compatibility interface
+# Primitive geometry import compatibility
 
-The pending N07a vocabulary is provided by the independent N06 bridge.
-No primitive field is silently added to the current cumulative nonlinear
-statement. This import can point directly to `Statements.Nonlinear` once
-that upstream statement repair is merged.
+The actual primitive geometry and cached state instances are defined once
+in the shared nonlinear statements. This module preserves the import path
+used by the original-atlas analytic proof.
 -/

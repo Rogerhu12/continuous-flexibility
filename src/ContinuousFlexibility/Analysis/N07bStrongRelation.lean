@@ -121,13 +121,14 @@ theorem n07b_perturbedCanonicalRelation_of_strong
     (hCp : ∀ r ∈ radialCore D,
       Function.Periodic (fun θ => (L.coefficients z).c (r, θ)) Real.pi)
     (hηp : Function.Periodic η (0, Real.pi))
+    (hfp : Function.Periodic f (0, Real.pi))
     (hrep : HasCanonicalRepresentation D S C K z U F η f)
     (hrow : referenceRow D η = 0) (hcompat : U.2.2.2 = 0)
     (hstrong : ∀ p ∈ annularOpen D,
       divergenceOperator (L.coefficients z) η p +
         U.2.2.1 * nuColumnField D S C z p = f p) :
     PerturbedCanonicalRelation D S C K L z U F := by
-  refine ⟨η, f, hrep, hrow, ?_⟩
+  refine ⟨η, f, hrep, hηp, hfp, hrow, ?_⟩
   intro φ hφ
   change (∫ r in D.a..D.b, radialAngularMean (fun θ =>
       η (r, θ) * divergenceOperator (L.coefficients z) φ (r, θ))) +
