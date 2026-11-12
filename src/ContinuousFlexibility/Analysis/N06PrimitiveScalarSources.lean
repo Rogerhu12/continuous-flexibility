@@ -72,7 +72,8 @@ theorem n06_primitiveActual_columnDifferences_finiteSupport
     n06_referenceScalarFields_commonSupport hS h01.1.2.2.2.1
   let J : Set ℝ := Jc ∪ Jr
   have hJ : IsCompact J := hJc.union hJr
-  have hJD : J ⊆ radialCore D := fun _ hr => hr.elim hJcD hJrD
+  have hJD : J ⊆ radialCore D := fun _ hr =>
+    hr.elim (fun hc => hJcD hc) (fun hr => hJrD hr)
   have hfinite := n06_cutSaturatedSupport_finite_of_primitive h01.1.1 hT h01.2.2.2.1 h04 hjets hJ hJD
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hsref := n05_referenceState_sector h01.2.2.1

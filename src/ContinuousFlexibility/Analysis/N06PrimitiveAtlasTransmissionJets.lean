@@ -34,9 +34,11 @@ theorem n06_primitive_alignedChart_fderiv_apply
     fderiv ℝ (endpointAlignedChart K z m endpoint orientation) p v =
       (orientation * (fderiv ℝ (K.chart z m) p v).1,
         (fderiv ℝ (K.chart z m) p v).2) := by
+  change fderiv ℝ (fun q =>
+    (orientation * ((K.chart z m q).1 - endpoint), (K.chart z m q).2)) p v = _
   have hd := ((hF.hasFDerivAt.fst.sub_const endpoint).const_mul orientation).prodMk
     hF.hasFDerivAt.snd
-  simpa only [endpointAlignedChart, ContinuousLinearMap.prod_apply, smul_apply,
+  simpa only [ContinuousLinearMap.prod_apply, smul_apply,
     ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
     ContinuousLinearMap.coe_snd', smul_eq_mul] using
     congrArg (fun A : PolarPoint →L[ℝ] PolarPoint => A v) hd.fderiv

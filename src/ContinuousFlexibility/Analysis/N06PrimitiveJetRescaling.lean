@@ -40,6 +40,20 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
   {base : ℕ} {ε : ℝ}
 
+private theorem n06_add_state_difference {E : Type*} [AddCommGroup E]
+    (x y : E) : x + (y - x) = y :=
+  (add_comm x (y - x)).trans (sub_add_cancel y x)
+
+private theorem n06_submodule_parameter_grading
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (U : Submodule ℝ E)
+    (n : ℕ) (x : U) (q : ℝ) :
+    pairGrading (fun k => (p k).comp U.subtype) realGrading n (x, q) =
+      p n x.val + |q| := by
+  rw [pairGrading_apply]
+  change p n x.val + ‖q‖ = p n x.val + |q|
+  exact congrArg (fun r : ℝ => p n x.val + r) (Real.norm_eq_abs q)
+
 def n06PrimitiveParameterOfState (href : referenceStateConditions D S C)
     (z : AnnularState S × ℝ) (hs : stateSector S z.1) : Parameter S :=
   (⟨z.1 - C.referenceState,
@@ -50,7 +64,7 @@ theorem n06PrimitiveParameterOfState_lift (href : referenceStateConditions D S C
     liftSectorParameter S C (n06PrimitiveParameterOfState href z hs) = z := by
   apply Prod.ext
   · change C.referenceState + (z.1 - C.referenceState) = z.1
-    simpa only [add_comm] using sub_add_cancel z.1 C.referenceState
+    exact n06_add_state_difference C.referenceState z.1
   · rfl
 
 theorem n06PrimitiveParameterOfState_mem (href : referenceStateConditions D S C)
@@ -62,9 +76,9 @@ theorem n06PrimitiveParameterOfState_grading (href : referenceStateConditions D 
     (z : AnnularState S × ℝ) (hs : stateSector S z.1) (n : ℕ) :
     parameterGrading S n (n06PrimitiveParameterOfState href z hs) =
       stateGrading S n (z.1 - C.referenceState) + |z.2| := by
-  rw [parameterGrading, pairGrading_apply]
-  change stateGrading S n (z.1 - C.referenceState) + ‖z.2‖ = _
-  rw [Real.norm_eq_abs]
+  exact n06_submodule_parameter_grading (stateGrading S) (stateSectorSubmodule S) n
+    (n06PrimitiveParameterOfState href z hs).1
+    (n06PrimitiveParameterOfState href z hs).2
 
 /-- The state loss is selected once, before every spatial order. -/
 theorem n06_primitive_currentAtom_difference_jets
@@ -79,12 +93,9 @@ theorem n06_primitive_currentAtom_difference_jets
           B * T.E0 (T.sample (K.cell m)) ^ B *
             T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) *
               (stateGrading S (s + d) (z.1 - C.referenceState) + |z.2|) := by
-  let d : ℕ := hcur.2.1.choose
-  have hd := hcur.2.1.choose_spec
+  obtain ⟨d, hd⟩ := hcur.2.1
   refine ⟨d, fun s => ?_⟩
-  let B : ℝ := (hd s).choose
-  have hB : 0 < B := (hd s).choose_spec.1
-  have hb := (hd s).choose_spec.2
+  obtain ⟨B, hB, hb⟩ := hd s
   refine ⟨B, hB, ?_⟩
   intro z hz hs m a p hp i j hij
   have h := hb (n06PrimitiveParameterOfState href z hs)

@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Statements.N06PrimitiveGeometryBridge
+import ContinuousFlexibility.Analysis.N05ReferenceResidual
 import ContinuousFlexibility.Analysis.N06ReferenceCanonicalEquation
 import ContinuousFlexibility.Analysis.N06FiniteReferenceColumns
 import ContinuousFlexibility.Analysis.N07aReferenceOpenCoefficients
@@ -197,7 +198,10 @@ theorem n06_primitiveReference_positive_distribution
     ring
   have he := n06N05_positive_canonicalWeakPairing hD hb hS h03 h04.1 h05
     href hz hs u hm hφ
-  rw [integral_congr_ae hop, integral_add hiD.neg hiV, integral_neg,
+  have hiDneg : Integrable (fun p =>
+      -(U p * divergenceOperator (K.coefficients (C.referenceState, 0) m) φ p))
+      (canonicalMeasure S K m) := hiD.neg
+  rw [integral_congr_ae hop, integral_add hiDneg hiV, integral_neg,
     integral_congr_ae hforcing, integral_sub hiV hiG] at he
   change (∫ p, U p * divergenceOperator (K.coefficients (C.referenceState, 0) m) φ p
     ∂canonicalMeasure S K m) = ∫ p, G p * φ p ∂canonicalMeasure S K m

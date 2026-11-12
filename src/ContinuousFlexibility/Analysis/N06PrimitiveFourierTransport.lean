@@ -119,7 +119,7 @@ theorem n06_primitiveReferenceTransforms_congr_ae_physical
     intro p hp
     have hp' : p ∈ referencePhysicalPieceOpen S K m := by
       simpa only [h04.1.referenceDomain m] using hp
-    exact congrArg Prod.snd (hradial.1 m p hp').1
+    simpa only using congrArg Prod.snd (hradial.1 m p hp').1
   have hpull : ∀ᵐ p ∂canonicalMeasure S K m,
       f (K.inverseChart (C.referenceState, 0) m p) =
         g (K.inverseChart (C.referenceState, 0) m p) := by

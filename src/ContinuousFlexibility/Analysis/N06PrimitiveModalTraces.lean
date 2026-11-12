@@ -56,7 +56,7 @@ theorem n06_primitiveReference_radial_ae_pullback
     intro p hp
     have hp' : p ∈ referencePhysicalPieceOpen S K m := by
       simpa only [h04.1.referenceDomain m] using hp
-    exact congrArg Prod.snd (hradial.1 m p hp').1
+    simpa only using congrArg Prod.snd (hradial.1 m p hp').1
   have hxActual := (n05_canonicalChart_ae_iff h04 href hs m hangle
     (fun p => P p.1)).mp hp
   have hx : ∀ᵐ p ∂volume.restrict
@@ -199,10 +199,13 @@ theorem n06N05_primitive_canonicalMode_root_traces
       DifferentiableAt ℝ (fun r => K.height (C.referenceState, 0) m (r, 0) *
         v ((K.chart (C.referenceState, 0) m (r, 0)).1)) (K.physicalRight ml) := by
     have hline : DifferentiableAt ℝ (fun r : ℝ => (r, (0 : ℝ)))
-        (K.physicalRight ml) := differentiableAt_id.prodMk differentiableAt_const
-    have hchart := (J.chart_differentiable 0).comp _ hline
-    have hheight := (J.height_differentiable 0).comp _ hline
-    exact hheight.fun_mul ((hv.differentiable (by norm_num) _).comp _ hchart.fst)
+        (K.physicalRight ml) := differentiableAt_id.prodMk (differentiableAt_const (0 : ℝ))
+    have hchart : DifferentiableAt ℝ (fun r => K.chart (C.referenceState, 0) m (r, 0))
+        (K.physicalRight ml) := (J.chart_differentiable 0).comp (K.physicalRight ml) hline
+    have hheight : DifferentiableAt ℝ (fun r => K.height (C.referenceState, 0) m (r, 0))
+        (K.physicalRight ml) := (J.height_differentiable 0).comp (K.physicalRight ml) hline
+    exact hheight.fun_mul
+      ((hv.differentiable (by norm_num) _).comp (K.physicalRight ml) hchart.fst)
   have hL := n06_cauchyData_eq_of_eqOn_Ioo_left (h04.1.referenceBounds ml).1
     (hpull ml vl Jl hvl) hdw (he ml vl hvl hmodeL).symm
   have hright : K.physicalRight ml < K.physicalRight mr :=

@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N07aProfileHeight
 import ContinuousFlexibility.Analysis.SolveReturnEquations
+import ContinuousFlexibility.Analysis.N05ReferenceResidual
 
 /-!
 # The actual reference characteristic return
@@ -74,11 +75,8 @@ theorem n07a_originalCoefficients_reference
 
 theorem n07a_reference_mem_stateNeighborhood
     (h01 : N01Properties D T S C base loss ε) :
-    (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
-  change stateGrading S base (C.referenceState - C.referenceState) < ε ∧ |(0 : ℝ)| < ε
-  have hzero : stateGrading S base (0 : AnnularState S) = 0 := (stateGrading S base).map_zero'
-  rw [sub_self, hzero, abs_zero]
-  exact ⟨h01.2.1, h01.2.1⟩
+    (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
+  n05_referenceState_mem h01.2.1
 
 private theorem n07a_sqrt_radial_speed {r w d : ℝ} (hr : r ≠ 0) (hw : 0 < w) :
     Real.sqrt (-(w * (d / r))) / w = Real.sqrt (-d / (r * w)) := by
