@@ -73,7 +73,6 @@ theorem n04WholeCanonicalAtlasData_actual_referencePartition :
     apply hu
     have hrad := n04WholeCanonicalAtlasData_actual_reference_radii
       hT hS hN hfield e₀ e cell F G Q N n
-    dsimp only at hn
     rwa [hrad.1, hrad.2] at hn
 
 theorem n04PositiveNormalizationBuffer_region_subset_actualNormalization
