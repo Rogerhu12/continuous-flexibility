@@ -32,6 +32,9 @@ theorem SeedRetainedPair.n01c_radialPrimitiveGeometry
     (hcoordinates : R11aRetainedCoordinates P Γ) :
     N01RadialPrimitiveGeometry Γ.reference := by
   let G := P.toEntryPair hS hband
+  have hGL : G.radiusL = P.pair.radiusL := rfl
+  have hGR : G.radiusR = P.pair.radiusR := rfl
+  have hGw : G.profile = P.pair.profile := rfl
   have hreal := (hS.2.2.2.1 S.sigma hS.2.2.1).1
   have hGeo : RadialProfileGeometry Γ.reference := (Classical.choose_spec hΓ.2.1).1
   have hentry (side : Bool) :
@@ -98,7 +101,7 @@ theorem SeedRetainedPair.n01c_radialPrimitiveGeometry
   let l := centralRadius (-sqrt centralOscillatorA)
   let u := centralRadius (sqrt centralOscillatorA)
   have hcentral : NegativeRadialComponent Γ.reference l u := by
-    simpa only [NegativeRadialComponent, l, u, ha, hb, hw] using
+    simpa only [NegativeRadialComponent, l, u, ha, hb, hw, hGL, hGR, hGw] using
       (G.central_model_return hq (hentry false) (hentry true)).1
   obtain ⟨c₀, hc₀, hcentralLower⟩ :=
     negativeRadialComponent_optical_lower_bound hGeo hcentral
@@ -113,8 +116,8 @@ theorem SeedRetainedPair.n01c_radialPrimitiveGeometry
   intro r hr hneg
   have hrG : r ∈ Ioo (G.radiusL * (S.family S.sigma).a)
       (G.radiusR * (S.family S.sigma).b) := by
-    simpa only [radialCore, Set.mem_Ioo, ha, hb] using hr
-  have hnegG : deriv G.profile r < 0 := by simpa only [hw] using hneg
+    simpa only [radialCore, Set.mem_Ioo, ha, hb, hGL, hGR] using hr
+  have hnegG : deriv G.profile r < 0 := by simpa only [hw, hGw] using hneg
   rcases G.negative_deriv_cases hq hrG hnegG with hleftCase | hmiddle | hrightCase
   · obtain ⟨s, hs, rfl, hsneg⟩ := hleftCase
     exact (htail false s hs hsneg).mono_constant
