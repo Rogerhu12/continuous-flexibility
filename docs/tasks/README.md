@@ -11,6 +11,10 @@ The rules below are the same for every line.
 
 Read this section every time you check the rules. A notice is removed when it is done.
 
+- **N07a and N08 are taken over by new sessions (2026-11-12).** The earlier sessions on `line/N07a`
+  and `line/N08` must not push to those branches any more. The new sessions continue on the same
+  branches: N07a ports to N07b's state-dependent physical domains (instructions in the last comment
+  of PR #37); N08 continues from its last push (PR #39), whose CI is red.
 - **R10a, R11a, N07a, N07b, N09N10: your math-research access check was wrong, not your access.**
   `git ls-remote` on a bare URL has no credentials. Use the URL derived from your `origin` remote
   (step 4 of "When you finish" below), and take the next reserved topic.
