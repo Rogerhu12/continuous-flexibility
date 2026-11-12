@@ -96,6 +96,8 @@ theorem n04Realization_fixedSpatialProduct_parameterJet_bound
     _ ≤ ∑ t : I, c t *
         (|mixedDerivative t.1.val t.2.val h q| *
           |(RF.parameter (a - t.1.val) (b - t.2.val) q hq).D k x v|) := by
+      change |∑ t : I, (c t * mixedDerivative t.1.val t.2.val h q) *
+        (RF.parameter (a - t.1.val) (b - t.2.val) q hq).D k x v| ≤ _
       simpa only [abs_mul, habsc, mul_assoc] using
         Finset.abs_sum_le_sum_abs
           (fun t : I => (c t * mixedDerivative t.1.val t.2.val h q) *

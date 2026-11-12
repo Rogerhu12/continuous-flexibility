@@ -33,7 +33,7 @@ attribute [local instance]
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
 
-private def n04Realization_atomFintype : Fintype Atom := derive_fintype%
+private abbrev n04Realization_atomFintype : Fintype Atom := derive_fintype% Atom
 
 attribute [local instance] n04Realization_atomFintype
 

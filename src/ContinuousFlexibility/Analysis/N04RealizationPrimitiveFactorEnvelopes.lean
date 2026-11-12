@@ -147,7 +147,9 @@ theorem n04Realization_primitiveFactor_envelopes
       (1 + stateGrading S high ((ζ b x).1 - C.referenceState) + |(ζ b x).2|) ≤ W x := by
     cases b
     · exact hcurrentBase x
-    · simpa only [ζ, ↓reduceIte, Prod.fst, Prod.snd, sub_self, map_zero,
+    · have hzero : stateGrading S high (0 : AnnularState S) = 0 :=
+        (stateGrading S high).map_zero'
+      simpa only [ζ, ↓reduceIte, Prod.fst, Prod.snd, sub_self, hzero,
         abs_zero, add_zero, mul_one] using hrefBase x
   have hFj (b : Bool) (s : X → PolarPoint)
       (hmem : ∀ x, s x ∈ physicalPieceOpen S K (ζ b x) (m x))
@@ -283,7 +285,12 @@ theorem n04Realization_primitiveFactor_envelopes
     have h := n04Realization_envelope_mul_jets hW p
       (fun _ y => T.ell (T.radius y.1)) J (fun _ => hell.contDiffAt) hJ j
       (fun k _ => hellj k) (fun k hk => hJj k (hk.trans hj))
-    simpa only [J, canonicalMaterialJacobian, Function.comp_apply, n07bMaterialRadiusChart] using h
+    have heq (x : X) :
+        canonicalMaterialJacobian T K (z x) (m x) ∘ n07bMaterialRadiusChart T =
+          fun y => T.ell (T.radius y.1) * J x y := by
+      funext y
+      simp only [J, canonicalMaterialJacobian, Function.comp_apply, n07bMaterialRadiusChart]
+    simpa only [heq] using h
   · intro j hj
     have h := n04Realization_envelope_mul_jets hW p
       (fun _ y => (T.ell (T.radius y.1))⁻¹) I (fun _ => hellInv.contDiffAt) hI j

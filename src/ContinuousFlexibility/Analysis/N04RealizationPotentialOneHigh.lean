@@ -92,7 +92,7 @@ theorem n04Realization_potential_positive_oneHigh (K s : ℕ) (RH : ℝ) :
         have h := hraw j 0 (Nat.zero_le _) u w huw q hq x hx hlow
           Fin.elim0 (fun t => t.elim0) R hR hxR (fun t => t.elim0)
         rw [smoothDirections_D_zero_apply ((RF j).parameter u w q hq) hx Fin.elim0] at h
-        simpa only [parameterHeightWeight, if_pos rfl, mul_one] using h
+        simpa only [parameterHeightWeight, if_pos rfl, ite_true, mul_one] using h
       have hjet (j : Fin 5) (u w : ℕ) (huw : u + w ≤ s + 2)
           (d : OrderedFinpartition k) (t : Fin d.length) :
           ‖((RF j).parameter u w q hq).D (d.partSize t) x (v ∘ d.emb t)‖ ≤

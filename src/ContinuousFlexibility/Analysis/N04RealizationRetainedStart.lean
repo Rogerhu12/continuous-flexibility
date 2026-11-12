@@ -41,6 +41,63 @@ attribute [local instance]
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
 
+/-- Keep the dependent cutoff/source tail opaque during the preceding
+existential selections. This is exactly the public optical payload. -/
+private def n04RealizationOpticalFieldStartAt
+    (D : ReferenceData) (T : MaterialData) (S : PhysicalSpacesData)
+    (C : NonlinearGeometryData S) (R : ReturnEquationData S)
+    (base loss : ℕ) (ε : ℝ) : Prop :=
+  ∃ Q : N04bOpticalCutoffData D S C base ε,
+    ∃ E : AnnularState S × ℝ → CircleSpace S →ₗ[ℝ] HeightPair S →ₗ[ℝ] S.Source,
+      NonlinearPropertiesThrough03 D T S C R (Q.field E) base loss ε ∧
+      N04bFieldRegularity D S C (Q.field E) base ε ∧
+      (Q.field E).coefficients = returnCorrectedCoefficients D S C Q.cutoff ∧
+      (Q.field E).minusFlow = returnCorrectedMinusFlow S C Q.cutoff
+
+private def n04RealizationRetainedFieldStart (D : ReferenceData) : Prop :=
+  ∃ T : MaterialData, ∃ S : PhysicalSpacesData, ∃ C : NonlinearGeometryData S,
+    ∃ R : ReturnEquationData S, ∃ base loss : ℕ, ∃ ε : ℝ,
+      IsMaterialData D T ∧ IsPhysicalSpaces D T S ∧
+      (∀ r : ℝ, 1 ≤ T.E0 r) ∧ N01PrimitiveGeometry D T S C ∧
+      (∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (C.cell m)) ∧
+      4 ≤ base ∧ 0 < ε ∧ n04RealizationOpticalFieldStartAt D T S C R base loss ε
+
+/-- Compose the two choices before specializing the geometry type or
+the final dependent field predicate. Neither intermediate witness moves. -/
+private theorem n04Realization_compose_fixed_start
+    {Flow Geometry Return : Type*} (install : Flow → Geometry)
+    (N : Geometry → ℕ → ℕ → ℝ → Prop) (Primitive Host : Geometry → Prop)
+    (Final : Geometry → Return → ℕ → ℕ → ℝ → Prop)
+    (hstart : ∃ f base loss ε, 4 ≤ base ∧ 0 < ε ∧
+      N (install f) base loss ε ∧ Primitive (install f) ∧ Host (install f))
+    (hnext : ∀ C base loss ε, N C base loss ε →
+      ∃ R base' ε', base ≤ base' ∧ 0 < ε' ∧ Final C R base' loss ε') :
+    ∃ f R base loss ε, 4 ≤ base ∧ 0 < ε ∧
+      Primitive (install f) ∧ Host (install f) ∧ Final (install f) R base loss ε := by
+  obtain ⟨f, base₀, loss, ε₀, hbase₀, _hε₀, hN, hPrimitive, hHost⟩ := hstart
+  obtain ⟨R, base, ε, hbase, hε, hFinal⟩ := hnext (install f) base₀ loss ε₀ hN
+  exact ⟨f, R, base, loss, ε, hbase₀.trans hbase, hε, hPrimitive, hHost, hFinal⟩
+
+private theorem n04Realization_retainedN01_with_host
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S}
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hA : N01PartA D T S C) (hG : N01PrimitiveGeometry D T S C)
+    (hE : ∀ r : ℝ, 1 ≤ T.E0 r)
+    (hhost : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (C.cell m)) :
+    ∃ Θ : (AnnularState S × ℝ) → ℕ → ℝ → ℝ → ℝ,
+      ∃ base loss : ℕ, ∃ ε : ℝ, 4 ≤ base ∧ 0 < ε ∧
+        N01Properties D T S (circleFlowGeometry C Θ) base loss ε ∧
+        N01PrimitiveGeometry D T S (circleFlowGeometry C Θ) ∧
+        (∀ m, Ioo ((circleFlowGeometry C Θ).left m)
+          ((circleFlowGeometry C Θ).right m) ⊆
+            D.cells ((circleFlowGeometry C Θ).cell m)) := by
+  obtain ⟨Θ, base, loss, ε, hbase, hε, hN, hG',
+      _hcontrol, hcell, hleft, hright, _htravel, _hreference⟩ :=
+    n04Realization_retainedN01 hS hT hA hG hE
+  refine ⟨Θ, base, loss, ε, hbase, hε, hN, hG', fun m => ?_⟩
+  simpa only [hleft, hright, hcell] using hhost m
+
 /-- The fixed N02 factory is applied before the optical cutoff factory.
 Only the three flow fields of the supplied Part A record are installed. -/
 theorem n04Realization_partA_through03
@@ -66,17 +123,41 @@ theorem n04Realization_partA_through03
             returnCorrectedCoefficients D S (circleFlowGeometry C Θ) Q.cutoff ∧
           (Q.field E).minusFlow =
             returnCorrectedMinusFlow S (circleFlowGeometry C Θ) Q.cutoff := by
-  obtain ⟨Θ, base₀, loss, ε₀, hbase₀, hε₀, hN, hG',
-      _hcontrol, hcell, hleft, hright, _htravel, _hreference⟩ :=
-    n04Realization_retainedN01 hS hT hA hG hE
-  obtain ⟨R, hR⟩ := hN.exists_returnEquation hS hT
-  obtain ⟨base, ε, hbase, hε, _hεε₀, hfield⟩ :=
-    n04Realization_exists_opticalField_through03 hT hS hN hR
-  have hhost' (m : ℕ) : Ioo ((circleFlowGeometry C Θ).left m)
-      ((circleFlowGeometry C Θ).right m) ⊆
-        D.cells ((circleFlowGeometry C Θ).cell m) := by
-    simpa only [hleft, hright, hcell] using hhost m
-  exact ⟨Θ, R, base, loss, ε, hbase₀.trans hbase, hε, hG', hhost', hfield⟩
+  exact n04Realization_compose_fixed_start (circleFlowGeometry C)
+    (N01Properties D T S) (N01PrimitiveGeometry D T S)
+    (fun C' => ∀ m, Ioo (C'.left m) (C'.right m) ⊆ D.cells (C'.cell m))
+    (n04RealizationOpticalFieldStartAt D T S)
+    (n04Realization_retainedN01_with_host hT hS hA hG hE hhost)
+    (fun C' base loss ε hN => by
+      obtain ⟨R, hR⟩ := hN.exists_returnEquation hS hT
+      obtain ⟨base', ε', hb, hε', _hε'ε, hfield⟩ :=
+        n04Realization_exists_opticalField_through03 hT hS hN hR
+      exact ⟨R, base', ε', hb, hε', hfield⟩)
+
+/-- Assemble on an abstract reference before the retained connected
+reference is substituted. The optical tail stays unopened. -/
+private theorem n04Realization_fieldStart_of_partA
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S}
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hA : N01PartA D T S C) (hG : N01PrimitiveGeometry D T S C)
+    (hE : ∀ r : ℝ, 1 ≤ T.E0 r)
+    (hhost : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (C.cell m)) :
+    n04RealizationRetainedFieldStart D := by
+  obtain ⟨Θ, R, base, loss, ε, hbase, hε, hG', hhost', hfield⟩ :=
+    n04Realization_partA_through03 hT hS hA hG hE hhost
+  exact ⟨T, S, circleFlowGeometry C Θ, R, base, loss, ε,
+    hT, hS, hE, hG', hhost', hbase, hε, hfield⟩
+
+private theorem n04Realization_seedConstruction_fieldStart
+    {q : ℝ} (Q : SeedReferenceConstruction q) (hq : 0 < q)
+    (hD : IsRadialReference Q.reference)
+    (hraw : (Q.selected.family Q.selected.sigma).cellIndex =
+      morseTwoTailAt Q.selected.chain.index (fun _ k => Q.selected.chain.index + k)) :
+    n04RealizationRetainedFieldStart Q.reference := by
+  obtain ⟨T, S, C, hT, hS, hA, _henumeration, hhost, hE, hG⟩ :=
+    Q.exists_n05RetainedN01a hq hD hraw
+  exact n04Realization_fieldStart_of_partA hT hS hA hG hE hhost
 
 /-- The caller's retained reference is unchanged. The returned field,
 its primitive geometry and its global material floor belong to one
@@ -104,6 +185,7 @@ theorem n04Realization_retainedSeed_through03
           N04bFieldRegularity Γ.reference S C (Q.field E) base ε ∧
           (Q.field E).coefficients = returnCorrectedCoefficients Γ.reference S C Q.cutoff ∧
           (Q.field E).minusFlow = returnCorrectedMinusFlow S C Q.cutoff := by
+  change n04RealizationRetainedFieldStart Γ.reference
   obtain ⟨Q₀, hreference, hselected_eq, _hretained, _hprofile, _hheight⟩ :=
     exists_n05_seedReferenceConstruction_of_retained P hselected hband
       hw hphi hD.1 hconstruction hcoordinates
@@ -116,22 +198,8 @@ theorem n04Realization_retainedSeed_through03
   have hrawQ₀ : (Q₀.selected.family Q₀.selected.sigma).cellIndex =
       morseTwoTailAt Q₀.selected.chain.index (fun _ k => Q₀.selected.chain.index + k) := by
     simpa only [hselected_eq] using hraw
-  obtain ⟨T, S, C, hT₀, hS₀, hA₀, _henumeration, hhost₀, hE, hG₀⟩ :=
-    Q₀.exists_n05RetainedN01a hq hQ₀ hrawQ₀
-  have hT : IsMaterialData Γ.reference T := by
-    simpa only [hreference] using hT₀
-  have hS : IsPhysicalSpaces Γ.reference T S := by
-    simpa only [hreference] using hS₀
-  have hA : N01PartA Γ.reference T S C := by
-    simpa only [hreference] using hA₀
-  have hG : N01PrimitiveGeometry Γ.reference T S C := by
-    simpa only [hreference] using hG₀
-  have hhost : ∀ m, Ioo (C.left m) (C.right m) ⊆ Γ.reference.cells (C.cell m) := by
-    simpa only [hreference] using hhost₀
-  obtain ⟨Θ, R, base, loss, ε, hbase, hε, hG', hhost', hfield⟩ :=
-    n04Realization_partA_through03 hT hS hA hG hE hhost
-  exact ⟨T, S, circleFlowGeometry C Θ, R, base, loss, ε,
-    hT, hS, hE, hG', hhost', hbase, hε, hfield⟩
+  simpa only [hreference] using
+    n04Realization_seedConstruction_fieldStart Q₀ hq hQ₀ hrawQ₀
 
 /-- The closed R11a construction retains its actual pair, reference and
 coordinate metadata all the way to the literal corrected physical field. -/

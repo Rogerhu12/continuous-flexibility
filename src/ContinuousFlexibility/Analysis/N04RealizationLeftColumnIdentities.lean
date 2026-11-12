@@ -69,6 +69,19 @@ theorem n04Realization_scalarLeft_hasDerivAt
 
 variable {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
+/-- Remove the vanishing angular error before specializing the complete
+derivative curve and coefficients to the dependent physical state. -/
+private theorem n04Realization_leftDerivative_of_error
+    (hχ : ContDiff ℝ ∞ S.chiLeft) (f : ℝ → ℝ) (A : SymmetricCoefficients)
+    (B R : PolarPoint → ℝ) (q : ℝ) (p : PolarPoint)
+    (hd : HasDerivAt f
+      (divergenceOperator A (heightPairField S (0, 1)) p +
+        q * scalarCorrectionError B R (heightPairField S (0, 1)) p) 0) :
+    HasDerivAt f (divergenceOperator A (n06ReferenceLeftField S.chiLeft) p) 0 := by
+  have he : heightPairField S (0, 1) = scalarCommonHeightDecode S (0, 1) := rfl
+  simpa only [he, n04Realization_leftHeight_error hχ, mul_zero, add_zero,
+    n04Realization_leftHeight_decode] using hd
+
 theorem n04Realization_originalLeft_hasDerivAt
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h01 : N01Properties D T S C base loss ε)
@@ -79,12 +92,12 @@ theorem n04Realization_originalLeft_hasDerivAt
         (z.1 + coupledScalarAction t ((0, 1), (0, (0, 0))), z.2) p)
       (divergenceOperator (originalCoefficients D S C z)
         (n06ReferenceLeftField S.chiLeft) p) 0 := by
-  have hd := coupled_hasDerivAt_scalarResidualField_heightDirection hT hS h01 hz hs
-    (0, 1) hp
-  have he : heightPairField S (0, 1) = scalarCommonHeightDecode S (0, 1) := rfl
-  rw [he, n04Realization_leftHeight_error hS.2.2.1.1, mul_zero, add_zero,
-    n04Realization_leftHeight_decode] at hd
-  exact hd
+  exact n04Realization_leftDerivative_of_error hS.2.2.1.1
+    (fun t : ℝ => scalarResidualField D S C
+      (z.1 + coupledScalarAction t ((0, 1), (0, (0, 0))), z.2) p)
+    (originalCoefficients D S C z) (residualErrorCoefficient D S C z)
+    (scalarResidualField D S C z) z.2 p
+    (coupled_hasDerivAt_scalarResidualField_heightDirection hT hS h01 hz hs (0, 1) hp)
 
 /-- The profile germ comparison holds along the entire left-height
 parameter curve, before taking its derivative. -/
