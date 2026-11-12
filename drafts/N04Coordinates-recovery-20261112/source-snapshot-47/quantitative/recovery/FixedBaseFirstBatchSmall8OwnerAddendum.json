@@ -1,0 +1,128 @@
+{
+  "schema": "n04-fixed-base-first-batch-small8-owner-addendum/v1",
+  "path": "quantitative/recovery/FixedBaseFirstBatchSmall8OwnerAddendum.json",
+  "author": "/root/quantitative_route",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "status": "REVIEW_BINDING_UPDATED_HELD_NOT_ACTIVATED",
+  "immutable_selection": {
+    "blob": "a9969267ba216a1d29840079894603d480ffd536",
+    "sha256": "74a1ecd904248853c48b1712a3f187f3b4540a8026733ff11b086422e14dec0a",
+    "changed": false
+  },
+  "update": "The optional71-line eighth leaf now has a completed independent source review and frozen owner. The earlier selection record's pending-review wording is historical; no source, provider or budget is changed.",
+  "optional_module": "ContinuousFlexibility.Analysis.ActualNegativeMovingReferenceUnitPoint",
+  "optional_source": {
+    "draft_path": "audit/reconstructed/ActualNegativeMovingReferenceUnitPoint.lean",
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeMovingReferenceUnitPoint.lean",
+    "module": "ContinuousFlexibility.Analysis.ActualNegativeMovingReferenceUnitPoint",
+    "blob": "aba2322ac91263cc9b63a6f487c5338f21667574",
+    "sha256": "4de7f0e3cff3982cb846413fa1f6eedbe2762a82bcd9e88d350ff1c5f38e9ff9",
+    "bytes": 3473,
+    "lines": 71,
+    "server_readback_exact": true
+  },
+  "candidate": {
+    "path": "audit/reconstructed/ActualNegativeMovingReferenceUnitPointCandidateManifest.json",
+    "git_blob": "4e7587d1ca8f24326c5c1d9c4514e5a51c018103",
+    "sha256": "26b2ad7cb954414726e4246d3d6b4fe74dded1c492ac519a3be4fa5d5258e807",
+    "utf8_bytes": 12135,
+    "changed": false
+  },
+  "owner": {
+    "blob": "01165ee25048ab2541b585f3fae506ef5e5ab346",
+    "sha256": "2673931c828afd8e05ebdc0ad918b3c3776becc53479443b450a7f55c60c5c11",
+    "bytes": 9116
+  },
+  "independent_peer": {
+    "blob": "cb6df894811759aa407c32d9ff6489a52d1b1c73",
+    "sha256": "dfb5567d8e5a47b32d8f39ab5641e0bf62b0cbf1ae77247247b23e232d1522f1",
+    "bytes": 23700,
+    "reviewer": "/root/proof_inventory",
+    "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+    "verdict": "PASS_FULL_SOURCE_AND_ACTUAL_CALLEES"
+  },
+  "exact_identity_and_binding_checks": {
+    "owner_source_equals_the_immutable_optional_source": true,
+    "owner_candidate_equals_the_immutable_optional_candidate": true,
+    "owner_and_peer_Git_SHA256_verified": true,
+    "declared_public_header": {
+      "count": 1,
+      "private_count": 0,
+      "name": "ContinuousFlexibility.Analysis.n04bActualTypedAtlas_moving_negative_reference_unitPoint",
+      "complete_header_sha256": "70e2029a791c06c1819d0e6f755a543be43ef26d02f6778d6b38070f2d6b32c5",
+      "complete_header_exact_in_candidate_and_independent_review": true
+    },
+    "all_seven_actual_providers_match173": [
+      {
+        "module": "ContinuousFlexibility.Analysis.N04bActualTypedAtlas",
+        "path": "src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean",
+        "blob": "334d3c0c19727465e3afc75f988c79df1b8d7b8a",
+        "actual173_blob": "334d3c0c19727465e3afc75f988c79df1b8d7b8a",
+        "matches": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient",
+        "path": "src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+        "blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+        "actual173_blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+        "matches": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry",
+        "path": "src/ContinuousFlexibility/Analysis/N07aCurrentPhysicalGeometry.lean",
+        "blob": "dd8ea3aac0ba1e207170091f16a2bfc623a4257b",
+        "actual173_blob": "dd8ea3aac0ba1e207170091f16a2bfc623a4257b",
+        "matches": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04bCurrentPartition",
+        "path": "src/ContinuousFlexibility/Analysis/N04bCurrentPartition.lean",
+        "blob": "1005399b1097409b64312fd2994c23a7b69e5757",
+        "actual173_blob": "1005399b1097409b64312fd2994c23a7b69e5757",
+        "matches": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04bTypedAtlasData",
+        "path": "src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+        "blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+        "actual173_blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+        "matches": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04bReferencePieces",
+        "path": "src/ContinuousFlexibility/Analysis/N04bReferencePieces.lean",
+        "blob": "ba67b0a6776363ed4ebf616d7fd56c489baf2b25",
+        "actual173_blob": "ba67b0a6776363ed4ebf616d7fd56c489baf2b25",
+        "matches": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04bReferenceHalves",
+        "path": "src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+        "blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+        "actual173_blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+        "matches": true
+      }
+    ],
+    "no_collision_with_selected684": [],
+    "full_small8_global_name_and_import_gate_remains_parent_owned": true
+  },
+  "budget": {
+    "small7_fixed1_added": 19934,
+    "small8_fixed1_added": 19935,
+    "first_batch_sources_added": 19539,
+    "small8_parent_full_root_lag": 265,
+    "small8_after_fixed1_full_root_lag": 396,
+    "limit": 20000,
+    "reserve_small8": 65
+  },
+  "remaining_gates": [
+    "Failed173 repair successor must be full green.",
+    "Exact reviewed small8 group must be selected by parent and complete full CI.",
+    "Recheck future parent provider fingerprints and full generated-root lag before fixed131.",
+    "Keep reference85 after fixed131."
+  ],
+  "no_source_edit": true,
+  "no_Lean_or_CI_query": true,
+  "no_ref_or_active_change": true,
+  "scope": "This is a receipt and actual-provider-binding supplement, not a second mathematical peer of the71-line lemma and not a compiled-success declaration."
+}

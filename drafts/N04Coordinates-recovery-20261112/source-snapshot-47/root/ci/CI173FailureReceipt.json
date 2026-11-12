@@ -1,0 +1,52 @@
+{
+  "schema": "N04-CI-complete-failure-receipt-v1",
+  "ci_round": 173,
+  "head": "fe5e4ceec7c959c0a078eacdea58ce6741940149",
+  "tree": "e92d8ed54fae5a18179f13cdfaadc15b4669ed80",
+  "run": 43326937998,
+  "workflow_run_number": 1848,
+  "job": 131561646081,
+  "conclusion": "failure",
+  "finished_at": "2026-11-12T23:17:44Z",
+  "checked_at": "2026-11-12 23:18:02 UTC",
+  "job_log": {
+    "blob": "0eb8d265c4860084766c1a045615217eee1ccb00",
+    "sha256": "db55d03d0b307f8719171ae6452ce567dadf1ef9a0558ef7ef0daa6c4152d114",
+    "bytes": 92252,
+    "download_count": 1
+  },
+  "full_diagnostics": {
+    "blob": "07915f3536523e5addadf2987bd8424afe359760",
+    "sha256": "bf13eecfbdb83d24f05362ed9a915dea811c6d84f2f7baa408c20ef91ebeaf54",
+    "count": 1,
+    "all_complete_from_job_log": true
+  },
+  "quick": {
+    "result": "failure",
+    "newly_compiled_project_modules": 4,
+    "all_three_previous_repairs_passed": true,
+    "compiled_modules": [
+      "WholeReferenceGaugeRootFirstJets",
+      "WholeReferenceGaugeAtlasInterfaces",
+      "WholeReferenceGaugeReferencePrincipal",
+      "WholeReferenceGaugeRootInterfaces"
+    ]
+  },
+  "full_build": "skipped",
+  "endpoint_report": "skipped",
+  "current_project_total": 4562,
+  "current_full_compiled_coverage": "not established",
+  "last_complete_green": {
+    "head": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "receipt": "40f4094476659c1b052cd462cdfb119ca6032f44",
+    "project_compiled": 4409,
+    "project_total": 4413
+  },
+  "endpoint": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open"
+  },
+  "environment": "Exec transport disconnected during attempted artifact materialization; all source repair work continues through authorized Git tools.",
+  "no_more_log_downloads": true
+}

@@ -1,0 +1,213 @@
+{
+  "schema": "n04-held-source-candidate-v1",
+  "path": "audit/reconstructed/ActualNegativeMovingReferenceUnitPointCandidateManifest.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "author": "audit_coordinates",
+  "status": "held; independently reviewed owner pending; not compiled; not installed",
+  "authorization": "One genuinely needed Stage B connection, at most 80 new Lean lines; no active, ref, CI, or local Lean actions.",
+  "baseline": {
+    "commit": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+    "tree": "944690f469cb649cafd0e1dc582b6acb4992af6c",
+    "ci_status": "CI172 failed, as reported by root. CI173 repairs are separate. No CI query by this agent."
+  },
+  "source": {
+    "draft_path": "audit/reconstructed/ActualNegativeMovingReferenceUnitPoint.lean",
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeMovingReferenceUnitPoint.lean",
+    "module": "ContinuousFlexibility.Analysis.ActualNegativeMovingReferenceUnitPoint",
+    "blob": "aba2322ac91263cc9b63a6f487c5338f21667574",
+    "sha256": "4de7f0e3cff3982cb846413fa1f6eedbe2762a82bcd9e88d350ff1c5f38e9ff9",
+    "bytes": 3473,
+    "lines": 71,
+    "server_readback_exact": true
+  },
+  "new_file_diff": {
+    "path": "audit/reconstructed/ActualNegativeMovingReferenceUnitPoint.new.diff",
+    "blob": "7100074cf403816ab0e422d64dcc9f9a574871aa",
+    "sha256": "1fc017efe8a2493f74f4888dcb110aea7cabb6f984e2fd2e5262af3da04edded",
+    "additions": 71,
+    "deletions": 0,
+    "against": "No existing file is modified."
+  },
+  "public_declarations": [
+    {
+      "name": "ContinuousFlexibility.Analysis.n04bActualTypedAtlas_moving_negative_reference_unitPoint",
+      "header": "theorem n04bActualTypedAtlas_moving_negative_reference_unitPoint\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}\n    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)\n    (hN : NonlinearPropertiesThrough03 D T S C R L base loss ε)\n    (hfield : N04bFieldRegularity D S C L base ε)\n    (e : ℕ ≃ N04PieceIndex D) (z : AnnularState S × ℝ)\n    (m : ℕ) (side : Bool) (p : PolarPoint) :\n    let K := n04bActualTypedAtlas hT hS hN hfield e\n    p ∈ physicalPieceOpen S K z (e.symm (.inl (m, side))) →\n      p ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ) ∧\n      (p.1 = n04bActualReferenceCut hN m ∨\n        ∃ refSide : Bool,\n          (if refSide then n04bActualReferenceCut hN m < p.1\n            else p.1 < n04bActualReferenceCut hN m) ∧\n          let j := e.symm (.inl (m, refSide))\n          let q := n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData K) j p\n          p ∈ referencePhysicalPieceOpen S K j ∧\n            q ∈ CanonicalGeometry.unitStrip ∧\n            CanonicalGeometry.physicalUnitPoint K j q = p)",
+      "header_sha256": "70e2029a791c06c1819d0e6f755a543be43ef26d02f6778d6b38070f2d6b32c5"
+    }
+  ],
+  "direct_imports": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualTypedAtlas",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean",
+      "blob": "334d3c0c19727465e3afc75f988c79df1b8d7b8a",
+      "sha256": "91687b630205a380f137dcdb4cb32068d79582e09d17d4a4cd14317e21b9e19f",
+      "bytes": 4841,
+      "lines": 111,
+      "url": "https://github.com/Rogerhu12/continuous-flexibility/blob/1206f9b294beb20a2c04760dfe1f6fb0b8649223/src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient",
+      "path": "src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "sha256": "bbec6c5ccb9e0d9bcf75516b8c9024e4f15c2e834119822ace6da3c4e70fd51c",
+      "bytes": 5638,
+      "lines": 128,
+      "url": "https://github.com/Rogerhu12/continuous-flexibility/blob/1206f9b294beb20a2c04760dfe1f6fb0b8649223/src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/N07aCurrentPhysicalGeometry.lean",
+      "blob": "dd8ea3aac0ba1e207170091f16a2bfc623a4257b",
+      "sha256": "067b9539ca2976ec2b523901a574fd74a397013091406a77901799b87a2e78cf",
+      "bytes": 6799,
+      "lines": 139,
+      "url": "https://github.com/Rogerhu12/continuous-flexibility/blob/1206f9b294beb20a2c04760dfe1f6fb0b8649223/src/ContinuousFlexibility/Analysis/N07aCurrentPhysicalGeometry.lean"
+    }
+  ],
+  "transitive_actual_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bCurrentPartition",
+      "path": "src/ContinuousFlexibility/Analysis/N04bCurrentPartition.lean",
+      "blob": "1005399b1097409b64312fd2994c23a7b69e5757",
+      "sha256": "4087433cb73325005c6677a09b43531b3f8abc469c95958a5c874d8bbe41a2cf",
+      "lines": 165,
+      "selection": "Exact file read at 1206f9b294beb20a2c04760dfe1f6fb0b8649223"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bTypedAtlasData",
+      "path": "src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+      "blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "sha256": "166d48b590552637d5efedb29ce0b19d5963d02f33e7caebffe44a04b576fdf4",
+      "lines": 142,
+      "review": "Full source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferencePieces",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferencePieces.lean",
+      "blob": "ba67b0a6776363ed4ebf616d7fd56c489baf2b25",
+      "sha256": "0ae0b98aef8f688002cf783e7b129f6834a79b1502061bd123f90ffe59edf766",
+      "lines": 174,
+      "review": "Full source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceHalves",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+      "blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+      "sha256": "598b1d5f18c4a22eecd5108949d46b2ddca955d79ea66090b85ca6ba06ff8227",
+      "lines": 96,
+      "review": "Full source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    }
+  ],
+  "actual_callees": [
+    {
+      "name": "n04b_typed_negative_domain_subset",
+      "provider": "1005399b1097409b64312fd2994c23a7b69e5757",
+      "use": "Membership of the actual moving domain implies membership of the original component without neighborhood, bijection, or material assumptions."
+    },
+    {
+      "name": "n04bTypedAtlasData_physicalPieceOpen",
+      "provider": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "use": "Exact actual atlas-to-typed-domain equality at e.symm (.inl (m, side))."
+    },
+    {
+      "name": "n04bTypedAtlasData_referencePhysicalPieceOpen",
+      "provider": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "use": "The same original cut and enumeration identify the reference half."
+    },
+    {
+      "name": "n07aPhysicalIntervalData",
+      "provider": "dd8ea3aac0ba1e207170091f16a2bfc623a4257b",
+      "use": "Existing record sets only left/right to the physical interval endpoints."
+    },
+    {
+      "name": "n07aCanonicalUnitInversePoint_maps",
+      "provider": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "use": "With K := n07aPhysicalIntervalData K, reference physical membership yields genuine unitStrip membership."
+    },
+    {
+      "name": "n07aCanonicalUnitPoint_inverse",
+      "provider": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "use": "With the same existing interval record, its canonicalUnitPoint is definitionally physicalUnitPoint K; the actual affine inverse returns the original p."
+    },
+    {
+      "name": "lt_or_gt_of_ne",
+      "provider_pattern": "N04bReferenceHalves.n04b_negativeHalf_existsUnique uses exactly this API and Boolean interval constructors.",
+      "use": "Used only after preserving the equality-to-cut branch."
+    },
+    {
+      "name": "Equiv.apply_symm_apply",
+      "use": "Public apply lemma, with no unfolding of a mathlib definition."
+    }
+  ],
+  "proof_audit": [
+    "The theorem explicitly takes the original hT/hS/hN/hfield/e and defines K once as the literal n04bActualTypedAtlas.",
+    "The input is actual physicalPieceOpen at the given state z and current Bool side; it is not replaced by a reference domain.",
+    "The existing typed negative-domain subset lemma gives the exact same component m.",
+    "The old reference-cut equality branch remains explicit. Off the cut, lt_or_gt_of_ne chooses one Bool reference side and returns its literal comparison.",
+    "Reference membership is proved by exact metadata reduction, not assumed.",
+    "Positive physical width is deduced from the point's strict reference-interval membership.",
+    "The final two affine facts reuse the existing public N07a maps and inverse lemmas. No affine algebra is reimplemented.",
+    "The current-side proof is uniform in Bool; only the two scalar strict-order witnesses differ.",
+    "All theorem parameters occur in the full public header, so no proof-only section binder can disappear."
+  ],
+  "witness_and_sample_scope": {
+    "K": "Unchanged original actual typed atlas.",
+    "component": "The original m is retained in both current and reference indices.",
+    "current_index": "e.symm (.inl (m, side))",
+    "reference_index": "e.symm (.inl (m, refSide))",
+    "width": "K.physicalRight j - K.physicalLeft j, as used by the existing affine inverse.",
+    "cell_and_sample": "No cell field or material sample is modified or identified across halves. Later estimates retain T.sample (K.cell j).",
+    "state_domain": "No extra or enlarged neighborhood/sector hypothesis is imposed; the domain-containment step is literal for every z.",
+    "absent_target_assumptions": "No CurrentJets, ReferenceJets, CanonicalPrimitiveGeometry, material bound, or equality between moving and reference domains is assumed."
+  },
+  "remaining_scope": [
+    "The equality-to-old-cut branch still needs its actual continuity/closed-domain consumer.",
+    "This theorem does not prove normalized opposite-root range u <= 5/4.",
+    "No material estimate or full CanonicalPrimitiveGeometry completion is claimed.",
+    "Whole-reference-gauge reuse must use its existing exact negative metadata and domain-field equalities."
+  ],
+  "prior_route": {
+    "path": "audit/recovery/CanonicalPrimitiveStageBActualHalfClosenessRoute.json",
+    "blob": "c75cab2b29c2d3047261c97492adf3f6af48d6b6",
+    "sha256": "5c59e17a5e5ea97770059f619ffd48e3fdbeed036fe56affea25cb61dd84b68d"
+  },
+  "static_name_check": {
+    "scope": "Exact token search on repository default main; not a fresh whole-active generated-declaration scan",
+    "query": "n04bActualTypedAtlas_moving_negative_reference_unitPoint",
+    "total_count": 0,
+    "incomplete_results": false,
+    "items": []
+  },
+  "visibility_and_graph_scope": "All three direct imports were fetched at the exact baseline and fully read. Called transitive provider sources were fully read and their exact selection is bound above. No fresh whole-repository DAG/generated-name scan is claimed.",
+  "checks": {
+    "public_count": 1,
+    "private_count": 0,
+    "project_axioms": 0,
+    "sorry": 0,
+    "unsafe": 0,
+    "native_decide": 0,
+    "resource_limit_changes": false,
+    "local_compilation": false,
+    "active_edits": false,
+    "ref_actions": false,
+    "ci_queries": false
+  },
+  "budget": {
+    "allocated_new_lean_lines": 80,
+    "actual_new_lean_lines": 71,
+    "previous_draft_ledger": 19899,
+    "projected_draft_ledger": 19970,
+    "remaining_of_this_allocation": 9
+  },
+  "independent_review": {
+    "reviewer": "root",
+    "status": "requested; receipt pending"
+  },
+  "owner_selection": {
+    "selected_source": "aba2322ac91263cc9b63a6f487c5338f21667574",
+    "status": "candidate only; reviewed manifest will bind the independent receipt after it arrives"
+  }
+}

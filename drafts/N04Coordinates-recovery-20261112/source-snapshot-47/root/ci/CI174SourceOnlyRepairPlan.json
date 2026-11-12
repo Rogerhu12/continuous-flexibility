@@ -1,0 +1,62 @@
+{
+  "schema": "N04Coordinates-reviewed-source-repair-v1",
+  "ci_round": 174,
+  "repository": "Rogerhu12/continuous-flexibility",
+  "branch": "line/N04Coordinates",
+  "base_commit": "fe5e4ceec7c959c0a078eacdea58ce6741940149",
+  "base_tree": "e92d8ed54fae5a18179f13cdfaadc15b4669ed80",
+  "tree": "807284b6c96dec4c4d109c9ad4ad27d85a719c12",
+  "main_readback": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "last_complete_green": {
+    "commit": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "receipt": "40f4094476659c1b052cd462cdfb119ca6032f44"
+  },
+  "failed_predecessor": {
+    "run": 43326937998,
+    "receipt": "0a5635b54fd3d3754a2fb4b18069bf112671e124",
+    "complete_diagnostics": "07915f3536523e5addadf2987bd8424afe359760",
+    "diagnostic_count": 1,
+    "previous_three_repairs_compiled": true
+  },
+  "prior_plan": "cec0558a2ea690a7e6086ba9bb2bf032b592402d",
+  "selected_dependency_graph": "8d2aa82e28f0575edd9f69ac871029dc19bf6610",
+  "repairs": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootMatching.lean",
+      "before": "d044ebf2139de1886c261a1ad19294ff4f227d5b",
+      "after": "098a4853bebee5185fba6a50fc170045172827cc",
+      "before_lines": 133,
+      "after_lines": 134,
+      "owner": "37f33ffa2433124e577a52fb566c10eafeb16e21",
+      "peer": "b8bf00b65e34bb7eac04e28ab0011b878c706446"
+    }
+  ],
+  "public_theorem_heads_unchanged": 1,
+  "all_imports_and_dependency_edges_unchanged": true,
+  "all_witnesses_and_statements_unchanged": true,
+  "budget": {
+    "source_added_since_complete_green": 19714,
+    "source_deleted_since_complete_green": 0,
+    "source_paths": 149,
+    "full_checked_in_root_lag": 257,
+    "conservative_total": 19971,
+    "limit": 20000,
+    "margin": 29,
+    "repair_net_lines": 1
+  },
+  "actual_expected_patch": {
+    "added": 2,
+    "deleted": 1,
+    "net": 1
+  },
+  "conditional_compiled_coverage_plan": "2423233254216be57bae5c892f40909e10361544",
+  "unchanged": [
+    "all other blob paths",
+    "generated import root",
+    "workflow",
+    "toolchain",
+    "lake manifest",
+    "resource limits"
+  ],
+  "validation": "Exact full source and complete seven-line diagnostic reviewed by owner and independent peer. Lean validation pending CI; no task completion or axiom-clearance claim."
+}

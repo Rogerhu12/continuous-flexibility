@@ -1,0 +1,382 @@
+{
+  "schema": "n04-independent-source-review/v1",
+  "path": "positive/recovery/reviews/ActualNegativeMovingReferenceUnitPointIndependentReview.json",
+  "author": "/root/proof_inventory",
+  "source_author": "/root/audit_coordinates",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "created_at_utc": "2026-11-12 23:22:01 UTC",
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "verdict": "PASS_FULL_SOURCE_AND_ACTUAL_CALLEES",
+  "findings": [],
+  "candidate_manifest": {
+    "git_blob": "4e7587d1ca8f24326c5c1d9c4514e5a51c018103",
+    "sha256": "26b2ad7cb954414726e4246d3d6b4fe74dded1c492ac519a3be4fa5d5258e807",
+    "utf8_bytes": 12135,
+    "lines": 213,
+    "final_newline": true
+  },
+  "source": {
+    "draft_path": "audit/reconstructed/ActualNegativeMovingReferenceUnitPoint.lean",
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeMovingReferenceUnitPoint.lean",
+    "module": "ContinuousFlexibility.Analysis.ActualNegativeMovingReferenceUnitPoint",
+    "git_blob": "aba2322ac91263cc9b63a6f487c5338f21667574",
+    "sha256": "4de7f0e3cff3982cb846413fa1f6eedbe2762a82bcd9e88d350ff1c5f38e9ff9",
+    "utf8_bytes": 3473,
+    "lines": 71,
+    "final_newline": true
+  },
+  "new_file_diff": {
+    "git_blob": "7100074cf403816ab0e422d64dcc9f9a574871aa",
+    "sha256": "1fc017efe8a2493f74f4888dcb110aea7cabb6f984e2fd2e5262af3da04edded",
+    "utf8_bytes": 3660,
+    "lines": 74,
+    "final_newline": true,
+    "additions": 71,
+    "deletions": 0,
+    "reconstructed_source_bytes_exact": true
+  },
+  "baseline": {
+    "commit": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+    "tree": "944690f469cb649cafd0e1dc582b6acb4992af6c",
+    "ci_status": "CI172 failed, as reported by root. CI173 repairs are separate. No CI query by this agent."
+  },
+  "public_surface": {
+    "public_count": 1,
+    "private_count": 0,
+    "full_header": "theorem n04bActualTypedAtlas_moving_negative_reference_unitPoint\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}\n    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)\n    (hN : NonlinearPropertiesThrough03 D T S C R L base loss ε)\n    (hfield : N04bFieldRegularity D S C L base ε)\n    (e : ℕ ≃ N04PieceIndex D) (z : AnnularState S × ℝ)\n    (m : ℕ) (side : Bool) (p : PolarPoint) :\n    let K := n04bActualTypedAtlas hT hS hN hfield e\n    p ∈ physicalPieceOpen S K z (e.symm (.inl (m, side))) →\n      p ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ) ∧\n      (p.1 = n04bActualReferenceCut hN m ∨\n        ∃ refSide : Bool,\n          (if refSide then n04bActualReferenceCut hN m < p.1\n            else p.1 < n04bActualReferenceCut hN m) ∧\n          let j := e.symm (.inl (m, refSide))\n          let q := n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData K) j p\n          p ∈ referencePhysicalPieceOpen S K j ∧\n            q ∈ CanonicalGeometry.unitStrip ∧\n            CanonicalGeometry.physicalUnitPoint K j q = p)",
+    "header_sha256": "70e2029a791c06c1819d0e6f755a543be43ef26d02f6778d6b38070f2d6b32c5",
+    "header_matches_candidate_byte_for_byte": true,
+    "direct_imports": [
+      "import ContinuousFlexibility.Analysis.N04bActualTypedAtlas",
+      "import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient",
+      "import ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry"
+    ],
+    "all_parameters_explicit_in_theorem_header": true,
+    "proof_only_section_parameters_missing": false
+  },
+  "actual_providers_read_in_full": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualTypedAtlas",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean",
+      "git_blob": "334d3c0c19727465e3afc75f988c79df1b8d7b8a",
+      "sha256": "91687b630205a380f137dcdb4cb32068d79582e09d17d4a4cd14317e21b9e19f",
+      "utf8_bytes": 4841,
+      "lines": 111,
+      "final_newline": true,
+      "read_scope": "Full source; all71-line candidate calls and metadata reductions checked",
+      "exact_baseline_path_blob_verified": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient",
+      "path": "src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "git_blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "sha256": "bbec6c5ccb9e0d9bcf75516b8c9024e4f15c2e834119822ace6da3c4e70fd51c",
+      "utf8_bytes": 5638,
+      "lines": 128,
+      "final_newline": true,
+      "read_scope": "Full source; all71-line candidate calls and metadata reductions checked",
+      "exact_baseline_path_blob_verified": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/N07aCurrentPhysicalGeometry.lean",
+      "git_blob": "dd8ea3aac0ba1e207170091f16a2bfc623a4257b",
+      "sha256": "067b9539ca2976ec2b523901a574fd74a397013091406a77901799b87a2e78cf",
+      "utf8_bytes": 6799,
+      "lines": 139,
+      "final_newline": true,
+      "read_scope": "Full source; all71-line candidate calls and metadata reductions checked",
+      "exact_baseline_path_blob_verified": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bCurrentPartition",
+      "path": "src/ContinuousFlexibility/Analysis/N04bCurrentPartition.lean",
+      "git_blob": "1005399b1097409b64312fd2994c23a7b69e5757",
+      "sha256": "4087433cb73325005c6677a09b43531b3f8abc469c95958a5c874d8bbe41a2cf",
+      "utf8_bytes": 7233,
+      "lines": 165,
+      "final_newline": true,
+      "read_scope": "Full source; all71-line candidate calls and metadata reductions checked",
+      "exact_baseline_path_blob_verified": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bTypedAtlasData",
+      "path": "src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+      "git_blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "sha256": "166d48b590552637d5efedb29ce0b19d5963d02f33e7caebffe44a04b576fdf4",
+      "utf8_bytes": 6905,
+      "lines": 142,
+      "final_newline": true,
+      "read_scope": "Full source; all71-line candidate calls and metadata reductions checked",
+      "exact_baseline_path_blob_verified": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferencePieces",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferencePieces.lean",
+      "git_blob": "ba67b0a6776363ed4ebf616d7fd56c489baf2b25",
+      "sha256": "0ae0b98aef8f688002cf783e7b129f6834a79b1502061bd123f90ffe59edf766",
+      "utf8_bytes": 7872,
+      "lines": 174,
+      "final_newline": true,
+      "read_scope": "Full source; all71-line candidate calls and metadata reductions checked",
+      "exact_baseline_path_blob_verified": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceHalves",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+      "git_blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+      "sha256": "598b1d5f18c4a22eecd5108949d46b2ddca955d79ea66090b85ca6ba06ff8227",
+      "utf8_bytes": 3544,
+      "lines": 96,
+      "final_newline": true,
+      "read_scope": "Full source; all71-line candidate calls and metadata reductions checked",
+      "exact_baseline_path_blob_verified": true
+    }
+  ],
+  "additional_sources_read_in_full": [
+    {
+      "git_blob": "c1ab39be003a688c6c818ba6971cfc14edb60371",
+      "sha256": "4ec54b5113f1353ee8ebf46b7d02838f5525480f8ec224764fb826e232d2acd1",
+      "utf8_bytes": 5632,
+      "lines": 115,
+      "final_newline": true,
+      "module": "ContinuousFlexibility.Analysis.N04bTypedAtlasNegative",
+      "read_scope": "Full source; metadata and import visibility checked"
+    },
+    {
+      "git_blob": "4ad5cbd7979d26b7e8f5733d9795df09f5d9ec9d",
+      "sha256": "853eb7d9cc44e1ac4706ea8dc83e39a7a5356d21f5bd0ecd4e864a8ac88ef256",
+      "utf8_bytes": 7918,
+      "lines": 165,
+      "final_newline": true,
+      "module": "ContinuousFlexibility.Analysis.N04bActualDomainGeometry",
+      "read_scope": "Full source; metadata and import visibility checked"
+    },
+    {
+      "git_blob": "d2be1124da85939a9dfd1cba380a9ac303c61308",
+      "sha256": "21d8319b313d567698500bb20354251130e9d1746ff414fdf5aad2adb94ee7c0",
+      "utf8_bytes": 3293,
+      "lines": 76,
+      "final_newline": true,
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceMetadata",
+      "read_scope": "Full source; metadata and import visibility checked"
+    }
+  ],
+  "interface_definitions": {
+    "compatibility_module": {
+      "path": "src/ContinuousFlexibility/Statements/N07aCanonicalGeometry.lean",
+      "git_blob": "3c05f4bd67460143d05c22a7580dd712e23c62a7",
+      "sha256": "432151f047054e28dcce9f20439290684afa9ed5bf85a3cf294a2e790b85fd53",
+      "utf8_bytes": 635,
+      "lines": 14,
+      "final_newline": true,
+      "read_scope": "Full14-line compatibility import; definitions live in Nonlinear"
+    },
+    "nonlinear": {
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "ref": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+      "git_blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "utf8_bytes": 101197,
+      "lines": 1773,
+      "final_newline": true,
+      "read_scope": "The six actual domain/unit-point definitions listed below, with enclosing namespace context; no claim of reading all1773 lines in this review"
+    },
+    "exact_blocks": [
+      {
+        "pattern": "def physicalPieceOpen",
+        "line": 637,
+        "block": "    (m : ℕ) : Set PolarPoint :=\n  Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ univ\n\ndef physicalPieceOpen (S : PhysicalSpacesData) (K : CanonicalData S)\n    (z : AnnularState S × ℝ) (m : ℕ) : Set PolarPoint :=\n  K.physicalDomain z m\n\ndef physicalPieceClosed (S : PhysicalSpacesData) (K : CanonicalData S)\n    (z : AnnularState S × ℝ) (m : ℕ) : Set PolarPoint :=\n  closure (physicalPieceOpen S K z m)\n\ndef canonicalClosed (S : PhysicalSpacesData) (K : CanonicalData S)\n    (m : ℕ) : Set PolarPoint :=\n  Icc (K.left m) (K.right m) ×ˢ univ\n"
+      },
+      {
+        "pattern": "def referencePhysicalPieceOpen",
+        "line": 633,
+        "block": "def canonicalOpen (S : PhysicalSpacesData) (K : CanonicalData S) (m : ℕ) : Set PolarPoint :=\n  Ioo (K.left m) (K.right m) ×ˢ univ\n\ndef referencePhysicalPieceOpen (S : PhysicalSpacesData) (K : CanonicalData S)\n    (m : ℕ) : Set PolarPoint :=\n  Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ univ\n\ndef physicalPieceOpen (S : PhysicalSpacesData) (K : CanonicalData S)\n    (z : AnnularState S × ℝ) (m : ℕ) : Set PolarPoint :=\n  K.physicalDomain z m\n\ndef physicalPieceClosed (S : PhysicalSpacesData) (K : CanonicalData S)\n    (z : AnnularState S × ℝ) (m : ℕ) : Set PolarPoint :=\n  closure (physicalPieceOpen S K z m)\n"
+      },
+      {
+        "pattern": "def canonicalOpen",
+        "line": 630,
+        "block": "  cutRadius : ℕ → ℝ\n  normalizationRegion : Set ℝ\n\ndef canonicalOpen (S : PhysicalSpacesData) (K : CanonicalData S) (m : ℕ) : Set PolarPoint :=\n  Ioo (K.left m) (K.right m) ×ˢ univ\n\ndef referencePhysicalPieceOpen (S : PhysicalSpacesData) (K : CanonicalData S)\n    (m : ℕ) : Set PolarPoint :=\n  Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ univ\n\ndef physicalPieceOpen (S : PhysicalSpacesData) (K : CanonicalData S)\n    (z : AnnularState S × ℝ) (m : ℕ) : Set PolarPoint :=\n  K.physicalDomain z m\n\ndef physicalPieceClosed (S : PhysicalSpacesData) (K : CanonicalData S)"
+      },
+      {
+        "pattern": "def physicalUnitPoint",
+        "line": 999,
+        "block": "\ndef unitStrip : Set PolarPoint := Ioo (0 : ℝ) 1 ×ˢ univ\n\ndef physicalUnitPoint {S : PhysicalSpacesData} (K : CanonicalData S)\n    (m : ℕ) (p : PolarPoint) : PolarPoint :=\n  (K.physicalLeft m + (K.physicalRight m - K.physicalLeft m) * p.1, p.2)\n\ndef canonicalUnitPoint {S : PhysicalSpacesData} (K : CanonicalData S)\n    (m : ℕ) (p : PolarPoint) : PolarPoint :=\n  (K.left m + (K.right m - K.left m) * p.1, p.2)\n\n/-- Angular coordinates occur as defects from the identity, since the\nunwrapped angular coordinate itself is unbounded. All radial variables in\nthis list are evaluated on a unit interval. -/\ninductive Atom"
+      },
+      {
+        "pattern": "def canonicalUnitPoint",
+        "line": 1003,
+        "block": "    (m : ℕ) (p : PolarPoint) : PolarPoint :=\n  (K.physicalLeft m + (K.physicalRight m - K.physicalLeft m) * p.1, p.2)\n\ndef canonicalUnitPoint {S : PhysicalSpacesData} (K : CanonicalData S)\n    (m : ℕ) (p : PolarPoint) : PolarPoint :=\n  (K.left m + (K.right m - K.left m) * p.1, p.2)\n\n/-- Angular coordinates occur as defects from the identity, since the\nunwrapped angular coordinate itself is unbounded. All radial variables in\nthis list are evaluated on a unit interval. -/\ninductive Atom\n  | chartRadial | chartAngleDefect | inverseRadial | inverseAngleDefect\n  | height | heightInverse | jacobian | jacobianInverse\n  | sourceFactor | sourceFactorInverse\n  | principalA | principalAInverse | principalB | principalC | potential"
+      },
+      {
+        "pattern": "def unitStrip",
+        "line": 997,
+        "block": "def parameterGrading (S : PhysicalSpacesData) : ℕ → Seminorm ℝ (Parameter S) :=\n  pairGrading (sectorGrading S) realGrading\n\ndef unitStrip : Set PolarPoint := Ioo (0 : ℝ) 1 ×ˢ univ\n\ndef physicalUnitPoint {S : PhysicalSpacesData} (K : CanonicalData S)\n    (m : ℕ) (p : PolarPoint) : PolarPoint :=\n  (K.physicalLeft m + (K.physicalRight m - K.physicalLeft m) * p.1, p.2)\n\ndef canonicalUnitPoint {S : PhysicalSpacesData} (K : CanonicalData S)\n    (m : ℕ) (p : PolarPoint) : PolarPoint :=\n  (K.left m + (K.right m - K.left m) * p.1, p.2)\n\n/-- Angular coordinates occur as defects from the identity, since the\nunwrapped angular coordinate itself is unbounded. All radial variables in"
+      }
+    ]
+  },
+  "import_visibility_checks": {
+    "exact_baseline": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+    "source_imports_resolve": true,
+    "relevant_paths": [
+      [
+        "N04bActualTypedAtlas",
+        "N04bTypedAtlasNegative",
+        "N04bTypedAtlasPositive",
+        "N04bTypedAtlasDomains",
+        "N04bTypedAtlasData"
+      ],
+      [
+        "N04bTypedAtlasData",
+        "N04bActualDomainGeometry",
+        "N04bReferenceActualDomains",
+        "N04bCurrentPartition"
+      ],
+      [
+        "N04bTypedAtlasData",
+        "N04bReferenceMetadata",
+        "N04bReferencePieces",
+        "N04bReferenceHalves"
+      ],
+      [
+        "N07aCanonicalUnitCoefficient",
+        "Statements.N07aCanonicalGeometry",
+        "Statements.Nonlinear"
+      ]
+    ],
+    "import_only_source_fingerprints": [
+      {
+        "module": "ContinuousFlexibility.Analysis.N04bTypedAtlasPositive",
+        "git_blob": "2af7ae857614c2e1dbb24e87272633d320e63853",
+        "sha256": "b84cf956ed7f04ce08043eb43b3b4c355d653d13b0fbde58c6153ab69e24dc2d",
+        "utf8_bytes": 4840,
+        "lines": 93,
+        "final_newline": true,
+        "imports": [
+          "import ContinuousFlexibility.Analysis.N04bTypedAtlasDomains"
+        ],
+        "read_scope": "Import header and exact baseline source fingerprint; no separate mathematical audit of unused declarations"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04bReferenceActualDomains",
+        "git_blob": "22dba872c605b5168d156c01f6d0e5bdeeb554d9",
+        "sha256": "8d34d189917cf632f50a004e6c2a44e245113972caa933f893e5f6e531c728b9",
+        "utf8_bytes": 5799,
+        "lines": 124,
+        "final_newline": true,
+        "imports": [
+          "import ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+          "import ContinuousFlexibility.Analysis.N04bReferencePieces",
+          "import ContinuousFlexibility.Analysis.N04bCurrentPartition"
+        ],
+        "read_scope": "Import header and exact baseline source fingerprint; no separate mathematical audit of unused declarations"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04bTypedAtlasDomains",
+        "git_blob": "4114c475e0bda07b9674ea1f5127fc56507695fc",
+        "sha256": "8032ce84bf016719e83ee02e2d6d11ab3869314b5de2aae207935b757ef121b9",
+        "utf8_bytes": 7788,
+        "lines": 155,
+        "final_newline": true,
+        "imports": [
+          "import ContinuousFlexibility.Analysis.N04bTypedAtlasData"
+        ],
+        "read_scope": "Import header and exact baseline source fingerprint; no separate mathematical audit of unused declarations"
+      }
+    ],
+    "no_whole_transitive_graph_or_global_name_scan_claimed": true
+  },
+  "proof_review": [
+    {
+      "step": "One original actual atlas and actual moving input",
+      "detail": "K is introduced from the theorem's literal let n04bActualTypedAtlas hT hS hN hfield e. The input is physicalPieceOpen S K z at e.symm(.inl(m,side)). Unfolding only the project constructor and applying n04bTypedAtlasData_physicalPieceOpen, followed by Equiv.apply_symm_apply, produces the genuine current typed domain at the same z,C,L,m,side."
+    },
+    {
+      "step": "Actual moving half is contained in the original component",
+      "detail": "n04b_typed_negative_domain_subset has exactly the required subset header and no regularity, material, neighborhood or chart-invertibility premise. Its proof takes the original-domain conjunct of mem_n04bTravelDomain. The candidate therefore legitimately proves p in Ioo(C.left m)(C.right m)×univ for arbitrary z admitted by its input."
+    },
+    {
+      "step": "Equality to the old optical cut remains a separate outcome",
+      "detail": "The by_cases split uses precisely n04bActualReferenceCut hN m. When equality holds, Or.inl closes that branch without claiming reference open-half membership at the cut. This is the old reference cut, not the current moving cut."
+    },
+    {
+      "step": "Reference-side selection retains the same m",
+      "detail": "Off the cut, lt_or_gt_of_ne gives p.1<cut or cut<p.1. false yields the strict interval(C.left m,cut), true yields(cut,C.right m). The definitions n04bNegativeLeft/right reduce with these concrete Boolean constructors, and hfull supplies the remaining strict endpoint. The exact API pattern is already used in the fully read N04bReferenceHalves.n04b_negativeHalf_existsUnique."
+    },
+    {
+      "step": "Reference metadata, enumeration and point are exact",
+      "detail": "n04bTypedAtlasData_referencePhysicalPieceOpen reduces to Ioo(n04bReferenceTypedLeft...)(n04bReferenceTypedRight...)×univ. Applying e to e.symm(.inl(m,refSide)) and unfolding the two reference typed endpoint definitions gives exactly the preceding hr. No new e, component, chart, C/R/L object, cell or material sample is selected."
+    },
+    {
+      "step": "Width positivity is derived, not assumed",
+      "detail": "href is referencePhysicalPieceOpen, whose actual definition is the strict physical endpoint interval. Thus href.1.1.trans href.1.2 proves K.physicalLeft j<K.physicalRight j for the same selected j. There is no unjustified global width lower bound."
+    },
+    {
+      "step": "Existing genuine affine inverse gives q in unitStrip",
+      "detail": "n07aPhysicalIntervalData K changes only left/right to K.physicalLeft/right. Hence its canonicalOpen is definitionally referencePhysicalPieceOpen S K. n07aCanonicalUnitInversePoint_maps with the same positive width and href gives the displayed literal q in CanonicalGeometry.unitStrip."
+    },
+    {
+      "step": "The original point is recovered by physicalUnitPoint",
+      "detail": "n07aCanonicalUnitPoint_inverse supplies canonicalUnitPoint(n07aPhysicalIntervalData K) j q=p. Expanding the actual public project definitions shows this left side is definitionally physicalUnitPoint K j q. Both use K.physicalLeft j+(K.physicalRight j−K.physicalLeft j)*q.1 and retain q.2=p.2. This is the reference physical affine normalization; no equality with a nonlinear current inverseChart is asserted."
+    },
+    {
+      "step": "Lean declaration and proof structure",
+      "detail": "The theorem owns all parameters in its full public header, so no proof-only section binder can disappear. intro K hp handles the head let and implication. Nested existential/conjunction construction reduces the final j,q lets. All source imports, options, namespaces and the complete71-line file were read; no unresolved concrete syntax or API defect was found."
+    }
+  ],
+  "actual_API_contracts": {
+    "n04b_typed_negative_domain_subset": "(i:ℕ×Bool) : n04bTypedPhysicalDomain (D:=D) C Γ (.inl i) ⊆ Ioo(C.left i.1)(C.right i.1)×ˢ(univ:Set ℝ)",
+    "n04bTypedAtlasData_physicalPieceOpen": "physicalPieceOpen S (n04bTypedAtlasData D S C L cut e F h J) z m = n04bTypedPhysicalDomain C (n04bActualTravelChart S C L z) (e m)",
+    "n04bTypedAtlasData_referencePhysicalPieceOpen": "referencePhysicalPieceOpen S (n04bTypedAtlasData D S C L cut e F h J) m = Ioo(n04bReferenceTypedLeft C cut(e m))(n04bReferenceTypedRight C cut(e m))×ˢuniv",
+    "n07aCanonicalUnitInversePoint_maps": "(hm:K.left m<K.right m) : MapsTo(n07aCanonicalUnitInversePoint K m)(canonicalOpen S K m) CanonicalGeometry.unitStrip",
+    "n07aCanonicalUnitPoint_inverse": "(hm:K.left m<K.right m)(p:PolarPoint) : CanonicalGeometry.canonicalUnitPoint K m (n07aCanonicalUnitInversePoint K m p)=p",
+    "library_API_validation": "Equiv.apply_symm_apply and lt_or_gt_of_ne are used in the exact same forms in the fully read actual baseline providers. No new mathlib definition is unfolded by the candidate, and no independent whole-mathlib source audit is claimed."
+  },
+  "scope_and_limits": {
+    "same_actual_K_C_R_L_e": true,
+    "original_component_m_retained": true,
+    "current_side_may_differ_from_reference_side": true,
+    "equality_to_reference_cut_explicit": true,
+    "cell_or_sample_equality_across_halves_not_claimed": true,
+    "whole_reference_gauge_metadata_transport_not_proved_here": true,
+    "quantitative_closeness_or_normalized_range_not_claimed": true,
+    "no_CurrentJets_ReferenceJets_or_final_geometry_premise": true,
+    "no_material_bound_produced": true,
+    "complete_global_import_graph_and_name_preflight": "Separate root-owned installation gate; this review checks exact direct providers and relevant visibility paths.",
+    "source_unchanged_by_reviewer": true,
+    "local_Lean_or_compilation": false,
+    "CI_query_or_download": false,
+    "active_edit_index_or_ref_action": false,
+    "resource_limit_changes": false
+  },
+  "subsequent_budget_note": {
+    "prior_frozen_ledger_report": {
+      "git_blob": "7a0aab35f942c06078903f0f05633480eadf2e5c",
+      "sha256": "90d1b2c3460b060c0c6ccc299406dd34880d6a8854c55f70e7b4c2da296296ee",
+      "unchanged": true
+    },
+    "exact_new_source_lines": 71,
+    "recorded_draft_bound_before_this_source": 19899,
+    "bound_with_this_source": 19970,
+    "parent_proposed_eight_source_group_lines": 578,
+    "group_components": {
+      "gateway_five": 333,
+      "root_open_U": 100,
+      "audit_Frechet": 74,
+      "this_source": 71
+    },
+    "allowed_credit_only_after_exact_complete_green_and_root_ledger_update": {
+      "root_open_U": 100,
+      "audit_Frechet": 74,
+      "this_source": 71,
+      "total": 245,
+      "gateway_five": 0
+    },
+    "conditional_result": 19725,
+    "conditional_remaining_of20000": 275,
+    "conditional_remaining_after_future_delta250": 25,
+    "no_credit_applied_now": true,
+    "same_reference_to_uncompiled_history_does_not_create_gateway333_credit": true,
+    "active_CI_line_budget_is_separate": true
+  }
+}

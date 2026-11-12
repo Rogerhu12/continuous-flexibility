@@ -1,0 +1,48 @@
+{
+  "schema": "N04-full-source-local-repair-owner-v1",
+  "author": "/root",
+  "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootMatching.lean",
+  "base_commit": "fe5e4ceec7c959c0a078eacdea58ce6741940149",
+  "before": {
+    "blob": "d044ebf2139de1886c261a1ad19294ff4f227d5b",
+    "sha256": "56874820bdb1b924cac665f08355410d02885b4e449d4055f6020bda731d459f",
+    "lines": 133
+  },
+  "after": {
+    "blob": "098a4853bebee5185fba6a50fc170045172827cc",
+    "sha256": "444601ac9257fb6cdbe4a6672667d5d311d050d5fd51325f18b75e4ea7211316",
+    "lines": 134
+  },
+  "diagnostic": {
+    "blob": "07915f3536523e5addadf2987bd8424afe359760",
+    "run": 43326937998,
+    "line": 111,
+    "column": 6,
+    "complete": true,
+    "lines": 7,
+    "reason": "hrad.2 uses the unchanged old whole-atlas physicalRight field, while the goal retains the local reference-gauged V alias."
+  },
+  "repair": "Explicitly change the goal to the same original whole-atlas physicalRight; add K to the existing metadata-only simp list so the typed-atlas abbreviation is exposed on both sides.",
+  "actual_provider": {
+    "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasData.lean",
+    "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+    "read": "Complete atlas constructor definition. Its B record changes canonical endpoints and positive chart/operator fields but does not change physicalRight; the existing interior-division update preserves physical endpoints."
+  },
+  "unchanged": {
+    "complete_public_theorem_headers": 1,
+    "imports": 2,
+    "options": true,
+    "all_witnesses": true,
+    "other_ordered_root_case": true,
+    "all_other_bytes": true
+  },
+  "delta": {
+    "added": 2,
+    "deleted": 1,
+    "net": 1
+  },
+  "after_server_readback_exact": true,
+  "new_Lean_axioms_or_resource_changes": false,
+  "local_Lean": false,
+  "status": "FULL_OWNER_REVIEW_INDEPENDENT_PEER_PENDING"
+}

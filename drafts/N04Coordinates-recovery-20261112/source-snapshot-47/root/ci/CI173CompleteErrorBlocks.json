@@ -1,0 +1,23 @@
+{
+  "ci_round": 173,
+  "run": 43326937998,
+  "head": "fe5e4ceec7c959c0a078eacdea58ce6741940149",
+  "source": "Complete failed job log diagnostic section",
+  "job_log_blob": "0eb8d265c4860084766c1a045615217eee1ccb00",
+  "completeness": "The sole detailed diagnostic is seven lines and is immediately followed by a successful build event inside the forty-line window, so the diagnostic is complete.",
+  "errors": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootMatching.lean",
+      "line": 111,
+      "column": 6,
+      "text": "error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootMatching.lean:111:6: Type mismatch: After simplification, term\n  hrad.right\n has type\n  @Eq ℝ ((n04WholeCanonicalAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell σ τ Q N).physicalRight il)\n    (C.right m)\nbut is expected to have type\n  @Eq ℝ (V.physicalRight il) (C.right m)",
+      "next_event": "✔ [6848/6857] Ran ContinuousFlexibility.Analysis.WholeReferenceGaugeTransmission"
+    }
+  ],
+  "artifact": {
+    "id": 13994195173,
+    "digest": "3cdb773dbd46685d8042fe769d7c5d8115242227b961eed421afe9585230b105",
+    "download_request_count": 1,
+    "binary_materialization": "unavailable after exec environment disconnected; artifact bytes were not inspected"
+  }
+}

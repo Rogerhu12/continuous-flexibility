@@ -1,0 +1,183 @@
+{
+  "schema": "n04-independent-full-source-local-repair-review/v1",
+  "path": "quantitative/recovery/reviews/CI173WholeReferenceGaugeRootMatchingIndependentReview.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "reviewer": "/root/quantitative_route",
+  "author": "/root",
+  "verdict": "PASS_INDEPENDENT_FULL_SOURCE_AND_EXACT_DELTA_REVIEW_NOT_COMPILED",
+  "base": {
+    "commit": "fe5e4ceec7c959c0a078eacdea58ce6741940149",
+    "tree": "e92d8ed54fae5a18179f13cdfaadc15b4669ed80",
+    "status": "CI173 failed at this exact source. No new CI query was performed."
+  },
+  "source_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootMatching.lean",
+  "before": {
+    "blob": "d044ebf2139de1886c261a1ad19294ff4f227d5b",
+    "sha256": "56874820bdb1b924cac665f08355410d02885b4e449d4055f6020bda731d459f",
+    "bytes": 6981,
+    "lines": 133
+  },
+  "after": {
+    "blob": "098a4853bebee5185fba6a50fc170045172827cc",
+    "sha256": "444601ac9257fb6cdbe4a6672667d5d311d050d5fd51325f18b75e4ea7211316",
+    "bytes": 7078,
+    "lines": 134
+  },
+  "owner_record": {
+    "blob": "7828cb9678a45b77150d0dd6ff4c39b3f051ac46",
+    "sha256": "a1e394fa7b1cad76ee366e11a91ca6ce90265ebf6c501cb1c4c88f615547636c",
+    "bytes": 1905,
+    "lines": 48
+  },
+  "diagnosis": {
+    "receipt": {
+      "blob": "07915f3536523e5addadf2987bd8424afe359760",
+      "sha256": "bf13eecfbdb83d24f05362ed9a915dea811c6d84f2f7baa408c20ef91ebeaf54",
+      "bytes": 1322,
+      "lines": 23
+    },
+    "job_log": {
+      "blob": "0eb8d265c4860084766c1a045615217eee1ccb00",
+      "sha256": "db55d03d0b307f8719171ae6452ce567dadf1ef9a0558ef7ef0daa6c4152d114",
+      "bytes": 92252,
+      "lines": 841
+    },
+    "independently_read_from_existing_git_blob": true,
+    "detailed_error_lines": 7,
+    "exact_seven_lines_equal_receipt": true,
+    "next_line": "✔ [6848/6857] Ran ContinuousFlexibility.Analysis.WholeReferenceGaugeTransmission",
+    "next_line_proves_this_detailed_diagnostic_not_truncated": true,
+    "error": "error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootMatching.lean:111:6: Type mismatch: After simplification, term\n  hrad.right\n has type\n  @Eq ℝ ((n04WholeCanonicalAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell σ τ Q N).physicalRight il)\n    (C.right m)\nbut is expected to have type\n  @Eq ℝ (V.physicalRight il) (C.right m)",
+    "artifact_zip_not_inspected": true
+  },
+  "exact_delta": {
+    "replacement_count": 1,
+    "old_literal": "      simpa only [hl, n04WholePieceRight, n04bNegativeRight, ↓reduceIte] using hrad.2",
+    "new_literal": "      change (n04WholeCanonicalAtlasData C L K e cell σ τ Q N).physicalRight il = C.right m\n      simpa only [K, hl, n04WholePieceRight, n04bNegativeRight, ↓reduceIte] using hrad.2",
+    "forward_rebuild_equal_after": true,
+    "reverse_rebuild_equal_before": true,
+    "added_lines": 2,
+    "deleted_lines": 1,
+    "net_lines": 1,
+    "public_headers": 1,
+    "complete_public_header_byte_equal": true,
+    "public_header_sha256": "2d0e5151c3490842688a3989f5d17738238355f3193049508099c707f4e1f316",
+    "import_lines_byte_equal": true,
+    "imports": [
+      "import ContinuousFlexibility.Analysis.WholeReferenceGaugeRootFirstJets",
+      "import ContinuousFlexibility.Analysis.WholeReferenceGaugeRootInterfaces"
+    ],
+    "options_byte_equal": true,
+    "source_options": [],
+    "all_bytes_outside_the_one_replacement_equal": true
+  },
+  "actual_providers": [
+    {
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "bytes": 6809,
+      "lines": 131,
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasData.lean",
+      "read_scope": "entire source",
+      "matches_actual173_tree": true
+    },
+    {
+      "blob": "c3a5f79617c7e583e16deb09c44e5679744ea092",
+      "sha256": "a4a3c629dcde3b7c324291d5e65c6bc6ceacbbdf8968577f2abcc3f0472c9f1d",
+      "bytes": 7986,
+      "lines": 165,
+      "path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasData.lean",
+      "read_scope": "entire source",
+      "matches_actual173_tree": true
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04bPositiveDivision.lean",
+      "blob": "052cdea1dd1db004e3021e7100bf3b0704f1f472",
+      "sha256": "d274f19959dd831c45e7d0ee0374a4bf01132369e13d69e595beb71a60de39ee",
+      "bytes": 5646,
+      "lines": 110,
+      "read_scope": "entire source",
+      "matches_actual173_tree": true
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasReferencePartition.lean",
+      "blob": "11142364a13b1664c4d627be253d52f47dcf5edf",
+      "sha256": "1208378855ce36f5185958a40b485ddd1f6faca3e4123ae3e6c6140acbf61207",
+      "bytes": 4225,
+      "lines": 91,
+      "read_scope": "entire source",
+      "matches_actual173_tree": true
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04WholeComponentPieces.lean",
+      "blob": "31a07cd1ac849aaa1a42f559dcaa84fb4e7e94b8",
+      "sha256": "5d2d7e19dcb41ad41fc58f433b96e0180ccd3d15acb514fe34025878380bf822",
+      "bytes": 6277,
+      "lines": 143,
+      "read_scope": "entire source",
+      "matches_actual173_tree": true
+    },
+    {
+      "blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+      "sha256": "598b1d5f18c4a22eecd5108949d46b2ddca955d79ea66090b85ca6ba06ff8227",
+      "bytes": 3544,
+      "lines": 96,
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+      "read_scope": "entire source",
+      "matches_actual173_tree": true
+    }
+  ],
+  "source_review": [
+    {
+      "location": "WholeReferenceGaugeRootMatching134: theorem complete header and both ordered-root branches",
+      "finding": "The same hT/hS/hN/hfield, old K, e0/e, positive Y/H, relative tau/sigma/Q, cut enumeration, narrowed state neighborhood and matching hypotheses remain in the same order. Neither endpoint case nor first-jet tuple is changed."
+    },
+    {
+      "location": "WholeReferenceGaugeAtlasData: n04WholeReferenceGaugeAtlasData",
+      "finding": "The constructor first binds W=n04WholeCanonicalAtlasData C L K e cell sigma tau Q N. Its B record update changes canonical left/right, chart, inverseChart, height, coefficients and potential only; physicalRight is inherited literally from W."
+    },
+    {
+      "location": "N04bPositiveDivision: n04bWithInteriorDivision",
+      "finding": "The exact definition is the record update { K with dividedDifference := n04bInteriorDividedDifference C K }. It leaves physicalRight, physicalLeft and all endpoint metadata unchanged. Both nesting levels therefore reduce the physicalRight projection without requiring a theorem, new geometric hypothesis or changed atlas."
+    },
+    {
+      "location": "WholeReferenceGaugeAtlasData: n04WholeReferenceGaugeAtlasData_physical_fields",
+      "finding": "The actual same-source statement independently exposes V.physicalRight=W.physicalRight and is proved by rfl among eight projections, corroborating the new change's definitional equality."
+    },
+    {
+      "location": "WholeCanonicalAtlasReferencePartition: n04WholeCanonicalAtlasData_actual_reference_radii",
+      "finding": "At arguments F=sigma and G=tau, the right component is exactly W.physicalRight il=n04WholePieceRight C (n04bActualReferenceCut hN) (e il), for the original actual typed K. It does not involve a reselected reference atlas."
+    },
+    {
+      "location": "N04WholeComponentPieces / N04bReferenceHalves",
+      "finding": "n04WholePieceRight at .inl(m,true) is n04bNegativeRight C cut (m,true); its true branch is C.right m. Thus hl and the existing metadata simp list reduce only the right-hand endpoint expression to the original desired radius."
+    },
+    {
+      "location": "New lines111-112",
+      "finding": "change explicitly selects the inherited W.physicalRight goal. Adding K to the existing simp-only list expands the local typed-atlas abbreviation on the target, so hrad.2 and the goal have the same old whole-atlas left-hand side. No unfolding of the positive reference choice or whole-state fields is introduced."
+    },
+    {
+      "location": "Unchanged first and second branches",
+      "finding": "The subsequent rw[hp] and exact five-value/fderiv tuple remain byte-identical. The positive-left/negative-right ordered-root case is entirely unchanged."
+    }
+  ],
+  "mechanical_checks": {
+    "actual173_preimage_blob_verified": true,
+    "all_six_provider_blobs_match_actual173_tree": true,
+    "UTF8_SHA256_and_Git_blob_checked_for_all_read_artifacts": true,
+    "both_complete_sources_read": true,
+    "one_public_header_fingerprint_equal": true,
+    "no_import_or_public_name_changes": true,
+    "no_new_axiom_sorry_unsafe_or_resource_setting": true,
+    "no_new_definition_or_representative": true,
+    "no_new_hypothesis_or_estimate": true,
+    "no_local_Lean_or_elaboration": true,
+    "no_active_index_refs_or_CI_operation": true
+  },
+  "scope": {
+    "result": "The exact source repair addresses the observed physicalRight alias mismatch using an actual definitional projection and preserves the full public contract.",
+    "remaining": "Elaboration and complete library success remain for the parent's next CI. This review does not claim the candidate has compiled.",
+    "historical_records": "Original133, original owner record and failed173 diagnostic remain immutable."
+  },
+  "findings": []
+}

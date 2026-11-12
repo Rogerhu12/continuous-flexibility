@@ -1,0 +1,453 @@
+{
+  "schema": "n04-recovery-draft-budget-provenance/v1",
+  "status": "READ_ONLY_PROVENANCE_VERIFIED_NO_CURRENT_GATEWAY_DEDUCTION",
+  "reviewer": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "created_at_utc": "2026-11-12 23:19:09 UTC",
+  "intended_archive_path": "positive/recovery/GatewayFiveDraftBudgetProvenance.json",
+  "task": "Determine whether the exact five retained-witness gateway Lean sources, totaling333 lines, are still charged in the preserved19526/19899 draft ledger and could be deducted after their future complete-green compilation.",
+  "decision": {
+    "gateway_source_lines": 333,
+    "gateway_lines_proven_charged_in_current_19899": 0,
+    "permitted_future_deduction_from_this_ledger_for_gateway_five": 0,
+    "reason": "The current ledger is descended from the snapshot27 archive epoch. The five files live only at older historical commit/path locations named by SOURCE-INDEX. They are absent by exact blob and basename from the complete backup34 archive metadata tree, and none of snapshots35–45 adds them back. Their continued recoverability is not evidence that333 remains charged in19526 or19899.",
+    "does_not_claim_gateway_previously_compiled": true,
+    "does_not_reclassify_any_source_now": true,
+    "separate_verified_future_deduction": 174,
+    "separate_verified_future_deduction_condition": "The exact root100 and audit74 source versions currently charged by snapshots44 and45 must first be included in a complete-green actual build; root then performs the explicit ledger reclassification."
+  },
+  "pins": {
+    "source_index45": {
+      "git_blob": "d9aabd98390edcc87dc6925ecb108d62a4ae477e",
+      "entries": 3149
+    },
+    "backup45_head": "20bb2ff5c333dc6f3b7612fb8fa7a0f83c5920fb",
+    "current_active_reported_by_parent": "fe5e4ceec7c959c0a078eacdea58ce6741940149",
+    "current_tree_reported_by_parent": "e92d8ed54fae5a18179f13cdfaadc15b4669ed80",
+    "current_CI_label_reported_by_parent": 173,
+    "CI_queried_by_reviewer": false,
+    "five_source_owner_binding": {
+      "git_blob": "8990a59ded6e06b4b68b6d2f86b380b66b7ad5ed",
+      "sha256": "b7814ce56bf30cb3918b5632ebebe9dafc91469ebf2d2e6875c8e296e82eca6b"
+    },
+    "original_five_source_plan": "b55da774bdeb5ea34f69842122fb20cf8ff969ce"
+  },
+  "exact_five_sources": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ActualRetainedReference",
+      "planned_active_path": "src/ContinuousFlexibility/Analysis/N01ActualRetainedReference.lean",
+      "git_blob": "ca7674d50e07ae8fbccfff307348308327941342",
+      "sha256": "ca09ea2f1ddf4bed503b6ac152f0aa286089625f48a4be9e33e22030de1118a2",
+      "utf8_bytes": 2241,
+      "lines": 45,
+      "final_newline": true,
+      "source_index_logical_source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01ActualRetainedReference.lean",
+      "stored_at": {
+        "commit": "4f80b004829747a059ffbdf56673e3e28afd1f68",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-22/positive/gateway/n01c-bb419/N01ActualRetainedReference.lean"
+      },
+      "source_index45_identity_matches": true,
+      "present_in_backup34_archive_by_blob_or_basename": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction",
+      "planned_active_path": "src/ContinuousFlexibility/Analysis/N01PrimitiveFixedWitnessConstruction.lean",
+      "git_blob": "fa468a78f48266fb1c0603e9b16988a50d5a4fb4",
+      "sha256": "5a786c0686f89e5186e4f39dc748c644e2d433be5a06d0c95f9324e27b9a539b",
+      "utf8_bytes": 2366,
+      "lines": 52,
+      "final_newline": true,
+      "source_index_logical_source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01PrimitiveFixedWitnessConstruction.lean",
+      "stored_at": {
+        "commit": "f98e15e4243d0d47a9d42fa40e64f60ed54691d3",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-21/positive/gateway/n01c-bb419/N01PrimitiveFixedWitnessConstruction.lean"
+      },
+      "source_index45_identity_matches": true,
+      "present_in_backup34_archive_by_blob_or_basename": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01RetainedPrimitiveConstruction",
+      "planned_active_path": "src/ContinuousFlexibility/Analysis/N01RetainedPrimitiveConstruction.lean",
+      "git_blob": "b4c99756ab69d37a0a3ce2c61570bed32f749885",
+      "sha256": "5e4823895fdf7f549d98d6cff9e1e0d8ef460e1dadc531892bf1ed957a2125f6",
+      "utf8_bytes": 3154,
+      "lines": 61,
+      "final_newline": true,
+      "source_index_logical_source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01RetainedPrimitiveConstruction.lean",
+      "stored_at": {
+        "commit": "4f80b004829747a059ffbdf56673e3e28afd1f68",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-22/positive/gateway/n01c-bb419/N01RetainedPrimitiveConstruction.lean"
+      },
+      "source_index45_identity_matches": true,
+      "present_in_backup34_archive_by_blob_or_basename": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext",
+      "planned_active_path": "src/ContinuousFlexibility/Analysis/N01aFixedReferencePrimitiveContext.lean",
+      "git_blob": "41ee0aaa4a3971691bfdc8a8832a87300d97a863",
+      "sha256": "48542eac85fcd18116d018740b290ab9d57c41793d055e255d2b9791a9fe4c4c",
+      "utf8_bytes": 3131,
+      "lines": 64,
+      "final_newline": true,
+      "source_index_logical_source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01aFixedReferencePrimitiveContext.lean",
+      "stored_at": {
+        "commit": "4f80b004829747a059ffbdf56673e3e28afd1f68",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-22/positive/gateway/n01c-bb419/N01aFixedReferencePrimitiveContext.lean"
+      },
+      "source_index45_identity_matches": true,
+      "present_in_backup34_archive_by_blob_or_basename": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry",
+      "planned_active_path": "src/ContinuousFlexibility/Analysis/NeighborhoodFlowRetainedGeometry.lean",
+      "git_blob": "1e5acd56f27b8dfe803c4ee990b470e839d47e0d",
+      "sha256": "abdb8e16cd7f6a4163500e87c4f5d9dafe7cce08816d35f6f573df0b8036219a",
+      "utf8_bytes": 5364,
+      "lines": 111,
+      "final_newline": true,
+      "source_index_logical_source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/NeighborhoodFlowRetainedGeometry.lean",
+      "stored_at": {
+        "commit": "20854f91f48a59f7ba5f6f0ab592a0543c442141",
+        "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/NeighborhoodFlowRetainedGeometry.lean"
+      },
+      "source_index45_identity_matches": true,
+      "present_in_backup34_archive_by_blob_or_basename": false
+    }
+  ],
+  "direct_source_verification": {
+    "method": "Read exactly the five Git blobs, recompute Git blob SHA1, SHA256, UTF8 byte length, newline count and final newline in JavaScript; compare each to the retained plan and SOURCE-INDEX45.",
+    "sum_lines": 333,
+    "all_fingerprints_match": true,
+    "did_not_read_or_scan_other_old_Lean_source": true
+  },
+  "historical_epoch_evidence": {
+    "snapshot27": {
+      "record": {
+        "git_blob": "e215ab482d1a822beb6bac05f94a3b994ced8c98",
+        "sha256": "c3e93f88a5699eab540595272ebb4bd2eda12a3496134d7a98f9a61f1430fccb",
+        "utf8_bytes": 7314,
+        "lines": 152,
+        "final_newline": true
+      },
+      "parent": "7f083833b93046e013d7980d7713078defb10067",
+      "compiled_baseline": "03e526021c371413f03fc0ce052476b63e105361",
+      "existing_added_lean_from_compiled_baseline146": 0,
+      "new_source_lines": 5309,
+      "projected_added_lean_from_compiled_baseline146": 5309,
+      "original_preservation_statement": "All historical source locations remain immutable and reachable through the backup parent; SOURCE-INDEX names their exact commit and path.",
+      "five_sources_in_new_sources": false,
+      "interpretation": "The record starts the post-refresh counted archive epoch at0+5309. The older five sources remain recoverable through parent commits but are not included as new source copies in this record."
+    },
+    "backup34": {
+      "head": "9f11634c5091a3fd5901bc11b2bfb7971f8e7122",
+      "tree": "815e9297db69b6db9adb1be81538dba567acc933",
+      "complete_archive_metadata_tree": "b1d3fe6993d94b51340776e8855010127fec5959",
+      "archive_metadata_entries": 1455,
+      "recursive_response_truncated": false,
+      "five_blob_or_basename_matches": [],
+      "actual_archive_source_directories": [
+        {
+          "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-27",
+          "tree": "d7b3a4e6dc8d43df13f960492757c67923137305"
+        },
+        {
+          "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-28",
+          "tree": "c48ade48d16db0f749ad24c70f749fb1501867fc"
+        },
+        {
+          "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-29",
+          "tree": "0688c1fe87c11feeb39b2b02627e81b59edfa5c6"
+        },
+        {
+          "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-30",
+          "tree": "23a54d522a5d708de9ab0a503ebc222354f0a3ea"
+        },
+        {
+          "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-31",
+          "tree": "46189ed5a66399e527f729b5890cf81dbde3485b"
+        },
+        {
+          "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-32",
+          "tree": "90218b9ada2fb01aa8607ea5d8a29900ba0db7bc"
+        },
+        {
+          "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-33",
+          "tree": "3532193a3d11f592ecd0f9f613462eccac97a326"
+        },
+        {
+          "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-34",
+          "tree": "c1d4a92b807d8d9606dbe6b8ce67759518d2c931"
+        }
+      ],
+      "old_gateway21_and22_paths_at_backup34": "NOT_PRESENT; exact directory probes returned404, then complete recursive metadata confirmed no same-blob or same-basename copy anywhere in the archive",
+      "baseline163": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+      "baseline163_root_tree": "64a18c3f510156a0386b5601f7c26fe575e6f958",
+      "baseline163_root_has_drafts": false,
+      "baseline163_root_response_truncated": false,
+      "record": {
+        "git_blob": "e23bc263e84242b5ccf0ee478f47969e35112f21",
+        "sha256": "ad98588b21566a8643a62b79f2743d348e51c86fccbb0fe18fd5ca261bd949ef",
+        "utf8_bytes": 15701,
+        "lines": 254,
+        "final_newline": true
+      },
+      "independently_existing_dedup_review": {
+        "git_blob": "02a4e45ece79b0b56e4ce528bb90a1c3e94f6127",
+        "sha256": "a2fd238f49c6b8f8c443e47eee731c9e34396421e5f51cdf728875a709cdac8e",
+        "stored_at": {
+          "commit": "acac62fd1903dd18733c1759927aca87ad7b045a",
+          "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-35/audit/reviews/Backup34CompiledSourceDedupIndependentReview.json"
+        },
+        "compiled_identical_copies_removed": 23,
+        "lines_removed": 4481,
+        "uncompiled_archive_deletions": 0,
+        "arithmetic": "19585 -4481 +378 =15482",
+        "relevance": "The five gateway files are not among the23 deletions, but that fact alone does not establish counted membership. The complete archive tree absence is decisive."
+      }
+    }
+  },
+  "carried_budget_chain": [
+    {
+      "snapshot": 34,
+      "starting": 19585,
+      "compiled_copy_deduction": 4481,
+      "new_lines": 378,
+      "result": 15482
+    },
+    {
+      "snapshot": 35,
+      "starting": 15482,
+      "new_lines": 1470,
+      "deduction": 0,
+      "result": 16952
+    },
+    {
+      "snapshot": 36,
+      "starting": 16952,
+      "new_lines": 953,
+      "deduction": 0,
+      "result": 17905
+    },
+    {
+      "snapshot": 37,
+      "starting": 17905,
+      "new_lines": 967,
+      "deduction": 0,
+      "result": 18872
+    },
+    {
+      "snapshot": 38,
+      "starting": 18872,
+      "new_conservatively_added_lines": 654,
+      "result": 19526,
+      "note": "The only deletion is1 line in the unrelated working153→326 composition source; the conservative result uses added654 without subtracting it. No gateway source is among changes."
+    },
+    {
+      "snapshot": 39,
+      "starting": 19526,
+      "new_archived_Lean_lines": 0,
+      "preserved_upper_bound": 19526,
+      "gateway_addition_or_deduction": 0
+    },
+    {
+      "snapshot": 40,
+      "starting": 19526,
+      "new_archived_Lean_lines": 0,
+      "preserved_upper_bound": 19526,
+      "gateway_addition_or_deduction": 0
+    },
+    {
+      "snapshot": 41,
+      "starting": 19526,
+      "new_archived_Lean_lines": 0,
+      "preserved_upper_bound": 19526,
+      "gateway_addition_or_deduction": 0
+    },
+    {
+      "snapshot": 42,
+      "starting": 19526,
+      "new_archived_Lean_lines": 0,
+      "preserved_upper_bound": 19526,
+      "gateway_addition_or_deduction": 0
+    },
+    {
+      "snapshot": 43,
+      "starting": 19526,
+      "new_archived_Lean_lines": 0,
+      "preserved_upper_bound": 19526,
+      "gateway_addition_or_deduction": 0
+    },
+    {
+      "snapshot": 44,
+      "starting": 19526,
+      "new_archived_Lean_lines": 299,
+      "result": 19825,
+      "prior_bound_not_reclassified_on_CI169_success": true
+    },
+    {
+      "snapshot": 45,
+      "starting": 19825,
+      "new_archived_Lean_lines": 74,
+      "result": 19899
+    }
+  ],
+  "record_fingerprints": [
+    {
+      "snapshot": 27,
+      "git_blob": "e215ab482d1a822beb6bac05f94a3b994ced8c98",
+      "sha256": "c3e93f88a5699eab540595272ebb4bd2eda12a3496134d7a98f9a61f1430fccb",
+      "utf8_bytes": 7314,
+      "lines": 152,
+      "final_newline": true
+    },
+    {
+      "snapshot": 34,
+      "git_blob": "e23bc263e84242b5ccf0ee478f47969e35112f21",
+      "sha256": "ad98588b21566a8643a62b79f2743d348e51c86fccbb0fe18fd5ca261bd949ef",
+      "utf8_bytes": 15701,
+      "lines": 254,
+      "final_newline": true
+    },
+    {
+      "snapshot": 35,
+      "git_blob": "f8eec1034be1f1b09f018b3f2399d518fec1d90a",
+      "sha256": "d9a781f0caf62b43a105a1be4ddcdc595617b13baa03017b0b50b9fa5f154a20",
+      "utf8_bytes": 3528,
+      "lines": 61,
+      "final_newline": true
+    },
+    {
+      "snapshot": 36,
+      "git_blob": "9b7826a4420843f8762bc4e47d96901409a7e5d4",
+      "sha256": "4f1b1c736eb94d9d46cd861599c5dd944fe84572c42db523564a2e0856e76066",
+      "utf8_bytes": 3974,
+      "lines": 70,
+      "final_newline": true
+    },
+    {
+      "snapshot": 37,
+      "git_blob": "fcb0c9697bc88cf0896e70aeb9be030e061b850d",
+      "sha256": "03776b3429f00d644e1e2570324a45464c8f67ef7bad521fb004178b04c2f6cd",
+      "utf8_bytes": 5522,
+      "lines": 100,
+      "final_newline": true
+    },
+    {
+      "snapshot": 38,
+      "git_blob": "ee9d072e5cf0ca7baf0ef5832298425f42004a07",
+      "sha256": "c96c60607ea09541d6a5df31ead1b6fb5c4960b288ebfc9398c2d3bd6bdb8d17",
+      "utf8_bytes": 16981,
+      "lines": 358,
+      "final_newline": true
+    },
+    {
+      "snapshot": 39,
+      "git_blob": "af4cb449ecacf4fd1222caef089087357f0fb841",
+      "sha256": "0f3fd3ac82b381294e95f5f485742e3bb65a2e78d2f3d739d55518d91bfccd52",
+      "utf8_bytes": 16476,
+      "lines": 415,
+      "final_newline": true
+    },
+    {
+      "snapshot": 40,
+      "git_blob": "b125d90d7919237416416081d81a7fdd31458df6",
+      "sha256": "1b9f094b6f800cd3f6e761b8fb0a910b5d72bc05d70aa412f7e7e1b9ba5648f6",
+      "utf8_bytes": 11463,
+      "lines": 285,
+      "final_newline": true
+    },
+    {
+      "snapshot": 41,
+      "git_blob": "a691247a71acfd69d554d8396aa03aac2e5013f3",
+      "sha256": "1381c85b74b7e5e44b5b530bb57bbb5b80e3de3f466d9c33b62ac2682b5b2948",
+      "utf8_bytes": 8872,
+      "lines": 231,
+      "final_newline": true
+    },
+    {
+      "snapshot": 42,
+      "git_blob": "4d3d3c08369dd6ae00e2c1fdc372d7ea7a6b551d",
+      "sha256": "96b3f249a61a3609a269bb98d989abf6b98bb470a4ef33adf9d5055348d4f4f4",
+      "utf8_bytes": 6400,
+      "lines": 174,
+      "final_newline": true
+    },
+    {
+      "snapshot": 43,
+      "git_blob": "e5b516ffb528c6e1159a50415a21736499888d9b",
+      "sha256": "2b1be382a0ef43d5132a661ce0d403f59d3272dedb8fb8d154678bbead3d8637",
+      "utf8_bytes": 7037,
+      "lines": 188,
+      "final_newline": true
+    },
+    {
+      "snapshot": 44,
+      "git_blob": "76699ed3ac82f25b3b089e3d57929290cc185c26",
+      "sha256": "f99c7908057e90470248e3cabf88ef13da10345036ef39c5170af1229a8ae391",
+      "utf8_bytes": 14339,
+      "lines": 392,
+      "final_newline": true
+    },
+    {
+      "snapshot": 45,
+      "git_blob": "7af5d674472e3350343f6657a884b2e8c4bbd851",
+      "sha256": "02ce91192511f9e04217ae8bc25ed1bff8ffa89cb5d302a4852d166a17357fef",
+      "utf8_bytes": 13210,
+      "lines": 352,
+      "final_newline": true
+    }
+  ],
+  "later_source_addition_membership_checks": {
+    "snapshots35_36_37_38_new_source_lists_contain_no_five_gateway_basename": true,
+    "snapshots39_through43_report_zero_new_archive_Lean": true,
+    "snapshot44_only_new_sources": [
+      {
+        "git_blob": "c4ce6d627aecdad5dd13050f972c8b1e85e03ba6",
+        "lines": 100,
+        "role": "root open-U material radius adapter"
+      },
+      {
+        "git_blob": "63073bc007f7945e905e6cb9237a96f2c463ff8a",
+        "lines": 199,
+        "role": "coefficient increment joint-gain producer"
+      }
+    ],
+    "snapshot45_only_new_source": {
+      "git_blob": "d53b5c3cececfff9655dc1a570e21f3b2281db32",
+      "lines": 74,
+      "role": "actual unit-atom Frechet bound adapter"
+    },
+    "repairs_in44_and45": "Retained only in actual src commit ancestry; no duplicate repair Lean archives were added.",
+    "no_gateway333_recharge_identified": true
+  },
+  "conditional_future_arithmetic": {
+    "current_recorded_bound": 19899,
+    "hard_limit": 20000,
+    "audit_new_lines_parameter": "a, with0≤a≤80; the actual frozen source count must be used",
+    "before_any_complete_green_reclassification": "19899+a",
+    "after_exact100_and74_complete_green_and_explicit_reclassification": "19725+a",
+    "remaining_after_allowed174_credit": "275-a",
+    "at_maximum_a80": {
+      "upper_bound": 19805,
+      "remaining": 195,
+      "delta250_shortfall": 55
+    },
+    "at_a0": {
+      "upper_bound": 19725,
+      "remaining": 275,
+      "remaining_after_delta250": 25
+    },
+    "criterion_for_delta250_without_any_other_release": "a≤25",
+    "forbidden_extra_credit": 333,
+    "generated_root_lines": "Not part of this archive draft-source accounting. The separate active CI addition budget is unchanged.",
+    "no_new_Lean_authorization_implied": true
+  },
+  "limitations": [
+    "This is a narrow provenance audit of the recorded19899 upper bound, not a full recount of all historical uncompiled Lean retained in every ancestor.",
+    "The snapshot27 rollover preserved old files by commit/path references. This review does not infer that those historical files compiled or that historical source recoverability should count as a new current ledger entry.",
+    "The earlier34 dedup review was read as exact historical evidence; the reviewer did not rerun its writer or build.",
+    "No active source, index, Git ref, CI status, toolchain, resource limit or frozen source was modified.",
+    "No CI was queried or downloaded, no local Lean was invoked, and no new Lean source was written.",
+    "Any further release needed for a250-line producer requires another exact charged-source/complete-green audit by root; this report supplies no speculative release."
+  ]
+}

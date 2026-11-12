@@ -1,0 +1,187 @@
+{
+  "schema": "n04-reviewed-owner-selection/v1",
+  "path": "audit/reconstructed/ActualNegativeMovingReferenceUnitPointReviewedManifest.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "owner": "/root/audit_coordinates",
+  "status": "FULL_SOURCE_PEER_PASSED_HELD_UNCOMPILED",
+  "source": {
+    "draft_path": "audit/reconstructed/ActualNegativeMovingReferenceUnitPoint.lean",
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeMovingReferenceUnitPoint.lean",
+    "module": "ContinuousFlexibility.Analysis.ActualNegativeMovingReferenceUnitPoint",
+    "blob": "aba2322ac91263cc9b63a6f487c5338f21667574",
+    "sha256": "4de7f0e3cff3982cb846413fa1f6eedbe2762a82bcd9e88d350ff1c5f38e9ff9",
+    "bytes": 3473,
+    "lines": 71,
+    "server_readback_exact": true
+  },
+  "immutable_candidate_manifest": {
+    "path": "audit/reconstructed/ActualNegativeMovingReferenceUnitPointCandidateManifest.json",
+    "git_blob": "4e7587d1ca8f24326c5c1d9c4514e5a51c018103",
+    "sha256": "26b2ad7cb954414726e4246d3d6b4fe74dded1c492ac519a3be4fa5d5258e807",
+    "utf8_bytes": 12135,
+    "changed": false
+  },
+  "independent_review": {
+    "path": "positive/recovery/reviews/ActualNegativeMovingReferenceUnitPointIndependentReview.json",
+    "author": "/root/proof_inventory",
+    "git_blob": "cb6df894811759aa407c32d9ff6489a52d1b1c73",
+    "sha256": "dfb5567d8e5a47b32d8f39ab5641e0bf62b0cbf1ae77247247b23e232d1522f1",
+    "utf8_bytes": 23700,
+    "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+    "verdict": "PASS_FULL_SOURCE_AND_ACTUAL_CALLEES",
+    "findings": [],
+    "complete_source_read": true,
+    "complete_public_header_read": true,
+    "exact_actual_providers_read_in_full": 7,
+    "additional_metadata_sources_read_in_full": 3,
+    "actual_Nonlinear_domain_and_unit_definitions_read": true
+  },
+  "binding_checks": {
+    "sha256s": {
+      "peer": "dfb5567d8e5a47b32d8f39ab5641e0bf62b0cbf1ae77247247b23e232d1522f1",
+      "mf": "26b2ad7cb954414726e4246d3d6b4fe74dded1c492ac519a3be4fa5d5258e807",
+      "source": "4de7f0e3cff3982cb846413fa1f6eedbe2762a82bcd9e88d350ff1c5f38e9ff9"
+    },
+    "provider_count": 7,
+    "all_input_and_header_hashes_exact": true,
+    "all_seven_provider_bindings_exact": true,
+    "source_unchanged": true,
+    "peer_status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+    "peer_verdict": "PASS_FULL_SOURCE_AND_ACTUAL_CALLEES",
+    "peer_bytes": 23700
+  },
+  "public_surface": {
+    "count": 1,
+    "private_count": 0,
+    "name": "ContinuousFlexibility.Analysis.n04bActualTypedAtlas_moving_negative_reference_unitPoint",
+    "complete_header_sha256": "70e2029a791c06c1819d0e6f755a543be43ef26d02f6778d6b38070f2d6b32c5",
+    "complete_header_exact_in_candidate_and_independent_review": true
+  },
+  "selected_provider_baseline": {
+    "commit": "1206f9b294beb20a2c04760dfe1f6fb0b8649223",
+    "tree": "944690f469cb649cafd0e1dc582b6acb4992af6c",
+    "ci_status": "CI172 failed, as reported by root. CI173 repairs are separate. No CI query by this agent."
+  },
+  "direct_imports": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualTypedAtlas",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean",
+      "blob": "334d3c0c19727465e3afc75f988c79df1b8d7b8a",
+      "sha256": "91687b630205a380f137dcdb4cb32068d79582e09d17d4a4cd14317e21b9e19f",
+      "bytes": 4841,
+      "lines": 111,
+      "url": "https://github.com/Rogerhu12/continuous-flexibility/blob/1206f9b294beb20a2c04760dfe1f6fb0b8649223/src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient",
+      "path": "src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "sha256": "bbec6c5ccb9e0d9bcf75516b8c9024e4f15c2e834119822ace6da3c4e70fd51c",
+      "bytes": 5638,
+      "lines": 128,
+      "url": "https://github.com/Rogerhu12/continuous-flexibility/blob/1206f9b294beb20a2c04760dfe1f6fb0b8649223/src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/N07aCurrentPhysicalGeometry.lean",
+      "blob": "dd8ea3aac0ba1e207170091f16a2bfc623a4257b",
+      "sha256": "067b9539ca2976ec2b523901a574fd74a397013091406a77901799b87a2e78cf",
+      "bytes": 6799,
+      "lines": 139,
+      "url": "https://github.com/Rogerhu12/continuous-flexibility/blob/1206f9b294beb20a2c04760dfe1f6fb0b8649223/src/ContinuousFlexibility/Analysis/N07aCurrentPhysicalGeometry.lean"
+    }
+  ],
+  "selected_transitive_callees": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bCurrentPartition",
+      "path": "src/ContinuousFlexibility/Analysis/N04bCurrentPartition.lean",
+      "blob": "1005399b1097409b64312fd2994c23a7b69e5757",
+      "sha256": "4087433cb73325005c6677a09b43531b3f8abc469c95958a5c874d8bbe41a2cf",
+      "lines": 165,
+      "selection": "Exact file read at 1206f9b294beb20a2c04760dfe1f6fb0b8649223"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bTypedAtlasData",
+      "path": "src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+      "blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "sha256": "166d48b590552637d5efedb29ce0b19d5963d02f33e7caebffe44a04b576fdf4",
+      "lines": 142,
+      "review": "Full source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferencePieces",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferencePieces.lean",
+      "blob": "ba67b0a6776363ed4ebf616d7fd56c489baf2b25",
+      "sha256": "0ae0b98aef8f688002cf783e7b129f6834a79b1502061bd123f90ffe59edf766",
+      "lines": 174,
+      "review": "Full source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceHalves",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+      "blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+      "sha256": "598b1d5f18c4a22eecd5108949d46b2ddca955d79ea66090b85ca6ba06ff8227",
+      "lines": 96,
+      "review": "Full source read.",
+      "selection": "exact active fc525; unchanged by inspected CI172 four-source compare"
+    }
+  ],
+  "new_file_diff": {
+    "path": "audit/reconstructed/ActualNegativeMovingReferenceUnitPoint.new.diff",
+    "blob": "7100074cf403816ab0e422d64dcc9f9a574871aa",
+    "sha256": "1fc017efe8a2493f74f4888dcb110aea7cabb6f984e2fd2e5262af3da04edded",
+    "additions": 71,
+    "deletions": 0,
+    "against": "No existing file is modified."
+  },
+  "mathematical_scope": {
+    "input": "The original actual moving negative half at e.symm (.inl (m, side)) of the same n04bActualTypedAtlas.",
+    "output": "Original component m; old reference-cut equality or a genuine Bool reference half with literal affine q in unitStrip and physicalUnitPoint K j q = p.",
+    "old_reference_cut_equality_retained": true,
+    "K_C_R_L_e_component_m_unchanged": true,
+    "current_and_reference_side_need_not_agree": true,
+    "physical_width_and_half_cells_unchanged": true,
+    "cross_half_sample_equality_not_assumed": true,
+    "no_CurrentJets_ReferenceJets_or_final_material_bound_premise": true
+  },
+  "remaining_gates": {
+    "complete_group_import_graph_and_global_name_check": "Root-owned activation gate; this owner does not enlarge the recorded lightweight scope.",
+    "exact_complete_group_CI_success": false,
+    "local_Lean_run": false,
+    "source_installed_by_this_agent": false,
+    "active_checkout_index_refs_or_CI_modified_by_this_agent": false,
+    "future_state": "Root may select the proposed small8 group after the repair baseline is fully green. Compiled claims and the conditional 245-line ledger credit require the exact small8 group to finish full CI successfully. This metadata artifact performs no activation."
+  },
+  "budget": {
+    "current_uncompiled_draft_bound": 19970,
+    "new_source_lines_already_in_that_bound": 71,
+    "no_further_new_Lean_authorized_before_small_group_full_green": true,
+    "proposed_group_source_lines": 578,
+    "group_components": {
+      "gateway_five": 333,
+      "open_U": 100,
+      "Frechet": 74,
+      "moving_reference_unit_point": 71
+    },
+    "conditional_credit_after_exact_full_group_green_and_root_ledger_update": 245,
+    "conditional_credit_breakdown": {
+      "open_U": 100,
+      "Frechet": 74,
+      "moving_reference_unit_point": 71,
+      "gateway_five": 0
+    },
+    "conditional_bound_after_valid_credit": 19725,
+    "conditional_remaining_of_20000": 275,
+    "credit_applied_now": 0,
+    "note": "The historical gateway333 sources were not counted in this upper bound and cannot be deducted from it."
+  },
+  "preservation": {
+    "source_bytes_unchanged": true,
+    "candidate_manifest_bytes_unchanged": true,
+    "independent_review_bytes_unchanged": true,
+    "additional_Lean_copies_created": false,
+    "this_artifact_is_metadata_only": true
+  }
+}
