@@ -137,7 +137,8 @@ theorem n04Realization_materialJets_neighborhood
   let x : X := ⟨((z', m'), y), hz', hs', hy⟩
   let j : I := (i, ⟨k, Nat.lt_succ_of_le hk⟩)
   have hsingle : F j x ≤ ∑ i : I, F i x :=
-    Finset.single_le_sum (fun _ _ => norm_nonneg _) (Finset.mem_univ j)
+    Finset.single_le_sum (fun i _ => (show 0 ≤ F i x from norm_nonneg _))
+      (Finset.mem_univ j)
   exact hsingle.trans (hbound x)
 
 end ContinuousFlexibility.Analysis
