@@ -99,10 +99,15 @@ theorem n04Realization_multilinear_twoSeminorm_bound
     |A v| ≤ C * ∏ i, (low (v i) + high (v i) / R) := by
   let r : NNReal := ⟨R⁻¹, inv_nonneg.mpr hR.le⟩
   let q : Seminorm ℝ E := low + r • high
+  have hscale (x : E) : (r • high) x = (r : ℝ) * high x :=
+    (_root_.smul_apply r high x).trans
+      ((NNReal.smul_def r (high x)).trans (smul_eq_mul (r : ℝ) (high x)))
   have hq (x : E) : q x = low x + high x / R := by
-    rw [show q = low + r • high from rfl, _root_.add_apply, _root_.smul_apply]
-    simp only [NNReal.smul_def, smul_eq_mul,
-      r, NNReal.coe_mk, div_eq_mul_inv, mul_comm]
+    calc
+      q x = low x + (r • high) x := _root_.add_apply low (r • high) x
+      _ = low x + (r : ℝ) * high x := congrArg (fun y : ℝ => low x + y) (hscale x)
+      _ = low x + high x / R := by
+        simp only [r, NNReal.coe_mk, div_eq_mul_inv, mul_comm]
   have hunit (u : Fin k → E) (hu : ∀ i, q (u i) < 1) :
       (normSeminorm ℝ ℝ) (A u) ≤
         C * ((1 : ℝ) + ∑ i : Fin k, (0 : Seminorm ℝ E) (u i)) := by

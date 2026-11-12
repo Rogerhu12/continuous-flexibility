@@ -67,10 +67,12 @@ theorem n04Realization_exists_uniformNuColumn
   let A : (StateDirections S × ℝ) → N07aNuParameter S :=
     fun z => c + n07aNuSectorProjectionCLM S z
   have hA : Continuous A := continuous_const.add (n07aNuSectorProjectionCLM S).continuous
-  have hA0 : A (0 : StateDirections S × ℝ) = c := by
-    simp only [A, map_zero, add_zero]
+  have hA0 : A (0 : StateDirections S × ℝ) = c :=
+    (congrArg (fun y : N07aNuParameter S => c + y)
+      (map_zero (n07aNuSectorProjectionCLM S))).trans (add_zero c)
   have hzero : (0 : StateDirections S × ℝ) ∈ A ⁻¹' U := by
-    exact hA0.symm ▸ hcenter
+    rw [Set.mem_preimage, hA0]
+    exact hcenter
   have hpull : FixedNeighborhoodSmoothTame (n07aParameterGrading S)
       (scalarHeightGrading S) (A ⁻¹' U) b₀ ell (fun z => N (A z)) :=
     n04Realization_fixedNeighborhood_affine hN c (n07aNuSectorProjectionCLM S)
