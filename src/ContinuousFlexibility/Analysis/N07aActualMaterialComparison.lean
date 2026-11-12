@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N07aMaterialLocalWindow
 import ContinuousFlexibility.Analysis.N07aMaterialPieceBounds
 import ContinuousFlexibility.Analysis.N07aInverseChartDisplacement
+import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Sampled material ratios on the actual current physical pieces
@@ -33,6 +34,13 @@ attribute [local instance]
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
   {base : ℕ} {ε : ℝ}
+
+/-- Keep the geometric bound and the final neighborhood proposition abstract
+while eliminating the successive choices of quantitative constants. -/
+private theorem n07a_material_with_exists {α : Sort*} {Condition : α → Prop} {P : Prop}
+    (h : ∃ x, Condition x) (hP : ∀ x, Condition x → P) : P := by
+  obtain ⟨x, hx⟩ := h
+  exact hP x hx
 
 /-- A derived geometric certificate, to be restricted together with the
 original N04/N06 data. It contains no assertion about solutions. -/
@@ -76,13 +84,26 @@ theorem n07a_inverseChart_material_displacement
         |(K.inverseChart (liftSectorParameter S C z) m y).1 -
             (K.inverseChart (C.referenceState, 0) m y).1| ≤
           δ * T.ell (K.inverseChart (C.referenceState, 0) m y).1 := by
-  obtain ⟨low, e, he, he0, heb⟩ := n07a_inverseChart_radial_displacement
+  refine n07a_material_with_exists (n07a_inverseChart_radial_displacement
     hD hT href hcur (fun m => (hgeom.referenceBounds m).2.1)
-      (fun m => (hgeom.referenceBounds m).1)
-  obtain ⟨a, ha, ha0, hab⟩ := n07a_reference_materialEllInverse_bound
-    hD hT href (fun m => (hgeom.referenceBounds m).1)
-  obtain ⟨A, hA, hAb⟩ := (N07aSampleSubpower.mul hD hT he ha).height_absorption
-    hD hT (by norm_num : 0 < (3 / 4 : ℝ))
+      (fun m => (hgeom.referenceBounds m).1)) ?_
+  intro low hlow
+  refine n07a_material_with_exists hlow ?_
+  intro e heall
+  have he := heall.1
+  have he0 := heall.2.1
+  have heb := heall.2.2
+  refine n07a_material_with_exists (n07a_reference_materialEllInverse_bound
+    hD hT href (fun m => (hgeom.referenceBounds m).1)) ?_
+  intro a haall
+  have ha := haall.1
+  have ha0 := haall.2.1
+  have hab := haall.2.2
+  refine n07a_material_with_exists ((N07aSampleSubpower.mul hD hT he ha).height_absorption
+    hD hT (by norm_num : 0 < (3 / 4 : ℝ))) ?_
+  intro A hAall
+  have hA := hAall.1
+  have hAb := hAall.2
   let η : ℝ := min ε (δ / (2 * A))
   have hη : 0 < η := lt_min hε (div_pos hδ (mul_pos (by norm_num) hA))
   have hηε : η ≤ ε := min_le_left _ _

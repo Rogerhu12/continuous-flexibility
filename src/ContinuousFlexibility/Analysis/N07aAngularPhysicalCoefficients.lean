@@ -112,7 +112,7 @@ theorem bound_nonneg (chi : N07aPhysicalOpenCoefficient S K z m) :
 
 theorem bound_ae (chi : N07aPhysicalOpenCoefficient S K z m) :
     ∀ᵐ p ∂n07aPhysicalMeasure S K z m, |chi.value p| ≤ chi.bound := by
-  simpa only [spaces_mixedDerivative_zero] using (chi.bounded 0 0).choose_spec.2
+  simpa only [bound, spaces_mixedDerivative_zero] using (chi.bounded 0 0).choose_spec.2
 
 end N07aPhysicalOpenCoefficient
 
@@ -137,9 +137,9 @@ theorem n07aPhysicalJetField_contDiffAt_closed
   have h := (h04.1.boundary z hz hs m).2.2.2.2.1 p hp
   have hJ := ContinuousFlexibility.contDiffAt_planeJacobian h.1
   fin_cases i
-  · simpa only [n07aPhysicalJetField, Fin.isValue, Matrix.cons_val_zero, div_eq_mul_inv] using
-      (h.1.fst.sub (contDiffAt_const (c := K.left m))).mul
-        (contDiffAt_const (c := (K.right m - K.left m)⁻¹))
+  · change ContDiffAt ℝ ∞
+      (fun q => ((K.chart z m q).1 - K.left m) / (K.right m - K.left m)) p
+    exact (h.1.fst.sub contDiffAt_const).div_const (K.right m - K.left m)
   · exact h.1.snd.sub contDiffAt_snd
   · exact h.2.1
   · exact h.2.1.inv h.2.2.2.ne'

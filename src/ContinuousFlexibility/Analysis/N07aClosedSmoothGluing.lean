@@ -54,6 +54,7 @@ private theorem n07a_hasFDerivWithinAt_two_closed_rectangles
         (Icc c r ×ˢ T) (c, θ) := by
       apply ((hv _ hright).congr_fderiv (hderiv θ hp.2).symm).congr
       · intro q hq
+        change (if q.1 ≤ c then u q else v q) = v q
         by_cases hqc : q.1 ≤ c
         · have hqe : q.1 = c := le_antisymm hqc hq.1.1
           rw [if_pos hqc]

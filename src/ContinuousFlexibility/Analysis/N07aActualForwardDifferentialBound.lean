@@ -19,6 +19,31 @@ open scoped ContDiff
 
 set_option backward.isDefEq.respectTransparency true
 
+private theorem n07a_absorb_half (v g a : ℝ) (hv : 0 ≤ v)
+    (ha : a ≤ 1 / 2) (hb : v ≤ g + v * a) : v ≤ 2 * g := by
+  have hsmall := mul_le_mul_of_nonneg_left ha hv
+  nlinarith only [hb, hsmall]
+
+private theorem n07a_inverse_perturbation_norm_le
+    {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    (P₀ P G₀ V : E →L[ℝ] E)
+    (h₀ : ∀ v, P₀ (G₀ v) = v) (hV : ∀ v, V (P v) = v)
+    (hrel : ‖(P - P₀).comp G₀‖ < 1 / 2) : ‖V‖ ≤ 2 * ‖G₀‖ := by
+  have heq : V = G₀ - V.comp ((P - P₀).comp G₀) := by
+    apply ContinuousLinearMap.ext
+    intro v
+    simp only [ContinuousLinearMap.sub_apply, ContinuousLinearMap.comp_apply, map_sub,
+      h₀, hV]
+    abel
+  have hbound : ‖V‖ ≤ ‖G₀‖ + ‖V‖ * ‖(P - P₀).comp G₀‖ := by
+    calc
+      ‖V‖ = ‖G₀ - V.comp ((P - P₀).comp G₀)‖ := congrArg norm heq
+      _ ≤ ‖G₀‖ + ‖V.comp ((P - P₀).comp G₀)‖ :=
+        norm_sub_le G₀ (V.comp ((P - P₀).comp G₀))
+      _ ≤ ‖G₀‖ + ‖V‖ * ‖(P - P₀).comp G₀‖ :=
+        add_le_add_left (ContinuousLinearMap.opNorm_comp_le V ((P - P₀).comp G₀)) ‖G₀‖
+  exact n07a_absorb_half ‖V‖ ‖G₀‖ ‖(P - P₀).comp G₀‖ (norm_nonneg V) hrel.le hbound
+
 attribute [local instance]
   n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
   n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
@@ -30,25 +55,6 @@ attribute [local instance]
   n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
-
-private theorem n07a_inverse_perturbation_norm_le
-    {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
-    (P₀ P G₀ V : E →L[ℝ] E)
-    (h₀ : ∀ v, P₀ (G₀ v) = v) (hV : ∀ v, V (P v) = v)
-    (hrel : ‖(P - P₀).comp G₀‖ < 1 / 2) : ‖V‖ ≤ 2 * ‖G₀‖ := by
-  have heq : V = G₀ - V.comp ((P - P₀).comp G₀) := by
-    ext v
-    simp only [ContinuousLinearMap.sub_apply, ContinuousLinearMap.comp_apply, map_sub,
-      h₀, hV]
-    abel
-  have hbound : ‖V‖ ≤ ‖G₀‖ + ‖V‖ * ‖(P - P₀).comp G₀‖ := by
-    calc
-      ‖V‖ = ‖G₀ - V.comp ((P - P₀).comp G₀)‖ := congrArg norm heq
-      _ ≤ ‖G₀‖ + ‖V.comp ((P - P₀).comp G₀)‖ := norm_sub_le _ _
-      _ ≤ ‖G₀‖ + ‖V‖ * ‖(P - P₀).comp G₀‖ :=
-        add_le_add_left (ContinuousLinearMap.opNorm_comp_le _ _) _
-  have hsmall := mul_le_mul_of_nonneg_left hrel.le (norm_nonneg V)
-  nlinarith only [hbound, hsmall]
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
@@ -81,14 +87,19 @@ private theorem n07a_reference_forward_fderiv_bound
   obtain ⟨b, hbs, hb0, hbb⟩ := hb 1 (by omega)
   have hzero : (0 : CanonicalGeometry.Parameter S) ∈ sectorNeighborhood S base ε ε := by
     constructor
-    · simpa only [Prod.fst_zero, map_zero] using hε
+    · change sectorGrading S base (0 : StateDirections S) < ε
+      rw [(sectorGrading S base).map_zero']
+      exact hε
     · simpa only [Prod.snd_zero, abs_zero] using hε
   have hlift : liftSectorParameter S C (0 : CanonicalGeometry.Parameter S) =
       (C.referenceState, 0) := by
     simp only [liftSectorParameter, Prod.fst_zero, Prod.snd_zero,
       ZeroMemClass.coe_zero, add_zero]
   refine ⟨b, hbs, hb0, fun m x hx => ?_⟩
-  simpa only [hlift, norm_iteratedFDeriv_one, map_zero, add_zero, mul_one]
+  have hpzero (n : ℕ) : CanonicalGeometry.parameterGrading S n
+      (0 : CanonicalGeometry.Parameter S) = 0 :=
+    (CanonicalGeometry.parameterGrading S n).map_zero'
+  simpa only [hlift, norm_iteratedFDeriv_one, hpzero, add_zero, mul_one]
     using hbb 0 hzero m x hx
 
 theorem n07a_actualForwardFirstBound_neighborhood

@@ -41,15 +41,17 @@ theorem n07a_closedStrip_radial_hasDerivWithinAt {l r t : ℝ}
   have hd := (hW.differentiableOn (by simp) (t, θ) ⟨ht, mem_univ θ⟩).hasFDerivWithinAt
   have hs : HasDerivWithinAt (fun s : ℝ => (s, θ)) (1, 0) (Icc l r) t :=
     ((hasDerivAt_id' t).prodMk (hasDerivAt_const t θ)).hasDerivWithinAt
-  exact hd.comp_hasDerivWithinAt t hs (fun s hs => ⟨hs, mem_univ θ⟩)
+  have hmap : MapsTo (fun s : ℝ => (s, θ)) (Icc l r) (closedStrip l r) :=
+    fun s hs => ⟨hs, mem_univ θ⟩
+  exact hd.comp_hasDerivWithinAt t hs hmap
 
 theorem n07a_closedStrip_radial_hasDerivAt {l r t : ℝ}
     {W : PolarPoint → ℝ} (hW : ContDiffOn ℝ ∞ W (closedStrip l r))
     (ht : t ∈ Ioo l r) (θ : ℝ) :
     HasDerivAt (fun s => W (s, θ))
       (n07aClosedRadialJet l r W (t, θ)) t :=
-  (n07a_closedStrip_radial_hasDerivWithinAt hW (Ioo_subset_Icc_self ht) θ).
-    hasDerivAt (Icc_mem_nhds ht.1 ht.2)
+  (n07a_closedStrip_radial_hasDerivWithinAt hW (Ioo_subset_Icc_self ht) θ).hasDerivAt
+    (Icc_mem_nhds ht.1 ht.2)
 
 theorem n07aClosedRadialJet_periodic {l r P : ℝ} (hlr : l < r)
     {W : PolarPoint → ℝ} (hW : ContDiffOn ℝ ∞ W (closedStrip l r))
@@ -120,9 +122,11 @@ theorem n07a_referenceGraph_firstTraces_of_closedSmooth
     (fun x hx θ _ => n07a_closedStrip_radial_hasDerivAt hWR hx θ) hUL hUR
   · exact (n07a_closedStrip_angularTrace_contDiff hWL hleft).sub
       (n07a_closedStrip_angularTrace_contDiff hWR hright)
-  · simpa only [← two_mul] using hp₀.add_period hp₀
+  · intro θ
+    simpa only [Pi.sub_apply, ← two_mul] using (hp₀.add_period hp₀) θ
   · exact (n07a_closedStrip_angularTrace_contDiff hDL hleft).sub
       (n07a_closedStrip_angularTrace_contDiff hDR hright)
-  · simpa only [← two_mul] using hp₁.add_period hp₁
+  · intro θ
+    simpa only [Pi.sub_apply, ← two_mul] using (hp₁.add_period hp₁) θ
 
 end ContinuousFlexibility.Analysis
