@@ -56,6 +56,7 @@ namespace ContinuousFlexibility.Statements
 open Set MeasureTheory ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {M : CircleModelData}
   (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
@@ -72,8 +73,20 @@ theorem coupledCircleShiftedCompose_decode
   rw [coupledCircleShiftedCompose, coupledCircleKernel_decode_apply]
   simp only [iteratedDeriv_zero, Fin.prod_univ_zero, mul_one,
     coupledCircleTranslation_decode]
-  congr 1
-  ring
+  exact congrArg (M.decode v m) (add_right_comm θ (M.decode ψ m θ) (travel m))
+
+private theorem coupled_circle_decode_smul (a : ℝ) (ψ : M.Space) (m : ℕ) (θ : ℝ) :
+    M.decode (a • ψ) m θ = a * M.decode ψ m θ := by
+  have h := congrFun (congrFun (M.decode.map_smul a ψ) m) θ
+  exact h
+
+private theorem coupledCircleShiftedCompose_smul_decode
+    (travel : ℕ → ℝ) (a : ℝ) (ψ v : M.Space) (m : ℕ) (θ : ℝ) :
+    M.decode (coupledCircleShiftedCompose hD hT hγ hM hI travel (a • ψ) v) m θ =
+      M.decode v m (θ + travel m + a * M.decode ψ m θ) := by
+  have hd := coupledCircleShiftedCompose_decode hD hT hγ hM hI travel (a • ψ) v m θ
+  exact hd.trans (congrArg (fun t : ℝ => M.decode v m (θ + travel m + t))
+    (coupled_circle_decode_smul (M := M) a ψ m θ))
 
 theorem coupled_circleShiftedCompose_smoothTameOn (travel : ℕ → ℝ) :
     SmoothTameOn (pairGrading M.grading M.grading) M.grading univ
@@ -97,8 +110,10 @@ theorem coupled_circleShiftedCompose_smoothTameOn (travel : ℕ → ℝ) :
 
 private theorem coupled_circleShiftedCompose_continuous (travel : ℕ → ℝ) :
     Continuous (fun z : M.Space × M.Space =>
-      coupledCircleShiftedCompose hD hT hγ hM hI travel z.1 z.2) :=
-  continuous_smoothDirections_univ
+      coupledCircleShiftedCompose hD hT hγ hM hI travel z.1 z.2) := by
+  letI : ∀ n, CompleteSpace (M.level n) :=
+    fun n => (hM.2.1 n).isComplete.completeSpace_coe
+  exact continuous_smoothDirections_univ
     (coupled_circleShiftedCompose_smoothTameOn hD hT hγ hM hI travel).choose
 
 def coupledCircleAverageCompose (travel : ℕ → ℝ) (ψ v : M.Space) : M.Space :=
@@ -115,10 +130,12 @@ theorem coupledCircleAverageCompose_decode
     zero_lt_one.trans_le (hT.2.1 _ (spaces_trace_sample_mem hD hT j)).2.2.2
   have hHpos : ∀ j, 0 < T.H (T.sample j) := fun j =>
     (hT.2.1 _ (spaces_trace_sample_mem hD hT j)).2.1
-  rw [coupledCircleAverageCompose, circleUnitIntegral_decode hM hMpos hHpos]
-  apply intervalIntegral.integral_congr
-  intro a _
-  simp only [coupledCircleShiftedCompose_decode, map_smul, Pi.smul_apply, smul_eq_mul]
+  have hd := circleUnitIntegral_decode hM hMpos hHpos
+    (fun a : ℝ => coupledCircleShiftedCompose hD hT hγ hM hI travel (a • ψ) v)
+    ((coupled_circleShiftedCompose_continuous hD hT hγ hM hI travel).comp
+      ((continuous_id.smul continuous_const).prodMk continuous_const)) m θ
+  exact hd.trans (intervalIntegral.integral_congr (fun a _ =>
+    coupledCircleShiftedCompose_smul_decode hD hT hγ hM hI travel a ψ v m θ))
 
 /-- The integral retains a fixed loss before every output order. -/
 theorem coupled_circleAverageCompose_smoothTameOn (travel : ℕ → ℝ) :
@@ -132,12 +149,46 @@ theorem coupled_circleAverageCompose_smoothTameOn (travel : ℕ → ℝ) :
     (gradedSeminorm_monotone _ _) (gradedSeminorm_monotone _ _)
   have ht : WithSeminorms p :=
     withSeminorms_pairGrading (withSeminorms_graded _ _) (withSeminorms_graded _ _)
-  let hcomp := coupled_circleShiftedCompose_smoothTameOn hD hT hγ hM hI travel
-  have h := smoothTameOn_unitIntegralLinearFamily hp ht hcomp.choose hcomp.choose_spec
-    (fun a : ℝ => (coupledCircleScaleFirst a : M.Space × M.Space →L[ℝ] M.Space × M.Space))
+  have hcomp : SmoothTameOn p M.grading univ
+      (fun z : M.Space × M.Space =>
+        coupledCircleShiftedCompose hD hT hγ hM hI travel z.1 z.2) :=
+    coupled_circleShiftedCompose_smoothTameOn hD hT hγ hM hI travel
+  let J : SmoothDirections univ (fun z : M.Space × M.Space =>
+      coupledCircleShiftedCompose hD hT hγ hM hI travel z.1 z.2) := hcomp.choose
+  have hJ : J.TameBounds p M.grading := hcomp.choose_spec
+  let L : ℝ → M.Space × M.Space →L[ℝ] M.Space × M.Space :=
+    fun a => coupledCircleScaleFirst a
+  have hL : Continuous (fun z : ℝ × (M.Space × M.Space) => L z.1 z.2) :=
     coupledCircleScaleFirst_continuous
+  have h := smoothTameOn_unitIntegralLinearFamily
+    (F := fun n => M.level n) (bond := M.bond) (p := p)
+    (f := fun z : M.Space × M.Space =>
+      coupledCircleShiftedCompose hD hT hγ hM hI travel z.1 z.2)
+    hp ht J hJ L hL
     (fun a ha s x => coupledCircleScaleFirst_grading_le M.grading ha s x)
-  simpa only [coupledCircleAverageCompose, circleUnitIntegral,
-    coupledCircleScaleFirst_apply] using h
+  change SmoothTameOn p M.grading univ
+    (fun x : M.Space × M.Space => projectiveUnitIntegral
+      (fun a => coupledCircleShiftedCompose hD hT hγ hM hI travel (L a x).1 (L a x).2)
+      ((continuous_smoothDirections_univ J).comp
+        (hL.comp (continuous_id.prodMk continuous_const)))) at h
+  apply smoothTameOn_congr h
+  intro x hx
+  have hf : Continuous (fun a : ℝ =>
+      coupledCircleShiftedCompose hD hT hγ hM hI travel (L a x).1 (L a x).2) :=
+    (continuous_smoothDirections_univ J).comp
+      (hL.comp (continuous_id.prodMk continuous_const))
+  have hg : Continuous (fun a : ℝ =>
+      coupledCircleShiftedCompose hD hT hγ hM hI travel (a • x.1) x.2) :=
+    (coupled_circleShiftedCompose_continuous hD hT hγ hM hI travel).comp
+      ((continuous_id.smul continuous_const).prodMk continuous_const)
+  change projectiveUnitIntegral
+      (fun a => coupledCircleShiftedCompose hD hT hγ hM hI travel (L a x).1 (L a x).2) hf =
+    projectiveUnitIntegral
+      (fun a => coupledCircleShiftedCompose hD hT hγ hM hI travel (a • x.1) x.2) hg
+  apply projectiveUnitIntegral_congr hf hg
+  intro a ha
+  exact congrArg
+    (fun z : M.Space × M.Space => coupledCircleShiftedCompose hD hT hγ hM hI travel z.1 z.2)
+    (coupledCircleScaleFirst_apply a x)
 
 end ContinuousFlexibility.Statements

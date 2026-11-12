@@ -22,6 +22,7 @@ namespace ContinuousFlexibility.Statements
 open Set Function ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 section CircleFormula
 
@@ -90,8 +91,17 @@ theorem coupledCircleErrorFormula_smoothTameOn
   have hsecond := smoothTameOn_comp_generic hp ht htcc
     (smoothTameOn_prodMk_generic hp ht hdr hodd)
     (coupled_circleProduct_smoothTameOn hD hT hγ hM hI) (fun _ _ => mem_univ _)
-  simpa only [Function.comp_def, coupledCircleErrorFormula] using
-    coupled_smoothTameOn_sub hp heven hsecond
+  have hsub := coupled_smoothTameOn_sub hp heven hsecond
+  change SmoothTameOn p M.grading U
+    (fun x : X =>
+      circleModelEvenProjection hM
+        (coupledCircleProduct hD hT hγ hM hI (r x)
+          (coupledCircleAverageCompose hD hT hγ hM hI travel (e x)
+            (coupledCircleDerivative hM (v x)))) -
+        coupledCircleProduct hD hT hγ hM hI (coupledCircleDerivative hM (r x))
+          (circleModelOddProjection hM
+            (coupledCircleShiftedCompose hD hT hγ hM hI travel (e x) (v x)))) at hsub
+  simpa only [Function.comp_def, coupledCircleErrorFormula] using hsub
 
 end CircleFormula
 
