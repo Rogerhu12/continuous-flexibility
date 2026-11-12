@@ -132,7 +132,7 @@ theorem n04Coordinates_actual_reference_negative_radial_fields
     rw [hg.1.self_of_nhds]
     change n04bRootStripChart (C.travel m) side
       (n04bActualTravelChart S C L z₀ m p) = _
-    rw [n04b_reference_actualTravelChart hN.1.1.2.2.1 hT hS hN hfield m
+    rw [n04b_reference_actualTravelChart hN.1.1.2.2.1 hfield m
       ⟨hp.1.1.le, hp.1.2.le⟩ p.2]
     rfl
   have hshape (p : PolarPoint) (hp : p ∈ Ω) :

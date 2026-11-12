@@ -86,6 +86,7 @@ def n04Realization_heightFieldJointDirections
     (convex_Ioo D.a D.b)
   let L := K.compLinear (parameterSpatialAssociation X) (J.open_domain.prod hΩ)
     (fun x hx => ⟨⟨hx.1, hx.2.1⟩, hx.2.2⟩)
-  exact L.congrOn (fun x _ => congrFun (spaces_mixedDerivative_zero (g x.1)) x.2)
+  exact L.congrOn (fun x _ => by
+    simp only [mixedDerivative, iteratedDeriv_zero, Prod.eta])
 
 end ContinuousFlexibility.Analysis

@@ -56,7 +56,7 @@ private theorem n04Realization_uniformRestriction_family
     apply hsub
     have he : η ≤ δ / 2 := min_le_right _ _
     have hxδ : p b x < δ := lt_of_lt_of_le (hsize b η x hx) (by linarith)
-    simpa only [sub_zero] using hxδ
+    simpa only [Set.mem_setOf_eq, sub_zero] using hxδ
   exact ⟨b, η, (le_max_left _ _).trans hb, hη, hηε, hmap,
     (hf.restrict (hV b η) hmap).weaken hp ((le_max_right _ _).trans hb) le_rfl⟩
 
