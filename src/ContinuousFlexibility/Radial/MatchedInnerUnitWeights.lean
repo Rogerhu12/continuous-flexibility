@@ -55,7 +55,7 @@ theorem innerBorderFieldMap_weight_one :
 
 /-- The constant physical weight is exactly the identity on the original
 supported space, including its scalar coordinate. -/
-theorem innerSupportedWeightMultiplier_one (s : Set α) (hs : MeasurableSet s)
+theorem innerSupportedWeightMultiplier_one_unit (s : Set α) (hs : MeasurableSet s)
     (bordered : Bool) :
     innerSupportedWeightMultiplier μ s hs bordered (fun _ => (1 : ℝ))
       measurable_const 1 (fun _ => by norm_num) =

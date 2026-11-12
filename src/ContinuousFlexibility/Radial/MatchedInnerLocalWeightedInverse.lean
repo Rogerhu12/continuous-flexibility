@@ -44,7 +44,7 @@ theorem innerSupportedWeightEquiv_one :
   have hh := (innerSupportedWeightEquiv_toCLM μ s hs bordered (fun _ => (1 : ℝ))
     measurable_const (fun _ => zero_lt_one) 1 1
     (fun _ => by norm_num) (fun _ => by norm_num)).trans
-      (innerSupportedWeightMultiplier_one μ s hs bordered)
+      (innerSupportedWeightMultiplier_one_unit μ s hs bordered)
   apply ContinuousLinearEquiv.ext
   funext F
   exact congrArg (fun T : (↥(innerSupportedAdmissibleSource μ s bordered)) →L[ℝ] (↥(innerSupportedAdmissibleSource μ s bordered)) => T F) hh
