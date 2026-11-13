@@ -120,6 +120,93 @@ namespace N04RealizationGauge
 
 variable (G : N04RealizationGauge)
 
+/-- Restrict the actual point tower before using it in a quantitative
+interface. Its construction does not enter the coefficient transfer. -/
+private def negativeInverse_pointTower_on
+    {b : ℕ} {ε : ℝ} (hadm : G.Admissible b ε) (m : ℕ) (hm : G.Neg 0 m) :
+    SmoothDirections (sectorNeighborhood (G.S 0) b ε ε ×ˢ unitStrip)
+      (fun x : Parameter (G.S 0) × PolarPoint =>
+        G.pulledPoint 0 (G.lift 0 x.1) m x.2) := by
+  have hU : IsOpen (sectorNeighborhood G.W.S b ε ε) :=
+    sectorNeighborhood_isOpen G.W.S b ε ε
+  have hΩ : IsOpen unitStrip := isOpen_Ioo.prod isOpen_univ
+  have hsub : sectorNeighborhood G.W.S b ε ε ⊆
+      sectorNeighborhood G.W.S G.W.base G.W.ε G.W.ε :=
+    sectorNeighborhood_mono G.W.S hadm.1 hadm.2.2.1 hadm.2.2.1
+  exact (G.negativeInversePointJointTower 0 m hm).restrict (hU.prod hΩ)
+    (fun x hx => ⟨hsub hx.1, hx.2⟩)
+
+/-- Extract only the inverse length cost needed by affine output
+normalization. The remaining length witnesses are kept out of its jet proof. -/
+private theorem negativeInverse_inverseLength_envelope :
+    ∃ C : ℝ, 0 < C ∧ ∀ m : ℕ,
+      |((G.V 0).physicalRight m - (G.V 0).physicalLeft m)⁻¹| ≤
+        C * G.W.U.E0 (G.W.U.sample ((G.V 0).cell m)) ^ C := by
+  let data := G.negativeInverse_length_values
+  let C : ℝ := data.choose
+  have hC : 0 < C := data.choose_spec.1
+  refine ⟨C, hC, ?_⟩
+  intro m
+  have hlength : 0 < (G.V 0).physicalRight m - (G.V 0).physicalLeft m :=
+    (data.choose_spec.2 0 m).1
+  have hbound : ((G.V 0).physicalRight m - (G.V 0).physicalLeft m)⁻¹ ≤
+      C * G.W.U.E0 (G.W.U.sample ((G.V 0).cell m)) ^ C :=
+    (data.choose_spec.2 0 m).2.2.2.1
+  exact (abs_of_pos (inv_pos.mpr hlength)).trans_le hbound
+
+/-- Instantiate the coordinate bound with abstract source and target
+towers, before either is selected from the actual geometry. -/
+private theorem negativeInverse_atom_bound_on
+    {b : ℕ} {ε : ℝ} (a : Atom) (ha : atomIsNegativeInverse a) (m : ℕ)
+    (JP : SmoothDirections (sectorNeighborhood (G.S 0) b ε ε ×ˢ unitStrip)
+      (fun x : Parameter (G.S 0) × PolarPoint =>
+        G.pulledPoint 0 (G.lift 0 x.1) m x.2))
+    (Q : SmoothDirections (sectorNeighborhood (G.S 0) b ε ε ×ˢ unitStrip)
+      (fun x : Parameter (G.S 0) × PolarPoint => G.atomFamily 0 a x.1 m x.2))
+    {n : ℕ} (w : StateAngleWord n) (hk : 0 < w.stateArity)
+    (z : Parameter (G.S 0)) (hz : z ∈ sectorNeighborhood (G.S 0) b ε ε)
+    (q : PolarPoint) (hq : q ∈ unitStrip)
+    (v : Fin n → Parameter (G.S 0) × PolarPoint)
+    (hv : ∀ i, w.isState i = true → (v i).2 = 0) :
+    |Q.D n (z, q) v| ≤
+      (1 + |((G.V 0).physicalRight m - (G.V 0).physicalLeft m)⁻¹|) *
+        ‖JP.D n (z, q) v‖ := by
+  exact G.negativeInverseAtom_positiveJoint_bound 0
+    (U := sectorNeighborhood (G.S 0) b ε ε ×ˢ unitStrip)
+    m JP a ha Q w hk (x := (z, q)) ⟨hz, hq⟩ v hv
+
+/-- The concrete atlas enters the generic transfer only through a
+given coefficient and a given tower family. -/
+private theorem negativeInverse_atom_jointPrefixes_with_coefficients
+    {b : ℕ} {ε : ℝ} (C : ℝ) (hC : 0 < C)
+    (hinv : ∀ m : ℕ,
+      |((G.V 0).physicalRight m - (G.V 0).physicalLeft m)⁻¹| ≤
+        C * G.W.U.E0 (G.W.U.sample ((G.V 0).cell m)) ^ C)
+    (J : ∀ m, G.Neg 0 m →
+      SmoothDirections (sectorNeighborhood (G.S 0) b ε ε ×ˢ unitStrip)
+        (fun x : Parameter (G.S 0) × PolarPoint =>
+          G.pulledPoint 0 (G.lift 0 x.1) m x.2))
+    (hpoint : N04NegativeInverseJointPrefixes (G.S 0) G.W.U (G.V 0).cell (G.Neg 0) b ε
+      (fun z m q => G.pulledPoint 0 (G.lift 0 z) m q))
+    (a : Atom) (ha : atomIsNegativeInverse a) :
+    N04NegativeInverseJointPrefixes (G.S 0) G.W.U (G.V 0).cell (G.Neg 0) b ε
+      (G.atomFamily 0 a) := by
+  have hE : ∀ m, 1 ≤ G.W.U.E0 (G.W.U.sample ((G.V 0).cell m)) :=
+    (G.cost_nonneg 0).2.2
+  have hH : ∀ m, 0 ≤ G.W.U.H (G.W.U.sample ((G.V 0).cell m)) :=
+    (G.cost_nonneg 0).2.1
+  exact n04NegativeInverse_jointPrefixes_of_scalar_bound
+    (S := G.S 0) (T := G.W.U) (cell := (G.V 0).cell) (P := G.Neg 0)
+    (base := b) (ε := ε) (C := C)
+    (f := fun z m q => G.pulledPoint 0 (G.lift 0 z) m q)
+    (g := G.atomFamily 0 a)
+    (I := fun m => |((G.V 0).physicalRight m - (G.V 0).physicalLeft m)⁻¹|)
+    hE hH hC (fun _ => abs_nonneg _) hinv J
+    (fun m _ JP Q z hz q hq n w hk v hv =>
+      G.negativeInverse_atom_bound_on (b := b) (ε := ε) a ha m JP Q
+        (n := n) w hk z hz q hq v hv)
+    hpoint
+
 theorem negativeInverse_atom_jointPrefixes
     {b : ℕ} {ε : ℝ} (hadm : G.Admissible b ε)
     (hpoint : N04NegativeInverseJointPrefixes (G.S 0) G.W.U (G.V 0).cell (G.Neg 0) b ε
@@ -127,28 +214,10 @@ theorem negativeInverse_atom_jointPrefixes
     (a : Atom) (ha : atomIsNegativeInverse a) :
     N04NegativeInverseJointPrefixes (G.S 0) G.W.U (G.V 0).cell (G.Neg 0) b ε
       (G.atomFamily 0 a) := by
-  have lengths := G.negativeInverse_length_values
-  let C : ℝ := lengths.choose
-  have hC : 0 < C := lengths.choose_spec.1
-  have hc := lengths.choose_spec.2
-  let J : ∀ m, G.Neg 0 m →
-      SmoothDirections (sectorNeighborhood G.W.S b ε ε ×ˢ unitStrip)
-        (fun x : Parameter G.W.S × PolarPoint => G.pulledPoint 0 (G.lift 0 x.1) m x.2) :=
-    fun m hm => (G.negativeInversePointJointTower 0 m hm).restrict
-      ((sectorNeighborhood_isOpen G.W.S b ε ε).prod (isOpen_Ioo.prod isOpen_univ))
-      (fun x hx => ⟨sectorNeighborhood_mono G.W.S hadm.1 hadm.2.2.1 hadm.2.2.1 hx.1, hx.2⟩)
-  exact n04NegativeInverse_jointPrefixes_of_scalar_bound
-    (S := G.S 0) (T := G.W.U) (cell := (G.V 0).cell) (P := G.Neg 0)
-    (base := b) (ε := ε)
-    (f := fun z m q => G.pulledPoint 0 (G.lift 0 z) m q)
-    (g := G.atomFamily 0 a)
-    (I := fun m => |((G.V 0).physicalRight m - (G.V 0).physicalLeft m)⁻¹|)
-    (G.cost_nonneg 0).2.2 (G.cost_nonneg 0).2.1 hC (fun _ => abs_nonneg _)
-    (fun m => (abs_of_pos (inv_pos.mpr (hc 0 m).1)).trans_le (hc 0 m).2.2.2.1)
-    J
-    (fun m hm JP Q z hz q hq n w hk v hv =>
-      G.negativeInverseAtom_positiveJoint_bound 0 m JP a ha Q w hk ⟨hz, hq⟩ v hv)
-    hpoint
+  let data := G.negativeInverse_inverseLength_envelope
+  exact G.negativeInverse_atom_jointPrefixes_with_coefficients
+    (b := b) (ε := ε) data.choose data.choose_spec.1 data.choose_spec.2
+    (fun m hm => G.negativeInverse_pointTower_on hadm m hm) hpoint a ha
 
 /-- The point and pulled-height joint estimates close exactly the
 inverse subnode's conclusion on the supplied common neighborhood. -/
