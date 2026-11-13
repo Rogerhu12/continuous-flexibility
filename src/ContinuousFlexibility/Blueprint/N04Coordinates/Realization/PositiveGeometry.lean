@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N04PositiveGeometryProof
+import Lean.Util.CollectAxioms
 
 /-!
 # N04Coordinates-Realization: positive geometry

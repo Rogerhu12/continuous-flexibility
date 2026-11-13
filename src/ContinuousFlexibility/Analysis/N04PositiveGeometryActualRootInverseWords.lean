@@ -55,8 +55,7 @@ theorem n04PositiveGeometry_rootInverseDifferential_word_bound
     n04PositiveGeometry_rootInversePacket_word_bound (E := StateDirections S × ℝ) K s L hL
   refine ⟨A, hA, degree, hd, ?_⟩
   intro g m side U hU JO JE Jα Jb Q hpos x hx θ p q R hR M H t hM hH hHM hHL ht shift
-  dsimp only
-  intro hO hE hα hb
+  intro P η hO hE hα hb
   have heq (y : (StateDirections S × ℝ) × ℝ) (hy : y ∈ U ×ˢ (univ : Set ℝ)) :=
     n04PositiveGeometry_rootInverseDifferential_packet_eq D S C g m side y
       (hpos (y.1, Function.invFun
