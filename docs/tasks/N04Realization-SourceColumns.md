@@ -2,24 +2,11 @@
 
 ## Problem
 
-Prove `ContinuousFlexibility.Blueprint.N04RealizationSourceColumns` in
-`src/ContinuousFlexibility/Blueprint/N04Coordinates/Realization/SourceColumns.lean`:
+Prove `ContinuousFlexibility.Blueprint.N04RealizationSourceColumns`
+(`Blueprint/N04Coordinates/Realization/SourceColumns.lean`): on all pieces, prove the current jets
+of the atoms `sourceFactor`, `sourceFactorInverse`, `leftColumn` and `nuColumn`.
 
-```lean
-theorem N04RealizationSourceColumns : N04RealizationSourceColumnObligation
-```
-
-Given the interface (geometry atoms, pulled height, pulled coefficients and columns) and the
-reference jets of the same atlas, prove on all pieces the current jets of the atoms
-`sourceFactor`, `sourceFactorInverse`, `leftColumn` and `nuColumn`. Since
-`canonicalSource S K z m f y = h x * f x / |planeJacobian (K.chart z m) x|` with
-`x = K.inverseChart z m y`, these atoms are products and quotients of interface families.
-
-Definitions and rules: `docs/tasks/N04Realization-Common.md`.
-
-Existing pieces: `N04RealizationPositivePulledHeight`, `N04RealizationCanonicalSourceProduct`,
-`N04RealizationFullWeightProductOneHigh`, `N04RealizationDifferenceValue`.
-Estimated size: 2,000–4,000 lines.
+Common part: `docs/tasks/N04Realization-Common.md`.
 
 ## Completion standard
 
