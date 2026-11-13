@@ -159,8 +159,13 @@ theorem n04Coordinates_actual_whole_referenceJets_with_auxiliary
       by_cases hv : v = .auxiliaryColumn
       · subst v
         exact hauxRegular m
-      · rw [hsame v hv (C'.referenceState, 0) m]
-        exact ⟨(hother0 m v hv).1, (hother0 m v hv).2.1⟩
+      · have hf : atom Γ.reference U S' C' L' V' (C'.referenceState, 0) m v =
+            atom Γ.reference U S C L V (C.referenceState, 0) m v :=
+          hsame v hv (C'.referenceState, 0) m
+        have he := congrArg (fun f : PolarPoint → ℝ =>
+          ContDiffOn ℝ ∞ f unitStrip ∧
+            ∀ p ∈ unitStrip, f (p + (0, Real.pi)) = f p) hf
+        exact Eq.mpr he ⟨(hother0 m v hv).1, (hother0 m v hv).2.1⟩
     · intro s
       have hotherAtOrder := (hother e τ σ Q buffer.region href).2 s
       have hauxAtOrder := hauxBound s
@@ -184,8 +189,13 @@ theorem n04Coordinates_actual_whole_referenceJets_with_auxiliary
       by_cases hv : v = .auxiliaryColumn
       · subst v
         exact (haux m p hp a b hab).trans (hcost (le_max_right _ _))
-      · rw [hsame v hv (C'.referenceState, 0) m]
-        exact ((hrest m v hv).2.2 p hp a b hab).trans (hcost (le_max_left _ _))
+      · have hf : atom Γ.reference U S' C' L' V' (C'.referenceState, 0) m v =
+            atom Γ.reference U S C L V (C.referenceState, 0) m v :=
+          hsame v hv (C'.referenceState, 0) m
+        have he := congrArg
+          (fun f : PolarPoint → ℝ => |mixedDerivative a b f p|) hf
+        exact he.trans_le
+          (((hrest m v hv).2.2 p hp a b hab).trans (hcost (le_max_left _ _)))
   exact ⟨i, l, u, η, hlu, hinterval, hU, hS', hN', hA', hR', hreference,
     hgauge, hQ, hcompact, hsupport, hinside, hauxRef, hauxZero, hauxJ, hsame⟩
 
