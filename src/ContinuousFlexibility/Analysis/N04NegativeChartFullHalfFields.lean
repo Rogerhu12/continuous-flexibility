@@ -33,7 +33,8 @@ private theorem finiteAffine_spatial_comp_at
     ContDiffAt ℝ ∞ (fun q : P × PolarPoint => f (x + L q.1) (g q.2)) (y, p) := by
   have hopen : IsOpen (((fun y => x + L y) ⁻¹' U) ×ˢ Ω) :=
     (hU.preimage (continuous_const.add L.continuous)).prod hΩ
-  exact (hf.contDiffAt (hopen.mem_nhds ⟨hy, hp⟩)).comp (y, p)
+  have hmem : (y, g p) ∈ (((fun y => x + L y) ⁻¹' U) ×ˢ Ω) := ⟨hy, hp⟩
+  exact (hf.contDiffAt (hopen.mem_nhds hmem)).comp (y, p)
     (contDiff_fst.prodMk (hg.comp contDiff_snd)).contDiffAt
 
 private theorem factoredFields_contDiffAt

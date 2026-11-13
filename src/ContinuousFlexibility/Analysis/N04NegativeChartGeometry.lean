@@ -56,7 +56,8 @@ theorem negativeChart_forward_fields
   have hf := G.negative_fields η (liftSectorParameter G.W.S G.W.C z) m j hi
   have hdomain : referencePhysicalPieceOpen (G.S η) (G.V η) m =
       referencePhysicalPieceOpen G.W.S K k := by
-    simp only [referencePhysicalPieceOpen, hf.2.2.1, hf.2.2.2.1]
+    exact congrArg₂ (fun l r : ℝ => Ioo l r ×ˢ (univ : Set ℝ))
+      hf.2.2.1 hf.2.2.2.1
   have hchart : (G.V η).chart (G.lift η z) m =
       K.chart (liftSectorParameter G.W.S G.W.C z) k := hf.2.2.2.2.2.2.2.1
   refine ⟨?_, ?_, ?_, ?_⟩
@@ -78,9 +79,9 @@ def negativeChartDeterminantRef : ℕ → PolarPoint → ℝ :=
     (G.atomRef η .chartRadial) (G.atomRef η .chartAngleDefect)
 
 theorem negativeChartDeterminant_zero :
-    G.negativeChartDeterminant η 0 = G.negativeChartDeterminantRef η := by
-  unfold negativeChartDeterminant negativeChartDeterminantRef
-  rw [G.atomFamily_zero η .chartRadial, G.atomFamily_zero η .chartAngleDefect]
+    G.negativeChartDeterminant η 0 = G.negativeChartDeterminantRef η :=
+  congrArg₂ (n04NegativeChartDeterminant (G.negativeChartWidthRatio η))
+    (G.atomFamily_zero η .chartRadial) (G.atomFamily_zero η .chartAngleDefect)
 
 theorem negativeChartDeterminant_eq
     (z : Parameter G.W.S)

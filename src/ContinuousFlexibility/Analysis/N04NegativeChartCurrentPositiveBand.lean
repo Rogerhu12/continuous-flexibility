@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N04RealizationPrincipalHalfBounds
+import ContinuousFlexibility.Analysis.N04SourceColumnsSmallness
 
 /-!
 # One state neighborhood preserves all actual interior travel lower bounds
@@ -111,6 +112,37 @@ attribute [local instance]
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
 
+local instance currentBand_parameterTopology (S : PhysicalSpacesData) :
+    TopologicalSpace (Parameter S) := inferInstance
+
+local instance currentBand_parameterAddGroup (S : PhysicalSpacesData) :
+    IsTopologicalAddGroup (Parameter S) :=
+  (n07aParameterGrading_withSeminorms S).isTopologicalAddGroup
+
+local instance currentBand_parameterSMul (S : PhysicalSpacesData) :
+    ContinuousSMul ℝ (Parameter S) :=
+  (n07aParameterGrading_withSeminorms S).continuousSMul
+
+set_option diagnostics true in
+private theorem currentBand_sector_zero (S : PhysicalSpacesData) (base : ℕ)
+    {ε : ℝ} (hε : 0 < ε) : (0 : Parameter S) ∈ sectorNeighborhood S base ε ε := by
+  constructor
+  · change sectorGrading S base 0 < ε
+    exact (sectorGrading S base).map_zero'.trans_lt hε
+  · change |(0 : ℝ)| < ε
+    simpa only [abs_zero] using hε
+
+set_option diagnostics true in
+private theorem currentBand_sector_small (S : PhysicalSpacesData) (base loss : ℕ)
+    {ε δ : ℝ} (hε : 0 < ε) (hδ : 0 < δ) :
+    ∃ η : ℝ, 0 < η ∧ η ≤ ε ∧ η ≤ 1 / 2 ∧
+      ∀ z ∈ sectorNeighborhood S (max base loss) η η,
+        z ∈ sectorNeighborhood S base ε ε ∧ parameterGrading S (max base loss) z < δ := by
+  obtain ⟨η, hη, hηε, hηhalf, hηδ⟩ := currentBand_sector_radius hε hδ
+  refine ⟨η, hη, hηε, hηhalf, fun z hz => ?_⟩
+  exact ⟨n07a_sectorNeighborhood_mono (S := S) (le_max_left _ _) hηε hz,
+    (n04SourceColumns_parameter_lt hz).trans_le hηδ⟩
+
 set_option diagnostics true in
 /-- The index may contain a component, side and physical point. The
 radius and low base precede all of them and every later derivative order. -/
@@ -131,27 +163,14 @@ theorem n04NegativeChart_current_half_reference
       ∀ i z, z ∈ sectorNeighborhood S b η η →
         f i 0 / 2 ≤ f i z ∧ 0 < f i z ∧
           (f i z)⁻¹ ≤ 2 * B * T.E0 (T.sample (sample i)) ^ A := by
-  have hzero : (0 : Parameter S) ∈ sectorNeighborhood S base ε ε := by
-    constructor
-    · change sectorGrading S base 0 < ε
-      exact (sectorGrading S base).map_zero'.trans_lt hε
-    · change |(0 : ℝ)| < ε
-      simpa only [abs_zero] using hε
-  refine (currentBand_material_ball hD hT sample (parameterGrading S)
+  have hball := currentBand_material_ball (X := Parameter S) hD hT sample (parameterGrading S)
     (n07aParameterGrading_monotone S) base loss (sectorNeighborhood_convex S base ε ε)
-    hzero f J c P B A hc hB href hfirst).elim ?_
-  intro δ hδdata
-  obtain ⟨η, hη, hηε, hηhalf, hηδ⟩ := currentBand_sector_radius hε hδdata.1
-  refine ⟨max base loss, η, le_max_left _ _, hη, hηε, hηhalf, fun i z hz => ?_⟩
-  have hzU : z ∈ sectorNeighborhood S base ε ε :=
-    n07a_sectorNeighborhood_mono (S := S) (le_max_left _ _) hηε hz
-  have hp : parameterGrading S (max base loss) z < 2 * η := by
-    rw [show parameterGrading S (max base loss) z =
-        sectorGrading S (max base loss) z.1 + |z.2| from
-      pairGrading_apply (E := StateDirections S) (F := ℝ)
-        (sectorGrading S) realGrading (max base loss) z]
-    exact (add_lt_add hz.1 hz.2).trans_eq (two_mul η).symm
-  exact hδdata.2 i z hzU (hp.trans_le hηδ)
+    (currentBand_sector_zero S base hε) f J c P B A hc hB href hfirst
+  have hsector := currentBand_sector_small S base loss hε hball.choose_spec.1
+  refine ⟨max base loss, hsector.choose, le_max_left _ _,
+    hsector.choose_spec.1, hsector.choose_spec.2.1, hsector.choose_spec.2.2.1, fun i z hz => ?_⟩
+  have hz' := hsector.choose_spec.2.2.2 z hz
+  exact hball.choose_spec.2 i z hz'.1 hz'.2
 
 end ContinuousFlexibility.Analysis
 

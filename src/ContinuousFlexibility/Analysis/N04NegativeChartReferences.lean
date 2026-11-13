@@ -81,9 +81,13 @@ theorem negativeChart_referenceData
     ⟨(sectorGrading G.W.S G.W.base).map_zero'.trans_lt G.W.ε_pos,
       (abs_zero : |(0 : ℝ)| = 0).trans_lt G.W.ε_pos⟩
   refine ⟨fun n => ?_, fun s => ?_⟩
-  · simpa only [G.atomFamily_zero η a] using
-      G.negative_geometry_spatial η 0 hz (G.negativeChartPiece n)
-        (G.negativeChartPiece_negative η n) a ha
+  · have he : G.atomFamily η a (0 : Parameter G.W.S) (G.negativeChartPiece n) =
+        G.atomRef η a (G.negativeChartPiece n) :=
+      congrFun (G.atomFamily_zero η a) (G.negativeChartPiece n)
+    exact Eq.mp (congrArg (fun f : PolarPoint → ℝ => ContDiffOn ℝ ∞ f unitStrip ∧
+      ∀ q ∈ unitStrip, f (q + (0, Real.pi)) = f q) he)
+      (G.negative_geometry_spatial η 0 hz (G.negativeChartPiece n)
+        (G.negativeChartPiece_negative η n) a ha)
   · have hb := G.negative_geometry_reference_bounds η s
     exact ⟨hb.choose, hb.choose_spec.1, fun n q hq i j hij =>
       hb.choose_spec.2 (G.negativeChartPiece n) (G.negativeChartPiece_negative η n)
