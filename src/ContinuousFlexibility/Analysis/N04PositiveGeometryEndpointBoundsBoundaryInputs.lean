@@ -50,6 +50,26 @@ private def rootInputDirections
         (fun y : Y × ℝ => n06RootBoundaryInputs (d y.1) (c y.1) (β y.1) l y.2))
     (Jd 0) (Jd 1) (Jd 2) (Jd 3) (Jc 0) (Jc 1) (Jc 2) (Jc 3) JB j
 
+theorem n04PositiveGeometry_rootBoundaryInputs_each
+    {Y : Type*} (d c : Y → PolarPoint → ℝ) (β : Y → ℝ → ℝ)
+    (P : (Y → ℝ → ℝ) → Prop)
+    (hd : ∀ a : ℕ, a ≤ 3 →
+      P (fun y => radialBoundaryJet (d y) 0 a))
+    (hc : ∀ a : ℕ, a ≤ 3 →
+      P (fun y => radialBoundaryJet (c y) 0 a))
+    (hβ : P (fun y => deriv (β y))) (j : Fin 9) :
+    P (fun y => n06RootBoundaryInputs (d y) (c y) (β y) j) := by
+  fin_cases j
+  · exact hd 0 (by decide)
+  · exact hd 1 (by decide)
+  · exact hd 2 (by decide)
+  · exact hd 3 (by decide)
+  · exact hc 0 (by decide)
+  · exact hc 1 (by decide)
+  · exact hc 2 (by decide)
+  · exact hc 3 (by decide)
+  · exact hβ
+
 def n04PositiveGeometry_rootBoundaryInput
     (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
     (g : ℝ → ℝ) (m : ℕ) (side : Bool) (j : Fin 9)

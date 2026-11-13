@@ -146,15 +146,17 @@ theorem n04PositiveGeometry_rootBoundaryInput_sample_prefix
       (mul_le_mul_of_nonneg_right
         (mul_le_mul_of_nonneg_right (hcost (le_max_right Dc Dβ))
           (parameterHeightWeight_nonneg hH k)) hP))
-  fin_cases j
-  · exact hcoeff false 0 (by decide) J
-  · exact hcoeff false 1 (by decide) J
-  · exact hcoeff false 2 (by decide) J
-  · exact hcoeff false 3 (by decide) J
-  · exact hcoeff true 0 (by decide) J
-  · exact hcoeff true 1 (by decide) J
-  · exact hcoeff true 2 (by decide) J
-  · exact hcoeff true 3 (by decide) J
-  · exact hlabel J
+  exact n04PositiveGeometry_rootBoundaryInputs_each
+    (fun y => n04PositiveGeometry_rootRawCoefficient W.D W.S W.C g
+      (n01ComponentRoot W.C m (!side)) (n01ComponentRootOrientation (!side)) false
+      (liftSectorParameter W.S W.C y))
+    (fun y => n04PositiveGeometry_rootRawCoefficient W.D W.S W.C g
+      (n01ComponentRoot W.C m (!side)) (n01ComponentRootOrientation (!side)) true
+      (liftSectorParameter W.S W.C y))
+    (fun y => n01RootLabel W.S W.C (liftSectorParameter W.S W.C y) m (!side))
+    (fun f => ∀ Q : SmoothDirections (sectorNeighborhood W.S base ε ε)
+      (fun y => iteratedDeriv (u + d) (f y) θ),
+        ‖Q.D k z v‖ ≤ A * E ^ A * parameterHeightWeight H k * P)
+    (hcoeff false) (hcoeff true) hlabel j J
 
 end ContinuousFlexibility.Analysis
