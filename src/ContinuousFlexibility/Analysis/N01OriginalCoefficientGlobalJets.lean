@@ -2,6 +2,7 @@ import ContinuousFlexibility.Analysis.N01CoefficientValueJets
 import ContinuousFlexibility.Analysis.N01OpticalCollarPositivity
 import ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope
 import ContinuousFlexibility.Analysis.LocalMixedProductBounds
+import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Actual original coefficient jets throughout the annulus
@@ -41,8 +42,8 @@ private theorem radial_coefficient_compact_jet_bound
       |mixedDerivative a b (K i) (r, 0)|
   have hc (i : Fin 3) (a b : ℕ) :
       ContinuousOn (fun r : ℝ => |mixedDerivative a b (K i) (r, 0)|) (Icc l u) :=
-    (((contDiffOn_mixedDerivative (isOpen_Ioi.prod isOpen_univ) (hK i) a b).
-      continuousOn).comp' (continuous_id.prodMk continuous_const).continuousOn
+    (((contDiffOn_mixedDerivative (isOpen_Ioi.prod isOpen_univ) (hK i) a b).continuousOn).comp'
+      (continuous_id.prodMk continuous_const).continuousOn
       (fun r hr => ⟨hl.trans_le hr.1, mem_univ _⟩)).abs
   have hJ : ContinuousOn J (Icc l u) :=
     continuousOn_finsetSum _ (fun i _ => continuousOn_finsetSum _ (fun a _ =>
@@ -96,10 +97,14 @@ theorem N01Properties.reference_coefficient_mixed_global_bound
   have hc : (originalCoefficients D S C (C.referenceState, 0)).c =
       fun p : PolarPoint => deriv D.w p.1 / p.1 :=
     funext (fun p => (hN.reference_coefficients p).2.2)
-  apply radial_coefficient_compact_jet_bound _ _
+  refine radial_coefficient_compact_jet_bound
+    (fun i => canonicalCoefficientComponent i (originalCoefficients D S C (C.referenceState, 0)))
+    (fun i => ?_)
     (fun i r θ => originalCoefficientComponent_zeroParameter_angle_invariant
       D S C C.referenceState i r θ 0) hg.1 D.b s
-  intro i
+  show ContDiffOn ℝ ∞
+    (canonicalCoefficientComponent i (originalCoefficients D S C (C.referenceState, 0)))
+    (Ioi (0 : ℝ) ×ˢ (univ : Set ℝ))
   unfold canonicalCoefficientComponent
   split_ifs
   · rw [ha]
@@ -131,7 +136,7 @@ theorem originalCoefficient_global_bound_of_n01
   obtain ⟨B, hB, hdifference⟩ := coefficientFamily_value_bound_of_n01 hN s
   obtain ⟨K, hK, habsorb⟩ :=
     materialSample_H_E0_envelope hT hN.1.1 (by norm_num : (0 : ℝ) < 3 / 4) B
-  obtain ⟨M, hM, hreference⟩ := hN.reference_coefficient_mixed_global_bound s
+  obtain ⟨M, hM, hreference⟩ := N01Properties.reference_coefficient_mixed_global_bound hN s
   refine ⟨B * K + M, add_pos_of_pos_of_nonneg (mul_pos hB hK) hM, ?_⟩
   intro z hz hsector i a b hab q hq
   have hpart : RadialPartition D := hN.1.1.choose_spec.2.1

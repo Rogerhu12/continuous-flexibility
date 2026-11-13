@@ -62,7 +62,7 @@ theorem exists_canonicalFixedGeometryDifference_zero_tower
       (fun z : Parameter S => differenceJets D T S C L K z a),
       ∀ k z v, J.D k z v = 0 := by
   have hratio : CanonicalMaterialRatioAtom .ratioH := Or.inl rfl
-  obtain ⟨J, hJ⟩ := exists_canonicalMaterialRatioDifference_zero_tower
+  have hex := exists_canonicalMaterialRatioDifference_zero_tower
     (D := D) (T := T) (C := C) (L := L) (K := K)
     (base := base) (ε := ε) hratio
   have he : ∀ z ∈ sectorNeighborhood S base ε ε,
@@ -72,6 +72,6 @@ theorem exists_canonicalFixedGeometryDifference_zero_tower
     funext m i j p
     rw [canonical_materialRatioDifferenceJets_eq_zero hratio,
       canonical_fixedGeometryDifferenceJets_eq_zero ha]
-  exact ⟨J.congr he, hJ⟩
+  exact ⟨hex.choose.congr he, hex.choose_spec⟩
 
 end ContinuousFlexibility.Analysis

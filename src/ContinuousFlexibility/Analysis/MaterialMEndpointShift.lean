@@ -37,7 +37,11 @@ private theorem materialMExponent_hasDerivAt {x : ℝ} (hx : 0 ≤ x) :
     convert Real.hasDerivAt_rpow_const (x := x) (p := (5 / 2 : ℝ))
       (Or.inr (by norm_num)) using 1 <;> norm_num
   have hl : HasDerivAt materialLogFactor ((Real.exp 1 + x)⁻¹) x := by
-    simpa only [materialLogFactor, one_div] using
+    have hfun : materialLogFactor = fun y : ℝ => Real.log (Real.exp 1 + y) := by
+      funext y
+      rw [materialLogFactor]
+    rw [hfun]
+    simpa only [one_div] using
       (((hasDerivAt_id' x).const_add (Real.exp 1)).log
         (add_pos_of_pos_of_nonneg (Real.exp_pos 1) hx).ne')
   have hl2 : HasDerivAt (fun t : ℝ => materialLogFactor t ^ 2)

@@ -56,7 +56,7 @@ theorem canonical_auxiliaryDifferenceJets_eq_zero
     {z : Parameter S} (hz : z ∈ sectorNeighborhood S base ε ε)
     (m i j : ℕ) (p : unitStrip) :
     differenceJets D T S C L K z .auxiliaryColumn m i j p = 0 := by
-  have hz' := liftSectorParameter_mem_stateNeighborhood hz (le_refl ε)
+  have hz' := liftSectorParameter_mem_stateNeighborhood (C := C) hz (le_refl ε)
   have hs := hN.1.1.2.2.1.liftSectorParameter_sector z
   have he := canonical_auxiliaryColumn_eqOn_reference hN hA hψ hz' hs m
   have hzero : EqOn

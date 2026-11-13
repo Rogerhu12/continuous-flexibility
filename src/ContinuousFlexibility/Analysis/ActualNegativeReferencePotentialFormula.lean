@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.RadialReferencePotentialGerms
 import ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields
+import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # The actual negative reference potential after unit-density cancellation

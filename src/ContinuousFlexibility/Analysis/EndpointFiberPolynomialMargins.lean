@@ -56,7 +56,9 @@ theorem prescribedEndpointWidth_fiber_polynomial_inv_le (n : ℕ)
         (24 + 16 * ((n + 1 : ℕ) : ℝ)) * U ^ 2 := by
   let N : ℝ := ((n + 1 : ℕ) : ℝ)
   let L : ℝ := max (M + N * M) 1
-  have hN : 1 ≤ N := by exact_mod_cast Nat.succ_le_succ (Nat.zero_le n)
+  have hN : 1 ≤ N := by
+    show (1 : ℝ) ≤ ((n + 1 : ℕ) : ℝ)
+    exact_mod_cast Nat.le_add_left 1 n
   have hN0 : 0 ≤ N := zero_le_one.trans hN
   have hU0 : 0 ≤ U := zero_le_one.trans hU
   have hU2 : U ≤ U ^ 2 := by nlinarith only [hU, sq_nonneg (U - 1)]
@@ -142,11 +144,13 @@ theorem endpointFiberJacobianLower_polynomial_inv_le (n : ℕ)
   have hkinv : k⁻¹ ≤ 4 * U := by
     have h := reciprocal_min_le_add (half_pos hκX) (by norm_num : (0 : ℝ) < 1 / 2)
     have h' : k⁻¹ ≤ 2 * κX⁻¹ + 2 := by
-      simpa only [k, inv_div, div_one, div_eq_mul_inv] using h
+      calc
+        k⁻¹ ≤ (κX / 2)⁻¹ + (1 / 2)⁻¹ := h
+        _ = 2 * κX⁻¹ + 2 := by rw [inv_div, inv_div, div_one, div_eq_mul_inv]
     linarith only [h', hXU, hU]
   have hφinv : (κφ / 2)⁻¹ ≤ 2 * U := by
-    simpa only [inv_div, div_eq_mul_inv] using
-      mul_le_mul_of_nonneg_left hφU (by norm_num : (0 : ℝ) ≤ 2)
+    rw [inv_div, div_eq_mul_inv]
+    exact mul_le_mul_of_nonneg_left hφU (by norm_num : (0 : ℝ) ≤ 2)
   refine ⟨mul_pos hB (half_pos hκφ), ?_⟩
   change (B * (κφ / 2))⁻¹ ≤ 8 * U ^ 2
   rw [mul_inv_rev]

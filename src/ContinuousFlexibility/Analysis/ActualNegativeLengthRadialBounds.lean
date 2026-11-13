@@ -26,7 +26,7 @@ private theorem actual_halfTravel_inverseWidth
     (htravel : (∫ x in l..r, v x) = t / 2)
     (hlower : E ^ (-A) ≤ t) :
     (r - l)⁻¹ ≤ 2 * M * E ^ (2 * A) := by
-  have hi := hv.intervalIntegrable_of_Icc hlr.le
+  have hi := hv.intervalIntegrable_of_Icc (μ := volume) hlr.le
   have hc : IntervalIntegrable (fun _ : ℝ => M * E ^ A) volume l r :=
     intervalIntegrable_const
   have hint := intervalIntegral.integral_mono_on hlr.le hi hc hbound
@@ -135,8 +135,8 @@ theorem n04b_actual_negative_radial_length_bounds
   have hv := n04b_referenceOpticalSpeed_continuousOn hD hC m
   have hvL := hv.mono (Icc_subset_Icc le_rfl hcut.1.2.le)
   have hvR := hv.mono (Icc_subset_Icc hcut.1.1.le le_rfl)
-  have hil := hvL.intervalIntegrable_of_Icc hcut.1.1.le
-  have hir := hvR.intervalIntegrable_of_Icc hcut.1.2.le
+  have hil := hvL.intervalIntegrable_of_Icc (μ := volume) hcut.1.1.le
+  have hir := hvR.intervalIntegrable_of_Icc (μ := volume) hcut.1.2.le
   have hleft : (∫ x in C.left m..cut m, opticalSpeed D.w x) = C.travel m / 2 := hcut.2
   have hright : (∫ x in cut m..C.right m, opticalSpeed D.w x) = C.travel m / 2 := by
     have hadd := intervalIntegral.integral_add_adjacent_intervals hil hir
@@ -165,7 +165,7 @@ theorem n04b_actual_negative_radial_length_bounds
   have hcanonical : n04bRootCutRadius (C.travel m) ≤ B * E ^ (2 * A) := by
     calc
       _ ≤ 1 + C.travel m := hRupper
-      _ ≤ 1 + V * M * E ^ A := add_le_add_left htravelUpper 1
+      _ ≤ 1 + V * M * E ^ A := add_le_add le_rfl htravelUpper
       _ ≤ E ^ (2 * A) + V * M * E ^ (2 * A) :=
         add_le_add hone (mul_le_mul_of_nonneg_left hpower hVM)
       _ = (1 + V * M) * E ^ (2 * A) := by ring

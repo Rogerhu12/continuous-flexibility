@@ -132,6 +132,7 @@ theorem opticalHalf_integral_eq_airyAverage
       ∫ y in (0 : ℝ)..x, Real.sqrt y * c y := by
     apply intervalIntegral.integral_congr
     intro y hy
+    dsimp only
     have hy' : y ∈ Icc (0 : ℝ) x := by simpa only [uIcc_of_le hx.1] using hy
     rw [heq y ⟨hy'.1, hy'.2.trans hx.2⟩, Real.sqrt_mul hy'.1]
   have hchange : x * (∫ t in (0 : ℝ)..1, Real.sqrt (t * x) * c (t * x)) =
@@ -144,6 +145,7 @@ theorem opticalHalf_integral_eq_airyAverage
     rw [← intervalIntegral.integral_const_mul]
     apply intervalIntegral.integral_congr
     intro t ht
+    dsimp only
     have ht' : t ∈ Icc (0 : ℝ) 1 := by simpa only [uIcc_of_le zero_le_one] using ht
     rw [Real.sqrt_mul ht'.1]
     ring

@@ -35,8 +35,9 @@ theorem mixedDerivative_radialIntervalPrimitive_zero {f : PolarPoint → ℝ}
   have hswap : ContDiff ℝ ∞ (fun p : PolarPoint => (p.2, p.1)) :=
     contDiff_snd.prodMk contDiff_fst
   funext p
-  simpa only [mixedDerivative, iteratedDeriv_zero, radialIntervalPrimitive] using
-    iteratedDeriv_intervalIntegral_parameter (hf.comp hswap) b l p.1 p.2
+  have h := iteratedDeriv_intervalIntegral_parameter
+    (f := fun q : ℝ × ℝ => f (q.2, q.1)) (hf.comp hswap) b l p.1 p.2
+  simpa only [mixedDerivative, iteratedDeriv_zero, radialIntervalPrimitive] using h
 
 theorem mixedDerivative_radialIntervalPrimitive_succ {f : PolarPoint → ℝ}
     (hf : ContDiff ℝ ∞ f) (l : ℝ) (a b : ℕ) :

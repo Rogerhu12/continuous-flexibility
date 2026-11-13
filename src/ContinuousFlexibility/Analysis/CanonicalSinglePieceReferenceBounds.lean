@@ -57,7 +57,8 @@ private theorem compact_radial_unit_mixed_bound
       calc
         _ = mixedDerivative i j (fun q : PolarPoint => g (q.1, 0)) p := hjets hp
         _ = mixedDerivative i j (fun q : PolarPoint => g (q.1, 0)) (p.1, 0) := by
-          simp only [n08_mixedDerivative_radial]
+          rw [n08_mixedDerivative_radial (fun r => g (r, 0)) i j p,
+            n08_mixedDerivative_radial (fun r => g (r, 0)) i j (p.1, 0)]
         _ = _ := (hjets (x := (p.1, 0)) ⟨hp.1, mem_univ _⟩).symm
     have hb : |mixedDerivative i j g (p.1, 0)| ≤ M := by
       simpa only [Real.norm_eq_abs] using hM (p.1, 0) ⟨hpE, mem_singleton 0⟩
@@ -197,6 +198,8 @@ theorem canonicalReferenceUnitSource_singlePiece_bounds
         (isOpen_Ioo.prod isOpen_univ) (hother m hm) i j) (x := p) hp
       have hz : mixedDerivative i j (g m) p = 0 := by
         simpa only [mixedDerivative, iteratedDeriv_fun_const_zero] using he
-      simpa only [hz, abs_zero] using hM.le
+      have hz' : mixedDerivative i j (canonicalReferenceUnitSource S C K m f) p = 0 := hz
+      rw [hz', abs_zero]
+      exact hM.le
 
 end ContinuousFlexibility.Analysis

@@ -113,7 +113,9 @@ theorem N01Properties.originalRadialCoefficient_inverse_component_material_bound
   have hcoef := hN.originalRadialCoefficient_ge_sixteenth_profile hz hs hpD
   have hinv : ((originalCoefficients D S C z).a p)⁻¹ ≤ 16 * (D.w p.1)⁻¹ := by
     have h := inv_anti₀ (div_pos hw (by norm_num : (0 : ℝ) < 16)) hcoef
-    simpa only [inv_div, div_eq_mul_inv] using h
+    calc
+      _ ≤ (D.w p.1 / 16)⁻¹ := h
+      _ = 16 * (D.w p.1)⁻¹ := by rw [inv_div, div_eq_mul_inv]
   calc
     _ ≤ 16 * (D.w p.1)⁻¹ := hinv
     _ ≤ 16 * (A * radialE (D.cellIndex j) ^ A) :=
