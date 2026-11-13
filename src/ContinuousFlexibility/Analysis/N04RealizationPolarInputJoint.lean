@@ -2,6 +2,7 @@ import ContinuousFlexibility.Analysis.N01cCoefficientPolarPowerInputs
 import ContinuousFlexibility.Analysis.N01cActualCosineSpeedTower
 import ContinuousFlexibility.Analysis.N04RealizationMixedJointDirections
 import ContinuousFlexibility.Analysis.SmoothDirectionsOneHighLimit
+import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # Joint towers of the actual polar height inputs
@@ -20,6 +21,13 @@ namespace ContinuousFlexibility.Analysis
 open Set ContinuousFlexibility.Statements
 open scoped ContDiff
 
+private theorem useNonnegativeParameters
+    {P : ℝ → ℝ → Prop} {Q : Prop}
+    (h : ∃ c A : ℝ, 0 ≤ c ∧ 0 ≤ A ∧ P c A)
+    (huse : ∀ c A : ℝ, 0 ≤ c → P c A → Q) : Q := by
+  obtain ⟨c, A, hc, _, hP⟩ := h
+  exact huse c A hc hP
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}
 
@@ -37,8 +45,9 @@ theorem n04Realization_polarInput_uniformSeminormBounds
     (n01c_continuous_jointStateGrading S) (jointStateGrading_monotone S)
     0 (fun _ => a + b + 4)
   intro k
-  obtain ⟨C₀, A, hC₀, _, hbound⟩ :=
-    stateU_qPolarMixedJets_oneHigh_bound hT hS hD (a + b)
+  refine useNonnegativeParameters
+    (stateU_qPolarMixedJets_oneHigh_bound hT hS hD (a + b)) ?_
+  intro C₀ A hC₀ hbound
   obtain ⟨B, hB, habsorb⟩ :=
     materialHeight_E0_weight_bounded hT (by norm_num : (0 : ℝ) < 3 / 4) A
   refine ⟨C₀ * B, mul_nonneg hC₀ hB.le, ?_⟩
