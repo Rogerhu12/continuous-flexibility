@@ -146,7 +146,7 @@ theorem n04Realization_positive_principal_half_reference
   have hzero : (0 : CanonicalGeometry.Parameter S) ∈ sectorNeighborhood S base ε ε := by
     constructor
     · change sectorGrading S base 0 < ε
-      simpa only [map_zero] using hε
+      exact (sectorGrading S base).map_zero'.trans_lt hε
     · change |(0 : ℝ)| < ε
       simpa only [abs_zero] using hε
   have hzeroLift : liftSectorParameter S C (0 : CanonicalGeometry.Parameter S) =
