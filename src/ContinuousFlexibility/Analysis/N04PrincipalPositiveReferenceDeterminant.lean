@@ -51,9 +51,14 @@ theorem n04PrincipalPositive_reference_inverseJacobian_composedAtom {b : ℕ} {�
       G.n04PrincipalPositive_referenceUnitInverse_point h η m q
   have hJpos : 0 < planeJacobian F (I q) := hg.jacobian_positive (I q)
   cases inverse
-  · simpa only [Bool.false_eq_true, ↓reduceIte, atomRef, atom, hpoint,
-      abs_of_pos hJpos] using hJ
-  · simpa only [↓reduceIte, atomRef, atom, hpoint, abs_of_pos hJpos] using hInv
+  · simp only [Bool.false_eq_true, ↓reduceIte, atomRef, atom, hpoint]
+    change planeJacobian I q = |planeJacobian F (I q)|⁻¹
+    rw [abs_of_pos hJpos]
+    exact hJ
+  · simp only [↓reduceIte, atomRef, atom, hpoint]
+    change (planeJacobian I q)⁻¹ = |planeJacobian F (I q)|
+    rw [abs_of_pos hJpos]
+    exact hInv
 
 /-- The reference inverse determinant and its reciprocal are smooth and
 have full uniform coefficient-power bounds on positive pieces. -/

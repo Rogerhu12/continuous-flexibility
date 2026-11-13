@@ -77,7 +77,9 @@ theorem n04PrincipalPositive_parameter_interpolation
 theorem n04PrincipalPositive_lift_zero
     (η : (G.W.S.height (3 / 4 : ℝ)).Space) : G.lift η 0 = G.ref η := by
   change liftSectorParameter (G.S η) (G.C η) 0 = ((G.C η).referenceState, 0)
-  rw [liftSectorParameter_eq_affine, map_zero, add_zero]
+  exact (liftSectorParameter_eq_affine (G.S η) (G.C η) 0).trans
+    ((congrArg (fun w : AnnularState (G.S η) × ℝ => ((G.C η).referenceState, 0) + w)
+      (ContinuousLinearMap.map_zero (sectorParameterInclusion (G.S η)))).trans (add_zero _))
 
 theorem n04PrincipalPositive_sector_zero
     (η : (G.W.S.height (3 / 4 : ℝ)).Space) (b : ℕ) {ε : ℝ} (hε : 0 < ε) :

@@ -23,8 +23,10 @@ theorem n04PrincipalPositive_coordinatePair_fderiv
     (l w : ℝ) (v : PolarPoint) :
     fderiv ℝ (fun q => (l + w * f q, q.2 + g q)) p v =
       (w * fderiv ℝ f p v, v.2 + fderiv ℝ g p v) := by
+  have hsum : DifferentiableAt ℝ (fun q : PolarPoint => q.2 + g q) p :=
+    differentiableAt_snd.add hg
   rw [DifferentiableAt.fderiv_prodMk ((hf.const_mul w).const_add l)
-    (differentiableAt_snd.add hg), fderiv_const_add, fderiv_const_mul hf w,
+    hsum, fderiv_const_add, fderiv_const_mul hf w,
     fderiv_fun_add differentiableAt_snd hg]
   simp only [ContinuousLinearMap.prod_apply, ContinuousLinearMap.smul_apply,
     ContinuousLinearMap.add_apply, fderiv_snd, ContinuousLinearMap.coe_snd', smul_eq_mul]
@@ -53,12 +55,19 @@ theorem n04PrincipalPositive_inverse_entries {b : ℕ} {ε : ℝ}
   let W := (G.V η).physicalRight m - (G.V η).physicalLeft m
   have hunit := G.n04PrincipalPositive_unitPoint_eq η hm
   have hgeometry := G.n04PrincipalPositive_rangeGeometry h η hz hs hm
+  have hRformula : R = fun p =>
+      (((G.V η).inverseChart z m p).1 - (G.V η).physicalLeft m) / W := by
+    funext p
+    simp only [R, atom, hunit, id_eq, W]
+  have hTformula : T = fun p => ((G.V η).inverseChart z m p).2 - p.2 := by
+    funext p
+    simp only [T, atom, hunit, id_eq]
   have hR : ContDiff ℝ ∞ R := by
-    simpa only [R, atom, hunit, id_eq] using
-      (hgeometry.inverse_smooth.fst.sub contDiff_const).div_const W
+    rw [hRformula]
+    exact (hgeometry.inverse_smooth.fst.sub contDiff_const).div_const W
   have hT : ContDiff ℝ ∞ T := by
-    simpa only [T, atom, hunit, id_eq] using
-      hgeometry.inverse_smooth.snd.sub contDiff_snd
+    rw [hTformula]
+    exact hgeometry.inverse_smooth.snd.sub contDiff_snd
   have hW : W ≠ 0 :=
     (sub_pos.mpr ((G.n04PrincipalPositive_admissible_parts h η).1.referenceBounds m).1).ne'
   have hmap : (G.V η).inverseChart z m =
@@ -133,7 +142,7 @@ theorem n04PrincipalPositive_principal_unit_formula {b : ℕ} {ε : ℝ}
   have hend := G.n04PrincipalDivided_positive_endpoints η hm
   have hunit := G.n04PrincipalPositive_unitPoint_eq η hm
   have hqK : q ∈ canonicalOpen (G.S η) (G.V η) m := by
-    simpa only [canonicalOpen, hend.1, hend.2] using hq
+    simpa only [canonicalOpen, unitStrip, hend.1, hend.2] using hq
   have hraw := G.n04PrincipalPositive_principal_eq_adjugate h η hw hs m hqK
   have hform := n04PrincipalPositive_adjugate_inverseHeight_formula
     ((G.L η).coefficients w) ((G.V η).inverseChart w m)

@@ -104,18 +104,25 @@ theorem n04PrincipalPositive_potential_unit_formula {b : ℕ} {ε : ℝ}
   have hunit := G.n04PrincipalPositive_unitPoint_eq η hm
   have hend := G.n04PrincipalDivided_positive_endpoints η hm
   have hqK : q ∈ canonicalOpen (G.S η) (G.V η) m := by
-    simpa only [canonicalOpen, hend.1, hend.2] using hq
+    simpa only [canonicalOpen, unitStrip, hend.1, hend.2] using hq
   let v : PolarPoint → ℝ := fun p =>
     ((G.V η).height w m ((G.V η).inverseChart w m p))⁻¹
   have hv : ContDiffOn ℝ ∞ v unitStrip := by
-    simpa only [pulledHeight, heightField, pulledPoint, hunit, id_eq] using
-      (G.n04PrincipalPositive_reciprocal_pulledHeight_smooth h η hz hm).contDiffOn
+    apply (G.n04PrincipalPositive_reciprocal_pulledHeight_smooth h η hz hm).contDiffOn.congr
+    intro p hp
+    simp only [v, w, pulledHeight, heightField, pulledPoint, hunit, id_eq]
   have ha' : ContDiffOn ℝ ∞ ((G.V η).coefficients w m).a unitStrip := by
-    simpa only [atomFamily, atom, hunit, id_eq] using ha
+    apply ha.congr
+    intro p hp
+    simp only [atomFamily, atom, hunit, id_eq, w]
   have hb' : ContDiffOn ℝ ∞ ((G.V η).coefficients w m).b unitStrip := by
-    simpa only [atomFamily, atom, hunit, id_eq] using hb
+    apply hb.congr
+    intro p hp
+    simp only [atomFamily, atom, hunit, id_eq, w]
   have hc' : ContDiffOn ℝ ∞ ((G.V η).coefficients w m).c unitStrip := by
-    simpa only [atomFamily, atom, hunit, id_eq] using hc
+    apply hc.congr
+    intro p hp
+    simp only [atomFamily, atom, hunit, id_eq, w]
   have hdiv := n04PrincipalPositive_divergence_mixed_flux
     (isOpen_Ioo.prod isOpen_univ) ((G.V η).coefficients w m) ha' hb' hc' hv hq
   have hpot := G.n04PrincipalPositive_potential_identity h η hw hs m hqK
@@ -124,7 +131,7 @@ theorem n04PrincipalPositive_potential_unit_formula {b : ℕ} {ε : ℝ}
   simp only [↓reduceIte, neg_neg, one_mul] at hpot
   rw [hdiv] at hpot
   simpa only [atomFamily, atom, pulledHeight, heightField, pulledPoint,
-    hunit, id_eq] using hpot
+    hunit, id_eq, v, w] using hpot
 
 end N04RealizationGauge
 
