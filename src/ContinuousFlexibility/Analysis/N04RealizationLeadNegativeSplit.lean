@@ -6,7 +6,7 @@ import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
 The geometry interface on negative pieces is split by atoms:
 
 * the forward chart atoms (`chartRadial`, `chartAngleDefect`, `jacobian`, `jacobianInverse`);
-* the height atoms (`height`, `heightInverse`);
+* the height atoms (`height`, `heightInverse`), given the forward chart atoms;
 * the inverse chart atoms (`inverseRadial`, `inverseAngleDefect`) and the pulled height,
   given the first two on the same neighborhood.
 
@@ -67,9 +67,13 @@ def N04RealizationNegativeChartObligation : Prop :=
     ∃ (b' : ℕ) (ε' : ℝ), b ≤ b' ∧ 0 < ε' ∧ ε' ≤ ε ∧
       ∀ η, G.NegativeAtomData η atomIsNegativeChart b' ε'
 
-/-- The height atoms on negative pieces. -/
+/-- The height atoms on negative pieces, recovered from the forward chart
+and the physical radial coefficient through the nondegenerate angular density.
+The chart premise is supplied by the preceding sibling, before the auxiliary
+column is selected. -/
 def N04RealizationNegativeHeightObligation : Prop :=
   ∀ (G : N04RealizationGauge) (b : ℕ) (ε : ℝ), G.Admissible b ε →
+    (∀ η, G.NegativeAtomData η atomIsNegativeChart b ε) →
     ∃ (b' : ℕ) (ε' : ℝ), b ≤ b' ∧ 0 < ε' ∧ ε' ≤ ε ∧
       ∀ η, G.NegativeAtomData η atomIsNegativeHeight b' ε'
 
@@ -90,21 +94,20 @@ theorem n04Realization_negativeGeometry_of_split
     N04RealizationNegativeGeometryObligation := by
   intro G b ε hadm
   refine Exists.elim (hchart G b ε hadm) (fun b₁ h₁ => Exists.elim h₁ (fun ε₁ h₁ => ?_))
-  refine Exists.elim (hheight G b ε hadm) (fun b₂ h₂ => Exists.elim h₂ (fun ε₂ h₂ => ?_))
-  have hb : b ≤ max b₁ b₂ := h₁.1.trans (le_max_left _ _)
-  have hεpos : 0 < min ε₁ ε₂ := lt_min h₁.2.1 h₂.2.1
-  have hεle : min ε₁ ε₂ ≤ ε := (min_le_left _ _).trans h₁.2.2.1
-  have hadm' : G.Admissible (max b₁ b₂) (min ε₁ ε₂) := G.admissible_mono hadm hb hεpos hεle
-  have hc : ∀ η, G.NegativeAtomData η atomIsNegativeChart (max b₁ b₂) (min ε₁ ε₂) :=
-    fun η => G.negativeAtomData_mono η (h₁.2.2.2 η) (le_max_left _ _) (min_le_left _ _)
-  have hh : ∀ η, G.NegativeAtomData η atomIsNegativeHeight (max b₁ b₂) (min ε₁ ε₂) :=
-    fun η => G.negativeAtomData_mono η (h₂.2.2.2 η) (le_max_right _ _) (min_le_right _ _)
-  refine Exists.elim (hinv G _ _ hadm' hc hh) (fun b₃ h₃ => Exists.elim h₃ (fun ε₃ h₃ => ?_))
-  refine ⟨b₃, ε₃, hb.trans h₃.1, h₃.2.1, h₃.2.2.1.trans hεle, fun η => ⟨fun a ha => ?_,
-    (h₃.2.2.2 η).2⟩⟩
+  have hadm₁ : G.Admissible b₁ ε₁ := G.admissible_mono hadm h₁.1 h₁.2.1 h₁.2.2.1
+  refine Exists.elim (hheight G b₁ ε₁ hadm₁ h₁.2.2.2)
+    (fun b₂ h₂ => Exists.elim h₂ (fun ε₂ h₂ => ?_))
+  have hadm₂ : G.Admissible b₂ ε₂ := G.admissible_mono hadm₁ h₂.1 h₂.2.1 h₂.2.2.1
+  have hc : ∀ η, G.NegativeAtomData η atomIsNegativeChart b₂ ε₂ :=
+    fun η => G.negativeAtomData_mono η (h₁.2.2.2 η) h₂.1 h₂.2.2.1
+  refine Exists.elim (hinv G b₂ ε₂ hadm₂ hc h₂.2.2.2)
+    (fun b₃ h₃ => Exists.elim h₃ (fun ε₃ h₃ => ?_))
+  refine ⟨b₃, ε₃, h₁.1.trans (h₂.1.trans h₃.1), h₃.2.1,
+    h₃.2.2.1.trans (h₂.2.2.1.trans h₁.2.2.1), fun η => ⟨fun a ha => ?_,
+      (h₃.2.2.2 η).2⟩⟩
   rcases atomIsGeometry_negative_cases a ha with hca | hha | hia
   · exact G.negativeAtomData_mono η (hc η) h₃.1 h₃.2.2.1 a hca
-  · exact G.negativeAtomData_mono η (hh η) h₃.1 h₃.2.2.1 a hha
+  · exact G.negativeAtomData_mono η (h₂.2.2.2 η) h₃.1 h₃.2.2.1 a hha
   · exact (h₃.2.2.2 η).1 a hia
 
 end ContinuousFlexibility.Analysis
