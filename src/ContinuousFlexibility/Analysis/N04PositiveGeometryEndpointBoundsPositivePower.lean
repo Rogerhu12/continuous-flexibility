@@ -27,8 +27,10 @@ theorem n04PositiveGeometry_positivePower_outer_prefix (γ : ℝ) (N : ℕ) :
   have hexp : |γ - (n : ℝ)| ≤ (degree : ℝ) := by
     calc
       _ ≤ |γ| + |(n : ℝ)| := abs_sub _ _
-      _ = |γ| + (n : ℝ) := by rw [abs_of_nonneg (Nat.cast_nonneg _)]
-      _ ≤ |γ| + (N : ℝ) := add_le_add_left (by exact_mod_cast hn) _
+      _ = |γ| + (n : ℝ) := by
+        rw [abs_of_nonneg (show (0 : ℝ) ≤ (n : ℝ) from Nat.cast_nonneg n)]
+      _ ≤ |γ| + (N : ℝ) :=
+        add_le_add_left (show (n : ℝ) ≤ (N : ℝ) by exact_mod_cast hn) |γ|
       _ ≤ (degree : ℝ) := Nat.le_ceil _
   have hpower : x ^ (γ - (n : ℝ)) ≤ M ^ degree := by
     calc
@@ -68,7 +70,8 @@ theorem n04PositiveGeometry_boundaryWord_positivePower
   obtain ⟨C₀, hC₀, degree, houter⟩ :=
     n04PositiveGeometry_positivePower_outer_prefix γ N
   obtain ⟨C, hC, hkernel⟩ :=
-    n04PositiveGeometry_boundaryKernel_polynomial_bound (E := E) N degree C₀ hC₀
+    n04PositiveGeometry_boundaryKernel_polynomial_bound (E := E) (F := ℝ) (G := ℝ)
+      N degree C₀ hC₀
   refine ⟨C, hC, degree + 2 * N, ?_⟩
   intro U f J Q hpos K s d hN x hx θ P M H t hM hH hHM ht shift hJ hinv
   have hvalue : f (x, θ) ≤ M :=

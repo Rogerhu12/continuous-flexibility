@@ -30,9 +30,10 @@ theorem n04PositiveGeometry_movingPoint_projected_partition
         n04PositiveGeometry_inverseSelectedTerm b f g x c s := by
   classical
   have hcomp := iteratedFDeriv_comp
-    (f := f) (g := n04PositiveGeometry_fiberLift g) hf
+    (g := f) (f := n04PositiveGeometry_fiberLift g) hf
     (contDiffAt_fst.prodMk hg) (by simp : (n : ℕ∞ω) ≤ ∞)
-  ext v
+  apply ContinuousMultilinearMap.ext
+  intro v
   rw [n04PositiveGeometry_projectedJet_apply, hcomp]
   simp only [ContinuousMultilinearMap.sum_apply,
     OrderedFinpartition.compAlongOrderFinpartition_apply,

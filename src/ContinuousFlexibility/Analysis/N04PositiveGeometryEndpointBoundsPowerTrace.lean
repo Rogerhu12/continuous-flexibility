@@ -37,8 +37,7 @@ theorem n04PositiveGeometry_radialBoundaryJet_rpow
   have hleft : iteratedFDeriv ℝ n ((fun y : ℝ => y ^ γ) ∘ F) 0 (fun _ => 1) =
       radialBoundaryJet (fun p => f p ^ γ) 0 n θ := by
     rw [iteratedFDeriv_apply_eq_iteratedDeriv_mul_prod]
-    simp only [Finset.prod_const_one, one_smul]
-    rfl
+    simp only [Finset.prod_const_one, one_smul, F, Function.comp_def, radialBoundaryJet]
   rw [hleft] at h
   refine h.trans ?_
   apply Finset.sum_congr rfl
@@ -46,8 +45,7 @@ theorem n04PositiveGeometry_radialBoundaryJet_rpow
   have hj (i : Fin c.length) : iteratedFDeriv ℝ (c.partSize i) F 0
       ((fun _ => (1 : ℝ)) ∘ c.emb i) = radialBoundaryJet f 0 (c.partSize i) θ := by
     rw [iteratedFDeriv_apply_eq_iteratedDeriv_mul_prod]
-    simp only [Function.comp_def, Finset.prod_const_one, one_smul]
-    rfl
+    simp only [Function.comp_def, Finset.prod_const_one, one_smul, F, radialBoundaryJet]
   rw [iteratedFDeriv_apply_eq_iteratedDeriv_mul_prod, iteratedDeriv_rpow_eq, smul_eq_mul]
   simp only [hj]
   change _ * (rpowJetCoefficient γ c.length * f (0, θ) ^ (γ - c.length)) =

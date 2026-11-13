@@ -86,14 +86,26 @@ theorem n04PositiveGeometry_multilinearEvaluation_prefix (n N : ℕ) :
     exact le_rfl
   have he : (fun p : V => p.1 p.2) = A ∘ L := by
     funext p
-    simpa only [A, L, Function.comp_def, ContinuousLinearMap.pi_apply,
-      ContinuousLinearMap.id_apply,
-      ContinuousLinearMap.continuousMultilinearMapOption_apply_eq_self, I]
+    change p.1 p.2 = I.continuousMultilinearMapOption (fun _ => p)
+    rw [ContinuousLinearMap.continuousMultilinearMapOption_apply_eq_self]
+    rfl
   obtain ⟨C, hC, hb⟩ := n04PositiveGeometry_multilinearDiagonal_prefix A L hL N
   refine ⟨C, hC, ?_⟩
   intro M hM z hz j hj
   rw [he]
   simpa only [Fintype.card_option, Fintype.card_fin] using hb M hM z hz j hj
+
+private theorem linear_prefix {M : ℝ} (hM : 1 ≤ M)
+    (L : E →L[ℝ] F) (hL : ‖L‖ ≤ 1) (z : E) (hz : ‖z‖ ≤ M)
+    (k : ℕ) : ‖iteratedFDeriv ℝ k L z‖ ≤ M := by
+  cases k with
+  | zero =>
+      rw [norm_iteratedFDeriv_zero]
+      exact (L.le_opNorm z).trans
+        ((mul_le_mul_of_nonneg_right hL (norm_nonneg z)).trans
+          (by simpa only [one_mul] using hz))
+  | succ k => exact (flowJet_norm_iteratedFDeriv_clm_le L
+      (Nat.succ_pos k) z).trans (hL.trans hM)
 
 /-- The signed application used by the inverse recurrence is a
 bilinear kernel with the same quadratic material cost. -/
@@ -105,21 +117,11 @@ theorem n04PositiveGeometry_negClmEvaluation_prefix
       (2 : ℝ) ^ N * M ^ 2 := by
   let B : (E →L[ℝ] F) →L[ℝ] E →L[ℝ] F := -ContinuousLinearMap.id ℝ _
   have hB : ‖B‖ ≤ 1 := by
-    simpa only [B, norm_neg] using (ContinuousLinearMap.norm_id_le
-      (𝕜 := ℝ) (E := E →L[ℝ] F))
-  have hlinear {Y : Type*} [NormedAddCommGroup Y] [NormedSpace ℝ Y]
-      (L : ((E →L[ℝ] F) × E) →L[ℝ] Y) (hL : ‖L‖ ≤ 1)
-      (k : ℕ) : ‖iteratedFDeriv ℝ k L z‖ ≤ M := by
-    cases k with
-    | zero =>
-        rw [norm_iteratedFDeriv_zero]
-        exact (L.le_opNorm z).trans
-          ((mul_le_mul_of_nonneg_right hL (norm_nonneg z)).trans
-            (by simpa only [one_mul] using hz))
-    | succ k => exact (flowJet_norm_iteratedFDeriv_clm_le L
-        (Nat.succ_pos k) z).trans (hL.trans hM)
+    change ‖-(ContinuousLinearMap.id ℝ (E →L[ℝ] F))‖ ≤ 1
+    rw [norm_neg]
+    exact ContinuousLinearMap.norm_id_le
   have hraw := n04Realization_norm_iteratedFDeriv_bilinear_le_at B
-    (contDiffAt_fst (x := z)) (contDiffAt_snd (x := z)) j
+    (contDiffAt_fst (p := z)) (contDiffAt_snd (p := z)) j
   have hsum : (∑ k ∈ Finset.range (j + 1), (j.choose k : ℝ) *
       ‖iteratedFDeriv ℝ k (fun p : (E →L[ℝ] F) × E => p.1) z‖ *
       ‖iteratedFDeriv ℝ (j - k) (fun p : (E →L[ℝ] F) × E => p.2) z‖) ≤
@@ -130,11 +132,11 @@ theorem n04PositiveGeometry_negClmEvaluation_prefix
         intro k hk
         have hb := mul_le_mul
           (mul_le_mul_of_nonneg_left
-            (hlinear (ContinuousLinearMap.fst ℝ (E →L[ℝ] F) E)
-              (ContinuousLinearMap.norm_fst_le ℝ (E →L[ℝ] F) E) k)
+            (linear_prefix hM (ContinuousLinearMap.fst ℝ (E →L[ℝ] F) E)
+              (ContinuousLinearMap.norm_fst_le ℝ (E →L[ℝ] F) E) z hz k)
             (Nat.cast_nonneg (j.choose k)))
-          (hlinear (ContinuousLinearMap.snd ℝ (E →L[ℝ] F) E)
-            (ContinuousLinearMap.norm_snd_le ℝ (E →L[ℝ] F) E) (j - k))
+          (linear_prefix hM (ContinuousLinearMap.snd ℝ (E →L[ℝ] F) E)
+            (ContinuousLinearMap.norm_snd_le ℝ (E →L[ℝ] F) E) z hz (j - k))
           (norm_nonneg _) (mul_nonneg (Nat.cast_nonneg _) (zero_le_one.trans hM))
         exact hb.trans_eq (by ring)
       _ = (2 : ℝ) ^ j * M ^ 2 := by

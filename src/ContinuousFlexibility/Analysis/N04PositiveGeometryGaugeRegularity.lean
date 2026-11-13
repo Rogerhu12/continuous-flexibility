@@ -51,6 +51,9 @@ theorem n04PositiveGeometry_gaugeAtlas_range
       PositiveChartRangeGeometry (V.chart z m) (V.inverseChart z m) (V.height z m)
         (V.physicalLeft m) (V.physicalRight m) (V.left m) (V.right m) := by
   let V := n04WholeReferenceGaugeAtlasData C L K e cell ψ χ h₀ τ σ Q N
+  change ∀ m, V.positive m = true →
+    PositiveChartRangeGeometry (V.chart z m) (V.inverseChart z m) (V.height z m)
+      (V.physicalLeft m) (V.physicalRight m) (V.left m) (V.right m)
   intro m hm
   change PositiveChartRangeGeometry (V.chart z m) (V.inverseChart z m) (V.height z m)
     (V.physicalLeft m) (V.physicalRight m) (V.left m) (V.right m)

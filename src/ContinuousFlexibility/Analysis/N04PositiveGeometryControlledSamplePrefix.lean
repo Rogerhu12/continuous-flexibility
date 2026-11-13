@@ -87,7 +87,7 @@ theorem n04PositiveGeometry_positiveEndpoint_parameter_weight
       (Real.rpow_nonneg (zero_le_one.trans hE) _) (zero_le_one.trans hB)
   by_cases hk : k = 0
   · subst k
-    simpa only [parameterHeightWeight, if_pos rfl, mul_one] using
+    simpa only [parameterHeightWeight, ite_true, mul_one] using
       (hzero i side).trans (hraise hB₀B)
   · have hH : 0 ≤ W.U.H (W.U.sample (X.cell i)) ^ γ := Real.rpow_nonneg
       (W.hT.2.1 _ (materialSample_mem_interval W.radial.1 W.hT (X.cell i))).2.1.le _

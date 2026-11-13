@@ -93,7 +93,8 @@ private theorem forwardCircle_fixedBaseBounds
         (solveSmoothDirectionsPostcomp JT (circleOddContinuousLinear (hS.2.1 (3 / 4 : ℝ))))
       apply hJT.postLinear (circleOddContinuousLinear (hS.2.1 (3 / 4 : ℝ))) 0
       intro s
-      obtain ⟨A, hA⟩ := circleOddLinear_tame (hS.2.1 (3 / 4 : ℝ)) s (Nat.zero_le s)
+      refine (circleOddLinear_tame (hS.2.1 (3 / 4 : ℝ)) s (Nat.zero_le s)).elim ?_
+      intro A hA
       exact ⟨A, A.coe_nonneg, fun y => hA y⟩
 
 theorem n04PositiveGeometry_rootForwardDefect_fixedBase_oneHigh_of_flow

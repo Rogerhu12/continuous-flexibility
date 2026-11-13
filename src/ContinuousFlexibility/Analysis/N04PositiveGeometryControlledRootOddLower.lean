@@ -84,17 +84,32 @@ theorem n04PositiveGeometry_rootOddValue_sample_inverse
           deriv (n01RootLabel W.S W.C (liftSectorParameter W.S W.C z) m (!side)) θ
         0 < χ ∧ χ⁻¹ ≤ B * W.U.E0 (W.U.sample (X.cell i)) ^ B := by
   have hN := n01Properties_restrict W.hT W.through03.1.1 hb le_rfl hε hεW
-  obtain ⟨C0, lowS, lossS, hC0, hfloor, hpowers⟩ :=
-    n01_rootSpeed_axis_rpow_material_jets_of_component_optical W.hS W.hT hN X.κ_pos
-  obtain ⟨A, hA, hinverse⟩ := hpowers (-1)
+  refine (n01_rootSpeed_axis_rpow_material_jets_of_component_optical
+    W.hS W.hT hN X.κ_pos).elim ?_
+  intro C0 hCdata
+  refine hCdata.elim ?_
+  intro lowS hlowData
+  refine hlowData.elim ?_
+  intro lossS hmaterial
+  have hC0 := hmaterial.1
+  have hfloor := hmaterial.2.1
+  refine (hmaterial.2.2 (-1)).elim ?_
+  intro A hAdata
+  have hA := hAdata.1
+  have hinverse := hAdata.2
   let low : ℕ := max base (max lowS lossS)
   have hbLow : base ≤ low := le_max_left _ _
   have hlowS : lowS ≤ low := (le_max_left _ _).trans (le_max_right _ _)
   have hlossS : lossS ≤ low := (le_max_right _ _).trans (le_max_right _ _)
-  obtain ⟨K₁, A₁, hK₁, hA₁, hsample⟩ :=
-    retainedReference_positive_endpoint_host_sample_bound W.P W.metadata.selected
+  refine (retainedReference_positive_endpoint_host_sample_bound W.P W.metadata.selected
       W.metadata.first_two one_pos W.realizes W.hw W.coordinates
-      W.through03.1.1.2.2.2.1 W.hT (hA 0).le
+      W.through03.1.1.2.2.2.1 W.hT (hA 0).le).elim ?_
+  intro K₁ hKdata
+  refine hKdata.elim ?_
+  intro A₁ hsampleData
+  have hK₁ := hsampleData.1
+  have hA₁ := hsampleData.2.1
+  have hsample := hsampleData.2.2
   let D : ℝ := (12 * A 0 * C0 ^ (A 0)) * K₁
   have hD : 0 < D := mul_pos (mul_pos
     (mul_pos (by norm_num : (0 : ℝ) < 12) (hA 0))

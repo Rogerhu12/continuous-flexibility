@@ -106,6 +106,7 @@ theorem n04PositiveGeometry_controlledReferenceChart_radial_saved_bound
   have hvalue : |g (f (x, p))| ≤ 1 := by
     have hσ := (G.matching (state x) hz hs i).geometry.inverse_maps_open hp
     have hy := ((href i).1.maps_open hσ).1
+    change Y i (f (x, p)).1 ∈ Ioo (0 : ℝ) 1 at hy
     change |Y i (f (x, p)).1| ≤ 1
     rw [abs_of_pos hy.1]
     exact hy.2.le
@@ -116,8 +117,10 @@ theorem n04PositiveGeometry_controlledReferenceChart_radial_saved_bound
         simpa only [norm_iteratedFDeriv_zero, Real.norm_eq_abs] using hvalue.trans hM
     | succ j =>
         have hb : ‖iteratedFDeriv ℝ (j + 1) (Y i) (f (x, p)).1‖ ≤ Br * E ^ Br := by
+          have hy := (hrefjets i j (by omega) (f (x, p)).1).1
+          change |iteratedDeriv (j + 1) (Y i) (f (x, p)).1| ≤ Br * E ^ Br at hy
           simpa only [norm_iteratedFDeriv_eq_norm_iteratedDeriv, Real.norm_eq_abs] using
-            (hrefjets i j (by omega) (f (x, p)).1).1
+            hy
         exact (n04PositiveGeometry_norm_radial_pullback_le hY (j + 1) (f (x, p))).trans
           (hb.trans (hraise hBrD))
   have hinner (c : OrderedFinpartition n) (j : Fin c.length) :

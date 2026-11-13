@@ -86,7 +86,7 @@ theorem polynomial_bound (e : N04BoundaryExpression) (K s d : ℕ)
   | input i =>
       refine ⟨1, le_rfl, 1, ?_⟩
       intro U hU v J x hx θ P hP M H t hM hH hHL ht shift hv
-      simpa only [depth, Nat.add_zero, directions, pow_one, one_mul] using hv i
+      simpa only [depth, Nat.add_zero, directions, eval, pow_one, one_mul] using hv i
   | scale a f ih =>
       obtain ⟨C, hC, degree, hb⟩ := ih d
       refine ⟨1 + |a| * C, le_add_of_nonneg_right
@@ -141,7 +141,7 @@ theorem polynomial_bound (e : N04BoundaryExpression) (K s d : ℕ)
       have hg := hgi.enlarge hH (zero_le_one.trans ht) hc.2.2
       have hp := hpb (f.directions J) (g.directions J) K s d le_rfl x hx θ P
         ((Cf + Cg) * M ^ (df + dg)) H t hc.1 hH hHL ht shift hf hg
-      simpa only [directions, mul_pow, ← pow_mul, mul_assoc] using hp
+      simpa only [directions, eval, mul_pow, ← pow_mul, mul_assoc] using hp
   | angle f ih =>
       obtain ⟨C, hC, degree, hb⟩ := ih (d + 1)
       refine ⟨C, hC, degree, ?_⟩
@@ -192,11 +192,28 @@ theorem n04PositiveGeometry_boundaryExpression_eval
     (i : Fin 8) (v : N06RootBoundaryInputs) :
     (n04PositiveGeometry_boundaryExpressions i).eval v =
       n04PositiveGeometry_boundaryFormula i v := by
+  have e1 : n06RootEvenFormula1 v = fun θ => -(v 0 θ * v 8 θ) := rfl
+  have e2 : n06RootEvenFormula2 v = fun θ =>
+      -(v 0 θ * deriv (n06RootEvenFormula1 v) θ + v 1 θ * v 8 θ) := rfl
+  have e3 : n06RootEvenFormula3 v = fun θ =>
+      -(v 0 θ * deriv (n06RootEvenFormula2 v) θ +
+        2 * v 1 θ * deriv (n06RootEvenFormula1 v) θ + v 2 θ * v 8 θ) +
+        2 * v 4 θ * deriv (n06RootOddFormula0 v) θ := rfl
+  have o0 : n06RootOddFormula0 v = fun θ => (2 / 3 : ℝ) * v 4 θ * v 8 θ := rfl
+  have o1 : n06RootOddFormula1 v = fun θ =>
+      (2 / 5 : ℝ) * (v 4 θ * deriv (n06RootEvenFormula1 v) θ + v 5 θ * v 8 θ -
+        v 0 θ * deriv (n06RootOddFormula0 v) θ) := rfl
+  have o2 : n06RootOddFormula2 v = fun θ =>
+      (2 / 7 : ℝ) * (v 4 θ * deriv (n06RootEvenFormula2 v) θ +
+        2 * v 5 θ * deriv (n06RootEvenFormula1 v) θ + v 6 θ * v 8 θ -
+        2 * (v 0 θ * deriv (n06RootOddFormula1 v) θ +
+          v 1 θ * deriv (n06RootOddFormula0 v) θ)) := rfl
   fin_cases i <;> funext θ <;>
     dsimp [n04PositiveGeometry_boundaryExpressions, n04PositiveGeometry_boundaryFormula,
       N04BoundaryExpression.eval,
       n06RootEvenFormula1, n06RootEvenFormula2, n06RootEvenFormula3, n06RootEvenFormula4,
       n06RootOddFormula0, n06RootOddFormula1, n06RootOddFormula2, n06RootOddFormula3]
-  all_goals simp only [neg_one_mul, sub_eq_add_neg, neg_mul, one_mul, mul_assoc]
+  all_goals simp only [e3, e2, e1, o2, o1, o0,
+    neg_one_mul, sub_eq_add_neg, neg_mul, one_mul, mul_assoc]
 
 end ContinuousFlexibility.Analysis

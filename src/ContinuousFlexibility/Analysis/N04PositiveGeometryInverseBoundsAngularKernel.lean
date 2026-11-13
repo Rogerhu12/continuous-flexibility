@@ -99,8 +99,8 @@ theorem n04PositiveGeometry_angularKernel_bounds
     apply (N04PositiveKernelJetBounds.linear hW L hp).congr
     intro i
     funext y
-    simp only [L, ContinuousLinearMap.comp_apply, ContinuousLinearMap.proj_apply,
-      ContinuousLinearMap.coe_fst']
+    simp only [L, ContinuousLinearMap.comp_apply, ContinuousLinearMap.proj_apply]
+    rfl
   have hx : N04PositiveKernelJetBounds W p (fun _ (y : Q) => y.2) :=
     N04PositiveKernelJetBounds.linear hW
       (ContinuousLinearMap.snd ℝ (N04PositiveRadialCoefficients n) ℝ) hp

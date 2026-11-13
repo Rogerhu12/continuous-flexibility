@@ -117,7 +117,7 @@ theorem n04PositiveGeometry_positiveSource_circle_parameter_weight
   · subst k
     have hz : C * W.T.E0 (W.T.sample m) ^ A ≤ B₀ * E ^ B₀ := by
       simpa only [Real.rpow_zero, mul_one] using hzero i side m hm
-    simpa only [parameterHeightWeight, if_pos rfl, mul_one] using hz.trans (hraise hB₀B)
+    simpa only [parameterHeightWeight, ite_true, mul_one] using hz.trans (hraise hB₀B)
   · have hH : 0 ≤ W.U.H (W.U.sample (X.cell i)) ^ γ := Real.rpow_nonneg
       (W.hT.2.1 _ (materialSample_mem_interval W.radial.1 W.hT (X.cell i))).2.1.le _
     simpa only [parameterHeightWeight, if_neg hk] using

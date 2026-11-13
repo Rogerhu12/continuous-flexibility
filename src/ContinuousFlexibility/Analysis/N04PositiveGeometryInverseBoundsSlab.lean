@@ -33,7 +33,7 @@ theorem n04PositiveGeometry_radialKernel_middleMass_envelope
     (l r c d κ M : I → ℝ)
     (hlc : ∀ i, l i < c i) (hcd : ∀ i, c i < d i) (hdr : ∀ i, d i < r i)
     (hκ : ∀ i, 0 < κ i) (hM : ∀ i, 0 ≤ M i)
-    (hspan : ∀ side, HasPositiveEnvelope W
+    (hspan : ∀ side : Bool, HasPositiveEnvelope W
       (fun i => |((if side then r i else c i) - (if side then d i else l i))⁻¹|))
     (side : Bool) :
     HasPositiveEnvelope W (fun i =>
@@ -74,7 +74,7 @@ theorem n04PositiveGeometry_radialKernel_inverse_bounds
     (hMcost : HasPositiveEnvelope W M)
     (hwidth : ∀ side, HasPositiveEnvelope W (fun i =>
       |(endpointFiberWidths n (l i) (r i) (c i) (d i) (κ i) (M i) side)⁻¹|))
-    (hspan : ∀ side, HasPositiveEnvelope W
+    (hspan : ∀ side : Bool, HasPositiveEnvelope W
       (fun i => |((if side then r i else c i) - (if side then d i else l i))⁻¹|))
     (hlower : HasPositiveEnvelope W (fun i =>
       |(endpointFiberLower n (l i) (r i) (c i) (d i) (κ i) (M i))⁻¹|)) :

@@ -126,7 +126,7 @@ theorem n04PositiveGeometry_radialKernel_bounds
     (hc : HasPositiveEnvelope W (fun i => |c i|))
     (hd : HasPositiveEnvelope W (fun i => |d i|))
     (hηinv : ∀ side, HasPositiveEnvelope W (fun i => |(η i side)⁻¹|))
-    (hspan : ∀ side, HasPositiveEnvelope W
+    (hspan : ∀ side : Bool, HasPositiveEnvelope W
       (fun i => |((if side then r i else c i) - (if side then d i else l i))⁻¹|))
     (hmiddle : ∀ side, HasPositiveEnvelope W
       (fun i => |(positiveReferenceMiddleMass (if side then d i else l i)
@@ -204,7 +204,11 @@ theorem n04PositiveGeometry_radialKernel_endpoints
         apply ContDiff.sum
         intro j _
         exact contDiff_const.mul ((contDiff_id.sub contDiff_const).pow j.val)
-    rw [positiveReferenceCoordinate_right (hη true) (hgap true)
+    change d + (r - d) * positiveReferenceCoordinate d r (η true)
+      (fun t => n04PositiveGeometry_collarSlopeKernel n d r true (a true) false t / (r - d))
+      (fun t => n04PositiveGeometry_collarSlopeKernel n d r true (a true) true t / (r - d)) r = r
+    rw [positiveReferenceCoordinate_right (l := d) (r := r) (hη true)
+      (show 2 * η true < r - d from hgap true)
       (fun t _ => (hs false).contDiffAt) (fun t _ => (hs true).contDiffAt), mul_one]
     ring
 
@@ -228,16 +232,18 @@ theorem n04PositiveGeometry_radialKernel_inverse_mem
     (bijective_of_deriv_lower_bound hgeom.2.2.1 (hgeom.2.2.2 a ha)).2
   have he := n04PositiveGeometry_radialKernel_endpoints n hlc hcd hdr
     (endpointFiberWidths n l r c d κ M) hgeom.1 hgeom.2.1 a
+  have hleft : F l = l := he.1
+  have hend : F r = r := he.2
   have hright : F (Function.invFun F x) = x := Function.rightInverse_invFun hsurj x
   change Function.invFun F x ∈ Icc l r
   constructor
   · by_contra hn
     have hlt : F (Function.invFun F x) < F l := hm (lt_of_not_ge hn)
-    rw [hright, he.1] at hlt
+    rw [hright, hleft] at hlt
     exact (not_lt.mpr hx.1) hlt
   · by_contra hn
     have hlt : F r < F (Function.invFun F x) := hm (lt_of_not_ge hn)
-    rw [hright, he.2] at hlt
+    rw [hright, hend] at hlt
     exact (not_lt.mpr hx.2) hlt
 
 end ContinuousFlexibility.Analysis

@@ -42,21 +42,27 @@ variable {φ : PolarPoint → ℝ} {T : ℝ}
   (hpositive : ∀ p : PolarPoint, 0 < deriv (fun θ => φ (p.1, θ)) p.2)
   (hperiod : ∀ r θ, φ (r, θ + T) = φ (r, θ) + T)
 
+include hφ in
 theorem n04PositiveGeometry_angularGraph_contDiff :
     ContDiff ℝ ∞ (n04PositiveGeometry_angularGraph φ) :=
   contDiff_fst.prodMk hφ
 
+include hT hφ hpositive hperiod in
 theorem n04PositiveGeometry_angularGraphInverse_contDiff :
     ContDiff ℝ ∞ (n04PositiveGeometry_angularGraphInverse φ) :=
   contDiff_fst.prodMk (contDiff_parameterizedCircleInverse hT hφ hpositive hperiod)
 
+include hT hφ hperiod in
 theorem n04PositiveGeometry_angularGraph_right_inverse (p : PolarPoint) :
     n04PositiveGeometry_angularGraph φ (n04PositiveGeometry_angularGraphInverse φ p) = p :=
   Prod.ext rfl (parameterizedCircleInverse_right_inverse hT hφ hperiod p)
 
+include hpositive in
 theorem n04PositiveGeometry_angularGraph_left_inverse (p : PolarPoint) :
     n04PositiveGeometry_angularGraphInverse φ (n04PositiveGeometry_angularGraph φ p) = p :=
   Prod.ext rfl (parameterizedCircleInverse_left_inverse hpositive p)
+
+include hT hφ hpositive hperiod
 
 /-- An exact inverse angular boundary value identifies its actual first
 angular derivative with the reciprocal forward angular derivative. -/

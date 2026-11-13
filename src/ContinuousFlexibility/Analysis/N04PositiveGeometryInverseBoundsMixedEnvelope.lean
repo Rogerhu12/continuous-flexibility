@@ -171,7 +171,8 @@ theorem n04PositiveGeometry_mixedInverse_polynomial_envelope (n : ℕ) :
         simpa only [he] using hh
       · push_neg at hid
         obtain ⟨i, hi, hbad⟩ := hid
-        rw [n04PositiveGeometry_inverseSelectedTerm_eq_zero hg w c s i hi hbad, norm_zero]
+        rw [n04PositiveGeometry_inverseSelectedTerm_eq_zero hg w c s i hi
+          (fun h => hbad h.1 h.2), norm_zero]
         exact hR
     have hsum : (∑ c : OrderedFinpartition n, if 2 ≤ c.length then
         ∑ s : Finset (Fin c.length),

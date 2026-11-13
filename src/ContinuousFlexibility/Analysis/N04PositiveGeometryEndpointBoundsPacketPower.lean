@@ -121,7 +121,8 @@ private theorem packet_prefix_of_height
     have h := hb j a d had b hbs p hp U Jq k hk z hz hzq hzlow v hv R hR hzR hvR
     have hgain := mul_le_mul_of_nonneg_right
       (mul_le_mul_of_nonneg_left hPH (mul_nonneg (zero_le_one.trans hC0)
-        (Real.rpow_nonneg hEn A))) (Real.rpow_nonneg (zero_le_one.trans hR) _)
+        (Real.rpow_nonneg hEn A)))
+          (Real.rpow_nonneg (zero_le_one.trans hR) ((b : ℝ) / ((s : ℝ) + 1)))
     have hcoeff : C0 * E p ^ A * L ≤ C * E p ^ A := by
       calc
         C0 * E p ^ A * L = (C0 * L) * E p ^ A := by ring
@@ -135,8 +136,10 @@ private theorem packet_prefix_of_height
   · let c := mixedDerivative a (b + d) (fun q : PolarPoint => w q.1) p
     have hc : |c| ≤ W + 1 := by
       by_cases hbd : b + d = 0
-      · have hm := abs_mixedDerivative_le_norm_iteratedFDeriv isOpen_univ
-          (hwSmooth.comp contDiff_fst).contDiffOn a 0 (mem_univ p)
+      · have hm := abs_mixedDerivative_le_norm_iteratedFDeriv
+          (f := fun q : PolarPoint => w q.1) isOpen_univ
+          (by simpa only [Function.comp_def] using
+            (hwSmooth.comp contDiff_fst).contDiffOn) a 0 (mem_univ p)
         have he : |c| ≤ W := by
           simpa only [c, hbd, Nat.add_zero] using
             hm.trans (hw a (by omega) p hp)
@@ -164,30 +167,41 @@ private theorem packet_prefix_of_height
       exact hfixed5 y q)
     exact hfixed c hc Jc
 
+private def packetFiniteShiftPowerBound
+    {Y : Type*} [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
+    [IsTopologicalAddGroup Y] [ContinuousSMul ℝ Y]
+    (pgrade : ℕ → Seminorm ℝ Y)
+    (packet : Y × ℝ → PolarPoint → Fin 6 → ℝ)
+    (Ω : Set PolarPoint) (E H : PolarPoint → ℝ)
+    (x0 : Y) (N requestedBase : ℕ) : Prop :=
+    ∃ B loss : ℕ, requestedBase ≤ B ∧ ∀ K s : ℕ,
+      ∃ C A : ℝ, 1 ≤ C ∧ 0 ≤ A ∧
+      ∀ i : Fin 6, ∀ a d : ℕ, a + d ≤ N → ∀ b : ℕ, b ≤ s →
+      ∀ p ∈ Ω, ∀ U : Set (Y × ℝ),
+      ∀ J : SmoothDirections U (fun z => mixedDerivative a (b + d)
+        (fun q => packet z q i) p),
+      ∀ k : ℕ, k ≤ K → ∀ z ∈ U, |z.2| ≤ 1 →
+      pairGrading pgrade realGrading B (z - (x0, 0)) ≤ 1 →
+      ∀ v : Fin k → (Y × ℝ),
+      (∀ j, pairGrading pgrade realGrading B (v j) ≤ 1) →
+      ∀ R : ℝ, 1 ≤ R →
+      pairGrading pgrade realGrading (s + loss) (z - (x0, 0)) ≤ R →
+      (∀ j, pairGrading pgrade realGrading (s + loss) (v j) ≤ R) →
+        |J.D k z v| ≤ C * E p ^ A * parameterHeightWeight (H p) k *
+          R ^ ((b : ℝ) / ((s : ℝ) + 1))
 
 /-- The exact six-coordinate packet satisfies a common normalized
-bound, including every genuine parameter tower of every mixed input. -/
+bound, including every genuine parameter tower of every mixed input.
+The transparent statement is assembled over an abstract state space to
+avoid repeatedly elaborating the physical grading instances. -/
 theorem n04PositiveGeometry_rootPacket_finiteShift_power
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S)
     (hE : ∀ r ∈ radialCore D, 1 ≤ T.E0 r)
     (x0 : AnnularState S) (N requestedBase : ℕ) :
-    ∃ B loss : ℕ, requestedBase ≤ B ∧ ∀ K s : ℕ,
-      ∃ C A : ℝ, 1 ≤ C ∧ 0 ≤ A ∧
-      ∀ i : Fin 6, ∀ a d : ℕ, a + d ≤ N → ∀ b : ℕ, b ≤ s →
-      ∀ p ∈ annularOpen D, ∀ U : Set (AnnularState S × ℝ),
-      ∀ J : SmoothDirections U (fun z => mixedDerivative a (b + d)
-        (fun q => n06ActualRootAbsorbedCoordinates D S z q i) p),
-      ∀ k : ℕ, k ≤ K → ∀ z ∈ U, |z.2| ≤ 1 →
-      pairGrading (stateGrading S) realGrading B (z - (x0, 0)) ≤ 1 →
-      ∀ v : Fin k → (AnnularState S × ℝ),
-      (∀ j, pairGrading (stateGrading S) realGrading B (v j) ≤ 1) →
-      ∀ R : ℝ, 1 ≤ R →
-      pairGrading (stateGrading S) realGrading (s + loss) (z - (x0, 0)) ≤ R →
-      (∀ j, pairGrading (stateGrading S) realGrading (s + loss) (v j) ≤ R) →
-        |J.D k z v| ≤ C * T.E0 p.1 ^ A *
-          parameterHeightWeight (T.H p.1 ^ scalarBeta) k *
-          R ^ ((b : ℝ) / ((s : ℝ) + 1)) := by
+    packetFiniteShiftPowerBound (Y := AnnularState S) (stateGrading S)
+      (n06ActualRootAbsorbedCoordinates D S) (annularOpen D)
+      (fun q => T.E0 q.1) (fun q => T.H q.1 ^ scalarBeta) x0 N requestedBase := by
   refine (n04PositiveGeometry_rootHeightInputs_finiteShift_power
     hD hT hS hE x0 N requestedBase).elim fun B h => ?_
   refine h.elim fun loss h => ?_

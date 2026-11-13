@@ -165,7 +165,7 @@ theorem n04PositiveGeometry_rootForwardDerivative_fixedBase_prefix_of_flow
           (mul_le_mul_of_nonneg_left (hHbound m) (zero_le_one.trans hA)) hP) hPone
       _ = (A * RH + 1) * P := by rw [add_mul, one_mul]
       _ ≤ C₁ * P := mul_le_mul_of_nonneg_right hAHC₁ hP
-    simpa only [parameterHeightWeight, if_pos rfl, mul_one] using hfinal
+    simpa only [parameterHeightWeight, ite_true, mul_one] using hfinal
   · have hjet := n04PositiveGeometry_rootForwardDerivative_positive_jet_eq
       hT hS hN side m (u + d) θ J JD (Nat.pos_of_ne_zero hkzero) hx v
     have hfinal : |J.D k x v| ≤ C₁ * T.H (T.sample m) ^ (3 / 4 : ℝ) * P :=
