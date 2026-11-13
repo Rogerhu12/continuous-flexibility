@@ -43,7 +43,11 @@ private theorem n04PulledFieldsInverseSlot_head_zero
         (fun a j => scalarAngularHead (fun a j => A a b j) (v 0).1 a j)) =
         (0 : ScalarAngularJetData (E × ℝ)) := by
     funext b k
-    simp only [hhead b, map_zero, Pi.zero_apply]
+    change scalarAngularExpansion k
+      (fun a j => scalarAngularHead (fun a j => A a b j) (v 0).1 a j) =
+        (0 : MultilinearMap ℝ (fun _ : Fin k => E × ℝ) ℝ)
+    exact (congrArg (scalarAngularExpansion k) (hhead b)).trans
+      (map_zero (scalarAngularExpansion k))
   rw [hzero, map_zero, zero_apply]
 
 /-- Only the exact state count of a pure word enters its double

@@ -392,6 +392,12 @@ c_n d_n,\qquad c_n=1+3w(r_n)^2>0,\qquad
 d_n=\widetilde\chi_n'(\widetilde Y_n(r_n)).
 ```
 
+There is no omitted canonical interval-length factor here: on positive
+pieces, [WholeReferenceGaugeAtlasData.lean](../../src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasData.lean)
+sets `left = 0` and `right = 1`, so `canonicalUnitPoint` is the identity.
+The displayed derivative is therefore the spatial derivative in the unit
+coordinate used by the target current-data estimate.
+
 The pure-direction identities in
 [HeightSectorDirections.lean](../../src/ContinuousFlexibility/Analysis/HeightSectorDirections.lean)
 give `p_j(v_q) = 1` for every grading order. Consequently, for any proposed
