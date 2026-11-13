@@ -102,7 +102,9 @@ def negativeInversePointJointTower
     (η : (G.W.S.height (3 / 4 : ℝ)).Space) (m : ℕ) (hm : G.Neg η m) :
     SmoothDirections (sectorNeighborhood G.W.S G.W.base G.W.ε G.W.ε ×ˢ unitStrip)
       (fun x : Parameter G.W.S × PolarPoint => G.pulledPoint η (G.lift η x.1) m x.2) := by
-  obtain ⟨j, hi⟩ := (G.neg_iff_inl η m).mp hm
+  let data : ∃ j : ℕ × Bool, G.e m = .inl j := (G.neg_iff_inl η m).mp hm
+  let j : ℕ × Bool := data.choose
+  have hi : G.e m = .inl j := data.choose_spec
   let k := G.negativeIndex j
   have hk : G.X.e₀ k = .inl (j.1, j.2) := G.X.e₀.apply_symm_apply _
   apply (n04NegativeInverse_canonicalUnitJointTower (G.W.A G.X.e₀) k
@@ -116,8 +118,12 @@ def negativeInversePointJointTower
     (n04bActualNegativeHeight G.W.hT G.W.hS G.W.through03 G.W.field)
     (n04bActualNegativeInverse G.W.hT G.W.hS G.W.through03 G.W.field)
     (n04bActualReferenceCut G.W.through03) k j.1 j.2 hk
-  symm
-  rw [G.negative_pulledPoint η (G.lift η x.1) m j hi x.2, hf.2.2.2.2.1]
+  have hinverse : (G.W.A G.X.e₀).inverseChart
+      (liftSectorParameter G.W.S G.W.C x.1) k =
+      n04bActualNegativeInverse G.W.hT G.W.hS G.W.through03 G.W.field
+        (liftSectorParameter G.W.S G.W.C x.1) j.1 j.2 := hf.2.2.2.2.1
+  exact ((G.negative_pulledPoint η (G.lift η x.1) m j hi x.2).trans
+    (congrFun hinverse (canonicalUnitPoint (G.W.A G.X.e₀) k x.2))).symm
 
 /-- The two normalized atoms inherit the vector inverse estimate on
 every pure tuple containing an original parameter slot. -/
