@@ -115,7 +115,8 @@ theorem n04PositiveGeometry_controlled_inverseKernel_bounds
       ⟨hb.1.trans hb.2.1.le, hb.2.2⟩,
       ⟨hb.1.trans ho.1.le, ho.2.1.le.trans (ho.2.2.le.trans hb.2.2)⟩,
       ⟨hb.1.trans (ho.1.le.trans ho.2.1.le), ho.2.2.le.trans hb.2.2⟩⟩
-  have hradial (f) (hb : ∀ i, f i ∈ Icc W.D.a W.D.b) :
+  have hradial (f : N04PositiveComponent W.D.a W.D.b (deriv W.D.w) → ℝ)
+      (hb : ∀ i, f i ∈ Icc W.D.a W.D.b) :
       HasPositiveEnvelope E (fun i => |f i|) := by
     apply (hasPositiveEnvelope_const E hE (|W.D.a| + |W.D.b|)).mono
     intro i

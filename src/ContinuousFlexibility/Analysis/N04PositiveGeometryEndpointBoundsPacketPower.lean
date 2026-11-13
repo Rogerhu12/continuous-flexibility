@@ -223,6 +223,7 @@ private theorem packetFiniteShiftPower_of_height
     hheight hw hb).elim fun C h => ?_
   exact ⟨C, A, h.1, hA, h.2⟩
 
+set_option diagnostics true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The exact six-coordinate packet satisfies a common normalized
 bound, including every genuine parameter tower of every mixed input.
@@ -236,12 +237,17 @@ theorem n04PositiveGeometry_rootPacket_finiteShift_power
     packetFiniteShiftPowerBound (Y := AnnularState S) (stateGrading S)
       (n06ActualRootAbsorbedCoordinates D S) (annularOpen D)
       (fun q => T.E0 q.1) (fun q => T.H q.1 ^ scalarBeta) x0 N requestedBase := by
-  obtain ⟨L0, hL0, hheight⟩ :=
+  let hheightExists :=
     materialHeight_E0_weight_bounded hT (γ := scalarBeta) (by norm_num [scalarBeta]) 0
+  let L0 : ℝ := hheightExists.choose
+  have hheight := hheightExists.choose_spec.2
   let L : ℝ := max 1 L0
   have hL : 1 ≤ L := le_max_left _ _
-  obtain ⟨W, hW, hw⟩ := n06_radialLift_finite_frechet_bound (b := D.b)
+  let hradialExists := n06_radialLift_finite_frechet_bound (b := D.b)
     hD.choose_spec.1.1 hD.choose_spec.1.2.2.1.1.contDiffOn N
+  let W : ℝ := hradialExists.choose
+  have hW := hradialExists.choose_spec.1
+  have hw := hradialExists.choose_spec.2
   refine packetFiniteShiftPower_of_height (Y := AnnularState S) (stateGrading S)
     (fun j x => n06RootNormalizedHeightFields D S x.1 j)
     (n06ActualRootAbsorbedCoordinates D S) D.w hD.choose_spec.1.2.2.1.1

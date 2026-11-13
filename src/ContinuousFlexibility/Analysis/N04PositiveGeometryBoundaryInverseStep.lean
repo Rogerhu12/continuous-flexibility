@@ -101,7 +101,9 @@ theorem n04PositiveGeometry_boundaryInverse_step_bound (N n : ℕ) (hn : 2 ≤ n
   let D := n + 1 + 2 * N
   let e := 2 + 2 * N
   refine ⟨b * B ^ e, one_le_mul_of_one_le_of_one_le hb (one_le_pow₀ hB),
-    D * e, by apply Nat.mul_pos <;> dsimp [D, e] <;> omega, ?_⟩
+    D * e, by
+      apply Nat.succ_le_of_lt
+      apply Nat.mul_pos <;> dsimp [D, e] <;> omega, ?_⟩
   intro U hU f g q L hf hg hfg hL JL JF JG K s d hN x hx θ P
     M H t hM hH hHM ht shift hJL hJF hJG v hv Q
   let term : OrderedFinpartition n → X × ℝ → F := fun c z =>

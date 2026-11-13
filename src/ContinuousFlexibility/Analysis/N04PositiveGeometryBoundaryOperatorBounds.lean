@@ -41,7 +41,8 @@ theorem n04PositiveGeometry_boundary_multilinearApply_bound (n N : ℕ) :
   intro U A v JA JV Q K s d hN x hx θ P M H t hM hH hHM ht shift hJA hJV
   let J := smoothDirectionsProd JA JV
   have hJ : N04BoundaryWordBounds J K s d x θ P M H t shift := hJA.prod hJV
-  exact hc J Q isOpen_univ (contDiff_multilinearEvaluation n).contDiffOn
+  exact hc (g := fun p : (E [×n]→L[ℝ] F) × (Fin n → E) => p.1 p.2)
+    J Q isOpen_univ (contDiff_multilinearEvaluation n).contDiffOn
     (fun _ _ => mem_univ _) K s d hN x hx θ P M H t hM hH hHM ht shift hJ
     (fun j hj => ha M hM (A (x, θ), v (x, θ)) (hJ.value hx) j hj)
 
@@ -64,7 +65,8 @@ theorem n04PositiveGeometry_boundary_negClmApply_bound (N : ℕ) :
   intro U A v JA JV Q K s d hN x hx θ P M H t hM hH hHM ht shift hJA hJV
   let J := smoothDirectionsProd JA JV
   have hJ : N04BoundaryWordBounds J K s d x θ P M H t shift := hJA.prod hJV
-  exact hc J Q isOpen_univ (contDiff_fst.clm_apply contDiff_snd).neg.contDiffOn
+  exact hc (g := fun p : (E →L[ℝ] F) × E => -p.1 p.2)
+    J Q isOpen_univ (contDiff_fst.clm_apply contDiff_snd).neg.contDiffOn
     (fun _ _ => mem_univ _) K s d hN x hx θ P M H t hM hH hHM ht shift hJ
     (fun j hj => n04PositiveGeometry_negClmEvaluation_prefix N hM
       (A (x, θ), v (x, θ)) (hJ.value hx) j hj)
