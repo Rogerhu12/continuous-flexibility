@@ -38,8 +38,8 @@ private theorem normalizedKernel_trace_formula
   have hΩ : IsOpen Ω := hV.preimage hu.continuous
   have hc : ContDiffOn ℝ ∞ (fun p => n06RootNormalizedFields (u p)) Ω := by
     intro p hp
-    exact ((n06RootNormalizedFields_contDiffAt hp.1.ne' hp.2).comp p hu.contDiffAt)
-      .contDiffWithinAt
+    exact ((n06RootNormalizedFields_contDiffAt hp.1.ne' hp.2).comp p
+      hu.contDiffAt).contDiffWithinAt
   have hcπ : ContDiffOn ℝ ∞ (fun p => π (n06RootNormalizedFields (u p))) Ω := by
     intro p hp
     exact (π.contDiff.contDiffAt.comp p (hc.contDiffAt (hΩ.mem_nhds hp))).contDiffWithinAt
