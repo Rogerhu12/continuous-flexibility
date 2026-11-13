@@ -24,6 +24,17 @@ local instance n04PulledFieldsCoefficientPhysicalDifferenceStateSMul (S : Physic
 
 set_option backward.isDefEq.respectTransparency false
 
+private theorem n04PulledFields_physicalDifference_envelope
+    (k : ℕ) {value reference originalRef C Q E E' H weight : ℝ}
+    (href : reference = originalRef) (hC : 0 ≤ C) (hQ : 0 ≤ Q)
+    (hE : 0 ≤ E) (hEE : E ≤ E') (hH : 0 ≤ H) (hweight : 0 ≤ weight)
+    (hb : |value - (if k = 0 then originalRef else 0)| ≤ C * E ^ Q * H * weight) :
+    |value - (if k = 0 then reference else 0)| ≤ C * E' ^ Q * H * weight := by
+  rw [href]
+  exact hb.trans (mul_le_mul_of_nonneg_right
+    (mul_le_mul_of_nonneg_right
+      (mul_le_mul_of_nonneg_left (Real.rpow_le_rpow hE hEE hQ) hC) hH) hweight)
+
 /-- The actual corrected family on any smaller parameter domain has a
 common physical full-height difference bound. The supplied towers are
 arbitrary genuine towers of the retained physical coefficients. -/
@@ -83,20 +94,22 @@ theorem n04PulledFields_startCoefficient_physicalDifference
     exact n04PulledFields_startCoefficient_differenceJet W i hsub
       (RF i) (RO i) (RA i) k a b z hz y.val y.property v
   · intro k s
-    obtain ⟨C, Q, hC, hQ, hb⟩ := n04PulledFields_originalCoefficient_difference_physicalOneHigh
+    let data := n04PulledFields_originalCoefficient_difference_physicalOneHigh
       W.through03.1.1 W.hS W.hT k s
-    exact ⟨C, Q, hC.le, hQ, fun i z hz y a b hab v =>
-      hb i a b hab y.val y.property U hU hsub
+    exact ⟨data.choose, data.choose_spec.choose, data.choose_spec.choose_spec.1.le,
+      data.choose_spec.choose_spec.2.1, fun i z hz y a b hab v =>
+      data.choose_spec.choose_spec.2.2 i a b hab y.val y.property U hU hsub
         ((RO i).parameter a b y.val y.property) z hz v⟩
   · intro i
-    obtain ⟨B, hB⟩ := n04PulledFields_actualError_physicalOneHigh W.cutoff
+    let data := n04PulledFields_actualError_physicalOneHigh W.cutoff
       W.through03.1.1 W.hS W.hT W.through03.1.2 W.host i (RA₀ i)
-    refine ⟨B, fun k => ?_⟩
-    obtain ⟨L, hL⟩ := hB k
-    refine ⟨L, fun s => ?_⟩
-    obtain ⟨C, Q, hC, hQ, hb⟩ := hL s
-    exact ⟨C, Q, hC, hQ, fun z hz hzlow y a b hab v =>
-      hb z (hsub hz) hzlow y.val y.property a b hab v⟩
+    refine ⟨data.choose, fun k => ?_⟩
+    let order := data.choose_spec k
+    refine ⟨order.choose, fun s => ?_⟩
+    let bound := order.choose_spec s
+    exact ⟨bound.choose, bound.choose_spec.choose, bound.choose_spec.choose_spec.1,
+      bound.choose_spec.choose_spec.2.1, fun z hz hzlow y a b hab v =>
+      bound.choose_spec.choose_spec.2.2 z (hsub hz) hzlow y.val y.property a b hab v⟩
 
 attribute [local instance]
   n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
@@ -125,24 +138,22 @@ theorem n04PulledFields_coefficient_physicalDifference
     · change G.W.C.referenceState + (0 : AnnularState G.W.S) = G.W.C.referenceState
       exact add_zero _
     · rfl
-  have hraw := n04PulledFields_startCoefficient_physicalDifference G.W
+  let data := n04PulledFields_startCoefficient_physicalDifference G.W
     (isOpen_sectorNeighborhood (G.S η) base ε ε) hsub
     (n04PulledFields_coefficientMixedOn G η hadm)
-  obtain ⟨B, hB⟩ := hraw
-  refine ⟨B, fun k => ?_⟩
-  obtain ⟨L, hL⟩ := hB k
-  refine ⟨L, fun s => ?_⟩
-  obtain ⟨C, Q, hC, hQ, hb⟩ := hL s
-  refine ⟨C, Q, hC, hQ, fun i z hz hzlow y hy a b hab v => ?_⟩
-  rw [href]
-  have hE : G.W.T.E0 y.1 ^ Q ≤ G.W.U.E0 y.1 ^ Q :=
-    Real.rpow_le_rpow (zero_le_one.trans (G.W.floor y.1))
-      (le_enlargedMaterialData_E0 G.W.T y.1) hQ
-  have hH : 0 ≤ G.W.T.H y.1 ^ (3 / 4 : ℝ) :=
-    Real.rpow_nonneg (G.W.hT.2.1 y.1 hy.1).2.1.le _
-  exact (hb i z hz hzlow ⟨y, hy⟩ a b hab v).trans
-    (mul_le_mul_of_nonneg_right
-      (mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hE hC) hH)
-      (oneHighVariationWeight_nonneg _ _ _ _ _))
+  refine ⟨data.choose, fun k => ?_⟩
+  let order := data.choose_spec k
+  refine ⟨order.choose, fun s => ?_⟩
+  let bound := order.choose_spec s
+  refine ⟨bound.choose, bound.choose_spec.choose, bound.choose_spec.choose_spec.1,
+    bound.choose_spec.choose_spec.2.1, fun i z hz hzlow y hy a b hab v => ?_⟩
+  have hrefMixed := congrArg
+    (fun w : AnnularState (G.S η) × ℝ => mixedDerivative a b (G.coefficientField η i w) y) href
+  exact n04PulledFields_physicalDifference_envelope k hrefMixed
+    bound.choose_spec.choose_spec.1 bound.choose_spec.choose_spec.2.1
+    (zero_le_one.trans (G.W.floor y.1)) (le_enlargedMaterialData_E0 G.W.T y.1)
+    (Real.rpow_nonneg (G.W.hT.2.1 y.1 hy.1).2.1.le _)
+    (oneHighVariationWeight_nonneg _ _ _ _ _)
+    (bound.choose_spec.choose_spec.2.2 i z hz hzlow ⟨y, hy⟩ a b hab v)
 
 end ContinuousFlexibility.Analysis
