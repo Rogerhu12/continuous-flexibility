@@ -39,6 +39,12 @@ subnode may shrink the neighborhood, but must choose it before the auxiliary col
 - Work on `line/N04Realization-<Subnode>`, cut from `line/N04Realization-lead`, and merge that
   branch when it moves. Open one pull request into `line/N04Realization-lead` (not into `main`);
   the lead integrates the subnodes and then the whole node into `main`.
+- Until `line/N04Realization-lead` is green, CI failures in the ported reference-chain modules
+  (`N01Root*MaterialJets`, `N03RootEndpointMaterialJets`, `ActualReferenceRootFiniteMaterialData`,
+  `ActualPositiveReference*`, `WholePositiveReferencePotentialJets`,
+  `WholeReferenceGaugeFixedPotentialReferenceJets`, `ActualWholeReference*`,
+  `N04RealizationLeadReference`) are the lead's; your subnode does not import them. Check that the
+  modules you changed compile, and merge the lead branch when it moves.
 - Heartbeats: in this tree `obtain`/`rcases` into goals with large `let`s or state-space gradings,
   and `rw`/`simp at` on hypotheses containing `pairGrading`, can exhaust the limit. Open existentials
   with `Exists.elim` or `.choose`/`.choose_spec`, and put grading arithmetic into private lemmas over
