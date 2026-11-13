@@ -1,0 +1,244 @@
+{
+  "schema": "n04-recovery-snapshot/v1",
+  "snapshot": 58,
+  "created_at": "2026-11-13 03:20:45 UTC",
+  "parent": "c8be313a61dfb425ac823d396277cf64a90be16e",
+  "additional_parent": "cdd1f9f2aa9d2a569fa43e8a8690738dc34d1b4c",
+  "compiled_baseline": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "compiled_baseline_tree": "02a8747b6aaae413f67372d96e52ad8f3dbd9e9a",
+  "source_index": {
+    "path": "drafts/N04Coordinates-recovery-20261112/SOURCE-INDEX.json",
+    "blob": "eede31509773035ba7ead6f8eebda1a121bdbdf4",
+    "sha256": "3e7e57db318411f83a3262345b987c7727fb0f6cc3e28dd4d2607b0c8edd92a2",
+    "bytes": 1742944,
+    "entries": 3429,
+    "new": 20
+  },
+  "artifacts": [
+    {
+      "name": "root/state/Backup57PushReceipt.json",
+      "blob": "e1457ee0ec4396ab41b7fd6915c8cfd13ad8d651",
+      "sha256": "9e6d820afa4096cdfe06d6076e7c74ce8971986146e9449f0b3c97b213ee19fc",
+      "bytes": 859,
+      "lines": 25
+    },
+    {
+      "name": "root/ci/CI188-build.log",
+      "blob": "71f2f3e53ec687b59ad01036e246339cc570157c",
+      "sha256": "6a747fe2af46063cb81a5f7fad761cb38d6e705929bb0aff4bc6db2046385bb3",
+      "bytes": 69983,
+      "lines": 812
+    },
+    {
+      "name": "root/ci/CI188CompleteErrors.json",
+      "blob": "cb358a3f81fb80c6997eb2f093db7027aaf28db4",
+      "sha256": "ab9dd2ff43025330677dc0f4a72378dac93a61b67e8a44a80d72ca1cde23f42e",
+      "bytes": 3022,
+      "lines": 36
+    },
+    {
+      "name": "root/ci/CI188FailureReceipt.json",
+      "blob": "cf80328d3a943e1eda2e97370eed631e478d9372",
+      "sha256": "b08472092508d4b3f06c450afb06a1b7f6c04fda62c27a4e818fabfce9e23170",
+      "bytes": 1094,
+      "lines": 23
+    },
+    {
+      "name": "positive/repair188/CircleShiftedForwardFixedBaseBoundsCandidateManifest.json",
+      "blob": "17d98d65d11a8e67b4e21d629d3ec2cfc453cfbb",
+      "sha256": "41c0929711dbb46bfc9a260bfad233ed5173aa3f5f8ac53ea2cd9d4873d56afd",
+      "bytes": 10276,
+      "lines": 173
+    },
+    {
+      "name": "positive/repair188/CircleShiftedForwardFixedBaseBounds.patch",
+      "blob": "0cc38c7500c13483c3a33d02279a149da62cc0ae",
+      "sha256": "ff509d04ef3a8699961f3383062a9fb26dab2ef94add6af1f34a7eb4b71d8d76",
+      "bytes": 486,
+      "lines": 15
+    },
+    {
+      "name": "audit/recovery/reviews/CI188CircleShiftedForwardConfigurationIndependentReview.json",
+      "blob": "47083f908748e7a159cb5346370e986a34a6138c",
+      "sha256": "8c2dd28f2d55df8d70c9f41c53da34392ed3efff9cd63dcde058d88220df9d2f",
+      "bytes": 6463,
+      "lines": 127
+    },
+    {
+      "name": "positive/repair188/CircleShiftedForwardFixedBaseBoundsReviewedManifest.json",
+      "blob": "88028483edbaee4c3332a25ba5f9b6bceabb671e",
+      "sha256": "947451e5fc0f9902f0ea632c5b0c0b4f6b59f4e543bb7a32caf4c0091670b171",
+      "bytes": 4677,
+      "lines": 127
+    },
+    {
+      "name": "root/ci/CI189StagingPlan.json",
+      "blob": "26a147a5e2154449a907ac88a0e36144a96faf93",
+      "sha256": "7e37eaccfb12b5e47831e65677ed4970e612db5bef4d5f7750f1eb27e64cc553",
+      "bytes": 3696,
+      "lines": 96
+    },
+    {
+      "name": "root/ci/CI189PushReceipt.json",
+      "blob": "2d7f5988660409614d0067d879251c08e91fe324",
+      "sha256": "34442f8736adcc4cd93e641795a0d4fc6a5e44e3d23d87dd608277463aec293f",
+      "bytes": 728,
+      "lines": 19
+    },
+    {
+      "name": "root/ci/CI189CoveragePreflight.json",
+      "blob": "cccd4f2c2f953095102cc21394e71c4eaf4b9c58",
+      "sha256": "da9eb33036a7b803dc42f867a30c00c3676bf7eacbc2e17fe351096cf15b728b",
+      "bytes": 1850,
+      "lines": 45
+    },
+    {
+      "name": "audit/recovery/reviews/Next84Main79Next71Main69ExplicitNameCrossReview.json",
+      "blob": "ff35d9c62a58625b84f1c1fc22eab562592829af",
+      "sha256": "a594bf560387bc731ea1c7a35705bc06d72ece022378a5428c30e63f99c94e6e",
+      "bytes": 3370,
+      "lines": 55
+    },
+    {
+      "name": "audit/recovery/Next84Main79ExactPublicNamesAndCrossLocals.json",
+      "blob": "61344d6978bc725ded989ea9341be8f36cbd4494",
+      "sha256": "f1b53241371150c0fb109de48c835152109a7b5fb1ea00607be26d70198f676a",
+      "bytes": 106291,
+      "lines": 3345
+    },
+    {
+      "name": "quantitative/recovery/ActualReturnResidualFixedBaseInterfaceCheckpoint.json",
+      "blob": "5bc618a6f0c35584fad0c1ad3b55efe0922078f2",
+      "sha256": "41a2d3441aa398a74bedd289c101b038c5280a1f9e5354880cb6e9a64f6573a7",
+      "bytes": 7109,
+      "lines": 96
+    },
+    {
+      "name": "root/recovery/Future75OpticalProjection.json",
+      "blob": "8c5bb97ff4964cd31209330baf20161cc62a2d49",
+      "sha256": "8b93b4be9d34dd43cc820143d92e39ff8c451720a2ee57de10510b8651989d56",
+      "bytes": 770,
+      "lines": 27
+    },
+    {
+      "name": "root/recovery/TransportWrapperProofOutline.json",
+      "blob": "b8538646348801624ef5b6c225db52168e6f242f",
+      "sha256": "058e56219d6f8ddfcf3288a78089989f600dcf20bc055aedec387ed70cea3c2a",
+      "bytes": 1254,
+      "lines": 15
+    },
+    {
+      "name": "root/ci/CI189-build.log",
+      "blob": "fae5782ea2d9020f8d69881172036cd2afad878c",
+      "sha256": "a70f31313da6d4b54d694c9e4bf1099684abe689570bbc6b898d7d001fac5dfd",
+      "bytes": 68726,
+      "lines": 816
+    },
+    {
+      "name": "root/ci/CI189ObservedDiagnostics.json",
+      "blob": "5d7520e425d903f2d925d817694116e6b3e99604",
+      "sha256": "0d4850d52ce6522c17577051b7690570d690258f26d375ddde422e2f6c33f85b",
+      "bytes": 3729,
+      "lines": 41
+    },
+    {
+      "name": "root/ci/CI189FailureReceipt.json",
+      "blob": "fea8133d86d24891775b6bf9b7be577254df52e0",
+      "sha256": "d4aa7e0afbc6e4ca4a70615e55c9f781a433ac271ccef4374e452e38955118fb",
+      "bytes": 1484,
+      "lines": 27
+    },
+    {
+      "name": "root/state/CRITICAL-current.json",
+      "blob": "bc76b3f28b2340b01bc9b77f4d2dfdf511a72cb9",
+      "sha256": "b8efaa9a340b6ff25136c509ec9fc74d8a71a39e5f3573b171771eeec1e5723d",
+      "bytes": 11639,
+      "lines": 213
+    }
+  ],
+  "outside_archive": {
+    "exact_target": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+    "paths": 4933,
+    "changed_since57": 0
+  },
+  "active": {
+    "schema": "n04-ci-push-receipt/v1",
+    "round": 189,
+    "repository": "Rogerhu12/continuous-flexibility",
+    "branch": "line/N04Coordinates",
+    "parent": "795cc520c075a91e56e14a92ee826479c15c168d",
+    "commit": "cdd1f9f2aa9d2a569fa43e8a8690738dc34d1b4c",
+    "tree": "d6338ff8e876073ac7544ebcb6317c340d6dc28c",
+    "plan": "26a147a5e2154449a907ac88a0e36144a96faf93",
+    "force": false,
+    "expected_sha_verified": true,
+    "ref_readback_exact": true,
+    "pushed_readback_utc": "2026-11-13 03:02:58 UTC",
+    "earliest_first_ci_lookup_utc": "2026-11-13T03:07:58.000Z",
+    "conservative_active_added": 18603,
+    "actual_retained_upper": 20000,
+    "compilation": "PENDING",
+    "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b"
+  },
+  "previous_failure": {
+    "schema": "n04-ci-failure-receipt/v1",
+    "round": 189,
+    "head": "cdd1f9f2aa9d2a569fa43e8a8690738dc34d1b4c",
+    "tree": "d6338ff8e876073ac7544ebcb6317c340d6dc28c",
+    "run": 43356294176,
+    "job": 131659019839,
+    "status": "completed",
+    "conclusion": "failure",
+    "updated_at": "2026-11-13T03:08:46Z",
+    "quick": "failure",
+    "full": "skipped",
+    "fresh_project_modules": 0,
+    "original_log": "fae5782ea2d9020f8d69881172036cd2afad878c",
+    "observed_diagnostics": "5d7520e425d903f2d925d817694116e6b3e99604",
+    "core_errors_complete": true,
+    "profile_complete": false,
+    "artifact_downloaded_once": true,
+    "artifact_extracted": false,
+    "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+    "released_draft_credit": 0,
+    "draft_actual_upper": 20000,
+    "active_conservative": 18603,
+    "repository_limit": 20000,
+    "performance": "The two configuration settings did not resolve default200000 failure. Observed profile is dominated by concrete PreLp/PiLp/CircleModelData.level/Zero reduction; core errors occur in the inverseForwardJet derivative target and public quantitative declaration. Full profiler table is not available, so no exclusive root-cause claim is made.",
+    "next_repair": "Abstract the ordered-kernel induction and scalar-source normalization across generic vector spaces. Necessary repair growth may use the actual remaining repository added-Lean allowance1397; session retained guard is not a repository prohibition. New mathematics stays paused."
+  },
+  "budget": {
+    "new_full_Lean_archives": 0,
+    "active213_retained_by_additional_parent": true,
+    "repair_net": 0,
+    "after182_existing": 19276,
+    "held_selected_lines": 670,
+    "forward_net_since159": 54,
+    "actual_retained_upper": 20000,
+    "remaining": 0,
+    "active_conservative": 18603,
+    "released_credit": 0,
+    "conditional_complete_owned_credit": [
+      213,
+      301,
+      115,
+      152,
+      44
+    ],
+    "repair242": "Now published and root read, independent review pending; not yet selected or charged in this historical index frozen03:15:56. Necessary +29 repair authorized within actual repo cap; session softguard is not a repo prohibition."
+  },
+  "endpoint": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open",
+    "proved": 37,
+    "total": 42,
+    "exact_target": "theorem N04Coordinates (hN04b : N04bStatement) : N04cStatement",
+    "allowed_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "environment": "Local execution unavailable; remote Git persistence only."
+}

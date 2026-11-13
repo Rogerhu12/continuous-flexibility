@@ -1,0 +1,41 @@
+{
+  "schema": "n04-ci-errors-and-observed-profile/v1",
+  "round": 189,
+  "head": "cdd1f9f2aa9d2a569fa43e8a8690738dc34d1b4c",
+  "run": 43356294176,
+  "job": 131659019839,
+  "original_job_log": {
+    "blob": "fae5782ea2d9020f8d69881172036cd2afad878c",
+    "sha256": "a70f31313da6d4b54d694c9e4bf1099684abe689570bbc6b898d7d001fac5dfd",
+    "bytes": 68726
+  },
+  "errors": [
+    {
+      "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:78:28: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached",
+      "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:78:28: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.",
+      "lines": 3
+    },
+    {
+      "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:152:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached",
+      "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:152:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.",
+      "lines": 3
+    }
+  ],
+  "core_error_blocks_complete": true,
+  "profile": {
+    "complete": false,
+    "reason": "Quick workflow prints grep error -A40. The diagnostic table is cut after its first printed context window, followed by -- before the next error. This is only the observed prefix, not complete profiling.",
+    "observed_prefix": "info: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:58:0: [diag] Diagnostics\n[reduction] unfolded declarations (max: 5569, num: 22):\n[reduction] PreLp ↦ 5569\n[reduction] SetLike.coe ↦ 4100\n[reduction] OfNat.ofNat ↦ 3521\n[reduction] Set ↦ 3517\n[reduction] Zero.zero ↦ 2557\n[reduction] lp ↦ 880\n[reduction] SMul.smul ↦ 573\n[reduction] HSMul.hSMul ↦ 572\n[reduction] WithLp.equiv ↦ 436\n[reduction] Quotient.mk ↦ 294\n[reduction] MeasureTheory.AEEqFun.const ↦ 294\n[reduction] MeasureTheory.AEEqFun.mk ↦ 294\n[reduction] NSMul.nsmul ↦ 262\n[reduction] PreLp.instAddCommMonoid._aux_1 ↦ 254\n[reduction] Add.add ↦ 75\n[reduction] HAdd.hAdd ↦ 72\n[reduction] Mul.mul ↦ 70\n[reduction] compatibleSubmodule ↦ 54\n[reduction] LE.le ↦ 46\n[reduction] HMul.hMul ↦ 43\n[reduction] norm ↦ 39\n[reduction] LT.lt ↦ 21\n[reduction] unfolded reducible declarations (max: 7488, num: 30):\n[reduction] PiLp ↦ 7488\n[reduction] AddSubmonoid.toAddSubsemigroup ↦ 4569\n[reduction] AddSubsemigroup.carrier ↦ 4076\n[reduction] Submodule.toAddSubmonoid ↦ 3442\n[reduction] CircleModelData.level ↦ 2966\n[reduction] CircleJetHilbert ↦ 2307\n[reduction] AddSubgroup.toAddSubmonoid ↦ 2126\n[reduction] Function.Injective.addMonoid ↦ 598\n[reduction] Function.Injective.subNegMonoid ↦ 425\n[reduction] Equiv.invFun ↦ 424\n[reduction] Function.Injective.addGroup ↦ 421\n[reduction] Subtype.val ↦ 416\n[reduction] Function.Injective.addZeroClass ↦ 399"
+  },
+  "artifact": {
+    "id": 14006197836,
+    "name": "build-log",
+    "zip_bytes_reported": 329236,
+    "zip_sha256_reported_by_GitHub": "1c009ac221fca2b40a8fbe241a09778c24bc2db2a925b3cccdf39825c2397819",
+    "downloaded_once": true,
+    "download_file_id": "file_00000000447481f5be4683956c4ded59",
+    "local_extraction": false,
+    "full_quick_log_read": false,
+    "limitation": "Local execution is disconnected; no archive member content has yet been extracted. No signed download URL is persisted here."
+  }
+}

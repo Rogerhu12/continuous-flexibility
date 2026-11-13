@@ -1,0 +1,15 @@
+--- a/CircleShiftedForwardFixedBaseBounds.lean
++++ b/CircleShiftedForwardFixedBaseBounds.lean
+@@ -14,10 +14,10 @@
+ noncomputable section
+ 
+ namespace ContinuousFlexibility.Statements
+-
++set_option backward.isDefEq.respectTransparency false
+ open Set Filter ContinuousFlexibility.Analysis
+ open scoped BigOperators Topology
+-
++set_option diagnostics true
+ local instance circleShiftedForwardFixedBasePairSMul (M : CircleModelData) :
+     SMul ℝ (M.Space × M.Space) := Prod.instSMul
+ 

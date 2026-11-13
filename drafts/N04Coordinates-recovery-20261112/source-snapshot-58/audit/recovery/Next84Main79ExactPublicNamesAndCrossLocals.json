@@ -1,0 +1,3345 @@
+{
+  "schema": "n04-gateway-explicit-names-cross-evidence-v1",
+  "proposed_backup_path": "audit/recovery/Next79MainExplicitNamesAndCrossLocals.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "main_pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "selection_plan": {
+    "blob": "14d63e2dfd4abf9853ebf0d301b40fe1fd2c9d22",
+    "sha256": "05f6a0f1e0515158954a0ad2186a851efab1b165d94c483c064ff02c0e630186"
+  },
+  "reused_69_names": {
+    "blob": "1a16f9310a7e04403629ba8de51691aeb1c95e09",
+    "sha256": "b2e301acb8e8441b609f33917403573c9d52ce8607feb90967a22511cd7a1803",
+    "selection": "69 rows kind=additional-main1ece; excludes two owned153/206 rows"
+  },
+  "scanner_sha256": "d7b3dd7f4c276420d502fb4eebff879a589b1db600c1f117d548af95ff3a7a5d",
+  "scope": "Explicit namespace-qualified named def/theorem/lemma/abbrev/opaque/structure/class/inductive/instance. Named local instances are listed separately. Generated fields/constructors/recursors, anonymous instances, aliases/macros and private generated names are excluded.",
+  "counts": {
+    "files79": 79,
+    "public79": 420,
+    "local79": 28,
+    "files69": 69,
+    "public69": 365,
+    "local69": 24,
+    "source_errors": 0,
+    "scanner_warnings": 0,
+    "unhandled_ordinary_declarations": 0
+  },
+  "nodes79": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CoefficientParameterTower",
+      "path": "src/ContinuousFlexibility/Analysis/N01CoefficientParameterTower.lean",
+      "blob": "cd39fe6442e946b6dbc5c7b6e5bb1df7088461c3",
+      "sha256": "63683c286d4cd93f8fa6c100453956c1c6a3b56aa1a93ce98e90dd4967af4bb0",
+      "bytes": 5991,
+      "lines": 118,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorCoefficient_tower",
+          "theorem",
+          28
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorCoefficientTower",
+          "def",
+          73
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorCoefficientTower_bound",
+          "theorem",
+          80
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.originalCoefficientSectorTower",
+          "def",
+          99
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01CoefficientParameterTowerStateSMul",
+          "instance",
+          19
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionErrorSupport",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionErrorSupport.lean",
+      "blob": "141bc958077c95bb3b3735e94af05a03454f898b",
+      "sha256": "bf0b74c008887313303858a93962e461b9a2dd91cfc813b0d10223f81586b09e",
+      "bytes": 10470,
+      "lines": 191,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.returnCorrectionVelocityLinear_eq_zero_of_deriv_zero",
+          "theorem",
+          24
+        ],
+        [
+          "ContinuousFlexibility.Statements.returnCorrectionDriftSpeedLinear_eq_zero_of_deriv_zero",
+          "theorem",
+          31
+        ],
+        [
+          "ContinuousFlexibility.Statements.returnCorrectionLocalCoefficientError_eq_zero_of_deriv_zero",
+          "theorem",
+          43
+        ],
+        [
+          "ContinuousFlexibility.Statements.returnCorrectionCoefficientError_eq_local",
+          "theorem",
+          54
+        ],
+        [
+          "ContinuousFlexibility.Statements.returnCorrectionCoefficientError_eventually_local",
+          "theorem",
+          79
+        ],
+        [
+          "ContinuousFlexibility.Statements.returnCorrectionCoefficientError_eventually_zero",
+          "theorem",
+          91
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionCutoffs_deriv_eventually_zero_of_nonnegative",
+          "theorem",
+          103
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionCoefficientError_eventually_zero_of_nonnegative",
+          "theorem",
+          133
+        ],
+        [
+          "ContinuousFlexibility.Statements.returnCorrectionResidualErrorField_eq_zero_of_eventually_zero",
+          "theorem",
+          144
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionResidualErrorField_eq_zero_of_outside_components",
+          "theorem",
+          175
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnFlowInverseRegularity",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnFlowInverseRegularity.lean",
+      "blob": "e0be707031f2e1272044f54a61e918b3659c30db",
+      "sha256": "326f32dc7479b72ffd0db8f3890e03967793c919285981f923dd8358f39dd360",
+      "bytes": 7967,
+      "lines": 170,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.returnTriangularEquiv",
+          "def",
+          29
+        ],
+        [
+          "ContinuousFlexibility.Statements.returnTriangularEquiv_apply",
+          "theorem",
+          58
+        ],
+        [
+          "ContinuousFlexibility.Statements.returnTriangularEquiv_graph_derivative",
+          "theorem",
+          61
+        ],
+        [
+          "ContinuousFlexibility.Statements.returnFlow_invFun_hasStrictFDerivAt",
+          "theorem",
+          76
+        ],
+        [
+          "ContinuousFlexibility.Statements.returnFlow_invFun_contDiffAt",
+          "theorem",
+          102
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusFlow_invFun_differentiableAt",
+          "theorem",
+          134
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowAngularJointRegularity",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowAngularJointRegularity.lean",
+      "blob": "281eac8a096efd9b338976cd0bf52e576b1d53d2",
+      "sha256": "7966e3720827defc7c00e1ae9214e1c8eb56b0af0f53a1232aaf9a20e30baac4",
+      "bytes": 12394,
+      "lines": 230,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.returnFlow_coprod_toSpan",
+          "theorem",
+          28
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusFlow_angular_deriv_hasDerivAt_radial",
+          "theorem",
+          50
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusFlow_angular_deriv_hasStrictFDerivAt",
+          "theorem",
+          89
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusFlow_angular_deriv_contDiffAt_one",
+          "theorem",
+          146
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusFlow_contDiffAt_one",
+          "theorem",
+          175
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusFlow_invFun_contDiffAt_one",
+          "theorem",
+          204
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01FlowAngularJointRegularityRealNormedSpace",
+          "instance",
+          26
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionVelocityRegularity",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionVelocityRegularity.lean",
+      "blob": "6bf736eac45c44161e46bcd12236fa91a2ac0210",
+      "sha256": "88ca164eb1987e45acadeeddbae639ee624e916a88cc39423817573a28f76e36",
+      "bytes": 6409,
+      "lines": 125,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnInterpolation_invFun_contDiffAt",
+          "theorem",
+          37
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionVelocityLinear_contDiffAt_one",
+          "theorem",
+          73
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionDriftSpeedLinear_contDiffAt_one",
+          "theorem",
+          105
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientRegularity",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionCoefficientRegularity.lean",
+      "blob": "d746bf028ca3d959e9a42e78283190fd47cdb52e",
+      "sha256": "28af7107f8498979bec44f235567e4a3a544223bcff4a390b148e35766b897bd",
+      "bytes": 9332,
+      "lines": 164,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.N01Properties.originalCoefficients_contDiffAt",
+          "theorem",
+          28
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionLocalCoefficientError_contDiffAt_one",
+          "theorem",
+          47
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionCoefficientError_contDiffAt_one",
+          "theorem",
+          90
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionErrorFluxes_contDiffAt_one",
+          "theorem",
+          139
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01OpticalCollarJetBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01OpticalCollarJetBounds.lean",
+      "blob": "23ab619e7b23dd3d6274325b91b4e5b0b8569b1a",
+      "sha256": "b4a799348acdc74351e8fdc16c2991d5fad10a3a2cd5e35a8de637f8f0c79bd6",
+      "bytes": 16714,
+      "lines": 325,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.abs_le_of_power_weight_bound",
+          "theorem",
+          25
+        ],
+        [
+          "ContinuousFlexibility.Statements.smoothDirections_zeroth_spatialWeight_bound",
+          "theorem",
+          41
+        ],
+        [
+          "ContinuousFlexibility.Statements.smoothDirections_zeroth_twoFactor_bound",
+          "theorem",
+          53
+        ],
+        [
+          "ContinuousFlexibility.Statements.smoothDirections_divide_spatialWeight_bound",
+          "theorem",
+          67
+        ],
+        [
+          "ContinuousFlexibility.Statements.opticalSpeed_lower_boundaryDistance",
+          "theorem",
+          81
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.opticalCollar_inverse_boundaryDistance_bound",
+          "theorem",
+          129
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.ordinaryFlowFamily_weighted_zeroth_bound",
+          "theorem",
+          187
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.ordinaryFlowFamily_collar_directional_bounds",
+          "theorem",
+          225
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.ordinaryFlowFamily_collar_bound",
+          "theorem",
+          284
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01OpticalCollarJetBoundsStateSMul",
+          "instance",
+          19
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.PolynomialJetComposition",
+      "path": "src/ContinuousFlexibility/Analysis/PolynomialJetComposition.lean",
+      "blob": "4f4d473a6e55a09a6190d47392458213c9fba3df",
+      "sha256": "787413d805f16a538a5fad819d521b5cdd0218a4ee560b25b744370aa29d5e0d",
+      "bytes": 7625,
+      "lines": 144,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.finite_polynomial_majorant",
+          "theorem",
+          22
+        ],
+        [
+          "ContinuousFlexibility.Analysis.norm_iteratedFDeriv_comp_polynomial_bound",
+          "theorem",
+          44
+        ],
+        [
+          "ContinuousFlexibility.Analysis.norm_iteratedFDeriv_mul_polynomial_bound",
+          "theorem",
+          107
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ScalarRpowJetGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/ScalarRpowJetGrowth.lean",
+      "blob": "611cb4e313987ed4c53bc3b9fe04313b215620f4",
+      "sha256": "a785053b2d5c66e98cc7d8ae9888bae3034f909a80d098ea3fe2eee2d90d2621",
+      "bytes": 3787,
+      "lines": 82,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.rpow_polynomial_bound_of_interval",
+          "theorem",
+          19
+        ],
+        [
+          "ContinuousFlexibility.Analysis.iteratedDeriv_rpow_polynomial_bound",
+          "theorem",
+          44
+        ],
+        [
+          "ContinuousFlexibility.Analysis.iteratedDeriv_sqrt_polynomial_bound",
+          "theorem",
+          60
+        ],
+        [
+          "ContinuousFlexibility.Analysis.iteratedDeriv_inv_polynomial_bound",
+          "theorem",
+          70
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.PolynomialJetPowers",
+      "path": "src/ContinuousFlexibility/Analysis/PolynomialJetPowers.lean",
+      "blob": "5d2d725acbc05c4193050b16069da6b38c1acda1",
+      "sha256": "c7a82f537edb67f9733b43d7b8093b6bd64deb4fe1f01269a9f440cd5e027199",
+      "bytes": 4186,
+      "lines": 84,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.norm_iteratedFDeriv_rpow_polynomial_bound",
+          "theorem",
+          22
+        ],
+        [
+          "ContinuousFlexibility.Analysis.norm_iteratedFDeriv_inv_polynomial_bound",
+          "theorem",
+          54
+        ],
+        [
+          "ContinuousFlexibility.Analysis.norm_iteratedFDeriv_sqrt_polynomial_bound",
+          "theorem",
+          69
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01OpticalSpeedJetBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01OpticalSpeedJetBounds.lean",
+      "blob": "7bb4ded5ba67a83e9a05099e3abc419ec6fefe4e",
+      "sha256": "eca02513105e99cc5ab157702ad9e9bd1c1e191372baf2c58c31c4902654fa0f",
+      "bytes": 7994,
+      "lines": 156,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.scalar_positive_interval_jet_bound",
+          "theorem",
+          23
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.reference_opticalSpeed_collar_jets",
+          "theorem",
+          45
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MixedDerivativeLocality",
+      "path": "src/ContinuousFlexibility/Analysis/MixedDerivativeLocality.lean",
+      "blob": "02386ba505db686f26f36abbdd2d9a98d537cf3b",
+      "sha256": "a893fbaeda475c4e9c2c34ac4aae2bfa905929cd82ff8ebc2ff86aa10b2e8ffd",
+      "bytes": 4325,
+      "lines": 89,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.mixedDerivative_congr_of_eventuallyEq",
+          "theorem",
+          15
+        ],
+        [
+          "ContinuousFlexibility.Statements.mixedDerivative_congr_on_open",
+          "theorem",
+          26
+        ],
+        [
+          "ContinuousFlexibility.Statements.mixedDerivative_sub_of_contDiffOn",
+          "theorem",
+          34
+        ],
+        [
+          "ContinuousFlexibility.Statements.mixedDerivative_angular_translation_abs_le",
+          "theorem",
+          73
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CoefficientMixedBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01CoefficientMixedBounds.lean",
+      "blob": "6cabafc21264de983d8466932f9230247d3e478e",
+      "sha256": "f30fb5257cf5c5a7af7c2764fd4a2f22ca9e45cbfbd6e4ed9b969a6d03d25808",
+      "bytes": 10571,
+      "lines": 209,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.mixedDerivative_radial_field",
+          "theorem",
+          30
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.coefficientFamily_uniform_bound",
+          "theorem",
+          40
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.reference_coefficient_smooth_jets",
+          "theorem",
+          72
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.original_coefficient_contDiffOn",
+          "theorem",
+          120
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.original_coefficient_mixed_jets",
+          "theorem",
+          138
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.original_coefficient_fderiv_jets",
+          "theorem",
+          174
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01CoefficientMixedBoundsStateSMul",
+          "instance",
+          23
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsLocalLabels",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsLocalLabels.lean",
+      "blob": "be1912969fd80ef7713be3b53c6ac6adf1bfbc0b",
+      "sha256": "7b17285c2247c15729a19f511ebdb3668753c53754f7ff9d5cac4926dc4f71e7",
+      "bytes": 4561,
+      "lines": 101,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.UniformScalarJetSeminormBounds.reindex",
+          "theorem",
+          22
+        ],
+        [
+          "ContinuousFlexibility.Analysis.smoothDirections_label_jet_continuous",
+          "theorem",
+          30
+        ],
+        [
+          "ContinuousFlexibility.Analysis.localScalarJet",
+          "def",
+          47
+        ],
+        [
+          "ContinuousFlexibility.Analysis.localScalarJet_of_mem",
+          "theorem",
+          53
+        ],
+        [
+          "ContinuousFlexibility.Analysis.localScalarJet_continuousOn_of_uniform_bounds",
+          "theorem",
+          59
+        ],
+        [
+          "ContinuousFlexibility.Analysis.LocalUniformScalarJetSeminormBounds",
+          "def",
+          76
+        ],
+        [
+          "ContinuousFlexibility.Analysis.localScalarJet_continuousOn_of_local_uniform_bounds",
+          "theorem",
+          83
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsLocalAngularJets",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsLocalAngularJets.lean",
+      "blob": "daa2d9e6bfbf746955189225da2cfec10684d98d",
+      "sha256": "cdb41d7b1df9a030611fc3372a507d856a4456e7034ddbdf899c6f95ca43f10d",
+      "bytes": 10751,
+      "lines": 208,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.smoothDirections_local_angular_jet_hasDerivAt",
+          "theorem",
+          58
+        ],
+        [
+          "ContinuousFlexibility.Analysis.localScalarJet_hasDerivAt_on_Ioo",
+          "theorem",
+          101
+        ],
+        [
+          "ContinuousFlexibility.Analysis.localScalarJet_hasDerivAt_along",
+          "theorem",
+          151
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsSpatialJets",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsSpatialJets.lean",
+      "blob": "3a21f8f4108f390212f30afa40a9fcfcba7e6957",
+      "sha256": "862be9c7c1b60d12904d4415a9c25220e79e4fa548b9469c3385dea51ff24ae0",
+      "bytes": 7502,
+      "lines": 152,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.localScalarJet_spatial_hasDerivAt_fst",
+          "theorem",
+          39
+        ],
+        [
+          "ContinuousFlexibility.Analysis.localScalarJet_spatial_hasDerivAt_snd",
+          "theorem",
+          50
+        ],
+        [
+          "ContinuousFlexibility.Analysis.localScalarJet_spatial_contDiffOn",
+          "theorem",
+          61
+        ],
+        [
+          "ContinuousFlexibility.Analysis.mixedDerivative_eq_of_coordinate_hierarchy",
+          "theorem",
+          88
+        ],
+        [
+          "ContinuousFlexibility.Analysis.localScalarJet_spatial_mixedDerivative",
+          "theorem",
+          110
+        ],
+        [
+          "ContinuousFlexibility.Analysis.localScalarJet_spatial_line_hasDerivAt",
+          "theorem",
+          129
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MixedDerivativeHierarchy",
+      "path": "src/ContinuousFlexibility/Analysis/MixedDerivativeHierarchy.lean",
+      "blob": "b67fc3dc8858f56c715ad95b680a07b873399f75",
+      "sha256": "e9db31f132dda5a403eadd732849efc5516f7f9261e02f4ca48351ce47bfc8c8",
+      "bytes": 4535,
+      "lines": 96,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.hasDerivAt_radial_slice_of_differentiableAt",
+          "theorem",
+          19
+        ],
+        [
+          "ContinuousFlexibility.Statements.hasDerivAt_angular_slice_of_differentiableAt",
+          "theorem",
+          26
+        ],
+        [
+          "ContinuousFlexibility.Statements.radialPartial_mixedDerivative_of_contDiffOn",
+          "theorem",
+          33
+        ],
+        [
+          "ContinuousFlexibility.Statements.angularPartial_mixedDerivative_of_contDiffOn",
+          "theorem",
+          43
+        ],
+        [
+          "ContinuousFlexibility.Statements.mixedDerivative_hasDerivAt_radial",
+          "theorem",
+          74
+        ],
+        [
+          "ContinuousFlexibility.Statements.mixedDerivative_hasDerivAt_angular",
+          "theorem",
+          85
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CoefficientSpatialJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01CoefficientSpatialJets.lean",
+      "blob": "0e038e131e20d709f5411f0c17637da9900b65e4",
+      "sha256": "5242b2bbb36f35525783b1941e73a51b0c6bbc0ff993b722a7b4f38040b16e12",
+      "bytes": 13967,
+      "lines": 249,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.coefficientFamily_eq_mixedDerivative_zero",
+          "theorem",
+          31
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.coefficientFamily_contDiffOn",
+          "theorem",
+          38
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.coefficientFamily_hasDerivAt_radial",
+          "theorem",
+          55
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.coefficientFamily_hasDerivAt_angular",
+          "theorem",
+          69
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.componentCoefficientTower",
+          "def",
+          83
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.componentCoefficientTower_uniformBounds",
+          "theorem",
+          92
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.componentCoefficientTower_localBounds",
+          "theorem",
+          115
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.componentCoefficientScalarJet",
+          "def",
+          165
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.componentCoefficientScalarJet_of_mem",
+          "theorem",
+          172
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.componentCoefficientScalarJet_contDiffOn",
+          "theorem",
+          182
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.componentCoefficientScalarJet_mixedDerivative",
+          "theorem",
+          197
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.componentCoefficientScalarJet_hasDerivAt_line",
+          "theorem",
+          214
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.componentCoefficientScalarJet_mixed_bound",
+          "theorem",
+          233
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01CoefficientSpatialJetsStateSMul",
+          "instance",
+          22
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsConstantShift",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsConstantShift.lean",
+      "blob": "077272d4e1c8f526bcfd1f5d2f45a1714f4efc0f",
+      "sha256": "f785ad3fd1768cd58384b84f28749b7e08649d5e0fab6f032fb7c425b1e82242",
+      "bytes": 2662,
+      "lines": 62,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.positive_jet_eq_of_constant_shift",
+          "theorem",
+          22
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01OriginalCoefficientSpatialJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01OriginalCoefficientSpatialJets.lean",
+      "blob": "a6ef81af9b34cd42ee567396bc989fabe3381c18",
+      "sha256": "8d8751954a975c5a8d8d7b22e4c592ddff0ffcda787f35b7eb9c11018a9db528",
+      "bytes": 11580,
+      "lines": 208,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.originalCoefficientEntry",
+          "def",
+          28
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.originalCoefficientSectorTower_positive_eq",
+          "theorem",
+          33
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.originalComponentCoefficientScalarJet",
+          "def",
+          48
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.originalComponentCoefficientScalarJet_zero",
+          "theorem",
+          57
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.originalComponentCoefficientScalarJet_positive_eq",
+          "theorem",
+          74
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.originalComponentCoefficientScalarJet_contDiffOn",
+          "theorem",
+          100
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.originalComponentCoefficientScalarJet_mixedDerivative_zero",
+          "theorem",
+          123
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.originalComponentCoefficientScalarJet_mixedDerivative_positive",
+          "theorem",
+          147
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.originalComponentCoefficientScalarJet_hasDerivAt_line",
+          "theorem",
+          161
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01OriginalCoefficientSpatialJetsStateSMul",
+          "instance",
+          19
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowMixedParameterTower",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowMixedParameterTower.lean",
+      "blob": "1cea1dbf8a561921f82465e75f13d4077beec1ac",
+      "sha256": "758e0ac22adab79d3b62b36fd2020ed426c3187a6441f0490a1f53baccb237e2",
+      "bytes": 8964,
+      "lines": 178,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorFlow_mixed_tower",
+          "theorem",
+          34
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorFlowMixedTower",
+          "def",
+          87
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorFlowMixedTower_bound",
+          "theorem",
+          94
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorFlowMixedTower_uniform_on_radial_interval",
+          "theorem",
+          119
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01FlowMixedParameterTowerStateSMul",
+          "instance",
+          21
+        ],
+        [
+          "ContinuousFlexibility.Statements.n01FlowMixedParameterTowerParameterSMul",
+          "instance",
+          23
+        ],
+        [
+          "ContinuousFlexibility.Statements.n01FlowMixedParameterTowerRealNormedSpace",
+          "instance",
+          25
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReferenceFlowJetBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReferenceFlowJetBounds.lean",
+      "blob": "f3ad0352808eccf44e52de45195482f497746689",
+      "sha256": "8791a767367fcae1a8ab50eba7bf4d8a45ef8db74aef01c4761f0f297fa378fc",
+      "bytes": 4758,
+      "lines": 97,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusFlow_reference_radial_hasDerivAt",
+          "theorem",
+          25
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.reference_minusFlow_collar_mixed_jets",
+          "theorem",
+          51
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CompactParameterIntegral",
+      "path": "src/ContinuousFlexibility/Analysis/CompactParameterIntegral.lean",
+      "blob": "4db6b51ab6815a655240be46b5704dae20ef5cc2",
+      "sha256": "eb35abcfc70e5b43f1b11ec2048940d879289536ca59deee0264f74ea0b14ffe",
+      "bytes": 9073,
+      "lines": 184,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.contDiffOn_compactParameterIntegral",
+          "theorem",
+          26
+        ],
+        [
+          "ContinuousFlexibility.Analysis.contDiffAt_radialPrimitive",
+          "theorem",
+          92
+        ],
+        [
+          "ContinuousFlexibility.Analysis.contDiffAt_radialPrimitive_of_isOpen",
+          "theorem",
+          140
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowJointSmoothness",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowJointSmoothness.lean",
+      "blob": "97cd67640598f9af1d0ce5a85773e91f32c57bcc",
+      "sha256": "5acb4c1e6048ab491a5df124278244a97d6c59edf8c3b4065e87fa61e5d9fb6d",
+      "bytes": 12354,
+      "lines": 230,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusCharacteristicSpeed_contDiffAt_of_discriminant",
+          "theorem",
+          35
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.characteristicAngularDerivative_contDiffAt_of_discriminant",
+          "theorem",
+          45
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusFlow_angular_deriv_eq_base_mul_exp",
+          "theorem",
+          64
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusFlow_contDiffAt_of_discriminant",
+          "theorem",
+          99
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusFlow_angular_deriv_contDiffAt_of_discriminant",
+          "theorem",
+          184
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusFlow_invFun_contDiffAt_of_discriminant",
+          "theorem",
+          197
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowCollarJetBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowCollarJetBounds.lean",
+      "blob": "699df248ec7c279a0c376e427d2f45230dc77e57",
+      "sha256": "49743f7e03b7727a9b51abb382826630353e19b17a9652434d2ac56e057d7db9",
+      "bytes": 9568,
+      "lines": 185,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusFlow_reference_contDiffAt",
+          "theorem",
+          27
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusFlow_collar_contDiffOn",
+          "theorem",
+          80
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusFlow_collar_mixed_jets",
+          "theorem",
+          91
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusFlow_collar_positive_fderiv_jets",
+          "theorem",
+          153
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01FlowCollarJetBoundsStateSMul",
+          "instance",
+          21
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsLocalJointAngular",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsLocalJointAngular.lean",
+      "blob": "53e21d2501941323f7baa55446667191d1264b83",
+      "sha256": "f9664a976553cd0fe6ea6f986a294cd61788da5b890f6c98f77b0fb68dd9d54f",
+      "bytes": 13381,
+      "lines": 262,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.localScalarJet_joint_continuousOn_of_uniform_bounds",
+          "theorem",
+          59
+        ],
+        [
+          "ContinuousFlexibility.Analysis.localScalarJetMap",
+          "def",
+          79
+        ],
+        [
+          "ContinuousFlexibility.Analysis.localScalarJetMap_apply",
+          "theorem",
+          85
+        ],
+        [
+          "ContinuousFlexibility.Analysis.localAngularTower_jointLine_hasDerivAt",
+          "theorem",
+          96
+        ],
+        [
+          "ContinuousFlexibility.Analysis.localAngularTowerJointDirections",
+          "def",
+          163
+        ],
+        [
+          "ContinuousFlexibility.Analysis.localAngularTowerJointDirections_apply",
+          "theorem",
+          228
+        ],
+        [
+          "ContinuousFlexibility.Analysis.localAngularTowerJointDirectionsOfUniform",
+          "def",
+          244
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.LocalJointJetSeminormBounds",
+      "path": "src/ContinuousFlexibility/Analysis/LocalJointJetSeminormBounds.lean",
+      "blob": "a6282f7a4e68bc55f63fdffae9273ffbbdeb524a",
+      "sha256": "d349bd98be672c3d10157e921e725fc7fca861374428361ec725a66cfdbc052d",
+      "bytes": 8902,
+      "lines": 180,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.scalarAngularExpansion_seminorm_bound",
+          "theorem",
+          22
+        ],
+        [
+          "ContinuousFlexibility.Analysis.uniformScalarJetSeminormBounds_finite_rectangle",
+          "theorem",
+          101
+        ],
+        [
+          "ContinuousFlexibility.Analysis.uniformScalarJetSeminormBounds_local_joint",
+          "theorem",
+          131
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowSpatialJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowSpatialJets.lean",
+      "blob": "c6ca31d2695bb2d62296370939d81df3d4464fda",
+      "sha256": "1af887ccbc9bef7fff9fafe734e82c27cee50c84069585dd8a894c433aea67b9",
+      "bytes": 9657,
+      "lines": 177,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorFlowStripTower",
+          "def",
+          40
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorFlowStripTower_uniform",
+          "theorem",
+          47
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorFlowStripTower_localUniform",
+          "theorem",
+          55
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorFlowStrip_increment_contDiffOn",
+          "theorem",
+          63
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorFlowStrip_spatial_contDiffOn",
+          "theorem",
+          83
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorFlowStrip_hasDerivAt_radial",
+          "theorem",
+          91
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorFlowStrip_hasDerivAt_angular",
+          "theorem",
+          99
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorFlowStrip_parameterJets_contDiffOn",
+          "theorem",
+          107
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorFlowStrip_parameterJets_mixedDerivative",
+          "theorem",
+          122
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorFlow_radialJointTower",
+          "def",
+          138
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorFlow_radialJointTower_uniform",
+          "theorem",
+          157
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01FlowSpatialJetsStateSMul",
+          "instance",
+          23
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleSingleComponent",
+      "path": "src/ContinuousFlexibility/Analysis/CircleSingleComponent.lean",
+      "blob": "4786e739754095f1f8040e267cfa90cea1ad6a2d",
+      "sha256": "2f21c953e7cb1db71be97a4e62d902fc721d944c03649b46815e6a23006fc568",
+      "bytes": 6292,
+      "lines": 150,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.circleSingleComponentField",
+          "def",
+          21
+        ],
+        [
+          "ContinuousFlexibility.Statements.circleSingleComponentFieldLinear",
+          "def",
+          24
+        ],
+        [
+          "ContinuousFlexibility.Statements.circleSingleComponentField_self",
+          "theorem",
+          36
+        ],
+        [
+          "ContinuousFlexibility.Statements.circleSingleComponentField_ne",
+          "theorem",
+          41
+        ],
+        [
+          "ContinuousFlexibility.Statements.circleSingleComponentField_iteratedDeriv",
+          "theorem",
+          46
+        ],
+        [
+          "ContinuousFlexibility.Statements.circleSingleComponentField_energy",
+          "theorem",
+          56
+        ],
+        [
+          "ContinuousFlexibility.Statements.circleSingleComponentField_member",
+          "theorem",
+          72
+        ],
+        [
+          "ContinuousFlexibility.Statements.circleSingleComponentField_norm_le",
+          "theorem",
+          98
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleSingleComponentJets",
+      "path": "src/ContinuousFlexibility/Analysis/CircleSingleComponentJets.lean",
+      "blob": "c5ac4607fe4e02e706fedb85d9654df5db1c427b",
+      "sha256": "3eeaf806c353402ea4f30264219a7708e43af5dd279e6624e2a2930754753b46",
+      "bytes": 11873,
+      "lines": 250,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.uniformScalarJetSeminormBounds_finite_orders",
+          "theorem",
+          40
+        ],
+        [
+          "ContinuousFlexibility.Statements.singleComponentScalarJets",
+          "def",
+          92
+        ],
+        [
+          "ContinuousFlexibility.Statements.singleComponentScalarJets_apply",
+          "theorem",
+          97
+        ],
+        [
+          "ContinuousFlexibility.Statements.singleComponentScalarJets_iteratedDeriv",
+          "theorem",
+          103
+        ],
+        [
+          "ContinuousFlexibility.Statements.singleComponentScalarJets_member",
+          "theorem",
+          113
+        ],
+        [
+          "ContinuousFlexibility.Statements.singleComponentScalarJets_normBounds",
+          "theorem",
+          124
+        ],
+        [
+          "ContinuousFlexibility.Statements.singleComponentScalarJets_hasDerivAt",
+          "theorem",
+          148
+        ],
+        [
+          "ContinuousFlexibility.Statements.singleComponentScalarJets_secondEnvelopes",
+          "theorem",
+          172
+        ],
+        [
+          "ContinuousFlexibility.Statements.exists_singleComponent_circle_smoothDirections",
+          "theorem",
+          231
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.NormedSmoothDirections",
+      "path": "src/ContinuousFlexibility/Analysis/NormedSmoothDirections.lean",
+      "blob": "7213556bc161330252af55892636608158ecf212",
+      "sha256": "9d72681b37c1b57a44a3d12b3402a838110aa3826cb2e0dea536b38256256b95",
+      "bytes": 5962,
+      "lines": 116,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.normedMultilinearEvalLinear",
+          "def",
+          25
+        ],
+        [
+          "ContinuousFlexibility.Analysis.normedMultilinearEvalLinear_apply",
+          "theorem",
+          32
+        ],
+        [
+          "ContinuousFlexibility.Analysis.contDiffOnJetFamily",
+          "def",
+          35
+        ],
+        [
+          "ContinuousFlexibility.Analysis.contDiffOnJetFamily_continuousOn",
+          "theorem",
+          38
+        ],
+        [
+          "ContinuousFlexibility.Analysis.hasDerivAt_contDiffOnJet_fixed",
+          "theorem",
+          50
+        ],
+        [
+          "ContinuousFlexibility.Analysis.hasProjectiveJetsOn_contDiffOn",
+          "theorem",
+          66
+        ],
+        [
+          "ContinuousFlexibility.Analysis.smoothDirectionsOfContDiffOn",
+          "def",
+          83
+        ],
+        [
+          "ContinuousFlexibility.Analysis.hasProjectiveCurveDerivAt_contDiffOnJet_eval",
+          "theorem",
+          89
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01SingleComponentFlow",
+      "path": "src/ContinuousFlexibility/Analysis/N01SingleComponentFlow.lean",
+      "blob": "73fda03ff2dd73df268be15c9569429eaabd1f0f",
+      "sha256": "53c0456a4801295ad3a213601e995c3d628e080dbad30d819d86ad0a89422720",
+      "bytes": 15781,
+      "lines": 307,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentFlowIncrement_periodic",
+          "theorem",
+          58
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentFlowIncrement_member",
+          "theorem",
+          73
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentFlowIncrementCircle",
+          "def",
+          87
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentFlowIncrementCircle_decode",
+          "theorem",
+          98
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentFlowCircle",
+          "def",
+          108
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentFlowCircle_decode",
+          "theorem",
+          114
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentFlowCircle_affineLift",
+          "theorem",
+          142
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentFlowCircle_positive",
+          "theorem",
+          154
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentFlowInverseCircle",
+          "def",
+          178
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentFlowInverseCircle_decode",
+          "theorem",
+          183
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentFlowIncrementTower",
+          "def",
+          213
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentFlowTower",
+          "def",
+          234
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentFlowInverseTower",
+          "def",
+          263
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusFlow_inverse_radial_angularJointTower",
+          "def",
+          279
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01SingleComponentFlowStateSMul",
+          "instance",
+          22
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations",
+      "path": "src/ContinuousFlexibility/Analysis/CircleSmoothDirectionsOperations.lean",
+      "blob": "da4963869db936865516fc441a28967765a84b2f",
+      "sha256": "e6e6157b0c663b15fbba3ab7b61374ae7ebd52ec7f465cc729d7b3dd9106d743",
+      "bytes": 5371,
+      "lines": 129,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.compLinear",
+          "def",
+          30
+        ],
+        [
+          "ContinuousFlexibility.Statements.smoothDirectionsLinearOn",
+          "def",
+          46
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.compCircle",
+          "def",
+          63
+        ],
+        [
+          "ContinuousFlexibility.Statements.circleProductDirections",
+          "def",
+          83
+        ],
+        [
+          "ContinuousFlexibility.Statements.circleInverseComposeDirections",
+          "def",
+          91
+        ],
+        [
+          "ContinuousFlexibility.Statements.circleInversePerturbationDirections",
+          "def",
+          102
+        ],
+        [
+          "ContinuousFlexibility.Statements.circleDerivativeDirections",
+          "def",
+          111
+        ],
+        [
+          "ContinuousFlexibility.Statements.circleSingletonDirections",
+          "def",
+          116
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01SingleComponentInterpolation",
+      "path": "src/ContinuousFlexibility/Analysis/N01SingleComponentInterpolation.lean",
+      "blob": "02a20ae3324142b01bcbe22836f7cd001ae4d197",
+      "sha256": "12a6b0964ffa7b47c4f0771eff693f4308afe58aa8a391eec709898116d7ac4f",
+      "bytes": 9806,
+      "lines": 186,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentInterpolationCircle",
+          "def",
+          52
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentInterpolationCircle_decode",
+          "theorem",
+          58
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentInterpolationCircle_lift",
+          "theorem",
+          84
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentInterpolationCircle_positive",
+          "theorem",
+          97
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentInterpolationTower",
+          "def",
+          125
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentInterpolationInverseCircle",
+          "def",
+          143
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentInterpolationInverseCircle_decode",
+          "theorem",
+          148
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentInterpolationInverseTower",
+          "def",
+          174
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01SingleComponentInterpolationStateSMul",
+          "instance",
+          19
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnVelocitySpatialTower.lean",
+      "blob": "198e815b49f723edca476ad56ec173040e11edfe",
+      "sha256": "b05abee5a782c5621c8bfae80b66ef323eed66e0476e7d865fd0517757ac623d",
+      "bytes": 24370,
+      "lines": 421,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.velocitySpatial_pair_locallyConvex",
+          "theorem",
+          24
+        ],
+        [
+          "ContinuousFlexibility.Statements.correctionStateRadiusProjection",
+          "def",
+          38
+        ],
+        [
+          "ContinuousFlexibility.Statements.parameterSpatialAssociation",
+          "def",
+          45
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentFlowInverseCompose_decode",
+          "theorem",
+          59
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentInterpolationInverseCompose_decode",
+          "theorem",
+          87
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentFlow_derivative_decode",
+          "theorem",
+          117
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentPulledDisplacementCircle",
+          "def",
+          149
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentPulledDisplacementCircle_decode",
+          "theorem",
+          158
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentInverseSlopeCircle",
+          "def",
+          188
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentInverseSlopeCircle_decode",
+          "theorem",
+          195
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentVelocityCircle",
+          "def",
+          215
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentVelocityCircle_decode",
+          "theorem",
+          225
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentVelocityCircleTower",
+          "def",
+          288
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionVelocity_spatialJointTower",
+          "def",
+          337
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionVelocity_parameterSpatialTower",
+          "def",
+          350
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentVelocityCircleAtResidualTower",
+          "def",
+          361
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionVelocity_actual_spatialJointTower",
+          "def",
+          391
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionVelocity_actual_parameterSpatialTower",
+          "def",
+          407
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01ReturnVelocitySpatialTowerStateSMul",
+          "instance",
+          18
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsSpatialJoint",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsSpatialJoint.lean",
+      "blob": "2f05d4538c68c5d143beb08ffb731044c24fdd14",
+      "sha256": "e7c080258d7133979762bf1693d0e1de41d6bd099c8993cb1104dfad9fb8f555",
+      "bytes": 3838,
+      "lines": 82,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.mixedScalarRadialJointDirections",
+          "def",
+          35
+        ],
+        [
+          "ContinuousFlexibility.Analysis.mixedScalarRadialJointDirections_uniform",
+          "theorem",
+          49
+        ],
+        [
+          "ContinuousFlexibility.Analysis.mixedScalarSpatialJointDirections",
+          "def",
+          66
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CoefficientJointTower",
+      "path": "src/ContinuousFlexibility/Analysis/N01CoefficientJointTower.lean",
+      "blob": "6a73e0d13b39b7cfda04fb0b22208e9c2e44fdb0",
+      "sha256": "082e10476e7067ac5bd8246dbce72aad825019fc196bd45d6191198abdd9b639",
+      "bytes": 4844,
+      "lines": 100,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.N01Properties.negativeComponent_subset_annularOpen",
+          "theorem",
+          35
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.coefficientIncrement_spatialJointTower",
+          "def",
+          41
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.coefficientIncrement_parameterSpatialTower",
+          "def",
+          67
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.originalCoefficient_parameterSpatialTower",
+          "def",
+          77
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01CoefficientJointTowerStateSMul",
+          "instance",
+          21
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsFixedLast",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsFixedLast.lean",
+      "blob": "2ba6c7b1eebaa3e6a466126ffb6f100aad721799",
+      "sha256": "275c9444a2485350e8ab9d98c9c79f617613d7246320b4d8c85d2fa73955cee3",
+      "bytes": 3384,
+      "lines": 85,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.continuous_fin_snoc",
+          "theorem",
+          26
+        ],
+        [
+          "ContinuousFlexibility.Analysis.fixedLastContinuousMultilinear",
+          "def",
+          34
+        ],
+        [
+          "ContinuousFlexibility.Analysis.fixedLastContinuousMultilinear_apply",
+          "theorem",
+          39
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.fixedLast",
+          "def",
+          54
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.fixedLast_apply",
+          "theorem",
+          76
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.fixedLast_eq_cons",
+          "theorem",
+          80
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.JointJetSpatialRegularity",
+      "path": "src/ContinuousFlexibility/Analysis/JointJetSpatialRegularity.lean",
+      "blob": "8121ae30ba3505ef7020d759d0686257bea6fff6",
+      "sha256": "17c9b148bc6658c5acfb75e1b476b73e403d09263d6fe291747aa7ffb27a9dd1",
+      "bytes": 12920,
+      "lines": 249,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.freezeSpatial",
+          "def",
+          28
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.freezeSpatial_apply",
+          "theorem",
+          42
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.pointTower_eq_jointJet",
+          "theorem",
+          49
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.jointJet_spatial_continuousOn",
+          "theorem",
+          57
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.jointJet_spatial_hasDerivAt_fst",
+          "theorem",
+          66
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.jointJet_spatial_hasDerivAt_snd",
+          "theorem",
+          80
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.jointJet_spatial_contDiffOn",
+          "theorem",
+          94
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.jointJet_radialPartial_eq_fixedLast",
+          "theorem",
+          129
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.jointJet_angularPartial_eq_fixedLast",
+          "theorem",
+          147
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.jointJet_mixed_radial_step",
+          "theorem",
+          165
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.jointJet_mixed_angular_step",
+          "theorem",
+          175
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.jointJet_mixed_hasDerivAt_line",
+          "theorem",
+          239
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.JointJetInterpolationBudget",
+      "path": "src/ContinuousFlexibility/Analysis/JointJetInterpolationBudget.lean",
+      "blob": "a0266303fc2962a8db01865e50dcf7424b7c11cd",
+      "sha256": "75c51025c391a2acad3126d55fbb3fd53dfa7add99edf622336caa7913fe026f",
+      "bytes": 9478,
+      "lines": 185,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.interpolation_affine_family_le_common_scale",
+          "theorem",
+          22
+        ],
+        [
+          "ContinuousFlexibility.Statements.finite_affine_family_interpolation_bound",
+          "theorem",
+          58
+        ],
+        [
+          "ContinuousFlexibility.Statements.hasInterpolation_partition_affine_growth",
+          "theorem",
+          110
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsNormedComposition.lean",
+      "blob": "044cabd4f03203951521892a886e54e7eafa3863",
+      "sha256": "f59f35ed991dfdcd1715cd5a9c478f0fb6e0e4e0d6f723925a9bbdbe2d63de2e",
+      "bytes": 5282,
+      "lines": 113,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.HasProjectiveJetsOn.compositionTerm_hasLineDerivAt_contDiff",
+          "theorem",
+          29
+        ],
+        [
+          "ContinuousFlexibility.Analysis.HasProjectiveJetsOn.comp_contDiff",
+          "theorem",
+          54
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.comp_contDiff",
+          "def",
+          92
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.comp_contDiff_apply",
+          "theorem",
+          98
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.mul",
+          "def",
+          107
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WeightedJointComposition",
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointComposition.lean",
+      "blob": "b3a73752bec84738dfc1f85cae1ddad39718e934",
+      "sha256": "7a04fb5661645cbd20a15252deadf05f732c3b84505141c89867f481bafd41b2",
+      "bytes": 7349,
+      "lines": 144,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.UniformWeightedJointGrowth",
+          "def",
+          29
+        ],
+        [
+          "ContinuousFlexibility.Analysis.UniformWeightedJointGrowth.congr",
+          "theorem",
+          39
+        ],
+        [
+          "ContinuousFlexibility.Analysis.UniformWeightedJointGrowth.comp_contDiff",
+          "theorem",
+          55
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MixedJointTameBounds",
+      "path": "src/ContinuousFlexibility/Analysis/MixedJointTameBounds.lean",
+      "blob": "16fdec87b363c2eb4e9dbedda85a5d9a0298f3ac",
+      "sha256": "cf1f48dd90cf5adc2ec6889291a5bb7e50bf1ac76e658c53a564c60dfd995abc",
+      "bytes": 12586,
+      "lines": 245,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.jointJet_unit_bound_of_mixed_parameter_bounds",
+          "theorem",
+          177
+        ],
+        [
+          "ContinuousFlexibility.Analysis.uniformWeightedJointGrowth_of_mixed_parameter_oneHigh",
+          "theorem",
+          193
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01OriginalCoefficientTameBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01OriginalCoefficientTameBounds.lean",
+      "blob": "2882b8f1346b141ca00fc4a465fa14235e0abc57",
+      "sha256": "be33de53e6b62482895e27484fa4812c68b1753446cf385242ec16f589efb03f",
+      "bytes": 12097,
+      "lines": 231,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.N01Properties.reference_coefficient_mixed_uniform_bound",
+          "theorem",
+          65
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorCoefficientTower_uniform_oneHigh",
+          "theorem",
+          83
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.originalComponentCoefficientScalarJet_uniform_oneHigh",
+          "theorem",
+          111
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.originalCoefficient_parameterSpatialTower_parameterJet",
+          "theorem",
+          176
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.originalCoefficient_joint_mixed_uniform_oneHigh",
+          "theorem",
+          197
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01OriginalCoefficientTameBoundsStateSMul",
+          "instance",
+          21
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.PhysicalJetLinearity",
+      "path": "src/ContinuousFlexibility/Analysis/PhysicalJetLinearity.lean",
+      "blob": "1bbe0e760e22a6765f602dbf7115348cb4035b74",
+      "sha256": "5bffdc94f6e2810051395fcb2728819f9592dbd56f21695ad5da1ba16c5ce856",
+      "bytes": 3489,
+      "lines": 80,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.n02n03_mixedDerivative_add_of_contDiff",
+          "theorem",
+          21
+        ],
+        [
+          "ContinuousFlexibility.Statements.weightedPhysicalJet_add",
+          "theorem",
+          34
+        ],
+        [
+          "ContinuousFlexibility.Statements.weightedPhysicalJet_const_mul",
+          "theorem",
+          48
+        ],
+        [
+          "ContinuousFlexibility.Statements.heightWeightedJetLinear",
+          "def",
+          61
+        ],
+        [
+          "ContinuousFlexibility.Statements.heightWeightedJetLinear_apply",
+          "theorem",
+          74
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.JointMixedTameBounds",
+      "path": "src/ContinuousFlexibility/Analysis/JointMixedTameBounds.lean",
+      "blob": "4d8f586b05c130768ef60a244b2325d5c6814444",
+      "sha256": "db2e93c7c91c4b5f9bd41691ec1a6973cecff8a4444b940ff1d237a50c46bf82",
+      "bytes": 12935,
+      "lines": 246,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.mixedJet_unit_bound_of_jointJet",
+          "theorem",
+          110
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.mixedParameterMultilinearMap",
+          "def",
+          147
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.mixedParameterMultilinearMap_apply",
+          "theorem",
+          177
+        ],
+        [
+          "ContinuousFlexibility.Analysis.UniformWeightedJointGrowth.mixed_parameter_oneHigh",
+          "theorem",
+          186
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WeightedJointOperations",
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointOperations.lean",
+      "blob": "33d59355404f7ad98ee177af0ccd0dbafbf136ce",
+      "sha256": "8caae1b11577f110368626ad71e48dd2ad8bd6f011b5e2ddf1710356a05f3993",
+      "bytes": 8016,
+      "lines": 155,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.UniformWeightedJointGrowth.mono",
+          "theorem",
+          29
+        ],
+        [
+          "ContinuousFlexibility.Analysis.UniformWeightedJointGrowth.withWeight",
+          "theorem",
+          46
+        ],
+        [
+          "ContinuousFlexibility.Analysis.UniformWeightedJointGrowth.prodMk",
+          "theorem",
+          56
+        ],
+        [
+          "ContinuousFlexibility.Analysis.UniformWeightedJointGrowth.postLinear",
+          "theorem",
+          87
+        ],
+        [
+          "ContinuousFlexibility.Analysis.UniformWeightedJointGrowth.sub",
+          "theorem",
+          102
+        ],
+        [
+          "ContinuousFlexibility.Analysis.UniformWeightedJointGrowth.comp_smooth_unweighted",
+          "theorem",
+          118
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.PolynomialJetOperations",
+      "path": "src/ContinuousFlexibility/Analysis/PolynomialJetOperations.lean",
+      "blob": "f888ef1e75a21eb881a1a3fb59b4538983582bcd",
+      "sha256": "0c92924ef5b361762cc040738613ff9075f94e7dd3b2c4fd29c5440090a1d999",
+      "bytes": 7958,
+      "lines": 158,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.norm_iteratedFDeriv_linear_of_pos",
+          "theorem",
+          21
+        ],
+        [
+          "ContinuousFlexibility.Analysis.norm_iteratedFDeriv_clm_left_polynomial_bound",
+          "theorem",
+          36
+        ],
+        [
+          "ContinuousFlexibility.Analysis.norm_iteratedFDeriv_add_polynomial_bound",
+          "theorem",
+          58
+        ],
+        [
+          "ContinuousFlexibility.Analysis.norm_iteratedFDeriv_fderiv_apply_polynomial_bound",
+          "theorem",
+          86
+        ],
+        [
+          "ContinuousFlexibility.Analysis.norm_iteratedFDeriv_coordinate_graph_polynomial_bound",
+          "theorem",
+          106
+        ],
+        [
+          "ContinuousFlexibility.Analysis.norm_iteratedFDeriv_scalar_coordinate_polynomial_bound",
+          "theorem",
+          135
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.PolynomialProductOuterJets",
+      "path": "src/ContinuousFlexibility/Analysis/PolynomialProductOuterJets.lean",
+      "blob": "303e9c1574ebf1744c2d88096172c50350766cf8",
+      "sha256": "4ab76aa967dbcc08b01dd0864698e08f48be3a952b1e37464eff858c7e9954ea",
+      "bytes": 3422,
+      "lines": 72,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.norm_iteratedFDeriv_linear_on_polynomial_ball",
+          "theorem",
+          19
+        ],
+        [
+          "ContinuousFlexibility.Analysis.norm_iteratedFDeriv_mul_on_polynomial_ball",
+          "theorem",
+          46
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WeightedJointProducts",
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointProducts.lean",
+      "blob": "a2f03fe0abfaf31ef200ffe22d2ecce8bf3c0028",
+      "sha256": "d6a3c54795c2481294a543b4fe9dc4170cce2741b2718427c76d6112cb74b7c6",
+      "bytes": 3255,
+      "lines": 65,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.UniformWeightedJointGrowth.mul",
+          "theorem",
+          26
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WeightedJointPowers",
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointPowers.lean",
+      "blob": "860ee0b7c683ac5db3d6939f9dc6aa7703698ff3",
+      "sha256": "9108175edde74e2c72c1006f51d4371642d6848496b7571c523617fe289142a1",
+      "bytes": 5068,
+      "lines": 94,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.UniformWeightedJointGrowth.rpow",
+          "theorem",
+          28
+        ],
+        [
+          "ContinuousFlexibility.Analysis.UniformWeightedJointGrowth.sqrt",
+          "theorem",
+          72
+        ],
+        [
+          "ContinuousFlexibility.Analysis.UniformWeightedJointGrowth.inv",
+          "theorem",
+          83
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CharacteristicJointGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/N01CharacteristicJointGrowth.lean",
+      "blob": "b95f6b480dcf1aa6634d4591b24ae2125b645f9a",
+      "sha256": "41b21de7ebdb4b635f1b2b83657884713a0d3ca13b98c2ef69c64f6d09e3c30b",
+      "bytes": 24803,
+      "lines": 435,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.N01Properties.originalCoefficient_stripTower",
+          "def",
+          156
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.originalCoefficient_stripTower_apply",
+          "theorem",
+          169
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.originalCoefficient_strip_joint_growth",
+          "theorem",
+          179
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusCharacteristicSpeed_stripTower",
+          "def",
+          299
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusCharacteristicSpeed_strip_joint_growth",
+          "theorem",
+          320
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.exists_minusCharacteristicSpeed_strip_joint_growth",
+          "theorem",
+          397
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01CharacteristicJointGrowthStateSMul",
+          "instance",
+          145
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialMixedMultiplier",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialMixedMultiplier.lean",
+      "blob": "213487b477c949ef884046d17d08b6a069e46c08",
+      "sha256": "ba2c6dd7cae2824263259182761fcb5ca357571278e08aaa308b8c5f3b3e7f4c",
+      "bytes": 6298,
+      "lines": 134,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.mixedDerivative_mul",
+          "theorem",
+          29
+        ],
+        [
+          "ContinuousFlexibility.Statements.weighted_mixedDerivative_mul",
+          "theorem",
+          70
+        ],
+        [
+          "ContinuousFlexibility.Statements.memLp_weighted_product_of_power_bound",
+          "theorem",
+          97
+        ],
+        [
+          "ContinuousFlexibility.Statements.memLp_weighted_mixed_product",
+          "theorem",
+          110
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus",
+      "path": "src/ContinuousFlexibility/Analysis/JointMixedDiagonalCalculus.lean",
+      "blob": "030159292b3d6ecfffb207ffb7f515c8b07f78aa",
+      "sha256": "fdb7dd2f331e36b1e50679a50e972ffb7891aa7742221447eb25a9f04feb4b40",
+      "bytes": 14842,
+      "lines": 295,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.mixedDerivative_mul_on_open",
+          "theorem",
+          25
+        ],
+        [
+          "ContinuousFlexibility.Analysis.jointMixedDiagonal",
+          "def",
+          91
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.spatial_value_contDiffOn",
+          "theorem",
+          95
+        ],
+        [
+          "ContinuousFlexibility.Analysis.jointMixedDiagonal_zero",
+          "theorem",
+          102
+        ],
+        [
+          "ContinuousFlexibility.Analysis.jointMixedDiagonal_hasDerivAt_line",
+          "theorem",
+          112
+        ],
+        [
+          "ContinuousFlexibility.Analysis.jointMixedDiagonal_line_contDiffOn",
+          "theorem",
+          127
+        ],
+        [
+          "ContinuousFlexibility.Analysis.jointMixedDiagonal_eq_iteratedDeriv",
+          "theorem",
+          166
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.mixed_actual_line_contDiffOn",
+          "theorem",
+          189
+        ],
+        [
+          "ContinuousFlexibility.Analysis.jointMixedDiagonal_congr",
+          "theorem",
+          199
+        ],
+        [
+          "ContinuousFlexibility.Analysis.jointMixedDiagonal_mul",
+          "theorem",
+          213
+        ],
+        [
+          "ContinuousFlexibility.Analysis.jointMixedDiagonal_radial_step",
+          "theorem",
+          281
+        ],
+        [
+          "ContinuousFlexibility.Analysis.jointMixedDiagonal_angular_step",
+          "theorem",
+          288
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.JointMixedCircleEvaluation",
+      "path": "src/ContinuousFlexibility/Analysis/JointMixedCircleEvaluation.lean",
+      "blob": "4b8ce57628201fdef1d3924ac0b1173bb1d29e9d",
+      "sha256": "f84887a8589a3fae2675346ae085c1694e9f3e4af4e22a89d67cc9e6968a9a18",
+      "bytes": 7053,
+      "lines": 138,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.jointJet_eq_circleDecoded",
+          "theorem",
+          28
+        ],
+        [
+          "ContinuousFlexibility.Analysis.jointMixedDiagonal_eq_circleAngularJet",
+          "theorem",
+          48
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.jointJet_eq_circleDecoded_add_const",
+          "theorem",
+          65
+        ],
+        [
+          "ContinuousFlexibility.Analysis.jointMixedDiagonal_eq_circleAngularJet_add_const",
+          "theorem",
+          120
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleUniformAngularInterpolation",
+      "path": "src/ContinuousFlexibility/Analysis/CircleUniformAngularInterpolation.lean",
+      "blob": "466d286aa4f7b0ae51682ec163bbb2491f6ff7c0",
+      "sha256": "ad7ff2d938634dc60a41defdaa81dbdef82e5ef043fb97154c9b15f54c6e8733",
+      "bytes": 9471,
+      "lines": 192,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.hasInterpolation_spatial_affine_rpow_bound",
+          "theorem",
+          27
+        ],
+        [
+          "ContinuousFlexibility.Analysis.UniformFamilyJetBounds.diagonal_spatial_interpolation",
+          "theorem",
+          77
+        ],
+        [
+          "ContinuousFlexibility.Analysis.UniformFamilyJetBounds.circle_diagonal_angular_interpolation",
+          "theorem",
+          171
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleStripAngularInterpolation",
+      "path": "src/ContinuousFlexibility/Analysis/CircleStripAngularInterpolation.lean",
+      "blob": "f50cc35b6834effabd3138841b58c3cbedcc2064",
+      "sha256": "f3d74ab93c568f463201e75de897cde99146602a44c4e80a8a9bb1c0be27cc88",
+      "bytes": 6501,
+      "lines": 133,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.UniformSmoothFamilyOn.realized_strip_angular_interpolation",
+          "theorem",
+          29
+        ],
+        [
+          "ContinuousFlexibility.Analysis.UniformSmoothFamilyOn.realized_strip_angular_interpolation_add_const",
+          "theorem",
+          65
+        ],
+        [
+          "ContinuousFlexibility.Analysis.common_spatial_scale_mono",
+          "theorem",
+          120
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnInterpolationJetBounds",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnInterpolationJetBounds.lean",
+      "blob": "f3e8b6134ae25a0316f4a4173f4856d3baf88028",
+      "sha256": "1eff1ee33bb9e2747b635e0d4ca3ce015029c309aed963f0dae6eb9502626f0b",
+      "bytes": 6884,
+      "lines": 136,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.returnInterpolation_contDiff",
+          "theorem",
+          21
+        ],
+        [
+          "ContinuousFlexibility.Analysis.returnInterpolation_deriv_bounds",
+          "theorem",
+          25
+        ],
+        [
+          "ContinuousFlexibility.Analysis.returnInterpolation_positive_jets_uniform",
+          "theorem",
+          36
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnInterpolation_inverse_positive_jets_uniform",
+          "theorem",
+          74
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.exists_uniform_interpolation_inverse_jets",
+          "theorem",
+          114
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnVelocityUniformBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnVelocityUniformBounds.lean",
+      "blob": "6a54e8cd9550b1e8d18e27069161bd1d80fc8fe2",
+      "sha256": "d166edeb5c1c0f9d3de327a381413c4bcaa9507e5e05c77d205243c24bb5303c",
+      "bytes": 21829,
+      "lines": 362,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.N01Properties.uniformSmoothFamilyOn_returnCorrectionDisplacementCircleLinear",
+          "theorem",
+          34
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.uniformSmoothFamilyOn_interpolationSelectorCircle",
+          "theorem",
+          65
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.interpolationSelectorCircle_uniform_lower",
+          "theorem",
+          100
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.uniformSmoothFamilyOn_selectorInverseSlopeCircle",
+          "theorem",
+          122
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.uniformSmoothFamilyOn_returnCorrectionPulledDisplacementCircleLinear",
+          "theorem",
+          141
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.uniformSmoothFamilyOn_returnCorrectionPulledResidualCircle",
+          "theorem",
+          174
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.selectorInverseSlopeCircle_uniformFamilyJetBounds",
+          "theorem",
+          217
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionPulledDisplacementCircleLinear_uniformFamilyJetBounds",
+          "theorem",
+          226
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionPulledResidualCircle_uniformFamilyJetBounds",
+          "theorem",
+          241
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.uniformSmoothFamilyOn_returnCorrectionVelocityCircleLinear",
+          "theorem",
+          254
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionVelocity_uniform_oneHigh",
+          "theorem",
+          310
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01ReturnVelocityUniformBoundsStateSMul",
+          "instance",
+          21
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ResidualUniformBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01ResidualUniformBounds.lean",
+      "blob": "278da0d7202d16c0fceb30d4f63421b47061641d",
+      "sha256": "034099ca8fc6162f801012223aa784b9f2481f1752be5c787c55ea47209e8ebd",
+      "bytes": 4049,
+      "lines": 82,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.N01Properties.sectorReturnResidualCircle_eq_of_N02",
+          "theorem",
+          29
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.uniformSmoothFamilyOn_returnResidual_of_N02",
+          "theorem",
+          46
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.uniformSmoothFamilyOn_returnCorrectionPulledResidual_of_N02",
+          "theorem",
+          54
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionPulledResidual_uniformFamilyJetBounds_of_N02",
+          "theorem",
+          70
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01ResidualUniformBoundsStateSMul",
+          "instance",
+          19
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionTransportEquations",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionTransportEquations.lean",
+      "blob": "b754185bc3b33feb33962fb753edf8ffa17d53f9",
+      "sha256": "2bb457d53c4479e06e9fc3487f744659803e7bb2cca5b2fcc2a234f0c03421c5",
+      "bytes": 15388,
+      "lines": 273,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.returnFlowInverseSlope",
+          "def",
+          31
+        ],
+        [
+          "ContinuousFlexibility.Statements.returnCorrectionPulledDisplacementLinear",
+          "def",
+          37
+        ],
+        [
+          "ContinuousFlexibility.Statements.returnCorrectionVelocityLinear_eq_transportProduct",
+          "theorem",
+          44
+        ],
+        [
+          "ContinuousFlexibility.Statements.returnFlowInverseSlope_on_flow",
+          "theorem",
+          55
+        ],
+        [
+          "ContinuousFlexibility.Statements.returnCorrectionPulledDisplacementLinear_on_flow",
+          "theorem",
+          64
+        ],
+        [
+          "ContinuousFlexibility.Statements.scalar_transport_identity_of_curve",
+          "theorem",
+          83
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusFlow_slice_bijective",
+          "theorem",
+          101
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnInterpolation_slice_bijective",
+          "theorem",
+          126
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnFlowInverseSlope_contDiffAt_one",
+          "theorem",
+          138
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionPulledDisplacementLinear_contDiffAt_one",
+          "theorem",
+          146
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnFlowInverseSlope_transport",
+          "theorem",
+          168
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnFlowInverseSlope_transport_of_discriminant",
+          "theorem",
+          196
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionPulledDisplacementLinear_transport",
+          "theorem",
+          217
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionPulledDisplacementLinear_transport_actual",
+          "theorem",
+          249
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.returnCorrectionTransportEquationsRealNormedSpace",
+          "instance",
+          27
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnTransportSpatialTowers",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnTransportSpatialTowers.lean",
+      "blob": "5d344f47513c29824570e8e2a2da836b4166cc67",
+      "sha256": "3013d2f1421068192eebda00f6e2d1bc131af0c9f5deba1ab75d0a5a8f4b33a0",
+      "bytes": 12866,
+      "lines": 239,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.fstParameter",
+          "def",
+          26
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentInverseSlopeCircleTower",
+          "def",
+          66
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnFlowInverseSlope_parameterSpatialTower",
+          "def",
+          119
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentPulledDisplacementCircleTower",
+          "def",
+          130
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionPulledDisplacement_parameterSpatialTower",
+          "def",
+          169
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.singleComponentPulledResidualCircleTower",
+          "def",
+          188
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionPulledResidual_parameterSpatialTower",
+          "def",
+          219
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01ReturnTransportSpatialTowersStateSMul",
+          "instance",
+          52
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01TransportAngularInterpolation",
+      "path": "src/ContinuousFlexibility/Analysis/N01TransportAngularInterpolation.lean",
+      "blob": "33e32a0bd6706814d68eacac0eda98bdf1232735",
+      "sha256": "57dc5e67c0e5f656159cd2b4f6603e41a61184667eb778befbba7d393c50cf18",
+      "bytes": 15641,
+      "lines": 275,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.correctionParameterGrading_monotone",
+          "theorem",
+          26
+        ],
+        [
+          "ContinuousFlexibility.Statements.correctionParameterGrading_hasInterpolation",
+          "theorem",
+          33
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.closedRadiusSelector_cover",
+          "theorem",
+          105
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionPulledDisplacement_angular_diagonal_interpolation",
+          "theorem",
+          129
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnFlowInverseSlope_angular_diagonal_interpolation",
+          "theorem",
+          160
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionPulledResidual_angular_diagonal_interpolation",
+          "theorem",
+          215
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01TransportAngularInterpolationStateSMul",
+          "instance",
+          23
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WeightedJointMixedInterpolation",
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointMixedInterpolation.lean",
+      "blob": "64a01fe0496cce318f88950cb05d103165f0c2b3",
+      "sha256": "5dda69f03b83426456b8c1ca085347d9ba27ac78c42f23ba56849d339c07bf70",
+      "bytes": 4108,
+      "lines": 87,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.UniformWeightedJointGrowth.mixed_diagonal_spatial_interpolation",
+          "theorem",
+          29
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01TransportCharacteristicInterpolation",
+      "path": "src/ContinuousFlexibility/Analysis/N01TransportCharacteristicInterpolation.lean",
+      "blob": "2b7d3e0c73a3536dc1a57fac7fbd2b679db3b305",
+      "sha256": "8455f008bb216b77bcbfb9695e2378c04f466a6e67ce351d1dc6064148d0a556",
+      "bytes": 13443,
+      "lines": 247,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.fstParameter_apply",
+          "theorem",
+          32
+        ],
+        [
+          "ContinuousFlexibility.Analysis.UniformWeightedJointGrowth.fstParameter",
+          "theorem",
+          62
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusCharacteristicSpeed_correction_joint_growth",
+          "theorem",
+          103
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.minusCharacteristicSpeed_correction_mixed_interpolation",
+          "theorem",
+          169
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01TransportCharacteristicInterpolationStateSMul",
+          "instance",
+          95
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SourceMixedOrderInterpolation",
+      "path": "src/ContinuousFlexibility/Analysis/SourceMixedOrderInterpolation.lean",
+      "blob": "55ee1af198959ce9f705ad1db90135f4f71fa5b4",
+      "sha256": "0975c94429039f21b8ccda2fb1a4bb1a71ff584cb2882277423b533369841196",
+      "bytes": 7933,
+      "lines": 166,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.hasInterpolation_oneHigh_height_local_growth",
+          "theorem",
+          72
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MixedAffineInterpolation",
+      "path": "src/ContinuousFlexibility/Analysis/MixedAffineInterpolation.lean",
+      "blob": "3be65351521c609fbe1324a39d6bf2e680a38960",
+      "sha256": "6bfe8bdb8f533122c27b0af2fb4acf4b9f77c4b46f9e91b568d71d18eb8387fe",
+      "bytes": 4275,
+      "lines": 95,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.hasInterpolation_affine_mixed_product",
+          "theorem",
+          21
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsPermutationSymmetry",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsPermutationSymmetry.lean",
+      "blob": "957a0efcc4821f355b8e18d706e1658527dbebeb",
+      "sha256": "da173d1afc8c43e6701f4e4405a32d6738ad642c3471adf69fc28e1d08b36f70",
+      "bytes": 5032,
+      "lines": 118,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.comp_perm",
+          "theorem",
+          86
+        ],
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.domDomCongr_eq",
+          "theorem",
+          112
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MixedParameterSymmetry",
+      "path": "src/ContinuousFlexibility/Analysis/MixedParameterSymmetry.lean",
+      "blob": "00634b89291e95f58c8683536d0ef2e21dd7c87b",
+      "sha256": "9493435eb9c131679dead32e57a44fe49187e384e433094d6e3b68724e00a2ff",
+      "bytes": 1576,
+      "lines": 37,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.mixedParameterMultilinearMap_comp_perm",
+          "theorem",
+          24
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SymmetricMultilinearDiagonalBounds",
+      "path": "src/ContinuousFlexibility/Analysis/SymmetricMultilinearDiagonalBounds.lean",
+      "blob": "58ebd2b7e3230a74639447e9dd9067b34e3e1ccf",
+      "sha256": "827198c269cb210b6d3558d98dc0ae09b99dbb4b1df9b30b80e0008c454e4071",
+      "bytes": 13274,
+      "lines": 271,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.exists_symmetric_diagonal_unit_bound",
+          "theorem",
+          117
+        ],
+        [
+          "ContinuousFlexibility.Analysis.exists_symmetric_multilinear_diagonal_affine_bound",
+          "theorem",
+          194
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.FlatMixedDiagonalGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/FlatMixedDiagonalGrowth.lean",
+      "blob": "53445f04d508d5ca67203d0ac6c454474ff101f0",
+      "sha256": "609200ff4defa708d53afab5de2e45bd728994e26a7f9242fb9cb2bceff4d2c8",
+      "bytes": 12533,
+      "lines": 254,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.FlatMixedDiagonalGrowth",
+          "def",
+          27
+        ],
+        [
+          "ContinuousFlexibility.Analysis.FlatMixedDiagonalGrowth.mono",
+          "theorem",
+          38
+        ],
+        [
+          "ContinuousFlexibility.Analysis.FlatMixedDiagonalGrowth.congr",
+          "theorem",
+          57
+        ],
+        [
+          "ContinuousFlexibility.Analysis.FlatMixedDiagonalGrowth.spatial_orders",
+          "theorem",
+          73
+        ],
+        [
+          "ContinuousFlexibility.Analysis.FlatMixedDiagonalGrowth.mul",
+          "theorem",
+          181
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.FlatMixedDiagonalRealization",
+      "path": "src/ContinuousFlexibility/Analysis/FlatMixedDiagonalRealization.lean",
+      "blob": "1da9bab60d0fdd894ced751d9a31564e4d250b69",
+      "sha256": "e3014fcd7fbddfb6d2fcd0222cd53fcb40e7610d1e34c7fb8a1443642c096cc8",
+      "bytes": 9264,
+      "lines": 186,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.HasFlatMixedTameGrowth",
+          "def",
+          24
+        ],
+        [
+          "ContinuousFlexibility.Analysis.HasFlatMixedTameGrowth.of_each_diagonal_order",
+          "theorem",
+          30
+        ],
+        [
+          "ContinuousFlexibility.Analysis.HasFlatMixedTameGrowth.of_mixed_oneHigh",
+          "theorem",
+          74
+        ],
+        [
+          "ContinuousFlexibility.Analysis.UniformWeightedJointGrowth.hasFlatMixedTameGrowth",
+          "theorem",
+          113
+        ],
+        [
+          "ContinuousFlexibility.Analysis.HasFlatMixedTameGrowth.mul",
+          "theorem",
+          127
+        ],
+        [
+          "ContinuousFlexibility.Analysis.FlatMixedDiagonalGrowth.mixed_oneHigh",
+          "theorem",
+          149
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionOriginalFactorGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/N01CorrectionOriginalFactorGrowth.lean",
+      "blob": "b2f808debd71d6868c647c3f5ec377043a6e2277",
+      "sha256": "c42fad843f7218d84091f3b9a28e0b9496fb30a393c07e1d1bfdcc8ec98e8bd5",
+      "bytes": 21090,
+      "lines": 377,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.N01Properties.originalCorrectionFactors_flat_mixed_growth",
+          "theorem",
+          267
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01CorrectionOriginalFactorGrowthStateSMul",
+          "instance",
+          18
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnVelocityAtResidual",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnVelocityAtResidual.lean",
+      "blob": "884054c0aa15df1491dbf782abc7f885ffb1bb5e",
+      "sha256": "b1499e6300ee579a1cc87245175377151598420729958576513f350264ccc4e8",
+      "bytes": 5199,
+      "lines": 104,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.N01Properties.smoothTameOn_returnCorrectionVelocity_at_residual",
+          "theorem",
+          35
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionVelocity_pointTower",
+          "def",
+          77
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionVelocity_actual_pointTower",
+          "def",
+          90
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01ReturnVelocityAtResidualStateSMul",
+          "instance",
+          18
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientAlgebra",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionCoefficientAlgebra.lean",
+      "blob": "41dd4922d94f13beb477e83f7589c84d920c5d83",
+      "sha256": "b58944d654a363116998bd6459717e41d2f5d41bc7624b1081bd6be888a96ab3",
+      "bytes": 2499,
+      "lines": 61,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.returnCoefficientError_cancel_denominators",
+          "theorem",
+          20
+        ],
+        [
+          "ContinuousFlexibility.Statements.returnCorrectionLocalCoefficientError_cancel_denominators",
+          "theorem",
+          40
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientJetSymmetry",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionCoefficientJetSymmetry.lean",
+      "blob": "9b908a7168f53b9e2cf0dada1bcabcc7d0cde622",
+      "sha256": "52cde2dd364c38aa7aa18b298c8876c05a9910bc34e4cc10cb675b0291e4716c",
+      "bytes": 3920,
+      "lines": 91,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.jets_eq_of_postcomp",
+          "theorem",
+          31
+        ],
+        [
+          "ContinuousFlexibility.Statements.returnCoefficientReflectionLinear",
+          "def",
+          42
+        ],
+        [
+          "ContinuousFlexibility.Statements.returnCoefficientReflectionLinear_apply",
+          "theorem",
+          45
+        ],
+        [
+          "ContinuousFlexibility.Statements.returnCorrectionCoefficientError_jets_reflection",
+          "theorem",
+          55
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionCoefficientError_jets_periodic",
+          "theorem",
+          72
+        ]
+      ],
+      "named_local": []
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionCoefficientPointTower",
+      "path": "src/ContinuousFlexibility/Analysis/N01CorrectionCoefficientPointTower.lean",
+      "blob": "815e3f796bf7a67ae7665483fd590ccb360ea407",
+      "sha256": "dec94fbbdc992978f31809f7e5e1e463f8e059278ffcf379c052c063a8659994",
+      "bytes": 14260,
+      "lines": 258,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.SmoothDirections.fstProduct",
+          "def",
+          36
+        ],
+        [
+          "ContinuousFlexibility.Statements.reflectedVelocityDirections",
+          "def",
+          46
+        ],
+        [
+          "ContinuousFlexibility.Statements.coefficientPolynomialDirections",
+          "def",
+          56
+        ],
+        [
+          "ContinuousFlexibility.Statements.coefficientPolynomialSqrtDirections",
+          "def",
+          75
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionLocalCoefficient_pointTower",
+          "def",
+          219
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionCoefficient_pointTower",
+          "def",
+          232
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01CorrectionCoefficientPointTowerStateSMul",
+          "instance",
+          97
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionCoefficientJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01CorrectionCoefficientJets.lean",
+      "blob": "fa1b42341d5a03065633dacd0cd1b0f65c3592a2",
+      "sha256": "9ec0ba2ed25a8795adbbcbe09d47d287b1461700f01b1bf9dbad6bcae0ab51b1",
+      "bytes": 11463,
+      "lines": 202,
+      "public": [
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionCoefficientScalarJets",
+          "def",
+          82
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionCoefficientScalarJets_apply",
+          "theorem",
+          90
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionCoefficientScalarJets_zero",
+          "theorem",
+          97
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionCoefficientScalarJets_hasDerivAt",
+          "theorem",
+          107
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionCoefficientScalarJets_reflection",
+          "theorem",
+          130
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionCoefficientScalarJets_periodic",
+          "theorem",
+          163
+        ]
+      ],
+      "named_local": [
+        [
+          "ContinuousFlexibility.Statements.n01CorrectionCoefficientJetsStateSMul",
+          "instance",
+          21
+        ],
+        [
+          "ContinuousFlexibility.Statements.n01CorrectionCoefficientJetsParameterSMul",
+          "instance",
+          24
+        ]
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionComponentIntegral",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionComponentIntegral.lean",
+      "blob": "f9dde282e02c689b3653b9513e686c449737e6d5",
+      "sha256": "a04124c3c19fd5d98d93fddeee23464108f4adeedd0fd991dd78a376568a41c5",
+      "bytes": 7724,
+      "lines": 157,
+      "public": [
+        [
+          "ContinuousFlexibility.Analysis.intervalIntegral_eq_zero_of_disjoint_components",
+          "theorem",
+          27
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionResidualErrorField_componentIntegral_eq_zero",
+          "theorem",
+          75
+        ],
+        [
+          "ContinuousFlexibility.Statements.N01Properties.returnCorrectionResidualErrorField_sourceIntegral_eq_zero_of_collar",
+          "theorem",
+          140
+        ]
+      ],
+      "named_local": []
+    }
+  ],
+  "named_local_69": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionCoefficientJointTower",
+      "blob": "b215031ce9d0a257025556376fc1244c578542c2",
+      "name": "ContinuousFlexibility.Statements.n01CorrectionCoefficientJointTowerStateSMul",
+      "kind": "instance",
+      "line": 19
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionCoefficientStripJets",
+      "blob": "d9aca860c03222833d9fe132ab262f5398681fe2",
+      "name": "ContinuousFlexibility.Statements.n01CorrectionCoefficientStripJetsStateSMul",
+      "kind": "instance",
+      "line": 19
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionCoefficientStripJets",
+      "blob": "d9aca860c03222833d9fe132ab262f5398681fe2",
+      "name": "ContinuousFlexibility.Statements.n01CorrectionCoefficientStripJetsParameterSMul",
+      "kind": "instance",
+      "line": 22
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionCoefficientSpatialJets",
+      "blob": "f8235b7fb3f57aa389ade479a65ebc0b084c3f4a",
+      "name": "ContinuousFlexibility.Statements.n01CorrectionCoefficientSpatialJetsStateSMul",
+      "kind": "instance",
+      "line": 19
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionCoefficientSpatialJets",
+      "blob": "f8235b7fb3f57aa389ade479a65ebc0b084c3f4a",
+      "name": "ContinuousFlexibility.Statements.n01CorrectionCoefficientSpatialJetsParameterSMul",
+      "kind": "instance",
+      "line": 21
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionCoefficientSpatialJets",
+      "blob": "f8235b7fb3f57aa389ade479a65ebc0b084c3f4a",
+      "name": "ContinuousFlexibility.Statements.n01CorrectionCoefficientSpatialJetsRealNormedSpace",
+      "kind": "instance",
+      "line": 23
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnDivergenceBilinear",
+      "blob": "767b474ebdd93eca837d1d069ae08bb860ce5763",
+      "name": "ContinuousFlexibility.Statements.returnDivergenceBilinearRealNormedSpace",
+      "kind": "instance",
+      "line": 23
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionCoefficientSourceData",
+      "blob": "601308bc32f34763420107453d34c375932bc9bb",
+      "name": "ContinuousFlexibility.Statements.n01CorrectionCoefficientSourceDataStateSMul",
+      "kind": "instance",
+      "line": 17
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.PhysicalTaylorDifferentiation",
+      "blob": "f3c06220c7c32655cd88d2cdcb7f54e617e6de13",
+      "name": "ContinuousFlexibility.Statements.physicalTaylorDifferentiationRealNormedSpace",
+      "kind": "instance",
+      "line": 23
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionCoefficientSmoothJets",
+      "blob": "ae025b91ed66c17a0059ab65e9f04fea8dded8d0",
+      "name": "ContinuousFlexibility.Statements.n01CorrectionCoefficientSmoothJetsStateSMul",
+      "kind": "instance",
+      "line": 19
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionCoefficientSmoothJets",
+      "blob": "ae025b91ed66c17a0059ab65e9f04fea8dded8d0",
+      "name": "ContinuousFlexibility.Statements.n01CorrectionCoefficientSmoothJetsParameterSMul",
+      "kind": "instance",
+      "line": 21
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionCoefficientFlatBounds",
+      "blob": "a18f1bf1b9fa22f0e57806c380178b644be0cae8",
+      "name": "ContinuousFlexibility.Statements.n01CorrectionCoefficientFlatBoundsStateSMul",
+      "kind": "instance",
+      "line": 144
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionCoefficientTameTransfer",
+      "blob": "eb568bed8832e7f686c005888dc8e3a5efdc7966",
+      "name": "ContinuousFlexibility.Statements.n01CorrectionCoefficientTameTransferStateSMul",
+      "kind": "instance",
+      "line": 19
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionCoefficientPolynomialGrowth",
+      "blob": "a0f627cbed5adf74789efc5627f80cac0a4e50bd",
+      "name": "ContinuousFlexibility.Statements.n01CorrectionCoefficientPolynomialGrowthStateSMul",
+      "kind": "instance",
+      "line": 19
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionCoefficientPolynomialGrowth",
+      "blob": "a0f627cbed5adf74789efc5627f80cac0a4e50bd",
+      "name": "ContinuousFlexibility.Statements.n01CorrectionCoefficientPolynomialGrowthSectorSMul",
+      "kind": "instance",
+      "line": 22
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionCoefficientPolynomialGrowth",
+      "blob": "a0f627cbed5adf74789efc5627f80cac0a4e50bd",
+      "name": "ContinuousFlexibility.Statements.n01CorrectionCoefficientPolynomialGrowthParameterSMul",
+      "kind": "instance",
+      "line": 25
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnTransportRecurrences",
+      "blob": "c7392c229a019eeef398b8338edca3218d62ef15",
+      "name": "ContinuousFlexibility.Statements.n01ReturnTransportRecurrencesStateSMul",
+      "kind": "instance",
+      "line": 23
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01TransportVelocityMixedGrowth",
+      "blob": "55ce14f7eb28990cfb2faf19ff844ec3957607e7",
+      "name": "ContinuousFlexibility.Statements.n01TransportVelocityMixedGrowthStateSMul",
+      "kind": "instance",
+      "line": 306
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01TransportVelocityMixedGrowth",
+      "blob": "55ce14f7eb28990cfb2faf19ff844ec3957607e7",
+      "name": "ContinuousFlexibility.Statements.n01TransportVelocityMixedGrowthParameterSMul",
+      "kind": "instance",
+      "line": 308
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionCoefficientMaterialTame",
+      "blob": "47472e7230e3282cb752e854bafee64394f4f64c",
+      "name": "ContinuousFlexibility.Statements.n01CorrectionCoefficientMaterialTameStateSMul",
+      "kind": "instance",
+      "line": 19
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N03SourceFromCoefficientJets",
+      "blob": "7d6732eea01082eac00a99b215183b146dd7302c",
+      "name": "ContinuousFlexibility.Statements.n03SourceFromCoefficientJetsStateSMul",
+      "kind": "instance",
+      "line": 22
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N03SourceFromCoefficientJets",
+      "blob": "7d6732eea01082eac00a99b215183b146dd7302c",
+      "name": "ContinuousFlexibility.Statements.n03SourceFromCoefficientJetsParameterSMul",
+      "kind": "instance",
+      "line": 25
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N03SourceFromActualCoefficientJets",
+      "blob": "afbf9d047431c015d3eed456bb6d92496f893fd9",
+      "name": "ContinuousFlexibility.Statements.n03SourceFromActualCoefficientJetsStateSMul",
+      "kind": "instance",
+      "line": 19
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionUniformNeighborhood",
+      "blob": "d93ffb039a87de62f1e5130351da1e974c43114c",
+      "name": "ContinuousFlexibility.Statements.returnCorrectionUniformNeighborhoodStateSMul",
+      "kind": "instance",
+      "line": 22
+    }
+  ],
+  "result": {
+    "a_files": 79,
+    "b_files": 69,
+    "a_public": 420,
+    "b_public": 365,
+    "a_named_local": 28,
+    "b_named_local": 24,
+    "a_including_named_locals_duplicates": [],
+    "b_including_named_locals_duplicates": [],
+    "cross_including_locals": []
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "schema": "n04-independent-configuration-repair-review-v1",
+  "proposed_backup_path": "audit/recovery/reviews/CI188CircleShiftedForwardConfigurationIndependentReview.json",
+  "reviewer": "audit_coordinates",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "status": "PASS exact configuration-only static review; successor CI remains required",
+  "candidate": {
+    "manifest_blob": "17d98d65d11a8e67b4e21d629d3ec2cfc453cfbb",
+    "manifest_sha256": "41c0929711dbb46bfc9a260bfad233ed5173aa3f5f8ac53ea2cd9d4873d56afd",
+    "source_blob": "ca502cf54c23cb25d348088fe061b3fb7403a7c5",
+    "source_sha256": "fcc0b9a0ece4227feca8028f026035fb8634a41c2bcb275f07e7b4f9aa666877",
+    "utf8_bytes": 12012,
+    "lines": 213
+  },
+  "preimage": {
+    "head": "795cc520c075a91e56e14a92ee826479c15c168d",
+    "tree": "b18c521c94c2630bfb9694d85a64401bbf432379",
+    "source_blob": "e81998dd165a9b3ab67d527e1e3fc33f12d70765",
+    "source_sha256": "dbaec99c20613aba1590ffe730c4abdd971064ce968fa834a117a71d66be105d",
+    "read_actual_path": true,
+    "prior_review_blob": "89495ddfd683902260aca85e3b94e65a56dc537b",
+    "ci188": "failure; previous dependent-alpha mismatch absent, four complete default-200000 timeout blocks remain"
+  },
+  "patch": {
+    "blob": "0cc38c7500c13483c3a33d02279a149da62cc0ae",
+    "sha256": "ff509d04ef3a8699961f3383062a9fb26dab2ef94add6af1f34a7eb4b71d8d76",
+    "hunks": 1,
+    "added": 2,
+    "deleted": 2,
+    "net": 0,
+    "standard_patch_forward_reverse_exact": true,
+    "only_delta": "Replace the two blank lines after namespace and after open scoped with the two stated options. All other bytes unchanged."
+  },
+  "reviewed": {
+    "complete_before_and_after_source": true,
+    "complete_four_diagnostics_blob": "cb358a3f81fb80c6997eb2f093db7027aaf28db4",
+    "diagnostics_sha256": "ab9dd2ff43025330677dc0f4a72378dac93a61b67e8a44a80d72ca1cde23f42e",
+    "manifest_all_source_patch_rule_diagnostic_hashes_match": true,
+    "public_headers": [
+      {
+        "name": "circleShiftedChartCompose_orderedJet_eq_kernel",
+        "sha256": "913ba8c51f556820b0f9e50082d34d46c753b95e17cf9a249ff7917546d718cb",
+        "full_header_byte_unchanged": true
+      },
+      {
+        "name": "circleShiftedChartCompose_orderedJets_fixedBase_bound",
+        "sha256": "c37560a6bae45406930471adb60fd3fb9faf6965d44b19b74403c5f8e4bdc6d0",
+        "full_header_byte_unchanged": true
+      }
+    ],
+    "all_private_headers_proofs_constants_binders_imports_byte_unchanged": true,
+    "actual_generic_provider": {
+      "blob": "14ad46cae7d92dca46f5efd006f5260873046713",
+      "sha256": "5f19c405b830b56e9ad43319b2e9b306af3a27d840167fc29d592e9b9edaec56",
+      "exact_actual188_path_read": true,
+      "option_at_line21": "set_option backward.isDefEq.respectTransparency false"
+    }
+  },
+  "configuration": [
+    {
+      "name": "backward.isDefEq.respectTransparency",
+      "value": false,
+      "line": 17,
+      "supported": "Pinned Lean ExprDefEq.lean registers this Bool with default true at line47. False selects the existing compatibility transparency path for implicit argument comparison; respectTransparencyAtTypes also becomes false. This is an elaboration transparency policy, not a resource limit or new logical assumption."
+    },
+    {
+      "name": "diagnostics",
+      "value": true,
+      "line": 20,
+      "supported": "Pinned Lean CoreM.lean registers this Bool with default false at line18. Meta.Basic records counters and Meta.Diagnostics reports them. The four complete CI188 errors also suggest this command; it does not raise the independent maxHeartbeats default."
+    }
+  ],
+  "scope": "Both commands occur inside namespace ContinuousFlexibility.Statements before the local instance and all declarations, so they affect the following declarations in this source scope. Imported theorem source/proofs are unchanged; their prior local options are not made into theorem assumptions. The original include hI command and all quantifier order remain literal.",
+  "resource_and_rule_check": {
+    "main_pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "AGENTS_blob": "e6835ac7265ded9040e63ea60908e8f91f645f7d",
+    "AGENTS_main_equals_actual188": true,
+    "tasks_rules_blob": "57b252cad32de311bf2bd20390eab2b11e936006",
+    "readme_blob": "1d254e8895fce0101944394416d2bfd4bfbc1897",
+    "task_blob": "94d52f529bea6b9e2b4aabd26783de4ee101b6ce",
+    "toolchain_blob": "f0e00b3338bac0d6f050d9a64e277314a9f7830f",
+    "finding": "Rules prohibit raised heartbeat limits, not this built-in compatibility option. No maxHeartbeats/maxRecDepth/watchdog or workflow change occurs. Pinned CoreM registers maxHeartbeats independently at 200000. Earlier unchanged-transparency claims were historical patch invariants, not a rule."
+  },
+  "pinned_option_sources": [
+    {
+      "repository": "leanprover/lean4",
+      "ref": "v4.35.0-rc3",
+      "path": "src/Lean/Meta/ExprDefEq.lean",
+      "blob": "3bc3e69ab997376fc3b5fc01bd9affc7b4ea925b",
+      "sha256": "9c878105a5a39288da5b283267f7dfc89ae0f9413111a822307694c98d54ec0f"
+    },
+    {
+      "repository": "leanprover/lean4",
+      "ref": "v4.35.0-rc3",
+      "path": "src/Lean/CoreM.lean",
+      "blob": "ce7c6379fa561aecfd9d8e6681b929b5cce61eb2",
+      "sha256": "ca0d40389b8a4945b875b845990d69f3668ae3e71c63b83176a297c4db9b5714"
+    },
+    {
+      "repository": "leanprover/lean4",
+      "ref": "v4.35.0-rc3",
+      "path": "src/Lean/Meta/Basic.lean",
+      "blob": "1791b62f7fdeb9d2f2f83caec4cd281f38f4279b",
+      "sha256": "4b39e775b4d80696b5c86f4befb05acbb9ecc673ed20a7e800cafc5f384e5929"
+    },
+    {
+      "repository": "leanprover/lean4",
+      "ref": "v4.35.0-rc3",
+      "path": "src/Lean/Meta/Diagnostics.lean",
+      "blob": "d1b9c832edb7f5cb4dee3a33d99a78c5338682c9",
+      "sha256": "4edad35b736c4ffcff7289ea25813e19f34a0b023eb1ef03e607c2992ffb62bd"
+    }
+  ],
+  "limits": [
+    "No confirmed root-cause attribution for the four remaining timeouts; no claim that this configuration improves performance or compiles successfully.",
+    "Kernel checking and unchanged public contracts still require the root-controlled complete successor CI.",
+    "Diagnostics may add collection/reporting work; it is enabled for evidence, not counted as a proof or a resource-budget increase."
+  ],
+  "executed": {
+    "new_lean": false,
+    "source_mutation": false,
+    "active_tree_or_refs": false,
+    "ci_query": false,
+    "job_log_download": false,
+    "local_compiler": false
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "schema": "n04-reviewed-source-selection/v1",
+  "path": "positive/repair188/CircleShiftedForwardFixedBaseBoundsReviewedManifest.json",
+  "repository_full_name": "Rogerhu12/continuous-flexibility",
+  "owner": "/root/proof_inventory",
+  "status": "COMPLETE_SOURCE_AND_CONFIGURATION_STATIC_REVIEWED_NOT_COMPILED",
+  "selected_source": {
+    "module": "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+    "install_path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "archive_path": "positive/repair188/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "ca502cf54c23cb25d348088fe061b3fb7403a7c5",
+    "sha256": "fcc0b9a0ece4227feca8028f026035fb8634a41c2bcb275f07e7b4f9aa666877",
+    "utf8_bytes": 12012,
+    "lines": 213,
+    "final_newline": true,
+    "server_readback_equal": true
+  },
+  "candidate": {
+    "git_blob": "17d98d65d11a8e67b4e21d629d3ec2cfc453cfbb",
+    "sha256": "41c0929711dbb46bfc9a260bfad233ed5173aa3f5f8ac53ea2cd9d4873d56afd",
+    "utf8_bytes": 10276,
+    "lines": 173,
+    "final_newline": true
+  },
+  "patch": {
+    "git_blob": "0cc38c7500c13483c3a33d02279a149da62cc0ae",
+    "sha256": "ff509d04ef3a8699961f3383062a9fb26dab2ef94add6af1f34a7eb4b71d8d76",
+    "utf8_bytes": 486,
+    "lines": 15,
+    "final_newline": true,
+    "hunks": 1,
+    "added": 2,
+    "deleted": 2,
+    "net": 0,
+    "forward_reverse_exact": true
+  },
+  "independent_peer": {
+    "path": "audit/recovery/reviews/CI188CircleShiftedForwardConfigurationIndependentReview.json",
+    "git_blob": "47083f908748e7a159cb5346370e986a34a6138c",
+    "sha256": "8c2dd28f2d55df8d70c9f41c53da34392ed3efff9cd63dcde058d88220df9d2f",
+    "utf8_bytes": 6463,
+    "lines": 127,
+    "final_newline": true,
+    "reviewer": "/root/audit_coordinates",
+    "status": "PASS exact configuration-only static review; successor CI remains required"
+  },
+  "predecessor": {
+    "source": "e81998dd165a9b3ab67d527e1e3fc33f12d70765",
+    "owner": "e5cf29853148c0b2e5fb9a2164bff0086747a320",
+    "peer": "89495ddfd683902260aca85e3b94e65a56dc537b",
+    "head": "795cc520c075a91e56e14a92ee826479c15c168d",
+    "status": "FAILED_CI188_PRESERVED_HISTORY"
+  },
+  "permitted_changes": [
+    {
+      "option": "backward.isDefEq.respectTransparency",
+      "value": false,
+      "line": 17
+    },
+    {
+      "option": "diagnostics",
+      "value": true,
+      "line": 20
+    }
+  ],
+  "preserved": {
+    "all_public_and_private_headers": true,
+    "all_proof_and_definition_bytes": true,
+    "imports": true,
+    "constants": true,
+    "same_J_and_source_slots": true,
+    "loss_quantifier_order": true,
+    "default_maxHeartbeats_200000": true,
+    "no_resource_limit_change": true,
+    "no_workflow_change": true
+  },
+  "evidence": {
+    "actual_generic_source": "14ad46cae7d92dca46f5efd006f5260873046713",
+    "actual_rule_blob": "e6835ac7265ded9040e63ea60908e8f91f645f7d",
+    "complete_ci188_errors": "cb358a3f81fb80c6997eb2f093db7027aaf28db4",
+    "pinned_lean_registration_sources": [
+      {
+        "path": "src/Lean/Meta/ExprDefEq.lean",
+        "blob": "3bc3e69ab997376fc3b5fc01bd9affc7b4ea925b",
+        "sha256": "9c878105a5a39288da5b283267f7dfc89ae0f9413111a822307694c98d54ec0f"
+      },
+      {
+        "path": "src/Lean/CoreM.lean",
+        "blob": "ce7c6379fa561aecfd9d8e6681b929b5cce61eb2",
+        "sha256": "ca0d40389b8a4945b875b845990d69f3668ae3e71c63b83176a297c4db9b5714"
+      },
+      {
+        "path": "src/Lean/Meta/Basic.lean",
+        "blob": "1791b62f7fdeb9d2f2f83caec4cd281f38f4279b",
+        "sha256": "4b39e775b4d80696b5c86f4befb05acbb9ecc673ed20a7e800cafc5f384e5929"
+      },
+      {
+        "path": "src/Lean/Meta/Diagnostics.lean",
+        "blob": "d1b9c832edb7f5cb4dee3a33d99a78c5338682c9",
+        "sha256": "4edad35b736c4ffcff7289ea25813e19f34a0b023eb1ef03e607c2992ffb62bd"
+      }
+    ],
+    "pinned_registration_review": "Independent reviewer read exact v4.35.0-rc3 registration and diagnostics implementation; this owner binds that review without claiming a second independent source audit."
+  },
+  "readback": {
+    "source": true,
+    "candidate": true,
+    "patch": true,
+    "peer": true
+  },
+  "readiness": "The source/configuration review is complete. No successful-compilation or performance-cause claim is made. Root-controlled successor CI, with diagnostics if still failing, remains mandatory.",
+  "budget": {
+    "before": 213,
+    "after": 213,
+    "net": 0,
+    "draft_upper_bound": 20000,
+    "released_credit": 0,
+    "remaining": 0
+  },
+  "operations": {
+    "local_lean": false,
+    "active_or_index_edits": false,
+    "git_refs": false,
+    "ci_queries": false,
+    "new_lean_modules": false
+  }
+}

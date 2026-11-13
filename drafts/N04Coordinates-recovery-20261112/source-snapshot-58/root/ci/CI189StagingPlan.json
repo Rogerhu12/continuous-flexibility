@@ -1,0 +1,96 @@
+{
+  "schema": "n04-single-source-ci-repair-plan/v1",
+  "round": 189,
+  "status": "REVIEWED_ELABORATION_CONFIGURATION_DIAGNOSTICS",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "branch": "line/N04Coordinates",
+  "parent": "795cc520c075a91e56e14a92ee826479c15c168d",
+  "commit": "cdd1f9f2aa9d2a569fa43e8a8690738dc34d1b4c",
+  "tree": "d6338ff8e876073ac7544ebcb6317c340d6dc28c",
+  "main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "failure": {
+    "receipt": "cf80328d3a943e1eda2e97370eed631e478d9372",
+    "diagnostics": "cb358a3f81fb80c6997eb2f093db7027aaf28db4",
+    "original_log": "71f2f3e53ec687b59ad01036e246339cc570157c",
+    "read_complete": true
+  },
+  "source": {
+    "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "before": "e81998dd165a9b3ab67d527e1e3fc33f12d70765",
+    "after": "ca502cf54c23cb25d348088fe061b3fb7403a7c5",
+    "lines": 213,
+    "net_added": 0,
+    "candidate": "17d98d65d11a8e67b4e21d629d3ec2cfc453cfbb",
+    "patch": "0cc38c7500c13483c3a33d02279a149da62cc0ae",
+    "peer": "47083f908748e7a159cb5346370e986a34a6138c",
+    "owner": "88028483edbaee4c3332a25ba5f9b6bceabb671e"
+  },
+  "change": "Only two blank lines replaced: backward.isDefEq.respectTransparency false as in the actual compiled generic provider, and diagnostics true to collect concrete hotspots if still failing. All proof/header/import/constant bytes unchanged. maxHeartbeats remains200000, no watchdog/workflow changes.",
+  "preflight": {
+    "full_prior_proof_read": true,
+    "exact_new_option_delta": true,
+    "forward_reverse_reconstruction_exact": true,
+    "all_proof_bytes_unchanged": true,
+    "public_headers_unchanged": true,
+    "imports_unchanged": true,
+    "source_lines": 213,
+    "added": 2,
+    "deleted": 2,
+    "net": 0,
+    "max_heartbeats_unchanged": true,
+    "watchdog_unchanged": true,
+    "elaboration_transparency_explicitly_changed": true,
+    "diagnostics_enabled": true,
+    "performance": "UNCOMPILED",
+    "changes": [
+      {
+        "line": 17,
+        "before": "",
+        "after": "set_option backward.isDefEq.respectTransparency false"
+      },
+      {
+        "line": 20,
+        "before": "",
+        "after": "set_option diagnostics true"
+      }
+    ],
+    "exact_one_source_tree_delta": true,
+    "all_src_nodes": 4802,
+    "project_nodes": 4798,
+    "generated_imports": 4734,
+    "checked_root_imports": 4241,
+    "missing_imports": 0,
+    "cycles": 0,
+    "all_other_paths_identical_to188": true,
+    "main_and_rules_unchanged_from_verified_current_main": true,
+    "independent_pinned_Lean_option_registration_review": true
+  },
+  "budget": {
+    "conservative_since_complete182": 18603,
+    "new_source_lines": 16663,
+    "shared_full_lines": 1447,
+    "full_root_lag": 493,
+    "precise_added": 16802,
+    "precise_deleted": 255,
+    "repository_limit": 20000,
+    "existing_draft_after182": 19276,
+    "held_fullJ206": 206,
+    "held_piece286": 286,
+    "held_global178": 178,
+    "forward_repair_net_since159": 54,
+    "actual_retained_upper": 20000,
+    "guard": 20000,
+    "remaining": 0,
+    "conditional_complete_group_credit": [
+      213,
+      301,
+      115,
+      152,
+      44
+    ]
+  },
+  "no_credit_yet": true,
+  "CI_gate": "First query at least five minutes after push/readback; subsequent queries at least one minute apart. Complete quick/full/blueprint success required before release. No resource changes.",
+  "next_group": "84 sources held until complete repaired parent green, explicit fullJ206 binding to ca502213, fresh refs/main; next84-main79/next71-main69 name cross-check now separately completed."
+}

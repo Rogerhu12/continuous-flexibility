@@ -1,0 +1,96 @@
+{
+  "schema": "n04-same-residual-fixed-base-interface-checkpoint/v1",
+  "artifact_path": "quantitative/recovery/ActualReturnResidualFixedBaseInterfaceCheckpoint.json",
+  "status": "READ_ONLY_INTERFACE_CHECKPOINT_NOT_IMPLEMENTED_OR_COMPILED",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "main_pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "scope": "First actual same-R fixed-base leaf, intended <=200 Lean lines after explicit budget authorization and required full CI green. Parent reports CI188 still failed; no CI queried for this record.",
+  "proposed_module": "ContinuousFlexibility.Analysis.N04ActualReturnResidualFixedBaseBounds",
+  "proposed_public": "ContinuousFlexibility.Statements.N01Properties.actual_returnResidual_fixedBase_oneHigh",
+  "minimal_direct_import": "ContinuousFlexibility.Analysis.N04SelectorInverseCircleFixedBaseBounds",
+  "visibility": "Existing frozen selected metadata already gives transitive N01ResidualSmoothTame, N01CircleLinearTame, SmoothDirectionsAffine, CanonicalStateInterpolation and TameProductDirections. No new graph or source selection is created here.",
+  "contract": {
+    "input": "Original hN : N01Properties D T S C base loss epsilon, hS, hT, hR : N02Properties D T S C R base epsilon; original hflow on every u in U, m, r in Icc(C.left m)(C.right m), theta, with 1/2 <= deriv(C.minusFlow(liftSectorParameter S C u)m r)theta <= 3/2.",
+    "notation": "U=sectorNeighborhood S base epsilon epsilon; p=pairGrading(sectorGrading S)realGrading; H=S.circle(3/4).",
+    "output": "exists B, base<=B and forall k exists delta forall R0>=0 forall s exists K>=0 forall J:SmoothDirections U (fun u=>R.residual(liftSectorParameter S C u)), forall u in U with p B u<=R0, forall v:Fin k->(StateDirections S x Real), H.grading s(J.D k u v)<=K*tameJetSize p k s delta B u v.",
+    "witness_rule": "No new R, no exists_returnEquation call, no supplied final residual estimate. B precedes every k; delta(k) precedes R0,s,J,u,v."
+  },
+  "literal_formula": {
+    "source": "e7aeb751c99fbc50dbb5a0b1398b0afe061213b6",
+    "module": "N01ResidualCircleModel",
+    "formula": "a=returnFlowCircle; ell(u)=u.1.val.2.2.2; t=P_{-C.travel}(a,ell-a); rho=P_0(circleOddLinear(t),circleEvenLinear(t)). P is the actual circlePositiveInverseComposeLinear.",
+    "actual_identity": "sectorReturnResidualCircle_decode and original hR.2.1 give equal decoded functions on U. IsCircleModel.decode injectivity (hH.2.2.2.2.2.1) identifies rho with original R.residual o liftSectorParameter.",
+    "hR_definition_source": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8"
+  },
+  "tower_transport": {
+    "unique_source": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+    "unique_module": "SmoothDirectionsAffine",
+    "unique_header": "SmoothDirections.unique (J K : SmoothDirections U f) : forall n x, x in U -> J.D n x = K.D n x",
+    "unique_instances": "Source E: IsTopologicalAddGroup and ContinuousSMul; target F: T2Space. Actual sector pair and circle space supply these.",
+    "congr_source": "bc38b3601334a7b76a3eda9f3602c4d3b2440423",
+    "congr_header": "SmoothDirections.congr (J:SmoothDirections U f) (hfg:forall x in U,f x=g x):SmoothDirections U g",
+    "exact_effect": "congr sets D:=J.D. After transporting constructed rho tower to actual R, evaluate congrArg (fun A=>A v) (J.unique JA k u hu).",
+    "zero": "J.zero x hx is J.D 0 x Fin.elim0=f x; arbitrary Fin 0 inputs require Subsingleton.elim.",
+    "genuine_composition": "Use HasProjectiveJetsOn.comp_topological and smoothDirectionsOfJets for the actual projectiveCompositionJets.",
+    "local_instance": "Mirror selector152's explicit local AnnularState SMul := Prod.instSMul; imported local instances do not propagate."
+  },
+  "fixed_base_composition": {
+    "source": "f43a2b774c41da8cc9417051adc8c0a89d3ed04e",
+    "module": "TameFixedBaseCompositionBounds",
+    "public": "projectiveCompositionJets_fixedBase_oneHigh",
+    "interpolation": "Requires HasInterpolation(pairGrading realGrading p). Derive from original hS state interpolation restricted to the sector subtype and coordinate_hasInterpolation_pair twice, as in selector152; no extra assumption.",
+    "base": "For inner BJ,d and outer BK,e, B=max BJ (max BP (BK+d(0))) is chosen before n.",
+    "loss": "After n: delta_n=sum(j:Fin(n+1),d(j.val)); L(n)=Finset.univ.sup(fun c:OrderedFinpartition n=>e(c.length)+delta_n+c.length*(BK+delta_n)+LP).",
+    "two_calls": "Apply once to (a,ell-a), then to (odd t,even t). Only each inner zero-order loss enters its fixed base. Higher losses remain in L(n).",
+    "linear_pieces": "sectorChartContinuousLinear and circleOdd/EvenContinuousLinear are actual zero-loss maps; use genuine linear/add/product towers, tameJetSize_zero/one/nonneg/mono, not the weaker numerical quantifiers of SmoothTameOn."
+  },
+  "inverse_domain": {
+    "inverse_source": "1f55edbb185fe33327757a087479196cc8565e4f",
+    "public": "circlePositiveInverseComposeLinear_fixedBase_oneHigh",
+    "uniform_lower_source": "a9b6d7a92da85f46f18f84563d4b1d29f333910a",
+    "domain": "V=circleUniformInverseDomain H (1/3) times univ, for this residual-only leaf.",
+    "actual_input_lower": "endpointFlowCircle_uniform_lower gives 1/2; transportedOddCircle_uniform_lower gives 1/3; mem_circleUniformInverseDomain places both inputs in V.",
+    "whole_domain_lower": "interior_subset gives only (1/3)/2=1/6 at arbitrary points of V. Invoke inverse301 with a=1/6, not 1/3.",
+    "quantifiers": "Inverse base before all k, loss(k) before R,s, constant before travel and supplied JP. Use max R 1 to satisfy R>=1 without changing base."
+  },
+  "six_main_candidates": [
+    [
+      "ReturnResidualWeightedBounds",
+      "d8b1b64050cb0addeffdca2a36798b3bf1418e27",
+      "Independent rho zero-order displacement/velocity bounds."
+    ],
+    [
+      "ReturnResidualAngularWeightedBounds",
+      "f99a73f946840e3a1d0457b06e9238f002a73c23",
+      "Fixed z, then forall rho angular n exists A; no fixed-base parameter tower."
+    ],
+    [
+      "ReturnResidualVelocityMixedWeighted",
+      "61e6126df8ece1ec393a497046341a3005f1cb0c",
+      "Fixed z,rho ordinary spatial iteratedFDeriv, using actual buffer/cutoff."
+    ],
+    [
+      "ReturnCoefficientErrorMixedWeighted",
+      "1d46551aec3d7aa8923fe4b53742d5346af0e900",
+      "Fixed z,rho spatial jets; additionally consumes explicit hVbound."
+    ],
+    [
+      "ReturnCoefficientGlobalWeighted",
+      "fb1538bf395aa0dea1d5218140c1043ed152efe0",
+      "Global ordinary spatial bounds for fixed z,rho, not state-parameter jets."
+    ],
+    [
+      "ReturnInterpolationMixedJets",
+      "a51bce40bce0fd4c91b9b7162af2e77cad6cacbb",
+      "Joint means PolarPoint=(r,theta), not a state-parameter tower."
+    ]
+  ],
+  "limits": "The six headers and section binders do not directly supply exists B forall k for actual R. They remain useful for later spatial forcing. This checkpoint supplies neither chi-prime*A*Z mixed radial bounds nor CurrentJets.",
+  "verification": {
+    "new_Lean_lines": 0,
+    "new_graphs": 0,
+    "active_or_refs_changed": false,
+    "local_Lean": false,
+    "CI_queries": false
+  }
+}

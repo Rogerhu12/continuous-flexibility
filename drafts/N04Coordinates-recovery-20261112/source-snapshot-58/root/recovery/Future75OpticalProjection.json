@@ -1,0 +1,27 @@
+{
+  "status": "READ_ONLY_GROUP_PROJECTION_ADAPTER_NOT_WRITTEN",
+  "base": "after reviewed84 then original71",
+  "original71": 71,
+  "additionalMain": 4,
+  "newSourcesBeforeAdapter": 75,
+  "newSourceLines": 13626,
+  "sharedFullLines": 80,
+  "sharedNet": 21,
+  "generatedRootImports": 4893,
+  "checkedRootImports": 4241,
+  "fullRootLag": 652,
+  "conservativeBeforeAdapter": 14358,
+  "allSourceNodes": 4961,
+  "missing": [],
+  "cycles": [],
+  "withPlanned140LineAdapter": {
+    "newSources": 76,
+    "sourceLines": 13766,
+    "rootLag": 653,
+    "conservative": 14499,
+    "allSourceNodes": 4962
+  },
+  "sharedMigration": "0accc70bea719eb47f46bcde4989c99798027273 -> fc6a92f96c18e23d8b87eb0f3385909c90154194",
+  "no_source_authored": true,
+  "no_compilation_claim": true
+}

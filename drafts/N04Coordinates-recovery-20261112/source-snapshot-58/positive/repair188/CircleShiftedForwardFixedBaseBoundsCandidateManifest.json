@@ -1,0 +1,173 @@
+{
+  "schema": "n04-ci-repair-candidate/v1",
+  "path": "positive/repair188/CircleShiftedForwardFixedBaseBoundsCandidateManifest.json",
+  "repository_full_name": "Rogerhu12/continuous-flexibility",
+  "status": "SOURCE_CONFIGURATION_CANDIDATE_STATIC_ONLY_NOT_COMPILED",
+  "actual_base": {
+    "head": "795cc520c075a91e56e14a92ee826479c15c168d",
+    "tree": "b18c521c94c2630bfb9694d85a64401bbf432379",
+    "run": 43354889012,
+    "job": 131654456243,
+    "ci_status": "CI188_COMPLETE_FAILURE"
+  },
+  "source": {
+    "module": "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+    "install_path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "archive_path": "positive/repair188/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "ca502cf54c23cb25d348088fe061b3fb7403a7c5",
+    "sha256": "fcc0b9a0ece4227feca8028f026035fb8634a41c2bcb275f07e7b4f9aa666877",
+    "utf8_bytes": 12012,
+    "lines": 213,
+    "final_newline": true,
+    "server_readback_equal": true
+  },
+  "before": {
+    "git_blob": "e81998dd165a9b3ab67d527e1e3fc33f12d70765",
+    "sha256": "dbaec99c20613aba1590ffe730c4abdd971064ce968fa834a117a71d66be105d",
+    "utf8_bytes": 11932,
+    "lines": 213,
+    "final_newline": true,
+    "owner_git_blob": "e5cf29853148c0b2e5fb9a2164bff0086747a320",
+    "review_git_blob": "89495ddfd683902260aca85e3b94e65a56dc537b",
+    "status": "FAILED_CI188_PRESERVED_HISTORY"
+  },
+  "patch": {
+    "git_blob": "0cc38c7500c13483c3a33d02279a149da62cc0ae",
+    "sha256": "ff509d04ef3a8699961f3383062a9fb26dab2ef94add6af1f34a7eb4b71d8d76",
+    "utf8_bytes": 486,
+    "lines": 15,
+    "final_newline": true,
+    "hunks": 1,
+    "added": 2,
+    "deleted": 2,
+    "net": 0,
+    "exact_forward_and_reverse": true
+  },
+  "exact_replacement": {
+    "old": "namespace ContinuousFlexibility.Statements\n\nopen Set Filter ContinuousFlexibility.Analysis\nopen scoped BigOperators Topology\n\n",
+    "new": "namespace ContinuousFlexibility.Statements\nset_option backward.isDefEq.respectTransparency false\nopen Set Filter ContinuousFlexibility.Analysis\nopen scoped BigOperators Topology\nset_option diagnostics true\n"
+  },
+  "options": [
+    {
+      "name": "backward.isDefEq.respectTransparency",
+      "value": false,
+      "source_line": 17,
+      "evidence": {
+        "module": "ContinuousFlexibility.Analysis.TameInverseExpressions",
+        "git_blob": "14ad46cae7d92dca46f5efd006f5260873046713",
+        "source_line": 21,
+        "sha256": "5f19c405b830b56e9ad43319b2e9b306af3a27d840167fc29d592e9b9edaec56",
+        "actual188_full_source_match": true
+      },
+      "purpose": "Match the existing generic ordered-jet provider's elaboration transparency policy in this specializing module; imports do not carry its local command options."
+    },
+    {
+      "name": "diagnostics",
+      "value": true,
+      "source_line": 20,
+      "evidence": "All four complete CI188 timeout blocks explicitly recommend set_option diagnostics true.",
+      "purpose": "Collect concrete elaboration hotspots if the unchanged proofs still exceed the default budget."
+    }
+  ],
+  "scope": "Both commands are inside namespace ContinuousFlexibility.Statements before the existing local instance and all declarations. They apply to this module namespace, do not change imported sources, and introduce no theorem assumptions or new declarations.",
+  "public_headers": [
+    {
+      "name": "circleShiftedChartCompose_orderedJet_eq_kernel",
+      "header": "theorem circleShiftedChartCompose_orderedJet_eq_kernel\n    (travel : ℕ → ℝ) {U : Set M.Space} (hU : IsOpen U)\n    (J : SmoothDirections (U ×ˢ univ) (fun z : M.Space × M.Space =>\n      circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2))\n    (n : ℕ) :\n    ∀ e ∈ U, ∀ (v : Fin n → M.Space) (y : M.Space),\n      inverseForwardJet J n e v y =\n        coupledCircleKernel hD hT hγ hM hI n n e\n          (circleTranslationContinuousLinear hM hT hD hγ travel y) v ",
+      "sha256": "913ba8c51f556820b0f9e50082d34d46c753b95e17cf9a249ff7917546d718cb"
+    },
+    {
+      "name": "circleShiftedChartCompose_orderedJets_fixedBase_bound",
+      "header": "theorem circleShiftedChartCompose_orderedJets_fixedBase_bound :\n    ∃ base loss : ℕ, ∀ (n : ℕ) (R : ℝ), 1 ≤ R →\n      ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧\n        ∀ (travel : ℕ → ℝ) (U : Set M.Space) (hU : IsOpen U)\n          (J : SmoothDirections (U ×ˢ univ) (fun z : M.Space × M.Space =>\n            circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2)),\n          ∀ e ∈ U, M.grading base e ≤ R → ∀ v : Fin n → M.Space,\n            (∀ i, M.grading base (v i) ≤ R) → ∀ y : M.Space,\n              M.grading s (inverseForwardJet J n e v y) ≤ C *\n                ((1 + M.grading (s + (n + loss)) e +\n                    ∑ i, M.grading (s + (n + loss)) (v i)) * M.grading base y +\n                  M.grading (s + (n + loss)) y) ",
+      "sha256": "c37560a6bae45406930471adb60fd3fb9faf6965d44b19b74403c5f8e4bdc6d0"
+    }
+  ],
+  "all_proofs_and_definitions_byte_unchanged": true,
+  "imports_unchanged": [
+    "import ContinuousFlexibility.Analysis.TameInverseExpressions",
+    "import ContinuousFlexibility.Analysis.CoupledCircleCompositionCurveDerivative",
+    "import ContinuousFlexibility.Analysis.CircleTranslationUniformBounds",
+    "import ContinuousFlexibility.Analysis.TameMultilinearNormalization"
+  ],
+  "limits_unchanged": {
+    "maxHeartbeats": true,
+    "maxRecDepth": true,
+    "watchdog": true,
+    "no_resource_increase": true
+  },
+  "unchanged_mathematics": [
+    "same given J and ordered source-last slots",
+    "same parameter/kernel families",
+    "same base/loss and all quantifier ordering",
+    "same C/P/a constant choices",
+    "same unit-ball normalization and material/circle gradings"
+  ],
+  "rule_check": {
+    "path": "AGENTS.md",
+    "git_blob": "e6835ac7265ded9040e63ea60908e8f91f645f7d",
+    "sha256": "c93fb4ff25e2109e6d06cd0a2139fa6cdbdd97d4f33ea0dcbe45f8432aee39ac",
+    "utf8_bytes": 3153,
+    "lines": 49,
+    "final_newline": true,
+    "read_at_actual_base": true,
+    "exact_relevant_rule": "Do not raise heartbeat limits. Find the slow declaration and fix it.",
+    "finding": "No heartbeat limit is raised. The previous patches' unchanged-transparency statements describe those exact historical deltas, not a repository prohibition."
+  },
+  "diagnostics": {
+    "git_blob": "cb358a3f81fb80c6997eb2f093db7027aaf28db4",
+    "sha256": "ab9dd2ff43025330677dc0f4a72378dac93a61b67e8a44a80d72ca1cde23f42e",
+    "utf8_bytes": 3022,
+    "lines": 36,
+    "final_newline": true,
+    "complete": true,
+    "blocks": [
+      {
+        "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:86:12: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached",
+        "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:86:12: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+        "lines": 5
+      },
+      {
+        "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:79:83: (deterministic) timeout at `«tactic execution»`, maximum number of heartbeats (200000) has been reached",
+        "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:79:83: (deterministic) timeout at `«tactic execution»`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+        "lines": 5
+      },
+      {
+        "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:93:4: (deterministic) timeout at `«tactic execution»`, maximum number of heartbeats (200000) has been reached",
+        "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:93:4: (deterministic) timeout at `«tactic execution»`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+        "lines": 5
+      },
+      {
+        "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:152:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached",
+        "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:152:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+        "lines": 5
+      }
+    ],
+    "original_log": {
+      "blob": "71f2f3e53ec687b59ad01036e246339cc570157c",
+      "sha256": "6a747fe2af46063cb81a5f7fad761cb38d6e705929bb0aff4bc6db2046385bb3",
+      "bytes": 69983
+    },
+    "redownloaded_job_log": false
+  },
+  "assessment": "This is a controlled two-option experiment supported by the actual generic provider and the compiler diagnostics. The prior dependent-family type mismatch disappeared in CI188. The causes of the remaining timeouts are not uniquely established; no performance or successful-compilation claim is made.",
+  "budget": {
+    "before_lines": 213,
+    "after_lines": 213,
+    "net": 0,
+    "draft_upper_bound": 20000,
+    "remaining": 0,
+    "compile_credit": 0
+  },
+  "operations": {
+    "new_lean_modules": false,
+    "proof_changes": false,
+    "local_lean": false,
+    "active_edits": false,
+    "index_or_refs": false,
+    "ci_queries": false
+  },
+  "pending": [
+    "Independent exact source/options/scope peer",
+    "Root-controlled complete successor CI and diagnostic hotspot inspection if still failing"
+  ]
+}

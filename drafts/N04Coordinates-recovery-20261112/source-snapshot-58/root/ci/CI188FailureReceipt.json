@@ -1,0 +1,23 @@
+{
+  "schema": "n04-ci-failure-receipt/v1",
+  "round": 188,
+  "head": "795cc520c075a91e56e14a92ee826479c15c168d",
+  "tree": "b18c521c94c2630bfb9694d85a64401bbf432379",
+  "run": 43354889012,
+  "job": 131654456243,
+  "status": "completed",
+  "conclusion": "failure",
+  "updated_at": "2026-11-13T02:55:53Z",
+  "quick": "failure",
+  "full": "skipped",
+  "fresh_project_modules": 0,
+  "original_log": "71f2f3e53ec687b59ad01036e246339cc570157c",
+  "complete_errors": "cb358a3f81fb80c6997eb2f093db7027aaf28db4",
+  "diagnostics": 4,
+  "no_artifact_download_needed": true,
+  "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "released_draft_credit": 0,
+  "draft_actual_upper": 20000,
+  "remaining": 0,
+  "performance": "The previous Fin.snoc application mismatch is absent. Four default200000 timeouts remain: the actual tuple identity rewrite, its surrounding derivative proof, the later germ proof, and the quantitative public declaration. Explicit typed inference boundaries have not resolved performance; targeted diagnostics and actual elaboration settings need investigation."
+}

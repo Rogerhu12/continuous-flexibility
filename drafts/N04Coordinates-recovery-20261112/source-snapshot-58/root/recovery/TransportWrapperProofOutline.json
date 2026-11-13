@@ -1,0 +1,15 @@
+{
+  "status": "READ_ONLY_NO_LEAN_WRITTEN",
+  "name": "n04_referenceCurrent_transport_bounds",
+  "source_inputs": [
+    "CanonicalTransportGlobalBounds",
+    "N01cPhysicalHeightBounds",
+    "StateNeighborhood"
+  ],
+  "estimate": "≤200 lines after complete repaired-group green",
+  "same_witness": "Given one qualitative pair per original state, choose it once at each restricted state; use its literal C3/periodic/reflection/piece properties for both global estimates.",
+  "neighborhood": "Select base'/eta from global_material_ratios before z. Form w=(subtype(z.1-C.referenceState),z.2), stateSector subtraction via referenceStateConditions. Show liftSectorParameter S C w=z and use sectorNeighborhood_mono.",
+  "constants": "Obtain original T E0 scaled floor 1<=KE*E0 from materialE0_rpow_le_of_exponent_le at A=0,B=1. For each same z/pair take global jet B>0. Set C0=B+exp(1)*KE>0, A=1. M>=1 implies jet monotonicity; E0>0 and scaled floor make exp(1)<=C0*E0. Keep all four bounds with same C0/A.",
+  "interfaces": "Return literal CanonicalPrimitiveGeometry.transport payload (eight qualitative clauses then four estimates), not a new data object or reselected atlas.",
+  "scope": "StageE finite0..2 fixed-z only; no all-order materialJets claim."
+}

@@ -1,0 +1,55 @@
+{
+  "schema": "n04-independent-ordinary-name-cross-review-v1",
+  "proposed_backup_path": "audit/recovery/reviews/Next84Main79Next71Main69ExplicitNameCrossReview.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "reviewer": "audit_coordinates",
+  "status": "PASS for the stated explicit-name cross-scope; activation remains gated",
+  "supersedes_only_gap": {
+    "prior_review_blob": "00d12aa6c22b06a266d7e9df194400f0e829466c",
+    "prior_review_sha256": "92b775d1728d1a59aaa61271a77ba0e623ff93b19b74800c8ddd591c8d5a3e97",
+    "gap": "The 79 main prefix sources versus the 69 main successor sources were not freshly cross-scanned. This addendum closes that name-only gap; original source/import/budget findings remain unchanged."
+  },
+  "selection": {
+    "main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "plan_blob": "14d63e2dfd4abf9853ebf0d301b40fe1fd2c9d22",
+    "plan_sha256": "05f6a0f1e0515158954a0ad2186a851efab1b165d94c483c064ff02c0e630186",
+    "main_authority_inventory_blob": "a0948c5b56e409d3a636e97a873df717f978caeb",
+    "groups": "next84:79 additional-main1ece; next71:69 additional-main1ece. Five prefix-owned and two successor-owned sources retain their prior separate checks."
+  },
+  "evidence": {
+    "new_79_and_named_locals_blob": "61344d6978bc725ded989ea9341be8f36cbd4494",
+    "sha256": "f1b53241371150c0fb109de48c835152109a7b5fb1ea00607be26d70198f676a",
+    "bytes": 106291,
+    "reused_71_table_blob": "1a16f9310a7e04403629ba8de51691aeb1c95e09",
+    "reused_71_table_sha256": "b2e301acb8e8441b609f33917403573c9d52ce8607feb90967a22511cd7a1803",
+    "scanner_sha256": "d7b3dd7f4c276420d502fb4eebff879a589b1db600c1f117d548af95ff3a7a5d"
+  },
+  "checks": {
+    "exact_main_blob_matches": 148,
+    "newly_read_79_source_bytes": 718574,
+    "newly_read_79_lines": 13924,
+    "sha256_bytes_lines_imports_mismatches": 0,
+    "parser_warnings": 0,
+    "unhandled_ordinary_declaration_lines": 0,
+    "public79": 420,
+    "public69": 365,
+    "ordinary_public_cross_collisions": [],
+    "ordinary_public_internal_collisions": [],
+    "named_local_instances79": 28,
+    "named_local_instances69": 24,
+    "cross_and_internal_collisions_including_named_local_instances": []
+  },
+  "method": "Reuse the complete 69-source raw/name evidence. Fetch only the missing 79 exact blobs, verify SHA256/UTF8 length/lines/imports, track namespace/section scopes through comment stripping, and compare exact fully qualified ordinary names. Supplement both groups with named local instances. No whole-repository scan or large dependency graph was rebuilt.",
+  "limits": [
+    "Covers explicitly named def/theorem/lemma/abbrev/opaque/structure/class/inductive/instance declarations only; named local instances checked separately.",
+    "Does not clear generated structure fields, constructors/recursors, aliases, macro-generated declarations, private generated names or anonymous instances.",
+    "This is static name evidence, not a Lean elaboration/compilation result. CI188 has failed per parent notification; neither future batch is activated by this receipt.",
+    "Before activation retain fresh exact preimage/provider checks, applicable complete-green gate, source-only diff and existing full-root budget checks."
+  ],
+  "executed": {
+    "new_lean": false,
+    "active_tree_or_refs": false,
+    "ci_query": false,
+    "local_compiler": false
+  }
+}
