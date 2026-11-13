@@ -31,7 +31,7 @@ attribute [local instance]
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
 
-private def negativePhysicalProjectionRegularity (W : N04RealizationStart)
+def negativePhysicalProjectionRegularity (W : N04RealizationStart)
     (m : ℕ) (side radial : Bool) :
     MixedJetRegularity (sectorNeighborhood W.S W.base W.ε W.ε)
       (Ioo (W.C.left m) (W.C.right m) ×ˢ univ)
