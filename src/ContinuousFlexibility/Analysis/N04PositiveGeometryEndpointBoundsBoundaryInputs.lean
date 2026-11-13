@@ -33,6 +33,23 @@ private def rootInputSelect {α : Fin 9 → Type*}
                 (Fin.cases a7
                   (Fin.cases a8 (fun l : Fin 0 => Fin.elim0 l))))))))) j
 
+private def rootInputDirections
+    {Y : Type*} [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
+    [IsTopologicalAddGroup Y] [ContinuousSMul ℝ Y] {U : Set Y}
+    (d c : Y → PolarPoint → ℝ) (β : Y → ℝ → ℝ)
+    (Jd : ∀ a : ℕ, SmoothDirections (U ×ˢ (univ : Set ℝ))
+      (fun y : Y × ℝ => radialBoundaryJet (d y.1) 0 a y.2))
+    (Jc : ∀ a : ℕ, SmoothDirections (U ×ˢ (univ : Set ℝ))
+      (fun y : Y × ℝ => radialBoundaryJet (c y.1) 0 a y.2))
+    (JB : SmoothDirections (U ×ˢ (univ : Set ℝ))
+      (fun y : Y × ℝ => deriv (β y.1) y.2)) (j : Fin 9) :
+    SmoothDirections (U ×ˢ (univ : Set ℝ))
+      (fun y : Y × ℝ => n06RootBoundaryInputs (d y.1) (c y.1) (β y.1) j y.2) :=
+  rootInputSelect (α := fun l : Fin 9 =>
+      SmoothDirections (U ×ˢ (univ : Set ℝ))
+        (fun y : Y × ℝ => n06RootBoundaryInputs (d y.1) (c y.1) (β y.1) l y.2))
+    (Jd 0) (Jd 1) (Jd 2) (Jd 3) (Jc 0) (Jc 1) (Jc 2) (Jc 3) JB j
+
 def n04PositiveGeometry_rootBoundaryInput
     (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
     (g : ℝ → ℝ) (m : ℕ) (side : Bool) (j : Fin 9)
@@ -70,7 +87,12 @@ def n04PositiveGeometry_rootBoundaryInput_joint
     (hroot : deriv D.w (n01ComponentRoot C m side) = 0) (j : Fin 9) :
     SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
       (n04PositiveGeometry_rootBoundaryInput D S C g m side j) := by
-  let JC (speed : Bool) (a : ℕ) :=
+  let JC (speed : Bool) (a : ℕ) :
+      SmoothDirections (sectorNeighborhood S base ε ε ×ˢ (univ : Set ℝ))
+        (fun y : (StateDirections S × ℝ) × ℝ => radialBoundaryJet
+          (n04PositiveGeometry_rootRawCoefficient D S C g
+            (n01ComponentRoot C m side) (n01ComponentRootOrientation side) speed
+            (liftSectorParameter S C y.1)) 0 a y.2) :=
     n04PositiveGeometry_rootRawCoefficientTrace_joint hT hS hN hε hr hroot
       (n01ComponentRootOrientation side) g hg hg0 speed a
   let JB : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
@@ -79,10 +101,14 @@ def n04PositiveGeometry_rootBoundaryInput_joint
     (smoothDirections_angularIterate
     (n04Realization_rootLabel_forwardJointDirections hT hS hN m side) 1).congr
       (fun _ _ => by simp only [iteratedDeriv_one])
-  exact rootInputSelect (α := fun l : Fin 9 =>
-      SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
-        (n04PositiveGeometry_rootBoundaryInput D S C g m side l))
-    (JC false 0) (JC false 1) (JC false 2) (JC false 3)
-    (JC true 0) (JC true 1) (JC true 2) (JC true 3) JB j
+  exact rootInputDirections
+    (fun y => n04PositiveGeometry_rootRawCoefficient D S C g
+      (n01ComponentRoot C m side) (n01ComponentRootOrientation side) false
+      (liftSectorParameter S C y))
+    (fun y => n04PositiveGeometry_rootRawCoefficient D S C g
+      (n01ComponentRoot C m side) (n01ComponentRootOrientation side) true
+      (liftSectorParameter S C y))
+    (fun y => n01RootLabel S C (liftSectorParameter S C y) m side)
+    (JC false) (JC true) JB j
 
 end ContinuousFlexibility.Analysis
