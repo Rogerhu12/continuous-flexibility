@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+import ContinuousFlexibility.Analysis.N04PositiveGeometryProof
 
 /-!
 # N04Coordinates-Realization: positive geometry
@@ -15,7 +15,17 @@ namespace ContinuousFlexibility.Blueprint
 
 open ContinuousFlexibility.Analysis
 
-theorem N04RealizationPositiveGeometry : N04RealizationPositiveGeometryObligation := by
-  sorry
+theorem N04RealizationPositiveGeometry : N04RealizationPositiveGeometryObligation :=
+  n04Realization_positiveGeometry
 
 end ContinuousFlexibility.Blueprint
+
+open Lean in
+run_cmd do
+  let axioms ← collectAxioms
+    ``ContinuousFlexibility.Blueprint.N04RealizationPositiveGeometry
+  for ax in axioms do
+    unless ax == ``propext || ax == ``Classical.choice || ax == ``Quot.sound do
+      throwError "Unexpected axiom {ax} in N04RealizationPositiveGeometry"
+
+#print axioms ContinuousFlexibility.Blueprint.N04RealizationPositiveGeometry

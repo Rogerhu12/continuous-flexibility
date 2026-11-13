@@ -42,6 +42,39 @@ scalar derivative, and surjectivity. It then composes that finite
 dimensional inverse with the original coefficient tower; no inverse
 regularity hypothesis is substituted for the construction.
 
+## Actual current-data construction
+
+The endpoint traces come from the actual source maps and their root
+contexts. The angular defect and the radial coefficients are composed
+with the same endpoint inverse circle, and all their finite prefixes use
+one low seminorm order chosen before the parameter and spatial orders.
+
+`N04PositiveGeometryTransportSamplePrefix` records positive joint words
+of the displayed transport and its inverse. It keeps the parameter
+arity bound, the low and high seminorm boxes, the original component
+sample, and one parameter-height factor. Boundary prefixes are aligned
+by increasing their angular horizons before composition. This leaves
+the normalized denominator unchanged; the additional shift pays for
+turning boundary coefficients into plane fields.
+
+The finite coefficient kernels, angular inverse, and moving-point
+composition give this prefix for the actual `τ` and `σ`. Their constants
+are collected into one material power before selecting a component or
+state. No estimate for an independently chosen transport is assumed.
+
+The physical height is formed from the same inverse transport and the
+fixed reference height. The pulled height uses the identity between the
+chosen forward and inverse transports. The coordinate construction uses
+the reference chart and inverse chart, followed by the affine unit-cell
+normalization. Its physical width factor is bounded by
+`max 1 (D.b - D.a)` and enters only the finite constant.
+
+Finally, the coordinate, physical-height, and pulled-height data are
+restricted to one common neighborhood. The geometry collector produces
+the remaining reciprocal and Jacobian atoms and transfers the result to
+every auxiliary column. The final obligation retains the chosen buffer,
+matching transports, and reference-state identities throughout.
+
 ## Validation record
 
 The merge of the updated lead (`a4733032`) exposed two rewrite failures in
@@ -50,7 +83,9 @@ definitionally the original reference state. The proof now states this
 exact reference-atom equality before rewriting. This is part of the
 current line's complete-CI responsibility under the revised rules.
 
-The positive blueprint proof is still being assembled. Completion requires
-its full proof, the strict axiom audit, and a successful complete CI run;
-the interface changes and historical counterexample alone do not establish
-completion.
+The positive blueprint now invokes the unconditional construction in
+`N04PositiveGeometryProof.lean`. Its module checks the transitive axiom
+set against `propext`, `Classical.choice`, and `Quot.sound`, and prints that
+set for the CI log. Compilation fixes are being validated before recording
+completion; the interface changes and historical counterexample alone do
+not establish completion.
