@@ -341,9 +341,18 @@ theorem negativeInverse_inverseJacobian_bound
             |planeJacobian ((G.V η).chart (G.lift η z) k)
               (G.pulledPoint η (G.lift η z) k q)|⁻¹ ≤
               B * G.W.U.E0 (G.W.U.sample ((G.V η).cell k)) ^ B := by
-  obtain ⟨b', ε', C, hb, hε', hε'ε, hC, hvalues⟩ :=
+  have hcurrent :=
     G.negativeInverse_atom_value_bound hadm.2.1 .jacobianInverse
       (by simp [atomIsGeometry]) h
+  let b' : ℕ := hcurrent.choose
+  let ε' : ℝ := hcurrent.choose_spec.choose
+  let C : ℝ := hcurrent.choose_spec.choose_spec.choose
+  have hc := hcurrent.choose_spec.choose_spec.choose_spec
+  have hb : b ≤ b' := hc.1
+  have hε' : 0 < ε' := hc.2.1
+  have hε'ε : ε' ≤ ε := hc.2.2.1
+  have hC : 0 < C := hc.2.2.2.1
+  have hvalues := hc.2.2.2.2
   obtain ⟨M, P, hM, hP, htransfer⟩ := G.negativeInverse_pair_sample_weights 0 C hC.le
   obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (C * M) P
   refine ⟨b', ε', B, hb, hε', hε'ε, hB, ?_⟩
@@ -437,14 +446,21 @@ theorem negativeInverse_atom_purePrefix
     intro s
     obtain ⟨B, hB, hb⟩ := G.negativeInverse_reference_geometry_bounds s
     exact ⟨B, hB, fun m hm q hq i j hij => hb 0 m hm a ha q hq i j hij⟩
-  obtain ⟨low, hlow, hprefix⟩ := h.negativeInverse_sharpPrefix_power
+  have hfamily := h.negativeInverse_sharpPrefix_power
     G.W.radial.1 hU G.W.negativeInverse_parameterInterpolation
     (fun m hm => (G.negativeInverse_reference_geometry_regular 0 m hm a ha).1)
     href (G.cost_nonneg 0).2.2 (G.cost_nonneg 0).2.1
+  let low : ℕ := hfamily.choose
+  have hlow : b ≤ low := hfamily.choose_spec.1
+  have hprefix := hfamily.choose_spec.2
   refine ⟨low, hlow, fun K => ?_⟩
-  obtain ⟨shift, hshift, hp⟩ := hprefix K
+  let shift : ℕ := (hprefix K).choose
+  have hshift : 1 ≤ shift := (hprefix K).choose_spec.1
+  have hp := (hprefix K).choose_spec.2
   refine ⟨shift, hshift, fun s => ?_⟩
-  obtain ⟨C, hC, hb⟩ := hp s
+  let C : ℝ := (hp s).choose
+  have hC : 0 < C := (hp s).choose_spec.1
+  have hb := (hp s).choose_spec.2
   obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack ((2 : ℝ) ^ s * C) C
   refine ⟨B, hB, ?_⟩
   intro m hm J z hz hzlow q hq n w hwK hws v hvlow R hR hzR hvR hvphys hvstate hvspatial

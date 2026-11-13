@@ -313,9 +313,15 @@ theorem negativeInverse_radial_closedHalf_small
         p ∈ Icc ((G.V 0).physicalLeft k) ((G.V 0).physicalRight k) ×ˢ (univ : Set ℝ) →
         |G.negativeInversePhysicalAtomFamily 0 .chartRadial z k p -
           G.negativeInversePhysicalAtomFamily 0 .chartRadial 0 k p| ≤ 1 / 4 := by
-  obtain ⟨b', ε', hb, hε', hε'ε, hsmall⟩ :=
+  have hbound :=
     G.negativeInverse_atomData_uniform_small hadm.2.1 .chartRadial (by decide) h 0 0
       (by norm_num : (0 : ℝ) < 1 / 4)
+  let b' : ℕ := hbound.choose
+  let ε' : ℝ := hbound.choose_spec.choose
+  have hb : b ≤ b' := hbound.choose_spec.choose_spec.1
+  have hε' : 0 < ε' := hbound.choose_spec.choose_spec.2.1
+  have hε'ε : ε' ≤ ε := hbound.choose_spec.choose_spec.2.2.1
+  have hsmall := hbound.choose_spec.choose_spec.2.2.2
   obtain ⟨B, hB, hl⟩ := G.negativeInverse_length_values
   refine ⟨b', ε', hb, hε', hε'ε, ?_⟩
   intro z hz k m side hi p hp hhalf
@@ -445,10 +451,19 @@ theorem negativeInverse_componentScalars_purePrefix
     · exact hc .chartRadial trivial
     · exact hc .chartAngleDefect trivial
     · exact hh .height trivial
-  obtain ⟨base, hbase, hprefix⟩ := G.negativeInverse_physicalFamily_purePrefix
+  have hfamily := G.negativeInverse_physicalFamily_purePrefix
     hadm n04NegativeInverseScalarAtom n04NegativeInverseScalarAtom_physical hdata
-  obtain ⟨smallBase, radius, hsmallBase, hradius, hradiusε, hsmall⟩ :=
+  let base : ℕ := hfamily.choose
+  have hbase : b ≤ base := hfamily.choose_spec.1
+  have hprefix := hfamily.choose_spec.2
+  have hbound :=
     G.negativeInverse_radial_closedHalf_small hadm (hc .chartRadial trivial)
+  let smallBase : ℕ := hbound.choose
+  let radius : ℝ := hbound.choose_spec.choose
+  have hsmallBase : b ≤ smallBase := hbound.choose_spec.choose_spec.1
+  have hradius : 0 < radius := hbound.choose_spec.choose_spec.2.1
+  have hradiusε : radius ≤ ε := hbound.choose_spec.choose_spec.2.2.1
+  have hsmall := hbound.choose_spec.choose_spec.2.2.2
   let low := max base smallBase
   let ε' := min radius (1 / 2)
   have hlow : b ≤ low := hbase.trans (le_max_left _ _)
@@ -468,9 +483,13 @@ theorem negativeInverse_componentScalars_purePrefix
     exact h.trans (le_max_right _ _)
   have hmono : Monotone (parameterGrading G.W.S) := sectorPairGrading_monotone G.W.S
   refine ⟨low, ε', hlow, hadm', hε'ε, hε'half, fun K => ?_⟩
-  obtain ⟨shift, hshift, hpref⟩ := hprefix K
+  let shift : ℕ := (hprefix K).choose
+  have hshift : 1 ≤ shift := (hprefix K).choose_spec.1
+  have hpref := (hprefix K).choose_spec.2
   refine ⟨shift, hshift, fun s => ?_⟩
-  obtain ⟨C, hC, hb⟩ := hpref s
+  let C : ℝ := (hpref s).choose
+  have hC : 0 < C := (hpref s).choose_spec.1
+  have hb := (hpref s).choose_spec.2
   obtain ⟨D, hD, htransfer⟩ := G.negativeInverse_pair_sample_heightWeight C hC.le
   obtain ⟨CO, hCO, houter⟩ := n04NegativeInverseOverlapOuter_finiteJets (s + K)
   obtain ⟨B, hB, hpack⟩ := n04NegativeInverse_finiteComposition_envelope (s + K) hCO hL hD

@@ -320,12 +320,19 @@ theorem negativeInverse_physicalFamily_purePrefix
     have ha := hselect a
     cases he : select a <;> simp_all only [negativePhysicalGeometryAtom, atomIsGeometry,
       false_or, or_false, true_or, or_true]
-  obtain ⟨low, hlow, hprefix⟩ := G.negativeInverse_atomFamily_purePrefix select hgeometry h
+  have hfamily := G.negativeInverse_atomFamily_purePrefix select hgeometry h
+  let low : ℕ := hfamily.choose
+  have hlow : b ≤ low := hfamily.choose_spec.1
+  have hprefix := hfamily.choose_spec.2
   obtain ⟨D, hD, hlength⟩ := G.negativeInverse_length_values
   refine ⟨low, hlow, fun K => ?_⟩
-  obtain ⟨shift, hshift, hpref⟩ := hprefix K
+  let shift : ℕ := (hprefix K).choose
+  have hshift : 1 ≤ shift := (hprefix K).choose_spec.1
+  have hpref := (hprefix K).choose_spec.2
   refine ⟨shift, hshift, fun s => ?_⟩
-  obtain ⟨C, hC, hb⟩ := hpref s
+  let C : ℝ := (hpref s).choose
+  have hC : 0 < C := (hpref s).choose_spec.1
+  have hb := (hpref s).choose_spec.2
   obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (C * (1 + D) ^ s) (C + D * s)
   refine ⟨B, hB, ?_⟩
   intro a k m side hi J z hz hzlow p hp hhalf n w hwK hws v hvlow R hR hzR hvR hvphys hvstate hvspatial
