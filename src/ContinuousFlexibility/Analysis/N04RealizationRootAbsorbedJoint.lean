@@ -1,6 +1,8 @@
 import ContinuousFlexibility.Analysis.N04RealizationPolarInputJoint
 import ContinuousFlexibility.Analysis.N06RootAbsorbedPacket
 import ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus
+import ContinuousFlexibility.Analysis.N01cParameterCalculus
+import ContinuousFlexibility.Analysis.NormedSmoothDirections
 
 /-!
 # The actual absorbed root packet has genuine joint parameter jets
@@ -64,11 +66,11 @@ def n04Realization_rootAbsorbedCoordinates_joint
   let π : ((AnnularState S × ℝ) × PolarPoint) →L[ℝ] PolarPoint :=
     ContinuousLinearMap.snd ℝ (AnnularState S × ℝ) PolarPoint
   let Jw : SmoothDirections U (fun z => D.w z.2.1) :=
-    ((smoothDirections_contDiffOn hΩ hw).compAffine π 0 hU
+    ((smoothDirectionsOfContDiffOn hΩ hw).compAffine π 0 hU
       (fun z hz => by simpa only [zero_add, π, ContinuousLinearMap.coe_snd'] using hz.2)).congr
         (fun z _ => by simp only [zero_add, π, ContinuousLinearMap.coe_snd'])
   let Ji : SmoothDirections U (fun z => (D.w z.2.1)⁻¹) :=
-    ((smoothDirections_contDiffOn hΩ hwinv).compAffine π 0 hU
+    ((smoothDirectionsOfContDiffOn hΩ hwinv).compAffine π 0 hU
       (fun z hz => by simpa only [zero_add, π, ContinuousLinearMap.coe_snd'] using hz.2)).congr
         (fun z _ => by simp only [zero_add, π, ContinuousLinearMap.coe_snd'])
   let JP (i : Fin 5) : SmoothDirections U
@@ -82,9 +84,9 @@ def n04Realization_rootAbsorbedCoordinates_joint
       fun z => (D.w z.2.1)⁻¹ * (z.1.2 * stateUPolarInput S 4 z.1.1 z.2),
       fun _ => 1]
   let JF : ∀ i : Fin 6, SmoothDirections U (F i) :=
-    Fin.cases Jw (Fin.cases (Ji.mul (JP 0)) (Fin.cases (JP 1)
-      (Fin.cases (Ji.mul (JP 3)) (Fin.cases (Ji.mul (JP 4))
-        (Fin.cases (smoothDirections_constant hU (1 : ℝ)) Fin.elim0)))))
+    Fin.cases Jw (Fin.cases (smoothDirections_realMul Ji (JP 0)) (Fin.cases (JP 1)
+      (Fin.cases (smoothDirections_realMul Ji (JP 3)) (Fin.cases (smoothDirections_realMul Ji (JP 4))
+        (Fin.cases (smoothDirections_constant hU (1 : ℝ)) (fun i => i.elim0))))))
   apply (smoothDirections_scalarTuple hU JF).congr
   intro z hz
   rw [actualRootAbsorbedCoordinates_polar]
