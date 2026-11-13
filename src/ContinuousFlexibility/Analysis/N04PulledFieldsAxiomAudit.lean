@@ -47,6 +47,7 @@ import ContinuousFlexibility.Analysis.N04PulledFieldsActualDisplacementFixedBase
 import ContinuousFlexibility.Analysis.N04PulledFieldsStripAngularPower
 import ContinuousFlexibility.Analysis.N04PulledFieldsActualPolynomialGrowth
 import ContinuousFlexibility.Analysis.N04PulledFieldsActualVelocityMixedGrowth
+import ContinuousFlexibility.Analysis.N04PulledFieldsStripPhysicalCost
 import Lean.Util.CollectAxioms
 
 /-!

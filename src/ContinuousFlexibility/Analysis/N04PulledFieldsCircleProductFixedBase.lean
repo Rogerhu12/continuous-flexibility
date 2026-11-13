@@ -121,6 +121,47 @@ theorem n04PulledFields_fixedBaseFamily_quadratic
               rw [map_zero]
               exact mul_nonneg (by positivity) (tameJetSize_nonneg _ _ _ _ _ _ _)
 
+/-- A bilinear operation on a pair inherits one fixed low base.  The scalar
+estimate is transferred before any concrete projective space is instantiated. -/
+theorem n04PulledFields_fixedBaseFamily_pair_of_multilinear_bound
+    {I E F : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    [IsTopologicalAddGroup F] [ContinuousSMul ℝ F]
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F)
+    (A : (E × E) [×2]→L[ℝ] F) (P : E → E → F)
+    (heq : ∀ v, A v = P (v 0).1 (v 1).2)
+    (hb : ∃ base loss : ℕ, ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ u v : E,
+      q s (P u v) ≤ C *
+        (p (s + loss) u * p base v + p base u * p (s + loss) v)) :
+    N04PulledFieldsFixedBaseFamily (pairGrading p p) q univ
+      (fun (_ : I) x => P x.1 x.2) := by
+  obtain ⟨base, loss, hb⟩ := hb
+  have hA : ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ x y : E × E,
+      q s (bilinearJetValue A x y) ≤ C *
+        (pairGrading p p (s + loss) x * pairGrading p p base y +
+          pairGrading p p base x * pairGrading p p (s + loss) y) := by
+    intro s
+    obtain ⟨C, hC, hc⟩ := hb s
+    refine ⟨C, hC, fun x y => ?_⟩
+    rw [show bilinearJetValue A x y = P x.1 y.2 from heq ![x, y]]
+    apply (hc x.1 y.2).trans
+    apply mul_le_mul_of_nonneg_left _ hC
+    change
+      p (s + loss) x.1 * p base y.2 + p base x.1 * p (s + loss) y.2 ≤
+        (p (s + loss) x.1 + p (s + loss) x.2) * (p base y.1 + p base y.2) +
+          (p base x.1 + p base x.2) * (p (s + loss) y.1 + p (s + loss) y.2)
+    apply add_le_add
+    · exact mul_le_mul (le_add_of_nonneg_right (apply_nonneg _ _))
+        (le_add_of_nonneg_left (apply_nonneg _ _)) (apply_nonneg _ _)
+        (add_nonneg (apply_nonneg _ _) (apply_nonneg _ _))
+    · exact mul_le_mul (le_add_of_nonneg_right (apply_nonneg _ _))
+        (le_add_of_nonneg_left (apply_nonneg _ _)) (apply_nonneg _ _)
+        (add_nonneg (apply_nonneg _ _) (apply_nonneg _ _))
+  exact (n04PulledFields_fixedBaseFamily_quadratic (I := I)
+    (pairGrading p p) q A base loss hA).congr
+      (fun _ x _ => heq ![x, x])
+
 end ContinuousFlexibility.Analysis
 
 namespace ContinuousFlexibility.Statements
@@ -138,32 +179,11 @@ include hI
 theorem n04PulledFields_fixedBase_circleProduct :
     N04PulledFieldsFixedBaseFamily (pairGrading M.grading M.grading) M.grading univ
       (fun (_ : I) x => circleProductBilinear hM hT hD hγ x.1 x.2) := by
-  let data := circleProduct_oneHigh_bound hM hT hD hγ hI
-  let B := circleProductPairMultilinear hM hT hD hγ
-  have hB : ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ x y : M.Space × M.Space,
-      M.grading s (bilinearJetValue B x y) ≤ C *
-        (pairGrading M.grading M.grading (s + data.choose_spec.choose) x *
-          pairGrading M.grading M.grading data.choose y +
-        pairGrading M.grading M.grading data.choose x *
-          pairGrading M.grading M.grading (s + data.choose_spec.choose) y) := by
-    intro s
-    let estimate := data.choose_spec.choose_spec s
-    refine ⟨estimate.choose, estimate.choose_spec.1, fun x y => ?_⟩
-    rw [show bilinearJetValue B x y = circleProductBilinear hM hT hD hγ x.1 y.2 from
-      circleProductPairMultilinear_apply hM hT hD hγ ![x, y]]
-    apply (estimate.choose_spec.2 x.1 y.2).trans
-    apply mul_le_mul_of_nonneg_left _ estimate.choose_spec.1
-    simp only [pairGrading_apply]
-    apply add_le_add
-    · exact mul_le_mul (le_add_of_nonneg_right (apply_nonneg _ _))
-        (le_add_of_nonneg_left (apply_nonneg _ _)) (apply_nonneg _ _)
-        (add_nonneg (apply_nonneg _ _) (apply_nonneg _ _))
-    · exact mul_le_mul (le_add_of_nonneg_right (apply_nonneg _ _))
-        (le_add_of_nonneg_left (apply_nonneg _ _)) (apply_nonneg _ _)
-        (add_nonneg (apply_nonneg _ _) (apply_nonneg _ _))
-  exact (n04PulledFields_fixedBaseFamily_quadratic (I := I)
-    (pairGrading M.grading M.grading) M.grading B data.choose data.choose_spec.choose hB).congr
-      (fun _ x _ => circleProductPairMultilinear_apply hM hT hD hγ ![x, x])
+  exact n04PulledFields_fixedBaseFamily_pair_of_multilinear_bound
+    M.grading M.grading (circleProductPairMultilinear hM hT hD hγ)
+    (circleProductBilinear hM hT hD hγ)
+    (circleProductPairMultilinear_apply hM hT hD hγ)
+    (circleProduct_oneHigh_bound hM hT hD hγ hI)
 
 theorem n04PulledFields_fixedBase_circleProduct_maps
     {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
