@@ -45,11 +45,11 @@ private theorem matchedRoot_boundaryJets
   have hFc : ContDiffAt ℝ ∞ (fun p => F (rootProfileShift r σ p)) (0, θ) := by
     have hfAt : ContDiffAt ℝ ∞ F (rootProfileShift r σ (0, θ)) := by
       simpa only [hpoint] using hF θ
-    simpa only [Function.comp_apply] using hfAt.comp (0, θ) harg.contDiffAt
+    simpa only [Function.comp_def] using hfAt.comp (0, θ) harg.contDiffAt
   have hhc : ContDiffAt ℝ ∞ (fun p => h (rootProfileShift r σ p)) (0, θ) := by
     have hhAt : ContDiffAt ℝ ∞ h (rootProfileShift r σ (0, θ)) := by
       simpa only [hpoint] using hh θ
-    simpa only [Function.comp_apply] using hhAt.comp (0, θ) harg.contDiffAt
+    simpa only [Function.comp_def] using hhAt.comp (0, θ) harg.contDiffAt
   exact ⟨iteratedFDeriv_eq_of_eqOn_open_of_mem_closure hΩ hx
       (fun p hp => (hmatch p hp).1) hFc (hM θ) n,
     iteratedFDeriv_eq_of_eqOn_open_of_mem_closure hΩ hx
@@ -119,6 +119,7 @@ theorem n04Realization_actualAtlas_matchedRoot_boundaryJets
     obtain ⟨_, hF, _, _, _, _, hh, _, _⟩ :=
       hcollar 0 θ (by simpa only [abs_zero] using hδ)
     exact ⟨hF, hh⟩
+  dsimp only
   intro θ n
   refine matchedRoot_boundaryJets hδ
     (fun θ => (hregular θ).1) (fun θ => (hregular θ).2.1)

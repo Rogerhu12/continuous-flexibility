@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N04RealizationInverseJetFormula
 import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+import ContinuousFlexibility.Scalar.WeightedTowerOperations
 
 /-!
 # Genuine parameter towers for a finite prefix of boundary inverse jets
@@ -57,7 +58,7 @@ def n04Realization_inverseJet_step
       let JV : ∀ i, SmoothDirections U (V i) := fun i =>
         Jlower (c.partSize i) (c.partSize_pos i)
           (flowJet_partition_partSize_lt c hc i) (v ∘ c.emb i)
-      let Jpair := smoothDirectionsProd (JF c.length hc c.length_le)
+      let Jpair := smoothDirectionsUniformProd (JF c.length hc c.length_le)
         (smoothDirections_vectorTuple hU JV)
       let K := smoothDirections_contDiff_comp Jpair isOpen_univ
         (contDiff_multilinearEvaluation (Y := E) (Z := F) c.length).contDiffOn
@@ -71,7 +72,7 @@ def n04Realization_inverseJet_step
       refine K.congr (fun z _ => ?_)
       simp only [term, if_neg hc]
   let Jsum := smoothDirections_finiteSum hU JT
-  let Jpair := smoothDirectionsProd JL Jsum
+  let Jpair := smoothDirectionsUniformProd JL Jsum
   have hkernel : ContDiff ℝ ∞
       (fun p : (F →L[ℝ] E) × F => -p.1 p.2) :=
     (contDiff_fst.clm_apply contDiff_snd).neg
