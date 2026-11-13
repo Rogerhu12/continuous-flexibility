@@ -67,7 +67,9 @@ theorem n04NegativeGeometry_obligation_false :
 ```
 
 The argument uses an actual admissible gauge, not just an arbitrary scalar
-family. Its compilation status is recorded below.
+family. The theorem compiled at commit `3e23f7b3179f582b843c424779a2388a1a43f958`,
+and its guarded axiom audit passed with exactly `propext`,
+`Classical.choice`, and `Quot.sound`.
 
 1. `N04NegativeGeometryAdmissibleExistence` constructs `G`, `b`, and
    `ε > 0` from the proved retained-start, optical, positive-reference and
@@ -134,44 +136,48 @@ the corresponding family. With `P = True`, this recovers the unrestricted
 tower needed by the assembly. The frozen interface has not been altered
 on this branch, in accordance with `N04Realization-Common.md`.
 
-## Validation
+## Validation and task status
 
-The source modules have no proof placeholders, added project axioms,
-unsafe declarations, or raised heartbeat limits. The interface
-counterexample, negative reductions, admissible existence, reference
-positivity, jump obstruction and full refutation include guarded axiom
-audits.
+[CI run 43420024812](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43420024812)
+at `3e23f7b3179f582b843c424779a2388a1a43f958` records
+`Built ContinuousFlexibility.Analysis.N04NegativeGeometryObstruction (11s)`
+in its `build-log` artifact's `quick.log`. All eight supporting modules
+were successfully replayed from their verified builds. The final module
+contains this successful guarded audit:
 
-The first CI run, `43417103992` at `9344362a`, accepted the explicit
-absolute-value counterexample and printed only `propext`,
-`Classical.choice`, and `Quot.sound`; its module failed only because the
-guard expected different line wrapping. The run also identified two
-small elaboration repairs in the reduction/cancellation lemmas, now
-addressed, and an inherited reference-chain failure in
-`N03RootEndpointMaterialJets`; the lead's subsequent repair `3e7dcfcf`
-has been merged.
+```lean
+/-- info: 'ContinuousFlexibility.Analysis.n04NegativeGeometry_obligation_false' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms ContinuousFlexibility.Analysis.n04NegativeGeometry_obligation_false
+```
 
-The second run, `43418085638` at `eec2d271`, compiled the interface audit,
-height-multiplier preservation, negative reductions, admissible-gauge
-existence, and the gauge-value module. It found two pointwise-continuity
-elaboration errors in the jump module and a reference-identity simplification
-plus a large-record rewrite timeout in the gauge perturbation module.
-These have been replaced by explicitly typed scalar equalities, without
-raising heartbeat limits. The inherited reference-chain failure moved to
-`ActualReferenceRootFiniteMaterialData.lean:92`
-(`exists_bound_of_continuousOn` on a split line); the subnode does not
-import that module.
+The nine added modules therefore compile, and the full negation has a
+kernel-checked proof using only the permitted axioms. No source proof
+placeholders, project axioms, unsafe declarations, or raised heartbeat
+limits were added. No open current-geometry blueprint theorem is in the
+refutation's import closure. The successful final audit checks the entire
+proof dependency chain, including the actual admissible-gauge witness.
 
-The third run, `43419028122` at `550080d9`, compiled the jump obstruction,
-gauge perturbation, and explicit interior factor, so all eight supporting
-modules now compile. The final obstruction reached elaboration but hit
-the default heartbeat limit in a rewrite involving the large gauge record;
-that proof is being split into scalar equalities without changing the
-limit. Its guarded axiom audit has not yet passed. The original
-NegativeGeometry blueprint theorem is not marked complete.
+The original `Blueprint.N04RealizationNegativeGeometry` statement remains
+open. This is a definitive refutation of its unchanged obligation, not a
+completion claim for the original theorem. Its stated completion standard
+cannot be met without a lead-authorized interface repair. Neither shared
+definitions nor the blueprint statement were changed on this branch.
 
-The inherited reference-chain call can be repaired by keeping the method
-dot adjacent to its receiver:
+The verification run above failed solely at the inherited
+`ActualReferenceRootFiniteMaterialData.lean:91–92` call. This module is
+outside the refutation's import closure; responsibility for the ported
+reference chain is assigned to the lead by `N04Realization-Common.md`.
+The workflow's raw `modules compiled / total: 5464 / 5460` is a cached
+artifact count containing stale modules, not a successful full build.
+Repository-wide `statements open` was not recomputed because the full-build
+and blueprint-status steps were skipped; this subnode's original statement
+is open. The lead subsequently repaired that module in `cb14e791`, which
+has been merged into this branch. The post-merge full-CI result is reported
+in [PR #47](https://github.com/Rogerhu12/continuous-flexibility/pull/47).
+
+The lead-owned call can be repaired by keeping the method dot adjacent to
+its receiver:
 
 ```lean
   obtain ⟨W₀, hW₀⟩ :=
@@ -181,4 +187,7 @@ dot adjacent to its receiver:
 
 The split-line version produces the spurious `LE.le`/`Membership.mem`
 method lookup errors; the subsequent destructuring error is a consequence.
-The lead-owned file is unchanged on this branch.
+The lead's merged repair uses the equivalent explicit
+`IsCompact.exists_bound_of_continuousOn` call and also separates grading
+simplifications into a scalar lemma. This subnode did not independently
+edit the lead-owned file.
