@@ -40,7 +40,8 @@ def CurrentJetDataOn (S : PhysicalSpacesData) (T : MaterialData) (cell : ℕ →
   (∀ z ∈ sectorNeighborhood S base ε ε, ∀ m, P m →
     ContDiffOn ℝ ∞ (f z m) unitStrip ∧
       ∀ q ∈ unitStrip, f z m (q + (0, Real.pi)) = f z m q) ∧
-  ∃ J : ∀ m, P m → ∀ (i j : ℕ) (q : unitStrip), SmoothDirections (sectorNeighborhood S base ε ε)
+  ∃ J : ∀ m, P m → ∀ (i j : ℕ) (q : unitStrip),
+      SmoothDirections (sectorNeighborhood S base ε ε)
       (fun z => mixedDerivative i j (fun y => f z m y - f₀ m y) q.val),
     (∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m, P m → ∀ (q : unitStrip) (i j : ℕ),
@@ -49,7 +50,7 @@ def CurrentJetDataOn (S : PhysicalSpacesData) (T : MaterialData) (cell : ℕ →
           B * T.E0 (T.sample (cell m)) ^ B * T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) *
             parameterGrading S (s + loss) z) ∧
     ∀ k : ℕ, ∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
-      ∀ z ∈ sectorNeighborhood S base ε ε, ∀ v : Fin k → Parameter S, ∀ m, ∀ hm : P m,
+      ∀ z ∈ sectorNeighborhood S base ε ε, ∀ v : Fin k → Parameter S, ∀ m (hm : P m),
         ∀ (q : unitStrip) (i j : ℕ), i + j ≤ s →
           |(J m hm i j q).D k z v| ≤
             B * T.E0 (T.sample (cell m)) ^ B * T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) *

@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+import ContinuousFlexibility.Analysis.N04SourceColumnsAssembly
 
 /-!
 # N04Coordinates-Realization: source factors and columns
@@ -15,7 +15,9 @@ namespace ContinuousFlexibility.Blueprint
 
 open ContinuousFlexibility.Analysis
 
-theorem N04RealizationSourceColumns : N04RealizationSourceColumnObligation := by
-  sorry
+theorem N04RealizationSourceColumns : N04RealizationSourceColumnObligation :=
+  n04SourceColumns_obligation
+
+#print axioms N04RealizationSourceColumns
 
 end ContinuousFlexibility.Blueprint
