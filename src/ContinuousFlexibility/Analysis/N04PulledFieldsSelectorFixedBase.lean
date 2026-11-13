@@ -32,6 +32,24 @@ open scoped Topology BigOperators
 local instance n04PulledFieldsSelectorFixedBaseStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
+private theorem n04PulledFields_negativeTowerJet
+    {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    [IsTopologicalAddGroup F] [ContinuousSMul ℝ F] [T2Space F]
+    {U : Set E} {f : E → F}
+    (J : SmoothDirections U f) (K : SmoothDirections U (fun x => -f x))
+    (n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E) :
+    K.D n x v = -J.D n x v := by
+  let N : SmoothDirections U (fun x => -f x) :=
+    (solveSmoothDirectionsPostcomp J (-ContinuousLinearMap.id ℝ F)).congrOn
+      (fun _ _ => rfl)
+  have hjet := congrArg (fun A : E [×n]→L[ℝ] F => A v) (K.unique N n x hx)
+  simp only [N, SmoothDirections.congrOn, solveSmoothDirectionsPostcomp,
+    ContinuousLinearMap.compContinuousMultilinearMap_coe, Function.comp_apply,
+    ContinuousLinearMap.neg_apply, ContinuousLinearMap.id_apply] at hjet
+  exact hjet
+
 /-- The original inverse-flow displacement retains its physical circle
 weight and one low base for all selectors and all parameter orders. -/
 theorem N01Properties.n04PulledFields_selectorInverseCircle_fixedBase_oneHigh
@@ -153,18 +171,10 @@ theorem N01Properties.n04PulledFields_selectorInverseCircle_fixedBase_oneHigh
     smoothDirectionsOfJets hU (projectiveCompositionJets (f i) (JF i).D (KP i).D)
       (HasProjectiveJetsOn.comp_topological hU hV
         (JF i).hasProjectiveJetsOn (KP i).hasProjectiveJetsOn (hmap i))
-  let JA : SmoothDirections U (hN.selectorInverseCircle hS hT rsel hrsel) :=
-    (solveSmoothDirectionsPostcomp JC (-ContinuousLinearMap.id ℝ H.Space)).congr
-      (fun _ _ => rfl)
-  have hjet := congrArg (fun A : (StateDirections S × ℝ) [×n]→L[ℝ] H.Space => A v)
-    (J.unique JA n x hx)
-  have heq : J.D n x v =
-      -projectiveCompositionJets (f i) (JF i).D (KP i).D n x v := by
-    simpa only [JA, SmoothDirections.congr, solveSmoothDirectionsPostcomp,
-      ContinuousLinearMap.compContinuousMultilinearMap_coe, Function.comp_apply,
-      ContinuousLinearMap.neg_apply, ContinuousLinearMap.id_apply, JC,
-      smoothDirectionsOfJets] using hjet
+  have heq : J.D n x v = -JC.D n x v :=
+    n04PulledFields_negativeTowerJet JC J n x hx v
   rw [heq, map_neg_eq_map]
+  change H.grading s (projectiveCompositionJets (f i) (JF i).D (KP i).D n x v) ≤ _
   exact estimate.choose_spec.2 i x hx hbx v
 
 end ContinuousFlexibility.Statements

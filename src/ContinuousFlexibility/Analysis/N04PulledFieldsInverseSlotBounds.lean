@@ -18,6 +18,8 @@ namespace ContinuousFlexibility.Analysis
 open Set ContinuousFlexibility.Statements
 open scoped BigOperators
 
+set_option backward.isDefEq.respectTransparency false
+
 variable {E : Type*} [AddCommGroup E] [Module ℝ E]
 
 private theorem n04PulledFieldsInverseSlot_head_zero
@@ -41,8 +43,8 @@ private theorem n04PulledFieldsInverseSlot_head_zero
         (fun a j => scalarAngularHead (fun a j => A a b j) (v 0).1 a j)) =
         (0 : ScalarAngularJetData (E × ℝ)) := by
     funext b k
-    simp only [hhead b, map_zero]
-  rw [hzero, map_zero, MultilinearMap.zero_apply]
+    simp only [hhead b, map_zero, Pi.zero_apply]
+  rw [hzero, map_zero, zero_apply]
 
 /-- Only the exact state count of a pure word enters its double
 expansion.  The permitted parameter directions can be any predicate. -/
@@ -63,16 +65,16 @@ theorem n04PulledFields_doubleExpansion_pureSlots_bound
         C * 2 ^ w.angleArity := by
   induction w generalizing A C with
   | nil =>
-      simpa only [scalarAngularExpansion_zero_apply, StateAngleWord.angleArity,
-        StateAngleWord.stateArity, pow_zero, mul_one] using
-        hA 0 0 rfl Fin.elim0 (fun i => i.elim0)
+      have hh : |A 0 0 0 Fin.elim0| ≤ C := hA 0 0 rfl Fin.elim0 (fun i => i.elim0)
+      change |A 0 0 0 Fin.elim0| ≤ C * 2 ^ 0
+      simpa only [pow_zero, mul_one] using hh
   | @state n w ih =>
       let AH : ∀ a b k : ℕ, MultilinearMap ℝ (fun _ : Fin k => E) ℝ :=
         fun a b k => scalarAngularHead (fun a j => A a b j) (v 0).1 a k
       have hAH (a b : ℕ) (hab : a + b = w.angleArity)
           (u : Fin w.stateArity → E) (hu : ∀ i, allowed (u i)) :
           |AH a b w.stateArity u| ≤ C := by
-        simpa only [AH, scalarAngularHead_apply] using
+        simpa only [AH, scalarAngularHead_apply, StateAngleWord.stateArity] using
           hA a b hab (Fin.cons (v 0).1.1 u)
             (fun i => Fin.cases (hv 0) (fun j => hu j) i)
       have hh := ih AH hC hAH (Fin.tail v) (fun i => hv i.succ)
@@ -119,7 +121,11 @@ theorem n04PulledFields_doubleExpansion_pureSlots_bound
               (fun b k => scalarAngularExpansion k (fun a j => AR a b j)) (Fin.tail v)| +
             |(v 0).2| * |scalarAngularExpansion n
               (fun b k => scalarAngularExpansion k (fun a j => AT a b j)) (Fin.tail v)| := by
-          simpa only [abs_mul] using abs_add_le _ _
+          simpa only [abs_mul] using abs_add_le
+            ((v 0).1.2 * scalarAngularExpansion n
+              (fun b k => scalarAngularExpansion k (fun a j => AR a b j)) (Fin.tail v))
+            ((v 0).2 * scalarAngularExpansion n
+              (fun b k => scalarAngularExpansion k (fun a j => AT a b j)) (Fin.tail v))
         _ ≤ C * 2 ^ w.angleArity + C * 2 ^ w.angleArity := add_le_add hr' ha'
         _ = C * 2 ^ (StateAngleWord.angle w).angleArity := by
           simp only [StateAngleWord.angleArity, pow_succ]

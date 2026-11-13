@@ -95,6 +95,7 @@ theorem n04PulledFields_opticalCoefficientJets_zero
     (hN.returnCorrectionCoefficientScalarJets_zero hS hT hR Q.cell Q.component_cell
       Q.cutoff Q.range_on_component Q.derivative_bounds Q.active_discriminant x hx)
 
+include hN hS hT hR in
 private theorem n04PulledFields_opticalError_spatial
     (π : (ℝ × ℝ) →L[ℝ] ℝ) (x : (StateDirections S × ℝ) × CircleSpace S)
     (hx : x ∈ sectorNeighborhood S base ε ε ×ˢ univ) :
@@ -202,7 +203,7 @@ def n04PulledFields_correctedCoefficientMixedRegularity
   apply (F.add N hU hΩ).congr hΩ
   · intro z hz
     have h := W.field.smooth_coefficients (liftSectorParameter W.S W.C z)
-      (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
+      (liftSectorParameter_mem_stateNeighborhood (C := W.C) hz le_rfl)
       (W.through03.1.1.2.2.1.liftSectorParameter_sector z)
     unfold canonicalCoefficientComponent
     split_ifs
@@ -210,7 +211,7 @@ def n04PulledFields_correctedCoefficientMixedRegularity
     · exact h.2.1
     · exact h.2.2
   · intro z hz p hp
-    have hz' := liftSectorParameter_mem_stateNeighborhood hz le_rfl
+    have hz' := liftSectorParameter_mem_stateNeighborhood (C := W.C) hz le_rfl
     have hs := W.through03.1.1.2.2.1.liftSectorParameter_sector z
     have he := returnCorrectionCoefficientError_at_actual W.through03.1.1
       W.through03.1.2 W.hS W.cutoff.cutoff hz' hs p hp

@@ -88,8 +88,9 @@ theorem n04PulledFields_spatial_of_physical
       F (G.lift η z) (p + (0, Real.pi)) = F (G.lift η z) p) (m : ℕ) :
     ContDiffOn ℝ ∞ (G.pulled η F z m) unitStrip ∧
       ∀ y ∈ unitStrip, G.pulled η F z m (y + (0, Real.pi)) = G.pulled η F z m y := by
+  have hproduct := n04PulledFields_pulledPoint_mapsTo G η hadm m
   have hmap : MapsTo (G.pulledPoint η (G.lift η z) m) unitStrip (annularOpen G.W.D) :=
-    fun y hy => n04PulledFields_pulledPoint_mapsTo G η hadm m ⟨hz, hy⟩
+    fun y hy => @hproduct (z, y) ⟨hz, hy⟩
   refine ⟨hsmooth.comp (n04PulledFields_pulledPoint_spatial G η hadm hz m) hmap, ?_⟩
   intro y hy
   change F (G.lift η z) (G.pulledPoint η (G.lift η z) m (y + (0, Real.pi))) = _
@@ -120,11 +121,14 @@ theorem n04PulledFields_coefficient_spatial
     · exact hreg.2.2
   · intro p hp
     have hper := G.W.field.periodic_coefficients _ hzstate hs p.1 hp.1
+    have hpadd : p + (0, Real.pi) = (p.1, p.2 + Real.pi) :=
+      Prod.ext (add_zero p.1) rfl
     unfold N04RealizationGauge.coefficientField canonicalCoefficientComponent
+    rw [hpadd]
     split_ifs
-    · simpa only [Prod.fst_add, Prod.snd_add, add_zero] using hper.1 p.2
-    · simpa only [Prod.fst_add, Prod.snd_add, add_zero] using hper.2.1 p.2
-    · simpa only [Prod.fst_add, Prod.snd_add, add_zero] using hper.2.2 p.2
+    · exact hper.1 p.2
+    · exact hper.2.1 p.2
+    · exact hper.2.2 p.2
 
 /-- The reference family in the target is the zero-parameter value of
 the same pulled physical field, exactly as required by the value estimate. -/
@@ -135,6 +139,7 @@ theorem n04PulledFields_pulled_zero
   have hz : G.lift η (0 : Parameter (G.S η)) = G.ref η := by
     simp only [N04RealizationGauge.lift, N04RealizationGauge.ref, liftSectorParameter,
       Prod.fst_zero, Prod.snd_zero, ZeroMemClass.coe_zero, add_zero]
-  simp only [N04RealizationGauge.pulled, N04RealizationGauge.pulledRef, hz]
+  exact congrArg (fun w : AnnularState (G.S η) × ℝ =>
+    fun y => F w (G.pulledPoint η w m y)) hz
 
 end ContinuousFlexibility.Analysis
