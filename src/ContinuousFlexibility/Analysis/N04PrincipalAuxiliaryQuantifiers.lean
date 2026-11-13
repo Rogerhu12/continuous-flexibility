@@ -8,7 +8,8 @@ Principal atoms do not contain the auxiliary column. A neighborhood
 constructed using one reference-jet witness therefore serves every
 auxiliary column. If no reference witness exists, the final implications
 are vacuous. This keeps the neighborhood before the auxiliary column in
-the unchanged blueprint statement.
+the unchanged blueprint statement. The geometry and field premises are
+instantiated with the same selected reference certificate.
 -/
 
 noncomputable section
@@ -88,7 +89,8 @@ theorem n04Principal_obligation_of_fixedAuxiliary
   classical
   by_cases href : ∃ η, ReferenceJets G.W.D G.W.U (G.S η) (G.C η) (G.L η) (G.V η)
   · let η := href.choose
-    have hlocal := hfixed G b ε hA η (hG η) (hF η) href.choose_spec
+    have hlocal := hfixed G b ε hA η
+      (hG η href.choose_spec) (hF η href.choose_spec) href.choose_spec
     let b' : ℕ := hlocal.choose
     let ε' : ℝ := hlocal.choose_spec.choose
     have hproof := hlocal.choose_spec.choose_spec

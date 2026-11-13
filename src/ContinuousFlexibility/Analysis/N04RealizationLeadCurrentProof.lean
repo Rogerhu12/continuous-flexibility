@@ -7,6 +7,9 @@ The five interface statements of `N04RealizationLeadCurrentSplit` give the
 current obligation: the positive family and its neighborhood come from the
 positive geometry statement, every later statement restricts the
 neighborhood, and the data of every atom are restricted to the last one.
+The geometry and field data remain conditional on the same atlas's reference
+jets until the parent supplies that certificate. All neighborhood choices
+still precede the auxiliary column.
 -/
 
 noncomputable section
@@ -47,23 +50,26 @@ theorem n04Realization_currentObligation_of_split
   have hεε : ε ≤ W.ε := hp.2.2.1
   have hadm : G.Admissible b ε :=
     ⟨hb, hε, hεε, hfam, hp.2.2.2.2.1, B, lower, upper, rfl, hp.2.2.2.1⟩
-  have hgeoP : ∀ η, G.GeometryData η (G.Pos η) b ε := hp.2.2.2.2.2
+  have hgeoP : ∀ η, G.ReferenceData η → G.GeometryData η (G.Pos η) b ε :=
+    hp.2.2.2.2.2
   have h2 := hneg G b ε hadm
   let b2 := h2.choose
   let ε2 := h2.choose_spec.choose
   have hp2 := h2.choose_spec.choose_spec
   have hadm2 : G.Admissible b2 ε2 := G.admissible_mono hadm hp2.1 hp2.2.1 hp2.2.2.1
-  have hgeo2 : ∀ η, G.GeometryData η (fun _ => True) b2 ε2 := fun η =>
-    G.geometryData_union η (G.geometryData_mono η (hgeoP η) (fun _ h => h) hp2.1 hp2.2.2.1)
-      (hp2.2.2.2 η)
+  have hgeo2 : ∀ η, G.ReferenceData η → G.GeometryData η (fun _ => True) b2 ε2 :=
+    fun η href =>
+      G.geometryData_union η
+        (G.geometryData_mono η (hgeoP η href) (fun _ h => h) hp2.1 hp2.2.2.1)
+        (hp2.2.2.2 η)
   have h3 := hfield G b2 ε2 hadm2 hgeo2
   let b3 := h3.choose
   let ε3 := h3.choose_spec.choose
   have hp3 := h3.choose_spec.choose_spec
   have hadm3 : G.Admissible b3 ε3 := G.admissible_mono hadm2 hp3.1 hp3.2.1 hp3.2.2.1
-  have hgeo3 : ∀ η, G.GeometryData η (fun _ => True) b3 ε3 := fun η =>
-    G.geometryData_mono η (hgeo2 η) (fun _ h => h) hp3.1 hp3.2.2.1
-  have hfd3 : ∀ η, G.FieldData η b3 ε3 := hp3.2.2.2
+  have hgeo3 : ∀ η, G.ReferenceData η → G.GeometryData η (fun _ => True) b3 ε3 :=
+    fun η href => G.geometryData_mono η (hgeo2 η href) (fun _ h => h) hp3.1 hp3.2.2.1
+  have hfd3 : ∀ η, G.ReferenceData η → G.FieldData η b3 ε3 := hp3.2.2.2
   have h4 := hsrc G b3 ε3 hadm3 hgeo3 hfd3
   have h5 := hprin G b3 ε3 hadm3 hgeo3 hfd3
   let b4 := h4.choose
@@ -89,7 +95,7 @@ theorem n04Realization_currentObligation_of_split
   intro η _ _ _ _ hrefJ a ha hs
   have hdata : G.Data η (fun _ => True) nb ε' (G.atomFamily η a) (G.atomRef η a) :=
     (atom_classification a ha hs).elim
-      (fun hg => ((hgeo3 η).1 a hg).mono (fun _ h => h) hb3 hε'3
+      (fun hg => ((hgeo3 η hrefJ).1 a hg).mono (fun _ h => h) hb3 hε'3
         (G.cost_nonneg η).1 (G.cost_nonneg η).2.1)
       (fun hr => hr.elim
         (fun hsc => (hp4.2.2.2 η hrefJ a hsc).mono (fun _ h => h) (le_max_left _ _)

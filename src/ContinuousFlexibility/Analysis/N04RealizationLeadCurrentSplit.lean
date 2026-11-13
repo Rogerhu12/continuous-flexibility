@@ -109,6 +109,11 @@ abbrev lift (z : Parameter (G.S η)) : AnnularState (G.S η) × ℝ :=
 /-- The reference state. -/
 abbrev ref : AnnularState (G.S η) × ℝ := ((G.C η).referenceState, 0)
 
+/-- Quantitative reference jets of the same replaced atlas. This certificate
+has no neighborhood parameter; it is supplied by the parent current obligation. -/
+abbrev ReferenceData : Prop :=
+  ReferenceJets G.W.D G.W.U (G.S η) (G.C η) (G.L η) (G.V η)
+
 /-- Jet-difference data of the replaced atlas on pieces satisfying `P`. -/
 abbrev Data (P : ℕ → Prop) (b : ℕ) (ε : ℝ)
     (f : Parameter (G.S η) → ℕ → PolarPoint → ℝ) (f₀ : ℕ → PolarPoint → ℝ) : Prop :=
@@ -265,8 +270,9 @@ def N04RealizationSuppliedBufferPositiveGeometryObligation : Prop :=
         (B.centerLeft i) (B.centerRight i) (lower i) (upper i)) ∧
     (∀ i, τ (W.C.referenceState, 0) i = id ∧ σ (W.C.referenceState, 0) i = id ∧
       Q (W.C.referenceState, 0) i = (fun _ => (1 : ℝ))) ∧
-    ∀ η, (N04RealizationGauge.mk W X e Y H τ σ Q B.region).GeometryData η
-      ((N04RealizationGauge.mk W X e Y H τ σ Q B.region).Pos η) b ε
+    ∀ η, (N04RealizationGauge.mk W X e Y H τ σ Q B.region).ReferenceData η →
+      (N04RealizationGauge.mk W X e Y H τ σ Q B.region).GeometryData η
+        ((N04RealizationGauge.mk W X e Y H τ σ Q B.region).Pos η) b ε
 
 /-- One positive transport family with its matching on a smaller neighborhood,
 and the geometry interface on positive pieces. The same reference family
@@ -302,16 +308,20 @@ def N04RealizationNegativeGeometryObligation : Prop :=
     ∃ (b' : ℕ) (ε' : ℝ), b ≤ b' ∧ 0 < ε' ∧ ε' ≤ ε ∧
       ∀ η, G.GeometryData η (G.Neg η) b' ε'
 
-/-- The pulled physical coefficients and columns, given the geometry interface. -/
+/-- The pulled physical coefficients and columns, given the geometry interface
+and the parent's quantitative reference jets of the same atlas. The neighborhood
+is chosen before the auxiliary column and its reference certificate. -/
 def N04RealizationPulledFieldObligation : Prop :=
   ∀ (G : N04RealizationGauge) (b : ℕ) (ε : ℝ), G.Admissible b ε →
-    (∀ η, G.GeometryData η (fun _ => True) b ε) →
-    ∃ (b' : ℕ) (ε' : ℝ), b ≤ b' ∧ 0 < ε' ∧ ε' ≤ ε ∧ ∀ η, G.FieldData η b' ε'
+    (∀ η, G.ReferenceData η → G.GeometryData η (fun _ => True) b ε) →
+    ∃ (b' : ℕ) (ε' : ℝ), b ≤ b' ∧ 0 < ε' ∧ ε' ≤ ε ∧
+      ∀ η, G.ReferenceData η → G.FieldData η b' ε'
 
 /-- The source factors and both scalar columns, given the interface. -/
 def N04RealizationSourceColumnObligation : Prop :=
   ∀ (G : N04RealizationGauge) (b : ℕ) (ε : ℝ), G.Admissible b ε →
-    (∀ η, G.GeometryData η (fun _ => True) b ε) → (∀ η, G.FieldData η b ε) →
+    (∀ η, G.ReferenceData η → G.GeometryData η (fun _ => True) b ε) →
+    (∀ η, G.ReferenceData η → G.FieldData η b ε) →
     ∃ (b' : ℕ) (ε' : ℝ), b ≤ b' ∧ 0 < ε' ∧ ε' ≤ ε ∧ ∀ η,
       ReferenceJets G.W.D G.W.U (G.S η) (G.C η) (G.L η) (G.V η) →
       ∀ a : Atom, atomIsSourceColumn a →
@@ -321,7 +331,8 @@ def N04RealizationSourceColumnObligation : Prop :=
 given the interface. -/
 def N04RealizationPrincipalObligation : Prop :=
   ∀ (G : N04RealizationGauge) (b : ℕ) (ε : ℝ), G.Admissible b ε →
-    (∀ η, G.GeometryData η (fun _ => True) b ε) → (∀ η, G.FieldData η b ε) →
+    (∀ η, G.ReferenceData η → G.GeometryData η (fun _ => True) b ε) →
+    (∀ η, G.ReferenceData η → G.FieldData η b ε) →
     ∃ (b' : ℕ) (ε' : ℝ), b ≤ b' ∧ 0 < ε' ∧ ε' ≤ ε ∧ ∀ η,
       ReferenceJets G.W.D G.W.U (G.S η) (G.C η) (G.L η) (G.V η) →
       ∀ a : Atom, atomIsPrincipal a →

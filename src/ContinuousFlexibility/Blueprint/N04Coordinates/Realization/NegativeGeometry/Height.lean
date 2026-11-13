@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadNegativeSplit
+import ContinuousFlexibility.Analysis.N04NegativeHeightProof
 
 /-!
 # N04Coordinates-Realization, negative geometry: height
@@ -15,7 +15,11 @@ namespace ContinuousFlexibility.Blueprint
 
 open ContinuousFlexibility.Analysis
 
-theorem N04RealizationNegativeHeight : N04RealizationNegativeHeightObligation := by
-  sorry
+theorem N04RealizationNegativeHeight : N04RealizationNegativeHeightObligation :=
+  n04Realization_negativeHeight
 
 end ContinuousFlexibility.Blueprint
+
+/-- info: 'ContinuousFlexibility.Blueprint.N04RealizationNegativeHeight' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms ContinuousFlexibility.Blueprint.N04RealizationNegativeHeight

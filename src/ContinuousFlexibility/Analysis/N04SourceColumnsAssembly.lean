@@ -95,13 +95,15 @@ theorem sourceColumns_data {b : ℕ} {ε : ℝ}
 
 end N04RealizationGauge
 
-/-- The frozen source-column obligation, with its original quantifier order. -/
+/-- The source-column obligation, retaining the same-atlas reference
+premise and the original common-neighborhood quantifier order. -/
 theorem n04SourceColumns_obligation : N04RealizationSourceColumnObligation := by
   classical
   intro G b ε hA hG hF
   by_cases hR : ∃ η, ReferenceJets G.W.D G.W.U (G.S η) (G.C η) (G.L η) (G.V η)
   · let η₀ := hR.choose
-    have hd := G.sourceColumns_data η₀ hA (hG η₀) (hF η₀) hR.choose_spec
+    have hd := G.sourceColumns_data η₀ hA
+      (hG η₀ hR.choose_spec) (hF η₀ hR.choose_spec) hR.choose_spec
     let b' : ℕ := hd.choose
     let ε' : ℝ := hd.choose_spec.choose
     have hd' := hd.choose_spec.choose_spec

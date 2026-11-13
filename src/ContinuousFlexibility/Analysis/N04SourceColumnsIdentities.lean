@@ -24,7 +24,8 @@ namespace ContinuousFlexibility.Analysis
 open Set ContinuousFlexibility.Statements CanonicalGeometry
 open scoped ContDiff
 
-variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+variable {D : ContinuousFlexibility.Statements.ReferenceData}
+  {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
 
 /-- The canonical source is a scalar multiplier times the actual pulled
