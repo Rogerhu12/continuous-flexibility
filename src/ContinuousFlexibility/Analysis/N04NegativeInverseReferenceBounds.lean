@@ -212,10 +212,16 @@ private theorem n04NegativeInverse_valuePrefix_uniform_small
         ∀ (q : unitStrip) (i j : ℕ), i + j ≤ s →
           T.E0 (T.sample (cell m)) ^ A *
             |mixedDerivative i j (fun y => f z m y - f₀ m y) q.val| < δ := by
-  obtain ⟨loss, hdiff⟩ := hvalue
-  obtain ⟨B, hB, hb⟩ := hdiff s
-  obtain ⟨C, hC, hbound⟩ := material_sample_height_coefficient_power_bounded
+  let loss : ℕ := hvalue.choose
+  have hdiff := hvalue.choose_spec s
+  let B : ℝ := hdiff.choose
+  have hB : 0 < B := hdiff.choose_spec.1
+  have hb := hdiff.choose_spec.2
+  have hheight := material_sample_height_coefficient_power_bounded
     hD hT cell (A + B) (by norm_num : (0 : ℝ) < 3 / 4)
+  let C : ℝ := hheight.choose
+  have hC : 0 < C := hheight.choose_spec.1
+  have hbound := hheight.choose_spec.2
   let ε' := min ε (δ / (2 * (B * C)))
   have hBC : 0 < B * C := mul_pos hB hC
   have hε' : 0 < ε' := lt_min hε (div_pos hδ (mul_pos (by norm_num) hBC))
@@ -285,8 +291,13 @@ theorem negativeInverse_atomData_uniform_small
               |mixedDerivative i j
                 (fun y => G.atomFamily η a z m y - G.atomRef η a m y) q.val| < δ := by
   have hU := isMaterialData_enlargedMaterialData G.W.radial.1 G.W.hT
-  obtain ⟨b', ε', hb, hε', hε'ε, hsmall⟩ :=
-    h.negativeInverse_uniform_small G.W.radial.1 hU hε s A hδ
+  have hbound := h.negativeInverse_uniform_small G.W.radial.1 hU hε s A hδ
+  let b' : ℕ := hbound.choose
+  let ε' : ℝ := hbound.choose_spec.choose
+  have hb : b ≤ b' := hbound.choose_spec.choose_spec.1
+  have hε' : 0 < ε' := hbound.choose_spec.choose_spec.2.1
+  have hε'ε : ε' ≤ ε := hbound.choose_spec.choose_spec.2.2.1
+  have hsmall := hbound.choose_spec.choose_spec.2.2.2
   refine ⟨b', ε', hb, hε', hε'ε, ?_⟩
   intro η z hz m hm q i j hij
   rw [G.nonAuxiliary_atomFamily_eq 0 η a ha, G.nonAuxiliary_atomRef_eq 0 η a ha]
@@ -305,9 +316,18 @@ theorem negativeInverse_atom_value_bound
             B * G.W.U.E0 (G.W.U.sample ((G.V η).cell m)) ^ B := by
   have hne : a ≠ .auxiliaryColumn :=
     atomIsNegativeInverseReference_ne_auxiliary (Or.inl ha)
-  obtain ⟨b', ε', hb, hε', hε'ε, hsmall⟩ :=
-    G.negativeInverse_atomData_uniform_small hε a hne h 0 0 (by norm_num : (0 : ℝ) < 1)
-  obtain ⟨C, hC, href⟩ := G.negativeInverse_reference_geometry_bounds 0
+  have hbound := G.negativeInverse_atomData_uniform_small hε a hne h 0 0
+    (by norm_num : (0 : ℝ) < 1)
+  let b' : ℕ := hbound.choose
+  let ε' : ℝ := hbound.choose_spec.choose
+  have hb : b ≤ b' := hbound.choose_spec.choose_spec.1
+  have hε' : 0 < ε' := hbound.choose_spec.choose_spec.2.1
+  have hε'ε : ε' ≤ ε := hbound.choose_spec.choose_spec.2.2.1
+  have hsmall := hbound.choose_spec.choose_spec.2.2.2
+  have hrefAll := G.negativeInverse_reference_geometry_bounds 0
+  let C : ℝ := hrefAll.choose
+  have hC : 0 < C := hrefAll.choose_spec.1
+  have href := hrefAll.choose_spec.2
   obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (1 + C) C
   refine ⟨b', ε', B, hb, hε', hε'ε, hB, ?_⟩
   intro η z hz m hm q hq

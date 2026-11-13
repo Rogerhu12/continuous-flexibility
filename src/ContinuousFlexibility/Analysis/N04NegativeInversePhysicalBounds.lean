@@ -70,10 +70,11 @@ theorem n04NegativeInverse_physicalUnit_jet
     apply Prod.ext
     · simp only [L, ContinuousLinearMap.prod_apply, ContinuousLinearMap.coe_fst', v']
     · apply Prod.ext
-      · change (K.physicalRight k - K.physicalLeft k) *
-          ((K.physicalRight k - K.physicalLeft k)⁻¹ * (v i).2.1) = (v i).2.1
+      · simp only [L, A, v', ContinuousLinearMap.prod_apply, ContinuousLinearMap.comp_apply,
+          ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd', smul_apply, smul_eq_mul]
         rw [← mul_assoc, mul_inv_cancel₀ (sub_pos.mpr hlen).ne', one_mul]
-      · rfl
+      · simp only [L, A, v', ContinuousLinearMap.prod_apply, ContinuousLinearMap.comp_apply,
+          ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd']
   have h := congrArg (fun B : (E × PolarPoint) [×n]→L[ℝ] F => B v')
     (Q.unique Q' n (z, q) ⟨hz, hq⟩)
   change Q.D n (z, q) v' =
@@ -398,3 +399,7 @@ theorem negativeInverse_physicalFamily_purePrefix
 end N04RealizationGauge
 
 end ContinuousFlexibility.Analysis
+
+/-- info: 'ContinuousFlexibility.Analysis.N04RealizationGauge.negativeInverse_physicalFamily_purePrefix' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms ContinuousFlexibility.Analysis.N04RealizationGauge.negativeInverse_physicalFamily_purePrefix
