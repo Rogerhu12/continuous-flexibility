@@ -70,19 +70,25 @@ theorem n04PositiveGeometry_sourceComposite_regularities
     let g := Kcur.chart (C.referenceState, 0) k
     let q : PolarPoint := (n04PositiveEndpoint i side, y.2)
     g q = (0, y.2) ∧ ContDiffAt ℝ ∞ f (g q) ∧ ContDiffAt ℝ ∞ g q := by
+  intro k f g q
   have hrad := n04PositiveGeometry_sourceEndpoint_eq_root src hm
-  have he := n04PositiveGeometry_referenceRoot_chart_eq hT hS hN hflow hctx y.2
-  rw [hrad] at he
-  have hreg := n04PositiveGeometry_storedInverse_regularities hT hS hN hflow hA hctx hy
+  have hq : ((n01ComponentRoot C m (!side), y.2) : PolarPoint) = q :=
+    congrArg (fun r : ℝ => (r, y.2)) hrad
+  have he : g q = (0, y.2) :=
+    (congrArg g hq.symm).trans
+      (n04PositiveGeometry_referenceRoot_chart_eq hT hS hN hflow hctx y.2)
+  have hInv : ContDiffAt ℝ ∞ f (0, y.2) :=
+    (n04PositiveGeometry_storedInverse_regularities hT hS hN hflow hA hctx hy).2.1
   have hc := hctx.choose_spec.choose_spec.choose_spec.choose_spec
   have hmodel := (hc.2.2.2.2 (C.referenceState, 0)
     hN.reference_mem_stateNeighborhood hN.2.2.1.stateSector).2.choose_spec.2
   have href := hA.boundary (C.referenceState, 0) hN.reference_mem_stateNeighborhood
-    hN.2.2.1.stateSector (if !side then (Kcur.cutPair m).2 else (Kcur.cutPair m).1)
-  refine ⟨he, ?_, ?_⟩
-  · rw [he]
-    exact hreg.2.1
-  · simpa only [hrad] using (href.2.2.2.2.1 _ (hmodel y.2).1).1
+    hN.2.2.1.stateSector k
+  have hRef : ContDiffAt ℝ ∞ g (n01ComponentRoot C m (!side), y.2) :=
+    (href.2.2.2.2.1 _ (hmodel y.2).1).1
+  exact ⟨he,
+    (congrArg (fun p : PolarPoint => ContDiffAt ℝ ∞ f p) he.symm).mp hInv,
+    (congrArg (fun p : PolarPoint => ContDiffAt ℝ ∞ g p) hq).mp hRef⟩
 
 def n04PositiveGeometry_sourceJet_directions
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -120,16 +126,19 @@ def n04PositiveGeometry_sourceJet_directions
     (n04PositiveGeometry_boundaryFixedEvaluation_directions
       (n04PositiveGeometry_referenceForwardJet_joint hT hS hN hε hεone hflow hctx
         hr' hroot' j hj (hjn.trans hn4)) v).congr
-      (fun _ _ => by rw [n04PositiveGeometry_referenceForwardJet, hrad])
+      (fun y _ => congrArg
+        (fun r : ℝ => iteratedFDeriv ℝ j (G y) (r, y.2) v) hrad)
   apply n04PositiveGeometry_planeBasis_directions n
     (n04PositiveGeometry_sourceJet S C src Kcur n)
   intro w
   exact (n04PositiveGeometry_boundaryComposition_directions n (by omega)
     (sectorNeighborhood_isOpen S base ε ε) F G q
     (fun y hy => (hreg y hy).2.1) (fun y hy => (hreg y hy).2.2) JF JG
-    (fun a => cylinderBasisVector (w a))).congr (fun y _ => by
-      unfold n04PositiveGeometry_sourceJet
-      rw [n04PositiveGeometry_sourceMap_eq_rootComposite src Kcur hm])
+    (fun a => cylinderBasisVector (w a))).congr (fun y _ =>
+      congrArg (fun f : PolarPoint → PolarPoint =>
+        iteratedFDeriv ℝ n f (q y) (fun a => cylinderBasisVector (w a)))
+        (n04PositiveGeometry_sourceMap_eq_rootComposite src Kcur hm
+          (liftSectorParameter S C y.1)).symm)
 
 /-- The sampled atlas supplies every geometric input; this is a producer
 for the actual stored source, with no assumed source jet tower. -/
