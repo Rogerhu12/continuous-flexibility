@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds
 import ContinuousFlexibility.Analysis.SolveNewtonBridge
+import ContinuousFlexibility.Analysis.N01cStateSeminorms
 
 /-!
 # Fixed-base bounds for translated instances of one inverse family
