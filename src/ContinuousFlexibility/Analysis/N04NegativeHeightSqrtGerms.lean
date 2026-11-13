@@ -63,7 +63,7 @@ theorem sqrtFactor
   have h₂ := hr.choose_spec.choose_spec
   have hKV : Icc (1 / 2 : ℝ) (3 / 2 : ℝ) ⊆ Ioi (0 : ℝ) := by
     intro x hx
-    linarith [hx.1]
+    exact lt_of_lt_of_le (by norm_num : (0 : ℝ) < 1 / 2) hx.1
   have hc := h₂.2.2.2.1.height_scalarComp hD hT hI h₂.2.1 hE hf.1 hf.2.1 isOpen_Ioi
       isCompact_Icc hKV (n04NegativeHeightSqrtFactor inverse)
       (n04NegativeHeightSqrtFactor_smooth inverse) h₂.2.2.2.2

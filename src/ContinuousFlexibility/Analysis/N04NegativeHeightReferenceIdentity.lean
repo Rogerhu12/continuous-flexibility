@@ -65,9 +65,9 @@ theorem negative_referenceChart_shape (m : ℕ) (hm : G.Neg η m)
 theorem negative_chartRadialRef_radial (m : ℕ) (hm : G.Neg η m)
     (q : PolarPoint) (hq : q ∈ unitStrip) :
     G.atomRef η .chartRadial m q = G.atomRef η .chartRadial m (q.1, 0) := by
+  have hfirst := congrArg Prod.fst (G.negative_referenceChart_shape η m hm q hq)
   exact congrArg
-    (fun p : PolarPoint => (p.1 - (G.V η).left m) / ((G.V η).right m - (G.V η).left m))
-    (G.negative_referenceChart_shape η m hm q hq)
+    (fun r : ℝ => (r - (G.V η).left m) / ((G.V η).right m - (G.V η).left m)) hfirst
 
 theorem negative_chartAngleRef_zero (m : ℕ) (hm : G.Neg η m)
     (q : PolarPoint) (hq : q ∈ unitStrip) :

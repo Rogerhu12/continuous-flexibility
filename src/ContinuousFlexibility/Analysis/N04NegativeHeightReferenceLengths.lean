@@ -25,7 +25,7 @@ theorem negative_canonicalLeft_zero (m : ℕ) (hm : G.Neg η m) :
   obtain ⟨j, hi⟩ := (G.neg_iff_inl η m).mp hm
   have hf := G.negative_fields η (G.W.C.referenceState, 0) m j hi
   rw [hf.1]
-  rfl
+  simp only [N04RealizationStart.A, n04bActualTypedAtlas, n04bTypedAtlasData_left]
 
 theorem negative_canonicalLength_pos (m : ℕ) (hm : G.Neg η m) :
     0 < (G.V η).right m - (G.V η).left m := by

@@ -31,10 +31,75 @@ attribute [local instance]
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
 
+private theorem heightRadial_envelope_scale
+    {x l L A H₀ E₀ B₀ H E P B V : ℝ}
+    (hA : 0 ≤ A) (hL : 0 ≤ L) (hH : 0 ≤ H) (hV : 0 ≤ V)
+    (hl : l ≤ L) (hraw : |x| ≤ A * H₀ * E₀ * V)
+    (hsample : H₀ * E₀ ≤ B₀ * (H * E ^ P))
+    (hpack : (L * A * B₀) * E ^ P ≤ B * E ^ B) :
+    l * |x| ≤ B * E ^ B * H * V := by
+  calc
+    _ ≤ L * (A * H₀ * E₀ * V) := mul_le_mul hl hraw (abs_nonneg x) hL
+    _ = (L * A) * (H₀ * E₀) * V := by ring
+    _ ≤ (L * A) * (B₀ * (H * E ^ P)) * V :=
+      mul_le_mul_of_nonneg_right
+        (mul_le_mul_of_nonneg_left hsample (mul_nonneg hL hA)) hV
+    _ = ((L * A * B₀) * E ^ P) * H * V := by ring
+    _ ≤ B * E ^ B * H * V :=
+      mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right hpack hH) hV
+
+private theorem heightRadial_value_reorder (A E H V : ℝ) :
+    (3 * (A * E ^ A * H)) * V = ((3 * A) * E ^ A) * H * V := by ring
+
+private theorem heightRadial_drop_zero_material {H₀ M₀ E₀ H M E A P B : ℝ}
+    (h : H₀ * M₀ ^ (0 : ℝ) * E₀ ^ A ≤ B * (H * M ^ (0 : ℝ) * E ^ P)) :
+    H₀ * E₀ ^ A ≤ B * (H * E ^ P) := by
+  simpa only [Real.rpow_zero, mul_one] using h
+
 namespace N04RealizationGauge
 
 variable (G : N04RealizationGauge)
   (η : (G.W.S.height (3 / 4 : ℝ)).Space)
+
+/-- Move the coefficient-height envelope to the retained half sample
+before introducing any parameter derivative tower. -/
+private theorem heightRadial_sample_envelope (A : ℝ) (hA : 0 ≤ A) :
+    ∃ B P : ℝ, 0 < B ∧ 0 ≤ P ∧ ∀ m (hm : G.Neg η m),
+      G.W.T.H (G.W.T.sample (G.W.C.cell (G.heightRadialLabel η m hm).1)) ^ (3 / 4 : ℝ) *
+        G.W.T.E0 (G.W.T.sample (G.W.C.cell (G.heightRadialLabel η m hm).1)) ^ A ≤
+      B * (G.W.U.H (G.W.U.sample ((G.V η).cell m)) ^ (3 / 4 : ℝ) *
+        G.W.U.E0 (G.W.U.sample ((G.V η).cell m)) ^ P) := by
+  have hweights := n04bActualTypedAtlas_negative_host_sample_weights G.W.hT G.W.hS
+    G.W.through03 G.W.field G.X.e₀ (3 / 4 : ℝ) 0 A hA
+  let B : ℝ := hweights.choose
+  let P : ℝ := hweights.choose_spec.choose
+  have hB : 0 < B := hweights.choose_spec.choose_spec.1
+  have hP : 0 ≤ P := hweights.choose_spec.choose_spec.2.1
+  refine ⟨B, P, hB, hP, ?_⟩
+  intro m hm
+  let t := G.heightRadialLabel η m hm
+  have ht : G.e m = .inl t := G.heightRadialLabel_spec η m hm
+  have hk : G.X.e₀ (G.negativeIndex t) = .inl (t.1, t.2) :=
+    G.X.e₀.apply_symm_apply _
+  have hfields := G.negative_fields η (G.W.C.referenceState, 0) m t ht
+  have hcell : (G.V η).cell m = (G.W.A G.X.e₀).cell (G.negativeIndex t) :=
+    hfields.2.2.2.2.2.1
+  have hs := heightRadial_drop_zero_material (hweights.choose_spec.choose_spec.2.2
+    (G.negativeIndex t) t.1 t.2 hk (G.W.C.cell t.1) (G.W.host t.1))
+  rw [← hcell] at hs
+  change G.W.T.H (G.W.T.sample (G.W.C.cell t.1)) ^ (3 / 4 : ℝ) *
+      G.W.T.E0 (G.W.T.sample (G.W.C.cell t.1)) ^ A ≤
+    B * (G.W.T.H (G.W.T.sample ((G.V η).cell m)) ^ (3 / 4 : ℝ) *
+      G.W.U.E0 (G.W.T.sample ((G.V η).cell m)) ^ P)
+  have hH : 0 ≤ G.W.T.H (G.W.T.sample ((G.V η).cell m)) ^ (3 / 4 : ℝ) :=
+    Real.rpow_nonneg
+      (G.W.hT.2.1 _ (materialSample_mem_interval G.W.radial.1 G.W.hT _)).2.1.le _
+  have hEP : G.W.T.E0 (G.W.T.sample ((G.V η).cell m)) ^ P ≤
+      G.W.U.E0 (G.W.T.sample ((G.V η).cell m)) ^ P :=
+    Real.rpow_le_rpow (zero_le_one.trans (G.W.floor _))
+      (le_enlargedMaterialData_E0 G.W.T _) hP
+  exact hs.trans (mul_le_mul_of_nonneg_left
+    (mul_le_mul_of_nonneg_left hEP hH) hB.le)
 
 theorem heightRadialDifferenceTower_bound (k s : ℕ) :
     ∃ B : ℝ, 0 < B ∧ ∀ m (hm : G.Neg η m) (q : unitStrip) (i j : ℕ), i + j ≤ s →
@@ -49,12 +114,9 @@ theorem heightRadialDifferenceTower_bound (k s : ℕ) :
   let A : ℝ := hcoeff.choose
   have hA : 0 < A := hcoeff.choose_spec.1
   have hb := hcoeff.choose_spec.2
-  have hweights := n04bActualTypedAtlas_negative_host_sample_weights G.W.hT G.W.hS
-      G.W.through03 G.W.field G.X.e₀ (3 / 4 : ℝ) 0 A hA.le
+  have hweights := G.heightRadial_sample_envelope η A hA.le
   let B₀ : ℝ := hweights.choose
   let P₀ : ℝ := hweights.choose_spec.choose
-  have hB₀ : 0 < B₀ := hweights.choose_spec.choose_spec.1
-  have hP₀ : 0 ≤ P₀ := hweights.choose_spec.choose_spec.2.1
   have hsample := hweights.choose_spec.choose_spec.2.2
   let L : ℝ := max 1 (G.W.D.b - G.W.D.a)
   have hL : 1 ≤ L := le_max_left _ _
@@ -66,8 +128,6 @@ theorem heightRadialDifferenceTower_bound (k s : ℕ) :
   intro m hm q i j hij z hz v
   let t := G.heightRadialLabel η m hm
   have ht : G.e m = .inl t := G.heightRadialLabel_spec η m hm
-  have hk : G.X.e₀ (G.negativeIndex t) = .inl (t.1, t.2) :=
-    G.X.e₀.apply_symm_apply _
   have hp := G.heightRadial_physicalUnitPoint_mem η m t ht q.property
   have hgeom := G.heightRadial_physicalBounds η m t ht
   let l : ℝ := (G.V η).physicalRight m - (G.V η).physicalLeft m
@@ -77,12 +137,6 @@ theorem heightRadialDifferenceTower_bound (k s : ℕ) :
     linarith only [hgeom.1, hgeom.2.2] : l ≤ G.W.D.b - G.W.D.a).trans (le_max_right _ _)
   have hpow : l ^ i ≤ L ^ s :=
     (pow_le_pow_left₀ hlpos.le hlL i).trans (pow_le_pow_right₀ hL (by omega))
-  have hfields := G.negative_fields η (G.W.C.referenceState, 0) m t ht
-  have hcell : (G.V η).cell m = (G.W.A G.X.e₀).cell (G.negativeIndex t) :=
-    hfields.2.2.2.2.2.1
-  have hs := hsample (G.negativeIndex t) t.1 t.2 hk (G.W.C.cell t.1) (G.W.host t.1)
-  simp only [Real.rpow_zero, mul_one] at hs
-  rw [← hcell] at hs
   let E : ℝ := G.W.U.E0 (G.W.U.sample ((G.V η).cell m))
   let H : ℝ := G.W.U.H (G.W.U.sample ((G.V η).cell m)) ^ (3 / 4 : ℝ)
   let V : ℝ := oneHighVariationWeight (parameterGrading G.W.S)
@@ -90,12 +144,9 @@ theorem heightRadialDifferenceTower_bound (k s : ℕ) :
   have hE : 1 ≤ E := (G.cost_nonneg η).2.2 m
   have hH : 0 ≤ H := Real.rpow_nonneg ((G.cost_nonneg η).2.1 m) _
   have hV : 0 ≤ V := oneHighVariationWeight_nonneg _ _ _ _ _
-  have hEP : G.W.T.E0 (G.W.T.sample ((G.V η).cell m)) ^ P₀ ≤ E ^ P₀ :=
-    Real.rpow_le_rpow (zero_le_one.trans (G.W.floor _))
-      (le_enlargedMaterialData_E0 G.W.T _) hP₀
   have hsample' : G.W.T.H (G.W.T.sample (G.W.C.cell t.1)) ^ (3 / 4 : ℝ) *
       G.W.T.E0 (G.W.T.sample (G.W.C.cell t.1)) ^ A ≤ B₀ * (H * E ^ P₀) :=
-    hs.trans (mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left hEP hH) hB₀.le)
+    hsample m hm
   have hraw := hb (G.W.C.cell t.1) 0 i j (physicalUnitPoint (G.V η) m q.val)
     hij (G.W.host t.1 hp.1) z hz v
   have hraw' :
@@ -106,20 +157,8 @@ theorem heightRadialDifferenceTower_bound (k s : ℕ) :
   rw [G.heightRadialDifferenceTower_apply η m hm i j q k hz v,
     abs_mul, abs_of_nonneg (pow_nonneg hlpos.le i)]
   change l ^ i * _ ≤ B * E ^ B * H * V
-  calc
-    _ ≤ L ^ s * (A * G.W.T.H (G.W.T.sample (G.W.C.cell t.1)) ^ (3 / 4 : ℝ) *
-        G.W.T.E0 (G.W.T.sample (G.W.C.cell t.1)) ^ A * V) :=
-      mul_le_mul hpow hraw' (abs_nonneg _) (pow_nonneg (zero_le_one.trans hL) _)
-    _ = (L ^ s * A) *
-        (G.W.T.H (G.W.T.sample (G.W.C.cell t.1)) ^ (3 / 4 : ℝ) *
-          G.W.T.E0 (G.W.T.sample (G.W.C.cell t.1)) ^ A) * V := by ring
-    _ ≤ (L ^ s * A) * (B₀ * (H * E ^ P₀)) * V :=
-      mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hsample'
-        (mul_nonneg (pow_nonneg (zero_le_one.trans hL) _) hA.le)) hV
-    _ = ((L ^ s * A * B₀) * E ^ P₀) * H * V := by ring
-    _ ≤ B * E ^ B * H * V :=
-      mul_le_mul_of_nonneg_right
-        (mul_le_mul_of_nonneg_right (hpack E hE) hH) hV
+  exact heightRadial_envelope_scale hA.le (pow_nonneg (zero_le_one.trans hL) s)
+    hH hV hpow hraw' hsample' (hpack E hE)
 
 /-- One neighborhood works for all current radial-coefficient jets and
 for every auxiliary-column replacement. -/
@@ -184,7 +223,8 @@ theorem negative_physicalRadial_currentData :
     calc
       _ ≤ (3 * M) * parameterGrading G.W.S (s + (G.W.base + G.W.loss)) z := hvalue
       _ = ((3 * A) * E ^ A) * H *
-          parameterGrading G.W.S (s + (G.W.base + G.W.loss)) z := by dsimp only [M]; ring
+          parameterGrading G.W.S (s + (G.W.base + G.W.loss)) z :=
+        heightRadial_value_reorder A E H _
       _ ≤ B * E ^ B * H * parameterGrading G.W.S (s + (G.W.base + G.W.loss)) z :=
         mul_le_mul_of_nonneg_right
           (mul_le_mul_of_nonneg_right (hpack E hE) hH) hweight

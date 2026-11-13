@@ -63,8 +63,8 @@ def n04NegativeGeometry_physicalUnitJointTower
       Prod.mk_add_mk, zero_add]
   have hmaps : MapsTo (fun x => c + P x) (U ×ˢ unitStrip) (U ×ˢ Ω) := by
     intro x hx
-    exact (hpoint x).symm ▸ (show (x.1, physicalUnitPoint K k x.2) ∈ U ×ˢ Ω from
-      ⟨hx.1, hmap hx.2⟩)
+    exact Eq.mpr (congrArg (fun y : X × PolarPoint => y ∈ U ×ˢ Ω) (hpoint x))
+      ⟨hx.1, hmap hx.2⟩
   exact (J.compAffine P c (hU.prod (isOpen_Ioo.prod isOpen_univ)) hmaps).congrOn
     (fun x _ => congrArg f (hpoint x))
 
@@ -137,7 +137,8 @@ def negativePhysicalAtomJointTower
   · let L : ((StateDirections W.S × ℝ) × PolarPoint) →L[ℝ] ℝ :=
       (ContinuousLinearMap.snd ℝ ℝ ℝ).comp
         (ContinuousLinearMap.snd ℝ (StateDirections W.S × ℝ) PolarPoint)
-    let Jθ := smoothDirectionsLinearOn L (hU.prod (isOpen_Ioo.prod isOpen_univ))
+    let Jθ : SmoothDirections (U ×ˢ unitStrip) L :=
+      smoothDirectionsLinearOn L (hU.prod (isOpen_Ioo.prod isOpen_univ))
     apply ((smoothDirectionsProd JC Jθ).comp_contDiff isOpen_univ
       ((contDiff_fst.snd.sub contDiff_snd) :
         ContDiff ℝ ∞ (fun p : PolarPoint × ℝ => p.1.2 - p.2)).contDiffOn
