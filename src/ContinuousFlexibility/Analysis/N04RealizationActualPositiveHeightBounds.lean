@@ -86,8 +86,13 @@ theorem n04Realization_actualFixedPositiveHeight_shifted_bound
   have hlow := n04Realization_actualFixedPositiveHeight_log_data
     (K := n04bActualTypedAtlas hT hS hN hfield e)
     src hcontrols hlog U state hstate hsector i
-  let RQ := n04Realization_actualFixedPositiveHeight_mixedJetRegularity
-    hT hS hN hfield e hU state hstate₀ hsector src δ i JH inv
+  let RQ : MixedJetRegularity U univ (fun y q => if inv then
+      (n04FixedPositiveHeight (n04bActualTypedAtlas hT hS hN hfield e)
+        src 3 δ (state y) i q)⁻¹
+      else n04FixedPositiveHeight (n04bActualTypedAtlas hT hS hN hfield e)
+        src 3 δ (state y) i q) :=
+    n04Realization_actualFixedPositiveHeight_mixedJetRegularity
+      hT hS hN hfield e hU state hstate₀ hsector src δ i JH inv
   refine ⟨RQ, ?_⟩
   intro x hx P v hv W Mjet scale hW hWR hMjet hscale hδM budget shift hinv hraw q
   exact hbound U hU (n04PositiveLeft i) (n04PositiveRight i) (δ i) hδ hδone
