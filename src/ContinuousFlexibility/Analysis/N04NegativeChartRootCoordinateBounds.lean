@@ -291,7 +291,7 @@ theorem RootCoordinatePrefixData.normalized_positive_bounds :
       (s + (base + shift * n + 1)) n z (J.D n z) hm
       (spatialOrder_fraction_le_one (Nat.add_le_add_right hab (shift * n)))
       (fun w hw R hR hzR hwR => by
-        simpa only [parameterHeightWeight, if_neg (Nat.ne_of_gt hn)] using
+        simpa only [Bf, E, H, shift, parameterHeightWeight, if_neg (Nat.ne_of_gt hn)] using
           hb m side false q hq n le_rfl a b hab J z hz w hw R hR
             (by simpa only [hindex] using hzR)
             (fun i => by simpa only [hindex] using hwR i)) v

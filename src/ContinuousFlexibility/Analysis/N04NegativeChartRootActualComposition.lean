@@ -35,6 +35,7 @@ attribute [local instance]
   n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
+  interiorRaw_parameterTopology interiorRaw_parameterAddGroup interiorRaw_parameterSMul
 
 set_option backward.isDefEq.respectTransparency true
 
@@ -47,6 +48,7 @@ def FullHalfFieldPowerControl.rootCompositionScaleCoefficient
     (Q : F.FullHalfFieldPowerControl base loss) : ℝ :=
   Q.root_low_input.choose_spec.choose_spec.choose
 
+set_option diagnostics true in
 theorem FullHalfFieldPowerControl.actualRootComposition_prefix
     (Q : F.FullHalfFieldPowerControl base loss) :
     ∃ b : ℕ, ∃ ε : ℝ,
@@ -215,8 +217,8 @@ theorem FullHalfFieldPowerControl.actualRootComposition_prefix
       R hR hgz
       (fun a => by rw [hdir]; exact (sectorPairGrading_monotone W.S high (L (u a))).trans (hu₁ a))
       δ hδ hδone hδwidth (q.1, θ) hq hqx t ht
-    rw [hsf] at hb
-    exact hb.trans (hbudget Cf hCf df hdf l r)
+    exact hb.trans (by
+      simpa only [← hsf] using hbudget Cf hCf df hdf l r)
   have hlabel : ∀ r, r ≤ N → ∀ u : Fin r → (Fin 1 → ℝ),
       (∀ a, p₀ (u a) ≤ 1) → (∀ a, p₁ (u a) ≤ R) → ∀ l, l ≤ s + 1 + N + 1 → ∀ θ,
       ‖iteratedFDeriv ℝ l (fun y : N04FlowPoint =>
@@ -230,8 +232,8 @@ theorem FullHalfFieldPowerControl.actualRootComposition_prefix
       (fun a => (sectorPairGrading_monotone W.S hbh (L (u a))).trans (hu₀ a)) R hR
       ((sectorPairGrading_monotone W.S high z).trans hzR)
       (fun a => (sectorPairGrading_monotone W.S high (L (u a))).trans (hu₁ a)) 1 (q.1, θ)
-    rw [hsh] at hb
-    exact hb.trans (hbudget Ch hCh dh hdh l r)
+    exact hb.trans (by
+      simpa only [← hsh] using hbudget Ch hCh dh hdh l r)
   let I : NegativeChartRootCompositionInput (Fin 1 → ℝ) N (s + 1) shift RH := {
     d := A.d, c := A.c, hd := A.hd, hc := A.hc, dp := A.dp, cp := A.cp,
     δ := δ, flow := A.flow, q := q, p₀ := p₀, p₁ := p₁, R := R, H := H, M := M, ρ := ρ,
@@ -250,8 +252,8 @@ theorem FullHalfFieldPowerControl.actualRootComposition_prefix
     (mul_le_mul_of_nonneg_right hm (parameterHeightWeight_nonneg hH k))
     (pow_nonneg (zero_le_one.trans hρ) (j - 1 + D * k))
   have hb' := hb.trans hp
-  rw [← rootComposition_fraction (zero_le_one.trans hR) (j - 1 + D * k) (s + D * N)] at hb'
-  exact hb'
+  exact hb'.trans_eq (congrArg (fun t : ℝ => B * E ^ B * parameterHeightWeight H k * t)
+    (rootComposition_fraction (zero_le_one.trans hR) (j - 1 + D * k) (s + D * N)).symm)
 
 end N04RealizationStart.NegativeOpticalFactors
 end ContinuousFlexibility.Analysis

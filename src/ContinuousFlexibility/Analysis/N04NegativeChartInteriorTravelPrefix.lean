@@ -308,8 +308,8 @@ theorem negativeInterior_scaledTravel_prefix
     have h := hF k a b hk hab m side p hp JP z hz v hv R hR
       (by simpa only [Nat.mul_comm D K] using hzR)
       (fun i => by simpa only [Nat.mul_comm D K] using hvR i)
-    simpa only [BF, E, H, Q, Nat.mul_comm K D,
-      (by ring : k * D + a + b = a + b + D * k)] using h
+    simpa only [BF, E, H, Q, D, Nat.mul_comm K hexD.choose,
+      (by ring : k * hexD.choose + a + b = a + b + hexD.choose * k)] using h
   have hbound := affine_two_height_budget
     (show 0 ≤ (3 / 2 : ℝ) * (CR * E ^ AR) from mul_nonneg (by norm_num)
       (mul_nonneg hRjet.1.le (Real.rpow_nonneg (zero_le_one.trans hE) _)))
