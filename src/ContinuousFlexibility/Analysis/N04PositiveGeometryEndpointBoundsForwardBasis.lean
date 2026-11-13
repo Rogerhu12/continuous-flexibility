@@ -82,9 +82,12 @@ theorem n04PositiveGeometry_forwardBasis_word_bound
       (show |(0 : ℝ)| * M ≤ (1 + 4 * |κ|) * M by
         simpa only [abs_zero, zero_mul] using hM.trans hcost)
     exact (hz.prod (hs.enlarge hH (zero_le_one.trans ht) hcost)).congr hx
-      (fun y _ => by simp only [n04PositiveGeometry_forwardBasisValue, if_pos ha0,
-        Function.comp_apply, ContinuousLinearMap.smul_apply,
-        ContinuousLinearMap.id_apply, zero_smul])
+      (fun y _ => by
+        rw [n04PositiveGeometry_forwardBasisValue, if_pos ha0]
+        apply Prod.ext
+        · simp only [Function.comp_apply, ContinuousLinearMap.smul_apply,
+            ContinuousLinearMap.id_apply, smul_eq_mul, zero_mul]
+        · rfl)
   · have hj : a - 1 ≤ 3 := by omega
     have hOr := (hO (a - 1) hj).reserve hM hH ht (Nat.add_le_add_left hb d)
     have hEr := (hE ⟨a - 1, by omega⟩).reserve hM hH ht

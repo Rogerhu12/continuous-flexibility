@@ -37,8 +37,8 @@ theorem n04PositiveGeometry_joint_spatial_first
     funext (fun y => congrArg f (hp y))
   have h := smoothDirections_iteratedFDeriv_finiteAffine J (x, (0 : PolarPoint)) L 1
     (y := q) (by rw [hp]; exact hx) (fun _ => v)
-  simpa only [hf, hp, iteratedFDeriv_one_apply, L, ContinuousLinearMap.prod_apply,
-    zero_apply, ContinuousLinearMap.id_apply] using h
+  simpa only [iteratedFDeriv_one_apply, L, ContinuousLinearMap.prod_apply,
+    zero_apply, ContinuousLinearMap.id_apply, Prod.mk_add_mk, add_zero, zero_add] using h
 
 /-- Only positive forward words and the pointwise reciprocal slope are
 quantitative premises. The unwrapped angular value is never bounded. -/
@@ -92,7 +92,9 @@ theorem n04PositiveGeometry_angularInverse_unit_word_bound (n : ℕ) :
     have hk : word.stateArity = 0 := rfl
     have hb : word.angleArity = 1 := by have := word.arity_sum; omega
     have hh := hforward 1 zero_lt_one hn word (by rw [hk]; exact Nat.zero_le K)
-      (fun _ => (0, u)) (fun _ => rfl)
+      (fun _ => (0, u)) (fun j => by
+        have hj : word.isState j = false := by fin_cases j; rfl
+        simp only [hj, Bool.false_eq_true, ite_false, Prod.fst_mk])
       (fun _ => ⟨by simp, by simpa only [map_zero] using hR, hu⟩)
     rw [← n04PositiveGeometry_joint_spatial_first JF x.1 y hy u] at hh
     simpa only [hk, hb, parameterHeightWeight, ite_true, mul_one,
@@ -103,6 +105,7 @@ theorem n04PositiveGeometry_angularInverse_unit_word_bound (n : ℕ) :
   have hκinv : κ⁻¹ ≤ M := (le_abs_self _).trans hslope
   have hκangle : κ ≤ angularPartial (φ x.1) y := by
     rw [← deriv_cylinder_angular_slice (hφ.differentiable (by simp))]
+    exact le_rfl
   have hrad : |radialPartial (φ x.1) y| ≤ M := by
     have he : fderiv ℝ (n04PositiveGeometry_angularGraph (φ x.1)) y =
         (ContinuousLinearMap.fst ℝ ℝ ℝ).prod (fderiv ℝ (φ x.1) y) :=
@@ -124,7 +127,10 @@ theorem n04PositiveGeometry_angularInverse_unit_word_bound (n : ℕ) :
   have hBnorm : ‖B‖ ≤ 3 * M ^ 2 := by
     have hh := flowJet_augmented_jet_norm_le hα (n := 1) le_rfl x.2
     simp only [norm_iteratedFDeriv_one] at hh
-    exact (hh.trans (add_le_add_left hαcost 1)).trans (by nlinarith only [hM])
+    calc
+      ‖B‖ ≤ 1 + ‖fderiv ℝ (parameterizedCircleInverse (φ x.1)) x.2‖ := hh
+      _ ≤ 1 + (1 + M) * M := by linarith only [hαcost]
+      _ ≤ 3 * M ^ 2 := by nlinarith only [hM, sq_nonneg (M - 1)]
   have hBleft (u : PolarPoint) : B (JF.D 1 (x.1, g x) (fun _ => (0, u))) = u := by
     rw [← n04PositiveGeometry_joint_spatial_first JF x.1 (g x) hy u]
     exact congrArg (fun L : PolarPoint →L[ℝ] PolarPoint => L u)

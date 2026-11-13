@@ -84,8 +84,12 @@ theorem n04PositiveGeometry_rootInverseLinear_word_bound (N : ℕ) (L : ℝ) (hL
     1 + dp, by omega, ?_⟩
   intro U hU a e b Ja Je Jb σ hσ Q K s d hN x hx θ P M H t hM hH hHL ht shift ha he hb
   let f : Fin 3 → E × ℝ → ℝ := ![b, e, a]
-  let J : ∀ i, SmoothDirections (U ×ˢ univ) (f i) :=
-    Fin.cases Jb (Fin.cases Je (Fin.cases Ja Fin.elim0))
+  let J : ∀ i, SmoothDirections (U ×ˢ univ) (f i) := by
+    intro i
+    fin_cases i
+    · exact Jb
+    · exact Je
+    · exact Ja
   let JP := smoothDirections_finiteProduct Ja.open_domain J
   have hp := hprod hU J JP K s d hN x hx θ P M H t hM hH hHL ht shift
     (fun i => by fin_cases i <;> assumption)

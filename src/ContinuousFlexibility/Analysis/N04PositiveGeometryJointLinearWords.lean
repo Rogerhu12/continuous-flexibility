@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSavedMovingWords
 import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
+import ContinuousFlexibility.Analysis.TameProductDirections
 
 /-!
 # The fixed spatial coordinates in positive joint words
@@ -56,7 +57,10 @@ theorem n04PositiveGeometry_spatialLinear_saved_word_bound
           · have hs' : w.isState 0 = false := Bool.eq_false_iff.mpr hs
             have hk : w.stateArity = 0 := by
               rw [w.stateArity_eq_sum]
-              simp only [Fin.sum_univ_one, hs', Bool.false_eq_true, if_false]
+              apply Finset.sum_eq_zero
+              intro j _
+              have hj : j = 0 := Subsingleton.elim _ _
+              simp only [hj, hs', Bool.false_eq_true, ite_false]
             have hb : w.angleArity = 1 := by have := w.arity_sum; omega
             simp only [hk, hb, parameterHeightWeight, ite_true, mul_one,
               Nat.mul_zero, Nat.add_zero, Nat.sub_self, pow_zero]
@@ -76,10 +80,23 @@ theorem n04PositiveGeometry_jointPair_word_bound
     (n : ℕ) (x : E × V) (hx : x ∈ U) (v : Fin n → E × V)
     {B : ℝ} (hf : ‖JF.D n x v‖ ≤ B) (hg : ‖JG.D n x v‖ ≤ B) :
     ‖J.D n x v‖ ≤ B := by
-  let K := smoothDirectionsUniformProd JF JG
+  let K := smoothDirectionsProd JF JG
   have he : J.D n x v = (JF.D n x v, JG.D n x v) :=
     congrArg (fun A : (E × V) [×n]→L[ℝ] (F × G) => A v) (J.unique K n x hx)
   rw [he, Prod.norm_def]
   exact max_le hf hg
+
+theorem n04PositiveGeometry_jointAdd_word_bound
+    {U : Set (E × V)} {f g h : E × V → F}
+    (JF : SmoothDirections U f) (JG : SmoothDirections U g)
+    (J : SmoothDirections U h) (he : EqOn h (fun x => f x + g x) U)
+    (n : ℕ) (x : E × V) (hx : x ∈ U) (v : Fin n → E × V)
+    {B C : ℝ} (hf : ‖JF.D n x v‖ ≤ B) (hg : ‖JG.D n x v‖ ≤ C) :
+    ‖J.D n x v‖ ≤ B + C := by
+  have hvalue : J.D n x v = JF.D n x v + JG.D n x v :=
+    congrArg (fun A : (E × V) [×n]→L[ℝ] F => A v)
+      ((J.congr he).unique (smoothDirectionsAdd JF JG) n x hx)
+  rw [hvalue]
+  exact (norm_add_le _ _).trans (add_le_add hf hg)
 
 end ContinuousFlexibility.Analysis

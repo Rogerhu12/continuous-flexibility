@@ -103,7 +103,14 @@ def n04PositiveGeometry_positiveHeightTaylor_jointDirections
     (n04PositiveGeometry_logBoundaryTrace_jointDirections hU (if side then r else l) j
       (fun x => h x side) (fun x hx => hroot x hx side) (fun x hx => hpos x hx side)
       (fun a ha => J side a (ha.trans hj))).congr (fun y _ => by
-        simp only [A, positiveHeightTaylorData, boundaryHeightLogRatio, div_one])
+        change radialBoundaryJet (fun p => Real.log (h y.1 side p))
+          (if side then r else l) j y.2 =
+            radialBoundaryJet (boundaryHeightLogRatio (fun _ => 1) (h y.1 side))
+              (if side then r else l) j y.2
+        apply congrArg (fun F : PolarPoint → ℝ =>
+          radialBoundaryJet F (if side then r else l) j y.2)
+        funext p
+        exact congrArg Real.log (div_one (h y.1 side p)).symm)
   let JT := n04PositiveGeometry_endpointTaylorCorrection_jointDirections hU n l r δ A JA
   have houter : ContDiff ℝ ∞ (fun t : ℝ => if inv then Real.exp (-t) else Real.exp t) := by
     cases inv

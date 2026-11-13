@@ -49,9 +49,10 @@ theorem n04PositiveGeometry_fixedState_joint_apply
     Q.D n (x, θ) v = J.D n (0, θ) (fun i => (0, (v i).2)) := by
   have he := congrArg (fun A : (E × ℝ) [×n]→L[ℝ] F => A v)
     (Q.unique (n04PositiveGeometry_fixedState_joint J h0) n (x, θ) ⟨hx, mem_univ _⟩)
-  simpa only [n04PositiveGeometry_fixedState_joint, SmoothDirections.congrOn,
-    SmoothDirections.compLinear, SmoothDirections.compAffine_apply, zero_add,
-    n04PositiveGeometry_fixedStateLinear_apply] using he
+  change Q.D n (x, θ) v =
+    J.D n (0 + n04PositiveGeometry_fixedStateLinear (x, θ))
+      (fun i => n04PositiveGeometry_fixedStateLinear (v i)) at he
+  simpa only [zero_add, n04PositiveGeometry_fixedStateLinear_apply] using he
 
 theorem n04PositiveGeometry_fixedState_stateWord_zero
     (J : SmoothDirections (U ×ˢ univ) f) (h0 : (0 : E) ∈ U)
@@ -87,7 +88,9 @@ theorem N04BoundaryWordBounds.fixedState
   by_cases hw : w.stateArity = 0
   · have hpure : w.IsPure (fun i => ((0 : E), (v i).2)) := by
       refine ⟨hv.1, fun i hi => ?_⟩
-      exact Prod.ext rfl (congrArg Prod.snd (hv.2 i hi))
+      have hθ : (v i).2 = (1 : ℝ) :=
+        congrArg (fun y : E × ℝ => y.2) (hv.2 i hi)
+      exact congrArg (fun a : ℝ => ((0 : E), a)) hθ
     have hb := h n w (by omega) ha (fun i => ((0 : E), (v i).2)) hpure (fun _ => hP₀)
     have hb' : ‖J.D n (0, θ) (fun i => ((0 : E), (v i).2))‖ ≤
         M * parameterHeightWeight H w.stateArity := by

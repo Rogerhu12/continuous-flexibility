@@ -120,8 +120,19 @@ theorem n04PositiveGeometry_rootDividedHeight_rpow_radialTrace
   have hca : ContDiffAt ℝ ∞ (fun x => c * A x) 0 := contDiffAt_const.mul hA
   have hp := n04PositiveGeometry_radialBoundaryJet_threeFactors hca hO hV n
   exact (he.iteratedDeriv_eq n).trans (by
-    simpa only [n04PositiveGeometry_rootHeightProductTrace,
-      iteratedDeriv_const_mul_field] using hp)
+    simpa only [radialBoundaryJet, n04PositiveGeometry_rootHeightProductTrace,
+      iteratedDeriv_const_mul_field, A, c, O, V] using hp)
+
+private theorem heightProductTrace_congr_odd {n : ℕ}
+    (a f f' g : ℕ → ℝ) (he : ∀ j, j ≤ n → f j = f' j) :
+    n04PositiveGeometry_rootHeightProductTrace n a f g =
+      n04PositiveGeometry_rootHeightProductTrace n a f' g := by
+  unfold n04PositiveGeometry_rootHeightProductTrace
+  apply Finset.sum_congr rfl
+  intro c _
+  exact congrArg (fun t : ℝ =>
+    ((n.choose c.1.val : ℝ) * ((n - c.1.val).choose c.2.val : ℝ) * a c.1.val) *
+      (t * g (n - c.1.val - c.2.val))) (he c.2.val (by omega))
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -218,16 +229,13 @@ theorem n04PositiveGeometry_actual_unitHeightPowerTrace_eq
         (n01RootLabel S C (liftSectorParameter S C z) m side)) (0, θ) := by
     rw [extendedRootOddCoefficient_of_nonneg _ (le_refl (0 : ℝ))]
     exact P.odd_positive θ
-  rw [n04PositiveGeometry_rootDividedHeight_rpow_radialTrace
+  have hmodel := n04PositiveGeometry_rootDividedHeight_rpow_radialTrace
     hN.1.1.choose_spec.1.2.2.1.1 hg
     (contDiff_stateProfile_of_n01 hS hT hN _)
     (contDiff_stateHeight_of_n01 hS hT hN _)
-    hR hstrip P.n06_extendedOdd_smooth hpos γ n]
-  unfold n04PositiveGeometry_rootHeightPowerTrace n04PositiveGeometry_rootHeightProductTrace
-  apply Finset.sum_congr rfl
-  intro c _
-  rw [congrFun (n04PositiveGeometry_actual_oddPowerTrace_eq hT hS hN hflow hz
-    m side g hg hR hstrip hδ Θ hΘ (γ / 6) c.2.val (by omega)) θ]
-  rfl
+    hR hstrip P.n06_extendedOdd_smooth hpos γ n
+  exact hmodel.trans (heightProductTrace_congr_odd _ _ _ _ (fun j hj =>
+    congrFun (n04PositiveGeometry_actual_oddPowerTrace_eq hT hS hN hflow hz
+      m side g hg hR hstrip hδ Θ hΘ (γ / 6) j (hj.trans hn)) θ))
 
 end ContinuousFlexibility.Analysis

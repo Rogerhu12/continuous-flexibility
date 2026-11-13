@@ -59,7 +59,8 @@ theorem n04PositiveGeometry_radialBoundaryJet_mul
   have he := iteratedDeriv_fun_mul
     (hfs.of_le (show (n : ℕ∞ω) ≤ ∞ by simp))
     (hgs.of_le (show (n : ℕ∞ω) ≤ ∞ by simp))
-  simpa only [radialBoundaryJet, Fin.sum_univ_eq_sum_range, mul_assoc] using he
+  rw [← Fin.sum_univ_eq_sum_range] at he
+  simpa only [radialBoundaryJet, Function.comp_apply, mul_assoc] using he
 
 def n04PositiveGeometry_radialProduct_directions
     {U : Set E} (hU : IsOpen U) (c : ℝ) (n : ℕ)
@@ -98,9 +99,10 @@ theorem n04PositiveGeometry_radialProduct_bound (n N : ℕ) (L : ℝ) (hL : 1 �
   obtain ⟨B, hB, hb⟩ := n04PositiveGeometry_boundaryWord_mul (E := E) N L hL
   let A : ℝ := 1 + ∑ j : Fin (n + 1), |(n.choose j.val : ℝ)|
   have hA : 1 ≤ A := le_add_of_nonneg_right (Finset.sum_nonneg (fun _ _ => abs_nonneg _))
-  have hchoose (j : Fin (n + 1)) : |(n.choose j.val : ℝ)| ≤ A :=
-    (Finset.single_le_sum (fun _ _ => abs_nonneg _) (Finset.mem_univ j)).trans
-      (le_add_of_nonneg_left zero_le_one)
+  have hchoose (j : Fin (n + 1)) : |(n.choose j.val : ℝ)| ≤ A := by
+    have hsum : |(n.choose j.val : ℝ)| ≤ ∑ l : Fin (n + 1), |(n.choose l.val : ℝ)| :=
+      Finset.single_le_sum (fun l _ => abs_nonneg (n.choose l.val : ℝ)) (Finset.mem_univ j)
+    exact hsum.trans (le_add_of_nonneg_left zero_le_one)
   let C : ℝ := 1 + (Fintype.card (Fin (n + 1)) : ℝ) * (A * B)
   have hC : 1 ≤ C := le_add_of_nonneg_right
     (mul_nonneg (Nat.cast_nonneg _) (mul_nonneg (zero_le_one.trans hA) (zero_le_one.trans hB)))

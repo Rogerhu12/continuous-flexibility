@@ -62,6 +62,41 @@ theorem n04PositiveGeometry_root_firstColumns_of_unit
     exact n06_fderiv_angular_of_boundary_value
       ((P.n06_chart_contDiffAt_zero θ).differentiableAt (by simp)) P.extended_chart_zero
 
+private theorem root_firstColumns_of_scalar_traces
+    {d c : PolarPoint → ℝ} {β : ℝ → ℝ} {Φ : ℝ → ℝ → ℝ}
+    {R τ : ℝ} {G : ℝ × ℝ × ℝ → ℝ}
+    (P : N04bRootCoordinateProperties d c β Φ R τ G)
+    (F : PolarPoint → PolarPoint) (r σ θ odd even : ℝ)
+    (hσ : σ = 1 ∨ σ = -1)
+    (hf : ContDiffAt ℝ ∞ (fun p => F (rootProfileShift r σ p)) (0, θ))
+    (hj0 : iteratedFDeriv ℝ 0 (fun p => F (rootProfileShift r σ p)) (0, θ) =
+      iteratedFDeriv ℝ 0 (extendedRootEvenOddChart G) (0, θ))
+    (hj1 : iteratedFDeriv ℝ 1 (fun p => F (rootProfileShift r σ p)) (0, θ) =
+      iteratedFDeriv ℝ 1 (extendedRootEvenOddChart G) (0, θ))
+    (hodd : radialBoundaryJet (extendedRootOddCoefficient G) 0 0 θ = odd)
+    (heven : radialBoundaryJet (extendedRootEven G) 0 1 θ = even) :
+    F (r, θ) = (0, β θ) ∧
+      fderiv ℝ F (r, θ) (1, 0) =
+        (σ * (((3 / 2 : ℝ) * odd) ^ (2 / 3 : ℝ)), σ * even) ∧
+      fderiv ℝ F (r, θ) (0, 1) = (0, deriv β θ) := by
+  have ho : rootOddCoefficient G (0, θ) = odd := by
+    simpa only [radialBoundaryJet, iteratedDeriv_zero,
+      extendedRootOddCoefficient_of_nonneg G (p := (0, θ)) (le_refl (0 : ℝ))] using hodd
+  have he : radialPartial (extendedRootEven G) (0, θ) = even := by
+    have hreg : ContDiffAt ℝ ∞ (extendedRootEven G) (0, θ) :=
+      (P.n06_chart_contDiffAt_zero θ).snd
+    have hjet : radialBoundaryJet (extendedRootEven G) 0 1 θ =
+        radialPartial (extendedRootEven G) (0, θ) := by
+      simpa only [iteratedFDeriv_one_apply, radialPartial] using
+        n06_radialBoundaryJet_eq_frechet 1 hreg
+    exact hjet.symm.trans heven
+  have hv : F (r, θ) = extendedRootEvenOddChart G (0, θ) := by
+    have h := congrArg (fun A : PolarPoint [×0]→L[ℝ] PolarPoint => A Fin.elim0) hj0
+    simpa only [iteratedFDeriv_zero_apply, rootProfileShift, mul_zero, add_zero] using h
+  have hc := n04PositiveGeometry_root_firstColumns_of_unit P r σ θ hσ hf hj1
+  refine ⟨hv.trans (P.extended_chart_zero θ), ?_, hc.2⟩
+  simpa only [n06RootBoundaryScale, rootRadialFactor, ho, he] using hc.1
+
 def n04PositiveGeometry_rootBoundaryScale
     (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
     (g : ℝ → ℝ) (m : ℕ) (side : Bool) (y : (StateDirections S × ℝ) × ℝ) : ℝ :=
@@ -118,41 +153,19 @@ theorem n04PositiveGeometry_actual_root_firstColumns
   let r := n01ComponentRoot C m side
   let σ := n01ComponentRootOrientation side
   let i := if side then (K.cutPair m).2 else (K.cutPair m).1
-  let G := rootInverseCoordinate (rootFlowParameterUnscale Θ δ) (n01RootLabel S C z m side)
   have hz := liftSectorParameter_mem_stateNeighborhood (C := C) hx le_rfl
   have hs := hN.2.2.1.liftSectorParameter_sector x
   have P := n04PositiveGeometry_actual_unitRootCoordinate_properties
     hT hS hN hflow hz hs m side g hg hR hstrip hδ Θ hΘ
   have H := hmodel θ
-  have hcols := n04PositiveGeometry_root_firstColumns_of_unit P r σ θ
-    (n01ComponentRootOrientation_eq side) H.2.1 (H.2.2.2.2.1 1)
-  have hodd : rootOddCoefficient G (0, θ) =
-      n04PositiveGeometry_rootOddTrace D S C g m side 0 (x, θ) := by
-    have h := congrFun (n04PositiveGeometry_actual_oddTrace_eq hT hS hN hflow hx
-      m side g hg hR hstrip hδ Θ hΘ 0 (by omega)) θ
-    simpa only [radialBoundaryJet, iteratedDeriv_zero,
-      extendedRootOddCoefficient_of_nonneg _ (le_refl (0 : ℝ))] using h
-  have hscale : n06RootBoundaryScale G θ =
-      n04PositiveGeometry_rootBoundaryScale D S C g m side (x, θ) :=
-    congrArg (fun a : ℝ => ((3 / 2 : ℝ) * a) ^ (2 / 3 : ℝ)) hodd
-  have heven : radialPartial (extendedRootEven G) (0, θ) =
-      n04PositiveGeometry_rootBoundaryFormula D S C g m side 0 (x, θ) := by
-    have h := congrFun (n04PositiveGeometry_actual_unitRootTrace_eq hT hS hN hflow hx
-      m side g hg hR hstrip hδ Θ hΘ 0) θ
-    change radialBoundaryJet (extendedRootEven G) 0 1 θ = _ at h
-    have hreg : ContDiffAt ℝ ∞ (extendedRootEven G) (0, θ) :=
-      (P.n06_chart_contDiffAt_zero θ).snd
-    have he : radialBoundaryJet (extendedRootEven G) 0 1 θ =
-        radialPartial (extendedRootEven G) (0, θ) := by
-      simpa only [iteratedFDeriv_one_apply, radialPartial] using
-        n06_radialBoundaryJet_eq_frechet 1 hreg
-    exact he.symm.trans h
-  have hv : K.chart z i (r, θ) = extendedRootEvenOddChart G (0, θ) := by
-    have h := congrArg (fun A : PolarPoint [×0]→L[ℝ] PolarPoint => A Fin.elim0)
-      (H.2.2.2.2.1 0)
-    simpa only [iteratedFDeriv_zero_apply, rootProfileShift, mul_zero, add_zero] using h
-  refine ⟨hv.trans (P.extended_chart_zero θ), ?_, hcols.2⟩
-  simpa only [hscale, heven] using hcols.1
+  exact root_firstColumns_of_scalar_traces P (K.chart z i) r σ θ
+    (n04PositiveGeometry_rootOddTrace D S C g m side 0 (x, θ))
+    (n04PositiveGeometry_rootBoundaryFormula D S C g m side 0 (x, θ))
+    (n01ComponentRootOrientation_eq side) H.2.1 (H.2.2.2.2.1 0) (H.2.2.2.2.1 1)
+    (congrFun (n04PositiveGeometry_actual_oddTrace_eq hT hS hN hflow hx
+      m side g hg hR hstrip hδ Θ hΘ 0 (by omega)) θ)
+    (congrFun (n04PositiveGeometry_actual_unitRootTrace_eq hT hS hN hflow hx
+      m side g hg hR hstrip hδ Θ hΘ 0) θ)
 
 /-- The first derivative belongs to the original inverse chart. Its
 off-diagonal term has no remaining orientation factor. -/
