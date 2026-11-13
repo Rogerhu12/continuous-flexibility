@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseRawEnvelope
+import ContinuousFlexibility.Analysis.N04NegativeInverseNormalizedPair
 import ContinuousFlexibility.Analysis.N04NegativeInverseActualSystem
 import ContinuousFlexibility.Analysis.N04NegativeInverseCoefficientBounds
 import ContinuousFlexibility.Analysis.N04NegativeInverseJointPrefixes
@@ -107,7 +107,10 @@ private theorem negativeInverse_jointPrefix_pair
   let B : ℝ := boundData.choose
   have hB : 1 ≤ B := boundData.choose_spec.1
   have hforward := boundData.choose_spec.2
-  obtain ⟨D, hD, hcoeff⟩ := n04NegativeInverse_normalizedMajorants_envelope N hB hL
+  let coeffData := n04NegativeInverse_normalizedMajorants_envelope N hB hL
+  let D : ℝ := coeffData.choose
+  have hD : 1 ≤ D := coeffData.choose_spec.1
+  have hcoeff := coeffData.choose_spec.2
   refine ⟨D, zero_lt_one.trans_le hD, ?_⟩
   intro i hi J Q z hz q hq n w hw hs v hl R hR hzR hvR hp hvstate hvspace
   let indexData : ∃ j : ℕ × Bool, G.e i = .inl j := (G.neg_iff_inl 0 i).mp hi
@@ -119,23 +122,13 @@ private theorem negativeInverse_jointPrefix_pair
   let C : ℝ := B * E ^ B
   let A := G.negativeInverseCanonicalLinear 0 i
   let c : PolarPoint := ((G.V 0).left i, 0)
-  let M := n04NegativeInverse_prefixMajorant (2 * C * C) C L N
   have hE : 1 ≤ E := (G.cost_nonneg 0).2.2 i
   have hH : 0 ≤ H := Real.rpow_nonneg ((G.cost_nonneg 0).2.1 i) _
   have hHL : H ≤ L := hheight i
-  have ht : 1 ≤ t := Real.one_le_rpow hR (by positivity)
   have hC : 1 ≤ C := n04NegativeInverse_envelope_one_le hB hE
-  have hC0 : 0 ≤ C := zero_le_one.trans hC
-  have hM : 1 ≤ M := n04NegativeInverse_prefixMajorant_one_le
-    (mul_nonneg (mul_nonneg (by norm_num) hC0) hC0) hC0 (zero_le_one.trans hL) N
-  have hn : 0 < n := by have hsum := w.arity_sum; omega
-  have hnN : n ≤ N := by have hsum := w.arity_sum; dsimp only [N]; omega
-  have hβN : w.angleArity ≤ N := by have hsum := w.arity_sum; omega
-  have hden : N + shift * k = s + (shift + 1) * k := by
+  have hindex : base + N + shift * k + 1 = base + s + (shift + 1) * k + 1 := by
     dsimp only [N]
     simp only [Nat.add_mul, Nat.one_mul]
-    omega
-  have hindex : base + N + shift * k + 1 = base + s + (shift + 1) * k + 1 := by
     omega
   have hzR' : parameterGrading G.W.S (base + N + shift * k + 1) z ≤ R :=
     negativeInverse_grading_index_le (parameterGrading G.W.S) hindex hzR
@@ -153,27 +146,26 @@ private theorem negativeInverse_jointPrefix_pair
   let JH := G.negativeInverseHeightOn 0 hadm i j.1 j.2 hi'
   let QH := G.negativeInversePulledHeightOn 0 hadm i j.1 j.2 hi'
   have hpull : G.pulledPoint 0 (G.lift 0 z) i q =
-      (G.V 0).inverseChart (G.lift 0 z) i (c + A q) := by
-    unfold pulledPoint
-    rw [G.negativeInverseUnit_eq_affine]
+      (G.V 0).inverseChart (G.lift 0 z) i (c + A q) :=
+    congrArg ((G.V 0).inverseChart (G.lift 0 z) i)
+      (G.negativeInverseUnit_eq_affine 0 i q)
   have hmap : MapsTo (fun a => c + A a) unitStrip (G.negativeInverseTarget j.1) := by
     intro a ha
-    change ((G.V 0).left i, 0) + G.negativeInverseCanonicalLinear 0 i a ∈ _
-    rw [← G.negativeInverseUnit_eq_affine]
-    exact G.negativeInverseUnit_maps 0 i j.1 j.2 hi' ha
+    exact (congrArg (fun p : PolarPoint => p ∈ G.negativeInverseTarget j.1)
+      (G.negativeInverseUnit_eq_affine 0 i a)).mp
+        (G.negativeInverseUnit_maps 0 i j.1 j.2 hi' ha)
   let J' : SmoothDirections (sectorNeighborhood G.W.S base ε ε ×ˢ unitStrip)
       (fun x : Parameter G.W.S × PolarPoint =>
         (G.V 0).inverseChart (G.lift 0 x.1) i (c + A x.2)) :=
-    J.congrOn (fun x _ => by
-      unfold pulledPoint
-      rw [G.negativeInverseUnit_eq_affine])
+    J.congrOn (fun x _ => congrArg ((G.V 0).inverseChart (G.lift 0 x.1) i)
+      (G.negativeInverseUnit_eq_affine 0 i x.2))
   let Q' : SmoothDirections (sectorNeighborhood G.W.S base ε ε ×ˢ unitStrip)
       (fun x : Parameter G.W.S × PolarPoint =>
         (G.V 0).height (G.lift 0 x.1) i
           ((G.V 0).inverseChart (G.lift 0 x.1) i (c + A x.2))) :=
-    Q.congrOn (fun x _ => by
-      unfold pulledHeight heightField pulledPoint
-      rw [G.negativeInverseUnit_eq_affine])
+    Q.congrOn (fun x _ => congrArg (fun p : PolarPoint =>
+      (G.V 0).height (G.lift 0 x.1) i ((G.V 0).inverseChart (G.lift 0 x.1) i p))
+      (G.negativeInverseUnit_eq_affine 0 i x.2))
   have hfwd' : N04NegativeInverseJet.UnitPrefix JF
       (z, (G.V 0).inverseChart (G.lift 0 z) i (c + A q))
       (parameterGrading G.W.S base)
@@ -194,71 +186,19 @@ private theorem negativeInverse_jointPrefix_pair
       ((G.V 0).inverseChart (G.lift 0 z) i (c + A q))|⁻¹ ≤ C := by
     exact (congrArg (fun r : PolarPoint =>
       |planeJacobian ((G.V 0).chart (G.lift 0 z) i) r|⁻¹ ≤ C) hpull).mp hdet
-  have hpoint := N04NegativeInverseJet.normalized_inverse_prefix_norm_le JF KG
+  have hmajorants := hcoeff E hE
+  exact n04NegativeInverse_normalized_pair_bound (C := C) (Z := D * E ^ D) JF KG JH
     (sectorNeighborhood_isOpen G.W.S base ε ε)
     (isOpen_Ioo.prod isOpen_univ) (isOpen_Ioo.prod isOpen_univ)
     (isOpen_Ioo.prod isOpen_univ)
     (G.negativeInverseCanonical_maps 0 hadm i j.1 j.2 hi')
     (fun x hx => G.negativeInverseCanonical_jacobian_ne_zero 0 hadm i j.1 j.2 hi' hx)
     (fun x hx => G.negativeInverseCanonical_right 0 hadm i j.1 j.2 hi' hx)
-    A c hmap J' (parameterGrading G.W.S base)
-    (parameterGrading G.W.S (base + N + shift * k + 1)) N k shift hshift hz hq
-    hC0 hC0 hC0 hH hHL hL (zero_le_one.trans hR) (zero_le_one.trans ht)
-    hdet' hlinear hfwd' n hn hnN w hw.le v hl hvR' hp hvstate hvspace
-  have hheightRaw := N04NegativeInverseJet.normalized_scalar_prefix_norm_le JF KG JH
-    (sectorNeighborhood_isOpen G.W.S base ε ε)
-    (isOpen_Ioo.prod isOpen_univ) (isOpen_Ioo.prod isOpen_univ)
-    (isOpen_Ioo.prod isOpen_univ)
-    (G.negativeInverseCanonical_maps 0 hadm i j.1 j.2 hi')
-    (fun x hx => G.negativeInverseCanonical_jacobian_ne_zero 0 hadm i j.1 j.2 hi' hx)
-    (fun x hx => G.negativeInverseCanonical_right 0 hadm i j.1 j.2 hi' hx)
-    A c hmap QH Q' (parameterGrading G.W.S base)
-    (parameterGrading G.W.S (base + N + shift * k + 1)) N k shift hshift hz hq
-    hC0 hC0 hC0 hH hHL hL (zero_le_one.trans hR) (zero_le_one.trans ht)
-    hdet' hlinear hfwd' hscalar' n hn hnN w hw.le v hl hvR' hp hvstate hvspace
-  change ‖J.D n (z, q) v‖ ≤ (M * C ^ w.angleArity) *
-    parameterHeightWeight H w.stateArity * t ^ (w.angleArity + shift * w.stateArity - 1)
-    at hpoint
-  change ‖Q.D n (z, q) v‖ ≤
-    (n04NegativeInverse_partitionMajorant C M L n * C ^ w.angleArity) *
-    parameterHeightWeight H w.stateArity * t ^ (w.angleArity + shift * w.stateArity - 1)
-    at hheightRaw
-  have hcoef := hcoeff E hE
-  have hpointC : M * C ^ w.angleArity ≤ D * E ^ D :=
-    (mul_le_mul_of_nonneg_left (pow_le_pow_right₀ hC hβN) (zero_le_one.trans hM)).trans hcoef.1
-  have hheightC : n04NegativeInverse_partitionMajorant C M L n * C ^ w.angleArity ≤
-      D * E ^ D :=
-    (mul_le_mul_of_nonneg_left (pow_le_pow_right₀ hC hβN)
-      (n04NegativeInverse_partitionMajorant_nonneg hC0 (zero_le_one.trans hM)
-        (zero_le_one.trans hL) n)).trans (hcoef.2 n hnN)
-  have hfinish (a : ℝ) (ha : a ≤ D * E ^ D * parameterHeightWeight H w.stateArity *
-      t ^ (w.angleArity + shift * w.stateArity - 1)) :
-      a ≤ D * E ^ D * H * R ^ (((w.angleArity + (shift + 1) * k - 1 : ℕ) : ℝ) /
-        (((s + (shift + 1) * k : ℕ) : ℝ) + 1)) := by
-    rw [hw, parameterHeightWeight, if_neg (Nat.ne_of_gt hk)] at ha
-    have hd : w.angleArity + shift * k - 1 ≤ w.angleArity + (shift + 1) * k - 1 := by
-      simp only [Nat.add_mul, Nat.one_mul]
-      omega
-    have hp (d : ℕ) : t ^ d =
-        R ^ ((d : ℝ) / (((s + (shift + 1) * k : ℕ) : ℝ) + 1)) := by
-      dsimp only [t]
-      rw [n04NegativeInverse_commonScale_pow (zero_le_one.trans hR), hden]
-    calc
-      a ≤ D * E ^ D * H * t ^ (w.angleArity + shift * k - 1) := ha
-      _ ≤ D * E ^ D * H * t ^ (w.angleArity + (shift + 1) * k - 1) :=
-        mul_le_mul_of_nonneg_left (pow_le_pow_right₀ ht hd)
-          (mul_nonneg (mul_nonneg (zero_le_one.trans hD)
-            (Real.rpow_nonneg (zero_le_one.trans hE) _)) hH)
-      _ = _ := by rw [hp]
-  constructor
-  · apply hfinish
-    exact hpoint.trans (mul_le_mul_of_nonneg_right
-      (mul_le_mul_of_nonneg_right hpointC (parameterHeightWeight_nonneg hH _))
-      (pow_nonneg (zero_le_one.trans ht) _))
-  · apply hfinish
-    exact hheightRaw.trans (mul_le_mul_of_nonneg_right
-      (mul_le_mul_of_nonneg_right hheightC (parameterHeightWeight_nonneg hH _))
-      (pow_nonneg (zero_le_one.trans ht) _))
+    A c hmap QH J' Q' (parameterGrading G.W.S base)
+    (parameterGrading G.W.S (base + N + shift * k + 1)) k s shift hk hshift hz hq
+    hC (mul_nonneg (zero_le_one.trans hD) (Real.rpow_nonneg (zero_le_one.trans hE) _))
+    hH hHL hL hR hmajorants.1 hmajorants.2 hdet' hlinear hfwd' hscalar'
+    n w hw hs v hl hvR' hp hvstate hvspace
 
 /-- The actual forward prefixes close both retained inverse outputs
 on the same fixed neighborhood. The extra parameter shift accounts

@@ -59,6 +59,61 @@ private theorem n04NegativeInverse_scaled_product_bound
     _ ≤ _ := mul_le_mul_of_nonneg_right
       (mul_le_mul_of_nonneg_right hcoef hH) hW
 
+/-- Transfer a positive joint prefix before instantiating an atlas or a
+constructed inverse tower.  The coefficient witness stays independent
+of the piece, point, and direction tuple. -/
+private theorem n04NegativeInverse_jointPrefixes_of_scalar_bound
+    {S : PhysicalSpacesData} {T : MaterialData} {cell : ℕ → ℕ}
+    {P : ℕ → Prop} {base : ℕ} {ε : ℝ}
+    {f : Parameter S → ℕ → PolarPoint → PolarPoint}
+    {g : Parameter S → ℕ → PolarPoint → ℝ}
+    {I : ℕ → ℝ} {C : ℝ}
+    (hE : ∀ m, 1 ≤ T.E0 (T.sample (cell m)))
+    (hH : ∀ m, 0 ≤ T.H (T.sample (cell m)))
+    (hC : 0 < C) (hI : ∀ m, 0 ≤ I m)
+    (hinv : ∀ m, I m ≤ C * T.E0 (T.sample (cell m)) ^ C)
+    (J : ∀ m, P m → SmoothDirections (sectorNeighborhood S base ε ε ×ˢ unitStrip)
+      (fun x : Parameter S × PolarPoint => f x.1 m x.2))
+    (hbound : ∀ m (hm : P m),
+      ∀ Q : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ unitStrip)
+        (fun x : Parameter S × PolarPoint => g x.1 m x.2),
+      ∀ z ∈ sectorNeighborhood S base ε ε, ∀ q ∈ unitStrip,
+      ∀ n : ℕ, ∀ w : StateAngleWord n, 0 < w.stateArity →
+      ∀ v : Fin n → Parameter S × PolarPoint,
+      (∀ i, w.isState i = true → (v i).2 = 0) →
+        |Q.D n (z, q) v| ≤ (1 + I m) * ‖(J m hm).D n (z, q) v‖)
+    (hpoint : N04NegativeInverseJointPrefixes S T cell P base ε f) :
+    N04NegativeInverseJointPrefixes S T cell P base ε g := by
+  intro k hk
+  have orderData := hpoint k hk
+  let shift : ℕ := orderData.choose
+  have hshift := orderData.choose_spec
+  refine ⟨shift, fun s => ?_⟩
+  have boundData := hshift s
+  let B : ℝ := boundData.choose
+  have hB : 0 < B := boundData.choose_spec.1
+  have hb := boundData.choose_spec.2
+  have packed := coefficientEnvelope_pack ((1 + C) * B) (C + B)
+  let D : ℝ := packed.choose
+  have hD : 0 < D := packed.choose_spec.1
+  have hpack := packed.choose_spec.2
+  refine ⟨D, hD, ?_⟩
+  intro m hm Q z hz q hq n w hw hs v hv R hR hzR hvR hp hstate hspatial
+  have hP := hb m hm (J m hm) z hz q hq n w hw hs v hv R hR hzR hvR hp hstate hspatial
+  have hA := hbound m hm Q z hz q hq n w (hw.symm ▸ hk) v hspatial
+  let E : ℝ := T.E0 (T.sample (cell m))
+  let H : ℝ := T.H (T.sample (cell m)) ^ (3 / 4 : ℝ)
+  let W : ℝ := R ^ (((w.angleArity + shift * k - 1 : ℕ) : ℝ) /
+    (((s + shift * k : ℕ) : ℝ) + 1))
+  have hheight : 0 ≤ H := Real.rpow_nonneg (hH m) _
+  have hW : 0 ≤ W := Real.rpow_nonneg (zero_le_one.trans hR) _
+  have hcoef : (1 + I m) * (B * E ^ B) ≤ D * E ^ D :=
+    n04NegativeInverse_atom_coefficient_pack (hE m) hC hB (hinv m) (hpack E (hE m))
+  have hraw : |Q.D n (z, q) v| ≤ D * E ^ D * H * W :=
+    n04NegativeInverse_scaled_product_bound
+      (add_nonneg zero_le_one (hI m)) hheight hW hA hP hcoef
+  exact (Real.norm_eq_abs _).trans_le hraw
+
 namespace N04RealizationGauge
 
 variable (G : N04RealizationGauge)
@@ -74,45 +129,24 @@ theorem negativeInverse_atom_jointPrefixes
   let C : ℝ := lengths.choose
   have hC : 0 < C := lengths.choose_spec.1
   have hc := lengths.choose_spec.2
-  intro k hk
-  have orderData := hpoint k hk
-  let shift : ℕ := orderData.choose
-  have hshift := orderData.choose_spec
-  refine ⟨shift, fun s => ?_⟩
-  have boundData := hshift s
-  let B : ℝ := boundData.choose
-  have hB : 0 < B := boundData.choose_spec.1
-  have hb := boundData.choose_spec.2
-  have packed := coefficientEnvelope_pack ((1 + C) * B) (C + B)
-  let D : ℝ := packed.choose
-  have hD : 0 < D := packed.choose_spec.1
-  have hpack := packed.choose_spec.2
-  refine ⟨D, hD, ?_⟩
-  intro m hm J z hz q hq n w hw hs v hv R hR hzR hvR hp hstate hspatial
-  let P : SmoothDirections (sectorNeighborhood G.W.S b ε ε ×ˢ unitStrip)
-      (fun x : Parameter G.W.S × PolarPoint => G.pulledPoint 0 (G.lift 0 x.1) m x.2) :=
-    (G.negativeInversePointJointTower 0 m hm).restrict
-    ((sectorNeighborhood_isOpen G.W.S b ε ε).prod (isOpen_Ioo.prod isOpen_univ))
-    (fun x hx => ⟨sectorNeighborhood_mono G.W.S hadm.1 hadm.2.2.1 hadm.2.2.1 hx.1, hx.2⟩)
-  have hP := hb m hm P z hz q hq n w hw hs v hv R hR hzR hvR hp hstate hspatial
-  have hA := G.negativeInverseAtom_positiveJoint_bound 0 m P a ha J w
-    (hw.symm ▸ hk) ⟨hz, hq⟩ v hspatial
-  let E : ℝ := G.W.U.E0 (G.W.U.sample ((G.V 0).cell m))
-  let H : ℝ := G.W.U.H (G.W.U.sample ((G.V 0).cell m)) ^ (3 / 4 : ℝ)
-  let W : ℝ := R ^ (((w.angleArity + shift * k - 1 : ℕ) : ℝ) /
-    (((s + shift * k : ℕ) : ℝ) + 1))
-  have hE : 1 ≤ E := (G.cost_nonneg 0).2.2 m
-  have hH : 0 ≤ H := Real.rpow_nonneg ((G.cost_nonneg 0).2.1 m) _
-  have hW : 0 ≤ W := Real.rpow_nonneg (zero_le_one.trans hR) _
-  have hinv : |((G.V 0).physicalRight m - (G.V 0).physicalLeft m)⁻¹| ≤ C * E ^ C :=
-    (abs_of_pos (inv_pos.mpr (hc 0 m).1)).trans_le (hc 0 m).2.2.2.1
-  have hcoef : (1 + |((G.V 0).physicalRight m - (G.V 0).physicalLeft m)⁻¹|) *
-      (B * E ^ B) ≤ D * E ^ D :=
-    n04NegativeInverse_atom_coefficient_pack hE hC hB hinv (hpack E hE)
-  have hraw : |J.D n (z, q) v| ≤ D * E ^ D * H * W :=
-    n04NegativeInverse_scaled_product_bound
-      (add_nonneg zero_le_one (abs_nonneg _)) hH hW hA hP hcoef
-  exact (Real.norm_eq_abs _).trans_le hraw
+  let J : ∀ m, G.Neg 0 m →
+      SmoothDirections (sectorNeighborhood G.W.S b ε ε ×ˢ unitStrip)
+        (fun x : Parameter G.W.S × PolarPoint => G.pulledPoint 0 (G.lift 0 x.1) m x.2) :=
+    fun m hm => (G.negativeInversePointJointTower 0 m hm).restrict
+      ((sectorNeighborhood_isOpen G.W.S b ε ε).prod (isOpen_Ioo.prod isOpen_univ))
+      (fun x hx => ⟨sectorNeighborhood_mono G.W.S hadm.1 hadm.2.2.1 hadm.2.2.1 hx.1, hx.2⟩)
+  exact n04NegativeInverse_jointPrefixes_of_scalar_bound
+    (S := G.S 0) (T := G.W.U) (cell := (G.V 0).cell) (P := G.Neg 0)
+    (base := b) (ε := ε)
+    (f := fun z m q => G.pulledPoint 0 (G.lift 0 z) m q)
+    (g := G.atomFamily 0 a)
+    (I := fun m => |((G.V 0).physicalRight m - (G.V 0).physicalLeft m)⁻¹|)
+    (G.cost_nonneg 0).2.2 (G.cost_nonneg 0).2.1 hC (fun _ => abs_nonneg _)
+    (fun m => (abs_of_pos (inv_pos.mpr (hc 0 m).1)).trans_le (hc 0 m).2.2.2.1)
+    J
+    (fun m hm Q z hz q hq n w hk v hv =>
+      G.negativeInverseAtom_positiveJoint_bound 0 m (J m hm) a ha Q w hk ⟨hz, hq⟩ v hv)
+    hpoint
 
 /-- The point and pulled-height joint estimates close exactly the
 inverse subnode's conclusion on the supplied common neighborhood. -/

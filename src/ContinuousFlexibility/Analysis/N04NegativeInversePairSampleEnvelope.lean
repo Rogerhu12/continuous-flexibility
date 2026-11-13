@@ -35,7 +35,8 @@ private theorem n04NegativeInverse_pair_weight_scalar
   by_cases hκ : κ = 0
   · subst κ
     simp only [parameterHeightWeight, if_pos rfl, mul_one]
-    exact (mul_le_mul_of_nonneg_left (hzero.trans hb₀) hC).trans_eq (by ring)
+    exact (mul_le_mul_of_nonneg_left (hzero.trans hb₀) hC).trans_eq
+      (mul_assoc C (max B₀ B₁) (E ^ (max A₀ A₁))).symm
   · have hp : Hs * Es ^ C ≤ (max B₀ B₁ * E ^ (max A₀ A₁)) * H := by
       calc
         _ ≤ B₁ * (H * E ^ A₁) := hpositive

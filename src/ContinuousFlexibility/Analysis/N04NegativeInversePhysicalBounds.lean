@@ -54,10 +54,12 @@ theorem n04NegativeInverse_physicalUnit_jet
       ContinuousLinearMap.coe_snd', smul_apply, smul_eq_mul, Prod.mk_add_mk, zero_add]
   have hm : MapsTo (fun x : E × PolarPoint => c + L x) (U ×ˢ unitStrip) (U ×ˢ Ω) := by
     intro x hx
+    change c + L x ∈ U ×ˢ Ω
     rw [hpoint]
     exact ⟨hx.1, hmap hx.2⟩
-  let Q' := (J.compAffine L c (hU.prod (isOpen_Ioo.prod isOpen_univ)) hm).congrOn
-    (fun x hx => by rw [hpoint]; exact heq x hx)
+  let Q' : SmoothDirections (U ×ˢ unitStrip) g :=
+    (J.compAffine L c (hU.prod (isOpen_Ioo.prod isOpen_univ)) hm).congrOn
+      (fun x hx => (congrArg f (hpoint x)).trans (heq x hx))
   let q := n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData K) k p
   have hq : q ∈ unitStrip :=
     n07aCanonicalUnitInversePoint_maps (K := n07aPhysicalIntervalData K) hlen hp
@@ -150,11 +152,45 @@ theorem n04NegativeInverse_jet_bound_on_closedHalf
     (hb : ∀ q ∈ Ioo a b ×ˢ (univ : Set ℝ), ‖J.D n (z, q) v‖ ≤ M) :
     ‖J.D n (z, p) v‖ ≤ M := by
   apply n04NegativeInverse_le_on_closedHalf hab hhalf
-  · have hc := (J.continuous n).continuousAt
+  · have hc : ContinuousAt
+        (fun x : (E × PolarPoint) × (Fin n → E × PolarPoint) => J.D n x.1 x.2)
+        ((z, p), v) := (J.continuous n).continuousAt
       ((J.open_domain.prod isOpen_univ).mem_nhds
         (show ((z, p), v) ∈ (U ×ˢ Ω) ×ˢ univ from ⟨⟨hz, hp⟩, mem_univ _⟩))
-    exact (hc.comp ((continuousAt_const.prodMk continuousAt_id).prodMk continuousAt_const)).norm
+    have hmap : ContinuousAt (fun q : PolarPoint => ((z, q), v)) p :=
+      (continuousAt_const.prodMk continuousAt_id).prodMk continuousAt_const
+    exact (hc.comp_of_eq hmap rfl).norm
   · exact hb
+
+private theorem n04NegativeInverse_physicalAtom_is_geometry
+    {a : Atom} (ha : negativePhysicalGeometryAtom a) : atomIsGeometry a := by
+  cases a <;> simp_all only [negativePhysicalGeometryAtom, atomIsGeometry,
+    false_or, or_false, true_or, or_true]
+
+/-- The fixed physical affine length costs are polynomial in the sample
+weight, uniformly for every spatial arity in a finite prefix. -/
+private theorem n04NegativeInverse_physical_scale_envelope
+    {C D : ℝ} (hC : 0 < C) (hD : 0 < D) (s : ℕ) :
+    ∃ B : ℝ, 0 < B ∧ ∀ E : ℝ, 1 ≤ E → ∀ a : ℕ, a ≤ s →
+      C * E ^ C * (1 + D * E ^ D) ^ a ≤ B * E ^ B := by
+  obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (C * (1 + D) ^ s) (C + D * s)
+  refine ⟨B, hB, ?_⟩
+  intro E hE a ha
+  have hEpos : 0 < E := zero_lt_one.trans_le hE
+  have hM : 1 ≤ 1 + D * E ^ D := le_add_of_nonneg_right
+    (mul_nonneg hD.le (Real.rpow_nonneg hEpos.le _))
+  have hMupper : 1 + D * E ^ D ≤ (1 + D) * E ^ D := by
+    nlinarith only [Real.one_le_rpow hE hD.le]
+  calc
+    _ ≤ C * E ^ C * (1 + D * E ^ D) ^ s := mul_le_mul_of_nonneg_left
+      (pow_le_pow_right₀ hM ha) (mul_nonneg hC.le (Real.rpow_nonneg hEpos.le _))
+    _ ≤ C * E ^ C * ((1 + D) * E ^ D) ^ s := mul_le_mul_of_nonneg_left
+      (pow_le_pow_left₀ (zero_le_one.trans hM) hMupper s)
+      (mul_nonneg hC.le (Real.rpow_nonneg hEpos.le _))
+    _ = (C * (1 + D) ^ s) * E ^ (C + D * s) := by
+      rw [mul_pow, ← Real.rpow_mul_natCast hEpos.le, Real.rpow_add hEpos]
+      ring
+    _ ≤ B * E ^ B := hpack E hE
 
 attribute [local instance]
   n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
@@ -343,11 +379,10 @@ theorem negativeInverse_physicalFamily_purePrefix
               (G.W.U.H (G.W.U.sample ((G.V 0).cell k)) ^ (3 / 4 : ℝ)) w.stateArity *
             R ^ (((w.angleArity + shift * w.stateArity - 1 : ℕ) : ℝ) /
               (((s + shift * K : ℕ) : ℝ) + 1)) := by
-  have hgeometry (a : A) : atomIsGeometry (select a) := by
-    have ha := hselect a
-    cases he : select a <;> simp_all only [negativePhysicalGeometryAtom, atomIsGeometry,
-      false_or, or_false, true_or, or_true]
-  have hfamily := G.negativeInverse_atomFamily_purePrefix select hgeometry h
+  have hgeometry (a : A) : atomIsGeometry (select a) :=
+    n04NegativeInverse_physicalAtom_is_geometry (hselect a)
+  have hfamily := G.negativeInverse_atomFamily_purePrefix
+    (A := A) (b := b) (ε := ε) select hgeometry h
   let low : ℕ := hfamily.choose
   have hlow : b ≤ low := hfamily.choose_spec.1
   have hprefix := hfamily.choose_spec.2
@@ -363,7 +398,10 @@ theorem negativeInverse_physicalFamily_purePrefix
   let C : ℝ := (hpref s).choose
   have hC : 0 < C := (hpref s).choose_spec.1
   have hb := (hpref s).choose_spec.2
-  obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (C * (1 + D) ^ s) (C + D * s)
+  have packed := n04NegativeInverse_physical_scale_envelope hC hD s
+  let B : ℝ := packed.choose
+  have hB : 0 < B := packed.choose_spec.1
+  have hpack := packed.choose_spec.2
   refine ⟨B, hB, ?_⟩
   intro a k m side hi J z hz hzlow p hp hhalf n w hwK hws v hvlow R hR hzR hvR hvphys hvstate hvspatial
   have hk : G.Neg 0 k := (G.neg_iff_inl 0 k).mpr ⟨(m, side), hi⟩
@@ -380,23 +418,16 @@ theorem negativeInverse_physicalFamily_purePrefix
     (Real.rpow_nonneg (zero_le_one.trans hR) _)
   have hM : 1 ≤ M := le_add_of_nonneg_right
     (mul_nonneg hD.le (Real.rpow_nonneg hEpos.le _))
-  have hMupper : M ≤ (1 + D) * E ^ D := by
-    dsimp only [M]
-    nlinarith only [Real.one_le_rpow hE hD.le]
-  have hcoefficient : C * E ^ C * M ^ w.angleArity ≤ B * E ^ B := by
-    calc
-      _ ≤ C * E ^ C * M ^ s := mul_le_mul_of_nonneg_left
-        (pow_le_pow_right₀ hM hws) (mul_nonneg hC.le (Real.rpow_nonneg hEpos.le _))
-      _ ≤ C * E ^ C * ((1 + D) * E ^ D) ^ s := mul_le_mul_of_nonneg_left
-        (pow_le_pow_left₀ (zero_le_one.trans hM) hMupper s)
-        (mul_nonneg hC.le (Real.rpow_nonneg hEpos.le _))
-      _ = (C * (1 + D) ^ s) * E ^ (C + D * s) := by
-        rw [mul_pow, ← Real.rpow_mul_natCast hEpos.le, Real.rpow_add hEpos]
-        ring
-      _ ≤ B * E ^ B := hpack E hE
+  have hcoefficient : C * E ^ C * M ^ w.angleArity ≤ B * E ^ B :=
+    hpack E hE w.angleArity hws
   have hlen : (G.V 0).physicalLeft k < (G.V 0).physicalRight k :=
     sub_pos.mp (hlength 0 k).1
-  apply n04NegativeInverse_jet_bound_on_closedHalf J hz hp hlen hhalf n v
+  apply n04NegativeInverse_jet_bound_on_closedHalf
+    (E := Parameter G.W.S) (F := ℝ) (U := sectorNeighborhood G.W.S b ε ε)
+    (Ω := Ioo (G.W.C.left m) (G.W.C.right m) ×ˢ (univ : Set ℝ))
+    (f := fun x : Parameter G.W.S × PolarPoint =>
+      G.negativeInversePhysicalAtomFamily 0 (select a) x.1 k x.2)
+    J hz hp hlen hhalf n v
   intro r hr
   let q := n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData (G.V 0)) k r
   have hq : q ∈ unitStrip :=
@@ -412,15 +443,27 @@ theorem negativeInverse_physicalFamily_purePrefix
       cases he : w.isState i with
       | true => simp only [u, he, if_true]
       | false => simp only [u, he, Bool.false_eq_true, if_false, hvstate i he]
-    have hbnd := hb a k hk Q z hz hzlow q hq n w hwK hws u
-      (fun i => by rw [hu]; exact hvlow i) R hR hzR
-      (fun i => by rw [hu]; exact hvR i)
+    have hbnd : |Q.D n (z, q) u| ≤ C * E ^ C * parameterHeightWeight H w.stateArity *
+        R ^ (((w.angleArity + shift * w.stateArity - 1 : ℕ) : ℝ) /
+          (((s + shift * K : ℕ) : ℝ) + 1)) :=
+      hb a k hk Q z hz hzlow q hq n w hwK hws u
+      (fun i => (congrArg (parameterGrading G.W.S low) (hu i)).trans_le (hvlow i))
+      R hR hzR
+      (fun i => (congrArg (parameterGrading G.W.S (low + s + shift * K + 1))
+        (hu i)).trans_le (hvR i))
       (fun i => by cases he : w.isState i <;> simp only [u, he, if_true,
         Bool.false_eq_true, if_false, norm_zero, zero_le_one, hy i])
       (fun i he => by simp only [u, he, Bool.false_eq_true, if_false])
       (fun i he => by simp only [u, he, if_true])
-    simpa only [Real.norm_eq_abs, E, H, tail, mul_assoc] using hbnd
-  have hraw := n04NegativeInverse_physicalUnit_norm_bound (G.V 0) k
+    simpa only [Real.norm_eq_abs, tail, mul_assoc] using hbnd
+  have hraw := n04NegativeInverse_physicalUnit_norm_bound
+    (E := Parameter G.W.S) (F := ℝ) (S := G.S 0)
+    (U := sectorNeighborhood G.W.S b ε ε)
+    (Ω := Ioo (G.W.C.left m) (G.W.C.right m) ×ˢ (univ : Set ℝ))
+    (f := fun x : Parameter G.W.S × PolarPoint =>
+      G.negativeInversePhysicalAtomFamily 0 (select a) x.1 k x.2)
+    (g := fun x : Parameter G.W.S × PolarPoint => G.atomFamily 0 (select a) x.1 k x.2)
+    (G.V 0) k
     (sectorNeighborhood_isOpen G.W.S b ε ε) hlen J Q
     (G.negativeInverse_physicalUnit_maps 0 k m side hi)
     (fun x hx => G.negativeInverse_physicalAtom_on_unit 0 (select a) x.1 k x.2)
@@ -429,9 +472,9 @@ theorem negativeInverse_physicalFamily_purePrefix
     ((hlength 0 k).2.2.2.1.trans (le_add_of_nonneg_left zero_le_one)) hunit
   calc
     ‖J.D n (z, r) v‖ ≤ ((C * E ^ C) * tail) * M ^ w.angleArity := hraw
-    _ = (C * E ^ C * M ^ w.angleArity) * tail := by ring
+    _ = (C * E ^ C * M ^ w.angleArity) * tail := mul_right_comm _ _ _
     _ ≤ (B * E ^ B) * tail := mul_le_mul_of_nonneg_right hcoefficient htail
-    _ = _ := by dsimp only [E, H, tail]; ring
+    _ = _ := (mul_assoc _ _ _).symm
 
 end N04RealizationGauge
 
