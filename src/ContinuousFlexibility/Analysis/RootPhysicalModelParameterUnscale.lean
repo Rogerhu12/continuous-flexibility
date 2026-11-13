@@ -79,8 +79,8 @@ theorem extendedRootRadialFactor_parameterUnscale_pos
       δ * extendedRootRadialFactor
         (rootInverseCoordinate (rootFlowParameterUnscale Θ δ) h) (δ * x, θ) := by
   simp only [extendedRootRadialFactor,
-    extendedRootOddCoefficient_of_nonneg _ hx.le,
-    extendedRootOddCoefficient_of_nonneg _ (mul_pos hδ hx).le]
+    extendedRootOddCoefficient_of_nonneg _ (p := (x, θ)) hx.le,
+    extendedRootOddCoefficient_of_nonneg _ (p := (δ * x, θ)) (mul_pos hδ hx).le]
   rw [rootScaledInverseCoordinate_odd_parameterUnscale Θ h hδ hx θ]
   have hreorder (v : ℝ) : (3 / 2 : ℝ) * (δ ^ (3 / 2 : ℝ) * v) =
       δ ^ (3 / 2 : ℝ) * ((3 / 2 : ℝ) * v) := by ring
@@ -140,7 +140,7 @@ theorem iteratedFDeriv_rootModel_parameterUnscale
     simpa only [Function.comp_def] using hh
   have hclosure : (0, θ) ∈ closure (Ioi (0 : ℝ) ×ˢ (univ : Set ℝ)) := by
     rw [closure_prod_eq, closure_Ioi, closure_univ]
-    exact ⟨le_rfl, mem_univ _⟩
+    exact mk_mem_prod self_mem_Ici (mem_univ θ)
   apply iteratedFDeriv_eq_of_eqOn_open_of_mem_closure
     (isOpen_Ioi.prod isOpen_univ) hclosure _ hFs hG n
   intro p hp

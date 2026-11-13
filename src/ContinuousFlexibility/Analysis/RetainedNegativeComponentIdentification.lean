@@ -93,6 +93,9 @@ theorem retainedReference_negative_component_identification
         Icc a b ⊆ radialTailInterval (S.family S.sigma) side (S.entry side S.chain.index) := by
   let D := S.family S.sigma
   let G := P.toEntryPair hS hband
+  have hGL : G.radiusL = P.pair.radiusL := rfl
+  have hGR : G.radiusR = P.pair.radiusR := rfl
+  have hGp : G.profile = P.pair.profile := rfl
   have hreal : MorseChainRealization S.chain S.sigma D S.constants :=
     (hS.2.2.2.1 S.sigma hS.2.2.1).1
   have hE : ContDiff ℝ ∞ Γ.reference.w := hΓ.2.1.choose_spec.1.2.2.1.1
@@ -128,9 +131,12 @@ theorem retainedReference_negative_component_identification
   have hrG : r ∈ Ioo (G.radiusL * D.a) (G.radiusR * D.b) := by
     have hrE : Γ.reference.a < r ∧ r < Γ.reference.b :=
       ⟨hcomponent.1.trans hr.1, hr.2.trans hcomponent.2.2.1⟩
-    simpa only [ha, hb] using hrE
+    rw [ha, hb, ← hGL, ← hGR] at hrE
+    exact hrE
   have hnegG : deriv G.profile r < 0 := by
-    simpa only [hw] using hcomponent.2.2.2.2.2 r hr
+    have h0 := hcomponent.2.2.2.2.2 r hr
+    rw [hw, ← hGp] at h0
+    exact h0
   rcases G.negative_deriv_cases hq hrG hnegG with hL | hC | hR
   · obtain ⟨s, hs, hrs, hsneg⟩ := hL
     have hscaled := scaled_morse_component_identification (E := Γ.reference)
@@ -161,7 +167,7 @@ theorem retainedReference_negative_component_identification
         (centralRadius_modelCoordinate hrpos).symm.trans_lt (strictMono_centralRadius hxI.2)⟩
     have hcentral : NegativeRadialComponent Γ.reference
         (centralRadius (-sqrt centralOscillatorA)) (centralRadius (sqrt centralOscillatorA)) := by
-      simpa only [NegativeRadialComponent, ha, hb, hw] using
+      simpa only [NegativeRadialComponent, ha, hb, hw, hGL, hGR, hGp] using
         (G.central_model_return hq hc hd).1
     exact Or.inl (negativeRadialComponent_unique_of_mem hcomponent hcentral hr hrcentral)
   · obtain ⟨s, hs, hrs, hsneg⟩ := hR

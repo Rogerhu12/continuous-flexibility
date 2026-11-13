@@ -98,7 +98,8 @@ theorem morseRealization_scaled_positive_gap_inverse_width_bound
     calc
       (u - l)⁻¹ ≤ (c * radialE (n + 1) ^ (-C 0))⁻¹ := inv_anti₀ hpositive hwidth
       _ = c⁻¹ * radialE (n + 1) ^ (C 0) := by
-        rw [mul_inv_rev, Real.rpow_neg (exp_pos _).le, inv_inv]
+        have hE0 : 0 ≤ radialE (n + 1) := (exp_pos _).le
+        rw [mul_inv_rev, Real.rpow_neg hE0, inv_inv]
         ring
   change (R side * u - R side * l)⁻¹ ≤ (B * c⁻¹ * K₀) * T.E0 (T.sample j) ^ A
   calc

@@ -96,11 +96,11 @@ theorem morseRealization_turning_component_order
     refine ⟨haCore.1.trans_le hr.1, ?_⟩
     have h := (hr'.2.trans_lt (hbounds false (n - T.index)).2.2).trans_le
       (hUL (Nat.zero_le (n - T.index)))
-    simpa only [U, Nat.add_zero] using h
+    simpa only [U, Nat.add_zero, morseChainSeam, Bool.false_eq_true, ↓reduceIte] using h
   | true =>
     refine ⟨?_, hr.2.trans_lt hbCore.2⟩
     have h := (hLR (Nat.zero_le (n - T.index))).trans_lt
       ((hbounds true (n - T.index)).1.trans_le hr'.1)
-    simpa only [L, Nat.add_zero] using h
+    simpa only [L, Nat.add_zero, morseChainSeam, ↓reduceIte] using h
 
 end ContinuousFlexibility.Radial

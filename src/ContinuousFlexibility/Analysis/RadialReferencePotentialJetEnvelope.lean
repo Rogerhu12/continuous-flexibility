@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.OneHighCompositionJets
+import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Finite jets of the actual radial reference potential

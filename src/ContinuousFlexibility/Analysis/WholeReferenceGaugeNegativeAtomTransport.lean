@@ -39,9 +39,16 @@ theorem n04WholeReferenceGaugeAtlasData_negative_atom
   let V := n04WholeReferenceGaugeAtlasData C L K e cell ψ χ h₀ τ σ Q N
   let k := if j.2 then (K.cutPair j.1).2 else (K.cutPair j.1).1
   change atom D T S C L V z m v = atom D T S C L K z k v
-  rcases n04WholeReferenceGaugeAtlasData_negative_fields
-    C L K e cell ψ χ h₀ τ σ Q N z m j hi with
-    ⟨hl, hr, hpl, hpr, _, hcell, hneg, hF, hG, hH, hcoeff, hpotential⟩
+  have hfields : V.left m = K.left k ∧ V.right m = K.right k ∧
+      V.physicalLeft m = K.physicalLeft k ∧ V.physicalRight m = K.physicalRight k ∧
+      physicalPieceOpen S V z m = physicalPieceOpen S K z k ∧
+      V.cell m = K.cell k ∧ V.positive m = false ∧
+      V.chart z m = K.chart z k ∧ V.inverseChart z m = K.inverseChart z k ∧
+      V.height z m = K.height z k ∧ V.coefficients z m = K.coefficients z k ∧
+      V.potential z m = K.potential z k :=
+    n04WholeReferenceGaugeAtlasData_negative_fields C L K e cell ψ χ h₀ τ σ Q N z m j hi
+  obtain ⟨hl, hr, hpl, hpr, _, hcell, hneg, hF, hG, hH, hcoeff, hpotential⟩ := hfields
+  have hnegk : K.positive k = false := hnegative
   have hphysical : physicalUnitPoint V m = physicalUnitPoint K k := by
     funext p
     simp only [physicalUnitPoint, hpl, hpr]
@@ -54,7 +61,7 @@ theorem n04WholeReferenceGaugeAtlasData_negative_atom
     simp only [canonicalSource, hF, hG, hH]
   cases v <;> funext p <;>
     simp only [atom, hphysical, hcanonical, hl, hr, hpl, hpr, hcell,
-      hneg, hnegative, hF, hG, hH, hcoeff, hpotential, hsource,
+      hneg, hnegk, hF, hG, hH, hcoeff, hpotential, hsource,
       Bool.false_eq_true, ite_false]
 
 end ContinuousFlexibility.Analysis

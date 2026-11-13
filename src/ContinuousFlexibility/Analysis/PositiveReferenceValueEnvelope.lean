@@ -76,7 +76,7 @@ theorem positiveReferenceCoordinate_deriv_bounds
         max M (2 / (r - l)) := by
   have hscale := positiveReferenceScale_two_sided hδ hgap hA hM hsmooth hlower hupper hmass
   have hsep : 2 * δ ≤ r - l := by linarith only [hδ, hgap]
-  rw [(hasDerivAt_positiveReferenceCoordinate hδ (hsmooth false) (hsmooth true) x).deriv]
+  rw [(hasDerivAt_positiveReferenceCoordinate (l := l) (r := r) hδ (hsmooth false) (hsmooth true) x).deriv]
   constructor
   · exact (min_le_min le_rfl hscale.1).trans
       (positiveReferenceSlope_lower hδ hsep (hlower false) (hlower true) x)

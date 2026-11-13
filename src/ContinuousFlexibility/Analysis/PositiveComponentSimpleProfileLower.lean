@@ -78,7 +78,7 @@ private theorem positiveInterval_simple_root_min_lower
     · by_cases hxR : x = u
       · subst x
         exact le_of_eq (hend true).1.symm
-      · exact (hpos x ⟨lt_of_le_of_ne hx.1 hxL.symm,
+      · exact (hpos x ⟨lt_of_le_of_ne hx.1 (Ne.symm hxL),
           lt_of_le_of_ne hx.2 hxR⟩).le
   have hhalf (side : Bool)
       (hxm : x ∈ uIcc (if side then u else l) m) :

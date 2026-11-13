@@ -71,7 +71,7 @@ theorem n04PositiveComponent_width_inverse_bound_of_left_mem
     {A : Set ℝ} (hA : A.Finite) :
     ∃ B : ℝ, 0 < B ∧ ∀ i : N04PositiveComponent a b f,
       n04PositiveLeft i ∈ A → (n04PositiveRight i - n04PositiveLeft i)⁻¹ ≤ B := by
-  have hfinite := n04PositiveComponent_finite_of_left_mem hf hA
+  have hfinite := n04PositiveComponent_finite_of_left_mem (a := a) (b := b) hf hA
   obtain ⟨M, hM⟩ := (hfinite.image
     (fun i => (n04PositiveRight i - n04PositiveLeft i)⁻¹)).bddAbove
   refine ⟨max 1 M, lt_of_lt_of_le zero_lt_one (le_max_left _ _), ?_⟩

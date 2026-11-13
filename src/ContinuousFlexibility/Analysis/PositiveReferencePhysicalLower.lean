@@ -25,12 +25,14 @@ theorem PositiveChartRangeGeometry.cylinder_endpoint_values
       (positiveReferenceCylinderInverse Y) (fun p : PolarPoint => H p.1) l u 0 1) :
     Y l = 0 ∧ Y u = 1 := by
   have hY : ContDiff ℝ ∞ Y := by
-    simpa only [positiveReferenceCylinderChart, Function.comp_def] using
+    simpa only [positiveReferenceCylinderChart, Function.comp_def, id_eq] using
       hG.chart_smooth.fst.comp (contDiff_id.prodMk (contDiff_const :
         ContDiff ℝ ∞ (fun _ : ℝ => (0 : ℝ))))
   have hYpos (r : ℝ) : 0 < deriv Y r := by
-    simpa only [planeJacobian_positiveReferenceCylinderChart
-      (hY.differentiable (by simp) r)] using hG.jacobian_positive (r, 0)
+    have h := hG.jacobian_positive (r, 0)
+    rw [planeJacobian_positiveReferenceCylinderChart (p := (r, 0))
+      (hY.differentiable (by simp) r)] at h
+    exact h
   have hmono := (strictMono_of_deriv_pos hYpos).monotone
   have hends (side : Bool) : Y (if side then u else l) = (if side then 1 else 0) := by
     have hp : (if side then u else l) ∈ Icc l u := by

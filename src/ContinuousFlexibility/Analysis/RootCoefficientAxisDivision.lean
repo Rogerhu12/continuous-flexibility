@@ -33,9 +33,10 @@ theorem norm_iteratedFDeriv_smoothRadialFactor_root_le
   apply abs_mixedDerivative_smoothRadialFactor_le hF hG hfactor a b
   intro t _ht
   have hindex : (a + 1) + b = n + 1 := by omega
-  simpa only [mul_zero, hindex] using
-    abs_mixedDerivative_le_norm_iteratedFDeriv isOpen_univ hF.contDiffOn
-      (a + 1) b (p := (0, θ)) (mem_univ _)
+  have h := abs_mixedDerivative_le_norm_iteratedFDeriv isOpen_univ hF.contDiffOn
+    (a + 1) b (p := (0, θ)) (mem_univ _)
+  rw [hindex] at h
+  simpa only [mul_zero] using h
 
 /-- Both fields are the actual root coefficient fields. The extension
 is used only to justify their ordinary jets at the interior root. -/
@@ -89,15 +90,19 @@ theorem norm_iteratedFDeriv_rootCoefficientRadialFactor_root_le_of_physical_mixe
   change |mixedDerivative (a + 1) b F (t * 0, θ)| ≤ M
   rw [mul_zero, mixedDerivative_eqOn_of_isOpen
     (isOpen_Ioo.prod isOpen_univ) hFeq (a + 1) b hp]
-  have hshift := abs_mixedDerivative_rootProfileShift
+  have hshift := abs_mixedDerivative_rootProfileShift (r := r)
     (fun p => polarLinearB w z p ^ 2 - polarLinearA w z p * polarCorrectedC w z p)
     hσ (a + 1) b (0, θ)
-  have he : |mixedDerivative (a + 1) b (rootCoefficientDiscriminant w z r σ) (0, θ)| =
-      |mixedDerivative (a + 1) b
-        (fun p => polarLinearB w z p ^ 2 - polarLinearA w z p * polarCorrectedC w z p)
-        (r, θ)| := by
-    simpa only [rootCoefficientDiscriminant, rootProfileShift, mul_zero, add_zero]
-      using hshift
-  exact he.trans_le (hbound (a + 1) b (by omega))
+  have hpt : rootProfileShift r σ (0, θ) = (r, θ) := by
+    simp only [rootProfileShift, mul_zero, add_zero]
+  rw [hpt] at hshift
+  have hfun : rootCoefficientDiscriminant w z r σ = fun q =>
+      polarLinearB w z (rootProfileShift r σ q) ^ 2 -
+        polarLinearA w z (rootProfileShift r σ q) *
+          polarCorrectedC w z (rootProfileShift r σ q) := by
+    funext q
+    simp only [rootCoefficientDiscriminant]
+  rw [hfun]
+  exact hshift.trans_le (hbound (a + 1) b (by omega))
 
 end ContinuousFlexibility.Analysis
