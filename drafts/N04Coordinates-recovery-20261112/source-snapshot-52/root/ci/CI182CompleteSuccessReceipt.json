@@ -1,0 +1,73 @@
+{
+  "schema": "n04-complete-ci-success/v1",
+  "round": 182,
+  "commit": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "tree": "02a8747b6aaae413f67372d96e52ad8f3dbd9e9a",
+  "run_id": 43343760931,
+  "workflow_number": 1864,
+  "job_id": 131618041968,
+  "conclusion": "success",
+  "completed_updated_utc": "2026-11-13T01:24:03Z",
+  "all_required_steps_succeeded": true,
+  "quick_targets": 1150,
+  "generated_root_imports": 4637,
+  "full_jobs": 8681,
+  "fresh_quick_modules": [
+    {
+      "name": "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds",
+      "minutes": 0.2
+    }
+  ],
+  "fresh_full_modules": [
+    {
+      "name": "ContinuousFlexibility",
+      "minutes": 0.1
+    }
+  ],
+  "coverage_blob": "43f48f184f286e81597f12ab2bc242ea369bf271",
+  "coverage": {
+    "project_covered": 4699,
+    "project_total": 4701,
+    "all_src_covered": 4703,
+    "all_src_total": 4705
+  },
+  "original_log": {
+    "blob": "6ac8f47675260480cdc6975bf3301c38d4c853de",
+    "sha256": "97493a8d5805a6f7a8e3c36d75cab688bd5e6bb3ca37a38af5c3e5779d41df61",
+    "bytes": 71648
+  },
+  "blueprint": {
+    "proved": 37,
+    "total": 42,
+    "open": [
+      "N01c",
+      "N02N03",
+      "N04b",
+      "N04Coordinates",
+      "N05"
+    ],
+    "endpoint_axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "draft_ledger": {
+    "before": 19957,
+    "verified_credit": 681,
+    "components": [
+      332,
+      349
+    ],
+    "provenance": "0b4fc88a7cc2b1e8d7ca4f7f0e97b9d96885cdb5",
+    "after": 19276,
+    "remaining": 724,
+    "authorizations": {
+      "full_J_max": 250,
+      "StageE_piece_max": 400
+    },
+    "no_credit_for_129_upstream_main_files": true
+  },
+  "task_complete": false
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "n04-backup-push-receipt/v1",
+  "snapshot": 51,
+  "repository": "Rogerhu12/continuous-flexibility",
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "commit": "33242e92f62b6491702d5048a3cc1464e0f95cb3",
+  "tree": "73e62763ff8e9668037b342a50effade86154bbf",
+  "parent": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
+  "additional_parent": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "expected_head_nonforce": true,
+  "ref_readback_exact": true,
+  "pushed_readback_utc": "2026-11-13 01:20:19 UTC",
+  "blob_paths": 6539,
+  "outside_archive_exact_paths": 4802,
+  "outside_archive_target": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+  "indexed_artifacts": 3304,
+  "new_artifacts": 31,
+  "new_archived_Lean_lines": 0,
+  "source_index": {
+    "blob": "14c7a3ad1a44ec74fb661a7ecc11bc688555fe59",
+    "sha256": "91b213ef47adc03ad66933c30d6d54ca85cb422431003179734f408000a861e1",
+    "bytes": 1672134,
+    "entries": 3304
+  },
+  "record": "0aa2524d6b427ec972e8f1a4b0f2128a9726f0e3"
+}

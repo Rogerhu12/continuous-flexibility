@@ -1,0 +1,77 @@
+{
+  "schema": "n04-critical-recovery/v1",
+  "as_of_utc": "2026-11-13 01:28:04 UTC",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "branch": "line/N04Coordinates",
+  "active": {
+    "schema": "n04-ci-push-receipt/v1",
+    "round": 183,
+    "repository": "Rogerhu12/continuous-flexibility",
+    "branch": "line/N04Coordinates",
+    "commit": "3c966e45bee461dc9f4ab9885ad1dbe9a70deb88",
+    "tree": "88bf373764bc23e7a47e74bb875968800673386d",
+    "parent": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+    "plan": "ae71994a60f7e2d912936b187737b1aba867a401",
+    "force": false,
+    "expected_sha_verified": true,
+    "ref_readback_exact": true,
+    "pushed_readback_utc": "2026-11-13 01:26:56 UTC",
+    "earliest_first_ci_lookup_utc": "2026-11-13T01:31:56.000Z",
+    "conservative_active_added": 18549,
+    "compilation": "PENDING",
+    "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b"
+  },
+  "last_complete_green": {
+    "round": 182,
+    "commit": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+    "tree": "02a8747b6aaae413f67372d96e52ad8f3dbd9e9a",
+    "receipt": "318abffc005fd4c3069d27066e3ad5c1ad63a7b4",
+    "coverage": "43f48f184f286e81597f12ab2bc242ea369bf271",
+    "log": "6ac8f47675260480cdc6975bf3301c38d4c853de"
+  },
+  "budget": {
+    "retained_existing_drafts": 19276,
+    "allocated_not_yet_frozen": {
+      "full_J_max": 250,
+      "StageE_piece_max": 400
+    },
+    "reserved_upper": 19926,
+    "remaining_unallocated": 74,
+    "active_conservative": 18549,
+    "conditional_next_credit": {
+      "four_owned": 727,
+      "AE": 44
+    },
+    "no_new_credit_until_complete_CI183": true
+  },
+  "work": {
+    "positive": "Implement actual same-J full-forward fixed-base bound; <=250 new lines; planf81ad4.",
+    "quantitative": "Implement actual Stage E piece q/tau envelope; <=400 new lines; plan764ae5 and peer5d7.",
+    "audit": "Final same-witness assembly inventory and incoming source reviews. StageB<=200 waits second batch completegreen.",
+    "root": "CI183 validation, next numerical153/strongN03 batches, global StageE after second-batch budget."
+  },
+  "same_witness_gate": {
+    "route": "fc631678cd227d3f2b34feeefe37bbf79fd3d20e",
+    "retained_seed_compiled": true,
+    "numerical153": "6ba76a32edfe98908b3b1d44f9af3c7e3d72bfe5",
+    "strong_N03_206": "fd48b7aea0616211039f84119dd4fb7f5d36a455",
+    "gap_adapter": "Unimplemented90–140 lines on same selectedR/L/chi/buffer; existinggap theorem shrinks only neighborhood."
+  },
+  "next_pipeline": {
+    "numerical_two_batch_plan": "14d63e2dfd4abf9853ebf0d301b40fe1fd2c9d22",
+    "reference_two_batch_plan": "7d435900758e73116867b1a613efdc7b6fb1dfca",
+    "reference_leaf294": "f92cac74d1a7d5f0f5906e27bb2d1aad8c37cdd5",
+    "reference_leaf151": "46844fab38919d0d3808cbf39a16e63aae173e2e"
+  },
+  "endpoint": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open",
+    "proved": 37,
+    "total": 42,
+    "actual_completion_required": true
+  },
+  "environment": "Local execution unavailable. All new work persisted through Git. No local writes asserted after disconnection.",
+  "main_checked": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "invalid_superseded_record_excluded": "ea6d5b2f4e5c53c82ca0962dbb53b297ca2bb588"
+}

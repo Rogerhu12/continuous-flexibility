@@ -1,0 +1,635 @@
+{
+  "head": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "tree": "02a8747b6aaae413f67372d96e52ad8f3dbd9e9a",
+  "source_of_full_graph": "6d4933e47763157649c2ccafdfd67b05f74809a6",
+  "rebound_sources": [
+    "ContinuousFlexibility.Analysis.CircleUnitIntegral",
+    "ContinuousFlexibility.Analysis.N01ControlFlowBounds",
+    "ContinuousFlexibility.Analysis.N01ControlIndexBound",
+    "ContinuousFlexibility.Analysis.N01ControlWeightConstraint",
+    "ContinuousFlexibility.Analysis.N01FlowSmallness",
+    "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction",
+    "ContinuousFlexibility.Analysis.OpticalControlRatio",
+    "ContinuousFlexibility.Analysis.SmoothDirectionsUnitIntegral",
+    "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds",
+    "ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily"
+  ],
+  "all_nodes": 4705,
+  "project_nodes": 4701,
+  "generated_imports": 4637,
+  "checked_imports": 4241,
+  "full_lag": 396,
+  "default_roots": [
+    "ContinuousFlexibility",
+    "AxiomAudit",
+    "Challenge.FlexibleSphereChallenge",
+    "Solution.FlexibleSphereSolution"
+  ],
+  "default_all_reachable": 4699,
+  "default_project_reachable": 4695,
+  "default_unreached": [
+    "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+    "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth",
+    "ContinuousFlexibility.Blueprint.N01c.Coefficients",
+    "ContinuousFlexibility.Blueprint.N01c.Flows",
+    "ContinuousFlexibility.Blueprint.N01c.Speeds",
+    "ContinuousFlexibility.Blueprint.N05.VolumeModel"
+  ],
+  "missing": [],
+  "cycles": [],
+  "compilation": "COMPLETE_SUCCESS",
+  "schema": "n04-exact-ci-coverage/v1",
+  "baseline": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+  "baseline_coverage": "c953aaf006661c95a0c01909ae1a79bbf9ebad8b",
+  "actual_deltas": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ActualRadialCellComparison.lean",
+      "blob": "3348ac15c7a5b9f11d94cac0972eeddbebc2f6e5"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleAngularJetLinear.lean",
+      "blob": "91156e397f00e61ea0ebd48e7b1daa5243498fe0"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleAveragedComposition.lean",
+      "blob": "c756172121da5a6009a0ea80270ce0f8dcf0026b"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleBilinearRealization.lean",
+      "blob": "cb6ae71099b63cb414c39c8e44ed3e306aa98b0e"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleChartCompositionJets.lean",
+      "blob": "78ee43e48a7c8104ef977bd527f82f572f0ba107"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleCompositionModel.lean",
+      "blob": "558cbffe8d66e2f033967b9744841798ac4f56fa"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleDifferentialOperators.lean",
+      "blob": "98e345a5b5ec13ff2a368cff337cb857e559d85d"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleEnergyDifferentiation.lean",
+      "blob": "564f6baf2bd076c778e87a4af23d2aada4d854de"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleEnergyEnvelope.lean",
+      "blob": "0e0147a741014a634c384188612caadf19d2d51b"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleEnergyPointwiseBounds.lean",
+      "blob": "655914e338a33d345f7749ad603f84f4e1c0a00a"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleFiniteEnergyEnvelopes.lean",
+      "blob": "9f1602e49df55d4a377fbf80e12d3e151b69569f"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleJetAssembly.lean",
+      "blob": "4175430db2c34bc16fa58bedadb6010ba8af5198"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleJetPointwiseEnergy.lean",
+      "blob": "9d4fc36867c4ff0004d89d814499e61958aaa30e"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleMultilinearRealization.lean",
+      "blob": "217da706fabe4a23ce177e8579be88b15fc5752e"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleNonlinearRealization.lean",
+      "blob": "2013f87589194b12f9f75c5a861ad37fdc1a8e3a"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleParameterIntegral.lean",
+      "blob": "74731c2d2bb72aaf2494fa89ffa0cee2dab458b3"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleReturnBounded.lean",
+      "blob": "cc58ef2c3a73f3580534354fee29cbc578f5a9c2"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleReturnFourier.lean",
+      "blob": "e9a74832f35a8d072c7107e6297757ff3ef80d48"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleReturnSeries.lean",
+      "blob": "d96941e5a88134d4c638e38e9088fbfc2b869287"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleReturnSmoothInverse.lean",
+      "blob": "c15364c1339d9f5118ebc5d945474ad1ec0ac244"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleReturnUniqueness.lean",
+      "blob": "d95a035a847887d709899fe99c103375216dc9b3"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleTaylorDifferentiation.lean",
+      "blob": "8f7a377e1d214fed13fd4d55b705c94390649f2a"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleTwoEnergyEnvelope.lean",
+      "blob": "edb50def78e15c5ff21ec6fd0a474a0d2f6f77f6"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleWeightedComposition.lean",
+      "blob": "ff0db9ed23f3c19146b1cf4d367d65fd0ff9970c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleWeightedEstimate.lean",
+      "blob": "da4bae43883167841c478e07710e3667c4fb2bb8"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleWeightedJetNormSum.lean",
+      "blob": "e4968975396a3930091927899a564f677091a8b8"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleWeightedProduct.lean",
+      "blob": "9050bec95e50ef67af17ab4e009a54e9100efb82"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CompactRadialHeightMember.lean",
+      "blob": "af187ddce4e99fb0b183d177ecb7d8af90aa8c98"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CylinderUniformNorm.lean",
+      "blob": "41c5e0555a5aa2ceb1b9d748e78263e85726637c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/DisjointIntervalPacking.lean",
+      "blob": "1bba5b88899a497fcb4375ee0efc5d48f6b3f6db"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/FinitePhysicalEnergyBounds.lean",
+      "blob": "3c150c21d8dc137cb4c3eab5e36afb10c68cca2e"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/FiniteRestrictedEnergy.lean",
+      "blob": "d11b8e512c40516db0bb08548e9a3559f5806b64"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/HeightScalarVariationWeights.lean",
+      "blob": "6d7a92cee20f21d2f356f0b6fbf29bf5d6a6859d"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/HeightSectorDirections.lean",
+      "blob": "fc1e595af278a8e007cbd3f8fe39c7bcc7507ef6"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/LocalizedJetInterpolation.lean",
+      "blob": "6c35cc9c69be4ffc631bf2d62fb9a5b0edac95ab"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialBalancedConstraint.lean",
+      "blob": "4bc37d622c51d9267ee10972ed8088866ac45fd9"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialComponentEnergy.lean",
+      "blob": "cbc7cb8f1cf0ce1f25d15ff1799d0a7465d85d5b"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialCutoffJetEnergy.lean",
+      "blob": "6882aee53788254bac399944d5c1f4b0227ec18c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialEndpointComparison.lean",
+      "blob": "9bd3a3d1196a42cf9f61fa2ea3210946cad4bad9"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialHeightCutoff.lean",
+      "blob": "7aac00b91409a32572ff07d6ab88ad295c68ad6a"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialPlateauGeometry.lean",
+      "blob": "881d284a832025d6f2fb1c36e7a3ba194886dae8"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialPlateauIndexBand.lean",
+      "blob": "da71b64cf1036807c5b9a7fabf3dc9bff9a4b2b8"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialPlateauJets.lean",
+      "blob": "f4b1243a9c8cf0f46ebb3aa9d728bd69ce3da90e"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialPlateauLocalization.lean",
+      "blob": "9ea55af9b2098f60984ab9af0dd73cefbf70be64"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialPlateauRadialLoss.lean",
+      "blob": "23f7f1d7bf1d837446e6fad1a7e09d0e504043bf"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialPlateauSampleWeights.lean",
+      "blob": "b174a37bfdc5273204c16ca83bd460e6e94fc252"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialPlateauSize.lean",
+      "blob": "d3d867fff1a071bd595efa704bac9832ef739a1c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialPlateauWeights.lean",
+      "blob": "d442f9bafe1376a90105806847dd2e3d95e9a93c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialRadiusJets.lean",
+      "blob": "8764c134a2ebbe76f19370b1da5365bbe7a5a716"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialRhoGrowth.lean",
+      "blob": "b8364e13764ca8cbff0ac66acac8a2c45f34304f"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialSampleBalancedConstraint.lean",
+      "blob": "b4c831352bd9ea5fc2b1827deeccae8321f92e73"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialSampleWeightedConstraint.lean",
+      "blob": "9ddc7a9140522d66da7a4c187238ef4c7b568266"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ActualCellMaterialOrder.lean",
+      "blob": "13958585922bb393852df89d3d397d9a8f495264"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01CharacteristicParameterRegularity.lean",
+      "blob": "941cca82d1d77fbb8e6b435c88e9ce769109654b"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ControlLengthBound.lean",
+      "blob": "60332c2a7d6cb632b442bbab049fb294e250c6e1"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ControlPlateauOverlap.lean",
+      "blob": "996ac95d68f34d2f11ed4525e3df29de767c0b8a"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ControlPlateauWeights.lean",
+      "blob": "14c6618beeef93562f517ce3a9a6e218ee08ba8c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointAngularJets.lean",
+      "blob": "28eb283fb4a233b5db1f0693113f56905922361d"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointCircleJets.lean",
+      "blob": "55157d7700a12a33d2c630e287c6501468b4f51a"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointJetLocalGrowth.lean",
+      "blob": "6ffd056b6f856a2caf27a44a440dcbf3cd8eb1b5"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointOneHigh.lean",
+      "blob": "89d524bcc7934390eecae7a0c60d0790cbfc16f0"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointParameterTower.lean",
+      "blob": "a1e3799a094e9f4d1e30b769389ae578464ea0e0"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointPositiveCircleMember.lean",
+      "blob": "864c9c5c68da571ef5da7f03a0ebb8af5cacf70c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointScalarCircleMember.lean",
+      "blob": "128caa8e65e6554f7b3a880cd365b063513a9b19"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointScalarHeightBounds.lean",
+      "blob": "4bc9dc5b21d34ee9aca74fd6fc41e1e683e495a1"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointScalarJetGrowth.lean",
+      "blob": "6efff96e65dced74c3781bf959a6c8b30b38517f"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointScalarSplitNorm.lean",
+      "blob": "b233e30041f596bc30c4c50c6bf863ae1e57ebfa"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointSplitEnergy.lean",
+      "blob": "14e83e191babff4927b275ffc698915fc9535daa"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointSplitNorm.lean",
+      "blob": "392808fbcfc2a68f8d340f4a5dcff3c96fb62d95"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointStateCircleMember.lean",
+      "blob": "46c554ae4cded159f7254f48a466e6c38029c05c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointStateJetGrowth.lean",
+      "blob": "49b8f818a5b38195bae5311d96e5bdf442175a90"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointWeightedJets.lean",
+      "blob": "d6cda63241de57dc1374ccf03cdde38909f03f51"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowConstantDirections.lean",
+      "blob": "cde1ebeb3af5711da9704bb150fc4d0c0709fbd4"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowGermLocality.lean",
+      "blob": "504d5e2e4102399936814e995e192fa9ca6dcf5f"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowHeightResponse.lean",
+      "blob": "f4e110a8cd8c952827725e96072f945df3f72252"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowHeightScaling.lean",
+      "blob": "f7cebced0e63e1ce16100f4535aefda81df36d18"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowHeightVariation.lean",
+      "blob": "74b2acecfec85a91dbd830c46d941079ec8de5f4"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowLocality.lean",
+      "blob": "981d30325c8cf8ab597e227d73c7888402c3d21b"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowLocalizedDirections.lean",
+      "blob": "98d47b071a75c76b2d98cf91decfba521ae859f8"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowMixedParameterBound.lean",
+      "blob": "5afeee1121f7dcc77b49a78161071df25393a73a"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowParameterPartialVariation.lean",
+      "blob": "f385093af70a8283b7dd452a16d01b746ca78610"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowParameterVariation.lean",
+      "blob": "f1a60b510c4296b8c6d52f26382600cbc6e25d93"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowSamplePrefactor.lean",
+      "blob": "62d01175dace47d6da9c87e1587a7118acce80aa"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowScalarHeightBounds.lean",
+      "blob": "2bb9365f2c4d9b86bb41980c838394dfaaa95f99"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowStateLocality.lean",
+      "blob": "d30b000abe9257b127558bc8b8074b1b3191ffee"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01HeightLineResponse.lean",
+      "blob": "f24be0e5c4321713df507eccfa4d6b8b564d5bf8"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01HeightPlateauDirections.lean",
+      "blob": "ca10a66d3477e0b3d244332bfe526aed6cfc3fa5"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01HeightResponseBound.lean",
+      "blob": "212dfa54c5919fb09b18d9b7ae496bf64d3094d6"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01HeightTestWeightBridge.lean",
+      "blob": "53397ad614536d4bebf667dcb00d38333e531b6b"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01HeightWeightConstraint.lean",
+      "blob": "0d496678c84ab64066f4f7af095e1b6414b307b1"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01LocalizedStateDirections.lean",
+      "blob": "cb6a22da8c998ddb76f1537c35c41cd8dea117a7"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01PlateauEnergy.lean",
+      "blob": "e0c39a39b2dd39e9e6c0deee4abb7346510abd93"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01PlateauEnergyEnvelope.lean",
+      "blob": "ef46f6e3df3da294a3edf0392fdb67b2990c61c1"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01PlateauMaterialPowers.lean",
+      "blob": "936b4c3c7b8f596cf3663763ea5dc86ed37a6a09"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ReverseMaterialOrder.lean",
+      "blob": "2e586a38ab3d213ec44a7a6a535fc99bc0ff7da5"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ReverseMaterialOrderActualCell.lean",
+      "blob": "d9f054cb3a08d0529dd0a5311eed9e8ded847919"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01SectorFlowTower.lean",
+      "blob": "4de49c37d8e8a86e64b0e6a7342a434b478367a0"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01StateLocalizationEnergy.lean",
+      "blob": "37df6176b4c5ea9af1ba7d15003e915e03372b7c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01TravelLowerBound.lean",
+      "blob": "58e7765976d0c6db5a89bf6263b9322fa73fdd52"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01WeightedActualCellTransfer.lean",
+      "blob": "6417f2f68f971a4f5c4fe2df9e266fd9e3ce7a61"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01WeightedPlateauEnergy.lean",
+      "blob": "77fa9425425ddabd439c2ecabe63752643a07c5c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01WeightedPlateauEnvelope.lean",
+      "blob": "cd0c5ae71892ff23d7ab99541bf0a066e3c3ec1f"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/OneHighLocalizedSlot.lean",
+      "blob": "57f9d1089d4eb988f128391593040234de594fb9"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/PhysicalGradeEnergy.lean",
+      "blob": "b4d9fccc28eeda64b741b2c88f2b1d7b814587ad"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/PolarHeightCharacteristicVariation.lean",
+      "blob": "e2a619998b82e149a9b27452d288a1f5fdfc903f"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ProjectiveJetContinuity.lean",
+      "blob": "a22c669bc7f09ebaa7495461164fa3d0e672c93f"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/RadialPlateauBounds.lean",
+      "blob": "04403f37c4c15ef1ffee456d4e1b2f1ff86f11fd"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/RadialPlateauCutoff.lean",
+      "blob": "38c728ea7e4a3ed6b3a15f3801a93d2b562f3373"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/RadialPlateauHeight.lean",
+      "blob": "837042fafa128efaee997d7ca2353f87ea9b2e8e"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/RadialPlateauNorm.lean",
+      "blob": "8ce5ed2588bed20f6329ec65c58e6ba35b116eba"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/RadialPrimitiveJets.lean",
+      "blob": "257cef0ec28fc3b989ad9e52faca42d0581f3797"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/RestrictedOverlapEnergy.lean",
+      "blob": "4e30443870c01c9b7c4ff7654b81cdd830dfa815"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ScalarDerivativeLimit.lean",
+      "blob": "3a3f4c13462ca8514e0853376c78778a8c5cfcab"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ScalarFlowParameterVariation.lean",
+      "blob": "1c1bf9250df13437ee0ef48f05abff67fcd1e3d4"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ScalarJetSchwarz.lean",
+      "blob": "6d571e8fff0548a383a0dd3288e191e66affe521"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SectorParameterGeometry.lean",
+      "blob": "2aedeefa0b7cecd1a972ac5b9fbf48bb538b6490"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAffine.lean",
+      "blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAngularJets.lean",
+      "blob": "237d9bd4419709eff54e03c8267304d7c6d0961d"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsBoundedLimit.lean",
+      "blob": "47177e7f1d7be00084e1a5f6627b1824b278307d"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsEuler.lean",
+      "blob": "9594fc323da0b8e27b6f693913535eec6f047d00"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsJetLimits.lean",
+      "blob": "9005be0f325f19ce9c178f015f27e9d60ed8bc20"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsLimitAssembly.lean",
+      "blob": "74eb23a3344e171dc1c31652669ad0d54c941b32"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsLocalDirections.lean",
+      "blob": "a3d5087351bd6b7679b86b72d12936c5290904f6"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsMixedScalarLine.lean",
+      "blob": "fd9ce319319ed8c8cdf4d7be43cb6a27ce644ed4"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsOneHighLimit.lean",
+      "blob": "0253a94eb6f31c6f5aec0ff43dcf64a4b067b3ca"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsUniformBounds.lean",
+      "blob": "16fe8d01e715b0519e63ff6504066b9e343c9f50"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameFixedBaseCompositionBounds.lean",
+      "blob": "f43a2b774c41da8cc9417051adc8c0a89d3ed04e"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameInterpolationProducts.lean",
+      "blob": "554f3ac62d0d4e8033c7e2139d55fcb088045b37"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+      "blob": "0ebea7f59395ec005429f835a0d1a5110d4dcab9"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameTopologicalComposition.lean",
+      "blob": "55b7375931ca80f58ae6dd8b82e28ab9da80f5e4"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WeightedCutoffJetEnergy.lean",
+      "blob": "2ec9124aab66a149f61d6712943cfb9805a4729b"
+    }
+  ],
+  "all_baseline_paths_unchanged": true,
+  "first40": [
+    "ContinuousFlexibility.Analysis.AbsoluteReciprocalJetBounds",
+    "ContinuousFlexibility.Analysis.ActualAtlasCutFirstJets",
+    "ContinuousFlexibility.Analysis.ActualNegativeMovingReferenceUnitPoint",
+    "ContinuousFlexibility.Analysis.ActualNegativeOppositeRootFields",
+    "ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity",
+    "ContinuousFlexibility.Analysis.ActualPositiveGaugeRootFirstJets",
+    "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+    "ContinuousFlexibility.Analysis.ActualPositiveReferenceFirstJets",
+    "ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation",
+    "ContinuousFlexibility.Analysis.ActualRadialCellComparison",
+    "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+    "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+    "ContinuousFlexibility.Analysis.AdjugateAiryTransport",
+    "ContinuousFlexibility.Analysis.AdjugateInversePrincipalField",
+    "ContinuousFlexibility.Analysis.AdjugatePrincipalField",
+    "ContinuousFlexibility.Analysis.AdjugatePrincipalFiniteJets",
+    "ContinuousFlexibility.Analysis.AffineMaterialSampling",
+    "ContinuousFlexibility.Analysis.AffineWeightedCompositionJets",
+    "ContinuousFlexibility.Analysis.AiryFirstJetMatching",
+    "ContinuousFlexibility.Analysis.AiryHalfHolonomy",
+    "ContinuousFlexibility.Analysis.AiryInteriorChartMaterialJets",
+    "ContinuousFlexibility.Analysis.AngularFiberEndpointJets",
+    "ContinuousFlexibility.Analysis.AngularFiberFiniteJetBounds",
+    "ContinuousFlexibility.Analysis.AngularInverseFirstDerivative",
+    "ContinuousFlexibility.Analysis.AngularRegularity",
+    "ContinuousFlexibility.Analysis.AngularRegularityIntegral",
+    "ContinuousFlexibility.Analysis.AngularSimpleDivisionBounds",
+    "ContinuousFlexibility.Analysis.AngularSineMixedBounds",
+    "ContinuousFlexibility.Analysis.AngularSineQuotient",
+    "ContinuousFlexibility.Analysis.AngularTaylorDivision",
+    "ContinuousFlexibility.Analysis.AngularTaylorPolynomial",
+    "ContinuousFlexibility.Analysis.BoundaryJetClosure",
+    "ContinuousFlexibility.Analysis.BoundaryRadialFrechetJets",
+    "ContinuousFlexibility.Analysis.BoundaryTaylorBounds",
+    "ContinuousFlexibility.Analysis.BoundaryTaylorCanonicalExtension",
+    "ContinuousFlexibility.Analysis.BoundaryTaylorDensity",
+    "ContinuousFlexibility.Analysis.BoundaryTaylorHeight",
+    "ContinuousFlexibility.Analysis.BoundaryTaylorMatching",
+    "ContinuousFlexibility.Analysis.BoundaryTaylorPrincipalRemainder",
+    "ContinuousFlexibility.Analysis.BufferedRadialAuxiliaryColumn"
+  ],
+  "quick_count": 1150,
+  "quick_count_check": "1019 existing plus131 new; first40 reconstructed from exact source delta and matches original CI header. Main merge-base and changed script unchanged.",
+  "combined_project_reachable": 4699,
+  "combined_all_reachable": 4703,
+  "remaining_unreached": [
+    "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+    "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth"
+  ],
+  "extra_quick_targets": [
+    "ContinuousFlexibility.Blueprint.N01c.Coefficients",
+    "ContinuousFlexibility.Blueprint.N01c.Flows",
+    "ContinuousFlexibility.Blueprint.N01c.Speeds",
+    "ContinuousFlexibility.Blueprint.N05.VolumeModel"
+  ],
+  "full_jobs": 8681,
+  "job_log": {
+    "blob": "6ac8f47675260480cdc6975bf3301c38d4c853de",
+    "sha256": "97493a8d5805a6f7a8e3c36d75cab688bd5e6bb3ca37a38af5c3e5779d41df61",
+    "bytes": 71648
+  },
+  "raw_cached_oleans": 5126,
+  "raw_cache_not_coverage": true
+}

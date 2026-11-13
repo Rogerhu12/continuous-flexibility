@@ -1,0 +1,709 @@
+{
+  "schema": "n04-source-only-ci-plan/v1",
+  "round": 183,
+  "status": "REVIEWED_CONDITIONAL_BATCH_ACTIVATED_AFTER_COMPLETE_GREEN",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "branch": "line/N04Coordinates",
+  "parent": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "tree": "88bf373764bc23e7a47e74bb875968800673386d",
+  "commit": "3c966e45bee461dc9f4ab9885ad1dbe9a70deb88",
+  "current_main_checked": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "complete_parent_success": "318abffc005fd4c3069d27066e3ad5c1ad63a7b4",
+  "source_plan": "d5e3166592308c414a60214aa41c3b51bec2f9a1",
+  "actual_parent_anchor": "9b41272be5dff02c2745700b5f497b622870aa18",
+  "independent_execution_peer": "7f2cdb412ab8f6d68a2ea4dbe28b51f1031044e7",
+  "projected_graph": "6d4933e47763157649c2ccafdfd67b05f74809a6",
+  "selected_count": 106,
+  "preflight": {
+    "providers": 413,
+    "rebindings": [
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+        "before": "083d926c2e2bd91323a068b40e93dc93117f9779",
+        "after": "0ebea7f59395ec005429f835a0d1a5110d4dcab9"
+      }
+    ],
+    "new": 97,
+    "shared": 9,
+    "new_source_lines": 16609,
+    "shared_full_lines": 1447,
+    "full_root_lag": 493,
+    "conservative_added": 18549
+  },
+  "source_only_tree_entries": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/AngularJetExpansion.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "378681efb075b8e1c6edbb90534f9f2e568b3fda"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleAverageCompositionSmoothTame.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "da25ed949924696c8c3f82e87ffc9e8117b20653"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleAverageCompositionUniformBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f5318c9c0ec92d723bc9d0445a7afc3bf1ceacea"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleAveragedCompositionTame.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4ef5bd5826557652ed1200cf3c75ef6e6fce2b17"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleComponentContraction.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "74e0d0a24a0e17fa62ccd3dbf9cb90a1a373ddbc"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleComponentMultiplier.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2868a6468360e0a7d72d2f71115140b9ec4aa365"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleCompositionFaaBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8850d9427fb2e1b8104d6f477ef36ad3c5ff5651"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleCompositionJetModels.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3877b674f0f5f1c154d7b754225e9e946032aff3"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleCompositionJetNormBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8310c830512499f3e12b4ac7bde09578f4800ae7"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleCompositionLineEnvelope.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c03ee39cb8ed7ed4f76e70e1e3d43a9f172113aa"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleCompositionLocalTame.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "33cc650b2ae7855379712f7ff7f9eb6c726141a6"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleCompositionMixedJets.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4b29c76386563141ebe4cf0acd338fdb2f43565a"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleCompositionSecondEnvelopes.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "99db4b83e1101bd1f9f13d921fb93fc7627e3991"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleCompositionSmoothDirections.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e18aa8ce1e77ebdc960d721a286e9ffdb7b58632"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleCompositionSmoothTame.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "54058eb65074dda046b62af876a4a54a02e98b09"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleCompositionTameBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "921b559a9d8c84d3cd6ceaa6ddeaaffc44de188c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleCompositionUniformBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c106d144ed51f41df90902c42a30c657ae361a33"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleCurveEnergyEnvelope.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cfe84746be5ffd69143b1318893f2e1addb36848"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleFiniteProductBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "04a7a7df19c9eeaf9bd48331e225ce3245c3877e"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleInverseCompositionGrowth.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4b9561e1984fbc8e3d228b0c1ab9aa23950418b5"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleInverseFaaBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6421119f4ecd651955aeeec34ed00772e4f608e7"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleInverseFamilyTame.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bd50211085dff91e17f5c661e77d69e5e82ae1a2"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleInverseInterpolatedJets.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3b78988f92909bd9c29fb617a2fb0a1a5090fda2"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleInverseModel.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d4cd16420a70111439856a3685e292a7ee34b17b"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleInversePerturbation.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3947211ba4cbb5e9454c9011d19ee59b83d87d8b"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleInverseSmoothTame.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "504b92af7bd8b1c93d1dcb0f78ac83fa0cfe36f4"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleInverseUniformGrowth.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "51594d94b87522ce7f6f6b06f2525819704a0c1e"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleJointEvaluation.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b18010ba5d5c86d247e70d32e8ffd134434e126b"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleOuterCompositionBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cde5c2c433dc84b025f7f533bc88865cd3d27b3e"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInverseFixedBaseBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1f55edbb185fe33327757a087479196cc8565e4f"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInverseModel.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6f2c793893f51f1fd72c6201f149a0e527458994"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInversePerturbation.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d532c92eee0cf46e41a22a1a641cf1d95ac87ef6"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInverseSmoothTame.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "28e258fbf0a0417606cb01a1c5abea5af9ccb49b"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInverseUniformBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ac025f689b8ad75193d681ed756ff66e164f157f"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveJetAssembly.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a3a36711425ab8be2c94ed33a78e5b4d6f9bede9"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveLiftDomain.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d718375ee23823ae2b5d10fd8da9b759c65e6eb4"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleProductMixedBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "31cf2c27f7035a15931194ed3053b9bc79c274e9"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleProductSmoothTame.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d442ac2f3732e0d66b0392699d9e31c8c694333a"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleReturnInverseLinear.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c31581c7bafd4cdb8e791065e7d2a5f0975b42c4"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleReturnL2.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4a80a45bed0eb4e2e4505b43cc5798efc14d90ee"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleReturnWeightedInverse.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6c4cb1bbfbe30846632e063346e9fc4a025d5aa6"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4ea70ab43fc1fa6e51ddcfa3849f97580bf02235"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleTranslationUniformBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "29683e9c974fecbcd03fef36251ebb8b0061c485"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleTravelUniformJets.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ae1370a1c3e76de95577c57de04a220955683512"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleUniformFamilyOperations.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c5282293b21370a88a5b1f198d61bd0507d79dd0"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleUnitIntegral.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "539887de9877614276395ffbbadb8a8ab8d8904c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01CircleLinearTame.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "60cb27e73d5bac0102e5436d7fad54ae47740532"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ControlFlowBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "440c6c682d1e8e1ff6114d11aeec6411035e7789"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ControlIndexBound.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e6ca03487e088a47f5869881ff0c1a7e6bf42d2a"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ControlWeightConstraint.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fc55c919e972c5529680464eba8dbb66c07afb37"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointCircleTower.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4568eb845666ec52e17e51a8864c670503e57ecb"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointHeightLineEnvelope.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c712fa90b33064a49a9fe098fce6eb8f23dfcbf0"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointSecondEnvelope.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d87da5e07a7b3ba297df8b305d391f352d848413"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointSmoothTame.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2da111ee694d4a440f4a2f4b2bbcfe6d4788f5e6"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointStateEnvelope.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f757bba172750f1ae890b82b9a2d3063ad6f3f8a"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointStateIncrement.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "aea057ae66c62dd65f0c4f73389c6f27f8726b05"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointZeroCircleMember.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4986fd87120fe9934d46c3e3ff3a6873e097bb2b"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointZeroGrowth.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "62cd5f1fb9570b052f87b129c94cd5f845a5d95f"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowCircleUniformBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "84dfd97594ecb91e64c204b89d82625d8fddfd08"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowInverseJetBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f598b3ee14ce332a7e194e8ef05a1616a8608dc5"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowSmallness.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "128bbe1e44710de2eeb4e45e9570ddd2bbcbec52"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01InterpolationInverseCircle.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5d29709ce82e9e2d9eddd11f6812a25fcd2faf6f"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cc38a6d2b17c7398b071a6b22a130668877f3204"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01OpticalCutoffCircleMultiplier.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2cc250891b684e1d33888806dd79200f00f81f9f"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ResidualCircleModel.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e7aeb751c99fbc50dbb5a0b1398b0afe061213b6"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ResidualSectorCoordinates.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f10148f5287f1e0cd6802cec6ced3a2dca0d6d98"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ResidualSmoothTame.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ddef35ff6690d2ea86984e765305ed23e3708bc3"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnChartLineVariation.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c8e830e624dc76a572595e32ae432b354475a93b"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnCircleUniformBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a9b6d7a92da85f46f18f84563d4b1d29f333910a"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnDisplacementCircle.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "51a6fb4a9dea0a53ba0ee75124960ce5911f76ea"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnDisplacementSmoothTame.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ef2ba1ab9191b4183cc9f5a349663549d40c24ae"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnInverseCircle.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e99a08956ffd3e0dcf86d6e1ed0a4421b5675a86"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnLinearOperators.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "46506260fd8734076891dc62801af0ecd14788ec"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnVelocityCircle.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "760d2146f1837ea325b447b5b4d82e1789167b88"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnVelocitySmoothTame.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9f02465d6563eaed8060468f1ab06e1aea084bdf"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01SelectorInverse.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "959be823f4a888cca1c45c2f0fa77ef627bbc8f9"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01UniformReturnMargins.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8f38338b2049d23253abdabe24ada109d0df09cf"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N02ChartError.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "603a6d6b07ad9a35b014f4688bb7bc75caf04ea3"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N02ChartIncrement.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3feb32973ec5ecb637403280230b696fe3358d07"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N02ProjectiveChartVariation.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e2cac7e7da748d57cc04506c8d95c3b7afb5dd83"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N02ReturnAssembly.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1b240fd0f06f9e4028cfa4e246f2dc86969acf82"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04EndpointCircleFixedBaseBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "09a1696b57c7fe3678cc6e10e419bb8fa22c0c11"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04SelectorInverseCircleFixedBaseBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "054e86dbc3a61f36df0ff4fd7ddf71aefeacb117"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/NonlinearNeighborhoodRestriction.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3f231a86ea80d87d6f908ce36c27ad1855dafaf3"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/OpticalControlRatio.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ebcd0da63d49616a822888fdfdb3add58ea433c5"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ReturnChartUniformBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d632e8aa3ad47fa9733b123e14a42fcd5ff90d40"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ReturnChartVariation.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0486e2dd6f5f72652b8d74b04469e4352bddc8c8"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionDisplacementRegularity.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d2ac2e60f80fe1f09d457846d3770a334d947a72"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ScalarInverseJetBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "97ba38ba524edb843d53eb958290bb9a0177c7bf"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ScalarInverseScaleBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2184855caba52b35048777b602b977387ee2b917"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ScalarJetFamilyBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5ebd48a466745ad5851855fafc3dc00f7f04443f"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ScalarPlaneJetRegularity.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d34c51a6a6bd2a6a1220a3a33b8fb291e594b720"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsGluing.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "17c20b98c1e0789179039177e5d689bb9dd96dc9"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsJointAngular.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c80bfa074a6fa03afb21b6cd159f4ca29fb2b272"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsUnitIntegral.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "524d2fbeddf977df987df89dc5547e823629fdc6"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameInterpolationOneAdd.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ef8df0172573a91c3929e60cdaf7ba41e725be0d"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseInitialContinuity.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1cc0bc84a667099a8f1741d0eb8a8854655919e4"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseUniformBounds.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "416066293486fab94b2198ce8d4198f36c9f84fd"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameProductDirections.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "da7b331dbdf5958e0f9e2f18326085519ae35398"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameUniformFamilyGrowth.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3118f4c042fe5fcabb4398389f62fdc14c0c9821"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameUniformFamilyJets.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "af2fcbf1366ab7ff2a314f03f02cbfe99234961d"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameUniformGrowth.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f4d31adbba1c23cbc1d03c02f0f1cb14ea28ac65"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameUniformSmoothFamily.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a52a1e3d098c51d67260efef9b64b2d42195161a"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameUnitIntegralLinearFamily.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f6269f9eb372fe9acaf71533c402bcd66d95e50d"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/UniformUnitIntegralLinearFamily.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3e51d7f6493103f67acaa8f4755619f6978230a4"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferencePieceInequality.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d0b62f775987c37e6af0553ee18ea6dcd0224c8f"
+    }
+  ],
+  "coverage_preflight": {
+    "all_src_nodes": 4802,
+    "project_nodes": 4798,
+    "generated_root_imports": 4734,
+    "checked_root_imports": 4241,
+    "full_lag": 493,
+    "all_expected_graph_nodes_match_exact_candidate_blobs": true,
+    "missing_imports": 0,
+    "cycles": 0,
+    "compilation": "NOT_YET_RUN"
+  },
+  "budget": {
+    "actual_source_added": 16748,
+    "actual_source_deleted": 255,
+    "conservative_full_shared_plus_new_plus_root": 18549,
+    "limit": 20000,
+    "draft_after_CI182": 19276,
+    "new_draft_allocations": {
+      "full_J_max": 250,
+      "StageE_piece_max": 400
+    },
+    "future_owned_credit_only_after_complete_CI": [
+      159,
+      301,
+      115,
+      152,
+      44
+    ]
+  },
+  "preserved": {
+    "StateNeighborhood": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+    "root_generator_unchanged": true,
+    "workflow_toolchain_resources_limits_unchanged": true,
+    "all_nonselected_blob_paths_unchanged": true
+  },
+  "contract_limitations": "Nine reviewed shared changes retain44 public heads:37 identical,6 alpha-renamed,1 helper quantifier-order migration with its only actual consumer in the same file. No whole elaborated generated-name scan claimed. The historical115 owner body is unavailable; the full actual source/current contracts and152 peer consumption were independently reread and accepted, as recorded in the source plan/peer.",
+  "endpoint": "FlowJets proved; Realization and N04Coordinates remain open.",
+  "ci_gate": "First status lookup at least five minutes after push/readback, subsequent status lookups at least one minute apart. Download a failed job log once; full diagnostics required before repairs."
+}
