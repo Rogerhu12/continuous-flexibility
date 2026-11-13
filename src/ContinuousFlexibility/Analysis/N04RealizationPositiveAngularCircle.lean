@@ -123,7 +123,7 @@ theorem n04Realization_positiveAngularTaylor_circleDirections
     rw [circleProductBilinear_decode, circleSingletonLinear_decode, hF side j x.1 hx.1]
     by_cases him : i = m
     · subst i
-      simp only [circleSingletonField, circleSingleComponentField, if_pos rfl]
+      simp only [circleSingletonField, circleSingleComponentField, ite_true]
     · simp only [circleSingletonField, circleSingleComponentField,
         if_neg him, zero_mul]
   have hsideValue (side : Bool) (i : ℕ) (θ : ℝ) :
