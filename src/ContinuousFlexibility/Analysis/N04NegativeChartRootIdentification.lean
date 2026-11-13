@@ -172,7 +172,8 @@ theorem fullHalfFields_root_chart
       Bool.false_eq_true, ↓reduceIte] <;> constructor <;> linarith only [hδx, hh]
   have htravel := (n04b_actualTravelChart_bijOn W.through03 W.hS W.hT W.field hz' hs m).mapsTo hp
   have hτ := n04b_travelOrientation_pos_of_fullStrip side htravel.1
-  have hv := congrArg Prod.fst (characteristicTravelChart_rootCharacteristicCoordinate G hx.1)
+  have hv := congrArg Prod.fst
+    (characteristicTravelChart_rootCharacteristicCoordinate G (p := (x, θ)) hx.1)
   rw [ht] at hv
   dsimp only at hv
   have hχ : 0 ≤ rootOddCoefficient G (x, θ) := by
@@ -180,7 +181,7 @@ theorem fullHalfFields_root_chart
     have hm := mul_neg_of_pos_of_neg (Real.rpow_pos_of_pos hx.1 (3 / 2 : ℝ))
       (lt_of_not_ge hn)
     linarith only [hv, hτ, hm]
-  have he := extendedRootEvenOddChart_eq_rootTravelPower G hx.1 hχ
+  have he := extendedRootEvenOddChart_eq_rootTravelPower G (p := (x, θ)) hx.1 hχ
   rw [ht] at he
   calc
     _ = n04bRootPhysicalChart (n04bActualTravelChart W.S W.C W.L z m)

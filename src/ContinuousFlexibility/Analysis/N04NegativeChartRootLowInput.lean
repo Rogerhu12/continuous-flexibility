@@ -136,7 +136,7 @@ theorem FullHalfFieldPowerControl.root_low_input
   have hpack := hbound.choose_spec.choose_spec.2.2
   let b := max bL (max base (2 + loss))
   let ε := min εL W.negativeHalfStateRadius
-  have hε : 0 < ε := lt_min hεL (lt_min (by linarith [W.ε_pos]) (by norm_num))
+  have hε : 0 < ε := lt_min hεL (lt_min (by linarith only [W.ε_pos]) (by norm_num))
   refine ⟨b, ε, C₀, B, p, hbL.trans (le_max_left _ _),
     (le_max_left _ _).trans (le_max_right _ _), hε,
     (min_le_left _ _).trans hεLW, hC₀, hB, hp, ?_⟩

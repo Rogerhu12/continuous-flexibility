@@ -168,13 +168,18 @@ theorem fullHalfSpeed_inverse_material :
         p.1 ∈ Icc (0 : ℝ) (W.negativeOpticalWidth m side) →
         0 < F.fullHalfSpeed z m side p ∧ (F.fullHalfSpeed z m side p)⁻¹ ≤
           B * W.T.E0 (W.negativeHalfSample e m side) ^ A := by
-  obtain ⟨B, A, hB, hA, hb⟩ := F.stateSquare_inverse_material
+  have hSquare := F.stateSquare_inverse_material
+  let B := hSquare.choose
+  let A := hSquare.choose_spec.choose
+  have hB := hSquare.choose_spec.choose_spec.1
+  have hA := hSquare.choose_spec.choose_spec.2.1
+  have hb := hSquare.choose_spec.choose_spec.2.2
   refine ⟨4 * (1 + B), A, by positivity, hA, fun z hz m side p hp => ?_⟩
   have hz' : z ∈ stateNeighborhood W.S W.C W.base W.ε :=
-    stateNeighborhood_mono W.S W.C le_rfl (by linarith [W.ε_pos]) hz
+    stateNeighborhood_mono W.S W.C le_rfl (by linarith only [W.ε_pos]) hz
   exact factoredSqrt_inverse_bound (F.stateSquare_pos hz m side hp)
     (normalizedSpeed_lower_of_n01 W.hS W.through03.1.1 hz'
-      (W.negativeInwardPoint_mem_annular m side hp)) hB (W.floor _) hA.le
+      (W.negativeInwardPoint_mem_annular m side (p := p) hp)) hB (W.floor _) hA.le
     (hb z hz m side p.1 hp)
 
 /-- The constants precede the finite plot, its dimension, and the
@@ -191,11 +196,16 @@ theorem fullHalfFields_root_axis_inverse_material :
       ∀ m side, (∀ θ, c (y, (0, θ)) = F.fullHalfSpeed z m side (0, θ)) → ∀ θ,
         let χ := rootOddCoefficient (W.negativeRootInverseCoordinate A z m side y) (0, θ)
         0 < χ ∧ χ⁻¹ ≤ B * (δ⁻¹) ^ 2 * W.T.E0 (W.negativeHalfSample e m side) ^ p := by
-  obtain ⟨B, p, hB, hp, hb⟩ := F.fullHalfSpeed_inverse_material
+  have hSpeed := F.fullHalfSpeed_inverse_material
+  let B := hSpeed.choose
+  let p := hSpeed.choose_spec.choose
+  have hB := hSpeed.choose_spec.choose_spec.1
+  have hp := hSpeed.choose_spec.choose_spec.2.1
+  have hb := hSpeed.choose_spec.choose_spec.2.2
   refine ⟨6 * B, p, by positivity, hp, ?_⟩
   intro n d c hd hc hdp hcp δ hδ hδone A y z hz hs m side hrep θ
   have hz' : z ∈ stateNeighborhood W.S W.C W.base W.ε :=
-    stateNeighborhood_mono W.S W.C le_rfl (by linarith [W.ε_pos]) hz
+    stateNeighborhood_mono W.S W.C le_rfl (by linarith only [W.ε_pos]) hz
   have hzero : (0 : ℝ) ∈ Icc 0 (W.negativeOpticalWidth m side) :=
     ⟨le_rfl, (W.negativeOpticalWidth_pos m side).le⟩
   have hcval := hb z hz m side (0, θ) hzero

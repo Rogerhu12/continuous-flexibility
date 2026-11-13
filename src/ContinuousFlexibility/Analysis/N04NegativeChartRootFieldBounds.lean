@@ -42,15 +42,20 @@ theorem negativeChartRootPlotField_stateJet
     hd.comp (contDiff_id.prodMk contDiff_const)
   have hcp : ContDiff ℝ ∞ (fun y : P => c (y, p)) :=
     hc.comp (contDiff_id.prodMk contDiff_const)
+  have had : ContDiff ℝ ∞ (fun y : P => a • d (y, p)) := contDiff_const.smul hdp
+  have hbc : ContDiff ℝ ∞ (fun y : P => b • c (y, p)) := contDiff_const.smul hcp
   have he : (fun y : P => f (y, q.1)) =
       (fun y : P => a • d (y, p)) + (fun y : P => b • c (y, p)) := rfl
   change iteratedFDeriv ℝ k (fun y : P => f (y, q.1)) 0 v = _
   rw [he, iteratedFDeriv_add_apply
-    ((contDiff_const.smul hdp).contDiffAt.of_le (by simp : (k : ℕ∞ω) ≤ ∞))
-    ((contDiff_const.smul hcp).contDiffAt.of_le (by simp : (k : ℕ∞ω) ≤ ∞)),
-    iteratedFDeriv_const_smul_apply' (hdp.contDiffAt.of_le (by simp : (k : ℕ∞ω) ≤ ∞)),
-    iteratedFDeriv_const_smul_apply' (hcp.contDiffAt.of_le (by simp : (k : ℕ∞ω) ≤ ∞)),
-    ContinuousMultilinearMap.add_apply, smul_apply, smul_eq_mul]
+    (had.contDiffAt.of_le (by simp : (k : ℕ∞ω) ≤ ∞))
+    (hbc.contDiffAt.of_le (by simp : (k : ℕ∞ω) ≤ ∞)),
+    iteratedFDeriv_const_smul_apply' (a := a)
+      (hdp.contDiffAt.of_le (by simp : (k : ℕ∞ω) ≤ ∞)),
+    iteratedFDeriv_const_smul_apply' (a := b)
+      (hcp.contDiffAt.of_le (by simp : (k : ℕ∞ω) ≤ ∞)),
+    ContinuousMultilinearMap.add_apply]
+  simp only [ContinuousMultilinearMap.smul_apply, smul_eq_mul]
   have hde : iteratedFDeriv ℝ k (fun y : P => d (y, p)) 0 v =
       negativeChartCoefficientJet d k v p := flowParameterField_eq_joint hd k 0 v p
   have hce : iteratedFDeriv ℝ k (fun y : P => c (y, p)) 0 v =

@@ -77,9 +77,17 @@ theorem negativeInterior_firstIntegral_prefix
         W.T.H (W.negativeHalfSample e m side) ^ (3 / 4 : ℝ) *
           R ^ (((k * D + a + b : ℕ) : ℝ) / ((s + K * D : ℕ) + 1 : ℝ)) := by
   classical
-  obtain ⟨base, ε, hbase, hε, hεW, hf⟩ := W.negativeInterior_firstIntegral_fractional e ρ hρ hρb
+  have hex := W.negativeInterior_firstIntegral_fractional e ρ hρ hρb
+  let base : ℕ := hex.choose
+  let ε : ℝ := hex.choose_spec.choose
+  have hbase := hex.choose_spec.choose_spec.1
+  have hε := hex.choose_spec.choose_spec.2.1
+  have hεW := hex.choose_spec.choose_spec.2.2.1
+  have hf := hex.choose_spec.choose_spec.2.2.2
   refine ⟨base, ε, hbase, hε, hεW, fun K => ?_⟩
-  obtain ⟨D, hD⟩ := hf K
+  have hDExists := hf K
+  let D : ℕ := hDExists.choose
+  have hD := hDExists.choose_spec
   refine ⟨D, fun s => ?_⟩
   let I : Type := {i : Fin (K + 1) × Fin (s + 1) × Fin (s + 1) // i.2.1.val + i.2.2.val ≤ s}
   choose Cp hCp hpolar using fun n : Fin (K + 1) => interior_twoBall_polarization n.val

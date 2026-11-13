@@ -160,7 +160,6 @@ private theorem interior_speed_cost
     _ = _ := by rw [Real.rpow_add hE]; ring
 
 set_option backward.isDefEq.respectTransparency true in
-set_option diagnostics true in
 /-- The raw speed estimate at the actual physical point of either
 reference half. Both the spatial fraction and the positive state weight
 are exactly those of the original endpoint power control. -/

@@ -107,8 +107,14 @@ theorem NegativeOpticalFactors.interior_referenceTravel_inverse_material
         (opticalTravel W.D.w (W.C.left m)
           (inwardComponentPoint (W.C.left m) (W.C.right m) side x))
       0 < τ ∧ τ⁻¹ ≤ B * W.T.E0 (W.negativeHalfSample e m side) ^ A := by
-  obtain ⟨Ci, hCi, hi⟩ := F.reference_powers (-(1 / 2 : ℝ))
-  obtain ⟨Cu, hCu, hu⟩ := F.reference_powers (1 / 2 : ℝ)
+  have hexI := F.reference_powers (-(1 / 2 : ℝ))
+  let Ci : ℕ → ℝ := hexI.choose
+  have hCi := hexI.choose_spec.1
+  have hi := hexI.choose_spec.2
+  have hexU := F.reference_powers (1 / 2 : ℝ)
+  let Cu : ℕ → ℝ := hexU.choose
+  have hCu := hexU.choose_spec.1
+  have hu := hexU.choose_spec.2
   obtain ⟨Cρ, Pρ, hCρ, hPρ, hbρ⟩ := hρb
   refine ⟨6 * Ci 0 * Cρ ^ 2, Ci 0 + Pρ * 2, by positivity,
     add_nonneg (hCi 0).le (mul_nonneg hPρ (by norm_num)), fun m side x hx => ?_⟩

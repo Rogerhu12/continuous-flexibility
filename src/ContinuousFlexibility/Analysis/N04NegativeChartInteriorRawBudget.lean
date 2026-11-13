@@ -49,9 +49,16 @@ theorem negativeInterior_raw_fractional
         C * E ^ A * Q ^ (((a + b : ℕ) : ℝ) / ((s : ℝ) + 1)) ∧
       |jointMixedDiagonal (W.negativeRawDefectJointTower m) k a b z w q| ≤
         C * E ^ A * H * Q ^ (((a + b : ℕ) : ℝ) / ((s : ℝ) + 1)) := by
-  obtain ⟨C, A, hC, hA, hbound⟩ := G.bounds (max 1 K) s
-  obtain ⟨M, hM, hheight⟩ := materialHeight_E0_weight_bounded W.hT
+  have hex := G.bounds (max 1 K) s
+  let C : ℝ := hex.choose
+  let A : ℝ := hex.choose_spec.choose
+  have hC := hex.choose_spec.choose_spec.1
+  have hA := hex.choose_spec.choose_spec.2.1
+  have hbound := hex.choose_spec.choose_spec.2.2
+  have hheightExists := materialHeight_E0_weight_bounded W.hT
     (γ := (3 / 4 : ℝ)) (by norm_num) 0
+  let M : ℝ := hheightExists.choose
+  have hheight := hheightExists.choose_spec.2
   let L : ℝ := max 1 M
   have hL : 1 ≤ L := le_max_left _ _
   have hC0 : 0 < C := zero_lt_one.trans_le hC

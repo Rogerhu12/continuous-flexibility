@@ -150,8 +150,16 @@ theorem fullHalfFields_root_positive_band :
           extendedRootOddCoefficient (W.negativeRootInverseCoordinate A z m side y) (x, θ) ∈
             Icc ((B * (δ⁻¹) ^ 2 * W.T.E0 (W.negativeHalfSample e m side) ^ p)⁻¹ / 2)
               (1 + C * M) := by
-  obtain ⟨B, p, hB, hp, haxis⟩ := F.fullHalfFields_root_axis_inverse_material
-  obtain ⟨C, hC, hband⟩ := rootOdd_positive_radius
+  have hAxis := F.fullHalfFields_root_axis_inverse_material
+  let B := hAxis.choose
+  let p := hAxis.choose_spec.choose
+  have hB := hAxis.choose_spec.choose_spec.1
+  have hp := hAxis.choose_spec.choose_spec.2.1
+  have haxis := hAxis.choose_spec.choose_spec.2.2
+  have hBand := rootOdd_positive_radius
+  let C := hBand.choose
+  have hC := hBand.choose_spec.1
+  have hband := hBand.choose_spec.2
   refine ⟨B, p, C, hB, hp, hC, ?_⟩
   intro n d c hd hc hdp hcp δ hδ hδone A m side M hM
   let κ : ℝ := (B * (δ⁻¹) ^ 2 * W.T.E0 (W.negativeHalfSample e m side) ^ p)⁻¹
@@ -162,7 +170,7 @@ theorem fullHalfFields_root_positive_band :
   · simpa only [negativeRootPositiveRadius, κ, inv_inv] using hr.2.2.1
   · intro y z hz hs hrep hb
     have hz' : z ∈ stateNeighborhood W.S W.C W.base W.ε :=
-      stateNeighborhood_mono W.S W.C le_rfl (by linarith [W.ε_pos]) hz
+      stateNeighborhood_mono W.S W.C le_rfl (by linarith only [W.ε_pos]) hz
     have hregular := W.negativeRootInverseCoordinate_regular hd hc hdp hcp A y hz' hs m side
     apply hband _ hregular.1 hregular.2 M hM κ hκ hb
     intro θ

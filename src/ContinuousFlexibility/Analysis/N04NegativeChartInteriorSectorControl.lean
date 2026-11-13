@@ -58,6 +58,8 @@ private def interiorControl_affine
 
 namespace N04RealizationStart
 
+set_option backward.isDefEq.respectTransparency true
+
 variable (W : N04RealizationStart)
 
 def negativeInteriorPhysicalDomain (ρ : ℕ → Bool → ℝ) (i : ℕ × Bool) : Set PolarPoint :=
@@ -75,6 +77,8 @@ variable (e : ℕ ≃ N04PieceIndex W.D) (ρ : ℕ → Bool → ℝ)
   (hρb : ∃ B A : ℝ, 0 < B ∧ 0 ≤ A ∧ ∀ m side,
     (ρ m side)⁻¹ ≤ B * W.T.E0 (W.negativeHalfSample e m side) ^ A)
 
+include hρ hρb in
+set_option diagnostics true in
 private def negativeInterior_originalSpeedControl
     {base loss : ℕ} {ε : ℝ}
     (G : WholeCharacteristicSpeedPowerControl W.D W.T W.S W.C base loss ε) :
@@ -89,11 +93,14 @@ private def negativeInterior_originalSpeedControl
     fun a b q hq => (G.regular i.1).parameter a b q
       (W.negativeInteriorPhysicalDomain_subset ρ (fun m side => (hρ m side).1) i hq)⟩, ?_⟩
   intro K s
-  obtain ⟨C, A, hC, hA, hb⟩ := W.negativeInterior_speed_power_bounds e ρ hρ hρb G K s
-  refine ⟨C, A, hC, hA, ?_⟩
+  have hex := W.negativeInterior_speed_power_bounds e ρ hρ hρb G K s
+  let C : ℝ := hex.choose
+  let A : ℝ := hex.choose_spec.choose
+  have h := hex.choose_spec.choose_spec
+  refine ⟨C, A, h.1, h.2.1, ?_⟩
   rintro ⟨m, side⟩ k hk a b hab _ ⟨p, hp, rfl⟩ J z hz hlow v hv R hR hhigh hvhigh
   simpa only [one_pow, one_mul] using
-    hb m side p hp.1 k hk a b hab J z hz hlow v hv R hR hhigh hvhigh
+    h.2.2 m side p hp.1 k hk a b hab J z hz hlow v hv R hR hhigh hvhigh
 
 /-- All values are the original physical speed, on the actual overlap
 interior. No open extension of the closed interior set is chosen. -/
@@ -106,11 +113,14 @@ def NegativeInteriorSpeedControl (base loss : ℕ) (ε : ℝ) : Type :=
     (fun _ z => minusCharacteristicSpeed
       (originalCoefficients W.D W.S W.C (liftSectorParameter W.S W.C z)))
 
+include hρ hρb in
 def negativeInterior_sectorSpeedControl
     {base loss : ℕ} {ε : ℝ}
     (G : WholeCharacteristicSpeedPowerControl W.D W.T W.S W.C base loss ε) :
     W.NegativeInteriorSpeedControl e ρ base loss ε :=
-  interiorControl_affine (sectorParameterInclusion W.S)
+  interiorControl_affine
+    (f := fun (_ : ℕ × Bool) z => minusCharacteristicSpeed (originalCoefficients W.D W.S W.C z))
+    (sectorParameterInclusion W.S)
     (sectorNeighborhood_isOpen W.S base ε ε)
     (fun x hx => (liftSectorParameter_eq_affine W.S W.C x) ▸
       liftSectorParameter_mem_stateNeighborhood hx le_rfl)
@@ -120,9 +130,9 @@ def negativeInterior_sectorSpeedControl
       (fun z => minusCharacteristicSpeed (originalCoefficients W.D W.S W.C z))
       (liftSectorParameter_eq_affine W.S W.C x))
 
+include hρ hρb in
 /-- The low base, radius and raw spatial loss precede all state and
 spatial orders, and survive every later common neighborhood restriction. -/
-include hρ hρb in
 theorem negativeInterior_stable_speedControl :
     ∃ base : ℕ, ∃ ε : ℝ, ∃ loss : ℕ,
       W.base ≤ base ∧ 0 < ε ∧ ε ≤ min W.ε (1 / 2 : ℝ) ∧
@@ -135,12 +145,15 @@ theorem negativeInterior_stable_speedControl :
     ⟨h01.2.2.2.2.2.2.1, h01.2.2.2.2.2.2.2.1,
       h01.2.2.2.2.2.2.2.2.1, h01.2.2.2.2.2.2.2.2.2.1,
       h01.2.2.2.2.2.2.2.2.2.2.1⟩
-  obtain ⟨base, ε, loss, hb, hε, hεW, hG⟩ :=
-    n01_exists_stable_commonWholeSpeed_powerControl W.hS W.hT hA W.ε_pos hB
-      W.primitive (fun r _ => W.floor r)
-  refine ⟨base, ε, loss, hb, hε, hεW, fun b hbb η hη hηε => ?_⟩
-  obtain ⟨G⟩ := hG b hbb η hη hηε
-  exact ⟨W.negativeInterior_sectorSpeedControl e ρ hρ hρb G⟩
+  have hex := n01_exists_stable_commonWholeSpeed_powerControl W.hS W.hT hA W.ε_pos hB
+    W.primitive (fun r _ => W.floor r)
+  let base : ℕ := hex.choose
+  let ε : ℝ := hex.choose_spec.choose
+  let loss : ℕ := hex.choose_spec.choose_spec.choose
+  have h := hex.choose_spec.choose_spec.choose_spec
+  refine ⟨base, ε, loss, h.1, h.2.1, h.2.2.1, fun b hbb η hη hηε => ?_⟩
+  exact ⟨W.negativeInterior_sectorSpeedControl e ρ hρ hρb
+    (Classical.choice (h.2.2.2 b hbb η hη hηε))⟩
 
 end N04RealizationStart
 end ContinuousFlexibility.Analysis
