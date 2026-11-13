@@ -17,6 +17,10 @@ open scoped ContDiff
 
 local instance n04PositivePacketSectorPowerStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
+local instance n04PositivePacketSectorPowerParameterSMul (S : PhysicalSpacesData) :
+    SMul ℝ (AnnularState S × ℝ) := Prod.instSMul
+local instance n04PositivePacketSectorPowerRealNormedSpace : NormedSpace ℝ ℝ :=
+    NormedField.toNormedSpace
 
 private theorem packet_affine_jet_apply
     {E F : Type*}
@@ -26,19 +30,25 @@ private theorem packet_affine_jet_apply
     [IsTopologicalAddGroup F] [ContinuousSMul ℝ F]
     {U : Set E} {V : Set F} {f : F → ℝ} {g : E → ℝ}
     (JP : SmoothDirections V f) (J : SmoothDirections U g)
-    (L : E →L[ℝ] F) (c : F)
-    (hmap : MapsTo (fun y => c + L y) U V)
-    (heq : ∀ y ∈ U, f (c + L y) = g y)
+    (u : E → F) (L : E →L[ℝ] F) (c : F)
+    (hmap : MapsTo u U V) (heq : ∀ y, u y = c + L y)
+    (hfg : ∀ y ∈ U, f (u y) = g y)
     (k : ℕ) (z : E) (hz : z ∈ U) (v : Fin k → E) :
-    J.D k z v = JP.D k (c + L z) (fun j => L (v j)) := by
-  let JQ := (JP.compAffine L c J.open_domain hmap).congr heq
+    J.D k z v = JP.D k (u z) (fun j => L (v j)) := by
+  have hm : MapsTo (fun y => c + L y) U V := by
+    intro y hy
+    exact (congrArg (fun q : F => q ∈ V) (heq y)).mp (hmap hy)
+  let JQ := (JP.compAffine L c J.open_domain hm).congrOn
+    (fun y hy => (congrArg f (heq y).symm).trans (hfg y hy))
   have he := congrArg (fun A : E [×k]→L[ℝ] ℝ => A v) (J.unique JQ k z hz)
-  exact he.trans (JP.compAffine_apply L c J.open_domain hmap k z v)
+  exact (he.trans (JP.compAffine_apply L c J.open_domain hm k z v)).trans
+    (congrArg (fun q : F => JP.D k q (fun j => L (v j))) (heq z).symm)
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base : ℕ} {ε r : ℝ}
 
 set_option diagnostics true in
+set_option backward.isDefEq.respectTransparency false in
 /-- A fixed base and angular loss control the literal sector packet
 through every future parameter and angular order. -/
 theorem n04PositiveGeometry_rootPacketSector_finiteShift_power
@@ -78,26 +88,11 @@ theorem n04PositiveGeometry_rootPacketSector_finiteShift_power
   intro i a d had b hbs r hr θ J k hk z hz hzlow v hv R hR hzR hvR
   let JP := n04PositiveGeometry_rootPacketMixed_parameter
     (C := C) (base := base) hD hT hS hε hr i a (b + d) θ
-  have hmap : MapsTo (fun y => (C.referenceState, 0) + sectorParameterInclusion S y)
-      (sectorNeighborhood S base ε ε) (stateNeighborhood S C base ε) := by
-    intro y hy
-    exact (liftSectorParameter_eq_affine S C y) ▸
-      liftSectorParameter_mem_stateNeighborhood hy le_rfl
   have he : J.D k z v = JP.D k (liftSectorParameter S C z)
-      (fun j => sectorParameterInclusion S (v j)) := by
-    have heq (y : StateDirections S × ℝ) (_hy : y ∈ sectorNeighborhood S base ε ε) :
-        mixedDerivative a (b + d) (fun p => n06ActualRootAbsorbedCoordinates D S
-          ((C.referenceState, 0) + sectorParameterInclusion S y) p i) (r, θ) =
-        mixedDerivative a (b + d) (fun p => n06ActualRootAbsorbedCoordinates D S
-          (liftSectorParameter S C y) p i) (r, θ) :=
-      congrArg (fun x : AnnularState S × ℝ => mixedDerivative a (b + d)
-        (fun p => n06ActualRootAbsorbedCoordinates D S x p i) (r, θ))
-        (liftSectorParameter_eq_affine S C y).symm
-    exact (packet_affine_jet_apply JP J (sectorParameterInclusion S)
-      (C.referenceState, 0) hmap heq k z hz v).trans
-        (congrArg (fun y : AnnularState S × ℝ =>
-          JP.D k y (fun j => sectorParameterInclusion S (v j)))
-          (liftSectorParameter_eq_affine S C z).symm)
+      (fun j => sectorParameterInclusion S (v j)) :=
+    packet_affine_jet_apply JP J (liftSectorParameter S C) (sectorParameterInclusion S)
+      (C.referenceState, 0) (fun _ hy => liftSectorParameter_mem_stateNeighborhood hy le_rfl)
+      (liftSectorParameter_eq_affine S C) (fun _ _ => rfl) k z hz v
   have hgrade (n : ℕ) :
       pairGrading (stateGrading S) realGrading n
         (liftSectorParameter S C z - (C.referenceState, 0)) =
