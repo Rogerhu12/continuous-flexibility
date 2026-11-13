@@ -53,8 +53,8 @@ theorem N04SourceReferenceData.sourceColumns_constMul
 theorem n04SourceColumns_negative_one_envelope
     (hE : ∀ m, 1 ≤ T.E0 (T.sample (cell m))) :
     ∃ A : ℝ, 0 < A ∧ ∀ m, |(-1 : ℝ)| ≤ A * T.E0 (T.sample (cell m)) ^ A :=
-  ⟨1, zero_lt_one, fun m => by simpa only [abs_neg, abs_one, one_mul, Real.rpow_one]
-    using hE m⟩
+  ⟨1, zero_lt_one, fun m => by
+    simpa only [abs_neg, abs_one, one_mul, Real.rpow_one] using hE m⟩
 
 theorem N04SourceReferenceData.sourceColumns_neg
     (hf : N04SourceReferenceData T cell f₀)
@@ -110,9 +110,9 @@ theorem n04SourceColumns_reference_const
       rw [spaces_mixedDerivative_zero]
       exact hc.choose_spec.2 m
     · simp only [mixedDerivative, iteratedDeriv_zero,
-        iteratedDeriv_const, if_neg hj, abs_zero]
+        iteratedDeriv_const, if_neg hj, ite_true, ite_self, abs_zero]
       exact mul_nonneg hc.choose_spec.1.le (Real.rpow_nonneg (zero_le_one.trans (hE m)) _)
-  · simp only [mixedDerivative, iteratedDeriv_const, if_neg hi, abs_zero]
+  · simp only [mixedDerivative, iteratedDeriv_const, if_neg hi, ite_true, ite_self, abs_zero]
     exact mul_nonneg hc.choose_spec.1.le (Real.rpow_nonneg (zero_le_one.trans (hE m)) _)
 
 theorem n04SourceColumns_reference_one

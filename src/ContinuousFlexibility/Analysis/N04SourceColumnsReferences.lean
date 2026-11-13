@@ -118,11 +118,18 @@ theorem sourceColumns_inverseDeterminantRef_reciprocal_bound {b : ℕ} {ε : ℝ
   have hb' : |planeJacobian ((G.V η).chart (G.ref η) m) x| ≤
       hzero.choose * G.W.U.E0 (G.W.U.sample ((G.V η).cell m)) ^ hzero.choose :=
     hvalue.symm.trans_le hb
+  have habs : |G.sourceColumnsInverseDeterminantRef η m p| =
+      |planeJacobian ((G.V η).chart (G.ref η) m) x|⁻¹ :=
+    (congrArg abs (G.sourceColumns_inverseDeterminantRef_eq η hA href m hp)).trans
+      (n07a_actual_inverseChart_jacobian_abs hg hz hs m hq)
+  have hinv : (|G.sourceColumnsInverseDeterminantRef η m p|)⁻¹ =
+      |planeJacobian ((G.V η).chart (G.ref η) m) x| :=
+    (congrArg (fun t : ℝ => t⁻¹) habs).trans (inv_inv _)
   calc
     |(|G.sourceColumnsInverseDeterminantRef η m p|)⁻¹| =
-        |planeJacobian ((G.V η).chart (G.ref η) m) x| := by
-      rw [abs_inv, abs_abs, G.sourceColumns_inverseDeterminantRef_eq η hA href m hp,
-        n07a_actual_inverseChart_jacobian_abs hg hz hs m hq, inv_inv]
+        (|G.sourceColumnsInverseDeterminantRef η m p|)⁻¹ :=
+      abs_of_nonneg (inv_nonneg.mpr (abs_nonneg _))
+    _ = |planeJacobian ((G.V η).chart (G.ref η) m) x| := hinv
     _ ≤ _ := hb'
 
 /-- The reference pulled height is recovered from the source factor and
