@@ -113,9 +113,11 @@ theorem n04PositiveGeometry_rootKernelTerm_finite_power
   have hcount (j : ℕ) (hj : j ≤ s + K) :
       (Fintype.card (OrderedFinpartition j) : ℝ) ≤ Pcount := by
     let t : Fin (s + K + 1) := ⟨j, by omega⟩
-    exact (Finset.single_le_sum (fun i _ => Nat.cast_nonneg
-      (Fintype.card (OrderedFinpartition i.val))) (Finset.mem_univ t)).trans
-        (le_add_of_nonneg_left zero_le_one)
+    exact (Finset.single_le_sum
+      (f := fun i : Fin (s + K + 1) => (Fintype.card (OrderedFinpartition i.val) : ℝ))
+      (fun i _ => Nat.cast_nonneg (Fintype.card (OrderedFinpartition i.val)))
+      (Finset.mem_univ t)).trans
+        (le_add_of_nonneg_left (zero_le_one : (0 : ℝ) ≤ 1))
   let Cfinal : ℝ := Pcount * CK * Cp ^ (s + K) * L ^ (s + K)
   have hCfinal : 1 ≤ Cfinal := one_le_mul_of_one_le_of_one_le
     (one_le_mul_of_one_le_of_one_le (one_le_mul_of_one_le_of_one_le hPcount hCK)

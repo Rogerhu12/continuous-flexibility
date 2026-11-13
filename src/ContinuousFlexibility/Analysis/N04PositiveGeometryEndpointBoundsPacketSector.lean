@@ -47,7 +47,6 @@ private theorem packet_affine_jet_apply
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base : ℕ} {ε r : ℝ}
 
-set_option diagnostics true in
 set_option backward.isDefEq.respectTransparency false in
 /-- A fixed base and angular loss control the literal sector packet
 through every future parameter and angular order. -/

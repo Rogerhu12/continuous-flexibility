@@ -53,11 +53,9 @@ private def packet_affine_angle_directions
     (L.prodMap (ContinuousLinearMap.id ℝ ℝ)) (c, 0) (hU.prod isOpen_univ)
     (fun y hy => ⟨hmap hy.1, mem_univ _⟩) ?_ J
   intro y
-  apply Prod.ext
-  · change u y.1 = c + L y.1
-    exact heq y.1
-  · change y.2 = 0 + y.2
-    exact (zero_add y.2).symm
+  simpa only [ContinuousLinearMap.coe_prodMap', Prod.map_apply',
+    ContinuousLinearMap.id_apply, Prod.mk_add_mk, zero_add] using
+      congrArg (fun q : F => (q, y.2)) (heq y.1)
 
 private def packet_angular_directions
     {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
@@ -72,8 +70,6 @@ private def packet_angular_directions
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base : ℕ} {ε r : ℝ}
 
-set_option diagnostics true in
-set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The literal sector radial traces of all six actual coordinates. -/
 def n04PositiveGeometry_rootPacketSectorTrace_joint
@@ -94,8 +90,6 @@ def n04PositiveGeometry_rootPacketSectorTrace_joint
     (n04PositiveGeometry_rootPacketTrace_joint
       (C := C) (base := base) hD hT hS hε hr i a)
 
-set_option diagnostics true in
-set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The affine pullback of the actual spatial mixed jet. -/
 def n04PositiveGeometry_rootPacketSectorMixed_parameter
@@ -115,8 +109,6 @@ def n04PositiveGeometry_rootPacketSectorMixed_parameter
     (n04PositiveGeometry_rootPacketMixed_parameter
       (C := C) (base := base) hD hT hS hε hr i a b θ)
 
-set_option diagnostics true in
-set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The finite intrinsic angular prolongation still has the original
 joint sector and angle tower. -/
