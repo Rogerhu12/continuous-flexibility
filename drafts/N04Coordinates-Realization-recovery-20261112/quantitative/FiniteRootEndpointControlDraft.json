@@ -1,0 +1,51 @@
+{
+  "status": "draft-only; uncompiled; no source-owned dependency activated",
+  "parent": "8b8aab12f0a6f40736b396c7bc4f341bd2516105",
+  "files": [
+    {
+      "path": "drafts/N04Coordinates-Realization-recovery-20261112/quantitative/N04RealizationFiniteBoundaryEnvelopes.lean",
+      "lines": 135
+    },
+    {
+      "path": "drafts/N04Coordinates-Realization-recovery-20261112/quantitative/N04RealizationRootMaterialPrefix.lean",
+      "lines": 156
+    },
+    {
+      "path": "drafts/N04Coordinates-Realization-recovery-20261112/quantitative/N04RealizationRootBetweenEnvelopes.lean",
+      "lines": 136
+    },
+    {
+      "path": "drafts/N04Coordinates-Realization-recovery-20261112/quantitative/N04RealizationRootHeightEnvelopes.lean",
+      "lines": 110
+    },
+    {
+      "path": "drafts/N04Coordinates-Realization-recovery-20261112/quantitative/N04RealizationRootEndpointControls.lean",
+      "lines": 172
+    }
+  ],
+  "construction": "Select actual finite root endpoint controls before positive transport; same D/T/S/C/K, actual containing host cell, common finite neighborhood, explicit 1+B*(C0*sampleE0)^A.",
+  "endpoint_order": "For n=3: coordinate orders1..5, height and inverse-height values plus height jets0..3. The raw material prefix is through5.",
+  "upstream": [
+    {
+      "module": "N03RootEndpointMaterialJets",
+      "commit": "f98e15e4243d0d47a9d42fa40e64f60ed54691d3",
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-21/quantitative/primitive-route/reconstructed/N03RootEndpointMaterialJets.lean",
+      "compatibility": "Thread reference_flow in its restricted hfield. Its held N01ReturnUniformPositiveJets dependency must select and retain the current per-order parameterLoss before output orders."
+    },
+    {
+      "module": "N04RealizationRootJacobianMaterialBounds",
+      "commit": "8b8aab12f0a6f40736b396c7bc4f341bd2516105",
+      "path": "drafts/N04Coordinates-Realization-recovery-20261112/quantitative/N04RealizationRootJacobianMaterialBounds.lean",
+      "compatibility": "Exact same-K theorem; active generic core split already reviewed. Held odd-value/unit-identification source closure remains owner-controlled."
+    }
+  ],
+  "reused": [
+    "FiniteInversePolynomialEnvelope.exists_nonlinearInverse_finiteJet_polynomial_envelope",
+    "PlanarInverseDerivativeBound.fderiv_inverse_norm_le_of_germ",
+    "N04RealizationEnvelopeComposition product and partition sum estimates",
+    "CanonicalClosedInverseJets actual two-sided germs and differential identities",
+    "CanonicalRootDiagonalLower.canonicalCurrentPoint_root_diagonal_lower"
+  ],
+  "private_source_argument": "rootBetween_radial repeats only the inaccessible private rootBetween_states_radial zero-circle-image argument from CanonicalRootRelativeJets; both states are supplied, and no atlas/reference witness is reselected.",
+  "pending": "Independently review this exact draft and complete the prescribed positive midpoint-host transfer using RetainedPositiveEndpointHostSample69; no claim of compiled target closure."
+}
