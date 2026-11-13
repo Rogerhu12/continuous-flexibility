@@ -317,9 +317,124 @@ be required after the lead repairs the split.
 The independent module
 [N04PulledFieldsReferenceSplit.lean](../../src/ContinuousFlexibility/Analysis/N04PulledFieldsReferenceSplit.lean)
 defines these proposed interfaces in its own namespace and proves their
-conditional assembly into the exact unchanged parent. It is submitted to CI
-without applying the patch to any frozen definition. This checks the proposed
+conditional assembly into the exact unchanged parent. It compiled in
+[CI 43419522382](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43419522382)
+at `1a8a8648` in 5.0 seconds, without applying the patch to any frozen
+definition. This checks the proposed
 information flow; it does not prove any of the input obligations. In
 particular, it does not resolve separate questions about unrestricted
 normalization buffers or the unguarded all-piece tower in a predicate-restricted
 `CurrentJetDataOn`.
+
+## 7. Adversarial check: pulled height and the fixed-order test
+
+The extra pulled-height family does not remove the proposed freedom in the
+middle. Write `M = (c,d)` for the physical middle of one positive component,
+`ψ(r,θ) = (Y(r),θ)`, `χ = ψ⁻¹`, and `h₀(r,θ) = H(r)`. For every admissible
+state the matching certificate gives `τ = σ = id` and `Q = 1` on `M × ℝ`.
+The exact formulas of `WholePositiveReferenceGauge.lean` therefore give
+
+```math
+F_z=\psi\circ\sigma_z,\qquad G_z=\tau_z\circ\chi,\qquad
+h_z(G_z(y))=\frac{h_0(\chi(y))}{Q_z(\chi(y))}.
+```
+
+Choose an increasing smooth diffeomorphism `Θ` equal to the identity outside
+a compact subinterval of `Y(M)`, and replace `Y` by `Θ ∘ Y`. Keep `H`, `τ`, `σ`, `Q`,
+the buffer, and all physical data fixed. The new inverse is
+`χ̃ = χ ∘ Θ⁻¹`, with the cylindrical lifts understood. The support interval
+is invariant under `Θ` and `Θ⁻¹`; off it both maps are the identity.
+On it the displayed pulled height is the same for every state as for the
+reference, even when `H` has nonconstant or very large derivatives. Thus
+its **difference** is zero there, and is unchanged off the support.
+
+Checking the other eight families gives the following preservation argument:
+
+| Families | Effect of this reference change |
+| --- | --- |
+| Physical height and inverse height | Their actual functions do not use `Y`, so they are unchanged. |
+| Forward angle defect | A radial postcomposition does not change the angle. |
+| Forward radial coordinate | On the modified physical region current and reference charts coincide; elsewhere both charts are unchanged. |
+| Jacobian and inverse Jacobian | The same argument applies to germs of the charts. A bijection fixing the middle pointwise cannot send an exterior point into the middle. |
+| Inverse radial coordinate and angle defect | Their old differences vanish on `Y(M)`; postcomposition of those differences by `Θ⁻¹` leaves them unchanged. |
+| Pulled height | Its difference is `h₀(χ(y)) * (Q_z(χ(y))⁻¹ - 1)`, which vanishes on `Y(M)`. |
+
+The physical/canonical endpoints, piece labels, samples, and parameter
+gradings are unchanged. The endpoint source maps in admissibility use
+`W.A` and `X.src`, not the modified `Y`; all endpoint jets of `Y` are
+preserved because the modification is supported strictly inside the
+middle. Transport Jacobian lower bounds and bounds for `Q` are retained
+because those transports and `Q` are not changed. Middle normalization
+requires equality with the reference fields, so it is retained as well.
+No analyticity assumption rules out this compactly supported modification:
+the project's `ContDiff ℝ ∞` is smoothness.
+
+This audit found no additional hypothesis that supplies an absolute bound
+for the reference inverse slope in that region. The table is a precise
+mathematical preservation argument; a Lean theorem transporting the entire
+`GeometryData` certificate has **not** yet been supplied.
+
+For the quantitative obstruction it suffices to fix parameter order
+`k = 2`, spatial order `s = 1`, and the base point `z = 0`. On distinct
+positive pieces choose interior points `r_n` and compact radial tests `f_n`
+with `f_n'(r_n) = 0` and `f_n''(r_n) = 1`. Let `v_n` be their genuine pure
+height directions and `v_q` the scalar direction. The local response
+lemmas in
+[N04PulledFieldsCoefficientMixedVariation.lean](../../src/ContinuousFlexibility/Analysis/N04PulledFieldsCoefficientMixedVariation.lean)
+differentiate the total increment `q * (U_ref + t f_n)` and remove the
+fixed, generally nonzero `U_ref`. `N03Properties` preserves the literal
+radial coefficient at every allowed state, and the middle inverse is
+independent of that state. The expected mixed jet of the actual pulled
+radial coefficient at a static middle point is therefore
+
+```math
+c_n d_n,\qquad c_n=1+3w(r_n)^2>0,\qquad
+d_n=\widetilde\chi_n'(\widetilde Y_n(r_n)).
+```
+
+The pure-direction identities in
+[HeightSectorDirections.lean](../../src/ContinuousFlexibility/Analysis/HeightSectorDirections.lean)
+give `p_j(v_q) = 1` for every grading order. Consequently, for any proposed
+output base `b'` and loss `ℓ`, the exact one-high weight at zero is
+
+```math
+\operatorname{oneHigh}(p,b',1+\ell,0;(v_q,v_n))
+  =2p_{b'}(v_n)+p_{1+\ell}(v_n).
+```
+
+Fix the physical test before choosing its reparametrization. Its grading
+values are finite and independent of `Θ_n`. Writing `E_n` and `H_n` for
+the unchanged material sample values, choose the inverse slope so that
+
+```math
+c_n d_n>
+n E_n^n\bigl(1+H_n^{3/4}\bigr)\bigl(1+3p_n(v_n)\bigr)
+\qquad(n\ge1).
+```
+
+Then `n ≥ b'`, `n ≥ 1+ℓ`, and `n ≥ B` imply, by grading monotonicity and
+`E_n ≥ 1`, that this exceeds the required bound
+`B E_n^B H_n^(3/4) * (2p_b'(v_n) + p_(1+ℓ)(v_n))`. Every smaller positive
+neighborhood contains zero, and directional derivatives do not restrict
+the magnitudes of the tangent directions. Thus shrinking the neighborhood
+does not avoid this fixed-order test.
+
+**This is still not a formal counterexample to the frozen obligation.**
+The remaining construction burdens are explicit:
+
+1. Supply one actual admissible baseline gauge with the full all-piece
+   `∀ η, GeometryData η ... b ε` premise, without using an open blueprint
+   proof. Existence of a retained start or of good reference jets alone
+   does not supply this baseline.
+2. Construct the simultaneous smooth diffeomorphisms and prove that they
+   preserve the reference-family certificate and all nine complete
+   current-data interfaces, including their mixed towers on the same
+   parameter neighborhood.
+3. Select distinct retained positive components and genuine compact tests,
+   then identify the relevant actual `SmoothDirections.D 2` of the spatial
+   difference jet with `c_n d_n`. The existing scalar response and sector
+   direction lemmas are ingredients, not that final identification.
+4. Assemble the diagonal inequality against every possible output base,
+   positive radius, loss and material constant. One fixed auxiliary column
+   suffices to contradict an all-`η` conclusion, but the premise must still
+   hold for every auxiliary column.
