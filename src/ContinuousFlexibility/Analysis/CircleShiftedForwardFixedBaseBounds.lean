@@ -25,6 +25,31 @@ variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {M : CircleModelData}
   (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
   (hγ : 0 < γ) (hM : IsCircleModel T γ M) (hI : HasInterpolation M.grading)
 
+private theorem circleShiftedChartCompose_zero_kernel
+    (travel : ℕ → ℝ) (e y : M.Space) :
+    circleShiftedChartComposeContinuousLinear hM hT hD hγ travel e y =
+      coupledCircleKernel hD hT hγ hM hI 0 0 e
+        (circleTranslationContinuousLinear hM hT hD hγ travel y) Fin.elim0 := by
+  apply hM.2.2.2.2.2.1
+  funext m θ
+  have hc := circleShiftedChartComposeContinuousLinear_apply hM hT hD hγ travel e y
+  have hl := circleShiftedChartComposeLinear_decode hM hT hD hγ travel e y m θ
+  have ht := congrFun (congrFun
+    (circleTranslationContinuousLinear_decode hM hT hD hγ travel y) m)
+    (θ + M.decode e m θ)
+  have hk := coupledCircleKernel_decode_apply hD hT hγ hM hI 0 0 e
+    (circleTranslationContinuousLinear hM hT hD hγ travel y) Fin.elim0 m θ
+  calc
+    _ = M.decode (circleShiftedChartComposeLinear hM hT hD hγ travel e y) m θ :=
+      congrArg (fun z : M.Space => M.decode z m θ) hc
+    _ = M.decode y m (θ + travel m + M.decode e m θ) := hl
+    _ = M.decode y m ((θ + M.decode e m θ) + travel m) :=
+      congrArg (M.decode y m) (by ring)
+    _ = M.decode (circleTranslationContinuousLinear hM hT hD hγ travel y) m
+        (θ + M.decode e m θ) := ht.symm
+    _ = _ := by
+      simpa only [iteratedDeriv_zero, Fin.prod_univ_zero, mul_one] using hk.symm
+
 /-- The existing ordered tower has the literal shifted kernel as its jet. -/
 theorem circleShiftedChartCompose_orderedJet_eq_kernel
     (travel : ℕ → ℝ) {U : Set M.Space} (hU : IsOpen U)
@@ -41,31 +66,16 @@ theorem circleShiftedChartCompose_orderedJet_eq_kernel
     have hv : v = Fin.elim0 := Subsingleton.elim _ _
     subst v
     rw [inverseForwardJet_zero J he y]
-    apply hM.2.2.2.2.2.1
-    funext m θ
-    have hc := circleShiftedChartComposeContinuousLinear_apply hM hT hD hγ travel e y
-    have hl := circleShiftedChartComposeLinear_decode hM hT hD hγ travel e y m θ
-    have ht := congrFun (congrFun
-      (circleTranslationContinuousLinear_decode hM hT hD hγ travel y) m)
-      (θ + M.decode e m θ)
-    have hk := coupledCircleKernel_decode_apply hD hT hγ hM hI 0 0 e
-      (circleTranslationContinuousLinear hM hT hD hγ travel y) Fin.elim0 m θ
-    calc
-      _ = M.decode (circleShiftedChartComposeLinear hM hT hD hγ travel e y) m θ :=
-        congrArg (fun z : M.Space => M.decode z m θ) hc
-      _ = M.decode y m (θ + travel m + M.decode e m θ) := hl
-      _ = M.decode y m ((θ + M.decode e m θ) + travel m) :=
-        congrArg (M.decode y m) (by ring)
-      _ = M.decode (circleTranslationContinuousLinear hM hT hD hγ travel y) m
-          (θ + M.decode e m θ) := ht.symm
-      _ = _ := by
-        simpa only [iteratedDeriv_zero, Fin.prod_univ_zero, mul_one] using hk.symm
+    exact circleShiftedChartCompose_zero_kernel hD hT hγ hM hI travel e y
   | succ n ih =>
     intro e he v y
-    have hf := hasProjectiveLineDerivAt_inverseForwardJet
-      (X := M.Space) (Y := M.Space) (Z := M.Space) (U := U)
-      (L := circleShiftedChartComposeContinuousLinear hM hT hD hγ travel)
-      (x := e) J he n (Fin.tail v) y (v 0)
+    have hf : HasProjectiveLineDerivAt
+        (fun z : M.Space => inverseForwardJet J n z (Fin.tail v) y)
+        (inverseForwardJet J (n + 1) e (Fin.cons (v 0) (Fin.tail v)) y) e (v 0) :=
+      hasProjectiveLineDerivAt_inverseForwardJet
+        (X := M.Space) (Y := M.Space) (Z := M.Space) (U := U)
+        (L := circleShiftedChartComposeContinuousLinear hM hT hD hγ travel)
+        (x := e) J he n (Fin.tail v) y (v 0)
     have hk := coupledCircleKernel_hasProjectiveLineDerivAt hD hT hγ hM hI
       n n e (v 0) (circleTranslationContinuousLinear hM hT hD hγ travel y) (Fin.tail v)
     have hg : (fun z => coupledCircleKernel hD hT hγ hM hI n n z
@@ -75,6 +85,56 @@ theorem circleShiftedChartCompose_orderedJet_eq_kernel
       exact (ih z hz (Fin.tail v) y).symm
     have hsame := (hf.congr_germ hg).unique hk
     simpa only [Fin.cons_self_tail] using hsame
+
+private theorem circleShiftedChartCompose_unit_majorant
+    (base H n : ℕ) (R : ℝ) (hR : 1 ≤ R) (travel : ℕ → ℝ)
+    (e : M.Space) (v : Fin n → M.Space) (hv : ∀ i, M.grading base (v i) ≤ R)
+    (u : M.Space) (hu : M.grading base u < 1) :
+    coupledCircleKernelMajorant M base H e
+        (Fin.cons (circleTranslationContinuousLinear hM hT hD hγ travel u) v) ≤
+      R ^ (n + 1) * ((1 + M.grading H e + ∑ i, M.grading H (v i)) + M.grading H u) := by
+  classical
+  let τ := circleTranslationContinuousLinear hM hT hD hγ travel
+  let P := R ^ (n + 1)
+  let a : ℝ := 1 + M.grading H e + ∑ i, M.grading H (v i)
+  have hP : 0 ≤ P := pow_nonneg (zero_le_one.trans hR) _
+  let w : Fin (n + 1) → M.Space := Fin.cons (τ u) v
+  have hw (i : Fin (n + 1)) : M.grading base (w i) ≤ R := by
+    refine Fin.cases ?_ (fun j => ?_) i
+    · exact (circleTranslationContinuousLinear_grading_le hM hT hD hγ travel base u).trans
+        (hu.le.trans hR)
+    · exact hv j
+  have hp (I : Finset (Fin (n + 1))) : (∏ i ∈ I, M.grading base (w i)) ≤ P := by
+    have hcard : I.card ≤ n + 1 := by
+      simpa only [Finset.card_univ, Fintype.card_fin] using
+        Finset.card_le_card (Finset.subset_univ I)
+    calc
+      _ ≤ ∏ _i ∈ I, R := Finset.prod_le_prod₀
+        (fun i _ => apply_nonneg _ _) (fun i _ => hw i)
+      _ = R ^ I.card := by simp only [Finset.prod_const]
+      _ ≤ P := pow_le_pow_right₀ hR hcard
+  have hsum : (∑ i, M.grading H (w i)) ≤
+      M.grading H u + ∑ i, M.grading H (v i) := by
+    simpa only [w, Fin.sum_univ_succ, Fin.cons_zero, Fin.cons_succ] using
+      add_le_add (circleTranslationContinuousLinear_grading_le hM hT hD hγ travel H u)
+        (le_refl (∑ i, M.grading H (v i)))
+  have hmajor : coupledCircleKernelMajorant M base H e w ≤ P * (a + M.grading H u) := by
+    unfold coupledCircleKernelMajorant
+    calc
+      _ ≤ (1 + M.grading H e) * P + ∑ i, M.grading H (w i) * P :=
+        add_le_add
+          (mul_le_mul_of_nonneg_left (hp Finset.univ)
+            (add_nonneg zero_le_one (apply_nonneg _ _)))
+          (Finset.sum_le_sum (fun i _ => mul_le_mul_of_nonneg_left
+            (hp (Finset.univ.erase i)) (apply_nonneg _ _)))
+      _ = P * (1 + M.grading H e + ∑ i, M.grading H (w i)) := by
+        rw [← Finset.sum_mul]
+        ring
+      _ ≤ P * (1 + M.grading H e +
+          (M.grading H u + ∑ i, M.grading H (v i))) :=
+        mul_le_mul_of_nonneg_left (add_le_add le_rfl hsum) hP
+      _ = P * (a + M.grading H u) := by dsimp only [a]; ring
+  exact hmajor
 
 include hI in
 /-- One base and loss precede every parameter order, spatial order and
@@ -115,42 +175,9 @@ theorem circleShiftedChartCompose_orderedJets_fixedBase_bound :
   let a : ℝ := 1 + M.grading H e + ∑ i, M.grading H (v i)
   have hlocal (u : M.Space) (hu : M.grading base u < 1) :
       M.grading s (inverseForwardJet J n e v u) ≤ C * P * (a + M.grading H u) := by
-    let w : Fin (n + 1) → M.Space := Fin.cons (τ u) v
-    have hw (i : Fin (n + 1)) : M.grading base (w i) ≤ R := by
-      refine Fin.cases ?_ (fun j => ?_) i
-      · exact (circleTranslationContinuousLinear_grading_le hM hT hD hγ travel base u).trans
-          (hu.le.trans hR)
-      · exact hv j
-    have hp (I : Finset (Fin (n + 1))) : (∏ i ∈ I, M.grading base (w i)) ≤ P := by
-      have hcard : I.card ≤ n + 1 := by
-        simpa only [Finset.card_univ, Fintype.card_fin] using
-          Finset.card_le_card (Finset.subset_univ I)
-      calc
-        _ ≤ ∏ _i ∈ I, R := Finset.prod_le_prod₀
-          (fun i _ => apply_nonneg _ _) (fun i _ => hw i)
-        _ = R ^ I.card := by simp only [Finset.prod_const]
-        _ ≤ P := pow_le_pow_right₀ hR hcard
-    have hsum : (∑ i, M.grading H (w i)) ≤
-        M.grading H u + ∑ i, M.grading H (v i) := by
-      simpa only [w, Fin.sum_univ_succ, Fin.cons_zero, Fin.cons_succ] using
-        add_le_add (circleTranslationContinuousLinear_grading_le hM hT hD hγ travel H u)
-          (le_refl (∑ i, M.grading H (v i)))
-    have hmajor : coupledCircleKernelMajorant M base H e w ≤ P * (a + M.grading H u) := by
-      unfold coupledCircleKernelMajorant
-      calc
-        _ ≤ (1 + M.grading H e) * P + ∑ i, M.grading H (w i) * P :=
-          add_le_add
-            (mul_le_mul_of_nonneg_left (hp Finset.univ)
-              (add_nonneg zero_le_one (apply_nonneg _ _)))
-            (Finset.sum_le_sum (fun i _ => mul_le_mul_of_nonneg_left
-              (hp (Finset.univ.erase i)) (apply_nonneg _ _)))
-        _ = P * (1 + M.grading H e + ∑ i, M.grading H (w i)) := by
-          rw [← Finset.sum_mul]
-          ring
-        _ ≤ P * (1 + M.grading H e +
-            (M.grading H u + ∑ i, M.grading H (v i))) :=
-          mul_le_mul_of_nonneg_left (add_le_add le_rfl hsum) hP
-        _ = P * (a + M.grading H u) := by dsimp only [a]; ring
+    have hmajor : coupledCircleKernelMajorant M base H e (Fin.cons (τ u) v) ≤
+        P * (a + M.grading H u) :=
+      circleShiftedChartCompose_unit_majorant hD hT hγ hM base H n R hR travel e v hv u hu
     rw [circleShiftedChartCompose_orderedJet_eq_kernel hD hT hγ hM hI travel hU J n e he v u]
     exact (hc e heR (τ u) v).trans
       ((mul_le_mul_of_nonneg_left hmajor hC).trans_eq (mul_assoc C P _).symm)
