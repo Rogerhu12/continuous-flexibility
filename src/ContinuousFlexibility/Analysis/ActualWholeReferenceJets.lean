@@ -119,7 +119,7 @@ theorem n04Coordinates_actual_whole_referenceJets_with_auxiliary
     canonicalAtom_replaceAuxiliaryColumn_of_ne Γ.reference U S C L V η z m v hv
   have hreference : ReferenceJets Γ.reference U S' C' L' V' := by
     refine ⟨?_, ?_⟩
-    · obtain ⟨B0, _, hother0⟩ := hother e τ σ Q buffer.region href 0
+    · obtain ⟨B0, _, hother0⟩ := (hother e τ σ Q buffer.region href).2 0
       intro m v
       by_cases hv : v = .auxiliaryColumn
       · subst v
@@ -127,7 +127,7 @@ theorem n04Coordinates_actual_whole_referenceJets_with_auxiliary
       · rw [hsame v hv (C.referenceState, 0) m]
         exact ⟨(hother0 m v hv).1, (hother0 m v hv).2.1⟩
     · intro s
-      obtain ⟨B1, hB1, hrest⟩ := hother e τ σ Q buffer.region href s
+      obtain ⟨B1, hB1, hrest⟩ := (hother e τ σ Q buffer.region href).2 s
       obtain ⟨B2, hB2, haux⟩ := hauxBound s
       let B : ℝ := max B1 B2
       have hB : 0 < B := hB1.trans_le (le_max_left _ _)
