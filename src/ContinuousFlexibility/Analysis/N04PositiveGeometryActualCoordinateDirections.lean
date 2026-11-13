@@ -184,7 +184,7 @@ theorem n04PositiveGeometry_controlledGauge_coordinate_fields
             ((G.V η).physicalLeft m +
               ((G.V η).physicalRight m - (G.V η).physicalLeft m) * q.1, q.2)).1 -
                 (G.V η).left m) / ((G.V η).right m - (G.V η).left m) = _
-          rw [hpl, hpr, hl, hr, sub_zero, div_one, hF]
+          rw [hpl, hpr, hl, hr, sub_zero, sub_zero, div_one, hF]
           rfl
       | true =>
           change ((G.V η).chart state m

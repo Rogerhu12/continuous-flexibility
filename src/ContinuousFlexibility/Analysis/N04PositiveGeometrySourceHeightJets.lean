@@ -66,7 +66,7 @@ theorem n04PositiveGeometry_sourceHeight_factorization
   cases inv <;> simp only [Bool.false_eq_true, ite_false, ite_true,
     n04PositiveSourceHeight, n04PositiveSourceMap, hm,
     n04CoordinatesCurrentHeightRatio, Real.rpow_one, Real.rpow_neg_one,
-    inv_div, div_eq_mul_inv] <;> ring
+    div_eq_mul_inv, inv_inv] <;> ring
 
 def n04PositiveGeometry_sourceHeightCurrentJet
     (W : N04RealizationStart) (X : N04RealizationChoice W)

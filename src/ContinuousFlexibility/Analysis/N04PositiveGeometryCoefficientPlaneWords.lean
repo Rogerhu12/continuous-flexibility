@@ -127,7 +127,9 @@ theorem n04PositiveGeometry_boundaryKernel_plane_saved_bound
     omega
   exact n04PositiveGeometry_coefficientPacket_saved_word_bound hU J JP p q hR hM hH ht
     K (s + K) shift x hx y hbound (π.partSize_pos i) (w.restrict (π.emb i)) hk' ha'
-    (v ∘ π.emb i) (fun j => by simpa only [StateAngleWord.isState_restrict, comp_apply]
-      using hpure (π.emb i j)) (fun j => hbox (π.emb i j))
+    (v ∘ π.emb i)
+    (fun j => by
+      simpa only [StateAngleWord.isState_restrict, comp_apply] using hpure (π.emb i j))
+    (fun j => hbox (π.emb i j))
 
 end ContinuousFlexibility.Analysis

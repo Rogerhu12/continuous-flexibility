@@ -54,7 +54,7 @@ theorem n04PositiveGeometry_boundaryWord_constant
     have he := smoothDirections_D_zero_apply Q (x := (x, θ)) ⟨hx, mem_univ θ⟩ v
     have hk : w.stateArity = 0 := by have h := w.arity_sum; omega
     have ha : w.angleArity = 0 := by have h := w.arity_sum; omega
-    simpa only [he, Real.norm_eq_abs, hk, ha, parameterHeightWeight, if_pos rfl,
+    simpa only [he, Real.norm_eq_abs, hk, ha, parameterHeightWeight, ite_true,
       Nat.zero_sub, Nat.mul_zero, Nat.zero_add, pow_zero, mul_one] using hc
   · have he := smoothDirections_D_constant Q (Nat.pos_of_ne_zero hn)
       (x := (x, θ)) ⟨hx, mem_univ θ⟩ v

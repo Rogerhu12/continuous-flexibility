@@ -104,18 +104,20 @@ theorem n04PositiveGeometry_finite_nat_power_majorant
   let A : ℝ := 1 + ∑ j : Fin (N + 1), a j
   let D : ℕ := ∑ j : Fin (N + 1), d j
   have hA : 1 ≤ A := le_add_of_nonneg_right
-    (Finset.sum_nonneg (fun j _ => zero_le_one.trans (ha j)))
+    (Finset.sum_nonneg (fun (j : Fin (N + 1)) _ => zero_le_one.trans (ha j.val)))
   refine ⟨A, hA, D, ?_⟩
   intro j hj M hM
   let k : Fin (N + 1) := ⟨j, by omega⟩
   have hcoef₀ : a k ≤ ∑ l : Fin (N + 1), a l :=
-    Finset.single_le_sum (fun l _ => zero_le_one.trans (ha l)) (Finset.mem_univ k)
+    Finset.single_le_sum (f := fun l : Fin (N + 1) => a l.val)
+      (fun l _ => zero_le_one.trans (ha l.val)) (Finset.mem_univ k)
   have hcoef : a j ≤ A := hcoef₀.trans (by
     dsimp only [A]
     exact le_add_of_nonneg_left zero_le_one)
   have hdegree : d j ≤ D := by
     change d k ≤ ∑ l : Fin (N + 1), d l
-    exact Finset.single_le_sum (fun l _ => Nat.zero_le (d l)) (Finset.mem_univ k)
+    exact Finset.single_le_sum (f := fun l : Fin (N + 1) => d l.val)
+      (fun l _ => Nat.zero_le (d l.val)) (Finset.mem_univ k)
   exact mul_le_mul hcoef (pow_le_pow_right₀ hM hdegree)
     (pow_nonneg (zero_le_one.trans hM) _) (zero_le_one.trans hA)
 

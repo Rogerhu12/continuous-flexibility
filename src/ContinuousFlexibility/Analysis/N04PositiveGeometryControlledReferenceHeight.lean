@@ -146,7 +146,7 @@ theorem n04PositiveGeometry_controlledReferenceHeight_unit_word_bound
       · exact ((hrefjets i a ha (S₁ (x, y)).1).2.2.1).trans (hraise hBrD)
       · simpa only [abs_zero] using zero_le_one.trans hM
     · rw [show hfix = fun p : PolarPoint => (fun r : ℝ => (H₀ i r)⁻¹) p.1 by rfl,
-        mixedDerivative_radialFunction]
+        mixedDerivative_radialFunction (fun r : ℝ => (H₀ i r)⁻¹) a b (S₁ (x, y))]
       split_ifs with hb
       · exact ((hrefjets i a ha (S₁ (x, y)).1).2.2.2).trans (hraise hBrD)
       · simpa only [abs_zero] using zero_le_one.trans hM
@@ -207,7 +207,8 @@ theorem n04PositiveGeometry_controlledReferenceHeight_unit_word_bound
         (zero_le_one.trans hCm)
       _ = (Cm * P₀ ^ (2 * N + 2)) * M ^ (4 * N + 4) := by
         dsimp only [M']
-        rw [mul_pow, ← pow_mul, show 2 * (2 * N + 2) = 4 * N + 4 by omega]
+        rw [mul_pow P₀ (M ^ 2) (2 * N + 2), ← pow_mul M 2 (2 * N + 2),
+          show 2 * (2 * N + 2) = 4 * N + 4 by omega]
         ring
       _ ≤ B₀ * E₀ ^ B₀ := hpack E₀ hE₀
       _ ≤ B * E₀ ^ B := mul_le_mul hB₀B (Real.rpow_le_rpow_of_exponent_le hE₀ hB₀B)

@@ -24,7 +24,9 @@ theorem n04PositiveGeometry_rootPowerTrace_zero (γ : ℝ) (v : ℕ → ℝ) :
       v ((default : OrderedFinpartition 0).partSize i)) = 1 := by
     apply Finset.prod_eq_one
     intro i _
-    exact False.elim (Nat.not_lt_zero i.val (hc ▸ i.isLt))
+    have hi : i.val < (default : OrderedFinpartition 0).length := i.isLt
+    rw [hc] at hi
+    exact False.elim (Nat.not_lt_zero i.val hi)
   rw [hp, hc]
   simp only [rpowJetCoefficient, Nat.cast_zero, sub_zero, one_mul, mul_one]
 

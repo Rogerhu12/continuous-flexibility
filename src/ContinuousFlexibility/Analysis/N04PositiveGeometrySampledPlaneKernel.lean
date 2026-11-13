@@ -67,7 +67,9 @@ theorem n04PositiveGeometry_sampledPlaneKernel_saved_prefix
     let k : Fin (N + 1) := ⟨n, Nat.lt_succ_of_le hn⟩
     have hsum : (Fintype.card (OrderedFinpartition k.val) : ℝ) ≤
         ∑ j : Fin (N + 1), (Fintype.card (OrderedFinpartition j.val) : ℝ) :=
-      Finset.single_le_sum (fun j _ => Nat.cast_nonneg _) (Finset.mem_univ k)
+      Finset.single_le_sum
+        (f := fun j : Fin (N + 1) => (Fintype.card (OrderedFinpartition j.val) : ℝ))
+        (fun j _ => Nat.cast_nonneg _) (Finset.mem_univ k)
     exact hsum.trans (by
       dsimp only [count]
       exact le_add_of_nonneg_left zero_le_one)
