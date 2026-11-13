@@ -122,8 +122,11 @@ theorem n04PositiveGeometry_rootSpatialInput_uniform_bound
       ∀ c : OrderedFinpartition n, ∀ w : Fin n → Fin 2,
         ‖n04PositiveGeometry_rootSpatialInput (D := D) (C := C) c w r (z, θ)‖ ≤ M := by
   let R0 := stateGrading S (N + 7) C.referenceState + 1
-  obtain ⟨M, hM, hb⟩ := n06_actualRootAbsorbedCoordinates_spatial_bound hD hT hS N
+  let hdata := n06_actualRootAbsorbedCoordinates_spatial_bound hD hT hS N
     (show 0 ≤ R0 by dsimp only [R0]; positivity)
+  let M : ℝ := hdata.choose
+  have hM := hdata.choose_spec.1
+  have hb := hdata.choose_spec.2
   refine ⟨M, hM, ?_⟩
   intro B hB z hz r hr θ n hn c w
   have hsmall := (sectorPairGrading_monotone S hB z).trans hz

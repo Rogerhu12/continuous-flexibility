@@ -51,22 +51,39 @@ theorem n04PositiveGeometry_rootBoundaryInput_sample_prefix
         parameterHeightWeight (W.U.H (W.U.sample (X.cell i)) ^ (3 / 4 : ℝ)) k *
         R ^ (((u + shift * k : ℕ) : ℝ) / (((s + shift * K : ℕ) : ℝ) + 1)) := by
   have hN := n01Properties_restrict W.hT W.through03.1.1 hb le_rfl hε hεW
-  obtain ⟨Bβ, hBβ, hβ⟩ :=
+  let labelData :=
     n04PositiveGeometry_rootForwardDerivative_fixedBase_prefix_of_flow W.hT W.hS hN hflow
-  obtain ⟨Bc, Lc, hBc, hc⟩ := n04PositiveGeometry_rootRawCoefficient_sample_prefix
+  let Bβ := labelData.choose
+  have hBβ := labelData.choose_spec.1
+  have hβ := labelData.choose_spec.2
+  let coefficientData := n04PositiveGeometry_rootRawCoefficient_sample_prefix
     W X hb hε hεW hεone 7 Bβ
+  let Bc := coefficientData.choose
+  let Lc := coefficientData.choose_spec.choose
+  have hBc := coefficientData.choose_spec.choose_spec.1
+  have hc := coefficientData.choose_spec.choose_spec.2
   let low := max Bc Lc
   have hBlow : Bβ ≤ low := hBc.trans (le_max_left _ _)
   let p := pairGrading (sectorGrading W.S) realGrading
   have hp : Monotone p := sectorPairGrading_monotone W.S
   refine ⟨low, hBβ.trans hBlow, fun K => ?_⟩
-  obtain ⟨shift, hshift⟩ := hβ K
+  let prefixData := hβ K
+  let shift := prefixData.choose
+  have hshift := prefixData.choose_spec
   refine ⟨shift, fun s => ?_⟩
-  obtain ⟨Aβ, hAβ, hβbound⟩ := hshift s
-  obtain ⟨Dβ, hDβ, hβsample⟩ :=
-    n04PositiveGeometry_positiveSource_circle_parameter_weight W X (3 / 4 : ℝ)
+  let labelOrderData := hshift s
+  let Aβ := labelOrderData.choose
+  have hAβ := labelOrderData.choose_spec.1
+  have hβbound := labelOrderData.choose_spec.2
+  let sampleData := n04PositiveGeometry_positiveSource_circle_parameter_weight W X (3 / 4 : ℝ)
       (A := 0) (C := Aβ) (by norm_num) (zero_le_one.trans hAβ)
-  obtain ⟨Dc, hDc, hcBound⟩ := hc K (s + shift * K)
+  let Dβ := sampleData.choose
+  have hDβ := sampleData.choose_spec.1
+  have hβsample := sampleData.choose_spec.2
+  let coefficientOrderData := hc K (s + shift * K)
+  let Dc := coefficientOrderData.choose
+  have hDc := coefficientOrderData.choose_spec.1
+  have hcBound := coefficientOrderData.choose_spec.2
   let A := max Dc Dβ
   have hA : 1 ≤ A := hDc.trans (le_max_left _ _)
   refine ⟨A, hA, ?_⟩
@@ -116,7 +133,14 @@ theorem n04PositiveGeometry_rootBoundaryInput_sample_prefix
       ((hp hhighβ z).trans hzR) (fun l => (hp hhighβ (v l)).trans (hvR l))
     have hsample : Aβ * parameterHeightWeight (W.T.H (W.T.sample m) ^ (3 / 4 : ℝ)) k ≤
         Dβ * E ^ Dβ * parameterHeightWeight H k := by
-      simpa only [Real.rpow_zero, mul_one] using hβsample i side m hm k
+      calc
+        _ = (Aβ * W.T.E0 (W.T.sample m) ^ (0 : ℝ)) *
+            parameterHeightWeight (W.T.H (W.T.sample m) ^ (3 / 4 : ℝ)) k :=
+          congrArg (fun c : ℝ => c *
+            parameterHeightWeight (W.T.H (W.T.sample m) ^ (3 / 4 : ℝ)) k)
+              ((mul_one Aβ).symm.trans
+                (congrArg (fun c : ℝ => Aβ * c) (Real.rpow_zero _).symm))
+        _ ≤ _ := hβsample i side m hm k
     rw [Real.norm_eq_abs]
     exact hraw.trans ((mul_le_mul_of_nonneg_right hsample hP).trans
       (mul_le_mul_of_nonneg_right

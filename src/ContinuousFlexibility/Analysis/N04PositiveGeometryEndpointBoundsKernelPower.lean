@@ -67,22 +67,40 @@ theorem n04PositiveGeometry_rootKernelTerm_finite_power
         ‖J.D k z v‖ ≤ C0 * T.E0 r ^ A * parameterHeightWeight (T.H r ^ scalarBeta) k *
           R ^ ((b : ℝ) / ((s : ℝ) + 1)) := by
   classical
-  obtain ⟨B, inputLoss, hB, hpacket⟩ :=
+  let hpacketData :=
     n04PositiveGeometry_rootPacketSector_finiteShift_power
       (C := C) (base := base) hN.1.1 hT hS hε hE N (max requestedBase (N + 7))
+  let B : ℕ := hpacketData.choose
+  let inputLoss : ℕ := hpacketData.choose_spec.choose
+  have hB : max requestedBase (N + 7) ≤ B := hpacketData.choose_spec.choose_spec.1
+  have hpacket := hpacketData.choose_spec.choose_spec.2
   have hrequested : requestedBase ≤ B := (le_max_left _ _).trans hB
   have hBN : N + 7 ≤ B := (le_max_right _ _).trans hB
-  obtain ⟨M0, hM0, hcompact⟩ :=
+  let hcompactData :=
     n04PositiveGeometry_rootSpatialInput_uniform_bound hN.1.1 hT hS C N
-  obtain ⟨L0, hL0, hheight⟩ := materialHeight_E0_weight_bounded
+  let M0 : ℝ := hcompactData.choose
+  have hM0 : 0 ≤ M0 := hcompactData.choose_spec.1
+  have hcompact := hcompactData.choose_spec.2
+  let hheightData := materialHeight_E0_weight_bounded
     hT (γ := scalarBeta) (by norm_num [scalarBeta]) 0
+  let L0 : ℝ := hheightData.choose
+  have hL0 : 0 < L0 := hheightData.choose_spec.1
+  have hheight := hheightData.choose_spec.2
   let L : ℝ := max 1 L0
   have hL : 1 ≤ L := le_max_left _ _
   let p := pairGrading (sectorGrading S) realGrading
   refine ⟨B, inputLoss, hrequested, fun K s => ?_⟩
-  obtain ⟨Cp, Ap, hCp, hAp, hpbound⟩ := hpacket K s
-  choose Co hCo houter using fun j : Fin (N + 1) =>
+  let hpdata := hpacket K s
+  let Cp : ℝ := hpdata.choose
+  let Ap : ℝ := hpdata.choose_spec.choose
+  have hCp : 1 ≤ Cp := hpdata.choose_spec.choose_spec.1
+  have hAp : 0 ≤ Ap := hpdata.choose_spec.choose_spec.2.1
+  have hpbound := hpdata.choose_spec.choose_spec.2.2
+  let houterData := fun j : Fin (N + 1) =>
     n04PositiveGeometry_rootRadialKernel_finite_bound j.val (s + K) M0
+  let Co : Fin (N + 1) → ℝ := fun j => (houterData j).choose
+  have hCo (j : Fin (N + 1)) : 0 < Co j := (houterData j).choose_spec.1
+  have houter (j : Fin (N + 1)) := (houterData j).choose_spec.2
   let CK : ℝ := 1 + ∑ j : Fin (N + 1), Co j
   have hCK : 1 ≤ CK := le_add_of_nonneg_right (Finset.sum_nonneg (fun j _ => (hCo j).le))
   have hCoCK (j : Fin (N + 1)) : Co j ≤ CK :=
@@ -122,7 +140,9 @@ theorem n04PositiveGeometry_rootKernelTerm_finite_power
   have hM : 1 ≤ M := one_le_mul_of_one_le_of_one_le hCp (Real.one_le_rpow hE1 hAp)
   have hH : 0 ≤ H := Real.rpow_nonneg (hT.2.1 r hr).2.1.le _
   have hHL : H ≤ L := by
-    have hb : H ≤ L0 := by simpa only [H, Real.rpow_zero, mul_one] using hheight r hr
+    have hb : H ≤ L0 := calc
+      H = H * T.E0 r ^ (0 : ℝ) := by rw [Real.rpow_zero, mul_one]
+      _ ≤ L0 := hheight r hr
     exact hb.trans (le_max_right _ _)
   have ht : 1 ≤ t := Real.one_le_rpow hR (by positivity)
   have hpow (j : ℕ) : R ^ ((j : ℝ) / ((s : ℝ) + 1)) = t ^ j := by

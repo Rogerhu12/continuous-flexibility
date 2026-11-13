@@ -81,8 +81,12 @@ theorem n04PositiveGeometry_physicalRootTrace_finiteShift_power
         ‖J.D k z v‖ ≤ C0 * T.E0 r ^ A * parameterHeightWeight (T.H r ^ scalarBeta) k *
           R ^ ((b : ℝ) / ((s : ℝ) + 1)) := by
   classical
-  obtain ⟨B, inputLoss, hB, hterms⟩ :=
-    n04PositiveGeometry_rootKernelTerm_finite_power hT hS hN hε hE N requestedBase
+  let data := n04PositiveGeometry_rootKernelTerm_finite_power
+    hT hS hN hε hE N requestedBase
+  let B := data.choose
+  let inputLoss := data.choose_spec.choose
+  have hB := data.choose_spec.choose_spec.1
+  have hterms := data.choose_spec.choose_spec.2
   let count : ℝ := 1 + ∑ j : Fin (N + 1), (Fintype.card (OrderedFinpartition j.val) : ℝ)
   have hcount : 1 ≤ count := le_add_of_nonneg_right
     (Finset.sum_nonneg (fun _ _ => Nat.cast_nonneg _))
@@ -93,7 +97,12 @@ theorem n04PositiveGeometry_physicalRootTrace_finiteShift_power
       (Fintype.card (OrderedFinpartition i.val))) (Finset.mem_univ j)).trans
         (le_add_of_nonneg_left zero_le_one)
   refine ⟨B, inputLoss, hB, fun K s => ?_⟩
-  obtain ⟨C0, A, hC0, hA, hb⟩ := hterms K s
+  let orderData := hterms K s
+  let C0 := orderData.choose
+  let A := orderData.choose_spec.choose
+  have hC0 := orderData.choose_spec.choose_spec.1
+  have hA := orderData.choose_spec.choose_spec.2.1
+  have hb := orderData.choose_spec.choose_spec.2.2
   refine ⟨count * C0, A, one_le_mul_of_one_le_of_one_le hcount hC0, hA, ?_⟩
   intro r hr hroot a d had π hπ b hbs θ J k hk z hz hzlow v hv R hR hzR hvR
   let Ji := fun c : OrderedFinpartition (a + d) =>
