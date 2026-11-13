@@ -145,9 +145,10 @@ theorem n04PositiveGeometry_rootBoundaryFormula_sample_prefix
             (y, η)) θ))
       (w : Fin e → (StateDirections W.S × ℝ)) (hw : ∀ l, P (w l)) :
       ‖Q.D e z w‖ ≤ M * parameterHeightWeight H e * t ^ (b + shift * e) := by
-    rw [htpow]
-    exact hin i side m hm g hg hg0 hfactor ρ hρ hstrip l e he b hb a ha θ Q
+    have hraw := hin i side m hm g hg hg0 hfactor ρ hρ hstrip l e he b hb a ha θ Q
       z hz hzlow w (fun l => (hw l).1) R hR hzR (fun l => (hw l).2)
+    exact hraw.trans_eq (congrArg (fun q : ℝ => M * parameterHeightWeight H e * q)
+      (htpow (b + shift * e)).symm)
   have hout := hformula (sectorNeighborhood_convex W.S base ε ε) Ji
     z hz θ P hP M H t hM hH hHL ht shift hsource
     j k hk u hu d hd J v (fun l => ⟨hv l, hvR l⟩)
@@ -161,8 +162,10 @@ theorem n04PositiveGeometry_rootBoundaryFormula_sample_prefix
       _ ≤ A * E ^ A := mul_le_mul hA₀A
         (Real.rpow_le_rpow_of_exponent_le hE hA₀A)
         (Real.rpow_nonneg (zero_le_one.trans hE) _) (zero_le_one.trans hA)
-  rw [htpow] at hout
-  exact hout.trans (mul_le_mul_of_nonneg_right
+  have hscaled := hout.trans_eq
+    (congrArg (fun q : ℝ => C * M ^ degree * parameterHeightWeight H k * q)
+      (htpow (u + shift * k)))
+  exact hscaled.trans (mul_le_mul_of_nonneg_right
     (mul_le_mul_of_nonneg_right hcost (parameterHeightWeight_nonneg hH k))
       (Real.rpow_nonneg (zero_le_one.trans hR) _))
 
