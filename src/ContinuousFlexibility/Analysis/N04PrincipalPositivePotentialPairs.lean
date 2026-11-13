@@ -52,9 +52,12 @@ theorem n04PrincipalPositive_potential_pairBounds {b : ℕ} {ε : ℝ}
   have hW (m : {m : ℕ // G.Pos η m}) :
       0 < G.W.U.H (G.W.U.sample ((G.V η).cell m.val)) ^ (3 / 4 : ℝ) :=
     Real.rpow_pos_of_pos (G.n04PrincipalPositive_sample_height_pos η m.val) _
-  have ha := hP 0
-  have hb := hP 1
-  have hc := hP 2
+  have ha : G.n04PrincipalPositivePair η b ε
+      (G.atomFamily η .principalA) (G.atomRef η .principalA) := hP 0
+  have hb : G.n04PrincipalPositivePair η b ε
+      (G.atomFamily η .principalB) (G.atomRef η .principalB) := hP 1
+  have hc : G.n04PrincipalPositivePair η b ε
+      (G.atomFamily η .principalC) (G.atomRef η .principalC) := hP 2
   have hVr := hV.firstMixed hΩ hUne true
   have hVt := hV.firstMixed hΩ hUne false
   have hR := (ha.mul hVr hp hI hU hΩ hE hW).add
