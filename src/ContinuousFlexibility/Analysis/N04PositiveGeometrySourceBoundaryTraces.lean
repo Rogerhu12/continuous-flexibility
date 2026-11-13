@@ -141,7 +141,7 @@ def n04PositiveGeometry_sourceAngleTrace_joint
   · exact (n04PositiveGeometry_sourceProjectedTrace_joint hb hε hεW hεone hflow
       i side m hm hctx j (by omega) hj4 (ContinuousLinearMap.snd ℝ ℝ ℝ)).congr
         (fun _ _ => by simp only [n04PositiveGeometry_sourceAngleTrace, if_neg hj, sub_zero,
-          ContinuousLinearMap.snd_apply])
+          ContinuousLinearMap.coe_snd'])
 
 def n04PositiveGeometry_sourceRadialTrace
     (W : N04RealizationStart) (X : N04RealizationChoice W)

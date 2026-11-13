@@ -51,12 +51,13 @@ theorem n04PositiveGeometry_boundaryWord_constant
   intro n w _ _ v _ _
   by_cases hn : n = 0
   · subst n
-    have he := smoothDirections_D_zero_apply Q ⟨hx, mem_univ θ⟩ v
+    have he := smoothDirections_D_zero_apply Q (x := (x, θ)) ⟨hx, mem_univ θ⟩ v
     have hk : w.stateArity = 0 := by have h := w.arity_sum; omega
     have ha : w.angleArity = 0 := by have h := w.arity_sum; omega
     simpa only [he, Real.norm_eq_abs, hk, ha, parameterHeightWeight, if_pos rfl,
       Nat.zero_sub, Nat.mul_zero, Nat.zero_add, pow_zero, mul_one] using hc
-  · have he := smoothDirections_D_constant Q (Nat.pos_of_ne_zero hn) ⟨hx, mem_univ θ⟩ v
+  · have he := smoothDirections_D_constant Q (Nat.pos_of_ne_zero hn)
+      (x := (x, θ)) ⟨hx, mem_univ θ⟩ v
     exact (congrArg norm he).trans_le (by
       simpa only [norm_zero] using mul_nonneg
         (mul_nonneg hM (parameterHeightWeight_nonneg hH _)) (pow_nonneg ht _))

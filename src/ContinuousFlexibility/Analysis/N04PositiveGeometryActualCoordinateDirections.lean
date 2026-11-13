@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledGauge
 import ContinuousFlexibility.Analysis.N04PositiveGeometryGaugeDirections
 import ContinuousFlexibility.Analysis.N04PositiveGeometryTransportSamplePrefix
+import ContinuousFlexibility.Analysis.N04PositiveGeometryReferencePullbackCosts
 
 /-!
 # The four actual coordinate components
@@ -127,16 +128,19 @@ def n04PositiveGeometry_controlledCoordinate_joint
         (n04PositiveLeft i) (n04PositiveRight i)
       cases angle with
       | false => exact JP
-      | true => exact (smoothDirectionsProd JP Jθ).comp_contDiff isOpen_univ
-          (contDiff_fst.sub contDiff_snd).contDiffOn (fun _ _ => mem_univ _)
+      | true =>
+          exact (smoothDirectionsProd JP Jθ).comp_contDiff isOpen_univ
+            (contDiff_fst.sub contDiff_snd).contDiffOn (fun _ _ => mem_univ _)
   | true =>
       let JP := J.restrict (hU.prod hV) (fun z hz => ⟨hz.1, mem_univ z.2⟩)
       cases angle with
-      | false => exact JP.comp_contDiff isOpen_univ
-          ((contDiff_id.sub contDiff_const).div_const
-            (n04PositiveRight i - n04PositiveLeft i)).contDiffOn (fun _ _ => mem_univ _)
-      | true => exact (smoothDirectionsProd JP Jθ).comp_contDiff isOpen_univ
-          (contDiff_fst.sub contDiff_snd).contDiffOn (fun _ _ => mem_univ _)
+      | false =>
+          exact JP.comp_contDiff isOpen_univ
+            ((contDiff_id.sub contDiff_const).div_const
+              (n04PositiveRight i - n04PositiveLeft i)).contDiffOn (fun _ _ => mem_univ _)
+      | true =>
+          exact (smoothDirectionsProd JP Jθ).comp_contDiff isOpen_univ
+            (contDiff_fst.sub contDiff_snd).contDiffOn (fun _ _ => mem_univ _)
 
 theorem n04PositiveGeometry_controlledGauge_coordinate_fields
     {W : N04RealizationStart} {X : N04RealizationChoice W}
@@ -172,10 +176,34 @@ theorem n04PositiveGeometry_controlledGauge_coordinate_fields
   funext q
   change atom W.D W.U (G.S η) (G.C η) (G.L η) (G.V η) state m
     (n04PositiveGeometry_coordinateAtom inverse angle) q = _
-  cases inverse <;> cases angle <;>
-    simp only [n04PositiveGeometry_coordinateAtom, Bool.false_eq_true, ite_false, ite_true,
-      atom, physicalUnitPoint, canonicalUnitPoint, hl, hr, hpl, hpr, hF, hI,
-      sub_zero, one_mul, zero_add, div_one, n04PositiveGeometry_controlledCoordinate,
-      n04PositiveGeometry_controlledReferenceComponent]
+  cases inverse with
+  | false =>
+      cases angle with
+      | false =>
+          change (((G.V η).chart state m
+            ((G.V η).physicalLeft m +
+              ((G.V η).physicalRight m - (G.V η).physicalLeft m) * q.1, q.2)).1 -
+                (G.V η).left m) / ((G.V η).right m - (G.V η).left m) = _
+          rw [hpl, hpr, hl, hr, sub_zero, div_one, hF]
+          rfl
+      | true =>
+          change ((G.V η).chart state m
+            ((G.V η).physicalLeft m +
+              ((G.V η).physicalRight m - (G.V η).physicalLeft m) * q.1, q.2)).2 - q.2 = _
+          rw [hpl, hpr, hF]
+          rfl
+  | true =>
+      cases angle with
+      | false =>
+          change (((G.V η).inverseChart state m
+            ((G.V η).left m + ((G.V η).right m - (G.V η).left m) * q.1, q.2)).1 -
+              (G.V η).physicalLeft m) / ((G.V η).physicalRight m - (G.V η).physicalLeft m) = _
+          rw [hl, hr, sub_zero, one_mul, zero_add, hpl, hpr, hI]
+          rfl
+      | true =>
+          change ((G.V η).inverseChart state m
+            ((G.V η).left m + ((G.V η).right m - (G.V η).left m) * q.1, q.2)).2 - q.2 = _
+          rw [hl, hr, sub_zero, one_mul, zero_add, hI]
+          rfl
 
 end ContinuousFlexibility.Analysis

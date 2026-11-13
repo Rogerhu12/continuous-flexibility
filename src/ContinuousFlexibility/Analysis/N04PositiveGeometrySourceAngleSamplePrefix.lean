@@ -98,7 +98,7 @@ theorem n04PositiveGeometry_sourceAngleTrace_sample_prefix
             (liftSectorParameter W.S W.C y.1) q)) (n04PositiveEndpoint i side) j y.2 =
           n04PositiveGeometry_sourceAngleTrace W X i side j y := by
       simp only [n04PositiveGeometry_sourceAngleTrace, if_neg hj, sub_zero,
-        ContinuousLinearMap.snd_apply]
+        ContinuousLinearMap.coe_snd']
     let JP := Q.congr (fun y _ => (he y).symm)
     have h := positiveOrder.choose_spec.2 i side m hm hctx j (by omega) hj4
       (ContinuousLinearMap.snd ℝ ℝ ℝ) (ContinuousLinearMap.norm_snd_le ℝ ℝ ℝ)

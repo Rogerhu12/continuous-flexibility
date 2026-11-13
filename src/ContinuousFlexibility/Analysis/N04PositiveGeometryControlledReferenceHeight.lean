@@ -117,11 +117,13 @@ theorem n04PositiveGeometry_controlledReferenceHeight_unit_word_bound
     G.toN04PositiveGeometryControlData.σ (state z.1) i z.2
   let hfix : PolarPoint → ℝ := fun p => if inv then (H₀ i p.1)⁻¹ else H₀ i p.1
   have hsmooth := n04PositiveGeometry_reference_scalar_geometry (href i).1
+  have hheight : ContDiff ℝ ∞ (fun p : PolarPoint => H₀ i p.1) :=
+    hsmooth.2.2.1.comp contDiff_fst
   have hhfix : ContDiffOn ℝ ∞ hfix univ := by
     cases inv with
-    | false => exact (hsmooth.2.2.1.comp contDiff_fst).contDiffOn
-    | true => exact (hsmooth.2.2.1.comp contDiff_fst).contDiffOn.inv
-        (fun p _ => (hsmooth.2.2.2 p.1).ne')
+    | false => exact hheight.contDiffOn
+    | true =>
+        exact hheight.contDiffOn.inv (fun p _ => (hsmooth.2.2.2 p.1).ne')
   let RF : MixedJetRegularity U univ (fun x p => hfix p * Q x p) :=
     (n04Realization_mixedJetRegularity_fixedSpatial hU hhfix).mul RQ hU isOpen_univ
   let L : (E × PolarPoint) →L[ℝ] PolarPoint := ContinuousLinearMap.snd ℝ E PolarPoint

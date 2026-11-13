@@ -58,6 +58,8 @@ theorem n04PositiveGeometry_actualFactorData_nonempty
     ∃ low : ℕ, base ≤ low ∧ ∀ larger : ℕ, low ≤ larger →
       ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →
       ∀ i, Nonempty (N04PositiveGeometryFactorData G larger η i) := by
+  letI : LocallyConvexSpace ℝ (StateDirections W.S × ℝ) :=
+    (sectorPairGrading_withSeminorms W.S).toLocallyConvexSpace
   let uniformData := n04PositiveGeometry_sourceAngleTrace_uniform_prefix
     W X hb hε hεW hεone hflow
   refine ⟨uniformData.choose, uniformData.choose_spec.1, ?_⟩
@@ -101,9 +103,9 @@ theorem n04PositiveGeometry_actualFactorData_nonempty
     ho.1 (ho.2.1.trans (ho.2.2.1.trans ho.2.2.2.1)) ho.2.2.2.2
     (half_pos (inv_pos.mpr (zero_lt_one.trans_le (G.input_one i))))
     (zero_le_one.trans (G.inverse_one i)) ψ radialSource
-    (fun x hx side j => n04PositiveGeometry_sourceAngleTrace_contDiff
+    (fun x hx side j => n04PositiveGeometry_sourceAngleTrace_contDiff (X := X)
       (hb.trans hbase) (hη.trans hεW) i side j hx)
-    (fun x hx side j => n04PositiveGeometry_sourceAngleTrace_period
+    (fun x hx side j => n04PositiveGeometry_sourceAngleTrace_period (X := X)
       (hb.trans hbase) (hη.trans hεW) i side j hx)
     (fun side j b θ => smoothDirections_angularStateSlice (Jψ side j) b θ)
     (fun side j b => uniformData.choose_spec.2 larger hlarge η hη hηhalf

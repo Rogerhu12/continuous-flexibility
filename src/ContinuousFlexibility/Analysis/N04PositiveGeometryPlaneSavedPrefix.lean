@@ -26,7 +26,7 @@ def n04PositiveGeometry_spatialLinearDirections {U : Set E} (hU : IsOpen U)
     SmoothDirections (U ×ˢ univ) (fun z : E × PolarPoint => L z.2) :=
   (smoothDirectionsLinearOn (L.comp (ContinuousLinearMap.snd ℝ E PolarPoint))
     (hU.prod isOpen_univ)).congrOn (fun z _ => by
-      simp only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.snd_apply])
+      simp only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_snd'])
 
 def N04PlaneSavedWordBounds {U : Set E} {f : E × PolarPoint → F}
     (J : SmoothDirections (U ×ˢ univ) f) (N K C : ℕ) (x : E) (Ω : Set PolarPoint)
@@ -108,11 +108,14 @@ theorem n04PositiveGeometry_finite_nat_power_majorant
   refine ⟨A, hA, D, ?_⟩
   intro j hj M hM
   let k : Fin (N + 1) := ⟨j, by omega⟩
-  have hcoef : a j ≤ A :=
-    (Finset.single_le_sum (fun k _ => zero_le_one.trans (ha k)) (Finset.mem_univ k)).trans
-      (le_add_of_nonneg_left zero_le_one)
-  have hdegree : d j ≤ D :=
-    Finset.single_le_sum (fun k _ => Nat.zero_le (d k)) (Finset.mem_univ k)
+  have hcoef₀ : a k ≤ ∑ l : Fin (N + 1), a l :=
+    Finset.single_le_sum (fun l _ => zero_le_one.trans (ha l)) (Finset.mem_univ k)
+  have hcoef : a j ≤ A := hcoef₀.trans (by
+    dsimp only [A]
+    exact le_add_of_nonneg_left zero_le_one)
+  have hdegree : d j ≤ D := by
+    change d k ≤ ∑ l : Fin (N + 1), d l
+    exact Finset.single_le_sum (fun l _ => Nat.zero_le (d l)) (Finset.mem_univ k)
   exact mul_le_mul hcoef (pow_le_pow_right₀ hM hdegree)
     (pow_nonneg (zero_le_one.trans hM) _) (zero_le_one.trans hA)
 

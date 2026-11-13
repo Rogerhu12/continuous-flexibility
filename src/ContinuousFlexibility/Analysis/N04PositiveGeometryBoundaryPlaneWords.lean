@@ -53,8 +53,8 @@ theorem n04PositiveGeometry_boundaryPlane_saved_word_bound
       J.D n (x, y.2) (fun i => ((v i).1, (v i).2.2)) := by
     have hh := congrArg (fun A : (E × PolarPoint) [×n]→L[ℝ] F => A v)
       (Q.unique Q' n (x, y) ⟨hx, mem_univ _⟩)
-    simpa only [Q', SmoothDirections.congrOn, SmoothDirections.compLinear,
-      SmoothDirections.compAffine_apply, zero_add, hL] using hh
+    change Q.D n (x, y) v = J.D n (0 + L (x, y)) (fun i => L (v i)) at hh
+    simpa only [zero_add, hL] using hh
   have hpure' (i : Fin n) : if w.isState i then (v i).2.2 = 0 else (v i).1 = 0 := by
     cases hi : w.isState i
     · simpa only [hi, Bool.false_eq_true, if_false] using hpure i

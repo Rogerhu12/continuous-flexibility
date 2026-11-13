@@ -70,7 +70,7 @@ theorem n04PositiveGeometry_boundaryRadialComposition_bound (n N : ℕ) :
     have hb := hc hU f g (fun y => (c, y.2)) hf hg (fun j _ hj => JF j hj) JG
       K s d hN x hx θ P M H t hM hH hHM ht shift
       (fun j _ hj => hF j hj) hG (fun _ => (1, 0))
-      (fun _ => by simp only [Prod.norm_def, norm_one, norm_zero, max_eq_left zero_le_one]) J
+      (fun _ => by norm_num [Prod.norm_def]) J
     exact hb.congr hx (fun y hy => (n06_radialBoundaryJet_eq_frechet n
       ((hf y hy).comp _ (hg y hy))).symm)
   · have hn0 : n = 0 := by omega

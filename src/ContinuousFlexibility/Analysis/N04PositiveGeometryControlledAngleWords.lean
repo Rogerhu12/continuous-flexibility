@@ -81,7 +81,7 @@ theorem n04PositiveGeometry_controlledAngle_saved_word_bound
     (ContinuousLinearMap.snd ℝ ℝ ℝ).comp (ContinuousLinearMap.snd ℝ V PolarPoint)
   let Jθ : SmoothDirections (U ×ˢ univ) (fun z : V × PolarPoint => z.2.2) :=
     (smoothDirectionsLinearOn L (hU.prod isOpen_univ)).congrOn
-      (fun z _ => by simp only [L, ContinuousLinearMap.comp_apply, ContinuousLinearMap.snd_apply])
+      (fun z _ => by simp only [L, ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_snd'])
   have hM : 1 ≤ B₀ * E i ^ B₀ := one_le_mul_of_one_le_of_one_le hB₀
     (Real.one_le_rpow (hE i) (zero_le_one.trans hB₀))
   have hθ := n04PositiveGeometry_spatialLinear_saved_word_bound (hU.prod isOpen_univ)

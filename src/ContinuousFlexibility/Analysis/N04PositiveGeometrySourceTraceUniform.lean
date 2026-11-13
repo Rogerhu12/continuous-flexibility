@@ -80,7 +80,7 @@ theorem n04PositiveGeometry_sourceAngleTrace_uniform_prefix
             (liftSectorParameter W.S W.C y.1) q)) (n04PositiveEndpoint i side) j y.2 =
           n04PositiveGeometry_sourceAngleTrace W X i side j y := by
       simp only [n04PositiveGeometry_sourceAngleTrace, if_neg hj, sub_zero,
-        ContinuousLinearMap.snd_apply]
+        ContinuousLinearMap.coe_snd']
     let JP := J.congr (fun y _ => (he y).symm)
     apply n04PositiveGeometry_boundaryPrefix_uniformSeminormBounds p
       (sectorPairGrading_continuous W.S) hp J positiveData.choose H hH ?_

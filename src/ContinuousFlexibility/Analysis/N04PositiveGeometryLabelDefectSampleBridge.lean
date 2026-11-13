@@ -84,7 +84,10 @@ theorem n04PositiveGeometry_labelDefect_sample_bridge
   have hsample (k : ℕ) : B₀ * W.T.H (W.T.sample m) ^ (3 / 4 : ℝ) ≤
       M * parameterHeightWeight H k := by
     have hraw : B₀ * W.T.H (W.T.sample m) ^ (3 / 4 : ℝ) ≤ B * E ^ B * H := by
-      simpa only [Real.rpow_zero, mul_one] using transfer.choose_spec.2 i side m hm
+      calc
+        _ = B₀ * W.T.E0 (W.T.sample m) ^ (0 : ℝ) *
+            W.T.H (W.T.sample m) ^ (3 / 4 : ℝ) := by rw [Real.rpow_zero, mul_one]
+        _ ≤ B * E ^ B * H := transfer.choose_spec.2 i side m hm
     calc
       _ ≤ B * E ^ B * H := hraw
       _ ≤ B * E ^ B * (L * parameterHeightWeight H k) :=

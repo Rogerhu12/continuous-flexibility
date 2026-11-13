@@ -63,10 +63,14 @@ theorem n04PositiveGeometry_sampledPlaneKernel_saved_prefix
   let count : ℝ := 1 + ∑ j : Fin (N + 1), (Fintype.card (OrderedFinpartition j.val) : ℝ)
   have hcount : 1 ≤ count := le_add_of_nonneg_right
     (Finset.sum_nonneg (fun _ _ => Nat.cast_nonneg _))
-  have hcard (n : ℕ) (hn : n ≤ N) : (Fintype.card (OrderedFinpartition n) : ℝ) ≤ count :=
-    (Finset.single_le_sum (fun j _ => Nat.cast_nonneg (Fintype.card (OrderedFinpartition j.val)))
-      (Finset.mem_univ (⟨n, Nat.lt_succ_of_le hn⟩ : Fin (N + 1)))).trans
-        (le_add_of_nonneg_left zero_le_one)
+  have hcard (n : ℕ) (hn : n ≤ N) : (Fintype.card (OrderedFinpartition n) : ℝ) ≤ count := by
+    let k : Fin (N + 1) := ⟨n, Nat.lt_succ_of_le hn⟩
+    have hsum : (Fintype.card (OrderedFinpartition k.val) : ℝ) ≤
+        ∑ j : Fin (N + 1), (Fintype.card (OrderedFinpartition j.val) : ℝ) :=
+      Finset.single_le_sum (fun j _ => Nat.cast_nonneg _) (Finset.mem_univ k)
+    exact hsum.trans (by
+      dsimp only [count]
+      exact le_add_of_nonneg_left zero_le_one)
   obtain ⟨B₁, _, hpack⟩ := n04PositiveGeometry_polynomial_sample_pack count D (2 * N + 1)
   let B : ℝ := max 1 B₁
   have hB : 1 ≤ B := le_max_left _ _
