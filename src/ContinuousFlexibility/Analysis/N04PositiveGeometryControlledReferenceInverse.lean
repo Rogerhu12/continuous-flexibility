@@ -79,6 +79,7 @@ theorem n04PositiveGeometry_controlledReferenceInverse_shifted_bound
     ∀ x ∈ U, ∀ v : Fin k → V,
     ∀ H R : ℝ, 0 ≤ H → 1 ≤ R → ∀ budget shift : ℕ,
     (∀ u w : ℕ, u + w ≤ a + b → ∀ p : PolarPoint,
+      p ∈ Ioo (n04PositiveLeft i) (n04PositiveRight i) ×ˢ (univ : Set ℝ) →
       |(RF.parameter u w p (mem_univ p)).D k x v| ≤
         A * W.U.E0 (W.U.sample (X.cell i)) ^ A * parameterHeightWeight H k *
           R ^ (((u + w + shift * k : ℕ) : ℝ) / ((budget : ℝ) + 1))) →
@@ -121,7 +122,8 @@ theorem n04PositiveGeometry_controlledReferenceInverse_shifted_bound
   change SmoothDirections U (fun z => mixedDerivative a b (fun p => f z (χ p.1, p.2)) q) at J
   have hout := n04PositiveGeometry_fixedRadial_shifted_parameter_bound
     isOpen_Ioo isOpen_univ (hsmooth i).2.1 RF hmap a b k budget shift hq J hx v hM hR
-    (fun j => hraw j.val b (by omega) (χ q.1, q.2))
+    (fun j => hraw j.val b (by omega) (χ q.1, q.2)
+      ((href i).1.inverse_maps_open hq))
   have hmass := hchain i a (Nat.le_add_right _ _) q.1
   calc
     _ ≤ (∑ j : Fin (a + 1), |radialChainCoefficient χ a j q.1|) * M *
