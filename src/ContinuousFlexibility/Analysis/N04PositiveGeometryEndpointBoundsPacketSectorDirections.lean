@@ -48,7 +48,8 @@ private def packet_affine_angle_directions
     (hU : IsOpen U) (hmap : MapsTo u U V) (heq : ∀ y, u y = c + L y)
     {f : F × ℝ → ℝ} (J : SmoothDirections (V ×ˢ univ) f) :
     SmoothDirections (U ×ˢ univ) (fun y => f (u y.1, y.2)) := by
-  apply packet_affine_directions (fun y : E × ℝ => (u y.1, y.2))
+  apply packet_affine_directions (U := U ×ˢ (univ : Set ℝ))
+    (V := V ×ˢ (univ : Set ℝ)) (f := f) (fun y : E × ℝ => (u y.1, y.2))
     (L.prodMap (ContinuousLinearMap.id ℝ ℝ)) (c, 0) (hU.prod isOpen_univ)
     (fun y hy => ⟨hmap hy.1, mem_univ _⟩) ?_ J
   intro y
