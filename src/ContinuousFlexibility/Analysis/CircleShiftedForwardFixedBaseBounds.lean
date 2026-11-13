@@ -25,6 +25,31 @@ variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {M : CircleModelData}
   (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
   (hγ : 0 < γ) (hM : IsCircleModel T γ M) (hI : HasInterpolation M.grading)
 
+private theorem circleShiftedChartCompose_zero_kernel
+    (travel : ℕ → ℝ) (e y : M.Space) :
+    circleShiftedChartComposeContinuousLinear hM hT hD hγ travel e y =
+      coupledCircleKernel hD hT hγ hM hI 0 0 e
+        (circleTranslationContinuousLinear hM hT hD hγ travel y) Fin.elim0 := by
+  apply hM.2.2.2.2.2.1
+  funext m θ
+  have hc := circleShiftedChartComposeContinuousLinear_apply hM hT hD hγ travel e y
+  have hl := circleShiftedChartComposeLinear_decode hM hT hD hγ travel e y m θ
+  have ht := congrFun (congrFun
+    (circleTranslationContinuousLinear_decode hM hT hD hγ travel y) m)
+    (θ + M.decode e m θ)
+  have hk := coupledCircleKernel_decode_apply hD hT hγ hM hI 0 0 e
+    (circleTranslationContinuousLinear hM hT hD hγ travel y) Fin.elim0 m θ
+  calc
+    _ = M.decode (circleShiftedChartComposeLinear hM hT hD hγ travel e y) m θ :=
+      congrArg (fun z : M.Space => M.decode z m θ) hc
+    _ = M.decode y m (θ + travel m + M.decode e m θ) := hl
+    _ = M.decode y m ((θ + M.decode e m θ) + travel m) :=
+      congrArg (M.decode y m) (by ring)
+    _ = M.decode (circleTranslationContinuousLinear hM hT hD hγ travel y) m
+        (θ + M.decode e m θ) := ht.symm
+    _ = _ := by
+      simpa only [iteratedDeriv_zero, Fin.prod_univ_zero, mul_one] using hk.symm
+
 /-- The existing ordered tower has the literal shifted kernel as its jet. -/
 theorem circleShiftedChartCompose_orderedJet_eq_kernel
     (travel : ℕ → ℝ) {U : Set M.Space} (hU : IsOpen U)
@@ -39,25 +64,7 @@ theorem circleShiftedChartCompose_orderedJet_eq_kernel
     (fun n e v y => coupledCircleKernel hD hT hγ hM hI n n e
       (circleTranslationContinuousLinear hM hT hD hγ travel y) v) ?_ ?_ n
   · intro e he y
-    apply hM.2.2.2.2.2.1
-    funext m θ
-    have hc := circleShiftedChartComposeContinuousLinear_apply hM hT hD hγ travel e y
-    have hl := circleShiftedChartComposeLinear_decode hM hT hD hγ travel e y m θ
-    have ht := congrFun (congrFun
-      (circleTranslationContinuousLinear_decode hM hT hD hγ travel y) m)
-      (θ + M.decode e m θ)
-    have hk := coupledCircleKernel_decode_apply hD hT hγ hM hI 0 0 e
-      (circleTranslationContinuousLinear hM hT hD hγ travel y) Fin.elim0 m θ
-    calc
-      _ = M.decode (circleShiftedChartComposeLinear hM hT hD hγ travel e y) m θ :=
-        congrArg (fun z : M.Space => M.decode z m θ) hc
-      _ = M.decode y m (θ + travel m + M.decode e m θ) := hl
-      _ = M.decode y m ((θ + M.decode e m θ) + travel m) :=
-        congrArg (M.decode y m) (by ring)
-      _ = M.decode (circleTranslationContinuousLinear hM hT hD hγ travel y) m
-          (θ + M.decode e m θ) := ht.symm
-      _ = _ := by
-        simpa only [iteratedDeriv_zero, Fin.prod_univ_zero, mul_one] using hk.symm
+    exact circleShiftedChartCompose_zero_kernel hD hT hγ hM hI travel e y
   · intro n e he v y h
     exact coupledCircleKernel_hasProjectiveLineDerivAt hD hT hγ hM hI
       n n e h (circleTranslationContinuousLinear hM hT hD hγ travel y) v
