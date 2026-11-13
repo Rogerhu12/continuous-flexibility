@@ -37,6 +37,27 @@ attribute [local instance]
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
 
+private theorem first_radialJet_reference_zero
+    (F F₀ : PolarPoint → ℝ) (h₀ : ∀ p, F₀ p = 0) (y θ : ℝ) :
+    |deriv (fun r => F (r, θ)) y| =
+      |mixedDerivative 1 0 (fun p => F p - F₀ p) (y, θ)| := by
+  simp only [mixedDerivative, iteratedDeriv_one, iteratedDeriv_zero, h₀, sub_zero]
+
+private theorem scalar_cost_homogeneous {A g a K : ℝ} (hg : g = a * K) :
+    A * g = (A * K) * a := by
+  rw [hg]
+  ring
+
+private theorem scalar_endpoint_cost
+    {f : ℝ → ℝ} {d a M K : ℝ} (ha : 0 < a) (hd : d < 1)
+    (hf : ContDiff ℝ ∞ f) (hmid : f d = 0) (hend : |f 1| = a)
+    (hderiv : ∀ y ∈ Ioo d 1, |deriv f y| ≤ M) (hscale : M = K * a) :
+    1 ≤ K * (1 - d) := by
+  have h := n04PositiveGeometry_endpointJump_le hd hf.continuous.continuousOn
+    (hf.differentiable (by simp)).differentiableOn hderiv
+  rw [hmid, sub_zero, hend, hscale] at h
+  exact n04PositiveGeometry_cancel_amplitude ha h
+
 namespace N04RealizationGauge
 
 /-- Uniform positive geometry data charge the reciprocal canonical width
@@ -115,13 +136,11 @@ theorem n04PositiveGeometry_geometryData_forces_right_cost
   have hfmid : f (G.Y i (buffer.centerRight i)) = 0 :=
     G.n04PositiveGeometry_inverseAngle_middle_zero η m i hi hreference hmatch
       (buffer.centerRight i) ⟨hcd, le_rfl⟩ θ
-  have hfend : |f 1| = a := by
-    change |atom G.W.D G.W.U (G.S η) (G.C η) (G.L η) (G.V η)
-      (G.lift η z) m .inverseAngleDefect (1, θ)| = a
-    rw [G.n04PositiveGeometry_inverseAngle_endpoint η m i hi hreference
-      hzoriginal hs hmatch true k hsource θ]
-    exact n04PositiveGeometry_circleDirection_inverseRootLabel_displacement
-      G.W.hS G.W.through03.1.1 k ha.le hzoriginal
+  have hfend : |f 1| = a :=
+    (congrArg abs (G.n04PositiveGeometry_inverseAngle_endpoint η m i hi hreference
+      hzoriginal hs hmatch true k hsource θ)).trans
+      (n04PositiveGeometry_circleDirection_inverseRootLabel_displacement
+        G.W.hS G.W.through03.1.1 k ha.le hzoriginal)
   have hrefzero : ∀ p, G.atomRef η .inverseAngleDefect m p = 0 :=
     G.n04PositiveGeometry_inverseAngle_reference_zero η m i hi (href i)
   have hderiv : ∀ y ∈ Ioo (G.Y i (buffer.centerRight i)) 1,
@@ -132,29 +151,23 @@ theorem n04PositiveGeometry_geometryData_forces_right_cost
     intro y hy'
     let q : unitStrip := ⟨(y, θ), ⟨⟨hy.1.trans hy'.1, hy'.2⟩, mem_univ _⟩⟩
     have h := hbound z hz m hpos q 1 0 (by norm_num)
-    simpa only [mixedDerivative, iteratedDeriv_one, iteratedDeriv_zero,
-      hrefzero, sub_zero, hcell, f] using h
-  have hjump := n04PositiveGeometry_endpointJump_le hy.2
-    hfsmooth.continuous.continuousOn
-    (hfsmooth.differentiable (by simp)).differentiableOn hderiv
-  rw [hfmid, sub_zero, hfend] at hjump
+    have he : |deriv f y| =
+        |mixedDerivative 1 0
+          (fun p => G.atomFamily η .inverseAngleDefect z m p -
+            G.atomRef η .inverseAngleDefect m p) q.val| :=
+      first_radialJet_reference_zero (G.atomFamily η .inverseAngleDefect z m)
+        (G.atomRef η .inverseAngleDefect m) hrefzero y θ
+    have hcost := congrArg (fun c : ℕ =>
+      B * G.W.U.E0 (G.W.U.sample c) ^ B *
+        G.W.U.H (G.W.U.sample c) ^ (3 / 4 : ℝ) *
+        parameterGrading (G.S η) (1 + loss) z) hcell
+    exact he.le.trans (h.trans_eq hcost)
   have hscale : parameterGrading (G.S η) (1 + loss) z =
       a * parameterGrading G.W.S (1 + loss)
         (n04PositiveGeometry_circleDirection G.W.hS k, 0) :=
     n04PositiveGeometry_circleDirection_parameterGrading G.W.hS k (1 + loss) ha.le
-  rw [hscale] at hjump
-  apply n04PositiveGeometry_cancel_amplitude ha
-  calc
-    a ≤ (B * G.W.U.E0 (G.W.U.sample (G.X.cell i)) ^ B *
-        G.W.U.H (G.W.U.sample (G.X.cell i)) ^ (3 / 4 : ℝ) *
-        (a * parameterGrading G.W.S (1 + loss)
-          (n04PositiveGeometry_circleDirection G.W.hS k, 0))) *
-        (1 - G.Y i (buffer.centerRight i)) := hjump
-    _ = (B * G.W.U.E0 (G.W.U.sample (G.X.cell i)) ^ B *
-        G.W.U.H (G.W.U.sample (G.X.cell i)) ^ (3 / 4 : ℝ) *
-        parameterGrading G.W.S (1 + loss)
-          (n04PositiveGeometry_circleDirection G.W.hS k, 0) * a) *
-        (1 - G.Y i (buffer.centerRight i)) := by ring
+  exact scalar_endpoint_cost ha hy.2 hfsmooth hfmid hfend hderiv
+    (scalar_cost_homogeneous hscale)
 
 end N04RealizationGauge
 

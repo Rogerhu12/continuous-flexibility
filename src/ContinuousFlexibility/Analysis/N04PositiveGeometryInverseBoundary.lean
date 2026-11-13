@@ -115,10 +115,12 @@ column and every positive canonical point, including both boundaries. -/
 theorem n04PositiveGeometry_inverseAngle_reference_zero
     (href : G.τ (G.W.C.referenceState, 0) i = id) (p : PolarPoint) :
     G.atomRef η .inverseAngleDefect m p = 0 := by
-  change atom G.W.D G.W.U (G.S η) (G.C η) (G.L η) (G.V η)
-    (G.W.C.referenceState, 0) m .inverseAngleDefect p = 0
-  rw [G.n04PositiveGeometry_inverseAngle_formula η m i hi, href]
-  exact sub_self _
+  have ht : (G.τ (G.W.C.referenceState, 0) i
+      (Function.invFun (G.Y i) p.1, p.2)).2 = p.2 :=
+    congrArg (fun F : PolarPoint → PolarPoint =>
+      (F (Function.invFun (G.Y i) p.1, p.2)).2) href
+  exact (G.n04PositiveGeometry_inverseAngle_formula η m i hi (G.ref η) p).trans
+    (sub_eq_zero.mpr ht)
 
 /-- Matching prescribes zero angular defect at every physical radius
 where the transport has its middle identity germ. -/
