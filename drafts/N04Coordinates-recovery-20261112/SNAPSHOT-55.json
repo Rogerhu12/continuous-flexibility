@@ -1,0 +1,142 @@
+{
+  "schema": "n04-recovery-snapshot/v1",
+  "snapshot": 55,
+  "created_at": "2026-11-13 02:19:18 UTC",
+  "parent": "679ac5a8189ffc3b87a9e8fc0a8fff43d9547888",
+  "additional_parent": "fe9c74978f5e639bd6d0963516e231ef6bb9f4f0",
+  "compiled_baseline": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "compiled_baseline_tree": "02a8747b6aaae413f67372d96e52ad8f3dbd9e9a",
+  "source_index": {
+    "path": "drafts/N04Coordinates-recovery-20261112/SOURCE-INDEX.json",
+    "blob": "650741c2c64d440b9d63f0b96b807d4b61924560",
+    "sha256": "451162704218b49af6307e2415062e560899b8277ac168d63a81f2b2719bee52",
+    "bytes": 1714174,
+    "entries": 3377,
+    "new": 11,
+    "updated_historical": 1
+  },
+  "artifacts": [
+    {
+      "name": "root/state/Backup54PushReceipt.json",
+      "blob": "a2a270653ec6e273e9fe89d64c6136952fd92c6d",
+      "sha256": "b509b48d5ca1fc3e363d2d5f687fa648d282810c720dbd0565a96d7661774fa9",
+      "bytes": 928,
+      "lines": 25
+    },
+    {
+      "name": "positive/repair185/CircleShiftedForwardFixedBaseBoundsCandidateManifest.json",
+      "blob": "70bcdf7013e2fff180d1c47bc221bf201f077c66",
+      "sha256": "5013cc8a2bdba7f37e72678aa8b6499f9be2ceae3182906b739407744930c30b",
+      "bytes": 11794,
+      "lines": 198
+    },
+    {
+      "name": "positive/repair185/CircleShiftedForwardFixedBaseBounds.patch",
+      "blob": "b19b1c8c319da49259f09b0a79cced5596a69969",
+      "sha256": "513365ada7b5491e79d599134f079feb6d0e675bc62a614fd6f83ae3623caf6a",
+      "bytes": 9557,
+      "lines": 177
+    },
+    {
+      "name": "quantitative/recovery/reviews/CI185CircleShiftedForwardFixedBaseBoundsIndependentReview.json",
+      "blob": "5d6bedbcf87956b4362bbe711b04c7e1b4c3dd97",
+      "sha256": "cc6a15e2ba69399e283d384685384a405a116e8c3eb4fdde6d4c73e23ca690ba",
+      "bytes": 8262,
+      "lines": 162
+    },
+    {
+      "name": "positive/repair185/CircleShiftedForwardFixedBaseBoundsReviewedManifest.json",
+      "blob": "79edab512f28fc1fcdd38b6372d5907bbffe5161",
+      "sha256": "b4642a88287e8c3095ad1960d7d2e9276d8b537a477d7272c15f00b1f6a4c1ff",
+      "bytes": 5983,
+      "lines": 105
+    },
+    {
+      "name": "root/ci/CI186StagingPlan.json",
+      "blob": "02f97a8841d8e86b288bf8c5c32ea5364cdbf795",
+      "sha256": "e4eb1b04cd8d3a61cac29490c5af313ab32fceea136490b37bc064d3af6e5a96",
+      "bytes": 2955,
+      "lines": 72
+    },
+    {
+      "name": "root/ci/CI186PushReceipt.json",
+      "blob": "d5212177108cc2f4fb20d2f19e70c3c75884434c",
+      "sha256": "5434447f80f2a3a20d622e3f5b83195097645593535355914ed0fecb0c3ef867",
+      "bytes": 728,
+      "lines": 19
+    },
+    {
+      "name": "audit/recovery/ReferencePrincipal134MinimalHeldClosure.json",
+      "blob": "97e7e76bb4fd4791ce8fe6b64488978938b6eab0",
+      "sha256": "f3914753736ba4290f3ddfbcc0239f9f9ef6d676aae81990131a2ae448068d13",
+      "bytes": 9529,
+      "lines": 265
+    },
+    {
+      "name": "quantitative/recovery/FullForwardToActualResidualForcingCommonNeighborhood.json",
+      "blob": "f9f7b0eae0dc990a0ffb00171e4cf23ffa92295c",
+      "sha256": "c010bc1086b2710fb2b2d3c4c20f9a5246acd09ed260eeb8b8c1d0cbfddc5782",
+      "bytes": 7767,
+      "lines": 118
+    },
+    {
+      "name": "positive/reconstructed/CircleShiftedFullForwardFixedBaseBoundsCI186ProviderBinding.json",
+      "blob": "1590f632ae7a449fae21d669092f6c255c418f7f",
+      "sha256": "1cd967953e24965ae8dfb7e78b203ee9c43f9562b9f199f2909e8dc443fddc65",
+      "bytes": 6206,
+      "lines": 119
+    },
+    {
+      "name": "root/state/CRITICAL-current.json",
+      "blob": "3e0b385533f03ea79310901dedcffcc5790c5e23",
+      "sha256": "58859acea8ad55d5bc74bbe4a74f6dabb18d34d4ccf825294ad0470c3acd84ad",
+      "bytes": 6993,
+      "lines": 140
+    }
+  ],
+  "outside_archive": {
+    "exact_target": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+    "paths": 4933,
+    "changed_since54": 0
+  },
+  "active": {
+    "schema": "n04-ci-push-receipt/v1",
+    "round": 186,
+    "repository": "Rogerhu12/continuous-flexibility",
+    "branch": "line/N04Coordinates",
+    "parent": "ac176dbd9f00a76e7c1ec1c0d7c97bdb93626f5c",
+    "commit": "fe9c74978f5e639bd6d0963516e231ef6bb9f4f0",
+    "tree": "b647959a51f28b0ef5b9a3ca22758e16efb0563e",
+    "plan": "02f97a8841d8e86b288bf8c5c32ea5364cdbf795",
+    "force": false,
+    "expected_sha_verified": true,
+    "ref_readback_exact": true,
+    "pushed_readback_utc": "2026-11-13 02:17:55 UTC",
+    "earliest_first_ci_lookup_utc": "2026-11-13T02:22:55.000Z",
+    "conservative_active_added": 18591,
+    "actual_retained_upper": 19988,
+    "compilation": "PENDING",
+    "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b"
+  },
+  "budget": {
+    "new_full_Lean_archives": 0,
+    "active201_retained_by_additional_parent": true,
+    "net201_repair": 27,
+    "after182_existing": 19276,
+    "held_selected_lines": 670,
+    "forward_repair_net_since159": 42,
+    "actual_retained_upper": 19988,
+    "remaining": 12,
+    "active_conservative": 18591,
+    "credit_from183_to186": 0
+  },
+  "next84": "84 reviewed sources held for complete186. Exact fullJ206→201 provider binding1590f632 retained; all4886 projected nodes checked against proposed tree. No new mathematical assumption or resource increase.",
+  "endpoint": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open",
+    "proved": 37,
+    "total": 42
+  },
+  "environment": "Local execution unavailable; remote Git persistence only."
+}

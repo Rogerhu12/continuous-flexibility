@@ -1,0 +1,198 @@
+{
+  "schema": "n04-ci-proof-boundary-repair-candidate/v1",
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "artifact_path": "positive/repair185/CircleShiftedForwardFixedBaseBoundsCandidateManifest.json",
+  "active_base": {
+    "head": "ac176dbd9f00a76e7c1ec1c0d7c97bdb93626f5c",
+    "tree": "64a4d0ed5ffafabc9aa75f0811a57809370392ef",
+    "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "85ff989e03a1281fbfbbfb7071a2f866819b581c",
+    "sha256": "db833e98ec374977606ea387ea672d17c91d0a3ff514c5aedba7488227f01a82",
+    "utf8_bytes": 9026,
+    "lines": 174,
+    "final_newline": true,
+    "previous_owner_git_blob": "4d0596cfc70a650c6c66c67a70d84fce1f3ed9dd"
+  },
+  "selected": {
+    "path": "positive/repair185/CircleShiftedForwardFixedBaseBounds.lean",
+    "intended_path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "b2300d35aed5ebeddd53ac2f1da6e1081a461759",
+    "sha256": "557f8db08e4ad547ec9460b2babc388b1474aad72254686d618b0282dc911700",
+    "utf8_bytes": 10399,
+    "lines": 201,
+    "final_newline": true
+  },
+  "patch": {
+    "git_blob": "b19b1c8c319da49259f09b0a79cced5596a69969",
+    "sha256": "513365ada7b5491e79d599134f079feb6d0e675bc62a614fd6f83ae3623caf6a",
+    "utf8_bytes": 9557,
+    "lines": 177,
+    "final_newline": true,
+    "hunks": 4,
+    "added_lines": 86,
+    "deleted_lines": 59,
+    "net_lines": 27,
+    "exact_inverse_reconstruction": true
+  },
+  "changes": [
+    {
+      "kind": "private proof boundary",
+      "name": "circleShiftedChartCompose_zero_kernel",
+      "body_original_lines": [
+        44,
+        62
+      ],
+      "body_delta": "Exactly two leading spaces removed per original line; all other 19-line proof bytes unchanged.",
+      "old_block_sha256": "2ec6678726aaf4e17c579c60ef8212800f6afa533d45515441d91f208cec4630",
+      "new_block_sha256": "9b3d0e5e9a4ad58d1e0a426739d2ff7733e729083c063e56ecdcfc2e02fa6731",
+      "purpose": "Separate zero-order decode proof from the successor derivative application; original public zero branch invokes this proved equality after inverseForwardJet_zero."
+    },
+    {
+      "kind": "typed derivative application",
+      "name": "hf",
+      "old_actual_callee": "hasProjectiveLineDerivAt_inverseForwardJet",
+      "same_actual_arguments": true,
+      "target": "HasProjectiveLineDerivAt (fun z : M.Space => inverseForwardJet J n z (Fin.tail v) y) (inverseForwardJet J (n + 1) e (Fin.cons (v 0) (Fin.tail v)) y) e (v 0)",
+      "purpose": "Provide the complete actual derivative type before specializing the unchanged generic theorem."
+    },
+    {
+      "kind": "private proof boundary",
+      "name": "circleShiftedChartCompose_unit_majorant",
+      "body_original_lines": [
+        118,
+        153
+      ],
+      "body_delta": "Exactly two leading spaces removed per original line; all other 36-line proof bytes unchanged. Local tau/P/a and nonnegativity are supplied at this independent declaration boundary.",
+      "old_block_sha256": "41cf55807e67427892e8dd62c0854cc0617f371791a84fcec99f558cdd3e06e5",
+      "new_block_sha256": "2430028e70dd25e3c2586c4e9709d9ce9b3223c4247e8c50a12a3cafc2c6cf15",
+      "purpose": "Move the actual translation contraction, finite product estimate and majorant algebra out of the public bound declaration. The public theorem still performs the same kernel selection, same C*R^(n+1) choice, same-J identity, and original source-only continuous multilinear normalization."
+    }
+  ],
+  "complete_public_headers": [
+    {
+      "name": "circleShiftedChartCompose_orderedJet_eq_kernel",
+      "header": "theorem circleShiftedChartCompose_orderedJet_eq_kernel\n    (travel : ℕ → ℝ) {U : Set M.Space} (hU : IsOpen U)\n    (J : SmoothDirections (U ×ˢ univ) (fun z : M.Space × M.Space =>\n      circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2))\n    (n : ℕ) :\n    ∀ e ∈ U, ∀ (v : Fin n → M.Space) (y : M.Space),\n      inverseForwardJet J n e v y =\n        coupledCircleKernel hD hT hγ hM hI n n e\n          (circleTranslationContinuousLinear hM hT hD hγ travel y) v"
+    },
+    {
+      "name": "circleShiftedChartCompose_orderedJets_fixedBase_bound",
+      "header": "theorem circleShiftedChartCompose_orderedJets_fixedBase_bound :\n    ∃ base loss : ℕ, ∀ (n : ℕ) (R : ℝ), 1 ≤ R →\n      ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧\n        ∀ (travel : ℕ → ℝ) (U : Set M.Space) (hU : IsOpen U)\n          (J : SmoothDirections (U ×ˢ univ) (fun z : M.Space × M.Space =>\n            circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2)),\n          ∀ e ∈ U, M.grading base e ≤ R → ∀ v : Fin n → M.Space,\n            (∀ i, M.grading base (v i) ≤ R) → ∀ y : M.Space,\n              M.grading s (inverseForwardJet J n e v y) ≤ C *\n                ((1 + M.grading (s + (n + loss)) e +\n                    ∑ i, M.grading (s + (n + loss)) (v i)) * M.grading base y +\n                  M.grading (s + (n + loss)) y)"
+    }
+  ],
+  "same_existing_public_headers": true,
+  "same_imports": [
+    "ContinuousFlexibility.Analysis.TameInverseExpressions",
+    "ContinuousFlexibility.Analysis.CoupledCircleCompositionCurveDerivative",
+    "ContinuousFlexibility.Analysis.CircleTranslationUniformBounds",
+    "ContinuousFlexibility.Analysis.TameMultilinearNormalization"
+  ],
+  "same_options": true,
+  "same_local_product_instance": true,
+  "unchanged_blocks": [
+    "Successor kernel derivative, germ and uniqueness argument after typed hf",
+    "Public base/loss choice and quantifier order",
+    "Entire final source-only continuous multilinear normalization block",
+    "Same shifted chart, same travel, same genuine J, same R^(n+1) constant"
+  ],
+  "direct_actual_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.TameInverseExpressions",
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseExpressions.lean",
+      "ref": "ac176dbd9f00a76e7c1ec1c0d7c97bdb93626f5c",
+      "git_blob": "14ad46cae7d92dca46f5efd006f5260873046713",
+      "sha256": "5f19c405b830b56e9ad43319b2e9b306af3a27d840167fc29d592e9b9edaec56",
+      "utf8_bytes": 22877,
+      "lines": 490,
+      "final_newline": true,
+      "checked": "Exact CI185 source identity read back; unchanged callee signatures, with derivative target and normalization API rechecked."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CoupledCircleCompositionCurveDerivative",
+      "path": "src/ContinuousFlexibility/Analysis/CoupledCircleCompositionCurveDerivative.lean",
+      "ref": "ac176dbd9f00a76e7c1ec1c0d7c97bdb93626f5c",
+      "git_blob": "8ea11ac34960b5ebec1df0085ef1237cda8a8a56",
+      "sha256": "c66b2304951e6d0e2e94b9d83e289447032aa34deed51b27edd537815647980c",
+      "utf8_bytes": 8127,
+      "lines": 166,
+      "final_newline": true,
+      "checked": "Exact CI185 source identity read back; unchanged callee signatures, with derivative target and normalization API rechecked."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleTranslationUniformBounds",
+      "path": "src/ContinuousFlexibility/Analysis/CircleTranslationUniformBounds.lean",
+      "ref": "ac176dbd9f00a76e7c1ec1c0d7c97bdb93626f5c",
+      "git_blob": "29683e9c974fecbcd03fef36251ebb8b0061c485",
+      "sha256": "7ef561296693115b33d9daa18e66efb1778b028ac5d558696449a73af322b79f",
+      "utf8_bytes": 6812,
+      "lines": 144,
+      "final_newline": true,
+      "checked": "Exact CI185 source identity read back; unchanged callee signatures, with derivative target and normalization API rechecked."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "path": "src/ContinuousFlexibility/Analysis/TameMultilinearNormalization.lean",
+      "ref": "ac176dbd9f00a76e7c1ec1c0d7c97bdb93626f5c",
+      "git_blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "utf8_bytes": 9718,
+      "lines": 204,
+      "final_newline": true,
+      "checked": "Exact CI185 source identity read back; unchanged callee signatures, with derivative target and normalization API rechecked."
+    }
+  ],
+  "additional_unchanged_provider": {
+    "module": "ContinuousFlexibility.Analysis.CoupledCircleCompositionRealization",
+    "git_blob": "c0b4ada33ad03e522aed5a3a52d8ef461bec9be3",
+    "sha256": "08ae5c8b3e993e1db595d5a4ee79e5711910bfac1f89a7871d7a42ced29223f0",
+    "utf8_bytes": 7809,
+    "lines": 151,
+    "final_newline": true,
+    "scope": "Existing kernel/majorant definitions and global fixed-base supplier; no new import."
+  },
+  "ci": {
+    "round": 185,
+    "run": 43348582859,
+    "job": 131633809897,
+    "complete_error_json_git_blob": "17e7185894d1cbbcee11bffbc8b3d6c3a0066fd0",
+    "complete_error_json_sha256": "632d76dd712c790bb90b5e1250b91e3decb17a02b7ba6809dae0adf616f61b33",
+    "joblog_git_blob": "bf85be1f2a8fa0a4ca7476aafe5b7f971107f56a",
+    "joblog_sha256": "735c42f163377d77f13da46a5b8d4ccd31dff6020c19dfcfe06f24b85dbdc6dd",
+    "diagnostics": [
+      {
+        "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:65:15: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached",
+        "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:65:15: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+        "lines": 5
+      },
+      {
+        "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:80:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached",
+        "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:80:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+        "lines": 5
+      }
+    ],
+    "completeness": "Both emitted error blocks are complete five-line timeout diagnostics; no40-line truncation or omitted goal. Original completed job log downloaded once; no artifact needed."
+  },
+  "performance_statement": "The complete diagnostics show default-budget timeouts only. They do not prove a specific cumulative-budget cause. These opaque theorem boundaries reduce declaration-local proof work without modifying resources; actual elaboration performance requires the next root-owned CI.",
+  "budget": {
+    "net_new_Lean_lines": 27,
+    "selected_lines": 201,
+    "parent_reported_before": 19961,
+    "proposed_after": 19988,
+    "remaining": 12,
+    "do_not_duplicate_Lean_archive": "Use exact patch/source identities and root-owned active commit history; no second archived .lean copy is requested."
+  },
+  "invariants": {
+    "same_witnesses": true,
+    "same_tower": true,
+    "same_base_loss_order": true,
+    "same_source_normalization": true,
+    "same_material_weight": true,
+    "no_added_assumptions": true,
+    "no_resource_or_transparency_changes": true,
+    "no_local_Lean_or_elaboration": true,
+    "no_active_ref_or_index_changes": true,
+    "no_CI_query_or_download": true
+  },
+  "persistence": "Git blob source and patch were fetched back as exact UTF-8 bytes; no local-file availability claim.",
+  "peer_review": "PENDING_FULL_SOURCE_AND_EXACT_DELTA_REVIEW"
+}

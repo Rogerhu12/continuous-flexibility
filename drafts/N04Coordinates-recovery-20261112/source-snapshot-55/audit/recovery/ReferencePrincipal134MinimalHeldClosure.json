@@ -1,0 +1,265 @@
+{
+  "schema": "n04-minimal-existing-held-closure/v1",
+  "artifact_path": "audit/recovery/ReferencePrincipal134MinimalHeldClosure.json",
+  "author": "/root/audit_coordinates",
+  "status": "READ_ONLY_EXISTING_OWNER_RECOVERY_AND_IMPORT_CLOSURE_NOT_ACTIVATION",
+  "baseline": {
+    "head": "ac176dbd9f00a76e7c1ec1c0d7c97bdb93626f5c",
+    "tree": "64a4d0ed5ffafabc9aa75f0811a57809370392ef",
+    "CI185": "failed, per root; no reviewer CI query"
+  },
+  "reuse": {
+    "index53": "5913505b96210f2776f8ec3ce69d04dd080befea",
+    "index53_sha256": "8ccd97ff75b5bc147365081a3cf934541e8cefa45fc66a96c99ad66692f72141",
+    "reference161_inventory": "85b9de7b007ad4bbacc6534f62b94ed6d5779da1",
+    "reference_two_batches": "170b0a0717f1275be27271a136533996c8f2584d"
+  },
+  "module_prefix": "ContinuousFlexibility.Analysis.",
+  "node_columns": [
+    "module_suffix",
+    "git_blob",
+    "sha256",
+    "lines",
+    "owner_key",
+    "project_import_suffixes"
+  ],
+  "nodes": [
+    [
+      "PositiveComponentSimpleProfileLower",
+      "195f76dc5cdef33a628021f6b41b34190914bf6f",
+      "1daae7132a2cae409c1a685b16932ed3148e5b30a54ab928c2112c82c8528180",
+      152,
+      "simple",
+      [
+        "PositiveComponentEndpoints"
+      ]
+    ],
+    [
+      "RetainedPositiveGapProfileLower",
+      "0ae92eed4b262407ea61466f05f7db0061abcfd6",
+      "5c930735ba24681e737119b0395bcea1aaf2030950746ee9623102d4baf2de46",
+      184,
+      "gap",
+      [
+        "RetainedMorsePositiveGapComponents",
+        "RetainedMorsePositiveGapMaterialWidth"
+      ]
+    ],
+    [
+      "RetainedPositiveComponentProfileLower",
+      "acbf48810b111be8060c03c10a7adbd2bda15520",
+      "776135cda63374b488f048b3b44a178f29648497446daac2a5821e275427972e",
+      122,
+      "component",
+      [
+        "PositiveComponentSimpleProfileLower",
+        "RetainedPositiveGapProfileLower",
+        "RetainedPositiveComponentClassification",
+        "RetainedPositiveComponentInteriorEndpoints",
+        "PositiveComponentMaterialCell",
+        "MaterialGlobalEndpointModels"
+      ]
+    ],
+    [
+      "ActualPositiveReferencePrincipalMaterialCost",
+      "3cd6145e53cc9c4fd121b77c76eb3721c32ef6bc",
+      "1f3198433fddcb8aa95c50fe396055d5e69fdde24803291a9c7765f021bbfea6",
+      194,
+      "cost",
+      [
+        "RetainedPositiveComponentProfileLower",
+        "ActualPositiveReferenceAllOrderMaterialJets",
+        "PositiveReferencePrescribedCosts",
+        "MaterialEnvelopeNormalization"
+      ]
+    ],
+    [
+      "PositiveReferencePhysicalLower",
+      "67eb210bafb8b58d25ddacf80d44fcaf95e86fee",
+      "531eb07e8de402ba9f78121ebc664bd15138cec5d4c5ac3355de97f042ce2f33",
+      116,
+      "lower",
+      [
+        "PositiveChartRangeGeometry"
+      ]
+    ],
+    [
+      "WholeReferenceGaugePrincipalLower",
+      "fe2370ab072d7730e846d1aadf8e8db3881df9f3",
+      "6936771d2cfb7052ededc9ad2c1960b4ffc02689cec69d7300a02612b42339d4",
+      167,
+      "lower",
+      [
+        "PositiveReferencePhysicalLower",
+        "WholeReferenceGaugeReferencePrincipal"
+      ]
+    ],
+    [
+      "ActualPositiveReferencePrincipalAssembly",
+      "9d0581140a551918a113ce17d1d91d8fce474500",
+      "d6e96fa76c5638d8894bdead907acc0d212beb54b1fceec9e9d35724e1976d3a",
+      134,
+      "assembly",
+      [
+        "ActualPositiveReferencePrincipalMaterialCost",
+        "WholeReferenceGaugePrincipalLower"
+      ]
+    ]
+  ],
+  "review_bindings": {
+    "assembly": {
+      "owner": "1ec8dd3cbcf22d253fc2b66b7fbec43b845cdac1",
+      "owner_sha256": "a5cad6b227cff211701c6228d4605144981529248d763512b82eb7f9366beac9",
+      "peer": "c13dba1b4bd1d78334bc855aa605e71fe7755a2a",
+      "peer_sha256": "95178885d0dce94f101f4ad366ae611e0bd6b2f575124d6b0c311dcfd6757ce3"
+    },
+    "cost": {
+      "owner": "b636f1aa513842f26963bd8ba149710a33df7cae",
+      "owner_sha256": "1320524470122e86d78316c4ebda674c77f8e29b7e5e6af66ddd5bde5a86b043",
+      "peer": "2ab1cb21e37308cc338edad9ffdf78e2ed65c0c1",
+      "peer_sha256": "60e5e62cdb89ae6753eb6e87f0c104203981a61c8f1a183a170beb14344ceb8e"
+    },
+    "lower": {
+      "owner": "32c60cdfe32ef64fde942108783b38a76868bd34",
+      "owner_sha256": "7eddcd6143eb29d138d562f225d603af46079a7169c6757f9f14ef354c81c68e",
+      "peer": "2fc5f6f8a434e5b47c9343323751a3aa0129078f",
+      "peer_sha256": "2c479b4f7c1f192c358b436cb3defdc40adb1c25fe2cb2675790b2223c0133af"
+    },
+    "component": {
+      "owner": "313d8b3bdf0334ac897d987030a1c5cd507f71fd",
+      "owner_sha256": "1520e342e7f54d45cd8137b3abb7001ba1d6aeaac6e23f6a39f6b79b04eef1ee",
+      "peer": "2e10933328c330ec0721c6c18ea1af87c8ecd941",
+      "peer_sha256": "3935e8bfef3e30623caf6e988be45ed6474527245d86664faa60b1075e157146"
+    },
+    "simple": {
+      "owner": "c61b024adc822c2479554d7eace5f63301c9913c",
+      "owner_sha256": "950192ba62841e50f7edffd4d1526a2e14af74227f5475a2b95fc53a58c182b4",
+      "peer": "04acbf880e56cdf6bde7cc8ebdc998f2aaead1f6",
+      "peer_sha256": "3504a3713f6aa25ba848c796c959c6095db387bd38c4a99087aaf7d75bbea95d"
+    },
+    "gap": {
+      "owner": "5c718b72aeacee76b032995e783a52405905313c",
+      "owner_sha256": "0ad5f102f13831f54b5fbe9201bc7a36c5ea337313c9d3ed5c71a17ed90b20a9",
+      "peer": "d4a055ab96d305ca7ba9e406686383e536e878ec",
+      "peer_sha256": "80a5e05c44ea51f2a68c13eb85dca64cceb2ec05669e61419a117f0ab621922e"
+    }
+  },
+  "boundary_columns": [
+    "module_suffix",
+    "selected_source_group",
+    "git_blob"
+  ],
+  "boundary": [
+    [
+      "PositiveComponentEndpoints",
+      "actual185",
+      "85ac7d7b23c9e63f59e25e0d0281fd5106fb7527"
+    ],
+    [
+      "RetainedMorsePositiveGapComponents",
+      "reference_batch85",
+      "de884cab00810db8740aa3c40842c774e099c9b2"
+    ],
+    [
+      "RetainedMorsePositiveGapMaterialWidth",
+      "reference_batch85",
+      "ba7c79db478389ae5989fd4fe41be755a89749cb"
+    ],
+    [
+      "RetainedPositiveComponentClassification",
+      "reference_batch85",
+      "59fdc8ca30daf6b573d27dcdc17bf458116f5a98"
+    ],
+    [
+      "RetainedPositiveComponentInteriorEndpoints",
+      "reference_batch85",
+      "f5d74d7c6bd5230ac8af2e12548f9221fb8ea697"
+    ],
+    [
+      "PositiveComponentMaterialCell",
+      "reference_batch85",
+      "9bd8135577563874f4fa614e1af047afd9982d94"
+    ],
+    [
+      "MaterialGlobalEndpointModels",
+      "reference_batch85",
+      "94856c92ba535db174db559d1ab2ddacdf77dfd5"
+    ],
+    [
+      "ActualPositiveReferenceAllOrderMaterialJets",
+      "reference_batch85",
+      "68fb6e0caf22c3154fbc316c22780f4dcbd9b643"
+    ],
+    [
+      "PositiveReferencePrescribedCosts",
+      "reference_batch85",
+      "f50437f2ab563c4e8a8076b803441290ef10a7a2"
+    ],
+    [
+      "MaterialEnvelopeNormalization",
+      "actual185",
+      "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc"
+    ],
+    [
+      "PositiveChartRangeGeometry",
+      "actual185",
+      "37c324a711fd04efbc92d5df436ea670ce0dbfd9"
+    ],
+    [
+      "WholeReferenceGaugeReferencePrincipal",
+      "actual185",
+      "5eddcf61d077190611c1a84cf5b88a132b5573f0"
+    ]
+  ],
+  "checks": {
+    "all7_raw_SHA_and_literal_imports_verified": true,
+    "all6_original_owners_and6_full_peers_fetched_and_SHA_verified": true,
+    "source_matches_original_owner": true,
+    "no_fresh_mathematical_re_review_claim": true,
+    "new7_absent_actual185_and_original161": true,
+    "missing_project_imports": 0,
+    "cycles": 0,
+    "dependency_order": "node order is valid after reference batch85",
+    "minimal_missing_from_actual185": {
+      "files": 82,
+      "source_lines": 11272,
+      "original85_nodes": 75,
+      "extra_nodes": 7,
+      "original76_nodes": 0,
+      "installed_boundary_nodes": 79
+    },
+    "increment_beyond_original161": {
+      "files": 7,
+      "source_lines": 1069,
+      "new_generated_imports": 7,
+      "total": 1076
+    }
+  },
+  "budget_after_prospective84": {
+    "assumed_checked_in_root_lag": 577,
+    "choice": "Append7 in displayed node order after original85; retain original76.",
+    "first": {
+      "files": 92,
+      "source_lines": 12642,
+      "full_root_lag": 669,
+      "total": 13311,
+      "headroom": 6689
+    },
+    "second": {
+      "files": 76,
+      "source_lines": 11611,
+      "full_root_lag": 745,
+      "total": 12356,
+      "headroom": 7644
+    },
+    "excludes": "Unwritten294/151 strengthening deltas, any future source changes, and repair deltas; activation must recompute against its true fullgreen predecessor."
+  },
+  "same_witness_hook": "At294's existing C0/B/hfinite and displayed Y/H, call134 with n=3. Return its Geometry=>ReferencePrincipal continuation before hiding those choices;151 supplies hA and positive epsilon. No new family choice.",
+  "preservation": "Auxiliary-column field copies preserve Principal and Transmission definitionally. T->enlargedMaterialData needs a new small monotonicity proof for Principal's positive denominator (same B/sample/cell); no existing named transport in the recovered package is claimed. Transmission additionally needs the true relative matching supplier, not href alone.",
+  "limits": [
+    "Historical owner/peer receipts remain unchanged; old provider snapshots are not asserted to be actual185. Boundary selects exact actual185 or frozen85 identities explicitly.",
+    "PositiveChartRangeGeometry and WholeReferenceGaugeReferencePrincipal use their reviewed compiled proof successors, not old candidate provider blobs.",
+    "This is an import/ownership recovery, not an ordinary-name gate or whole-source compatibility proof for all seven.",
+    "No Lean file, active tree/index/ref, CI or resource limit was changed."
+  ]
+}

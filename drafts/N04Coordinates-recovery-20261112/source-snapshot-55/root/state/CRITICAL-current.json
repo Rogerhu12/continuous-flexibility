@@ -1,0 +1,140 @@
+{
+  "schema": "n04-live-recovery-state/v1",
+  "as_of": "2026-11-13 02:18:59 UTC",
+  "active": {
+    "schema": "n04-ci-push-receipt/v1",
+    "round": 186,
+    "repository": "Rogerhu12/continuous-flexibility",
+    "branch": "line/N04Coordinates",
+    "parent": "ac176dbd9f00a76e7c1ec1c0d7c97bdb93626f5c",
+    "commit": "fe9c74978f5e639bd6d0963516e231ef6bb9f4f0",
+    "tree": "b647959a51f28b0ef5b9a3ca22758e16efb0563e",
+    "plan": "02f97a8841d8e86b288bf8c5c32ea5364cdbf795",
+    "force": false,
+    "expected_sha_verified": true,
+    "ref_readback_exact": true,
+    "pushed_readback_utc": "2026-11-13 02:17:55 UTC",
+    "earliest_first_ci_lookup_utc": "2026-11-13T02:22:55.000Z",
+    "conservative_active_added": 18591,
+    "actual_retained_upper": 19988,
+    "compilation": "PENDING",
+    "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b"
+  },
+  "last_complete_green": {
+    "head": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+    "tree": "02a8747b6aaae413f67372d96e52ad8f3dbd9e9a",
+    "success": "318abffc005fd4c3069d27066e3ad5c1ad63a7b4",
+    "coverage": "43f48f184f286e81597f12ab2bc242ea369bf271"
+  },
+  "draft_budget": {
+    "guard": 20000,
+    "after_complete182": 19276,
+    "held_actual_sources": [
+      206,
+      286,
+      178
+    ],
+    "forward_net_since159": 42,
+    "actual_retained_upper": 19988,
+    "remaining": 12,
+    "credit_since182": 0
+  },
+  "repository_budget": {
+    "hard_added_Lean_limit": 20000,
+    "active_conservative_since182": 18591,
+    "new_source_lines": 16651,
+    "shared_full": 1447,
+    "whole_root_lag": 493
+  },
+  "failed_repairs": [
+    "183: five diagnostics in AE44/forward159/endpoint115.",
+    "184: AE44 and endpoint115 compiled. Forward171 still two timeout diagnostics.",
+    "185: local product SMul addition174 did not resolve either timeout; fresh0, complete gate failed."
+  ],
+  "current_repair": "201-line proof-boundary repair is independently reviewed and pushed asCI186. Two unchanged public contracts, sameJ and constants; no resource change. Await complete actual CI.",
+  "selected_uncompiled": {
+    "fullJ": {
+      "source": "b0432b0c9033f1655fb127f705c00d772c255a44",
+      "lines": 206,
+      "owner": "58dd5ca292030c3d94ebd92cf812c631c23bdde0",
+      "peer": "1cb80c2fc11ae217e873685b63e91f5d6bf111a8",
+      "recovery": {
+        "base_blob": "52bc280f8a817b5afac75d049e0c5d01d0366997",
+        "selected_blob": "b0432b0c9033f1655fb127f705c00d772c255a44",
+        "patch_blob": "a902fec5bd816a712dc5c2d605d018d3adb39542",
+        "forward_exact": true,
+        "reverse_exact": true,
+        "base_commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
+        "base_path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/positive/working/CircleShiftedFullForwardFixedBaseBounds.lean.txt",
+        "new_Lean_line_delta": 3
+      },
+      "provider_successor_binding": "1590f632ae7a449fae21d669092f6c255c418f7f"
+    },
+    "piece": {
+      "source": "d8f2a72059aea8d0a2a37702ec95cf7017c2f31c",
+      "lines": 286,
+      "owner": "f5517acf2efd614bfcecbc3b3bc7f3eecf5ce4e9",
+      "peer": "7a941317e67fe215d27ae6362a4c7d6b2f37b373"
+    },
+    "global": {
+      "source": "94aa073f7aff6b010b18fa65e26167978711aa5e",
+      "lines": 178,
+      "owner": "d20802922b7a2d856d3a9ab22acc1ca1034503c5",
+      "peer": "de261ed1adae2d1c5ec55686509b589541ad3a96",
+      "remaining": "Common original-E0 exponent1/state/existential transport assembly."
+    }
+  },
+  "next84": {
+    "expected_parent": "fe9c74978f5e639bd6d0963516e231ef6bb9f4f0",
+    "base_tree": "b647959a51f28b0ef5b9a3ca22758e16efb0563e",
+    "entries": 84,
+    "main_sources": 79,
+    "owned_sources": 5,
+    "new_source_lines": 14977,
+    "generated_imports": 4818,
+    "checked_imports": 4241,
+    "full_lag": 577,
+    "conservative_added": 15554,
+    "all_nodes": 4886,
+    "missing": 0,
+    "cycles": 0,
+    "all_retained_and_new_graph_blobs_match": true,
+    "conditional_owned_credit_only_after_complete_CI": [
+      199,
+      184,
+      206,
+      286,
+      178
+    ],
+    "gate": "Complete actual CI186 green, then fresh main/ref and exact source projection. FullJ201 provider binding now frozen.",
+    "old81_peer": "81cdc5264824bac20985257b7812aa36adef475d",
+    "three_layout": "07db1968d6c742312ae36aeb07a8036153569db6",
+    "all_owners_addendum": "c89f356d07d364076f56541d91535496a4005e10",
+    "status": "All84 source/owner/peer bodies and explicit201 rebind ready; held for complete186.",
+    "provider_binding": "1590f632ae7a449fae21d669092f6c255c418f7f"
+  },
+  "same_witness_assembly": {
+    "field_gateway": "Preserve153's actual R/L/chi/j/closedbuffer, shrink base/epsilon for strict cutoff gap, restrict same N02/N03, then opticalFieldRegularity. proof_inventory read-only phase paused for repair.",
+    "Principal": "Actual134(n=3) shares294's chosen C0/B/hfinite and all Y/H lets. Strengthen294 to retain conditional ReferencePrincipal, then151 can discharge using hA and hN.1.1.2.1. Preserve same Y/H through auxiliary replacement. T->enlargedMaterialData needs inverse denominator monotonicity at same B; auxiliary replacement itself definitionally preserves Principal.",
+    "Transmission": "No T or psi dependence; auxiliary replacement preserves it definitionally. Still supply actual relative matching to WholeReferenceGaugeTransmission.actual_transmissionGeometry and the same hfamily4. href alone is insufficient.",
+    "missing_activation": "Actual134 closure recovered exactly:7 additional existing sources1069lines outside prior161 selection. They may follow85 as92sources12642lines before original76. Future root lag must also include intervening84/71 additions. Receipt97e7e76bb4fd4791ce8fe6b64488978938b6eab0.",
+    "R_forcing": "Actual fixed-low-neighborhood route frozen f9f7b0eae0dc990a0ffb00171e4cf23ffa92295c. Strong radial mixed/PDE and finalCurrentJets remain open.",
+    "N03_historical_owner": "Recovered exact old snapshot29 body695afcd519fabd22dc82889b388d78ae57698a25 at34563c9cf53ad95b24e2c22d7f1c1c001559db99/path recorded inindex; no new review implied."
+  },
+  "endpoint": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open",
+    "proved": 37,
+    "total": 42,
+    "exact_target": "theorem N04Coordinates (hN04b : N04bStatement) : N04cStatement",
+    "allowed_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "environment": "Local execution unavailable; no native retries or local writes asserted. Git text/trees/expected refs only; preserve single original completed CI logs before repair. No resource limits/root/STATUS/workflow edits.",
+  "material15_readonly": "Actual negative material comparison131 applies to full closed original component, including moving-half points once71 gives that inclusion. Retain explicitE0(sample)^power from Frechet84; SampleSubpower alone cannot yield E0(point)^power. Actual radius100 already supplies final open-domain pullback."
+}

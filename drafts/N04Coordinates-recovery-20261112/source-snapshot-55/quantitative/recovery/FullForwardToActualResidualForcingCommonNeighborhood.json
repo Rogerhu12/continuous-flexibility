@@ -1,0 +1,118 @@
+{
+  "schema": "n04-readonly-implementation-boundary-delta/v1",
+  "artifact_path": "quantitative/recovery/FullForwardToActualResidualForcingCommonNeighborhood.json",
+  "status": "READ_ONLY_IMPLEMENTATION_BOUNDARY_NOT_A_NEW_PRODUCER",
+  "owner": "/root/quantitative_route",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "reuses": [
+    {
+      "git_blob": "147e5887ac36e6114d9043e2187eb1aeba5873a5",
+      "scope": "same-R endpoint/positive-inverse/ordered-composition chain"
+    },
+    {
+      "git_blob": "5f4f31a241940af33cffb06da8475c75cafa386a",
+      "scope": "actual chi-prime*A*Z identity, cutoff multiplier, radial/sample boundary"
+    },
+    {
+      "git_blob": "072cdd3bd9369eb78720d5d37e30305a88db536f",
+      "scope": "two genuine full-forward operations for the same initial correction"
+    }
+  ],
+  "newly_closed_input": {
+    "module": "CircleShiftedFullForwardFixedBaseBounds",
+    "source": "b0432b0c9033f1655fb127f705c00d772c255a44",
+    "peer": "1cb80c2fc11ae217e873685b63e91f5d6bf111a8",
+    "owner": "58dd5ca292030c3d94ebd92cf812c631c23bdde0",
+    "scope": "Static-reviewed full J bound; selected forward174 has failed performance in CI185 and is being repaired. No completed-CI claim or activation authorization."
+  },
+  "exact_finite_inputs": [
+    {
+      "module": "TameFixedBaseCompositionBounds",
+      "source": "f43a2b774c41da8cc9417051adc8c0a89d3ed04e",
+      "public": "projectiveCompositionJets_fixedBase_oneHigh",
+      "fact": "For inner base BJ/loss d and outer base BK/loss e, the proof chooses B=max BJ (max BP (BK+d(0))) before n. Only then does it choose L(n), before R and s."
+    },
+    {
+      "module": "CirclePositiveInverseFixedBaseBounds",
+      "source": "1f55edbb185fe33327757a087479196cc8565e4f",
+      "public": "circlePositiveInverseComposeLinear_fixedBase_oneHigh",
+      "fact": "One base before all n; loss(n) before R,s; constants before travel and supplied JP. Convert R>=0 to max R 1 without changing base."
+    },
+    {
+      "module": "CircleTravelUniformJets",
+      "source": "ae1370a1c3e76de95577c57de04a220955683512",
+      "public": [
+        "circleUniformInverseDomain",
+        "circleUniformInverseDomain_isOpen",
+        "circleUniformInverseDomain_subset_positive",
+        "mem_circleUniformInverseDomain"
+      ],
+      "fact": "The actual domain is interior{e | forall m theta, a/2 <= 1+deriv(decode e m)theta}. A true lower bound a places e in it; interior_subset supplies lower a/2 on the whole open domain."
+    },
+    {
+      "module": "CanonicalStateInterpolation",
+      "source": "3b016eb8f2348a15d6d9d926ed03881ddc47b747",
+      "public": [
+        "coordinate_hasInterpolation_stateGrading",
+        "coordinate_hasInterpolation_pair",
+        "coordinate_hasInterpolation_realGrading"
+      ],
+      "fact": "Use the retained selected provider. Restrict the actual state grading interpolation estimate to the sector subtype, then pair with realGrading twice to obtain the exact composition input HasInterpolation(pairGrading realGrading p). No new interpolation assumption."
+    },
+    {
+      "module": "StateNeighborhood",
+      "source": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+      "public": [
+        "sectorNeighborhood_mono",
+        "isOpen_sectorNeighborhood"
+      ],
+      "fact": "Increasing the fixed base and decreasing the fixed two radii restricts the original sector neighborhood."
+    },
+    {
+      "module": "N01CircleLinearTame",
+      "source": "60cb27e73d5bac0102e5436d7fad54ae47740532",
+      "public": [
+        "sectorParameter_chart_grading_le",
+        "sectorChartContinuousLinear_tame",
+        "circleOddLinear_tame",
+        "circleEvenLinear_tame"
+      ],
+      "fact": "All are actual maps with zero loss. Use the genuine CLM towers rather than merely the qualitative SmoothTameOn wrapper."
+    }
+  ],
+  "next_minimal_implementation": [
+    {
+      "part": "Actual residual and initial-map finite chain",
+      "scope": "Keep the original hN,hR,C,R,L,chi and supplied towers. Start with the actual uniform-selector endpoint bound. Build u=P_{-travel}(endpoint,ell-endpoint), rho=P_0(odd u,even u), dRight=-P_0(odd u,odd u), w=dRight+F_0(dRight,eInvRight), kappa=ell+F_{-travel}(ell,w). The last two nodes use reviewed206. At each finite composition use332; at inverse nodes use301; the existing152 selector inverse supplies eInvRight. Transfer rho to the already supplied R.residual by its N02 decode equality and uniqueness. Do not call another exists_returnEquation."
+    },
+    {
+      "part": "Actual selector forcing",
+      "scope": "Treat every closed-radius selector as the index I of332. Use e_r, i_r=chi(r)*kappa, a_r=P_{travel_r}(e_r,Dtheta e_r), z_r=P_{travel_r}(e_r,P_0(i_r,kappa)). Then the existing cutoff first-jet CLM applied to z_r+product(a_r,z_r) decodes exactly to chi'(r)*A*Z for the same R. Use the public at_actual displacement identity; no independent-residual average estimate is needed."
+    }
+  ],
+  "single_open_inverse_domain": {
+    "choice": "V=circleUniformInverseDomain H (1/12) times univ, H=S.circle(3/4).",
+    "actual_inputs": "The same retained hflow gives original flow slope>=1/2. Actual rightChartCandidate has slope>=1/3. Actual correction-initial map K has slope>=1/12; 0<=chi<=1 gives interpolation slope (1-chi)+chi*K'>=1/12.",
+    "numerical_supplier": "All actual inverse inputs therefore map into this one V using mem_circleUniformInverseDomain. Every point of V has slope>=1/24; invoke301 at a=1/24. This uses public domain APIs, not301's private common-lower helper. No parameter-order-dependent neighborhood is selected."
+  },
+  "common_low_neighborhood": {
+    "p": "pairGrading (sectorGrading S) realGrading",
+    "choices": "After the fixed finite operation chain, take Bstar to dominate the original base and all resulting fixed operation bases. Let epsstar=min epsilon (1/2), using the original retained epsilon>0.",
+    "domain": "Ustar=sectorNeighborhood S Bstar epsstar epsstar.",
+    "verification": "For x in Ustar, p Bstar x=sectorGrading S Bstar x.1+abs(x.2)<2*epsstar<=1. sectorNeighborhood_mono puts Ustar inside the original U. Hence all strong low-ball estimates can be specialized at R=1 uniformly over x, every selector, and every parameter order.",
+    "witness_rule": "Restrict the original actual towers to Ustar. Do not reconstruct the hN-dependent fields with a newly chosen restricted N01 proof or select a new R/L/chi.",
+    "quantifiers": "Bstar and epsstar are chosen once before k. Only loss(k) is selected after k, before output order s and all selectors. The final constants may depend on k,s; neither Bstar nor epsstar may depend on k or s."
+  },
+  "gain_and_exact_stop": {
+    "angular": "The forcing selector remains in the original H model. circleModel_iteratedDeriv_abs_le gives the actual T.H(T.sample m)^(3/4) factor on every parameter jet, with output grading b+1. The cutoff first-jet CLM adds a fixed one-order shift; this does not alter the low base.",
+    "not_yet_proved": "Radial mixed jets are not consequences of selector-uniform angular estimates. Still required: true same-buffer radial estimates/PDE with explicit spatial derivative accounting, original host sample C.cell m to the actual circle sample comparison, and original G_raw minus chi-prime*A*Z as the inhomogeneous forcing.",
+    "no_false_completion": "No final CurrentJets, corrected coefficient bound, uniform discriminant floor on an entire root half, or global transport certificate is supplied by this record."
+  },
+  "verification": {
+    "new_Lean_lines": 0,
+    "active_or_ref_changes": false,
+    "CI_queries": false,
+    "large_new_graph": false,
+    "final_artifact": "compact delta to existing147e/5f4/072 routes; actual public contracts above were reread"
+  }
+}

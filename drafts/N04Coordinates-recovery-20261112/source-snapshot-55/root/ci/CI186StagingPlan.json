@@ -1,0 +1,72 @@
+{
+  "schema": "n04-single-source-ci-repair-plan/v1",
+  "round": 186,
+  "status": "REVIEWED_PROOF_BOUNDARY_REPAIR",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "branch": "line/N04Coordinates",
+  "parent": "ac176dbd9f00a76e7c1ec1c0d7c97bdb93626f5c",
+  "commit": "fe9c74978f5e639bd6d0963516e231ef6bb9f4f0",
+  "tree": "b647959a51f28b0ef5b9a3ca22758e16efb0563e",
+  "main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "failure": {
+    "receipt": "73ddfdc1a4e332e064a3eaf5113eed1bd1dedace",
+    "diagnostics": "17e7185894d1cbbcee11bffbc8b3d6c3a0066fd0",
+    "original_log": "bf85be1f2a8fa0a4ca7476aafe5b7f971107f56a",
+    "read_complete": true
+  },
+  "source": {
+    "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "before": "85ff989e03a1281fbfbbfb7071a2f866819b581c",
+    "after": "b2300d35aed5ebeddd53ac2f1da6e1081a461759",
+    "lines": 201,
+    "net_added": 27,
+    "candidate": "70bcdf7013e2fff180d1c47bc221bf201f077c66",
+    "patch": "b19b1c8c319da49259f09b0a79cced5596a69969",
+    "peer": "5d6bedbcf87956b4362bbe711b04c7e1b4c3dd97",
+    "owner": "79edab512f28fc1fcdd38b6372d5907bbffe5161"
+  },
+  "change": "Original zero decoder and unit-source finite majorant proofs move to private theorems; successor generic derivative receives its actual expected type. Complete public contracts, witnesses, imports, options, constant choices and source normalization remain unchanged. No performance claim until CI.",
+  "preflight": {
+    "exact_full_tree_one_path": true,
+    "public_headers_identical": 2,
+    "imports_identical": 4,
+    "source_normalization_tail_identical": true,
+    "options_identical": true,
+    "source": "b2300d35aed5ebeddd53ac2f1da6e1081a461759",
+    "mf": "70bcdf7013e2fff180d1c47bc221bf201f077c66",
+    "all_src_nodes": 4802,
+    "project_nodes": 4798,
+    "imports_and_graph_edges_unchanged": true,
+    "missing_imports": 0,
+    "cycles": 0,
+    "all_other_paths_identical_to185": true
+  },
+  "budget": {
+    "conservative_since_complete182": 18591,
+    "new_source_lines": 16651,
+    "shared_full_lines": 1447,
+    "full_root_lag": 493,
+    "precise_added": 16790,
+    "precise_deleted": 255,
+    "repository_limit": 20000,
+    "existing_draft_after182": 19276,
+    "held_fullJ206": 206,
+    "held_piece286": 286,
+    "held_global178": 178,
+    "forward_repair_net_since159": 42,
+    "actual_retained_upper": 19988,
+    "guard": 20000,
+    "remaining": 12,
+    "conditional_complete_group_credit": [
+      201,
+      301,
+      115,
+      152,
+      44
+    ]
+  },
+  "no_credit_yet": true,
+  "CI_gate": "First query at least five minutes after push/readback; subsequent queries at least one minute apart. Complete quick/full/blueprint success required before release. No resource changes.",
+  "next_group": "84 sources held until complete parent green, explicit fullJ206 provider rebinding and fresh main/ref."
+}

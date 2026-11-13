@@ -1,0 +1,25 @@
+{
+  "schema": "n04-recovery-push-receipt/v1",
+  "snapshot": 54,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "commit": "679ac5a8189ffc3b87a9e8fc0a8fff43d9547888",
+  "tree": "55735b59dfa5300e6a191049d8d8dcb1eb3ffafc",
+  "parent": "dd4041719e45f15a77719f508a0cee89db1b36e3",
+  "additional_parent": "ac176dbd9f00a76e7c1ec1c0d7c97bdb93626f5c",
+  "ref_readback_exact": true,
+  "pushed_readback_utc": "2026-11-13 02:09:48 UTC",
+  "blob_paths": 6735,
+  "outside_archive_exact_complete182_paths": 4933,
+  "index": {
+    "blob": "8cdeb5a5bf2ecb77cedd2d6c6b718fc395e2a714",
+    "sha256": "e49ef648444122f88f479e8557add3f80f96981e9f37fbb4b10e110be3f14839",
+    "bytes": 1707254,
+    "entries": 3366
+  },
+  "new_records": 26,
+  "new_full_Lean_archives": 0,
+  "fullJ206_exactly_recoverable": true,
+  "actual_retained_upper_before_unselected201": 19961,
+  "pending201_net": 27,
+  "actual_upper_including_pending201": 19988
+}

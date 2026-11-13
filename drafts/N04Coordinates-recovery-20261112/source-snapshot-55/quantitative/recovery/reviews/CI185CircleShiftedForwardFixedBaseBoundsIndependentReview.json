@@ -1,0 +1,162 @@
+{
+  "schema": "n04-independent-source-repair-review/v1",
+  "reviewer": "/root/quantitative_route",
+  "date_utc": "2026-11-13",
+  "artifact_path": "quantitative/recovery/reviews/CI185CircleShiftedForwardFixedBaseBoundsIndependentReview.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "verdict": "PASS_STATIC_FULL_SOURCE_AND_EXACT_DELTA",
+  "candidate": {
+    "git_blob": "70bcdf7013e2fff180d1c47bc221bf201f077c66",
+    "sha256": "5013cc8a2bdba7f37e72678aa8b6499f9be2ceae3182906b739407744930c30b"
+  },
+  "actual_base": {
+    "head": "ac176dbd9f00a76e7c1ec1c0d7c97bdb93626f5c",
+    "tree": "64a4d0ed5ffafabc9aa75f0811a57809370392ef",
+    "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "85ff989e03a1281fbfbbfb7071a2f866819b581c",
+    "sha256": "db833e98ec374977606ea387ea672d17c91d0a3ff514c5aedba7488227f01a82",
+    "lines": 174
+  },
+  "selected": {
+    "git_blob": "b2300d35aed5ebeddd53ac2f1da6e1081a461759",
+    "sha256": "557f8db08e4ad547ec9460b2babc388b1474aad72254686d618b0282dc911700",
+    "utf8_bytes": 10399,
+    "lines": 201
+  },
+  "patch": {
+    "git_blob": "b19b1c8c319da49259f09b0a79cced5596a69969",
+    "sha256": "513365ada7b5491e79d599134f079feb6d0e675bc62a614fd6f83ae3623caf6a",
+    "hunks": 4,
+    "added_lines": 86,
+    "deleted_lines": 59,
+    "net_lines": 27,
+    "both_directions_reconstruct_exact_bytes": true
+  },
+  "reading_scope": "Read all 201 candidate lines, all 174 actual-base lines, the complete four-hunk patch, candidate manifest, both complete CI185 timeout diagnostics, and the actual four direct-provider contracts used at the changed boundaries. Reused the unchanged fixed-base kernel and normalization review; no new whole-repository or 284-provider audit is claimed.",
+  "actual_path_verification": "Fetched the before source and all four direct providers at ac176dbd9f00a76e7c1ec1c0d7c97bdb93626f5c; independently recomputed Git blob, SHA256, UTF-8 length and line count, matching the manifest.",
+  "direct_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.TameInverseExpressions",
+      "git_blob": "14ad46cae7d92dca46f5efd006f5260873046713",
+      "sha256": "5f19c405b830b56e9ad43319b2e9b306af3a27d840167fc29d592e9b9edaec56",
+      "lines": 490
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CoupledCircleCompositionCurveDerivative",
+      "git_blob": "8ea11ac34960b5ebec1df0085ef1237cda8a8a56",
+      "sha256": "c66b2304951e6d0e2e94b9d83e289447032aa34deed51b27edd537815647980c",
+      "lines": 166
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleTranslationUniformBounds",
+      "git_blob": "29683e9c974fecbcd03fef36251ebb8b0061c485",
+      "sha256": "7ef561296693115b33d9daa18e66efb1778b028ac5d558696449a73af322b79f",
+      "lines": 144
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "git_blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "lines": 204
+    }
+  ],
+  "kernel_supplier": {
+    "module": "ContinuousFlexibility.Analysis.CoupledCircleCompositionRealization",
+    "git_blob": "c0b4ada33ad03e522aed5a3a52d8ef461bec9be3",
+    "sha256": "08ae5c8b3e993e1db595d5a4ee79e5711910bfac1f89a7871d7a42ced29223f0",
+    "checked": "The cached full source identity matches; coupled_circle_kernel_grading_bounds retains base and loss before all r/k/s/R."
+  },
+  "mechanical": {
+    "bidirectional_exact_patch": true,
+    "hunks": 4,
+    "added": 86,
+    "deleted": 59,
+    "public_headers": [
+      {
+        "name": "circleShiftedChartCompose_orderedJet_eq_kernel",
+        "sha256": "343f1f91d75417ce3498c7f0f1ecb087ac5a4a25c8ced93cf4b05167a8cf1858",
+        "bytes": 496
+      },
+      {
+        "name": "circleShiftedChartCompose_orderedJets_fixedBase_bound",
+        "sha256": "9cca6a1573826058359460b0c8f1c9b1ba9c56065831acf75f47145ac84fad38",
+        "bytes": 793
+      }
+    ],
+    "moved_bodies": [
+      {
+        "name": "zero_kernel",
+        "lines": 19,
+        "exact_after_removing_two_indent_spaces": true,
+        "old_sha256": "2ec6678726aaf4e17c579c60ef8212800f6afa533d45515441d91f208cec4630",
+        "new_sha256": "9b3d0e5e9a4ad58d1e0a426739d2ff7733e729083c063e56ecdcfc2e02fa6731"
+      },
+      {
+        "name": "unit_majorant",
+        "lines": 36,
+        "exact_after_removing_two_indent_spaces": true,
+        "old_sha256": "41cf55807e67427892e8dd62c0854cc0617f371791a84fcec99f558cdd3e06e5",
+        "new_sha256": "2430028e70dd25e3c2586c4e9709d9ce9b3223c4247e8c50a12a3cafc2c6cf15"
+      }
+    ],
+    "unchanged_blocks": [
+      {
+        "name": "successor_remainder",
+        "sha256": "50dad617458477d8f9b9005227aaa48aece65e9f40dafe0209c325a69c6ef941"
+      },
+      {
+        "name": "same_constant_selection",
+        "sha256": "394cf70c12e0fe8e57d9d4e15a6ec2d8d998b38eedc019cd74fc82d268dfe588"
+      },
+      {
+        "name": "same_normalization",
+        "sha256": "84f3c7394d1f42b4148cec97b03412c99e556ba5d0010768af1ed7c65f43b69e"
+      }
+    ],
+    "imports_same": true,
+    "options_and_local_instance_same": true,
+    "actual_before_fetched_at_pinned_head": true,
+    "diagnostic_identity_verified": true
+  },
+  "substantive_checks": [
+    {
+      "boundary": "private zero kernel",
+      "result": "PASS",
+      "detail": "The old 19-line decoder proof is identical after removing exactly two leading spaces per line. The new result is precisely the zero-kernel equality after inverseForwardJet_zero; hD/hT/hγ/hM/hI all occur in its result, so the required section parameters are retained. Shift ordering and the same actual translation are unchanged."
+    },
+    {
+      "boundary": "typed successor hf",
+      "result": "PASS",
+      "detail": "The explicit HasProjectiveLineDerivAt target is the literal specialization of hasProjectiveLineDerivAt_inverseForwardJet at x=e, v=Fin.tail v, h=v 0. It agrees with the existing kernel derivative and the same open-U germ. Fin.cons_self_tail closes the identical ordered successor."
+    },
+    {
+      "boundary": "private unit majorant",
+      "result": "PASS",
+      "detail": "The old 36-line finite-product/sum argument is identical after removing two leading spaces. The independent header supplies arbitrary base/H/n, R>=1, the same translated unit source and the same increments. It requires no interpolation hypothesis: hI is neither used nor accidentally omitted. Translation contracts each actual grading; every subset product costs at most R^(n+1), including n=0. Local tau/P/a definitions match the public invocation by definition."
+    },
+    {
+      "boundary": "public choices and source normalization",
+      "result": "PASS",
+      "detail": "Both complete public headers and include hI scope are unchanged. The full base/loss choice prefix, C*R^(n+1), order s+(n+loss), same genuine J/travel/source, and complete final one-source continuous-multilinear normalization block are byte-identical. No assumption, witness, parameter order or high-order factor has been changed."
+    }
+  ],
+  "ci_evidence": {
+    "round": 185,
+    "run": 43348582859,
+    "job": 131633809897,
+    "complete_error_json_git_blob": "17e7185894d1cbbcee11bffbc8b3d6c3a0066fd0",
+    "complete_error_json_sha256": "632d76dd712c790bb90b5e1250b91e3decb17a02b7ba6809dae0adf616f61b33",
+    "diagnostics": [
+      "65:15 deterministic isDefEq timeout, maximum 200000",
+      "80:0 deterministic whnf timeout, maximum 200000"
+    ],
+    "reading": "Both emitted five-line diagnostics read in full; their blob/SHA independently verified. No new job query, download or compilation."
+  },
+  "findings": [],
+  "limitations": [
+    "Static source review only. Successful elaboration and improvement under the unchanged default budget remain for root-owned CI186.",
+    "The observed timeouts do not establish a unique performance cause; the new declaration boundaries are reviewed as proof-preserving changes.",
+    "No local Lean/elaboration, source mutation, active/index/ref/CI action, resource-limit change or added Lean archive."
+  ],
+  "downstream": "Any future selector using the prior174 provider must explicitly bind this201 successor; this receipt does not silently rewrite an older graph."
+}
