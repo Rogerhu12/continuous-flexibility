@@ -89,11 +89,11 @@ theorem CurrentJetDataOn.sourceColumns_mixedDerivative
       n07a_mixedDerivative_mixedDerivative_on hU (h₀.1 m).1 i j r t q.property,
       mixedDerivative_sub_of_contDiffOn hU (h.1 z hz m trivial).1 (h₀.1 m).1
         (i + r) (j + t) q.property]
-  let J : ∀ m (i j : ℕ) (q : unitStrip),
+  let J : ∀ m, True → ∀ (i j : ℕ) (q : unitStrip),
       SmoothDirections (sectorNeighborhood S base ε ε)
         (fun z => mixedDerivative i j
           (fun y => mixedDerivative r t (f z m) y - mixedDerivative r t (f₀ m) y) q.val) :=
-    fun m i j q => (h.2.choose m (i + r) (j + t) q).congrOn
+    fun m hm i j q => (h.2.choose m hm (i + r) (j + t) q).congrOn
       (fun z hz => (he z hz m i j q).symm)
   refine ⟨fun z hz m _ =>
     ⟨contDiffOn_mixedDerivative hU (h.1 z hz m trivial).1 r t,
@@ -111,9 +111,9 @@ theorem CurrentJetDataOn.sourceColumns_mixedDerivative
     have ht := h.2.choose_spec.2 k
     refine ⟨r + t + ht.choose, fun s => ?_⟩
     have hb := ht.choose_spec (s + r + t)
-    refine ⟨hb.choose, hb.choose_spec.1, fun z hz v m _ q i j hij => ?_⟩
-    change |(h.2.choose m (i + r) (j + t) q).D k z v| ≤ _
-    have hb' := hb.choose_spec.2 z hz v m trivial q (i + r) (j + t) (by omega)
+    refine ⟨hb.choose, hb.choose_spec.1, fun z hz v m hm q i j hij => ?_⟩
+    change |(h.2.choose m hm (i + r) (j + t) q).D k z v| ≤ _
+    have hb' := hb.choose_spec.2 z hz v m hm q (i + r) (j + t) (by omega)
     exact n04SourceColumns_shift_bound
       (fun n => oneHighVariationWeight (parameterGrading S) base n z v) _
       s r t ht.choose hb'

@@ -125,7 +125,8 @@ theorem n04SourceColumns_data_of_positive_towers
     fun m i j q => n04SourceColumns_differenceTower hU hΩ (RF m) (h₀ m) i j q.val q.property
   have hvalue := n04SourceColumns_values_of_first_towers hε hE hH RF h₀ hzero hlow
     (hbound 1 zero_lt_one)
-  refine ⟨fun z hz m _ => ⟨(RF m).spatial z hz, hperiod z hz m⟩, JD, hvalue, ?_⟩
+  refine ⟨fun z hz m _ => ⟨(RF m).spatial z hz, hperiod z hz m⟩,
+    (fun m _ => JD m), hvalue, ?_⟩
   intro k
   by_cases hk : k = 0
   · subst k

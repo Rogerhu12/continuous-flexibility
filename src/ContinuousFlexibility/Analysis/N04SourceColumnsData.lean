@@ -85,7 +85,7 @@ def CurrentJetDataOn.sourceColumns_differenceRegularity
     MixedJetRegularity (sectorNeighborhood S base ε ε) unitStrip
       (fun z q => f z m q - f₀ m q) where
   spatial z hz := (h.1 z hz m trivial).1.sub (h₀.1 m).1
-  parameter i j q hq := h.2.choose m i j ⟨q, hq⟩
+  parameter i j q hq := h.2.choose m trivial i j ⟨q, hq⟩
 
 /-- Adding back the fixed reference field reconstructs a genuine tower
 of the current field itself. -/
@@ -95,7 +95,7 @@ def CurrentJetDataOn.sourceColumns_regularity
     MixedJetRegularity (sectorNeighborhood S base ε ε) unitStrip (fun z => f z m) where
   spatial z hz := (h.1 z hz m trivial).1
   parameter i j q hq :=
-    (smoothDirectionsAdd (h.2.choose m i j ⟨q, hq⟩)
+    (smoothDirectionsAdd (h.2.choose m trivial i j ⟨q, hq⟩)
       (smoothDirections_constant (isOpen_sectorNeighborhood S base ε ε)
         (mixedDerivative i j (f₀ m) q))).congr (fun z hz => by
       rw [mixedDerivative_sub_of_contDiffOn (isOpen_Ioo.prod isOpen_univ)
@@ -112,8 +112,8 @@ theorem CurrentJetDataOn.sourceColumns_positive_jet_eq
       (fun z => mixedDerivative i j (f z m) q.val))
     {k : ℕ} (hk : 0 < k) {z : Parameter S}
     (hz : z ∈ sectorNeighborhood S base ε ε) (v : Fin k → Parameter S) :
-    J.D k z v = (h.2.choose m i j q).D k z v := by
-  let K := (h.2.choose m i j q).congr (fun z hz =>
+    J.D k z v = (h.2.choose m trivial i j q).D k z v := by
+  let K := (h.2.choose m trivial i j q).congr (fun z hz =>
     mixedDerivative_sub_of_contDiffOn (isOpen_Ioo.prod isOpen_univ)
       (h.1 z hz m trivial).1 (h₀.1 m).1 i j q.property)
   exact (smoothDirections_D_sub_constant J K hk hz v).symm

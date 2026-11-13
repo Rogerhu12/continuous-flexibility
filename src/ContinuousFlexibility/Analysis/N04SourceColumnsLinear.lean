@@ -56,7 +56,8 @@ theorem CurrentJetDataOn.sourceColumns_congr
         mixedDerivative i j (fun y => g z m y - g₀ m y) q.val :=
     n07a_mixedDerivative_eqOn hU
       (fun _ hy => congrArg₂ (· - ·) (he z hz m hy) (he₀ m hy)) i j q.property
-  refine ⟨?_, fun m i j q => (hf.2.choose m i j q).congr (fun z hz => heJ z hz m i j q),
+  refine ⟨?_, fun m _ i j q => (hf.2.choose m trivial i j q).congr
+    (fun z hz => heJ z hz m i j q),
     ?_, ?_⟩
   · intro z hz m _
     refine ⟨(hf.1 z hz m trivial).1.congr (fun _ hq => (he z hz m hq).symm), ?_⟩
@@ -101,7 +102,7 @@ theorem N04SourceReferenceData.sourceColumns_static
       (0 : ℝ) = mixedDerivative i j (fun y => f₀ m y - f₀ m y) q.val := by
     simp only [sub_self, mixedDerivative_fun_zero]
   refine ⟨fun _ _ m _ => hf.1 m,
-    fun m i j q => (smoothDirections_constant (isOpen_sectorNeighborhood S base ε ε)
+    fun m _ i j q => (smoothDirections_constant (isOpen_sectorNeighborhood S base ε ε)
       (0 : ℝ)).congr (fun z _ => he m i j q z), ⟨0, fun s => ⟨1, zero_lt_one, ?_⟩⟩,
     fun k => ⟨0, fun s => ⟨1, zero_lt_one, ?_⟩⟩⟩
   · intro z hz m _ q i j hij
@@ -138,11 +139,11 @@ theorem CurrentJetDataOn.sourceColumns_constMul
     exact (mixedDerivative_const_mul _ _ _ _ _).symm
   let J : ∀ m i j (q : unitStrip), SmoothDirections (sectorNeighborhood S base ε ε)
       (fun z => mixedDerivative i j (fun y => c m * f z m y - c m * f₀ m y) q.val) :=
-    fun m i j q => (smoothDirections_postcompCLM (hf.2.choose m i j q)
+    fun m i j q => (smoothDirections_postcompCLM (hf.2.choose m trivial i j q)
       ((c m) • ContinuousLinearMap.id ℝ ℝ)).congr (fun z _ => he m i j q.val z)
   have hJ (m i j : ℕ) (q : unitStrip) (k : ℕ) (z : Parameter S)
       (v : Fin k → Parameter S) :
-      (J m i j q).D k z v = c m * (hf.2.choose m i j q).D k z v := by
+      (J m i j q).D k z v = c m * (hf.2.choose m trivial i j q).D k z v := by
     simp only [J, SmoothDirections.congr, smoothDirections_postcompCLM_D_apply,
       smul_apply, ContinuousLinearMap.id_apply, smul_eq_mul]
   let A : ℝ := hc.choose
@@ -172,7 +173,8 @@ theorem CurrentJetDataOn.sourceColumns_constMul
       _ ≤ _ := mul_le_mul_of_nonneg_right
         (mul_le_mul_of_nonneg_right (hp.choose_spec.2 _ (hE m)) hh) hu
   refine ⟨fun z hz m _ => ⟨contDiffOn_const.mul (hf.1 z hz m trivial).1,
-    fun q hq => congrArg (fun x => c m * x) ((hf.1 z hz m trivial).2 q hq)⟩, J, ?_, ?_⟩
+    fun q hq => congrArg (fun x => c m * x) ((hf.1 z hz m trivial).2 q hq)⟩,
+    (fun m _ => J m), ?_, ?_⟩
   · have hv := hf.2.choose_spec.1
     refine ⟨hv.choose, fun s => ?_⟩
     have hs := hv.choose_spec s

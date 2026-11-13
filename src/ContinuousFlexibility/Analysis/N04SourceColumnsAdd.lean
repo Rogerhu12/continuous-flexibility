@@ -90,15 +90,15 @@ theorem CurrentJetDataOn.sourceColumns_add
   let J : ∀ m i j (q : unitStrip), SmoothDirections (sectorNeighborhood S base ε ε)
       (fun z => mixedDerivative i j
         (fun y => (f z m y + g z m y) - (f₀ m y + g₀ m y)) q.val) :=
-    fun m i j q => (smoothDirectionsAdd (hf.2.choose m i j q)
-      (hg.2.choose m i j q)).congr (fun z hz => he z hz m i j q)
+    fun m i j q => (smoothDirectionsAdd (hf.2.choose m trivial i j q)
+      (hg.2.choose m trivial i j q)).congr (fun z hz => he z hz m i j q)
   have hJ (m i j : ℕ) (q : unitStrip) (k : ℕ) (z : Parameter S)
       (v : Fin k → Parameter S) :
-      (J m i j q).D k z v = (hf.2.choose m i j q).D k z v +
-        (hg.2.choose m i j q).D k z v := rfl
+      (J m i j q).D k z v = (hf.2.choose m trivial i j q).D k z v +
+        (hg.2.choose m trivial i j q).D k z v := rfl
   refine ⟨fun z hz m _ => ⟨(hf.1 z hz m trivial).1.add (hg.1 z hz m trivial).1,
     fun q hq => congrArg₂ (· + ·) ((hf.1 z hz m trivial).2 q hq)
-      ((hg.1 z hz m trivial).2 q hq)⟩, J, ?_, ?_⟩
+      ((hg.1 z hz m trivial).2 q hq)⟩, (fun m _ => J m), ?_, ?_⟩
   · have hfv := hf.2.choose_spec.1
     have hgv := hg.2.choose_spec.1
     refine ⟨max hfv.choose hgv.choose, fun s => ?_⟩
