@@ -4,7 +4,14 @@ Date: 2026-11-13. Branch: `line/N04Realization-PulledFields`.
 
 ## Status of this audit
 
-The current PulledFields split does not retain the quantitative reference
+**Update after the task-rule revision `cd7d86b4`:** the line now owns its
+statement and the necessary shared assembly changes. The reference-preserving
+repair described in section 6 is applied to `N04RealizationLeadCurrentSplit`
+and `N04RealizationLeadCurrentProof`; section 9 records the exact changes.
+The historical audit below concerns the original draft. The actual
+PulledFields proof and its complete CI remain in progress.
+
+The original PulledFields split did not retain the quantitative reference
 hypothesis which its parent already has. The available composition estimates
 need that hypothesis. This note identifies the exact quantifier mismatch and
 explains a static-middle reparametrization which is invisible to the supplied
@@ -19,12 +26,13 @@ admissibility condition, and the complete `GeometryData` premise in Lean.
 Accordingly, this note does not mark the blueprint theorem complete or claim
 that the main geometric theorem has been refuted.
 
-No frozen statement is changed by this audit.
+The original audit did not change a statement. The authorized implementation
+update is recorded separately below.
 
 ## 1. The exact clause and where the information is lost
 
 In [N04RealizationLeadCurrentSplit.lean](../../src/ContinuousFlexibility/Analysis/N04RealizationLeadCurrentSplit.lean),
-the frozen clause is:
+the original draft clause was:
 
 ```lean
 def N04RealizationPulledFieldObligation : Prop :=
@@ -468,3 +476,30 @@ This run still failed in the inherited
 complete green CI. The frozen `N04RealizationPulledFields` node remains
 open. Neither this support audit nor the verified conditional assembly
 is a proof or axiom audit of that node.
+
+## 9. Applied reference-preserving split repair
+
+The updated common task gives each line ownership of its subnode statement
+and the required shared definitions and assembly. The implementation now
+adds `G.ReferenceData η`, an abbreviation for the same-atlas `ReferenceJets`
+already present in the parent current obligation.
+
+The positive geometry conclusion, the geometry and field inputs to the
+later subnodes, and the PulledFields conclusion carry this certificate as
+an implication. The selection of the neighborhood still precedes the
+auxiliary column and its certificate. The source and principal conclusions
+retain their existing reference premise. Negative geometry is unchanged
+by this repair.
+
+`n04Realization_currentObligation_of_split` carries these implications
+through neighborhood restriction and union, and discharges them with the
+actual reference certificate supplied by the parent. It still derives
+the exact unchanged `N04RealizationCurrentObligation` from the five subnodes.
+Neither `N04RealizationLeadAssembly.lean` nor the statement
+`N04CoordinatesRealization : N04cStatement` is changed by this repair.
+
+The conditional assembly in section 6 had already verified this information
+flow in a separate namespace. Its successful audit is not completion of
+the actual subnode. The applied shared definitions and the continuing
+quantitative PulledFields proof must still pass the compiler and their
+respective audits.

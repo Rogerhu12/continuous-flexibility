@@ -23,6 +23,8 @@ import ContinuousFlexibility.Analysis.N04PulledFieldsCompositionBudget
 import ContinuousFlexibility.Analysis.N04PulledFieldsMovingPointOneHigh
 import ContinuousFlexibility.Analysis.N04PulledFieldsCompositionCost
 import ContinuousFlexibility.Analysis.N04PulledFieldsSampleTransport
+import ContinuousFlexibility.Analysis.N04PulledFieldsInverseAffineBounds
+import ContinuousFlexibility.Analysis.N04PulledFieldsMovingFamily
 import Lean.Util.CollectAxioms
 
 /-!
@@ -83,3 +85,4 @@ run_cmd do
 #print axioms ContinuousFlexibility.Analysis.n04PulledFields_movingPoint_masked_positive_oneHigh
 #print axioms ContinuousFlexibility.Analysis.n04PulledFields_movingPoint_materialOneHigh
 #print axioms ContinuousFlexibility.Analysis.n04PulledFields_pulledPoint_sample_endpointX
+#print axioms ContinuousFlexibility.Analysis.n04PulledFields_movingFamily_positiveJets

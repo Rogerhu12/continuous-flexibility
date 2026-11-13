@@ -24,12 +24,14 @@ theorem n04PulledFields_isState_false_of_stateArity_zero
     w.isState i = false := by
   have hi : (if w.isState i then 1 else 0 : ℕ) ≤ w.stateArity := by
     rw [w.stateArity_eq_sum]
-    exact Finset.single_le_sum (fun _ _ => Nat.zero_le _) (Finset.mem_univ i)
+    exact Finset.single_le_sum
+      (f := fun j : Fin n => if w.isState j then (1 : ℕ) else 0)
+      (fun _ _ => Nat.zero_le _) (Finset.mem_univ i)
   cases hflag : w.isState i with
   | false => rfl
   | true =>
       have hbad : (1 : ℕ) ≤ 0 := by
-        simpa only [hflag, if_true, hw] using hi
+        simpa only [hflag, ite_true, hw] using hi
       omega
 
 variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
