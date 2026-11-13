@@ -90,7 +90,7 @@ theorem n04PositiveGeometry_inverse_sub_le_forward_discrepancy
     calc
       |x - F (J y)| ≤ |x - y| + |y - F (J y)| := abs_sub_le x y (F (J y))
       _ = |x - y| + |F (J y) - G (J y)| := by
-        rw [abs_sub_comm y, ← hGJ]
+        rw [abs_sub_comm y, hGJ]
   have hdiv : |I x - J y| ≤ (|x - y| + |F (J y) - G (J y)|) / B := by
     apply (le_div_iff₀ hB).2
     simpa only [mul_comm] using h.trans htri

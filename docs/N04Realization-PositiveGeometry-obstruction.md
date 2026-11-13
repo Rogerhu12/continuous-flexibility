@@ -16,11 +16,12 @@ for `.inverseAngleDefect`. It does not rely on estimates for parameter
 derivatives, inverse differentiation, a particular Taylor interpolation, or
 any proposed construction of `τ`, `σ`, or `Q`.
 
-This note gives an ordinary mathematical refutation of the displayed universal
-buffer assertion and records the corresponding source identities. It does not
-claim that Lean has checked the complete theorem
-`¬ N04RealizationPositiveGeometryObligation`. The new supporting Lean modules
-must be compiled and audited separately; the blueprint statement is unchanged.
+This note gives the mathematical refutation of the displayed universal buffer
+assertion and records the corresponding source identities. The proof has also
+been assembled in `Analysis/N04PositiveGeometryObstruction.lean` as
+`n04Realization_not_positiveGeometryObligation`, with the exact conclusion
+`¬ N04RealizationPositiveGeometryObligation`. Its compilation and axiom audit
+remain a separate verification gate; the blueprint statement is unchanged.
 
 ## The exact contracts involved
 
@@ -222,27 +223,33 @@ gap for each index `S₀.chain.index+n`. Their right endpoints are the left
 turns of successive Morse models, which are strictly increasing by
 `morseRealization_turning_component_order` in
 `Analysis/MorseRealizationComponentOrder.lean`. Denote these distinct
-components by `i_n`, `n∈ℕ`.
+components by `i_(n,k)`, `(n,k)∈ℕ×ℕ`, using the natural-number pairing
+function.
 
-Choose the single-component direction `v_n` from §1 for each `i_n`, and put
+Choose the single-component direction `v_(n,k)` from §1 for each component,
+and put
 
 \[
-K_n=1+\sum_{j=0}^{n+1}p_j(v_n)>0,
+K_{n,k}=p_{1+k}(v_{n,k})\ge0,
 \qquad
-\delta_n=
-\frac{1}{(n+1)\bigl(1+E_n^{n+1}H_n^{3/4}K_n\bigr)}>0.
+A_{n,k}=(n+1)E_{n,k}^{n+1}H_{n,k}^{3/4}(K_{n,k}+1),
+\]
+
+\[
+\delta_{n,k}=\frac{1}{A_{n,k}+1}>0.
 \]
 
 These are choices made before any proposed realization, neighborhood, loss,
 or estimate constant. The material floor gives `E_n≥1`; all displayed
-weights are finite and nonnegative.
+weights are finite and nonnegative. In particular,
+`A_(n,k) δ_(n,k) < 1` for every pair.
 
 Start from any allowed buffer `B₀`. Keep `centerLeft`, `normalizationLeft`,
-and `normalizationRight` exactly unchanged. Move only `centerRight i_n`
-toward `r_{i_n}`, far enough that
+and `normalizationRight` exactly unchanged. Move only `centerRight i_(n,k)`
+toward `r_(n,k)`, far enough that
 
 \[
-0<\Delta_n=1-Y_{i_n}(B.centerRight(i_n))<\delta_n.
+0<\Delta_{n,k}=1-Y_{i_{n,k}}(B.centerRight(i_{n,k}))<\delta_{n,k}.
 \]
 
 This is possible by continuity and `Y_i(r_i)=1`. It preserves all strict
@@ -251,45 +258,57 @@ There is no need to discard finitely many support-containing components.
 Use any positive gap budget on the remaining components.
 
 Now suppose the asserted realization exists and take its loss `ℓ` and
-constant `C` for `s=1`. Choose `n` with
+constant `C` for `s=1`. Choose an integer `n>C` and use the component with
+paired index `(n,ℓ)`. Since `E_(n,ℓ)≥1`,
 
 \[
-n+1>C,\qquad n+1\ge 1+\ell.
+C E_{n,\ell}^C H_{n,\ell}^{3/4}p_{1+\ell}(v_{n,\ell})
+\le (n+1)E_{n,\ell}^{n+1}H_{n,\ell}^{3/4}(K_{n,\ell}+1)
+=A_{n,\ell}.
 \]
 
-Then `p_{1+ℓ}(v_n)≤K_n` and `E_n^C≤E_n^{n+1}`. The right side of (*) is
-strictly less than
+The right side of (*) is therefore at most
 
 \[
-\frac{C}{n+1}
-\frac{E_n^{n+1}H_n^{3/4}K_n}
-     {1+E_n^{n+1}H_n^{3/4}K_n}
-\le\frac{C}{n+1}<1,
+A_{n,\ell}\delta_{n,\ell}
+=\frac{A_{n,\ell}}{A_{n,\ell}+1}<1,
 \]
 
 contradicting (*). This rules out every possible positive transport family,
 not merely the existing family selected by the qualitative interpolation
 theorem.
 
-## Supporting Lean work and remaining verification boundary
+## Formal assembly and verification boundary
 
-`Analysis/N04PositiveGeometryBufferFreedom.lean` contains proofs of:
+The proof is split into the following modules under `Analysis/`:
 
-1. smoothness of the scalar coordinate in a cylindrical range certificate;
-2. `Y(right)=1` from the existing two closed range conditions and inverse;
-3. existence of an interior right center with any positive canonical gap
-   budget;
-4. construction of the actual `N04PositiveNormalizationBuffer` with that
-   budget while preserving the normalization intervals and support.
+| Module | Role in the exact contradiction |
+| --- | --- |
+| `N04PositiveGeometryInfiniteComponents` | Embeds `ℕ×ℕ` into actual retained positive components using the original Morse gaps and turning-root order. |
+| `N04PositiveGeometryRightSource` | Uses `W.roots` to select the genuine negative source slot at each right endpoint. |
+| `N04PositiveGeometryCircleVariation` | Builds the permitted single-slot sine direction, enters any positive neighborhood, and computes its inverse label displacement and grading scaling. |
+| `N04PositiveGeometryInverseBoundary` | Identifies the actual inverse-angle atom, its reference value, its middle value, and its source endpoint value. |
+| `N04PositiveGeometryBufferCost` | Proves the mean-value estimate on an open derivative interval and cancels the positive state amplitude. |
+| `N04PositiveGeometryCurrentCost` | Derives (*) from the original `GeometryData` at spatial order one, with the same supplied buffer and original state grading. |
+| `N04PositiveGeometryBufferFreedom` | Moves only the right centers to meet arbitrary positive canonical gap budgets while preserving normalization intervals and support. |
+| `N04PositiveGeometryDiagonalCost` | Constructs the paired-index positive width budgets that defeat every material power and derivative loss. |
+| `N04PositiveGeometryBadBuffer` | Combines the actual components, circle costs, material samples and buffer freedom into a legal buffer violating every necessary uniform cost. |
+| `N04PositiveGeometryObstruction` | Instantiates existing retained start, choice, reference family and enumeration factories, applies the frozen obligation, and derives its negation. |
 
-At the time this note was written these declarations had been written but
-not yet compiled in the local environment. CI is the authority for their
-compilation and axiom audit. The mean-value/diagonal obstruction and the
-actual endpoint/atom identities are being supplied in separate, independently
-checkable modules. Until those modules are assembled into a theorem with
-the exact negated frozen statement, the distinction remains: the argument
-above is a mathematical statement audit, while the repository's original
-positive-geometry blueprint is still open.
+The final theorem uses `n04RealizationStart_nonempty`,
+`n04RealizationChoice_nonempty n04Realization_opticalObligation`,
+`n04Coordinates_exists_positive_reference_family` at order four,
+`n04WholePiece_exists_enumeration`, and the existing normalization-buffer
+existence theorem. It does not assume a new reference estimate, a new physical
+space, or the positive-geometry blueprint theorem. The auxiliary parameter is
+specialized to zero in the asserted `∀ η`.
+
+At this stage the complete proof term has been written, but compilation and
+the final `#print axioms` audit are still being checked through CI. The audit
+must include the unconditional witness factories as dependencies; a successful
+result may contain only `propext`, `Classical.choice`, and `Quot.sound`.
+The original positive-geometry blueprint remains open because its frozen
+statement is the assertion refuted here.
 
 ## Consequence for the intended proof
 

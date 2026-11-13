@@ -111,9 +111,10 @@ theorem n04PositiveGeometry_circleDirection_small
     ∃ a : ℝ, 0 < a ∧ a < 1 ∧
       (a • n04PositiveGeometry_circleDirection hS m, (0 : ℝ)) ∈
         sectorNeighborhood S b ε ε := by
-  obtain ⟨a, ha, ha1, hsmall⟩ := exists_positive_small_seminorm_multiple
+  let h := exists_positive_small_seminorm_multiple
     (sectorGrading S b) (n04PositiveGeometry_circleDirection hS m) hε
-  exact ⟨a, ha, ha1, hsmall, by simpa only [abs_zero] using hε⟩
+  exact ⟨h.choose, h.choose_spec.1, h.choose_spec.2.1, h.choose_spec.2.2,
+    by simpa only [abs_zero] using hε⟩
 
 private theorem real_seminorm_smul
     {E : Type*} [AddCommGroup E] [Module ℝ E]
@@ -222,9 +223,9 @@ theorem n04PositiveGeometry_exists_nontrivial_rootLabel
       n01RootLabel S C
           (liftSectorParameter S C (a • n04PositiveGeometry_circleDirection hS m, 0))
           m false (Real.pi / 4) ≠ Real.pi / 4 := by
-  obtain ⟨a, ha, ha1, hsmall⟩ := n04PositiveGeometry_circleDirection_small hS m b hε
-  refine ⟨a, ha, ha1, hsmall, ?_⟩
-  rw [n04PositiveGeometry_circleDirection_rootLabel_test hS href m a]
-  exact ne_of_gt (lt_add_of_pos_right _ ha)
+  let h := n04PositiveGeometry_circleDirection_small hS m b hε
+  refine ⟨h.choose, h.choose_spec.1, h.choose_spec.2.1, h.choose_spec.2.2, ?_⟩
+  rw [n04PositiveGeometry_circleDirection_rootLabel_test hS href m h.choose]
+  exact ne_of_gt (lt_add_of_pos_right _ h.choose_spec.1)
 
 end ContinuousFlexibility.Analysis
