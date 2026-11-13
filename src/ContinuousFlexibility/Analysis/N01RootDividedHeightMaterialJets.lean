@@ -49,6 +49,39 @@ private theorem unitRootHeight_material_mono
     (add_nonneg zero_le_one (apply_nonneg _ _))
     (mul_nonneg hb (Real.rpow_nonneg (zero_le_one.trans hW) _))
 
+/-- The final scaling for an arbitrary graded state space. All grading
+manipulations happen here, away from the actual state spaces. -/
+private theorem dividedHeight_jet_bound_generic {E : Type} [AddCommGroup E] [Module ℝ E]
+    {p : ℕ → Seminorm ℝ E} (x : E) {outLoss n : ℕ}
+    {F f q : PolarPoint → ℝ} {pt : PolarPoint} {Q BPn W B : ℝ} (hQ : 0 < Q)
+    (hBP : 0 < BPn) (hW : 1 ≤ W)
+    (hf : ContDiffAt ℝ ∞ f pt) (hq : ContDiffAt ℝ ∞ q pt)
+    (he : F =ᶠ[𝓝 pt] fun y => Q * (f y * q y))
+    (hb : ‖iteratedFDeriv ℝ n (fun y => f y * q y) pt‖ ≤
+      BPn * W ^ BPn * (1 + p (n + outLoss) x))
+    (hBdef : B = 1 + (1 + Q) * BPn) :
+    ‖iteratedFDeriv ℝ n F pt‖ ≤ B * W ^ B * (1 + p (n + outLoss) x) := by
+  subst hBdef
+  have hscale : ‖iteratedFDeriv ℝ n (fun y => Q * (f y * q y)) pt‖ =
+      Q * ‖iteratedFDeriv ℝ n (fun y => f y * q y) pt‖ := by
+    have hh := iteratedFDeriv_const_smul_apply' (a := Q)
+      ((hf.mul hq).of_le (by simp : (n : ℕ∞ω) ≤ ∞))
+    simpa only [smul_eq_mul, norm_smul, Real.norm_of_nonneg hQ.le] using congrArg norm hh
+  rw [(he.iteratedFDeriv ℝ n).self_of_nhds, hscale]
+  apply (mul_le_mul_of_nonneg_left hb hQ.le).trans
+  have hQB := mul_pos hQ hBP
+  have hPB : BPn ≤ 1 + (1 + Q) * BPn := by nlinarith only [hQB]
+  have hQPB : Q * BPn ≤ 1 + (1 + Q) * BPn := by nlinarith only [hBP]
+  have hB0 : 0 ≤ 1 + (1 + Q) * BPn :=
+    (add_pos zero_lt_one (mul_pos (add_pos zero_lt_one hQ) hBP)).le
+  calc
+    Q * (BPn * W ^ BPn * (1 + p (n + outLoss) x)) =
+        (Q * BPn) * W ^ BPn * (1 + p (n + outLoss) x) := by ring
+    _ ≤ _ := mul_le_mul_of_nonneg_right
+      (mul_le_mul hQPB (Real.rpow_le_rpow_of_exponent_le hW hPB)
+        (Real.rpow_nonneg (zero_le_one.trans hW) _) hB0)
+      (add_nonneg zero_le_one (apply_nonneg _ _))
+
 theorem n01_rootDividedHeight_unit_rpow_material_jets_of_component_optical
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε K : ℝ}
@@ -233,28 +266,10 @@ theorem n01_rootDividedHeight_unit_rpow_material_jets_of_component_optical
         (zero_le_one.trans (hA k)) (hfloorV j) hWV (le_max_right lossχ lossV) _)) n
   have he : (fun p => rootDividedHeight 1 V G p ^ γ) =ᶠ[𝓝 (0, θ)]
       (fun p => Q * (f p * q p)) := by
-    filter_upwards [hχ.continuousAt.eventually (Ioi_mem_nhds hχpos),
+    filter_upwards [hχ.continuous.continuousAt.eventually (Ioi_mem_nhds hχpos),
       hV.continuousAt.eventually (Ioi_mem_nhds hVpos)] with p hpχ hpV
     exact unitRootHeight_rpow_eq hpV hpχ γ
-  have hscale : ‖iteratedFDeriv ℝ n (fun p => Q * (f p * q p)) (0, θ)‖ =
-      Q * ‖iteratedFDeriv ℝ n (fun p => f p * q p) (0, θ)‖ := by
-    have hh := iteratedFDeriv_const_smul_apply' (a := Q)
-      ((hf.mul hq).of_le (by simp : (n : ℕ∞ω) ≤ ∞))
-    simpa only [smul_eq_mul, norm_smul, Real.norm_of_nonneg hQ.le] using congrArg norm hh
-  change ‖iteratedFDeriv ℝ n (fun p => rootDividedHeight 1 V G p ^ γ) (0, θ)‖ ≤ _
-  rw [(he.iteratedFDeriv ℝ n).self_of_nhds, hscale]
-  apply (mul_le_mul_of_nonneg_left hb hQ.le).trans
-  have hPB : BP n ≤ B n := by
-    dsimp only [B]
-    nlinarith only [mul_pos hQ (hBP n)]
-  have hQPB : Q * BP n ≤ B n := by dsimp only [B]; linarith only [hBP n]
-  calc
-    _ = (Q * BP n) * W ^ (BP n) *
-        (1 + pairGrading (stateGrading S) realGrading (n + outLoss)
-          (z - (C.referenceState, 0))) := by ring
-    _ ≤ _ := mul_le_mul_of_nonneg_right
-      (mul_le_mul hQPB (Real.rpow_le_rpow_of_exponent_le hW hPB)
-        (Real.rpow_nonneg (zero_le_one.trans hW) _) (hB n).le)
-      (add_nonneg zero_le_one (apply_nonneg _ _))
+  exact dividedHeight_jet_bound_generic (z - (C.referenceState, 0)) hQ (hBP n) hW hf hq he
+    hb rfl
 
 end ContinuousFlexibility.Analysis
