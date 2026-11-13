@@ -91,8 +91,8 @@ theorem n04PositiveGeometry_boundaryAngularPullback_word_bound
   have hM0 : 0 ≤ M := zero_le_one.trans hM
   have ht0 : 0 ≤ t := zero_le_one.trans ht
   have ha : N04BoundaryWordBounds Ja K s d x θ P M H t shift :=
-    ((hS 1 le_rfl (by decide)).fixedEvaluation (fun _ => (1, 0)) (fun _ => by simp)).
-      postcompCLM (ContinuousLinearMap.snd ℝ ℝ ℝ) (ContinuousLinearMap.norm_snd_le ℝ ℝ ℝ)
+    ((hS 1 le_rfl (by decide)).fixedEvaluation (fun _ => (1, 0)) (fun _ => by simp)).postcompCLM
+      (ContinuousLinearMap.snd ℝ ℝ ℝ) (ContinuousLinearMap.norm_snd_le ℝ ℝ ℝ)
   have hone : N04BoundaryWordBounds Jone K s d x θ P M H t shift :=
     n04PositiveGeometry_boundaryWord_constant 1 Jone K s d x hx θ P M H t shift
       hM0 hH ht0 (by simpa only [abs_one] using hM)

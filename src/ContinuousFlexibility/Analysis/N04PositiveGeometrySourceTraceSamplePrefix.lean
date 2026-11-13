@@ -47,7 +47,7 @@ theorem n04PositiveGeometry_sourceProjectedTrace_sample_prefix
   intro i side m hm hctx j hj hj4 L hL Q z hz hzlow θ R hR hzR
   let J := n04PositiveGeometry_sourceJet_joint W X hb hε hεW hεone hflow
     i side m hm hctx j hj hj4
-  exact (orderData.choose_spec.2 i side m hm hctx j hj hj4 J z hz hzlow θ R hR hzR).
-    radialProjection (n04PositiveGeometry_source_root_smooth (X := X) hb hεW i side) L hL hz Q
+  exact (orderData.choose_spec.2 i side m hm hctx j hj hj4 J z hz hzlow θ R hR hzR).radialProjection
+    (n04PositiveGeometry_source_root_smooth (X := X) hb hεW i side) L hL hz Q
 
 end ContinuousFlexibility.Analysis
