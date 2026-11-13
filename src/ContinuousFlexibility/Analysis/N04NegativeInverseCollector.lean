@@ -82,7 +82,9 @@ theorem CurrentJetDataOn.negativeInverse_of_joint_prefixes
       (abs_zero : |(0 : ℝ)| = 0).trans_lt hε⟩
   have href (m : ℕ) (hm : P m) : ContDiffOn ℝ ∞ (f₀ m) unitStrip :=
     ((RF m hm).spatial 0 hz₀).congr (fun q hq => (hzero m hm q hq).symm)
-  apply CurrentJetDataOn.negativeInverse_of_positive_prefixes hε hE hH RF hperiod href
+  apply CurrentJetDataOn.negativeInverse_of_positive_prefixes
+    (S := S) (T := T) (cell := cell) (P := P) (base := base) (ε := ε) (f := f) (f₀ := f₀)
+    hε hE hH RF hperiod href
     hzero (fun _ hz => n04NegativeInverse_parameter_low hsmall hz)
   intro k hk
   obtain ⟨shift, hshift⟩ := hraw k hk
@@ -120,7 +122,10 @@ theorem negativeInverse_collect
     cases a <;> first | trivial | exact ha.elim
   have hi : G.NegativeAtomData 0 atomIsNegativeInverse b ε := by
     intro a ha
-    apply CurrentJetDataOn.negativeInverse_of_joint_prefixes hadm.2.1 hsmall
+    apply CurrentJetDataOn.negativeInverse_of_joint_prefixes
+      (S := G.S 0) (T := G.W.U) (cell := (G.V 0).cell) (P := G.Neg 0)
+      (base := b) (ε := ε) (f := G.atomFamily 0 a) (f₀ := G.atomRef 0 a)
+      hadm.2.1 hsmall
       (G.cost_nonneg 0).2.2 (G.cost_nonneg 0).2.1
       (fun m hm => (G.negativeInverseAtomJointTower 0 m hm a ha).restrict (hU.prod hΩ)
         (fun x hx => ⟨hsub hx.1, hx.2⟩))
@@ -133,7 +138,10 @@ theorem negativeInverse_collect
       rw [hlift]
     · exact hatom a ha
   have hh : G.Data 0 (G.Neg 0) b ε (G.pulledHeight 0) (G.pulledHeightRef 0) := by
-    apply CurrentJetDataOn.negativeInverse_of_joint_prefixes hadm.2.1 hsmall
+    apply CurrentJetDataOn.negativeInverse_of_joint_prefixes
+      (S := G.S 0) (T := G.W.U) (cell := (G.V 0).cell) (P := G.Neg 0)
+      (base := b) (ε := ε) (f := G.pulledHeight 0) (f₀ := G.pulledHeightRef 0)
+      hadm.2.1 hsmall
       (G.cost_nonneg 0).2.2 (G.cost_nonneg 0).2.1
       (fun m hm => (G.negativePulledHeightJointTower 0 m hm).restrict (hU.prod hΩ)
         (fun x hx => ⟨hsub hx.1, hx.2⟩))

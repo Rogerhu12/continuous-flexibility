@@ -165,12 +165,18 @@ theorem negativeInverse_collect_joint
       G.Data η (G.Neg η) b ε (G.pulledHeight η) (G.pulledHeightRef η) := by
   apply G.negativeInverse_collect hadm hsmall
   · intro a ha
-    apply n04NegativeInverse_rawPrefixes_of_joint (G.cost_nonneg 0).2.2 (G.cost_nonneg 0).2.1
+    apply n04NegativeInverse_rawPrefixes_of_joint
+      (S := G.S 0) (T := G.W.U) (cell := (G.V 0).cell) (P := G.Neg 0)
+      (base := b) (ε := ε) (f := G.atomFamily 0 a)
+      (G.cost_nonneg 0).2.2 (G.cost_nonneg 0).2.1
       (fun m hm => (G.negativeInverseAtomJointTower 0 m hm a ha).restrict
         ((sectorNeighborhood_isOpen G.W.S b ε ε).prod (isOpen_Ioo.prod isOpen_univ))
         (fun x hx => ⟨sectorNeighborhood_mono G.W.S hadm.1 hadm.2.2.1 hadm.2.2.1 hx.1, hx.2⟩))
     exact G.negativeInverse_atom_jointPrefixes hadm hpoint a ha
-  · apply n04NegativeInverse_rawPrefixes_of_joint (G.cost_nonneg 0).2.2 (G.cost_nonneg 0).2.1
+  · apply n04NegativeInverse_rawPrefixes_of_joint
+      (S := G.S 0) (T := G.W.U) (cell := (G.V 0).cell) (P := G.Neg 0)
+      (base := b) (ε := ε) (f := G.pulledHeight 0)
+      (G.cost_nonneg 0).2.2 (G.cost_nonneg 0).2.1
       (fun m hm => (G.negativePulledHeightJointTower 0 m hm).restrict
         ((sectorNeighborhood_isOpen G.W.S b ε ε).prod (isOpen_Ioo.prod isOpen_univ))
         (fun x hx => ⟨sectorNeighborhood_mono G.W.S hadm.1 hadm.2.2.1 hadm.2.2.1 hx.1, hx.2⟩))
