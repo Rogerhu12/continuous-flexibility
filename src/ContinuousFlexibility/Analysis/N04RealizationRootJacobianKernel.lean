@@ -1,5 +1,5 @@
 import ContinuousFlexibility.Analysis.RootChartExtensionGeometry
-import ContinuousFlexibility.Analysis.N04FlowJetsProof
+import ContinuousFlexibility.Analysis.N04FlowInverseGeometry
 
 /-!
 # The reciprocal determinant of the same unit root chart
@@ -15,7 +15,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Analysis
 
-open Set ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint
+open Set ContinuousFlexibility.Statements
 open scoped ContDiff
 
 private theorem rootJacobian_inverse_le_of_odd_inverse
