@@ -125,7 +125,7 @@ theorem translatedInverseFamily_fixedBase_oneHigh
     (JP.restrict (hU.prod isOpen_univ)
       (fun z hz => ⟨hsub hz.1, hz.2⟩)).hasProjectiveJetsOn JT.hasProjectiveJetsOn n x hxU
   have hvalue : JP.D n x v = τ (JV.D n x v) := by
-    simpa only [JT, SmoothDirections.congr, solveSmoothDirectionsPostcomp,
+    simpa only [JT, SmoothDirections.restrict, SmoothDirections.congr, solveSmoothDirectionsPostcomp,
       ContinuousLinearMap.compContinuousMultilinearMap_coe, Function.comp_apply, Jactual] using
       congrArg (fun A : (E × E) [×n]→L[ℝ] E => A v) hjet
   rw [hvalue]
