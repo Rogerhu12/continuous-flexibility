@@ -80,7 +80,9 @@ private theorem compactFlow_timeChange
     (fun q => hi q.1 q.2) hf'
   refine ⟨hs.comp ((contDiff_fst.prodMk contDiff_snd.snd).prodMk contDiff_snd.fst), ?_⟩
   intro q t α
-  exact scalarFlowTimeChange_hasDerivAt hf' (q, α) t
+  exact scalarFlowTimeChange_hasDerivAt
+    (Θ := fun z : (E × ℝ) × ℝ => Θ z.1.1 z.2 z.1.2)
+    (F := F) (a := 0) (b := 1) hf' (q, α) t
 
 /-- All functions in this package are the same actual ODE solutions.
 The smooth time-changed functions are used only to differentiate them. -/
@@ -138,7 +140,8 @@ private theorem exists_rootPlotFlowData {d c : P × PolarPoint → ℝ}
   have hG : ContDiff ℝ ∞ G := negativeChartRootPlotField_contDiff hd hc δ
   have hperiod (t : ℝ) (q : P × (ℝ × ℝ)) :
       Function.Periodic (fun θ => G (q, (t, θ))) Real.pi :=
-    rootRescaledField_periodic (hdper q.1) (hcper q.1) δ t q.2
+    rootRescaledField_periodic (d := fun p => d (q.1, p))
+      (c := fun p => c (q.1, p)) (T := Real.pi) (hdper q.1) (hcper q.1) δ t q.2
   have hF : ContDiff ℝ ∞ (fun z : ℝ × ((P × (ℝ × ℝ)) × ℝ) =>
       G (z.2.1, (z.1, z.2.2))) :=
     hG.comp (contDiff_snd.fst.prodMk (contDiff_fst.prodMk contDiff_snd.snd))
@@ -215,9 +218,12 @@ theorem fullHalfFields_finiteRootFlow
           d (y, p) = F.fullHalfDrift (x + L y) m side p ∧
           c (y, p) = F.fullHalfSpeed (x + L y) m side p) ∧
       Nonempty (NegativeChartRootFlowData d c δ) := by
-  obtain ⟨d, c, hd, hc, hdp, hcp, hg, hV⟩ :=
-    F.fullHalfFields_finiteAffine_representatives_uniform x hx L m side
-  exact ⟨d, c, hd, hc, hdp, hcp, hg, hV, exists_rootPlotFlowData hd hc hdp hcp δ⟩
+  have hrep := F.fullHalfFields_finiteAffine_representatives_uniform x hx L m side
+  let d := hrep.choose
+  let c := hrep.choose_spec.choose
+  have h := hrep.choose_spec.choose_spec
+  exact ⟨d, c, h.1, h.2.1, h.2.2.1, h.2.2.2.1, h.2.2.2.2.1, h.2.2.2.2.2,
+    exists_rootPlotFlowData h.1 h.2.1 h.2.2.1 h.2.2.2.1 δ⟩
 
 end N04RealizationStart.NegativeOpticalFactors
 end ContinuousFlexibility.Analysis

@@ -165,9 +165,24 @@ theorem negativeInterior_speed_power_bounds
       ‖J.D k z v‖ ≤ C * W.T.E0 (W.negativeHalfSample e m side) ^ A *
         parameterHeightWeight (W.T.H (W.negativeHalfSample e m side) ^ (3 / 4 : ℝ)) k *
           R ^ (((a + b : ℕ) : ℝ) / ((s : ℝ) + 1)) := by
-  obtain ⟨C₀, A₀, hC₀, hA₀, hraw⟩ := G.bounds K s
-  obtain ⟨C₁, A₁, hC₁, hA₁, hhost⟩ := W.interior_host_parameter_weights e A₀ hA₀
-  obtain ⟨C₂, A₂, hC₂, hA₂, hdist⟩ := W.inverse_endpoint_power_material e ρ hρ hρb s
+  have hex₀ := G.bounds K s
+  let C₀ : ℝ := hex₀.choose
+  let A₀ : ℝ := hex₀.choose_spec.choose
+  have hC₀ := hex₀.choose_spec.choose_spec.1
+  have hA₀ := hex₀.choose_spec.choose_spec.2.1
+  have hraw := hex₀.choose_spec.choose_spec.2.2
+  have hex₁ := W.interior_host_parameter_weights e A₀ hA₀
+  let C₁ : ℝ := hex₁.choose
+  let A₁ : ℝ := hex₁.choose_spec.choose
+  have hC₁ := hex₁.choose_spec.choose_spec.1
+  have hA₁ := hex₁.choose_spec.choose_spec.2.1
+  have hhost := hex₁.choose_spec.choose_spec.2.2
+  have hex₂ := W.inverse_endpoint_power_material e ρ hρ hρb s
+  let C₂ : ℝ := hex₂.choose
+  let A₂ : ℝ := hex₂.choose_spec.choose
+  have hC₂ := hex₂.choose_spec.choose_spec.1
+  have hA₂ := hex₂.choose_spec.choose_spec.2.1
+  have hdist := hex₂.choose_spec.choose_spec.2.2
   refine ⟨C₀ * C₁ * C₂, A₁ + A₂,
     one_le_mul_of_one_le_of_one_le (one_le_mul_of_one_le_of_one_le hC₀ hC₁) hC₂,
     add_nonneg hA₁ hA₂, ?_⟩

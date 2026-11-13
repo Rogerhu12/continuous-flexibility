@@ -169,6 +169,15 @@ def negativeHalfFiniteCoefficientBounds (W : N04RealizationStart)
 
 namespace NegativeOpticalFactors
 
+set_option backward.isDefEq.respectTransparency true
+
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+
 variable {W : N04RealizationStart} {e : ℕ ≃ N04PieceIndex W.D}
   {F : NegativeOpticalFactors W e} {base loss : ℕ}
 
@@ -179,9 +188,13 @@ theorem FullHalfFieldPowerControl.finiteRepresentative_prefix
     ∃ base' : ℕ, base ≤ base' ∧ ∀ K : ℕ, ∃ shift : ℕ,
       W.negativeHalfFiniteCoefficientBounds (P := P) e base' base K shift F.fullHalfDrift ∧
       W.negativeHalfFiniteCoefficientBounds (P := P) e base' base K shift F.fullHalfSpeed := by
-  obtain ⟨base', hb, hp⟩ := A.firstSpatial_prefix
-  refine ⟨base', hb, fun K => ?_⟩
-  obtain ⟨shift, hd, hc⟩ := hp K
+  have hbase := A.firstSpatial_prefix
+  let base' := hbase.choose
+  refine ⟨base', hbase.choose_spec.1, fun K => ?_⟩
+  have hp := hbase.choose_spec.2 K
+  let shift := hp.choose
+  have hd := hp.choose_spec.1
+  have hc := hp.choose_spec.2
   have hH (i : ℕ × Bool) (q : PolarPoint)
       (_hq : q ∈ Ioo (0 : ℝ) (W.negativeOpticalWidth i.1 i.2) ×ˢ univ) :
       0 ≤ W.T.H (W.negativeHalfSample e i.1 i.2) ^ (3 / 4 : ℝ) :=
@@ -198,11 +211,11 @@ theorem FullHalfFieldPowerControl.finiteRepresentative_prefix
     (fun _ => isOpen_Ioo.prod isOpen_univ) hH hE
   refine ⟨shift, ?_, ?_⟩
   · intro s
-    obtain ⟨B, hB, hbound⟩ := hdrift s
-    exact ⟨B, hB, fun m side => hbound (m, side)⟩
+    have h := hdrift s
+    exact ⟨h.choose, h.choose_spec.1, fun m side => h.choose_spec.2 (m, side)⟩
   · intro s
-    obtain ⟨B, hB, hbound⟩ := hspeed s
-    exact ⟨B, hB, fun m side => hbound (m, side)⟩
+    have h := hspeed s
+    exact ⟨h.choose, h.choose_spec.1, fun m side => h.choose_spec.2 (m, side)⟩
 
 end NegativeOpticalFactors
 end N04RealizationStart

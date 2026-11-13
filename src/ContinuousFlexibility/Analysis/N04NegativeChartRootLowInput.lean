@@ -23,10 +23,21 @@ theorem negativeRootLabel_low_displacement (W : N04RealizationStart) :
       ∀ z ∈ stateNeighborhood W.S W.C b ε, stateSector W.S z.1 →
       ∀ m side j, j ≤ 2 → ∀ θ,
         ‖iteratedFDeriv ℝ j (fun η => n01RootLabel W.S W.C z m side η - η) θ‖ ≤ L := by
-  obtain ⟨b₀, ε₀, hb₀, hε₀, hεold, hflow⟩ :=
-    exists_ordinaryFlowJacobianBounds_of_n01 W.hT W.through03.1.1
+  have hflowData := exists_ordinaryFlowJacobianBounds_of_n01 W.hT W.through03.1.1
+  let b₀ := hflowData.choose
+  let ε₀ := hflowData.choose_spec.choose
+  have hs := hflowData.choose_spec.choose_spec
+  have hb₀ := hs.1
+  have hε₀ := hs.2.1
+  have hεold := hs.2.2.1
+  have hflow := hs.2.2.2
   have hN := n01Properties_mono W.hT W.through03.1.1 hb₀ le_rfl hεold hε₀
-  obtain ⟨low, loss, B, hB, hb⟩ := n01_rootLabels_displacement_uniform W.hS W.hT hN hflow
+  have hlabels := n01_rootLabels_displacement_uniform W.hS W.hT hN hflow
+  let low := hlabels.choose
+  let loss := hlabels.choose_spec.choose
+  let B := hlabels.choose_spec.choose_spec.choose
+  have hB := hlabels.choose_spec.choose_spec.choose_spec.1
+  have hb := hlabels.choose_spec.choose_spec.choose_spec.2
   let b := max b₀ (max low (2 + loss))
   let ε := min ε₀ (1 / 2 : ℝ)
   let L := 1 + 2 * ∑ j : Fin 3, B j.val
@@ -79,9 +90,25 @@ theorem FullHalfFieldPowerControl.root_low_input
         CSBound 2 (Icc (0 : ℝ) 1 ×ˢ Icc (-1 : ℝ) 1 ×ˢ Icc (-Real.pi) Real.pi)
           (W.negativeRootInverseCoordinate A z m side y)
           (B * W.T.E0 (W.negativeHalfSample e m side) ^ p) := by
-  obtain ⟨C₀, hC₀, hcoef⟩ := Q.root_low_coefficients
-  obtain ⟨bL, εL, L, hbL, hεL, hεLW, hL, hlabel⟩ := W.negativeRootLabel_low_displacement
-  obtain ⟨Cf, ef, hCf, hflow⟩ := n04NegativeChart_normalized_flow_low
+  have hcoefficients := Q.root_low_coefficients
+  let C₀ := hcoefficients.choose
+  have hC₀ := hcoefficients.choose_spec.1
+  have hcoef := hcoefficients.choose_spec.2
+  have hlabels := W.negativeRootLabel_low_displacement
+  let bL := hlabels.choose
+  let εL := hlabels.choose_spec.choose
+  let L := hlabels.choose_spec.choose_spec.choose
+  have hs := hlabels.choose_spec.choose_spec.choose_spec
+  have hbL := hs.1
+  have hεL := hs.2.1
+  have hεLW := hs.2.2.1
+  have hL := hs.2.2.2.1
+  have hlabel := hs.2.2.2.2
+  have hflowData := n04NegativeChart_normalized_flow_low
+  let Cf := hflowData.choose
+  let ef := hflowData.choose_spec.choose
+  have hCf := hflowData.choose_spec.choose_spec.1
+  have hflow := hflowData.choose_spec.choose_spec.2
   let K : ℝ := 1 + ∑ j : Fin 3, 4 * linearWeightedCompositionJetConstant j.val
   have hKn (j : ℕ) : 0 ≤ 4 * linearWeightedCompositionJetConstant j :=
     mul_nonneg (by norm_num) (zero_le_one.trans (one_le_linearWeightedCompositionJetConstant j))
@@ -101,7 +128,12 @@ theorem FullHalfFieldPowerControl.root_low_input
   have henv : HasPositiveEnvelope E M :=
     ⟨K * C₀ + L + 1, C₀, by have hc := hC₀; have hk := hK; have hl := hL; positivity,
       zero_lt_one.trans_le hC₀, fun _ => le_rfl⟩
-  obtain ⟨B, p, hB, hp, hpack⟩ := negativeChartLowInputBound_envelope hE hM henv Cf hCf ef
+  have hbound := negativeChartLowInputBound_envelope hE hM henv Cf hCf ef
+  let B := hbound.choose
+  let p := hbound.choose_spec.choose
+  have hB := hbound.choose_spec.choose_spec.1
+  have hp := hbound.choose_spec.choose_spec.2.1
+  have hpack := hbound.choose_spec.choose_spec.2.2
   let b := max bL (max base (2 + loss))
   let ε := min εL W.negativeHalfStateRadius
   have hε : 0 < ε := lt_min hεL (lt_min (by linarith [W.ε_pos]) (by norm_num))

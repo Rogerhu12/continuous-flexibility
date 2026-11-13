@@ -30,6 +30,8 @@ private theorem envelope_mono {a b E : ℝ} (hab : a ≤ b) (hb : 0 ≤ b) (hE :
 
 namespace N04RealizationStart.NegativeOpticalFactors
 
+set_option backward.isDefEq.respectTransparency true
+
 variable {P : Type} [NormedAddCommGroup P] [NormedSpace ℝ P]
   [FiniteDimensional ℝ P]
   {W : N04RealizationStart} {e : ℕ ≃ N04PieceIndex W.D}
@@ -66,12 +68,20 @@ theorem FullHalfFieldPowerControl.actualRootField_prefix
             parameterHeightWeight (W.T.H (W.negativeHalfSample e m side) ^ (3 / 4 : ℝ)) k *
             R ^ (((j - 1 + shift * k : ℕ) : ℝ) / (((s + shift * K : ℕ) : ℝ) + 1)) := by
   classical
-  obtain ⟨b, hb, hp⟩ := A.finiteRepresentative_prefix (P := P)
-  refine ⟨b, hb, fun K => ?_⟩
-  obtain ⟨shift, hdB, hcB⟩ := hp K
+  have hprefix := A.finiteRepresentative_prefix (P := P)
+  let b := hprefix.choose
+  refine ⟨b, hprefix.choose_spec.1, fun K => ?_⟩
+  have hshift := hprefix.choose_spec.2 K
+  let shift := hshift.choose
   refine ⟨shift, fun s => ?_⟩
-  obtain ⟨Cd, hCd, hdb⟩ := hdB s
-  obtain ⟨Cc, hCc, hcb⟩ := hcB s
+  have hdB := hshift.choose_spec.1 s
+  let Cd := hdB.choose
+  have hCd := hdB.choose_spec.1
+  have hdb := hdB.choose_spec.2
+  have hcB := hshift.choose_spec.2 s
+  let Cc := hcB.choose
+  have hCc := hcB.choose_spec.1
+  have hcb := hcB.choose_spec.2
   let C : ℝ := max Cd Cc
   have hC : 0 < C := hCd.trans_le (le_max_left _ _)
   let Croot : ℝ := ∑ i : Fin (s + 2), 4 * linearWeightedCompositionJetConstant i.val
@@ -82,7 +92,10 @@ theorem FullHalfFieldPowerControl.actualRootField_prefix
     Finset.single_le_sum (f := fun i : Fin (s + 2) =>
       4 * linearWeightedCompositionJetConstant i.val) (fun i _ => hterm i)
       (Finset.mem_univ (⟨j, by omega⟩ : Fin (s + 2)))
-  obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (Croot * C) C
+  have henv := coefficientEnvelope_pack (Croot * C) C
+  let B := henv.choose
+  have hB := henv.choose_spec.1
+  have hpack := henv.choose_spec.2
   refine ⟨B, hB, ?_⟩
   intro m side k hk j hj x hx hlow L d c hd hc V hV h0 heq v hv R hR hxR hvR
     δ hδ hδone hδwidth q hq hqx t ht
