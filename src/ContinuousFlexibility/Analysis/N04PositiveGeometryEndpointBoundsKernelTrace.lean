@@ -122,7 +122,8 @@ def n04PositiveGeometry_rootKernelTerm_joint
     SmoothDirections (sectorNeighborhood S base ε ε ×ˢ (univ : Set ℝ))
       (fun z => π (n04PositiveGeometry_rootRadialKernel c.length
         (n04PositiveGeometry_rootSpatialInput (D := D) (C := C) c w r z))) := by
-  let JT := n04PositiveGeometry_rootSpatialInput_joint hN.1.1 hT hS hε hr c w
+  let JT := n04PositiveGeometry_rootSpatialInput_joint
+    (C := C) (base := base) hN.1.1 hT hS hε hr c w
   let Q := JT.comp_contDiff (n04PositiveGeometry_rootRadialKernelDomain_open c.length)
     (n04PositiveGeometry_rootRadialKernel_contDiff c.length)
     (n04PositiveGeometry_rootSpatialInput_mapsTo hT hS hN hr hroot c w)

@@ -126,13 +126,15 @@ theorem n04PositiveGeometry_rootKernelTerm_finite_power
   intro r hr hroot n hn c w π hπ b hbs θ J k hk z hz hzlow v hv R hR hzR hvR
   let f : (Fin (c.length + 1) × Fin 6) → ((StateDirections S × ℝ) × ℝ) → ℝ :=
     fun ij y => n04PositiveGeometry_rootSpatialInput (D := D) (C := C) c w r y ij
-  let Jf := n04PositiveGeometry_rootSpatialInput_coordinateJoint hN.1.1 hT hS hε hr c w
+  let Jf := n04PositiveGeometry_rootSpatialInput_coordinateJoint
+    (C := C) (base := base) hN.1.1 hT hS hε hr c w
   let Ja := fun ij a η => smoothDirections_angularStateSlice (Jf ij) a η
   let g := π ∘ n04PositiveGeometry_rootRadialKernel c.length
   have hV := n04PositiveGeometry_rootRadialKernelDomain_open c.length
   have hg := rootKernel_projection_contDiff c.length π
   have hmap := n04PositiveGeometry_rootSpatialInput_mapsTo hT hS hN hr hroot c w
-  let JT := n04PositiveGeometry_rootSpatialInput_joint hN.1.1 hT hS hε hr c w
+  let JT := n04PositiveGeometry_rootSpatialInput_joint
+    (C := C) (base := base) hN.1.1 hT hS hε hr c w
   let Q := JT.comp_contDiff hV hg hmap
   let H := T.H r ^ scalarBeta
   let E := T.E0 r
