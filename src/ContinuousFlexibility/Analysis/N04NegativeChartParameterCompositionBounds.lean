@@ -79,6 +79,49 @@ private theorem composition_sum_bound
         (by linarith : (2 : ℝ) ^ K + Cf ≤ 1 + (2 : ℝ) ^ K + Cf) hW)
         (pow_nonneg hMR _)) (pow_nonneg (zero_le_one.trans hρ) _)
 
+set_option backward.isDefEq.respectTransparency true in
+private theorem parameterComposition_of_forcing
+    {G Θ : E × PolarPoint → ℝ}
+    (hG : ContDiff ℝ ∞ G) (J : ContinuousTimeSpeedTower (univ : Set E) G)
+    (hΘ : ContDiff ℝ ∞ Θ) (n K : ℕ) (hn : 0 < n)
+    (γ : Q → E) (α : Q → ℝ) (hγ : ContDiff ℝ ∞ γ) (hα : ContDiff ℝ ∞ α)
+    (v : Fin n → E) (t : ℝ) (x : Q) {W M R ρ Cf : ℝ} (D : ℕ)
+    (hW : 0 ≤ W) (hM : 1 ≤ M) (hR : 1 ≤ R) (hρ : 1 ≤ ρ)
+    (hκ : ∀ j, j ≤ K → ‖iteratedFDeriv ℝ j (fun y : Q =>
+      flowVariationCoefficient G Θ (γ y) (t, α y)) x‖ ≤ M * ρ ^ j)
+    (hu : ∀ j, j ≤ K → ‖iteratedFDeriv ℝ j (fun y : Q =>
+      flowParameterField Θ n (γ y) v (t, α y)) x‖ ≤ W * M * ρ ^ (D + j))
+    (hf : ∀ j, j ≤ K → ‖iteratedFDeriv ℝ j (fun y : Q =>
+      flowVariationForcing J hΘ n (γ y) v (t, α y)) x‖ ≤
+        Cf * W * (M * R) ^ (n + 1) * ρ ^ (D * (n + 1) + j)) :
+    ∀ j, j ≤ K → ‖iteratedFDeriv ℝ j (fun y : Q =>
+      flowParameterField (fun z => G (z.1, (z.2.1, Θ z))) n
+        (γ y) v (t, α y)) x‖ ≤
+      (1 + (2 : ℝ) ^ K + Cf) * W * (M * R) ^ (n + 1) * ρ ^ (D * (n + 1) + j) := by
+  let κ : Q → ℝ := fun y => flowVariationCoefficient G Θ (γ y) (t, α y)
+  let u : Q → ℝ := fun y => flowParameterField Θ n (γ y) v (t, α y)
+  let F : Q → ℝ := fun y => flowVariationForcing J hΘ n (γ y) v (t, α y)
+  have hκs : ContDiff ℝ ∞ κ :=
+    (n04NegativeChart_flowCoefficient_joint_contDiff hG hΘ).comp
+      (hγ.prodMk (contDiff_const.prodMk hα))
+  have hus : ContDiff ℝ ∞ u :=
+    (n04NegativeChart_flowParameterField_joint_contDiff hΘ n v).comp
+      (hγ.prodMk (contDiff_const.prodMk hα))
+  have hFs : ContDiff ℝ ∞ F :=
+    (n04NegativeChart_flowForcing_joint_contDiff hG J hΘ hn v).comp
+      (hγ.prodMk (contDiff_const.prodMk hα))
+  have he : (fun y : Q =>
+      flowParameterField (fun z => G (z.1, (z.2.1, Θ z))) n (γ y) v (t, α y)) =
+      fun y => κ y * u y + F y := by
+    funext y
+    dsimp only [κ, u, F]
+    exact (sub_eq_iff_eq_add.mp
+      (flowVariationForcing_eq_source_sub hG J hΘ hn (γ y) v (t, α y)).symm).trans
+        (add_comm _ _)
+  intro j hj
+  rw [he]
+  exact composition_sum_bound n K D hn hκs hus hFs x hW hM hR hρ hκ hu hf j hj
+
 set_option diagnostics true in
 set_option backward.isDefEq.respectTransparency true in
 /-- The constant is fixed before all representatives and evaluated
@@ -107,40 +150,18 @@ theorem n04NegativeChart_parameterComposition_positive_prefix
           flowParameterField (fun z => G (z.1, (z.2.1, Θ z))) n
             (γ y) v (t, α y)) x‖ ≤
           C * W * (M * R) ^ (n + 1) * ρ ^ (D * (n + 1) + j) := by
-  have hex := n04NegativeChart_actualForcing_weighted_prefix (E := E) (Q := Q) n K
-  let Cf := hex.choose
-  have hCf := hex.choose_spec.1
+  obtain ⟨Cf, hCf, hforcing⟩ :=
+    n04NegativeChart_actualForcing_weighted_prefix (E := E) (Q := Q) n K
   have hCp : 0 ≤ (2 : ℝ) ^ K := pow_nonneg (by norm_num) _
   refine ⟨1 + (2 : ℝ) ^ K + Cf, by linarith only [hCp, hCf], ?_⟩
   intro G Θ hG J hΘ γ α hγ hα v t x W M R ρ D hW hWR hM hR hρ hκ hhead hlower
-  let κ : Q → ℝ := fun y => flowVariationCoefficient G Θ (γ y) (t, α y)
-  let u : Q → ℝ := fun y => flowParameterField Θ n (γ y) v (t, α y)
-  let F : Q → ℝ := fun y => flowVariationForcing J hΘ n (γ y) v (t, α y)
-  have hκs : ContDiff ℝ ∞ κ :=
-    (n04NegativeChart_flowCoefficient_joint_contDiff hG hΘ).comp
-      (hγ.prodMk (contDiff_const.prodMk hα))
-  have hus : ContDiff ℝ ∞ u :=
-    (n04NegativeChart_flowParameterField_joint_contDiff hΘ n v).comp
-      (hγ.prodMk (contDiff_const.prodMk hα))
-  have hFs : ContDiff ℝ ∞ F :=
-    (n04NegativeChart_flowForcing_joint_contDiff hG J hΘ hn v).comp
-      (hγ.prodMk (contDiff_const.prodMk hα))
-  have hu (l : ℕ) (hl : l ≤ K) :
-      ‖iteratedFDeriv ℝ l u x‖ ≤ W * M * ρ ^ (D + l) := by
-    simpa only [Function.comp_id, u] using hlower n hn le_rfl id l hl
-  have hmarked := n04NegativeChart_actualForcing_marked_factors J hΘ hn K D γ α v t x
-    hW hWR hM hR hρ hhead (fun k hk hkn e l hl => hlower k hk hkn.le e l hl)
-  have hf := hex.choose_spec.2 (G := G) (Θ := Θ) hG J hΘ γ α hγ hα v t x D hW
-    (one_le_mul_of_one_le_of_one_le hM hR) hρ hmarked
-  have he : (fun y : Q =>
-      flowParameterField (fun z => G (z.1, (z.2.1, Θ z))) n (γ y) v (t, α y)) =
-      fun y => κ y * u y + F y := by
-    funext y
-    dsimp only [κ, u, F]
-    rw [flowVariationForcing_eq_source_sub hG J hΘ hn]
-    ring
-  rw [he]
-  exact composition_sum_bound n K D hn hκs hus hFs x hW hM hR hρ hκ hu hf
+  apply parameterComposition_of_forcing hG J hΘ n K hn γ α hγ hα v t x D hW hM hR hρ hκ
+  · intro l hl
+    simpa only [Function.comp_id] using hlower n hn le_rfl id l hl
+  · apply hforcing hG J hΘ γ α hγ hα v t x D hW
+      (one_le_mul_of_one_le_of_one_le hM hR) hρ
+    exact n04NegativeChart_actualForcing_marked_factors J hΘ hn K D γ α v t x
+      hW hWR hM hR hρ hhead (fun k hk hkn e l hl => hlower k hk hkn.le e l hl)
 
 end ContinuousFlexibility.Analysis
 

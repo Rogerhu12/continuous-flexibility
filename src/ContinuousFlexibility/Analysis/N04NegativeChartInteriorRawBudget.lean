@@ -65,6 +65,29 @@ private theorem interior_raw_difference_bound
 
 namespace N04RealizationStart
 
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
+
+local instance interiorRaw_parameterTopology (S : PhysicalSpacesData) :
+    TopologicalSpace (Parameter S) := inferInstance
+
+local instance interiorRaw_parameterAddGroup (S : PhysicalSpacesData) :
+    IsTopologicalAddGroup (Parameter S) :=
+  (n07aParameterGrading_withSeminorms S).isTopologicalAddGroup
+
+local instance interiorRaw_parameterSMul (S : PhysicalSpacesData) :
+    ContinuousSMul ℝ (Parameter S) :=
+  (n07aParameterGrading_withSeminorms S).continuousSMul
+
 variable (W : N04RealizationStart) (e : ℕ ≃ N04PieceIndex W.D) (ρ : ℕ → Bool → ℝ)
 
 set_option backward.isDefEq.respectTransparency true in
@@ -175,7 +198,9 @@ theorem negativeInterior_raw_fractional
         ((W.negativeRawReferenceJointTower m).spatial_value_contDiffOn hΩ y (hsub hy)) a b hqΩ
       simpa only [liftSectorParameter, Prod.fst_zero, Prod.snd_zero,
         ZeroMemClass.coe_zero, add_zero] using h
-    have hJD := interior_raw_difference_bound J Jd heq p base (s + loss)
+    have hJD : ‖Jd.D k z (fun _ => w)‖ ≤
+        (C * E ^ A) * H * Q ^ (((a + b : ℕ) : ℝ) / ((s : ℝ) + 1)) :=
+      interior_raw_difference_bound (X := Parameter W.S) (U := V) J Jd heq p base (s + loss)
       (M := C * E ^ A) (H := H) (Q := Q)
       (R := Q ^ (((a + b : ℕ) : ℝ) / ((s : ℝ) + 1)))
       (sectorNeighborhood_convex W.S base ε ε) hzero hk hz hzlow

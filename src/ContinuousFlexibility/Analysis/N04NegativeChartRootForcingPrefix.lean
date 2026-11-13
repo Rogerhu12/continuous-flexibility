@@ -88,8 +88,9 @@ theorem negativeChart_actual_forcing_head_prefix
           M * parameterHeightWeight H d.stateWord.stateArity *
             ρ ^ (l + d.stateWord.angleArity - 1 + shift * d.stateWord.stateArity) := by
       apply hs.trans
-      simpa only [u, flowForcingStateDirections, ContinuousLinearMap.id_apply,
-        FlowForcingChoice.stateWord, a, b] using hb
+      convert hb using 1 <;>
+        simp only [u, flowForcingStateDirections, ContinuousLinearMap.id_apply,
+          FlowForcingChoice.stateWord, a, b] <;> rfl
     rw [forcing_stateArity] at hs'
     apply hs'.trans
     apply mul_le_mul_of_nonneg_left (pow_le_pow_right₀ hρ ?_)

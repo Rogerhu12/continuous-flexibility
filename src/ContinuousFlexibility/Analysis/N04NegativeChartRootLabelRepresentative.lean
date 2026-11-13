@@ -45,12 +45,13 @@ theorem n04NegativeChart_finiteStateAngle_representative
     J (x, (0 : ℝ)) (flowStateAngleMap L)).comp_contDiff hΨ hmap
   let h : P × ℝ → ℝ := fun q => g (x + L (ρ q.1), q.2)
   have hh : ContDiff ℝ ∞ h := by
-    simpa only [h, Ψ, Function.comp_apply, flowStateAngleMap_apply,
+    simpa only [h, Ψ, Function.comp_def, flowStateAngleMap_apply,
       Prod.mk_add_mk, zero_add] using hs
   obtain ⟨V, hVeq, hV, h0⟩ := mem_nhds_iff.mp hρ.2.2.2
   refine ⟨h, hh, V, hV, h0, ?_, ?_⟩
   · intro y hy
-    simpa only [hVeq hy] using hρ.2.2.1 y
+    have he : flowPlotCompression hU x hx L y = y := hVeq hy
+    simpa only [he] using hρ.2.2.1 y
   · intro y hy θ
     exact congrArg (fun u : P => g (x + L u, θ)) (hVeq hy)
 

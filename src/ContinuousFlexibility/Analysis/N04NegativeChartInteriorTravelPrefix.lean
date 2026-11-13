@@ -44,7 +44,7 @@ private theorem mixed_affine_reflection
     mixedDerivative_reflect_angle]
   ring
 
-private theorem affine_two_parameterJet
+theorem n04NegativeChart_affine_two_parameterJet
     {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
     [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
     {U : Set X} {f g h : X → ℝ}
@@ -283,7 +283,7 @@ theorem negativeInterior_scaledTravel_prefix
           (c * (-1 : ℝ) ^ b) * mixedDerivative a b (W.negativeFirstIntegralDefect x m) (q.1, -q.2) :=
     mixed_affine_reflection hΩ hreflect (F.spatial x hx) hr c
       (fun p _ => W.negativeScaledOrientedTravel_firstIntegral m side x p) a b hqΩ
-  have hjet := affine_two_parameterJet J JF JG (mixedDerivative a b r q) c (c * (-1 : ℝ) ^ b)
+  have hjet := n04NegativeChart_affine_two_parameterJet J JF JG (mixedDerivative a b r q) c (c * (-1 : ℝ) ^ b)
     hformula k hz v
   have hE : 1 ≤ E := W.floor _
   have hH : 0 ≤ H := Real.rpow_nonneg (W.hT.2.1 _

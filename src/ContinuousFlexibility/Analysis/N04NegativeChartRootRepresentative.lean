@@ -1,6 +1,8 @@
 import ContinuousFlexibility.Analysis.N04NegativeChartRootFlowFactory
 import ContinuousFlexibility.Analysis.N04NegativeChartRootLabelRepresentative
 import ContinuousFlexibility.Analysis.N04NegativeChartRootCoefficient
+import ContinuousFlexibility.Analysis.N04NegativeChartProjectionAffineBounds
+import ContinuousFlexibility.Analysis.N04NegativeChartPartialJets
 
 /-! One finite plot carries the actual divided fields, endpoint label and
 their single inverse flow on a common open convex state neighborhood. -/
@@ -157,6 +159,55 @@ theorem projection_eq (hb : W.base ≤ base) (hε : ε ≤ W.ε / 2)
       A.flow y hz hs m side (by norm_num : (0 : ℝ) < 2) hδ hband
       (A.fields y hy) ⟨hp.1, hp.2.le⟩
 
+/-- A bound for the finite coordinate returns a bound for any actual
+mixed tower. Its displayed projection constant precedes the component,
+state, representatives and every supplied flow. -/
+theorem projection_bound (s : ℕ) (hb : W.base ≤ base) (hε : ε ≤ W.ε / 2)
+    (hδ : 0 < δ) (hband : δ * 2 ≤ W.negativeMaterialCollar m)
+    (odd : Bool) (k : ℕ) (v : Fin k → (Fin n → ℝ)) {M : ℝ} (hM : 0 ≤ M)
+    (a b : ℕ) (hab : a + b ≤ s)
+    (hraw : CSBound (a + b + if odd then 1 else 0)
+      (Icc (0 : ℝ) 1 ×ˢ Icc (-1 : ℝ) 1 ×ˢ (univ : Set ℝ))
+      (fun q => iteratedFDeriv ℝ k (fun y => A.coordinate y q) 0 v) M)
+    (p : PolarPoint) (hp : p.1 ∈ Ioc (0 : ℝ) 1)
+    (J : SmoothDirections (sectorNeighborhood W.S base ε ε)
+      (fun x => mixedDerivative a b (fun q =>
+        if odd then W.negativeRootTravelCoefficient m side δ x q
+        else W.negativeRootAngleDefect m side δ x q) p)) :
+    |J.D k z (fun i => L (v i))| ≤
+      (n04NegativeChart_rootProjection_affine_bound
+        (X := Parameter W.S) (P := Fin n → ℝ) s).choose * M := by
+  let U := sectorNeighborhood W.S base ε ε
+  let Ω : Set PolarPoint := Ioo (0 : ℝ) 2 ×ˢ univ
+  let f : Parameter W.S × PolarPoint → ℝ := fun x =>
+    if odd then W.negativeRootTravelCoefficient m side δ x.1 x.2
+      else W.negativeRootAngleDefect m side δ x.1 x.2
+  have hU : IsOpen U := sectorNeighborhood_isOpen W.S base ε ε
+  have hΩ : IsOpen Ω := isOpen_Ioo.prod isOpen_univ
+  have hεW : ε ≤ W.ε := hε.trans (by linarith only [W.ε_pos])
+  have hsub : U ⊆ sectorNeighborhood W.S W.base W.ε W.ε :=
+    sectorNeighborhood_mono W.S hb hεW hεW
+  have hc : δ * 2 ≤ W.C.right m - W.C.left m := by
+    have hhalf := (W.negativeMaterialCollar_bounds m).2.2.2 side
+    have hwidth := W.negativeOpticalWidth_le_component m side
+    have hwpos := W.negativeOpticalWidth_pos m side
+    linarith only [hband, hhalf, hwidth, hwpos]
+  let JF : SmoothDirections (U ×ˢ Ω) f := by
+    cases odd
+    · exact (W.negativeRootAngleDefectJointTower m side hδ hc).restrict
+        (hU.prod hΩ) (fun _ hx => ⟨hsub hx.1, hx.2⟩)
+    · exact (W.negativeRootTravelCoefficientJointTower m side hδ hc).restrict
+        (hU.prod hΩ) (fun _ hx => ⟨hsub hx.1, hx.2⟩)
+  have hj := n04NegativeChart_partial_stateJet_contDiff A.coordinate_joint_contDiff k 0 v
+  exact (n04NegativeChart_rootProjection_affine_bound
+    (X := Parameter W.S) (P := Fin n → ℝ) s).choose_spec.2
+    odd U hU Ω hΩ ((convex_Ioo _ _).prod convex_univ) (fun _ hx => hx.1.1)
+    f JF z L A.V A.open_V A.convex_V A.zero_V A.sector
+    A.coordinate (fun q => A.coordinate_joint_contDiff.comp
+      (contDiff_id.prodMk contDiff_const))
+    (fun y hy q hq => A.projection_eq hb hε hδ hband odd y hy q hq.1)
+    k v hj M hM a b hab hraw p ⟨⟨hp.1, hp.2.trans_lt (by norm_num)⟩, mem_univ _⟩ hp J
+
 end NegativeRootRepresentative
 
 end ContinuousFlexibility.Analysis.N04RealizationStart
@@ -170,3 +221,8 @@ depends on axioms: [propext, Classical.choice, Quot.sound] -/
 depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms ContinuousFlexibility.Analysis.N04RealizationStart.NegativeRootRepresentative.projection_eq
+
+/-- info: 'ContinuousFlexibility.Analysis.N04RealizationStart.NegativeRootRepresentative.projection_bound'
+depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms ContinuousFlexibility.Analysis.N04RealizationStart.NegativeRootRepresentative.projection_bound
