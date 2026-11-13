@@ -40,8 +40,6 @@ theorem n04PositiveGeometry_rootDrift_projection_norm {σ : ℝ} (hσ : |σ| ≤
 local instance n04PositiveSampleCoefficientDirectionsStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
-set_option diagnostics true in
-set_option trace.profiler true in
 def n04PositiveGeometry_rootRawCoefficientTrace_joint
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε r : ℝ}

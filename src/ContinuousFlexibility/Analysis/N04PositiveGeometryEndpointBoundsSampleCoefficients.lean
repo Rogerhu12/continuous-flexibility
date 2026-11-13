@@ -54,6 +54,7 @@ theorem n04PositiveGeometry_rootRawCoefficient_sample_prefix
         ‖J.D k z v‖ ≤ A * W.U.E0 (W.U.sample (X.cell i)) ^ A *
           parameterHeightWeight (W.U.H (W.U.sample (X.cell i)) ^ (3 / 4 : ℝ)) k *
           R ^ ((b : ℝ) / ((s : ℝ) + 1)) := by
+  run_tac liftM (IO.eprintln "sample checkpoint 1: proof body")
   have hN := n01Properties_restrict W.hT W.through03.1.1 hb le_rfl hε hεW
   have hE : ∀ r ∈ radialCore W.D, 1 ≤ W.T.E0 r := fun r _ => W.floor r
   let driftData := n04PositiveGeometry_orientedRootTrace_finiteShift_power
@@ -74,6 +75,7 @@ theorem n04PositiveGeometry_rootRawCoefficient_sample_prefix
   have hFbound := referenceData.choose_spec.2
   let p := pairGrading (sectorGrading W.S) realGrading
   have hp : Monotone p := sectorPairGrading_monotone W.S
+  run_tac liftM (IO.eprintln "sample checkpoint 2: fixed witnesses")
   refine ⟨max Bd Bc, max Ld Lc, hBd.trans (le_max_left _ _), fun K s => ?_⟩
   let driftOrder := hd K s
   let Cd : ℝ := driftOrder.choose
@@ -97,13 +99,17 @@ theorem n04PositiveGeometry_rootRawCoefficient_sample_prefix
   let Dc : ℝ := speedSample.choose
   have hDc : 1 ≤ Dc := speedSample.choose_spec.1
   have hcs := speedSample.choose_spec.2
-  obtain ⟨A₀, _, hpack⟩ := coefficientEnvelope_pack (F * Dc) (F + Dc)
+  let packedCost := coefficientEnvelope_pack (F * Dc) (F + Dc)
+  let A₀ : ℝ := packedCost.choose
+  have hpack := packedCost.choose_spec.2
   let A : ℝ := max Dd (max 1 A₀)
   have hA : 1 ≤ A := (le_max_left _ _).trans (le_max_right _ _)
   have hDdA : Dd ≤ A := le_max_left _ _
   have hA₀A : A₀ ≤ A := (le_max_right _ _).trans (le_max_right _ _)
+  run_tac liftM (IO.eprintln "sample checkpoint 3: sampled witnesses")
   refine ⟨A, hA, ?_⟩
   intro i side m hm g hg hg0 hfactor ρ hρ hstrip speed a d had b hbs θ J k hk z hz hzlow v hv R hR hzR hvR
+  run_tac liftM (IO.eprintln "sample checkpoint 4: point inputs")
   let r := n01ComponentRoot W.C m (!side)
   let σ := n01ComponentRootOrientation (!side)
   let E : ℝ := W.U.E0 (W.U.sample (X.cell i))
@@ -144,8 +150,10 @@ theorem n04PositiveGeometry_rootRawCoefficient_sample_prefix
       _ ≤ A * E ^ A := mul_le_mul hA₀A
         (Real.rpow_le_rpow_of_exponent_le hEpos hA₀A)
         (Real.rpow_nonneg (zero_le_one.trans hEpos) _) (zero_le_one.trans hA)
+  run_tac liftM (IO.eprintln "sample checkpoint 5: scalar estimates")
   cases speed with
   | false =>
+      run_tac liftM (IO.eprintln "sample checkpoint 6: drift branch")
       let π : PolarPoint →L[ℝ] ℝ := σ • ContinuousLinearMap.fst ℝ ℝ ℝ
       let JP : SmoothDirections (sectorNeighborhood W.S base ε ε)
           (fun y => iteratedDeriv (b + d) (radialBoundaryJet
@@ -155,15 +163,18 @@ theorem n04PositiveGeometry_rootRawCoefficient_sample_prefix
           (fun f : PolarPoint → ℝ => iteratedDeriv (b + d) (radialBoundaryJet f 0 a) θ)
           (n04PositiveGeometry_orientedDrift_eq_projection W.D W.S W.C
             (liftSectorParameter W.S W.C y) r σ))
+      run_tac liftM (IO.eprintln "sample checkpoint 7: drift tower")
       have hout := hdb r hr hroot σ hσ a d had π (n04PositiveGeometry_rootDrift_projection_norm hσ)
         b hbs θ JP k hk z hz ((hp (le_max_left Bd Bc) z).trans hzlow)
         v (fun j => (hp (le_max_left Bd Bc) (v j)).trans (hv j)) R hR
         ((hp (Nat.add_le_add_left (le_max_left Ld Lc) s) z).trans hzR)
         (fun j => (hp (Nat.add_le_add_left (le_max_left Ld Lc) s) (v j)).trans (hvR j))
+      run_tac liftM (IO.eprintln "sample checkpoint 8: drift estimate")
       exact hout.trans ((mul_le_mul_of_nonneg_right hdpoint hQ).trans
         (mul_le_mul_of_nonneg_right
           (mul_le_mul_of_nonneg_right hdcost (parameterHeightWeight_nonneg hH k)) hQ))
   | true =>
+      run_tac liftM (IO.eprintln "sample checkpoint 9: speed branch")
       have hFE : 0 ≤ F * E ^ F := mul_nonneg (zero_le_one.trans hF)
         (Real.rpow_nonneg (zero_le_one.trans hEpos) _)
       have hout := hcb r hr hroot σ hσ g hg hg0 (F * E ^ F) hFE
@@ -172,6 +183,7 @@ theorem n04PositiveGeometry_rootRawCoefficient_sample_prefix
         v (fun j => (hp (le_max_right Bd Bc) (v j)).trans (hv j)) R hR
         ((hp (Nat.add_le_add_left (le_max_right Ld Lc) s) z).trans hzR)
         (fun j => (hp (Nat.add_le_add_left (le_max_right Ld Lc) s) (v j)).trans (hvR j))
+      run_tac liftM (IO.eprintln "sample checkpoint 10: speed estimate")
       have hm : (F * E ^ F) * (Cc * W.T.E0 r ^ Ac *
           parameterHeightWeight (W.T.H r ^ scalarBeta) k) ≤
           (A * E ^ A) * parameterHeightWeight H k := by
@@ -186,5 +198,7 @@ theorem n04PositiveGeometry_rootRawCoefficient_sample_prefix
         _ ≤ ((A * E ^ A) * parameterHeightWeight H k) * Q :=
           mul_le_mul_of_nonneg_right hm hQ
         _ = _ := by rfl
+
+  run_tac liftM (IO.eprintln "sample checkpoint 11: proof elaborated")
 
 end ContinuousFlexibility.Analysis
