@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N04PositiveGeometryActualCoordinateUnitBounds
+import ContinuousFlexibility.Analysis.N04PositiveGeometryCoordinateSampleNormalization
 import ContinuousFlexibility.Analysis.N04PositiveGeometryReferenceChartSamplePrefix
 import ContinuousFlexibility.Analysis.N04PositiveGeometryReferenceInverseSamplePrefix
 import ContinuousFlexibility.Analysis.N04PositiveGeometryCurrentJointPowers
@@ -130,66 +131,36 @@ theorem n04PositiveGeometry_actualControlledCoordinates_currentData_of_transport
       have hE : 1 ≤ E := (W.floor _).trans (le_enlargedMaterialData_E0 W.T _)
       have hH : 0 ≤ H := Real.rpow_nonneg
         (W.hT.2.1 _ (materialSample_mem_interval W.radial.1 W.hT (X.cell i))).2.1.le _
-      have ht : 1 ≤ t := Real.one_le_rpow hR (by positivity)
       have hzlow : p low z ≤ 1 := n04Principal_parameter_low_le_one (S := W.S) hδhalf hz
       have hfHigh : fd.choose + s + shift * k + 1 ≤ low + s + shift * k + 1 := by omega
       have hgeo := n04PositiveComponent_bounds
         ((n04b_profileGeometry_of_through03 W.through03).2.2.1.1.continuous_deriv (by simp)) i
-      have hspan : |n04PositiveRight i - n04PositiveLeft i| ≤ C := by
-        rw [abs_of_pos (sub_pos.mpr hgeo.2.1)]
-        exact (sub_le_sub hgeo.2.2 hgeo.1).trans (le_max_right _ _)
+      have hspan : |n04PositiveRight i - n04PositiveLeft i| ≤ C :=
+        n04PositiveGeometry_coordinate_span_bound hgeo.1 hgeo.2.1 hgeo.2.2
       have hpoint : (n04PositiveLeft i + (n04PositiveRight i - n04PositiveLeft i) * q.1, q.2) ∈
-          Ioo (n04PositiveLeft i) (n04PositiveRight i) ×ˢ (univ : Set ℝ) := by
-        refine ⟨⟨lt_add_of_pos_right _ (mul_pos (sub_pos.mpr hgeo.2.1) hq.1.1), ?_⟩, mem_univ _⟩
-        have h := mul_lt_of_lt_one_right (sub_pos.mpr hgeo.2.1) hq.1.2
-        linarith only [h]
+          Ioo (n04PositiveLeft i) (n04PositiveRight i) ×ˢ (univ : Set ℝ) :=
+        n04PositiveGeometry_coordinate_unitPoint_mem hgeo.2.1 hq
       have hnpos : 0 < n := by have := w.arity_sum; omega
       have hwpos : 0 < w.stateArity := hw.symm ▸ hk
+      have hsaved := bd.choose_spec.2 i angle (JC false angle i) z (hsub hz)
+        ((hp hfLow z).trans hzlow) _ hpoint R hR ((hp hfHigh z).trans hzR) n hnpos
+        (hn.trans (Nat.le_succ _)) w hwpos hw.le
       have hraw := n04PositiveGeometry_controlledForwardCoordinate_word_bound F Y angle i
         (JC false angle i) (JU false angle i) hC hspan
+        (M := A * E ^ A * parameterHeightWeight H w.stateArity *
+          t ^ (w.angleArity + shift * w.stateArity))
         (p low) (p (low + s + shift * k + 1)) (zero_le_one.trans hR) n w hwpos z (hsub hz) q hq
-        (fun u huL huH huS hu0 hu1 => (Real.norm_eq_abs _).trans_le
-          (bd.choose_spec.2 i angle (JC false angle i) z (hsub hz)
-            ((hp hfLow z).trans hzlow) _ hpoint R hR ((hp hfHigh z).trans hzR) n hnpos (by omega)
-            w hwpos hw.le u
-            (fun j => by
-              cases hj : w.isState j with
-              | false => simpa only [hj, if_false] using hu0 j hj
-              | true => simpa only [hj, if_true] using hu1 j hj)
-            (fun j => ⟨(hp hfLow (u j).1).trans (huL j),
-              (hp hfHigh (u j).1).trans (huH j), huS j⟩)))
+        (n04PositiveGeometry_coordinate_separated_norm_bound w _
+          (p fd.choose) (p low) (p (fd.choose + s + shift * k + 1))
+          (p (low + s + shift * k + 1)) (fun x => hp hfLow x) (fun x => hp hfHigh x) hsaved)
         v hv hvR hvS hv0 hv1
-      have hpack : C ^ n * (A * E ^ A) ≤ B * E ^ B := by
-        have hcoef : C ^ n * A ≤ B :=
-          (mul_le_mul_of_nonneg_right (pow_le_pow_right₀ hC (by omega))
-            (zero_le_one.trans bd.choose_spec.1)).trans (le_max_right _ _)
-        calc
-          _ = (C ^ n * A) * E ^ A := by ring
-          _ ≤ _ := mul_le_mul hcoef
-            (Real.rpow_le_rpow_of_exponent_le hE (le_max_left _ _))
-            (Real.rpow_nonneg (zero_le_one.trans hE) _) (zero_le_one.trans hB)
-      have hout : |(JU false angle i).D n (z, q) v| ≤
-          B * E ^ B * parameterHeightWeight H w.stateArity * t ^ (w.angleArity + shift * w.stateArity) :=
-        hraw.trans (by
-          calc
-            _ = (C ^ n * (A * E ^ A)) * parameterHeightWeight H w.stateArity *
-                t ^ (w.angleArity + shift * w.stateArity) := by ring
-            _ ≤ _ := mul_le_mul_of_nonneg_right
-              (mul_le_mul_of_nonneg_right hpack (parameterHeightWeight_nonneg hH _))
-              (pow_nonneg (zero_le_one.trans ht) _))
-      have htpow (d : ℕ) : t ^ d = R ^ ((d : ℝ) / (((s + shift * k : ℕ) : ℝ) + 1)) := by
-        dsimp only [t]
-        rw [← Real.rpow_natCast, ← Real.rpow_mul (zero_le_one.trans hR)]
-        congr 1
-        ring
-      have hscalar : B * E ^ B * parameterHeightWeight H w.stateArity *
-          t ^ (w.angleArity + shift * w.stateArity) =
-          B * W.U.E0 (W.U.sample ((G.V η).cell m)) ^ B *
-            W.U.H (W.U.sample ((G.V η).cell m)) ^ (3 / 4 : ℝ) *
-            R ^ (((w.angleArity + shift * k : ℕ) : ℝ) / (((s + shift * k : ℕ) : ℝ) + 1)) := by
-        rw [htpow, hw, (hfields m hm).1]
-        simp only [parameterHeightWeight, Nat.ne_of_gt hk, if_false]
-      exact hout.trans_eq hscalar
+      have hout := hraw.trans (n04PositiveGeometry_coordinate_affine_sample_pack
+        (β := w.angleArity) (s := s) (shift := shift) hC bd.choose_spec.1 hE hH hR
+        (hn.trans (Nat.le_succ _)) hk hw)
+      exact hout.trans_eq (congrArg (fun cell : ℕ =>
+        B * W.U.E0 (W.U.sample cell) ^ B * W.U.H (W.U.sample cell) ^ (3 / 4 : ℝ) *
+          R ^ (((w.angleArity + shift * k : ℕ) : ℝ) / (((s + shift * k : ℕ) : ℝ) + 1)))
+        (hfields m hm).1.symm)
   | true =>
       let J : ∀ m, G.Pos η m → ∀ a b (q : unitStrip),
           SmoothDirections (sectorNeighborhood (G.S η) low δ δ)
@@ -229,40 +200,14 @@ theorem n04PositiveGeometry_actualControlledCoordinates_currentData_of_transport
         ((hp hiLow z).trans hzlow) v (fun j => (hp hiLow (v j)).trans (hv j)) R hR
         ((hp hiHigh z).trans hzR) (fun j => (hp hiHigh (v j)).trans (hvR j))
       let c : ℝ := if angle then 1 else (n04PositiveRight i - n04PositiveLeft i)⁻¹
-      have hc : |c| ≤ Cw * E ^ Cw := by
-        cases angle
-        · exact widthData.choose_spec.2.span_inverse i
-        · simpa only [c, if_true, abs_one] using
-            one_le_mul_of_one_le_of_one_le hCw
-              (Real.one_le_rpow hE (zero_le_one.trans hCw))
-      have hpack : (Cw * E ^ Cw) * (A * E ^ A) ≤ B * E ^ B := by
-        calc
-          _ = (Cw * A) * E ^ (Cw + A) := by
-            rw [Real.rpow_add (zero_lt_one.trans_le hE)]
-            ring
-          _ ≤ _ := mul_le_mul ((le_max_left _ _).trans (le_max_right _ _))
-            (Real.rpow_le_rpow_of_exponent_le hE ((le_max_right _ _).trans (le_max_right _ _)))
-            (Real.rpow_nonneg (zero_le_one.trans hE) _) (zero_le_one.trans hB)
-      have hout : |JQ.D k z v| ≤ B * E ^ B * parameterHeightWeight H k *
-          R ^ (((a + b + shift * k : ℕ) : ℝ) / (((s + shift * k : ℕ) : ℝ) + 1)) := by
-        calc
-          _ = |c| * |JP.D k z v| := (congrArg abs heval).trans (abs_mul _ _)
-          _ ≤ (Cw * E ^ Cw) * (A * E ^ A * parameterHeightWeight H k *
-              R ^ (((a + b + shift * k : ℕ) : ℝ) / (((s + shift * k : ℕ) : ℝ) + 1))) :=
-            mul_le_mul hc hraw (abs_nonneg _)
-              (mul_nonneg (zero_le_one.trans hCw) (Real.rpow_nonneg (zero_le_one.trans hE) _))
-          _ = ((Cw * E ^ Cw) * (A * E ^ A)) * parameterHeightWeight H k *
-              R ^ (((a + b + shift * k : ℕ) : ℝ) / (((s + shift * k : ℕ) : ℝ) + 1)) := by ring
-          _ ≤ _ := mul_le_mul_of_nonneg_right
-            (mul_le_mul_of_nonneg_right hpack (parameterHeightWeight_nonneg hH _))
-            (Real.rpow_nonneg (zero_le_one.trans hR) _)
-      have hscalar : B * E ^ B * parameterHeightWeight H k *
-          R ^ (((a + b + shift * k : ℕ) : ℝ) / (((s + shift * k : ℕ) : ℝ) + 1)) =
-          B * W.U.E0 (W.U.sample ((G.V η).cell m)) ^ B *
-            W.U.H (W.U.sample ((G.V η).cell m)) ^ (3 / 4 : ℝ) *
-            R ^ (((a + b + shift * k : ℕ) : ℝ) / (((s + shift * k : ℕ) : ℝ) + 1)) := by
-        rw [(hfields m hm).1]
-        simp only [parameterHeightWeight, Nat.ne_of_gt hk, if_false]
-      exact hout.trans_eq hscalar
+      have hc : |c| ≤ Cw * E ^ Cw :=
+        n04PositiveGeometry_coordinate_coefficient_bound angle hCw hE
+          (widthData.choose_spec.2.span_inverse i)
+      have hout := n04PositiveGeometry_coordinate_inverse_sample_pack
+        hCw hE hH (zero_le_one.trans hR) hk heval hc hraw
+      exact hout.trans_eq (congrArg (fun cell : ℕ =>
+        B * W.U.E0 (W.U.sample cell) ^ B * W.U.H (W.U.sample cell) ^ (3 / 4 : ℝ) *
+          R ^ (((a + b + shift * k : ℕ) : ℝ) / (((s + shift * k : ℕ) : ℝ) + 1)))
+        (hfields m hm).1.symm)
 
 end ContinuousFlexibility.Analysis
