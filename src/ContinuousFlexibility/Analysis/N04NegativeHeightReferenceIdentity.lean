@@ -38,6 +38,12 @@ private theorem height_referenceDensity_scalar {a J h : ℝ}
   rw [Real.sq_sqrt (mul_nonneg ha hJ)] at hsq
   rw [← hsq, ← mul_pow, inv_mul_cancel₀ hh.ne', one_pow]
 
+private theorem height_referenceChartShape_of_eq
+    {F H : PolarPoint → PolarPoint} (he : F = H) (p : PolarPoint)
+    (hH : H p = ((H (p.1, 0)).1, p.2)) :
+    F p = ((F (p.1, 0)).1, p.2) :=
+  he.symm ▸ hH
+
 variable (G : N04RealizationGauge)
   (η : (G.W.S.height (3 / 4 : ℝ)).Space)
 
@@ -50,10 +56,11 @@ theorem negative_referenceChart_shape (m : ℕ) (hm : G.Neg η m)
   have hr := n04Coordinates_actual_reference_negative_radial_fields
     G.W.hT G.W.hS G.W.through03 G.W.field G.X.e₀ j.1 j.2
   have hp := G.heightRadial_physicalUnitPoint_mem η m j hi hq
-  change (G.V η).chart (G.W.C.referenceState, 0) m _ =
-    (((G.V η).chart (G.W.C.referenceState, 0) m _).1, _)
-  rw [hf.2.2.2.2.2.2.2.1]
-  exact hr.2.2.1 _ hp
+  have he : (G.V η).chart (G.ref η) m =
+      (G.W.A G.X.e₀).chart (G.W.C.referenceState, 0) (G.negativeIndex j) :=
+    hf.2.2.2.2.2.2.2.1
+  exact height_referenceChartShape_of_eq he (physicalUnitPoint (G.V η) m q)
+    (hr.2.2.1 _ hp)
 
 theorem negative_chartRadialRef_radial (m : ℕ) (hm : G.Neg η m)
     (q : PolarPoint) (hq : q ∈ unitStrip) :
@@ -67,7 +74,7 @@ theorem negative_chartAngleRef_zero (m : ℕ) (hm : G.Neg η m)
     G.atomRef η .chartAngleDefect m q = 0 := by
   have h := congrArg (fun p : PolarPoint => p.2 - q.2)
     (G.negative_referenceChart_shape η m hm q hq)
-  simpa only [sub_self] using h
+  exact h.trans (sub_self q.2)
 
 /-- Reference chart atoms have zero angular derivative at every point
 of the open unit strip; their total extensions play no role. -/
@@ -108,10 +115,11 @@ theorem negative_heightRef_pos (m : ℕ) (hm : G.Neg η m)
   have hf := G.negative_fields η (G.W.C.referenceState, 0) m j hi
   have hr := n04Coordinates_actual_reference_negative_radial_fields
     G.W.hT G.W.hS G.W.through03 G.W.field G.X.e₀ j.1 j.2
-  change 0 < (G.V η).height (G.W.C.referenceState, 0) m
-    (physicalUnitPoint (G.V η) m q)
-  rw [hf.2.2.2.2.2.2.2.2.2.1]
-  exact hr.2.2.2.2 _ (G.heightRadial_physicalUnitPoint_mem η m j hi hq)
+  have he : (G.V η).height (G.ref η) m =
+      (G.W.A G.X.e₀).height (G.W.C.referenceState, 0) (G.negativeIndex j) :=
+    hf.2.2.2.2.2.2.2.2.2.1
+  exact (hr.2.2.2.2 _ (G.heightRadial_physicalUnitPoint_mem η m j hi hq)).trans_eq
+    (congrFun he (physicalUnitPoint (G.V η) m q)).symm
 
 /-- The second nonsingular factor is also normalized to one at the
 reference state.  Its fixed height multiplier has its own reference jets. -/
