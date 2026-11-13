@@ -260,7 +260,7 @@ private theorem inverseExpression_fixedBase_growth
           ((hfst (s + (n + forwardLoss)) (e.eval J V i.val.1 i.val.2)).trans
             (le_mul_of_one_le_left (apply_nonneg _ _) hK))
         simpa only [TameInverseExpression.eval, pairGrading_apply, map_zero, zero_add] using
-          hh.trans ((mul_le_mul_of_nonneg_left harg hC).trans_eq (by ring))
+          hh.trans ((mul_le_mul_of_nonneg_left harg hC).trans_eq (by simp only [pairGrading_apply]; ring))
       have hg := inverseProfile_linear_step P
         (fun s i => pairGrading q q s (e.eval J V i.val.1 i.val.2))
         (fun s i => pairGrading q q s ((TameInverseExpression.forward n v e).eval J V i.val.1 i.val.2))
