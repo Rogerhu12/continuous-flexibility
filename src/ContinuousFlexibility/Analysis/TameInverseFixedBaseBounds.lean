@@ -47,7 +47,7 @@ private theorem inverseInputProfile_product
   have hcross : (∑ i, p a (x i)) * (∑ i, p b (x i)) ≤ 2 * C * R * H := by
     calc
       _ = ∑ i, ∑ j, p a (x i) * p b (x j) := by
-        simp only [Finset.sum_mul, Finset.mul_sum]
+        exact Fintype.sum_mul_sum _ _
       _ ≤ ∑ i, ∑ j, C *
           (p (a + b + loss) (x i) * p base (x j) +
             p base (x i) * p (a + b + loss) (x j)) :=
@@ -55,7 +55,6 @@ private theorem inverseInputProfile_product
       _ = C * (H * L + L * H) := by
         dsimp only [L, H]
         simp only [mul_add, Finset.sum_add_distrib, ← Finset.mul_sum, ← Finset.sum_mul]
-        ring
       _ = 2 * C * L * H := by ring
       _ ≤ _ := mul_le_mul_of_nonneg_right
         (mul_le_mul_of_nonneg_left hx (mul_nonneg (by norm_num) hC)) hH
@@ -254,7 +253,7 @@ private theorem inverseExpression_fixedBase_growth
           K * P (s + (n + forwardLoss)) i := by
           dsimp only [K, P]
           nlinarith [hx (s + (n + forwardLoss)) i.val,
-            Finset.sum_nonneg (fun j _ => (cHigh j).coe_nonneg)]
+            Finset.sum_nonneg (s := Finset.univ) (fun (j : Fin n) _ => (cHigh j).coe_nonneg)]
         have harg := add_le_add
           (mul_le_mul hcoef (hfst operatorBase _) (apply_nonneg _ _)
             (mul_nonneg (zero_le_one.trans hK) (add_nonneg zero_le_one (apply_nonneg _ _))))
