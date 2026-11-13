@@ -1,6 +1,6 @@
 {
   "status": "draft-only; uncompiled; no source-owned dependency activated",
-  "parent": "8b8aab12f0a6f40736b396c7bc4f341bd2516105",
+  "parent": "afd89f5e3bf63e28b17d414aeb6bc3c2a069ffa8",
   "files": [
     {
       "path": "drafts/N04Coordinates-Realization-recovery-20261112/quantitative/N04RealizationFiniteBoundaryEnvelopes.lean",
@@ -21,9 +21,13 @@
     {
       "path": "drafts/N04Coordinates-Realization-recovery-20261112/quantitative/N04RealizationRootEndpointControls.lean",
       "lines": 172
+    },
+    {
+      "path": "drafts/N04Coordinates-Realization-recovery-20261112/quantitative/N04RealizationPositiveEndpointControls.lean",
+      "lines": 166
     }
   ],
-  "construction": "Select actual finite root endpoint controls before positive transport; same D/T/S/C/K, actual containing host cell, common finite neighborhood, explicit 1+B*(C0*sampleE0)^A.",
+  "construction": "Select actual finite root endpoint controls before positive transport; same D/T/S/C/K, actual containing host cell, common finite neighborhood, explicit 1+B*(C0*sampleE0)^A. The positive transfer then prescribes M=B*(C0*sampleE0)^B and kappa=M^-1, H=M at any supplied cell containing the actual midpoint; the same seed Q, original atlas and endpoint source choices are retained.",
   "endpoint_order": "For n=3: coordinate orders1..5, height and inverse-height values plus height jets0..3. The raw material prefix is through5.",
   "upstream": [
     {
@@ -37,6 +41,12 @@
       "commit": "8b8aab12f0a6f40736b396c7bc4f341bd2516105",
       "path": "drafts/N04Coordinates-Realization-recovery-20261112/quantitative/N04RealizationRootJacobianMaterialBounds.lean",
       "compatibility": "Exact same-K theorem; active generic core split already reviewed. Held odd-value/unit-identification source closure remains owner-controlled."
+    },
+    {
+      "module": "RetainedPositiveEndpointHostSample",
+      "commit": "4f80b004829747a059ffbdf56673e3e28afd1f68",
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-22/quantitative/primitive-route/reconstructed/RetainedPositiveEndpointHostSample.lean",
+      "compatibility": "Source-owned held same-retained-reference sample comparison; its closure has not been activated."
     }
   ],
   "reused": [
@@ -44,8 +54,9 @@
     "PlanarInverseDerivativeBound.fderiv_inverse_norm_le_of_germ",
     "N04RealizationEnvelopeComposition product and partition sum estimates",
     "CanonicalClosedInverseJets actual two-sided germs and differential identities",
-    "CanonicalRootDiagonalLower.canonicalCurrentPoint_root_diagonal_lower"
+    "CanonicalRootDiagonalLower.canonicalCurrentPoint_root_diagonal_lower",
+    "N04RealizationRetainedPositiveEndpoints.n04Realization_seed_positive_endpoints_sameReference"
   ],
   "private_source_argument": "rootBetween_radial repeats only the inaccessible private rootBetween_states_radial zero-circle-image argument from CanonicalRootRelativeJets; both states are supplied, and no atlas/reference witness is reselected.",
-  "pending": "Independently review this exact draft and complete the prescribed positive midpoint-host transfer using RetainedPositiveEndpointHostSample69; no claim of compiled target closure."
+  "pending": "Draft-only and uncompiled. Primitive independently reviewed FiniteBoundaryEnvelopes135 and RootMaterialPrefix156; the other original three leaves and this new positive transfer are awaiting fresh peer review. Complete source dependency compatibility/activation through agreed genuine merges before CI; no target-closure claim."
 }
