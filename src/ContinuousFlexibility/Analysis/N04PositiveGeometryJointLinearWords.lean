@@ -56,11 +56,9 @@ theorem n04PositiveGeometry_spatialLinear_saved_word_bound
             exact hcost
           · have hs' : w.isState 0 = false := Bool.eq_false_iff.mpr hs
             have hk : w.stateArity = 0 := by
-              rw [w.stateArity_eq_sum]
-              apply Finset.sum_eq_zero
-              intro j _
-              have hj : j = 0 := Subsingleton.elim _ _
-              simp only [hj, hs', Bool.false_eq_true, ite_false]
+              have hsum := w.stateArity_eq_sum
+              simp only [Fin.sum_univ_succ, Fin.sum_univ_zero, add_zero] at hsum
+              simpa only [hs', Bool.false_eq_true, ite_false] using hsum
             have hb : w.angleArity = 1 := by have := w.arity_sum; omega
             simp only [hk, hb, parameterHeightWeight, ite_true, mul_one,
               Nat.mul_zero, Nat.add_zero, Nat.sub_self, pow_zero]

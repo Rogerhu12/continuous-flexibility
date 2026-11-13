@@ -64,9 +64,9 @@ theorem n04PositiveGeometry_sourceAngleTrace_uniform_prefix
       (sectorPairGrading_continuous W.S) hp J zeroData.choose H hH ?_
       hV hVU (hunit _ hzlow) Q b
     intro K
-    let prefix := zeroData.choose_spec.2 K
-    refine ⟨prefix.choose, fun s => ?_⟩
-    let orderData := prefix.choose_spec s
+    let prefixData := zeroData.choose_spec.2 K
+    refine ⟨prefixData.choose, fun s => ?_⟩
+    let orderData := prefixData.choose_spec s
     refine ⟨orderData.choose * E ^ orderData.choose,
       mul_nonneg (zero_le_one.trans orderData.choose_spec.1)
         (Real.rpow_nonneg (zero_le_one.trans hE) _), ?_⟩
@@ -86,9 +86,9 @@ theorem n04PositiveGeometry_sourceAngleTrace_uniform_prefix
       (sectorPairGrading_continuous W.S) hp J positiveData.choose H hH ?_
       hV hVU (hunit _ hplow) Q b
     intro K
-    let prefix := positiveData.choose_spec.2 K
-    refine ⟨prefix.choose, fun s => ?_⟩
-    let orderData := prefix.choose_spec s
+    let prefixData := positiveData.choose_spec.2 K
+    refine ⟨prefixData.choose, fun s => ?_⟩
+    let orderData := prefixData.choose_spec s
     refine ⟨orderData.choose * E ^ orderData.choose,
       mul_nonneg (zero_le_one.trans orderData.choose_spec.1)
         (Real.rpow_nonneg (zero_le_one.trans hE) _), ?_⟩

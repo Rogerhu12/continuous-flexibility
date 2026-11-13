@@ -40,14 +40,14 @@ theorem n04PositiveGeometry_sourceProjectedTrace_sample_prefix
         (R ^ (1 / (((s + shift * K : ℕ) : ℝ) + 1))) shift := by
   let data := n04PositiveGeometry_sourceJet_sample_prefix W X hb hε hεW hεone hflow
   refine ⟨data.choose, data.choose_spec.1, fun K => ?_⟩
-  let prefix := data.choose_spec.2 K
-  refine ⟨prefix.choose, fun s => ?_⟩
-  let orderData := prefix.choose_spec s
+  let prefixData := data.choose_spec.2 K
+  refine ⟨prefixData.choose, fun s => ?_⟩
+  let orderData := prefixData.choose_spec s
   refine ⟨orderData.choose, orderData.choose_spec.1, ?_⟩
   intro i side m hm hctx j hj hj4 L hL Q z hz hzlow θ R hR hzR
   let J := n04PositiveGeometry_sourceJet_joint W X hb hε hεW hεone hflow
     i side m hm hctx j hj hj4
   exact (orderData.choose_spec.2 i side m hm hctx j hj hj4 J z hz hzlow θ R hR hzR).
-    radialProjection (n04PositiveGeometry_source_root_smooth hb hεW i side) L hL hz Q
+    radialProjection (n04PositiveGeometry_source_root_smooth (X := X) hb hεW i side) L hL hz Q
 
 end ContinuousFlexibility.Analysis

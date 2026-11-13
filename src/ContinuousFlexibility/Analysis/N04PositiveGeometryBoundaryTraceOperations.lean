@@ -54,13 +54,13 @@ theorem n04PositiveGeometry_radialBoundaryJet_mul
         (radialBoundaryJet f c j.val θ * radialBoundaryJet g c (n - j.val) θ) := by
   have hline : ContDiffAt ℝ ∞ (fun r : ℝ => (r, θ)) c :=
     contDiffAt_id.prodMk contDiffAt_const
-  have hfs := hf.comp c hline
-  have hgs := hg.comp c hline
+  have hfs : ContDiffAt ℝ ∞ (fun r : ℝ => f (r, θ)) c := hf.comp c hline
+  have hgs : ContDiffAt ℝ ∞ (fun r : ℝ => g (r, θ)) c := hg.comp c hline
   have he := iteratedDeriv_fun_mul
     (hfs.of_le (show (n : ℕ∞ω) ≤ ∞ by simp))
     (hgs.of_le (show (n : ℕ∞ω) ≤ ∞ by simp))
   rw [← Fin.sum_univ_eq_sum_range] at he
-  simpa only [radialBoundaryJet, Function.comp_apply, mul_assoc] using he
+  simpa only [radialBoundaryJet, mul_assoc] using he
 
 def n04PositiveGeometry_radialProduct_directions
     {U : Set E} (hU : IsOpen U) (c : ℝ) (n : ℕ)

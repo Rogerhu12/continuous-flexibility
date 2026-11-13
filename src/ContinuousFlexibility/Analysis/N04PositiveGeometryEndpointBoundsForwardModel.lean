@@ -93,7 +93,7 @@ theorem N04bRootCoordinateProperties.n04PositiveGeometry_chartBasis_eq
       omega
     have he : radialBoundaryJet (extendedRootEven G) 0 0 = β := by
       funext η
-      simpa only [radialBoundaryJet, iteratedDeriv_zero] using
+      simpa only [radialBoundaryJet, iteratedDeriv_zero, extendedRootEvenOddChart] using
         congrArg Prod.snd (P.extended_chart_zero η)
     have hr : radialBoundaryJet (extendedRootRadialCoordinate G) 0 0 = fun _ => 0 := by
       funext η

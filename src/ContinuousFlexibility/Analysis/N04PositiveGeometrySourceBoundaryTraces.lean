@@ -81,7 +81,7 @@ theorem n04PositiveGeometry_sourceAngleTrace_contDiff
     {z : StateDirections W.S × ℝ} (hz : z ∈ sectorNeighborhood W.S base ε ε) :
     ContDiff ℝ ∞ (fun θ => n04PositiveGeometry_sourceAngleTrace W X i side j (z, θ)) := by
   have h := contDiff_radialBoundaryJet_of_contDiffAt (n04PositiveEndpoint i side)
-    (fun θ => (n04PositiveGeometry_source_root_smooth hb hεW i side
+    (fun θ => (n04PositiveGeometry_source_root_smooth (X := X) hb hεW i side
       (z, θ) ⟨hz, mem_univ θ⟩).snd) j
   apply h.sub
   by_cases hj : j = 0
@@ -104,7 +104,7 @@ theorem n04PositiveGeometry_sourceAngleTrace_period
     (τ := fun t : ℝ => t + Real.pi) hd.interval hd.endpoint
     (fun η => (hd.root_smooth η).snd) (contDiff_id.add contDiff_const)
     (fun r hr η => by
-      simpa only [Prod.mk_add_mk, add_zero, Prod.snd_add, Prod.snd_mk, one_mul, add_comm]
+      simpa only [Prod.mk_add_mk, add_zero, Prod.snd_add, one_mul, add_comm]
         using congrArg Prod.snd (hd.period_add (r, η) ⟨hr, mem_univ η⟩)) j θ
   change radialBoundaryJet _ _ j (θ + Real.pi) - (if j = 0 then θ + Real.pi else 0) =
     radialBoundaryJet _ _ j θ - (if j = 0 then θ else 0)
@@ -124,7 +124,7 @@ def n04PositiveGeometry_sourceProjectedTrace_joint
           (liftSectorParameter W.S W.C y.1) p)) (n04PositiveEndpoint i side) j y.2) :=
   n04PositiveGeometry_boundaryRadialProjection_directions
     (n04PositiveGeometry_sourceJet_joint W X hb hε hεW hεone hflow i side m hm hctx j hj hj4)
-    (n04PositiveGeometry_source_root_smooth hb hεW i side) L
+    (n04PositiveGeometry_source_root_smooth (X := X) hb hεW i side) L
 
 def n04PositiveGeometry_sourceAngleTrace_joint
     (hb : W.base ≤ base) (hε : 0 < ε) (hεW : ε ≤ W.ε) (hεone : ε ≤ 1)

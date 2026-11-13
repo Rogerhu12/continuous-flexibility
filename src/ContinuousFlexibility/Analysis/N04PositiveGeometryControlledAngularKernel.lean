@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsAngularKernel
 import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsControlled
+import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsBoundaryData
 
 /-!
 # The stored angular kernel and its material envelope
@@ -113,9 +114,12 @@ theorem n04PositiveGeometry_controlled_angularKernel_bounds
     apply hrad.mono
     intro i
     have hi := n04PositiveComponent_bounds hf i
+    have he : n04PositiveEndpoint i side ∈ Icc W.D.a W.D.b := by
+      cases side with
+      | false => exact ⟨hi.1, hi.2.1.le.trans hi.2.2⟩
+      | true => exact ⟨hi.1.trans hi.2.1.le, hi.2.2⟩
     apply abs_le.mpr
-    cases side <;> change -(|W.D.a| + |W.D.b|) ≤ _ ∧ _ ≤ |W.D.a| + |W.D.b| <;>
-      constructor <;> linarith only [hi.1, hi.2.1, hi.2.2, neg_abs_le W.D.a,
+    constructor <;> linarith only [he.1, he.2, neg_abs_le W.D.a,
         le_abs_self W.D.b, abs_nonneg W.D.a, abs_nonneg W.D.b]
   obtain ⟨B, hB, hmat⟩ := n04PositiveGeometry_controlledFamily_material_bounds G
   have hwidth : HasPositiveEnvelope E (fun i =>

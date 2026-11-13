@@ -55,10 +55,10 @@ theorem n04PositiveGeometry_labelDefect_sample_bridge
   let L : ℝ := max 1 heightData.choose
   have hL : 1 ≤ L := le_max_left _ _
   refine ⟨low, hprefix.choose_spec.1, fun K => ?_⟩
-  let prefix := hprefix.choose_spec.2 K
-  let shift : ℕ := prefix.choose
+  let prefixData := hprefix.choose_spec.2 K
+  let shift : ℕ := prefixData.choose
   refine ⟨shift, fun s => ?_⟩
-  let orderData := prefix.choose_spec s
+  let orderData := prefixData.choose_spec s
   let B₀ : ℝ := orderData.choose
   let transfer := n04PositiveGeometry_positiveSource_circle_material_weight W X
     (3 / 4 : ℝ) (A := 0) (C := B₀) (by norm_num)

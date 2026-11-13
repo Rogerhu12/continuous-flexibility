@@ -84,15 +84,26 @@ theorem n04PositiveGeometry_rootInverseLinear_word_bound (N : ℕ) (L : ℝ) (hL
     1 + dp, by omega, ?_⟩
   intro U hU a e b Ja Je Jb σ hσ Q K s d hN x hx θ P M H t hM hH hHL ht shift ha he hb
   let f : Fin 3 → E × ℝ → ℝ := ![b, e, a]
-  let J : ∀ i, SmoothDirections (U ×ˢ univ) (f i) := by
-    intro i
+  let J : ∀ i, SmoothDirections (U ×ˢ univ) (f i) := fun i =>
+    Fin.cases (motive := fun i : Fin 3 => SmoothDirections (U ×ˢ univ) (f i)) Jb
+      (fun j : Fin 2 =>
+        Fin.cases (motive := fun j : Fin 2 => SmoothDirections (U ×ˢ univ) (f j.succ)) Je
+          (fun k : Fin 1 =>
+            Fin.cases (motive := fun k : Fin 1 =>
+                SmoothDirections (U ×ˢ univ) (f k.succ.succ)) Ja
+              (fun h : Fin 0 => h.elim0) k) j) i
+  let JFin := smoothDirections_finiteProduct Ja.open_domain J
+  have hproduct (y : E × ℝ) : (∏ i, f i y) = b y * e y * a y := by
+    simp [f, Fin.prod_univ_succ, mul_assoc]
+  let JP : SmoothDirections (U ×ˢ univ) (fun y => b y * e y * a y) :=
+    JFin.congr (fun y _ => hproduct y)
+  have hinput (i : Fin 3) : N04BoundaryWordBounds (J i) K s d x θ P M H t shift := by
     fin_cases i
-    · exact Jb
-    · exact Je
-    · exact Ja
-  let JP := smoothDirections_finiteProduct Ja.open_domain J
-  have hp := hprod hU J JP K s d hN x hx θ P M H t hM hH hHL ht shift
-    (fun i => by fin_cases i <;> assumption)
+    · exact hb
+    · exact he
+    · exact ha
+  have hp := (hprod hU J JFin K s d hN x hx θ P M H t hM hH hHL ht shift hinput).congr
+    (Q := JP) hx (fun y _ => hproduct y)
   let M' : ℝ := (1 + Cp) * M ^ (1 + dp)
   have hc := n04PositiveGeometry_power_product_cost (degree := dp) hCp hM
   have ha' := ha.enlarge hH (zero_le_one.trans ht) hc.2.1
@@ -104,16 +115,10 @@ theorem n04PositiveGeometry_rootInverseLinear_word_bound (N : ℕ) (L : ℝ) (hL
   simp only [hσabs, abs_neg, abs_one, one_mul] at hrad hcross
   have hzero := ha'.scale (0 : ℝ)
   have hz : N04BoundaryWordBounds
-      (smoothDirections_postcompCLM Ja (0 • ContinuousLinearMap.id ℝ ℝ))
+      (smoothDirections_postcompCLM Ja ((0 : ℝ) • ContinuousLinearMap.id ℝ ℝ))
       K s d x θ P M' H t shift := by
     apply hzero.enlarge hH (zero_le_one.trans ht)
     simpa only [abs_zero, zero_mul] using zero_le_one.trans hc.1
-  let JT := smoothDirectionsProd
-    (smoothDirectionsProd
-      (smoothDirections_postcompCLM Ja (σ • ContinuousLinearMap.id ℝ ℝ))
-      (smoothDirections_postcompCLM JP ((-1 : ℝ) • ContinuousLinearMap.id ℝ ℝ)))
-    (smoothDirectionsProd
-      (smoothDirections_postcompCLM Ja (0 • ContinuousLinearMap.id ℝ ℝ)) Jb)
   have htuple := (hrad.prod hcross).prod (hz.prod hb')
   have hmap := htuple.postcompCLM_norm rootColumnsLinear
   have hout : N04BoundaryWordBounds Q K s d x θ P
@@ -126,8 +131,7 @@ theorem n04PositiveGeometry_rootInverseLinear_word_bound (N : ℕ) (L : ℝ) (hL
     rw [rootColumnsLinear_apply, n04PositiveGeometry_rootInverseLinear_apply]
     simp only [Function.comp_apply, ContinuousLinearMap.smul_apply,
       ContinuousLinearMap.id_apply, smul_eq_mul, Prod.smul_mk, Prod.mk_add_mk,
-      Fin.prod_univ_succ, Fin.prod_univ_zero, f, Matrix.cons_val_zero,
-      Matrix.cons_val_one, Matrix.cons_val_two, zero_mul, mul_one]
+      zero_mul, mul_one]
     ext <;> ring
   apply hout.enlarge hH (zero_le_one.trans ht)
   calc

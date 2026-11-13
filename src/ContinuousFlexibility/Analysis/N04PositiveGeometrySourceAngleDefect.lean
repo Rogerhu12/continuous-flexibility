@@ -84,9 +84,9 @@ theorem n04PositiveGeometry_sourceAngleTrace_zero_sample_prefix
   let heightData := n04PositiveGeometry_sample_height_bound W X
     (by norm_num : (0 : ℝ) < 3 / 4)
   refine ⟨data.choose, data.choose_spec.1, fun K => ?_⟩
-  let prefix := data.choose_spec.2 K
-  refine ⟨prefix.choose, fun s => ?_⟩
-  let orderData := prefix.choose_spec s
+  let prefixData := data.choose_spec.2 K
+  refine ⟨prefixData.choose, fun s => ?_⟩
+  let orderData := prefixData.choose_spec s
   refine ⟨orderData.choose, orderData.choose_spec.1, ?_⟩
   intro i side Q z hz hzlow θ R hR hzR
   let source := n04PositiveGeometry_source_some W X i side

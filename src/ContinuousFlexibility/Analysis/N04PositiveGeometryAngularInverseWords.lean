@@ -94,7 +94,7 @@ theorem n04PositiveGeometry_angularInverse_unit_word_bound (n : ℕ) :
     have hh := hforward 1 zero_lt_one hn word (by rw [hk]; exact Nat.zero_le K)
       (fun _ => (0, u)) (fun j => by
         have hj : word.isState j = false := by fin_cases j; rfl
-        simp only [hj, Bool.false_eq_true, ite_false, Prod.fst_mk])
+        simp only [hj, Bool.false_eq_true, ite_false])
       (fun _ => ⟨by simp, by simpa only [map_zero] using hR, hu⟩)
     rw [← n04PositiveGeometry_joint_spatial_first JF x.1 y hy u] at hh
     simpa only [hk, hb, parameterHeightWeight, ite_true, mul_one,

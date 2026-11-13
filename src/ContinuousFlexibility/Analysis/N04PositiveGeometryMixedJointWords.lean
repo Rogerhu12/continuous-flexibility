@@ -40,7 +40,10 @@ theorem n04PositiveGeometry_joint_word_bound_of_mixed
     n04PulledFields_jointDirections_mixedExpansion J RF hU hΩ hc n x hx q hq]
   apply n04PulledFields_doubleExpansion_pureSlots_bound P w
     (fun a b k => ((RF.parameter a b q hq).D k x).toMultilinearMap) hM
-    (fun a b hab u hu => by simpa only [Real.norm_eq_abs] using hraw a b hab u hu)
+    (fun a b hab u hu => by
+      change |(RF.parameter a b q hq).D w.stateArity x u| ≤ M
+      rw [← Real.norm_eq_abs]
+      exact hraw a b hab u hu)
     (fun i => (((v i).1, (v i).2.1), (v i).2.2))
     (fun i => (hbox i).1)
     (fun i => (show |(v i).2.1| ≤ ‖(v i).2‖ by
