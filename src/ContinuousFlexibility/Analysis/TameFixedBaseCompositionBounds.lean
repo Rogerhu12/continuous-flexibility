@@ -250,7 +250,7 @@ theorem projectiveCompositionJets_fixedBase_oneHigh
     let total : ℕ := s + (e c.length + δ + c.length * (BK + δ))
     have htotal : ∑ j, order j ≤ total := by
       simp only [order, total, Fin.sum_univ_succ, Fin.cons_zero, Fin.cons_succ,
-        Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
+        Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul, Nat.cast_id]
       omega
     obtain ⟨D, hD, hpD⟩ := hproduct n (c.length + 1) order total htotal
       (max R 1) (zero_le_one.trans (le_max_right _ _))

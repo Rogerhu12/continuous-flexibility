@@ -47,8 +47,7 @@ private theorem inverseInputProfile_product
   have hcross : (∑ i, p a (x i)) * (∑ i, p b (x i)) ≤ 2 * C * R * H := by
     calc
       _ = ∑ i, ∑ j, p a (x i) * p b (x j) := by
-        rw [Finset.sum_mul]
-        simp only [Finset.mul_sum]
+        exact Fintype.sum_mul_sum _ _
       _ ≤ ∑ i, ∑ j, C *
           (p (a + b + loss) (x i) * p base (x j) +
             p base (x i) * p (a + b + loss) (x j)) :=
@@ -257,9 +256,9 @@ private theorem inverseExpression_fixedBase_growth
             Finset.sum_nonneg (s := Finset.univ)
               (fun (j : Fin n) _ => (cHigh j).coe_nonneg)]
         have harg := add_le_add
-          (mul_le_mul hcoef (hfst operatorBase _) (apply_nonneg _ _)
+          (mul_le_mul hcoef (hfst operatorBase (e.eval J V i.val.1 i.val.2)) (apply_nonneg _ _)
             (mul_nonneg (zero_le_one.trans hK) (add_nonneg zero_le_one (apply_nonneg _ _))))
-          ((hfst (s + (n + forwardLoss)) _).trans
+          ((hfst (s + (n + forwardLoss)) (e.eval J V i.val.1 i.val.2)).trans
             (le_mul_of_one_le_left (apply_nonneg _ _) hK))
         simpa only [TameInverseExpression.eval, pairGrading_apply, map_zero, zero_add] using
           hh.trans ((mul_le_mul_of_nonneg_left harg hC).trans_eq (by ring))
