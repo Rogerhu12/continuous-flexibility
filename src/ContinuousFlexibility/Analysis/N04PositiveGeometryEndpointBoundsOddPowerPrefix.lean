@@ -164,7 +164,9 @@ theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix
   have hinv : (f 0 (z, θ))⁻¹ ≤ M := by
     have h := (hi i side m hm g hg hfactor z hz
       ((hp (le_max_right Bf Bi) z).trans hzlow) ρ hρ (hstrip z hz) θ).2
-    exact h.trans (hcost hCiB)
+    have he := congrArg (fun q : ℝ => q⁻¹)
+      (n04PositiveGeometry_rootOddTrace_zero_eq W.D W.S W.C g m (!side) z θ)
+    exact he.trans_le (h.trans (hcost hCiB))
   have hinput (j : ℕ) (hj : j ≤ n) :
       N04BoundaryWordBounds (JO j hj) K s 1 z θ P M H t shift := by
     apply n04PositiveGeometry_boundaryWord_of_angular (JO j hj)
