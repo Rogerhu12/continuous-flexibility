@@ -21,12 +21,58 @@ namespace ContinuousFlexibility.Analysis
 open Set ContinuousFlexibility.Statements
 open scoped ContDiff
 
-private theorem useNonnegativeParameters
-    {P : ℝ → ℝ → Prop} {Q : Prop}
-    (h : ∃ c A : ℝ, 0 ≤ c ∧ 0 ≤ A ∧ P c A)
-    (huse : ∀ c A : ℝ, 0 ≤ c → P c A → Q) : Q := by
-  obtain ⟨c, A, hc, _, hP⟩ := h
-  exact huse c A hc hP
+private theorem polarInput_uniformBounds_of_raw
+    {Y : Type*} [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
+    [IsTopologicalAddGroup Y] [ContinuousSMul ℝ Y]
+    (p : ℕ → Seminorm ℝ Y)
+    (hp : ∀ n, Continuous (pairGrading p realGrading n))
+    (hmono : Monotone (pairGrading p realGrading))
+    (F : Fin 5 → Y → PolarPoint → ℝ) (Ω : Set PolarPoint)
+    (H E : PolarPoint → ℝ) (U : Set (Y × ℝ)) (i : Fin 5) (a b : ℕ)
+    (RF : MixedJetRegularity U Ω (fun z q => z.2 * F i z.1 q))
+    (hscalar : ∀ z ∈ U, |z.2| ≤ 1)
+    (habsorb : ∀ A : ℝ, ∃ B : ℝ, 0 < B ∧
+      ∀ q ∈ Ω, H q * E q ^ A ≤ B)
+    (hraw : ∃ C A : ℝ, 0 ≤ C ∧ 0 ≤ A ∧
+      ∀ i' : Fin 5, ∀ a' b' : ℕ, a' + b' ≤ a + b →
+      ∀ q ∈ Ω, ∀ V : Set (Y × ℝ),
+      ∀ J : SmoothDirections V
+        (fun z => z.2 * mixedDerivative a' b' (F i' z.1) q),
+      ∀ k base : ℕ, ∀ x0 : Y, ∀ z ∈ V, |z.2| ≤ 1 →
+      ∀ v : Fin k → Y × ℝ,
+        |J.D k z v| ≤ C * E q ^ A * H q * (1 + p (a + b + 4) x0) *
+          oneHighVariationWeight (pairGrading p realGrading)
+            base (a + b + 4) (z - (x0, 0)) v) :
+    UniformScalarJetSeminormBounds
+      (fun q : Ω => RF.parameter a b q q.property) := by
+  apply uniformScalarJetSeminormBounds_of_oneHigh
+    (pairGrading p realGrading) hp hmono 0 (fun _ => a + b + 4)
+  intro k
+  obtain ⟨C₀, A, hC₀, _, hbound⟩ := hraw
+  obtain ⟨B, hB, hweight⟩ := habsorb A
+  refine ⟨C₀ * B, mul_nonneg hC₀ hB.le, ?_⟩
+  intro q z hz v
+  let J : SmoothDirections U
+      (fun x => x.2 * mixedDerivative a b (F i x.1) q.val) :=
+    (RF.parameter a b q q.property).congr (fun x _ =>
+      mixedDerivative_const_mul x.2 (F i x.1) a b q.val)
+  have hj := hbound i a b le_rfl q q.property U J k 0 (0 : Y) z hz
+    (hscalar z hz) v
+  have hzero : p (a + b + 4) (0 : Y) = 0 := (p (a + b + 4)).map_zero'
+  have hdisp : z - ((0 : Y), (0 : ℝ)) = z := sub_zero z
+  simp only [hzero, add_zero, mul_one, hdisp] at hj
+  have hw : 0 ≤ oneHighVariationWeight
+      (pairGrading p realGrading) 0 (a + b + 4) z v :=
+    oneHighVariationWeight_nonneg _ _ _ _ _
+  calc
+    _ ≤ C₀ * E q.val ^ A * H q.val *
+        oneHighVariationWeight (pairGrading p realGrading) 0 (a + b + 4) z v := hj
+    _ = C₀ * (H q.val * E q.val ^ A) *
+        oneHighVariationWeight (pairGrading p realGrading) 0 (a + b + 4) z v := by ring
+    _ ≤ C₀ * B *
+        oneHighVariationWeight (pairGrading p realGrading) 0 (a + b + 4) z v :=
+      mul_le_mul_of_nonneg_right
+        (mul_le_mul_of_nonneg_left (hweight q q.property) hC₀) hw
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}
@@ -40,44 +86,18 @@ theorem n04Realization_polarInput_uniformSeminormBounds
       (fun q : annularOpen D =>
         (coefficientPolarInput_regular hS hT hD C base ε i).parameter
           a b q q.property) := by
-  apply uniformScalarJetSeminormBounds_of_oneHigh
-    (pairGrading (stateGrading S) realGrading)
-    (n01c_continuous_jointStateGrading S) (jointStateGrading_monotone S)
-    0 (fun _ => a + b + 4)
-  intro k
-  refine useNonnegativeParameters
-    (stateU_qPolarMixedJets_oneHigh_bound hT hS hD (a + b)) ?_
-  intro C₀ A hC₀ hbound
-  obtain ⟨B, hB, habsorb⟩ :=
-    materialHeight_E0_weight_bounded hT (by norm_num : (0 : ℝ) < 3 / 4) A
-  refine ⟨C₀ * B, mul_nonneg hC₀ hB.le, ?_⟩
-  intro q z hz v
-  let RF := coefficientPolarInput_regular hS hT hD C base ε i
-  let J : SmoothDirections (stateNeighborhood S C base ε)
-      (fun x => x.2 * mixedDerivative a b (stateUPolarInput S i x.1) q.val) :=
-    (RF.parameter a b q q.property).congr (fun x _ =>
-      mixedDerivative_const_mul x.2 (stateUPolarInput S i x.1) a b q.val)
-  have hj := hbound i a b le_rfl q q.property
-    (stateNeighborhood S C base ε) J k 0 (0 : AnnularState S) z hz
-    (hz.2.le.trans hε) v
-  have hzero : stateGrading S (a + b + 4) (0 : AnnularState S) = 0 :=
-    (stateGrading S (a + b + 4)).map_zero'
-  have hdisp : z - ((0 : AnnularState S), (0 : ℝ)) = z := sub_zero z
-  simp only [hzero, add_zero, mul_one, hdisp] at hj
-  have hw : 0 ≤ oneHighVariationWeight
-      (pairGrading (stateGrading S) realGrading) 0 (a + b + 4) z v :=
-    oneHighVariationWeight_nonneg _ _ _ _ _
-  calc
-    _ ≤ C₀ * T.E0 q.val.1 ^ A * T.H q.val.1 ^ (3 / 4 : ℝ) *
-        oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-          0 (a + b + 4) z v := hj
-    _ = C₀ * (T.H q.val.1 ^ (3 / 4 : ℝ) * T.E0 q.val.1 ^ A) *
-        oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-          0 (a + b + 4) z v := by ring
-    _ ≤ C₀ * B * oneHighVariationWeight
-        (pairGrading (stateGrading S) realGrading) 0 (a + b + 4) z v :=
-      mul_le_mul_of_nonneg_right
-        (mul_le_mul_of_nonneg_left (habsorb q.val.1 q.property.1) hC₀) hw
+  exact polarInput_uniformBounds_of_raw
+    (stateGrading S) (n01c_continuous_jointStateGrading S) (jointStateGrading_monotone S)
+    (stateUPolarInput S) (annularOpen D)
+    (fun q => T.H q.1 ^ (3 / 4 : ℝ)) (fun q => T.E0 q.1)
+    (stateNeighborhood S C base ε) i a b
+    (coefficientPolarInput_regular hS hT hD C base ε i)
+    (fun z hz => hz.2.le.trans hε)
+    (fun A => by
+      have h := materialHeight_E0_weight_bounded hT
+        (by norm_num : (0 : ℝ) < 3 / 4) A
+      exact ⟨h.choose, h.choose_spec.1, fun q hq => h.choose_spec.2 q.1 hq.1⟩)
+    (stateU_qPolarMixedJets_oneHigh_bound hT hS hD (a + b))
 
 /-- Genuine joint state and physical-position jets of each actual polar
 height input, on the same original state neighborhood. -/
