@@ -137,6 +137,30 @@ private theorem inverse_endpoint_power_material
     _ ≤ (C * E ^ A) ^ s := pow_le_pow_right₀ hone ha
     _ = _ := by rw [mul_pow, ← Real.rpow_mul_natCast (zero_le_one.trans hE)]
 
+private theorem interior_speed_cost
+    {d x L H₀ E H Q C₀ C₁ C₂ A₁ A₂ : ℝ} {a : ℕ}
+    (hd : 0 < d) (hE : 0 < E) (hC₀ : 0 ≤ C₀) (hC₁ : 0 ≤ C₁)
+    (hH : 0 ≤ H) (hQ : 0 ≤ Q)
+    (hraw : d ^ a * x ≤ C₀ * L * H₀ * Q)
+    (hhost : L * H₀ ≤ C₁ * E ^ A₁ * H)
+    (hdist : d⁻¹ ^ a ≤ C₂ * E ^ A₂) :
+    x ≤ C₀ * C₁ * C₂ * E ^ (A₁ + A₂) * H * Q := by
+  have hc : d ^ a * x ≤ C₀ * (C₁ * E ^ A₁ * H) * Q :=
+    hraw.trans (by
+      simpa only [mul_assoc] using
+        mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hhost hC₀) hQ)
+  have hcancel : d⁻¹ ^ a * (d ^ a * x) = x := by
+    rw [← mul_assoc, ← mul_pow, inv_mul_cancel₀ hd.ne', one_pow, one_mul]
+  calc
+    x = d⁻¹ ^ a * (d ^ a * x) := hcancel.symm
+    _ ≤ d⁻¹ ^ a * (C₀ * (C₁ * E ^ A₁ * H) * Q) :=
+      mul_le_mul_of_nonneg_left hc (pow_nonneg (inv_nonneg.mpr hd.le) _)
+    _ ≤ (C₂ * E ^ A₂) * (C₀ * (C₁ * E ^ A₁ * H) * Q) :=
+      mul_le_mul_of_nonneg_right hdist (by positivity)
+    _ = _ := by rw [Real.rpow_add hE]; ring
+
+set_option backward.isDefEq.respectTransparency true in
+set_option diagnostics true in
 /-- The raw speed estimate at the actual physical point of either
 reference half. Both the spatial fraction and the positive state weight
 are exactly those of the original endpoint power control. -/
@@ -202,21 +226,14 @@ theorem negativeInterior_speed_power_bounds
       (materialSample_mem_radialCore W.hT W.radial.1.choose_spec.2.1 _)).2.1.le _) k
   have hQ : 0 ≤ Q := Real.rpow_nonneg (zero_le_one.trans hR) _
   have hh := hraw m k hk a b hab q hq J z hz hlow v hv R hR hhigh hvhigh
-  have hc : d ^ a * ‖J.D k z v‖ ≤ C₀ * (C₁ * E ^ A₁ * H) * Q :=
-    hh.trans (by
-      simpa only [mul_assoc] using
-        mul_le_mul_of_nonneg_right
-          (mul_le_mul_of_nonneg_left (hhost m side k) (zero_le_one.trans hC₀)) hQ)
-  have hcancel : d⁻¹ ^ a * (d ^ a * ‖J.D k z v‖) = ‖J.D k z v‖ := by
-    rw [← mul_assoc, ← mul_pow, inv_mul_cancel₀ hd.ne', one_pow, one_mul]
-  calc
-    _ = d⁻¹ ^ a * (d ^ a * ‖J.D k z v‖) := hcancel.symm
-    _ ≤ d⁻¹ ^ a * (C₀ * (C₁ * E ^ A₁ * H) * Q) :=
-      mul_le_mul_of_nonneg_left hc (pow_nonneg (inv_nonneg.mpr hd.le) _)
-    _ ≤ (C₂ * E ^ A₂) * (C₀ * (C₁ * E ^ A₁ * H) * Q) :=
-      mul_le_mul_of_nonneg_right (hdist m side p.1 hp a (by omega))
-        (by positivity)
-    _ = _ := by rw [Real.rpow_add hE]; ring
+  have hw := hhost m side k
+  change d ^ a * ‖J.D k z v‖ ≤ C₀ * W.T.E0 (W.T.sample (W.C.cell m)) ^ A₀ *
+    parameterHeightWeight (W.T.H (W.T.sample (W.C.cell m)) ^ (3 / 4 : ℝ)) k * Q at hh
+  change W.T.E0 (W.T.sample (W.C.cell m)) ^ A₀ *
+    parameterHeightWeight (W.T.H (W.T.sample (W.C.cell m)) ^ (3 / 4 : ℝ)) k ≤
+      C₁ * E ^ A₁ * H at hw
+  exact interior_speed_cost hd hE (zero_le_one.trans hC₀) (zero_le_one.trans hC₁) hH hQ
+    hh hw (hdist m side p.1 hp a (by omega))
 
 end ContinuousFlexibility.Analysis.N04RealizationStart
 

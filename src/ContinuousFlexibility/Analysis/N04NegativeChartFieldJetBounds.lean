@@ -55,7 +55,10 @@ private theorem representative_mixedJet_eq
     (convex_univ.prod convex_univ)).parameter a b q (mem_univ _)
   let U₀ : Set P := V ∩ (fun y => x + L y) ⁻¹' U
   have hU₀ : IsOpen U₀ := hV.inter (hU.preimage (continuous_const.add L.continuous))
-  have h0₀ : (0 : P) ∈ U₀ := ⟨h0, by simpa only [map_zero, add_zero] using hx⟩
+  have h0₀ : (0 : P) ∈ U₀ := by
+    refine ⟨h0, ?_⟩
+    change x + L (0 : P) ∈ U
+    simpa only [map_zero, add_zero] using hx
   let A := (smoothDirections_precompAffine (RF.parameter a b q hq) x L).restrict
     hU₀ (fun _ h => h.2)
   let B : SmoothDirections U₀ (fun y => mixedDerivative a b (fun p => d (y, p)) q) :=
@@ -64,8 +67,9 @@ private theorem representative_mixedJet_eq
   have he := congrArg (fun T : P [×k]→L[ℝ] ℝ => T v)
     ((Q.restrict hU₀ (subset_univ _)).unique B k 0 h0₀)
   have he' : Q.D k 0 v = (RF.parameter a b q hq).D k x (fun i => L (v i)) := by
-    simpa only [B, A, SmoothDirections.congrOn, SmoothDirections.restrict_D,
-      smoothDirections_precompAffine_D_apply, map_zero, add_zero] using he
+    change Q.D k 0 v =
+      (RF.parameter a b q hq).D k (x + L (0 : P)) (fun i => L (v i)) at he
+    simpa only [map_zero, add_zero] using he
   have hm := n04Realization_mixedParameter_eq_joint J isOpen_univ isOpen_univ
     (convex_univ.prod convex_univ) a b k (0 : P) (mem_univ _) q (mem_univ _) Q v
   exact hm.symm.trans he'
@@ -203,10 +207,10 @@ theorem FullHalfFieldPowerControl.finiteRepresentative_prefix
   have hE (i : ℕ × Bool) (q : PolarPoint)
       (_hq : q ∈ Ioo (0 : ℝ) (W.negativeOpticalWidth i.1 i.2) ×ˢ univ) :
       1 ≤ W.T.E0 (W.negativeHalfSample e i.1 i.2) := W.floor _
-  have hdrift := hd.representative_prefix A.1.regular
+  have hdrift := hd.representative_prefix (P := P) A.1.regular
     (isOpen_stateNeighborhood W.S W.C base W.negativeHalfStateRadius)
     (fun _ => isOpen_Ioo.prod isOpen_univ) hH hE
-  have hspeed := hc.representative_prefix A.2.regular
+  have hspeed := hc.representative_prefix (P := P) A.2.regular
     (isOpen_stateNeighborhood W.S W.C base W.negativeHalfStateRadius)
     (fun _ => isOpen_Ioo.prod isOpen_univ) hH hE
   refine ⟨shift, ?_, ?_⟩

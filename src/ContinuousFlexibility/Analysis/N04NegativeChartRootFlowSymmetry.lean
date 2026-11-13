@@ -46,8 +46,8 @@ private theorem normalizedFactors_reflect
   · change profileEnergy w (r, -θ) * radialPartial (heightAngular h) (r, -θ) /
       (w r * (heightQ (profileEnergy w (r, -θ)) (heightRadial h (r, -θ))
         (angularPartial (heightAngular h) (r, -θ)) / w r)) = _
-    rw [hE, hpr, hQ]
-    simp only [normalizedSpeedFactor, if_pos rfl, mul_neg, neg_div, w, h]
+    rw [hQ, hE, hpr]
+    simp only [normalizedSpeedFactor, ↓reduceIte, mul_neg, neg_div, w, h]
   · change Real.sqrt (polarDiscriminant w h (r, -θ)) /
       (heightQ (profileEnergy w (r, -θ)) (heightRadial h (r, -θ))
         (angularPartial (heightAngular h) (r, -θ)) / w r) = _
