@@ -17,6 +17,13 @@ namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements CanonicalGeometry
 
+/-- Reindex before instantiating a concrete physical grading. -/
+private theorem negativeInverse_grading_index_le
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) {a b : ℕ} (hab : a = b)
+    {x : E} {R : ℝ} (h : p b x ≤ R) : p a x ≤ R := by
+  simpa only [hab] using h
+
 attribute [local instance]
   n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
   n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
@@ -86,14 +93,22 @@ private theorem negativeInverse_jointPrefix_pair
   letI : LocallyConvexSpace ℝ (Parameter G.W.S) :=
     (sectorPairGrading_withSeminorms G.W.S).toLocallyConvexSpace
   obtain ⟨L, hL, hheight⟩ := G.negativeInverse_height_uniform
-  obtain ⟨shift, hshift, hf⟩ := hprefix k
+  let orderData := hprefix k
+  let shift : ℕ := orderData.choose
+  have hshift : 1 ≤ shift := orderData.choose_spec.1
+  have hf := orderData.choose_spec.2
   refine ⟨shift + 1, fun s => ?_⟩
   let N : ℕ := k + s
-  obtain ⟨B, hB, hforward⟩ := hf N
+  let boundData := hf N
+  let B : ℝ := boundData.choose
+  have hB : 1 ≤ B := boundData.choose_spec.1
+  have hforward := boundData.choose_spec.2
   obtain ⟨D, hD, hcoeff⟩ := n04NegativeInverse_normalizedMajorants_envelope N hB hL
   refine ⟨D, zero_lt_one.trans_le hD, ?_⟩
   intro i hi J Q z hz q hq n w hw hs v hl R hR hzR hvR hp hvstate hvspace
-  obtain ⟨j, hi'⟩ := (G.neg_iff_inl 0 i).mp hi
+  let indexData : ∃ j : ℕ × Bool, G.e i = .inl j := (G.neg_iff_inl 0 i).mp hi
+  let j : ℕ × Bool := indexData.choose
+  have hi' : G.e i = .inl j := indexData.choose_spec
   let E : ℝ := G.W.U.E0 (G.W.U.sample ((G.V 0).cell i))
   let H : ℝ := G.W.U.H (G.W.U.sample ((G.V 0).cell i)) ^ (3 / 4 : ℝ)
   let t : ℝ := R ^ (1 / (((N + shift * k : ℕ) : ℝ) + 1))
@@ -118,13 +133,17 @@ private theorem negativeInverse_jointPrefix_pair
     omega
   have hindex : base + N + shift * k + 1 = base + s + (shift + 1) * k + 1 := by
     omega
-  have hzR' : parameterGrading G.W.S (base + N + shift * k + 1) z ≤ R := by
-    simpa only [hindex] using hzR
+  have hzR' : parameterGrading G.W.S (base + N + shift * k + 1) z ≤ R :=
+    negativeInverse_grading_index_le (parameterGrading G.W.S) hindex hzR
   have hvR' (a : Fin n) :
-      parameterGrading G.W.S (base + N + shift * k + 1) (v a).1 ≤ R := by
-    simpa only [hindex] using hvR a
-  obtain ⟨hfwd, hscalar, hdet, hlinear⟩ :=
+      parameterGrading G.W.S (base + N + shift * k + 1) (v a).1 ≤ R :=
+    negativeInverse_grading_index_le (parameterGrading G.W.S) hindex (hvR a)
+  have forwardData :=
     hforward i j.1 j.2 hi' z hz q hq R hR hzR'
+  have hfwd := forwardData.1
+  have hscalar := forwardData.2.1
+  have hdet := forwardData.2.2.1
+  have hlinear := forwardData.2.2.2
   let JF := G.negativeInverseForwardOn 0 hadm i j.1 j.2 hi'
   let KG := G.negativeInverseCanonicalOn 0 hadm i j.1 j.2 hi'
   let JH := G.negativeInverseHeightOn 0 hadm i j.1 j.2 hi'
@@ -250,17 +269,27 @@ theorem negativeInverse_jointPrefixes_of_forward
     (sectorNeighborhood_isOpen G.W.S base ε ε).prod (isOpen_Ioo.prod isOpen_univ)
   constructor
   · intro k hk
-    obtain ⟨shift, hshift⟩ := G.negativeInverse_jointPrefix_pair hadm hprefix k hk
+    let orderData := G.negativeInverse_jointPrefix_pair hadm hprefix k hk
+    let shift : ℕ := orderData.choose
+    have hshift := orderData.choose_spec
     refine ⟨shift, fun s => ?_⟩
-    obtain ⟨D, hD, hb⟩ := hshift s
+    let boundData := hshift s
+    let D : ℝ := boundData.choose
+    have hD : 0 < D := boundData.choose_spec.1
+    have hb := boundData.choose_spec.2
     refine ⟨D, hD, ?_⟩
     intro i hi J z hz q hq n w hw hs v hl R hR hzR hvR hp hstate hspatial
     let Q := (G.negativePulledHeightJointTower 0 i hi).restrict hopen hsub
     exact (hb i hi J Q z hz q hq n w hw hs v hl R hR hzR hvR hp hstate hspatial).1
   · intro k hk
-    obtain ⟨shift, hshift⟩ := G.negativeInverse_jointPrefix_pair hadm hprefix k hk
+    let orderData := G.negativeInverse_jointPrefix_pair hadm hprefix k hk
+    let shift : ℕ := orderData.choose
+    have hshift := orderData.choose_spec
     refine ⟨shift, fun s => ?_⟩
-    obtain ⟨D, hD, hb⟩ := hshift s
+    let boundData := hshift s
+    let D : ℝ := boundData.choose
+    have hD : 0 < D := boundData.choose_spec.1
+    have hb := boundData.choose_spec.2
     refine ⟨D, hD, ?_⟩
     intro i hi Q z hz q hq n w hw hs v hl R hR hzR hvR hp hstate hspatial
     let J := (G.negativeInversePointJointTower 0 i hi).restrict hopen hsub
