@@ -75,44 +75,40 @@ theorem n04NegativeGeometry_atoms_spatial_of_fields
   cases a <;> simp only [atomIsGeometry] at ha <;> dsimp only [atom]
   · refine ⟨(((hF.comp hP.contDiffOn hPmap).fst.sub contDiffOn_const).div_const _), ?_⟩
     intro p hp
-    change ((K.chart z m (physicalUnitPoint K m (p + (0, Real.pi)))).1 - K.left m) /
-      (K.right m - K.left m) = _
+    dsimp only [atom]
     rw [hPshift, (hperiod _ (hPmap hp)).1]
     simp only [Prod.fst_add, add_zero]
   · refine ⟨((hF.comp hP.contDiffOn hPmap).snd.sub hP.contDiffOn.snd), ?_⟩
     intro p hp
-    change (K.chart z m (physicalUnitPoint K m (p + (0, Real.pi)))).2 -
-      (physicalUnitPoint K m (p + (0, Real.pi))).2 = _
+    dsimp only [atom]
     rw [hPshift, (hperiod _ (hPmap hp)).1]
     simp only [Prod.snd_add, add_sub_add_right_eq_sub]
   · refine ⟨(((hI.comp hC.contDiffOn hCmap).fst.sub contDiffOn_const).div_const _), ?_⟩
     intro p hp
-    change ((K.inverseChart z m (canonicalUnitPoint K m (p + (0, Real.pi)))).1 -
-      K.physicalLeft m) / (K.physicalRight m - K.physicalLeft m) = _
+    dsimp only [atom]
     rw [hCshift, hIperiod _ (hCmap hp)]
     simp only [Prod.fst_add, add_zero]
   · refine ⟨((hI.comp hC.contDiffOn hCmap).snd.sub hC.contDiffOn.snd), ?_⟩
     intro p hp
-    change (K.inverseChart z m (canonicalUnitPoint K m (p + (0, Real.pi)))).2 -
-      (canonicalUnitPoint K m (p + (0, Real.pi))).2 = _
+    dsimp only [atom]
     rw [hCshift, hIperiod _ (hCmap hp)]
     simp only [Prod.snd_add, add_sub_add_right_eq_sub]
   · refine ⟨hH.comp hP.contDiffOn hPmap, ?_⟩
     intro p hp
-    change K.height z m (physicalUnitPoint K m (p + (0, Real.pi))) = _
+    dsimp only [atom]
     rw [hPshift, (hperiod _ (hPmap hp)).2]
   · refine ⟨(hH.inv (fun p hp => (hgood p hp).2.ne')).comp hP.contDiffOn hPmap, ?_⟩
     intro p hp
-    change (K.height z m (physicalUnitPoint K m (p + (0, Real.pi))))⁻¹ = _
+    dsimp only [atom]
     rw [hPshift, (hperiod _ (hPmap hp)).2]
   · refine ⟨hJ.comp hP.contDiffOn hPmap, ?_⟩
     intro p hp
-    change |planeJacobian (K.chart z m) (physicalUnitPoint K m (p + (0, Real.pi)))| = _
+    dsimp only [atom]
     rw [hPshift, hJperiod _ (hPmap hp)]
   · refine ⟨(hJ.inv (fun p hp => abs_ne_zero.mpr (hgood p hp).1)).comp
       hP.contDiffOn hPmap, ?_⟩
     intro p hp
-    change |planeJacobian (K.chart z m) (physicalUnitPoint K m (p + (0, Real.pi)))|⁻¹ = _
+    dsimp only [atom]
     rw [hPshift, hJperiod _ (hPmap hp)]
 
 namespace N04RealizationGauge
@@ -141,10 +137,11 @@ theorem negative_geometry_spatial (G : N04RealizationGauge)
       intro he
       subst a
       cases ha
-    simpa only [G.negative_atomFamily η z m j hi a haux] using
-      (n04NegativeGeometry_atoms_spatial_of_fields (T := G.W.U) k
-        (hA.referenceBounds k).1 (hA.referenceBounds k).2.1
-        hf.1 hf.2.1 hf.2.2.1 hf.2.2.2.1 hf.2.2.2.2.1 hf.2.2.2.2.2 a ha)
+    rw [G.negative_atomFamily η z m j hi a haux]
+    exact n04NegativeGeometry_atoms_spatial_of_fields
+      (D := G.W.D) (T := G.W.U) (C := G.W.C) (L := G.W.L) k
+      (hA.referenceBounds k).1 (hA.referenceBounds k).2.1
+      hf.1 hf.2.1 hf.2.2.1 hf.2.2.2.1 hf.2.2.2.2.1 hf.2.2.2.2.2 a ha
 
 end N04RealizationGauge
 

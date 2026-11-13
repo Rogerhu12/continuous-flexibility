@@ -25,6 +25,18 @@ local instance n04NegativeGeometryInverseBoundsCircleSMul (H : CircleModelData) 
 local instance n04NegativeGeometryInverseBoundsStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
+private theorem inverseBounds_neg_jet
+    {E F : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    [IsTopologicalAddGroup F]
+    {U : Set E} {f : E → F} (J : SmoothDirections U f)
+    (q : Seminorm ℝ F) (n : ℕ) (x : E) (v : Fin n → E) {A : ℝ}
+    (h : q ((solveSmoothDirectionsPostcomp J (-ContinuousLinearMap.id ℝ F)).D n x v) ≤ A) :
+    q (J.D n x v) ≤ A := by
+  change q (-J.D n x v) ≤ A at h
+  exact (map_neg_eq_map q (J.D n x v)).symm.trans_le h
+
 /-- The genuine inverse displacement of every closed-radius selector has
 one common low order. Its bound is uniform in the selector and in the
 choice of genuine tower of that same actual inverse. -/
@@ -59,6 +71,7 @@ theorem N01Properties.n04NegativeGeometry_selectorInverseCircle_fixedBase_oneHig
     fun i => smoothDirectionsProd (J i) (J i)
   let source := hN.endpointFlowCircle_fixedBase_oneHigh hS hT
   let BJ : ℕ := source.choose
+  have hBJ : base ≤ BJ := source.choose_spec.1
   have hP : ∀ n : ℕ, ∃ L : ℕ, ∀ R : ℝ, 0 ≤ R → ∀ s : ℕ,
       ∃ K : ℝ, 0 ≤ K ∧ ∀ i x, x ∈ U → p BJ x ≤ R →
       ∀ v : Fin n → StateDirections S × ℝ,
@@ -88,11 +101,12 @@ theorem N01Properties.n04NegativeGeometry_selectorInverseCircle_fixedBase_oneHig
       (fun j => -opticalTravel D.w (C.left j) (i.val j)) (f i x) m θ
     exact (hflow x hx m (i.val m) (i.property m) θ).trans_eq (he.symm.trans hd)
   let inverse := n04NegativeGeometry_circleInverse_fixedBase_oneHigh
+    (I := I) (E := StateDirections S × ℝ) (H := H)
     (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num)
     (hS.2.2.2.2.1 (3 / 4 : ℝ)).2.2 p hp hIp P BJ hP
     (fun i m => -opticalTravel D.w (C.left m) (i.val m)) (1 / 2) (by norm_num) hlower
   let B : ℕ := inverse.choose
-  refine ⟨B, source.choose_spec.1.trans inverse.choose_spec.1, fun n => ?_⟩
+  refine ⟨B, hBJ.trans inverse.choose_spec.1, fun n => ?_⟩
   let lossData := inverse.choose_spec.2 n
   let L : ℕ := lossData.choose
   refine ⟨L, fun R hR s => ?_⟩
@@ -106,8 +120,7 @@ theorem N01Properties.n04NegativeGeometry_selectorInverseCircle_fixedBase_oneHig
       (fun x _ => by
         change -(-circlePositiveInverseComposeLinear _ _ _ _ _ _ _) = _
         exact neg_neg _)
-  have h := bound.choose_spec.2 i Jpositive x hx hlow v
-  change H.grading s (-Jinv.D n x v) ≤ _ at h
-  simpa only [map_neg_eq_map] using h
+  exact inverseBounds_neg_jet Jinv (H.grading s) n x v
+    (bound.choose_spec.2 i Jpositive x hx hlow v)
 
 end ContinuousFlexibility.Statements

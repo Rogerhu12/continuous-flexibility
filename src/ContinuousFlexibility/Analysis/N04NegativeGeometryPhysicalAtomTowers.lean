@@ -12,10 +12,24 @@ The two inverse-coordinate atoms are treated on their canonical domain.
 
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements CanonicalGeometry
 open scoped ContDiff
+
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
 
 def negativePhysicalGeometryAtom : Atom → Prop
   | .chartRadial | .chartAngleDefect | .height | .heightInverse
@@ -47,12 +61,11 @@ def n04NegativeGeometry_physicalUnitJointTower
       ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
       ContinuousLinearMap.coe_snd', smul_apply, smul_eq_mul,
       Prod.mk_add_mk, zero_add]
-  have hmap' : MapsTo (fun x => c + P x) (U ×ˢ unitStrip) (U ×ˢ Ω) := by
+  have hmaps : MapsTo (fun x => c + P x) (U ×ˢ unitStrip) (U ×ˢ Ω) := by
     intro x hx
-    change c + P x ∈ U ×ˢ Ω
-    rw [hpoint]
-    exact ⟨hx.1, hmap hx.2⟩
-  exact (J.compAffine P c (hU.prod (isOpen_Ioo.prod isOpen_univ)) hmap').congrOn
+    exact Eq.mpr (congrArg (fun y : X × PolarPoint => y ∈ U ×ˢ Ω) (hpoint x))
+      ⟨hx.1, hmap hx.2⟩
+  exact (J.compAffine P c (hU.prod (isOpen_Ioo.prod isOpen_univ)) hmaps).congrOn
     (fun x _ => congrArg f (hpoint x))
 
 namespace N04RealizationStart
@@ -125,8 +138,9 @@ def negativePhysicalAtomJointTower
   · let L : ((StateDirections W.S × ℝ) × PolarPoint) →L[ℝ] ℝ :=
       (ContinuousLinearMap.snd ℝ ℝ ℝ).comp
         (ContinuousLinearMap.snd ℝ (StateDirections W.S × ℝ) PolarPoint)
-    let Jθ := smoothDirectionsLinearOn L (U := U ×ˢ unitStrip)
-      (hU.prod (isOpen_Ioo.prod isOpen_univ))
+    let Jθ : SmoothDirections (U ×ˢ unitStrip) L :=
+      smoothDirectionsLinearOn L (U := U ×ˢ unitStrip)
+        (hU.prod (isOpen_Ioo.prod isOpen_univ))
     apply ((smoothDirectionsProd JC Jθ).comp_contDiff isOpen_univ
       ((contDiff_fst.snd.sub contDiff_snd) :
         ContDiff ℝ ∞ (fun p : PolarPoint × ℝ => p.1.2 - p.2)).contDiffOn
@@ -171,6 +185,7 @@ def negativePhysicalAtomJointTower
     (a : Atom) (ha : negativePhysicalGeometryAtom a) :
     SmoothDirections (sectorNeighborhood G.W.S G.W.base G.W.ε G.W.ε ×ˢ unitStrip)
       (fun x : (StateDirections G.W.S × ℝ) × PolarPoint => G.atomFamily η a x.1 m x.2) := by
+  classical
   let data : ∃ j : ℕ × Bool, G.e m = .inl j := (G.neg_iff_inl η m).mp hm
   let j : ℕ × Bool := data.choose
   have hi : G.e m = .inl j := data.choose_spec

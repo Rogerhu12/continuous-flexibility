@@ -14,25 +14,36 @@ stored corrected field, including the inactive part of each component.
 
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace ContinuousFlexibility.Analysis.N04RealizationStart
 
 open Set ContinuousFlexibility.Statements
 open scoped ContDiff
 
-private theorem n04NegativeGeometry_minus_add_velocity
-    {a b c v : ℝ} (hc : c = b) (hv : v = b - a) : a + v = c := by
-  rw [hc, hv]
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
+
+private theorem original_add_correction {a c v : ℝ} (h : v = c - a) : a + v = c := by
+  rw [h]
   ring
 
-private theorem n04NegativeGeometry_halfGap_of_reflection
-    (A : SymmetricCoefficients) (p : PolarPoint)
-    (href : n04bCharacteristicDrift A (p.1, -p.2) = -n04bCharacteristicDrift A p ∧
-      n04bCharacteristicHalfGap A (p.1, -p.2) = n04bCharacteristicHalfGap A p) :
-    (-1 / 2 : ℝ) *
-      (minusCharacteristicSpeed A (p.1, -p.2) + minusCharacteristicSpeed A p) =
-        n04bCharacteristicHalfGap A p := by
+private theorem halfGap_of_reflection (A : SymmetricCoefficients) (p : PolarPoint)
+    (hdrift : n04bCharacteristicDrift A (p.1, -p.2) = -n04bCharacteristicDrift A p)
+    (hgap : n04bCharacteristicHalfGap A (p.1, -p.2) = n04bCharacteristicHalfGap A p) :
+    (-1 / 2 : ℝ) * (minusCharacteristicSpeed A (p.1, -p.2) +
+      minusCharacteristicSpeed A p) = n04bCharacteristicHalfGap A p := by
   rw [(n04b_characteristic_speed_factorization A (p.1, -p.2)).1,
-    (n04b_characteristic_speed_factorization A p).1, href.1, href.2]
+    (n04b_characteristic_speed_factorization A p).1, hdrift, hgap]
   ring
 
 variable (W : N04RealizationStart)
@@ -171,7 +182,7 @@ def negativeMinusJointTower (m : ℕ) :
     W.through03.1.1 W.through03.1.2
     W.cutoff.cutoff (liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl)
     (W.through03.1.1.2.2.1.liftSectorParameter_sector x.1) m x.2
-  exact n04NegativeGeometry_minus_add_velocity hc hv
+  exact (original_add_correction hv).trans hc.symm
 
 /-- Reflection of the actual minus speed recovers the actual positive
 half-gap, as a function on the same complete physical component. -/
@@ -201,8 +212,7 @@ def negativeHalfGapJointTower (m : ℕ) :
     (minusCharacteristicSpeed (W.L.coefficients (liftSectorParameter W.S W.C x.1))
       (x.2.1, -x.2.2) +
       minusCharacteristicSpeed (W.L.coefficients (liftSectorParameter W.S W.C x.1)) x.2) = _
-  exact n04NegativeGeometry_halfGap_of_reflection
-    (W.L.coefficients (liftSectorParameter W.S W.C x.1)) x.2 href
+  exact halfGap_of_reflection _ _ href.1 href.2
 
 end ContinuousFlexibility.Analysis.N04RealizationStart
 

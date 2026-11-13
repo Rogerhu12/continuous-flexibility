@@ -53,7 +53,7 @@ theorem flowJet_difference_norm_le_of_integral_equations
     abel
   have hb := flowJet_norm_le_of_integral_equation
     (hu.sub hu₀) (hq.sub hq₀) hα hα0 hM hΛ hsub hbound
-  simpa only [norm_zero, zero_add, Pi.sub_apply] using hb
+  simpa only [Pi.sub_apply, norm_zero, zero_add] using hb
 
 /-- The ordinary mixed derivative of a difference of two actual flows
 obeys the zero-initial-data estimate at every spatial order. -/
@@ -89,8 +89,10 @@ theorem n04Flow_spatialJet_difference_norm_le_of_composed_bound
     (fun t ht => n04Flow_spatialJet_integral_eq hF hperiod hΘ n q ht)
     (fun t ht => n04Flow_spatialJet_integral_eq hF₀ hperiod₀ hΘ₀ n q ht) hbound
   intro t ht
-  have hs := (n04Flow_contDiff_slice hF hperiod hΘ ht).contDiffAt (x := q)
-  have hs₀ := (n04Flow_contDiff_slice hF₀ hperiod₀ hΘ₀ ht).contDiffAt (x := q)
+  have hs : ContDiffAt ℝ ∞ (fun y : N04FlowPoint => Θ y.1 t y.2) q :=
+    (n04Flow_contDiff_slice hF hperiod hΘ ht).contDiffAt
+  have hs₀ : ContDiffAt ℝ ∞ (fun y : N04FlowPoint => Θ₀ y.1 t y.2) q :=
+    (n04Flow_contDiff_slice hF₀ hperiod₀ hΘ₀ ht).contDiffAt
   change ‖iteratedFDeriv ℝ n
     ((fun y : N04FlowPoint => Θ y.1 t y.2) -
       (fun y : N04FlowPoint => Θ₀ y.1 t y.2)) q‖ ≤ M * Real.exp Λ

@@ -142,7 +142,6 @@ theorem continuous_graph_reindex {U : Set E} {n N : ℕ}
     (B : N04NegativeGeometryImplicitJet U Y n) (σ : Fin n → Fin N) :
     ContinuousOn (fun p : E × (Fin N → E) =>
       graph n (B.value p.1) (p.2 ∘ σ)) (U ×ˢ univ) := by
-  simp only [graph_apply]
   have hr : Continuous (fun p : E × (Fin N → E) => (p.2 ∘ σ : Fin n → E)) :=
     continuous_pi (fun i => (continuous_apply (σ i)).comp continuous_snd)
   have hp : Continuous (fun p : E × (Fin N → E) =>
@@ -151,7 +150,11 @@ theorem continuous_graph_reindex {U : Set E} {n N : ℕ}
       (U ×ˢ univ) :=
     B.continuous.comp (continuous_fst.prodMk hr).continuousOn
       (fun _ hx => ⟨hx.1, mem_univ _⟩)
-  exact hp.continuousOn.add (continuousOn_const.prodMk hb)
+  have hz : ContinuousOn (fun _ : E × (Fin N → E) => (0 : E)) (U ×ˢ univ) :=
+    continuousOn_const
+  apply (hp.continuousOn.add (hz.prodMk hb)).congr
+  intro p _
+  simp only [Pi.add_apply, graph_apply]
 
 def forcing {U : Set E} {V : Set Y} {H : E × Y → Y} {N : ℕ}
     (J : SmoothDirections (U ×ˢ V) H) (g : E → Y)

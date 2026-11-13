@@ -28,7 +28,7 @@ local instance n01CorrectionCoefficientPolynomialGrowthParameterSMul (S : Physic
 open Set ContinuousFlexibility.Analysis
 open scoped ContDiff Topology
 
-private def correctionPolynomialValue (a b q ve ver vr vrr : ℝ) : ℝ × ℝ :=
+def correctionPolynomialValue (a b q ve ver vr vrr : ℝ) : ℝ × ℝ :=
   let ed := (ve - ver) / 2
   let ev := (-ver - ve) / 2
   let rd := (vr - vrr) / 2
@@ -53,7 +53,7 @@ private theorem correctionPolynomial_entry_two_apply
     originalCoefficientEntry D S C 2 z p = (originalCoefficients D S C z).c p := by
   norm_num [originalCoefficientEntry]
 
-private def correctionPolynomial_sqrtDirections
+def correctionPolynomial_sqrtDirections
     {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
     [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
     {U : Set X} {a b c : X → ℝ}
@@ -85,7 +85,7 @@ variable {I E : Type*}
   [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
   [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
 
-private def correctionPolynomial_reflectedDirections
+def correctionPolynomial_reflectedDirections
     {U : Set E} {V : Set PolarPoint} {f : E × PolarPoint → ℝ}
     (J : SmoothDirections (U ×ˢ V) f) (hU : IsOpen U) (hV : IsOpen V)
     (hmap : ∀ y ∈ V, (y.1, -y.2) ∈ V) :
@@ -195,7 +195,7 @@ private theorem correctionPolynomial_growth_from_velocity
 
 end GenericPolynomial
 
-private theorem correctionPolynomial_actual_error
+theorem correctionPolynomial_actual_error
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {R : ReturnEquationData S}
     {base loss : ℕ} {ε : ℝ}

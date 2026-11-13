@@ -46,7 +46,11 @@ theorem n04NegativeGeometry_travelAngleInverse_continuousOn
   have hMaps : MapsTo (fun q : P × PolarPoint => ((q.1, q.2.1), q.2.2))
       (U ×ˢ (Ioo a b ×ˢ univ)) ((U ×ˢ Ioo a b) ×ˢ univ) :=
     fun q hq => ⟨⟨hq.1, hq.2.1⟩, mem_univ _⟩
-  exact hA.comp hReindex.continuousOn hMaps
+  have hc : ContinuousOn
+      (fun q : P × PolarPoint => parameterizedCircleInverse φ ((q.1, q.2.1), q.2.2))
+      (U ×ˢ (Ioo a b ×ˢ univ)) :=
+    hA.comp hReindex.continuousOn hMaps
+  exact hc
 
 /-- The literal travel coordinate at a fixed target angle has the same
 joint continuity, before any radial inverse has been selected. -/
