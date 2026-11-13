@@ -203,7 +203,7 @@ theorem negativeInterior_physical_positive_bounds
         oneHighVariationWeight (parameterGrading W.S) base (s + Dτ * n + base + 1) z v := by
       simpa only [JP, SmoothDirections.congr, sub_zero, Real.norm_eq_abs] using hp
     have hweight := oneHighVariationWeight_mono (n07aParameterGrading_monotone W.S)
-      le_rfl (show s + Dτ * n + base + 1 ≤ s + loss from by dsimp only [loss]; omega) z v
+      (le_rfl : base ≤ base) (show s + Dτ * n + base + 1 ≤ s + loss from by dsimp only [loss]; omega) z v
     exact interior_enlarge_cost hE hB.le hH hV hBRB hBRB
       (hp'.trans (mul_le_mul_of_nonneg_left hweight
         (mul_nonneg (mul_nonneg hBR.le (Real.rpow_nonneg (zero_le_one.trans hE) _)) hH)))
@@ -244,7 +244,7 @@ theorem negativeInterior_physical_positive_bounds
       (1 / 2 : ℝ) (-(1 / 2 : ℝ) * (-1 : ℝ) ^ b) hformula n hz v
     have hj' : J.D n z v = (1 / 2 : ℝ) * JF.D n z v +
         (-(1 / 2 : ℝ) * (-1 : ℝ) ^ b) * JR.D n z v := by
-      simpa only [if_neg (Nat.ne_of_gt hn), zero_add] using hj
+      simpa only [if_neg (Nat.ne_of_gt hn), zero_add, SmoothDirections.restrict_D] using hj
     have hc : |-(1 / 2 : ℝ) * (-1 : ℝ) ^ b| ≤ 1 := by
       simp only [abs_mul, abs_pow, abs_neg, abs_one, one_pow, mul_one]
       norm_num
