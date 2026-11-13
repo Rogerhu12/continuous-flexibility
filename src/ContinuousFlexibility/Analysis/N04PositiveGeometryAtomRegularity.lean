@@ -90,7 +90,7 @@ theorem n04PositiveGeometry_atom_regular
     change (K.chart z m (physicalUnitPoint K m (q + (0, Real.pi)))).2 -
       (physicalUnitPoint K m (q + (0, Real.pi))).2 = _
     rw [hFp]
-    simp only [Prod.snd_add, physicalUnitPoint]
+    simp only [atom, Prod.snd_add, physicalUnitPoint]
     ring
   case inverseRadial =>
     refine ⟨((h.inverse_smooth.fst.comp hc).sub contDiff_const).div_const _, ?_⟩
@@ -102,7 +102,7 @@ theorem n04PositiveGeometry_atom_regular
     change (K.inverseChart z m (canonicalUnitPoint K m (q + (0, Real.pi)))).2 -
       (canonicalUnitPoint K m (q + (0, Real.pi))).2 = _
     rw [hGp]
-    simp only [Prod.snd_add, canonicalUnitPoint]
+    simp only [atom, Prod.snd_add, canonicalUnitPoint]
     ring
   case height =>
     exact ⟨h.height_smooth.comp hp, hHp⟩

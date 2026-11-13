@@ -24,13 +24,13 @@ open scoped ContDiff BigOperators
 
 set_option backward.isDefEq.respectTransparency false
 
-private theorem controlled_reference_grading_zero
+theorem n04PositiveGeometry_reference_grading_zero
     {E : Type} [AddCommGroup E] [Module ℝ E]
     (p : ℕ → Seminorm ℝ E) (x : E) (k : ℕ) : p k (x - x) ≤ 1 := by
   rw [sub_self, map_zero]
   exact zero_le_one
 
-private theorem controlled_reference_grading_bound
+theorem n04PositiveGeometry_reference_grading_bound
     {E : Type} [AddCommGroup E] [Module ℝ E]
     (p : ℕ → Seminorm ℝ E) (x : E) (k : ℕ) {a b : ℝ}
     (h : a ≤ b * (1 + p k (x - x))) : a ≤ b := by
@@ -56,7 +56,7 @@ theorem n04PositiveGeometry_referenceRootSpeedFactor_eq_actual
     n04b_heightQ_radialHeightField hprimitive, Real.sqrt_one, mul_one]
   rfl
 
-private theorem controlled_scalar_radial_norm_le
+theorem n04PositiveGeometry_scalar_radial_norm_le
     {f : ℝ → ℝ} (hf : ContDiffAt ℝ ∞ f 0) (j : ℕ) :
     |iteratedDeriv j f 0| ≤
       ‖iteratedFDeriv ℝ j (fun p : PolarPoint => f p.1) (0, 0)‖ := by
@@ -120,7 +120,7 @@ theorem n04PositiveGeometry_referenceRootSpeedFactor_sample_prefix
   have href : (W.C.referenceState, 0) ∈ stateNeighborhood W.S W.C W.base W.ε :=
     reference_mem_stateNeighborhood W.S W.C W.base W.ε_pos
   have hsref : stateSector W.S W.C.referenceState := W.through03.1.1.2.2.1.stateSector
-  have hlow := controlled_reference_grading_zero
+  have hlow := n04PositiveGeometry_reference_grading_zero
     (pairGrading (stateGrading W.S) realGrading) (W.C.referenceState, 0) low
   have hw : ContDiff ℝ ∞ W.D.w := W.through03.1.1.1.1.choose_spec.1.2.2.1.1
   refine ⟨B, hB, ?_⟩
@@ -155,7 +155,7 @@ theorem n04PositiveGeometry_referenceRootSpeedFactor_sample_prefix
         (Real.rpow_nonneg (zero_le_one.trans hE) _) (zero_le_one.trans hB)
   have hraw := hjets (W.C.referenceState, 0) href hsref hlow
     m (W.C.cell m) (W.host m) (X.optical m) (!side) g hg hfactor R hR hstrip 0 j
-  have hraw' := controlled_reference_grading_bound
+  have hraw' := n04PositiveGeometry_reference_grading_bound
     (pairGrading (stateGrading W.S) realGrading) (W.C.referenceState, 0)
     (j + outLoss) hraw
   have heq := n04PositiveGeometry_referenceRootSpeedFactor_eq_actual hw
@@ -176,7 +176,7 @@ theorem n04PositiveGeometry_referenceRootSpeedFactor_sample_prefix
   have hroot := hstrip (0, 0) hzero
   have hsmooth : ContDiffAt ℝ ∞ (referenceRootSpeedFactor W.D.w g r σ) 0 :=
     contDiffAt_referenceRootSpeedFactor hw hg hroot.1 hroot.2.1 hroot.2.2.1
-  exact (controlled_scalar_radial_norm_le hsmooth j).trans (hpolar.trans
+  exact (n04PositiveGeometry_scalar_radial_norm_le hsmooth j).trans (hpolar.trans
     ((mul_le_mul (hAB j hj) (Real.rpow_le_rpow_of_exponent_le hV (hAB j hj))
       (Real.rpow_nonneg (zero_le_one.trans hV) _) (zero_le_one.trans hB₀)).trans hmaterial))
 

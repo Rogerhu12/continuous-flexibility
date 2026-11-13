@@ -69,7 +69,7 @@ theorem n04PositiveGeometry_rootSpatialPacket_mixed {n : ℕ}
     have he := congrArg
       (fun A : PolarPoint [×c.partSize j]→L[ℝ] ℝ =>
         A ((fun t => cylinderBasisVector (w t)) ∘ c.emb j))
-      (L.iteratedFDeriv_comp_left hu.contDiffAt (i := c.partSize j) (by simp))
+      (L.iteratedFDeriv_comp_left (x := p) hu.contDiffAt (i := c.partSize j) (by simp))
     change iteratedFDeriv ℝ (c.partSize j) (fun q => u q ij.2) p
         ((fun t => cylinderBasisVector (w t)) ∘ c.emb j) =
       (iteratedFDeriv ℝ (c.partSize j) u p

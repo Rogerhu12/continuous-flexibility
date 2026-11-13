@@ -72,8 +72,8 @@ private theorem angularPatchKernel_bounds
       (hasPositiveEnvelope_const W hW |(((j : ℕ).factorial : ℝ))⁻¹|)
     simpa only [div_eq_mul_inv] using
       (hcut.mul ((hshift.pow hW j).mul hfactor hW) hW).mul (ha j) hW
-  exact N04PositiveKernelJetBounds.sum hW Finset.univ
-    (fun j i y => (positiveEndpointCutoff (c i) (δ i) (x i y) *
+  exact N04PositiveKernelJetBounds.sum hW (Finset.univ : Finset (Fin (n + 1)))
+    (fun (j : Fin (n + 1)) i y => (positiveEndpointCutoff (c i) (δ i) (x i y) *
       ((x i y - c i) ^ (j : ℕ) / ((j : ℕ).factorial : ℝ))) * a i y j)
     (fun j _ => hterm j)
 
@@ -96,8 +96,11 @@ theorem n04PositiveGeometry_angularKernel_bounds
     let L : Q →L[ℝ] ℝ := (ContinuousLinearMap.proj j).comp
       ((ContinuousLinearMap.proj side).comp
         (ContinuousLinearMap.fst ℝ (N04PositiveRadialCoefficients n) ℝ))
-    simpa only [L, ContinuousLinearMap.comp_apply, ContinuousLinearMap.proj_apply,
-      ContinuousLinearMap.coe_fst'] using N04PositiveKernelJetBounds.linear hW L hp
+    apply (N04PositiveKernelJetBounds.linear hW L hp).congr
+    intro i
+    funext y
+    simp only [L, ContinuousLinearMap.comp_apply, ContinuousLinearMap.proj_apply,
+      ContinuousLinearMap.coe_fst']
   have hx : N04PositiveKernelJetBounds W p (fun _ (y : Q) => y.2) :=
     N04PositiveKernelJetBounds.linear hW
       (ContinuousLinearMap.snd ℝ (N04PositiveRadialCoefficients n) ℝ) hp

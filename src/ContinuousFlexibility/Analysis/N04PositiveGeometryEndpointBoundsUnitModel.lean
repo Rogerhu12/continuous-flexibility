@@ -126,7 +126,10 @@ theorem n04PositiveGeometry_actual_unitRootCoordinate_properties
       (stateProfile D S C z.1) (stateHeight D S C z) r σ) hR
       (show ((0, θ) : PolarPoint) ∈ Ioo (-(R / 2)) (R / 2) ×ˢ univ from
         ⟨⟨by linarith only [hR], by linarith only [hR]⟩, mem_univ _⟩)
-    exact he.symm ▸ factoredCharacteristicSpeed_pos hb.1 hb.2.1 hb.2.2.1
+    change 0 < rootFieldLocalization (factoredCharacteristicSpeed D.w g
+      (stateProfile D S C z.1) (stateHeight D S C z) r σ) hR (0, θ)
+    rw [he]
+    exact factoredCharacteristicSpeed_pos hb.1 hb.2.1 hb.2.2.1
       hb.2.2.2.1 hb.2.2.2.2.1
   exact rootFlow_coordinate_properties hregular.1 hregular.2 hperiod.1 hperiod.2
     (fun x θ => (hreflect x θ).1) (fun x θ => (hreflect x θ).2) hpos

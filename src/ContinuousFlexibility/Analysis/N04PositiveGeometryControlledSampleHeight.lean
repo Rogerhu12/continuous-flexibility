@@ -64,12 +64,13 @@ theorem n04PositiveGeometry_sample_height_bound
     ∃ RH : ℝ, 0 < RH ∧ ∀ i,
       0 ≤ W.U.H (W.U.sample (X.cell i)) ^ γ ∧
         W.U.H (W.U.sample (X.cell i)) ^ γ ≤ RH := by
-  obtain ⟨RH, hRH, hbound⟩ := materialHeight_E0_weight_bounded W.hT hγ 0
+  have hU : IsMaterialData W.D W.U := isMaterialData_enlargedMaterialData W.radial.1 W.hT
+  obtain ⟨RH, hRH, hbound⟩ := materialHeight_E0_weight_bounded hU hγ 0
   refine ⟨RH, hRH, ?_⟩
   intro i
-  have hs : W.T.sample (X.cell i) ∈ Ioo W.D.a W.D.b :=
-    materialSample_mem_interval W.radial.1 W.hT (X.cell i)
-  refine ⟨Real.rpow_nonneg (W.hT.2.1 _ hs).2.1.le _, ?_⟩
+  have hs : W.U.sample (X.cell i) ∈ Ioo W.D.a W.D.b :=
+    materialSample_mem_interval W.radial.1 hU (X.cell i)
+  refine ⟨Real.rpow_nonneg (hU.2.1 _ hs).2.1.le _, ?_⟩
   simpa only [Real.rpow_zero, mul_one] using hbound _ hs
 
 /-- A fixed pointwise polynomial coefficient at either actual endpoint

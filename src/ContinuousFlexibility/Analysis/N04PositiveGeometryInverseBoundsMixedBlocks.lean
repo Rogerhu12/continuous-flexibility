@@ -30,7 +30,7 @@ private theorem projectedGraph_state_one
   cases hb : b 0 <;>
     simp only [ContinuousLinearMap.prod_apply, ContinuousLinearMap.coe_fst',
       n04PositiveGeometry_slotProjection_apply, hb, Bool.false_eq_true,
-      if_false, if_true]
+      if_false, if_true, Prod.mk_zero_zero]
 
 /-- At every positive order, the selected state graph jet has norm at
 most one. This bound is independent of all inverse derivatives. -/
@@ -54,7 +54,8 @@ theorem n04PositiveGeometry_projectedGraph_state_norm_le
   · have hn2 : 2 ≤ n := by omega
     have he : (n04PositiveGeometry_slotProjection true).compContinuousMultilinearMap
         (n04PositiveGeometry_projectedJet b (n04PositiveGeometry_fiberLift g) x) = 0 := by
-      ext v
+      apply ContinuousMultilinearMap.ext
+      intro v
       change n04PositiveGeometry_slotProjection true
         (n04PositiveGeometry_projectedJet b (n04PositiveGeometry_fiberLift g) x v) = 0
       rw [n04PositiveGeometry_projectedJet_apply, n04PositiveGeometry_fiberLift_jet hg hn2]
@@ -78,14 +79,16 @@ theorem n04PositiveGeometry_projectedGraph_state_eq_zero
         exact (hbad ⟨rfl, rfl⟩).elim
     | angle w =>
         cases w
-        ext v
+        apply ContinuousMultilinearMap.ext
+        intro v
         change n04PositiveGeometry_slotProjection true
           (n04PositiveGeometry_projectedJet (StateAngleWord.angle .nil).isState
             (n04PositiveGeometry_fiberLift g) x v) = 0
         rw [projectedGraph_state_one hg]
         rfl
   · have hn2 : 2 ≤ n := by omega
-    ext v
+    apply ContinuousMultilinearMap.ext
+    intro v
     change n04PositiveGeometry_slotProjection true
       (n04PositiveGeometry_projectedJet w.isState (n04PositiveGeometry_fiberLift g) x v) = 0
     rw [n04PositiveGeometry_projectedJet_apply, n04PositiveGeometry_fiberLift_jet hg hn2]
@@ -100,7 +103,8 @@ theorem n04PositiveGeometry_projectedGraph_space_eq
       (n04PositiveGeometry_projectedJet b (n04PositiveGeometry_fiberLift g) x) =
       (ContinuousLinearMap.inr ℝ P V).compContinuousMultilinearMap
         (n04PositiveGeometry_projectedJet b g x) := by
-  ext v
+  apply ContinuousMultilinearMap.ext
+  intro v
   change n04PositiveGeometry_slotProjection false
       (n04PositiveGeometry_projectedJet b (n04PositiveGeometry_fiberLift g) x v) =
     (0, n04PositiveGeometry_projectedJet b g x v)
@@ -167,7 +171,8 @@ theorem n04PositiveGeometry_inverseSelectedTerm_eq_zero
       (w.restrict (c.emb i)).angleArity = 0)) :
     n04PositiveGeometry_inverseSelectedTerm w.isState f g x c s = 0 := by
   have hz := n04PositiveGeometry_inverseSelectedBlock_state_eq_zero hg w c s i hi hbad
-  ext v
+  apply ContinuousMultilinearMap.ext
+  intro v
   change (n04PositiveGeometry_projectedJet (fun j => decide (j ∈ s)) f
     (n04PositiveGeometry_fiberLift g x))
     (fun j => n04PositiveGeometry_inverseSelectedBlock w.isState g x c s j (v ∘ c.emb j)) = 0
@@ -187,7 +192,8 @@ theorem n04PositiveGeometry_fiberInverse_state_one
     n04PositiveGeometry_projectedJet b g x =
       -B.compContinuousMultilinearMap
         (n04PositiveGeometry_projectedJet b f (n04PositiveGeometry_fiberLift g x)) := by
-  ext v
+  apply ContinuousMultilinearMap.ext
+  intro v
   simp only [ContinuousMultilinearMap.neg_apply,
     ContinuousLinearMap.compContinuousMultilinearMap_coe, comp_apply,
     n04PositiveGeometry_projectedJet_apply, iteratedFDeriv_one_apply]

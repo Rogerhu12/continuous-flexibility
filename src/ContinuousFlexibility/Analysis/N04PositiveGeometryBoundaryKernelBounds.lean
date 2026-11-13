@@ -25,6 +25,19 @@ variable {E F G : Type*}
 
 namespace N04BoundaryWordBounds
 
+theorem postcompCLM {U : Set E} {f : E × ℝ → F}
+    {J : SmoothDirections (U ×ˢ univ) f}
+    {K s d : ℕ} {x : E} {θ : ℝ} {P : E → Prop} {M H t : ℝ} {shift : ℕ}
+    (hf : N04BoundaryWordBounds J K s d x θ P M H t shift)
+    (A : F →L[ℝ] G) (hA : ‖A‖ ≤ 1) :
+    N04BoundaryWordBounds (smoothDirections_postcompCLM J A)
+      K s d x θ P M H t shift := by
+  intro n w hk ha v hv hp
+  rw [smoothDirections_postcompCLM_D_apply]
+  exact (A.le_opNorm _).trans
+    ((mul_le_mul_of_nonneg_right hA (norm_nonneg _)).trans
+      (by simpa only [one_mul] using hf n w hk ha v hv hp))
+
 theorem prod {U : Set E} {f : E × ℝ → F} {g : E × ℝ → G}
     {J : SmoothDirections (U ×ˢ univ) f} {Q : SmoothDirections (U ×ˢ univ) g}
     {K s d : ℕ} {x : E} {θ : ℝ} {P : E → Prop} {M H t : ℝ} {shift : ℕ}
@@ -35,8 +48,8 @@ theorem prod {U : Set E} {f : E × ℝ → F} {g : E × ℝ → G}
   change max ‖J.D n (x, θ) v‖ ‖Q.D n (x, θ) v‖ ≤ _
   exact max_le (hf n w hk ha v hv hp) (hg n w hk ha v hv hp)
 
-theorem vectorTuple {ι : Type*} [Fintype ι] {U : Set E}
-    (hU : IsOpen U) {f : ι → E × ℝ → F}
+theorem vectorTuple {m : ℕ} {U : Set E}
+    (hU : IsOpen U) {f : Fin m → E × ℝ → F}
     (J : ∀ i, SmoothDirections (U ×ˢ univ) (f i))
     {K s d : ℕ} {x : E} {θ : ℝ} {P : E → Prop} {M H t : ℝ} {shift : ℕ}
     (hM : 0 ≤ M) (hH : 0 ≤ H) (ht : 0 ≤ t)

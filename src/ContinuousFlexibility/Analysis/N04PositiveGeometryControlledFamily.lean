@@ -217,7 +217,8 @@ theorem n04PositiveGeometry_controlledFamily_nonempty
   let G : N04PositiveGeometryControlData W X n :=
     { buffer := buffer, base := base, ε := ε, M := M, Mσ := Mσ, δ := δ,
       Cinput := Cinput, Cbuffer := Cbuffer, Cσ := Cσ, degree := degree, Clog := Clog }
-  refine ⟨{ toN04PositiveGeometryControlData := G
+  refine ⟨{
+    toN04PositiveGeometryControlData := G
     base_le := hb
     radius_pos := hε
     radius_le := hεW

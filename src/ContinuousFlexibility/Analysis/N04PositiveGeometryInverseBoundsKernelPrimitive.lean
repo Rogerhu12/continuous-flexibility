@@ -68,14 +68,20 @@ theorem n04PositiveGeometry_scalarCollarKernel_bounds
       (fun z : J => W (e z)) q (fun (_ : J) (y : E × ℝ) => y.1.1 j) := by
     let L : (E × ℝ) →L[ℝ] ℝ := (ContinuousLinearMap.proj j).comp
       ((ContinuousLinearMap.fst ℝ P ℝ).comp (ContinuousLinearMap.fst ℝ E ℝ))
-    simpa only [L, ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
-      ContinuousLinearMap.proj_apply] using N04PositiveKernelJetBounds.linear hW' L hq
+    apply (N04PositiveKernelJetBounds.linear hW' L hq).congr
+    intro z
+    funext y
+    simp only [L, ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
+      ContinuousLinearMap.proj_apply]
   have hx : N04PositiveKernelJetBounds (fun z : J => W (e z)) q
       (fun (_ : J) (y : E × ℝ) => y.1.2) := by
     let L : (E × ℝ) →L[ℝ] ℝ :=
       (ContinuousLinearMap.snd ℝ P ℝ).comp (ContinuousLinearMap.fst ℝ E ℝ)
-    simpa only [L, ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
-      ContinuousLinearMap.coe_snd'] using N04PositiveKernelJetBounds.linear hW' L hq
+    apply (N04PositiveKernelJetBounds.linear hW' L hq).congr
+    intro z
+    funext y
+    simp only [L, ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
+      ContinuousLinearMap.coe_snd']
   have hs : N04PositiveKernelJetBounds (fun z : J => W (e z)) q
       (fun (_ : J) (y : E × ℝ) => y.2) :=
     N04PositiveKernelJetBounds.linear hW' (ContinuousLinearMap.snd ℝ E ℝ) hq

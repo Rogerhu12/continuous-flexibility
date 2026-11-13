@@ -115,7 +115,10 @@ theorem polynomial_bound (e : N04BoundaryExpression) (K s d : ℕ)
       have hf := hfi.enlarge hH (zero_le_one.trans ht) hc.2.1
       have hg := hgi.enlarge hH (zero_le_one.trans ht) hc.2.2
       have ha := hf.add hg
-      convert ha using 1 <;> ring
+      have he : (Cf + Cg) * M ^ (df + dg) + (Cf + Cg) * M ^ (df + dg) =
+          2 * (Cf + Cg) * M ^ (df + dg) := by ring
+      rw [he] at ha
+      simpa only [directions, eval] using ha
   | mul f g ihf ihg =>
       obtain ⟨Cf, hCf, df, hfb⟩ := ihf d
       obtain ⟨Cg, hCg, dg, hgb⟩ := ihg d
@@ -189,11 +192,11 @@ theorem n04PositiveGeometry_boundaryExpression_eval
     (i : Fin 8) (v : N06RootBoundaryInputs) :
     (n04PositiveGeometry_boundaryExpressions i).eval v =
       n04PositiveGeometry_boundaryFormula i v := by
-  fin_cases i <;>
-    simp [n04PositiveGeometry_boundaryExpressions, n04PositiveGeometry_boundaryFormula,
+  fin_cases i <;> funext θ <;>
+    dsimp [n04PositiveGeometry_boundaryExpressions, n04PositiveGeometry_boundaryFormula,
       N04BoundaryExpression.eval,
       n06RootEvenFormula1, n06RootEvenFormula2, n06RootEvenFormula3, n06RootEvenFormula4,
-      n06RootOddFormula0, n06RootOddFormula1, n06RootOddFormula2, n06RootOddFormula3,
-      neg_one_mul, sub_eq_add_neg, neg_mul, one_mul]
+      n06RootOddFormula0, n06RootOddFormula1, n06RootOddFormula2, n06RootOddFormula3]
+  all_goals simp only [neg_one_mul, sub_eq_add_neg, neg_mul, one_mul, mul_assoc]
 
 end ContinuousFlexibility.Analysis
