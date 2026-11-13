@@ -75,7 +75,7 @@ def n04Realization_circleInverseJointDirections
     funext θ
     rw [hF x hx]
     simp only [circleAffineLift, circleSingleComponentField,
-      if_pos rfl, one_mul, add_zero]
+      ite_true, one_mul, add_zero]
     ring
   have hpos : MapsTo F U (circlePositiveLiftDomain S) := by
     intro x hx
