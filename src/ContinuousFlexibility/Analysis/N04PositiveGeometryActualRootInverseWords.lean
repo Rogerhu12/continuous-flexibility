@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N04PositiveGeometryActualRootInversePacket
+import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInversePacketWordData
 
 /-!
 # Word bounds for the actual inverse differential
@@ -51,9 +52,9 @@ theorem n04PositiveGeometry_rootInverseDifferential_word_bound
     N04BoundaryWordBounds Q K s 1 x θ P (A * M ^ degree) H t (shift + 1) := by
   letI : LocallyConvexSpace ℝ (StateDirections S × ℝ) :=
     (sectorPairGrading_withSeminorms S).toLocallyConvexSpace
-  obtain ⟨A, hA, degree, hd, hbound⟩ :=
-    n04PositiveGeometry_rootInversePacket_word_bound (E := StateDirections S × ℝ) K s L hL
-  refine ⟨A, hA, degree, hd, ?_⟩
+  let data : N04RootInversePacketWordData (StateDirections S × ℝ) K s L :=
+    n04PositiveGeometry_rootInversePacketWordData (E := StateDirections S × ℝ) K s L hL
+  refine ⟨data.A, data.one_le_A, data.degree, data.one_le_degree, ?_⟩
   intro g m side U hU JO JE Jα Jb Q hpos x hx θ p q R hR M H t hM hH hHM hHL ht shift
   intro P η hO hE hα hb
   have heq (y : (StateDirections S × ℝ) × ℝ) (hy : y ∈ U ×ˢ (univ : Set ℝ)) :=
@@ -62,10 +63,12 @@ theorem n04PositiveGeometry_rootInverseDifferential_word_bound
         (n01RootLabel S C (liftSectorParameter S C y.1) m side) y.2) ⟨hy.1, mem_univ _⟩)
   let QP : SmoothDirections (U ×ˢ univ)
       (n04PositiveGeometry_rootInverseDifferentialPacket D S C g m side) := Q.congr heq
-  have hpacket := hbound hU JO JE Jb Jα
-    (n01ComponentRootOrientation side) (n01ComponentRootOrientation_eq side)
-    ((3 / 2 : ℝ) ^ (-(2 / 3 : ℝ))) inverseScaleCoefficient_le_one QP
-    x hx θ p q R hR M H t hM hH hHM hHL ht shift hO hE hα hb
+  have hpacket : N04BoundaryWordBounds QP K s 1 x θ P
+      (data.A * M ^ data.degree) H t (shift + 1) :=
+    data.bound hU JO JE Jb Jα
+      (n01ComponentRootOrientation side) (n01ComponentRootOrientation_eq side)
+      ((3 / 2 : ℝ) ^ (-(2 / 3 : ℝ))) inverseScaleCoefficient_le_one QP
+      x hx θ p q R hR M H t hM hH hHM hHL ht shift hO hE hα hb
   exact hpacket.congr (Q := Q) hx (fun y hy => (heq y hy).symm)
 
 end ContinuousFlexibility.Analysis
