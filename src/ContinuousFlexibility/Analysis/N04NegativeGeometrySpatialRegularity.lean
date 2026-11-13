@@ -75,40 +75,32 @@ theorem n04NegativeGeometry_atoms_spatial_of_fields
   cases a <;> simp only [atomIsGeometry] at ha <;> dsimp only [atom]
   · refine ⟨(((hF.comp hP.contDiffOn hPmap).fst.sub contDiffOn_const).div_const _), ?_⟩
     intro p hp
-    dsimp only [atom]
     rw [hPshift, (hperiod _ (hPmap hp)).1]
     simp only [Prod.fst_add, add_zero]
   · refine ⟨((hF.comp hP.contDiffOn hPmap).snd.sub hP.contDiffOn.snd), ?_⟩
     intro p hp
-    dsimp only [atom]
     rw [hPshift, (hperiod _ (hPmap hp)).1]
     simp only [Prod.snd_add, add_sub_add_right_eq_sub]
   · refine ⟨(((hI.comp hC.contDiffOn hCmap).fst.sub contDiffOn_const).div_const _), ?_⟩
     intro p hp
-    dsimp only [atom]
     rw [hCshift, hIperiod _ (hCmap hp)]
     simp only [Prod.fst_add, add_zero]
   · refine ⟨((hI.comp hC.contDiffOn hCmap).snd.sub hC.contDiffOn.snd), ?_⟩
     intro p hp
-    dsimp only [atom]
     rw [hCshift, hIperiod _ (hCmap hp)]
     simp only [Prod.snd_add, add_sub_add_right_eq_sub]
   · refine ⟨hH.comp hP.contDiffOn hPmap, ?_⟩
     intro p hp
-    dsimp only [atom]
     rw [hPshift, (hperiod _ (hPmap hp)).2]
   · refine ⟨(hH.inv (fun p hp => (hgood p hp).2.ne')).comp hP.contDiffOn hPmap, ?_⟩
     intro p hp
-    dsimp only [atom]
     rw [hPshift, (hperiod _ (hPmap hp)).2]
   · refine ⟨hJ.comp hP.contDiffOn hPmap, ?_⟩
     intro p hp
-    dsimp only [atom]
     rw [hPshift, hJperiod _ (hPmap hp)]
   · refine ⟨(hJ.inv (fun p hp => abs_ne_zero.mpr (hgood p hp).1)).comp
       hP.contDiffOn hPmap, ?_⟩
     intro p hp
-    dsimp only [atom]
     rw [hPshift, hJperiod _ (hPmap hp)]
 
 namespace N04RealizationGauge
