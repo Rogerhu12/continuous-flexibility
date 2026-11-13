@@ -42,11 +42,18 @@ private theorem material_coefficient_mono {A C C' : ℝ} {e e' : ℕ}
   mul_le_mul hCC' (pow_le_pow_right₀ hA hee')
     (pow_nonneg (zero_le_one.trans hA) _) (hC.trans hCC')
 
+/-- The state degree is selected from the original speed degrees alone,
+before any spatial scale, field, flow, or material envelope. -/
+def negativeChartVariationDegree (head : ℕ → ℕ) (n : ℕ) : ℕ :=
+  (head n + ∑ m : Fin n, negativeChartVariationDegree head m.val) * (n + 1)
+termination_by n
+decreasing_by exact m.isLt
+
 /-- Genuine strong induction on a fixed finite state prefix. The head bounds
 refer only to derivatives of the original speed along the state-free
 spatial flow. All positive state derivatives of that flow are proved
 here by their actual ODE and its strict-lower finite forcing expansion. -/
-theorem n04NegativeChart_actualVariation_all_orders (N : ℕ)
+theorem n04NegativeChart_actualVariation_prescribed_orders (N : ℕ)
     (G Θ : I → E × PolarPoint → ℝ)
     (hG : ∀ i, ContDiff ℝ ∞ (G i))
     (J : ∀ i, ContinuousTimeSpeedTower (univ : Set E) (G i))
@@ -71,15 +78,17 @@ theorem n04NegativeChart_actualVariation_all_orders (N : ℕ)
         ‖iteratedFDeriv ℝ j (fun y : Q =>
           flowVariationCoefficient (G i) (Θ i) (γ i y) (t, α i y)) (x i)‖ ≤
             C * A i ^ e * ρ K i ^ j)
-    (hhead : ∀ n : ℕ, n ≤ N → 0 < n → ∃ D : ℕ, ∀ K : ℕ,
+    (head : ℕ → ℕ)
+    (hhead : ∀ n : ℕ, n ≤ N → 0 < n → ∀ K : ℕ,
       ∃ C : ℝ, ∃ e : ℕ, 1 ≤ C ∧ ∀ i (v : Fin n → E), admissible n i v →
         ∀ t ∈ Icc (0 : ℝ) 1, ∀ d : FlowForcingChoice n, ∀ j, j ≤ K →
           ‖iteratedFDeriv ℝ j (fun y : Q =>
             canonicalFlowForcingFactors (J i) (hΘ i) (γ i y) v t d 0 (α i y)) (x i)‖ ≤
               parameterHeightWeight (H i) d.2.card *
-                (C * A i ^ e) * ρ K i ^ (D + j)) :
-    ∀ n : ℕ, n ≤ N → ∃ D : ℕ,
-      NegativeChartPositiveVariationOrderBounds Θ γ α x H A ρ admissible n D := by
+                (C * A i ^ e) * ρ K i ^ (head n + j)) :
+    ∀ n : ℕ, n ≤ N →
+      NegativeChartPositiveVariationOrderBounds Θ γ α x H A ρ admissible n
+        (negativeChartVariationDegree head n) := by
   classical
   intro n
   induction n using Nat.strong_induction_on with
@@ -87,17 +96,21 @@ theorem n04NegativeChart_actualVariation_all_orders (N : ℕ)
     intro hnN
     by_cases hn0 : n = 0
     · subst n
-      exact ⟨0, fun K => ⟨1, 0, le_rfl, by omega⟩⟩
+      exact fun K => ⟨1, 0, le_rfl, by omega⟩
     have hn : 0 < n := Nat.pos_of_ne_zero hn0
-    obtain ⟨D₀, hheads⟩ := hhead n hnN hn
-    choose d hd using (fun m : Fin n => ih m m.isLt (m.isLt.le.trans hnN))
-    let D : ℕ := D₀ + ∑ m : Fin n, d m
-    have hD₀ : D₀ ≤ D := Nat.le_add_right _ _
+    have hheads := hhead n hnN hn
+    let d : Fin n → ℕ := fun m => negativeChartVariationDegree head m.val
+    have hd (m : Fin n) := ih m m.isLt (m.isLt.le.trans hnN)
+    let D : ℕ := head n + ∑ m : Fin n, d m
+    have hD₀ : head n ≤ D := Nat.le_add_right _ _
     have hdD (m : Fin n) : d m ≤ D :=
       (Finset.single_le_sum (fun (l : Fin n) _ => Nat.zero_le (d l))
         (Finset.mem_univ m)).trans
         (Nat.le_add_left _ _)
-    refine ⟨D * (n + 1), fun K => ?_⟩
+    have hdegree : negativeChartVariationDegree head n = D * (n + 1) := by
+      rw [negativeChartVariationDegree]
+    rw [hdegree]
+    intro K
     obtain ⟨Cκ, eκ, hCκ, hκ⟩ := hcoefficient K
     obtain ⟨C₀, e₀, hC₀, hh⟩ := hheads K
     choose C e hC hb using (fun m : Fin n => hd m K)
@@ -186,6 +199,52 @@ theorem n04NegativeChart_actualVariation_all_orders (N : ℕ)
     dsimp only [Cfinal, M, p]
     simp only [mul_pow, ← pow_mul]
     ring
+
+/-- The existential interface is retained for callers whose scale is
+already fixed. The stronger theorem exposes its numerical degree. -/
+theorem n04NegativeChart_actualVariation_all_orders (N : ℕ)
+    (G Θ : I → E × PolarPoint → ℝ)
+    (hG : ∀ i, ContDiff ℝ ∞ (G i))
+    (J : ∀ i, ContinuousTimeSpeedTower (univ : Set E) (G i))
+    (hΘ : ∀ i, ContDiff ℝ ∞ (Θ i))
+    (hinit : ∀ i q α, Θ i (q, (0, α)) = α)
+    (hflow : ∀ i q t α, HasDerivAt (fun r => Θ i (q, (r, α)))
+      (G i (q, (t, Θ i (q, (t, α))))) t)
+    (γ : I → Q → E) (α : I → Q → ℝ)
+    (hγ : ∀ i, ContDiff ℝ ∞ (γ i)) (hα : ∀ i, ContDiff ℝ ∞ (α i))
+    (x : I → Q) (H A : I → ℝ) (ρ : ℕ → I → ℝ)
+    (admissible : ∀ n : ℕ, I → (Fin n → E) → Prop)
+    (hrestrict : ∀ n i v, admissible n i v → ∀ k (e : Fin k → Fin n),
+      admissible k i (v ∘ e))
+    {R Λ : ℝ} (hR : 1 ≤ R) (hΛ : 0 ≤ Λ)
+    (hH : ∀ i, 0 ≤ H i) (hHR : ∀ i, H i ≤ R)
+    (hA : ∀ i, 1 ≤ A i) (hρ : ∀ K i, 1 ≤ ρ K i)
+    (hprimitive : ∀ i t, t ∈ Icc (0 : ℝ) 1 →
+      |∫ r in (0 : ℝ)..t,
+        flowVariationCoefficient (G i) (Θ i) (γ i (x i)) (r, α i (x i))| ≤ Λ)
+    (hcoefficient : ∀ K : ℕ, ∃ C : ℝ, ∃ e : ℕ, 1 ≤ C ∧
+      ∀ i j, 1 ≤ j → j ≤ K → ∀ t ∈ Icc (0 : ℝ) 1,
+        ‖iteratedFDeriv ℝ j (fun y : Q =>
+          flowVariationCoefficient (G i) (Θ i) (γ i y) (t, α i y)) (x i)‖ ≤
+            C * A i ^ e * ρ K i ^ j)
+    (hhead : ∀ n : ℕ, n ≤ N → 0 < n → ∃ D : ℕ, ∀ K : ℕ,
+      ∃ C : ℝ, ∃ e : ℕ, 1 ≤ C ∧ ∀ i (v : Fin n → E), admissible n i v →
+        ∀ t ∈ Icc (0 : ℝ) 1, ∀ d : FlowForcingChoice n, ∀ j, j ≤ K →
+          ‖iteratedFDeriv ℝ j (fun y : Q =>
+            canonicalFlowForcingFactors (J i) (hΘ i) (γ i y) v t d 0 (α i y)) (x i)‖ ≤
+              parameterHeightWeight (H i) d.2.card *
+                (C * A i ^ e) * ρ K i ^ (D + j)) :
+    ∀ n : ℕ, n ≤ N → ∃ D : ℕ,
+      NegativeChartPositiveVariationOrderBounds Θ γ α x H A ρ admissible n D := by
+  classical
+  let head : ℕ → ℕ := fun n =>
+    if hn : n ≤ N ∧ 0 < n then (hhead n hn.1 hn.2).choose else 0
+  have hall := n04NegativeChart_actualVariation_prescribed_orders N G Θ hG J hΘ
+    hinit hflow γ α hγ hα x H A ρ admissible hrestrict hR hΛ hH hHR hA hρ
+    hprimitive hcoefficient head (fun n hnN hn => by
+      simpa only [head, dif_pos (show n ≤ N ∧ 0 < n from ⟨hnN, hn⟩)] using
+        (hhead n hnN hn).choose_spec)
+  exact fun n hn => ⟨negativeChartVariationDegree head n, hall n hn⟩
 
 end ContinuousFlexibility.Analysis
 

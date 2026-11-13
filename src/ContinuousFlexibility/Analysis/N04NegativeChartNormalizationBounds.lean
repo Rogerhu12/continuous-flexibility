@@ -72,7 +72,8 @@ theorem negativeChart_normalization_material (e : ℕ ≃ N04PieceIndex W.D) (s 
   calc
     _ ≤ 2 * M ^ (s + 1) := coordinateNormalization_power hM hp hc hi
     _ = (2 * (1 + C) ^ (s + 1)) * E ^ (P * (s + 1 : ℕ)) := by
-      rw [M, mul_pow, ← Real.rpow_mul_natCast hEpos.le P (s + 1)]
+      dsimp only [M]
+      rw [mul_pow, ← Real.rpow_mul_natCast hEpos.le P (s + 1)]
       ring
     _ ≤ B * E ^ B := hpack E hE
 

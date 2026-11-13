@@ -128,7 +128,7 @@ def negativeOriginalMinusJointTower (m : ℕ) :
         originalCoefficientEntry W.D W.S W.C 1 (liftSectorParameter W.S W.C x.1) x.2,
         originalCoefficientEntry W.D W.S W.C 2 (liftSectorParameter W.S W.C x.1) x.2) ∈ V := by
     intro x hx
-    simpa only [originalCoefficientEntry, if_pos rfl,
+    simpa only [originalCoefficientEntry, ↓reduceIte, if_pos rfl,
       if_neg (by decide : (1 : Fin 3) ≠ 0), if_neg (by decide : (2 : Fin 3) ≠ 0),
       if_neg (by decide : (2 : Fin 3) ≠ 1), V, mem_setOf_eq] using
       And.intro (W.negativeOriginalRadial_pos m hx.1 hx.2)
@@ -136,7 +136,7 @@ def negativeOriginalMinusJointTower (m : ℕ) :
   apply ((smoothDirectionsProd (J 0) (smoothDirectionsProd (J 1) (J 2))).comp_contDiff
     hV hkernel hmap).congrOn
   intro x hx
-  simp only [originalCoefficientEntry, if_pos rfl,
+  simp only [originalCoefficientEntry, ↓reduceIte, if_pos rfl,
     if_neg (by decide : (1 : Fin 3) ≠ 0), if_neg (by decide : (2 : Fin 3) ≠ 0),
     if_neg (by decide : (2 : Fin 3) ≠ 1), minusCharacteristicSpeed]
 

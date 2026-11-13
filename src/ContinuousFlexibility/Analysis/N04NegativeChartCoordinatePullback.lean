@@ -49,12 +49,14 @@ theorem n04NegativeChart_coordinatePullback_positiveJet
         (fun _ _ => (sub_eq_add_neg _ _).symm)
   have hK := n04Realization_smoothDirections_D_const_mul JS K d⁻¹
     (fun z hz => by
-      rw [mixedDerivative_const_mul,
+      rw [mixedDerivative_const_mul]
+      have hsub :=
         mixedDerivative_sub_of_contDiffOn (isOpen_Ioo.prod isOpen_univ)
           ((hf z hz).comp
             ((contDiff_const.add (contDiff_const.mul contDiff_fst)).prodMk
-              contDiff_snd).contDiffOn hmap) hh i j hq,
-        n07a_mixedDerivative_radialAffine]) k hx v
+              contDiff_snd).contDiffOn hmap) hh i j hq
+      simp only [Function.comp_apply] at hsub
+      rw [hsub, n07a_mixedDerivative_radialAffine]) k hx v
   have hS := smoothDirections_D_sub_constant JC JS hk hx v
   have hC := n04Realization_smoothDirections_D_const_mul J JC (c ^ i)
     (fun _ _ => rfl) k hx v

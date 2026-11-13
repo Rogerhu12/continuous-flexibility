@@ -127,6 +127,36 @@ private theorem scalarJet_interpolation_budget
     (mul_le_mul_of_nonneg_left (hscale x w hxlow hwlow) hCj)
   exact hg.trans_eq (mul_assoc _ _ _).symm
 
+private theorem scalarJet_pointwise_interpolation_budget
+    (hp : Monotone p) (hIp : HasInterpolation p)
+    (a : ∀ k : ℕ, ℕ → I → E → (Fin k → E) → ℝ)
+    (value : ℕ → ℕ → I → E → E → ℕ → ℝ → ℝ)
+    (weight : ℕ → ℝ) (A : ℝ) (hA : 0 ≤ A) (hw : ∀ m, 0 ≤ weight m)
+    (hjet : ∃ B₀ : ℕ, ∀ k : ℕ, ∃ L : ℕ,
+      ∀ R : ℝ, 0 ≤ R → ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧
+      ∀ i x, x ∈ U → p B₀ x ≤ R → ∀ v : Fin k → E,
+        a k s i x v ≤ C * tameJetSize p k s L B₀ x v)
+    (heval : ∀ k b i x w m θ,
+      value k b i x w m θ ≤ (A * a k (b + 1) i x (fun _ => w)) * weight m) :
+    ∃ B : ℕ, ∀ K : ℕ, ∃ D : ℕ,
+      ∀ R : ℝ, 0 ≤ R → ∀ N k : ℕ, k ≤ K → ∀ b : ℕ, b ≤ N →
+      ∃ C : ℝ, 0 ≤ C ∧ ∀ i x, x ∈ U → ∀ w : E,
+        p B x ≤ R → p B w ≤ 1 → ∀ m θ,
+        value k b i x w m θ ≤ C * weight m *
+          (1 + p (N + K * D + B + 1) x + p (N + K * D + B + 1) w) ^
+            (((b + k * D : ℕ) : ℝ) / ((N + K * D : ℕ) + 1 : ℝ)) := by
+  obtain ⟨B, hbudget⟩ := scalarJet_interpolation_budget hp hIp a hjet
+  refine ⟨B, fun K => ?_⟩
+  obtain ⟨D, hD⟩ := hbudget K
+  refine ⟨D, fun R hR N k hk b hb => ?_⟩
+  obtain ⟨C, hC, hc⟩ := hD R hR N k hk b hb
+  refine ⟨A * C, mul_nonneg hA hC, fun i x hx w hxlow hwlow m θ => ?_⟩
+  have hg := hc i x hx w hxlow hwlow
+  exact (heval k b i x w m θ).trans
+    ((mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hg hA) (hw m)).trans_eq
+      (by ring))
+
+set_option backward.isDefEq.respectTransparency true in
 /-- Genuine angular jets use the degree `b + k * D` on the common
 scale `N + K * D + 1`. In particular the base precedes `K`. -/
 theorem N04FixedBaseSmoothFamilyOn.circle_diagonal_stateBudget
@@ -142,26 +172,14 @@ theorem N04FixedBaseSmoothFamilyOn.circle_diagonal_stateBudget
           C * T.H (T.sample m) ^ γ *
             (1 + p (N + K * D + B + 1) x + p (N + K * D + B + 1) w) ^
               (((b + k * D : ℕ) : ℝ) / ((N + K * D : ℕ) + 1 : ℝ)) := by
-  obtain ⟨B, hbudget⟩ := scalarJet_interpolation_budget hp hIp
-    (fun k s i x v => H.grading s ((J i).D k x v)) (hf.jets J)
-  refine ⟨B, fun K => ?_⟩
-  obtain ⟨D, hD⟩ := hbudget K
-  refine ⟨D, fun R hR N k hk b hb => ?_⟩
-  obtain ⟨C, hC, hc⟩ := hD R hR N k hk b hb
-  let A : ℝ := 2 * circleSobolevConstant
-  have hA : 0 ≤ A := mul_nonneg (by norm_num) circleSobolevConstant_nonneg
-  refine ⟨A * C, mul_nonneg hA hC, fun i x hx w hxlow hwlow m θ => ?_⟩
-  have hg := hc i x hx w hxlow hwlow
-  have hweight : 0 ≤ T.H (T.sample m) ^ γ := Real.rpow_nonneg (hpos m).le γ
-  calc
-    _ ≤ (A * H.grading (b + 1) ((J i).D k x (fun _ => w))) *
-        T.H (T.sample m) ^ γ := circleModel_iteratedDeriv_abs_le hH hpos _ m b θ
-    _ ≤ (A * (C * (1 + p (N + K * D + B + 1) x +
-        p (N + K * D + B + 1) w) ^
-        (((b + k * D : ℕ) : ℝ) / (((N + K * D : ℕ) : ℝ) + 1)))) *
-        T.H (T.sample m) ^ γ :=
-      mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hg hA) hweight
-    _ = _ := by ring
+  exact scalarJet_pointwise_interpolation_budget hp hIp
+    (fun k s i x v => H.grading s ((J i).D k x v))
+    (fun k b i x w m θ => |iteratedDeriv b (H.decode ((J i).D k x (fun _ => w)) m) θ|)
+    (fun m => T.H (T.sample m) ^ γ) (2 * circleSobolevConstant)
+    (mul_nonneg (by norm_num) circleSobolevConstant_nonneg)
+    (fun m => Real.rpow_nonneg (hpos m).le γ) (hf.jets J)
+    (fun k b i x w m θ => circleModel_iteratedDeriv_abs_le hH hpos
+      ((J i).D k x (fun _ => w)) m b θ)
 
 /-- The same base controls the actual strip tower at every physical
 radius, using selector-independent circle estimates. -/

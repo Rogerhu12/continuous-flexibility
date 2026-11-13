@@ -22,6 +22,33 @@ open scoped ContDiff
 
 set_option backward.isDefEq.respectTransparency true
 
+private abbrev factorStateTopology (S : PhysicalSpacesData) :
+    TopologicalSpace (AnnularState S) := inferInstance
+attribute [local instance] factorStateTopology
+private abbrev factorStateGroup (S : PhysicalSpacesData) :
+    AddCommGroup (AnnularState S) := inferInstance
+attribute [local instance] factorStateGroup
+private abbrev factorStateModule (S : PhysicalSpacesData) :
+    Module ℝ (AnnularState S) := inferInstance
+attribute [local instance] factorStateModule
+private abbrev factorStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) :=
+  (factorStateModule S).toDistribMulAction.toDistribSMul.toSMul
+attribute [local instance] factorStateSMul
+
+private theorem normalizedFactor_partA
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε) : N01PartA D T S C :=
+  ⟨hN.1, hN.2.2.1, hN.2.2.2.1, hN.2.2.2.2.1, hN.2.2.2.2.2.1⟩
+
+private theorem normalizedFactor_partB
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε) : N01PartB D S C base ε :=
+  ⟨hN.2.2.2.2.2.2.1, hN.2.2.2.2.2.2.2.1,
+    hN.2.2.2.2.2.2.2.2.1, hN.2.2.2.2.2.2.2.2.2.1,
+    hN.2.2.2.2.2.2.2.2.2.2.1⟩
+
 private theorem controlledField_regular_bounds
     {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
     [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
@@ -113,15 +140,10 @@ private theorem normalizedFactorSector_of_n01
         (sectorNeighborhood S base ε ε) (annularOpen D)
         (fun q => T.H q.1 ^ (3 / 4 : ℝ)) (fun q => T.E0 q.1)
         (fun z => normalizedSpeedFactor D S C i (liftSectorParameter S C z)) := by
-  have hA : N01PartA D T S C :=
-    ⟨hN.1, hN.2.2.1, hN.2.2.2.1, hN.2.2.2.2.1, hN.2.2.2.2.2.1⟩
-  have hB : N01PartB D S C oldBase oldε :=
-    ⟨hN.2.2.2.2.2.2.1, hN.2.2.2.2.2.2.2.1,
-      hN.2.2.2.2.2.2.2.2.1, hN.2.2.2.2.2.2.2.2.2.1,
-      hN.2.2.2.2.2.2.2.2.2.2.1⟩
   intro i
   obtain ⟨RF, hraw⟩ := n04NegativeGeometry_normalizedFactor_regular_bounds
-    hS hT hA hε hε1 (n01PartB_mono hB hb hεold) hE hloc hχloc hI i
+    hS hT (normalizedFactor_partA hN) hε hε1
+    (n01PartB_mono (normalizedFactor_partB hN) hb hεold) hE hloc hχloc hI i
   exact normalizedFactor_sector_regular_bounds RF hraw
 
 namespace N04RealizationStart

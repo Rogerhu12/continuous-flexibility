@@ -184,14 +184,16 @@ private theorem composition_shifted_kernel_bound
   obtain ⟨C, hC, hbound⟩ := hb r k s R hR
   refine ⟨C * (((k + 1 : ℕ) : ℝ) + 1) * R ^ (k + 1), by positivity,
     fun t e u v A hA he hu hv hAe hAu hAv => ?_⟩
-  have hlow (i : Fin (k + 1)) : q base (Fin.cons (τ t u) v i) ≤ R := by
+  have hlow (i : Fin (k + 1)) :
+      q base ((Fin.cons (τ t u) v : Fin (k + 1) → E) i) ≤ R := by
     refine Fin.cases ?_ hv i
     exact (hτ t base u).trans hu
-  have hhigh (i : Fin (k + 1)) : q (r + s + loss) (Fin.cons (τ t u) v i) ≤ A := by
+  have hhigh (i : Fin (k + 1)) :
+      q (r + s + loss) ((Fin.cons (τ t u) v : Fin (k + 1) → E) i) ≤ A := by
     refine Fin.cases ?_ hAv i
     exact (hτ t (r + s + loss) u).trans hAu
   have hmajorant := composition_majorant_on_low_ball (q base)
-    (q (r + s + loss)) (Fin.cons (τ t u) v)
+    (q (r + s + loss)) (Fin.cons (τ t u) v : Fin (k + 1) → E)
     (by positivity) hA hAe hR hlow hhigh
   exact (hbound e he (τ t u) v).trans
     ((mul_le_mul_of_nonneg_left hmajorant hC).trans_eq (by ring))

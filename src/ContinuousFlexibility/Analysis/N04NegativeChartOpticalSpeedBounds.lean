@@ -17,7 +17,28 @@ namespace ContinuousFlexibility.Analysis
 open Set ContinuousFlexibility.Statements
 open scoped ContDiff BigOperators
 
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
+
+private abbrev rootSpeedStateTopology (S : PhysicalSpacesData) :
+    TopologicalSpace (AnnularState S) := inferInstance
+attribute [local instance] rootSpeedStateTopology
+private abbrev rootSpeedStateGroup (S : PhysicalSpacesData) :
+    AddCommGroup (AnnularState S) := inferInstance
+attribute [local instance] rootSpeedStateGroup
+private abbrev rootSpeedStateModule (S : PhysicalSpacesData) :
+    Module ℝ (AnnularState S) := inferInstance
+attribute [local instance] rootSpeedStateModule
+private abbrev rootSpeedStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) :=
+  (rootSpeedStateModule S).toDistribMulAction.toDistribSMul.toSMul
+attribute [local instance] rootSpeedStateSMul
+
+private theorem negativeDirection_radial_bound (j : ℕ) (f : ℝ → ℝ)
+    {a b t C H E p q : ℝ} (hab : a = b)
+    (hb : |b * iteratedDeriv j f t| ≤ C * H * E * p)
+    (hcost : 0 ≤ C * H * E) (hpq : p ≤ q) :
+    |iteratedDeriv j (fun s => a * (-f s)) t| ≤ C * E * H * q := by
+  rw [iteratedDeriv_const_mul_field, iteratedDeriv_fun_neg, hab, mul_neg, abs_neg]
+  exact hb.trans ((mul_le_mul_of_nonneg_left hpq hcost).trans_eq (by ring))
 
 private theorem affineSqrt_bounds_from_inverse
     {X ι : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
@@ -118,17 +139,15 @@ private theorem opticalDirection_joint_material_bounds (j : ℕ) :
               pairGrading (stateGrading W.S) realGrading 0 v := by
   obtain ⟨C, A, hC, hA, hb⟩ := F.control_direction_material_jets j
   refine ⟨C, A, hC, hA, fun i t ht v => ?_⟩
-  rw [iteratedDeriv_const_mul_field, iteratedDeriv_fun_neg,
-    stateJointKappaCLM_apply, mul_neg, abs_neg]
   have hH : 0 ≤ W.T.H (W.T.sample ((W.A e).cell (e.symm (.inl i)))) ^ (3 / 4 : ℝ) :=
     Real.rpow_nonneg (W.hT.2.1 _
       (materialSample_mem_radialCore W.hT W.radial.1.choose_spec.2.1 _)).2.1.le _
   have hcost : 0 ≤ C * (W.T.H (W.T.sample ((W.A e).cell (e.symm (.inl i)))) ^
       (3 / 4 : ℝ)) * W.T.E0 (W.T.sample ((W.A e).cell (e.symm (.inl i)))) ^ A :=
     mul_nonneg (mul_nonneg hC.le hH) (Real.rpow_nonneg (zero_le_one.trans (W.floor _)) _)
-  exact (hb i.1 i.2 t ht v.1).trans
-    ((mul_le_mul_of_nonneg_left (stateGrading_fst_le_jointStateGrading W.S 0 v)
-      hcost).trans_eq (by ring))
+  exact negativeDirection_radial_bound j (F.control i.1 i.2)
+    (stateJointKappaCLM_apply W.hS W.hT W.radial.1 i.1 v)
+    (hb i.1 i.2 t ht v.1) hcost (stateGrading_fst_le_jointStateGrading W.S 0 v)
 
 /-- The mixed bound is for every genuine parameter tower of the actual
 radial derivative. Constants precede the component, state and point. -/

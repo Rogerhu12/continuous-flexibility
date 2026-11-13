@@ -108,6 +108,57 @@ private theorem linearVariation_markedForcing_prefix
   rw [mul_pow, ← pow_mul, pow_add]
   ring
 
+set_option backward.isDefEq.respectTransparency true in
+private theorem actualVariation_of_forcing_bound
+    (n K : ℕ) (hn : 0 < n) {C₀ : ℝ} (hC₀ : 1 ≤ C₀) :
+    ∃ C : ℝ, 1 ≤ C ∧ ∀ {G Θ : E × PolarPoint → ℝ},
+      ∀ (hG : ContDiff ℝ ∞ G) (J : ContinuousTimeSpeedTower (univ : Set E) G)
+        (hΘ : ContDiff ℝ ∞ Θ),
+      (∀ q α, Θ (q, (0, α)) = α) →
+      (∀ q t α, HasDerivAt (fun r => Θ (q, (r, α)))
+        (G (q, (t, Θ (q, (t, α))))) t) →
+      ∀ (γ : Q → E) (α : Q → ℝ), ContDiff ℝ ∞ γ → ContDiff ℝ ∞ α →
+      ∀ (v : Fin n → E) (x : Q) {W M ρ Λ : ℝ} (D : ℕ),
+      0 ≤ W → 1 ≤ M → 1 ≤ ρ →
+      (∀ t ∈ Icc (0 : ℝ) 1,
+        |∫ r in (0 : ℝ)..t, flowVariationCoefficient G Θ (γ x) (r, α x)| ≤ Λ) →
+      (∀ j, 1 ≤ j → j ≤ K → ∀ t ∈ Icc (0 : ℝ) 1,
+        ‖iteratedFDeriv ℝ j
+          (fun y : Q => flowVariationCoefficient G Θ (γ y) (t, α y)) x‖ ≤ M * ρ ^ j) →
+      (∀ j, j ≤ K → ∀ t ∈ Icc (0 : ℝ) 1,
+        ‖iteratedFDeriv ℝ j (fun y : Q =>
+          flowVariationForcing J hΘ n (γ y) v (t, α y)) x‖ ≤
+            C₀ * W * M ^ (n + 1) * ρ ^ (D * (n + 1) + j)) →
+      ∀ k, k ≤ K → ∀ t ∈ Icc (0 : ℝ) 1,
+        ‖iteratedFDeriv ℝ k
+          (fun y : Q => flowParameterField Θ n (γ y) v (t, α y)) x‖ ≤
+            C * Real.exp (2 * Λ) * W * M ^ ((n + 1) * (2 * K + 1)) *
+              ρ ^ (D * (n + 1) + k) := by
+  obtain ⟨C, hC, hlinear⟩ :=
+    linearVariation_markedForcing_prefix (Q := Q) n K hC₀
+  refine ⟨C, hC, ?_⟩
+  intro G Θ hG J hΘ hinit hflow γ α hγ hα v x W M ρ Λ D hW hM hρ hamp hκj hforcing
+  let κ : Q × ℝ → ℝ := fun z => flowVariationCoefficient G Θ (γ z.1) (z.2, α z.1)
+  let F : Q × ℝ → ℝ := fun z => flowVariationForcing J hΘ n (γ z.1) v (z.2, α z.1)
+  let w : Q → ℝ → ℝ := fun y t => flowParameterField Θ n (γ y) v (t, α y)
+  have hmap : ContDiff ℝ ∞ (fun z : Q × ℝ => (γ z.1, (z.2, α z.1))) :=
+    (hγ.comp contDiff_fst).prodMk (contDiff_snd.prodMk (hα.comp contDiff_fst))
+  have hκ : ContDiff ℝ ∞ κ :=
+    (n04NegativeChart_flowCoefficient_joint_contDiff hG hΘ).comp hmap
+  have hF : ContDiff ℝ ∞ F :=
+    (n04NegativeChart_flowForcing_joint_contDiff hG J hΘ hn v).comp hmap
+  have hwjoint : ContDiff ℝ ∞ (fun z : Q × ℝ => w z.1 z.2) :=
+    (n04NegativeChart_flowParameterField_joint_contDiff hΘ n v).comp hmap
+  have hw (y : Q) : ContinuousOn (w y) (Icc (0 : ℝ) 1) :=
+    (hwjoint.continuous.comp (continuous_const.prodMk continuous_id)).continuousOn
+  have hzero (y : Q) : w y 0 = 0 :=
+    actualVariation_zero hinit hn (γ y) (α y) v
+  have hderiv (y : Q) (t : ℝ) (_ht : t ∈ Ioo (0 : ℝ) 1) :
+      HasDerivAt (w y) (κ (y, t) * w y t + F (y, t)) t :=
+    actualVariation_hasDerivAt hG J hΘ hinit hflow hn (γ y) t (α y) v
+  exact hlinear hκ hF hw hzero hderiv x D hW hM hρ hamp hκj hforcing
+
+set_option backward.isDefEq.respectTransparency true in
 /-- This is the genuine state-order induction step. The forcing factors
 contain only original speed derivatives and strictly lower state
 variations; the current unknown is not among the bounded factors.
@@ -143,29 +194,11 @@ theorem n04NegativeChart_actualVariation_weighted_step (n K : ℕ) (hn : 0 < n) 
               ρ ^ (D * (n + 1) + k) := by
   obtain ⟨C₀, hC₀, hforcing⟩ :=
     n04NegativeChart_actualForcing_weighted_prefix (E := E) (Q := Q) n K
-  obtain ⟨C, hC, hlinear⟩ :=
-    linearVariation_markedForcing_prefix (Q := Q) n K hC₀
+  obtain ⟨C, hC, hactual⟩ :=
+    actualVariation_of_forcing_bound (E := E) (Q := Q) n K hn hC₀
   refine ⟨C, hC, ?_⟩
   intro G Θ hG J hΘ hinit hflow γ α hγ hα v x W M ρ Λ D hW hM hρ hamp hκj hmarked
-  let κ : Q × ℝ → ℝ := fun z => flowVariationCoefficient G Θ (γ z.1) (z.2, α z.1)
-  let F : Q × ℝ → ℝ := fun z => flowVariationForcing J hΘ n (γ z.1) v (z.2, α z.1)
-  let w : Q → ℝ → ℝ := fun y t => flowParameterField Θ n (γ y) v (t, α y)
-  have hmap : ContDiff ℝ ∞ (fun z : Q × ℝ => (γ z.1, (z.2, α z.1))) :=
-    (hγ.comp contDiff_fst).prodMk (contDiff_snd.prodMk (hα.comp contDiff_fst))
-  have hκ : ContDiff ℝ ∞ κ :=
-    (n04NegativeChart_flowCoefficient_joint_contDiff hG hΘ).comp hmap
-  have hF : ContDiff ℝ ∞ F :=
-    (n04NegativeChart_flowForcing_joint_contDiff hG J hΘ hn v).comp hmap
-  have hwjoint : ContDiff ℝ ∞ (fun z : Q × ℝ => w z.1 z.2) :=
-    (n04NegativeChart_flowParameterField_joint_contDiff hΘ n v).comp hmap
-  have hw (y : Q) : ContinuousOn (w y) (Icc (0 : ℝ) 1) :=
-    (hwjoint.continuous.comp (continuous_const.prodMk continuous_id)).continuousOn
-  have hzero (y : Q) : w y 0 = 0 :=
-    actualVariation_zero hinit hn (γ y) (α y) v
-  have hderiv (y : Q) (t : ℝ) (_ht : t ∈ Ioo (0 : ℝ) 1) :
-      HasDerivAt (w y) (κ (y, t) * w y t + F (y, t)) t :=
-    actualVariation_hasDerivAt hG J hΘ hinit hflow hn (γ y) t (α y) v
-  apply hlinear hκ hF hw hzero hderiv x D hW hM hρ hamp hκj
+  apply hactual hG J hΘ hinit hflow γ α hγ hα v x D hW hM hρ hamp hκj
   intro j hj t ht
   exact hforcing hG J hΘ γ α hγ hα v t x D hW hM hρ (hmarked t ht) j hj
 
