@@ -103,7 +103,8 @@ def negativeOriginalMinusJointTower (m : ℕ) :
       (originalCoefficientEntry W.D W.S W.C 0 (liftSectorParameter W.S W.C x.1) x.2,
         originalCoefficientEntry W.D W.S W.C 1 (liftSectorParameter W.S W.C x.1) x.2,
         originalCoefficientEntry W.D W.S W.C 2 (liftSectorParameter W.S W.C x.1) x.2) ∈ V := by
-    simpa only [V, originalCoefficientEntry, show (1 : Fin 3) ≠ 0 by decide,
+    simpa only [V, Set.mem_ofPred_eq, originalCoefficientEntry,
+      show (1 : Fin 3) ≠ 0 by decide,
       show (2 : Fin 3) ≠ 0 by decide, show (2 : Fin 3) ≠ 1 by decide,
       eq_self_iff_true, ite_true, ite_false] using
       And.intro (W.negativeOriginalRadial_pos m hx.1 hx.2)
