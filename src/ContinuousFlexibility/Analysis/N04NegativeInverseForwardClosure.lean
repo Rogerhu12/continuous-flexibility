@@ -133,7 +133,7 @@ theorem negativeInverse_forwardPrefixes
   have hradiusε : radius ≤ ε := jacSpec.2.2.1
   have hI : 0 < I := jacSpec.2.2.2.1
   have hJac := jacSpec.2.2.2.2
-  have hadm₀ := G.admissible_mono hadm hb hradius hradiusε
+  have hadm₀ : G.Admissible base radius := G.admissible_mono hadm hb hradius hradiusε
   have hc₀ := G.negativeAtomData_mono 0 hc hb hradiusε
   have hh₀ := G.negativeAtomData_mono 0 hh hb hradiusε
   let scalarData := G.negativeInverse_componentScalars_purePrefix hadm₀ hc₀ hh₀
@@ -152,21 +152,24 @@ theorem negativeInverse_forwardPrefixes
   refine ⟨low, ε', hb.trans hbase, hadm', hε'.trans hradiusε, hhalf, ?_⟩
   intro K
   let prefixData := hprefix K
-  let shift := prefixData.choose
+  let shift : ℕ := prefixData.choose
   have hshift : 1 ≤ shift := prefixData.choose_spec.1
   have horder := prefixData.choose_spec.2
   refine ⟨shift, hshift, fun N => ?_⟩
   let order := horder N
-  let C := order.choose
+  let C : ℝ := order.choose
   have hC : 0 < C := order.choose_spec.1
   have hscalar := order.choose_spec.2
-  obtain ⟨B, hB, hcommon⟩ := n04NegativeInverse_common_coefficient hC hI hL
+  let commonData := n04NegativeInverse_common_coefficient hC hI hL
+  let B : ℝ := commonData.choose
+  have hB : 1 ≤ B := commonData.choose_spec.1
+  have hcommon := commonData.choose_spec.2
   refine ⟨B, hB, ?_⟩
   intro k m side hi z hz q hq R hR hzR
-  let E := G.W.U.E0 (G.W.U.sample ((G.V 0).cell k))
-  let H := G.W.U.H (G.W.U.sample ((G.V 0).cell k)) ^ (3 / 4 : ℝ)
+  let E : ℝ := G.W.U.E0 (G.W.U.sample ((G.V 0).cell k))
+  let H : ℝ := G.W.U.H (G.W.U.sample ((G.V 0).cell k)) ^ (3 / 4 : ℝ)
   let t : ℝ := R ^ (1 / (((N + shift * K : ℕ) : ℝ) + 1))
-  let p := G.pulledPoint 0 (G.lift 0 z) k q
+  let p : PolarPoint := G.pulledPoint 0 (G.lift 0 z) k q
   have hE : 1 ≤ E := (G.cost_nonneg 0).2.2 k
   have hH : 0 ≤ H := Real.rpow_nonneg ((G.cost_nonneg 0).2.1 k) _
   have ht : 1 ≤ t := Real.one_le_rpow hR (by positivity)
@@ -185,22 +188,52 @@ theorem negativeInverse_forwardPrefixes
       N04NegativeInverseJet.UnitPrefix Q (z, p)
         (parameterGrading G.W.S low) (parameterGrading G.W.S (low + N + shift * K + 1))
         N K shift (C * E ^ C) H R t := by
-    apply N04NegativeInverseJet.UnitPrefix.of_pure (zero_le_one.trans hR)
+    apply N04NegativeInverseJet.UnitPrefix.of_pure
+      (X := Parameter G.W.S) (Y := ℝ)
+      (U := sectorNeighborhood G.W.S low ε' ε' ×ˢ G.negativeInverseComponent m)
+      (f := fun x : Parameter G.W.S × PolarPoint =>
+        G.negativeInversePhysicalAtomFamily 0 (n04NegativeInverseScalarAtom a) x.1 k x.2)
+      (J := Q) (p := (z, p)) (low := parameterGrading G.W.S low)
+      (high := parameterGrading G.W.S (low + N + shift * K + 1))
+      (N := N) (K := K) (shift := shift) (C := C * E ^ C)
+      (H := H) (R := R) (t := t) (zero_le_one.trans hR)
     intro n hn hnN w hw v vl vh vp vs va
     have hwN : w.angleArity ≤ N := by have hs := w.arity_sum; omega
-    have h := hscalar a k m side hi Q z hz p hp htarget n hn w hw hwN v vl R hR hzR
-      vh vp vs va
-    simpa only [E, H, hpower] using h
-  let J := G.negativeInverseForwardOn 0 hadm' k m side hi
-  let JH := G.negativeInverseHeightOn 0 hadm' k m side hi
-  let JR := G.negativeInverse_componentAtomJointTowerOn hadm' k m side hi .chartRadial trivial
-  let JA := G.negativeInverse_componentAtomJointTowerOn hadm' k m side hi .chartAngleDefect trivial
+    have hbound : ‖Q.D n (z, p) v‖ ≤ C * E ^ C *
+        parameterHeightWeight H w.stateArity *
+          R ^ (((w.angleArity + shift * w.stateArity - 1 : ℕ) : ℝ) /
+            (((N + shift * K : ℕ) : ℝ) + 1)) :=
+      hscalar a k m side hi Q z hz p hp htarget n hn w hw hwN v vl R hR hzR
+        vh vp vs va
+    exact hbound.trans_eq
+      (congrArg (fun r : ℝ => C * E ^ C * parameterHeightWeight H w.stateArity * r)
+        (hpower (w.angleArity + shift * w.stateArity - 1))).symm
+  let J : SmoothDirections (sectorNeighborhood G.W.S low ε' ε' ×ˢ G.negativeInverseComponent m)
+      (fun x : Parameter G.W.S × PolarPoint => (G.V 0).chart (G.lift 0 x.1) k x.2) :=
+    G.negativeInverseForwardOn 0 hadm' k m side hi
+  let JH : SmoothDirections (sectorNeighborhood G.W.S low ε' ε' ×ˢ G.negativeInverseComponent m)
+      (fun x : Parameter G.W.S × PolarPoint => (G.V 0).height (G.lift 0 x.1) k x.2) :=
+    G.negativeInverseHeightOn 0 hadm' k m side hi
+  let JR : SmoothDirections (sectorNeighborhood G.W.S low ε' ε' ×ˢ G.negativeInverseComponent m)
+      (fun x : Parameter G.W.S × PolarPoint =>
+        G.negativeInversePhysicalAtomFamily 0 .chartRadial x.1 k x.2) :=
+    G.negativeInverse_componentAtomJointTowerOn hadm' k m side hi .chartRadial trivial
+  let JA : SmoothDirections (sectorNeighborhood G.W.S low ε' ε' ×ˢ G.negativeInverseComponent m)
+      (fun x : Parameter G.W.S × PolarPoint =>
+        G.negativeInversePhysicalAtomFamily 0 .chartAngleDefect x.1 k x.2) :=
+    G.negativeInverse_componentAtomJointTowerOn hadm' k m side hi .chartAngleDefect trivial
   let C₀ : ℝ := 1 + C * E ^ C
   have hC₀ : 1 ≤ C₀ := le_add_of_nonneg_right hC0
-  have hRraw := (hraw 0 JR).coefficient_mono
-    (le_add_of_nonneg_left zero_le_one) hH (zero_le_one.trans ht)
-  have hAraw := (hraw 1 JA).coefficient_mono
-    (le_add_of_nonneg_left zero_le_one) hH (zero_le_one.trans ht)
+  have hRraw : N04NegativeInverseJet.UnitPrefix JR (z, p)
+      (parameterGrading G.W.S low) (parameterGrading G.W.S (low + N + shift * K + 1))
+      N K shift C₀ H R t :=
+    (hraw 0 JR).coefficient_mono
+      (le_add_of_nonneg_left zero_le_one) hH (zero_le_one.trans ht)
+  have hAraw : N04NegativeInverseJet.UnitPrefix JA (z, p)
+      (parameterGrading G.W.S low) (parameterGrading G.W.S (low + N + shift * K + 1))
+      N K shift C₀ H R t :=
+    (hraw 1 JA).coefficient_mono
+      (le_add_of_nonneg_left zero_le_one) hH (zero_le_one.trans ht)
   have hspan : |(G.V 0).right k - (G.V 0).left k| ≤ L * E ^ L :=
     (abs_of_pos (hlength 0 k).2.1).trans_le (hlength 0 k).2.2.2.2.1
   have hcoef : (2 + |(G.V 0).right k - (G.V 0).left k|) * C₀ ≤ B * E ^ B :=
@@ -209,28 +242,49 @@ theorem negativeInverse_forwardPrefixes
   have hforward : N04NegativeInverseJet.UnitPrefix J (z, p)
       (parameterGrading G.W.S low) (parameterGrading G.W.S (low + N + shift * K + 1))
       N K shift (B * E ^ B) H R t := by
-    apply N04NegativeInverseJet.UnitPrefix.of_pure (zero_le_one.trans hR)
+    apply N04NegativeInverseJet.UnitPrefix.of_pure
+      (X := Parameter G.W.S) (Y := PolarPoint)
+      (U := sectorNeighborhood G.W.S low ε' ε' ×ˢ G.negativeInverseComponent m)
+      (f := fun x : Parameter G.W.S × PolarPoint => (G.V 0).chart (G.lift 0 x.1) k x.2)
+      (J := J) (p := (z, p)) (low := parameterGrading G.W.S low)
+      (high := parameterGrading G.W.S (low + N + shift * K + 1))
+      (N := N) (K := K) (shift := shift) (C := B * E ^ B)
+      (H := H) (R := R) (t := t) (zero_le_one.trans hR)
     intro n hn hnN w hw v vl vh vp vs va
-    have hr := hRraw.norm_le n hn hnN w hw v vl vh vp vs va
-    have ha := hAraw.norm_le n hn hnN w hw v vl vh vp vs va
-    have hv := G.negativeInverse_vector_forward_bound 0 k J JR JA hn w shift
-      ⟨hz, hp⟩ v vp va hC₀ hH ht
-      (by simpa only [Real.norm_eq_abs] using hr)
-      (by simpa only [Real.norm_eq_abs] using ha)
-    exact hv.trans (mul_le_mul_of_nonneg_right
-      (mul_le_mul_of_nonneg_right hcoef (parameterHeightWeight_nonneg hH _))
-      (pow_nonneg (zero_le_one.trans ht) _))
+    have hr : ‖JR.D n (z, p) v‖ ≤ C₀ * parameterHeightWeight H w.stateArity *
+        t ^ (w.angleArity + shift * w.stateArity - 1) :=
+      hRraw.norm_le n hn hnN w hw v vl vh vp vs va
+    have ha : ‖JA.D n (z, p) v‖ ≤ C₀ * parameterHeightWeight H w.stateArity *
+        t ^ (w.angleArity + shift * w.stateArity - 1) :=
+      hAraw.norm_le n hn hnN w hw v vl vh vp vs va
+    have hv : ‖J.D n (z, p) v‖ ≤
+        (2 + |(G.V 0).right k - (G.V 0).left k|) * C₀ *
+          parameterHeightWeight H w.stateArity *
+            t ^ (w.angleArity + shift * w.stateArity - 1) :=
+      G.negativeInverse_vector_forward_bound 0 k
+        (U := sectorNeighborhood G.W.S low ε' ε' ×ˢ G.negativeInverseComponent m)
+        J JR JA (n := n) hn w shift (x := (z, p)) ⟨hz, hp⟩ v vp va
+        (C := C₀) (H := H) (t := t) hC₀ hH ht
+        ((Real.norm_eq_abs _).symm.trans_le hr) ((Real.norm_eq_abs _).symm.trans_le ha)
+    exact n04NegativeInverse_prefix_mono hcoef
+      (parameterHeightWeight_nonneg hH _)
+      (pow_nonneg (zero_le_one.trans ht) _) hv
   have hheight : N04NegativeInverseJet.UnitPrefix JH (z, p)
       (parameterGrading G.W.S low) (parameterGrading G.W.S (low + N + shift * K + 1))
       N K shift (B * E ^ B) H R t := by
-    let Q := JH.congrOn (fun x _ => (G.negativeInverse_physical_height 0 x.1 k x.2).symm)
+    let Q : SmoothDirections (sectorNeighborhood G.W.S low ε' ε' ×ˢ G.negativeInverseComponent m)
+        (fun x : Parameter G.W.S × PolarPoint =>
+          G.negativeInversePhysicalAtomFamily 0 .height x.1 k x.2) :=
+      JH.congrOn (fun x _ => (G.negativeInverse_physical_height 0 x.1 k x.2).symm)
     exact (hraw 2 Q).coefficient_mono (hcommon E hE).2.2.2 hH (zero_le_one.trans ht)
   have hzbase : z ∈ sectorNeighborhood G.W.S base radius radius :=
     sectorNeighborhood_mono G.W.S hbase hε' hε' hz
   have hk : G.Neg 0 k := (G.neg_iff_inl 0 k).mpr ⟨(m, side), hi⟩
-  have hjac := (hJac 0 z hzbase k hk q hq).trans (hcommon E hE).2.1
-  have hlinear := (G.negativeInverseCanonicalLinear_norm 0 k).trans
-    ((add_le_add le_rfl hspan).trans (hcommon E hE).2.2.1)
+  have hjac : |planeJacobian ((G.V 0).chart (G.lift 0 z) k) p|⁻¹ ≤ B * E ^ B :=
+    (hJac 0 z hzbase k hk q hq).trans (hcommon E hE).2.1
+  have hlinear : ‖G.negativeInverseCanonicalLinear 0 k‖ ≤ B * E ^ B :=
+    (G.negativeInverseCanonicalLinear_norm 0 k).trans
+      ((add_le_add le_rfl hspan).trans (hcommon E hE).2.2.1)
   exact ⟨hforward, hheight, hjac, hlinear⟩
 
 end N04RealizationGauge
