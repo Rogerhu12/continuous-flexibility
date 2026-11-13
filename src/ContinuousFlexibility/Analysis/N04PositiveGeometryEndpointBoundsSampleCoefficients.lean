@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsFactored
+import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsSampleCoefficientDirections
 import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootSpeedFactor
 import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSamplePrefix
 
@@ -18,54 +18,11 @@ namespace ContinuousFlexibility.Analysis
 open Set Function ContinuousFlexibility.Statements
 open scoped ContDiff
 
-def n04PositiveGeometry_rootRawCoefficient (D : ReferenceData) (S : PhysicalSpacesData)
-    (C : NonlinearGeometryData S) (g : ℝ → ℝ) (r σ : ℝ) (speed : Bool)
-    (z : AnnularState S × ℝ) : PolarPoint → ℝ :=
-  if speed then factoredCharacteristicSpeed D.w g (stateProfile D S C z.1)
-    (stateHeight D S C z) r σ
-  else orientedCharacteristicDrift (stateProfile D S C z.1) (stateHeight D S C z) r σ
-
-theorem n04PositiveGeometry_orientedDrift_eq_projection
-    (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
-    (z : AnnularState S × ℝ) (r σ : ℝ) :
-    orientedCharacteristicDrift (stateProfile D S C z.1) (stateHeight D S C z) r σ =
-      (fun p => (σ • ContinuousLinearMap.fst ℝ ℝ ℝ)
-        (n06PhysicalRootFields D S C z (rootProfileShift r σ p))) := by
-  funext p
-  simp only [ContinuousLinearMap.smul_apply, ContinuousLinearMap.fst_apply, smul_eq_mul,
-    n06PhysicalRootFields, orientedCharacteristicDrift]
-
-private theorem rootDrift_projection_norm {σ : ℝ} (hσ : |σ| ≤ 1) :
-    ‖σ • ContinuousLinearMap.fst ℝ ℝ ℝ‖ ≤ 1 := by
-  rw [norm_smul, Real.norm_eq_abs]
-  exact (mul_le_mul hσ (ContinuousLinearMap.norm_fst_le ℝ ℝ ℝ)
-    (norm_nonneg _) zero_le_one).trans_eq (mul_one 1)
-
 local instance n04PositiveSampleCoefficientStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
-def n04PositiveGeometry_rootRawCoefficientTrace_joint
-    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
-    {C : NonlinearGeometryData S} {base loss : ℕ} {ε r : ℝ}
-    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
-    (hN : N01Properties D T S C base loss ε) (hε : ε ≤ 1)
-    (hr : r ∈ radialCore D) (hroot : deriv D.w r = 0)
-    (σ : ℝ) (g : ℝ → ℝ) (hg : ContDiff ℝ ∞ g) (hg0 : 0 < g 0)
-    (speed : Bool) (a : ℕ) :
-    SmoothDirections (sectorNeighborhood S base ε ε ×ˢ (univ : Set ℝ))
-      (fun y => radialBoundaryJet (n04PositiveGeometry_rootRawCoefficient
-        D S C g r σ speed (liftSectorParameter S C y.1)) 0 a y.2) := by
-  cases speed with
-  | false =>
-      apply (n04Realization_orientedRootFieldTrace_joint hT hS hN hε hr hroot σ
-        (σ • ContinuousLinearMap.fst ℝ ℝ ℝ) a).congr
-      intro y _
-      exact congrArg (fun f : PolarPoint → ℝ => radialBoundaryJet f 0 a y.2)
-        (n04PositiveGeometry_orientedDrift_eq_projection D S C
-          (liftSectorParameter S C y.1) r σ).symm
-  | true => exact n04Realization_factoredRootSpeedTrace_joint
-      hT hS hN hε hr hroot σ g hg hg0 a
-
+set_option diagnostics true in
+set_option trace.profiler true in
 theorem n04PositiveGeometry_rootRawCoefficient_sample_prefix
     (W : N04RealizationStart) (X : N04RealizationChoice W)
     {base : ℕ} {ε : ℝ} (hb : W.base ≤ base) (hε : 0 < ε)
@@ -111,7 +68,10 @@ theorem n04PositiveGeometry_rootRawCoefficient_sample_prefix
   let Lc : ℕ := speedData.choose_spec.choose
   have hBc : requestedBase ≤ Bc := speedData.choose_spec.choose_spec.1
   have hc := speedData.choose_spec.choose_spec.2
-  obtain ⟨F, hF, hFbound⟩ := n04PositiveGeometry_referenceRootSpeedFactor_sample_prefix W X N
+  let referenceData := n04PositiveGeometry_referenceRootSpeedFactor_sample_prefix W X N
+  let F : ℝ := referenceData.choose
+  have hF : 1 ≤ F := referenceData.choose_spec.1
+  have hFbound := referenceData.choose_spec.2
   let p := pairGrading (sectorGrading W.S) realGrading
   have hp : Monotone p := sectorPairGrading_monotone W.S
   refine ⟨max Bd Bc, max Ld Lc, hBd.trans (le_max_left _ _), fun K s => ?_⟩
@@ -127,10 +87,16 @@ theorem n04PositiveGeometry_rootRawCoefficient_sample_prefix
   have hCc : 1 ≤ Cc := speedOrder.choose_spec.choose_spec.1
   have hAc : 0 ≤ Ac := speedOrder.choose_spec.choose_spec.2.1
   have hcb := speedOrder.choose_spec.choose_spec.2.2
-  obtain ⟨Dd, hDd, hds⟩ := n04PositiveGeometry_positiveEndpoint_parameter_weight W X
+  let driftSample := n04PositiveGeometry_positiveEndpoint_parameter_weight W X
     (γ := (3 / 4 : ℝ)) (by norm_num) hAd (zero_le_one.trans hCd)
-  obtain ⟨Dc, hDc, hcs⟩ := n04PositiveGeometry_positiveEndpoint_parameter_weight W X
+  let Dd : ℝ := driftSample.choose
+  have hDd : 1 ≤ Dd := driftSample.choose_spec.1
+  have hds := driftSample.choose_spec.2
+  let speedSample := n04PositiveGeometry_positiveEndpoint_parameter_weight W X
     (γ := (3 / 4 : ℝ)) (by norm_num) hAc (zero_le_one.trans hCc)
+  let Dc : ℝ := speedSample.choose
+  have hDc : 1 ≤ Dc := speedSample.choose_spec.1
+  have hcs := speedSample.choose_spec.2
   obtain ⟨A₀, _, hpack⟩ := coefficientEnvelope_pack (F * Dc) (F + Dc)
   let A : ℝ := max Dd (max 1 A₀)
   have hA : 1 ≤ A := (le_max_left _ _).trans (le_max_right _ _)
@@ -180,12 +146,16 @@ theorem n04PositiveGeometry_rootRawCoefficient_sample_prefix
         (Real.rpow_nonneg (zero_le_one.trans hEpos) _) (zero_le_one.trans hA)
   cases speed with
   | false =>
-      let π := σ • ContinuousLinearMap.fst ℝ ℝ ℝ
-      let JP := J.congr (fun y _ => congrArg
-        (fun f : PolarPoint → ℝ => iteratedDeriv (b + d) (radialBoundaryJet f 0 a) θ)
-        (n04PositiveGeometry_orientedDrift_eq_projection W.D W.S W.C
-          (liftSectorParameter W.S W.C y) r σ))
-      have hout := hdb r hr hroot σ hσ a d had π (rootDrift_projection_norm hσ)
+      let π : PolarPoint →L[ℝ] ℝ := σ • ContinuousLinearMap.fst ℝ ℝ ℝ
+      let JP : SmoothDirections (sectorNeighborhood W.S base ε ε)
+          (fun y => iteratedDeriv (b + d) (radialBoundaryJet
+            (fun q => π (n06PhysicalRootFields W.D W.S W.C
+              (liftSectorParameter W.S W.C y) (rootProfileShift r σ q))) 0 a) θ) :=
+        J.congr (fun y _ => congrArg
+          (fun f : PolarPoint → ℝ => iteratedDeriv (b + d) (radialBoundaryJet f 0 a) θ)
+          (n04PositiveGeometry_orientedDrift_eq_projection W.D W.S W.C
+            (liftSectorParameter W.S W.C y) r σ))
+      have hout := hdb r hr hroot σ hσ a d had π (n04PositiveGeometry_rootDrift_projection_norm hσ)
         b hbs θ JP k hk z hz ((hp (le_max_left Bd Bc) z).trans hzlow)
         v (fun j => (hp (le_max_left Bd Bc) (v j)).trans (hv j)) R hR
         ((hp (Nat.add_le_add_left (le_max_left Ld Lc) s) z).trans hzR)

@@ -86,9 +86,13 @@ theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix
   have hAfB : Af ≤ B := le_max_left _ _
   have hCiB : Ci ≤ B := (le_max_left _ _).trans (le_max_right _ _)
   have hLB : L ≤ B := (le_max_right _ _).trans (le_max_right _ _)
-  choose C hC degree hpower using fun j : Fin 4 =>
+  let powerData (j : Fin 4) :=
     n04PositiveGeometry_rootPowerTrace_word_bound (E := StateDirections W.S × ℝ)
       γ j.val (K + s + 1) L hL
+  let C : Fin 4 → ℝ := fun j => (powerData j).choose
+  have hC (j : Fin 4) : 1 ≤ C j := (powerData j).choose_spec.1
+  let degree : Fin 4 → ℕ := fun j => (powerData j).choose_spec.2.choose
+  have hpower (j : Fin 4) := (powerData j).choose_spec.2.choose_spec
   let C₀ : ℝ := 1 + ∑ j, C j
   let D : ℕ := ∑ j, degree j
   have hC₀ : 1 ≤ C₀ := le_add_of_nonneg_right
