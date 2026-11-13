@@ -47,7 +47,8 @@ private theorem n04PulledFields_error_zero_germ
     (z : AnnularState S × ℝ) (ρ : CircleSpace S) (π : (ℝ × ℝ) →L[ℝ] ℝ) :
     (fun q => π (returnCorrectionCoefficientError D S C R χ z q ρ)) =ᶠ[𝓝 p]
       (fun _ => 0) := by
-  have hnear := hzero.comp_tendsto (continuous_fst.tendsto p)
+  have hnear : ∀ᶠ q : PolarPoint in 𝓝 p, ∀ m, deriv (χ m) q.1 = 0 :=
+    (continuous_fst.tendsto p).eventually hzero
   filter_upwards [hnear] with q hq
   have hinactive : ¬ ∃ m,
       q.1 ∈ Ioo (C.left m) (C.right m) ∧ deriv (χ m) q.1 ≠ 0 := by
@@ -55,6 +56,22 @@ private theorem n04PulledFields_error_zero_germ
     exact hm (hq m)
   simp only [returnCorrectionCoefficientError, dif_neg hinactive,
     LinearMap.zero_apply, map_zero]
+
+private theorem n04PulledFields_mixed_zero_of_germ
+    {f : PolarPoint → ℝ} {p : PolarPoint}
+    (hz : f =ᶠ[𝓝 p] fun _ => 0) (a b : ℕ) :
+    mixedDerivative a b f p = 0 :=
+  (mixedDerivative_congr_of_eventuallyEq hz a b).trans
+    (by simp only [mixedDerivative, iteratedDeriv_const, ite_self])
+
+private def n04PulledFields_zeroGermParameterTower
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} (hU : IsOpen U) (f : E → PolarPoint → ℝ) (p : PolarPoint)
+    (hz : ∀ x ∈ U, f x =ᶠ[𝓝 p] fun _ => 0) (a b : ℕ) :
+    SmoothDirections U (fun x => mixedDerivative a b (f x) p) :=
+  (smoothDirections_constant hU (0 : ℝ)).congrOn
+    (fun x hx => (n04PulledFields_mixed_zero_of_germ (hz x hx) a b).symm)
 
 section OpticalError
 
@@ -78,48 +95,65 @@ theorem n04PulledFields_opticalCoefficientJets_zero
     (hN.returnCorrectionCoefficientScalarJets_zero hS hT hR Q.cell Q.component_cell
       Q.cutoff Q.range_on_component Q.derivative_bounds Q.active_discriminant x hx)
 
+private theorem n04PulledFields_opticalError_spatial
+    (π : (ℝ × ℝ) →L[ℝ] ℝ) (x : (StateDirections S × ℝ) × CircleSpace S)
+    (hx : x ∈ sectorNeighborhood S base ε ε ×ˢ univ) :
+    ContDiffOn ℝ ∞
+      (fun p => π (returnCorrectionCoefficientError D S C R Q.cutoff
+        (liftSectorParameter S C x.1) p x.2)) (annularOpen D) := by
+  have hs := (Q.coefficientJets hN hS hT hR 0 x Fin.elim0).property
+  rw [n04PulledFields_opticalCoefficientJets_zero Q hN hS hT hR x hx] at hs
+  exact π.contDiff.contDiffOn.comp hs (fun _ _ => mem_univ _)
+
+private def n04PulledFields_opticalErrorStripMixedRegularity
+    (π : (ℝ × ℝ) →L[ℝ] ℝ) (m : ℕ) :
+    MixedJetRegularity (sectorNeighborhood S base ε ε ×ˢ univ)
+      (Ioo (Q.stripLeft m) (Q.stripRight m) ×ˢ univ)
+      (fun x p => π (returnCorrectionCoefficientError D S C R Q.cutoff
+        (liftSectorParameter S C x.1) p x.2)) := by
+  let J := solveSmoothDirectionsPostcomp
+    (hN.returnCorrectionCoefficient_parameterSpatialTower hS hT hR
+      Q.cutoff Q.cutoff_smooth Q.range_on_component m (Q.cell m) (Q.component_cell m)
+      (Q.stripLeft m) (Q.stripRight m) (Q.stripLeft_gt m) (Q.stripRight_lt m)
+      (fun z hz q hq => Q.strip_discriminant hN hS hT z hz m q hq)) π
+  have hU : IsOpen (sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) :=
+    (sectorNeighborhood_isOpen S base ε ε).prod isOpen_univ
+  have hV : IsOpen (Ioo (Q.stripLeft m) (Q.stripRight m) ×ˢ (univ : Set ℝ)) :=
+    isOpen_Ioo.prod isOpen_univ
+  have hc : Convex ℝ
+      ((sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) ×ˢ
+        (Ioo (Q.stripLeft m) (Q.stripRight m) ×ˢ (univ : Set ℝ))) :=
+    ((sectorNeighborhood_convex S base ε ε).prod convex_univ).prod
+      ((convex_Ioo _ _).prod convex_univ)
+  exact n04Realization_jointMixedRegularity J hU hV hc
+
+private def n04PulledFields_opticalErrorParameterTower
+    (π : (ℝ × ℝ) →L[ℝ] ℝ) (a b : ℕ) (p : PolarPoint) (hp : p ∈ annularOpen D) :
+    SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
+      (fun x => mixedDerivative a b
+        (fun q => π (returnCorrectionCoefficientError D S C R Q.cutoff
+          (liftSectorParameter S C x.1) q x.2)) p) := by
+  classical
+  by_cases hstrip : ∃ m, p.1 ∈ Ioo (Q.stripLeft m) (Q.stripRight m)
+  · exact (n04PulledFields_opticalErrorStripMixedRegularity Q hN hS hT hR π
+      hstrip.choose).parameter a b p ⟨hstrip.choose_spec, mem_univ _⟩
+  · have hz := (hN.cutoffStrip_or_eventually_zero Q.cutoff Q.support_interior
+      Q.endpoint_germs Q.stripLeft Q.stripRight Q.strip_support hp.1).resolve_left hstrip
+    exact n04PulledFields_zeroGermParameterTower
+      ((sectorNeighborhood_isOpen S base ε ε).prod isOpen_univ)
+      (fun x q => π (returnCorrectionCoefficientError D S C R Q.cutoff
+        (liftSectorParameter S C x.1) q x.2)) p
+      (fun x _ => n04PulledFields_error_zero_germ (D := D) (C := C) R Q.cutoff hz
+        (liftSectorParameter S C x.1) x.2 π) a b
+
 /-- The actual error has mixed spatial/parameter towers on the unchanged
 open sector neighborhood.  The strip-or-zero cover is uniform in the state. -/
 def n04PulledFields_opticalErrorMixedRegularity (π : (ℝ × ℝ) →L[ℝ] ℝ) :
     MixedJetRegularity (sectorNeighborhood S base ε ε ×ˢ univ) (annularOpen D)
       (fun x p => π (returnCorrectionCoefficientError D S C R Q.cutoff
-        (liftSectorParameter S C x.1) p x.2)) := by
-  have hU : IsOpen (sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) :=
-    (sectorNeighborhood_isOpen S base ε ε).prod isOpen_univ
-  refine ⟨?_, ?_⟩
-  · intro x hx
-    have hs := (Q.coefficientJets hN hS hT hR 0 x Fin.elim0).property
-    rw [n04PulledFields_opticalCoefficientJets_zero Q hN hS hT hR x hx] at hs
-    exact π.contDiff.contDiffOn.comp hs (fun _ _ => mem_univ _)
-  · intro a b p hp
-    classical
-    have hcover := hN.cutoffStrip_or_eventually_zero Q.cutoff Q.support_interior
-      Q.endpoint_germs Q.stripLeft Q.stripRight Q.strip_support hp.1
-    by_cases hstrip : ∃ m, p.1 ∈ Ioo (Q.stripLeft m) (Q.stripRight m)
-    · let m := Classical.choose hstrip
-      have hm : p.1 ∈ Ioo (Q.stripLeft m) (Q.stripRight m) := Classical.choose_spec hstrip
-      let J := solveSmoothDirectionsPostcomp
-        (hN.returnCorrectionCoefficient_parameterSpatialTower hS hT hR
-          Q.cutoff Q.cutoff_smooth Q.range_on_component m (Q.cell m) (Q.component_cell m)
-          (Q.stripLeft m) (Q.stripRight m) (Q.stripLeft_gt m) (Q.stripRight_lt m)
-          (fun z hz q hq => Q.strip_discriminant hN hS hT z hz m q hq)) π
-      have hV : IsOpen (Ioo (Q.stripLeft m) (Q.stripRight m) ×ˢ (univ : Set ℝ)) :=
-        isOpen_Ioo.prod isOpen_univ
-      have hc : Convex ℝ
-          ((sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) ×ˢ
-            (Ioo (Q.stripLeft m) (Q.stripRight m) ×ˢ (univ : Set ℝ))) :=
-        ((sectorNeighborhood_convex S base ε ε).prod convex_univ).prod
-          ((convex_Ioo _ _).prod convex_univ)
-      exact (n04Realization_jointMixedRegularity J hU hV hc).parameter
-        a b p ⟨hm, mem_univ _⟩
-    · have hz := hcover.resolve_left hstrip
-      apply (smoothDirections_constant hU (0 : ℝ)).congrOn
-      intro x hx
-      symm
-      rw [mixedDerivative_congr_of_eventuallyEq
-        (n04PulledFields_error_zero_germ R Q.cutoff hz
-          (liftSectorParameter S C x.1) x.2 π) a b]
-      simp only [mixedDerivative, iteratedDeriv_const, ite_self]
+        (liftSectorParameter S C x.1) p x.2)) where
+  spatial := n04PulledFields_opticalError_spatial Q hN hS hT hR π
+  parameter := n04PulledFields_opticalErrorParameterTower Q hN hS hT hR π
 
 /-- Substitution of the genuine N02 residual is carried out in the
 actual parameter towers, retaining all mixed spatial derivatives. -/
@@ -135,9 +169,8 @@ def n04PulledFields_actualErrorMixedRegularity (π : (ℝ × ℝ) →L[ℝ] ℝ)
     sectorNeighborhood_isOpen S base ε ε
   have hres : SmoothTameOn (pairGrading (sectorGrading S) realGrading) H.grading
       (sectorNeighborhood S base ε ε)
-      (fun z => R.residual (liftSectorParameter S C z)) := by
-    rcases hR with ⟨_, _, _, _, _, _, _, _, _, _, hr⟩
-    exact hr
+      (fun z => R.residual (liftSectorParameter S C z)) :=
+    hR.2.2.2.2.2.2.2.2.2.2
   let J : SmoothDirections (sectorNeighborhood S base ε ε)
       (fun z : StateDirections S × ℝ => (z, R.residual (liftSectorParameter S C z))) :=
     smoothDirectionsProd
