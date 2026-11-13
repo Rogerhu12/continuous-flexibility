@@ -159,7 +159,7 @@ theorem n04Coordinates_actual_whole_referenceJets_with_auxiliary
       by_cases hv : v = .auxiliaryColumn
       · subst v
         exact hauxRegular m
-      · rw [hsame v hv (C.referenceState, 0) m]
+      · rw [hsame v hv (C'.referenceState, 0) m]
         exact ⟨(hother0 m v hv).1, (hother0 m v hv).2.1⟩
     · intro s
       have hotherAtOrder := (hother e τ σ Q buffer.region href).2 s
@@ -184,7 +184,7 @@ theorem n04Coordinates_actual_whole_referenceJets_with_auxiliary
       by_cases hv : v = .auxiliaryColumn
       · subst v
         exact (haux m p hp a b hab).trans (hcost (le_max_right _ _))
-      · rw [hsame v hv (C.referenceState, 0) m]
+      · rw [hsame v hv (C'.referenceState, 0) m]
         exact ((hrest m v hv).2.2 p hp a b hab).trans (hcost (le_max_left _ _))
   exact ⟨i, l, u, η, hlu, hinterval, hU, hS', hN', hA', hR', hreference,
     hgauge, hQ, hcompact, hsupport, hinside, hauxRef, hauxZero, hauxJ, hsame⟩
