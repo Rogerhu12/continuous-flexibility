@@ -9,6 +9,7 @@ import ContinuousFlexibility.Analysis.WholeReferenceGaugeStaticReferenceJets
 import ContinuousFlexibility.Analysis.CanonicalReferenceDividedJets
 import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
 import ContinuousFlexibility.Analysis.ActualPositiveReferencePrincipalAssembly
+import ContinuousFlexibility.Analysis.N04PositiveReferenceMaterialBounds
 
 /-!
 # All non-auxiliary reference atoms of one actual whole atlas
@@ -56,6 +57,7 @@ theorem n04Coordinates_actual_whole_reference_nonAuxiliaryJets
     let A := n04bActualTypedAtlas hT hS hN hfield e₀
     ∃ Y H : N04PositiveComponent Γ.reference.a Γ.reference.b (deriv Γ.reference.w) → ℝ → ℝ,
       N04PositiveReferenceFamily A src 4 Y H ∧
+      N04PositiveReferenceMaterialBounds T cell Y H ∧
       ∀ (e : ℕ ≃ N04WholePieceIndex Γ.reference)
         (τ σ : (AnnularState S × ℝ) →
           N04PositiveComponent Γ.reference.a Γ.reference.b (deriv Γ.reference.w) →
@@ -116,7 +118,7 @@ theorem n04Coordinates_actual_whole_reference_nonAuxiliaryJets
   obtain ⟨BN, hBN, hnegativePrincipal⟩ :=
     n04WholeReferenceGauge_negative_principalReferenceJets_enlargedMaterialData
       hT hS hN hfield e₀
-  refine ⟨Y, H, hfamily, ?_⟩
+  refine ⟨Y, H, hfamily, ⟨C0, hC0, hfloor, hjets⟩, ?_⟩
   intro e τ σ Q N href
   let ψ := fun i => positiveReferenceCylinderChart (Y i)
   let χ := fun i => positiveReferenceCylinderInverse (Y i)

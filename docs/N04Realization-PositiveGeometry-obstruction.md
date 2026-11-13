@@ -2,7 +2,8 @@
 
 ## Finding and scope
 
-The frozen `N04RealizationPositiveGeometryObligation` quantifies over **every**
+The original draft, now retained as
+`N04RealizationSuppliedBufferPositiveGeometryObligation`, quantifies over **every**
 `N04PositiveNormalizationBuffer`. That qualitative buffer contract permits the
 right center of each positive component to approach its right endpoint at an
 arbitrary rate. The conclusion nevertheless requires one sampled-`E0` power,
@@ -20,13 +21,15 @@ This note gives the mathematical refutation of the displayed universal buffer
 assertion and records the corresponding source identities. The proof has also
 been assembled in `Analysis/N04PositiveGeometryObstruction.lean` as
 `n04Realization_not_positiveGeometryObligation`, with the exact conclusion
-`¬ N04RealizationPositiveGeometryObligation`. Lean compiled this theorem and
+`¬ N04RealizationSuppliedBufferPositiveGeometryObligation`. Lean compiled this theorem and
 passed its strict axiom gate in
 [CI run 43419984621](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43419984621),
 at [commit f59c477e](https://github.com/Rogerhu12/continuous-flexibility/commit/f59c477e5e372ea7ad8e1385d38b0840e218baa5).
 Both the final theorem and the unconditional retained-start witness depend
-on exactly `propext`, `Classical.choice`, and `Quot.sound`. The blueprint
-statement is unchanged.
+on exactly `propext`, `Classical.choice`, and `Quot.sound`. This is a historical obstruction, not completion of the revised task.
+The corrected positive-geometry obligation carries the same reference
+family's material certificate and existentially chooses its buffer.
+The final `N04cStatement` is unchanged.
 
 ## The exact contracts involved
 

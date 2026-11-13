@@ -5,7 +5,7 @@ import ContinuousFlexibility.Analysis.N04RealizationLeadOptical
 /-!
 # The supplied-buffer quantifier obstructs positive geometry
 
-The frozen positive-geometry obligation allows every normalization buffer.
+The historical supplied-buffer draft allows every normalization buffer.
 Its matching condition fixes the transport to the identity throughout the
 buffer's middle interval. A legal choice can make the remaining right
 transition arbitrarily narrow on infinitely many positive components.
@@ -18,7 +18,9 @@ including every fixed parameter loss and every material power.
 
 All witnesses used here come from existing unconditional constructions.
 No positive-geometry or realization blueprint theorem is imported.
-The frozen obligation itself is unchanged.
+That exact draft is retained as
+`N04RealizationSuppliedBufferPositiveGeometryObligation`. The corrected
+`N04RealizationPositiveGeometryObligation` instead chooses its buffer.
 -/
 
 noncomputable section
@@ -43,7 +45,7 @@ attribute [local instance]
 obligation is false. The obstruction already follows from the first
 spatial derivative of the genuine inverse-angle atom. -/
 theorem n04Realization_not_positiveGeometryObligation :
-    ¬ N04RealizationPositiveGeometryObligation := by
+    ¬ N04RealizationSuppliedBufferPositiveGeometryObligation := by
   intro hpositive
   have W : N04RealizationStart := n04RealizationStart_nonempty.some
   have X : N04RealizationChoice W :=

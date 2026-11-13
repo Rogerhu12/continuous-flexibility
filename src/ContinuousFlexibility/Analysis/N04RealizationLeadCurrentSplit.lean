@@ -243,14 +243,42 @@ theorem admissible_mono {b b' : ℕ} {ε ε' : ℝ} (h : G.Admissible b ε) (hb 
 
 end N04RealizationGauge
 
-/-- One positive transport family with its matching on a smaller neighborhood,
-and the geometry interface on positive pieces. -/
-def N04RealizationPositiveGeometryObligation : Prop :=
+/-- Historical draft with a universally supplied normalization buffer.
+This is retained only as the subject of the certified counterexample. -/
+def N04RealizationSuppliedBufferPositiveGeometryObligation : Prop :=
   ∀ (W : N04RealizationStart) (X : N04RealizationChoice W)
     (Y H : N04PositiveComponent W.D.a W.D.b (deriv W.D.w) → ℝ → ℝ),
     N04PositiveReferenceFamily (W.A X.e₀) X.src 4 Y H →
   ∀ (e : ℕ ≃ N04WholePieceIndex W.D)
     (B : N04PositiveNormalizationBuffer W.D.a W.D.b (deriv W.D.w) (tsupport W.D.chi)),
+  ∃ (b : ℕ) (ε : ℝ) (lower upper : N04PositiveComponent W.D.a W.D.b (deriv W.D.w) → ℝ)
+    (τ σ : (AnnularState W.S × ℝ) →
+      N04PositiveComponent W.D.a W.D.b (deriv W.D.w) → PolarPoint → PolarPoint)
+    (Q : (AnnularState W.S × ℝ) →
+      N04PositiveComponent W.D.a W.D.b (deriv W.D.w) → PolarPoint → ℝ),
+    W.base ≤ b ∧ 0 < ε ∧ ε ≤ W.ε ∧
+    (∀ z ∈ stateNeighborhood W.S W.C b ε, stateSector W.S z.1 → ∀ i,
+      WholePositiveTransportMatching 3
+        (fun side => n04PositiveSourceMap (X.src i side) (W.A X.e₀) z)
+        (fun side => n04PositiveSourceHeight (X.src i side) (W.A X.e₀) z)
+        (τ z i) (σ z i) (Q z i) (n04PositiveLeft i) (n04PositiveRight i)
+        (B.centerLeft i) (B.centerRight i) (lower i) (upper i)) ∧
+    (∀ i, τ (W.C.referenceState, 0) i = id ∧ σ (W.C.referenceState, 0) i = id ∧
+      Q (W.C.referenceState, 0) i = (fun _ => (1 : ℝ))) ∧
+    ∀ η, (N04RealizationGauge.mk W X e Y H τ σ Q B.region).GeometryData η
+      ((N04RealizationGauge.mk W X e Y H τ σ Q B.region).Pos η) b ε
+
+/-- One positive transport family with its matching on a smaller neighborhood,
+and the geometry interface on positive pieces. The same reference family
+carries material bounds, and the construction chooses its normalization
+buffer before choosing the transport and its smaller neighborhood. -/
+def N04RealizationPositiveGeometryObligation : Prop :=
+  ∀ (W : N04RealizationStart) (X : N04RealizationChoice W)
+    (Y H : N04PositiveComponent W.D.a W.D.b (deriv W.D.w) → ℝ → ℝ),
+    N04PositiveReferenceFamily (W.A X.e₀) X.src 4 Y H →
+    N04PositiveReferenceMaterialBounds W.T X.cell Y H →
+  ∀ e : ℕ ≃ N04WholePieceIndex W.D,
+  ∃ B : N04PositiveNormalizationBuffer W.D.a W.D.b (deriv W.D.w) (tsupport W.D.chi),
   ∃ (b : ℕ) (ε : ℝ) (lower upper : N04PositiveComponent W.D.a W.D.b (deriv W.D.w) → ℝ)
     (τ σ : (AnnularState W.S × ℝ) →
       N04PositiveComponent W.D.a W.D.b (deriv W.D.w) → PolarPoint → PolarPoint)

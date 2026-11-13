@@ -57,9 +57,10 @@ theorem n04Realization_referenceObligation : N04RealizationReferenceObligation :
   have hprod := n04Coordinates_actual_whole_reference_nonAuxiliaryJets W.P W.metadata.selected
     W.metadata.first_two one_pos W.realizes W.hw W.coordinates W.hT W.hS W.through03 W.field
     X.e₀ hE0 X.κ_pos W.host X.optical X.cell X.cell_mem X.src
-  refine ⟨hprod.choose, hprod.choose_spec.choose, hprod.choose_spec.choose_spec.1, ?_⟩
+  refine ⟨hprod.choose, hprod.choose_spec.choose, hprod.choose_spec.choose_spec.1,
+    hprod.choose_spec.choose_spec.2.1, ?_⟩
   intro e τ σ Q F buffer href b' ε' hb hε' hε'ε V hV hR
-  have hrest := hprod.choose_spec.choose_spec.2 e τ σ Q buffer.region href
+  have hrest := hprod.choose_spec.choose_spec.2.2 e τ σ Q buffer.region href
   have hprincipal := hrest.1 hε' hV
   have hjets := hrest.2
   have hN' := nonlinearPropertiesThrough03_restrict W.hT W.through03 hb le_rfl hε' hε'ε
@@ -103,6 +104,10 @@ theorem n04Realization_referenceObligation : N04RealizationReferenceObligation :
   have hsame (v : Atom) (hv : v ≠ .auxiliaryColumn) (z : AnnularState W.S × ℝ) (m : ℕ) :
       atom W.D W.U S' C' L' V' z m v = atom W.D W.U W.S W.C W.L V z m v :=
     canonicalAtom_replaceAuxiliaryColumn_of_ne W.D W.U W.S W.C W.L V η z m v hv
+  have hsameRef (v : Atom) (hv : v ≠ .auxiliaryColumn) (m : ℕ) :
+      atom W.D W.U S' C' L' V' (C'.referenceState, 0) m v =
+        atom W.D W.U W.S W.C W.L V (W.C.referenceState, 0) m v :=
+    hsame v hv (W.C.referenceState, 0) m
   have hUfloor (j : ℕ) : 1 ≤ W.U.E0 (W.U.sample j) :=
     (W.floor _).trans (le_enlargedMaterialData_E0 W.T _)
   have hreference : ReferenceJets W.D W.U S' C' L' V' := by
@@ -112,7 +117,7 @@ theorem n04Realization_referenceObligation : N04RealizationReferenceObligation :
       by_cases hv : v = .auxiliaryColumn
       · subst v
         exact hauxReg m
-      · rw [hsame v hv (W.C.referenceState, 0) m]
+      · rw [hsameRef v hv m]
         exact ⟨(hother0 m v hv).1, (hother0 m v hv).2.1⟩
     · intro s
       obtain ⟨B1, hB1, hrest⟩ := hjets s
@@ -130,7 +135,7 @@ theorem n04Realization_referenceObligation : N04RealizationReferenceObligation :
       by_cases hv : v = .auxiliaryColumn
       · subst v
         exact (haux m p hp a b hab).trans (hcost (le_max_right _ _))
-      · rw [hsame v hv (W.C.referenceState, 0) m]
+      · rw [hsameRef v hv m]
         exact ((hrest m v hv).2.2 p hp a b hab).trans (hcost (le_max_left _ _))
   have hpos : ∀ m, 0 < W.T.E0 (W.T.sample (V.cell m)) := fun m =>
     zero_lt_one.trans_le (hE0 _)

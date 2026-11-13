@@ -36,8 +36,9 @@ theorem n04Realization_currentObligation_of_split
     (hsrc : N04RealizationSourceColumnObligation)
     (hprin : N04RealizationPrincipalObligation) :
     N04RealizationCurrentObligation := by
-  intro W X Y H hfam e B
-  refine (hpos W X Y H hfam e B).elim fun b h1 => h1.elim fun ε h1 => h1.elim
+  intro W X Y H hfam hreference e
+  refine (hpos W X Y H hfam hreference e).elim fun B hB =>
+    hB.elim fun b h1 => h1.elim fun ε h1 => h1.elim
     fun lower h1 => h1.elim fun upper h1 => h1.elim fun τ h1 => h1.elim fun σ h1 =>
       h1.elim fun Q hp => ?_
   let G : N04RealizationGauge := ⟨W, X, e, Y, H, τ, σ, Q, B.region⟩
@@ -82,7 +83,7 @@ theorem n04Realization_currentObligation_of_split
   have hbb : b ≤ b2 := hp2.1
   have hbn : b ≤ nb := hbb.trans (hb2.trans hb3)
   have hεn : ε' ≤ ε := hε'3.trans (hε32.trans hε2)
-  refine ⟨nb, ε', hb.trans hbn, hε', hεn.trans hεε, lower, upper, τ, σ, Q,
+  refine ⟨B, nb, ε', hb.trans hbn, hε', hεn.trans hεε, lower, upper, τ, σ, Q,
     fun z hz hs i => hp.2.2.2.1 z (stateNeighborhood_mono W.S W.C hbn hεn hz) hs i,
     hp.2.2.2.2.1, ?_⟩
   intro η _ _ _ _ hrefJ a ha hs
@@ -97,7 +98,7 @@ theorem n04Realization_currentObligation_of_split
           (min_le_right _ _) (G.cost_nonneg η).1 (G.cost_nonneg η).2.1))
   have hJ := hdata.2
   have hv := hJ.choose_spec.1
-  exact ⟨fun z hz m => hdata.1 z hz m trivial, hJ.choose,
+  exact ⟨fun z hz m => hdata.1 z hz m trivial, fun m => hJ.choose m trivial,
     ⟨hv.choose, fun s => ⟨(hv.choose_spec s).choose, (hv.choose_spec s).choose_spec.1,
       fun z hz m q i j hij => (hv.choose_spec s).choose_spec.2 z hz m trivial q i j hij⟩⟩,
     fun k => ⟨(hJ.choose_spec.2 k).choose, fun s =>

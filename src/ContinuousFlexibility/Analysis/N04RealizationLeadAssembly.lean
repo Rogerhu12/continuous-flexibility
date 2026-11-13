@@ -6,6 +6,7 @@ import ContinuousFlexibility.Analysis.N04WholeComponentPieces
 import ContinuousFlexibility.Analysis.N04bReferencePieces
 import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
 import ContinuousFlexibility.Analysis.PositiveComponentMaterialCell
+import ContinuousFlexibility.Analysis.N04PositiveReferenceMaterialBounds
 
 /-!
 # The Realization theorem from four explicit obligations
@@ -110,6 +111,7 @@ def N04RealizationReferenceObligation : Prop :=
   ∀ (W : N04RealizationStart) (X : N04RealizationChoice W),
   ∃ Y H : N04PositiveComponent W.D.a W.D.b (deriv W.D.w) → ℝ → ℝ,
     N04PositiveReferenceFamily (W.A X.e₀) X.src 4 Y H ∧
+    N04PositiveReferenceMaterialBounds W.T X.cell Y H ∧
     ∀ (e : ℕ ≃ N04WholePieceIndex W.D)
       (τ σ : (AnnularState W.S × ℝ) →
         N04PositiveComponent W.D.a W.D.b (deriv W.D.w) → PolarPoint → PolarPoint)
@@ -147,8 +149,9 @@ def N04RealizationCurrentObligation : Prop :=
   ∀ (W : N04RealizationStart) (X : N04RealizationChoice W)
     (Y H : N04PositiveComponent W.D.a W.D.b (deriv W.D.w) → ℝ → ℝ),
     N04PositiveReferenceFamily (W.A X.e₀) X.src 4 Y H →
-  ∀ (e : ℕ ≃ N04WholePieceIndex W.D)
-    (B : N04PositiveNormalizationBuffer W.D.a W.D.b (deriv W.D.w) (tsupport W.D.chi)),
+    N04PositiveReferenceMaterialBounds W.T X.cell Y H →
+  ∀ e : ℕ ≃ N04WholePieceIndex W.D,
+  ∃ B : N04PositiveNormalizationBuffer W.D.a W.D.b (deriv W.D.w) (tsupport W.D.chi),
   ∃ newBase : ℕ, ∃ ε' : ℝ, W.base ≤ newBase ∧ 0 < ε' ∧ ε' ≤ W.ε ∧
   ∃ (lower upper : N04PositiveComponent W.D.a W.D.b (deriv W.D.w) → ℝ)
     (τ σ : (AnnularState W.S × ℝ) →
@@ -418,15 +421,16 @@ theorem n04Realization_of_obligations
   have hf : Continuous (deriv W.D.w) :=
     (n04b_profileGeometry_of_through03 W.through03).2.2.1.1.continuous_deriv (by simp)
   have e : ℕ ≃ N04WholePieceIndex W.D := (n04WholePiece_exists_enumeration (D := W.D) hf).some
-  have B : N04PositiveNormalizationBuffer W.D.a W.D.b (deriv W.D.w) (tsupport W.D.chi) :=
-    (n04PositiveNormalizationBuffer_nonempty hf hborder.2.1 hborder.2.2.1).some
   have href := hrefO W X
   let Y := href.choose
   let H := href.choose_spec.choose
   have hfam : N04PositiveReferenceFamily (W.A X.e₀) X.src 4 Y H :=
     href.choose_spec.choose_spec.1
-  have hrefJ := href.choose_spec.choose_spec.2
-  have hcur := hcurO W X Y H hfam e B
+  have hrefBounds := href.choose_spec.choose_spec.2.1
+  have hrefJ := href.choose_spec.choose_spec.2.2
+  have hchosen := hcurO W X Y H hfam hrefBounds e
+  let B := hchosen.choose
+  have hcur := hchosen.choose_spec
   let newBase := hcur.choose
   let ε' := hcur.choose_spec.choose
   have hcur1 := hcur.choose_spec.choose_spec
