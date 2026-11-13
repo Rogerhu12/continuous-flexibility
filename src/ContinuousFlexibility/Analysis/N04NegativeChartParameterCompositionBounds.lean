@@ -110,7 +110,6 @@ theorem n04NegativeChart_parameterComposition_positive_prefix
   have hex := n04NegativeChart_actualForcing_weighted_prefix (E := E) (Q := Q) n K
   let Cf := hex.choose
   have hCf := hex.choose_spec.1
-  have hforcing := hex.choose_spec.2
   have hCp : 0 ≤ (2 : ℝ) ^ K := pow_nonneg (by norm_num) _
   refine ⟨1 + (2 : ℝ) ^ K + Cf, by linarith only [hCp, hCf], ?_⟩
   intro G Θ hG J hΘ γ α hγ hα v t x W M R ρ D hW hWR hM hR hρ hκ hhead hlower
@@ -131,7 +130,7 @@ theorem n04NegativeChart_parameterComposition_positive_prefix
     simpa only [Function.comp_id, u] using hlower n hn le_rfl id l hl
   have hmarked := n04NegativeChart_actualForcing_marked_factors J hΘ hn K D γ α v t x
     hW hWR hM hR hρ hhead (fun k hk hkn e l hl => hlower k hk hkn.le e l hl)
-  have hf := hforcing hG J hΘ γ α hγ hα v t x D hW
+  have hf := hex.choose_spec.2 (G := G) (Θ := Θ) hG J hΘ γ α hγ hα v t x D hW
     (one_le_mul_of_one_le_of_one_le hM hR) hρ hmarked
   have he : (fun y : Q =>
       flowParameterField (fun z => G (z.1, (z.2.1, Θ z))) n (γ y) v (t, α y)) =

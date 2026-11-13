@@ -15,7 +15,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Analysis
 
-open Set ContinuousFlexibility.Statements
+open Set ContinuousFlexibility.Statements CanonicalGeometry
 open scoped ContDiff
 
 variable {P : Type*} [NormedAddCommGroup P] [NormedSpace ℝ P]

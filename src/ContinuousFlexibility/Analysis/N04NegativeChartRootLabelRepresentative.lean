@@ -15,7 +15,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Analysis
 
-open Set Filter ContinuousFlexibility.Statements
+open Set Filter ContinuousFlexibility.Statements CanonicalGeometry
 open scoped Topology ContDiff
 
 variable {E P : Type*}

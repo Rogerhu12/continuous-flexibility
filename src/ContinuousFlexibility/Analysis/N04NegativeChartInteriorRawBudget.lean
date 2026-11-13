@@ -39,6 +39,30 @@ private theorem interior_raw_remove_height
     (mul_le_mul_of_nonneg_left hw (mul_nonneg hC (Real.rpow_nonneg hE A))) hR)
   exact h.trans_eq (by ring)
 
+private theorem interior_raw_difference_bound
+    {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+    [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
+    {U : Set X} {f g : X → ℝ}
+    (J : SmoothDirections U f) (Jd : SmoothDirections U g)
+    (heq : ∀ y ∈ U, g y = f y - f 0)
+    (p : ℕ → Seminorm ℝ X) (base high : ℕ)
+    (hc : Convex ℝ U) (hzero : (0 : X) ∈ U)
+    {k K : ℕ} (hk : k ≤ K) {x : X} (hx : x ∈ U) (hlow : p base x ≤ 1)
+    (v : Fin k → X) (hv : ∀ i, p base (v i) ≤ 1)
+    {Q M H R : ℝ} (hxQ : p high x ≤ Q) (hvQ : ∀ i, p high (v i) ≤ Q)
+    (hb : ∀ j : ℕ, j ≤ max 1 K → ∀ y ∈ U, p base y ≤ 1 →
+      ∀ u : Fin j → X, (∀ i, p base (u i) ≤ 1) → p high y ≤ Q →
+        (∀ i, p high (u i) ≤ Q) →
+          ‖J.D j y u‖ ≤ M * parameterHeightWeight H j * R) :
+    ‖Jd.D k x v‖ ≤ M * H * R := by
+  let JD := Jd.congrOn heq
+  have h := n04NegativeChart_raw_reference_difference J JD p base high
+    (k := k) (x := x) (R := Q) (M := M * H * R)
+    hc hzero hx hlow v hv hxQ hvQ (fun j hj hjpos y hy hylow u hu hyQ huQ => by
+      have hh := hb j (hj.trans (max_le_max le_rfl hk)) y hy hylow u hu hyQ huQ
+      simpa only [parameterHeightWeight, if_neg (Nat.ne_of_gt hjpos)] using hh)
+  exact h
+
 namespace N04RealizationStart
 
 variable (W : N04RealizationStart) (e : ℕ ≃ N04PieceIndex W.D) (ρ : ℕ → Bool → ℝ)
@@ -136,22 +160,26 @@ theorem negativeInterior_raw_fractional
     exact ((congrArg abs hpoint.symm).trans (Real.norm_eq_abs _).symm).trans_le h
   · let Rd := n04Realization_jointMixedRegularity (W.negativeRawDefectJointTower m) hU hΩ hc
     let Jd := (Rd.parameter a b q hqΩ).restrict hV hsub
-    let JD : SmoothDirections V (fun y =>
+    have heq (y : Parameter W.S) (hy : y ∈ V) :
+        mixedDerivative a b (fun p =>
+          minusCharacteristicSpeed (originalCoefficients W.D W.S W.C
+            (liftSectorParameter W.S W.C y)) p -
+          minusCharacteristicSpeed (originalCoefficients W.D W.S W.C
+            (W.C.referenceState, 0)) p) q =
         mixedDerivative a b (minusCharacteristicSpeed (originalCoefficients W.D W.S W.C
           (liftSectorParameter W.S W.C y))) q -
         mixedDerivative a b (minusCharacteristicSpeed (originalCoefficients W.D W.S W.C
-          (liftSectorParameter W.S W.C 0))) q) := Jd.congrOn (fun y hy => by
+          (liftSectorParameter W.S W.C 0))) q := by
       have h := mixedDerivative_sub_of_contDiffOn hΩ
         ((W.negativeOriginalMinusJointTower m).spatial_value_contDiffOn hΩ y (hsub hy))
         ((W.negativeRawReferenceJointTower m).spatial_value_contDiffOn hΩ y (hsub hy)) a b hqΩ
       simpa only [liftSectorParameter, Prod.fst_zero, Prod.snd_zero,
-        ZeroMemClass.coe_zero, add_zero] using h)
-    have hJD := n04NegativeChart_raw_reference_difference J JD p base (s + loss)
-      (M := C * E ^ A * H * Q ^ (((a + b : ℕ) : ℝ) / ((s : ℝ) + 1)))
-      (sectorNeighborhood_convex W.S base ε ε) hzero hz hzlow (fun _ => w)
-      (fun _ => hw) hzQ (fun _ => hwQ) (fun j hj hjpos y hy hylow v hv hyQ hvQ => by
-        have hh := hraw j (hj.trans (max_le_max le_rfl hk)) y hy hylow v hv hyQ hvQ
-        simpa only [parameterHeightWeight, if_neg (Nat.ne_of_gt hjpos)] using hh)
+        ZeroMemClass.coe_zero, add_zero] using h
+    have hJD := interior_raw_difference_bound J Jd heq p base (s + loss)
+      (M := C * E ^ A) (H := H) (Q := Q)
+      (R := Q ^ (((a + b : ℕ) : ℝ) / ((s : ℝ) + 1)))
+      (sectorNeighborhood_convex W.S base ε ε) hzero hk hz hzlow
+      (fun _ => w) (fun _ => hw) hzQ (fun _ => hwQ) hraw
     have hd := n04NegativeChart_joint_restricted_parameter
       (W.negativeRawDefectJointTower m) hU hΩ hc hV hsub k a b hz hqΩ Jd (fun _ => w)
     have hCE : C * E ^ A * H ≤ (C * L) * E ^ A * H := by

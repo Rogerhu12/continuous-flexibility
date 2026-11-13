@@ -17,7 +17,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Analysis
 
-open Set ContinuousFlexibility.Statements
+open Set ContinuousFlexibility.Statements CanonicalGeometry
 open scoped BigOperators
 
 variable {X I : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]

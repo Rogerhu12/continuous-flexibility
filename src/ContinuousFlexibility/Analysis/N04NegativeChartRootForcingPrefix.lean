@@ -79,7 +79,7 @@ theorem negativeChart_actual_forcing_head_prefix
     have hs := negativeChart_speed_selected_spatialJet_le hG J b a t l
       (q.1, Θ ((0, q.1), (t, q.2)))
     have hb := hraw d.stateWord.stateArity hstate u hu₀ hu₁
-      (l + d.stateWord.angleArity) (by omega) _
+      (l + d.stateWord.angleArity) (by omega) (Θ ((0, q.1), (t, q.2)))
     have hs' :
         ‖iteratedFDeriv ℝ l (fun y : N04FlowPoint =>
           flowSpeedJointField J d.1.length (0, y.1)
