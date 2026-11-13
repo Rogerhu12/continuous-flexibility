@@ -87,15 +87,14 @@ def n04Realization_physicalRootJet_joint
         (ContinuousLinearMap.snd ℝ (StateDirections S × ℝ) ℝ))
   have hpoint (z : (StateDirections S × ℝ) × ℝ) :
       c + L z = (liftSectorParameter S C z.1, (r, z.2)) := by
-    rw [liftSectorParameter_eq_affine]
-    simp only [c, L, ContinuousLinearMap.prod_apply, ContinuousLinearMap.comp_apply,
-      ContinuousLinearMap.fst_apply, ContinuousLinearMap.snd_apply,
+    simp only [c, L, liftSectorParameter_eq_affine, ContinuousLinearMap.prod_apply,
+      ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
       ContinuousLinearMap.zero_apply, Prod.mk_add_mk, add_zero, zero_add]
   have hZ : IsOpen Z := (isOpen_sectorNeighborhood S base ε ε).prod isOpen_univ
   have hmap : MapsTo (fun z => c + L z) Z W := by
     intro z hz
     change c + L z ∈ W
-    rw [hpoint]
+    simp only [hpoint]
     have hz' : liftSectorParameter S C z.1 ∈ stateNeighborhood S C base ε :=
       liftSectorParameter_mem_stateNeighborhood hz.1 le_rfl
     have hd := n06_actualRootNormalized_denominators_lower hT hS hN hz'
@@ -117,7 +116,7 @@ def n04Realization_physicalRootJet_joint
   intro z hz
   change iteratedFDeriv ℝ n
     (fun p => π (n06RootNormalizedFields (f ((c + L z).1, p)))) (c + L z).2 v = _
-  rw [hpoint]
+  simp only [hpoint]
   change iteratedFDeriv ℝ n
       (fun p => π (n06RootNormalizedFields
         (n06ActualRootAbsorbedCoordinates D S (liftSectorParameter S C z.1) p)))

@@ -52,7 +52,8 @@ theorem circlePositiveInverseComposeLinear_zero_fixedBase_value
   let base : ℕ := max b₀ (ell + 2)
   let loss : ℕ := base + ell + 2
   have hq : Monotone M.grading := gradedSeminorm_monotone _ _
-  obtain ⟨A, hA, hHA⟩ := material_circle_power_upper hT hD hγ
+  have hpow := material_circle_power_upper hT hD hγ
+  obtain ⟨A, hA, hHA⟩ := hpow
   have hw := material_circle_sample_weights_pos hT hD
   refine ⟨base, loss, ?_⟩
   refine linearFamily_fixedBase_value_of_norm_growth M.grading hq
@@ -70,7 +71,7 @@ theorem circlePositiveInverseComposeLinear_zero_fixedBase_value
         M.grading base z.1 ≤ R ∧ M.grading base z.2 ≤ 1}
     let e : I → M.Space := fun i => i.val.1
     let u : I → M.Space := fun i => i.val.2
-    obtain ⟨C, hC, hb⟩ := circleNorm_inverseCompose_family_growth hM hw.1 hw.2 hA hHA
+    have hgrowth := circleNorm_inverseCompose_family_growth hM hw.1 hw.2 hA hHA
       base ell (le_max_right _ _)
       (fun b c hb hc => hinterp base b c (le_max_left _ _) hb hc)
       R (zero_le_one.trans hR) e u
@@ -79,6 +80,7 @@ theorem circlePositiveInverseComposeLinear_zero_fixedBase_value
       (fun i => i.property.1)
       (fun i => circleAffineInverse_left (fun _ => 0) (e i) ha i.property.1)
       (fun i => circleAffineInverse_right hM hT hD hγ (fun _ => 0) (e i)) s
+    obtain ⟨C, hC, hb⟩ := hgrowth
     refine ⟨C, hC, fun x hx hxR y hy => ?_⟩
     have hxW : x ∈ circlePositiveLiftDomain M :=
       (circlePositiveLiftDomain_iff hM (fun _ => 0) x).mpr
@@ -133,8 +135,8 @@ theorem circlePositiveInverseComposeLinear_fixedBase_oneHigh
           pairGrading M.grading M.grading base x ≤ R → ∀ v : Fin n → M.Space × M.Space,
             M.grading s (JP.D n x v) ≤
               C * tameJetSize (pairGrading M.grading M.grading) n s loss base x v := by
-  obtain ⟨c, hc, U, hU, hsub, hAU, hlow⟩ :=
-    circleFixedBase_common_lower_domain hD hT hγ hM a ha
+  have hlower0 := circleFixedBase_common_lower_domain hD hT hγ hM a ha
+  obtain ⟨c, hc, U, hU, hsub, hAU, hlow⟩ := hlower0
   have hq : Monotone M.grading := gradedSeminorm_monotone _ _
   refine translatedInverseFamily_fixedBase_oneHigh M.grading hq
     (coordinate_hasInterpolation_pair hq hq hI hI)
@@ -172,10 +174,11 @@ theorem circlePositiveInverseComposeLinear_fixedBase_oneHigh
           circleShiftedChartComposeContinuousLinear hM hT hD hγ (fun _ => 0) e (A y)) hp
       _ = y := circleInverseComposeLinear_right_inverse hM hT hD hγ
         (fun _ => 0) c hc e y (hlow e he)
-  · obtain ⟨bv, lv, hv⟩ :=
-      circlePositiveInverseComposeLinear_zero_fixedBase_value hD hT hγ hM hI JP₀ c hc
+  · have hval := circlePositiveInverseComposeLinear_zero_fixedBase_value hD hT hγ hM hI JP₀ c hc
+    obtain ⟨bv, lv, hv⟩ := hval
     refine ⟨bv, lv, fun R hR s => ?_⟩
-    obtain ⟨C, hC, hb⟩ := hv R hR s
+    have hvR := hv R hR s
+    obtain ⟨C, hC, hb⟩ := hvR
     exact ⟨C, hC, fun e he => hb e (hlow e he)⟩
   · exact circleShiftedChartCompose_orderedJets_fixedBase_bound hD hT hγ hM hI
 

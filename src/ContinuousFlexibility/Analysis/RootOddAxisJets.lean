@@ -64,8 +64,9 @@ private theorem rootOddAxisKernel_jet_bound (n : ℕ) :
   have hb := hB t ht
   rw [Real.norm_of_nonneg hJnonneg] at hb
   have hiJ : ‖iteratedFDeriv ℝ i rootOddAxisKernel ((0, 0, 0), t)‖ ≤ J t :=
-    Finset.single_le_sum (fun k _ => norm_nonneg _)
-      (Finset.mem_range.mpr (Nat.lt_succ_of_le hin))
+    Finset.single_le_sum
+      (f := fun k => ‖iteratedFDeriv ℝ k rootOddAxisKernel ((0, 0, 0), t)‖)
+      (fun k _ => norm_nonneg _) (Finset.mem_range.mpr (Nat.lt_succ_of_le hin))
   exact (hiJ.trans hb).trans ((le_max_right 1 B).trans
     (le_self_pow₀ (le_max_left 1 B)
       (Nat.ne_of_gt (lt_of_lt_of_le Nat.zero_lt_one hi))))
@@ -157,7 +158,8 @@ theorem exists_rootOddCoefficient_axis_jet_bound (n : ℕ) :
       (Ioi (0 : ℝ) ×ˢ (univ : Set ℝ)) := by
     intro p hp
     rw [Pi.neg_apply, hEq hp, neg_neg]
-    exact (rootEven_rootOddIntegral_eqOn hG ⟨hp.1.le, mem_univ _⟩).symm
+    exact (rootEven_rootOddIntegral_eqOn hG
+      ⟨Set.mem_Ici.mpr (Set.mem_Ioi.mp hp.1).le, mem_univ _⟩).symm
   have hb := heven (rootOddIntegral G) (contDiff_rootOddIntegral hG)
     (-F) hF.neg heq θ (A * M) hinput
   simpa only [iteratedFDeriv_neg_apply, norm_neg, mul_assoc] using hb

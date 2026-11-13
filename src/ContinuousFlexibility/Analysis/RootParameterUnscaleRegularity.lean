@@ -83,12 +83,13 @@ theorem extendedRootOddCoefficient_parameterUnscale_zero
         (rootInverseCoordinate (rootFlowParameterUnscale Θ δ) h) (δ * p.1, p.2))
       (Ioi (0 : ℝ) ×ˢ (univ : Set ℝ)) := by
     intro p hp
+    dsimp only
     rw [extendedRootOddCoefficient_of_nonneg _ hp.1.le,
-      extendedRootOddCoefficient_of_nonneg _ (mul_pos hδ hp.1).le]
+      extendedRootOddCoefficient_of_nonneg _ (p := (δ * p.1, p.2)) (mul_pos hδ hp.1).le]
     exact rootScaledInverseCoordinate_odd_parameterUnscale Θ h hδ hp.1 p.2
   have hroot : (0, θ) ∈ closure (Ioi (0 : ℝ) ×ˢ (univ : Set ℝ)) := by
     rw [closure_prod_eq, closure_Ioi, closure_univ]
-    exact ⟨le_rfl, mem_univ _⟩
+    exact ⟨Set.mem_Ici.mpr le_rfl, mem_univ _⟩
   have hc := he.closure hχ.continuous
     (continuous_const.mul (hχ1.continuous.comp
       ((continuous_const.mul continuous_fst).prodMk continuous_snd))) hroot

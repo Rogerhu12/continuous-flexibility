@@ -35,7 +35,7 @@ private theorem referenceScalarSource_compact_prefix
   have hj : |iteratedDeriv k f x| ≤ A j := by
     simpa only [Real.norm_eq_abs] using hA j x hx
   exact (hj.trans (le_abs_self _)).trans
-    (Finset.single_le_sum (fun _ _ => abs_nonneg _) (Finset.mem_univ j))
+    (Finset.single_le_sum (f := fun k => |A k|) (fun _ _ => abs_nonneg _) (Finset.mem_univ j))
 
 /-- The given inverse and source factor determine every scalar source.
 Only positive inverse derivatives are charged; its value is used through
@@ -94,7 +94,7 @@ theorem fixedReferenceScalarSource_material_jets
       ((hf.contDiffAt.comp p.1 (hXa p.1 hp.1)).comp p contDiffAt_fst)).mul
       (hg.contDiffAt.comp p contDiffAt_snd)).contDiffWithinAt
   · intro p hp
-    change F i p.1 * f (X i p.1) * g (p.2 + Real.pi) = _
+    simp only [Prod.fst_add, Prod.snd_add, add_zero]
     rw [hgperiod p.2]
   · intro p hp a b hab
     have ha : a ≤ s := by omega

@@ -76,9 +76,11 @@ theorem exists_positiveReferenceHeight_allOrder_jet_envelope (N : ℕ) :
     change |iteratedDeriv k (fun t =>
       positiveEndpointCutoff l δ t * Real.log (h false t) +
       positiveEndpointCutoff r δ t * Real.log (h true t)) x| ≤ _
-    rw [iteratedDeriv_fun_add
-      ((contDiff_positiveEndpointCutoff_mul hδ (hlogSmooth false)).contDiffAt.of_le (by simp))
-      ((contDiff_positiveEndpointCutoff_mul hδ (hlogSmooth true)).contDiffAt.of_le (by simp))]
+    have hl : ContDiff ℝ ∞ (fun t => positiveEndpointCutoff l δ t * Real.log (h false t)) :=
+      contDiff_positiveEndpointCutoff_mul hδ (hlogSmooth false)
+    have hr : ContDiff ℝ ∞ (fun t => positiveEndpointCutoff r δ t * Real.log (h true t)) :=
+      contDiff_positiveEndpointCutoff_mul hδ (hlogSmooth true)
+    rw [iteratedDeriv_fun_add (hl.contDiffAt.of_le (by simp)) (hr.contDiffAt.of_le (by simp))]
     calc
       _ ≤ _ + _ := abs_add_le _ _
       _ ≤ Ccut * U ^ N * (Clog * U ^ (2 * N + 1)) +
