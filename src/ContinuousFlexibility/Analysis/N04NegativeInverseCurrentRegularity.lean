@@ -74,8 +74,9 @@ theorem CurrentJetDataOn.negativeInverse_positiveTower
   refine ⟨ht.choose, fun s => ⟨(ht.choose_spec s).choose,
     (ht.choose_spec s).choose_spec.1, ?_⟩⟩
   intro m hm q hq i j hij J z hz v
-  rw [h.negativeInverse_positive_jet_eq h₀ m hm i j ⟨q, hq⟩ J hk hz v]
-  exact (ht.choose_spec s).choose_spec.2 z hz v m hm ⟨q, hq⟩ i j hij
+  have he := congrArg abs
+    (h.negativeInverse_positive_jet_eq h₀ m hm i j ⟨q, hq⟩ J hk hz v)
+  exact he.trans_le ((ht.choose_spec s).choose_spec.2 z hz v m hm ⟨q, hq⟩ i j hij)
 
 
 end ContinuousFlexibility.Analysis

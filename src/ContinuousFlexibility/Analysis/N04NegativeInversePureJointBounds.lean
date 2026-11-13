@@ -68,18 +68,21 @@ theorem n04NegativeInverse_pureSpatial_homogeneous
     | false =>
         simp only [c, hi, Bool.false_eq_true, if_false]
         apply Prod.ext
-        · simp only [Prod.fst_smul, smul_zero]
+        · change (0 : E) = ‖y i‖ • (0 : E)
+          exact (smul_zero _).symm
         · change y i = ‖y i‖ • (‖y i‖⁻¹ • y i)
           by_cases hy : y i = 0
           · simp only [hy, norm_zero, inv_zero, zero_smul]
           · rw [smul_smul, mul_inv_cancel₀ (norm_ne_zero_iff.mpr hy), one_smul]
-  rw [heq, A.map_smul_univ, norm_smul, Real.norm_eq_abs,
-    abs_of_nonneg (Finset.prod_nonneg (fun i _ => hc i))]
-  have h := mul_le_mul_of_nonneg_left (hunit v hv)
-    (Finset.prod_nonneg (fun i _ => hc i))
-  exact h.trans_eq (by
-    rw [w.negativeInverse_selectedProduct_eq_prod]
-    simp only [c, mul_comm])
+  calc
+    _ = (∏ i, c i) * ‖A (fun i => if w.isState i then (u i, 0) else (0, v i))‖ := by
+      rw [heq, A.map_smul_univ, norm_smul, Real.norm_eq_abs,
+        abs_of_nonneg (Finset.prod_nonneg (fun i _ => hc i))]
+    _ ≤ (∏ i, c i) * C := mul_le_mul_of_nonneg_left (hunit v hv)
+      (Finset.prod_nonneg (fun i _ => hc i))
+    _ = C * w.selectedProduct (fun i => ‖y i‖) := by
+      rw [w.negativeInverse_selectedProduct_eq_prod]
+      exact mul_comm _ _
 
 /-- Pure tagged slots preserve both arities when mixed jets are joined. -/
 theorem n04NegativeInverse_pureJoint_of_mixed
@@ -136,8 +139,9 @@ theorem n04NegativeInverse_pureJoint_of_mixed
           funext p
           rw [J.fixedLast_apply, hslots]
         rw [heq]
-        apply hb (k + 1) a b (by simpa only [StateAngleWord.stateArity] using
-          Nat.add_le_add_right hk 1) hab
+        have hk' : k + 1 ≤ w.state.stateArity := by
+          simpa only [StateAngleWord.stateArity] using (Nat.add_le_add_right hk 1)
+        apply hb (k + 1) a b hk' hab
         · intro i
           refine Fin.lastCases ?_ (fun j => ?_) i
           · simpa only [Fin.snoc_last, z] using hlow 0

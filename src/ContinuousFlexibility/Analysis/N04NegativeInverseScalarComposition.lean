@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N01cCompositionJetBounds
 import ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget
+import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
 
 /-!
 # Smooth finite-dimensional composition with the saved inverse degree
