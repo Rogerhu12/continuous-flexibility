@@ -15,6 +15,8 @@ and before the auxiliary column.
 
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements CanonicalGeometry
@@ -51,12 +53,19 @@ private theorem heightRadial_envelope_scale
 private theorem heightRadial_value_reorder (A E H V : ℝ) :
     (3 * (A * E ^ A * H)) * V = ((3 * A) * E ^ A) * H * V := by ring
 
+private theorem heightRadial_abs_scale {x c y : ℝ} (hc : 0 ≤ c) (he : x = c * y) :
+    |x| = c * |y| :=
+  (congrArg abs he).trans ((abs_mul c y).trans
+    (congrArg (fun r : ℝ => r * |y|) (abs_of_nonneg hc)))
+
 private theorem heightRadial_drop_zero_material {H₀ M₀ E₀ H M E A P B : ℝ}
     (h : H₀ * M₀ ^ (0 : ℝ) * E₀ ^ A ≤ B * (H * M ^ (0 : ℝ) * E ^ P)) :
     H₀ * E₀ ^ A ≤ B * (H * E ^ P) := by
   simpa only [Real.rpow_zero, mul_one] using h
 
 namespace N04RealizationGauge
+
+attribute [local irreducible] heightRadialDifferenceTower N01Properties.sectorCoefficientTower
 
 variable (G : N04RealizationGauge)
   (η : (G.W.S.height (3 / 4 : ℝ)).Space)
@@ -101,6 +110,24 @@ private theorem heightRadial_sample_envelope (A : ℝ) (hA : 0 ≤ A) :
   exact hs.trans (mul_le_mul_of_nonneg_left
     (mul_le_mul_of_nonneg_left hEP hH) hB.le)
 
+private theorem heightRadial_physicalLength_power_bound
+    (m : ℕ) (hm : G.Neg η m) (i s : ℕ) (his : i ≤ s) :
+    0 < (G.V η).physicalRight m - (G.V η).physicalLeft m ∧
+      ((G.V η).physicalRight m - (G.V η).physicalLeft m) ^ i ≤
+        (max 1 (G.W.D.b - G.W.D.a)) ^ s := by
+  let t := G.heightRadialLabel η m hm
+  have hgeom := G.heightRadial_physicalBounds η m t
+    (G.heightRadialLabel_spec η m hm)
+  have hlpos := sub_pos.mpr hgeom.2.1
+  have hlength : (G.V η).physicalRight m - (G.V η).physicalLeft m ≤
+      max 1 (G.W.D.b - G.W.D.a) := by
+    have houter : (G.V η).physicalRight m - (G.V η).physicalLeft m ≤
+        G.W.D.b - G.W.D.a := by
+      linarith only [hgeom.1, hgeom.2.2]
+    exact houter.trans (le_max_right _ _)
+  exact ⟨hlpos, (pow_le_pow_left₀ hlpos.le hlength i).trans
+    (pow_le_pow_right₀ (le_max_left _ _) his)⟩
+
 theorem heightRadialDifferenceTower_bound (k s : ℕ) :
     ∃ B : ℝ, 0 < B ∧ ∀ m (hm : G.Neg η m) (q : unitStrip) (i j : ℕ), i + j ≤ s →
       ∀ z ∈ sectorNeighborhood G.W.S G.W.base G.W.ε G.W.ε,
@@ -129,14 +156,10 @@ theorem heightRadialDifferenceTower_bound (k s : ℕ) :
   let t := G.heightRadialLabel η m hm
   have ht : G.e m = .inl t := G.heightRadialLabel_spec η m hm
   have hp := G.heightRadial_physicalUnitPoint_mem η m t ht q.property
-  have hgeom := G.heightRadial_physicalBounds η m t ht
   let l : ℝ := (G.V η).physicalRight m - (G.V η).physicalLeft m
-  have hlpos : 0 < l := sub_pos.mpr hgeom.2.1
-  have hlL : l ≤ L := (by
-    dsimp only [l]
-    linarith only [hgeom.1, hgeom.2.2] : l ≤ G.W.D.b - G.W.D.a).trans (le_max_right _ _)
-  have hpow : l ^ i ≤ L ^ s :=
-    (pow_le_pow_left₀ hlpos.le hlL i).trans (pow_le_pow_right₀ hL (by omega))
+  have hlength := G.heightRadial_physicalLength_power_bound η m hm i s (by omega)
+  have hlpos : 0 < l := hlength.1
+  have hpow : l ^ i ≤ L ^ s := hlength.2
   let E : ℝ := G.W.U.E0 (G.W.U.sample ((G.V η).cell m))
   let H : ℝ := G.W.U.H (G.W.U.sample ((G.V η).cell m)) ^ (3 / 4 : ℝ)
   let V : ℝ := oneHighVariationWeight (parameterGrading G.W.S)
@@ -154,11 +177,10 @@ theorem heightRadialDifferenceTower_bound (k s : ℕ) :
         (physicalUnitPoint (G.V η) m q.val) (G.W.host t.1 hp.1)).D k z v| ≤
       A * G.W.T.H (G.W.T.sample (G.W.C.cell t.1)) ^ (3 / 4 : ℝ) *
         G.W.T.E0 (G.W.T.sample (G.W.C.cell t.1)) ^ A * V := hraw
-  rw [G.heightRadialDifferenceTower_apply η m hm i j q k hz v,
-    abs_mul, abs_of_nonneg (pow_nonneg hlpos.le i)]
-  change l ^ i * _ ≤ B * E ^ B * H * V
-  exact heightRadial_envelope_scale hA.le (pow_nonneg (zero_le_one.trans hL) s)
-    hH hV hpow hraw' hsample' (hpack E hE)
+  have hscaled := heightRadial_abs_scale (pow_nonneg hlpos.le i)
+    (G.heightRadialDifferenceTower_apply η m hm i j q k hz v)
+  exact hscaled.trans_le (heightRadial_envelope_scale hA.le
+    (pow_nonneg (zero_le_one.trans hL) s) hH hV hpow hraw' hsample' (hpack E hE))
 
 /-- One neighborhood works for all current radial-coefficient jets and
 for every auxiliary-column replacement. -/
