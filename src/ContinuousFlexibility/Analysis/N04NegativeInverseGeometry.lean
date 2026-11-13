@@ -178,7 +178,9 @@ def negativeInverseAtomJointTower
     change (_ - K.physicalLeft k) / (K.physicalRight k - K.physicalLeft k) =
       ((K.inverseChart (liftSectorParameter W.S W.C x.1) k (canonicalUnitPoint K k x.2)).1 -
         K.physicalLeft k) / (K.physicalRight k - K.physicalLeft k)
-    rw [hinverse]
+    exact congrArg (fun p : PolarPoint =>
+      (p.1 - K.physicalLeft k) / (K.physicalRight k - K.physicalLeft k))
+      (congrFun (hinverse x.1) (canonicalUnitPoint K k x.2)).symm
   · let L : ((StateDirections W.S × ℝ) × PolarPoint) →L[ℝ] ℝ :=
       (ContinuousLinearMap.snd ℝ ℝ ℝ).comp
         (ContinuousLinearMap.snd ℝ (StateDirections W.S × ℝ) PolarPoint)
@@ -190,7 +192,8 @@ def negativeInverseAtomJointTower
     intro x hx
     change _ - x.2.2 =
       (K.inverseChart (liftSectorParameter W.S W.C x.1) k (canonicalUnitPoint K k x.2)).2 - x.2.2
-    rw [hinverse]
+    exact congrArg (fun p : PolarPoint => p.2 - x.2.2)
+      (congrFun (hinverse x.1) (canonicalUnitPoint K k x.2)).symm
 
 end N04RealizationStart
 
