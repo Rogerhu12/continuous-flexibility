@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N04PulledFieldsOriginalFactorsFixedBase
 import ContinuousFlexibility.Analysis.N04PulledFieldsVelocityPolynomialFixedBase
+import ContinuousFlexibility.Analysis.MaterialSampleBounds
 
 /-!
 # The actual residual-substituted coefficient error

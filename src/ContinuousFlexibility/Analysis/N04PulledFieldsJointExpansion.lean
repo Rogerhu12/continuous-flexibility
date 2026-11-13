@@ -110,7 +110,9 @@ private theorem n04PulledFields_jointExpansion_of_mixed
           _ = _ := by
             refine mixedDerivative_congr_on_open hV ?_ a b hq
             intro p hp
-            rw [J.fixedLast_eq_cons hc _ j (x, p) ⟨hx, hp⟩, hslots]
+            exact (congrArg (J.D (j + 1) (x, p)) hslots).trans
+              (J.fixedLast_eq_cons hc ((v 0).1, 0) j (x, p) ⟨hx, hp⟩
+                (fun i => (u i, 0))).symm
       have hAR (a b j : ℕ) (u : Fin j → E) :
           AR a b j u = mixedDerivative a b
             (fun p => (J.fixedLast (0, (1, 0))).D j (x, p)
