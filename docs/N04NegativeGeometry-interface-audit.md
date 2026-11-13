@@ -1,5 +1,19 @@
 # NegativeGeometry: scope of the current-jet tower
 
+## Status after the subnode-interface repair
+
+The audit below concerns the original draft at commit `3e23f7b3`.
+The task rules now assign interface repairs to the subnode line itself.
+The active definition has been repaired by indexing its directional towers
+by `P m`; `mono`, `union`, and the final all-pieces assembly were adapted
+at the same time. The original two audit modules are preserved under
+`drafts/N04NegativeGeometry-original-interface/` because their negation
+does not apply to the repaired definition. The final `N04cStatement` is
+unchanged. Work continues on the actual negative-piece geometric towers;
+the historical refutation is not a completion claim.
+
+## Historical audit
+
 The task is `N04RealizationNegativeGeometryObligation`, with the frozen
 definitions in `Analysis/N04RealizationLeadCurrentSplit.lean` and
 `Analysis/N04RealizationLeadCurrentData.lean`. This audit does not change
