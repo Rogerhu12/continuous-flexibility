@@ -85,7 +85,8 @@ theorem n04Realization_positiveCollar_uniform_exit
     rw [(hasDerivAt_parameterizedPositiveReferenceCoordinate hB hδ
       l (r - l) t θ).deriv]
     cases root <;>
-      simp only [c, d, Bool.false_eq_true, ite_false, ite_true] at hxone hxzero
+      simp only [c, d, Bool.false_eq_true, ite_false, ite_true,
+        Bool.not_false, Bool.not_true] at hxone hxzero hexit
     <;> simp only [positiveReferenceSlope, hxone, hxzero, one_mul, zero_mul,
       zero_add, add_zero, sub_self, sub_zero, mul_zero]
     <;> rw [hexit]

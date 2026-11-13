@@ -22,6 +22,32 @@ private def collarCoefficients (n : ℕ) (a : Fin (n + 2) → ℝ)
     (j : ℕ) (_θ : ℝ) : ℝ :=
   if hj : j < n + 2 then a ⟨j, hj⟩ else 0
 
+private theorem collarCoefficients_apply (n : ℕ) (a : Fin (n + 2) → ℝ)
+    {j : ℕ} (hj : j < n + 2) (θ : ℝ) :
+    collarCoefficients n a j θ = a ⟨j, hj⟩ := by
+  simp [collarCoefficients, hj]
+
+private theorem positivePrimitiveRadial_contDiff
+    {P : Type} [NormedAddCommGroup P] [NormedSpace ℝ P] [FiniteDimensional ℝ P]
+    (F : Bool → P × PolarPoint → ℝ) (hF : ∀ side, ContDiff ℝ ∞ (F side))
+    (l r δ v m : ℝ) :
+    ContDiff ℝ ∞ (fun p : P × ℝ =>
+      parameterizedPositiveReferenceCoordinate l r δ v m
+        (fun side q => radialPartial (fun z => F side (p.1, z)) q) (p.2, 0)) := by
+  have hPartial (side : Bool) : ContDiff ℝ ∞
+      (fun p : P × PolarPoint => radialPartial (fun q => F side (p.1, q)) p.2) := by
+    apply contDiff_iff_contDiffAt.mpr
+    intro p
+    exact contDiffAt_parameter_radialPartial (hF side).contDiffAt
+  let B : Bool → P × ℝ → ℝ := fun side p =>
+    radialPartial (fun q => F side (p.1, q)) (p.2, 0)
+  let Q : P × ℝ → P × PolarPoint := fun p => (p.1, (p.2, 0))
+  have hQ : ContDiff ℝ ∞ Q :=
+    contDiff_fst.prodMk (contDiff_snd.prodMk contDiff_const)
+  have hB (side : Bool) : ContDiff ℝ ∞ (B side) := by
+    simpa only [B, Q, Function.comp_apply] using (hPartial side).comp hQ
+  exact n04Realization_positivePrimitive_finiteParameter_contDiff B hB l r δ v m
+
 /-- This is the original collar, with fixed finite scalar coefficients. -/
 def n04Realization_positiveCollarKernel (n : ℕ) (l r δ v m : ℝ)
     (root : Bool) (p : (Fin (n + 2) → ℝ) × ℝ) : ℝ :=
@@ -34,35 +60,37 @@ theorem n04Realization_positiveCollarKernel_contDiff
   let P : Type := Fin (n + 2) → ℝ
   let F : Bool → P × PolarPoint → ℝ := fun side p =>
     positiveReferenceCollarField n l r root (collarCoefficients n p.1) Prod.fst side p.2
+  have hrad : ContDiff ℝ ∞ (fun p : P × PolarPoint => p.2.1) := by
+    simpa only [Function.comp_apply] using
+      (contDiff_fst : ContDiff ℝ ∞ (Prod.fst : PolarPoint → ℝ)).comp
+        (contDiff_snd : ContDiff ℝ ∞ (Prod.snd : P × PolarPoint → PolarPoint))
   have hPoly (c : ℝ) : ContDiff ℝ ∞ (fun p : P × PolarPoint =>
       boundaryTaylorPolynomial (n + 1) c (collarCoefficients n p.1) p.2) := by
     unfold boundaryTaylorPolynomial
     apply ContDiff.sum
     intro j hj
     have hj' : j < n + 2 := Finset.mem_range.mp hj
-    simp only [collarCoefficients, dif_pos hj']
-    have hcoord : ContDiff ℝ ∞ (fun p : P × PolarPoint => p.1 ⟨j, hj'⟩) :=
-      (contDiff_apply ℝ ℝ ⟨j, hj'⟩).comp contDiff_fst
-    have hrad : ContDiff ℝ ∞ (fun p : P × PolarPoint => p.2.1) :=
-      contDiff_fst.comp contDiff_snd
+    have heq : (fun p : P × PolarPoint =>
+        collarCoefficients n p.1 j p.2.2 / (j.factorial : ℝ) * (p.2.1 - c) ^ j) =
+        (fun p : P × PolarPoint =>
+          p.1 ⟨j, hj'⟩ / (j.factorial : ℝ) * (p.2.1 - c) ^ j) := by
+      funext p
+      rw [collarCoefficients_apply n _ hj' p.2.2]
+    rw [heq]
+    have hcoord : ContDiff ℝ ∞ (fun p : P × PolarPoint => p.1 ⟨j, hj'⟩) := by
+      simpa only [Function.comp_apply] using
+        (contDiff_apply ℝ ℝ (⟨j, hj'⟩ : Fin (n + 2))).comp
+          (contDiff_fst : ContDiff ℝ ∞ (Prod.fst : P × PolarPoint → P))
     exact (hcoord.div_const _).mul ((hrad.sub contDiff_const).pow j)
   have hF (side : Bool) : ContDiff ℝ ∞ (F side) := by
     by_cases hs : side = root
     · simpa only [F, positiveReferenceCollarField, if_pos hs] using
         hPoly (if side then r else l)
-    · simpa only [F, positiveReferenceCollarField, if_neg hs] using
-        (contDiff_fst.comp contDiff_snd :
-          ContDiff ℝ ∞ (fun p : P × PolarPoint => p.2.1))
-  have hPartial (side : Bool) : ContDiff ℝ ∞
-      (fun p : P × PolarPoint => radialPartial (fun q => F side (p.1, q)) p.2) := by
-    apply contDiff_iff_contDiffAt.mpr
-    intro p
-    exact contDiffAt_parameter_radialPartial (hF side).contDiffAt
-  let B : Bool → P × ℝ → ℝ := fun side p =>
-    radialPartial (fun q => F side (p.1, q)) (p.2, 0)
-  have hB (side : Bool) : ContDiff ℝ ∞ (B side) :=
-    (hPartial side).comp (contDiff_fst.prodMk (contDiff_snd.prodMk contDiff_const))
-  exact n04Realization_positivePrimitive_finiteParameter_contDiff B hB l r δ v m
+    · simpa only [F, positiveReferenceCollarField, if_neg hs] using hrad
+  change ContDiff ℝ ∞ (fun p : P × ℝ =>
+    parameterizedPositiveReferenceCoordinate l r δ v m
+      (fun side q => radialPartial (fun z => F side (p.1, z)) q) (p.2, 0))
+  exact positivePrimitiveRadial_contDiff F hF l r δ v m
 
 private theorem positiveCollar_congr_slice
     {n : ℕ} {A B : ℕ → ℝ → ℝ} (l r δ v m : ℝ) (root : Bool)
@@ -126,6 +154,7 @@ theorem n04Realization_positiveCollarKernel_eq
     (fun _ _ => contDiff_const) x θ 0
   intro j hj
   have hj' : j < n + 2 := by omega
-  simp only [collarCoefficients, dif_pos hj']
+  change A j θ = collarCoefficients n (fun i : Fin (n + 2) => A i θ) j 0
+  rw [collarCoefficients_apply n _ hj' 0]
 
 end ContinuousFlexibility.Analysis
