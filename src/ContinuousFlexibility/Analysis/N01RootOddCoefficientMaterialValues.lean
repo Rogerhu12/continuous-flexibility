@@ -34,7 +34,20 @@ private theorem oddRoot_value_inverse_of_speed
     nlinarith only [mul_le_mul_of_nonneg_left ha.2 hc.le, hc]
   have hi := inv_anti₀ (div_pos hc (by norm_num : (0 : ℝ) < 6)) hlo
   refine ⟨hpos, hhi, ?_⟩
-  simpa only [inv_div, div_eq_mul_inv] using hi
+  calc
+    _ ≤ (c / 6)⁻¹ := hi
+    _ = 6 * c⁻¹ := by rw [inv_div, div_eq_mul_inv]
+
+/-- Real bookkeeping for a zeroth jet with the state grading kept abstract. -/
+private theorem le_two_mul_of_norm_jet_zero {f : PolarPoint → ℝ} {q : PolarPoint}
+    {v B W : ℝ} {P : ℕ → ℝ} {k k' : ℕ} (hk : k' = k)
+    (hb : ‖iteratedFDeriv ℝ 0 f q‖ ≤ B * W ^ B * (1 + P k')) (hfv : f q = v)
+    (hv : 0 ≤ v) (ht : P k ≤ 1) (hB : 0 ≤ B) (hW : 1 ≤ W) :
+    v ≤ 2 * B * W ^ B := by
+  rw [hk, norm_iteratedFDeriv_zero, hfv, Real.norm_of_nonneg hv] at hb
+  have hBW : 0 ≤ B * W ^ B := mul_nonneg hB (Real.rpow_nonneg (zero_le_one.trans hW) _)
+  have h := mul_le_mul_of_nonneg_left ht hBW
+  nlinarith only [hb, h]
 
 theorem n01_rootOddCoefficient_unit_material_values_of_component_optical
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -71,10 +84,23 @@ theorem n01_rootOddCoefficient_unit_material_values_of_component_optical
             P * (C0 * T.E0 (T.sample j)) ^ P ∧
           (extendedRootOddCoefficient G (0, θ))⁻¹ ≤
             P * (C0 * T.E0 (T.sample j)) ^ P := by
-  obtain ⟨C0, low, lossS, hC0, hfloor, hpowers⟩ :=
-    n01_rootSpeed_axis_rpow_material_jets_of_component_optical hS hT hN hK
-  obtain ⟨BP, hBP, hplus⟩ := hpowers 1
-  obtain ⟨BM, hBM, hminus⟩ := hpowers (-1)
+  refine (n01_rootSpeed_axis_rpow_material_jets_of_component_optical hS hT hN hK).elim ?_
+  intro C0 hS1
+  refine hS1.elim ?_
+  intro low hS2
+  refine hS2.elim ?_
+  intro lossS hS3
+  have hC0 := hS3.1
+  have hfloor := hS3.2.1
+  have hpowers := hS3.2.2
+  refine (hpowers 1).elim ?_
+  intro BP hBPplus
+  have hBP := hBPplus.1
+  have hplus := hBPplus.2
+  refine (hpowers (-1)).elim ?_
+  intro BM hBMminus
+  have hBM := hBMminus.1
+  have hminus := hBMminus.2
   have hp : Monotone (pairGrading (stateGrading S) realGrading) :=
     tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
   let P : ℝ := 1 + 12 * BP 0 + 12 * BM 0
@@ -135,30 +161,18 @@ theorem n01_rootOddCoefficient_unit_material_values_of_component_optical
     rw [he, hcvalue]
   have hscalar := oddRoot_value_inverse_of_speed hv
     (n01RootLabel_deriv_mem_quarter_four hN hflow hz hs m side θ)
-  have hvalue : v ≤ 2 * BP 0 * W ^ (BP 0) := by
-    have hb := hplus z hz hs hzlow m j hhost hoptical side g hg hfactor R hR hstrip θ 0
-    have hb' : v ≤ BP 0 * W ^ (BP 0) *
-        (1 + pairGrading (stateGrading S) realGrading lossS (z - (C.referenceState, 0))) := by
-      simpa only [norm_iteratedFDeriv_zero, Real.rpow_one, Real.norm_of_nonneg hv.le,
-        Nat.zero_add] using hb
-    exact hb'.trans (by
-      calc
-        _ ≤ BP 0 * W ^ (BP 0) * 2 := mul_le_mul_of_nonneg_left
-          (by linarith only [hzloss])
-          (mul_nonneg (hBP 0).le (Real.rpow_nonneg (zero_le_one.trans hW) _))
-        _ = _ := by ring)
-  have hinverse : v⁻¹ ≤ 2 * BM 0 * W ^ (BM 0) := by
-    have hb := hminus z hz hs hzlow m j hhost hoptical side g hg hfactor R hR hstrip θ 0
-    have hb' : v⁻¹ ≤ BM 0 * W ^ (BM 0) *
-        (1 + pairGrading (stateGrading S) realGrading lossS (z - (C.referenceState, 0))) := by
-      simpa only [norm_iteratedFDeriv_zero, Real.rpow_neg_one,
-        Real.norm_of_nonneg (inv_nonneg.mpr hv.le), Nat.zero_add] using hb
-    exact hb'.trans (by
-      calc
-        _ ≤ BM 0 * W ^ (BM 0) * 2 := mul_le_mul_of_nonneg_left
-          (by linarith only [hzloss])
-          (mul_nonneg (hBM 0).le (Real.rpow_nonneg (zero_le_one.trans hW) _))
-        _ = _ := by ring)
+  have hvalue : v ≤ 2 * BP 0 * W ^ (BP 0) :=
+    le_two_mul_of_norm_jet_zero
+      (P := fun k => pairGrading (stateGrading S) realGrading k (z - (C.referenceState, 0)))
+      (Nat.zero_add lossS)
+      (hplus z hz hs hzlow m j hhost hoptical side g hg hfactor R hR hstrip θ 0)
+      (Real.rpow_one _) hv.le hzloss (hBP 0).le hW
+  have hinverse : v⁻¹ ≤ 2 * BM 0 * W ^ (BM 0) :=
+    le_two_mul_of_norm_jet_zero
+      (P := fun k => pairGrading (stateGrading S) realGrading k (z - (C.referenceState, 0)))
+      (Nat.zero_add lossS)
+      (hminus z hz hs hzlow m j hhost hoptical side g hg hfactor R hR hstrip θ 0)
+      (Real.rpow_neg_one _) (inv_nonneg.mpr hv.le) hzloss (hBM 0).le hW
   change 0 < extendedRootOddCoefficient G (0, θ) ∧ _
   rw [hχeq]
   refine ⟨hscalar.1, ?_, ?_⟩
