@@ -21,6 +21,7 @@ open scoped ContDiff
 local instance n04PositiveSampleCoefficientStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
+set_option stderrAsMessages false in
 set_option diagnostics true in
 set_option trace.profiler true in
 theorem n04PositiveGeometry_rootRawCoefficient_sample_prefix
