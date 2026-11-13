@@ -51,7 +51,7 @@ theorem n04Realization_currentObligation_of_split
   have hadm : G.Admissible b ε :=
     ⟨hb, hε, hεε, hfam, hp.2.2.2.2.1, B, lower, upper, rfl, hp.2.2.2.1⟩
   have hgeoP : ∀ η, G.ReferenceData η → G.GeometryData η (G.Pos η) b ε :=
-    hp.2.2.2.2.2
+    fun η _ => hp.2.2.2.2.2 η
   have h2 := hneg G b ε hadm
   let b2 := h2.choose
   let ε2 := h2.choose_spec.choose

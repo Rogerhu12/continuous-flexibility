@@ -270,9 +270,8 @@ def N04RealizationSuppliedBufferPositiveGeometryObligation : Prop :=
         (B.centerLeft i) (B.centerRight i) (lower i) (upper i)) ∧
     (∀ i, τ (W.C.referenceState, 0) i = id ∧ σ (W.C.referenceState, 0) i = id ∧
       Q (W.C.referenceState, 0) i = (fun _ => (1 : ℝ))) ∧
-    ∀ η, (N04RealizationGauge.mk W X e Y H τ σ Q B.region).ReferenceData η →
-      (N04RealizationGauge.mk W X e Y H τ σ Q B.region).GeometryData η
-        ((N04RealizationGauge.mk W X e Y H τ σ Q B.region).Pos η) b ε
+    ∀ η, (N04RealizationGauge.mk W X e Y H τ σ Q B.region).GeometryData η
+      ((N04RealizationGauge.mk W X e Y H τ σ Q B.region).Pos η) b ε
 
 /-- One positive transport family with its matching on a smaller neighborhood,
 and the geometry interface on positive pieces. The same reference family
