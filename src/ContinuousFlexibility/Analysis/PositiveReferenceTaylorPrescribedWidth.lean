@@ -92,7 +92,7 @@ theorem radialEndpointTaylorSlice_collar_bounds
   · have hlo := (abs_le.mp hdiff).1
     linarith only [hlo, hheight]
   · have hzero := hg 0 (by omega)
-    linarith only [htriangle, hdiff, hzero, hκM]
+    linarith only [htriangle, hdiff, hzero, hκM, hM]
 
 /-- The displayed width has a quadratic reciprocal cost once the
 finite jets, reciprocal endpoint lower bound and reciprocal gap have

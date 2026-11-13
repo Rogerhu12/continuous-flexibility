@@ -139,8 +139,8 @@ theorem parameterizedPositiveReferenceCoordinate_sub_fst
           (r - l) * positiveReferenceSlope l r δ
             (fun _ => 1 / (r - l)) (fun _ => 1 / (r - l)) x) := by
       rw [intervalIntegral.integral_sub
-        ((continuous_const.mul hSA).intervalIntegrable (μ := MeasureTheory.volume) l p.1)
-        ((continuous_const.mul hS₀).intervalIntegrable (μ := MeasureTheory.volume) l p.1),
+        ((continuous_const.fun_mul hSA).intervalIntegrable (μ := MeasureTheory.volume) l p.1)
+        ((continuous_const.fun_mul hS₀).intervalIntegrable (μ := MeasureTheory.volume) l p.1),
         intervalIntegral.integral_const_mul, intervalIntegral.integral_const_mul]
     _ = _ := by
       apply intervalIntegral.integral_congr

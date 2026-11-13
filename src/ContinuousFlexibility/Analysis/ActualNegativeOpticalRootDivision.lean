@@ -189,8 +189,8 @@ theorem n04bActualTypedAtlas_opticalRootDivision_half_material
   refine ⟨g, hg, hfactor, ?_, ?_⟩
   · intro n t ht
     exact (hjets n t ht).trans
-      ((mul_le_mul_of_nonneg_left (hsample n k m side hk j hhost) (hAg n).le)
-        .trans_eq (by ring))
+      ((mul_le_mul_of_nonneg_left (hsample n k m side hk j hhost) (hAg n).le).trans_eq
+        (by ring))
   let E := T.E0 (T.sample (K.cell k))
   have hE : 0 < E := (hT.2.1 _ (materialSample_mem_interval hN.1.1.1.1 hT (K.cell k))).2.2.1
   have hEj : 0 < T.E0 (T.sample j) :=

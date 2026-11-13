@@ -74,7 +74,7 @@ theorem n04Coordinates_actual_reference_negative_scalar_inverse
   have hwhole {r : ℝ} (hr : r ∈ I) : r ∈ Ioo (C.left m) (C.right m) :=
     n04b_negativeHalf_subset (n04bActualReferenceCut_mem hN) (m, side) hr
   have hshape (p : PolarPoint) (hp : p ∈ I ×ˢ (univ : Set ℝ)) :
-      F p = (Y p.1, p.2) := hradial.2.2.1 p ⟨hwhole hp.1, mem_univ _⟩
+      K.chart z₀ k p = (Y p.1, p.2) := hradial.2.2.1 p ⟨hwhole hp.1, mem_univ _⟩
   have hHeight (p : PolarPoint) (hp : p ∈ I ×ˢ (univ : Set ℝ)) :
       K.height z₀ k p = H p.1 := hradial.2.2.2.1 p ⟨hwhole hp.1, mem_univ _⟩
   have hY : ContDiffOn ℝ ∞ Y I := by
@@ -122,7 +122,8 @@ theorem n04Coordinates_actual_reference_negative_scalar_inverse
     have ha : (L.coefficients z₀).a (r, 0) = D.w r :=
       (hN.2.1 z₀ href hsref (r, 0)).trans (hN.1.1.reference_coefficients (r, 0)).1
     have hu := (n04Coordinates_actualAtlas_negativePrincipalDensity
-      hT hS hN hfield e href hsref k m side hi ⟨hwhole hr, mem_univ (0 : ℝ)⟩).1
+      hT hS hN hfield e href hsref k m side hi (p := (r, 0))
+      ⟨hwhole hr, mem_univ (0 : ℝ)⟩).1
     have hdensity : H r ^ 2 / |deriv Y r| * (D.w r * deriv Y r ^ 2) = 1 := by
       have hn := hf.symm.trans (he.symm.trans hu)
       simpa only [ha] using hn
@@ -143,7 +144,7 @@ theorem n04Coordinates_actual_reference_negative_scalar_inverse
   · intro p hp
     have hq : (χ p.1, p.2) ∈ I ×ˢ (univ : Set ℝ) :=
       ⟨hmapχ hp.1, mem_univ _⟩
-    have hfq : F (χ p.1, p.2) = p := by
+    have hfq : K.chart z₀ k (χ p.1, p.2) = p := by
       rw [hshape _ hq, hYχ p.1 hp.1]
     have he := hleft (χ p.1, p.2) hq
     rw [hfq] at he

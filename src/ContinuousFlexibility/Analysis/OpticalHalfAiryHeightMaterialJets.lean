@@ -136,7 +136,7 @@ theorem opticalHalf_airyHeight_power_material_jets
       _ = V := Real.rpow_one _
   have hcValues (x : ℝ) (hx : x ∈ Icc (0 : ℝ) d) :
       0 < c x ∧ c x ≤ V ∧ (c x)⁻¹ ≤ V := by
-    have he := (hcg x hx).self_of_nhds
+    have he : c x = Real.sqrt (g x) := (hcg x hx).self_of_nhds
     have hb := hgb x hx
     refine ⟨by rw [he]; exact Real.sqrt_pos.mpr hb.1, ?_, ?_⟩
     · rw [he, Real.sqrt_eq_rpow]
@@ -204,7 +204,8 @@ theorem opticalHalf_airyHeight_power_material_jets
     calc
       V ^ 3 = K ^ 3 * E ^ (K * 3) := by
         dsimp only [V]
-        rw [mul_pow, ← Real.rpow_mul_natCast hE0 K 3]
+        rw [mul_pow, show K * 3 = K * ((3 : ℕ) : ℝ) by norm_num,
+          Real.rpow_mul_natCast hE0 K 3]
       _ ≤ K₁ * E ^ K₁ := mul_le_mul hk (Real.rpow_le_rpow_of_exponent_le hE he)
         (Real.rpow_nonneg hE0 _) (zero_le_one.trans hK₁)
   intro x hx n

@@ -31,7 +31,9 @@ private theorem rootFactor_inverse_of_relative_speed
   have hκc : κ / 4 ≤ c ^ 2 := by nlinarith only [hvκ, hs]
   have hci : (c ^ 2)⁻¹ ≤ 4 * κ⁻¹ := by
     have hi := inv_anti₀ (div_pos hκ (by norm_num : (0 : ℝ) < 4)) hκc
-    simpa only [inv_div, div_eq_mul_inv] using hi
+    calc
+      _ ≤ (κ / 4)⁻¹ := hi
+      _ = 4 * κ⁻¹ := by rw [inv_div, div_eq_mul_inv]
   have hai2 : (a ^ 2)⁻¹ ≤ A ^ 2 := by
     rw [← inv_pow]
     exact pow_le_pow_left₀ (inv_nonneg.mpr ha.le) hai 2

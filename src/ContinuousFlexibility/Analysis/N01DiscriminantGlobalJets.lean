@@ -31,6 +31,17 @@ def N01DiscriminantGlobalBound (D : ReferenceData) (S : PhysicalSpacesData)
         B (a + b) * (1 + pairGrading (stateGrading S) realGrading (a + b + outLoss)
           (z - (C.referenceState, 0)))
 
+private theorem le_one_add_mul_one_rpow {y a t : ℝ} (hy : y ≤ a * (1 + t)) (ht : 0 ≤ t) :
+    y ≤ (1 + a) * (1 : ℝ) ^ (1 + a) * (1 + t) := by
+  rw [Real.one_rpow, mul_one]
+  exact hy.trans (mul_le_mul_of_nonneg_right (le_add_of_nonneg_left zero_le_one)
+    (add_nonneg zero_le_one ht))
+
+private theorem le_mul_of_le_one_rpow {y q B t : ℝ} (hy : y ≤ q * (1 : ℝ) ^ q * (1 + t))
+    (hqB : q ≤ B) (ht : 0 ≤ t) : y ≤ B * (1 + t) := by
+  rw [Real.one_rpow, mul_one] at hy
+  exact hy.trans (mul_le_mul_of_nonneg_right hqB (add_nonneg zero_le_one ht))
+
 /-- All constants precede every point and component of the physical
 annulus. Neither a cell nor a local geometric radius enters the bound. -/
 theorem n01_discriminant_global_fixed_loss
@@ -46,12 +57,21 @@ theorem n01_discriminant_global_fixed_loss
     coordinate_hasInterpolation_pair (stateGrading_monotone S)
       (fun _ _ _ => le_rfl) (coordinate_hasInterpolation_stateGrading hS)
       coordinate_hasInterpolation_realGrading
-  obtain ⟨low, outLoss, hmaterial⟩ :=
-    coefficientDiscriminant_fixed_loss_material_bound hp hI loss
-  choose A hA hraw using fun n => originalCoefficient_global_bound_of_n01 hS hT hN n
+  refine (coefficientDiscriminant_fixed_loss_material_bound hp hI loss).elim ?_
+  intro low hlowEx
+  refine hlowEx.elim ?_
+  intro outLoss hmaterial
+  have hAex (n : ℕ) := originalCoefficient_global_bound_of_n01 hS hT hN n
+  let A : ℕ → ℝ := fun n => (hAex n).choose
+  have hA (n : ℕ) : 0 < A n := (hAex n).choose_spec.1
+  have hraw (n : ℕ) : N01OriginalCoefficientGlobalBoundAtOrder D S C base loss ε n (A n) :=
+    (hAex n).choose_spec.2
   let M : ℕ → ℝ := fun n => 1 + A n
   have hM (n : ℕ) : 1 ≤ M n := le_add_of_nonneg_right (hA n).le
-  choose Q hQ hbound using hmaterial M hM
+  have hQex (a b : ℕ) := hmaterial M hM a b
+  let Q : ℕ → ℕ → ℝ := fun a b => (hQex a b).choose
+  have hQ (a b : ℕ) : 0 < Q a b := (hQex a b).choose_spec.1
+  have hbound (a b : ℕ) := (hQex a b).choose_spec.2
   let B : ℕ → ℝ := fun n => 1 + ∑ i : Fin (n + 1), Q i (n - i)
   have hB (n : ℕ) : 0 < B n := add_pos_of_pos_of_nonneg zero_lt_one
     (Finset.sum_nonneg (fun i _ => (hQ i (n - i)).le))
@@ -69,17 +89,20 @@ theorem n01_discriminant_global_fixed_loss
   have hU : IsOpen (annularOpen D) := isOpen_Ioo.prod isOpen_univ
   have hrep (i : Fin 3) := exists_global_contDiff_germ_of_open hU
     (contDiffOn_originalCoefficientComponent_of_n01 hS hT hN hz hs i) hq
-  choose F hF he using hrep
+  let F : Fin 3 → PolarPoint → ℝ := fun i => (hrep i).choose
+  have hF (i : Fin 3) : ContDiff ℝ ∞ (F i) := (hrep i).choose_spec.1
+  have he (i : Fin 3) :
+      F i =ᶠ[𝓝 q] canonicalCoefficientComponent i (originalCoefficients D S C z) :=
+    (hrep i).choose_spec.2
   have hinput (i : Fin 3) (c d : ℕ) (_hcd : c + d ≤ a + b) :
       |mixedDerivative c d (F i) q| ≤
         M (c + d) * (1 : ℝ) ^ M (c + d) *
           (1 + pairGrading (stateGrading S) realGrading (c + d + loss)
-            (z - (C.referenceState, 0))) := by
-    simp only [Real.one_rpow, mul_one]
-    rw [mixedDerivative_eq_of_germ (he i) c d]
-    exact (hraw (c + d) z hz hs i c d le_rfl q hq).trans
-      (mul_le_mul_of_nonneg_right (le_add_of_nonneg_left zero_le_one)
-        (add_nonneg zero_le_one (apply_nonneg _ _)))
+            (z - (C.referenceState, 0))) :=
+    le_one_add_mul_one_rpow
+      ((congrArg abs (mixedDerivative_eq_of_germ (he i) c d)).trans_le
+        (hraw (c + d) z hz hs i c d le_rfl q hq))
+      (apply_nonneg _ _)
   have hlocal := hbound a b (z - (C.referenceState, 0)) hlow 1 le_rfl F hF q hinput
   have hdiscriminant : (fun x => F 1 x ^ 2 - F 0 x * F 2 x) =ᶠ[𝓝 q]
       (fun x => (originalCoefficients D S C z).b x ^ 2 -
@@ -87,14 +110,8 @@ theorem n01_discriminant_global_fixed_loss
     filter_upwards [he 0, he 1, he 2] with x h0 h1 h2
     rw [h0, h1, h2]
     norm_num [canonicalCoefficientComponent]
-  rw [mixedDerivative_eq_of_germ hdiscriminant a b] at hlocal
-  have hlocal' : |mixedDerivative a b
-      (fun x => (originalCoefficients D S C z).b x ^ 2 -
-        (originalCoefficients D S C z).a x * (originalCoefficients D S C z).c x) q| ≤
-      Q a b * (1 + pairGrading (stateGrading S) realGrading (a + b + outLoss)
-        (z - (C.referenceState, 0))) := by
-    simpa only [Real.one_rpow, mul_one] using hlocal
-  exact hlocal'.trans (mul_le_mul_of_nonneg_right (hQB a b)
-    (add_nonneg zero_le_one (apply_nonneg _ _)))
+  exact le_mul_of_le_one_rpow
+    ((congrArg abs (mixedDerivative_eq_of_germ hdiscriminant a b)).symm.trans_le hlocal)
+    (hQB a b) (apply_nonneg _ _)
 
 end ContinuousFlexibility.Analysis
