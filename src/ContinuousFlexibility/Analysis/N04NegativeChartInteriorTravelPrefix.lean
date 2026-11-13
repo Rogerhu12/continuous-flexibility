@@ -25,7 +25,7 @@ private theorem scaledOrientation_add (T t x y : ℝ) (side : Bool) :
     (3 / 2 : ℝ) * n04bTravelOrientation T side (t + (x + y) / 2) =
       (3 / 2 : ℝ) * n04bTravelOrientation T side t +
         (if side then -(3 / 4 : ℝ) else 3 / 4) * (x + y) := by
-  cases side <;> simp only [n04bTravelOrientation, ↓reduceIte] <;> ring
+  cases side <;> simp only [n04bTravelOrientation, Bool.false_eq_true, ↓reduceIte] <;> ring
 
 private theorem mixed_affine_reflection
     {Ω : Set PolarPoint} {f g r : PolarPoint → ℝ} (hΩ : IsOpen Ω)
@@ -94,8 +94,8 @@ private theorem affine_two_height_budget
     · simp only [if_neg hk, abs_zero, le_refl]
   have htri : |t| ≤ (if k = 0 then M else 0) + N * H * Q + N * H * Q := by
     rw [ht]
-    exact ((abs_add_le _ _).trans (add_le_add_right (abs_add_le _ _) _)).trans
-      (add_le_add (add_le_add hc' hx') hy')
+    exact (abs_add_le ((if k = 0 then c else 0) + α * x) (β * y)).trans
+      (add_le_add ((abs_add_le _ _).trans (add_le_add hc' hx')) hy')
   by_cases hk : k = 0
   · simp only [hk, parameterHeightWeight, ite_true, mul_one] at htri ⊢
     have hMQ : M ≤ M * Q := le_mul_of_one_le_right hM hQ
@@ -113,7 +113,7 @@ private theorem travel_material_envelope
     (hB : 0 ≤ B) (hRH : 0 ≤ RH) :
     (3 / 2 : ℝ) * (C * E ^ A) + 2 * (B * E ^ B) * (1 + RH) ≤
       ((3 / 2 : ℝ) * C + 2 * B * (1 + RH)) * E ^ (A + B) := by
-  have hc := mul_le_mul_of_nonneg_left
+  have hc : C * E ^ A ≤ C * E ^ (A + B) := mul_le_mul_of_nonneg_left
     (Real.rpow_le_rpow_of_exponent_le hE (le_add_of_nonneg_right hB)) hC
   have hb := mul_le_mul_of_nonneg_left
     (Real.rpow_le_rpow_of_exponent_le hE
@@ -126,6 +126,7 @@ private theorem travel_material_envelope
 namespace N04RealizationStart
 
 set_option backward.isDefEq.respectTransparency true
+attribute [local instance] interiorRaw_parameterTopology interiorRaw_parameterAddGroup interiorRaw_parameterSMul
 
 variable (W : N04RealizationStart)
 
@@ -197,6 +198,7 @@ private theorem negativeInterior_reflect_mem (ρ : ℕ → Bool → ℝ) (m : �
   rcases hq with ⟨p, hp, rfl⟩
   exact ⟨(p.1, -p.2), ⟨hp.1, mem_univ _⟩, rfl⟩
 
+set_option diagnostics true in
 /-- The common sector precedes every parameter and spatial order.
 The finite prefix keeps the exact fractional interpolation exponent and
 applies to every genuine tower, including arbitrary parameter slots. -/
@@ -306,8 +308,8 @@ theorem negativeInterior_scaledTravel_prefix
     have h := hF k a b hk hab m side p hp JP z hz v hv R hR
       (by simpa only [Nat.mul_comm D K] using hzR)
       (fun i => by simpa only [Nat.mul_comm D K] using hvR i)
-    simpa only [E, H, Q, Nat.mul_comm k D, Nat.mul_comm K D, Nat.add_assoc,
-      Nat.add_left_comm, Nat.add_comm] using h
+    simpa only [BF, E, H, Q, Nat.mul_comm K D,
+      (by ring : k * D + a + b = a + b + D * k)] using h
   have hbound := affine_two_height_budget
     (show 0 ≤ (3 / 2 : ℝ) * (CR * E ^ AR) from mul_nonneg (by norm_num)
       (mul_nonneg hRjet.1.le (Real.rpow_nonneg (zero_le_one.trans hE) _)))

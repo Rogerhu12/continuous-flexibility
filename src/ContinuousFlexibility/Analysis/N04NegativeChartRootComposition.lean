@@ -84,7 +84,7 @@ private theorem positive_fullField_split
   cases n with
   | zero => omega
   | succ n => simp only [iteratedFDeriv_succ_const, Pi.zero_apply, sub_zero,
-      ContinuousMultilinearMap.add_apply]
+      ContinuousMultilinearMap.add_apply, f, g]
 
 private theorem displacement_prefix
     {Θ : N04FlowPoint → ℝ} (hΘ : ContDiff ℝ ∞ Θ) (K : ℕ) (q : N04FlowPoint)
@@ -341,7 +341,7 @@ theorem n04NegativeChart_rootComposition_prefix (N shift : ℕ)
     have h₁ := Nat.mul_le_mul_left D₀ (show k + 1 ≤ N + 1 by omega)
     have h₂ := Nat.mul_le_mul_left D hkpos
     simp only [Nat.mul_one] at h₂
-    dsimp only [D] at h₂
+    change D₀ * (N + 1) + shift + 3 ≤ D * k at h₂
     omega
   have hd' : D₀ + j ≤ j - 1 + D * k := by
     have hh := Nat.mul_le_mul_left D₀ (show 1 ≤ k + 1 by omega)
@@ -379,7 +379,7 @@ theorem n04NegativeChart_rootComposition_prefix (N shift : ℕ)
   have hf' := hf.trans (mul_le_mul_of_nonneg_right
     (mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right hca hZ) i.hH)
     (pow_nonneg (zero_le_one.trans i.hρ) _))
-  simpa only [parameterHeightWeight, if_neg hk, hpack] using hf'
+  simpa only [parameterHeightWeight, if_neg hk, hpack, Function.comp_id] using hf'
 
 end ContinuousFlexibility.Analysis
 

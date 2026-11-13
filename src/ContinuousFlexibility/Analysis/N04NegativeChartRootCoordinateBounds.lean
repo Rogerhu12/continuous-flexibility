@@ -260,7 +260,7 @@ theorem RootCoordinatePrefixData.normalized_positive_bounds :
   have hB := henv.choose_spec.1
   have hpack := henv.choose_spec.2
   refine ⟨B, hB, fun m side radial q hq a b hab J z hz v => ?_⟩
-  have hindex : base + s + shift * n + 1 = s + (base + shift * n + 1) := by omega
+  have hindex : base + s + hpref.choose * n + 1 = s + (base + shift * n + 1) := by dsimp only [shift]; omega
   let U := sectorNeighborhood W.S base ε ε
   let Ω := Ioo (0 : ℝ) 2 ×ˢ (univ : Set ℝ)
   let E := W.T.E0 (W.negativeHalfSample e m side)
@@ -270,7 +270,7 @@ theorem RootCoordinatePrefixData.normalized_positive_bounds :
   have hH : 0 ≤ H := Real.rpow_nonneg (W.hT.2.1 _
     (materialSample_mem_radialCore W.hT W.radial.1.choose_spec.2.1 _)).2.1.le _
   have hHR : H ≤ RH := by
-    simpa only [Real.rpow_zero, mul_one] using hheight.choose_spec.2
+    simpa only [H, RH, Real.rpow_zero, mul_one] using hheight.choose_spec.2
       (W.negativeHalfSample e m side)
         (materialSample_mem_radialCore W.hT W.radial.1.choose_spec.2.1 _)
   have hV : 0 ≤ V := oneHighVariationWeight_nonneg _ _ _ _ _
