@@ -81,7 +81,7 @@ theorem circleShiftedChartCompose_orderedJet_eq_kernel
         (Fin.snoc (fun i => (Fin.tail v i, (0 : M.Space))) ((0 : M.Space), y)) (v 0, (0 : M.Space))
       have hi : Fin.cons (v 0, (0 : M.Space))
           (Fin.snoc (fun i => (Fin.tail v i, (0 : M.Space))) ((0 : M.Space), y)) =
-          Fin.snoc (fun i : Fin (n + 1) => (Fin.cons (v 0) (Fin.tail v) i, (0 : M.Space)))
+          Fin.snoc (α := fun _ : Fin (n + 2) => M.Space × M.Space) (fun i : Fin (n + 1) => (Fin.cons (α := fun _ : Fin (n + 1) => M.Space) (v 0) (Fin.tail v) i, (0 : M.Space)))
             ((0 : M.Space), y) := by
         rw [Fin.cons_snoc_eq_snoc_cons]; congr 1
         funext i; refine Fin.cases ?_ (fun j => ?_) i <;> rfl
@@ -95,7 +95,7 @@ theorem circleShiftedChartCompose_orderedJet_eq_kernel
         (fun z => inverseForwardJet J n z (Fin.tail v) y) := by
       filter_upwards [hU.mem_nhds he] with z hz
       exact (ih z hz (Fin.tail v) y).symm
-    have hsame := (hf.congr_germ hg).unique hk
+    have hsame : inverseForwardJet J (n + 1) e (Fin.cons (v 0) (Fin.tail v)) y = coupledCircleKernel hD hT hγ hM hI (n + 1) (n + 1) e (circleTranslationContinuousLinear hM hT hD hγ travel y) (Fin.cons (v 0) (Fin.tail v)) := HasProjectiveLineDerivAt.unique (V := M.Space) (F := M.Space) (HasProjectiveLineDerivAt.congr_germ (V := M.Space) (W := M.Space) hf hg) hk
     simpa only [Fin.cons_self_tail] using hsame
 
 private theorem circleShiftedChartCompose_unit_majorant
@@ -203,8 +203,8 @@ theorem circleShiftedChartCompose_orderedJets_fixedBase_bound :
       M.grading s (A w) ≤ C * P * (a + ∑ i, M.grading H (w i)) := by
     rw [hA]
     simpa only [Fin.sum_univ_one] using hlocal (w 0) (hw 0)
-  have hbound := multilinear_bound_of_unitBall A (M.grading s) (M.grading base)
-    (M.grading H) (mul_nonneg hC hP) hunit (fun _ : Fin 1 => y)
+  have hbound : M.grading s (A (fun _ : Fin 1 => y)) ≤ (C * P) * multilinearTameSize (M.grading base) (M.grading H) 1 a (fun _ : Fin 1 => y) :=
+    multilinear_bound_of_unitBall (E := M.Space) (F := M.Space) (k := 1) (C := C * P) (a := a) A (M.grading s) (M.grading base) (M.grading H) (mul_nonneg hC hP) hunit (fun _ : Fin 1 => y)
   rw [hA] at hbound
   have he0 : (Finset.univ : Finset (Fin 1)).erase 0 = ∅ := by decide
   simpa only [multilinearTameSize, Fin.prod_univ_one, Fin.sum_univ_one,
