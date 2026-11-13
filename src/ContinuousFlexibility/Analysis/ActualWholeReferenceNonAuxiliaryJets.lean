@@ -135,7 +135,6 @@ theorem n04Coordinates_actual_whole_reference_nonAuxiliaryJets
     hT hS hN hfield e₀ e cell ψ χ h₀ τ σ Q N
   have hrefMem := reference_mem_stateNeighborhood S C base hN.1.1.2.1
   have hrefSector := n04b_referenceState_sector hN.1.1.2.2.1
-  dsimp only
   refine ⟨fun hε' hgeo => n04WholeReferenceGauge_actual_prescribed_referencePrincipal
     P hSelected hband hq hΓ hw hcoordinates hT hS hN hfield e₀ 3 hC0 hB hE0 hfinite
     e cell hcell src τ σ Q N href hε' hgeo, fun s => ?_⟩
