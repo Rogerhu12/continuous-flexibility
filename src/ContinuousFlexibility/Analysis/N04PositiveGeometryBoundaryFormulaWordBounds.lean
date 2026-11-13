@@ -4,6 +4,7 @@ import ContinuousFlexibility.Analysis.N01cAngularJetTowers
 import ContinuousFlexibility.Analysis.N01cStateAngleSelections
 import ContinuousFlexibility.Analysis.FlowJetLinearization
 import ContinuousFlexibility.Analysis.SmoothDirectionsFixedLast
+import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
 
 /-!
 # A finite angular reserve for the actual boundary formulas
@@ -29,7 +30,10 @@ theorem n04PositiveGeometry_sum_sub_reserve_le
   | empty => simp only [Finset.sum_empty, Nat.zero_sub, le_refl]
   | @insert i s hi ih =>
       rw [Finset.sum_insert hi, Finset.sum_insert hi]
-      exact (add_le_add_left ih (a i - d)).trans (by omega)
+      calc
+        (a i - d) + (∑ j ∈ s, (a j - d)) ≤
+            (a i - d) + ((∑ j ∈ s, a j) - d) := Nat.add_le_add_left ih _
+        _ ≤ (a i + ∑ j ∈ s, a j) - d := by omega
 
 variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
   [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
@@ -117,7 +121,7 @@ theorem angular (h : N04BoundaryWordBounds J K s (d + 1) x θ P M H t shift)
       · intro _
         rfl
       · exact hv.2 j
-  have hdirs : ∀ i, P (Fin.cons ((0 : E), (1 : ℝ)) v i).1 :=
+  have hdirs : ∀ i, P (Fin.cons (α := fun _ => E × ℝ) (0, 1) v i).1 :=
     Fin.cases hP hp
   have hb := h (n + 1) (.angle w) hk (by
     change w.angleArity + 1 ≤ s + (d + 1)
@@ -142,8 +146,9 @@ private theorem boundary_mul_outer_prefix
       (hz : ‖L z‖ ≤ M) (j : ℕ) : ‖iteratedFDeriv ℝ j L z‖ ≤ M := by
     cases j with
     | zero => simpa only [norm_iteratedFDeriv_zero] using hz
-    | succ j => exact (flowJet_norm_iteratedFDeriv_clm_le L (Nat.succ_pos j) z).trans
-        (hL.trans hM)
+    | succ j =>
+        exact (flowJet_norm_iteratedFDeriv_clm_le L (Nat.succ_pos j) z).trans
+          (hL.trans hM)
   exact n04PositiveGeometry_product_prefix_bound (zero_le_one.trans hM)
     contDiff_fst.contDiffAt contDiff_snd.contDiffAt
     (fun j _ => hcoord (ContinuousLinearMap.fst ℝ ℝ ℝ)
@@ -169,7 +174,8 @@ theorem n04PositiveGeometry_boundaryWord_mul (N : ℕ) (L : ℝ) (hL : 1 ≤ L) 
   have hA : 1 ≤ A := le_add_of_nonneg_right
     (Finset.sum_nonneg fun _ _ => Nat.cast_nonneg _)
   let C : ℝ := A * (2 : ℝ) ^ N * L ^ N
-  have hC : 1 ≤ C := one_le_mul (one_le_mul hA (one_le_pow₀ (by norm_num)))
+  have hC : 1 ≤ C := one_le_mul_of_one_le_of_one_le
+    (one_le_mul_of_one_le_of_one_le hA (one_le_pow₀ (by norm_num)))
     (one_le_pow₀ hL)
   refine ⟨C, hC, ?_⟩
   intro U f g J Q K s d hN x hx θ P M H t hM hH hHL ht shift hf hg

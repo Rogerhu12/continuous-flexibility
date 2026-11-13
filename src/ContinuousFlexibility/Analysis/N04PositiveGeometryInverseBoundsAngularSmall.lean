@@ -165,8 +165,12 @@ theorem n04PositiveGeometry_angularInterpolation_lower_of_small
       (fun η => positiveAngularTaylorInterpolation n l r δ A (x, η)) :=
     (contDiff_positiveAngularTaylorInterpolation hA l r δ).comp
       (contDiff_const.prodMk contDiff_id)
-  rw [iteratedDeriv_one, deriv_fun_sub (hsmooth.differentiable (by simp) θ)
-    (differentiableAt_id), deriv_id''] at hjet
+  have hderiv : deriv
+      (fun η => positiveAngularTaylorInterpolation n l r δ A (x, η) - η) θ =
+        deriv (fun η => positiveAngularTaylorInterpolation n l r δ A (x, η)) θ - 1 := by
+    simpa only [id_eq] using
+      ((hsmooth.differentiable (by simp) θ).hasDerivAt.sub (hasDerivAt_id θ)).deriv
+  rw [iteratedDeriv_one, hderiv] at hjet
   have hlow := (abs_le.mp hjet).1
   linarith
 
@@ -224,7 +228,7 @@ theorem n04PositiveGeometry_angularInterpolation_fixedCircle_bound
     n04PositiveGeometry_angularInterpolation_defect_jet_bound (b := b)
       (l := l) (r := r) hA hδ hδone hM₀
       (fun side k hk η => hbound side k hk b (hb.trans hj) η) x θ
-  have hn := circleSingleComponentField_norm_le hM hH 0 j _ hsmooth hlow hjets
+  have hn := circleSingleComponentField_norm_le (γ := γ) hM hH 0 j _ hsmooth hlow hjets
   exact hn.trans ((mul_le_mul_of_nonneg_right (haB j hj) hlow).trans_eq (by ring))
 
 end ContinuousFlexibility.Analysis

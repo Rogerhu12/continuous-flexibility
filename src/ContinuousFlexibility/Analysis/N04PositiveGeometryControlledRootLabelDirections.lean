@@ -27,15 +27,18 @@ private theorem controlled_rootLabel_slope_add_identity
     {f : ℝ → ℝ} (hf : ContDiff ℝ ∞ f) (n : ℕ) (θ : ℝ) :
     iteratedDeriv n (deriv (fun α => f α + α)) θ =
       iteratedDeriv (n + 1) f θ + if n = 0 then 1 else 0 := by
-  rw [← iteratedDeriv_succ', iteratedDeriv_fun_add
-    (hf.contDiffAt.of_le (by simp)) contDiffAt_id]
+  rw [← iteratedDeriv_succ']
+  have hadd : iteratedDeriv (n + 1) (fun α => f α + α) θ =
+      iteratedDeriv (n + 1) f θ + iteratedDeriv (n + 1) (id : ℝ → ℝ) θ :=
+    iteratedDeriv_fun_add (f := f) (g := fun α : ℝ => α) (n := n + 1)
+      (hf.contDiffAt.of_le (by simp)) contDiffAt_id
   have hid : iteratedDeriv (n + 1) (id : ℝ → ℝ) θ = if n = 0 then 1 else 0 := by
     rw [iteratedDeriv_id, if_neg (Nat.succ_ne_zero n)]
     by_cases hn : n = 0
     · subst n
       norm_num
     · rw [if_neg (by omega : n + 1 ≠ 1), if_neg hn]
-  exact congrArg (fun t : ℝ => iteratedDeriv (n + 1) f θ + t) hid
+  exact hadd.trans (congrArg (fun t : ℝ => iteratedDeriv (n + 1) f θ + t) hid)
 
 /-- Every angular jet of the actual inverse-label displacement has its
 original parameter tower, obtained by continuous circle evaluation. -/

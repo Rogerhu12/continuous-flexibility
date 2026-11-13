@@ -2,6 +2,7 @@ import ContinuousFlexibility.Analysis.N04PositiveGeometryFiniteKernelBounds
 import ContinuousFlexibility.Analysis.N01cStateAngleSelections
 import ContinuousFlexibility.Analysis.N01cPhysicalGraphJets
 import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+import ContinuousFlexibility.Analysis.N01cAngularJetTowers
 import ContinuousFlexibility.Scalar.WeightedTowerCalculus
 
 /-!
@@ -102,7 +103,7 @@ private theorem pureSlots_fst_property {n : ℕ} (w : StateAngleWord n)
   | state w ih =>
       intro j
       refine Fin.cases ?_ (fun i => ?_) j
-      · exact hv 0
+      · exact hv (0 : Fin (w.stateArity + 1))
       · exact ih (Fin.tail v) (fun i => hv i.succ) i
   | angle w ih =>
       intro j

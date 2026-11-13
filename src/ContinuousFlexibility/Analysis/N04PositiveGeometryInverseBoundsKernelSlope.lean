@@ -103,7 +103,7 @@ theorem n04PositiveGeometry_collarEndMass_bounds
       calc
         _ = |(z.1.2 - l (e z)) + l (e z)| := by rw [sub_add_cancel]
         _ ≤ |z.1.2 - l (e z)| + |l (e z)| := abs_add_le _ _
-        _ ≤ _ := add_le_add_right (abs_sub_left_of_mem_uIcc z.2) _
+        _ ≤ _ := add_le_add (abs_sub_left_of_mem_uIcc z.2) le_rfl
     rw [Prod.norm_def, Real.norm_eq_abs]
     exact max_le (le_add_of_nonneg_right (by positivity))
       (hs.trans (le_add_of_nonneg_left (norm_nonneg _)))

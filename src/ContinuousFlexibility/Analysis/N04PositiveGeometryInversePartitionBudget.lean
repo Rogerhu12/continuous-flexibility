@@ -53,7 +53,7 @@ theorem n04PositiveGeometry_inversePartition_cost
   have hκ : (∑ i ∈ q, κ i) = q.card := by
     calc
       _ = ∑ _i ∈ q, (1 : ℕ) := Finset.sum_congr rfl (fun i hi => (hidentity i hi).1)
-      _ = q.card := by simp only [Finset.sum_const, nsmul_eq_mul, mul_one]
+      _ = q.card := by simp
   have hβ : (∑ i ∈ q, β i) = 0 := by
     exact Finset.sum_eq_zero (fun i hi => (hidentity i hi).2)
   have hblock (i : ι) (hi : i ∈ s \ q) : 1 ≤ β i + C * κ i := by
@@ -66,7 +66,7 @@ theorem n04PositiveGeometry_inversePartition_cost
     calc
       _ = ∑ i ∈ s \ q, ((β i + C * κ i - 1) + 1) := by
         rw [Finset.sum_add_distrib]
-        simp only [Finset.sum_const, nsmul_eq_mul, mul_one]
+        simp
       _ = _ := Finset.sum_congr rfl (fun i hi => Nat.sub_add_cancel (hblock i hi))
   have hcard : 0 < s.card := Finset.card_pos.mpr hs
   have hqmul : q.card ≤ C * q.card := by
@@ -93,7 +93,7 @@ theorem n04PositiveGeometry_inversePartition_height
   have hκ : (∑ i ∈ q, κ i) = q.card := by
     calc
       _ = ∑ _i ∈ q, (1 : ℕ) := Finset.sum_congr rfl hidentity
-      _ = _ := by simp only [Finset.sum_const, nsmul_eq_mul, mul_one]
+      _ = _ := by simp
   have htotal : q.card + (∑ i ∈ s \ q, κ i) = ∑ i ∈ s, κ i := by
     have h := hsplit.2 κ
     rw [hκ] at h

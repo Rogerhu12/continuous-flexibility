@@ -169,8 +169,10 @@ theorem n04PositiveGeometry_fiberInverse_higherJet
       ContinuousLinearMap.id ℝ (P × V) := by
     rw [n04PositiveGeometry_fiberLift_fderiv hf]
     exact n04PositiveGeometry_triangularInverse_left A B hB
-  have he := n04Realization_inverse_higherJet_apply (contDiffAt_fst.prodMk hf)
-    (contDiffAt_fst.prodMk hg) hfg (n04PositiveGeometry_triangularInverse A B) hleft hn v
+  have he := n04Realization_inverse_higherJet_apply
+    (f := n04PositiveGeometry_fiberLift f) (g := n04PositiveGeometry_fiberLift g)
+    (contDiffAt_fst.prodMk hf) (contDiffAt_fst.prodMk hg) hfg
+    (n04PositiveGeometry_triangularInverse A B) hleft hn v
   let t : OrderedFinpartition n → V := fun c => if 2 ≤ c.length then
     iteratedFDeriv ℝ c.length f (n04PositiveGeometry_fiberLift g x)
       (fun i => iteratedFDeriv ℝ (c.partSize i)
@@ -295,6 +297,36 @@ theorem n04PositiveGeometry_clm_multilinear_norm_le
     ((mul_le_mul_of_nonneg_left (A.le_opNorm v) (norm_nonneg B)).trans_eq
       (mul_assoc _ _ _).symm)
 
+theorem n04PositiveGeometry_fiberInverse_projected_norm_terms
+    {f g : P × V → V} {x : P × V}
+    (hf : ContDiffAt ℝ ∞ f (n04PositiveGeometry_fiberLift g x))
+    (hg : ContDiffAt ℝ ∞ g x)
+    (hfg : n04PositiveGeometry_fiberLift f ∘ n04PositiveGeometry_fiberLift g
+      =ᶠ[𝓝 x] id)
+    (B : V →L[ℝ] V)
+    (hB : B.comp ((fderiv ℝ f (n04PositiveGeometry_fiberLift g x)).comp
+      (ContinuousLinearMap.inr ℝ P V)) = ContinuousLinearMap.id ℝ V)
+    {n : ℕ} (hn : 2 ≤ n) (b : Fin n → Bool) :
+    ‖n04PositiveGeometry_projectedJet b g x‖ ≤ ‖B‖ *
+      ∑ c : OrderedFinpartition n, if 2 ≤ c.length then
+        ∑ s : Finset (Fin c.length),
+          ‖n04PositiveGeometry_inverseSelectedTerm b f g x c s‖ else 0 := by
+  classical
+  rw [n04PositiveGeometry_fiberInverse_projected_recursion hf hg hfg B hB hn b, norm_neg]
+  apply (n04PositiveGeometry_clm_multilinear_norm_le B _).trans
+  apply mul_le_mul_of_nonneg_left _ (norm_nonneg B)
+  have hsum : ‖(∑ c : OrderedFinpartition n, if 2 ≤ c.length then
+      ∑ s : Finset (Fin c.length), n04PositiveGeometry_inverseSelectedTerm b f g x c s else 0)‖ ≤
+      ∑ c : OrderedFinpartition n, ‖if 2 ≤ c.length then
+        ∑ s : Finset (Fin c.length), n04PositiveGeometry_inverseSelectedTerm b f g x c s else 0‖ :=
+    norm_sum_le _ _
+  apply hsum.trans
+  exact Finset.sum_le_sum (fun c _ => by
+    by_cases hc : 2 ≤ c.length
+    · simp only [if_pos hc]
+      exact norm_sum_le _ _
+    · simp only [if_neg hc, norm_zero, le_refl])
+
 theorem n04PositiveGeometry_fiberInverse_projected_norm_recursion
     {f g : P × V → V} {x : P × V}
     (hf : ContDiffAt ℝ ∞ f (n04PositiveGeometry_fiberLift g x))
@@ -312,18 +344,15 @@ theorem n04PositiveGeometry_fiberInverse_projected_norm_recursion
             (n04PositiveGeometry_fiberLift g x)‖ *
             ∏ i, ‖n04PositiveGeometry_inverseSelectedBlock b g x c s i‖ else 0 := by
   classical
-  rw [n04PositiveGeometry_fiberInverse_projected_recursion hf hg hfg B hB hn b, norm_neg]
-  apply (n04PositiveGeometry_clm_multilinear_norm_le B _).trans
+  apply (n04PositiveGeometry_fiberInverse_projected_norm_terms hf hg hfg B hB hn b).trans
   apply mul_le_mul_of_nonneg_left _ (norm_nonneg B)
-  apply (norm_sum_le _ _).trans
   apply Finset.sum_le_sum
   intro c _
   by_cases hc : 2 ≤ c.length
-  · rw [if_pos hc]
-    apply (norm_sum_le _ _).trans
+  · simp only [if_pos hc]
     apply Finset.sum_le_sum
     intro s _
     exact c.norm_compAlongOrderedFinpartition_le _ _
-  · simp only [if_neg hc, norm_zero, le_refl]
+  · simp only [if_neg hc, le_refl]
 
 end ContinuousFlexibility.Analysis

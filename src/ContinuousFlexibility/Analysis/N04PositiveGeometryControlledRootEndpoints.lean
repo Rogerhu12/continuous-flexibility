@@ -12,7 +12,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Analysis
 
-open Set ContinuousFlexibility.Statements
+open Set ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint
 open scoped ContDiff
 
 set_option backward.isDefEq.respectTransparency false

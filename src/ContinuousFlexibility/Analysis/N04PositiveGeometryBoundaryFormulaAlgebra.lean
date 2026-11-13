@@ -61,7 +61,7 @@ private theorem polynomial_combine {Cf Cg M : ℝ} {df dg : ℕ}
     Cf * M ^ df ≤ (Cf + Cg) * M ^ (df + dg) ∧
     Cg * M ^ dg ≤ (Cf + Cg) * M ^ (df + dg) := by
   have hC : 1 ≤ Cf + Cg := by linarith
-  exact ⟨one_le_mul hC (one_le_pow₀ hM),
+  exact ⟨one_le_mul_of_one_le_of_one_le hC (one_le_pow₀ hM),
     mul_le_mul (le_add_of_nonneg_right (zero_le_one.trans hg))
       (pow_le_pow_right₀ hM (Nat.le_add_right _ _))
       (pow_nonneg (zero_le_one.trans hM) _) (zero_le_one.trans hC),
@@ -123,7 +123,7 @@ theorem polynomial_bound (e : N04BoundaryExpression) (K s d : ℕ)
         (K + s + d) L hL
       have hCg' : 1 ≤ Cf + Cg := by linarith
       refine ⟨Cp * (Cf + Cg) ^ (K + s + d + 2),
-        one_le_mul hCp (one_le_pow₀ hCg'), (df + dg) * (K + s + d + 2), ?_⟩
+        one_le_mul_of_one_le_of_one_le hCp (one_le_pow₀ hCg'), (df + dg) * (K + s + d + 2), ?_⟩
       intro U hU v J x hx θ P hP M H t hM hH hHL ht shift hv
       have hfi := hfb hU J x hx θ P hP M H t hM hH hHL ht shift
         (fun i => (hv i).reserve (zero_le_one.trans hM) hH ht (by
