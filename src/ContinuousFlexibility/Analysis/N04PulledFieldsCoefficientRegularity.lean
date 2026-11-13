@@ -40,7 +40,7 @@ theorem n04PulledFields_coefficient_reconstruction
       canonicalCoefficientComponent i B p := by
   fin_cases i <;> simp [n04PulledFields_errorProjection, canonicalCoefficientComponent, ha]
 
-private theorem n04PulledFields_error_zero_germ
+theorem n04PulledFields_error_zero_germ
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     (R : ReturnEquationData S) (χ : ℕ → ℝ → ℝ)
     {p : PolarPoint} (hzero : ∀ᶠ r in 𝓝 p.1, ∀ m, deriv (χ m) r = 0)
