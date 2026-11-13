@@ -21,6 +21,50 @@ namespace ContinuousFlexibility.Analysis
 open Set ContinuousFlexibility.Statements
 open scoped ContDiff
 
+/-- Construct the two joint towers over abstract parameter and circle data.
+The actual root-label specialization below only supplies its existing lift. -/
+private def n04Realization_circleLabel_jointDirections
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : CircleModelData}
+    {U : Set E}
+    (hH : IsCircleModel T γ H) (hT : IsMaterialData D T)
+    (hD : IsAccumulatingProfile D) (hγ : 0 < γ)
+    (hI : HasInterpolation H.grading)
+    (F : E → H.Space) (J : SmoothDirections U F)
+    (label : E → ℕ → ℝ → ℝ)
+    (hlift : ∀ x ∈ U, ∀ j,
+      circleAffineLift (fun _ => 0) (H.decode (F x)) 1 j = label x j)
+    (hpos : MapsTo F U (circlePositiveLiftDomain H)) (m : ℕ) :
+    (SmoothDirections (U ×ˢ univ)
+      (fun p : E × ℝ => label p.1 m p.2)) ×
+    SmoothDirections (U ×ˢ univ)
+      (fun p : E × ℝ => Function.invFun (label p.1 m) p.2) := by
+  let G : E → H.Space := fun x =>
+    circlePositiveInversePerturbation hH hT hD hγ (fun _ => 0) (F x)
+  let JG : SmoothDirections U G :=
+    circleInversePerturbationDirections hH hT hD hγ hI
+      (fun _ => 0) J hpos
+  have hweight (j : ℕ) : 0 < T.H (T.sample j) :=
+    (material_circle_sample_weights_pos hT hD).2 j
+  refine ⟨?_, ?_⟩
+  · apply (circleAffineLiftJointDirections hH hweight J (fun _ => 0) m).congrOn
+    intro p hp
+    simpa only [circleAffineLift, one_mul] using congrFun (hlift p.1 hp.1 m) p.2
+  · apply (circleAffineLiftJointDirections hH hweight JG (fun _ => 0) m).congrOn
+    intro p hp
+    have hd : H.decode (G p.1) m p.2 =
+        circleAffineInverse (fun _ => 0) (F p.1) m p.2 - (p.2 - 0) :=
+      congrArg (fun g : ℕ → ℝ → ℝ => g m p.2)
+        (circlePositiveInversePerturbation_decode hH hT hD hγ
+          (fun _ => 0) (F p.1) (hpos hp.1))
+    have hinv : circleAffineInverse (fun _ => 0) (F p.1) m p.2 =
+        Function.invFun (label p.1 m) p.2 :=
+      congrArg (fun f : ℝ → ℝ => Function.invFun f p.2) (hlift p.1 hp.1 m)
+    change p.2 + 0 + H.decode (G p.1) m p.2 = _
+    rw [hd, hinv]
+    ring
+
 local instance n04RootBoundaryDirectionsStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
@@ -64,7 +108,8 @@ def n04Realization_rootLabel_jointDirections
     cases side with
     | false =>
         funext θ
-        simpa only [F, n01RootLabel, circleAffineLift, add_zero, one_mul] using
+        simpa only [F, n01RootLabel, circleAffineLift, add_zero, one_mul,
+          Bool.false_eq_true, ↓reduceIte] using
           (hN.2.2.1.sector_leftChart x j θ).symm
     | true => exact hN.sectorReturnTransportCircle_odd_lift hS hT x hx j
   have hpos : MapsTo F U (circlePositiveLiftDomain H) := by
@@ -79,30 +124,10 @@ def n04Realization_rootLabel_jointDirections
             (liftSectorParameter_mem_stateNeighborhood hx le_rfl)
             (hN.2.2.1.liftSectorParameter_sector x) j θ).1
     | true => exact hN.sectorReturnTransportCircle_odd_positive hS hT x hx
-  let G : (StateDirections S × ℝ) → CircleSpace S := fun x =>
-    circlePositiveInversePerturbation hH hT hN.1.1 (by norm_num) (fun _ => 0) (F x)
-  let JG : SmoothDirections U G :=
-    circleInversePerturbationDirections hH hT hN.1.1 (by norm_num) hI
-      (fun _ => 0) J hpos
-  have hweight (j : ℕ) : 0 < T.H (T.sample j) :=
-    (material_circle_sample_weights_pos hT hN.1.1).2 j
-  refine ⟨?_, ?_⟩
-  · apply (circleAffineLiftJointDirections hH hweight J (fun _ => 0) m).congrOn
-    intro p hp
-    simpa only [circleAffineLift, one_mul] using congrFun (hlift p.1 hp.1 m) p.2
-  · apply (circleAffineLiftJointDirections hH hweight JG (fun _ => 0) m).congrOn
-    intro p hp
-    have hd : H.decode (G p.1) m p.2 =
-        circleAffineInverse (fun _ => 0) (F p.1) m p.2 - (p.2 - 0) :=
-      congrArg (fun g : ℕ → ℝ → ℝ => g m p.2)
-        (circlePositiveInversePerturbation_decode hH hT hN.1.1 (by norm_num)
-          (fun _ => 0) (F p.1) (hpos hp.1))
-    have hinv : circleAffineInverse (fun _ => 0) (F p.1) m p.2 =
-        Function.invFun (n01RootLabel S C (liftSectorParameter S C p.1) m side) p.2 :=
-      congrArg (fun f : ℝ → ℝ => Function.invFun f p.2) (hlift p.1 hp.1 m)
-    change p.2 + 0 + H.decode (G p.1) m p.2 = _
-    rw [hd, hinv]
-    ring
+  exact n04Realization_circleLabel_jointDirections hH hT hN.1.1
+    (by norm_num) hI F J
+    (fun x j => n01RootLabel S C (liftSectorParameter S C x) j side)
+    hlift hpos m
 
 /-- The original forward root label, with its genuine state and angle jets. -/
 def n04Realization_rootLabel_forwardJointDirections
