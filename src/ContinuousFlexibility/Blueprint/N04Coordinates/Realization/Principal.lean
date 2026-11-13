@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+import ContinuousFlexibility.Analysis.N04PrincipalRealization
 
 /-!
 # N04Coordinates-Realization: principal, potential and divided coefficients
@@ -15,7 +15,9 @@ namespace ContinuousFlexibility.Blueprint
 
 open ContinuousFlexibility.Analysis
 
-theorem N04RealizationPrincipal : N04RealizationPrincipalObligation := by
-  sorry
+theorem N04RealizationPrincipal : N04RealizationPrincipalObligation :=
+  n04Principal_realization
+
+#print axioms N04RealizationPrincipal
 
 end ContinuousFlexibility.Blueprint
