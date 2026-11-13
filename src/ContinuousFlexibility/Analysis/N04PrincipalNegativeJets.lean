@@ -8,8 +8,8 @@ import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientJetSupport
 On a negative canonical piece the principal field is the fixed Airy field,
 and the three divided atoms are identically zero.  Their differences from
 the reference therefore have zero spatial and parameter jets.  The final
-packaging lemma deliberately accepts a tower on every piece: the tower in
-`CurrentJetDataOn` is quantified also on pieces outside its predicate.
+packaging lemma accepts a tower on every piece and uses it on the pieces of
+its predicate.
 -/
 
 noncomputable section
@@ -112,7 +112,7 @@ theorem n04PrincipalNegative_currentData_of_stationary
         T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) :=
     mul_nonneg (mul_nonneg zero_le_one (Real.rpow_nonneg (hE m) _))
       (Real.rpow_nonneg (hH m) _)
-  refine ⟨?_, J, ⟨0, fun s => ⟨1, zero_lt_one, ?_⟩⟩,
+  refine ⟨?_, fun m _ => J m, ⟨0, fun s => ⟨1, zero_lt_one, ?_⟩⟩,
     fun k => ⟨0, fun s => ⟨1, zero_lt_one, ?_⟩⟩⟩
   · intro z hz m hm
     refine ⟨(href m hm).1.congr (fun q hq => heq z hz m hm hq), ?_⟩
@@ -131,6 +131,7 @@ theorem n04PrincipalNegative_currentData_of_stationary
         (fun x => mixedDerivative i j (fun y => f x m y - f₀ m y) q.val)
         (fun _ => 0) (sectorNeighborhood S base ε ε) :=
       fun x hx => hz0 x hx m hm i j q
+    show |(J m i j q).D k z v| ≤ _
     rw [(J m i j q).jets_zero_of_eqOn_zero hzero k z hz v, abs_zero]
     exact mul_nonneg (hcost m) (oneHighVariationWeight_nonneg _ _ _ _ _)
 

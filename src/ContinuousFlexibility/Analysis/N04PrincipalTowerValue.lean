@@ -76,7 +76,7 @@ theorem n04Principal_currentData_of_tower
     · change |(0 : ℝ)| < ε
       simpa only [abs_zero] using hε
   have hfirst := htower 1
-  refine ⟨hreg, J, ⟨max base hfirst.choose, fun s => ?_⟩, htower⟩
+  refine ⟨hreg, fun m _ => J m, ⟨max base hfirst.choose, fun s => ?_⟩, htower⟩
   let B : ℝ := (hfirst.choose_spec s).choose
   have hB : 0 < B := (hfirst.choose_spec s).choose_spec.1
   let B' : ℝ := 4 * B + 1

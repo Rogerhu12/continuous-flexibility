@@ -42,7 +42,7 @@ def CurrentJetDataOn.n04Principal_differenceRegularity
     MixedJetRegularity (sectorNeighborhood S base ε ε) unitStrip
       (fun z q => f z m q - f₀ m q) where
   spatial z hz := (h.1 z hz m hm).1.sub (href m hm)
-  parameter i j q hq := h.2.choose m i j ⟨q, hq⟩
+  parameter i j q hq := h.2.choose m hm i j ⟨q, hq⟩
 
 /-- Recover the full current field without introducing a new family. -/
 def CurrentJetDataOn.n04Principal_familyRegularity

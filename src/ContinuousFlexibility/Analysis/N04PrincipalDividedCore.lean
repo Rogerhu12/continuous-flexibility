@@ -24,16 +24,16 @@ def N04PrincipalDividedCoreData (p : ℕ → Seminorm ℝ X) (U : Set X)
     (f : X → ι → PolarPoint → ℝ) (f₀ : ι → PolarPoint → ℝ) : Prop :=
   (∀ z ∈ U, ∀ m, P m → ContDiffOn ℝ ∞ (f z m) unitStrip ∧
     ∀ q ∈ unitStrip, f z m (q + (0, Real.pi)) = f z m q) ∧
-  ∃ J : ∀ m (a b : ℕ) (q : unitStrip), SmoothDirections U
+  ∃ J : ∀ m, P m → ∀ (a b : ℕ) (q : unitStrip), SmoothDirections U
       (fun z => mixedDerivative a b (fun y => f z m y - f₀ m y) q.val),
     (∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
       ∀ z ∈ U, ∀ m, P m → ∀ (q : unitStrip) (a b : ℕ), a + b ≤ s →
         |mixedDerivative a b (fun y => f z m y - f₀ m y) q.val| ≤
           B * E m ^ B * H m * p (s + loss) z) ∧
     ∀ k : ℕ, ∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
-      ∀ z ∈ U, ∀ v : Fin k → X, ∀ m, P m →
+      ∀ z ∈ U, ∀ v : Fin k → X, ∀ m (hm : P m),
         ∀ (q : unitStrip) (a b : ℕ), a + b ≤ s →
-          |(J m a b q).D k z v| ≤
+          |(J m hm a b q).D k z v| ≤
             B * E m ^ B * H m * oneHighVariationWeight p base (s + loss) z v
 
 /-- Genuine endpoint representatives transfer both current value bounds
@@ -60,7 +60,7 @@ theorem n04PrincipalDivided_coreData
   let N : I → X → PolarPoint → ℝ := fun m z q => f z m.val q - f₀ m.val q
   let RN : ∀ m : I, MixedJetRegularity U unitStrip (N m) := fun m =>
     { spatial := fun z hz => (h.1 z hz m.val m.property).1.sub (href m.val).1
-      parameter := fun a b q hq => h.2.choose m.val a b ⟨q, hq⟩ }
+      parameter := fun a b q hq => h.2.choose m.val m.property a b ⟨q, hq⟩ }
   have hnum : ∀ k : ℕ, ∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
       ∀ m : I, ∀ a b, a + b ≤ s → ∀ q (hq : q ∈ unitStrip),
       ∀ z ∈ U, ∀ v : Fin k → X,
@@ -116,7 +116,7 @@ theorem n04PrincipalDivided_coreData
       (J m a b q) (J m a b q) 0
       (fun y hy => by rw [hnegJet m hm a b q y hy, zero_mul]) k hz v
     simpa only [zero_mul] using he
-  refine ⟨?_, J, ?_, ?_⟩
+  refine ⟨?_, fun m _ => J m, ?_, ?_⟩
   · intro z hz m _
     have hshift (q : PolarPoint) (hq : q ∈ unitStrip) :
         q + (0, Real.pi) ∈ unitStrip := by
@@ -149,6 +149,7 @@ theorem n04PrincipalDivided_coreData
     refine ⟨ht.choose, fun s => ⟨(ht.choose_spec s).choose,
       (ht.choose_spec s).choose_spec.1, ?_⟩⟩
     intro z hz v m _ q a b hab
+    show |(J m a b q).D k z v| ≤ _
     by_cases hm : P m
     · rw [hJDpos m hm a b q k z hz v]
       exact (ht.choose_spec s).choose_spec.2 ⟨m, hm⟩ a b hab q.val q.property z hz v

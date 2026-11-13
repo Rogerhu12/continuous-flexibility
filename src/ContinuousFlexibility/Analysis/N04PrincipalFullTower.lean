@@ -72,7 +72,7 @@ theorem CurrentJetDataOn.n04Principal_fullWeighted
     mul_le_mul_of_nonneg_left
       (Real.rpow_le_rpow_of_exponent_le (hE m.val) (le_max_right _ _)) hBr.le
   let Jf := (h.n04Principal_familyRegularity href m.val m.property).parameter a b q hq
-  let Jd := h.2.choose m.val a b ⟨q, hq⟩
+  let Jd := h.2.choose m.val m.property a b ⟨q, hq⟩
   have hdiff : ‖Jd.D k z v‖ ≤ Bd * E ^ A * RH * O :=
     (Real.norm_eq_abs _).trans_le
       (((hd.choose_spec s).choose_spec.2 z hz v m.val m.property ⟨q, hq⟩ a b hab).trans
