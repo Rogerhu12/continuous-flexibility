@@ -50,7 +50,7 @@ theorem n04PositiveGeometry_angularInverse_saved_prefix (N : ℕ) :
       (JG : SmoothDirections (U ×ˢ univ)
         (fun z : E × PolarPoint => n04PositiveGeometry_angularGraphInverse (φ z.1) z.2)),
       (∀ z ∈ U, ContDiff ℝ ∞ (φ z)) →
-      (∀ z ∈ U, ∀ y, 0 < deriv (fun θ => φ z (y.1, θ)) y.2) →
+      (∀ z ∈ U, ∀ y : PolarPoint, 0 < deriv (fun θ => φ z (y.1, θ)) y.2) →
       (∀ z ∈ U, ∀ r θ, φ z (r, θ + Real.pi) = φ z (r, θ) + Real.pi) →
     ∀ x ∈ U, ∀ Ω : Set PolarPoint,
       MapsTo (n04PositiveGeometry_angularGraphInverse (φ x)) Ω Ω →

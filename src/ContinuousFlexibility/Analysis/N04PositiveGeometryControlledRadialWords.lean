@@ -81,7 +81,7 @@ theorem n04PositiveGeometry_controlledRadial_saved_word_bound
     obtain ⟨C₀, P, hC₀, hP, hb⟩ := n04PositiveGeometry_controlled_radialKernels_bounds G inverse j
     exact ⟨C₀, P, hC₀.le, hP, fun i z hz => hb i z.1 hz.1 z.2 hz.2⟩
   obtain ⟨B, hB, hbound⟩ := n04PositiveGeometry_sampledPlaneKernel_saved_prefix
-    E hE (fun i => C i ×ˢ univ) Ω g hopen hg N A RH hA hkernel
+    (E := V) E hE (fun i => C i ×ˢ univ) Ω g hopen hg N A RH hA hkernel
   refine ⟨B, hB, ?_⟩
   intro U hU state hstate hsector i J Q p q R H t hR hH hHR ht K s shift x hx y hy hraw
     j hj hjN hjs w hw v hpure hbox
@@ -95,10 +95,12 @@ theorem n04PositiveGeometry_controlledRadial_saved_word_bound
       (fun z : V × PolarPoint => g i (f (z.1, z.2.2), z.2.1)) :=
     Q.congr (fun z hz => by
       cases inverse with
-      | false => exact n04PositiveGeometry_controlled_radial_eq_kernel G
-          (hstate z.1 hz.1) (hsector z.1 hz.1) i z.2
-      | true => exact n04PositiveGeometry_controlled_radialInverse_eq_kernel G
-          (hstate z.1 hz.1) (hsector z.1 hz.1) i z.2)
+      | false =>
+          exact n04PositiveGeometry_controlled_radial_eq_kernel G
+            (hstate z.1 hz.1) (hsector z.1 hz.1) i z.2
+      | true =>
+          exact n04PositiveGeometry_controlled_radialInverse_eq_kernel G
+            (hstate z.1 hz.1) (hsector z.1 hz.1) i z.2)
   exact hbound U hU f J i hmap QK p q R H t hR hH hHR ht K s shift x hx y
     ⟨hmem _ hx, hy⟩ hraw j hj hjN hjs w hw v hpure hbox
 

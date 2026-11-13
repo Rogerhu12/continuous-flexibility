@@ -49,6 +49,18 @@ theorem n04PositiveGeometry_actualHeightPower_root_smooth
   have hreg := (hA.boundary z hz hs k).2.2.2.2.1 _ hp
   exact hreg.2.1.rpow_const_of_ne hreg.2.2.2.ne'
 
+private theorem sourceHeight_factorization_scalar (a b : ℝ) (inv : Bool) :
+    (if inv then (a / b)⁻¹ else a / b) =
+      a ^ (if inv then (-1 : ℝ) else 1) * b ^ (if inv then (1 : ℝ) else -1) := by
+  cases inv with
+  | false =>
+      change a / b = a ^ (1 : ℝ) * b ^ (-1 : ℝ)
+      rw [Real.rpow_one, Real.rpow_neg_one, div_eq_mul_inv]
+  | true =>
+      change (a / b)⁻¹ = a ^ (-1 : ℝ) * b ^ (1 : ℝ)
+      rw [inv_div, Real.rpow_neg_one, Real.rpow_one, div_eq_mul_inv]
+      exact mul_comm _ _
+
 theorem n04PositiveGeometry_sourceHeight_factorization
     (W : N04RealizationStart) (X : N04RealizationChoice W)
     (i : N04PositiveComponent W.D.a W.D.b (deriv W.D.w)) (side : Bool)
@@ -63,10 +75,12 @@ theorem n04PositiveGeometry_sourceHeight_factorization
           (if side then ((W.A X.e₀).cutPair m).1 else ((W.A X.e₀).cutPair m).2)
           (n04PositiveSourceMap (X.src i side) (W.A X.e₀) z p) ^
             (if inv then (1 : ℝ) else -1) := by
-  cases inv <;> simp only [Bool.false_eq_true, ite_false, ite_true,
-    n04PositiveSourceHeight, n04PositiveSourceMap, hm,
-    n04CoordinatesCurrentHeightRatio, Real.rpow_one, Real.rpow_neg_one,
-    div_eq_mul_inv, inv_inv] <;> ring
+  let k := if side then ((W.A X.e₀).cutPair m).1 else ((W.A X.e₀).cutPair m).2
+  have h := sourceHeight_factorization_scalar
+    ((W.A X.e₀).height (W.C.referenceState, 0) k p)
+    ((W.A X.e₀).height z k (canonicalCurrentPoint W.C (W.A X.e₀) z k p)) inv
+  simpa only [n04PositiveSourceHeight, n04PositiveSourceMap, hm,
+    n04CoordinatesCurrentHeightRatio, k] using h
 
 def n04PositiveGeometry_sourceHeightCurrentJet
     (W : N04RealizationStart) (X : N04RealizationChoice W)

@@ -77,8 +77,9 @@ theorem n04PositiveGeometry_actualControlledCoordinates_currentData_of_transport
   have hU := sectorNeighborhood_isOpen W.S base ε ε
   have hUnew := sectorNeighborhood_isOpen W.S low δ δ
   have hV : IsOpen unitStrip := isOpen_Ioo.prod isOpen_univ
-  have hc := (sectorNeighborhood_convex W.S base ε ε).prod
-    ((convex_Ioo (0 : ℝ) 1).prod convex_univ)
+  have hc : Convex ℝ (sectorNeighborhood W.S base ε ε ×ˢ unitStrip) :=
+    (sectorNeighborhood_convex W.S base ε ε).prod
+      ((convex_Ioo (0 : ℝ) 1).prod (convex_univ : Convex ℝ (univ : Set ℝ)))
   have hA : G.Admissible low δ := G.admissible_mono
     (F.gauge_admissible e Y H₀ href) (hFb.trans hlow) hδ (hδε.trans hFε)
   let JC (inverse angle : Bool) (i : N04PositiveComponent W.D.a W.D.b (deriv W.D.w)) :=

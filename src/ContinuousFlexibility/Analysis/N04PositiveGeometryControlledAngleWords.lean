@@ -56,7 +56,7 @@ theorem n04PositiveGeometry_controlledAngle_saved_word_bound
     obtain ⟨C, P, hC, hP, hb⟩ := n04PositiveGeometry_controlled_angularKernel_bounds G hA j
     exact ⟨C, P, hC.le, hP, fun i z hz => hb i z.1 hz.1 z.2 hz.2⟩
   obtain ⟨B₀, hB₀, hbound⟩ := n04PositiveGeometry_sampledPlaneKernel_saved_prefix
-    E hE (fun _ => univ) Ω g (fun _ => isOpen_univ) (fun i => (hg i).contDiffOn)
+    (E := V) E hE (fun _ => univ) Ω g (fun _ => isOpen_univ) (fun i => (hg i).contDiffOn)
     N A RH hA hkernel
   let B : ℝ := 2 * B₀
   have hB : 1 ≤ B := by dsimp only [B]; linarith only [hB₀]

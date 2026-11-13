@@ -72,7 +72,8 @@ theorem n04PositiveGeometry_boundaryAngularPullback_word_bound
   let Ja := smoothDirections_postcompCLM
     (n04PositiveGeometry_boundaryFixedEvaluation_directions (JS 1 le_rfl (by decide))
       (fun _ => (1, 0))) (ContinuousLinearMap.snd ℝ ℝ ℝ)
-  let Jone := smoothDirections_constant (hU.prod isOpen_univ) (1 : ℝ)
+  let Jone : SmoothDirections (U ×ˢ univ) (fun _ : E × ℝ => (1 : ℝ)) :=
+    smoothDirections_constant (hU.prod isOpen_univ) (1 : ℝ)
   let JL := n04PositiveGeometry_rootInverseLinear_directions 1 Jone Ja Jb
   let Λ : E × ℝ → PolarPoint →L[ℝ] PolarPoint := fun y =>
     n04PositiveGeometry_rootInverseLinear 1 1 ((S 1 y (fun _ => (1, 0))).2) (b y)
