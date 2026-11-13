@@ -22,7 +22,7 @@ variable {I E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
   [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
   {U : Set E} {V : I → Set PolarPoint}
 
-private def scalarLinearCombinationDirections
+def scalarLinearCombinationDirections
     {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
     [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
     {U : Set X} {f g : X → ℝ}
