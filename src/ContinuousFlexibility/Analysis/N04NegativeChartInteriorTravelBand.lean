@@ -54,6 +54,7 @@ private theorem interior_material_lower {f B E A : ℝ}
 namespace N04RealizationStart
 
 set_option backward.isDefEq.respectTransparency true
+attribute [local instance] interiorRaw_parameterTopology interiorRaw_parameterAddGroup interiorRaw_parameterSMul
 
 variable (W : N04RealizationStart)
 
@@ -134,6 +135,7 @@ theorem negativeScaledOrientedTravel_le_total (m : ℕ) (side : Bool)
   · change W.C.travel m - _ ≤ W.C.travel m
     exact sub_le_self _ h.1.le
 
+set_option diagnostics true in
 /-- The single first-jet shrink ranges over every component, side and
 interior point. No later parameter or spatial order changes it. -/
 theorem negativeInteriorTravelControl_nonempty
@@ -168,13 +170,14 @@ theorem negativeInteriorTravelControl_nonempty
       (fun _ _ => by simp only [mixedDerivative, iteratedDeriv_zero, f])
   have hreference (i : I) : 0 < f i 0 ∧
       (f i 0)⁻¹ ≤ B * W.T.E0 (W.T.sample (sample i)) ^ A := by
-    rcases i.2.property with ⟨p, hpq, heq⟩
-    have hb := hr.2.2 i.1.1 i.1.2 p.1 hpq.1
+    let p := i.2.property.choose
+    have hpq := i.2.property.choose_spec
+    have hb := hr.2.2 i.1.1 i.1.2 p.1 hpq.1.1
     change 0 < W.negativeScaledOrientedTravel i.1.1 i.1.2 0 i.2.val ∧
       (W.negativeScaledOrientedTravel i.1.1 i.1.2 0 i.2.val)⁻¹ ≤
         B * W.T.E0 (W.negativeHalfSample e i.1.1 i.1.2) ^ A
     rw [W.negativeScaledOrientedTravel_reference i.1.1 i.1.2 (hq i)]
-    simpa only [← heq, negativeInwardPoint] using interior_scaled_reference_inverse hb.1 hb.2
+    simpa only [← hpq.2, negativeInwardPoint] using interior_scaled_reference_inverse hb.1 hb.2
   have hfirst (i : I) (z : Parameter W.S) (hz : z ∈ sectorNeighborhood W.S b₀ ε₀ ε₀)
       (v : Fin 1 → Parameter W.S) :
       |(J i).D 1 z v| ≤ C * W.T.E0 (W.T.sample (sample i)) ^ C *
@@ -210,7 +213,8 @@ theorem negativeInteriorTravelControl_nonempty
   let Cu := hu.choose
   let Au := hu.choose_spec.choose
   have hu' := hu.choose_spec.choose_spec
-  refine ⟨{ base := base, ε := ε, base_le := hs.1.trans hb.1, ε_pos := hb.2.1,
+  refine ⟨{
+    base := base, ε := ε, base_le := hs.1.trans hb.1, ε_pos := hb.2.1,
     ε_le := le_min (hb.2.2.1.trans (hs.2.2.1.trans (min_le_left _ _))) hb.2.2.2.1,
     lower := (2 * B)⁻¹, upper := (3 / 2 : ℝ) * Cu, lowerPower := A, upperPower := Au,
     lower_pos := inv_pos.mpr (mul_pos (by norm_num) hr.1),

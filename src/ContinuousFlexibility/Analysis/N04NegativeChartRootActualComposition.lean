@@ -182,7 +182,7 @@ theorem FullHalfFieldPowerControl.actualRootComposition_prefix
   have hangle := (hl.2.2.2.2.2.2.2 x hx₀
     (W.through03.1.1.2.2.1.liftSectorParameter_sector z) m side δ hδ hδone hδwidth.le hsmall
     1 A.d A.c A.hd A.hc A.dp A.cp A.flow 0
-    (fun p hp => by simpa only [map_zero, add_zero, x] using A.fields 0 A.zero_V p hp)).1
+    (fun p hp => by simpa only [L.map_zero, add_zero, x] using A.fields 0 A.zero_V p hp)).1
   let p₀ := (parameterGrading W.S b).comp L.toLinearMap
   let p₁ := (parameterGrading W.S (b + s + D * N + 1)).comp L.toLinearMap
   have hbudget (a : ℝ) (haC : a ≤ C) (d : ℕ) (hd : d ≤ shift) (l r : ℕ) :

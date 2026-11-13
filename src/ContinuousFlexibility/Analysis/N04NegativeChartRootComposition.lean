@@ -41,11 +41,6 @@ theorem fullField_smooth : ContDiff ℝ ∞ i.fullField :=
   (i.hh.comp (contDiff_fst.fst.prodMk
     i.toNegativeChartRootInverseInput.trajectory_smooth)).sub contDiff_snd.snd
 
-theorem fullField_endpoint (y : P) (v : PolarPoint) (θ : ℝ) :
-    i.fullField ((y, v), (1, θ)) = i.h (y, i.flow.inverse y v 1 θ) - θ := by
-  simp only [fullField, NegativeChartRootInverseInput.trajectory,
-    negativeChartRootPlotTimeChange, compactScalarFlowTime_one]
-
 /-- These are exactly the ordinary parameter jets of the supplied
 endpoint, with the original state slots and fixed root coordinates. -/
 theorem fullField_parameterJet (k : ℕ) (v : Fin k → P) (q : N04FlowPoint) :
