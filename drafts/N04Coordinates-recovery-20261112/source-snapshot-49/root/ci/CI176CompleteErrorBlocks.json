@@ -1,0 +1,22 @@
+{
+  "ci_round": 176,
+  "head": "ae9eb8801b4bd629989e1f4b46f195263adb188d",
+  "run": 43332272502,
+  "job": 131579634362,
+  "unique_errors": 1,
+  "errors": [
+    {
+      "start": 548,
+      "lines": [
+        "error: src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentFrechetJets.lean:49:2: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached",
+        "",
+        "Note: Use `set_option maxHeartbeats <num>` to set the limit.",
+        "",
+        "Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command."
+      ],
+      "next": "Some required targets logged failures:"
+    }
+  ],
+  "complete": true,
+  "explanation": "Original log contains the complete timeout diagnostic followed by the required-target summary. The earlier one-line occurrence repeats the same headline; no artifact extraction is necessary."
+}

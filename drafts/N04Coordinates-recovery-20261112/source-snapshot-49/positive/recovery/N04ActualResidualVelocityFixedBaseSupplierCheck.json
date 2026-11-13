@@ -1,0 +1,443 @@
+{
+  "schema": "n04.actual-velocity-fixed-base-supplier-check.v1",
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED; exact public identities and numerical suppliers checked; missing fixed-base implementations are explicit",
+  "author": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "destination": "positive/recovery/N04ActualResidualVelocityFixedBaseSupplierCheck.json",
+  "selected_main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "scope": {
+    "new_lean_lines": 0,
+    "ci_queries": 0,
+    "active_or_ref_changes": false,
+    "task": "Check the same actual chi'*A*Z correction after the same-R residual-circle route; identify the shortest exact public assembly and remaining strong mixed estimates."
+  },
+  "predecessor": {
+    "same_R_execution_blob": "147e5887ac36e6114d9043e2187eb1aeba5873a5",
+    "same_R_execution_sha256": "9e4334a2424da7f7ab0da85f93ffcf09549ee09886d29454d06df3b420272a35",
+    "correction": "The predecessor's final boundary mentioned the divided-difference average as a later obligation. For the actual R.residual only, the public at_actual identity below removes that average from this CurrentJets route. It remains relevant for estimates with an independent residual argument."
+  },
+  "conclusion": [
+    "For the selected actual R, returnCorrectionDisplacementLinear_at_actual converts the independent-residual displacement to returnCorrectionInitialMap-id. Thus actual chi'*A*Z can use the already defined returnCorrectionInitialCircle directly; no new dslope-average bound is required for this actual-value route.",
+    "The cutoff cost is already a strong public supplier: every fixed radial derivative of chi acts on the same circle model with the single fixed grading loss 1, uniformly in the selector and output order. The chi-value action is a genuine loss-0 component contraction.",
+    "The inverse-slope and pulled initial displacement are exact combinations of endpoint115, derivative CLM, reviewed301 and ordered composition328. Their common positive inverse lower bounds come from the same153 hflow and the existing return-chart derivative inequalities.",
+    "The first remaining numerical implementation is the genuine full forward circle-composition fixed-base estimate needed by the two literal compositions in returnTransportInverseCircle/returnCorrectionInitialCircle; the reviewed159 supplies inverse forward jets, not this final full-map theorem by itself.",
+    "Pure selector/angle estimates do not yet supply all radial mixed parameter jets. Existing421 is a genuine tower only, and existing195 mixed weighted result fixes state/rho before its constants. A separate exact same-buffer weighted mixed budget remains necessary before normalized corrected-speed growth can be asserted."
+  ],
+  "same_objects": {
+    "witness153": {
+      "git_blob": "6ba76a32edfe98908b3b1d44f9af3c7e3d72bfe5",
+      "sha256": "15cc71a282ea4b0aaf371c968dc37a627b41b1407dff8f25e61f613e70c71bea",
+      "utf8_bytes": 8858,
+      "lines": 153,
+      "final_newline": true
+    },
+    "original": "hN01 is the N01 projection of the same153 Through03; C is unchanged.",
+    "residual": "hN02 is the N02 projection for the exact same selected R. No second exists_returnEquation is invoked.",
+    "correction": "L.minusFlow and L.coefficients are the literal returnCorrectedMinusFlow/returnCorrectedCoefficients using that same chi.",
+    "sample": "The circle decoder gain and cutoff multiplier use T.sample m. The raw N01 mixed-flow estimate instead explicitly uses T.sample(C.cell m); these are not silently identified.",
+    "genuine_tower": "Use returnCorrectionVelocity_actual_parameterSpatialTower198e815b or the same stored122 speed tower. On the open common domain, pointwise identities transfer all derivatives by HasProjectiveJetsOn.unique / SmoothDirections.congr. No representative or R/L is reselected."
+  },
+  "scalar_identity": {
+    "notation": [
+      "zeta=liftSectorParameter S C z; F_r(theta)=C.minusFlow zeta m r theta.",
+      "K(theta)=returnCorrectionInitialMap S C zeta m theta; I_r=returnInterpolation(chi m r) K.",
+      "alpha=Function.invFun F_r theta; beta=Function.invFun I_r alpha.",
+      "A(z,r,theta)=deriv F_r alpha; Z(z,r,theta)=K beta-beta; c(r)=deriv(chi m) r."
+    ],
+    "exact_equation": "returnCorrectionVelocityLinear D S C chi zeta m (r,theta) (R.residual zeta) = A(z,r,theta) * c(r) * Z(z,r,theta).",
+    "public_proof": [
+      "rw [returnCorrectionVelocityLinear_apply].",
+      "rw [returnCorrectionDisplacementLinear_at_actual hN01 hN02 hzeta hsector m beta].",
+      "All arguments are the same actual inverse points. The at_actual lemma uses hN02.2.1 and the true N01 two-inverse identities; it is valid even where the residual is zero and introduces no division by that residual."
+    ],
+    "same_corrected_speed": "The already reviewed122 n04_actualMinusSpeed_eq_original_add_residual then yields v_L=v_original+c*A*Z on the actual component. The final first-integral forcing v_reference-v_L remains G_raw-c*A*Z, where G_raw=v_reference-v_original. No original-speed theorem is applied directly to corrected L.coefficients."
+  },
+  "circle_identity": {
+    "H": "H=S.circle(3/4); q=H.grading; p=pairGrading(sectorGrading S) realGrading.",
+    "quantities": [
+      "For a fixed selector rsel, e_r(z)=hN.endpointFlowCircle hS hT rsel hrsel z, and travel_r(m)=-opticalTravel D.w(C.left m)(rsel m).",
+      "kappa(z)=hN.returnCorrectionInitialCircle hS hT z. Its actual decoder is K-id.",
+      "i_r(z)=hN.interpolationSelectorCircle hS hT chi hchiRange rsel hrsel z, a componentwise contraction chi(rsel)*kappa.",
+      "a_r(z)=P_travel_r(e_r(z),Dtheta e_r(z)), where P is the literal circlePositiveInverseComposeLinear; this is the existing selectorInverseSlopeCircle and decodes to A-1.",
+      "z_r(z)=P_travel_r(e_r(z),P_0(i_r(z),kappa(z))). Its decoder is Z by the two actual inverse-compose decoder lemmas and kappa_decode.",
+      "v_r(z)=CutoffJet1_rsel(z_r(z)+circleProductBilinear(a_r(z),z_r(z)))."
+    ],
+    "exact_output": "H.decode(v_r(z)) m theta = returnCorrectionVelocityLinear ... (R.residual(lift z)) at (rsel m,theta).",
+    "implementation_status": "The displayed v_r uses existing public operations, but its same-R equality and fixed-base numerical composition have not been written as a new Lean producer in this check.",
+    "advantage": "The circleAverageComposeLinear / dslope factor is absent on this actual-R path. It cannot be removed for a free independent rho; no claim about that independent operator's full fixed-base parameter bounds is made."
+  },
+  "fixed_base_suppliers": [
+    {
+      "factor": "chi values",
+      "module": "CircleComponentContraction",
+      "public": "circleComponentContractionLinear_grading_le",
+      "cost": "q_s(C_chi u)<=q_s(u); actual continuous linear wrapper and apply lemma are public; uniform in all selectors because |chi(rsel)|<=1."
+    },
+    {
+      "factor": "all fixed radial chi jets",
+      "module": "N01OpticalCutoffCircleMultiplier",
+      "public": "N01Properties.opticalCutoffJetCircleLinear_uniform_bound",
+      "quantifier": "forall k, exists K>=0, forall rsel s u, q_s(CutoffJet_k,rsel u)<=K*q_(s+1)(u).",
+      "cost": "Exactly one grading order, independent of k/rsel/s; K may depend on k. k=1 is the velocity multiplier; radial Leibniz uses k=d+1.",
+      "source": "Uses the same full-component host j from153, its existing cutoff polynomial jets and the actual control-cell index theorem; final sample is literally T.sample m."
+    },
+    {
+      "factor": "centered ordinary flow",
+      "public": "N04EndpointCircleFixedBaseBounds endpoint115",
+      "blob": "09a1696b57c7fe3678cc6e10e419bb8fa22c0c11",
+      "cost": "One B before all parameter orders and selectors, with per-order loss before output s; exact same endpointFlowCircle."
+    },
+    {
+      "factor": "angular derivative",
+      "public": "circleDerivativeContinuousLinear / circleDerivativeLinear_isTame",
+      "cost": "Existing real CLM; fixed tame shift. Applying it to the same endpoint tower preserves the parameter base after a fixed order-zero adjustment, not a k-dependent low base."
+    },
+    {
+      "factor": "positive inverse compose",
+      "public": "circlePositiveInverseComposeLinear_fixedBase_oneHigh",
+      "blob": "1f55edbb185fe33327757a087479196cc8565e4f",
+      "cost": "Reviewed301; same-map given towers and constants before travel. Invoke on a genuine common open inverse domain, with lower fixed before k."
+    },
+    {
+      "factor": "actual inverse selector",
+      "public": "N04SelectorInverseCircleFixedBaseBounds",
+      "blob": "054e86dbc3a61f36df0ff4fd7ddf71aefeacb117",
+      "cost": "Reviewed152, same actual inverse perturbation and uniform selector. This is not by itself the general-source pulled-displacement estimate, which uses301+328."
+    },
+    {
+      "factor": "nonlinear finite composition",
+      "public": "projectiveCompositionJets_fixedBase_oneHigh",
+      "blob": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+      "cost": "Reviewed328, real ordered partitions. It composes numerical inputs and a numerical outer tower; it cannot invent the missing full-forward numerical outer estimate."
+    },
+    {
+      "factor": "circle product",
+      "module": "CircleProductSmoothTame",
+      "public": "circleProduct_oneHigh_bound; circleProductContinuousMultilinear_eq; circleProductPairMultilinear_apply",
+      "cost": "exists base loss before every output s. The actual quadratic tower has only orders0,1,2. Finite Leibniz /328 gives fixed-base parameter bounds after explicit numerical instantiation; the public SmoothTameOn wrapper alone does not retain this stronger order."
+    },
+    {
+      "factor": "initial correction kappa",
+      "module": "N01ReturnInverseCircle",
+      "public": "returnCorrectionInitialCircle; returnCorrectionInitialCircle_decode",
+      "cost": "Literal finite chain: right-chart inverse perturbation, selector inverse at C.right, one full shifted-forward composition for returnTransportInverseCircle, and one for kappa with the true left-chart CLM. The full-forward fixed-base numerical wrapper remains to be implemented."
+    }
+  ],
+  "common_inverse_domain": {
+    "same_hflow": "The original same153 hflow has 1/2<=dtheta F_r<=3/2 on every closed component, uniformly in the allowed states and m/r/theta.",
+    "exact_public_lower": "ReturnChartUniformBounds.returnCorrectionInitialMap_deriv_bounds gives 1/12<=K'<=12 from that same endpoint hflow and N01 left-chart conditions.",
+    "interpolation_lower": "I_r'=(1-chi_r)+chi_r*K' >= 1/12 because 0<=chi_r<=1. This is an elementary inequality using the actual public returnInterpolation_hasDerivAt, not an assumed inverse bound.",
+    "one_usable_domain": "circleUniformInverseDomain H (1/12) has the common interior lower 1/24; the actual e_r and i_r lie in it. A single301 selection at a=1/24 can serve this finite family. No high-order shrinking of the state neighborhood is needed for these lower bounds.",
+    "forbidden_shortcut": "singleComponentFlowCircle includes the uncentered reference optical translation in one component. Its qualitative307 tower cannot be assigned the centered endpoint115 bound without a real translation/cost argument. Use the centered selector/travel formulation above for uniform estimates."
+  },
+  "radial_mixed_boundary": {
+    "genuine_api": "N01ReturnVelocitySpatialTower.returnCorrectionVelocity_actual_parameterSpatialTower already supplies the joint(state,r,theta) tower for the exact R on every actual positive-discriminant interior strip.",
+    "original_sharp_input": "N01FlowMixedParameterTower.sectorFlowMixedTower_bound is genuinely k -> exists d -> forall s with the ORIGINAL base. It retains dist(r,endpoints)^a, H(T.sample(C.cell m))^(3/4), E0(T.sample(C.cell m))^B and oneHigh at s+loss+d. Do not replace it by the following weaker UniformScalarJetSeminormBounds wrapper.",
+    "same_buffer_use": "153 returns x,delta with full closed buffer Icc(x-delta,x+delta) interior, delta^-1 material bound, and support chi' in Icc(x-delta/2,x+delta/2). For an open guard Ioo(x-3delta/4,x+3delta/4), every point has endpoint distance >=delta/4; the whole guard lies in the same full closed buffer with the genuine a/Delta floor.",
+    "exact_remaining_tasks": [
+      "Use the existing full mixed flow identity and the sharp weighted bound, not an arbitrary contDiff inverse estimate, to produce strong parameter/spatial input bounds uniformly over m on that derived guard.",
+      "Carry the raw sample C.cell m and true host j m explicitly through the established material comparison before claiming the circle label sample m. No identity between those samples is asserted.",
+      "Differentiate the actual inverse/interpolation chain or its real tower with the per-parameter degree budget. A selector-uniform pure angular theorem does not prove radial derivatives by itself.",
+      "All chi radial derivatives are already uniformly costed by the public multiplier supplier. Product/chain accounting must retain the actual count of physical derivatives; never absorb parameter-order losses into a low base depending on that order.",
+      "Off tsupport chi', the actual velocity correction is identically zero on a neighborhood; this gives its zero jets there. Original G_raw still requires its own appropriate root/outer-region argument."
+    ],
+    "old_results_not_promoted": [
+      "ReturnResidualVelocityMixedWeighted61e6126d fixes z and rho before exists A,P and only then quantifies all m/physical points. It is not the required all-state fixed-base strong parameter estimate.",
+      "The421 joint tower and307 single-component inverse tower prove identity/regularity, not an all-component E0 constant or a uniform discriminant floor.",
+      "No estimate here extends the genuine closed-buffer a/Delta lower bound to the entire negative half approaching a root."
+    ]
+  },
+  "gain_and_currentJets": {
+    "how_H_is_preserved": "All centered fields and the proposed v_r live in the exact supplied H=S.circle(3/4). The actual circle product theorem includes the material factor needed to stay in that model. The public circleModel_iteratedDeriv_abs_le applied to the same J.D k gives the multiplicative T.H(T.sample m)^(3/4) factor; it is not discarded and reintroduced.",
+    "angular_decode": "|iteratedDeriv b(H.decode(J.D k z v)m) theta| <= 2*circleSobolevConstant*q_(b+1)(J.D k z v)*T.H(T.sample m)^(3/4).",
+    "normalized": "After a real strong mixed estimate has been obtained on the same guard/sample, scalar postcomposition by H_m^-1 (H_m=T.H(T.sample m)^(3/4)>0) cancels that entire factor at every joint tower level. This check does not claim the missing mixed estimate already exists.",
+    "final_boundary": "Even a completed actual correction bound only supplies the chi'*A*Z part. The final e forcing is the same G_raw minus this correction, for the exact153 L/chi. CurrentJets, global extension and root behavior remain separate obligations."
+  },
+  "public_headers": [
+    {
+      "module": "ReturnCorrectionResidualLinear",
+      "name": "returnCorrectionDisplacementLinear_at_actual",
+      "header": "theorem returnCorrectionDisplacementLinear_at_actual\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {base loss : ℕ} {ε : ℝ}\n    (hN01 : N01Properties D T S C base loss ε)\n    (hN02 : N02Properties D T S C R base ε)\n    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)\n    (hsector : stateSector S z.1) (m : ℕ) (θ : ℝ) :\n    returnCorrectionDisplacementLinear S C z m θ (R.residual z) =\n      returnCorrectionInitialMap S C z m θ - θ"
+    },
+    {
+      "module": "ReturnCorrectionResidualLinear",
+      "name": "returnCorrectionVelocityLinear_apply",
+      "header": "theorem returnCorrectionVelocityLinear_apply\n    (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)\n    (χ : ℕ → ℝ → ℝ) (z : AnnularState S × ℝ) (m : ℕ) (p : PolarPoint)\n    (ρ : CircleSpace S) :\n    returnCorrectionVelocityLinear D S C χ z m p ρ =\n      deriv (C.minusFlow z m p.1) (Function.invFun (C.minusFlow z m p.1) p.2) *\n        deriv (χ m) p.1 *\n        returnCorrectionDisplacementLinear S C z m\n          (Function.invFun\n            (returnInterpolation (χ m p.1) (returnCorrectionInitialMap S C z m))\n            (Function.invFun (C.minusFlow z m p.1) p.2)) ρ"
+    },
+    {
+      "module": "ReturnCorrectionResidualLinear",
+      "name": "returnCorrectionVelocityLinear_at_actual",
+      "header": "theorem returnCorrectionVelocityLinear_at_actual\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {base loss : ℕ} {ε : ℝ}\n    (hN01 : N01Properties D T S C base loss ε)\n    (hN02 : N02Properties D T S C R base ε)\n    (χ : ℕ → ℝ → ℝ) {z : AnnularState S × ℝ}\n    (hz : z ∈ stateNeighborhood S C base ε) (hsector : stateSector S z.1)\n    (m : ℕ) (p : PolarPoint) :\n    returnCorrectionVelocityLinear D S C χ z m p (R.residual z) =\n      returnCorrectedMinusSpeed D S C χ z m p -\n        minusCharacteristicSpeed (originalCoefficients D S C z) p"
+    },
+    {
+      "module": "N01ReturnInverseCircle",
+      "name": "N01Properties.returnCorrectionInitialCircle_decode",
+      "header": "theorem N01Properties.returnCorrectionInitialCircle_decode\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)\n    (z : StateDirections S × ℝ) (hz : z ∈ sectorNeighborhood S base ε ε)\n    (m : ℕ) (θ : ℝ) :\n    (S.circle (3 / 4 : ℝ)).decode (hN.returnCorrectionInitialCircle hS hT z) m θ =\n      returnCorrectionInitialMap S C (liftSectorParameter S C z) m θ - θ"
+    },
+    {
+      "module": "N01ReturnVelocityCircle",
+      "name": "N01Properties.selectorInverseSlopeCircle_decode",
+      "header": "theorem N01Properties.selectorInverseSlopeCircle_decode\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)\n    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m))\n    (z : StateDirections S × ℝ) (hz : z ∈ sectorNeighborhood S base ε ε)\n    (m : ℕ) (θ : ℝ) :\n    (S.circle (3 / 4 : ℝ)).decode (hN.selectorInverseSlopeCircle hS hT rsel hrsel z) m θ =\n      deriv (C.minusFlow (liftSectorParameter S C z) m (rsel m))\n        (Function.invFun (C.minusFlow (liftSectorParameter S C z) m (rsel m)) θ) - 1"
+    },
+    {
+      "module": "N01ReturnVelocityCircle",
+      "name": "N01Properties.interpolationInverseComposeCircle_decode",
+      "header": "theorem N01Properties.interpolationInverseComposeCircle_decode\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)\n    (χ : ℕ → ℝ → ℝ)\n    (hχrange : ∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1)\n    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m))\n    (z : StateDirections S × ℝ) (hz : z ∈ sectorNeighborhood S base ε ε)\n    (u : CircleSpace S) (m : ℕ) (θ : ℝ) :\n    (S.circle (3 / 4 : ℝ)).decode\n      (circlePositiveInverseComposeLinear (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num)\n        (fun _ => 0) (hN.interpolationSelectorCircle hS hT χ hχrange rsel hrsel z) u) m θ =\n      (S.circle (3 / 4 : ℝ)).decode u m\n        (Function.invFun (returnInterpolation (χ m (rsel m))\n          (returnCorrectionInitialMap S C (liftSectorParameter S C z) m)) θ)"
+    },
+    {
+      "module": "N01OpticalCutoffCircleMultiplier",
+      "name": "N01Properties.opticalCutoff_iteratedDeriv_le_sample_M",
+      "header": "theorem N01Properties.opticalCutoff_iteratedDeriv_le_sample_M\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)\n    (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))\n    (χ : ℕ → ℝ → ℝ)\n    (hcutoff : ∀ k : ℕ, ∃ A P : ℝ, 0 ≤ A ∧ 0 ≤ P ∧ ∀ m r,\n      |iteratedDeriv k (χ m) r| ≤ A * radialE (D.cellIndex (j m)) ^ P) (k : ℕ) :\n    ∃ K : ℝ, 0 ≤ K ∧ ∀ m r,\n      |iteratedDeriv k (χ m) r| ≤ K * T.M (T.sample m)"
+    },
+    {
+      "module": "N01OpticalCutoffCircleMultiplier",
+      "name": "N01Properties.opticalCutoffJetCircleLinear_uniform_bound",
+      "header": "theorem N01Properties.opticalCutoffJetCircleLinear_uniform_bound\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)\n    (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))\n    (χ : ℕ → ℝ → ℝ)\n    (hcutoff : ∀ k : ℕ, ∃ A P : ℝ, 0 ≤ A ∧ 0 ≤ P ∧ ∀ m r,\n      |iteratedDeriv k (χ m) r| ≤ A * radialE (D.cellIndex (j m)) ^ P)\n    (k : ℕ) :\n    ∃ K : ℝ, 0 ≤ K ∧ ∀ rsel s u,\n      (S.circle (3 / 4 : ℝ)).grading s\n        (hN.opticalCutoffJetCircleLinear hS hT j hcell χ hcutoff k rsel u) ≤\n      K * (S.circle (3 / 4 : ℝ)).grading (s + 1) u"
+    },
+    {
+      "module": "CircleComponentContraction",
+      "name": "circleComponentContractionLinear_grading_le",
+      "header": "theorem circleComponentContractionLinear_grading_le (hS : IsCircleModel T γ S)\n    (c : ℕ → ℝ) (hc : ∀ m, |c m| ≤ 1) (s : ℕ) (u : S.Space) :\n    S.grading s (circleComponentContractionLinear hS c hc u) ≤ S.grading s u"
+    },
+    {
+      "module": "CircleProductSmoothTame",
+      "name": "circleProduct_oneHigh_bound",
+      "header": "theorem circleProduct_oneHigh_bound\n    (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)\n    (hD : IsAccumulatingProfile D) (hγ : 0 < γ)\n    (hinterp : HasInterpolation S.grading) :\n    ∃ base loss : ℕ, ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ u v : S.Space,\n      S.grading s (circleProductBilinear hS hT hD hγ u v) ≤\n        C * (S.grading (s + loss) u * S.grading base v +\n          S.grading base u * S.grading (s + loss) v)"
+    },
+    {
+      "module": "N01FlowMixedParameterTower",
+      "name": "N01Properties.sectorFlowMixedTower_bound",
+      "header": "theorem N01Properties.sectorFlowMixedTower_bound\n    (hN : N01Properties D T S C base loss ε) (k : ℕ) :\n    ∃ d : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b p (hab : a + b ≤ s)\n      (hp : p.1 ∈ Ioo (C.left m) (C.right m)),\n      ∀ z ∈ sectorNeighborhood S base ε ε, ∀ v : Fin k → (StateDirections S × ℝ),\n        min (p.1 - C.left m) (C.right m - p.1) ^ a *\n            |(hN.sectorFlowMixedTower m a b p hp).D k z v| ≤\n          B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *\n            T.E0 (T.sample (C.cell m)) ^ B *\n            oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)\n              base (s + loss + d) z v"
+    },
+    {
+      "module": "N01ReturnVelocitySpatialTower",
+      "name": "N01Properties.returnCorrectionVelocity_actual_parameterSpatialTower",
+      "header": "def N01Properties.returnCorrectionVelocity_actual_parameterSpatialTower\n    {R : ReturnEquationData S} (hR : N02Properties D T S C R base ε) :\n    SmoothDirections (sectorNeighborhood S base ε ε ×ˢ (Ioo l h ×ˢ univ))\n      (fun x : (StateDirections S × ℝ) × PolarPoint =>\n        returnCorrectionVelocityLinear D S C χ (liftSectorParameter S C x.1)\n          m x.2 (R.residual (liftSectorParameter S C x.1)))"
+    }
+  ],
+  "shared_section_binders": {
+    "N01ReturnInverseCircle": "{D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S} {base loss : Nat} {epsilon : Real}.",
+    "N01ReturnVelocitySpatialTower": "The actual_parameterSpatialTower declaration inherits hN:N01Properties, hS, hT, chi, hchiRange, hchi, m,l,h, hl:C.left m<l, hh:h<C.right m, and hdisc:forall z in sectorNeighborhood forall p with p.1 in Ioo l h, 0<original discriminant. Its hR is the exact same R. The stored full421 fingerprint binds the precise inherited types.",
+    "CircleComponentContraction_and_Product": "Headers inherit the declared T/gamma/S CircleModelData variables and, for the product, D. The selected full sources are fingerprinted below."
+  },
+  "source_fingerprints": [
+    {
+      "module": "ReturnCorrectionResidualLinear",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionResidualLinear.lean",
+      "key": "VelocityResidualLinear",
+      "git_blob": "20c303b0135ac0eb7e779d7767bded4ba3e05be5",
+      "sha256": "011d097e57c082dfe2aa6bef910a224df021b23709c8ee4329083dd65fbb5e5d",
+      "utf8_bytes": 11895,
+      "lines": 223,
+      "final_newline": true
+    },
+    {
+      "module": "N01ReturnInverseCircle",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnInverseCircle.lean",
+      "key": "VelocityReturnInverse",
+      "git_blob": "e99a08956ffd3e0dcf86d6e1ed0a4421b5675a86",
+      "sha256": "4efcb2d32b0e23c51812bfe4b14add3e20ffd4356394f87a1f15ef5ab308c55e",
+      "utf8_bytes": 17591,
+      "lines": 317,
+      "final_newline": true
+    },
+    {
+      "module": "N01ReturnVelocityCircle",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnVelocityCircle.lean",
+      "key": "VelocityReturnCircle",
+      "git_blob": "760d2146f1837ea325b447b5b4d82e1789167b88",
+      "sha256": "878561ce9ba1f5dcb7995e65327c9729eed5e117f7170d710dc19e0a7edb8291",
+      "utf8_bytes": 16400,
+      "lines": 274,
+      "final_newline": true
+    },
+    {
+      "module": "N01InterpolationInverseCircle",
+      "path": "src/ContinuousFlexibility/Analysis/N01InterpolationInverseCircle.lean",
+      "key": "VelocityInterpolationInverse",
+      "git_blob": "5d29709ce82e9e2d9eddd11f6812a25fcd2faf6f",
+      "sha256": "e4ddcbab9a22add55fca82e01770a15b004ba6cdf42fa1a928f3ba7565f8052b",
+      "utf8_bytes": 11849,
+      "lines": 215,
+      "final_newline": true
+    },
+    {
+      "module": "CircleComponentContraction",
+      "path": "src/ContinuousFlexibility/Analysis/CircleComponentContraction.lean",
+      "key": "VelocityComponentContraction",
+      "git_blob": "74e0d0a24a0e17fa62ccd3dbf9cb90a1a373ddbc",
+      "sha256": "e5ddaf8acc08507cd467459ed80518b8a41c92ba57553d546f05f18dd797e9f3",
+      "utf8_bytes": 6426,
+      "lines": 136,
+      "final_newline": true
+    },
+    {
+      "module": "N01OpticalCutoffCircleMultiplier",
+      "path": "src/ContinuousFlexibility/Analysis/N01OpticalCutoffCircleMultiplier.lean",
+      "key": "VelocityOpticalCutoff",
+      "git_blob": "2cc250891b684e1d33888806dd79200f00f81f9f",
+      "sha256": "c78ec604946fc351a2477cc40eb4410445d6203cf7624bf1819c3759f9f95b8c",
+      "utf8_bytes": 5327,
+      "lines": 104,
+      "final_newline": true
+    },
+    {
+      "module": "CircleProductSmoothTame",
+      "path": "src/ContinuousFlexibility/Analysis/CircleProductSmoothTame.lean",
+      "key": "VelocityCircleProductSmooth",
+      "git_blob": "d442ac2f3732e0d66b0392699d9e31c8c694333a",
+      "sha256": "4eca07694ef2636151d94f3ce7fc83d5e3beffac7e0055c89c9eff881fbc40d5",
+      "utf8_bytes": 17436,
+      "lines": 359,
+      "final_newline": true
+    },
+    {
+      "module": "N01ReturnVelocitySpatialTower",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnVelocitySpatialTower.lean",
+      "key": "VelocityActualSpatialTower",
+      "git_blob": "198e815b49f723edca476ad56ec173040e11edfe",
+      "sha256": "b05abee5a782c5621c8bfae80b66ef323eed66e0476e7d865fd0517757ac623d",
+      "utf8_bytes": 24370,
+      "lines": 421,
+      "final_newline": true
+    },
+    {
+      "module": "N01SingleComponentFlow",
+      "path": "src/ContinuousFlexibility/Analysis/N01SingleComponentFlow.lean",
+      "key": "VelocitySingleFlow",
+      "git_blob": "73fda03ff2dd73df268be15c9569429eaabd1f0f",
+      "sha256": "53c0456a4801295ad3a213601e995c3d628e080dbad30d819d86ad0a89422720",
+      "utf8_bytes": 15781,
+      "lines": 307,
+      "final_newline": true
+    },
+    {
+      "module": "N01SingleComponentInterpolation",
+      "path": "src/ContinuousFlexibility/Analysis/N01SingleComponentInterpolation.lean",
+      "key": "VelocitySingleInterpolation",
+      "git_blob": "02a20ae3324142b01bcbe22836f7cd001ae4d197",
+      "sha256": "12a6b0964ffa7b47c4f0771eff693f4308afe58aa8a391eec709898116d7ac4f",
+      "utf8_bytes": 9806,
+      "lines": 186,
+      "final_newline": true
+    },
+    {
+      "module": "N01ReturnVelocitySmoothTame",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnVelocitySmoothTame.lean",
+      "key": "VelocityReturnSmoothTame",
+      "git_blob": "9f02465d6563eaed8060468f1ab06e1aea084bdf",
+      "sha256": "58cfe99a893cc26198301ca98acc474d9bb0d07140897edaf6baff9d7a928ffd",
+      "utf8_bytes": 9997,
+      "lines": 174,
+      "final_newline": true
+    },
+    {
+      "module": "N01ReturnDisplacementCircle",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnDisplacementCircle.lean",
+      "key": "VelocityDisplacementCircle",
+      "git_blob": "51a6fb4a9dea0a53ba0ee75124960ce5911f76ea",
+      "sha256": "b079c57c370f18266786a52c655fd4c0caf5aa3d915b779c9d01ef18fd07f542",
+      "utf8_bytes": 15107,
+      "lines": 277,
+      "final_newline": true
+    },
+    {
+      "module": "CircleAverageCompositionSmoothTame",
+      "path": "src/ContinuousFlexibility/Analysis/CircleAverageCompositionSmoothTame.lean",
+      "key": "VelocityAverageSmooth",
+      "git_blob": "da25ed949924696c8c3f82e87ffc9e8117b20653",
+      "sha256": "28b004db87235200fbdae2c6c2af62af485d5c03928c04be09613bcdc85ede5c",
+      "utf8_bytes": 5901,
+      "lines": 123,
+      "final_newline": true
+    },
+    {
+      "module": "N01FlowSpatialJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowSpatialJets.lean",
+      "key": "VelocityFlowSpatialJets",
+      "git_blob": "c6ca31d2695bb2d62296370939d81df3d4464fda",
+      "sha256": "1af887ccbc9bef7fff9fafe734e82c27cee50c84069585dd8a894c433aea67b9",
+      "utf8_bytes": 9657,
+      "lines": 177,
+      "final_newline": true
+    },
+    {
+      "module": "N01FlowMixedParameterTower",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowMixedParameterTower.lean",
+      "key": "VelocityFlowMixedTower",
+      "git_blob": "1cea1dbf8a561921f82465e75f13d4077beec1ac",
+      "sha256": "758e0ac22adab79d3b62b36fd2020ed426c3187a6441f0490a1f53baccb237e2",
+      "utf8_bytes": 8964,
+      "lines": 178,
+      "final_newline": true
+    },
+    {
+      "module": "ReturnResidualVelocityMixedWeighted",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnResidualVelocityMixedWeighted.lean",
+      "key": "VelocityMixedWeighted",
+      "git_blob": "61e6126df8ece1ec393a497046341a3005f1cb0c",
+      "sha256": "070a463e19712296070b2a268298d79e421d9787e2b27bd4a2d6b4b6f8145735",
+      "utf8_bytes": 11001,
+      "lines": 195,
+      "final_newline": true
+    },
+    {
+      "module": "ReturnChartUniformBounds",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnChartUniformBounds.lean",
+      "key": "ResidualRightChartUniformSource",
+      "git_blob": "d632e8aa3ad47fa9733b123e14a42fcd5ff90d40",
+      "sha256": "a1677fbf43c7000ede695fbcbdafd48d3290e84970b197cdf3470ec8fadaf22d",
+      "utf8_bytes": 14630,
+      "lines": 283,
+      "final_newline": true
+    }
+  ],
+  "held_sources": [
+    {
+      "module": "N04RetainedCorrectionNumericalWitness",
+      "blob": "6ba76a32edfe98908b3b1d44f9af3c7e3d72bfe5",
+      "status": "previously full-peer-reviewed source, no new selection"
+    },
+    {
+      "module": "N04ActualMinusSpeedStripTower",
+      "git_blob": "f0ee10cf1c352acd5eaf85792f2f0b32ba9be796",
+      "sha256": "231e649dd57453716bbeb036dcaa4c4c0a1793d6198bedd0d482864c901bbfbf",
+      "utf8_bytes": 6517,
+      "lines": 122,
+      "final_newline": true,
+      "status": "previously full-peer-reviewed122; same speed identity reread; not a numerical bound"
+    },
+    {
+      "module": "N04CoefficientIncrementJointGain",
+      "blob": "63073bc007f7945e905e6cb9237a96f2c463ff8a",
+      "status": "original coefficient gain199 only, not corrected L coefficients"
+    }
+  ],
+  "verification": {
+    "full_read_new_sources": [
+      "ReturnCorrectionResidualLinear",
+      "N01ReturnInverseCircle",
+      "N01ReturnVelocityCircle",
+      "N01InterpolationInverseCircle",
+      "CircleComponentContraction",
+      "N01OpticalCutoffCircleMultiplier",
+      "CircleProductSmoothTame",
+      "N01ReturnVelocitySpatialTower",
+      "N01SingleComponentFlow",
+      "N01SingleComponentInterpolation",
+      "N01ReturnVelocitySmoothTame",
+      "N01ReturnDisplacementCircle",
+      "CircleAverageCompositionSmoothTame",
+      "N01FlowSpatialJets",
+      "N01FlowMixedParameterTower",
+      "ReturnResidualVelocityMixedWeighted",
+      "ReturnChartUniformBounds"
+    ],
+    "no_new_transitive_closure_claim": true,
+    "no_new_api_compilation_claim": true,
+    "mathlib_api_change": false,
+    "public_at_actual_identity_read_full_proof": true,
+    "source_fingerprints_recomputed_from_exact_utf8": true,
+    "no_private_sample_helper_invoked": true
+  }
+}

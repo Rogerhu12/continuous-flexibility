@@ -1,0 +1,642 @@
+{
+  "schema": "n04.stageE.actual-piece-finite-derivative-route.v1",
+  "destination": "quantitative/recovery/StageEActualTransportFiniteDerivativeRoute.json",
+  "author": "/root/quantitative_route",
+  "date": "2026-11-13",
+  "status": "READ_ONLY_EXECUTABLE_PROOF_PLAN_NO_LEAN_ADDED_NO_COMPILATION_CLAIM",
+  "source_baseline": {
+    "commit": "5998e753d1e57c592fc4970009611857cfbbce22",
+    "tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+    "existing_sources": "Exact paths and blobs read against this cached actual tree; no future-main providers selected.",
+    "pending_frechet_repair": {
+      "commit_reported_by_parent": "ae9eb8801b4bd629989e1f4b46f195263adb188d",
+      "source": "2a5a26576abbc983bef6f9c51735cd28f5623859",
+      "required_by_recommended_route": false,
+      "CI_not_queried": true
+    }
+  },
+  "antecedents": [
+    {
+      "blob": "b46eb06138dfd5761a536176a88be584499c37a4",
+      "sha256": "5ef17536ba6f923eee745948c0f79d6dc1ff9c2bc54f96acaed198f181009aad",
+      "role": "Exact actual transport/source/Jacobian identity and target field."
+    },
+    {
+      "blob": "7353ec06fd63e6c5f4b17546dcb1805008d357e1",
+      "sha256": "a2ffba30eee833e25779573e35eca3a4dedb82c4791e4bf10a1631cb124d8740",
+      "role": "Separate hdisp+hwindow gives the H/M ratios by exp(1); no derivative bound inferred from it."
+    }
+  ],
+  "recommendation": {
+    "primary": "For the actual transport target C0*M(point)^A at each fixed state, reuse the existing N07a sampled-subpower calculus. This is sufficient, requires no E0>=1 assumption, and avoids adding new finite-affine/Jacobian machinery.",
+    "explicit_E0_alternative": "If a consumer specifically needs C_z*E0(original_sample)^P, use the separately specified finite N=3 route from the already existing Absolute118. It needs an explicit same-T sampled floor. A sampled-subpower bound alone is NOT asserted to imply an E0-power bound.",
+    "actual_objects": "K,T,C and the original sample T.sample(K.cell m) are fixed throughout. Only numerical envelopes are selected. No atlas, inverse, positive family, material data or geometric witness is reselected."
+  },
+  "definitions": {
+    "source_blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+    "source_sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+    "physical_width": "lambda_m = K.physicalRight m - K.physicalLeft m",
+    "canonical_width": "rho_m = K.right m - K.left m",
+    "P": "P_m(u,theta)=(K.physicalLeft m+lambda_m*u,theta)",
+    "A": "A_m(u,theta)=(K.left m+rho_m*u,theta)",
+    "W": "referencePhysicalPieceOpen S K m",
+    "V": "canonicalOpen S K m",
+    "F": "F_m = K.chart (C.referenceState,0) m",
+    "G": "G_m = K.inverseChart (liftSectorParameter S C z) m",
+    "H": "H_m = K.height (C.referenceState,0) m",
+    "R": "R_m(y)=(canonicalSource S K (liftSectorParameter S C z) m (fun _=>1) y)^(-1)",
+    "tau": "canonicalCurrentPoint C K (liftSectorParameter S C z) m = G_m o F_m",
+    "q": "q_m(p)=H_m(p)/K.height (liftSectorParameter S C z) m (G_m(F_m(p)))",
+    "q_identity_on_W": "q_m = H_m * (abs(planeJacobian G_m) o F_m) * (R_m o F_m)",
+    "normalization_warning": "physical atoms are evaluated via P_m on the fixed reference interval. Current inverse atoms are evaluated via A_m on the true canonical interval. G_m(F_m p) is in the CURRENT moving physical piece and is never treated as belonging to the fixed reference half."
+  },
+  "order_budget": [
+    {
+      "quantity": "F_m positive jets",
+      "needed_orders": [
+        1,
+        2
+      ],
+      "domain": "W_m",
+      "source_atoms": [
+        "chartRadial",
+        "chartAngleDefect"
+      ],
+      "widths": "rho_m output factor; lambda_m^(-a) for a radial input derivatives",
+      "angle": "The identity angle contributes at most 1 to every positive-order norm; no zeroth angular norm is used."
+    },
+    {
+      "quantity": "H_m jets",
+      "needed_orders": [
+        0,
+        1,
+        2
+      ],
+      "domain": "W_m",
+      "source_atoms": [
+        "height"
+      ],
+      "widths": "lambda_m^(-a)"
+    },
+    {
+      "quantity": "G_m positive jets",
+      "needed_orders": [
+        1,
+        2,
+        3
+      ],
+      "domain": "V_m",
+      "source_atoms": [
+        "inverseRadial",
+        "inverseAngleDefect"
+      ],
+      "widths": "lambda_m output factor; rho_m^(-a)",
+      "angle": "Again only angle defect plus the fixed identity-angle derivative."
+    },
+    {
+      "quantity": "R_m jets",
+      "needed_orders": [
+        0,
+        1,
+        2
+      ],
+      "domain": "V_m",
+      "source_atoms": [
+        "sourceFactorInverse"
+      ],
+      "widths": "rho_m^(-a); no new reciprocal estimate because this is already the actual reciprocal-source atom."
+    },
+    {
+      "quantity": "planeJacobian G_m and its absolute value",
+      "needed_orders": [
+        0,
+        1,
+        2
+      ],
+      "domain": "V_m",
+      "reason": "Each derivative entry costs one G order; determinant is two scalar products. Absolute value preserves every derivative norm locally at the nonzero Jacobian."
+    },
+    {
+      "quantity": "tau_m",
+      "needed_orders": [
+        1,
+        2
+      ],
+      "domain": "W_m",
+      "reason": "Positive-order composition uses only positive G and F jets; no G/F value norm."
+    },
+    {
+      "quantity": "q_m",
+      "needed_orders": [
+        0,
+        1,
+        2
+      ],
+      "domain": "W_m",
+      "reason": "Two scalar compositions and two scalar products of the displayed literal functions."
+    }
+  ],
+  "primary_existing_calls": [
+    {
+      "step": 1,
+      "call": "n07a_forwardChart_positive_jets hD hT href hcur hcanonical hphysical",
+      "specialization": "Use parameter (0,0); hε proves membership, liftSectorParameter at zero equals (referenceState,0). This gives the true F_m on W_m.",
+      "result": "All positive reference-chart jets with the original same-sample subpower envelopes."
+    },
+    {
+      "step": 2,
+      "call": "n07a_inverseChart_positive_jets hD hT href hcur hcanonical hphysical",
+      "specialization": "Fix the actual z in the current sector neighborhood. For each positive n absorb 1+parameterGrading((n-1)+loss)z with N07aSampleSubpower.const and .mul.",
+      "result": "All positive G_m jets on V_m; the constant is independent of m and theta, and is allowed to depend on this fixed z."
+    },
+    {
+      "step": 3,
+      "call": "n07a_physicalAtomFields_sampleJetBounds ...; n07a_fixedJetEnvelope_of_sampleJetBounds ... (0,0) hz0; n07a_physicalAtomField_height",
+      "result": "N07aAngularFixedJetEnvelope T K W (fun _=>1) H. No current-height evaluation on the wrong physical half."
+    },
+    {
+      "step": 4,
+      "call": "n07a_canonicalAtomFields_sampleJetBounds ... .sourceFactorInverse; n07a_fixedJetEnvelope_of_sampleJetBounds ... z hz",
+      "identity": "Unfold only n07aCanonicalAtomField/atom and use n07aCanonicalUnitPoint_inverse: the function is exactly R_m on V_m.",
+      "result": "All ordinary R_m jets with original K.cell sample."
+    },
+    {
+      "step": 5,
+      "call": "n07a_planeJacobian_fixedEnvelope_of_positiveJets hD hT hV hG hGpositive",
+      "result": "Envelope for planeJacobian G_m, using only G positive orders. At final order2 this consumes only G orders1..3."
+    },
+    {
+      "step": 6,
+      "call": "n07a_actual_inverseChart_jacobian_abs hgeom hz_state hs m hy; N07aAngularFixedJetEnvelope.abs",
+      "detail": "The geometry-only determinant identity and actual forward nonzero Jacobian imply the inverse Jacobian is nonzero. The public abs envelope lemma uses continuity and nonzero pointwise. Local smoothness of abs follows from the same positive/negative-sign germ used in n07a_norm_iteratedFDeriv_abs; there is no numerical lower bound to pay."
+    },
+    {
+      "step": 7,
+      "call": "N07aAngularFixedJetEnvelope.comp twice",
+      "mapping": "F_m:W_m->V_m comes from hgeom.referenceDomain and reference hgeom.charts. Its positive jets are step1.",
+      "result": "Envelopes of abs(JG_m) o F_m and R_m o F_m. The comp API never asks for an F_m zeroth norm."
+    },
+    {
+      "step": 8,
+      "call": "N07aAngularFixedJetEnvelope.mul twice",
+      "result": "Envelope of the exact triple product for q_m. The three weights are all identically1."
+    },
+    {
+      "step": 9,
+      "call": "norm_iteratedFDeriv_comp_le_bounded_partition_sum",
+      "detail": "For n=1 and n=2, c.length>0 and all part sizes>0. Form the finite products/sum of the actual G and F envelopes via N07aSampleSubpower.finset_prod/finset_sum. This is the only positive-composition envelope wrapper not already exposed under one convenient public name; its proof is the existing comp proof restricted to positive n, avoiding a G zeroth bound."
+    },
+    {
+      "step": 10,
+      "call": "N07aSampleSubpower.const/add (or finite sum)",
+      "detail": "Take e=1+e_q0+e_q1+e_q2+e_tau1+e_tau2. This single envelope is selected after fixed z but before m,p,k and bounds every required derivative."
+    }
+  ],
+  "minimal_new_source_split": [
+    {
+      "proposed_module": "ContinuousFlexibility.Analysis.CanonicalTransportPieceJetEnvelope",
+      "status": "PROPOSED_ONLY_NO_LEAN_CREATED",
+      "responsibilities": [
+        "A local geometry-only q identity, obtained by the exact scalar cancellation already described in b46e; use the public inverse Jacobian identity instead of taking N04Properties.",
+        "A small positive-order composition-envelope helper copied structurally from the existing partition-sum calculus, not a new derivative representation.",
+        "The actual same-K scalar/source/Jacobian envelope assembly and finite common e for q0..2 and tau1..2."
+      ],
+      "proposed_public_header": "theorem n04_referenceCurrent_transport_piece_envelope\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}\n    {base : ℕ} {ε : ℝ}\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hε : 0 < ε)\n    (hstate : referenceStateConditions D S C)\n    (hgeom : CanonicalGeometry D S C K base ε)\n    (href : CanonicalGeometry.ReferenceJets D T S C L K)\n    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)\n    (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε) :\n    ∃ e : ℕ → ℝ, N07aSampleSubpower T K e ∧ (∀ m, 0 ≤ e m) ∧\n      ∀ m p, p ∈ referencePhysicalPieceOpen S K m →\n        (∀ n : ℕ, n ≤ 2 →\n          ‖iteratedFDeriv ℝ n\n            (fun x => K.height (C.referenceState,0) m x /\n              K.height (liftSectorParameter S C z) m\n                (canonicalCurrentPoint C K (liftSectorParameter S C z) m x)) p‖ ≤ e m) ∧\n        (∀ n : ℕ, 1 ≤ n → n ≤ 2 →\n          ‖iteratedFDeriv ℝ n\n            (canonicalCurrentPoint C K (liftSectorParameter S C z) m) p‖ ≤ e m)",
+      "direct_existing_imports": [
+        "N07aForwardChartBounds",
+        "N07aInverseChartBounds",
+        "N07aAngularJacobianEnvelope"
+      ],
+      "expected_implementation_scale": "One substantive leaf; no need to create separate affine, product or Jacobian libraries. The proposed header is a plan, not a compiled declaration."
+    },
+    {
+      "proposed_module": "ContinuousFlexibility.Analysis.CanonicalTransportPieceMaterialBound",
+      "status": "PROPOSED_ONLY_OPTIONAL_SMALL_FINISHER",
+      "responsibilities": [
+        "Apply n07a_material_piece_ratio_envelope to obtain r>=1 and M_sample/M(p)<=r on the same W_m.",
+        "For the complete e from the first leaf, apply (N07aSampleSubpower.mul hD hT he hr).one_power once.",
+        "Cancel the same positive r to replace the sampled coefficient by C_z*T.M(p.1).",
+        "Use the existing qualitative global transport piece equalities and open-piece eventual equality if the caller wants the already selected global tau/q rather than the literal local composites."
+      ],
+      "exact_absorption": "e_m*r_m <= C_z*M_sample <= C_z*r_m*M(p.1); r_m>0, hence e_m<=C_z*M(p.1).",
+      "requirements": "Only hD,hT,href and hgeom.referenceBounds in addition to the derived e; no N04Properties, Primitive.materialJetBounds or Primitive.transport is consumed.",
+      "order_of_constants": "Fix z first; choose one C_z before every piece, point and n<=2.",
+      "resulting_physical_power": "A=1 suffices for the derivative part. Combining with the separate exp(1) H/M ratio bounds under a single common A still requires the explicitly normalized final material E0 floor or its genuine uniform scaled-floor constant; do not infer E0>=1 from IsMaterialData."
+    }
+  ],
+  "explicit_E0_finite_route": {
+    "required_extra": "hfloor : ∀m, 1<=T.E0(T.sample(K.cell m)), for this exact T. This may be supplied by the final normalization but is not silently assumed.",
+    "supplier": "CanonicalReferenceCurrentAbsoluteJets.n04Coordinates_unitAtom_absolute_envelope at s=3. This route already works with mixed jets from Absolute118 and does not need the pending Frechet76.",
+    "constants": {
+      "E": "E_m=T.E0(T.sample(K.cell m))",
+      "loss": "The single loss selected by the actual unit envelope, before s.",
+      "A_B": "A>0,B>0 from the s=3 specialization, before z,m,atom,point.",
+      "g": "g=CanonicalGeometry.parameterGrading S (3+loss) z >=0",
+      "M": "M_m=1+A*(1+g)*E_m^B >=1",
+      "R": "R_m=17*M_m^5",
+      "C2": "C2=1+sum_{n=0}^2 card(OrderedFinpartition n), as a real number; C2>=1 and dominates each relevant partition cardinality."
+    },
+    "width_payment": "At the unit center, the same s=3 supplier bounds each of lambda_m,lambda_m^(-1),rho_m,rho_m^(-1) by M_m. These four atoms are state-independent. Geometry supplies both widths positive.",
+    "scalar_conversion": [
+      "For canonical raw atoms use n07a_mixedDerivative_unitInverse with K. For physical raw atoms use the same exact theorem with n07aPhysicalIntervalData K, as in the existing PhysicalAtomBounds proof; its scalar field remains the original same-K atom.",
+      "At mixed order a+b<=3 the input scale is exactly rho_m^(-a), respectively lambda_m^(-a), with no angular scale.",
+      "Therefore each needed raw scalar mixed jet is <= M_m^(a+1)<=M_m^4.",
+      "CylinderMixedJets.norm_iteratedFDeriv_le_of_mixedDerivative then gives every needed raw scalar Frechet jet <=2^n*M_m^4<=8*M_m^4 for n<=3."
+    ],
+    "pair_conversion": "n07a_coordinatePair_iteratedFDeriv_bound applied to the two exact raw-atom chart identities gives each positive F or G jet <=rho_m*(8*M_m^4)+1+8*M_m^4, or with lambda_m in place of rho_m, hence <=17*M_m^5=R_m. Constants K.left and K.physicalLeft disappear at positive order; the only identity-angle cost is the displayed +1.",
+    "determinant_numeric": "For n<=2 the four actual entries of DG have jets<=R_m by contraction with the norm1 coordinate directions/projections. n07b_norm_jet_mul_le with b=2 bounds each determinant product by4*R_m^2. The two terms give8*R_m^2. n07a_norm_iteratedFDeriv_abs keeps this norm unchanged.",
+    "composition_numeric": [
+      "For n=1,2, positive-order composition gives ||D^n tau||<=C2*R_m^3.",
+      "For n=0,1,2, abs(JG)oF has jets<=8*C2*R_m^4.",
+      "For n=0,1,2, R_source o F has jets<=C2*R_m^3. The n=0 term uses only the source-factor-inverse value, never an F or G value norm."
+    ],
+    "product_numeric": "Two calls of n07b_norm_jet_mul_le with b=2 give ||D^n q||<=16*R_m*(8*C2*R_m^4)*(C2*R_m^3)=128*C2^2*R_m^8, n<=2. This also dominates the tau bound.",
+    "final_explicit_bound": "M_m<=(1+A*(1+g))*E_m^B using the explicit hfloor. Thus C_z=128*C2^2*17^8*(1+A*(1+g))^40 and P=40*B bound both families by C_z*E_m^P. This is a conservative explicit certificate, not a claim of optimal exponents.",
+    "new_work_if_this_variant_is_required": "Only finite-envelope packaging over the listed public affine/mixed, coordinate-pair, product and partition lemmas. Do not invoke the all-order PointwiseMaterialJetBound Jacobian theorem, which asks for unwanted zero-order chart bounds and an interpolation low ball."
+  },
+  "scope_and_nonclaims": [
+    "All derivatives are ordinary finite-dimensional spatial Frechet derivatives; no new SmoothDirections tower is asserted.",
+    "The current canonical inverse is evaluated on canonicalOpen. No opposite-half inverse/source atom is evaluated outside its genuine canonical interval.",
+    "The source sample is always T.sample(K.cell m); no opposite-piece or endpoint/midpoint relabeling occurs.",
+    "No compact bound for an unwrapped angle or for a total chart's value is used.",
+    "No new uniform lower bound for the inverse Jacobian is needed; local nonvanishing suffices for absolute-value jets.",
+    "The existing n07a_canonicalHeightInverse_eq_sourceFactorInverse has an N04Properties hypothesis; use its algebraic proof pattern with the geometry-only inverse-Jacobian lemma, not that stronger public theorem.",
+    "The existing n07a_sampleMaterial_absorb also takes N04Properties; do not call it here. The explicit e*r cancellation above uses only the independent ratio envelope and subpower one_power.",
+    "This completes an executable interior derivative route only. Extending the uniform n<=2 estimates through all cuts/roots still requires the selected global C3 transport and the referencePartition density/continuity argument.",
+    "The separate H/M ratio route is exactly root7353: choose the local material window and a common displacement neighborhood before state/piece, then ratios<=exp(1). No derivative estimate is inferred from those ratios.",
+    "The PolynomialPositiveComposition and PolynomialWeightedJets modules suggested by the sibling are not in the selected actual175 tree; they are not prerequisites of this plan."
+  ],
+  "public_provider_headers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient",
+      "path": "src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "sha256": "bbec6c5ccb9e0d9bcf75516b8c9024e4f15c2e834119822ace6da3c4e70fd51c",
+      "bytes": 5638,
+      "lines": 128,
+      "full_source_read": true,
+      "selected_tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+      "public_headers": [
+        {
+          "name": "n07aCanonicalUnitInversePoint_maps",
+          "header": "theorem n07aCanonicalUnitInversePoint_maps (hm : K.left m < K.right m) :\n    MapsTo (n07aCanonicalUnitInversePoint K m) (canonicalOpen S K m)\n      CanonicalGeometry.unitStrip",
+          "header_sha256": "7ae78d1344de380c8e6bb1823fceaec9fa392db78b4569203a8838d7690839b0"
+        },
+        {
+          "name": "n07aCanonicalUnitPoint_inverse",
+          "header": "theorem n07aCanonicalUnitPoint_inverse (hm : K.left m < K.right m) (p : PolarPoint) :\n    CanonicalGeometry.canonicalUnitPoint K m (n07aCanonicalUnitInversePoint K m p) = p",
+          "header_sha256": "5ac7462b50eaf3fb79e056be224661a52525ec892077fd6649cebed1b77aca18"
+        },
+        {
+          "name": "n07a_mixedDerivative_radialAffine",
+          "header": "theorem n07a_mixedDerivative_radialAffine (f : PolarPoint → ℝ)\n    (d c : ℝ) (a b : ℕ) (p : PolarPoint) :\n    mixedDerivative a b (fun q => f (d + c * q.1, q.2)) p =\n      c ^ a * mixedDerivative a b f (d + c * p.1, p.2)",
+          "header_sha256": "ec8db3955602a6a738276b22d8797ea721b0ff549ae40a9316d408e1b14cc792"
+        }
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aCanonicalAtomBounds.lean",
+      "blob": "7f58525255a1dd409689e8b21ba4bab30a4af3c5",
+      "sha256": "a162c68611e25b6851e7d0a582437100ddd24c28ec65acd32ee002975087b0e7",
+      "lines": 102,
+      "bytes": 4894,
+      "full_source_read": true,
+      "selected_tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+      "public_headers": [
+        {
+          "name": "n07a_mixedDerivative_unitInverse",
+          "header": "theorem n07a_mixedDerivative_unitInverse (m : ℕ) (f : PolarPoint → ℝ)\n    (a b : ℕ) (y : PolarPoint) :\n    mixedDerivative a b (f ∘ n07aCanonicalUnitInversePoint K m) y =\n      (K.right m - K.left m)⁻¹ ^ a *\n        mixedDerivative a b f (n07aCanonicalUnitInversePoint K m y)",
+          "header_sha256": "e6025a8c745205a8aef57d130ca5a455abd51e44a44d85bb025e6a9fadd435ef"
+        },
+        {
+          "name": "n07a_canonicalAtomField_smooth",
+          "header": "theorem n07a_canonicalAtomField_smooth\n    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)\n    (hinterval : ∀ m, K.left m < K.right m) (a : CanonicalGeometry.Atom)\n    (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε) (m : ℕ) :\n    ContDiffOn ℝ ∞ (n07aCanonicalAtomField D T S C L K a z m) (canonicalOpen S K m)",
+          "header_sha256": "48430fd4dad972abcf3603374939367996f5fba2c34eb142c1feae4fd0358668"
+        },
+        {
+          "name": "n07a_canonicalAtomFields_sampleJetBounds",
+          "header": "theorem n07a_canonicalAtomFields_sampleJetBounds\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (href : CanonicalGeometry.ReferenceJets D T S C L K)\n    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)\n    (hinterval : ∀ m, K.left m < K.right m) :\n    ∃ loss : ℕ, ∀ a : CanonicalGeometry.Atom,\n      N07aSampleJetBounds T K (CanonicalGeometry.parameterGrading S)\n        (sectorNeighborhood S base ε ε) (canonicalOpen S K) loss\n        (n07aCanonicalAtomField D T S C L K a)",
+          "header_sha256": "22a7ef65ac211a7972efabdaf91acec3960b3dc98593f348f6ce366579e133bf"
+        }
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aPhysicalAtomBounds.lean",
+      "blob": "90fc674abbd4d61ed694d2140805c2af25dc261a",
+      "sha256": "24655e9ab3fb45a47f7202e0fd8e38811026d0837b047046882f9aa3f9f70108",
+      "lines": 97,
+      "full_source_read": true,
+      "selected_tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+      "public_headers": [
+        {
+          "name": "n07a_physicalAtomField_smooth",
+          "header": "theorem n07a_physicalAtomField_smooth\n    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)\n    (hinterval : ∀ m, K.physicalLeft m < K.physicalRight m) (a : CanonicalGeometry.Atom)\n    (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε) (m : ℕ) :\n    ContDiffOn ℝ ∞ (n07aPhysicalAtomField D T S C L K a z m) (referencePhysicalPieceOpen S K m)",
+          "header_sha256": "3a2422dd71e82233f856ce5eda93a7e5466c197a8d59344478b016bec4a56b47"
+        },
+        {
+          "name": "n07a_physicalAtomFields_sampleJetBounds",
+          "header": "theorem n07a_physicalAtomFields_sampleJetBounds\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (href : CanonicalGeometry.ReferenceJets D T S C L K)\n    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)\n    (hinterval : ∀ m, K.physicalLeft m < K.physicalRight m) :\n    ∃ loss : ℕ, ∀ a : CanonicalGeometry.Atom,\n      N07aSampleJetBounds T K (CanonicalGeometry.parameterGrading S)\n        (sectorNeighborhood S base ε ε) (referencePhysicalPieceOpen S K) loss\n        (n07aPhysicalAtomField D T S C L K a)",
+          "header_sha256": "bd7569fb83a45bf217560baba59b6c05296af8e596173d3da7a8494290582440"
+        },
+        {
+          "name": "n07a_physicalAtomField_height",
+          "header": "theorem n07a_physicalAtomField_height (m : ℕ)\n    (hm : K.physicalLeft m < K.physicalRight m) (z : CanonicalGeometry.Parameter S) :\n    n07aPhysicalAtomField D T S C L K .height z m = K.height (liftSectorParameter S C z) m",
+          "header_sha256": "d2ff9ab21b0ea616209b64600e266ab05bfa2b9202db20dbd5c9ccac45c5d754"
+        }
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aForwardChartBounds.lean",
+      "blob": "fee0603405737ade95ecd8639bc33e2997272f3a",
+      "sha256": "c4eacdcafbf69c82dff51b1fa3438b126126d0fda52b9e1c01b5a6d8bbee553f",
+      "lines": 118,
+      "full_source_read": true,
+      "selected_tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+      "public_headers": [
+        {
+          "name": "n07a_forwardChart_eq_rawAtoms",
+          "header": "theorem n07a_forwardChart_eq_rawAtoms\n    (m : ℕ) (hm : K.left m < K.right m)\n    (hp : K.physicalLeft m < K.physicalRight m)\n    (z : CanonicalGeometry.Parameter S) :\n    K.chart (liftSectorParameter S C z) m = fun y =>\n      (K.left m + (K.right m - K.left m) *\n        n07aPhysicalAtomField D T S C L K .chartRadial z m y,\n       y.2 + n07aPhysicalAtomField D T S C L K .chartAngleDefect z m y)",
+          "header_sha256": "8d9e55bb12637e0a07cd2a94809a4f33f8a96671724f289f28a2e50a3cace82b"
+        },
+        {
+          "name": "n07a_forwardChart_positive_jets",
+          "header": "theorem n07a_forwardChart_positive_jets\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (href : CanonicalGeometry.ReferenceJets D T S C L K)\n    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)\n    (hinterval : ∀ m, K.left m < K.right m)\n    (hphysical : ∀ m, K.physicalLeft m < K.physicalRight m) :\n    ∃ loss : ℕ, ∀ n : ℕ, 0 < n → ∃ e : ℕ → ℝ,\n      N07aSampleSubpower T K e ∧ (∀ m, 0 ≤ e m) ∧\n        ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m x, x ∈ referencePhysicalPieceOpen S K m →\n          ‖iteratedFDeriv ℝ n (K.chart (liftSectorParameter S C z) m) x‖ ≤\n            e m * (1 + CanonicalGeometry.parameterGrading S ((n - 1) + loss) z)",
+          "header_sha256": "2f7861137f7f21af50663d6edc87f35a65008eb7584c6f1d72be08f1dfb895e6"
+        }
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aInverseChartBounds.lean",
+      "blob": "bbc8e6acd60fdb4937b7ca75611a028d0511ba73",
+      "sha256": "cf57b7a9d5a616700bcb1b3ac816cbd00be96f367440c03553210a60c8221030",
+      "lines": 115,
+      "full_source_read": true,
+      "selected_tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+      "public_headers": [
+        {
+          "name": "n07a_inverseChart_eq_rawAtoms",
+          "header": "theorem n07a_inverseChart_eq_rawAtoms\n    (m : ℕ) (hm : K.left m < K.right m)\n    (hp : K.physicalLeft m < K.physicalRight m)\n    (z : CanonicalGeometry.Parameter S) :\n    K.inverseChart (liftSectorParameter S C z) m = fun y =>\n      (K.physicalLeft m + (K.physicalRight m - K.physicalLeft m) *\n        n07aCanonicalAtomField D T S C L K .inverseRadial z m y,\n       y.2 + n07aCanonicalAtomField D T S C L K .inverseAngleDefect z m y)",
+          "header_sha256": "2c99dd61ba9309734f6b828f5cf603d0c8be5b665754239aa544339abbdb1437"
+        },
+        {
+          "name": "n07a_inverseChart_positive_jets",
+          "header": "theorem n07a_inverseChart_positive_jets\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (href : CanonicalGeometry.ReferenceJets D T S C L K)\n    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)\n    (hinterval : ∀ m, K.left m < K.right m)\n    (hphysical : ∀ m, K.physicalLeft m < K.physicalRight m) :\n    ∃ loss : ℕ, ∀ n : ℕ, 0 < n → ∃ e : ℕ → ℝ,\n      N07aSampleSubpower T K e ∧ (∀ m, 0 ≤ e m) ∧\n        ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m x, x ∈ canonicalOpen S K m →\n          ‖iteratedFDeriv ℝ n (K.inverseChart (liftSectorParameter S C z) m) x‖ ≤\n            e m * (1 + CanonicalGeometry.parameterGrading S ((n - 1) + loss) z)",
+          "header_sha256": "211421bb45e9bafc2ea86b032913fc640a588df16d518ebdefc6f424c6bbab03"
+        }
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aCoordinateJetNorms.lean",
+      "blob": "453609ef2bde9f92ba12b99d844e6e030e2a32ac",
+      "sha256": "ee4d80b23bb91ac45c597020a1a7eebe6fdfb933bc798f05e69f02b9250d0b90",
+      "lines": 75,
+      "full_source_read": true,
+      "selected_tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+      "public_headers": [
+        {
+          "name": "n07a_coordinatePair_iteratedFDeriv_bound",
+          "header": "theorem n07a_coordinatePair_iteratedFDeriv_bound\n    {f g : PolarPoint → ℝ} {x : PolarPoint}\n    (hf : ContDiffAt ℝ ∞ f x) (hg : ContDiffAt ℝ ∞ g x)\n    (d c : ℝ) {n : ℕ} (hn : 0 < n) :\n    ‖iteratedFDeriv ℝ n (fun y => (d + c * f y, y.2 + g y)) x‖ ≤\n      |c| * ‖iteratedFDeriv ℝ n f x‖ + 1 + ‖iteratedFDeriv ℝ n g x‖",
+          "header_sha256": "034d617780ea45dbf54d4ea0aadf5adcc1c53b1db20d4c71c19c70e783ce1556"
+        }
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aGeometryLengthBounds.lean",
+      "blob": "2c336c9315bc5aa70efc149544448e30a2be0967",
+      "sha256": "31f0cce08f7612f3fdee200cc3f077796510bd12534af8287a6b866ba0b2c47b",
+      "lines": 89,
+      "full_source_read": true,
+      "selected_tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+      "public_headers": [
+        {
+          "name": "n07aCanonicalUnit_jet_inverse",
+          "header": "theorem n07aCanonicalUnit_jet_inverse (m : ℕ) (hm : K.left m < K.right m)\n    (f : PolarPoint → ℝ) (a b : ℕ) (y : PolarPoint) :\n    mixedDerivative a b f y = (K.right m - K.left m)⁻¹ ^ a *\n      mixedDerivative a b (f ∘ CanonicalGeometry.canonicalUnitPoint K m)\n        (n07aCanonicalUnitInversePoint K m y)",
+          "header_sha256": "7ef05b03ac0395fc188dd4c81d23e56cf384a6b29e3956fd017ec9ce00ff9338"
+        },
+        {
+          "name": "n07a_physicalLength_subpower",
+          "header": "theorem n07a_physicalLength_subpower\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (href : CanonicalGeometry.ReferenceJets D T S C L K) :\n    N07aSampleSubpower T K (fun m => K.physicalRight m - K.physicalLeft m)",
+          "header_sha256": "a64c74e7a6d8c1facf029bb2096e35be6a20cd5bce65eea65f5f0ce0dece99df"
+        },
+        {
+          "name": "n07a_physicalLengthInverse_subpower",
+          "header": "theorem n07a_physicalLengthInverse_subpower\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (href : CanonicalGeometry.ReferenceJets D T S C L K) :\n    N07aSampleSubpower T K (fun m => (K.physicalRight m - K.physicalLeft m)⁻¹)",
+          "header_sha256": "f0d89532c42c0f44a249391b310aa80d1ac2903f766443843b19fdf18b2130e7"
+        },
+        {
+          "name": "n07a_canonicalLength_subpower",
+          "header": "theorem n07a_canonicalLength_subpower\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (href : CanonicalGeometry.ReferenceJets D T S C L K) :\n    N07aSampleSubpower T K (fun m => K.right m - K.left m)",
+          "header_sha256": "722e8e28ba9001173a26230ef2c71806108981a888f89d624890e93015d86349"
+        },
+        {
+          "name": "n07a_canonicalLengthInverse_subpower",
+          "header": "theorem n07a_canonicalLengthInverse_subpower\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (href : CanonicalGeometry.ReferenceJets D T S C L K) :\n    N07aSampleSubpower T K (fun m => (K.right m - K.left m)⁻¹)",
+          "header_sha256": "fda1023d5029e9bc119ce2aaa8941ee53925adabaa67fd3e6e760de0ca225946"
+        }
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aAngularFixedJetEnvelope.lean",
+      "blob": "66d54099e14b61ba98b641c1016f9ee06641e117",
+      "sha256": "e74315ddb703d807c5c189c7d178ea9ff141dcc8d7ffa683153986a413e68f7d",
+      "lines": 146,
+      "full_source_read": true,
+      "selected_tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+      "public_headers": [
+        {
+          "name": "comp",
+          "header": "theorem comp\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    {W : ℕ → Set E} {V : ℕ → Set F} {w : ℕ → ℝ}\n    {f : ℕ → F → G} {Φ : ℕ → E → F}\n    (hf : N07aAngularFixedJetEnvelope T K V w f) (hw : ∀ m, 0 ≤ w m)\n    (hmaps : ∀ m, MapsTo (Φ m) (W m) (V m))\n    (hfs : ∀ m x, x ∈ W m → ContDiffAt ℝ ∞ (f m) (Φ m x))\n    (hΦs : ∀ m x, x ∈ W m → ContDiffAt ℝ ∞ (Φ m) x)\n    (hΦ : ∀ n : ℕ, 0 < n → ∃ e : ℕ → ℝ,\n      N07aSampleSubpower T K e ∧ (∀ m, 0 ≤ e m) ∧\n        ∀ m x, x ∈ W m → ‖iteratedFDeriv ℝ n (Φ m) x‖ ≤ e m) :\n    N07aAngularFixedJetEnvelope T K W w (fun m => f m ∘ Φ m)",
+          "header_sha256": "73bac1e75f2a67be671d1a7a653c7e2d6eb74ec3169bb40aea319bd9a3a169fe"
+        },
+        {
+          "name": "mul",
+          "header": "theorem mul\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    {W : ℕ → Set E} {v w : ℕ → ℝ} {f g : ℕ → E → ℝ}\n    (hW : ∀ m, IsOpen (W m))\n    (hfs : ∀ m, ContDiffOn ℝ ∞ (f m) (W m))\n    (hgs : ∀ m, ContDiffOn ℝ ∞ (g m) (W m))\n    (hf : N07aAngularFixedJetEnvelope T K W v f)\n    (hg : N07aAngularFixedJetEnvelope T K W w g)\n    (hv : ∀ m, 0 ≤ v m) (hw : ∀ m, 0 ≤ w m) :\n    N07aAngularFixedJetEnvelope T K W (fun m => v m * w m)\n      (fun m x => f m x * g m x)",
+          "header_sha256": "f21e39aa16c9f271edd37d27ef496de0e911cfded9d8037de78bdf05ea4910a5"
+        },
+        {
+          "name": "n07a_fixedJetEnvelope_of_sampleJetBounds",
+          "header": "theorem n07a_fixedJetEnvelope_of_sampleJetBounds\n    {E : Type*} [AddCommGroup E] [Module ℝ E]\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    {p : ℕ → Seminorm ℝ E} {U : Set E} {W : ℕ → Set PolarPoint}\n    {d : ℕ} {f : E → ℕ → PolarPoint → ℝ}\n    (hf : N07aSampleJetBounds T K p U W d f)\n    (hW : ∀ m, IsOpen (W m))\n    (hfs : ∀ z ∈ U, ∀ m, ContDiffOn ℝ ∞ (f z m) (W m))\n    (z : E) (hz : z ∈ U) :\n    N07aAngularFixedJetEnvelope T K W (fun _ => 1) (f z)",
+          "header_sha256": "591cc5deb3d7f8492a39902f4a3bdcae8001f7cc3f06d64060858da134dbec4c"
+        }
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aAngularJacobianEnvelope.lean",
+      "blob": "81b85e8973a267426cc6311dc5ad0f32c28b69fa",
+      "sha256": "abe3838996cb4231a3464b4f76106dfb28c9a91ddb8fc3614c635887cfca008f",
+      "lines": 209,
+      "bytes": 10307,
+      "full_source_read": true,
+      "selected_tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+      "public_headers": [
+        {
+          "name": "n07a_planeJacobian_fixedEnvelope_of_positiveJets",
+          "header": "theorem n07a_planeJacobian_fixedEnvelope_of_positiveJets\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    {W : ℕ → Set PolarPoint} {F : ℕ → PolarPoint → PolarPoint}\n    (hW : ∀ m, IsOpen (W m))\n    (hF : ∀ m, ContDiffOn ℝ ∞ (F m) (W m))\n    (hb : ∀ n : ℕ, 0 < n → ∃ e : ℕ → ℝ,\n      N07aSampleSubpower T K e ∧ (∀ m, 0 ≤ e m) ∧\n        ∀ m x, x ∈ W m → ‖iteratedFDeriv ℝ n (F m) x‖ ≤ e m) :\n    N07aAngularFixedJetEnvelope T K W (fun _ => 1) (fun m => planeJacobian (F m))",
+          "header_sha256": "17182e236c53314050fddd4a2f756155bc804c79b35539b207a4651ad5f8f02e"
+        },
+        {
+          "name": "n07a_norm_iteratedFDeriv_abs",
+          "header": "theorem n07a_norm_iteratedFDeriv_abs\n    {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n    {f : E → ℝ} {x : E} (hf : ContinuousAt f x) (hne : f x ≠ 0) (n : ℕ) :\n    ‖iteratedFDeriv ℝ n (fun y => |f y|) x‖ = ‖iteratedFDeriv ℝ n f x‖",
+          "header_sha256": "931c0c99d247ff85b36635c13880aa593fa14197a7c5f1f57d26d0dcd7b35a4e"
+        },
+        {
+          "name": "n07a_actual_inverseChart_jacobian_abs",
+          "header": "theorem n07a_actual_inverseChart_jacobian_abs\n    {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}\n    (hgeom : CanonicalGeometry D S C K base ε)\n    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)\n    (hs : stateSector S z.1) (m : ℕ) {y : PolarPoint}\n    (hy : y ∈ canonicalOpen S K m) :\n    |planeJacobian (K.inverseChart z m) y| =\n      |planeJacobian (K.chart z m) (K.inverseChart z m y)|⁻¹",
+          "header_sha256": "0cba0e62f111b08dae511a96b7360378e517ece700fa5149fe53b07e402676df"
+        },
+        {
+          "name": "N07aAngularFixedJetEnvelope.abs",
+          "header": "theorem N07aAngularFixedJetEnvelope.abs\n    {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n    {W : ℕ → Set E} {w : ℕ → ℝ} {f : ℕ → E → ℝ}\n    (hfs : ∀ m x, x ∈ W m → ContinuousAt (f m) x)\n    (hne : ∀ m x, x ∈ W m → f m x ≠ 0)\n    (hf : N07aAngularFixedJetEnvelope T K W w f) :\n    N07aAngularFixedJetEnvelope T K W w (fun m x => |f m x|)",
+          "header_sha256": "4d6b000eb7dac4d0ad5aa5562b52595a2fae3f361939e7d583ac7d1f7de86f25"
+        }
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/OneHighCompositionJets.lean",
+      "blob": "55ee6f621f2b0a63a723dfdceab93144234f9ab4",
+      "sha256": "c9d18bc3cd346d55434c7b39fcbd8589c226bae2cd4b1ad46597288735692af3",
+      "lines": 79,
+      "full_source_read": true,
+      "selected_tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+      "public_headers": [
+        {
+          "name": "norm_iteratedFDeriv_comp_le_partition_sum",
+          "header": "theorem norm_iteratedFDeriv_comp_le_partition_sum {Φ : F → K} {v : E → F} {x : E}\n    (hΦ : ContDiffAt ℝ ∞ Φ (v x)) (hv : ContDiffAt ℝ ∞ v x) (n : ℕ) :\n    ‖iteratedFDeriv ℝ n (Φ ∘ v) x‖ ≤\n      ∑ c : OrderedFinpartition n,\n        ‖iteratedFDeriv ℝ c.length Φ (v x)‖ *\n          ∏ j, ‖iteratedFDeriv ℝ (c.partSize j) v x‖",
+          "header_sha256": "251c8791df5757fc20ea262182e6f45b6041a7f0b757ac0b65648da9231d5ff7"
+        },
+        {
+          "name": "norm_iteratedFDeriv_comp_le_bounded_partition_sum",
+          "header": "theorem norm_iteratedFDeriv_comp_le_bounded_partition_sum\n    {Φ : F → K} {v : E → F} {x : E}\n    (hΦ : ContDiffAt ℝ ∞ Φ (v x)) (hv : ContDiffAt ℝ ∞ v x)\n    {n : ℕ} (hn : 0 < n) {B : ℕ → ℝ}\n    (hB : ∀ m, 1 ≤ m → m ≤ n → ‖iteratedFDeriv ℝ m Φ (v x)‖ ≤ B m) :\n    ‖iteratedFDeriv ℝ n (Φ ∘ v) x‖ ≤\n      ∑ c : OrderedFinpartition n, B c.length *\n        ∏ j, ‖iteratedFDeriv ℝ (c.partSize j) v x‖",
+          "header_sha256": "970e82e0052ef192903999b4b688dad43526ebbb4f291bc1403ac6e18d428404"
+        }
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07bFiniteJetAlgebra",
+      "path": "src/ContinuousFlexibility/Analysis/N07bFiniteJetAlgebra.lean",
+      "blob": "b32f0509062908c774662b2711b2d76ac6a6d238",
+      "sha256": "002a1eaf01f638dd1247425924de085e01985113f39588265ac046986ce88dd1",
+      "bytes": 5515,
+      "lines": 119,
+      "full_source_read": true,
+      "selected_tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+      "public_headers": [
+        {
+          "name": "n07b_norm_jet_mul_le",
+          "header": "theorem n07b_norm_jet_mul_le\n    {U : Set E} {f g : E → ℝ} (hU : IsOpen U)\n    (hf : ContDiffOn ℝ ∞ f U) (hg : ContDiffOn ℝ ∞ g U)\n    {x : E} (hx : x ∈ U) {A B : ℝ} (hA : 0 ≤ A) (hB : 0 ≤ B)\n    {n b : ℕ}\n    (hfj : ∀ i : ℕ, i ≤ n → ‖iteratedFDeriv ℝ i f x‖ ≤ A)\n    (hgj : ∀ i : ℕ, i ≤ n → ‖iteratedFDeriv ℝ i g x‖ ≤ B)\n    (hn : n ≤ b) :\n    ‖iteratedFDeriv ℝ n (fun y => f y * g y) x‖ ≤\n      n07bFiniteJetProductConstant b * A * B",
+          "header_sha256": "49970d772cb3334a3ff977fc179a1185418946e7a1c3730e3d1bd2a52fbb65dd"
+        },
+        {
+          "name": "n07b_norm_jet_directional_le",
+          "header": "theorem n07b_norm_jet_directional_le\n    {U : Set E} {f : E → ℝ} (hU : IsOpen U)\n    (hf : ContDiffOn ℝ ∞ f U) {x : E} (hx : x ∈ U) (n : ℕ) (v : E) :\n    ‖iteratedFDeriv ℝ n (fun y => fderiv ℝ f y v) x‖ ≤\n      ‖v‖ * ‖iteratedFDeriv ℝ (n + 1) f x‖",
+          "header_sha256": "1dce9cb0af0bbbf73e214667e27c2e8d3023caf28f9a815f9870d010572ec611"
+        }
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets",
+      "path": "src/ContinuousFlexibility/Analysis/PointwiseAffineMaterialJets.lean",
+      "blob": "4814a6aa7254709e1ab6d28b8c4f74d77929f53c",
+      "sha256": "3bcba380a61ce99114b245672257334ecdf4c6e5f538247fe47a6417b8219c5e",
+      "bytes": 2462,
+      "lines": 57,
+      "full_source_read": true,
+      "selected_tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+      "public_headers": [
+        {
+          "name": "norm_iteratedFDeriv_comp_linear_le_at",
+          "header": "theorem norm_iteratedFDeriv_comp_linear_le_at\n    {X Y Z : Type*} [NormedAddCommGroup X] [NormedSpace ℝ X]\n    [NormedAddCommGroup Y] [NormedSpace ℝ Y]\n    [NormedAddCommGroup Z] [NormedSpace ℝ Z]\n    (L : X →L[ℝ] Y) {f : Y → Z} {x : X}\n    (hf : ContDiffAt ℝ ∞ f (L x)) (n : ℕ) :\n    ‖iteratedFDeriv ℝ n (f ∘ L) x‖ ≤ ‖iteratedFDeriv ℝ n f (L x)‖ * ‖L‖ ^ n",
+          "header_sha256": "84ecf783e02e40cf2e9bb286e098e3f097b6b57377735d62a1b47dbf8808893f"
+        }
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aMaterialPieceBounds.lean",
+      "blob": "321fa9566f12829d7c6769789a9b51d2fa13fc1f",
+      "sha256": "a452494a4445a85e2261f014c14034ca704cb976449d652b833af2e0a5fb888e",
+      "lines": 128,
+      "full_source_read": true,
+      "selected_tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+      "public_headers": [
+        {
+          "name": "n07a_material_piece_ratio_envelope",
+          "header": "theorem n07a_material_piece_ratio_envelope\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (href : CanonicalGeometry.ReferenceJets D T S C L K)\n    (hinterval : ∀ m, K.physicalLeft m < K.physicalRight m) :\n    ∃ e : ℕ → ℝ, N07aSampleSubpower T K e ∧ (∀ m, 1 ≤ e m) ∧\n      ∀ m p, p ∈ referencePhysicalPieceOpen S K m →\n        T.H p.1 / T.H (T.sample (K.cell m)) ≤ e m ∧\n        T.H (T.sample (K.cell m)) / T.H p.1 ≤ e m ∧\n        T.M p.1 / T.M (T.sample (K.cell m)) ≤ e m ∧\n        T.M (T.sample (K.cell m)) / T.M p.1 ≤ e m",
+          "header_sha256": "6d29caba42e06ef2c2b60048699c77fe31cc63003a498c95cb9d2ce301630dc2"
+        }
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aMaterialProductBounds.lean",
+      "blob": "705984daec9322d629166432628ecd887534171f",
+      "sha256": "cb6614c253d91ae45cc383551456cd0b345acd5e78ad2e4117a549560c84bf90",
+      "lines": 134,
+      "full_source_read": true,
+      "selected_tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+      "public_headers": [
+        {
+          "name": "one_power",
+          "header": "theorem one_power {f : ℕ → ℝ} (hf : N07aSampleSubpower T K f) :\n    ∃ C : ℝ, 0 < C ∧ ∀ m, |f m| ≤ C * T.M (T.sample (K.cell m))",
+          "header_sha256": "cbc0ee89211102eec7efe3dec4776c3bc22733d0bb52fa0903d241255791d2a4"
+        }
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CylinderMixedJets.lean",
+      "blob": "3dc20e779221e16f9be32dff13d22e978b5a048d",
+      "sha256": "ae19c58f66f0778411f64607f52acf0525aceb27036c9d1ac1825e0e46e3614d",
+      "lines": 253,
+      "full_source_read": true,
+      "selected_tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+      "public_headers": [
+        {
+          "name": "norm_iteratedFDeriv_le_of_mixedDerivative",
+          "header": "theorem norm_iteratedFDeriv_le_of_mixedDerivative {U : Set PolarPoint}\n    {f : PolarPoint → ℝ} (hU : IsOpen U) (hf : ContDiffOn ℝ ∞ f U)\n    (n : ℕ) {p : PolarPoint} (hp : p ∈ U) {M : ℝ} (hM : 0 ≤ M)\n    (h : ∀ a b : ℕ, a + b = n → ‖mixedDerivative a b f p‖ ≤ M) :\n    ‖iteratedFDeriv ℝ n f p‖ ≤ (2 : ℝ) ^ n * M",
+          "header_sha256": "7483099b363898d4d19c12a30d23947bb794bdd985e4eae987785da10017cf57"
+        }
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean",
+      "blob": "4a0f2095b9c16558d889f814750f1fa648590e52",
+      "sha256": "cf481c45cf6ab2b1d5c1b3e9b9588bd3189291fe79e122a60cf355c4a07a1152",
+      "lines": 118,
+      "full_source_read": true,
+      "public_headers": [
+        {
+          "name": "n04Coordinates_unitAtom_absolute_envelope",
+          "header": "theorem n04Coordinates_unitAtom_absolute_envelope\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (hfloor : ∀ m, 1 ≤ T.E0 (T.sample (K.cell m)))\n    (href : CanonicalGeometry.ReferenceJets D T S C L K)\n    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε) :\n    ∃ loss : ℕ, ∀ s : ℕ, ∃ A B : ℝ, 0 < A ∧ 0 < B ∧\n      ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m v p,\n        p ∈ CanonicalGeometry.unitStrip → ∀ i j : ℕ, i + j ≤ s →\n          |mixedDerivative i j\n            (CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m v) p| ≤\n            A * T.E0 (T.sample (K.cell m)) ^ B *\n              (1 + CanonicalGeometry.parameterGrading S (s + loss) z)"
+        }
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentFrechetJets",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentFrechetJets.lean",
+      "blob": "2a5a26576abbc983bef6f9c51735cd28f5623859",
+      "sha256": "c75e4efb81cbb6c70de8e7fa278f8942ae97a6ae6ff9a847142fd757f1e89dad",
+      "lines": 76,
+      "full_source_read": true,
+      "status": "CI176_PROPOSED_REPAIR_NOT_CLAIMED_GREEN_NOT_REQUIRED_FOR_RECOMMENDED_ROUTE",
+      "public_headers": [
+        {
+          "name": "n04Coordinates_unitAtom_absolute_iteratedFDeriv_envelope",
+          "header": "theorem n04Coordinates_unitAtom_absolute_iteratedFDeriv_envelope\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}\n    {base : ℕ} {ε : ℝ}\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (hfloor : ∀ m, 1 ≤ T.E0 (T.sample (K.cell m)))\n    (href : CanonicalGeometry.ReferenceJets D T S C L K)\n    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε) :\n    ∃ loss : ℕ, ∀ N : ℕ, ∃ A B : ℝ, 0 < A ∧ 0 < B ∧\n      ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m v p,\n        p ∈ CanonicalGeometry.unitStrip → ∀ k : ℕ, k ≤ N →\n          ‖iteratedFDeriv ℝ k\n            (CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m v) p‖ ≤\n            (2 : ℝ) ^ N * A * T.E0 (T.sample (K.cell m)) ^ B *\n              (1 + CanonicalGeometry.parameterGrading S (N + loss) z)"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "exact_Git_blob_and_SHA256_verified_for_each_listed_provider": true,
+    "full_source_read_for_each_listed_provider": true,
+    "Nonlinear_exact_relevant_definitions_read": true,
+    "existing_comp_product_Jacobian_headers_have_no_hidden_Primitive_or_N04_hypothesis": true,
+    "no_new_Lean": true,
+    "no_active_edit": true,
+    "no_ref_or_index_mutation": true,
+    "no_local_execution_or_elaboration": true,
+    "no_CI_query": true,
+    "no_new_4k_source_or_name_scan": true,
+    "no_fresh_mathlib_full_source_audit_claim": "Public project lemmas supply the quantitative steps. Basic local smoothness/germ operations are the same APIs used by the exact listed source proofs.",
+    "output_is_a_route_not_a_full_peer_or_completed_estimate": true
+  }
+}

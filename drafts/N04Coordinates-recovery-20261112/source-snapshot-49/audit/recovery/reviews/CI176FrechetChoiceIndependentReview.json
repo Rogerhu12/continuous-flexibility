@@ -1,0 +1,109 @@
+{
+  "schema": "N04-independent-source-repair-review-v1",
+  "reviewer": "/root/audit_coordinates",
+  "author": "/root",
+  "status": "PASS_STATIC_FULL_SOURCE_AND_EXACT_DELTA",
+  "intended_path": "audit/recovery/reviews/CI176FrechetChoiceIndependentReview.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "source_path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentFrechetJets.lean",
+  "baseline": {
+    "head": "ae9eb8801b4bd629989e1f4b46f195263adb188d",
+    "tree": "57a0345b93f168e268e9aac63612b635fd695262",
+    "actual_path_fetched": true,
+    "actual_preimage_exact": true
+  },
+  "before": {
+    "blob": "2a5a26576abbc983bef6f9c51735cd28f5623859",
+    "sha256": "c75e4efb81cbb6c70de8e7fa278f8942ae97a6ae6ff9a847142fd757f1e89dad",
+    "lines": 76
+  },
+  "after": {
+    "blob": "ca9b054b984497e689d6d5d15d8c35a9506a1980",
+    "sha256": "d823d9144c089027e9c06c6489496fcd4d39e90cd3c468b6eed3735841560e8a",
+    "bytes": 3792,
+    "lines": 84
+  },
+  "candidate_owner": {
+    "blob": "0f48360e236dc168976af020bf1e0c949f2135ba",
+    "sha256": "71e5acec231349f8be79dcdabb3dd7476a73ee735feefcd6e9a6a80e6cc618cb"
+  },
+  "diagnostics": {
+    "failure_blob": "6a8e4a9a901fdaf6883197a261087d08d11e5681",
+    "failure_sha256": "8845a9e0b5227ba2bdaf586bdcfb8eeec4f6a94ed95d4a5d8e09e78c153787d5",
+    "complete_error_blob": "30bf447c78b3db134e7b327210042ac3100ff3d7",
+    "complete_error_sha256": "1893faaab233ab949d9c563185ff180e349ace915f5fc586bc6820598f1ec769",
+    "log_blob": "a5e1798f69c94b8133274a2de50731944b36e084",
+    "log_sha256": "5dcec6a75eed7e1fbd4b1c81569191283001fd1f79a502b0dae639aab6f8f6a8",
+    "read_scope": "Complete sole diagnostic and failure record; no CI query or new log download.",
+    "finding": "Line 49:2 isDefEq timeout at the initial obtain command with the default 200000 heartbeat limit, despite all eight explicit parameters."
+  },
+  "mechanical_verification": {
+    "before_sha256": "c75e4efb81cbb6c70de8e7fa278f8942ae97a6ae6ff9a847142fd757f1e89dad",
+    "after_sha256": "d823d9144c089027e9c06c6489496fcd4d39e90cd3c468b6eed3735841560e8a",
+    "before_lines": 76,
+    "after_lines": 84,
+    "after_bytes": 3792,
+    "forward_reverse_exact": true,
+    "complete_public_head_identical": true,
+    "prefix_before_proof_identical": true,
+    "tail_identical": true,
+    "each_literal_block_unique": true,
+    "literal_replacements": [
+      {
+        "old": "  obtain ⟨loss, hbound⟩ :=\n    n04Coordinates_unitAtom_absolute_envelope\n      (D := D) (T := T) (S := S) (C := C) (L := L) (K := K)\n      (base := base) (ε := ε) hD hT hfloor href hcur\n",
+        "new": "  have hboundExists :=\n    n04Coordinates_unitAtom_absolute_envelope\n      (D := D) (T := T) (S := S) (C := C) (L := L) (K := K)\n      (base := base) (ε := ε) hD hT hfloor href hcur\n  let loss : ℕ := hboundExists.choose\n  have hbound := hboundExists.choose_spec\n"
+      },
+      {
+        "old": "  obtain ⟨A, B, hA, hB, hb⟩ := hbound N\n",
+        "new": "  let A : ℝ := (hbound N).choose\n  have hBex := (hbound N).choose_spec\n  let B : ℝ := hBex.choose\n  have hAB := hBex.choose_spec\n  have hA : 0 < A := hAB.1\n  have hB : 0 < B := hAB.2.1\n  have hb := hAB.2.2\n"
+      }
+    ],
+    "net_lines": 8,
+    "all_other_bytes_identical": true,
+    "imports_options_local_instances_unchanged": true,
+    "complete_public_head": "theorem n04Coordinates_unitAtom_absolute_iteratedFDeriv_envelope\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}\n    {base : ℕ} {ε : ℝ}\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (hfloor : ∀ m, 1 ≤ T.E0 (T.sample (K.cell m)))\n    (href : CanonicalGeometry.ReferenceJets D T S C L K)\n    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε) :\n    ∃ loss : ℕ, ∀ N : ℕ, ∃ A B : ℝ, 0 < A ∧ 0 < B ∧\n      ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m v p,\n        p ∈ CanonicalGeometry.unitStrip → ∀ k : ℕ, k ≤ N →\n          ‖iteratedFDeriv ℝ k\n            (CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m v) p‖ ≤\n            (2 : ℝ) ^ N * A * T.E0 (T.sample (K.cell m)) ^ B *\n              (1 + CanonicalGeometry.parameterGrading S (N + loss) z) := by\n",
+    "complete_public_head_sha256": "2255b8e17274c161d930ed937702b8e51c8827c934ca25d53b7ad8dccb1abff0"
+  },
+  "providers": [
+    {
+      "blob": "4a0f2095b9c16558d889f814750f1fa648590e52",
+      "sha256": "cf481c45cf6ab2b1d5c1b3e9b9588bd3189291fe79e122a60cf355c4a07a1152",
+      "review_scope": "Full actual 118-line supplier read. Existential loss precedes N; A/B and mixed bounds use the same K, sample, state and N+loss. The supplier itself uses typed choose/choose_spec."
+    },
+    {
+      "blob": "3dc20e779221e16f9be32dff13d22e978b5a048d",
+      "sha256": "ae19c58f66f0778411f64607f52acf0525aceb27036c9d1ac1825e0e46e3614d",
+      "review_scope": "Rechecked the compiled norm_iteratedFDeriv_le_of_mixedDerivative contract and its open-domain/ContDiffOn hypotheses; not a new full-source audit of all 253 lines."
+    },
+    {
+      "blob": "5150d77940daa6a3f95bd505bdb929b2e95db667",
+      "sha256": "e49b0d271a6a1633dce24a1a2ac1c6b2c4ca33f73be8191d59fb827b6e30e8f4",
+      "review_scope": "Read the actual prior N01NeighborhoodRestriction typed Nat choice and cached nested B choice pattern, previously reported compiled. Used as an elaboration-pattern precedent, not as proof that this repair compiles."
+    }
+  ],
+  "mathematical_checks": [
+    "Both the complete 76-line preimage and selected 84-line source were read. No extra assumption, final bound hypothesis, witness replacement, or resource option was introduced.",
+    "hboundExists is exactly the original supplier proof with the same eight explicit parameters. Its Nat choice fixes loss before N.",
+    "For each N, A is the first existential witness; hBex caches its exact choose_spec. B is the second witness and hAB caches its conjunction. hAB.1, hAB.2.1 and hAB.2.2 respectively give positivity of A, positivity of B and the unchanged mixed bound.",
+    "A/B precede every state, piece, atom, unit point and k <= N. The same T.E0(T.sample(K.cell m)) and the same parameterGrading(N+loss) are retained.",
+    "Actual CurrentJets supplies ContDiffOn infinity of the same unit atom. The unchanged cylinder theorem consumes mixed orders i+j=k, converted to i+j<=N using hk.",
+    "The unchanged nonnegative M calculation, 2^k<=2^N, multiplication and final ring reassociation preserve the claimed estimate, including N=0 and k=0."
+  ],
+  "performance_limit": "Avoiding dependent Exists elimination against the large actual atom goal is a supported static repair strategy, not a profiler-verified unique cause. Only the next CI can establish that the default-budget timeout is resolved.",
+  "findings": [],
+  "validation": {
+    "local_lean": false,
+    "compilation": false,
+    "ci_queries": false,
+    "resource_increase": false,
+    "active_or_ref_edits": false,
+    "whole_graph_rescan": false,
+    "scope": "Only the selected 84-line source is approved statically. The 82-line working version is not selected. CI176 remains failed; no complete-green budget credit is asserted."
+  },
+  "budget_record": {
+    "net_repair_lines": 8,
+    "parent_reported_draft_total": 19980,
+    "parent_reported_remaining": 20,
+    "conditional_credit_after_full_small_group_green_only": 255
+  }
+}

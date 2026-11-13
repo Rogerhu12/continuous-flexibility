@@ -1,0 +1,63 @@
+{
+  "schema": "N04-source-only-CI-repair-staging-v1",
+  "ci_round": 177,
+  "parent": "ae9eb8801b4bd629989e1f4b46f195263adb188d",
+  "commit": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+  "tree": "da843557a720e7424e680ec2eaa3de49ad7ea07a",
+  "complete_green": "a195d1ecf1cacb20c98250e601e58489e0239d86",
+  "failure": "6a8e4a9a901fdaf6883197a261087d08d11e5681",
+  "complete_error": "30bf447c78b3db134e7b327210042ac3100ff3d7",
+  "source": {
+    "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentFrechetJets.lean",
+    "before": {
+      "blob": "2a5a26576abbc983bef6f9c51735cd28f5623859",
+      "sha256": "c75e4efb81cbb6c70de8e7fa278f8942ae97a6ae6ff9a847142fd757f1e89dad",
+      "lines": 76
+    },
+    "after": {
+      "blob": "ca9b054b984497e689d6d5d15d8c35a9506a1980",
+      "sha256": "d823d9144c089027e9c06c6489496fcd4d39e90cd3c468b6eed3735841560e8a",
+      "bytes": 3792,
+      "lines": 84
+    }
+  },
+  "reviewed_owner": "844b42003287d8c180d47169b10235f025f0d72c",
+  "peer": "289de5495c624ef071970a1ba54ef9de4fce5ea0",
+  "git_parent_diff": {
+    "paths": 1,
+    "added": 10,
+    "deleted": 2
+  },
+  "git_green_diff": {
+    "paths": 8,
+    "added": 588,
+    "deleted": 0
+  },
+  "generated_imports": 4506,
+  "checked_imports": 4241,
+  "whole_root_lag": 265,
+  "conservative_budget": 853,
+  "limit": 20000,
+  "exact_blob_paths": 4802,
+  "imports_head_resource_options_unchanged": true,
+  "main_rules_checked": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "draft_budget": {
+    "active_source_lines_since_full_green174": 588,
+    "full_checked_root_lag": 265,
+    "total": 853,
+    "draft_prior": 19972,
+    "draft_after": 19980,
+    "remaining": 20,
+    "only_after_complete_small_group_green": {
+      "credit": 255,
+      "components": [
+        100,
+        84,
+        71
+      ],
+      "result": 19725
+    },
+    "fixed131_still_held": true
+  },
+  "next_fixed131": "Held until full green. Exact two owned path destinations corrected; source fingerprints, graph and19935 budget unchanged."
+}

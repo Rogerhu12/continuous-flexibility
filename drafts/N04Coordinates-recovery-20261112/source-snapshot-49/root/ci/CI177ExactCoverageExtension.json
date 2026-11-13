@@ -1,0 +1,101 @@
+{
+  "schema": "N04-small8-coverage-extension-v1",
+  "head": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+  "baseline": "a195d1ecf1cacb20c98250e601e58489e0239d86",
+  "baseline_graph": "9f5480dfc6e6e901e135b15d1d4424245b1e5ae1",
+  "baseline_coverage": "2423233254216be57bae5c892f40909e10361544",
+  "actual_deltas": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ActualNegativeMovingReferenceUnitPoint.lean",
+      "blob": "aba2322ac91263cc9b63a6f487c5338f21667574"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentFrechetJets.lean",
+      "blob": "ca9b054b984497e689d6d5d15d8c35a9506a1980"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ActualRetainedReference.lean",
+      "blob": "ca7674d50e07ae8fbccfff307348308327941342"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01PrimitiveFixedWitnessConstruction.lean",
+      "blob": "fa468a78f48266fb1c0603e9b16988a50d5a4fb4"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01RetainedPrimitiveConstruction.lean",
+      "blob": "b4c99756ab69d37a0a3ce2c61570bed32f749885"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01aFixedReferencePrimitiveContext.lean",
+      "blob": "41ee0aaa4a3971691bfdc8a8832a87300d97a863"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04MaterialRadiusLocalJets.lean",
+      "blob": "c4ce6d627aecdad5dd13050f972c8b1e85e03ba6"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/NeighborhoodFlowRetainedGeometry.lean",
+      "blob": "1e5acd56f27b8dfe803c4ee990b470e839d47e0d"
+    }
+  ],
+  "all_changes_new_nonblueprint_sources": true,
+  "imports_resolve": true,
+  "first40": [
+    "ContinuousFlexibility.Analysis.AbsoluteReciprocalJetBounds",
+    "ContinuousFlexibility.Analysis.ActualAtlasCutFirstJets",
+    "ContinuousFlexibility.Analysis.ActualNegativeMovingReferenceUnitPoint",
+    "ContinuousFlexibility.Analysis.ActualNegativeOppositeRootFields",
+    "ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity",
+    "ContinuousFlexibility.Analysis.ActualPositiveGaugeRootFirstJets",
+    "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+    "ContinuousFlexibility.Analysis.ActualPositiveReferenceFirstJets",
+    "ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation",
+    "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+    "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+    "ContinuousFlexibility.Analysis.AdjugateAiryTransport",
+    "ContinuousFlexibility.Analysis.AdjugateInversePrincipalField",
+    "ContinuousFlexibility.Analysis.AdjugatePrincipalField",
+    "ContinuousFlexibility.Analysis.AdjugatePrincipalFiniteJets",
+    "ContinuousFlexibility.Analysis.AffineMaterialSampling",
+    "ContinuousFlexibility.Analysis.AffineWeightedCompositionJets",
+    "ContinuousFlexibility.Analysis.AiryFirstJetMatching",
+    "ContinuousFlexibility.Analysis.AiryHalfHolonomy",
+    "ContinuousFlexibility.Analysis.AiryInteriorChartMaterialJets",
+    "ContinuousFlexibility.Analysis.AngularFiberEndpointJets",
+    "ContinuousFlexibility.Analysis.AngularFiberFiniteJetBounds",
+    "ContinuousFlexibility.Analysis.AngularInverseFirstDerivative",
+    "ContinuousFlexibility.Analysis.AngularRegularity",
+    "ContinuousFlexibility.Analysis.AngularRegularityIntegral",
+    "ContinuousFlexibility.Analysis.AngularSimpleDivisionBounds",
+    "ContinuousFlexibility.Analysis.AngularSineMixedBounds",
+    "ContinuousFlexibility.Analysis.AngularSineQuotient",
+    "ContinuousFlexibility.Analysis.AngularTaylorDivision",
+    "ContinuousFlexibility.Analysis.AngularTaylorPolynomial",
+    "ContinuousFlexibility.Analysis.BoundaryJetClosure",
+    "ContinuousFlexibility.Analysis.BoundaryRadialFrechetJets",
+    "ContinuousFlexibility.Analysis.BoundaryTaylorBounds",
+    "ContinuousFlexibility.Analysis.BoundaryTaylorCanonicalExtension",
+    "ContinuousFlexibility.Analysis.BoundaryTaylorDensity",
+    "ContinuousFlexibility.Analysis.BoundaryTaylorHeight",
+    "ContinuousFlexibility.Analysis.BoundaryTaylorMatching",
+    "ContinuousFlexibility.Analysis.BoundaryTaylorPrincipalRemainder",
+    "ContinuousFlexibility.Analysis.BufferedRadialAuxiliaryColumn",
+    "ContinuousFlexibility.Analysis.CanonicalActualEndpointFields"
+  ],
+  "quick_count": 1019,
+  "after_success": {
+    "default_project": 4564,
+    "total_project": 4570,
+    "default_all_src": 4568,
+    "total_all_src": 4574,
+    "combined_project": 4568,
+    "combined_all_src": 4572,
+    "remaining_unreached": [
+      "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+      "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth"
+    ]
+  },
+  "status": "COMPLETE_SUCCESS_ACTUAL_LOG_TARGET_COUNT_AND_FIRST40_MATCH",
+  "generated_root_imports": 4506,
+  "full_jobs": 8550
+}

@@ -1,0 +1,130 @@
+{
+  "schema": "N04-readonly-actual-partition-extension-api-review-v1",
+  "reviewer": "/root/audit_coordinates",
+  "status": "MATHEMATICAL_AND_PINNED_API_ROUTE_CONFIRMED_NOT_IMPLEMENTED",
+  "intended_path": "audit/recovery/CanonicalPrimitiveStageEAlmostEverywhereExtensionRoute.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "mathlib_commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "project_supplier": {
+    "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+    "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+    "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+    "referenceDomain": "forall m, physicalPieceOpen S K (C.referenceState,0) m = referencePhysicalPieceOpen S K m",
+    "partition": "forall z in stateNeighborhood S C base epsilon, stateSector S z.1 -> exists E : Set PolarPoint, volume E = 0 and forall p in annularOpen D minus E, exists unique m with p in physicalPieceOpen S K z m"
+  },
+  "actual_inputs": [
+    "The same CanonicalGeometry certificate hgeom, with actual reference-state neighborhood membership hrefmem and sector membership hsref.",
+    "f,g : PolarPoint -> Real continuous on annularOpen D, supplied from their actual definitions.",
+    "For every actual referencePhysicalPieceOpen S K m, the already proved pointwise inequality f<=g on that piece."
+  ],
+  "sequence": [
+    "Apply hgeom.partition (C.referenceState,0) hrefmem hsref to get the actual two-dimensional null set E and cover. No separate one-dimensional partition construction is needed.",
+    "Use MeasureTheory.measure_eq_zero_iff_ae_notMem.mp hE to obtain forall-a.e. p with respect to global volume, p notin E. E need not be measurable.",
+    "Transport this event by MeasureTheory.ae_restrict_of_ae to volume.restrict (annularOpen D). Intersect with MeasureTheory.ae_restrict_mem hU.measurableSet, where hU is the actual open annular product.",
+    "For an actual p in the intersection, obtain m from the cover and rewrite its membership using hgeom.referenceDomain m. Apply the real piece inequality, then min_eq_left, to prove min(f p)(g p)=f p.",
+    "Obtain ContinuousOn (fun p => min(f p)(g p)) U pointwise by Filter.Tendsto.min (hf p hp) (hg p hp). This is the generated to_dual counterpart of the exact pinned Filter.Tendsto.max theorem.",
+    "Apply MeasureTheory.Measure.eqOn_open_of_ae_eq with mu := (volume : Measure PolarPoint), the restricted a.e. equality, open U, and the two ContinuousOn proofs.",
+    "For p in U, conclude f p<=g p by (heq p hp).symm.trans_le (min_le_right _ _). This avoids any iff-name ambiguity."
+  ],
+  "exact_api": {
+    "extension": "MeasureTheory.Measure.eqOn_open_of_ae_eq {f g : X -> Y} (h : f =ae[mu.restrict U] g) (hU : IsOpen U) (hf : ContinuousOn f U) (hg : ContinuousOn g U) : EqOn f g U",
+    "extension_context": "TopologicalSpace X; MeasurableSpace X; TopologicalSpace Y; T2Space Y; IsOpenPosMeasure mu. The mu parameter is implicit at the theorem and may be passed explicitly by name.",
+    "null_event": "MeasureTheory.measure_eq_zero_iff_ae_notMem : mu s = 0 <-> forall-a.e. a with respect to mu, a notin s",
+    "restriction": "MeasureTheory.ae_restrict_of_ae {s} {p} (h : forall-a.e. x with respect to mu, p x) : forall-a.e. x with respect to mu.restrict s, p x",
+    "restricted_membership": "MeasureTheory.ae_restrict_mem (hs : MeasurableSet s) : forall-a.e. x with respect to mu.restrict s, x in s",
+    "continuous_min": "Filter.Tendsto.min, generated from the to_dual max declaration in pinned OrderClosed.lean",
+    "inequality_to_equality": "min_eq_left (h : a<=b) : min a b = a",
+    "equality_to_inequality": "min_eq_left_iff.mp is the iff API if desired; alternatively use equality.symm.trans_le (min_le_right _ _)."
+  },
+  "important_corrections": [
+    "The pinned null-set theorem is measure_eq_zero_iff_ae_notMem, not ae_not_mem.",
+    "min_eq_left is an implication from an inequality, not an iff supporting .mp.",
+    "Pass global volume to eqOn_open_of_ae_eq. The theorem itself restricts the measure to U; do not request global IsOpenPosMeasure of volume.restrict U.",
+    "Use the pointwise Filter.Tendsto.min proof for ContinuousOn; no unverified ContinuousOn.min overload is required.",
+    "Reference-state helper theorems are not all available from the proposed three imports: reference_mem_stateNeighborhood is in Analysis.StateNeighborhood, while referenceStateConditions.stateSector is in Analysis.SolveReturnEquations, which imports Blueprint.Statements. To keep a future leaf independent of Blueprint, take these actual membership facts explicitly or supply them upstream.",
+    "No moving-domain equality, replacement sample, or global inequality premise is introduced. The current state may be fixed in f; the cover used in this argument remains the actual reference partition.",
+    "The route does not supply continuity of an arbitrary piecewise sample envelope. The actual f and g must have the stated global-on-annulus continuity from independent providers."
+  ],
+  "proposed_minimal_imports": [
+    "ContinuousFlexibility.Statements.Nonlinear",
+    "Mathlib.MeasureTheory.Measure.OpenPos",
+    "Mathlib.MeasureTheory.Measure.Lebesgue.Basic"
+  ],
+  "measure_instance_evidence": {
+    "type": "PolarPoint is the ordinary product Real x Real; use its product-volume instance, not an assumed inner-product structure for the product norm.",
+    "chain": "Lebesgue.Basic -> Haar.OfBasis -> Haar.Basic -> Group.Prod -> Group.Measure -> Measure.Prod",
+    "real": "Real volume has the additive Haar instance, whose parents include IsOpenPosMeasure; it is SFinite.",
+    "product": "Measure.Prod explicitly provides prod.instIsOpenPosMeasure and the instance for volume on X x Y, given the component open-positive volumes and SFinite volume on Y."
+  },
+  "providers": [
+    {
+      "path": "Mathlib/MeasureTheory/Measure/OpenPos.lean",
+      "blob": "64b8663d129b8d5d7613fb2bf7583eabf3a4d1d3",
+      "sha256": "e58615b60bff5e995e3133b6e5bf35d22e5f7fded53f23ccd99301926cef5676"
+    },
+    {
+      "path": "Mathlib/MeasureTheory/OuterMeasure/AE.lean",
+      "blob": "1802fcab91bae1a8537d57413d45b28628d6d5b5",
+      "sha256": "de58d3b2aa42d801e9a268df285c32e5aa6ca7ffc5b42bf5eff8f12bda87a00d"
+    },
+    {
+      "path": "Mathlib/MeasureTheory/Measure/Restrict.lean",
+      "blob": "c09895e051ae618e89078cb5ef27a4c11f49d75e",
+      "sha256": "23e9fdc4229631efb2dfb57ad7a6f1a7891d545346393544ebc9ec3d9e2314fb"
+    },
+    {
+      "path": "Mathlib/Topology/Order/OrderClosed.lean",
+      "blob": "9603945a9c797c1d1d695ddf79281f6887211098",
+      "sha256": "e311dbc7fca744dc0f0d4a10e3c838eb4996c2fa8b63e833077c40f763f05444"
+    },
+    {
+      "path": "Mathlib/Order/Defs/LinearOrder.lean",
+      "blob": "e96a831b3d94f29b1d2d790a66530f923ba810b1",
+      "sha256": "dd0130c240109d5bdd532d2b0bd72996941de49af84b4239fa0d1caae555106f"
+    },
+    {
+      "path": "Mathlib/Order/MinMax.lean",
+      "blob": "de014275ed509bebd700df981e9562e26194bbe7",
+      "sha256": "d240cae7cecee39478184cd446d4fc2289166b20db71b1ed59e469805784a80c"
+    },
+    {
+      "path": "Mathlib/MeasureTheory/Measure/Lebesgue/Basic.lean",
+      "blob": "84794cf74fa34664073bbf336adccdefb5bada62",
+      "sha256": "628bcfc45fabd59501cdebf1cc3a8003ef3aba18fc7de4710ca9ffc1033b32d7"
+    },
+    {
+      "path": "Mathlib/MeasureTheory/Measure/Haar/OfBasis.lean",
+      "blob": "3b37fa5afdb3882f15353ad3d2a7f7fff4fa63e5",
+      "sha256": "f9a552df475ecbf1715b4ac85515967bf534ee2484037b49dc4e392eb36d4761"
+    },
+    {
+      "path": "Mathlib/MeasureTheory/Measure/Haar/Basic.lean",
+      "blob": "db04f2087be649474a7b51c5478e67aef0d6dfe5",
+      "sha256": "ede9dfecb46e2512332b7af9307fc8276df0440ed5ad86053bc4664683dbfe4b"
+    },
+    {
+      "path": "Mathlib/MeasureTheory/Group/Prod.lean",
+      "blob": "e823621fb123d95afa5d3c08c5cc347e02649690",
+      "sha256": "fc250b2d8f5b1f5de2f66a0dd5820f486b377af6764b58e88fc1ce23f460e1d9"
+    },
+    {
+      "path": "Mathlib/MeasureTheory/Group/Measure.lean",
+      "blob": "6b47bb8ce072504dfaf9080749c99b525d35c91b",
+      "sha256": "cba62e69e14aafd9e79c41c3209cc75828e5bd7e3bcf46e5af7d8281e43696bd"
+    },
+    {
+      "path": "Mathlib/MeasureTheory/Measure/Prod.lean",
+      "blob": "dcda187671ab2b4ded4e301fb30ca0391eb41c3b",
+      "sha256": "62b4007fc8e0a0ddca557fcdacbe649752764d09c7a97763a5450146cb9d03c9"
+    }
+  ],
+  "scope": {
+    "source_read": "Complete OpenPos was read; exact cited theorem blocks, namespaces and the displayed import/instance chain were read in the other pinned files.",
+    "direct_order_lemma": "No directly equivalent public <= extension lemma was found in the examined OpenPos source; no exhaustive all-mathlib absence claim is made.",
+    "no_new_lean": true,
+    "no_compile": true,
+    "no_ci_queries": true,
+    "no_ref_or_active_edits": true,
+    "conclusion": "The existing public a.e.-equality theorem suffices for the intended Stage E inequality extension. This is a ready implementation route, not a compiled new producer."
+  }
+}

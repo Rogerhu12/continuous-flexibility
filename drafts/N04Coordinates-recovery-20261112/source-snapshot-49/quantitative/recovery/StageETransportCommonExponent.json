@@ -1,0 +1,162 @@
+{
+  "schema": "n04-stageE-common-transport-exponent-v1",
+  "status": "CLOSED_SOURCE_BACKED_READONLY_ROUTE_NOT_NEW_LEAN",
+  "author": "/root/quantitative_route",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "path": "quantitative/recovery/StageETransportCommonExponent.json",
+  "baseline": {
+    "actual_local_HEAD_verified": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+    "relevant177_source_blobs_equal_cached175": true,
+    "no_CI_status_query_or_inference": true
+  },
+  "supplements": [
+    {
+      "blob": "0b712720ca56e40d853e3d1d173f925af1d4ffe0",
+      "sha256": "adab39915ea6bd3955c089f73fccaac911f4421424d36592264f73d6f01b02dd",
+      "role": "piecewise finite derivative/sample envelope route"
+    },
+    {
+      "blob": "7353ec06fd63e6c5f4b17546dcb1805008d357e1",
+      "sha256": "a2ffba30eee833e25779573e35eca3a4dedb82c4791e4bf10a1631cb124d8740",
+      "role": "actual displacement plus local ratio window yields exp1 ratios on reference pieces, followed by continuity"
+    }
+  ],
+  "exact_target": {
+    "definition": "ContinuousFlexibility.Statements.CanonicalPrimitiveGeometry",
+    "transport_lines": [
+      778,
+      797
+    ],
+    "quantifier_order": "forall z in the fixed state neighborhood and satisfying the sector condition, exists the actual tau and q with the qualitative properties, then exists C0 A with C0>0 and A>=0, followed by all physical points and derivative orders.",
+    "four_numeric_fields": [
+      {
+        "field": "q jets",
+        "orders": "0<=n<=2",
+        "rhs": "C0 * T.M(p.1)^A"
+      },
+      {
+        "field": "tau jets",
+        "orders": "1<=n<=2",
+        "rhs": "C0 * T.M(p.1)^A"
+      },
+      {
+        "field": "H ratio",
+        "lhs": "T.H((tau p).1) / T.H(p.1)",
+        "rhs": "C0 * T.E0(p.1)^A"
+      },
+      {
+        "field": "M ratio",
+        "lhs": "T.M((tau p).1) / T.M(p.1)",
+        "rhs": "C0 * T.E0(p.1)^A"
+      }
+    ],
+    "distinction_from_15_material_fields": "materialJets at769-777 has its own independent forall N exists r d C0 A before state, for all15 CanonicalPrimitiveIndex entries. The transport constant may depend on fixed z; this does not prove or alter that separate materialJets field."
+  },
+  "actual_material_facts": {
+    "definition": "IsMaterialData, Analysis.lean67-109",
+    "exact_positive_clause": "forall r in Ioo D.a D.b, 0 < T.ell r and 0 < T.H r and 0 < T.E0 r and 1 <= T.M r",
+    "M_floor": "(hT.2.1 r hr).2.2.2 : 1 <= T.M r",
+    "E0_pointwise_positivity": "(hT.2.1 r hr).2.2.1 : 0 < T.E0 r",
+    "original_E0_at_least_one_not_assumed": true
+  },
+  "existing_public_supplier": {
+    "qualified_name": "ContinuousFlexibility.Statements.materialE0_rpow_le_of_exponent_le",
+    "module": "ContinuousFlexibility.Analysis.N01cPhysicalHeightBounds",
+    "line": 37,
+    "exact_header": "theorem materialE0_rpow_le_of_exponent_le\n    {D : ReferenceData} {T : MaterialData} (hT : IsMaterialData D T)\n    {A B : ℝ} (hAB : A ≤ B) :\n    ∃ K : ℝ, 0 ≤ K ∧ ∀ r ∈ Ioo D.a D.b, T.E0 r ^ A ≤ K * T.E0 r ^ B",
+    "body_read_range": [
+      37,
+      74
+    ],
+    "proof_basis": "Exact endpoint formulas imply E0>=1 on both endpoint collars. The continuous negative-power ratio is bounded on the compact middle interval. The complete proof was read; no local primitive/transport bound is an input.",
+    "private_helper_not_called_by_consumer": true,
+    "specialization": {
+      "A": 0,
+      "B": 1,
+      "hAB": "0 <= 1",
+      "result": "exists K : Real, 0 <= K and forall r in radialCore D, 1 <= K * T.E0 r",
+      "simplification": [
+        "Real.rpow_zero",
+        "Real.rpow_one"
+      ],
+      "dependencies": "Only the original hT. K is selected before z, piece index, and physical point."
+    }
+  },
+  "common_constant_construction": {
+    "derivative_input": "For the fixed z, the previously derived common envelope gives Cd(z)>0 and q jets0..2/tau jets1..2 <= Cd(z)*T.M(p.1) on every reference open piece.",
+    "ratio_input": "The actual hdisp+hwindow argument gives the two required H/M ratios <= Real.exp1 on every reference open piece, on one neighborhood chosen before states.",
+    "choose": "A := (1 : Real); C0 := Cd(z) + Real.exp(1) * K",
+    "positivity": "Cd(z)>0, exp1>0 and K>=0 imply C0>0; 0<=A.",
+    "derivative_check": "Since Cd(z)<=C0 and T.M(p.1)>0, Cd(z)*M<=C0*M=C0*M^1.",
+    "ratio_check": "ratio<=exp1<=exp1*(K*E0)=(exp1*K)*E0<=C0*E0=C0*E0^1.",
+    "uniformity": "Same A=1 and C0 for all four transport fields, every piece, point and requested derivative order. Only Cd and hence C0 may depend on the already-fixed state z; K depends solely on hT.",
+    "no_objects_changed": [
+      "T",
+      "S",
+      "C",
+      "L",
+      "K",
+      "sample",
+      "actual tau",
+      "actual q",
+      "positive reference family"
+    ]
+  },
+  "one_power_assessment": {
+    "exact_public_name": "ContinuousFlexibility.Analysis.N07aSampleSubpower.one_power",
+    "exact_quantifiers": "hf : forall delta>0, exists C>0, forall m, |f m|<=C*M(sample(K.cell m))^delta; output exists C>0, forall m, |f m|<=C*M(sample(K.cell m)).",
+    "adding_constant_one": "Valid using N07aSampleSubpower.const/add. Combined with the same-piece ratio envelope and cancellation, this also yields1<=C*M(p) on each reference open piece.",
+    "why_not_sufficient_alone": "The last two actual transport fields use E0^A, not M^A. A lower bound for M cannot raise their E0 exponent from0 to1. Use the existing public exponent-monotonicity supplier above.",
+    "M_floor_is_already_in_hT": true
+  },
+  "implementation_recommendation": {
+    "no_new_floor_theorem_needed": true,
+    "import_if_not_already_transitive": "ContinuousFlexibility.Analysis.N01cPhysicalHeightBounds",
+    "minimal_future_steps": [
+      "Before fixing the state, specialize materialE0_rpow_le_of_exponent_le hT to0<=1 and simplify to obtain K>=0 and the all-core scaled E0 floor.",
+      "For each fixed state, form the common derivative sample envelope and Cd exactly as in the prior Stage E route.",
+      "Use A=1 and C0=Cd+exp1*K in the actual transport existential.",
+      "Extend the already-uniform piece estimates to all annularOpen using the chosen globalC3 tau/q and the genuine reference-partition density; continuity of M,E0 and positive H,M denominators comes from hT. This remains the separate endpoint/cut gluing obligation."
+    ],
+    "explicit_enlarged_material_special_case": "If the final target already uses U=enlargedMaterialData T, one_le_enlargedMaterialData_E0 allows K=1 directly. The general original-T route above avoids any data replacement or reselection.",
+    "no_new_floor_hypothesis": true
+  },
+  "sources": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01cPhysicalHeightBounds.lean",
+      "blob": "d843c7c24cb9aab04e3bd670ce3b7154dd93bb43",
+      "sha256": "7ad1e698f333f494cb6bc29b1a8104c7131278bfb306fa5d10a2785056fe53c3",
+      "bytes": 10735,
+      "lines": 212
+    },
+    {
+      "path": "src/ContinuousFlexibility/Statements/Analysis.lean",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "bytes": 30441,
+      "lines": 603
+    },
+    {
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "bytes": 101197,
+      "lines": 1773
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aMaterialProductBounds.lean",
+      "blob": "705984daec9322d629166432628ecd887534171f",
+      "sha256": "cb6614c253d91ae45cc383551456cd0b345acd5e78ad2e4117a549560c84bf90",
+      "bytes": 5945,
+      "lines": 134
+    }
+  ],
+  "scope": {
+    "no_new_Lean": true,
+    "no_active_edits": true,
+    "no_refs_or_CI_operations": true,
+    "genuine_common_exponent_obligation_resolved": true,
+    "global_qualitative_transport_and_dense_extension_not_reproved_here": true,
+    "no_claim_of_new_compilation": true
+  }
+}

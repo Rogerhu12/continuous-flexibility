@@ -1,0 +1,385 @@
+{
+  "kind": "recovery_snapshot_with_latest_compiled_tree",
+  "snapshot": 49,
+  "created_at": "2026-11-13 00:14:51 UTC",
+  "parent": "845cbcac25b3ddce03ed3ec845c2d14ca88b0eae",
+  "additional_parent": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+  "compiled_baseline": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+  "compiled_baseline_tree": "da843557a720e7424e680ec2eaa3de49ad7ea07a",
+  "source_index_blob": "b9772979eef0519e1bad23ff1dd39a8075b05305",
+  "source_index": {
+    "path": "drafts/N04Coordinates-recovery-20261112/SOURCE-INDEX.json",
+    "sha256": "823d010fb75e62d8e7ac26eef1c0c71fd40c955a4a0b815b6e84489d296cda2a",
+    "entries": 3227,
+    "new": 19,
+    "updated": 0
+  },
+  "artifacts": [
+    {
+      "name": "positive/recovery/N04ActualResidualVelocityFixedBaseSupplierCheck.json",
+      "blob": "5f4f31a241940af33cffb06da8475c75cafa386a",
+      "sha256": "e7a092c0cf8dd1b943a577252797a33459e9db28cd47240cf6c86a2e8bf1d995",
+      "bytes": 33079,
+      "lines": 443
+    },
+    {
+      "name": "audit/recovery/CanonicalPrimitiveStageEAlmostEverywhereExtensionRoute.json",
+      "blob": "02afed9bf50db228be9ebd058dabc7cd5453ff9f",
+      "sha256": "b408529d7c8ee2d4f46520eabe3b8ef1e7d1f849e94bd929e72429101c3a2503",
+      "bytes": 9021,
+      "lines": 130
+    },
+    {
+      "name": "quantitative/recovery/StageEActualTransportFiniteDerivativeRoute.json",
+      "blob": "0b712720ca56e40d853e3d1d173f925af1d4ffe0",
+      "sha256": "adab39915ea6bd3955c089f73fccaac911f4421424d36592264f73d6f01b02dd",
+      "bytes": 47487,
+      "lines": 642
+    },
+    {
+      "name": "root/ci/CI176-build.log",
+      "blob": "a5e1798f69c94b8133274a2de50731944b36e084",
+      "sha256": "5dcec6a75eed7e1fbd4b1c81569191283001fd1f79a502b0dae639aab6f8f6a8",
+      "bytes": 64467,
+      "lines": 764
+    },
+    {
+      "name": "root/ci/CI176CompleteErrorBlocks.json",
+      "blob": "30bf447c78b3db134e7b327210042ac3100ff3d7",
+      "sha256": "1893faaab233ab949d9c563185ff180e349ace915f5fc586bc6820598f1ec769",
+      "bytes": 912,
+      "lines": 22
+    },
+    {
+      "name": "root/ci/CI176FailureReceipt.json",
+      "blob": "6a8e4a9a901fdaf6883197a261087d08d11e5681",
+      "sha256": "8845a9e0b5227ba2bdaf586bdcfb8eeec4f6a94ed95d4a5d8e09e78c153787d5",
+      "bytes": 1111,
+      "lines": 27
+    },
+    {
+      "name": "root/repair176/CanonicalReferenceCurrentFrechetJetsChoiceOwner.json",
+      "blob": "0f48360e236dc168976af020bf1e0c949f2135ba",
+      "sha256": "71e5acec231349f8be79dcdabb3dd7476a73ee735feefcd6e9a6a80e6cc618cb",
+      "bytes": 2315,
+      "lines": 57
+    },
+    {
+      "name": "root/repair176/CanonicalReferenceCurrentFrechetJetsChoiceReviewedOwner.json",
+      "blob": "844b42003287d8c180d47169b10235f025f0d72c",
+      "sha256": "12c56c154959a9005a5990742b101302f03110b3efe69c168c215b59ac2cd0c3",
+      "bytes": 2746,
+      "lines": 68
+    },
+    {
+      "name": "audit/recovery/reviews/CI176FrechetChoiceIndependentReview.json",
+      "blob": "289de5495c624ef071970a1ba54ef9de4fce5ea0",
+      "sha256": "26eafe95470f82e511a3ee68b9fcde7b26014e5e37e9bab62225a0ba16ab6871",
+      "bytes": 7486,
+      "lines": 109
+    },
+    {
+      "name": "root/ci/CI177SourceOnlyRepairPlan.json",
+      "blob": "11ed6f49f97d3d321dec9c2680422d56effb05ab",
+      "sha256": "6c2aee88687b46cfca729e0f10319d132cd1906dba7c7f935f5e869c792995c8",
+      "bytes": 2013,
+      "lines": 63
+    },
+    {
+      "name": "root/ci/CI177PushReceipt.json",
+      "blob": "9c127ed7b5e66deb99ab189a1b75e8b57aeac271",
+      "sha256": "f8c20f9a17a99c9874c7ff9eb0b64ade3081a928ec83f6c66aa8642af2c22404",
+      "bytes": 558,
+      "lines": 15
+    },
+    {
+      "name": "quantitative/recovery/FixedBaseOwnedGitTreeDestinationCorrection.json",
+      "blob": "a8aafe606395d706bd428a99d249110ddf27185d",
+      "sha256": "f272d25e1c0fef7e0f176113e4e338156a1134cb1c1f43993b6e3e666f11181d",
+      "bytes": 8078,
+      "lines": 137
+    },
+    {
+      "name": "root/ci/CI177-build.log",
+      "blob": "3e6cc05dd0c6611fdefe23bece34ba301dcab88d",
+      "sha256": "8188cf7836a07d594b64d0370c4d9ae6c704c63bf980f39f21f920bca8e01086",
+      "bytes": 72524,
+      "lines": 880
+    },
+    {
+      "name": "root/ci/CI177ExactCoverageExtension.json",
+      "blob": "c953aaf006661c95a0c01909ae1a79bbf9ebad8b",
+      "sha256": "517fed3bfba21f1c5fe57770667af92defc318e8ae6d711c4a21385b288b94a2",
+      "bytes": 4833,
+      "lines": 101
+    },
+    {
+      "name": "root/ci/CI177CompleteSuccessReceipt.json",
+      "blob": "5980c2ba762512f9ea495cfe101031ec4c8b0a4e",
+      "sha256": "33f78f0aa17153a33467122434f11af486c07227af5e78b15cb189a8dd87cce8",
+      "bytes": 3897,
+      "lines": 148
+    },
+    {
+      "name": "audit/recovery/reviews/Fixed131NormalizedCandidateAfterCI177IndependentReview.json",
+      "blob": "a5c9553c820e60542c34331ab5109a488fab2af1",
+      "sha256": "4e3231a9138dc498f008adbc117f6832f5d93b7532ed168d50a524e82bf820ec",
+      "bytes": 14117,
+      "lines": 291
+    },
+    {
+      "name": "root/ci/CI178FixedBaseStagingPlan.json",
+      "blob": "eeaff14569fb00602009b1d406a3c3db91256da9",
+      "sha256": "a371a50f0abe83dadd080028a991d20932df9219feb6a129ac02e28b26d833c5",
+      "bytes": 2829,
+      "lines": 78
+    },
+    {
+      "name": "root/ci/CI178PushReceipt.json",
+      "blob": "8d7aebc1b5ce0f91a50f3f868b6cce82278d819a",
+      "sha256": "a89baa7c261d4a585e395aff4628aef6ff5a1af77c8c539295ad19122ad0aede",
+      "bytes": 537,
+      "lines": 14
+    },
+    {
+      "name": "quantitative/recovery/StageETransportCommonExponent.json",
+      "blob": "1c3144d2d443d1c124935b4caef5235873bd6ffb",
+      "sha256": "d271952473db05f9132a7feb7e7f58e1772c1825b7a2a392ac385d4b6115b652",
+      "bytes": 8025,
+      "lines": 162
+    }
+  ],
+  "outside_archive": {
+    "exact_target": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+    "upgrade_from": "a195d1ecf1cacb20c98250e601e58489e0239d86",
+    "actual_added_source_paths": 8,
+    "actual_added_Lean_lines": 588,
+    "all_complete_green": true
+  },
+  "CI176": {
+    "receipt": "6a8e4a9a901fdaf6883197a261087d08d11e5681",
+    "conclusion": "failure",
+    "complete_error": "30bf447c78b3db134e7b327210042ac3100ff3d7",
+    "repair_in177": "replace existential elimination with explicit cached choices",
+    "resource_limits_unchanged": true
+  },
+  "CI177": {
+    "schema": "N04-complete-ci-success-v1",
+    "ci_round": 177,
+    "repository": "Rogerhu12/continuous-flexibility",
+    "commit": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+    "tree": "da843557a720e7424e680ec2eaa3de49ad7ea07a",
+    "run_id": 43333903962,
+    "job_id": 131585117632,
+    "workflow_number": 1855,
+    "run_updated_at": "2026-11-13T00:11:10Z",
+    "verified_at": "2026-11-13 00:12:16 UTC",
+    "conclusion": "success",
+    "required_steps": [
+      {
+        "name": "Generate the root import",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10
+      },
+      {
+        "name": "Changed modules",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11
+      },
+      {
+        "name": "Quick check of the changed modules",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12
+      },
+      {
+        "name": "Build every library",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13
+      },
+      {
+        "name": "Save project build artifacts",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14
+      },
+      {
+        "name": "Count compiled modules",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16
+      },
+      {
+        "name": "Blueprint status and endpoint axioms",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17
+      },
+      {
+        "name": "Pack this line's build for main",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19
+      },
+      {
+        "name": "Run actions/upload-artifact@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 20
+      },
+      {
+        "name": "Run actions/upload-artifact@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 21
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 43
+      }
+    ],
+    "log": {
+      "blob": "3e6cc05dd0c6611fdefe23bece34ba301dcab88d",
+      "sha256": "8188cf7836a07d594b64d0370c4d9ae6c704c63bf980f39f21f920bca8e01086",
+      "bytes": 72524
+    },
+    "generated_root_imports": 4506,
+    "quick_target_count": 1019,
+    "quick_compiled_this_run": [
+      "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentFrechetJets"
+    ],
+    "quick_module_minutes": 0.2,
+    "full_build_jobs": 8550,
+    "full_step_new_compiled_project_modules": 1,
+    "coverage": {
+      "evidence": "c953aaf006661c95a0c01909ae1a79bbf9ebad8b",
+      "default_project": 4564,
+      "total_project": 4570,
+      "default_all_src": 4568,
+      "total_all_src": 4574,
+      "combined_project": 4568,
+      "combined_all_src": 4572,
+      "remaining_unreached": [
+        "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+        "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth"
+      ],
+      "additional_quick_targets": [
+        "ContinuousFlexibility.Blueprint.N01c.Coefficients",
+        "ContinuousFlexibility.Blueprint.N01c.Speeds",
+        "ContinuousFlexibility.Blueprint.N01c.Flows",
+        "ContinuousFlexibility.Blueprint.N05.VolumeModel"
+      ],
+      "cache_file_count_5124_is_not_coverage": true
+    },
+    "blueprint": {
+      "proved": 37,
+      "total": 42,
+      "open": [
+        "N01c",
+        "N02N03",
+        "N04b",
+        "N04Coordinates",
+        "N05"
+      ],
+      "whole_endpoint_axioms": [
+        "propext",
+        "sorryAx",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "N04Coordinates_completion_claim": false
+    },
+    "new_complete_green_baseline": true,
+    "previous_complete_green": "a195d1ecf1cacb20c98250e601e58489e0239d86",
+    "draft_reclassification": {
+      "prior": 19980,
+      "reclassifiable": 255,
+      "components": [
+        100,
+        84,
+        71
+      ],
+      "after": 19725,
+      "margin": 275,
+      "gateway333_never_counted_not_deducted": true,
+      "fixed131_credit_zero_until_its_complete_green": 677,
+      "proof_inventory_new_authorized_line_cap": 250
+    }
+  },
+  "active": {
+    "ci_round": 178,
+    "commit": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+    "tree": "4df6517d5b3c92f5a366501af217c4471d0f23f8",
+    "parent": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+    "pushed_readback": "2026-11-13 00:13:46 UTC",
+    "first_ci_lookup_not_before": "2026-11-13T00:18:46.000Z",
+    "plan_blob": "eeaff14569fb00602009b1d406a3c3db91256da9",
+    "source_added_since_complete_green": 19539,
+    "source_deleted": 0,
+    "full_root_lag": 396,
+    "conservative_total": 19935,
+    "status": "pushed; awaiting first permitted CI lookup"
+  },
+  "budget": {
+    "new_archived_Lean_lines": 0,
+    "before177_complete_success": 19980,
+    "reclassified_after_complete_green": 255,
+    "components": [
+      100,
+      84,
+      71
+    ],
+    "retained_uncompiled_conservative_upper_bound": 19725,
+    "limit": 20000,
+    "remaining": 275,
+    "delta_new_authorized_cap": 250,
+    "delta_not_in_this_snapshot": true,
+    "gateway333_not_counted_or_subtracted": true,
+    "later_fixed131_credit_only_after_its_own_complete_green": {
+      "sources": [
+        328,
+        349
+      ],
+      "total": 677,
+      "provenance": "0b4fc88a7cc2b1e8d7ca4f7f0e97b9d96885cdb5",
+      "current_credit": 0
+    }
+  },
+  "fixed131": {
+    "staging_plan": "eeaff14569fb00602009b1d406a3c3db91256da9",
+    "peer": "a5c9553c820e60542c34331ab5109a488fab2af1",
+    "path_correction": "a8aafe606395d706bd428a99d249110ddf27185d",
+    "counts": {
+      "project": 4701,
+      "allSrc": 4705,
+      "generated": 4637,
+      "checked": 4241,
+      "lag": 396,
+      "sourceAdded": 19539,
+      "total": 19935
+    },
+    "no_CI_result_yet": true
+  },
+  "main_rules_checked": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "root_workflow_resource_toolchain_dependency_limits_unchanged": true,
+  "environment": "Execution and Git access restored; clean active checkout at /workspace/scratch/n04-active-20261113. Lean/lake not in PATH; compiler validation continues in unchanged CI.",
+  "endpoint_status": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open",
+    "proved": 37,
+    "total": 42,
+    "open": [
+      "N01c",
+      "N02N03",
+      "N04b",
+      "N04Coordinates",
+      "N05"
+    ]
+  }
+}

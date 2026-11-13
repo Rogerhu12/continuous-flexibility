@@ -1,0 +1,14 @@
+{
+  "ci_round": 178,
+  "commit": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+  "tree": "4df6517d5b3c92f5a366501af217c4471d0f23f8",
+  "parent": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+  "pushed_readback": "2026-11-13 00:13:46 UTC",
+  "first_ci_lookup_not_before": "2026-11-13T00:18:46.000Z",
+  "plan_blob": "eeaff14569fb00602009b1d406a3c3db91256da9",
+  "source_added_since_complete_green": 19539,
+  "source_deleted": 0,
+  "full_root_lag": 396,
+  "conservative_total": 19935,
+  "status": "pushed; awaiting first permitted CI lookup"
+}

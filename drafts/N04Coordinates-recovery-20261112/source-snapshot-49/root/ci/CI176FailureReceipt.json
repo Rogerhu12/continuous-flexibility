@@ -1,0 +1,27 @@
+{
+  "ci_round": 176,
+  "head": "ae9eb8801b4bd629989e1f4b46f195263adb188d",
+  "tree": "57a0345b93f168e268e9aac63612b635fd695262",
+  "run": 43332272502,
+  "job": 131579634362,
+  "workflow_number": 1853,
+  "first_queried": "2026-11-12 23:56:18 UTC",
+  "completed": "2026-11-12T23:56:16Z",
+  "conclusion": "failure",
+  "quick": "failure",
+  "full_build": "skipped",
+  "endpoint_reporting": "skipped",
+  "compiled_this_run": 0,
+  "retained_prior_successful_new_sources": 7,
+  "sole_failed_module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentFrechetJets",
+  "diagnostic": "Same line49:2 isDefEq timeout at the initial obtain command despite all eight explicit implicit parameters; no assertion of profiled internal root cause.",
+  "log": {
+    "blob": "a5e1798f69c94b8133274a2de50731944b36e084",
+    "sha256": "5dcec6a75eed7e1fbd4b1c81569191283001fd1f79a502b0dae639aab6f8f6a8",
+    "bytes": 64467
+  },
+  "complete_error": "30bf447c78b3db134e7b327210042ac3100ff3d7",
+  "last_complete_green": "a195d1ecf1cacb20c98250e601e58489e0239d86",
+  "no_conditional_credit": true,
+  "no_fixed131_activation": true
+}

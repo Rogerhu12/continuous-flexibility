@@ -1,0 +1,137 @@
+{
+  "schema": "n04-fixed-base-owned-git-path-normalization-v1",
+  "status": "PASSED_EXACT_METADATA_TRANSFORM_ONLY_NOT_ACTIVATED",
+  "author": "/root/quantitative_route",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "path": "quantitative/recovery/FixedBaseOwnedGitTreeDestinationCorrection.json",
+  "problem": {
+    "classification": "genuine executable metadata defect in previous plans",
+    "description": "Logical absolute archive/source paths were retained as Git create_tree destinations for six owned sources. Git tree entry paths must be repository-relative. Source identity and selected module are distinct from archive location.",
+    "prior_git_api_rejection": "Parent observed HTTP422: path cannot start with slash. This report independently verifies the faulty entries and the exact correction, not the API event."
+  },
+  "immutable_inputs": {
+    "first_batch_selection": {
+      "path": "quantitative/recovery/FixedBaseFirstBatchSelectionAfterCI173AndSmallGroup.json",
+      "blob": "a9969267ba216a1d29840079894603d480ffd536",
+      "sha256": "74a1ecd904248853c48b1712a3f187f3b4540a8026733ff11b086422e14dec0a",
+      "bytes": 516612
+    },
+    "two_batch_plan": {
+      "blob": "e8d048a62c7b0bbf695503818b5f9a13d0bc3b07",
+      "sha256": "ac34e182556c181d5cf745a2631638f4613234f4eaa12fbcdb6def5971b2dc7c"
+    },
+    "selected518": {
+      "blob": "f8548b858d40234fce54e77c5ff0702a6f4ed86a",
+      "sha256": "10ce1ad71024dfcd300f5c815eb7a5049f86c02f6a97b61495fb8b55df78792e"
+    },
+    "cached_actual175_tree": "c4a16462028b7b673b09318d62b24ff726d690a3",
+    "parent_reported177_candidate_base_tree": "da843557a720e7424e680ec2eaa3de49ad7ea07a",
+    "parent_created_unreferenced_fixed131_tree": "4df6517d5b3c92f5a366501af217c4471d0f23f8",
+    "tree_review_boundary": "This report checks exact plan entries and cached175 absence. Root/audit separately verify the full177-base-to-candidate tree. No duplicate full-tree verification is claimed."
+  },
+  "correction_rule": "For only the six listed owned entries: set path = 'src/' + module.replaceAll('.', '/') + '.lean'. Preserve every other field, entry order and all other entries byte-for-byte under the same JSON serialization.",
+  "first_batch": {
+    "mappings": [
+      {
+        "module": "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds",
+        "source_blob": "45fae56b12e755379fcf3e4aa3e211ba0cfe9c7a",
+        "source_sha256": "7e79129c9a9df8e2d74c353106685db461089a05ec1141f333211d5a257c6aac",
+        "source_lines": 349,
+        "logical_archive_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-include-layout/TameInverseFixedBaseBounds.lean",
+        "git_destination_path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+        "mode": "100644",
+        "type": "blob"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds",
+        "source_blob": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+        "source_sha256": "f70497231b60b5c0a59e8de16cb534f1820e2bd9d6469ed8c86643b88f428b80",
+        "source_lines": 328,
+        "logical_archive_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBounds.lean",
+        "git_destination_path": "src/ContinuousFlexibility/Analysis/TameFixedBaseCompositionBounds.lean",
+        "mode": "100644",
+        "type": "blob"
+      }
+    ],
+    "total_entries": 131,
+    "unchanged_entries": 129,
+    "unique_relative_destinations": 131,
+    "canonical_json_before_sha256": "c0c05a713023f603bbdf991d10865c5d8c9572245d1adb654809f048ee4b910b",
+    "canonical_json_after_sha256": "300a35065e1bb010b9be7fc9f54a0d30a06711f45c50c6b69c90b021c4fb0906",
+    "exact_source_added_lines": 19539,
+    "selected_graph_nodes": 347,
+    "selected_graph_edges": 593,
+    "existing_providers": 216,
+    "content_import_math_header_selection_changes": 0
+  },
+  "second_batch": {
+    "mappings": [
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+        "source_blob": "4ea70ab43fc1fa6e51ddcfa3849f97580bf02235",
+        "source_sha256": "4c3c07d97d9b4ad03cbb16f4b9b1829eabacdbeb1c012dee3733958f32ac1941",
+        "source_lines": 159,
+        "logical_archive_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/circle-forward-source-apply/CircleShiftedForwardFixedBaseBounds.lean",
+        "git_destination_path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+        "mode": "100644",
+        "type": "blob"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds",
+        "source_blob": "1f55edbb185fe33327757a087479196cc8565e4f",
+        "source_sha256": "435088fc0bad2d63d09101dfcb8a2629cc24e5437f855867e41cac8368b2eb64",
+        "source_lines": 301,
+        "logical_archive_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CirclePositiveInverseFixedBaseBounds.lean",
+        "git_destination_path": "src/ContinuousFlexibility/Analysis/CirclePositiveInverseFixedBaseBounds.lean",
+        "mode": "100644",
+        "type": "blob"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04EndpointCircleFixedBaseBounds",
+        "source_blob": "09a1696b57c7fe3678cc6e10e419bb8fa22c0c11",
+        "source_sha256": "4726b99d556fcd77b094156f54551a65b5ec63b04f570f2ffb90fecdd1d0c29e",
+        "source_lines": 115,
+        "logical_archive_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04EndpointCircleFixedBaseBounds.lean",
+        "git_destination_path": "src/ContinuousFlexibility/Analysis/N04EndpointCircleFixedBaseBounds.lean",
+        "mode": "100644",
+        "type": "blob"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04SelectorInverseCircleFixedBaseBounds",
+        "source_blob": "054e86dbc3a61f36df0ff4fd7ddf71aefeacb117",
+        "source_sha256": "93154c0937eac430488bc4927b7d5e5f42d026df05959e430686c650ddd79fd4",
+        "source_lines": 152,
+        "logical_archive_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04SelectorInverseCircleFixedBaseBounds.lean",
+        "git_destination_path": "src/ContinuousFlexibility/Analysis/N04SelectorInverseCircleFixedBaseBounds.lean",
+        "mode": "100644",
+        "type": "blob"
+      }
+    ],
+    "total_entries": 105,
+    "unchanged_entries": 101,
+    "unique_relative_destinations": 105,
+    "canonical_json_before_sha256": "e8d3a397694ebab3d366c35a536906e5406ba223d0993522455cdced3a7a9c85",
+    "canonical_json_after_sha256": "10c948678ab3a54179927434b6da89dc2339803e7b61c061b3b25c04aeb52d65",
+    "new_modules": 96,
+    "shared_updates": 9,
+    "new_source_lines": 16565,
+    "shared_full_after_lines_upper_bound": 1447,
+    "content_import_math_header_selection_changes": 0
+  },
+  "checks": {
+    "module_and_full_blob_match_selected518": true,
+    "all_six_corrected_destinations_absent_at_cached175": true,
+    "original_nonpath_fields_and_entry_order_preserved": true,
+    "all_uncorrected_entries_preserved": true,
+    "normalized_paths_repository_relative_unique": true,
+    "source_graph_and_19539_first_batch_budget_unchanged": true,
+    "actual177_tree_independent_verification_not_repeated": true
+  },
+  "activation_gates": [
+    "Do not activate until the actual preceding small-group full CI is green; no CI status is inferred here.",
+    "At activation, verify every existing selected provider against the actual parent, preserve StateNeighborhood67260, and check corrected new destinations are still absent.",
+    "Recompute the full generated-root lag from the actual parent. The previous small8 scenario gives19539+396=19935; never replace this with marginal-root accounting.",
+    "The same destination normalization is mandatory for all four owned batch2 entries, while the nine shared migrations and their consumer gates remain unchanged.",
+    "No source changes, refs, commits, CI queries or local Lean were performed."
+  ]
+}

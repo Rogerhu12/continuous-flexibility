@@ -1,0 +1,78 @@
+{
+  "schema": "N04-reviewed-source-batch-staging-v1",
+  "ci_round": 178,
+  "commit": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+  "tree": "4df6517d5b3c92f5a366501af217c4471d0f23f8",
+  "parent": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+  "complete_green_evidence": "5980c2ba762512f9ea495cfe101031ec4c8b0a4e",
+  "selection": "a9969267ba216a1d29840079894603d480ffd536",
+  "source_path_correction": "a8aafe606395d706bd428a99d249110ddf27185d",
+  "peer": "a5c9553c820e60542c34331ab5109a488fab2af1",
+  "sources": {
+    "total": 131,
+    "main": 129,
+    "owned": 2,
+    "added_lines": 19539,
+    "bytes": 971376
+  },
+  "owned_sources": [
+    {
+      "module": "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds",
+      "logical_source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-include-layout/TameInverseFixedBaseBounds.lean",
+      "destination": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+      "blob": "45fae56b12e755379fcf3e4aa3e211ba0cfe9c7a"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds",
+      "logical_source_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBounds.lean",
+      "destination": "src/ContinuousFlexibility/Analysis/TameFixedBaseCompositionBounds.lean",
+      "blob": "f7492e92dd84ed60c9f2400df00b1554a48ccf52"
+    }
+  ],
+  "closure": {
+    "roots": [
+      "ContinuousFlexibility.Analysis.CoupledCircleCompositionRealization",
+      "ContinuousFlexibility.Analysis.CircleChartCompositionJets",
+      "ContinuousFlexibility.Analysis.N01EndpointOneHigh",
+      "ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds",
+      "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds"
+    ],
+    "nodes": 347,
+    "edges": 593,
+    "existing_providers": 216,
+    "missing": 0,
+    "cycles": 0
+  },
+  "actual_tree": {
+    "blob_paths": 4933,
+    "added_paths": 131,
+    "modified_paths": 0,
+    "deleted_paths": 0
+  },
+  "git_diff": {
+    "paths": 131,
+    "added": 19539,
+    "deleted": 0,
+    "sole_parent": true
+  },
+  "root_budget": {
+    "project": 4701,
+    "allSrc": 4705,
+    "generated": 4637,
+    "checked": 4241,
+    "lag": 396,
+    "sourceAdded": 19539,
+    "total": 19935
+  },
+  "main_rules_checked": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "existing_root_workflow_rules_toolchain_all_unchanged": true,
+  "deferred_shared_sources": 9,
+  "stateNeighborhood_kept": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+  "draft_budget": {
+    "bound": 19725,
+    "delta_leaf_reserved_cap": 250,
+    "only_after_this_batch_complete_green_owned_credit": 677,
+    "provenance": "0b4fc88a7cc2b1e8d7ca4f7f0e97b9d96885cdb5"
+  },
+  "status": "reviewed exact candidate; source only; awaits CI"
+}

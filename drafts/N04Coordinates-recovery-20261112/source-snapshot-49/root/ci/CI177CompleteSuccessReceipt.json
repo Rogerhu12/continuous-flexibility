@@ -1,0 +1,148 @@
+{
+  "schema": "N04-complete-ci-success-v1",
+  "ci_round": 177,
+  "repository": "Rogerhu12/continuous-flexibility",
+  "commit": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+  "tree": "da843557a720e7424e680ec2eaa3de49ad7ea07a",
+  "run_id": 43333903962,
+  "job_id": 131585117632,
+  "workflow_number": 1855,
+  "run_updated_at": "2026-11-13T00:11:10Z",
+  "verified_at": "2026-11-13 00:12:16 UTC",
+  "conclusion": "success",
+  "required_steps": [
+    {
+      "name": "Generate the root import",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 10
+    },
+    {
+      "name": "Changed modules",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 11
+    },
+    {
+      "name": "Quick check of the changed modules",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 12
+    },
+    {
+      "name": "Build every library",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 13
+    },
+    {
+      "name": "Save project build artifacts",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 14
+    },
+    {
+      "name": "Count compiled modules",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 16
+    },
+    {
+      "name": "Blueprint status and endpoint axioms",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 17
+    },
+    {
+      "name": "Pack this line's build for main",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 19
+    },
+    {
+      "name": "Run actions/upload-artifact@v4",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 20
+    },
+    {
+      "name": "Run actions/upload-artifact@v4",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 21
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 43
+    }
+  ],
+  "log": {
+    "blob": "3e6cc05dd0c6611fdefe23bece34ba301dcab88d",
+    "sha256": "8188cf7836a07d594b64d0370c4d9ae6c704c63bf980f39f21f920bca8e01086",
+    "bytes": 72524
+  },
+  "generated_root_imports": 4506,
+  "quick_target_count": 1019,
+  "quick_compiled_this_run": [
+    "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentFrechetJets"
+  ],
+  "quick_module_minutes": 0.2,
+  "full_build_jobs": 8550,
+  "full_step_new_compiled_project_modules": 1,
+  "coverage": {
+    "evidence": "c953aaf006661c95a0c01909ae1a79bbf9ebad8b",
+    "default_project": 4564,
+    "total_project": 4570,
+    "default_all_src": 4568,
+    "total_all_src": 4574,
+    "combined_project": 4568,
+    "combined_all_src": 4572,
+    "remaining_unreached": [
+      "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+      "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth"
+    ],
+    "additional_quick_targets": [
+      "ContinuousFlexibility.Blueprint.N01c.Coefficients",
+      "ContinuousFlexibility.Blueprint.N01c.Speeds",
+      "ContinuousFlexibility.Blueprint.N01c.Flows",
+      "ContinuousFlexibility.Blueprint.N05.VolumeModel"
+    ],
+    "cache_file_count_5124_is_not_coverage": true
+  },
+  "blueprint": {
+    "proved": 37,
+    "total": 42,
+    "open": [
+      "N01c",
+      "N02N03",
+      "N04b",
+      "N04Coordinates",
+      "N05"
+    ],
+    "whole_endpoint_axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "N04Coordinates_completion_claim": false
+  },
+  "new_complete_green_baseline": true,
+  "previous_complete_green": "a195d1ecf1cacb20c98250e601e58489e0239d86",
+  "draft_reclassification": {
+    "prior": 19980,
+    "reclassifiable": 255,
+    "components": [
+      100,
+      84,
+      71
+    ],
+    "after": 19725,
+    "margin": 275,
+    "gateway333_never_counted_not_deducted": true,
+    "fixed131_credit_zero_until_its_complete_green": 677,
+    "proof_inventory_new_authorized_line_cap": 250
+  }
+}

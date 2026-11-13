@@ -1,0 +1,291 @@
+{
+  "schema": "N04-exact-normalized-candidate-tree-independent-review-v1",
+  "reviewer": "/root/audit_coordinates",
+  "status": "PASS_EXACT_SOURCE_ONLY_CANDIDATE_PARENT_REPORTS_REQUIRED_FULL_GREEN",
+  "intended_path": "audit/recovery/reviews/Fixed131NormalizedCandidateAfterCI177IndependentReview.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "baseline": {
+    "commit": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+    "tree": "da843557a720e7424e680ec2eaa3de49ad7ea07a",
+    "commit_to_tree_independently_fetched": true
+  },
+  "candidate": {
+    "tree": "4df6517d5b3c92f5a366501af217c4471d0f23f8",
+    "only_source_additions": true,
+    "commits_or_refs_created_by_reviewer": false
+  },
+  "source_selection": {
+    "blob": "a9969267ba216a1d29840079894603d480ffd536",
+    "sha256": "74a1ecd904248853c48b1712a3f187f3b4540a8026733ff11b086422e14dec0a",
+    "bytes": 516612,
+    "scope": "Original conditional selection retained byte-for-byte. This receipt rebinds execution to exact CI177 and normalizes the two owned destination paths only."
+  },
+  "exact_tree_checks": {
+    "baseTree": "da843557a720e7424e680ec2eaa3de49ad7ea07a",
+    "candidateTree": "4df6517d5b3c92f5a366501af217c4471d0f23f8",
+    "truncated": false,
+    "baseFiles": 4802,
+    "candidateFiles": 4933,
+    "added": 131,
+    "removed": 0,
+    "changed": 0,
+    "normalizationCorrections": [
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "45fae56b12e755379fcf3e4aa3e211ba0cfe9c7a"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameFixedBaseCompositionBounds.lean",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "f7492e92dd84ed60c9f2400df00b1554a48ccf52"
+      }
+    ],
+    "wrongAdded": [],
+    "missingSelected": [],
+    "unexpected": [],
+    "providerMismatches": [],
+    "graph": {
+      "roots": [
+        "ContinuousFlexibility.Analysis.CoupledCircleCompositionRealization",
+        "ContinuousFlexibility.Analysis.CircleChartCompositionJets",
+        "ContinuousFlexibility.Analysis.N01EndpointOneHigh",
+        "ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds",
+        "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds"
+      ],
+      "providerRows": 347,
+      "reached": 347,
+      "edges": 593,
+      "unreachable": [],
+      "missing": [],
+      "cycles": [],
+      "topologicalViolations": []
+    },
+    "counts": {
+      "newRows": 131,
+      "lines": 19539,
+      "bytes": 971376
+    },
+    "all131AbsentBefore": true,
+    "sourceOnly": true
+  },
+  "path_corrections": [
+    {
+      "before": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-inverse-include-layout/TameInverseFixedBaseBounds.lean",
+      "after": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+      "blob": "45fae56b12e755379fcf3e4aa3e211ba0cfe9c7a"
+    },
+    {
+      "before": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/fixed-composition-algebra-topology/TameFixedBaseCompositionBounds.lean",
+      "after": "src/ContinuousFlexibility/Analysis/TameFixedBaseCompositionBounds.lean",
+      "blob": "f7492e92dd84ed60c9f2400df00b1554a48ccf52"
+    }
+  ],
+  "reconstruction": {
+    "method": "Fetch both complete recursive Git trees, reject truncation, compare every non-tree path/mode/type/blob. Reconstruct expected candidate by adding precisely the normalized 131 entries to the exact 177 file map.",
+    "base_file_map_sha256": "8dc5c05fdc23d261e1fe71b63cf47f25073778cbba9bf4625f32ce30cac048a4",
+    "candidate_file_map_sha256": "58e8fe614288ee85766fb7e71768f47ca9c9a9816610718e171e84a79617fe60",
+    "normalized_entries_sha256": "2d69296959019913b946a17618228b130f583c6f8e87de1440beef85acf1b866",
+    "all_other_4802_files_identical": true,
+    "no_absolute_or_archive_destination_added": true,
+    "recursive_candidate_entry_count_including_directories": 4975,
+    "candidate_file_count": 4933,
+    "source_paths_under_src_ending_lean": 4705,
+    "source_bytes_independently_match_all_tree_entry_sizes": true,
+    "line_count_method": "Sum the per-source frozen line metadata after binding all 131 exact Git blobs and byte sizes to the candidate. No fresh mathematical review or unnecessary full 131-source body download is claimed."
+  },
+  "main_and_owned_selection": {
+    "main_commit": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "main_tree": "d15c0a9504d0fc417bbcd7373995dbf85f1e2560",
+    "main_tree_fetched_untruncated": true,
+    "exact_main_path_blob_matches": 129,
+    "main_mismatches": [],
+    "owned": [
+      {
+        "module": "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds",
+        "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+        "blob": "45fae56b12e755379fcf3e4aa3e211ba0cfe9c7a",
+        "sha256": "7e79129c9a9df8e2d74c353106685db461089a05ec1141f333211d5a257c6aac",
+        "lines": 349,
+        "bytes": 18485,
+        "owner_blob": "652f71cd2f0cbde8d19d0f99a33521e2756ae7ba",
+        "owner_sha256": "d2d8835926ae52ddcf6dd18194555de3af3156ab55e0636e041f34f74f74074d"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds",
+        "path": "src/ContinuousFlexibility/Analysis/TameFixedBaseCompositionBounds.lean",
+        "blob": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+        "sha256": "f70497231b60b5c0a59e8de16cb534f1820e2bd9d6469ed8c86643b88f428b80",
+        "lines": 328,
+        "bytes": 17787,
+        "owner_blob": "186312bc05765159d2d4311d51e7c54d27b609d7",
+        "owner_sha256": "d55f9f1672ec1724b5cb642319514cea2b81d80e02bd607bbb0cf80a917ca98c"
+      }
+    ],
+    "owned_source_and_owner_sha256_freshly_checked": true,
+    "owned_raw_import_lists_equal_selected_graph": true,
+    "semantic_effect": "Only repository destination paths are corrected. Owned source bytes, imports, public names, mathematical contracts and exact owner selections are unchanged."
+  },
+  "closure": {
+    "roots": [
+      "ContinuousFlexibility.Analysis.CoupledCircleCompositionRealization",
+      "ContinuousFlexibility.Analysis.CircleChartCompositionJets",
+      "ContinuousFlexibility.Analysis.N01EndpointOneHigh",
+      "ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds",
+      "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds"
+    ],
+    "scope": "Recompute reachability, edges and topological ordering from the frozen blob-bound project import metadata and compare every reachable provider to its actual candidate-tree path/blob.",
+    "project_nodes": 347,
+    "project_edges": 593,
+    "existing_providers": 216,
+    "new_providers": 131,
+    "all216_actual177_preimages_exact": true,
+    "all131_paths_absent_in177": true,
+    "missing_imports": [],
+    "cycles": [],
+    "unreachable_nodes": [],
+    "topological_violations": [],
+    "deferred_second_batch_nodes_reached": [],
+    "deferred_shared_updates_reached": [],
+    "retained_StateNeighborhood": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+    "all9_deferred_shared_provider_preimages_checked_and_unchanged": true
+  },
+  "names": {
+    "selected_source_name_rows": 131,
+    "selected_explicit_names": 684,
+    "internal_collisions": [],
+    "all_name_rows_bound_to_same_actual_source_blob_and_sha256": true,
+    "actual169_nonmain_index": {
+      "blob": "9c3e8c742cbce4d8b019b5d7923b45af5f30dcba",
+      "sha256": "79a86b2a00a0b16fcb343221248cd6d1a271f94e9b09ba427018939695d88cb1",
+      "sources": 524,
+      "declarations": 1974,
+      "fresh_comparison": true,
+      "all524_current177_source_blobs_unchanged": true,
+      "collisions": []
+    },
+    "current_small8": {
+      "source_records": [
+        {
+          "module": "ContinuousFlexibility.Analysis.N01ActualRetainedReference",
+          "path": "src/ContinuousFlexibility/Analysis/N01ActualRetainedReference.lean",
+          "blob": "ca7674d50e07ae8fbccfff307348308327941342",
+          "declarations": [
+            "ContinuousFlexibility.Radial.n01c_exists_actual_retained_reference"
+          ]
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction",
+          "path": "src/ContinuousFlexibility/Analysis/N01PrimitiveFixedWitnessConstruction.lean",
+          "blob": "fa468a78f48266fb1c0603e9b16988a50d5a4fb4",
+          "declarations": [
+            "ContinuousFlexibility.Statements.n01Primitive_exists_fixedWitness_properties"
+          ]
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N01RetainedPrimitiveConstruction",
+          "path": "src/ContinuousFlexibility/Analysis/N01RetainedPrimitiveConstruction.lean",
+          "blob": "b4c99756ab69d37a0a3ce2c61570bed32f749885",
+          "declarations": [
+            "ContinuousFlexibility.Radial.n01c_exists_retained_primitive_properties"
+          ]
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext",
+          "path": "src/ContinuousFlexibility/Analysis/N01aFixedReferencePrimitiveContext.lean",
+          "blob": "41ee0aaa4a3971691bfdc8a8832a87300d97a863",
+          "declarations": [
+            "ContinuousFlexibility.Statements.n01a_exists_fixedReference_primitive_context"
+          ]
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry",
+          "path": "src/ContinuousFlexibility/Analysis/NeighborhoodFlowRetainedGeometry.lean",
+          "blob": "1e5acd56f27b8dfe803c4ee990b470e839d47e0d",
+          "declarations": [
+            "ContinuousFlexibility.Blueprint.exists_n01b_circleFlowGeometry"
+          ]
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.N04MaterialRadiusLocalJets",
+          "path": "src/ContinuousFlexibility/Analysis/N04MaterialRadiusLocalJets.lean",
+          "blob": "c4ce6d627aecdad5dd13050f972c8b1e85e03ba6",
+          "declarations": [
+            "ContinuousFlexibility.Analysis.n04_materialRadiusPullback_mixedDerivative",
+            "ContinuousFlexibility.Analysis.n04_materialRadiusPullback_mixedDerivative_bound",
+            "ContinuousFlexibility.Analysis.n04_materialRadiusPullback_iteratedFDeriv_bound"
+          ]
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentFrechetJets",
+          "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentFrechetJets.lean",
+          "blob": "ca9b054b984497e689d6d5d15d8c35a9506a1980",
+          "declarations": [
+            "ContinuousFlexibility.Analysis.n04Coordinates_unitAtom_absolute_iteratedFDeriv_envelope"
+          ]
+        },
+        {
+          "module": "ContinuousFlexibility.Analysis.ActualNegativeMovingReferenceUnitPoint",
+          "path": "src/ContinuousFlexibility/Analysis/ActualNegativeMovingReferenceUnitPoint.lean",
+          "blob": "aba2322ac91263cc9b63a6f487c5338f21667574",
+          "declarations": [
+            "ContinuousFlexibility.Analysis.n04bActualTypedAtlas_moving_negative_reference_unitPoint"
+          ]
+        }
+      ],
+      "explicit_names": 10,
+      "all8_actual_sources_fetched": true,
+      "collisions_with_selected684": []
+    },
+    "prior_preflight": {
+      "blob": "da6cfb498fcfd4d13a87a453929383ff783e9306",
+      "sha256": "8d7d7351a833f696cb806737041338d3cad43cdbbb123ab33d261fa46d587185",
+      "reused_scope": "Existing future149/703 explicit-name comparison, unchanged-main partition evidence, and the three owned exact-token main searches. No new all-repository scan is claimed."
+    },
+    "selected_future149_collisions": [],
+    "limitations": [
+      "Explicit names only, not a new scan of elaborator-generated fields or export aliases.",
+      "Existing future149 and main-partition name evidence is reused; this review does not independently re-read all current repository bodies.",
+      "Both owned destination corrections preserve source bytes, hence do not change declared namespaces or names."
+    ]
+  },
+  "budget": {
+    "checkedRootImports": 4241,
+    "baseGeneratedImports": 4506,
+    "candidateGeneratedImports": 4637,
+    "baseFullLag": 265,
+    "candidateFullLag": 396,
+    "rootRemoved": [],
+    "candidateNewImports": 131,
+    "sourceAdded": 19539,
+    "sourceAndAllRootLag": 19935,
+    "reserve": 65,
+    "limit": 20000,
+    "generator_blob": "8c4778a0260d7f7125f2deb16c15a89dc416d4f8",
+    "exclusion_blob": "fb280f584a48220180a18c65ab9a6883cbba800c",
+    "checked_root_blob": "38c718d76599e9550272afe65276ffed72dc9caf",
+    "method": "Reproduce the actual generator's path filtering and sorted module list from both complete trees, using the exact exclusions. Compare against every checked-in root import. Include old lag 265 plus new 131, not marginal imports alone.",
+    "no_generated_root_written": true
+  },
+  "controls": {
+    "actual_AGENTS_toolchain_lake_manifest_lakefile_generator_exclusions_and_root_match_frozen_expected": true,
+    "all_existing_workflow_and_control_files_unchanged_by_full_tree_comparison": true,
+    "no_unreviewed_shared_update": true,
+    "generated_root_remains_the_existing_CI_step": true
+  },
+  "gate": {
+    "required": "Exact CI177 complete full-green, followed by the parent's fresh branch lease check, sole-parent source-only commit and compare verification before push.",
+    "parent_report": {
+      "received": "Parent reports CI177 completed success 2026-11-13 00:11:10 UTC, verified 00:11:50 UTC; quick/full/all reports/uploads succeeded.",
+      "run": 43333903962,
+      "job": 131585117632,
+      "head": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30"
+    },
+    "reviewer_ci_queries": false,
+    "no_candidate_compilation_claim": true
+  },
+  "findings": [],
+  "conclusion": "The exact normalized tree is the original selected fixed131 prefix added to exact177, with only the two intended owned destination corrections. Counts, selected closure, preserved controls, explicit-name evidence and conservative budget pass. Parent may proceed under the stated full-green and fresh-lease gate; this receipt creates no ref and proves no final CurrentJets/N04Coordinates target."
+}
