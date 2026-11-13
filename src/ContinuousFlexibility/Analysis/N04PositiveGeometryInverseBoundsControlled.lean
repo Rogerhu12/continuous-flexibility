@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsSlab
+import ContinuousFlexibility.Analysis.N04PositiveGeometryForwardKernelSlab
 import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamilyMaterial
 
 /-!
@@ -88,15 +88,17 @@ theorem n04PositiveGeometry_controlled_inverseKernel_contDiffOn
 
 /-- Quantitative inverse bounds for the same selected family. They
 involve no bound or regularity assumption on an inverse map. -/
-theorem n04PositiveGeometry_controlled_inverseKernel_bounds
+theorem n04PositiveGeometry_controlled_radialKernels_bounds
     {W : N04RealizationStart} {X : N04RealizationChoice W} {n : ℕ}
-    (G : N04PositiveGeometryControlledFamily W X n) :
+    (G : N04PositiveGeometryControlledFamily W X n) (inverse : Bool) :
     ∀ k : ℕ, ∃ C Q : ℝ, 0 < C ∧ 0 ≤ Q ∧
       ∀ (i : N04PositiveComponent W.D.a W.D.b (deriv W.D.w))
         (a : N04PositiveRadialCoefficients n),
         a ∈ G.toN04PositiveGeometryControlData.radialCoefficientDomain i →
       ∀ x ∈ Icc (n04PositiveLeft i) (n04PositiveRight i),
-        ‖iteratedFDeriv ℝ k (G.toN04PositiveGeometryControlData.radialInverseKernel i)
+        ‖iteratedFDeriv ℝ k (if inverse then
+          G.toN04PositiveGeometryControlData.radialInverseKernel i else
+          G.toN04PositiveGeometryControlData.radialKernel i)
           (a, x)‖ ≤ C * W.U.E0 (W.U.sample (X.cell i)) ^ Q := by
   let E := fun i => W.U.E0 (W.U.sample (X.cell i))
   have hE (i) : 1 ≤ E i := (W.floor _).trans (le_enlargedMaterialData_E0 W.T _)
@@ -150,16 +152,54 @@ theorem n04PositiveGeometry_controlled_inverseKernel_bounds
       |(endpointFiberLower n (n04PositiveLeft i) (n04PositiveRight i)
         (G.buffer.centerLeft i) (G.buffer.centerRight i) ((G.M i)⁻¹ / 2) (G.Mσ i))⁻¹|) :=
     ⟨A, A, hApos, hApos, hcost.radial_lower_inverse⟩
-  exact n04PositiveGeometry_radialKernel_inverse_bounds hE n
-    n04PositiveLeft n04PositiveRight G.buffer.centerLeft G.buffer.centerRight
-    (fun i => (G.M i)⁻¹ / 2) G.Mσ
-    (fun i => (control_ordered G.toN04PositiveGeometryControlData i).1)
-    (fun i => (control_ordered G.toN04PositiveGeometryControlData i).2.1)
-    (fun i => (control_ordered G.toN04PositiveGeometryControlData i).2.2)
-    (fun i => half_pos (inv_pos.mpr (zero_lt_one.trans_le (G.input_one i))))
-    (fun i => zero_le_one.trans (G.inverse_one i))
-    (hradial _ (fun i => (hbounded i).1)) (hradial _ (fun i => (hbounded i).2.1))
-    (hradial _ (fun i => (hbounded i).2.2.1)) (hradial _ (fun i => (hbounded i).2.2.2))
-    hMcost hwidth hspan hlower
+  cases inverse with
+  | false =>
+    exact n04PositiveGeometry_radialKernel_forward_bounds hE n
+      n04PositiveLeft n04PositiveRight G.buffer.centerLeft G.buffer.centerRight
+      (fun i => (G.M i)⁻¹ / 2) G.Mσ
+      (fun i => (control_ordered G.toN04PositiveGeometryControlData i).1)
+      (fun i => (control_ordered G.toN04PositiveGeometryControlData i).2.1)
+      (fun i => (control_ordered G.toN04PositiveGeometryControlData i).2.2)
+      (fun i => half_pos (inv_pos.mpr (zero_lt_one.trans_le (G.input_one i))))
+      (fun i => zero_le_one.trans (G.inverse_one i))
+      (hradial _ (fun i => (hbounded i).1)) (hradial _ (fun i => (hbounded i).2.1))
+      (hradial _ (fun i => (hbounded i).2.2.1)) (hradial _ (fun i => (hbounded i).2.2.2))
+      hMcost hwidth hspan
+  | true =>
+    exact n04PositiveGeometry_radialKernel_inverse_bounds hE n
+      n04PositiveLeft n04PositiveRight G.buffer.centerLeft G.buffer.centerRight
+      (fun i => (G.M i)⁻¹ / 2) G.Mσ
+      (fun i => (control_ordered G.toN04PositiveGeometryControlData i).1)
+      (fun i => (control_ordered G.toN04PositiveGeometryControlData i).2.1)
+      (fun i => (control_ordered G.toN04PositiveGeometryControlData i).2.2)
+      (fun i => half_pos (inv_pos.mpr (zero_lt_one.trans_le (G.input_one i))))
+      (fun i => zero_le_one.trans (G.inverse_one i))
+      (hradial _ (fun i => (hbounded i).1)) (hradial _ (fun i => (hbounded i).2.1))
+      (hradial _ (fun i => (hbounded i).2.2.1)) (hradial _ (fun i => (hbounded i).2.2.2))
+      hMcost hwidth hspan hlower
+
+theorem n04PositiveGeometry_controlled_inverseKernel_bounds
+    {W : N04RealizationStart} {X : N04RealizationChoice W} {n : ℕ}
+    (G : N04PositiveGeometryControlledFamily W X n) :
+    ∀ k : ℕ, ∃ C Q : ℝ, 0 < C ∧ 0 ≤ Q ∧
+      ∀ (i : N04PositiveComponent W.D.a W.D.b (deriv W.D.w))
+        (a : N04PositiveRadialCoefficients n),
+        a ∈ G.toN04PositiveGeometryControlData.radialCoefficientDomain i →
+      ∀ x ∈ Icc (n04PositiveLeft i) (n04PositiveRight i),
+        ‖iteratedFDeriv ℝ k (G.toN04PositiveGeometryControlData.radialInverseKernel i)
+          (a, x)‖ ≤ C * W.U.E0 (W.U.sample (X.cell i)) ^ Q :=
+  n04PositiveGeometry_controlled_radialKernels_bounds G true
+
+theorem n04PositiveGeometry_controlled_forwardKernel_bounds
+    {W : N04RealizationStart} {X : N04RealizationChoice W} {n : ℕ}
+    (G : N04PositiveGeometryControlledFamily W X n) :
+    ∀ k : ℕ, ∃ C Q : ℝ, 0 < C ∧ 0 ≤ Q ∧
+      ∀ (i : N04PositiveComponent W.D.a W.D.b (deriv W.D.w))
+        (a : N04PositiveRadialCoefficients n),
+        a ∈ G.toN04PositiveGeometryControlData.radialCoefficientDomain i →
+      ∀ x ∈ Icc (n04PositiveLeft i) (n04PositiveRight i),
+        ‖iteratedFDeriv ℝ k (G.toN04PositiveGeometryControlData.radialKernel i)
+          (a, x)‖ ≤ C * W.U.E0 (W.U.sample (X.cell i)) ^ Q :=
+  n04PositiveGeometry_controlled_radialKernels_bounds G false
 
 end ContinuousFlexibility.Analysis
