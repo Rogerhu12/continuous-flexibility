@@ -50,15 +50,15 @@ import ContinuousFlexibility.Analysis.N04PulledFieldsActualVelocityMixedGrowth
 import ContinuousFlexibility.Analysis.N04PulledFieldsStripPhysicalCost
 import ContinuousFlexibility.Analysis.N04PulledFieldsActualErrorPhysical
 import ContinuousFlexibility.Analysis.N04PulledFieldsOriginalDifferencePhysical
+import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.PulledFields
 import Lean.Util.CollectAxioms
 
 /-!
 # Axiom audit of the PulledFields support modules
 
 This target audits every declaration owned by the imported PulledFields
-modules, including private helpers and all transitive dependencies. It is
-independent of the open blueprint theorem: a passing support audit does
-not assert that `N04RealizationPulledFields` has been proved.
+modules, including private helpers and all transitive dependencies. It
+also audits the actual blueprint theorem assembled from those proofs.
 -/
 
 open Lean in
@@ -84,6 +84,14 @@ run_cmd do
   if theorems == 0 then
     throwError "No PulledFields support theorem was audited"
   logInfo m!"PulledFields support axiom audit passed: {declarations} declarations, {theorems} theorems"
+  let target := ``ContinuousFlexibility.Blueprint.N04RealizationPulledFields
+  let axioms ← collectAxioms target
+  for ax in axioms do
+    unless ax == ``propext || ax == ``Classical.choice || ax == ``Quot.sound do
+      throwError "Unexpected axiom {ax} in PulledFields blueprint theorem"
+  logInfo m!"PulledFields blueprint axiom audit passed: {target}"
+
+#print axioms ContinuousFlexibility.Blueprint.N04RealizationPulledFields
 
 #print axioms ContinuousFlexibility.Analysis.n04PulledFieldsColumn_uniformHeight
 #print axioms ContinuousFlexibility.Analysis.n04PulledFieldsCurrentData_of_positiveJets

@@ -116,7 +116,8 @@ theorem N04PulledFieldsFixedBaseMixedGrowth.of_mixed_oneHigh
     (fun _ : Fin n => w) (fun _ => hw)
   have hunit' : oneHighVariationWeight p B (s + L) x (fun _ : Fin n => w) ≤
       1 + p (s + L) x + (n : ℝ) * p (s + L) w := by
-    simpa only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul] using hunit
+    simpa only [multilinearTameSize, oneHighVariationWeight, Finset.sum_const,
+      Finset.card_univ, Fintype.card_fin, nsmul_eq_mul] using hunit
   have hweight : oneHighVariationWeight p B (s + L) x (fun _ : Fin n => w) ≤
       ((n : ℝ) + 1) * (1 + p (s + L) x + p (s + L) w) := by
     apply hunit'.trans

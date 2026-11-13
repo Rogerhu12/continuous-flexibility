@@ -181,7 +181,7 @@ theorem n04PulledFields_fixedBase_circleProduct :
       (fun (_ : I) x => circleProductBilinear hM hT hD hγ x.1 x.2) := by
   exact n04PulledFields_fixedBaseFamily_pair_of_multilinear_bound
     M.grading M.grading (circleProductPairMultilinear hM hT hD hγ)
-    (circleProductBilinear hM hT hD hγ)
+    (fun u v => circleProductBilinear hM hT hD hγ u v)
     (circleProductPairMultilinear_apply hM hT hD hγ)
     (circleProduct_oneHigh_bound hM hT hD hγ hI)
 

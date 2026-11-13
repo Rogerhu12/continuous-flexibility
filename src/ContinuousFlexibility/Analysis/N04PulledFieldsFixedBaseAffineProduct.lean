@@ -39,7 +39,7 @@ private theorem n04PulledFields_affine_product_at_orders
   let order : Fin 2 → ℕ := ![a + lossA, b + lossB]
   have hhigh : B < high := by dsimp only [high]; omega
   have horder (i : Fin 2) : B < order i → order i + ell < high := by
-    fin_cases i <;> simp only [order, Matrix.cons_val_zero, Matrix.cons_val_one] <;>
+    fin_cases i <;> simp only [order, Matrix.cons_val_zero', Matrix.cons_val_succ'] <;>
       (dsimp only [high]; omega)
   have hcost : (∑ i : Fin 2, interpolationOrderCost B ell (order i)) ≤ high - B := by
     have h₀ := n04PulledFields_interpolationCost_le B ell (a + lossA)

@@ -92,18 +92,21 @@ private theorem n04PulledFields_jointExpansion_of_mixed
           AH a b j u = mixedDerivative a b
             (fun p => (J.fixedLast ((v 0).1, 0)).D j (x, p)
               (fun i => (u i, 0))) q := by
-        have hslots : (fun i : Fin (j + 1) => (Fin.cons (v 0).1 u i, (0 : PolarPoint))) =
+        have hslots : (fun i : Fin (j + 1) =>
+            (Fin.cons (α := fun _ : Fin (j + 1) => E) (v 0).1 u i, (0 : PolarPoint))) =
             Fin.cons (α := fun _ : Fin (j + 1) => E × PolarPoint)
               ((v 0).1, (0 : PolarPoint)) (fun i => (u i, (0 : PolarPoint))) := by
           funext i
           refine Fin.cases ?_ (fun k => ?_) i <;> rfl
         calc
-          AH a b j u = A a b (j + 1) (Fin.cons (v 0).1 u) :=
+          AH a b j u = A a b (j + 1)
+              (Fin.cons (α := fun _ : Fin (j + 1) => E) (v 0).1 u) :=
             scalarAngularHead_apply _ _ _ _ _
           _ = mixedDerivative a b
               (fun p => J.D (j + 1) (x, p)
-                (fun i => (Fin.cons (v 0).1 u i, (0 : PolarPoint)))) q :=
-            hA a b (j + 1) (Fin.cons (v 0).1 u)
+                (fun i => (Fin.cons (α := fun _ : Fin (j + 1) => E)
+                  (v 0).1 u i, (0 : PolarPoint)))) q :=
+            hA a b (j + 1) (Fin.cons (α := fun _ : Fin (j + 1) => E) (v 0).1 u)
           _ = _ := by
             refine mixedDerivative_congr_on_open hV ?_ a b hq
             intro p hp

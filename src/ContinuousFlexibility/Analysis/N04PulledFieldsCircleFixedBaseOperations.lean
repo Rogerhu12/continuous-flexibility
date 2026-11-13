@@ -14,6 +14,34 @@ all parameter orders and all external selectors.
 
 noncomputable section
 
+namespace ContinuousFlexibility.Analysis
+
+open Set ContinuousFlexibility.Statements
+
+set_option backward.isDefEq.respectTransparency false
+
+private theorem n04PulledFields_fixedBase_binary_maps
+    {I E F : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    [IsTopologicalAddGroup F] [ContinuousSMul ℝ F] [LocallyConvexSpace ℝ F]
+    {Y : ℕ → Type*} [∀ n, NormedAddCommGroup (Y n)] [∀ n, NormedSpace ℝ (Y n)]
+    [∀ n, CompleteSpace (Y n)] {bond : ∀ n, Y (n + 1) →L[ℝ] Y n}
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F)
+    (r : ℕ → Seminorm ℝ (ProjectiveLimit Y bond))
+    (op : I → F → F → ProjectiveLimit Y bond)
+    (hop : N04PulledFieldsFixedBaseFamily (pairGrading q q) r univ
+      (fun i z => op i z.1 z.2))
+    {U : Set E} {f g : I → E → F}
+    (hp : Monotone p) (hPI : HasInterpolation (pairGrading realGrading p))
+    (hU : IsOpen U) (hf : N04PulledFieldsFixedBaseFamily p q U f)
+    (hg : N04PulledFieldsFixedBaseFamily p q U g) :
+    N04PulledFieldsFixedBaseFamily p r U (fun i x => op i (f i x) (g i x)) := by
+  exact hop.comp hp hPI (hf.prodMk hp hg) hU isOpen_univ (fun _ _ _ => mem_univ _)
+
+end ContinuousFlexibility.Analysis
+
 namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
@@ -91,8 +119,9 @@ theorem n04PulledFields_fixedBase_circleCompose_maps
       (fun i x => circleShiftedChartComposeLinear hM hT hD hγ (travel i) (f i x) (g i x)) := by
   letI : ∀ n, CompleteSpace (M.level n) :=
     fun n => (hM.2.1 n).isComplete.completeSpace_coe
-  exact (n04PulledFields_fixedBase_circleComposition hD hT hγ hM hI travel).comp
-    hp hPI (hf.prodMk hp hg) hU isOpen_univ (fun _ _ _ => mem_univ _)
+  exact n04PulledFields_fixedBase_binary_maps p M.grading M.grading
+    (fun i x y => circleShiftedChartComposeLinear hM hT hD hγ (travel i) x y)
+    (n04PulledFields_fixedBase_circleComposition hD hT hγ hM hI travel) hp hPI hU hf hg
 
 theorem n04PulledFields_fixedBase_circleInverse_maps
     (travel : I → ℕ → ℝ) (a : ℝ) (ha : 0 < a) (hp : Monotone p)
@@ -118,8 +147,9 @@ theorem n04PulledFields_fixedBase_circleAverage_maps
       (fun i x => circleAverageComposeLinear hM hT hD hγ (travel i) (f i x) (g i x)) := by
   letI : ∀ n, CompleteSpace (M.level n) :=
     fun n => (hM.2.1 n).isComplete.completeSpace_coe
-  exact (n04PulledFields_fixedBase_circleAverage hD hT hγ hM hI travel).comp
-    hp hPI (hf.prodMk hp hg) hU isOpen_univ (fun _ _ _ => mem_univ _)
+  exact n04PulledFields_fixedBase_binary_maps p M.grading M.grading
+    (fun i x y => circleAverageComposeLinear hM hT hD hγ (travel i) x y)
+    (n04PulledFields_fixedBase_circleAverage hD hT hγ hM hI travel) hp hPI hU hf hg
 
 end Maps
 
