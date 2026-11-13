@@ -87,7 +87,7 @@ theorem n04WholeReferenceGauge_negative_scalarColumnReferenceJets_enlargedMateri
         have hpositive : V.positive m = true := by
           simp only [V, n04WholeReferenceGaugeAtlasData, n04WholeCanonicalAtlasData,
             n04bWithInteriorDivision, n04WholePiecePositive, hi]
-        exact False.elim (Bool.true_ne_false (hpositive.symm.trans hm))
+        exact False.elim (Bool.false_ne_true (hpositive.symm.trans hm).symm)
     | inl j =>
         let k := if j.2 then (K.cutPair j.1).2 else (K.cutPair j.1).1
         have hk : e₀ k = .inl j := by
@@ -109,9 +109,10 @@ theorem n04WholeReferenceGauge_negative_scalarColumnReferenceJets_enlargedMateri
             D T S C L K (C.referenceState, 0) k v hratios.1 hratios.2
           simpa only [hpiece] using hwhole.trans hmaterial
         have hsample : V.cell m = K.cell (piece j) := by
-          have hh := (n04WholeReferenceGaugeAtlasData_negative_fields
+          have hh : V.cell m = K.cell k := (n04WholeReferenceGaugeAtlasData_negative_fields
             C L K e cell ψ χ h₀ τ σ Q N (C.referenceState, 0) m j hi).2.2.2.2.2.1
-          simpa only [hpiece] using hh
+          rw [hpiece] at hh
+          exact hh
         have hactual := hcolumnsK j v hv
         rw [← hatom] at hactual
         refine ⟨hactual.1, hactual.2.1, ?_⟩
