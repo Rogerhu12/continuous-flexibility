@@ -138,10 +138,11 @@ private theorem currentBand_sector_small (S : PhysicalSpacesData) (base loss : �
     ∃ η : ℝ, 0 < η ∧ η ≤ ε ∧ η ≤ 1 / 2 ∧
       ∀ z ∈ sectorNeighborhood S (max base loss) η η,
         z ∈ sectorNeighborhood S base ε ε ∧ parameterGrading S (max base loss) z < δ := by
-  obtain ⟨η, hη, hηε, hηhalf, hηδ⟩ := currentBand_sector_radius hε hδ
-  refine ⟨η, hη, hηε, hηhalf, fun z hz => ?_⟩
-  exact ⟨n07a_sectorNeighborhood_mono (S := S) (le_max_left _ _) hηε hz,
-    (n04SourceColumns_parameter_lt hz).trans_le hηδ⟩
+  have hradius := currentBand_sector_radius hε hδ
+  refine ⟨hradius.choose, hradius.choose_spec.1, hradius.choose_spec.2.1,
+    hradius.choose_spec.2.2.1, fun z hz => ?_⟩
+  exact ⟨n07a_sectorNeighborhood_mono (S := S) (le_max_left _ _) hradius.choose_spec.2.1 hz,
+    (n04SourceColumns_parameter_lt hz).trans_le hradius.choose_spec.2.2.2⟩
 
 set_option diagnostics true in
 /-- The index may contain a component, side and physical point. The

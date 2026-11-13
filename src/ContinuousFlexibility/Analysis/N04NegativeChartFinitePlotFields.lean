@@ -19,9 +19,19 @@ namespace ContinuousFlexibility.Analysis.N04RealizationStart.NegativeOpticalFact
 open Set Filter ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint
 open scoped ContDiff Topology
 
+set_option backward.isDefEq.respectTransparency true
+
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+
 variable {W : N04RealizationStart} {e : ℕ ≃ N04PieceIndex W.D}
   (F : NegativeOpticalFactors W e)
 
+set_option diagnostics true in
 /-- The same representatives retain the complete state-and-space germ
 at every point of the actual closed half, including its root. -/
 theorem fullHalfFields_finiteAffine_representatives_uniform
@@ -48,10 +58,14 @@ theorem fullHalfFields_finiteAffine_representatives_uniform
     (continuous_const.add L.continuous)
   have h0 : (0 : Fin n → ℝ) ∈ V := by
     simpa only [V, mem_preimage, map_zero, add_zero] using hx
-  obtain ⟨ρ, hρ, hρ0, hρV, hρid⟩ := exists_smooth_neighbourhood_compression hV h0
+  have hcompression := exists_smooth_neighbourhood_compression hV h0
+  let ρ := hcompression.choose
+  have hρ := hcompression.choose_spec.1
+  have hρV := hcompression.choose_spec.2.2.1
+  have hρid := hcompression.choose_spec.2.2.2
   have hstate (y : Fin n → ℝ) :
       x + L (ρ y) ∈ stateNeighborhood W.S W.C W.base W.ε :=
-    stateNeighborhood_mono W.S W.C le_rfl (by linarith [W.ε_pos]) (hρV y)
+    stateNeighborhood_mono W.S W.C le_rfl (by linarith only [W.ε_pos]) (hρV y)
   have hc := W.through03.1.1.2.2.2.1.1 m
   let a : ℝ := (W.D.a + W.C.left m) / 2
   let b : ℝ := (W.C.right m + W.D.b) / 2
@@ -97,8 +111,16 @@ theorem fullHalfFields_finiteAffine_representatives_uniform
   have hq : ContDiff ℝ ∞ q :=
     ((F.reference_smooth m side).comp contDiff_snd.fst).sub
       ((hk.comp contDiff_fst).mul ((F.control_smooth m side).comp contDiff_snd.fst))
-  obtain ⟨Bi, Ai, hBi, _, hinv⟩ := F.stateSquare_inverse_material
-  obtain ⟨Bu, Au, hBu, _, hupper⟩ := F.stateSquare_material_jets 0
+  have hinverse := F.stateSquare_inverse_material
+  let Bi := hinverse.choose
+  let Ai := hinverse.choose_spec.choose
+  have hBi := hinverse.choose_spec.choose_spec.1
+  have hinv := hinverse.choose_spec.choose_spec.2.2
+  have hupperData := F.stateSquare_material_jets 0
+  let Bu := hupperData.choose
+  let Au := hupperData.choose_spec.choose
+  have hBu := hupperData.choose_spec.choose_spec.1
+  have hupper := hupperData.choose_spec.choose_spec.2.2
   let E : ℝ := W.T.E0 (W.T.sample ((W.A e).cell (e.symm (.inl (m, side)))))
   have hE : 0 < E := zero_lt_one.trans_le (W.floor _)
   let l : ℝ := (Bi * E ^ Ai)⁻¹
@@ -108,7 +130,10 @@ theorem fullHalfFields_finiteAffine_representatives_uniform
     have hb := mul_pos hBu (Real.rpow_pos_of_pos hE Au)
     dsimp only [u]
     linarith only [hb]
-  obtain ⟨Φ, hΦ, hΦeq, _⟩ := exists_smooth_positivePower_extension hl hlu (1 / 2 : ℝ)
+  have hpower := exists_smooth_positivePower_extension hl hlu (1 / 2 : ℝ)
+  let Φ := hpower.choose
+  have hΦ := hpower.choose_spec.1
+  have hΦeq := hpower.choose_spec.2.1
   have hqrange (y : Fin n → ℝ) (p : PolarPoint)
       (hp : p.1 ∈ Icc (0 : ℝ) (W.negativeOpticalWidth m side)) : q (y, p) ∈ Icc l u := by
     have hpq := F.stateSquare_pos (hρV y) m side hp
@@ -159,7 +184,11 @@ theorem fullHalfFields_finiteAffine_representatives_uniform
       rw [hφ, ha]
       simp only [q, hρy, fullHalfSpeed, opticalSpeed]
 
-  · obtain ⟨V₀, hV₀, hV₀open, h0V₀⟩ := mem_nhds_iff.mp hρid
+  · have hlocal := mem_nhds_iff.mp hρid
+    let V₀ := hlocal.choose
+    have hV₀ := hlocal.choose_spec.1
+    have hV₀open := hlocal.choose_spec.2.1
+    have h0V₀ := hlocal.choose_spec.2.2
     have hρeq (y : Fin n → ℝ) (hy : y ∈ V₀) : ρ y = y := hV₀ hy
     refine ⟨V₀, hV₀open, h0V₀, ?_, ?_⟩
     · intro y hy
@@ -186,6 +215,7 @@ theorem fullHalfFields_finiteAffine_representatives_uniform
         rw [hφ, ha 1]
         simp only [q, hρeq y hy, fullHalfSpeed, opticalSpeed]
 
+set_option diagnostics true in
 /-- The pointwise germ interface is retained for existing callers. -/
 theorem fullHalfFields_finiteAffine_representatives
     {n : ℕ} (x : AnnularState W.S × ℝ)
@@ -199,9 +229,10 @@ theorem fullHalfFields_finiteAffine_representatives
       (∀ p : PolarPoint, p.1 ∈ Icc (0 : ℝ) (W.negativeOpticalWidth m side) →
         d =ᶠ[𝓝 (0, p)] (fun q => F.fullHalfDrift (x + L q.1) m side q.2) ∧
         c =ᶠ[𝓝 (0, p)] (fun q => F.fullHalfSpeed (x + L q.1) m side q.2)) := by
-  obtain ⟨d, c, hd, hc, hdp, hcp, hg, _⟩ :=
-    F.fullHalfFields_finiteAffine_representatives_uniform x hx L m side
-  exact ⟨d, c, hd, hc, hdp, hcp, hg⟩
+  have h := F.fullHalfFields_finiteAffine_representatives_uniform x hx L m side
+  have hs := h.choose_spec.choose_spec
+  exact ⟨h.choose, h.choose_spec.choose, hs.1, hs.2.1,
+    hs.2.2.1, hs.2.2.2.1, hs.2.2.2.2.1⟩
 
 end ContinuousFlexibility.Analysis.N04RealizationStart.NegativeOpticalFactors
 
