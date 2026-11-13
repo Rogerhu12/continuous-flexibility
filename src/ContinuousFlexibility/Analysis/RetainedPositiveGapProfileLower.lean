@@ -127,8 +127,9 @@ theorem retainedReference_positive_gap_profile_material_lower
     calc
       κ⁻¹ = (2 * c⁻¹) * radialE (n + 1) ^ P0 * d⁻¹ := by
         dsimp only [κ]
+        have hE0 : 0 ≤ radialE (n + 1) := (exp_pos _).le
         rw [inv_div, div_eq_mul_inv, mul_inv_rev, mul_inv_rev,
-          Real.rpow_neg (exp_pos _).le, inv_inv]
+          Real.rpow_neg hE0, inv_inv]
         ring
       _ ≤ (2 * c⁻¹) * (Cw * T.E0 (T.sample j) ^ Aw) *
           (Cs * T.E0 (T.sample j) ^ As) :=
@@ -162,7 +163,7 @@ theorem retainedReference_positive_gap_profile_material_lower
     dsimp only [d]
     ring
   have hhalf : d / 2 ≤ max (x - R * l) (R * u - x) := by
-    have hm := min_le_max (x - R * l) (R * u - x)
+    have hm : min (x - R * l) (R * u - x) ≤ max (x - R * l) (R * u - x) := min_le_max
     linarith only [hsum, hm]
   have hdist : (d / 2) * min (x - R * l) (R * u - x) ≤
       (x - R * l) * (R * u - x) := by

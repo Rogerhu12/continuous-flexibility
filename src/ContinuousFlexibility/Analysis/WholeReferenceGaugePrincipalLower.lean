@@ -57,13 +57,12 @@ theorem n04WholeReferenceGaugeAtlasData_positive_reference_lower_of_profile
       (fun j q => H j q.1) τ σ Q N
     (h ^ 2 * k / M ^ 2) * (p.1 * (1 - p.1)) ≤
       (V.coefficients (C.referenceState, 0) m).c p := by
-  let K := n04bActualTypedAtlas hT hS hN hfield e₀
-  let ψ := fun j => positiveReferenceCylinderChart (Y j)
-  let χ := fun j => positiveReferenceCylinderInverse (Y j)
-  let h₀ := fun j (q : PolarPoint) => H j q.1
   let x : PolarPoint := positiveReferenceCylinderInverse (Y i) p
   have hfields := n04WholeReferenceGaugeAtlasData_positive_fields
-    C L K e cell ψ χ h₀ τ σ Q N (C.referenceState, 0) m i hi
+    C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell
+    (fun j => positiveReferenceCylinderChart (Y j))
+    (fun j => positiveReferenceCylinderInverse (Y j))
+    (fun j (q : PolarPoint) => H j q.1) τ σ Q N (C.referenceState, 0) m i hi
   have hp01 : p ∈ Ioo (0 : ℝ) 1 ×ˢ (univ : Set ℝ) := by
     simpa only [canonicalOpen, hfields.1, hfields.2.1] using hp
   have hx : x ∈ Ioo (n04PositiveLeft i) (n04PositiveRight i) ×ˢ (univ : Set ℝ) :=
@@ -143,12 +142,14 @@ theorem n04WholeReferenceGaugeAtlasData_referencePrincipal_of_physical_costs
         (fun r hr => (hb r hr).2.2) hp
       obtain ⟨hl, hr, _, _, _, hcell, _, _, _, _, _, _⟩ :=
         n04WholeReferenceGaugeAtlasData_positive_fields
-          C L K e cell ψ χ h₀ τ σ Q N (C.referenceState, 0) m i hi
+          C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell
+          (fun i => positiveReferenceCylinderChart (Y i))
+          (fun i => positiveReferenceCylinderInverse (Y i))
+          (fun i (p : PolarPoint) => H i p.1) τ σ Q N (C.referenceState, 0) m i hi
       have hp01 : p.1 ∈ Ioo (0 : ℝ) 1 := by
         simpa only [canonicalOpen, hl, hr] using hp.1
-      let cost := B * T.E0 (T.sample (V.cell m)) ^ B
-      have hcost' : M i ^ 2 ≤ cost * (h i ^ 2 * k i) := by
-        simpa only [cost, hcell] using hcost i
+      let cost := B * T.E0 (T.sample (cell i)) ^ B
+      have hcost' : M i ^ 2 ≤ cost * (h i ^ 2 * k i) := hcost i
       have hpos : 0 < h i ^ 2 * k i := mul_pos (sq_pos_of_pos hh) hk
       have hcostpos : 0 < cost := by
         by_contra hn
@@ -161,7 +162,7 @@ theorem n04WholeReferenceGaugeAtlasData_referencePrincipal_of_physical_costs
         simpa only [div_eq_mul_inv, mul_comm] using hd
       have hnonneg : 0 ≤ p.1 * (1 - p.1) :=
         mul_nonneg hp01.1.le (sub_nonneg.mpr hp01.2.le)
-      simpa only [cost, hl, hr, sub_zero] using
+      simpa only [cost, hl, hr, hcell, sub_zero] using
         (mul_le_mul_of_nonneg_right hconstant hnonneg).trans hlower
 
 end ContinuousFlexibility.Analysis

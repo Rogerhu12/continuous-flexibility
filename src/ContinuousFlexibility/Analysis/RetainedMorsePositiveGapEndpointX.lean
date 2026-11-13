@@ -33,9 +33,9 @@ theorem retainedReference_positive_gap_endpointX_oscillation
   have hdata := hT
   obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, hcompare⟩ := hdata
   obtain ⟨B, A, hB, _, hindexBound⟩ := hcompare
-  obtain ⟨_, N, _, hlabels, hindex, _⟩ := hcoordinates
   have htransport := (retainedReference_positive_gap_cell_transport
     P hS hband hcoordinates).1
+  obtain ⟨_, N, _, hlabels, hindex, _⟩ := hcoordinates
   have hreal := (hS.2.2.2.1 S.sigma hS.2.2.1).1
   have hfloor (m : ℕ) : Γ.reference.cellIndex m =
       max ((S.family S.sigma).cellIndex m) N := by rw [hindex, hlabels]

@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope
 import Mathlib.Topology.Order.Compact
+import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 /-!
 # Potential bounds for an already chosen positive reference family
@@ -34,7 +35,8 @@ private theorem fixedReferencePotential_profile_compact_bound
   have hjet : |iteratedDeriv k w x| ≤ A j := by
     simpa only [Real.norm_eq_abs] using hA j x hx
   exact (hjet.trans (le_abs_self _)).trans
-    (Finset.single_le_sum (fun _ _ => abs_nonneg _) (Finset.mem_univ j))
+    (Finset.single_le_sum (f := fun k : Fin (s + 1) => |A k|)
+      (fun _ _ => abs_nonneg _) (Finset.mem_univ j))
 
 /-- Only coefficient bounds are selected. The supplied coordinate,
 height, inverse, and weight remain the same at every derivative order. -/

@@ -65,6 +65,9 @@ theorem retainedReference_natural_component_enumeration
   classical
   let D := S.family S.sigma
   let G := P.toEntryPair hS hband
+  have hGL : G.radiusL = P.pair.radiusL := rfl
+  have hGR : G.radiusR = P.pair.radiusR := rfl
+  have hGp : G.profile = P.pair.profile := rfl
   let R (side : Bool) := if side then G.radiusR else G.radiusL
   let a (side : Bool) (k : ℕ) := S.chain.radius side (S.chain.index + k)
     (morseLeftTurn (morseChainA S.chain (S.chain.index + k))
@@ -76,8 +79,9 @@ theorem retainedReference_natural_component_enumeration
     (hS.2.2.2.1 S.sigma hS.2.2.1).1
   have hE : ContDiff ℝ ∞ Γ.reference.w := hΓ.2.1.choose_spec.1.2.2.1.1
   have horder := morseRealization_turning_component_order hreal
+  have hcoordinates' := hcoordinates
   obtain ⟨o, N, hN, hlabels, hindex, hcells, hlocal, hleft, hright, hfibers, ha, hb⟩ :=
-    hcoordinates
+    hcoordinates'
   have hentry (side : Bool) :
       S.entry side S.chain.index = morseChainSeam S.chain side S.chain.index :=
     (hS.2.2.2.2.2 side S.chain.index 2 le_rfl (by decide) hband).2.2.2.2.2.1
@@ -127,7 +131,8 @@ theorem retainedReference_natural_component_enumeration
         (hclosed true k) (fun r hr => by rw [hw]; exact (G.right_tail r hr).1)).1
   have hcentral : NegativeRadialComponent Γ.reference
       (centralRadius (-sqrt centralOscillatorA)) (centralRadius (sqrt centralOscillatorA)) := by
-    simpa only [NegativeRadialComponent, ha, hb, hw] using (G.central_model_return hq hc hd).1
+    simpa only [NegativeRadialComponent, ha, hb, hw, hGL, hGR, hGp] using
+      (G.central_model_return hq hc hd).1
   let J₀ : N01aNegativeComponent Γ.reference :=
     ⟨(centralRadius (-sqrt centralOscillatorA), centralRadius (sqrt centralOscillatorA)), hcentral⟩
   let J (side : Bool) (k : ℕ) : N01aNegativeComponent Γ.reference :=
@@ -174,8 +179,10 @@ theorem retainedReference_natural_component_enumeration
       rw [morseTwoTailAt_tail]
       apply Subtype.ext
       apply Prod.ext
-      · simpa only [J, a, R, Nat.add_sub_of_le hn] using hl.symm
-      · simpa only [J, b, R, Nat.add_sub_of_le hn] using hr.symm
+      · simpa only [J, a, R, Nat.add_sub_of_le hn, hGL, hGR, N01aNegativeComponent.left]
+          using hl.symm
+      · simpa only [J, b, R, Nat.add_sub_of_le hn, hGL, hGR, N01aNegativeComponent.right]
+          using hr.symm
   let e : ℕ ≃ N01aNegativeComponent Γ.reference :=
     Equiv.ofBijective f ⟨twoTailAt_injective_of_separated J₀ J hneq hinj, hsurj⟩
   refine ⟨e, rfl, rfl, ?_⟩

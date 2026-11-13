@@ -38,8 +38,10 @@ private theorem positiveGeometry_scalar_data {Y H : ℝ → ℝ} {l r : ℝ}
     simpa only [positiveReferenceCylinderInverse, Function.comp_def] using
       hgeometry.inverse_smooth.fst.comp hline
   have hYpos (x : ℝ) : 0 < deriv Y x := by
-    simpa only [planeJacobian_positiveReferenceCylinderChart
-      (hY.differentiable (by simp) x)] using hgeometry.jacobian_positive (x, 0)
+    have h := hgeometry.jacobian_positive (x, 0)
+    rw [planeJacobian_positiveReferenceCylinderChart (p := (x, 0))
+      (hY.differentiable (by simp) x)] at h
+    exact h
   refine ⟨hY, hH, hχ, hYpos, ?_⟩
   intro x
   have hright (t : ℝ) : Y (Function.invFun Y t) = t :=
@@ -242,7 +244,8 @@ theorem n04WholeReferenceGauge_positive_geometryReferenceJets_fixedFamily
         exact ((positiveReferenceGeometryScalar_smooth (hgeometry i) v).comp
           contDiff_fst).contDiffOn
       · intro p hp
-        simp only [hEq, Prod.add_def, add_zero]
+        rw [hEq]
+        simp only [Prod.add_def, add_zero]
       · intro p hp a b hab
         rw [hEq, n08_mixedDerivative_radial, hsample]
         let t : ℝ := T.E0 (T.sample (cell i))
