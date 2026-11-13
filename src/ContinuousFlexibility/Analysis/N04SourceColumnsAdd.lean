@@ -31,8 +31,8 @@ theorem n04SourceColumns_add_cost {A B : ℝ} (hA : 0 < A) (hB : 0 < B) :
   have hp := coefficientEnvelope_pack (2 * M) M
   refine ⟨hp.choose, hp.choose_spec.1, ?_⟩
   intro E H u v w x y hE hH hu hv huw hvw hx hy
-  have hx' := n04SourceColumns_cost_raise hA (le_max_left _ _) hE hH hu huw hx
-  have hy' := n04SourceColumns_cost_raise hB (le_max_right _ _) hE hH hv hvw hy
+  have hx' := n04SourceColumns_cost_raise hA (le_max_left A B) hE hH hu huw hx
+  have hy' := n04SourceColumns_cost_raise hB (le_max_right A B) hE hH hv hvw hy
   calc
     |x + y| ≤ |x| + |y| := abs_add_le _ _
     _ ≤ M * E ^ M * H * w + M * E ^ M * H * w := add_le_add hx' hy'

@@ -122,7 +122,8 @@ theorem sourceColumns_inverseDeterminant_fixedSign {b : ℕ} {ε : ℝ}
   have hV : IsPreconnected unitStrip := isPreconnected_Ioo.prod isPreconnected_univ
   have hzero : (0 : Parameter (G.S η)) ∈ sectorNeighborhood (G.S η) b ε ε := by
     change sectorGrading (G.S η) b (0 : StateDirections (G.S η)) < ε ∧ |(0 : ℝ)| < ε
-    simpa only [map_zero, abs_zero] using And.intro hA.2.1 hA.2.1
+    exact ⟨(map_zero (sectorGrading (G.S η) b)).trans_lt hA.2.1,
+      abs_zero.trans_lt hA.2.1⟩
   have hmid : ((1 / 2 : ℝ), (0 : ℝ)) ∈ unitStrip := by
     refine ⟨?_, mem_univ _⟩
     norm_num

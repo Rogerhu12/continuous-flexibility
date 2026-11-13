@@ -72,7 +72,9 @@ theorem N04SourceReferenceData.sourceColumns_scalarComp
     V hV (fun _ : ℝ => f₀ m) g RF hg (fun _ _ => hmap m)
     q hq J 0 (mem_univ _) (fun _ => True) Fin.elim0 (fun i => i.elim0)
     1 M 1 zero_le_one le_rfl hM le_rfl
-    (fun n hn j hj => (ho.choose_spec.2 m q hq j n (by omega)).trans hoM)
+    (fun n hn j hj => (ho.choose_spec.2 m q hq j n (by
+      change n ≤ a + b at hn
+      omega)).trans hoM)
     (fun j hj u w huw z _ => by
       have hj0 : j = 0 := Nat.eq_zero_of_le_zero hj
       subst j
