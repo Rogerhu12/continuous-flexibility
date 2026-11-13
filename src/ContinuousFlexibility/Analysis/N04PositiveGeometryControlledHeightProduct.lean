@@ -38,11 +38,11 @@ theorem n04PositiveGeometry_radialBoundaryJet_threeFactors
   simp only [radialBoundaryJet, n04PositiveGeometry_rootHeightProductTrace]
   rw [iteratedDeriv_fun_mul (ha.of_le (by simp))
     ((hf'.mul hg').of_le (by simp)), Fintype.sum_sigma,
-    Fin.sum_univ_eq_sum_range]
+    ← Fin.sum_univ_eq_sum_range]
   apply Finset.sum_congr rfl
   intro j _
   rw [iteratedDeriv_fun_mul (hf'.of_le (by simp)) (hg'.of_le (by simp)),
-    Fin.sum_univ_eq_sum_range, Finset.mul_sum]
+    ← Fin.sum_univ_eq_sum_range, Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro l _
   ring
@@ -85,7 +85,6 @@ theorem n04PositiveGeometry_rootHeightProductTrace_word_bound
   let mulData := n04PositiveGeometry_boundaryWord_mul (E := E) N L hL
   let Cmul : ℝ := mulData.choose
   have hCmul : 1 ≤ Cmul := mulData.choose_spec.1
-  have hmul := mulData.choose_spec.2
   let I := Σ j : Fin (n + 1), Fin (n - j.val + 1)
   let coeff (c : I) : ℝ :=
     (n.choose c.1.val : ℝ) * ((n - c.1.val).choose c.2.val : ℝ)
@@ -105,7 +104,8 @@ theorem n04PositiveGeometry_rootHeightProductTrace_word_bound
     ((coeff c * a c.1.val) • ContinuousLinearMap.id ℝ ℝ)
   have hterm (c : I) : N04BoundaryWordBounds (JT c) K s d x θ P
       ((C₀ * Cmul) * M ^ (N + 3)) H t shift := by
-    have hp := hmul (J c.2.val (by omega)) (Q (n - c.1.val - c.2.val) (by omega))
+    have hp := mulData.choose_spec.2 (J c.2.val (by omega))
+      (Q (n - c.1.val - c.2.val) (by omega))
       K s d hN x hx θ P M H t hM hH hHL ht shift (hf _ _) (hg _ _)
     have hs := hp.scale (coeff c * a c.1.val)
     apply hs.enlarge hH (zero_le_one.trans ht)

@@ -52,6 +52,7 @@ theorem n04PositiveGeometry_affineSpatial_word_bound
       ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd', Prod.mk_add_mk, zero_add]
   have hAmap : MapsTo (fun z => (0, a) + A z) (U ×ˢ W) (U ×ˢ V) := by
     intro z hz
+    change (0, a) + A z ∈ U ×ˢ V
     rw [hA z]
     exact ⟨hz.1, hmap hz.2⟩
   let K : SmoothDirections (U ×ˢ W)
@@ -64,7 +65,8 @@ theorem n04PositiveGeometry_affineSpatial_word_bound
       (Q.unique K n (x, y) ⟨hx, hy⟩)
     simpa only [K, SmoothDirections.congrOn, SmoothDirections.compAffine_apply, hA,
       A, ContinuousLinearMap.prod_apply, ContinuousLinearMap.comp_apply,
-      ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd'] using h
+      ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
+      Prod.mk_add_mk, zero_add] using h
   let u : Fin n → E × PolarPoint := fun i => C⁻¹ • ((v i).1, L (v i).2)
   have hscale (s : Seminorm ℝ E) (i : Fin n) :
       s (u i).1 = C⁻¹ * s (v i).1 := by

@@ -67,7 +67,7 @@ theorem N04BoundaryWordBounds.angularIterate
         ih (d := d + 1)
           (by simpa only [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using h)
       exact (hprev.angular hx hU hP).congr hx (fun y _ => by
-        simp only [iteratedDeriv_one, iteratedDeriv_succ])
+        simp only [iteratedDeriv_succ, iteratedDeriv_zero])
 
 variable {n : ℕ} {A : X × ℝ → PolarPoint [×n]→L[ℝ] ℝ}
   {f : ℕ → X × ℝ → ℝ}

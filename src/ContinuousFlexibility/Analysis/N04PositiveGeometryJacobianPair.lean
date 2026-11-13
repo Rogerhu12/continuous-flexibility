@@ -16,6 +16,16 @@ namespace ContinuousFlexibility.Analysis
 open Set ContinuousFlexibility.Statements CanonicalGeometry
 open scoped ContDiff
 
+private theorem jacobianFormula_congr
+    {j j₀ r r₀ t t₀ : PolarPoint → ℝ} (hj : j₀ = j) (hr : r₀ = r)
+    (ht : t₀ = t) (c : ℝ) (q : PolarPoint)
+    (h : j q = c * (mixedDerivative 1 0 r q * (1 + mixedDerivative 0 1 t q) -
+      mixedDerivative 1 0 t q * mixedDerivative 0 1 r q)) :
+    j₀ q = c * (mixedDerivative 1 0 r₀ q * (1 + mixedDerivative 0 1 t₀ q) -
+      mixedDerivative 1 0 t₀ q * mixedDerivative 0 1 r₀ q) := by
+  rw [hj, hr, ht]
+  exact h
+
 attribute [local instance]
   n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
   n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
@@ -66,10 +76,10 @@ theorem positiveGeometry_jacobian_reference_formula {base : ℕ} {ε : ℝ}
             (1 + mixedDerivative 0 1 (G.atomRef η .chartAngleDefect m) q) -
           mixedDerivative 1 0 (G.atomRef η .chartAngleDefect m) q *
             mixedDerivative 0 1 (G.atomRef η .chartRadial m) q) := by
-  rw [G.atomRef_eq_zero η .jacobian m, G.atomRef_eq_zero η .chartRadial m,
-    G.atomRef_eq_zero η .chartAngleDefect m]
-  exact G.positiveGeometry_jacobian_atom_formula hA η
-    (G.n04PrincipalPositive_sector_zero η base hA.2.1) hm hq
+  exact jacobianFormula_congr (G.atomRef_eq_zero η .jacobian m)
+    (G.atomRef_eq_zero η .chartRadial m) (G.atomRef_eq_zero η .chartAngleDefect m) _ q
+    (G.positiveGeometry_jacobian_atom_formula hA η
+      (G.n04PrincipalPositive_sector_zero η base hA.2.1) hm hq)
 
 theorem positiveGeometry_jacobian_pair {base : ℕ} {ε : ℝ}
     (hA : G.Admissible base ε) (η : (G.W.S.height (3 / 4 : ℝ)).Space)
