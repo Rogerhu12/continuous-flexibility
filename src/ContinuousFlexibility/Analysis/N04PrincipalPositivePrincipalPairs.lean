@@ -58,7 +58,14 @@ theorem n04PrincipalPositive_principal_polynomial {b : ℕ} {ε : ℝ}
     liftSectorParameter_mem_stateNeighborhood hz le_rfl
   have hs : stateSector (G.S η) (G.lift η z).1 :=
     G.W.through03.1.1.2.2.1.liftSectorParameter_sector z
-  have hJ := G.n04PrincipalPositive_inverseJacobian_formula h η hw hs hm q
+  have hJ : planeJacobian ((G.V η).inverseChart (G.lift η z) m) q =
+      ((G.V η).physicalRight m - (G.V η).physicalLeft m) *
+          mixedDerivative 1 0 (G.atomFamily η .inverseRadial z m) q *
+          (1 + mixedDerivative 0 1 (G.atomFamily η .inverseAngleDefect z m) q) -
+        mixedDerivative 1 0 (G.atomFamily η .inverseAngleDefect z m) q *
+          (((G.V η).physicalRight m - (G.V η).physicalLeft m) *
+            mixedDerivative 0 1 (G.atomFamily η .inverseRadial z m) q) :=
+    G.n04PrincipalPositive_inverseJacobian_formula h η hw hs hm q
   dsimp only at hf
   rw [← hJ] at hf
   fin_cases v
@@ -107,7 +114,8 @@ theorem n04PrincipalPositive_principal_pairBounds_of_inverse {b : ℕ} {ε : ℝ
   · intro m q hq
     have hzero := G.n04PrincipalPositive_principal_polynomial h η hz0 m.property hq v
     simpa only [atomFamily, atomRef, pulled, pulledRef, pulledHeight, pulledHeightRef,
-      heightField, G.n04PrincipalPositive_lift_zero η] using hzero.symm
+      heightField, G.n04PrincipalPositive_lift_zero η, Bool.false_eq_true, ↓reduceIte]
+      using hzero.symm
 
 /-- A single smaller positive neighborhood supplies all three actual
 principal pairs. It is chosen before the component and all jet orders. -/

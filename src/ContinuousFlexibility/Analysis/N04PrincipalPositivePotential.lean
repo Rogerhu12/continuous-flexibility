@@ -40,11 +40,13 @@ theorem n04PrincipalPositive_divergence_mixed_flux
   have heR : EqOn (fun q => A.a q * radialPartial v q + A.b q * angularPartial v q)
       (fun q => A.a q * mixedDerivative 1 0 v q + A.b q * mixedDerivative 0 1 v q) U := by
     intro q hq
+    dsimp only
     rw [radialPartial_eq_mixedDerivative_on hU hv hq,
       angularPartial_eq_mixedDerivative_on hU hv hq]
   have heT : EqOn (fun q => A.b q * radialPartial v q + A.c q * angularPartial v q)
       (fun q => A.b q * mixedDerivative 1 0 v q + A.c q * mixedDerivative 0 1 v q) U := by
     intro q hq
+    dsimp only
     rw [radialPartial_eq_mixedDerivative_on hU hv hq,
       angularPartial_eq_mixedDerivative_on hU hv hq]
   intro p hp
@@ -71,8 +73,10 @@ theorem n04PrincipalPositive_reciprocal_pulledHeight_smooth {b : ℕ} {ε : ℝ}
   have hs : stateSector (G.S η) (G.lift η z).1 :=
     G.W.through03.1.1.2.2.1.liftSectorParameter_sector z
   have hg := G.n04PrincipalPositive_rangeGeometry h η hw hs hm
-  have hv := (hg.height_smooth.comp hg.inverse_smooth).inv
-    (fun p => (hg.height_positive ((G.V η).inverseChart (G.lift η z) m p)).ne')
+  have hv : ContDiff ℝ ∞ (fun p : PolarPoint =>
+      ((G.V η).height (G.lift η z) m ((G.V η).inverseChart (G.lift η z) m p))⁻¹) :=
+    (hg.height_smooth.comp hg.inverse_smooth).inv
+      (fun p => (hg.height_positive ((G.V η).inverseChart (G.lift η z) m p)).ne')
   simpa only [pulledHeight, heightField, pulledPoint,
     G.n04PrincipalPositive_unitPoint_eq η hm, id_eq, Function.comp_apply] using hv
 

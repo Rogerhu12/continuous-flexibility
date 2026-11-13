@@ -72,7 +72,8 @@ theorem n04PrincipalPositive_potential_pairBounds {b : ℕ} {ε : ℝ}
     have hzero := G.n04PrincipalPositive_potential_unit_formula h η hz0 m.property
       (ha.spatial m 0 hz0) (hb.spatial m 0 hz0) (hc.spatial m 0 hz0) hq
     simpa only [atomFamily, atomRef, pulledHeight, pulledHeightRef,
-      heightField, G.n04PrincipalPositive_lift_zero η] using hzero.symm
+      heightField, G.n04PrincipalPositive_lift_zero η, Bool.false_eq_true, ↓reduceIte]
+      using hzero.symm
 
 end N04RealizationGauge
 
