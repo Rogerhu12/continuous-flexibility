@@ -139,7 +139,8 @@ theorem n04Realization_doubleAngularExpansion_height_bound
           |AT a b k u| ≤ (C * t) * parameterHeightWeight H (r + k) *
             t ^ (a + b) * ∏ i, p (u i) := by
         have h := hA a (b + 1) k (by omega) u
-        simpa only [AT, Nat.add_assoc, pow_succ,
+        have he : a + (b + 1) = (a + b) + 1 := by omega
+        simpa only [AT, he, pow_succ,
           mul_assoc, mul_comm, mul_left_comm] using h
       have hh := ih (r := r + 1) (A := AH) (C := C * p (v 0).1.1)
         (hC := mul_nonneg hC (hp _))
@@ -233,7 +234,7 @@ theorem n04Realization_doubleAngularExpansion_height_bound
                   (fun b k => scalarAngularExpansion k (fun a j => AR a b j)) (Fin.tail v)| +
                 |(v 0).2 * scalarAngularExpansion n
                   (fun b k => scalarAngularExpansion k (fun a j => AT a b j)) (Fin.tail v)| :=
-              add_le_add_right (abs_add_le _ _) _
+              add_le_add (abs_add_le _ _) le_rfl
             _ = _ := by rw [abs_mul, abs_mul]
         _ ≤ (2 * L) * Z + (M * L) * Z + (M * L) * Z :=
           add_le_add (add_le_add hheadBound hr') ha'

@@ -67,11 +67,11 @@ theorem n04Realization_mixedSlots_snoc_with_arity
       (∀ i, w.isState i = true → (v i).2 = 0))
     (e : PolarPoint) (he : ‖e‖ ≤ 1) :
     ∃ w : StateAngleWord (n + 1), P w.stateArity ∧
-      (∀ i, low (Fin.snoc v (0, e) i).1 ≤ 1) ∧
-      (∀ i, high (Fin.snoc v (0, e) i).1 ≤ R) ∧
-      (∀ i, ‖(Fin.snoc v (0, e) i).2‖ ≤ 1) ∧
-      (∀ i, w.isState i = false → (Fin.snoc v (0, e) i).1 = 0) ∧
-      (∀ i, w.isState i = true → (Fin.snoc v (0, e) i).2 = 0) := by
+      (∀ i, low (Fin.snoc (α := fun _ : Fin (n + 1) => E × PolarPoint) v ((0 : E), e) i).1 ≤ 1) ∧
+      (∀ i, high (Fin.snoc (α := fun _ : Fin (n + 1) => E × PolarPoint) v ((0 : E), e) i).1 ≤ R) ∧
+      (∀ i, ‖(Fin.snoc (α := fun _ : Fin (n + 1) => E × PolarPoint) v ((0 : E), e) i).2‖ ≤ 1) ∧
+      (∀ i, w.isState i = false → (Fin.snoc (α := fun _ : Fin (n + 1) => E × PolarPoint) v ((0 : E), e) i).1 = 0) ∧
+      (∀ i, w.isState i = true → (Fin.snoc (α := fun _ : Fin (n + 1) => E × PolarPoint) v ((0 : E), e) i).2 = 0) := by
   classical
   obtain ⟨w, hw, hl, hh, hp, hs, ha⟩ := hv
   let w' : StateAngleWord (n + 1) :=
