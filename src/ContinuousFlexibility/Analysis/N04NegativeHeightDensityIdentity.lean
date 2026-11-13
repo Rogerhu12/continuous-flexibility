@@ -37,8 +37,9 @@ theorem n04NegativeHeight_angularFactor_eq_of_density
     A canonicalAiryPrincipalCoefficients F h p hJ hh ha.symm hb.symm hc.symm).1
   have hq : n04NegativeHeightAngularFactor F p / (h p ^ 2 * |planeJacobian F p|) =
       A.a p := by
-    simpa only [adjugateCoordinatePrincipalCoefficients, canonicalAiryPrincipalCoefficients,
-      coefficientQuadratic, one_mul, zero_mul, zero_add, add_zero, neg_sq, neg_mul,
+    simpa only [n04NegativeHeightAngularFactor,
+      adjugateCoordinatePrincipalCoefficients, canonicalAiryPrincipalCoefficients,
+      coefficientQuadratic, one_mul, mul_one, zero_mul, mul_zero, zero_add, add_zero, neg_sq, neg_mul,
       ← sub_eq_add_neg, one_div, div_eq_mul_inv, mul_comm] using hr
   have he := (div_eq_iff
     (mul_ne_zero (pow_ne_zero 2 hh) (abs_ne_zero.mpr hJ))).mp hq
@@ -69,7 +70,7 @@ theorem n04NegativeHeight_sqrt_eq_of_density
     ring
   have hisquare : (h p)⁻¹ ^ 2 = (A.a p * |planeJacobian F p|) /
       n04NegativeHeightAngularFactor F p := by
-    rw [← inv_pow, hsquare, inv_div]
+    rw [inv_pow, hsquare, inv_div]
   exact ⟨hfactor, by rw [← hsquare, Real.sqrt_sq hh.le],
     by rw [← hisquare, Real.sqrt_sq (inv_pos.mpr hh).le]⟩
 

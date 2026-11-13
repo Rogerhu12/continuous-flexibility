@@ -77,12 +77,14 @@ theorem n04NegativeGeometry_referenceHalf_fields
   have hFg (p : PolarPoint) (hp : p ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ)) :
       K.chart z k =ᶠ[𝓝 p] n04bRootPhysicalChart
         (n04bActualTravelChart S C L z m) (C.travel m) side := by
+    dsimp only [K, n04bActualTypedAtlas]
     rw [hf.2.2.2.1]
     exact H.component_chart_germ hp
   have hHg (p : PolarPoint) (hp : p ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ)) :
       K.height z k =ᶠ[𝓝 p] n04bRootPhysicalHeight (L.coefficients z)
         (n04bCharacteristicHalfGap (L.coefficients z))
         (n04bActualTravelChart S C L z m) (C.travel m) side := by
+    dsimp only [K, n04bActualTypedAtlas]
     rw [hf.2.2.2.2.2]
     exact H.component_height_germ hp
   have hregular (p : PolarPoint) (hp : p ∈ referencePhysicalPieceOpen S K k) :

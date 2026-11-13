@@ -142,14 +142,17 @@ theorem continuous_graph_reindex {U : Set E} {n N : ℕ}
     (B : N04NegativeGeometryImplicitJet U Y n) (σ : Fin n → Fin N) :
     ContinuousOn (fun p : E × (Fin N → E) =>
       graph n (B.value p.1) (p.2 ∘ σ)) (U ×ˢ univ) := by
-  have hc : ContinuousOn
-      (fun p : E × (Fin n → E) => graph n (B.value p.1) p.2) (U ×ˢ univ) :=
-    ((parameter n).cont.comp continuous_snd).continuousOn.add
-      ((ContinuousLinearMap.inr ℝ E Y).continuous.comp_continuousOn B.continuous)
-  exact hc.comp
-    (continuous_fst.prodMk
-      (continuous_pi (fun i => (continuous_apply (σ i)).comp continuous_snd))).continuousOn
-    (fun _ hp => ⟨hp.1, mem_univ _⟩)
+  have hσ : Continuous (fun v : Fin N → E => v ∘ σ) :=
+    continuous_pi (fun i => continuous_apply (σ i))
+  have hb : ContinuousOn (fun p : E × (Fin N → E) =>
+      B.value p.1 (p.2 ∘ σ)) (U ×ˢ univ) :=
+    B.continuous.comp
+      (continuous_fst.prodMk (hσ.comp continuous_snd)).continuousOn
+      (fun _ hp => ⟨hp.1, mem_univ _⟩)
+  have hp : Continuous (fun p : E × (Fin N → E) => parameter n (p.2 ∘ σ)) :=
+    (parameter n).cont.comp (hσ.comp continuous_snd)
+  simpa only [graph_apply] using
+    hp.continuousOn.add (continuousOn_const.prodMk hb)
 
 def forcing {U : Set E} {V : Set Y} {H : E × Y → Y} {N : ℕ}
     (J : SmoothDirections (U ×ˢ V) H) (g : E → Y)
