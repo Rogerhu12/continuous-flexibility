@@ -107,12 +107,17 @@ private theorem n04NegativeGeometry_obligation_contradicts_admissible
       (0, t) (hsub hz) i
     have hratio := n04NegativeGeometry_perturbedGauge_pulledHeight_positive
       G φ η (0, t) m i hi hστ y.val
+    have hswitch :
+        (if t = 0 then (1 : ℝ) else
+          φ i (positiveReferenceCylinderInverse (G.Y i) y.val)) = 2 :=
+      (if_neg ht).trans hfactor
     change G'.pulledHeight η (0, t) m y.val = G.pulledHeight η (0, t) m y.val / 2
     calc
       G'.pulledHeight η (0, t) m y.val =
           G.pulledHeight η (0, t) m y.val /
             (if t = 0 then 1 else φ i (positiveReferenceCylinderInverse (G.Y i) y.val)) := hratio
-      _ = G.pulledHeight η (0, t) m y.val / 2 := by rw [if_neg ht, hfactor]
+      _ = G.pulledHeight η (0, t) m y.val / 2 :=
+        congrArg (fun denominator : ℝ => f (0, t) / denominator) hswitch
   have hzero : g 0 = f 0 :=
     (n04NegativeGeometry_gauge_pulledHeight_zero G' η hG' m i hi y.val).trans
       (n04NegativeGeometry_gauge_pulledHeight_zero G η hG m i hi y.val).symm

@@ -160,6 +160,25 @@ These have been replaced by explicitly typed scalar equalities, without
 raising heartbeat limits. The inherited reference-chain failure moved to
 `ActualReferenceRootFiniteMaterialData.lean:92`
 (`exists_bound_of_continuousOn` on a split line); the subnode does not
-import that module. The complete obstruction audit remains pending until
-its dependencies pass. The original NegativeGeometry blueprint theorem is
-not marked complete.
+import that module.
+
+The third run, `43419028122` at `550080d9`, compiled the jump obstruction,
+gauge perturbation, and explicit interior factor, so all eight supporting
+modules now compile. The final obstruction reached elaboration but hit
+the default heartbeat limit in a rewrite involving the large gauge record;
+that proof is being split into scalar equalities without changing the
+limit. Its guarded axiom audit has not yet passed. The original
+NegativeGeometry blueprint theorem is not marked complete.
+
+The inherited reference-chain call can be repaired by keeping the method
+dot adjacent to its receiver:
+
+```lean
+  obtain ⟨W₀, hW₀⟩ :=
+    (isCompact_Icc : IsCompact (Icc D.a D.b)).exists_bound_of_continuousOn
+      hD.2.2.1.1.continuous.continuousOn
+```
+
+The split-line version produces the spurious `LE.le`/`Membership.mem`
+method lookup errors; the subsequent destructuring error is a consequence.
+The lead-owned file is unchanged on this branch.
