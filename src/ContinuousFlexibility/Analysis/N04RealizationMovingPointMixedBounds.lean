@@ -38,7 +38,7 @@ def n04Realization_movingPoint_mixedRegularity
     exact ⟨by simpa only [L, ContinuousLinearMap.coe_fst'] using hz.1, hφ hz⟩
   let J : SmoothDirections (U ×ˢ Ω) (fun z => f (z.1, φ z)) :=
     (smoothDirections_realCompTVS G F hmap).congrOn (fun z _ => by
-      simp only [L, ContinuousLinearMap.coe_fst'])
+      simp only [Function.comp_apply, L, ContinuousLinearMap.coe_fst'])
   exact n04Realization_jointMixedRegularity
     (f := fun z => f (z.1, φ z)) J hU hΩ hc
 
@@ -80,7 +80,7 @@ theorem n04Realization_movingPoint_mixed_bound
     exact ⟨by simpa only [L, ContinuousLinearMap.coe_fst'] using hz.1, hφ hz⟩
   let J : SmoothDirections (U ×ˢ Ω) (fun z => f (z.1, φ z)) :=
     (smoothDirections_realCompTVS G F hmap).congrOn (fun z _ => by
-      simp only [L, ContinuousLinearMap.coe_fst'])
+      simp only [Function.comp_apply, L, ContinuousLinearMap.coe_fst'])
   let scale : E × PolarPoint → ℝ := fun w => low w.1 + high w.1 / R +
     t * |w.2.1| + t * |w.2.2|
   have ht0 : 0 ≤ t := zero_le_one.trans ht
@@ -104,7 +104,7 @@ theorem n04Realization_movingPoint_mixed_bound
       rw [show κ c i + β c i = c.partSize i from (w.restrict (c.emb i)).arity_sum]
       exact c.partSize_pos i
     have hcost (c : OrderedFinpartition n) :
-        (∑ i, β c i + (offset + 1) * κ c i) ≤ s + (offset + 1) * K :=
+        (∑ i : Fin c.length, (β c i + (offset + 1) * κ c i)) ≤ s + (offset + 1) * K :=
       n04Realization_partition_mixedSlot_cost w c offset hnN hw
     have hraw := n04Realization_realComp_weighted_power_bound G F hmap scale hscale
       hC h4A ht n (s + (offset + 1) * K) (x, q) u
@@ -140,7 +140,9 @@ theorem n04Realization_movingPoint_mixed_bound
           (κ c i) (β c i) offset (hpart c i) hA ht hs hi
         simpa only [G, scale, n04Realization_linearPointGraph_D_apply] using hb)
     have hcard : (Fintype.card (OrderedFinpartition n) : ℝ) ≤ count :=
-      Finset.single_le_sum (fun _ _ => Nat.cast_nonneg _)
+      Finset.single_le_sum
+        (f := fun j : Fin (K + s + 1) => (Fintype.card (OrderedFinpartition j.val) : ℝ))
+        (fun _ _ => Nat.cast_nonneg _)
         (Finset.mem_univ (⟨n, Nat.lt_succ_of_le hnN⟩ : Fin (K + s + 1)))
     have hpows := pow_le_pow_right₀ h4A hnN
     have hcount0 : 0 ≤ count := Finset.sum_nonneg (fun _ _ => Nat.cast_nonneg _)
