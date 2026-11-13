@@ -6,6 +6,7 @@ import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
 import ContinuousFlexibility.Analysis.N06RootJetTransportCalculus
 import ContinuousFlexibility.Analysis.N04NegativeInverseFiniteEnvelope
 import ContinuousFlexibility.Analysis.N04NegativeInversePairSampleEnvelope
+import ContinuousFlexibility.Analysis.N04NegativeInverseCrossingCalculus
 
 /-!
 # Actual scalar fields across the old negative cut
@@ -48,6 +49,23 @@ def n04NegativeInverseScalarAtom (i : Fin 3) : Atom :=
 theorem n04NegativeInverseScalarAtom_physical (i : Fin 3) :
     negativePhysicalGeometryAtom (n04NegativeInverseScalarAtom i) := by
   fin_cases i <;> trivial
+
+theorem n04NegativeInverseScalarAtom_property
+    {P : Atom → Prop} (hr : P .chartRadial) (ha : P .chartAngleDefect)
+    (hh : P .height) (i : Fin 3) : P (n04NegativeInverseScalarAtom i) := by
+  fin_cases i
+  · exact hr
+  · exact ha
+  · exact hh
+
+private theorem n04NegativeInverse_nil_prefix
+    {x M H t : ℝ} {shift : ℕ}
+    (h : x ≤ M * parameterHeightWeight H StateAngleWord.nil.stateArity *
+      t ^ (StateAngleWord.nil.angleArity + shift * StateAngleWord.nil.stateArity - 1)) :
+    x ≤ M := by
+  simpa only [StateAngleWord.stateArity, StateAngleWord.angleArity,
+    Nat.mul_zero, Nat.add_zero, Nat.zero_sub, parameterHeightWeight, if_true,
+    pow_zero, mul_one] using h
 
 theorem n04NegativeInverseOverlapOuter_contDiffOn (height : Bool) :
     ContDiffOn ℝ ∞ (n04NegativeInverseOverlapOuter height)
@@ -93,9 +111,11 @@ theorem n04NegativeInverseOverlapOuter_finiteJets (N : ℕ) :
   let fst : (ℝ × ℝ) →L[ℝ] ℝ := ContinuousLinearMap.fst ℝ ℝ ℝ
   let snd : (ℝ × ℝ) →L[ℝ] ℝ := ContinuousLinearMap.snd ℝ ℝ ℝ
   have hfst : ‖fst‖ ≤ 1 := ContinuousLinearMap.opNorm_le_bound fst zero_le_one
-    (fun p => by simpa only [one_mul] using norm_fst_le p)
+    (fun p => by
+      simpa only [fst, ContinuousLinearMap.coe_fst', one_mul] using norm_fst_le p)
   have hsnd : ‖snd‖ ≤ 1 := ContinuousLinearMap.opNorm_le_bound snd zero_le_one
-    (fun p => by simpa only [one_mul] using norm_snd_le p)
+    (fun p => by
+      simpa only [snd, ContinuousLinearMap.coe_snd', one_mul] using norm_snd_le p)
   refine ⟨C, hC, ?_⟩
   intro height n hn p hp
   have hpopen : p.1 ∈ Ioo (1 / 2 : ℝ) (4 / 3) :=
@@ -116,8 +136,10 @@ theorem n04NegativeInverseOverlapOuter_finiteJets (N : ℕ) :
     cases j with
     | zero => simpa only [norm_iteratedFDeriv_zero, Real.norm_eq_abs] using
         (le_add_of_nonneg_left zero_le_one : |p.2| ≤ 1 + |p.2|)
-    | succ j => exact (norm_iteratedFDeriv_linear_of_pos snd (j + 1) (by omega) p).trans
-        (hsnd.trans (le_add_of_nonneg_right (abs_nonneg _)))
+    | succ j =>
+        simpa only [snd, ContinuousLinearMap.coe_snd'] using
+          (norm_iteratedFDeriv_linear_of_pos snd (j + 1) (by omega) p).trans
+            (hsnd.trans (le_add_of_nonneg_right (abs_nonneg _)))
   cases height with
   | false =>
       apply (hroot' n hn).trans
@@ -171,15 +193,18 @@ theorem n04NegativeInverse_overlapScalar_bound
   have hU' : IsOpen U' := J.continuousOn.isOpen_inter_preimage J.open_domain hV
   have hx' : x ∈ U' := ⟨hx,
     ⟨⟨by linarith [hband.1], by linarith [hband.2]⟩, mem_univ _⟩⟩
-  let J' := J.restrict hU' inter_subset_left
-  let Q' := (Q.restrict hU' inter_subset_left).congrOn (fun y hy => heq y hy.1)
+  let J' : SmoothDirections U' f := J.restrict hU' inter_subset_left
+  let Q' : SmoothDirections U' (n04NegativeInverseOverlapOuter height ∘ f) :=
+    (Q.restrict hU' inter_subset_left).congrOn (fun y hy => heq y hy.1)
   have hout (j : ℕ) (hj : j ≤ n) :
       ‖iteratedFDeriv ℝ j (n04NegativeInverseOverlapOuter height) (f x)‖ ≤
         (2 : ℝ) ^ N * C * (1 + M) :=
     (houter height j (hj.trans hnN) (f x) hband).trans
       (mul_le_mul_of_nonneg_left (add_le_add le_rfl hvalue)
         (mul_nonneg (pow_nonneg (by norm_num) _) (zero_le_one.trans hC)))
-  exact n04NegativeInverse_contDiff_comp_sharp_bound J' Q' hV
+  exact n04NegativeInverse_contDiff_comp_sharp_bound
+    (X := E) (Y := ℝ × ℝ) (Z := ℝ) (U := U') (V := V)
+    (f := f) (g := n04NegativeInverseOverlapOuter height) J' Q' hV
     (n04NegativeInverseOverlapOuter_contDiffOn height) (fun y hy => hy.2)
     hn w shift hshift hx'
     (mul_nonneg (mul_nonneg (pow_nonneg (by norm_num) _) (zero_le_one.trans hC))
@@ -249,6 +274,9 @@ theorem negativeInverse_physicalAtom_fields
         (liftSectorParameter G.W.S G.W.C z) m side p :=
     congrArg₂ (fun (H : PolarPoint → ℝ) (q : PolarPoint) => H q)
       hf.2.2.2.2.2.2 hp
+  have hbounds : ((G.V η).left k, (G.V η).right k) =
+      ((0 : ℝ), n04bRootCutRadius (G.W.C.travel m)) :=
+    Prod.ext hf.1 hf.2.1
   refine ⟨?_, ?_, ?_⟩
   · change (((G.V η).chart (G.lift η z) k
       (physicalUnitPoint (G.V η) k
@@ -256,7 +284,7 @@ theorem negativeInverse_physicalAtom_fields
         (G.V η).left k) / ((G.V η).right k - (G.V η).left k) = _
     simpa only [sub_zero] using
       (congrArg₂ (fun (q : PolarPoint) (bounds : PolarPoint) =>
-        (q.1 - bounds.1) / (bounds.2 - bounds.1)) hchart (Prod.ext hf.1 hf.2.1))
+        (q.1 - bounds.1) / (bounds.2 - bounds.1)) hchart hbounds)
   · change ((G.V η).chart (G.lift η z) k
       (physicalUnitPoint (G.V η) k
         (n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData (G.V η)) k p))).2 - p.2 = _
@@ -287,37 +315,45 @@ theorem negativeInverse_referenceRadial_le_one
   have hlen : (G.V η).physicalLeft k < (G.V η).physicalRight k :=
     sub_pos.mp (hl η k).1
   apply n04NegativeInverse_le_on_closedHalf hlen hhalf
-  · exact (J.continuousOn.continuousAt (J.open_domain.mem_nhds ⟨hzero, hp⟩)).comp
-      (continuousAt_const.prodMk continuousAt_id)
+  · exact n04NegativeInverse_fixedParameter_continuousAt
+      (E := Parameter G.W.S)
+      (U := sectorNeighborhood G.W.S G.W.base G.W.ε G.W.ε)
+      (Ω := Ioo (G.W.C.left m) (G.W.C.right m) ×ˢ (univ : Set ℝ))
+      (f := fun x : Parameter G.W.S × PolarPoint =>
+        G.negativeInversePhysicalAtomFamily η .chartRadial x.1 k x.2) J hzero hp
   · intro r hr
     let q := n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData (G.V η)) k r
     have hpq : physicalUnitPoint (G.V η) k q = r :=
       n07aCanonicalUnitPoint_inverse (K := n07aPhysicalIntervalData (G.V η)) hlen r
     change G.atomFamily η .chartRadial 0 k q ≤ 1
-    rw [G.negativeInverse_atom_zero]
-    rw [G.negative_atomRef η k (m, side) hi .chartRadial (by decide)]
+    refine ((congrFun (G.negativeInverse_atom_zero η .chartRadial k) q).trans
+      (congrFun (G.negative_atomRef η k (m, side) hi .chartRadial (by decide)) q)).trans_le ?_
     let K := G.W.A G.X.e₀
     let j := G.negativeIndex (m, side)
     have hf := G.negative_fields η (G.W.C.referenceState, 0) k (m, side) hi
-    have hphysical : physicalUnitPoint K j q = r := by
-      have he : physicalUnitPoint K j q = physicalUnitPoint (G.V η) k q := by
-        simp only [physicalUnitPoint, hf.2.2.1, hf.2.2.2.1, K, j]
-      exact he.trans hpq
+    have hleft : (G.V η).physicalLeft k = K.physicalLeft j := hf.2.2.1
+    have hright : (G.V η).physicalRight k = K.physicalRight j := hf.2.2.2.1
+    have hphysicalEq : physicalUnitPoint (G.V η) k q = physicalUnitPoint K j q :=
+      congrArg₂ (fun a b : ℝ => (a + (b - a) * q.1, q.2)) hleft hright
+    have hphysical : physicalUnitPoint K j q = r := hphysicalEq.symm.trans hpq
     have hreference : r ∈ referencePhysicalPieceOpen G.W.S K j := by
       change r ∈ Ioo (K.physicalLeft j) (K.physicalRight j) ×ˢ (univ : Set ℝ)
-      simpa only [hf.2.2.1, hf.2.2.2.1, K, j] using hr
+      exact ⟨⟨hleft.symm.trans_lt hr.1.1, hr.1.2.trans_eq hright⟩, mem_univ _⟩
     have hA := n04b_actualTypedAtlas_partA G.W.hT G.W.hS G.W.through03 G.W.field G.X.e₀
-    have hcurrent : r ∈ physicalPieceOpen G.W.S K (G.W.C.referenceState, 0) j := by
-      rw [hA.referenceDomain]
-      exact hreference
+    have hdomain : physicalPieceOpen G.W.S K (G.W.C.referenceState, 0) j =
+        referencePhysicalPieceOpen G.W.S K j := hA.referenceDomain j
+    have hcurrent : r ∈ physicalPieceOpen G.W.S K (G.W.C.referenceState, 0) j :=
+      hdomain.symm ▸ hreference
     have hmap := (hA.charts (G.W.C.referenceState, 0)
       (reference_mem_stateNeighborhood G.W.S G.W.C G.W.base G.W.ε_pos)
       G.W.through03.1.1.2.2.1.stateSector j).1 hcurrent
     change ((K.chart (G.W.C.referenceState, 0) j (physicalUnitPoint K j q)).1 - K.left j) /
       (K.right j - K.left j) ≤ 1
-    rw [hphysical]
-    exact (div_le_one (sub_pos.mpr (hA.referenceBounds j).2.1)).mpr
-      (sub_le_sub_right hmap.1.2.le _)
+    exact (congrArg (fun p : PolarPoint =>
+      ((K.chart (G.W.C.referenceState, 0) j p).1 - K.left j) /
+        (K.right j - K.left j)) hphysical).trans_le
+          ((div_le_one (sub_pos.mpr (hA.referenceBounds j).2.1)).mpr
+            (sub_le_sub_right hmap.1.2.le _))
 
 /-- A single parameter neighborhood controls the normalized radial
 difference on both closed reference halves, including their shared cut. -/
@@ -356,10 +392,22 @@ theorem negativeInverse_radial_closedHalf_small
   let J := G.negativeInverse_componentAtomJointTower 0 k m side hi .chartRadial trivial
   have hlen : (G.V 0).physicalLeft k < (G.V 0).physicalRight k := sub_pos.mp (hl 0 k).1
   apply n04NegativeInverse_le_on_closedHalf hlen hhalf
-  · have hcurrent := (J.continuousOn.continuousAt (J.open_domain.mem_nhds ⟨hzfull, hp⟩)).comp
-      (continuousAt_const.prodMk continuousAt_id)
-    have href := (J.continuousOn.continuousAt (J.open_domain.mem_nhds ⟨hzero, hp⟩)).comp
-      (continuousAt_const.prodMk continuousAt_id)
+  · have hcurrent : ContinuousAt
+        (fun p : PolarPoint => G.negativeInversePhysicalAtomFamily 0 .chartRadial z k p) p :=
+      n04NegativeInverse_fixedParameter_continuousAt
+        (E := Parameter G.W.S)
+        (U := sectorNeighborhood G.W.S G.W.base G.W.ε G.W.ε)
+        (Ω := Ioo (G.W.C.left m) (G.W.C.right m) ×ˢ (univ : Set ℝ))
+        (f := fun x : Parameter G.W.S × PolarPoint =>
+          G.negativeInversePhysicalAtomFamily 0 .chartRadial x.1 k x.2) J hzfull hp
+    have href : ContinuousAt
+        (fun p : PolarPoint => G.negativeInversePhysicalAtomFamily 0 .chartRadial 0 k p) p :=
+      n04NegativeInverse_fixedParameter_continuousAt
+        (E := Parameter G.W.S)
+        (U := sectorNeighborhood G.W.S G.W.base G.W.ε G.W.ε)
+        (Ω := Ioo (G.W.C.left m) (G.W.C.right m) ×ˢ (univ : Set ℝ))
+        (f := fun x : Parameter G.W.S × PolarPoint =>
+          G.negativeInversePhysicalAtomFamily 0 .chartRadial x.1 k x.2) J hzero hp
     exact (hcurrent.sub href).abs
   · intro r hr
     let q := n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData (G.V 0)) k r
@@ -367,9 +415,13 @@ theorem negativeInverse_radial_closedHalf_small
       n07aCanonicalUnitInversePoint_maps (K := n07aPhysicalIntervalData (G.V 0)) hlen hr
     have hk : G.Neg 0 k := (G.neg_iff_inl 0 k).mpr ⟨(m, side), hi⟩
     have hs := hsmall 0 z hz k hk ⟨q, hq⟩ 0 0 (by omega)
-    simp only [Real.rpow_zero, one_mul, spaces_mixedDerivative_zero,
-      ← G.negativeInverse_atom_zero 0 .chartRadial k] at hs
-    exact hs.le
+    have hs0 : |G.atomFamily 0 .chartRadial z k q - G.atomRef 0 .chartRadial k q| <
+        1 / 4 := n04NegativeInverse_mixedZero_lt
+      (f := G.atomFamily 0 .chartRadial z k) (g := G.atomRef 0 .chartRadial k)
+      (q := q) hs
+    change |G.atomFamily 0 .chartRadial z k q - G.atomFamily 0 .chartRadial 0 k q| ≤ 1 / 4
+    exact (congrArg (fun t : ℝ => |G.atomFamily 0 .chartRadial z k q - t|)
+      (congrFun (G.negativeInverse_atom_zero 0 .chartRadial k) q)).trans_le hs0.le
 
 /-- The three scalar fields obey the actual opposite-half identities
 throughout their original component. -/
@@ -465,11 +517,10 @@ theorem negativeInverse_componentScalars_purePrefix
               (((s + shift * K : ℕ) : ℝ) + 1)) := by
   have hdata (a : Fin 3) : G.Data 0 (G.Neg 0) b ε
       (G.atomFamily 0 (n04NegativeInverseScalarAtom a))
-      (G.atomRef 0 (n04NegativeInverseScalarAtom a)) := by
-    fin_cases a
-    · exact hc .chartRadial trivial
-    · exact hc .chartAngleDefect trivial
-    · exact hh .height trivial
+      (G.atomRef 0 (n04NegativeInverseScalarAtom a)) :=
+    n04NegativeInverseScalarAtom_property
+      (P := fun atom => G.Data 0 (G.Neg 0) b ε (G.atomFamily 0 atom) (G.atomRef 0 atom))
+      (hc .chartRadial trivial) (hc .chartAngleDefect trivial) (hh .height trivial) a
   have hfamily := G.negativeInverse_physicalFamily_purePrefix
     hadm n04NegativeInverseScalarAtom n04NegativeInverseScalarAtom_physical hdata
   let base : ℕ := hfamily.choose
@@ -491,15 +542,15 @@ theorem negativeInverse_componentScalars_purePrefix
   have hε'half : ε' ≤ 1 / 2 := min_le_right _ _
   have hadm' : G.Admissible low ε' := G.admissible_mono hadm hlow hε' hε'ε
   have hU := isMaterialData_enlargedMaterialData G.W.radial.1 G.W.hT
-  obtain ⟨CH, hCH, hheight⟩ := material_sample_height_coefficient_power_bounded
+  have heightData := material_sample_height_coefficient_power_bounded
     G.W.radial.1 hU (G.V 0).cell 0 (by norm_num : (0 : ℝ) < 3 / 4)
+  let CH : ℝ := heightData.choose
+  have hheight := heightData.choose_spec.2
   let L := max 1 CH
   have hL : 1 ≤ L := le_max_left _ _
   have hheightL (k : ℕ) :
-      G.W.U.H (G.W.U.sample ((G.V 0).cell k)) ^ (3 / 4 : ℝ) ≤ L := by
-    have h := hheight k
-    simp only [Real.rpow_zero, mul_one] at h
-    exact h.trans (le_max_right _ _)
+      G.W.U.H (G.W.U.sample ((G.V 0).cell k)) ^ (3 / 4 : ℝ) ≤ L :=
+    (n04NegativeInverse_remove_rpow_zero (C := CH) (hheight k)).trans (le_max_right _ _)
   have hmono : Monotone (parameterGrading G.W.S) := sectorPairGrading_monotone G.W.S
   refine ⟨low, ε', hlow, hadm', hε'ε, hε'half, fun K => ?_⟩
   let shift : ℕ := (hprefix K).choose
@@ -513,8 +564,14 @@ theorem negativeInverse_componentScalars_purePrefix
   let D : ℝ := transferData.choose
   have hD : 1 ≤ D := transferData.choose_spec.1
   have htransfer := transferData.choose_spec.2
-  obtain ⟨CO, hCO, houter⟩ := n04NegativeInverseOverlapOuter_finiteJets (s + K)
-  obtain ⟨B, hB, hpack⟩ := n04NegativeInverse_finiteComposition_envelope (s + K) hCO hL hD
+  have outerData := n04NegativeInverseOverlapOuter_finiteJets (s + K)
+  let CO : ℝ := outerData.choose
+  have hCO : 1 ≤ CO := outerData.choose_spec.1
+  have houter := outerData.choose_spec.2
+  have packedData := n04NegativeInverse_finiteComposition_envelope (s + K) hCO hL hD
+  let B : ℝ := packedData.choose
+  have hB : 1 ≤ B := packedData.choose_spec.1
+  have hpack := packedData.choose_spec.2
   refine ⟨B, zero_lt_one.trans_le hB, ?_⟩
   intro a k m side hi J z hz p hp htarget n hn w hwK hws v hvlow R hR hzR hvR hvphys hvstate hvspatial
   have hzold : z ∈ sectorNeighborhood G.W.S b ε ε :=
@@ -562,26 +619,41 @@ theorem negativeInverse_componentScalars_purePrefix
     let Qnew := Qold.restrict
       ((sectorNeighborhood_isOpen G.W.S low ε' ε').prod (isOpen_Ioo.prod isOpen_univ))
       (fun x hx => ⟨sectorNeighborhood_mono G.W.S hlow hε'ε hε'ε hx.1, hx.2⟩)
-    have he := congrArg (fun A : (Parameter G.W.S × PolarPoint) [×j]→L[ℝ] ℝ => A u)
-      (Q.unique Qnew j (z, p) ⟨hz, hp⟩)
-    rw [he]
-    have hraw := hb a' k' m source hi' Qold z hzold hzbase p hp hhalf j word
-      hwordK hwords u (fun i => (hmono hbaselow (u i).1).trans (hulow i)) R hR hzRold
-      (fun i => (hmono hhigh (u i).1).trans (huhigh i)) huphys hustate huspatial
-    have hcost := htransfer 0 k k' m side source hi hi' word.stateArity
-    have hscaled := hraw.trans (mul_le_mul_of_nonneg_right hcost
-      (Real.rpow_nonneg (zero_le_one.trans hR) _))
-    simpa only [Qnew, SmoothDirections.restrict, M, E, H, hpower] using hscaled
-  have htail : 0 ≤ parameterHeightWeight H w.stateArity *
-      t ^ (w.angleArity + shift * w.stateArity - 1) :=
-    mul_nonneg (parameterHeightWeight_nonneg hH _) (pow_nonneg (zero_le_one.trans ht) _)
+    have he : Q.D j (z, p) u = Qold.D j (z, p) u :=
+      congrArg (fun A : (Parameter G.W.S × PolarPoint) [×j]→L[ℝ] ℝ => A u)
+        (Q.unique Qnew j (z, p) ⟨hz, hp⟩)
+    let Es := G.W.U.E0 (G.W.U.sample ((G.V 0).cell k'))
+    let Hs := G.W.U.H (G.W.U.sample ((G.V 0).cell k')) ^ (3 / 4 : ℝ)
+    have hraw : ‖Qold.D j (z, p) u‖ ≤ C * Es ^ C *
+        parameterHeightWeight Hs word.stateArity *
+          R ^ (((word.angleArity + shift * word.stateArity - 1 : ℕ) : ℝ) /
+            (((s + shift * K : ℕ) : ℝ) + 1)) :=
+      hb a' k' m source hi' Qold z hzold hzbase p hp hhalf j word
+        hwordK hwords u (fun i => (hmono hbaselow (u i).1).trans (hulow i)) R hR hzRold
+        (fun i => (hmono hhigh (u i).1).trans (huhigh i)) huphys hustate huspatial
+    have hcost : C * Es ^ C * parameterHeightWeight Hs word.stateArity ≤
+        M * parameterHeightWeight H word.stateArity :=
+      htransfer 0 k k' m side source hi hi' word.stateArity
+    have hscaled : ‖Qold.D j (z, p) u‖ ≤ M * parameterHeightWeight H word.stateArity *
+        R ^ (((word.angleArity + shift * word.stateArity - 1 : ℕ) : ℝ) /
+          (((s + shift * K : ℕ) : ℝ) + 1)) :=
+      hraw.trans (mul_le_mul_of_nonneg_right hcost
+        (Real.rpow_nonneg (zero_le_one.trans hR) _))
+    exact ((congrArg norm he).trans_le hscaled).trans_eq
+      (congrArg (fun r : ℝ => M * parameterHeightWeight H word.stateArity * r)
+        (hpower (word.angleArity + shift * word.stateArity - 1))).symm
   have hfinish {x : ℝ} (hx : x ≤ M * parameterHeightWeight H w.stateArity *
       t ^ (w.angleArity + shift * w.stateArity - 1)) :
       x ≤ B * E ^ B * parameterHeightWeight H w.stateArity *
         R ^ (((w.angleArity + shift * w.stateArity - 1 : ℕ) : ℝ) /
           (((s + shift * K : ℕ) : ℝ) + 1)) := by
-    have hm := mul_le_mul_of_nonneg_right (hpack E hE).1 htail
-    simpa only [M, hpower, mul_assoc] using hx.trans (by simpa only [mul_assoc] using hm)
+    have hcost : M ≤ B * E ^ B := (hpack E hE).1
+    have hscaled := n04NegativeInverse_prefix_mono hcost
+      (parameterHeightWeight_nonneg hH w.stateArity)
+      (pow_nonneg (zero_le_one.trans ht) (w.angleArity + shift * w.stateArity - 1)) hx
+    exact hscaled.trans_eq
+      (congrArg (fun r : ℝ => B * E ^ B * parameterHeightWeight H w.stateArity * r)
+        (hpower (w.angleArity + shift * w.stateArity - 1)))
   by_cases hsame : source = side
   · have hkk : k' = k := G.e.injective (by
       calc
@@ -609,14 +681,19 @@ theorem negativeInverse_componentScalars_purePrefix
       .height trivial
     let Qpair := smoothDirectionsProd Qrad Qheight
     have hvalue : |G.negativeInversePhysicalAtomFamily 0 .height z k' p| ≤ M := by
-      have hb0 := sourceBound 2 Qheight 0 .nil (by simp [StateAngleWord.stateArity])
-        (by simp [StateAngleWord.angleArity]) Fin.elim0 (fun i => Fin.elim0 i)
-        (fun i => Fin.elim0 i) (fun i => Fin.elim0 i)
-        (fun i => Fin.elim0 i) (fun i => Fin.elim0 i)
-      rw [Qheight.zero (z, p) ⟨hz, hp⟩] at hb0
-      simpa only [Real.norm_eq_abs, StateAngleWord.stateArity, StateAngleWord.angleArity,
-        Nat.mul_zero, Nat.add_zero, Nat.zero_sub, parameterHeightWeight, if_true,
-        pow_zero, mul_one] using hb0
+      have hb0 : ‖Qheight.D 0 (z, p) Fin.elim0‖ ≤
+          M * parameterHeightWeight H StateAngleWord.nil.stateArity *
+            t ^ (StateAngleWord.nil.angleArity + shift * StateAngleWord.nil.stateArity - 1) :=
+        sourceBound 2 Qheight 0 .nil (by simp [StateAngleWord.stateArity])
+          (by simp [StateAngleWord.angleArity]) Fin.elim0 (fun i => Fin.elim0 i)
+          (fun i => Fin.elim0 i) (fun i => Fin.elim0 i)
+          (fun i => Fin.elim0 i) (fun i => Fin.elim0 i)
+      have hzero : Qheight.D 0 (z, p) Fin.elim0 =
+          G.negativeInversePhysicalAtomFamily 0 .height z k' p :=
+        Qheight.zero (z, p) ⟨hz, hp⟩
+      exact (Real.norm_eq_abs _).symm.trans_le
+        ((congrArg norm hzero).symm.trans_le
+          (n04NegativeInverse_nil_prefix (M := M) (H := H) (t := t) (shift := shift) hb0))
     have hinner (c : OrderedFinpartition n) (i : Fin c.length) :
         ‖Qpair.D (c.partSize i) (z, p) (v ∘ c.emb i)‖ ≤
           M * parameterHeightWeight H (w.restrict (c.emb i)).stateArity *
@@ -667,16 +744,45 @@ theorem negativeInverse_componentScalars_purePrefix
         cases height
         · exact (hidentity x hx).1
         · exact (hidentity x hx).2.2
-      have hcomp := n04NegativeInverse_overlapScalar_bound Qpair Q height heq
+      have hcomp : ‖Q.D n (z, p) v‖ ≤
+          ((2 : ℝ) ^ (s + K) * CO * (1 + M)) *
+            (Fintype.card (OrderedFinpartition n) : ℝ) * (M * L) ^ n *
+              parameterHeightWeight H w.stateArity *
+                t ^ (w.angleArity + shift * w.stateArity - 1) :=
+        n04NegativeInverse_overlapScalar_bound Qpair Q height heq
         ⟨hz, hp⟩ hband hn hnN w shift hshift hCO hM hH (hheightL k) hL ht houter hvalue v hinner
-      have hcoef := (hpack E hE).2 n hnN
-      have hscaled := mul_le_mul_of_nonneg_right hcoef htail
-      exact hcomp.trans (by simpa only [M, hpower, mul_assoc] using hscaled)
-    fin_cases a
-    · exact hcompose false J
-    · let Q := J.congrOn (fun x hx => (hidentity x hx).2.1)
-      exact hfinish (sourceBound 1 Q n w hwK hws v hvlow hvR hvphys hvstate hvspatial)
-    · exact hcompose true J
+      have hcoef : ((2 : ℝ) ^ (s + K) * CO * (1 + M)) *
+          (Fintype.card (OrderedFinpartition n) : ℝ) * (M * L) ^ n ≤ B * E ^ B :=
+        (hpack E hE).2 n hnN
+      have hscaled := n04NegativeInverse_prefix_mono hcoef
+        (parameterHeightWeight_nonneg hH w.stateArity)
+        (pow_nonneg (zero_le_one.trans ht) (w.angleArity + shift * w.stateArity - 1)) hcomp
+      exact hscaled.trans_eq
+        (congrArg (fun r : ℝ => B * E ^ B * parameterHeightWeight H w.stateArity * r)
+          (hpower (w.angleArity + shift * w.stateArity - 1)))
+    have hangle
+        (Q : SmoothDirections (sectorNeighborhood G.W.S low ε' ε' ×ˢ
+          (Ioo (G.W.C.left m) (G.W.C.right m) ×ˢ univ))
+          (fun x : Parameter G.W.S × PolarPoint =>
+            G.negativeInversePhysicalAtomFamily 0 .chartAngleDefect x.1 k x.2)) :
+        ‖Q.D n (z, p) v‖ ≤ B * E ^ B * parameterHeightWeight H w.stateArity *
+          R ^ (((w.angleArity + shift * w.stateArity - 1 : ℕ) : ℝ) /
+            (((s + shift * K : ℕ) : ℝ) + 1)) := by
+      let Qsource : SmoothDirections (sectorNeighborhood G.W.S low ε' ε' ×ˢ
+          (Ioo (G.W.C.left m) (G.W.C.right m) ×ˢ univ))
+          (fun x : Parameter G.W.S × PolarPoint =>
+            G.negativeInversePhysicalAtomFamily 0 .chartAngleDefect x.1 k' x.2) :=
+        Q.congrOn (fun x hx => (hidentity x hx).2.1)
+      exact hfinish (sourceBound 1 Qsource n w hwK hws v hvlow hvR hvphys hvstate hvspatial)
+    exact n04NegativeInverseScalarAtom_property
+      (P := fun atom => ∀ Q : SmoothDirections (sectorNeighborhood G.W.S low ε' ε' ×ˢ
+          (Ioo (G.W.C.left m) (G.W.C.right m) ×ˢ univ))
+          (fun x : Parameter G.W.S × PolarPoint =>
+            G.negativeInversePhysicalAtomFamily 0 atom x.1 k x.2),
+        ‖Q.D n (z, p) v‖ ≤ B * E ^ B * parameterHeightWeight H w.stateArity *
+          R ^ (((w.angleArity + shift * w.stateArity - 1 : ℕ) : ℝ) /
+            (((s + shift * K : ℕ) : ℝ) + 1)))
+      (hcompose false) hangle (hcompose true) a J
 
 end N04RealizationGauge
 end ContinuousFlexibility.Analysis
