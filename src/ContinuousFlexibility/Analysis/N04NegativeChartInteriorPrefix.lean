@@ -9,10 +9,20 @@ namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements CanonicalGeometry
 open scoped BigOperators
-
-
 namespace N04RealizationStart
 
+set_option backward.isDefEq.respectTransparency true
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul n07aNonlinearSectorParameterSub
+  interiorRaw_parameterTopology interiorRaw_parameterAddGroup interiorRaw_parameterSMul
+set_option diagnostics true in
 /-- A uniform finite prefix of genuine mixed parameter towers, with
 arbitrary directions and the unchanged fractional high-order exponent. -/
 theorem negativeInterior_firstIntegral_prefix
@@ -116,7 +126,7 @@ theorem negativeInterior_firstIntegral_prefix
     have hpos : 0 ≤ C i * E ^ P i * H :=
       mul_nonneg (mul_nonneg (hC i) (Real.rpow_nonneg (zero_le_one.trans hE) _)) hH
     have hh' := hh₀.trans (mul_le_mul_of_nonneg_left hscale hpos)
-    simpa only [mul_assoc, mul_left_comm, mul_comm] using hh'
+    exact hh'.trans_eq (by rw [mul_left_comm, ← mul_assoc, ← mul_assoc, ← mul_assoc])
   have hbound := hpolar i.val.1 (Parameter W.S) (parameterGrading W.S base)
     (parameterGrading W.S high) A hsym (3 * C i * E ^ P i * H * R ^ β) R
     (mul_nonneg (mul_nonneg (mul_nonneg (mul_nonneg (by norm_num) (hC i))
@@ -129,7 +139,8 @@ theorem negativeInterior_firstIntegral_prefix
     k a b hz hqold J v
   have hbound' : |J.D k z v| ≤ (3 * Cp i.val.1 * C i) * E ^ P i * H * R ^ β := by
     rw [hpoint]
-    simpa only [A, SmoothDirections.mixedParameterMultilinearMap_apply, mul_assoc, mul_left_comm, mul_comm] using hbound
+    change |A v| ≤ _
+    exact hbound.trans_eq (by simp only [mul_assoc, mul_left_comm (Cp i.val.1) 3])
   exact hbound'.trans (mul_le_mul_of_nonneg_right
     (mul_le_mul_of_nonneg_right (hcoef i E hE) hH) (Real.rpow_nonneg (zero_le_one.trans hR) _))
 

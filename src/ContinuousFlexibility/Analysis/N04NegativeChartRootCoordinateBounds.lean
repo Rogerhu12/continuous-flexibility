@@ -238,10 +238,6 @@ theorem RootCoordinatePrefixData.normalized_positive_bounds :
       |J.D n z v| ≤ B * W.T.E0 (W.negativeHalfSample e m side) ^ B *
         W.T.H (W.negativeHalfSample e m side) ^ (3 / 4 : ℝ) *
           oneHighVariationWeight (parameterGrading W.S) base (s + loss) z v := by
-  let l := A.values.choose
-  let Au := A.values.choose_spec.choose
-  let P := A.values.choose_spec.choose_spec.choose
-  let Q := A.values.choose_spec.choose_spec.choose_spec.choose
   have hv := A.values.choose_spec.choose_spec.choose_spec.choose_spec
   have hheight := materialHeight_E0_weight_bounded W.hT (γ := (3 / 4 : ℝ)) (by norm_num) 0
   let RH := hheight.choose
@@ -264,12 +260,12 @@ theorem RootCoordinatePrefixData.normalized_positive_bounds :
   have hB := henv.choose_spec.1
   have hpack := henv.choose_spec.2
   refine ⟨B, hB, fun m side radial q hq a b hab J z hz v => ?_⟩
-  rw [← show base + s + shift * n + 1 = s + (base + shift * n + 1) by omega]
+  have hindex : base + s + shift * n + 1 = s + (base + shift * n + 1) := by omega
   let U := sectorNeighborhood W.S base ε ε
   let Ω := Ioo (0 : ℝ) 2 ×ˢ (univ : Set ℝ)
   let E := W.T.E0 (W.negativeHalfSample e m side)
   let H := W.T.H (W.negativeHalfSample e m side) ^ (3 / 4 : ℝ)
-  let V := oneHighVariationWeight (parameterGrading W.S) base (base + s + shift * n + 1) z v
+  let V := oneHighVariationWeight (parameterGrading W.S) base (s + (base + shift * n + 1)) z v
   have hE : 1 ≤ E := W.floor _
   have hH : 0 ≤ H := Real.rpow_nonneg (W.hT.2.1 _
     (materialSample_mem_radialCore W.hT W.radial.1.choose_spec.2.1 _)).2.1.le _
@@ -292,11 +288,13 @@ theorem RootCoordinatePrefixData.normalized_positive_bounds :
   | false =>
     have hm : 0 ≤ Bf * E ^ Bf * H := by positivity
     have hnorm := fractional_oneHigh (parameterGrading W.S) base
-      (base + s + shift * n + 1) n z (J.D n z) hm
+      (s + (base + shift * n + 1)) n z (J.D n z) hm
       (spatialOrder_fraction_le_one (Nat.add_le_add_right hab (shift * n)))
       (fun w hw R hR hzR hwR => by
         simpa only [parameterHeightWeight, if_neg (Nat.ne_of_gt hn)] using
-          hb m side false q hq n le_rfl a b hab J z hz w hw R hR hzR hwR) v
+          hb m side false q hq n le_rfl a b hab J z hz w hw R hR
+            (by simpa only [hindex] using hzR)
+            (fun i => by simpa only [hindex] using hwR i)) v
     have hfinal := hnorm.trans (mul_le_mul_of_nonneg_right
       (mul_le_mul_of_nonneg_right hcmpF hH) hV)
     simpa only [Real.norm_eq_abs] using hfinal
@@ -305,7 +303,7 @@ theorem RootCoordinatePrefixData.normalized_positive_bounds :
     let R := A.powerRegularity m side
     have hpowerBound (u w : ℕ) (huw : u + w ≤ s) :
         |(R.parameter u w q hq₂).D n z v| ≤ Bp * E ^ Bp * H * V := by
-      have h := hpow (parameterGrading W.S) 0 base (base + s + shift * n + 1)
+      have h := hpow (parameterGrading W.S) 0 base (s + (base + shift * n + 1))
         U (isOpen_sectorNeighborhood W.S base ε ε) Ω (isOpen_Ioo.prod isOpen_univ)
         (W.negativeRootTravelCoefficient m side (W.negativeChartRootScale e C m side)) F
         (fun y hy p hp => A.coefficient_pos m side hy hp) q hq₂ E H hE hH hHR z hz
@@ -314,7 +312,8 @@ theorem RootCoordinatePrefixData.normalized_positive_bounds :
         (fun j hj u w huw dirs hdirs R₀ hR₀ hzR hdR => by
           simpa only [sub_zero] using hb m side true q hq j hj u w huw
             (F.parameter u w q hq₂) z hz dirs hdirs R₀ hR₀
-              (by simpa only [sub_zero] using hzR) hdR)
+              (by simpa only [sub_zero, hindex] using hzR)
+              (fun i => by simpa only [hindex] using hdR i))
         n le_rfl hn u w huw (R.parameter u w q hq₂) v
       simpa only [sub_zero, Real.norm_eq_abs] using h
     have hrad := n04NegativeChart_radialProduct_parameterJet_bound
@@ -441,7 +440,8 @@ theorem RootCoordinatePrefixData.physical_positive_bounds :
   have hpow : (δ⁻¹) ^ a ≤ D ^ s * E ^ (P * (s : ℝ)) := by
     apply (pow_le_pow_right₀ hinv (show a ≤ s by omega)).trans
     have hp := pow_le_pow_left₀ (inv_nonneg.mpr hδ.1.le) (hcost m side) s
-    simpa only [mul_pow, ← Real.rpow_mul_natCast hEp.le] using hp
+    change (δ⁻¹) ^ s ≤ (D * E ^ P) ^ s at hp
+    simpa only [mul_pow, ← Real.rpow_mul_natCast hEp.le P s] using hp
   have hdS : |d| ≤ S := by
     rw [abs_of_pos hd]
     cases radial with
@@ -453,7 +453,7 @@ theorem RootCoordinatePrefixData.physical_positive_bounds :
       (mul_assoc _ _ _).symm
   have hnorm := hb m side radial q ⟨hq.1, hq.2.le⟩ a b hab Jg z hz v
   calc
-    |J.D n z v| = |d / c ^ a| * |Jg.D n z v| := by rw [hj, abs_mul]
+    |J.D n z v| = |d / c ^ a| * |Jg.D n z v| := (congrArg abs hj).trans (abs_mul _ _)
     _ ≤ ((S * D ^ s) * E ^ (P * (s : ℝ))) * (Bg * E ^ Bg * H * V) :=
       mul_le_mul hcoef hnorm (abs_nonneg _) (by positivity)
     _ = ((S * D ^ s * Bg) * E ^ (P * (s : ℝ) + Bg)) * H * V := by

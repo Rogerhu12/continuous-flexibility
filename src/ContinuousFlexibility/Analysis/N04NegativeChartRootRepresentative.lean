@@ -131,7 +131,7 @@ theorem coordinate_joint_contDiff :
   have hflow : ContDiff ℝ ∞
       (fun x : (Fin n → ℝ) × (ℝ × ℝ × ℝ) =>
         A.flow.inverse x.1 (x.2.1, Real.sqrt δ * x.2.2.1) 1 x.2.2.2) := by
-    simpa only [negativeChartRootPlotTimeChange, compactScalarFlowTime_one]
+    simpa only [Function.comp_def, negativeChartRootPlotTimeChange, compactScalarFlowTime_one]
       using A.flow.inverse_smooth.comp harg
   exact (A.hh.comp (contDiff_fst.prodMk hflow)).sub contDiff_snd.snd.snd
 

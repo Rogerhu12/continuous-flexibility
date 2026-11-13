@@ -57,18 +57,8 @@ theorem fullField_parameterJet (k : ℕ) (v : Fin k → P) (q : N04FlowPoint) :
   have hf : ContDiff ℝ ∞ f := i.fullField_smooth.comp
     (contDiff_id.prodMk contDiff_const)
   have he := (flowParameterField_eq_joint hf k 0 v q.1).symm
-  simpa only [f, fullField, NegativeChartRootInverseInput.trajectory,
+  simpa only [flowParameterField, f, fullField, NegativeChartRootInverseInput.trajectory,
     negativeChartRootPlotTimeChange, compactScalarFlowTime_one] using he
-
-theorem fullField_parameterJet_smooth (k : ℕ) (v : Fin k → P) :
-    ContDiff ℝ ∞ (fun q : N04FlowPoint =>
-      iteratedFDeriv ℝ k
-        (fun y => i.h (y, i.flow.inverse y q.1 1 q.2) - q.2) 0 v) := by
-  have he := funext (i.fullField_parameterJet k v)
-  rw [← he]
-  exact (n04NegativeChart_flowParameterField_joint_contDiff i.fullField_smooth k
-    (fun a => (v a, (0 : PolarPoint)))).comp
-      ((contDiff_const.prodMk contDiff_fst).prodMk (contDiff_const.prodMk contDiff_snd))
 
 end NegativeChartRootCompositionInput
 
@@ -88,8 +78,9 @@ private theorem positive_fullField_split
   have he : (fun y : P × PolarPoint => h (y.1, Θ (y, p)) - p.2) =
       (f + g) - fun _ => p.2 := by funext y; dsimp [f, g, negativeChartRootLabelField]; ring
   unfold flowParameterField
-  rw [he, iteratedFDeriv_sub_apply ((hf.add hg).contDiffAt.of_le (by simp)) contDiffAt_const,
-    iteratedFDeriv_add_apply (hf.contDiffAt.of_le (by simp)) (hg.contDiffAt.of_le (by simp))]
+  rw [he, iteratedFDeriv_sub_apply (f := f + g) (g := fun _ => p.2)
+    ((hf.add hg).contDiffAt.of_le (by simp)) contDiffAt_const,
+    iteratedFDeriv_add_apply (f := f) (g := g) (hf.contDiffAt.of_le (by simp)) (hg.contDiffAt.of_le (by simp))]
   cases n with
   | zero => omega
   | succ n => simp only [iteratedFDeriv_succ_const, Pi.zero_apply, sub_zero,
@@ -247,7 +238,7 @@ theorem n04NegativeChart_rootComposition_prefix (N shift : ℕ)
   let Z : ℝ := (M * RH) ^ (N + 1)
   have hMZ : M ≤ Z := (le_mul_of_one_le_right (zero_le_one.trans hM) hRH).trans
     (by simpa only [pow_one] using pow_le_pow_right₀
-      (one_le_mul_of_one_le_of_one_le hM hRH) (show 1 ≤ N + 1 by omega))
+          (one_le_mul_of_one_le_of_one_le hM hRH) (show 1 ≤ N + 1 by omega))
   have hZ : 0 ≤ Z := pow_nonneg
     (mul_nonneg (zero_le_one.trans hM) (zero_le_one.trans hRH)) _
   have hpack : Cs * Z = Cs * (A * RH) ^ (N + 1) * i.M ^ (e * (N + 1)) := by
