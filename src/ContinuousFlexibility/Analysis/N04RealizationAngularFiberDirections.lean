@@ -67,12 +67,14 @@ def n04Realization_radialBoundaryJointDirections
   have hdomain : IsOpen (U ×ˢ (univ : Set ℝ)) := hU.prod isOpen_univ
   have hmap : MapsTo (fun p => a + L p) (U ×ˢ univ) (U ×ˢ univ) := by
     intro p hp
+    change a + L p ∈ U ×ˢ (univ : Set PolarPoint)
     rw [hL]
     exact ⟨hp.1, mem_univ _⟩
   let K := (n04Realization_jointMixedTower J isOpen_univ
     (hc.prod convex_univ) j 0).compAffine L a hdomain hmap
   apply K.congrOn
   intro p hp
+  change mixedDerivative j 0 (f (a + L p).1) (a + L p).2 = _
   rw [hL]
   simp only [mixedDerivative, iteratedDeriv_zero, radialBoundaryJet]
 

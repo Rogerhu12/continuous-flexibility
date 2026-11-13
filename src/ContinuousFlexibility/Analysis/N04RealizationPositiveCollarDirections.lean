@@ -44,7 +44,10 @@ def n04Realization_positiveCollar_jointDirections
   let JV : SmoothDirections (U ×ˢ univ)
       (fun p : E × PolarPoint => fun j : Fin (n + 2) => A p.1 j p.2.2) :=
     ((smoothDirections_scalarTuple (hU.prod isOpen_univ) J).compLinear
-      L hdomain hmap).congrOn (fun p _ => by rw [hL])
+      L hdomain hmap).congrOn (fun p _ => by
+        funext j
+        change A (L p).1 j (L p).2 = A p.1 j p.2.2
+        rw [hL])
   let R : (E × PolarPoint) →L[ℝ] ℝ :=
     (ContinuousLinearMap.fst ℝ ℝ ℝ).comp (ContinuousLinearMap.snd ℝ E PolarPoint)
   let JR : SmoothDirections (U ×ˢ univ) (fun p : E × PolarPoint => p.2.1) :=
