@@ -227,7 +227,7 @@ theorem n01_rootInverseCoordinate_unit_axis_material_jets_of_component_optical
       add_le_add (mul_le_mul_of_nonneg_right
         (mul_le_mul_of_nonneg_left hpwr (hBC (n - 1)).le)
         (zero_le_one.trans (hstate n))) (hBweight n)
-    _ ≤ _ := by nlinarith only [mul_le_mul_of_nonneg_right hcoef
-        (zero_le_one.trans (hBweight n))]
+    _ ≤ _ := by
+      nlinarith only [mul_le_mul_of_nonneg_right hcoef (zero_le_one.trans (hBweight n))]
 
 end ContinuousFlexibility.Analysis

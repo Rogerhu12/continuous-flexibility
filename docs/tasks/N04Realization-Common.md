@@ -37,7 +37,8 @@ subnode may shrink the neighborhood, but must choose it before the auxiliary col
   `N04RealizationLeadCurrentData.lean`, `N04RealizationLeadAssembly.lean`). If a statement is false
   or unusable, say so in the pull request with the reason; the lead repairs it.
 - Work on `line/N04Realization-<Subnode>`, cut from `line/N04Realization-lead`, and merge that
-  branch when it moves.
+  branch when it moves. Open one pull request into `line/N04Realization-lead` (not into `main`);
+  the lead integrates the subnodes and then the whole node into `main`.
 - Heartbeats: in this tree `obtain`/`rcases` into goals with large `let`s or state-space gradings,
   and `rw`/`simp at` on hypotheses containing `pairGrading`, can exhaust the limit. Open existentials
   with `Exists.elim` or `.choose`/`.choose_spec`, and put grading arithmetic into private lemmas over
