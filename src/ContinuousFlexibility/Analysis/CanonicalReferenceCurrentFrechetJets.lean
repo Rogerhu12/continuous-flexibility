@@ -46,12 +46,20 @@ theorem n04Coordinates_unitAtom_absolute_iteratedFDeriv_envelope
             (CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m v) p‖ ≤
             (2 : ℝ) ^ N * A * T.E0 (T.sample (K.cell m)) ^ B *
               (1 + CanonicalGeometry.parameterGrading S (N + loss) z) := by
-  obtain ⟨loss, hbound⟩ :=
+  have hboundExists :=
     n04Coordinates_unitAtom_absolute_envelope
       (D := D) (T := T) (S := S) (C := C) (L := L) (K := K)
       (base := base) (ε := ε) hD hT hfloor href hcur
+  let loss : ℕ := hboundExists.choose
+  have hbound := hboundExists.choose_spec
   refine ⟨loss, fun N => ?_⟩
-  obtain ⟨A, B, hA, hB, hb⟩ := hbound N
+  let A : ℝ := (hbound N).choose
+  have hBex := (hbound N).choose_spec
+  let B : ℝ := hBex.choose
+  have hAB := hBex.choose_spec
+  have hA : 0 < A := hAB.1
+  have hB : 0 < B := hAB.2.1
+  have hb := hAB.2.2
   refine ⟨A, B, hA, hB, ?_⟩
   intro z hz m v p hp k hk
   let M : ℝ := A * T.E0 (T.sample (K.cell m)) ^ B *
