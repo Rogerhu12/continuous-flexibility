@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N04NegativeHeightCurrentData
 import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
+import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 
 /-!
 # One uniform neighborhood for normalized negative height factors
@@ -31,13 +32,9 @@ theorem n04NegativeHeight_parameterInterpolation
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     (hS : IsPhysicalSpaces D T S) : HasInterpolation (parameterGrading S) := by
   have hr : Monotone realGrading := fun _ _ _ _ => le_rfl
-  have hsector : HasInterpolation (sectorGrading S) := by
-    obtain ⟨b, l, hb⟩ := coordinate_hasInterpolation_stateGrading hS
-    refine ⟨b, l, fun a b c ha hab hbc => ?_⟩
-    obtain ⟨A, hA, hbound⟩ := hb a b c ha hab hbc
-    exact ⟨A, hA, fun z => hbound z.val⟩
-  exact coordinate_hasInterpolation_pair (sectorGrading_monotone S) hr
-    hsector coordinate_hasInterpolation_realGrading
+  exact hasInterpolation_of_hasSmoothing
+    (tamePairGrading_monotone (sectorGrading_monotone S) hr)
+    (hasSmoothing_pairGrading (solve_sector_hasSmoothing hS) hasSmoothing_realGrading)
 
 variable {S : PhysicalSpacesData} {T : MaterialData} {D : ReferenceData}
   {cell : ℕ → ℕ} {P : ℕ → Prop} {base : ℕ} {ε : ℝ}

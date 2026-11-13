@@ -18,9 +18,35 @@ diagonal of this operator, so its estimates use one common low order too.
 
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
+
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
+
+local instance n04NegativeGeometryInverseBoundsCircleGroup (H : CircleModelData) :
+    AddCommGroup H.Space := inferInstance
+
+local instance n04NegativeGeometryInverseBoundsCircleModule (H : CircleModelData) :
+    Module ℝ H.Space := inferInstance
+
+local instance n04NegativeGeometryInverseBoundsCirclePairGroup (H : CircleModelData) :
+    AddCommGroup (H.Space × H.Space) := inferInstance
+
+local instance n04NegativeGeometryInverseBoundsCirclePairModule (H : CircleModelData) :
+    Module ℝ (H.Space × H.Space) := inferInstance
 
 local instance n04NegativeGeometryInverseBoundsCircleSMul (H : CircleModelData) :
     SMul ℝ (H.Space × H.Space) := Prod.instSMul
@@ -47,6 +73,7 @@ private theorem inverseOperator_fixedBase
         H.grading s (K.D n y v) ≤
           C * tameJetSize (pairGrading H.grading H.grading) n s L B y v := by
   obtain ⟨B, hB⟩ := circlePositiveInverseComposeLinear_fixedBase_oneHigh
+    (D := D) (T := T) (γ := γ) (M := H)
     hD hT hγ hH hi JF (JP (fun _ => 0)) (a / 2) (half_pos ha)
   refine ⟨B, fun n => ?_⟩
   obtain ⟨L, hL⟩ := hB n
@@ -102,8 +129,6 @@ theorem n04NegativeGeometry_circleInverse_fixedBase_oneHigh
       ∀ x ∈ U, p B x ≤ R → ∀ v : Fin n → E,
         H.grading s (K.D n x v) ≤ C * tameJetSize p n s L B x v := by
   classical
-  letI : ∀ n, CompleteSpace (H.level n) :=
-    fun n => (hH.2.1 n).isComplete.completeSpace_coe
   let W : Set H.Space := circleUniformInverseDomain H a
   have hW : IsOpen W := circleUniformInverseDomain_isOpen H a
   have hsub : W ⊆ circlePositiveLiftDomain H := circleUniformInverseDomain_subset_positive ha
@@ -143,10 +168,7 @@ theorem n04NegativeGeometry_circleInverse_fixedBase_oneHigh
   refine ⟨C, hC, fun i K x hx hlow v => ?_⟩
   let Kactual : SmoothDirections U (fun x =>
       circlePositiveInverseComposeLinear hH hT hD hγ (travel i) (f i x) (g i x)) :=
-    smoothDirectionsOfJets (J i).open_domain
-      (projectiveCompositionJets (fun x => (f i x, g i x)) (J i).D (KP i).D)
-      (HasProjectiveJetsOn.comp_topological (J i).open_domain (KP i).open_domain
-        (J i).hasProjectiveJetsOn (KP i).hasProjectiveJetsOn (hmap i))
+    (J i).compCircle hH (KP i) (hmap i)
   have heq := congrArg (fun A : E [×n]→L[ℝ] H.Space => A v) (K.unique Kactual n x hx)
   have heq' : K.D n x v =
       projectiveCompositionJets (fun x => (f i x, g i x)) (J i).D (KP i).D n x v := heq
@@ -155,23 +177,15 @@ theorem n04NegativeGeometry_circleInverse_fixedBase_oneHigh
 
 end InverseComposition
 
-local instance n04NegativeGeometryInverseBoundsStateSMul (S : PhysicalSpacesData) :
-    SMul ℝ (AnnularState S) := Prod.instSMul
-
 private theorem inverseBounds_parameterInterpolation
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     (hS : IsPhysicalSpaces D T S) :
     HasInterpolation (pairGrading realGrading (pairGrading (sectorGrading S) realGrading)) := by
   have hr : Monotone realGrading := fun _ _ _ _ => le_rfl
-  have hsector : HasInterpolation (sectorGrading S) := by
-    obtain ⟨b, l, hb⟩ := coordinate_hasInterpolation_stateGrading hS
-    refine ⟨b, l, fun a b c ha hab hbc => ?_⟩
-    obtain ⟨A, hA, hb⟩ := hb a b c ha hab hbc
-    exact ⟨A, hA, fun z => hb z.val⟩
-  exact coordinate_hasInterpolation_pair hr (sectorPairGrading_monotone S)
-    coordinate_hasInterpolation_realGrading
-    (coordinate_hasInterpolation_pair (sectorGrading_monotone S) hr
-      hsector coordinate_hasInterpolation_realGrading)
+  exact hasInterpolation_of_hasSmoothing
+    (tamePairGrading_monotone hr (sectorPairGrading_monotone S))
+    (hasSmoothing_pairGrading hasSmoothing_realGrading
+      (hasSmoothing_pairGrading (solve_sector_hasSmoothing hS) hasSmoothing_realGrading))
 
 /-- The genuine inverse displacement of every closed-radius selector has
 one common low order. Its bound is uniform in the selector and in the
