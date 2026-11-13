@@ -129,8 +129,9 @@ theorem negativeChart_opposite_absJacobian (m : ℕ) (side : Bool)
     rw [(hg b).fderiv_eq (𝕜 := ℝ)]
   rw [hj side, hj (!side), (hg side).self_of_nhds, (hg (!side)).self_of_nhds]
   apply n04b_abs_planeJacobian_rootPhysicalChart_opposite side
-  · exact ((n04b_actualTravelChart_smooth W.through03 W.hS W.hT W.field hw hs m)
-      .contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp)).differentiableAt (by simp)
+  · have hSmooth := n04b_actualTravelChart_smooth W.through03 W.hS W.hT W.field hw hs m
+    exact (hSmooth.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp)).differentiableAt
+      (by simp)
   · exact ((n04b_actualTravelChart_bijOn W.through03 W.hS W.hT W.field hw hs m).mapsTo hp).1
 
 /-- On the current target half, changing to the opposite reference half

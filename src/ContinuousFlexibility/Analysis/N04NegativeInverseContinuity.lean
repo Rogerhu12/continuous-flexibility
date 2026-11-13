@@ -98,9 +98,9 @@ theorem negativeTravel_angle_surjective (m : ℕ)
   have hw := liftSectorParameter_mem_stateNeighborhood (C := W.C) hz le_rfl
   have hs := W.through03.1.1.2.2.1.liftSectorParameter_sector z
   apply surjective_of_continuous_periodic_lift Real.pi_ne_zero
-  · exact ((n04b_actualTravelChart_continuous W.through03 W.hS W.hT W.field hw hs m).snd)
-      .comp_continuous (continuous_const.prodMk continuous_id)
-        (fun θ => ⟨hr, mem_univ θ⟩)
+  · have hcont := n04b_actualTravelChart_continuous W.through03 W.hS W.hT W.field hw hs m
+    exact hcont.snd.comp_continuous (f := fun θ : ℝ => (r, θ))
+      (continuous_const.prodMk continuous_id) (fun θ => ⟨hr, mem_univ θ⟩)
   · intro θ
     exact congrArg Prod.snd
       (n04b_actualTravelChart_period_add W.through03 W.hS W.hT W.field hw hs m hr θ)
@@ -155,14 +155,22 @@ theorem negativeInverse_continuousOn (m : ℕ) (side : Bool) :
         (liftSectorParameter W.S W.C x.1) m side x.2)
       (sectorNeighborhood W.S W.base W.ε W.ε ×ˢ
         (Ioo (0 : ℝ) (n04bRootCutRadius (W.C.travel m)) ×ˢ univ)) := by
-  have hc := (W.negativeTravelInverse_continuousOn m).comp
-    (continuous_fst.prodMk
-      ((n04b_continuous_rootStripInverse (W.C.travel m) side).comp continuous_snd)).continuousOn
-    (fun x hx => ⟨hx.1, W.negativeRootStripInverse_mapsTo m side hx.2⟩)
+  let Φ : ((StateDirections W.S × ℝ) × PolarPoint) →
+      (StateDirections W.S × ℝ) × PolarPoint := fun x =>
+    (x.1, n04bRootStripInverse (W.C.travel m) side x.2)
+  have hΦ : Continuous Φ := continuous_fst.prodMk
+    ((n04b_continuous_rootStripInverse (W.C.travel m) side).comp continuous_snd)
+  have hmap : MapsTo Φ
+      (sectorNeighborhood W.S W.base W.ε W.ε ×ˢ
+        (Ioo (0 : ℝ) (n04bRootCutRadius (W.C.travel m)) ×ˢ univ))
+      (sectorNeighborhood W.S W.base W.ε W.ε ×ˢ
+        (Ioo (0 : ℝ) (W.C.travel m) ×ˢ univ)) :=
+    fun x hx => ⟨hx.1, W.negativeRootStripInverse_mapsTo m side hx.2⟩
+  have hc := (W.negativeTravelInverse_continuousOn m).comp hΦ.continuousOn hmap
   exact hc.congr (fun x hx =>
-    ((n04bActualNegativeFunctions_spec W.hT W.hS W.through03 W.field
+    (n04bActualNegativeFunctions_spec W.hT W.hS W.through03 W.field
       (liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl)
-      (W.through03.1.1.2.2.1.liftSectorParameter_sector x.1) m side).open_inverse_eq hx.2).symm)
+      (W.through03.1.1.2.2.1.liftSectorParameter_sector x.1) m side).open_inverse_eq hx.2)
 
 /-- The whole-component forward map is injective; the inverse root change
 recovers the travel chart on this larger fixed domain. -/
@@ -231,8 +239,8 @@ theorem negativeInverse_right (m : ℕ) (side : Bool)
         (liftSectorParameter W.S W.C z) m side q) = q := by
   have hw := liftSectorParameter_mem_stateNeighborhood (C := W.C) hz le_rfl
   have hs := W.through03.1.1.2.2.1.liftSectorParameter_sector z
-  exact ((n04bActualNegativeFunctions_spec W.hT W.hS W.through03 W.field hw hs m side)
-    .open_chart_data W.through03 W.hS W.hT W.field hw hs).2.2.2 q hq
+  have H := n04bActualNegativeFunctions_spec W.hT W.hS W.through03 W.field hw hs m side
+  exact (H.open_chart_data W.through03 W.hS W.hT W.field hw hs).2.2.2 q hq
 
 /-- Angular translation of the actual inverse follows from injectivity of
 the same stored forward chart. -/
@@ -277,8 +285,8 @@ theorem negativePulledHeight_period (m : ℕ) (side : Bool)
   rw [W.negativeInverse_period m side hz hq]
   have hw := liftSectorParameter_mem_stateNeighborhood (C := W.C) hz le_rfl
   have hs := W.through03.1.1.2.2.1.liftSectorParameter_sector z
-  exact ((n04bActualNegativeFunctions_spec W.hT W.hS W.through03 W.field hw hs m side)
-    .period W.through03 W.hS W.hT W.field hw hs
-      (W.negativeInverse_maps_component m side hz hq)).2
+  have H := n04bActualNegativeFunctions_spec W.hT W.hS W.through03 W.field hw hs m side
+  exact (H.period W.through03 W.hS W.hT W.field hw hs
+    (W.negativeInverse_maps_component m side hz hq)).2
 
 end ContinuousFlexibility.Analysis.N04RealizationStart

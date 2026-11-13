@@ -240,10 +240,10 @@ def negativeInverse_componentAtomJointTower
   let JJ := G.W.negativeAbsJacobianJointTower m side
   let JJI := G.W.negativeJacobianInverseJointTower m side
   cases a <;> simp only [negativePhysicalGeometryAtom] at ha
-  · apply (JC.comp_contDiff isOpen_univ
-      (((contDiff_fst.sub contDiff_const).div_const (K.right k - K.left k)) :
-        ContDiff ℝ ∞ (fun p : PolarPoint => (p.1 - K.left k) / (K.right k - K.left k)))
-      .contDiffOn (fun _ _ => mem_univ _)).congrOn
+  · have hradial : ContDiff ℝ ∞
+        (fun p : PolarPoint => (p.1 - K.left k) / (K.right k - K.left k)) :=
+      (contDiff_fst.sub contDiff_const).div_const (K.right k - K.left k)
+    apply (JC.comp_contDiff isOpen_univ hradial.contDiffOn (fun _ _ => mem_univ _)).congrOn
     intro x hx
     change (_ - K.left k) / (K.right k - K.left k) =
       ((K.chart (G.lift η x.1) k
