@@ -16,7 +16,7 @@ namespace ContinuousFlexibility.Analysis
 open Set ContinuousFlexibility.Statements
 open scoped ContDiff
 
-theorem n04Realization_oneSidedTransport_angle_positive
+theorem n04Realization_oneSidedTransport_angle_lower
     (n : ℕ) {F : Bool → PolarPoint → PolarPoint} {q : Bool → PolarPoint → ℝ}
     {a b : Bool → ℝ} {l r c d κ κX M H : ℝ}
     (hlc : l < c) (hcd : c < d) (hdr : d < r)
@@ -25,7 +25,7 @@ theorem n04Realization_oneSidedTransport_angle_positive
       (a side) (b side) (if side then r else l))
     (hbound : WholePositiveEndpointJetBounds n F q l r κ κX M H)
     (t θ : ℝ) :
-    0 < deriv (fun η => wholeComponentEndpointAngle n
+    κ / 2 ≤ deriv (fun η => wholeComponentEndpointAngle n
       (oneSidedEndpointRepresentative (n + 2) l r (fun side p => (F side p).2))
       l r c d κ M (t, η)) θ := by
   let ψ : Bool → PolarPoint → ℝ := fun side p => (F side p).2
@@ -82,6 +82,22 @@ theorem n04Realization_oneSidedTransport_angle_positive
     (ψ := fun _ => Ψ) hlc hcd hdr hκ hκone hM
     (fun _ side => hΨ side) (fun _ side => hangle side)
     (fun _ side => hjets side) (fun _ side => hlift side) (fun _ side => hodd side)
-  exact (half_pos hκ).trans_le ((hang.2.2.2.2.2 ()).2.1 t θ)
+  exact (hang.2.2.2.2.2 ()).2.1 t θ
+
+/-- Positivity follows from the quantitative lower bound for the same width. -/
+theorem n04Realization_oneSidedTransport_angle_positive
+    (n : ℕ) {F : Bool → PolarPoint → PolarPoint} {q : Bool → PolarPoint → ℝ}
+    {a b : Bool → ℝ} {l r c d κ κX M H : ℝ}
+    (hlc : l < c) (hcd : c < d) (hdr : d < r)
+    (hκ : 0 < κ) (hκone : κ ≤ 1) (hM : 0 ≤ M)
+    (hdata : ∀ side, OneSidedTransportEndpoint (F side) (q side)
+      (a side) (b side) (if side then r else l))
+    (hbound : WholePositiveEndpointJetBounds n F q l r κ κX M H)
+    (t θ : ℝ) :
+    0 < deriv (fun η => wholeComponentEndpointAngle n
+      (oneSidedEndpointRepresentative (n + 2) l r (fun side p => (F side p).2))
+      l r c d κ M (t, η)) θ := by
+  exact (half_pos hκ).trans_le
+    (n04Realization_oneSidedTransport_angle_lower n hlc hcd hdr hκ hκone hM hdata hbound t θ)
 
 end ContinuousFlexibility.Analysis

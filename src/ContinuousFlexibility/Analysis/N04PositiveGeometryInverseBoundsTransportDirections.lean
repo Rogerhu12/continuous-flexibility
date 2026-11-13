@@ -28,7 +28,7 @@ variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
 retained by the controlled transport factory. The fixed circle label zero
 is an implementation of the same angular functions, uniformly over all
 physical components. -/
-def n04PositiveGeometry_oneSidedTransportPairDirections
+def n04PositiveGeometry_oneSidedTransportFactorDirections
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
     (hD : IsAccumulatingProfile D) (hγ : 0 < γ) (hi : HasInterpolation S.grading)
     (hU : IsOpen U) (hc : Convex ℝ U) (n : ℕ)
@@ -60,6 +60,21 @@ def n04PositiveGeometry_oneSidedTransportPairDirections
     (hcoeff : ∀ x ∈ U, ∀ side (j : Fin (n + 1)) θ,
       |n04PositiveGeometry_oneSidedFiberData n (ψ x) (X x)
         l r c d κφ M side (j + 1) θ| < Mσ) :
+    let φ : E → PolarPoint → ℝ := fun x => wholeComponentEndpointAngle n
+      (oneSidedEndpointRepresentative (n + 2) l r (ψ x)) l r c d κφ M
+    let X₀ : E → Bool → PolarPoint → ℝ := fun x =>
+      oneSidedEndpointRepresentative (n + 1) l r (X x)
+    let Y : E → PolarPoint → ℝ := fun x =>
+      endpointFiberPullbackCoordinate n (φ x) (X₀ x) l r c d κX Mσ
+    SmoothDirections (U ×ˢ univ) (fun p : E × PolarPoint => φ p.1 p.2) ×
+    SmoothDirections (U ×ˢ univ) (fun p : E × PolarPoint =>
+      parameterizedCircleInverse (φ p.1) p.2) ×
+    SmoothDirections (U ×ˢ univ) (fun p : E × PolarPoint => Y p.1 p.2) ×
+    SmoothDirections (U ×ˢ univ) (fun p : E × PolarPoint =>
+      positiveFiberRadialInverse (Y p.1) p.2) ×
+    (∀ side (j : Fin (n + 1)), SmoothDirections (U ×ˢ univ)
+      (fun p : E × ℝ => n04PositiveGeometry_oneSidedFiberData n
+        (ψ p.1) (X p.1) l r c d κφ M side (j + 1) p.2)) ×
     SmoothDirections (U ×ˢ univ) (fun p : E × PolarPoint =>
       oneSidedWholeComponentTransport n (ψ p.1) (X p.1) l r c d κφ κX M Mσ p.2) ×
     SmoothDirections (U ×ˢ univ) (fun p : E × PolarPoint =>
@@ -126,7 +141,50 @@ def n04PositiveGeometry_oneSidedTransportPairDirections
       positiveFiberRadialInverse (Y p.1) p.2) :=
     n04PositiveGeometry_endpointRadialInverseDirections hU n hlc hcd hdr hκX hMσ
       B hB hzero JB hfirst hcoeff
-  exact ⟨n04Realization_positiveFiberChart_jointDirections hU φ Y pair.1 KY,
+  exact ⟨pair.1, pair.2, KY, KI, JB,
+    n04Realization_positiveFiberChart_jointDirections hU φ Y pair.1 KY,
     n04PositiveGeometry_fiberChartInverseDirections (φ := φ) (Y := Y) KI pair.2⟩
+
+/-- The two transport towers are projections of the same retained
+angular, radial and coefficient towers. -/
+def n04PositiveGeometry_oneSidedTransportPairDirections
+    (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
+    (hD : IsAccumulatingProfile D) (hγ : 0 < γ) (hi : HasInterpolation S.grading)
+    (hU : IsOpen U) (hc : Convex ℝ U) (n : ℕ)
+    {l r c d κφ κX M Mσ : ℝ} (hlc : l < c) (hcd : c < d) (hdr : d < r)
+    (hκX : 0 < κX) (hMσ : 0 ≤ Mσ)
+    (ψ X : E → Bool → PolarPoint → ℝ)
+    (hψ : ∀ x ∈ U, ∀ side (j : Fin (n + 2)), ContDiff ℝ ∞
+      (fun θ => radialBoundaryJet (ψ x side) (if side then r else l) j θ -
+        if (j : ℕ) = 0 then θ else 0))
+    (hperiod : ∀ x ∈ U, ∀ side (j : Fin (n + 2)), Function.Periodic
+      (fun θ => radialBoundaryJet (ψ x side) (if side then r else l) j θ -
+        if (j : ℕ) = 0 then θ else 0) Real.pi)
+    (Jψ : ∀ side (j : Fin (n + 2)) b θ, SmoothDirections U
+      (fun x => iteratedDeriv b (fun η =>
+        radialBoundaryJet (ψ x side) (if side then r else l) j η -
+          if (j : ℕ) = 0 then η else 0) θ))
+    (hbound : ∀ side j b, UniformScalarJetSeminormBounds (Jψ side j b))
+    (JX : ∀ side (j : Fin (n + 2)), SmoothDirections (U ×ˢ univ)
+      (fun p : E × ℝ => radialBoundaryJet (X p.1 side)
+        (if side then r else l) j p.2))
+    (hXvalue : ∀ x ∈ U, ∀ side θ,
+      X x side (if side then r else l, θ) = if side then r else l)
+    (hpositive : ∀ x ∈ U, ∀ t θ, 0 < deriv (fun η =>
+      wholeComponentEndpointAngle n
+        (oneSidedEndpointRepresentative (n + 2) l r (ψ x))
+        l r c d κφ M (t, η)) θ)
+    (hfirst : ∀ x ∈ U, ∀ side θ, κX <
+      n04PositiveGeometry_oneSidedFiberData n (ψ x) (X x) l r c d κφ M side 1 θ)
+    (hcoeff : ∀ x ∈ U, ∀ side (j : Fin (n + 1)) θ,
+      |n04PositiveGeometry_oneSidedFiberData n (ψ x) (X x)
+        l r c d κφ M side (j + 1) θ| < Mσ) :
+    SmoothDirections (U ×ˢ univ) (fun p : E × PolarPoint =>
+      oneSidedWholeComponentTransport n (ψ p.1) (X p.1) l r c d κφ κX M Mσ p.2) ×
+    SmoothDirections (U ×ˢ univ) (fun p : E × PolarPoint =>
+      oneSidedWholeComponentTransportInverse n (ψ p.1) (X p.1) l r c d κφ κX M Mσ p.2) :=
+  (n04PositiveGeometry_oneSidedTransportFactorDirections hS hT hD hγ hi
+    hU hc n hlc hcd hdr hκX hMσ ψ X hψ hperiod Jψ hbound JX
+    hXvalue hpositive hfirst hcoeff).2.2.2.2.2
 
 end ContinuousFlexibility.Analysis
