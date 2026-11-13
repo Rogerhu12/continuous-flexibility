@@ -110,9 +110,14 @@ theorem sourceColumns_inverseDeterminantRef_reciprocal_bound {b : ℕ} {ε : ℝ
     n07aCanonicalUnitPoint_inverse (K := n07aPhysicalIntervalData (G.V η))
       (hg.referenceBounds m).1 x
   have hb := hzero.choose_spec.2 m .jacobian q hqu 0 0 (by omega)
+  have hvalue : |mixedDerivative 0 0
+      (atom G.W.D G.W.U (G.S η) (G.C η) (G.L η) (G.V η)
+        (G.ref η) m .jacobian) q| =
+      |planeJacobian ((G.V η).chart (G.ref η) m) x| := by
+    simp only [spaces_mixedDerivative_zero, atom, abs_abs, hpoint]
   have hb' : |planeJacobian ((G.V η).chart (G.ref η) m) x| ≤
-      hzero.choose * G.W.U.E0 (G.W.U.sample ((G.V η).cell m)) ^ hzero.choose := by
-    simpa only [spaces_mixedDerivative_zero, atom, abs_abs, hpoint] using hb
+      hzero.choose * G.W.U.E0 (G.W.U.sample ((G.V η).cell m)) ^ hzero.choose :=
+    hvalue.symm.trans_le hb
   calc
     |(|G.sourceColumnsInverseDeterminantRef η m p|)⁻¹| =
         |planeJacobian ((G.V η).chart (G.ref η) m) x| := by

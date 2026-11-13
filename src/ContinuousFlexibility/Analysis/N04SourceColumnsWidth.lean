@@ -27,14 +27,23 @@ theorem sourceColumns_widthRatio_bound
     refine ⟨?_, mem_univ _⟩
     norm_num
   refine ⟨hpack.choose, hpack.choose_spec.1, fun m => ?_⟩
+  have hphysicalValue : |mixedDerivative 0 0
+      (atom G.W.D G.W.U (G.S η) (G.C η) (G.L η) (G.V η)
+        (G.ref η) m .physicalLength) ((1 / 2 : ℝ), (0 : ℝ))| =
+      |(G.V η).physicalRight m - (G.V η).physicalLeft m| := by
+    simp only [spaces_mixedDerivative_zero, atom]
   have hphysical : |(G.V η).physicalRight m - (G.V η).physicalLeft m| ≤
-      hs.choose * G.W.U.E0 (G.W.U.sample ((G.V η).cell m)) ^ hs.choose := by
-    simpa only [spaces_mixedDerivative_zero, atom] using
-      hs.choose_spec.2 m .physicalLength _ hmid 0 0 (by omega)
+      hs.choose * G.W.U.E0 (G.W.U.sample ((G.V η).cell m)) ^ hs.choose :=
+    hphysicalValue.symm.trans_le (hs.choose_spec.2 m .physicalLength _ hmid 0 0 (by omega))
+  have hcanonicalValue : |mixedDerivative 0 0
+      (atom G.W.D G.W.U (G.S η) (G.C η) (G.L η) (G.V η)
+        (G.ref η) m .canonicalLengthInverse) ((1 / 2 : ℝ), (0 : ℝ))| =
+      |((G.V η).right m - (G.V η).left m)⁻¹| := by
+    simp only [spaces_mixedDerivative_zero, atom]
   have hcanonical : |((G.V η).right m - (G.V η).left m)⁻¹| ≤
-      hs.choose * G.W.U.E0 (G.W.U.sample ((G.V η).cell m)) ^ hs.choose := by
-    simpa only [spaces_mixedDerivative_zero, atom] using
-      hs.choose_spec.2 m .canonicalLengthInverse _ hmid 0 0 (by omega)
+      hs.choose * G.W.U.E0 (G.W.U.sample ((G.V η).cell m)) ^ hs.choose :=
+    hcanonicalValue.symm.trans_le
+      (hs.choose_spec.2 m .canonicalLengthInverse _ hmid 0 0 (by omega))
   calc
     |G.sourceColumnsWidthRatio η m| =
         |(G.V η).physicalRight m - (G.V η).physicalLeft m| *
