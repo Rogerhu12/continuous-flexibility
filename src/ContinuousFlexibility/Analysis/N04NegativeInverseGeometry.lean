@@ -115,12 +115,13 @@ def n04NegativeInverse_canonicalUnitJointTower
       ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
       ContinuousLinearMap.coe_snd', smul_apply, smul_eq_mul,
       Prod.mk_add_mk, zero_add]
-  apply (J.compAffine P c (hU.prod (isOpen_Ioo.prod isOpen_univ))
-    (fun x hx => ?_)).congrOn
-  · rw [hpoint]
+  have hmap' : MapsTo (fun x => c + P x) (U ×ˢ unitStrip) (U ×ˢ Ω) := by
+    intro x hx
+    change c + P x ∈ U ×ˢ Ω
+    rw [hpoint]
     exact ⟨hx.1, hmap hx.2⟩
-  · intro x hx
-    exact congrArg f (hpoint x)
+  exact (J.compAffine P c (hU.prod (isOpen_Ioo.prod isOpen_univ)) hmap').congrOn
+    (fun x _ => congrArg f (hpoint x))
 
 namespace N04RealizationStart
 
@@ -135,7 +136,9 @@ theorem negativeCanonicalUnit_mapsTo
       (Ioo (0 : ℝ) (n04bRootCutRadius (W.C.travel m)) ×ˢ (univ : Set ℝ)) := by
   let K := W.A e
   have hA := n04b_actualTypedAtlas_partA W.hT W.hS W.through03 W.field e
-  have hcan := (n04bTypedAtlasData_negative_fields
+  have hcan : canonicalOpen W.S K k =
+      Ioo (0 : ℝ) (n04bRootCutRadius (W.C.travel m)) ×ˢ (univ : Set ℝ) :=
+    (n04bTypedAtlasData_negative_fields
     (C := W.C) (L := W.L) (z := (W.C.referenceState, 0)) e
     (n04bActualNegativeChart W.hT W.hS W.through03 W.field)
     (n04bActualNegativeHeight W.hT W.hS W.through03 W.field)
@@ -144,7 +147,8 @@ theorem negativeCanonicalUnit_mapsTo
   have hm : MapsTo (canonicalUnitPoint K k) unitStrip (canonicalOpen W.S K k) :=
     (n04NegativeGeometry_affine_unitPoint (K.left k) (K.right k)
       (hA.referenceBounds k).2.1).2.1
-  simpa only [hcan] using hm
+  intro p hp
+  exact hcan ▸ hm hp
 
 /-- Both actual normalized inverse atoms have genuine joint towers. -/
 def negativeInverseAtomJointTower
@@ -184,7 +188,10 @@ def negativeInverseAtomJointTower
   · let L : ((StateDirections W.S × ℝ) × PolarPoint) →L[ℝ] ℝ :=
       (ContinuousLinearMap.snd ℝ ℝ ℝ).comp
         (ContinuousLinearMap.snd ℝ (StateDirections W.S × ℝ) PolarPoint)
-    let Jθ := smoothDirectionsLinearOn L (hU.prod (isOpen_Ioo.prod isOpen_univ))
+    let Jθ : SmoothDirections
+        (sectorNeighborhood W.S W.base W.ε W.ε ×ˢ unitStrip)
+        (fun x : (StateDirections W.S × ℝ) × PolarPoint => L x) :=
+      smoothDirectionsLinearOn L (hU.prod (isOpen_Ioo.prod isOpen_univ))
     apply ((smoothDirectionsProd J Jθ).comp_contDiff isOpen_univ
       ((contDiff_fst.snd.sub contDiff_snd) :
         ContDiff ℝ ∞ (fun p : PolarPoint × ℝ => p.1.2 - p.2)).contDiffOn
@@ -206,7 +213,9 @@ def negativeInverseAtomJointTower
     (a : Atom) (ha : atomIsNegativeInverse a) :
     SmoothDirections (sectorNeighborhood G.W.S G.W.base G.W.ε G.W.ε ×ˢ unitStrip)
       (fun x : (StateDirections G.W.S × ℝ) × PolarPoint => G.atomFamily η a x.1 m x.2) := by
-  obtain ⟨j, hi⟩ := (G.neg_iff_inl η m).mp hm
+  let data : ∃ j : ℕ × Bool, G.e m = .inl j := (G.neg_iff_inl η m).mp hm
+  let j : ℕ × Bool := data.choose
+  have hi : G.e m = .inl j := data.choose_spec
   have hk : G.X.e₀ (G.negativeIndex j) = .inl (j.1, j.2) := G.X.e₀.apply_symm_apply _
   have haux : a ≠ .auxiliaryColumn := by
     intro he
@@ -227,11 +236,47 @@ def negativeInverseAtomMixedRegularity
     ((sectorNeighborhood_convex G.W.S G.W.base G.W.ε G.W.ε).prod
       ((convex_Ioo (0 : ℝ) 1).prod convex_univ))
 
+/-- The retained pulled height is the actual height at the actual inverse
+point, with the original typed canonical normalization. -/
+theorem negativePulledHeight_actual
+    (η : (G.W.S.height (3 / 4 : ℝ)).Space) (z : Parameter G.W.S)
+    (m : ℕ) (j : ℕ × Bool) (hi : G.e m = .inl j) (q : PolarPoint) :
+    G.pulledHeight η z m q =
+      n04bActualNegativeHeight G.W.hT G.W.hS G.W.through03 G.W.field
+        (liftSectorParameter G.W.S G.W.C z) j.1 j.2
+        (n04bActualNegativeInverse G.W.hT G.W.hS G.W.through03 G.W.field
+          (liftSectorParameter G.W.S G.W.C z) j.1 j.2
+          (canonicalUnitPoint (G.W.A G.X.e₀) (G.negativeIndex j) q)) := by
+  let k := G.negativeIndex j
+  let K := G.W.A G.X.e₀
+  have hk : G.X.e₀ k = .inl (j.1, j.2) := G.X.e₀.apply_symm_apply _
+  have hf := n04bTypedAtlasData_negative_fields
+    (C := G.W.C) (L := G.W.L) (z := liftSectorParameter G.W.S G.W.C z) G.X.e₀
+    (n04bActualNegativeChart G.W.hT G.W.hS G.W.through03 G.W.field)
+    (n04bActualNegativeHeight G.W.hT G.W.hS G.W.through03 G.W.field)
+    (n04bActualNegativeInverse G.W.hT G.W.hS G.W.through03 G.W.field)
+    (n04bActualReferenceCut G.W.through03) k j.1 j.2 hk
+  have hheight : K.height (liftSectorParameter G.W.S G.W.C z) k =
+      n04bActualNegativeHeight G.W.hT G.W.hS G.W.through03 G.W.field
+        (liftSectorParameter G.W.S G.W.C z) j.1 j.2 := hf.2.2.2.2.2
+  have hinverse : K.inverseChart (liftSectorParameter G.W.S G.W.C z) k =
+      n04bActualNegativeInverse G.W.hT G.W.hS G.W.through03 G.W.field
+        (liftSectorParameter G.W.S G.W.C z) j.1 j.2 := hf.2.2.2.2.1
+  exact (G.negative_pulledHeight η z m j hi q).trans
+    ((congrFun hheight
+      (K.inverseChart (liftSectorParameter G.W.S G.W.C z) k
+        (canonicalUnitPoint K k q))).trans
+      (congrArg (n04bActualNegativeHeight G.W.hT G.W.hS G.W.through03 G.W.field
+        (liftSectorParameter G.W.S G.W.C z) j.1 j.2)
+        (congrFun hinverse (canonicalUnitPoint K k q))))
+
 def negativePulledHeightJointTower
     (η : (G.W.S.height (3 / 4 : ℝ)).Space) (m : ℕ) (hm : G.Neg η m) :
     SmoothDirections (sectorNeighborhood G.W.S G.W.base G.W.ε G.W.ε ×ˢ unitStrip)
       (fun x : (StateDirections G.W.S × ℝ) × PolarPoint => G.pulledHeight η x.1 m x.2) := by
-  obtain ⟨j, hi⟩ := (G.neg_iff_inl η m).mp hm
+  let data : ∃ j : ℕ × Bool, G.e m = .inl j := (G.neg_iff_inl η m).mp hm
+  let j : ℕ × Bool := data.choose
+  have hi : G.e m = .inl j := data.choose_spec
   let k := G.negativeIndex j
   have hk : G.X.e₀ k = .inl (j.1, j.2) := G.X.e₀.apply_symm_apply _
   apply (n04NegativeInverse_canonicalUnitJointTower (G.W.A G.X.e₀) k
@@ -239,14 +284,7 @@ def negativePulledHeightJointTower
     (G.W.negativePulledHeightJointTower j.1 j.2)
     (G.W.negativeCanonicalUnit_mapsTo G.X.e₀ k j.1 j.2 hk)).congrOn
   intro x hx
-  have hf := n04bTypedAtlasData_negative_fields
-    (C := G.W.C) (L := G.W.L) (z := liftSectorParameter G.W.S G.W.C x.1) G.X.e₀
-    (n04bActualNegativeChart G.W.hT G.W.hS G.W.through03 G.W.field)
-    (n04bActualNegativeHeight G.W.hT G.W.hS G.W.through03 G.W.field)
-    (n04bActualNegativeInverse G.W.hT G.W.hS G.W.through03 G.W.field)
-    (n04bActualReferenceCut G.W.through03) k j.1 j.2 hk
-  symm
-  rw [G.negative_pulledHeight η x.1 m j hi x.2, hf.2.2.2.2.2, hf.2.2.2.2.1]
+  exact (G.negativePulledHeight_actual η x.1 m j hi x.2).symm
 
 def negativePulledHeightMixedRegularity
     (η : (G.W.S.height (3 / 4 : ℝ)).Space) (m : ℕ) (hm : G.Neg η m) :
@@ -264,22 +302,29 @@ theorem negativePulledHeight_period
     (hz : z ∈ sectorNeighborhood G.W.S G.W.base G.W.ε G.W.ε)
     (m : ℕ) (hm : G.Neg η m) {q : PolarPoint} (hq : q ∈ unitStrip) :
     G.pulledHeight η z m (q + (0, Real.pi)) = G.pulledHeight η z m q := by
-  obtain ⟨j, hi⟩ := (G.neg_iff_inl η m).mp hm
+  let data : ∃ j : ℕ × Bool, G.e m = .inl j := (G.neg_iff_inl η m).mp hm
+  let j : ℕ × Bool := data.choose
+  have hi : G.e m = .inl j := data.choose_spec
   let k := G.negativeIndex j
   have hk : G.X.e₀ k = .inl (j.1, j.2) := G.X.e₀.apply_symm_apply _
-  have hf := n04bTypedAtlasData_negative_fields
-    (C := G.W.C) (L := G.W.L) (z := liftSectorParameter G.W.S G.W.C z) G.X.e₀
-    (n04bActualNegativeChart G.W.hT G.W.hS G.W.through03 G.W.field)
-    (n04bActualNegativeHeight G.W.hT G.W.hS G.W.through03 G.W.field)
-    (n04bActualNegativeInverse G.W.hT G.W.hS G.W.through03 G.W.field)
-    (n04bActualReferenceCut G.W.through03) k j.1 j.2 hk
+  let H : PolarPoint → ℝ := fun p =>
+    n04bActualNegativeHeight G.W.hT G.W.hS G.W.through03 G.W.field
+      (liftSectorParameter G.W.S G.W.C z) j.1 j.2
+      (n04bActualNegativeInverse G.W.hT G.W.hS G.W.through03 G.W.field
+        (liftSectorParameter G.W.S G.W.C z) j.1 j.2 p)
   have hshift : canonicalUnitPoint (G.W.A G.X.e₀) k (q + (0, Real.pi)) =
       canonicalUnitPoint (G.W.A G.X.e₀) k q + (0, Real.pi) := by
     simp only [canonicalUnitPoint, Prod.fst_add, Prod.snd_add, add_zero, Prod.mk_add_mk]
-  rw [G.negative_pulledHeight η z m j hi (q + (0, Real.pi)),
-    G.negative_pulledHeight η z m j hi q, hf.2.2.2.2.2, hf.2.2.2.2.1, hshift]
-  exact G.W.negativePulledHeight_period j.1 j.2 hz
-    (G.W.negativeCanonicalUnit_mapsTo G.X.e₀ k j.1 j.2 hk hq)
+  calc
+    G.pulledHeight η z m (q + (0, Real.pi)) =
+        H (canonicalUnitPoint (G.W.A G.X.e₀) k (q + (0, Real.pi))) :=
+      G.negativePulledHeight_actual η z m j hi (q + (0, Real.pi))
+    _ = H (canonicalUnitPoint (G.W.A G.X.e₀) k q + (0, Real.pi)) :=
+      congrArg H hshift
+    _ = H (canonicalUnitPoint (G.W.A G.X.e₀) k q) :=
+      G.W.negativePulledHeight_period j.1 j.2 hz
+        (G.W.negativeCanonicalUnit_mapsTo G.X.e₀ k j.1 j.2 hk hq)
+    _ = G.pulledHeight η z m q := (G.negativePulledHeight_actual η z m j hi q).symm
 
 end N04RealizationGauge
 end ContinuousFlexibility.Analysis
