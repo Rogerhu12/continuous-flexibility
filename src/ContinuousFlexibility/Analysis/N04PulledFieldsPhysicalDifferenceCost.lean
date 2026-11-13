@@ -74,12 +74,12 @@ private theorem n04PulledFields_restoreSampledReferenceCost
       refine ⟨B', hB', fun value reference E H W hE hH hHL _ hW href hdelta => ?_⟩
       have hrestore : |value| ≤ Cref + B * E ^ B * H * W := by
         have hb : |value - reference| ≤ B * E ^ B * H * W := by
-          simpa only [if_pos rfl] using hdelta
+          simpa only [if_pos rfl, ite_true] using hdelta
         calc
           _ = |(value - reference) + reference| := congrArg abs (sub_add_cancel _ _).symm
           _ ≤ _ := (abs_add_le _ _).trans
             ((add_le_add hb href).trans_eq (add_comm _ _))
-      simpa only [parameterHeightWeight, if_pos rfl, mul_one] using
+      simpa only [parameterHeightWeight, if_pos rfl, ite_true, mul_one] using
         hrestore.trans (hpack E H W hE hH hHL (hW rfl))
   | succ k =>
       refine ⟨B, hB, fun value reference E H W _ _ _ _ _ _ hdelta => ?_⟩
