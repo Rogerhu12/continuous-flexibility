@@ -43,7 +43,7 @@ private theorem radialReferencePotential_flux_formula
     simpa only [positiveReferenceCylinderInverse, Function.comp_def, χ] using
       hgeometry.inverse_smooth.fst.comp hline
   have hYpos : 0 < deriv Y (χ x) := by
-    simpa only [planeJacobian_positiveReferenceCylinderChart
+    simpa only [planeJacobian_positiveReferenceCylinderChart (p := (χ x, 0))
       (hY.differentiable (by simp) (χ x))] using
       hgeometry.jacobian_positive (χ x, 0)
   have hright (t : ℝ) : Y (χ t) = t :=
