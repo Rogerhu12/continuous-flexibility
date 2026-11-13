@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N04bSymmetricRootField
+import ContinuousFlexibility.Analysis.N04bLeftRootFlowGeometry
 import ContinuousFlexibility.Analysis.N04bRootOrientation
 import ContinuousFlexibility.Analysis.N04bRootFlowContinuity
 import ContinuousFlexibility.Analysis.N04bCorrectedReturnGeometry
@@ -48,7 +49,7 @@ theorem n04b_rightRootFlow_eq_stored
 
 /-- Construct the actual reverse-root equation on one nontrivial closed
 right collar. No angular regularity of the stored interior flow is used. -/
-theorem n04b_exists_right_root_symmetric_flow_equations_with_halfGap
+theorem n04b_exists_right_root_symmetric_flow_equations_with_physical_factors
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {R : ReturnEquationData S}
     {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}
@@ -71,7 +72,9 @@ theorem n04b_exists_right_root_symmetric_flow_equations_with_halfGap
           (rootPhysicalSpeed d c₀ 1 (x, n04bRightRootFlow C L z m θ x)) x) ∧
       (∀ x ∈ Icc (0 : ℝ) ρ, ∀ θ : ℝ,
         Real.sqrt x * c₀ (x, θ) =
-          n04bCharacteristicHalfGap (L.coefficients z) (C.right m - x, θ)) := by
+          n04bCharacteristicHalfGap (L.coefficients z) (C.right m - x, θ)) ∧
+      (∀ x ∈ Icc (0 : ℝ) ρ, ∀ θ : ℝ,
+        d (x, θ) = -n04bCharacteristicDrift (L.coefficients z) (C.right m - x, θ)) := by
   have hcontrol : controlGeometryConditions D S C := h03.1.1.2.2.2.1
   have hbounds := hcontrol.1 m
   have hroot := hcontrol.2.1 m
@@ -90,7 +93,7 @@ theorem n04b_exists_right_root_symmetric_flow_equations_with_halfGap
   have hflow := h03.2.2.2.2.2.1 z hz hs m
   have hgeometry := n04b_corrected_return_geometry hT hS h03 hz hs m
   have hbij := hgeometry.2.2.2.1
-  refine ⟨ρ, d, c₀, hρ, hsmall, hd, hc, hdp, hcp, hdodd, hceven, hcpos, ?_, ?_, ?_, ?_⟩
+  refine ⟨ρ, d, c₀, hρ, hsmall, hd, hc, hdp, hcp, hdodd, hceven, hcpos, ?_, ?_, ?_, ?_, ?_⟩
   · intro θ
     simpa only [n04bRightRootFlow, sub_zero] using
       Function.rightInverse_invFun hbij.2 θ
@@ -139,6 +142,43 @@ theorem n04b_exists_right_root_symmetric_flow_equations_with_halfGap
     dsimp only [minusCharacteristicSpeed, plusCharacteristicSpeed,
       n04bCharacteristicHalfGap] at hm hp' ⊢
     linarith only [hm, hp']
+  · intro x hx θ
+    have hp : (x, θ) ∈ Icc (0 : ℝ) η ×ˢ (univ : Set ℝ) :=
+      ⟨⟨hx.1, hx.2.trans hρη⟩, mem_univ _⟩
+    have hdrift := n04b_rootDrift_eq_of_characteristic_equations
+      (hphysical (x, θ) hp).2.1 (hphysical (x, θ) hp).2.2
+    simpa only [rootProfileShift, neg_one_mul, ← sub_eq_add_neg] using hdrift
+
+/-- Projection retaining the established half-gap interface. -/
+theorem n04b_exists_right_root_symmetric_flow_equations_with_halfGap
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {R : ReturnEquationData S}
+    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (h03 : NonlinearPropertiesThrough03 D T S C R L base loss ε)
+    (hL : N04bFieldRegularity D S C L base ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1) (m : ℕ) :
+    ∃ (ρ : ℝ) (d c₀ : PolarPoint → ℝ), 0 < ρ ∧ C.left m < C.right m - ρ ∧
+      ContDiff ℝ ∞ d ∧ ContDiff ℝ ∞ c₀ ∧
+      (∀ r, Function.Periodic (fun θ => d (r, θ)) Real.pi) ∧
+      (∀ r, Function.Periodic (fun θ => c₀ (r, θ)) Real.pi) ∧
+      (∀ r θ, d (r, -θ) = -d (r, θ)) ∧
+      (∀ r θ, c₀ (r, -θ) = c₀ (r, θ)) ∧
+      (∀ p, 0 < c₀ p) ∧
+      (∀ θ, n04bRightRootFlow C L z m θ 0 = θ) ∧
+      (∀ θ, ContinuousOn (n04bRightRootFlow C L z m θ) (Icc (0 : ℝ) ρ)) ∧
+      (∀ θ x, x ∈ Ioo (0 : ℝ) ρ →
+        HasDerivAt (n04bRightRootFlow C L z m θ)
+          (rootPhysicalSpeed d c₀ 1 (x, n04bRightRootFlow C L z m θ x)) x) ∧
+      (∀ x ∈ Icc (0 : ℝ) ρ, ∀ θ : ℝ,
+        Real.sqrt x * c₀ (x, θ) =
+          n04bCharacteristicHalfGap (L.coefficients z) (C.right m - x, θ)) := by
+  obtain ⟨ρ, d, c₀, hρ, hsmall, hd, hc, hdp, hcp, hdodd, hceven, hcpos,
+      hi, hcont, hflow, hgap, _⟩ :=
+    n04b_exists_right_root_symmetric_flow_equations_with_physical_factors hT hS h03 hL hz hs m
+  exact ⟨ρ, d, c₀, hρ, hsmall, hd, hc, hdp, hcp, hdodd, hceven, hcpos,
+    hi, hcont, hflow, hgap⟩
 
 /-- Projection retaining the established actual root-flow interface. -/
 theorem n04b_exists_right_root_symmetric_flow_equations
