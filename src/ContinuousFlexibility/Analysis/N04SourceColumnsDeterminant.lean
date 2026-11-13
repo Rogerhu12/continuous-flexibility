@@ -39,10 +39,14 @@ variable (G : N04RealizationGauge) (η : (G.W.S.height (3 / 4 : ℝ)).Space)
 /-- Replacing the auxiliary field retains the sector grading and its
 smoothing operators, hence its interpolation estimates. -/
 theorem sourceColumns_interpolation :
-    HasInterpolation (parameterGrading (G.S η)) :=
-  hasInterpolation_of_hasSmoothing (n07aParameterGrading_monotone (G.S η))
-    (hasSmoothing_pairGrading (solve_sector_hasSmoothing G.W.hS)
-      hasSmoothing_realGrading)
+    HasInterpolation (parameterGrading (G.S η)) := by
+  have hsector : HasSmoothing (sectorGrading G.W.S) :=
+    solve_sector_hasSmoothing (S := G.W.S) G.W.hS
+  have hparameter : HasSmoothing (parameterGrading G.W.S) :=
+    hasSmoothing_pairGrading hsector hasSmoothing_realGrading
+  have hI : HasInterpolation (parameterGrading G.W.S) :=
+    hasInterpolation_of_hasSmoothing (n07aParameterGrading_monotone G.W.S) hparameter
+  exact hI
 
 /-- Reference jets control the determinant polynomial at the same sample. -/
 theorem sourceColumns_inverseDeterminantRef_data
