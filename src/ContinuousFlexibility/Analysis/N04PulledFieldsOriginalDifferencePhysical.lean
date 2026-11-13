@@ -16,6 +16,8 @@ namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements
 
+set_option backward.isDefEq.respectTransparency false
+
 private theorem n04PulledFields_constantShiftJet_difference
     {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
     [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
@@ -35,11 +37,52 @@ private theorem n04PulledFields_constantShiftJet_difference
       simp only [Nat.succ_ne_zero, ite_false, sub_zero]
       exact J.positive_jet_eq_of_constant_shift K c heq k x hx v
 
+private theorem n04PulledFields_restrictedConstantShift_bound
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U V : Set E} {f g : E → ℝ}
+    (J : SmoothDirections U f) (K : SmoothDirections V g)
+    (hU : IsOpen U) (hsub : U ⊆ V) (c : ℝ)
+    (heq : ∀ x ∈ U, f x = g x + c)
+    (k : ℕ) (x : E) (hx : x ∈ U) (v : Fin k → E)
+    {R : ℝ} (hb : |K.D k x v| ≤ R) :
+    |J.D k x v - (if k = 0 then c else 0)| ≤ R := by
+  have hjet := n04PulledFields_constantShiftJet_difference
+    J (K.restrict hU hsub) c heq k x hx v
+  exact (congrArg abs hjet).trans_le hb
+
+private theorem n04PulledFields_physicalHeight_transfer
+    {value B Hs Es K H E Q W : ℝ} (hB : 0 ≤ B) (hW : 0 ≤ W)
+    (hb : |value| ≤ B * Hs * Es ^ B * W)
+    (ht : Hs * Es ^ B ≤ K * H * E ^ Q) :
+    |value| ≤ (B * K) * E ^ Q * H * W := by
+  calc
+    _ ≤ B * Hs * Es ^ B * W := hb
+    _ = B * (Hs * Es ^ B) * W := by ring
+    _ ≤ B * (K * H * E ^ Q) * W :=
+      mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left ht hB) hW
+    _ = _ := by ring
+
 local instance n04PulledFieldsOriginalDifferenceStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+
+private theorem n04PulledFields_annularCoefficientIncrement_sampleBound
+    (hN : N01Properties D T S C base loss ε) (k s : ℕ) :
+    ∃ B : ℝ, 0 < B ∧ ∀ (i : Fin 3) (a b : ℕ), a + b ≤ s →
+      ∀ (p : PolarPoint) (hp : p ∈ annularOpen D),
+      ∀ z ∈ sectorNeighborhood S base ε ε, ∀ v : Fin k → StateDirections S × ℝ,
+        |(n04Realization_annularCoefficientIncrementTower hN i a b p hp).D k z v| ≤
+          B * T.H (T.sample (n04CellAt D p.1)) ^ (3 / 4 : ℝ) *
+            T.E0 (T.sample (n04CellAt D p.1)) ^ B *
+              oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+                base (s + loss) z v := by
+  let data := hN.sectorCoefficientTower_bound k s
+  exact ⟨data.choose, data.choose_spec.1, fun i a b hab p hp z hz v =>
+    data.choose_spec.2 (n04CellAt D p.1) i a b p hab
+      (n04_cell_at_mem hN.1.1.choose_spec.2.1 hp.1) z hz v⟩
 
 /-- Every actual increment jet has the original one-high bound with
 the full height evaluated at the same physical point. -/
@@ -53,26 +96,17 @@ theorem n04PulledFields_annularCoefficientIncrement_physicalOneHigh
           A * T.E0 p.1 ^ Q * T.H p.1 ^ (3 / 4 : ℝ) *
             oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
               base (s + loss) z v := by
-  obtain ⟨B, hB, hbound⟩ := hN.sectorCoefficientTower_bound k s
-  obtain ⟨K, Q, hK, hQ, htransfer⟩ := n04PulledFields_cellSample_physicalCost
-    hT hN.1.1 (by norm_num : 0 < (3 / 4 : ℝ)) hB.le
-  refine ⟨B * K, Q, mul_pos hB hK, hQ, ?_⟩
-  intro i a b hab p hp z hz v
-  let j := n04CellAt D p.1
-  have hj : p.1 ∈ D.cells j := n04_cell_at_mem hN.1.1.choose_spec.2.1 hp.1
-  let W := oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-    base (s + loss) z v
-  have hW : 0 ≤ W := oneHighVariationWeight_nonneg _ _ _ _ _
-  have hraw : |(n04Realization_annularCoefficientIncrementTower hN i a b p hp).D k z v| ≤
-      B * T.H (T.sample j) ^ (3 / 4 : ℝ) * T.E0 (T.sample j) ^ B * W :=
-    hbound j i a b p hab hj z hz v
-  calc
-    _ ≤ B * T.H (T.sample j) ^ (3 / 4 : ℝ) * T.E0 (T.sample j) ^ B * W := hraw
-    _ = B * (T.H (T.sample j) ^ (3 / 4 : ℝ) * T.E0 (T.sample j) ^ B) * W := by ring
-    _ ≤ B * (K * T.H p.1 ^ (3 / 4 : ℝ) * T.E0 p.1 ^ Q) * W :=
-      mul_le_mul_of_nonneg_right
-        (mul_le_mul_of_nonneg_left (htransfer j p.1 hj) hB.le) hW
-    _ = _ := by dsimp only [W]; ring
+  let data := n04PulledFields_annularCoefficientIncrement_sampleBound hN k s
+  let transfer := n04PulledFields_cellSample_physicalCost
+    hT hN.1.1 (by norm_num : 0 < (3 / 4 : ℝ)) data.choose_spec.1.le
+  refine ⟨data.choose * transfer.choose, transfer.choose_spec.choose,
+    mul_pos data.choose_spec.1 transfer.choose_spec.choose_spec.1,
+    transfer.choose_spec.choose_spec.2.1, fun i a b hab p hp z hz v => ?_⟩
+  exact n04PulledFields_physicalHeight_transfer data.choose_spec.1.le
+    (oneHighVariationWeight_nonneg _ _ _ _ _)
+    (data.choose_spec.2 i a b hab p hp z hz v)
+    (transfer.choose_spec.choose_spec.2.2 (n04CellAt D p.1) p.1
+      (n04_cell_at_mem hN.1.1.choose_spec.2.1 hp.1))
 
 /-- The same estimate holds for any genuine original-coefficient tower
 on a smaller open parameter domain. The reference term occurs exactly
@@ -92,15 +126,14 @@ theorem n04PulledFields_originalCoefficient_difference_physicalOneHigh
           A * T.E0 p.1 ^ Q * T.H p.1 ^ (3 / 4 : ℝ) *
             oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
               base (s + loss) z v := by
-  obtain ⟨A, Q, hA, hQ, hb⟩ :=
-    n04PulledFields_annularCoefficientIncrement_physicalOneHigh hN hT k s
-  refine ⟨A, Q, hA, hQ, ?_⟩
-  intro i a b hab p hp U hU hsub J z hz v
-  let K := (n04Realization_annularCoefficientIncrementTower hN i a b p hp).restrict hU hsub
-  have heq := n04PulledFields_constantShiftJet_difference J K
+  let data := n04PulledFields_annularCoefficientIncrement_physicalOneHigh hN hT k s
+  refine ⟨data.choose, data.choose_spec.choose, data.choose_spec.choose_spec.1,
+    data.choose_spec.choose_spec.2.1, fun i a b hab p hp U hU hsub J z hz v => ?_⟩
+  exact n04PulledFields_restrictedConstantShift_bound J
+    (n04Realization_annularCoefficientIncrementTower hN i a b p hp) hU hsub
     (mixedDerivative a b (originalCoefficientEntry D S C i (C.referenceState, 0)) p)
     (fun x hx => n04Realization_coefficientMixed_eq_increment_add hN hS hT i a b hp (hsub hx))
     k z hz v
-  exact (congrArg abs heq).trans_le (hb i a b hab p hp z (hsub hz) v)
+    (data.choose_spec.choose_spec.2.2 i a b hab p hp z (hsub hz) v)
 
 end ContinuousFlexibility.Analysis

@@ -90,4 +90,30 @@ theorem N04PulledFieldsFixedBaseFamily.weighted_evaluation_power
         weight y := mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hgrade hCe) (hweight y)
     _ = _ := by dsimp only [Q, high]; ring
 
+/-- A curried evaluation label is handled before specializing either
+space. This keeps witness and label conversions out of model adapters. -/
+theorem N04PulledFieldsFixedBaseFamily.weighted_evaluation_power_two
+    {P : Type*} {f : I → E → F} (hf : N04PulledFieldsFixedBaseFamily p q U f)
+    (hp : Monotone p) (hIp : HasInterpolation p)
+    (ev : ℕ → F → M → P → ℝ) (weight : M → ℝ) (hweight : ∀ y, 0 ≤ weight y)
+    (evaluationLoss : ℕ) (Ce : ℝ) (hCe : 0 ≤ Ce)
+    (heval : ∀ b u y t, |ev b u y t| ≤ (Ce * q (b + evaluationLoss) u) * weight y) :
+    ∃ B : ℕ, ∀ K : ℕ, ∃ highLoss shift : ℕ,
+      ∀ R : ℝ, 0 ≤ R → ∀ N k : ℕ, k ≤ K → ∀ b : ℕ, b ≤ N →
+      ∃ C : ℝ, 0 ≤ C ∧
+      ∀ i (J : SmoothDirections U (f i)) x, x ∈ U → ∀ w : E,
+        p B x ≤ R → p B w ≤ 1 → ∀ y t,
+        |ev b (J.D k x (fun _ => w)) y t| ≤ C * weight y *
+          (1 + p (N + highLoss) x + p (N + highLoss) w) ^
+            (((b + shift * k : ℕ) : ℝ) / ((N : ℝ) + 1)) := by
+  obtain ⟨B, hB⟩ := hf.weighted_evaluation_power hp hIp
+    (fun b u (y : M × P) => ev b u y.1 y.2) (fun y : M × P => weight y.1)
+    (fun y => hweight y.1) evaluationLoss Ce hCe (fun b u y => heval b u y.1 y.2)
+  refine ⟨B, fun K => ?_⟩
+  obtain ⟨highLoss, shift, hprefix⟩ := hB K
+  refine ⟨highLoss, shift, fun R hR N k hk b hb => ?_⟩
+  obtain ⟨C, hC, hc⟩ := hprefix R hR N k hk b hb
+  exact ⟨C, hC, fun i J x hx w hxlow hwlow y t =>
+    hc i J x hx w hxlow hwlow (y, t)⟩
+
 end ContinuousFlexibility.Analysis

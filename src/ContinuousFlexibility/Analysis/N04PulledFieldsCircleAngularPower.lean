@@ -16,6 +16,8 @@ namespace ContinuousFlexibility.Analysis
 open Set ContinuousFlexibility.Statements
 open scoped BigOperators
 
+set_option backward.isDefEq.respectTransparency false
+
 variable {I E : Type*}
   [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
   [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
@@ -38,23 +40,14 @@ theorem N04PulledFieldsFixedBaseFamily.circle_diagonal_angular_power
           C * T.H (T.sample m) ^ γ *
             (1 + p (N + highLoss) x + p (N + highLoss) w) ^
               (((b + shift * k : ℕ) : ℝ) / ((N : ℝ) + 1)) := by
-  let ev : ℕ → H.Space → (ℕ × ℝ) → ℝ := fun b u y =>
-    iteratedDeriv b (H.decode u y.1) y.2
-  let weight : (ℕ × ℝ) → ℝ := fun y => T.H (T.sample y.1) ^ γ
-  have hweight (y : ℕ × ℝ) : 0 ≤ weight y := Real.rpow_nonneg (hpos y.1).le γ
-  have heval (b : ℕ) (u : H.Space) (y : ℕ × ℝ) :
-      |ev b u y| ≤ (2 * circleSobolevConstant * H.grading (b + 1) u) * weight y :=
-    circleModel_iteratedDeriv_abs_le hH hpos u y.1 b y.2
-  obtain ⟨B, hB⟩ := N04PulledFieldsFixedBaseFamily.weighted_evaluation_power
-    (I := I) (M := ℕ × ℝ) (E := E) (F := H.Space)
-    (p := p) (q := H.grading) (U := U) (f := g) hg hp hIp ev weight hweight 1
+  exact N04PulledFieldsFixedBaseFamily.weighted_evaluation_power_two
+    (I := I) (M := ℕ) (P := ℝ) (E := E) (F := H.Space)
+    (p := p) (q := H.grading) (U := U) (f := g) hg hp hIp
+    (fun b u m θ => iteratedDeriv b (H.decode u m) θ)
+    (fun m => T.H (T.sample m) ^ γ)
+    (fun m => Real.rpow_nonneg (hpos m).le γ) 1
     (2 * circleSobolevConstant)
-    (mul_nonneg (by norm_num) circleSobolevConstant_nonneg) heval
-  refine ⟨B, fun K => ?_⟩
-  obtain ⟨highLoss, shift, hprefix⟩ := hB K
-  refine ⟨highLoss, shift, fun R hR N k hk b hb => ?_⟩
-  obtain ⟨C, hC, hc⟩ := hprefix R hR N k hk b hb
-  exact ⟨C, hC, fun i J x hx w hxlow hwlow m θ =>
-    hc i J x hx w hxlow hwlow (m, θ)⟩
+    (mul_nonneg (by norm_num) circleSobolevConstant_nonneg)
+    (fun b u m θ => circleModel_iteratedDeriv_abs_le hH hpos u m b θ)
 
 end ContinuousFlexibility.Analysis
