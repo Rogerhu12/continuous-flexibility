@@ -1,0 +1,104 @@
+{
+  "schema": "n04-reviewed-source-manifest/v1",
+  "status": "FULL_SOURCE_AND_EXACT_DELTA_REVIEWED_ONLY_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "artifact_path": "positive/repair186/CircleShiftedForwardFixedBaseBoundsReviewedManifest.json",
+  "candidate": {
+    "git_blob": "7ba8e36b239d26fe503dfabf5a6d555a2b7e3d79",
+    "sha256": "6ba8afd1d0375e2ce74a456206833e6f44bb5b881a8cb2f91c0e1c183feef43c",
+    "utf8_bytes": 13316,
+    "lines": 211,
+    "final_newline": true
+  },
+  "active_preimage": {
+    "head": "fe9c74978f5e639bd6d0963516e231ef6bb9f4f0",
+    "tree": "b647959a51f28b0ef5b9a3ca22758e16efb0563e",
+    "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "b2300d35aed5ebeddd53ac2f1da6e1081a461759",
+    "sha256": "557f8db08e4ad547ec9460b2babc388b1474aad72254686d618b0282dc911700",
+    "utf8_bytes": 10399,
+    "lines": 201,
+    "final_newline": true,
+    "previous_owner_git_blob": "79edab512f28fc1fcdd38b6372d5907bbffe5161"
+  },
+  "selected": {
+    "path": "positive/repair186/CircleShiftedForwardFixedBaseBounds.lean",
+    "intended_path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "25ac7596fcd840162d70ba65a76b502cbe9e58e1",
+    "sha256": "215ce15fb8ae30c5cf57bc2b3c77cbe018d6a3bdd21b134fcc3da333f98d78b4",
+    "utf8_bytes": 11335,
+    "lines": 213,
+    "final_newline": true
+  },
+  "patch": {
+    "git_blob": "ad3e5f7931393f31f6cbf77e9399d07fc9c22ea3",
+    "sha256": "9dbf769c9c731363d61505214cfcf78761976e4c9b4c53ae0f023385bc519385",
+    "utf8_bytes": 3265,
+    "lines": 56,
+    "final_newline": true,
+    "hunks": 3,
+    "added": 21,
+    "deleted": 9,
+    "net_lines": 12,
+    "exact_inverse_reconstruction": true
+  },
+  "independent_review": {
+    "path": "audit/recovery/reviews/CI186CircleShiftedForwardFixedBaseBoundsIndependentReview.json",
+    "git_blob": "91936a29cd3983e3106535c9f2d7f78a2efe9d48",
+    "sha256": "cc4909f23363dcd10da236599e56e3b89b3a2be073fcdba5ab47ab41f6abbe36",
+    "utf8_bytes": 5858,
+    "lines": 111,
+    "final_newline": true,
+    "verdict": "PASS_COMPLETE_SOURCE_AND_EXACT_DELTA_STATIC_REVIEW_UNCOMPILED",
+    "findings": [],
+    "reviewer": "/root/audit_coordinates",
+    "full_review_read_by_owner": true
+  },
+  "complete_public_headers": [
+    {
+      "name": "circleShiftedChartCompose_orderedJet_eq_kernel",
+      "header": "theorem circleShiftedChartCompose_orderedJet_eq_kernel\n    (travel : ℕ → ℝ) {U : Set M.Space} (hU : IsOpen U)\n    (J : SmoothDirections (U ×ˢ univ) (fun z : M.Space × M.Space =>\n      circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2))\n    (n : ℕ) :\n    ∀ e ∈ U, ∀ (v : Fin n → M.Space) (y : M.Space),\n      inverseForwardJet J n e v y =\n        coupledCircleKernel hD hT hγ hM hI n n e\n          (circleTranslationContinuousLinear hM hT hD hγ travel y) v"
+    },
+    {
+      "name": "circleShiftedChartCompose_orderedJets_fixedBase_bound",
+      "header": "theorem circleShiftedChartCompose_orderedJets_fixedBase_bound :\n    ∃ base loss : ℕ, ∀ (n : ℕ) (R : ℝ), 1 ≤ R →\n      ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧\n        ∀ (travel : ℕ → ℝ) (U : Set M.Space) (hU : IsOpen U)\n          (J : SmoothDirections (U ×ˢ univ) (fun z : M.Space × M.Space =>\n            circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2)),\n          ∀ e ∈ U, M.grading base e ≤ R → ∀ v : Fin n → M.Space,\n            (∀ i, M.grading base (v i) ≤ R) → ∀ y : M.Space,\n              M.grading s (inverseForwardJet J n e v y) ≤ C *\n                ((1 + M.grading (s + (n + loss)) e +\n                    ∑ i, M.grading (s + (n + loss)) (v i)) * M.grading base y +\n                  M.grading (s + (n + loss)) y)"
+    }
+  ],
+  "mathematical_scope": {
+    "same_J_source_last_ordered_recurrence": true,
+    "no_Schwarz_or_new_tower": true,
+    "real_scalar_sum_helper_outside_circle_model_context": true,
+    "explicit_real_add_assoc_and_add_right_comm": true,
+    "entire_second_public_theorem_unchanged": true,
+    "same_base_loss_order": true,
+    "same_source_normalization": true
+  },
+  "invariants": {
+    "same_imports": [
+      "ContinuousFlexibility.Analysis.TameInverseExpressions",
+      "ContinuousFlexibility.Analysis.CoupledCircleCompositionCurveDerivative",
+      "ContinuousFlexibility.Analysis.CircleTranslationUniformBounds",
+      "ContinuousFlexibility.Analysis.TameMultilinearNormalization"
+    ],
+    "same_existing_local_product_instance": true,
+    "no_assumption_or_resource_or_transparency_change": true,
+    "no_new_public_names": true,
+    "unchanged_source_after_independent_review": true
+  },
+  "performance": {
+    "verified": false,
+    "meaning": "Independent source review does not prove performance under the default200000 budget. Complete CI186 failed; only root-owned successor CI can establish this candidate compiles."
+  },
+  "budget": {
+    "before": 19988,
+    "net_new_Lean_lines": 12,
+    "proposed_after": 20000,
+    "remaining": 0,
+    "source_lines": 213,
+    "duplicate_Lean_archive_not_requested": true
+  },
+  "persistence": "Source, exact patch, candidate and independent peer read back as exact UTF-8 Git blobs; this owner likewise read back. No local availability claim.",
+  "no_local_Lean_or_elaboration": true,
+  "no_active_index_ref_or_CI_action_by_owner": true
+}

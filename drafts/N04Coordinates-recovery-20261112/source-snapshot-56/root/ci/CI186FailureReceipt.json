@@ -1,0 +1,23 @@
+{
+  "schema": "n04-ci-failure-receipt/v1",
+  "round": 186,
+  "head": "fe9c74978f5e639bd6d0963516e231ef6bb9f4f0",
+  "tree": "b647959a51f28b0ef5b9a3ca22758e16efb0563e",
+  "run": 43351147037,
+  "job": 131642235209,
+  "status": "completed",
+  "conclusion": "failure",
+  "updated_at": "2026-11-13T02:24:25Z",
+  "quick": "failure",
+  "full": "skipped",
+  "fresh_project_modules": 0,
+  "original_log": "144a2473ba5cbd1906975a6333bb0696c7621add",
+  "complete_errors": "c37713d391222304487a05d385e8af6960b72384",
+  "diagnostics": 5,
+  "no_artifact_download_needed": true,
+  "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "released_draft_credit": 0,
+  "draft_actual_upper": 19988,
+  "remaining": 12,
+  "performance": "Proof-boundary split did not resolve the generic derivative specialization or scalar-majorant elaboration timeouts. No resource change permitted; further source diagnosis required."
+}

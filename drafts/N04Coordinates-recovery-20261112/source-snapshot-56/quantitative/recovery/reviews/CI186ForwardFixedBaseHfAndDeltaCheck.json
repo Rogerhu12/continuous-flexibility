@@ -1,0 +1,78 @@
+{
+  "schema": "n04-contributor-exact-delta-and-hf-review/v1",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "artifact_path": "quantitative/recovery/reviews/CI186ForwardFixedBaseHfAndDeltaCheck.json",
+  "reviewer": "/root/quantitative_route",
+  "date_utc": "2026-11-13",
+  "status": "PASS_SCOPED_STATIC_CHECK_THIRD_PARTY_FULL_PEER_SEPARATE",
+  "independence": "This reviewer proposed the scalar-majorant change. This record independently checks the new hf proof, complete source identities, all public contracts and exact delta; it does not replace audit_coordinates' requested third-party full peer.",
+  "candidate": {
+    "git_blob": "7ba8e36b239d26fe503dfabf5a6d555a2b7e3d79",
+    "sha256": "6ba8afd1d0375e2ce74a456206833e6f44bb5b881a8cb2f91c0e1c183feef43c"
+  },
+  "actual_base": {
+    "head": "fe9c74978f5e639bd6d0963516e231ef6bb9f4f0",
+    "tree": "b647959a51f28b0ef5b9a3ca22758e16efb0563e",
+    "git_blob": "b2300d35aed5ebeddd53ac2f1da6e1081a461759",
+    "sha256": "557f8db08e4ad547ec9460b2babc388b1474aad72254686d618b0282dc911700",
+    "lines": 201
+  },
+  "selected": {
+    "git_blob": "25ac7596fcd840162d70ba65a76b502cbe9e58e1",
+    "sha256": "215ce15fb8ae30c5cf57bc2b3c77cbe018d6a3bdd21b134fcc3da333f98d78b4",
+    "utf8_bytes": 11335,
+    "lines": 213
+  },
+  "patch": {
+    "git_blob": "ad3e5f7931393f31f6cbf77e9399d07fc9c22ea3",
+    "sha256": "9dbf769c9c731363d61505214cfcf78761976e4c9b4c53ae0f023385bc519385",
+    "hunks": 3,
+    "added": 21,
+    "deleted": 9,
+    "net": 12,
+    "bidirectional_exact_bytes": true
+  },
+  "reading": "All 201 actual before and 213 after lines, entire candidate manifest/patch, all five complete CI186 timeout diagnostics, and actual14ad derivative recurrence. Before and14ad fetched independently at exact fe9c7497.",
+  "complete_public_headers": [
+    {
+      "name": "circleShiftedChartCompose_orderedJet_eq_kernel",
+      "sha256": "343f1f91d75417ce3498c7f0f1ecb087ac5a4a25c8ced93cf4b05167a8cf1858"
+    },
+    {
+      "name": "circleShiftedChartCompose_orderedJets_fixedBase_bound",
+      "sha256": "9cca6a1573826058359460b0c8f1c9b1ba9c56065831acf75f47145ac84fad38"
+    }
+  ],
+  "unchanged": {
+    "numeric_public_theorem_entire_bytes": true,
+    "zero_private_theorem_entire_bytes": true,
+    "imports": true,
+    "options": true,
+    "product_instance": true,
+    "base_loss_before_all_n": true,
+    "same_J_travel_source": true
+  },
+  "hf": {
+    "provider": "14ad46cae7d92dca46f5efd006f5260873046713",
+    "provider_sha256": "5f19c405b830b56e9ad43319b2e9b306af3a27d840167fc29d592e9b9edaec56",
+    "public": "hasProjectiveLineDerivAt_inverseForwardJet",
+    "check": "The new proof specializes the existing provider proof at X=Y=Z=M.Space, x=e, old increments=Fin.tail v, head=v0. J.derivative is applied at (e,0) to the n+1 source-last snoc tuple and direction(v0,0). The cons/snoc equality is pointwise identical; after it the HasProjectiveLineDerivAt/inverseForwardJet/product/zero simplification list is unchanged. No fresh tower, slot permutation or Schwarz assumption.",
+    "result": "PASS"
+  },
+  "majorant": {
+    "check": "Scalar helper is before D/T/M variables, with only a finite index and real scalars. The invocation supplies the exact P,A and explicitly typed Fin(n+1) high-grading function. The last congrArg proves A+(B+C)=(A+C)+B; local a is definitionally A+C. Every finite-product inequality, R^(n+1), translation estimate and normalization is unchanged.",
+    "result": "CONSISTENT_WITH_PROPOSED_CHANGE"
+  },
+  "diagnostics": {
+    "git_blob": "c37713d391222304487a05d385e8af6960b72384",
+    "sha256": "649ad948682dd26401b19427c81840227ab204e663860d7a6edca807c7b5f27a",
+    "complete_blocks": 5,
+    "lines_per_block": 5
+  },
+  "findings": [],
+  "limits": [
+    "No Lean/elaboration, performance certification, resource increase, new graph or active/ref/CI action.",
+    "Next root-owned CI must validate the default-budget performance; the213 candidate is uncompiled.",
+    "Scope is a contributor check plus independent hf/delta check, not a substitute for audit's full independent source review."
+  ]
+}

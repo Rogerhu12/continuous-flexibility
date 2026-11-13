@@ -1,0 +1,127 @@
+{
+  "schema": "n04-single-provider-successor-binding/v1",
+  "status": "EXACT_REVIEWED_SOURCE_AND_IMPORT_BINDING_NOT_COMPILED",
+  "artifact_path": "positive/reconstructed/CircleShiftedFullForwardFixedBaseBoundsCI187ProviderBinding.json",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "unchanged_consumer": {
+    "module": "ContinuousFlexibility.Analysis.CircleShiftedFullForwardFixedBaseBounds",
+    "path": "src/ContinuousFlexibility/Analysis/CircleShiftedFullForwardFixedBaseBounds.lean",
+    "git_blob": "b0432b0c9033f1655fb127f705c00d772c255a44",
+    "sha256": "ac05f36caca3c4b9261abb81f35187c82847b30081b154937de931878e11bf39",
+    "utf8_bytes": 10419,
+    "lines": 206,
+    "final_newline": true,
+    "project_imports": [
+      "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+      "ContinuousFlexibility.Analysis.CircleCompositionSmoothDirections",
+      "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+      "ContinuousFlexibility.Analysis.TameLocalCalculus"
+    ],
+    "selection": "new-owned-source-review-candidate-not-compiled",
+    "owner_git_blob": "58dd5ca292030c3d94ebd92cf812c631c23bdde0",
+    "owner_sha256": "d0091630aaa0b558ca57e4616ec69bc0431c3a3cc0465d7198a858a8aa249b92",
+    "candidate_git_blob": "6a5ba52762cf0da0a191a79419700424f67bd682",
+    "independent_review_git_blob": "1cb80c2fc11ae217e873685b63e91f5d6bf111a8",
+    "source_unchanged": true
+  },
+  "historical_graph": {
+    "git_blob": "b7adc37fa050ddbe10c58a34d5752c1d0e312d09",
+    "sha256": "fde9f33513306ea2a9a25cf88885e86f7bef9c47decbd3f0df3b6e54749e3533",
+    "preserved_unmodified": true
+  },
+  "previous_binding": {
+    "git_blob": "1590f632ae7a449fae21d669092f6c255c418f7f",
+    "sha256": "1cd967953e24965ae8dfb7e78b203ee9c43f9562b9f199f2909e8dc443fddc65",
+    "preserved_unmodified": true
+  },
+  "predecessor": {
+    "module": "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+    "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "b2300d35aed5ebeddd53ac2f1da6e1081a461759",
+    "sha256": "557f8db08e4ad547ec9460b2babc388b1474aad72254686d618b0282dc911700",
+    "utf8_bytes": 10399,
+    "lines": 201,
+    "project_imports": [
+      "ContinuousFlexibility.Analysis.TameInverseExpressions",
+      "ContinuousFlexibility.Analysis.CoupledCircleCompositionCurveDerivative",
+      "ContinuousFlexibility.Analysis.CircleTranslationUniformBounds",
+      "ContinuousFlexibility.Analysis.TameMultilinearNormalization"
+    ],
+    "selection": "explicit-CI185-repair-reviewed-successor201-not-compiled",
+    "owner_git_blob": "79edab512f28fc1fcdd38b6372d5907bbffe5161",
+    "final_newline": true,
+    "candidate_git_blob": "70bcdf7013e2fff180d1c47bc221bf201f077c66",
+    "independent_review_git_blob": "5d6bedbcf87956b4362bbe711b04c7e1b4c3dd97",
+    "independent_review_sha256": "cc6a15e2ba69399e283d384685384a405a116e8c3eb4fdde6d4c73e23ca690ba",
+    "owner_sha256": "b4642a88287e8c3095ad1960d7d2e9276d8b537a477d7272c15f00b1f6a4c1ff"
+  },
+  "successor": {
+    "module": "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+    "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "25ac7596fcd840162d70ba65a76b502cbe9e58e1",
+    "sha256": "215ce15fb8ae30c5cf57bc2b3c77cbe018d6a3bdd21b134fcc3da333f98d78b4",
+    "utf8_bytes": 11335,
+    "lines": 213,
+    "final_newline": true,
+    "project_imports": [
+      "ContinuousFlexibility.Analysis.TameInverseExpressions",
+      "ContinuousFlexibility.Analysis.CoupledCircleCompositionCurveDerivative",
+      "ContinuousFlexibility.Analysis.CircleTranslationUniformBounds",
+      "ContinuousFlexibility.Analysis.TameMultilinearNormalization"
+    ],
+    "selection": "explicit-CI186-repair-reviewed-successor213-not-compiled",
+    "owner_git_blob": "3ff495453288cb78ea070b93d73a2168bcbe56ad",
+    "candidate_git_blob": "7ba8e36b239d26fe503dfabf5a6d555a2b7e3d79",
+    "independent_review_git_blob": "91936a29cd3983e3106535c9f2d7f78a2efe9d48",
+    "independent_review_sha256": "cc4909f23363dcd10da236599e56e3b89b3a2be073fcdba5ab47ab41f6abbe36",
+    "owner_sha256": "0fa918d3a9bcd91303299f1fb9c8eccb6d1dde63fe747a8edfb96381ea17b873"
+  },
+  "active_source_identity": {
+    "head": "4a9f2194ef3b84cb2840c4cf95807635c33d8d88",
+    "tree": "d5508ec676a6d4a0aed4ac0ca9364717612e535d",
+    "round": 187,
+    "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "25ac7596fcd840162d70ba65a76b502cbe9e58e1",
+    "full_source_exactly_fetched_at_head": true,
+    "ci_status": "Root reports pushed; no CI result queried or claimed here."
+  },
+  "binding_rule": "Apply the prior174-to201 binding to the unchanged historical286 graph, then replace only that same provider's201 source with this213 successor. No other node, project edge, root source or original record is rewritten. Prior compilation/review limitations remain historical and are not upgraded.",
+  "compatibility": {
+    "complete_two_public_headers_identical": true,
+    "public_names": [
+      "circleShiftedChartCompose_orderedJet_eq_kernel",
+      "circleShiftedChartCompose_orderedJets_fixedBase_bound"
+    ],
+    "entire_second_public_theorem_identical_to201": true,
+    "four_imports_identical": true,
+    "resources_identical": true,
+    "same_J_family_and_quantifier_order": true,
+    "consumer_206_bytes_need_no_change": true
+  },
+  "effective_graph": {
+    "node_count": 286,
+    "project_edges": 465,
+    "missing": [],
+    "cycles": [],
+    "changed_nodes_from_previous_binding": 1,
+    "unchanged_source_count": 285,
+    "root_source_unchanged": true,
+    "project_edges_identical": true,
+    "effective_source_fingerprint_sha256": "25a0c0e7f1a17d4b4e63199d58584ad13eb3dfd59b1da8ad7c39567e5a6228d0"
+  },
+  "fingerprint_recipe": "For the effective source records, retain fields module,path,git_blob,sha256,utf8_bytes,lines,project_imports in that order; sort by module with JavaScript lexical < and >; SHA256 UTF-8 of JSON.stringify(array) followed by one newline.",
+  "limits": [
+    "No Lean source added or changed by this binding.",
+    "The213 independent source review is not a successful CI187 receipt.",
+    "Consumer206 is unchanged and remains uncompiled; root owns its later activation/global checks.",
+    "No active/index/ref mutation or CI query by this owner."
+  ],
+  "ledger": {
+    "new_Lean_lines": 0,
+    "consumer_lines": 206,
+    "provider_net_lines_this_successor": 12,
+    "parent_reported_draft_bound": 20000,
+    "remaining": 0
+  }
+}

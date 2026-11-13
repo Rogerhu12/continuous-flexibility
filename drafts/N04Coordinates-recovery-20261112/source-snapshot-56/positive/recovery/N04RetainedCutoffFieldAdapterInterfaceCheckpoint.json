@@ -1,0 +1,229 @@
+{
+  "schema": "n04-readonly-implementation-checkpoint/v1",
+  "status": "ACTUAL_SAME_WITNESS_API_PATH_CHECKED_NO_NEW_LEAN_NOT_COMPILED",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "owner": "/root/proof_inventory",
+  "artifact_path": "positive/recovery/N04RetainedCutoffFieldAdapterInterfaceCheckpoint.json",
+  "prior_complete_route_git_blob": "fc631678cd227d3f2b34feeefe37bbf79fd3d20e",
+  "scope": "Narrow executable-interface check after full-J206 and CI186 proof-boundary repair. Reuses the existing route; no repeated whole dependency graph or new mathematical source.",
+  "result": "The same153 cutoff and buffered data suffice for the existing strict-gap theorem. Its only new choices are a larger low base and a smaller epsilon. N02/N03 restriction and the actual reference-flow identity then provide N04bFieldRegularity for the already selected L.",
+  "planned_single_leaf": {
+    "tentative_module": "ContinuousFlexibility.Analysis.N04RetainedCutoffFieldRegularity",
+    "size_estimate_lines": {
+      "lower": 100,
+      "upper": 140,
+      "authorized_future_ceiling": 160
+    },
+    "not_written": true,
+    "retained_inputs": [
+      "Same D,T,S,C,R,L,base,loss,epsilon from153; hN,hR,hL,hS,hT and positive epsilon.",
+      "Same literal L.coefficients=returnCorrectedCoefficients D S C chi and L.minusFlow=returnCorrectedMinusFlow S C chi.",
+      "Same chi smoothness/range/endpoint germs; same cell,x,delta,A,lam,P and positive constants.",
+      "Same real host containment, strict wider-buffer endpoint inclusions, tsupport(deriv chi) subset of the open wider buffer, original all-order cutoff bound, and actual closed-buffer original-coefficient lower data."
+    ],
+    "output": "There exist base2 and epsilon2 with base<=base2, 0<epsilon2<=epsilon, Through03 D T S C R L base2 loss epsilon2, and N04bFieldRegularity D S C L base2 epsilon2; also retain stateNeighborhood and sectorNeighborhood inclusions into the original domains.",
+    "no_data_reselection": [
+      "R",
+      "L",
+      "chi",
+      "cell",
+      "x",
+      "delta",
+      "A",
+      "lam",
+      "P",
+      "sample labels",
+      "physical/circle representations",
+      "any existing J"
+    ],
+    "expected_direct_imports": [
+      "ContinuousFlexibility.Analysis.ReturnCorrectionBufferedCollars",
+      "ContinuousFlexibility.Analysis.NonlinearNeighborhoodRestriction",
+      "ContinuousFlexibility.Analysis.N04bOpticalFieldType",
+      "ContinuousFlexibility.Analysis.N04bReferenceCorrection"
+    ]
+  },
+  "exact_execution": [
+    {
+      "step": 1,
+      "operation": "Take the n=1 instance of the original hjets certificate. Existing BufferedCollars lines271–277 already perform this exact extraction and call.",
+      "existing_proof_pattern": "obtain <J,hJ,hjet> from hjets 1; simpa only [iteratedDeriv_one, Nat.cast_one, mul_one] using hjet m r."
+    },
+    {
+      "step": 2,
+      "operation": "For p.1 in tsupport(deriv chi_m), use the retained open-buffer support inclusion and weaken its two strict inequalities to obtain membership in the same closed Icc buffer. Invoke the original hpositive there; no floor is extended beyond the buffer."
+    },
+    {
+      "step": 3,
+      "operation": "Call public exists_gap_neighborhood_for_positive_cutoff with the original hN,hS,hT,positive epsilon, same chi/cell, J,hJ,A>=0,lam>0,P>=0, same host containment and the two facts above. Choose only base2,epsilon2 and hN2. Take the first conjunct of its final speed conclusion as the strict active-cutoff gap."
+    },
+    {
+      "step": 4,
+      "operation": "Use hR.restrict_neighborhood and hL.restrict_neighborhood with the returned base/epsilon inequalities. This retains all actual R/L operators and restricts genuine tame towers. Assemble Through03 as the same pair of N01/N02 plus N03 certificates."
+    },
+    {
+      "step": 5,
+      "operation": "Compose tsupport-to-open-buffer with C.left<x-delta and x+delta<C.right, giving the exact tsupport subset requested by n04b_opticalFieldRegularity. Function.support alone would not meet this input."
+    },
+    {
+      "step": 6,
+      "operation": "Rewrite only L.minusFlow using its retained literal identity; apply hN2.n04b_returnCorrectedMinusFlow_reference hS hT chi m hr theta. The physical radius r is implicit in this actual public theorem; do not pass it twice."
+    },
+    {
+      "step": 7,
+      "operation": "Invoke hN2.n04b_opticalFieldRegularity hR2 hS hT with the same chi/smoothness/range/tsupport/endpoints, strict active gap, L, literal coefficient identity and reference-flow equality."
+    },
+    {
+      "step": 8,
+      "operation": "Return stateNeighborhood_mono S C hb hepsilon and sectorNeighborhood_mono S hb hepsilon hepsilon. All original closed-buffer inequalities, discriminant certificate and both original-flow slope bounds are transported by these inclusions; their cell/width/constants remain literal."
+    }
+  ],
+  "domain_limits": [
+    "Only the original closed buffer carries a uniform quantitative original a/-c/discriminant floor.",
+    "The field theorem obtains strict type elsewhere in the full negative component from its existing N01 theorem; this is not a uniform all-half discriminant floor.",
+    "The internal hcorrected tuple of153 supplies corrected-flow ODE/initial/return properties and is not itself a strict-gap certificate.",
+    "No call to FieldRealization, Q.field E, a second correction factory, or a fresh R/L is used."
+  ],
+  "actual_public_header_fingerprints": [
+    {
+      "name": "exists_gap_neighborhood_for_positive_cutoff",
+      "header_sha256": "4a3bca84e8497c32b5405f072d5cb24ed6e45c1bc44e247b571f38347d6b1ec2",
+      "header_bytes": 1686
+    },
+    {
+      "name": "N02Properties.restrict_neighborhood",
+      "header_sha256": "1c0e443f0899f3b3a1bde26e897bddb5bda8449d2a76f832e2e83cb141c99d54",
+      "header_bytes": 338
+    },
+    {
+      "name": "N03Properties.restrict_neighborhood",
+      "header_sha256": "6ad69c376b3cad809054adc5802359ea0e2071ddd0d221cf5c0d969a85cd0c81",
+      "header_bytes": 371
+    },
+    {
+      "name": "N01Properties.n04b_opticalFieldRegularity",
+      "header_sha256": "d1569cf68b56a10dbcbbdbce1326e90ba17886cbdc931442ee3f3f3418c1e571",
+      "header_bytes": 1154
+    },
+    {
+      "name": "N01Properties.n04b_returnCorrectedMinusFlow_reference",
+      "header_sha256": "b9e2fbc7eae84f7c979a4551a475a8f6dbda12214cc46234940e7129bdbb9241",
+      "header_bytes": 349
+    }
+  ],
+  "exact_selected_sources": [
+    {
+      "module": "N04RetainedCorrectionNumericalWitness",
+      "git_blob": "6ba76a32edfe98908b3b1d44f9af3c7e3d72bfe5",
+      "sha256": "15cc71a282ea4b0aaf371c968dc37a627b41b1407dff8f25e61f613e70c71bea",
+      "lines": 153,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01CorrectionCoefficientMaterialTame",
+        "ContinuousFlexibility.Analysis.N01ResidualSmoothTame",
+        "ContinuousFlexibility.Analysis.N03CorrectionAssembly",
+        "ContinuousFlexibility.Analysis.N03SourceFromActualCoefficientJets",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionUniformNeighborhood"
+      ]
+    },
+    {
+      "module": "ReturnCorrectionBufferedCollars",
+      "git_blob": "e52779806ba4290ea6dc7af3864a2cb20455afbd",
+      "sha256": "4c1f8954ac061a3e7e41696ae0e73974f61898982e1310efbfc4fc5fc08ae944",
+      "lines": 294,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap"
+      ]
+    },
+    {
+      "module": "NonlinearNeighborhoodRestriction",
+      "git_blob": "3f231a86ea80d87d6f908ce36c27ad1855dafaf3",
+      "sha256": "e89345ab3ac88ba3fa718488e90ec923bb77e96b41b70fc8602ca1b8d242d647",
+      "lines": 85,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction",
+        "ContinuousFlexibility.Analysis.SectorParameterGeometry"
+      ]
+    },
+    {
+      "module": "N04bOpticalFieldType",
+      "git_blob": "da2a788ce170da35a3c0f1d72849ab87187bbe15",
+      "sha256": "88891722dfa086127c946dc92a8e04bc53973df6a37cfb0c4beb013ba806ba08",
+      "lines": 109,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bOriginalType",
+        "ContinuousFlexibility.Analysis.N04bCorrectedFieldFacts",
+        "ContinuousFlexibility.Analysis.N04bFieldRegularity"
+      ]
+    },
+    {
+      "module": "N04bReferenceCorrection",
+      "git_blob": "8de44e6b9b63d15c1bf36be0521c5358c37d2b01",
+      "sha256": "d40a5560d69b5f1c0addeb6da26b2032e3edef8b96af8c2e5ad6f521094fa64b",
+      "lines": 140,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01RadialFlow",
+        "ContinuousFlexibility.Analysis.ReturnCorrectedFlow"
+      ]
+    },
+    {
+      "module": "N03CorrectionAssembly-selected206",
+      "git_blob": "fd48b7aea0616211039f84119dd4fb7f5d36a455",
+      "sha256": "a699eb62ab13a137bf5e75ee7f27a8d8fb9d0449dee431b3980bdd015997efaa",
+      "lines": 206,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionOperatorComparison",
+        "ContinuousFlexibility.Analysis.N02ReturnAssembly"
+      ]
+    }
+  ],
+  "historical_N03_owner_restore": {
+    "git_blob": "695afcd519fabd22dc82889b388d78ae57698a25",
+    "sha256": "eec7b5a0a03df2c4a29c0249eec940c113f23af9d1e2e96235781726a89ced52",
+    "full_text_readback_verified": true,
+    "meaning": "Historical source-review owner for fd48 strong206 and the older117 adapter; restoration is not a new review or a compiled receipt."
+  },
+  "actual186_narrow_availability": {
+    "head": "fe9c74978f5e639bd6d0963516e231ef6bb9f4f0",
+    "checks": [
+      {
+        "module": "ReturnCorrectionBufferedCollars",
+        "expected": "e52779806ba4290ea6dc7af3864a2cb20455afbd",
+        "found": false,
+        "isError": true
+      },
+      {
+        "module": "N04bOpticalFieldType",
+        "expected": "da2a788ce170da35a3c0f1d72849ab87187bbe15",
+        "found": false,
+        "isError": true
+      },
+      {
+        "module": "N04bReferenceCorrection",
+        "expected": "8de44e6b9b63d15c1bf36be0521c5358c37d2b01",
+        "found": false,
+        "isError": true
+      },
+      {
+        "module": "NonlinearNeighborhoodRestriction",
+        "expected": "3f231a86ea80d87d6f908ce36c27ad1855dafaf3",
+        "actual": "3f231a86ea80d87d6f908ce36c27ad1855dafaf3",
+        "equal": true,
+        "found": true
+      },
+      {
+        "module": "N03CorrectionAssembly",
+        "expected": "fd48b7aea0616211039f84119dd4fb7f5d36a455",
+        "found": false,
+        "isError": true
+      }
+    ],
+    "meaning": "Only explicit five paths checked. Four are not installed at this head; this proof outline is not a claim that153 or the optical-field dependency closure is ready to activate."
+  },
+  "remaining_gates": [
+    "Wait for root authorization after complete-green credit before writing this <=160-line adapter.",
+    "The existing selected153/strongN03 and optical-field providers need their actual closed source set and independent CI gates; no new broad graph was fetched here.",
+    "No Lean elaboration or complete implementation has been performed for this new adapter."
+  ],
+  "new_Lean_lines": 0
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "n04-recovery-push-receipt/v1",
+  "snapshot": 55,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "commit": "4d27224c6f926bc1ac7646d70f4d23fda9dd00f6",
+  "tree": "57df34a53030f3d56421016687252f5f1edeea58",
+  "parent": "679ac5a8189ffc3b87a9e8fc0a8fff43d9547888",
+  "additional_parent": "fe9c74978f5e639bd6d0963516e231ef6bb9f4f0",
+  "ref_readback_exact": true,
+  "pushed_readback_utc": "2026-11-13 02:19:57 UTC",
+  "blob_paths": 6747,
+  "outside_archive_exact_complete182_paths": 4933,
+  "index": {
+    "blob": "650741c2c64d440b9d63f0b96b807d4b61924560",
+    "sha256": "451162704218b49af6307e2415062e560899b8277ac168d63a81f2b2719bee52",
+    "bytes": 1714174,
+    "entries": 3377
+  },
+  "new_records": 11,
+  "recovered_historical_identity": 1,
+  "new_full_Lean_archives": 0,
+  "actual_retained_upper": 19988,
+  "remaining": 12,
+  "active_CI186": "PENDING"
+}

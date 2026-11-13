@@ -1,0 +1,196 @@
+{
+  "schema": "n04-recovery-snapshot/v1",
+  "snapshot": 56,
+  "created_at": "2026-11-13 02:41:37 UTC",
+  "parent": "4d27224c6f926bc1ac7646d70f4d23fda9dd00f6",
+  "additional_parent": "4a9f2194ef3b84cb2840c4cf95807635c33d8d88",
+  "compiled_baseline": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "compiled_baseline_tree": "02a8747b6aaae413f67372d96e52ad8f3dbd9e9a",
+  "source_index": {
+    "path": "drafts/N04Coordinates-recovery-20261112/SOURCE-INDEX.json",
+    "blob": "02b99d4c030a6cba51a7d0da9492eb5e2bc4869f",
+    "sha256": "6f0c0830ca49a5fe516d06b561690ffec1065940b85255467cc4f44e64eac7fa",
+    "bytes": 1724123,
+    "entries": 3395,
+    "new": 18
+  },
+  "artifacts": [
+    {
+      "name": "root/state/Backup55PushReceipt.json",
+      "blob": "ca601340b72cf479dec4dd2ae43f7f2666202ac9",
+      "sha256": "a98b3faa96d2a9e6d0e6727d1e97f668f81b3b2f227f6b8a5486ebfad2fc470d",
+      "bytes": 883,
+      "lines": 25
+    },
+    {
+      "name": "root/ci/CI186-build.log",
+      "blob": "144a2473ba5cbd1906975a6333bb0696c7621add",
+      "sha256": "a161876f9234dbe57071b5db6f8d32875418dbf8459f22b8686820304c96c6d9",
+      "bytes": 68152,
+      "lines": 797
+    },
+    {
+      "name": "root/ci/CI186CompleteErrors.json",
+      "blob": "c37713d391222304487a05d385e8af6960b72384",
+      "sha256": "649ad948682dd26401b19427c81840227ab204e663860d7a6edca807c7b5f27a",
+      "bytes": 3620,
+      "lines": 41
+    },
+    {
+      "name": "root/ci/CI186FailureReceipt.json",
+      "blob": "fdf6cc5b253de6609999f98fc61f8605473f450c",
+      "sha256": "d595d0a86feab00a6a4031854c51eb9cc5ec56c601059526c7a0a02fc7493c91",
+      "bytes": 914,
+      "lines": 23
+    },
+    {
+      "name": "positive/recovery/N04RetainedCutoffFieldAdapterInterfaceCheckpoint.json",
+      "blob": "ab73f31a7106a56ca54981a0b43e8f1216988980",
+      "sha256": "5c509fc01a47cf0578a10bb10062023f92a5a2942f503a35f87e042bc5572d71",
+      "bytes": 11120,
+      "lines": 229
+    },
+    {
+      "name": "audit/recovery/CanonicalPrimitiveMaterial15ActualHeadsRangeAddendum.json",
+      "blob": "36aca52a13bd7025a6335fcf6a6a78bdaf752605",
+      "sha256": "306410c62a5196aa819f10d56a08bf8dacad445ca415d1d19ccc88bba9977e94",
+      "bytes": 6957,
+      "lines": 89
+    },
+    {
+      "name": "audit/recovery/Next71Post84ConditionalExecutionReviewAtCI186.json",
+      "blob": "00d12aa6c22b06a266d7e9df194400f0e829466c",
+      "sha256": "92b775d1728d1a59aaa61271a77ba0e623ff93b19b74800c8ddd591c8d5a3e97",
+      "bytes": 6681,
+      "lines": 174
+    },
+    {
+      "name": "audit/recovery/Next71ExactSourceExplicitDeclarations.json",
+      "blob": "1a16f9310a7e04403629ba8de51691aeb1c95e09",
+      "sha256": "b2e301acb8e8441b609f33917403573c9d52ce8607feb90967a22511cd7a1803",
+      "bytes": 75055,
+      "lines": 1
+    },
+    {
+      "name": "positive/repair186/CircleShiftedForwardFixedBaseBoundsCandidateManifest.json",
+      "blob": "7ba8e36b239d26fe503dfabf5a6d555a2b7e3d79",
+      "sha256": "6ba8afd1d0375e2ce74a456206833e6f44bb5b881a8cb2f91c0e1c183feef43c",
+      "bytes": 13316,
+      "lines": 211
+    },
+    {
+      "name": "positive/repair186/CircleShiftedForwardFixedBaseBounds.patch",
+      "blob": "ad3e5f7931393f31f6cbf77e9399d07fc9c22ea3",
+      "sha256": "9dbf769c9c731363d61505214cfcf78761976e4c9b4c53ae0f023385bc519385",
+      "bytes": 3265,
+      "lines": 56
+    },
+    {
+      "name": "audit/recovery/reviews/CI186CircleShiftedForwardFixedBaseBoundsIndependentReview.json",
+      "blob": "91936a29cd3983e3106535c9f2d7f78a2efe9d48",
+      "sha256": "cc4909f23363dcd10da236599e56e3b89b3a2be073fcdba5ab47ab41f6abbe36",
+      "bytes": 5858,
+      "lines": 111
+    },
+    {
+      "name": "quantitative/recovery/reviews/CI186ForwardFixedBaseHfAndDeltaCheck.json",
+      "blob": "20c70f0df260d2099f9e2b7713983959fa1c7257",
+      "sha256": "85883ba847d4a939503b8edf220d388547ab13c042a44ff5185d030dda2b7daa",
+      "bytes": 4084,
+      "lines": 78
+    },
+    {
+      "name": "positive/repair186/CircleShiftedForwardFixedBaseBoundsReviewedManifest.json",
+      "blob": "3ff495453288cb78ea070b93d73a2168bcbe56ad",
+      "sha256": "0fa918d3a9bcd91303299f1fb9c8eccb6d1dde63fe747a8edfb96381ea17b873",
+      "bytes": 5461,
+      "lines": 104
+    },
+    {
+      "name": "root/ci/CI187StagingPlan.json",
+      "blob": "c5820c4388eb5ffdf8b1d9976aa942cfe4a00208",
+      "sha256": "0141ce9adf8600b8b06ae6aed27762592a14ccd7b91daebf9726486f2d89dcb8",
+      "bytes": 3215,
+      "lines": 79
+    },
+    {
+      "name": "root/ci/CI187PushReceipt.json",
+      "blob": "fee72aefc50c5075f250039ada7beeb5056e9101",
+      "sha256": "f41b116f0f6a5cc953ae82f52b5c8d98d08d1f321b3e79a048917dfd4e618f75",
+      "bytes": 728,
+      "lines": 19
+    },
+    {
+      "name": "root/ci/CI187CoveragePreflight.json",
+      "blob": "0dee7f901b4316619aa23c8ef27427bc45dbb510",
+      "sha256": "47c21ff2cb954a81e4e6b8639a5a799c5ee8f8810a37c6811ab1564206930fc7",
+      "bytes": 1799,
+      "lines": 45
+    },
+    {
+      "name": "positive/reconstructed/CircleShiftedFullForwardFixedBaseBoundsCI187ProviderBinding.json",
+      "blob": "9c9c005d1902c93c3293c5d2f20285412bcdaafc",
+      "sha256": "fc6eac3c592b4a36510c2d34c18bc6c5839337ff050d45b59be1002b76ba8570",
+      "bytes": 6603,
+      "lines": 127
+    },
+    {
+      "name": "root/state/CRITICAL-current.json",
+      "blob": "b0a132c1ab52f7e045b75d90e702bce37dfdd272",
+      "sha256": "7baef45fae888157f95c970a18a3f86f7edf3119df06821c846d782719639c59",
+      "bytes": 8378,
+      "lines": 165
+    }
+  ],
+  "outside_archive": {
+    "exact_target": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+    "paths": 4933,
+    "changed_since55": 0
+  },
+  "active": {
+    "schema": "n04-ci-push-receipt/v1",
+    "round": 187,
+    "repository": "Rogerhu12/continuous-flexibility",
+    "branch": "line/N04Coordinates",
+    "parent": "fe9c74978f5e639bd6d0963516e231ef6bb9f4f0",
+    "commit": "4a9f2194ef3b84cb2840c4cf95807635c33d8d88",
+    "tree": "d5508ec676a6d4a0aed4ac0ca9364717612e535d",
+    "plan": "c5820c4388eb5ffdf8b1d9976aa942cfe4a00208",
+    "force": false,
+    "expected_sha_verified": true,
+    "ref_readback_exact": true,
+    "pushed_readback_utc": "2026-11-13 02:38:19 UTC",
+    "earliest_first_ci_lookup_utc": "2026-11-13T02:43:19.000Z",
+    "conservative_active_added": 18603,
+    "actual_retained_upper": 20000,
+    "compilation": "PENDING",
+    "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b"
+  },
+  "budget": {
+    "new_full_Lean_archives": 0,
+    "active213_retained_by_additional_parent": true,
+    "net213_repair": 12,
+    "after182_existing": 19276,
+    "held_selected_lines": 670,
+    "forward_net_since159": 54,
+    "actual_retained_upper": 20000,
+    "remaining": 0,
+    "active_conservative": 18603,
+    "released_credit": 0,
+    "conditional_complete_owned_credit": [
+      213,
+      301,
+      115,
+      152,
+      44
+    ]
+  },
+  "endpoint": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open",
+    "proved": 37,
+    "total": 42
+  },
+  "environment": "Local execution unavailable; remote Git persistence only."
+}

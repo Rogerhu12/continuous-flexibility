@@ -1,0 +1,89 @@
+{
+  "schema": "n04-material15-actual-heads-range-addendum/v1",
+  "proposed_path": "audit/recovery/CanonicalPrimitiveMaterial15ActualHeadsRangeAddendum.json",
+  "author": "/root/audit_coordinates",
+  "status": "Readonly source/API audit; no new Lean, graph, CI query, active mutation, or compilation claim.",
+  "scope": "Minimal actual supplier chain for CanonicalPrimitiveGeometry.materialJets; supplements existing Stage B/C/E routes.",
+  "target": {
+    "source_blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+    "declarations": [
+      "canonicalPrimitiveDirection",
+      "CanonicalPrimitiveIndex",
+      "canonicalPrimitiveField",
+      "CanonicalPrimitiveGeometry.materialJets"
+    ],
+    "index": "(Fin 3 × Fin 3) ⊕ (Fin 3 ⊕ Fin 3): 9 direction coefficients + 3 normalizers + 3 reference source fields",
+    "quantifiers": "∀ N, ∃ r d : ℕ, ∃ C₀ A : ℝ, 0<C₀ ∧ 0≤A ∧ ∀ z∈stateNeighborhood S C base ε, stateSector S z.1 → ∀ m y, (T.radius y.1,y.2)∈physicalPieceOpen S K z m → ∀ i, ∀ k≤N, norm(iteratedFDeriv k (field_i ∘ radiusPair) y) ≤ C₀*E0(T.radius y.1)^A*(1+stateGrading S r (z.1-C.referenceState)+|z.2|)^d",
+    "invariants": [
+      "One base/ε before all N.",
+      "Constants and r/d before state, index, point and k≤N.",
+      "Actual moving physical domain; no identification with a reference half."
+    ]
+  },
+  "range_corrections": [
+    {
+      "module": "ActualNegativeMaterialSamples",
+      "source_blob": "2546c07212cf569a225e873eb38945a9cb4127e3",
+      "readiness": "Previously independently reviewed held source in future reference161; not claimed installed.",
+      "theorem": "n04bActualTypedAtlas_negative_material_sample_comparison hT hS hN hfield e P hP",
+      "head": "P≥0 → let K:=n04bActualTypedAtlas hT hS hN hfield e; ∃ BH AH BE AE, 0<BH ∧ 0≤AH ∧ 0<BE ∧ 0≤AE ∧ ∀ k m side, e k=.inl(m,side) → ∀ r∈Icc(C.left m)(C.right m), H(r)/H(sample(K.cell k))≤BH*E0(r)^AH ∧ E0(sample(K.cell k))^P≤BE*E0(r)^AE",
+      "correction": "The domain is the entire closed negative component, including both roots and the reference cut, not one reference half.",
+      "existing_moving_input": {
+        "module": "ActualNegativeMovingReferenceUnitPoint",
+        "source_blob": "aba2322ac91263cc9b63a6f487c5338f21667574",
+        "theorem": "n04bActualTypedAtlas_moving_negative_reference_unitPoint",
+        "use": "Its first conjunct places the actual moving point in Ioo(C.left m)(C.right m)×univ; weaken to Icc and apply the same stored half sample bound."
+      }
+    },
+    {
+      "module": "WholeReferenceGaugeMaterialSamples",
+      "source_blob": "366a91fc3b296b373ac708fb6127a99e47e6ecea",
+      "readiness": "Previously independently reviewed held source in future reference161; not claimed installed.",
+      "theorem": "n04WholeReferenceGauge_material_sample_comparison hT hS hN hfield e₀ e cell hcell ψ χ h₀ τ σ Q N P hP",
+      "head": "P≥0 → let K:=n04bActualTypedAtlas ...; let V:=n04WholeReferenceGaugeAtlasData ...; ∃ BH AH BE AE, 0<BH ∧ 0≤AH ∧ 0<BE ∧ 0≤AE ∧ ∀ z m p, p∈physicalPieceOpen S V z m → H(p.1)/H(sample(V.cell m))≤BH*E0(p.1)^AH ∧ E0(sample(V.cell m))^P≤BE*E0(p.1)^AE",
+      "correction": "Already covers every actual moving V-domain, before restricting states. No new sample-to-point theorem is needed.",
+      "invariants": [
+        "Same V.cell and T; no host/half-cell identification.",
+        "Positive input only requires the actual midpoint to lie in cell(i), not the entire positive interval."
+      ]
+    }
+  ],
+  "cell_factory": {
+    "module": "PositiveComponentMaterialCell",
+    "source_blob": "9bd8135577563874f4fa614e1af047afd9982d94",
+    "theorem": "exists_wholePositive_midpoint_material_cells hT hRef",
+    "head": "∃ cell, (∀ i, n04PositiveMidpoint i∈D.cells(cell i)) ∧ H-ratio bound ∧ ∀ R≥0, ∃ B A, 0<B ∧ 0≤A ∧ ∀ i r∈Icc(left i)(right i), r∈core → E0(sample(cell i))^R≤B*E0(r)^A",
+    "selection_order": "Choose cell/hcell once before the positive family; pass unchanged into actual_positive_reference_fifteenAtoms178, NonAux294, Jets151 and the 197 comparison.",
+    "exact_finite_call": "hfinite i (cell i) (hcell i) (src i)",
+    "prohibition": "Do not choose a second cell after retaining C0/B/hfinite/δ/Y/H.",
+    "alternative": "If fixed explicitly before family selection, cell i:=n04CellAt D (n04PositiveMidpoint i) uses n04_cell_at_mem from N04SignedPieces/cdc180b7d11337446407047fb5f88d9c1b26bd0c and n04PositiveMidpoint_mem_core from this held source."
+  },
+  "direct_suppliers": [
+    {
+      "module": "CanonicalReferenceCurrentFrechetJets",
+      "source_blob": "ca9b054b984497e689d6d5d15d8c35a9506a1980",
+      "theorem": "n04Coordinates_unitAtom_absolute_iteratedFDeriv_envelope",
+      "head": "∃ loss, ∀ N, ∃ A B>0, ∀ z∈sectorNeighborhood, ∀ m atom p∈unitStrip, ∀ k≤N, norm(jet k atom p)≤2^N*A*E0(sample(K.cell m))^B*(1+parameterGrading S (N+loss) z)",
+      "limitation": "Requires actual sample floor. Retain explicit E0/state bounds; N07aSampleSubpower alone only bounds by M(sample)^δ and cannot be inverted to E0."
+    },
+    {
+      "module": "N04MaterialRadiusLocalJets",
+      "source_blob": "c4ce6d627aecdad5dd13050f972c8b1e85e03ba6",
+      "theorem": "n04_materialRadiusPullback_iteratedFDeriv_bound hT N",
+      "head": "∃ C≥0, ∀ U, IsOpen U → ∀ f, ContDiffOn ℝ ∞ f U → ∀ p, radiusPair p∈U → ∀ W≥0, (∀ a b, a+b≤N → |mixedDerivative a b f (radiusPair p)|≤W) → ∀ k≤N, norm(iteratedFDeriv k (f∘radiusPair) p)≤C*W",
+      "status": "Already compiled. C precedes U/f/p/W; uses genuine globally bounded radius jet coefficients. No exterior extension or derivative loss."
+    }
+  ],
+  "stageE_limit": {
+    "module": "CanonicalTransportGlobalBounds",
+    "source_blob": "94aa073f7aff6b010b18fa65e26167978711aa5e",
+    "theorem": "n04_referenceCurrent_transport_global_jet_bounds",
+    "limitation": "For fixed z, returns ∃B(z)>0 for q orders 0..2 and τ orders 1..2 with B*M(point). This cannot replace materialJets, which requires every N and constants before all z with E0(point)^A."
+  },
+  "remaining": [
+    "One fixed low-order neighborhood crossing buffer, including the old reference-cut equality branch by actual continuity.",
+    "All-order negative moving F positive jets, H± and |JF|± from reference-half jets and actual opposite-root germs on the fixed positive buffer; preserve explicit E0 and polynomial state dependence.",
+    "Finite inverse/product/positive-power/composition assembly of the actual 15 fields. A conservative N+2 primitive-field jet prefix covers the derivative of ell*|JF|; unify state grading and finite polynomial degree before all state/point/index/k.",
+    "Apply the existing 197 sample-to-point comparison and compiled open-U radius lemma. Never use regularity alone as a numerical bound."
+  ]
+}

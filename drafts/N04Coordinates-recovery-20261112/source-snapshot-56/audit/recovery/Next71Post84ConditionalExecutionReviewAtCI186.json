@@ -1,0 +1,174 @@
+{
+  "schema": "n04_next71_conditional_execution_preflight_v1",
+  "proposed_backup_path": "audit/recovery/Next71Post84ConditionalExecutionReviewAtCI186.json",
+  "reviewer": "/root/audit_coordinates",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "status": "PASS_WITHIN_EXPLICIT_STATIC_SCOPE_NOT_ACTIVATED",
+  "baseline": {
+    "head": "fe9c74978f5e639bd6d0963516e231ef6bb9f4f0",
+    "tree": "b647959a51f28b0ef5b9a3ca22758e16efb0563e",
+    "ci": "186 failed; use only as exact preimage, not green authorization.",
+    "delta_from185": "Only CircleShiftedForwardFixedBaseBounds85ff989e... to b2300d35aed5ebeddd53ac2f1da6e1081a461759; 86+/59-; imports unchanged."
+  },
+  "inputs": {
+    "source_plan": {
+      "blob": "14d63e2dfd4abf9853ebf0d301b40fe1fd2c9d22",
+      "sha256": "05f6a0f1e0515158954a0ad2186a851efab1b165d94c483c064ff02c0e630186",
+      "batch": 2
+    },
+    "minimal_inventory": {
+      "blob": "a0948c5b56e409d3a636e97a873df717f978caeb",
+      "sha256": "415575d3469c47c8206e6c050cc44b8ec5c465664be88237455846336aeb43f1",
+      "nodes": 623
+    },
+    "prefix84": {
+      "layout_blob": "07db1968d6c742312ae36aeb07a8036153569db6",
+      "complete_green_required": true,
+      "forward201_binding": "1590f632ae7a449fae21d669092f6c255c418f7f"
+    },
+    "fresh_names": {
+      "blob": "1a16f9310a7e04403629ba8de51691aeb1c95e09",
+      "sha256": "b2e301acb8e8441b609f33917403573c9d52ce8607feb90967a22511cd7a1803",
+      "bytes": 75055
+    }
+  },
+  "source_checks": {
+    "files": 71,
+    "main_same1ece": 69,
+    "owned": 2,
+    "exact_raw_hash_bytes_lines_imports": 71,
+    "raw_bytes": 692377,
+    "source_lines": 13141,
+    "actual186_paths_absent": 71,
+    "overlap_with84": 0,
+    "no_shared_updates": true,
+    "order_errors": [],
+    "all71_reachable_from_N04RetainedCorrectionNumericalWitness": true
+  },
+  "imports": {
+    "reuse": "Exact prior source/import graph; actual185 path map plus exact186 sole-file compare. Four changed existing provider raw imports independently refetched and identical. No whole repository source rescan or new large graph.",
+    "baseline_nodes": 4802,
+    "projected_nodes": 4957,
+    "checked_in_edges": 14698,
+    "generated_root_edges": 15346,
+    "missing": [],
+    "cycles": [],
+    "gateway_closure": 623,
+    "prefix_provider_nodes": 552,
+    "prefix_provider_blob_mismatches": [],
+    "gateway_unreachable_or_extra": [],
+    "source_plan_order_valid": true
+  },
+  "names": {
+    "new_ordinary_public": 368,
+    "internal_collisions": [],
+    "parser_warnings": [],
+    "against_four_indices": [
+      {
+        "blob": "9c3e8c742cbce4d8b019b5d7923b45af5f30dcba",
+        "sha256": "79a86b2a00a0b16fcb343221248cd6d1a271f94e9b09ba427018939695d88cb1",
+        "records": 1974,
+        "collisions": []
+      },
+      {
+        "blob": "394db737d43724d8c5b39783fa7263419f89ada1",
+        "sha256": "9ad7165978ba19924ac326eade24359169f3eda69dacf71b80f227e63280cac2",
+        "records": 703,
+        "collisions": []
+      },
+      {
+        "blob": "5c815b6f63a572455a89ef2cc2e778fb4ed717b6",
+        "sha256": "5f9fc6d9b1f83dc346a3b5193ee0979cfc565c990426c4a60b5f96a8b4625c76",
+        "records": 1301,
+        "collisions": []
+      },
+      {
+        "blob": "170b0a0717f1275be27271a136533996c8f2584d",
+        "sha256": "69c859ad141c271135e53984ff4033f3b535de58170ef4eeb32fb51f33cf961c",
+        "records": 318,
+        "collisions": []
+      }
+    ],
+    "against_five_owned_sources": {
+      "sources": [
+        {
+          "blob": "63073bc007f7945e905e6cb9237a96f2c463ff8a",
+          "names": 3
+        },
+        {
+          "blob": "70f648d5fdfbc870f42a1b44e9f29ed9bdcebec7",
+          "names": 1
+        },
+        {
+          "blob": "b0432b0c9033f1655fb127f705c00d772c255a44",
+          "names": 2
+        },
+        {
+          "blob": "d8f2a72059aea8d0a2a37702ec95cf7017c2f31c",
+          "names": 1
+        },
+        {
+          "blob": "94aa073f7aff6b010b18fa65e26167978711aa5e",
+          "names": 2
+        }
+      ],
+      "public_names": 9,
+      "collisions": []
+    },
+    "limits": [
+      "No fresh cross-scan of the79 prefix main sources against the69 next main sources; both use exact main1ece selections. Prior424 name-row digest is not substituted for a recovered name list.",
+      "No fresh all-repository or generated declarations/fields/constructors/aliases clearance. Only stated ordinary-name scopes passed; CI must typecheck projected complete tree."
+    ]
+  },
+  "owned_bindings": [
+    {
+      "module": "N03CorrectionAssembly",
+      "source": "fd48b7aea0616211039f84119dd4fb7f5d36a455",
+      "sha256": "a699eb62ab13a137bf5e75ee7f27a8d8fb9d0449dee431b3980bdd015997efaa",
+      "owner": {
+        "blob": "695afcd519fabd22dc82889b388d78ae57698a25",
+        "sha256": "eec7b5a0a03df2c4a29c0249eec940c113f23af9d1e2e96235781726a89ced52"
+      },
+      "peer": {
+        "blob": "5d4b866209decb64116f4226818bbcad08ff7cc0",
+        "sha256": "47aaed608c03fe5cf554a86613c0c7674076b73966d836a163f34bf30d156af9"
+      }
+    },
+    {
+      "module": "N04RetainedCorrectionNumericalWitness",
+      "source": "6ba76a32edfe98908b3b1d44f9af3c7e3d72bfe5",
+      "sha256": "15cc71a282ea4b0aaf371c968dc37a627b41b1407dff8f25e61f613e70c71bea",
+      "owner": {
+        "blob": "d52b4873da2a27f52a099a62286eed0c53d0aca1",
+        "sha256": "32919423d17d7d69e54be4341f67eb38615e1316c2419149e157a4eb17b2b4ed"
+      },
+      "peer": {
+        "blob": "882e31ae1843e31bba16cd3f6b6df5b9a691e59f",
+        "sha256": "c572743be524a171cd1dab21c0ea874895f114e3d682653ad3279827dc82dfbf"
+      }
+    }
+  ],
+  "budget": {
+    "source_additions": 13141,
+    "deletions": 0,
+    "unchanged_checked_in_root_imports": 4241,
+    "projected_generated_imports": 4889,
+    "whole_root_lag": 648,
+    "conservative_added": 13789,
+    "limit": 20000,
+    "repair_headroom": 6211,
+    "note": "Do not replace whole648 lag by only71; recalculate if predecessor source/root changes."
+  },
+  "activation_gates": [
+    "Existing failing forward provider must first obtain full CI green.",
+    "Reviewed84 prefix must be installed and fullgreen before this71; all prefix/provider identities and71 absence must be rechecked against the actual successor.",
+    "Fresh expected-head/main lease, source-only entries, unchanged roots/controls/exclusions, full20k budget and ordinary-name scope clearance remain execution gates.",
+    "No witness for final N04 is inferred from installation. Same selected R/L/chi/sample are retained; strict-gap and final field assembly are separate consumers."
+  ],
+  "executed": {
+    "new_lean": false,
+    "active_tree_or_refs": false,
+    "ci_query": false,
+    "local_compiler": false
+  }
+}

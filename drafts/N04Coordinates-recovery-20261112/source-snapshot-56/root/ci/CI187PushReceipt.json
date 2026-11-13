@@ -1,0 +1,19 @@
+{
+  "schema": "n04-ci-push-receipt/v1",
+  "round": 187,
+  "repository": "Rogerhu12/continuous-flexibility",
+  "branch": "line/N04Coordinates",
+  "parent": "fe9c74978f5e639bd6d0963516e231ef6bb9f4f0",
+  "commit": "4a9f2194ef3b84cb2840c4cf95807635c33d8d88",
+  "tree": "d5508ec676a6d4a0aed4ac0ca9364717612e535d",
+  "plan": "c5820c4388eb5ffdf8b1d9976aa942cfe4a00208",
+  "force": false,
+  "expected_sha_verified": true,
+  "ref_readback_exact": true,
+  "pushed_readback_utc": "2026-11-13 02:38:19 UTC",
+  "earliest_first_ci_lookup_utc": "2026-11-13T02:43:19.000Z",
+  "conservative_active_added": 18603,
+  "actual_retained_upper": 20000,
+  "compilation": "PENDING",
+  "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b"
+}
