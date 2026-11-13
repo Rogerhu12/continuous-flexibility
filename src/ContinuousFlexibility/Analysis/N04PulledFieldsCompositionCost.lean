@@ -34,9 +34,10 @@ theorem n04PulledFields_fullHeight_power_le
     (hH : 0 ≤ H) (hHL : H ≤ L) (hL : 1 ≤ L) (ht : 0 ≤ t) (k d : ℕ) :
     C * E ^ A * H * t ^ d ≤
       (C * L) * E ^ A * parameterHeightWeight H k * t ^ d := by
-  have h := mul_le_mul_of_nonneg_right
+  have h : C * E ^ A * H * t ^ d ≤
+      C * E ^ A * (L * parameterHeightWeight H k) * t ^ d := mul_le_mul_of_nonneg_right
     (mul_le_mul_of_nonneg_left (n04PulledFields_fullHeight_le_parameterWeight hH hHL hL k)
-      (mul_nonneg hC (Real.rpow_nonneg hE _))) (pow_nonneg ht _)
+      (mul_nonneg hC (Real.rpow_nonneg hE A))) (pow_nonneg ht d)
   exact h.trans_eq (by ring)
 
 /-- Pack the entire finite moving-point coefficient, uniformly before

@@ -71,7 +71,7 @@ private theorem n04PulledFields_negativeCompositionSeminorm
     n04PulledFields_negativeTowerJet JC N n x hx v
   rw [hd, map_neg_eq_map]
 
-private theorem n04PulledFields_selectorParameterInterpolation
+theorem n04PulledFields_selectorParameterInterpolation
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     (hS : IsPhysicalSpaces D T S) :
     HasInterpolation (pairGrading realGrading (pairGrading (sectorGrading S) realGrading)) := by

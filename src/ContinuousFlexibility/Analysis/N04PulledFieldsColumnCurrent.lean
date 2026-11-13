@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N04PulledFieldsColumnTransport
 import ContinuousFlexibility.Analysis.N04PulledFieldsMovingFamily
 import ContinuousFlexibility.Analysis.N04PulledFieldsCurrentData
+import ContinuousFlexibility.Analysis.N04PulledFieldsInversePointData
 
 /-!
 # Current data of the actual pulled physical columns
@@ -101,5 +102,35 @@ theorem n04PulledFieldsColumn_currentData_of_inversePrefix
   refine (hloss s).elim fun B hB => ⟨B, hB.1, ?_⟩
   intro z hz v m _ q a c hac
   exact hB.2 m z hz q.val q.property a c hac ((RF m).parameter a c q.val q.property) v
+
+/-- Both actual columns have complete current jet data on one smaller
+neighborhood. At a fixed auxiliary witness the only inputs are the
+admissible atlas, its current geometry and its same-atlas reference jets. -/
+theorem n04PulledFieldsColumn_currentData
+    (G : N04RealizationGauge) (η : (G.W.S.height (3 / 4 : ℝ)).Space)
+    {base : ℕ} {ε : ℝ} (hadm : G.Admissible base ε)
+    (hgeo : G.GeometryData η (fun _ => True) base ε) (href : G.ReferenceData η) :
+    ∃ base' : ℕ, ∃ ε' : ℝ, base ≤ base' ∧ 0 < ε' ∧ ε' ≤ ε ∧
+      ∀ F : AnnularState (G.S η) × ℝ → PolarPoint → ℝ,
+        (F = G.leftColumnField η ∨ F = G.nuField η) →
+        G.Data η (fun _ => True) base' ε' (G.pulled η F) (G.pulledRef η F) := by
+  refine (n04PulledFields_inversePoint_neighborhood G η hadm hgeo href).elim
+    fun low hlow => ?_
+  let δ : ℝ := min ε (1 / 2)
+  have hδ : 0 < δ := lt_min hadm.2.1 (by norm_num)
+  have hδε : δ ≤ ε := min_le_left _ _
+  have hδhalf : δ ≤ 1 / 2 := min_le_right _ _
+  have hadmLow : G.Admissible low δ := G.admissible_mono hadm hlow.1 hδ hδε
+  refine (n04PulledFieldsColumn_commonPhysicalData G η hadmLow).elim fun base' hbase' => ?_
+  refine hbase'.elim fun outLoss hout => hout.elim fun ε' hdata => ?_
+  have hb : base ≤ base' := hlow.1.trans hdata.1
+  have hεε : ε' ≤ ε := hdata.2.2.1.trans hδε
+  have hhalf : ε' ≤ 1 / 2 := hdata.2.2.1.trans hδhalf
+  have hadm' : G.Admissible base' ε' := G.admissible_mono hadm hb hdata.2.1 hεε
+  refine (hlow.2 base' ε' hdata.1 hεε hhalf).elim fun I => ?_
+  refine ⟨base', ε', hb, hdata.2.1, hεε, fun F hF => ?_⟩
+  refine (hdata.2.2.2 F hF).elim fun D => ?_
+  exact n04PulledFieldsColumn_currentData_of_inversePrefix G η hadm' hhalf F D
+    I.joint I.prefix
 
 end ContinuousFlexibility.Analysis

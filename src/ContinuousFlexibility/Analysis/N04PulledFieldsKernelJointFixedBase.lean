@@ -58,14 +58,14 @@ private theorem n04PulledFields_seminorm_sum
       exact (map_add_le_add q _ _).trans (add_le_add le_rfl ih)
 
 private theorem n04PulledFields_pair_fst_le
-    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
     (p : ℕ → Seminorm ℝ E) (s : ℕ) (z : E × E) :
     p s z.1 ≤ pairGrading p p s z := by
   rw [pairGrading_apply]
   exact le_add_of_nonneg_right (apply_nonneg _ _)
 
 private theorem n04PulledFields_pair_snd_le
-    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
     (p : ℕ → Seminorm ℝ E) (s : ℕ) (z : E × E) :
     p s z.2 ≤ pairGrading p p s z := by
   rw [pairGrading_apply]
