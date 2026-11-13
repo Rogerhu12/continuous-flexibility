@@ -94,6 +94,7 @@ def n04Realization_physicalRootJet_joint
   have hZ : IsOpen Z := (isOpen_sectorNeighborhood S base ε ε).prod isOpen_univ
   have hmap : MapsTo (fun z => c + L z) Z W := by
     intro z hz
+    change c + L z ∈ W
     rw [hpoint]
     have hz' : liftSectorParameter S C z.1 ∈ stateNeighborhood S C base ε :=
       liftSectorParameter_mem_stateNeighborhood hz.1 le_rfl
@@ -114,6 +115,8 @@ def n04Realization_physicalRootJet_joint
       exact lt_of_lt_of_le (by norm_num : (0 : ℝ) < 1 / 2) hd.2
   apply (Jn.compAffine L c hZ hmap).congr
   intro z hz
+  change iteratedFDeriv ℝ n
+    (fun p => π (n06RootNormalizedFields (f ((c + L z).1, p)))) (c + L z).2 v = _
   rw [hpoint]
   change iteratedFDeriv ℝ n
       (fun p => π (n06RootNormalizedFields
