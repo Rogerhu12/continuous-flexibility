@@ -99,7 +99,12 @@ theorem n03_controlledRootInput_unit_identification
     have hmap : ContDiff ℝ ∞ (fun p : PolarPoint => (δ * p.1, p.2)) :=
       (contDiff_const.mul contDiff_fst).prodMk contDiff_snd
     have hc := hv.comp (0, θ) hmap.contDiffAt
-    simpa only [Function.comp_def, V, rootScaledDividedDiscriminant] using hc
+    have heq : rootScaledDividedDiscriminant D S C z g r σ δ =
+        V ∘ (fun p : PolarPoint => (δ * p.1, p.2)) := by
+      funext q
+      simp only [rootScaledDividedDiscriminant, Function.comp_apply, V]
+    rw [heq]
+    exact hc
   have hscaledPos : 0 < rootScaledDividedDiscriminant D S C z g r σ δ (0, θ) := by
     simpa only [rootScaledDividedDiscriminant, V, mul_zero] using hVp
   have hoddPos : 0 < extendedRootOddCoefficient

@@ -74,7 +74,7 @@ theorem exists_positiveReferenceMiddleWeight_jet_bound (N : ℕ) :
     _ ≤ |iteratedDeriv a (fun _ : ℝ => (1 : ℝ)) x| +
         |iteratedDeriv a (positiveEndpointCutoff l δ) x| +
         |iteratedDeriv a (positiveEndpointCutoff r δ) x| :=
-      (abs_sub _ _).trans (add_le_add_right (abs_sub _ _) _)
+      (abs_sub _ _).trans (add_le_add (abs_sub _ _) le_rfl)
     _ ≤ 1 + B * U ^ N + B * U ^ N := add_le_add (add_le_add hc (hcut l)) (hcut r)
     _ ≤ (1 + 2 * B) * U ^ N := by nlinarith only [hpow]
 

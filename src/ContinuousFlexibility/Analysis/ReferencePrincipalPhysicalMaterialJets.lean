@@ -46,7 +46,8 @@ private theorem referencePrincipal_profile_flux_compact_jets
     have hjet : |iteratedDeriv k (f side) r| ≤ A t := by
       simpa only [Real.norm_eq_abs] using hA t r hr
     exact (hjet.trans (le_abs_self _)).trans
-      (Finset.single_le_sum (fun _ _ => abs_nonneg _) (Finset.mem_univ t))
+      (Finset.single_le_sum (f := fun t : Bool × Fin (N + 1) => |A t|)
+        (fun _ _ => abs_nonneg _) (Finset.mem_univ t))
   exact ⟨K, hK, fun k hk r hr => ⟨hj false k hk r hr, hj true k hk r hr⟩⟩
 
 /-- Three genuine physical factors have a common finite-prefix envelope

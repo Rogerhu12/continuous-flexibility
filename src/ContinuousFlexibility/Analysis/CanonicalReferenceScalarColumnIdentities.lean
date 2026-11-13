@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N06LeftColumnPhysical
 import ContinuousFlexibility.Analysis.FixedReferenceScalarSourceMaterialJets
 import ContinuousFlexibility.Analysis.LocalMixedProductBounds
+import ContinuousFlexibility.Radial.R11bFourierTests
 
 /-!
 # The actual left and nu columns in a fixed radial reference atlas

@@ -142,7 +142,7 @@ theorem positiveReferencePrescribedCost_material_bound (n : ℕ)
       mul_le_mul_of_nonneg_left (pow_le_pow_left₀ hU hUW 2) (by positivity)
     _ = _ := by
       rw [mul_pow, ← Real.rpow_mul_natCast hW0 K 2]
-      rw [show K * (2 : ℝ) = 2 * K by ring]
+      rw [show K * ((2 : ℕ) : ℝ) = 2 * K by push_cast; ring]
       ring
 
 end ContinuousFlexibility.Analysis

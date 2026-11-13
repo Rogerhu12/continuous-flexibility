@@ -57,9 +57,45 @@ private theorem drift_material_envelope_mono
   exact mul_le_mul
     (mul_le_mul hab (Real.rpow_le_rpow_of_exponent_le hW hab)
       (Real.rpow_nonneg hW0 _) hb)
-    (add_le_add_left (hp (Nat.add_le_add_left hlm k) z) 1)
+    (add_le_add le_rfl (hp (Nat.add_le_add_left hlm k) z))
     (add_nonneg zero_le_one (apply_nonneg _ _))
     (mul_nonneg hb (Real.rpow_nonneg hW0 _))
+
+/-- The pointwise product estimate for an arbitrary graded state space. All
+grading manipulations happen here, away from the actual state spaces. -/
+private theorem drift_jet_bound_generic {E : Type} [AddCommGroup E] [Module ℝ E]
+    {p : ℕ → Seminorm ℝ E} (hp : Monotone p) (x : E)
+    {loss inverseLoss outLoss productLow : ℕ} (hx : p productLow x ≤ 1)
+    {A AI M B : ℕ → ℝ} (hA : ∀ k, 1 ≤ A k) (hM : ∀ k, 1 ≤ M k)
+    (hAM : ∀ k, A k ≤ M k) (hAIM : ∀ k, AI k ≤ M k)
+    {W : ℝ} (hW : 1 ≤ W) {fb fa : PolarPoint → ℝ} {q : PolarPoint}
+    (hfb : ContDiffAt ℝ ∞ fb q) (hfa : ContDiffAt ℝ ∞ fa q)
+    (hjb : ∀ k, ‖iteratedFDeriv ℝ k fb q‖ ≤ A k * (1 + p (k + loss) x))
+    (hja : ∀ k, ‖iteratedFDeriv ℝ k fa q‖ ≤
+      AI k * W ^ (AI k) * (1 + p (k + inverseLoss) x))
+    (hbound : ∀ z : E, p productLow z ≤ 1 → ∀ W : ℝ, 1 ≤ W →
+      ∀ f g : PolarPoint → ℝ, ∀ y : PolarPoint,
+        ContDiffAt ℝ ∞ f y → ContDiffAt ℝ ∞ g y →
+        (∀ n, ‖iteratedFDeriv ℝ n f y‖ ≤
+          M n * W ^ (M n) * (1 + p (n + max loss inverseLoss) z)) →
+        (∀ n, ‖iteratedFDeriv ℝ n g y‖ ≤
+          M n * W ^ (M n) * (1 + p (n + max loss inverseLoss) z)) →
+        ∀ n, ‖iteratedFDeriv ℝ n (fun y => f y * g y) y‖ ≤
+          B n * W ^ (B n) * (1 + p (n + outLoss) z))
+    (n : ℕ) :
+    ‖iteratedFDeriv ℝ n (fun y => fb y * fa y) q‖ ≤
+      B n * W ^ (B n) * (1 + p (n + outLoss) x) := by
+  refine hbound x hx W hW fb fa q hfb hfa ?_ ?_ n
+  · intro k
+    have hscale : A k ≤ A k * W ^ (A k) := le_mul_of_one_le_right
+      (zero_le_one.trans (hA k)) (Real.one_le_rpow hW (zero_le_one.trans (hA k)))
+    exact (hjb k).trans ((mul_le_mul_of_nonneg_right hscale
+      (add_nonneg zero_le_one (apply_nonneg _ _))).trans
+        (drift_material_envelope_mono hp (hAM k) (zero_le_one.trans (hM k))
+          hW (le_max_left loss inverseLoss) x))
+  · intro k
+    exact (hja k).trans (drift_material_envelope_mono hp (hAIM k)
+      (zero_le_one.trans (hM k)) hW (le_max_right loss inverseLoss) x)
 
 theorem n01_characteristicDrift_component_material_jets
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -84,18 +120,35 @@ theorem n01_characteristicDrift_component_material_jets
     coordinate_hasInterpolation_pair (stateGrading_monotone S)
       (fun _ _ _ => le_rfl) (coordinate_hasInterpolation_stateGrading hS)
       coordinate_hasInterpolation_realGrading
-  obtain ⟨C0, inverseLow, inverseLoss, hC0, hfloor, hpowers⟩ :=
-    n01_radialCoefficient_rpow_component_material_jets hS hT hN
-  obtain ⟨AI, hAI, hinverse⟩ := hpowers (-1)
-  obtain ⟨A, hA, hraw⟩ := originalCoefficient_ordinary_global_bound_of_n01 hS hT hN
-  let commonLoss := max loss inverseLoss
-  obtain ⟨productLow, outLoss, hproduct⟩ :=
-    pointwiseProduct_polynomial_material_bound (X := PolarPoint) hp hI commonLoss
+  refine (n01_radialCoefficient_rpow_component_material_jets hS hT hN).elim ?_
+  intro C0 hR1
+  refine hR1.elim ?_
+  intro inverseLow hR2
+  refine hR2.elim ?_
+  intro inverseLoss hR3
+  have hC0 := hR3.1
+  have hfloor := hR3.2.1
+  have hpowers := hR3.2.2
+  refine (hpowers (-1)).elim ?_
+  intro AI hAIinv
+  have hinverse := hAIinv.2
+  refine (originalCoefficient_ordinary_global_bound_of_n01 hS hT hN).elim ?_
+  intro A hAraw
+  have hA := hAraw.1
+  have hraw := hAraw.2
+  refine (pointwiseProduct_polynomial_material_bound (X := PolarPoint) hp hI
+    (max loss inverseLoss)).elim ?_
+  intro productLow hP1
+  refine hP1.elim ?_
+  intro outLoss hproduct
   let M : ℕ → ℝ := fun k => max 1 (max (A k) (AI k))
   have hM (k : ℕ) : 1 ≤ M k := le_max_left _ _
   have hAM (k : ℕ) : A k ≤ M k := (le_max_left _ _).trans (le_max_right _ _)
   have hAIM (k : ℕ) : AI k ≤ M k := (le_max_right _ _).trans (le_max_right _ _)
-  obtain ⟨B, hB, hbound⟩ := hproduct M hM
+  refine (hproduct M hM).elim ?_
+  intro B hBb
+  have hB := hBb.1
+  have hbound := hBb.2
   refine ⟨C0, max inverseLow productLow, outLoss, hC0, hfloor, B, hB, ?_⟩
   intro z hz hs hzlow m j hhost q hq n
   have hcomp := n01Properties_negativeRadialComponent hN m
@@ -106,15 +159,22 @@ theorem n01_characteristicDrift_component_material_jets
   have hW : 1 ≤ W := hfloor j
   have hzI := (hp (le_max_left inverseLow productLow) _).trans hzlow
   have hzP := (hp (le_max_right inverseLow productLow) _).trans hzlow
+  have hcomp0 : canonicalCoefficientComponent 0 (originalCoefficients D S C z) =
+      (originalCoefficients D S C z).a := by
+    unfold canonicalCoefficientComponent
+    exact if_pos rfl
+  have hcomp1 : canonicalCoefficientComponent 1 (originalCoefficients D S C z) =
+      (originalCoefficients D S C z).b := by
+    unfold canonicalCoefficientComponent
+    rw [if_neg (show (1 : Fin 3) ≠ 0 by decide), if_pos rfl]
   have ha : ContDiffAt ℝ ∞ (originalCoefficients D S C z).a q := by
-    simpa only [canonicalCoefficientComponent, if_pos rfl] using
-      (contDiffOn_originalCoefficientComponent_of_n01 hS hT hN hz hs (0 : Fin 3)).contDiffAt
-        (hU.mem_nhds hqD)
+    rw [← hcomp0]
+    exact (contDiffOn_originalCoefficientComponent_of_n01 hS hT hN hz hs
+      (0 : Fin 3)).contDiffAt (hU.mem_nhds hqD)
   have hb : ContDiffAt ℝ ∞ (originalCoefficients D S C z).b q := by
-    simpa only [canonicalCoefficientComponent, if_neg (show (1 : Fin 3) ≠ 0 by decide),
-      if_pos rfl] using
-      (contDiffOn_originalCoefficientComponent_of_n01 hS hT hN hz hs (1 : Fin 3)).contDiffAt
-        (hU.mem_nhds hqD)
+    rw [← hcomp1]
+    exact (contDiffOn_originalCoefficientComponent_of_n01 hS hT hN hz hs
+      (1 : Fin 3)).contDiffAt (hU.mem_nhds hqD)
   have hapos : 0 < (originalCoefficients D S C z).a q :=
     (div_pos (hN.1.1.choose_spec.1.2.2.2.2.1 q.1 hqD.1)
       (by norm_num : (0 : ℝ) < 16)).trans_le
@@ -125,29 +185,22 @@ theorem n01_characteristicDrift_component_material_jets
         ((originalCoefficients D S C z).a x)⁻¹) (annularOpen D) := by
     intro x hx
     simpa only [div_eq_mul_inv] using n01_characteristicDrift_eq_original_ratio hS hT hN hz hs hx
-  rw [iteratedFDeriv_eqOn_of_isOpen hU he n hqD]
-  refine hbound (z - (C.referenceState, 0)) hzP W hW
-    (originalCoefficients D S C z).b (fun x => ((originalCoefficients D S C z).a x)⁻¹)
-    q hb (ha.inv hapos.ne') ?_ ?_ n
-  · intro k
-    have hjet : ‖iteratedFDeriv ℝ k (originalCoefficients D S C z).b q‖ ≤
-        A k * (1 + pairGrading (stateGrading S) realGrading (k + loss)
-          (z - (C.referenceState, 0))) := by
-      simpa only [canonicalCoefficientComponent, if_neg (show (1 : Fin 3) ≠ 0 by decide),
-        if_pos rfl] using hraw z hz hs (1 : Fin 3) k q hqD
-    have hscale : A k ≤ A k * W ^ (A k) := le_mul_of_one_le_right
-      (zero_le_one.trans (hA k)) (Real.one_le_rpow hW (zero_le_one.trans (hA k)))
-    exact hjet.trans ((mul_le_mul_of_nonneg_right hscale
-      (add_nonneg zero_le_one (apply_nonneg _ _))).trans
-        (drift_material_envelope_mono hp (hAM k) (zero_le_one.trans (hM k))
-          hW (le_max_left loss inverseLoss) _))
-  · intro k
-    have hjet : ‖iteratedFDeriv ℝ k
-        (fun x => ((originalCoefficients D S C z).a x)⁻¹) q‖ ≤
-        AI k * W ^ (AI k) * (1 + pairGrading (stateGrading S) realGrading (k + inverseLoss)
-          (z - (C.referenceState, 0))) := by
-      simpa only [Real.rpow_neg_one] using hinverse z hz hs hzI m j hhost q hq k
-    exact hjet.trans (drift_material_envelope_mono hp (hAIM k)
-      (zero_le_one.trans (hM k)) hW (le_max_right loss inverseLoss) _)
+  have hnormb (k : ℕ) : ‖iteratedFDeriv ℝ k
+      (canonicalCoefficientComponent 1 (originalCoefficients D S C z)) q‖ =
+        ‖iteratedFDeriv ℝ k (originalCoefficients D S C z).b q‖ := by
+    rw [hcomp1]
+  have hinvfun : (fun x => (originalCoefficients D S C z).a x ^ (-1 : ℝ)) =
+      fun x => ((originalCoefficients D S C z).a x)⁻¹ :=
+    funext fun x => Real.rpow_neg_one _
+  have hnorma (k : ℕ) : ‖iteratedFDeriv ℝ k
+      (fun x => (originalCoefficients D S C z).a x ^ (-1 : ℝ)) q‖ =
+        ‖iteratedFDeriv ℝ k (fun x => ((originalCoefficients D S C z).a x)⁻¹) q‖ := by
+    rw [hinvfun]
+  exact (congrArg norm (iteratedFDeriv_eqOn_of_isOpen hU he n hqD)).trans_le
+    (drift_jet_bound_generic hp (z - (C.referenceState, 0)) hzP hA hM hAM hAIM hW hb
+      (ha.inv hapos.ne')
+      (fun k => (hnormb k).symm.trans_le (hraw z hz hs (1 : Fin 3) k q hqD))
+      (fun k => (hnorma k).symm.trans_le (hinverse z hz hs hzI m j hhost q hq k))
+      hbound n)
 
 end ContinuousFlexibility.Analysis

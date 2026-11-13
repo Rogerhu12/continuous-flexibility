@@ -97,7 +97,8 @@ theorem n04Coordinates_actual_reference_negative_airy_height
     · exact (hasDerivAt_id p.1).const_sub (C.right m)
   have hYderiv : HasDerivAt Y j p.1 := by
     have h := (n06_hasDerivAt_airyRadialCoordinate hc (X p.1) (hApos _)).comp p.1 hXderiv
-    simpa only [hXp] using h
+    rw [hXp] at h
+    exact h
   have hFg : K.chart z₀ k =ᶠ[𝓝 p] positiveReferenceCylinderChart Y := by
     have hpX : X p.1 ∈ Ioo (0 : ℝ) d := by simpa only [hXp] using hx
     filter_upwards [(hXcontinuous.comp continuous_fst).continuousAt.preimage_mem_nhds
@@ -109,8 +110,19 @@ theorem n04Coordinates_actual_reference_negative_airy_height
         hT hS hN hfield e m side hd hfactor hceq hq (hApos _).le q.2
     rw [hXinward q.1] at he
     exact he
-  have hdF := (hYderiv.comp_hasFDerivAt (f := fun q : PolarPoint => q.1) p
-    (hasFDerivAt_fst (p := p))).prodMk (hasFDerivAt_snd (p := p))
+  have hfirst : HasFDerivAt (fun q : PolarPoint => Y q.1)
+      (j • ContinuousLinearMap.fst ℝ ℝ ℝ) p := by
+    have hecomp : Y ∘ (fun q : PolarPoint => q.1) = (fun q : PolarPoint => Y q.1) := by
+      funext q
+      exact Function.comp_apply
+    rw [← hecomp]
+    exact HasDerivAt.comp_hasFDerivAt (𝕜 := ℝ) (𝕜' := ℝ)
+      (h₂ := Y) (h₂' := j) (f := fun q : PolarPoint => q.1)
+      (f' := ContinuousLinearMap.fst ℝ ℝ ℝ) p hYderiv
+      (hasFDerivAt_fst (𝕜 := ℝ) (p := p))
+  have hdF : HasFDerivAt (positiveReferenceCylinderChart Y)
+      ((j • ContinuousLinearMap.fst ℝ ℝ ℝ).prod (ContinuousLinearMap.snd ℝ ℝ ℝ)) p :=
+    hfirst.prodMk (hasFDerivAt_snd (𝕜 := ℝ) (p := p))
   have hDF (v : PolarPoint) : fderiv ℝ (K.chart z₀ k) p v = (j * v.1, v.2) := by
     rw [hFg.fderiv_eq (𝕜 := ℝ), hdF.fderiv]
     simp only [positiveReferenceCylinderChart, Function.comp_apply,
@@ -133,8 +145,10 @@ theorem n04Coordinates_actual_reference_negative_airy_height
   have ha : (L.coefficients z₀).a p = D.w p.1 :=
     (hN.2.1 z₀ href hsref p).trans (hN.1.1.reference_coefficients p).1
   have hunit : K.height z₀ k p ^ 2 / |j| * (D.w p.1 * j ^ 2) = 1 := by
-    have h := (n04Coordinates_actualAtlas_negativePrincipalDensity
-      hT hS hN hfield e href hsref k m side (e.apply_symm_apply _) hp).1
+    have h : (coordinatePrincipalDensity (L.coefficients z₀) (K.chart z₀ k)
+        (K.height z₀ k)).a p = 1 :=
+      (n04Coordinates_actualAtlas_negativePrincipalDensity
+        hT hS hN hfield e href hsref k m side (e.apply_symm_apply _) hp).1
     simpa only [coordinatePrincipalDensity, coefficientQuadratic, hDF, hJ, ha,
       mul_one, mul_zero, zero_pow two_ne_zero, add_zero] using h
   have hHpos : 0 < K.height z₀ k p :=
@@ -142,7 +156,8 @@ theorem n04Coordinates_actual_reference_negative_airy_height
   have hslope : 0 < n06AiryRadialSlope c x :=
     mul_pos (hcpos x) (Real.rpow_pos_of_pos (hApos x) _)
   have hj : |j| = n06AiryRadialSlope c x := by
-    rw [j, abs_mul, abs_of_pos hslope]
+    show |n06AiryRadialSlope c x * (if side then (-1 : ℝ) else 1)| = _
+    rw [abs_mul, abs_of_pos hslope]
     cases side <;> norm_num
   have he := positive_height_of_radial_unit_density hHpos hw hunit
   rw [hj] at he

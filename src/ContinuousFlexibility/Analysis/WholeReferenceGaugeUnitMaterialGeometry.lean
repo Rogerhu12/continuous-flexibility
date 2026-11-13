@@ -86,9 +86,11 @@ theorem n04WholeReferenceGauge_unit_material_geometry :
       ⟨_, _, hl, hr, _, hsample, _, _, _, _, _, _⟩
     obtain ⟨hc, hwidth, hpoint⟩ :=
       n04bActualTypedAtlas_negative_physicalUnitPoint hT hS hN hfield e₀ k j.1 j.2 hk
+    have hl' : V.physicalLeft m = K.physicalLeft k := hl
+    have hr' : V.physicalRight m = K.physicalRight k := hr
     have he : physicalUnitPoint V m = physicalUnitPoint K k := by
       funext p
-      simp only [physicalUnitPoint, hl, hr]
+      simp only [physicalUnitPoint, hl', hr']
     refine ⟨by rw [hl, hr]; exact hc, by rw [hl, hr]; exact hwidth, ?_⟩
     intro p hp
     rw [he, hsample]

@@ -40,7 +40,7 @@ private theorem radialJet_shift
     funext x
     simp only [Function.comp_apply, g, L, ContinuousLinearMap.prod_apply,
       smul_apply, ContinuousLinearMap.id_apply, ContinuousLinearMap.zero_apply,
-      smul_eq_mul, rootProfileShift, Prod.mk_add_mk, zero_add, add_comm]
+      smul_eq_mul, rootProfileShift, Prod.mk_add_mk, zero_add, add_zero, add_comm]
   rw [hslice, ContinuousMultilinearMap.compContinuousLinearMap_apply] at he
   have hshift : iteratedFDeriv ℝ n g (L 0) = iteratedFDeriv ℝ n f (r, θ) := by
     change iteratedFDeriv ℝ n (fun p => f (p + (r, θ))) (L 0) = _
@@ -92,7 +92,8 @@ private def fixedRadialProductTrace
   change (∑ i : Fin (n + 1), (n.choose i : ℝ) * iteratedDeriv i a 0 *
     iteratedDeriv (n - i) (fun x => f z.1 (x, z.2)) 0) =
       iteratedDeriv n (fun x => a x * f z.1 (x, z.2)) 0
-  rw [Fin.sum_univ_eq_sum_range]
+  rw [Fin.sum_univ_eq_sum_range (fun i => (n.choose i : ℝ) * iteratedDeriv i a 0 *
+    iteratedDeriv (n - i) (fun x => f z.1 (x, z.2)) 0) (n + 1)]
   exact (iteratedDeriv_fun_mul
     (ha.of_le (show (n : ℕ∞ω) ≤ ∞ by simp))
     ((hf z hz).of_le (show (n : ℕ∞ω) ≤ ∞ by simp))).symm

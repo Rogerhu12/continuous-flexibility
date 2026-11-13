@@ -98,7 +98,9 @@ theorem n04Coordinates_actual_reference_negative_geometry_fields
     have hJ : planeJacobian F p = deriv Y p.1 := by
       calc
         _ = planeJacobian (positiveReferenceCylinderChart Y) p := by
-          simp only [planeJacobian, hFg.fderiv_eq (𝕜 := ℝ)]
+          have hfd : fderiv ℝ F p = fderiv ℝ (positiveReferenceCylinderChart Y) p :=
+            hFg.fderiv_eq
+          simp only [planeJacobian, hfd]
         _ = _ := planeJacobian_positiveReferenceCylinderChart hYd
     have hn := radialUnit_scalar_normalization (hunit p.1 hp.1).2
     refine ⟨hshape, hheight, hYrange, (hunit p.1 hp.1).1, ?_, ?_⟩
@@ -118,7 +120,9 @@ theorem n04Coordinates_actual_reference_negative_geometry_fields
     rw [hG, mul_one, hd.2.1, div_eq_mul_inv, hd.2.2.2.2.2]
     ring
   refine ⟨hG, hx, hsource, ?_⟩
-  rw [hsource, mul_inv_rev, mul_comm]
-  simp only [Real.rpow_neg_ofNat, zpow_neg, zpow_ofNat]
+  change (canonicalSource S K z₀ k (fun _ => 1) p)⁻¹ =
+    H (χ p.1) ^ (-3 : ℝ) * (D.w (χ p.1))⁻¹
+  rw [hsource]
+  simp only [Real.rpow_neg_ofNat, zpow_neg, zpow_ofNat, mul_inv]
 
 end ContinuousFlexibility.Analysis
