@@ -38,6 +38,14 @@ namespace N04RealizationGauge
 
 variable (G : N04RealizationGauge)
 
+private theorem n04PrincipalDivided_atom_cases (v : Fin 3) :
+    n07aCubicDividedAtom v = .dividedA ∨ n07aCubicDividedAtom v = .dividedB ∨
+      n07aCubicDividedAtom v = .dividedC := by
+  fin_cases v
+  · exact Or.inl rfl
+  · exact Or.inr (Or.inl rfl)
+  · exact Or.inr (Or.inr rfl)
+
 private theorem n04PrincipalDivided_principal_atom (η : (G.W.S.height (3 / 4 : ℝ)).Space)
     (w : AnnularState (G.S η) × ℝ) (m : ℕ) (v : Fin 3) (q : PolarPoint) :
     atom G.W.D G.W.U (G.S η) (G.C η) (G.L η) (G.V η) w m
@@ -78,8 +86,9 @@ theorem n04PrincipalDivided_positive_representative {b : ℕ} {ε : ℝ}
   have hG := (h.2.2.2.1 i).1
   have hleft : G.W.D.a < n04PositiveLeft i := (G.W.roots i false).1.1
   have hright : n04PositiveRight i < G.W.D.b := (G.W.roots i true).1.2
+  have hD := n04b_profileGeometry_of_through03 G.W.through03
   have hlr := (n04PositiveComponent_bounds
-    (G.W.radial.1.2.2.1.1.continuous_deriv (by simp)) i).2.1
+    (hD.2.2.1.1.continuous_deriv (by simp)) i).2.1
   have hA := G.W.field.smooth_coefficients w hw₀ hs
   have hA₀ := G.W.field.smooth_coefficients (G.W.C.referenceState, 0)
     (reference_mem_stateNeighborhood G.W.S G.W.C G.W.base G.W.ε_pos) hrefSector
@@ -118,11 +127,17 @@ theorem n04PrincipalDivided_positive_representative {b : ℕ} {ε : ℝ}
       atom G.W.D G.W.U (G.S η) (G.C η) (G.L η) (G.V η)
         (G.ref η) m (n07aCubicPrincipalAtom v) q
     rw [G.n04PrincipalDivided_principal_atom, G.n04PrincipalDivided_principal_atom,
-      hunit, hcoef, hcoef]
-    exact hqeq
+      hunit]
+    have hc := congrArg (fun A : SymmetricCoefficients => canonicalCoefficientComponent v A q)
+      (hcoef w)
+    have hr := congrArg (fun A : SymmetricCoefficients => canonicalCoefficientComponent v A q)
+      (hcoef (G.W.C.referenceState, 0))
+    exact hqeq.trans (congrArg₂ (fun a b : ℝ => a - b) hc.symm hr.symm)
   · intro side θ k hk
     let t : ℝ := if side then 1 else 0
-    have ht : t ∈ Icc (0 : ℝ) 1 := by cases side <;> exact ⟨by norm_num, by norm_num⟩
+    have ht : t ∈ Icc (0 : ℝ) 1 := by
+      dsimp only [t]
+      cases side <;> norm_num
     have hg := (he v (t, θ) ⟨ht, mem_univ _⟩).comp_tendsto
       ((continuous_id.prodMk continuous_const).tendsto t)
     have hinterior : n04PositiveEndpoint i side ≠ (if side then G.W.D.b else G.W.D.a) := by
@@ -139,11 +154,11 @@ theorem n04PrincipalDivided_positive_representative {b : ℕ} {ε : ℝ}
 theorem n04PrincipalDivided_reference_zero
     (η : (G.W.S.height (3 / 4 : ℝ)).Space) (m : ℕ) (v : Fin 3) :
     G.atomRef η (n07aCubicDividedAtom v) m = fun _ => 0 := by
-  fin_cases v <;> funext q <;>
-    simp only [atomRef, ref, V, C, geometryReplaceAuxiliaryColumn,
-      canonicalReplaceAuxiliaryColumn, n04RealizationAtlas, n04WholeReferenceGaugeAtlasData,
-      n07aCubicDividedAtom, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two,
-      atom, n04bWithInteriorDivision, n04bInteriorDividedDifference, sub_self, zero_div, ite_self]
+  have hV : n04bWithInteriorDivision (G.C η) (G.V η) = G.V η := rfl
+  simpa only [atomRef, ref, hV] using
+    n04bWithInteriorDivision_reference_dividedAtom_zero G.W.D G.W.U (G.S η)
+      (G.C η) (G.L η) (G.V η) m (n07aCubicDividedAtom v)
+      (n04PrincipalDivided_atom_cases v)
 
 /-- Each of the three actual divided atoms follows from the corresponding
 positive principal current data on the same neighborhood. -/
@@ -164,7 +179,7 @@ theorem n04PrincipalDivided_data {b : ℕ} {ε : ℝ} (h : G.Admissible b ε)
     have hend := G.n04PrincipalDivided_positive_endpoints η hm
     have hrefconds : referenceStateConditions G.W.D (G.S η) (G.C η) :=
       G.W.through03.1.1.2.2.1
-    have hf := n04Realization_unitDifference_cubic_factor
+    have hf := n04Realization_unitDifference_cubic_factor (T := G.W.U)
       (G.n04PrincipalPositive_admissible_parts h η).2.1 hrefconds h.2.1 hz hm
       (by rw [hend.1, hend.2]; exact zero_lt_one) v hq
     change G.atomFamily η (n07aCubicPrincipalAtom v) z m q -
@@ -177,11 +192,10 @@ theorem n04PrincipalDivided_data {b : ℕ} {ε : ℝ} (h : G.Admissible b ε)
   · intro m hm z hz q hq
     have hn : (G.V η).positive m = false := by
       cases he : (G.V η).positive m
-      · exact he
+      · rfl
       · exact False.elim (hm he)
-    fin_cases v <;>
-      simp only [atomFamily, n07aCubicDividedAtom, Matrix.cons_val_zero, Matrix.cons_val_one,
-        Matrix.cons_val_two, atom, hn, Bool.false_eq_true, ↓reduceIte]
+    rcases n04PrincipalDivided_atom_cases v with hv | hv | hv <;> rw [hv] <;>
+      simp only [atomFamily, atom, hn, Bool.false_eq_true, ↓reduceIte]
 
 end N04RealizationGauge
 

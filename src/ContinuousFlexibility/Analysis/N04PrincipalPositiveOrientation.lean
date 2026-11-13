@@ -80,9 +80,19 @@ theorem n04PrincipalPositive_reference_principalA_pos {b : ℕ} {ε : ℝ}
     (h : G.Admissible b ε) (η : (G.W.S.height (3 / 4 : ℝ)).Space)
     (m : ℕ) {p : PolarPoint} (hp : p ∈ canonicalOpen (G.S η) (G.V η) m) :
     0 < ((G.V η).coefficients (G.ref η) m).a p := by
+  have hm := h.2.2.2.2.2
+  let B := hm.choose
+  let lower := hm.choose_spec.choose
+  let upper := hm.choose_spec.choose_spec.choose
+  have hN : G.N = B.region := hm.choose_spec.choose_spec.choose_spec.1
+  have hmatching := hm.choose_spec.choose_spec.choose_spec.2
+  have hg := n04Realization_gaugeAtlas_of_family G.W.hT G.W.hS G.W.through03
+    G.W.field G.X.e₀ G.e G.X.cell G.X.src B G.Y G.H h.2.2.2.1
+    G.τ G.σ G.Q lower upper h.1 h.2.1 h.2.2.1 hmatching h.2.2.2.2.1
   have hA : CanonicalGeometry G.W.D G.W.S G.W.C
-      (n04RealizationAtlas G.W G.X G.e G.Y G.H G.τ G.σ G.Q G.N) b ε :=
-    (G.n04PrincipalPositive_admissible_parts h η).1
+      (n04RealizationAtlas G.W G.X G.e G.Y G.H G.τ G.σ G.Q G.N) b ε := by
+    rw [hN]
+    exact hg.1
   have hqual := n04WholeReferenceGaugeAtlasData_actual_referencePrincipal_qualitative
     G.W.hT G.W.hS G.W.through03 G.W.field G.X.e₀ G.e G.X.cell
     G.Y G.H G.τ G.σ G.Q G.N h.2.1 h.2.2.2.2.1

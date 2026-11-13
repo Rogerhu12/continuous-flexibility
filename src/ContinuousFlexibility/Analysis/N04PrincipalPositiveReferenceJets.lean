@@ -148,8 +148,12 @@ theorem n04PrincipalPositive_reference_composedAtom_bounds {b : ℕ} {ε : ℝ}
       have hpair' : ‖iteratedFDeriv ℝ n (g x) (p x)‖ ≤
           ‖iteratedFDeriv ℝ n (G.atomRef η .inverseRadial x.1) (p x)‖ + 1 +
           ‖iteratedFDeriv ℝ n (G.atomRef η .inverseAngleDefect x.1) (p x)‖ := by
-        simpa only [g, n04PrincipalPositive_referenceUnitInverse,
-          abs_one, one_mul, zero_add] using hpair
+        change ‖iteratedFDeriv ℝ n
+          (fun y => (G.atomRef η .inverseRadial x.1 y,
+            y.2 + G.atomRef η .inverseAngleDefect x.1 y)) x.2.2.val‖ ≤
+          ‖iteratedFDeriv ℝ n (G.atomRef η .inverseRadial x.1) x.2.2.val‖ + 1 +
+            ‖iteratedFDeriv ℝ n (G.atomRef η .inverseAngleDefect x.1) x.2.2.val‖
+        simpa only [atomRef, ref, abs_one, one_mul, zero_add] using hpair
       have huB := hb.choose_spec.2 x.1 .inverseRadial (p x) x.2.2.property
       have hvB := hb.choose_spec.2 x.1 .inverseAngleDefect (p x) x.2.2.property
       have he1 : 1 ≤ E x ^ A := Real.one_le_rpow (hE x) hA.le

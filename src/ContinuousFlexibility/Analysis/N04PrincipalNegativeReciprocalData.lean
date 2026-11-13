@@ -45,9 +45,12 @@ theorem CurrentJetDataOn.n04PrincipalNegative_reference_zero
   have hb := (hv.choose_spec 0).choose_spec.2
   intro q hq
   have hh := hb 0 hz m hm ⟨q, hq⟩ 0 0 (by omega)
+  have hpzero : parameterGrading S hv.choose (0 : Parameter S) = 0 :=
+    (parameterGrading S hv.choose).map_zero'
   have hh' : |f 0 m q - f₀ m q| ≤ 0 := by
-    simpa only [spaces_mixedDerivative_zero, Nat.zero_add,
-      (parameterGrading S hv.choose).map_zero', mul_zero] using hh
+    simp only [spaces_mixedDerivative_zero, Nat.zero_add] at hh
+    rw [hpzero, mul_zero] at hh
+    exact hh
   exact sub_eq_zero.mp (abs_eq_zero.mp (le_antisymm hh' (abs_nonneg _)))
 
 /-- Reciprocal closure of the exact all-pieces current-data interface.
