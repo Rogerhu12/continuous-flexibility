@@ -49,7 +49,7 @@ def n04PulledFields_currentData_rawMixedRegularity
   have hU := isOpen_sectorNeighborhood S base ε ε
   refine { spatial := fun z hz => (hdata.1 z hz m trivial).1, parameter := ?_ }
   intro i j q hq
-  exact (smoothDirectionsAdd (hdata.2.choose m i j ⟨q, hq⟩)
+  exact (smoothDirectionsAdd (hdata.2.choose m trivial i j ⟨q, hq⟩)
     (smoothDirections_constant hU (mixedDerivative i j (f₀ m) q))).congr
     (fun z hz => by
       rw [mixedDerivative_sub_of_contDiffOn (isOpen_Ioo.prod isOpen_univ)
@@ -184,7 +184,7 @@ private theorem n04PulledFieldsInverseJoint_raw_positive_uniform
     (Real.rpow_nonneg (hH m) _)
   let JD (q : unitStrip) : SmoothDirections (sectorNeighborhood S base ε ε)
       (fun z => mixedDerivative a b (f z m) q.val - mixedDerivative a b (f₀ m) q.val) :=
-    (hdata.2.choose m a b q).congr (fun y hy =>
+    (hdata.2.choose m trivial a b q).congr (fun y hy =>
       mixedDerivative_sub_of_contDiffOn (isOpen_Ioo.prod isOpen_univ)
         (hdata.1 y hy m trivial).1 (hreg m) a b q.property)
   exact n04PulledFieldsInverseJoint_positive_uniform

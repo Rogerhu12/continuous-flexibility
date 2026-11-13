@@ -74,8 +74,10 @@ theorem n04PulledFieldsCurrentData_of_positiveJets
     have hh := (sectorNeighborhood_convex S base ε ε) hzero hz
       (sub_nonneg.mpr ht.2) ht.1 (sub_add_cancel 1 t)
     simpa only [smul_zero, zero_add] using hh
+  refine (n04PulledFields_differenceData_of_positiveJets hU hΩ hzero hp hsegment
+    hsmall hE (fun m => Real.rpow_nonneg (hH m) (3 / 4 : ℝ))
+    RF hreference hparameter).elim fun JD hJD => ?_
   exact ⟨fun z hz m hm => ⟨(RF m).spatial z hz, hperiodic z hz m hm⟩,
-    n04PulledFields_differenceData_of_positiveJets hU hΩ hzero hp hsegment hsmall hE
-      (fun m => Real.rpow_nonneg (hH m) (3 / 4 : ℝ)) RF hreference hparameter⟩
+    fun m _ => JD m, hJD.1, hJD.2⟩
 
 end ContinuousFlexibility.Analysis

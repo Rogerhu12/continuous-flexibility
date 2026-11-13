@@ -33,9 +33,8 @@ attribute [local instance]
   n07aNonlinearSectorParameterSub
 
 /-- No uniform bound on the raw reference derivatives is needed by the
-current difference interface for a state-independent family.  The
-constant towers are supplied on every piece, including pieces outside
-`P`, exactly as required by the definition. -/
+current difference interface for a state-independent family. The
+constant towers are retained on the pieces satisfying `P`. -/
 theorem n04PulledFields_staticReference_currentJetDataOn
     {S : PhysicalSpacesData} {T : MaterialData} {cell : ℕ → ℕ}
     {P : ℕ → Prop} {base : ℕ} {ε : ℝ} (f₀ : ℕ → PolarPoint → ℝ)
@@ -65,7 +64,7 @@ theorem n04PulledFields_staticReference_currentJetDataOn
     mul_nonneg (mul_nonneg zero_le_one (Real.rpow_nonneg (hE m) _))
       (Real.rpow_nonneg (hH m) _)
   refine ⟨fun _ _ m hm => ⟨hregular m hm, hperiodic m hm⟩,
-    J, ⟨0, fun _ => ⟨1, one_pos, ?_⟩⟩,
+    (fun m _ => J m), ⟨0, fun _ => ⟨1, one_pos, ?_⟩⟩,
     fun k => ⟨0, fun _ => ⟨1, one_pos, ?_⟩⟩⟩
   · intro z _ m _ q i j _
     rw [hzero m i j q, abs_zero]

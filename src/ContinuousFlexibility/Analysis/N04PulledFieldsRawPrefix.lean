@@ -114,7 +114,7 @@ theorem n04PulledFields_currentData_rawPositive_prefix
   refine ⟨hd.choose, fun s => ?_⟩
   have hs := hd.choose_spec s
   refine ⟨hs.choose, hs.choose_spec.1, fun hk z hz v m q i j hij => ?_⟩
-  let JD := (hdata.2.choose m i j q).congr (fun y hy =>
+  let JD := (hdata.2.choose m trivial i j q).congr (fun y hy =>
     mixedDerivative_sub_of_contDiffOn (isOpen_Ioo.prod isOpen_univ)
       (hdata.1 y hy m trivial).1 (hreg m) i j q.property)
   have heq := smoothDirections_D_sub_constant
