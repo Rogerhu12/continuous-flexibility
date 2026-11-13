@@ -161,15 +161,15 @@ theorem n01_rootInverseCoordinate_unit_axis_material_jets_of_component_optical
       calc
         _ ≤ BL k * (1 + pairGrading (stateGrading S) realGrading (k + inputLoss)
             (z - (C.referenceState, 0))) + 1 :=
-          add_le_add_right (mul_le_mul_of_nonneg_left
-            (add_le_add_left hgrade 1) (hBL k).le) 1
+          add_le_add (mul_le_mul_of_nonneg_left
+            (add_le_add le_rfl hgrade) (hBL k).le) le_rfl
         _ ≤ (1 + BL k) * (1 + pairGrading (stateGrading S) realGrading (k + inputLoss)
             (z - (C.referenceState, 0))) := by nlinarith only [hnonneg]
         _ ≤ _ := mul_le_mul_of_nonneg_right hcoef (add_nonneg zero_le_one hnonneg))
     exact hraw'.trans (mul_le_mul_of_nonneg_right
       (by simpa only [mul_one] using mul_le_mul_of_nonneg_left
-        (Real.one_le_rpow hW (zero_le_one.trans (hA k)))
-        (zero_le_one.trans (hA k))) (add_nonneg zero_le_one hnonneg))
+            (Real.one_le_rpow hW (zero_le_one.trans (hA k)))
+            (zero_le_one.trans (hA k))) (add_nonneg zero_le_one hnonneg))
   have hinner (k : ℕ) (hk : 1 ≤ k) : ‖iteratedFDeriv ℝ k J (0, 0, θ)‖ ≤
       A k * W ^ (A k) * (1 + pairGrading (stateGrading S) realGrading
         (k + inputLoss) (z - (C.referenceState, 0))) := by
@@ -185,7 +185,7 @@ theorem n01_rootInverseCoordinate_unit_axis_material_jets_of_component_optical
     exact hb'.trans (mul_le_mul
       (mul_le_mul hcoef (Real.rpow_le_rpow_of_exponent_le hW hcoef)
         (Real.rpow_nonneg (zero_le_one.trans hW) _) (zero_le_one.trans (hA k)))
-      (add_le_add_left (hp (Nat.add_le_add_left (le_max_right lossL lossF) k) _) 1)
+      (add_le_add le_rfl (hp (Nat.add_le_add_left (le_max_right lossL lossF) k) _))
       (add_nonneg zero_le_one (apply_nonneg _ _))
       (mul_nonneg (zero_le_one.trans (hA k))
         (Real.rpow_nonneg (zero_le_one.trans hW) _)))
