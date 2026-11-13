@@ -318,7 +318,7 @@ theorem negativeHeight_opposite_transition (m : ℕ) (side : Bool)
       (hside.component_chart_germ hp).self_of_nhds,
       (hopp.component_chart_germ hp).self_of_nhds]
     congr 2
-    field_simp [hR.ne', ho.ne']
+    exact div_div_div_cancel_right₀ hR.ne' _ _
   rw [hfactor, (hside.component_height_germ hp).self_of_nhds,
     (hopp.component_height_germ hp).self_of_nhds]
   exact n04NegativeInverse_rootHeight_ratio

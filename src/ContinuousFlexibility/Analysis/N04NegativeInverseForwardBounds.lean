@@ -358,7 +358,10 @@ theorem negativeInverse_inverseJacobian_bound
   obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (C * M) P
   refine ⟨b', ε', B, hb, hε', hε'ε, hB, ?_⟩
   intro η z hz k hk q hq
-  obtain ⟨⟨m, side⟩, hi⟩ := (G.neg_iff_inl η k).mp hk
+  let data : ∃ j : ℕ × Bool, G.e k = .inl j := (G.neg_iff_inl η k).mp hk
+  let m : ℕ := data.choose.1
+  let side : Bool := data.choose.2
+  have hi : G.e k = .inl (m, side) := data.choose_spec
   have hzfull : z ∈ sectorNeighborhood G.W.S G.W.base G.W.ε G.W.ε :=
     sectorNeighborhood_mono G.W.S (hadm.1.trans hb)
       (hε'ε.trans hadm.2.2.1) (hε'ε.trans hadm.2.2.1) hz
