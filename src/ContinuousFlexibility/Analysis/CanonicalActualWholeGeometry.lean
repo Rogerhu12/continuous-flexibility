@@ -38,7 +38,8 @@ def WholeCanonicalTransportQualitative
     ∀ p ∈ annularOpen D, 0 < q p
 
 /-- Finite endpoint controls are derived from the original hypotheses.
-Every later clause uses the same displayed maps, widths and atlas. -/
+Every later clause uses the same displayed maps, widths and atlas. The
+selected endpoint certificate is retained alongside the logarithmic bounds. -/
 theorem n04Coordinates_exists_actual_whole_geometry_with_log_bounds
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {R : ReturnEquationData S}
@@ -60,6 +61,11 @@ theorem n04Coordinates_exists_actual_whole_geometry_with_log_bounds
         let σ := n04FixedPositiveInverse K j B 3 κ M Mσ
         let Q := n04FixedPositiveHeight K j 3 δ
         let W := n04WholeCanonicalAtlasData C L K e cell σ τ Q B.region
+        (∀ z ∈ stateNeighborhood S C newBase ε', stateSector S z.1 → ∀ i,
+          WholePositiveEndpointJetBounds 3
+            (fun side => n04PositiveSourceMap (j i side) K z)
+            (fun side => n04PositiveSourceHeight (j i side) K z)
+            (n04PositiveLeft i) (n04PositiveRight i) (κ i) (κ i) (M i) (H i)) ∧
         (∀ z ∈ stateNeighborhood S C newBase ε', stateSector S z.1 →
           ∀ i side k, 0 < k → k ≤ 3 → ∀ θ,
             |positiveHeightTaylorData (n04PositiveLeft i) (n04PositiveRight i) (fun _ => 1)
@@ -83,7 +89,7 @@ theorem n04Coordinates_exists_actual_whole_geometry_with_log_bounds
               (n04WholeComponentField C (canonicalWholeNegativeHeightRatio C K z) (Q z)
                 (fun _ => (1 : ℝ))) := by
   obtain ⟨newBase, ε', hb, hε', hε'ε, κ, M, H, Clog, Mσ, δ,
-      hcontrols, hlog, hmatching, href⟩ :=
+      hcontrols, hendpoint, hlog, hmatching, href⟩ :=
     n04Coordinates_exists_fixed_positive_family_with_log_bounds hT hS hN hfield e₀ j B 3
   let K := n04bActualTypedAtlas hT hS hN hfield e₀
   let τ := n04FixedPositiveTransport K j B 3 κ M Mσ
@@ -98,7 +104,7 @@ theorem n04Coordinates_exists_actual_whole_geometry_with_log_bounds
     n04WholeCanonicalAtlasData_actual_cutOperator_restricted hT hS hN hfield
       e₀ e cell σ τ Q B.region hb hε'ε hA
   refine ⟨newBase, ε', hb, hε', hε'ε, κ, M, H, Clog, Mσ, δ,
-    hcontrols, hlog, hmatching, hA, hcut, ?_, ?_⟩
+    hcontrols, hendpoint, hlog, hmatching, hA, hcut, ?_, ?_⟩
   · intro z hz hs m u f _ _ _ _ _ _
     exact canonicalSource_pairing_of_partA hA hz hs m u f
   · intro z hz hs
@@ -151,7 +157,7 @@ theorem n04Coordinates_exists_actual_whole_geometry
               (n04WholeComponentField C (canonicalWholeNegativeHeightRatio C K z) (Q z)
                 (fun _ => (1 : ℝ))) := by
   obtain ⟨newBase, ε', hb, hε', hε'ε, κ, M, H, Clog, Mσ, δ,
-      hcontrols, _hlog, hmatching, hA, hcut, hpairing, htransport⟩ :=
+      hcontrols, _hendpoint, _hlog, hmatching, hA, hcut, hpairing, htransport⟩ :=
     n04Coordinates_exists_actual_whole_geometry_with_log_bounds hT hS hN hfield e₀ e cell j B
   exact ⟨newBase, ε', hb, hε', hε'ε, κ, M, H, Clog, Mσ, δ,
     hcontrols, hmatching, hA, hcut, hpairing, htransport⟩
