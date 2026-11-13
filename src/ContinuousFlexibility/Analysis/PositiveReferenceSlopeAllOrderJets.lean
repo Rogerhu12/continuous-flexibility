@@ -42,8 +42,10 @@ theorem exists_positiveReferenceSlope_allOrder_jet_envelope (N : ℕ) :
   have hW : ContDiff ℝ ∞ W :=
     (contDiff_const.sub (contDiff_positiveEndpointCutoff l δ)).sub
       (contDiff_positiveEndpointCutoff r δ)
-  have hL := contDiff_positiveEndpointCutoff_mul hδ (ha false)
-  have hR := contDiff_positiveEndpointCutoff_mul hδ (ha true)
+  have hL : ContDiff ℝ ∞ (fun t => positiveEndpointCutoff l δ t * a false t) :=
+    contDiff_positiveEndpointCutoff_mul hδ (ha false)
+  have hR : ContDiff ℝ ∞ (fun t => positiveEndpointCutoff r δ t * a true t) :=
+    contDiff_positiveEndpointCutoff_mul hδ (ha true)
   have hb (side : Bool) :
       |iteratedDeriv k (fun t =>
         positiveEndpointCutoff (if side then r else l) δ t * a side t) x| ≤
@@ -66,7 +68,7 @@ theorem exists_positiveReferenceSlope_allOrder_jet_envelope (N : ℕ) :
     _ ≤ |iteratedDeriv k (fun t => positiveEndpointCutoff l δ t * a false t) x| +
         |iteratedDeriv k (fun t => positiveEndpointCutoff r δ t * a true t) x| +
         |μ * iteratedDeriv k W x| :=
-      (abs_add_le _ _).trans (add_le_add_right (abs_add_le _ _) _)
+      (abs_add_le _ _).trans (add_le_add (abs_add_le _ _) le_rfl)
     _ ≤ Ccut * U ^ N * M + Ccut * U ^ N * M + M * (Cmid * U ^ N) :=
       add_le_add (add_le_add (hb false) (hb true)) hscaled
     _ = (2 * Ccut + Cmid) * U ^ N * M := by ring

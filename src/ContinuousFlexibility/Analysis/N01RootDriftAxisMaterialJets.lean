@@ -34,6 +34,8 @@ theorem norm_iteratedFDeriv_rootProfileShift_le
   have hL : ‖L‖ ≤ 1 := by
     apply ContinuousLinearMap.opNorm_le_bound L zero_le_one
     intro q
+    rw [one_mul]
+    apply le_of_eq
     simp only [hLapply, Prod.norm_def, norm_mul, hσnorm, one_mul]
   have hpoint (q : PolarPoint) : (r, (0 : ℝ)) + L q = rootProfileShift r σ q := by
     simp only [hLapply, Prod.mk_add_mk, zero_add, rootProfileShift]
@@ -65,11 +67,14 @@ theorem contDiffAt_characteristicDrift_of_n01
     simpa only [canonicalCoefficientComponent, ↓reduceIte] using
       (contDiffOn_originalCoefficientComponent_of_n01 hS hT hN hz hs (0 : Fin 3)).contDiffAt
         (hU.mem_nhds hq)
+  have hcomp1 : canonicalCoefficientComponent 1 (originalCoefficients D S C z) =
+      (originalCoefficients D S C z).b := by
+    unfold canonicalCoefficientComponent
+    rw [if_neg (show (1 : Fin 3) ≠ 0 by decide), if_pos rfl]
   have hb : ContDiffAt ℝ ∞ (originalCoefficients D S C z).b q := by
-    simpa only [canonicalCoefficientComponent,
-      if_neg (show (1 : Fin 3) ≠ 0 by decide), if_pos rfl] using
-      (contDiffOn_originalCoefficientComponent_of_n01 hS hT hN hz hs (1 : Fin 3)).contDiffAt
-        (hU.mem_nhds hq)
+    rw [← hcomp1]
+    exact (contDiffOn_originalCoefficientComponent_of_n01 hS hT hN hz hs
+      (1 : Fin 3)).contDiffAt (hU.mem_nhds hq)
   have hapos : 0 < (originalCoefficients D S C z).a q :=
     (div_pos (hN.1.1.choose_spec.1.2.2.2.2.1 q.1 hq.1)
       (by norm_num : (0 : ℝ) < 16)).trans_le
@@ -98,8 +103,18 @@ theorem n01_orientedRootDrift_axis_material_jets
             B n * (C0 * T.E0 (T.sample j)) ^ (B n) *
               (1 + pairGrading (stateGrading S) realGrading (n + outLoss)
                 (z - (C.referenceState, 0))) := by
-  obtain ⟨C0, low, outLoss, hC0, hfloor, B, hB, hbound⟩ :=
-    n01_characteristicDrift_component_material_jets hS hT hN
+  refine (n01_characteristicDrift_component_material_jets hS hT hN).elim ?_
+  intro C0 hD1
+  refine hD1.elim ?_
+  intro low hD2
+  refine hD2.elim ?_
+  intro outLoss hD3
+  have hC0 := hD3.1
+  have hfloor := hD3.2.1
+  refine hD3.2.2.elim ?_
+  intro B hBb
+  have hB := hBb.1
+  have hbound := hBb.2
   refine ⟨C0, low, outLoss, hC0, hfloor, B, hB, ?_⟩
   intro z hz hs hzlow m j hhost side θ
   let r := n01ComponentRoot C m side
@@ -126,11 +141,12 @@ theorem n01_orientedRootDrift_axis_material_jets
     simpa only [Function.comp_def] using hf'.comp (0, θ) hshift.contDiffAt
   refine ⟨contDiffAt_const.mul hfs, ?_⟩
   intro n
-  change ‖iteratedFDeriv ℝ n (fun y => σ • f (rootProfileShift r σ y)) (0, θ)‖ ≤ _
-  rw [iteratedFDeriv_const_smul_apply' (hfs.of_le (by simp : (n : ℕ∞ω) ≤ ∞)),
-    norm_smul, Real.norm_eq_abs, hσabs, one_mul]
+  have hnorm : ‖iteratedFDeriv ℝ n (fun y => σ • f (rootProfileShift r σ y)) (0, θ)‖ =
+      ‖iteratedFDeriv ℝ n (fun y => f (rootProfileShift r σ y)) (0, θ)‖ := by
+    rw [iteratedFDeriv_const_smul_apply' (hfs.of_le (by simp : (n : ℕ∞ω) ≤ ∞)),
+      norm_smul, Real.norm_eq_abs, hσabs, one_mul]
   have hb := norm_iteratedFDeriv_rootProfileShift_le hσ hf' n
   rw [hpoint] at hb
-  exact hb.trans (hbound z hz hs hzlow m j hhost (r, θ) hr n)
+  exact hnorm.trans_le (hb.trans (hbound z hz hs hzlow m j hhost (r, θ) hr n))
 
 end ContinuousFlexibility.Analysis

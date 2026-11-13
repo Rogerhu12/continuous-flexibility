@@ -36,7 +36,8 @@ private theorem negativePotential_profile_prefix
   have hj : |iteratedDeriv q D.w r| ≤ A j := by
     simpa only [Real.norm_eq_abs] using hA j r hr
   exact ((hj.trans (le_abs_self _)).trans
-    (Finset.single_le_sum (fun _ _ => abs_nonneg _) (Finset.mem_univ j))).trans
+    (Finset.single_le_sum (f := fun q : Fin (N + 1) => |A q|)
+      (fun _ _ => abs_nonneg _) (Finset.mem_univ j))).trans
       (le_add_of_nonneg_left zero_le_one)
 
 /-- Every mixed derivative of the actual stored reference potential is
@@ -178,7 +179,7 @@ theorem n04bActualTypedAtlas_reference_half_potential_material_jets
     have hH3j (q : ℕ) (hq : q ≤ N) :
         |iteratedDeriv q (fun r => H r ^ 3) (χ ξ)| ≤ M := by
       have hh : |iteratedDeriv q (fun r => H r ^ 3) (χ ξ)| ≤ B3 q * WH ^ (B3 q) := by
-        simpa only [Real.rpow_natCast] using
+        simpa only [Real.rpow_ofNat] using
           hheight3 i m side hi j hhost hoptical (χ ξ) hr 0 q
       exact hh.trans (hpack (zero_le_one.trans hWH) hWHW
         (zero_le_one.trans (hB3 q)) (hprefix q (by omega)).2.1)

@@ -33,7 +33,8 @@ private theorem negativeGeometry_profile_prefix
   have hj : |iteratedDeriv q D.w r| ≤ A j := by
     simpa only [Real.norm_eq_abs] using hA j r hr
   exact ((hj.trans (le_abs_self _)).trans
-    (Finset.single_le_sum (fun _ _ => abs_nonneg _) (Finset.mem_univ j))).trans
+    (Finset.single_le_sum (f := fun q : Fin (N + 1) => |A q|)
+      (fun _ _ => abs_nonneg _) (Finset.mem_univ j))).trans
       (le_add_of_nonneg_left zero_le_one)
 
 /-- One material scale works before the real height power, the choice of
@@ -166,9 +167,10 @@ theorem n04bActualTypedAtlas_reference_half_heightProfile_material_jets
           (hprefix q hq).1 (hprefix q hq).1)
     have hwbound (q : ℕ) (hq : q ≤ N) : |iteratedDeriv q w r| ≤ M := by
       cases inverse with
-      | false => exact (hwjets q hq r ⟨hcore.1.le, hcore.2.le⟩).trans
-          (hPA.trans (le_mul_of_one_le_right (zero_le_one.trans hA)
-            (Real.one_le_rpow hW (zero_le_one.trans hA))))
+      | false =>
+          exact (hwjets q hq r ⟨hcore.1.le, hcore.2.le⟩).trans
+            (hPA.trans (le_mul_of_one_le_right (zero_le_one.trans hA)
+              (Real.one_le_rpow hW (zero_le_one.trans hA))))
       | true =>
           have hs : T.E0 r ^ Pi ≤ Ks * E ^ Ps := by
             simpa only [Real.rpow_zero, one_mul] using hiSample i m side hi r ⟨hrwhole.1.le, hrwhole.2.le⟩
