@@ -234,6 +234,16 @@ def negativeInverse_componentAtomJointTower
     n07aCanonicalUnitPoint_inverse (K := n07aPhysicalIntervalData K)
       (sub_pos.mp (hlength η k).1) p
   have hf (z : Parameter G.W.S) := G.negativeInverse_actual_fields η z k m side hi
+  have hchart (z : Parameter G.W.S) :
+      K.chart (G.lift η z) k =
+        n04bActualNegativeChart G.W.hT G.W.hS G.W.through03 G.W.field
+          (liftSectorParameter G.W.S G.W.C z) m side :=
+    (hf z).2.2.2.2.1
+  have hheight (z : Parameter G.W.S) :
+      K.height (G.lift η z) k =
+        n04bActualNegativeHeight G.W.hT G.W.hS G.W.through03 G.W.field
+          (liftSectorParameter G.W.S G.W.C z) m side :=
+    (hf z).2.2.2.2.2.2
   let JC := G.W.negativeChartJointTower m side
   let JH := G.W.negativeHeightJointTower m side
   let JHI := G.W.negativeHeightInverseJointTower m side
@@ -249,7 +259,10 @@ def negativeInverse_componentAtomJointTower
       ((K.chart (G.lift η x.1) k
         (physicalUnitPoint K k (n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData K) k x.2))).1 -
         K.left k) / (K.right k - K.left k)
-    rw [hp, (hf x.1).2.2.2.2.1]
+    exact congrArg
+      (fun p : PolarPoint => (p.1 - K.left k) / (K.right k - K.left k))
+      ((congrFun (hchart x.1) x.2).symm.trans
+        (congrArg (K.chart (G.lift η x.1) k) (hp x.2)).symm)
   · let L : (Parameter G.W.S × PolarPoint) →L[ℝ] ℝ :=
       (ContinuousLinearMap.snd ℝ ℝ ℝ).comp
         (ContinuousLinearMap.snd ℝ (Parameter G.W.S) PolarPoint)
@@ -262,27 +275,38 @@ def negativeInverse_componentAtomJointTower
     change _ - x.2.2 =
       (K.chart (G.lift η x.1) k
         (physicalUnitPoint K k (n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData K) k x.2))).2 - x.2.2
-    rw [hp, (hf x.1).2.2.2.2.1]
+    exact congrArg (fun p : PolarPoint => p.2 - x.2.2)
+      ((congrFun (hchart x.1) x.2).symm.trans
+        (congrArg (K.chart (G.lift η x.1) k) (hp x.2)).symm)
   · apply JH.congrOn
     intro x hx
     change _ = K.height (G.lift η x.1) k
       (physicalUnitPoint K k (n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData K) k x.2))
-    rw [hp, (hf x.1).2.2.2.2.2.2]
+    exact (congrFun (hheight x.1) x.2).symm.trans
+      (congrArg (K.height (G.lift η x.1) k) (hp x.2)).symm
   · apply JHI.congrOn
     intro x hx
     change _ = (K.height (G.lift η x.1) k
       (physicalUnitPoint K k (n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData K) k x.2)))⁻¹
-    rw [hp, (hf x.1).2.2.2.2.2.2]
+    exact congrArg (fun t : ℝ => t⁻¹)
+      ((congrFun (hheight x.1) x.2).symm.trans
+        (congrArg (K.height (G.lift η x.1) k) (hp x.2)).symm)
   · apply JJ.congrOn
     intro x hx
     change _ = |planeJacobian (K.chart (G.lift η x.1) k)
       (physicalUnitPoint K k (n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData K) k x.2))|
-    rw [hp, (hf x.1).2.2.2.2.1]
+    exact (congrArg (fun f : PolarPoint → PolarPoint => |planeJacobian f x.2|)
+      (hchart x.1).symm).trans
+        (congrArg (fun p : PolarPoint =>
+          |planeJacobian (K.chart (G.lift η x.1) k) p|) (hp x.2).symm)
   · apply JJI.congrOn
     intro x hx
     change _ = |planeJacobian (K.chart (G.lift η x.1) k)
       (physicalUnitPoint K k (n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData K) k x.2))|⁻¹
-    rw [hp, (hf x.1).2.2.2.2.1]
+    exact (congrArg (fun f : PolarPoint → PolarPoint => |planeJacobian f x.2|⁻¹)
+      (hchart x.1).symm).trans
+        (congrArg (fun p : PolarPoint =>
+          |planeJacobian (K.chart (G.lift η x.1) k) p|⁻¹) (hp x.2).symm)
 
 /-- A finite family of actual physical atoms has one sharp prefix bound
 on the closed old halves.  Every parameter factor and its sampled height
