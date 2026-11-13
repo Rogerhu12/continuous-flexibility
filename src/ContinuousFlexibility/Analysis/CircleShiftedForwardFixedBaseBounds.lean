@@ -21,6 +21,11 @@ open scoped BigOperators Topology
 local instance circleShiftedForwardFixedBasePairSMul (M : CircleModelData) :
     SMul ℝ (M.Space × M.Space) := Prod.instSMul
 
+private theorem circleShiftedForward_scalar_sum {ι : Type*} [Fintype ι]
+    (P a : ℝ) (f : ι → ℝ) :
+    a * P + ∑ i, f i * P = P * (a + ∑ i, f i) := by
+  rw [← Finset.sum_mul]; ring
+
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {M : CircleModelData}
   (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
   (hγ : 0 < γ) (hM : IsCircleModel T γ M) (hI : HasInterpolation M.grading)
@@ -71,11 +76,18 @@ theorem circleShiftedChartCompose_orderedJet_eq_kernel
     intro e he v y
     have hf : HasProjectiveLineDerivAt
         (fun z : M.Space => inverseForwardJet J n z (Fin.tail v) y)
-        (inverseForwardJet J (n + 1) e (Fin.cons (v 0) (Fin.tail v)) y) e (v 0) :=
-      hasProjectiveLineDerivAt_inverseForwardJet
-        (X := M.Space) (Y := M.Space) (Z := M.Space) (U := U)
-        (L := circleShiftedChartComposeContinuousLinear hM hT hD hγ travel)
-        (x := e) J he n (Fin.tail v) y (v 0)
+        (inverseForwardJet J (n + 1) e (Fin.cons (v 0) (Fin.tail v)) y) e (v 0) := by
+      have hd := J.derivative (n + 1) (e, (0 : M.Space)) ⟨he, mem_univ _⟩
+        (Fin.snoc (fun i => (Fin.tail v i, (0 : M.Space))) ((0 : M.Space), y)) (v 0, (0 : M.Space))
+      have hi : Fin.cons (v 0, (0 : M.Space))
+          (Fin.snoc (fun i => (Fin.tail v i, (0 : M.Space))) ((0 : M.Space), y)) =
+          Fin.snoc (fun i : Fin (n + 1) => (Fin.cons (v 0) (Fin.tail v) i, (0 : M.Space)))
+            ((0 : M.Space), y) := by
+        rw [Fin.cons_snoc_eq_snoc_cons]; congr 1
+        funext i; refine Fin.cases ?_ (fun j => ?_) i <;> rfl
+      simpa only [HasProjectiveLineDerivAt, inverseForwardJet,
+        Prod.smul_mk, Prod.mk_add_mk, Prod.fst_add, Prod.snd_add,
+        smul_zero, add_zero, zero_add, hi] using hd
     have hk := coupledCircleKernel_hasProjectiveLineDerivAt hD hT hγ hM hI
       n n e (v 0) (circleTranslationContinuousLinear hM hT hD hγ travel y) (Fin.tail v)
     have hg : (fun z => coupledCircleKernel hD hT hγ hM hI n n z
@@ -127,13 +139,13 @@ private theorem circleShiftedChartCompose_unit_majorant
             (add_nonneg zero_le_one (apply_nonneg _ _)))
           (Finset.sum_le_sum (fun i _ => mul_le_mul_of_nonneg_left
             (hp (Finset.univ.erase i)) (apply_nonneg _ _)))
-      _ = P * (1 + M.grading H e + ∑ i, M.grading H (w i)) := by
-        rw [← Finset.sum_mul]
-        ring
+      _ = P * (1 + M.grading H e + ∑ i, M.grading H (w i)) :=
+        circleShiftedForward_scalar_sum P (1 + M.grading H e) (fun i : Fin (n + 1) => M.grading H (w i))
       _ ≤ P * (1 + M.grading H e +
           (M.grading H u + ∑ i, M.grading H (v i))) :=
         mul_le_mul_of_nonneg_left (add_le_add le_rfl hsum) hP
-      _ = P * (a + M.grading H u) := by dsimp only [a]; ring
+      _ = P * (a + M.grading H u) :=
+        congrArg (fun t : ℝ => P * t) ((add_assoc (1 + M.grading H e) (M.grading H u) (∑ i, M.grading H (v i))).symm.trans (add_right_comm (1 + M.grading H e) (M.grading H u) (∑ i, M.grading H (v i))))
   exact hmajor
 
 include hI in
