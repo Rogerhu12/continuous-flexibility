@@ -65,11 +65,11 @@ theorem n04PositiveGeometry_rootSpatialPacket_mixed {n : ℕ}
       Fin.cons_zero, mixedDerivative, iteratedDeriv_zero]
   · change (iteratedFDeriv ℝ (c.partSize j) u p
         ((fun t => cylinderBasisVector (w t)) ∘ c.emb j)) ij.2 = _
+    let L : N06RootNormalizedCoordinates →L[ℝ] ℝ := ContinuousLinearMap.proj ij.2
     have he := congrArg
       (fun A : PolarPoint [×c.partSize j]→L[ℝ] ℝ =>
         A ((fun t => cylinderBasisVector (w t)) ∘ c.emb j))
-      ((ContinuousLinearMap.proj ij.2 : N06RootNormalizedCoordinates →L[ℝ] ℝ)
-        .iteratedFDeriv_comp_left hu.contDiffAt (i := c.partSize j) (by simp))
+      (L.iteratedFDeriv_comp_left hu.contDiffAt (i := c.partSize j) (by simp))
     change iteratedFDeriv ℝ (c.partSize j) (fun q => u q ij.2) p
         ((fun t => cylinderBasisVector (w t)) ∘ c.emb j) =
       (iteratedFDeriv ℝ (c.partSize j) u p
@@ -121,7 +121,9 @@ theorem n04PositiveGeometry_rootSpatialKernel_formula
     fun v hv => (n06RootNormalizedFields_contDiffAt hv.1.ne' hv.2).contDiffWithinAt
   have hf := iteratedFDeriv_comp_ordered_apply (hV.preimage hu.continuous) hV
     hu.contDiffOn hg (fun _ h => h) n (show p ∈ u ⁻¹' V from ⟨hQ, hD⟩) v
-  simpa only [n04PositiveGeometry_rootRadialKernel, n04PositiveGeometry_rootSpatialPacket,
-    Fin.cons_zero, Fin.cons_succ] using hf
+  refine hf.trans ?_
+  apply Finset.sum_congr rfl
+  intro c _
+  rfl
 
 end ContinuousFlexibility.Analysis

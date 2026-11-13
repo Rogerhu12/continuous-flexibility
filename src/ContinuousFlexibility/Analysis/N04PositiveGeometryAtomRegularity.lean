@@ -25,12 +25,12 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 theorem n04PositiveGeometry_physicalUnitPoint_period (q : PolarPoint) :
     physicalUnitPoint K m (q + (0, Real.pi)) =
       physicalUnitPoint K m q + (0, Real.pi) := by
-  ext <;> simp only [physicalUnitPoint, Prod.add_fst, Prod.add_snd, add_zero]
+  ext <;> simp only [physicalUnitPoint, Prod.fst_add, Prod.snd_add, add_zero]
 
 theorem n04PositiveGeometry_canonicalUnitPoint_period (q : PolarPoint) :
     canonicalUnitPoint K m (q + (0, Real.pi)) =
       canonicalUnitPoint K m q + (0, Real.pi) := by
-  ext <;> simp only [canonicalUnitPoint, Prod.add_fst, Prod.add_snd, add_zero]
+  ext <;> simp only [canonicalUnitPoint, Prod.fst_add, Prod.snd_add, add_zero]
 
 /-- This concerns the literal stored atom, including the absolute
 Jacobian and both normalized radial coordinates. -/
@@ -71,8 +71,9 @@ theorem n04PositiveGeometry_atom_regular
     have hshift (r θ : ℝ) : K.chart z m (r, θ + Real.pi) =
         K.chart z m (r, θ) + (0, Real.pi) := by
       simpa only [Prod.mk_add_mk, add_zero] using h.period_add (r, θ)
+    rcases q with ⟨r, θ⟩
     simpa only [Prod.mk_add_mk, add_zero] using
-      planeJacobian_periodic_snd hshift q.1 q.2
+      planeJacobian_periodic_snd hshift r θ
   have hJp (q : PolarPoint) :
       planeJacobian (K.chart z m) (physicalUnitPoint K m (q + (0, Real.pi))) =
         planeJacobian (K.chart z m) (physicalUnitPoint K m q) := by
@@ -82,20 +83,26 @@ theorem n04PositiveGeometry_atom_regular
   case chartRadial =>
     refine ⟨((h.chart_smooth.fst.comp hp).sub contDiff_const).div_const _, ?_⟩
     intro q
-    simp only [atom, hFp, Prod.add_fst, add_zero]
+    simp only [atom, hFp, Prod.fst_add, add_zero]
   case chartAngleDefect =>
     refine ⟨(h.chart_smooth.snd.comp hp).sub hp.snd, ?_⟩
     intro q
-    simp only [atom, hFp, Prod.add_snd, physicalUnitPoint]
+    change (K.chart z m (physicalUnitPoint K m (q + (0, Real.pi)))).2 -
+      (physicalUnitPoint K m (q + (0, Real.pi))).2 = _
+    rw [hFp]
+    simp only [Prod.snd_add, physicalUnitPoint]
     ring
   case inverseRadial =>
     refine ⟨((h.inverse_smooth.fst.comp hc).sub contDiff_const).div_const _, ?_⟩
     intro q
-    simp only [atom, hGp, Prod.add_fst, add_zero]
+    simp only [atom, hGp, Prod.fst_add, add_zero]
   case inverseAngleDefect =>
     refine ⟨(h.inverse_smooth.snd.comp hc).sub hc.snd, ?_⟩
     intro q
-    simp only [atom, hGp, Prod.add_snd, canonicalUnitPoint]
+    change (K.inverseChart z m (canonicalUnitPoint K m (q + (0, Real.pi)))).2 -
+      (canonicalUnitPoint K m (q + (0, Real.pi))).2 = _
+    rw [hGp]
+    simp only [Prod.snd_add, canonicalUnitPoint]
     ring
   case height =>
     exact ⟨h.height_smooth.comp hp, hHp⟩

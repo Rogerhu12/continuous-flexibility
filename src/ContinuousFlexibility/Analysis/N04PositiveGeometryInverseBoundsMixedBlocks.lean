@@ -159,7 +159,8 @@ theorem n04PositiveGeometry_inverseSelectedBlock_state_eq_zero
   exact n04PositiveGeometry_projectedGraph_state_eq_zero hg (c.partSize_pos i) _ hbad
 
 theorem n04PositiveGeometry_inverseSelectedTerm_eq_zero
-    {f g : P × V → V} {x : P × V} (hg : ContDiffAt ℝ ∞ g x)
+    {Z : Type*} [NormedAddCommGroup Z] [NormedSpace ℝ Z]
+    {f : P × V → Z} {g : P × V → V} {x : P × V} (hg : ContDiffAt ℝ ∞ g x)
     {n : ℕ} (w : StateAngleWord n) (c : OrderedFinpartition n)
     (s : Finset (Fin c.length)) (i : Fin c.length) (hi : i ∈ s)
     (hbad : ¬ ((w.restrict (c.emb i)).stateArity = 1 ∧

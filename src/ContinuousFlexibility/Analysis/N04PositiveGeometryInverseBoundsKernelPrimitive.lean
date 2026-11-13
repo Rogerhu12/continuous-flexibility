@@ -60,33 +60,33 @@ theorem n04PositiveGeometry_scalarCollarKernel_bounds
       (hasPositiveEnvelope_const (fun z => W (e z)) hW' 1)).mono
     intro z
     have hs : |z.1.2| ≤ 1 := by
-      simpa only [sub_zero, one_sub_zero, abs_one] using abs_sub_left_of_mem_uIcc z.2
+      simpa only [sub_zero, abs_one] using abs_sub_left_of_mem_uIcc z.2
     rw [Prod.norm_def, Real.norm_eq_abs]
     exact max_le (le_add_of_nonneg_right zero_le_one)
       (hs.trans (le_add_of_nonneg_left (norm_nonneg _)))
   have ha (j : Fin (n + 1)) : N04PositiveKernelJetBounds
-      (fun z : J => W (e z)) q (fun _ y : E × ℝ => y.1.1 j) := by
+      (fun z : J => W (e z)) q (fun (_ : J) (y : E × ℝ) => y.1.1 j) := by
     let L : (E × ℝ) →L[ℝ] ℝ := (ContinuousLinearMap.proj j).comp
       ((ContinuousLinearMap.fst ℝ P ℝ).comp (ContinuousLinearMap.fst ℝ E ℝ))
     simpa only [L, ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
       ContinuousLinearMap.proj_apply] using N04PositiveKernelJetBounds.linear hW' L hq
   have hx : N04PositiveKernelJetBounds (fun z : J => W (e z)) q
-      (fun _ y : E × ℝ => y.1.2) := by
+      (fun (_ : J) (y : E × ℝ) => y.1.2) := by
     let L : (E × ℝ) →L[ℝ] ℝ :=
       (ContinuousLinearMap.snd ℝ P ℝ).comp (ContinuousLinearMap.fst ℝ E ℝ)
     simpa only [L, ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
       ContinuousLinearMap.coe_snd'] using N04PositiveKernelJetBounds.linear hW' L hq
   have hs : N04PositiveKernelJetBounds (fun z : J => W (e z)) q
-      (fun _ y : E × ℝ => y.2) :=
+      (fun (_ : J) (y : E × ℝ) => y.2) :=
     N04PositiveKernelJetBounds.linear hW' (ContinuousLinearMap.snd ℝ E ℝ) hq
   have hbase := N04PositiveKernelJetBounds.const (p := q) hW' (fun z => l (e z))
     (n04PositiveGeometry_envelope_reindex hl e)
   have ht := ((hx.sub hbase hW').mul hs hW').add hbase hW'
   let F : I → E × ℝ → ℝ := fun i y => n04PositiveGeometry_collarNormalizedSlope n
     (l i) (r i) (δ i) root y.1.1 ((y.1.2 - l i) * y.2 + l i)
-  have hF := n04PositiveGeometry_collarNormalizedSlope_bounds hW' n root
-    (fun _ y : E × ℝ => y.1.1)
-    (fun z y => (y.1.2 - l (e z)) * y.2 + l (e z))
+  have hF := n04PositiveGeometry_collarNormalizedSlope_bounds (p := q) hW' n root
+    (fun (_ : J) (y : E × ℝ) => y.1.1)
+    (fun (z : J) (y : E × ℝ) => (y.1.2 - l (e z)) * y.2 + l (e z))
     (fun z => l (e z)) (fun z => r (e z)) (fun z => δ (e z)) ha ht hq
     (n04PositiveGeometry_envelope_reindex hl e)
     (n04PositiveGeometry_envelope_reindex hr e)
@@ -103,7 +103,7 @@ theorem n04PositiveGeometry_scalarCollarKernel_bounds
     (hr.add hW hl).mono (fun _ => abs_sub _ _)
   have hM := N04PositiveKernelJetBounds.const (p := p) hW
     (fun i => r i - l i) hspanValue
-  have hR : N04PositiveKernelJetBounds W p (fun _ y : E => y.2) :=
+  have hR : N04PositiveKernelJetBounds W p (fun (_ : I) (y : E) => y.2) :=
     N04PositiveKernelJetBounds.linear hW (ContinuousLinearMap.snd ℝ P ℝ) hp
   have hprimitive := hL.add (hM.mul ((hR.sub hL hW).mul hI hW) hW) hW
   apply hprimitive.congr

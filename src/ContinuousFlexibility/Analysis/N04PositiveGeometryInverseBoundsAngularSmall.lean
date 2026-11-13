@@ -40,7 +40,7 @@ private theorem angular_displacement_sum
       rw [Finset.sum_sub_distrib]
       simp [boundaryTaylorPolynomial]
 
-private theorem angular_patch_displacement_sum
+theorem n04PositiveGeometry_angular_patch_displacement_sum
     (n : ℕ) (c δ x θ : ℝ) (A : ℕ → ℝ → ℝ) :
     positiveAngularTaylorPatch n c δ A (x, θ) - θ =
       ∑ j : Fin (n + 1),
@@ -100,7 +100,7 @@ private theorem angular_patch_jet_bound
       exact hA j (Nat.le_of_lt_succ j.isLt)
   have hsum : (fun η => positiveAngularTaylorPatch n c δ A (x, η) - η) =
       (fun η => ∑ j, w j * f j η) :=
-    funext (fun η => angular_patch_displacement_sum n c δ x η A)
+    funext (fun η => n04PositiveGeometry_angular_patch_displacement_sum n c δ x η A)
   rw [hsum, iteratedDeriv_fun_sum (fun j _ =>
     (contDiff_const.mul (hf j)).contDiffAt.of_le (by simp))]
   simp only [iteratedDeriv_const_mul_field]
@@ -168,7 +168,7 @@ theorem n04PositiveGeometry_angularInterpolation_lower_of_small
   have hderiv : deriv
       (fun η => positiveAngularTaylorInterpolation n l r δ A (x, η) - η) θ =
         deriv (fun η => positiveAngularTaylorInterpolation n l r δ A (x, η)) θ - 1 := by
-    simpa only [id_eq] using
+    simpa only [Pi.sub_def, id_eq] using
       ((hsmooth.differentiable (by simp) θ).hasDerivAt.sub (hasDerivAt_id θ)).deriv
   rw [iteratedDeriv_one, hderiv] at hjet
   have hlow := (abs_le.mp hjet).1

@@ -37,7 +37,12 @@ theorem n04PositiveGeometry_sum_sub_reserve_le
 
 variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
   [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
-  {U : Set E} {f g : E × ℝ → ℝ}
+  {U : Set E}
+
+section NormedBounds
+
+variable {F : Type*} [NormedAddCommGroup F] [NormedSpace ℝ F]
+  {f g : E × ℝ → F}
 
 /-- Bounds for actual ordered pure slots, with a finite intrinsic
 angular reserve. They include the true zeroth value. -/
@@ -80,7 +85,7 @@ theorem congr (h : N04BoundaryWordBounds J K s d x θ P M H t shift)
     N04BoundaryWordBounds Q K s d x θ P M H t shift := by
   intro n w hk ha v hv hp
   have hq := (J.congr he).unique Q n (x, θ) ⟨hx, mem_univ _⟩
-  exact (congrArg norm (congrArg (fun A : (E × ℝ) [×n]→L[ℝ] ℝ => A v)
+  exact (congrArg norm (congrArg (fun A : (E × ℝ) [×n]→L[ℝ] F => A v)
     hq.symm)).trans_le (h n w hk ha v hv hp)
 
 theorem add (hf : N04BoundaryWordBounds J K s d x θ P M H t shift)
@@ -91,6 +96,21 @@ theorem add (hf : N04BoundaryWordBounds J K s d x θ P M H t shift)
   change ‖J.D n (x, θ) v + Q.D n (x, θ) v‖ ≤ _
   exact (norm_add_le _ _).trans ((add_le_add
     (hf n w hk ha v hv hp) (hg n w hk ha v hv hp)).trans_eq (by ring))
+
+end N04BoundaryWordBounds
+
+end NormedBounds
+
+section ScalarBounds
+
+variable {f g : E × ℝ → ℝ}
+
+namespace N04BoundaryWordBounds
+
+variable {J : SmoothDirections (U ×ˢ (univ : Set ℝ)) f}
+  {Q : SmoothDirections (U ×ˢ (univ : Set ℝ)) g}
+  {K s d : ℕ} {x : E} {θ : ℝ} {P : E → Prop}
+  {M M' H t : ℝ} {shift : ℕ}
 
 theorem scale (hf : N04BoundaryWordBounds J K s d x θ P M H t shift) (a : ℝ) :
     N04BoundaryWordBounds
@@ -184,7 +204,7 @@ theorem n04PositiveGeometry_boundaryWord_mul (N : ℕ) (L : ℝ) (hL : 1 ≤ L) 
       ‖F (x, θ)‖ ≤ M := by
     have hb := hF 0 .nil (Nat.zero_le _) (Nat.zero_le _) Fin.elim0
       ⟨fun i => i.elim0, fun i => i.elim0⟩ (fun i => i.elim0)
-    simpa only [smoothDirections_D_zero_apply JF ⟨hx, mem_univ _⟩,
+    simpa only [JF.zero (x, θ) ⟨hx, mem_univ _⟩,
       StateAngleWord.stateArity, StateAngleWord.angleArity, Nat.zero_sub,
       Nat.mul_zero, Nat.add_zero, parameterHeightWeight, ite_true, pow_zero,
       mul_one] using hb
@@ -202,7 +222,7 @@ theorem n04PositiveGeometry_boundaryWord_mul (N : ℕ) (L : ℝ) (hL : 1 ≤ L) 
     have hs := n04PositiveGeometry_sum_sub_reserve_le Finset.univ
       (fun i => (w.restrict (c.emb i)).angleArity) d
     rw [w.sum_restrict_angleArity c] at hs
-    exact add_le_add_right hs _
+    exact Nat.add_le_add_right hs _
   have hinner (c : OrderedFinpartition n) (i : Fin c.length) :
       ‖JT.D (c.partSize i) (x, θ) (v ∘ c.emb i)‖ ≤
         M * parameterHeightWeight H (κ c i) * t ^ cost c i := by
@@ -245,5 +265,7 @@ theorem n04PositiveGeometry_boundaryWord_mul (N : ℕ) (L : ℝ) (hL : 1 ≤ L) 
   exact hb.trans (mul_le_mul_of_nonneg_right
     (mul_le_mul_of_nonneg_right hmat (parameterHeightWeight_nonneg hH _))
     (pow_nonneg (zero_le_one.trans ht) _))
+
+end ScalarBounds
 
 end ContinuousFlexibility.Analysis

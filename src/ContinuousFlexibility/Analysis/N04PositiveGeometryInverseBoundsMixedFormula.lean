@@ -193,7 +193,7 @@ theorem n04PositiveGeometry_fiberInverse_higherJet
   rw [hsum, n04PositiveGeometry_fiberLift_jet hg hn] at he
   have hsnd := congrArg Prod.snd he
   simpa only [n04PositiveGeometry_triangularInverse_apply, ContinuousLinearMap.inr_apply,
-    Prod.snd_neg, map_zero, sub_zero, t] using hsnd
+    Prod.snd_neg, Prod.mk_zero_zero, map_zero, sub_zero, t] using hsnd
 
 /-- Multilinearity separates each actual slot into its state and spatial
 parts. The same finite set will be used to count the surviving state
@@ -226,15 +226,15 @@ def n04PositiveGeometry_inverseSelectedBlock {n : ℕ} (b : Fin n → Bool)
     (n04PositiveGeometry_projectedJet (b ∘ c.emb i) (n04PositiveGeometry_fiberLift g) x)
 
 def n04PositiveGeometry_inverseSelectedTerm {n : ℕ} (b : Fin n → Bool)
-    (f g : P × V → V) (x : P × V) (c : OrderedFinpartition n)
-    (s : Finset (Fin c.length)) : (P × V) [×n]→L[ℝ] V :=
+    (f : P × V → Z) (g : P × V → V) (x : P × V) (c : OrderedFinpartition n)
+    (s : Finset (Fin c.length)) : (P × V) [×n]→L[ℝ] Z :=
   c.compAlongOrderedFinpartition
     (n04PositiveGeometry_projectedJet (fun i => decide (i ∈ s)) f
       (n04PositiveGeometry_fiberLift g x))
     (fun i => n04PositiveGeometry_inverseSelectedBlock b g x c s i)
 
 theorem n04PositiveGeometry_inverseSelectedTerm_apply {n : ℕ} (b : Fin n → Bool)
-    (f g : P × V → V) (x : P × V) (c : OrderedFinpartition n)
+    (f : P × V → Z) (g : P × V → V) (x : P × V) (c : OrderedFinpartition n)
     (s : Finset (Fin c.length)) (v : Fin n → P × V) :
     n04PositiveGeometry_inverseSelectedTerm b f g x c s v =
       iteratedFDeriv ℝ c.length f (n04PositiveGeometry_fiberLift g x)

@@ -45,10 +45,15 @@ theorem n04PositiveGeometry_rootHeightInputs_finiteRadial_power
       (∀ j, pairGrading (stateGrading S) realGrading (s + loss) (v j) ≤ R) →
         |J.D k z v| ≤ C * T.E0 p.1 ^ A * T.H p.1 ^ scalarBeta *
           R ^ ((b : ℝ) / ((s : ℝ) + 1)) := by
-  obtain ⟨B, loss, hB, hb⟩ :=
-    n04PositiveGeometry_rootHeightInputs_finiteShift_power hD hT hS hE x0 N requestedBase
+  refine (n04PositiveGeometry_rootHeightInputs_finiteShift_power
+    hD hT hS hE x0 N requestedBase).elim fun B h => ?_
+  refine h.elim fun loss h => ?_
+  refine h.elim fun hB hb => ?_
   refine ⟨B, loss, hB, fun K s => ?_⟩
-  obtain ⟨C, A, hC, hA, hbound⟩ := hb K s
+  refine (hb K s).elim fun C h => ?_
+  refine h.elim fun A h => ?_
+  refine h.elim fun hC h => ?_
+  refine h.elim fun hA hbound => ?_
   refine ⟨C, A, hC, hA, ?_⟩
   intro i a ha b hbs q hq U J k hk z hz hzq hzlow v hv R hR hzR hvR
   exact hbound i a 0 (by omega) b hbs q hq U J k hk z hz hzq hzlow v hv R hR hzR hvR

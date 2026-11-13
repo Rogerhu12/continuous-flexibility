@@ -62,8 +62,10 @@ theorem n04PositiveGeometry_rootPacket_finiteShift_power
         |J.D k z v| ≤ C * T.E0 p.1 ^ A *
           parameterHeightWeight (T.H p.1 ^ scalarBeta) k *
           R ^ ((b : ℝ) / ((s : ℝ) + 1)) := by
-  obtain ⟨B, loss, hB, hraw⟩ :=
-    n04PositiveGeometry_rootHeightInputs_finiteShift_power hD hT hS hE x0 N requestedBase
+  refine (n04PositiveGeometry_rootHeightInputs_finiteShift_power
+    hD hT hS hE x0 N requestedBase).elim fun B h => ?_
+  refine h.elim fun loss h => ?_
+  refine h.elim fun hB hraw => ?_
   obtain ⟨L0, hL0, hheight⟩ :=
     materialHeight_E0_weight_bounded hT (γ := scalarBeta) (by norm_num [scalarBeta]) 0
   let L : ℝ := max 1 L0
@@ -71,7 +73,10 @@ theorem n04PositiveGeometry_rootPacket_finiteShift_power
   obtain ⟨W, hW, hw⟩ := n06_radialLift_finite_frechet_bound (b := D.b)
     hD.choose_spec.1.1 hD.choose_spec.1.2.2.1.1.contDiffOn N
   refine ⟨B, loss, hB, fun K s => ?_⟩
-  obtain ⟨C0, A, hC0, hA, hb⟩ := hraw K s
+  refine (hraw K s).elim fun C0 h => ?_
+  refine h.elim fun A h => ?_
+  refine h.elim fun hC0 h => ?_
+  refine h.elim fun hA hb => ?_
   let C : ℝ := 1 + W + C0 * L
   have hprod : 0 ≤ C0 * L := mul_nonneg (zero_le_one.trans hC0) (zero_le_one.trans hL)
   have hC : 1 ≤ C := (le_add_of_nonneg_right hW).trans (le_add_of_nonneg_right hprod)

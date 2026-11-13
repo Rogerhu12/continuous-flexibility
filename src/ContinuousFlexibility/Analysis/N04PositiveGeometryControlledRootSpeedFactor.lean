@@ -64,7 +64,7 @@ private theorem controlled_scalar_radial_norm_le
   have hF : ContDiffAt ℝ ∞ (fun p : PolarPoint => f p.1) (L 0) :=
     hf.comp (L 0) contDiffAt_fst
   have hb := norm_iteratedFDeriv_comp_linear_le_at L hF j
-  have hL : ‖L‖ ≤ 1 := ContinuousLinearMap.norm_inl_le_one
+  have hL : ‖L‖ ≤ 1 := ContinuousLinearMap.norm_inl_le_one ℝ ℝ ℝ
   have hp : ‖L‖ ^ j ≤ 1 := pow_le_one₀ (norm_nonneg L) hL
   have he : (fun p : PolarPoint => f p.1) ∘ L = f := rfl
   rw [he, norm_iteratedFDeriv_eq_norm_iteratedDeriv, Real.norm_eq_abs] at hb

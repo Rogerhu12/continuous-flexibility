@@ -129,9 +129,11 @@ theorem n04PositiveGeometry_actual_positive_endpoint_material_bounds
         (n04PositiveSourceMap (X.src i side) K z)
         (n04PositiveSourceHeight (X.src i side) K z) t M₀⁻¹ M₀ M₀) hr
       apply he.mp
+      rw [← n04PositiveSourceMap_withInteriorDivision (X.src i side) K z,
+        ← n04PositiveSourceHeight_withInteriorDivision (X.src i side) K z]
       cases side <;>
         simpa only [n04PositiveSourceMap, n04PositiveSourceHeight, hm,
-          n01ComponentRoot, n04bWithInteriorDivision, Bool.not_false, Bool.not_true,
+          n01ComponentRoot, Bool.not_false, Bool.not_true,
           Bool.false_eq_true, ↓reduceIte] using hactual.2
     exact hraw.mono (inv_anti₀ (zero_lt_one.trans_le hactual.1) hcost) hcost hcost
   exact
