@@ -22,10 +22,21 @@ open scoped ContDiff
 
 set_option backward.isDefEq.respectTransparency false
 
+/-- The oriented drift is determined by the two actual characteristic
+equations. This single scalar identity applies at either root. -/
+theorem n04b_rootDrift_eq_of_characteristic_equations
+    {A : SymmetricCoefficients} {p : PolarPoint} {σ d c : ℝ}
+    (hm : σ * minusCharacteristicSpeed A p = d - c)
+    (hp : σ * plusCharacteristicSpeed A p = d + c) :
+    d = σ * n04bCharacteristicDrift A p := by
+  rw [(n04b_characteristic_speed_factorization A p).1] at hm
+  rw [(n04b_characteristic_speed_factorization A p).2] at hp
+  linear_combination -(1 / 2 : ℝ) * hm - (1 / 2 : ℝ) * hp
+
 /-- Construct one genuine left collar on which the stored corrected flow
 solves the smooth-factor root equation. The root orientation is derived
 from the primitive profile rather than assumed. -/
-theorem n04b_exists_left_root_symmetric_flow_equations_with_halfGap
+theorem n04b_exists_left_root_symmetric_flow_equations_with_physical_factors
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {R : ReturnEquationData S}
     {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}
@@ -49,7 +60,9 @@ theorem n04b_exists_left_root_symmetric_flow_equations_with_halfGap
           (rootPhysicalSpeed d c₀ (-1) (x, L.minusFlow z m (C.left m + x) θ)) x) ∧
       (∀ x ∈ Icc (0 : ℝ) ρ, ∀ θ : ℝ,
         Real.sqrt x * c₀ (x, θ) =
-          n04bCharacteristicHalfGap (L.coefficients z) (C.left m + x, θ)) := by
+          n04bCharacteristicHalfGap (L.coefficients z) (C.left m + x, θ)) ∧
+      (∀ x ∈ Icc (0 : ℝ) ρ, ∀ θ : ℝ,
+        d (x, θ) = n04bCharacteristicDrift (L.coefficients z) (C.left m + x, θ)) := by
   have hcontrol : controlGeometryConditions D S C := h03.1.1.2.2.2.1
   have hbounds := hcontrol.1 m
   have hroot := hcontrol.2.1 m
@@ -66,7 +79,7 @@ theorem n04b_exists_left_root_symmetric_flow_equations_with_halfGap
     have hhalf : ρ ≤ (C.right m - C.left m) / 2 := min_le_right _ _
     linarith [hbounds.2.1]
   have hflow := h03.2.2.2.2.2.1 z hz hs m
-  refine ⟨ρ, d, c₀, hρ, hsmall, hd, hc, hdp, hcp, hdodd, hceven, hcpos, ?_, ?_, ?_, ?_⟩
+  refine ⟨ρ, d, c₀, hρ, hsmall, hd, hc, hdp, hcp, hdodd, hceven, hcpos, ?_, ?_, ?_, ?_, ?_⟩
   · intro θ
     simpa only [add_zero] using (hflow θ).1
   · intro θ
@@ -102,6 +115,44 @@ theorem n04b_exists_left_root_symmetric_flow_equations_with_halfGap
     dsimp only [minusCharacteristicSpeed, plusCharacteristicSpeed,
       n04bCharacteristicHalfGap] at hm hp' ⊢
     linarith only [hm, hp']
+  · intro x hx θ
+    have hp : (x, θ) ∈ Icc (0 : ℝ) η ×ˢ (univ : Set ℝ) :=
+      ⟨⟨hx.1, hx.2.trans hρη⟩, mem_univ _⟩
+    have hdrift := n04b_rootDrift_eq_of_characteristic_equations
+      (hphysical (x, θ) hp).2.1 (hphysical (x, θ) hp).2.2
+    simpa only [rootProfileShift, one_mul] using hdrift
+
+/-- Projection retaining the established half-gap interface. -/
+theorem n04b_exists_left_root_symmetric_flow_equations_with_halfGap
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {R : ReturnEquationData S}
+    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (h03 : NonlinearPropertiesThrough03 D T S C R L base loss ε)
+    (hL : N04bFieldRegularity D S C L base ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1) (m : ℕ) :
+    ∃ (ρ : ℝ) (d c₀ : PolarPoint → ℝ), 0 < ρ ∧ C.left m + ρ < C.right m ∧
+      ContDiff ℝ ∞ d ∧ ContDiff ℝ ∞ c₀ ∧
+      (∀ r, Function.Periodic (fun θ => d (r, θ)) Real.pi) ∧
+      (∀ r, Function.Periodic (fun θ => c₀ (r, θ)) Real.pi) ∧
+      (∀ r θ, d (r, -θ) = -d (r, θ)) ∧
+      (∀ r θ, c₀ (r, -θ) = c₀ (r, θ)) ∧
+      (∀ p, 0 < c₀ p) ∧
+      (∀ θ, L.minusFlow z m (C.left m + 0) θ = θ) ∧
+      (∀ θ, ContinuousOn (fun x => L.minusFlow z m (C.left m + x) θ)
+        (Icc (0 : ℝ) ρ)) ∧
+      (∀ θ x, x ∈ Ioo (0 : ℝ) ρ →
+        HasDerivAt (fun y => L.minusFlow z m (C.left m + y) θ)
+          (rootPhysicalSpeed d c₀ (-1) (x, L.minusFlow z m (C.left m + x) θ)) x) ∧
+      (∀ x ∈ Icc (0 : ℝ) ρ, ∀ θ : ℝ,
+        Real.sqrt x * c₀ (x, θ) =
+          n04bCharacteristicHalfGap (L.coefficients z) (C.left m + x, θ)) := by
+  obtain ⟨ρ, d, c₀, hρ, hsmall, hd, hc, hdp, hcp, hdodd, hceven, hcpos,
+      hi, hcont, hflow, hgap, _⟩ :=
+    n04b_exists_left_root_symmetric_flow_equations_with_physical_factors hT hS h03 hL hz hs m
+  exact ⟨ρ, d, c₀, hρ, hsmall, hd, hc, hdp, hcp, hdodd, hceven, hcpos,
+    hi, hcont, hflow, hgap⟩
 
 /-- Projection retaining the established actual root-flow interface. -/
 theorem n04b_exists_left_root_symmetric_flow_equations
