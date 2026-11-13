@@ -8,8 +8,10 @@ Date: 2026-11-13. Branch: `line/N04Realization-PulledFields`.
 statement and the necessary shared assembly changes. The reference-preserving
 repair described in section 6 is applied to `N04RealizationLeadCurrentSplit`
 and `N04RealizationLeadCurrentProof`; section 9 records the exact changes.
-The historical audit below concerns the original draft. The actual
-PulledFields proof and its complete CI remain in progress.
+The historical audit below concerns the original draft. At `54bf9d13`, the
+actual PulledFields blueprint placeholder has been replaced by the complete
+assembled proof. Compilation of the new proof, its target axiom audit, and
+the complete CI remain in progress; section 10 records that implementation.
 
 The original PulledFields split did not retain the quantitative reference
 hypothesis which its parent already has. The available composition estimates
@@ -263,18 +265,19 @@ remaining independent of `s`, as the frozen current-data definition permits.
 This correct loss bookkeeping does not replace the missing bounds on the
 zeroth-parameter-order reference inverse jets.
 
-## 6. Minimal repair preserving the parent statement
+## 6. Historical proposal for the parent-preserving repair
 
-A proposed two-file patch is available at
+A historical two-file patch is available at
 [N04PulledFields-reference-repair.patch](../../drafts/N04PulledFields-reference-repair.patch).
 It changes only `N04RealizationLeadCurrentSplit.lean` and
 `N04RealizationLeadCurrentProof.lean`; it leaves
 `N04RealizationLeadAssembly.lean`, including the parent statement, unchanged.
-`git apply --check` accepts the patch against the audited working tree.
-That is a patch-context check, not a Lean compilation result. The patch has
-not been applied to the frozen files.
+At the original audit revision, `git apply --check` accepted the patch
+against the audited working tree. That was a patch-context check, not a
+Lean compilation result. The implementation has since been applied and
+ported to the current lead interface, as recorded in section 9.
 
-A proposed repair, for the lead to decide, is to thread the parent's
+The proposal was to thread the parent's
 same-atlas reference hypothesis through the split. An abbreviation such as
 
 ```lean
@@ -319,8 +322,8 @@ of the existing statement.
 
 The proposed implication restores information already present in
 `N04RealizationCurrentObligation`; it does not add an unproved premise to
-the final geometric theorem. The full proof and axiom audit would still
-be required after the lead repairs the split.
+the final geometric theorem. The full proof and axiom audit remain required
+for the repaired split.
 
 The independent module
 [N04PulledFieldsReferenceSplit.lean](../../src/ContinuousFlexibility/Analysis/N04PulledFieldsReferenceSplit.lean)
@@ -473,9 +476,9 @@ support audit in 120 seconds, all under the unchanged default limits.
 
 This run still failed in the inherited
 `WholeReferenceGaugeFixedPotentialReferenceJets` module, so it is not a
-complete green CI. The frozen `N04RealizationPulledFields` node remains
-open. Neither this support audit nor the verified conditional assembly
-is a proof or axiom audit of that node.
+complete green CI. At that revision, `N04RealizationPulledFields` remained
+open. Neither that support audit nor the verified conditional assembly
+was a proof or axiom audit of the node.
 
 ## 9. Applied reference-preserving split repair
 
@@ -503,3 +506,35 @@ flow in a separate namespace. Its successful audit is not completion of
 the actual subnode. The applied shared definitions and the continuing
 quantitative PulledFields proof must still pass the compiler and their
 respective audits.
+
+## 10. Complete pulled-field proof, awaiting final verification
+
+At `54bf9d13`,
+[N04PulledFieldsClosure.lean](../../src/ContinuousFlexibility/Analysis/N04PulledFieldsClosure.lean)
+proves `n04PulledFields_obligation`, and the actual
+[blueprint theorem](../../src/ContinuousFlexibility/Blueprint/N04Coordinates/Realization/PulledFields.lean)
+applies it directly. The proof no longer takes an extra physical coefficient
+bound as a premise: the actual corrected coefficient difference certificate
+is proved from the retained start and admissibility.
+
+The construction combines the original coefficient increment with the
+actual return-correction error, using genuine whole-annulus parameter and
+spatial jets. A common low grading base is chosen before every parameter
+order; each order's high loss is chosen before the spatial order. The full
+physical `H^(3/4)` factor survives strip gluing and transfer to the retained
+sample. Actual reference identities restore the parameter-order-zero term.
+Moving-point composition then gives the three coefficient current families,
+which are combined with the actual left and ν column families on one common
+neighborhood.
+
+The final auxiliary-witness reduction first selects one existing same-atlas
+reference certificate, then chooses the neighborhood. Only `FieldData` is
+transported to other auxiliary columns, since those five physical fields,
+their gradings, and their samples are independent of the auxiliary column.
+The proof does not transport the full `ReferenceJets` certificate.
+
+The parent declaration and the five-input current assembly retain their
+original statements. The updated support audit also explicitly checks the
+actual blueprint theorem, allowing only `propext`, `Classical.choice`, and
+`Quot.sound`. The implementation is not counted as complete until that
+audit and the entire CI pass.
