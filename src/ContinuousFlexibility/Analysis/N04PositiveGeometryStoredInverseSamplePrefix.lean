@@ -108,7 +108,10 @@ theorem n04PositiveGeometry_storedInverseJet_sample_prefix
     (E := StateDirections W.S × ℝ) (F := PolarPoint [×j.val]→L[ℝ] PolarPoint) K s
   let cm (j : Fin 5) : ℝ := (movingData j).choose
   have hcm (j : Fin 5) : 1 ≤ cm j := (movingData j).choose_spec.1
-  let hmoving (j : Fin 5) := (movingData j).choose_spec.2
+  let hmoving (j : Fin 5) {U : Set (StateDirections W.S × ℝ)}
+      {f : (StateDirections W.S × ℝ) × ℝ → PolarPoint [×j.val]→L[ℝ] PolarPoint}
+      {ψ : (StateDirections W.S × ℝ) × ℝ → ℝ} :=
+    (movingData j).choose_spec.2 (U := U) (f := f) (ψ := ψ)
   let Cm := 1 + ∑ j : Fin 5, cm j
   have hCm : 1 ≤ Cm := le_add_of_nonneg_right
     (Finset.sum_nonneg fun j _ => zero_le_one.trans (hcm j))
@@ -120,7 +123,8 @@ theorem n04PositiveGeometry_storedInverseJet_sample_prefix
     (X := StateDirections W.S × ℝ) (K + s + 1)
   let Ci : ℝ := inverseData.choose
   let di : ℕ := inverseData.choose_spec.2.choose
-  let hinverse := inverseData.choose_spec.2.choose_spec.2
+  let hinverse {U : Set (StateDirections W.S × ℝ)} :=
+    inverseData.choose_spec.2.choose_spec.2 (U := U)
   let D := (1 + dm) * di
   have houter (M : ℝ) :
       Ci * ((1 + Cm) * M ^ (1 + dm)) ^ di = (Ci * (1 + Cm) ^ di) * M ^ D := by

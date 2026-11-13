@@ -60,7 +60,10 @@ def n04PositiveGeometry_actualControlledPhysicalHeight_joint
   apply (Jnum.mul Jden).congrOn
   intro y _
   exact (div_eq_mul_inv _ _).symm.trans
-    (wholePositiveReferenceGaugeHeight_eq _ _ _ _).symm
+    (wholePositiveReferenceGaugeHeight_eq (fun p : PolarPoint => H₀ i p.1)
+      (G.toN04PositiveGeometryControlData.σ (liftSectorParameter W.S W.C y.1) i)
+      (G.toN04PositiveGeometryControlData.Q (liftSectorParameter W.S W.C y.1) i)
+      y.2).symm
 
 def n04PositiveGeometry_actualControlledUnitHeight_joint
     {W : N04RealizationStart} {X : N04RealizationChoice W} {n : ℕ}

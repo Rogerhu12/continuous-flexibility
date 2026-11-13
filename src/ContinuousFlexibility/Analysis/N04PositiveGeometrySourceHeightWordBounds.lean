@@ -1,5 +1,5 @@
 import ContinuousFlexibility.Analysis.N04PositiveGeometryActualHeightDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryRadialProductComposition
+import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryRadialProductWordData
 
 /-! # Word bounds for the literal source height and its reciprocal -/
 
@@ -39,9 +39,10 @@ theorem n04PositiveGeometry_sourceHeightChoice_word_bound
         N04BoundaryWordBounds JS K s d z θ P M H t shift) →
       N04BoundaryWordBounds Q K s d z θ P
         (C * M ^ ((n + 1 + 2 * N) * (N + 2))) H t shift := by
-  obtain ⟨C, hC, hbound⟩ := n04PositiveGeometry_radialProductComposition_bound
-    (E := StateDirections W.S × ℝ) n N L hL
-  refine ⟨C, hC, ?_⟩
+  let wordData : N04RadialProductCompositionWordData (StateDirections W.S × ℝ) n N L :=
+    n04PositiveGeometry_radialProductCompositionWordData
+      (E := StateDirections W.S × ℝ) n N L hL
+  refine ⟨wordData.C, wordData.one_le_C, ?_⟩
   intro i side m hm hctx inv Q K s d hNorder z hz θ P M H t hM hH hHM hHL ht shift hR hCj hS
   let U := sectorNeighborhood W.S base ε ε
   have hU : IsOpen U := sectorNeighborhood_isOpen W.S base ε ε
@@ -104,17 +105,21 @@ theorem n04PositiveGeometry_sourceHeightChoice_word_bound
       (fun p => f y p * h y (g y p)) :=
     funext (fun p => n04PositiveGeometry_sourceHeight_factorization W X i side m hm
       (liftSectorParameter W.S W.C y.1) inv p)
-  let Q' := Q.congr (fun y _ => congrArg
-    (fun F : PolarPoint → ℝ => radialBoundaryJet F r n y.2) (hformula y))
+  let Q' : SmoothDirections (U ×ˢ univ)
+      (fun y => radialBoundaryJet (fun p => f y p * h y (g y p)) r n y.2) :=
+    Q.congr (fun y _ => congrArg
+      (fun F : PolarPoint → ℝ => radialBoundaryJet F r n y.2) (hformula y))
   have hF (j : ℕ) (hj : j ≤ n) : N04BoundaryWordBounds (JF j hj) K s d z θ P M H t shift := by
     have h := (hR j hj (JR j hj)).fixedEvaluation (fun _ => ((1 : ℝ), (0 : ℝ)))
       (fun _ => by simp only [Prod.norm_def, norm_one, norm_zero, max_eq_left zero_le_one])
     exact h.congr hz (fun y hy => by
       simpa only [n04PositiveGeometry_referenceHeightPowerJet, hidx, hrad] using
         (n06_radialBoundaryJet_eq_frechet j (hf y hy)).symm)
-  have hout := hbound hU r f h g hf hh hg JF JH JG Q' K s d hNorder z hz θ P
-    M H t hM hH hHM hHL ht shift hF (fun j hj => hCj j hj (JH j hj))
-    (fun j hj hjn v hv => (hS j hj hjn (JS j hj hjn)).fixedEvaluation v hv)
+  have hout : N04BoundaryWordBounds Q' K s d z θ P
+      (wordData.C * M ^ ((n + 1 + 2 * N) * (N + 2))) H t shift :=
+    wordData.bound hU r f h g hf hh hg JF JH JG Q' K s d hNorder z hz θ P
+      M H t hM hH hHM hHL ht shift hF (fun j hj => hCj j hj (JH j hj))
+      (fun j hj hjn v hv => (hS j hj hjn (JS j hj hjn)).fixedEvaluation v hv)
   exact hout.congr hz (fun y _ => congrArg
     (fun F : PolarPoint → ℝ => radialBoundaryJet F r n y.2) (hformula y).symm)
 
