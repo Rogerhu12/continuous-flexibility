@@ -33,19 +33,33 @@ theorem tower_one_apply (J : SmoothDirections (U ×ˢ V) H)
     (x : E) (v : Fin 1 → E) :
     (tower J hg hmap A hA 1).value x v =
       -A x (J.D 1 (x, g x) (fun _ : Fin 1 => (v 0, 0))) := by
+  classical
   rw [tower_succ_apply, forcing_apply]
-  rw [Fintype.sum_unique]
-  congr 2
-  change J.D 1 (x, g x)
-    (fun i : Fin 1 => graph 1
-      ((lower (fun k (_ : k < 1) => tower J hg hmap A hA k) 1).value x)
-      (v ∘ (default : OrderedFinpartition 1).emb i)) = _
+  let c₀ := OrderedFinpartition.singleBlock 1 (by omega)
+  let T : OrderedFinpartition 1 → Y := fun c => J.D c.length (x, g x)
+    (fun i => graph (c.partSize i)
+      ((lower (fun k (_ : k < 1) => tower J hg hmap A hA k) (c.partSize i)).value x)
+      (v ∘ c.emb i))
+  have hc (c : OrderedFinpartition 1) : c = c₀ :=
+    OrderedFinpartition.eq_singleBlock_of_length_eq_one c (by omega)
+      (Nat.le_antisymm c.length_le (c.length_pos (by omega)))
+  have hs : (∑ c : OrderedFinpartition 1, T c) = T c₀ := by
+    apply Finset.sum_eq_single c₀
+    · intro c _ hne
+      exact False.elim (hne (hc c))
+    · intro hne
+      exact False.elim (hne (Finset.mem_univ _))
+  change -A x (∑ c : OrderedFinpartition 1, T c) = _
+  rw [hs]
+  change -A x (J.D 1 (x, g x) (fun _ : Fin 1 => graph 1
+    ((lower (fun k (_ : k < 1) => tower J hg hmap A hA k) 1).value x) v)) = _
   rw [lower_self]
-  congr 1
+  apply congrArg (fun y : Y => -A x y)
+  apply congrArg (J.D 1 (x, g x))
   funext i
-  change (v ((default : OrderedFinpartition 1).emb i 0), (0 : Y)) = _
-  congr 1
-  exact congrArg v (Subsingleton.elim _ _)
+  rw [graph_apply]
+  change (v 0, (0 : Y)) + (0, 0) = (v 0, 0)
+  simp only [Prod.mk_add_mk, add_zero]
 
 /-- A finite majorant for the actual recursively constructed forcing.
 Only strictly lower solution jets enter the summands. -/
@@ -113,15 +127,13 @@ theorem stateIdentity_eq_zero {n : ℕ} (hn : 0 < n)
     cases n with
     | zero =>
       change (v 0).1 = 0
-      apply hpure 0
-      cases hi : w.isState 0 with
-      | false => rfl
-      | true =>
-          apply False.elim
-          apply h
-          constructor <;>
-            simp only [StateAngleWord.stateArity_eq_sum, StateAngleWord.angleArity_eq_sum,
-              Fin.sum_univ_one, hi, if_true]
+      cases w with
+      | state w =>
+          cases w
+          exact False.elim (h ⟨rfl, rfl⟩)
+      | angle w =>
+          cases w
+          exact hpure 0 rfl
     | succ n => rfl
 
 theorem stateIdentity_seminorm_le (q : Seminorm ℝ E) {n : ℕ} (hn : 0 < n)
