@@ -66,18 +66,21 @@ same component endpoint, hence from one another. -/
 theorem negativeInverse_pair_sample_endpointX (e : ℕ ≃ N04PieceIndex W.D) :
     ∃ A : ℝ, 0 ≤ A ∧ ∀ k k' m side side',
       e k = .inl (m, side) → e k' = .inl (m, side') →
-        |endpointX 1 (endpointDistance W.D (W.U.sample ((W.A e).cell k'))) -
-          endpointX 1 (endpointDistance W.D (W.U.sample ((W.A e).cell k)))| ≤ A := by
-  obtain ⟨A, hA, hb⟩ := n04bActualTypedAtlas_negative_sample_endpointX
+        |endpointX 1 (Statements.endpointDistance W.D (W.U.sample ((W.A e).cell k'))) -
+          endpointX 1 (Statements.endpointDistance W.D (W.U.sample ((W.A e).cell k)))| ≤ A := by
+  have data := n04bActualTypedAtlas_negative_sample_endpointX
     W.hT W.hS W.through03 W.field e
+  let A : ℝ := data.choose
+  have hA : 0 ≤ A := data.choose_spec.1
+  have hb := data.choose_spec.2
   refine ⟨A + A, add_nonneg hA hA, ?_⟩
   intro k k' m side side' hk hk'
   have hr : W.C.left m ∈ Icc (W.C.left m) (W.C.right m) :=
     ⟨le_rfl, (W.through03.1.1.2.2.2.1.1 m).2.1.le⟩
   have hleft := hb k m side hk (W.C.left m) hr
   have hright := hb k' m side' hk' (W.C.left m) hr
-  exact (abs_sub_le _ (endpointX 1 (endpointDistance W.D (W.C.left m))) _).trans
-    (add_le_add hright (by simpa only [abs_sub_comm] using hleft))
+  exact (abs_sub_le _ (endpointX 1 (Statements.endpointDistance W.D (W.C.left m))) _).trans
+    (add_le_add hright ((abs_sub_comm _ _).trans_le hleft))
 
 /-- The prescribed height power survives transfer between either two
 halves of one component.  Only the coefficient exponent changes. -/
@@ -305,7 +308,8 @@ theorem negativeInverse_inverseJacobian_closedHalf
     |planeJacobian (n04bActualNegativeChart G.W.hT G.W.hS G.W.through03 G.W.field
       (liftSectorParameter G.W.S G.W.C z) m side) p|⁻¹ ≤ M := by
   have hf := G.negativeInverse_actual_fields η z k m side hi
-  obtain ⟨B, hB, hlength⟩ := G.negativeInverse_length_values
+  have lengths := G.negativeInverse_length_values
+  have hlength := lengths.choose_spec.2
   have hlen : (G.V η).physicalLeft k < (G.V η).physicalRight k :=
     sub_pos.mp (hlength η k).1
   apply n04NegativeInverse_le_on_closedHalf hlen hhalf
@@ -322,10 +326,15 @@ theorem negativeInverse_inverseJacobian_closedHalf
     have hpoint : physicalUnitPoint (G.V η) k q = r :=
       n07aCanonicalUnitPoint_inverse (K := n07aPhysicalIntervalData (G.V η)) hlen r
     have hv := hvalues q hq
-    change ||planeJacobian ((G.V η).chart (G.lift η z) k)
-      (physicalUnitPoint (G.V η) k q)|⁻¹| ≤ M at hv
-    rw [hpoint, hf.2.2.2.2.1, abs_of_nonneg (inv_nonneg.mpr (abs_nonneg _))] at hv
-    exact hv
+    change abs (|planeJacobian ((G.V η).chart (G.lift η z) k)
+      (physicalUnitPoint (G.V η) k q)|⁻¹) ≤ M at hv
+    have he : |planeJacobian ((G.V η).chart (G.lift η z) k)
+        (physicalUnitPoint (G.V η) k q)|⁻¹ =
+        |planeJacobian (n04bActualNegativeChart G.W.hT G.W.hS G.W.through03 G.W.field
+          (liftSectorParameter G.W.S G.W.C z) m side) r|⁻¹ :=
+      congrArg₂ (fun (F : PolarPoint → PolarPoint) (p : PolarPoint) =>
+        |planeJacobian F p|⁻¹) hf.2.2.2.2.1 hpoint
+    exact he.symm.trans_le ((le_abs_self _).trans hv)
 
 /-- The determinant needed by the actual negative inverse has one
 uniform coefficient envelope.  Crossing the old reference cut is
@@ -354,8 +363,14 @@ theorem negativeInverse_inverseJacobian_bound
   have hε'ε : ε' ≤ ε := hc.2.2.1
   have hC : 0 < C := hc.2.2.2.1
   have hvalues := hc.2.2.2.2
-  obtain ⟨M, P, hM, hP, htransfer⟩ := G.negativeInverse_pair_sample_weights 0 C hC.le
-  obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (C * M) P
+  have transfers := G.negativeInverse_pair_sample_weights 0 C hC.le
+  let M : ℝ := transfers.choose
+  let P : ℝ := transfers.choose_spec.choose
+  have htransfer := transfers.choose_spec.choose_spec.2.2
+  have packed := coefficientEnvelope_pack (C * M) P
+  let B : ℝ := packed.choose
+  have hB : 0 < B := packed.choose_spec.1
+  have hpack := packed.choose_spec.2
   refine ⟨b', ε', B, hb, hε', hε'ε, hB, ?_⟩
   intro η z hz k hk q hq
   let data : ∃ j : ℕ × Bool, G.e k = .inl j := (G.neg_iff_inl η k).mp hk
@@ -375,7 +390,9 @@ theorem negativeInverse_inverseJacobian_bound
   let p := n04bActualNegativeInverse G.W.hT G.W.hS G.W.through03 G.W.field
     (liftSectorParameter G.W.S G.W.C z) m side y
   have hp := G.W.negativeInverse_maps_component m side hzfull hy
-  obtain ⟨source, hhalf⟩ := G.negativeInverse_referenceHalf_cover η m hp
+  have covered := G.negativeInverse_referenceHalf_cover η m hp
+  let source : Bool := covered.choose
+  have hhalf := covered.choose_spec
   let k' := G.e.symm (.inl (m, source))
   have hi' : G.e k' = .inl (m, source) := G.e.apply_symm_apply _
   have hk' : G.Neg η k' := (G.neg_iff_inl η k').mpr ⟨(m, source), hi'⟩
@@ -395,13 +412,20 @@ theorem negativeInverse_inverseJacobian_bound
     simpa only [Real.rpow_zero, one_mul] using htransfer η k k' m side source hi hi'
   change |planeJacobian ((G.V η).chart (G.lift η z) k)
     ((G.V η).inverseChart (G.lift η z) k y)|⁻¹ ≤ _
-  rw [hf.2.2.2.2.1, hf.2.2.2.2.2.1]
+  have he : |planeJacobian ((G.V η).chart (G.lift η z) k)
+      ((G.V η).inverseChart (G.lift η z) k y)|⁻¹ =
+      |planeJacobian (n04bActualNegativeChart G.W.hT G.W.hS G.W.through03 G.W.field
+        (liftSectorParameter G.W.S G.W.C z) m side) p|⁻¹ :=
+    congrArg₂ (fun (F : PolarPoint → PolarPoint) (p : PolarPoint) =>
+      |planeJacobian F p|⁻¹) hf.2.2.2.2.1 (congrFun hf.2.2.2.2.2.1 y)
+  apply he.trans_le
   calc
     _ ≤ C * G.W.U.E0 (G.W.U.sample ((G.V η).cell k')) ^ C :=
       hcompare.trans hsource
     _ ≤ C * (M * G.W.U.E0 (G.W.U.sample ((G.V η).cell k)) ^ P) :=
       mul_le_mul_of_nonneg_left ht hC.le
-    _ = (C * M) * G.W.U.E0 (G.W.U.sample ((G.V η).cell k)) ^ P := by ring
+    _ = (C * M) * G.W.U.E0 (G.W.U.sample ((G.V η).cell k)) ^ P :=
+      (mul_assoc C M _).symm
     _ ≤ B * G.W.U.E0 (G.W.U.sample ((G.V η).cell k)) ^ B :=
       hpack _ ((G.cost_nonneg η).2.2 k)
 
@@ -448,10 +472,16 @@ theorem negativeInverse_atom_purePrefix
         |mixedDerivative i j (G.atomRef 0 a m) q| ≤
           B * G.W.U.E0 (G.W.U.sample ((G.V 0).cell m)) ^ B := by
     intro s
-    obtain ⟨B, hB, hb⟩ := G.negativeInverse_reference_geometry_bounds s
+    have reference := G.negativeInverse_reference_geometry_bounds s
+    let B : ℝ := reference.choose
+    have hB : 0 < B := reference.choose_spec.1
+    have hb := reference.choose_spec.2
     exact ⟨B, hB, fun m hm q hq i j hij => hb 0 m hm a ha q hq i j hij⟩
-  have hfamily := h.negativeInverse_sharpPrefix_power
-    G.W.radial.1 hU G.W.negativeInverse_parameterInterpolation
+  have hfamily := CurrentJetDataOn.negativeInverse_sharpPrefix_power
+    (D := G.W.D) (S := G.S 0) (T := G.W.U) (cell := (G.V 0).cell)
+    (P := G.Neg 0) (base := b) (ε := ε)
+    (f := G.atomFamily 0 a) (f₀ := G.atomRef 0 a)
+    G.W.radial.1 hU G.W.negativeInverse_parameterInterpolation h
     (fun m hm => (G.negativeInverse_reference_geometry_regular 0 m hm a ha).1)
     href (G.cost_nonneg 0).2.2 (G.cost_nonneg 0).2.1
   let low : ℕ := hfamily.choose
@@ -465,7 +495,10 @@ theorem negativeInverse_atom_purePrefix
   let C : ℝ := (hp s).choose
   have hC : 0 < C := (hp s).choose_spec.1
   have hb := (hp s).choose_spec.2
-  obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack ((2 : ℝ) ^ s * C) C
+  have packed := coefficientEnvelope_pack ((2 : ℝ) ^ s * C) C
+  let B : ℝ := packed.choose
+  have hB : 0 < B := packed.choose_spec.1
+  have hpack := packed.choose_spec.2
   refine ⟨B, hB, ?_⟩
   intro m hm J z hz hzlow q hq n w hwK hws v hvlow R hR hzR hvR hvphys hvstate hvspatial
   let E := G.W.U.E0 (G.W.U.sample ((G.V 0).cell m))
@@ -481,6 +514,8 @@ theorem negativeInverse_atom_purePrefix
       (parameterHeightWeight_nonneg hH k))
       (Real.rpow_nonneg (zero_le_one.trans hR) _)
   have hraw := n04NegativeInverse_pureJoint_of_parameterTowers
+    (E := Parameter G.W.S) (U := sectorNeighborhood G.W.S b ε ε) (V := unitStrip)
+    (f := fun x : Parameter G.W.S × PolarPoint => G.atomFamily 0 a x.1 m x.2)
     (sectorNeighborhood_isOpen G.W.S b ε ε) (isOpen_Ioo.prod isOpen_univ)
     ((sectorNeighborhood_convex G.W.S b ε ε).prod
       ((convex_Ioo (0 : ℝ) 1).prod convex_univ))
@@ -496,7 +531,7 @@ theorem negativeInverse_atom_purePrefix
       _ ≤ (2 : ℝ) ^ s * (C * E ^ C) :=
         mul_le_mul_of_nonneg_right htwo
           (mul_nonneg hC.le (Real.rpow_nonneg (zero_le_one.trans hE) _))
-      _ = ((2 : ℝ) ^ s * C) * E ^ C := by ring
+      _ = ((2 : ℝ) ^ s * C) * E ^ C := (mul_assoc _ _ _).symm
       _ ≤ B * E ^ B := hpack E hE
   have htail : 0 ≤ parameterHeightWeight H w.stateArity *
       R ^ (((w.angleArity + shift * w.stateArity - 1 : ℕ) : ℝ) /
@@ -508,11 +543,11 @@ theorem negativeInverse_atom_purePrefix
     _ = ((2 : ℝ) ^ w.angleArity * (C * E ^ C)) *
         (parameterHeightWeight H w.stateArity *
           R ^ (((w.angleArity + shift * w.stateArity - 1 : ℕ) : ℝ) /
-            (((s + shift * K : ℕ) : ℝ) + 1))) := by dsimp only [major]; ring
+            (((s + shift * K : ℕ) : ℝ) + 1))) := by simp only [major, mul_assoc]
     _ ≤ (B * E ^ B) * (parameterHeightWeight H w.stateArity *
         R ^ (((w.angleArity + shift * w.stateArity - 1 : ℕ) : ℝ) /
           (((s + shift * K : ℕ) : ℝ) + 1))) := mul_le_mul_of_nonneg_right hcost htail
-    _ = _ := by dsimp only [E, H]; ring
+    _ = _ := (mul_assoc _ _ _).symm
 
 end N04RealizationGauge
 end ContinuousFlexibility.Analysis

@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N04NegativeInverseForwardClosure
+import ContinuousFlexibility.Analysis.N04NegativeInverseJointCollector
 
 /-!
 # N04Coordinates-Realization, negative geometry: inverse chart

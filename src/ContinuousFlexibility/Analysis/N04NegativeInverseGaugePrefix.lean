@@ -1,7 +1,8 @@
 import ContinuousFlexibility.Analysis.N04NegativeInverseRawEnvelope
 import ContinuousFlexibility.Analysis.N04NegativeInverseActualSystem
 import ContinuousFlexibility.Analysis.N04NegativeInverseCoefficientBounds
-import ContinuousFlexibility.Analysis.N04NegativeInverseJointCollector
+import ContinuousFlexibility.Analysis.N04NegativeInverseJointPrefixes
+import ContinuousFlexibility.Analysis.N04NegativeInverseOutputAtoms
 
 /-!
 # Closing the inverse and pulled-height joint prefixes

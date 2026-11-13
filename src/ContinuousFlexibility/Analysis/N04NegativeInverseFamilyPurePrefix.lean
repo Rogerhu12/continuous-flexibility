@@ -67,11 +67,18 @@ theorem negativeInverse_atomFamily_purePrefix
         |mixedDerivative i j (G.atomRef 0 (select a) m) q| ≤
           B * G.W.U.E0 (G.W.U.sample ((G.V 0).cell m)) ^ B := by
     intro s
-    obtain ⟨B, hB, hb⟩ := G.negativeInverse_reference_geometry_bounds s
+    let reference := G.negativeInverse_reference_geometry_bounds s
+    let B : ℝ := reference.choose
+    have hB : 0 < B := reference.choose_spec.1
+    have hb := reference.choose_spec.2
     exact ⟨B, hB, fun a m hm q hq i j hij =>
       hb 0 m hm (select a) (hselect a) q hq i j hij⟩
   let prefixData :=
     CurrentJetDataOn.negativeInverse_finiteFamily_sharpPrefix_power
+      (A := A) (D := G.W.D) (S := G.S 0) (T := G.W.U) (cell := (G.V 0).cell)
+      (P := G.Neg 0) (base := b) (ε := ε)
+      (f := fun a => G.atomFamily 0 (select a))
+      (f₀ := fun a => G.atomRef 0 (select a))
       G.W.radial.1 hU G.W.negativeInverse_parameterInterpolation h
       (fun a m hm =>
         (G.negativeInverse_reference_geometry_regular 0 m hm (select a) (hselect a)).1)
@@ -84,7 +91,10 @@ theorem negativeInverse_atomFamily_purePrefix
   let bound := shiftData.choose_spec.2 s
   let C : ℝ := bound.choose
   have hC : 0 < C := bound.choose_spec.1
-  obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack ((2 : ℝ) ^ s * C) C
+  let packed := coefficientEnvelope_pack ((2 : ℝ) ^ s * C) C
+  let B : ℝ := packed.choose
+  have hB : 0 < B := packed.choose_spec.1
+  have hpack := packed.choose_spec.2
   refine ⟨B, hB, ?_⟩
   intro a m hm J z hz hzlow q hq n w hwK hws v hvlow R hR hzR hvR hvphys hvstate hvspatial
   let E := G.W.U.E0 (G.W.U.sample ((G.V 0).cell m))
@@ -100,6 +110,8 @@ theorem negativeInverse_atomFamily_purePrefix
       (parameterHeightWeight_nonneg hH k))
       (Real.rpow_nonneg (zero_le_one.trans hR) _)
   have hraw := n04NegativeInverse_pureJoint_of_parameterTowers
+    (E := Parameter G.W.S) (U := sectorNeighborhood G.W.S b ε ε) (V := unitStrip)
+    (f := fun x : Parameter G.W.S × PolarPoint => G.atomFamily 0 (select a) x.1 m x.2)
     (sectorNeighborhood_isOpen G.W.S b ε ε) (isOpen_Ioo.prod isOpen_univ)
     ((sectorNeighborhood_convex G.W.S b ε ε).prod
       ((convex_Ioo (0 : ℝ) 1).prod convex_univ))
@@ -116,7 +128,7 @@ theorem negativeInverse_atomFamily_purePrefix
       _ ≤ (2 : ℝ) ^ s * (C * E ^ C) :=
         mul_le_mul_of_nonneg_right htwo
           (mul_nonneg hC.le (Real.rpow_nonneg (zero_le_one.trans hE) _))
-      _ = ((2 : ℝ) ^ s * C) * E ^ C := by ring
+      _ = ((2 : ℝ) ^ s * C) * E ^ C := (mul_assoc _ _ _).symm
       _ ≤ B * E ^ B := hpack E hE
   have htail : 0 ≤ parameterHeightWeight H w.stateArity *
       R ^ (((w.angleArity + shift * w.stateArity - 1 : ℕ) : ℝ) /
@@ -128,11 +140,11 @@ theorem negativeInverse_atomFamily_purePrefix
     _ = ((2 : ℝ) ^ w.angleArity * (C * E ^ C)) *
         (parameterHeightWeight H w.stateArity *
           R ^ (((w.angleArity + shift * w.stateArity - 1 : ℕ) : ℝ) /
-            (((s + shift * K : ℕ) : ℝ) + 1))) := by dsimp only [major]; ring
+            (((s + shift * K : ℕ) : ℝ) + 1))) := by simp only [major, mul_assoc]
     _ ≤ (B * E ^ B) * (parameterHeightWeight H w.stateArity *
         R ^ (((w.angleArity + shift * w.stateArity - 1 : ℕ) : ℝ) /
           (((s + shift * K : ℕ) : ℝ) + 1))) := mul_le_mul_of_nonneg_right hcost htail
-    _ = _ := by dsimp only [E, H]; ring
+    _ = _ := (mul_assoc _ _ _).symm
 
 
 end N04RealizationGauge
