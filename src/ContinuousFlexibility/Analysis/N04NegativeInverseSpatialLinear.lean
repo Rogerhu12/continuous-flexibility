@@ -83,8 +83,13 @@ theorem spatialInverse_continuousOn (J : SmoothDirections (U ×ˢ V) F)
     (N04NegativeGeometryImplicitJet.spatialDifferential_continuousOn J).comp
       (continuous_fst.continuousOn.prodMk hG) (fun p hp => ⟨hp.1, hmap hp⟩)
   intro p hp
-  exact ((hD p hp).contDiffAt_map_inverse (n := ∞)).continuousAt.comp_continuousWithinAt
-    (hDc p hp)
+  have hc : ContinuousAt (fun D : Y →L[ℝ] Y => D.inverse)
+      (N04NegativeGeometryImplicitJet.spatialDifferential J (p.1, G p)) :=
+    ((hD p hp).contDiffAt_map_inverse (n := ∞)).continuousAt
+  change ContinuousWithinAt
+    (fun x : E × Y => (N04NegativeGeometryImplicitJet.spatialDifferential J (x.1, G x)).inverse)
+    (U ×ˢ W) p
+  exact hc.comp_continuousWithinAt (hDc p hp)
 
 theorem spatialInverse_left (J : SmoothDirections (U ×ˢ V) F)
     (p : E × Y)
@@ -117,7 +122,7 @@ theorem spatialDifferential_isInvertible (J : SmoothDirections (U ×ˢ V) F)
   let D := N04NegativeGeometryImplicitJet.spatialDifferential J (p.1, G p)
   have hd : D.det ≠ 0 := by rw [spatialDifferential_det J p hp]; exact hJac
   let e : PolarPoint ≃L[ℝ] PolarPoint := D.toContinuousLinearEquivOfDetNeZero hd
-  exact ⟨e, by simp only [e, ContinuousLinearMap.coe_toContinuousLinearEquivOfDetNeZero]⟩
+  exact ⟨e, by simp only [e, ContinuousLinearMap.coe_toContinuousLinearEquivOfDetNeZero, D]⟩
 
 theorem spatialInverse_continuousOn_of_jacobian (J : SmoothDirections (U ×ˢ V) F)
     (hG : ContinuousOn G (U ×ˢ W)) (hmap : MapsTo G (U ×ˢ W) V)

@@ -47,13 +47,13 @@ theorem inverseParameterOrder_eq {n : ℕ} (w : StateAngleWord n)
         Nat.add_zero]
   | state w ih =>
       have hhead := (h 0 rfl).1
-      have ht := ih (Fin.tail κ) (Fin.tail β) h.inverseIdentitySelection_tail_state
-      simp only [flowParameterOrder, stateArity, selectedSum] at ht ⊢
+      have ht := ih (Fin.tail κ) (Fin.tail β) (inverseIdentitySelection_tail_state h)
+      simp only [flowParameterOrder, stateArity, selectedSum, Fin.tail_def] at ht ⊢
       rw [Fin.sum_univ_succ, hhead]
       omega
   | angle w ih =>
-      have ht := ih (Fin.tail κ) (Fin.tail β) h.inverseIdentitySelection_tail_angle
-      simp only [flowParameterOrder, stateArity, selectedSum] at ht ⊢
+      have ht := ih (Fin.tail κ) (Fin.tail β) (inverseIdentitySelection_tail_angle h)
+      simp only [flowParameterOrder, stateArity, selectedSum, Fin.tail_def] at ht ⊢
       rw [Fin.sum_univ_succ]
       omega
 
@@ -73,14 +73,14 @@ theorem inverseDegree_add_one {n : ℕ} (w : StateAngleWord n)
   | state w ih =>
       obtain ⟨hk, hb⟩ := h 0 rfl
       have ht := ih (Fin.tail κ) (Fin.tail β) (fun i => hpart i.succ)
-        h.inverseIdentitySelection_tail_state
+        (inverseIdentitySelection_tail_state h)
       simp only [angleArity, stateArity, selectedSum, Fin.tail_def] at ht ⊢
       simp only [Fin.sum_univ_succ, hk, hb, Nat.zero_add, Nat.mul_add,
         Nat.mul_one, Fin.tail_def]
       omega
   | angle w ih =>
       have ht := ih (Fin.tail κ) (Fin.tail β) (fun i => hpart i.succ)
-        h.inverseIdentitySelection_tail_angle
+        (inverseIdentitySelection_tail_angle h)
       have hk : κ 0 ≤ shift * κ 0 := by
         simpa only [Nat.one_mul] using Nat.mul_le_mul_right (κ 0) hshift
       have hp := hpart 0
@@ -180,7 +180,15 @@ theorem n04NegativeInverse_graph_expansion {n : ℕ}
     funext i
     simp only [Pi.add_apply, Prod.mk_add_mk, add_zero, zero_add]
   rw [hp] at he
-  simpa only [Finset.piecewise] using he
+  calc
+    _ = ∑ s : Finset (Fin n),
+        A (s.piecewise (fun i => (b i, (0 : Y))) (fun i => ((0 : E), y i))) := he
+    _ = _ := by
+      apply Finset.sum_congr rfl
+      intro s _
+      congr 1
+      funext i
+      by_cases hi : i ∈ s <;> simp only [Finset.piecewise, hi, if_true, if_false]
 
 end GraphBounds
 
@@ -293,10 +301,9 @@ theorem n04NegativeInverse_graph_norm_le {n : ℕ}
         by_contra his
         exact hi (fun h => False.elim (his h))
       have hbad : ¬ (κ i = 1 ∧ β i = 0) := fun hb => hi (fun _ => hb)
-      have hz := A.map_coord_zero i
-        (show (if w.isState i then (b i, (0 : Y)) else (0, y i)) = 0 by
-          rw [his, if_true, hidentity i hbad]
-          rfl)
+      have hz := A.map_coord_zero
+        (m := fun j => if w.isState j then (b j, (0 : Y)) else (0, y j)) i
+        (by rw [if_pos his, hidentity i hbad]; rfl)
       rw [hz, norm_zero]
       exact hB
   rw [n04NegativeInverse_graph_expansion]
