@@ -79,8 +79,9 @@ theorem n04PulledFields_inversePrefix_power
     by_cases hk0 : k = 0
     · simp only [r, e, hk0, if_pos rfl, Nat.mul_zero, Nat.add_zero, le_refl]
     · simpa only [r, e, if_neg hk0] using Nat.add_le_add_left (Nat.mul_le_mul_left shift hk) (a + b)
-  have hweight := oneHighVariationWeight_mono hp hbase le_rfl x v
-    (high := r + L k) (high' := r + L k)
+  have hweight : oneHighVariationWeight p requestedBase (r + L k) x v ≤
+      oneHighVariationWeight p base (r + L k) x v :=
+    oneHighVariationWeight_mono hp hbase le_rfl x v
   have hw := hpower k hk r hr x hxlow v hvlow R hR hxhigh hvhigh
   have hexponent : ((r + shift * k : ℕ) : ℝ) / (((N + shift * K : ℕ) : ℝ) + 1) ≤
       (e : ℝ) / (((N + shift * K : ℕ) : ℝ) + 1) :=
