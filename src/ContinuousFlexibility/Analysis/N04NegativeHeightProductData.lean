@@ -1,5 +1,6 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightScalarData
-import ContinuousFlexibility.Analysis.N04NegativeHeightProductBounds
+import ContinuousFlexibility.Analysis.N04NegativeHeightDomains
+import ContinuousFlexibility.Analysis.N04NegativeGeometryDataCollector
+import ContinuousFlexibility.Analysis.N04SourceColumnsFullProductBounds
 import ContinuousFlexibility.Analysis.N04NegativeHeightReferenceProduct
 
 /-! Multiplication of current scalar families on selected negative pieces.
@@ -25,6 +26,14 @@ attribute [local instance]
   n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
+
+/-- Specialize only the scalar height weight, leaving the chosen
+coefficient, loss and concrete grading opaque. -/
+private theorem n04NegativeHeight_product_positiveHeight_elim
+    {k : ℕ} (hk : 0 < k) {A H W x : ℝ}
+    (h : x ≤ A * parameterHeightWeight H k * W) :
+    x ≤ A * H * W := by
+  simpa only [parameterHeightWeight, if_neg (Nat.ne_of_gt hk)] using h
 
 variable {S : PhysicalSpacesData} {T : MaterialData} {D : ReferenceData}
   {cell : ℕ → ℕ} {P : ℕ → Prop} {base : ℕ} {ε : ℝ}
@@ -114,13 +123,18 @@ theorem CurrentJetDataOn.height_mul
       (oneHighVariationWeight_nonneg _ _ _ _ _)
       (mul_nonneg (mul_nonneg hB.le (Real.rpow_nonneg (zero_le_one.trans (hE t.2.val)) _))
         (parameterHeightWeight_nonneg (Real.rpow_nonneg (hH t.2.val) _) k)))
-  obtain ⟨b', hb', hprefix⟩ := n04SourceColumns_prefix_power
-    (parameterGrading S) hp hI base L
-    (fun t : Fin 2 × {m // P m} => T.E0 (T.sample (cell t.2.val)))
-    (fun k t => parameterHeightWeight (T.H (T.sample (cell t.2.val)) ^ (3 / 4 : ℝ)) k)
-    (fun t => hE t.2.val)
-    (fun k t => parameterHeightWeight_nonneg (Real.rpow_nonneg (hH t.2.val) _) k)
-    (fun t z => F t.1 z t.2.val) (fun t => RF t.1 t.2.val t.2.property) hbound
+  have hproduct := n04SourceColumns_fullProduct_oneHigh
+    (parameterGrading S) hp hI base L hU hΩ
+    (fun t : {m // P m} => T.E0 (T.sample (cell t.val)))
+    (fun t => T.H (T.sample (cell t.val)) ^ (3 / 4 : ℝ)) RH
+    (fun t => hE t.val)
+    (fun t => ⟨Real.rpow_nonneg (hH t.val) _, hHR t.val⟩)
+    (fun l t z => F l z t.val) (fun l t => RF l t.val t.property)
+    (fun k s => ⟨(hbound k s).choose, (hbound k s).choose_spec.1,
+      fun l t q hq a b hab z hz v =>
+        (hbound k s).choose_spec.2 (l, t) q hq a b hab z hz v⟩)
+  let b' : ℕ := hproduct.choose
+  have hb' : base ≤ b' := hproduct.choose_spec.1
   let ε' : ℝ := min ε (1 / 2)
   let U' := sectorNeighborhood S b' ε' ε'
   have hε' : 0 < ε' := lt_min hε (by norm_num)
@@ -134,68 +148,33 @@ theorem CurrentJetDataOn.height_mul
     fun z hz => n04NegativeHeight_parameterGrading_le_one (min_le_right ε (1 / 2)) hz
   refine ⟨b', ε', hb', hε', hεε, CurrentJetDataOn.of_positive_towers hε' hE hH R'
     (fun z hz m hm q hq => by
+      change f z m (q + (0, Real.pi)) * g z m (q + (0, Real.pi)) =
+        f z m q * g z m q
       rw [(hf.1 z (hsub hz) m hm).2 q hq, (hg.1 z (hsub hz) m hm).2 q hq])
     (fun m hm => (hf₀.1 m hm).1.mul (hg₀.1 m hm).1)
-    (fun m hm q hq => by rw [hfzero m hm q hq, hgzero m hm q hq]) hlow ?_⟩
+    (fun m hm q hq => by
+      change f 0 m q * g 0 m q = f₀ m q * g₀ m q
+      rw [hfzero m hm q hq, hgzero m hm q hq]) hlow ?_⟩
   intro k hk
-  obtain ⟨shift, hshift⟩ := hprefix k
-  refine ⟨b' + shift * k + 1, fun s => ?_⟩
-  obtain ⟨A, hA, hraw⟩ := hshift s
-  obtain ⟨B, hB, hprod⟩ := n04NegativeHeight_product_positive_oneHigh
-    (X := Parameter S) 2 k s shift RH
-  let M : ℝ := 1 + A
-  have hM : 1 ≤ M := le_add_of_nonneg_right hA.le
-  have hAM : A ≤ M := le_add_of_nonneg_left zero_le_one
-  obtain ⟨Q, hQ, hpack⟩ := coefficientEnvelope_pack (B * M ^ 2) (M * (2 : ℝ))
-  refine ⟨Q, hQ, ?_⟩
+  have hkbound := hproduct.choose_spec.2 k
+  refine ⟨hkbound.choose, fun s => ⟨(hkbound.choose_spec s).choose,
+    (hkbound.choose_spec s).choose_spec.1, ?_⟩⟩
   intro m hm q hq a b hab z hz v
-  let E : ℝ := T.E0 (T.sample (cell m))
-  have hE0 : 1 ≤ E := hE m
-  have hME : 1 ≤ M * E ^ M := one_le_mul_of_one_le_of_one_le hM
-    (Real.one_le_rpow hE0 (zero_le_one.trans hM))
-  have hAE : A * E ^ A ≤ M * E ^ M := mul_le_mul hAM
-    (Real.rpow_le_rpow_of_exponent_le hE0 hAM)
-    (Real.rpow_nonneg (zero_le_one.trans hE0) _) (zero_le_one.trans hM)
-  have hraw' (l : Fin 2) (j : ℕ) (hj : j ≤ k) (u w : ℕ) (huw : u + w ≤ s)
-      (d : Fin j → Parameter S) (hd : ∀ i, parameterGrading S b' (d i) ≤ 1)
-      (R : ℝ) (hR : 1 ≤ R)
-      (hzR : parameterGrading S (s + (b' + shift * k + 1)) (z - 0) ≤ R)
-      (hdR : ∀ i, parameterGrading S (s + (b' + shift * k + 1)) (d i) ≤ R) :
-      ‖((RF l m hm).parameter u w q hq).D j z d‖ ≤ M * E ^ M *
-        parameterHeightWeight (T.H (T.sample (cell m)) ^ (3 / 4 : ℝ)) j *
-          R ^ (((u + w + shift * j : ℕ) : ℝ) /
-            (((s + shift * k : ℕ) : ℝ) + 1)) := by
-    have hr := hraw j hj (l, ⟨m, hm⟩) q hq u w huw z (hsub hz) (hlow z hz) d hd R hR
-      (by simpa only [sub_zero, Nat.add_assoc, Nat.add_left_comm, Nat.add_comm] using hzR)
-      (fun i => by simpa only [Nat.add_assoc, Nat.add_left_comm, Nat.add_comm] using hdR i)
-    rw [Real.norm_eq_abs]
-    exact hr.trans (mul_le_mul_of_nonneg_right
-      (mul_le_mul_of_nonneg_right hAE
-        (parameterHeightWeight_nonneg (Real.rpow_nonneg (hH m) _) j))
-      (Real.rpow_nonneg (zero_le_one.trans hR) _))
+  have hprod (y : Parameter S) :
+      (fun p => ∏ l : Fin 2, F l y m p) = (fun p => f y m p * g y m p) := by
+    funext p
+    simp only [Fin.prod_univ_two, hFzero, hFone]
   let Jprod : SmoothDirections U
       (fun y => mixedDerivative a b (fun p => ∏ l : Fin 2, F l y m p) q) :=
-    ((RG m hm).parameter a b q hq).congr (fun y hy => by
-      have he : (fun p => ∏ l : Fin 2, F l y m p) =
-          (fun p => f y m p * g y m p) := by
-        funext p
-        simp only [Fin.prod_univ_two, hFzero, hFone]
-      rw [he])
-  have hresult := hprod (parameterGrading S) 0 b' (s + (b' + shift * k + 1))
-    U hU unitStrip hΩ (fun l y => F l y m) (fun l => RF l m hm) q hq
-    (T.H (T.sample (cell m)) ^ (3 / 4 : ℝ)) (M * E ^ M)
-    (Real.rpow_nonneg (hH m) _) (hHR m) hME z (hsub hz)
-    (by simpa only [sub_zero] using hlow z hz) hraw'
-    k le_rfl hk a b hab Jprod v
-  have hcost := mul_le_mul_of_nonneg_right (hpack E hE0)
-    (mul_nonneg (Real.rpow_nonneg (hH m) _)
-      (oneHighVariationWeight_nonneg (parameterGrading S) b'
-        (s + (b' + shift * k + 1)) z v))
-  have hpow : B * (M * E ^ M) ^ 2 = (B * M ^ 2) * E ^ (M * (2 : ℝ)) := by
-    rw [mul_pow, ← Real.rpow_mul_natCast (zero_le_one.trans hE0)]
-    ring
-  simpa only [R', MixedJetRegularity.height_restrict, SmoothDirections.restrict,
-    Jprod, SmoothDirections.congr, Real.norm_eq_abs, sub_zero, hpow, mul_assoc] using
-    hresult.trans (by simpa only [sub_zero, hpow, mul_assoc] using hcost)
+    ((RG m hm).parameter a b q hq).congr (fun y _ =>
+      congrArg (fun G : PolarPoint → ℝ => mixedDerivative a b G q) (hprod y).symm)
+  have hj := (hkbound.choose_spec s).choose_spec.2 ⟨m, hm⟩ q hq a b hab
+    Jprod z (hsub hz) (hlow z hz) v
+  have hj' : |((RG m hm).parameter a b q hq).D k z v| ≤
+      (hkbound.choose_spec s).choose * T.E0 (T.sample (cell m)) ^
+        (hkbound.choose_spec s).choose * T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) *
+          oneHighVariationWeight (parameterGrading S) b' (s + hkbound.choose) z v :=
+    n04NegativeHeight_product_positiveHeight_elim hk hj
+  exact hj'
 
 end ContinuousFlexibility.Analysis

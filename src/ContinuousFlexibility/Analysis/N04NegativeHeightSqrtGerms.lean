@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N04NegativeHeightGerms
+import ContinuousFlexibility.Analysis.N04NegativeHeightScalarData
 
 /-!
 # Square roots of normalized current families

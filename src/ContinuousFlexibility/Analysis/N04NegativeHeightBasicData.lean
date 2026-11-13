@@ -72,6 +72,45 @@ theorem n04NegativeHeight_angularPartial_periodic
     simpa only [ContinuousLinearMap.comp_id] using h
   exact congrArg (fun A : PolarPoint →L[ℝ] ℝ => A (0, 1)) hder
 
+private theorem height_angularPartial_smooth {f : PolarPoint → ℝ}
+    (hf : ContDiffOn ℝ ∞ f unitStrip) :
+    ContDiffOn ℝ ∞ (angularPartial f) unitStrip :=
+  contDiffOn_cylinderPartial (isOpen_Ioo.prod isOpen_univ) hf (0, 1)
+
+private theorem height_mixed_add_difference
+    {f g f₀ g₀ : PolarPoint → ℝ}
+    (hf : ContDiffOn ℝ ∞ f unitStrip) (hg : ContDiffOn ℝ ∞ g unitStrip)
+    (hf₀ : ContDiffOn ℝ ∞ f₀ unitStrip) (hg₀ : ContDiffOn ℝ ∞ g₀ unitStrip)
+    (i j : ℕ) {q : PolarPoint} (hq : q ∈ unitStrip) :
+    mixedDerivative i j (fun y => (f y + g y) - (f₀ y + g₀ y)) q =
+      mixedDerivative i j (fun y => f y - f₀ y) q +
+        mixedDerivative i j (fun y => g y - g₀ y) q := by
+  have heq : (fun y => (f y + g y) - (f₀ y + g₀ y)) =
+      (fun y => (f y - f₀ y) + (g y - g₀ y)) := by
+    funext y
+    ring
+  rw [heq]
+  exact n07a_mixedDerivative_add_on (isOpen_Ioo.prod isOpen_univ)
+    (hf.sub hf₀) (hg.sub hg₀) i j hq
+
+private theorem height_mixed_angular_difference
+    {f f₀ : PolarPoint → ℝ}
+    (hf : ContDiffOn ℝ ∞ f unitStrip) (hf₀ : ContDiffOn ℝ ∞ f₀ unitStrip)
+    (i j : ℕ) {q : PolarPoint} (hq : q ∈ unitStrip) :
+    mixedDerivative i j (fun y => angularPartial f y - angularPartial f₀ y) q =
+      mixedDerivative i (j + 1) (fun y => f y - f₀ y) q := by
+  have hU : IsOpen unitStrip := isOpen_Ioo.prod isOpen_univ
+  calc
+    _ = mixedDerivative i j (angularPartial f) q -
+        mixedDerivative i j (angularPartial f₀) q :=
+      mixedDerivative_sub_of_contDiffOn hU
+        (height_angularPartial_smooth hf) (height_angularPartial_smooth hf₀) i j hq
+    _ = mixedDerivative i (j + 1) f q - mixedDerivative i (j + 1) f₀ q :=
+      congrArg₂ (fun x y : ℝ => x - y)
+        (mixedDerivative_angularPartial hU hf i j hq)
+        (mixedDerivative_angularPartial hU hf₀ i j hq)
+    _ = _ := (mixedDerivative_sub_of_contDiffOn hU hf hf₀ i (j + 1) hq).symm
+
 section Data
 
 variable {S : PhysicalSpacesData} {T : MaterialData} {cell : ℕ → ℕ}
@@ -84,7 +123,8 @@ theorem N04HeightReferenceDataOn.height_add
     (hE : ∀ m, 1 ≤ T.E0 (T.sample (cell m))) :
     N04HeightReferenceDataOn T cell P (fun m q => f₀ m q + g₀ m q) := by
   refine ⟨fun m hm => ⟨(hf.1 m hm).1.add (hg.1 m hm).1,
-    fun q hq => by rw [(hf.1 m hm).2 q hq, (hg.1 m hm).2 q hq]⟩, fun s => ?_⟩
+    fun q hq => congrArg₂ (fun x y : ℝ => x + y)
+      ((hf.1 m hm).2 q hq) ((hg.1 m hm).2 q hq)⟩, fun s => ?_⟩
   have hfs := hf.2 s
   have hgs := hg.2 s
   refine ⟨hfs.choose + hgs.choose, add_pos hfs.choose_spec.1 hgs.choose_spec.1,
@@ -102,8 +142,8 @@ theorem N04HeightReferenceDataOn.height_angularPartial
     (hf : N04HeightReferenceDataOn T cell P f₀) :
     N04HeightReferenceDataOn T cell P (fun m => angularPartial (f₀ m)) := by
   have hU : IsOpen unitStrip := isOpen_Ioo.prod isOpen_univ
-  refine ⟨fun m hm => ⟨((hf.1 m hm).1.fderiv_of_isOpen hU (by simp)).clm_apply
-    contDiffOn_const, n04NegativeHeight_angularPartial_periodic (hf.1 m hm).1
+  refine ⟨fun m hm => ⟨height_angularPartial_smooth (hf.1 m hm).1,
+    n04NegativeHeight_angularPartial_periodic (hf.1 m hm).1
       (hf.1 m hm).2⟩, fun s => ?_⟩
   have h := hf.2 (s + 1)
   refine ⟨h.choose, h.choose_spec.1, fun m hm q hq i j hij => ?_⟩
@@ -121,34 +161,32 @@ theorem CurrentJetDataOn.height_add
     (hH : ∀ m, 0 ≤ T.H (T.sample (cell m))) :
     CurrentJetDataOn S T cell P base ε (fun z m q => f z m q + g z m q)
       (fun m q => f₀ m q + g₀ m q) := by
-  have hU : IsOpen unitStrip := isOpen_Ioo.prod isOpen_univ
   have hmono := height_parameterGrading_mono S
   have he (z : Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε)
       (m : ℕ) (hm : P m) (i j : ℕ) (q : unitStrip) :
       mixedDerivative i j (fun y => (f z m y + g z m y) - (f₀ m y + g₀ m y)) q.val =
         mixedDerivative i j (fun y => f z m y - f₀ m y) q.val +
-          mixedDerivative i j (fun y => g z m y - g₀ m y) q.val := by
-    have heq : (fun y => (f z m y + g z m y) - (f₀ m y + g₀ m y)) =
-        (fun y => (f z m y - f₀ m y) + (g z m y - g₀ m y)) := by
-      funext y
-      ring
-    rw [heq]
-    exact n07a_mixedDerivative_add_on hU
-      ((hf.1 z hz m hm).1.sub (hf₀.1 m hm).1)
-      ((hg.1 z hz m hm).1.sub (hg₀.1 m hm).1) i j q.property
-  let J := fun m (hm : P m) i j (q : unitStrip) =>
-    (smoothDirectionsAdd (hf.2.choose m hm i j q) (hg.2.choose m hm i j q)).congr
-      (fun z hz => (he z hz m hm i j q).symm)
+          mixedDerivative i j (fun y => g z m y - g₀ m y) q.val :=
+    height_mixed_add_difference (hf.1 z hz m hm).1 (hg.1 z hz m hm).1
+      (hf₀.1 m hm).1 (hg₀.1 m hm).1 i j q.property
+  let J : ∀ m, P m → ∀ (i j : ℕ) (q : unitStrip),
+      SmoothDirections (sectorNeighborhood S base ε ε) (fun z =>
+        mixedDerivative i j
+          (fun y => (f z m y + g z m y) - (f₀ m y + g₀ m y)) q.val) :=
+    fun m hm i j q =>
+      (smoothDirectionsAdd (hf.2.choose m hm i j q) (hg.2.choose m hm i j q)).congr
+        (fun z hz => (he z hz m hm i j q).symm)
   have hfv := hf.2.choose_spec.1
   have hgv := hg.2.choose_spec.1
   refine ⟨fun z hz m hm => ⟨(hf.1 z hz m hm).1.add (hg.1 z hz m hm).1,
-    fun q hq => by rw [(hf.1 z hz m hm).2 q hq, (hg.1 z hz m hm).2 q hq]⟩,
+    fun q hq => congrArg₂ (fun x y : ℝ => x + y)
+      ((hf.1 z hz m hm).2 q hq) ((hg.1 z hz m hm).2 q hq)⟩,
     J, ⟨max hfv.choose hgv.choose, fun s => ?_⟩, fun k => ?_⟩
   · have hfs := hfv.choose_spec s
     have hgs := hgv.choose_spec s
     refine ⟨hfs.choose + hgs.choose, add_pos hfs.choose_spec.1 hgs.choose_spec.1,
       fun z hz m hm q i j hij => ?_⟩
-    rw [he z hz m hm i j q]
+    apply (congrArg abs (he z hz m hm i j q)).trans_le
     exact n04NegativeHeight_add_cost hfs.choose_spec.1.le hgs.choose_spec.1.le (hE m)
       (Real.rpow_nonneg (hH m) _) (apply_nonneg _ _) (apply_nonneg _ _)
       (hmono (Nat.add_le_add_left (le_max_left _ _) s) z)
@@ -181,28 +219,25 @@ theorem CurrentJetDataOn.height_angularPartial
     (hf₀ : N04HeightReferenceDataOn T cell P f₀) :
     CurrentJetDataOn S T cell P base ε (fun z m => angularPartial (f z m))
       (fun m => angularPartial (f₀ m)) := by
-  have hU : IsOpen unitStrip := isOpen_Ioo.prod isOpen_univ
   have hdiff (z : Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε)
       (m : ℕ) (hm : P m) (i j : ℕ) (q : unitStrip) :
       mixedDerivative i j (fun y => angularPartial (f z m) y - angularPartial (f₀ m) y) q.val =
-        mixedDerivative i (j + 1) (fun y => f z m y - f₀ m y) q.val := by
-    rw [mixedDerivative_sub_of_contDiffOn hU
-      (((hf.1 z hz m hm).1.fderiv_of_isOpen hU (by simp)).clm_apply contDiffOn_const)
-      (((hf₀.1 m hm).1.fderiv_of_isOpen hU (by simp)).clm_apply contDiffOn_const) i j q.property,
-      mixedDerivative_angularPartial hU (hf.1 z hz m hm).1 i j q.property,
-      mixedDerivative_angularPartial hU (hf₀.1 m hm).1 i j q.property,
-      mixedDerivative_sub_of_contDiffOn hU (hf.1 z hz m hm).1 (hf₀.1 m hm).1
-        i (j + 1) q.property]
-  let J := fun m (hm : P m) i j (q : unitStrip) =>
-    (hf.2.choose m hm i (j + 1) q).congr (fun z hz => (hdiff z hz m hm i j q).symm)
+        mixedDerivative i (j + 1) (fun y => f z m y - f₀ m y) q.val :=
+    height_mixed_angular_difference (hf.1 z hz m hm).1 (hf₀.1 m hm).1 i j q.property
+  let J : ∀ m, P m → ∀ (i j : ℕ) (q : unitStrip),
+      SmoothDirections (sectorNeighborhood S base ε ε) (fun z =>
+        mixedDerivative i j
+          (fun y => angularPartial (f z m) y - angularPartial (f₀ m) y) q.val) :=
+    fun m hm i j q =>
+      (hf.2.choose m hm i (j + 1) q).congr (fun z hz => (hdiff z hz m hm i j q).symm)
   have hv := hf.2.choose_spec.1
   refine ⟨fun z hz m hm =>
-    ⟨((hf.1 z hz m hm).1.fderiv_of_isOpen hU (by simp)).clm_apply contDiffOn_const,
+    ⟨height_angularPartial_smooth (hf.1 z hz m hm).1,
       n04NegativeHeight_angularPartial_periodic (hf.1 z hz m hm).1 (hf.1 z hz m hm).2⟩,
     J, ⟨hv.choose + 1, fun s => ?_⟩, fun k => ?_⟩
   · have hs := hv.choose_spec (s + 1)
     refine ⟨hs.choose, hs.choose_spec.1, fun z hz m hm q i j hij => ?_⟩
-    rw [hdiff z hz m hm i j q]
+    apply (congrArg abs (hdiff z hz m hm i j q)).trans_le
     have ho : (s + 1) + hv.choose = s + (hv.choose + 1) := by omega
     simpa only [ho] using hs.choose_spec.2 z hz m hm q i (j + 1) (by omega)
   · have ht := hf.2.choose_spec.2 k
@@ -228,8 +263,11 @@ theorem CurrentJetDataOn.height_congr
     n07a_mixedDerivative_eqOn hU
       (fun y hy => congrArg₂ (fun a b : ℝ => a - b) (hfg z hz m hm hy) (hfg₀ m hm hy))
       i j q.property
-  let J := fun m (hm : P m) i j (q : unitStrip) =>
-    (hf.2.choose m hm i j q).congr (fun z hz => he z hz m hm i j q)
+  let J : ∀ m, P m → ∀ (i j : ℕ) (q : unitStrip),
+      SmoothDirections (sectorNeighborhood S base ε ε)
+        (fun z => mixedDerivative i j (fun y => g z m y - g₀ m y) q.val) :=
+    fun m hm i j q =>
+      (hf.2.choose m hm i j q).congr (fun z hz => he z hz m hm i j q)
   refine ⟨fun z hz m hm => ⟨(hf.1 z hz m hm).1.congr
     (fun q hq => (hfg z hz m hm hq).symm), ?_⟩, J, ?_, ?_⟩
   · intro q hq
@@ -240,8 +278,8 @@ theorem CurrentJetDataOn.height_congr
   · have hv := hf.2.choose_spec.1
     refine ⟨hv.choose, fun s => ⟨(hv.choose_spec s).choose,
       (hv.choose_spec s).choose_spec.1, fun z hz m hm q i j hij => ?_⟩⟩
-    rw [← he z hz m hm i j q]
-    exact (hv.choose_spec s).choose_spec.2 z hz m hm q i j hij
+    exact (congrArg abs (he z hz m hm i j q).symm).trans_le
+      ((hv.choose_spec s).choose_spec.2 z hz m hm q i j hij)
   · intro k
     have ht := hf.2.choose_spec.2 k
     refine ⟨ht.choose, fun s => ⟨(ht.choose_spec s).choose,

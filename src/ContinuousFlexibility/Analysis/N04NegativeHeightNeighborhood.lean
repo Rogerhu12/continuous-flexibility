@@ -1,6 +1,5 @@
 import ContinuousFlexibility.Analysis.N04NegativeHeightCurrentData
-import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
-import ContinuousFlexibility.Analysis.TameSmoothingCalculus
+import ContinuousFlexibility.Analysis.N04NegativeHeightParameterInterpolation
 
 /-!
 # One uniform neighborhood for normalized negative height factors
@@ -28,13 +27,47 @@ attribute [local instance]
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
 
-theorem n04NegativeHeight_parameterInterpolation
-    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
-    (hS : IsPhysicalSpaces D T S) : HasInterpolation (parameterGrading S) := by
-  have hr : Monotone realGrading := fun _ _ _ _ => le_rfl
-  exact hasInterpolation_of_hasSmoothing
-    (tamePairGrading_monotone (sectorGrading_monotone S) hr)
-    (hasSmoothing_pairGrading (solve_sector_hasSmoothing hS) hasSmoothing_realGrading)
+/-- The real coordinate is the only norm conversion needed in the
+sector bound. Keep the state seminorm opaque throughout the conversion. -/
+private theorem height_parameterGrading_apply (S : PhysicalSpacesData)
+    (n : ℕ) (z : Parameter S) :
+    parameterGrading S n z = sectorGrading S n z.1 + |z.2| :=
+  (pairGrading_apply (sectorGrading S) realGrading n z).trans
+    (congrArg (fun t : ℝ => sectorGrading S n z.1 + t)
+      ((congrFun (coe_normSeminorm ℝ ℝ) z.2).trans (Real.norm_eq_abs z.2)))
+
+private theorem height_parameterGrading_le_radius
+    {S : PhysicalSpacesData} {low high : ℕ} {ε : ℝ} {z : Parameter S}
+    (horder : low ≤ high) (hz : z ∈ sectorNeighborhood S high ε ε) :
+    parameterGrading S low z ≤ 2 * ε :=
+  (sectorPairGrading_monotone S horder z).trans
+    ((height_parameterGrading_apply S high z).trans_le
+      ((add_le_add hz.1.le hz.2.le).trans_eq (two_mul ε).symm))
+
+/-- Reading the zeroth mixed derivative does not simplify the full
+state grading or its selected derivative tower. -/
+private theorem height_zero_order_value (p : ℕ → ℝ) (loss : ℕ)
+    (B : ℝ) (f : PolarPoint → ℝ) (q : PolarPoint)
+    (h : |mixedDerivative 0 0 f q| ≤ B * p (0 + loss)) :
+    |f q| ≤ B * p loss :=
+  ((congrArg abs (congrFun (spaces_mixedDerivative_zero f) q)).symm.trans_le h).trans_eq
+    (congrArg (fun n => B * p n) (Nat.zero_add loss))
+
+private theorem height_sampleCost_reorder (B E H : ℝ) :
+    B * E * H = B * (H * E) := by ring
+
+private theorem height_small_radius_bound {K ε δ : ℝ}
+    (hK : 0 < K) (hε : ε ≤ δ / (2 * K)) : K * (2 * ε) ≤ δ := by
+  have hden : 0 < 2 * K := mul_pos (by norm_num) hK
+  calc
+    _ = (2 * K) * ε := by ring
+    _ ≤ (2 * K) * (δ / (2 * K)) := mul_le_mul_of_nonneg_left hε hden.le
+    _ = δ := mul_div_cancel₀ δ hden.ne'
+
+private theorem height_range_one_scalar {x y : ℝ} (hy : y = 1)
+    (h : |x - y| ≤ (1 / 2 : ℝ)) : x ∈ Icc (1 / 2 : ℝ) (3 / 2 : ℝ) := by
+  rw [hy, abs_le] at h
+  exact ⟨by linarith only [h.1], by linarith only [h.2]⟩
 
 variable {S : PhysicalSpacesData} {T : MaterialData} {D : ReferenceData}
   {cell : ℕ → ℕ} {P : ℕ → Prop} {base : ℕ} {ε : ℝ}
@@ -50,11 +83,11 @@ theorem CurrentJetDataOn.height_small_difference
       CurrentJetDataOn S T cell P b' ε' f f₀ ∧
         ∀ z ∈ sectorNeighborhood S b' ε' ε', ∀ m, P m → ∀ q ∈ unitStrip,
           |f z m q - f₀ m q| ≤ δ := by
-  have hv := h.2.choose_spec.1
-  obtain ⟨B, hB, hbound⟩ := hv.choose_spec 0
+  obtain ⟨loss, hvalue⟩ := h.2.choose_spec.1
+  obtain ⟨B, hB, hbound⟩ := hvalue 0
   obtain ⟨C, hC, hsample⟩ := material_sample_height_coefficient_power_bounded
     hD hT cell B (by norm_num : (0 : ℝ) < 3 / 4)
-  let b' : ℕ := max base hv.choose
+  let b' : ℕ := max base loss
   let ε' : ℝ := min ε (δ / (2 * (B * C)))
   have hb : base ≤ b' := le_max_left _ _
   have hBC : 0 < B * C := mul_pos hB hC
@@ -68,30 +101,22 @@ theorem CurrentJetDataOn.height_small_difference
   refine ⟨b', ε', hb, he, hele, h.mono (fun _ hm => hm) hb hele
     (fun m => zero_le_one.trans (hE m)) hH, ?_⟩
   intro z hz m hm q hq
-  have hgrade : parameterGrading S hv.choose z ≤ 2 * ε' := by
-    have hmono := tamePairGrading_monotone (sectorGrading_monotone S)
-      (fun _ _ _ => le_rfl : Monotone realGrading)
-    apply (hmono (le_max_right base hv.choose) z).trans
-    change sectorGrading S b' z.1 + ‖z.2‖ ≤ 2 * ε'
-    rw [Real.norm_eq_abs]
-    linarith [hz.1, hz.2]
+  have hgrade : parameterGrading S loss z ≤ 2 * ε' :=
+    height_parameterGrading_le_radius (le_max_right base loss) hz
   have hcost : B * T.E0 (T.sample (cell m)) ^ B *
-      T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) ≤ B * C := by
-    calc
-      _ = B * (T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) *
-        T.E0 (T.sample (cell m)) ^ B) := by ring
-      _ ≤ _ := mul_le_mul_of_nonneg_left (hsample m) hB.le
-  have hv' := hbound z (hsub hz) m hm ⟨q, hq⟩ 0 0 (by omega)
-  simp only [mixedDerivative, iteratedDeriv_zero, zero_add] at hv'
+      T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) ≤ B * C :=
+    (height_sampleCost_reorder B (T.E0 (T.sample (cell m)) ^ B)
+      (T.H (T.sample (cell m)) ^ (3 / 4 : ℝ))).trans_le
+        (mul_le_mul_of_nonneg_left (hsample m) hB.le)
+  have hv' := height_zero_order_value (fun n => parameterGrading S n z) loss
+    (B * T.E0 (T.sample (cell m)) ^ B * T.H (T.sample (cell m)) ^ (3 / 4 : ℝ))
+    (fun y => f z m y - f₀ m y) q (hbound z (hsub hz) m hm ⟨q, hq⟩ 0 0 le_rfl)
   calc
     _ ≤ B * T.E0 (T.sample (cell m)) ^ B * T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) *
-        parameterGrading S hv.choose z := hv'
+        parameterGrading S loss z := hv'
     _ ≤ (B * C) * (2 * ε') :=
       mul_le_mul hcost hgrade (apply_nonneg _ _) hBC.le
-    _ = (2 * (B * C)) * ε' := by ring
-    _ ≤ (2 * (B * C)) * (δ / (2 * (B * C))) :=
-      mul_le_mul_of_nonneg_left (min_le_right ε _) hden.le
-    _ = δ := mul_div_cancel₀ δ hden.ne'
+    _ ≤ δ := height_small_radius_bound hBC (min_le_right ε _)
 
 /-- A normalized field with reference value one has one fixed compact
 range on a smaller neighborhood. -/
@@ -107,8 +132,6 @@ theorem CurrentJetDataOn.height_range_one
   obtain ⟨b', ε', hb, he, hele, hdata, hsmall⟩ :=
     h.height_small_difference hD hT hε hE (by norm_num : (0 : ℝ) < 1 / 2)
   refine ⟨b', ε', hb, he, hele, hdata, fun z hz m hm q hq => ?_⟩
-  have hs := hsmall z hz m hm q hq
-  rw [h₀ m hm q hq, abs_le] at hs
-  exact ⟨by linarith [hs.1], by linarith [hs.2]⟩
+  exact height_range_one_scalar (h₀ m hm q hq) (hsmall z hz m hm q hq)
 
 end ContinuousFlexibility.Analysis

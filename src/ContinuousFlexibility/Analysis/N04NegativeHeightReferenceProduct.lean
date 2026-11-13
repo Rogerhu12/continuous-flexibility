@@ -21,7 +21,9 @@ theorem N04HeightReferenceDataOn.height_mul
   classical
   have hΩ : IsOpen unitStrip := isOpen_Ioo.prod isOpen_univ
   refine ⟨fun m hm => ⟨(hf.1 m hm).1.mul (hg.1 m hm).1,
-    fun q hq => by rw [(hf.1 m hm).2 q hq, (hg.1 m hm).2 q hq]⟩, ?_⟩
+    fun q hq => by
+      change f m (q + (0, Real.pi)) * g m (q + (0, Real.pi)) = f m q * g m q
+      rw [(hf.1 m hm).2 q hq, (hg.1 m hm).2 q hq]⟩, ?_⟩
   intro s
   obtain ⟨A, hA, hAf⟩ := hf.2 s
   obtain ⟨B, hB, hBg⟩ := hg.2 s

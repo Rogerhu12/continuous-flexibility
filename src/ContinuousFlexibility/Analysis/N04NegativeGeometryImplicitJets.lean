@@ -150,7 +150,7 @@ theorem continuous_graph_reindex {U : Set E} {n N : ℕ}
       (continuous_fst.prodMk (hσ.comp continuous_snd)).continuousOn
       (fun _ hp => ⟨hp.1, mem_univ _⟩)
   have hp : Continuous (fun p : E × (Fin N → E) => parameter n (p.2 ∘ σ)) :=
-    (parameter n).cont.comp (hσ.comp continuous_snd)
+    (parameter (E := E) (Y := Y) n).cont.comp (hσ.comp continuous_snd)
   simpa only [graph_apply] using
     hp.continuousOn.add (continuousOn_const.prodMk hb)
 
