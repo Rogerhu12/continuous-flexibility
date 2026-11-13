@@ -2,6 +2,7 @@ import ContinuousFlexibility.Analysis.N01EndpointAngularJets
 import ContinuousFlexibility.Analysis.N01FlowSmallness
 import ContinuousFlexibility.Analysis.N04RealizationDifferenceValue
 import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # The actual closed-radius flow bounds in the current-jet normalization
@@ -153,7 +154,8 @@ theorem n04NegativeGeometry_ordinaryFlow_angular_value_bound
         (oneHighVariationWeight_mono (sectorPairGrading_monotone S)
           le_rfl hhigh y v) hM)
   have hlift : liftSectorParameter S C (0 : Parameter S) = (C.referenceState, 0) := by
-    rw [liftSectorParameter_eq_affine, map_zero, add_zero]
+    simp only [liftSectorParameter, Prod.fst_zero, Prod.snd_zero,
+      ZeroMemClass.coe_zero, add_zero]
   have hzero : ordinaryFlowFamily S C m 0 j (r, θ)
       (liftSectorParameter S C (0 : Parameter S)) = 0 :=
     (congrArg (ordinaryFlowFamily S C m 0 j (r, θ)) hlift).trans

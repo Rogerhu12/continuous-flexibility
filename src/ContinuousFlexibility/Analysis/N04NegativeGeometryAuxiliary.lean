@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
 
 /-!
 # Auxiliary-column independence of negative geometry
@@ -17,6 +18,31 @@ open ContinuousFlexibility.Statements CanonicalGeometry
 
 variable (G : N04RealizationGauge)
 
+/-- The complete current scalar family of a non-auxiliary atom is
+preserved, before selecting any jets or directional towers. -/
+theorem nonAuxiliary_atomFamily_eq
+    (η₀ η : (G.W.S.height (3 / 4 : ℝ)).Space)
+    (a : Atom) (ha : a ≠ .auxiliaryColumn) :
+    G.atomFamily η a = G.atomFamily η₀ a := by
+  funext z m
+  let K := n04RealizationAtlas G.W G.X G.e G.Y G.H G.τ G.σ G.Q G.N
+  exact (canonicalAtom_replaceAuxiliaryColumn_of_ne G.W.D G.W.U G.W.S G.W.C G.W.L K
+    η (liftSectorParameter G.W.S G.W.C z) m a ha).trans
+      (canonicalAtom_replaceAuxiliaryColumn_of_ne G.W.D G.W.U G.W.S G.W.C G.W.L K
+        η₀ (liftSectorParameter G.W.S G.W.C z) m a ha).symm
+
+/-- The reference scalar family is preserved by the same field identity. -/
+theorem nonAuxiliary_atomRef_eq
+    (η₀ η : (G.W.S.height (3 / 4 : ℝ)).Space)
+    (a : Atom) (ha : a ≠ .auxiliaryColumn) :
+    G.atomRef η a = G.atomRef η₀ a := by
+  funext m
+  let K := n04RealizationAtlas G.W G.X G.e G.Y G.H G.τ G.σ G.Q G.N
+  exact (canonicalAtom_replaceAuxiliaryColumn_of_ne G.W.D G.W.U G.W.S G.W.C G.W.L K
+    η (G.W.C.referenceState, 0) m a ha).trans
+      (canonicalAtom_replaceAuxiliaryColumn_of_ne G.W.D G.W.U G.W.S G.W.C G.W.L K
+        η₀ (G.W.C.referenceState, 0) m a ha).symm
+
 /-- Transport a geometric atom's selected-piece data between auxiliary columns. -/
 theorem geometryAtom_data_auxiliary
     (η₀ η : (G.W.S.height (3 / 4 : ℝ)).Space) (P : ℕ → Prop) (b : ℕ) (ε : ℝ)
@@ -24,9 +50,12 @@ theorem geometryAtom_data_auxiliary
     G.Data η₀ P b ε (G.atomFamily η₀ a) (G.atomRef η₀ a) →
       G.Data η P b ε (G.atomFamily η a) (G.atomRef η a) := by
   intro h
-  cases a <;> first
-    | exact False.elim ha
-    | exact h
+  have hne : a ≠ .auxiliaryColumn := by
+    intro he
+    subst a
+    exact ha
+  rw [G.nonAuxiliary_atomFamily_eq η₀ η a hne, G.nonAuxiliary_atomRef_eq η₀ η a hne]
+  exact h
 
 /-- The pulled-height data is independent of the auxiliary column. -/
 theorem pulledHeight_data_auxiliary

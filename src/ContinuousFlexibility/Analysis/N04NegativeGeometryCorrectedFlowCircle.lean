@@ -61,8 +61,8 @@ theorem N01Properties.n04NegativeGeometryCorrectedFlowCircle_affineLift
   have hdecode : (S.circle (3 / 4 : ℝ)).decode
       (hN.n04NegativeGeometryCorrectedFlowCircle hS hT χ hχrange rsel hrsel z) m θ =
       de + (S.circle (3 / 4 : ℝ)).decode f m (θ + de) := by
-    simpa only [n04NegativeGeometryCorrectedFlowCircle, map_add, Pi.add_apply,
-      circleShiftedChartComposeLinear_decode, add_zero]
+    simp only [n04NegativeGeometryCorrectedFlowCircle, map_add, Pi.add_apply,
+      circleShiftedChartComposeLinear_decode, add_zero, e, f, de]
   change θ + -opticalTravel D.w (C.left m) (rsel m) +
       1 * (S.circle (3 / 4 : ℝ)).decode
         (hN.n04NegativeGeometryCorrectedFlowCircle hS hT χ hχrange rsel hrsel z) m θ = _
@@ -90,8 +90,8 @@ theorem N01Properties.smoothTameOn_n04NegativeGeometryCorrectedFlowCircle
     (hS.2.2.2.2.1 (3 / 4 : ℝ)).2.2 (fun _ => 0)
     (sectorPairGrading_monotone S) (sectorPairGrading_withSeminorms S)
     (sectorNeighborhood_isOpen S base ε ε) he hf
-  simpa only [n04NegativeGeometryCorrectedFlowCircle] using
-    smoothTameOn_add (sectorPairGrading_monotone S) he hcomp
+  unfold n04NegativeGeometryCorrectedFlowCircle
+  exact smoothTameOn_add (sectorPairGrading_monotone S) he hcomp
 
 def N01Properties.n04NegativeGeometryCorrectedFlowSelector_jointTower
     (hN : N01Properties D T S C base loss ε)

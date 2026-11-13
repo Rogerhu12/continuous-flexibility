@@ -22,6 +22,52 @@ namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
 
+local instance n04NegativeGeometryInverseBoundsCircleSMul (H : CircleModelData) :
+    SMul ℝ (H.Space × H.Space) := Prod.instSMul
+
+private theorem inverseOperator_fixedBase
+    {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : CircleModelData}
+    (hH : IsCircleModel T γ H) (hT : IsMaterialData D T)
+    (hD : IsAccumulatingProfile D) (hγ : 0 < γ)
+    (hi : HasInterpolation H.grading)
+    (JF : SmoothDirections univ (fun y : H.Space × H.Space =>
+      circleShiftedChartComposeContinuousLinear hH hT hD hγ (fun _ => 0) y.1 y.2))
+    (JP : ∀ travel : ℕ → ℝ, SmoothDirections (circlePositiveLiftDomain H ×ˢ univ)
+      (fun y : H.Space × H.Space =>
+        circlePositiveInverseComposeLinear hH hT hD hγ travel y.1 y.2))
+    (a : ℝ) (ha : 0 < a) :
+    ∃ B : ℕ, ∀ n : ℕ, ∃ L : ℕ, ∀ R : ℝ, 0 ≤ R → ∀ s : ℕ,
+      ∃ C : ℝ, 0 ≤ C ∧ ∀ travel : ℕ → ℝ,
+      ∀ K : SmoothDirections (circleUniformInverseDomain H a ×ˢ univ)
+        (fun y : H.Space × H.Space =>
+          circlePositiveInverseComposeLinear hH hT hD hγ travel y.1 y.2),
+      ∀ y ∈ circleUniformInverseDomain H a ×ˢ univ,
+        pairGrading H.grading H.grading B y ≤ R →
+      ∀ v : Fin n → H.Space × H.Space,
+        H.grading s (K.D n y v) ≤
+          C * tameJetSize (pairGrading H.grading H.grading) n s L B y v := by
+  obtain ⟨B, hB⟩ := circlePositiveInverseComposeLinear_fixedBase_oneHigh
+    hD hT hγ hH hi JF (JP (fun _ => 0)) (a / 2) (half_pos ha)
+  refine ⟨B, fun n => ?_⟩
+  obtain ⟨L, hL⟩ := hB n
+  refine ⟨L, fun R _hR s => ?_⟩
+  obtain ⟨C, hC, hb⟩ := hL (max R 1) (le_max_right _ _) s
+  refine ⟨C, hC, fun travel K y hy hlow v => ?_⟩
+  have hlower (m : ℕ) (θ : ℝ) :
+      a / 2 ≤ deriv (circleAffineLift travel (H.decode y.1) 1 m) θ := by
+    rw [circleAffineLift_deriv hH]
+    exact interior_subset hy.1 m θ
+  let K' : SmoothDirections (circleUniformInverseDomain H a ×ˢ univ)
+      (fun y : H.Space × H.Space =>
+        circlePositiveInverseComposeLinear hH hT hD hγ travel y.1 y.2) :=
+    (JP travel).restrict ((circleUniformInverseDomain_isOpen H a).prod isOpen_univ)
+      (fun y hy => ⟨circleUniformInverseDomain_subset_positive ha hy.1, hy.2⟩)
+  have heq := congrArg (fun A : (H.Space × H.Space) [×n]→L[ℝ] H.Space => A v)
+    (K.unique K' n y hy)
+  have heq' : K.D n y v = (JP travel).D n y v := heq
+  rw [heq']
+  exact hb travel (JP travel) y hlower (hlow.trans (le_max_left _ _)) v
+
 section InverseComposition
 
 variable {I E : Type*}
@@ -56,27 +102,24 @@ theorem n04NegativeGeometry_circleInverse_fixedBase_oneHigh
       ∀ x ∈ U, p B x ≤ R → ∀ v : Fin n → E,
         H.grading s (K.D n x v) ≤ C * tameJetSize p n s L B x v := by
   classical
+  letI : ∀ n, CompleteSpace (H.level n) :=
+    fun n => (hH.2.1 n).isComplete.completeSpace_coe
   let W : Set H.Space := circleUniformInverseDomain H a
   have hW : IsOpen W := circleUniformInverseDomain_isOpen H a
   have hsub : W ⊆ circlePositiveLiftDomain H := circleUniformInverseDomain_subset_positive ha
-  let JP : ∀ i, SmoothDirections (circlePositiveLiftDomain H ×ˢ univ)
+  let JP : ∀ travel : ℕ → ℝ, SmoothDirections (circlePositiveLiftDomain H ×ˢ univ)
       (fun y : H.Space × H.Space =>
-        circlePositiveInverseComposeLinear hH hT hD hγ (travel i) y.1 y.2) :=
-    fun i => (smoothTameOn_circlePositiveInverseComposeLinear hH hT hD hγ hi (travel i)).choose
+        circlePositiveInverseComposeLinear hH hT hD hγ travel y.1 y.2) :=
+    fun travel => (smoothTameOn_circlePositiveInverseComposeLinear hH hT hD hγ hi travel).choose
   let KP : ∀ i, SmoothDirections (W ×ˢ univ)
       (fun y : H.Space × H.Space =>
         circlePositiveInverseComposeLinear hH hT hD hγ (travel i) y.1 y.2) :=
-    fun i => (JP i).restrict (hW.prod isOpen_univ)
+    fun i => (JP (travel i)).restrict (hW.prod isOpen_univ)
       (fun y hy => ⟨hsub hy.1, hy.2⟩)
   let JF : SmoothDirections univ (fun y : H.Space × H.Space =>
       circleShiftedChartComposeContinuousLinear hH hT hD hγ (fun _ => 0) y.1 y.2) :=
     (exists_circleChartComposition_uniform_oneHigh hH hT hD hγ hi (fun _ => 0)).choose
-  let JP₀ : SmoothDirections (circlePositiveLiftDomain H ×ˢ univ)
-      (fun y : H.Space × H.Space =>
-        circlePositiveInverseComposeLinear hH hT hD hγ (fun _ => 0) y.1 y.2) :=
-    (smoothTameOn_circlePositiveInverseComposeLinear hH hT hD hγ hi (fun _ => 0)).choose
-  obtain ⟨BK, hBK⟩ := circlePositiveInverseComposeLinear_fixedBase_oneHigh
-    hD hT hγ hH hi JF JP₀ (a / 2) (half_pos ha)
+  obtain ⟨BK, hBK⟩ := inverseOperator_fixedBase hH hT hD hγ hi JF JP a ha
   choose d hd using hJ
   choose e he using hBK
   have houter (n : ℕ) (R : ℝ) (_hR : 0 ≤ R) (s : ℕ) :
@@ -85,12 +128,9 @@ theorem n04NegativeGeometry_circleInverse_fixedBase_oneHigh
         ∀ v : Fin n → H.Space × H.Space,
           H.grading s ((KP i).D n y v) ≤
             C * tameJetSize (pairGrading H.grading H.grading) n s (e n) BK y v := by
-    obtain ⟨C, hC, hb⟩ := he n (max R 1) (le_max_right _ _) s
+    obtain ⟨C, hC, hb⟩ := he n R _hR s
     refine ⟨C, hC, fun i y hy hlow v => ?_⟩
-    exact hb (travel i) (JP i) y
-      (fun m θ => (interior_subset hy.1 m θ).trans_eq
-        (circleAffineLift_deriv hH (travel i) y.1 m θ).symm)
-      (hlow.trans (le_max_left _ _)) v
+    exact hb (travel i) (KP i) y hy hlow v
   have hmap (i : I) : MapsTo (fun x => (f i x, g i x)) U (W ×ˢ univ) :=
     fun x hx => ⟨mem_circleUniformInverseDomain hH hT hD hγ ha (f i x)
       (hlower i x hx), mem_univ _⟩
@@ -101,15 +141,37 @@ theorem n04NegativeGeometry_circleInverse_fixedBase_oneHigh
   refine ⟨L, fun R hR s => ?_⟩
   obtain ⟨C, hC, hc⟩ := hL R hR s
   refine ⟨C, hC, fun i K x hx hlow v => ?_⟩
-  let Kactual := (J i).compCircle hH (KP i) (hmap i)
-  have heq : K.D n x = Kactual.D n x := K.unique Kactual n x hx
-  rw [heq]
+  let Kactual : SmoothDirections U (fun x =>
+      circlePositiveInverseComposeLinear hH hT hD hγ (travel i) (f i x) (g i x)) :=
+    smoothDirectionsOfJets (J i).open_domain
+      (projectiveCompositionJets (fun x => (f i x, g i x)) (J i).D (KP i).D)
+      (HasProjectiveJetsOn.comp_topological (J i).open_domain (KP i).open_domain
+        (J i).hasProjectiveJetsOn (KP i).hasProjectiveJetsOn (hmap i))
+  have heq := congrArg (fun A : E [×n]→L[ℝ] H.Space => A v) (K.unique Kactual n x hx)
+  have heq' : K.D n x v =
+      projectiveCompositionJets (fun x => (f i x, g i x)) (J i).D (KP i).D n x v := heq
+  rw [heq']
   exact hc i x hx hlow v
 
 end InverseComposition
 
 local instance n04NegativeGeometryInverseBoundsStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
+
+private theorem inverseBounds_parameterInterpolation
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    (hS : IsPhysicalSpaces D T S) :
+    HasInterpolation (pairGrading realGrading (pairGrading (sectorGrading S) realGrading)) := by
+  have hr : Monotone realGrading := fun _ _ _ _ => le_rfl
+  have hsector : HasInterpolation (sectorGrading S) := by
+    obtain ⟨b, l, hb⟩ := coordinate_hasInterpolation_stateGrading hS
+    refine ⟨b, l, fun a b c ha hab hbc => ?_⟩
+    obtain ⟨A, hA, hb⟩ := hb a b c ha hab hbc
+    exact ⟨A, hA, fun z => hb z.val⟩
+  exact coordinate_hasInterpolation_pair hr (sectorPairGrading_monotone S)
+    coordinate_hasInterpolation_realGrading
+    (coordinate_hasInterpolation_pair (sectorGrading_monotone S) hr
+      hsector coordinate_hasInterpolation_realGrading)
 
 /-- The genuine inverse displacement of every closed-radius selector has
 one common low order. Its bound is uniform in the selector and in the
@@ -141,7 +203,8 @@ theorem N01Properties.n04NegativeGeometry_selectorInverseCircle_fixedBase_oneHig
     fun i => hN.endpointFlowCircle hS hT i.val i.property
   let J : ∀ i, SmoothDirections U (f i) :=
     fun i => (hN.exists_endpointFlowCircle_smoothDirections hS hT i.val i.property).choose
-  let P := fun i => smoothDirectionsProd (J i) (J i)
+  let P : ∀ i, SmoothDirections U (fun x => (f i x, f i x)) :=
+    fun i => smoothDirectionsProd (J i) (J i)
   obtain ⟨BJ, hBJ, hJ⟩ := hN.endpointFlowCircle_fixedBase_oneHigh hS hT
   have hP : ∀ n : ℕ, ∃ L : ℕ, ∀ R : ℝ, 0 ≤ R → ∀ s : ℕ,
       ∃ K : ℝ, 0 ≤ K ∧ ∀ i x, x ∈ U → p BJ x ≤ R →
@@ -154,13 +217,11 @@ theorem N01Properties.n04NegativeGeometry_selectorInverseCircle_fixedBase_oneHig
     obtain ⟨K, hK, hb⟩ := hL R hR s
     refine ⟨K + K, add_nonneg hK hK, fun i x hx hlow v => ?_⟩
     have h := hb i.val i.property (J i) x hx hlow v
-    change H.grading s ((J i).D n x v) + H.grading s ((J i).D n x v) ≤ _
-    exact (add_le_add h h).trans_eq (by ring)
+    simpa only [P, smoothDirectionsProd, ContinuousMultilinearMap.prod_apply,
+      pairGrading_apply, add_mul] using add_le_add h h
   have hp : Monotone p := sectorPairGrading_monotone S
   have hIp : HasInterpolation (pairGrading realGrading p) :=
-    hasInterpolation_of_hasSmoothing (tamePairGrading_monotone (fun _ _ _ _ => le_rfl) hp)
-      (hasSmoothing_pairGrading hasSmoothing_realGrading
-        (hasSmoothing_pairGrading (solve_sector_hasSmoothing hS) hasSmoothing_realGrading))
+    inverseBounds_parameterInterpolation hS
   have hlower (i : I) (x : StateDirections S × ℝ) (hx : x ∈ U) (m : ℕ) (θ : ℝ) :
       1 / 2 ≤ 1 + deriv (H.decode (f i x) m) θ := by
     rw [← circleAffineLift_deriv (hS.2.1 (3 / 4 : ℝ))

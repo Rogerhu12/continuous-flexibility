@@ -27,6 +27,8 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   (e : ℕ ≃ N04PieceIndex D) (k m : ℕ) (side : Bool)
   (hi : e k = .inl (m, side))
 
+include hi
+
 /-- The fixed reference half is contained in its original negative
 component, independently of the current state and its moving cut. -/
 theorem n04NegativeGeometry_referenceHalf_subset_component :

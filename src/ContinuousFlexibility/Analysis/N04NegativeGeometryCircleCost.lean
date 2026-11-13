@@ -54,8 +54,14 @@ theorem n04NegativeGeometry_circleJet_component_cost
         T.E0 (T.sample (C.cell m)) ^ A := by
     have hindex : |(D.cellIndex m : ℝ) - D.cellIndex (C.cell m)| ≤ indexData.choose := by
       simpa only [abs_sub_comm] using indexData.choose_spec.2 m
-    simpa only [Real.rpow_zero, mul_one] using
+    have hraw : T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ (0 : ℝ) ≤
+        KH * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+          T.E0 (T.sample (C.cell m)) ^ A :=
       heightData.choose_spec.choose_spec.2.2 m (C.cell m) hindex
+    calc
+      _ = T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ (0 : ℝ) := by
+        rw [Real.rpow_zero, mul_one]
+      _ ≤ _ := hraw
   have hpack : (KH * anglePairEvaluationConstant * K) *
       T.E0 (T.sample (C.cell m)) ^ A ≤ B * T.E0 (T.sample (C.cell m)) ^ B :=
     packed.choose_spec.2 _ (hfloor m)
@@ -104,7 +110,7 @@ theorem n04NegativeGeometry_circleTower_pointwise_bound
   have horder : (s + 1) + L = s + (L + 1) := by omega
   have hgrade : Q.grading (j + 1) ((J i).D k z v) ≤
       orderData.choose * oneHighVariationWeight p b (s + (L + 1)) z v := by
-    have hm := gradedSeminorm_monotone Q.level Q.bond
+    have hm := gradedSeminorm_monotone (fun s => ↥(Q.level s)) Q.bond
       (Nat.add_le_add_right hjs 1) ((J i).D k z v)
     exact (hm.trans (orderData.choose_spec.2 i z hz v)).trans_eq
       (congrArg (fun n : ℕ => orderData.choose * oneHighVariationWeight p b n z v) horder)

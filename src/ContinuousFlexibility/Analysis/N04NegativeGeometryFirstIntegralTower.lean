@@ -65,6 +65,69 @@ private theorem correctedFlow_inverse_comp
     (hN.singleComponentInterpolationCircle_lift hS hT χ m x hx)
   exact invFun_comp_of_bijective hf hg
 
+/-- The circle displacement of the actual first integral, before taking
+its state-and-angle tower. -/
+def N01Properties.n04NegativeGeometryMinusFirstIntegralCircle
+    (m : ℕ) (x : (StateDirections S × ℝ) × ℝ) : CircleSpace S :=
+  hN.singleComponentFlowInverseCircle hS hT m x +
+    circlePositiveInverseComposeLinear (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num)
+      (fun _ => 0) (hN.singleComponentFlowCircle hS hT m x)
+      (hN.singleComponentInterpolationInverseCircle hS hT χ m x +
+        circlePositiveInverseComposeLinear (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num)
+          (fun _ => 0) (hN.singleComponentInterpolationCircle hS hT χ m x)
+          x.1.1.val.2.2.2)
+
+include hχrange in
+private theorem correctedFirstIntegralCircle_decode
+    (m : ℕ) (x : (StateDirections S × ℝ) × ℝ)
+    (hx : x.1 ∈ sectorNeighborhood S base ε ε)
+    (hr : x.2 ∈ Ioo (C.left m) (C.right m)) (θ : ℝ) :
+    θ + 0 + (S.circle (3 / 4 : ℝ)).decode
+      (hN.n04NegativeGeometryMinusFirstIntegralCircle hS hT χ m x) m θ =
+      n04bMinusFirstIntegral
+        (fun q => returnCorrectedMinusFlow S C χ (liftSectorParameter S C x.1) m q.1 q.2)
+        (stateLeftChart S (liftSectorParameter S C x.1).1 m) (x.2, θ) := by
+  let H := S.circle (3 / 4 : ℝ)
+  let u : ℝ := Function.invFun (C.minusFlow (liftSectorParameter S C x.1) m x.2) θ
+  let v : ℝ := Function.invFun (returnInterpolation (χ m x.2)
+    (returnCorrectionInitialMap S C (liftSectorParameter S C x.1) m)) u
+  let e : CircleSpace S := hN.singleComponentInterpolationInverseCircle hS hT χ m x
+  let c : CircleSpace S := circlePositiveInverseComposeLinear (hS.2.1 (3 / 4 : ℝ))
+    hT hN.1.1 (by norm_num) (fun _ => 0)
+      (hN.singleComponentInterpolationCircle hS hT χ m x) x.1.1.val.2.2.2
+  let d : CircleSpace S := circlePositiveInverseComposeLinear (hS.2.1 (3 / 4 : ℝ))
+    hT hN.1.1 (by norm_num) (fun _ => 0)
+      (hN.singleComponentFlowCircle hS hT m x) (e + c)
+  have hflow : H.decode (hN.singleComponentFlowInverseCircle hS hT m x) m θ = u - θ :=
+    hN.singleComponentFlowInverseCircle_decode hS hT m x hx hr θ
+  have hinitial : H.decode e m u = v - u :=
+    hN.singleComponentInterpolationInverseCircle_decode
+      hS hT χ hχrange m x hx ⟨hr.1.le, hr.2.le⟩ u
+  have hinner : H.decode c m u = H.decode x.1.1.val.2.2.2 m v :=
+    hN.singleComponentInterpolationInverseCompose_decode
+      hS hT χ hχrange m x hx ⟨hr.1.le, hr.2.le⟩ x.1.1.val.2.2.2 u
+  have hsum : H.decode (e + c) m u = (v - u) + H.decode x.1.1.val.2.2.2 m v :=
+    (congrArg (fun f : ℕ → ℝ → ℝ => f m u) (H.decode.map_add e c)).trans
+      (congrArg₂ (fun a b : ℝ => a + b) hinitial hinner)
+  have houter : H.decode d m θ = H.decode (e + c) m u :=
+    hN.singleComponentFlowInverseCompose_decode hS hT m x hx hr (e + c) θ
+  have hdecode : H.decode
+      (hN.n04NegativeGeometryMinusFirstIntegralCircle hS hT χ m x) m θ =
+      (u - θ) + ((v - u) + H.decode x.1.1.val.2.2.2 m v) :=
+    (congrArg (fun f : ℕ → ℝ → ℝ => f m θ)
+      (H.decode.map_add (hN.singleComponentFlowInverseCircle hS hT m x) d)).trans
+        (congrArg₂ (fun a b : ℝ => a + b) hflow (houter.trans hsum))
+  have hleft := hN.2.2.1.sector_leftChart x.1 m v
+  have hinverse := congrFun (correctedFlow_inverse_comp hN hS hT χ hχrange
+    m x hx hr) θ
+  change θ + 0 + H.decode
+    (hN.n04NegativeGeometryMinusFirstIntegralCircle hS hT χ m x) m θ =
+      stateLeftChart S (liftSectorParameter S C x.1).1 m
+        (Function.invFun (returnCorrectedMinusFlow S C χ
+          (liftSectorParameter S C x.1) m x.2) θ)
+  rw [hdecode, hinverse, hleft]
+  ring
+
 /-- One genuine joint tower for the actual first integral on an interior
 physical strip. The cutoff, old flow and inverse are all retained. -/
 def N01Properties.n04NegativeGeometryMinusFirstIntegral_stripJointTower
@@ -103,9 +166,12 @@ def N01Properties.n04NegativeGeometryMinusFirstIntegral_stripJointTower
   let A := smoothDirectionsAdd Kinitial
     (circleInverseComposeDirections hH hT hN.1.1 (by norm_num) hi (fun _ => 0)
       Jinitial Jleft hinitialpos)
-  let B := smoothDirectionsAdd Kflow
-    (circleInverseComposeDirections hH hT hN.1.1 (by norm_num) hi (fun _ => 0)
-      Jflow A hflowpos)
+  let B : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ Ioo l h)
+      (hN.n04NegativeGeometryMinusFirstIntegralCircle hS hT χ m) := by
+    unfold n04NegativeGeometryMinusFirstIntegralCircle
+    exact smoothDirectionsAdd Kflow
+      (circleInverseComposeDirections hH hT hN.1.1 (by norm_num) hi (fun _ => 0)
+        Jflow A hflowpos)
   have hsample (i : ℕ) : 0 < T.H (T.sample i) :=
     (material_circle_sample_weights_pos hT hN.1.1).2 i
   let K := circleAffineLiftJointDirections hH hsample B (fun _ => 0) m
@@ -115,41 +181,10 @@ def N01Properties.n04NegativeGeometryMinusFirstIntegral_stripJointTower
         (stateLeftChart S (liftSectorParameter S C x.1.1).1 m) (x.1.2, x.2)) := by
     apply K.congrOn
     intro x hx
-    let u : ℝ := Function.invFun (C.minusFlow (liftSectorParameter S C x.1.1) m x.1.2) x.2
-    let v : ℝ := Function.invFun (returnInterpolation (χ m x.1.2)
-      (returnCorrectionInitialMap S C (liftSectorParameter S C x.1.1) m)) u
     have hr : x.1.2 ∈ Ioo (C.left m) (C.right m) :=
       ⟨hl.trans hx.1.2.1, hx.1.2.2.trans hh⟩
-    have hflow := hN.singleComponentFlowInverseCircle_decode hS hT m x.1 hx.1.1 hr x.2
-    have hinitial := hN.singleComponentInterpolationInverseCircle_decode
-      hS hT χ hχrange m x.1 hx.1.1 ⟨hr.1.le, hr.2.le⟩ u
-    have houter := hN.singleComponentFlowInverseCompose_decode hS hT m x.1 hx.1.1 hr
-      (hN.singleComponentInterpolationInverseCircle hS hT χ m x.1 +
-        circlePositiveInverseComposeLinear hH hT hN.1.1 (by norm_num) (fun _ => 0)
-          (hN.singleComponentInterpolationCircle hS hT χ m x.1) x.1.1.1.val.2.2.2) x.2
-    have hinner := hN.singleComponentInterpolationInverseCompose_decode
-      hS hT χ hχrange m x.1 hx.1.1 ⟨hr.1.le, hr.2.le⟩ x.1.1.1.val.2.2.2 u
-    have hleft := hN.2.2.1.sector_leftChart x.1.1 m v
-    have hinverse := congrFun (correctedFlow_inverse_comp hN hS hT χ hχrange
-      m x.1 hx.1.1 hr) x.2
-    change x.2 + 0 + H.decode
-      (hN.singleComponentFlowInverseCircle hS hT m x.1 +
-        circlePositiveInverseComposeLinear hH hT hN.1.1 (by norm_num) (fun _ => 0)
-          (hN.singleComponentFlowCircle hS hT m x.1)
-          (hN.singleComponentInterpolationInverseCircle hS hT χ m x.1 +
-            circlePositiveInverseComposeLinear hH hT hN.1.1 (by norm_num) (fun _ => 0)
-              (hN.singleComponentInterpolationCircle hS hT χ m x.1)
-              x.1.1.1.val.2.2.2)) m x.2 = _
-    simp only [map_add, Pi.add_apply]
-    rw [hflow, houter]
-    simp only [map_add, Pi.add_apply]
-    rw [hinitial, hinner]
-    change x.2 + 0 + ((u - x.2) + ((v - u) + H.decode x.1.1.1.val.2.2.2 m v)) = _
-    change _ = stateLeftChart S (liftSectorParameter S C x.1.1).1 m
-      (Function.invFun (returnCorrectedMinusFlow S C χ
-        (liftSectorParameter S C x.1.1) m x.1.2) x.2)
-    rw [hinverse, hleft]
-    ring
+    exact correctedFirstIntegralCircle_decode hN hS hT χ hχrange
+      m x.1 hx.1.1 hr x.2
   exact hdecode.compLinear (parameterSpatialAssociation (StateDirections S × ℝ))
     ((sectorNeighborhood_isOpen S base ε ε).prod (isOpen_Ioo.prod isOpen_univ))
     (fun x hx => ⟨⟨hx.1, hx.2.1⟩, hx.2.2⟩)
