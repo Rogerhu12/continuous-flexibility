@@ -37,8 +37,12 @@ theorem n04PositiveGeometry_rootInverseDifferential_packet_eq
       (y.1, Function.invFun (n01RootLabel S C (liftSectorParameter S C y.1) m side) y.2)) :
     n04PositiveGeometry_rootInverseDifferential D S C g m side y =
       n04PositiveGeometry_rootInverseDifferentialPacket D S C g m side y := by
-  dsimp only [n04PositiveGeometry_rootInverseDifferential,
-    n04PositiveGeometry_rootInverseDifferentialPacket, n04PositiveGeometry_rootInversePacket]
-  rw [n04PositiveGeometry_rootBoundaryScale_inv_eq D S C g m side _ hy]
+  let β : ℝ → ℝ := n01RootLabel S C (liftSectorParameter S C y.1) m side
+  let η : ℝ := Function.invFun β y.2
+  exact congrArg (fun a : ℝ => n04PositiveGeometry_rootInverseLinear
+    (n01ComponentRootOrientation side) a
+    (n04PositiveGeometry_rootBoundaryFormula D S C g m side 0 (y.1, η))
+    (deriv (Function.invFun β) y.2))
+    (n04PositiveGeometry_rootBoundaryScale_inv_eq D S C g m side (y.1, η) hy)
 
 end ContinuousFlexibility.Analysis

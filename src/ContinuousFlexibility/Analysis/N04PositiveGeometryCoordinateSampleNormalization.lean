@@ -25,8 +25,9 @@ theorem n04PositiveGeometry_coordinate_unitPoint_mem
     (l + (r - l) * q.1, q.2) ∈ Ioo l r ×ˢ (univ : Set ℝ) := by
   refine ⟨⟨lt_add_of_pos_right _ (mul_pos (sub_pos.mpr hlr) hq.1.1), ?_⟩, mem_univ _⟩
   calc
-    l + (r - l) * q.1 < l + (r - l) :=
-      add_lt_add_left (mul_lt_of_lt_one_right (sub_pos.mpr hlr) hq.1.2) l
+    l + (r - l) * q.1 < l + (r - l) := by
+      simpa only [add_comm] using
+        add_lt_add_left (mul_lt_of_lt_one_right (sub_pos.mpr hlr) hq.1.2) l
     _ = r := by ring
 
 /-- Convert the separate slot conditions and enlarge the two seminorms
