@@ -77,8 +77,11 @@ theorem n04PositiveGeometry_rootBoundaryFormula_sample_prefix
   refine (n04PositiveGeometry_rootBoundaryInput_sample_prefix
     W X hb hε hεW hεone hflow).elim fun low h => ?_
   refine h.elim fun hlow hprefix => ?_
-  obtain ⟨RH, hRH, hheight⟩ := n04PositiveGeometry_sample_height_bound W X
+  let heightData := n04PositiveGeometry_sample_height_bound W X
     (by norm_num : (0 : ℝ) < 3 / 4)
+  let RH : ℝ := heightData.choose
+  have hRH : 0 < RH := heightData.choose_spec.1
+  have hheight := heightData.choose_spec.2
   let L := max 1 RH
   have hL : 1 ≤ L := le_max_left _ _
   refine ⟨low, hlow, fun K => ?_⟩
@@ -90,7 +93,9 @@ theorem n04PositiveGeometry_rootBoundaryFormula_sample_prefix
     (E := StateDirections W.S × ℝ) K s 1 L hL).elim fun C h => ?_
   refine h.elim fun hC h => ?_
   refine h.elim fun degree hformula => ?_
-  obtain ⟨A₀, _, hpack⟩ := coefficientEnvelope_pack (C * Ai ^ degree) (Ai * degree)
+  let packData := coefficientEnvelope_pack (C * Ai ^ degree) (Ai * degree)
+  let A₀ : ℝ := packData.choose
+  have hpack := packData.choose_spec.2
   let A := max 1 A₀
   have hA : 1 ≤ A := le_max_left _ _
   have hA₀A : A₀ ≤ A := le_max_right _ _

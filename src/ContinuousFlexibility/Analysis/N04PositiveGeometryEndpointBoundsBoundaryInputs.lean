@@ -66,15 +66,17 @@ def n04PositiveGeometry_rootBoundaryInput_joint
     (smoothDirections_angularIterate
     (n04Realization_rootLabel_forwardJointDirections hT hS hN m side) 1).congr
       (fun _ _ => by simp only [iteratedDeriv_one])
-  fin_cases j
-  · exact JC false 0
-  · exact JC false 1
-  · exact JC false 2
-  · exact JC false 3
-  · exact JC true 0
-  · exact JC true 1
-  · exact JC true 2
-  · exact JC true 3
-  · exact JB
+  exact Fin.cases (motive := fun l : Fin 9 =>
+      SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
+        (n04PositiveGeometry_rootBoundaryInput D S C g m side l))
+    (JC false 0)
+    (Fin.cases (JC false 1)
+      (Fin.cases (JC false 2)
+        (Fin.cases (JC false 3)
+          (Fin.cases (JC true 0)
+            (Fin.cases (JC true 1)
+              (Fin.cases (JC true 2)
+                (Fin.cases (JC true 3)
+                  (Fin.cases JB (fun l : Fin 0 => Fin.elim0 l))))))))) j
 
 end ContinuousFlexibility.Analysis

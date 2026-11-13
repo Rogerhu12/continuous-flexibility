@@ -69,8 +69,11 @@ theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix
   refine h.elim fun hBi h => ?_
   refine h.elim fun Ci h => ?_
   refine h.elim fun hCi hi => ?_
-  obtain ⟨RH, hRH, hheight⟩ := n04PositiveGeometry_sample_height_bound W X
+  let heightData := n04PositiveGeometry_sample_height_bound W X
     (by norm_num : (0 : ℝ) < 3 / 4)
+  let RH : ℝ := heightData.choose
+  have hRH : 0 < RH := heightData.choose_spec.1
+  have hheight := heightData.choose_spec.2
   let L := max 1 RH
   have hL : 1 ≤ L := le_max_left _ _
   let low := max Bf Bi
@@ -102,7 +105,9 @@ theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix
       (le_add_of_nonneg_left zero_le_one)
   have hDD (j : Fin 4) : degree j ≤ D :=
     Finset.single_le_sum (fun l _ => Nat.zero_le (degree l)) (Finset.mem_univ j)
-  obtain ⟨A₀, _, hpack⟩ := coefficientEnvelope_pack (C₀ * B ^ D) (B * D)
+  let packData := coefficientEnvelope_pack (C₀ * B ^ D) (B * D)
+  let A₀ : ℝ := packData.choose
+  have hpack := packData.choose_spec.2
   let A := max 1 A₀
   have hA : 1 ≤ A := le_max_left _ _
   have hA₀A : A₀ ≤ A := le_max_right _ _
