@@ -94,8 +94,9 @@ theorem n04NegativeInverse_prefixMajorant_polynomial (N : ℕ) :
     have hprev : n04NegativeInverse_prefixMajorant a C L n ≤ b * Q ^ d' :=
       hM.trans (mul_le_mul_of_nonneg_left (pow_le_pow_right₀ hQ hdd') hb0)
     have hfirst : a * (C + 1) ≤ 2 * Q ^ d' := by
+      have hCQ₁ : C + 1 ≤ Q + 1 := by linarith
       calc
-        _ ≤ Q * (Q + 1) := mul_le_mul haQ (add_le_add_right hCQ 1) (by linarith) hQ0
+        _ ≤ Q * (Q + 1) := mul_le_mul haQ hCQ₁ (by linarith) hQ0
         _ ≤ 2 * Q ^ 2 := by nlinarith
         _ ≤ _ := mul_le_mul_of_nonneg_left (pow_le_pow_right₀ hQ htwo) (by norm_num)
     have hp := n04NegativeInverse_partitionMajorant_le_power (n + 1) d

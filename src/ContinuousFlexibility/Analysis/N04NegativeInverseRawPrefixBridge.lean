@@ -57,6 +57,7 @@ theorem n04NegativeInverse_affineInput_jet
       ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd', Prod.mk_add_mk, zero_add]
   have hm : MapsTo (fun p : E × PolarPoint => a + L p) (U ×ˢ Ω) (U ×ˢ W) := by
     intro p hp
+    change a + L p ∈ U ×ˢ W
     rw [hpoint]
     exact ⟨hp.1, hmap hp.2⟩
   let Q' := (J.compAffine L a (hU.prod hΩ) hm).congrOn
@@ -184,7 +185,7 @@ theorem inverse_unitPrefix_of_jacobian
     spatialInverse_continuousOn_of_jacobian J K.continuousOn hmap hJac
   have hleft (x : E × PolarPoint) (hx : x ∈ U ×ˢ W) (a : PolarPoint) :
       A x (J.D 1 (x.1, G x) (fun _ : Fin 1 => (0, a))) = a :=
-    spatialInverse_left_of_jacobian J x ⟨hx.1, hmap hx⟩ (hJac x hx) a
+    spatialInverse_left_of_jacobian (G := G) J x ⟨hx.1, hmap hx⟩ (hJac x hx) a
   have hfirst (a : PolarPoint) (ha : ‖a‖ ≤ 1) :
       ‖J.D 1 (p.1, G p) (fun _ : Fin 1 => (0, a))‖ ≤ C := by
     let w₁ : StateAngleWord 1 := .angle .nil
@@ -202,7 +203,7 @@ theorem inverse_unitPrefix_of_jacobian
       parameterHeightWeight, if_true, Nat.mul_zero, Nat.add_zero, Nat.sub_self,
       pow_zero, mul_one] using h
   have hApoint : ‖A p‖ ≤ 2 * C * I :=
-    spatialInverse_norm_le J p ⟨hp.1, hmap hp⟩ (hJac p hp) hC hdet hfirst
+    spatialInverse_norm_le (G := G) J p ⟨hp.1, hmap hp⟩ (hJac p hp) hC hdet hfirst
   apply prefix_norm_le J K hU hV hW hmap A hAc hleft hright low high
     N paramOrder shift hshift p hp (mul_nonneg (mul_nonneg (by norm_num) hC) hI)
     hC hH hHL hL hR ht hApoint hforward.homogeneous n hn hnN w hw
