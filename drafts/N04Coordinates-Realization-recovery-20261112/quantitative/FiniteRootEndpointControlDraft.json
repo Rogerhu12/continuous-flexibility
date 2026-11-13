@@ -1,30 +1,66 @@
 {
   "status": "draft-only; uncompiled; no source-owned dependency activated",
-  "parent": "afd89f5e3bf63e28b17d414aeb6bc3c2a069ffa8",
+  "parent": "868b6b74f76e541c42d042e11c595c1f3a6421ce",
   "files": [
     {
       "path": "drafts/N04Coordinates-Realization-recovery-20261112/quantitative/N04RealizationFiniteBoundaryEnvelopes.lean",
-      "lines": 135
+      "lines": 135,
+      "blob": "60a50163d38f41301811f1134391e42dbfdc0577",
+      "independent_review": {
+        "result": "PASS; static only",
+        "reviewer": "primitive_certificate",
+        "checkpoint": "afd89f5e3bf63e28b17d414aeb6bc3c2a069ffa8"
+      }
     },
     {
       "path": "drafts/N04Coordinates-Realization-recovery-20261112/quantitative/N04RealizationRootMaterialPrefix.lean",
-      "lines": 156
+      "lines": 156,
+      "blob": "f927982f1b004dcba76e70447a3eaf32b115f983",
+      "independent_review": {
+        "result": "PASS; static only",
+        "reviewer": "primitive_certificate",
+        "checkpoint": "afd89f5e3bf63e28b17d414aeb6bc3c2a069ffa8"
+      }
     },
     {
       "path": "drafts/N04Coordinates-Realization-recovery-20261112/quantitative/N04RealizationRootBetweenEnvelopes.lean",
-      "lines": 136
+      "lines": 136,
+      "blob": "f992aa1e7c794560cd58796398514df21d0148df",
+      "independent_review": {
+        "result": "PASS; static only",
+        "reviewer": "potential_bounds",
+        "checkpoint": "afd89f5e3bf63e28b17d414aeb6bc3c2a069ffa8"
+      }
     },
     {
       "path": "drafts/N04Coordinates-Realization-recovery-20261112/quantitative/N04RealizationRootHeightEnvelopes.lean",
-      "lines": 110
+      "lines": 110,
+      "blob": "c48aaab4da47bf9a8ac28751a1304ab1e05719bf",
+      "independent_review": {
+        "result": "PASS; static only",
+        "reviewer": "potential_bounds",
+        "checkpoint": "afd89f5e3bf63e28b17d414aeb6bc3c2a069ffa8"
+      }
     },
     {
       "path": "drafts/N04Coordinates-Realization-recovery-20261112/quantitative/N04RealizationRootEndpointControls.lean",
-      "lines": 172
+      "lines": 172,
+      "blob": "b41da6f493b0b502f21ac15bcdd7e4afb5b809c1",
+      "independent_review": {
+        "result": "PASS; static only",
+        "reviewer": "potential_bounds",
+        "checkpoint": "afd89f5e3bf63e28b17d414aeb6bc3c2a069ffa8"
+      }
     },
     {
       "path": "drafts/N04Coordinates-Realization-recovery-20261112/quantitative/N04RealizationPositiveEndpointControls.lean",
-      "lines": 166
+      "lines": 166,
+      "blob": "eaa72abac354a1cb662793287ba464e1498426fd",
+      "independent_review": {
+        "result": "PASS; static only",
+        "reviewer": "primitive_certificate",
+        "checkpoint": "868b6b74f76e541c42d042e11c595c1f3a6421ce"
+      }
     }
   ],
   "construction": "Select actual finite root endpoint controls before positive transport; same D/T/S/C/K, actual containing host cell, common finite neighborhood, explicit 1+B*(C0*sampleE0)^A. The positive transfer then prescribes M=B*(C0*sampleE0)^B and kappa=M^-1, H=M at any supplied cell containing the actual midpoint; the same seed Q, original atlas and endpoint source choices are retained.",
@@ -34,7 +70,7 @@
       "module": "N03RootEndpointMaterialJets",
       "commit": "f98e15e4243d0d47a9d42fa40e64f60ed54691d3",
       "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-21/quantitative/primitive-route/reconstructed/N03RootEndpointMaterialJets.lean",
-      "compatibility": "Thread reference_flow in its restricted hfield. Its held N01ReturnUniformPositiveJets dependency must select and retain the current per-order parameterLoss before output orders."
+      "compatibility": "Retain reference_flow in the restricted hfield. Its held N01ReturnUniformPositiveJets dependency must select the closed-flow provider's parameter loss once before all angular orders; its inverse output keeps the existing existential loss contract."
     },
     {
       "module": "N04RealizationRootJacobianMaterialBounds",
@@ -58,5 +94,11 @@
     "N04RealizationRetainedPositiveEndpoints.n04Realization_seed_positive_endpoints_sameReference"
   ],
   "private_source_argument": "rootBetween_radial repeats only the inaccessible private rootBetween_states_radial zero-circle-image argument from CanonicalRootRelativeJets; both states are supplied, and no atlas/reference witness is reselected.",
-  "pending": "Draft-only and uncompiled. Primitive independently reviewed FiniteBoundaryEnvelopes135 and RootMaterialPrefix156; the other original three leaves and this new positive transfer are awaiting fresh peer review. Complete source dependency compatibility/activation through agreed genuine merges before CI; no target-closure claim."
+  "pending": "All six draft modules (875 Lean lines) passed fresh independent static review. They remain uncompiled and outside src. Source-owned dependency activation and the separately documented legacy API ports require coordinated genuine merges before CI. No target-closure claim.",
+  "provenance_files": [
+    "FiniteRootEndpointControlDependencies.json",
+    "RootLabelFixedBaseInventory.json",
+    "compatibility/N01ReturnUniformPositiveJets.current-n01-api.patch",
+    "compatibility/N03RootEndpointMaterialJets.reference-flow.patch"
+  ]
 }

@@ -1,0 +1,59 @@
+{
+  "status": "Read-only; no new proof or activation",
+  "active_ref": "280315f95e23eb520f1439902d6788f7cd23affb",
+  "archive_scope": {
+    "snapshot": 50,
+    "entries": 3273
+  },
+  "findings": [
+    {
+      "file": "Analysis/N01ReturnCircleUniformBounds.lean",
+      "theorems": [
+        "N01Properties.uniformSmoothFamilyOn_sectorReturnTransportCircle",
+        "N01Properties.uniformSmoothFamilyOn_rightChartInverseCircle",
+        "N01Properties.transportedOddCircle_uniform_lower"
+      ],
+      "result": "Actual circle H^(3/4) objects and uniform 1/3 slope are available; UniformFamilyJetBounds quantifies each derivative order before its low base, so it does not provide one low base before all orders."
+    },
+    {
+      "file": "Analysis/N01CircleLinearTame.lean",
+      "theorems": [
+        "sectorChartContinuousLinear_tame",
+        "sectorParameter_chart_grading_le",
+        "circleOddLinear_tame"
+      ],
+      "result": "Original left displacement and odd projection are zero-loss linear maps."
+    },
+    {
+      "file": "Analysis/N04EndpointCircleFixedBaseBounds.lean",
+      "theorem": "N01Properties.endpointFlowCircle_fixedBase_oneHigh",
+      "result": "One low base before all parameter orders for actual endpoint/return displacement."
+    },
+    {
+      "file": "Analysis/N04SelectorInverseCircleFixedBaseBounds.lean",
+      "theorem": "N01Properties.selectorInverseCircle_fixedBase_oneHigh",
+      "result": "One low base before all orders for actual inverse flow selectors; this is not the left label inverse."
+    },
+    {
+      "files": [
+        "Analysis/CirclePositiveInverseFixedBaseBounds.lean",
+        "Analysis/TameFixedBaseCompositionBounds.lean"
+      ],
+      "theorems": [
+        "circlePositiveInverseComposeLinear_fixedBase_oneHigh",
+        "projectiveCompositionJets_fixedBase_oneHigh"
+      ],
+      "result": "Existing generic tools suffice to assemble both actual labels and inverses without proving a new inverse or composition estimate."
+    },
+    {
+      "files": [
+        "Analysis/N01RootLabels.lean",
+        "Analysis/InteriorRootLabelMaterialJets.lean",
+        "held N01RootLabelUniformJets182"
+      ],
+      "result": "Existing root-label bounds are ordinary spatial bounds, not the required fixed-base parameter towers."
+    }
+  ],
+  "missing_export": "No additional concrete root-label fixed-base parameter export was located within the complete snapshot50 filename index and the active root/return/circle provider modules inspected.",
+  "exact_reuse_route": "First compose the exact pair (returnFlowCircle, sectorChart-returnFlowCircle) through the fixed-base circle inverse-composition kernel to obtain existing sectorReturnTransportCircle; apply existing odd continuous linear projection for the right root label. Apply the same kernel to its diagonal and negate for right inverse. The original left label is the sector chart lift; apply the same kernel with N01's 1/2 slope for its inverse. Keep all values in S.circle (3/4), actual definitions and original U; select finite maximum of low bases before all parameter orders."
+}

@@ -1,0 +1,11 @@
+diff --git a/src/ContinuousFlexibility/Analysis/N03RootEndpointMaterialJets.lean b/src/ContinuousFlexibility/Analysis/N03RootEndpointMaterialJets.lean
+--- a/src/ContinuousFlexibility/Analysis/N03RootEndpointMaterialJets.lean
++++ b/src/ContinuousFlexibility/Analysis/N03RootEndpointMaterialJets.lean
+@@ -92,6 +92,7 @@
+     { smooth_coefficients := fun z hz => hfield.smooth_coefficients z (hsub hz)
+       periodic_coefficients := fun z hz => hfield.periodic_coefficients z (hsub hz)
+       positive_a := fun z hz => hfield.positive_a z (hsub hz)
++      reference_flow := hfield.reference_flow
+       negative_discriminant := fun z hz => hfield.negative_discriminant z (hsub hz) }
+   obtain ⟨CF, lowF, lossF, hCF, hfloorF, BF, hBF, hchart⟩ :=
+     n01_rootChart_unit_positive_material_jets_of_component_optical hS hT hN'.1.1 hflow hK
