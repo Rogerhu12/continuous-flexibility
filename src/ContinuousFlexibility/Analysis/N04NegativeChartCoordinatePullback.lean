@@ -2,6 +2,7 @@ import ContinuousFlexibility.Analysis.N04RealizationCubicRegularity
 import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
 import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
 import ContinuousFlexibility.Analysis.MixedDerivativeLocality
+import ContinuousFlexibility.Analysis.N01cHeightParameterJets
 
 /-!
 # The exact positive jets of the normalized coordinate atoms
@@ -38,7 +39,8 @@ theorem n04NegativeChart_coordinatePullback_positiveJet
   let JC : SmoothDirections U
       (fun z => c ^ i * mixedDerivative i j (f z) (a + c * q.1, q.2)) :=
     (smoothDirections_postcompCLM J (c ^ i • ContinuousLinearMap.id ℝ ℝ)).congr
-      (fun _ _ => by simp only [smul_apply, ContinuousLinearMap.id_apply, smul_eq_mul])
+      (fun _ _ => by simp only [Function.comp_apply, smul_apply,
+        ContinuousLinearMap.id_apply, smul_eq_mul])
   let JS : SmoothDirections U
       (fun z => c ^ i * mixedDerivative i j (f z) (a + c * q.1, q.2) -
         mixedDerivative i j h q) :=

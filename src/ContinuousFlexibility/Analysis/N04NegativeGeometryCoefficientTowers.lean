@@ -29,6 +29,39 @@ private def addScalarTowersCongr
     (he : ∀ x ∈ U, f x + g x = h x) : SmoothDirections U h :=
   (smoothDirectionsAdd Jf Jg).congrOn he
 
+private theorem add_actual_residual {a b c d : ℝ} (hc : c = b - a) (hd : d = b) :
+    a + c = d := by rw [hc, hd]; ring
+
+private def reflectedMinusHalfGapTower
+    {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+    [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
+    {U : Set X} {Ω : Set PolarPoint} (A : X → SymmetricCoefficients)
+    (J : SmoothDirections (U ×ˢ Ω) (fun q : X × PolarPoint =>
+      minusCharacteristicSpeed (A q.1) q.2))
+    (hΩ : ∀ p ∈ Ω, (p.1, -p.2) ∈ Ω)
+    (href : ∀ x ∈ U, ∀ p ∈ Ω,
+      n04bCharacteristicDrift (A x) (p.1, -p.2) = -n04bCharacteristicDrift (A x) p ∧
+      n04bCharacteristicHalfGap (A x) (p.1, -p.2) = n04bCharacteristicHalfGap (A x) p) :
+    SmoothDirections (U ×ˢ Ω) (fun q : X × PolarPoint =>
+      n04bCharacteristicHalfGap (A q.1) q.2) := by
+  let R : PolarPoint →L[ℝ] PolarPoint :=
+    (ContinuousLinearMap.fst ℝ ℝ ℝ).prod (-ContinuousLinearMap.snd ℝ ℝ ℝ)
+  let P : (X × PolarPoint) →L[ℝ] X × PolarPoint :=
+    (ContinuousLinearMap.fst ℝ X PolarPoint).prod
+      (R.comp (ContinuousLinearMap.snd ℝ X PolarPoint))
+  let K := J.compLinear P J.open_domain (fun q hq => ⟨hq.1, hΩ q.2 hq.2⟩)
+  let B : (ℝ × ℝ) →L[ℝ] ℝ :=
+    (-1 / 2 : ℝ) • (ContinuousLinearMap.fst ℝ ℝ ℝ + ContinuousLinearMap.snd ℝ ℝ ℝ)
+  apply (solveSmoothDirectionsPostcomp (smoothDirectionsProd K J) B).congrOn
+  intro q hq
+  change (-1 / 2 : ℝ) *
+    (minusCharacteristicSpeed (A q.1) (q.2.1, -q.2.2) +
+      minusCharacteristicSpeed (A q.1) q.2) = _
+  have hh := href q.1 hq.1 q.2 hq.2
+  rw [(n04b_characteristic_speed_factorization _ _).1,
+    (n04b_characteristic_speed_factorization _ _).1, hh.1, hh.2]
+  ring
+
 theorem negativeOriginalDiscriminant_pos (m : ℕ)
     {z : StateDirections W.S × ℝ}
     (hz : z ∈ sectorNeighborhood W.S W.base W.ε W.ε)
@@ -95,13 +128,17 @@ def negativeOriginalMinusJointTower (m : ℕ) :
         originalCoefficientEntry W.D W.S W.C 1 (liftSectorParameter W.S W.C x.1) x.2,
         originalCoefficientEntry W.D W.S W.C 2 (liftSectorParameter W.S W.C x.1) x.2) ∈ V := by
     intro x hx
-    simpa only [originalCoefficientEntry, ↓reduceIte] using
+    simpa only [originalCoefficientEntry, if_pos rfl,
+      if_neg (by decide : (1 : Fin 3) ≠ 0), if_neg (by decide : (2 : Fin 3) ≠ 0),
+      if_neg (by decide : (2 : Fin 3) ≠ 1), V, mem_setOf_eq] using
       And.intro (W.negativeOriginalRadial_pos m hx.1 hx.2)
         (W.negativeOriginalDiscriminant_pos m hx.1 hx.2.1)
   apply ((smoothDirectionsProd (J 0) (smoothDirectionsProd (J 1) (J 2))).comp_contDiff
     hV hkernel hmap).congrOn
   intro x hx
-  simp only [originalCoefficientEntry, ↓reduceIte, minusCharacteristicSpeed]
+  simp only [originalCoefficientEntry, if_pos rfl,
+    if_neg (by decide : (1 : Fin 3) ≠ 0), if_neg (by decide : (2 : Fin 3) ≠ 0),
+    if_neg (by decide : (2 : Fin 3) ≠ 1), minusCharacteristicSpeed]
 
 /-- The actual residual velocity has the same full-component domain as
 the chart; its construction uses no chart estimate. -/
@@ -147,12 +184,12 @@ private theorem negativeMinus_sum_identity (m : ℕ)
       returnCorrectionVelocityLinear W.D W.S W.C W.cutoff.cutoff
         (liftSectorParameter W.S W.C x.1) m x.2
         (W.R.residual (liftSectorParameter W.S W.C x.1)) =
-      minusCharacteristicSpeed (W.L.coefficients (liftSectorParameter W.S W.C x.1)) x.2 := by
-  rw [W.negativeMinus_eq_corrected m hx.1 hx.2,
-    returnCorrectionVelocityLinear_at_actual W.through03.1.1 W.through03.1.2
+      minusCharacteristicSpeed (W.L.coefficients (liftSectorParameter W.S W.C x.1)) x.2 :=
+  add_actual_residual
+    (returnCorrectionVelocityLinear_at_actual W.through03.1.1 W.through03.1.2
       W.cutoff.cutoff (liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl)
-      (W.through03.1.1.2.2.1.liftSectorParameter_sector x.1)]
-  ring
+      (W.through03.1.1.2.2.1.liftSectorParameter_sector x.1) m x.2)
+    (W.negativeMinus_eq_corrected m hx.1 hx.2)
 
 /-- The literal corrected characteristic speed has a joint tower. -/
 def negativeMinusJointTower (m : ℕ) :
@@ -171,30 +208,12 @@ def negativeHalfGapJointTower (m : ℕ) :
       (sectorNeighborhood W.S W.base W.ε W.ε ×ˢ
         (Ioo (W.C.left m) (W.C.right m) ×ˢ univ))
       (fun x : (StateDirections W.S × ℝ) × PolarPoint =>
-        n04bCharacteristicHalfGap (W.L.coefficients (liftSectorParameter W.S W.C x.1)) x.2) := by
-  let J := W.negativeMinusJointTower m
-  let R : PolarPoint →L[ℝ] PolarPoint :=
-    (ContinuousLinearMap.fst ℝ ℝ ℝ).prod (-ContinuousLinearMap.snd ℝ ℝ ℝ)
-  let P : ((StateDirections W.S × ℝ) × PolarPoint) →L[ℝ]
-      (StateDirections W.S × ℝ) × PolarPoint :=
-    (ContinuousLinearMap.fst ℝ (StateDirections W.S × ℝ) PolarPoint).prod
-      (R.comp (ContinuousLinearMap.snd ℝ (StateDirections W.S × ℝ) PolarPoint))
-  let K := J.compLinear P J.open_domain (fun x hx => by
-    exact ⟨hx.1, hx.2.1, mem_univ _⟩)
-  let A : (ℝ × ℝ) →L[ℝ] ℝ :=
-    (-1 / 2 : ℝ) • (ContinuousLinearMap.fst ℝ ℝ ℝ + ContinuousLinearMap.snd ℝ ℝ ℝ)
-  apply (solveSmoothDirectionsPostcomp (smoothDirectionsProd K J) A).congrOn
-  intro x hx
-  have href := n04b_actualCharacteristic_reflection W.through03
-    (liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl)
-    (W.through03.1.1.2.2.1.liftSectorParameter_sector x.1) x.2
-  change (-1 / 2 : ℝ) *
-    (minusCharacteristicSpeed (W.L.coefficients (liftSectorParameter W.S W.C x.1))
-      (x.2.1, -x.2.2) +
-      minusCharacteristicSpeed (W.L.coefficients (liftSectorParameter W.S W.C x.1)) x.2) = _
-  rw [(n04b_characteristic_speed_factorization _ _).1,
-    (n04b_characteristic_speed_factorization _ _).1, href.1, href.2]
-  ring
+        n04bCharacteristicHalfGap (W.L.coefficients (liftSectorParameter W.S W.C x.1)) x.2) :=
+  reflectedMinusHalfGapTower (fun z => W.L.coefficients (liftSectorParameter W.S W.C z))
+    (W.negativeMinusJointTower m) (fun _ hp => ⟨hp.1, mem_univ _⟩)
+    (fun z hz p _ => n04b_actualCharacteristic_reflection W.through03
+      (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
+      (W.through03.1.1.2.2.1.liftSectorParameter_sector z) p)
 
 end ContinuousFlexibility.Analysis.N04RealizationStart
 

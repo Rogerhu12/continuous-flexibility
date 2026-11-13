@@ -75,14 +75,14 @@ private theorem endpointUnitPower_oneHigh
         (parameterHeightWeight_nonneg (hH m q hq) k))
       (oneHighVariationWeight_nonneg p base (s + loss) (x - center) v))
 
-/-- Positive spatial order, with the first derivative already paid at
-the fixed base. The state domain and its center stay literal. -/
+/-- The value and first derivative are paid at the fixed base. The
+remaining spatial order and the state domain stay literal. -/
 def N04NegativeChartFirstSpatialBounds
     (p : ℕ → Seminorm ℝ X) (center : X) (base : ℕ)
     (U : Set X) (Ω : I → Set PolarPoint) (H E : I → PolarPoint → ℝ)
     (f : I → X → PolarPoint → ℝ) (K shift : ℕ) : Prop :=
   ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m k, k ≤ K → ∀ a b,
-    1 ≤ a + b → a + b ≤ s + 1 → ∀ q ∈ Ω m,
+    a + b ≤ s + 1 → ∀ q ∈ Ω m,
     ∀ J : SmoothDirections U (fun x => mixedDerivative a b (f m x) q),
     ∀ x ∈ U, p base (x - center) ≤ 1 →
     ∀ v : Fin k → X, (∀ i, p base (v i) ≤ 1) →
@@ -121,7 +121,7 @@ theorem n04NegativeChart_firstSpatial_prefix
   obtain ⟨C, hC, hCb⟩ := hshift s
   obtain ⟨B, hB, hBb⟩ := coefficientEnvelope_pack (A * C) A
   refine ⟨B, hB, ?_⟩
-  intro m k hk a b hpos hab q hq T x hx hlow v hv R hR hxR hvR
+  intro m k hk a b hab q hq T x hx hlow v hv R hR hxR hvR
   have hn : a + b - 1 ≤ s := by omega
   have heq : a + b ≤ a + b - 1 + 1 := by omega
   let j : J := (⟨k, Nat.lt_succ_of_le hk⟩, ⟨a + b - 1, Nat.lt_succ_of_le hn⟩)

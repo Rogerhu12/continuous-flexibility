@@ -37,7 +37,7 @@ private theorem projection_linear_jet
   have he := congrArg (fun B : E [×n]→L[ℝ] ℝ => B v) (L.unique P n x hx)
   exact he.trans (by
     simp only [P, SmoothDirections.congrOn, solveSmoothDirectionsPostcomp,
-      smoothDirectionsProd, ContinuousLinearMap.compContinuousMultilinearMap_apply,
+      smoothDirectionsProd, ContinuousLinearMap.compContinuousMultilinearMap_coe, Function.comp_apply,
       ContinuousMultilinearMap.prod_apply, A, ContinuousLinearMap.add_apply,
       ContinuousLinearMap.smul_apply, ContinuousLinearMap.coe_fst',
       ContinuousLinearMap.coe_snd', smul_eq_mul])
@@ -49,12 +49,12 @@ theorem n04NegativeChart_rootEven_stateJet
     (K : SmoothDirections U (fun x => rootEven (G x) p))
     (n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E) :
     K.D n x v = rootEven (fun q => (J q).D n x v) p := by
-  let q₊ : ℝ × ℝ × ℝ := (p.1, p.1 ^ (3 / 2 : ℝ), p.2)
-  let q₋ : ℝ × ℝ × ℝ := (p.1, -(p.1 ^ (3 / 2 : ℝ)), p.2)
-  let K' : SmoothDirections U (fun z => (1 / 2 : ℝ) * G z q₊ + (1 / 2 : ℝ) * G z q₋) :=
-    K.congrOn (fun z _ => by simp only [rootEven, q₊, q₋]; ring)
-  have h := projection_linear_jet (1 / 2 : ℝ) (1 / 2 : ℝ) (J q₊) (J q₋) K' n x hx v
-  exact h.trans (by simp only [rootEven, q₊, q₋]; ring)
+  let qPos : ℝ × ℝ × ℝ := (p.1, p.1 ^ (3 / 2 : ℝ), p.2)
+  let qNeg : ℝ × ℝ × ℝ := (p.1, -(p.1 ^ (3 / 2 : ℝ)), p.2)
+  let K' : SmoothDirections U (fun z => (1 / 2 : ℝ) * G z qPos + (1 / 2 : ℝ) * G z qNeg) :=
+    K.congrOn (fun z _ => by simp only [rootEven, qPos, qNeg]; ring)
+  have h := projection_linear_jet (1 / 2 : ℝ) (1 / 2 : ℝ) (J qPos) (J qNeg) K' n x hx v
+  exact h.trans (by simp only [rootEven, qPos, qNeg]; ring)
 
 /-- On the open physical half, the signed divided odd coefficient also
 commutes with every state jet. Its spatial estimate loses only the one
@@ -66,16 +66,16 @@ theorem n04NegativeChart_rootOddCoefficient_stateJet
     (K : SmoothDirections U (fun x => rootOddCoefficient (G x) p))
     (n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E) :
     K.D n x v = rootOddCoefficient (fun q => (J q).D n x v) p := by
-  let q₊ : ℝ × ℝ × ℝ := (p.1, p.1 ^ (3 / 2 : ℝ), p.2)
-  let q₋ : ℝ × ℝ × ℝ := (p.1, -(p.1 ^ (3 / 2 : ℝ)), p.2)
+  let qPos : ℝ × ℝ × ℝ := (p.1, p.1 ^ (3 / 2 : ℝ), p.2)
+  let qNeg : ℝ × ℝ × ℝ := (p.1, -(p.1 ^ (3 / 2 : ℝ)), p.2)
   let c : ℝ := (2 * p.1 ^ (3 / 2 : ℝ))⁻¹
-  let K' : SmoothDirections U (fun z => (-c) * G z q₊ + c * G z q₋) :=
+  let K' : SmoothDirections U (fun z => (-c) * G z qPos + c * G z qNeg) :=
     K.congrOn (fun z _ => by
-      simp only [rootOddCoefficient, rootOdd, if_neg hp, q₊, q₋, c, div_eq_mul_inv]
+      simp only [rootOddCoefficient, rootOdd, if_neg hp, qPos, qNeg, c, div_eq_mul_inv]
       ring)
-  have h := projection_linear_jet (-c) c (J q₊) (J q₋) K' n x hx v
+  have h := projection_linear_jet (-c) c (J qPos) (J qNeg) K' n x hx v
   exact h.trans (by
-    simp only [rootOddCoefficient, rootOdd, if_neg hp, q₊, q₋, c, div_eq_mul_inv]
+    simp only [rootOddCoefficient, rootOdd, if_neg hp, qPos, qNeg, c, div_eq_mul_inv]
     ring)
 
 end ContinuousFlexibility.Analysis

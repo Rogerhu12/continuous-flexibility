@@ -24,7 +24,7 @@ variable {W : N04RealizationStart} {e : ℕ ≃ N04PieceIndex W.D}
 
 /-- The same representatives retain the complete state-and-space germ
 at every point of the actual closed half, including its root. -/
-theorem fullHalfFields_finiteAffine_representatives
+theorem fullHalfFields_finiteAffine_representatives_uniform
     {n : ℕ} (x : AnnularState W.S × ℝ)
     (hx : x ∈ stateNeighborhood W.S W.C W.base (W.ε / 2))
     (L : (Fin n → ℝ) →L[ℝ] (AnnularState W.S × ℝ))
@@ -35,7 +35,13 @@ theorem fullHalfFields_finiteAffine_representatives
       (∀ y r, Function.Periodic (fun θ => c (y, (r, θ))) Real.pi) ∧
       (∀ p : PolarPoint, p.1 ∈ Icc (0 : ℝ) (W.negativeOpticalWidth m side) →
         d =ᶠ[𝓝 (0, p)] (fun q => F.fullHalfDrift (x + L q.1) m side q.2) ∧
-        c =ᶠ[𝓝 (0, p)] (fun q => F.fullHalfSpeed (x + L q.1) m side q.2)) := by
+        c =ᶠ[𝓝 (0, p)] (fun q => F.fullHalfSpeed (x + L q.1) m side q.2)) ∧
+      ∃ V : Set (Fin n → ℝ), IsOpen V ∧ (0 : Fin n → ℝ) ∈ V ∧
+        (∀ y ∈ V, x + L y ∈ stateNeighborhood W.S W.C W.base (W.ε / 2)) ∧
+        ∀ y ∈ V, ∀ p : PolarPoint,
+          p.1 ∈ Icc (0 : ℝ) (W.negativeOpticalWidth m side) →
+          d (y, p) = F.fullHalfDrift (x + L y) m side p ∧
+          c (y, p) = F.fullHalfSpeed (x + L y) m side p := by
   let V : Set (Fin n → ℝ) :=
     (fun y => x + L y) ⁻¹' stateNeighborhood W.S W.C W.base (W.ε / 2)
   have hV : IsOpen V := (isOpen_stateNeighborhood W.S W.C W.base (W.ε / 2)).preimage
@@ -123,37 +129,81 @@ theorem fullHalfFields_finiteAffine_representatives
         (R (W.negativeInwardPoint m side (r, θ)).1, θ)
   refine ⟨d, c, contDiff_const.mul (hAs 0), (hΦ.comp hq).mul (hAs 1),
     fun y r θ => congrArg (fun z => -n01ComponentRootOrientation side * z) (hperiod 0 y r θ),
-    fun y r θ => congrArg (fun z => Φ (q (y, (r, θ))) * z) (hperiod 1 y r θ), ?_⟩
-  intro p hp
-  have hin := inwardComponentPoint_mem side
-    (show p.1 ∈ Icc (0 : ℝ) (W.C.right m - W.C.left m) from
-      ⟨hp.1, hp.2.trans (W.negativeOpticalWidth_le_component m side)⟩)
-  have hpab : (W.negativeInwardPoint m side p).1 ∈ Ioo a b := by
-    change a < inwardComponentPoint _ _ _ _ ∧ inwardComponentPoint _ _ _ _ < b
-    dsimp only [a, b]
-    constructor <;> linarith only [hin.1, hin.2, hc.1, hc.2.2]
-  have hρg : (fun y : (Fin n → ℝ) × PolarPoint => ρ y.1) =ᶠ[𝓝 (0, p)]
-      (fun y => y.1) := hρid.comp_tendsto continuousAt_fst
-  have hRg : ∀ᶠ y : (Fin n → ℝ) × PolarPoint in 𝓝 (0, p),
-      R (W.negativeInwardPoint m side y.2).1 = (W.negativeInwardPoint m side y.2).1 := by
-    filter_upwards [((((W.negativeInwardPoint_contDiff m side).comp
-      contDiff_snd).fst).continuous.continuousAt).tendsto.eventually
-        (isOpen_Ioo.mem_nhds hpab)] with y hy
-    exact circleFlowSmoothTimeClamp_eq hab hε ⟨hy.1.le, hy.2.le⟩
-  have hAg (i : Fin 2) : A i =ᶠ[𝓝 (0, p)] (fun y =>
-      normalizedSpeedFactor W.D W.S W.C i (x + L y.1) (W.negativeInwardPoint m side y.2)) := by
-    filter_upwards [hρg, hRg] with y hy hz
-    simp only [A, Ψ, hy, hz, negativeInwardPoint]
-  have hΦg : (fun y => Φ (q y)) =ᶠ[𝓝 (0, p)] (fun y => Real.sqrt (q y)) := by
-    simpa only [Real.sqrt_eq_rpow] using (hΦeq (q (0, p)) (hqrange 0 p hp)).comp_tendsto
-      hq.continuous.continuousAt
-  constructor
-  · filter_upwards [hAg 0] with y hy
-    exact congrArg (fun z => -n01ComponentRootOrientation side * z) hy
-  · filter_upwards [hΦg, hAg 1, hρg] with y hφ ha hρy
-    change Φ (q y) * A 1 y = _
-    rw [hφ, ha]
-    simp only [q, hρy, fullHalfSpeed, opticalSpeed]
+    fun y r θ => congrArg (fun z => Φ (q (y, (r, θ))) * z) (hperiod 1 y r θ), ?_, ?_⟩
+  · intro p hp
+    have hin := inwardComponentPoint_mem side
+      (show p.1 ∈ Icc (0 : ℝ) (W.C.right m - W.C.left m) from
+        ⟨hp.1, hp.2.trans (W.negativeOpticalWidth_le_component m side)⟩)
+    have hpab : (W.negativeInwardPoint m side p).1 ∈ Ioo a b := by
+      change a < inwardComponentPoint _ _ _ _ ∧ inwardComponentPoint _ _ _ _ < b
+      dsimp only [a, b]
+      constructor <;> linarith only [hin.1, hin.2, hc.1, hc.2.2]
+    have hρg : (fun y : (Fin n → ℝ) × PolarPoint => ρ y.1) =ᶠ[𝓝 (0, p)]
+        (fun y => y.1) := hρid.comp_tendsto continuousAt_fst
+    have hRg : ∀ᶠ y : (Fin n → ℝ) × PolarPoint in 𝓝 (0, p),
+        R (W.negativeInwardPoint m side y.2).1 = (W.negativeInwardPoint m side y.2).1 := by
+      filter_upwards [((((W.negativeInwardPoint_contDiff m side).comp
+        contDiff_snd).fst).continuous.continuousAt).tendsto.eventually
+          (isOpen_Ioo.mem_nhds hpab)] with y hy
+      exact circleFlowSmoothTimeClamp_eq hab hε ⟨hy.1.le, hy.2.le⟩
+    have hAg (i : Fin 2) : A i =ᶠ[𝓝 (0, p)] (fun y =>
+        normalizedSpeedFactor W.D W.S W.C i (x + L y.1) (W.negativeInwardPoint m side y.2)) := by
+      filter_upwards [hρg, hRg] with y hy hz
+      simp only [A, Ψ, hy, hz, negativeInwardPoint]
+    have hΦg : (fun y => Φ (q y)) =ᶠ[𝓝 (0, p)] (fun y => Real.sqrt (q y)) := by
+      simpa only [Real.sqrt_eq_rpow] using (hΦeq (q (0, p)) (hqrange 0 p hp)).comp_tendsto
+        hq.continuous.continuousAt
+    constructor
+    · filter_upwards [hAg 0] with y hy
+      exact congrArg (fun z => -n01ComponentRootOrientation side * z) hy
+    · filter_upwards [hΦg, hAg 1, hρg] with y hφ ha hρy
+      change Φ (q y) * A 1 y = _
+      rw [hφ, ha]
+      simp only [q, hρy, fullHalfSpeed, opticalSpeed]
+
+  · obtain ⟨V₀, hV₀, hV₀open, h0V₀⟩ := mem_nhds_iff.mp hρid
+    have hρeq (y : Fin n → ℝ) (hy : y ∈ V₀) : ρ y = y := hV₀ hy
+    refine ⟨V₀, hV₀open, h0V₀, ?_, ?_⟩
+    · intro y hy
+      simpa only [hρeq y hy] using hρV y
+    · intro y hy p hp
+      have hin := inwardComponentPoint_mem side
+        (show p.1 ∈ Icc (0 : ℝ) (W.C.right m - W.C.left m) from
+          ⟨hp.1, hp.2.trans (W.negativeOpticalWidth_le_component m side)⟩)
+      have hpab : (W.negativeInwardPoint m side p).1 ∈ Icc a b := by
+        change a ≤ inwardComponentPoint _ _ _ _ ∧ inwardComponentPoint _ _ _ _ ≤ b
+        dsimp only [a, b]
+        constructor <;> linarith only [hin.1, hin.2, hc.1, hc.2.2]
+      have hRid : R (W.negativeInwardPoint m side p).1 =
+          (W.negativeInwardPoint m side p).1 := circleFlowSmoothTimeClamp_eq hab hε hpab
+      have ha (i : Fin 2) : A i (y, p) =
+          normalizedSpeedFactor W.D W.S W.C i (x + L y)
+            (W.negativeInwardPoint m side p) := by
+        simp only [A, Ψ, hρeq y hy, hRid, negativeInwardPoint]
+      have hφ : Φ (q (y, p)) = Real.sqrt (q (y, p)) := by
+        simpa only [Real.sqrt_eq_rpow] using (hΦeq (q (y, p)) (hqrange y p hp)).self_of_nhds
+      constructor
+      · exact congrArg (fun a => -n01ComponentRootOrientation side * a) (ha 0)
+      · change Φ (q (y, p)) * A 1 (y, p) = _
+        rw [hφ, ha 1]
+        simp only [q, hρeq y hy, fullHalfSpeed, opticalSpeed]
+
+/-- The pointwise germ interface is retained for existing callers. -/
+theorem fullHalfFields_finiteAffine_representatives
+    {n : ℕ} (x : AnnularState W.S × ℝ)
+    (hx : x ∈ stateNeighborhood W.S W.C W.base (W.ε / 2))
+    (L : (Fin n → ℝ) →L[ℝ] (AnnularState W.S × ℝ))
+    (m : ℕ) (side : Bool) :
+    ∃ d c : (Fin n → ℝ) × PolarPoint → ℝ,
+      ContDiff ℝ ∞ d ∧ ContDiff ℝ ∞ c ∧
+      (∀ y r, Function.Periodic (fun θ => d (y, (r, θ))) Real.pi) ∧
+      (∀ y r, Function.Periodic (fun θ => c (y, (r, θ))) Real.pi) ∧
+      (∀ p : PolarPoint, p.1 ∈ Icc (0 : ℝ) (W.negativeOpticalWidth m side) →
+        d =ᶠ[𝓝 (0, p)] (fun q => F.fullHalfDrift (x + L q.1) m side q.2) ∧
+        c =ᶠ[𝓝 (0, p)] (fun q => F.fullHalfSpeed (x + L q.1) m side q.2)) := by
+  obtain ⟨d, c, hd, hc, hdp, hcp, hg, _⟩ :=
+    F.fullHalfFields_finiteAffine_representatives_uniform x hx L m side
+  exact ⟨d, c, hd, hc, hdp, hcp, hg⟩
 
 end ContinuousFlexibility.Analysis.N04RealizationStart.NegativeOpticalFactors
 

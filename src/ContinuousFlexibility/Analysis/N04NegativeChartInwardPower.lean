@@ -138,7 +138,7 @@ def negativeHalf_inward_powerControl
       (smoothDirections_postcompCLM (RF.parameter a b _ (hmap i hq))
         (n01ComponentRootOrientation i.2 ^ a • ContinuousLinearMap.id ℝ ℝ)).congr
           (fun x hx => by
-            simpa only [smul_apply, ContinuousLinearMap.id_apply, smul_eq_mul] using
+            simpa only [Function.comp_apply, smul_apply, ContinuousLinearMap.id_apply, smul_eq_mul] using
               (n04NegativeChart_mixedDerivative_inward (f x)
                 (W.C.left i.1) (W.C.right i.1) i.2 a b q).symm) }
   refine ⟨RG, ?_⟩

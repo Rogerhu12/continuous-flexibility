@@ -32,7 +32,7 @@ private def endpointPowerControl_unitSign
     parameter := fun a b q hq =>
       (smoothDirections_postcompCLM ((F.regular i).parameter a b q hq)
         (σ i • ContinuousLinearMap.id ℝ ℝ)).congr (fun x hx => by
-          simpa only [smul_apply, ContinuousLinearMap.id_apply, smul_eq_mul] using
+          simpa only [Function.comp_apply, smul_apply, ContinuousLinearMap.id_apply, smul_eq_mul] using
             (mixedDerivative_const_mul (σ i) (f i x) a b q).symm) }
   refine ⟨R, ?_⟩
   intro K s

@@ -164,6 +164,68 @@ private theorem composition_kernel_oneHigh
       simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
       ring
 
+private theorem composition_shifted_kernel_bound
+    {E ι : Type*} [AddCommGroup E] [Module ℝ E]
+    (q : ℕ → Seminorm ℝ E)
+    (K : (r k : ℕ) → E → E → (Fin k → E) → E)
+    (τ : ι → E → E) (hτ : ∀ t j u, q j (τ t u) ≤ q j u)
+    (hkernel : ∃ base loss : ℕ, ∀ r k s : ℕ, ∀ R : ℝ, 1 ≤ R →
+      ∃ C : ℝ, 0 ≤ C ∧ ∀ e, q base e ≤ R → ∀ u v,
+        q s (K r k e u v) ≤ C * multilinearTameSize (q base)
+          (q (r + s + loss)) (k + 1) (1 + q (r + s + loss) e) (Fin.cons u v)) :
+    ∃ base loss : ℕ, ∀ r k s : ℕ, ∀ R : ℝ, 1 ≤ R →
+      ∃ C : ℝ, 0 ≤ C ∧ ∀ t e u v (A : ℝ), 0 ≤ A →
+      q base e ≤ R → q base u ≤ R → (∀ i : Fin k, q base (v i) ≤ R) →
+      1 + q (r + s + loss) e ≤ A → q (r + s + loss) u ≤ A →
+      (∀ i, q (r + s + loss) (v i) ≤ A) →
+      q s (K r k e (τ t u) v) ≤ C * A := by
+  obtain ⟨base, loss, hb⟩ := hkernel
+  refine ⟨base, loss, fun r k s R hR => ?_⟩
+  obtain ⟨C, hC, hbound⟩ := hb r k s R hR
+  refine ⟨C * (((k + 1 : ℕ) : ℝ) + 1) * R ^ (k + 1), by positivity,
+    fun t e u v A hA he hu hv hAe hAu hAv => ?_⟩
+  have hlow (i : Fin (k + 1)) : q base (Fin.cons (τ t u) v i) ≤ R := by
+    refine Fin.cases ?_ hv i
+    exact (hτ t base u).trans hu
+  have hhigh (i : Fin (k + 1)) : q (r + s + loss) (Fin.cons (τ t u) v i) ≤ A := by
+    refine Fin.cases ?_ hAv i
+    exact (hτ t (r + s + loss) u).trans hAu
+  have hmajorant := composition_majorant_on_low_ball (q base)
+    (q (r + s + loss)) (Fin.cons (τ t u) v)
+    (by positivity) hA hAe hR hlow hhigh
+  exact (hbound e he (τ t u) v).trans
+    ((mul_le_mul_of_nonneg_left hmajorant hC).trans_eq (by ring))
+
+/-- Eliminate the existential constants before instantiating the
+projective model, so no realization choices enter the normalization. -/
+private theorem composition_fixedBase_from_kernel
+    {E ι : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (q : ℕ → Seminorm ℝ E) (hq : Monotone q)
+    (K : ι → (r k : ℕ) → E → E → (Fin k → E) → E)
+    (f : ι → E × E → E)
+    (hzero : ∀ t (U : Set (E × E)) (J : SmoothDirections U (f t)) x,
+      x ∈ U → ∀ v : Fin 0 → E × E, J.D 0 x v = K t 0 0 x.1 x.2 Fin.elim0)
+    (hsucc : ∀ t (U : Set (E × E)) (J : SmoothDirections U (f t)) n x,
+      x ∈ U → ∀ v : Fin (n + 1) → E × E,
+        J.D (n + 1) x v = K t (n + 1) (n + 1) x.1 x.2 (fun i => (v i).1) +
+          ∑ i : Fin (n + 1), K t n n x.1 (v i).2
+            (fun j => (v (i.succAbove j)).1))
+    (hkernel : ∃ base loss : ℕ, ∀ r k s : ℕ, ∀ R : ℝ, 1 ≤ R →
+      ∃ C : ℝ, 0 ≤ C ∧ ∀ t e u v (A : ℝ), 0 ≤ A →
+      q base e ≤ R → q base u ≤ R → (∀ i : Fin k, q base (v i) ≤ R) →
+      1 + q (r + s + loss) e ≤ A → q (r + s + loss) u ≤ A →
+      (∀ i, q (r + s + loss) (v i) ≤ A) → q s (K t r k e u v) ≤ C * A) :
+    ∃ base loss : ℕ, ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R → ∀ s : ℕ,
+      ∃ C : ℝ, 0 ≤ C ∧ ∀ t (U : Set (E × E)) (J : SmoothDirections U (f t)),
+      ∀ x ∈ U, pairGrading q q base x ≤ R → ∀ v : Fin n → E × E,
+        q s (J.D n x v) ≤ C * tameJetSize (pairGrading q q) n s (n + loss) base x v := by
+  obtain ⟨base, loss, hb⟩ := hkernel
+  refine ⟨base, loss, fun n R hR s => ?_⟩
+  obtain ⟨C, hC, hbound⟩ := composition_kernel_oneHigh q hq K hb n R hR s
+  refine ⟨C, hC, fun t U J x hx hxR => ?_⟩
+  exact hbound t (fun k => J.D k x) x (hzero t U J x hx)
+    (fun k => hsucc t U J k x hx) hxR
+
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : CircleModelData}
   (hH : IsCircleModel T γ H) (hT : IsMaterialData D T)
   (hD : IsAccumulatingProfile D) (hγ : 0 < γ) (hI : HasInterpolation H.grading)
@@ -233,7 +295,7 @@ private theorem fullCompositionJet_succ_kernels
     (fun i : Fin (n + 1) => shiftedCompositionKernel hH hT hD hγ hI travel n n
       x.1 (v i).2 (fun j => (v (i.succAbove j)).1))).symm
   funext m θ
-  simp only [Pi.add_apply, Pi.sum_apply, circleChartCompositionJets_apply,
+  simp only [Pi.add_apply, Finset.sum_apply, circleChartCompositionJets_apply,
     shiftedCompositionKernel_decode, circleCompositionPhase, Nat.add_sub_cancel]
   congr 1
   apply Finset.sum_congr rfl
@@ -249,26 +311,12 @@ private theorem shiftedCompositionKernel_uniform_affine_bound :
       H.grading (r + s + loss) u ≤ A →
       (∀ i, H.grading (r + s + loss) (v i) ≤ A) →
       H.grading s (shiftedCompositionKernel hH hT hD hγ hI travel r k e u v) ≤ C * A := by
-  obtain ⟨base, loss, hkernel⟩ := coupled_circle_kernel_grading_bounds hD hT hγ hH hI
-  refine ⟨base, loss, fun r k s R hR => ?_⟩
-  obtain ⟨C, hC, hbound⟩ := hkernel r k s R hR
-  refine ⟨C * (((k + 1 : ℕ) : ℝ) + 1) * R ^ (k + 1), by positivity,
-    fun travel e u v A hA he hu hv hAe hAu hAv => ?_⟩
-  let τ : H.Space →L[ℝ] H.Space := circleTranslationContinuousLinear hH hT hD hγ travel
-  have hlow (i : Fin (k + 1)) :
-      H.grading base ((Fin.cons (τ u) v : Fin (k + 1) → H.Space) i) ≤ R := by
-    refine Fin.cases ?_ hv i
-    exact (circleTranslationContinuousLinear_grading_le hH hT hD hγ travel base u).trans hu
-  have hhigh (i : Fin (k + 1)) :
-      H.grading (r + s + loss) ((Fin.cons (τ u) v : Fin (k + 1) → H.Space) i) ≤ A := by
-    refine Fin.cases ?_ hAv i
-    exact (circleTranslationContinuousLinear_grading_le hH hT hD hγ travel
-      (r + s + loss) u).trans hAu
-  have hb := composition_majorant_on_low_ball (H.grading base)
-    (H.grading (r + s + loss)) (Fin.cons (τ u) v)
-    (by positivity) hA hAe hR hlow hhigh
-  exact (hbound e he (τ u) v).trans
-    ((mul_le_mul_of_nonneg_left hb hC).trans_eq (by ring))
+  apply composition_shifted_kernel_bound H.grading
+    (coupledCircleKernel hD hT hγ hH hI)
+    (fun travel u => circleTranslationContinuousLinear hH hT hD hγ travel u)
+    (circleTranslationContinuousLinear_grading_le hH hT hD hγ)
+  simpa only [coupledCircleKernelMajorant, multilinearTameSize] using
+    coupled_circle_kernel_grading_bounds hD hT hγ hH hI
 
 include hI in
 /-- The base and the additive loss are chosen before every parameter
@@ -283,15 +331,13 @@ theorem n04NegativeChart_circleComposition_fixedBase_oneHigh :
       ∀ v : Fin n → H.Space × H.Space,
         H.grading s (J.D n x v) ≤
           C * tameJetSize (pairGrading H.grading H.grading) n s (n + loss) base x v := by
-  obtain ⟨base, loss, hb⟩ := shiftedCompositionKernel_uniform_affine_bound hH hT hD hγ hI
-  refine ⟨base, loss, fun n R hR s => ?_⟩
-  obtain ⟨C, hC, hbound⟩ := composition_kernel_oneHigh H.grading
+  exact composition_fixedBase_from_kernel H.grading
     (gradedSeminorm_monotone (fun j => H.level j) H.bond)
-    (shiftedCompositionKernel hH hT hD hγ hI) hb n R hR s
-  refine ⟨C, hC, fun travel U J x hx hxR => ?_⟩
-  exact hbound travel (fun k => J.D k x) x
-    (fullCompositionJet_zero_kernel hH hT hD hγ hI travel J x hx)
-    (fun k => fullCompositionJet_succ_kernels hH hT hD hγ hI travel J k x hx) hxR
+    (shiftedCompositionKernel hH hT hD hγ hI)
+    (fun travel x => circleShiftedChartComposeContinuousLinear hH hT hD hγ travel x.1 x.2)
+    (fun travel _ J => fullCompositionJet_zero_kernel hH hT hD hγ hI travel J)
+    (fun travel _ J => fullCompositionJet_succ_kernels hH hT hD hγ hI travel J)
+    (shiftedCompositionKernel_uniform_affine_bound hH hT hD hγ hI)
 
 /-- info: 'ContinuousFlexibility.Statements.n04NegativeChart_circleComposition_fixedBase_oneHigh'
 depends on axioms: [propext, Classical.choice, Quot.sound] -/

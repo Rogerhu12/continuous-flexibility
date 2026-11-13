@@ -92,6 +92,38 @@ private theorem normalizedFactor_sector_regular_bounds
     (fun z hz p hp => congrArg (fun x => normalizedSpeedFactor D S C i x p)
       (liftSectorParameter_eq_affine S C z))
 
+private theorem normalizedFactorSector_of_n01
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {oldBase oldLoss base loss : ℕ} {oldε ε : ℝ}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hN : N01Properties D T S C oldBase oldLoss oldε)
+    (hb : oldBase ≤ base) (hε : 0 < ε) (hε1 : ε ≤ 1) (hεold : ε ≤ oldε)
+    (hE : ∀ r ∈ Ioo D.a D.b, 1 ≤ T.E0 r)
+    (hloc : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (C.cell m))
+    (hχloc : tsupport D.chi ⊆ Ioo D.a D.b)
+    (hI : ∀ s : ℕ, ∃ B : ℝ, 1 ≤ B ∧
+      ∀ n : ℕ, n ≤ s → ∀ x : AnnularState S × ℝ,
+      pairGrading (stateGrading S) realGrading base x ≤ 1 →
+      ∀ R : ℝ, 1 ≤ R → pairGrading (stateGrading S) realGrading (s + loss) x ≤ R →
+        pairGrading (stateGrading S) realGrading (n + 4) x ≤
+          B * R ^ ((n : ℝ) / ((s : ℝ) + 1))) :
+    ∀ i : Fin 2, ∃ J : MixedJetRegularity (sectorNeighborhood S base ε ε) (annularOpen D)
+      (fun z => normalizedSpeedFactor D S C i (liftSectorParameter S C z)),
+      MixedPowerBounds (pairGrading (sectorGrading S) realGrading) 0 base loss
+        (sectorNeighborhood S base ε ε) (annularOpen D)
+        (fun q => T.H q.1 ^ (3 / 4 : ℝ)) (fun q => T.E0 q.1)
+        (fun z => normalizedSpeedFactor D S C i (liftSectorParameter S C z)) := by
+  have hA : N01PartA D T S C :=
+    ⟨hN.1, hN.2.2.1, hN.2.2.2.1, hN.2.2.2.2.1, hN.2.2.2.2.2.1⟩
+  have hB : N01PartB D S C oldBase oldε :=
+    ⟨hN.2.2.2.2.2.2.1, hN.2.2.2.2.2.2.2.1,
+      hN.2.2.2.2.2.2.2.2.1, hN.2.2.2.2.2.2.2.2.2.1,
+      hN.2.2.2.2.2.2.2.2.2.2.1⟩
+  intro i
+  obtain ⟨RF, hraw⟩ := n04NegativeGeometry_normalizedFactor_regular_bounds
+    hS hT hA hε hε1 (n01PartB_mono hB hb hεold) hE hloc hχloc hI i
+  exact normalizedFactor_sector_regular_bounds RF hraw
+
 namespace N04RealizationStart
 
 variable (W : N04RealizationStart)
@@ -114,23 +146,11 @@ private theorem negativeNormalizedFactor_of_interpolation
       ∀ R : ℝ, 1 ≤ R → pairGrading (stateGrading W.S) realGrading (s + loss) x ≤ R →
         pairGrading (stateGrading W.S) realGrading (n + 4) x ≤
           B * R ^ ((n : ℝ) / ((s : ℝ) + 1))) :
-    W.NegativeNormalizedFactorPowerBounds base loss := by
-  have h01 := W.through03.1.1
-  have hA : N01PartA W.D W.T W.S W.C :=
-    ⟨h01.1, h01.2.2.1, h01.2.2.2.1, h01.2.2.2.2.1, h01.2.2.2.2.2.1⟩
-  have hB : N01PartB W.D W.S W.C W.base W.ε :=
-    ⟨h01.2.2.2.2.2.2.1, h01.2.2.2.2.2.2.2.1,
-      h01.2.2.2.2.2.2.2.2.1, h01.2.2.2.2.2.2.2.2.2.1,
-      h01.2.2.2.2.2.2.2.2.2.2.1⟩
-  have hB' : N01PartB W.D W.S W.C base W.negativeRootParameterRadius :=
-    n01PartB_mono hB hb (min_le_left _ _)
-  intro i
-  obtain ⟨RF, hraw⟩ := n04NegativeGeometry_normalizedFactor_regular_bounds
-    (D := W.D) (T := W.T) (S := W.S) (C := W.C) W.hS W.hT hA
+    W.NegativeNormalizedFactorPowerBounds base loss :=
+  normalizedFactorSector_of_n01 W.hS W.hT W.through03.1.1 hb
     W.negativeRootParameterRadius_pos
-    ((min_le_right W.ε (1 / 2 : ℝ)).trans (by norm_num)) hB'
-    (fun r _ => W.floor r) W.primitive.1 W.primitive.2.1 hI i
-  exact normalizedFactor_sector_regular_bounds RF hraw
+    ((min_le_right W.ε (1 / 2 : ℝ)).trans (by norm_num)) (min_le_left _ _)
+    (fun r _ => W.floor r) W.primitive.1 W.primitive.2.1 hI
 
 /-- The retained start supplies all inputs to the existing N01 theorem.
 In particular, neither an estimate nor a derivative tower of a target
