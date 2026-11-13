@@ -48,7 +48,8 @@ theorem n04NegativeInverse_angleDefect_jet
     K.D n x v = (J.D n x v).2 := by
   let L : (E × PolarPoint) →L[ℝ] ℝ :=
     (ContinuousLinearMap.snd ℝ ℝ ℝ).comp (ContinuousLinearMap.snd ℝ E PolarPoint)
-  let T := smoothDirectionsLinearOn L J.open_domain
+  let T := smoothDirectionsOfJets J.open_domain (continuousLinearJets L)
+    (hasProjectiveJetsOn_continuousLinear L U)
   have hzero : T.D n x v = 0 := by
     change continuousLinearJets L n x v = 0
     cases n with
@@ -79,6 +80,27 @@ theorem n04NegativeInverse_angleDefect_jet
     (smoothDirections_postcompCLM J (ContinuousLinearMap.snd ℝ ℝ ℝ)).D n x v at he
   simpa only [hzero, add_zero, smoothDirections_postcompCLM_D_apply,
     ContinuousLinearMap.coe_snd'] using he
+
+/-- Scalar coordinate estimates are proved before the atlas is supplied. -/
+private theorem negativeInverse_radial_norm_le (p : PolarPoint) (span : ℝ)
+    {r : ℝ} (hr : r = p.1 / span) :
+    |r| ≤ (1 + |span⁻¹|) * ‖p‖ := by
+  rw [hr, abs_div]
+  have hp : |p.1| ≤ ‖p‖ := by
+    simpa only [Real.norm_eq_abs] using norm_fst_le p
+  calc
+    _ = |span⁻¹| * |p.1| := by rw [abs_inv, div_eq_mul_inv, mul_comm]
+    _ ≤ |span⁻¹| * ‖p‖ := mul_le_mul_of_nonneg_left hp (abs_nonneg _)
+    _ ≤ _ := mul_le_mul_of_nonneg_right (by linarith) (norm_nonneg p)
+
+private theorem negativeInverse_angular_norm_le (p : PolarPoint) (span : ℝ)
+    {r : ℝ} (hr : r = p.2) :
+    |r| ≤ (1 + |span⁻¹|) * ‖p‖ := by
+  rw [hr]
+  have hp : |p.2| ≤ ‖p‖ := by
+    simpa only [Real.norm_eq_abs] using norm_snd_le p
+  exact hp.trans (le_mul_of_one_le_left (norm_nonneg p)
+    (le_add_of_nonneg_right (abs_nonneg _)))
 
 attribute [local instance]
   n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
@@ -142,24 +164,14 @@ theorem negativeInverseAtom_positiveJoint_bound
     |K.D n x v| ≤ (1 + |((G.V η).physicalRight m - (G.V η).physicalLeft m)⁻¹|) *
       ‖J.D n x v‖ := by
   have hn : 0 < n := by have hs := w.arity_sum; omega
-  have hnorm := norm_nonneg (J.D n x v)
   cases a <;> simp only [atomIsNegativeInverse] at ha
   · have he := n04NegativeInverse_affineRadial_jet J ((G.V η).physicalLeft m)
         ((G.V η).physicalRight m - (G.V η).physicalLeft m) K hn hx v
-    rw [he, abs_div]
-    have hp : |(J.D n x v).1| ≤ ‖J.D n x v‖ := by
-      simpa only [Real.norm_eq_abs] using norm_fst_le (J.D n x v)
-    calc
-      _ = |((G.V η).physicalRight m - (G.V η).physicalLeft m)⁻¹| * |(J.D n x v).1| := by
-        rw [abs_inv, div_eq_mul_inv, mul_comm]
-      _ ≤ |((G.V η).physicalRight m - (G.V η).physicalLeft m)⁻¹| * ‖J.D n x v‖ :=
-        mul_le_mul_of_nonneg_left hp (abs_nonneg _)
-      _ ≤ _ := mul_le_mul_of_nonneg_right (le_add_of_nonneg_left zero_le_one) hnorm
+    exact negativeInverse_radial_norm_le (J.D n x v)
+      ((G.V η).physicalRight m - (G.V η).physicalLeft m) he
   · have he := n04NegativeInverse_angleDefect_jet J K w hκ hx v hspatial
-    rw [he]
-    have hp : |(J.D n x v).2| ≤ ‖J.D n x v‖ := by
-      simpa only [Real.norm_eq_abs] using norm_snd_le (J.D n x v)
-    exact hp.trans (le_mul_of_one_le_left hnorm (le_add_of_nonneg_right (abs_nonneg _)))
+    exact negativeInverse_angular_norm_le (J.D n x v)
+      ((G.V η).physicalRight m - (G.V η).physicalLeft m) he
 
 end N04RealizationGauge
 end ContinuousFlexibility.Analysis
