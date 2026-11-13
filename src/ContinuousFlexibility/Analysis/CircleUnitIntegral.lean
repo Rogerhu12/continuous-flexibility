@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.ProjectiveUnitIntegral
 import ContinuousFlexibility.Analysis.CircleJetEvaluation
+import ContinuousFlexibility.Analysis.CircleModelRealization
 
 /-!
 # Parameter integration and the actual circle decoder
