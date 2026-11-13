@@ -85,7 +85,7 @@ def n04Realization_positiveAngularTaylor_jointDirections
     apply (circleAffineLiftJointDirections hS hH KG (fun _ => 0) m).congr
     intro p hp
     rw [hG p.1 hp.1]
-    simp only [circleSingleComponentField, if_pos rfl]
+    simp only [circleSingleComponentField, ite_true]
     dsimp only [φ]
     ring
   let P : (E × PolarPoint) →L[ℝ] E := ContinuousLinearMap.fst ℝ E PolarPoint
