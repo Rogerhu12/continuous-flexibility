@@ -38,6 +38,25 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
       deriv (C.minusFlow (liftSectorParameter S C z) m r) θ ≤ 3 / 2)
   (l h : ℕ → ℝ) (hl : ∀ m, C.left m < l m) (hh : ∀ m, h m < C.right m)
 
+include hN hl hh in
+private theorem n04PulledFields_actualAngular_selectorCover
+    (m : ℕ) (r : ℝ) (hr : r ∈ Ioo (l m) (h m)) :
+    ∃ i : {s : ℕ → ℝ // ∀ m, s m ∈ Icc (C.left m) (C.right m)}, i.val m = r :=
+  hN.closedRadiusSelector_cover m r
+    ⟨((hl m).trans hr.1).le, (hr.2.trans (hh m)).le⟩
+
+include hN hS hT in
+private theorem n04PulledFields_actualAngular_inverseSlope_decode
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m))
+    (x : StateDirections S × ℝ) (hx : x ∈ sectorNeighborhood S base ε ε)
+    (m : ℕ) (θ : ℝ) :
+    returnFlowInverseSlope S C (liftSectorParameter S C x) m (rsel m, θ) =
+      1 + (S.circle (3 / 4 : ℝ)).decode
+        (hN.selectorInverseSlopeCircle hS hT rsel hrsel x) m θ :=
+  (eq_add_of_sub_eq
+    (hN.selectorInverseSlopeCircle_decode hS hT rsel hrsel x hx m θ).symm).trans
+    (add_comm _ _)
+
 include hN hS hT hflow hl hh in
 /-- The old inverse slope has a common low order before all parameter
 prefixes. Its affine constant and bounded sample height are absorbed
@@ -52,27 +71,24 @@ theorem N01Properties.n04PulledFields_returnFlowInverseSlope_angular_growth
     ∃ B : ℕ, ∀ K : ℕ, ∃ highLoss shift : ℕ,
       N04PulledFieldsAngularPowerGrowth (pairGrading (sectorGrading S) realGrading)
         W (fun _ => 1) J K B highLoss shift := by
-  let H := S.circle (3 / 4 : ℝ)
-  let I := {s : ℕ → ℝ // ∀ m, s m ∈ Icc (C.left m) (C.right m)}
-  let rsel : I → ℕ → ℝ := Subtype.val
-  have hrsel (i : I) (m : ℕ) : rsel i m ∈ Icc (C.left m) (C.right m) := i.property m
-  have hcover (m : ℕ) (r : ℝ) (hr : r ∈ Ioo (l m) (h m)) : ∃ i : I, rsel i m = r :=
-    hN.closedRadiusSelector_cover m r ⟨((hl m).trans hr.1).le, (hr.2.trans (hh m)).le⟩
-  let g : I → (StateDirections S × ℝ) → H.Space :=
-    fun i => hN.selectorInverseSlopeCircle hS hT (rsel i) (hrsel i)
-  have hg : N04PulledFieldsFixedBaseFamily (pairGrading (sectorGrading S) realGrading)
-      H.grading (sectorNeighborhood S base ε ε) g :=
-    hN.n04PulledFields_fixedBase_selectorInverseSlopeCircle hS hT hflow rsel hrsel
-  apply hg.realized_strip_angular_power_add_const (sectorPairGrading_monotone S)
+  exact N04PulledFieldsFixedBaseFamily.realized_strip_angular_power_add_const
+    (I := {s : ℕ → ℝ // ∀ m, s m ∈ Icc (C.left m) (C.right m)})
+    (E := StateDirections S × ℝ) (T := T) (γ := (3 / 4 : ℝ))
+    (H := S.circle (3 / 4 : ℝ))
+    (U := sectorNeighborhood S base ε ε)
+    (p := pairGrading (sectorGrading S) realGrading)
+    (g := fun i => hN.selectorInverseSlopeCircle hS hT i.val i.property)
+    (f := fun m (x : (StateDirections S × ℝ) × PolarPoint) =>
+      returnFlowInverseSlope S C (liftSectorParameter S C x.1) m x.2)
+    (hN.n04PulledFields_fixedBase_selectorInverseSlopeCircle hS hT hflow
+      (fun i => i.val) (fun i => i.property))
+    (sectorPairGrading_monotone S)
     (n04PulledFields_actualAngular_parameterInterpolation hS) (hS.2.1 (3 / 4 : ℝ))
     ((material_circle_sample_weights_pos hT hN.1.1).2)
-    KH hKH hheight l h rsel hcover J 1 _ W
-  intro i m _hr x hx θ
-  have hd : H.decode (g i x) m θ =
-      returnFlowInverseSlope S C (liftSectorParameter S C x) m (rsel i m, θ) - 1 :=
-    hN.selectorInverseSlopeCircle_decode hS hT (rsel i) (hrsel i) x hx m θ
-  rw [hd]
-  ring
+    KH hKH hheight l h (fun i => i.val)
+    (n04PulledFields_actualAngular_selectorCover hN l h hl hh) J 1
+    (fun i m _hr x hx θ => n04PulledFields_actualAngular_inverseSlope_decode
+      hN hS hT i.val i.property x hx m θ) W
 
 include hN hS hT hflow hl hh in
 /-- The actual residual-substituted displacement retains its full

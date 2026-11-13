@@ -22,6 +22,14 @@ local instance n04PulledFieldsCoefficientDifferenceStateSMul (S : PhysicalSpaces
 
 set_option backward.isDefEq.respectTransparency false
 
+private theorem n04PulledFields_differenceJet_reference_sub
+    {current original error reference originalRef : ℝ} (k : ℕ)
+    (hjet : current = original - error) (href : reference = originalRef) :
+    current - (if k = 0 then reference else 0) =
+      (original - (if k = 0 then originalRef else 0)) - error := by
+  rw [hjet, href]
+  ring
+
 /-- Subtracting the actual reference leaves the original reference
 difference minus the full actual correction jet, at every order. -/
 theorem n04PulledFields_startCoefficient_differenceJet
@@ -53,7 +61,6 @@ theorem n04PulledFields_startCoefficient_differenceJet
     k a b z hz y hy v
   have href := mixedDerivative_congr_on_open (isOpen_Ioo.prod isOpen_univ)
     (n04PulledFields_correctedCoefficient_reference_eq W i) a b hy
-  rw [hjet, href]
-  ring
+  exact n04PulledFields_differenceJet_reference_sub k hjet href
 
 end ContinuousFlexibility.Analysis
