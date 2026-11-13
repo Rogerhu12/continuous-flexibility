@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds
 import ContinuousFlexibility.Analysis.TameUniformSmoothFamily
+import ContinuousFlexibility.Analysis.N01cStateSeminorms
 
 /-!
 # Finite assembly with a common low order
@@ -35,7 +36,8 @@ theorem N04FixedBaseSmoothFamilyOn.uniform
     UniformSmoothFamilyOn p q U f := by
   obtain ⟨J, B, hb⟩ := hf
   refine ⟨J, fun n => ?_⟩
-  apply uniformFamilyLowGrowthOn_of_oneHigh
+  apply uniformFamilyLowGrowthOn_of_oneHigh (p := p) (q := q) (U := U)
+    (fun i x v => (J i).D n x v)
   obtain ⟨L, hL⟩ := hb n
   exact ⟨B, L, hL⟩
 

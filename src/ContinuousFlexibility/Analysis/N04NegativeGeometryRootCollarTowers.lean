@@ -36,42 +36,49 @@ abbrev referenceSpeed (p : PolarPoint) : ℝ :=
 abbrev coefficientDifference (z : AnnularState W.S × ℝ) (p : PolarPoint) : PolarPoint :=
   (B.drift z p, B.speed z p - B.referenceSpeed p)
 
+/-- The spatial affine pullback is proved with its source family opaque,
+so specialization does not unfold the selected physical fields. -/
+private def jointRootShift
+    {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+    [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
+    {U : Set X} {Ω V : Set PolarPoint} {f : X × PolarPoint → PolarPoint}
+    (hU : IsOpen U) (hV : IsOpen V) (r σ : ℝ)
+    (hm : MapsTo (rootProfileShift r σ) V Ω)
+    (J : SmoothDirections (U ×ˢ Ω) f) :
+    SmoothDirections (U ×ˢ V) (fun x => f (x.1, rootProfileShift r σ x.2)) := by
+  let Q : PolarPoint →L[ℝ] PolarPoint :=
+    (σ • ContinuousLinearMap.fst ℝ ℝ ℝ).prod (ContinuousLinearMap.snd ℝ ℝ ℝ)
+  let P : (X × PolarPoint) →L[ℝ] X × PolarPoint :=
+    (ContinuousLinearMap.fst ℝ X PolarPoint).prod
+      (Q.comp (ContinuousLinearMap.snd ℝ X PolarPoint))
+  let c : X × PolarPoint := (0, (r, 0))
+  have he (x : X × PolarPoint) : c + P x = (x.1, rootProfileShift r σ x.2) := by
+    simp only [c, P, Q, rootProfileShift, ContinuousLinearMap.prod_apply,
+      ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
+      ContinuousLinearMap.coe_snd', smul_apply, smul_eq_mul, Prod.mk_add_mk, zero_add]
+  have hmap : MapsTo (fun x => c + P x) (U ×ˢ V) (U ×ˢ Ω) := by
+    intro x hx
+    change c + P x ∈ _
+    rw [he x]
+    exact ⟨hx.1, hm hx.2⟩
+  apply (J.compAffine P c (hU.prod hV) hmap).congrOn
+  intro x hx
+  exact congrArg f (he x)
+
 /-- Both coordinates are actual physical coefficients at the shifted
 point, with the entire open collar retained. -/
 def physicalFieldsJointTower :
     SmoothDirections (W.negativeRootParameterDomain ×ˢ B.strip)
       (fun x : (StateDirections W.S × ℝ) × PolarPoint =>
         n06PhysicalRootFields W.D W.S W.C (liftSectorParameter W.S W.C x.1)
-          (rootProfileShift B.root B.orientation x.2)) := by
-  let J := W.rootProfileLocus_physicalFieldsJointTower B.physicalStrip
-    B.physicalStrip_isOpen (fun _ hp => (B.physicalStrip_properties hp).1)
-    (fun z _ hp => (B.physicalStrip_properties hp).2 z)
-  let Q : PolarPoint →L[ℝ] PolarPoint :=
-    (B.orientation • ContinuousLinearMap.fst ℝ ℝ ℝ).prod
-      (ContinuousLinearMap.snd ℝ ℝ ℝ)
-  let P : ((StateDirections W.S × ℝ) × PolarPoint) →L[ℝ]
-      (StateDirections W.S × ℝ) × PolarPoint :=
-    (ContinuousLinearMap.fst ℝ (StateDirections W.S × ℝ) PolarPoint).prod
-      (Q.comp (ContinuousLinearMap.snd ℝ (StateDirections W.S × ℝ) PolarPoint))
-  let c : (StateDirections W.S × ℝ) × PolarPoint := (0, (B.root, 0))
-  have hpoint (x : (StateDirections W.S × ℝ) × PolarPoint) :
-      c + P x = (x.1, rootProfileShift B.root B.orientation x.2) := by
-    simp only [c, P, Q, rootProfileShift, ContinuousLinearMap.prod_apply,
-      ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
-      ContinuousLinearMap.coe_snd', smul_apply, smul_eq_mul,
-      Prod.mk_add_mk, zero_add]
-  have hU : IsOpen (W.negativeRootParameterDomain ×ˢ B.strip) :=
+          (rootProfileShift B.root B.orientation x.2)) :=
+  jointRootShift
     (sectorNeighborhood_isOpen W.S W.base W.negativeRootParameterRadius
-      W.negativeRootParameterRadius).prod B.strip_isOpen
-  have hmap : MapsTo (fun x => c + P x)
-      (W.negativeRootParameterDomain ×ˢ B.strip)
-      (W.negativeRootParameterDomain ×ˢ B.physicalStrip) := by
-    intro x hx
-    rw [hpoint]
-    exact ⟨hx.1, B.shift_mem_physicalStrip hx.2⟩
-  apply (J.compAffine P c hU hmap).congrOn
-  intro x hx
-  rw [hpoint]
+      W.negativeRootParameterRadius) B.strip_isOpen B.root B.orientation
+    (fun _ hp => B.shift_mem_physicalStrip hp)
+    (W.rootProfileLocus_physicalFieldsJointTower B.physicalStrip
+      B.physicalStrip_isOpen (fun _ hp => (B.physicalStrip_properties hp).1)
+      (fun z _ hp => (B.physicalStrip_properties hp).2 z))
 
 def referenceSpeedJointTower :
     SmoothDirections (W.negativeRootParameterDomain ×ˢ B.strip)

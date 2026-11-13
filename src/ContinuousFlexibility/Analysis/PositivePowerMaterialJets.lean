@@ -23,7 +23,7 @@ open scoped Topology ContDiff
 
 set_option backward.isDefEq.respectTransparency false
 
-private theorem exists_smooth_positivePower_extension
+theorem exists_smooth_positivePower_extension
     {l u : ℝ} (hl : 0 < l) (hlu : l ≤ u) (a : ℝ) :
     ∃ Φ : ℝ → ℝ, ContDiff ℝ ∞ Φ ∧
       (∀ x ∈ Icc l u, Φ =ᶠ[𝓝 x] (fun y : ℝ => y ^ a)) ∧

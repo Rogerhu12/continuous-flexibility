@@ -80,11 +80,22 @@ private theorem shiftedCompositionKernel_decode (travel : ℕ → ℝ) (r k : �
     H.decode (shiftedCompositionKernel hH hT hD hγ hI travel r k e u v) m θ =
       iteratedDeriv r (H.decode u m) (θ + travel m + H.decode e m θ) *
         ∏ j, H.decode (v j) m θ := by
-  rw [shiftedCompositionKernel, coupledCircleKernel_decode_apply,
-    circleTranslationContinuousLinear_decode, iteratedDeriv_comp_add_const]
+  have hk := coupledCircleKernel_decode_apply hD hT hγ hH hI r k e
+    (circleTranslationContinuousLinear hH hT hD hγ travel u) v m θ
+  have ht := congrFun
+    (circleTranslationContinuousLinear_decode hH hT hD hγ travel u) m
+  have hj :
+      iteratedDeriv r
+          (H.decode (circleTranslationContinuousLinear hH hT hD hγ travel u) m)
+          (θ + H.decode e m θ) =
+        iteratedDeriv r (H.decode u m) ((θ + H.decode e m θ) + travel m) := by
+    rw [ht]
+    exact congrFun (iteratedDeriv_comp_add_const r (H.decode u m) (travel m)) _
   have heq : (θ + H.decode e m θ) + travel m = θ + travel m + H.decode e m θ := by ring
-  rw [heq]
+  exact hk.trans (congrArg (fun a => a * ∏ j, H.decode (v j) m θ)
+    (hj.trans (congrArg (iteratedDeriv r (H.decode u m)) heq)))
 
+include hI in
 private theorem fullCompositionJet_decode
     (travel : ℕ → ℝ) {U : Set (H.Space × H.Space)}
     (J : SmoothDirections U (fun x : H.Space × H.Space =>
@@ -166,6 +177,7 @@ private theorem shiftedCompositionKernel_uniform_affine_bound :
   exact (estimate.choose_spec.2 e he (τ u) v).trans
     ((mul_le_mul_of_nonneg_left hb hC).trans_eq (by ring))
 
+include hI in
 /-- The base and the additive loss are chosen before every parameter
 order, spatial order, travel selector and genuine tower. -/
 theorem n04NegativeChart_circleComposition_fixedBase_oneHigh :

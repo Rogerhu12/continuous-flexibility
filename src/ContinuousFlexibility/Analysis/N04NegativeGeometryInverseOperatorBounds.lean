@@ -13,6 +13,17 @@ open Set ContinuousFlexibility.Analysis
 local instance n04NegativeGeometryInverseBoundsCircleSMul (H : CircleModelData) :
     SMul ℝ (H.Space × H.Space) := Prod.instSMul
 
+private theorem inverseOperator_restrict_jet_eq
+    {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F] [T2Space F]
+    {U V : Set E} {f : E → F} (hU : IsOpen U) (hUV : U ⊆ V)
+    (J : SmoothDirections V f) (K : SmoothDirections U f)
+    (n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E) :
+    K.D n x v = J.D n x v :=
+  congrArg (fun A : E [×n]→L[ℝ] F => A v)
+    (K.unique (smoothDirectionsRestrict J hU hUV) n x hx)
+
 theorem n04NegativeGeometry_inverseOperator_fixedBase
     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : CircleModelData}
     (hH : IsCircleModel T γ H) (hT : IsMaterialData D T)
@@ -34,29 +45,26 @@ theorem n04NegativeGeometry_inverseOperator_fixedBase
       ∀ v : Fin n → H.Space × H.Space,
         H.grading s (K.D n y v) ≤
           C * tameJetSize (pairGrading H.grading H.grading) n s L B y v := by
-  let data := circlePositiveInverseComposeLinear_fixedBase_oneHigh
+  obtain ⟨B, hB⟩ := circlePositiveInverseComposeLinear_fixedBase_oneHigh
     (M := H) hD hT hγ hH hi JF (JP (fun _ => 0)) (a / 2) (half_pos ha)
-  let B : ℕ := data.choose
   refine ⟨B, fun n => ?_⟩
-  let orderData := data.choose_spec n
-  let L : ℕ := orderData.choose
+  obtain ⟨L, hL⟩ := hB n
   refine ⟨L, fun R _hR s => ?_⟩
-  let estimate := orderData.choose_spec (max R 1) (le_max_right _ _) s
-  refine ⟨estimate.choose, estimate.choose_spec.1, fun travel K y hy hlow v => ?_⟩
+  obtain ⟨C, hC, hbound⟩ := hL (max R 1) (le_max_right _ _) s
+  refine ⟨C, hC, fun travel K y hy hlow v => ?_⟩
   have hlower (m : ℕ) (θ : ℝ) :
       a / 2 ≤ deriv (circleAffineLift travel (H.decode y.1) 1 m) θ := by
     rw [circleAffineLift_deriv hH]
     exact interior_subset hy.1 m θ
-  let K' : SmoothDirections (circleUniformInverseDomain H a ×ˢ univ)
-      (fun y : H.Space × H.Space =>
-        circlePositiveInverseComposeLinear hH hT hD hγ travel y.1 y.2) :=
-    (JP travel).restrict ((circleUniformInverseDomain_isOpen H a).prod isOpen_univ)
-      (fun y hy => ⟨circleUniformInverseDomain_subset_positive ha hy.1, hy.2⟩)
-  have heq := congrArg (fun A : (H.Space × H.Space) [×n]→L[ℝ] H.Space => A v)
-    (K.unique K' n y hy)
-  have heq' : K.D n y v = (JP travel).D n y v := heq
-  rw [heq']
-  exact estimate.choose_spec.2 travel (JP travel) y hlower (hlow.trans (le_max_left _ _)) v
+  have hsub : circleUniformInverseDomain H a ×ˢ (univ : Set H.Space) ⊆
+      circlePositiveLiftDomain H ×ˢ univ :=
+    fun y hy => ⟨circleUniformInverseDomain_subset_positive ha hy.1, hy.2⟩
+  have heq : K.D n y v = (JP travel).D n y v :=
+    inverseOperator_restrict_jet_eq
+      ((circleUniformInverseDomain_isOpen H a).prod isOpen_univ) hsub
+      (JP travel) K n y hy v
+  exact (congrArg (H.grading s) heq).trans_le (hbound travel (JP travel) y hlower
+    (hlow.trans (le_max_left _ _)) v)
 
 
 end ContinuousFlexibility.Statements

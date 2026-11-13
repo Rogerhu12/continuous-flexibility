@@ -18,7 +18,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Analysis
 
-open Set Filter ContinuousFlexibility.Statements
+open Set Filter ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint
 open scoped ContDiff Topology
 
 theorem n04NegativeChart_controlOpticalFactor_support
@@ -51,7 +51,8 @@ theorem n04NegativeChart_controlOpticalFactor_contDiff
     have he' : controlOpticalFactor C m =ᶠ[𝓝 (0 : ℝ)] (0 : ℝ → ℝ) := by
       filter_upwards [he] with x hx
       change deriv (C.control m) x / x = 0
-      rw [hx, zero_div]
+      rw [hx]
+      simp only [Pi.zero_apply, zero_div]
     exact contDiffAt_const.congr_of_eventuallyEq he'
   · exact hd.contDiffAt.div contDiffAt_id hr
 

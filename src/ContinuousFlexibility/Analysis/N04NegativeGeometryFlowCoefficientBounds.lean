@@ -68,7 +68,7 @@ private theorem field_angle_eq_fderiv
     hF.comp (contDiff_const.prodMk contDiff_id)
   have hd := (hs.differentiable (by simp) q).hasFDerivAt.comp_hasDerivAt q.2
     ((hasDerivAt_const q.2 q.1).prodMk (hasDerivAt_id q.2))
-  simpa only [Function.comp_def] using hd.deriv
+  simpa only [Function.comp_def, id_eq] using hd.deriv
 
 private theorem field_angle_contDiff
     {F : ℝ × N04FlowPoint → ℝ} (hF : ContDiff ℝ ∞ F) (t : ℝ) :
@@ -96,7 +96,7 @@ private theorem field_angle_jet_le
   rw [he]
   have hb := n07b_norm_jet_directional_le isOpen_univ hs.contDiffOn
     (mem_univ q) j (((0, 0), 1) : N04FlowPoint)
-  simpa only [Prod.norm_def, norm_zero, Real.norm_one, max_self, max_eq_right zero_le_one,
+  simpa only [Prod.norm_def, norm_zero, norm_one, max_self, max_eq_right zero_le_one,
     one_mul] using hb
 
 /-- All spatial jets of the genuine angular linearization have one
@@ -153,7 +153,7 @@ theorem n04NegativeGeometry_flowCoefficient_weighted_prefix (Λ : ℝ) (N : ℕ)
   have hb := n04NegativeGeometry_weighted_composition_jet_le hΨ
     (field_angle_contDiff hF t) q k hB hρ houter hinner
   have hfac : (k.factorial : ℝ) ≤ (N.factorial : ℝ) := by
-    exact_mod_cast Nat.factorial_le_factorial hk
+    exact_mod_cast Nat.factorial_le hk
   calc
     _ ≤ (k.factorial : ℝ) * A * B ^ k * ρ ^ k := hb
     _ ≤ (N.factorial : ℝ) * A * B ^ N * ρ ^ k :=

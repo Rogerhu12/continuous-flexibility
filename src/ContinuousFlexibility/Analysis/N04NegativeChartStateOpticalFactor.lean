@@ -16,7 +16,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Analysis.N04RealizationStart
 
-open Set ContinuousFlexibility.Statements
+open Set ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint
 open scoped ContDiff
 
 variable (W : N04RealizationStart)

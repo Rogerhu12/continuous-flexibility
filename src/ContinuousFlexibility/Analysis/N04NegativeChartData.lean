@@ -77,12 +77,12 @@ def negativeChartMixedRegularity
 data, including order zero and the spatial period. Constants are chosen
 before the piece, so no compactness argument can hide a piece-dependent
 loss or discard the sampled height factor. -/
-theorem negativeChart_data_of_positive_bounds
+theorem negativeChart_atomData_of_positive_bounds
     (η : (G.W.S.height (3 / 4 : ℝ)).Space) (b : ℕ) (ε : ℝ)
     (hb : G.W.base ≤ b) (hεpos : 0 < ε) (hε : ε ≤ G.W.ε)
     (hεhalf : ε ≤ 1 / 2)
-    (hbound : ∀ a : Atom, atomIsNegativeChart a →
-      ∀ k : ℕ, 0 < k → ∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+    (a : Atom) (ha : atomIsNegativeChart a)
+    (hbound : ∀ k : ℕ, 0 < k → ∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
       ∀ m, G.Neg η m → ∀ q ∈ unitStrip, ∀ i j : ℕ, i + j ≤ s →
       ∀ J : SmoothDirections (sectorNeighborhood G.W.S b ε ε)
         (fun z => mixedDerivative i j (G.atomFamily η a z m) q),
@@ -90,7 +90,7 @@ theorem negativeChart_data_of_positive_bounds
         |J.D k z v| ≤ B * G.W.U.E0 (G.W.U.sample ((G.V η).cell m)) ^ B *
           G.W.U.H (G.W.U.sample ((G.V η).cell m)) ^ (3 / 4 : ℝ) *
             oneHighVariationWeight (parameterGrading G.W.S) b (s + loss) z v) :
-    G.NegativeAtomData η atomIsNegativeChart b ε := by
+    G.Data η (G.Neg η) b ε (G.atomFamily η a) (G.atomRef η a) := by
   have hsub := sectorNeighborhood_mono G.W.S hb hε hε
   have hz₀ : (0 : Parameter G.W.S) ∈ sectorNeighborhood G.W.S b ε ε := by
     constructor
@@ -104,7 +104,6 @@ theorem negativeChart_data_of_positive_bounds
       pairGrading_apply (E := StateDirections G.W.S) (F := ℝ)
         (sectorGrading G.W.S) realGrading b z]
     linarith only [hz.1, hz.2, hεhalf]
-  intro a ha
   let RF := G.negativeChartMixedRegularity η b ε hb hε
   apply CurrentJetDataOn.of_positive_towers hεpos (G.cost_nonneg η).2.2
     (G.cost_nonneg η).2.1 (fun m hm => RF m hm a ha)
@@ -117,11 +116,30 @@ theorem negativeChart_data_of_positive_bounds
     exact congrFun (congrFun (G.atomFamily_zero η a) m) q
   · exact hlow
   · intro k hk
-    obtain ⟨loss, hB⟩ := hbound a ha k hk
+    obtain ⟨loss, hB⟩ := hbound k hk
     refine ⟨loss, fun s => ?_⟩
     obtain ⟨B, hBpos, hBs⟩ := hB s
     exact ⟨B, hBpos, fun m hm q hq i j hij z hz v =>
       hBs m hm q hq i j hij ((RF m hm a ha).parameter i j q hq) z hz v⟩
+
+/-- The four positive-order atom bounds use the same sector and therefore
+assemble directly, before any auxiliary replacement. -/
+theorem negativeChart_data_of_positive_bounds
+    (η : (G.W.S.height (3 / 4 : ℝ)).Space) (b : ℕ) (ε : ℝ)
+    (hb : G.W.base ≤ b) (hεpos : 0 < ε) (hε : ε ≤ G.W.ε)
+    (hεhalf : ε ≤ 1 / 2)
+    (hbound : ∀ a : Atom, atomIsNegativeChart a →
+      ∀ k : ℕ, 0 < k → ∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+      ∀ m, G.Neg η m → ∀ q ∈ unitStrip, ∀ i j : ℕ, i + j ≤ s →
+      ∀ J : SmoothDirections (sectorNeighborhood G.W.S b ε ε)
+        (fun z => mixedDerivative i j (G.atomFamily η a z m) q),
+      ∀ z ∈ sectorNeighborhood G.W.S b ε ε, ∀ v : Fin k → Parameter G.W.S,
+        |J.D k z v| ≤ B * G.W.U.E0 (G.W.U.sample ((G.V η).cell m)) ^ B *
+          G.W.U.H (G.W.U.sample ((G.V η).cell m)) ^ (3 / 4 : ℝ) *
+            oneHighVariationWeight (parameterGrading G.W.S) b (s + loss) z v) :
+    G.NegativeAtomData η atomIsNegativeChart b ε :=
+  fun a ha => G.negativeChart_atomData_of_positive_bounds η b ε hb hεpos hε hεhalf
+    a ha (hbound a ha)
 
 /-- The same chart data works for every auxiliary source column. -/
 theorem negativeChartData_auxiliary

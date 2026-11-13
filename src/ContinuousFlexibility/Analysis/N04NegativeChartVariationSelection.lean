@@ -24,7 +24,7 @@ variable {E Q : Type} [NormedAddCommGroup E] [NormedSpace ℝ E]
 private theorem constant_one_jet_le (x : Q) (j : ℕ) :
     ‖iteratedFDeriv ℝ j (fun _ : Q => (1 : ℝ)) x‖ ≤ 1 := by
   cases j with
-  | zero => simp only [norm_iteratedFDeriv_zero, Real.norm_one, le_refl]
+  | zero => simp only [norm_iteratedFDeriv_zero, norm_one, le_refl]
   | succ j => simp only [iteratedFDeriv_succ_const, Pi.zero_apply, norm_zero, zero_le_one]
 
 private theorem constant_zero_jet_le (x : Q) (j : ℕ) {A : ℝ} (hA : 0 ≤ A) :

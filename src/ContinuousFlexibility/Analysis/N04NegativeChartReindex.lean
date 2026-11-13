@@ -68,7 +68,9 @@ theorem CurrentJetDataOn.of_reindex_selected
       SmoothDirections (sectorNeighborhood S base ε ε)
         (fun z => mixedDerivative i j (fun y => f z m y - f₀ m y) q.val) :=
     fun m hm i j q => (h.2.choose (index m hm) trivial i j q).congrOn
-      (fun z hz => by rw [hindex])
+      (fun z _ => congrArg
+        (fun n => mixedDerivative i j (fun y => f z n y - f₀ n y) q.val)
+        (hindex m hm))
   refine ⟨fun z hz m hm => ?_, J, ?_, ?_⟩
   · simpa only [hindex] using h.1 z hz (index m hm) trivial
   · have hv := h.2.choose_spec.1

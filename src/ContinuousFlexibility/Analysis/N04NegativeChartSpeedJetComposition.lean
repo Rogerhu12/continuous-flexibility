@@ -74,7 +74,7 @@ theorem n04NegativeChart_speedJet_along_flow_weighted_prefix
   have hb := n04NegativeGeometry_weighted_composition_jet_le hΦ hF x k hB hρ
     houter (fun j hj hjk => hinner j hj (hjk.trans hk))
   have hfac : (k.factorial : ℝ) ≤ (K.factorial : ℝ) := by
-    exact_mod_cast Nat.factorial_le_factorial hk
+    exact_mod_cast Nat.factorial_le hk
   calc
     _ ≤ (k.factorial : ℝ) * (A * ρ ^ D) * B ^ k * ρ ^ k := hb
     _ ≤ (K.factorial : ℝ) * (A * ρ ^ D) * B ^ K * ρ ^ k :=

@@ -29,8 +29,8 @@ private theorem iteratedFDeriv_graph
       graph n (iteratedFDeriv ℝ n g x) v := by
   have hid : iteratedFDeriv ℝ n (id : P → P) x =
       continuousLinearJets (ContinuousLinearMap.id ℝ P) n x :=
-    ((hasProjectiveJetsOn_continuousLinear (ContinuousLinearMap.id ℝ P) univ).
-      eq_iteratedFDeriv_finiteDimensional isOpen_univ n (mem_univ x)).symm
+    ((hasProjectiveJetsOn_continuousLinear (ContinuousLinearMap.id ℝ P) univ).eq_iteratedFDeriv_finiteDimensional
+      isOpen_univ n (mem_univ x)).symm
   change iteratedFDeriv ℝ n (fun q => ((id : P → P) q, g q)) x v = _
   rw [iteratedFDeriv_prodMk (contDiffAt_id : ContDiffAt ℝ ∞ (id : P → P) x)
     hg (by simp)]
@@ -90,8 +90,12 @@ private theorem finiteAffine_partition_zero
     have hj := smoothDirections_iteratedFDeriv_finiteAffine
       J (x, (0 : Y)) M k hpoint w
     simpa only [F, hM, map_zero, add_zero] using hj
-  have hcomp := congrArg (fun A : P [×n]→L[ℝ] Y => A v)
-    (iteratedFDeriv_comp (hΦ0.symm ▸ hF) hΦ (by simp : (n : ℕ∞ω) ≤ ∞))
+  have hformula : iteratedFDeriv ℝ n (F ∘ Φ) 0 =
+      ∑ c : _root_.OrderedFinpartition n,
+        c.compAlongOrderedFinpartition (iteratedFDeriv ℝ c.length F (Φ 0))
+          (fun i => iteratedFDeriv ℝ (c.partSize i) Φ 0) :=
+    iteratedFDeriv_comp (hΦ0.symm ▸ hF) hΦ (by simp : (n : ℕ∞ω) ≤ ∞)
+  have hcomp := congrArg (fun A : P [×n]→L[ℝ] Y => A v) hformula
   simp only [ContinuousMultilinearMap.sum_apply,
     OrderedFinpartition.compAlongOrderFinpartition_apply,
     OrderedFinpartition.applyOrderedFinpartition_apply, hΦ0, houter] at hcomp
@@ -142,8 +146,8 @@ theorem tower_finiteAffine
       let AJ : ∀ k : ℕ, P [×k]→L[ℝ] (E × Y) :=
         fun k => M.compContinuousMultilinearMap (graph k (iteratedFDeriv ℝ k g' 0))
       let BJ : ∀ k : ℕ, P [×k]→L[ℝ] (E × Y) := fun k =>
-        (graph k ((lower (fun j (_ : j < n + 1) => R j) k).value x)).
-          compContinuousLinearMap (fun _ => L)
+        (graph k ((lower (fun j (_ : j < n + 1) => R j) k).value x)).compContinuousLinearMap
+          (fun _ => L)
       have hAB (k : ℕ) (hk : k < n + 1) : AJ k = BJ k := by
         apply ContinuousMultilinearMap.ext
         intro w
@@ -159,7 +163,8 @@ theorem tower_finiteAffine
           J.D c.length (x, g x) (fun i => BJ (c.partSize i) (v ∘ c.emb i))) =
           forcing J g (fun j (_ : j < n + 1) => R j) x (fun i => L (v i)) := by
         rw [forcing_apply]
-        rfl
+        simp only [BJ, ContinuousMultilinearMap.compContinuousLinearMap_apply,
+          Function.comp_def]
       have hp : M (parameter (n + 1) v) = parameter (n + 1) (fun i => L (v i)) := by
         have hh := graph_natural L (n + 1)
           (0 : P [×(n + 1)]→L[ℝ] Y) (0 : E [×(n + 1)]→L[ℝ] Y) v rfl

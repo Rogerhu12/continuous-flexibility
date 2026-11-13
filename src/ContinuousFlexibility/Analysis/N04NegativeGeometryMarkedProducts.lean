@@ -36,7 +36,7 @@ theorem n04NegativeGeometry_weighted_finiteProduct_jet_le (L N : ℕ)
       simp only [Finset.univ_eq_empty, Finset.prod_empty]
     rw [he]
     cases k with
-    | zero => simp only [norm_iteratedFDeriv_zero, Real.norm_one, pow_zero,
+    | zero => simp only [norm_iteratedFDeriv_zero, norm_one, pow_zero,
         Finset.univ_eq_empty, Finset.prod_empty, one_mul, le_refl]
     | succ k =>
       simp only [iteratedFDeriv_succ_const, Pi.zero_apply, norm_zero, pow_zero,

@@ -44,11 +44,9 @@ def n04NegativeGeometry_glueComponentTowers
     refine ⟨hx.1, ⟨?_, ?_⟩, mem_univ _⟩
     · have hr := r.property.1
       have hp := hx.2.1.1
-      dsimp only [V] at hp
       linarith
     · have hr := r.property.2
       have hp := hx.2.1.2
-      dsimp only [V] at hp
       linarith
   have hcover : ∀ x ∈ U ×ˢ (Ioo l h ×ˢ (univ : Set ℝ)),
       ∃ r, x ∈ V r := by
