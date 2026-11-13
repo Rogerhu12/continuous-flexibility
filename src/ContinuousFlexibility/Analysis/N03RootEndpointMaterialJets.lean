@@ -45,6 +45,80 @@ private theorem physicalRoot_two_material_mono
       (add_nonneg zero_le_one (apply_nonneg _ _))
       (mul_nonneg hb (Real.rpow_nonneg (zero_le_one.trans hW) _))
 
+/-- The final envelope comparison for an arbitrary graded state space. All
+grading manipulations happen here, away from the actual state spaces. -/
+private theorem endpoint_jet_le_generic {E : Type} [AddCommGroup E] [Module ℝ E]
+    {p : ℕ → Seminorm ℝ E} (hp : Monotone p) (x : E)
+    {Y : Type*} [NormedAddCommGroup Y] [NormedSpace ℝ Y] {f : PolarPoint → Y}
+    {q q' : PolarPoint} (hq : q' = q) {σ : ℝ} (hσ : σ = 1 ∨ σ = -1)
+    {Aenv : ℕ → ℝ} {n l m : ℕ} {a b V W : ℝ}
+    (hb : ‖iteratedFDeriv ℝ n f q'‖ ≤ rootAffineJetEnvelope σ Aenv n * (1 + p (n + l) x))
+    (hAenv : Aenv n = a * V ^ a) (ha : 0 ≤ a) (hab : 2 * a ≤ b) (hV : 1 ≤ V)
+    (hVW : V ≤ W) (hlm : l ≤ m) :
+    ‖iteratedFDeriv ℝ n f q‖ ≤ b * W ^ b * (1 + p (n + m) x) := by
+  subst hq
+  simp only [rootAffineJetEnvelope_unit hσ, hAenv] at hb
+  exact hb.trans (physicalRoot_two_material_mono hp ha hab hV hVW hlm x)
+
+/-- The physical transfer at the root for an arbitrary graded state space.
+All grading manipulations happen here, away from the actual state spaces. -/
+private theorem endpoint_physical_generic {E : Type} [AddCommGroup E] [Module ℝ E]
+    {p : ℕ → Seminorm ℝ E} (hp : Monotone p) (x : E)
+    {r σ θ γ : ℝ} (hσ : σ = 1 ∨ σ = -1)
+    {Fc : PolarPoint → PolarPoint} {Hc : PolarPoint → ℝ}
+    {F' : PolarPoint → PolarPoint} {H' : PolarPoint → ℝ}
+    (hFregular : ContDiffAt ℝ ∞ (fun y => Fc (rootProfileShift r σ y)) (0, θ))
+    (hHregular : ContDiffAt ℝ ∞ (fun y => Hc (rootProfileShift r σ y)) (0, θ))
+    (hHpos : 0 < Hc (r, θ))
+    (hFjet : ∀ n, iteratedFDeriv ℝ n (fun y => Fc (rootProfileShift r σ y)) (0, θ) =
+      iteratedFDeriv ℝ n F' (0, θ))
+    (hHjet : ∀ n, iteratedFDeriv ℝ n (fun y => Hc (rootProfileShift r σ y) ^ γ) (0, θ) =
+      iteratedFDeriv ℝ n H' (0, θ))
+    {lossF lossH outLoss : ℕ} (hFout : lossF ≤ outLoss) (hHout : lossH ≤ outLoss)
+    {BF BH B : ℕ → ℝ} (hBF : ∀ n, 0 < BF n) (hBH : ∀ n, 0 < BH n)
+    (hFB : ∀ n, 2 * BF n ≤ B n) (hHB : ∀ n, 2 * BH n ≤ B n)
+    {VF VH W : ℝ} (hVF : 1 ≤ VF) (hVH : 1 ≤ VH) (hVFW : VF ≤ W) (hVHW : VH ≤ W)
+    (hchart : ∀ n, 1 ≤ n → ‖iteratedFDeriv ℝ n F' (0, θ)‖ ≤
+      BF n * VF ^ (BF n) * (1 + p (n + lossF) x))
+    (hheight : ∀ n, ‖iteratedFDeriv ℝ n H' (0, θ)‖ ≤
+      BH n * VH ^ (BH n) * (1 + p (n + lossH) x)) :
+    (∀ n : ℕ, 1 ≤ n → ‖iteratedFDeriv ℝ n Fc (r, θ)‖ ≤
+        B n * W ^ (B n) * (1 + p (n + outLoss) x)) ∧
+      ∀ n : ℕ, ‖iteratedFDeriv ℝ n (fun y => Hc y ^ γ) (r, θ)‖ ≤
+        B n * W ^ (B n) * (1 + p (n + outLoss) x) := by
+  have hσne : σ ≠ 0 := by rcases hσ with h | h <;> rw [h] <;> norm_num
+  have hpoint : rootProfileShift r σ (0, θ) = (r, θ) := by
+    simp only [rootProfileShift, mul_zero, add_zero]
+  let AF : ℕ → ℝ := fun n => BF n * VF ^ (BF n)
+  let AH : ℕ → ℝ := fun n => BH n * VH ^ (BH n)
+  have hAF (n : ℕ) : 0 ≤ AF n :=
+    mul_nonneg (hBF n).le (Real.rpow_nonneg (zero_le_one.trans hVF) _)
+  have hAH (n : ℕ) : 0 ≤ AH n :=
+    mul_nonneg (hBH n).le (Real.rpow_nonneg (zero_le_one.trans hVH) _)
+  have hFbound (n : ℕ) (hn : 1 ≤ n) :
+      ‖iteratedFDeriv ℝ n (fun y => Fc (rootProfileShift r σ y)) (0, θ)‖ ≤
+        AF n * (1 + p (n + lossF) x) := by
+    rw [hFjet n]
+    exact hchart n hn
+  have hHbound : PointwiseMaterialJetBound p lossH AH x
+      (fun y => Hc (rootProfileShift r σ y) ^ γ) (0, θ) := by
+    intro n
+    rw [hHjet n]
+    exact hheight n
+  have hHpow : ContDiffAt ℝ ∞ (fun y => Hc (rootProfileShift r σ y) ^ γ) (0, θ) :=
+    hHregular.rpow_const_of_ne (by
+      show Hc (rootProfileShift r σ (0, θ)) ≠ 0
+      rw [hpoint]
+      exact hHpos.ne')
+  have hFphysical := rootProfile_unscale_positiveJets (f := Fc) r σ hσne hAF hFregular hFbound
+  have hHphysical := PointwiseMaterialJetBound.unscale_rootProfile
+    (f := fun y => Hc y ^ γ) r σ hσne hAH hHpow hHbound
+  refine ⟨fun n hn => ?_, fun n => ?_⟩
+  · exact endpoint_jet_le_generic hp x hpoint hσ (hFphysical n hn) rfl (hBF n).le (hFB n)
+      hVF hVFW hFout
+  · exact endpoint_jet_le_generic hp x hpoint hσ (hHphysical n) rfl (hBH n).le (hHB n)
+      hVH hVHW hHout
+
 /-- Positive chart jets and every real height power have material bounds
 at both actual roots, with a common neighborhood and derivative loss.
 All material constants precede the component, actual host and state. -/
@@ -101,6 +175,7 @@ theorem n04b_actual_root_material_jets_of_component_optical
     { smooth_coefficients := fun z hz => hfield.smooth_coefficients z (hsub hz)
       periodic_coefficients := fun z hz => hfield.periodic_coefficients z (hsub hz)
       positive_a := fun z hz => hfield.positive_a z (hsub hz)
+      reference_flow := hfield.reference_flow
       negative_discriminant := fun z hz => hfield.negative_discriminant z (hsub hz) }
   refine (n01_rootChart_unit_positive_material_jets_of_component_optical
     hS hT hN'.1.1 hflow hK).elim ?_
@@ -197,20 +272,11 @@ theorem n04b_actual_root_material_jets_of_component_optical
     (n01RootLabel S C z m side)
   let V := rootCoefficientRadialFactor D.w g (stateProfile D S C z.1)
     (stateHeight D S C z) r σ
-  let AF : ℕ → ℝ := fun n => BF n * (CF * T.E0 (T.sample j)) ^ (BF n)
-  let AH : ℕ → ℝ := fun n => BH n * (CH * T.E0 (T.sample j)) ^ (BH n)
-  have hAF (n : ℕ) : 0 ≤ AF n :=
-    mul_nonneg (hBF n).le (Real.rpow_nonneg (zero_le_one.trans (hfloorF j)) _)
-  have hAH (n : ℕ) : 0 ≤ AH n :=
-    mul_nonneg (hBH n).le (Real.rpow_nonneg (zero_le_one.trans (hfloorH j)) _)
   have hWf : CF * T.E0 (T.sample j) ≤ C0 * T.E0 (T.sample j) :=
     mul_le_mul_of_nonneg_right (le_max_left _ _) (hE j).le
   have hWh : CH * T.E0 (T.sample j) ≤ C0 * T.E0 (T.sample j) :=
     mul_le_mul_of_nonneg_right (le_max_right _ _) (hE j).le
   have hσ : σ = 1 ∨ σ = -1 := n01ComponentRootOrientation_eq side
-  have hσne : σ ≠ 0 := by rcases hσ with h | h <;> rw [h] <;> norm_num
-  have hpoint : rootProfileShift r σ (0, θ) = (r, θ) := by
-    simp only [rootProfileShift, mul_zero, add_zero]
   have hidθ := hident θ
   have hclosed := hidθ.1
   have hFregular := hidθ.2.1
@@ -218,43 +284,16 @@ theorem n04b_actual_root_material_jets_of_component_optical
   have hHpos := hidθ.2.2.2.1
   have hFjet := hidθ.2.2.2.2.1
   have hHjet := hidθ.2.2.2.2.2
-  have hFbound (n : ℕ) (hn : 1 ≤ n) :
-      ‖iteratedFDeriv ℝ n (fun p => K.chart z i (rootProfileShift r σ p)) (0, θ)‖ ≤
-        AF n * (1 + pairGrading (stateGrading S) realGrading (n + lossF)
-          (z - (C.referenceState, 0))) := by
-    calc
-      _ = ‖iteratedFDeriv ℝ n (extendedRootEvenOddChart G) (0, θ)‖ :=
-        congrArg norm (hFjet n)
-      _ ≤ _ := hchart z hzroot hs hzF m j hhost hoptical side g hg hfactor R hR hstrip
-        δ hδ.ne' Θ hΘ θ n hn
-  have hHbound : PointwiseMaterialJetBound (pairGrading (stateGrading S) realGrading)
-      lossH AH (z - (C.referenceState, 0))
-      (fun p => K.height z i (rootProfileShift r σ p) ^ γ) (0, θ) := by
-    intro n
-    calc
-      _ = ‖iteratedFDeriv ℝ n (fun p => rootDividedHeight 1 V G p ^ γ) (0, θ)‖ :=
-        congrArg norm (hHjet γ n)
-      _ ≤ _ := hheight z hzroot hs hzH m j hhost hoptical side g hg hfactor R hR hstrip
-        δ hδ.ne' Θ hΘ θ n
-  have hHpow : ContDiffAt ℝ ∞
-      (fun p => K.height z i (rootProfileShift r σ p) ^ γ) (0, θ) :=
-    hHregular.rpow_const_of_ne (by simpa only [hpoint] using hHpos.ne')
-  have hFphysical := rootProfile_unscale_positiveJets r σ hσne hAF hFregular hFbound
-  have hHphysical := hHbound.unscale_rootProfile r σ hσne hAH hHpow
-  refine ⟨hclosed, hHpos, ?_, ?_⟩
-  · intro n hn
-    have ht : ‖iteratedFDeriv ℝ n (K.chart z i) (r, θ)‖ ≤
-        2 * AF n * (1 + pairGrading (stateGrading S) realGrading (n + lossF)
-          (z - (C.referenceState, 0))) := by
-      simpa only [rootAffineJetEnvelope_unit hσ AF, hpoint] using hFphysical n hn
-    exact ht.trans (physicalRoot_two_material_mono hp (hBF n).le (hFB n)
-      (hfloorF j) hWf (le_max_left lossF lossH) _)
-  · intro n
-    have ht : ‖iteratedFDeriv ℝ n (fun p => K.height z i p ^ γ) (r, θ)‖ ≤
-        2 * AH n * (1 + pairGrading (stateGrading S) realGrading (n + lossH)
-          (z - (C.referenceState, 0))) := by
-      simpa only [rootAffineJetEnvelope_unit hσ AH, hpoint] using hHphysical n
-    exact ht.trans (physicalRoot_two_material_mono hp (hBH n).le (hHB n)
-      (hfloorH j) hWh (le_max_right lossF lossH) _)
+  have hgen := endpoint_physical_generic (r := r) (σ := σ) (θ := θ) (γ := γ)
+    (Fc := K.chart z i) (Hc := K.height z i) (F' := extendedRootEvenOddChart G)
+    (H' := fun p => rootDividedHeight 1 V G p ^ γ)
+    hp (z - (C.referenceState, 0)) hσ hFregular hHregular hHpos hFjet (fun n => hHjet γ n)
+    (le_max_left lossF lossH) (le_max_right lossF lossH) hBF hBH hFB hHB
+    (hfloorF j) (hfloorH j) hWf hWh
+    (fun n hn => hchart z hzroot hs hzF m j hhost hoptical side g hg hfactor R hR hstrip
+      δ hδ.ne' Θ hΘ θ n hn)
+    (fun n => hheight z hzroot hs hzH m j hhost hoptical side g hg hfactor R hR hstrip
+      δ hδ.ne' Θ hΘ θ n)
+  exact ⟨hclosed, hHpos, hgen.1, hgen.2⟩
 
 end ContinuousFlexibility.Analysis
