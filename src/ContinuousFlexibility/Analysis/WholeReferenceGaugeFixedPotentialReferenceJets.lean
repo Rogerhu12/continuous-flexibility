@@ -142,7 +142,7 @@ theorem n04WholeReferenceGauge_positive_potentialReferenceJets_fixedFamily
         have hp' : p + (0, Real.pi) ∈ unitStrip := by
           refine ⟨?_, mem_univ _⟩
           change 0 < p.1 + 0 ∧ p.1 + 0 < 1
-          simpa only [add_zero] using hp.1
+          simpa only [add_zero, Set.mem_Ioo] using hp.1
         calc
           _ = f (p + (0, Real.pi)).1 := hEq hp'
           _ = f p.1 := by simp only [Prod.add_def, add_zero]

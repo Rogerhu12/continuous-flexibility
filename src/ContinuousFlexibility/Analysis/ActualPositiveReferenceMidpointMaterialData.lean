@@ -120,7 +120,7 @@ theorem n04Coordinates_retained_positive_reference_midpoint_material_data
         cases side
         · exact (ne_of_gt hc.1) (by simpa only [Bool.false_eq_true, ↓reduceIte] using hamb)
         · exact (ne_of_lt hc.2) (by simpa only [↓reduceIte] using hamb)
-    | some m => exact ⟨m, ho⟩
+    | some m => exact ⟨m, rfl⟩
   have hend : n04PositiveEndpoint i side = (if side then C.left m else C.right m) := by
     simpa only [hm] using (src side).property
   have hs := hsample i side m (C.cell m) j (hhost m) hend hmid

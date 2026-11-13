@@ -24,6 +24,14 @@ open scoped ContDiff BigOperators
 
 set_option backward.isDefEq.respectTransparency false
 
+/-- The reference displacement is zero, so its grading factor is one. The
+grading is an arbitrary one here, away from the actual state spaces. -/
+private theorem le_of_reference_grading_bound {E : Type} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (x : E) (k : ℕ) {L c : ℝ}
+    (h : L ≤ c * (1 + p k (x - x))) : L ≤ c := by
+  rw [sub_self, map_zero, add_zero, mul_one] at h
+  exact h
+
 /-- One material base precedes the finite order. The resulting numerical
 envelope precedes every component, original host and root orientation.
 It controls exactly the raw radial data used by reference interpolation. -/
@@ -88,13 +96,13 @@ theorem n04Coordinates_actual_reference_root_finite_material_data
     reference_mem_stateNeighborhood S C newBase hη
   have hsref : stateSector S z₀.1 := n04b_referenceState_sector hN.1.1.2.2.1
   have hD := n04b_profileGeometry_of_through03 hN
-  obtain ⟨W₀, hW₀⟩ := (isCompact_Icc : IsCompact (Icc D.a D.b))
-    .exists_bound_of_continuousOn hD.2.2.1.1.continuous.continuousOn
+  obtain ⟨W₀, hW₀⟩ := IsCompact.exists_bound_of_continuousOn
+    (isCompact_Icc : IsCompact (Icc D.a D.b)) hD.2.2.1.1.continuous.continuousOn
   let V : ℝ := max W₀ 1
   have hV : 0 ≤ V := zero_le_one.trans (le_max_right _ _)
-  have hwbound (r : ℝ) (hr : r ∈ Icc D.a D.b) : D.w r ≤ V :=
-    (le_abs_self _).trans ((by simpa only [Real.norm_eq_abs] using hW₀ r hr).trans
-      (le_max_left _ _))
+  have hwbound (r : ℝ) (hr : r ∈ Icc D.a D.b) : D.w r ≤ V := by
+    have h1 : |D.w r| ≤ W₀ := by simpa only [Real.norm_eq_abs] using hW₀ r hr
+    exact (le_abs_self _).trans (h1.trans (le_max_left _ _))
   refine ⟨C0, hC0, hfloor, ?_⟩
   intro N
   let J : ℝ := ∑ n ∈ Finset.range (N + 1), A n
@@ -132,25 +140,29 @@ theorem n04Coordinates_actual_reference_root_finite_material_data
   have hjq := hjetQ z₀ href hsref m j hhost hoptical side 0
   have hFbound (n : ℕ) (hn : 1 ≤ n) :
       ‖iteratedFDeriv ℝ n (K.chart z₀ k) (c, 0)‖ ≤ A n * W ^ (A n) := by
-    simpa only [n04bWithInteriorDivision, n01ComponentRoot, hi, z₀, sub_self,
-      map_zero, add_zero, mul_one] using hja.2.2.1 n hn
+    have h := le_of_reference_grading_bound (pairGrading (stateGrading S) realGrading)
+      z₀ (n + outLoss) (hja.2.2.1 n hn)
+    simpa only [n04bWithInteriorDivision, n01ComponentRoot, hi] using h
   have hHbound (n : ℕ) :
       ‖iteratedFDeriv ℝ n (K.height z₀ k) (c, 0)‖ ≤ A n * W ^ (A n) := by
-    simpa only [n04bWithInteriorDivision, n01ComponentRoot, hi, z₀, sub_self,
-      map_zero, add_zero, mul_one, Real.rpow_one] using hja.2.2.2 n
+    have h := le_of_reference_grading_bound (pairGrading (stateGrading S) realGrading)
+      z₀ (n + outLoss) (hja.2.2.2 n)
+    simpa only [n04bWithInteriorDivision, n01ComponentRoot, hi, Real.rpow_one] using h
   have hroot := n04Coordinates_actual_reference_negative_endpoint_data hT hS hN hfield e m side
   have hopen := n04Coordinates_actual_reference_negative_radial_fields hT hS hN hfield e m side
   have hHpos : 0 < K.height z₀ k (c, 0) := (hroot.1 0).2.2.2.1
   have hHinv : (K.height z₀ k (c, 0))⁻¹ ≤ I 0 * W ^ (I 0) := by
     have h0 : |K.height z₀ k (c, 0)|⁻¹ ≤ I 0 * W ^ (I 0) := by
-      simpa only [n04bWithInteriorDivision, n01ComponentRoot, hi, z₀, sub_self,
-        map_zero, add_zero, mul_one, norm_iteratedFDeriv_zero, Real.rpow_neg_one,
-        norm_inv, Real.norm_eq_abs] using hji.2.2.2 0
+      have h := le_of_reference_grading_bound (pairGrading (stateGrading S) realGrading)
+        z₀ (0 + outLoss) (hji.2.2.2 0)
+      simpa only [n04bWithInteriorDivision, n01ComponentRoot, hi, norm_iteratedFDeriv_zero,
+        Real.rpow_neg_one, norm_inv, Real.norm_eq_abs] using h
     rwa [abs_of_pos hHpos] at h0
   have hHsquare : K.height z₀ k (c, 0) ^ 2 ≤ Q 0 * W ^ (Q 0) := by
-    simpa only [n04bWithInteriorDivision, n01ComponentRoot, hi, z₀, sub_self,
-      map_zero, add_zero, mul_one, norm_iteratedFDeriv_zero, Real.rpow_two,
-      Real.norm_of_nonneg (sq_nonneg _)] using hjq.2.2.2 0
+    have h := le_of_reference_grading_bound (pairGrading (stateGrading S) realGrading)
+      z₀ (0 + outLoss) (hjq.2.2.2 0)
+    simpa only [n04bWithInteriorDivision, n01ComponentRoot, hi, norm_iteratedFDeriv_zero,
+      Real.rpow_two, Real.norm_of_nonneg (sq_nonneg _)] using h
   have hcD : c ∈ Icc D.a D.b := by
     have hc := (hN.1.1.2.2.2.1.1 m)
     cases side

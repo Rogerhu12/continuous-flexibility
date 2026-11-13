@@ -224,7 +224,7 @@ theorem n04Coordinates_retained_positive_reference_inverse_material_jets
   have hdercost : ∀ x, 0 < deriv Y x ∧ (deriv Y x)⁻¹ ≤ 2 * U := by
     have hc := positiveReferenceFiniteRadialJets_prescribed_costs n
       (κ := U⁻¹) (M := U) (U := U) (a := a) (b := b) (y := y) (h := h)
-      hlr (inv_pos.mpr hUpos) hUpos.le hU le_rfl (by simp only [inv_inv])
+      hlr (inv_pos.mpr hUpos) hUpos.le hU le_rfl (inv_inv U).le
       hinput.2.1 hinput.2.2.1
       (fun side => (hd side).1) (fun side => (hd side).2.1)
       (fun side => (hd side).2.2.1) (fun side => (hd side).2.2.2.1)
