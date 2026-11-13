@@ -18,6 +18,9 @@ namespace ContinuousFlexibility.Statements
 open Set Filter ContinuousFlexibility.Analysis
 open scoped BigOperators Topology
 
+local instance circleShiftedForwardFixedBasePairSMul (M : CircleModelData) :
+    SMul ℝ (M.Space × M.Space) := Prod.instSMul
+
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {M : CircleModelData}
   (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
   (hγ : 0 < γ) (hM : IsCircleModel T γ M) (hI : HasInterpolation M.grading)
