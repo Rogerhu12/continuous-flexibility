@@ -42,13 +42,15 @@ theorem n04NegativeGeometry_inverseOperator_fixedBase
       ∀ v : Fin n → H.Space × H.Space,
         H.grading s (K.D n y v) ≤
           C * tameJetSize (pairGrading H.grading H.grading) n s L B y v := by
-  obtain ⟨B, hB⟩ := circlePositiveInverseComposeLinear_fixedBase_oneHigh
+  let source := circlePositiveInverseComposeLinear_fixedBase_oneHigh
     (D := D) (T := T) (γ := γ) (M := H) hD hT hγ hH hi JF (JP (fun _ => 0)) (a / 2) (half_pos ha)
+  let B : ℕ := source.choose
   refine ⟨B, fun n => ?_⟩
-  obtain ⟨L, hL⟩ := hB n
+  let lossData := source.choose_spec n
+  let L : ℕ := lossData.choose
   refine ⟨L, fun R _hR s => ?_⟩
-  obtain ⟨C, hC, hb⟩ := hL (max R 1) (le_max_right _ _) s
-  refine ⟨C, hC, fun travel K y hy hlow v => ?_⟩
+  let bound := lossData.choose_spec (max R 1) (le_max_right _ _) s
+  refine ⟨bound.choose, bound.choose_spec.1, fun travel K y hy hlow v => ?_⟩
   have hlower (m : ℕ) (θ : ℝ) :
       a / 2 ≤ deriv (circleAffineLift travel (H.decode y.1) 1 m) θ := by
     rw [circleAffineLift_deriv hH]
@@ -61,7 +63,7 @@ theorem n04NegativeGeometry_inverseOperator_fixedBase
   have heq := congrArg (fun A : (H.Space × H.Space) [×n]→L[ℝ] H.Space => A v)
     (K.unique K' n y hy)
   have heq' : K.D n y v = (JP travel).D n y v := heq
-  rw [heq']
-  exact hb travel (JP travel) y hlower (hlow.trans (le_max_left _ _)) v
+  exact (congrArg (H.grading s) heq').trans_le
+    (bound.choose_spec.2 travel (JP travel) y hlower (hlow.trans (le_max_left _ _)) v)
 
 end ContinuousFlexibility.Statements

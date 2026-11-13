@@ -57,18 +57,22 @@ theorem N01Properties.n04NegativeGeometry_selectorInverseCircle_fixedBase_oneHig
     fun i => (hN.exists_endpointFlowCircle_smoothDirections hS hT i.val i.property).choose
   let P : ∀ i, SmoothDirections U (fun x => (f i x, f i x)) :=
     fun i => smoothDirectionsProd (J i) (J i)
-  obtain ⟨BJ, hBJ, hJ⟩ := hN.endpointFlowCircle_fixedBase_oneHigh hS hT
+  let source := hN.endpointFlowCircle_fixedBase_oneHigh hS hT
+  let BJ : ℕ := source.choose
   have hP : ∀ n : ℕ, ∃ L : ℕ, ∀ R : ℝ, 0 ≤ R → ∀ s : ℕ,
       ∃ K : ℝ, 0 ≤ K ∧ ∀ i x, x ∈ U → p BJ x ≤ R →
       ∀ v : Fin n → StateDirections S × ℝ,
         pairGrading H.grading H.grading s ((P i).D n x v) ≤
           K * tameJetSize p n s L BJ x v := by
     intro n
-    obtain ⟨L, hL⟩ := hJ n
+    let lossData := source.choose_spec.2 n
+    let L : ℕ := lossData.choose
     refine ⟨L, fun R hR s => ?_⟩
-    obtain ⟨K, hK, hb⟩ := hL R hR s
+    let bound := lossData.choose_spec R hR s
+    let K : ℝ := bound.choose
+    have hK : 0 ≤ K := bound.choose_spec.1
     refine ⟨K + K, add_nonneg hK hK, fun i x hx hlow v => ?_⟩
-    have h := hb i.val i.property (J i) x hx hlow v
+    have h := bound.choose_spec.2 i.val i.property (J i) x hx hlow v
     have hdiag : pairGrading H.grading H.grading s ((P i).D n x v) =
         H.grading s ((J i).D n x v) + H.grading s ((J i).D n x v) :=
       n04NegativeGeometry_diagonalTower_grading (J i) n s x v
@@ -83,15 +87,17 @@ theorem N01Properties.n04NegativeGeometry_selectorInverseCircle_fixedBase_oneHig
       (fun j => -opticalTravel D.w (C.left j) (i.val j)),
       hN.endpointFlowCircle_affineLift hS hT i.val i.property x hx]
     exact hflow x hx m (i.val m) (i.property m) θ
-  obtain ⟨B, hB, hbound⟩ := n04NegativeGeometry_circleInverse_fixedBase_oneHigh
+  let inverse := n04NegativeGeometry_circleInverse_fixedBase_oneHigh
     (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num)
     (hS.2.2.2.2.1 (3 / 4 : ℝ)).2.2 p hp hIp P BJ hP
     (fun i m => -opticalTravel D.w (C.left m) (i.val m)) (1 / 2) (by norm_num) hlower
-  refine ⟨B, hBJ.trans hB, fun n => ?_⟩
-  obtain ⟨L, hL⟩ := hbound n
+  let B : ℕ := inverse.choose
+  refine ⟨B, source.choose_spec.1.trans inverse.choose_spec.1, fun n => ?_⟩
+  let lossData := inverse.choose_spec.2 n
+  let L : ℕ := lossData.choose
   refine ⟨L, fun R hR s => ?_⟩
-  obtain ⟨K, hK, hb⟩ := hL R hR s
-  refine ⟨K, hK, fun rsel hrsel Jinv x hx hlow v => ?_⟩
+  let bound := lossData.choose_spec R hR s
+  refine ⟨bound.choose, bound.choose_spec.1, fun rsel hrsel Jinv x hx hlow v => ?_⟩
   let i : I := ⟨rsel, hrsel⟩
   let Jpositive : SmoothDirections U (fun x =>
       circlePositiveInverseComposeLinear (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num)
@@ -100,7 +106,7 @@ theorem N01Properties.n04NegativeGeometry_selectorInverseCircle_fixedBase_oneHig
       (fun x _ => by
         change -(-circlePositiveInverseComposeLinear _ _ _ _ _ _ _) = _
         exact neg_neg _)
-  have h := hb i Jpositive x hx hlow v
+  have h := bound.choose_spec.2 i Jpositive x hx hlow v
   change H.grading s (-Jinv.D n x v) ≤ _ at h
   simpa only [map_neg_eq_map] using h
 

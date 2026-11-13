@@ -128,30 +128,33 @@ theorem CurrentJetDataOn.negativeInverse_finiteFamily_sharpPrefix_power
     (fun m => hE m.val)
     (fun k m => parameterHeightWeight_nonneg (Real.rpow_nonneg (hH m.val) _) k) RF
     (fun a k => by
-      obtain ⟨L, hL⟩ := (h a).negativeInverse_fullTower hD hT (h₀ a) (hrefa a) hE k
-      refine ⟨L, fun s => ?_⟩
-      obtain ⟨B, hB, hb⟩ := hL s
-      exact ⟨B, hB, fun m q hq i j hij z hz v =>
-        hb m.val m.property q hq i j hij ((RF (a, m)).parameter i j q hq) z hz v⟩)
+      let data := (h a).negativeInverse_fullTower hD hT (h₀ a) (hrefa a) hE k
+      refine ⟨data.choose, fun s => ?_⟩
+      let bound := data.choose_spec s
+      exact ⟨bound.choose, bound.choose_spec.1, fun m q hq i j hij z hz v =>
+        bound.choose_spec.2 m.val m.property q hq i j hij
+          ((RF (a, m)).parameter i j q hq) z hz v⟩)
   let L : ℕ → ℕ := fun k => (ht k).choose
   have hb (k s : ℕ) := (ht k).choose_spec s
-  obtain ⟨b, hbase, hprefix⟩ := n04NegativeInverse_scalar_prefix_power
+  let prefix := n04NegativeInverse_scalar_prefix_power
     (parameterGrading S) hp hI base L
     (fun t : A × I => T.E0 (T.sample (cell t.2.val)))
     (fun k t => parameterHeightWeight (T.H (T.sample (cell t.2.val)) ^ (3 / 4 : ℝ)) k)
     (fun t => hE t.2.val)
     (fun k t => parameterHeightWeight_nonneg (Real.rpow_nonneg (hH t.2.val) _) k)
     (fun t z => f t.1 z t.2.val) RF hb
-  refine ⟨b, hbase, fun K => ?_⟩
-  obtain ⟨shift, hshiftOne, hshift⟩ := hprefix K
-  refine ⟨shift, hshiftOne, fun s => ?_⟩
-  obtain ⟨B, hB, hbound⟩ := hshift s
-  refine ⟨B, hB, ?_⟩
+  let b : ℕ := prefix.choose
+  refine ⟨b, prefix.choose_spec.1, fun K => ?_⟩
+  let shiftData := prefix.choose_spec.2 K
+  let shift : ℕ := shiftData.choose
+  refine ⟨shift, shiftData.choose_spec.1, fun s => ?_⟩
+  let bound := shiftData.choose_spec.2 s
+  refine ⟨bound.choose, bound.choose_spec.1, ?_⟩
   intro a k hk m hm q hq i j hij J z hz hlow v hv R hR hzR hvR
   have he := congrArg (fun M : (Parameter S) [×k]→L[ℝ] ℝ => M v)
     (J.unique ((RF (a, ⟨m, hm⟩)).parameter i j q hq) k z hz)
-  rw [he]
-  exact hbound k hk (a, ⟨m, hm⟩) q hq i j hij z hz hlow v hv R hR hzR hvR
+  exact (congrArg abs he).trans_le
+    (bound.choose_spec.2 k hk (a, ⟨m, hm⟩) q hq i j hij z hz hlow v hv R hR hzR hvR)
 
 end ContinuousFlexibility.Analysis
 
