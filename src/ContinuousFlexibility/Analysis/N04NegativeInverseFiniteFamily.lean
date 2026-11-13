@@ -136,16 +136,16 @@ theorem CurrentJetDataOn.negativeInverse_finiteFamily_sharpPrefix_power
           ((RF (a, m)).parameter i j q hq) z hz v⟩)
   let L : ℕ → ℕ := fun k => (ht k).choose
   have hb (k s : ℕ) := (ht k).choose_spec s
-  let prefix := n04NegativeInverse_scalar_prefix_power
+  let prefixData := n04NegativeInverse_scalar_prefix_power
     (parameterGrading S) hp hI base L
     (fun t : A × I => T.E0 (T.sample (cell t.2.val)))
     (fun k t => parameterHeightWeight (T.H (T.sample (cell t.2.val)) ^ (3 / 4 : ℝ)) k)
     (fun t => hE t.2.val)
     (fun k t => parameterHeightWeight_nonneg (Real.rpow_nonneg (hH t.2.val) _) k)
     (fun t z => f t.1 z t.2.val) RF hb
-  let b : ℕ := prefix.choose
-  refine ⟨b, prefix.choose_spec.1, fun K => ?_⟩
-  let shiftData := prefix.choose_spec.2 K
+  let b : ℕ := prefixData.choose
+  refine ⟨b, prefixData.choose_spec.1, fun K => ?_⟩
+  let shiftData := prefixData.choose_spec.2 K
   let shift : ℕ := shiftData.choose
   refine ⟨shift, shiftData.choose_spec.1, fun s => ?_⟩
   let bound := shiftData.choose_spec.2 s

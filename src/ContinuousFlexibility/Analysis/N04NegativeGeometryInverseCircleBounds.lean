@@ -76,17 +76,17 @@ theorem N01Properties.n04NegativeGeometry_selectorInverseCircle_fixedBase_oneHig
     have hdiag : pairGrading H.grading H.grading s ((P i).D n x v) =
         H.grading s ((J i).D n x v) + H.grading s ((J i).D n x v) :=
       n04NegativeGeometry_diagonalTower_grading (J i) n s x v
-    rw [hdiag]
-    simpa only [add_mul] using add_le_add h h
+    exact hdiag.trans_le ((add_le_add h h).trans_eq (add_mul K K _).symm)
   have hp : Monotone p := sectorPairGrading_monotone S
   have hIp : HasInterpolation (pairGrading realGrading p) :=
     n04NegativeGeometry_inverseBounds_parameterInterpolation hS
   have hlower (i : I) (x : StateDirections S × ℝ) (hx : x ∈ U) (m : ℕ) (θ : ℝ) :
       1 / 2 ≤ 1 + deriv (H.decode (f i x) m) θ := by
-    rw [← circleAffineLift_deriv (hS.2.1 (3 / 4 : ℝ))
-      (fun j => -opticalTravel D.w (C.left j) (i.val j)),
-      hN.endpointFlowCircle_affineLift hS hT i.val i.property x hx]
-    exact hflow x hx m (i.val m) (i.property m) θ
+    have he := congrArg (fun g : ℝ → ℝ => deriv g θ)
+      (congrFun (hN.endpointFlowCircle_affineLift hS hT i.val i.property x hx) m)
+    have hd := circleAffineLift_deriv (hS.2.1 (3 / 4 : ℝ))
+      (fun j => -opticalTravel D.w (C.left j) (i.val j)) (f i x) m θ
+    exact (hflow x hx m (i.val m) (i.property m) θ).trans_eq (he.symm.trans hd)
   let inverse := n04NegativeGeometry_circleInverse_fixedBase_oneHigh
     (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num)
     (hS.2.2.2.2.1 (3 / 4 : ℝ)).2.2 p hp hIp P BJ hP

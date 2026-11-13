@@ -70,16 +70,20 @@ theorem negativeInverse_atomFamily_purePrefix
     obtain ⟨B, hB, hb⟩ := G.negativeInverse_reference_geometry_bounds s
     exact ⟨B, hB, fun a m hm q hq i j hij =>
       hb 0 m hm (select a) (hselect a) q hq i j hij⟩
-  obtain ⟨low, hlow, hprefix⟩ :=
+  let prefixData :=
     CurrentJetDataOn.negativeInverse_finiteFamily_sharpPrefix_power
       G.W.radial.1 hU G.W.negativeInverse_parameterInterpolation h
       (fun a m hm =>
         (G.negativeInverse_reference_geometry_regular 0 m hm (select a) (hselect a)).1)
       href (G.cost_nonneg 0).2.2 (G.cost_nonneg 0).2.1
-  refine ⟨low, hlow, fun K => ?_⟩
-  obtain ⟨shift, hshift, hp⟩ := hprefix K
-  refine ⟨shift, hshift, fun s => ?_⟩
-  obtain ⟨C, hC, hb⟩ := hp s
+  let low : ℕ := prefixData.choose
+  refine ⟨low, prefixData.choose_spec.1, fun K => ?_⟩
+  let shiftData := prefixData.choose_spec.2 K
+  let shift : ℕ := shiftData.choose
+  refine ⟨shift, shiftData.choose_spec.1, fun s => ?_⟩
+  let bound := shiftData.choose_spec.2 s
+  let C : ℝ := bound.choose
+  have hC : 0 < C := bound.choose_spec.1
   obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack ((2 : ℝ) ^ s * C) C
   refine ⟨B, hB, ?_⟩
   intro a m hm J z hz hzlow q hq n w hwK hws v hvlow R hR hzR hvR hvphys hvstate hvspatial
@@ -102,7 +106,8 @@ theorem negativeInverse_atomFamily_purePrefix
     (parameterGrading G.W.S low)
     (parameterGrading G.W.S (low + s + shift * K + 1)) R z hz q hq w J major hmajor
     (fun k i j hk hij Q u hu huR =>
-      hb a k (hk.trans hwK) m hm q hq i j (hij.trans hws) Q z hz hzlow u hu R hR hzR huR)
+      bound.choose_spec.2 a k (hk.trans hwK) m hm q hq i j (hij.trans hws)
+        Q z hz hzlow u hu R hR hzR huR)
     v hvlow hvR hvphys hvstate hvspatial
   have htwo : (2 : ℝ) ^ w.angleArity ≤ (2 : ℝ) ^ s :=
     pow_le_pow_right₀ (by norm_num) hws
