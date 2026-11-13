@@ -61,7 +61,7 @@ def n04PositiveGeometry_boundaryMoving_directions
   let Q := smoothDirections_postcompCLM CP e.symm.toContinuousLinearMap
   exact Q.congr (fun p _ => e.symm_apply_apply (f (p.1, ψ p)))
 
-private theorem boundary_pure_unit_bound
+theorem n04PositiveGeometry_boundary_pure_unit_bound
     {n : ℕ} (w : StateAngleWord n) (A : (E × ℝ) [×n]→L[ℝ] F)
     (p q : Seminorm ℝ E) {R : ℝ} (hR : 0 ≤ R) {B : ℝ}
     (hbound : ∀ u : Fin n → E × ℝ, w.IsPure u →
@@ -164,7 +164,7 @@ theorem n04PositiveGeometry_boundaryMoving_saved_word_bound
         (hbox : ∀ i, p (a i).1 ≤ 1 ∧ q (a i).1 ≤ R ∧ ‖(a i).2‖ ≤ 1) :
         ‖JF.D j (x, ψ (x, θ)) a‖ ≤ M * parameterHeightWeight H u.stateArity *
           t ^ (u.angleArity + (shift + 1) * u.stateArity - 1) := by
-      apply boundary_pure_unit_bound u (JF.D j (x, ψ (x, θ))) p q hR ?_ a hpure hbox
+      apply n04PositiveGeometry_boundary_pure_unit_bound u (JF.D j (x, ψ (x, θ))) p q hR ?_ a hpure hbox
       intro b hb hbb
       exact (houter j u hu (hhorizon hjn u) b hb hbb).trans
         (mul_le_mul_of_nonneg_left (pow_le_pow_right₀ ht (hcost hj u))
@@ -176,7 +176,7 @@ theorem n04PositiveGeometry_boundaryMoving_saved_word_bound
         (hbox : ∀ i, p (a i).1 ≤ 1 ∧ q (a i).1 ≤ R ∧ ‖(a i).2‖ ≤ 1) :
         ‖Jψ.D j (x, θ) a‖ ≤ M * parameterHeightWeight H u.stateArity *
           t ^ (u.angleArity + (shift + 1) * u.stateArity - 1) := by
-      apply boundary_pure_unit_bound u (Jψ.D j (x, θ)) p q hR ?_ a hpure hbox
+      apply n04PositiveGeometry_boundary_pure_unit_bound u (Jψ.D j (x, θ)) p q hR ?_ a hpure hbox
       intro b hb hbb
       exact (hinner j hj u hu (hhorizon hjn u) b hb hbb).trans
         (mul_le_mul_of_nonneg_left (pow_le_pow_right₀ ht (hcost hj u))
