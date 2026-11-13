@@ -40,8 +40,8 @@ private theorem circle_angular_stateBudget_add_const
     {p : ℕ → Seminorm ℝ E} {U : Set E} {g : I → E → H.Space}
     (hg : N04FixedBaseSmoothFamilyOn p H.grading U g)
     (hp : Monotone p) (hIp : HasInterpolation p) (hH : IsCircleModel T γ H)
-    (hpos : ∀ m, 0 < T.H (T.sample m)) (KH : ℝ) (hKH : 0 ≤ KH)
-    (hheight : ∀ m, T.H (T.sample m) ^ γ ≤ KH)
+    (hpos : ∀ m, 0 < T.H (T.sample m))
+    (hheightBound : ∃ KH : ℝ, 0 ≤ KH ∧ ∀ m, T.H (T.sample m) ^ γ ≤ KH)
     (l h : ℕ → ℝ) (rsel : I → ℕ → ℝ)
     (hcover : ∀ m r, r ∈ Ioo (l m) (h m) → ∃ i, rsel i m = r)
     {f : ℕ → E × PolarPoint → ℝ}
@@ -50,6 +50,7 @@ private theorem circle_angular_stateBudget_add_const
     (heq : ∀ i m, rsel i m ∈ Ioo (l m) (h m) → ∀ x ∈ U, ∀ θ,
       f m (x, (rsel i m, θ)) = c + H.decode (g i x) m θ) :
     N04NegativeChartAngularStateBudget p (fun _ => 1) U l h J := by
+  obtain ⟨KH, hKH, hheight⟩ := hheightBound
   obtain ⟨B, hb⟩ := hg.circle_diagonal_stateBudget hp hIp hH hpos hg.choose
   refine ⟨B, fun K => ?_⟩
   obtain ⟨D, hD⟩ := hb K
@@ -84,6 +85,14 @@ private theorem circle_angular_stateBudget_add_const
         (mul_le_mul_of_nonneg_left (hheight m) hC) (zero_le_one.trans hQ)))
     _ = _ := by dsimp only [Q]; ring
 
+private theorem circle_sample_height_bounded {D : ReferenceData} {T : MaterialData}
+    (hT : IsMaterialData D T) (hRef : IsAccumulatingProfile D) :
+    ∃ KH : ℝ, 0 ≤ KH ∧ ∀ m, T.H (T.sample m) ^ (3 / 4 : ℝ) ≤ KH := by
+  refine (materialSample_H_M_envelope hT hRef (γ := (3 / 4 : ℝ)) (by norm_num) 0).elim ?_
+  intro KH hKH
+  exact ⟨KH, hKH.1.le, fun m => by
+    simpa only [Real.rpow_zero, mul_one] using hKH.2 m⟩
+
 namespace N04RealizationStart
 
 variable (W : N04RealizationStart)
@@ -101,28 +110,38 @@ private theorem closedRadius_cover (m : ℕ) (r : ℝ)
     ∃ i : W.ClosedRadiusSelector, i.val m = r :=
   W.through03.1.1.closedRadiusSelector_cover m r ⟨hr.1.le, hr.2.le⟩
 
+private theorem closedInverseSlope_family :
+    N04FixedBaseSmoothFamilyOn (pairGrading (sectorGrading W.S) realGrading)
+      (W.S.circle (3 / 4 : ℝ)).grading (sectorNeighborhood W.S W.base W.ε W.ε)
+      (fun i : W.ClosedRadiusSelector =>
+        W.through03.1.1.selectorInverseSlopeCircle W.hS W.hT i.val i.property) :=
+  W.through03.1.1.n04FixedBase_selectorInverseSlopeCircle W.hS W.hT
+    (W.cutoff.sector_flow_slope W.through03.1.1)
+    (fun i : W.ClosedRadiusSelector => i.val) (fun i => i.property)
+
+private theorem closedInverseSlope_decode (i : W.ClosedRadiusSelector) (m : ℕ)
+    (x : StateDirections W.S × ℝ) (hx : x ∈ sectorNeighborhood W.S W.base W.ε W.ε)
+    (θ : ℝ) :
+    returnFlowInverseSlope W.S W.C (liftSectorParameter W.S W.C x) m (i.val m, θ) =
+      1 + (W.S.circle (3 / 4 : ℝ)).decode
+        (W.through03.1.1.selectorInverseSlopeCircle W.hS W.hT i.val i.property x) m θ := by
+  have hd := W.through03.1.1.selectorInverseSlopeCircle_decode
+    W.hS W.hT i.val i.property x hx m θ
+  have he := congrArg (fun a : ℝ => 1 + a) hd
+  exact (he.trans ((add_comm _ _).trans (sub_add_cancel _ _))).symm
+
 theorem negativeInverseSlope_angular_stateBudget :
     N04NegativeChartAngularStateBudget (pairGrading (sectorGrading W.S) realGrading)
       (fun _ => 1) (sectorNeighborhood W.S W.base W.ε W.ε) W.C.left W.C.right
       W.negativeInverseSlopeJointTower := by
-  have hg := W.through03.1.1.n04FixedBase_selectorInverseSlopeCircle W.hS W.hT
-    (W.cutoff.sector_flow_slope W.through03.1.1)
-    (fun i : W.ClosedRadiusSelector => i.val) (fun i => i.property)
-  obtain ⟨KH, hKH, hheight⟩ := materialSample_H_M_envelope W.hT W.radial.1
-    (γ := (3 / 4 : ℝ)) (by norm_num) 0
-  apply circle_angular_stateBudget_add_const hg (sectorPairGrading_monotone W.S)
+  exact circle_angular_stateBudget_add_const W.closedInverseSlope_family
+    (sectorPairGrading_monotone W.S)
     W.sector_parameter_interpolation (W.hS.2.1 (3 / 4 : ℝ))
-    (material_circle_sample_weights_pos W.hT W.radial.1).2 KH hKH.le
-    (fun m => by simpa only [Real.rpow_zero, mul_one] using hheight m)
+    (material_circle_sample_weights_pos W.hT W.radial.1).2
+    (circle_sample_height_bounded W.hT W.radial.1)
     W.C.left W.C.right (fun i : W.ClosedRadiusSelector => i.val) W.closedRadius_cover
     W.negativeInverseSlopeJointTower 1
-  intro i m _ x hx θ
-  have hd : (W.S.circle (3 / 4 : ℝ)).decode
-      (W.through03.1.1.selectorInverseSlopeCircle W.hS W.hT i.val i.property x) m θ =
-        returnFlowInverseSlope W.S W.C (liftSectorParameter W.S W.C x) m (i.val m, θ) - 1 :=
-    W.through03.1.1.selectorInverseSlopeCircle_decode W.hS W.hT i.val i.property x hx m θ
-  have he := congrArg (fun a : ℝ => 1 + a) hd
-  exact (he.trans (by ring)).symm
+    (fun i m _ x hx θ => W.closedInverseSlope_decode i m x hx θ)
 
 theorem negativePulledCorrection_angular_stateBudget :
     N04NegativeChartAngularStateBudget (pairGrading (sectorGrading W.S) realGrading)

@@ -21,6 +21,31 @@ open scoped ContDiff
 
 set_option backward.isDefEq.respectTransparency true
 
+private theorem finiteAffine_spatial_comp_at
+    {E P : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [NormedAddCommGroup P] [NormedSpace ℝ P]
+    {U : Set E} {Ω : Set PolarPoint} (hU : IsOpen U) (hΩ : IsOpen Ω)
+    (f : E → PolarPoint → ℝ) (x : E) (L : P →L[ℝ] E)
+    (hf : ContDiffOn ℝ ∞ (fun q : P × PolarPoint => f (x + L q.1) q.2)
+      (((fun y => x + L y) ⁻¹' U) ×ˢ Ω))
+    (g : PolarPoint → PolarPoint) (hg : ContDiff ℝ ∞ g)
+    (y : P) (p : PolarPoint) (hy : x + L y ∈ U) (hp : g p ∈ Ω) :
+    ContDiffAt ℝ ∞ (fun q : P × PolarPoint => f (x + L q.1) (g q.2)) (y, p) := by
+  have hopen : IsOpen (((fun y => x + L y) ⁻¹' U) ×ˢ Ω) :=
+    (hU.preimage (continuous_const.add L.continuous)).prod hΩ
+  exact (hf.contDiffAt (hopen.mem_nhds ⟨hy, hp⟩)).comp (y, p)
+    (contDiff_fst.prodMk (hg.comp contDiff_snd)).contDiffAt
+
+private theorem factoredFields_contDiffAt
+    {P : Type*} [NormedAddCommGroup P] [NormedSpace ℝ P]
+    {k r u a b : P → ℝ} {p : P} (o : ℝ)
+    (hk : ContDiffAt ℝ ∞ k p) (hr : ContDiffAt ℝ ∞ r p)
+    (hu : ContDiffAt ℝ ∞ u p) (ha : ContDiffAt ℝ ∞ a p)
+    (hb : ContDiffAt ℝ ∞ b p) (hpos : 0 < r p - k p * u p) :
+    ContDiffAt ℝ ∞ (fun q => o * a q) p ∧
+      ContDiffAt ℝ ∞ (fun q => Real.sqrt (r q - k q * u q) * b q) p :=
+  ⟨contDiffAt_const.mul ha, ((hr.sub (hk.mul hu)).sqrt hpos.ne').mul hb⟩
+
 attribute [local instance]
   n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
   n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
@@ -144,6 +169,7 @@ theorem fullHalfFields_minus_speed
   dsimp only [fullHalfDrift, fullHalfSpeed]
   ring
 
+set_option diagnostics true in
 private theorem normalizedFactor_inward_finiteAffine_contDiffAt
     {n : ℕ} (x : AnnularState W.S × ℝ)
     (L : (Fin n → ℝ) →L[ℝ] (AnnularState W.S × ℝ)) (y : Fin n → ℝ)
@@ -154,18 +180,16 @@ private theorem normalizedFactor_inward_finiteAffine_contDiffAt
       normalizedSpeedFactor W.D W.S W.C i (x + L q.1)
         (W.negativeInwardPoint m side q.2)) (y, p) := by
   have hy' : x + L y ∈ stateNeighborhood W.S W.C W.base W.ε :=
-    stateNeighborhood_mono W.S W.C le_rfl (by linarith [W.ε_pos]) hy
-  let V := ((fun q => x + L q) ⁻¹' stateNeighborhood W.S W.C W.base W.ε) ×ˢ
-    annularOpen W.D
-  have hV : IsOpen V :=
-    ((isOpen_stateNeighborhood W.S W.C W.base W.ε).preimage
-      (continuous_const.add L.continuous)).prod (isOpen_Ioo.prod isOpen_univ)
-  exact ((contDiffOn_normalizedSpeedFactor_finiteAffine W.hS W.hT W.negativeHalf_partA
-      W.negativeHalf_partB x L i).contDiffAt
-      (hV.mem_nhds ⟨hy', W.negativeInwardPoint_mem_annular m side hp⟩)).comp (y, p)
-        (contDiff_fst.prodMk
-          ((W.negativeInwardPoint_contDiff m side).comp contDiff_snd)).contDiffAt
+    stateNeighborhood_mono W.S W.C le_rfl (by linarith only [W.ε_pos]) hy
+  exact finiteAffine_spatial_comp_at
+    (isOpen_stateNeighborhood W.S W.C W.base W.ε) (isOpen_Ioo.prod isOpen_univ)
+    (normalizedSpeedFactor W.D W.S W.C i) x L
+    (contDiffOn_normalizedSpeedFactor_finiteAffine W.hS W.hT W.negativeHalf_partA
+      W.negativeHalf_partB x L i)
+    (W.negativeInwardPoint m side) (W.negativeInwardPoint_contDiff m side) y p hy'
+    (W.negativeInwardPoint_mem_annular m side hp)
 
+set_option diagnostics true in
 /-- A finite state plot is smooth at each actual point, including the
 physical root. This supplies an open germ without any quantitative
 assumption on the size of an extension outside the closed half. -/
@@ -179,14 +203,13 @@ theorem fullHalfFields_finiteAffine_contDiffAt
       F.fullHalfDrift (x + L q.1) m side q.2) (y, p) ∧
     ContDiffAt ℝ ∞ (fun q : (Fin n → ℝ) × PolarPoint =>
       F.fullHalfSpeed (x + L q.1) m side q.2) (y, p) := by
-  have hn := normalizedFactor_inward_finiteAffine_contDiffAt (W := W) x L y hy m side p hp
-  have hk := W.negativeKappa_finiteAffine_contDiff x L m
-  have hq : ContDiff ℝ ∞ (fun q : (Fin n → ℝ) × PolarPoint =>
-      F.stateSquare (x + L q.1) m side q.2.1) :=
-    ((F.reference_smooth m side).comp contDiff_snd.fst).sub
-      ((hk.comp contDiff_fst).mul ((F.control_smooth m side).comp contDiff_snd.fst))
-  exact ⟨contDiffAt_const.mul (hn 0),
-    (hq.contDiffAt.sqrt (F.stateSquare_pos hy m side hp).ne').mul (hn 1)⟩
+  exact factoredFields_contDiffAt (-n01ComponentRootOrientation side)
+    ((W.negativeKappa_finiteAffine_contDiff x L m).comp contDiff_fst).contDiffAt
+    ((F.reference_smooth m side).comp contDiff_snd.fst).contDiffAt
+    ((F.control_smooth m side).comp contDiff_snd.fst).contDiffAt
+    (normalizedFactor_inward_finiteAffine_contDiffAt (W := W) x L y hy m side p hp 0)
+    (normalizedFactor_inward_finiteAffine_contDiffAt (W := W) x L y hy m side p hp 1)
+    (F.stateSquare_pos hy m side hp)
 
 end NegativeOpticalFactors
 

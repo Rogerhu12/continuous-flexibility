@@ -20,6 +20,8 @@ namespace ContinuousFlexibility.Analysis
 open Set ContinuousFlexibility.Statements CanonicalGeometry
 open scoped ContDiff
 
+set_option backward.isDefEq.respectTransparency true
+
 attribute [local instance]
   n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
   n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
@@ -104,23 +106,29 @@ theorem negativeChart_atomData_of_positive_bounds
       pairGrading_apply (E := StateDirections G.W.S) (F := ℝ)
         (sectorGrading G.W.S) realGrading b z]
     linarith only [hz.1, hz.2, hεhalf]
-  let RF := G.negativeChartMixedRegularity η b ε hb hε
-  apply CurrentJetDataOn.of_positive_towers hεpos (G.cost_nonneg η).2.2
-    (G.cost_nonneg η).2.1 (fun m hm => RF m hm a ha)
+  let RF : ∀ m, G.Neg η m →
+      MixedJetRegularity (sectorNeighborhood G.W.S b ε ε) unitStrip
+        (fun z => G.atomFamily η a z m) :=
+    fun m hm => G.negativeChartMixedRegularity η b ε hb hε m hm a ha
+  apply CurrentJetDataOn.of_positive_towers (S := G.W.S) hεpos
+    (G.cost_nonneg η).2.2 (G.cost_nonneg η).2.1 RF
   · intro z hz m hm q hq
     exact (G.negative_geometry_spatial η z (hsub hz) m hm a
       (atomIsNegativeChart_geometry ha)).2 q hq
   · intro m hm
-    simpa only [G.atomFamily_zero η a] using (RF m hm a ha).spatial 0 hz₀
+    have he : G.atomFamily η a (0 : Parameter G.W.S) m = G.atomRef η a m :=
+      congrFun (G.atomFamily_zero η a) m
+    exact Eq.mp (congrArg (fun f : PolarPoint → ℝ => ContDiffOn ℝ ∞ f unitStrip) he)
+      ((RF m hm).spatial 0 hz₀)
   · intro m hm q hq
     exact congrFun (congrFun (G.atomFamily_zero η a) m) q
   · exact hlow
   · intro k hk
-    obtain ⟨loss, hB⟩ := hbound k hk
-    refine ⟨loss, fun s => ?_⟩
-    obtain ⟨B, hBpos, hBs⟩ := hB s
-    exact ⟨B, hBpos, fun m hm q hq i j hij z hz v =>
-      hBs m hm q hq i j hij ((RF m hm a ha).parameter i j q hq) z hz v⟩
+    have h := hbound k hk
+    refine ⟨h.choose, fun s => ?_⟩
+    have hs := h.choose_spec s
+    exact ⟨hs.choose, hs.choose_spec.1, fun m hm q hq i j hij z hz v =>
+      hs.choose_spec.2 m hm q hq i j hij ((RF m hm).parameter i j q hq) z hz v⟩
 
 /-- The four positive-order atom bounds use the same sector and therefore
 assemble directly, before any auxiliary replacement. -/

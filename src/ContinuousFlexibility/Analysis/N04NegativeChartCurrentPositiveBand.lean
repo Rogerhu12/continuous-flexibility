@@ -58,6 +58,45 @@ private theorem currentBand_sector_radius {ε δ : ℝ} (hε : 0 < ε) (hδ : 0 
     min_le_left _ _, (min_le_right _ _).trans (min_le_left _ _), ?_⟩
   linarith only [hηδ]
 
+set_option diagnostics true in
+private theorem currentBand_material_ball
+    {X I : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+    [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
+    {D : ReferenceData} {T : MaterialData}
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (sample : I → ℕ) (p : ℕ → Seminorm ℝ X) (hp : Monotone p) (base loss : ℕ)
+    {U : Set X} (hconvex : Convex ℝ U) (hzero : (0 : X) ∈ U)
+    (f : I → X → ℝ) (J : ∀ i, SmoothDirections U (f i))
+    (c P B A : ℝ) (hc : 0 < c) (hB : 0 < B)
+    (href : ∀ i, 0 < f i 0 ∧ (f i 0)⁻¹ ≤ B * T.E0 (T.sample (sample i)) ^ A)
+    (hfirst : ∀ i x, x ∈ U → ∀ v : Fin 1 → X,
+      |(J i).D 1 x v| ≤ c * T.E0 (T.sample (sample i)) ^ P *
+        T.H (T.sample (sample i)) ^ (3 / 4 : ℝ) * oneHighVariationWeight p base loss x v) :
+    ∃ δ : ℝ, 0 < δ ∧ ∀ i x, x ∈ U → p (max base loss) x < δ →
+      f i 0 / 2 ≤ f i x ∧ 0 < f i x ∧
+        (f i x)⁻¹ ≤ 2 * B * T.E0 (T.sample (sample i)) ^ A := by
+  refine (n07a_materialSample_envelope_bound hD hT
+    (by norm_num : 0 < (3 / 4 : ℝ)) (P + A)).elim ?_
+  intro N hNdata
+  let E : I → ℝ := fun i => T.E0 (T.sample (sample i))
+  let H : I → ℝ := fun i => T.H (T.sample (sample i)) ^ (3 / 4 : ℝ)
+  let M : I → ℝ := fun i => c * E i ^ P * H i
+  let r : I → ℝ := fun i => B * E i ^ A
+  let Q : ℝ := c * B * N
+  have hQ : 0 < Q := mul_pos (mul_pos hc hB) hNdata.1
+  have hpos (i : I) : 0 < E i ∧ 0 ≤ H i := by
+    have hs := hT.2.1 _ (materialSample_mem_radialCore hT hD.choose_spec.2.1 (sample i))
+    exact ⟨hs.2.2.1, Real.rpow_nonneg hs.2.1.le _⟩
+  have hM (i : I) : 0 ≤ M i :=
+    mul_nonneg (mul_nonneg hc.le (Real.rpow_nonneg (hpos i).1.le P)) (hpos i).2
+  have hprod (i : I) : M i * r i ≤ Q :=
+    currentBand_envelope_product hc.le hB.le (hpos i).1 (hNdata.2 (sample i))
+  refine (currentBand_firstJet_ball p hp base loss hconvex hzero J M r Q
+    hQ hM hprod href hfirst).elim ?_
+  intro δ hδdata
+  refine ⟨δ, hδdata.1, fun i x hx hsmall => ?_⟩
+  simpa only [r, E, mul_assoc] using hδdata.2 i x hx hsmall
+
 set_option backward.isDefEq.respectTransparency true
 
 attribute [local instance]
@@ -72,6 +111,7 @@ attribute [local instance]
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
 
+set_option diagnostics true in
 /-- The index may contain a component, side and physical point. The
 radius and low base precede all of them and every later derivative order. -/
 theorem n04NegativeChart_current_half_reference
@@ -91,34 +131,17 @@ theorem n04NegativeChart_current_half_reference
       ∀ i z, z ∈ sectorNeighborhood S b η η →
         f i 0 / 2 ≤ f i z ∧ 0 < f i z ∧
           (f i z)⁻¹ ≤ 2 * B * T.E0 (T.sample (sample i)) ^ A := by
-  refine (n07a_materialSample_envelope_bound hD hT
-    (by norm_num : 0 < (3 / 4 : ℝ)) (P + A)).elim ?_
-  intro N hNdata
-  have hN := hNdata.1
-  have hbound := hNdata.2
-  let E : I → ℝ := fun i => T.E0 (T.sample (sample i))
-  let H : I → ℝ := fun i => T.H (T.sample (sample i)) ^ (3 / 4 : ℝ)
-  let M : I → ℝ := fun i => c * E i ^ P * H i
-  let r : I → ℝ := fun i => B * E i ^ A
-  let Q : ℝ := c * B * N
-  have hQ : 0 < Q := mul_pos (mul_pos hc hB) hN
-  have hpos (i : I) : 0 < E i ∧ 0 ≤ H i := by
-    have hs := hT.2.1 _ (materialSample_mem_radialCore hT hD.choose_spec.2.1 (sample i))
-    exact ⟨hs.2.2.1, Real.rpow_nonneg hs.2.1.le _⟩
-  have hM (i : I) : 0 ≤ M i :=
-    mul_nonneg (mul_nonneg hc.le (Real.rpow_nonneg (hpos i).1.le P)) (hpos i).2
-  have hprod (i : I) : M i * r i ≤ Q :=
-    currentBand_envelope_product hc.le hB.le (hpos i).1 (hbound (sample i))
   have hzero : (0 : Parameter S) ∈ sectorNeighborhood S base ε ε := by
     constructor
     · change sectorGrading S base 0 < ε
       exact (sectorGrading S base).map_zero'.trans_lt hε
     · change |(0 : ℝ)| < ε
       simpa only [abs_zero] using hε
-  obtain ⟨δ, hδ, hclose⟩ := currentBand_firstJet_ball (parameterGrading S)
+  refine (currentBand_material_ball hD hT sample (parameterGrading S)
     (n07aParameterGrading_monotone S) base loss (sectorNeighborhood_convex S base ε ε)
-    hzero J M r Q hQ hM hprod href hfirst
-  obtain ⟨η, hη, hηε, hηhalf, hηδ⟩ := currentBand_sector_radius hε hδ
+    hzero f J c P B A hc hB href hfirst).elim ?_
+  intro δ hδdata
+  obtain ⟨η, hη, hηε, hηhalf, hηδ⟩ := currentBand_sector_radius hε hδdata.1
   refine ⟨max base loss, η, le_max_left _ _, hη, hηε, hηhalf, fun i z hz => ?_⟩
   have hzU : z ∈ sectorNeighborhood S base ε ε :=
     n07a_sectorNeighborhood_mono (S := S) (le_max_left _ _) hηε hz
@@ -128,7 +151,7 @@ theorem n04NegativeChart_current_half_reference
       pairGrading_apply (E := StateDirections S) (F := ℝ)
         (sectorGrading S) realGrading (max base loss) z]
     exact (add_lt_add hz.1 hz.2).trans_eq (two_mul η).symm
-  simpa only [r, E, mul_assoc] using hclose i z hzU (hp.trans_le hηδ)
+  exact hδdata.2 i z hzU (hp.trans_le hηδ)
 
 end ContinuousFlexibility.Analysis
 

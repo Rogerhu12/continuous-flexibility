@@ -16,6 +16,20 @@ namespace ContinuousFlexibility.Analysis
 open Set ContinuousFlexibility.Statements CanonicalGeometry
 open scoped ContDiff
 
+set_option backward.isDefEq.respectTransparency true
+
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
+
 def negativeInverseGeometryAtom : Atom → Prop
   | .inverseRadial | .inverseAngleDefect => True
   | _ => False
@@ -65,7 +79,8 @@ def negativeInverseAtomJointTower
     (a : Atom) (ha : negativeInverseGeometryAtom a) :
     SmoothDirections (sectorNeighborhood G.W.S G.W.base G.W.ε G.W.ε ×ˢ unitStrip)
       (fun x : (StateDirections G.W.S × ℝ) × PolarPoint => G.atomFamily η a x.1 m x.2) := by
-  obtain ⟨j, hi⟩ := (G.neg_iff_inl η m).mp hm
+  let j := ((G.neg_iff_inl η m).mp hm).choose
+  have hi := ((G.neg_iff_inl η m).mp hm).choose_spec
   have hk : G.X.e₀ (G.negativeIndex j) = .inl (j.1, j.2) := G.X.e₀.apply_symm_apply _
   have haux : a ≠ .auxiliaryColumn := by
     intro he
@@ -92,7 +107,8 @@ def negativePulledHeightJointTower
     (η : (G.W.S.height (3 / 4 : ℝ)).Space) (m : ℕ) (hm : G.Neg η m) :
     SmoothDirections (sectorNeighborhood G.W.S G.W.base G.W.ε G.W.ε ×ˢ unitStrip)
       (fun x : (StateDirections G.W.S × ℝ) × PolarPoint => G.pulledHeight η x.1 m x.2) := by
-  obtain ⟨j, hi⟩ := (G.neg_iff_inl η m).mp hm
+  let j := ((G.neg_iff_inl η m).mp hm).choose
+  have hi := ((G.neg_iff_inl η m).mp hm).choose_spec
   have hk : G.X.e₀ (G.negativeIndex j) = .inl (j.1, j.2) := G.X.e₀.apply_symm_apply _
   apply (G.W.negativePulledHeightJointTower G.X.e₀ (G.negativeIndex j) j.1 j.2 hk).congrOn
   intro x hx
