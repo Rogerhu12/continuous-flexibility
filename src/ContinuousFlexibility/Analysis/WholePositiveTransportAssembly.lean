@@ -52,7 +52,8 @@ private theorem endpoint_projection_jet_bound
   (L.norm_iteratedFDeriv_comp_left hF (by simp : (k : ℕ∞ω) ≤ ∞)).trans
     ((mul_le_of_le_one_left (norm_nonneg _) hL).trans hbound)
 
-theorem exists_wholePositiveTransport_family
+/-- The low logarithmic bound is retained for the same selected collar. -/
+theorem exists_wholePositiveTransport_family_with_log_bounds
     {ι : Type*} (i₀ : ι) (n : ℕ)
     {F : ι → Bool → PolarPoint → PolarPoint} {q : ι → Bool → PolarPoint → ℝ}
     {a b : Bool → ℝ} {l r c d κφ κX M H : ℝ}
@@ -78,6 +79,9 @@ theorem exists_wholePositiveTransport_family
     ∃ Clog Mσ δ : ℝ, 0 < Clog ∧ 1 ≤ Mσ ∧ 0 < δ ∧ δ ≤ ρ ∧ δ ≤ 1 ∧
       δ⁻¹ = ρ⁻¹ + 1 + ((n + 1 : ℕ) : ℝ) * (Clog * H ^ (2 * n + 1) + 1) ∧
       0 < endpointFiberLower n l r c d κX Mσ ∧
+      (∀ i side j, 0 < j → j ≤ n → ∀ θ,
+        |positiveHeightTaylorData l r (fun _ => 1) (q i) side j θ| ≤
+          Clog * H ^ (2 * n + 1)) ∧
       ∀ i,
       let ψ := fun side p => (F i side p).2
       let X := fun side p => (F i side p).1
@@ -164,7 +168,7 @@ theorem exists_wholePositiveTransport_family
       simpa only [Prod.mk_add_mk, add_zero] using
         (hdata i side).height_period (x, θ) ⟨hx, mem_univ _⟩)
     (fun i side x hx θ => (hdata i side).height_even (x, θ) ⟨hx, mem_univ _⟩)
-  refine ⟨Clog, Mσ, δ, hClog, hMσ, hδ, hδρ, hδone, hrecip, hB, ?_⟩
+  refine ⟨Clog, Mσ, δ, hClog, hMσ, hδ, hδρ, hδone, hrecip, hB, hlog, ?_⟩
   intro i
   dsimp only
   rcases ht i with ⟨hgeometry, _, _, hboundary⟩
@@ -207,5 +211,46 @@ theorem exists_wholePositiveTransport_family
       (κφ := κφ) (κX := κX) (M := M) (Mσ := Mσ) n hψref hXref hη hηgap
     exact ⟨hid.1, hid.2, positiveHeightTaylorInterpolation_reference_one n l r δ
       (fun side θ => (href side θ).2)⟩
+
+/-- Projection of the retained construction to the original interface. -/
+theorem exists_wholePositiveTransport_family
+    {ι : Type*} (i₀ : ι) (n : ℕ)
+    {F : ι → Bool → PolarPoint → PolarPoint} {q : ι → Bool → PolarPoint → ℝ}
+    {a b : Bool → ℝ} {l r c d κφ κX M H : ℝ}
+    (hlc : l < c) (hcd : c < d) (hdr : d < r)
+    (hκφ : 0 < κφ) (hκφone : κφ ≤ 1) (hκX : 0 < κX)
+    (hM : 0 ≤ M) (hH : 1 ≤ H)
+    (hdata : ∀ i side, OneSidedTransportEndpoint (F i side) (q i side)
+      (a side) (b side) (if side then r else l))
+    (hangle : ∀ i side θ, κφ ≤ angularPartial (fun p => (F i side p).2)
+      (if side then r else l, θ))
+    (hradial : ∀ i side θ, κX ≤ radialPartial (fun p => (F i side p).1)
+      (if side then r else l, θ))
+    (hjets : ∀ i side k, 1 ≤ k → k ≤ n + 2 → ∀ θ,
+      ‖iteratedFDeriv ℝ k (F i side) (if side then r else l, θ)‖ ≤ M)
+    (hupper : ∀ i side θ, q i side (if side then r else l, θ) ≤ H)
+    (hinverse : ∀ i side θ, (q i side (if side then r else l, θ))⁻¹ ≤ H)
+    (hqjets : ∀ i side k, 1 ≤ k → k ≤ n → ∀ θ,
+      ‖iteratedFDeriv ℝ k (q i side) (if side then r else l, θ)‖ ≤ H)
+    (href : ∀ side θ,
+      F i₀ side =ᶠ[𝓝 (if side then r else l, θ)] (id : PolarPoint → PolarPoint) ∧
+      q i₀ side =ᶠ[𝓝 (if side then r else l, θ)] (fun _ => (1 : ℝ))) :
+    let ρ := min ((r - l) / 4) (min (c - l) (r - d))
+    ∃ Clog Mσ δ : ℝ, 0 < Clog ∧ 1 ≤ Mσ ∧ 0 < δ ∧ δ ≤ ρ ∧ δ ≤ 1 ∧
+      δ⁻¹ = ρ⁻¹ + 1 + ((n + 1 : ℕ) : ℝ) * (Clog * H ^ (2 * n + 1) + 1) ∧
+      0 < endpointFiberLower n l r c d κX Mσ ∧
+      ∀ i,
+      let ψ := fun side p => (F i side p).2
+      let X := fun side p => (F i side p).1
+      let τ := oneSidedWholeComponentTransport n ψ X l r c d κφ κX M Mσ
+      let σ := oneSidedWholeComponentTransportInverse n ψ X l r c d κφ κX M Mσ
+      let Q := positiveHeightTaylorInterpolation n l r δ (fun _ => 1) (q i)
+      WholePositiveTransportMatching n (F i) (q i) τ σ Q l r c d
+        (endpointFiberLower n l r c d κX Mσ * (κφ / 2)) (Real.exp 2 * H ^ 2) ∧
+        (i = i₀ → τ = id ∧ σ = id ∧ Q = (fun _ => (1 : ℝ))) := by
+  obtain ⟨Clog, Mσ, δ, hClog, hMσ, hδ, hδρ, hδone, hrecip, hB, _hlog, hmatch⟩ :=
+    exists_wholePositiveTransport_family_with_log_bounds i₀ n
+      hlc hcd hdr hκφ hκφone hκX hM hH hdata hangle hradial hjets hupper hinverse hqjets href
+  exact ⟨Clog, Mσ, δ, hClog, hMσ, hδ, hδρ, hδone, hrecip, hB, hmatch⟩
 
 end ContinuousFlexibility.Analysis

@@ -74,6 +74,65 @@ def N04FixedPositiveFamilyControls
 
 /-- The common neighborhood precedes every component parameter. Each
 actual function is then fixed for all states and all future output orders. -/
+theorem n04Coordinates_exists_fixed_positive_family_with_log_bounds
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {R : ReturnEquationData S}
+    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : NonlinearPropertiesThrough03 D T S C R L base loss ε)
+    (hfield : N04bFieldRegularity D S C L base ε)
+    (e : ℕ ≃ N04PieceIndex D)
+    (j : ∀ i : N04PositiveComponent D.a D.b (deriv D.w),
+      ∀ side, N04PositiveEndpointSource C i side)
+    (B : N04PositiveNormalizationBuffer D.a D.b (deriv D.w) (tsupport D.chi)) (n : ℕ) :
+    ∃ newBase : ℕ, ∃ ε' : ℝ,
+      base ≤ newBase ∧ 0 < ε' ∧ ε' ≤ ε ∧
+      ∃ κ M H Clog Mσ δ : N04PositiveComponent D.a D.b (deriv D.w) → ℝ,
+        N04FixedPositiveFamilyControls B n κ M H Clog Mσ δ ∧
+        let K := n04bActualTypedAtlas hT hS hN hfield e
+        let τ := n04FixedPositiveTransport K j B n κ M Mσ
+        let σ := n04FixedPositiveInverse K j B n κ M Mσ
+        let Q := n04FixedPositiveHeight K j n δ
+        (∀ z ∈ stateNeighborhood S C newBase ε', stateSector S z.1 →
+          ∀ i side k, 0 < k → k ≤ n → ∀ θ,
+            |positiveHeightTaylorData (n04PositiveLeft i) (n04PositiveRight i) (fun _ => 1)
+              (fun side => n04PositiveSourceHeight (j i side) K z) side k θ| ≤
+              Clog i * H i ^ (2 * n + 1)) ∧
+        (∀ z ∈ stateNeighborhood S C newBase ε', stateSector S z.1 → ∀ i,
+          WholePositiveTransportMatching n
+            (fun side => n04PositiveSourceMap (j i side) K z)
+            (fun side => n04PositiveSourceHeight (j i side) K z)
+            (τ z i) (σ z i) (Q z i) (n04PositiveLeft i) (n04PositiveRight i)
+            (B.centerLeft i) (B.centerRight i)
+            (endpointFiberLower n (n04PositiveLeft i) (n04PositiveRight i)
+              (B.centerLeft i) (B.centerRight i) (κ i) (Mσ i) * (κ i / 2))
+            (Real.exp 2 * H i ^ 2)) ∧
+          ∀ i, τ (C.referenceState, 0) i = id ∧ σ (C.referenceState, 0) i = id ∧
+            Q (C.referenceState, 0) i = (fun _ => (1 : ℝ)) := by
+  classical
+  obtain ⟨newBase, ε', hb, hε', hε'ε, hfamily⟩ :=
+    n04Coordinates_exists_actual_wholePositive_families_with_log_bounds hT hS hN hfield e n
+  choose κ M H hκ hκone hκinv hM hH hnext using fun i => hfamily i (j i)
+  have hcenters (i : N04PositiveComponent D.a D.b (deriv D.w)) :
+      B.centerLeft i < B.centerRight i :=
+    (B.ordered i).2.1.trans ((B.ordered i).2.2.1.trans (B.ordered i).2.2.2.1)
+  have hwhole := fun i => hnext i (B.centerLeft i) (B.centerRight i)
+    (B.ordered i).1 (hcenters i) (B.ordered i).2.2.2.2
+  dsimp only at hwhole
+  choose Clog Mσ δ hClog hMσ hδ hδρ hδone hrecip hJ hlog hmatched using hwhole
+  refine ⟨newBase, ε', hb, hε', hε'ε, κ, M, H, Clog, Mσ, δ, ?_, ?_⟩
+  · exact fun i => ⟨hκ i, hκone i, hκinv i, hM i, hH i, hClog i, hMσ i,
+      hδ i, hδρ i, hδone i, hrecip i, hJ i⟩
+  · dsimp only
+    refine ⟨?_, ?_, ?_⟩
+    · exact fun z hz hs i => hlog i z hz hs
+    · exact fun z hz hs i => (hmatched i z hz hs).1
+    · intro i
+      exact (hmatched i (C.referenceState, 0)
+        (reference_mem_stateNeighborhood S C newBase hε')
+        hN.1.1.2.2.1.stateSector).2 rfl
+
+/-- Projection of the retained construction to the original interface. -/
 theorem n04Coordinates_exists_fixed_positive_family
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {R : ReturnEquationData S}
@@ -104,26 +163,10 @@ theorem n04Coordinates_exists_fixed_positive_family
             (Real.exp 2 * H i ^ 2)) ∧
           ∀ i, τ (C.referenceState, 0) i = id ∧ σ (C.referenceState, 0) i = id ∧
             Q (C.referenceState, 0) i = (fun _ => (1 : ℝ)) := by
-  classical
-  obtain ⟨newBase, ε', hb, hε', hε'ε, hfamily⟩ :=
-    n04Coordinates_exists_actual_wholePositive_families hT hS hN hfield e n
-  choose κ M H hκ hκone hκinv hM hH hnext using fun i => hfamily i (j i)
-  have hcenters (i : N04PositiveComponent D.a D.b (deriv D.w)) :
-      B.centerLeft i < B.centerRight i :=
-    (B.ordered i).2.1.trans ((B.ordered i).2.2.1.trans (B.ordered i).2.2.2.1)
-  have hwhole := fun i => hnext i (B.centerLeft i) (B.centerRight i)
-    (B.ordered i).1 (hcenters i) (B.ordered i).2.2.2.2
-  dsimp only at hwhole
-  choose Clog Mσ δ hClog hMσ hδ hδρ hδone hrecip hJ hmatched using hwhole
-  refine ⟨newBase, ε', hb, hε', hε'ε, κ, M, H, Clog, Mσ, δ, ?_, ?_⟩
-  · exact fun i => ⟨hκ i, hκone i, hκinv i, hM i, hH i, hClog i, hMσ i,
-      hδ i, hδρ i, hδone i, hrecip i, hJ i⟩
-  · dsimp only
-    constructor
-    · exact fun z hz hs i => (hmatched i z hz hs).1
-    · intro i
-      exact (hmatched i (C.referenceState, 0)
-        (reference_mem_stateNeighborhood S C newBase hε')
-        hN.1.1.2.2.1.stateSector).2 rfl
+  obtain ⟨newBase, ε', hb, hε', hε'ε, κ, M, H, Clog, Mσ, δ,
+      hcontrols, _hlog, hmatching, href⟩ :=
+    n04Coordinates_exists_fixed_positive_family_with_log_bounds hT hS hN hfield e j B n
+  exact ⟨newBase, ε', hb, hε', hε'ε, κ, M, H, Clog, Mσ, δ,
+    hcontrols, hmatching, href⟩
 
 end ContinuousFlexibility.Analysis
