@@ -51,6 +51,29 @@ def n04PositiveGeometry_rootOddTrace_joint
     g hg hg0 m side hr hroot ⟨4 + j, by omega⟩).congr (fun y _ =>
       (congrFun (n04PositiveGeometry_rootOddTrace_eq D S C g m side j hj) y).symm)
 
+private theorem rootOddFormulaZero_value
+    (d c : PolarPoint → ℝ) (β : ℝ → ℝ) (θ : ℝ) :
+    n04PositiveGeometry_boundaryFormula 4 (n06RootBoundaryInputs d c β) θ =
+      (2 / 3 : ℝ) * c (0, θ) * deriv β θ := by
+  change (2 / 3 : ℝ) * radialBoundaryJet c 0 0 θ * deriv β θ = _
+  simp only [radialBoundaryJet, iteratedDeriv_zero]
+
+theorem n04PositiveGeometry_rootOddTrace_zero_eq
+    (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (g : ℝ → ℝ) (m : ℕ) (side : Bool) (z : StateDirections S × ℝ) (θ : ℝ) :
+    n04PositiveGeometry_rootOddTrace D S C g m side 0 (z, θ) =
+      (2 / 3 : ℝ) * factoredCharacteristicSpeed D.w g
+        (stateProfile D S C (liftSectorParameter S C z).1)
+        (stateHeight D S C (liftSectorParameter S C z))
+        (n01ComponentRoot C m side) (n01ComponentRootOrientation side) (0, θ) *
+          deriv (n01RootLabel S C (liftSectorParameter S C z) m side) θ := by
+  have htrace := congrFun
+    (n04PositiveGeometry_rootOddTrace_eq D S C g m side 0 (by decide)) (z, θ)
+  have hinputs := congrArg
+    (fun v : N06RootBoundaryInputs => n04PositiveGeometry_boundaryFormula 4 v θ)
+    (n04PositiveGeometry_rootBoundaryInput_eq D S C g m side z)
+  exact htrace.trans (hinputs.trans (rootOddFormulaZero_value _ _ _ θ))
+
 theorem n04PositiveGeometry_rootOddTrace_zero_pos
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -72,13 +95,9 @@ theorem n04PositiveGeometry_rootOddTrace_zero_pos
   have hβ := (n01RootLabel_deriv_mem_quarter_four hN hflow
     (liftSectorParameter_mem_stateNeighborhood (C := C) hz le_rfl)
     (hN.2.2.1.liftSectorParameter_sector z) m side θ).1
-  change 0 < (2 / 3 : ℝ) * factoredCharacteristicSpeed D.w g
-    (stateProfile D S C (liftSectorParameter S C z).1)
-    (stateHeight D S C (liftSectorParameter S C z))
-    (n01ComponentRoot C m side) (n01ComponentRootOrientation side) (0, θ) *
-      deriv (n01RootLabel S C (liftSectorParameter S C z) m side) θ
-  exact mul_pos (mul_pos (by norm_num : (0 : ℝ) < 2 / 3) hc)
-    (lt_of_lt_of_le (by norm_num : (0 : ℝ) < 1 / 4) hβ)
+  exact (mul_pos (mul_pos (by norm_num : (0 : ℝ) < 2 / 3) hc)
+    (lt_of_lt_of_le (by norm_num : (0 : ℝ) < 1 / 4) hβ)).trans_eq
+      (n04PositiveGeometry_rootOddTrace_zero_eq D S C g m side z θ).symm
 
 def n04PositiveGeometry_rootOddPowerTrace
     (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)

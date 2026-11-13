@@ -46,8 +46,9 @@ def PositiveGeometryObligation : Prop :=
   ∀ (W : N04RealizationStart) (X : N04RealizationChoice W)
     (Y H : N04PositiveComponent W.D.a W.D.b (deriv W.D.w) → ℝ → ℝ),
     N04PositiveReferenceFamily (W.A X.e₀) X.src 4 Y H →
-  ∀ (e : ℕ ≃ N04WholePieceIndex W.D)
-    (B : N04PositiveNormalizationBuffer W.D.a W.D.b (deriv W.D.w) (tsupport W.D.chi)),
+    N04PositiveReferenceMaterialBounds W.T X.cell Y H →
+  ∀ e : ℕ ≃ N04WholePieceIndex W.D,
+  ∃ B : N04PositiveNormalizationBuffer W.D.a W.D.b (deriv W.D.w) (tsupport W.D.chi),
   ∃ (b : ℕ) (ε : ℝ) (lower upper : N04PositiveComponent W.D.a W.D.b (deriv W.D.w) → ℝ)
     (τ σ : (AnnularState W.S × ℝ) →
       N04PositiveComponent W.D.a W.D.b (deriv W.D.w) → PolarPoint → PolarPoint)
@@ -105,8 +106,9 @@ theorem currentObligation_of_referenceSplit
     (hsrc : SourceColumnObligation)
     (hprin : PrincipalObligation) :
     N04RealizationCurrentObligation := by
-  intro W X Y H hfam e B
-  refine (hpos W X Y H hfam e B).elim fun b h1 => h1.elim fun ε h1 => h1.elim
+  intro W X Y H hfam hmaterial e
+  refine (hpos W X Y H hfam hmaterial e).elim fun B hB =>
+    hB.elim fun b h1 => h1.elim fun ε h1 => h1.elim
     fun lower h1 => h1.elim fun upper h1 => h1.elim fun τ h1 => h1.elim fun σ h1 =>
       h1.elim fun Q hp => ?_
   let G : N04RealizationGauge := ⟨W, X, e, Y, H, τ, σ, Q, B.region⟩
@@ -154,7 +156,7 @@ theorem currentObligation_of_referenceSplit
   have hbb : b ≤ b2 := hp2.1
   have hbn : b ≤ nb := hbb.trans (hb2.trans hb3)
   have hεn : ε' ≤ ε := hε'3.trans (hε32.trans hε2)
-  refine ⟨nb, ε', hb.trans hbn, hε', hεn.trans hεε, lower, upper, τ, σ, Q,
+  refine ⟨B, nb, ε', hb.trans hbn, hε', hεn.trans hεε, lower, upper, τ, σ, Q,
     fun z hz hs i => hp.2.2.2.1 z (stateNeighborhood_mono W.S W.C hbn hεn hz) hs i,
     hp.2.2.2.2.1, ?_⟩
   intro η _ _ _ _ hrefJ a ha hs

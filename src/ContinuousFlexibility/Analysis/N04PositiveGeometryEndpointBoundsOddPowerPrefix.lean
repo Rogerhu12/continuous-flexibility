@@ -183,10 +183,11 @@ theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix
         low + s + shift * K + 1) z).trans hzR)
       (fun l => (hp (by dsimp only [low]; omega : Bf + s + shift * K + 1 ≤
         low + s + shift * K + 1) (w l)).trans (hw l).2)
-    rw [htpow]
-    exact hh.trans (mul_le_mul_of_nonneg_right
+    have hscaled := hh.trans (mul_le_mul_of_nonneg_right
       (mul_le_mul_of_nonneg_right (hcost hAfB) (parameterHeightWeight_nonneg hH e))
         (Real.rpow_nonneg (zero_le_one.trans hR) _))
+    exact hscaled.trans_eq (congrArg (fun q : ℝ => M * parameterHeightWeight H e * q)
+      (htpow (b + shift * e)).symm)
   let idx : Fin 4 := ⟨n, by omega⟩
   have hout := hpower idx (sectorNeighborhood_isOpen W.S base ε ε) JO JP hpos
     K s 1 le_rfl z hz θ P M H t hM hH hHM hHL ht shift hinput hinv
@@ -215,6 +216,8 @@ theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix
     (pow_nonneg (zero_le_one.trans ht) _)
     (mul_nonneg (mul_nonneg (zero_le_one.trans hA)
       (Real.rpow_nonneg (zero_le_one.trans hE) _)) (parameterHeightWeight_nonneg hH k)))
-  simpa only [htpow] using hfinal
+  exact hfinal.trans_eq
+    (congrArg (fun q : ℝ => A * E ^ A * parameterHeightWeight H k * q)
+      (htpow (u + shift * k)))
 
 end ContinuousFlexibility.Analysis
