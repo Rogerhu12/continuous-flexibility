@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsSpatialInputs
+import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
 
 /-!
 # Actual normalized root kernel terms with distributed angular powers
