@@ -131,7 +131,7 @@ theorem n04PositiveGeometry_boundaryInverse_step_bound (N n : ℕ) (hn : 2 ≤ n
       let JT' : SmoothDirections (U ×ˢ univ) (term c) :=
         JT.congr (fun z _ => by simp only [term, if_pos hc]; rfl)
       refine ⟨JT', (hterm.enlarge hH (zero_le_one.trans ht) ?_).congr hx
-        (fun z _ => by simp only [term, if_pos hc]; rfl)⟩
+        (fun z _ => by simp only [term, if_pos hc])⟩
       exact mul_le_mul (haA c) (pow_le_pow_right₀ hM (Nat.add_le_add_right
           (Nat.add_le_add_right c.length_le 1) (2 * N)))
         (pow_nonneg (zero_le_one.trans hM) _) (zero_le_one.trans hA)

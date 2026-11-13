@@ -223,7 +223,6 @@ private theorem packetFiniteShiftPower_of_height
     hheight hw hb).elim fun C h => ?_
   exact ⟨C, A, h.1, hA, h.2⟩
 
-set_option diagnostics true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The exact six-coordinate packet satisfies a common normalized
 bound, including every genuine parameter tower of every mixed input.
@@ -259,7 +258,10 @@ theorem n04PositiveGeometry_rootPacket_finiteShift_power
     (fun z j a b q => n04PositiveGeometry_rootPacket_mixed_height z j a b q)
     x0 N requestedBase L W hL hW
     (fun q hq => (show T.H q.1 ^ scalarBeta ≤ L0 from by
-      simpa only [Real.rpow_zero, mul_one] using hheight q.1 hq.1).trans (le_max_right _ _))
+      calc
+        T.H q.1 ^ scalarBeta = T.H q.1 ^ scalarBeta * T.E0 q.1 ^ (0 : ℝ) := by
+          rw [Real.rpow_zero, mul_one]
+        _ ≤ L0 := hheight q.1 hq.1).trans (le_max_right _ _))
     (fun a ha q hq => hw a ha q ⟨hq.1.1.le, hq.1.2.le⟩)
     ?_
   exact n04PositiveGeometry_rootHeightInputs_finiteShift_power hD hT hS hE x0 N requestedBase

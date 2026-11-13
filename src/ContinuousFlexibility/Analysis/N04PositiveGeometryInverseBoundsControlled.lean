@@ -137,12 +137,14 @@ theorem n04PositiveGeometry_controlled_inverseKernel_bounds
     intro i
     cases side with
     | false =>
-      rw [if_neg Bool.false_ne_true, if_neg Bool.false_ne_true,
-        abs_of_pos (inv_pos.mpr (sub_pos.mpr (control_ordered G.toN04PositiveGeometryControlData i).1))]
+      change |(G.buffer.centerLeft i - n04PositiveLeft i)⁻¹| ≤ A * E i ^ A
+      rw [abs_of_pos (inv_pos.mpr
+        (sub_pos.mpr (control_ordered G.toN04PositiveGeometryControlData i).1))]
       exact (hcost.buffer_gaps i).1
     | true =>
-      rw [if_pos rfl, if_pos rfl,
-        abs_of_pos (inv_pos.mpr (sub_pos.mpr (control_ordered G.toN04PositiveGeometryControlData i).2.2))]
+      change |(n04PositiveRight i - G.buffer.centerRight i)⁻¹| ≤ A * E i ^ A
+      rw [abs_of_pos (inv_pos.mpr
+        (sub_pos.mpr (control_ordered G.toN04PositiveGeometryControlData i).2.2))]
       exact (hcost.buffer_gaps i).2.2.2.2
   have hlower : HasPositiveEnvelope E (fun i =>
       |(endpointFiberLower n (n04PositiveLeft i) (n04PositiveRight i)
