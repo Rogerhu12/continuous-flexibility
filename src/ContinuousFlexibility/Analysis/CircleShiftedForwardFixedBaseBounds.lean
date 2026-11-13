@@ -25,7 +25,7 @@ variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {M : CircleModelData}
   (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
   (hγ : 0 < γ) (hM : IsCircleModel T γ M) (hI : HasInterpolation M.grading)
 
-private theorem circleShiftedChartCompose_zero_kernel
+theorem circleShiftedChartCompose_zero_kernel
     (travel : ℕ → ℝ) (e y : M.Space) :
     circleShiftedChartComposeContinuousLinear hM hT hD hγ travel e y =
       coupledCircleKernel hD hT hγ hM hI 0 0 e
