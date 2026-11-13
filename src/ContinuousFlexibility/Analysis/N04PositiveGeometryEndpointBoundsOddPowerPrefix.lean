@@ -5,7 +5,7 @@ import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOddTraces
 
 The common low order includes the already proved reciprocal bound for
 the true zeroth odd coefficient. All later parameter orders use the
-same domain and retain the reserved angular derivative.
+same domain and retain five reserved angular derivatives.
 -/
 
 noncomputable section
@@ -22,8 +22,8 @@ private def oddPowerTracePrefix
     {Y : Type*} [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
     [IsTopologicalAddGroup Y] [ContinuousSMul ℝ Y]
     (pgrade : ℕ → Seminorm ℝ Y) (U : Set Y) (F : ℕ → Y × ℝ → ℝ)
-    (low K s shift : ℕ) (A E H : ℝ) : Prop :=
-  ∀ n : ℕ, n ≤ 3 → ∀ k : ℕ, k ≤ K → ∀ u : ℕ, u ≤ s → ∀ d : ℕ, d ≤ 1 →
+    (low K s reserve shift : ℕ) (A E H : ℝ) : Prop :=
+  ∀ n : ℕ, n ≤ 3 → ∀ k : ℕ, k ≤ K → ∀ u : ℕ, u ≤ s → ∀ d : ℕ, d ≤ reserve →
     ∀ θ : ℝ, ∀ J : SmoothDirections U
       (fun z => iteratedDeriv (u + d) (fun η => F n (z, η)) θ),
     ∀ z ∈ U, pgrade low z ≤ 1 → ∀ v : Fin k → Y,
@@ -33,7 +33,7 @@ private def oddPowerTracePrefix
     ‖J.D k z v‖ ≤ A * E ^ A * parameterHeightWeight H k *
       R ^ (((u + shift * k : ℕ) : ℝ) / (((s + shift * K : ℕ) : ℝ) + 1))
 
-theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix
+theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix_five
     (W : N04RealizationStart) (X : N04RealizationChoice W)
     {base : ℕ} {ε : ℝ} (hb : W.base ≤ base) (hε : 0 < ε)
     (hεW : ε ≤ W.ε) (hεone : ε ≤ 1)
@@ -57,11 +57,11 @@ theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix
       oddPowerTracePrefix (pairGrading (sectorGrading W.S) realGrading)
         (sectorNeighborhood W.S base ε ε)
         (fun n => n04PositiveGeometry_rootOddPowerTrace W.D W.S W.C g m (!side) γ n)
-        low K s shift A (W.U.E0 (W.U.sample (X.cell i)))
+        low K s 5 shift A (W.U.E0 (W.U.sample (X.cell i)))
         (W.U.H (W.U.sample (X.cell i)) ^ (3 / 4 : ℝ)) := by
   classical
   have hN := n01Properties_restrict W.hT W.through03.1.1 hb le_rfl hε hεW
-  refine (n04PositiveGeometry_rootBoundaryFormula_sample_prefix
+  refine (n04PositiveGeometry_rootBoundaryFormula_sample_prefix_five
     W X hb hε hεW hεone hflow).elim fun Bf h => ?_
   refine h.elim fun hBf hf => ?_
   refine (n04PositiveGeometry_rootOddValue_sample_inverse
@@ -91,7 +91,7 @@ theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix
   have hLB : L ≤ B := (le_max_right _ _).trans (le_max_right _ _)
   let powerData (j : Fin 4) :=
     n04PositiveGeometry_rootPowerTrace_word_bound (E := StateDirections W.S × ℝ)
-      γ j.val (K + s + 1) L hL
+      γ j.val (K + s + 5) L hL
   let C : Fin 4 → ℝ := fun j => (powerData j).choose
   have hC (j : Fin 4) : 1 ≤ C j := (powerData j).choose_spec.1
   let degree : Fin 4 → ℕ := fun j => (powerData j).choose_spec.2.choose
@@ -168,9 +168,9 @@ theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix
       (n04PositiveGeometry_rootOddTrace_zero_eq W.D W.S W.C g m (!side) z θ)
     exact he.trans_le (h.trans (hcost hCiB))
   have hinput (j : ℕ) (hj : j ≤ n) :
-      N04BoundaryWordBounds (JO j hj) K s 1 z θ P M H t shift := by
+      N04BoundaryWordBounds (JO j hj) K s 5 z θ P M H t shift := by
     apply n04PositiveGeometry_boundaryWord_of_angular (JO j hj)
-      (smoothDirections_angularStateSlice (JO j hj)) K s 1 z hz θ P M H t shift
+      (smoothDirections_angularStateSlice (JO j hj)) K s 5 z hz θ P M H t shift
     intro e he b hbs a ha w hw
     let Q := smoothDirections_angularStateSlice (JO j hj) (b + a) θ
     let QF := Q.congr (fun y _ => congrArg
@@ -193,7 +193,7 @@ theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix
       (htpow (b + shift * e)).symm)
   let idx : Fin 4 := ⟨n, by omega⟩
   have hout := hpower idx (sectorNeighborhood_isOpen W.S base ε ε) JO JP hpos
-    K s 1 le_rfl z hz θ P M H t hM hH hHM hHL ht shift hinput hinv
+    K s 5 le_rfl z hz θ P M H t hM hH hHM hHL ht shift hinput hinv
   have hnorm := n04PositiveGeometry_boundaryWord_to_angular_reserve JP
     (smoothDirections_angularStateSlice JP) hz θ P hP hout
       k (u + d) hk (by omega) v (fun l => ⟨hv l, hvR l⟩)
@@ -209,7 +209,7 @@ theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix
       _ ≤ A * E ^ A := mul_le_mul hA₀A
         (Real.rpow_le_rpow_of_exponent_le hE hA₀A)
         (Real.rpow_nonneg (zero_le_one.trans hE) _) (zero_le_one.trans hA)
-  have hpow : t ^ ((u + d - 1) + shift * k) ≤ t ^ (u + shift * k) :=
+  have hpow : t ^ ((u + d - 5) + shift * k) ≤ t ^ (u + shift * k) :=
     pow_le_pow_right₀ ht (by omega)
   have heq := J.unique (smoothDirections_angularStateSlice JP (u + d) θ) k z hz
   have hnorm' := (congrArg norm (congrArg
@@ -222,5 +222,43 @@ theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix
   exact hfinal.trans_eq
     (congrArg (fun q : ℝ => A * E ^ A * parameterHeightWeight H k * q)
       (htpow (u + shift * k)))
+
+/-- The former reserve-one statement uses the same witnesses. -/
+theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix
+    (W : N04RealizationStart) (X : N04RealizationChoice W)
+    {base : ℕ} {ε : ℝ} (hb : W.base ≤ base) (hε : 0 < ε)
+    (hεW : ε ≤ W.ε) (hεone : ε ≤ 1)
+    (hflow : OrdinaryFlowJacobianBounds W.S W.C base ε) :
+    ∃ low : ℕ, base ≤ low ∧ ∀ γ : ℝ, ∀ K : ℕ, ∃ shift : ℕ,
+      ∀ s : ℕ, ∃ A : ℝ, 1 ≤ A ∧
+      ∀ i side m, (X.src i side).val = some m →
+      ∀ g : ℝ → ℝ, ContDiff ℝ ∞ g → 0 < g 0 →
+      (∀ t, -deriv W.D.w (n01ComponentRoot W.C m (!side) +
+        n01ComponentRootOrientation (!side) * t) = t * g t) →
+      ∀ ρ : ℝ, 0 < ρ →
+      RootCoefficientStripConditions W.D.w g
+        (stateProfile W.D W.S W.C W.C.referenceState)
+        (stateHeight W.D W.S W.C (W.C.referenceState, 0))
+        (n01ComponentRoot W.C m (!side)) (n01ComponentRootOrientation (!side)) ρ →
+      (∀ z ∈ sectorNeighborhood W.S base ε ε,
+        RootCoefficientStripConditions W.D.w g
+          (stateProfile W.D W.S W.C (liftSectorParameter W.S W.C z).1)
+          (stateHeight W.D W.S W.C (liftSectorParameter W.S W.C z))
+          (n01ComponentRoot W.C m (!side)) (n01ComponentRootOrientation (!side)) ρ) →
+      oddPowerTracePrefix (pairGrading (sectorGrading W.S) realGrading)
+        (sectorNeighborhood W.S base ε ε)
+        (fun n => n04PositiveGeometry_rootOddPowerTrace W.D W.S W.C g m (!side) γ n)
+        low K s 1 shift A (W.U.E0 (W.U.sample (X.cell i)))
+        (W.U.H (W.U.sample (X.cell i)) ^ (3 / 4 : ℝ)) := by
+  let data := n04PositiveGeometry_rootOddPowerTrace_sample_prefix_five
+    W X hb hε hεW hεone hflow
+  refine ⟨data.choose, data.choose_spec.1, fun γ K => ?_⟩
+  let prefixData := data.choose_spec.2 γ K
+  refine ⟨prefixData.choose, fun s => ?_⟩
+  let orderData := prefixData.choose_spec s
+  refine ⟨orderData.choose, orderData.choose_spec.1, ?_⟩
+  intro i side m hm g hg hg0 hfactor ρ hρ href hstrip n hn k hk u hu d hd
+  exact orderData.choose_spec.2 i side m hm g hg hg0 hfactor ρ hρ href hstrip
+    n hn k hk u hu d (hd.trans (by decide))
 
 end ContinuousFlexibility.Analysis

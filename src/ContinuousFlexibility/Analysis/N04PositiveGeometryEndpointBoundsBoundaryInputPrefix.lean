@@ -1,11 +1,13 @@
 import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsBoundaryInputs
+import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledForwardLabelReserve
 
 /-!
 # One fixed low base for all nine actual root inputs
 
 The physical coefficients have a fixed spatial loss. The actual forward
 label has a loss for each finite parameter prefix. A single low base is
-selected before that prefix, and their budgets then agree exactly.
+selected before that prefix, and their budgets then agree exactly. Eight
+angular orders are reserved for the subsequent finite root formulas.
 -/
 
 noncomputable section
@@ -18,7 +20,7 @@ open scoped ContDiff
 local instance n04BoundaryInputPrefixStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
-theorem n04PositiveGeometry_rootBoundaryInput_sample_prefix
+theorem n04PositiveGeometry_rootBoundaryInput_sample_prefix_eight
     (W : N04RealizationStart) (X : N04RealizationChoice W)
     {base : ℕ} {ε : ℝ} (hb : W.base ≤ base) (hε : 0 < ε)
     (hεW : ε ≤ W.ε) (hεone : ε ≤ 1)
@@ -34,7 +36,7 @@ theorem n04PositiveGeometry_rootBoundaryInput_sample_prefix
         (stateProfile W.D W.S W.C W.C.referenceState)
         (stateHeight W.D W.S W.C (W.C.referenceState, 0))
         (n01ComponentRoot W.C m (!side)) (n01ComponentRootOrientation (!side)) ρ →
-      ∀ j : Fin 9, ∀ k : ℕ, k ≤ K → ∀ u : ℕ, u ≤ s → ∀ d : ℕ, d ≤ 4 →
+      ∀ j : Fin 9, ∀ k : ℕ, k ≤ K → ∀ u : ℕ, u ≤ s → ∀ d : ℕ, d ≤ 8 →
       ∀ θ : ℝ, ∀ J : SmoothDirections (sectorNeighborhood W.S base ε ε)
         (fun z => iteratedDeriv (u + d)
           (fun η => n04PositiveGeometry_rootBoundaryInput W.D W.S W.C g m (!side) j
@@ -52,12 +54,12 @@ theorem n04PositiveGeometry_rootBoundaryInput_sample_prefix
         R ^ (((u + shift * k : ℕ) : ℝ) / (((s + shift * K : ℕ) : ℝ) + 1)) := by
   have hN := n01Properties_restrict W.hT W.through03.1.1 hb le_rfl hε hεW
   let labelData :=
-    n04PositiveGeometry_rootForwardDerivative_fixedBase_prefix_of_flow W.hT W.hS hN hflow
+    n04PositiveGeometry_rootForwardDerivative_fixedBase_reserve_of_flow W.hT W.hS hN hflow 8
   let Bβ := labelData.choose
   have hBβ := labelData.choose_spec.1
   have hβ := labelData.choose_spec.2
   let coefficientData := n04PositiveGeometry_rootRawCoefficient_sample_prefix
-    W X hb hε hεW hεone 7 Bβ
+    W X hb hε hεW hεone 11 Bβ
   let Bc := coefficientData.choose
   let Lc := coefficientData.choose_spec.choose
   have hBc := coefficientData.choose_spec.choose_spec.1
@@ -158,5 +160,49 @@ theorem n04PositiveGeometry_rootBoundaryInput_sample_prefix
       (fun y => iteratedDeriv (u + d) (f y) θ),
         ‖Q.D k z v‖ ≤ A * E ^ A * parameterHeightWeight H k * P)
     (hcoeff false) (hcoeff true) hlabel j J
+
+/-- The original four-order input interface follows on the same low base. -/
+theorem n04PositiveGeometry_rootBoundaryInput_sample_prefix
+    (W : N04RealizationStart) (X : N04RealizationChoice W)
+    {base : ℕ} {ε : ℝ} (hb : W.base ≤ base) (hε : 0 < ε)
+    (hεW : ε ≤ W.ε) (hεone : ε ≤ 1)
+    (hflow : OrdinaryFlowJacobianBounds W.S W.C base ε) :
+    ∃ low : ℕ, base ≤ low ∧ ∀ K : ℕ, ∃ shift : ℕ,
+      ∀ s : ℕ, ∃ A : ℝ, 1 ≤ A ∧
+      ∀ i side m, (X.src i side).val = some m →
+      ∀ g : ℝ → ℝ, ContDiff ℝ ∞ g → 0 < g 0 →
+      (∀ t, -deriv W.D.w (n01ComponentRoot W.C m (!side) +
+        n01ComponentRootOrientation (!side) * t) = t * g t) →
+      ∀ ρ : ℝ, 0 < ρ →
+      RootCoefficientStripConditions W.D.w g
+        (stateProfile W.D W.S W.C W.C.referenceState)
+        (stateHeight W.D W.S W.C (W.C.referenceState, 0))
+        (n01ComponentRoot W.C m (!side)) (n01ComponentRootOrientation (!side)) ρ →
+      ∀ j : Fin 9, ∀ k : ℕ, k ≤ K → ∀ u : ℕ, u ≤ s → ∀ d : ℕ, d ≤ 4 →
+      ∀ θ : ℝ, ∀ J : SmoothDirections (sectorNeighborhood W.S base ε ε)
+        (fun z => iteratedDeriv (u + d)
+          (fun η => n04PositiveGeometry_rootBoundaryInput W.D W.S W.C g m (!side) j
+            (z, η)) θ),
+      ∀ z ∈ sectorNeighborhood W.S base ε ε,
+      pairGrading (sectorGrading W.S) realGrading low z ≤ 1 →
+      ∀ v : Fin k → (StateDirections W.S × ℝ),
+      (∀ l, pairGrading (sectorGrading W.S) realGrading low (v l) ≤ 1) →
+      ∀ R : ℝ, 1 ≤ R →
+      pairGrading (sectorGrading W.S) realGrading (low + s + shift * K + 1) z ≤ R →
+      (∀ l, pairGrading (sectorGrading W.S) realGrading
+        (low + s + shift * K + 1) (v l) ≤ R) →
+      ‖J.D k z v‖ ≤ A * W.U.E0 (W.U.sample (X.cell i)) ^ A *
+        parameterHeightWeight (W.U.H (W.U.sample (X.cell i)) ^ (3 / 4 : ℝ)) k *
+        R ^ (((u + shift * k : ℕ) : ℝ) / (((s + shift * K : ℕ) : ℝ) + 1)) := by
+  let data := n04PositiveGeometry_rootBoundaryInput_sample_prefix_eight
+    W X hb hε hεW hεone hflow
+  refine ⟨data.choose, data.choose_spec.1, fun K => ?_⟩
+  let prefixData := data.choose_spec.2 K
+  refine ⟨prefixData.choose, fun s => ?_⟩
+  let orderData := prefixData.choose_spec s
+  refine ⟨orderData.choose, orderData.choose_spec.1, ?_⟩
+  intro i side m hm g hg hg0 hfactor ρ hρ href j k hk u hu d hd
+  exact orderData.choose_spec.2 i side m hm g hg hg0 hfactor ρ hρ href
+    j k hk u hu d (hd.trans (by decide))
 
 end ContinuousFlexibility.Analysis

@@ -5,7 +5,7 @@ import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSampleHeight
 /-!
 # Sampled mixed prefixes of the eight actual root formulas
 
-The finite differential recursion keeps one intrinsic angular order
+The finite differential recursion keeps five intrinsic angular orders
 in reserve. Its true parameter towers retain one complete sample height
 factor at every positive parameter order, at one low base selected
 before all finite parameter prefixes.
@@ -41,7 +41,7 @@ def n04PositiveGeometry_rootBoundaryFormula_joint
   n04PositiveGeometry_boundaryFormula_directions
     (n04PositiveGeometry_rootBoundaryInput_joint hT hS hN hε g hg hg0 m side hr hroot) j
 
-theorem n04PositiveGeometry_rootBoundaryFormula_sample_prefix
+theorem n04PositiveGeometry_rootBoundaryFormula_sample_prefix_five
     (W : N04RealizationStart) (X : N04RealizationChoice W)
     {base : ℕ} {ε : ℝ} (hb : W.base ≤ base) (hε : 0 < ε)
     (hεW : ε ≤ W.ε) (hεone : ε ≤ 1)
@@ -57,7 +57,7 @@ theorem n04PositiveGeometry_rootBoundaryFormula_sample_prefix
         (stateProfile W.D W.S W.C W.C.referenceState)
         (stateHeight W.D W.S W.C (W.C.referenceState, 0))
         (n01ComponentRoot W.C m (!side)) (n01ComponentRootOrientation (!side)) ρ →
-      ∀ j : Fin 8, ∀ k : ℕ, k ≤ K → ∀ u : ℕ, u ≤ s → ∀ d : ℕ, d ≤ 1 →
+      ∀ j : Fin 8, ∀ k : ℕ, k ≤ K → ∀ u : ℕ, u ≤ s → ∀ d : ℕ, d ≤ 5 →
       ∀ θ : ℝ, ∀ J : SmoothDirections (sectorNeighborhood W.S base ε ε)
         (fun z => iteratedDeriv (u + d)
           (fun η => n04PositiveGeometry_rootBoundaryFormula W.D W.S W.C g m (!side) j
@@ -74,7 +74,7 @@ theorem n04PositiveGeometry_rootBoundaryFormula_sample_prefix
         parameterHeightWeight (W.U.H (W.U.sample (X.cell i)) ^ (3 / 4 : ℝ)) k *
         R ^ (((u + shift * k : ℕ) : ℝ) / (((s + shift * K : ℕ) : ℝ) + 1)) := by
   have hN := n01Properties_restrict W.hT W.through03.1.1 hb le_rfl hε hεW
-  refine (n04PositiveGeometry_rootBoundaryInput_sample_prefix
+  refine (n04PositiveGeometry_rootBoundaryInput_sample_prefix_eight
     W X hb hε hεW hεone hflow).elim fun low h => ?_
   refine h.elim fun hlow hprefix => ?_
   let heightData := n04PositiveGeometry_sample_height_bound W X
@@ -90,7 +90,7 @@ theorem n04PositiveGeometry_rootBoundaryFormula_sample_prefix
   refine (hshift s).elim fun Ai h => ?_
   refine h.elim fun hAi hin => ?_
   refine (n04PositiveGeometry_boundaryFormulas_weighted_reserve
-    (E := StateDirections W.S × ℝ) K s 1 L hL).elim fun C h => ?_
+    (E := StateDirections W.S × ℝ) K s 5 L hL).elim fun C h => ?_
   refine h.elim fun hC h => ?_
   refine h.elim fun degree hformula => ?_
   let packData := coefficientEnvelope_pack (C * Ai ^ degree) (Ai * degree)
@@ -138,7 +138,7 @@ theorem n04PositiveGeometry_rootBoundaryFormula_sample_prefix
   let Ji := n04PositiveGeometry_rootBoundaryInput_joint
     W.hT W.hS hN hεone g hg hg0 m (!side) hr hroot
   have hsource (l : Fin 9) (e : ℕ) (he : e ≤ K) (b : ℕ) (hb : b ≤ s)
-      (a : ℕ) (ha : a ≤ 1 + 3)
+      (a : ℕ) (ha : a ≤ 5 + 3)
       (Q : SmoothDirections (sectorNeighborhood W.S base ε ε)
         (fun y => iteratedDeriv (b + a)
           (fun η => n04PositiveGeometry_rootBoundaryInput W.D W.S W.C g m (!side) l
@@ -168,5 +168,49 @@ theorem n04PositiveGeometry_rootBoundaryFormula_sample_prefix
   exact hscaled.trans (mul_le_mul_of_nonneg_right
     (mul_le_mul_of_nonneg_right hcost (parameterHeightWeight_nonneg hH k))
       (Real.rpow_nonneg (zero_le_one.trans hR) _))
+
+/-- Restricting the reserve preserves the original one-order interface. -/
+theorem n04PositiveGeometry_rootBoundaryFormula_sample_prefix
+    (W : N04RealizationStart) (X : N04RealizationChoice W)
+    {base : ℕ} {ε : ℝ} (hb : W.base ≤ base) (hε : 0 < ε)
+    (hεW : ε ≤ W.ε) (hεone : ε ≤ 1)
+    (hflow : OrdinaryFlowJacobianBounds W.S W.C base ε) :
+    ∃ low : ℕ, base ≤ low ∧ ∀ K : ℕ, ∃ shift : ℕ,
+      ∀ s : ℕ, ∃ A : ℝ, 1 ≤ A ∧
+      ∀ i side m, (X.src i side).val = some m →
+      ∀ g : ℝ → ℝ, ContDiff ℝ ∞ g → 0 < g 0 →
+      (∀ t, -deriv W.D.w (n01ComponentRoot W.C m (!side) +
+        n01ComponentRootOrientation (!side) * t) = t * g t) →
+      ∀ ρ : ℝ, 0 < ρ →
+      RootCoefficientStripConditions W.D.w g
+        (stateProfile W.D W.S W.C W.C.referenceState)
+        (stateHeight W.D W.S W.C (W.C.referenceState, 0))
+        (n01ComponentRoot W.C m (!side)) (n01ComponentRootOrientation (!side)) ρ →
+      ∀ j : Fin 8, ∀ k : ℕ, k ≤ K → ∀ u : ℕ, u ≤ s → ∀ d : ℕ, d ≤ 1 →
+      ∀ θ : ℝ, ∀ J : SmoothDirections (sectorNeighborhood W.S base ε ε)
+        (fun z => iteratedDeriv (u + d)
+          (fun η => n04PositiveGeometry_rootBoundaryFormula W.D W.S W.C g m (!side) j
+            (z, η)) θ),
+      ∀ z ∈ sectorNeighborhood W.S base ε ε,
+      pairGrading (sectorGrading W.S) realGrading low z ≤ 1 →
+      ∀ v : Fin k → (StateDirections W.S × ℝ),
+      (∀ l, pairGrading (sectorGrading W.S) realGrading low (v l) ≤ 1) →
+      ∀ R : ℝ, 1 ≤ R →
+      pairGrading (sectorGrading W.S) realGrading (low + s + shift * K + 1) z ≤ R →
+      (∀ l, pairGrading (sectorGrading W.S) realGrading
+        (low + s + shift * K + 1) (v l) ≤ R) →
+      ‖J.D k z v‖ ≤ A * W.U.E0 (W.U.sample (X.cell i)) ^ A *
+        parameterHeightWeight (W.U.H (W.U.sample (X.cell i)) ^ (3 / 4 : ℝ)) k *
+        R ^ (((u + shift * k : ℕ) : ℝ) / (((s + shift * K : ℕ) : ℝ) + 1)) := by
+  let data := n04PositiveGeometry_rootBoundaryFormula_sample_prefix_five
+    W X hb hε hεW hεone hflow
+  refine ⟨data.choose, data.choose_spec.1, fun K => ?_⟩
+  let prefixData := data.choose_spec.2 K
+  refine ⟨prefixData.choose, fun s => ?_⟩
+  let orderData := prefixData.choose_spec s
+  refine ⟨orderData.choose, orderData.choose_spec.1, ?_⟩
+  intro i side m hm g hg hg0 hfactor ρ hρ href j k hk u hu d hd
+  exact orderData.choose_spec.2 i side m hm g hg hg0 hfactor ρ hρ href
+    j k hk u hu d (hd.trans (by decide))
 
 end ContinuousFlexibility.Analysis
