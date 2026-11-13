@@ -18,6 +18,67 @@ set_option backward.isDefEq.respectTransparency false
 open Set Filter ContinuousFlexibility.Analysis
 open scoped BigOperators Topology
 set_option diagnostics true
+private theorem circleShiftedForward_ordered_kernel
+    {X Y Z : Type*}
+    [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+    [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
+    [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
+    [IsTopologicalAddGroup Y] [ContinuousSMul ℝ Y]
+    [TopologicalSpace Z] [AddCommGroup Z] [Module ℝ Z]
+    [IsTopologicalAddGroup Z] [ContinuousSMul ℝ Z] [T2Space Z]
+    {U : Set X} {L : X → Y →L[ℝ] Z} (hU : IsOpen U)
+    (J : SmoothDirections (U ×ˢ univ) (fun z : X × Y => L z.1 z.2))
+    (K : (n : ℕ) → X → (Fin n → X) → Y → Z)
+    (hzero : ∀ e ∈ U, ∀ y, L e y = K 0 e Fin.elim0 y)
+    (hstep : ∀ (n : ℕ) (e : X), e ∈ U →
+      ∀ (h : X) (v : Fin n → X) (y : Y),
+        HasProjectiveLineDerivAt (fun z => K n z v y)
+          (K (n + 1) e (Fin.cons h v) y) e h) :
+    ∀ (n : ℕ) (e : X), e ∈ U → ∀ (v : Fin n → X) (y : Y),
+      inverseForwardJet J n e v y = K n e v y := by
+  intro n
+  induction n with
+  | zero =>
+    intro e he v y
+    have hv : v = Fin.elim0 := Subsingleton.elim _ _
+    subst v
+    rw [inverseForwardJet_zero J he y]
+    exact hzero e he y
+  | succ n ih =>
+    intro e he v y
+    have hf := hasProjectiveLineDerivAt_inverseForwardJet
+      (X := X) (Y := Y) (Z := Z) (U := U) (L := L) J he n (Fin.tail v) y (v 0)
+    have hg : (fun z => K n z (Fin.tail v) y) =ᶠ[𝓝 e]
+        (fun z => inverseForwardJet J n z (Fin.tail v) y) := by
+      filter_upwards [hU.mem_nhds he] with z hz
+      exact (ih z hz (Fin.tail v) y).symm
+    have hs := (hf.congr_germ hg).unique (hstep n e he (v 0) (Fin.tail v) y)
+    simpa only [Fin.cons_self_tail] using hs
+
+private theorem circleShiftedForward_linear_unit_bound
+    {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    (A : E →L[ℝ] F) (q : Seminorm ℝ F) (low high : Seminorm ℝ E)
+    {C a : ℝ} (hC : 0 ≤ C)
+    (hlocal : ∀ u, low u < 1 → q (A u) ≤ C * (a + high u)) (y : E) :
+    q (A y) ≤ C * (a * low y + high y) := by
+  classical
+  let B : E [×1]→L[ℝ] F :=
+    ContinuousMultilinearMap.ofSubsingleton ℝ E F (0 : Fin 1) A
+  have hB (w : Fin 1 → E) : B w = A (w 0) := by
+    simp only [B, ContinuousMultilinearMap.ofSubsingleton_apply_apply]
+  have hunit (w : Fin 1 → E) (hw : ∀ i, low (w i) < 1) :
+      q (B w) ≤ C * (a + ∑ i, high (w i)) := by
+    rw [hB]
+    simpa only [Fin.sum_univ_one] using hlocal (w 0) (hw 0)
+  have hbound := multilinear_bound_of_unitBall
+    (E := E) (F := F) (k := 1) (C := C) (a := a) B q low high hC hunit
+    (fun _ : Fin 1 => y)
+  rw [hB] at hbound
+  have he0 : (Finset.univ : Finset (Fin 1)).erase 0 = ∅ := by decide
+  simpa only [multilinearTameSize, Fin.prod_univ_one, Fin.sum_univ_one,
+    he0, Finset.prod_empty, mul_one] using hbound
+
 local instance circleShiftedForwardFixedBasePairSMul (M : CircleModelData) :
     SMul ℝ (M.Space × M.Space) := Prod.instSMul
 
@@ -65,38 +126,14 @@ theorem circleShiftedChartCompose_orderedJet_eq_kernel
       inverseForwardJet J n e v y =
         coupledCircleKernel hD hT hγ hM hI n n e
           (circleTranslationContinuousLinear hM hT hD hγ travel y) v := by
-  induction n with
-  | zero =>
-    intro e he v y
-    have hv : v = Fin.elim0 := Subsingleton.elim _ _
-    subst v
-    rw [inverseForwardJet_zero J he y]
-    exact circleShiftedChartCompose_zero_kernel hD hT hγ hM hI travel e y
-  | succ n ih =>
-    intro e he v y
-    have hf : HasProjectiveLineDerivAt
-        (fun z : M.Space => inverseForwardJet J n z (Fin.tail v) y)
-        (inverseForwardJet J (n + 1) e (Fin.cons (v 0) (Fin.tail v)) y) e (v 0) := by
-      have hd := J.derivative (n + 1) (e, (0 : M.Space)) ⟨he, mem_univ _⟩
-        (Fin.snoc (fun i => (Fin.tail v i, (0 : M.Space))) ((0 : M.Space), y)) (v 0, (0 : M.Space))
-      have hi : Fin.cons (v 0, (0 : M.Space))
-          (Fin.snoc (fun i => (Fin.tail v i, (0 : M.Space))) ((0 : M.Space), y)) =
-          Fin.snoc (α := fun _ : Fin (n + 2) => M.Space × M.Space) (fun i : Fin (n + 1) => (Fin.cons (α := fun _ : Fin (n + 1) => M.Space) (v 0) (Fin.tail v) i, (0 : M.Space)))
-            ((0 : M.Space), y) := by
-        rw [Fin.cons_snoc_eq_snoc_cons]; congr 1
-        funext i; refine Fin.cases ?_ (fun j => ?_) i <;> rfl
-      simpa only [HasProjectiveLineDerivAt, inverseForwardJet,
-        Prod.smul_mk, Prod.mk_add_mk, Prod.fst_add, Prod.snd_add,
-        smul_zero, add_zero, zero_add, hi] using hd
-    have hk := coupledCircleKernel_hasProjectiveLineDerivAt hD hT hγ hM hI
-      n n e (v 0) (circleTranslationContinuousLinear hM hT hD hγ travel y) (Fin.tail v)
-    have hg : (fun z => coupledCircleKernel hD hT hγ hM hI n n z
-        (circleTranslationContinuousLinear hM hT hD hγ travel y) (Fin.tail v)) =ᶠ[𝓝 e]
-        (fun z => inverseForwardJet J n z (Fin.tail v) y) := by
-      filter_upwards [hU.mem_nhds he] with z hz
-      exact (ih z hz (Fin.tail v) y).symm
-    have hsame : inverseForwardJet J (n + 1) e (Fin.cons (v 0) (Fin.tail v)) y = coupledCircleKernel hD hT hγ hM hI (n + 1) (n + 1) e (circleTranslationContinuousLinear hM hT hD hγ travel y) (Fin.cons (v 0) (Fin.tail v)) := HasProjectiveLineDerivAt.unique (V := M.Space) (F := M.Space) (HasProjectiveLineDerivAt.congr_germ (V := M.Space) (W := M.Space) hf hg) hk
-    simpa only [Fin.cons_self_tail] using hsame
+  exact circleShiftedForward_ordered_kernel
+    (X := M.Space) (Y := M.Space) (Z := M.Space) (U := U)
+    (L := circleShiftedChartComposeContinuousLinear hM hT hD hγ travel) hU J
+    (fun k e v y => coupledCircleKernel hD hT hγ hM hI k k e
+      (circleTranslationContinuousLinear hM hT hD hγ travel y) v)
+    (fun e _ y => circleShiftedChartCompose_zero_kernel hD hT hγ hM hI travel e y)
+    (fun k e _ h v y => coupledCircleKernel_hasProjectiveLineDerivAt hD hT hγ hM hI
+      k k e h (circleTranslationContinuousLinear hM hT hD hγ travel y) v) n
 
 private theorem circleShiftedChartCompose_unit_majorant
     (base H n : ℕ) (R : ℝ) (hR : 1 ≤ R) (travel : ℕ → ℝ)
@@ -193,21 +230,13 @@ theorem circleShiftedChartCompose_orderedJets_fixedBase_bound :
     rw [circleShiftedChartCompose_orderedJet_eq_kernel hD hT hγ hM hI travel hU J n e he v u]
     exact (hc e heR (τ u) v).trans
       ((mul_le_mul_of_nonneg_left hmajor hC).trans_eq (mul_assoc C P _).symm)
-  let A : M.Space [×1]→L[ℝ] M.Space :=
-    ContinuousMultilinearMap.ofSubsingleton ℝ M.Space M.Space (0 : Fin 1)
-      (inverseForwardJetLinear J n e v)
-  have hA (w : Fin 1 → M.Space) : A w = inverseForwardJet J n e v (w 0) := by
-    simpa only [A, ContinuousMultilinearMap.ofSubsingleton_apply_apply] using
-      inverseForwardJetLinear_apply J n e v (w 0)
-  have hunit (w : Fin 1 → M.Space) (hw : ∀ i, M.grading base (w i) < 1) :
-      M.grading s (A w) ≤ C * P * (a + ∑ i, M.grading H (w i)) := by
-    rw [hA]
-    simpa only [Fin.sum_univ_one] using hlocal (w 0) (hw 0)
-  have hbound : M.grading s (A (fun _ : Fin 1 => y)) ≤ (C * P) * multilinearTameSize (M.grading base) (M.grading H) 1 a (fun _ : Fin 1 => y) :=
-    multilinear_bound_of_unitBall (E := M.Space) (F := M.Space) (k := 1) (C := C * P) (a := a) A (M.grading s) (M.grading base) (M.grading H) (mul_nonneg hC hP) hunit (fun _ : Fin 1 => y)
-  rw [hA] at hbound
-  have he0 : (Finset.univ : Finset (Fin 1)).erase 0 = ∅ := by decide
-  simpa only [multilinearTameSize, Fin.prod_univ_one, Fin.sum_univ_one,
-    he0, Finset.prod_empty, mul_one, a, H] using hbound
+  have hbound := circleShiftedForward_linear_unit_bound
+    (E := M.Space) (F := M.Space)
+    (inverseForwardJetLinear (X := M.Space) (Y := M.Space) (Z := M.Space)
+      (U := U) (L := circleShiftedChartComposeContinuousLinear hM hT hD hγ travel) J n e v)
+    (M.grading s) (M.grading base) (M.grading H)
+    (C := C * P) (a := a) (mul_nonneg hC hP)
+    (fun u hu => by simpa only [inverseForwardJetLinear_apply] using hlocal u hu) y
+  simpa only [inverseForwardJetLinear_apply, a, H] using hbound
 
 end ContinuousFlexibility.Statements
