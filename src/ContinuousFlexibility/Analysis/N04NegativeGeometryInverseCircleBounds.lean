@@ -22,6 +22,19 @@ namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
 
+/- Use the same cached state instances as the statement layer. -/
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
+
 local instance n04NegativeGeometryInverseBoundsCircleSMul (H : CircleModelData) :
     SMul ℝ (H.Space × H.Space) := Prod.instSMul
 
@@ -46,13 +59,15 @@ private theorem inverseOperator_fixedBase
       ∀ v : Fin n → H.Space × H.Space,
         H.grading s (K.D n y v) ≤
           C * tameJetSize (pairGrading H.grading H.grading) n s L B y v := by
-  obtain ⟨B, hB⟩ := circlePositiveInverseComposeLinear_fixedBase_oneHigh
-    hD hT hγ hH hi JF (JP (fun _ => 0)) (a / 2) (half_pos ha)
+  let data := circlePositiveInverseComposeLinear_fixedBase_oneHigh
+    (M := H) hD hT hγ hH hi JF (JP (fun _ => 0)) (a / 2) (half_pos ha)
+  let B : ℕ := data.choose
   refine ⟨B, fun n => ?_⟩
-  obtain ⟨L, hL⟩ := hB n
+  let orderData := data.choose_spec n
+  let L : ℕ := orderData.choose
   refine ⟨L, fun R _hR s => ?_⟩
-  obtain ⟨C, hC, hb⟩ := hL (max R 1) (le_max_right _ _) s
-  refine ⟨C, hC, fun travel K y hy hlow v => ?_⟩
+  let estimate := orderData.choose_spec (max R 1) (le_max_right _ _) s
+  refine ⟨estimate.choose, estimate.choose_spec.1, fun travel K y hy hlow v => ?_⟩
   have hlower (m : ℕ) (θ : ℝ) :
       a / 2 ≤ deriv (circleAffineLift travel (H.decode y.1) 1 m) θ := by
     rw [circleAffineLift_deriv hH]
@@ -66,7 +81,7 @@ private theorem inverseOperator_fixedBase
     (K.unique K' n y hy)
   have heq' : K.D n y v = (JP travel).D n y v := heq
   rw [heq']
-  exact hb travel (JP travel) y hlower (hlow.trans (le_max_left _ _)) v
+  exact estimate.choose_spec.2 travel (JP travel) y hlower (hlow.trans (le_max_left _ _)) v
 
 section InverseComposition
 
@@ -102,7 +117,7 @@ theorem n04NegativeGeometry_circleInverse_fixedBase_oneHigh
       ∀ x ∈ U, p B x ≤ R → ∀ v : Fin n → E,
         H.grading s (K.D n x v) ≤ C * tameJetSize p n s L B x v := by
   classical
-  letI : ∀ n, CompleteSpace (H.level n) :=
+  let : ∀ n, CompleteSpace (H.level n) :=
     fun n => (hH.2.1 n).isComplete.completeSpace_coe
   let W : Set H.Space := circleUniformInverseDomain H a
   have hW : IsOpen W := circleUniformInverseDomain_isOpen H a
@@ -119,28 +134,32 @@ theorem n04NegativeGeometry_circleInverse_fixedBase_oneHigh
   let JF : SmoothDirections univ (fun y : H.Space × H.Space =>
       circleShiftedChartComposeContinuousLinear hH hT hD hγ (fun _ => 0) y.1 y.2) :=
     (exists_circleChartComposition_uniform_oneHigh hH hT hD hγ hi (fun _ => 0)).choose
-  obtain ⟨BK, hBK⟩ := inverseOperator_fixedBase hH hT hD hγ hi JF JP a ha
-  choose d hd using hJ
-  choose e he using hBK
+  let inverseData := inverseOperator_fixedBase hH hT hD hγ hi JF JP a ha
+  let BK : ℕ := inverseData.choose
+  let d : ℕ → ℕ := fun n => (hJ n).choose
+  let e : ℕ → ℕ := fun n => (inverseData.choose_spec n).choose
   have houter (n : ℕ) (R : ℝ) (_hR : 0 ≤ R) (s : ℕ) :
       ∃ C : ℝ, 0 ≤ C ∧ ∀ i y, y ∈ W ×ˢ univ →
         pairGrading H.grading H.grading BK y ≤ R →
         ∀ v : Fin n → H.Space × H.Space,
           H.grading s ((KP i).D n y v) ≤
             C * tameJetSize (pairGrading H.grading H.grading) n s (e n) BK y v := by
-    obtain ⟨C, hC, hb⟩ := he n R _hR s
-    refine ⟨C, hC, fun i y hy hlow v => ?_⟩
-    exact hb (travel i) (KP i) y hy hlow v
+    let estimate := (inverseData.choose_spec n).choose_spec R _hR s
+    exact ⟨estimate.choose, estimate.choose_spec.1,
+      fun i y hy hlow v => estimate.choose_spec.2 (travel i) (KP i) y hy hlow v⟩
   have hmap (i : I) : MapsTo (fun x => (f i x, g i x)) U (W ×ˢ univ) :=
     fun x hx => ⟨mem_circleUniformInverseDomain hH hT hD hγ ha (f i x)
       (hlower i x hx), mem_univ _⟩
-  obtain ⟨B, hB, hb⟩ := projectiveCompositionJets_fixedBase_oneHigh
-    p (pairGrading H.grading H.grading) H.grading hp hIp J KP BJ BK d e hd houter hmap
-  refine ⟨B, hB, fun n => ?_⟩
-  obtain ⟨L, hL⟩ := hb n
+  let composeData := projectiveCompositionJets_fixedBase_oneHigh
+    p (pairGrading H.grading H.grading) H.grading hp hIp J KP BJ BK d e
+      (fun n => (hJ n).choose_spec) houter hmap
+  let B : ℕ := composeData.choose
+  refine ⟨B, composeData.choose_spec.1, fun n => ?_⟩
+  let orderData := composeData.choose_spec.2 n
+  let L : ℕ := orderData.choose
   refine ⟨L, fun R hR s => ?_⟩
-  obtain ⟨C, hC, hc⟩ := hL R hR s
-  refine ⟨C, hC, fun i K x hx hlow v => ?_⟩
+  let estimate := orderData.choose_spec R hR s
+  refine ⟨estimate.choose, estimate.choose_spec.1, fun i K x hx hlow v => ?_⟩
   let Kactual : SmoothDirections U (fun x =>
       circlePositiveInverseComposeLinear hH hT hD hγ (travel i) (f i x) (g i x)) :=
     smoothDirectionsOfJets (J i).open_domain
@@ -151,12 +170,9 @@ theorem n04NegativeGeometry_circleInverse_fixedBase_oneHigh
   have heq' : K.D n x v =
       projectiveCompositionJets (fun x => (f i x, g i x)) (J i).D (KP i).D n x v := heq
   rw [heq']
-  exact hc i x hx hlow v
+  exact estimate.choose_spec.2 i x hx hlow v
 
 end InverseComposition
-
-local instance n04NegativeGeometryInverseBoundsStateSMul (S : PhysicalSpacesData) :
-    SMul ℝ (AnnularState S) := Prod.instSMul
 
 private theorem inverseBounds_parameterInterpolation
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -164,10 +180,12 @@ private theorem inverseBounds_parameterInterpolation
     HasInterpolation (pairGrading realGrading (pairGrading (sectorGrading S) realGrading)) := by
   have hr : Monotone realGrading := fun _ _ _ _ => le_rfl
   have hsector : HasInterpolation (sectorGrading S) := by
-    obtain ⟨b, l, hb⟩ := coordinate_hasInterpolation_stateGrading hS
+    let data : HasInterpolation (stateGrading S) := coordinate_hasInterpolation_stateGrading hS
+    let b : ℕ := data.choose
+    let l : ℕ := data.choose_spec.choose
     refine ⟨b, l, fun a b c ha hab hbc => ?_⟩
-    obtain ⟨A, hA, hb⟩ := hb a b c ha hab hbc
-    exact ⟨A, hA, fun z => hb z.val⟩
+    let estimate := data.choose_spec.choose_spec a b c ha hab hbc
+    exact ⟨estimate.choose, estimate.choose_spec.1, fun z => estimate.choose_spec.2 z.val⟩
   exact coordinate_hasInterpolation_pair hr (sectorPairGrading_monotone S)
     coordinate_hasInterpolation_realGrading
     (coordinate_hasInterpolation_pair (sectorGrading_monotone S) hr

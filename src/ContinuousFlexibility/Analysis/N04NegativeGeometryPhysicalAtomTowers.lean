@@ -77,7 +77,7 @@ def negativePhysicalAtomJointTower
     apply n04NegativeGeometry_referenceHalf_subset_component
       W.hT W.hS W.through03 W.field e k m side hi
     exact (n04NegativeGeometry_affine_unitPoint (K.physicalLeft k) (K.physicalRight k)
-      (hA.referenceBounds k).2.1).2.1 hp
+      (hA.referenceBounds k).1).2.1 hp
   have hchart (z : StateDirections W.S × ℝ) :
       K.chart (liftSectorParameter W.S W.C z) k =
         n04bActualNegativeChart W.hT W.hS W.through03 W.field

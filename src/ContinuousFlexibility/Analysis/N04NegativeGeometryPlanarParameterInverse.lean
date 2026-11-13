@@ -100,16 +100,7 @@ theorem n04NegativeGeometry_contDiffOn_parameterized_planar_inverse
   let L : PolarPoint ≃L[ℝ] PolarPoint := A.toContinuousLinearEquivOfDetNeZero hd
   have hL : (L : PolarPoint →L[ℝ] PolarPoint) = A := by
     simp only [L, ContinuousLinearMap.coe_toContinuousLinearEquivOfDetNeZero]
-  apply ContinuousLinearMap.IsInvertible.of_inverse
-    (g := (L.symm : PolarPoint →L[ℝ] PolarPoint))
-  · ext y
-    change A (L.symm y) = y
-    rw [← hL]
-    exact L.apply_symm_apply y
-  · ext y
-    change L.symm (A y) = y
-    rw [← hL]
-    exact L.symm_apply_apply y
+  exact ⟨L, hL⟩
 
 end NormedParameters
 
