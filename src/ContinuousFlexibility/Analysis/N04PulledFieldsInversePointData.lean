@@ -36,7 +36,7 @@ structure N04PulledFieldsInversePointData
     (base : ℕ) (ε : ℝ) where
   joint : ∀ m, SmoothDirections (sectorNeighborhood (G.S η) base ε ε ×ˢ unitStrip)
     (fun z : Parameter (G.S η) × PolarPoint => G.pulledPoint η (G.lift η z.1) m z.2)
-  prefix : ∀ K : ℕ, ∃ offset : ℕ, ∀ N : ℕ,
+  bounds : ∀ K : ℕ, ∃ offset : ℕ, ∀ N : ℕ,
     ∃ M A : ℝ, 1 ≤ M ∧ 0 ≤ A ∧
     ∀ m z, z ∈ sectorNeighborhood (G.S η) base ε ε →
     ∀ q ∈ unitStrip, ∀ R : ℝ, 1 ≤ R →
@@ -79,7 +79,7 @@ theorem n04PulledFields_inversePoint_neighborhood
       (fun z : Parameter (G.S η) × PolarPoint => G.pulledPoint η (G.lift η z.1) m z.2) :=
     fun m => (J0 m).restrict (hU.prod (isOpen_Ioo.prod isOpen_univ))
       (fun _ hz => ⟨hsub hz.1, hz.2⟩)
-  refine ⟨{ joint := J, prefix := ?_ }⟩
+  refine ⟨{ joint := J, bounds := ?_ }⟩
   intro K
   refine (hlow.2 K).elim fun offset hoffset => ⟨offset, fun N => ?_⟩
   refine (hoffset N).elim fun M hM => hM.elim fun A hMA => ?_

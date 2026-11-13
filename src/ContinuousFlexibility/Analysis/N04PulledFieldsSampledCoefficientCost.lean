@@ -18,6 +18,35 @@ namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements CanonicalGeometry
 
+set_option backward.isDefEq.respectTransparency false
+
+/-- Pack the one-sided material transfer before introducing the gauge's
+dependent state space or its actual inverse-point maps. -/
+theorem n04PulledFields_material_heightCost
+    {D : ReferenceData} {T : MaterialData}
+    (hT : IsMaterialData D T) (hRef : IsAccumulatingProfile D)
+    {C P L : ℝ} (hC : 0 ≤ C) (hP : 0 ≤ P) (hL : 0 ≤ L) :
+    ∃ B : ℝ, 0 < B ∧ ∀ r s : ℝ,
+      r ∈ Ioo D.a D.b → s ∈ Ioo D.a D.b → 1 ≤ T.E0 s →
+      endpointX 1 (Statements.endpointDistance D s) ≤
+        endpointX 1 (Statements.endpointDistance D r) + L →
+      C * T.E0 r ^ P * T.H r ^ (3 / 4 : ℝ) ≤
+        B * T.E0 s ^ B * T.H s ^ (3 / 4 : ℝ) := by
+  obtain ⟨CW, A, _, _, htransfer⟩ :=
+    n04Realization_material_H_E0_rpow_oneSided hT hRef
+      (by norm_num : 0 < (3 / 4 : ℝ)) hP hL
+  obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (C * CW) A
+  refine ⟨B, hB, fun r s hr hs hE hdist => ?_⟩
+  have hw := htransfer r s hr hs hdist
+  have hH : 0 ≤ T.H s ^ (3 / 4 : ℝ) :=
+    Real.rpow_nonneg (hT.2.1 s hs).2.1.le _
+  calc
+    _ = C * (T.H r ^ (3 / 4 : ℝ) * T.E0 r ^ P) := by ring
+    _ ≤ C * (CW * T.H s ^ (3 / 4 : ℝ) * T.E0 s ^ A) :=
+      mul_le_mul_of_nonneg_left hw hC
+    _ = ((C * CW) * T.E0 s ^ A) * T.H s ^ (3 / 4 : ℝ) := by ring
+    _ ≤ _ := mul_le_mul_of_nonneg_right (hpack (T.E0 s) hE) hH
+
 attribute [local instance]
   n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
   n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
@@ -43,29 +72,16 @@ theorem n04PulledFields_sampledCoefficient_heightCost
             G.W.U.H (G.pulledPoint η (G.lift η z) m q).1 ^ (3 / 4 : ℝ) ≤
           B * G.W.U.E0 (G.W.U.sample ((G.V η).cell m)) ^ B *
             G.W.U.H (G.W.U.sample ((G.V η).cell m)) ^ (3 / 4 : ℝ) := by
-  obtain ⟨L, hL, hpoint⟩ := n04PulledFields_pulledPoint_sample_endpointX G hadm
-  obtain ⟨CW, A, hCW, hA, htransfer⟩ :=
-    n04Realization_material_H_E0_rpow_oneSided
-      (isMaterialData_enlargedMaterialData G.W.radial.1 G.W.hT) G.W.radial.1
-      (by norm_num : 0 < (3 / 4 : ℝ)) hP hL
-  obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (C * CW) A
-  refine ⟨B, hB, fun η z hz m q hq => ?_⟩
-  have hp := hpoint η z hz m q hq
-  have hw := htransfer (G.pulledPoint η (G.lift η z) m q).1
+  let pointData := n04PulledFields_pulledPoint_sample_endpointX G
+    (base := base) (ε := ε) hadm
+  let costData := n04PulledFields_material_heightCost
+    (isMaterialData_enlargedMaterialData G.W.radial.1 G.W.hT) G.W.radial.1
+    hC hP pointData.choose_spec.1
+  refine ⟨costData.choose, costData.choose_spec.1, fun η z hz m q hq => ?_⟩
+  have hp := pointData.choose_spec.2 η z hz m q hq
+  exact costData.choose_spec.2 (G.pulledPoint η (G.lift η z) m q).1
     (G.W.U.sample ((G.V η).cell m)) hp.1
-    (n04PulledFields_sample_mem_interval G η m) hp.2
-  have hH : 0 ≤ G.W.U.H (G.W.U.sample ((G.V η).cell m)) ^ (3 / 4 : ℝ) :=
-    Real.rpow_nonneg ((G.cost_nonneg η).2.1 m) _
-  calc
-    _ = C * (G.W.U.H (G.pulledPoint η (G.lift η z) m q).1 ^ (3 / 4 : ℝ) *
-        G.W.U.E0 (G.pulledPoint η (G.lift η z) m q).1 ^ P) := by ring
-    _ ≤ C * (CW * G.W.U.H (G.W.U.sample ((G.V η).cell m)) ^ (3 / 4 : ℝ) *
-        G.W.U.E0 (G.W.U.sample ((G.V η).cell m)) ^ A) :=
-      mul_le_mul_of_nonneg_left hw hC
-    _ = ((C * CW) * G.W.U.E0 (G.W.U.sample ((G.V η).cell m)) ^ A) *
-        G.W.U.H (G.W.U.sample ((G.V η).cell m)) ^ (3 / 4 : ℝ) := by ring
-    _ ≤ _ := mul_le_mul_of_nonneg_right
-      (hpack _ ((G.cost_nonneg η).2.2 m)) hH
+    (n04PulledFields_sample_mem_interval G η m) ((G.cost_nonneg η).2.2 m) hp.2
 
 /-- An unweighted uniform reference term is added only after the
 current height-weighted term has reached the actual sample. -/

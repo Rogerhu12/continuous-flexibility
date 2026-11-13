@@ -131,6 +131,6 @@ theorem n04PulledFieldsColumn_currentData
   refine ⟨base', ε', hb, hdata.2.1, hεε, fun F hF => ?_⟩
   refine (hdata.2.2.2 F hF).elim fun D => ?_
   exact n04PulledFieldsColumn_currentData_of_inversePrefix G η hadm' hhalf F D
-    I.joint I.prefix
+    I.joint I.bounds
 
 end ContinuousFlexibility.Analysis

@@ -103,7 +103,12 @@ def n04PulledFields_actualErrorJointDirections (π : (ℝ × ℝ) →L[ℝ] ℝ)
         ((x.1, R.residual (liftSectorParameter S C x.1)), x.2)) :=
     smoothDirectionsProd Jstate Jpoint
   let K := n04PulledFields_opticalErrorJointDirections Q hN hS hT hR π
-  exact smoothDirections_realCompTVS Jgraph K
+  exact smoothDirections_realCompTVS
+    (f := fun x : (StateDirections S × ℝ) × PolarPoint =>
+      ((x.1, R.residual (liftSectorParameter S C x.1)), x.2))
+    (g := fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+      π (returnCorrectionCoefficientError D S C R Q.cutoff
+        (liftSectorParameter S C x.1.1) x.2 x.1.2)) Jgraph K
     (fun _ hx => ⟨⟨hx.1, mem_univ _⟩, hx.2⟩)
 
 end ContinuousFlexibility.Analysis

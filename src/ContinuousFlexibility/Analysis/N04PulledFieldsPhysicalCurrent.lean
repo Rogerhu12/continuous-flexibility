@@ -122,7 +122,7 @@ theorem n04PulledFields_physical_currentData
       have hp := @hmap m (z, q) ⟨hz, hq⟩
       simpa only [hA m z q hp] using
         hCP.2.2 m z hz q hq hp a b j hj hab u hu R hR hzR huR)
-    IP.prefix
+    IP.bounds
   refine n04PulledFieldsCurrentData_of_positiveJets hadm.2.1
     (fun _ hz => n04PulledFields_parameterGrading_le_one (G.S η) hε hz)
     (G.cost_nonneg η).2.2 (G.cost_nonneg η).2.1 RP

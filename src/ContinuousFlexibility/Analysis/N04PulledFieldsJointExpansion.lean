@@ -93,7 +93,8 @@ private theorem n04PulledFields_jointExpansion_of_mixed
             (fun p => (J.fixedLast ((v 0).1, 0)).D j (x, p)
               (fun i => (u i, 0))) q := by
         have hslots : (fun i : Fin (j + 1) => (Fin.cons (v 0).1 u i, (0 : PolarPoint))) =
-            Fin.cons ((v 0).1, (0 : PolarPoint)) (fun i => (u i, (0 : PolarPoint))) := by
+            Fin.cons (α := fun _ : Fin (j + 1) => E × PolarPoint)
+              ((v 0).1, (0 : PolarPoint)) (fun i => (u i, (0 : PolarPoint))) := by
           funext i
           refine Fin.cases ?_ (fun k => ?_) i <;> rfl
         calc

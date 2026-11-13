@@ -59,9 +59,14 @@ def restrict (D : N04PulledFieldsColumnData G η base outLoss ε F)
       (fun z : Parameter (G.S η) × PolarPoint => F (G.lift η z.1) z.2) :=
     D.joint.restrict (hU.prod (isOpen_Ioo.prod isOpen_univ))
       (fun _ hz => ⟨hsub hz.1, hz.2⟩)
-  refine { mixed := RF, joint := JF,
-    uniformSeminorm := ?_, expansion := ?_,
-    periodic := fun z hz => D.periodic z (hsub hz), power := ?_ }
+  refine {
+    mixed := RF
+    joint := JF
+    uniformSeminorm := ?_
+    expansion := ?_
+    periodic := fun z hz => D.periodic z (hsub hz)
+    power := ?_
+  }
   · intro a c n
     refine (D.uniformSeminorm a c n).elim fun p hp => hp.elim fun B hB => ?_
     exact ⟨p, B, hB.1, hB.2.1, fun q z hz v => hB.2.2 q z (hsub hz) v⟩
