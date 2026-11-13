@@ -176,9 +176,10 @@ theorem fullHalfFields_finiteAffine_representatives_uniform
     have hAg (i : Fin 2) : A i =ᶠ[𝓝 (0, p)]
         (fun y => N i (y.1, W.negativeInwardPoint m side y.2)) := hΨg.fun_comp (N i)
     have hΦg : (fun y => Φ (q y)) =ᶠ[𝓝 (0, p)] (fun y => Real.sqrt (q y)) := by
-      simpa only [Φ, Function.comp_apply, Real.sqrt_eq_rpow] using
-        (hΦeq (q (0, p)) (hqrange 0 p hp)).comp_tendsto
+      have he := (hΦeq (q (0, p)) (hqrange 0 p hp)).comp_tendsto
         hq.continuous.continuousAt
+      filter_upwards [he] with y hy
+      exact hy.trans (Real.sqrt_eq_rpow (q y)).symm
     constructor
     · filter_upwards [hAg 0] with y hy
       change -n01ComponentRootOrientation side * A 0 y =
@@ -201,7 +202,8 @@ theorem fullHalfFields_finiteAffine_representatives_uniform
     have hρeq (y : Fin n → ℝ) (hy : y ∈ V₀) : ρ y = y := hV₀ hy
     refine ⟨V₀, hV₀open, h0V₀, ?_, ?_⟩
     · intro y hy
-      simpa only [hρeq y hy] using hρV y
+      simpa only [hρeq y hy] using
+        (show x + L (ρ y) ∈ stateNeighborhood W.S W.C W.base (W.ε / 2) from hρV y)
     · intro y hy p hp
       have hin := inwardComponentPoint_mem side
         (show p.1 ∈ Icc (0 : ℝ) (W.C.right m - W.C.left m) from

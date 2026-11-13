@@ -93,8 +93,9 @@ private theorem interior_host_parameter_weights
     have he := mul_le_mul
       (show C₁ ≤ C by dsimp only [C]; linarith only [hC₀])
       (mul_le_mul_of_nonneg_left
-        (Real.rpow_le_rpow_of_exponent_le hE (le_add_of_nonneg_left hP₀)) hH)
-      (mul_nonneg hH (Real.rpow_nonneg (zero_le_one.trans hE) _))
+        (Real.rpow_le_rpow_of_exponent_le hE
+          (show P₁ ≤ P₀ + P₁ from le_add_of_nonneg_left hP₀)) hH)
+      (mul_nonneg hH (Real.rpow_nonneg (zero_le_one.trans hE) P₁))
       (zero_le_one.trans hC)
     simpa only [parameterHeightWeight, if_neg hk, mul_assoc, mul_left_comm, mul_comm]
       using hh.trans he
@@ -187,9 +188,10 @@ theorem negativeInterior_speed_power_bounds
   have hQ : 0 ≤ Q := Real.rpow_nonneg (zero_le_one.trans hR) _
   have hh := hraw m k hk a b hab q hq J z hz hlow v hv R hR hhigh hvhigh
   have hc : d ^ a * ‖J.D k z v‖ ≤ C₀ * (C₁ * E ^ A₁ * H) * Q :=
-    hh.trans (by simpa only [mul_assoc] using
-      mul_le_mul_of_nonneg_right
-        (mul_le_mul_of_nonneg_left (hhost m side k) (zero_le_one.trans hC₀)) hQ)
+    hh.trans (by
+      simpa only [mul_assoc] using
+        mul_le_mul_of_nonneg_right
+          (mul_le_mul_of_nonneg_left (hhost m side k) (zero_le_one.trans hC₀)) hQ)
   have hcancel : d⁻¹ ^ a * (d ^ a * ‖J.D k z v‖) = ‖J.D k z v‖ := by
     rw [← mul_assoc, ← mul_pow, inv_mul_cancel₀ hd.ne', one_pow, one_mul]
   calc

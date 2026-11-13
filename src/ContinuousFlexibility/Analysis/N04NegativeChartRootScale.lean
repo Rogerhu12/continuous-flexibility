@@ -69,7 +69,7 @@ theorem negativeChartRootScale_inverse_material
   have h₁ := Real.one_le_rpow hE (add_nonneg hA hCpos.le)
   have h₂ := (hb m side).trans (mul_le_mul_of_nonneg_left
     (Real.rpow_le_rpow_of_exponent_le hE (le_add_of_nonneg_right hCpos.le)) hB.le)
-  have h₃ := mul_le_mul_of_nonneg_left
+  have h₃ : 4 * C * E ^ C ≤ 4 * C * E ^ (A + C) := mul_le_mul_of_nonneg_left
     (Real.rpow_le_rpow_of_exponent_le hE (le_add_of_nonneg_left hA))
     (mul_nonneg (by norm_num : (0 : ℝ) ≤ 4) hCpos.le)
   have hs := mul_le_mul_of_nonneg_left (add_le_add (add_le_add h₁ h₂) h₃)
