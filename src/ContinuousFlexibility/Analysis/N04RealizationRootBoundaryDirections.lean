@@ -27,12 +27,15 @@ local instance n04RootBoundaryDirectionsStateSMul (S : PhysicalSpacesData) :
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
-/-- The inverse of either original root label, on the unchanged joint
-sector and angular domain. The Boolean selector changes only which
-already constructed circle displacement is passed to circle inversion. -/
-def n04Realization_rootLabel_inverseJointDirections
+/-- Both genuine towers use the same original circle displacement and
+unchanged joint sector and angular domain. The Boolean selector changes
+only which existing root label is passed to circle inversion. -/
+def n04Realization_rootLabel_jointDirections
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (hN : N01Properties D T S C base loss ε) (m : ℕ) (side : Bool) :
+    (SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
+      (fun p : (StateDirections S × ℝ) × ℝ =>
+        n01RootLabel S C (liftSectorParameter S C p.1) m side p.2)) ×
     SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
       (fun p : (StateDirections S × ℝ) × ℝ =>
         Function.invFun (n01RootLabel S C (liftSectorParameter S C p.1) m side) p.2) := by
@@ -83,19 +86,41 @@ def n04Realization_rootLabel_inverseJointDirections
       (fun _ => 0) J hpos
   have hweight (j : ℕ) : 0 < T.H (T.sample j) :=
     (material_circle_sample_weights_pos hT hN.1.1).2 j
-  apply (circleAffineLiftJointDirections hH hweight JG (fun _ => 0) m).congrOn
-  intro p hp
-  have hd : H.decode (G p.1) m p.2 =
-      circleAffineInverse (fun _ => 0) (F p.1) m p.2 - (p.2 - 0) :=
-    congrArg (fun g : ℕ → ℝ → ℝ => g m p.2)
-      (circlePositiveInversePerturbation_decode hH hT hN.1.1 (by norm_num)
-        (fun _ => 0) (F p.1) (hpos hp.1))
-  have hinv : circleAffineInverse (fun _ => 0) (F p.1) m p.2 =
-      Function.invFun (n01RootLabel S C (liftSectorParameter S C p.1) m side) p.2 :=
-    congrArg (fun f : ℝ → ℝ => Function.invFun f p.2) (hlift p.1 hp.1 m)
-  change p.2 + 0 + H.decode (G p.1) m p.2 = _
-  rw [hd, hinv]
-  ring
+  refine ⟨?_, ?_⟩
+  · apply (circleAffineLiftJointDirections hH hweight J (fun _ => 0) m).congrOn
+    intro p hp
+    simpa only [circleAffineLift, one_mul] using congrFun (hlift p.1 hp.1 m) p.2
+  · apply (circleAffineLiftJointDirections hH hweight JG (fun _ => 0) m).congrOn
+    intro p hp
+    have hd : H.decode (G p.1) m p.2 =
+        circleAffineInverse (fun _ => 0) (F p.1) m p.2 - (p.2 - 0) :=
+      congrArg (fun g : ℕ → ℝ → ℝ => g m p.2)
+        (circlePositiveInversePerturbation_decode hH hT hN.1.1 (by norm_num)
+          (fun _ => 0) (F p.1) (hpos hp.1))
+    have hinv : circleAffineInverse (fun _ => 0) (F p.1) m p.2 =
+        Function.invFun (n01RootLabel S C (liftSectorParameter S C p.1) m side) p.2 :=
+      congrArg (fun f : ℝ → ℝ => Function.invFun f p.2) (hlift p.1 hp.1 m)
+    change p.2 + 0 + H.decode (G p.1) m p.2 = _
+    rw [hd, hinv]
+    ring
+
+/-- The original forward root label, with its genuine state and angle jets. -/
+def n04Realization_rootLabel_forwardJointDirections
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε) (m : ℕ) (side : Bool) :
+    SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
+      (fun p : (StateDirections S × ℝ) × ℝ =>
+        n01RootLabel S C (liftSectorParameter S C p.1) m side p.2) :=
+  (n04Realization_rootLabel_jointDirections hT hS hN m side).1
+
+/-- The literal inverse of the same original root label. -/
+def n04Realization_rootLabel_inverseJointDirections
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε) (m : ℕ) (side : Bool) :
+    SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
+      (fun p : (StateDirections S × ℝ) × ℝ =>
+        Function.invFun (n01RootLabel S C (liftSectorParameter S C p.1) m side) p.2) :=
+  (n04Realization_rootLabel_jointDirections hT hS hN m side).2
 
 /-- The returned genuine tower is for the literal current point of the
 same typed atlas at its original physical root. No neighborhood is
