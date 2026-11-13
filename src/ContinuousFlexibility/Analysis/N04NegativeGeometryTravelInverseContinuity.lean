@@ -40,7 +40,10 @@ theorem n04NegativeGeometry_travelAngleInverse_continuousOn
   have hA := continuousOn_parameterizedCircleInverse_of_strictMono hφ
     (fun q hq => hMono q.1 hq.1 q.2 hq.2)
     (fun q hq => hSurj q.1 hq.1 q.2 hq.2)
-  have hc := hA.comp
+  have hc : ContinuousOn
+      (fun q : P × PolarPoint =>
+        parameterizedCircleInverse φ ((q.1, q.2.1), q.2.2))
+      (U ×ˢ (Ioo a b ×ˢ univ)) := hA.comp
     ((continuous_fst.prodMk continuous_snd.fst).prodMk continuous_snd.snd).continuousOn
     (fun q hq => ⟨⟨hq.1, hq.2.1⟩, mem_univ _⟩)
   exact hc

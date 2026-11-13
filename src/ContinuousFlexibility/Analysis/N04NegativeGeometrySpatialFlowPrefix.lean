@@ -131,7 +131,7 @@ theorem n04NegativeGeometry_flow_spatial_weighted_prefix (Λ : ℝ) (N : ℕ) :
       (Finset.mem_univ (⟨k, Nat.lt_succ_of_le hk⟩ : Fin (N + 1)))).trans
       (le_add_of_nonneg_left zero_le_one)
   have hed (k : ℕ) (hk : k ≤ N) : e k ≤ d :=
-    Finset.single_le_sum (fun _ _ => Nat.zero_le _)
+    Finset.single_le_sum (fun (i : Fin (N + 1)) _ => Nat.zero_le (e i.val))
       (Finset.mem_univ (⟨k, Nat.lt_succ_of_le hk⟩ : Fin (N + 1)))
   refine ⟨C, d, hC, ?_⟩
   intro A ρ hA hρ F hF hperiod M hM hraw hangular hprefix Θ hΘ k hk t ht q hq

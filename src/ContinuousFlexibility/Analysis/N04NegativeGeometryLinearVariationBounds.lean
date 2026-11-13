@@ -196,7 +196,13 @@ theorem n04NegativeGeometry_variationIntegral_weighted_prefix (N : ℕ) :
     apply hExp hM (Real.exp_pos Λ).le hρ (fun y => -P (y, t)) x (hPs t).neg.contDiffAt
       (Real.exp_le_exp.mpr ((neg_le_abs _).trans (hamp t ht)))
       (fun i hi hiN => ?_) j hj
-    simpa only [iteratedFDeriv_neg_apply, norm_neg] using hPj i hi hiN t ht
+    have he : ‖iteratedFDeriv ℝ i (fun y : Q => -P (y, t)) x‖ =
+        ‖iteratedFDeriv ℝ i (fun y : Q => P (y, t)) x‖ := by
+      simpa only [Pi.neg_def, norm_neg] using congrArg norm
+        (iteratedFDeriv_neg_apply (𝕜 := ℝ) (i := i)
+          (f := fun y : Q => P (y, t)) (x := x))
+    rw [he]
+    exact hPj i hi hiN t ht
   let G : Q × ℝ → ℝ := fun z => Real.exp (-P z) * F z
   have hG : ContDiff ℝ ∞ G := (Real.contDiff_exp.comp hP.neg).mul hF
   let B : ℝ := (2 : ℝ) ^ N * A * (W * M)
@@ -265,7 +271,7 @@ theorem n04NegativeGeometry_linearVariation_weighted_prefix (N : ℕ) :
       (hF.continuous.comp (continuous_const.prodMk continuous_id)).continuousOn
       ((hw y).mono (Icc_subset_Icc le_rfl ht.2))
       (fun s hs => hderiv y s ⟨hs.1, hs.2.trans_le ht.2⟩)
-    simpa only [hzero y, zero_add] using h
+    simpa only [hzero y, zero_add, Function.comp_apply, id_eq] using h
   rw [heq]
   exact hbound hκ hF x hM hW hρ hamp hκj hFj k hk t ht
 

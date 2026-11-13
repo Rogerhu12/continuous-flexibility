@@ -74,23 +74,25 @@ theorem rootPhysicalFields_zero_parameter_of_profile
       (v := n06ActualNuJetCoordinates W.D W.S (x, 0) p) hw).symm.trans
       (congrFun (n06_rootNormalizedFields_zero_parameter W.D W.S x) p))
 
-/-- The actual physical drift and speed ratio on any fixed open profile
-locus. The common root collar below supplies all three spatial inputs. -/
-def rootProfileLocus_physicalFieldsJointTower
-    (Ω : Set PolarPoint) (hΩ : IsOpen Ω) (hΩann : Ω ⊆ annularOpen W.D)
-    (hprofile : ∀ x : AnnularState W.S, ∀ p ∈ Ω,
-      stateProfile W.D W.S W.C x p.1 = W.D.w p.1) :
+/-- Restrict the actual absorbed packet to the sector by its fixed affine
+parameter inclusion. This is independent of the profile-locus identity. -/
+def rootAbsorbedCoordinates_sectorJointTower
+    (Ω : Set PolarPoint) (hΩ : IsOpen Ω) (hΩann : Ω ⊆ annularOpen W.D) :
     SmoothDirections (W.negativeRootParameterDomain ×ˢ Ω)
       (fun x : (StateDirections W.S × ℝ) × PolarPoint =>
-        n06PhysicalRootFields W.D W.S W.C (liftSectorParameter W.S W.C x.1) x.2) := by
+        n06ActualRootAbsorbedCoordinates W.D W.S (liftSectorParameter W.S W.C x.1) x.2) := by
   let U := W.negativeRootParameterDomain ×ˢ Ω
   have hU : IsOpen U :=
     (sectorNeighborhood_isOpen W.S W.base W.negativeRootParameterRadius
       W.negativeRootParameterRadius).prod hΩ
   have hε : W.negativeRootParameterRadius ≤ 1 :=
     (min_le_right W.ε (1 / 2 : ℝ)).trans (by norm_num)
-  let JP := n04Realization_rootAbsorbedCoordinates_joint
-    (C := W.C) (base := W.base) (ε := W.negativeRootParameterRadius)
+  let JP : SmoothDirections
+      (stateNeighborhood W.S W.C W.base W.negativeRootParameterRadius ×ˢ annularOpen W.D)
+      (fun x : (AnnularState W.S × ℝ) × PolarPoint =>
+        n06ActualRootAbsorbedCoordinates W.D W.S x.1 x.2) :=
+    n04Realization_rootAbsorbedCoordinates_joint
+    (D := W.D) (T := W.T) (C := W.C) (base := W.base) (ε := W.negativeRootParameterRadius)
     W.through03.1.1.1.1 W.hT W.hS hε
   let c : (AnnularState W.S × ℝ) × PolarPoint := ((W.C.referenceState, 0), 0)
   let L : ((StateDirections W.S × ℝ) × PolarPoint) →L[ℝ]
@@ -107,12 +109,25 @@ def rootProfileLocus_physicalFieldsJointTower
       (stateNeighborhood W.S W.C W.base W.negativeRootParameterRadius ×ˢ
         annularOpen W.D) := by
     intro x hx
-    rw [hpoint]
+    change c + L x ∈ _
+    rw [hpoint x]
     exact ⟨liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl, hΩann hx.2⟩
-  let K : SmoothDirections U
+  apply (JP.compAffine L c hU hmap).congrOn
+  intro x hx
+  exact congrArg (fun q : (AnnularState W.S × ℝ) × PolarPoint =>
+    n06ActualRootAbsorbedCoordinates W.D W.S q.1 q.2) (hpoint x)
+
+/-- The actual physical drift and speed ratio on any fixed open profile
+locus. The common root collar below supplies all three spatial inputs. -/
+def rootProfileLocus_physicalFieldsJointTower
+    (Ω : Set PolarPoint) (hΩ : IsOpen Ω) (hΩann : Ω ⊆ annularOpen W.D)
+    (hprofile : ∀ x : AnnularState W.S, ∀ p ∈ Ω,
+      stateProfile W.D W.S W.C x p.1 = W.D.w p.1) :
+    SmoothDirections (W.negativeRootParameterDomain ×ˢ Ω)
       (fun x : (StateDirections W.S × ℝ) × PolarPoint =>
-        n06ActualRootAbsorbedCoordinates W.D W.S (liftSectorParameter W.S W.C x.1) x.2) :=
-    (JP.compAffine L c hU hmap).congrOn (fun x _ => by rw [hpoint])
+        n06PhysicalRootFields W.D W.S W.C (liftSectorParameter W.S W.C x.1) x.2) := by
+  let U := W.negativeRootParameterDomain ×ˢ Ω
+  let K := W.rootAbsorbedCoordinates_sectorJointTower Ω hΩ hΩann
   let V : Set N06RootNormalizedCoordinates :=
     {q | 0 < n06RootNormalizedQ q ∧ 0 < n06RootNormalizedDiscriminant q}
   have hV : IsOpen V :=
