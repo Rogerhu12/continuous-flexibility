@@ -271,6 +271,21 @@ theorem CurrentJetDataOn.negativeInverse_uniform_small
             |mixedDerivative i j (fun y => f z m y - f₀ m y) q.val| < δ :=
   n04NegativeInverse_valuePrefix_uniform_small hD hT hε h.2.choose_spec.1 s A hδ
 
+private theorem n04NegativeInverse_abs_value_le
+    {u u₀ C E : ℝ} (hC : 0 < C) (hE : 1 ≤ E)
+    (hdiff : |u - u₀| < 1) (href : |u₀| ≤ C * E ^ C) :
+    |u| ≤ (1 + C) * E ^ (1 + C) := by
+  calc
+    |u| = |(u - u₀) + u₀| := by rw [sub_add_cancel]
+    _ ≤ |u - u₀| + |u₀| := abs_add_le _ _
+    _ ≤ 1 + C * E ^ C := add_le_add hdiff.le href
+    _ ≤ E ^ C + C * E ^ C := add_le_add_right (Real.one_le_rpow hE hC.le) _
+    _ = (1 + C) * E ^ C := by ring
+    _ ≤ (1 + C) * E ^ (1 + C) :=
+      mul_le_mul_of_nonneg_left
+        (Real.rpow_le_rpow_of_exponent_le hE (le_add_of_nonneg_left zero_le_one))
+        (add_nonneg zero_le_one hC.le)
+
 /-- A reference value envelope and a uniformly small value difference
 give a current value envelope. This numerical argument is independent
 of the representation of the underlying physical atlas. -/
@@ -284,29 +299,22 @@ theorem CurrentJetDataOn.negativeInverse_value_bound
     ∃ b : ℕ, ∃ ε' B : ℝ, base ≤ b ∧ 0 < ε' ∧ ε' ≤ ε ∧ 0 < B ∧
       ∀ z ∈ sectorNeighborhood S b ε' ε', ∀ m, P m →
         ∀ q ∈ unitStrip, |f z m q| ≤ B * T.E0 (T.sample (cell m)) ^ B := by
-  have hbound := h.negativeInverse_uniform_small hD hT hε 0 0
-    (by norm_num : (0 : ℝ) < 1)
+  have hbound := CurrentJetDataOn.negativeInverse_uniform_small
+    (D := D) (S := S) (T := T) (cell := cell) (P := P)
+    (base := base) (ε := ε) (f := f) (f₀ := f₀)
+    hD hT hε h 0 0 zero_lt_one
   let b : ℕ := hbound.choose
   let ε' : ℝ := hbound.choose_spec.choose
   have hb : base ≤ b := hbound.choose_spec.choose_spec.1
   have hε' : 0 < ε' := hbound.choose_spec.choose_spec.2.1
   have hε'ε : ε' ≤ ε := hbound.choose_spec.choose_spec.2.2.1
   have hsmall := hbound.choose_spec.choose_spec.2.2.2
-  obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (1 + C) C
-  refine ⟨b, ε', B, hb, hε', hε'ε, hB, ?_⟩
+  refine ⟨b, ε', 1 + C, hb, hε', hε'ε, add_pos zero_lt_one hC, ?_⟩
   intro z hz m hm q hq
-  let E := T.E0 (T.sample (cell m))
-  have hE : 1 ≤ E := hfloor m
   have hdiff : |f z m q - f₀ m q| < 1 := by
     simpa only [Real.rpow_zero, one_mul, spaces_mixedDerivative_zero] using
       hsmall z hz m hm ⟨q, hq⟩ 0 0 (by omega)
-  calc
-    |f z m q| = |(f z m q - f₀ m q) + f₀ m q| := by rw [sub_add_cancel]
-    _ ≤ |f z m q - f₀ m q| + |f₀ m q| := abs_add_le _ _
-    _ ≤ 1 + C * E ^ C := add_le_add hdiff.le (href m hm q hq)
-    _ ≤ E ^ C + C * E ^ C := add_le_add_right (Real.one_le_rpow hE hC.le) _
-    _ = (1 + C) * E ^ C := by ring
-    _ ≤ B * E ^ B := hpack E hE
+  exact n04NegativeInverse_abs_value_le hC (hfloor m) hdiff (href m hm q hq)
 
 end UniformSmallness
 
@@ -369,8 +377,11 @@ theorem negativeInverse_atom_value_bound
   let C : ℝ := hreference.choose
   have hC : 0 < C := hreference.choose_spec.1
   have href := hreference.choose_spec.2
-  have hbound := h.negativeInverse_value_bound G.W.radial.1 hU hε C hC
-    ((G.cost_nonneg 0).2.2) href
+  have hbound := CurrentJetDataOn.negativeInverse_value_bound
+    (D := G.W.D) (S := G.S 0) (T := G.W.U) (cell := (G.V 0).cell)
+    (P := G.Neg 0) (base := b) (ε := ε)
+    (f := G.atomFamily 0 a) (f₀ := G.atomRef 0 a)
+    G.W.radial.1 hU hε h C hC ((G.cost_nonneg 0).2.2) href
   let b' : ℕ := hbound.choose
   let ε' : ℝ := hbound.choose_spec.choose
   let B : ℝ := hbound.choose_spec.choose_spec.choose
