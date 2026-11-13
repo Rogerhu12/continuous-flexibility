@@ -93,7 +93,10 @@ private theorem negativeInverse_jointPrefix_pair
       ‖Q.D n (z, q) v‖ ≤ D * E ^ D * H * scale := by
   letI : LocallyConvexSpace ℝ (Parameter G.W.S) :=
     (sectorPairGrading_withSeminorms G.W.S).toLocallyConvexSpace
-  obtain ⟨L, hL, hheight⟩ := G.negativeInverse_height_uniform
+  let heightData := G.negativeInverse_height_uniform
+  let L : ℝ := heightData.choose
+  have hL : 1 ≤ L := heightData.choose_spec.1
+  have hheight := heightData.choose_spec.2
   let orderData := hprefix k
   let shift : ℕ := orderData.choose
   have hshift : 1 ≤ shift := orderData.choose_spec.1
@@ -175,18 +178,22 @@ private theorem negativeInverse_jointPrefix_pair
       (z, (G.V 0).inverseChart (G.lift 0 z) i (c + A q))
       (parameterGrading G.W.S base)
       (parameterGrading G.W.S (base + N + shift * k + 1)) N k shift C H R t := by
-    rw [← hpull]
-    exact hfwd
+    exact (congrArg (fun r : PolarPoint => N04NegativeInverseJet.UnitPrefix JF (z, r)
+      (parameterGrading G.W.S base)
+      (parameterGrading G.W.S (base + N + shift * k + 1)) N k shift C H R t)
+      hpull).mp hfwd
   have hscalar' : N04NegativeInverseJet.UnitPrefix JH
       (z, (G.V 0).inverseChart (G.lift 0 z) i (c + A q))
       (parameterGrading G.W.S base)
       (parameterGrading G.W.S (base + N + shift * k + 1)) N k shift C H R t := by
-    rw [← hpull]
-    exact hscalar
+    exact (congrArg (fun r : PolarPoint => N04NegativeInverseJet.UnitPrefix JH (z, r)
+      (parameterGrading G.W.S base)
+      (parameterGrading G.W.S (base + N + shift * k + 1)) N k shift C H R t)
+      hpull).mp hscalar
   have hdet' : |planeJacobian ((G.V 0).chart (G.lift 0 z) i)
       ((G.V 0).inverseChart (G.lift 0 z) i (c + A q))|⁻¹ ≤ C := by
-    rw [← hpull]
-    exact hdet
+    exact (congrArg (fun r : PolarPoint =>
+      |planeJacobian ((G.V 0).chart (G.lift 0 z) i) r|⁻¹ ≤ C) hpull).mp hdet
   have hpoint := N04NegativeInverseJet.normalized_inverse_prefix_norm_le JF KG
     (sectorNeighborhood_isOpen G.W.S base ε ε)
     (isOpen_Ioo.prod isOpen_univ) (isOpen_Ioo.prod isOpen_univ)

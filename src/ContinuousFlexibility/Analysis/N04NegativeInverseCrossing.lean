@@ -229,25 +229,42 @@ theorem negativeInverse_physicalAtom_fields
         n04bActualNegativeHeight G.W.hT G.W.hS G.W.through03 G.W.field
           (liftSectorParameter G.W.S G.W.C z) m side p := by
   have hf := G.negativeInverse_actual_fields η z k m side hi
-  obtain ⟨B, hB, hlength⟩ := G.negativeInverse_length_values
+  have lengthData := G.negativeInverse_length_values
+  have hlength := lengthData.choose_spec.2
   have hp : physicalUnitPoint (G.V η) k
       (n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData (G.V η)) k p) = p :=
     n07aCanonicalUnitPoint_inverse (K := n07aPhysicalIntervalData (G.V η))
       (sub_pos.mp (hlength η k).1) p
+  have hchart : (G.V η).chart (G.lift η z) k
+      (physicalUnitPoint (G.V η) k
+        (n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData (G.V η)) k p)) =
+      n04bActualNegativeChart G.W.hT G.W.hS G.W.through03 G.W.field
+        (liftSectorParameter G.W.S G.W.C z) m side p :=
+    congrArg₂ (fun (F : PolarPoint → PolarPoint) (q : PolarPoint) => F q)
+      hf.2.2.2.2.1 hp
+  have hheight : (G.V η).height (G.lift η z) k
+      (physicalUnitPoint (G.V η) k
+        (n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData (G.V η)) k p)) =
+      n04bActualNegativeHeight G.W.hT G.W.hS G.W.through03 G.W.field
+        (liftSectorParameter G.W.S G.W.C z) m side p :=
+    congrArg₂ (fun (H : PolarPoint → ℝ) (q : PolarPoint) => H q)
+      hf.2.2.2.2.2.2 hp
   refine ⟨?_, ?_, ?_⟩
   · change (((G.V η).chart (G.lift η z) k
       (physicalUnitPoint (G.V η) k
         (n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData (G.V η)) k p))).1 -
         (G.V η).left k) / ((G.V η).right k - (G.V η).left k) = _
-    rw [hp, hf.1, hf.2.1, hf.2.2.2.2.1, sub_zero, sub_zero]
+    simpa only [sub_zero] using
+      (congrArg₂ (fun (q : PolarPoint) (bounds : PolarPoint) =>
+        (q.1 - bounds.1) / (bounds.2 - bounds.1)) hchart (Prod.ext hf.1 hf.2.1))
   · change ((G.V η).chart (G.lift η z) k
       (physicalUnitPoint (G.V η) k
         (n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData (G.V η)) k p))).2 - p.2 = _
-    rw [hp, hf.2.2.2.2.1]
+    exact congrArg (fun q : PolarPoint => q.2 - p.2) hchart
   · change (G.V η).height (G.lift η z) k
       (physicalUnitPoint (G.V η) k
         (n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData (G.V η)) k p)) = _
-    rw [hp, hf.2.2.2.2.2.2]
+    exact hheight
 
 theorem negativeInverse_referenceRadial_le_one
     (η : (G.W.S.height (3 / 4 : ℝ)).Space)
@@ -265,7 +282,8 @@ theorem negativeInverse_referenceRadial_le_one
       exact (sectorGrading G.W.S G.W.base).map_zero'.trans_lt G.W.ε_pos
     · change |(0 : ℝ)| < G.W.ε
       simpa only [abs_zero] using G.W.ε_pos
-  obtain ⟨B, hB, hl⟩ := G.negativeInverse_length_values
+  have lengthData := G.negativeInverse_length_values
+  have hl := lengthData.choose_spec.2
   have hlen : (G.V η).physicalLeft k < (G.V η).physicalRight k :=
     sub_pos.mp (hl η k).1
   apply n04NegativeInverse_le_on_closedHalf hlen hhalf
@@ -322,7 +340,8 @@ theorem negativeInverse_radial_closedHalf_small
   have hε' : 0 < ε' := hbound.choose_spec.choose_spec.2.1
   have hε'ε : ε' ≤ ε := hbound.choose_spec.choose_spec.2.2.1
   have hsmall := hbound.choose_spec.choose_spec.2.2.2
-  obtain ⟨B, hB, hl⟩ := G.negativeInverse_length_values
+  have lengthData := G.negativeInverse_length_values
+  have hl := lengthData.choose_spec.2
   refine ⟨b', ε', hb, hε', hε'ε, ?_⟩
   intro z hz k m side hi p hp hhalf
   have hzfull := sectorNeighborhood_mono G.W.S (hadm.1.trans hb)
@@ -490,7 +509,10 @@ theorem negativeInverse_componentScalars_purePrefix
   let C : ℝ := (hpref s).choose
   have hC : 0 < C := (hpref s).choose_spec.1
   have hb := (hpref s).choose_spec.2
-  obtain ⟨D, hD, htransfer⟩ := G.negativeInverse_pair_sample_heightWeight C hC.le
+  have transferData := G.negativeInverse_pair_sample_heightWeight C hC.le
+  let D : ℝ := transferData.choose
+  have hD : 1 ≤ D := transferData.choose_spec.1
+  have htransfer := transferData.choose_spec.2
   obtain ⟨CO, hCO, houter⟩ := n04NegativeInverseOverlapOuter_finiteJets (s + K)
   obtain ⟨B, hB, hpack⟩ := n04NegativeInverse_finiteComposition_envelope (s + K) hCO hL hD
   refine ⟨B, zero_lt_one.trans_le hB, ?_⟩
@@ -516,7 +538,9 @@ theorem negativeInverse_componentScalars_purePrefix
   have ht : 1 ≤ t := Real.one_le_rpow hR (by positivity)
   have hpower (d : ℕ) : t ^ d = R ^ ((d : ℝ) / (((s + shift * K : ℕ) : ℝ) + 1)) :=
     n04NegativeInverse_commonScale_pow (zero_le_one.trans hR) d (s + shift * K)
-  obtain ⟨source, hhalf⟩ := G.negativeInverse_referenceHalf_cover 0 m hp
+  have coverData := G.negativeInverse_referenceHalf_cover 0 m hp
+  let source : Bool := coverData.choose
+  have hhalf := coverData.choose_spec
   let k' := G.e.symm (.inl (m, source))
   have hi' : G.e k' = .inl (m, source) := G.e.apply_symm_apply _
   have sourceBound (a' : Fin 3)
@@ -573,14 +597,15 @@ theorem negativeInverse_componentScalars_purePrefix
   · have hopposite : source = !side := by
       have hbool : source = side ∨ source = !side := by cases source <;> cases side <;> simp
       exact hbool.resolve_left hsame
-    subst source
+    have hiOpp : G.e k' = .inl (m, !side) :=
+      hi'.trans (congrArg (fun b : Bool => Sum.inl (m, b)) hopposite)
     have hzsmall : z ∈ sectorNeighborhood G.W.S smallBase radius radius :=
       sectorNeighborhood_mono G.W.S (le_max_right _ _) (min_le_left _ _) (min_le_left _ _) hz
-    have hband := G.negativeInverse_opposite_middleBand hzfull k k' m side hi hi' hp hhalf
-      htarget (hsmall z hzsmall k' m (!side) hi' p hp hhalf)
-    let Qrad := G.negativeInverse_componentAtomJointTowerOn hadm' k' m (!side) hi'
+    have hband := G.negativeInverse_opposite_middleBand hzfull k k' m side hi hiOpp hp hhalf
+      htarget (hsmall z hzsmall k' m (!side) hiOpp p hp hhalf)
+    let Qrad := G.negativeInverse_componentAtomJointTowerOn hadm' k' m (!side) hiOpp
       .chartRadial trivial
-    let Qheight := G.negativeInverse_componentAtomJointTowerOn hadm' k' m (!side) hi'
+    let Qheight := G.negativeInverse_componentAtomJointTowerOn hadm' k' m (!side) hiOpp
       .height trivial
     let Qpair := smoothDirectionsProd Qrad Qheight
     have hvalue : |G.negativeInversePhysicalAtomFamily 0 .height z k' p| ≤ M := by
@@ -620,7 +645,7 @@ theorem negativeInverse_componentScalars_purePrefix
           (Ioo (G.W.C.left m) (G.W.C.right m) ×ˢ (univ : Set ℝ))) :=
       G.negativeInverse_physicalAtom_opposite 0
         (sectorNeighborhood_mono G.W.S hadm'.1 hadm'.2.2.1 hadm'.2.2.1 hx.1)
-        k k' m side hi hi' hx.2
+        k k' m side hi hiOpp hx.2
     have hcompose (height : Bool)
         (Q : SmoothDirections (sectorNeighborhood G.W.S low ε' ε' ×ˢ
           (Ioo (G.W.C.left m) (G.W.C.right m) ×ˢ univ))

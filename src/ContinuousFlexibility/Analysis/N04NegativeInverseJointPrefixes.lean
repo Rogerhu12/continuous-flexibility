@@ -16,6 +16,48 @@ namespace ContinuousFlexibility.Analysis
 open Set ContinuousFlexibility.Statements CanonicalGeometry
 open scoped ContDiff
 
+/-- Convert one finite prefix with abstract seminorms and scalar weights,
+before supplying the concrete sector grading. -/
+private theorem negativeInverse_fractionalMixed_bound
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} {V : Set PolarPoint} {f : E × PolarPoint → ℝ}
+    (J : SmoothDirections (U ×ˢ V) f)
+    (hU : IsOpen U) (hV : IsOpen V) (hc : Convex ℝ (U ×ˢ V))
+    (low high : Seminorm ℝ E) (k a b s shift : ℕ)
+    (hk : 0 < k) (hab : a + b ≤ s)
+    (x : E) (hx : x ∈ U) (q : PolarPoint) (hq : q ∈ V)
+    {M H R : ℝ} (hM : 0 ≤ M) (hH : 0 ≤ H) (hR : 1 ≤ R)
+    (hraw : ∀ n : ℕ, 0 < n → n ≤ k + a + b →
+      ∀ w : StateAngleWord n, w.stateArity = k → w.angleArity ≤ s →
+      ∀ u : Fin n → E × PolarPoint,
+      (∀ i, low (u i).1 ≤ 1) → (∀ i, high (u i).1 ≤ R) →
+      (∀ i, ‖(u i).2‖ ≤ 1) →
+      (∀ i, w.isState i = false → (u i).1 = 0) →
+      (∀ i, w.isState i = true → (u i).2 = 0) →
+        ‖J.D n (x, q) u‖ ≤ M * H *
+          R ^ (((w.angleArity + shift * k - 1 : ℕ) : ℝ) /
+            (((s + shift * k : ℕ) : ℝ) + 1)))
+    (Q : SmoothDirections U (fun z => mixedDerivative a b (fun p => f (z, p)) q))
+    (v : Fin k → E) (hlow : ∀ i, low (v i) ≤ 1)
+    (hhigh : ∀ i, high (v i) ≤ R) :
+    |Q.D k x v| ≤ M * H *
+      R ^ (((a + b + shift * k : ℕ) : ℝ) / (((s + shift * k : ℕ) : ℝ) + 1)) := by
+  let t : ℝ := R ^ (1 / (((s + shift * k : ℕ) : ℝ) + 1))
+  have ht : 1 ≤ t := Real.one_le_rpow hR (by positivity)
+  have hp (d : ℕ) : t ^ d = R ^ ((d : ℝ) / (((s + shift * k : ℕ) : ℝ) + 1)) :=
+    n04NegativeInverse_commonScale_pow (zero_le_one.trans hR) d (s + shift * k)
+  have h := n04NegativeInverse_mixed_of_pureJoint J hU hV hc low high
+    (zero_le_one.trans hR) hM hH ht k a b shift hk x hx q hq
+    (fun n hn hns w hw u hu huh hup hus hsp => by
+      have hs : w.angleArity ≤ s := by have hsum := w.arity_sum; omega
+      have hbound := hraw n hn hns w hw hs u hu huh hup hus hsp
+      rw [parameterHeightWeight, if_neg (Nat.ne_of_gt hk), hp]
+      simpa only [Real.norm_eq_abs] using hbound)
+    Q v hlow hhigh
+  rw [parameterHeightWeight, if_neg (Nat.ne_of_gt hk), hp] at h
+  exact h
+
 attribute [local instance]
   n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
   n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
@@ -74,27 +116,18 @@ theorem n04NegativeInverse_rawPrefixes_of_joint
   have hb := boundData.choose_spec.2
   refine ⟨B, hB, ?_⟩
   intro m hm q hq a b hab Q z hz v hv R hR hzR hvR
-  let t : ℝ := R ^ (1 / (((s + shift * k : ℕ) : ℝ) + 1))
-  have ht : 1 ≤ t := Real.one_le_rpow hR (by positivity)
-  have hp (d : ℕ) : t ^ d = R ^ ((d : ℝ) / (((s + shift * k : ℕ) : ℝ) + 1)) :=
-    n04NegativeInverse_commonScale_pow (zero_le_one.trans hR) d (s + shift * k)
   have hM : 0 ≤ B * T.E0 (T.sample (cell m)) ^ B :=
     mul_nonneg hB.le (Real.rpow_nonneg (zero_le_one.trans (hE m)) _)
   have hheight : 0 ≤ T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) :=
     Real.rpow_nonneg (hH m) _
-  have h := n04NegativeInverse_mixed_of_pureJoint (J m hm)
+  exact negativeInverse_fractionalMixed_bound (J m hm)
     (sectorNeighborhood_isOpen S base ε ε) (isOpen_Ioo.prod isOpen_univ)
     ((sectorNeighborhood_convex S base ε ε).prod
       ((convex_Ioo (0 : ℝ) 1).prod convex_univ))
     (parameterGrading S base) (parameterGrading S (base + s + shift * k + 1))
-    (zero_le_one.trans hR) hM hheight ht k a b shift hk z hz q hq
-    (fun n hn hns w hw u hu huh hup hus hsp => by
-      have hs : w.angleArity ≤ s := by have hsum := w.arity_sum; omega
-      have hbound := hb m hm (J m hm) z hz q hq n w hw hs u hu R hR hzR huh hup hus hsp
-      rw [parameterHeightWeight, if_neg (Nat.ne_of_gt hk), hp]
-      simpa only [Real.norm_eq_abs] using hbound)
+    k a b s shift hk hab z hz q hq hM hheight hR
+    (fun n _ _ w hw hs u hu huh hup hus hsp =>
+      hb m hm (J m hm) z hz q hq n w hw hs u hu R hR hzR huh hup hus hsp)
     Q v hv hvR
-  rw [parameterHeightWeight, if_neg (Nat.ne_of_gt hk), hp] at h
-  exact h
 
 end ContinuousFlexibility.Analysis

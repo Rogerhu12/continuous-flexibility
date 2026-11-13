@@ -86,7 +86,8 @@ def negativeInversePulledHeightOn
     (fun x hx => ⟨sectorNeighborhood_mono G.W.S hadm.1 hadm.2.2.1 hadm.2.2.1 hx.1, hx.2⟩)).congrOn
   intro x hx
   have hf := G.negativeInverse_actual_fields η x.1 k m side hi
-  rw [hf.2.2.2.2.2.1, hf.2.2.2.2.2.2]
+  exact (congrArg₂ (fun (F : PolarPoint → ℝ) (p : PolarPoint) => F p)
+    hf.2.2.2.2.2.2 (congrFun hf.2.2.2.2.2.1 x.2)).symm
 
 theorem negativeInverseCanonical_maps
     (η : (G.W.S.height (3 / 4 : ℝ)).Space)
@@ -98,9 +99,10 @@ theorem negativeInverseCanonical_maps
       (G.negativeInverseComponent m) := by
   intro x hx
   have hf := G.negativeInverse_actual_fields η x.1 k m side hi
-  rw [hf.2.2.2.2.2.1]
-  exact G.W.negativeInverse_maps_component m side
-    (sectorNeighborhood_mono G.W.S hadm.1 hadm.2.2.1 hadm.2.2.1 hx.1) hx.2
+  exact (congrArg (fun p : PolarPoint => p ∈ G.negativeInverseComponent m)
+    (congrFun hf.2.2.2.2.2.1 x.2)).mpr
+      (G.W.negativeInverse_maps_component m side
+        (sectorNeighborhood_mono G.W.S hadm.1 hadm.2.2.1 hadm.2.2.1 hx.1) hx.2)
 
 theorem negativeInverseCanonical_right
     (η : (G.W.S.height (3 / 4 : ℝ)).Space)
@@ -110,9 +112,10 @@ theorem negativeInverseCanonical_right
     (hx : x ∈ sectorNeighborhood G.W.S b ε ε ×ˢ G.negativeInverseTarget m) :
     (G.V η).chart (G.lift η x.1) k ((G.V η).inverseChart (G.lift η x.1) k x.2) = x.2 := by
   have hf := G.negativeInverse_actual_fields η x.1 k m side hi
-  rw [hf.2.2.2.2.1, hf.2.2.2.2.2.1]
-  exact G.W.negativeInverse_right m side
-    (sectorNeighborhood_mono G.W.S hadm.1 hadm.2.2.1 hadm.2.2.1 hx.1) hx.2
+  exact (congrArg₂ (fun (F : PolarPoint → PolarPoint) (p : PolarPoint) => F p)
+    hf.2.2.2.2.1 (congrFun hf.2.2.2.2.2.1 x.2)).trans
+      (G.W.negativeInverse_right m side
+        (sectorNeighborhood_mono G.W.S hadm.1 hadm.2.2.1 hadm.2.2.1 hx.1) hx.2)
 
 theorem negativeInverseCanonical_jacobian_ne_zero
     (η : (G.W.S.height (3 / 4 : ℝ)).Space)
@@ -124,17 +127,22 @@ theorem negativeInverseCanonical_jacobian_ne_zero
       ((G.V η).inverseChart (G.lift η x.1) k x.2) ≠ 0 := by
   have hz := sectorNeighborhood_mono G.W.S hadm.1 hadm.2.2.1 hadm.2.2.1 hx.1
   have hf := G.negativeInverse_actual_fields η x.1 k m side hi
-  rw [hf.2.2.2.2.1, hf.2.2.2.2.2.1]
-  exact G.W.negativeChart_jacobian_ne_zero m side hz
+  have he := congrArg₂
+    (fun (F : PolarPoint → PolarPoint) (p : PolarPoint) => planeJacobian F p)
+      hf.2.2.2.2.1 (congrFun hf.2.2.2.2.2.1 x.2)
+  have hne := G.W.negativeChart_jacobian_ne_zero m side hz
     (G.W.negativeInverse_maps_component m side hz hx.2)
+  exact fun hzero => hne (he.symm.trans hzero)
 
 theorem negativeInverseUnit_maps
     (η : (G.W.S.height (3 / 4 : ℝ)).Space)
     (k m : ℕ) (side : Bool) (hi : G.e k = .inl (m, side)) :
     MapsTo (canonicalUnitPoint (G.V η) k) unitStrip (G.negativeInverseTarget m) := by
-  rw [G.negative_canonicalUnitPoint η k (m, side) hi]
-  exact G.W.negativeCanonicalUnit_mapsTo G.X.e₀ (G.negativeIndex (m, side)) m side
-    (G.X.e₀.apply_symm_apply _)
+  intro q hq
+  exact (congrArg (fun p : PolarPoint => p ∈ G.negativeInverseTarget m)
+    (congrFun (G.negative_canonicalUnitPoint η k (m, side) hi) q)).mpr
+      (G.W.negativeCanonicalUnit_mapsTo G.X.e₀ (G.negativeIndex (m, side)) m side
+        (G.X.e₀.apply_symm_apply _) hq)
 
 def negativeInverseCanonicalLinear
     (η : (G.W.S.height (3 / 4 : ℝ)).Space) (k : ℕ) : PolarPoint →L[ℝ] PolarPoint :=

@@ -68,6 +68,12 @@ theorem of_pure (hR : 0 ≤ R)
 
 end N04NegativeInverseJet.UnitPrefix
 
+/-- Normalize a fixed affine interval before instantiating its endpoints. -/
+private theorem n04NegativeInverse_normalized_affine_first
+    (left span q : ℝ) (hspan : span ≠ 0) :
+    (left + span * q - left) / span = q := by
+  rw [add_sub_cancel_left, mul_div_cancel_left₀ _ hspan]
+
 attribute [local instance]
   n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
   n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
@@ -101,14 +107,13 @@ theorem negativeInverse_pulledPoint_in_currentHalf
     canonicalUnitPoint (G.V 0) k q at he
   have hr : G.negativeInversePhysicalAtomFamily 0 .chartRadial z k
       (G.pulledPoint 0 (G.lift 0 z) k q) = q.1 := by
-    obtain ⟨L, hL, hl⟩ := G.negativeInverse_length_values
-    rw [G.negativeInverse_physical_chartRadial, he]
-    change ((G.V 0).left k + ((G.V 0).right k - (G.V 0).left k) * q.1 -
-      (G.V 0).left k) / ((G.V 0).right k - (G.V 0).left k) = q.1
-    rw [add_sub_cancel_left, mul_div_cancel_left₀ _ (hl 0 k).2.1.ne']
-  refine ⟨hp, ?_⟩
-  rw [hr]
-  exact hq.1
+    have lengths := G.negativeInverse_length_values
+    have hl := lengths.choose_spec.2
+    exact (G.negativeInverse_physical_chartRadial 0 z k _).trans
+      ((congrArg (fun p : PolarPoint => (p.1 - (G.V 0).left k) /
+        ((G.V 0).right k - (G.V 0).left k)) he).trans
+          (n04NegativeInverse_normalized_affine_first _ _ _ (hl 0 k).2.1.ne'))
+  exact ⟨hp, (congrArg (fun r : ℝ => r ∈ Ioo (0 : ℝ) 1) hr).mpr hq.1⟩
 
 /-- The three current scalar fields supply all actual forward inputs
 on a common neighborhood chosen before every derivative order. -/
@@ -140,7 +145,10 @@ theorem negativeInverse_forwardPrefixes
   have hε' : ε' ≤ radius := scalarSpec.2.2.1
   have hhalf : ε' ≤ 1 / 2 := scalarSpec.2.2.2.1
   have hprefix := scalarSpec.2.2.2.2
-  obtain ⟨L, hL, hlength⟩ := G.negativeInverse_length_values
+  have lengths := G.negativeInverse_length_values
+  let L : ℝ := lengths.choose
+  have hL : 0 < L := lengths.choose_spec.1
+  have hlength := lengths.choose_spec.2
   refine ⟨low, ε', hb.trans hbase, hadm', hε'.trans hradiusε, hhalf, ?_⟩
   intro K
   let prefixData := hprefix K
@@ -167,7 +175,9 @@ theorem negativeInverse_forwardPrefixes
   have hpower (d : ℕ) : t ^ d =
       R ^ ((d : ℝ) / (((N + shift * K : ℕ) : ℝ) + 1)) :=
     n04NegativeInverse_commonScale_pow (zero_le_one.trans hR) d (N + shift * K)
-  obtain ⟨hp, htarget⟩ := G.negativeInverse_pulledPoint_in_currentHalf hadm' k m side hi hz hq
+  have currentHalf := G.negativeInverse_pulledPoint_in_currentHalf hadm' k m side hi hz hq
+  have hp := currentHalf.1
+  have htarget := currentHalf.2
   have hraw (a : Fin 3)
       (Q : SmoothDirections (sectorNeighborhood G.W.S low ε' ε' ×ˢ G.negativeInverseComponent m)
         (fun x : Parameter G.W.S × PolarPoint =>
@@ -191,9 +201,8 @@ theorem negativeInverse_forwardPrefixes
     (le_add_of_nonneg_left zero_le_one) hH (zero_le_one.trans ht)
   have hAraw := (hraw 1 JA).coefficient_mono
     (le_add_of_nonneg_left zero_le_one) hH (zero_le_one.trans ht)
-  have hspan : |(G.V 0).right k - (G.V 0).left k| ≤ L * E ^ L := by
-    rw [abs_of_pos (hlength 0 k).2.1]
-    exact (hlength 0 k).2.2.2.2.1
+  have hspan : |(G.V 0).right k - (G.V 0).left k| ≤ L * E ^ L :=
+    (abs_of_pos (hlength 0 k).2.1).trans_le (hlength 0 k).2.2.2.2.1
   have hcoef : (2 + |(G.V 0).right k - (G.V 0).left k|) * C₀ ≤ B * E ^ B :=
     (mul_le_mul_of_nonneg_right (add_le_add le_rfl hspan)
       (zero_le_one.trans hC₀)).trans (hcommon E hE).1

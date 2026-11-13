@@ -184,7 +184,8 @@ theorem negativeInverse_physicalAtom_on_unit
     (z : Parameter G.W.S) (k : ℕ) (q : PolarPoint) :
     G.negativeInversePhysicalAtomFamily η a z k (physicalUnitPoint (G.V η) k q) =
       G.atomFamily η a z k q := by
-  obtain ⟨B, hB, hl⟩ := G.negativeInverse_length_values
+  have lengthData := G.negativeInverse_length_values
+  have hl := lengthData.choose_spec.2
   apply congrArg (G.atomFamily η a z k)
   apply Prod.ext
   · change ((G.V η).physicalLeft k +
@@ -199,7 +200,8 @@ theorem negativeInverse_physicalUnit_maps
     (k m : ℕ) (side : Bool) (hi : G.e k = .inl (m, side)) :
     MapsTo (physicalUnitPoint (G.V η) k) unitStrip
       (Ioo (G.W.C.left m) (G.W.C.right m) ×ˢ (univ : Set ℝ)) := by
-  obtain ⟨B, hB, hl⟩ := G.negativeInverse_length_values
+  have lengthData := G.negativeInverse_length_values
+  have hl := lengthData.choose_spec.2
   have hf := G.negativeInverse_actual_fields η 0 k m side hi
   intro q hq
   have hp := (n04NegativeGeometry_affine_unitPoint
@@ -228,7 +230,8 @@ def negativeInverse_componentAtomJointTower
   have hU : IsOpen (U ×ˢ Ω) :=
     (sectorNeighborhood_isOpen G.W.S G.W.base G.W.ε G.W.ε).prod
       (isOpen_Ioo.prod isOpen_univ)
-  obtain ⟨B, hB, hlength⟩ := G.negativeInverse_length_values
+  have lengthData := G.negativeInverse_length_values
+  have hlength := lengthData.choose_spec.2
   have hp (p : PolarPoint) : physicalUnitPoint K k
       (n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData K) k p) = p :=
     n07aCanonicalUnitPoint_inverse (K := n07aPhysicalIntervalData K)
@@ -348,7 +351,10 @@ theorem negativeInverse_physicalFamily_purePrefix
   let low : ℕ := hfamily.choose
   have hlow : b ≤ low := hfamily.choose_spec.1
   have hprefix := hfamily.choose_spec.2
-  obtain ⟨D, hD, hlength⟩ := G.negativeInverse_length_values
+  have lengthData := G.negativeInverse_length_values
+  let D : ℝ := lengthData.choose
+  have hD : 0 < D := lengthData.choose_spec.1
+  have hlength := lengthData.choose_spec.2
   refine ⟨low, hlow, fun K => ?_⟩
   let shift : ℕ := (hprefix K).choose
   have hshift : 1 ≤ shift := (hprefix K).choose_spec.1

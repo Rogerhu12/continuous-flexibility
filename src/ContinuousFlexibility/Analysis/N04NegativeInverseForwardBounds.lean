@@ -50,6 +50,11 @@ theorem n04NegativeInverse_le_on_closedHalf
     hf.continuousWithinAt.mem_closure hpcl hbound
   simpa only [isClosed_Iic.closure_eq, mem_Iic] using hcl
 
+private theorem n04NegativeInverse_remove_zero_height_weight
+    {H H' a b M : ℝ}
+    (h : H ^ (0 : ℝ) * a ≤ M * (H' ^ (0 : ℝ) * b)) : a ≤ M * b := by
+  simpa only [Real.rpow_zero, one_mul] using h
+
 namespace N04RealizationStart
 
 variable (W : N04RealizationStart)
@@ -404,12 +409,19 @@ theorem negativeInverse_inverseJacobian_bound
       |planeJacobian (n04bActualNegativeChart G.W.hT G.W.hS G.W.through03 G.W.field
         (liftSectorParameter G.W.S G.W.C z) m source) p|⁻¹ := by
     have hs : source = side ∨ source = !side := by cases source <;> cases side <;> simp
-    rcases hs with rfl | rfl
-    · exact le_rfl
-    · exact G.W.negativeInverse_inverseJacobian_le_opposite m side hzfull hy
+    let inverseJac : Bool → ℝ := fun b =>
+      |planeJacobian (n04bActualNegativeChart G.W.hT G.W.hS G.W.through03 G.W.field
+        (liftSectorParameter G.W.S G.W.C z) m b) p|⁻¹
+    rcases hs with hsame | hopposite
+    · exact (congrArg inverseJac hsame).symm.le
+    · exact (G.W.negativeInverse_inverseJacobian_le_opposite m side hzfull hy).trans_eq
+        (congrArg inverseJac hopposite).symm
   have ht : G.W.U.E0 (G.W.U.sample ((G.V η).cell k')) ^ C ≤
       M * G.W.U.E0 (G.W.U.sample ((G.V η).cell k)) ^ P := by
-    simpa only [Real.rpow_zero, one_mul] using htransfer η k k' m side source hi hi'
+    exact n04NegativeInverse_remove_zero_height_weight (M := M)
+      (a := G.W.U.E0 (G.W.U.sample ((G.V η).cell k')) ^ C)
+      (b := G.W.U.E0 (G.W.U.sample ((G.V η).cell k)) ^ P)
+      (htransfer η k k' m side source hi hi')
   change |planeJacobian ((G.V η).chart (G.lift η z) k)
     ((G.V η).inverseChart (G.lift η z) k y)|⁻¹ ≤ _
   have he : |planeJacobian ((G.V η).chart (G.lift η z) k)

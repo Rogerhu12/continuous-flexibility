@@ -126,21 +126,25 @@ theorem negativeInverse_physical_chartRadial
     G.negativeInversePhysicalAtomFamily η .chartRadial z m p =
       (((G.V η).chart (G.lift η z) m p).1 - (G.V η).left m) /
         ((G.V η).right m - (G.V η).left m) := by
-  obtain ⟨B, hB, hl⟩ := G.negativeInverse_length_values
+  have lengths := G.negativeInverse_length_values
+  have hl := lengths.choose_spec.2
   have hp := n07aCanonicalUnitPoint_inverse (K := n07aPhysicalIntervalData (G.V η))
     (sub_pos.mp (hl η m).1) p
   change (((G.V η).chart (G.lift η z) m
     (physicalUnitPoint (G.V η) m
       (n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData (G.V η)) m p))).1 -
         (G.V η).left m) / ((G.V η).right m - (G.V η).left m) = _
-  rw [hp]
+  exact congrArg (fun q : PolarPoint =>
+    (((G.V η).chart (G.lift η z) m q).1 - (G.V η).left m) /
+      ((G.V η).right m - (G.V η).left m)) hp
 
 theorem negativeInverse_physical_chartAngleDefect
     (η : (G.W.S.height (3 / 4 : ℝ)).Space) (z : Parameter G.W.S)
     (m : ℕ) (p : PolarPoint) :
     G.negativeInversePhysicalAtomFamily η .chartAngleDefect z m p =
       ((G.V η).chart (G.lift η z) m p).2 - p.2 := by
-  obtain ⟨B, hB, hl⟩ := G.negativeInverse_length_values
+  have lengths := G.negativeInverse_length_values
+  have hl := lengths.choose_spec.2
   have hp := n07aCanonicalUnitPoint_inverse (K := n07aPhysicalIntervalData (G.V η))
     (sub_pos.mp (hl η m).1) p
   change ((G.V η).chart (G.lift η z) m
@@ -148,20 +152,22 @@ theorem negativeInverse_physical_chartAngleDefect
       (n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData (G.V η)) m p))).2 -
         (physicalUnitPoint (G.V η) m
           (n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData (G.V η)) m p)).2 = _
-  rw [hp]
+  exact congrArg (fun q : PolarPoint =>
+    ((G.V η).chart (G.lift η z) m q).2 - q.2) hp
 
 theorem negativeInverse_physical_height
     (η : (G.W.S.height (3 / 4 : ℝ)).Space) (z : Parameter G.W.S)
     (m : ℕ) (p : PolarPoint) :
     G.negativeInversePhysicalAtomFamily η .height z m p =
       (G.V η).height (G.lift η z) m p := by
-  obtain ⟨B, hB, hl⟩ := G.negativeInverse_length_values
+  have lengths := G.negativeInverse_length_values
+  have hl := lengths.choose_spec.2
   have hp := n07aCanonicalUnitPoint_inverse (K := n07aPhysicalIntervalData (G.V η))
     (sub_pos.mp (hl η m).1) p
   change (G.V η).height (G.lift η z) m
     (physicalUnitPoint (G.V η) m
       (n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData (G.V η)) m p)) = _
-  rw [hp]
+  exact congrArg ((G.V η).height (G.lift η z) m) hp
 
 /-- Actual whole-component scalar atom bounds give the vector forward
 bound required by the genuine implicit recurrence. -/
@@ -189,7 +195,8 @@ theorem negativeInverse_vector_forward_bound
     ‖J.D n x v‖ ≤ (2 + |(G.V η).right m - (G.V η).left m|) * C *
       parameterHeightWeight H w.stateArity *
         t ^ (w.angleArity + shift * w.stateArity - 1) := by
-  obtain ⟨B, hB, hl⟩ := G.negativeInverse_length_values
+  have lengths := G.negativeInverse_length_values
+  have hl := lengths.choose_spec.2
   exact n04NegativeInverse_vector_of_normalizedAtoms J
     ((G.V η).left m) ((G.V η).right m - (G.V η).left m) (hl η m).2.1.ne'
     (JR.congrOn (fun x _ => G.negativeInverse_physical_chartRadial η x.1 m x.2))
