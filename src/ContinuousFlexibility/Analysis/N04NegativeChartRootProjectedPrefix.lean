@@ -52,13 +52,16 @@ private theorem rootProjected_normalized_prefix
   have hτ : |Real.sqrt δ| ≤ 1 := by
     rw [abs_of_nonneg (Real.sqrt_nonneg δ)]
     nlinarith only [Real.sqrt_nonneg δ, Real.sq_sqrt hδ, hδone]
-  have hb := n04NegativeChart_rootNormalized_csBound hg hτ
+  have hb := n04NegativeChart_rootNormalized_csBound
+    (M := M * R ^ (((a + b + D * k : ℕ) : ℝ) / (((s + D * K : ℕ) : ℝ) + 1))) hg hτ
     (a + b + if odd then 1 else 0) (fun j hj q hq hx => by
       have hj' : j ≤ s + 1 := by split_ifs at hj <;> omega
       have hn : j - 1 + D * k ≤ a + b + D * k := by split_ifs at hj <;> omega
+      have hnℝ : ((j - 1 + D * k : ℕ) : ℝ) ≤ ((a + b + D * k : ℕ) : ℝ) := by
+        exact_mod_cast hn
       exact (hraw j hj' q hq hx).trans (mul_le_mul_of_nonneg_left
         (Real.rpow_le_rpow_of_exponent_le hR
-          (div_le_div_of_nonneg_right (by exact_mod_cast hn) (by positivity))) hM))
+          (div_le_div_of_nonneg_right hnℝ (by positivity))) hM))
   simpa only [g, Function.comp_def, rootFlowNormalizedArgument_apply] using hb
 
 namespace N04RealizationStart.NegativeOpticalFactors
@@ -204,7 +207,7 @@ private theorem rootProjected_prefix_of_endpoint
   have hb := (hp'.trans_eq he).trans (mul_le_mul_of_nonneg_right
     (mul_le_mul_of_nonneg_right (hpack.choose_spec.2 E hE)
       (parameterHeightWeight_nonneg hH k)) hpow)
-  simpa only [Real.norm_eq_abs] using hb
+  simpa only [ContinuousMultilinearMap.coe_coe, Real.norm_eq_abs, E, H, β] using hb
 
 /-- The actual endpoint estimate supplies both root projections with
 one common base, neighborhood and material scale before all orders. -/
