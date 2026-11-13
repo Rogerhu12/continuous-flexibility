@@ -24,6 +24,40 @@ local instance n04PulledFieldsActualErrorPhysicalStateSMul (S : PhysicalSpacesDa
 
 set_option backward.isDefEq.respectTransparency false
 
+private theorem n04PulledFields_errorProjection_zero_eq :
+    n04PulledFields_errorProjection 0 = (0 : (ℝ × ℝ) →L[ℝ] ℝ) := by
+  simp [n04PulledFields_errorProjection]
+
+private theorem n04PulledFields_errorProjection_one_eq :
+    n04PulledFields_errorProjection 1 = ContinuousLinearMap.fst ℝ ℝ ℝ := by
+  simp [n04PulledFields_errorProjection]
+
+private theorem n04PulledFields_errorProjection_two_eq :
+    n04PulledFields_errorProjection 2 = ContinuousLinearMap.snd ℝ ℝ ℝ := by
+  simp [n04PulledFields_errorProjection]
+
+/-- The zero entry is handled at the level of an arbitrary genuine mixed
+tower, before specializing its parameter space or its pair-valued field. -/
+private theorem n04PulledFields_zeroErrorProjection_physicalOneHigh
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} {Ω : Set PolarPoint} (p : ℕ → Seminorm ℝ E)
+    (Ephys Hphys : PolarPoint → ℝ) (f : E → PolarPoint → ℝ × ℝ)
+    (RF : MixedJetRegularity U Ω (fun z y => n04PulledFields_errorProjection 0 (f z y))) :
+    ∃ B : ℕ, ∀ k : ℕ, ∃ L : ℕ, ∀ s : ℕ, ∃ A P : ℝ,
+      0 ≤ A ∧ 0 ≤ P ∧ ∀ z, z ∈ U → p B z ≤ 1 →
+      ∀ y (hy : y ∈ Ω), ∀ a b : ℕ, a + b ≤ s → ∀ v : Fin k → E,
+        |(RF.parameter a b y hy).D k z v| ≤
+          A * Ephys y ^ P * Hphys y * oneHighVariationWeight p B (s + L) z v := by
+  refine ⟨0, fun k => ⟨0, fun s => ⟨0, 0, le_rfl, le_rfl,
+    fun z hz _ y hy a b _ v => ?_⟩⟩⟩
+  have hzero : (RF.parameter a b y hy).D k z v = 0 := by
+    apply (RF.parameter a b y hy).jets_zero_of_eqOn_zero _ k z hz v
+    intro x hx
+    simp only [n04PulledFields_errorProjection_zero_eq, ContinuousLinearMap.zero_apply,
+      mixedDerivative, iteratedDeriv_const, ite_self]
+  simp only [hzero, abs_zero, zero_mul, le_refl]
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {base loss : ℕ} {ε : ℝ}
@@ -46,18 +80,38 @@ private theorem n04PulledFields_actualErrorStrip_physicalCost :
   exact (hb m (Q.cell m) y.1 (Q.strip_subset m hy.1)
     (Q.component_cell m (Q.strip_subset m hy.1))).trans_eq (by ring)
 
-include hhost in
+include hN in
+private theorem n04PulledFields_actualError_stripOrZero
+    (π : (ℝ × ℝ) →L[ℝ] ℝ) :
+    ∀ y ∈ annularOpen D,
+      (∃ m, y ∈ Ioo (Q.stripLeft m) (Q.stripRight m) ×ˢ (univ : Set ℝ)) ∨
+      ∀ z ∈ sectorNeighborhood S base ε ε,
+        (fun q => π (returnCorrectionCoefficientError D S C R Q.cutoff
+          (liftSectorParameter S C z) q (R.residual (liftSectorParameter S C z))))
+            =ᶠ[𝓝 y] (fun _ => 0) := by
+  intro y hy
+  rcases hN.cutoffStrip_or_eventually_zero Q.cutoff Q.support_interior
+    Q.endpoint_germs Q.stripLeft Q.stripRight Q.strip_support hy.1 with ⟨m, hm⟩ | hz
+  · exact Or.inl ⟨m, hm, mem_univ _⟩
+  · exact Or.inr (fun z _ => n04PulledFields_error_zero_germ R Q.cutoff hz
+      (liftSectorParameter S C z) (R.residual (liftSectorParameter S C z)) π)
+
+include hN hT hhost in
 private theorem n04PulledFields_actualErrorPhysical_of_stripGrowth
     (π : (ℝ × ℝ) →L[ℝ] ℝ)
     (RF : MixedJetRegularity (sectorNeighborhood S base ε ε) (annularOpen D)
       (fun z y => π (returnCorrectionCoefficientError D S C R Q.cutoff
         (liftSectorParameter S C z) y (R.residual (liftSectorParameter S C z)))))
+    (J : ∀ m, SmoothDirections
+      (sectorNeighborhood S base ε ε ×ˢ (Ioo (Q.stripLeft m) (Q.stripRight m) ×ˢ univ))
+      (fun x : (StateDirections S × ℝ) × PolarPoint =>
+        π (returnCorrectionCoefficientError D S C R Q.cutoff
+          (liftSectorParameter S C x.1) x.2
+            (R.residual (liftSectorParameter S C x.1)))))
     (hg : N04PulledFieldsFixedBaseMixedGrowth
       (pairGrading (sectorGrading S) realGrading)
       (fun m => radialE (D.cellIndex (Q.cell m)))
-      (fun m => T.H (T.sample m) ^ (3 / 4 : ℝ))
-      (fun m => solveSmoothDirectionsPostcomp
-        (n04PulledFields_actualErrorStripDirections Q hN hS hT hR m) π)) :
+      (fun m => T.H (T.sample m) ^ (3 / 4 : ℝ)) J) :
     ∃ B : ℕ, ∀ k : ℕ, ∃ L : ℕ, ∀ s : ℕ, ∃ A P : ℝ,
       0 ≤ A ∧ 0 ≤ P ∧ ∀ z, z ∈ sectorNeighborhood S base ε ε →
       pairGrading (sectorGrading S) realGrading B z ≤ 1 →
@@ -66,7 +120,7 @@ private theorem n04PulledFields_actualErrorPhysical_of_stripGrowth
         |(RF.parameter a b y hy).D k z v| ≤
           A * T.E0 y.1 ^ P * T.H y.1 ^ (3 / 4 : ℝ) *
             oneHighVariationWeight (pairGrading (sectorGrading S) realGrading) B (s + L) z v := by
-  refine n04PulledFields_mixedPhysical_of_strips_or_zero
+  exact n04PulledFields_mixedPhysical_of_strips_or_zero
     (pairGrading (sectorGrading S) realGrading)
     (sectorNeighborhood_isOpen S base ε ε)
     (fun m => Ioo (Q.stripLeft m) (Q.stripRight m) ×ˢ univ)
@@ -82,14 +136,7 @@ private theorem n04PulledFields_actualErrorPhysical_of_stripGrowth
     (fun y hy => (hT.2.1 y.1 hy.1).2.2.1.le)
     (fun y hy => Real.rpow_nonneg (hT.2.1 y.1 hy.1).2.1.le _)
     (n04PulledFields_actualErrorStrip_physicalCost Q hN hT hhost)
-    RF (fun m => solveSmoothDirectionsPostcomp
-      (n04PulledFields_actualErrorStripDirections Q hN hS hT hR m) π) ?_ hg
-  intro y hy
-  rcases hN.cutoffStrip_or_eventually_zero Q.cutoff Q.support_interior
-    Q.endpoint_germs Q.stripLeft Q.stripRight Q.strip_support hy.1 with ⟨m, hm⟩ | hz
-  · exact Or.inl ⟨m, hm, mem_univ _⟩
-  · exact Or.inr (fun z _ => n04PulledFields_error_zero_germ R Q.cutoff hz
-      (liftSectorParameter S C z) (R.residual (liftSectorParameter S C z)) π)
+    RF J (n04PulledFields_actualError_stripOrZero Q hN π) hg
 
 include hN hS hT hR hhost in
 /-- Each actual correction coefficient has a physical full-height
@@ -111,26 +158,26 @@ theorem n04PulledFields_actualError_physicalOneHigh
           A * T.E0 y.1 ^ P * T.H y.1 ^ (3 / 4 : ℝ) *
             oneHighVariationWeight (pairGrading (sectorGrading S) realGrading) B (s + L) z v := by
   fin_cases i
-  · refine ⟨0, fun k => ⟨0, fun s => ⟨0, 0, le_rfl, le_rfl,
-      fun z hz _ y hy a b _ v => ?_⟩⟩⟩
-    have hzero : (RF.parameter a b y hy).D k z v = 0 := by
-      apply (RF.parameter a b y hy).jets_zero_of_eqOn_zero _ k z hz v
-      intro x hx
-      simp only [n04PulledFields_errorProjection, if_pos rfl, ContinuousLinearMap.zero_apply,
-        mixedDerivative, iteratedDeriv_const, ite_self]
-    simp only [hzero, abs_zero, zero_mul, le_refl]
-  · apply n04PulledFields_actualErrorPhysical_of_stripGrowth Q hN hS hT hR hhost
+  · exact n04PulledFields_zeroErrorProjection_physicalOneHigh
+      (pairGrading (sectorGrading S) realGrading)
+      (fun y => T.E0 y.1) (fun y => T.H y.1 ^ (3 / 4 : ℝ))
+      (fun z y => returnCorrectionCoefficientError D S C R Q.cutoff
+        (liftSectorParameter S C z) y (R.residual (liftSectorParameter S C z))) RF
+  · apply n04PulledFields_actualErrorPhysical_of_stripGrowth Q hN hT hhost
       (n04PulledFields_errorProjection 1) RF
-    have hg := (n04PulledFields_actualErrorStrip_fixedBaseMixedGrowth Q hN hS hT hR
+      (fun m => solveSmoothDirectionsPostcomp
+        (n04PulledFields_actualErrorStripDirections Q hN hS hT hR m)
+        (n04PulledFields_errorProjection 1))
+    rw [n04PulledFields_errorProjection_one_eq]
+    exact (n04PulledFields_actualErrorStrip_fixedBaseMixedGrowth Q hN hS hT hR
       (n04PulledFields_actualErrorStripDirections Q hN hS hT hR)).1
-    have h10 : (1 : Fin 3) ≠ 0 := by decide
-    simpa only [n04PulledFields_errorProjection, h10, if_false, if_pos rfl] using hg
-  · apply n04PulledFields_actualErrorPhysical_of_stripGrowth Q hN hS hT hR hhost
+  · apply n04PulledFields_actualErrorPhysical_of_stripGrowth Q hN hT hhost
       (n04PulledFields_errorProjection 2) RF
-    have hg := (n04PulledFields_actualErrorStrip_fixedBaseMixedGrowth Q hN hS hT hR
+      (fun m => solveSmoothDirectionsPostcomp
+        (n04PulledFields_actualErrorStripDirections Q hN hS hT hR m)
+        (n04PulledFields_errorProjection 2))
+    rw [n04PulledFields_errorProjection_two_eq]
+    exact (n04PulledFields_actualErrorStrip_fixedBaseMixedGrowth Q hN hS hT hR
       (n04PulledFields_actualErrorStripDirections Q hN hS hT hR)).2
-    have h20 : (2 : Fin 3) ≠ 0 := by decide
-    have h21 : (2 : Fin 3) ≠ 1 := by decide
-    simpa only [n04PulledFields_errorProjection, h20, h21, if_false] using hg
 
 end ContinuousFlexibility.Analysis
