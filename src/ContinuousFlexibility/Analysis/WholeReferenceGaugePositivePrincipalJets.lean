@@ -48,9 +48,10 @@ private theorem positivePrincipal_scalar_regularity {Y H : ℝ → ℝ} {l r : �
   refine ⟨hY, hH, hχ, ?_⟩
   intro x
   have hYpos : 0 < deriv Y (Function.invFun Y x) := by
-    simpa only [planeJacobian_positiveReferenceCylinderChart
-      (hY.differentiable (by simp) (Function.invFun Y x))] using
-      hgeometry.jacobian_positive (Function.invFun Y x, 0)
+    have h := hgeometry.jacobian_positive (Function.invFun Y x, 0)
+    rw [planeJacobian_positiveReferenceCylinderChart (p := (Function.invFun Y x, 0))
+      (hY.differentiable (by simp) (Function.invFun Y x))] at h
+    exact h
   have hright (t : ℝ) : Y (Function.invFun Y t) = t :=
     congrArg Prod.fst (hgeometry.right_inverse (t, 0))
   exact (HasDerivAt.of_local_left_inverse hχ.continuous.continuousAt
@@ -79,9 +80,11 @@ private theorem positivePrincipalScalar_smooth
   have hYdc : ContDiffAt ℝ ∞ (fun t => deriv Y (χ t)) x :=
     (contDiff_infty_iff_deriv.mp hY).2.contDiffAt.comp x hχ.contDiffAt
   have hχd : ContDiffAt ℝ ∞ (deriv χ) x := (contDiff_infty_iff_deriv.mp hχ).2.contDiffAt
+  have hflux0 : ContDiffAt ℝ ∞ (fun y => deriv D.w y / y) (χ x) :=
+    (contDiff_infty_iff_deriv.mp hD.2.2.1.1).2.contDiffAt.div
+      contDiffAt_id (hD.1.trans hcore.1).ne'
   have hflux : ContDiffAt ℝ ∞ (fun t => deriv D.w (χ t) / χ t) x :=
-    ((contDiff_infty_iff_deriv.mp hD.2.2.1.1).2.contDiffAt.div
-      contDiffAt_id (hD.1.trans hcore.1).ne').comp x hχ.contDiffAt
+    hflux0.comp x hχ.contDiffAt
   rcases hv with rfl | rfl | rfl | rfl
   · exact (((hHc.pow 2).mul hwc).mul hYdc).contDiffWithinAt
   · exact ((((hHc.inv (hgeometry.height_positive (χ x, 0)).ne').pow 2).mul
@@ -125,13 +128,17 @@ private theorem positivePrincipal_actual_atom_eqOn
   obtain ⟨hl, hr, _, _, _, _, _, _, _, _, _, _⟩ :=
     n04WholeReferenceGaugeAtlasData_positive_fields C L K e cell ψ χ h₀ τ σ Q N
       (C.referenceState, 0) m i hi
+  have hl' : V.left m = 0 := hl
+  have hr' : V.right m = 1 := hr
   have hunit (p : PolarPoint) : canonicalUnitPoint V m p = p := by
     change (V.left m + (V.right m - V.left m) * p.1, p.2) = p
-    simp only [hl, hr, sub_zero, one_mul, zero_add, Prod.mk.eta]
+    simp only [hl', hr', sub_zero, one_mul, zero_add, Prod.mk.eta]
   have hχd := (positivePrincipal_scalar_regularity hgeometry).2.2.2
+  show EqOn (atom D T S C L V (C.referenceState, 0) m v)
+    (fun p : PolarPoint => positivePrincipalScalar D.w (Y i) (H i) v p.1) unitStrip
   intro p hp
   have hpCanonical : p ∈ canonicalOpen S V m := by
-    simpa only [unitStrip, canonicalOpen, hl, hr] using hp
+    simpa only [unitStrip, canonicalOpen, hl', hr'] using hp
   have hf := n04WholeReferenceGaugeAtlasData_positive_reference_formulas
     hT hS hN hfield e₀ e cell Y H τ σ Q N m i hi hgeometry href hpCanonical
   rcases hv with rfl | rfl | rfl | rfl
@@ -251,7 +258,7 @@ theorem n04WholeReferenceGauge_positive_principalReferenceJets_fixedFamily
         have hp' : p + (0, Real.pi) ∈ unitStrip := by
           refine ⟨?_, mem_univ _⟩
           change 0 < p.1 + 0 ∧ p.1 + 0 < 1
-          simpa only [add_zero] using hp.1
+          simpa only [add_zero, mem_Ioo] using hp.1
         calc
           _ = positivePrincipalScalar Γ.reference.w (Y i) (H i) v (p + (0, Real.pi)).1 := hEq hp'
           _ = positivePrincipalScalar Γ.reference.w (Y i) (H i) v p.1 := by

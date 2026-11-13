@@ -108,9 +108,11 @@ theorem n04WholeReferenceGauge_positive_scalarColumnReferenceJets_fixedFamily
     refine ⟨?_, ?_, hsample⟩
     · intro p hp
       have hunit : canonicalUnitPoint V (piece i) p = p := by
+        have hl' : V.left (piece i) = 0 := hl
+        have hr' : V.right (piece i) = 1 := hr
         change (V.left (piece i) +
           (V.right (piece i) - V.left (piece i)) * p.1, p.2) = p
-        simp only [hl, hr, sub_zero, one_mul, zero_add, Prod.mk.eta]
+        simp only [hl', hr', sub_zero, one_mul, zero_add, Prod.mk.eta]
       rw [hunit]
       exact congrFun (hG.trans he.2.1) p
     · intro p hp

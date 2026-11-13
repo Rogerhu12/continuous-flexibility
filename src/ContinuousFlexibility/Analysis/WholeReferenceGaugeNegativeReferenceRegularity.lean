@@ -73,7 +73,7 @@ theorem n04WholeReferenceGauge_negative_geometryPotentialReferenceRegularity
       have hpositive : V.positive m = true := by
         simp only [V, n04WholeReferenceGaugeAtlasData, n04WholeCanonicalAtlasData,
           n04bWithInteriorDivision, n04WholePiecePositive, hi]
-      exact False.elim (Bool.true_ne_false (hpositive.symm.trans hm))
+      exact False.elim (Bool.false_ne_true (hpositive.symm.trans hm).symm)
   | inl j =>
       let k := if j.2 then (K.cutPair j.1).2 else (K.cutPair j.1).1
       have hk : e₀ k = .inl j := by

@@ -190,12 +190,18 @@ theorem n04WholeReferenceGauge_lengthReferenceJets_enlargedMaterialData :
   let U := enlargedMaterialData T
   obtain ⟨B, hB, hvalues⟩ := n04WholeReferenceGauge_length_values_enlargedMaterialData
     P hS₀ hband hq hΓ hw hcoordinates hT hS hN hfield e₀ e cell hcell ψ χ h₀ τ σ Q N
+  have hvalues' : ∀ m : ℕ,
+      0 < V.physicalRight m - V.physicalLeft m ∧ 0 < V.right m - V.left m ∧
+      V.physicalRight m - V.physicalLeft m ≤ B * U.E0 (U.sample (V.cell m)) ^ B ∧
+      (V.physicalRight m - V.physicalLeft m)⁻¹ ≤ B * U.E0 (U.sample (V.cell m)) ^ B ∧
+      V.right m - V.left m ≤ B * U.E0 (U.sample (V.cell m)) ^ B ∧
+      (V.right m - V.left m)⁻¹ ≤ B * U.E0 (U.sample (V.cell m)) ^ B := hvalues
   refine ⟨?_, fun s => ⟨B, hB, ?_⟩⟩
   · intro z m canonical inverse
     rw [canonicalLengthSelector_eq_const]
     exact ⟨contDiffOn_const, fun _ _ => rfl⟩
   · intro z m canonical inverse p hp a b hab
-    have hv := hvalues m
+    have hv := hvalues' m
     let d := if canonical then V.right m - V.left m
       else V.physicalRight m - V.physicalLeft m
     have hvalue : |if inverse then d⁻¹ else d| ≤ B * U.E0 (U.sample (V.cell m)) ^ B := by
