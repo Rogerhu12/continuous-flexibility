@@ -20,8 +20,13 @@ This note gives the mathematical refutation of the displayed universal buffer
 assertion and records the corresponding source identities. The proof has also
 been assembled in `Analysis/N04PositiveGeometryObstruction.lean` as
 `n04Realization_not_positiveGeometryObligation`, with the exact conclusion
-`¬ N04RealizationPositiveGeometryObligation`. Its compilation and axiom audit
-remain a separate verification gate; the blueprint statement is unchanged.
+`¬ N04RealizationPositiveGeometryObligation`. Lean compiled this theorem and
+passed its strict axiom gate in
+[CI run 43419984621](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43419984621),
+at [commit f59c477e](https://github.com/Rogerhu12/continuous-flexibility/commit/f59c477e5e372ea7ad8e1385d38b0840e218baa5).
+Both the final theorem and the unconditional retained-start witness depend
+on exactly `propext`, `Classical.choice`, and `Quot.sound`. The blueprint
+statement is unchanged.
 
 ## The exact contracts involved
 
@@ -278,7 +283,7 @@ contradicting (*). This rules out every possible positive transport family,
 not merely the existing family selected by the qualitative interpolation
 theorem.
 
-## Formal assembly and verification boundary
+## Formal assembly and certified verification
 
 The proof is split into the following modules under `Analysis/`:
 
@@ -303,12 +308,36 @@ existence theorem. It does not assume a new reference estimate, a new physical
 space, or the positive-geometry blueprint theorem. The auxiliary parameter is
 specialized to zero in the asserted `∀ η`.
 
-At this stage the complete proof term has been written, but compilation and
-the final `#print axioms` audit are still being checked through CI. The audit
-must include the unconditional witness factories as dependencies; a successful
-result may contain only `propext`, `Classical.choice`, and `Quot.sound`.
-The original positive-geometry blueprint remains open because its frozen
-statement is the assertion refuted here.
+New modules compiled / total: **13 / 13** at
+[commit f59c477e](https://github.com/Rogerhu12/continuous-flexibility/commit/f59c477e5e372ea7ad8e1385d38b0840e218baa5),
+verified by the quick-check log of
+[CI run 43419984621](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43419984621).
+The ten modules in the table, including the complete negation theorem,
+compiled, as did `N04PositiveGeometryEndpointRootTowers`,
+`N04PositiveGeometryEndpointValues`, and `N04PositiveGeometryInverseContinuity`.
+
+The final module's `run_cmd collectAxioms` gate passed. That gate rejects every
+axiom other than the standard three, including any dependency inherited from
+the unconditional witness factories. The two `#print axioms` results were:
+
+```text
+ContinuousFlexibility.Analysis.n04RealizationStart_nonempty
+  [propext, Classical.choice, Quot.sound]
+ContinuousFlexibility.Analysis.n04Realization_not_positiveGeometryObligation
+  [propext, Classical.choice, Quot.sound]
+```
+
+The complete CI run on that commit still failed in the lead-owned module
+`ActualReferenceRootFiniteMaterialData.lean`, at its existing
+`exists_bound_of_continuousOn` error. This did not prevent compilation or the
+axiom audit of the obstruction. The subsequent lead repair
+[cb14e791](https://github.com/Rogerhu12/continuous-flexibility/commit/cb14e7911c6e9ca3639d695c8aaafe4ca01769f9)
+has been merged into this branch; complete CI after that merge remains under
+verification.
+
+The original positive-geometry blueprint remains open: its frozen statement
+is the assertion whose negation has now been certified. Compiling that
+negation does not close the original blueprint or repair the parent assembly.
 
 ## Consequence for the intended proof
 
