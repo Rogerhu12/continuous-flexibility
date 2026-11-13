@@ -53,7 +53,8 @@ theorem n04Coordinates_actual_positiveEndpoint_bounds
 
 /-- No endpoint-bound hypothesis remains. The common base and radius
 precede all components. Each component then selects finite envelopes,
-and any ordered buffer centers give the actual common family. -/
+and any ordered buffer centers give the actual common family. The low
+endpoint certificate stays attached to those same selected controls. -/
 theorem n04Coordinates_exists_actual_wholePositive_families_with_log_bounds
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {R : ReturnEquationData S}
@@ -67,6 +68,12 @@ theorem n04Coordinates_exists_actual_wholePositive_families_with_log_bounds
       ∀ i : N04PositiveComponent D.a D.b (deriv D.w),
       ∀ j : ∀ side, N04PositiveEndpointSource C i side,
       ∃ κ M H : ℝ, 0 < κ ∧ κ ≤ 1 ∧ κ⁻¹ ≤ M ∧ 1 ≤ M ∧ 1 ≤ H ∧
+        (∀ z ∈ stateNeighborhood S C newBase ε', stateSector S z.1 →
+          let K := n04bActualTypedAtlas hT hS hN hfield e
+          WholePositiveEndpointJetBounds n
+            (fun side => n04PositiveSourceMap (j side) K z)
+            (fun side => n04PositiveSourceHeight (j side) K z)
+            (n04PositiveLeft i) (n04PositiveRight i) κ κ M H) ∧
       ∀ c d : ℝ, n04PositiveLeft i < c → c < d → d < n04PositiveRight i →
         let l := n04PositiveLeft i
         let r := n04PositiveRight i
@@ -97,7 +104,7 @@ theorem n04Coordinates_exists_actual_wholePositive_families_with_log_bounds
   refine ⟨newBase, ε', hb, hε', hε'ε, ?_⟩
   intro i j
   obtain ⟨κ, M, H, hκ, hκone, hκinv, hM, hH, hbounds⟩ := hfinite i j
-  refine ⟨κ, M, H, hκ, hκone, hκinv, hM, hH, ?_⟩
+  refine ⟨κ, M, H, hκ, hκone, hκinv, hM, hH, hbounds, ?_⟩
   intro c d hlc hcd hdr
   let K := n04bActualTypedAtlas hT hS hN hfield e
   let Z := {z : AnnularState S × ℝ //
@@ -177,7 +184,7 @@ theorem n04Coordinates_exists_actual_wholePositive_families
     n04Coordinates_exists_actual_wholePositive_families_with_log_bounds hT hS hN hfield e n
   refine ⟨newBase, ε', hb, hε', hε'ε, ?_⟩
   intro i j
-  obtain ⟨κ, M, H, hκ, hκone, hκinv, hM, hH, hnext⟩ := hfamily i j
+  obtain ⟨κ, M, H, hκ, hκone, hκinv, hM, hH, _hendpoint, hnext⟩ := hfamily i j
   refine ⟨κ, M, H, hκ, hκone, hκinv, hM, hH, ?_⟩
   intro c d hlc hcd hdr
   obtain ⟨Clog, Mσ, δ, hClog, hMσ, hδ, hδρ, hδone, hrecip, hB, _hlog, hmatch⟩ :=

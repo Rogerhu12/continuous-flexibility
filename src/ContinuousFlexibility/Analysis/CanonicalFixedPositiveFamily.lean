@@ -73,7 +73,8 @@ def N04FixedPositiveFamilyControls
       0 < endpointFiberLower n l r (B.centerLeft i) (B.centerRight i) (κ i) (Mσ i)
 
 /-- The common neighborhood precedes every component parameter. Each
-actual function is then fixed for all states and all future output orders. -/
+actual function is then fixed for all states and all future output orders.
+The raw endpoint bounds retain exactly these same component controls. -/
 theorem n04Coordinates_exists_fixed_positive_family_with_log_bounds
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {R : ReturnEquationData S}
@@ -93,6 +94,11 @@ theorem n04Coordinates_exists_fixed_positive_family_with_log_bounds
         let τ := n04FixedPositiveTransport K j B n κ M Mσ
         let σ := n04FixedPositiveInverse K j B n κ M Mσ
         let Q := n04FixedPositiveHeight K j n δ
+        (∀ z ∈ stateNeighborhood S C newBase ε', stateSector S z.1 → ∀ i,
+          WholePositiveEndpointJetBounds n
+            (fun side => n04PositiveSourceMap (j i side) K z)
+            (fun side => n04PositiveSourceHeight (j i side) K z)
+            (n04PositiveLeft i) (n04PositiveRight i) (κ i) (κ i) (M i) (H i)) ∧
         (∀ z ∈ stateNeighborhood S C newBase ε', stateSector S z.1 →
           ∀ i side k, 0 < k → k ≤ n → ∀ θ,
             |positiveHeightTaylorData (n04PositiveLeft i) (n04PositiveRight i) (fun _ => 1)
@@ -112,7 +118,7 @@ theorem n04Coordinates_exists_fixed_positive_family_with_log_bounds
   classical
   obtain ⟨newBase, ε', hb, hε', hε'ε, hfamily⟩ :=
     n04Coordinates_exists_actual_wholePositive_families_with_log_bounds hT hS hN hfield e n
-  choose κ M H hκ hκone hκinv hM hH hnext using fun i => hfamily i (j i)
+  choose κ M H hκ hκone hκinv hM hH hendpoint hnext using fun i => hfamily i (j i)
   have hcenters (i : N04PositiveComponent D.a D.b (deriv D.w)) :
       B.centerLeft i < B.centerRight i :=
     (B.ordered i).2.1.trans ((B.ordered i).2.2.1.trans (B.ordered i).2.2.2.1)
@@ -124,7 +130,8 @@ theorem n04Coordinates_exists_fixed_positive_family_with_log_bounds
   · exact fun i => ⟨hκ i, hκone i, hκinv i, hM i, hH i, hClog i, hMσ i,
       hδ i, hδρ i, hδone i, hrecip i, hJ i⟩
   · dsimp only
-    refine ⟨?_, ?_, ?_⟩
+    refine ⟨?_, ?_, ?_, ?_⟩
+    · exact fun z hz hs i => hendpoint i z hz hs
     · exact fun z hz hs i => hlog i z hz hs
     · exact fun z hz hs i => (hmatched i z hz hs).1
     · intro i
@@ -164,7 +171,7 @@ theorem n04Coordinates_exists_fixed_positive_family
           ∀ i, τ (C.referenceState, 0) i = id ∧ σ (C.referenceState, 0) i = id ∧
             Q (C.referenceState, 0) i = (fun _ => (1 : ℝ)) := by
   obtain ⟨newBase, ε', hb, hε', hε'ε, κ, M, H, Clog, Mσ, δ,
-      hcontrols, _hlog, hmatching, href⟩ :=
+      hcontrols, _hendpoint, _hlog, hmatching, href⟩ :=
     n04Coordinates_exists_fixed_positive_family_with_log_bounds hT hS hN hfield e j B n
   exact ⟨newBase, ε', hb, hε', hε'ε, κ, M, H, Clog, Mσ, δ,
     hcontrols, hmatching, href⟩
