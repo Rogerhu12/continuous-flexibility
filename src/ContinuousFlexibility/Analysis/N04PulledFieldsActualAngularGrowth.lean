@@ -87,23 +87,22 @@ theorem N01Properties.n04PulledFields_returnFlowInverseSlope_angular_growth
     ∃ B : ℕ, ∀ K : ℕ, ∃ highLoss shift : ℕ,
       N04PulledFieldsAngularPowerGrowth (pairGrading (sectorGrading S) realGrading)
         W (fun _ => 1) J K B highLoss shift := by
-  obtain ⟨g, hg, hdecode⟩ :=
-    n04PulledFields_actualAngular_inverseSlope_family hN hS hT hflow
+  let family := n04PulledFields_actualAngular_inverseSlope_family hN hS hT hflow
   exact N04PulledFieldsFixedBaseFamily.realized_strip_angular_power_add_const
     (I := {s : ℕ → ℝ // ∀ m, s m ∈ Icc (C.left m) (C.right m)})
     (E := StateDirections S × ℝ) (T := T) (γ := (3 / 4 : ℝ))
     (H := S.circle (3 / 4 : ℝ))
     (U := sectorNeighborhood S base ε ε)
     (p := pairGrading (sectorGrading S) realGrading)
-    (g := g)
+    (g := family.choose)
     (f := fun m (x : (StateDirections S × ℝ) × PolarPoint) =>
       returnFlowInverseSlope S C (liftSectorParameter S C x.1) m x.2)
-    hg (sectorPairGrading_monotone S)
+    family.choose_spec.1 (sectorPairGrading_monotone S)
     (n04PulledFields_actualAngular_parameterInterpolation hS) (hS.2.1 (3 / 4 : ℝ))
     ((material_circle_sample_weights_pos hT hN.1.1).2)
     KH hKH hheight l h (fun i => i.val)
     (n04PulledFields_actualAngular_selectorCover hN l h hl hh) J 1
-    (fun i m _hr x hx θ => hdecode i x hx m θ) W
+    (fun i m _hr x hx θ => family.choose_spec.2 i x hx m θ) W
 
 include hN hS hT hflow hl hh in
 /-- The actual residual-substituted displacement retains its full
