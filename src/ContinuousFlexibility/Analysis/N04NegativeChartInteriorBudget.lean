@@ -21,6 +21,21 @@ structure NegativeInteriorEvaluation (S : PhysicalSpacesData) where
 
 namespace N04RealizationStart
 
+set_option backward.isDefEq.respectTransparency true
+
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
+  interiorRaw_parameterTopology interiorRaw_parameterAddGroup interiorRaw_parameterSMul
+
 variable (W : N04RealizationStart)
 
 def negativeInteriorJet
@@ -87,6 +102,7 @@ private theorem interiorAngular
     (by positivity) (by positivity))
   simpa only [negativeInteriorJet, Nat.add_comm b (k * D), mul_assoc] using h
 
+set_option diagnostics true in
 /-- The actual corrected first integral has one fixed low order and
 one height charge on every material-controlled interior. The prefix
 retains its fractional powers for subsequent nonlinear compositions. -/
@@ -131,9 +147,15 @@ theorem negativeInterior_firstIntegral_fractional
   have hMH := hupperExists.choose_spec.1
   have hupper := hupperExists.choose_spec.2
   refine ⟨base, ε, hbase, hε, hεW, fun K => ?_⟩
-  obtain ⟨DA, hDA⟩ := hBA K
-  obtain ⟨DZ, hDZ⟩ := hBZ K
-  obtain ⟨DF, hDF⟩ := hBF K
+  have hDAExists := hBA K
+  let DA := hDAExists.choose
+  have hDA := hDAExists.choose_spec
+  have hDZExists := hBZ K
+  let DZ := hDZExists.choose
+  have hDZ := hDZExists.choose_spec
+  have hDFExists := hBF K
+  let DF := hDFExists.choose
+  have hDF := hDFExists.choose_spec
   let D : ℕ := DA + DZ + DF
   refine ⟨D, fun N => ?_⟩
   let Ω : Set (NegativeInteriorEvaluation W.S) := W.negativeInteriorBudgetDomain ρ base ε
@@ -202,9 +224,14 @@ theorem negativeInterior_firstIntegral_fractional
       W.negativeFirstIntegralDefectJointTower (fun m => W.T.H (W.T.sample m) ^ (3 / 4 : ℝ))
       1 (hDF 1 zero_le_one) hCH.le hPH
       (fun m side => by simpa only [pow_one] using hheight m side) n b hn hb
-  obtain ⟨Cr, Ar, hCr, hAr, hr⟩ := W.negativeInterior_raw_fractional e ρ hbase hε
+  have hrawBound := W.negativeInterior_raw_fractional e ρ hbase hε
     (hεW.trans (min_le_left _ _)) (hεW.trans (min_le_right _ _))
     (fun m side => (hρ m side).1) G K (N + K * D)
+  let Cr := hrawBound.choose
+  let Ar := hrawBound.choose_spec.choose
+  have hCr := hrawBound.choose_spec.choose_spec.1
+  have hAr := hrawBound.choose_spec.choose_spec.2.1
+  have hr := hrawBound.choose_spec.choose_spec.2.2
   have hraw (n a b : ℕ) (hn : n ≤ K) (hab : a + b ≤ N) :
       HasWeightedJetBound E H Q Ω d (n * D + a + b) 0 (L n a b) ∧
       HasWeightedJetBound E H Q Ω d (n * D + a + b) 1 (Ld n a b) := by
@@ -235,7 +262,12 @@ theorem negativeInterior_firstIntegral_fractional
             (hH x hx))))
   have hC (n a b : ℕ) (_ : n ≤ K) (_ : a + b ≤ N) :
       HasWeightedJetBound E H Q Ω d (n * D) 0 (C n a b) := by
-    obtain ⟨Cc, Ac, hCc, hAc, hcut⟩ := W.negativeCutoff_half_material e (a + 1)
+    have hcutExists := W.negativeCutoff_half_material e (a + 1)
+    let Cc := hcutExists.choose
+    let Ac := hcutExists.choose_spec.choose
+    have hCc := hcutExists.choose_spec.choose_spec.1
+    have hAc := hcutExists.choose_spec.choose_spec.2.1
+    have hcut := hcutExists.choose_spec.choose_spec.2.2
     apply HasWeightedJetBound.monoDegree (hW := hE) (hH := hH) (hQ := hQ)
       (hdenom := hd) (hde := Nat.zero_le (n * D))
     refine ⟨Cc, Ac, hCc.le, hAc, fun x hx => ?_⟩

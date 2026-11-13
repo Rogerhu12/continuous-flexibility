@@ -35,7 +35,8 @@ Every equality holds on the complete physical half or angular fiber. -/
 structure NegativeRootRepresentative (F : W.NegativeOpticalFactors e)
     {n : ℕ} (base : ℕ) (ε : ℝ) (z : Parameter W.S)
     (L : (Fin n → ℝ) →L[ℝ] Parameter W.S) (m : ℕ) (side : Bool) (δ : ℝ) where
-  d c : (Fin n → ℝ) × PolarPoint → ℝ
+  d : (Fin n → ℝ) × PolarPoint → ℝ
+  c : (Fin n → ℝ) × PolarPoint → ℝ
   hd : ContDiff ℝ ∞ d
   hc : ContDiff ℝ ∞ c
   dp : ∀ y r, Function.Periodic (fun θ => d (y, (r, θ))) Real.pi
@@ -152,10 +153,12 @@ theorem projection_eq (hb : W.base ≤ base) (hε : ε ≤ W.ε / 2)
   have hs := W.through03.1.1.2.2.1.liftSectorParameter_sector (z + L y)
   rw [A.coordinate_actual y hy]
   cases odd with
-  | false => exact F.fullHalfFields_root_angle_defect A.hd A.hc A.dp A.cp
+  | false =>
+    exact F.fullHalfFields_root_angle_defect A.hd A.hc A.dp A.cp
       A.flow y hz hs m side (by norm_num : (0 : ℝ) < 2) hδ hband
       (A.fields y hy) ⟨hp.1, hp.2.le⟩
-  | true => exact F.fullHalfFields_root_coefficient A.hd A.hc A.dp A.cp
+  | true =>
+    exact F.fullHalfFields_root_coefficient A.hd A.hc A.dp A.cp
       A.flow y hz hs m side (by norm_num : (0 : ℝ) < 2) hδ hband
       (A.fields y hy) ⟨hp.1, hp.2.le⟩
 

@@ -136,7 +136,7 @@ theorem negativeInterior_physical_positive_bounds
     (min_le_right G.ε εF) (min_le_right G.ε εF)
   have hsubW := sectorNeighborhood_mono W.S hbW hεW hεW
   have hτ := NegativeInteriorScaledTravelPrefix.mono W (fun m side => (hρ m side).1)
-    G.prefix G.base_le (G.ε_le.trans (min_le_left _ _))
+    G.«prefix» G.base_le (G.ε_le.trans (min_le_left _ _))
     (le_max_left _ _) (min_le_left _ _)
   have hhEx := materialHeight_E0_weight_bounded W.hT (γ := (3 / 4 : ℝ)) (by norm_num) 0
   let RH := hhEx.choose

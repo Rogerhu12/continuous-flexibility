@@ -23,7 +23,8 @@ variable {P : Type} [NormedAddCommGroup P] [NormedSpace ℝ P]
 physical radial fiber. No state-variation bound on the flow is an input. -/
 structure NegativeChartRootInverseInput (P : Type) [NormedAddCommGroup P]
     [NormedSpace ℝ P] [FiniteDimensional ℝ P] (N K shift : ℕ) (RH : ℝ) where
-  d c : P × PolarPoint → ℝ
+  d : P × PolarPoint → ℝ
+  c : P × PolarPoint → ℝ
   hd : ContDiff ℝ ∞ d
   hc : ContDiff ℝ ∞ c
   dp : ∀ y r, Function.Periodic (fun θ => d (y, (r, θ))) Real.pi
@@ -31,8 +32,12 @@ structure NegativeChartRootInverseInput (P : Type) [NormedAddCommGroup P]
   δ : ℝ
   flow : NegativeChartRootFlowData d c δ
   q : N04FlowPoint
-  p₀ p₁ : Seminorm ℝ P
-  R H M ρ : ℝ
+  p₀ : Seminorm ℝ P
+  p₁ : Seminorm ℝ P
+  R : ℝ
+  H : ℝ
+  M : ℝ
+  ρ : ℝ
   hR : 1 ≤ R
   hH : 0 ≤ H
   hHR : H ≤ RH

@@ -79,6 +79,13 @@ private theorem composition_sum_bound
         (by linarith : (2 : ℝ) ^ K + Cf ≤ 1 + (2 : ℝ) ^ K + Cf) hW)
         (pow_nonneg hMR _)) (pow_nonneg (zero_le_one.trans hρ) _)
 
+private theorem compositionPullback_contDiff {f : E × PolarPoint → ℝ}
+    (hf : ContDiff ℝ ∞ f) {γ : Q → E} {α : Q → ℝ}
+    (hγ : ContDiff ℝ ∞ γ) (hα : ContDiff ℝ ∞ α) (t : ℝ) :
+    ContDiff ℝ ∞ (fun y => f (γ y, (t, α y))) :=
+  hf.comp (hγ.prodMk (contDiff_const.prodMk hα))
+
+set_option diagnostics true in
 set_option backward.isDefEq.respectTransparency true in
 private theorem parameterComposition_of_forcing
     {G Θ : E × PolarPoint → ℝ}
@@ -102,14 +109,14 @@ private theorem parameterComposition_of_forcing
   let u : Q → ℝ := fun y => flowParameterField Θ n (γ y) v (t, α y)
   let F : Q → ℝ := fun y => flowVariationForcing J hΘ n (γ y) v (t, α y)
   have hκs : ContDiff ℝ ∞ κ :=
-    (n04NegativeChart_flowCoefficient_joint_contDiff hG hΘ).comp
-      (hγ.prodMk (contDiff_const.prodMk hα))
+    compositionPullback_contDiff
+      (n04NegativeChart_flowCoefficient_joint_contDiff hG hΘ) hγ hα t
   have hus : ContDiff ℝ ∞ u :=
-    (n04NegativeChart_flowParameterField_joint_contDiff hΘ n v).comp
-      (hγ.prodMk (contDiff_const.prodMk hα))
+    compositionPullback_contDiff
+      (n04NegativeChart_flowParameterField_joint_contDiff hΘ n v) hγ hα t
   have hFs : ContDiff ℝ ∞ F :=
-    (n04NegativeChart_flowForcing_joint_contDiff hG J hΘ hn v).comp
-      (hγ.prodMk (contDiff_const.prodMk hα))
+    compositionPullback_contDiff
+      (n04NegativeChart_flowForcing_joint_contDiff hG J hΘ hn v) hγ hα t
   have he : (fun y : Q =>
       flowParameterField (fun z => G (z.1, (z.2.1, Θ z))) n (γ y) v (t, α y)) =
       fun y => κ y * u y + F y := by
@@ -119,8 +126,9 @@ private theorem parameterComposition_of_forcing
       (flowVariationForcing_eq_source_sub hG J hΘ hn (γ y) v (t, α y)).symm).trans
         (add_comm _ _)
   intro j hj
-  rw [he]
-  exact composition_sum_bound n K D hn hκs hus hFs x hW hM hR hρ hκ hu hf j hj
+  exact (congrArg (fun f : Q → ℝ => ‖iteratedFDeriv ℝ j f x‖) he).trans_le
+    (composition_sum_bound n K D hn (κ := κ) (u := u) (F := F)
+      hκs hus hFs x hW hM hR hρ hκ hu hf j hj)
 
 set_option diagnostics true in
 set_option backward.isDefEq.respectTransparency true in

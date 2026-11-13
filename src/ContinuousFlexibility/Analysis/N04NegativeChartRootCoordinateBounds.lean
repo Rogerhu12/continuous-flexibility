@@ -53,7 +53,7 @@ structure RootCoordinatePrefixData (W : N04RealizationStart)
         W.negativeRootTravelCoefficient m side (W.negativeChartRootScale e C m side) z q ∧
       W.negativeRootTravelCoefficient m side (W.negativeChartRootScale e C m side) z q ≤
         A * W.T.E0 (W.negativeHalfSample e m side) ^ Q
-  prefix : ∀ K : ℕ, 0 < K → ∃ shift : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+  «prefix» : ∀ K : ℕ, 0 < K → ∃ shift : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
     ∀ m (side odd : Bool) (q : PolarPoint), q.1 ∈ Ioc (0 : ℝ) (σ m side) →
     ∀ k, k ≤ K → ∀ a b, a + b ≤ s →
     ∀ J : SmoothDirections (sectorNeighborhood W.S base ε ε)
@@ -90,7 +90,7 @@ theorem negativeRoot_band_material_values
   refine ⟨?_, ?_⟩
   · have he : (B * D ^ 2 * E ^ (q * 2 + p))⁻¹ / 2 =
         (2 * B * D ^ 2)⁻¹ * E ^ (-(q * 2 + p)) := by
-      rw [Real.rpow_neg, mul_inv_rev, mul_inv_rev, mul_inv_rev, mul_inv_rev]
+      rw [Real.rpow_neg hEp.le, mul_inv_rev, mul_inv_rev, mul_inv_rev, mul_inv_rev]
       ring
     exact he.symm.trans_le (hi.trans hlo)
   · exact hhi.trans ((add_le_add (Real.one_le_rpow hE hr)
@@ -100,6 +100,7 @@ variable {W : N04RealizationStart} {e : ℕ ≃ N04PieceIndex W.D}
   {base : ℕ} {ε C : ℝ} {σ : ℕ → Bool → ℝ}
   (A : RootCoordinatePrefixData W e base ε C σ)
 
+include A in
 theorem RootCoordinatePrefixData.scale_component (m : ℕ) (side : Bool) :
     W.negativeChartRootScale e C m side * 2 ≤ W.C.right m - W.C.left m := by
   have hs := W.negativeChartRootScale_bounds e A.scale m side
@@ -126,6 +127,7 @@ def RootCoordinatePrefixData.regularity (m : ℕ) (side odd : Bool) :
   | true =>
     exact (W.negativeRootTravelCoefficientMixedRegularity m side hδ hband).height_restrict hU hsub
 
+include A in
 theorem RootCoordinatePrefixData.coefficient_pos (m : ℕ) (side : Bool)
     {z : Parameter W.S} (hz : z ∈ sectorNeighborhood W.S base ε ε)
     {q : PolarPoint} (hq : q ∈ Ioo (0 : ℝ) 2 ×ˢ (univ : Set ℝ)) :
@@ -153,11 +155,13 @@ def RootCoordinatePrefixData.coordinateRegularity (m : ℕ) (side radial : Bool)
       (W.negativeRootPowerCoordinate m side radial (W.negativeChartRootScale e C m side)) := by
   cases radial with
   | false => exact A.regularity m side false
-  | true => exact (n04Realization_mixedJetRegularity_fixedSpatial
-      (isOpen_sectorNeighborhood W.S base ε ε) contDiff_fst.contDiffOn).mul
+  | true =>
+      exact (n04Realization_mixedJetRegularity_fixedSpatial
+        (isOpen_sectorNeighborhood W.S base ε ε) contDiff_fst.contDiffOn).mul
         (A.powerRegularity m side) (isOpen_sectorNeighborhood W.S base ε ε)
         (isOpen_Ioo.prod isOpen_univ)
 
+include A in
 theorem RootCoordinatePrefixData.chart_factorization (m : ℕ) (side radial : Bool)
     {z : Parameter W.S} (hz : z ∈ sectorNeighborhood W.S base ε ε)
     {q : PolarPoint} (hq : q ∈ Ioo (0 : ℝ) 2 ×ˢ (univ : Set ℝ)) :
@@ -216,11 +220,12 @@ private theorem fractional_oneHigh (p : ℕ → Seminorm ℝ (Parameter W.S))
       simpa only [coe_normSeminorm, R] using h)
   simpa only [coe_normSeminorm, multilinearTameSize, oneHighVariationWeight] using hh v
 
+include A in
 /-- Positive powers and multiplication by the normalized radius keep
 one height factor and the original parameter base. -/
 theorem RootCoordinatePrefixData.normalized_positive_bounds :
     ∀ n : ℕ, 0 < n → ∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
-    ∀ m (side radial : Bool) q, q.1 ∈ Ioc (0 : ℝ) (σ m side) →
+    ∀ m (side radial : Bool) (q : PolarPoint), q.1 ∈ Ioc (0 : ℝ) (σ m side) →
     ∀ a b : ℕ, a + b ≤ s →
     ∀ J : SmoothDirections (sectorNeighborhood W.S base ε ε)
       (fun z => mixedDerivative a b
@@ -237,7 +242,7 @@ theorem RootCoordinatePrefixData.normalized_positive_bounds :
   have hheight := materialHeight_E0_weight_bounded W.hT (γ := (3 / 4 : ℝ)) (by norm_num) 0
   let RH := hheight.choose
   intro n hn
-  have hpref := A.prefix n hn
+  have hpref := A.«prefix» n hn
   let shift := hpref.choose
   refine ⟨base + shift * n + 1, fun s => ?_⟩
   have hraw := hpref.choose_spec s
@@ -317,11 +322,12 @@ theorem RootCoordinatePrefixData.normalized_positive_bounds :
       _ = ((2 : ℝ) ^ s * Bp * E ^ Bp) * H * V := by ring
       _ ≤ _ := mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right hcmpP hH) hV
 
+include A in
 /-- Undo the fixed inward scale at the end. Its inverse pays only a
 material power; the high parameter order keeps spatial coefficient one. -/
 theorem RootCoordinatePrefixData.physical_positive_bounds :
     ∀ n : ℕ, 0 < n → ∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
-    ∀ m (side radial : Bool) q, q.1 ∈ Ioo (0 : ℝ) (σ m side) →
+    ∀ m (side radial : Bool) (q : PolarPoint), q.1 ∈ Ioo (0 : ℝ) (σ m side) →
     ∀ a b : ℕ, a + b ≤ s →
     ∀ J : SmoothDirections (sectorNeighborhood W.S base ε ε)
       (fun z => mixedDerivative a b (fun p => if radial then

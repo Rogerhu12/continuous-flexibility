@@ -51,7 +51,7 @@ theorem FullHalfFieldPowerControl.actualRootComposition_prefix
     (Q : F.FullHalfFieldPowerControl base loss) :
     ∃ b : ℕ, ∃ ε : ℝ,
       W.base ≤ b ∧ base ≤ b ∧ Q.root_low_input.choose ≤ b ∧
-      0 < ε ∧ ε ≤ W.ε / 2 ∧ ε ≤ Q.root_low_input.choose_spec.choose ∧
+      0 < ε ∧ ε ≤ min (W.ε / 2) (1 / 2 : ℝ) ∧ ε ≤ Q.root_low_input.choose_spec.choose ∧
       1 ≤ Q.rootCompositionScaleCoefficient ∧
       ∀ N : ℕ, 0 < N → ∃ D : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
       ∀ m side (δ : ℝ), 0 < δ →
@@ -92,7 +92,7 @@ theorem FullHalfFieldPowerControl.actualRootComposition_prefix
   have hεold : ε ≤ W.ε := hεW.trans (by linarith only [W.ε_pos])
   have hε : 0 < ε := lt_min hl.2.2.1
     (lt_min (by linarith only [W.ε_pos]) (by norm_num))
-  refine ⟨b, ε, hbW, hbbase, hb₀, hε, hεW, hε₀, hC, fun N hN => ?_⟩
+  refine ⟨b, ε, hbW, hbbase, hb₀, hε, hεhalf, hε₀, hC, fun N hN => ?_⟩
   have hfs := hf.choose_spec.2 N
   have hhs := hh.choose_spec.2 N
   let df := hfs.choose

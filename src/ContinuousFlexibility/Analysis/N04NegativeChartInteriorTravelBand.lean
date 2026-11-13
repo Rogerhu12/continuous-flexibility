@@ -104,12 +104,15 @@ structure NegativeInteriorTravelControl
   base_le : W.base ≤ base
   ε_pos : 0 < ε
   ε_le : ε ≤ min W.ε (1 / 2 : ℝ)
-  lower upper lowerPower upperPower : ℝ
+  lower : ℝ
+  upper : ℝ
+  lowerPower : ℝ
+  upperPower : ℝ
   lower_pos : 0 < lower
   upper_nonneg : 0 ≤ upper
   lowerPower_nonneg : 0 ≤ lowerPower
   upperPower_nonneg : 0 ≤ upperPower
-  prefix : W.NegativeInteriorScaledTravelPrefix e ρ base ε
+  «prefix» : W.NegativeInteriorScaledTravelPrefix e ρ base ε
   values : ∀ m side q, q ∈ W.negativeInteriorPhysicalDomain ρ (m, side) →
     ∀ z ∈ sectorNeighborhood W.S base ε ε,
       lower * W.T.E0 (W.negativeHalfSample e m side) ^ (-lowerPower) ≤
@@ -213,7 +216,7 @@ theorem negativeInteriorTravelControl_nonempty
     lower_pos := inv_pos.mpr (mul_pos (by norm_num) hr.1),
     upper_nonneg := mul_nonneg (by norm_num) hu'.1.le,
     lowerPower_nonneg := hr.2.1, upperPower_nonneg := hu'.2.1,
-    prefix := NegativeInteriorScaledTravelPrefix.mono W (fun m side => (hρ m side).1) hp hs.1
+    «prefix» := NegativeInteriorScaledTravelPrefix.mono W (fun m side => (hρ m side).1) hp hs.1
       (hs.2.2.1.trans (min_le_left _ _)) hb.1 hb.2.2.1,
     values := fun m side q hqi z hz => ?_ }⟩
   let i : I := ⟨(m, side), ⟨q, hqi⟩⟩
