@@ -62,8 +62,10 @@ theorem sourceColumns_data {b : ℕ} {ε : ℝ}
   have hl₂ := hl.choose_spec.choose_spec
   have hleft : G.Data η (fun _ => True) b₂ ε₂
       (G.atomFamily η .leftColumn) (G.atomRef η .leftColumn) := by
-    rw [G.sourceColumns_leftFamily_eq η, G.sourceColumns_leftRef_eq η]
-    exact hl₂.2.2.2
+    exact hl₂.2.2.2.sourceColumns_congr
+      (fun z _ m q _ => congrFun (congrFun (congrFun
+        (G.sourceColumns_leftFamily_eq η).symm z) m) q)
+      (fun m q _ => congrFun (congrFun (G.sourceColumns_leftRef_eq η).symm m) q)
   have hfactor₂ := hs₁.2.2.2.1.mono (fun _ h => h) hl₂.1 hl₂.2.2.1 hE₀ hH
   have hinverse₂ := hs₁.2.2.2.2.mono (fun _ h => h) hl₂.1 hl₂.2.2.1 hE₀ hH
   have hF₂ := G.fieldData_mono η hF₁ hl₂.1 hl₂.2.2.1
@@ -77,8 +79,10 @@ theorem sourceColumns_data {b : ℕ} {ε : ℝ}
   have hleft' := hleft.mono (fun _ h => h) hn'.1 hn'.2.2.1 hE₀ hH
   have hnu : G.Data η (fun _ => True) b' ε'
       (G.atomFamily η .nuColumn) (G.atomRef η .nuColumn) := by
-    rw [G.sourceColumns_nuFamily_eq η, G.sourceColumns_nuRef_eq η]
-    exact hn'.2.2.2
+    exact hn'.2.2.2.sourceColumns_congr
+      (fun z _ m q _ => congrFun (congrFun (congrFun
+        (G.sourceColumns_nuFamily_eq η).symm z) m) q)
+      (fun m q _ => congrFun (congrFun (G.sourceColumns_nuRef_eq η).symm m) q)
   refine ⟨b', ε', hs₁.1.trans (hl₂.1.trans hn'.1), hn'.2.1,
     hn'.2.2.1.trans (hl₂.2.2.1.trans hs₁.2.2.1), ?_⟩
   intro a ha

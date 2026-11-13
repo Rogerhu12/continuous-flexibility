@@ -33,13 +33,22 @@ theorem n04SourceColumns_mixedDerivative_periodic
     (hf : ∀ q ∈ unitStrip, f (q + (0, Real.pi)) = f q) (r t : ℕ) :
     ∀ q ∈ unitStrip,
       mixedDerivative r t f (q + (0, Real.pi)) = mixedDerivative r t f q := by
+  have hshift (q : PolarPoint) : q + (0, Real.pi) = (q.1, q.2 + Real.pi) :=
+    Prod.ext (add_zero q.1) rfl
   have he : EqOn (fun p : PolarPoint => f (p.1, p.2 + Real.pi)) f unitStrip := by
     intro q hq
-    simpa only [Prod.mk_add_mk, add_zero] using hf q hq
+    simpa only [hshift] using hf q hq
   intro q hq
   have h := n07a_mixedDerivative_eqOn (isOpen_Ioo.prod isOpen_univ) he r t hq
   rw [mixedDerivative_angularTranslate] at h
-  simpa only [Prod.mk_add_mk, add_zero] using h
+  rw [hshift]
+  exact h
+
+private theorem n04SourceColumns_shift_bound
+    (w : ℕ → ℝ) (C : ℝ) (s r t loss : ℕ) {x : ℝ}
+    (h : |x| ≤ C * w (s + r + t + loss)) :
+    |x| ≤ C * w (s + (r + t + loss)) := by
+  simpa only [Nat.add_assoc] using h
 
 variable {T : MaterialData} {cell : ℕ → ℕ}
 
@@ -94,9 +103,10 @@ theorem CurrentJetDataOn.sourceColumns_mixedDerivative
     refine ⟨r + t + hv.choose, fun s => ?_⟩
     have hb := hv.choose_spec (s + r + t)
     refine ⟨hb.choose, hb.choose_spec.1, fun z hz m _ q i j hij => ?_⟩
-    rw [he z hz m i j q]
     have hb' := hb.choose_spec.2 z hz m trivial q (i + r) (j + t) (by omega)
-    simpa only [Nat.add_assoc] using hb'
+    exact (congrArg abs (he z hz m i j q)).trans_le
+      (n04SourceColumns_shift_bound (fun n => parameterGrading S n z) _
+        s r t hv.choose hb')
   · intro k
     have ht := h.2.choose_spec.2 k
     refine ⟨r + t + ht.choose, fun s => ?_⟩
@@ -104,6 +114,8 @@ theorem CurrentJetDataOn.sourceColumns_mixedDerivative
     refine ⟨hb.choose, hb.choose_spec.1, fun z hz v m _ q i j hij => ?_⟩
     change |(h.2.choose m (i + r) (j + t) q).D k z v| ≤ _
     have hb' := hb.choose_spec.2 z hz v m trivial q (i + r) (j + t) (by omega)
-    simpa only [Nat.add_assoc] using hb'
+    exact n04SourceColumns_shift_bound
+      (fun n => oneHighVariationWeight (parameterGrading S) base n z v) _
+      s r t ht.choose hb'
 
 end ContinuousFlexibility.Analysis

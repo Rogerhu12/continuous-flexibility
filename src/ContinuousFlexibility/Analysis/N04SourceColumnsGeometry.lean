@@ -38,6 +38,17 @@ theorem n04SourceColumns_unitPoint_mem {S : PhysicalSpacesData} {K : CanonicalDa
     K.left m + (K.right m - K.left m) * p.1 < K.right m
   constructor <;> linarith
 
+private theorem n04SourceColumns_determinant_congr
+    (c : ℕ → ℝ) {R R₀ A A₀ : ℕ → PolarPoint → ℝ}
+    (hR : R = R₀) (hA : A = A₀) :
+    (fun m p => c m *
+      (mixedDerivative 1 0 (R m) p * (1 + mixedDerivative 0 1 (A m) p) -
+        mixedDerivative 1 0 (A m) p * mixedDerivative 0 1 (R m) p)) =
+    (fun m p => c m *
+      (mixedDerivative 1 0 (R₀ m) p * (1 + mixedDerivative 0 1 (A₀ m) p) -
+        mixedDerivative 1 0 (A₀ m) p * mixedDerivative 0 1 (R₀ m) p)) := by
+  rw [hR, hA]
+
 namespace N04RealizationGauge
 
 variable (G : N04RealizationGauge) (η : (G.W.S.height (3 / 4 : ℝ)).Space)
@@ -108,11 +119,10 @@ def sourceColumnsInverseDeterminantRef : ℕ → PolarPoint → ℝ :=
 
 theorem sourceColumns_inverseDeterminant_zero :
     G.sourceColumnsInverseDeterminant η (0 : Parameter (G.S η)) =
-      G.sourceColumnsInverseDeterminantRef η := by
-  funext m p
-  unfold sourceColumnsInverseDeterminant sourceColumnsInverseDeterminantRef
-  rw [G.sourceColumns_atomFamily_zero η .inverseRadial,
-    G.sourceColumns_atomFamily_zero η .inverseAngleDefect]
+      G.sourceColumnsInverseDeterminantRef η :=
+  n04SourceColumns_determinant_congr (G.sourceColumnsWidthRatio η)
+    (G.sourceColumns_atomFamily_zero η .inverseRadial)
+    (G.sourceColumns_atomFamily_zero η .inverseAngleDefect)
 
 /-- The explicit polynomial is the genuine inverse-chart determinant. -/
 theorem sourceColumns_inverseDeterminant_eq {b : ℕ} {ε : ℝ}

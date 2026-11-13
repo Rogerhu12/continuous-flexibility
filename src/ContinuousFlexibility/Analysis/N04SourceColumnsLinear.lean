@@ -55,21 +55,21 @@ theorem CurrentJetDataOn.sourceColumns_congr
       mixedDerivative i j (fun y => f z m y - f₀ m y) q.val =
         mixedDerivative i j (fun y => g z m y - g₀ m y) q.val :=
     n07a_mixedDerivative_eqOn hU
-      (fun y hy => congrArg₂ (· - ·) (he z hz m y hy) (he₀ m y hy)) i j q.property
+      (fun _ hy => congrArg₂ (· - ·) (he z hz m hy) (he₀ m hy)) i j q.property
   refine ⟨?_, fun m i j q => (hf.2.choose m i j q).congr (fun z hz => heJ z hz m i j q),
     ?_, ?_⟩
   · intro z hz m _
-    refine ⟨(hf.1 z hz m trivial).1.congr (fun q hq => (he z hz m q hq).symm), ?_⟩
+    refine ⟨(hf.1 z hz m trivial).1.congr (fun _ hq => (he z hz m hq).symm), ?_⟩
     intro q hq
     have hq' : q + (0, Real.pi) ∈ unitStrip := by
       exact ⟨by simpa only [Prod.fst_add, Prod.fst_zero, add_zero] using hq.1, mem_univ _⟩
-    rw [← he z hz m _ hq', (hf.1 z hz m trivial).2 q hq, he z hz m q hq]
+    rw [← he z hz m hq', (hf.1 z hz m trivial).2 q hq, he z hz m hq]
   · have hv := hf.2.choose_spec.1
     refine ⟨hv.choose, fun s => ⟨(hv.choose_spec s).choose,
       (hv.choose_spec s).choose_spec.1, ?_⟩⟩
     intro z hz m _ q i j hij
-    rw [← heJ z hz m i j q]
-    exact (hv.choose_spec s).choose_spec.2 z hz m trivial q i j hij
+    exact (congrArg abs (heJ z hz m i j q).symm).trans_le
+      ((hv.choose_spec s).choose_spec.2 z hz m trivial q i j hij)
   · have ht := hf.2.choose_spec.2
     exact fun k => ⟨(ht k).choose, fun s => ⟨((ht k).choose_spec s).choose,
       ((ht k).choose_spec s).choose_spec.1,
@@ -80,15 +80,16 @@ theorem CurrentJetDataOn.sourceColumns_congr
 theorem N04SourceReferenceData.sourceColumns_congr
     (hf : N04SourceReferenceData T cell f₀) (he : ∀ m, EqOn (f₀ m) (g₀ m) unitStrip) :
     N04SourceReferenceData T cell g₀ := by
-  refine ⟨fun m => ⟨(hf.1 m).1.congr (fun q hq => (he m q hq).symm), ?_⟩,
+  refine ⟨fun m => ⟨(hf.1 m).1.congr (fun _ hq => (he m hq).symm), ?_⟩,
     fun s => ⟨(hf.2 s).choose, (hf.2 s).choose_spec.1, ?_⟩⟩
   · intro q hq
     have hq' : q + (0, Real.pi) ∈ unitStrip :=
       ⟨by simpa only [Prod.fst_add, Prod.fst_zero, add_zero] using hq.1, mem_univ _⟩
-    rw [← he m _ hq', (hf.1 m).2 q hq, he m q hq]
+    rw [← he m hq', (hf.1 m).2 q hq, he m hq]
   · intro m q hq i j hij
-    rw [← n07a_mixedDerivative_eqOn (isOpen_Ioo.prod isOpen_univ) (he m) i j hq]
-    exact (hf.2 s).choose_spec.2 m q hq i j hij
+    exact (congrArg abs
+      (n07a_mixedDerivative_eqOn (isOpen_Ioo.prod isOpen_univ) (he m) i j hq).symm).trans_le
+        ((hf.2 s).choose_spec.2 m q hq i j hij)
 
 /-- A fixed reference family has identically zero differences. -/
 theorem N04SourceReferenceData.sourceColumns_static
@@ -178,9 +179,9 @@ theorem CurrentJetDataOn.sourceColumns_constMul
     have hp := hpack hs.choose hs.choose_spec.1
     refine ⟨hp.choose, hp.choose_spec.1, ?_⟩
     intro z hz m _ q i j hij
-    rw [← he m i j q.val z]
-    exact hp.choose_spec.2 m _ _ (apply_nonneg _ _)
-      (hs.choose_spec.2 z hz m trivial q i j hij)
+    exact (congrArg abs (he m i j q.val z).symm).trans_le
+      (hp.choose_spec.2 m _ _ (apply_nonneg _ _)
+        (hs.choose_spec.2 z hz m trivial q i j hij))
   · intro k
     have ht := hf.2.choose_spec.2 k
     refine ⟨ht.choose, fun s => ?_⟩
@@ -188,8 +189,8 @@ theorem CurrentJetDataOn.sourceColumns_constMul
     have hp := hpack hs.choose hs.choose_spec.1
     refine ⟨hp.choose, hp.choose_spec.1, ?_⟩
     intro z hz v m _ q i j hij
-    rw [hJ]
-    exact hp.choose_spec.2 m _ _ (oneHighVariationWeight_nonneg _ _ _ _ _)
-      (hs.choose_spec.2 z hz v m trivial q i j hij)
+    exact (congrArg abs (hJ m i j q k z v)).trans_le
+      (hp.choose_spec.2 m _ _ (oneHighVariationWeight_nonneg _ _ _ _ _)
+        (hs.choose_spec.2 z hz v m trivial q i j hij))
 
 end ContinuousFlexibility.Analysis

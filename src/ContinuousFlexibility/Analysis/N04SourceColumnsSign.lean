@@ -136,8 +136,9 @@ theorem sourceColumns_inverseDeterminant_fixedSign {b : ℕ} {ε : ℝ}
     fun z hz m p hp => (hsign m).choose_spec.2 z hz p hp, ?_⟩
   intro m p hp
   have he := (hsign m).choose_spec.2 0 hzero p hp
-  rw [G.sourceColumns_inverseDeterminant_zero η] at he
-  exact he
+  have hv := congrFun (congrFun (G.sourceColumns_inverseDeterminant_zero η) m) p
+  exact (congrArg abs hv).symm.trans
+    (he.trans (congrArg (fun t => σ m * t) hv))
 
 end N04RealizationGauge
 

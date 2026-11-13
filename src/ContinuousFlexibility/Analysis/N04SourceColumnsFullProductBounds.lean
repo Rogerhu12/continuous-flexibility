@@ -116,12 +116,15 @@ theorem n04SourceColumns_fullProduct_oneHigh
     dsimp only [weights]
     simp only [Finset.prod_const, Finset.card_univ, Fintype.card_fin]
     rw [mul_pow, ← Real.rpow_mul_natCast (zero_le_one.trans (hE t)) A m]
-  have hrest : 0 ≤ parameterHeightWeight (H t) k *
-      oneHighVariationWeight p base (s + loss) x v :=
-    mul_nonneg (parameterHeightWeight_nonneg (hH t).1 k)
-      (oneHighVariationWeight_nonneg _ _ _ _ _)
-  have hpack := mul_le_mul_of_nonneg_right (hBb (E t) (hE t)) hrest
-  simpa only [Real.norm_eq_abs, hprod, mul_assoc] using
-    hb.trans (by simpa only [hprod, mul_assoc] using hpack)
+  have hcoef : P * (∏ i, weights i q) ≤ B * E t ^ B := by
+    calc
+      P * (∏ i, weights i q) = P * (A ^ m * E t ^ (A * (m : ℝ))) :=
+        congrArg (fun y : ℝ => P * y) hprod
+      _ = (P * A ^ m) * E t ^ (A * (m : ℝ)) := (mul_assoc _ _ _).symm
+      _ ≤ B * E t ^ B := hBb (E t) (hE t)
+  have hfinal := hb.trans (mul_le_mul_of_nonneg_right
+    (mul_le_mul_of_nonneg_right hcoef (parameterHeightWeight_nonneg (hH t).1 k))
+    (oneHighVariationWeight_nonneg p base (s + loss) x v))
+  exact (Real.norm_eq_abs _).symm.trans_le hfinal
 
 end ContinuousFlexibility.Analysis

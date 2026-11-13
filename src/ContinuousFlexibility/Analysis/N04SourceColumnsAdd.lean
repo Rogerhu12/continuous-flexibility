@@ -107,13 +107,13 @@ theorem CurrentJetDataOn.sourceColumns_add
     have hp := n04SourceColumns_add_cost hfs.choose_spec.1 hgs.choose_spec.1
     refine ⟨hp.choose, hp.choose_spec.1, ?_⟩
     intro z hz m _ q i j hij
-    rw [← he z hz m i j q]
-    exact hp.choose_spec.2 _ _ _ _ _ _ _ (hE m) (Real.rpow_nonneg (hH m) _)
+    have hb := hp.choose_spec.2 _ _ _ _ _ _ _ (hE m) (Real.rpow_nonneg (hH m) _)
       (apply_nonneg _ _) (apply_nonneg _ _)
       (hpmono (Nat.add_le_add_left (le_max_left _ _) s) z)
       (hpmono (Nat.add_le_add_left (le_max_right _ _) s) z)
       (hfs.choose_spec.2 z hz m trivial q i j hij)
       (hgs.choose_spec.2 z hz m trivial q i j hij)
+    exact (congrArg abs (he z hz m i j q).symm).trans_le hb
   · intro k
     have hft := hf.2.choose_spec.2 k
     have hgt := hg.2.choose_spec.2 k
@@ -123,8 +123,7 @@ theorem CurrentJetDataOn.sourceColumns_add
     have hp := n04SourceColumns_add_cost hfs.choose_spec.1 hgs.choose_spec.1
     refine ⟨hp.choose, hp.choose_spec.1, ?_⟩
     intro z hz v m _ q i j hij
-    rw [hJ]
-    exact hp.choose_spec.2 _ _ _ _ _ _ _ (hE m) (Real.rpow_nonneg (hH m) _)
+    have hb := hp.choose_spec.2 _ _ _ _ _ _ _ (hE m) (Real.rpow_nonneg (hH m) _)
       (oneHighVariationWeight_nonneg _ _ _ _ _) (oneHighVariationWeight_nonneg _ _ _ _ _)
       (oneHighVariationWeight_mono hpmono le_rfl
         (Nat.add_le_add_left (le_max_left _ _) s) z v)
@@ -132,5 +131,6 @@ theorem CurrentJetDataOn.sourceColumns_add
         (Nat.add_le_add_left (le_max_right _ _) s) z v)
       (hfs.choose_spec.2 z hz v m trivial q i j hij)
       (hgs.choose_spec.2 z hz v m trivial q i j hij)
+    exact (congrArg abs (hJ m i j q k z v)).trans_le hb
 
 end ContinuousFlexibility.Analysis
