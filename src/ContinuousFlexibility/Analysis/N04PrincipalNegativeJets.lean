@@ -120,7 +120,7 @@ theorem n04PrincipalNegative_currentData_of_stationary
     have hq' : q + (0, Real.pi) ∈ unitStrip := by
       refine ⟨?_, mem_univ _⟩
       change 0 < q.1 + 0 ∧ q.1 + 0 < 1
-      simpa only [add_zero] using hq.1
+      simpa only [Set.mem_Ioo, add_zero] using hq.1
     exact (heq z hz m hm hq').trans
       (((href m hm).2 q hq).trans (heq z hz m hm hq).symm)
   · intro z hz m hm q i j _

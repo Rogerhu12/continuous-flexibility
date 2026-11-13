@@ -69,6 +69,13 @@ theorem n04PrincipalDivided_value_of_representative
   have hp' : p ∈ unitStrip := ⟨hp, mem_univ _⟩
   simpa only [sub_zero] using (he hp').trans (hfactor p hp')
 
+private theorem n04PrincipalDivided_six_order_shift
+    {X : Type*} (p : ℕ → X → ℝ) (s loss : ℕ) (x : X) (C r : ℝ)
+    (h : r ≤ C * p (s + 6 + loss) x) :
+    r ≤ C * p (s + (loss + 6)) x := by
+  have he : s + 6 + loss = s + (loss + 6) := by omega
+  simpa only [he] using h
+
 /-- Cubic division preserves the complete current-data interface. The
 only extra input is the genuine endpoint representative of the numerator;
 all parameter towers and their estimates come from the principal data. -/
@@ -76,7 +83,7 @@ theorem n04PrincipalDivided_currentData
     {S : PhysicalSpacesData} {T : MaterialData} {cell : ℕ → ℕ}
     {base : ℕ} {ε : ℝ} (P : ℕ → Prop)
     {f g : Parameter S → ℕ → PolarPoint → ℝ} {f₀ g₀ : ℕ → PolarPoint → ℝ}
-    (h : CurrentJetDataOn S T cell (fun _ => True) base ε f f₀)
+    (h : CurrentJetDataOn S T cell P base ε f f₀)
     (href : ∀ m, ContDiffOn ℝ ∞ (f₀ m) unitStrip ∧
       ∀ q ∈ unitStrip, f₀ m (q + (0, Real.pi)) = f₀ m q)
     (hE : ∀ m, 1 ≤ T.E0 (T.sample (cell m)))
@@ -93,6 +100,10 @@ theorem n04PrincipalDivided_currentData
     (hrefzero : ∀ m, g₀ m = fun _ => 0) :
     CurrentJetDataOn S T cell (fun _ => True) base ε g g₀ := by
   classical
+  letI : IsTopologicalAddGroup (Parameter S) :=
+    (n07aParameterGrading_withSeminorms S).isTopologicalAddGroup
+  letI : ContinuousSMul ℝ (Parameter S) :=
+    (n07aParameterGrading_withSeminorms S).continuousSMul
   have hzero₀ : g₀ = fun _ _ => (0 : ℝ) := funext hrefzero
   subst g₀
   let U : Set (Parameter S) := sectorNeighborhood S base ε ε
@@ -101,7 +112,7 @@ theorem n04PrincipalDivided_currentData
   let I : Type := {m : ℕ // P m}
   let N : I → Parameter S → PolarPoint → ℝ := fun m z q => f z m.val q - f₀ m.val q
   let RN : ∀ m : I, MixedJetRegularity U unitStrip (N m) := fun m =>
-    { spatial := fun z hz => (h.1 z hz m.val trivial).1.sub (href m.val).1
+    { spatial := fun z hz => (h.1 z hz m.val m.property).1.sub (href m.val).1
       parameter := fun a b q hq => h.2.choose m.val a b ⟨q, hq⟩ }
   have hnum : ∀ k : ℕ, ∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
       ∀ m : I, ∀ a b, a + b ≤ s → ∀ q (hq : q ∈ unitStrip),
@@ -115,7 +126,7 @@ theorem n04PrincipalDivided_currentData
     refine ⟨ht.choose, fun s => ⟨(ht.choose_spec s).choose,
       (ht.choose_spec s).choose_spec.1, ?_⟩⟩
     intro m a b hab q hq z hz v
-    exact (ht.choose_spec s).choose_spec.2 z hz v m.val trivial ⟨q, hq⟩ a b hab
+    exact (ht.choose_spec s).choose_spec.2 z hz v m.val m.property ⟨q, hq⟩ a b hab
   have hout := n04Realization_unitCubic_oneHigh_bounds hU
     (parameterGrading S) (n07aParameterGrading_withSeminorms S)
     (n07aParameterGrading_monotone S) base
@@ -151,10 +162,7 @@ theorem n04PrincipalDivided_currentData
   have hJDpos (m : ℕ) (hm : P m) (a b : ℕ) (q : unitStrip)
       (k : ℕ) (z : Parameter S) (hz : z ∈ U) (v : Fin k → Parameter S) :
       (J m a b q).D k z v = ((RE ⟨m, hm⟩).parameter a b q.val q.property).D k z v := by
-    exact congrArg (fun A : Parameter S [×k]→L[ℝ] ℝ => A v)
-      (HasProjectiveJetsOn.unique hU (J m a b q).hasProjectiveJetsOn
-        (((RE ⟨m, hm⟩).parameter a b q.val q.property).congr
-          (fun _ _ => by simp only [sub_zero])).hasProjectiveJetsOn k z hz)
+    simp only [J, dif_pos hm, SmoothDirections.congr]
   have hJDneg (m : ℕ) (hm : ¬ P m) (a b : ℕ) (q : unitStrip)
       (k : ℕ) (z : Parameter S) (hz : z ∈ U) (v : Fin k → Parameter S) :
       (J m a b q).D k z v = 0 := by
@@ -166,7 +174,10 @@ theorem n04PrincipalDivided_currentData
   · intro z hz m _
     have hshift (q : PolarPoint) (hq : q ∈ unitStrip) :
         q + (0, Real.pi) ∈ unitStrip := by
-      exact ⟨by simpa only [Prod.fst_add, add_zero] using hq.1, mem_univ _⟩
+      refine ⟨?_, mem_univ _⟩
+      change q.1 + 0 ∈ Ioo (0 : ℝ) 1
+      rw [add_zero]
+      exact hq.1
     by_cases hm : P m
     · refine ⟨(RE ⟨m, hm⟩).spatial z hz, ?_⟩
       intro q hq
@@ -175,9 +186,9 @@ theorem n04PrincipalDivided_currentData
       apply mul_left_cancel₀ hn
       have hf1 := hfactor m hm z hz (q + (0, Real.pi)) (hshift q hq)
       have hf0 := hfactor m hm z hz q hq
-      simpa only [Prod.fst_add, add_zero, (h.1 z hz m trivial).2 q hq,
+      simpa only [Prod.fst_add, add_zero, (h.1 z hz m hm).2 q hq,
         (href m).2 q hq, hf0] using hf1.symm
-    · refine ⟨contDiffOn_const.congr (fun q hq => (hzero m hm z hz hq).symm), ?_⟩
+    · refine ⟨contDiffOn_const.congr (fun q hq => hzero m hm z hz hq), ?_⟩
       intro q hq
       exact (hzero m hm z hz (hshift q hq)).trans (hzero m hm z hz hq).symm
   · have hv := h.2.choose_spec.1
@@ -195,14 +206,18 @@ theorem n04PrincipalDivided_currentData
     · have hb' : ∀ p ∈ unitStrip,
           |mixedDerivative (a + 6) b (fun y => f z m y - f₀ m y) p| ≤ M := by
         intro p hp
-        have he : s + 6 + hv.choose = s + (hv.choose + 6) := by omega
         have hh := (hv.choose_spec (s + 6)).choose_spec.2
-          z hz m trivial ⟨p, hp⟩ (a + 6) b (by omega)
-        exact he ▸ hh
+          z hz m hm ⟨p, hp⟩ (a + 6) b (by omega)
+        exact n04PrincipalDivided_six_order_shift
+          (fun n y => parameterGrading S n y) s hv.choose z
+          (B * T.E0 (T.sample (cell m)) ^ B *
+            T.H (T.sample (cell m)) ^ (3 / 4 : ℝ)) _ hh
       have hb := n04PrincipalDivided_value_of_representative
         (hrep m hm z hz) (hfactor m hm z hz) a b hb' q.property
-      simp only [sub_zero]
-      exact hb.trans (div_le_self hM (by norm_num))
+      have hbM : |mixedDerivative a b (g z m) q.val| ≤ M :=
+        hb.trans (div_le_self hM (by norm_num))
+      exact (le_of_eq (congrArg (fun F => |mixedDerivative a b F q.val|)
+        (funext fun y => sub_zero (g z m y)))).trans hbM
     · rw [hnegJet m hm a b q z hz, abs_zero]
       exact hM
   · intro k
