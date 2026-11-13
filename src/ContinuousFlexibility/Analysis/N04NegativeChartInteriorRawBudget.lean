@@ -27,10 +27,24 @@ theorem n04NegativeChart_joint_restricted_parameter
   exact he.trans (n04Realization_mixedParameter_eq_joint J hU hΩ hc
     a b n x (hsub hx) q hq (R.parameter a b q hq) v)
 
+private theorem interior_raw_remove_height
+    {x C E A H L R : ℝ} {k : ℕ}
+    (hC : 0 ≤ C) (hE : 0 ≤ E) (hL : 1 ≤ L) (hHL : H ≤ L) (hR : 0 ≤ R)
+    (hx : ‖x‖ ≤ C * E ^ A * parameterHeightWeight H k * R) :
+    ‖x‖ ≤ (C * L) * E ^ A * R := by
+  have hw : parameterHeightWeight H k ≤ L := by
+    unfold parameterHeightWeight
+    split_ifs <;> assumption
+  have h := hx.trans (mul_le_mul_of_nonneg_right
+    (mul_le_mul_of_nonneg_left hw (mul_nonneg hC (Real.rpow_nonneg hE A))) hR)
+  exact h.trans_eq (by ring)
+
 namespace N04RealizationStart
 
 variable (W : N04RealizationStart) (e : ℕ ≃ N04PieceIndex W.D) (ρ : ℕ → Bool → ℝ)
 
+set_option backward.isDefEq.respectTransparency true in
+set_option diagnostics true in
 /-- Both estimates use the literal full-component towers. The raw
 reference difference keeps one height factor also at state order zero. -/
 theorem negativeInterior_raw_fractional
@@ -100,22 +114,26 @@ theorem negativeInterior_raw_fractional
       (hvQ : ∀ i, p (s + loss) (v i) ≤ Q) :
       ‖J.D j y v‖ ≤ C * E ^ A * parameterHeightWeight H j *
         Q ^ (((a + b : ℕ) : ℝ) / ((s : ℝ) + 1)) := by
-    simpa only [one_pow, one_mul, sub_zero] using
+    have hh :=
       hbound (m, side) j hj a b hab q hq J y hy
         (by simpa only [sub_zero] using hylow) v hv Q hQ
         (by simpa only [sub_zero] using hyQ) hvQ
+    change (1 : ℝ) ^ a * ‖J.D j y v‖ ≤ C * E ^ A * parameterHeightWeight H j *
+      Q ^ (((a + b : ℕ) : ℝ) / ((s : ℝ) + 1)) at hh
+    simpa only [one_pow, one_mul] using hh
   have hzlow := n04NegativeGeometry_parameterGrading_le_one W.S base hhalf hz
   have hpoint := n04NegativeChart_joint_restricted_parameter
     (W.negativeOriginalMinusJointTower m) hU hΩ hc hV hsub k a b hz hqΩ J (fun _ => w)
   have hfirst := hraw k (hk.trans (le_max_right _ _)) z hz hzlow (fun _ => w)
     (fun _ => hw) hzQ (fun _ => hwQ)
-  have hweight : parameterHeightWeight H k ≤ L := by
-    unfold parameterHeightWeight
-    split_ifs <;> assumption
+  change |jointMixedDiagonal (W.negativeOriginalMinusJointTower m) k a b z w q| ≤
+      (C * L) * E ^ A * Q ^ (((a + b : ℕ) : ℝ) / ((s : ℝ) + 1)) ∧
+    |jointMixedDiagonal (W.negativeRawDefectJointTower m) k a b z w q| ≤
+      (C * L) * E ^ A * H * Q ^ (((a + b : ℕ) : ℝ) / ((s : ℝ) + 1))
   constructor
-  · have h := hfirst.trans (mul_le_mul_of_nonneg_right
-      (mul_le_mul_of_nonneg_left hweight (by positivity)) (Real.rpow_nonneg (zero_le_one.trans hQ) _))
-    simpa only [hpoint, Real.norm_eq_abs, jointMixedDiagonal, mul_assoc, mul_left_comm, mul_comm] using h
+  · have h := interior_raw_remove_height hC0.le hE hL hHL
+      (Real.rpow_nonneg (zero_le_one.trans hQ) _) hfirst
+    exact ((congrArg abs hpoint.symm).trans (Real.norm_eq_abs _).symm).trans_le h
   · let Rd := n04Realization_jointMixedRegularity (W.negativeRawDefectJointTower m) hU hΩ hc
     let Jd := (Rd.parameter a b q hqΩ).restrict hV hsub
     let JD : SmoothDirections V (fun y =>
@@ -129,6 +147,7 @@ theorem negativeInterior_raw_fractional
       simpa only [liftSectorParameter, Prod.fst_zero, Prod.snd_zero,
         ZeroMemClass.coe_zero, add_zero] using h)
     have hJD := n04NegativeChart_raw_reference_difference J JD p base (s + loss)
+      (M := C * E ^ A * H * Q ^ (((a + b : ℕ) : ℝ) / ((s : ℝ) + 1)))
       (sectorNeighborhood_convex W.S base ε ε) hzero hz hzlow (fun _ => w)
       (fun _ => hw) hzQ (fun _ => hwQ) (fun j hj hjpos y hy hylow v hv hyQ hvQ => by
         have hh := hraw j (hj.trans (max_le_max le_rfl hk)) y hy hylow v hv hyQ hvQ
@@ -140,7 +159,7 @@ theorem negativeInterior_raw_fractional
       exact mul_le_mul_of_nonneg_right (le_mul_of_one_le_right hC0.le hL) (by positivity)
     have hh := hJD.trans (mul_le_mul_of_nonneg_right hCE (Real.rpow_nonneg (zero_le_one.trans hQ) _))
     change ‖Jd.D k z (fun _ => w)‖ ≤ _ at hh
-    simpa only [hd, Real.norm_eq_abs, jointMixedDiagonal] using hh
+    exact ((congrArg abs hd.symm).trans (Real.norm_eq_abs _).symm).trans_le hh
 
 end N04RealizationStart
 end ContinuousFlexibility.Analysis

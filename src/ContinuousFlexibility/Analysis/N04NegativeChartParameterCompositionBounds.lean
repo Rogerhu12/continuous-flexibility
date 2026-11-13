@@ -19,6 +19,68 @@ open scoped ContDiff
 variable {E Q : Type} [NormedAddCommGroup E] [NormedSpace ℝ E]
   [FiniteDimensional ℝ E] [NormedAddCommGroup Q] [NormedSpace ℝ Q]
 
+private theorem composition_product_bound
+    (n K D : ℕ) (hn : 0 < n) {κ u : Q → ℝ}
+    (hκs : ContDiff ℝ ∞ κ) (hus : ContDiff ℝ ∞ u)
+    (x : Q) {W M R ρ : ℝ} (hW : 0 ≤ W) (hM : 1 ≤ M)
+    (hR : 1 ≤ R) (hρ : 1 ≤ ρ)
+    (hκ : ∀ j, j ≤ K → ‖iteratedFDeriv ℝ j κ x‖ ≤ M * ρ ^ j)
+    (hu : ∀ j, j ≤ K → ‖iteratedFDeriv ℝ j u x‖ ≤ W * M * ρ ^ (D + j))
+    (j : ℕ) (hj : j ≤ K) :
+    ‖iteratedFDeriv ℝ j (fun y => κ y * u y) x‖ ≤
+      (2 : ℝ) ^ K * W * (M * R) ^ (n + 1) * ρ ^ (D * (n + 1) + j) := by
+  have hCp : 0 ≤ (2 : ℝ) ^ K := pow_nonneg (by norm_num) _
+  have hup (l : ℕ) (hl : l ≤ j) :
+      ‖iteratedFDeriv ℝ l u x‖ ≤ (W * M * ρ ^ D) * ρ ^ l := by
+    simpa only [pow_add, mul_assoc] using hu l (hl.trans hj)
+  have hp := n04NegativeGeometry_weighted_product_jet_le hκs.contDiffAt hus.contDiffAt
+    (zero_le_one.trans hM)
+    (mul_nonneg (mul_nonneg hW (zero_le_one.trans hM)) (pow_nonneg (zero_le_one.trans hρ) _))
+    (zero_le_one.trans hρ) hj (fun l hl => hκ l (hl.trans hj)) hup
+  have hMR : 1 ≤ M * R := one_le_mul_of_one_le_of_one_le hM hR
+  have hMM : M ^ 2 ≤ (M * R) ^ (n + 1) :=
+    (pow_le_pow_left₀ (zero_le_one.trans hM)
+      (le_mul_of_one_le_right (zero_le_one.trans hM) hR) 2).trans
+      (pow_le_pow_right₀ hMR (by omega))
+  have hDD : D + j ≤ D * (n + 1) + j := by
+    have hh := Nat.mul_le_mul_left D (show 1 ≤ n + 1 by omega)
+    simpa only [Nat.mul_one] using Nat.add_le_add_right hh j
+  calc
+    _ ≤ (2 : ℝ) ^ K * M * (W * M * ρ ^ D) * ρ ^ j := hp
+    _ = (2 : ℝ) ^ K * W * M ^ 2 * ρ ^ (D + j) := by rw [pow_add]; ring
+    _ ≤ _ := mul_le_mul
+      (mul_le_mul_of_nonneg_left hMM (mul_nonneg hCp hW))
+      (pow_le_pow_right₀ hρ hDD) (pow_nonneg (zero_le_one.trans hρ) _)
+      (mul_nonneg (mul_nonneg hCp hW) (pow_nonneg (zero_le_one.trans hMR) _))
+
+private theorem composition_sum_bound
+    (n K D : ℕ) (hn : 0 < n) {κ u F : Q → ℝ}
+    (hκs : ContDiff ℝ ∞ κ) (hus : ContDiff ℝ ∞ u) (hFs : ContDiff ℝ ∞ F)
+    (x : Q) {W M R ρ Cf : ℝ} (hW : 0 ≤ W) (hM : 1 ≤ M)
+    (hR : 1 ≤ R) (hρ : 1 ≤ ρ)
+    (hκ : ∀ j, j ≤ K → ‖iteratedFDeriv ℝ j κ x‖ ≤ M * ρ ^ j)
+    (hu : ∀ j, j ≤ K → ‖iteratedFDeriv ℝ j u x‖ ≤ W * M * ρ ^ (D + j))
+    (hF : ∀ j, j ≤ K → ‖iteratedFDeriv ℝ j F x‖ ≤
+      Cf * W * (M * R) ^ (n + 1) * ρ ^ (D * (n + 1) + j))
+    (j : ℕ) (hj : j ≤ K) :
+    ‖iteratedFDeriv ℝ j (fun y => κ y * u y + F y) x‖ ≤
+      (1 + (2 : ℝ) ^ K + Cf) * W * (M * R) ^ (n + 1) * ρ ^ (D * (n + 1) + j) := by
+  have hp := composition_product_bound n K D hn hκs hus x hW hM hR hρ hκ hu j hj
+  change ‖iteratedFDeriv ℝ j ((fun y => κ y * u y) + F) x‖ ≤ _
+  rw [iteratedFDeriv_add_apply ((hκs.mul hus).contDiffAt.of_le (by simp))
+    (hFs.contDiffAt.of_le (by simp))]
+  have hMR : 0 ≤ M * R := mul_nonneg (zero_le_one.trans hM) (zero_le_one.trans hR)
+  calc
+    _ ≤ ‖iteratedFDeriv ℝ j (fun y => κ y * u y) x‖ + ‖iteratedFDeriv ℝ j F x‖ := norm_add_le _ _
+    _ ≤ ((2 : ℝ) ^ K + Cf) * W * (M * R) ^ (n + 1) * ρ ^ (D * (n + 1) + j) :=
+      (add_le_add hp (hF j hj)).trans_eq (by ring)
+    _ ≤ _ := mul_le_mul_of_nonneg_right
+      (mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right
+        (by linarith : (2 : ℝ) ^ K + Cf ≤ 1 + (2 : ℝ) ^ K + Cf) hW)
+        (pow_nonneg hMR _)) (pow_nonneg (zero_le_one.trans hρ) _)
+
+set_option diagnostics true in
+set_option backward.isDefEq.respectTransparency true in
 /-- The constant is fixed before all representatives and evaluated
 points. All losses in state order remain in the power `D`, separately
 from the requested spatial order. -/
@@ -45,11 +107,13 @@ theorem n04NegativeChart_parameterComposition_positive_prefix
           flowParameterField (fun z => G (z.1, (z.2.1, Θ z))) n
             (γ y) v (t, α y)) x‖ ≤
           C * W * (M * R) ^ (n + 1) * ρ ^ (D * (n + 1) + j) := by
-  obtain ⟨Cf, hCf, hforcing⟩ := n04NegativeChart_actualForcing_weighted_prefix (E := E) (Q := Q) n K
-  let Cp : ℝ := (2 : ℝ) ^ K
-  have hCp : 0 ≤ Cp := pow_nonneg (by norm_num) _
-  refine ⟨1 + Cp + Cf, by dsimp only [Cp]; linarith only [hCp, hCf], ?_⟩
-  intro G Θ hG J hΘ γ α hγ hα v t x W M R ρ D hW hWR hM hR hρ hκ hhead hlower j hj
+  have hex := n04NegativeChart_actualForcing_weighted_prefix (E := E) (Q := Q) n K
+  let Cf := hex.choose
+  have hCf := hex.choose_spec.1
+  have hforcing := hex.choose_spec.2
+  have hCp : 0 ≤ (2 : ℝ) ^ K := pow_nonneg (by norm_num) _
+  refine ⟨1 + (2 : ℝ) ^ K + Cf, by linarith only [hCp, hCf], ?_⟩
+  intro G Θ hG J hΘ γ α hγ hα v t x W M R ρ D hW hWR hM hR hρ hκ hhead hlower
   let κ : Q → ℝ := fun y => flowVariationCoefficient G Θ (γ y) (t, α y)
   let u : Q → ℝ := fun y => flowParameterField Θ n (γ y) v (t, α y)
   let F : Q → ℝ := fun y => flowVariationForcing J hΘ n (γ y) v (t, α y)
@@ -62,53 +126,22 @@ theorem n04NegativeChart_parameterComposition_positive_prefix
   have hFs : ContDiff ℝ ∞ F :=
     (n04NegativeChart_flowForcing_joint_contDiff hG J hΘ hn v).comp
       (hγ.prodMk (contDiff_const.prodMk hα))
-  have hu (l : ℕ) (hl : l ≤ j) :
-      ‖iteratedFDeriv ℝ l u x‖ ≤ (W * M * ρ ^ D) * ρ ^ l := by
-    have hh := hlower n hn le_rfl id l (hl.trans hj)
-    simpa only [Function.comp_id, u, pow_add, mul_assoc] using hh
-  have hproduct := n04NegativeGeometry_weighted_product_jet_le hκs.contDiffAt hus.contDiffAt
-    (zero_le_one.trans hM)
-    (mul_nonneg (mul_nonneg hW (zero_le_one.trans hM)) (pow_nonneg (zero_le_one.trans hρ) _))
-    (zero_le_one.trans hρ) hj (fun l hl => hκ l (hl.trans hj)) hu
-  have hMR : 1 ≤ M * R := one_le_mul_of_one_le_of_one_le hM hR
-  have hMM : M ^ 2 ≤ (M * R) ^ (n + 1) :=
-    (pow_le_pow_left₀ (zero_le_one.trans hM)
-      (le_mul_of_one_le_right (zero_le_one.trans hM) hR) 2).trans
-      (pow_le_pow_right₀ hMR (by omega))
-  have hDD : D + j ≤ D * (n + 1) + j := by
-    have hh := Nat.mul_le_mul_left D (show 1 ≤ n + 1 by omega)
-    simpa only [Nat.mul_one] using Nat.add_le_add_right hh j
-  have hp : ‖iteratedFDeriv ℝ j (fun y => κ y * u y) x‖ ≤
-      Cp * W * (M * R) ^ (n + 1) * ρ ^ (D * (n + 1) + j) := by
-    calc
-      _ ≤ (2 : ℝ) ^ K * M * (W * M * ρ ^ D) * ρ ^ j := hproduct
-      _ = Cp * W * M ^ 2 * ρ ^ (D + j) := by rw [pow_add]; dsimp only [Cp]; ring
-      _ ≤ _ := mul_le_mul
-        (mul_le_mul_of_nonneg_left hMM (mul_nonneg hCp hW))
-        (pow_le_pow_right₀ hρ hDD) (pow_nonneg (zero_le_one.trans hρ) _)
-        (mul_nonneg (mul_nonneg hCp hW) (pow_nonneg (zero_le_one.trans hMR) _))
+  have hu (l : ℕ) (hl : l ≤ K) :
+      ‖iteratedFDeriv ℝ l u x‖ ≤ W * M * ρ ^ (D + l) := by
+    simpa only [Function.comp_id, u] using hlower n hn le_rfl id l hl
   have hmarked := n04NegativeChart_actualForcing_marked_factors J hΘ hn K D γ α v t x
-    hW hWR hM hR hρ hhead
-    (fun k hk hkn e l hl => hlower k hk hkn.le e l hl)
-  have hf := hforcing hG J hΘ γ α hγ hα v t x D hW hMR hρ hmarked j hj
+    hW hWR hM hR hρ hhead (fun k hk hkn e l hl => hlower k hk hkn.le e l hl)
+  have hf := hforcing hG J hΘ γ α hγ hα v t x D hW
+    (one_le_mul_of_one_le_of_one_le hM hR) hρ hmarked
   have he : (fun y : Q =>
       flowParameterField (fun z => G (z.1, (z.2.1, Θ z))) n (γ y) v (t, α y)) =
       fun y => κ y * u y + F y := by
     funext y
-    have hh := flowVariationForcing_eq_source_sub hG J hΘ hn (γ y) v (t, α y)
-    change _ = _ * _ + _
     dsimp only [κ, u, F]
-    linarith only [hh]
-  rw [he, iteratedFDeriv_add_apply ((hκs.mul hus).contDiffAt.of_le (by simp))
-    (hFs.contDiffAt.of_le (by simp))]
-  calc
-    _ ≤ ‖iteratedFDeriv ℝ j (fun y => κ y * u y) x‖ + ‖iteratedFDeriv ℝ j F x‖ := norm_add_le _ _
-    _ ≤ (Cp + Cf) * W * (M * R) ^ (n + 1) * ρ ^ (D * (n + 1) + j) :=
-      (add_le_add hp hf).trans_eq (by ring)
-    _ ≤ _ := mul_le_mul_of_nonneg_right
-      (mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right
-        (by linarith : Cp + Cf ≤ 1 + Cp + Cf) hW)
-        (pow_nonneg (zero_le_one.trans hMR) _)) (pow_nonneg (zero_le_one.trans hρ) _)
+    rw [flowVariationForcing_eq_source_sub hG J hΘ hn]
+    ring
+  rw [he]
+  exact composition_sum_bound n K D hn hκs hus hFs x hW hM hR hρ hκ hu hf
 
 end ContinuousFlexibility.Analysis
 

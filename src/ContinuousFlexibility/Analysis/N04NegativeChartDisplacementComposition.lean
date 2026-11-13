@@ -21,10 +21,11 @@ private theorem positive_jet_sub_const
     {g : Y → ℝ} (hg : ContDiff ℝ ∞ g) {j : ℕ} (hj : 0 < j)
     (c : ℝ) (y : Y) :
     iteratedFDeriv ℝ j (fun z => g z - c) y = iteratedFDeriv ℝ j g y := by
+  change iteratedFDeriv ℝ j (g - fun _ : Y => c) y = _
   rw [iteratedFDeriv_sub_apply (hg.contDiffAt.of_le (by simp)) contDiffAt_const]
   cases j with
   | zero => omega
-  | succ j => simp only [iteratedFDeriv_succ_const, sub_zero]
+  | succ j => simp only [iteratedFDeriv_succ_const, Pi.zero_apply, sub_zero]
 
 /-- The finite prefix constant is uniform in the point and the inner
 and outer maps. No zeroth-order bound on the inner map is required. -/

@@ -88,7 +88,11 @@ theorem negativeChartOverlapRadius_inverse_material (e : ℕ ≃ N04PieceIndex W
     _ = δ⁻¹ * (W.negativeRootPositiveRadius e B p Cχ (B₀ * E ^ p₀) δ m side)⁻¹ := by
       simp only [negativeChartOverlapRadius, mul_inv_rev, δ, E, mul_comm]
     _ ≤ (D * E ^ q) * (K * E ^ (p₀ + q * 2 + p)) := hb
-    _ = _ := by rw [Real.rpow_add hE]; ring
+    _ = _ := by
+      change (D * E ^ q) * (K * E ^ (p₀ + q * 2 + p)) =
+        (D * K) * E ^ (q + (p₀ + q * 2 + p))
+      rw [Real.rpow_add hE]
+      ring
 
 end ContinuousFlexibility.Analysis.N04RealizationStart
 

@@ -70,7 +70,7 @@ private theorem field_angle_eq_fderiv
     ((hasDerivAt_const q.2 q.1).prodMk (hasDerivAt_id q.2))
   simpa only [Function.comp_def, id_eq, Prod.zero_eq_mk] using hd.deriv
 
-private theorem field_angle_contDiff
+theorem n04NegativeGeometry_field_angle_contDiff
     {F : ℝ × N04FlowPoint → ℝ} (hF : ContDiff ℝ ∞ F) (t : ℝ) :
     ContDiff ℝ ∞ (fun q : N04FlowPoint =>
       deriv (fun θ : ℝ => F (t, (q.1, θ))) q.2) := by
@@ -151,7 +151,7 @@ theorem n04NegativeGeometry_flowCoefficient_weighted_prefix (Λ : ℝ) (N : ℕ)
     (n04NegativeGeometry_field_angle_jet_le hF t (Ψ q) j).trans
       (hprefix j (hjk.trans hk) t ht (Ψ q) hq)
   have hb := n04NegativeGeometry_weighted_composition_jet_le hΨ
-    (field_angle_contDiff hF t) q k hB hρ houter hinner
+    (n04NegativeGeometry_field_angle_contDiff hF t) q k hB hρ houter hinner
   have hfac : (k.factorial : ℝ) ≤ (N.factorial : ℝ) := by
     exact_mod_cast Nat.factorial_le hk
   calc

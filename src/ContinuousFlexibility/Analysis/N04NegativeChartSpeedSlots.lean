@@ -71,8 +71,10 @@ theorem negativeChartAngularIterate_spatialJet_le {f : N04FlowPoint → ℝ}
         funext p
         simp only [negativeChartAngularIterate, iteratedDeriv_succ]
       rw [he]
-      exact hb.trans (by
-        simpa only [Nat.add_assoc, Nat.add_left_comm, Nat.add_comm] using (ih (j + 1)))
+      have hi := ih (j + 1)
+      have horder : j + 1 + a = j + (a + 1) := by omega
+      rw [horder] at hi
+      exact hb.trans hi
 
 /-- The selected speed head is literally the angular derivative of the
 corresponding true state derivative. The radial parameter slots are zero. -/

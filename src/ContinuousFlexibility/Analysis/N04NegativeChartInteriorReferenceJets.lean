@@ -33,8 +33,8 @@ private theorem endpointControl_reference_spatial
   refine ⟨C, A, hC, hA, fun i q hq a b hab => ?_⟩
   let J := (F.regular i).parameter a b q hq
   have hz (n : ℕ) : p n (center - center) ≤ 1 := by
-    rw [sub_self, (p n).map_zero']
-    exact zero_le_one
+    rw [sub_self]
+    exact (p n).map_zero'.le.trans zero_le_one
   have h := hb i 0 le_rfl a b hab q hq J center hc (hz base)
     Fin.elim0 (fun i => i.elim0) 1 le_rfl (hz (s + loss)) (fun i => i.elim0)
   simpa only [one_pow, one_mul, smoothDirections_D_zero_apply J hc,
@@ -116,7 +116,7 @@ private theorem negativeInterior_referenceSpeed_spatial :
   let A : ℝ := hb.choose_spec.choose
   have h := hb.choose_spec.choose_spec
   refine ⟨C, A, h.1, h.2.1, fun m side q hq a b hab => ?_⟩
-  simpa only [liftSectorParameter, Prod.fst_zero, Prod.snd_zero,
+  simpa only [C, A, liftSectorParameter, Prod.fst_zero, Prod.snd_zero,
     ZeroMemClass.coe_zero, add_zero] using h.2.2 (m, side) q hq a b hab
 
 private theorem negative_referenceTravel_successor_abs
@@ -175,7 +175,8 @@ theorem negativeInterior_referenceTravel_mixed_bounds (s : ℕ) :
     (fun m side => (hρ m side).1) (m, side) hq
   have henv := material_sum_envelope (W.floor (W.negativeHalfSample e m side))
     hC₀.le h₁.1.le h₀.2.1 h₁.2.1
-  rw [mixedDerivative_radialFunction]
+  rw [mixedDerivative_radialFunction (fun r =>
+    n04bTravelOrientation (W.C.travel m) side (opticalTravel W.D.w (W.C.left m) r)) a b q]
   by_cases hb : b = 0
   · rw [if_pos hb]
     by_cases ha : a = 0
