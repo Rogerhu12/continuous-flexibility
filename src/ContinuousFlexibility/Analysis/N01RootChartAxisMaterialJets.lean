@@ -41,8 +41,8 @@ private theorem rootChart_axis_bound_of_power_prefix
       (mul_ne_zero (by norm_num : (3 / 2 : ℝ) ≠ 0) hχpos.ne')
   have he : extendedRootRadialFactor G =ᶠ[𝓝 (0, θ)]
       (fun p => Q * extendedRootOddCoefficient G p ^ (2 / 3 : ℝ)) := by
-    filter_upwards [hχ.continuousAt.eventually (Ioi_mem_nhds hχpos)] with p hpos
-    exact Real.mul_rpow (by norm_num : (0 : ℝ) ≤ 3 / 2) hpos.le
+    filter_upwards [hχ.continuous.continuousAt.eventually (Ioi_mem_nhds hχpos)] with p hpos
+    exact Real.mul_rpow (by norm_num : (0 : ℝ) ≤ 3 / 2) (le_of_lt hpos)
   have hfjet (k : ℕ) (hk : k ≤ n) :
       ‖iteratedFDeriv ℝ k (extendedRootRadialFactor G) (0, θ)‖ ≤ Q * M := by
     rw [(he.iteratedFDeriv ℝ k).self_of_nhds]
@@ -99,7 +99,8 @@ private theorem rootChart_axis_bound_of_power_prefix
     exact ((norm_add_le _ _).trans (add_le_add hφjet hsnd)).trans
       (by linarith only [hM])
   change ‖iteratedFDeriv ℝ n
-    (fun p => (extendedRootRadialCoordinate G p, extendedRootEven G p)) (0, θ)‖ ≤ _
+    (fun p : PolarPoint => (p.1 * extendedRootRadialFactor G p, extendedRootEven G p))
+      (0, θ)‖ ≤ _
   rw [iteratedFDeriv_prodMk
     ((contDiffAt_fst.mul hf).of_le (by simp : (n : ℕ∞ω) ≤ ∞))
     (hφ.contDiffAt.of_le (by simp : (n : ℕ∞ω) ≤ ∞)) le_rfl,
