@@ -24,16 +24,22 @@ def N04RealizationMixedSlots (low high : Seminorm ℝ E)
     (∀ i, w.isState i = false → (v i).1 = 0) ∧
     (∀ i, w.isState i = true → (v i).2 = 0)
 
-theorem n04Realization_mixedSlots_parameters
-    (low high : Seminorm ℝ E) {k K : ℕ} {R : ℝ} (hk : k ≤ K)
+/-- The original parameter tuple preserves any supplied property of
+its exact state arity. -/
+theorem n04Realization_mixedSlots_parameters_with_arity
+    (low high : Seminorm ℝ E) (P : ℕ → Prop) {k : ℕ} {R : ℝ} (hk : P k)
     (v : Fin k → E) (hlow : ∀ i, low (v i) ≤ 1) (hhigh : ∀ i, high (v i) ≤ R) :
-    N04RealizationMixedSlots low high K R k (fun i => (v i, 0)) := by
+    ∃ w : StateAngleWord k, P w.stateArity ∧
+      (∀ i, low (v i) ≤ 1) ∧ (∀ i, high (v i) ≤ R) ∧
+      (∀ _i : Fin k, ‖(0 : PolarPoint)‖ ≤ 1) ∧
+      (∀ i, w.isState i = false → v i = 0) ∧
+      (∀ i, w.isState i = true → (0 : PolarPoint) = 0) := by
   classical
   let w : StateAngleWord k := StateAngleWord.ofBool (fun _ => true)
   have hw : w.stateArity = k := by
     simp only [StateAngleWord.stateArity_eq_sum, w, StateAngleWord.isState_ofBool,
       ite_true, Finset.sum_const, Finset.card_univ, Fintype.card_fin, smul_eq_mul, mul_one]
-  refine ⟨w, hw.trans_le hk, hlow, hhigh, ?_, ?_, ?_⟩
+  refine ⟨w, hw.symm ▸ hk, hlow, hhigh, ?_, ?_, ?_⟩
   · intro i
     simp only [norm_zero, zero_le_one]
   · intro i
@@ -41,11 +47,31 @@ theorem n04Realization_mixedSlots_parameters
   · intro i _
     rfl
 
-theorem n04Realization_mixedSlots_snoc
-    (low high : Seminorm ℝ E) {K n : ℕ} {R : ℝ} {v : Fin n → E × PolarPoint}
-    (hR : 0 ≤ R) (hv : N04RealizationMixedSlots low high K R n v)
+theorem n04Realization_mixedSlots_parameters
+    (low high : Seminorm ℝ E) {k K : ℕ} {R : ℝ} (hk : k ≤ K)
+    (v : Fin k → E) (hlow : ∀ i, low (v i) ≤ 1) (hhigh : ∀ i, high (v i) ≤ R) :
+    N04RealizationMixedSlots low high K R k (fun i => (v i, 0)) :=
+  n04Realization_mixedSlots_parameters_with_arity low high (fun j => j ≤ K)
+    hk v hlow hhigh
+
+/-- Appending a physical direction preserves the exact arity of the
+same word, so it also preserves any predicate of that arity. -/
+theorem n04Realization_mixedSlots_snoc_with_arity
+    (low high : Seminorm ℝ E) (P : ℕ → Prop)
+    {n : ℕ} {R : ℝ} {v : Fin n → E × PolarPoint}
+    (hR : 0 ≤ R)
+    (hv : ∃ w : StateAngleWord n, P w.stateArity ∧
+      (∀ i, low (v i).1 ≤ 1) ∧ (∀ i, high (v i).1 ≤ R) ∧
+      (∀ i, ‖(v i).2‖ ≤ 1) ∧
+      (∀ i, w.isState i = false → (v i).1 = 0) ∧
+      (∀ i, w.isState i = true → (v i).2 = 0))
     (e : PolarPoint) (he : ‖e‖ ≤ 1) :
-    N04RealizationMixedSlots low high K R (n + 1) (Fin.snoc v (0, e)) := by
+    ∃ w : StateAngleWord (n + 1), P w.stateArity ∧
+      (∀ i, low (Fin.snoc v (0, e) i).1 ≤ 1) ∧
+      (∀ i, high (Fin.snoc v (0, e) i).1 ≤ R) ∧
+      (∀ i, ‖(Fin.snoc v (0, e) i).2‖ ≤ 1) ∧
+      (∀ i, w.isState i = false → (Fin.snoc v (0, e) i).1 = 0) ∧
+      (∀ i, w.isState i = true → (Fin.snoc v (0, e) i).2 = 0) := by
   classical
   obtain ⟨w, hw, hl, hh, hp, hs, ha⟩ := hv
   let w' : StateAngleWord (n + 1) :=
@@ -54,7 +80,7 @@ theorem n04Realization_mixedSlots_snoc
     rw [StateAngleWord.stateArity_eq_sum, Fin.sum_univ_castSucc]
     simp only [w', StateAngleWord.isState_ofBool, Fin.snoc_castSucc, Fin.snoc_last,
       Bool.false_eq_true, ite_false, add_zero, ← StateAngleWord.stateArity_eq_sum]
-  refine ⟨w', hw'.trans_le hw, ?_, ?_, ?_, ?_, ?_⟩
+  refine ⟨w', hw'.symm ▸ hw, ?_, ?_, ?_, ?_, ?_⟩
   · intro i
     refine Fin.lastCases ?_ (fun j => ?_) i
     · simp only [Fin.snoc_last, map_zero, zero_le_one]
@@ -83,6 +109,13 @@ theorem n04Realization_mixedSlots_snoc
       have hj' : w.isState j = true := by
         simpa only [w', StateAngleWord.isState_ofBool, Fin.snoc_castSucc] using hj
       simpa only [Fin.snoc_castSucc] using ha j hj'
+
+theorem n04Realization_mixedSlots_snoc
+    (low high : Seminorm ℝ E) {K n : ℕ} {R : ℝ} {v : Fin n → E × PolarPoint}
+    (hR : 0 ≤ R) (hv : N04RealizationMixedSlots low high K R n v)
+    (e : PolarPoint) (he : ‖e‖ ≤ 1) :
+    N04RealizationMixedSlots low high K R (n + 1) (Fin.snoc v (0, e)) :=
+  n04Realization_mixedSlots_snoc_with_arity low high (fun j => j ≤ K) hR hv e he
 
 theorem n04Realization_partition_mixedSlot_cost
     {n K s : ℕ} (w : StateAngleWord n) (c : OrderedFinpartition n) (offset : ℕ)
