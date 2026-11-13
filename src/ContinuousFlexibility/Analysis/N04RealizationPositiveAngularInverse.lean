@@ -107,11 +107,9 @@ def n04Realization_positiveAngularTaylor_jointDirections
     (Kinv.compLinear L hdomain hmap).congrOn ?_⟩
   · intro p _
     change φ (L p).1 (L p).2 = _
-    rw [hL]
-    rfl
+    rw [hL] <;> rfl
   · intro p _
     change Function.invFun (φ (L p).1) (L p).2 = _
-    rw [hL]
-    rfl
+    rw [hL] <;> rfl
 
 end ContinuousFlexibility.Analysis
