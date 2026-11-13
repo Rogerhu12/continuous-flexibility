@@ -218,10 +218,12 @@ theorem projectiveCompositionJets_fixedBase_oneHigh
       (Finset.sum_nonneg (fun j _ => mul_nonneg (hC j) (Nat.cast_nonneg _)))
     refine ⟨A, hA, fun i x hx hbx v hv j hj σ => ?_⟩
     let j' : Fin (n + 1) := ⟨j, Nat.lt_succ_of_le hj⟩
-    have hCA : C j' * (j + 1 : ℕ) ≤ A :=
-      (Finset.single_le_sum
-        (fun l _ => mul_nonneg (hC l) (Nat.cast_nonneg _)) (Finset.mem_univ j')).trans
-          (le_add_of_nonneg_left zero_le_one)
+    have hCA : C j' * (j + 1 : ℕ) ≤ A := by
+      dsimp only [A]
+      exact (Finset.single_le_sum
+        (f := fun l : Fin (n + 1) => C l * (l.val + 1 : ℕ))
+        (fun l _ => mul_nonneg (hC l) (Nat.cast_nonneg (l.val + 1)))
+        (Finset.mem_univ j')).trans (le_add_of_nonneg_left zero_le_one)
     have hP : (1 + ∑ l, p (t + d j) ((Fin.cons x v : Fin (n + 1) → E) l)) ≤
         1 + ∑ l, p (t + δ) ((Fin.cons x v : Fin (n + 1) → E) l) :=
       add_le_add le_rfl (Finset.sum_le_sum (fun l _ =>
@@ -247,8 +249,8 @@ theorem projectiveCompositionJets_fixedBase_oneHigh
     let order : Fin (c.length + 1) → ℕ := Fin.cons (s + e c.length + δ) (fun _ => BK + δ)
     let total : ℕ := s + (e c.length + δ + c.length * (BK + δ))
     have htotal : ∑ j, order j ≤ total := by
-      simp only [order, Fin.sum_univ_succ, Finset.sum_const, Finset.card_univ,
-        Fintype.card_fin, smul_eq_mul]
+      simp only [order, total, Fin.sum_univ_succ, Fin.cons_zero, Fin.cons_succ,
+        Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
       omega
     obtain ⟨D, hD, hpD⟩ := hproduct n (c.length + 1) order total htotal
       (max R 1) (zero_le_one.trans (le_max_right _ _))
@@ -276,8 +278,8 @@ theorem projectiveCompositionJets_fixedBase_oneHigh
         omega
       have hh := (hpD (Fin.cons x v) hb).trans
         (mul_le_mul_of_nonneg_left (hmono hbudget) hD)
-      simpa only [order, Fin.prod_univ_succ, Finset.prod_const,
-        Finset.card_univ, Fintype.card_fin, P] using hh
+      simpa only [order, Fin.prod_univ_succ, Fin.cons_zero, Fin.cons_succ,
+        Finset.prod_const, Finset.card_univ, Fintype.card_fin, P] using hh
     have hbase : q (s + e c.length) (f i x) ≤ AH * P (s + e c.length + δ) := by
       have hh := hhigh i x hx hbx v hv 0 (Nat.zero_le n) Fin.elim0
       have hz : v ∘ (Fin.elim0 : Fin 0 → Fin n) = Fin.elim0 := Subsingleton.elim _ _
@@ -327,6 +329,6 @@ theorem projectiveCompositionJets_fixedBase_oneHigh
       Finset.sum_le_sum (fun c _ => hc c i x hx hbx w (fun l => (hw l).le))
     _ = K₀ * ((1 + p (s + L) x) + ∑ l, p (s + L) (w l)) := by
       rw [← Finset.sum_mul, Fin.sum_univ_succ]
-      simp only [K₀, add_assoc]
+      simp only [K₀, Fin.cons_zero, Fin.cons_succ, add_assoc]
 
 end ContinuousFlexibility.Analysis
