@@ -33,21 +33,9 @@ theorem n04PositiveGeometry_rootHeightInputs_finiteShift_power
     (hS : IsPhysicalSpaces D T S)
     (hE : ∀ r ∈ radialCore D, 1 ≤ T.E0 r)
     (x0 : AnnularState S) (N requestedBase : ℕ) :
-    ∃ B loss : ℕ, requestedBase ≤ B ∧ ∀ K s : ℕ,
-      ∃ C A : ℝ, 1 ≤ C ∧ 0 ≤ A ∧
-      ∀ i : Fin 4, ∀ a d : ℕ, a + d ≤ N → ∀ b : ℕ, b ≤ s →
-      ∀ p ∈ annularOpen D, ∀ U : Set (AnnularState S × ℝ),
-      ∀ J : SmoothDirections U (fun z => z.2 *
-        mixedDerivative a (b + d) (n06RootNormalizedHeightFields D S z.1.1 i) p),
-      ∀ k : ℕ, k ≤ K → ∀ z ∈ U, |z.2| ≤ 1 →
-      pairGrading (stateGrading S) realGrading B (z - (x0, 0)) ≤ 1 →
-      ∀ v : Fin k → (AnnularState S × ℝ),
-      (∀ j, pairGrading (stateGrading S) realGrading B (v j) ≤ 1) →
-      ∀ R : ℝ, 1 ≤ R →
-      pairGrading (stateGrading S) realGrading (s + loss) (z - (x0, 0)) ≤ R →
-      (∀ j, pairGrading (stateGrading S) realGrading (s + loss) (v j) ≤ R) →
-        |J.D k z v| ≤ C * T.E0 p.1 ^ A * T.H p.1 ^ scalarBeta *
-          R ^ ((b : ℝ) / ((s : ℝ) + 1)) := by
+    N04PositiveGeometryRootHeightFiniteShiftPowerBound (stateGrading S)
+      (fun i x => n06RootNormalizedHeightFields D S x.1 i) (annularOpen D)
+      (fun q => T.E0 q.1) (fun q => T.H q.1 ^ scalarBeta) x0 N requestedBase := by
   exact n04PositiveGeometry_rootFiniteShift_power_of_raw
     (stateGrading S) (stateGrading_monotone S) (jointStateGrading_hasInterpolation hS)
     (fun i x => n06RootNormalizedHeightFields D S x.1 i) (annularOpen D)

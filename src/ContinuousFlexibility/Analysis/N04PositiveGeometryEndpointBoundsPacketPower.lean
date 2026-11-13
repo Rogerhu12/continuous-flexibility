@@ -207,19 +207,8 @@ private theorem packetFiniteShiftPower_of_height
     (hheight : ∀ q ∈ Ω, H q ≤ L)
     (hw : ∀ a, a ≤ N → ∀ q ∈ Ω,
       ‖iteratedFDeriv ℝ a (fun p : PolarPoint => w p.1) q‖ ≤ W)
-    (hraw : ∃ B loss : ℕ, requestedBase ≤ B ∧ ∀ K s : ℕ,
-      ∃ C A : ℝ, 1 ≤ C ∧ 0 ≤ A ∧
-      ∀ i : Fin 4, ∀ a d : ℕ, a + d ≤ N → ∀ b : ℕ, b ≤ s →
-      ∀ q ∈ Ω, ∀ U : Set (Y × ℝ),
-      ∀ J : SmoothDirections U (fun z => z.2 * mixedDerivative a (b + d) (F i z.1) q),
-      ∀ k : ℕ, k ≤ K → ∀ z ∈ U, |z.2| ≤ 1 →
-      pairGrading pgrade realGrading B (z - (x0, 0)) ≤ 1 →
-      ∀ v : Fin k → (Y × ℝ),
-      (∀ j, pairGrading pgrade realGrading B (v j) ≤ 1) →
-      ∀ R : ℝ, 1 ≤ R →
-      pairGrading pgrade realGrading (s + loss) (z - (x0, 0)) ≤ R →
-      (∀ j, pairGrading pgrade realGrading (s + loss) (v j) ≤ R) →
-        |J.D k z v| ≤ C * E q ^ A * H q * R ^ ((b : ℝ) / ((s : ℝ) + 1))) :
+    (hraw : N04PositiveGeometryRootHeightFiniteShiftPowerBound
+      pgrade F Ω E H x0 N requestedBase) :
     packetFiniteShiftPowerBound pgrade packet Ω E H x0 N requestedBase := by
   refine hraw.elim fun B h => ?_
   refine h.elim fun loss h => ?_
@@ -253,7 +242,7 @@ theorem n04PositiveGeometry_rootPacket_finiteShift_power
   have hL : 1 ≤ L := le_max_left _ _
   obtain ⟨W, hW, hw⟩ := n06_radialLift_finite_frechet_bound (b := D.b)
     hD.choose_spec.1.1 hD.choose_spec.1.2.2.1.1.contDiffOn N
-  exact packetFiniteShiftPower_of_height (stateGrading S)
+  refine packetFiniteShiftPower_of_height (Y := AnnularState S) (stateGrading S)
     (fun j x => n06RootNormalizedHeightFields D S x.1 j)
     (n06ActualRootAbsorbedCoordinates D S) D.w hD.choose_spec.1.2.2.1.1
     (annularOpen D) (fun q => T.E0 q.1) (fun q => T.H q.1 ^ scalarBeta)
@@ -266,6 +255,7 @@ theorem n04PositiveGeometry_rootPacket_finiteShift_power
     (fun q hq => (show T.H q.1 ^ scalarBeta ≤ L0 from by
       simpa only [Real.rpow_zero, mul_one] using hheight q.1 hq.1).trans (le_max_right _ _))
     (fun a ha q hq => hw a ha q ⟨hq.1.1.le, hq.1.2.le⟩)
-    (n04PositiveGeometry_rootHeightInputs_finiteShift_power hD hT hS hE x0 N requestedBase)
+    ?_
+  exact n04PositiveGeometry_rootHeightInputs_finiteShift_power hD hT hS hE x0 N requestedBase
 
 end ContinuousFlexibility.Analysis

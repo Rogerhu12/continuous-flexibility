@@ -51,7 +51,9 @@ theorem n04PositiveGeometry_radialKernel_middleMass_envelope
     (min_le_right _ _).trans (min_le_left _ _)
   have hfour : 4 * η side ≤ (if side then r i else c i) -
       (if side then d i else l i) := by linarith only [hquarter]
-  have hpos := integral_positiveEndpointCutoff_complement_pos (hgeom.1 side) (hgeom.2.1 side)
+  have hpos : 0 < positiveReferenceMiddleMass (if side then d i else l i)
+      (if side then r i else c i) (η side) :=
+    integral_positiveEndpointCutoff_complement_pos (hgeom.1 side) (hgeom.2.1 side)
   rw [abs_of_pos (inv_pos.mpr hpos)]
   apply (positiveReferenceMiddleMass_inv_le (hgeom.1 side) hfour).trans
   rw [div_eq_mul_inv]

@@ -74,7 +74,9 @@ def n04PositiveGeometry_rootPowerTraceTerm_joint
     {U : Set E} (hU : IsOpen U) {f : ℕ → E × ℝ → ℝ} {n : ℕ}
     (J : ∀ j, j ≤ n → SmoothDirections (U ×ˢ univ) (f j))
     (γ : ℝ) (hpos : ∀ y ∈ U ×ˢ (univ : Set ℝ), 0 < f 0 y)
-    (c : OrderedFinpartition n) :=
+    (c : OrderedFinpartition n) :
+    SmoothDirections (U ×ˢ univ) (fun y => rpowJetCoefficient γ c.length *
+      ∏ i, n04PositiveGeometry_rootPowerTraceTermFields γ f c i y) :=
   smoothDirections_postcompCLM
     (smoothDirections_finiteProduct (hU.prod isOpen_univ)
       (n04PositiveGeometry_rootPowerTraceTerm_inputs J γ hpos c))
@@ -158,8 +160,8 @@ theorem n04PositiveGeometry_rootPowerTrace_word_bound
         (pow_le_pow_right₀ hM (hdd c)) (pow_nonneg (zero_le_one.trans hM) _)
         (zero_le_one.trans hC₀)
   have hsum := N04BoundaryWordBounds.finiteSum hU JT hterm
-  have heq : EqOn (fun y => ∑ c, rpowJetCoefficient γ c.length *
-      ∏ i, n04PositiveGeometry_rootPowerTraceTermFields γ f c i y)
+  have heq : EqOn (fun y => ∑ c : OrderedFinpartition n, rpowJetCoefficient γ c.length *
+      ∏ i : Fin (c.length + 1), n04PositiveGeometry_rootPowerTraceTermFields γ f c i y)
       (fun y => n04PositiveGeometry_rootPowerTrace γ n (fun j => f j y)) (U ×ˢ univ) := by
     intro y _
     apply Finset.sum_congr rfl

@@ -83,7 +83,7 @@ private theorem movingSelectedTerm_bound
       omega
     · have he : s = ∅ := Finset.not_nonempty_iff_eq_empty.mp hs
       simpa only [q, he, Finset.sdiff_empty, Finset.card_univ, Fintype.card_fin,
-        Finset.card_empty, Nat.mul_zero, Nat.add_zero] using hcpos
+        Finset.card_empty, Nat.mul_zero, Nat.add_zero] using Nat.succ_le_of_lt hcpos
   have htotalpos : 1 ≤ w.angleArity + C * w.stateArity := by
     have hmul : w.stateArity ≤ C * w.stateArity := by
       simpa only [one_mul] using Nat.mul_le_mul_right w.stateArity hC

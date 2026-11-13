@@ -50,7 +50,8 @@ theorem n04PositiveGeometry_boundaryInverse_first_bound
     intro B
     change ‖B (v 0)‖ ≤ 1 * ‖B‖
     exact (B.le_opNorm _).trans
-      ((mul_le_mul_of_nonneg_left (hv 0) (norm_nonneg B)).trans_eq (by ring))
+      ((mul_le_mul_of_nonneg_left (hv 0)
+        (ContinuousLinearMap.opNorm_nonneg B)).trans_eq (by ring))
   have hbound := hJL.postcompCLM A hA
   apply hbound.congr (Q := Q) hx
   intro z hz

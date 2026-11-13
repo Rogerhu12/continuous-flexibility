@@ -164,7 +164,7 @@ theorem n04PositiveGeometry_labelSlope_prefix_of_defect
       _ = (A * RH + 1) * P := by rw [add_mul, one_mul]
       _ ≤ C₁ * P := mul_le_mul_of_nonneg_right hAHC₁ hP
     simpa only [parameterHeightWeight, ite_true, mul_one] using hfinal
-  · let JF' := JF.congrOn (fun y hy => (eq_sub_iff_add_eq).mpr
+  · let JF' := JF.congr (fun y hy => (eq_sub_iff_add_eq).mpr
       (hvalue side m (u + d) θ y hy).symm)
     have hjet : J.D k x v = JF.D k x v :=
       (smoothDirections_D_sub_constant J JF' (Nat.pos_of_ne_zero hkzero) hx v).symm

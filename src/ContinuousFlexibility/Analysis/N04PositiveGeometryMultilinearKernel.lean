@@ -120,7 +120,7 @@ theorem n04PositiveGeometry_negClmEvaluation_prefix
   let B : (E →L[ℝ] F) →L[ℝ] E →L[ℝ] F := -ContinuousLinearMap.id ℝ _
   have hB : ‖B‖ ≤ 1 := by
     change ‖-(ContinuousLinearMap.id ℝ (E →L[ℝ] F))‖ ≤ 1
-    rw [norm_neg]
+    rw [ContinuousLinearMap.opNorm_neg]
     exact ContinuousLinearMap.norm_id_le
   have hraw := n04Realization_norm_iteratedFDeriv_bilinear_le_at B
     (contDiffAt_fst (p := z)) (contDiffAt_snd (p := z)) j
@@ -139,7 +139,8 @@ theorem n04PositiveGeometry_negClmEvaluation_prefix
             (Nat.cast_nonneg (j.choose k)))
           (linear_prefix hM (ContinuousLinearMap.snd ℝ (E →L[ℝ] F) E)
             (ContinuousLinearMap.norm_snd_le ℝ (E →L[ℝ] F) E) z hz (j - k))
-          (norm_nonneg _) (mul_nonneg (Nat.cast_nonneg _) (zero_le_one.trans hM))
+          (ContinuousMultilinearMap.opNorm_nonneg _)
+          (mul_nonneg (Nat.cast_nonneg _) (zero_le_one.trans hM))
         exact hb.trans_eq (by ring)
       _ = (2 : ℝ) ^ j * M ^ 2 := by
         rw [← Finset.sum_mul]
@@ -151,7 +152,9 @@ theorem n04PositiveGeometry_negClmEvaluation_prefix
       ‖iteratedFDeriv ℝ k (fun p : (E →L[ℝ] F) × E => p.1) z‖ *
       ‖iteratedFDeriv ℝ (j - k) (fun p : (E →L[ℝ] F) × E => p.2) z‖ :=
     Finset.sum_nonneg (fun k _ => mul_nonneg
-      (mul_nonneg (Nat.cast_nonneg _) (norm_nonneg _)) (norm_nonneg _))
+      (mul_nonneg (Nat.cast_nonneg _)
+        (ContinuousMultilinearMap.opNorm_nonneg _))
+      (ContinuousMultilinearMap.opNorm_nonneg _))
   exact hraw.trans ((mul_le_mul_of_nonneg_right hB hsum₀).trans
     (by simpa only [one_mul] using hsum))
 

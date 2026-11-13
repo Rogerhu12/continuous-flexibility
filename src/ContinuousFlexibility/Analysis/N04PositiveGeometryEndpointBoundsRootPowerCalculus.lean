@@ -16,6 +16,28 @@ namespace ContinuousFlexibility.Analysis
 open Set ContinuousFlexibility.Statements
 open scoped ContDiff BigOperators
 
+/-- The unchanged finite normalized prefix, kept abstract until the
+physical state space and its grading are supplied. -/
+def N04PositiveGeometryRootHeightFiniteShiftPowerBound
+    {Y : Type*} [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
+    [IsTopologicalAddGroup Y] [ContinuousSMul ℝ Y]
+    (p : ℕ → Seminorm ℝ Y) (F : Fin 4 → Y → PolarPoint → ℝ)
+    (Ω : Set PolarPoint) (E H : PolarPoint → ℝ)
+    (x0 : Y) (N requestedBase : ℕ) : Prop :=
+    ∃ B loss : ℕ, requestedBase ≤ B ∧ ∀ K s : ℕ,
+      ∃ C A : ℝ, 1 ≤ C ∧ 0 ≤ A ∧
+      ∀ i : Fin 4, ∀ a d : ℕ, a + d ≤ N → ∀ b : ℕ, b ≤ s →
+      ∀ q ∈ Ω, ∀ U : Set (Y × ℝ),
+      ∀ J : SmoothDirections U (fun z => z.2 * mixedDerivative a (b + d) (F i z.1) q),
+      ∀ k : ℕ, k ≤ K → ∀ z ∈ U, |z.2| ≤ 1 →
+      pairGrading p realGrading B (z - (x0, 0)) ≤ 1 →
+      ∀ v : Fin k → (Y × ℝ),
+      (∀ j, pairGrading p realGrading B (v j) ≤ 1) →
+      ∀ R : ℝ, 1 ≤ R →
+      pairGrading p realGrading (s + loss) (z - (x0, 0)) ≤ R →
+      (∀ j, pairGrading p realGrading (s + loss) (v j) ≤ R) →
+        |J.D k z v| ≤ C * E q ^ A * H q * R ^ ((b : ℝ) / ((s : ℝ) + 1))
+
 theorem n04PositiveGeometry_rootFiniteShift_power_of_raw
     {Y : Type*} [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
     [IsTopologicalAddGroup Y] [ContinuousSMul ℝ Y]
@@ -32,19 +54,7 @@ theorem n04PositiveGeometry_rootFiniteShift_power_of_raw
           oneHighVariationWeight (pairGrading p realGrading) B (s + 7)
             (z - (x0, 0)) v)
     (x0 : Y) (N requestedBase : ℕ) :
-    ∃ B loss : ℕ, requestedBase ≤ B ∧ ∀ K s : ℕ,
-      ∃ C A : ℝ, 1 ≤ C ∧ 0 ≤ A ∧
-      ∀ i : Fin 4, ∀ a d : ℕ, a + d ≤ N → ∀ b : ℕ, b ≤ s →
-      ∀ q ∈ Ω, ∀ U : Set (Y × ℝ),
-      ∀ J : SmoothDirections U (fun z => z.2 * mixedDerivative a (b + d) (F i z.1) q),
-      ∀ k : ℕ, k ≤ K → ∀ z ∈ U, |z.2| ≤ 1 →
-      pairGrading p realGrading B (z - (x0, 0)) ≤ 1 →
-      ∀ v : Fin k → (Y × ℝ),
-      (∀ j, pairGrading p realGrading B (v j) ≤ 1) →
-      ∀ R : ℝ, 1 ≤ R →
-      pairGrading p realGrading (s + loss) (z - (x0, 0)) ≤ R →
-      (∀ j, pairGrading p realGrading (s + loss) (v j) ≤ R) →
-        |J.D k z v| ≤ C * E q ^ A * H q * R ^ ((b : ℝ) / ((s : ℝ) + 1)) := by
+    N04PositiveGeometryRootHeightFiniteShiftPowerBound p F Ω E H x0 N requestedBase := by
   classical
   let pjoint := pairGrading p realGrading
   have hp : Monotone pjoint := tamePairGrading_monotone hp0 (fun _ _ _ => le_rfl)
