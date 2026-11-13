@@ -444,3 +444,27 @@ The remaining construction burdens are explicit:
    positive radius, loss and material constant. One fixed auxiliary column
    suffices to contradict an all-`η` conclusion, but the premise must still
    hold for every auxiliary column.
+
+## 8. Verified support implementation
+
+At commit `bfea9a79ffb0a3e83598a6c6e39782fe14e09ac5`,
+[CI run 43425432541](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43425432541)
+compiled or replayed all **16 / 16** `N04PulledFields` support/audit modules.
+The complete `quick.log` artifact records:
+
+```text
+PulledFields support axiom audit passed: 220 declarations, 197 theorems
+```
+
+The owner-based audit checks every declaration in the imported support
+modules, including private/generated helpers and transitive dependencies.
+It permits only `propext`, `Classical.choice`, and `Quot.sound`; the explicit
+axiom prints in that run contain those three axioms. The selector estimate
+compiled in 25 seconds, the slot expansion in 3.9 seconds, and the complete
+support audit in 120 seconds, all under the unchanged default limits.
+
+This run still failed in the inherited
+`WholeReferenceGaugeFixedPotentialReferenceJets` module, so it is not a
+complete green CI. The frozen `N04RealizationPulledFields` node remains
+open. Neither this support audit nor the verified conditional assembly
+is a proof or axiom audit of that node.
