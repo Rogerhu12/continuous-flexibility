@@ -38,7 +38,7 @@ abbrev coefficientDifference (z : AnnularState W.S × ℝ) (p : PolarPoint) : Po
 
 /-- The spatial affine pullback is proved with its source family opaque,
 so specialization does not unfold the selected physical fields. -/
-private def jointRootShift
+def jointRootShift
     {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
     [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
     {U : Set X} {Ω V : Set PolarPoint} {f : X × PolarPoint → PolarPoint}

@@ -41,6 +41,8 @@ def negativeChartAngularIterate (a : ℕ) (f : N04FlowPoint → ℝ)
 private theorem negativeChartAngularIterate_contDiff {f : N04FlowPoint → ℝ}
     (hf : ContDiff ℝ ∞ f) (a : ℕ) :
     ContDiff ℝ ∞ (negativeChartAngularIterate a f) := by
+  change ContDiff ℝ ∞ (fun q : N04FlowPoint =>
+    iteratedDeriv a (fun θ => f (q.1, θ)) q.2)
   have h := contDiffOn_uncurry_iteratedDeriv
     (f := fun x θ => f (x, θ)) (V := (univ : Set (ℝ × ℝ))) isOpen_univ
     (show ContDiffOn ℝ ∞ (Function.uncurry (fun x θ => f (x, θ)))
@@ -54,8 +56,11 @@ theorem negativeChartAngularIterate_spatialJet_le {f : N04FlowPoint → ℝ}
     ‖iteratedFDeriv ℝ j (negativeChartAngularIterate a f) q‖ ≤
       ‖iteratedFDeriv ℝ (j + a) f q‖ := by
   induction a generalizing j with
-  | zero => simpa only [negativeChartAngularIterate, iteratedDeriv_zero, Prod.eta,
-      Nat.add_zero] using (le_refl ‖iteratedFDeriv ℝ j f q‖)
+  | zero =>
+      have he : negativeChartAngularIterate 0 f = f := by
+        funext p
+        simp only [negativeChartAngularIterate, iteratedDeriv_zero, Prod.eta]
+      simpa only [he, Nat.add_zero] using (le_refl ‖iteratedFDeriv ℝ j f q‖)
   | succ a ih =>
       have ha := negativeChartAngularIterate_contDiff hf a
       have hb := n04NegativeGeometry_field_angle_jet_le
@@ -66,8 +71,8 @@ theorem negativeChartAngularIterate_spatialJet_le {f : N04FlowPoint → ℝ}
         funext p
         simp only [negativeChartAngularIterate, iteratedDeriv_succ]
       rw [he]
-      exact hb.trans (by simpa only [Nat.add_assoc, Nat.add_left_comm, Nat.add_comm] using
-        ih (j + 1))
+      exact hb.trans (by
+        simpa only [Nat.add_assoc, Nat.add_left_comm, Nat.add_comm] using (ih (j + 1)))
 
 /-- The selected speed head is literally the angular derivative of the
 corresponding true state derivative. The radial parameter slots are zero. -/

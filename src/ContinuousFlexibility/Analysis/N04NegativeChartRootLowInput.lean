@@ -108,7 +108,6 @@ theorem FullHalfFieldPowerControl.root_low_input
   let Cf := hflowData.choose
   let ef := hflowData.choose_spec.choose
   have hCf := hflowData.choose_spec.choose_spec.1
-  have hflow := hflowData.choose_spec.choose_spec.2
   let K : ℝ := 1 + ∑ j : Fin 3, 4 * linearWeightedCompositionJetConstant j.val
   have hKn (j : ℕ) : 0 ≤ 4 * linearWeightedCompositionJetConstant j :=
     mul_nonneg (by norm_num) (zero_le_one.trans (one_le_linearWeightedCompositionJetConstant j))
@@ -186,7 +185,8 @@ theorem FullHalfFieldPowerControl.root_low_input
         (hbcoef 1 (by omega) _ (hpoint hq hx ht)).2)).trans hsmall
   have hzL := stateNeighborhood_mono W.S W.C (le_max_left _ _) (min_le_left _ _) hz
   have hzold := stateNeighborhood_mono W.S W.C hbL hεLW hzL
-  have hb := hflow (hM (m, side)) (n04FlowReverseField R)
+  have hb := hflowData.choose_spec.choose_spec.2 (M := M (m, side))
+    (hM (m, side)) (n04FlowReverseField R)
     (n04FlowReverseField_contDiff hR) (n04FlowReverseField_periodic hRp)
     (fun q hq hx t ht => by
       change |deriv (fun η => -R (1 - t, (q.1, η))) q.2| ≤ 1

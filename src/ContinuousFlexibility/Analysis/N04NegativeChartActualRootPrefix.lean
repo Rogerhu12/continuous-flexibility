@@ -123,7 +123,7 @@ theorem FullHalfFieldPowerControl.actualRootField_prefix
     rw [hz]
     cases j with
     | zero => simpa only [norm_iteratedFDeriv_zero, norm_zero] using hbound0
-    | succ j => simpa only [iteratedFDeriv_succ_const, norm_zero] using hbound0
+    | succ j => simpa only [iteratedFDeriv_succ_const, Pi.zero_apply, norm_zero] using hbound0
   have htpos : 0 < t := lt_of_le_of_ne ht.1 (Ne.symm ht0)
   have ht2 : t ^ 2 ≤ 1 := by nlinarith only [ht.1, ht.2]
   have hrad : δ * q.1.1 * t ^ 2 < W.negativeOpticalWidth m side := by
