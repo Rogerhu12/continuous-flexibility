@@ -26,7 +26,7 @@ def MixedJetRegularity.n04PrincipalNegative_inv
     (hU : IsOpen U) (hΩ : IsOpen Ω)
     (hnonzero : ∀ x ∈ U, ∀ q ∈ Ω, f x q ≠ 0) :
     MixedJetRegularity U Ω (fun x q => (f x q)⁻¹) :=
-  F.scalarComp hU hΩ (isOpen_ne continuous_id continuous_const)
+  F.scalarComp hU hΩ (isOpen_ne : IsOpen {t : ℝ | t ≠ 0})
     (fun t ht => (contDiffAt_inv ℝ ht).contDiffWithinAt) hnonzero
 
 /-- Full reciprocal towers have unweighted one-high bounds whenever the

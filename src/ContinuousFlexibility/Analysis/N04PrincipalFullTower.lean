@@ -33,7 +33,7 @@ theorem CurrentJetDataOn.n04Principal_fullWeighted
     {P : ℕ → Prop} {base : ℕ} {ε : ℝ}
     {f : Parameter S → ℕ → PolarPoint → ℝ} {f₀ : ℕ → PolarPoint → ℝ}
     (h : CurrentJetDataOn S T cell P base ε f f₀)
-    (href : ∀ m, ContDiffOn ℝ ∞ (f₀ m) unitStrip)
+    (href : ∀ m, P m → ContDiffOn ℝ ∞ (f₀ m) unitStrip)
     (hrefb : ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m, P m →
       ∀ (q : unitStrip) (a b : ℕ), a + b ≤ s →
         |mixedDerivative a b (f₀ m) q.val| ≤ B * T.E0 (T.sample (cell m)) ^ B)
@@ -91,7 +91,7 @@ theorem CurrentJetDataOn.n04Principal_fullWeighted
       rw [smoothDirections_D_zero_apply Jf hz v]
       rw [smoothDirections_D_zero_apply Jd hz v] at hdiff
       have heq := mixedDerivative_sub_of_contDiffOn
-        (isOpen_Ioo.prod isOpen_univ) (h.1 z hz m.val m.property).1 (href m.val) a b hq
+        (isOpen_Ioo.prod isOpen_univ) (h.1 z hz m.val m.property).1 (href m.val m.property) a b hq
       have hsum : mixedDerivative a b (f z m.val) q =
           mixedDerivative a b (fun y => f z m.val y - f₀ m.val y) q +
             mixedDerivative a b (f₀ m.val) q := by rw [heq]; ring
@@ -103,7 +103,7 @@ theorem CurrentJetDataOn.n04Principal_fullWeighted
           add_le_add hdiff ((Real.norm_eq_abs _).trans_le hreference)
         _ = C * E ^ A * O := by dsimp only [C]; ring
     · let K := Jd.congr (fun y hy => mixedDerivative_sub_of_contDiffOn
-        (isOpen_Ioo.prod isOpen_univ) (h.1 y hy m.val m.property).1 (href m.val) a b hq)
+        (isOpen_Ioo.prod isOpen_univ) (h.1 y hy m.val m.property).1 (href m.val m.property) a b hq)
       have heq : Jd.D k z v = Jf.D k z v :=
         smoothDirections_D_sub_constant Jf K (Nat.pos_of_ne_zero hk) hz v
       rw [← heq]

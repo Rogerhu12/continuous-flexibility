@@ -36,7 +36,7 @@ variable {S : PhysicalSpacesData} {T : MaterialData} {cell : ℕ → ℕ}
 weight, also at parameter order zero. -/
 theorem CurrentJetDataOn.n04Principal_weightedDifference
     (h : CurrentJetDataOn S T cell P base ε f f₀)
-    (href : ∀ m, ContDiffOn ℝ ∞ (f₀ m) unitStrip) :
+    (href : ∀ m, P m → ContDiffOn ℝ ∞ (f₀ m) unitStrip) :
     N04PrincipalWeightedTowerBounds (parameterGrading S) base
       (fun m : {m : ℕ // P m} => T.E0 (T.sample (cell m.val)))
       (fun m : {m : ℕ // P m} => T.H (T.sample (cell m.val)) ^ (3 / 4 : ℝ))

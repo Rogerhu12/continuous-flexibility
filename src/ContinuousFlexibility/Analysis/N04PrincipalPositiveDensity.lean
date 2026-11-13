@@ -33,7 +33,8 @@ theorem n04PrincipalPositive_inversePrincipal_eq_adjugate
       (inverseChartPrincipalCoefficients A F G h).c p =
         (adjugateCoordinatePrincipalCoefficients A G (fun q => (h (G q))⁻¹)).c p := by
   have hFG : F (G p) = p := hinverse.self_of_nhds
-  have hr := reverseCoordinatePrincipalCoefficients_eq_adjugate A hG hF hinverse
+  have hr := reverseCoordinatePrincipalCoefficients_eq_adjugate A
+    (h := fun q => (h (G q))⁻¹) hG hF hinverse
     (inv_ne_zero hh : (h (G p))⁻¹ ≠ 0)
   have he (i : Fin 3) :
       canonicalCoefficientComponent i
@@ -73,7 +74,7 @@ theorem n04PrincipalPositive_adjugate_inverseHeight_formula
   dsimp only [adjugateCoordinatePrincipalCoefficients, coefficientQuadratic]
   have hscale : 1 / ((H p)⁻¹ ^ 2 * |planeJacobian G p|) =
       H p ^ 2 / |planeJacobian G p| := by
-    simp only [one_div, mul_inv_rev, inv_pow, inv_inv, div_eq_mul_inv, mul_comm]
+    simp only [one_div, mul_inv_rev, inv_pow, inv_inv, div_eq_mul_inv, mul_comm, mul_one]
   rw [hscale]
   constructor
   · ring

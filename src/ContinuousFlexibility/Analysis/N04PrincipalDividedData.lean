@@ -69,12 +69,47 @@ theorem n04PrincipalDivided_value_of_representative
   have hp' : p ∈ unitStrip := ⟨hp, mem_univ _⟩
   simpa only [sub_zero] using (he hp').trans (hfactor p hp')
 
-private theorem n04PrincipalDivided_six_order_shift
-    {X : Type*} (p : ℕ → X → ℝ) (s loss : ℕ) (x : X) (C r : ℝ)
-    (h : r ≤ C * p (s + 6 + loss) x) :
-    r ≤ C * p (s + (loss + 6)) x := by
-  have he : s + 6 + loss = s + (loss + 6) := by omega
-  simpa only [he] using h
+private theorem n04PrincipalDivided_valueBounds
+    {X ι : Type*} {U : Set X} (p : ℕ → X → ℝ) (hp : ∀ n x, 0 ≤ p n x)
+    (E H : ι → ℝ) (hE : ∀ m, 0 ≤ E m) (hH : ∀ m, 0 ≤ H m)
+    (P : ι → Prop) (N g : X → ι → PolarPoint → ℝ)
+    (hvalue : ∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+      ∀ z ∈ U, ∀ m, P m → ∀ q : unitStrip, ∀ a b, a + b ≤ s →
+        |mixedDerivative a b (N z m) q.val| ≤ B * E m ^ B * H m * p (s + loss) z)
+    (hrep : ∀ m, P m → ∀ z ∈ U,
+      ∃ F : PolarPoint → ℝ, ContDiff ℝ ∞ F ∧ EqOn F (N z m) unitStrip ∧
+        ∀ side : Bool, ∀ θ i, i ≤ 2 →
+          iteratedDeriv i (fun t : ℝ => F (t, θ)) (if side then 1 else 0) = 0)
+    (hfactor : ∀ m, P m → ∀ z ∈ U, ∀ q ∈ unitStrip,
+      N z m q = (q.1 * (1 - q.1)) ^ 3 * g z m q)
+    (hnegative : ∀ m, ¬ P m → ∀ z ∈ U, ∀ q : unitStrip, ∀ a b,
+      mixedDerivative a b (fun y => g z m y - 0) q.val = 0) :
+    ∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+      ∀ z ∈ U, ∀ m, True → ∀ q : unitStrip, ∀ a b, a + b ≤ s →
+        |mixedDerivative a b (fun y => g z m y - 0) q.val| ≤
+          B * E m ^ B * H m * p (s + loss) z := by
+  classical
+  obtain ⟨loss, hloss⟩ := hvalue
+  refine ⟨loss + 6, fun s => ?_⟩
+  obtain ⟨B, hB, hb⟩ := hloss (s + 6)
+  refine ⟨B, hB, ?_⟩
+  intro z hz m _ q a b hab
+  let M := B * E m ^ B * H m * p (s + (loss + 6)) z
+  have hM : 0 ≤ M := mul_nonneg
+    (mul_nonneg (mul_nonneg hB.le (Real.rpow_nonneg (hE m) _)) (hH m)) (hp _ _)
+  by_cases hm : P m
+  · have hb' : ∀ t ∈ unitStrip, |mixedDerivative (a + 6) b (N z m) t| ≤ M := by
+      intro t ht
+      have he : s + 6 + loss = s + (loss + 6) := by omega
+      simpa only [M, he] using hb z hz m hm ⟨t, ht⟩ (a + 6) b (by omega)
+    have hquot := n04PrincipalDivided_value_of_representative
+      (hrep m hm z hz) (hfactor m hm z hz) a b hb' q.property
+    have hbM : |mixedDerivative a b (g z m) q.val| ≤ M :=
+      hquot.trans (div_le_self hM (by norm_num))
+    exact (le_of_eq (congrArg (fun F => |mixedDerivative a b F q.val|)
+      (funext fun y => sub_zero (g z m y)))).trans hbM
+  · rw [hnegative m hm z hz q a b, abs_zero]
+    exact hM
 
 /-- Cubic division preserves the complete current-data interface. The
 only extra input is the genuine endpoint representative of the numerator;
@@ -191,35 +226,13 @@ theorem n04PrincipalDivided_currentData
     · refine ⟨contDiffOn_const.congr (fun q hq => hzero m hm z hz hq), ?_⟩
       intro q hq
       exact (hzero m hm z hz (hshift q hq)).trans (hzero m hm z hz hq).symm
-  · have hv := h.2.choose_spec.1
-    refine ⟨hv.choose + 6, fun s => ⟨(hv.choose_spec (s + 6)).choose,
-      (hv.choose_spec (s + 6)).choose_spec.1, ?_⟩⟩
-    intro z hz m _ q a b hab
-    let B : ℝ := (hv.choose_spec (s + 6)).choose
-    let M : ℝ := B * T.E0 (T.sample (cell m)) ^ B *
-      T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) * parameterGrading S (s + (hv.choose + 6)) z
-    have hM : 0 ≤ M := mul_nonneg
-      (mul_nonneg (mul_nonneg (hv.choose_spec (s + 6)).choose_spec.1.le
-        (Real.rpow_nonneg (zero_le_one.trans (hE m)) _))
-        (Real.rpow_nonneg (hH m) _)) (apply_nonneg _ _)
-    by_cases hm : P m
-    · have hb' : ∀ p ∈ unitStrip,
-          |mixedDerivative (a + 6) b (fun y => f z m y - f₀ m y) p| ≤ M := by
-        intro p hp
-        have hh := (hv.choose_spec (s + 6)).choose_spec.2
-          z hz m hm ⟨p, hp⟩ (a + 6) b (by omega)
-        exact n04PrincipalDivided_six_order_shift
-          (fun n y => parameterGrading S n y) s hv.choose z
-          (B * T.E0 (T.sample (cell m)) ^ B *
-            T.H (T.sample (cell m)) ^ (3 / 4 : ℝ)) _ hh
-      have hb := n04PrincipalDivided_value_of_representative
-        (hrep m hm z hz) (hfactor m hm z hz) a b hb' q.property
-      have hbM : |mixedDerivative a b (g z m) q.val| ≤ M :=
-        hb.trans (div_le_self hM (by norm_num))
-      exact (le_of_eq (congrArg (fun F => |mixedDerivative a b F q.val|)
-        (funext fun y => sub_zero (g z m y)))).trans hbM
-    · rw [hnegJet m hm a b q z hz, abs_zero]
-      exact hM
+  · exact n04PrincipalDivided_valueBounds
+      (fun n z => parameterGrading S n z) (fun n z => apply_nonneg _ _)
+      (fun m => T.E0 (T.sample (cell m)))
+      (fun m => T.H (T.sample (cell m)) ^ (3 / 4 : ℝ))
+      (fun m => zero_le_one.trans (hE m)) (fun m => Real.rpow_nonneg (hH m) _)
+      P (fun z m q => f z m q - f₀ m q) g h.2.choose_spec.1 hrep hfactor
+      (fun m hm z hz q a b => hnegJet m hm a b q z hz)
   · intro k
     have ht := hRE k
     refine ⟨ht.choose, fun s => ⟨(ht.choose_spec s).choose,

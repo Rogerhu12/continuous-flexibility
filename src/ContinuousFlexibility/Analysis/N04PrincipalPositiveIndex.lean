@@ -23,7 +23,7 @@ theorem n04PrincipalDivided_positive_index
   change n04WholePiecePositive (G.e m) = true at hm
   cases hi : G.e m with
   | inl j => simp only [hi, n04WholePiecePositive, Bool.false_eq_true] at hm
-  | inr i => exact ⟨i, hi⟩
+  | inr i => exact ⟨i, rfl⟩
 
 theorem n04PrincipalDivided_positive_endpoints
     (η : (G.W.S.height (3 / 4 : ℝ)).Space) {m : ℕ} (hm : G.Pos η m) :

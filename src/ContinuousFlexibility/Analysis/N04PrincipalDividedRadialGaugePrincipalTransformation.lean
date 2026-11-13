@@ -45,7 +45,7 @@ theorem coordinatePrincipalDensity_radial_postcompose
   dsimp only
   simp only [coordinatePrincipalDensity, coefficientQuadratic, hdet,
     hcomp.fderiv, ContinuousLinearMap.comp_apply, ContinuousLinearMap.prod_apply,
-    ContinuousLinearMap.smul_apply, ContinuousLinearMap.coe_fst',
+    smul_apply, ContinuousLinearMap.coe_fst',
     ContinuousLinearMap.coe_snd', smul_eq_mul, abs_mul, abs_of_pos hYpos]
   constructor
   · field_simp [hYpos.ne', abs_ne_zero.mpr hJ]
@@ -79,9 +79,12 @@ theorem wholePositiveReferenceGauge_principal_formula
     (p := τ (χ p)) (hgeometry.chart_smooth.differentiable (by simp) _)
     (hY.differentiable (by simp) _) (hYpos _)
     (hgeometry.jacobian_positive _).ne'
-  simpa only [wholePositiveReferenceGaugeChart, wholePositiveReferenceGaugeInverse,
+  have hinverse : σ (τ (χ p)) = χ p := hgeometry.right_inverse (χ p)
+  dsimp only at he
+  rw [hinverse] at he
+  dsimp only [wholePositiveReferenceGaugeChart, wholePositiveReferenceGaugeInverse,
     wholePositiveReferenceGaugeHeight, wholePositiveCanonicalCoefficients,
-    inverseChartPrincipalCoefficients, Function.comp_apply,
-    hgeometry.right_inverse, χ] using he
+    inverseChartPrincipalCoefficients, Function.comp_apply]
+  exact he
 
 end ContinuousFlexibility.Analysis

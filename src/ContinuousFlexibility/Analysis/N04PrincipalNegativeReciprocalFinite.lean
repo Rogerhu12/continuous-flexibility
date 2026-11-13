@@ -68,7 +68,9 @@ theorem n04PrincipalNegative_finiteReciprocal_shifted_bound
   let C : ℝ := 1 + (N.factorial : ℝ)
   have hC : 1 ≤ C := le_add_of_nonneg_right (Nat.cast_nonneg _)
   refine ⟨CB * C ^ (N + 1), (N + 1) * (N + 1),
-    one_le_mul_of_one_le_of_one_le hCB (one_le_pow₀ hC), by positivity, ?_⟩
+    one_le_mul_of_one_le_of_one_le hCB (one_le_pow₀ hC), by
+      have hN : 1 ≤ N + 1 := by omega
+      exact Nat.mul_le_mul hN hN, ?_⟩
   intro U hU Ω hΩ f F hnonzero q hq J x hx P v hv s shift H M R
     hH hHR hM hR hinv hsource
   let M1 : ℝ := C * M ^ (N + 1)
@@ -80,7 +82,7 @@ theorem n04PrincipalNegative_finiteReciprocal_shifted_bound
       _ ≤ C * M ^ (N + 1) := le_mul_of_one_le_left
         (pow_nonneg (zero_le_one.trans hM) _) hC
   let V : Set ℝ := {t | t ≠ 0}
-  have hV : IsOpen V := isOpen_ne continuous_id continuous_const
+  have hV : IsOpen V := isOpen_ne
   have hg : ContDiffOn ℝ ∞ (fun t : ℝ => t⁻¹) V :=
     fun t ht => (contDiffAt_inv ℝ ht).contDiffWithinAt
   have houter (m : ℕ) (hm : m ≤ a + b) (j : ℕ) (hj : j ≤ k) :

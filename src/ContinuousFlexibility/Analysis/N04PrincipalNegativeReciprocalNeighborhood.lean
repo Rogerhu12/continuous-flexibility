@@ -31,7 +31,7 @@ theorem n04PrincipalNegative_inverse_of_relative_error
     have hh := (div_lt_iff₀ ha₀pos).mp hdiv
     linarith
   have htri : |a₀| ≤ |a - a₀| + |a| := by
-    have hh := abs_add (a₀ - a) a
+    have hh := abs_add_le (a₀ - a) a
     rw [sub_add_cancel, abs_sub_comm] at hh
     exact hh
   have ha : |a₀| / 2 ≤ |a| := by linarith
@@ -127,14 +127,15 @@ theorem CurrentJetDataOn.n04PrincipalNegative_inverse_neighborhood
       _ = Q := rfl
   have hdiff : |f z m q - f₀ m q| ≤ M * parameterGrading S loss z := by
     have hh := hv.choose_spec.2 z hzU m hm ⟨q, hq⟩ 0 0 (by omega)
-    simpa only [mixedDerivative, iteratedDeriv_zero, Nat.zero_add] using hh
+    simp only [spaces_mixedDerivative_zero, Nat.zero_add] at hh
+    exact hh
   have hrelative : (M * parameterGrading S loss z) * r < 1 / 2 := by
     calc
       _ = (M * r) * parameterGrading S loss z := by ring
       _ ≤ Q * parameterGrading S loss z :=
         mul_le_mul_of_nonneg_right hprod (apply_nonneg _ _)
       _ < Q * (2 * Q)⁻¹ := mul_lt_mul_of_pos_left hsmall hQ
-      _ = 1 / 2 := by field_simp [hQ.ne']; ring
+      _ = 1 / 2 := by field_simp [hQ.ne']
   have hh := n04PrincipalNegative_inverse_of_relative_error
     (href.choose_spec.2 m hm q hq).1 (href.choose_spec.2 m hm q hq).2 hdiff hrelative
   refine ⟨hh.1, hh.2.1, hh.2.2.trans ?_⟩

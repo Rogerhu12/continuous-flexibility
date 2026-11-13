@@ -111,8 +111,10 @@ theorem n04PrincipalNegative_potential_unit_formula
     n07a_mixedDerivative_radialAffine v (K.left m) (K.right m - K.left m) 2 0 q
   have he0 : mixedDerivative 0 2 (fun p => (H p)⁻¹) q =
       mixedDerivative 0 2 v (canonicalUnitPoint K m q) := by
-    simpa only [pow_zero, one_mul] using
-      n07a_mixedDerivative_radialAffine v (K.left m) (K.right m - K.left m) 0 2 q
+    have hh := n07a_mixedDerivative_radialAffine v
+      (K.left m) (K.right m - K.left m) 0 2 q
+    rw [pow_zero, one_mul] at hh
+    exact hh
   have hrad : mixedDerivative 2 0 v (canonicalUnitPoint K m q) =
       (K.right m - K.left m)⁻¹ ^ 2 * mixedDerivative 2 0 (fun p => (H p)⁻¹) q := by
     rw [he2, ← mul_assoc, ← mul_pow, inv_mul_cancel₀ hlen, one_pow, one_mul]
@@ -120,8 +122,8 @@ theorem n04PrincipalNegative_potential_unit_formula
   rw [hpot, hm]
   simp only [Bool.false_eq_true, ite_false, neg_mul, one_mul]
   rw [hdiv]
-  change -H q * (mixedDerivative 2 0 v (canonicalUnitPoint K m q) -
-    (canonicalUnitPoint K m q).1 * mixedDerivative 0 2 v (canonicalUnitPoint K m q)) = _
+  change -(H q * (mixedDerivative 2 0 v (canonicalUnitPoint K m q) -
+    (canonicalUnitPoint K m q).1 * mixedDerivative 0 2 v (canonicalUnitPoint K m q))) = _
   rw [hrad, ← he0]
 
 /-- The reference inverse-height atom already bounds the reciprocal

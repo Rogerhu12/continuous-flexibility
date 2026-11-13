@@ -54,8 +54,10 @@ theorem n04Principal_weightedTower_prefix
                 (((s + shift * K : ℕ) : ℝ) + 1)) := by
   classical
   let L : ℕ → ℕ := fun k => ∑ i : Fin r, (hb i k).choose
-  have hLi (i : Fin r) (k : ℕ) : (hb i k).choose ≤ L k :=
-    Finset.single_le_sum (fun _ _ => Nat.zero_le _) (Finset.mem_univ i)
+  have hLi (i : Fin r) (k : ℕ) : (hb i k).choose ≤ L k := by
+    change (hb i k).choose ≤ ∑ j : Fin r, (hb j k).choose
+    exact Finset.single_le_sum (fun j _ => Nat.zero_le ((hb j k).choose))
+      (Finset.mem_univ i)
   have hinterp := n04Realization_fixedBase_prefix_power p hp hI
     (max oldBase requestedBase) L
   let base : ℕ := hinterp.choose

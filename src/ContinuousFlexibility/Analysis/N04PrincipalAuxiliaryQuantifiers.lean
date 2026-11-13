@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
 
 /-!
 # The auxiliary-column quantifier in the principal obligation
@@ -16,7 +17,36 @@ namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements CanonicalGeometry
 
+private theorem currentData_replaceAuxiliary
+    (S : PhysicalSpacesData) (T : MaterialData) (cell : ℕ → ℕ)
+    (η η' : (S.height (3 / 4 : ℝ)).Space) (P : ℕ → Prop) (b : ℕ) (ε : ℝ)
+    (f : Parameter S → ℕ → PolarPoint → ℝ) (f₀ : ℕ → PolarPoint → ℝ)
+    (h : CurrentJetDataOn (physicalSpacesReplaceAuxiliaryColumn S η) T cell P b ε f f₀) :
+    CurrentJetDataOn (physicalSpacesReplaceAuxiliaryColumn S η') T cell P b ε f f₀ := h
+
 namespace N04RealizationGauge
+
+private theorem principal_atomFamily_auxiliary
+    (G : N04RealizationGauge) (η η' : (G.W.S.height (3 / 4 : ℝ)).Space)
+    (a : Atom) (ha : a ≠ .auxiliaryColumn) : G.atomFamily η a = G.atomFamily η' a := by
+  funext z m
+  exact (canonicalAtom_replaceAuxiliaryColumn_of_ne G.W.D G.W.U G.W.S G.W.C G.W.L
+    (n04RealizationAtlas G.W G.X G.e G.Y G.H G.τ G.σ G.Q G.N)
+    η (G.lift η z) m a ha).trans
+      (canonicalAtom_replaceAuxiliaryColumn_of_ne G.W.D G.W.U G.W.S G.W.C G.W.L
+        (n04RealizationAtlas G.W G.X G.e G.Y G.H G.τ G.σ G.Q G.N)
+        η' (G.lift η z) m a ha).symm
+
+private theorem principal_atomRef_auxiliary
+    (G : N04RealizationGauge) (η η' : (G.W.S.height (3 / 4 : ℝ)).Space)
+    (a : Atom) (ha : a ≠ .auxiliaryColumn) : G.atomRef η a = G.atomRef η' a := by
+  funext m
+  exact (canonicalAtom_replaceAuxiliaryColumn_of_ne G.W.D G.W.U G.W.S G.W.C G.W.L
+    (n04RealizationAtlas G.W G.X G.e G.Y G.H G.τ G.σ G.Q G.N)
+    η (G.ref η) m a ha).trans
+      (canonicalAtom_replaceAuxiliaryColumn_of_ne G.W.D G.W.U G.W.S G.W.C G.W.L
+        (n04RealizationAtlas G.W G.X G.e G.Y G.H G.τ G.σ G.Q G.N)
+        η' (G.ref η) m a ha).symm
 
 /-- All eight principal atoms, their parameter spaces and their weights
 are unchanged by auxiliary-column replacement. -/
@@ -26,9 +56,16 @@ theorem n04Principal_data_auxiliary
     (P : ℕ → Prop) (b : ℕ) (ε : ℝ) (a : Atom) (ha : atomIsPrincipal a)
     (h : G.Data η P b ε (G.atomFamily η a) (G.atomRef η a)) :
     G.Data η' P b ε (G.atomFamily η' a) (G.atomRef η' a) := by
-  cases a <;> first
-    | exact ha.elim
-    | exact h
+  have hne : a ≠ .auxiliaryColumn := by
+    intro he
+    subst a
+    exact ha
+  have hh : G.Data η' P b ε (G.atomFamily η a) (G.atomRef η a) :=
+    currentData_replaceAuxiliary G.W.S G.W.U (G.V η).cell η η' P b ε
+      (G.atomFamily η a) (G.atomRef η a) h
+  exact (congrArg₂ (fun f f₀ => G.Data η' P b ε f f₀)
+    (principal_atomFamily_auxiliary G η η' a hne)
+    (principal_atomRef_auxiliary G η η' a hne)).mp hh
 
 end N04RealizationGauge
 
