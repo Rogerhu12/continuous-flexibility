@@ -96,8 +96,8 @@ theorem finiteFullJetMatch_wholePositiveReferenceGauge_principal
         (wholePositiveReferenceGaugeChart (positiveReferenceCylinderChart Y) σ₀)
         (wholePositiveReferenceGaugeInverse τ₀ (positiveReferenceCylinderInverse Y))
         (wholePositiveReferenceGaugeHeight (fun q : PolarPoint => H q.1) σ₀ Q₀))) := by
-  rw [wholePositiveReferenceGauge_principal_component A₁ hgeometry₁ hY hYpos i,
-    wholePositiveReferenceGauge_principal_component A₀ hgeometry₀ hY hYpos i]
+  rw [wholePositiveReferenceGauge_principal_component (H := H) A₁ hgeometry₁ hY hYpos i,
+    wholePositiveReferenceGauge_principal_component (H := H) A₀ hgeometry₀ hY hYpos i]
   exact (finiteFullJetMatch_refl
     (contDiff_radialGaugePrincipalMultiplier hY hH hχ hYpos i).contDiffAt).mul
       (hm.precomp hχ.contDiffAt)

@@ -118,7 +118,7 @@ theorem fixedSpatial (p : ℕ → Seminorm ℝ X) (E W : ι → ℝ)
   intro m a b hab q hq x hx hlow v
   have hd := n04Realization_smoothDirections_D_const_mul
     ((RD m).parameter a b q hq) ((RD m).parameter a b q hq) 0
-    (fun _ _ => by simp only [sub_self, mixedDerivative_fun_zero, zero_mul]) k hx v
+    (fun _ _ => by simp [mixedDerivative]) k hx v
   have hd0 : ((RD m).parameter a b q hq).D k x v = 0 := by
     simpa only [zero_mul] using hd
   rw [hd0, norm_zero]

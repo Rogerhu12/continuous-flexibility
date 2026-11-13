@@ -56,7 +56,7 @@ theorem n04PrincipalDivided_coreData
     (hzero : ∀ m, ¬ P m → ∀ z ∈ U, EqOn (g z m) (fun _ => 0) unitStrip) :
     N04PrincipalDividedCoreData p U E H (fun _ => True) base g (fun _ _ => 0) := by
   classical
-  let I := {m : ι // P m}
+  let I : Type _ := {m : ι // P m}
   let N : I → X → PolarPoint → ℝ := fun m z q => f z m.val q - f₀ m.val q
   let RN : ∀ m : I, MixedJetRegularity U unitStrip (N m) := fun m =>
     { spatial := fun z hz => (h.1 z hz m.val m.property).1.sub (href m.val).1
@@ -157,6 +157,4 @@ theorem n04PrincipalDivided_coreData
         (mul_nonneg (mul_nonneg (ht.choose_spec s).choose_spec.1.le
           (Real.rpow_nonneg (zero_le_one.trans (hE m)) _))
           (hH m)) (oneHighVariationWeight_nonneg _ _ _ _ _)
-
-
 end ContinuousFlexibility.Analysis

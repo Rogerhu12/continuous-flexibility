@@ -74,9 +74,9 @@ theorem exists_referenceGaugePrincipal_difference_extension
         (hG.inverse_smooth.continuous.tendsto p)
     filter_upwards [hg] with q hq
     have hcurrent := congrFun
-      (wholePositiveReferenceGauge_principal_component A hgeometry hY hYpos v) q
+      (wholePositiveReferenceGauge_principal_component (H := H₀) A hgeometry hY hYpos v) q
     have hreference := congrFun
-      (wholePositiveReferenceGauge_principal_component A₀ hgeometry₀ hY hYpos v) q
+      (wholePositiveReferenceGauge_principal_component (H := H₀) A₀ hgeometry₀ hY hYpos v) q
     rw [href] at hreference
     simp only [Function.comp_apply] at hq
     rw [hcurrent, hreference, hq]
