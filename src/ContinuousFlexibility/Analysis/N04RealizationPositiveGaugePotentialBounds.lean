@@ -137,8 +137,8 @@ theorem n04Realization_positiveGaugePotential_oneHigh
       (RA 0) (RA 1) (RA 2) RG.2) hU hΩ
   let RF : ∀ i : Fin 5, MixedJetRegularity U unitStrip
       (fun x => n04RealizationPotentialInputs (A x) (G x) (fun q => (G x q)⁻¹) i) := by
-    intro i
-    fin_cases i
+    refine Fin.cases ?_ (Fin.cases ?_ (Fin.cases ?_
+      (Fin.cases ?_ (Fin.cases ?_ (fun i => Fin.elim0 i)))))
     · exact RG.1
     · exact RA 0
     · exact RA 1
