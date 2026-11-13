@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds
+import ContinuousFlexibility.Analysis.CircleTravelUniformJets
 
 /-!
 # Uniform-domain bounds for the actual inverse-circle operator

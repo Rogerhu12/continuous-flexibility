@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
 import ContinuousFlexibility.Analysis.N01cStateSeminorms
+import ContinuousFlexibility.Analysis.SectorParameterGeometry
 import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 
 /-!

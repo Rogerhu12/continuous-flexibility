@@ -140,6 +140,9 @@ private theorem correctedFirstIntegralCircle_displacement
   exact (circle_decode_add_eval H (hN.singleComponentFlowInverseCircle hS hT m x)
     d m θ).trans (congrArg₂ (fun a b : ℝ => a + b) he (hd.trans hc))
 
+private theorem firstIntegral_displacement_cancel (θ u v d : ℝ) :
+    θ + 0 + ((u - θ) + ((v - u) + d)) = v + d := by ring
+
 include hχrange in
 private theorem correctedFirstIntegralCircle_decode
     (m : ℕ) (x : (StateDirections S × ℝ) × ℝ)
@@ -158,16 +161,20 @@ private theorem correctedFirstIntegralCircle_decode
       (hN.n04NegativeGeometryMinusFirstIntegralCircle hS hT χ m x) m θ =
       (u - θ) + ((v - u) + H.decode x.1.1.val.2.2.2 m v) :=
     correctedFirstIntegralCircle_displacement hN hS hT χ hχrange m x hx hr θ
-  have hleft := hN.2.2.1.sector_leftChart x.1 m v
-  have hinverse := congrFun (correctedFlow_inverse_comp hN hS hT χ hχrange
-    m x hx hr) θ
-  change θ + 0 + H.decode
-    (hN.n04NegativeGeometryMinusFirstIntegralCircle hS hT χ m x) m θ =
-      stateLeftChart S (liftSectorParameter S C x.1).1 m
-        (Function.invFun (returnCorrectedMinusFlow S C χ
-          (liftSectorParameter S C x.1) m x.2) θ)
-  rw [hdecode, hinverse, hleft]
-  ring
+  have hleft : stateLeftChart S (liftSectorParameter S C x.1).1 m v =
+      v + H.decode x.1.1.val.2.2.2 m v :=
+    hN.2.2.1.sector_leftChart x.1 m v
+  have hinverse : Function.invFun (returnCorrectedMinusFlow S C χ
+      (liftSectorParameter S C x.1) m x.2) θ = v :=
+    congrFun (correctedFlow_inverse_comp hN hS hT χ hχrange m x hx hr) θ
+  have hrecover : stateLeftChart S (liftSectorParameter S C x.1).1 m
+      (Function.invFun (returnCorrectedMinusFlow S C χ
+        (liftSectorParameter S C x.1) m x.2) θ) =
+      v + H.decode x.1.1.val.2.2.2 m v :=
+    (congrArg (stateLeftChart S (liftSectorParameter S C x.1).1 m) hinverse).trans hleft
+  exact (congrArg (fun d : ℝ => θ + 0 + d) hdecode).trans
+    ((firstIntegral_displacement_cancel θ u v (H.decode x.1.1.val.2.2.2 m v)).trans
+      hrecover.symm)
 
 /-- One genuine joint tower for the actual first integral on an interior
 physical strip. The cutoff, old flow and inverse are all retained. -/
