@@ -128,7 +128,8 @@ theorem finiteAffine_partition_sum_zero
     OrderedFinpartition.applyOrderedFinpartition_apply] at hcomp
   have hzeroJet : iteratedFDeriv ℝ n (F ∘ G) 0 v = 0 := by
     rw [(heq.iteratedFDeriv ℝ n).self_of_nhds,
-      iteratedFDeriv_const_of_ne (Nat.ne_of_gt hn), ContinuousMultilinearMap.zero_apply]
+      iteratedFDeriv_const_of_ne (Nat.ne_of_gt hn)]
+    rfl
   rw [hzeroJet] at hcomp
   refine (Finset.sum_congr rfl (fun c _ => ?_)).trans hcomp.symm
   have ho := smoothDirections_iteratedFDeriv_finiteAffine J (x, (0 : Y)) M

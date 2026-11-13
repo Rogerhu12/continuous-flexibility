@@ -1,21 +1,14 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseImplicitIdentification
-import ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget
-import ContinuousFlexibility.Analysis.N04RealizationMixedSlotBudget
+import ContinuousFlexibility.Analysis.N04NegativeInverseJetRecurrence
+import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
 
 /-!
-# Exact mixed-slot budgets for the actual implicit inverse
+# Sharp mixed bounds for actual inverse and pulled-height jets
 
-A nonzero state identity in a graph slot comes from a singleton state
-block.  Keeping that restriction saves exactly one spatial derivative
-in each nonzero inverse order.  The outer forward derivative and all
-selected lower inverse factors have total degree
-`angleArity + shift * stateArity - 1`, independently of the number of
-partition blocks.  Positive parameter orders retain one height factor.
-
-The estimates below are for the actual finite multilinear partition
-formula.  In particular the first-order formula and the forcing norm
-bound apply directly to the genuine implicit tower constructed in
-`N04NegativeInverseImplicitIdentification`.
+The original forward pure-slot bounds and the first spatial inverse
+bound imply every positive actual inverse jet. The recurrence has a
+finite polynomial majorant independent of the interpolation scale.
+The exact degree and one positive-parameter height factor survive both
+the inverse induction and composition with the physical height.
 -/
 
 noncomputable section
@@ -25,622 +18,491 @@ namespace ContinuousFlexibility.Analysis
 open Set Function ContinuousFlexibility.Statements
 open scoped Topology ContDiff BigOperators
 
-namespace StateAngleWord
-
-/-- A selected state identity is a singleton parameter block. -/
-def InverseIdentitySelection {n : ℕ} (w : StateAngleWord n)
-    (κ β : Fin n → ℕ) : Prop :=
-  ∀ i, w.isState i = true → κ i = 1 ∧ β i = 0
-
-theorem inverseIdentitySelection_tail_state {n : ℕ} {w : StateAngleWord n}
-    {κ β : Fin (n + 1) → ℕ}
-    (h : (state w).InverseIdentitySelection κ β) :
-    w.InverseIdentitySelection (Fin.tail κ) (Fin.tail β) :=
-  fun i hi => h i.succ hi
-
-theorem inverseIdentitySelection_tail_angle {n : ℕ} {w : StateAngleWord n}
-    {κ β : Fin (n + 1) → ℕ}
-    (h : (angle w).InverseIdentitySelection κ β) :
-    w.InverseIdentitySelection (Fin.tail κ) (Fin.tail β) :=
-  fun i hi => h i.succ hi
-
-/-- All parameter slots are counted once, either by the outer state
-derivative or by one selected inverse factor. -/
-theorem inverseParameterOrder_eq {n : ℕ} (w : StateAngleWord n)
-    (κ β : Fin n → ℕ) (h : w.InverseIdentitySelection κ β) :
-    w.flowParameterOrder κ = ∑ i, κ i := by
-  induction w with
-  | nil =>
-      simp only [flowParameterOrder, stateArity, selectedSum, Fin.sum_univ_zero,
-        Nat.add_zero]
-  | state w ih =>
-      have hhead := (h 0 rfl).1
-      have ht := ih (Fin.tail κ) (Fin.tail β) h.inverseIdentitySelection_tail_state
-      simp only [flowParameterOrder, stateArity, selectedSum] at ht ⊢
-      rw [Fin.sum_univ_succ, hhead]
-      omega
-  | angle w ih =>
-      have ht := ih (Fin.tail κ) (Fin.tail β) h.inverseIdentitySelection_tail_angle
-      simp only [flowParameterOrder, stateArity, selectedSum] at ht ⊢
-      rw [Fin.sum_univ_succ]
-      omega
-
-/-- The unsubtracted degree is additive before the one outer inverse
-derivative is removed.  This also covers an empty outer word. -/
-theorem inverseDegree_add_one {n : ℕ} (w : StateAngleWord n)
-    (κ β : Fin n → ℕ) (shift : ℕ) (hshift : 1 ≤ shift)
-    (hpart : ∀ i, 0 < κ i + β i)
-    (h : w.InverseIdentitySelection κ β) :
-    w.angleArity + shift * w.stateArity +
-        w.selectedSum (fun i => β i + shift * κ i - 1) =
-      (∑ i, β i) + shift * ∑ i, κ i := by
-  induction w with
-  | nil =>
-      simp only [angleArity, stateArity, selectedSum, Fin.sum_univ_zero,
-        Nat.mul_zero, Nat.add_zero]
-  | state w ih =>
-      obtain ⟨hk, hb⟩ := h 0 rfl
-      have ht := ih (Fin.tail κ) (Fin.tail β) (fun i => hpart i.succ)
-        h.inverseIdentitySelection_tail_state
-      simp only [angleArity, stateArity, selectedSum, Fin.tail_def] at ht ⊢
-      simp only [Fin.sum_univ_succ, hk, hb, Nat.zero_add, Nat.mul_add,
-        Nat.mul_one, Fin.tail_def]
-      omega
-  | angle w ih =>
-      have ht := ih (Fin.tail κ) (Fin.tail β) (fun i => hpart i.succ)
-        h.inverseIdentitySelection_tail_angle
-      have hk : κ 0 ≤ shift * κ 0 := by
-        simpa only [Nat.one_mul] using Nat.mul_le_mul_right (κ 0) hshift
-      have hp := hpart 0
-      simp only [angleArity, stateArity, selectedSum, Fin.tail_def] at ht ⊢
-      simp only [Fin.sum_univ_succ, Nat.mul_add, Fin.tail_def]
-      omega
-
-/-- The outer forward derivative and selected lower inverse factors
-have exactly the desired degree, with no loss per spatial block. -/
-theorem inverseDegree_eq {n : ℕ} (w : StateAngleWord n) (hn : 0 < n)
-    (κ β : Fin n → ℕ) (shift : ℕ) (hshift : 1 ≤ shift)
-    (hpart : ∀ i, 0 < κ i + β i)
-    (h : w.InverseIdentitySelection κ β) :
-    (w.angleArity + shift * w.stateArity - 1) +
-        w.selectedSum (fun i => β i + shift * κ i - 1) =
-      (∑ i, β i) + shift * (∑ i, κ i) - 1 := by
-  have he := w.inverseDegree_add_one κ β shift hshift hpart h
-  have hm : w.stateArity ≤ shift * w.stateArity := by
-    simpa only [Nat.one_mul] using Nat.mul_le_mul_right w.stateArity hshift
-  have ha := w.arity_sum
-  omega
-
-theorem selectedProduct_natPower {n : ℕ} (w : StateAngleWord n)
-    (d : Fin n → ℕ) (t : ℝ) :
-    w.selectedProduct (fun i => t ^ d i) = t ^ w.selectedSum d := by
-  induction w with
-  | nil => simp only [selectedProduct, selectedSum, pow_zero]
-  | state w ih => exact ih (Fin.tail d)
-  | angle w ih =>
-      simp only [selectedProduct, selectedSum, Fin.tail_def, ih, pow_add]
-
-/-- Exact degree and exact parameter count survive a genuine ordered
-partition of the original mixed tuple. -/
-theorem partition_inverseDegree_eq {n : ℕ} (input : StateAngleWord n)
-    (hn : 0 < n) (c : _root_.OrderedFinpartition n)
-    (output : StateAngleWord c.length) (shift : ℕ) (hshift : 1 ≤ shift)
-    (h : output.InverseIdentitySelection
-      (fun i => (input.restrict (c.emb i)).stateArity)
-      (fun i => (input.restrict (c.emb i)).angleArity)) :
-    (output.angleArity + shift * output.stateArity - 1) +
-        output.selectedSum (fun i => (input.restrict (c.emb i)).angleArity +
-          shift * (input.restrict (c.emb i)).stateArity - 1) =
-      input.angleArity + shift * input.stateArity - 1 := by
-  have he := output.inverseDegree_eq (c.length_pos hn)
-    (fun i => (input.restrict (c.emb i)).stateArity)
-    (fun i => (input.restrict (c.emb i)).angleArity) shift hshift
-    (fun i => by rw [(input.restrict (c.emb i)).arity_sum]; exact c.partSize_pos i) h
-  simpa only [input.sum_restrict_angleArity c, input.sum_restrict_stateArity c] using he
-
-/-- Extra height factors are absorbed by `L`, but the first positive
-parameter factor remains visible at the exact total parameter order. -/
-theorem inverseHeightPower_le {n : ℕ} (w : StateAngleWord n) (hn : 0 < n)
-    (κ β : Fin n → ℕ) (shift : ℕ) (hshift : 1 ≤ shift)
-    (hpart : ∀ i, 0 < κ i + β i)
-    (h : w.InverseIdentitySelection κ β)
-    {H L t : ℝ} (hH : 0 ≤ H) (hHL : H ≤ L) (hL : 1 ≤ L) (ht : 0 ≤ t) :
-    (parameterHeightWeight H w.stateArity *
-        t ^ (w.angleArity + shift * w.stateArity - 1)) *
-      w.selectedProduct (fun i => parameterHeightWeight H (κ i) *
-        t ^ (β i + shift * κ i - 1)) ≤
-      L ^ n * parameterHeightWeight H (∑ i, κ i) *
-        t ^ ((∑ i, β i) + shift * (∑ i, κ i) - 1) := by
-  have hh := w.selected_heightProduct_le κ hH hHL hL 0
-  simp only [Nat.zero_add, w.inverseParameterOrder_eq κ β h] at hh
-  rw [w.selectedProduct_mul, w.selectedProduct_natPower]
-  calc
-    _ = (parameterHeightWeight H w.stateArity *
-          w.selectedProduct (fun i => parameterHeightWeight H (κ i))) *
-        (t ^ (w.angleArity + shift * w.stateArity - 1) *
-          t ^ w.selectedSum (fun i => β i + shift * κ i - 1)) := by ring
-    _ ≤ (L ^ n * parameterHeightWeight H (∑ i, κ i)) *
-        (t ^ (w.angleArity + shift * w.stateArity - 1) *
-          t ^ w.selectedSum (fun i => β i + shift * κ i - 1)) :=
-      mul_le_mul_of_nonneg_right hh (mul_nonneg (pow_nonneg ht _) (pow_nonneg ht _))
-    _ = _ := by rw [← pow_add, w.inverseDegree_eq hn κ β shift hshift hpart h]
-
-end StateAngleWord
-
-section GraphBounds
-
-variable {E Y Z : Type*}
-  [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
-  [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
-  [NormedAddCommGroup Z] [NormedSpace ℝ Z]
-
-/-- Binary multilinearity separates the state identity from the
-vector-valued inverse factor, preserving the original slot order. -/
-theorem n04NegativeInverse_graph_expansion {n : ℕ}
-    (A : (E × Y) [×n]→L[ℝ] Z) (b : Fin n → E) (y : Fin n → Y) :
-    A (fun i => (b i, y i)) = ∑ s : Finset (Fin n),
-      A (fun i => if i ∈ s then (b i, 0) else (0, y i)) := by
-  classical
-  have he := A.map_add_univ
-    (fun i => (b i, (0 : Y))) (fun i => ((0 : E), y i))
-  have hp : (fun i => (b i, (0 : Y))) + (fun i => ((0 : E), y i)) =
-      fun i => (b i, y i) := by
-    funext i
-    simp only [Pi.add_apply, Prod.mk_add_mk, add_zero, zero_add]
-  rw [hp] at he
-  simpa only [Finset.piecewise] using he
-
-end GraphBounds
-
-section NormedGraphBounds
-
-variable {E Y Z : Type*}
-  [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
-  [NormedAddCommGroup Y] [NormedSpace ℝ Y]
-  [NormedAddCommGroup Z] [NormedSpace ℝ Z]
-
-/-- The estimate for one selected term uses only the forward pure-slot
-estimate and the lower inverse factors.  The first height factor and
-the exact saved spatial degree are retained. -/
-theorem n04NegativeInverse_selected_norm_le {n : ℕ}
-    (A : (E × Y) [×n]→L[ℝ] Z) (hn : 0 < n)
-    (w : StateAngleWord n) (κ β : Fin n → ℕ)
-    (shift : ℕ) (hshift : 1 ≤ shift) (hpart : ∀ i, 0 < κ i + β i)
-    (hselect : w.InverseIdentitySelection κ β)
-    (b : Fin n → E) (y : Fin n → Y)
-    {C M H L t : ℝ} (hC : 0 ≤ C) (hM : 1 ≤ M)
-    (hH : 0 ≤ H) (hHL : H ≤ L) (hL : 1 ≤ L) (ht : 0 ≤ t)
-    (houter : ‖A (fun i => if w.isState i then (b i, 0) else (0, y i))‖ ≤
-      C * parameterHeightWeight H w.stateArity *
-        t ^ (w.angleArity + shift * w.stateArity - 1) *
-          w.selectedProduct (fun i => ‖y i‖))
-    (hlower : ∀ i, ‖y i‖ ≤ M * parameterHeightWeight H (κ i) *
-      t ^ (β i + shift * κ i - 1)) :
-    ‖A (fun i => if w.isState i then (b i, 0) else (0, y i))‖ ≤
-      C * M ^ n * L ^ n * parameterHeightWeight H (∑ i, κ i) *
-        t ^ ((∑ i, β i) + shift * (∑ i, κ i) - 1) := by
-  have hM0 : 0 ≤ M := zero_le_one.trans hM
-  have hL0 : 0 ≤ L := zero_le_one.trans hL
-  have hp := w.selectedProduct_mono (fun i => norm_nonneg (y i)) hlower
-  have hh := w.inverseHeightPower_le hn κ β shift hshift hpart hselect hH hHL hL ht
-  have hm : M ^ w.angleArity ≤ M ^ n :=
-    pow_le_pow_right₀ hM (by have ha := w.arity_sum; omega)
-  have hweight : 0 ≤ parameterHeightWeight H (∑ i, κ i) *
-      t ^ ((∑ i, β i) + shift * (∑ i, κ i) - 1) :=
-    mul_nonneg (parameterHeightWeight_nonneg hH _) (pow_nonneg ht _)
-  calc
-    _ ≤ (C * parameterHeightWeight H w.stateArity *
-        t ^ (w.angleArity + shift * w.stateArity - 1)) *
-      w.selectedProduct (fun i => M * parameterHeightWeight H (κ i) *
-        t ^ (β i + shift * κ i - 1)) :=
-      houter.trans (mul_le_mul_of_nonneg_left hp
-        (mul_nonneg (mul_nonneg hC (parameterHeightWeight_nonneg hH _))
-          (pow_nonneg ht _)))
-    _ = (C * M ^ w.angleArity) *
-        ((parameterHeightWeight H w.stateArity *
-          t ^ (w.angleArity + shift * w.stateArity - 1)) *
-          w.selectedProduct (fun i => parameterHeightWeight H (κ i) *
-            t ^ (β i + shift * κ i - 1))) := by
-      simp only [mul_assoc, w.selectedProduct_mul, w.selectedProduct_const]
-      ring
-    _ ≤ (C * M ^ w.angleArity) * (L ^ n *
-        parameterHeightWeight H (∑ i, κ i) *
-          t ^ ((∑ i, β i) + shift * (∑ i, κ i) - 1)) :=
-      mul_le_mul_of_nonneg_left hh (mul_nonneg hC (pow_nonneg hM0 _))
-    _ ≤ (C * M ^ n) * (L ^ n * parameterHeightWeight H (∑ i, κ i) *
-        t ^ ((∑ i, β i) + shift * (∑ i, κ i) - 1)) :=
-      mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hm hC)
-        (by simpa only [mul_assoc] using mul_nonneg (pow_nonneg hL0 n) hweight)
-    _ = _ := by ring
-
-/-- A genuine graph partition is controlled by the forward pure-slot
-estimate.  Choices using a nonsingleton state identity vanish exactly;
-all remaining choices satisfy the sharp inverse degree budget. -/
-theorem n04NegativeInverse_graph_norm_le {n : ℕ}
-    (A : (E × Y) [×n]→L[ℝ] Z) (hn : 0 < n)
-    (κ β : Fin n → ℕ) (shift : ℕ) (hshift : 1 ≤ shift)
-    (hpart : ∀ i, 0 < κ i + β i)
-    (b : Fin n → E) (y : Fin n → Y)
-    (hidentity : ∀ i, ¬ (κ i = 1 ∧ β i = 0) → b i = 0)
-    {C M H L t : ℝ} (hC : 0 ≤ C) (hM : 1 ≤ M)
-    (hH : 0 ≤ H) (hHL : H ≤ L) (hL : 1 ≤ L) (ht : 0 ≤ t)
-    (houter : ∀ w : StateAngleWord n, w.InverseIdentitySelection κ β →
-      ‖A (fun i => if w.isState i then (b i, 0) else (0, y i))‖ ≤
-        C * parameterHeightWeight H w.stateArity *
-          t ^ (w.angleArity + shift * w.stateArity - 1) *
-            w.selectedProduct (fun i => ‖y i‖))
-    (hlower : ∀ i, ‖y i‖ ≤ M * parameterHeightWeight H (κ i) *
-      t ^ (β i + shift * κ i - 1)) :
-    ‖A (fun i => (b i, y i))‖ ≤
-      (Fintype.card (Finset (Fin n)) : ℝ) *
-        (C * M ^ n * L ^ n * parameterHeightWeight H (∑ i, κ i) *
-          t ^ ((∑ i, β i) + shift * (∑ i, κ i) - 1)) := by
-  classical
-  let B : ℝ := C * M ^ n * L ^ n * parameterHeightWeight H (∑ i, κ i) *
-    t ^ ((∑ i, β i) + shift * (∑ i, κ i) - 1)
-  have hB : 0 ≤ B := by
-    dsimp only [B]
-    exact mul_nonneg (mul_nonneg (mul_nonneg (mul_nonneg hC
-      (pow_nonneg (zero_le_one.trans hM) _)) (pow_nonneg (zero_le_one.trans hL) _))
-      (parameterHeightWeight_nonneg hH _)) (pow_nonneg ht _)
-  have hterm (s : Finset (Fin n)) :
-      ‖A (fun i => if i ∈ s then (b i, 0) else (0, y i))‖ ≤ B := by
-    let w : StateAngleWord n := StateAngleWord.ofBool (fun i => decide (i ∈ s))
-    have hw (i : Fin n) : w.isState i = decide (i ∈ s) := by
-      simp only [w, StateAngleWord.isState_ofBool]
-    have he : (fun i => if i ∈ s then (b i, (0 : Y)) else (0, y i)) =
-        fun i => if w.isState i then (b i, 0) else (0, y i) := by
-      funext i
-      simp only [hw, decide_eq_true_eq]
-    rw [he]
-    by_cases hs : w.InverseIdentitySelection κ β
-    · exact n04NegativeInverse_selected_norm_le A hn w κ β shift hshift hpart hs b y
-        hC hM hH hHL hL ht (houter w hs) hlower
-    · obtain ⟨i, hi⟩ := not_forall.mp hs
-      have his : w.isState i = true := by
-        by_contra his
-        exact hi (fun h => False.elim (his h))
-      have hbad : ¬ (κ i = 1 ∧ β i = 0) := fun hb => hi (fun _ => hb)
-      have hz := A.map_coord_zero i
-        (show (if w.isState i then (b i, (0 : Y)) else (0, y i)) = 0 by
-          rw [his, if_true, hidentity i hbad]
-          rfl)
-      rw [hz, norm_zero]
-      exact hB
-  rw [n04NegativeInverse_graph_expansion]
-  calc
-    _ ≤ ∑ s : Finset (Fin n), ‖A (fun i => if i ∈ s then (b i, 0) else (0, y i))‖ :=
-      norm_sum_le _ _
-    _ ≤ ∑ _s : Finset (Fin n), B := Finset.sum_le_sum (fun s _ => hterm s)
-    _ = _ := by simp only [Finset.sum_const, Finset.card_univ, nsmul_eq_mul, B]
-
-end NormedGraphBounds
-
-namespace N04NegativeGeometryImplicitJet
-
-variable {E Y : Type*}
-  [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
-  [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
-  [NormedAddCommGroup Y] [NormedSpace ℝ Y]
-  {U : Set E} {V : Set Y} {H : E × Y → Y} {g : E → Y}
-
-/-- The inverse tower's first derivative has no lower inverse jet.
-This is the exact source of the positive-parameter height factor. -/
-theorem tower_one_apply (J : SmoothDirections (U ×ˢ V) H)
-    (hg : ContinuousOn g U) (hmap : MapsTo g U V)
-    (A : E → Y →L[ℝ] Y) (hA : ContinuousOn A U)
-    (x : E) (v : Fin 1 → E) :
-    (tower J hg hmap A hA 1).value x v =
-      -A x (J.D 1 (x, g x) (fun _ : Fin 1 => (v 0, 0))) := by
-  rw [tower_succ_apply, forcing_apply]
-  rw [Fintype.sum_unique]
-  congr 2
-  change J.D 1 (x, g x)
-    (fun i : Fin 1 => graph 1
-      ((lower (fun k (_ : k < 1) => tower J hg hmap A hA k) 1).value x)
-      (v ∘ (default : OrderedFinpartition 1).emb i)) = _
-  rw [lower_self]
-  congr 1
-  funext i
-  change (v ((default : OrderedFinpartition 1).emb i 0), (0 : Y)) = _
-  congr 1
-  exact congrArg v (Subsingleton.elim _ _)
-
-/-- A finite majorant for the actual recursively constructed forcing.
-Only strictly lower solution jets enter the summands. -/
-theorem tower_succ_norm_le (J : SmoothDirections (U ×ˢ V) H)
-    (hg : ContinuousOn g U) (hmap : MapsTo g U V)
-    (A : E → Y →L[ℝ] Y) (hA : ContinuousOn A U)
-    (n : ℕ) (x : E) (v : Fin (n + 1) → E)
-    (B : OrderedFinpartition (n + 1) → ℝ)
-    (hB : ∀ c : OrderedFinpartition (n + 1),
-      ‖J.D c.length (x, g x)
-        (fun i => graph (c.partSize i)
-          ((lower (fun k (_ : k < n + 1) => tower J hg hmap A hA k)
-            (c.partSize i)).value x) (v ∘ c.emb i))‖ ≤ B c) :
-    ‖(tower J hg hmap A hA (n + 1)).value x v‖ ≤
-      ‖A x‖ * ∑ c : OrderedFinpartition (n + 1), B c := by
-  rw [tower_succ_apply, norm_neg]
-  refine ((A x).le_opNorm _).trans ?_
-  apply mul_le_mul_of_nonneg_left _ (norm_nonneg _)
-  rw [forcing_apply]
-  exact (norm_sum_le _ _).trans (Finset.sum_le_sum (fun c _ => hB c))
-
-variable [FiniteDimensional ℝ Y]
-
-/-- Any genuine solution tower agrees with the constructed implicit
-candidate, so quantitative estimates of the candidate apply to the
-actual map supplied by the geometric inverse theorem. -/
-theorem tower_eq_genuine (J : SmoothDirections (U ×ˢ V) H)
-    (K : SmoothDirections U g) (hmap : MapsTo g U V)
-    (A : E → Y →L[ℝ] Y) (hA : ContinuousOn A U)
-    (hleft : ∀ x ∈ U, ∀ y : Y,
-      A x (J.D 1 (x, g x) (fun _ : Fin 1 => (0, y))) = y)
-    (hzero : ∀ x ∈ U, H (x, g x) = 0)
-    (n : ℕ) (x : E) (hx : x ∈ U) :
-    (tower J K.hasProjectiveJetsOn.continuousOn hmap A hA n).value x = K.D n x := by
-  have hs : ∀ m : ℕ, ∀ x ∈ U, ∀ L : (Fin m → ℝ) →L[ℝ] E,
-      ContDiffAt ℝ ∞ (fun q => g (x + L q)) 0 := by
-    intro m x hx L
-    apply (smoothDirections_contDiffOn_finiteAffine K x L).contDiffAt
-    apply (K.open_domain.preimage (continuous_const.add L.continuous)).mem_nhds
-    change x + L 0 ∈ U
-    simpa only [map_zero, add_zero] using hx
-  exact (smoothDirections J K.open_domain K.hasProjectiveJetsOn.continuousOn hmap
-    A hA hleft hzero hs).unique K n x hx
-
-end N04NegativeGeometryImplicitJet
-
 namespace N04NegativeInverseJet
-
-section StateIdentity
-
-variable {E Y : Type*}
-  [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
-  [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
-
-/-- The positive graph jet of the unchanged state coordinate vanishes
-unless its block consists of one original parameter direction. -/
-theorem stateIdentity_eq_zero {n : ℕ} (hn : 0 < n)
-    (w : StateAngleWord n) (p : E × Y) (v : Fin n → E × Y)
-    (hpure : ∀ i, w.isState i = false → (v i).1 = 0)
-    (h : ¬ (w.stateArity = 1 ∧ w.angleArity = 0)) :
-    continuousLinearJets (ContinuousLinearMap.fst ℝ E Y) n p v = 0 := by
-  cases n with
-  | zero => omega
-  | succ n =>
-    cases n with
-    | zero =>
-      change (v 0).1 = 0
-      apply hpure 0
-      cases hi : w.isState 0 with
-      | false => rfl
-      | true =>
-          apply False.elim
-          apply h
-          constructor <;>
-            simp only [StateAngleWord.stateArity_eq_sum, StateAngleWord.angleArity_eq_sum,
-              Fin.sum_univ_one, hi, if_true]
-    | succ n => rfl
-
-theorem stateIdentity_seminorm_le (q : Seminorm ℝ E) {n : ℕ} (hn : 0 < n)
-    (p : E × Y) (v : Fin n → E × Y) {R : ℝ} (hR : 0 ≤ R)
-    (hv : ∀ i, q (v i).1 ≤ R) :
-    q (continuousLinearJets (ContinuousLinearMap.fst ℝ E Y) n p v) ≤ R := by
-  cases n with
-  | zero => omega
-  | succ n =>
-    cases n with
-    | zero => exact hv 0
-    | succ n => simpa only [continuousLinearJets, ContinuousMultilinearMap.zero_apply,
-        map_zero] using hR
-
-end StateIdentity
 
 section Residual
 
 variable {E Y : Type*}
   [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
   [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
-  [NormedAddCommGroup Y] [NormedSpace ℝ Y]
+  [NormedAddCommGroup Y] [NormedSpace ℝ Y] [FiniteDimensional ℝ Y]
   {U : Set E} {V W : Set Y} {F G : E × Y → Y}
 
-def forwardInput : ((E × Y) × Y) →L[ℝ] E × Y :=
-  ((ContinuousLinearMap.fst ℝ E Y).comp
-    (ContinuousLinearMap.fst ℝ (E × Y) Y)).prod
-      (ContinuousLinearMap.snd ℝ (E × Y) Y)
-
-def targetInput : ((E × Y) × Y) →L[ℝ] Y :=
-  (ContinuousLinearMap.snd ℝ E Y).comp (ContinuousLinearMap.fst ℝ (E × Y) Y)
-
-/-- The residual uses the original forward tower and an exact linear
-target coordinate.  Its higher target derivatives are genuinely zero. -/
-def residualTower (J : SmoothDirections (U ×ˢ V) F)
-    (hU : IsOpen U) (hV : IsOpen V) (hW : IsOpen W) :
-    SmoothDirections ((U ×ˢ W) ×ˢ V)
-      (fun p : (E × Y) × Y => F (p.1.1, p.2) - p.1.2) := by
-  let P := J.compLinear (forwardInput (E := E) (Y := Y)) ((hU.prod hW).prod hV)
-    (fun p hp => ⟨hp.1.1, hp.2⟩)
-  let Q := smoothDirectionsOfJets ((hU.prod hW).prod hV)
-    (continuousLinearJets (targetInput (E := E) (Y := Y)))
-    (hasProjectiveJetsOn_continuousLinear (targetInput (E := E) (Y := Y)) _)
-  let S : (Y × Y) →L[ℝ] Y :=
-    ContinuousLinearMap.fst ℝ Y Y - ContinuousLinearMap.snd ℝ Y Y
-  exact (smoothDirections_postcompCLM (smoothDirectionsProd P Q) S).congrOn
-    (fun p _ => rfl)
-
-theorem residualTower_D_apply (J : SmoothDirections (U ×ˢ V) F)
-    (hU : IsOpen U) (hV : IsOpen V) (hW : IsOpen W)
-    (n : ℕ) (p : (E × Y) × Y) (v : Fin n → (E × Y) × Y) :
-    (residualTower J hU hV hW).D n p v =
-      J.D n (p.1.1, p.2) (fun i => ((v i).1.1, (v i).2)) -
-        continuousLinearJets (targetInput (E := E) (Y := Y)) n p v := by
-  change J.D n (0 + forwardInput p) (fun i => forwardInput (v i)) -
-    continuousLinearJets targetInput n p v = _
-  rw [zero_add]
-  rfl
-
-/-- Projecting the implicit graph forgets only the target identity;
-the original state coordinate remains an exact linear jet. -/
-theorem forwardInput_graph {n : ℕ} (hn : 0 < n)
-    (B : (E × Y) [×n]→L[ℝ] Y) (p : E × Y) (v : Fin n → E × Y) :
-    forwardInput (N04NegativeGeometryImplicitJet.graph n B v) =
-      (continuousLinearJets (ContinuousLinearMap.fst ℝ E Y) n p v, B v) := by
-  cases n with
-  | zero => omega
-  | succ n =>
-    cases n with
-    | zero =>
-      change ((v 0).1 + 0, (0 : Y) + B v) = ((v 0).1, B v)
-      simp only [add_zero, zero_add]
-    | succ n =>
-      change ((0 : E) + 0, (0 : Y) + B v) = (0, B v)
-      simp only [zero_add]
-
-theorem targetInput_graph_eq_zero {n : ℕ} (hn : 2 ≤ n)
-    (B : (E × Y) [×n]→L[ℝ] Y) (v : Fin n → E × Y) :
-    targetInput (N04NegativeGeometryImplicitJet.graph n B v) = 0 := by
-  obtain ⟨m, rfl⟩ := Nat.exists_eq_add_of_le hn
-  rw [Nat.add_comm]
-  change (0 : Y) + 0 = 0
-  exact zero_add 0
-
-theorem continuousLinearJets_eq_zero {X Z : Type*}
-    [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
-    [TopologicalSpace Z] [AddCommGroup Z] [Module ℝ Z]
-    (L : X →L[ℝ] Z) {n : ℕ} (hn : 2 ≤ n) (x : X) :
-    continuousLinearJets L n x = 0 := by
-  obtain ⟨m, rfl⟩ := Nat.exists_eq_add_of_le hn
-  rw [Nat.add_comm]
-  rfl
-
-def lowerJet (K : SmoothDirections (U ×ˢ W) G) (N : ℕ) (p : E × Y) (k : ℕ) :
-    (E × Y) [×k]→L[ℝ] Y :=
-  if k < N then K.D k p else 0
-
-theorem lowerJet_of_lt (K : SmoothDirections (U ×ˢ W) G)
-    {N k : ℕ} (hk : k < N) (p : E × Y) :
-    lowerJet K N p k = K.D k p := by simp only [lowerJet, if_pos hk]
-
-@[simp] theorem lowerJet_self (K : SmoothDirections (U ×ˢ W) G) (N : ℕ) (p : E × Y) :
-    lowerJet K N p N = 0 := by simp only [lowerJet, lt_self_iff_false, if_false]
-
-/-- At order at least two, every residual partition is exactly the
-corresponding original forward partition.  The affine target has no
-contribution, including at the unique highest block. -/
-theorem residual_partition_apply (J : SmoothDirections (U ×ˢ V) F)
+/-- One step of the sharp mixed inverse estimate. The forward estimate
+uses at most the original parameter prefix. The only inverse estimates
+assumed here have strictly smaller total order. -/
+theorem higher_norm_le (J : SmoothDirections (U ×ˢ V) F)
     (K : SmoothDirections (U ×ˢ W) G)
     (hU : IsOpen U) (hV : IsOpen V) (hW : IsOpen W)
-    {N : ℕ} (hN : 2 ≤ N) (p : E × Y) (v : Fin N → E × Y)
-    (c : OrderedFinpartition N) :
-    (residualTower J hU hV hW).D c.length (p, G p)
-        (fun i => N04NegativeGeometryImplicitJet.graph (c.partSize i)
-          (lowerJet K N p (c.partSize i)) (v ∘ c.emb i)) =
-      J.D c.length (p.1, G p)
-        (fun i =>
-          (continuousLinearJets (ContinuousLinearMap.fst ℝ E Y) (c.partSize i) p
-            (v ∘ c.emb i), lowerJet K N p (c.partSize i) (v ∘ c.emb i))) := by
-  have hn : 0 < N := by omega
-  have ht : continuousLinearJets (targetInput (E := E) (Y := Y)) c.length (p, G p)
-      (fun i => N04NegativeGeometryImplicitJet.graph (c.partSize i)
-        (lowerJet K N p (c.partSize i)) (v ∘ c.emb i)) = 0 := by
-    by_cases hl : c.length = 1
-    · obtain rfl := OrderedFinpartition.eq_singleBlock_of_length_eq_one c hn hl
-      change targetInput (N04NegativeGeometryImplicitJet.graph N
-        (lowerJet K N p N) v) = 0
-      exact targetInput_graph_eq_zero hN _ _
-    · have hlen : 2 ≤ c.length := by have hp := c.length_pos hn; omega
-      rw [continuousLinearJets_eq_zero _ hlen]
+    (hmap : MapsTo G (U ×ˢ W) V)
+    (A : (E × Y) → Y →L[ℝ] Y) (hA : ContinuousOn A (U ×ˢ W))
+    (hleft : ∀ p ∈ U ×ˢ W, ∀ y : Y,
+      A p (J.D 1 (p.1, G p) (fun _ : Fin 1 => (0, y))) = y)
+    (hright : ∀ p ∈ U ×ˢ W, F (p.1, G p) = p.2)
+    (low high : Seminorm ℝ E) (n prefix shift : ℕ) (hshift : 1 ≤ shift)
+    (p : E × Y) (hp : p ∈ U ×ˢ W)
+    {C M H L R t : ℝ} (hC : 0 ≤ C) (hM : 1 ≤ M)
+    (hH : 0 ≤ H) (hHL : H ≤ L) (hL : 1 ≤ L) (hR : 0 ≤ R) (ht : 0 ≤ t)
+    (hforward : ∀ j : ℕ, 0 < j → j ≤ n + 2 → ∀ w : StateAngleWord j,
+      w.stateArity ≤ prefix → ∀ b : Fin j → E, ∀ y : Fin j → Y,
+      (∀ i, low (b i) ≤ 1) → (∀ i, high (b i) ≤ R) →
+      ‖J.D j (p.1, G p) (fun i => if w.isState i then (b i, 0) else (0, y i))‖ ≤
+        C * parameterHeightWeight H w.stateArity *
+          t ^ (w.angleArity + shift * w.stateArity - 1) *
+            w.selectedProduct (fun i => ‖y i‖))
+    (hlower : ∀ j : ℕ, 0 < j → j < n + 2 → ∀ w : StateAngleWord j,
+      w.stateArity ≤ prefix → ∀ v : Fin j → E × Y,
+      (∀ i, low (v i).1 ≤ 1) → (∀ i, high (v i).1 ≤ R) →
+      (∀ i, ‖(v i).2‖ ≤ 1) →
+      (∀ i, w.isState i = false → (v i).1 = 0) →
+      (∀ i, w.isState i = true → (v i).2 = 0) →
+      ‖K.D j p v‖ ≤ M * parameterHeightWeight H w.stateArity *
+        t ^ (w.angleArity + shift * w.stateArity - 1))
+    (w : StateAngleWord (n + 2)) (hw : w.stateArity ≤ prefix)
+    (v : Fin (n + 2) → E × Y)
+    (hlow : ∀ i, low (v i).1 ≤ 1) (hhigh : ∀ i, high (v i).1 ≤ R)
+    (hphysical : ∀ i, ‖(v i).2‖ ≤ 1)
+    (hstate : ∀ i, w.isState i = false → (v i).1 = 0)
+    (hspatial : ∀ i, w.isState i = true → (v i).2 = 0) :
+    ‖K.D (n + 2) p v‖ ≤
+      (‖A p‖ * ∑ c : OrderedFinpartition (n + 2),
+        (Fintype.card (Finset (Fin c.length)) : ℝ) * (C * M ^ c.length * L ^ c.length)) *
+          parameterHeightWeight H w.stateArity *
+            t ^ (w.angleArity + shift * w.stateArity - 1) := by
+  classical
+  let κ (c : OrderedFinpartition (n + 2)) (i : Fin c.length) :=
+    (w.restrict (c.emb i)).stateArity
+  let β (c : OrderedFinpartition (n + 2)) (i : Fin c.length) :=
+    (w.restrict (c.emb i)).angleArity
+  let b (c : OrderedFinpartition (n + 2)) (i : Fin c.length) :=
+    continuousLinearJets (ContinuousLinearMap.fst ℝ E Y) (c.partSize i) p (v ∘ c.emb i)
+  let y (c : OrderedFinpartition (n + 2)) (i : Fin c.length) :=
+    lowerJet K (n + 2) p (c.partSize i) (v ∘ c.emb i)
+  have hterm (c : OrderedFinpartition (n + 2)) :
+      ‖J.D c.length (p.1, G p) (fun i => (b c i, y c i))‖ ≤
+        ((Fintype.card (Finset (Fin c.length)) : ℝ) *
+          (C * M ^ c.length * L ^ c.length)) * parameterHeightWeight H w.stateArity *
+            t ^ (w.angleArity + shift * w.stateArity - 1) := by
+    have hpart (i : Fin c.length) : 0 < κ c i + β c i := by
+      rw [show κ c i + β c i = c.partSize i from (w.restrict (c.emb i)).arity_sum]
+      exact c.partSize_pos i
+    have hid (i : Fin c.length) (hi : ¬ (κ c i = 1 ∧ β c i = 0)) : b c i = 0 :=
+      stateIdentity_eq_zero (c.partSize_pos i) (w.restrict (c.emb i)) p (v ∘ c.emb i)
+        (fun j hj => hstate _ (by simpa only [StateAngleWord.isState_restrict] using hj)) hi
+    have hl (i : Fin c.length) : ‖y c i‖ ≤ M * parameterHeightWeight H (κ c i) *
+        t ^ (β c i + shift * κ c i - 1) := by
+      by_cases hi : c.partSize i < n + 2
+      · have hk : κ c i ≤ prefix :=
+          (Finset.single_le_sum (fun j _ => Nat.zero_le (κ c j)) (Finset.mem_univ i)).trans
+            ((w.sum_restrict_stateArity c).le.trans hw)
+        dsimp only [y]
+        rw [lowerJet_of_lt K hi]
+        exact hlower (c.partSize i) (c.partSize_pos i) hi (w.restrict (c.emb i)) hk _
+          (fun j => hlow _) (fun j => hhigh _) (fun j => hphysical _)
+          (fun j hj => hstate _ (by simpa only [StateAngleWord.isState_restrict] using hj))
+          (fun j hj => hspatial _ (by simpa only [StateAngleWord.isState_restrict] using hj))
+      · simp only [y, lowerJet, if_neg hi, ContinuousMultilinearMap.zero_apply, norm_zero]
+        exact mul_nonneg (mul_nonneg (zero_le_one.trans hM)
+          (parameterHeightWeight_nonneg hH _)) (pow_nonneg ht _)
+    have ho (output : StateAngleWord c.length)
+        (hs : output.InverseIdentitySelection (κ c) (β c)) :
+        ‖J.D c.length (p.1, G p)
+          (fun i => if output.isState i then (b c i, 0) else (0, y c i))‖ ≤
+          C * parameterHeightWeight H output.stateArity *
+            t ^ (output.angleArity + shift * output.stateArity - 1) *
+              output.selectedProduct (fun i => ‖y c i‖) := by
+      have hk : output.stateArity ≤ prefix := by
+        have hle : output.stateArity ≤ output.flowParameterOrder (κ c) := by
+          unfold StateAngleWord.flowParameterOrder
+          omega
+        rw [output.inverseParameterOrder_eq (κ c) (β c) hs] at hle
+        exact (hle.trans (w.sum_restrict_stateArity c).le).trans hw
+      exact hforward c.length (c.length_pos (by omega)) c.length_le output hk (b c) (y c)
+        (fun i => stateIdentity_seminorm_le low (c.partSize_pos i) p (v ∘ c.emb i)
+          zero_le_one (fun j => hlow _))
+        (fun i => stateIdentity_seminorm_le high (c.partSize_pos i) p (v ∘ c.emb i)
+          hR (fun j => hhigh _))
+    have hh := n04NegativeInverse_graph_norm_le (J.D c.length (p.1, G p))
+      (c.length_pos (by omega)) (κ c) (β c) shift hshift hpart (b c) (y c) hid
+      hC hM hH hHL hL ht ho hl
+    simpa only [κ, β, w.sum_restrict_stateArity c, w.sum_restrict_angleArity c,
+      mul_assoc] using hh
+  rw [higher_apply J K hU hV hW hmap A hA hleft hright n p hp v, norm_neg]
+  refine ((A p).le_opNorm _).trans ?_
+  calc
+    _ ≤ ‖A p‖ * ∑ c : OrderedFinpartition (n + 2),
+        (((Fintype.card (Finset (Fin c.length)) : ℝ) *
+          (C * M ^ c.length * L ^ c.length)) * parameterHeightWeight H w.stateArity *
+            t ^ (w.angleArity + shift * w.stateArity - 1)) :=
+      mul_le_mul_of_nonneg_left
+        ((norm_sum_le _ _).trans (Finset.sum_le_sum (fun c _ => hterm c))) (norm_nonneg _)
+    _ = _ := by rw [← Finset.sum_mul, ← Finset.sum_mul]; ring
+
+/-- The first inverse order starts the induction with a height factor
+exactly in parameter slots and with degree zero in spatial slots. -/
+theorem first_norm_le (J : SmoothDirections (U ×ˢ V) F)
+    (K : SmoothDirections (U ×ˢ W) G)
+    (hU : IsOpen U) (hV : IsOpen V) (hW : IsOpen W)
+    (hmap : MapsTo G (U ×ˢ W) V)
+    (A : (E × Y) → Y →L[ℝ] Y) (hA : ContinuousOn A (U ×ˢ W))
+    (hleft : ∀ p ∈ U ×ˢ W, ∀ y : Y,
+      A p (J.D 1 (p.1, G p) (fun _ : Fin 1 => (0, y))) = y)
+    (hright : ∀ p ∈ U ×ˢ W, F (p.1, G p) = p.2)
+    (low high : Seminorm ℝ E) (prefix shift : ℕ)
+    (p : E × Y) (hp : p ∈ U ×ˢ W)
+    {a C H R t : ℝ} (ha : 0 ≤ a) (hC : 0 ≤ C) (hH : 0 ≤ H) (ht : 0 ≤ t)
+    (hApoint : ‖A p‖ ≤ a)
+    (hparameter : 1 ≤ prefix → ∀ b : E, low b ≤ 1 → high b ≤ R →
+      ‖J.D 1 (p.1, G p) (fun _ : Fin 1 => (b, 0))‖ ≤ C * H * t ^ (shift - 1))
+    (w : StateAngleWord 1) (hw : w.stateArity ≤ prefix)
+    (v : Fin 1 → E × Y)
+    (hlow : ∀ i, low (v i).1 ≤ 1) (hhigh : ∀ i, high (v i).1 ≤ R)
+    (hphysical : ∀ i, ‖(v i).2‖ ≤ 1)
+    (hstate : ∀ i, w.isState i = false → (v i).1 = 0)
+    (hspatial : ∀ i, w.isState i = true → (v i).2 = 0) :
+    ‖K.D 1 p v‖ ≤ (a * (C + 1)) * parameterHeightWeight H w.stateArity *
+      t ^ (w.angleArity + shift * w.stateArity - 1) := by
+  cases w with
+  | state w =>
+    cases w
+    have hk : 1 ≤ prefix := hw
+    have hf := hparameter hk (v 0).1 (hlow 0) (hhigh 0)
+    have he : K.D 1 p v = -A p (J.D 1 (p.1, G p)
+        (fun _ : Fin 1 => ((v 0).1, 0))) := by
+      rw [first_apply J K hU hV hW hmap A hA hleft hright p hp v,
+        hspatial 0 rfl, zero_sub, map_neg]
+    rw [he, norm_neg]
+    have hn := ((A p).le_opNorm _).trans (mul_le_mul hApoint hf (norm_nonneg _) ha)
+    have hfactor : a * C ≤ a * (C + 1) := mul_le_mul_of_nonneg_left (by linarith) ha
+    have hext := mul_le_mul_of_nonneg_right hfactor
+      (mul_nonneg hH (pow_nonneg ht (shift - 1)))
+    simpa only [StateAngleWord.stateArity, StateAngleWord.angleArity,
+      parameterHeightWeight, Nat.zero_add, Nat.mul_one, ite_false, Nat.one_ne_zero,
+      mul_assoc] using hn.trans (by simpa only [mul_assoc] using hext)
+  | angle w =>
+    cases w
+    have hz : J.D 1 (p.1, G p) (fun _ : Fin 1 => ((v 0).1, (0 : Y))) = 0 := by
+      apply (J.D 1 (p.1, G p)).map_coord_zero (0 : Fin 1)
+      rw [hstate 0 rfl]
       rfl
-  rw [residualTower_D_apply, ht, sub_zero]
-  apply congrArg (J.D c.length (p.1, G p))
-  funext i
-  exact forwardInput_graph (c.partSize_pos i) _ p _
-
-variable [FiniteDimensional ℝ Y]
-
-/-- The residual construction uses precisely the given inverse of the
-spatial differential of the original forward chart. -/
-theorem residual_left (J : SmoothDirections (U ×ˢ V) F)
-    (hU : IsOpen U) (hV : IsOpen V) (hW : IsOpen W)
-    (A : (E × Y) → Y →L[ℝ] Y)
-    (hleft : ∀ p ∈ U ×ˢ W, ∀ y : Y,
-      A p (J.D 1 (p.1, G p) (fun _ : Fin 1 => (0, y))) = y) :
-    ∀ p ∈ U ×ˢ W, ∀ y : Y,
-      A p ((residualTower J hU hV hW).D 1 (p, G p)
-        (fun _ : Fin 1 => (0, y))) = y := by
-  intro p hp y
-  rw [residualTower_D_apply]
-  change A p (J.D 1 (p.1, G p) (fun _ : Fin 1 => (0, y)) - 0) = y
-  rw [sub_zero]
-  exact hleft p hp y
-
-/-- Exact first-order inverse formula, including the target direction.
-Its pure parameter specialization has the forward height factor. -/
-theorem first_apply (J : SmoothDirections (U ×ˢ V) F)
-    (K : SmoothDirections (U ×ˢ W) G)
-    (hU : IsOpen U) (hV : IsOpen V) (hW : IsOpen W)
-    (hmap : MapsTo G (U ×ˢ W) V)
-    (A : (E × Y) → Y →L[ℝ] Y) (hA : ContinuousOn A (U ×ˢ W))
-    (hleft : ∀ p ∈ U ×ˢ W, ∀ y : Y,
-      A p (J.D 1 (p.1, G p) (fun _ : Fin 1 => (0, y))) = y)
-    (hright : ∀ p ∈ U ×ˢ W, F (p.1, G p) = p.2)
-    (p : E × Y) (hp : p ∈ U ×ˢ W) (v : Fin 1 → E × Y) :
-    K.D 1 p v = A p ((v 0).2 -
-      J.D 1 (p.1, G p) (fun _ : Fin 1 => ((v 0).1, 0))) := by
-  let H := residualTower J hU hV hW
-  have hzero : ∀ p ∈ U ×ˢ W, F (p.1, G p) - p.2 = 0 :=
-    fun p hp => sub_eq_zero.mpr (hright p hp)
-  rw [← N04NegativeGeometryImplicitJet.tower_eq_genuine H K hmap A hA
-    (residual_left J hU hV hW A hleft) hzero 1 p hp,
-    N04NegativeGeometryImplicitJet.tower_one_apply]
-  rw [residualTower_D_apply]
-  change -A p (J.D 1 (p.1, G p) (fun _ : Fin 1 => ((v 0).1, 0)) - (v 0).2) = _
-  rw [← map_neg, neg_sub]
-
-/-- The actual inverse obeys the forward-chart recurrence at every
-order at least two. Every selected inverse jet has strictly lower
-order; the highest inverse block has been replaced by zero. -/
-theorem higher_apply (J : SmoothDirections (U ×ˢ V) F)
-    (K : SmoothDirections (U ×ˢ W) G)
-    (hU : IsOpen U) (hV : IsOpen V) (hW : IsOpen W)
-    (hmap : MapsTo G (U ×ˢ W) V)
-    (A : (E × Y) → Y →L[ℝ] Y) (hA : ContinuousOn A (U ×ˢ W))
-    (hleft : ∀ p ∈ U ×ˢ W, ∀ y : Y,
-      A p (J.D 1 (p.1, G p) (fun _ : Fin 1 => (0, y))) = y)
-    (hright : ∀ p ∈ U ×ˢ W, F (p.1, G p) = p.2)
-    (n : ℕ) (p : E × Y) (hp : p ∈ U ×ˢ W) (v : Fin (n + 2) → E × Y) :
-    K.D (n + 2) p v = -A p (∑ c : OrderedFinpartition (n + 2),
-      J.D c.length (p.1, G p)
-        (fun i =>
-          (continuousLinearJets (ContinuousLinearMap.fst ℝ E Y) (c.partSize i) p
-            (v ∘ c.emb i), lowerJet K (n + 2) p (c.partSize i) (v ∘ c.emb i)))) := by
-  let H := residualTower J hU hV hW
-  let hg := K.hasProjectiveJetsOn.continuousOn
-  have hzero : ∀ p ∈ U ×ˢ W, F (p.1, G p) - p.2 = 0 :=
-    fun p hp => sub_eq_zero.mpr (hright p hp)
-  have he (j : ℕ) :
-      (N04NegativeGeometryImplicitJet.tower H hg hmap A hA j).value p = K.D j p :=
-    N04NegativeGeometryImplicitJet.tower_eq_genuine H K hmap A hA
-      (residual_left J hU hV hW A hleft) hzero j p hp
-  have hlo (j : ℕ) :
-      (N04NegativeGeometryImplicitJet.lower
-        (fun k (_ : k < n + 2) => N04NegativeGeometryImplicitJet.tower H hg hmap A hA k)
-          j).value p = lowerJet K (n + 2) p j := by
-    by_cases hj : j < n + 2
-    · rw [N04NegativeGeometryImplicitJet.lower_of_lt _ hj, lowerJet_of_lt K hj]
-      exact he j
-    · simp only [N04NegativeGeometryImplicitJet.lower, dif_neg hj,
-        N04NegativeGeometryImplicitJet.zero, lowerJet, if_neg hj]
-  rw [← he (n + 2), N04NegativeGeometryImplicitJet.tower_succ_apply,
-    N04NegativeGeometryImplicitJet.forcing_apply]
-  apply congrArg (fun y : Y => -A p y)
-  apply Finset.sum_congr rfl
-  intro c _
-  simp_rw [hlo]
-  exact residual_partition_apply J K hU hV hW (by omega) p v c
+    rw [first_apply J K hU hV hW hmap A hA hleft hright p hp v, hz, sub_zero]
+    have hn : ‖A p (v 0).2‖ ≤ a := by
+      simpa only [mul_one] using ((A p).le_opNorm _).trans
+        (mul_le_mul hApoint (hphysical 0) (norm_nonneg _) ha)
+    have hext : a ≤ a * (C + 1) := by nlinarith
+    simpa only [StateAngleWord.stateArity, StateAngleWord.angleArity,
+      parameterHeightWeight, Nat.zero_add, Nat.mul_zero, Nat.add_zero, Nat.sub_self,
+      ite_true, pow_zero, mul_one] using hn.trans hext
 
 end Residual
+end N04NegativeInverseJet
+
+section Majorant
+
+def n04NegativeInverse_partitionMajorant (C M L : ℝ) (n : ℕ) : ℝ :=
+  ∑ c : OrderedFinpartition n, (Fintype.card (Finset (Fin c.length)) : ℝ) *
+    (C * M ^ c.length * L ^ c.length)
+
+theorem n04NegativeInverse_partitionMajorant_nonneg {C M L : ℝ}
+    (hC : 0 ≤ C) (hM : 0 ≤ M) (hL : 0 ≤ L) (n : ℕ) :
+    0 ≤ n04NegativeInverse_partitionMajorant C M L n := by
+  apply Finset.sum_nonneg
+  intro c _
+  exact mul_nonneg (Nat.cast_nonneg _)
+    (mul_nonneg (mul_nonneg hC (pow_nonneg hM _)) (pow_nonneg hL _))
+
+/-- A finite algebraic majorant for all inverse orders up to `N`.
+It depends only on the spatial inverse bound, the forward bound, and
+the height envelope. In particular it is independent of the scale `t`. -/
+def n04NegativeInverse_prefixMajorant (a C L : ℝ) : ℕ → ℝ
+  | 0 => 1
+  | n + 1 => n04NegativeInverse_prefixMajorant a C L n + a * (C + 1) +
+      a * n04NegativeInverse_partitionMajorant C
+        (n04NegativeInverse_prefixMajorant a C L n) L (n + 1)
+
+theorem n04NegativeInverse_prefixMajorant_one_le {a C L : ℝ}
+    (ha : 0 ≤ a) (hC : 0 ≤ C) (hL : 0 ≤ L) (n : ℕ) :
+    1 ≤ n04NegativeInverse_prefixMajorant a C L n := by
+  induction n with
+  | zero => exact le_rfl
+  | succ n ih =>
+    have hM : 0 ≤ n04NegativeInverse_prefixMajorant a C L n := zero_le_one.trans ih
+    have hc : 0 ≤ a * (C + 1) := mul_nonneg ha (by linarith)
+    have hs := mul_nonneg ha
+      (n04NegativeInverse_partitionMajorant_nonneg hC hM hL (n + 1))
+    change 1 ≤ n04NegativeInverse_prefixMajorant a C L n + _ + _
+    linarith
+
+theorem n04NegativeInverse_prefixMajorant_le_succ {a C L : ℝ}
+    (ha : 0 ≤ a) (hC : 0 ≤ C) (hL : 0 ≤ L) (n : ℕ) :
+    n04NegativeInverse_prefixMajorant a C L n ≤
+      n04NegativeInverse_prefixMajorant a C L (n + 1) := by
+  have hM : 0 ≤ n04NegativeInverse_prefixMajorant a C L n :=
+    zero_le_one.trans (n04NegativeInverse_prefixMajorant_one_le ha hC hL n)
+  have hs := mul_nonneg ha
+    (n04NegativeInverse_partitionMajorant_nonneg hC hM hL (n + 1))
+  change _ ≤ n04NegativeInverse_prefixMajorant a C L n + a * (C + 1) + _
+  have hc : 0 ≤ a * (C + 1) := mul_nonneg ha (by linarith)
+  linarith
+
+theorem n04NegativeInverse_prefixMajorant_first_le {a C L : ℝ}
+    (ha : 0 ≤ a) (hC : 0 ≤ C) (hL : 0 ≤ L) (n : ℕ) :
+    a * (C + 1) ≤ n04NegativeInverse_prefixMajorant a C L (n + 1) := by
+  have hM : 0 ≤ n04NegativeInverse_prefixMajorant a C L n :=
+    zero_le_one.trans (n04NegativeInverse_prefixMajorant_one_le ha hC hL n)
+  have hs := mul_nonneg ha (n04NegativeInverse_partitionMajorant_nonneg hC hM hL (n + 1))
+  change _ ≤ n04NegativeInverse_prefixMajorant a C L n + a * (C + 1) + _
+  linarith
+
+theorem n04NegativeInverse_prefixMajorant_step_le {a C L : ℝ}
+    (ha : 0 ≤ a) (hC : 0 ≤ C) (hL : 0 ≤ L) (n : ℕ) :
+    a * n04NegativeInverse_partitionMajorant C
+        (n04NegativeInverse_prefixMajorant a C L n) L (n + 1) ≤
+      n04NegativeInverse_prefixMajorant a C L (n + 1) := by
+  have hM : 0 ≤ n04NegativeInverse_prefixMajorant a C L n :=
+    zero_le_one.trans (n04NegativeInverse_prefixMajorant_one_le ha hC hL n)
+  have hc : 0 ≤ a * (C + 1) := mul_nonneg ha (by linarith)
+  change _ ≤ n04NegativeInverse_prefixMajorant a C L n + a * (C + 1) + _
+  linarith
+
+end Majorant
+
+namespace N04NegativeInverseJet
+
+section Prefix
+
+variable {E Y : Type*}
+  [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+  [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+  [NormedAddCommGroup Y] [NormedSpace ℝ Y] [FiniteDimensional ℝ Y]
+  {U : Set E} {V W : Set Y} {F G : E × Y → Y}
+
+/-- Forward bounds and the first spatial inverse bound control every
+actual mixed inverse jet in a finite prefix. No inverse derivative
+bound is an input. The common constant is an explicit finite polynomial
+majorant, while the spatial degree and positive-parameter height factor
+remain exactly those of the original tagged input tuple. -/
+theorem prefix_norm_le (J : SmoothDirections (U ×ˢ V) F)
+    (K : SmoothDirections (U ×ˢ W) G)
+    (hU : IsOpen U) (hV : IsOpen V) (hW : IsOpen W)
+    (hmap : MapsTo G (U ×ˢ W) V)
+    (A : (E × Y) → Y →L[ℝ] Y) (hA : ContinuousOn A (U ×ˢ W))
+    (hleft : ∀ p ∈ U ×ˢ W, ∀ y : Y,
+      A p (J.D 1 (p.1, G p) (fun _ : Fin 1 => (0, y))) = y)
+    (hright : ∀ p ∈ U ×ˢ W, F (p.1, G p) = p.2)
+    (low high : Seminorm ℝ E) (N prefix shift : ℕ) (hshift : 1 ≤ shift)
+    (p : E × Y) (hp : p ∈ U ×ˢ W)
+    {a C H L R t : ℝ} (ha : 0 ≤ a) (hC : 0 ≤ C)
+    (hH : 0 ≤ H) (hHL : H ≤ L) (hL : 1 ≤ L) (hR : 0 ≤ R) (ht : 0 ≤ t)
+    (hApoint : ‖A p‖ ≤ a)
+    (hforward : ∀ j : ℕ, 0 < j → j ≤ N → ∀ w : StateAngleWord j,
+      w.stateArity ≤ prefix → ∀ b : Fin j → E, ∀ y : Fin j → Y,
+      (∀ i, low (b i) ≤ 1) → (∀ i, high (b i) ≤ R) →
+      ‖J.D j (p.1, G p) (fun i => if w.isState i then (b i, 0) else (0, y i))‖ ≤
+        C * parameterHeightWeight H w.stateArity *
+          t ^ (w.angleArity + shift * w.stateArity - 1) *
+            w.selectedProduct (fun i => ‖y i‖))
+    (n : ℕ) (hn : 0 < n) (hnN : n ≤ N)
+    (w : StateAngleWord n) (hw : w.stateArity ≤ prefix) (v : Fin n → E × Y)
+    (hlow : ∀ i, low (v i).1 ≤ 1) (hhigh : ∀ i, high (v i).1 ≤ R)
+    (hphysical : ∀ i, ‖(v i).2‖ ≤ 1)
+    (hstate : ∀ i, w.isState i = false → (v i).1 = 0)
+    (hspatial : ∀ i, w.isState i = true → (v i).2 = 0) :
+    ‖K.D n p v‖ ≤ n04NegativeInverse_prefixMajorant a C L N *
+      parameterHeightWeight H w.stateArity *
+        t ^ (w.angleArity + shift * w.stateArity - 1) := by
+  have hL0 : 0 ≤ L := zero_le_one.trans hL
+  have hall : ∀ m : ℕ, m ≤ N → ∀ j : ℕ, 0 < j → j ≤ m →
+      ∀ word : StateAngleWord j, word.stateArity ≤ prefix → ∀ u : Fin j → E × Y,
+      (∀ i, low (u i).1 ≤ 1) → (∀ i, high (u i).1 ≤ R) →
+      (∀ i, ‖(u i).2‖ ≤ 1) →
+      (∀ i, word.isState i = false → (u i).1 = 0) →
+      (∀ i, word.isState i = true → (u i).2 = 0) →
+      ‖K.D j p u‖ ≤ n04NegativeInverse_prefixMajorant a C L m *
+        parameterHeightWeight H word.stateArity *
+          t ^ (word.angleArity + shift * word.stateArity - 1) := by
+    intro m
+    induction m with
+    | zero =>
+      intro _ j hj hjm
+      omega
+    | succ m ih =>
+      intro hm j hj hjm word hword u hul huh hup hus hua
+      by_cases hjprev : j ≤ m
+      · have hh := ih (by omega) j hj hjprev word hword u hul huh hup hus hua
+        exact hh.trans (mul_le_mul_of_nonneg_right
+          (mul_le_mul_of_nonneg_right
+            (n04NegativeInverse_prefixMajorant_le_succ ha hC hL0 m)
+            (parameterHeightWeight_nonneg hH _)) (pow_nonneg ht _))
+      · have heq : j = m + 1 := by omega
+        subst j
+        cases m with
+        | zero =>
+          have hparameter : 1 ≤ prefix → ∀ b : E, low b ≤ 1 → high b ≤ R →
+              ‖J.D 1 (p.1, G p) (fun _ : Fin 1 => (b, 0))‖ ≤
+                C * H * t ^ (shift - 1) := by
+            intro hprefix b hb hbh
+            let word₁ : StateAngleWord 1 := .state .nil
+            have h := hforward 1 (by omega) hm word₁ hprefix
+              (fun _ => b) (fun _ => 0) (fun _ => hb) (fun _ => hbh)
+            have he : (fun i : Fin 1 => if word₁.isState i then (b, (0 : Y)) else (0, 0)) =
+                fun _ : Fin 1 => (b, (0 : Y)) := by
+              funext i
+              rw [Fin.eq_zero i]
+              rfl
+            rw [he] at h
+            simpa only [word₁, StateAngleWord.stateArity, StateAngleWord.angleArity,
+              StateAngleWord.selectedProduct, parameterHeightWeight, Nat.zero_add,
+              Nat.mul_one, Nat.one_ne_zero, ite_false, mul_one] using h
+          have hh := first_norm_le J K hU hV hW hmap A hA hleft hright low high
+            prefix shift p hp ha hC hH ht hApoint hparameter word hword u hul huh hup hus hua
+          exact hh.trans (mul_le_mul_of_nonneg_right
+            (mul_le_mul_of_nonneg_right
+              (n04NegativeInverse_prefixMajorant_first_le ha hC hL0 0)
+              (parameterHeightWeight_nonneg hH _)) (pow_nonneg ht _))
+        | succ m =>
+          have hM := n04NegativeInverse_prefixMajorant_one_le ha hC hL0 (m + 1)
+          have hh := higher_norm_le J K hU hV hW hmap A hA hleft hright low high
+            m prefix shift hshift p hp hC hM hH hHL hL hR ht
+            (fun j hj hjN => hforward j hj (hjN.trans hm))
+            (fun j hj hjN word hword u hul huh hup hus hua =>
+              ih (by omega) j hj (by omega) word hword u hul huh hup hus hua)
+            word hword u hul huh hup hus hua
+          have hs := n04NegativeInverse_partitionMajorant_nonneg hC
+            (zero_le_one.trans hM) hL0 (m + 2)
+          have hc : ‖A p‖ * n04NegativeInverse_partitionMajorant C
+                (n04NegativeInverse_prefixMajorant a C L (m + 1)) L (m + 2) ≤
+              n04NegativeInverse_prefixMajorant a C L (m + 2) :=
+            (mul_le_mul_of_nonneg_right hApoint hs).trans
+              (n04NegativeInverse_prefixMajorant_step_le ha hC hL0 (m + 1))
+          exact hh.trans (mul_le_mul_of_nonneg_right
+            (mul_le_mul_of_nonneg_right hc (parameterHeightWeight_nonneg hH _))
+            (pow_nonneg ht _))
+  exact hall N le_rfl n hn hnN w hw v hlow hhigh hphysical hstate hspatial
+
+end Prefix
+
+section ScalarComposition
+
+variable {E Y : Type*}
+  [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+  [IsTopologicalAddGroup E] [ContinuousSMul ℝ E] [LocallyConvexSpace ℝ E]
+  [NormedAddCommGroup Y] [NormedSpace ℝ Y]
+  {U : Set E} {V W : Set Y} {f : E × Y → ℝ} {G : E × Y → Y}
+
+/-- Applying an actual scalar field at the inverse point uses the same
+sharp graph budget. All positive inverse orders through the requested
+order may be used here; no estimate of the composition is assumed.
+This is the final raw estimate for the pulled physical height. -/
+theorem scalar_graph_norm_le (J : SmoothDirections (U ×ˢ V) f)
+    (K : SmoothDirections (U ×ˢ W) G) (hmap : MapsTo G (U ×ˢ W) V)
+    (Q : SmoothDirections (U ×ˢ W) (fun p => f (p.1, G p)))
+    (low high : Seminorm ℝ E) (n prefix shift : ℕ) (hn : 0 < n)
+    (hshift : 1 ≤ shift) (p : E × Y) (hp : p ∈ U ×ˢ W)
+    {C M H L R t : ℝ} (hC : 0 ≤ C) (hM : 1 ≤ M)
+    (hH : 0 ≤ H) (hHL : H ≤ L) (hL : 1 ≤ L) (hR : 0 ≤ R) (ht : 0 ≤ t)
+    (hforward : ∀ j : ℕ, 0 < j → j ≤ n → ∀ w : StateAngleWord j,
+      w.stateArity ≤ prefix → ∀ b : Fin j → E, ∀ y : Fin j → Y,
+      (∀ i, low (b i) ≤ 1) → (∀ i, high (b i) ≤ R) →
+      ‖J.D j (p.1, G p) (fun i => if w.isState i then (b i, 0) else (0, y i))‖ ≤
+        C * parameterHeightWeight H w.stateArity *
+          t ^ (w.angleArity + shift * w.stateArity - 1) *
+            w.selectedProduct (fun i => ‖y i‖))
+    (hinverse : ∀ j : ℕ, 0 < j → j ≤ n → ∀ w : StateAngleWord j,
+      w.stateArity ≤ prefix → ∀ v : Fin j → E × Y,
+      (∀ i, low (v i).1 ≤ 1) → (∀ i, high (v i).1 ≤ R) →
+      (∀ i, ‖(v i).2‖ ≤ 1) →
+      (∀ i, w.isState i = false → (v i).1 = 0) →
+      (∀ i, w.isState i = true → (v i).2 = 0) →
+      ‖K.D j p v‖ ≤ M * parameterHeightWeight H w.stateArity *
+        t ^ (w.angleArity + shift * w.stateArity - 1))
+    (w : StateAngleWord n) (hw : w.stateArity ≤ prefix) (v : Fin n → E × Y)
+    (hlow : ∀ i, low (v i).1 ≤ 1) (hhigh : ∀ i, high (v i).1 ≤ R)
+    (hphysical : ∀ i, ‖(v i).2‖ ≤ 1)
+    (hstate : ∀ i, w.isState i = false → (v i).1 = 0)
+    (hspatial : ∀ i, w.isState i = true → (v i).2 = 0) :
+    ‖Q.D n p v‖ ≤ n04NegativeInverse_partitionMajorant C M L n *
+      parameterHeightWeight H w.stateArity *
+        t ^ (w.angleArity + shift * w.stateArity - 1) := by
+  classical
+  let π : (E × Y) →L[ℝ] E := ContinuousLinearMap.fst ℝ E Y
+  let P := smoothDirectionsUniformProd
+    ((smoothDirectionsLinear π).restrict K.open_domain (subset_univ (U ×ˢ W))) K
+  have hgraph : MapsTo (fun z => (π z, G z)) (U ×ˢ W) (U ×ˢ V) :=
+    fun z hz => ⟨hz.1, hmap hz⟩
+  let Q' : SmoothDirections (U ×ˢ W) (fun z => f (z.1, G z)) :=
+    (smoothDirections_realCompTVS P J hgraph).congrOn (fun _ _ => rfl)
+  have hformula : Q.D n p v = ∑ c : OrderedFinpartition n,
+      J.D c.length (p.1, G p) (fun i =>
+        (continuousLinearJets π (c.partSize i) p (v ∘ c.emb i),
+          K.D (c.partSize i) p (v ∘ c.emb i))) := by
+    rw [Q.unique Q' n p hp]
+    change (smoothDirections_realCompTVS P J hgraph).D n p v = _
+    rw [smoothDirections_realCompTVS_D_apply]
+    rfl
+  let κ (c : OrderedFinpartition n) (i : Fin c.length) :=
+    (w.restrict (c.emb i)).stateArity
+  let β (c : OrderedFinpartition n) (i : Fin c.length) :=
+    (w.restrict (c.emb i)).angleArity
+  let b (c : OrderedFinpartition n) (i : Fin c.length) :=
+    continuousLinearJets π (c.partSize i) p (v ∘ c.emb i)
+  let y (c : OrderedFinpartition n) (i : Fin c.length) :=
+    K.D (c.partSize i) p (v ∘ c.emb i)
+  have hterm (c : OrderedFinpartition n) :
+      ‖J.D c.length (p.1, G p) (fun i => (b c i, y c i))‖ ≤
+        ((Fintype.card (Finset (Fin c.length)) : ℝ) *
+          (C * M ^ c.length * L ^ c.length)) * parameterHeightWeight H w.stateArity *
+            t ^ (w.angleArity + shift * w.stateArity - 1) := by
+    have hpart (i : Fin c.length) : 0 < κ c i + β c i := by
+      rw [show κ c i + β c i = c.partSize i from (w.restrict (c.emb i)).arity_sum]
+      exact c.partSize_pos i
+    have hid (i : Fin c.length) (hi : ¬ (κ c i = 1 ∧ β c i = 0)) : b c i = 0 :=
+      stateIdentity_eq_zero (c.partSize_pos i) (w.restrict (c.emb i)) p (v ∘ c.emb i)
+        (fun j hj => hstate _ (by simpa only [StateAngleWord.isState_restrict] using hj)) hi
+    have hl (i : Fin c.length) : ‖y c i‖ ≤ M * parameterHeightWeight H (κ c i) *
+        t ^ (β c i + shift * κ c i - 1) := by
+      have hk : κ c i ≤ prefix :=
+        (Finset.single_le_sum (fun j _ => Nat.zero_le (κ c j)) (Finset.mem_univ i)).trans
+          ((w.sum_restrict_stateArity c).le.trans hw)
+      exact hinverse (c.partSize i) (c.partSize_pos i) (c.partSize_le i)
+        (w.restrict (c.emb i)) hk _ (fun j => hlow _) (fun j => hhigh _) (fun j => hphysical _)
+        (fun j hj => hstate _ (by simpa only [StateAngleWord.isState_restrict] using hj))
+        (fun j hj => hspatial _ (by simpa only [StateAngleWord.isState_restrict] using hj))
+    have ho (output : StateAngleWord c.length)
+        (hs : output.InverseIdentitySelection (κ c) (β c)) :
+        ‖J.D c.length (p.1, G p)
+          (fun i => if output.isState i then (b c i, 0) else (0, y c i))‖ ≤
+          C * parameterHeightWeight H output.stateArity *
+            t ^ (output.angleArity + shift * output.stateArity - 1) *
+              output.selectedProduct (fun i => ‖y c i‖) := by
+      have hk : output.stateArity ≤ prefix := by
+        have hle : output.stateArity ≤ output.flowParameterOrder (κ c) := by
+          unfold StateAngleWord.flowParameterOrder
+          omega
+        rw [output.inverseParameterOrder_eq (κ c) (β c) hs] at hle
+        exact (hle.trans (w.sum_restrict_stateArity c).le).trans hw
+      exact hforward c.length (c.length_pos hn) c.length_le output hk (b c) (y c)
+        (fun i => stateIdentity_seminorm_le low (c.partSize_pos i) p (v ∘ c.emb i)
+          zero_le_one (fun j => hlow _))
+        (fun i => stateIdentity_seminorm_le high (c.partSize_pos i) p (v ∘ c.emb i)
+          hR (fun j => hhigh _))
+    have hh := n04NegativeInverse_graph_norm_le (J.D c.length (p.1, G p))
+      (c.length_pos hn) (κ c) (β c) shift hshift hpart (b c) (y c) hid
+      hC hM hH hHL hL ht ho hl
+    simpa only [κ, β, w.sum_restrict_stateArity c, w.sum_restrict_angleArity c,
+      mul_assoc] using hh
+  rw [hformula]
+  calc
+    _ ≤ ∑ c : OrderedFinpartition n, ‖J.D c.length (p.1, G p)
+        (fun i => (b c i, y c i))‖ := norm_sum_le _ _
+    _ ≤ ∑ c : OrderedFinpartition n,
+        (((Fintype.card (Finset (Fin c.length)) : ℝ) *
+          (C * M ^ c.length * L ^ c.length)) * parameterHeightWeight H w.stateArity *
+            t ^ (w.angleArity + shift * w.stateArity - 1)) :=
+      Finset.sum_le_sum (fun c _ => hterm c)
+    _ = _ := by rw [← Finset.sum_mul, ← Finset.sum_mul]; rfl
+
+end ScalarComposition
 end N04NegativeInverseJet
 
 end ContinuousFlexibility.Analysis
