@@ -1,0 +1,108 @@
+{
+  "schema": "n04-source-only-ci-repair-plan/v1",
+  "round": 184,
+  "status": "THREE_REVIEWED_SOURCE_REPAIRS_READY",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "branch": "line/N04Coordinates",
+  "parent": "3c966e45bee461dc9f4ab9885ad1dbe9a70deb88",
+  "commit": "91aabb8b96f6d7571bc5bd6a2142a58d84738dc1",
+  "tree": "874193e6ca8080da8101554fe92e30348161dba0",
+  "current_main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "failure": {
+    "receipt": "c5fffd415e8957776b1676dc70c1e0ef1ce4fc6e",
+    "run": 43344996410,
+    "job": 131622089990,
+    "log": "d7c82139c0f9f317b6b511ce96b521b7676cbbd0",
+    "complete_errors": "192b37894e3ef716d6797d73daf8d1b607676dd4",
+    "all_five_diagnostics_complete": true,
+    "full_gate": "skipped",
+    "credit": 0
+  },
+  "repairs": [
+    {
+      "file": "CanonicalReferencePieceInequality",
+      "before": "d0b62f775987c37e6af0553ee18ea6dcd0224c8f",
+      "sha": "b9be621151ca4757fe041997db8cc11afe13b01a",
+      "owner": "1d72a16ecee61522a8d5bd09cc348acd63787dd5",
+      "peer": "77725b26ea2f65f3c0178916daf350a170eb2668",
+      "patch": "0cf6c7e0ce22684c061c5517dc5af9b4cf9db62e",
+      "candidate": "67760efae8e58b5ae5a09a9ad99799aed3d03355",
+      "lines": 44,
+      "net": 0,
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferencePieceInequality.lean",
+      "sha256": "6de4fdcb894add8edb408ae7abeffd381eab9a409d0fc8d2c099f24d1b00c59b"
+    },
+    {
+      "file": "CircleShiftedForwardFixedBaseBounds",
+      "before": "4ea70ab43fc1fa6e51ddcfa3849f97580bf02235",
+      "sha": "eff7a91bcc29fb4e6f13d24d2813849b70eb4e90",
+      "owner": "2da983637a31cb8bbdcb34576276c98d9d9d8303",
+      "peer": "f48f6eeb9f6a8e0bd6acbdbfc609569269364189",
+      "patch": "73a9944f0a10d0a2177556ee2b18e37eb96225b5",
+      "candidate": "cba4640db303d9ff4724df82fc03534268fc425c",
+      "lines": 171,
+      "net": 12,
+      "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+      "sha256": "afae749be22c550a897c45755f456bade73f684a52ca65ca50cd6c02cfbf8a58"
+    },
+    {
+      "file": "N04EndpointCircleFixedBaseBounds",
+      "before": "09a1696b57c7fe3678cc6e10e419bb8fa22c0c11",
+      "sha": "e1891a97f1d146c57a466013866aa7f4f914c37f",
+      "owner": "55e9fd00f378c81c39cb716daf34f24ca0528d74",
+      "peer": "0814c98ca6ad6a181358c7363e2456af32508dda",
+      "patch": "3d292982b311630cae8f52b1045b6a079c05f516",
+      "candidate": "0f5c6cc1d7c12f330586ce09ba3b16a10b298501",
+      "lines": 115,
+      "net": 0,
+      "path": "src/ContinuousFlexibility/Analysis/N04EndpointCircleFixedBaseBounds.lean",
+      "sha256": "a794443b1a03a8000d24a5d668f83be397ec798d92119b35f29ad7e3afcd7f66"
+    }
+  ],
+  "scope": "Only three source proof edits. No imports, public heads, hypotheses, quantitative witnesses or resource settings changed. Forward proof14 added/2 deleted; other two repairs1 added/1 deleted each.",
+  "preflight": {
+    "exact_full_recursive_tree_readback": true,
+    "changed_blobs": 3,
+    "all_other_paths_same_as183": true,
+    "StateNeighborhood": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+    "graph": "Retain the full4802-node183 graph and rebind only these three same-import source blobs. Its missing-import/cycle results remain zero; no new modules or dependencies.",
+    "all_src": 4802,
+    "project": 4798,
+    "generated_root": 4734,
+    "checked_root": 4241
+  },
+  "budget": {
+    "repository_active_added_rule": 20000,
+    "conservative_since_complete182": 18561,
+    "active_new_source_lines": 16621,
+    "shared_full_lines": 1447,
+    "full_root_lag": 493,
+    "precise_added": 16760,
+    "precise_deleted": 255,
+    "session_draft_guard": 20000,
+    "existing_after182": 19276,
+    "fullJ_actual_lines": 203,
+    "StageE_piece_actual_lines": 286,
+    "repair_net_lines": 12,
+    "actual_retained_upper": 19777,
+    "reallocated_global_StageE_max": 200,
+    "reserved_upper": 19977,
+    "reserve": 23,
+    "conditional_owned_release_only_after_complete_green": [
+      171,
+      301,
+      115,
+      152,
+      44
+    ]
+  },
+  "limitations": [
+    "The original115 owner body remains unavailable; current full source and repair have explicit independent reviews.",
+    "171-line static review does not assert resolution of the two timeout diagnostics. CI must establish it.",
+    "FullJ203 and StageE286 are separate held uncompiled drafts, not part of this repair tree.",
+    "Source-only: no root, STATUS, workflow, toolchain, heartbeat, recursion, watchdog or benchmark changes."
+  ],
+  "ci": "First query at least five minutes after push/readback; subsequent queries at least one minute apart; preserve original failed joblog once before repair.",
+  "endpoint": "FlowJets proved; Realization and N04Coordinates remain open."
+}

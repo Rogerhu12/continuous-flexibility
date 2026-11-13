@@ -1,0 +1,91 @@
+{
+  "schema": "N04-stageE-actual-piece-jet-envelope-reviewed-owner-v1",
+  "artifact_path": "quantitative/reconstructed/CanonicalTransportPieceJetEnvelopeReviewedManifest.json",
+  "owner": "/root/quantitative_route",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "source": {
+    "module": "ContinuousFlexibility.Analysis.CanonicalTransportPieceJetEnvelope",
+    "path": "quantitative/reconstructed/CanonicalTransportPieceJetEnvelope.lean",
+    "install_path": "src/ContinuousFlexibility/Analysis/CanonicalTransportPieceJetEnvelope.lean",
+    "git_blob": "d8f2a72059aea8d0a2a37702ec95cf7017c2f31c",
+    "sha256": "517644dd25d04d697027d8559837c4c79a687198f548cf8d8470debc236f9a16",
+    "bytes": 15538,
+    "lines": 286
+  },
+  "candidate_manifest": {
+    "git_blob": "69c2bca209abc59c4598f8ae66a455b479ebe50c",
+    "sha256": "f20afdbcec637e25a82b14634adda0f72dc55f38deb852613e62c81384ca07c3",
+    "bytes": 13901
+  },
+  "original_layout": {
+    "blob": "764ae5fef60e97e09deeaf621df9858e744feee3",
+    "sha256": "3f0dacdecb09039b2a8dd9bfa39cf61574aff73c4dc8a873f9cd2941259da5b5"
+  },
+  "independent_layout_check": {
+    "blob": "5d7f1f40d8576f94821c6f1fe855fee82dae326d",
+    "sha256": "18245f3063fc5e13def0de0604d4b67f53e3d3d127abe9c0b666f7ba0a11f2bf"
+  },
+  "source_unchanged_after_candidate": true,
+  "authorization": {
+    "limit_new_Lean_lines": 400,
+    "actual_new_Lean_lines": 286,
+    "additional_Lean_copies": 0,
+    "archive_selection": "Only final286 at the source path. Original285 is an immutable Git reference plus exact import patch; no duplicate full Lean archive."
+  },
+  "public_name": "ContinuousFlexibility.Analysis.n04_referenceCurrent_transport_piece_envelope",
+  "output": "For fixed admissible z, one e : Nat -> Real with N07aSampleSubpower T K e and e>=1, before all m,p,n, bounds the literal current height quotient through order 2 and literal canonicalCurrentPoint at orders 1 and 2 on referencePhysicalPieceOpen.",
+  "cycle_scope": "The proof uses CanonicalGeometry plus actual ReferenceJets and CurrentJets only; it does not consume N04Properties, Primitive.materialJets or the target transport conclusion.",
+  "domain_scope": "Current inverse chart still takes canonical points into the genuine moving physical piece; only the reference chart is rewritten using referenceDomain.",
+  "regularity": "The private reciprocal supplier includes actual ContDiffOn from height positivity and inverse MapsTo; open EqOn/full-function identities are explicit.",
+  "sample_scope": "Original T, K, K.cell and sample retained. No floor assumption added. Fixed z grading factors are absorbed in the intermediate sampled envelopes.",
+  "verification": {
+    "Lean_or_elaboration_run": false,
+    "compiled": false,
+    "active_modified": false,
+    "refs_modified": false,
+    "CI_queried": false,
+    "local_file_write": false,
+    "source_and_candidate_server_readback_exact": true,
+    "final_source_manifest_patch_and_peer_server_readback_exact": true
+  },
+  "downstream": "Global field identification, sample-to-physical absorption, AE extension and the common exponent A=1 are parent-owned subsequent steps.",
+  "status": "FULL_INDEPENDENT_STATIC_REVIEW_PASSED_HELD_UNCOMPILED",
+  "independent_full_peer": {
+    "git_blob": "7a941317e67fe215d27ae6362a4c7d6b2f37b373",
+    "sha256": "0919152110fa4dcaf74c2ff976f472b18b8fd67e8d218adc62fe11fc0d60c9e2",
+    "reviewer": "/root/audit_coordinates",
+    "status": "PASS_STATIC_FULL_SOURCE_AND_ACTUAL_PROVIDER_REVIEW_UNCOMPILED"
+  },
+  "original_candidate": {
+    "git_blob": "be0e79f35f0d5a17a5f531d10d75a288e08153d4",
+    "sha256": "de3ec7772d28fd32cb801e82fcc3aff83b348c8e5a5f537e13ec85fe5026a00c",
+    "bytes": 12069
+  },
+  "original_source": {
+    "module": "ContinuousFlexibility.Analysis.CanonicalTransportPieceJetEnvelope",
+    "path": "quantitative/reconstructed/CanonicalTransportPieceJetEnvelope.lean",
+    "install_path": "src/ContinuousFlexibility/Analysis/CanonicalTransportPieceJetEnvelope.lean",
+    "git_blob": "25aa8f2ca029cff499449b9a1cf0b095ac161220",
+    "sha256": "218dda2c4deb633396351bb2689db6f0046fb7d65cc1889264dbd20de5eb0801",
+    "bytes": 15482,
+    "lines": 285
+  },
+  "import_correction": {
+    "patch": {
+      "git_blob": "7e802d3b7aa9b480c699905171fe6b2ae99813db",
+      "sha256": "dd05e852fb943e7a8a8a7393a2a5bccc1f39c181b9745b2cf29f2e67a59f8d3f",
+      "bytes": 505
+    },
+    "net_Lean_lines": 1,
+    "exact_reverse": true,
+    "reason": "reference_mem_stateNeighborhood required explicit StateNeighborhood import"
+  },
+  "import_closure": {
+    "existing_graph": "6d4933e47763157649c2ccafdfd67b05f74809a6",
+    "upstream_project_nodes": 232,
+    "missing": [],
+    "cycles": [],
+    "used_provider_count": 12,
+    "comparison_template": "N07aAngularReferenceJetEnvelopes was read only and is not called."
+  }
+}

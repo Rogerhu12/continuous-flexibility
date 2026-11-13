@@ -1,0 +1,268 @@
+{
+  "schema": "n04-recovery-snapshot/v1",
+  "snapshot": 53,
+  "created_at": "2026-11-13 01:51:19 UTC",
+  "parent": "10f1232a7a757f1da29b6748bc747f9b495a4b14",
+  "additional_parent": "91aabb8b96f6d7571bc5bd6a2142a58d84738dc1",
+  "compiled_baseline": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "compiled_baseline_tree": "02a8747b6aaae413f67372d96e52ad8f3dbd9e9a",
+  "source_index": {
+    "path": "drafts/N04Coordinates-recovery-20261112/SOURCE-INDEX.json",
+    "blob": "5913505b96210f2776f8ec3ce69d04dd080befea",
+    "sha256": "8ccd97ff75b5bc147365081a3cf934541e8cefa45fc66a96c99ad66692f72141",
+    "bytes": 1692502,
+    "entries": 3340,
+    "new": 28,
+    "updated": 0
+  },
+  "artifacts": [
+    {
+      "name": "root/ci/CI183-build.log",
+      "blob": "d7c82139c0f9f317b6b511ce96b521b7676cbbd0",
+      "sha256": "4f87043673b85e282132aef2f01d476ae0eb1367d9df1279ede7096e90f87506",
+      "bytes": 124134,
+      "lines": 909
+    },
+    {
+      "name": "root/ci/CI183CompleteErrors.json",
+      "blob": "192b37894e3ef716d6797d73daf8d1b607676dd4",
+      "sha256": "37e624c5ffb34d16207b18d7ac720b2464847e0dee70fb0754b5dcf8e1079165",
+      "bytes": 3880,
+      "lines": 47
+    },
+    {
+      "name": "root/ci/CI183FailureReceipt.json",
+      "blob": "c5fffd415e8957776b1676dc70c1e0ef1ce4fc6e",
+      "sha256": "1d617f8a3c17acb8de431d2f1bfe898ddb2192a69ee7e372b79e4f8846c0e23f",
+      "bytes": 1278,
+      "lines": 41
+    },
+    {
+      "name": "root/repair183/CanonicalReferencePieceInequalityCandidate.json",
+      "blob": "67760efae8e58b5ae5a09a9ad99799aed3d03355",
+      "sha256": "371d48a3a207c1b65171853e7077836a040799321ac084e45282c9eab799c2ab",
+      "bytes": 1528,
+      "lines": 38
+    },
+    {
+      "name": "root/repair183/CanonicalReferencePieceInequalityReviewed.json",
+      "blob": "1d72a16ecee61522a8d5bd09cc348acd63787dd5",
+      "sha256": "2915aff9bde15e6ce105d06448f40fb4900b32b33bb70c9b8137baa10f9ee419",
+      "bytes": 1521,
+      "lines": 36
+    },
+    {
+      "name": "quantitative/recovery/CanonicalReferencePieceInequalityCI183RepairPeer.json",
+      "blob": "77725b26ea2f65f3c0178916daf350a170eb2668",
+      "sha256": "d871f0aec06212f49eb644b4d580c358810f36f2b1004bf49421c6238b4ae912",
+      "bytes": 2506,
+      "lines": 47
+    },
+    {
+      "name": "audit/repair183/N04EndpointCircleFixedBaseBounds.patch",
+      "blob": "3d292982b311630cae8f52b1045b6a079c05f516",
+      "sha256": "bfff045dac021ea7a36ea7650d8249e61bea91eb29d720221d000a3580f1ab4d",
+      "bytes": 697,
+      "lines": 11
+    },
+    {
+      "name": "audit/repair183/N04EndpointCircleFixedBaseBoundsCandidateManifest.json",
+      "blob": "0f5c6cc1d7c12f330586ce09ba3b16a10b298501",
+      "sha256": "86678663f10cac4e7fb3a853b5efc4b8608e9228035eb7d1dae93b96a31f7ea6",
+      "bytes": 5087,
+      "lines": 59
+    },
+    {
+      "name": "root/state/Backup52PushReceipt.json",
+      "blob": "3de831ca5a482ac7ed8cf1f9eed8740983469501",
+      "sha256": "d3c5eb5948a569670921612e498947ba118d4792449f394fd18c9a310d6bd698",
+      "bytes": 949,
+      "lines": 25
+    },
+    {
+      "name": "root/repair183/CanonicalReferencePieceInequality.patch",
+      "blob": "0cf6c7e0ce22684c061c5517dc5af9b4cf9db62e",
+      "sha256": "584cd76cfa69801d7639e30f995f121fd0467340230301f4e354436be949b2d1",
+      "bytes": 440,
+      "lines": 10
+    },
+    {
+      "name": "positive/repair183/CircleShiftedForwardFixedBaseBounds.patch",
+      "blob": "73a9944f0a10d0a2177556ee2b18e37eb96225b5",
+      "sha256": "6d60b15e13208ab6c1d0e1c08dd1190f313f45ffd00bd2af053c5b953e800046",
+      "bytes": 1890,
+      "lines": 32
+    },
+    {
+      "name": "positive/repair183/CircleShiftedForwardFixedBaseBoundsCandidateManifest.json",
+      "blob": "cba4640db303d9ff4724df82fc03534268fc425c",
+      "sha256": "eafb53034d87269be397b651ce8dd839fb5893169c100bc26cfd4657d4fc10c2",
+      "bytes": 13308,
+      "lines": 200
+    },
+    {
+      "name": "root/reviews/CircleShiftedForwardFixedBaseBoundsCI183RepairPeer.json",
+      "blob": "f48f6eeb9f6a8e0bd6acbdbfc609569269364189",
+      "sha256": "f9860eb138a612b78bf4613fb8bfedcbdc63e4399df1c08720d983210a625d71",
+      "bytes": 2282,
+      "lines": 34
+    },
+    {
+      "name": "positive/repair183/CircleShiftedForwardFixedBaseBoundsReviewedManifest.json",
+      "blob": "2da983637a31cb8bbdcb34576276c98d9d9d8303",
+      "sha256": "f71680d8bfbe500987c0999259ea76b7172d2050efb159705351dfa8b1ceaf0c",
+      "bytes": 3759,
+      "lines": 91
+    },
+    {
+      "name": "audit/repair183/N04EndpointCircleFixedBaseBoundsReviewedManifest.json",
+      "blob": "55e9fd00f378c81c39cb716daf34f24ca0528d74",
+      "sha256": "e9e9ee68bd4bde89e93522214179282b657d0751c5030596a60cd40402c01ba2",
+      "bytes": 2300,
+      "lines": 44
+    },
+    {
+      "name": "positive/working/CircleShiftedFullForwardFixedBaseBounds.lean.txt",
+      "blob": "52bc280f8a817b5afac75d049e0c5d01d0366997",
+      "sha256": "c5d4febf98bdb2a80960fb3e4d81816f7b0e1d14eba3b88da24a852eab74bb2d",
+      "bytes": 10258,
+      "lines": 203
+    },
+    {
+      "name": "quantitative/reconstructed/CanonicalTransportPieceJetEnvelope.lean.txt",
+      "blob": "d8f2a72059aea8d0a2a37702ec95cf7017c2f31c",
+      "sha256": "517644dd25d04d697027d8559837c4c79a687198f548cf8d8470debc236f9a16",
+      "bytes": 15538,
+      "lines": 286
+    },
+    {
+      "name": "quantitative/reconstructed/CanonicalTransportPieceJetEnvelopeOriginal285Candidate.json",
+      "blob": "be0e79f35f0d5a17a5f531d10d75a288e08153d4",
+      "sha256": "de3ec7772d28fd32cb801e82fcc3aff83b348c8e5a5f537e13ec85fe5026a00c",
+      "bytes": 12069,
+      "lines": 213
+    },
+    {
+      "name": "quantitative/reconstructed/CanonicalTransportPieceJetEnvelopeFinalCandidateManifest.json",
+      "blob": "69c2bca209abc59c4598f8ae66a455b479ebe50c",
+      "sha256": "f20afdbcec637e25a82b14634adda0f72dc55f38deb852613e62c81384ca07c3",
+      "bytes": 13901,
+      "lines": 242
+    },
+    {
+      "name": "quantitative/reconstructed/CanonicalTransportPieceJetEnvelopeImport.patch",
+      "blob": "7e802d3b7aa9b480c699905171fe6b2ae99813db",
+      "sha256": "dd05e852fb943e7a8a8a7393a2a5bccc1f39c181b9745b2cf29f2e67a59f8d3f",
+      "bytes": 505,
+      "lines": 10
+    },
+    {
+      "name": "audit/recovery/reviews/CanonicalTransportPieceJetEnvelopeIndependentReview.json",
+      "blob": "7a941317e67fe215d27ae6362a4c7d6b2f37b373",
+      "sha256": "0919152110fa4dcaf74c2ff976f472b18b8fd67e8d218adc62fe11fc0d60c9e2",
+      "bytes": 16195,
+      "lines": 255
+    },
+    {
+      "name": "quantitative/reconstructed/CanonicalTransportPieceJetEnvelopeReviewedManifest.json",
+      "blob": "f5517acf2efd614bfcecbc3b3bc7f3eecf5ce4e9",
+      "sha256": "807635b94b95649ff478af30cc891f117b4787fc76a1a475749c489fb427def0",
+      "bytes": 4813,
+      "lines": 91
+    },
+    {
+      "name": "root/working/CanonicalTransportGlobalBounds.lean.txt",
+      "blob": "94aa073f7aff6b010b18fa65e26167978711aa5e",
+      "sha256": "fcc95720d1dbe0711d6b905a76be759a05560ad73e3fa2acc71cf45aed8cac1f",
+      "bytes": 9496,
+      "lines": 178
+    },
+    {
+      "name": "root/working/CanonicalTransportGlobalBoundsCandidateManifest.json",
+      "blob": "18837c042fb33ab687fceb2e008239c30a70a321",
+      "sha256": "7b3b4de4430c6c1d0d75a395d5c5538800b806d2d58d6095cab6ae1ebd4cfbbb",
+      "bytes": 3736,
+      "lines": 76
+    },
+    {
+      "name": "root/ci/CI184StagingPlan.json",
+      "blob": "bb9bb9ec1f7b1656dbfe082215648c2df7b822ca",
+      "sha256": "9a8e9aad87bb8dbe0501d593a756c690f61fa0e22f5a6f36f9e60cbf9307a2b1",
+      "bytes": 4813,
+      "lines": 108
+    },
+    {
+      "name": "root/ci/CI184PushReceipt.json",
+      "blob": "0edd1cdf1f7969517109afc8bd2e77dc7c920ec8",
+      "sha256": "a96f00b5a98b048a182c7f3a3e90a243afd4bbd7c040cabbd80802567d99418e",
+      "bytes": 694,
+      "lines": 18
+    },
+    {
+      "name": "root/reviews/N04EndpointCircleFixedBaseBoundsCI183RepairPeer.json",
+      "blob": "0814c98ca6ad6a181358c7363e2456af32508dda",
+      "sha256": "f37841eebbb7a1d04abd970534e24d180f3f65ef04b2b4c7471d82a5421b7683",
+      "bytes": 2188,
+      "lines": 32
+    },
+    {
+      "name": "root/state/CRITICAL-current.json",
+      "blob": "5504bbcd2f8952dfefe6a37a7ab4674f33d6aa50",
+      "sha256": "085c905377ffe818f1d58036bf6dbefb48990e2a5c26fdaa4de58754bc5497a7",
+      "bytes": 5325,
+      "lines": 134
+    }
+  ],
+  "outside_archive": {
+    "exact_target": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+    "paths": 4933,
+    "all_complete_green": true,
+    "changed_paths_since52": 0
+  },
+  "active": {
+    "schema": "n04-ci-push-receipt/v1",
+    "round": 184,
+    "repository": "Rogerhu12/continuous-flexibility",
+    "branch": "line/N04Coordinates",
+    "commit": "91aabb8b96f6d7571bc5bd6a2142a58d84738dc1",
+    "tree": "874193e6ca8080da8101554fe92e30348161dba0",
+    "parent": "3c966e45bee461dc9f4ab9885ad1dbe9a70deb88",
+    "plan": "bb9bb9ec1f7b1656dbfe082215648c2df7b822ca",
+    "force": false,
+    "expected_sha_verified": true,
+    "ref_readback_exact": true,
+    "pushed_readback_utc": "2026-11-13 01:45:10 UTC",
+    "earliest_first_ci_lookup_utc": "2026-11-13T01:50:10.000Z",
+    "conservative_active_added": 18561,
+    "compilation": "PENDING",
+    "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+    "run_id": 43347207316,
+    "workflow_number": 1868,
+    "job_id": 131629331564,
+    "status": "in_progress_after_quick_failure",
+    "first_lookup": "2026-11-13 01:50:25 UTC",
+    "quick": "failure",
+    "full": "skipped",
+    "complete_job_diagnostics": "PENDING_FINAL_JOB_COMPLETION_BEFORE_SINGLE_LOG_DOWNLOAD"
+  },
+  "budget": {
+    "new_archived_Lean_lines": 667,
+    "after182_existing": 19276,
+    "net_three_repairs": 12,
+    "actual_retained_upper": 19955,
+    "reserve": 45,
+    "root_global_unused_allocation": 22,
+    "credit_from183_or184": 0,
+    "conditional_owned_credit_only_after_complete184": 783,
+    "active_conservative": 18561
+  },
+  "endpoint": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open",
+    "proved": 37,
+    "total": 42
+  },
+  "source_status": "FullJ203 and global178 working/peer pending. Piece286 independently reviewed, uncompiled. Full current gates remain required.",
+  "environment": "Local execution unavailable; Git artifact storage and exact remote readbacks."
+}

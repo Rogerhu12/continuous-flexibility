@@ -1,0 +1,41 @@
+{
+  "schema": "n04-ci-failure-receipt/v1",
+  "round": 183,
+  "head": "3c966e45bee461dc9f4ab9885ad1dbe9a70deb88",
+  "tree": "88bf373764bc23e7a47e74bb875968800673386d",
+  "run_id": 43344996410,
+  "workflow_number": 1866,
+  "job_id": 131622089990,
+  "conclusion": "failure",
+  "updated_utc": "2026-11-13T01:35:19Z",
+  "quick": "failure",
+  "full": "skipped",
+  "blueprint_status": "skipped",
+  "fresh_compiled_project_modules": 37,
+  "source_diagnostics": 5,
+  "files": [
+    "CanonicalReferencePieceInequality",
+    "CircleShiftedForwardFixedBaseBounds",
+    "N04EndpointCircleFixedBaseBounds"
+  ],
+  "original_log": {
+    "blob": "d7c82139c0f9f317b6b511ce96b521b7676cbbd0",
+    "sha256": "4f87043673b85e282132aef2f01d476ae0eb1367d9df1279ede7096e90f87506",
+    "bytes": 124134
+  },
+  "complete_errors": "192b37894e3ef716d6797d73daf8d1b607676dd4",
+  "artifact": {
+    "id": 14001995916,
+    "bytes": 315495,
+    "digest": "sha256:6583a05df449888778f971b7bbdcb9d627716b59499f57e236e6634e513ecacc",
+    "downloaded": false
+  },
+  "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "draft_credit": 0,
+  "budget": {
+    "existing_drafts": 19276,
+    "new_implementation_maxima": 650,
+    "repair_reserve_before_new_source": 74,
+    "active_conservative": 18549
+  }
+}

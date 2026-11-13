@@ -1,0 +1,91 @@
+{
+  "schema": "n04-reviewed-ci-repair-owner/v1",
+  "status": "SOURCE_REVIEWED_ONLY_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "path": "positive/repair183/CircleShiftedForwardFixedBaseBoundsReviewedManifest.json",
+  "base": {
+    "ref": "3c966e45bee461dc9f4ab9885ad1dbe9a70deb88",
+    "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "4ea70ab43fc1fa6e51ddcfa3849f97580bf02235",
+    "sha256": "4c3c07d97d9b4ad03cbb16f4b9b1829eabacdbeb1c012dee3733958f32ac1941",
+    "utf8_bytes": 8240,
+    "lines": 159,
+    "final_newline": true
+  },
+  "selected": {
+    "path": "positive/repair183/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "eff7a91bcc29fb4e6f13d24d2813849b70eb4e90",
+    "sha256": "afae749be22c550a897c45755f456bade73f684a52ca65ca50cd6c02cfbf8a58",
+    "utf8_bytes": 8897,
+    "lines": 171,
+    "final_newline": true
+  },
+  "candidate": {
+    "git_blob": "cba4640db303d9ff4724df82fc03534268fc425c",
+    "sha256": "eafb53034d87269be397b651ce8dd839fb5893169c100bc26cfd4657d4fc10c2",
+    "utf8_bytes": 13308,
+    "lines": 200,
+    "final_newline": true
+  },
+  "patch": {
+    "path": "positive/repair183/CircleShiftedForwardFixedBaseBounds.patch",
+    "git_blob": "73a9944f0a10d0a2177556ee2b18e37eb96225b5",
+    "sha256": "6d60b15e13208ab6c1d0e1c08dd1190f313f45ffd00bd2af053c5b953e800046",
+    "utf8_bytes": 1890,
+    "lines": 32,
+    "final_newline": true
+  },
+  "independent_review": {
+    "reviewer": "/root",
+    "git_blob": "f48f6eeb9f6a8e0bd6acbdbfc609569269364189",
+    "sha256": "f9860eb138a612b78bf4613fb8bfedcbdc63e4399df1c08720d983210a625d71",
+    "utf8_bytes": 2282,
+    "lines": 34,
+    "final_newline": true,
+    "result": "FULL_SOURCE_STATIC_PASS_UNCOMPILED",
+    "full_receipt_read": true
+  },
+  "selection": "Select only the171-line eff7a91bcc29fb4e6f13d24d2813849b70eb4e90 source. Exactly two proof substitutions: original generic types/family/point made explicit; original kernel existence cached and unpacked via typed choose/choose_spec. Both public headers and all other mathematical proof bytes are unchanged.",
+  "mechanical": {
+    "forward_reverse_exact": true,
+    "complete_public_headers_unchanged": 2,
+    "imports_unchanged": 4,
+    "options_unchanged": true,
+    "added_lines": 14,
+    "deleted_lines": 2,
+    "net_source_lines": 12
+  },
+  "diagnostics": {
+    "round": 183,
+    "head": "3c966e45bee461dc9f4ab9885ad1dbe9a70deb88",
+    "run": 43344996410,
+    "job": 131622089990,
+    "complete_error_json": "192b37894e3ef716d6797d73daf8d1b607676dd4",
+    "owned_error_count": 2,
+    "default_heartbeat_limit_unchanged": 200000
+  },
+  "same_objects": "Same J, shifted forward CLM, translated source, circle model, kernel and grading; base/loss still precede every parameter/spatial order and travel. No hypothesis of the desired full-J bound and no new representative.",
+  "persistence": {
+    "source_candidate_patch_exact_server_readbacks": true,
+    "peer_exact_hash_verified": true,
+    "local_write": "Not claimed: environment unavailable. All selected records are remote Git blobs; no refs or commits created by this owner."
+  },
+  "budget": {
+    "before": 159,
+    "selected": 171,
+    "net": 12,
+    "credit_from_CI": false
+  },
+  "next_gate": "Complete subsequent CI must establish compilation and resolve the timeout diagnostics. Static peer does not establish performance.",
+  "restrictions": {
+    "Lean_or_elaboration": false,
+    "CI_query_or_download": false,
+    "active_index_ref_change": false
+  },
+  "fullJ": {
+    "working_source_blob": "52bc280f8a817b5afac75d049e0c5d01d0366997",
+    "lines": 203,
+    "status": "SEPARATE_UNFROZEN_WORKING_DRAFT_NOT_REVIEWED_NOT_COMPILED"
+  }
+}

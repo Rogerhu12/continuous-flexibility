@@ -1,0 +1,10 @@
+--- a/src/ContinuousFlexibility/Analysis/CanonicalTransportPieceJetEnvelope.lean
++++ b/src/ContinuousFlexibility/Analysis/CanonicalTransportPieceJetEnvelope.lean
+@@ -2,6 +2,7 @@
+ import ContinuousFlexibility.Analysis.N07aAngularJacobianEnvelope
+ import ContinuousFlexibility.Analysis.N07aInverseChartBounds
+ import ContinuousFlexibility.Analysis.SolveReturnEquations
++import ContinuousFlexibility.Analysis.StateNeighborhood
+ 
+ /-!
+ # Finite jets of the actual reference-to-current transport on each piece

@@ -1,0 +1,178 @@
+import ContinuousFlexibility.Analysis.CanonicalTransportPieceJetEnvelope
+import ContinuousFlexibility.Analysis.CanonicalReferencePieceInequality
+import ContinuousFlexibility.Analysis.CanonicalActualWholeGeometry
+import ContinuousFlexibility.Analysis.N07aActualMaterialComparison
+import ContinuousFlexibility.Analysis.N07aMaterialLocalWindow
+
+/-!
+# Global estimates for the same qualitative transport
+
+The complete sampled envelope is multiplied by the material ratio before
+taking one material power. Continuity then extends the actual jet bounds
+through the null complement of the reference pieces.
+-/
+
+noncomputable section
+
+namespace ContinuousFlexibility.Analysis
+
+open Set Filter ContinuousFlexibility.Statements
+open scoped ContDiff Topology
+
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
+
+variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+  {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
+  {base : ℕ} {ε : ℝ}
+
+private theorem n04_transport_norm_jet_continuous
+    {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    {f : PolarPoint → E} (hf : ContDiffOn ℝ 3 f (annularOpen D))
+    {n : ℕ} (hn : n ≤ 2) :
+    ContinuousOn (fun p => ‖iteratedFDeriv ℝ n f p‖) (annularOpen D) := by
+  intro p hp
+  have hU : IsOpen (annularOpen D) := isOpen_Ioo.prod isOpen_univ
+  exact ((hf.contDiffAt (hU.mem_nhds hp)).differentiableAt_iteratedFDeriv
+    (by exact_mod_cast (show n < 3 by omega))).continuousAt.norm.continuousWithinAt
+
+/-- Both finite jet families use one physical material power, for the
+given global maps and the original material data. -/
+theorem n04_referenceCurrent_transport_global_jet_bounds
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hε : 0 < ε)
+    (hrefState : referenceStateConditions D S C)
+    (hgeom : CanonicalGeometry D S C K base ε)
+    (href : CanonicalGeometry.ReferenceJets D T S C L K)
+    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
+    (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε)
+    (τ : PolarPoint → PolarPoint) (q : PolarPoint → ℝ)
+    (hqual : WholeCanonicalTransportQualitative (D := D) C K
+      (liftSectorParameter S C z) τ q) :
+    ∃ B : ℝ, 0 < B ∧
+      (∀ p ∈ annularOpen D, ∀ n : ℕ, n ≤ 2 →
+        ‖iteratedFDeriv ℝ n q p‖ ≤ B * T.M p.1) ∧
+      (∀ p ∈ annularOpen D, ∀ n : ℕ, 1 ≤ n → n ≤ 2 →
+        ‖iteratedFDeriv ℝ n τ p‖ ≤ B * T.M p.1) := by
+  obtain ⟨e, he, _he1, heb⟩ :=
+    n04_referenceCurrent_transport_piece_envelope hD hT hε hrefState hgeom href hcur z hz
+  obtain ⟨r, hr, hr1, hrb⟩ := n07a_material_piece_ratio_envelope hD hT href
+    (fun m => (hgeom.referenceBounds m).1)
+  obtain ⟨B, hB, hBb⟩ := (he.mul hD hT hr).one_power
+  have hpoint (m : ℕ) (p : PolarPoint) (hp : p ∈ referencePhysicalPieceOpen S K m) :
+      e m ≤ B * T.M p.1 := by
+    have hpD : p.1 ∈ radialCore D := (hgeom.referenceBounds m).2.2 hp.1
+    have hMp : 0 < T.M p.1 := zero_lt_one.trans_le (hT.2.1 _ hpD).2.2.2
+    have hratio := (div_le_iff₀ hMp).mp (hrb m p hp).2.2.2
+    apply (mul_le_mul_iff_left₀ (zero_lt_one.trans_le (hr1 m))).mp
+    calc
+      r m * e m = e m * r m := mul_comm _ _
+      _ ≤ B * T.M (T.sample (K.cell m)) := (le_abs_self _).trans (hBb m)
+      _ ≤ B * (r m * T.M p.1) := mul_le_mul_of_nonneg_left hratio hB.le
+      _ = r m * (B * T.M p.1) := by ring
+  rcases hqual with ⟨hτ, hq, _hmap, _hperiod, _hqperiod, _hreflect, _hqeven,
+    hfields, _hpos⟩
+  have hM : ContinuousOn (fun p : PolarPoint => T.M p.1) (annularOpen D) :=
+    (hT.1 T.M (by simp)).continuousOn.comp continuous_fst.continuousOn (fun _ hp => hp.1)
+  have hbound : ContinuousOn (fun p : PolarPoint => B * T.M p.1) (annularOpen D) :=
+    continuousOn_const.mul hM
+  have hreference := reference_mem_stateNeighborhood S C base hε
+  have hW (m : ℕ) : IsOpen (referencePhysicalPieceOpen S K m) :=
+    isOpen_Ioo.prod isOpen_univ
+  refine ⟨B, hB, ?_, ?_⟩
+  · intro p hp n hn
+    apply n04_referencePieces_le_on_annularOpen hgeom hreference hrefState.stateSector
+      (n04_transport_norm_jet_continuous hq hn) hbound ?_ p hp
+    intro m x hx
+    have heq : q =ᶠ[𝓝 x] (fun y => K.height (C.referenceState, 0) m y /
+        K.height (liftSectorParameter S C z) m
+          (canonicalCurrentPoint C K (liftSectorParameter S C z) m y)) := by
+      filter_upwards [(hW m).mem_nhds hx] with y hy
+      rw [(hfields m y hy).2, (hfields m y hy).1]
+    rw [(heq.iteratedFDeriv ℝ n).eq_of_nhds]
+    exact ((heb m x hx).1 n hn).trans (hpoint m x hx)
+  · intro p hp n hn hn2
+    apply n04_referencePieces_le_on_annularOpen hgeom hreference hrefState.stateSector
+      (n04_transport_norm_jet_continuous hτ hn2) hbound ?_ p hp
+    intro m x hx
+    have heq : τ =ᶠ[𝓝 x] canonicalCurrentPoint C K (liftSectorParameter S C z) m := by
+      filter_upwards [(hW m).mem_nhds hx] with y hy
+      exact (hfields m y hy).1
+    rw [(heq.iteratedFDeriv ℝ n).eq_of_nhds]
+    exact ((heb m x hx).2 n hn hn2).trans (hpoint m x hx)
+
+
+private theorem n04_transport_material_ratio_continuous
+    {w : ℝ → ℝ} (hw : ContDiffOn ℝ ∞ w (radialCore D))
+    (hwp : ∀ r ∈ radialCore D, w r ≠ 0)
+    {τ : PolarPoint → PolarPoint} (hτ : ContinuousOn τ (annularOpen D))
+    (hmap : MapsTo τ (annularOpen D) (annularOpen D)) :
+    ContinuousOn (fun p => w (τ p).1 / w p.1) (annularOpen D) :=
+  (hw.continuousOn.comp hτ.fst (fun _ hp => (hmap hp).1)).div
+    (hw.continuousOn.comp continuous_fst.continuousOn (fun _ hp => hp.1))
+    (fun p hp => hwp p.1 hp.1)
+
+/-- One restriction works for both actual material ratios at every state.
+The maps themselves are the given qualitative whole-atlas transport. -/
+theorem n04_referenceCurrent_transport_global_material_ratios
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hε : 0 < ε)
+    (hrefState : referenceStateConditions D S C)
+    (hgeom : CanonicalGeometry D S C K base ε)
+    (href : CanonicalGeometry.ReferenceJets D T S C L K)
+    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε) :
+    ∃ base' : ℕ, base ≤ base' ∧ ∃ η : ℝ, 0 < η ∧ η ≤ ε ∧
+      ∀ z ∈ sectorNeighborhood S base' η η,
+        ∀ τ : PolarPoint → PolarPoint,
+          ContDiffOn ℝ 3 τ (annularOpen D) →
+          MapsTo τ (annularOpen D) (annularOpen D) →
+          (∀ m p, p ∈ referencePhysicalPieceOpen S K m →
+            τ p = canonicalCurrentPoint C K (liftSectorParameter S C z) m p) →
+          ∀ p ∈ annularOpen D,
+            T.H (τ p).1 / T.H p.1 ≤ Real.exp 1 ∧
+            T.M (τ p).1 / T.M p.1 ≤ Real.exp 1 := by
+  obtain ⟨δ, hδ, hwindow⟩ := n07a_material_local_ratio_window hT
+  obtain ⟨base', hb, η, hη, hηε, hdisp⟩ :=
+    n07a_inverseChart_material_displacement hD hT hε hrefState hgeom href hcur hδ
+  refine ⟨base', hb, η, hη, hηε, ?_⟩
+  intro z hz τ hτ hmap hpieces
+  have hreference := reference_mem_stateNeighborhood S C base hε
+  have hc (m : ℕ) := hgeom.charts (C.referenceState, 0)
+    hreference hrefState.stateSector m
+  have hpiece (m : ℕ) (p : PolarPoint) (hp : p ∈ referencePhysicalPieceOpen S K m) :
+      T.H (τ p).1 / T.H p.1 ≤ Real.exp 1 ∧
+        T.M (τ p).1 / T.M p.1 ≤ Real.exp 1 := by
+    let y := K.chart (C.referenceState, 0) m p
+    have hp' : p ∈ physicalPieceOpen S K (C.referenceState, 0) m := by
+      rw [hgeom.referenceDomain m]
+      exact hp
+    have hy : y ∈ canonicalOpen S K m := (hc m).1 hp'
+    have hleft : K.inverseChart (C.referenceState, 0) m y = p := (hc m).2.2.1 p hp'
+    have hcurrent : K.inverseChart (liftSectorParameter S C z) m y = τ p :=
+      (hpieces m p hp).symm
+    have hd := hdisp z hz m y hy
+    rw [hleft, hcurrent] at hd
+    have hpD : p.1 ∈ radialCore D := (hgeom.referenceBounds m).2.2 hp.1
+    have hτD : (τ p).1 ∈ radialCore D := (hmap ⟨hpD, mem_univ _⟩).1
+    have hw := hwindow p.1 hpD (τ p).1 hτD hd
+    exact ⟨hw.1, hw.2.2.1⟩
+  have hH : ContinuousOn (fun p => T.H (τ p).1 / T.H p.1) (annularOpen D) :=
+    n04_transport_material_ratio_continuous (hT.1 T.H (by simp))
+      (fun r hr => (hT.2.1 r hr).2.1.ne') hτ.continuousOn hmap
+  have hM : ContinuousOn (fun p => T.M (τ p).1 / T.M p.1) (annularOpen D) :=
+    n04_transport_material_ratio_continuous (hT.1 T.M (by simp))
+      (fun r hr => (zero_lt_one.trans_le (hT.2.1 r hr).2.2.2).ne') hτ.continuousOn hmap
+  have hHb := n04_referencePieces_le_on_annularOpen hgeom hreference hrefState.stateSector
+    hH continuousOn_const (fun m p hp => (hpiece m p hp).1)
+  have hMb := n04_referencePieces_le_on_annularOpen hgeom hreference hrefState.stateSector
+    hM continuousOn_const (fun m p hp => (hpiece m p hp).2)
+  exact fun p hp => ⟨hHb p hp, hMb p hp⟩
+
+end ContinuousFlexibility.Analysis

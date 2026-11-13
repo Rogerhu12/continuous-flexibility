@@ -1,0 +1,25 @@
+{
+  "schema": "n04-backup-push-receipt/v1",
+  "snapshot": 52,
+  "commit": "10f1232a7a757f1da29b6748bc747f9b495a4b14",
+  "tree": "855afcb7120c363796d5eb0147a98c42d6f517aa",
+  "parent": "33242e92f62b6491702d5048a3cc1464e0f95cb3",
+  "additional_parent": "3c966e45bee461dc9f4ab9885ad1dbe9a70deb88",
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "pushed_readback_utc": "2026-11-13 01:28:37 UTC",
+  "expected_head_nonforce": true,
+  "ref_readback_exact": true,
+  "blob_paths": 6679,
+  "outside_archive_exact_paths": 4933,
+  "outside_archive_target": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "indexed_artifacts": 3312,
+  "new_artifacts": 8,
+  "new_archived_Lean_lines": 0,
+  "source_index": {
+    "blob": "c375a2276c2d7186dafdd021516efb826794aaad",
+    "sha256": "c1c3d396a13bbe38818bcda29ea6a13e2639cd951638cf4fd8cef699e563b029",
+    "bytes": 1676924,
+    "entries": 3312
+  },
+  "record": "bd5bcc9eb681c6c7a978f3ab01565dfe5b089e5a"
+}

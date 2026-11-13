@@ -1,0 +1,59 @@
+{
+  "schema": "n04-ci183-endpoint-fixed-base-let-unfolding-candidate-v1",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_PEER",
+  "owner": "/root/audit_coordinates",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "intended_path": "audit/repair183/N04EndpointCircleFixedBaseBoundsCI183RepairCandidateManifest.json",
+  "target": "src/ContinuousFlexibility/Analysis/N04EndpointCircleFixedBaseBounds.lean",
+  "baseline": {
+    "head": "3c966e45bee461dc9f4ab9885ad1dbe9a70deb88",
+    "tree": "88bf373764bc23e7a47e74bb875968800673386d",
+    "source_blob": "09a1696b57c7fe3678cc6e10e419bb8fa22c0c11",
+    "source_sha256": "4726b99d556fcd77b094156f54551a65b5ec63b04f570f2ffb90fecdd1d0c29e",
+    "source_lines": 115,
+    "checked_exact_head_path_bytes": true
+  },
+  "candidate": {
+    "source_blob": "e1891a97f1d146c57a466013866aa7f4f914c37f",
+    "source_sha256": "a794443b1a03a8000d24a5d668f83be397ec798d92119b35f29ad7e3afcd7f66",
+    "source_lines": 115,
+    "net_added_lines": 0
+  },
+  "patch": {
+    "blob": "3d292982b311630cae8f52b1045b6a079c05f516",
+    "sha256": "bfff045dac021ea7a36ea7650d8249e61bea91eb29d720221d000a3580f1ab4d",
+    "added_lines": 1,
+    "deleted_lines": 1,
+    "hunks": 1
+  },
+  "cached_log": {
+    "blob": "d7c82139c0f9f317b6b511ce96b521b7676cbbd0",
+    "sha256": "4f87043673b85e282132aef2f01d476ae0eb1367d9df1279ede7096e90f87506",
+    "diagnostic": "2026-11-13T01:33:39.2087044Z error: src/ContinuousFlexibility/Analysis/N04EndpointCircleFixedBaseBounds.lean:107:4: Type mismatch: After simplification, term\n2026-11-13T01:33:39.2087673Z   (Exists.choose_spec estimate).right rsel hrsel J x hx hlow v\n2026-11-13T01:33:39.2088009Z  has type\n2026-11-13T01:33:39.2088305Z   circleNorm T (3 / 4) (s + B) (H.decode ((J.D n x) v)) ≤\n2026-11-13T01:33:39.2088648Z     ⋯.choose *\n2026-11-13T01:33:39.2088988Z       ((1 + (p (s + (B + ⋯.choose))) x) * ∏ i, (p B) (v i) +\n2026-11-13T01:33:39.2089580Z         ∑ x, (p (s + (B + ⋯.choose))) (v x) * ∏ i ∈ Finset.univ.erase x, (p B) (v i))\n2026-11-13T01:33:39.2089975Z but is expected to have type\n2026-11-13T01:33:39.2090326Z   circleNorm T (3 / 4) (s + B) (H.decode ((J.D n x) v)) ≤\n2026-11-13T01:33:39.2090630Z     K *\n2026-11-13T01:33:39.2090930Z       ((1 + (p (s + (B + L))) x) * ∏ i, (p B) (v i) +\n2026-11-13T01:33:39.2091332Z         ∑ i, (p (s + (B + L))) (v i) * ∏ i ∈ Finset.univ.erase i, (p B) (v i))\n2026-11-13T01:33:39.2091909Z ✔ [7012/7072] Ran ContinuousFlexibility.Analysis.N04SelectorInverseCircleFixedBaseBounds\n"
+  },
+  "exact_replacement": {
+    "before": "simpa only [oneHighVariationWeight, tameJetSize, Nat.add_assoc] using",
+    "after": "simpa only [K, L, oneHighVariationWeight, tameJetSize, Nat.add_assoc] using",
+    "occurrences": 1,
+    "reverse_reconstructs_all_bytes": true
+  },
+  "public_header": "theorem N01Properties.endpointFlowCircle_fixedBase_oneHigh\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :\n    ∃ B : ℕ, base ≤ B ∧ ∀ n : ℕ, ∃ L : ℕ, ∀ R : ℝ, 0 ≤ R →\n      ∀ s : ℕ, ∃ K : ℝ, 0 ≤ K ∧\n      ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),\n      ∀ J : SmoothDirections (sectorNeighborhood S base ε ε)\n        (hN.endpointFlowCircle hS hT rsel hrsel),\n      ∀ x ∈ sectorNeighborhood S base ε ε,\n      pairGrading (sectorGrading S) realGrading B x ≤ R →\n      ∀ v : Fin n → (StateDirections S × ℝ),\n        (S.circle (3 / 4 : ℝ)).grading s (J.D n x v) ≤\n          K * tameJetSize (pairGrading (sectorGrading S) realGrading) n s L B x v ",
+  "invariants": {
+    "complete_public_header_bytes": true,
+    "imports_bytes": true,
+    "options_bytes": true,
+    "all_other_bytes": true,
+    "same_positive_and_zero_producers": true,
+    "same_low_base_before_parameter_order": true,
+    "same_L_before_R_and_s": true,
+    "same_K_before_selector_and_genuine_J": true,
+    "same_hraw_and_all_but_last_conversion": true
+  },
+  "self_review": [
+    "Read all115 original lines and the complete nontruncated13-line diagnostic. The source term has estimate.choose and data.choose; the expected type has the local lets K and L.",
+    "The only change explicitly unfolds K:=estimate.choose and L:=data.choose in this final simpa. The existing oneHighVariationWeight/tameJetSize expansion and Nat.add_assoc normalization remain unchanged.",
+    "No new estimate, constant, radius, low order, loss, tower or witness is selected. The final s+B grading shift and original H-weight/circle model proof are retained.",
+    "Verified the actual fixed-head target bytes equal the supplied preimage, one exact replacement and its reverse, full public header, imports, options and all other source bytes.",
+    "No local Lean, no resource increase, no active checkout/index/tree/ref or CI action. Independent review and future complete CI remain required."
+  ]
+}

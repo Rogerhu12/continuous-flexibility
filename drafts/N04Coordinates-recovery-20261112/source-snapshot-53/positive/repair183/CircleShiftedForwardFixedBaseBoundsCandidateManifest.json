@@ -1,0 +1,200 @@
+{
+  "schema": "n04-ci-repair-candidate/v1",
+  "status": "CANDIDATE_SOURCE_REPAIR_ONLY_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "path": "positive/repair183/CircleShiftedForwardFixedBaseBoundsCandidateManifest.json",
+  "base": {
+    "ref": "3c966e45bee461dc9f4ab9885ad1dbe9a70deb88",
+    "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "4ea70ab43fc1fa6e51ddcfa3849f97580bf02235",
+    "sha256": "4c3c07d97d9b4ad03cbb16f4b9b1829eabacdbeb1c012dee3733958f32ac1941",
+    "utf8_bytes": 8240,
+    "lines": 159,
+    "final_newline": true
+  },
+  "selected": {
+    "path": "positive/repair183/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "eff7a91bcc29fb4e6f13d24d2813849b70eb4e90",
+    "sha256": "afae749be22c550a897c45755f456bade73f684a52ca65ca50cd6c02cfbf8a58",
+    "utf8_bytes": 8897,
+    "lines": 171,
+    "final_newline": true
+  },
+  "exact_patch": {
+    "path": "positive/repair183/CircleShiftedForwardFixedBaseBounds.patch",
+    "git_blob": "73a9944f0a10d0a2177556ee2b18e37eb96225b5",
+    "sha256": "6d60b15e13208ab6c1d0e1c08dd1190f313f45ffd00bd2af053c5b953e800046",
+    "utf8_bytes": 1890,
+    "lines": 32,
+    "final_newline": true
+  },
+  "ci_evidence": {
+    "round": 183,
+    "run_id": 43344996410,
+    "job_id": 131622089990,
+    "complete_error_json": {
+      "git_blob": "192b37894e3ef716d6797d73daf8d1b607676dd4",
+      "sha256": "37e624c5ffb34d16207b18d7ac720b2464847e0dee70fb0754b5dcf8e1079165",
+      "utf8_bytes": 3880,
+      "lines": 47,
+      "final_newline": true
+    },
+    "parent_downloaded_joblog": {
+      "blob": "d7c82139c0f9f317b6b511ce96b521b7676cbbd0",
+      "sha256": "4f87043673b85e282132aef2f01d476ae0eb1367d9df1279ede7096e90f87506",
+      "bytes": 124134
+    },
+    "owned_errors": [
+      {
+        "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:62:15: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached",
+        "lines": 5,
+        "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:62:15: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command."
+      },
+      {
+        "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:89:2: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached",
+        "lines": 5,
+        "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:89:2: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command."
+      }
+    ],
+    "reading_scope": "The original source159 and all five emitted complete error blocks were read. These two owned blocks contain the complete five-line timeout diagnostics, not truncated goal contexts. No new CI or artifact download by this owner."
+  },
+  "repair": {
+    "derivative_application": "Specify the original X=Y=Z=M.Space, U, actual shifted continuous-linear family L and point x=e at the generic derivative theorem. J, membership, order, tail/source/direction arguments stay unchanged.",
+    "kernel_boundary": "Cache the single original coupled_circle_kernel_grading_bounds result. Select its Nat base and loss with choose/choose_spec, then assign the exact all-r/k/s/R public bound to a typed hkernel before continuing the original proof. The two numerical witnesses still precede every order and travel; no new kernel or alternate J is selected.",
+    "performance_scope": "Intended to avoid expensive isDefEq inference of the structured circle family and nested Exists elimination. Performance is unverified until CI. No heartbeat/resource option is changed.",
+    "replacements": [
+      {
+        "before": "    have hf := hasProjectiveLineDerivAt_inverseForwardJet J he n (Fin.tail v) y (v 0)",
+        "after": "    have hf := hasProjectiveLineDerivAt_inverseForwardJet\n      (X := M.Space) (Y := M.Space) (Z := M.Space) (U := U)\n      (L := circleShiftedChartComposeContinuousLinear hM hT hD hγ travel)\n      (x := e) J he n (Fin.tail v) y (v 0)"
+      },
+      {
+        "before": "  obtain ⟨base, loss, hkernel⟩ := coupled_circle_kernel_grading_bounds hD hT hγ hM hI",
+        "after": "  let kernelBounds := coupled_circle_kernel_grading_bounds\n    (D := D) (T := T) (γ := γ) (M := M) hD hT hγ hM hI\n  let base : ℕ := kernelBounds.choose\n  let loss : ℕ := kernelBounds.choose_spec.choose\n  have hkernel : ∀ (r k s : ℕ) (R : ℝ), 1 ≤ R →\n      ∃ C : ℝ, 0 ≤ C ∧ ∀ ψ : M.Space, M.grading base ψ ≤ R →\n        ∀ (u : M.Space) (w : Fin k → M.Space),\n          M.grading s (coupledCircleKernel hD hT hγ hM hI r k ψ u w) ≤\n            C * coupledCircleKernelMajorant M base (r + s + loss) ψ (Fin.cons u w) :=\n    kernelBounds.choose_spec.choose_spec"
+      }
+    ]
+  },
+  "mechanical": {
+    "reverse_literal_reconstruction_exact": true,
+    "all_other_source_bytes_unchanged": true,
+    "complete_public_headers_unchanged": true,
+    "complete_public_headers": [
+      "theorem circleShiftedChartCompose_orderedJet_eq_kernel\n    (travel : ℕ → ℝ) {U : Set M.Space} (hU : IsOpen U)\n    (J : SmoothDirections (U ×ˢ univ) (fun z : M.Space × M.Space =>\n      circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2))\n    (n : ℕ) :\n    ∀ e ∈ U, ∀ (v : Fin n → M.Space) (y : M.Space),\n      inverseForwardJet J n e v y =\n        coupledCircleKernel hD hT hγ hM hI n n e\n          (circleTranslationContinuousLinear hM hT hD hγ travel y) v := by",
+      "theorem circleShiftedChartCompose_orderedJets_fixedBase_bound :\n    ∃ base loss : ℕ, ∀ (n : ℕ) (R : ℝ), 1 ≤ R →\n      ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧\n        ∀ (travel : ℕ → ℝ) (U : Set M.Space) (hU : IsOpen U)\n          (J : SmoothDirections (U ×ˢ univ) (fun z : M.Space × M.Space =>\n            circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2)),\n          ∀ e ∈ U, M.grading base e ≤ R → ∀ v : Fin n → M.Space,\n            (∀ i, M.grading base (v i) ≤ R) → ∀ y : M.Space,\n              M.grading s (inverseForwardJet J n e v y) ≤ C *\n                ((1 + M.grading (s + (n + loss)) e +\n                    ∑ i, M.grading (s + (n + loss)) (v i)) * M.grading base y +\n                  M.grading (s + (n + loss)) y) := by"
+    ],
+    "public_headers": 2,
+    "imports_unchanged": true,
+    "imports": [
+      "import ContinuousFlexibility.Analysis.TameInverseExpressions",
+      "import ContinuousFlexibility.Analysis.CoupledCircleCompositionCurveDerivative",
+      "import ContinuousFlexibility.Analysis.CircleTranslationUniformBounds",
+      "import ContinuousFlexibility.Analysis.TameMultilinearNormalization"
+    ],
+    "options_unchanged": true,
+    "added_lines": 14,
+    "deleted_lines": 2,
+    "net_source_lines": 12
+  },
+  "actual_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.TameInverseExpressions",
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseExpressions.lean",
+      "git_blob": "14ad46cae7d92dca46f5efd006f5260873046713",
+      "sha256": "5f19c405b830b56e9ad43319b2e9b306af3a27d840167fc29d592e9b9edaec56",
+      "utf8_bytes": 22877,
+      "lines": 490,
+      "final_newline": true,
+      "used_public_declarations": [
+        "hasProjectiveLineDerivAt_inverseForwardJet",
+        "inverseForwardJet"
+      ],
+      "scope": "Exact frozen fixed2/CI183-selected provider; relevant complete sources/actual API read. No provider/import change."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CoupledCircleCompositionCurveDerivative",
+      "path": "src/ContinuousFlexibility/Analysis/CoupledCircleCompositionCurveDerivative.lean",
+      "git_blob": "8ea11ac34960b5ebec1df0085ef1237cda8a8a56",
+      "sha256": "c66b2304951e6d0e2e94b9d83e289447032aa34deed51b27edd537815647980c",
+      "utf8_bytes": 8127,
+      "lines": 166,
+      "final_newline": true,
+      "used_public_declarations": [
+        "coupledCircleKernel_hasProjectiveLineDerivAt"
+      ],
+      "scope": "Exact frozen fixed2/CI183-selected provider; relevant complete sources/actual API read. No provider/import change."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CoupledCircleCompositionRealization",
+      "path": "src/ContinuousFlexibility/Analysis/CoupledCircleCompositionRealization.lean",
+      "git_blob": "c0b4ada33ad03e522aed5a3a52d8ef461bec9be3",
+      "sha256": "08ae5c8b3e993e1db595d5a4ee79e5711910bfac1f89a7871d7a42ced29223f0",
+      "utf8_bytes": 7809,
+      "lines": 151,
+      "final_newline": true,
+      "used_public_declarations": [
+        "coupled_circle_kernel_grading_bounds",
+        "coupledCircleKernel",
+        "coupledCircleKernel_decode_apply"
+      ],
+      "scope": "Exact frozen fixed2/CI183-selected provider; relevant complete sources/actual API read. No provider/import change."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleTranslationUniformBounds",
+      "path": "src/ContinuousFlexibility/Analysis/CircleTranslationUniformBounds.lean",
+      "git_blob": "29683e9c974fecbcd03fef36251ebb8b0061c485",
+      "sha256": "7ef561296693115b33d9daa18e66efb1778b028ac5d558696449a73af322b79f",
+      "utf8_bytes": 6812,
+      "lines": 144,
+      "final_newline": true,
+      "used_public_declarations": [
+        "circleTranslationContinuousLinear",
+        "circleTranslationContinuousLinear_grading_le"
+      ],
+      "scope": "Exact frozen fixed2/CI183-selected provider; relevant complete sources/actual API read. No provider/import change."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "path": "src/ContinuousFlexibility/Analysis/TameMultilinearNormalization.lean",
+      "git_blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "utf8_bytes": 9718,
+      "lines": 204,
+      "final_newline": true,
+      "used_public_declarations": [
+        "multilinear_bound_of_unitBall"
+      ],
+      "scope": "Exact frozen fixed2/CI183-selected provider; relevant complete sources/actual API read. No provider/import change."
+    }
+  ],
+  "exact_callee_contracts": {
+    "generic_variables": "{X Y Z : Type*}; X,Y,Z topological real modules; X,Y IsTopologicalAddGroup/ContinuousSMul; Z additionally T2Space; {U : Set X} {L : X → Y →L[ℝ] Z}.",
+    "derivative": "theorem hasProjectiveLineDerivAt_inverseForwardJet (J : SmoothDirections (U ×ˢ univ) (fun z : X × Y => L z.1 z.2)) {x : X} (hx : x ∈ U) (n : ℕ) (v : Fin n → X) (y : Y) (h : X) : HasProjectiveLineDerivAt (fun z => inverseForwardJet J n z v y) (inverseForwardJet J (n + 1) x (Fin.cons h v) y) x h",
+    "kernel": "∃ base loss : ℕ, ∀ (r k s : ℕ) (R : ℝ), 1 ≤ R → ∃ C : ℝ, 0 ≤ C ∧ ∀ ψ : M.Space, M.grading base ψ ≤ R → ∀ (v : M.Space) (w : Fin k → M.Space), M.grading s (coupledCircleKernel hD hT hγ hM hI r k ψ v w) ≤ C * coupledCircleKernelMajorant M base (r + s + loss) ψ (Fin.cons v w)",
+    "typed_boundary_match": "The hkernel text is this exact public kernel conclusion with the same chosen base/loss, and bound source variable v renamed to u. All realizing proof parameters hD,hT,hγ,hM,hI are the original ones."
+  },
+  "pinned_mathlib": {
+    "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "new_API": false,
+    "scope": "Only explicit named instantiation and Lean Exists choose/choose_spec replace elaboration paths. Existing ofSubsingleton_apply_apply normalization and all mathlib proof calls stay byte-identical."
+  },
+  "budget": {
+    "before_lines": 159,
+    "after_lines": 171,
+    "added_lines": 14,
+    "deleted_lines": 2,
+    "net": 12,
+    "storage": "Source before is retained in actual CI183 commit history; only selected source is proposed for the next active repair. No duplicate Lean archive is requested."
+  },
+  "unrelated_working_draft": {
+    "source_blob": "52bc280f8a817b5afac75d049e0c5d01d0366997",
+    "lines": 203,
+    "status": "UNFROZEN_FULL_J_WORKING_DRAFT_NOT_REVIEWED_NOT_COMPILED",
+    "note": "Preserved separately while this upstream repair takes priority; not a dependency or part of this repair."
+  },
+  "persistence": "Remote Git blobs and session store; execution environment unavailable, no local write claimed. Source and candidate require remote byte readback before final selection.",
+  "review_scope": "Full source before/after, both actual diagnostics, exact generic derivative and kernel contracts, public headers and two literal substitutions checked statically. SOURCE_REVIEW_ONLY_NOT_COMPILED. No Lean/lake/local elaboration, active/index/ref/CI operations.",
+  "peer_review": {
+    "status": "PENDING_FULL_INDEPENDENT_REVIEW",
+    "requested_reviewer": "/root"
+  }
+}

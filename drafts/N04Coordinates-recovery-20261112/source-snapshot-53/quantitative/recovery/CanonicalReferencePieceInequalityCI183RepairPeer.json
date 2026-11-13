@@ -1,0 +1,47 @@
+{
+  "schema": "n04-ci183-ae44-independent-repair-review/v1",
+  "artifact_path": "quantitative/recovery/reviews/CI183CanonicalReferencePieceInequalityIndependentReview.json",
+  "reviewer": "/root/quantitative_route",
+  "status": "PASS_STATIC_REPAIR_REVIEW_NOT_COMPILED",
+  "source_before": {
+    "blob": "d0b62f775987c37e6af0553ee18ea6dcd0224c8f",
+    "sha256": "a25275a8eb0f1900a6d2949e1ad85fd166023dc38684bf154659c6d3196ade98",
+    "bytes": 2027,
+    "lines": 44
+  },
+  "source_after": {
+    "blob": "b9be621151ca4757fe041997db8cc11afe13b01a",
+    "sha256": "6de4fdcb894add8edb408ae7abeffd381eab9a409d0fc8d2c099f24d1b00c59b",
+    "bytes": 2025,
+    "lines": 44
+  },
+  "candidate": "67760efae8e58b5ae5a09a9ad99799aed3d03355",
+  "patch": "0cf6c7e0ce22684c061c5517dc5af9b4cf9db62e",
+  "complete_diagnostics": "192b37894e3ef716d6797d73daf8d1b607676dd4",
+  "reading_scope": "Complete old/new 44-line source, exact patch and candidate, and complete two AE44 diagnostics (7 and 8 lines). Other three diagnostics in the same record are outside this repair.",
+  "exact_delta": {
+    "line": 42,
+    "before": "  exact (heq p hp).symm.trans_le (min_le_right _ _)",
+    "after": "  exact (heq hp).symm.trans_le (min_le_right _ _)",
+    "added": 1,
+    "deleted": 1,
+    "net": 0,
+    "forward_reverse_reconstruct_exact": true
+  },
+  "preserved": {
+    "public_headers": 1,
+    "public_header_sha256": "4f1c17602c8bc943b6ac0e81bc99adcd0632aac681c47aaea5ec3d9557432e94",
+    "imports_options_and_all_other_bytes": true,
+    "data_domains_partition_and_witnesses": true
+  },
+  "reasoning": "heq is explicitly Set.EqOn (fun p => min (f p) (g p)) f (annularOpen D). Its point binder is implicit, as both actual CI diagnostics also establish: the first explicit argument must be hp : p in annularOpen D. heq hp therefore gives min(f p)(g p)=f p; symmetry followed by min_le_right gives f p<=g p. The already accepted AE-to-open argument is unchanged.",
+  "historical_limit": "The earlier full static review 9b9983df8ab1720f93011044575bef196335720a missed this explicit/implicit binder issue. It is not evidence that original d0b62 compiled. This repair addresses the exact reported failure; future CI remains the elaboration test.",
+  "resources": "No heartbeat, recursion, tactic-resource or transparency option changed.",
+  "execution": {
+    "local_Lean": false,
+    "CI_queries": false,
+    "active_or_refs_mutated": false,
+    "local_file_written": false,
+    "persistence": "Git blob and functions store only"
+  }
+}

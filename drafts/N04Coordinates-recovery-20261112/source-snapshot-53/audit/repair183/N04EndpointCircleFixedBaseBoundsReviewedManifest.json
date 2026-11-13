@@ -1,0 +1,44 @@
+{
+  "schema": "n04-reviewed-ci-repair-owner-v1",
+  "owner": "/root/audit_coordinates",
+  "status": "INDEPENDENT_FULL_SOURCE_PEER_PASS_UNCOMPILED",
+  "intended_path": "audit/repair183/N04EndpointCircleFixedBaseBoundsCI183RepairReviewedManifest.json",
+  "source": {
+    "path": "src/ContinuousFlexibility/Analysis/N04EndpointCircleFixedBaseBounds.lean",
+    "blob": "e1891a97f1d146c57a466013866aa7f4f914c37f",
+    "sha256": "a794443b1a03a8000d24a5d668f83be397ec798d92119b35f29ad7e3afcd7f66",
+    "lines": 115,
+    "net_lines": 0
+  },
+  "baseline": {
+    "head": "3c966e45bee461dc9f4ab9885ad1dbe9a70deb88",
+    "tree": "88bf373764bc23e7a47e74bb875968800673386d",
+    "source_blob": "09a1696b57c7fe3678cc6e10e419bb8fa22c0c11",
+    "source_sha256": "4726b99d556fcd77b094156f54551a65b5ec63b04f570f2ffb90fecdd1d0c29e",
+    "source_lines": 115,
+    "checked_exact_head_path_bytes": true
+  },
+  "candidate": {
+    "blob": "0f5c6cc1d7c12f330586ce09ba3b16a10b298501",
+    "sha256": "86678663f10cac4e7fb3a853b5efc4b8608e9228035eb7d1dae93b96a31f7ea6"
+  },
+  "exact_patch": {
+    "blob": "3d292982b311630cae8f52b1045b6a079c05f516",
+    "sha256": "bfff045dac021ea7a36ea7650d8249e61bea91eb29d720221d000a3580f1ab4d",
+    "added_lines": 1,
+    "deleted_lines": 1,
+    "hunks": 1
+  },
+  "peer": {
+    "reviewer": "/root",
+    "blob": "0814c98ca6ad6a181358c7363e2456af32508dda",
+    "sha256": "f37841eebbb7a1d04abd970534e24d180f3f65ef04b2b4c7471d82a5421b7683",
+    "scope": "Full115-line selected source; exact preimage/delta and candidate; complete sole endpoint diagnostic from the already downloaded original job log. Prior full fixed2 execution/provider review retained as7f2cdb412ab8f6d68a2ea4dbe28b51f1031044e7."
+  },
+  "notes": [
+    "Selected source unchanged after independent review; all source/patch/candidate/peer objects were fetched back and checked byte-for-byte or SHA256.",
+    "Only the local let names K,L were added to the final simp-only set. Same 115 lines, public header, imports, resource settings, witnesses and quantifier order.",
+    "Old source/candidate/receipts remain immutable. This does not reconstruct the missing historical115 owner body or claim source compilation.",
+    "Activation and any draft-budget release remain parent-owned and require the complete successor CI gate."
+  ]
+}

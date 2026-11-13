@@ -1,0 +1,286 @@
+import ContinuousFlexibility.Analysis.N07aAngularPhysicalJetEnvelopes
+import ContinuousFlexibility.Analysis.N07aAngularJacobianEnvelope
+import ContinuousFlexibility.Analysis.N07aInverseChartBounds
+import ContinuousFlexibility.Analysis.SolveReturnEquations
+import ContinuousFlexibility.Analysis.StateNeighborhood
+
+/-!
+# Finite jets of the actual reference-to-current transport on each piece
+
+The geometry and the reference/current atom estimates retain the same
+data and sample. Only positive jets of the inverse chart are composed;
+its unbounded angular value is never placed in an envelope.
+-/
+
+noncomputable section
+
+namespace ContinuousFlexibility.Analysis
+
+open Set Filter ContinuousFlexibility.Statements
+open scoped ContDiff BigOperators Topology
+
+set_option backward.isDefEq.respectTransparency true
+
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
+
+variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+  {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
+  {base : ℕ} {ε : ℝ}
+
+private theorem n04_transport_positive_comp_envelope
+    {E F G : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    [NormedAddCommGroup F] [NormedSpace ℝ F]
+    [NormedAddCommGroup G] [NormedSpace ℝ G]
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    {W : ℕ → Set E} {V : ℕ → Set F} {f : ℕ → F → G} {Φ : ℕ → E → F}
+    (hmaps : ∀ m, MapsTo (Φ m) (W m) (V m))
+    (hfs : ∀ m x, x ∈ W m → ContDiffAt ℝ ∞ (f m) (Φ m x))
+    (hΦs : ∀ m x, x ∈ W m → ContDiffAt ℝ ∞ (Φ m) x)
+    (hf : ∀ n : ℕ, 0 < n → ∃ e : ℕ → ℝ,
+      N07aSampleSubpower T K e ∧ (∀ m, 0 ≤ e m) ∧
+        ∀ m y, y ∈ V m → ‖iteratedFDeriv ℝ n (f m) y‖ ≤ e m)
+    (hΦ : ∀ n : ℕ, 0 < n → ∃ e : ℕ → ℝ,
+      N07aSampleSubpower T K e ∧ (∀ m, 0 ≤ e m) ∧
+        ∀ m x, x ∈ W m → ‖iteratedFDeriv ℝ n (Φ m) x‖ ≤ e m) :
+    ∀ n : ℕ, 0 < n → ∃ e : ℕ → ℝ,
+      N07aSampleSubpower T K e ∧ (∀ m, 0 ≤ e m) ∧
+        ∀ m x, x ∈ W m → ‖iteratedFDeriv ℝ n (f m ∘ Φ m) x‖ ≤ e m := by
+  classical
+  intro n hn
+  choose a ha ha0 hab using fun k : OrderedFinpartition n => hf k.length (k.length_pos hn)
+  choose b hb hb0 hbb using fun k : OrderedFinpartition n =>
+    fun j : Fin k.length => hΦ (k.partSize j) (k.partSize_pos j)
+  let e : OrderedFinpartition n → ℕ → ℝ := fun k m => a k m * ∏ j, b k j m
+  have he (k : OrderedFinpartition n) : N07aSampleSubpower T K (e k) :=
+    N07aSampleSubpower.mul hD hT (ha k)
+      (N07aSampleSubpower.finset_prod hD hT Finset.univ (b k) (fun j _ => hb k j))
+  refine ⟨fun m => ∑ k, e k m,
+    N07aSampleSubpower.finset_sum hD hT Finset.univ e (fun k _ => he k),
+    fun m => Finset.sum_nonneg (fun k _ =>
+      mul_nonneg (ha0 k m) (Finset.prod_nonneg (fun j _ => hb0 k j m))), ?_⟩
+  intro m x hx
+  apply (norm_iteratedFDeriv_comp_le_partition_sum (hfs m x hx) (hΦs m x hx) n).trans
+  apply Finset.sum_le_sum
+  intro k _
+  have hprod : (∏ j, ‖iteratedFDeriv ℝ (k.partSize j) (Φ m) x‖) ≤ ∏ j, b k j m :=
+    Finset.prod_le_prod₀ (fun j _ => norm_nonneg _) (fun j _ => hbb k j m x hx)
+  exact mul_le_mul (hab k m (Φ m x) (hmaps m hx)) hprod
+    (Finset.prod_nonneg (fun j _ => norm_nonneg _)) (ha0 k m)
+
+private theorem n04_transport_inverse_positive_envelope
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (hgeom : CanonicalGeometry D S C K base ε)
+    (href : CanonicalGeometry.ReferenceJets D T S C L K)
+    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
+    (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε) :
+    ∀ n : ℕ, 0 < n → ∃ e : ℕ → ℝ,
+      N07aSampleSubpower T K e ∧ (∀ m, 0 ≤ e m) ∧
+        ∀ m y, y ∈ canonicalOpen S K m →
+          ‖iteratedFDeriv ℝ n (K.inverseChart (liftSectorParameter S C z) m) y‖ ≤ e m := by
+  let bounds := n07a_inverseChart_positive_jets
+    (D := D) (T := T) (S := S) (C := C) (L := L) (K := K) (base := base) (ε := ε)
+    hD hT href hcur (fun m => (hgeom.referenceBounds m).2.1)
+      (fun m => (hgeom.referenceBounds m).1)
+  let d : ℕ := bounds.choose
+  have hd := bounds.choose_spec
+  intro n hn
+  let e : ℕ → ℝ := (hd n hn).choose
+  have he := (hd n hn).choose_spec.1
+  have he0 := (hd n hn).choose_spec.2.1
+  have heb := (hd n hn).choose_spec.2.2
+  let a : ℝ := 1 + CanonicalGeometry.parameterGrading S ((n - 1) + d) z
+  have ha : 0 ≤ a := add_nonneg zero_le_one (apply_nonneg _ _)
+  exact ⟨fun m => e m * a,
+    N07aSampleSubpower.mul hD hT he (N07aSampleSubpower.const hD hT a),
+    fun m => mul_nonneg (he0 m) ha, fun m y hy => heb z hz m y hy⟩
+
+private theorem n04_transport_height_inverse_envelope
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (hrefState : referenceStateConditions D S C)
+    (hgeom : CanonicalGeometry D S C K base ε)
+    (href : CanonicalGeometry.ReferenceJets D T S C L K)
+    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
+    (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε) :
+    (∀ m, ContDiffOn ℝ ∞
+      (fun y => (K.height (liftSectorParameter S C z) m
+        (K.inverseChart (liftSectorParameter S C z) m y))⁻¹) (canonicalOpen S K m)) ∧
+    N07aAngularFixedJetEnvelope T K (canonicalOpen S K) (fun _ => 1)
+      (fun m y => (K.height (liftSectorParameter S C z) m
+        (K.inverseChart (liftSectorParameter S C z) m y))⁻¹) := by
+  let z' : AnnularState S × ℝ := liftSectorParameter S C z
+  let V : ℕ → Set PolarPoint := canonicalOpen S K
+  let G : ℕ → PolarPoint → PolarPoint := K.inverseChart z'
+  have hV : ∀ m, IsOpen (V m) := fun _ => isOpen_Ioo.prod isOpen_univ
+  have hz' := liftSectorParameter_mem_stateNeighborhood (C := C) hz le_rfl
+  have hs := hrefState.liftSectorParameter_sector z
+  have hc (m : ℕ) := hgeom.charts z' hz' hs m
+  have hG : ∀ m, ContDiffOn ℝ ∞ (G m) (V m) := fun m => (hc m).2.2.2.2.2.1
+  have hInv (m : ℕ) : ContDiffOn ℝ ∞
+      (fun y => (K.height z' m (G m y))⁻¹) (V m) :=
+    ((hc m).2.2.2.2.2.2.1.comp (hG m) (hc m).2.1).inv
+      (fun y hy => ((hc m).2.2.2.2.2.2.2 _ ((hc m).2.1 hy)).1.ne')
+  refine ⟨hInv, ?_⟩
+  have hJ (m : ℕ) (y : PolarPoint) (hy : y ∈ V m) :
+      ContDiffAt ℝ ∞ (planeJacobian (G m)) y :=
+    ContinuousFlexibility.contDiffAt_planeJacobian ((hG m).contDiffAt ((hV m).mem_nhds hy))
+  have hJne (m : ℕ) (y : PolarPoint) (hy : y ∈ V m) : planeJacobian (G m) y ≠ 0 := by
+    apply abs_ne_zero.mp
+    rw [n07a_actual_inverseChart_jacobian_abs hgeom hz' hs m hy]
+    exact inv_ne_zero (abs_ne_zero.mpr
+      ((hc m).2.2.2.2.2.2.2 _ ((hc m).2.1 hy)).2.1)
+  have hJb := n07a_planeJacobian_fixedEnvelope_of_positiveJets hD hT hV hG
+    (n04_transport_inverse_positive_envelope hD hT hgeom href hcur z hz)
+  have hJabs := hJb.abs (fun m y hy => (hJ m y hy).continuousAt) hJne
+  have hJsm (m : ℕ) : ContDiffOn ℝ ∞ (fun y => |planeJacobian (G m) y|) (V m) :=
+    fun y hy => ((hJ m y hy).abs (hJne m y hy)).contDiffWithinAt
+  have hinterval := fun m => (hgeom.referenceBounds m).2.1
+  let bounds := n07a_canonicalAtomFields_sampleJetBounds
+    (D := D) (T := T) (S := S) (C := C) (L := L) (K := K) (base := base) (ε := ε)
+    hD hT href hcur hinterval
+  have hd := bounds.choose_spec
+  have hsrc := n07a_fixedJetEnvelope_of_sampleJetBounds hD hT
+    (hd .sourceFactorInverse) hV
+    (n07a_canonicalAtomField_smooth hcur hinterval .sourceFactorInverse) z hz
+  have hsrcsm := n07a_canonicalAtomField_smooth hcur hinterval .sourceFactorInverse z hz
+  have hprod : N07aAngularFixedJetEnvelope T K V (fun _ => 1)
+      (fun m y => n07aCanonicalAtomField D T S C L K .sourceFactorInverse z m y *
+        |planeJacobian (G m) y|) := by
+    simpa only [one_mul] using N07aAngularFixedJetEnvelope.mul hD hT hV
+      hsrcsm hJsm hsrc hJabs (fun _ => zero_le_one) (fun _ => zero_le_one)
+  apply hprod.congr hV
+  intro m y hy
+  change (K.height z' m (K.inverseChart z' m y))⁻¹ =
+    n07aCanonicalAtomField D T S C L K .sourceFactorInverse z m y *
+      |planeJacobian (K.inverseChart z' m) y|
+  have hx := (hc m).2.1 hy
+  have hh := ((hc m).2.2.2.2.2.2.2 _ hx).1.ne'
+  have hj := abs_ne_zero.mpr ((hc m).2.2.2.2.2.2.2 _ hx).2.1
+  have hunit := n07aCanonicalUnitPoint_inverse (hgeom.referenceBounds m).2.1 y
+  rw [n07a_actual_inverseChart_jacobian_abs hgeom hz' hs m hy]
+  simp only [n07aCanonicalAtomField, Function.comp_apply, CanonicalGeometry.atom,
+    hunit, canonicalSource, mul_one]
+  field_simp [hh, hj]
+
+/-- At a fixed admissible parameter one sampled envelope controls the actual
+height quotient through order two and the actual transport at orders one and two. -/
+theorem n04_referenceCurrent_transport_piece_envelope
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hε : 0 < ε)
+    (hrefState : referenceStateConditions D S C)
+    (hgeom : CanonicalGeometry D S C K base ε)
+    (href : CanonicalGeometry.ReferenceJets D T S C L K)
+    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
+    (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε) :
+    ∃ e : ℕ → ℝ, N07aSampleSubpower T K e ∧ (∀ m, 1 ≤ e m) ∧
+      ∀ m p, p ∈ referencePhysicalPieceOpen S K m →
+        (∀ n : ℕ, n ≤ 2 →
+          ‖iteratedFDeriv ℝ n
+            (fun x => K.height (C.referenceState, 0) m x /
+              K.height (liftSectorParameter S C z) m
+                (canonicalCurrentPoint C K (liftSectorParameter S C z) m x)) p‖ ≤ e m) ∧
+        (∀ n : ℕ, 1 ≤ n → n ≤ 2 →
+          ‖iteratedFDeriv ℝ n
+            (canonicalCurrentPoint C K (liftSectorParameter S C z) m) p‖ ≤ e m) := by
+  classical
+  let z' : AnnularState S × ℝ := liftSectorParameter S C z
+  let W : ℕ → Set PolarPoint := referencePhysicalPieceOpen S K
+  let V : ℕ → Set PolarPoint := canonicalOpen S K
+  let F : ℕ → PolarPoint → PolarPoint := K.chart (C.referenceState, 0)
+  let G : ℕ → PolarPoint → PolarPoint := K.inverseChart z'
+  let H : ℕ → PolarPoint → ℝ := K.height (C.referenceState, 0)
+  let I : ℕ → PolarPoint → ℝ := fun m y => (K.height z' m (G m y))⁻¹
+  let Q : ℕ → PolarPoint → ℝ := fun m x =>
+    K.height (C.referenceState, 0) m x /
+      K.height z' m (canonicalCurrentPoint C K z' m x)
+  have hW : ∀ m, IsOpen (W m) := fun _ => isOpen_Ioo.prod isOpen_univ
+  have hV : ∀ m, IsOpen (V m) := fun _ => isOpen_Ioo.prod isOpen_univ
+  have hphysical := fun m => (hgeom.referenceBounds m).1
+  have hinterval := fun m => (hgeom.referenceBounds m).2.1
+  have hr := reference_mem_stateNeighborhood S C base hε
+  have hc (m : ℕ) := hgeom.charts (C.referenceState, 0) hr hrefState.stateSector m
+  have hmaps (m : ℕ) : MapsTo (F m) (W m) (V m) := by
+    simpa only [hgeom.referenceDomain m] using (hc m).1
+  have hFs (m : ℕ) : ContDiffOn ℝ ∞ (F m) (W m) := by
+    simpa only [hgeom.referenceDomain m] using (hc m).2.2.2.2.1
+  have hHs (m : ℕ) : ContDiffOn ℝ ∞ (H m) (W m) := by
+    simpa only [hgeom.referenceDomain m] using (hc m).2.2.2.2.2.2.1
+  have hfields := n07a_referencePhysicalJetFields_fixedEnvelope
+    (D := D) (T := T) (S := S) (C := C) (L := L) (K := K) hD hT href hphysical
+  have hF := n07a_physicalChart_positive_fixedEnvelope
+    (D := D) (T := T) (S := S) (C := C) (L := L) (K := K)
+    hD hT href hinterval hphysical (fun m a => (href.1 m a).1) hfields
+  have hH : N07aAngularFixedJetEnvelope T K W (fun _ => 1) H :=
+    (hfields (2 : Fin 6)).congr hW (fun _ _ _ => rfl)
+  have hG := n04_transport_inverse_positive_envelope hD hT hgeom href hcur z hz
+  have hI := n04_transport_height_inverse_envelope hD hT hrefState hgeom href hcur z hz
+  have hIs (m : ℕ) : ContDiffOn ℝ ∞ (I m) (V m) := hI.1 m
+  have hIb : N07aAngularFixedJetEnvelope T K V (fun _ => 1) I := hI.2
+  have hcomp : N07aAngularFixedJetEnvelope T K W (fun _ => 1)
+      (fun m => I m ∘ F m) :=
+    hIb.comp hD hT (fun _ => zero_le_one) hmaps
+      (fun m x hx => (hIs m).contDiffAt ((hV m).mem_nhds (hmaps m hx)))
+      (fun m x hx => (hFs m).contDiffAt ((hW m).mem_nhds hx)) hF
+  have hcomps (m : ℕ) : ContDiffOn ℝ ∞ (I m ∘ F m) (W m) :=
+    (hIs m).comp (hFs m) (hmaps m)
+  have hraw : N07aAngularFixedJetEnvelope T K W (fun _ => 1)
+      (fun m x => H m x * (I m ∘ F m) x) := by
+    simpa only [one_mul] using N07aAngularFixedJetEnvelope.mul hD hT hW
+      hHs hcomps hH hcomp (fun _ => zero_le_one) (fun _ => zero_le_one)
+  have hQ : N07aAngularFixedJetEnvelope T K W (fun _ => 1) Q := by
+    apply hraw.congr hW
+    intro m x _
+    exact div_eq_mul_inv _ _
+  have hz' := liftSectorParameter_mem_stateNeighborhood (C := C) hz le_rfl
+  have hGs (m : ℕ) : ContDiffOn ℝ ∞ (G m) (V m) :=
+    (hgeom.charts z' hz' (hrefState.liftSectorParameter_sector z) m).2.2.2.2.2.1
+  have hτ := n04_transport_positive_comp_envelope hD hT hmaps
+    (fun m x hx => (hGs m).contDiffAt ((hV m).mem_nhds (hmaps m hx)))
+    (fun m x hx => (hFs m).contDiffAt ((hW m).mem_nhds hx)) hG hF
+  choose a ha ha0 hab using fun i : Fin 3 => hQ i.val
+  choose b hb hb0 hbb using fun i : Fin 2 => hτ (i.val + 1) (Nat.succ_pos i.val)
+  let A : ℕ → ℝ := fun m => ∑ i, a i m
+  let B : ℕ → ℝ := fun m => ∑ i, b i m
+  have hA : N07aSampleSubpower T K A :=
+    N07aSampleSubpower.finset_sum hD hT Finset.univ a (fun i _ => ha i)
+  have hB : N07aSampleSubpower T K B :=
+    N07aSampleSubpower.finset_sum hD hT Finset.univ b (fun i _ => hb i)
+  have hA0 (m : ℕ) : 0 ≤ A m := Finset.sum_nonneg (fun i _ => ha0 i m)
+  have hB0 (m : ℕ) : 0 ≤ B m := Finset.sum_nonneg (fun i _ => hb0 i m)
+  let e : ℕ → ℝ := fun m => 1 + A m + B m
+  have he : N07aSampleSubpower T K e :=
+    ((N07aSampleSubpower.const hD hT (K := K) 1).add hA).add hB
+  refine ⟨e, he, fun m => by dsimp only [e]; linarith only [hA0 m, hB0 m], ?_⟩
+  intro m p hp
+  constructor
+  · intro n hn
+    let i : Fin 3 := ⟨n, by omega⟩
+    have hbound : ‖iteratedFDeriv ℝ n (Q m) p‖ ≤ a i m := by
+      simpa only [mul_one] using hab i m p hp
+    have hi : a i m ≤ A m :=
+      Finset.single_le_sum (fun j _ => ha0 j m) (Finset.mem_univ i)
+    change ‖iteratedFDeriv ℝ n (Q m) p‖ ≤ e m
+    dsimp only [e]
+    linarith only [hbound, hi, hB0 m]
+  · intro n hn hn2
+    let i : Fin 2 := ⟨n - 1, by omega⟩
+    have hi : i.val + 1 = n := Nat.sub_add_cancel hn
+    have hbound := hbb i m p hp
+    rw [hi] at hbound
+    have hfun : G m ∘ F m = canonicalCurrentPoint C K z' m := rfl
+    rw [hfun] at hbound
+    have hi' : b i m ≤ B m :=
+      Finset.single_le_sum (fun j _ => hb0 j m) (Finset.mem_univ i)
+    change ‖iteratedFDeriv ℝ n (canonicalCurrentPoint C K z' m) p‖ ≤ e m
+    dsimp only [e]
+    linarith only [hbound, hi', hA0 m]
+
+end ContinuousFlexibility.Analysis

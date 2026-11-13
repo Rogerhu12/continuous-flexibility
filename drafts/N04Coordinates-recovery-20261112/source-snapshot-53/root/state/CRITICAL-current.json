@@ -1,0 +1,134 @@
+{
+  "schema": "n04-live-recovery-state/v1",
+  "as_of": "2026-11-13 01:50:42 UTC",
+  "active": {
+    "schema": "n04-ci-push-receipt/v1",
+    "round": 184,
+    "repository": "Rogerhu12/continuous-flexibility",
+    "branch": "line/N04Coordinates",
+    "commit": "91aabb8b96f6d7571bc5bd6a2142a58d84738dc1",
+    "tree": "874193e6ca8080da8101554fe92e30348161dba0",
+    "parent": "3c966e45bee461dc9f4ab9885ad1dbe9a70deb88",
+    "plan": "bb9bb9ec1f7b1656dbfe082215648c2df7b822ca",
+    "force": false,
+    "expected_sha_verified": true,
+    "ref_readback_exact": true,
+    "pushed_readback_utc": "2026-11-13 01:45:10 UTC",
+    "earliest_first_ci_lookup_utc": "2026-11-13T01:50:10.000Z",
+    "conservative_active_added": 18561,
+    "compilation": "PENDING",
+    "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+    "run_id": 43347207316,
+    "workflow_number": 1868,
+    "job_id": 131629331564,
+    "status": "in_progress_after_quick_failure",
+    "first_lookup": "2026-11-13 01:50:25 UTC",
+    "quick": "failure",
+    "full": "skipped",
+    "complete_job_diagnostics": "PENDING_FINAL_JOB_COMPLETION_BEFORE_SINGLE_LOG_DOWNLOAD"
+  },
+  "last_complete_green": {
+    "head": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+    "tree": "02a8747b6aaae413f67372d96e52ad8f3dbd9e9a",
+    "success": "318abffc005fd4c3069d27066e3ad5c1ad63a7b4",
+    "coverage": "43f48f184f286e81597f12ab2bc242ea369bf271"
+  },
+  "failure183": {
+    "receipt": "c5fffd415e8957776b1676dc70c1e0ef1ce4fc6e",
+    "log": "d7c82139c0f9f317b6b511ce96b521b7676cbbd0",
+    "complete_errors": "192b37894e3ef716d6797d73daf8d1b607676dd4",
+    "credit": 0
+  },
+  "selected_repairs": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferencePieceInequality.lean",
+      "blob": "b9be621151ca4757fe041997db8cc11afe13b01a",
+      "owner": "1d72a16ecee61522a8d5bd09cc348acd63787dd5",
+      "peer": "77725b26ea2f65f3c0178916daf350a170eb2668",
+      "lines": 44
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+      "blob": "eff7a91bcc29fb4e6f13d24d2813849b70eb4e90",
+      "owner": "2da983637a31cb8bbdcb34576276c98d9d9d8303",
+      "peer": "f48f6eeb9f6a8e0bd6acbdbfc609569269364189",
+      "lines": 171
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04EndpointCircleFixedBaseBounds.lean",
+      "blob": "e1891a97f1d146c57a466013866aa7f4f914c37f",
+      "owner": "55e9fd00f378c81c39cb716daf34f24ca0528d74",
+      "peer": "0814c98ca6ad6a181358c7363e2456af32508dda",
+      "lines": 115
+    }
+  ],
+  "new_uncompiled_sources": [
+    {
+      "path": "positive/working/CircleShiftedFullForwardFixedBaseBounds.lean.txt",
+      "blob": "52bc280f8a817b5afac75d049e0c5d01d0366997",
+      "lines": 203,
+      "status": "Working; owner currently reviewing same-line proof corrections before final full peer."
+    },
+    {
+      "path": "quantitative/reconstructed/CanonicalTransportPieceJetEnvelope.lean.txt",
+      "blob": "d8f2a72059aea8d0a2a37702ec95cf7017c2f31c",
+      "lines": 286,
+      "owner": "f5517acf2efd614bfcecbc3b3bc7f3eecf5ce4e9",
+      "peer": "7a941317e67fe215d27ae6362a4c7d6b2f37b373",
+      "status": "Full static reviewed, held uncompiled."
+    },
+    {
+      "path": "root/working/CanonicalTransportGlobalBounds.lean.txt",
+      "blob": "94aa073f7aff6b010b18fa65e26167978711aa5e",
+      "lines": 178,
+      "candidate": "18837c042fb33ab687fceb2e008239c30a70a321",
+      "status": "Actual global jet and material ratio proofs; full peer pending. Common exponent/state/existential assembly remains."
+    }
+  ],
+  "budget": {
+    "repository_added_Lean_limit": 20000,
+    "active_conservative": 18561,
+    "session_draft_guard": 20000,
+    "after182": 19276,
+    "new_current_sources": 667,
+    "repair_net": 12,
+    "actual_retained_upper": 19955,
+    "remaining": 45,
+    "root_allocation_unused": 22,
+    "unallocated_repair_reserve": 23,
+    "no_credit_until_complete184": true,
+    "conditional_owned_credit": [
+      171,
+      301,
+      115,
+      152,
+      44
+    ]
+  },
+  "next_batch": {
+    "new_sources": 81,
+    "new_lines": 14307,
+    "whole_root_lag": 574,
+    "conservative": 14881,
+    "status": "Actual184 provider/absence/graph checked; ordinary declaration gate in progress; activate only after complete-green184."
+  },
+  "main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "endpoint": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open",
+    "target": "theorem N04Coordinates (hN04b : N04bStatement) : N04cStatement",
+    "allowed_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "remaining": [
+    "Same retained correction cutoff/strict gap field adapter; preserve153 numerical witness.",
+    "Preserve178 positive-reference construction witnesses through294/151 auxiliary/material transport to principal and transmission.",
+    "Actual R and cutoff forcing, full-J fixed-base supplier, all33 current jets and15 primitive material jets.",
+    "Global transport common exponent/original E0 factor, exact Realization, current-main merge and complete final CI."
+  ],
+  "environment": "Local execution unavailable; remote Git blobs/trees/ref readbacks only. No local writes asserted. Original CI logs retained once, no artifact download where complete error blocks suffice."
+}

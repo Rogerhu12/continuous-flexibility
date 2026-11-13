@@ -1,0 +1,76 @@
+{
+  "schema": "n04-global-transport-candidate/v1",
+  "author": "/root",
+  "status": "FULL_SOURCE_WORKING_CANDIDATE_PEER_PENDING_UNCOMPILED",
+  "source": {
+    "module": "ContinuousFlexibility.Analysis.CanonicalTransportGlobalBounds",
+    "path": "src/ContinuousFlexibility/Analysis/CanonicalTransportGlobalBounds.lean",
+    "blob": "94aa073f7aff6b010b18fa65e26167978711aa5e",
+    "sha256": "fcc95720d1dbe0711d6b905a76be759a05560ad73e3fa2acc71cf45aed8cac1f",
+    "bytes": 9496,
+    "lines": 178,
+    "imports": [
+      "ContinuousFlexibility.Analysis.CanonicalTransportPieceJetEnvelope",
+      "ContinuousFlexibility.Analysis.CanonicalReferencePieceInequality",
+      "ContinuousFlexibility.Analysis.CanonicalActualWholeGeometry",
+      "ContinuousFlexibility.Analysis.N07aActualMaterialComparison",
+      "ContinuousFlexibility.Analysis.N07aMaterialLocalWindow"
+    ]
+  },
+  "baseline": {
+    "head": "91aabb8b96f6d7571bc5bd6a2142a58d84738dc1",
+    "tree": "874193e6ca8080da8101554fe92e30348161dba0",
+    "complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b"
+  },
+  "held_dependency": {
+    "module": "CanonicalTransportPieceJetEnvelope",
+    "blob": "d8f2a72059aea8d0a2a37702ec95cf7017c2f31c",
+    "owner": "f5517acf2efd614bfcecbc3b3bc7f3eecf5ce4e9",
+    "peer": "7a941317e67fe215d27ae6362a4c7d6b2f37b373",
+    "lines": 286
+  },
+  "public_names": [
+    "n04_referenceCurrent_transport_global_jet_bounds",
+    "n04_referenceCurrent_transport_global_material_ratios"
+  ],
+  "proof": [
+    "Multiply the actual piece envelope e and same-sample material ratio r before one_power; cancel the positive r after M(sample)<=r*M(point). Gives a single B for q0..2 and tau1..2.",
+    "Open piece identities give germ equality of the actual global maps and exact local quotient/currentPoint. Pinned EventuallyEq.iteratedFDeriv and eq_of_nhds transfer their actual jets.",
+    "Global C3 implies continuity of every normed jet through order2 by differentiability of its iterated derivative; reference null-coverage inequality extends the bounds through all missing piece boundaries.",
+    "Choose local material delta and then one base'/eta before z, piece and point. Actual reference inverse identity and the same tau piece identity convert inverse-chart displacement into physical radial displacement.",
+    "The original smooth positive H and M compose with the given global tau; extend both ratio bounds <=exp1 by the same reference-partition continuity theorem."
+  ],
+  "preflight": {
+    "reachable_project_and_root_nodes": 854,
+    "missing_imports": 0,
+    "cycles": 0,
+    "all_retained_closure_blobs_match_actual184": true,
+    "all_sources_read_in_proof_scope": true
+  },
+  "pinned_API": {
+    "mathlib": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "files": [
+      "Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+      "Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean"
+    ],
+    "verified": [
+      "ContDiffAt.differentiableAt_iteratedFDeriv",
+      "Filter.EventuallyEq.iteratedFDeriv",
+      "Filter.EventuallyEq.eq_of_nhds"
+    ],
+    "no_resource_changes": true
+  },
+  "budget": {
+    "lines": 178,
+    "allocated_max": 200,
+    "existing_including286and203andrepair": 19777,
+    "actual_upper": 19955,
+    "remaining_guard": 45
+  },
+  "limitations": [
+    "Not compiled and not yet independently reviewed.",
+    "This gives the two core numerical families; the final transport existential/common A=1 wrapper and state-to-sector conversion remain a short subsequent assembly.",
+    "The common E0 ratio exponent must use materialE0_rpow_le_of_exponent_le at0<=1 with original T; M>=1 does not imply E0>=1.",
+    "No new CurrentJets, material15 jets, primitive transmission or final Realization is claimed."
+  ]
+}

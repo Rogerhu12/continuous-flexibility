@@ -1,0 +1,32 @@
+{
+  "schema": "n04-independent-ci-repair-review/v1",
+  "status": "PASS_FULL_SOURCE_AND_EXACT_DELTA_NOT_COMPILED",
+  "reviewer": "/root",
+  "path": "root/repair183/N04EndpointCircleFixedBaseBoundsIndependentReview.json",
+  "base_head": "3c966e45bee461dc9f4ab9885ad1dbe9a70deb88",
+  "before": "09a1696b57c7fe3678cc6e10e419bb8fa22c0c11",
+  "selected": {
+    "blob": "e1891a97f1d146c57a466013866aa7f4f914c37f",
+    "sha256": "a794443b1a03a8000d24a5d668f83be397ec798d92119b35f29ad7e3afcd7f66",
+    "bytes": 6011,
+    "lines": 115
+  },
+  "candidate": "0f5c6cc1d7c12f330586ce09ba3b16a10b298501",
+  "patch": "3d292982b311630cae8f52b1045b6a079c05f516",
+  "complete_diagnostics": "192b37894e3ef716d6797d73daf8d1b607676dd4",
+  "read_scope": "Full115-line selected source; exact preimage/delta and candidate; complete sole endpoint diagnostic from the already downloaded original job log. Prior full fixed2 execution/provider review retained as7f2cdb412ab8f6d68a2ea4dbe28b51f1031044e7.",
+  "finding": "K is exactly estimate.choose and L is exactly data.choose at the end of the same hraw proof. The original simpa normalizes associativity and the two size definitions but leaves these local definitions opaque in its expected type. Adding K,L to that simp-only set unfolds precisely the differing terms. No numerical inequality or quantifier changes.",
+  "mathematics": "The genuine-tower decode equality, fixed B=max Bz Bp, positive/zero order estimates, original H circle weight and final s+B monotonicity remain byte-identical. No new witness is selected. Same L before R,s; same K before radius selector and J.",
+  "checks": {
+    "one_reversible_replacement": true,
+    "added": 1,
+    "deleted": 1,
+    "net": 0,
+    "complete_public_header_unchanged": true,
+    "header_sha256": "1aafff122f3c38267eedd9f374ee525639c8667702b0c31478eea73481084086",
+    "imports_options_all_other_bytes_unchanged": true,
+    "resource_limits_unchanged": true
+  },
+  "limits": "Static review does not establish elaboration. Complete successor CI is required; no credit taken. No claim that the missing historical115 owner body was recovered.",
+  "persistence": "Git only; no local execution or write asserted."
+}

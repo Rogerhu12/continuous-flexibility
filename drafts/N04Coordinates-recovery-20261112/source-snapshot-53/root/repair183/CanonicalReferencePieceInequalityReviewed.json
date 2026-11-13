@@ -1,0 +1,36 @@
+{
+  "schema": "n04-reviewed-ci-repair-owner/v1",
+  "status": "SOURCE_REVIEWED_ONLY_NOT_COMPILED",
+  "owner": "/root",
+  "path": "root/repair183/CanonicalReferencePieceInequalityReviewedOwner.json",
+  "base": "3c966e45bee461dc9f4ab9885ad1dbe9a70deb88",
+  "destination": "src/ContinuousFlexibility/Analysis/CanonicalReferencePieceInequality.lean",
+  "selected": {
+    "blob": "b9be621151ca4757fe041997db8cc11afe13b01a",
+    "sha256": "6de4fdcb894add8edb408ae7abeffd381eab9a409d0fc8d2c099f24d1b00c59b",
+    "bytes": 2025,
+    "lines": 44
+  },
+  "candidate": "67760efae8e58b5ae5a09a9ad99799aed3d03355",
+  "patch": "0cf6c7e0ce22684c061c5517dc5af9b4cf9db62e",
+  "independent_review": {
+    "blob": "77725b26ea2f65f3c0178916daf350a170eb2668",
+    "sha256": "d871f0aec06212f49eb644b4d580c358810f36f2b1004bf49421c6238b4ae912",
+    "full_receipt_read_and_verified": true
+  },
+  "change": {
+    "line": 42,
+    "before": "  exact (heq p hp).symm.trans_le (min_le_right _ _)",
+    "after": "  exact (heq hp).symm.trans_le (min_le_right _ _)",
+    "added": 1,
+    "deleted": 1,
+    "net": 0
+  },
+  "all_other_bytes_unchanged": true,
+  "original_failed_owner": "5819fbde11d5495b671efeac25181fa486747696",
+  "original_peer": "9b9983df8ab1720f93011044575bef196335720a",
+  "history": "The initial static review missed the implicit EqOn point. CI183 failed on the original source; only the reviewed successor is selected for the next build.",
+  "draft_net_change": 0,
+  "credit": 0,
+  "persistence": "Git only; no local write asserted."
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "n04-ci-repair-independent-review-v1",
+  "reviewer": "/root",
+  "status": "FULL_SOURCE_STATIC_PASS_UNCOMPILED",
+  "candidate": {
+    "blob": "cba4640db303d9ff4724df82fc03534268fc425c",
+    "sha256": "eafb53034d87269be397b651ce8dd839fb5893169c100bc26cfd4657d4fc10c2"
+  },
+  "source": {
+    "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "before_blob": "4ea70ab43fc1fa6e51ddcfa3849f97580bf02235",
+    "after_blob": "eff7a91bcc29fb4e6f13d24d2813849b70eb4e90",
+    "sha256": "afae749be22c550a897c45755f456bade73f684a52ca65ca50cd6c02cfbf8a58",
+    "lines": 171,
+    "bytes": 8897
+  },
+  "scope": [
+    "Read the full159-line original, full171-line selected source, both complete five-line CI183 timeout diagnostics and candidate manifest.",
+    "Mechanically reconstructed the entire selected source by the two recorded literal substitutions, and reversed both to recover the exact original bytes. Git blob/SHA256/UTF8 bytes/line counts checked independently.",
+    "Both complete public heads, four imports, options and every byte outside the two proof substitutions are unchanged.",
+    "Read the actual generic derivative variables and full theorem14ad46cae7d92dca46f5efd006f5260873046713: X,Y,Z,U,L,x are the original named binders. The explicit family and point are the given shifted family and e, preserving the same J and derivative arguments.",
+    "Read the actual kernel realization c0b4ada33ad03e522aed5a3a52d8ef461bec9be3 and derivative8ea11ac34960b5ebec1df0085ef1237cda8a8a56. The typed hkernel is exactly its all-r/k/s/R bound with source variable renamed; the single chosen base/loss still precedes every order and travel.",
+    "Full proof preserves decode equality, genuine projective derivative uniqueness, fixed-base kernel estimate, translation grading and source-only multilinear normalization."
+  ],
+  "delta": {
+    "added": 14,
+    "deleted": 2,
+    "net": 12
+  },
+  "limitations": [
+    "This is a static review, not Lean compilation or a performance claim. The two200000-heartbeat failures must be resolved in the next complete CI gate.",
+    "No heartbeat/recursion/watchdog/toolchain/workflow/root/index/STATUS change. No independent peer can release the draft budget before complete-green CI."
+  ]
+}

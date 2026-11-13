@@ -1,0 +1,47 @@
+{
+  "schema": "n04-complete-ci-error-blocks/v1",
+  "round": 183,
+  "head": "3c966e45bee461dc9f4ab9885ad1dbe9a70deb88",
+  "run_id": 43344996410,
+  "job_id": 131622089990,
+  "source": {
+    "blob": "d7c82139c0f9f317b6b511ce96b521b7676cbbd0",
+    "sha256": "4f87043673b85e282132aef2f01d476ae0eb1367d9df1279ede7096e90f87506",
+    "bytes": 124134
+  },
+  "diagnostic_count": 5,
+  "completeness": "All five unique diagnostics are complete in the original downloaded job log. Each emitted error block ends before another normal replay/build record and has fewer than40 lines; none meets the workflow context cutoff. No artifact download required for these contexts.",
+  "blocks": [
+    {
+      "header": "error: src/ContinuousFlexibility/Analysis/CanonicalReferencePieceInequality.lean:42:9: Function expected at",
+      "lines": 7,
+      "text": "error: src/ContinuousFlexibility/Analysis/CanonicalReferencePieceInequality.lean:42:9: Function expected at\n  heq ?m.242\nbut this term has type\n  (fun p => min (f p) (g p)) ?m.241 = f ?m.241\n\nNote: Expected a function because this term is being applied to the argument\n  hp"
+    },
+    {
+      "header": "error: src/ContinuousFlexibility/Analysis/CanonicalReferencePieceInequality.lean:42:13: Application type mismatch: The argument",
+      "lines": 8,
+      "text": "error: src/ContinuousFlexibility/Analysis/CanonicalReferencePieceInequality.lean:42:13: Application type mismatch: The argument\n  p\nhas type\n  PolarPoint\nof sort `Type` but is expected to have type\n  ?m.241 ∈ annularOpen D\nof sort `Prop` in the application\n  heq p"
+    },
+    {
+      "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:62:15: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached",
+      "lines": 5,
+      "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:62:15: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command."
+    },
+    {
+      "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:89:2: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached",
+      "lines": 5,
+      "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:89:2: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command."
+    },
+    {
+      "header": "error: src/ContinuousFlexibility/Analysis/N04EndpointCircleFixedBaseBounds.lean:107:4: Type mismatch: After simplification, term",
+      "lines": 12,
+      "text": "error: src/ContinuousFlexibility/Analysis/N04EndpointCircleFixedBaseBounds.lean:107:4: Type mismatch: After simplification, term\n  (Exists.choose_spec estimate).right rsel hrsel J x hx hlow v\n has type\n  circleNorm T (3 / 4) (s + B) (H.decode ((J.D n x) v)) ≤\n    ⋯.choose *\n      ((1 + (p (s + (B + ⋯.choose))) x) * ∏ i, (p B) (v i) +\n        ∑ x, (p (s + (B + ⋯.choose))) (v x) * ∏ i ∈ Finset.univ.erase x, (p B) (v i))\nbut is expected to have type\n  circleNorm T (3 / 4) (s + B) (H.decode ((J.D n x) v)) ≤\n    K *\n      ((1 + (p (s + (B + L))) x) * ∏ i, (p B) (v i) +\n        ∑ i, (p (s + (B + L))) (v i) * ∏ i ∈ Finset.univ.erase i, (p B) (v i))"
+    }
+  ],
+  "artifact_available": {
+    "id": 14001995916,
+    "bytes": 315495,
+    "digest": "sha256:6583a05df449888778f971b7bbdcb9d627716b59499f57e236e6634e513ecacc",
+    "downloaded": false
+  }
+}

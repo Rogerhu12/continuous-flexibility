@@ -1,0 +1,203 @@
+import ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds
+import ContinuousFlexibility.Analysis.CircleCompositionSmoothDirections
+import ContinuousFlexibility.Analysis.TameElementaryCalculus
+import ContinuousFlexibility.Analysis.TameLocalCalculus
+
+/-!
+# Fixed low-base bounds for the full shifted composition tower
+
+The full joint derivative contains the ordered source term and one term
+for each source-direction slot. Translation is kept inside the source,
+so its uncentered travel contributes no grading cost.
+-/
+
+noncomputable section
+
+namespace ContinuousFlexibility.Statements
+
+open Set ContinuousFlexibility.Analysis
+open scoped BigOperators
+
+private theorem fullForward_prod_erase {n : ℕ}
+    (h : Fin (n + 1) → ℝ) (i : Fin (n + 1)) :
+    (∏ j ∈ Finset.univ.erase i, h j) = ∏ j : Fin n, h (i.succAbove j) := by
+  classical
+  have he := prod_single_replacement h i (1 : ℝ)
+  rw [Fin.prod_univ_succAbove (fun j => if j = i then (1 : ℝ) else h j) i] at he
+  simpa only [ite_true, Fin.succAbove_ne, ite_false, one_mul] using he.symm
+
+variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {M : CircleModelData}
+  (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+  (hγ : 0 < γ) (hM : IsCircleModel T γ M) (hI : HasInterpolation M.grading)
+
+include hI in
+private theorem fullForward_ordered_decode
+    (travel : ℕ → ℝ)
+    (J : SmoothDirections ((univ : Set M.Space) ×ˢ univ)
+      (fun z : M.Space × M.Space =>
+        circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2))
+    (n : ℕ) (e : M.Space) (v : Fin n → M.Space) (y : M.Space) (m : ℕ) (θ : ℝ) :
+    M.decode (inverseForwardJet J n e v y) m θ =
+      iteratedDeriv n (M.decode y m) (θ + travel m + M.decode e m θ) *
+        ∏ i, M.decode (v i) m θ := by
+  rw [circleShiftedChartCompose_orderedJet_eq_kernel hD hT hγ hM hI
+    travel isOpen_univ J n e (mem_univ e) v y, coupledCircleKernel_decode_apply]
+  have ht : M.decode (circleTranslationContinuousLinear hM hT hD hγ travel y) m =
+      fun t => M.decode y m (t + travel m) := by
+    funext t
+    exact congrFun (congrFun
+      (circleTranslationContinuousLinear_decode hM hT hD hγ travel y) m) t
+  rw [ht, iteratedDeriv_comp_add_const]
+  congr 2
+  ring
+
+include hI in
+/-- The complete jet of the same tower, including every varying-source slot. -/
+theorem circleShiftedChartCompose_fullJet_eq_ordered
+    (travel : ℕ → ℝ)
+    (J : SmoothDirections ((univ : Set M.Space) ×ˢ univ)
+      (fun z : M.Space × M.Space =>
+        circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2))
+    (n : ℕ) (x : M.Space × M.Space) (v : Fin (n + 1) → M.Space × M.Space) :
+    J.D (n + 1) x v =
+      inverseForwardJet J (n + 1) x.1 (fun i => (v i).1) x.2 +
+        ∑ i : Fin (n + 1), inverseForwardJet J n x.1
+          (fun j : Fin n => (v (i.succAbove j)).1) (v i).2 := by
+  classical
+  obtain ⟨K, hK⟩ := exists_circleChartComposition_smoothDirections hM hT hD hγ hI travel
+  let K₀ : SmoothDirections ((univ : Set M.Space) ×ˢ univ)
+      (fun z : M.Space × M.Space =>
+        circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2) :=
+    K.restrict (isOpen_univ.prod isOpen_univ) (subset_univ _)
+  apply hM.2.2.2.2.2.1
+  funext m θ
+  have hj := congrArg
+    (fun A : (M.Space × M.Space) [×(n + 1)]→L[ℝ] M.Space => M.decode (A v) m θ)
+    (J.unique K₀ (n + 1) x ⟨mem_univ x.1, mem_univ x.2⟩)
+  have hl := hj.trans (congrFun (congrFun (hK (n + 1) x v) m) θ)
+  rw [hl, circleChartCompositionJets_apply]
+  simp only [map_add, map_sum, Pi.add_apply, Finset.sum_apply,
+    fullForward_ordered_decode hD hT hγ hM hI, Nat.add_sub_cancel,
+    circleCompositionPhase, fullForward_prod_erase]
+
+include hI in
+/-- One base and loss precede all orders and all travel; the given full
+tower, not a separately chosen representative, satisfies the bound. -/
+theorem circleShiftedChartCompose_fullJets_fixedBase_oneHigh :
+    ∃ base loss : ℕ, ∀ (n : ℕ) (R : ℝ), 1 ≤ R → ∀ s : ℕ,
+      ∃ C : ℝ, 0 ≤ C ∧ ∀ (travel : ℕ → ℝ)
+        (J : SmoothDirections univ (fun x : M.Space × M.Space =>
+          circleShiftedChartComposeContinuousLinear hM hT hD hγ travel x.1 x.2)),
+        ∀ x : M.Space × M.Space, pairGrading M.grading M.grading base x ≤ R →
+        ∀ v : Fin n → M.Space × M.Space,
+          M.grading s (J.D n x v) ≤
+            C * tameJetSize (pairGrading M.grading M.grading) n s (n + loss) base x v := by
+  classical
+  obtain ⟨base, loss, hb⟩ := circleShiftedChartCompose_orderedJets_fixedBase_bound
+    hD hT hγ hM hI
+  refine ⟨base, loss, fun n R hR s => ?_⟩
+  obtain ⟨C, hC, hc⟩ := hb n R hR s
+  obtain ⟨K, hK, hk⟩ := hb (n - 1) R hR s
+  have hR0 : 0 ≤ R := zero_le_one.trans hR
+  refine ⟨C * R + (n : ℝ) * K, by positivity, fun travel J x hx v => ?_⟩
+  let q : ℕ → Seminorm ℝ M.Space := M.grading
+  let p : ℕ → Seminorm ℝ (M.Space × M.Space) := pairGrading q q
+  let H : ℕ := s + (n + loss)
+  let J₀ : SmoothDirections ((univ : Set M.Space) ×ˢ univ)
+      (fun z : M.Space × M.Space =>
+        circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2) :=
+    J.restrict (isOpen_univ.prod isOpen_univ) (subset_univ _)
+  have hfst (a : ℕ) (z : M.Space × M.Space) : q a z.1 ≤ p a z := by
+    rw [pairGrading_apply]
+    exact le_add_of_nonneg_right (apply_nonneg _ _)
+  have hsnd (a : ℕ) (z : M.Space × M.Space) : q a z.2 ≤ p a z := by
+    rw [pairGrading_apply]
+    exact le_add_of_nonneg_left (apply_nonneg _ _)
+  have hlocal (w : Fin n → M.Space × M.Space) (hw : ∀ i, p base (w i) < 1) :
+      q s (J.D n x w) ≤
+        (C * R + (n : ℝ) * K) * ((1 + p H x) + ∑ i, p H (w i)) := by
+    let A : ℝ := (1 + p H x) + ∑ i, p H (w i)
+    have hlow : q base x.1 ≤ R := (hfst base x).trans hx
+    have hwlow (i : Fin n) : q base (w i).1 ≤ R :=
+      (hfst base (w i)).trans ((hw i).le.trans hR)
+    have hsum : (∑ i, q H (w i).1) ≤ ∑ i, p H (w i) :=
+      Finset.sum_le_sum (fun i _ => hfst H (w i))
+    have ha : 1 + q H x.1 + (∑ i, q H (w i).1) + q H x.2 ≤ A := by
+      have he : p H x = q H x.1 + q H x.2 := pairGrading_apply q q H x
+      dsimp only [A]
+      rw [he]
+      linarith
+    have hmain :
+        q s (inverseForwardJet J₀ n x.1 (fun i => (w i).1) x.2) ≤ C * R * A := by
+      have h := hc travel univ isOpen_univ J₀ x.1 (mem_univ x.1) hlow
+        (fun i => (w i).1) hwlow x.2
+      have ht : (1 + q H x.1 + ∑ i, q H (w i).1) * q base x.2 + q H x.2 ≤ R * A := by
+        calc
+          _ ≤ (1 + q H x.1 + ∑ i, q H (w i).1) * R + R * q H x.2 :=
+            add_le_add (mul_le_mul_of_nonneg_left ((hsnd base x).trans hx) (by positivity))
+              (le_mul_of_one_le_left (apply_nonneg _ _) hR)
+          _ = R * (1 + q H x.1 + (∑ i, q H (w i).1) + q H x.2) := by ring
+          _ ≤ R * A := mul_le_mul_of_nonneg_left ha hR0
+      exact h.trans ((mul_le_mul_of_nonneg_left ht hC).trans_eq (by ring))
+    cases n with
+    | zero =>
+      have hw₀ : w = Fin.elim0 := Subsingleton.elim _ _
+      have hf₀ : (fun i : Fin 0 => (w i).1) = Fin.elim0 := Subsingleton.elim _ _
+      rw [hf₀, inverseForwardJet_zero J₀ (mem_univ x.1) x.2] at hmain
+      rw [hw₀, J.zero x (mem_univ x)]
+      simpa only [A, Fin.sum_univ_zero, Nat.cast_zero, zero_mul, add_zero] using hmain
+    | succ n =>
+      simp only [Nat.add_sub_cancel] at hk
+      let t : Fin (n + 1) → M.Space := fun i =>
+        inverseForwardJet J₀ n x.1 (fun j : Fin n => (w (i.succAbove j)).1) (w i).2
+      have hterm (i : Fin (n + 1)) : q s (t i) ≤ K * A := by
+        let H' : ℕ := s + (n + loss)
+        have horder : H' ≤ H := by dsimp only [H', H]; omega
+        have hq : Monotone q := gradedSeminorm_monotone _ _
+        have hp : 1 + q H' x.1 + (∑ j : Fin n, q H' (w (i.succAbove j)).1) ≤
+            1 + q H x.1 + ∑ j : Fin n, p H (w (i.succAbove j)) :=
+          add_le_add (add_le_add_left (hq horder x.1) 1)
+            (Finset.sum_le_sum (fun j _ =>
+              (hq horder (w (i.succAbove j)).1).trans (hfst H (w (i.succAbove j)))))
+        have hz : q H' (w i).2 ≤ p H (w i) :=
+          (hq horder (w i).2).trans (hsnd H (w i))
+        have hfit : (1 + q H x.1 + ∑ j : Fin n, p H (w (i.succAbove j))) +
+            p H (w i) ≤ A := by
+          have hi := Fin.sum_univ_succAbove (fun j : Fin (n + 1) => p H (w j)) i
+          have hxH := hfst H x
+          dsimp only [A]
+          rw [hi]
+          linarith
+        have hraw := hk travel univ isOpen_univ J₀ x.1 (mem_univ x.1) hlow
+          (fun j : Fin n => (w (i.succAbove j)).1)
+          (fun j => hwlow (i.succAbove j)) (w i).2
+        have hm := mul_le_mul hp ((hsnd base (w i)).trans (hw i).le)
+          (apply_nonneg (q base) (w i).2) (by positivity)
+        have hsmall :
+            (1 + q H' x.1 + (∑ j : Fin n, q H' (w (i.succAbove j)).1)) *
+              q base (w i).2 + q H' (w i).2 ≤ A :=
+          (by simpa only [mul_one] using add_le_add hm hz).trans hfit
+        exact hraw.trans (mul_le_mul_of_nonneg_left hsmall hK)
+      have hsumq (I : Finset (Fin (n + 1))) :
+          q s (∑ i ∈ I, t i) ≤ ∑ i ∈ I, q s (t i) := by
+        induction I using Finset.induction_on with
+        | empty => simp only [Finset.sum_empty, map_zero, le_refl]
+        | @insert i I hi ih =>
+          simp only [Finset.sum_insert hi]
+          exact (map_add_le_add (q s) _ _).trans (add_le_add le_rfl ih)
+      have hsumt : (∑ i : Fin (n + 1), q s (t i)) ≤ ((n + 1 : ℕ) : ℝ) * K * A := by
+        calc
+          _ ≤ ∑ _i : Fin (n + 1), K * A := Finset.sum_le_sum (fun i _ => hterm i)
+          _ = _ := by
+            simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
+            ring
+      have hj := circleShiftedChartCompose_fullJet_eq_ordered hD hT hγ hM hI
+        travel J₀ n x w
+      change q s (J₀.D (n + 1) x w) ≤ _
+      rw [hj]
+      exact (map_add_le_add (q s) _ _).trans
+        ((add_le_add hmain ((hsumq Finset.univ).trans hsumt)).trans_eq (by ring))
+  exact multilinear_bound_of_unitBall (J.D n x) (q s) (p base) (p H)
+    (by positivity) hlocal v
+
+end ContinuousFlexibility.Statements

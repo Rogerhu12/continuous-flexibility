@@ -1,0 +1,242 @@
+{
+  "schema": "N04-stageE-actual-piece-jet-envelope-final-import-candidate-v1",
+  "artifact_path": "quantitative/reconstructed/CanonicalTransportPieceJetEnvelopeFinalCandidateManifest.json",
+  "author": "/root/quantitative_route",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "status": "SOURCE_FROZEN_AWAITING_FULL_INDEPENDENT_PEER_AND_LATER_CI",
+  "source": {
+    "module": "ContinuousFlexibility.Analysis.CanonicalTransportPieceJetEnvelope",
+    "path": "quantitative/reconstructed/CanonicalTransportPieceJetEnvelope.lean",
+    "install_path": "src/ContinuousFlexibility/Analysis/CanonicalTransportPieceJetEnvelope.lean",
+    "git_blob": "d8f2a72059aea8d0a2a37702ec95cf7017c2f31c",
+    "sha256": "517644dd25d04d697027d8559837c4c79a687198f548cf8d8470debc236f9a16",
+    "bytes": 15538,
+    "lines": 286
+  },
+  "source_readback_exact": true,
+  "baseline": {
+    "head": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+    "tree": "02a8747b6aaae413f67372d96e52ad8f3dbd9e9a",
+    "full_green_receipt": "318abffc005fd4c3069d27066e3ad5c1ad63a7b4",
+    "providers_actual_read_head": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+    "rebind_evidence": "The only subsequent source changes through the exact CI182 parent chain are TameInverseFixedBaseBounds repairs; none of the direct actual providers below changed. The current parent-owned CI183 106-source batch is not assumed green or used as a silently substituted provider set.",
+    "mathlib": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "lean": "v4.35.0-rc3"
+  },
+  "authorization": {
+    "new_Lean_limit": 400,
+    "source_lines": 286,
+    "other_new_Lean_written": 0,
+    "active_modified": false,
+    "CI_queried": false,
+    "refs_modified": false,
+    "local_Lean_or_elaboration_run": false,
+    "local_write_status": "Environment unavailable: source and manifest persisted as Git blobs, not claimed to exist on local disk.",
+    "archive_selection": "Parent explicitly authorized the one import line. Select only the final 286-line source at its one logical path; preserve the original 285 bytes by immutable Git identity and this exact one-line diff, without creating another full Lean archive copy."
+  },
+  "layout": {
+    "blob": "764ae5fef60e97e09deeaf621df9858e744feee3",
+    "sha256": "3f0dacdecb09039b2a8dd9bfa39cf61574aff73c4dc8a873f9cd2941259da5b5"
+  },
+  "independent_layout_check": {
+    "blob": "5d7f1f40d8576f94821c6f1fe855fee82dae326d",
+    "sha256": "18245f3063fc5e13def0de0604d4b67f53e3d3d127abe9c0b666f7ba0a11f2bf"
+  },
+  "imports": [
+    "ContinuousFlexibility.Analysis.N07aAngularPhysicalJetEnvelopes",
+    "ContinuousFlexibility.Analysis.N07aAngularJacobianEnvelope",
+    "ContinuousFlexibility.Analysis.N07aInverseChartBounds",
+    "ContinuousFlexibility.Analysis.SolveReturnEquations",
+    "ContinuousFlexibility.Analysis.StateNeighborhood"
+  ],
+  "public_declarations": [
+    {
+      "name": "ContinuousFlexibility.Analysis.n04_referenceCurrent_transport_piece_envelope",
+      "header": "theorem n04_referenceCurrent_transport_piece_envelope\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hε : 0 < ε)\n    (hrefState : referenceStateConditions D S C)\n    (hgeom : CanonicalGeometry D S C K base ε)\n    (href : CanonicalGeometry.ReferenceJets D T S C L K)\n    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)\n    (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε) :\n    ∃ e : ℕ → ℝ, N07aSampleSubpower T K e ∧ (∀ m, 1 ≤ e m) ∧\n      ∀ m p, p ∈ referencePhysicalPieceOpen S K m →\n        (∀ n : ℕ, n ≤ 2 →\n          ‖iteratedFDeriv ℝ n\n            (fun x => K.height (C.referenceState, 0) m x /\n              K.height (liftSectorParameter S C z) m\n                (canonicalCurrentPoint C K (liftSectorParameter S C z) m x)) p‖ ≤ e m) ∧\n        (∀ n : ℕ, 1 ≤ n → n ≤ 2 →\n          ‖iteratedFDeriv ℝ n\n            (canonicalCurrentPoint C K (liftSectorParameter S C z) m) p‖ ≤ e m)",
+      "header_sha256": "784c2be3e04ee628168139fc3d000f78c8babf740ac7b2fa667a5d31d9c39c38",
+      "section_variables": "{D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S} {base : ℕ} {ε : ℝ}"
+    }
+  ],
+  "private_declarations": [
+    "n04_transport_positive_comp_envelope",
+    "n04_transport_inverse_positive_envelope",
+    "n04_transport_height_inverse_envelope"
+  ],
+  "preserved": [
+    "D",
+    "T",
+    "S",
+    "C",
+    "L",
+    "K",
+    "base",
+    "epsilon",
+    "fixed admissible z",
+    "K.cell m",
+    "T.sample (K.cell m)",
+    "literal reference/current chart and height functions"
+  ],
+  "input_boundary": [
+    "IsAccumulatingProfile D",
+    "IsMaterialData D T",
+    "epsilon > 0",
+    "referenceStateConditions D S C",
+    "CanonicalGeometry D S C K base epsilon",
+    "ReferenceJets D T S C L K",
+    "CurrentJets D T S C L K base epsilon",
+    "z in the same sectorNeighborhood"
+  ],
+  "result": "After fixing z, choose one e : Nat -> Real with N07aSampleSubpower T K e and e>=1, before every piece/point/order; the literal height quotient has orders 0..2 bounded by e, and literal canonicalCurrentPoint has orders 1..2 bounded by the same e on referencePhysicalPieceOpen.",
+  "proof_checks": {
+    "positive_composition": "OrderedFinpartition n at n>0 uses only positive outer length and positive inner block sizes. Finite sums/products remain N07aSampleSubpower; no inverse-chart order-zero bound.",
+    "actual_domains": "Reference hgeom.charts is rewritten by hgeom.referenceDomain to W. Current inverse maps V into the genuine moving physical piece; no equality of that piece with W is asserted.",
+    "reciprocal_regular": "Private helper explicitly returns ContDiffOn of (currentHeight o currentInverse)^(-1), by actual height smoothness, inverse MapsTo and actual height positivity.",
+    "density_identity": "Private envelope uses actual sourceFactorInverse times abs(planeJacobian currentInverse), with the public geometry-only inverse-Jacobian identity. The open EqOn proof uses the original canonicalSource and affine unit inverse identity.",
+    "quotient_transport": "N07aAngularFixedJetEnvelope.congr on open W converts H_ref*((currentHeight o G)^(-1) o F_ref) to the literal division Q; full function equality converts G o F_ref to canonicalCurrentPoint.",
+    "finite_aggregation": "e=1+sum over Fin3 of Q envelopes+sum over Fin2 of positive transport envelopes. Same T/K/sample throughout; n-1+1=n uses the explicit positive-order premise.",
+    "no_target_cycle": "No N04Properties, Primitive.materialJets, material transport conclusion or final physical bound is a premise or invoked theorem.",
+    "no_floor_substitution": "No E0>=1 or M>=1 hypothesis is introduced. Sampled subpower properties use existing actual IsMaterialData suppliers.",
+    "numerical_constants": "Only the given fixed z is absorbed into each intermediate sampled envelope. No new uniform low-base claim."
+  },
+  "actual_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aAngularPhysicalJetEnvelopes",
+      "path": "src/ContinuousFlexibility/Analysis/N07aAngularPhysicalJetEnvelopes.lean",
+      "git_blob": "9be1d650e38c5d4b754faa154feae2b3de0812a6",
+      "sha256": "8d94c2f34b5b54dfbd9070f561931855f3ea49cb28b956932d62bd00751a7c04",
+      "lines": 208,
+      "read_scope": "full source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aInverseChartBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N07aInverseChartBounds.lean",
+      "git_blob": "bbc8e6acd60fdb4937b7ca75611a028d0511ba73",
+      "sha256": "cf57b7a9d5a616700bcb1b3ac816cbd00be96f367440c03553210a60c8221030",
+      "lines": 115,
+      "read_scope": "full source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N07aCanonicalAtomBounds.lean",
+      "git_blob": "7f58525255a1dd409689e8b21ba4bab30a4af3c5",
+      "sha256": "a162c68611e25b6851e7d0a582437100ddd24c28ec65acd32ee002975087b0e7",
+      "lines": 102,
+      "read_scope": "full source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aAngularFixedJetEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/N07aAngularFixedJetEnvelope.lean",
+      "git_blob": "66d54099e14b61ba98b641c1016f9ee06641e117",
+      "sha256": "e74315ddb703d807c5c189c7d178ea9ff141dcc8d7ffa683153986a413e68f7d",
+      "lines": 146,
+      "read_scope": "full source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aAngularJacobianEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/N07aAngularJacobianEnvelope.lean",
+      "git_blob": "81b85e8973a267426cc6311dc5ad0f32c28b69fa",
+      "sha256": "abe3838996cb4231a3464b4f76106dfb28c9a91ddb8fc3614c635887cfca008f",
+      "lines": 209,
+      "read_scope": "full source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aAngularReferenceJetEnvelopes",
+      "path": "src/ContinuousFlexibility/Analysis/N07aAngularReferenceJetEnvelopes.lean",
+      "git_blob": "6b2b982c1ad616c4a8b76d9c0b5fd4e20e706fc8",
+      "sha256": "f35e70b56b198149a6fd8c981b22a1f7968095db4e45967605009f1fbd6b0b95",
+      "lines": 324,
+      "read_scope": "full source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.OneHighCompositionJets",
+      "path": "src/ContinuousFlexibility/Analysis/OneHighCompositionJets.lean",
+      "git_blob": "55ee6f621f2b0a63a723dfdceab93144234f9ab4",
+      "sha256": "c9d18bc3cd346d55434c7b39fcbd8589c226bae2cd4b1ad46597288735692af3",
+      "lines": 79,
+      "read_scope": "full source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateNeighborhood",
+      "path": "src/ContinuousFlexibility/Analysis/StateNeighborhood.lean",
+      "git_blob": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+      "sha256": "d69d61889ad31640933f00a39c70c7ff33eeb0df52df51a509df97850d1399b6",
+      "lines": 143,
+      "read_scope": "full source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SolveReturnEquations",
+      "path": "src/ContinuousFlexibility/Analysis/SolveReturnEquations.lean",
+      "git_blob": "79f7407854a3dea4f22ebf924f1a074265e878dc",
+      "sha256": "936751f4227d524f93ee0daa0d620fb309e98bd78888b0b7cefed8da06e82d6c",
+      "lines": 145,
+      "read_scope": "full source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aAngularPhysicalCoefficients",
+      "path": "src/ContinuousFlexibility/Analysis/N07aAngularPhysicalCoefficients.lean",
+      "git_blob": "51386a765453a0734f010b8546309b4299b0af3a",
+      "sha256": "2daa644b6ef4dab3f748115a36f5169ed1b8e17c312b635ff94d38626d1979ef",
+      "lines": 195,
+      "read_scope": "full source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient",
+      "path": "src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "git_blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "sha256": "bbec6c5ccb9e0d9bcf75516b8c9024e4f15c2e834119822ace6da3c4e70fd51c",
+      "lines": 128,
+      "read_scope": "full source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aSampleEnvelopes",
+      "git_blob": "0cc657b5ea25b922a5676dc0a8c0f6dbda938ba7",
+      "sha256": "2771c0d74dd4b7c69a238496b9dfdb72509da0c273dee70c918e581754684898",
+      "lines": 56,
+      "read_scope": "full source"
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "git_blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "lines": 1773,
+      "read_scope": "canonicalSource/currentPoint/Geometry/actual atoms/reference/current predicates"
+    }
+  ],
+  "source_scope": {
+    "full_import_graph_newly_built": false,
+    "existing_graph_reference": "6d4933e47763157649c2ccafdfd67b05f74809a6",
+    "public_name_check": "Unchanged public name and complete header from the original candidate; no fresh all-repository scan is claimed."
+  },
+  "limitations": [
+    "No Lean elaboration or CI has been run for this new source.",
+    "This is the piece estimate; the parent owns global-field identification, sample-to-point absorption, AE extension and common physical exponent."
+  ],
+  "peer_status": "pending final source/import-closure completion after the full 285-line mathematical review",
+  "supersession": {
+    "original_source": {
+      "module": "ContinuousFlexibility.Analysis.CanonicalTransportPieceJetEnvelope",
+      "path": "quantitative/reconstructed/CanonicalTransportPieceJetEnvelope.lean",
+      "install_path": "src/ContinuousFlexibility/Analysis/CanonicalTransportPieceJetEnvelope.lean",
+      "git_blob": "25aa8f2ca029cff499449b9a1cf0b095ac161220",
+      "sha256": "218dda2c4deb633396351bb2689db6f0046fb7d65cc1889264dbd20de5eb0801",
+      "bytes": 15482,
+      "lines": 285
+    },
+    "original_candidate": {
+      "git_blob": "be0e79f35f0d5a17a5f531d10d75a288e08153d4",
+      "sha256": "de3ec7772d28fd32cb801e82fcc3aff83b348c8e5a5f537e13ec85fe5026a00c",
+      "bytes": 12069
+    },
+    "patch": {
+      "git_blob": "7e802d3b7aa9b480c699905171fe6b2ae99813db",
+      "sha256": "dd05e852fb943e7a8a8a7393a2a5bccc1f39c181b9745b2cf29f2e67a59f8d3f",
+      "bytes": 505
+    },
+    "finding": "Independent full review found that the previous four-import closure did not make reference_mem_stateNeighborhood visible. Its existing actual provider StateNeighborhood is now imported explicitly.",
+    "exact_change": "One import line added; removing it exactly restores the entire original source.",
+    "mathematical_and_public_headers_unchanged": true,
+    "resources_unchanged": true,
+    "original_source_compiled": false,
+    "authorization": "/root authorized the exact one-line correction and final 286-line selection before publication of this successor."
+  }
+}

@@ -1,0 +1,11 @@
+--- a/src/ContinuousFlexibility/Analysis/N04EndpointCircleFixedBaseBounds.lean
++++ b/src/ContinuousFlexibility/Analysis/N04EndpointCircleFixedBaseBounds.lean
+@@ -104,7 +104,7 @@
+   refine ⟨K, hK, fun rsel hrsel J x hx hlow v => ?_⟩
+   have hb : circleNorm T (3 / 4 : ℝ) (s + B) (H.decode (J.D n x v)) ≤
+       K * tameJetSize p n s (B + L) B x v := by
+-    simpa only [oneHighVariationWeight, tameJetSize, Nat.add_assoc] using
++    simpa only [K, L, oneHighVariationWeight, tameJetSize, Nat.add_assoc] using
+       estimate.choose_spec.2 rsel hrsel J x hx hlow v
+   apply (circleGrading_le_iff_circleNorm hH s (J.D n x v)
+     (mul_nonneg hK (tameJetSize_nonneg p n s (B + L) B x v))).mpr

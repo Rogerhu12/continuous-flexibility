@@ -1,0 +1,38 @@
+{
+  "schema": "n04-ci-repair-candidate/v1",
+  "round_failed": 183,
+  "owner": "/root",
+  "path": "root/repair183/CanonicalReferencePieceInequalityCandidate.json",
+  "destination": "src/ContinuousFlexibility/Analysis/CanonicalReferencePieceInequality.lean",
+  "base_head": "3c966e45bee461dc9f4ab9885ad1dbe9a70deb88",
+  "before": {
+    "blob": "d0b62f775987c37e6af0553ee18ea6dcd0224c8f",
+    "lines": 44
+  },
+  "after": {
+    "blob": "b9be621151ca4757fe041997db8cc11afe13b01a",
+    "sha256": "6de4fdcb894add8edb408ae7abeffd381eab9a409d0fc8d2c099f24d1b00c59b",
+    "bytes": 2025,
+    "lines": 44
+  },
+  "patch": "0cf6c7e0ce22684c061c5517dc5af9b4cf9db62e",
+  "diagnostics": "192b37894e3ef716d6797d73daf8d1b607676dd4",
+  "cause": "Set.EqOn has an implicit point binder. heq p hp supplies p as the membership proof and then applies a proved equality as a function. Use heq hp at the point inferred from hp.",
+  "change": {
+    "line": 42,
+    "before": "  exact (heq p hp).symm.trans_le (min_le_right _ _)",
+    "after": "  exact (heq hp).symm.trans_le (min_le_right _ _)",
+    "added": 1,
+    "deleted": 1,
+    "net": 0
+  },
+  "verification": {
+    "forward_reverse_exact": true,
+    "header_imports_options_other_bytes_unchanged": true,
+    "no_resource_changes": true
+  },
+  "original_owner": "5819fbde11d5495b671efeac25181fa486747696",
+  "original_peer": "9b9983df8ab1720f93011044575bef196335720a",
+  "status": "AWAITING_INDEPENDENT_REPAIR_REVIEW_NOT_COMPILED",
+  "persistence": "Remote Git only; local environment unavailable"
+}
