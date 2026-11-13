@@ -82,7 +82,9 @@ theorem n04PositiveGeometry_scalarTriangularInverse_norm
     have hs : |v.2| ≤ ‖v‖ := by simpa only [Real.norm_eq_abs] using norm_snd_le v
     exact (abs_sub _ _).trans ((add_le_add hs hAv).trans_eq (by ring))
   apply max_le
-  · have hcoef : 1 ≤ 1 + |(A (0, 1))⁻¹| * (1 + ‖A‖) := by positivity
+  · have hcoef : 1 ≤ 1 + |(A (0, 1))⁻¹| * (1 + ‖A‖) :=
+      le_add_of_nonneg_right (mul_nonneg (abs_nonneg _)
+        (add_nonneg zero_le_one (norm_nonneg A)))
     exact (norm_fst_le v).trans (by
       simpa only [one_mul] using mul_le_mul_of_nonneg_right hcoef (norm_nonneg v))
   · exact (mul_le_mul_of_nonneg_left hsub (abs_nonneg _)).trans (by

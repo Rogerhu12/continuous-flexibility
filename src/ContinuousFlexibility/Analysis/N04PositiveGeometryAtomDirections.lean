@@ -40,7 +40,8 @@ def n04PositiveGeometry_unitPullbackDirections
       ContinuousLinearMap.smul_apply, smul_eq_mul, Prod.mk_add_mk, zero_add]
   have hmap : MapsTo (fun z => (0, (l, 0)) + L z) (U ×ˢ unitStrip) (U ×ˢ univ) := by
     intro z hz
-    rw [hL]
+    change ((0, (l, 0)) + L z) ∈ U ×ˢ univ
+    rw [hL z]
     exact ⟨hz.1, mem_univ _⟩
   exact (J.compAffine L (0, (l, 0))
     (hU.prod (isOpen_Ioo.prod isOpen_univ)) hmap).congrOn

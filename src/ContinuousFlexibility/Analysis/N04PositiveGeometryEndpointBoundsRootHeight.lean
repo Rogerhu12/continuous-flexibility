@@ -95,8 +95,6 @@ theorem n04PositiveGeometry_rootHeightStateJetCLM_apply
     (i : Fin 4) (x : AnnularState S) :
     n04PositiveGeometry_rootHeightStateJetCLM hD hT hS a b p hp i x =
       mixedDerivative a b (n06RootNormalizedHeightFields D S x.1 i) p := by
-  unfold n04PositiveGeometry_rootHeightStateJetCLM
-  rw [ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst']
   exact n04PositiveGeometry_rootHeightJetCLM_apply hD hT hS a b p hp i x.1
 
 /-- Uniform material decay and fixed spatial loss for the actual

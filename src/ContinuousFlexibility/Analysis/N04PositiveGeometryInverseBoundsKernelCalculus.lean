@@ -94,7 +94,8 @@ theorem neg (hf : N04PositiveKernelJetBounds W p f) :
   intro n
   have he (i : I) : ‖iteratedFDeriv ℝ n (fun y => -f i y) (p i)‖ =
       ‖iteratedFDeriv ℝ n (f i) (p i)‖ := by
-    rw [iteratedFDeriv_neg_apply, norm_neg]
+    simpa only [Pi.neg_def, norm_neg] using congrArg norm
+      (iteratedFDeriv_neg_apply (𝕜 := ℝ) (i := n) (f := f i) (x := p i))
   simpa only [he] using hf.jets n
 
 theorem sub (hf : N04PositiveKernelJetBounds W p f)

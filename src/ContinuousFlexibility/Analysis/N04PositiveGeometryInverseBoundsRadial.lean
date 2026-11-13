@@ -87,31 +87,56 @@ private theorem radialCoefficient_contDiff
           (contDiff_const : ContDiff ℝ ∞
             (fun _ : N04PositiveRadialCoefficients n × ℝ => (0 : ℝ)))
 
+private def radialCoefficient_directions
+    (n : ℕ) (l r : ℝ) (side : Bool) (j : Fin (n + 2)) :
+    SmoothDirections ((univ : Set (N04PositiveRadialCoefficients n)) ×ˢ univ)
+      (fun p : N04PositiveRadialCoefficients n × ℝ =>
+        n04PositiveGeometry_radialCoefficientField n l r p.1 side j p.2) :=
+  smoothDirectionsOfContDiffOn (isOpen_univ.prod isOpen_univ)
+    (radialCoefficient_contDiff n l r side j).contDiffOn
+
+private theorem radialCoefficient_fixed_contDiff
+    (n : ℕ) (l r : ℝ) (a : N04PositiveRadialCoefficients n)
+    (side : Bool) (j : ℕ) :
+    ContDiff ℝ ∞ (n04PositiveGeometry_radialCoefficientField n l r a side j) := by
+  cases j <;> exact contDiff_const
+
+private theorem endpointFiber_joint_contDiff
+    {P : Type*} [NormedAddCommGroup P] [NormedSpace ℝ P] [FiniteDimensional ℝ P]
+    (n : ℕ) (l r c d : ℝ) (hcd : c < d)
+    (η : Bool → ℝ) (hη : ∀ side, 0 < η side)
+    (hgap : ∀ side, 2 * η side <
+      (if side then r else c) - (if side then d else l))
+    (A : P → Bool → ℕ → ℝ → ℝ)
+    (hA : ∀ a side j, j ≤ n + 1 → ContDiff ℝ ∞ (A a side j))
+    (J : ∀ side (j : Fin (n + 2)), SmoothDirections
+      ((univ : Set P) ×ˢ univ) (fun p : P × ℝ => A p.1 side j p.2)) :
+    ContDiff ℝ ∞ (fun p : P × PolarPoint =>
+      endpointFiberInterpolation n l r c d η (A p.1) p.2) := by
+  have h : ContDiffOn ℝ ∞ (fun p : P × PolarPoint =>
+      endpointFiberInterpolation n l r c d η (A p.1) p.2) (univ ×ˢ univ) :=
+    smoothDirections_contDiffOn_finiteDimensional
+      (n04Realization_endpointFiberInterpolation_jointDirections isOpen_univ n l r c d
+        hcd η hη hgap A (fun a _ => hA a) J)
+  exact contDiffOn_univ.mp (by simpa only [univ_prod_univ] using h)
+
+private theorem contDiff_polar_slice_zero
+    {P : Type*} [NormedAddCommGroup P] [NormedSpace ℝ P]
+    {f : P × PolarPoint → ℝ} (hf : ContDiff ℝ ∞ f) :
+    ContDiff ℝ ∞ (fun p : P × ℝ => f (p.1, (p.2, 0))) :=
+  hf.comp (contDiff_fst.prodMk (contDiff_snd.prodMk contDiff_const))
+
 theorem n04PositiveGeometry_radialKernel_contDiff
     (n : ℕ) (l r c d : ℝ) (hcd : c < d)
     (η : Bool → ℝ) (hη : ∀ side, 0 < η side)
     (hgap : ∀ side, 2 * η side <
       (if side then r else c) - (if side then d else l)) :
     ContDiff ℝ ∞ (n04PositiveGeometry_radialKernel n l r c d η) := by
-  let A := n04PositiveGeometry_radialCoefficientField n l r
-  let J : ∀ side (j : Fin (n + 2)), SmoothDirections
-      ((univ : Set (N04PositiveRadialCoefficients n)) ×ˢ univ)
-      (fun p : N04PositiveRadialCoefficients n × ℝ => A p.1 side j p.2) :=
-    fun side j => smoothDirectionsOfContDiffOn (isOpen_univ.prod isOpen_univ)
-      (radialCoefficient_contDiff n l r side j).contDiffOn
-  have hA (a : N04PositiveRadialCoefficients n)
-      (_ha : a ∈ (univ : Set (N04PositiveRadialCoefficients n)))
-      (side : Bool) (j : ℕ) (_hj : j ≤ n + 1) : ContDiff ℝ ∞ (A a side j) := by
-    cases j with
-    | zero => exact contDiff_const
-    | succ j => exact contDiff_const
-  let K := n04Realization_endpointFiberInterpolation_jointDirections
-    isOpen_univ n l r c d hcd η hη hgap A hA J
-  have hK : ContDiff ℝ ∞ (fun p : N04PositiveRadialCoefficients n × PolarPoint =>
-      endpointFiberInterpolation n l r c d η (A p.1) p.2) := by
-    apply contDiffOn_univ.mp
-    simpa only [univ_prod_univ] using smoothDirections_contDiffOn_finiteDimensional K
-  exact hK.comp (contDiff_fst.prodMk (contDiff_snd.prodMk contDiff_const))
+  have h := endpointFiber_joint_contDiff n l r c d hcd η hη hgap
+    (n04PositiveGeometry_radialCoefficientField n l r)
+    (fun a side j _ => radialCoefficient_fixed_contDiff n l r a side j)
+    (radialCoefficient_directions n l r)
+  exact contDiff_polar_slice_zero h
 
 private theorem endpointFiberInterpolation_congr_slice
     {n : ℕ} (l r c d : ℝ) (η : Bool → ℝ)

@@ -16,7 +16,7 @@ noncomputable section
 namespace ContinuousFlexibility.Analysis
 
 open Set Filter
-open scoped Topology ContDiff
+open scoped Topology ContDiff BigOperators
 
 private def radialSplice {P : Type*} (c d : ℝ) (L R : P × ℝ → ℝ)
     (p : P × ℝ) : ℝ :=
@@ -171,5 +171,73 @@ theorem n04PositiveGeometry_radialKernel_bounds
       (le_add_of_nonneg_right (norm_nonneg _))
   · rw [(hg.iteratedFDeriv ℝ k).eq_of_nhds]
     exact le_add_of_nonneg_left (add_nonneg (norm_nonneg _) (norm_nonneg _))
+
+/-- The kernel preserves the two physical boundary radii for every finite
+coefficient vector. Only the fixed cutoff margins are used here. -/
+theorem n04PositiveGeometry_radialKernel_endpoints
+    (n : ℕ) {l r c d : ℝ} (hlc : l < c) (hcd : c < d) (hdr : d < r)
+    (η : Bool → ℝ) (hη : ∀ side, 0 < η side)
+    (hgap : ∀ side, 2 * η side <
+      (if side then r else c) - (if side then d else l))
+    (a : N04PositiveRadialCoefficients n) :
+    n04PositiveGeometry_radialKernel n l r c d η (a, l) = l ∧
+      n04PositiveGeometry_radialKernel n l r c d η (a, r) = r := by
+  rw [radialKernel_eq_splice]
+  constructor
+  · simp only [radialSplice, if_pos hlc, n04PositiveGeometry_radialCollarKernel,
+      Bool.false_eq_true, ite_false]
+    rw [n04PositiveGeometry_scalarCollarKernel_formula,
+      positiveReferenceCoordinate_left, mul_zero, add_zero]
+  · have hrc : ¬ r < c := not_lt.mpr (hcd.le.trans hdr.le)
+    have hrd : ¬ r < d := not_lt.mpr hdr.le
+    simp only [radialSplice, if_neg hrc, if_neg hrd,
+      n04PositiveGeometry_radialCollarKernel, ite_true]
+    rw [n04PositiveGeometry_scalarCollarKernel_formula]
+    have hs (side : Bool) : ContDiff ℝ ∞
+        (fun t => n04PositiveGeometry_collarSlopeKernel n d r true (a true) side t / (r - d)) := by
+      apply ContDiff.div_const
+      cases side with
+      | false => exact contDiff_const
+      | true =>
+        change ContDiff ℝ ∞ (fun t => ∑ j : Fin (n + 1),
+          a true j / (j.val.factorial : ℝ) * (t - r) ^ j.val)
+        apply ContDiff.sum
+        intro j _
+        exact contDiff_const.mul ((contDiff_id.sub contDiff_const).pow j.val)
+    rw [positiveReferenceCoordinate_right (hη true) (hgap true)
+      (fun t _ => (hs false).contDiffAt) (fun t _ => (hs true).contDiffAt), mul_one]
+    ring
+
+/-- Every inverse evaluation in the physical component has its actual
+preimage in that same closed component. This is the bounded radial set
+used for uniform coefficient jets. -/
+theorem n04PositiveGeometry_radialKernel_inverse_mem
+    (n : ℕ) {l r c d κ M : ℝ}
+    (hlc : l < c) (hcd : c < d) (hdr : d < r) (hκ : 0 < κ) (hM : 0 ≤ M)
+    {a : N04PositiveRadialCoefficients n}
+    (ha : a ∈ n04PositiveGeometry_radialCoefficientDomain n κ M)
+    {x : ℝ} (hx : x ∈ Icc l r) :
+    Function.invFun (fun t => n04PositiveGeometry_radialKernel n l r c d
+      (endpointFiberWidths n l r c d κ M) (a, t)) x ∈ Icc l r := by
+  let F : ℝ → ℝ := fun t => n04PositiveGeometry_radialKernel n l r c d
+    (endpointFiberWidths n l r c d κ M) (a, t)
+  have hgeom := n04PositiveGeometry_radialKernel_geometry n hlc hcd hdr hκ hM
+  have hm : StrictMono F := strictMono_of_deriv_pos
+    (fun t => hgeom.2.2.1.trans_le (hgeom.2.2.2 a ha t))
+  have hsurj : Function.Surjective F :=
+    (bijective_of_deriv_lower_bound hgeom.2.2.1 (hgeom.2.2.2 a ha)).2
+  have he := n04PositiveGeometry_radialKernel_endpoints n hlc hcd hdr
+    (endpointFiberWidths n l r c d κ M) hgeom.1 hgeom.2.1 a
+  have hright : F (Function.invFun F x) = x := Function.rightInverse_invFun hsurj x
+  change Function.invFun F x ∈ Icc l r
+  constructor
+  · by_contra hn
+    have hlt : F (Function.invFun F x) < F l := hm (lt_of_not_ge hn)
+    rw [hright, he.1] at hlt
+    exact (not_lt.mpr hx.1) hlt
+  · by_contra hn
+    have hlt : F r < F (Function.invFun F x) := hm (lt_of_not_ge hn)
+    rw [hright, he.2] at hlt
+    exact (not_lt.mpr hx.2) hlt
 
 end ContinuousFlexibility.Analysis

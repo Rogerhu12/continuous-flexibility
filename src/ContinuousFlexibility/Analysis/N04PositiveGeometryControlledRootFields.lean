@@ -46,7 +46,8 @@ private theorem finite_root_material_small_state
   calc
     v ≤ A * V ^ A * (1 + p (k + loss) z) := hv
     _ ≤ A * V ^ A * (1 + 1) := mul_le_mul_of_nonneg_left
-      (add_le_add_left hg 1) (mul_nonneg hA (Real.rpow_nonneg (zero_le_one.trans hV) _))
+      (add_le_add (le_refl (1 : ℝ)) hg)
+      (mul_nonneg hA (Real.rpow_nonneg (zero_le_one.trans hV) _))
     _ = (2 * A) * V ^ A := by ring
     _ ≤ B * W ^ B := mul_le_mul hAB hpower (Real.rpow_nonneg (zero_le_one.trans hV) _) hB
 

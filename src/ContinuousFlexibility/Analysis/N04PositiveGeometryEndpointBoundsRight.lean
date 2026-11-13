@@ -79,16 +79,19 @@ theorem n04PositiveGeometry_returnTransportCircle_fixedBaseBounds
   have hC : N04EndpointFixedBaseBounds p H.grading JC :=
     n04PositiveGeometry_endpointBounds_linear p H.grading
       (sectorChartContinuousLinear S) hU (fun s => ⟨1, zero_le_one, fun x => by
-        simpa only [one_mul, sectorChartContinuousLinear_apply] using
+        change (S.circle (3 / 4 : ℝ)).grading s x.1.val.2.2.2 ≤
+          1 * pairGrading (sectorGrading S) realGrading s x
+        simpa only [one_mul] using
           sectorParameter_chart_grading_le S s x⟩)
   let Lsub : (H.Space × H.Space) →L[ℝ] H.Space :=
     ContinuousLinearMap.snd ℝ H.Space H.Space - ContinuousLinearMap.fst ℝ H.Space H.Space
   have hLsub (s : ℕ) : ∃ A : ℝ, 0 ≤ A ∧ ∀ y,
       H.grading s (Lsub y) ≤ A * pairGrading H.grading H.grading (s + 0) y := by
     refine ⟨1, zero_le_one, fun y => ?_⟩
-    simpa only [Lsub, ContinuousLinearMap.sub_apply, ContinuousLinearMap.coe_snd',
-      ContinuousLinearMap.coe_fst', pairGrading_apply, Nat.add_zero, one_mul, add_comm] using
-        (map_sub_le_add (H.grading s) y.2 y.1)
+    change H.grading s (y.2 - y.1) ≤ 1 * (H.grading s y.1 + H.grading s y.2)
+    rw [one_mul]
+    exact (map_sub_le_add (H.grading s) y.2 y.1).trans_eq
+      (add_comm (H.grading s y.2) (H.grading s y.1))
   let JD := solveSmoothDirectionsPostcomp (smoothDirectionsProd JF JC) Lsub
   have hD : N04EndpointFixedBaseBounds p H.grading JD := (hF.prod hp hC).postLinear Lsub 0 hLsub
   exact n04PositiveGeometry_endpointBounds_inverseCompose hH hT hN.1.1 (by norm_num)
@@ -126,8 +129,8 @@ theorem n04PositiveGeometry_rightRootInverseCircle_fixedBaseBounds
     apply hJO.postLinear Lneg 0
     intro s
     refine ⟨1, zero_le_one, fun y => ?_⟩
-    simp only [Lneg, ContinuousLinearMap.neg_apply, ContinuousLinearMap.id_apply,
-      map_neg_eq_map, Nat.add_zero, one_mul]
+    change H.grading s (-y) ≤ 1 * H.grading s y
+    simpa only [map_neg_eq_map, one_mul] using le_refl (H.grading s y)
   have hlower : ∀ x ∈ U, ∀ m θ,
       1 / 4 ≤ 1 + deriv (H.decode
         (circleOddContinuousLinear hH (hN.sectorReturnTransportCircle hS hT x)) m) θ := by

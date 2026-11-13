@@ -116,7 +116,7 @@ theorem n04PositiveGeometry_exists_actual_relative_root_polynomial (n : ℕ) :
   have hRV : R ≤ V := hRQ.trans hQV
   have hVeq : V = A * M ^ degree := by
     dsimp only [V, Q, R, U, A, degree]
-    simp only [mul_pow, ← pow_mul]
+    simp only [mul_pow, ← pow_mul, Nat.mul_assoc]
     ring
   have hbetween (z₀ z₁ : AnnularState S × ℝ)
       (hz₀ : z₀ ∈ stateNeighborhood S C base ε) (hs₀ : stateSector S z₀.1)

@@ -90,7 +90,8 @@ theorem n04PositiveGeometry_rootHeightInputs_finiteRadial_power
   have horder (x : AnnularState S × ℝ) (hx : pjoint B x ≤ 1)
       (hxR : pjoint (s + loss) x ≤ R) :
       pjoint (N + b + 7) x ≤ CI * R ^ ((b : ℝ) / ((s : ℝ) + 1)) := by
-    simpa only [Nat.add_assoc, Nat.add_comm b N] using hIb b hbs x hx R hR hxR
+    have he : b + (N + 7) = N + b + 7 := by omega
+    simpa only [he] using hIb b hbs x hx R hR hxR
   have hoh := oneHighVariationWeight_unit_le_power pjoint B (N + b + 7)
     hk (z - (x0, 0)) v hv (zero_le_one.trans hCI) hpow
     (horder _ hzlow hzR) (fun t => horder _ (hv t) (hvR t))
