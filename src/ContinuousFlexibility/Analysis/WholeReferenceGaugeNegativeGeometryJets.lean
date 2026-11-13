@@ -21,13 +21,13 @@ open Set Filter ContinuousFlexibility.Statements
 open CanonicalGeometry
 open scoped ContDiff Topology BigOperators
 
-private def negativeGeometryScalar (l λ ρ : ℝ) (Y χ H w : ℝ → ℝ) : Atom → ℝ → ℝ
-  | .chartRadial => fun x => Y (l + λ * x) / ρ
-  | .inverseRadial => fun x => (χ (ρ * x) - l) / λ
-  | .height => fun x => H (l + λ * x)
-  | .heightInverse => fun x => (H (l + λ * x))⁻¹
-  | .jacobian => fun x => H (l + λ * x) ^ (-2 : ℝ) * (w (l + λ * x))⁻¹
-  | .jacobianInverse => fun x => H (l + λ * x) ^ 2 * w (l + λ * x)
+private def negativeGeometryScalar (l lam ρ : ℝ) (Y χ H w : ℝ → ℝ) : Atom → ℝ → ℝ
+  | .chartRadial => fun x => Y (l + lam * x) / ρ
+  | .inverseRadial => fun x => (χ (ρ * x) - l) / lam
+  | .height => fun x => H (l + lam * x)
+  | .heightInverse => fun x => (H (l + lam * x))⁻¹
+  | .jacobian => fun x => H (l + lam * x) ^ (-2 : ℝ) * (w (l + lam * x))⁻¹
+  | .jacobianInverse => fun x => H (l + lam * x) ^ 2 * w (l + lam * x)
   | .sourceFactor => fun x => H (χ (ρ * x)) ^ 3 * w (χ (ρ * x))
   | .sourceFactorInverse => fun x => H (χ (ρ * x)) ^ (-3 : ℝ) * (w (χ (ρ * x)))⁻¹
   | _ => fun _ => 0
@@ -145,7 +145,7 @@ theorem n04WholeReferenceGauge_negative_geometryReferenceJets_enlargedMaterialDa
       have hpos : V.positive m = true := by
         simp only [V, n04WholeReferenceGaugeAtlasData, n04WholeCanonicalAtlasData,
           n04bWithInteriorDivision, n04WholePiecePositive, he]
-      exact False.elim (Bool.true_ne_false (hpos.symm.trans hm))
+      exact False.elim (Bool.false_ne_true (hpos.symm.trans hm).symm)
   | inl j =>
       let k := if j.2 then (K.cutPair j.1).2 else (K.cutPair j.1).1
       have hk : e₀ k = .inl j := by
@@ -153,13 +153,23 @@ theorem n04WholeReferenceGauge_negative_geometryReferenceJets_enlargedMaterialDa
         cases side <;> simp only [K, k, n04bActualTypedAtlas, n04bTypedAtlasData_cutPair,
           Bool.false_eq_true, ite_false, ite_true, Equiv.apply_symm_apply]
       have hki : e₀.symm (.inl (j.1, j.2)) = k := by rw [← hk, e₀.symm_apply_apply]
-      rcases n04WholeReferenceGaugeAtlasData_negative_fields
-        C L K e cell ψ χ₀ h₀ τ σ Q N (C.referenceState, 0) m j he with
-        ⟨hl, hr, hpl, hpr, _, hsample, _, hF, hG, hH, _, _⟩
+      have hnegFields : V.left m = K.left k ∧ V.right m = K.right k ∧
+          V.physicalLeft m = K.physicalLeft k ∧ V.physicalRight m = K.physicalRight k ∧
+          physicalPieceOpen S V (C.referenceState, 0) m =
+            physicalPieceOpen S K (C.referenceState, 0) k ∧
+          V.cell m = K.cell k ∧ V.positive m = false ∧
+          V.chart (C.referenceState, 0) m = K.chart (C.referenceState, 0) k ∧
+          V.inverseChart (C.referenceState, 0) m = K.inverseChart (C.referenceState, 0) k ∧
+          V.height (C.referenceState, 0) m = K.height (C.referenceState, 0) k ∧
+          V.coefficients (C.referenceState, 0) m = K.coefficients (C.referenceState, 0) k ∧
+          V.potential (C.referenceState, 0) m = K.potential (C.referenceState, 0) k :=
+        n04WholeReferenceGaugeAtlasData_negative_fields
+          C L K e cell ψ χ₀ h₀ τ σ Q N (C.referenceState, 0) m j he
+      obtain ⟨hl, hr, hpl, hpr, _, hsample, _, hF, hG, hH, _, _⟩ := hnegFields
       let cut := n04bActualReferenceCut hN
       let l := n04bNegativeLeft C cut j
       let r := n04bNegativeRight C cut j
-      let λ := r - l
+      let lam := r - l
       let ρ := n04bRootCutRadius (C.travel j.1)
       let Y := fun t : ℝ => (K.chart (C.referenceState, 0) k (t, 0)).1
       let H := fun t : ℝ => K.height (C.referenceState, 0) k (t, 0)
@@ -169,13 +179,13 @@ theorem n04WholeReferenceGauge_negative_geometryReferenceJets_enlargedMaterialDa
       have hplK : K.physicalLeft k = l := by change n04bReferenceTypedLeft C cut (e₀ k) = l; rw [hk]; rfl
       have hprK : K.physicalRight k = r := by change n04bReferenceTypedRight C cut (e₀ k) = r; rw [hk]; rfl
       have hlr : l < r := (n04b_negativeHalf_bounds hN.1.1.2.2.2.1 (n04bActualReferenceCut_mem hN) j).2.1
-      have hλ : 0 < λ := sub_pos.mpr hlr
+      have hlam : 0 < lam := sub_pos.mpr hlr
       have hρ : 0 < ρ := n04bRootCutRadius_pos
         (n04b_referenceTravel_pos (n04b_profileGeometry_of_through03 hN) hN.1.1.2.2.2.1 j.1)
-      have hphys {x : ℝ} (hx : x ∈ Ioo (0 : ℝ) 1) : l + λ * x ∈ Ioo l r := by
-        refine ⟨lt_add_of_pos_right l (mul_pos hλ hx.1), ?_⟩
-        have ht := mul_lt_mul_of_pos_left hx.2 hλ
-        dsimp only [λ] at ht ⊢
+      have hphys {x : ℝ} (hx : x ∈ Ioo (0 : ℝ) 1) : l + lam * x ∈ Ioo l r := by
+        refine ⟨lt_add_of_pos_right l (mul_pos hlam hx.1), ?_⟩
+        have ht := mul_lt_mul_of_pos_left hx.2 hlam
+        dsimp only [lam] at ht ⊢
         linarith only [ht]
       have hcan {x : ℝ} (hx : x ∈ Ioo (0 : ℝ) 1) : ρ * x ∈ Ioo (K.left k) (K.right k) := by
         rw [hlK, hrK]
@@ -200,7 +210,7 @@ theorem n04WholeReferenceGauge_negative_geometryReferenceJets_enlargedMaterialDa
           (mul_le_mul hZC hEt hE.le (zero_le_one.trans hC0)) hd).trans
             (Real.rpow_le_rpow_of_exponent_le hW hdA))
           (Real.rpow_nonneg (mul_nonneg hZ hE.le) _) (zero_le_one.trans hA)
-      have hlengthM : λ⁻¹ ≤ M ∧ λ ≤ M ∧ ρ⁻¹ ≤ M ∧ ρ ≤ M := by
+      have hlengthM : lam⁻¹ ≤ M ∧ lam ≤ M ∧ ρ⁻¹ ≤ M ∧ ρ ≤ M := by
         have hh := hlength k j.1 j.2 hk
         rw [hplK, hprK, hlK, hrK, sub_zero] at hh
         have hb : BN * E ^ AN ≤ M := by
@@ -219,7 +229,8 @@ theorem n04WholeReferenceGauge_negative_geometryReferenceJets_enlargedMaterialDa
           ((hji k j.1 j.2 hk host hhost hraw).1 x hx q hq).trans (hprodCost hBJi hAparts.2.2.2.1)
       have hSB (x : ℝ) (hx : x ∈ Ioo (K.left k) (K.right k)) (q : ℕ) (hq : q ≤ s) :
           |iteratedDeriv q (fun u => H (χ u) ^ 3 * D.w (χ u)) x| ≤ M := by
-        simpa only [Bool.false_eq_true, ite_false, Function.comp_def, Real.rpow_natCast] using
+        simpa only [Bool.false_eq_true, ite_false, Function.comp_def, Real.rpow_natCast,
+          Real.rpow_ofNat] using!
           ((hs k j.1 j.2 hk host hhost hraw).2 x hx q hq).trans (hprodCost hBS hAparts.2.2.2.2.1)
       have hSIB (x : ℝ) (hx : x ∈ Ioo (K.left k) (K.right k)) (q : ℕ) (hq : q ≤ s) :
           |iteratedDeriv q (fun u => H (χ u) ^ (-3 : ℝ) * (D.w (χ u))⁻¹) x| ≤ M :=
@@ -244,47 +255,57 @@ theorem n04WholeReferenceGauge_negative_geometryReferenceJets_enlargedMaterialDa
           filter_upwards [isOpen_Ioo.mem_nhds hx] with u hu'
           exact (radialUnit_scalar_normalization (hscalar.2.2.2.2.2.2.1 u hu').2).2.2
         have hejet := radialUnit_abs_jet_of_abs_germ
-          (((hscalar.1.contDiffAt (isOpen_Ioo.mem_nhds hx)).derivWithin (by simp)).continuousAt) hu.1 hg (q - 1)
+          (((hscalar.1.contDiffAt (isOpen_Ioo.mem_nhds hx)).derivWithin (m := ∞)
+            (by simp)).continuousAt) hu.1 hg (q - 1)
         rw [← iteratedDeriv_succ', Nat.sub_add_cancel hq] at hejet
         exact hejet.trans_le (hJB x hx (q - 1) (by omega))
       have hnorm {l r y : ℝ} (hlr : l < r) (hy : y ∈ Ioo l r) : |(y - l) / (r - l)| ≤ 1 := by
         rw [abs_of_pos (div_pos (sub_pos.mpr hy.1) (sub_pos.mpr hlr))]
         exact (div_le_one (sub_pos.mpr hlr)).mpr (sub_le_sub_right hy.2.le l)
       have hscalarBound (x : ℝ) (hx : x ∈ Ioo (0 : ℝ) 1) (n : ℕ) (hn : n ≤ s) :
-          |iteratedDeriv n (negativeGeometryScalar l λ ρ Y χ H D.w v) x| ≤ M ^ (s + 2) := by
-        have hYrange := (hfields.1 (l + λ * x, 0) ⟨hphys hx, mem_univ _⟩).2.2.1
+          |iteratedDeriv n (negativeGeometryScalar l lam ρ Y χ H D.w v) x| ≤ M ^ (s + 2) := by
+        have hYrange := (hfields.1 (l + lam * x, 0) ⟨hphys hx, mem_univ _⟩).2.2.1
         rw [hlK, hrK] at hYrange
         have hχrange := hscalar.2.2.2.1 (hcan hx)
-        have hYzero : |Y (l + λ * x) / ρ| ≤ 1 := by simpa only [sub_zero] using hnorm hρ hYrange
-        have hχzero : |(χ (ρ * x) - l) / λ| ≤ 1 := hnorm hlr hχrange
+        have hYzero : |Y (l + lam * x) / ρ| ≤ 1 := by simpa only [sub_zero] using hnorm hρ hYrange
+        have hχzero : |(χ (ρ * x) - l) / lam| ≤ 1 := hnorm hlr hχrange
         cases v
-        case chartRadial => simpa only [negativeGeometryScalar, sub_zero] using
-          negativeGeometry_normalized_bound hM Y l λ 0 ρ x hn
-            (by simpa only [abs_of_pos hλ] using hlengthM.2.1)
-            (by simpa only [abs_of_pos (inv_pos.mpr hρ)] using hlengthM.2.2.1)
-            (by simpa only [sub_zero] using hYzero) (hYB _ (hphys hx))
-        case inverseRadial => simpa only [negativeGeometryScalar, zero_add] using
-          negativeGeometry_normalized_bound hM χ 0 ρ l λ x hn
-            (by simpa only [abs_of_pos hρ] using hlengthM.2.2.2)
-            (by simpa only [abs_of_pos (inv_pos.mpr hλ)] using hlengthM.1)
-            (by simpa only [zero_add] using hχzero)
-            (fun q hq hqs => by simpa only [zero_add] using hχB (ρ * x) (hcan hx) q hq hqs)
-        case height => exact negativeGeometry_affine_bound hM H l λ x hn
-          (by simpa only [abs_of_pos hλ] using hlengthM.2.1) (hHB _ (hphys hx) n hn).1
-        case heightInverse => exact negativeGeometry_affine_bound hM (fun u => (H u)⁻¹) l λ x hn
-          (by simpa only [abs_of_pos hλ] using hlengthM.2.1) (hHB _ (hphys hx) n hn).2
-        case jacobian => exact negativeGeometry_affine_bound hM (fun u => H u ^ (-2 : ℝ) * (D.w u)⁻¹) l λ x hn
-          (by simpa only [abs_of_pos hλ] using hlengthM.2.1) (hJB _ (hphys hx) n hn)
-        case jacobianInverse => exact negativeGeometry_affine_bound hM (fun u => H u ^ 2 * D.w u) l λ x hn
-          (by simpa only [abs_of_pos hλ] using hlengthM.2.1) (hJIB _ (hphys hx) n hn)
-        case sourceFactor => simpa only [negativeGeometryScalar, zero_add] using
-          negativeGeometry_affine_bound hM (fun u => H (χ u) ^ 3 * D.w (χ u)) 0 ρ x hn
-            (by simpa only [abs_of_pos hρ] using hlengthM.2.2.2)
-            (by simpa only [zero_add] using hSB (ρ * x) (hcan hx) n hn)
-        case sourceFactorInverse => simpa only [negativeGeometryScalar, zero_add] using
-          negativeGeometry_affine_bound hM (fun u => H (χ u) ^ (-3 : ℝ) * (D.w (χ u))⁻¹) 0 ρ x hn
-            (by simpa only [abs_of_pos hρ] using hlengthM.2.2.2)
-            (by simpa only [zero_add] using hSIB (ρ * x) (hcan hx) n hn)
+        case chartRadial =>
+          simpa only [negativeGeometryScalar, sub_zero] using
+            negativeGeometry_normalized_bound hM Y l lam 0 ρ x hn
+              (by simpa only [abs_of_pos hlam] using hlengthM.2.1)
+              (by simpa only [abs_of_pos (inv_pos.mpr hρ)] using hlengthM.2.2.1)
+              (by simpa only [sub_zero] using hYzero) (hYB _ (hphys hx))
+        case inverseRadial =>
+          simpa only [negativeGeometryScalar, zero_add] using
+            negativeGeometry_normalized_bound hM χ 0 ρ l lam x hn
+              (by simpa only [abs_of_pos hρ] using hlengthM.2.2.2)
+              (by simpa only [abs_of_pos (inv_pos.mpr hlam)] using hlengthM.1)
+              (by simpa only [zero_add] using hχzero)
+              (fun q hq hqs => by simpa only [zero_add] using hχB (ρ * x) (hcan hx) q hq hqs)
+        case height =>
+          exact negativeGeometry_affine_bound hM H l lam x hn
+            (by simpa only [abs_of_pos hlam] using hlengthM.2.1) (hHB _ (hphys hx) n hn).1
+        case heightInverse =>
+          exact negativeGeometry_affine_bound hM (fun u => (H u)⁻¹) l lam x hn
+            (by simpa only [abs_of_pos hlam] using hlengthM.2.1) (hHB _ (hphys hx) n hn).2
+        case jacobian =>
+          exact negativeGeometry_affine_bound hM (fun u => H u ^ (-2 : ℝ) * (D.w u)⁻¹)
+            l lam x hn (by simpa only [abs_of_pos hlam] using hlengthM.2.1)
+            (hJB _ (hphys hx) n hn)
+        case jacobianInverse =>
+          exact negativeGeometry_affine_bound hM (fun u => H u ^ 2 * D.w u) l lam x hn
+            (by simpa only [abs_of_pos hlam] using hlengthM.2.1) (hJIB _ (hphys hx) n hn)
+        case sourceFactor =>
+          simpa only [negativeGeometryScalar, zero_add] using
+            negativeGeometry_affine_bound hM (fun u => H (χ u) ^ 3 * D.w (χ u)) 0 ρ x hn
+              (by simpa only [abs_of_pos hρ] using hlengthM.2.2.2)
+              (by simpa only [zero_add] using hSB (ρ * x) (hcan hx) n hn)
+        case sourceFactorInverse =>
+          simpa only [negativeGeometryScalar, zero_add] using
+            negativeGeometry_affine_bound hM (fun u => H (χ u) ^ (-3 : ℝ) * (D.w (χ u))⁻¹)
+              0 ρ x hn (by simpa only [abs_of_pos hρ] using hlengthM.2.2.2)
+              (by simpa only [zero_add] using hSIB (ρ * x) (hcan hx) n hn)
         all_goals
           simp only [negativeGeometryScalar, iteratedDeriv_const, ite_self, abs_zero]
           exact pow_nonneg (zero_le_one.trans hM) _
@@ -293,15 +314,46 @@ theorem n04WholeReferenceGauge_negative_geometryReferenceJets_enlargedMaterialDa
         funext q
         simp only [canonicalSource, hF, hG, hH]
       have hEq : EqOn (atom D U S C L V (C.referenceState, 0) m v)
-          (fun q => negativeGeometryScalar l λ ρ Y χ H D.w v q.1) unitStrip := by
+          (fun q => negativeGeometryScalar l lam ρ Y χ H D.w v q.1) unitStrip := by
         intro q hq
-        have hf := hfields.1 (l + λ * q.1, q.2) ⟨hphys hq.1, mem_univ _⟩
+        have hxq : l + (r - l) * q.1 ∈ Ioo l r := hphys hq.1
+        have hf := hfields.1 (l + (r - l) * q.1, q.2) ⟨hxq, mem_univ _⟩
         have hg := hfields.2 (ρ * q.1, q.2) ⟨hcan hq.1, mem_univ _⟩
+        have hf1 : K.chart (C.referenceState, 0) k (l + (r - l) * q.1, q.2) =
+            (Y (l + (r - l) * q.1), q.2) := hf.1
+        have hf2 : K.height (C.referenceState, 0) k (l + (r - l) * q.1, q.2) =
+            H (l + (r - l) * q.1) := hf.2.1
+        have hf5 : |planeJacobian (K.chart (C.referenceState, 0) k) (l + (r - l) * q.1, q.2)| =
+            H (l + (r - l) * q.1) ^ (-2 : ℝ) * (D.w (l + (r - l) * q.1))⁻¹ := hf.2.2.2.2.1
+        have hf6 : |planeJacobian (K.chart (C.referenceState, 0) k) (l + (r - l) * q.1, q.2)|⁻¹ =
+            H (l + (r - l) * q.1) ^ 2 * D.w (l + (r - l) * q.1) := hf.2.2.2.2.2
+        have hg1 : K.inverseChart (C.referenceState, 0) k (ρ * q.1, q.2) =
+            (χ (ρ * q.1), q.2) := hg.1
+        have hg3 : canonicalSource S K (C.referenceState, 0) k (fun _ => 1) (ρ * q.1, q.2) =
+            H (χ (ρ * q.1)) ^ 3 * D.w (χ (ρ * q.1)) := hg.2.2.1
+        have hg4 : (canonicalSource S K (C.referenceState, 0) k (fun _ => 1) (ρ * q.1, q.2))⁻¹ =
+            H (χ (ρ * q.1)) ^ (-3 : ℝ) * (D.w (χ (ρ * q.1)))⁻¹ := hg.2.2.2
         rcases hv with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-        all_goals simp only [atom, hsource, hF, hG, hH, physicalUnitPoint, canonicalUnitPoint,
-          hl, hr, hpl, hpr, hlK, hrK, hplK, hprK, sub_zero, zero_add,
-          hf.1, hf.2.1, hf.2.2.2.2.1, hf.2.2.2.2.2, hg.1, hg.2.2.1, hg.2.2.2,
-          negativeGeometryScalar, sub_self]
+        · simp only [atom, hF, physicalUnitPoint, hl, hr, hpl, hpr, hlK, hrK, hplK, hprK,
+            sub_zero, hf1, negativeGeometryScalar, lam]
+        · simp only [atom, hF, physicalUnitPoint, hpl, hpr, hplK, hprK, hf1,
+            negativeGeometryScalar, sub_self]
+        · simp only [atom, hG, canonicalUnitPoint, hl, hr, hpl, hpr, hlK, hrK, hplK, hprK,
+            sub_zero, zero_add, hg1, negativeGeometryScalar, lam]
+        · simp only [atom, hG, canonicalUnitPoint, hl, hr, hlK, hrK, sub_zero, zero_add, hg1,
+            negativeGeometryScalar, sub_self]
+        · simp only [atom, hH, physicalUnitPoint, hpl, hpr, hplK, hprK, hf2,
+            negativeGeometryScalar, lam]
+        · simp only [atom, hH, physicalUnitPoint, hpl, hpr, hplK, hprK, hf2,
+            negativeGeometryScalar, lam]
+        · simp only [atom, hF, physicalUnitPoint, hpl, hpr, hplK, hprK, hf5,
+            negativeGeometryScalar, lam]
+        · simp only [atom, hF, physicalUnitPoint, hpl, hpr, hplK, hprK, hf6,
+            negativeGeometryScalar, lam]
+        · simp only [atom, hsource, canonicalUnitPoint, hl, hr, hlK, hrK, sub_zero, zero_add,
+            hg3, negativeGeometryScalar]
+        · simp only [atom, hsource, canonicalUnitPoint, hl, hr, hlK, hrK, sub_zero, zero_add,
+            hg4, negativeGeometryScalar]
       rw [mixedDerivative_eqOn_of_isOpen (isOpen_Ioo.prod isOpen_univ) hEq a b hp,
         n08_mixedDerivative_radial, hsample]
       have hnumeric : M ^ (s + 2) ≤ BM * t ^ BM := by
