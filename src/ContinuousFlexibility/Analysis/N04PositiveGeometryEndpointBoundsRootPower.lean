@@ -84,7 +84,7 @@ theorem n04PositiveGeometry_rootHeightInputs_finiteRadial_power
   have hraw := hb j i a b (by change a + b ≤ N + b; omega)
     q hq U J k B x0 z hz hzq v
   have hcenter : 1 + stateGrading S (N + b + 7) x0 ≤ M :=
-    add_le_add_left (stateGrading_monotone S (by omega) x0) 1
+    add_le_add le_rfl (stateGrading_monotone S (by omega) x0)
   have hpow : 1 ≤ R ^ ((b : ℝ) / ((s : ℝ) + 1)) :=
     Real.one_le_rpow hR (by positivity)
   have horder (x : AnnularState S × ℝ) (hx : pjoint B x ≤ 1)

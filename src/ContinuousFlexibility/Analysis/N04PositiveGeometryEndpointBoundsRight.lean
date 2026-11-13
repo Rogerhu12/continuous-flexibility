@@ -21,11 +21,57 @@ namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements
 
+private theorem endpointBounds_snd_sub_fst
+    {E F : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    [IsTopologicalAddGroup F] [ContinuousSMul ℝ F]
+    {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F}
+    {U : Set E} {f g : E → F} {J : SmoothDirections U f} {K : SmoothDirections U g}
+    (hp : Monotone p) (hJ : N04EndpointFixedBaseBounds p q J)
+    (hK : N04EndpointFixedBaseBounds p q K) :
+    N04EndpointFixedBaseBounds p q
+      (solveSmoothDirectionsPostcomp (smoothDirectionsProd J K)
+        (ContinuousLinearMap.snd ℝ F F - ContinuousLinearMap.fst ℝ F F)) := by
+  apply (hJ.prod hp hK).postLinear _ 0
+  intro s
+  refine ⟨1, zero_le_one, fun y => ?_⟩
+  change q s (y.2 - y.1) ≤ 1 * (q s y.1 + q s y.2)
+  rw [one_mul]
+  exact (map_sub_le_add (q s) y.2 y.1).trans_eq (add_comm (q s y.2) (q s y.1))
+
 local instance n04PositiveEndpointBoundsRightStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+
+private theorem endpointChart_fixedBaseBounds (S : PhysicalSpacesData)
+    {U : Set (StateDirections S × ℝ)} (hU : IsOpen U) :
+    N04EndpointFixedBaseBounds (pairGrading (sectorGrading S) realGrading)
+      (S.circle (3 / 4 : ℝ)).grading
+        (smoothDirectionsLinearOn (sectorChartContinuousLinear S) hU) := by
+  apply n04PositiveGeometry_endpointBounds_linear
+  intro s
+  refine ⟨1, zero_le_one, fun x => ?_⟩
+  change (S.circle (3 / 4 : ℝ)).grading s x.1.val.2.2.2 ≤
+    1 * pairGrading (sectorGrading S) realGrading s x
+  simpa only [one_mul] using sectorParameter_chart_grading_le S s x
+
+private theorem returnFlow_fixedBaseBounds
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε)
+    (JF : SmoothDirections (sectorNeighborhood S base ε ε) (hN.returnFlowCircle hS hT)) :
+    N04EndpointFixedBaseBounds (pairGrading (sectorGrading S) realGrading)
+      (S.circle (3 / 4 : ℝ)).grading JF := by
+  refine (hN.endpointFlowCircle_fixedBase_oneHigh hS hT).elim ?_
+  intro B hB
+  refine ⟨B, fun n => ?_⟩
+  refine (hB.2 n).elim ?_
+  intro ell hell
+  exact ⟨ell, fun R hR s => (hell R hR s).elim
+    (fun K hK => ⟨K, hK.1, hK.2 C.right hN.right_radius_mem JF⟩)⟩
 
 private theorem endpointParameter_affineInterpolation
     (hS : IsPhysicalSpaces D T S) :
@@ -67,33 +113,14 @@ theorem n04PositiveGeometry_returnTransportCircle_fixedBaseBounds
   have hU : IsOpen U := sectorNeighborhood_isOpen S base ε ε
   let JF : SmoothDirections U (hN.returnFlowCircle hS hT) :=
     (hN.exists_endpointFlowCircle_smoothDirections hS hT C.right hN.right_radius_mem).choose
-  have hF : N04EndpointFixedBaseBounds p H.grading JF := by
-    refine (hN.endpointFlowCircle_fixedBase_oneHigh hS hT).elim ?_
-    intro B hB
-    refine ⟨B, fun n => ?_⟩
-    refine (hB.2 n).elim ?_
-    intro ell hell
-    exact ⟨ell, fun R hR s => (hell R hR s).elim
-      (fun K hK => ⟨K, hK.1, hK.2 C.right hN.right_radius_mem JF⟩)⟩
+  have hF : N04EndpointFixedBaseBounds p H.grading JF := returnFlow_fixedBaseBounds hT hS hN JF
   let JC := smoothDirectionsLinearOn (sectorChartContinuousLinear S) hU
   have hC : N04EndpointFixedBaseBounds p H.grading JC :=
-    n04PositiveGeometry_endpointBounds_linear p H.grading
-      (sectorChartContinuousLinear S) hU (fun s => ⟨1, zero_le_one, fun x => by
-        change (S.circle (3 / 4 : ℝ)).grading s x.1.val.2.2.2 ≤
-          1 * pairGrading (sectorGrading S) realGrading s x
-        simpa only [one_mul] using
-          sectorParameter_chart_grading_le S s x⟩)
+    endpointChart_fixedBaseBounds S hU
   let Lsub : (H.Space × H.Space) →L[ℝ] H.Space :=
     ContinuousLinearMap.snd ℝ H.Space H.Space - ContinuousLinearMap.fst ℝ H.Space H.Space
-  have hLsub (s : ℕ) : ∃ A : ℝ, 0 ≤ A ∧ ∀ y,
-      H.grading s (Lsub y) ≤ A * pairGrading H.grading H.grading (s + 0) y := by
-    refine ⟨1, zero_le_one, fun y => ?_⟩
-    change H.grading s (y.2 - y.1) ≤ 1 * (H.grading s y.1 + H.grading s y.2)
-    rw [one_mul]
-    exact (map_sub_le_add (H.grading s) y.2 y.1).trans_eq
-      (add_comm (H.grading s y.2) (H.grading s y.1))
   let JD := solveSmoothDirectionsPostcomp (smoothDirectionsProd JF JC) Lsub
-  have hD : N04EndpointFixedBaseBounds p H.grading JD := (hF.prod hp hC).postLinear Lsub 0 hLsub
+  have hD : N04EndpointFixedBaseBounds p H.grading JD := endpointBounds_snd_sub_fst hp hF hC
   exact n04PositiveGeometry_endpointBounds_inverseCompose hH hT hN.1.1 (by norm_num)
     (hS.2.2.2.2.1 (3 / 4 : ℝ)).2.2 hp (endpointParameter_affineInterpolation hS)
     hF hD (fun m => -C.travel m) (by norm_num : (0 : ℝ) < 1 / 2)

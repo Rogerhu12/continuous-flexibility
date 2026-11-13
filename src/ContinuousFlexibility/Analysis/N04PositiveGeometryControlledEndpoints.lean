@@ -90,8 +90,7 @@ theorem n04PositiveGeometry_actual_positive_endpoint_material_bounds
           have hamb : n04PositiveEndpoint i side =
               (if side then W.D.b else W.D.a) := by
             simpa only [ho] using (X.src i side).property
-          have hc := (retainedReference_positive_endpoints_interior
-            W.P W.metadata.selected W.metadata.first_two one_pos W.realizes W.hw W.coordinates i side).1
+          have hc := (W.roots i side).1
           exfalso
           cases side
           · exact (ne_of_gt hc.1) (by simpa only [Bool.false_eq_true, ↓reduceIte] using hamb)

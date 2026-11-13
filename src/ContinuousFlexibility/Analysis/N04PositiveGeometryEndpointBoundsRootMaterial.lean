@@ -70,7 +70,7 @@ theorem n04PositiveGeometry_rootHeightJetCLM_material_bound
         |mixedDerivative a b ((S.height scalarBeta).decode u) p| ≤
           C * T.E0 p.1 ^ A * T.H p.1 ^ scalarBeta *
             scalarHeightGrading S (s + 3) u := by
-    simpa only [Nat.add_assoc] using hpoint
+    exact hpoint
   have hm := weighted_scalarCommonHeightGrading_monotone S
   obtain ⟨B0, hB0, hb0⟩ := rootMaterial_tame_evaluation hT hS s hC hpoint'
     (n06RootNormalizedRadialCLM hD hT hS)
@@ -101,6 +101,29 @@ theorem n04PositiveGeometry_rootHeightJetCLM_material_bound
   · exact (hb2 a (b + 1) (by omega) p hp u).trans (hmono (by linarith))
   · exact (hb3 a b (by omega) p hp u).trans (hmono (by linarith))
 
+/-- The original state projection preserves the same physical material
+cost and the same fixed spatial loss. -/
+theorem n04PositiveGeometry_rootHeightStateJetCLM_material_bound
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (hS : IsPhysicalSpaces D T S) (s : ℕ) :
+    ∃ C A : ℝ, 0 ≤ C ∧ 0 ≤ A ∧ ∀ i : Fin 4,
+      ∀ a b : ℕ, a + b ≤ s → ∀ p (hp : p ∈ annularOpen D),
+      ∀ x : AnnularState S,
+        |n04PositiveGeometry_rootHeightStateJetCLM hD hT hS a b p hp i x| ≤
+          C * T.E0 p.1 ^ A * T.H p.1 ^ scalarBeta * stateGrading S (s + 7) x := by
+  obtain ⟨C, A, hC, hA, hb⟩ :=
+    n04PositiveGeometry_rootHeightJetCLM_material_bound hD hT hS s
+  refine ⟨C, A, hC, hA, ?_⟩
+  intro i a b hab p hp x
+  have hW : 0 ≤ C * T.E0 p.1 ^ A * T.H p.1 ^ scalarBeta :=
+    mul_nonneg (mul_nonneg hC
+      (Real.rpow_nonneg (hT.2.1 p.1 hp.1).2.2.1.le _))
+      (Real.rpow_nonneg (hT.2.1 p.1 hp.1).2.1.le _)
+  have he : n04PositiveGeometry_rootHeightStateJetCLM hD hT hS a b p hp i x =
+      n04PositiveGeometry_rootHeightJetCLM hD hT hS a b p hp i x.1 := rfl
+  exact (congrArg abs he).trans_le ((hb i a b hab p hp x.1).trans
+    (mul_le_mul_of_nonneg_left (n06_root_commonHeightGrading_le_state S (s + 7) x) hW))
+
 /-- The genuine quadratic parameter jets retain their polynomial cost
 and full height gain at every parameter order, with one fixed loss. -/
 theorem n04PositiveGeometry_rootHeightInputs_material_oneHigh
@@ -116,7 +139,7 @@ theorem n04PositiveGeometry_rootHeightInputs_material_oneHigh
           (1 + stateGrading S (s + 7) x0) *
           oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
             B (s + 7) (z - (x0, 0)) v := by
-  refine (n04PositiveGeometry_rootHeightJetCLM_material_bound hD hT hS s).elim ?_
+  refine (n04PositiveGeometry_rootHeightStateJetCLM_material_bound hD hT hS s).elim ?_
   intro C hC
   refine hC.elim ?_
   intro A hA
@@ -128,14 +151,8 @@ theorem n04PositiveGeometry_rootHeightInputs_material_oneHigh
       (Real.rpow_nonneg (hT.2.1 p.1 hp.1).2.2.1.le _))
       (Real.rpow_nonneg (hT.2.1 p.1 hp.1).2.1.le _)
   have hL (x : AnnularState S) : |L x| ≤
-      (C * T.E0 p.1 ^ A * T.H p.1 ^ scalarBeta) * stateGrading S (s + 7) x := by
-    have he : L x = n04PositiveGeometry_rootHeightJetCLM hD hT hS a b p hp i x.1 := by
-      rw [n04PositiveGeometry_rootHeightStateJetCLM, ContinuousLinearMap.comp_apply,
-        ContinuousLinearMap.coe_fst']
-    exact (congrArg abs he).trans_le
-      ((hA.2.2 i a b hab p hp x.1).trans
-        (mul_le_mul_of_nonneg_left
-          (n06_root_commonHeightGrading_le_state S (s + 7) x) hW))
+      (C * T.E0 p.1 ^ A * T.H p.1 ^ scalarBeta) * stateGrading S (s + 7) x :=
+    hA.2.2 i a b hab p hp x
   exact qLinear_oneHigh_bound (stateGrading S) L B (s + 7) hW hL J
     (fun y _ => congrArg (fun t : ℝ => y.2 * t)
       (n04PositiveGeometry_rootHeightStateJetCLM_apply hD hT hS a b p hp i y.1).symm)

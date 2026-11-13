@@ -59,9 +59,9 @@ theorem n04PositiveGeometry_scalarCollarKernel_formula
       have hrad := (hasDerivAt_boundaryTaylorPolynomial_radial n
         (if root then r else l) t 0 A).deriv
       rw [← deriv_cylinder_radial_slice ((hQ root).differentiable (by simp)) t 0]
-      simp only [Q, positiveReferenceCollarField, if_pos rfl] at hrad ⊢
+      simp only [Q, positiveReferenceCollarField, if_pos rfl, ite_true] at hrad ⊢
       rw [hrad]
-      simp only [n04PositiveGeometry_collarSlopeKernel, if_pos rfl,
+      simp only [n04PositiveGeometry_collarSlopeKernel, if_pos rfl, ite_true,
         boundaryTaylorPolynomial, n04PositiveGeometry_taylorSlopeKernel, Finset.sum_range]
       apply Finset.sum_congr rfl
       intro j _

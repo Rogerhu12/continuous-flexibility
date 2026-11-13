@@ -43,7 +43,8 @@ theorem n04PositiveGeometry_angularKernel_weighted_bound
     {C M H L t : ℝ} (hC : 0 ≤ C) (hM : 1 ≤ M)
     (hH : 0 ≤ H) (hHL : H ≤ L) (hL : 1 ≤ L) (ht : 1 ≤ t)
     (houter : ∀ j, j ≤ n → ‖iteratedFDeriv ℝ j g (fun i => f i (x, θ))‖ ≤ C)
-    (hinputs : ∀ i k b, k + b ≤ n → ∀ u : Fin k → E, (∀ j, P (u j)) →
+    (hinputs : ∀ i k b, k ≤ w.stateArity → b ≤ w.angleArity →
+      ∀ u : Fin k → E, (∀ j, P (u j)) →
       ‖(JA i b θ).D k x u‖ ≤
         M * parameterHeightWeight H k * t ^ (b + shift * k)) :
     ‖Q.D n (x, θ) v‖ ≤ (Fintype.card (OrderedFinpartition n) : ℝ) *
@@ -73,13 +74,19 @@ theorem n04PositiveGeometry_angularKernel_weighted_bound
     let u := wj.stateDirections (v ∘ c.emb j)
     have hu (a : Fin wj.stateArity) : P (u a) := by
       obtain ⟨l, _, he⟩ := wj.stateDirections_mem_range (v ∘ c.emb j) a
-      exact he.symm ▸ hP (c.emb j l)
+      change P (wj.stateDirections (v ∘ c.emb j) a)
+      rw [he]
+      exact hP (c.emb j l)
     have hpure : wj.pureSlots u = v ∘ c.emb j :=
       wj.pureSlots_stateDirections _ (hv.restrict (c.emb j))
     have he := smoothDirections_joint_pureSlots (J i) (JA i) wj hx θ u
-    have hj : wj.stateArity + wj.angleArity ≤ n :=
-      wj.arity_sum.le.trans (c.partSize_le j)
-    have hbound := hinputs i wj.stateArity wj.angleArity hj u hu
+    have hk : wj.stateArity ≤ w.stateArity :=
+      (Finset.single_le_sum (fun l _ => Nat.zero_le (w.restrict (c.emb l)).stateArity)
+        (Finset.mem_univ j)).trans_eq (w.sum_restrict_stateArity c)
+    have hb : wj.angleArity ≤ w.angleArity :=
+      (Finset.single_le_sum (fun l _ => Nat.zero_le (w.restrict (c.emb l)).angleArity)
+        (Finset.mem_univ j)).trans_eq (w.sum_restrict_angleArity c)
+    have hbound := hinputs i wj.stateArity wj.angleArity hk hb u hu
     exact (congrArg norm ((congrArg (fun z => (J i).D (c.partSize j) (x, θ) z)
       hpure.symm).trans he)).trans_le hbound
   exact n04PositiveGeometry_finiteKernel_weighted_bound JT hV hg hmap Q

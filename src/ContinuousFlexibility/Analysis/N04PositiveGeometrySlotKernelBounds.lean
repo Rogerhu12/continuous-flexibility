@@ -35,7 +35,9 @@ theorem n04PositiveGeometry_partition_savedSpatial_cost
   · have hz (i : Fin c.length) : (w.restrict (c.emb i)).stateArity = 0 := by
       have hle : (w.restrict (c.emb i)).stateArity ≤
           ∑ j : Fin c.length, (w.restrict (c.emb j)).stateArity :=
-        Finset.single_le_sum (fun _ _ => Nat.zero_le _) (Finset.mem_univ i)
+        Finset.single_le_sum
+          (fun j _ => Nat.zero_le (w.restrict (c.emb j)).stateArity)
+          (Finset.mem_univ i)
       rw [w.sum_restrict_stateArity c, hw] at hle
       exact Nat.eq_zero_of_le_zero hle
     have hpos (i : Fin c.length) : 0 < (w.restrict (c.emb i)).angleArity := by
@@ -63,7 +65,9 @@ theorem n04PositiveGeometry_partition_savedSpatial_cost
           Finset.sum_congr rfl (fun i _ => hstep i)
         _ = w.angleArity := w.sum_restrict_angleArity c
     have hc := c.length_pos hn
-    simp only [n04PositiveGeometry_savedSpatialCost, hw, ite_true]
+    change (∑ i : Fin c.length,
+      n04PositiveGeometry_savedSpatialCost (w.restrict (c.emb i)) offset) ≤
+        w.angleArity - 1
     omega
   · have hblock (i : Fin c.length) :
         n04PositiveGeometry_savedSpatialCost (w.restrict (c.emb i)) offset ≤

@@ -20,6 +20,13 @@ open scoped Topology ContDiff
 
 set_option backward.isDefEq.respectTransparency false
 
+private theorem controlled_relative_envelope_identity (K M : ℝ) (d N : ℕ) :
+    (2 : ℝ) ^ (N + 1) *
+        (K * (K * (K * M ^ (d + 1)) ^ (N + 1)) ^ (N + 1)) ^ 2 =
+      ((2 : ℝ) ^ (N + 1) * (K * (K * K ^ (N + 1)) ^ (N + 1)) ^ 2) *
+        M ^ (((d + 1) * (N + 1) * (N + 1)) * 2) := by
+  simp only [mul_pow, ← pow_mul, Nat.mul_assoc, mul_assoc]
+
 private theorem controlled_rootBetween_radial
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {K : CanonicalData S} {base : ℕ} {ε : ℝ}
@@ -114,10 +121,7 @@ theorem n04PositiveGeometry_exists_actual_relative_root_polynomial (n : ℕ) :
   have hMR : M ≤ R := hMU.trans hUR
   have hMQ : M ≤ Q := hMR.trans hRQ
   have hRV : R ≤ V := hRQ.trans hQV
-  have hVeq : V = A * M ^ degree := by
-    dsimp only [V, Q, R, U, A, degree]
-    simp only [mul_pow, ← pow_mul, Nat.mul_assoc]
-    ring
+  have hVeq : V = A * M ^ degree := controlled_relative_envelope_identity K₀ M dI N
   have hbetween (z₀ z₁ : AnnularState S × ℝ)
       (hz₀ : z₀ ∈ stateNeighborhood S C base ε) (hs₀ : stateSector S z₀.1)
       (hz₁ : z₁ ∈ stateNeighborhood S C base ε) (hs₁ : stateSector S z₁.1)

@@ -61,7 +61,7 @@ theorem n04PositiveGeometry_controlled_coefficients_mem
     {z : AnnularState W.S × ℝ} (hz : z ∈ stateNeighborhood W.S W.C G.base G.ε)
     (hs : stateSector W.S z.1)
     (i : N04PositiveComponent W.D.a W.D.b (deriv W.D.w)) (θ : ℝ) :
-    (fun side j : Fin (n + 1) =>
+    (fun side (j : Fin (n + 1)) =>
       G.toN04PositiveGeometryControlData.coefficients z i side (j + 1) θ) ∈
         G.toN04PositiveGeometryControlData.radialCoefficientDomain i := by
   intro side
