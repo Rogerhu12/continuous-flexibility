@@ -50,9 +50,11 @@ theorem n04PrincipalNegative_reciprocal_oneHigh (k s shift : ℕ) :
   have hcB (i : I) : c i ≤ B :=
     (Finset.single_le_sum (fun j _ => zero_le_one.trans (hc j)) (Finset.mem_univ i)).trans
       (le_add_of_nonneg_left zero_le_one)
-  have hdD (i : I) : d i ≤ D :=
-    (Finset.single_le_sum (fun _ _ => Nat.zero_le _) (Finset.mem_univ i)).trans
-      (Nat.le_add_left _ _)
+  have hdD (i : I) : d i ≤ D := by
+    have hh : d i ≤ ∑ j : I, d j := Finset.single_le_sum
+      (fun j (_ : j ∈ (Finset.univ : Finset I)) => Nat.zero_le (d j))
+      (Finset.mem_univ i)
+    exact hh.trans (by dsimp only [D]; omega)
   refine ⟨B, D, hB, by dsimp only [D]; omega, ?_⟩
   intro p base high U hU Ω hΩ f F hnonzero M hM hinv hraw a b hab q hq J x hx hlow
   let i : I := (⟨a, by omega⟩, ⟨b, by omega⟩)

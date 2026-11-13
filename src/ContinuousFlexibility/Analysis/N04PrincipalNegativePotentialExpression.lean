@@ -12,7 +12,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Analysis
 
-open Set ContinuousFlexibility.Statements CanonicalGeometry
+open Set ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint CanonicalGeometry
 open scoped ContDiff
 
 theorem n04PrincipalNegative_secondPartials

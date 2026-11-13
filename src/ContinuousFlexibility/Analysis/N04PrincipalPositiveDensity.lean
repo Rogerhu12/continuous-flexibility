@@ -36,18 +36,8 @@ theorem n04PrincipalPositive_inversePrincipal_eq_adjugate
   have hr := reverseCoordinatePrincipalCoefficients_eq_adjugate A
     (h := fun q => (h (G q))⁻¹) hG hF hinverse
     (inv_ne_zero hh : (h (G p))⁻¹ ≠ 0)
-  have he (i : Fin 3) :
-      canonicalCoefficientComponent i
-          (reverseCoordinatePrincipalCoefficients A G F (fun q => (h (G q))⁻¹)) p =
-        canonicalCoefficientComponent i (inverseChartPrincipalCoefficients A F G h) p := by
-    fin_cases i <;>
-      simp only [canonicalCoefficientComponent, Fin.isValue, ↓reduceIte,
-        reverseCoordinatePrincipalCoefficients, inverseChartPrincipalCoefficients,
-        coordinatePrincipalDensity, hFG, one_div, inv_inv]
-  refine ⟨?_, ?_, ?_⟩
-  · exact (he 0).symm.trans hr.1
-  · exact (he 1).symm.trans hr.2.1
-  · exact (he 2).symm.trans hr.2.2
+  simpa only [reverseCoordinatePrincipalCoefficients, inverseChartPrincipalCoefficients,
+    coordinatePrincipalDensity, hFG, one_div, inv_inv] using hr
 
 /-- Expansion of the inverse-map adjugate formula.  The nine scalar inputs
 are the three pulled physical coefficients, the pulled height, the inverse

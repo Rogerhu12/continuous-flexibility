@@ -111,7 +111,7 @@ theorem n04PrincipalNegative_reciprocal_weightedTower
     have hh' : ‖((F m).parameter u w z hz).D j y vv‖ ≤
         (C * E m ^ A) * R ^ (((u + w + shift * j : ℕ) : ℝ) /
           (((s + shift * k : ℕ) : ℝ) + 1)) := by
-      simpa only [mul_one] using hh
+      simpa only [C, A, shift, mul_one] using hh
     exact hh'.trans (mul_le_mul_of_nonneg_right hsourceCoeff
       (Real.rpow_nonneg (zero_le_one.trans hR) _))
   have hh := hb p base (base + s + shift * k + 1) U hU Ω hΩ (f m) (F m)

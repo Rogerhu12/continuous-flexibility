@@ -45,6 +45,38 @@ abbrev n04PrincipalNegativePairBounds
     (U := sectorNeighborhood (G.S η) base ε ε) (Ω := unitStrip)
     (fun m z => f z m.val) (fun m => f₀ m.val)
 
+/-- Every negative stationary principal or divided atom is paired with
+its fixed reference. Its actual difference tower vanishes identically. -/
+theorem n04PrincipalNegative_stationary_pairBounds {base : ℕ} {ε : ℝ}
+    (h : G.Admissible base ε) (η : (G.W.S.height (3 / 4 : ℝ)).Space)
+    (href : ReferenceJets G.W.D G.W.U (G.S η) (G.C η) (G.L η) (G.V η))
+    (a : Atom) (ha : n04PrincipalNegativeStationary a) :
+    G.n04PrincipalNegativePairBounds η base ε (G.atomFamily η a) (G.atomRef η a) := by
+  let ι : Type := {m : ℕ // G.Neg η m}
+  let p := parameterGrading (G.S η)
+  let E : ι → ℝ := fun m => G.W.U.E0 (G.W.U.sample ((G.V η).cell m.val))
+  let W : ι → ℝ := fun m =>
+    G.W.U.H (G.W.U.sample ((G.V η).cell m.val)) ^ (3 / 4 : ℝ)
+  let U := sectorNeighborhood (G.S η) base ε ε
+  have hU : IsOpen U := isOpen_sectorNeighborhood (G.S η) base ε ε
+  have hΩ : IsOpen unitStrip := isOpen_Ioo.prod isOpen_univ
+  have hE (m : ι) : 1 ≤ E m := (G.cost_nonneg η).2.2 m.val
+  have hW (m : ι) : 0 ≤ W m := Real.rpow_nonneg ((G.cost_nonneg η).2.1 m.val) _
+  have hfixed : N04PrincipalPairBounds p E W (U := U) (Ω := unitStrip)
+      (fun m _ => G.atomRef η a m.val) (fun m => G.atomRef η a m.val) := by
+    apply N04PrincipalPairBounds.fixedSpatial p E W hU hE hW
+      (fun m => G.atomRef η a m.val) (fun m => (href.1 m.val a).1)
+    intro s
+    refine ⟨(href.2 s).choose, (href.2 s).choose, ?_⟩
+    intro m i j hij q hq
+    exact (Real.norm_eq_abs _).trans_le
+      ((href.2 s).choose_spec.2 m.val a q hq i j hij)
+  apply hfixed.congr hΩ
+  · intro m z hz q hq
+    exact (G.n04PrincipalNegative_stationary_eqOn h η hz m.val m.property a ha hq).symm
+  · intro m q _
+    rfl
+
 /-- Genuine full, reference and difference towers of the actual negative
 potential, with one low order before all spatial and parameter orders. -/
 theorem n04PrincipalNegative_potential_pairBounds {base : ℕ} {ε : ℝ}

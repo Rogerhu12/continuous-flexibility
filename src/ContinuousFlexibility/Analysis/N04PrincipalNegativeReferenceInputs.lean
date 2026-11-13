@@ -15,7 +15,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Analysis
 
-open Set ContinuousFlexibility.Statements CanonicalGeometry
+open Set ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint CanonicalGeometry
 open scoped ContDiff
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -48,7 +48,7 @@ theorem n04PrincipalNegative_inverseLengthSquare_reference_bound
       |mixedDerivative a b (fun _ : PolarPoint => (K.right m - K.left m)⁻¹ ^ 2) q| ≤
         |(K.right m - K.left m)⁻¹ ^ 2| := by
     by_cases ha : a = 0 <;> by_cases hb : b = 0 <;>
-      simp [mixedDerivative, iteratedDeriv_const, ha, hb]
+      simp [mixedDerivative, iteratedDeriv_const, ha, hb] <;> positivity
   have hsquare : |(K.right m - K.left m)⁻¹ ^ 2| ≤
       A ^ 2 * T.E0 (T.sample (K.cell m)) ^ (A * 2) := by
     rw [abs_pow]

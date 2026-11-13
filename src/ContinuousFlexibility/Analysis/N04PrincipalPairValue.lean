@@ -99,7 +99,7 @@ theorem value_neighborhood
       (hmono ht y).trans (n04Principal_parameter_low_le_one (min_le_right _ _) hy)
     have hh := (hfirst.choose_spec 0).choose_spec.2 m 0 0 (by omega) q hq y
       (hsub hy) hylo v
-    have hw := oneHighVariationWeight_mono hmono le_rfl
+    have hw := oneHighVariationWeight_mono hmono (le_refl t)
       (show 0 + hfirst.choose ≤ b by simpa only [zero_add] using hloss) y v
     have hh' : |J.D 1 y v| ≤ M *
         oneHighVariationWeight (parameterGrading S) t (0 + hfirst.choose) y v :=
@@ -110,8 +110,9 @@ theorem value_neighborhood
     ((hmono ht z).trans (n04Principal_parameter_low_le_one (min_le_right _ _) hz))
     hM hbound
   have hjetzero : mixedDerivative 0 0 (fun y => f m 0 y - f₀ m y) q = 0 := by
-    simpa only [mixedDerivative, iteratedDeriv_zero] using sub_eq_zero.mpr (hzero m hq)
-  simp only [zero_add, hjetzero, sub_zero, mixedDerivative, iteratedDeriv_zero] at hv
+    rw [spaces_mixedDerivative_zero]
+    exact sub_eq_zero.mpr (hzero m hq)
+  simp only [zero_add, hjetzero, sub_zero, spaces_mixedDerivative_zero] at hv
   have hcoef : 3 * M ≤ B * T.E0 (T.sample (cell m)) ^ B *
       T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) := by
     calc

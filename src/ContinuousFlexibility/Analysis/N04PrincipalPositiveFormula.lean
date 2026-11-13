@@ -145,9 +145,8 @@ theorem n04PrincipalPositive_principal_unit_formula {b : ℕ} {ε : ℝ}
   rw [abs_of_pos hJpos, hJ, he.1, he.2.1, he.2.2.1, he.2.2.2] at hform
   have hfull := And.intro (hraw.1.trans hform.1)
     (And.intro (hraw.2.1.trans hform.2.1) (hraw.2.2.trans hform.2.2))
-  simpa only [atomFamily, atom, pulled, pulledHeight, heightField, pulledPoint,
-    coefficientField, canonicalCoefficientComponent, hunit, id_eq, Fin.isValue,
-    ↓reduceIte, div_eq_mul_inv] using hfull
+  simpa [atomFamily, atom, pulled, pulledHeight, heightField, pulledPoint,
+    coefficientField, canonicalCoefficientComponent, hunit, div_eq_mul_inv] using hfull
 
 end N04RealizationGauge
 

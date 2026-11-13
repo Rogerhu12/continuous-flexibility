@@ -103,7 +103,7 @@ theorem n04Principal_currentData_of_tower
           oneHighVariationWeight (parameterGrading S) base high (y - 0) v := by
     intro y hy v
     have hb := (hfirst.choose_spec s).choose_spec.2 y hy v m hm q i j hij
-    have hw := oneHighVariationWeight_mono hmono le_rfl
+    have hw := oneHighVariationWeight_mono hmono (le_refl base)
       (Nat.add_le_add_left (le_max_right base hfirst.choose) s) y v
     simpa only [sub_zero] using hb.trans (mul_le_mul_of_nonneg_left hw hM)
   have hv := n04Realization_smoothDirections_difference_value_bound

@@ -93,9 +93,11 @@ theorem n04Principal_weightedTower_weight_envelope
   intro m a b hab q hq x hx hlow v
   have he : 0 < E m := zero_lt_one.trans_le (hE m)
   have hw := oneHighVariationWeight_nonneg p base (s + loss) x v
-  have hfirst := mul_le_mul_of_nonneg_right
+  have hfirst : B * E m ^ B * W m * oneHighVariationWeight p base (s + loss) x v ≤
+      B * E m ^ B * (C * E m ^ A * V m) *
+        oneHighVariationWeight p base (s + loss) x v := mul_le_mul_of_nonneg_right
     (mul_le_mul_of_nonneg_left (hWV m)
-      (mul_nonneg hB.le (Real.rpow_nonneg he.le _))) hw
+      (mul_nonneg hB.le (Real.rpow_nonneg he.le B))) hw
   have hlast := mul_le_mul_of_nonneg_right (hpack (E m) (hE m))
     (mul_nonneg (hV m) hw)
   apply (hbound m a b hab q hq x hx hlow v).trans

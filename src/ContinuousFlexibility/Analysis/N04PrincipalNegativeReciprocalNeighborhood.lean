@@ -127,8 +127,7 @@ theorem CurrentJetDataOn.n04PrincipalNegative_inverse_neighborhood
       _ = Q := rfl
   have hdiff : |f z m q - f₀ m q| ≤ M * parameterGrading S loss z := by
     have hh := hv.choose_spec.2 z hzU m hm ⟨q, hq⟩ 0 0 (by omega)
-    simp only [spaces_mixedDerivative_zero, Nat.zero_add] at hh
-    exact hh
+    simpa only [M, C, loss, spaces_mixedDerivative_zero, Nat.zero_add] using hh
   have hrelative : (M * parameterGrading S loss z) * r < 1 / 2 := by
     calc
       _ = (M * r) * parameterGrading S loss z := by ring

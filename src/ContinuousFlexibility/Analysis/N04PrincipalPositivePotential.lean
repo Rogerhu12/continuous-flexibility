@@ -121,7 +121,7 @@ theorem n04PrincipalPositive_potential_unit_formula {b : ℕ} {ε : ℝ}
   have hpot := G.n04PrincipalPositive_potential_identity h η hw hs m hqK
   have hpositive : (G.V η).positive m = true := hm
   rw [hpositive] at hpot
-  simp only [Bool.true_eq_true, ↓reduceIte, neg_neg, one_mul] at hpot
+  simp only [↓reduceIte, neg_neg, one_mul] at hpot
   rw [hdiv] at hpot
   simpa only [atomFamily, atom, pulledHeight, heightField, pulledPoint,
     hunit, id_eq] using hpot

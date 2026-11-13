@@ -190,7 +190,7 @@ end N04PrincipalPairBounds
 
 private theorem n04Principal_pair_zeroMixed (f : PolarPoint → ℝ) (q : PolarPoint) :
     mixedDerivative 0 0 f q = f q := by
-  simp only [mixedDerivative, iteratedDeriv_zero]
+  simp only [mixedDerivative, iteratedDeriv_zero, Prod.eta]
 
 private theorem n04Principal_pairPartial_sub
     {f g : PolarPoint → ℝ} (hΩ : IsOpen Ω)

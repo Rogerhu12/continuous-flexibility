@@ -42,12 +42,12 @@ theorem contDiff_radialGaugePrincipalMultiplier
     hH.comp hr
   have hd : ContDiff ℝ ∞ (fun p : PolarPoint => deriv Y (Function.invFun Y p.1)) :=
     (contDiff_infty_iff_deriv.mp hY).2.comp hr
-  by_cases hi0 : i = 0
-  · simpa only [radialGaugePrincipalMultiplier, hi0, if_pos] using (hh.pow 2).mul hd
-  by_cases hi1 : i = 1
-  · simpa only [radialGaugePrincipalMultiplier, hi0, hi1, if_neg, if_pos] using hh.pow 2
-  · simpa only [radialGaugePrincipalMultiplier, hi0, hi1, if_neg] using
-      (hh.pow 2).div hd (fun p => (hYpos (Function.invFun Y p.1)).ne')
+  unfold radialGaugePrincipalMultiplier
+  dsimp only
+  split_ifs with hi0 hi1
+  · exact (hh.pow 2).mul hd
+  · exact hh.pow 2
+  · exact (hh.pow 2).div hd (fun p => (hYpos (Function.invFun Y p.1)).ne')
 
 theorem wholePositiveReferenceGauge_principal_component
     (A : SymmetricCoefficients) {τ σ : PolarPoint → PolarPoint}
@@ -62,7 +62,7 @@ theorem wholePositiveReferenceGauge_principal_component
         canonicalCoefficientComponent i (wholePositiveCanonicalCoefficients A τ σ Q)
           (positiveReferenceCylinderInverse Y p) := by
   funext p
-  have he := wholePositiveReferenceGauge_principal_formula A hgeometry hY hYpos p
+  have he := wholePositiveReferenceGauge_principal_formula (H := H) A hgeometry hY hYpos p
   simp only [canonicalCoefficientComponent, radialGaugePrincipalMultiplier, ite_apply]
   split_ifs
   · simpa only [positiveReferenceCylinderInverse] using he.1
