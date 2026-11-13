@@ -85,7 +85,7 @@ theorem exists_positiveReferenceTaylor_allOrder_jet_envelope (n N : ℕ) :
     positiveReferenceTaylorWidth_margins n hlr hκ hUpos.le
   have hδV : δ⁻¹ ≤ V :=
     (positiveReferenceTaylorWidth_polynomial_inv_le n hlr hκ hUpos.le hU
-      le_rfl (by simp only [inv_inv]) hgapU).trans
+      le_rfl (inv_inv U).le hgapU).trans
       (mul_le_mul_of_nonneg_right hDK (sq_nonneg U))
   have hys (side : Bool) : ContDiff ℝ ∞ (ys side) :=
     contDiff_radialEndpointTaylorSlice _ (hyc side) (n + 1)

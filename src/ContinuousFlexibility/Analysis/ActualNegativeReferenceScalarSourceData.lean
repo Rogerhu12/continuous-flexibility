@@ -194,8 +194,14 @@ theorem n04bActualTypedAtlas_negative_scalarSource_material_data
     apply hunit (g i)
     have hb := (hproduct (piece i) i.1 i.2 (hi i) j hhost hraw).2
       (a i x) ((hmeta i).2 hx) q hq
-    have hg : |iteratedDeriv q (g i) (a i x)| ≤ BH * (CH * E) ^ BH := by
-      simpa only [Bool.false_eq_true, ↓reduceIte, Real.rpow_ofNat] using hb
+    have hfun : g i = (fun r => K.height (C.referenceState, 0) (piece i) (r, 0) ^ (3 : ℝ) *
+        (if false = true then (D.w r)⁻¹ else D.w r)) ∘
+          (fun ξ => (K.inverseChart (C.referenceState, 0) (piece i) (ξ, 0)).1) := by
+      funext ξ
+      simp only [g, H, χ, Function.comp_apply, Bool.false_eq_true, ↓reduceIte,
+        Real.rpow_ofNat] <;> norm_num
+    have hg : |iteratedDeriv q (g i) (a i x)| ≤ BH * (CH * E) ^ BH :=
+      (congrArg (fun F => |iteratedDeriv q F (a i x)|) hfun).trans_le hb
     exact hg.trans (hpack (mul_nonneg (zero_le_one.trans hCH) hE.le)
       (mul_le_mul_of_nonneg_right hCH0 hE.le) (zero_le_one.trans hBH) hBHA hBHA)
   · intro hq1
