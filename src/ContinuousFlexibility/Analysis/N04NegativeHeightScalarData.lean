@@ -62,6 +62,10 @@ private theorem height_compact_outer_envelope
     (le_mul_of_one_le_right h.choose_spec.1.le
       (Real.one_le_rpow (hE t) h.choose_spec.1.le))
 
+private theorem height_zero_coefficient_bound {x E R : ℝ}
+    (h : x * E ^ (0 : ℝ) ≤ R) : x ≤ R := by
+  simpa only [Real.rpow_zero, mul_one] using h
+
 variable {S : PhysicalSpacesData} {T : MaterialData} {D : ReferenceData}
   {cell : ℕ → ℕ} {P : ℕ → Prop} {base : ℕ} {ε : ℝ}
   {f : Parameter S → ℕ → PolarPoint → ℝ} {f₀ : ℕ → PolarPoint → ℝ}
@@ -101,8 +105,8 @@ theorem CurrentJetDataOn.height_scalarComp
   have hheight := material_sample_height_coefficient_power_bounded hD hT cell 0
     (by norm_num : (0 : ℝ) < 3 / 4)
   let RH : ℝ := hheight.choose
-  have hHR (m : ℕ) : T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) ≤ RH := by
-    simpa only [Real.rpow_zero, mul_one] using hheight.choose_spec.2 m
+  have hHR (m : ℕ) : T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) ≤ RH :=
+    height_zero_coefficient_bound (hheight.choose_spec.2 m)
   have ht := h.height_fullTower hD hT h₀ hE
   let L : ℕ → ℕ := fun k => (ht k).choose
   have hbound : ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧

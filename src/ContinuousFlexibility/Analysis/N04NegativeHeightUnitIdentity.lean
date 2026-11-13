@@ -82,7 +82,8 @@ theorem n04NegativeHeight_angularFactor_eq_unitAtoms
     change DifferentiableAt ℝ
       (fun y => ((K.chart z m (physicalUnitPoint K m y)).1 - K.left m) /
         (K.right m - K.left m)) q
-    exact (hcomp.fst.sub_const (K.left m)).div_const (K.right m - K.left m)
+    simpa only [div_eq_mul_inv] using
+      (hcomp.fst.sub_const (K.left m)).mul_const ((K.right m - K.left m)⁻¹)
   have hg : DifferentiableAt ℝ g q := by
     change DifferentiableAt ℝ
       (fun y => (K.chart z m (physicalUnitPoint K m y)).2 - y.2) q

@@ -14,10 +14,37 @@ stored corrected field, including the inactive part of each component.
 
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace ContinuousFlexibility.Analysis.N04RealizationStart
 
 open Set ContinuousFlexibility.Statements
 open scoped ContDiff
+
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
+
+private theorem original_add_correction {a c v : ℝ} (h : v = c - a) : a + v = c := by
+  rw [h]
+  ring
+
+private theorem halfGap_of_reflection (A : SymmetricCoefficients) (p : PolarPoint)
+    (hdrift : n04bCharacteristicDrift A (p.1, -p.2) = -n04bCharacteristicDrift A p)
+    (hgap : n04bCharacteristicHalfGap A (p.1, -p.2) = n04bCharacteristicHalfGap A p) :
+    (-1 / 2 : ℝ) * (minusCharacteristicSpeed A (p.1, -p.2) +
+      minusCharacteristicSpeed A p) = n04bCharacteristicHalfGap A p := by
+  rw [(n04b_characteristic_speed_factorization A (p.1, -p.2)).1,
+    (n04b_characteristic_speed_factorization A p).1, hdrift, hgap]
+  ring
 
 variable (W : N04RealizationStart)
 
@@ -81,13 +108,27 @@ def negativeOriginalMinusJointTower (m : ℕ) :
       ((((contDiffAt_snd.fst.pow 2).sub
         (contDiffAt_fst.mul contDiffAt_snd.snd)).sqrt hq.2.ne').div
           contDiffAt_fst hq.1.ne')).contDiffWithinAt
-  apply ((smoothDirectionsProd (J 0) (smoothDirectionsProd (J 1) (J 2))).comp_contDiff
-    hV hkernel (fun x hx => ?_)).congrOn
-  · simpa only [originalCoefficientEntry, ↓reduceIte] using
+  have hmap : MapsTo
+      (fun x : (StateDirections W.S × ℝ) × PolarPoint =>
+        (originalCoefficientEntry W.D W.S W.C 0 (liftSectorParameter W.S W.C x.1) x.2,
+          originalCoefficientEntry W.D W.S W.C 1 (liftSectorParameter W.S W.C x.1) x.2,
+          originalCoefficientEntry W.D W.S W.C 2 (liftSectorParameter W.S W.C x.1) x.2))
+      (sectorNeighborhood W.S W.base W.ε W.ε ×ˢ
+        (Ioo (W.C.left m) (W.C.right m) ×ˢ univ)) V := by
+    intro x hx
+    change 0 < (originalCoefficients W.D W.S W.C
+        (liftSectorParameter W.S W.C x.1)).a x.2 ∧
+      0 < (originalCoefficients W.D W.S W.C
+        (liftSectorParameter W.S W.C x.1)).b x.2 ^ 2 -
+          (originalCoefficients W.D W.S W.C (liftSectorParameter W.S W.C x.1)).a x.2 *
+            (originalCoefficients W.D W.S W.C (liftSectorParameter W.S W.C x.1)).c x.2
+    exact
       And.intro (W.negativeOriginalRadial_pos m hx.1 hx.2)
         (W.negativeOriginalDiscriminant_pos m hx.1 hx.2.1)
-  · intro x hx
-    simp only [originalCoefficientEntry, ↓reduceIte, minusCharacteristicSpeed]
+  apply ((smoothDirectionsProd (J 0) (smoothDirectionsProd (J 1) (J 2))).comp_contDiff
+    hV hkernel hmap).congrOn
+  intro x hx
+  rfl
 
 /-- The actual residual velocity has the same full-component domain as
 the chart; its construction uses no chart estimate. -/
@@ -134,11 +175,11 @@ def negativeMinusJointTower (m : ℕ) :
   apply (smoothDirectionsAdd (W.negativeOriginalMinusJointTower m)
     (W.negativeCorrectionVelocityJointTower m)).congrOn
   intro x hx
-  rw [W.negativeMinus_eq_corrected m hx.1 hx.2,
-    returnCorrectionVelocityLinear_at_actual W.through03.1.1 W.through03.1.2
+  exact (original_add_correction
+    (returnCorrectionVelocityLinear_at_actual W.through03.1.1 W.through03.1.2
       W.cutoff.cutoff (liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl)
-      (W.through03.1.1.2.2.1.liftSectorParameter_sector x.1)]
-  ring
+      (W.through03.1.1.2.2.1.liftSectorParameter_sector x.1) m x.2)).trans
+    (W.negativeMinus_eq_corrected m hx.1 hx.2).symm
 
 /-- Reflection of the actual minus speed recovers the actual positive
 half-gap, as a function on the same complete physical component. -/
@@ -168,9 +209,7 @@ def negativeHalfGapJointTower (m : ℕ) :
     (minusCharacteristicSpeed (W.L.coefficients (liftSectorParameter W.S W.C x.1))
       (x.2.1, -x.2.2) +
       minusCharacteristicSpeed (W.L.coefficients (liftSectorParameter W.S W.C x.1)) x.2) = _
-  rw [(n04b_characteristic_speed_factorization _ _).1,
-    (n04b_characteristic_speed_factorization _ _).1, href.1, href.2]
-  ring
+  exact halfGap_of_reflection _ _ href.1 href.2
 
 end ContinuousFlexibility.Analysis.N04RealizationStart
 

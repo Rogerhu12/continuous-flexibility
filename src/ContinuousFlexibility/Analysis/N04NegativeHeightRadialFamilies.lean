@@ -123,7 +123,11 @@ theorem physicalRadial_spatial (z : Parameter G.W.S)
   intro q hq
   have hper := (G.W.field.periodic_coefficients _ hz' hs
     (physicalUnitPoint (G.V η) m q).1 (hmap hq).1).1 q.2
-  simpa only [physicalRadialFamily, physicalUnitPoint, Prod.fst_add, Prod.snd_add,
+  change (G.W.L.coefficients (liftSectorParameter G.W.S G.W.C z)).a
+      (physicalUnitPoint (G.V η) m (q + (0, Real.pi))) =
+    (G.W.L.coefficients (liftSectorParameter G.W.S G.W.C z)).a
+      (physicalUnitPoint (G.V η) m q)
+  simpa only [physicalUnitPoint, Prod.fst_add, Prod.snd_add,
     add_zero] using hper
 
 theorem physicalRadial_pos (z : Parameter G.W.S)

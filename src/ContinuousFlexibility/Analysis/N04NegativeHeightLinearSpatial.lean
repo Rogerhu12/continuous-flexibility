@@ -52,8 +52,11 @@ theorem n04NegativeHeight_angularPartial_periodic
 
 theorem n04NegativeHeight_angularPartial_smooth {f : PolarPoint → ℝ}
     (hf : ContDiffOn ℝ ∞ f unitStrip) :
-    ContDiffOn ℝ ∞ (angularPartial f) unitStrip :=
-  contDiffOn_cylinderPartial (isOpen_Ioo.prod isOpen_univ) hf (0, 1)
+    ContDiffOn ℝ ∞ (angularPartial f) unitStrip := by
+  change ContDiffOn ℝ ∞ (fun p : PolarPoint => fderiv ℝ f p (0, 1)) unitStrip
+  have hd : ContDiffOn ℝ ∞ (fun _ : PolarPoint => ((0, 1) : PolarPoint)) unitStrip :=
+    contDiffOn_const
+  exact (hf.fderiv_of_isOpen (isOpen_Ioo.prod isOpen_univ) (by simp)).clm_apply hd
 
 theorem n04NegativeHeight_mixed_add_difference
     {f g f₀ g₀ : PolarPoint → ℝ}
