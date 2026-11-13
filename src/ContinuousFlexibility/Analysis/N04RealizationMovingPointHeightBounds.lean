@@ -147,7 +147,7 @@ theorem n04Realization_movingPoint_mixedHeight_bound
         (fun a' b' j => (A a' b' j).toMultilinearMap) hC hM hH hHL hL ht
         offset (κ c) (β c) (hpart c)
         (fun a' b' j hj z => by
-          simpa only [Nat.zero_add] using
+          simpa only [Nat.zero_add, ContinuousMultilinearMap.coe_coe] using
             hdata a' b' j (hj.trans (c.length_le.trans hnN)) z)
         (fun i =>
           ((continuousLinearJets π (c.partSize i) (x, q) (u ∘ c.emb i),
