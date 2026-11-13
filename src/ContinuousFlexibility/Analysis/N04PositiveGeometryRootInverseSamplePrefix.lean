@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseDifferentialDirections
 import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseLabelSamplePrefix
 import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOddPowerPrefix
+import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFiniteCalculus
 
 /-!
 # The actual inverse differential at the retained positive sample
@@ -41,14 +42,24 @@ theorem n04PositiveGeometry_rootInverseDifferential_sample_prefix
         (A * W.U.E0 (W.U.sample (X.cell i)) ^ A)
         (W.U.H (W.U.sample (X.cell i)) ^ (3 / 4 : ℝ))
         (R ^ (1 / (((s + shift * K : ℕ) : ℝ) + 1))) shift := by
+  classical
   have hN := n01Properties_restrict W.hT W.through03.1.1 hb le_rfl hε hεW
-  obtain ⟨Bo, hBo, po⟩ := n04PositiveGeometry_rootOddPowerTrace_sample_prefix_five
+  let oddData := n04PositiveGeometry_rootOddPowerTrace_sample_prefix_five
     W X hb hε hεW hεone hflow
-  obtain ⟨Be, hBe, pe⟩ := n04PositiveGeometry_rootBoundaryFormula_sample_prefix_five
+  let Bo : ℕ := oddData.choose
+  have hBo : base ≤ Bo := oddData.choose_spec.1
+  let po := oddData.choose_spec.2
+  let evenData := n04PositiveGeometry_rootBoundaryFormula_sample_prefix_five
     W X hb hε hεW hεone hflow
-  obtain ⟨Bl, hBl, pl⟩ := n04PositiveGeometry_rootInverseLabel_sample_prefix W X hb hε hεW hflow
-  obtain ⟨RH, hRH, hheight⟩ := n04PositiveGeometry_sample_height_bound W X
+  let Be : ℕ := evenData.choose
+  let pe := evenData.choose_spec.2
+  let labelData := n04PositiveGeometry_rootInverseLabel_sample_prefix W X hb hε hεW hflow
+  let Bl : ℕ := labelData.choose
+  let pl := labelData.choose_spec.2
+  let heightData := n04PositiveGeometry_sample_height_bound W X
     (by norm_num : (0 : ℝ) < 3 / 4)
+  let RH : ℝ := heightData.choose
+  have hheight := heightData.choose_spec.2
   let L := max 1 RH
   have hL : 1 ≤ L := le_max_left _ _
   let low := Bo + Be + Bl
@@ -56,9 +67,15 @@ theorem n04PositiveGeometry_rootInverseDifferential_sample_prefix
   have hel : Be ≤ low := by dsimp only [low]; omega
   have hll : Bl ≤ low := by dsimp only [low]; omega
   refine ⟨low, hBo.trans hol, fun K => ?_⟩
-  obtain ⟨co, poc⟩ := po (-(2 / 3 : ℝ)) K
-  obtain ⟨ce, pec⟩ := pe K
-  obtain ⟨cl, plc⟩ := pl K
+  let oddShiftData := po (-(2 / 3 : ℝ)) K
+  let co : ℕ := oddShiftData.choose
+  let poc := oddShiftData.choose_spec
+  let evenShiftData := pe K
+  let ce : ℕ := evenShiftData.choose
+  let pec := evenShiftData.choose_spec
+  let labelShiftData := pl K
+  let cl : ℕ := labelShiftData.choose
+  let plc := labelShiftData.choose_spec
   let c := co + ce + cl
   have hco : co ≤ c := by dsimp only [c]; omega
   have hce : ce ≤ c := by dsimp only [c]; omega
@@ -67,18 +84,32 @@ theorem n04PositiveGeometry_rootInverseDifferential_sample_prefix
   let so := s + (c + 1 - co) * K
   let se := s + (c + 1 - ce) * K
   let sl := s + (c + 1 - cl) * K
-  obtain ⟨Ao, hAo, ho⟩ := poc so
-  obtain ⟨Ae, hAe, he⟩ := pec se
-  obtain ⟨Al, hAl, hl⟩ := plc sl
+  let oddBoundData := poc so
+  let Ao : ℝ := oddBoundData.choose
+  have hAo : 1 ≤ Ao := oddBoundData.choose_spec.1
+  let ho := oddBoundData.choose_spec.2
+  let evenBoundData := pec se
+  let Ae : ℝ := evenBoundData.choose
+  have hAe : 1 ≤ Ae := evenBoundData.choose_spec.1
+  let he := evenBoundData.choose_spec.2
+  let labelBoundData := plc sl
+  let Al : ℝ := labelBoundData.choose
+  have hAl : 1 ≤ Al := labelBoundData.choose_spec.1
+  let hl := labelBoundData.choose_spec.2
   let B := Ao + Ae + Al + L
-  have hB : 1 ≤ B := by dsimp only [B]; linarith
-  have hAoB : Ao ≤ B := by dsimp only [B]; linarith
-  have hAeB : Ae ≤ B := by dsimp only [B]; linarith
-  have hAlB : Al ≤ B := by dsimp only [B]; linarith
-  have hLB : L ≤ B := by dsimp only [B]; linarith
-  obtain ⟨C, hC, degree, hd, hbound⟩ :=
+  have hB : 1 ≤ B := by dsimp only [B]; linarith only [hAo, hAe, hAl, hL]
+  have hAoB : Ao ≤ B := by dsimp only [B]; linarith only [hAe, hAl, hL]
+  have hAeB : Ae ≤ B := by dsimp only [B]; linarith only [hAo, hAl, hL]
+  have hAlB : Al ≤ B := by dsimp only [B]; linarith only [hAo, hAe, hL]
+  have hLB : L ≤ B := by dsimp only [B]; linarith only [hAo, hAe, hAl]
+  let inverseData :=
     n04PositiveGeometry_rootInverseDifferential_word_bound W.D W.S W.C K s L hL
-  obtain ⟨A₀, hA₀, hpack⟩ := coefficientEnvelope_pack (C * B ^ degree) (B * degree)
+  let C : ℝ := inverseData.choose
+  let degree : ℕ := inverseData.choose_spec.2.choose
+  let hbound := inverseData.choose_spec.2.choose_spec.2
+  let packData := n04PositiveGeometry_polynomial_sample_pack C B degree
+  let A₀ : ℝ := packData.choose
+  let hpack := packData.choose_spec.2
   let A := max 1 A₀
   have hA : 1 ≤ A := le_max_left _ _
   have hA₀A : A₀ ≤ A := le_max_right _ _
@@ -182,6 +213,14 @@ theorem n04PositiveGeometry_rootInverseDifferential_sample_prefix
     ((hp (hhigh Bl cl hll hcl) z).trans hzR)
   have htlabel : R ^ (1 / (((sl + cl * K : ℕ) : ℝ) + 1)) = t := by
     rw [show sl + cl * K = s + (c + 1) * K from hden cl hcl]
+  have hlabelpow (n : ℕ) (w : StateAngleWord n) :
+      Al * E ^ Al * parameterHeightWeight H w.stateArity *
+        (R ^ (1 / (((sl + cl * K : ℕ) : ℝ) + 1))) ^
+          ((w.angleArity - 1) + cl * w.stateArity) =
+      Al * E ^ Al * parameterHeightWeight H w.stateArity *
+        t ^ ((w.angleArity - 1) + cl * w.stateArity) :=
+    congrArg (fun a : ℝ => Al * E ^ Al * parameterHeightWeight H w.stateArity *
+      a ^ ((w.angleArity - 1) + cl * w.stateArity)) htlabel
   have hlabelcost (n : ℕ) (w : StateAngleWord n) :
       Al * E ^ Al * parameterHeightWeight H w.stateArity *
         t ^ ((w.angleArity - 1) + cl * w.stateArity) ≤
@@ -196,15 +235,13 @@ theorem n04PositiveGeometry_rootInverseDifferential_sample_prefix
     have h := hlabel.1 n hn w hk (ha.trans (Nat.add_le_add_right (hspan cl hcl) 1)) v hv
       (fun j => ⟨(hp hll _).trans (hvP j).1,
         (hp (hhigh Bl cl hll hcl) _).trans (hvP j).2⟩)
-    rw [htlabel] at h
-    exact h.trans (hlabelcost n w)
+    exact (h.trans_eq (hlabelpow n w)).trans (hlabelcost n w)
   have hb' : N04BoundaryWordBounds Jb K s 1 z θ P M H t c := by
     intro n w hk ha v hv hvP
     have h := hlabel.2 n w hk (by have hspan' := hspan cl hcl; omega) v hv
       (fun j => ⟨(hp hll _).trans (hvP j).1,
         (hp (hhigh Bl cl hll hcl) _).trans (hvP j).2⟩)
-    rw [htlabel] at h
-    exact h.trans (hlabelcost n w)
+    exact (h.trans_eq (hlabelpow n w)).trans (hlabelcost n w)
   have hout := hbound g m (!side) (sectorNeighborhood_isOpen W.S base ε ε) JO JE Jα Jb Q
     (fun y hy => (n04PositiveGeometry_rootOddTrace_zero_pos W.hT W.hS hN hflow
       g m (!side) hρ hy.1 (hstrip y.1 hy.1) y.2).le)
@@ -212,11 +249,7 @@ theorem n04PositiveGeometry_rootInverseDifferential_sample_prefix
     M H t hM hH hHM hHL ht c hO hE' hα hb'
   apply hout.enlarge hH (zero_le_one.trans ht)
   calc
-    C * M ^ degree = (C * B ^ degree) * E ^ (B * degree) := by
-      dsimp only [M]
-      rw [mul_pow, ← Real.rpow_mul_natCast (zero_le_one.trans hE)]
-      ring
-    _ ≤ A₀ * E ^ A₀ := hpack E hE
+    C * M ^ degree ≤ A₀ * E ^ A₀ := hpack E hE
     _ ≤ A * E ^ A := mul_le_mul hA₀A (Real.rpow_le_rpow_of_exponent_le hE hA₀A)
       (Real.rpow_nonneg (zero_le_one.trans hE) _) (zero_le_one.trans hA)
 

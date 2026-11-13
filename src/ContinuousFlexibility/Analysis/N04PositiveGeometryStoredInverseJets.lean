@@ -76,10 +76,10 @@ theorem n04PositiveGeometry_storedInverseBoundary_data
   have hr : (r, η) ∈ physicalPieceClosed S Kcur z i := (hmodel η).1
   have hclosed := hA.boundary z hz hs i
   refine ⟨?_, ?_, ?_⟩
-  · rw [← hv]
-    exact hclosed.2.2.1 _ hr
-  · rw [← hv]
-    exact hclosed.1 hr
+  · exact (congrArg (Kcur.inverseChart z i) hv.symm).trans
+      (hclosed.2.2.1 _ hr)
+  · exact (congrArg (fun q : PolarPoint => q ∈ canonicalClosed S Kcur i) hv).mp
+      (hclosed.1 hr)
   · exact n04PositiveGeometry_actual_rootInverse_fderiv_eq hT hS hN hflow hA hy.1
       m side g hc.1 hR data.1 hc.2.2.2.1.ne' Θ hΘ hmodel y.2
 
