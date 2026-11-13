@@ -10,8 +10,9 @@ repair described in section 6 is applied to `N04RealizationLeadCurrentSplit`
 and `N04RealizationLeadCurrentProof`; section 9 records the exact changes.
 The historical audit below concerns the original draft. At `54bf9d13`, the
 actual PulledFields blueprint placeholder has been replaced by the complete
-assembled proof. Compilation of the new proof, its target axiom audit, and
-the complete CI remain in progress; section 10 records that implementation.
+assembled proof. Section 10 records that construction. Current compiler,
+target-axiom-audit, and full-CI results are maintained in
+[pull request #45](https://github.com/Rogerhu12/continuous-flexibility/pull/45).
 
 The original PulledFields split did not retain the quantitative reference
 hypothesis which its parent already has. The available composition estimates
@@ -503,11 +504,11 @@ Neither `N04RealizationLeadAssembly.lean` nor the statement
 
 The conditional assembly in section 6 had already verified this information
 flow in a separate namespace. Its successful audit is not completion of
-the actual subnode. The applied shared definitions and the continuing
-quantitative PulledFields proof must still pass the compiler and their
-respective audits.
+the actual subnode. The applied shared definitions and the quantitative
+PulledFields proof are subject to the full build and actual node audit
+described in section 10.
 
-## 10. Complete pulled-field proof, awaiting final verification
+## 10. Complete pulled-field construction and verification
 
 At `54bf9d13`,
 [N04PulledFieldsClosure.lean](../../src/ContinuousFlexibility/Analysis/N04PulledFieldsClosure.lean)
@@ -536,5 +537,7 @@ The proof does not transport the full `ReferenceJets` certificate.
 The parent declaration and the five-input current assembly retain their
 original statements. The updated support audit also explicitly checks the
 actual blueprint theorem, allowing only `propext`, `Classical.choice`, and
-`Quot.sound`. The implementation is not counted as complete until that
-audit and the entire CI pass.
+`Quot.sound`. Completion requires both that target audit and the entire CI
+to pass on the branch containing the current lead. Pull request #45 records
+the verified commit, run, and audit output; the older CI snapshots in this
+note remain historical evidence for their explicitly named revisions.
