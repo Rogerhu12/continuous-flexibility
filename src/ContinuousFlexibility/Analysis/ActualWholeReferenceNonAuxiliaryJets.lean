@@ -8,6 +8,7 @@ import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeReferenceRegula
 import ContinuousFlexibility.Analysis.WholeReferenceGaugeStaticReferenceJets
 import ContinuousFlexibility.Analysis.CanonicalReferenceDividedJets
 import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
+import ContinuousFlexibility.Analysis.ActualPositiveReferencePrincipalAssembly
 
 /-!
 # All non-auxiliary reference atoms of one actual whole atlas
@@ -69,6 +70,9 @@ theorem n04Coordinates_actual_whole_reference_nonAuxiliaryJets
         (fun i => positiveReferenceCylinderInverse (Y i))
         (fun i p => H i p.1) τ σ Q N
       let U := enlargedMaterialData T
+      (∀ {newBase : ℕ} {ε' : ℝ}, 0 < ε' →
+        CanonicalGeometry Γ.reference S C V newBase ε' →
+          CanonicalGeometry.ReferencePrincipal T S C V) ∧
       ∀ s : ℕ, ∃ BM : ℝ, 0 < BM ∧ ∀ m (v : Atom), v ≠ .auxiliaryColumn →
         ContDiffOn ℝ ∞ (atom Γ.reference U S C L V (C.referenceState, 0) m v) unitStrip ∧
         (∀ p ∈ unitStrip, atom Γ.reference U S C L V (C.referenceState, 0) m v
@@ -130,9 +134,11 @@ theorem n04Coordinates_actual_whole_reference_nonAuxiliaryJets
   have hnegativeRegular := n04WholeReferenceGauge_negative_geometryPotentialReferenceRegularity
     hT hS hN hfield e₀ e cell ψ χ h₀ τ σ Q N
   have hrefMem := reference_mem_stateNeighborhood S C base hN.1.1.2.1
-  have hrefSector := hN.1.1.2.2.1.stateSector
+  have hrefSector := n04b_referenceState_sector hN.1.1.2.2.1
   dsimp only
-  intro s
+  refine ⟨fun hε' hgeo => n04WholeReferenceGauge_actual_prescribed_referencePrincipal
+    P hSelected hband hq hΓ hw hcoordinates hT hS hN hfield e₀ 3 hC0 hB hE0 hfinite
+    e cell hcell src τ σ Q N href hε' hgeo, fun s => ?_⟩
   obtain ⟨BP, hBP, hpositiveS⟩ := hpositive s
   obtain ⟨BC, hBC, hpositiveColumnsS⟩ := hpositiveColumns s
   obtain ⟨BG, hBG, hnegativeGeometryS⟩ :=

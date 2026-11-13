@@ -78,6 +78,24 @@ abbrev n04RealizationAtlas (W : N04RealizationStart) (X : N04RealizationChoice W
     (fun i => positiveReferenceCylinderInverse (Y i))
     (fun i p => H i p.1) τ σ Q N
 
+/-- Atoms whose value does not depend on the state: lengths, material
+radius and the material ratios. -/
+def atomIsStatic : Atom → Prop
+  | .physicalLength | .physicalLengthInverse | .canonicalLength | .canonicalLengthInverse
+  | .materialEll | .materialEllInverse | .ratioH | .ratioHInverse | .ratioM | .ratioMInverse
+  | .ratioE0 | .ratioE0Inverse => True
+  | _ => False
+
+theorem atom_state_eq_of_static {D : ReferenceData} {T : MaterialData}
+    {S : PhysicalSpacesData} {C : NonlinearGeometryData S} {L : ReturnCorrectionData S}
+    {K : CanonicalData S} {a : Atom} (ha : atomIsStatic a) (z z' : AnnularState S × ℝ) (m : ℕ) :
+    atom D T S C L K z m a = atom D T S C L K z' m a := by
+  cases a <;> first | exact ha.elim | rfl
+
+theorem mixedDerivative_fun_zero (a b : ℕ) (p : PolarPoint) :
+    mixedDerivative a b (fun _ : PolarPoint => (0 : ℝ)) p = 0 := by
+  simp [mixedDerivative]
+
 /-- The optical lower bound with a material cost. -/
 def N04RealizationOpticalObligation : Prop :=
   ∀ W : N04RealizationStart, ∃ κ : ℝ, 0 < κ ∧
@@ -151,7 +169,7 @@ def N04RealizationCurrentObligation : Prop :=
       let L' := correctionReplaceAuxiliaryColumn W.L η
       let V' := canonicalReplaceAuxiliaryColumn
         (n04RealizationAtlas W X e Y H τ σ Q B.region) η
-      ∀ a : Atom, a ≠ .auxiliaryColumn →
+      ∀ a : Atom, a ≠ .auxiliaryColumn → ¬ atomIsStatic a →
         (∀ z ∈ sectorNeighborhood S' newBase ε' ε', ∀ m,
           ContDiffOn ℝ ∞ (atom W.D W.U S' C' L' V' (liftSectorParameter S' C' z) m a)
             unitStrip ∧
@@ -242,7 +260,7 @@ theorem n04Realization_currentJets_of_parts
       let C' := geometryReplaceAuxiliaryColumn W.C η
       let L' := correctionReplaceAuxiliaryColumn W.L η
       let V' := canonicalReplaceAuxiliaryColumn (n04RealizationAtlas W X e Y H τ σ Q N) η
-      ∀ a : Atom, a ≠ .auxiliaryColumn →
+      ∀ a : Atom, a ≠ .auxiliaryColumn → ¬ atomIsStatic a →
         (∀ z ∈ sectorNeighborhood S' newBase ε' ε', ∀ m,
           ContDiffOn ℝ ∞ (atom W.D W.U S' C' L' V' (liftSectorParameter S' C' z) m a)
             unitStrip ∧
@@ -264,7 +282,21 @@ theorem n04Realization_currentJets_of_parts
                 |(J m i j q).D k z v| ≤
                   B * W.U.E0 (W.U.sample (V'.cell m)) ^ B *
                     W.U.H (W.U.sample (V'.cell m)) ^ (3 / 4 : ℝ) *
-                      oneHighVariationWeight (parameterGrading S') newBase (s + loss) z v) :
+                      oneHighVariationWeight (parameterGrading S') newBase (s + loss) z v)
+    (hrefReg : ∀ m (a : Atom),
+      ContDiffOn ℝ ∞ (atom W.D W.U (physicalSpacesReplaceAuxiliaryColumn W.S η)
+        (geometryReplaceAuxiliaryColumn W.C η) (correctionReplaceAuxiliaryColumn W.L η)
+        (canonicalReplaceAuxiliaryColumn (n04RealizationAtlas W X e Y H τ σ Q N) η)
+        (W.C.referenceState, 0) m a) unitStrip ∧
+      ∀ p ∈ unitStrip,
+        atom W.D W.U (physicalSpacesReplaceAuxiliaryColumn W.S η)
+          (geometryReplaceAuxiliaryColumn W.C η) (correctionReplaceAuxiliaryColumn W.L η)
+          (canonicalReplaceAuxiliaryColumn (n04RealizationAtlas W X e Y H τ σ Q N) η)
+          (W.C.referenceState, 0) m a (p + (0, Real.pi)) =
+        atom W.D W.U (physicalSpacesReplaceAuxiliaryColumn W.S η)
+          (geometryReplaceAuxiliaryColumn W.C η) (correctionReplaceAuxiliaryColumn W.L η)
+          (canonicalReplaceAuxiliaryColumn (n04RealizationAtlas W X e Y H τ σ Q N) η)
+          (W.C.referenceState, 0) m a p) :
     CurrentJets W.D W.U (physicalSpacesReplaceAuxiliaryColumn W.S η)
       (geometryReplaceAuxiliaryColumn W.C η) (correctionReplaceAuxiliaryColumn W.L η)
       (canonicalReplaceAuxiliaryColumn (n04RealizationAtlas W X e Y H τ σ Q N) η)
@@ -304,31 +336,69 @@ theorem n04Realization_currentJets_of_parts
                   W.U.H (W.U.sample (V'.cell m)) ^ (3 / 4 : ℝ) *
                     oneHighVariationWeight (parameterGrading S') newBase (s + loss) z v := by
     intro a
-    by_cases ha : a = .auxiliaryColumn
-    · subst ha
-      have hcost : ∀ m, 0 ≤ 1 * W.U.E0 (W.U.sample (V'.cell m)) ^ (1 : ℝ) *
-          W.U.H (W.U.sample (V'.cell m)) ^ (3 / 4 : ℝ) := fun m =>
-        mul_nonneg (mul_nonneg zero_le_one
-          (Real.rpow_nonneg (zero_le_one.trans (hfloor m)) _))
-          (Real.rpow_nonneg
-            (hU.2.1 _ (materialSample_mem_interval hD hU (V'.cell m))).2.1.le _)
-      refine ⟨hauxReg, fun m i j q => (smoothDirections_constant hopen (0 : ℝ)).congrOn
-        (fun z hz => (hauxZero z hz m i j q).symm), ⟨0, fun s => ⟨1, one_pos, ?_⟩⟩,
+    have hcost : ∀ m, 0 ≤ 1 * W.U.E0 (W.U.sample (V'.cell m)) ^ (1 : ℝ) *
+        W.U.H (W.U.sample (V'.cell m)) ^ (3 / 4 : ℝ) := fun m =>
+      mul_nonneg (mul_nonneg zero_le_one
+        (Real.rpow_nonneg (zero_le_one.trans (hfloor m)) _))
+        (Real.rpow_nonneg
+          (hU.2.1 _ (materialSample_mem_interval hD hU (V'.cell m))).2.1.le _)
+    have hzero : (∀ z ∈ sectorNeighborhood S' newBase ε' ε', ∀ m i j (q : unitStrip),
+        differenceJets W.D W.U S' C' L' V' z a m i j q = 0) →
+        ∃ J : ∀ m i j (q : unitStrip),
+            SmoothDirections (sectorNeighborhood S' newBase ε' ε')
+              (fun z => differenceJets W.D W.U S' C' L' V' z a m i j q),
+          (∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+            ∀ z ∈ sectorNeighborhood S' newBase ε' ε', ∀ m (q : unitStrip) i j, i + j ≤ s →
+              |differenceJets W.D W.U S' C' L' V' z a m i j q| ≤
+                B * W.U.E0 (W.U.sample (V'.cell m)) ^ B *
+                  W.U.H (W.U.sample (V'.cell m)) ^ (3 / 4 : ℝ) *
+                    parameterGrading S' (s + loss) z) ∧
+          ∀ k, ∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+            ∀ z ∈ sectorNeighborhood S' newBase ε' ε', ∀ v : Fin k → Parameter S',
+              ∀ m (q : unitStrip) i j, i + j ≤ s →
+                |(J m i j q).D k z v| ≤
+                  B * W.U.E0 (W.U.sample (V'.cell m)) ^ B *
+                    W.U.H (W.U.sample (V'.cell m)) ^ (3 / 4 : ℝ) *
+                      oneHighVariationWeight (parameterGrading S') newBase (s + loss) z v := by
+      intro hz0
+      refine ⟨fun m i j q => (smoothDirections_constant hopen (0 : ℝ)).congrOn
+        (fun z hz => (hz0 z hz m i j q).symm), ⟨0, fun s => ⟨1, one_pos, ?_⟩⟩,
         fun k => ⟨0, fun s => ⟨1, one_pos, ?_⟩⟩⟩
       · intro z hz m q i j _
-        rw [hauxZero z hz m i j q, abs_zero]
+        rw [hz0 z hz m i j q, abs_zero]
         exact mul_nonneg (hcost m) (apply_nonneg _ _)
       · intro z hz v m q i j _
-        have hz0 : ((smoothDirections_constant hopen (0 : ℝ)).congrOn
-            (fun z hz => (hauxZero z hz m i j q).symm)).D k z v = 0 := by
+        have hD0 : ((smoothDirections_constant hopen (0 : ℝ)).congrOn
+            (fun z hz => (hz0 z hz m i j q).symm)).D k z v = 0 := by
           by_cases hk : k = 0
           · subst k
             exact smoothDirections_D_zero_apply (smoothDirections_constant hopen (0 : ℝ)) hz v
           · exact smoothDirections_D_constant (smoothDirections_constant hopen (0 : ℝ))
               (Nat.pos_of_ne_zero hk) hz v
-        rw [hz0, abs_zero]
+        rw [hD0, abs_zero]
         exact mul_nonneg (hcost m) (oneHighVariationWeight_nonneg _ _ _ _ _)
-    · exact hother a ha
+    by_cases ha : a = .auxiliaryColumn
+    · subst ha
+      exact ⟨hauxReg, hzero hauxZero⟩
+    by_cases hs : atomIsStatic a
+    · have hsame : ∀ (z : Parameter S') m,
+          atom W.D W.U S' C' L' V' (liftSectorParameter S' C' z) m a =
+            atom W.D W.U S' C' L' V' (C'.referenceState, 0) m a :=
+        fun z m => atom_state_eq_of_static hs _ _ m
+      refine ⟨fun z _ m => ?_, hzero fun z _ m i j q => ?_⟩
+      · rw [hsame z m]
+        exact hrefReg m a
+      · have hfun : (fun q : PolarPoint =>
+            atom W.D W.U S' C' L' V' (liftSectorParameter S' C' z) m a q -
+              atom W.D W.U S' C' L' V' (C'.referenceState, 0) m a q) = fun _ => 0 := by
+          funext q
+          rw [hsame z m, sub_self]
+        change mixedDerivative i j (fun q : PolarPoint =>
+            atom W.D W.U S' C' L' V' (liftSectorParameter S' C' z) m a q -
+              atom W.D W.U S' C' L' V' (C'.referenceState, 0) m a q) q.val = 0
+        rw [hfun]
+        exact mixedDerivative_fun_zero i j q.val
+    · exact hother a ha hs
   exact n04Realization_currentJets_of_atomFamilies hD hU hfloor (fun a => (hall a).1)
     (fun a => (hall a).2.choose) (fun a => (hall a).2.choose_spec.1)
     (fun a => (hall a).2.choose_spec.2)
@@ -412,7 +482,7 @@ theorem n04Realization_of_obligations
   have hB' : N04PartB S' C' L' V' newBase ε' := cutOperator_replaceAuxiliaryColumn η hcut
   have hcurrent : CurrentJets W.D W.U S' C' L' V' newBase ε' :=
     n04Realization_currentJets_of_parts W X e Y H τ σ Q B.region η newBase ε'
-      hηs.2.2.2.2.1 hηs.2.2.2.2.2 (hother η)
+      hηs.2.2.2.2.1 hηs.2.2.2.2.2 (hother η) hrefjets.1
   have hprim : PrimitiveGeometryProperties W.D W.U S' C' L' V' newBase ε' :=
     ⟨referenceRadial_replaceAuxiliaryColumn η hradial, hprin, hrefjets, hcurrent, hgauge,
       transmissionGeometry_replaceAuxiliaryColumn η htrans⟩
