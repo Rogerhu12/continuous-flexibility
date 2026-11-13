@@ -54,7 +54,8 @@ theorem n04NegativeInverse_vector_of_normalizedAtoms
     by_cases hk : w.stateArity = 0
     · let L : (E × PolarPoint) →L[ℝ] ℝ :=
         (ContinuousLinearMap.snd ℝ ℝ ℝ).comp (ContinuousLinearMap.snd ℝ E PolarPoint)
-      let T := smoothDirectionsLinearOn L J.open_domain
+      let T := smoothDirectionsOfJets J.open_domain (continuousLinearJets L)
+        (hasProjectiveJetsOn_continuousLinear L U)
       have hT : |T.D n x v| ≤ 1 := by
         change |continuousLinearJets L n x v| ≤ 1
         cases n with

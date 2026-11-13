@@ -57,6 +57,42 @@ theorem n04NegativeInverse_parameter_low {S : PhysicalSpacesData}
   have h₂ := hz.2
   linarith
 
+/-- Specialize the raw prefixes while the mixed tower is abstract. -/
+private theorem n04NegativeInverse_currentData_of_mixed_prefixes
+    {S : PhysicalSpacesData} {T : MaterialData} {cell : ℕ → ℕ}
+    {P : ℕ → Prop} {base : ℕ} {ε : ℝ}
+    {f : Parameter S → ℕ → PolarPoint → ℝ} {f₀ : ℕ → PolarPoint → ℝ}
+    (hε : 0 < ε) (hsmall : ε ≤ 1 / 2)
+    (hE : ∀ m, 1 ≤ T.E0 (T.sample (cell m)))
+    (hH : ∀ m, 0 ≤ T.H (T.sample (cell m)))
+    (RF : ∀ m, P m → MixedJetRegularity (sectorNeighborhood S base ε ε) unitStrip
+      (fun z => f z m))
+    (hperiod : ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m, P m → ∀ q ∈ unitStrip,
+      f z m (q + (0, Real.pi)) = f z m q)
+    (hzero : ∀ m, P m → ∀ q ∈ unitStrip, f 0 m q = f₀ m q)
+    (hraw : N04NegativeInverseRawPrefixes S T cell P base ε f) :
+    CurrentJetDataOn S T cell P base ε f f₀ := by
+  have hz₀ : (0 : Parameter S) ∈ sectorNeighborhood S base ε ε :=
+    ⟨(sectorGrading S base).map_zero'.trans_lt hε,
+      (abs_zero : |(0 : ℝ)| = 0).trans_lt hε⟩
+  have href (m : ℕ) (hm : P m) : ContDiffOn ℝ ∞ (f₀ m) unitStrip :=
+    ((RF m hm).spatial 0 hz₀).congr (fun q hq => (hzero m hm q hq).symm)
+  apply CurrentJetDataOn.negativeInverse_of_positive_prefixes
+    (S := S) (T := T) (cell := cell) (P := P) (base := base) (ε := ε) (f := f) (f₀ := f₀)
+    hε hE hH RF hperiod href hzero
+    (fun _ hz => n04NegativeInverse_parameter_low (S := S) hsmall hz)
+  intro k hk
+  let orderData := hraw k hk
+  let shift : ℕ := orderData.choose
+  have hshift := orderData.choose_spec
+  refine ⟨shift, fun s => ?_⟩
+  let boundData := hshift s
+  let B : ℝ := boundData.choose
+  have hB : 0 < B := boundData.choose_spec.1
+  have hb := boundData.choose_spec.2
+  exact ⟨B, hB, fun m hm q hq i j hij =>
+    hb m hm q hq i j hij ((RF m hm).parameter i j q hq)⟩
+
 /-- The actual joint tower and its exact reference value close all
 qualitative clauses of the current-data collector. -/
 theorem CurrentJetDataOn.negativeInverse_of_joint_prefixes
@@ -73,25 +109,15 @@ theorem CurrentJetDataOn.negativeInverse_of_joint_prefixes
     (hzero : ∀ m, P m → ∀ q ∈ unitStrip, f 0 m q = f₀ m q)
     (hraw : N04NegativeInverseRawPrefixes S T cell P base ε f) :
     CurrentJetDataOn S T cell P base ε f f₀ := by
-  let RF (m : ℕ) (hm : P m) := n04Realization_jointMixedRegularity (J m hm)
+  let RF (m : ℕ) (hm : P m) :
+      MixedJetRegularity (sectorNeighborhood S base ε ε) unitStrip (fun z => f z m) :=
+    n04Realization_jointMixedRegularity (J m hm)
     (sectorNeighborhood_isOpen S base ε ε) (isOpen_Ioo.prod isOpen_univ)
     ((sectorNeighborhood_convex S base ε ε).prod
       ((convex_Ioo (0 : ℝ) 1).prod convex_univ))
-  have hz₀ : (0 : Parameter S) ∈ sectorNeighborhood S base ε ε :=
-    ⟨(sectorGrading S base).map_zero'.trans_lt hε,
-      (abs_zero : |(0 : ℝ)| = 0).trans_lt hε⟩
-  have href (m : ℕ) (hm : P m) : ContDiffOn ℝ ∞ (f₀ m) unitStrip :=
-    ((RF m hm).spatial 0 hz₀).congr (fun q hq => (hzero m hm q hq).symm)
-  apply CurrentJetDataOn.negativeInverse_of_positive_prefixes
+  exact n04NegativeInverse_currentData_of_mixed_prefixes
     (S := S) (T := T) (cell := cell) (P := P) (base := base) (ε := ε) (f := f) (f₀ := f₀)
-    hε hE hH RF hperiod href
-    hzero (fun _ hz => n04NegativeInverse_parameter_low hsmall hz)
-  intro k hk
-  obtain ⟨shift, hshift⟩ := hraw k hk
-  refine ⟨shift, fun s => ?_⟩
-  obtain ⟨B, hB, hb⟩ := hshift s
-  exact ⟨B, hB, fun m hm q hq i j hij =>
-    hb m hm q hq i j hij ((RF m hm).parameter i j q hq)⟩
+    hε hsmall hE hH RF hperiod hzero hraw
 
 namespace N04RealizationGauge
 
