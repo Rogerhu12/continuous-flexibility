@@ -279,7 +279,7 @@ private theorem n04NegativeInverse_abs_value_le
     |u| = |(u - u₀) + u₀| := by rw [sub_add_cancel]
     _ ≤ |u - u₀| + |u₀| := abs_add_le _ _
     _ ≤ 1 + C * E ^ C := add_le_add hdiff.le href
-    _ ≤ E ^ C + C * E ^ C := add_le_add_right (Real.one_le_rpow hE hC.le) _
+    _ ≤ E ^ C + C * E ^ C := add_le_add (Real.one_le_rpow hE hC.le) le_rfl
     _ = (1 + C) * E ^ C := by ring
     _ ≤ (1 + C) * E ^ (1 + C) :=
       mul_le_mul_of_nonneg_left
