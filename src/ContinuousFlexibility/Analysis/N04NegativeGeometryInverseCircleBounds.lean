@@ -51,6 +51,31 @@ local instance n04NegativeGeometryInverseBoundsCirclePairModule (H : CircleModel
 local instance n04NegativeGeometryInverseBoundsCircleSMul (H : CircleModelData) :
     SMul ℝ (H.Space × H.Space) := Prod.instSMul
 
+private theorem inverseBounds_diagonal_jet
+    {E F : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    [IsTopologicalAddGroup F] [ContinuousSMul ℝ F]
+    {U : Set E} {f : E → F} (J : SmoothDirections U f)
+    (q : ℕ → Seminorm ℝ F) (n s : ℕ) (x : E) (v : Fin n → E)
+    {K W : ℝ} (h : q s (J.D n x v) ≤ K * W) :
+    pairGrading q q s ((smoothDirectionsProd J J).D n x v) ≤ (K + K) * W := by
+  change q s (J.D n x v) + q s (J.D n x v) ≤ (K + K) * W
+  exact (add_le_add h h).trans_eq (add_mul K K W).symm
+
+private theorem inverseBounds_neg_jet
+    {E F : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    [IsTopologicalAddGroup F]
+    {U : Set E} {f : E → F} (J : SmoothDirections U f)
+    (q : Seminorm ℝ F) (n : ℕ) (x : E) (v : Fin n → E) {A : ℝ}
+    (h : q ((solveSmoothDirectionsPostcomp J (-ContinuousLinearMap.id ℝ F)).D n x v) ≤ A) :
+    q (J.D n x v) ≤ A := by
+  change q (-J.D n x v) ≤ A at h
+  exact (map_neg_eq_map q (J.D n x v)).symm.trans_le h
+
 private theorem inverseOperator_fixedBase
     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : CircleModelData}
     (hH : IsCircleModel T γ H) (hT : IsMaterialData D T)
@@ -72,18 +97,18 @@ private theorem inverseOperator_fixedBase
       ∀ v : Fin n → H.Space × H.Space,
         H.grading s (K.D n y v) ≤
           C * tameJetSize (pairGrading H.grading H.grading) n s L B y v := by
-  obtain ⟨B, hB⟩ := circlePositiveInverseComposeLinear_fixedBase_oneHigh
+  classical
+  have data := circlePositiveInverseComposeLinear_fixedBase_oneHigh
     (D := D) (T := T) (γ := γ) (M := H)
     hD hT hγ hH hi JF (JP (fun _ => 0)) (a / 2) (half_pos ha)
-  refine ⟨B, fun n => ?_⟩
-  obtain ⟨L, hL⟩ := hB n
-  refine ⟨L, fun R _hR s => ?_⟩
-  obtain ⟨C, hC, hb⟩ := hL (max R 1) (le_max_right _ _) s
-  refine ⟨C, hC, fun travel K y hy hlow v => ?_⟩
+  refine ⟨data.choose, fun n => ?_⟩
+  have order := data.choose_spec n
+  refine ⟨order.choose, fun R _hR s => ?_⟩
+  have bound := order.choose_spec (max R 1) (le_max_right _ _) s
+  refine ⟨bound.choose, bound.choose_spec.1, fun travel K y hy hlow v => ?_⟩
   have hlower (m : ℕ) (θ : ℝ) :
-      a / 2 ≤ deriv (circleAffineLift travel (H.decode y.1) 1 m) θ := by
-    rw [circleAffineLift_deriv hH]
-    exact interior_subset hy.1 m θ
+      a / 2 ≤ deriv (circleAffineLift travel (H.decode y.1) 1 m) θ :=
+    (interior_subset hy.1 m θ).trans_eq (circleAffineLift_deriv hH travel y.1 m θ).symm
   let K' : SmoothDirections (circleUniformInverseDomain H a ×ˢ univ)
       (fun y : H.Space × H.Space =>
         circlePositiveInverseComposeLinear hH hT hD hγ travel y.1 y.2) :=
@@ -92,8 +117,8 @@ private theorem inverseOperator_fixedBase
   have heq := congrArg (fun A : (H.Space × H.Space) [×n]→L[ℝ] H.Space => A v)
     (K.unique K' n y hy)
   have heq' : K.D n y v = (JP travel).D n y v := heq
-  rw [heq']
-  exact hb travel (JP travel) y hlower (hlow.trans (le_max_left _ _)) v
+  exact (congrArg (H.grading s) heq').trans_le
+    (bound.choose_spec.2 travel (JP travel) y hlower (hlow.trans (le_max_left _ _)) v)
 
 section InverseComposition
 
@@ -144,36 +169,38 @@ theorem n04NegativeGeometry_circleInverse_fixedBase_oneHigh
   let JF : SmoothDirections univ (fun y : H.Space × H.Space =>
       circleShiftedChartComposeContinuousLinear hH hT hD hγ (fun _ => 0) y.1 y.2) :=
     (exists_circleChartComposition_uniform_oneHigh hH hT hD hγ hi (fun _ => 0)).choose
-  obtain ⟨BK, hBK⟩ := inverseOperator_fixedBase hH hT hD hγ hi JF JP a ha
-  choose d hd using hJ
-  choose e he using hBK
+  have operator := inverseOperator_fixedBase hH hT hD hγ hi JF JP a ha
+  let BK : ℕ := operator.choose
+  let d : ℕ → ℕ := fun n => (hJ n).choose
+  let e : ℕ → ℕ := fun n => (operator.choose_spec n).choose
+  have hd := fun n => (hJ n).choose_spec
   have houter (n : ℕ) (R : ℝ) (_hR : 0 ≤ R) (s : ℕ) :
       ∃ C : ℝ, 0 ≤ C ∧ ∀ i y, y ∈ W ×ˢ univ →
         pairGrading H.grading H.grading BK y ≤ R →
         ∀ v : Fin n → H.Space × H.Space,
           H.grading s ((KP i).D n y v) ≤
             C * tameJetSize (pairGrading H.grading H.grading) n s (e n) BK y v := by
-    obtain ⟨C, hC, hb⟩ := he n R _hR s
-    refine ⟨C, hC, fun i y hy hlow v => ?_⟩
-    exact hb (travel i) (KP i) y hy hlow v
+    have bound := (operator.choose_spec n).choose_spec R _hR s
+    exact ⟨bound.choose, bound.choose_spec.1, fun i y hy hlow v =>
+      bound.choose_spec.2 (travel i) (KP i) y hy hlow v⟩
   have hmap (i : I) : MapsTo (fun x => (f i x, g i x)) U (W ×ˢ univ) :=
     fun x hx => ⟨mem_circleUniformInverseDomain hH hT hD hγ ha (f i x)
       (hlower i x hx), mem_univ _⟩
-  obtain ⟨B, hB, hb⟩ := projectiveCompositionJets_fixedBase_oneHigh
+  have composite := projectiveCompositionJets_fixedBase_oneHigh
+    (I := I) (E := E) (F := H.Space × H.Space) (G := H.Space)
     p (pairGrading H.grading H.grading) H.grading hp hIp J KP BJ BK d e hd houter hmap
-  refine ⟨B, hB, fun n => ?_⟩
-  obtain ⟨L, hL⟩ := hb n
-  refine ⟨L, fun R hR s => ?_⟩
-  obtain ⟨C, hC, hc⟩ := hL R hR s
-  refine ⟨C, hC, fun i K x hx hlow v => ?_⟩
+  refine ⟨composite.choose, composite.choose_spec.1, fun n => ?_⟩
+  have order := composite.choose_spec.2 n
+  refine ⟨order.choose, fun R hR s => ?_⟩
+  have bound := order.choose_spec R hR s
+  refine ⟨bound.choose, bound.choose_spec.1, fun i K x hx hlow v => ?_⟩
   let Kactual : SmoothDirections U (fun x =>
       circlePositiveInverseComposeLinear hH hT hD hγ (travel i) (f i x) (g i x)) :=
     (J i).compCircle hH (KP i) (hmap i)
   have heq := congrArg (fun A : E [×n]→L[ℝ] H.Space => A v) (K.unique Kactual n x hx)
   have heq' : K.D n x v =
       projectiveCompositionJets (fun x => (f i x, g i x)) (J i).D (KP i).D n x v := heq
-  rw [heq']
-  exact hc i x hx hlow v
+  exact (congrArg (H.grading s) heq').trans_le (bound.choose_spec.2 i x hx hlow v)
 
 end InverseComposition
 
@@ -219,38 +246,42 @@ theorem N01Properties.n04NegativeGeometry_selectorInverseCircle_fixedBase_oneHig
     fun i => (hN.exists_endpointFlowCircle_smoothDirections hS hT i.val i.property).choose
   let P : ∀ i, SmoothDirections U (fun x => (f i x, f i x)) :=
     fun i => smoothDirectionsProd (J i) (J i)
-  obtain ⟨BJ, hBJ, hJ⟩ := hN.endpointFlowCircle_fixedBase_oneHigh hS hT
+  have forward := hN.endpointFlowCircle_fixedBase_oneHigh hS hT
+  let BJ : ℕ := forward.choose
+  have hBJ : base ≤ BJ := forward.choose_spec.1
   have hP : ∀ n : ℕ, ∃ L : ℕ, ∀ R : ℝ, 0 ≤ R → ∀ s : ℕ,
       ∃ K : ℝ, 0 ≤ K ∧ ∀ i x, x ∈ U → p BJ x ≤ R →
       ∀ v : Fin n → StateDirections S × ℝ,
         pairGrading H.grading H.grading s ((P i).D n x v) ≤
           K * tameJetSize p n s L BJ x v := by
     intro n
-    obtain ⟨L, hL⟩ := hJ n
-    refine ⟨L, fun R hR s => ?_⟩
-    obtain ⟨K, hK, hb⟩ := hL R hR s
-    refine ⟨K + K, add_nonneg hK hK, fun i x hx hlow v => ?_⟩
-    have h := hb i.val i.property (J i) x hx hlow v
-    simpa only [P, smoothDirectionsProd, ContinuousMultilinearMap.prod_apply,
-      pairGrading_apply, add_mul] using add_le_add h h
+    have order := forward.choose_spec.2 n
+    refine ⟨order.choose, fun R hR s => ?_⟩
+    have bound := order.choose_spec R hR s
+    refine ⟨bound.choose + bound.choose,
+      add_nonneg bound.choose_spec.1 bound.choose_spec.1, fun i x hx hlow v => ?_⟩
+    exact inverseBounds_diagonal_jet (J i) H.grading n s x v
+      (bound.choose_spec.2 i.val i.property (J i) x hx hlow v)
   have hp : Monotone p := sectorPairGrading_monotone S
   have hIp : HasInterpolation (pairGrading realGrading p) :=
     inverseBounds_parameterInterpolation hS
   have hlower (i : I) (x : StateDirections S × ℝ) (hx : x ∈ U) (m : ℕ) (θ : ℝ) :
       1 / 2 ≤ 1 + deriv (H.decode (f i x) m) θ := by
-    rw [← circleAffineLift_deriv (hS.2.1 (3 / 4 : ℝ))
-      (fun j => -opticalTravel D.w (C.left j) (i.val j)),
-      hN.endpointFlowCircle_affineLift hS hT i.val i.property x hx]
-    exact hflow x hx m (i.val m) (i.property m) θ
-  obtain ⟨B, hB, hbound⟩ := n04NegativeGeometry_circleInverse_fixedBase_oneHigh
+    have he := congrArg (fun F : ℝ → ℝ => deriv F θ)
+      (congrFun (hN.endpointFlowCircle_affineLift hS hT i.val i.property x hx) m)
+    exact (hflow x hx m (i.val m) (i.property m) θ).trans_eq
+      (he.symm.trans (circleAffineLift_deriv (hS.2.1 (3 / 4 : ℝ))
+        (fun j => -opticalTravel D.w (C.left j) (i.val j)) (f i x) m θ))
+  have inverse := n04NegativeGeometry_circleInverse_fixedBase_oneHigh
+    (I := I) (E := StateDirections S × ℝ) (H := H)
     (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num)
     (hS.2.2.2.2.1 (3 / 4 : ℝ)).2.2 p hp hIp P BJ hP
     (fun i m => -opticalTravel D.w (C.left m) (i.val m)) (1 / 2) (by norm_num) hlower
-  refine ⟨B, hBJ.trans hB, fun n => ?_⟩
-  obtain ⟨L, hL⟩ := hbound n
-  refine ⟨L, fun R hR s => ?_⟩
-  obtain ⟨K, hK, hb⟩ := hL R hR s
-  refine ⟨K, hK, fun rsel hrsel Jinv x hx hlow v => ?_⟩
+  refine ⟨inverse.choose, hBJ.trans inverse.choose_spec.1, fun n => ?_⟩
+  have order := inverse.choose_spec.2 n
+  refine ⟨order.choose, fun R hR s => ?_⟩
+  have bound := order.choose_spec R hR s
+  refine ⟨bound.choose, bound.choose_spec.1, fun rsel hrsel Jinv x hx hlow v => ?_⟩
   let i : I := ⟨rsel, hrsel⟩
   let Jpositive : SmoothDirections U (fun x =>
       circlePositiveInverseComposeLinear (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num)
@@ -259,8 +290,7 @@ theorem N01Properties.n04NegativeGeometry_selectorInverseCircle_fixedBase_oneHig
       (fun x _ => by
         change -(-circlePositiveInverseComposeLinear _ _ _ _ _ _ _) = _
         exact neg_neg _)
-  have h := hb i Jpositive x hx hlow v
-  change H.grading s (-Jinv.D n x v) ≤ _ at h
-  simpa only [map_neg_eq_map] using h
+  exact inverseBounds_neg_jet Jinv (H.grading s) n x v
+    (bound.choose_spec.2 i Jpositive x hx hlow v)
 
 end ContinuousFlexibility.Statements

@@ -55,6 +55,7 @@ theorem physicalRadialFamily_zero (m : ℕ) :
     (liftSectorParameter G.W.S G.W.C (0 : Parameter G.W.S))).a _ = _
   simp only [liftSectorParameter, Prod.fst_zero, Prod.snd_zero,
     ZeroMemClass.coe_zero, add_zero]
+  rfl
 
 theorem heightRadial_physicalUnitPoint_eq (m : ℕ) (j : ℕ × Bool)
     (hi : G.e m = .inl j) :
@@ -114,7 +115,8 @@ theorem physicalRadial_spatial (z : Parameter G.W.S)
   have hz' := liftSectorParameter_mem_stateNeighborhood (C := G.W.C) hz le_rfl
   have hs := G.W.through03.1.1.2.2.1.liftSectorParameter_sector z
   have hf := (G.W.field.smooth_coefficients _ hz' hs).1
-  have hmap := G.heightRadial_physicalUnitPoint_mem_annulus η m hm
+  have hmap : MapsTo (physicalUnitPoint (G.V η) m) unitStrip (annularOpen G.W.D) :=
+    fun _ hq => G.heightRadial_physicalUnitPoint_mem_annulus η m hm hq
   have hpoint : ContDiff ℝ ∞ (physicalUnitPoint (G.V η) m) :=
     (contDiff_const.add (contDiff_const.mul contDiff_fst)).prodMk contDiff_snd
   refine ⟨hf.comp hpoint.contDiffOn hmap, ?_⟩

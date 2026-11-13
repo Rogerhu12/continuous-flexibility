@@ -147,14 +147,10 @@ theorem CurrentJetDataOn.height_mul
   have hlow : ∀ z ∈ U', parameterGrading S b' z ≤ 1 :=
     fun z hz => n04NegativeHeight_parameterGrading_le_one (min_le_right ε (1 / 2)) hz
   refine ⟨b', ε', hb', hε', hεε, CurrentJetDataOn.of_positive_towers hε' hE hH R'
-    (fun z hz m hm q hq => by
-      change f z m (q + (0, Real.pi)) * g z m (q + (0, Real.pi)) =
-        f z m q * g z m q
-      rw [(hf.1 z (hsub hz) m hm).2 q hq, (hg.1 z (hsub hz) m hm).2 q hq])
+    (fun z hz m hm q hq => congrArg₂ (· * ·)
+      ((hf.1 z (hsub hz) m hm).2 q hq) ((hg.1 z (hsub hz) m hm).2 q hq))
     (fun m hm => (hf₀.1 m hm).1.mul (hg₀.1 m hm).1)
-    (fun m hm q hq => by
-      change f 0 m q * g 0 m q = f₀ m q * g₀ m q
-      rw [hfzero m hm q hq, hgzero m hm q hq]) hlow ?_⟩
+    (fun m hm q hq => congrArg₂ (· * ·) (hfzero m hm q hq) (hgzero m hm q hq)) hlow ?_⟩
   intro k hk
   have hkbound := hproduct.choose_spec.2 k
   refine ⟨hkbound.choose, fun s => ⟨(hkbound.choose_spec s).choose,

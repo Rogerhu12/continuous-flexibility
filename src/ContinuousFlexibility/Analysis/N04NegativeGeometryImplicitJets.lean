@@ -151,8 +151,9 @@ theorem continuous_graph_reindex {U : Set E} {n N : ℕ}
       (fun _ hp => ⟨hp.1, mem_univ _⟩)
   have hp : Continuous (fun p : E × (Fin N → E) => parameter n (p.2 ∘ σ)) :=
     (parameter (E := E) (Y := Y) n).cont.comp (hσ.comp continuous_snd)
-  simpa only [graph_apply] using
-    hp.continuousOn.add (continuousOn_const.prodMk hb)
+  apply (hp.continuousOn.add (continuousOn_const.prodMk hb)).congr
+  intro p _
+  simp only [Pi.add_apply, graph_apply]
 
 def forcing {U : Set E} {V : Set Y} {H : E × Y → Y} {N : ℕ}
     (J : SmoothDirections (U ×ˢ V) H) (g : E → Y)

@@ -28,8 +28,11 @@ theorem n04NegativeHeight_angularFactor_reconstructed
     (hf : DifferentiableAt ℝ f q) (hg : DifferentiableAt ℝ g q) (l d : ℝ) :
     n04NegativeHeightAngularFactor (fun y => (l + d * f y, y.2 + g y)) q =
       n04NegativeHeightUnitNumerator l d f g q := by
-  have hd := ((hf.hasFDerivAt.const_mul d).const_add l).prodMk
-    (hasFDerivAt_snd.add hg.hasFDerivAt)
+  have hd : HasFDerivAt (fun y : PolarPoint => (l + d * f y, y.2 + g y))
+      ((d • fderiv ℝ f q).prod
+        (ContinuousLinearMap.snd ℝ ℝ ℝ + fderiv ℝ g q)) q :=
+    ((hf.hasFDerivAt.const_mul d).const_add l).prodMk
+      (hasFDerivAt_snd.add hg.hasFDerivAt)
   simp only [n04NegativeHeightAngularFactor, n04NegativeHeightUnitNumerator,
     hd.fderiv, ContinuousLinearMap.prod_apply, add_apply, smul_apply,
     ContinuousLinearMap.coe_snd', smul_eq_mul, angularPartial]
@@ -45,7 +48,11 @@ theorem n04NegativeHeight_angularFactor_affine
       ((d • ContinuousLinearMap.fst ℝ ℝ ℝ).prod
         (ContinuousLinearMap.snd ℝ ℝ ℝ)) q :=
     ((hasFDerivAt_fst.const_mul d).const_add l).prodMk hasFDerivAt_snd
-  have hd := hF.hasFDerivAt.comp q hP
+  have hd : HasFDerivAt (fun y : PolarPoint => F (l + d * y.1, y.2))
+      ((fderiv ℝ F (l + d * q.1, q.2)).comp
+        ((d • ContinuousLinearMap.fst ℝ ℝ ℝ).prod
+          (ContinuousLinearMap.snd ℝ ℝ ℝ))) q :=
+    hF.hasFDerivAt.comp q hP
   simp only [n04NegativeHeightAngularFactor, hd.fderiv,
     ContinuousLinearMap.comp_apply, ContinuousLinearMap.prod_apply, smul_apply,
     ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd', smul_eq_mul, mul_zero]
@@ -69,10 +76,17 @@ theorem n04NegativeHeight_angularFactor_eq_unitAtoms
     exact ((differentiableAt_const (K.physicalLeft m)).add
       ((differentiableAt_const (K.physicalRight m - K.physicalLeft m)).mul
         differentiableAt_fst)).prodMk differentiableAt_snd
-  have hcomp := hF.comp q hP
-  have hf : DifferentiableAt ℝ f q :=
-    (hcomp.fst.sub_const (K.left m)).div_const (K.right m - K.left m)
-  have hg : DifferentiableAt ℝ g q := hcomp.snd.sub differentiableAt_snd
+  have hcomp : DifferentiableAt ℝ
+      (fun y => K.chart z m (physicalUnitPoint K m y)) q := hF.comp q hP
+  have hf : DifferentiableAt ℝ f q := by
+    change DifferentiableAt ℝ
+      (fun y => ((K.chart z m (physicalUnitPoint K m y)).1 - K.left m) /
+        (K.right m - K.left m)) q
+    exact (hcomp.fst.sub_const (K.left m)).div_const (K.right m - K.left m)
+  have hg : DifferentiableAt ℝ g q := by
+    change DifferentiableAt ℝ
+      (fun y => (K.chart z m (physicalUnitPoint K m y)).2 - y.2) q
+    exact hcomp.snd.sub differentiableAt_snd
   have he : (fun y => K.chart z m (physicalUnitPoint K m y)) =
       (fun y => (K.left m + (K.right m - K.left m) * f y, y.2 + g y)) := by
     funext y

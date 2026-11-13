@@ -44,6 +44,24 @@ private theorem height_compact_outer_jets
     n04SourceColumns_iteratedDeriv_add]
   simpa only [norm_iteratedFDeriv_eq_norm_iteratedDeriv] using hb (a + b) hab t ht
 
+/-- Pack the compact scalar bound before introducing any concrete
+parameter space or current-data certificate. -/
+private theorem height_compact_outer_envelope
+    {X I : Type*} {U : Set X} {Ω : Set PolarPoint} {V K : Set ℝ}
+    (hV : IsOpen V) (hK : IsCompact K) (hKV : K ⊆ V)
+    {g : ℝ → ℝ} (hg : ContDiffOn ℝ ∞ g V)
+    (E : I → ℝ) (hE : ∀ t, 1 ≤ E t) (f : I → X → PolarPoint → ℝ)
+    (hrange : ∀ t q, q ∈ Ω → ∀ z ∈ U, f t z q ∈ K) :
+    ∀ N : ℕ, ∃ A : ℝ, 0 < A ∧
+      ∀ t q, q ∈ Ω → ∀ z ∈ U, ∀ a b : ℕ, a + b ≤ N →
+        ‖iteratedFDeriv ℝ a (iteratedDeriv b g) (f t z q)‖ ≤ A * E t ^ A := by
+  intro N
+  have h := height_compact_outer_jets hV hK hKV hg N
+  refine ⟨h.choose, h.choose_spec.1, fun t q hq z hz a b hab => ?_⟩
+  exact (h.choose_spec.2 (f t z q) (hrange t q hq z hz) a b hab).trans
+    (le_mul_of_one_le_right h.choose_spec.1.le
+      (Real.one_le_rpow (hE t) h.choose_spec.1.le))
+
 variable {S : PhysicalSpacesData} {T : MaterialData} {D : ReferenceData}
   {cell : ℕ → ℕ} {P : ℕ → Prop} {base : ℕ} {ε : ℝ}
   {f : Parameter S → ℕ → PolarPoint → ℝ} {f₀ : ℕ → PolarPoint → ℝ}
@@ -80,10 +98,11 @@ theorem CurrentJetDataOn.height_scalarComp
       (abs_zero : |(0 : ℝ)| = 0).trans_lt hε⟩
   have hH (m : ℕ) : 0 ≤ T.H (T.sample (cell m)) :=
     (hT.2.1 _ (materialSample_mem_interval hD hT (cell m))).2.1.le
-  obtain ⟨RH, hRH, hheight⟩ := material_sample_height_coefficient_power_bounded hD hT cell 0
+  have hheight := material_sample_height_coefficient_power_bounded hD hT cell 0
     (by norm_num : (0 : ℝ) < 3 / 4)
+  let RH : ℝ := hheight.choose
   have hHR (m : ℕ) : T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) ≤ RH := by
-    simpa only [Real.rpow_zero, mul_one] using hheight m
+    simpa only [Real.rpow_zero, mul_one] using hheight.choose_spec.2 m
   have ht := h.height_fullTower hD hT h₀ hE
   let L : ℕ → ℕ := fun k => (ht k).choose
   have hbound : ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧
@@ -98,15 +117,9 @@ theorem CurrentJetDataOn.height_scalarComp
       fun t q hq a b hab z hz v =>
         ((ht k).choose_spec s).choose_spec.2 t.val t.property q hq a b hab
           ((RF t.val t.property).parameter a b q hq) z hz v⟩
-  have houter : ∀ N : ℕ, ∃ A : ℝ, 0 < A ∧
-      ∀ t : {m // P m}, ∀ q, q ∈ unitStrip → ∀ z ∈ U, ∀ a b : ℕ, a + b ≤ N →
-        ‖iteratedFDeriv ℝ a (iteratedDeriv b g) (f z t.val q)‖ ≤
-          A * T.E0 (T.sample (cell t.val)) ^ A := by
-    intro N
-    obtain ⟨C, hC, hjet⟩ := height_compact_outer_jets hV hK hKV hg N
-    refine ⟨C, hC, fun t q hq z hz a b hab => ?_⟩
-    exact (hjet (f z t.val q) (hrange z hz t.val t.property q hq) a b hab).trans
-      (le_mul_of_one_le_right hC.le (Real.one_le_rpow (hE t.val) hC.le))
+  have houter := height_compact_outer_envelope (U := U) (Ω := unitStrip) hV hK hKV hg
+    (fun t : {m // P m} => T.E0 (T.sample (cell t.val))) (fun t => hE t.val)
+    (fun t z => f z t.val) (fun t q hq z hz => hrange z hz t.val t.property q hq)
   have hcomposite := n04SourceColumns_scalarFamily_oneHigh
     (parameterGrading S) hp hI base L hU hΩ hV
     (fun t : {m // P m} => T.E0 (T.sample (cell t.val)))
@@ -129,9 +142,9 @@ theorem CurrentJetDataOn.height_scalarComp
   refine ⟨b', ε', hb', hε', hεε, CurrentJetDataOn.of_positive_towers hε' hE hH R'
     (fun z hz m hm q hq => congrArg g ((h.1 z (hsub hz) m hm).2 q hq))
     (fun m hm => ?_) (fun m hm q hq => congrArg g (hzero m hm q hq)) hlow ?_⟩
-  · exact hg.comp (h₀.1 m hm).1 (fun q hq => by
-      rw [← hzero m hm q hq]
-      exact hKV (hrange 0 hz₀ m hm q hq))
+  · exact hg.comp (h₀.1 m hm).1 (fun q hq =>
+      Eq.mp (congrArg (fun t : ℝ => t ∈ V) (hzero m hm q hq))
+        (hKV (hrange 0 hz₀ m hm q hq)))
   · intro k hk
     have hkbound := hcomposite.choose_spec.2 k hk
     refine ⟨hkbound.choose, fun s => ?_⟩

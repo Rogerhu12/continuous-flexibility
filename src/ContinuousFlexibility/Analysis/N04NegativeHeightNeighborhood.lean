@@ -83,10 +83,17 @@ theorem CurrentJetDataOn.height_small_difference
       CurrentJetDataOn S T cell P b' ε' f f₀ ∧
         ∀ z ∈ sectorNeighborhood S b' ε' ε', ∀ m, P m → ∀ q ∈ unitStrip,
           |f z m q - f₀ m q| ≤ δ := by
-  obtain ⟨loss, hvalue⟩ := h.2.choose_spec.1
-  obtain ⟨B, hB, hbound⟩ := hvalue 0
-  obtain ⟨C, hC, hsample⟩ := material_sample_height_coefficient_power_bounded
+  have hvalue := h.2.choose_spec.1
+  let loss : ℕ := hvalue.choose
+  have hzero := hvalue.choose_spec 0
+  let B : ℝ := hzero.choose
+  have hB : 0 < B := hzero.choose_spec.1
+  have hbound := hzero.choose_spec.2
+  have hmaterial := material_sample_height_coefficient_power_bounded
     hD hT cell B (by norm_num : (0 : ℝ) < 3 / 4)
+  let C : ℝ := hmaterial.choose
+  have hC : 0 < C := hmaterial.choose_spec.1
+  have hsample := hmaterial.choose_spec.2
   let b' : ℕ := max base loss
   let ε' : ℝ := min ε (δ / (2 * (B * C)))
   have hb : base ≤ b' := le_max_left _ _
@@ -129,9 +136,14 @@ theorem CurrentJetDataOn.height_range_one
       CurrentJetDataOn S T cell P b' ε' f f₀ ∧
         ∀ z ∈ sectorNeighborhood S b' ε' ε', ∀ m, P m → ∀ q ∈ unitStrip,
           f z m q ∈ Icc (1 / 2 : ℝ) (3 / 2 : ℝ) := by
-  obtain ⟨b', ε', hb, he, hele, hdata, hsmall⟩ :=
-    h.height_small_difference hD hT hε hE (by norm_num : (0 : ℝ) < 1 / 2)
-  refine ⟨b', ε', hb, he, hele, hdata, fun z hz m hm q hq => ?_⟩
-  exact height_range_one_scalar (h₀ m hm q hq) (hsmall z hz m hm q hq)
+  have hsmall := CurrentJetDataOn.height_small_difference
+    (S := S) (T := T) (cell := cell) (P := P) (base := base) (ε := ε)
+    (f := f) (f₀ := f₀) hD hT hε hE h (by norm_num : (0 : ℝ) < 1 / 2)
+  let b' : ℕ := hsmall.choose
+  let ε' : ℝ := hsmall.choose_spec.choose
+  have hd := hsmall.choose_spec.choose_spec
+  exact ⟨b', ε', hd.1, hd.2.1, hd.2.2.1, hd.2.2.2.1,
+    fun z hz m hm q hq =>
+      height_range_one_scalar (h₀ m hm q hq) (hd.2.2.2.2 z hz m hm q hq)⟩
 
 end ContinuousFlexibility.Analysis
