@@ -1,0 +1,571 @@
+{
+  "schema": 1,
+  "status": "Draft adapter; source-owned dependencies are not activated",
+  "base": {
+    "sha": "10c7661e70f7185c94d1662df1c3f41803be09ff",
+    "tree": "43b34b277f5fb926e03a5d9108d6b13cf548bdec",
+    "activeLeanFiles": 5255,
+    "treeTruncated": false
+  },
+  "producer": {
+    "path": "drafts/N04Coordinates-Realization-recovery-20261112/quantitative/N04RealizationRootJacobianMaterialBounds.lean",
+    "lines": 222,
+    "theorem": "n04Realization_rootJacobian_material_bound",
+    "actualInputs": [
+      "IsPhysicalSpaces",
+      "IsMaterialData",
+      "NonlinearPropertiesThrough03",
+      "N04bFieldRegularity",
+      "N04PartA",
+      "N04PartB",
+      "positive fixed optical constant"
+    ],
+    "bound": "|planeJacobian (K.chart z i) (r,theta)|^-1 <= B * (C0 * E0(sample j))^B",
+    "quantifiers": "C0,B,newBase,eta before z,m,j,side,theta; original D,T,S,C,E,L,K retained",
+    "scope": "The actual containing cell and its optical lower inequality are supplied; no final N04 estimate is assumed."
+  },
+  "minimal": {
+    "modules": 21,
+    "lines": 2792,
+    "roots": [
+      "N01RootOddCoefficientMaterialValues",
+      "N03ControlledRootUnitIdentification"
+    ],
+    "order": [
+      "N01RootOddCoefficientMaterialValues",
+      "N01RootSpeedPowerMaterialJets",
+      "N01RootFactorPowerMaterialJets",
+      "N01RootFactorAxisGlobalJets",
+      "N01DiscriminantGlobalJets",
+      "N01OriginalCoefficientGlobalJets",
+      "RootCoefficientAxisDivision",
+      "N01RootFactorAxisMaterialInverse",
+      "N01RadialCoefficientMaterialInverse",
+      "RootOpticalEndpointLower",
+      "PositivePowerPolynomialMaterialJets",
+      "N01RootDriftAxisMaterialJets",
+      "N01CharacteristicDriftMaterialJets",
+      "N01RadialCoefficientPowerMaterialJets",
+      "N01OriginalCoefficientOrdinaryGlobalJets",
+      "PointwiseProductPolynomialMaterialJets",
+      "RootFlowParameterUnscale",
+      "N03ControlledRootUnitIdentification",
+      "N03RootUnitScaleIdentification",
+      "RootParameterUnscaleRegularity",
+      "RootPhysicalModelParameterUnscale"
+    ]
+  },
+  "oddPowerAlternative": {
+    "modules": 32,
+    "lines": 4754,
+    "roots": [
+      "N01RootOddPowerMaterialJets",
+      "N03ControlledRootUnitIdentification"
+    ]
+  },
+  "withAllRootMaterialJets": {
+    "modules": 36,
+    "lines": 5523,
+    "roots": [
+      "N03RootEndpointMaterialJets"
+    ]
+  },
+  "confirmedCompatibility": [
+    {
+      "module": "N03RootEndpointMaterialJets",
+      "location": "hfield' restriction record",
+      "repair": "Retain reference_flow := hfield.reference_flow, as the new adapter already does."
+    },
+    {
+      "module": "N01ReturnUniformPositiveJets",
+      "location": "n01_returnForward_higherJets_uniform",
+      "repair": "Full odd-power/material closure calls ordinaryFlowFamily_le_linear_high_on_closed_of_n01 with old per-order API. Current API chooses parameterLoss before all s. Preserve that chosen loss in the returned uniform forward/inverse material bounds. This file is not needed by the 21-module Jacobian-only route."
+    }
+  ],
+  "selectionNotes": [
+    "RootOpticalEndpointLower selects the compatibility/root-optical-limit-closure source-snapshot-14 version, rather than the older reconstructed source.",
+    "Generated src/ContinuousFlexibility.lean is stale relative to the active tree; presence/absence was checked against the complete recursive tree.",
+    "All manifests are provenance only. No archived Lean file is copied or activated."
+  ],
+  "providers": {
+    "N01RootOddPowerMaterialJets": {
+      "lines": 142,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/quantitative/primitive-route/reconstructed/N01RootOddPowerMaterialJets.lean",
+      "commit": "50cae968a47ba361e30c427780c4ee16765768d4",
+      "blob": null,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01RootEvenOddAxisMaterialJets",
+        "ContinuousFlexibility.Analysis.N01RootOddCoefficientMaterialValues",
+        "ContinuousFlexibility.Analysis.PositivePowerPolynomialMaterialJets"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N03ControlledRootUnitIdentification": {
+      "lines": 122,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-21/quantitative/primitive-route/reconstructed/N03ControlledRootUnitIdentification.lean",
+      "commit": "f98e15e4243d0d47a9d42fa40e64f60ed54691d3",
+      "blob": null,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ControlledRootInput",
+        "ContinuousFlexibility.Analysis.N03StateRootBandIdentification",
+        "ContinuousFlexibility.Analysis.N03RootUnitScaleIdentification"
+      ],
+      "legacyClauses": [
+        {
+          "l": "    (hfield : N04bFieldRegularity D S C L base ε)",
+          "i": 30
+        }
+      ],
+      "active": false
+    },
+    "N03RootEndpointMaterialJets": {
+      "lines": 202,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-21/quantitative/primitive-route/reconstructed/N03RootEndpointMaterialJets.lean",
+      "commit": "f98e15e4243d0d47a9d42fa40e64f60ed54691d3",
+      "blob": null,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N03ControlledRootUnitIdentification",
+        "ContinuousFlexibility.Analysis.N01RootChartAxisMaterialJets",
+        "ContinuousFlexibility.Analysis.N01RootDividedHeightMaterialJets",
+        "ContinuousFlexibility.Analysis.RootUnitPhysicalJetTransfer",
+        "ContinuousFlexibility.Analysis.N04FlowJetsProof"
+      ],
+      "legacyClauses": [
+        {
+          "l": "    (hfield : N04bFieldRegularity D S C L base ε)",
+          "i": 58
+        },
+        {
+          "l": "  have hfield' : N04bFieldRegularity D S C L rootBase η :=",
+          "i": 91
+        }
+      ],
+      "active": false
+    },
+    "N01RootEvenOddAxisMaterialJets": {
+      "lines": 219,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/quantitative/primitive-route/reconstructed/N01RootEvenOddAxisMaterialJets.lean",
+      "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
+      "blob": "454a8d18e9b0592dabf01d8a8995dc3576e7144e",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01RootInverseCoordinateAxisMaterialJets",
+        "ContinuousFlexibility.Analysis.RootOddAxisJets",
+        "ContinuousFlexibility.Analysis.RootChartExtension",
+        "ContinuousFlexibility.Analysis.RootChartSymmetry"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N01RootOddCoefficientMaterialValues": {
+      "lines": 182,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/quantitative/primitive-route/reconstructed/N01RootOddCoefficientMaterialValues.lean",
+      "commit": "50cae968a47ba361e30c427780c4ee16765768d4",
+      "blob": "7eac1d582f31ac64ea9fef0236cf0aa9ae45c793",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01RootSpeedPowerMaterialJets",
+        "ContinuousFlexibility.Analysis.RootFlowParameterUnscale",
+        "ContinuousFlexibility.Analysis.N01RootFieldLocalization",
+        "ContinuousFlexibility.Analysis.N01RootLabels",
+        "ContinuousFlexibility.Analysis.RootChartExtension",
+        "ContinuousFlexibility.Analysis.ActualRootChart"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "PositivePowerPolynomialMaterialJets": {
+      "lines": 137,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/quantitative/primitive-route/reconstructed/PositivePowerPolynomialMaterialJets.lean",
+      "commit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "blob": "b96ab8e2242b762952bf571b0583abcc010dcc00",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RootPowerJets",
+        "ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N03RootUnitScaleIdentification": {
+      "lines": 166,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/quantitative/primitive-route/reconstructed/N03RootUnitScaleIdentification.lean",
+      "commit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "blob": "4a2ada0572b9c2c534e7958a9b30e1c29929d433",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RootParameterUnscaleRegularity",
+        "ContinuousFlexibility.Analysis.N03FixedRootOrdinaryJets"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N01RootChartAxisMaterialJets": {
+      "lines": 281,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-21/quantitative/primitive-route/reconstructed/N01RootChartAxisMaterialJets.lean",
+      "commit": "f98e15e4243d0d47a9d42fa40e64f60ed54691d3",
+      "blob": "78c68e7f898bb2ca1f655631942b697ca2885263",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01RootOddPowerMaterialJets",
+        "ContinuousFlexibility.Analysis.PointwiseProductMaterialJets"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N01RootDividedHeightMaterialJets": {
+      "lines": 228,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/quantitative/primitive-route/reconstructed/N01RootDividedHeightMaterialJets.lean",
+      "commit": "50cae968a47ba361e30c427780c4ee16765768d4",
+      "blob": "b785c00878f9be9b1b79a446a58ac6c278174150",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01RootOddPowerMaterialJets",
+        "ContinuousFlexibility.Analysis.RootDividedHeight",
+        "ContinuousFlexibility.Analysis.PointwiseProductPolynomialMaterialJets"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "RootUnitPhysicalJetTransfer": {
+      "lines": 58,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/quantitative/primitive-route/reconstructed/RootUnitPhysicalJetTransfer.lean",
+      "commit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "blob": "5585fe17464c601e3ef931d94f3d03a3238ab131",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RootPhysicalJetTransfer"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N01RootInverseCoordinateAxisMaterialJets": {
+      "lines": 233,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-18/quantitative/primitive-route/reconstructed/N01RootInverseCoordinateAxisMaterialJets.lean",
+      "commit": "456cd39af7215e75d7b1e8530ea749e7440ba57e",
+      "blob": "a29f80c8047e953ff0afdb58277d53a1c70fd4b1",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01RootStationaryFlowMaterialJets",
+        "ContinuousFlexibility.Analysis.N01RootLabelUniformJets",
+        "ContinuousFlexibility.Analysis.ActualRootChart"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "RootOddAxisJets": {
+      "lines": 165,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/quantitative/primitive-route/reconstructed/RootOddAxisJets.lean",
+      "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
+      "blob": "f9c5871e0ad42f5d56e532fcdb111b22566e46e3",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RootEvenAxisJets",
+        "ContinuousFlexibility.Analysis.RootOddBounds"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N01RootSpeedPowerMaterialJets": {
+      "lines": 204,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-16/quantitative/primitive-route/reconstructed/N01RootSpeedPowerMaterialJets.lean",
+      "commit": "0db1a62e32efbba45f732812fc085ac6d6f6c3d3",
+      "blob": "31856ff7b5c296a3544b15648b025cb52a1f4c97",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01RootFactorPowerMaterialJets",
+        "ContinuousFlexibility.Analysis.N01RootDriftAxisMaterialJets",
+        "ContinuousFlexibility.Analysis.PointwiseProductPolynomialMaterialJets"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "RootFlowParameterUnscale": {
+      "lines": 81,
+      "path": "drafts/N04Coordinates-recovery-20261112/rescue-after-1058/quantitative/RootFlowParameterUnscale.lean",
+      "commit": "456cd39af7215e75d7b1e8530ea749e7440ba57e",
+      "blob": "99e5175e3bc217ba0ec1c34e4d444e1b7bfe81e0",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RootScaledInverseCoordinate"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "RootParameterUnscaleRegularity": {
+      "lines": 134,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-12/quantitative/primitive-route/reconstructed/RootParameterUnscaleRegularity.lean",
+      "commit": "08f54fa0f2826963980a9fcfe15090d501718e12",
+      "blob": "fa603a5960bb0184e596256e97759f5042a886f3",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RootPhysicalModelParameterUnscale",
+        "ContinuousFlexibility.Analysis.RootChartExtensionGeometry"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "PointwiseProductPolynomialMaterialJets": {
+      "lines": 85,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/quantitative/primitive-route/reconstructed/PointwiseProductPolynomialMaterialJets.lean",
+      "commit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "blob": "c2eef2dac4cf079d6ad8da950038309b7714261d",
+      "imports": [
+        "ContinuousFlexibility.Analysis.PointwiseProductMaterialJets",
+        "ContinuousFlexibility.Analysis.FlowJetMaterialClosure",
+        "ContinuousFlexibility.Analysis.FlowJetPartitionPolynomial"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N01RootStationaryFlowMaterialJets": {
+      "lines": 178,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-16/quantitative/primitive-route/reconstructed/N01RootStationaryFlowMaterialJets.lean",
+      "commit": "0db1a62e32efbba45f732812fc085ac6d6f6c3d3",
+      "blob": "e293462c4d23525fb524c187450c5586e774a1e7",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01RootSpeedPowerMaterialJets",
+        "ContinuousFlexibility.Analysis.N01RootFieldLocalization",
+        "ContinuousFlexibility.Analysis.RootFlowParameterUnscale",
+        "ContinuousFlexibility.Analysis.RootStationaryInverseMaterialJets"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N01RootLabelUniformJets": {
+      "lines": 182,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-17/quantitative/primitive-route/reconstructed/N01RootLabelUniformJets.lean",
+      "commit": "62fd35116408c35e0e565addea82100f07fa19b2",
+      "blob": "9dc5ce481f7e3cdf9c3411f0052bf446626fe9aa",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ReturnUniformPositiveJets",
+        "ContinuousFlexibility.Analysis.N01RootLabels"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "RootEvenAxisJets": {
+      "lines": 138,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-18/quantitative/primitive-route/reconstructed/RootEvenAxisJets.lean",
+      "commit": "456cd39af7215e75d7b1e8530ea749e7440ba57e",
+      "blob": "2c922e1288ef2eb351f3622ceb14e83b0057a128",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RootEvenInteriorBounds",
+        "ContinuousFlexibility.Analysis.RootExtensionPhysicalBounds"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N01RootFactorPowerMaterialJets": {
+      "lines": 148,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-16/quantitative/primitive-route/reconstructed/N01RootFactorPowerMaterialJets.lean",
+      "commit": "0db1a62e32efbba45f732812fc085ac6d6f6c3d3",
+      "blob": "aedbff50a4eb54bd08f26c95d85919ea2fd5d3b5",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01RootFactorAxisGlobalJets",
+        "ContinuousFlexibility.Analysis.N01RootFactorAxisMaterialInverse",
+        "ContinuousFlexibility.Analysis.PositivePowerPolynomialMaterialJets",
+        "ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels",
+        "ContinuousFlexibility.Analysis.CanonicalStateInterpolation"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N01RootDriftAxisMaterialJets": {
+      "lines": 136,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-15/quantitative/primitive-route/reconstructed/N01RootDriftAxisMaterialJets.lean",
+      "commit": "71fd2c8ba445c4fa595f823339912f3d55744631",
+      "blob": "68c96fcf81ab844826ffaaa8e8e6065a7893c749",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01CharacteristicDriftMaterialJets",
+        "ContinuousFlexibility.Analysis.N01ActualRootGeometry",
+        "ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "RootPhysicalModelParameterUnscale": {
+      "lines": 196,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-12/quantitative/primitive-route/reconstructed/RootPhysicalModelParameterUnscale.lean",
+      "commit": "08f54fa0f2826963980a9fcfe15090d501718e12",
+      "blob": "1faa730ba2eeb817ca0eade159949a05200e7d63",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RootFlowParameterUnscale",
+        "ContinuousFlexibility.Analysis.RootDividedHeight",
+        "ContinuousFlexibility.Analysis.OpenGermBoundaryJets"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "RootStationaryInverseMaterialJets": {
+      "lines": 163,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-12/quantitative/primitive-route/reconstructed/RootStationaryInverseMaterialJets.lean",
+      "commit": "08f54fa0f2826963980a9fcfe15090d501718e12",
+      "blob": "33272bc9a03295ba5d7a255bc07b40b565923877",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RootStationaryMaterialJets",
+        "ContinuousFlexibility.Analysis.ParameterizedInverseStateJets"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N01ReturnUniformPositiveJets": {
+      "lines": 161,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-17/quantitative/primitive-route/reconstructed/N01ReturnUniformPositiveJets.lean",
+      "commit": "62fd35116408c35e0e565addea82100f07fa19b2",
+      "blob": "33a48e444ee7fa43ec32f851bbd55df6b0d63442",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ReturnInverseJets",
+        "ContinuousFlexibility.Analysis.MaterialSampleBounds"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N01RootFactorAxisGlobalJets": {
+      "lines": 64,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/quantitative/primitive-route/reconstructed/N01RootFactorAxisGlobalJets.lean",
+      "commit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "blob": "bb630b104d353a5f39a2138ee70f446e5df95ecb",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01DiscriminantGlobalJets",
+        "ContinuousFlexibility.Analysis.RootCoefficientAxisDivision"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N01RootFactorAxisMaterialInverse": {
+      "lines": 143,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-15/quantitative/primitive-route/reconstructed/N01RootFactorAxisMaterialInverse.lean",
+      "commit": "71fd2c8ba445c4fa595f823339912f3d55744631",
+      "blob": "752db04b3a64673ce8cf3dea02c1fc06053c6477",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01RadialCoefficientMaterialInverse",
+        "ContinuousFlexibility.Analysis.N01ActualRootGeometry",
+        "ContinuousFlexibility.Analysis.RootOpticalEndpointLower",
+        "ContinuousFlexibility.Analysis.RootCoefficientDivision"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N01CharacteristicDriftMaterialJets": {
+      "lines": 153,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-15/quantitative/primitive-route/reconstructed/N01CharacteristicDriftMaterialJets.lean",
+      "commit": "71fd2c8ba445c4fa595f823339912f3d55744631",
+      "blob": "0d3588267eb6bb57ac977025a0f2603dea2667a3",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01RadialCoefficientPowerMaterialJets",
+        "ContinuousFlexibility.Analysis.PointwiseProductPolynomialMaterialJets",
+        "ContinuousFlexibility.Analysis.N04bOpticalCoefficientVariation",
+        "ContinuousFlexibility.Analysis.OneSidedOrdinaryJets"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "RootStationaryMaterialJets": {
+      "lines": 158,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-12/quantitative/primitive-route/reconstructed/RootStationaryMaterialJets.lean",
+      "commit": "08f54fa0f2826963980a9fcfe15090d501718e12",
+      "blob": "3e1dc27c0215f94a11692248df292d1594e6cc57",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RootStationaryFlowJetPolynomial",
+        "ContinuousFlexibility.Analysis.RootRescaledFieldJets",
+        "ContinuousFlexibility.Analysis.FlowJetMaterialClosure"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N01DiscriminantGlobalJets": {
+      "lines": 100,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/quantitative/primitive-route/reconstructed/N01DiscriminantGlobalJets.lean",
+      "commit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "blob": "baa7ace9728f02836699a4d598145f505706e88d",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01OriginalCoefficientGlobalJets",
+        "ContinuousFlexibility.Analysis.CoefficientDiscriminantMaterialBounds",
+        "ContinuousFlexibility.Analysis.CanonicalStateInterpolation"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "RootCoefficientAxisDivision": {
+      "lines": 103,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/quantitative/primitive-route/reconstructed/RootCoefficientAxisDivision.lean",
+      "commit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "blob": "e9a784cfbbc14106f74928f77cace144ff97addc",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RootCoefficientDivision",
+        "ContinuousFlexibility.Analysis.RootShiftMixedJets",
+        "ContinuousFlexibility.Analysis.CylinderMixedJetNorms",
+        "ContinuousFlexibility.Analysis.OneSidedOrdinaryJets"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N01RadialCoefficientMaterialInverse": {
+      "lines": 145,
+      "path": "drafts/N04Coordinates-recovery-20261112/quantitative/primitive-route/reconstructed/N01RadialCoefficientMaterialInverse.lean",
+      "commit": "20854f91f48a59f7ba5f6f0ab592a0543c442141",
+      "blob": "4aced4b7ac973d750dcf4c206c78fea2b9322150",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectionVelocityBounds",
+        "ContinuousFlexibility.Analysis.N01ReferenceOpticalCollars",
+        "ContinuousFlexibility.Analysis.MaterialSampleRadialPolynomial"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N01RadialCoefficientPowerMaterialJets": {
+      "lines": 128,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/quantitative/primitive-route/reconstructed/N01RadialCoefficientPowerMaterialJets.lean",
+      "commit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "blob": "65dba3f278439d4bb0acfff3cedb3bc4ac076d48",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01OriginalCoefficientOrdinaryGlobalJets",
+        "ContinuousFlexibility.Analysis.N01RadialCoefficientMaterialInverse",
+        "ContinuousFlexibility.Analysis.PositivePowerPolynomialMaterialJets",
+        "ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels",
+        "ContinuousFlexibility.Analysis.CanonicalStateInterpolation"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "RootOpticalEndpointLower": {
+      "lines": 123,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/quantitative/primitive-route/compatibility/root-optical-limit-closure/RootOpticalEndpointLower.lean",
+      "commit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "blob": "a128488bcd037bac244c3011dbe641a27e38969b",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RootCharacteristicFactor"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "RootStationaryFlowJetPolynomial": {
+      "lines": 223,
+      "path": "drafts/N04Coordinates-recovery-20261112/rescue-after-1058/quantitative/RootStationaryFlowJetPolynomial.lean",
+      "commit": "456cd39af7215e75d7b1e8530ea749e7440ba57e",
+      "blob": "51bd8708147723a1a0aa8b92b8b4a5f309f37a8a",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04FlowPolynomialBounds",
+        "ContinuousFlexibility.Analysis.RootFlowSymmetry"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N01OriginalCoefficientGlobalJets": {
+      "lines": 187,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/quantitative/primitive-route/reconstructed/N01OriginalCoefficientGlobalJets.lean",
+      "commit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "blob": "88e29ac239d06438ee9ac5c03ef9d88c821d5699",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01CoefficientValueJets",
+        "ContinuousFlexibility.Analysis.N01OpticalCollarPositivity",
+        "ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope",
+        "ContinuousFlexibility.Analysis.LocalMixedProductBounds"
+      ],
+      "legacyClauses": [],
+      "active": false
+    },
+    "N01OriginalCoefficientOrdinaryGlobalJets": {
+      "lines": 55,
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/quantitative/primitive-route/reconstructed/N01OriginalCoefficientOrdinaryGlobalJets.lean",
+      "commit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "blob": "c2aab4a1827e96bb86ff2d363b6649bfcf04d9b9",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01OriginalCoefficientGlobalJets",
+        "ContinuousFlexibility.Analysis.CylinderMixedJets"
+      ],
+      "legacyClauses": [],
+      "active": false
+    }
+  }
+}
