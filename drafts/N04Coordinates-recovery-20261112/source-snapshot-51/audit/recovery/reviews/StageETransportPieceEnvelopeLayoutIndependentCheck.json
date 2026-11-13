@@ -1,0 +1,174 @@
+{
+  "schema": "N04-stageE-piece-envelope-implementation-layout-independent-check-v1",
+  "artifact_path": "audit/recovery/reviews/StageETransportPieceEnvelopeLayoutIndependentCheck.json",
+  "reviewer": "/root/audit_coordinates",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "date_utc": "2026-11-13",
+  "status": "PASS_EXECUTABLE_MATHEMATICAL_LAYOUT_NO_SOURCE_IMPLEMENTED_OR_COMPILED",
+  "reviewed_layout": {
+    "blob": "764ae5fef60e97e09deeaf621df9858e744feee3",
+    "sha256": "3f0dacdecb09039b2a8dd9bfa39cf61574aff73c4dc8a873f9cd2941259da5b5",
+    "bytes": 38655,
+    "estimated_Lean_lines": 385
+  },
+  "pins": {
+    "actual_source_head": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+    "actual_source_tree": "f6bf0e9e425b2b0c019a1026ccbbfd0bf742c700",
+    "mathlib": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "source_graph_reused": "6d4933e47763157649c2ccafdfd67b05f74809a6",
+    "new_graph_built": false,
+    "direct_provider_identity_records_checked": 13,
+    "mismatches": []
+  },
+  "verdict": "No missing mathematical hypothesis was found in the displayed planned header. The geometry-only extraction is valid for the identified subproofs, and the actual positive-order suppliers suffice. This is a source-backed feasibility check, not a review of a new 385-line Lean implementation.",
+  "preserved_objects": [
+    "D",
+    "T",
+    "S",
+    "C",
+    "L",
+    "K",
+    "base",
+    "epsilon",
+    "fixed admissible z",
+    "K.cell m",
+    "T.sample (K.cell m)"
+  ],
+  "domain_check": {
+    "z_ref": "(C.referenceState,0)",
+    "z_current": "liftSectorParameter S C z",
+    "W": "referencePhysicalPieceOpen S K m",
+    "V": "canonicalOpen S K m",
+    "Omega_current": "physicalPieceOpen S K (liftSectorParameter S C z) m",
+    "reference_membership": "reference_mem_stateNeighborhood S C base hε",
+    "reference_sector": "hrefState.stateSector",
+    "current_membership": "liftSectorParameter_mem_stateNeighborhood (C := C) hz le_rfl",
+    "current_sector": "hrefState.liftSectorParameter_sector z",
+    "forward_map": "hgeom.charts at reference, rewritten by hgeom.referenceDomain, gives MapsTo F W V and ContDiffOn F W.",
+    "inverse_map": "hgeom.charts at the lifted current parameter gives MapsTo G V Omega_current and ContDiffOn G V.",
+    "forbidden_identification": "No use is made of Omega_current = W; G(F p) is evaluated in the genuine current physical piece."
+  },
+  "actual_suppliers": {
+    "reference_H": "n07aPhysicalJetField K zref m (2 : Fin 6) is literally K.height zref m. n07a_referencePhysicalJetFields_fixedEnvelope hD hT href hphysical 2 gives its all-order envelope. Smoothness is provided by n07a_physicalJetField_smooth_of_atoms using href.1, or by reference hgeom.charts.",
+    "reference_F": "n07a_physicalChart_positive_fixedEnvelope uses the actual reference physical fields, href.1, and the two strict interval inequalities from hgeom.referenceBounds. It reconstructs the original F with its actual radial length and angular identity.",
+    "current_G": "n07a_inverseChart_positive_jets hD hT href hcur hinterval hphysical chooses one loss before n. At fixed z, multiply each sampled envelope by the finite nonnegative scalar 1+parameterGrading S ((n-1)+loss) z; const/mul retain N07aSampleSubpower T K.",
+    "current_R": "n07a_canonicalAtomFields_sampleJetBounds at .sourceFactorInverse, followed by n07a_fixedJetEnvelope_of_sampleJetBounds and n07a_canonicalAtomField_smooth, supplies canonical R orders including zero.",
+    "inverse_jacobian": "n07a_actual_inverseChart_jacobian_abs already takes hgeom. Its proof uses actual two-sided inverse differential identities, hgeom.domains and hgeom.charts only.",
+    "determinant_envelope": "n07a_planeJacobian_fixedEnvelope_of_positiveJets plus .abs uses only positive G jets and qualitative nonzero determinant. No quantitative determinant lower bound or reciprocal determinant estimate is required."
+  },
+  "geometry_only_extraction": {
+    "reviewed_templates": [
+      "n07a_currentInverseChart_positive_fixedEnvelope",
+      "n07a_currentCanonicalHeightInverse_fixedJetEnvelope",
+      "n07a_canonicalHeightInverse_eq_sourceFactorInverse"
+    ],
+    "uses_outside_h04_geometry_found": false,
+    "exact_algebra": "On V, R(y)=(H_current(G y)/|J_Fcurrent(G y)|)^(-1), and |J_G(y)|=|J_Fcurrent(G y)|^(-1), hence R(y)*|J_G(y)|=(H_current(G y))^(-1).",
+    "nonzero_inputs": "Both H_current(G y)>0 and J_Fcurrent(G y)≠0 come from hgeom.charts at the actual mapped point G y.",
+    "necessary_explicit_local_result": "Also return ContDiffOn of y ↦ (H_current(G y))^(-1) on V. Derive it by composing the actual height smoothness with G and its MapsTo, then inv using the actual positive height. Do not infer smoothness from a numerical envelope.",
+    "cyclic_wrappers_excluded": true,
+    "no_N04Properties_extra_fields_used": true
+  },
+  "order_and_type_check": {
+    "F": "positive orders 1..2 only",
+    "G": "positive orders 1..3 only for requested final prefix",
+    "H_reference": "orders 0..2",
+    "sourceFactorInverse_R": "orders 0..2",
+    "determinant_absolute": "orders 0..2 from G through order 3",
+    "Q": "Q=H_reference*((R*|J_G|)∘F) on W; standard envelope comp permits outer order zero, which is genuinely supplied.",
+    "tau": "tau=G∘F; use the positive-only partition argument for n>0. For each OrderedFinpartition n, length_pos hn and partSize_pos supply the required strictly positive outer/inner orders.",
+    "zero_angle_bound_required": false,
+    "zero_inner_F_norm_bound_required": false,
+    "value_membership_in_place_of_value_norm": "The only zeroth-order use of F is F p∈V, used to apply outer bounds at the actual point; no norm bound on F p or G y is introduced.",
+    "partial_function_note": "For the final literal Q and tau functions, use explicit full-function equality or open EqOn/congr. Do not rely on unfolding an unapplied composition under iteratedFDeriv.",
+    "local_instances": "Reuse the actual N07a nonlinear parameter/direction local instance stanza and open scoped ContDiff/BigOperators from the cited suppliers; these are typing setup, not new hypotheses."
+  },
+  "quantifier_check": {
+    "final_order": "fixed original data and admissible z; choose e_z; then forall m,p,n in the displayed finite prefix",
+    "finite_aggregation": "e_z(m)=1+sum over Fin 3 of Q-order envelopes + sum over Fin 2 of tau-order (j+1) envelopes.",
+    "common_envelope_properties": "const/add/finset_sum preserve N07aSampleSubpower for the same T,K; nonnegative summands give e_z≥1 and each finite-order bound.",
+    "no_piecewise_choice_after_point": true,
+    "no_change_of_low_base_or_neighborhood": true,
+    "no_new_E0_ge_one_assumption": true,
+    "no_new_sample_or_opposite_half_index": true
+  },
+  "sources_read": {
+    "full_sources": [
+      [
+        "N07aAngularReferenceJetEnvelopes",
+        "6b2b982c1ad616c4a8b76d9c0b5fd4e20e706fc8"
+      ],
+      [
+        "N07aAngularJacobianEnvelope",
+        "81b85e8973a267426cc6311dc5ad0f32c28b69fa"
+      ],
+      [
+        "N07aAngularFixedJetEnvelope",
+        "66d54099e14b61ba98b641c1016f9ee06641e117"
+      ],
+      [
+        "N07aAngularPhysicalJetEnvelopes",
+        "9be1d650e38c5d4b754faa154feae2b3de0812a6"
+      ],
+      [
+        "N07aInverseChartBounds",
+        "bbc8e6acd60fdb4937b7ca75611a028d0511ba73"
+      ],
+      [
+        "N07aCanonicalAtomBounds",
+        "7f58525255a1dd409689e8b21ba4bab30a4af3c5"
+      ],
+      [
+        "OneHighCompositionJets",
+        "55ee6f621f2b0a63a723dfdceab93144234f9ab4"
+      ],
+      [
+        "N07aActualChartDifferentials",
+        "39c494529007bf113837fc8142b36db76bac3b89"
+      ],
+      [
+        "N07aGeometryLengthBounds",
+        "2c336c9315bc5aa70efc149544448e30a2be0967"
+      ],
+      [
+        "N07aSampleEnvelopes",
+        "0cc657b5ea25b922a5676dc0a8c0f6dbda938ba7"
+      ]
+    ],
+    "exact_relevant_definition_and_proof_excerpts": [
+      [
+        "Nonlinear",
+        "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+        "canonicalSource, canonicalCurrentPoint, full CanonicalGeometry fields, actual atom, ReferenceJets, CurrentJets"
+      ],
+      [
+        "N07aAngularPhysicalCoefficients",
+        "51386a765453a0734f010b8546309b4299b0af3a",
+        "actual six physical fields, unit identity"
+      ],
+      [
+        "SolveReturnEquations",
+        "79f7407854a3dea4f22ebf924f1a074265e878dc",
+        "reference and lifted sector, lifted neighborhood proofs"
+      ],
+      [
+        "StateNeighborhood",
+        "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+        "reference membership proof"
+      ]
+    ]
+  },
+  "implementation_notes": [
+    "The advertised 1..3 / 0..2 order table is the genuinely needed finite prefix. The existing all-order suppliers can be specialized to that prefix without changing the mathematical assumptions.",
+    "The proposed private helpers must return their local smoothness/maps explicitly where comp/mul require them; numerical envelopes alone do not supply these hypotheses.",
+    "Finite choices are after z and derivative order but before m and spatial points. The final finite sum removes derivative-order dependence from e_z.",
+    "Estimated 385 lines is a planning estimate only; exact Lean elaboration and line budget remain for the later authorized source and CI.",
+    "This leaf remains a reference-open-piece estimate. Global transport identification, sample-to-physical absorption and AE extension are separate parent-owned steps."
+  ],
+  "missing_mathematical_premises": [],
+  "source_written": false,
+  "Lean_or_lake_run": false,
+  "new_import_graph_built": false,
+  "CI_or_refs_touched": false,
+  "budget_authorization": "No new Lean authorized or written in this review."
+}

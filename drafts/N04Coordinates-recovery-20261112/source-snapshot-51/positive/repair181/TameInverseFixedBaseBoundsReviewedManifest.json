@@ -1,0 +1,101 @@
+{
+  "schema": "n04-reviewed-ci-repair-owner/v1",
+  "status": "SOURCE_REVIEWED_ONLY_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "path": "positive/repair181/TameInverseFixedBaseBoundsReviewedManifest.json",
+  "intended_module": "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds",
+  "base": {
+    "ref": "8a8082de2b905bb3f4abe5756c02083043c93970",
+    "tree": "c750b137383bf740f66f33c40412f7aa003fa862",
+    "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+    "git_blob": "9fdff8588082a748f33628a53f259a471b7b5f9d",
+    "sha256": "7f2932953ad3ddd1f983e812118f80db544b5c8e6acdeeb15645f4e69c35e7e3",
+    "utf8_bytes": 18586,
+    "lines": 349,
+    "final_newline": true
+  },
+  "selected": {
+    "path": "positive/repair181/TameInverseFixedBaseBounds.lean",
+    "git_blob": "0ebea7f59395ec005429f835a0d1a5110d4dcab9",
+    "sha256": "53b542af8c6bc563cbf67e92eeb2b393dae22e63488b7df8b362375deac94197",
+    "utf8_bytes": 18617,
+    "lines": 349,
+    "final_newline": true
+  },
+  "candidate_manifest": {
+    "path": "positive/repair181/TameInverseFixedBaseBoundsCandidateManifest.json",
+    "git_blob": "63f5ef223d0f162e408adcce2ec69ea607a4421b",
+    "sha256": "2197e997cd3dec3070cee8317c8916dcc998d91c4494772e57b8eae066066484",
+    "utf8_bytes": 8659,
+    "lines": 115,
+    "final_newline": true
+  },
+  "exact_patch": {
+    "path": "positive/repair181/TameInverseFixedBaseBounds.patch",
+    "git_blob": "161d3f46a3f20bfc21580bcc9986bd6fe1e2e44b",
+    "sha256": "70c64d53f72d780704cc70a6cad02262bd576f779b1d816cb86a2ccca0eb5855",
+    "utf8_bytes": 804,
+    "lines": 11,
+    "final_newline": true
+  },
+  "independent_review": {
+    "path": "quantitative/recovery/reviews/CI181TameInverseFixedBaseBoundsIndependentReview.json",
+    "git_blob": "e8fef010ca91f7436378114422e83946165c9321",
+    "sha256": "d54b0f665ccafa7e5e21ea11ea2d023c1b6ea8c765c27fc0a559498023667562",
+    "utf8_bytes": 7420,
+    "lines": 140,
+    "final_newline": true,
+    "reviewer": "/root/quantitative_route",
+    "result": "PASS_SOURCE_AND_EXACT_DELTA_NOT_COMPILED",
+    "full_receipt_read_and_verified_by_owner": true
+  },
+  "selection_decision": "Select only source0ebea7f59395ec005429f835a0d1a5110d4dcab9 for the next CI. The exact single-line inner pairGrading_apply expansion is approved by the independent full-source/delta review. No compilation result is claimed.",
+  "same_objects": "J,V,e,i,C,K,P and high=s+(n+forwardLoss), operatorBase, induction losses and the fixed base before all n remain unchanged. No provider, import, witness, resource or public contract changes.",
+  "mechanical": {
+    "all_four_complete_headers_unchanged": true,
+    "public_headers": 1,
+    "private_headers": 3,
+    "unique_replacement": true,
+    "forward_reverse_reconstruction_exact": true,
+    "all_other_bytes_unchanged": true,
+    "imports_options_unchanged": true,
+    "added_lines": 1,
+    "deleted_lines": 1,
+    "net_lines": 0
+  },
+  "diagnostic": {
+    "round": 181,
+    "source_errors": 1,
+    "complete_error_json": {
+      "git_blob": "3360e504e84c36fe0c1774a576090bc089704630",
+      "sha256": "d113a1c7aca05b3256aa16c732a6a7457245c5637730b551d91d6a0a1a678f88"
+    },
+    "complete_quicklog_sha256": "987b95aec041e1f3f8d945da163ff38c5bf40b832493f25c9a0520cc6ad73f50",
+    "trailing_build_summary_lines_not_counted_as_errors": 2
+  },
+  "history": {
+    "previous_owner": "56d6e9a33053e6b7d2e64df9edf5a50b54250a11",
+    "previous_peer": "cd21ba8871960322d962d7dacb397ed20ca24a41",
+    "note": "Prior static reviews remain historical. The actual CI181 failure is preserved; this successor addresses only its final nested ring goal. No previous pass is converted into a compilation claim."
+  },
+  "budget": {
+    "selected_lines": 349,
+    "net_source_change": 0,
+    "conservative_uncompiled_draft_bound": 19957,
+    "new_credit": 0
+  },
+  "persistence": {
+    "source_candidate_patch_git_exact_readbacks": true,
+    "peer_git_readback_and_hash": true,
+    "local_write": "NOT_CONFIRMED: exec-server disconnected while the local generation command was starting. This owner record is persisted by Git blob; no successful local write is claimed.",
+    "no_refs_or_commits_by_owner": true
+  },
+  "restrictions": {
+    "local_Lean_or_elaboration": false,
+    "CI_queries_or_downloads": false,
+    "active_edits": false,
+    "index_or_ref_operations": false
+  },
+  "remaining_gate": "The parent may stage this exact reviewed source. Only the next complete CI can establish compilation; full-J source authorization remains separate."
+}

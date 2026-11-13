@@ -1,0 +1,56 @@
+{
+  "schema": "N04-reviewed-source-only-repair-staging-v1",
+  "ci_round": 181,
+  "commit": "8a8082de2b905bb3f4abe5756c02083043c93970",
+  "tree": "c750b137383bf740f66f33c40412f7aa003fa862",
+  "parent": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+  "complete_green": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+  "complete_green_evidence": "5980c2ba762512f9ea495cfe101031ec4c8b0a4e",
+  "failure": "a781bcc23edb7bff25251b7aee646633de6f6690",
+  "complete_errors": "de707e9723b06179cd9d44ef18acdbe2a445e4f4",
+  "repairs": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+      "before": "083d926c2e2bd91323a068b40e93dc93117f9779",
+      "after": "9fdff8588082a748f33628a53f259a471b7b5f9d",
+      "before_lines": 349,
+      "after_lines": 349,
+      "owner_candidate": "7506e78879e649bf38a6dfc5a85d239adc5e966e",
+      "peer": "cd21ba8871960322d962d7dacb397ed20ca24a41",
+      "peer_status": "PASS_SOURCE_REVIEW_ONLY_NOT_COMPILED"
+    }
+  ],
+  "git_parent_diff": {
+    "paths": 1,
+    "added": 2,
+    "deleted": 2,
+    "net": 0
+  },
+  "git_green_diff": {
+    "paths": 131,
+    "added": 19543,
+    "deleted": 0
+  },
+  "whole_root_lag": 396,
+  "generated_imports": 4637,
+  "checked_imports": 4241,
+  "conservative_budget": 19939,
+  "limit": 20000,
+  "all_public_private_heads_imports_options_unchanged": true,
+  "main_rules_checked": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "new_Lean_sources_staged": 0,
+  "draft_budget": {
+    "current": 19957,
+    "remaining": 43,
+    "credit_only_after_repaired_fixed131_complete_green": {
+      "lines": 681,
+      "components": [
+        332,
+        349
+      ],
+      "original_counted_provenance": "0b4fc88a7cc2b1e8d7ca4f7f0e97b9d96885cdb5",
+      "result": 19276
+    }
+  },
+  "published_by": "connected GitHub API with local/API tree equality and non-force expected-head check"
+}

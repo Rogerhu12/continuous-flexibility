@@ -1,0 +1,13 @@
+{
+  "snapshot": 50,
+  "branch": "refs/heads/backup/N04Coordinates-recovery-20261112-0755",
+  "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
+  "tree": "b52ac16e64af6929da5c46ca3c501f2598d7a0fb",
+  "index": "1afcc61e7f4dc57c6e42742d8661fe516acdb142",
+  "record": "0618db4a427a8ceca4c9ca6111be9e7577844211",
+  "pushed_readback": "2026-11-13T00:53:49.458831+00:00",
+  "indexed_artifacts": 3273,
+  "blob_paths": 6507,
+  "outside_archive_exact_green_paths": 4802,
+  "compiled_baseline": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30"
+}

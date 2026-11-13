@@ -1,0 +1,1848 @@
+{
+  "schema": "N04-fixed-second-batch-conditional-execution-independent-review-v1",
+  "artifact_path": "audit/recovery/reviews/FixedBaseSecondBatchConditionalExecutionIndependentReview.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "reviewer": "/root/audit_coordinates",
+  "date_utc": "2026-11-13",
+  "status": "PASS_CONDITIONAL_SOURCE_ONLY_PLAN_REVIEW_ACTIVATION_BLOCKED_PENDING_REVIEWED_SUCCESSOR_FULL_GREEN",
+  "conclusion": "The finite 106-source selection, exact CI180 parent preimages, nine shared migrations and actual consumers, owner/peer provenance within the stated limitations, projected imports, explicit-name checks, and conservative 18549-line budget pass this independent read-only review. CI180 subsequently failed; this is not an authorization to activate the unchanged CI180 anchor. A reviewed inverse-only successor must be rebound and reach complete full green before the parent stages the group.",
+  "reviewed_inputs": [
+    {
+      "kind": "finite_source_plan",
+      "blob": "d5e3166592308c414a60214aa41c3b51bec2f9a1",
+      "sha256": "db7c5087d05250d0207c2d160db58ff443d17a73c89c697570a22446c00f3c05",
+      "bytes": 738878
+    },
+    {
+      "kind": "actual_CI180_anchor",
+      "blob": "d2d84bc129b92081530d9b9592d59477b59f3b19",
+      "sha256": "2b6adcab4116d50b208664eb4116dad764d8d71d2c42a087f3122c6aaf8ef6f8"
+    },
+    {
+      "kind": "projected_import_graph",
+      "blob": "6d4933e47763157649c2ccafdfd67b05f74809a6",
+      "sha256": "14d2524b5a9b6f3b1b7779bca8a05b2d41087fde52098aea8f0a7ed29a753c5f",
+      "bytes": 3255900
+    },
+    {
+      "kind": "historical_four_owned_charge",
+      "blob": "ba05d8a380c5b2c42c61cabcc3d24cc3419ace7c",
+      "sha256": "8c6927e7ed7bdadc6794139518857fc013d9501cf12ded441f294a73cb3b2313"
+    },
+    {
+      "kind": "prior_fixed518_selection_review_reused_for_stated_scope",
+      "blob": "da6cfb498fcfd4d13a87a453929383ff783e9306",
+      "sha256": "8d7d7351a833f696cb806737041338d3cad43cdbbb123ab33d261fa46d587185"
+    }
+  ],
+  "exact_pins": {
+    "actual_parent_head": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+    "actual_parent_tree": "f6bf0e9e425b2b0c019a1026ccbbfd0bf742c700",
+    "structural_baseline_head": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+    "structural_baseline_tree": "4df6517d5b3c92f5a366501af217c4471d0f23f8",
+    "upstream_main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "upstream_main_tree": "d15c0a9504d0fc417bbcd7373995dbf85f1e2560",
+    "mathlib": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "lean": "v4.35.0-rc3",
+    "local_actual_head_checked": true,
+    "later_CI181_parent_report_only": {
+      "head": "8a8082de2b905bb3f4abe5756c02083043c93970",
+      "tree": "c750b137383bf740f66f33c40412f7aa003fa862",
+      "source_change": "Parent reports an independently reviewed, zero-net-line, explicit harg type repair of TameInverseFixedBaseBounds.",
+      "status": "Pushed according to parent; no CI query or complete-green assertion by this reviewer.",
+      "scope": "Not silently substituted into this receipt's independently checked CI180 graph. Exact final inverse blob, peer and owner must be bound by a successor metadata addendum."
+    }
+  },
+  "finite_selection": {
+    "source_entries": 106,
+    "new_paths": 97,
+    "shared_updates": 9,
+    "original_fixed_group_entries": 105,
+    "independent_AE44_addon_entries": 1,
+    "every_source_Git_SHA1_SHA256_UTF8_bytes_lines_and_imports_independently_checked": true,
+    "new_paths_confirmed_absent": 97,
+    "shared_preimages_confirmed_exact": 9,
+    "all_source_paths_in": "src/ContinuousFlexibility/Analysis/",
+    "all_modes": "100644",
+    "all_types": "blob",
+    "duplicate_paths": [],
+    "unexpected_paths": [],
+    "generated_root_or_controls_in_source_entries": false,
+    "main_literal_source_objects": {
+      "new_paths": 92,
+      "shared_after_sources": 9
+    },
+    "owned_sources": 4,
+    "addon_sources": 1,
+    "exact_finite_source_list_json_sha256": "8bdcd6f8958916d8ff706cf2026a158350c39761906d1c95f48b8531c7fb2098",
+    "exact_finite_source_list": [
+      {
+        "module": "ContinuousFlexibility.Analysis.AngularJetExpansion",
+        "path": "src/ContinuousFlexibility/Analysis/AngularJetExpansion.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "378681efb075b8e1c6edbb90534f9f2e568b3fda",
+        "sha256": "4b8ebda88d548a589a7243db5c4570c34d0fea63c3bfd99a956044a270a5baf8",
+        "bytes": 9089,
+        "lines": 196
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleAverageCompositionSmoothTame",
+        "path": "src/ContinuousFlexibility/Analysis/CircleAverageCompositionSmoothTame.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "da25ed949924696c8c3f82e87ffc9e8117b20653",
+        "sha256": "28b004db87235200fbdae2c6c2af62af485d5c03928c04be09613bcdc85ede5c",
+        "bytes": 5901,
+        "lines": 123
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleAverageCompositionUniformBounds",
+        "path": "src/ContinuousFlexibility/Analysis/CircleAverageCompositionUniformBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "f5318c9c0ec92d723bc9d0445a7afc3bf1ceacea",
+        "sha256": "4543cd2ed85f8b0417b7ae163c011f584c34bb2b90a902fb96ed0009eb9ae76a",
+        "bytes": 2854,
+        "lines": 58
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleAveragedCompositionTame",
+        "path": "src/ContinuousFlexibility/Analysis/CircleAveragedCompositionTame.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "4ef5bd5826557652ed1200cf3c75ef6e6fce2b17",
+        "sha256": "2d4d8a887ede42e0be9871e98c67c0be1edb7d13eae43f744134beb9a5b78085",
+        "bytes": 9348,
+        "lines": 192
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleComponentContraction",
+        "path": "src/ContinuousFlexibility/Analysis/CircleComponentContraction.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "74e0d0a24a0e17fa62ccd3dbf9cb90a1a373ddbc",
+        "sha256": "e5ddaf8acc08507cd467459ed80518b8a41c92ba57553d546f05f18dd797e9f3",
+        "bytes": 6426,
+        "lines": 136
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleComponentMultiplier",
+        "path": "src/ContinuousFlexibility/Analysis/CircleComponentMultiplier.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "2868a6468360e0a7d72d2f71115140b9ec4aa365",
+        "sha256": "4224d331b25911bddb3f5c521481cc435df24ac07a85f7eca8018b1d6a88ee33",
+        "bytes": 7227,
+        "lines": 142
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleCompositionFaaBounds",
+        "path": "src/ContinuousFlexibility/Analysis/CircleCompositionFaaBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "8850d9427fb2e1b8104d6f477ef36ad3c5ff5651",
+        "sha256": "6c9c3e4eeccf6cba9829b225c9691e7c0d8b9fa2c91a12075e74319db44f2fd4",
+        "bytes": 12141,
+        "lines": 239
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleCompositionJetModels",
+        "path": "src/ContinuousFlexibility/Analysis/CircleCompositionJetModels.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "3877b674f0f5f1c154d7b754225e9e946032aff3",
+        "sha256": "7250c66e784f077b06a1415e8b3c93ab23b9fa9cf6de49fd9ff7d46f645fa8b6",
+        "bytes": 11957,
+        "lines": 241
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleCompositionJetNormBounds",
+        "path": "src/ContinuousFlexibility/Analysis/CircleCompositionJetNormBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "8310c830512499f3e12b4ac7bde09578f4800ae7",
+        "sha256": "a1710f290af0ca33f91169d8672cf98e64cb7d7b9ed00f5f22ac7d15b5846626",
+        "bytes": 10575,
+        "lines": 227
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleCompositionLineEnvelope",
+        "path": "src/ContinuousFlexibility/Analysis/CircleCompositionLineEnvelope.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "c03ee39cb8ed7ed4f76e70e1e3d43a9f172113aa",
+        "sha256": "be1776f2749e5bb07917d0d20e4303d315f6ab80229a5db8723fac95a1e8ad9b",
+        "bytes": 11805,
+        "lines": 237
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleCompositionLocalTame",
+        "path": "src/ContinuousFlexibility/Analysis/CircleCompositionLocalTame.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "33cc650b2ae7855379712f7ff7f9eb6c726141a6",
+        "sha256": "3814168aaaab94ee6419ee9204ae8191f7c4971103a271e10f60479a6b91bb05",
+        "bytes": 9184,
+        "lines": 207
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleCompositionMixedJets",
+        "path": "src/ContinuousFlexibility/Analysis/CircleCompositionMixedJets.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "4b29c76386563141ebe4cf0acd338fdb2f43565a",
+        "sha256": "eae145518b499919490fd8b437ade60154e639099cc33a17ce20f41ca3095886",
+        "bytes": 6148,
+        "lines": 124
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleCompositionSecondEnvelopes",
+        "path": "src/ContinuousFlexibility/Analysis/CircleCompositionSecondEnvelopes.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "99db4b83e1101bd1f9f13d921fb93fc7627e3991",
+        "sha256": "cb2e84c3c0cef2c3dc6a411a532f2db5b2eb4b2506c7c968b548436576ee0692",
+        "bytes": 10586,
+        "lines": 209
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleCompositionSmoothDirections",
+        "path": "src/ContinuousFlexibility/Analysis/CircleCompositionSmoothDirections.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "e18aa8ce1e77ebdc960d721a286e9ffdb7b58632",
+        "sha256": "aa517f48d3ea24278d0f4b7ef1b1a7e23547d22ee54b5cd09d1af73f8d259def",
+        "bytes": 5725,
+        "lines": 112
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleCompositionSmoothTame",
+        "path": "src/ContinuousFlexibility/Analysis/CircleCompositionSmoothTame.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "54058eb65074dda046b62af876a4a54a02e98b09",
+        "sha256": "c69215b26d3f2894c99802ab766f127edb3a523e9641e2a11d7c1db06a187204",
+        "bytes": 3619,
+        "lines": 80
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleCompositionTameBounds",
+        "path": "src/ContinuousFlexibility/Analysis/CircleCompositionTameBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "921b559a9d8c84d3cd6ceaa6ddeaaffc44de188c",
+        "sha256": "b2c59000f4170876a311bea6edd4bf131b2eaffb6d632d7d6bbe40903425599a",
+        "bytes": 13873,
+        "lines": 285
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleCompositionUniformBounds",
+        "path": "src/ContinuousFlexibility/Analysis/CircleCompositionUniformBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "c106d144ed51f41df90902c42a30c657ae361a33",
+        "sha256": "f054df7da7c0049e544541ca3c54b6231602dee260dccb35f1d46b9a55595fe4",
+        "bytes": 13856,
+        "lines": 266
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleCurveEnergyEnvelope",
+        "path": "src/ContinuousFlexibility/Analysis/CircleCurveEnergyEnvelope.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "cfe84746be5ffd69143b1318893f2e1addb36848",
+        "sha256": "e25f14cebafe9f7ad258788d5627830b48cc0b52fcdbfdf84f695a1b53a70b55",
+        "bytes": 3336,
+        "lines": 81
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleFiniteProductBounds",
+        "path": "src/ContinuousFlexibility/Analysis/CircleFiniteProductBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "04a7a7df19c9eeaf9bd48331e225ce3245c3877e",
+        "sha256": "620656ef94ccb38b0395da85b87bd3f1b63d827ba369090b52e167d6f58557aa",
+        "bytes": 10741,
+        "lines": 223
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleInverseCompositionGrowth",
+        "path": "src/ContinuousFlexibility/Analysis/CircleInverseCompositionGrowth.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "4b9561e1984fbc8e3d228b0c1ab9aa23950418b5",
+        "sha256": "bfa84748ab952d12b7dc81af4ebda64aae5e4acfc3cb5cd1f188031b008b28a2",
+        "bytes": 8266,
+        "lines": 162
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleInverseFaaBounds",
+        "path": "src/ContinuousFlexibility/Analysis/CircleInverseFaaBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "6421119f4ecd651955aeeec34ed00772e4f608e7",
+        "sha256": "7a8dd3167d15ddefa05f5777faa6f767efc53a3c8ae0eb25efe89b10930e0ca3",
+        "bytes": 7484,
+        "lines": 151
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleInverseFamilyTame",
+        "path": "src/ContinuousFlexibility/Analysis/CircleInverseFamilyTame.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "bd50211085dff91e17f5c661e77d69e5e82ae1a2",
+        "sha256": "bf486cd4cf1697d2b839c280490166f53820f440cc663fb842e58e8671df43ca",
+        "bytes": 7975,
+        "lines": 160
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleInverseInterpolatedJets",
+        "path": "src/ContinuousFlexibility/Analysis/CircleInverseInterpolatedJets.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "3b78988f92909bd9c29fb617a2fb0a1a5090fda2",
+        "sha256": "32c3334960fe18872f004ea200ad38630b5200984017ad883713877d2d036d3c",
+        "bytes": 6132,
+        "lines": 125
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleInverseModel",
+        "path": "src/ContinuousFlexibility/Analysis/CircleInverseModel.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "d4cd16420a70111439856a3685e292a7ee34b17b",
+        "sha256": "b04e3cdfd2af3aa8309bd62abe082df5bb0b58364680e6a56b7b0dc5aeecd95a",
+        "bytes": 12379,
+        "lines": 244
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleInversePerturbation",
+        "path": "src/ContinuousFlexibility/Analysis/CircleInversePerturbation.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "3947211ba4cbb5e9454c9011d19ee59b83d87d8b",
+        "sha256": "67133e515a5685ce4b2e8dbf8df025f8473f603253888cdad5a4afe5a9b5fb87",
+        "bytes": 4683,
+        "lines": 99
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleInverseSmoothTame",
+        "path": "src/ContinuousFlexibility/Analysis/CircleInverseSmoothTame.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "504b92af7bd8b1c93d1dcb0f78ac83fa0cfe36f4",
+        "sha256": "8a15d0cb019ea74f52223a37e682b56d4aae81da7ae3cf58a7c1962e47c7e11c",
+        "bytes": 6327,
+        "lines": 127
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleInverseUniformGrowth",
+        "path": "src/ContinuousFlexibility/Analysis/CircleInverseUniformGrowth.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "51594d94b87522ce7f6f6b06f2525819704a0c1e",
+        "sha256": "a1007c9406fc09a15a03feca8e6913c1c26a2464f7966196ed1405f15ec0dcaf",
+        "bytes": 7478,
+        "lines": 145
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleJointEvaluation",
+        "path": "src/ContinuousFlexibility/Analysis/CircleJointEvaluation.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "b18010ba5d5c86d247e70d32e8ffd134434e126b",
+        "sha256": "5110f4d8cf53b34ed33b6221317e9421d876d9add22dca234e95493edcc33ba6",
+        "bytes": 10338,
+        "lines": 216
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleOuterCompositionBounds",
+        "path": "src/ContinuousFlexibility/Analysis/CircleOuterCompositionBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "cde5c2c433dc84b025f7f533bc88865cd3d27b3e",
+        "sha256": "1ca445a67fa8f6ae79bd34875f4c4c6c7d07b86db95a683ee5034d49b1de6ab1",
+        "bytes": 8000,
+        "lines": 160
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds",
+        "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInverseFixedBaseBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "1f55edbb185fe33327757a087479196cc8565e4f",
+        "sha256": "435088fc0bad2d63d09101dfcb8a2629cc24e5437f855867e41cac8368b2eb64",
+        "bytes": 15638,
+        "lines": 301
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CirclePositiveInverseModel",
+        "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInverseModel.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "6f2c793893f51f1fd72c6201f149a0e527458994",
+        "sha256": "a6767f0378b48caf72404311675e416be98e8d1bad81800d134190a0a7d9d34d",
+        "bytes": 3740,
+        "lines": 81
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CirclePositiveInversePerturbation",
+        "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInversePerturbation.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "d532c92eee0cf46e41a22a1a641cf1d95ac87ef6",
+        "sha256": "db1f19b5c13d3eb7146ea15da658ccf5e2f49cb752a8cde198e4ac66957d0b14",
+        "bytes": 3084,
+        "lines": 67
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame",
+        "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInverseSmoothTame.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "28e258fbf0a0417606cb01a1c5abea5af9ccb49b",
+        "sha256": "fad6b2f03c427d05ff8d94cf51cecc1e1377766f86f426979f3be82a65747f5d",
+        "bytes": 5706,
+        "lines": 116
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CirclePositiveInverseUniformBounds",
+        "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInverseUniformBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "ac025f689b8ad75193d681ed756ff66e164f157f",
+        "sha256": "6c739cf0a3ba3a38e2397e879987f2b441a796d990121dc0919305401a71d85f",
+        "bytes": 9841,
+        "lines": 176
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CirclePositiveJetAssembly",
+        "path": "src/ContinuousFlexibility/Analysis/CirclePositiveJetAssembly.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "a3a36711425ab8be2c94ed33a78e5b4d6f9bede9",
+        "sha256": "e100319fd9f1b59cadd3e2d637c02c59026a93327064c6399fc954182af8ed99",
+        "bytes": 5363,
+        "lines": 112
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CirclePositiveLiftDomain",
+        "path": "src/ContinuousFlexibility/Analysis/CirclePositiveLiftDomain.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "d718375ee23823ae2b5d10fd8da9b759c65e6eb4",
+        "sha256": "1a29804386bd0ba3a3c51fa03162cb1e81f28746270d75576d331f4d11eefbf0",
+        "bytes": 12240,
+        "lines": 248
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleProductMixedBounds",
+        "path": "src/ContinuousFlexibility/Analysis/CircleProductMixedBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "31cf2c27f7035a15931194ed3053b9bc79c274e9",
+        "sha256": "dcf9156bfc4048b1fa12a223b9e0f98cafbb65052ef0b375eb457a3dfddf0ef0",
+        "bytes": 13167,
+        "lines": 258
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleProductSmoothTame",
+        "path": "src/ContinuousFlexibility/Analysis/CircleProductSmoothTame.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "d442ac2f3732e0d66b0392699d9e31c8c694333a",
+        "sha256": "4eca07694ef2636151d94f3ce7fc83d5e3beffac7e0055c89c9eff881fbc40d5",
+        "bytes": 17436,
+        "lines": 359
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleReturnInverseLinear",
+        "path": "src/ContinuousFlexibility/Analysis/CircleReturnInverseLinear.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "c31581c7bafd4cdb8e791065e7d2a5f0975b42c4",
+        "sha256": "c8f2f603769052f67429fa86c686c8e1f8776e5cd65ff5f94fef5deac246f5f4",
+        "bytes": 13206,
+        "lines": 259
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleReturnL2",
+        "path": "src/ContinuousFlexibility/Analysis/CircleReturnL2.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "4a80a45bed0eb4e2e4505b43cc5798efc14d90ee",
+        "sha256": "8f205113b61981b54fc4b9564690eec9ba8d964e41c1c2ffe38e4987c19edfbb",
+        "bytes": 18275,
+        "lines": 344
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleReturnWeightedInverse",
+        "path": "src/ContinuousFlexibility/Analysis/CircleReturnWeightedInverse.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "6c4cb1bbfbe30846632e063346e9fc4a025d5aa6",
+        "sha256": "f8702ecd4210354e24866a8f3c19d4ca5aff129fa7ce31b3f61d30355533e099",
+        "bytes": 8689,
+        "lines": 181
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+        "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "4ea70ab43fc1fa6e51ddcfa3849f97580bf02235",
+        "sha256": "4c3c07d97d9b4ad03cbb16f4b9b1829eabacdbeb1c012dee3733958f32ac1941",
+        "bytes": 8240,
+        "lines": 159
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleTranslationUniformBounds",
+        "path": "src/ContinuousFlexibility/Analysis/CircleTranslationUniformBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "29683e9c974fecbcd03fef36251ebb8b0061c485",
+        "sha256": "7ef561296693115b33d9daa18e66efb1778b028ac5d558696449a73af322b79f",
+        "bytes": 6812,
+        "lines": 144
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleTravelUniformJets",
+        "path": "src/ContinuousFlexibility/Analysis/CircleTravelUniformJets.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "ae1370a1c3e76de95577c57de04a220955683512",
+        "sha256": "35bc7f6a4d17d730d20cb465ed369c8e5919584d7a626871631fd2572c17a97a",
+        "bytes": 9526,
+        "lines": 174
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleUniformFamilyOperations",
+        "path": "src/ContinuousFlexibility/Analysis/CircleUniformFamilyOperations.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "c5282293b21370a88a5b1f198d61bd0507d79dd0",
+        "sha256": "b48f8889543fcf398a652570e2348e61dafcb0b1ec4734a94978297726595c86",
+        "bytes": 10335,
+        "lines": 191
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleUnitIntegral",
+        "path": "src/ContinuousFlexibility/Analysis/CircleUnitIntegral.lean",
+        "kind": "shared",
+        "before_blob": "39a06c8ea216f77af837487b24e3e187841e08a7",
+        "selected_blob": "539887de9877614276395ffbbadb8a8ab8d8904c",
+        "sha256": "9bbcfd648e9fc3da76d7120d167752a6572296f702a5a41e2337b126aa0a301d",
+        "bytes": 5300,
+        "lines": 112
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01CircleLinearTame",
+        "path": "src/ContinuousFlexibility/Analysis/N01CircleLinearTame.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "60cb27e73d5bac0102e5436d7fad54ae47740532",
+        "sha256": "18f9059ced21bc434aec9f75840a1dbb7842444192939afd4755dc1ed105ef7a",
+        "bytes": 4342,
+        "lines": 99
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ControlFlowBounds",
+        "path": "src/ContinuousFlexibility/Analysis/N01ControlFlowBounds.lean",
+        "kind": "shared",
+        "before_blob": "da5a86231558708da484b96b350a925cd0fe50d4",
+        "selected_blob": "440c6c682d1e8e1ff6114d11aeec6411035e7789",
+        "sha256": "2dbd515db64748286ac3773d5ade5225bf627451a17ba2b23410fed3e2087a9d",
+        "bytes": 12921,
+        "lines": 251
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ControlIndexBound",
+        "path": "src/ContinuousFlexibility/Analysis/N01ControlIndexBound.lean",
+        "kind": "shared",
+        "before_blob": "1928f91ca23a5a0620ca958c0d83fc46b148e33a",
+        "selected_blob": "e6ca03487e088a47f5869881ff0c1a7e6bf42d2a",
+        "sha256": "bbeb948f30b94d7be4268e8ac8c56fd360e732efe17edd2bd0ce5b131f484d22",
+        "bytes": 8239,
+        "lines": 179
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ControlWeightConstraint",
+        "path": "src/ContinuousFlexibility/Analysis/N01ControlWeightConstraint.lean",
+        "kind": "shared",
+        "before_blob": "c0e13885832aa4b133e24e45ff76bc0ca3cc2495",
+        "selected_blob": "fc55c919e972c5529680464eba8dbb66c07afb37",
+        "sha256": "a5dae44c173a989d43059bfc52a13fd7ab267a219c66486ccdf4aa4b19b1f9ee",
+        "bytes": 8102,
+        "lines": 155
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01EndpointCircleTower",
+        "path": "src/ContinuousFlexibility/Analysis/N01EndpointCircleTower.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "4568eb845666ec52e17e51a8864c670503e57ecb",
+        "sha256": "365844c7663074aa25ab251fc41b25164f43c79e8db7aecad2c7cd51c6d5b200",
+        "bytes": 8012,
+        "lines": 151
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01EndpointHeightLineEnvelope",
+        "path": "src/ContinuousFlexibility/Analysis/N01EndpointHeightLineEnvelope.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "c712fa90b33064a49a9fe098fce6eb8f23dfcbf0",
+        "sha256": "901669b929e8cb60d0c6e6aa92c8204a13fedd597c412c104fbf812a8abe0ca6",
+        "bytes": 11405,
+        "lines": 205
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01EndpointSecondEnvelope",
+        "path": "src/ContinuousFlexibility/Analysis/N01EndpointSecondEnvelope.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "d87da5e07a7b3ba297df8b305d391f352d848413",
+        "sha256": "03a8e8890026b3720d42b73baeb9d9b93a8c9b3eb33f7365db76bcac47e0584a",
+        "bytes": 10218,
+        "lines": 198
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01EndpointSmoothTame",
+        "path": "src/ContinuousFlexibility/Analysis/N01EndpointSmoothTame.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "2da111ee694d4a440f4a2f4b2bbcfe6d4788f5e6",
+        "sha256": "c8cf8eac21c64675520948714996ad7d7dd4622367378a70eb273b023e9db8d0",
+        "bytes": 5805,
+        "lines": 125
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01EndpointStateEnvelope",
+        "path": "src/ContinuousFlexibility/Analysis/N01EndpointStateEnvelope.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "f757bba172750f1ae890b82b9a2d3063ad6f3f8a",
+        "sha256": "e6169d3aaebc5670694bb90b7358a5c48e4db79d20a114ecb53c5e9f37fbba1f",
+        "bytes": 8330,
+        "lines": 163
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01EndpointStateIncrement",
+        "path": "src/ContinuousFlexibility/Analysis/N01EndpointStateIncrement.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "aea057ae66c62dd65f0c4f73389c6f27f8726b05",
+        "sha256": "78e28fc59cce22c11a797dba2944d289085782a3eab23556a22173c5c83548a5",
+        "bytes": 7104,
+        "lines": 142
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01EndpointZeroCircleMember",
+        "path": "src/ContinuousFlexibility/Analysis/N01EndpointZeroCircleMember.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "4986fd87120fe9934d46c3e3ff3a6873e097bb2b",
+        "sha256": "08f3d944ce0a27c4a14e74fc5549a9368392c97a5b76f781a7e6caa5a28aa08a",
+        "bytes": 13594,
+        "lines": 249
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01EndpointZeroGrowth",
+        "path": "src/ContinuousFlexibility/Analysis/N01EndpointZeroGrowth.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "62cd5f1fb9570b052f87b129c94cd5f845a5d95f",
+        "sha256": "cd5dfe6019fd62402ea733c2aa56381e4ba4ebc11a53a290b5bbb036ab1c9e29",
+        "bytes": 9144,
+        "lines": 164
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01FlowCircleUniformBounds",
+        "path": "src/ContinuousFlexibility/Analysis/N01FlowCircleUniformBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "84dfd97594ecb91e64c204b89d82625d8fddfd08",
+        "sha256": "a01b24b0bdd84a50f60524da297a4d9e93a1b608d8c4dbfba8328ad494c845d6",
+        "bytes": 6368,
+        "lines": 128
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01FlowInverseJetBounds",
+        "path": "src/ContinuousFlexibility/Analysis/N01FlowInverseJetBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "f598b3ee14ce332a7e194e8ef05a1616a8608dc5",
+        "sha256": "105cfbb3221219f583ee8e3f59d018d6baa4b723841fc37d98cac2192ea92ec9",
+        "bytes": 11536,
+        "lines": 216
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "path": "src/ContinuousFlexibility/Analysis/N01FlowSmallness.lean",
+        "kind": "shared",
+        "before_blob": "ca66bd0e3aa4056fdbdef013e16fe4825d066887",
+        "selected_blob": "128bbe1e44710de2eeb4e45e9570ddd2bbcbec52",
+        "sha256": "6ed46a0fb554a5874ae148554ba5d6561ba5e8db927a36713800507f5095763a",
+        "bytes": 11799,
+        "lines": 213
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01InterpolationInverseCircle",
+        "path": "src/ContinuousFlexibility/Analysis/N01InterpolationInverseCircle.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "5d29709ce82e9e2d9eddd11f6812a25fcd2faf6f",
+        "sha256": "e4ddcbab9a22add55fca82e01770a15b004ba6cdf42fa1a928f3ba7565f8052b",
+        "bytes": 11849,
+        "lines": 215
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction",
+        "path": "src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean",
+        "kind": "shared",
+        "before_blob": "5150d77940daa6a3f95bd505bdb929b2e95db667",
+        "selected_blob": "cc38a6d2b17c7398b071a6b22a130668877f3204",
+        "sha256": "ed4140a4a2a1c10d90e5e3d970a232b717ad8a46faf8556b0e886ba6ceb56f45",
+        "bytes": 3400,
+        "lines": 70
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01OpticalCutoffCircleMultiplier",
+        "path": "src/ContinuousFlexibility/Analysis/N01OpticalCutoffCircleMultiplier.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "2cc250891b684e1d33888806dd79200f00f81f9f",
+        "sha256": "c78ec604946fc351a2477cc40eb4410445d6203cf7624bf1819c3759f9f95b8c",
+        "bytes": 5327,
+        "lines": 104
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ResidualCircleModel",
+        "path": "src/ContinuousFlexibility/Analysis/N01ResidualCircleModel.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "e7aeb751c99fbc50dbb5a0b1398b0afe061213b6",
+        "sha256": "69096dee20990cc9e9e06ce9c823c138080aa648a08f329af47fd16580dbfebd",
+        "bytes": 13400,
+        "lines": 264
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ResidualSectorCoordinates",
+        "path": "src/ContinuousFlexibility/Analysis/N01ResidualSectorCoordinates.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "f10148f5287f1e0cd6802cec6ced3a2dca0d6d98",
+        "sha256": "7cb2eb450dec4d3c45df18151efff46f38f26de19457e7f4b488bea09796d5eb",
+        "bytes": 4646,
+        "lines": 104
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ResidualSmoothTame",
+        "path": "src/ContinuousFlexibility/Analysis/N01ResidualSmoothTame.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "ddef35ff6690d2ea86984e765305ed23e3708bc3",
+        "sha256": "6282bdb211d2ed494d7002fc23972918cdbe5bcadd71886268e90bb37682459c",
+        "bytes": 8992,
+        "lines": 169
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ReturnChartLineVariation",
+        "path": "src/ContinuousFlexibility/Analysis/N01ReturnChartLineVariation.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "c8e830e624dc76a572595e32ae432b354475a93b",
+        "sha256": "0e479d6525fdbec0e5e28c5a11c551760dfb6e44c032d94eaa03871d9c781da7",
+        "bytes": 10552,
+        "lines": 208
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds",
+        "path": "src/ContinuousFlexibility/Analysis/N01ReturnCircleUniformBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "a9b6d7a92da85f46f18f84563d4b1d29f333910a",
+        "sha256": "a5cdc37d50959078df17dfdee12b52f3c8dadcc2b5b90e3980ddd9edadaf4716",
+        "bytes": 11986,
+        "lines": 209
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ReturnDisplacementCircle",
+        "path": "src/ContinuousFlexibility/Analysis/N01ReturnDisplacementCircle.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "51a6fb4a9dea0a53ba0ee75124960ce5911f76ea",
+        "sha256": "b079c57c370f18266786a52c655fd4c0caf5aa3d915b779c9d01ef18fd07f542",
+        "bytes": 15107,
+        "lines": 277
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ReturnDisplacementSmoothTame",
+        "path": "src/ContinuousFlexibility/Analysis/N01ReturnDisplacementSmoothTame.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "ef2ba1ab9191b4183cc9f5a349663549d40c24ae",
+        "sha256": "d4a7db0d584c81b55c4e3911b7087d80d9257ecd1f56d0817cd330434d0468b5",
+        "bytes": 9338,
+        "lines": 179
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ReturnInverseCircle",
+        "path": "src/ContinuousFlexibility/Analysis/N01ReturnInverseCircle.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "e99a08956ffd3e0dcf86d6e1ed0a4421b5675a86",
+        "sha256": "4efcb2d32b0e23c51812bfe4b14add3e20ffd4356394f87a1f15ef5ab308c55e",
+        "bytes": 17591,
+        "lines": 317
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ReturnLinearOperators",
+        "path": "src/ContinuousFlexibility/Analysis/N01ReturnLinearOperators.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "46506260fd8734076891dc62801af0ecd14788ec",
+        "sha256": "cf2f6f65ac07485501226565377830a9440003d0bfb1595a03232746c9e80440",
+        "bytes": 5481,
+        "lines": 105
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ReturnVelocityCircle",
+        "path": "src/ContinuousFlexibility/Analysis/N01ReturnVelocityCircle.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "760d2146f1837ea325b447b5b4d82e1789167b88",
+        "sha256": "878561ce9ba1f5dcb7995e65327c9729eed5e117f7170d710dc19e0a7edb8291",
+        "bytes": 16400,
+        "lines": 274
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame",
+        "path": "src/ContinuousFlexibility/Analysis/N01ReturnVelocitySmoothTame.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "9f02465d6563eaed8060468f1ab06e1aea084bdf",
+        "sha256": "58cfe99a893cc26198301ca98acc474d9bb0d07140897edaf6baff9d7a928ffd",
+        "bytes": 9997,
+        "lines": 174
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01SelectorInverse",
+        "path": "src/ContinuousFlexibility/Analysis/N01SelectorInverse.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "959be823f4a888cca1c45c2f0fa77ef627bbc8f9",
+        "sha256": "e1ce3b7b578a17168ac6a432d732e302033f8e65309bc20c88fa610de4190a9b",
+        "bytes": 9050,
+        "lines": 173
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01UniformReturnMargins",
+        "path": "src/ContinuousFlexibility/Analysis/N01UniformReturnMargins.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "8f38338b2049d23253abdabe24ada109d0df09cf",
+        "sha256": "b7adc2d416e78c83e8328cb19643d106ad09763b7c477ca8ae4d6824ea8991a9",
+        "bytes": 2566,
+        "lines": 58
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N02ChartError",
+        "path": "src/ContinuousFlexibility/Analysis/N02ChartError.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "603a6d6b07ad9a35b014f4688bb7bc75caf04ea3",
+        "sha256": "dc4d5aafe0c78ff9cec26678bfee53808bde8116a13606f388617693fe06d988",
+        "bytes": 4494,
+        "lines": 103
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N02ChartIncrement",
+        "path": "src/ContinuousFlexibility/Analysis/N02ChartIncrement.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "3feb32973ec5ecb637403280230b696fe3358d07",
+        "sha256": "fb1e1910c5b5b75f0c449e847d464ed986dfe265b8d2607b7f394877d2269550",
+        "bytes": 2359,
+        "lines": 56
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N02ProjectiveChartVariation",
+        "path": "src/ContinuousFlexibility/Analysis/N02ProjectiveChartVariation.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "e2cac7e7da748d57cc04506c8d95c3b7afb5dd83",
+        "sha256": "789ee418d43971cff28cc16d066379001dbdfc9a88a7a02718c6a95f783237e0",
+        "bytes": 8446,
+        "lines": 168
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N02ReturnAssembly",
+        "path": "src/ContinuousFlexibility/Analysis/N02ReturnAssembly.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "1b240fd0f06f9e4028cfa4e246f2dc86969acf82",
+        "sha256": "8d3c1f2453177b7100f5528aacb5d76e54920956e82989081102a226137bd40e",
+        "bytes": 3251,
+        "lines": 72
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04EndpointCircleFixedBaseBounds",
+        "path": "src/ContinuousFlexibility/Analysis/N04EndpointCircleFixedBaseBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "09a1696b57c7fe3678cc6e10e419bb8fa22c0c11",
+        "sha256": "4726b99d556fcd77b094156f54551a65b5ec63b04f570f2ffb90fecdd1d0c29e",
+        "bytes": 6005,
+        "lines": 115
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04SelectorInverseCircleFixedBaseBounds",
+        "path": "src/ContinuousFlexibility/Analysis/N04SelectorInverseCircleFixedBaseBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "054e86dbc3a61f36df0ff4fd7ddf71aefeacb117",
+        "sha256": "93154c0937eac430488bc4927b7d5e5f42d026df05959e430686c650ddd79fd4",
+        "bytes": 8461,
+        "lines": 152
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.NonlinearNeighborhoodRestriction",
+        "path": "src/ContinuousFlexibility/Analysis/NonlinearNeighborhoodRestriction.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "3f231a86ea80d87d6f908ce36c27ad1855dafaf3",
+        "sha256": "e89345ab3ac88ba3fa718488e90ec923bb77e96b41b70fc8602ca1b8d242d647",
+        "bytes": 3483,
+        "lines": 85
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.OpticalControlRatio",
+        "path": "src/ContinuousFlexibility/Analysis/OpticalControlRatio.lean",
+        "kind": "shared",
+        "before_blob": "bd25720da42b672538f23d245d8c5890471d9a7e",
+        "selected_blob": "ebcd0da63d49616a822888fdfdb3add58ea433c5",
+        "sha256": "46a91e5a189d4c80ef852f3f7535b5650652e263c79679f1041b41a869a49604",
+        "bytes": 7491,
+        "lines": 172
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ReturnChartUniformBounds",
+        "path": "src/ContinuousFlexibility/Analysis/ReturnChartUniformBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "d632e8aa3ad47fa9733b123e14a42fcd5ff90d40",
+        "sha256": "a1677fbf43c7000ede695fbcbdafd48d3290e84970b197cdf3470ec8fadaf22d",
+        "bytes": 14630,
+        "lines": 283
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ReturnChartVariation",
+        "path": "src/ContinuousFlexibility/Analysis/ReturnChartVariation.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "0486e2dd6f5f72652b8d74b04469e4352bddc8c8",
+        "sha256": "93aa6276e380b40b33f0be77ff87893771dfbe7aa7af20e3c6b82c2cdfe65467",
+        "bytes": 17519,
+        "lines": 352
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ReturnCorrectionDisplacementRegularity",
+        "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionDisplacementRegularity.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "d2ac2e60f80fe1f09d457846d3770a334d947a72",
+        "sha256": "387512bca507c4fb81d78c9c90c732f1075736ecefcbf90f066d91aa536e0b7d",
+        "bytes": 7462,
+        "lines": 164
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ScalarInverseJetBounds",
+        "path": "src/ContinuousFlexibility/Analysis/ScalarInverseJetBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "97ba38ba524edb843d53eb958290bb9a0177c7bf",
+        "sha256": "30e3dc228760e6695351d00769ce7805b3bc46b8c275f07ed02d721362148164",
+        "bytes": 8649,
+        "lines": 169
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ScalarInverseScaleBounds",
+        "path": "src/ContinuousFlexibility/Analysis/ScalarInverseScaleBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "2184855caba52b35048777b602b977387ee2b917",
+        "sha256": "d1e063dc159c0f35e891c27062d666f52699ceee569c5b87435cb86a6b9a1b28",
+        "bytes": 5377,
+        "lines": 115
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ScalarJetFamilyBounds",
+        "path": "src/ContinuousFlexibility/Analysis/ScalarJetFamilyBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "5ebd48a466745ad5851855fafc3dc00f7f04443f",
+        "sha256": "1d18535ca9227aaa981c9b5d107bc1d4fe6de5bbe6bdf2fbc35e54bd8f06a0f4",
+        "bytes": 7048,
+        "lines": 144
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ScalarPlaneJetRegularity",
+        "path": "src/ContinuousFlexibility/Analysis/ScalarPlaneJetRegularity.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "d34c51a6a6bd2a6a1220a3a33b8fb291e594b720",
+        "sha256": "e7687f8c31a54f0e268904798e0492fe830af44a9e9f898700bf5b9eb846b20c",
+        "bytes": 5019,
+        "lines": 105
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.SmoothDirectionsGluing",
+        "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsGluing.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "17c20b98c1e0789179039177e5d689bb9dd96dc9",
+        "sha256": "48b65821f162b0c704dea9da5a45826f1dba18094e91614d73ff2be22d36ba91",
+        "bytes": 5510,
+        "lines": 119
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.SmoothDirectionsJointAngular",
+        "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsJointAngular.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "c80bfa074a6fa03afb21b6cd159f4ca29fb2b272",
+        "sha256": "652d931ff4d863915a8e4a16b70cab586500766ae8ebcb0de0e70bf4e4181a15",
+        "bytes": 7459,
+        "lines": 148
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.SmoothDirectionsUnitIntegral",
+        "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsUnitIntegral.lean",
+        "kind": "shared",
+        "before_blob": "db1f7cac84a057318f59c3d73a669948342193bd",
+        "selected_blob": "524d2fbeddf977df987df89dc5547e823629fdc6",
+        "sha256": "75475eec0adf477fa67fe884d57428b1e74f52a771dd135a514d243f4f0ec308",
+        "bytes": 7456,
+        "lines": 161
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameInterpolationOneAdd",
+        "path": "src/ContinuousFlexibility/Analysis/TameInterpolationOneAdd.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "ef8df0172573a91c3929e60cdaf7ba41e725be0d",
+        "sha256": "603d8762af82c79ee9f77e0e58ffdca5f275f77402912f1c46c42ce59455245a",
+        "bytes": 3508,
+        "lines": 74
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameInverseInitialContinuity",
+        "path": "src/ContinuousFlexibility/Analysis/TameInverseInitialContinuity.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "1cc0bc84a667099a8f1741d0eb8a8854655919e4",
+        "sha256": "ef5f71b1102c7a385b49dd89105d1ebe512f65479fe95fbf26d95f59ec249ccc",
+        "bytes": 3266,
+        "lines": 71
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameInverseUniformBounds",
+        "path": "src/ContinuousFlexibility/Analysis/TameInverseUniformBounds.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "416066293486fab94b2198ce8d4198f36c9f84fd",
+        "sha256": "601211fb4ff4713fb2f04f877874eb9198fd85849dde1f00bb4a20da2333ef9d",
+        "bytes": 6370,
+        "lines": 123
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameProductDirections",
+        "path": "src/ContinuousFlexibility/Analysis/TameProductDirections.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "da7b331dbdf5958e0f9e2f18326085519ae35398",
+        "sha256": "15f7e37725e1710ef8e56bb1e47a302afc070381b9a0fc5613345f6440f5f20f",
+        "bytes": 1873,
+        "lines": 48
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameUniformFamilyGrowth",
+        "path": "src/ContinuousFlexibility/Analysis/TameUniformFamilyGrowth.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "3118f4c042fe5fcabb4398389f62fdc14c0c9821",
+        "sha256": "993c8ab26745b1958ea176ccf8664b4950e3a437c4b0c455612bec62cb3e5d7d",
+        "bytes": 14258,
+        "lines": 288
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameUniformFamilyJets",
+        "path": "src/ContinuousFlexibility/Analysis/TameUniformFamilyJets.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "af2fcbf1366ab7ff2a314f03f02cbfe99234961d",
+        "sha256": "a568602dff4fba3065d7ee05893e1d64e03301ef2b603393d49facc9854e2760",
+        "bytes": 13027,
+        "lines": 270
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameUniformGrowth",
+        "path": "src/ContinuousFlexibility/Analysis/TameUniformGrowth.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "f4d31adbba1c23cbc1d03c02f0f1cb14ea28ac65",
+        "sha256": "89ba3b59927356224e04aef9e5921d7848af6ff01d1d6ef12288d0e6295d15c5",
+        "bytes": 13146,
+        "lines": 281
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameUniformSmoothFamily",
+        "path": "src/ContinuousFlexibility/Analysis/TameUniformSmoothFamily.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "a52a1e3d098c51d67260efef9b64b2d42195161a",
+        "sha256": "9c6826d76b69da22774d75954775a838fb0c16270ad0c0202123fa4bbcfc2802",
+        "bytes": 9426,
+        "lines": 200
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily",
+        "path": "src/ContinuousFlexibility/Analysis/TameUnitIntegralLinearFamily.lean",
+        "kind": "shared",
+        "before_blob": "d6fbe2afb25d83b302e606ecf0dbc4bf3763b7a2",
+        "selected_blob": "f6269f9eb372fe9acaf71533c402bcd66d95e50d",
+        "sha256": "b186680556554b2ca94bda82adc8f327febd9737c42b65e70598e6d74eabea88",
+        "bytes": 6267,
+        "lines": 134
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.UniformUnitIntegralLinearFamily",
+        "path": "src/ContinuousFlexibility/Analysis/UniformUnitIntegralLinearFamily.lean",
+        "kind": "new",
+        "before_blob": null,
+        "selected_blob": "3e51d7f6493103f67acaa8f4755619f6978230a4",
+        "sha256": "edea8ca50e2d570a5a6785e6ba36599376502f356052aa09ea91d25dd3a8d9f7",
+        "bytes": 2299,
+        "lines": 53
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CanonicalReferencePieceInequality",
+        "path": "src/ContinuousFlexibility/Analysis/CanonicalReferencePieceInequality.lean",
+        "kind": "new-independent-addon",
+        "before_blob": null,
+        "selected_blob": "d0b62f775987c37e6af0553ee18ea6dcd0224c8f",
+        "sha256": "a25275a8eb0f1900a6d2949e1ad85fd166023dc38684bf154659c6d3196ade98",
+        "bytes": 2027,
+        "lines": 44
+      }
+    ],
+    "retained_selected_providers_checked": 413,
+    "retained_mismatches": [],
+    "retained_fixed_proof_successors_at_reviewed_parent": {
+      "ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds": "f43a2b774c41da8cc9417051adc8c0a89d3ed04e",
+      "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds": "083d926c2e2bd91323a068b40e93dc93117f9779"
+    },
+    "retained_StateNeighborhood": {
+      "source": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+      "reason": "Keep the actual current provider. Main's import/open reduction is not part of these nine changes, and current consumers retain their actual transitive Blueprint visibility. This plan does not silently select main's different StateNeighborhood source."
+    }
+  },
+  "shared_migrations": {
+    "exact_nine_preimages_and_after_sources": [
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleUnitIntegral",
+        "path": "src/ContinuousFlexibility/Analysis/CircleUnitIntegral.lean",
+        "kind": "shared",
+        "before_blob": "39a06c8ea216f77af837487b24e3e187841e08a7",
+        "selected_blob": "539887de9877614276395ffbbadb8a8ab8d8904c",
+        "sha256": "9bbcfd648e9fc3da76d7120d167752a6572296f702a5a41e2337b126aa0a301d",
+        "bytes": 5300,
+        "lines": 112
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ControlFlowBounds",
+        "path": "src/ContinuousFlexibility/Analysis/N01ControlFlowBounds.lean",
+        "kind": "shared",
+        "before_blob": "da5a86231558708da484b96b350a925cd0fe50d4",
+        "selected_blob": "440c6c682d1e8e1ff6114d11aeec6411035e7789",
+        "sha256": "2dbd515db64748286ac3773d5ade5225bf627451a17ba2b23410fed3e2087a9d",
+        "bytes": 12921,
+        "lines": 251
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ControlIndexBound",
+        "path": "src/ContinuousFlexibility/Analysis/N01ControlIndexBound.lean",
+        "kind": "shared",
+        "before_blob": "1928f91ca23a5a0620ca958c0d83fc46b148e33a",
+        "selected_blob": "e6ca03487e088a47f5869881ff0c1a7e6bf42d2a",
+        "sha256": "bbeb948f30b94d7be4268e8ac8c56fd360e732efe17edd2bd0ce5b131f484d22",
+        "bytes": 8239,
+        "lines": 179
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ControlWeightConstraint",
+        "path": "src/ContinuousFlexibility/Analysis/N01ControlWeightConstraint.lean",
+        "kind": "shared",
+        "before_blob": "c0e13885832aa4b133e24e45ff76bc0ca3cc2495",
+        "selected_blob": "fc55c919e972c5529680464eba8dbb66c07afb37",
+        "sha256": "a5dae44c173a989d43059bfc52a13fd7ab267a219c66486ccdf4aa4b19b1f9ee",
+        "bytes": 8102,
+        "lines": 155
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "path": "src/ContinuousFlexibility/Analysis/N01FlowSmallness.lean",
+        "kind": "shared",
+        "before_blob": "ca66bd0e3aa4056fdbdef013e16fe4825d066887",
+        "selected_blob": "128bbe1e44710de2eeb4e45e9570ddd2bbcbec52",
+        "sha256": "6ed46a0fb554a5874ae148554ba5d6561ba5e8db927a36713800507f5095763a",
+        "bytes": 11799,
+        "lines": 213
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction",
+        "path": "src/ContinuousFlexibility/Analysis/N01NeighborhoodRestriction.lean",
+        "kind": "shared",
+        "before_blob": "5150d77940daa6a3f95bd505bdb929b2e95db667",
+        "selected_blob": "cc38a6d2b17c7398b071a6b22a130668877f3204",
+        "sha256": "ed4140a4a2a1c10d90e5e3d970a232b717ad8a46faf8556b0e886ba6ceb56f45",
+        "bytes": 3400,
+        "lines": 70
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.OpticalControlRatio",
+        "path": "src/ContinuousFlexibility/Analysis/OpticalControlRatio.lean",
+        "kind": "shared",
+        "before_blob": "bd25720da42b672538f23d245d8c5890471d9a7e",
+        "selected_blob": "ebcd0da63d49616a822888fdfdb3add58ea433c5",
+        "sha256": "46a91e5a189d4c80ef852f3f7535b5650652e263c79679f1041b41a869a49604",
+        "bytes": 7491,
+        "lines": 172
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.SmoothDirectionsUnitIntegral",
+        "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsUnitIntegral.lean",
+        "kind": "shared",
+        "before_blob": "db1f7cac84a057318f59c3d73a669948342193bd",
+        "selected_blob": "524d2fbeddf977df987df89dc5547e823629fdc6",
+        "sha256": "75475eec0adf477fa67fe884d57428b1e74f52a771dd135a514d243f4f0ec308",
+        "bytes": 7456,
+        "lines": 161
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily",
+        "path": "src/ContinuousFlexibility/Analysis/TameUnitIntegralLinearFamily.lean",
+        "kind": "shared",
+        "before_blob": "d6fbe2afb25d83b302e606ecf0dbc4bf3763b7a2",
+        "selected_blob": "f6269f9eb372fe9acaf71533c402bcd66d95e50d",
+        "sha256": "b186680556554b2ca94bda82adc8f327febd9737c42b65e70598e6d74eabea88",
+        "bytes": 6267,
+        "lines": 134
+      }
+    ],
+    "all_nine_complete_diffs_read": true,
+    "full_public_header_comparison": {
+      "before_count": 44,
+      "after_count": 44,
+      "added": [],
+      "removed": [],
+      "unchanged_modulo_whitespace": 37,
+      "only_existential_binder_renaming_or_formatting": 6,
+      "semantic_header_changes": 1,
+      "changed_contract": "N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood"
+    },
+    "semantic_change": {
+      "before": "After hN and hT, there exists parameterLoss, then forall spatial order s, there exists B.",
+      "after": "Spatial order s is an explicit argument after hN and hT; then there exist d1 and B.",
+      "exact_complete_headers": [
+        {
+          "name": "N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood",
+          "alpha_only": false,
+          "before_complete": "theorem N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n    (hN : N01Properties D T S C base loss ε) (hT : IsMaterialData D T) :\n    ∃ parameterLoss : ℕ, ∀ s : ℕ,\n      ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → s + loss + parameterLoss ≤ base' →\n      ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →\n      ∀ z ∈ stateNeighborhood S C base' η, ∀ m b p,\n        b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →\n        |ordinaryFlowFamily S C m 0 b p z| ≤\n          6 * B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *\n            T.E0 (T.sample (C.cell m)) ^ B * η",
+          "after_complete": "theorem N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n    (hN : N01Properties D T S C base loss ε) (hT : IsMaterialData D T) (s : ℕ) :\n    ∃ d₁ : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → s + loss + d₁ ≤ base' →\n      ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →\n      ∀ z ∈ stateNeighborhood S C base' η, ∀ m b p,\n        b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →\n        |ordinaryFlowFamily S C m 0 b p z| ≤\n          6 * B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *\n            T.E0 (T.sample (C.cell m)) ^ B * η"
+        }
+      ],
+      "audit": "This is an intentional per-spatial-order loss interface; it is not represented as a uniform loss before every spatial order.",
+      "actual_name_search_scope": "Exact-token search in all actual parent src sources and all 106 selected raw sources, without re-reading all source bodies.",
+      "actual_calls": "Only the declaration and its same-file call were present. The selected same-file consumer explicitly calls hN.ordinaryFlowFamily_angular_small_of_neighborhood hT 1.",
+      "public_final_weighted_and_uniform_consumers": "The weighted and uniform final theorem contracts remain alpha-equivalent and retain a fixed existential loss before their quantified points; existing ReturnCorrection consumers keep the same call shape."
+    },
+    "other_change_assessments": [
+      {
+        "module": "CircleUnitIntegral",
+        "assessment": "Only adds the actual CircleModelRealization import; all four public headers remain unchanged."
+      },
+      {
+        "module": "N01ControlFlowBounds",
+        "assessment": "Removes N01JetBounds import and replaces the private opaque supplier boundary by the same actual k=2, s=0 flow choice proof. Both quantitative public loss positions are unchanged up to binder renaming."
+      },
+      {
+        "module": "N01ControlWeightConstraint",
+        "assessment": "The same selected second-order loss is propagated through the material exponent; public headers are unchanged up to binder renaming and formatting."
+      },
+      {
+        "module": "N01ControlIndexBound",
+        "assessment": "Final actual-containing-cell index theorem headers remain unchanged; revised proof consumes the same fixed order loss."
+      },
+      {
+        "module": "N01NeighborhoodRestriction",
+        "assessment": "Four public headers are unchanged. The selected proof invokes actual Blueprint.n01Properties_mono with hT, hN, hb, le_rfl, hε, hε'; the full selected supplier header was read. D, T, S, C and the actual witness are retained."
+      },
+      {
+        "module": "OpticalControlRatio",
+        "assessment": "Same off-interval-zero derivative conclusions use the public iterated-derivative helper at orders one and two; all seven headers remain unchanged."
+      },
+      {
+        "module": "SmoothDirectionsUnitIntegral",
+        "assessment": "Explicit composition/preimage typing changes only; eight headers unchanged."
+      },
+      {
+        "module": "TameUnitIntegralLinearFamily",
+        "assessment": "Explicit finite-index and composition typing changes only; two public headers unchanged."
+      }
+    ],
+    "actual_and_projected_direct_consumers": [
+      {
+        "provider": "ContinuousFlexibility.Analysis.CircleUnitIntegral",
+        "actual_direct": [
+          "ContinuousFlexibility",
+          "ContinuousFlexibility.Analysis.CoupledCircleAverageSmooth"
+        ],
+        "projected_direct": [
+          "ContinuousFlexibility",
+          "ContinuousFlexibility.Analysis.CircleAverageCompositionSmoothTame",
+          "ContinuousFlexibility.Analysis.CoupledCircleAverageSmooth"
+        ]
+      },
+      {
+        "provider": "ContinuousFlexibility.Analysis.N01ControlFlowBounds",
+        "actual_direct": [
+          "ContinuousFlexibility",
+          "ContinuousFlexibility.Analysis.N01ControlWeightConstraint"
+        ],
+        "projected_direct": [
+          "ContinuousFlexibility",
+          "ContinuousFlexibility.Analysis.N01ControlWeightConstraint"
+        ]
+      },
+      {
+        "provider": "ContinuousFlexibility.Analysis.N01ControlIndexBound",
+        "actual_direct": [
+          "ContinuousFlexibility",
+          "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap"
+        ],
+        "projected_direct": [
+          "ContinuousFlexibility",
+          "ContinuousFlexibility.Analysis.N01OpticalCutoffCircleMultiplier",
+          "ContinuousFlexibility.Analysis.N01UniformReturnMargins",
+          "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap"
+        ]
+      },
+      {
+        "provider": "ContinuousFlexibility.Analysis.N01ControlWeightConstraint",
+        "actual_direct": [
+          "ContinuousFlexibility",
+          "ContinuousFlexibility.Analysis.N01ControlIndexBound"
+        ],
+        "projected_direct": [
+          "ContinuousFlexibility",
+          "ContinuousFlexibility.Analysis.N01ControlIndexBound"
+        ]
+      },
+      {
+        "provider": "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "actual_direct": [
+          "ContinuousFlexibility",
+          "ContinuousFlexibility.Analysis.ReturnCorrectionSmallness"
+        ],
+        "projected_direct": [
+          "ContinuousFlexibility",
+          "ContinuousFlexibility.Analysis.N01FlowInverseJetBounds",
+          "ContinuousFlexibility.Analysis.N01ResidualCircleModel",
+          "ContinuousFlexibility.Analysis.N01SelectorInverse",
+          "ContinuousFlexibility.Analysis.ReturnCorrectionSmallness"
+        ]
+      },
+      {
+        "provider": "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction",
+        "actual_direct": [
+          "ContinuousFlexibility",
+          "ContinuousFlexibility.Analysis.N01CoefficientSmallness"
+        ],
+        "projected_direct": [
+          "ContinuousFlexibility",
+          "ContinuousFlexibility.Analysis.N01CoefficientSmallness",
+          "ContinuousFlexibility.Analysis.NonlinearNeighborhoodRestriction",
+          "ContinuousFlexibility.Analysis.SmoothDirectionsGluing"
+        ]
+      },
+      {
+        "provider": "ContinuousFlexibility.Analysis.OpticalControlRatio",
+        "actual_direct": [
+          "ContinuousFlexibility",
+          "ContinuousFlexibility.Analysis.OpticalControlFullCurvature"
+        ],
+        "projected_direct": [
+          "ContinuousFlexibility",
+          "ContinuousFlexibility.Analysis.OpticalControlFullCurvature"
+        ]
+      },
+      {
+        "provider": "ContinuousFlexibility.Analysis.SmoothDirectionsUnitIntegral",
+        "actual_direct": [
+          "ContinuousFlexibility",
+          "ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily"
+        ],
+        "projected_direct": [
+          "ContinuousFlexibility",
+          "ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily"
+        ]
+      },
+      {
+        "provider": "ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily",
+        "actual_direct": [
+          "ContinuousFlexibility",
+          "ContinuousFlexibility.Analysis.CoupledCircleAverageSmooth"
+        ],
+        "projected_direct": [
+          "ContinuousFlexibility",
+          "ContinuousFlexibility.Analysis.CircleAverageCompositionSmoothTame",
+          "ContinuousFlexibility.Analysis.CoupledCircleAverageSmooth",
+          "ContinuousFlexibility.Analysis.UniformUnitIntegralLinearFamily"
+        ]
+      }
+    ],
+    "retained_callers_checked": [
+      {
+        "module": "ContinuousFlexibility.Analysis.ReturnCorrectionSmallness",
+        "blob": "5e8807badcc8eaabf7aa3a31ecbc64d64a76cb56",
+        "actual_blob": "5e8807badcc8eaabf7aa3a31ecbc64d64a76cb56",
+        "call": "minusFlow_near_reference_weighted",
+        "call_lines": [
+          {
+            "line": 177,
+            "text": "  obtain ⟨parameterLoss, B, hB, hb⟩ := hN.minusFlow_near_reference_weighted hS hT"
+          }
+        ]
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ReturnCorrectionVelocityBounds",
+        "blob": "b6c7cefc7e6768f7a2c43b36e688d0e4bef28637",
+        "actual_blob": "b6c7cefc7e6768f7a2c43b36e688d0e4bef28637",
+        "call": "minusFlow_near_reference_uniform",
+        "call_lines": [
+          {
+            "line": 124,
+            "text": "  obtain ⟨derivativeLoss, K, hK, hk⟩ := hN.minusFlow_near_reference_uniform hS hT"
+          }
+        ]
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap",
+        "blob": "d1a81d60b31bf68689e99722e23fc8c594999b8b",
+        "actual_blob": "d1a81d60b31bf68689e99722e23fc8c594999b8b",
+        "call": "unchanged final control-index API",
+        "call_lines": []
+      }
+    ],
+    "additional_exact_retained_call": {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap",
+      "blob": "d1a81d60b31bf68689e99722e23fc8c594999b8b",
+      "line": 42,
+      "expression": "obtain ⟨I, hI, hactual⟩ := hN.control_actual_cell_index_bound hS hT",
+      "conclusion": "Unchanged final public API; no extra parameter-loss binder is newly required here."
+    },
+    "all_transitive_project_namespace_losses": [
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ControlFlowBounds",
+        "lost": [
+          "ContinuousFlexibility.Analysis.N01JetBounds"
+        ],
+        "used_lost_names": []
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ControlIndexBound",
+        "lost": [
+          "ContinuousFlexibility.Analysis.N01JetBounds"
+        ],
+        "used_lost_names": []
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ControlWeightConstraint",
+        "lost": [
+          "ContinuousFlexibility.Analysis.N01JetBounds"
+        ],
+        "used_lost_names": []
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ReturnCorrectionReferenceLower",
+        "lost": [
+          "ContinuousFlexibility.Analysis.N01JetBounds"
+        ],
+        "used_lost_names": []
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap",
+        "lost": [
+          "ContinuousFlexibility.Analysis.N01JetBounds"
+        ],
+        "used_lost_names": []
+      }
+    ],
+    "removed_N01JetBounds_audit": "Its actual full 74-line source has four Prop aliases and two theorems, and no instances, notation or exports. None of those six names occurs in the five affected projected source bodies. No other transitive project import is lost."
+  },
+  "owned_provenance": {
+    "scope": "Historical full mathematical peers and exact source/owner hashes are reused. This is a finite migration and execution review, not a fresh re-proof of every owned source.",
+    "forward159": {
+      "module": "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+      "source": "4ea70ab43fc1fa6e51ddcfa3849f97580bf02235",
+      "lines": 159,
+      "owner": "29077697145a273ed7ead4420a1a7314674cc7b2",
+      "owner_sha256": "6105f92815170893af34cf2fa7dfb52d402357520feabc51e816fc6f2fccb0e2",
+      "peer": "19c43b0d732068575e30dfccf4661c32c65a92c5",
+      "peer_sha256": "f1cfa7fbf109fb6b3d6b9d6880e7dda7e52342737a20f521c70c40b317f6c959",
+      "bound_scope": "Actual source-linear forward kernel, not a full joint forward-jet estimate."
+    },
+    "inverse301": {
+      "module": "ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds",
+      "source": "1f55edbb185fe33327757a087479196cc8565e4f",
+      "lines": 301,
+      "owner": "5fe184eeb93ae1713fc6f1563fa83c7c752d8935",
+      "owner_sha256": "83f53dba6d8a6665e4551ff8b44ae3f60028f902cb030367507e3de189d87332",
+      "peer": "bf9fea7b30e8fc0dd3928f7036f69437929deb17",
+      "peer_sha256": "9dae94366bfd280d36301f52715857cd69c72a35ccc438c90c10caddf0b07ad6",
+      "bound_scope": "Actual zero-travel inverse construction and uniqueness transport for arbitrary genuine tower and travel, with one fixed base; not CurrentJets."
+    },
+    "endpoint115": {
+      "module": "ContinuousFlexibility.Analysis.N04EndpointCircleFixedBaseBounds",
+      "source": "09a1696b57c7fe3678cc6e10e419bb8fa22c0c11",
+      "sha256": "4726b99d556fcd77b094156f54551a65b5ec63b04f570f2ffb90fecdd1d0c29e",
+      "lines": 115,
+      "historical_owner_identity_only": "53ba6c498d8b51ce8919d90872e0cfa0650fdf8d",
+      "historical_owner_sha256": "fbe7b6649457f8c7bb7c9b8a9ce3a43e2ed10e26191bb442aa9e206216e41bb6",
+      "historical_peer_sha256_only": "7ce9720a1e7c07b711e045e82856113420dd10cc1885365874b8788b610dcf44",
+      "old_owner_body_recovered": false,
+      "limitation": "The immutable plan records the old owner body as unavailable. This review neither restores nor re-signs that missing historical body.",
+      "fresh_source_crosscheck": "The full 115-line selected source and actual selected public supplier headers were read. True hN/hS/hT provide the fixed maximum low base before every order; order loss is selected before R/s, and the constant is selected before the radius selector and arbitrary genuine J. The actual tower uniqueness supplies the same J, H^(3/4) and the original radius-selector domain.",
+      "exact_public_supplier_sources": {
+        "N01EndpointOneHigh": "89d524bcc7934390eecae7a0c60d0790cbfc16f0",
+        "N01EndpointZeroGrowth": "62cd5f1fb9570b052f87b129c94cd5f845a5d95f",
+        "N01EndpointCircleTower": "4568eb845666ec52e17e51a8864c670503e57ecb"
+      },
+      "independent_cross_record": "The recovered complete selector152 peer explicitly records reading this exact 115 source and the prior peer identity. Parent has expressly accepted this evidence limitation for conditional plan review; it is not described as restored original ownership."
+    },
+    "selector152": {
+      "module": "ContinuousFlexibility.Analysis.N04SelectorInverseCircleFixedBaseBounds",
+      "source": "054e86dbc3a61f36df0ff4fd7ddf71aefeacb117",
+      "lines": 152,
+      "owner": "5dd7e2c487ecc063f6a1033d25a314c721a79acb",
+      "owner_sha256": "69c6eb5bafb51eb40c0f84727c858a466b4460d1d0d0967f51adb6ca1207e4c5",
+      "peer": "d248e692dba26bf04ff60447ef2dc77b6383a1f8",
+      "peer_sha256": "76f08fd2b3be38c225b7de7e1a862f3b7fb2aad6f97a672c18d683981b6e367e",
+      "bound_scope": "Fixed low base before parameter order; the genuine same-J selector inverse uses actual hflow bounds and actual 115/301 suppliers. No final target estimate is assumed."
+    },
+    "fetched_owner_and_peer_hashes": [
+      {
+        "key": "CI181_ForwardOwner_raw",
+        "sha256": "6105f92815170893af34cf2fa7dfb52d402357520feabc51e816fc6f2fccb0e2",
+        "bytes": 1685
+      },
+      {
+        "key": "CI181_ForwardPeer_raw",
+        "sha256": "f1cfa7fbf109fb6b3d6b9d6880e7dda7e52342737a20f521c70c40b317f6c959",
+        "bytes": 10395
+      },
+      {
+        "key": "CI181_InverseOwner_raw",
+        "sha256": "83f53dba6d8a6665e4551ff8b44ae3f60028f902cb030367507e3de189d87332",
+        "bytes": 3285
+      },
+      {
+        "key": "CI181_InversePeer_raw",
+        "sha256": "9dae94366bfd280d36301f52715857cd69c72a35ccc438c90c10caddf0b07ad6",
+        "bytes": 23676
+      },
+      {
+        "key": "CI181_SelectorOwner_raw",
+        "sha256": "69c6eb5bafb51eb40c0f84727c858a466b4460d1d0d0967f51adb6ca1207e4c5",
+        "bytes": 6836
+      },
+      {
+        "key": "CI181_SelectorPeer_raw",
+        "sha256": "76f08fd2b3be38c225b7de7e1a862f3b7fb2aad6f97a672c18d683981b6e367e",
+        "bytes": 20220
+      },
+      {
+        "key": "CI181_AEOwner_raw",
+        "sha256": "d08fae7295a5d93a26238817c32359d54849698e9a974f5e022e6ae5af1b1ad3",
+        "bytes": 4213
+      },
+      {
+        "key": "CI181_AEPeer_raw",
+        "sha256": "62d9dad10c85de5c744ced965dffc57f4b759d00117e21dbdff2ea6f12545474",
+        "bytes": 7897
+      }
+    ]
+  },
+  "independent_AE44": {
+    "module": "ContinuousFlexibility.Analysis.CanonicalReferencePieceInequality",
+    "source": "d0b62f775987c37e6af0553ee18ea6dcd0224c8f",
+    "sha256": "a25275a8eb0f1900a6d2949e1ad85fd166023dc38684bf154659c6d3196ade98",
+    "lines": 44,
+    "bytes": 2027,
+    "owner": "5819fbde11d5495b671efeac25181fa486747696",
+    "owner_sha256": "d08fae7295a5d93a26238817c32359d54849698e9a974f5e022e6ae5af1b1ad3",
+    "peer": "9b9983df8ab1720f93011044575bef196335720a",
+    "peer_sha256": "62d9dad10c85de5c744ced965dffc57f4b759d00117e21dbdff2ea6f12545474",
+    "invalid_old_wrapper_not_selected": true,
+    "direct_project_provider": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+    "no_new_Blueprint_import": true,
+    "scope": "Actual reference-piece partition gives the almost-everywhere inequality; continuous min(f,g)=f extends it on the actual annular open set. Its explicit continuity hypotheses remain hypotheses, and this lemma does not itself produce the CurrentJets or material estimates."
+  },
+  "graph_checks": {
+    "projected_nodes": 4802,
+    "project_edges": 14328,
+    "missing_imports": [],
+    "cycles": [],
+    "every_projected_node_exact_against_actual_parent_plus_finite_entries": true,
+    "selected_518_exact": true,
+    "selected_with_AE44": 519,
+    "selected_missing": [],
+    "selected_extra": [],
+    "topological_order_nodes": 4802,
+    "topological_errors": [],
+    "checked_in_root_imports": 4241,
+    "generated_root_imports": 4734,
+    "full_root_lag": 493,
+    "generated_graph_project_edges": 14821,
+    "generated_graph_cycles": [],
+    "generator_logic_independently_recomputed_in_memory": true,
+    "generator_script_executed": false,
+    "generated_root_written": false,
+    "four_default_roots": [
+      "ContinuousFlexibility",
+      "AxiomAudit",
+      "Challenge.FlexibleSphereChallenge",
+      "Solution.FlexibleSphereSolution"
+    ],
+    "default_root_closure_nodes": 4796,
+    "default_root_unreached_nodes": [
+      "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+      "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth",
+      "ContinuousFlexibility.Blueprint.N01c.Coefficients",
+      "ContinuousFlexibility.Blueprint.N01c.Flows",
+      "ContinuousFlexibility.Blueprint.N01c.Speeds",
+      "ContinuousFlexibility.Blueprint.N05.VolumeModel"
+    ],
+    "coverage_limit": "The two named ProjectiveNewton exclusions and four preexisting Blueprint leaves are not reached by the actual four-default-target closure. All 106 proposed source modules are direct generated-root imports and are reached. No claim is made that all 4802 graph nodes will be built merely from graph existence.",
+    "all106_reached": true,
+    "all106_direct_generated_imports": true
+  },
+  "name_checks": {
+    "declared_new_names": 618,
+    "original_new_names": 617,
+    "AE44_names": 1,
+    "explicit_index_227_sources": {
+      "blob": "5c815b6f63a572455a89ef2cc2e778fb4ed717b6",
+      "sha256": "5f9fc6d9b1f83dc346a3b5193ee0979cfc565c990426c4a60b5f96a8b4625c76",
+      "explicit_declarations": 1301
+    },
+    "actual169_nonmain_index": {
+      "blob": "9c3e8c742cbce4d8b019b5d7923b45af5f30dcba",
+      "sha256": "79a86b2a00a0b16fcb343221248cd6d1a271f94e9b09ba427018939695d88cb1",
+      "sources": 524,
+      "explicit_declarations": 1974
+    },
+    "original96_new_source_blobs_exact_in_index": true,
+    "duplicate_qualified_names": [],
+    "collision_with_nonmain_index": [],
+    "collision_with_retained_fixed_names": [],
+    "collision_with_small8_explicit_names": [],
+    "exact_AE_name_search_actual_and_main": "n04_referencePieces_le_on_annularOpen: zero matches at either prior tree, with normal git-grep no-match exit status.",
+    "small8_source_identity_checks": [
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ActualRetainedReference",
+        "matches": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction",
+        "matches": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01RetainedPrimitiveConstruction",
+        "matches": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext",
+        "matches": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry",
+        "matches": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04MaterialRadiusLocalJets",
+        "matches": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentFrechetJets",
+        "matches": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ActualNegativeMovingReferenceUnitPoint",
+        "matches": true
+      }
+    ],
+    "unchanged_main_boundary_reuses_prior_source_evidence": true,
+    "no_fresh_4k_body_or_generated_declaration_scan": true,
+    "limits": [
+      "Explicit declarations and named instances only; no elaborator-generated structure projections/constructors or export aliases.",
+      "No fresh4k body or all-name scan is claimed.",
+      "No Lean command was run; full CI remains the operational gate."
+    ]
+  },
+  "budget": {
+    "limit": 20000,
+    "new_source_added_lines": 16609,
+    "shared_actual_added_lines": 139,
+    "shared_actual_deleted_lines": 255,
+    "actual_source_additions": 16748,
+    "actual_source_deletions": 255,
+    "full_generated_root_additions": 493,
+    "actual_added_plus_full_root_lag": 17241,
+    "conservative_shared_full_after_lines": 1447,
+    "conservative_added": 18549,
+    "conservative_formula": "16609 + 1447 + 493 = 18549",
+    "conservative_headroom": 1451,
+    "deletions_not_used_as_credit": true,
+    "shared_exact_numstat": [
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleUnitIntegral",
+        "numstat": "1\t0\t39a06c8ea216f77af837487b24e3e187841e08a7 => 539887de9877614276395ffbbadb8a8ab8d8904c"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ControlFlowBounds",
+        "numstat": "84\t96\tda5a86231558708da484b96b350a925cd0fe50d4 => 440c6c682d1e8e1ff6114d11aeec6411035e7789"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ControlIndexBound",
+        "numstat": "4\t4\t1928f91ca23a5a0620ca958c0d83fc46b148e33a => e6ca03487e088a47f5869881ff0c1a7e6bf42d2a"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01ControlWeightConstraint",
+        "numstat": "16\t18\tc0e13885832aa4b133e24e45ff76bc0ca3cc2495 => fc55c919e972c5529680464eba8dbb66c07afb37"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01FlowSmallness",
+        "numstat": "14\t20\tca66bd0e3aa4056fdbdef013e16fe4825d066887 => 128bbe1e44710de2eeb4e45e9570ddd2bbcbec52"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction",
+        "numstat": "2\t75\t5150d77940daa6a3f95bd505bdb929b2e95db667 => cc38a6d2b17c7398b071a6b22a130668877f3204"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.OpticalControlRatio",
+        "numstat": "4\t29\tbd25720da42b672538f23d245d8c5890471d9a7e => ebcd0da63d49616a822888fdfdb3add58ea433c5"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.SmoothDirectionsUnitIntegral",
+        "numstat": "4\t3\tdb1f7cac84a057318f59c3d73a669948342193bd => 524d2fbeddf977df987df89dc5547e823629fdc6"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily",
+        "numstat": "10\t10\td6fbe2afb25d83b302e606ecf0dbc4bf3763b7a2 => f6269f9eb372fe9acaf71533c402bcd66d95e50d"
+      }
+    ],
+    "current_draft_credit": 0,
+    "historical_four_owned_charge_verified": 727,
+    "conditional_parent_reclassification_total_with_AE44": 771,
+    "charge_note": "The four independently checked historical charge records establish 727 unique selected lines. Parent separately reports AE44 as charged; 727+44=771 is only a conditional future reclassification ceiling, not present credit. Complete full green and a parent check against duplicate ledger credit remain mandatory.",
+    "historical_charge_records": [
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+        "source": "4ea70ab43fc1fa6e51ddcfa3849f97580bf02235",
+        "lines": 159,
+        "record": "e23bc263e84242b5ccf0ee478f47969e35112f21",
+        "record_sha256": "ad98588b21566a8643a62b79f2743d348e51c86fccbb0fe18fd5ca261bd949ef",
+        "explanation": "Snapshot34 explicitly counts this final 159-line apply-compatible source separately from the distinct earlier reconstructed 159-line source and root60: 378 new lines. 19585 - 4481 compiled-copy lines + 378 = 15482. Only this final source is eligible for this row; its distinct historical 159-line predecessor is not also credited."
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds",
+        "source": "1f55edbb185fe33327757a087479196cc8565e4f",
+        "lines": 301,
+        "record": "f8eec1034be1f1b09f018b3f2399d518fec1d90a",
+        "record_sha256": "d9a781f0caf62b43a105a1be4ddcdc595617b13baa03017b0b50b9fa5f154a20",
+        "explanation": "Snapshot35 explicitly adds 1470 = 349 + 301 + 235 + 140 + 151 + 294 lines, taking 15482 to 16952. This is the exact 301-line selected source."
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04EndpointCircleFixedBaseBounds",
+        "source": "09a1696b57c7fe3678cc6e10e419bb8fa22c0c11",
+        "lines": 115,
+        "record": "9b7826a4420843f8762bc4e47d96901409a7e5d4",
+        "record_sha256": "4f1b1c736eb94d9d46cd861599c5dd944fe84572c42db523564a2e0856e76066",
+        "explanation": "Snapshot36 explicitly adds 953 = 256 + 197 + 115 + 94 + 109 + 182 lines, taking 16952 to 17905. This is the exact selected 115-line source."
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04SelectorInverseCircleFixedBaseBounds",
+        "source": "054e86dbc3a61f36df0ff4fd7ddf71aefeacb117",
+        "lines": 152,
+        "record": "ee9d072e5cf0ca7baf0ef5832298425f42004a07",
+        "record_sha256": "c96c60607ea09541d6a5df31ead1b6fb5c4960b288ebfc9398c2d3bd6bdb8d17",
+        "explanation": "Snapshot38 explicitly adds 654 = 174 additional working-composition lines + final composition328 + selector152, taking 18872 to 19526. The .lean.txt historical input is not a separately counted new Lean source."
+      }
+    ],
+    "source_index47_limit": "The charge document references the snapshot47 index; this review independently checked the four charge records and selected source identities, and does not claim to have newly fetched that whole index."
+  },
+  "controls_and_rules": {
+    "actual_and_main_identical": {
+      "scripts/gen_root.py": "8c4778a0260d7f7125f2deb16c15a89dc416d4f8",
+      "scripts/root_exclude.txt": "fb280f584a48220180a18c65ab9a6883cbba800c",
+      ".github/workflows/build.yml": "3152629f2ebb53a7af652218ea5bd2d64d16d493",
+      "lakefile.toml": "e5a1f0b7f675184f10cbc5bed03f252c438de494",
+      "lean-toolchain": "f0e00b3338bac0d6f050d9a64e277314a9f7830f",
+      "lake-manifest.json": "67156a1517d5fa6b4cd5e3adb52354c7eba69bc8",
+      "AGENTS.md": "e6835ac7265ded9040e63ea60908e8f91f645f7d"
+    },
+    "additional_exact_controls": {
+      "lake-manifest.json": "67156a1517d5fa6b4cd5e3adb52354c7eba69bc8",
+      "docs/tasks/N04Coordinates.md": "94d52f529bea6b9e2b4aabd26783de4ee101b6ce"
+    },
+    "complete_actual_AGENTS_and_N04_task_read": true,
+    "no_root_control_toolchain_manifest_or_rule_change_in_batch": true
+  },
+  "successor_gate": {
+    "CI180_failed": true,
+    "failure_information_source": "Parent's explicit status update during review; no CI API called by reviewer.",
+    "composition332_reported_compiled": true,
+    "inverse349_reported_remaining_failure": "Local harg implicit pair elaboration; not a changed public mathematical contract.",
+    "mandatory": [
+      "Bind the complete exact inverse harg repair source, independent peer and owner from the actual successor; a short SHA prefix is insufficient.",
+      "Independently verify that the relevant actual-parent delta is only that reviewed inverse source, with unchanged public headers, imports, options, line count and no other relevant selected provider or control change.",
+      "Create a metadata successor for the actual head/tree and the one retained graph node without modifying this immutable CI180 plan, anchor or receipt.",
+      "Require complete successful quick check, full library build and final CI conclusion at that exact actual successor before activation; CI180's failure cannot satisfy this gate.",
+      "At final staging, recheck exact head/main lease, 97 absent paths, nine preimages, selected source SHA identities, unchanged root and controls, the finite 106-entry source-only diff, and the conservative budget including the complete root lag.",
+      "If any import, source list, shared preimage, generator, exclude or unrelated retained provider changes, recompute the affected dependency/coverage/budget checks instead of claiming the one-node shortcut applies."
+    ],
+    "possible_incremental_rebind": "With the reported zero-line same-header/same-import inverse-only repair, the 106 entries, nine shared migration review, import edges, explicit-name review and 18549 arithmetic remain reusable. The actual successor identity and its full-green gate still require explicit binding.",
+    "CI_number": "Formerly proposed CI181; parent has pushed the inverse-only CI181 repair and expects this finite group at CI182 or later."
+  },
+  "verification_constraints": {
+    "source_or_Lean_written": false,
+    "local_Lean_or_lake_or_elaboration": false,
+    "active_repository_source_or_index_changed": false,
+    "git_tree_commit_ref_or_push_performed": false,
+    "CI_query_download_or_workflow_action_performed": false,
+    "root_or_source_generator_executed": false,
+    "work_performed": "Read-only exact Git object, source/diff/API, graph, finite-name and arithmetic checks; only review metadata is persisted as a Git blob.",
+    "no_claim_of_final_realization_CurrentJets_or_material_certificate_completion": true
+  },
+  "open_source_plan_findings": [],
+  "explicit_limitations": [
+    "Activation is blocked until the reviewed actual inverse successor is rebound and completely green.",
+    "The historical endpoint115 owner body remains unavailable. Its identity, exact selected source, fresh source/API crosscheck and recovered selector152 cross-peer evidence are explicitly distinguished.",
+    "Name checking is for scoped explicit declarations and named instances, not an elaborator-generated whole-repository declaration table.",
+    "Actual four-default-target reachability is 4796 of 4802 projected modules, although every one of the 106 proposed modules is reached.",
+    "Historical mathematical peers are reused only for their exact source and contract scopes; this receipt is not compilation evidence."
+  ]
+}

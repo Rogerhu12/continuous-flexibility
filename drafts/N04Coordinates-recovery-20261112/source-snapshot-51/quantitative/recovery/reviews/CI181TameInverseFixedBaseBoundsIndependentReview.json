@@ -1,0 +1,140 @@
+{
+  "schema": "n04-independent-ci-repair-review/v1",
+  "status": "PASS_SOURCE_AND_EXACT_DELTA_NOT_COMPILED",
+  "reviewer": "/root/quantitative_route",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "intended_path": "quantitative/recovery/reviews/CI181TameInverseFixedBaseBoundsIndependentReview.json",
+  "persistence": "Git blob and session store. The execution environment became unavailable after the complete diagnostic/native-preimage read; no local write is claimed.",
+  "base": {
+    "ref": "8a8082de2b905bb3f4abe5756c02083043c93970",
+    "tree": "c750b137383bf740f66f33c40412f7aa003fa862",
+    "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+    "git_blob": "9fdff8588082a748f33628a53f259a471b7b5f9d",
+    "sha256": "7f2932953ad3ddd1f983e812118f80db544b5c8e6acdeeb15645f4e69c35e7e3",
+    "utf8_bytes": 18586,
+    "lines": 349
+  },
+  "selected": {
+    "path": "positive/repair181/TameInverseFixedBaseBounds.lean",
+    "git_blob": "0ebea7f59395ec005429f835a0d1a5110d4dcab9",
+    "sha256": "53b542af8c6bc563cbf67e92eeb2b393dae22e63488b7df8b362375deac94197",
+    "utf8_bytes": 18617,
+    "lines": 349
+  },
+  "candidate_manifest": {
+    "git_blob": "63f5ef223d0f162e408adcce2ec69ea607a4421b",
+    "sha256": "2197e997cd3dec3070cee8317c8916dcc998d91c4494772e57b8eae066066484",
+    "utf8_bytes": 8659,
+    "lines": 115
+  },
+  "exact_patch": {
+    "git_blob": "161d3f46a3f20bfc21580bcc9986bd6fe1e2e44b",
+    "sha256": "70c64d53f72d780704cc70a6cad02262bd576f779b1d816cb86a2ccca0eb5855",
+    "utf8_bytes": 804,
+    "lines": 11
+  },
+  "full_reading": {
+    "before": "The full349-line actual181 preimage was independently read in the immediately preceding review and its nativeGit blob/SHA checked again before the environment disconnected.",
+    "after": "All349 lines of the new Git-fetched source were read in this review.",
+    "diagnostic": "The sole complete CI181 context and goal were read in full from the root-downloaded artifact before disconnection. The trailing two build-summary lines are not additional diagnostics.",
+    "relevant_provider": "Read the actual pairGrading_apply contract from the fixed TameLocalCalculus blob and verified its content hash. No new graph or broad source scan."
+  },
+  "diagnostic": {
+    "round": 181,
+    "head": "8a8082de2b905bb3f4abe5756c02083043c93970",
+    "run_id": 43341646689,
+    "job_id": 131611116423,
+    "artifact_id": 13999019031,
+    "complete_error_json": {
+      "local_path": "/workspace/scratch/n04-drafts-20261113/root/ci/CI181CompleteErrorBlocks.json",
+      "computed_git_blob": "3360e504e84c36fe0c1774a576090bc089704630",
+      "sha256": "d113a1c7aca05b3256aa16c732a6a7457245c5637730b551d91d6a0a1a678f88",
+      "bytes": 8629,
+      "remote_upload_not_asserted": true
+    },
+    "complete_quicklog": {
+      "sha256": "987b95aec041e1f3f8d945da163ff38c5bf40b832493f25c9a0520cc6ad73f50",
+      "bytes": 7460333
+    },
+    "header": "error: src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean:263:66: unsolved goals",
+    "number_of_source_errors": 1,
+    "resolved_previous_errors": "The fifteen pair-inference diagnostics from CI180 do not occur in this full CI181 error set. The remaining harg is concretely typed at the actual e.eval pair."
+  },
+  "mechanical": {
+    "changed_line": {
+      "line": 263,
+      "before": "          hh.trans ((mul_le_mul_of_nonneg_left harg hC).trans_eq (by ring))",
+      "after": "          hh.trans ((mul_le_mul_of_nonneg_left harg hC).trans_eq (by simp only [pairGrading_apply]; ring))"
+    },
+    "literal_replacements": 1,
+    "forward_reconstruction_exact": true,
+    "reverse_reconstruction_exact": true,
+    "unified_patch_contexts_exact": true,
+    "added_lines": 1,
+    "deleted_lines": 1,
+    "net_source_lines": 0,
+    "complete_headers": [
+      {
+        "name_line": "private theorem inverseInputProfile_product",
+        "sha256": "f49822036d1a905695902501752f9fcbce4e512500912a76e8f903816327d8f5"
+      },
+      {
+        "name_line": "private theorem inverseProfile_linear_step",
+        "sha256": "8cb690c8c5d220cd7417836a3bb3c51d0aa3fef15655ba2b16a79b7e15d3046b"
+      },
+      {
+        "name_line": "private theorem inverseExpression_fixedBase_growth",
+        "sha256": "dd2d82548d50a83579c0ad91456fde4eba167eebee5e0882ffb99ba86c160422"
+      },
+      {
+        "name_line": "theorem inverseFamilySmoothDirections_fixedBase_oneHigh",
+        "sha256": "c8b3dd7a68baa35444b0a97764ca53b601929c97c6fe36449e7d5a34667e0525"
+      }
+    ],
+    "public_headers_unchanged": 1,
+    "private_headers_unchanged": 3,
+    "imports_unchanged": true,
+    "options_unchanged": true,
+    "all_other_source_bytes_unchanged": true,
+    "no_resource_limit_changes": true
+  },
+  "mathematical_review": {
+    "actual_pair": "y := e.eval J V i.val.1 i.val.2 : E × E",
+    "actual_high_order": "s + (n + forwardLoss)",
+    "goal_form": "C*K*P*pair_base(y) + C*K*pair_high(y) = C*K*P*q_base(y.1) + C*K*P*q_base(y.2) + C*K*q_high(y.1) + C*K*q_high(y.2).",
+    "lemma_application": "pairGrading_apply rewrites each fully applied pair seminorm to its two original component seminorms. The lemma is applied inside the nested equality proof passed to trans_eq; the outer simpa could not discharge that previously isolated ring goal.",
+    "resulting_algebra": "After these two expansions, both sides are the same real polynomial by distributivity. P,K,C and all evaluated seminorms remain opaque real expressions; no estimate, denominator or sign argument is changed.",
+    "preserved": "The source still uses the same hh, harg, hC, e,J,V,i, operatorBase and forwardLoss. The original hstep constant C*K, induction loss and fixed base before every order n are unchanged.",
+    "circularity": "No new hypothesis, inverse estimate, neighborhood restriction or alternate tower is introduced.",
+    "confirmed_issue_in_selected_source": null
+  },
+  "actual_provider": {
+    "path": "src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+    "git_blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+    "sha256": "6952ac2501bd38f0f6d51b1633f52d30ed1820f9380bd6dd58ebc24c601e1991",
+    "declaration": "pairGrading_apply",
+    "contract": "(p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) (n : ℕ) (x : E × F) : pairGrading p q n x = p n x.1 + q n x.2",
+    "instantiation": "E=F are the already available topological real modules in section Expressions.",
+    "already_used_in_same_proof": true
+  },
+  "retained_review": {
+    "peer": "cd21ba8871960322d962d7dacb397ed20ca24a41",
+    "peer_sha256": "ee39d5c43ec70219425e2587e01093dcc578aac499f5f9c4fa04d3d88c7973a7",
+    "owner": "56d6e9a33053e6b7d2e64df9edf5a50b54250a11",
+    "provider_scope": "The six exact providers and full underlying mathematics remain as bound by that review. This successor changes only the one nested scalar equality proof.",
+    "history_limit": "The earlier static pass did not establish compilation: CI181 actually failed at this remaining ring goal. Both old source and failure remain historical."
+  },
+  "pinned_mathlib": {
+    "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "new_API": false
+  },
+  "result": {
+    "static_source_review": "PASS",
+    "compilation": "NOT_RUN; next complete CI is required",
+    "budget_net_change": 0,
+    "new_draft_credit": 0,
+    "no_local_Lean_or_elaboration": true,
+    "no_active_edits": true,
+    "no_refs_or_CI_operations": true
+  }
+}

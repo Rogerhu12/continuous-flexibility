@@ -1,0 +1,87 @@
+{
+  "schema": "n04-critical-recovery/v1",
+  "as_of_utc": "2026-11-13 01:18:57 UTC",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "branch": "line/N04Coordinates",
+  "active": {
+    "schema": "n04-ci-push-receipt/v1",
+    "round": 182,
+    "repository": "Rogerhu12/continuous-flexibility",
+    "branch": "line/N04Coordinates",
+    "commit": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+    "tree": "02a8747b6aaae413f67372d96e52ad8f3dbd9e9a",
+    "parent": "8a8082de2b905bb3f4abe5756c02083043c93970",
+    "plan": "fc2eebae1d2bc81b0784eadbd5e4d691769daa72",
+    "force": false,
+    "expected_sha_verified": true,
+    "ref_readback_exact": true,
+    "pushed_readback_utc": "2026-11-13 01:17:14 UTC",
+    "earliest_first_ci_lookup_utc": "2026-11-13T01:22:14.000Z",
+    "budget": {
+      "active_added": 19543,
+      "active_deleted": 0,
+      "generated_root_lag": 396,
+      "conservative_active": 19939,
+      "conservative_retained_drafts": 19957,
+      "credit": 0
+    },
+    "compilation": "PENDING",
+    "last_complete_green": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30"
+  },
+  "last_complete_green": {
+    "round": 177,
+    "commit": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+    "tree": "da843557a720e7424e680ec2eaa3de49ad7ea07a",
+    "receipt": "5980c2ba762512f9ea495cfe101031ec4c8b0a4e"
+  },
+  "recent_failed_rounds": {
+    "180": "a781bcc23edb7bff25251b7aee646633de6f6690",
+    "181": "990139e08546d176528ac151ab10a9dba013929a"
+  },
+  "selected_inverse": {
+    "blob": "0ebea7f59395ec005429f835a0d1a5110d4dcab9",
+    "lines": 349,
+    "peer": "e8fef010ca91f7436378114422e83946165c9321",
+    "owner": "de34dc1195faa35a4dcc11243b86641a3a0db58d"
+  },
+  "budget": {
+    "active_conservative": 19939,
+    "retained_draft_conservative": 19957,
+    "remaining": 43,
+    "fixed131_conditional_credit": 681,
+    "after_fixed131_complete_green": 19276,
+    "then_authorizations": {
+      "full_J_max": 250,
+      "StageE_piece_max": 400
+    },
+    "fixed2_owned_conditional_credit": 727,
+    "AE44_conditional_credit": 44
+  },
+  "next_fixed2": {
+    "plan": "d5e3166592308c414a60214aa41c3b51bec2f9a1",
+    "peer": "7f2cdb412ab8f6d68a2ea4dbe28b51f1031044e7",
+    "entry_count": 106,
+    "conservative_budget": 18549,
+    "gate": "Complete green of182 or separately reviewed exact successor; rebind actual inverse provider0eb and verify all relevant exact preimages. Do not treat a read-only projection as activation."
+  },
+  "new_proof_routes": {
+    "full_J": "f81ad4bb45fb3a85c6d82683a3e0af16865d41db",
+    "StageE": "764ae5fef60e97e09deeaf621df9858e744feee3",
+    "StageE_peer": "5d7f1f40d8576f94821c6f1fe855fee82dae326d",
+    "StageB": "670f44fdfd5f2be5147a6a4f1a62546c756d2609"
+  },
+  "endpoint": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open",
+    "statement": "theorem N04Coordinates (hN04b : N04bStatement) : N04cStatement",
+    "allowed_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "environment": "Local execution disconnected; operate using remote Git blobs and expected-head updates. No local artifact write is asserted after disconnection.",
+  "invalid_record_excluded": "ea6d5b2f4e5c53c82ca0962dbb53b297ca2bb588",
+  "mandatory": "Continue actual mathematical implementation and complete CI until exact target is proved. Keep backups, exact source reviews and complete failure diagnostics. No final success based on metadata, isolated module compilation or raw cache counts."
+}

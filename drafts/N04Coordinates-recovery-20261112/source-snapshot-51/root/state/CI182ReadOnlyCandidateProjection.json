@@ -1,0 +1,23 @@
+{
+  "kind": "read_only_candidate_projection_not_activated",
+  "parent": "8a8082de2b905bb3f4abe5756c02083043c93970",
+  "parent_tree": "c750b137383bf740f66f33c40412f7aa003fa862",
+  "candidate_tree": "140603707e955285805a82c502615047c3eca3b3",
+  "plan": "d5e3166592308c414a60214aa41c3b51bec2f9a1",
+  "provider_gate_count": 413,
+  "single_reviewed_provider_rebind": {
+    "before": "083d926c2e2bd91323a068b40e93dc93117f9779",
+    "after": "9fdff8588082a748f33628a53f259a471b7b5f9d",
+    "peer": "cd21ba8871960322d962d7dacb397ed20ca24a41",
+    "owner": "56d6e9a33053e6b7d2e64df9edf5a50b54250a11"
+  },
+  "source_entries": 106,
+  "new": 97,
+  "shared": 9,
+  "exact_added": 16748,
+  "exact_deleted": 255,
+  "full_root_lag": 493,
+  "conservative_added": 18549,
+  "complete_green_required_before_activation": true,
+  "active_source_and_index_unchanged": true
+}

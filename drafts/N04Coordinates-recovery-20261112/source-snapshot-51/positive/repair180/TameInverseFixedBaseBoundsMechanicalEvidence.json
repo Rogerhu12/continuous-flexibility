@@ -1,0 +1,110 @@
+{
+  "before": {
+    "ref": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+    "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+    "git_blob": "083d926c2e2bd91323a068b40e93dc93117f9779",
+    "sha256": "7d8e733967093d47742799f946c847296b63de70ac0c41cceb33c1ba84755b83",
+    "utf8_bytes": 18532,
+    "lines": 349,
+    "final_newline": true
+  },
+  "selected": {
+    "path": "positive/repair180/TameInverseFixedBaseBounds.lean",
+    "git_blob": "9fdff8588082a748f33628a53f259a471b7b5f9d",
+    "sha256": "7f2932953ad3ddd1f983e812118f80db544b5c8e6acdeeb15645f4e69c35e7e3",
+    "utf8_bytes": 18586,
+    "lines": 349,
+    "final_newline": true
+  },
+  "replacements": [
+    {
+      "before": "(hfst operatorBase _)",
+      "after": "(hfst operatorBase (e.eval J V i.val.1 i.val.2))"
+    },
+    {
+      "before": "((hfst (s + (n + forwardLoss)) _).trans",
+      "after": "((hfst (s + (n + forwardLoss)) (e.eval J V i.val.1 i.val.2)).trans"
+    }
+  ],
+  "reverse_reconstruction_equal": true,
+  "complete_declaration_headers_equal": true,
+  "complete_headers": [
+    "private theorem inverseInputProfile_product\n    {E : Type*} [AddCommGroup E] [Module ℝ E]\n    (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (hI : HasInterpolation p) :\n    ∃ base loss : ℕ, ∀ (a b : ℕ) (R : ℝ), 0 ≤ R →\n      ∃ C : ℝ, 0 ≤ C ∧ ∀ {ι : Type} [Fintype ι] (x : ι → E),\n        (∑ i, p base (x i)) ≤ R →\n        (1 + ∑ i, p a (x i)) * (1 + ∑ i, p b (x i)) ≤\n          C * (1 + ∑ i, p (a + b + loss) (x i)) := by",
+    "private theorem inverseProfile_linear_step\n    {I : Type*} (P f g : ℕ → I → ℝ)\n    (hP : ∀ s i, 0 ≤ P s i) (hmono : ∀ i, Monotone (fun s => P s i))\n    (base opLoss productLoss loss : ℕ)\n    (hprod : ∀ a b, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ i, P a i * P b i ≤ C * P (a + b + productLoss) i)\n    (hf : ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ i, f s i ≤ C * P (s + loss) i)\n    (hstep : ∀ s, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ i, g s i ≤ C * (P (s + opLoss) i * f base i + f (s + opLoss) i)) :\n    ∀ s, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ i, g s i ≤ C * P (s + (opLoss + base + loss + productLoss)) i := by",
+    "private theorem inverseExpression_fixedBase_growth\n    (a : ℕ → Seminorm ℝ A) (ha : Monotone a)\n    (base productLoss : ℕ) (hbase : operatorBase ≤ base)\n    (hproduct : ∀ R : ℝ, 1 ≤ R → ∀ b c, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ z : (E × E) × A, pairGrading (pairGrading q q) a base z ≤ R →\n        (1 + pairGrading (pairGrading q q) a b z) *\n          (1 + pairGrading (pairGrading q q) a c z) ≤\n        C * (1 + pairGrading (pairGrading q q) a (b + c + productLoss) z))\n    (e : TameInverseExpression E E E A) (he : e.IsZeroLoss q q q a) :\n    ∃ loss : ℕ, ∀ R : ℝ, 1 ≤ R → ∀ s, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ z : (E × E) × A, z.1.1 ∈ U →\n        pairGrading (pairGrading q q) a base z ≤ R →\n        pairGrading q q s (e.eval J V z.1 z.2) ≤\n          C * (1 + pairGrading (pairGrading q q) a (s + loss) z) := by",
+    "theorem inverseFamilySmoothDirections_fixedBase_oneHigh\n    (hI : HasInterpolation (pairGrading q q))\n    (hU : IsOpen U)\n    (hleft : ∀ x ∈ U, ∀ y, V x (L x y) = y)\n    (hright : ∀ x ∈ U, ∀ y, L x (V x y) = y)\n    (hcont : ContinuousOn (fun z : E × E => V z.1 z.2) (U ×ˢ univ)) :\n    ∃ base : ℕ, ∀ n : ℕ, ∃ loss : ℕ, ∀ R : ℝ, 1 ≤ R →\n      ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧\n        ∀ x ∈ U ×ˢ univ, pairGrading q q base x ≤ R →\n          ∀ v : Fin n → E × E,\n            q s ((inverseFamilySmoothDirections J hU V hleft hright hcont).D n x v) ≤\n              C * tameJetSize (pairGrading q q) n s loss base x v := by"
+  ],
+  "public_headers": 1,
+  "private_headers": 3,
+  "imports_equal": true,
+  "options_equal": true,
+  "only_two_explicit_arguments": true,
+  "added_lines": 2,
+  "deleted_lines": 2,
+  "net_source_lines": 0,
+  "actual_providers": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseBounds.lean",
+      "ref": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+      "git_blob": "aeee314ef570e000726d4c0b44ac7918fc1b0c4a",
+      "sha256": "925fda87a5189968db6eb87ffe62505baf7a32638d304dcf31c4aabcf681ab37",
+      "utf8_bytes": 11046,
+      "lines": 244,
+      "final_newline": true,
+      "review_scope": "Exact actual180 provider identity equals previously full-reviewed CI179/CI178 provider; no provider or mathematical API change in this repair."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseJets.lean",
+      "ref": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+      "git_blob": "976c9b64fc749b055e22c2e8596a8781263956bc",
+      "sha256": "e34d22d95954a7c2bbd2dd6317eb1fcd08e4e7ded3cd3633729b501236bf694d",
+      "utf8_bytes": 12129,
+      "lines": 254,
+      "final_newline": true,
+      "review_scope": "Exact actual180 provider identity equals previously full-reviewed CI179/CI178 provider; no provider or mathematical API change in this repair."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseExpressions.lean",
+      "ref": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+      "git_blob": "14ad46cae7d92dca46f5efd006f5260873046713",
+      "sha256": "5f19c405b830b56e9ad43319b2e9b306af3a27d840167fc29d592e9b9edaec56",
+      "utf8_bytes": 22877,
+      "lines": 490,
+      "final_newline": true,
+      "review_scope": "Exact actual180 provider identity equals previously full-reviewed CI179/CI178 provider; no provider or mathematical API change in this repair."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+      "ref": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+      "git_blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+      "sha256": "6952ac2501bd38f0f6d51b1633f52d30ed1820f9380bd6dd58ebc24c601e1991",
+      "utf8_bytes": 11512,
+      "lines": 250,
+      "final_newline": true,
+      "review_scope": "Exact actual180 provider identity equals previously full-reviewed CI179/CI178 provider; no provider or mathematical API change in this repair."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameJetLocalBounds.lean",
+      "ref": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+      "git_blob": "af44988e9b25134eaeb1ae6505691d755d8bc228",
+      "sha256": "0cdfa8c38f6ff5e84cc7d486946ca4c96a7574ec929185edfa7397204374a184",
+      "utf8_bytes": 9127,
+      "lines": 196,
+      "final_newline": true,
+      "review_scope": "Exact actual180 provider identity equals previously full-reviewed CI179/CI178 provider; no provider or mathematical API change in this repair."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SpacesInterpolationProducts.lean",
+      "ref": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+      "git_blob": "bef566d963e0bafb656cca8fb64d118d2c396162",
+      "sha256": "302248ce14c8d3ef488a6a46d8cb80cb72b374f89da308baac7012fa92f8fd58",
+      "utf8_bytes": 10818,
+      "lines": 212,
+      "final_newline": true,
+      "review_scope": "Exact actual180 provider identity equals previously full-reviewed CI179/CI178 provider; no provider or mathematical API change in this repair."
+    }
+  ],
+  "same_actual_pair": "e.eval J V i.val.1 i.val.2 : E × E",
+  "unchanged_harg_logic": "q_base(y.fst) <= pairq_base(y), q_high(y.fst) <= pairq_high(y) <= K*pairq_high(y), multiplied and added to the existing hcoef; y is the same actual child expression in hh.",
+  "diagnostic_context_read": "All15 unique headers, all varying elaborator applications/goals and the complete shared context read; first14 share the exact c212 context. No CI/job/artifact download by owner."
+}

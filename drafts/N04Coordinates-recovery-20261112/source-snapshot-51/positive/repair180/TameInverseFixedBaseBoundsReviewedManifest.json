@@ -1,0 +1,90 @@
+{
+  "schema": "n04-reviewed-ci-repair-owner/v1",
+  "status": "SOURCE_REVIEWED_PENDING_CI_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "intended_module": "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds",
+  "path": "positive/repair180/TameInverseFixedBaseBoundsReviewedManifest.json",
+  "source": {
+    "path": "positive/repair180/TameInverseFixedBaseBounds.lean",
+    "git_blob": "9fdff8588082a748f33628a53f259a471b7b5f9d",
+    "sha256": "7f2932953ad3ddd1f983e812118f80db544b5c8e6acdeeb15645f4e69c35e7e3",
+    "utf8_bytes": 18586,
+    "lines": 349
+  },
+  "candidate_manifest": {
+    "git_blob": "7506e78879e649bf38a6dfc5a85d239adc5e966e",
+    "sha256": "7691e631bd46639bf314d50782a5d4dd6e801bac9f2ddaac88cb3bb1c14a8615",
+    "utf8_bytes": 16029,
+    "lines": 237
+  },
+  "independent_review": {
+    "reviewer": "/root/quantitative_route",
+    "path": "quantitative/recovery/reviews/CI180TameInverseFixedBaseBoundsIndependentReview.json",
+    "git_blob": "cd21ba8871960322d962d7dacb397ed20ca24a41",
+    "sha256": "ee39d5c43ec70219425e2587e01093dcc578aac499f5f9c4fa04d3d88c7973a7",
+    "scope": "Complete actual and selected349-line source, two explicit-argument replacements, all15 complete diagnostics, four full declaration headers, six exact actual providers, and relevant eval/pairGrading public contracts.",
+    "result": "PASS_SOURCE_REVIEW_ONLY_NOT_COMPILED",
+    "owner_receipt_read": "Entire returned independent review read and selected/candidate/patch/source identities checked before this owner freeze."
+  },
+  "base": {
+    "ref": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+    "tree": "f6bf0e9e425b2b0c019a1026ccbbfd0bf742c700",
+    "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+    "git_blob": "083d926c2e2bd91323a068b40e93dc93117f9779",
+    "sha256": "7d8e733967093d47742799f946c847296b63de70ac0c41cceb33c1ba84755b83",
+    "utf8_bytes": 18532,
+    "lines": 349
+  },
+  "exact_patch": {
+    "git_blob": "174f39ab7c6d6a4f2dd3fb25b310d4516e26346b",
+    "sha256": "9bd99d912bec8a6af96efc10181f36f6c057b91b8a8d7501924de8b26142707e",
+    "utf8_bytes": 971,
+    "lines": 14
+  },
+  "mechanical_evidence": {
+    "path": "positive/repair180/TameInverseFixedBaseBoundsMechanicalEvidence.json",
+    "git_blob": "8944cffd63e7709f7fde0eb6fde907ce9a28eeee",
+    "sha256": "67ab616fdfc44cfabf552984dba1795af7f12fa658e2dea3bb96ebe768a19f5d"
+  },
+  "complete_diagnostics": {
+    "local_path": "/workspace/scratch/n04-drafts-20261113/root/ci/CI180CompleteErrorBlocks.json",
+    "git_blob": "de707e9723b06179cd9d44ef18acdbe2a445e4f4",
+    "sha256": "1073ce5a1418e2085cd4ecf7905c7db07ec60091fdc26145612118de44b551fe",
+    "utf8_bytes": 100934,
+    "lines": 2035,
+    "final_newline": true
+  },
+  "replacement_scope": "Only two local hfst arguments are made explicit as the same e.eval J V i.val.1 i.val.2. All constants, index arithmetic, neighborhoods, genuine J/V/e/i data, public/private headers, imports, options and all other source bytes remain unchanged.",
+  "metadata_correction": {
+    "affected_manifest": "7506e78879e649bf38a6dfc5a85d239adc5e966e",
+    "affected_field": "ci_evidence.reading_scope",
+    "correction": "The exact shared typed context is132 lines excluding the context: label and terminal goal; it is133 only if the context: label is counted. The frozen candidate prose used133 without this distinction. The actual complete diagnostic content and all hashes are correct and remain unchanged.",
+    "independent_review_confirms": true
+  },
+  "preservation": {
+    "source_unchanged_after_peer": true,
+    "previous_static_peer": "ce1f2bf6010c189257a7207a829f4b94834d12cb",
+    "previous_owner": "e5543f699e1559634d3bddf7d2979f400b31be0b",
+    "previous_source": "083d926c2e2bd91323a068b40e93dc93117f9779",
+    "historical_failure": "CI180 failed at these two uninstantiated pair holes. Earlier static passes are preserved as history and are not compiled readiness claims.",
+    "parent_controls_activation": true
+  },
+  "budget": {
+    "source_lines": 349,
+    "previous_lines": 349,
+    "added_lines": 2,
+    "deleted_lines": 2,
+    "net_source_lines": 0,
+    "no_new_lean_archive": true
+  },
+  "restrictions": {
+    "local_Lean_or_lake": false,
+    "elaboration": false,
+    "CI_queries_or_downloads": false,
+    "active_edits": false,
+    "index_changes": false,
+    "git_ref_changes": false
+  },
+  "next_gate": "Root may stage the exact selected source; only a future complete CI can establish compilation. No full-forward source is authorized by this receipt."
+}

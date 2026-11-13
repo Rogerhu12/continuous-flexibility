@@ -1,0 +1,50 @@
+{
+  "schema": "n04-source-only-ci-plan/v1",
+  "round": 182,
+  "status": "REVIEWED_SOURCE_ONLY_NOT_COMPILED",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "branch": "line/N04Coordinates",
+  "parent": "8a8082de2b905bb3f4abe5756c02083043c93970",
+  "tree": "02a8747b6aaae413f67372d96e52ad8f3dbd9e9a",
+  "commit": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "last_complete_green": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+  "current_main_checked": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "change": {
+    "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+    "before": "9fdff8588082a748f33628a53f259a471b7b5f9d",
+    "after": "0ebea7f59395ec005429f835a0d1a5110d4dcab9",
+    "sha256": "53b542af8c6bc563cbf67e92eeb2b393dae22e63488b7df8b362375deac94197",
+    "bytes": 18617,
+    "lines": 349,
+    "added": 1,
+    "deleted": 1,
+    "net": 0,
+    "purpose": "Expand pairGrading_apply inside the nested equality before ring. Complete CI181 goal is an unchanged real polynomial after this definitional expansion."
+  },
+  "evidence": {
+    "candidate": "63f5ef223d0f162e408adcce2ec69ea607a4421b",
+    "patch": "161d3f46a3f20bfc21580bcc9986bd6fe1e2e44b",
+    "peer": "e8fef010ca91f7436378114422e83946165c9321",
+    "owner": "de34dc1195faa35a4dcc11243b86641a3a0db58d",
+    "complete_error": "3360e504e84c36fe0c1774a576090bc089704630",
+    "failure_receipt": "990139e08546d176528ac151ab10a9dba013929a"
+  },
+  "verification": {
+    "all_other_4932_blob_paths_unchanged": true,
+    "recursive_tree_not_truncated": true,
+    "public_and_private_headers_unchanged": true,
+    "imports_options_resources_unchanged": true,
+    "source_readback_exact": true
+  },
+  "budget": {
+    "active_added": 19543,
+    "active_deleted": 0,
+    "generated_root_lag": 396,
+    "conservative_active": 19939,
+    "conservative_retained_drafts": 19957,
+    "credit": 0
+  },
+  "ci_gate": "First lookup at least five minutes after pushed head readback; subsequent status lookups at least one minute apart. No credit until complete quick, full build, blueprint status and final workflow success.",
+  "endpoint": "N04Coordinates_Realization and parent remain open; allowed-axiom completion not yet established.",
+  "environment": "Local execution unavailable; GitHub API publication and remote evidence used."
+}

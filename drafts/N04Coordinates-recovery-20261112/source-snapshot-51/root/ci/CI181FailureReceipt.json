@@ -1,0 +1,48 @@
+{
+  "schema": "N04-complete-ci-failure-v1",
+  "ci_round": 181,
+  "commit": "8a8082de2b905bb3f4abe5756c02083043c93970",
+  "tree": "c750b137383bf740f66f33c40412f7aa003fa862",
+  "run_id": 43341646689,
+  "job_id": 131611116423,
+  "workflow_number": 1862,
+  "conclusion": "failure",
+  "completed_at": "2026-11-13T01:05:29Z",
+  "failed_step": "Quick check of the changed modules",
+  "full_build_and_blueprint_status": "skipped",
+  "fresh_source_modules_compiled": 0,
+  "composition332_compiled_in_previous_CI180": true,
+  "job_log": {
+    "blob": "83fbbadfb53e7ed6da573c6a0e13b024a5948c6e",
+    "diagnostic_context_truncated": true
+  },
+  "complete_errors": {
+    "blob": "3360e504e84c36fe0c1774a576090bc089704630",
+    "sha256": "d113a1c7aca05b3256aa16c732a6a7457245c5637730b551d91d6a0a1a678f88",
+    "bytes": 8629,
+    "source_errors": 1,
+    "full_context_present": true,
+    "trailing_build_summary_also_retained": true
+  },
+  "complete_original_artifact": {
+    "id": 13999019031,
+    "zip_sha256": "f4fd1b4f7ab987e4bef53934e317a53adfae1a31369db41fe50a0c8053ee0265",
+    "zip_bytes": 305624,
+    "quick_log_sha256": "987b95aec041e1f3f8d945da163ff38c5bf40b832493f25c9a0520cc6ad73f50",
+    "quick_log_bytes": 7460333,
+    "downloaded_once": true,
+    "members": [
+      "quick.log"
+    ]
+  },
+  "diagnosis": {
+    "file": "TameInverseFixedBaseBounds.lean",
+    "location": "263:66",
+    "old15_implicit_argument_errors_resolved": true,
+    "remaining": "The inner ring proof treats pairGrading as an opaque atom while its expected right side has been expanded to the four component terms. Explicitly rewrite pairGrading_apply inside that proof before ring."
+  },
+  "baseline_unchanged": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+  "draft_bound": 19957,
+  "draft_credit": 0,
+  "completion_claim": false
+}

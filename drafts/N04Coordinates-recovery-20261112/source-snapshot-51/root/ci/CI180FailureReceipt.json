@@ -1,0 +1,193 @@
+{
+  "schema": "N04-complete-ci-failure-v1",
+  "ci_round": 180,
+  "commit": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+  "tree": "f6bf0e9e425b2b0c019a1026ccbbfd0bf742c700",
+  "run_id": 43339984216,
+  "job_id": 131605580257,
+  "workflow_number": 1860,
+  "conclusion": "failure",
+  "completed_at": "2026-11-13T00:53:23Z",
+  "failed_step": "Quick check of the changed modules",
+  "full_build_and_blueprint_status": "skipped",
+  "required_steps": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 1
+    },
+    {
+      "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 2
+    },
+    {
+      "name": "Disk space",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 3
+    },
+    {
+      "name": "Set up the pinned Lean and Mathlib environment",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 4
+    },
+    {
+      "name": "Restore main's build artifacts",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 5
+    },
+    {
+      "name": "Reuse the builds of the lines merged by this push",
+      "status": "completed",
+      "conclusion": "skipped",
+      "number": 6
+    },
+    {
+      "name": "Reuse the build of the line this branch was cut from",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 7
+    },
+    {
+      "name": "Restore project build artifacts",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 8
+    },
+    {
+      "name": "Report which cache was restored",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 9
+    },
+    {
+      "name": "Generate the root import",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 10
+    },
+    {
+      "name": "Changed modules",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 11
+    },
+    {
+      "name": "Quick check of the changed modules",
+      "status": "completed",
+      "conclusion": "failure",
+      "number": 12
+    },
+    {
+      "name": "Build every library",
+      "status": "completed",
+      "conclusion": "skipped",
+      "number": 13
+    },
+    {
+      "name": "Save project build artifacts",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 14
+    },
+    {
+      "name": "Delete this branch's older build caches",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 15
+    },
+    {
+      "name": "Count compiled modules",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 16
+    },
+    {
+      "name": "Blueprint status and endpoint axioms",
+      "status": "completed",
+      "conclusion": "skipped",
+      "number": 17
+    },
+    {
+      "name": "Publish the precompiled build for line sandboxes",
+      "status": "completed",
+      "conclusion": "skipped",
+      "number": 18
+    },
+    {
+      "name": "Pack this line's build for main",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 19
+    },
+    {
+      "name": "Run actions/upload-artifact@v4",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 20
+    },
+    {
+      "name": "Run actions/upload-artifact@v4",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 21
+    },
+    {
+      "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 42
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 43
+    }
+  ],
+  "fresh_source_modules_compiled": [
+    {
+      "module": "ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds",
+      "lines": 332,
+      "minutes": 0.3,
+      "source": "f43a2b774c41da8cc9417051adc8c0a89d3ed04e"
+    }
+  ],
+  "job_log": {
+    "blob": "244f8bc6a2e1451329bc5160459850b5268a8964",
+    "diagnostic_contexts_truncated": true
+  },
+  "complete_errors": {
+    "chars": 94837,
+    "bytes": 100934,
+    "blob": "de707e9723b06179cd9d44ef18acdbe2a445e4f4",
+    "sha256": "1073ce5a1418e2085cd4ecf7905c7db07ec60091fdc26145612118de44b551fe"
+  },
+  "complete_original_artifact": {
+    "id": 14000255788,
+    "zip_sha256": "4696f16dda32a0480caa6076861d97c768fc259ef540d2e5e5290cd2729bbdf4",
+    "zip_bytes": 306521,
+    "quick_log_sha256": "6f6bb2131d01563fd644aaa9e3783ccaa169f0183163acf1ccbcf0b8f49c56a0",
+    "quick_log_bytes": 7531620,
+    "downloaded_once": true,
+    "members": [
+      "quick.log"
+    ]
+  },
+  "diagnosis": {
+    "source_errors": 15,
+    "file": "TameInverseFixedBaseBounds.lean",
+    "locations": "257–261",
+    "common_cause": "Two unspecified inputs of hfst in an untyped intermediate harg. All messages are elaboration failures at the same inequality; assign the actual e.eval pair explicitly."
+  },
+  "raw_cache_file_count_5125_is_not_coverage": true,
+  "baseline_unchanged": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+  "draft_bound": 19957,
+  "draft_credit": 0,
+  "completion_claim": false
+}

@@ -1,10 +1,10 @@
 {
-  "kind": "recovery_snapshot_with_two_new_draft_leaves",
-  "snapshot": 50,
-  "prior_commit": "c8739d24d653a828a0100187254a199378b076c9",
-  "line_head": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
-  "line_tree": "f6bf0e9e425b2b0c019a1026ccbbfd0bf742c700",
-  "frozen_at": "2026-11-13T00:52:07.310311+00:00",
+  "kind": "recovery_snapshot_without_new_Lean",
+  "snapshot": 51,
+  "prior_commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
+  "line_head": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "line_tree": "02a8747b6aaae413f67372d96e52ad8f3dbd9e9a",
+  "frozen_at": "2026-11-13 01:18:57 UTC",
   "files": [
     {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/cut-first-jets-syntax/ConstructedRootCutFirstJets.base.lean.txt",
@@ -29681,7 +29681,7 @@
       "bytes": 97155,
       "lines": 909,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/ci/CI178-build.log"
       }
     },
@@ -29692,7 +29692,7 @@
       "bytes": 7187,
       "lines": 144,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/ci/CI178CompleteErrorBlocks.json"
       }
     },
@@ -29703,7 +29703,7 @@
       "bytes": 1372,
       "lines": 42,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/ci/CI178FailureReceipt.json"
       }
     },
@@ -29714,7 +29714,7 @@
       "bytes": 2226,
       "lines": 64,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/repair178/TameFixedBaseCompositionBounds.owner.json"
       }
     },
@@ -29725,7 +29725,7 @@
       "bytes": 2494,
       "lines": 70,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/repair178/TameFixedBaseCompositionBounds.reviewed-owner.json"
       }
     },
@@ -29736,7 +29736,7 @@
       "bytes": 12213,
       "lines": 304,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/quantitative/recovery/reviews/CI178TameFixedBaseCompositionBoundsIndependentReview.json"
       }
     },
@@ -29747,7 +29747,7 @@
       "bytes": 12497,
       "lines": 237,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/positive/repair178/TameInverseFixedBaseBoundsCandidateManifest.json"
       }
     },
@@ -29758,7 +29758,7 @@
       "bytes": 3889,
       "lines": 95,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/positive/repair178/TameInverseFixedBaseBoundsReviewedOwner.json"
       }
     },
@@ -29769,7 +29769,7 @@
       "bytes": 11261,
       "lines": 184,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/audit/recovery/reviews/CI178TameInverseFixedBaseBoundsIndependentReview.json"
       }
     },
@@ -29780,7 +29780,7 @@
       "bytes": 3355,
       "lines": 61,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/positive/repair178/TameInverseFixedBaseBounds.patch"
       }
     },
@@ -29791,7 +29791,7 @@
       "bytes": 2816,
       "lines": 77,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/ci/CI179StagingPlan.json"
       }
     },
@@ -29802,7 +29802,7 @@
       "bytes": 562,
       "lines": 15,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/ci/CI179PushReceipt.json"
       }
     },
@@ -29813,7 +29813,7 @@
       "bytes": 78610,
       "lines": 961,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/ci/CI179-build.log"
       }
     },
@@ -29824,7 +29824,7 @@
       "bytes": 17815,
       "lines": 397,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/ci/CI179CompleteErrorBlocks.json"
       }
     },
@@ -29835,7 +29835,7 @@
       "bytes": 2077,
       "lines": 54,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/repair179/TameFixedBaseCompositionBounds.owner.json"
       }
     },
@@ -29846,7 +29846,7 @@
       "bytes": 7668,
       "lines": 137,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/quantitative/recovery/reviews/CI179TameFixedBaseCompositionBoundsIndependentReview.json"
       }
     },
@@ -29857,7 +29857,7 @@
       "bytes": 15310,
       "lines": 244,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/positive/repair179/TameInverseFixedBaseBoundsCandidateManifest.json"
       }
     },
@@ -29868,7 +29868,7 @@
       "bytes": 1392,
       "lines": 28,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/positive/repair179/TameInverseFixedBaseBounds.patch"
       }
     },
@@ -29879,7 +29879,7 @@
       "bytes": 6507,
       "lines": 173,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/positive/repair179/CI179TameInverseFixedBaseErrors.txt"
       }
     },
@@ -29890,7 +29890,7 @@
       "bytes": 6816,
       "lines": 96,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/positive/repair179/TameInverseFixedBaseBoundsMechanicalEvidence.json"
       }
     },
@@ -29901,7 +29901,7 @@
       "bytes": 2485,
       "lines": 18,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/positive/repair179/CI179PinnedFiniteSumAPIs.json"
       }
     },
@@ -29912,7 +29912,7 @@
       "bytes": 10592,
       "lines": 184,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/positive/reconstructed/N04DiscriminantIncrementJointGain.lean"
       }
     },
@@ -29923,7 +29923,7 @@
       "bytes": 14527,
       "lines": 279,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/positive/recovery/N04DiscriminantIncrementJointGainCandidateManifest.json"
       }
     },
@@ -29934,7 +29934,7 @@
       "bytes": 4905,
       "lines": 80,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/positive/recovery/N04DiscriminantIncrementJointGainReviewedOwner.json"
       }
     },
@@ -29945,7 +29945,7 @@
       "bytes": 11492,
       "lines": 192,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/audit/recovery/reviews/N04DiscriminantIncrementJointGainIndependentReview.json"
       }
     },
@@ -29956,7 +29956,7 @@
       "bytes": 549225,
       "lines": 12840,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/positive/recovery/N04DiscriminantIncrementJointGainDependencyGraph.json"
       }
     },
@@ -29967,7 +29967,7 @@
       "bytes": 10671,
       "lines": 268,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/positive/recovery/N04DiscriminantIncrementJointGainExtraDependencies.json"
       }
     },
@@ -29978,7 +29978,7 @@
       "bytes": 2027,
       "lines": 44,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/CanonicalReferencePieceInequality.lean"
       }
     },
@@ -29989,7 +29989,7 @@
       "bytes": 3575,
       "lines": 62,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/CanonicalReferencePieceInequality.owner.json"
       }
     },
@@ -30000,7 +30000,7 @@
       "bytes": 7897,
       "lines": 157,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/quantitative/recovery/reviews/CanonicalReferencePieceInequalityIndependentReview.json"
       }
     },
@@ -30011,7 +30011,7 @@
       "bytes": 4213,
       "lines": 72,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/CanonicalReferencePieceInequality.reviewed-owner.json"
       }
     },
@@ -30022,7 +30022,7 @@
       "bytes": 448923,
       "lines": 10597,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/quantitative/recovery/FixedBaseSecondBatchActualCI178Checkpoint.json"
       }
     },
@@ -30033,7 +30033,7 @@
       "bytes": 6983,
       "lines": 131,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/quantitative/recovery/FixedBaseSecondBatchFourOwned727ChargeEvidence.json"
       }
     },
@@ -30044,7 +30044,7 @@
       "bytes": 27569,
       "lines": 351,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/positive/recovery/N04FullForwardFixedBaseActualOperationRoute.json"
       }
     },
@@ -30055,7 +30055,7 @@
       "bytes": 1752,
       "lines": 46,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/ci/CI179FailureReceipt.json"
       }
     },
@@ -30067,7 +30067,7 @@
       "lines": null,
       "binary": true,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/ci/CI179-artifact/build-log.zip"
       }
     },
@@ -30078,7 +30078,7 @@
       "bytes": 2329,
       "lines": 60,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/repair179/TameFixedBaseCompositionBounds.reviewed-owner.json"
       }
     },
@@ -30089,7 +30089,7 @@
       "bytes": 2129,
       "lines": 37,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/repair179/TameFixedBaseCompositionBounds.patch"
       }
     },
@@ -30100,7 +30100,7 @@
       "bytes": 12057,
       "lines": 196,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/audit/repair179/CI179TameInverseFixedBaseBoundsIndependentReview.json"
       }
     },
@@ -30111,7 +30111,7 @@
       "bytes": 3976,
       "lines": 99,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/positive/repair179/TameInverseFixedBaseBoundsReviewedManifest.json"
       }
     },
@@ -30122,7 +30122,7 @@
       "bytes": 2422,
       "lines": 71,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/ci/CI180SourceOnlyRepairPlan.json"
       }
     },
@@ -30133,7 +30133,7 @@
       "bytes": 580,
       "lines": 15,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/root/ci/CI180PushReceipt.json"
       }
     },
@@ -30144,7 +30144,7 @@
       "bytes": 738878,
       "lines": 16883,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/quantitative/recovery/FixedBaseSecondBatchCI180ConditionalExecutionPlan.json"
       }
     },
@@ -30155,7 +30155,7 @@
       "bytes": 3102,
       "lines": 56,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/quantitative/recovery/FixedBaseSecondBatchCI180ActivationAnchor.json"
       }
     },
@@ -30166,7 +30166,7 @@
       "bytes": 3255900,
       "lines": 1,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/quantitative/recovery/FixedBaseSecondBatchCI180ProjectedImportGraph.json"
       }
     },
@@ -30177,12 +30177,386 @@
       "bytes": 26576,
       "lines": 395,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "214c7d0f1a22e122449ca069c4de9877f224a2d0",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-50/audit/recovery/CanonicalPrimitiveStageBShortCrossHalfRangeRoute.json"
+      }
+    },
+    {
+      "source": "positive/recovery/N04FullForwardFixedBaseUnitBallImplementation.json",
+      "blob": "f81ad4bb45fb3a85c6d82683a3e0af16865d41db",
+      "sha256": "5a268532c5ea56df2f124f336206b62feaefef6248e2abe6ae8229d0705caca8",
+      "bytes": 15355,
+      "lines": 195,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/positive/recovery/N04FullForwardFixedBaseUnitBallImplementation.json"
+      }
+    },
+    {
+      "source": "quantitative/recovery/Discriminant184SecondFixedBatchOverlap.json",
+      "blob": "6c63e17e1c155440633fc3e60bcb6005fc0a159f",
+      "sha256": "cab56d81970e87fc0b360566150c81f93e9e6216b4dc86521ef33dcb96a83371",
+      "bytes": 9751,
+      "lines": 236,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/quantitative/recovery/Discriminant184SecondFixedBatchOverlap.json"
+      }
+    },
+    {
+      "source": "root/ci/CI180-build.log",
+      "blob": "244f8bc6a2e1451329bc5160459850b5268a8964",
+      "sha256": "cb6b3d64edeb3697ef811c5dfab157a116e3f14a54035c94e4034b98e3212b92",
+      "bytes": 93555,
+      "lines": 1184,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/root/ci/CI180-build.log"
+      }
+    },
+    {
+      "source": "root/ci/CI180CompleteErrorBlocks.json",
+      "blob": "de707e9723b06179cd9d44ef18acdbe2a445e4f4",
+      "sha256": "1073ce5a1418e2085cd4ecf7905c7db07ec60091fdc26145612118de44b551fe",
+      "bytes": 100934,
+      "lines": 2035,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/root/ci/CI180CompleteErrorBlocks.json"
+      }
+    },
+    {
+      "source": "root/ci/CI180FailureReceipt.json",
+      "blob": "a781bcc23edb7bff25251b7aee646633de6f6690",
+      "sha256": "6dbc14f82b702b70edfa297301c81c4a44267698632defedce28c19c4cf83128",
+      "bytes": 5161,
+      "lines": 193,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/root/ci/CI180FailureReceipt.json"
+      }
+    },
+    {
+      "source": "root/ci/CI180-artifact/build-log.zip",
+      "blob": "600eb43b68e6e1ef7d2d46c8161b986813cc4aa2",
+      "sha256": "4696f16dda32a0480caa6076861d97c768fc259ef540d2e5e5290cd2729bbdf4",
+      "bytes": 306521,
+      "lines": null,
+      "binary": true,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/root/ci/CI180-artifact/build-log.zip"
+      }
+    },
+    {
+      "source": "positive/repair180/TameInverseFixedBaseBoundsCandidateManifest.json",
+      "blob": "7506e78879e649bf38a6dfc5a85d239adc5e966e",
+      "sha256": "7691e631bd46639bf314d50782a5d4dd6e801bac9f2ddaac88cb3bb1c14a8615",
+      "bytes": 16029,
+      "lines": 237,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/positive/repair180/TameInverseFixedBaseBoundsCandidateManifest.json"
+      }
+    },
+    {
+      "source": "positive/repair180/TameInverseFixedBaseBoundsReviewedManifest.json",
+      "blob": "56d6e9a33053e6b7d2e64df9edf5a50b54250a11",
+      "sha256": "070f6c1b66f05f787ba6b092cc1e8c1066fdf58073f1b84ae6ab8373e940e51f",
+      "bytes": 4588,
+      "lines": 90,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/positive/repair180/TameInverseFixedBaseBoundsReviewedManifest.json"
+      }
+    },
+    {
+      "source": "positive/repair180/TameInverseFixedBaseBounds.patch",
+      "blob": "174f39ab7c6d6a4f2dd3fb25b310d4516e26346b",
+      "sha256": "9bd99d912bec8a6af96efc10181f36f6c057b91b8a8d7501924de8b26142707e",
+      "bytes": 971,
+      "lines": 14,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/positive/repair180/TameInverseFixedBaseBounds.patch"
+      }
+    },
+    {
+      "source": "positive/repair180/CI180CompleteDiagnosticsDeduplicated.json",
+      "blob": "7acc8e81db26165f2509cf0b093ffd21b2308c88",
+      "sha256": "b60cb9fc872c494f454ab5ff3bcdcf6e16fe51f63e488f24d118331d8e52316b",
+      "bytes": 17571,
+      "lines": 229,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/positive/repair180/CI180CompleteDiagnosticsDeduplicated.json"
+      }
+    },
+    {
+      "source": "quantitative/recovery/reviews/CI180TameInverseFixedBaseBoundsIndependentReview.json",
+      "blob": "cd21ba8871960322d962d7dacb397ed20ca24a41",
+      "sha256": "ee39d5c43ec70219425e2587e01093dcc578aac499f5f9c4fa04d3d88c7973a7",
+      "bytes": 10011,
+      "lines": 189,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/quantitative/recovery/reviews/CI180TameInverseFixedBaseBoundsIndependentReview.json"
+      }
+    },
+    {
+      "source": "root/ci/CI181SourceOnlyRepairPlan.json",
+      "blob": "6986f1d566656fb1f64e86aef6a75fd60e5f6a74",
+      "sha256": "fe8262337f998fd87ce0ea09e210f39bb6267a3360050926f9e5dc691b90f012",
+      "bytes": 1864,
+      "lines": 56,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/root/ci/CI181SourceOnlyRepairPlan.json"
+      }
+    },
+    {
+      "source": "root/ci/CI181PushReceipt.json",
+      "blob": "c5f24fb755138a2509be4054784ee9e46fcc5701",
+      "sha256": "a3cdc06035a88ff9f7ae107ecc8386f9cd70df76741b9125a70ec81befe6f932",
+      "bytes": 579,
+      "lines": 15,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/root/ci/CI181PushReceipt.json"
+      }
+    },
+    {
+      "source": "root/state/Backup50PushReceipt.json",
+      "blob": "850680d35b8f47b09a5c32d43099c1f97c41016e",
+      "sha256": "83829c99df6016fee77ecd80b380e8982e46ceaa840527bf3cbc3dfb18ce5039",
+      "bytes": 533,
+      "lines": 13,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/root/state/Backup50PushReceipt.json"
+      }
+    },
+    {
+      "source": "positive/repair180/TameInverseFixedBaseBoundsMechanicalEvidence.json",
+      "blob": "8944cffd63e7709f7fde0eb6fde907ce9a28eeee",
+      "sha256": "67ab616fdfc44cfabf552984dba1795af7f12fa658e2dea3bb96ebe768a19f5d",
+      "bytes": 7713,
+      "lines": 110,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/positive/repair180/TameInverseFixedBaseBoundsMechanicalEvidence.json"
+      }
+    },
+    {
+      "source": "audit/recovery/reviews/FixedBaseSecondBatchConditionalExecutionIndependentReview.json",
+      "blob": "7f2cdb412ab8f6d68a2ea4dbe28b51f1031044e7",
+      "sha256": "b6f1402d8d1b7012217c434b8fcfaceb0cbd00bdbafcefe621d8a68a74cf6709",
+      "bytes": 87688,
+      "lines": 1848,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/audit/recovery/reviews/FixedBaseSecondBatchConditionalExecutionIndependentReview.json"
+      }
+    },
+    {
+      "source": "quantitative/recovery/StageETransportPieceEnvelopeImplementationLayout.json",
+      "blob": "764ae5fef60e97e09deeaf621df9858e744feee3",
+      "sha256": "3f0dacdecb09039b2a8dd9bfa39cf61574aff73c4dc8a873f9cd2941259da5b5",
+      "bytes": 38655,
+      "lines": 541,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/quantitative/recovery/StageETransportPieceEnvelopeImplementationLayout.json"
+      }
+    },
+    {
+      "source": "root/ci/CI181-build.log",
+      "blob": "83fbbadfb53e7ed6da573c6a0e13b024a5948c6e",
+      "sha256": "617adb2f0a1794399f608aa0e98bd039d493640c34569cffaa770d51a72af9bd",
+      "bytes": 70835,
+      "lines": 839,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/root/ci/CI181-build.log"
+      }
+    },
+    {
+      "source": "root/ci/CI181CompleteErrorBlocks.json",
+      "blob": "3360e504e84c36fe0c1774a576090bc089704630",
+      "sha256": "d113a1c7aca05b3256aa16c732a6a7457245c5637730b551d91d6a0a1a678f88",
+      "bytes": 8629,
+      "lines": 165,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/root/ci/CI181CompleteErrorBlocks.json"
+      }
+    },
+    {
+      "source": "root/ci/CI181FailureReceipt.json",
+      "blob": "990139e08546d176528ac151ab10a9dba013929a",
+      "sha256": "1acee17b632888d6e91273bc04c2b617f7ae78ab1675dbd54c4e484caf621ad5",
+      "bytes": 1803,
+      "lines": 48,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/root/ci/CI181FailureReceipt.json"
+      }
+    },
+    {
+      "source": "root/ci/CI181-artifact/build-log.zip",
+      "blob": "0b9103b28303c2b0c3fd7401274ad38ec848a8a6",
+      "sha256": "f4fd1b4f7ab987e4bef53934e317a53adfae1a31369db41fe50a0c8053ee0265",
+      "bytes": 305624,
+      "lines": null,
+      "binary": true,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/root/ci/CI181-artifact/build-log.zip"
+      }
+    },
+    {
+      "source": "quantitative/recovery/FixedBaseSecondBatchCI181ActivationAnchor.json",
+      "blob": "a90e2838d41375f75b58e14de63ed128449c5564",
+      "sha256": "59cbd0af72feb59ead897d326da3a3ff2483e92e3474e1c64decd71f7864d71d",
+      "bytes": 6477,
+      "lines": 124,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/quantitative/recovery/FixedBaseSecondBatchCI181ActivationAnchor.json"
+      }
+    },
+    {
+      "source": "root/state/CI182ReadOnlyCandidateProjection.json",
+      "blob": "e066d8dbc4e7922f945ed4448033c50b8b877f54",
+      "sha256": "687422fb4ce79083c80df051187d6f827f8789e2bb59984d59d6153e7b6b011f",
+      "bytes": 851,
+      "lines": 23,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/root/state/CI182ReadOnlyCandidateProjection.json"
+      }
+    },
+    {
+      "source": "audit/recovery/reviews/StageETransportPieceEnvelopeLayoutIndependentCheck.json",
+      "blob": "5d7f1f40d8576f94821c6f1fe855fee82dae326d",
+      "sha256": "18245f3063fc5e13def0de0604d4b67f53e3d3d127abe9c0b666f7ba0a11f2bf",
+      "bytes": 9709,
+      "lines": 174,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/audit/recovery/reviews/StageETransportPieceEnvelopeLayoutIndependentCheck.json"
+      }
+    },
+    {
+      "source": "positive/repair181/TameInverseFixedBaseBoundsCandidateManifest.json",
+      "blob": "63f5ef223d0f162e408adcce2ec69ea607a4421b",
+      "sha256": "2197e997cd3dec3070cee8317c8916dcc998d91c4494772e57b8eae066066484",
+      "bytes": 8659,
+      "lines": 115,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/positive/repair181/TameInverseFixedBaseBoundsCandidateManifest.json"
+      }
+    },
+    {
+      "source": "positive/repair181/TameInverseFixedBaseBounds.patch",
+      "blob": "161d3f46a3f20bfc21580bcc9986bd6fe1e2e44b",
+      "sha256": "70c64d53f72d780704cc70a6cad02262bd576f779b1d816cb86a2ccca0eb5855",
+      "bytes": 804,
+      "lines": 11,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/positive/repair181/TameInverseFixedBaseBounds.patch"
+      }
+    },
+    {
+      "source": "quantitative/recovery/reviews/CI181TameInverseFixedBaseBoundsIndependentReview.json",
+      "blob": "e8fef010ca91f7436378114422e83946165c9321",
+      "sha256": "d54b0f665ccafa7e5e21ea11ea2d023c1b6ea8c765c27fc0a559498023667562",
+      "bytes": 7420,
+      "lines": 140,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/quantitative/recovery/reviews/CI181TameInverseFixedBaseBoundsIndependentReview.json"
+      }
+    },
+    {
+      "source": "positive/repair181/TameInverseFixedBaseBoundsReviewedManifest.json",
+      "blob": "de34dc1195faa35a4dcc11243b86641a3a0db58d",
+      "sha256": "0dafe0805beca92668c0ba9f906db495d5f1bfbcbf155165c5a8a541956e2b9e",
+      "bytes": 4594,
+      "lines": 101,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/positive/repair181/TameInverseFixedBaseBoundsReviewedManifest.json"
+      }
+    },
+    {
+      "source": "root/ci/CI182SourceOnlyRepairPlan.json",
+      "blob": "fc2eebae1d2bc81b0784eadbd5e4d691769daa72",
+      "sha256": "5c51edc7a4b8f49a3cf1c080f4c51d2dd97ce26a6e49184194c0a4b87c108749",
+      "bytes": 2316,
+      "lines": 50,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/root/ci/CI182SourceOnlyRepairPlan.json"
+      }
+    },
+    {
+      "source": "root/ci/CI182PushReceipt.json",
+      "blob": "5d927ce104115b57d2489f913c541e99d74a9d01",
+      "sha256": "946c7052b61159a97c481eedc41af6fa0ad094b4c2890c2051399c7f0daa43ff",
+      "bytes": 851,
+      "lines": 25,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/root/ci/CI182PushReceipt.json"
+      }
+    },
+    {
+      "source": "root/state/CRITICAL-current.json",
+      "blob": "54cfb9a030f3c5298d449607b3128f05c3000e79",
+      "sha256": "ac49f8bbc19a4dff0e60776d9f4e2c0737441a63994a080164484e2591a24dce",
+      "bytes": 3471,
+      "lines": 87,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-51/root/state/CRITICAL-current.json"
       }
     }
   ],
-  "storage_note": "Existing immutable archive entries retained. Outside the archive remains byte-exact complete-green CI177. CI180 source repairs are retained by the additional active parent. Only the new184-line discriminant and44-line reference-piece leaves add archived Lean; selected source repair copies are not duplicated. The original CI179 build-log ZIP retains every complete diagnostic byte.",
+  "storage_note": "Existing archive retained. Outside archive remains byte-exact complete-green CI177. Active CI182 and its source repairs are retained by the additional parent. This snapshot adds metadata, patches, complete original logs/ZIPs and exact implementation routes only; no new archived Lean.",
   "compiled_baseline": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
   "compiled_baseline_tree": "da843557a720e7424e680ec2eaa3de49ad7ea07a"
 }

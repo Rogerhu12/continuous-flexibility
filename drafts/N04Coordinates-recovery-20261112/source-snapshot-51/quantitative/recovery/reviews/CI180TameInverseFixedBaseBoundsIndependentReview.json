@@ -1,0 +1,189 @@
+{
+  "schema": "n04-independent-ci-repair-review/v1",
+  "status": "PASS_SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "reviewer": "/root/quantitative_route",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "intended_path": "quantitative/recovery/reviews/CI180TameInverseFixedBaseBoundsIndependentReview.json",
+  "review_scope": "Full actual349-line preimage and full selected349-line source; exact two-substitution forward/reverse reconstruction; all15 complete CI180 diagnostics by lossless deduplication; all four complete declaration headers; six actual provider identities and the relevant eval/pairGrading contracts. No local Lean, build, elaboration, CI query, active edit or ref mutation.",
+  "base": {
+    "ref": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+    "tree": "f6bf0e9e425b2b0c019a1026ccbbfd0bf742c700",
+    "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+    "git_blob": "083d926c2e2bd91323a068b40e93dc93117f9779",
+    "sha256": "7d8e733967093d47742799f946c847296b63de70ac0c41cceb33c1ba84755b83",
+    "utf8_bytes": 18532,
+    "lines": 349
+  },
+  "selected": {
+    "path": "positive/repair180/TameInverseFixedBaseBounds.lean",
+    "git_blob": "9fdff8588082a748f33628a53f259a471b7b5f9d",
+    "sha256": "7f2932953ad3ddd1f983e812118f80db544b5c8e6acdeeb15645f4e69c35e7e3",
+    "utf8_bytes": 18586,
+    "lines": 349
+  },
+  "candidate_manifest": {
+    "git_blob": "7506e78879e649bf38a6dfc5a85d239adc5e966e",
+    "sha256": "7691e631bd46639bf314d50782a5d4dd6e801bac9f2ddaac88cb3bb1c14a8615",
+    "utf8_bytes": 16029,
+    "lines": 237
+  },
+  "patch": {
+    "git_blob": "174f39ab7c6d6a4f2dd3fb25b310d4516e26346b",
+    "sha256": "9bd99d912bec8a6af96efc10181f36f6c057b91b8a8d7501924de8b26142707e",
+    "utf8_bytes": 971,
+    "lines": 14
+  },
+  "mechanical_checks": {
+    "exact_replacements": [
+      {
+        "before": "(hfst operatorBase _)",
+        "after": "(hfst operatorBase (e.eval J V i.val.1 i.val.2))"
+      },
+      {
+        "before": "((hfst (s + (n + forwardLoss)) _).trans",
+        "after": "((hfst (s + (n + forwardLoss)) (e.eval J V i.val.1 i.val.2)).trans"
+      }
+    ],
+    "forward_reconstruction_exact": true,
+    "reverse_reconstruction_exact": true,
+    "added_lines": 2,
+    "deleted_lines": 2,
+    "net_source_lines": 0,
+    "complete_headers": [
+      {
+        "name_line": "private theorem inverseInputProfile_product",
+        "sha256": "f49822036d1a905695902501752f9fcbce4e512500912a76e8f903816327d8f5"
+      },
+      {
+        "name_line": "private theorem inverseProfile_linear_step",
+        "sha256": "8cb690c8c5d220cd7417836a3bb3c51d0aa3fef15655ba2b16a79b7e15d3046b"
+      },
+      {
+        "name_line": "private theorem inverseExpression_fixedBase_growth",
+        "sha256": "dd2d82548d50a83579c0ad91456fde4eba167eebee5e0882ffb99ba86c160422"
+      },
+      {
+        "name_line": "theorem inverseFamilySmoothDirections_fixedBase_oneHigh",
+        "sha256": "c8b3dd7a68baa35444b0a97764ca53b601929c97c6fe36449e7d5a34667e0525"
+      }
+    ],
+    "complete_public_headers_unchanged": 1,
+    "complete_private_headers_unchanged": 3,
+    "imports_unchanged": true,
+    "options_unchanged": true,
+    "no_resource_options_added": true,
+    "all_other_source_bytes_unchanged": true
+  },
+  "complete_diagnostics": {
+    "round": 180,
+    "head": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+    "run_id": 43339984216,
+    "job_id": 131605580257,
+    "artifact_id": 14000255788,
+    "complete_error_blocks": {
+      "local_path": "/workspace/scratch/n04-drafts-20261113/root/ci/CI180CompleteErrorBlocks.json",
+      "git_blob": "de707e9723b06179cd9d44ef18acdbe2a445e4f4",
+      "sha256": "1073ce5a1418e2085cd4ecf7905c7db07ec60091fdc26145612118de44b551fe",
+      "utf8_bytes": 100934,
+      "lines": 2035,
+      "final_newline": true
+    },
+    "complete_quicklog": {
+      "local_path": "/workspace/scratch/n04-drafts-20261113/root/ci/CI180-artifact/quick.log",
+      "git_blob": "a88e1aa6a7e192aa6baed251e296156fd55e5869",
+      "sha256": "6f6bb2131d01563fd644aaa9e3783ccaa169f0183163acf1ccbcf0b8f49c56a0",
+      "utf8_bytes": 7531620,
+      "lines": 28396,
+      "final_newline": true,
+      "git_content_identity_only": "Computed from the parent-downloaded complete artifact; this owner does not upload the7.5MB log again."
+    },
+    "reading": "Read all15 unique headers, all distinct elaborator applications, the exact common typed context and every terminal target. The first14 typed contexts are byte-identical; the last diagnostic is the cascading failed-have-type message.",
+    "same_typed_context_count": 14,
+    "common_context_lines_excluding_context_label_and_goal": 132,
+    "common_context_sha256": "c2127977d4dc64cb8a1b1d9106e5a99fa343ade52e10f745753d580057a02036",
+    "metadata_correction": "The frozen candidate manifest's phrase '133-line context' includes the context: label. The shared typed context alone has132 lines. Source, full diagnostic artifact and its hash are unchanged; this correction does not alter the historical candidate.",
+    "no_repeat_log_download": true
+  },
+  "source_reasoning": [
+    "The local hfst has type forall(s:Nat)(y:E×E), q s y.1 <= pairGrading q q s y. Before repair, harg was introduced without an expected type, and both hfst pair arguments were independent metavariables. The complete diagnostics identify exactly these ?m.2544 and ?m.2619 pair holes.",
+    "Both arguments now equal y := e.eval J V i.val.1 i.val.2, exactly the child-expression pair whose first component is the last argument of hc in hh. No new state, intermediate low-neighborhood, expression, tower or source vector is chosen.",
+    "Writing high=s+(n+forwardLoss), the first inequality is hcoef*q operatorBase y.1 <= (K*P high i)*pairGrading q q operatorBase y. Nonnegativity requirements are the actual seminorm value and K*P; K>=1 and P=1+d>=0 already establish them.",
+    "The second inequality is q high y.1 <= pairGrading q q high y <= K*pairGrading q q high y. Thus harg has precisely the same two addends as hh, with both pair holes determined.",
+    "Multiplication by hC>=0, the existing ring normalization, and pairGrading_apply/eval for the forward constructor give the original hstep with constant C*K and the identical order/operatorBase/forwardLoss. The remaining induction and final fixed-base unit-ball argument are byte-identical.",
+    "The fixed base still precedes every n and loss choice. The public theorem bounds the already constructed inverseFamilySmoothDirections, with the original J,V and original U. There is no new quantitative premise or quantifier weakening."
+  ],
+  "providers": {
+    "six_actual180_identities_verified_against_git": [
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameInverseBounds.lean",
+        "git_blob": "aeee314ef570e000726d4c0b44ac7918fc1b0c4a",
+        "sha256": "925fda87a5189968db6eb87ffe62505baf7a32638d304dcf31c4aabcf681ab37",
+        "lines": 244
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameInverseJets.lean",
+        "git_blob": "976c9b64fc749b055e22c2e8596a8781263956bc",
+        "sha256": "e34d22d95954a7c2bbd2dd6317eb1fcd08e4e7ded3cd3633729b501236bf694d",
+        "lines": 254
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameInverseExpressions.lean",
+        "git_blob": "14ad46cae7d92dca46f5efd006f5260873046713",
+        "sha256": "5f19c405b830b56e9ad43319b2e9b306af3a27d840167fc29d592e9b9edaec56",
+        "lines": 490
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+        "git_blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+        "sha256": "6952ac2501bd38f0f6d51b1633f52d30ed1820f9380bd6dd58ebc24c601e1991",
+        "lines": 250
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameJetLocalBounds.lean",
+        "git_blob": "af44988e9b25134eaeb1ae6505691d755d8bc228",
+        "sha256": "0cdfa8c38f6ff5e84cc7d486946ca4c96a7574ec929185edfa7397204374a184",
+        "lines": 196
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/SpacesInterpolationProducts.lean",
+        "git_blob": "bef566d963e0bafb656cca8fb64d118d2c396162",
+        "sha256": "302248ce14c8d3ef488a6a46d8cb80cb72b374f89da308baac7012fa92f8fd58",
+        "lines": 212
+      }
+    ],
+    "relevant_actual_contracts_read": [
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameInverseExpressions.lean",
+        "git_blob": "14ad46cae7d92dca46f5efd006f5260873046713",
+        "declarations": [
+          "inverseForwardJet",
+          "TameInverseExpression.eval"
+        ],
+        "fact": "eval has codomain Y×Z; in this E/E/E specialization the forward constructor is (0,inverseForwardJet ... (e.eval ...).1)."
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+        "git_blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+        "declarations": [
+          "pairGrading_apply"
+        ],
+        "fact": "pairGrading p q s y = p s y.1 + q s y.2."
+      }
+    ],
+    "unchanged_provider_review_scope": "Six fingerprints rechecked at exact actual180. Earlier full-provider mathematics is retained from ce1f2bf; this narrow repair does not silently switch any provider.",
+    "mathlib_ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "new_mathlib_API": false
+  },
+  "historical_review": {
+    "git_blob": "ce1f2bf6010c189257a7207a829f4b94834d12cb",
+    "sha256": "4c5b9fb62cd9946441085a0027419a2e27c17fab4bce8d9bdbc10c7eb1f40ac0",
+    "owner_git_blob": "e5543f699e1559634d3bddf7d2979f400b31be0b",
+    "limit": "Historical static pass is not a compiled pass: CI180 actually failed at the two pair-inference holes. This receipt reviews only the precise successor source and retains that failure evidence."
+  },
+  "result": {
+    "source_and_delta": "PASS",
+    "confirmed_defect_in_selected_source": null,
+    "compilation": "NOT_RUN; next CI181 must verify elaboration",
+    "activation": "Root-controlled; no activation or push performed by reviewer"
+  }
+}

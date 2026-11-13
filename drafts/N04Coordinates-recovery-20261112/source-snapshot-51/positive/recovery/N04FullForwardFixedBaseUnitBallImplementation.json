@@ -1,0 +1,195 @@
+{
+  "schema": "n04-full-forward-fixed-base-unitball-implementation/v1",
+  "status": "READ_ONLY_EXECUTABLE_PROOF_DESIGN_NOT_NEW_LEAN_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "previous_route": {
+    "git_blob": "072cdd3bd9369eb78720d5d37e30305a88db536f",
+    "sha256": "1f551ff21bf82a7a658a8ea8d75323c05790cd43b8c2d694ecf48bd3999caa54",
+    "relationship": "This is a shorter proof of the same prospective actual full-J theorem. The old direct-kernel-majorant proof remains unchanged and valid as a plan."
+  },
+  "source_pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "active_diagnostic_pin": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+  "restrictions": "No new Lean, active edits, index/ref changes, local elaboration or CI queries. Await parent full-green authorization. The proposed complete leaf is estimated at 220-245 lines, not yet written or checked by Lean.",
+  "result": {
+    "name": "circleShiftedChartCompose_fullJets_fixedBase_oneHigh",
+    "head": "theorem circleShiftedChartCompose_fullJets_fixedBase_oneHigh\n    {D : ReferenceData} {T : MaterialData} {gamma : ℝ} {M : CircleModelData}\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (hgamma : 0 < gamma) (hM : IsCircleModel T gamma M)\n    (hI : HasInterpolation M.grading) :\n    ∃ B ell : ℕ, ∀ n : ℕ, ∀ R : ℝ, 1 ≤ R → ∀ s : ℕ,\n      ∃ C : ℝ, 0 ≤ C ∧ ∀ (travel : ℕ → ℝ)\n        (J : SmoothDirections univ (fun x : M.Space × M.Space =>\n          circleShiftedChartComposeContinuousLinear hM hT hD hgamma travel x.1 x.2)),\n      ∀ x : M.Space × M.Space,\n        pairGrading M.grading M.grading B x ≤ R →\n      ∀ v : Fin n → M.Space × M.Space,\n        M.grading s (J.D n x v) ≤\n          C * tameJetSize (pairGrading M.grading M.grading) n s (n + ell) B x v",
+    "quantifiers": "Given actual hD,hT,hgamma>0,hM,hI: choose B and ell once; then forall N,R>=1,s choose C>=0 before every travel, every given genuine full SmoothDirections univ F_travel, every x with pairq_B x<=R, and every N-tuple of directions. The conclusion is q_s(J.D_N x v)<=C*tameJetSize(pairq,N,s,N+ell,B,x,v).",
+    "source_and_weight": "The same CircleModelData and grading are used throughout. In the actual chain gamma=3/4; the material H(sample m)^gamma factor encoded by that grading is preserved. Travel is an external index-dependent real shift, never a vector whose grading is estimated.",
+    "no_target_hypothesis": "Only actual model/interpolation and given genuine tower inputs occur. No bound for the desired full J is an assumption.",
+    "scope_of159": "159 estimates inverseForwardJet with one source slot. It is applied only after proving the complete actual full-J decomposition with all source slots. The final normalization is of the given CML J.D_N, not of a fabricated full tensor."
+  },
+  "dependencies": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleChartCompositionJets.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "78ee43e48a7c8104ef977bd527f82f572f0ba107",
+      "sha256": "26d8489820d9b56af3f99caa2b7633aecc5cb475776d6c484698f518c517b3a6",
+      "utf8_bytes": 18723,
+      "lines": 367,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CoupledCircleCompositionRealization.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "c0b4ada33ad03e522aed5a3a52d8ef461bec9be3",
+      "sha256": "08ae5c8b3e993e1db595d5a4ee79e5711910bfac1f89a7871d7a42ced29223f0",
+      "utf8_bytes": 7809,
+      "lines": 151,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleCompositionSmoothDirections.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "e18aa8ce1e77ebdc960d721a286e9ffdb7b58632",
+      "sha256": "aa517f48d3ea24278d0f4b7ef1b1a7e23547d22ee54b5cd09d1af73f8d259def",
+      "utf8_bytes": 5725,
+      "lines": 112,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleTranslationUniformBounds.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "29683e9c974fecbcd03fef36251ebb8b0061c485",
+      "sha256": "7ef561296693115b33d9daa18e66efb1778b028ac5d558696449a73af322b79f",
+      "utf8_bytes": 6812,
+      "lines": 144,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAffine.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+      "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+      "utf8_bytes": 5346,
+      "lines": 124,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+      "git_blob": "4ea70ab43fc1fa6e51ddcfa3849f97580bf02235",
+      "lines": 159,
+      "selection": "Owned reviewed final _apply version. Complete actual source read, same selected version used by the301/152 chain."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameMultilinearNormalization.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "utf8_bytes": 9718,
+      "lines": 204,
+      "read_scope": "Full current source, both pure and continuous public normalization contracts read. Use the continuous version on genuine J.D."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameElementaryCalculus.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "bc38b3601334a7b76a3eda9f3602c4d3b2440423",
+      "sha256": "8970cb3def322b3ecaf1d4c717754fc68f57d4a63d4ed82023a7d4fae5ac9b09",
+      "read_scope": "Exact tameJetSize definition and its nonneg/mono/zero/one public declarations read; no claim of a fresh full-source review here."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+      "sha256": "6952ac2501bd38f0f6d51b1633f52d30ed1820f9380bd6dd58ebc24c601e1991",
+      "read_scope": "Products section and exact pairGrading_apply / tamePairGrading_monotone public declarations read. Circle spaces supply all section topology instances."
+    }
+  ],
+  "literal_supplier_header": "theorem circleShiftedChartCompose_orderedJets_fixedBase_bound :\n    ∃ base loss : ℕ, ∀ (n : ℕ) (R : ℝ), 1 ≤ R →\n      ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧\n        ∀ (travel : ℕ → ℝ) (U : Set M.Space) (hU : IsOpen U)\n          (J : SmoothDirections (U ×ˢ univ) (fun z : M.Space × M.Space =>\n            circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2)),\n          ∀ e ∈ U, M.grading base e ≤ R → ∀ v : Fin n → M.Space,\n            (∀ i, M.grading base (v i) ≤ R) → ∀ y : M.Space,\n              M.grading s (inverseForwardJet J n e v y) ≤ C *\n                ((1 + M.grading (s + (n + loss)) e +\n                    ∑ i, M.grading (s + (n + loss)) (v i)) * M.grading base y +\n                  M.grading (s + (n + loss)) y)",
+  "prospective_imports": [
+    "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+    "ContinuousFlexibility.Analysis.CircleCompositionSmoothDirections",
+    "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+    "ContinuousFlexibility.Analysis.TameLocalCalculus"
+  ],
+  "identity_proof": {
+    "product_helper": "For any h:Fin(n+1)->Real and i, product over univ.erase i equals product_j h(i.succAbove j). Derive from prod_single_replacement h i 1 and Fin.prod_univ_succAbove applied to j |-> if j=i then 1 else h j. Fin.succAbove_ne removes each conditional. No division or nonzero hypotheses.",
+    "actual_full_tensor": "For N=n+1, J.D_N x v = inverseForwardJet J0 N x.1 (fun i => (v i).1) x.2 + sum i:Fin N, inverseForwardJet J0 n x.1 (fun j:Fin n => (v(i.succAbove j)).1) (v i).2.",
+    "J0": "J0 is J with only univ rewritten as univ product univ using Set.univ_prod_univ, so it meets159's domain type. This is a domain type transport, not an existence call or a new representative. Each ordered-to-kernel identity holds for this same genuine J0.",
+    "proof_steps": [
+      "Obtain the already-existing genuine full tower and exact scalar decoder from exists_circleChartComposition_smoothDirections. Use SmoothDirections.unique on univ to identify its derivative CMLs with the given J. Only the given J occurs in the conclusion and numerical normalization.",
+      "For each pure source term, use159 circleShiftedChartCompose_orderedJet_eq_kernel, then coupledCircleKernel_decode_apply. Translate the decoded source with circleTranslationContinuousLinear_decode and the public iteratedDeriv_comp_add_const. Addition commutativity identifies the phase with circleCompositionPhase travel x.",
+      "Apply M.decode injectivity. Its map_add/map_sum and finite evaluation identities reduce the proposed sum to circleChartCompositionJets_apply. Use the helper for each erased product and Nat.add_sub_cancel for successor order. All N source terms are present; no Schwarz argument or source-symmetry assumption.",
+      "For N=0 use J.zero and inverseForwardJet_zero directly. The Fin0 tuple has a unique inhabitant; no deleted-source sum or negative order is needed."
+    ],
+    "public_apis": [
+      "SmoothDirections.unique",
+      "exists_circleChartComposition_smoothDirections",
+      "circleChartCompositionJets_apply",
+      "circleShiftedChartCompose_orderedJet_eq_kernel",
+      "coupledCircleKernel_decode_apply",
+      "circleTranslationContinuousLinear_decode",
+      "iteratedDeriv_comp_add_const",
+      "prod_single_replacement",
+      "Fin.prod_univ_succAbove",
+      "Fin.succAbove_ne",
+      "Set.univ_prod_univ"
+    ]
+  },
+  "fixed_base_estimate": {
+    "choose_once": "Take B,ell once from159 circleShiftedChartCompose_orderedJets_fixedBase_bound. For fixed N,R>=1,s obtain C_N and, for N>0, C_(N-1) using the same B,ell,R,s.",
+    "definitions": "p=pairGrading q q; H=s+(N+ell); A=1+p_H x+sum_i p_H(v_i). For unit directions assume p_B(v_i)<1. Each component low is <=1<=R and each component high is <=the pair high.",
+    "main": "159 gives C_N*((1+q_H x.fst+sum_i q_H(v_i.fst))*q_B x.snd+q_H x.snd). Since q_B x.snd<=R and R>=1, this is <=C_N*R*A. q_H x.snd is absorbed using q_H x.snd<=R*q_H x.snd, so the coefficient remains exactly R, not R+1.",
+    "deleted": "For i and N=n+1,159 gives C_n*((1+q_H' x.fst+sum_j q_H'(v(i.succAbove j).fst))*q_B(v_i.snd)+q_H'(v_i.snd)), H'=s+(n+ell). Promote only H'<=H by gradedSeminorm_monotone. Since q_B(v_i.snd)<=1, bound by C_n*(1+q_H x.fst+sum_j q_H(v(i.succAbove j).fst)+q_H(v_i.snd)).",
+    "no_double_count": "Fin.sum_univ_succAbove applied to f(j)=p_H(v_j) gives sum_all=f(i)+sum_others. Bound q_H(v_i.snd)<=f(i) and q_H(other.fst)<=f(other); therefore the deleted affine factor is <=A with no extra factor N, R, inverse seminorm or duplicated high slot.",
+    "sum": "Seminorm add subadditivity and a finite induction for sum subadditivity give q_s(J.D_N x v)<= (C_N*R+(N:Real)*C_(N-1))*A. For N=0 use C_0*R. The finite sum computation uses explicitly Real coefficients and Fin N binders.",
+    "normalization": "Apply current multilinear_bound_of_unitBall to the actual continuous multilinear map J.D_N x, q_s, p_B,p_H, with a=1+p_H x and nonnegative C. Its output is definitionally the requested tameJetSize after explicitly unfolding the project definitions only. The theorem keeps exactly C, so no arity-dependent low base appears.",
+    "public_apis": [
+      "gradedSeminorm_monotone",
+      "pairGrading_apply",
+      "Fin.sum_univ_succAbove",
+      "Finset.sum_le_sum",
+      "map_add_le_add",
+      "multilinear_bound_of_unitBall",
+      "tameJetSize"
+    ],
+    "final_constant": "C_N*R + (N:Real)*C_(N-1) for positive N; C_0*R for N=0. C is chosen before travel, J, x and directions. Parameter loss(N)=N+ell precedes all spatial s and ball radii.",
+    "same_J": "No quantitative choice of an alternative J is made. The auxiliary qualitative tower is only an equality witness for the full formula. Unit-ball normalization is explicitly on the supplied J.D_N.",
+    "gamma": "The entire proof is internal to q=M.grading and uses the same actual translated source. Hence no H^gamma factor is dropped or recovered from a weaker unweighted estimate."
+  },
+  "independent_narrow_check": {
+    "reviewer": "/root/audit_coordinates",
+    "scope": "Read-only numerical159-contract and finite-slot budget check, not a full peer of unwritten source.",
+    "conclusion": "Confirmed main<=C_N*R*A and each deleted<=C_(N-1)*A after promoting only its high index; Fin.sum_univ_succAbove counts every direction once. Genuine J.D unit-ball normalization returns the exact tameJetSize, including N=0 treated separately.",
+    "remaining": "Full scalar identity and eventual complete source/selected graph still need independent peer after writing. No compilation status claimed."
+  },
+  "line_budget_estimate": [
+    {
+      "block": "Imports, variables, local notation and required include placement",
+      "lines": 20
+    },
+    {
+      "block": "Erased product helper through pinned finite APIs",
+      "lines": 11
+    },
+    {
+      "block": "Actual full tensor identity through decoder and uniqueness",
+      "lines": 55
+    },
+    {
+      "block": "Public statement and once-only base/loss selection",
+      "lines": 27
+    },
+    {
+      "block": "Zero-order case using the original source-linear estimate",
+      "lines": 24
+    },
+    {
+      "block": "Successor unit-ball estimates, finite sum and actual CML normalization",
+      "lines": 100
+    },
+    {
+      "block": "Closing namespace",
+      "lines": 2
+    }
+  ],
+  "estimated_total_lines": 239,
+  "implementation_cautions": [
+    "Place include hI before documentation/declaration, not between a doc comment and theorem.",
+    "Give Finset.univ and Fin-index binders explicit types in sums; use real arithmetic casts for N. The prior CI179 failures make these concrete elaboration risks.",
+    "Use public mathlib _apply/finite/derivative lemmas; no changing through a mathlib definition.",
+    "The current full-J bound is an actual circle-operation supplier, not the final residual/CurrentJets theorem. Same-R residual identity, chi'AZ, actual buffer floor and all spatial/PDE stages remain as documented in072c/5f4f.",
+    "Do not use the private inverseInputProfile_product or introduce a generic assumption equal to the target result.",
+    "The final complete source must stay within the parent-granted limit; if it cannot, stop with the exact excess before creating a second version."
+  ]
+}

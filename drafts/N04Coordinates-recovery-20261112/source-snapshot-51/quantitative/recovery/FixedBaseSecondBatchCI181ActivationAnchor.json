@@ -1,0 +1,124 @@
+{
+  "schema": "n04-conditional-execution-anchor-successor/v1",
+  "artifact_path": "quantitative/recovery/FixedBaseSecondBatchCI181ActivationAnchor.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "author": "/root/quantitative_route",
+  "status": "EXACT_ACTUAL181_REBOUND_CONDITIONAL_ON_COMPLETE_CI_GREEN",
+  "previous_records": {
+    "execution_plan": {
+      "git_blob": "d5e3166592308c414a60214aa41c3b51bec2f9a1",
+      "sha256": "db7c5087d05250d0207c2d160db58ff443d17a73c89c697570a22446c00f3c05"
+    },
+    "previous_actual180_anchor": {
+      "git_blob": "d2d84bc129b92081530d9b9592d59477b59f3b19",
+      "sha256": "2b6adcab4116d50b208664eb4116dad764d8d71d2c42a087f3122c6aaf8ef6f8",
+      "status": "HISTORICAL; CI180 failed"
+    },
+    "full_projected_import_map": {
+      "git_blob": "6d4933e47763157649c2ccafdfd67b05f74809a6",
+      "sha256": "14d2524b5a9b6f3b1b7779bca8a05b2d41087fde52098aea8f0a7ed29a753c5f"
+    },
+    "finite_independent_execution_review": {
+      "git_blob": "7f2cdb412ab8f6d68a2ea4dbe28b51f1031044e7",
+      "sha256": "b6f1402d8d1b7012217c434b8fcfaceb0cbd00bdbafcefe621d8a68a74cf6709",
+      "scope": "Audit full finite source/preimage/shared-caller/graph/root/budget review reported to parent and author. This narrow successor neither extends nor replaces its scoped name and old115-owner limitations."
+    }
+  },
+  "actual_anchor": {
+    "head": "8a8082de2b905bb3f4abe5756c02083043c93970",
+    "tree": "c750b137383bf740f66f33c40412f7aa003fa862",
+    "previous_head": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+    "native_git_verified": true,
+    "exact_delta": [
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+        "before": "083d926c2e2bd91323a068b40e93dc93117f9779",
+        "after": "9fdff8588082a748f33628a53f259a471b7b5f9d",
+        "added": 2,
+        "deleted": 2,
+        "net": 0
+      }
+    ],
+    "root_blob_unchanged": "38c718d76599e9550272afe65276ffed72dc9caf",
+    "status": "CI181 pushed by parent; this agent has not queried or asserted its result."
+  },
+  "one_provider_successor": {
+    "module": "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds",
+    "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+    "before": {
+      "git_blob": "083d926c2e2bd91323a068b40e93dc93117f9779",
+      "sha256": "7d8e733967093d47742799f946c847296b63de70ac0c41cceb33c1ba84755b83",
+      "bytes": 18532,
+      "lines": 349
+    },
+    "after": {
+      "git_blob": "9fdff8588082a748f33628a53f259a471b7b5f9d",
+      "sha256": "7f2932953ad3ddd1f983e812118f80db544b5c8e6acdeeb15645f4e69c35e7e3",
+      "bytes": 18586,
+      "lines": 349
+    },
+    "imports_identical": true,
+    "all_four_complete_headers_identical": true,
+    "candidate": "7506e78879e649bf38a6dfc5a85d239adc5e966e",
+    "owner": {
+      "git_blob": "56d6e9a33053e6b7d2e64df9edf5a50b54250a11",
+      "sha256": "070f6c1b66f05f787ba6b092cc1e8c1066fdf58073f1b84ae6ab8373e940e51f",
+      "read_full_and_identity_verified": true
+    },
+    "independent_peer": {
+      "git_blob": "cd21ba8871960322d962d7dacb397ed20ca24a41",
+      "sha256": "ee39d5c43ec70219425e2587e01093dcc578aac499f5f9c4fa04d3d88c7973a7",
+      "status": "PASS_SOURCE_REVIEW_ONLY_NOT_COMPILED"
+    },
+    "exact_delta": "The two hfst pair arguments are the same literal e.eval J V i.val.1 i.val.2. No dependency, declaration name, constant or quantifier changed.",
+    "map_application": "In expected_existing_selected_providers and the TameInverseFixedBaseBounds node of the projected import map, replace precisely the previous identity by this after identity. Imports, line count, topological order and all graph edges remain identical. Do not replace the inverse by a main source or a former owned version."
+  },
+  "fresh_finite_verification": {
+    "method": "Read the exact actual181 recursive Git tree locally. Rechecked every one of the plan's413 existing selected provider identities after the explicit one-node substitution. Rechecked all106 source-entry preimages against the same tree.",
+    "existing_selected_providers": 413,
+    "existing_provider_mismatches": [],
+    "proposed_new_paths": 97,
+    "new_paths_already_present": [],
+    "proposed_shared_updates": 9,
+    "shared_preimage_mismatches": [],
+    "proposed_source_entries": 106,
+    "exact_source_selection": "All106 proposed source blobs, normalized destinations and source-only entries remain precisely the immutable d5e plan. No added consumer or source.",
+    "previous180_to181_only_one_changed_source": true,
+    "Composition332_retained": "f43a2b774c41da8cc9417051adc8c0a89d3ed04e",
+    "retained_StateNeighborhood": "67260ec8f17ed209c896eaa390c709bc9fe2c268"
+  },
+  "unchanged_graph_and_budget": {
+    "fixed_selected_nodes": 518,
+    "fixed_selected_edges": 962,
+    "selected_plus_AE_nodes": 519,
+    "selected_plus_AE_edges": 963,
+    "whole_projected_nodes": 4802,
+    "checked_in_root_edges": 14328,
+    "generated_root_edges": 14821,
+    "missing_imports": [],
+    "cycles": [],
+    "source_new_lines": 16565,
+    "shared_replacement_full_lines": 1447,
+    "independent_AE44_lines": 44,
+    "generated_root_imports": 4734,
+    "checked_in_root_imports": 4241,
+    "full_root_lag": 493,
+    "conservative_added_line_budget": 18549,
+    "limit": 20000,
+    "margin": 1451,
+    "graph_scope": "This is an exact one-node identity successor to the already verified map; no fresh whole-repository declaration scan is claimed.",
+    "draft_credit_now": 0
+  },
+  "execution_gates": [
+    "The parent must observe COMPLETE CI181 green on the exact8a8082de head, or independently rebind this selection to a later complete-green successor before staging.",
+    "Use d5e's106 source-only normalized entries. Four owned paths are already normalized; AE44 is the explicit independent addon.",
+    "Immediately before tree creation, require the413 exact existing provider identities and106 exact source preimages checked here; a changed public header/provider is not silently accepted.",
+    "Keep the fullrootlag493 budget and existing generated-root workflow; do not manually edit the checked-in root.",
+    "Preserve all nine shared-consumer conclusions, the original scoped name check, lost historical115-owner-body limitation, and future-only727 credit guard.",
+    "Root alone performs tree/commit/ref/CI operations."
+  ],
+  "no_new_Lean": true,
+  "no_local_build_or_elaboration": true,
+  "no_ref_changes": true,
+  "no_CI_query": true
+}

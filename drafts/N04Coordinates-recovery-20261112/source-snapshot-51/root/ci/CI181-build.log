@@ -1,0 +1,839 @@
+﻿2026-11-13T01:01:14.2772655Z Current runner version: '2.338.2'
+2026-11-13T01:01:14.2799525Z ##[group]Runner Image Provisioner
+2026-11-13T01:01:14.2800504Z Hosted Compute Agent
+2026-11-13T01:01:14.2801168Z Version: 20261103.629
+2026-11-13T01:01:14.2801887Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+2026-11-13T01:01:14.2802747Z Build Date: 2026-11-03T17:26:59Z
+2026-11-13T01:01:14.2803478Z Worker ID: {18541487-49f7-47c1-971c-379cc6651dbb}
+2026-11-13T01:01:14.2804254Z Region: eastus2
+2026-11-13T01:01:14.2804869Z Cloud: Azure
+2026-11-13T01:01:14.2805491Z ##[endgroup]
+2026-11-13T01:01:14.2807148Z ##[group]Operating System
+2026-11-13T01:01:14.2807865Z Ubuntu
+2026-11-13T01:01:14.2808501Z 26.04.1
+2026-11-13T01:01:14.2809400Z LTS
+2026-11-13T01:01:14.2810070Z ##[endgroup]
+2026-11-13T01:01:14.2810766Z ##[group]Runner Image
+2026-11-13T01:01:14.2811424Z Image: ubuntu-26.04
+2026-11-13T01:01:14.2812037Z Version: 20261111.196.1
+2026-11-13T01:01:14.2813424Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261111.196/images/ubuntu/Ubuntu2604-Readme.md
+2026-11-13T01:01:14.2815172Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261111.196
+2026-11-13T01:01:14.2816221Z ##[endgroup]
+2026-11-13T01:01:14.2817597Z ##[group]GITHUB_TOKEN Permissions
+2026-11-13T01:01:14.2820257Z Actions: write
+2026-11-13T01:01:14.2820992Z Contents: write
+2026-11-13T01:01:14.2821758Z Metadata: read
+2026-11-13T01:01:14.2822369Z ##[endgroup]
+2026-11-13T01:01:14.2824990Z Secret source: Actions
+2026-11-13T01:01:14.2826083Z Cache mode: write
+2026-11-13T01:01:14.2827085Z Prepare workflow directory
+2026-11-13T01:01:14.3234293Z Prepare all required actions
+2026-11-13T01:01:14.3282982Z Getting action download info
+2026-11-13T01:01:14.5179226Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-11-13T01:01:14.6409757Z Download action repository 'leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64' (SHA:fe408643ea7367d8c0404a8be3975bb145f5fb64)
+2026-11-13T01:01:14.7531715Z Download action repository 'actions/cache@v4' (SHA:0057852bfaa89a56745cba8c7296529d2fc39830)
+2026-11-13T01:01:14.8387212Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-11-13T01:01:15.0266206Z Getting action download info
+2026-11-13T01:01:15.0902957Z Download action repository 'actions/cache@caa296126883cff596d87d8935842f9db880ef25' (SHA:caa296126883cff596d87d8935842f9db880ef25)
+2026-11-13T01:01:15.2404238Z Complete job name: build
+2026-11-13T01:01:15.3488721Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+2026-11-13T01:01:15.3490018Z with:
+2026-11-13T01:01:15.3490491Z   persist-credentials: false
+2026-11-13T01:01:15.3491023Z   fetch-depth: 400
+2026-11-13T01:01:15.3491546Z   repository: Rogerhu12/continuous-flexibility
+2026-11-13T01:01:15.3495528Z   token: ***
+2026-11-13T01:01:15.3495981Z   ssh-strict: true
+2026-11-13T01:01:15.3496435Z   ssh-user: git
+2026-11-13T01:01:15.3496868Z   clean: true
+2026-11-13T01:01:15.3497350Z   sparse-checkout-cone-mode: true
+2026-11-13T01:01:15.3497904Z   fetch-tags: false
+2026-11-13T01:01:15.3498367Z   show-progress: true
+2026-11-13T01:01:15.3498953Z   lfs: false
+2026-11-13T01:01:15.3499391Z   submodules: false
+2026-11-13T01:01:15.3499854Z   set-safe-directory: true
+2026-11-13T01:01:15.3500372Z   allow-unsafe-pr-checkout: false
+2026-11-13T01:01:15.3501162Z env:
+2026-11-13T01:01:15.3501596Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:01:15.3502075Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:01:15.3502596Z ##[endgroup]
+2026-11-13T01:01:15.6376549Z Syncing repository: Rogerhu12/continuous-flexibility
+2026-11-13T01:01:15.6380198Z ##[group]Getting Git version info
+2026-11-13T01:01:15.6381953Z Working directory is '/home/runner/work/continuous-flexibility/continuous-flexibility'
+2026-11-13T01:01:15.6384536Z [command]/usr/bin/git version
+2026-11-13T01:01:15.6385646Z git version 2.56.1
+2026-11-13T01:01:15.6389694Z ##[endgroup]
+2026-11-13T01:01:15.6403402Z Temporarily overriding HOME='/home/runner/work/_temp/5e9209ef-f8b3-4246-a4c4-63458a2841e0' before making global git config changes
+2026-11-13T01:01:15.6406710Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-13T01:01:15.6409581Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/continuous-flexibility/continuous-flexibility
+2026-11-13T01:01:15.6484739Z Deleting the contents of '/home/runner/work/continuous-flexibility/continuous-flexibility'
+2026-11-13T01:01:15.6489017Z ##[group]Initializing the repository
+2026-11-13T01:01:15.6493208Z [command]/usr/bin/git init /home/runner/work/continuous-flexibility/continuous-flexibility
+2026-11-13T01:01:15.6620004Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-13T01:01:15.6622536Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-13T01:01:15.6624920Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-13T01:01:15.6626742Z hint: call:
+2026-11-13T01:01:15.6627722Z hint:
+2026-11-13T01:01:15.6629229Z hint: 	git config --global init.defaultBranch <name>
+2026-11-13T01:01:15.6630703Z hint:
+2026-11-13T01:01:15.6632081Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-13T01:01:15.6633919Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-13T01:01:15.6635393Z hint:
+2026-11-13T01:01:15.6636203Z hint: 	git branch -m <name>
+2026-11-13T01:01:15.6637207Z hint:
+2026-11-13T01:01:15.6638486Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-13T01:01:15.6641023Z Initialized empty Git repository in /home/runner/work/continuous-flexibility/continuous-flexibility/.git/
+2026-11-13T01:01:15.6658380Z [command]/usr/bin/git remote add origin https://github.com/Rogerhu12/continuous-flexibility
+2026-11-13T01:01:15.6714964Z ##[endgroup]
+2026-11-13T01:01:15.6716791Z ##[group]Disabling automatic garbage collection
+2026-11-13T01:01:15.6718237Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-13T01:01:15.6755862Z ##[endgroup]
+2026-11-13T01:01:15.6757498Z ##[group]Setting up auth
+2026-11-13T01:01:15.6763963Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T01:01:15.6799557Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T01:01:15.7331904Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T01:01:15.7366783Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T01:01:15.7642529Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T01:01:15.7677395Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T01:01:15.7949293Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-13T01:01:15.7990741Z ##[endgroup]
+2026-11-13T01:01:15.7993252Z ##[group]Fetching the repository
+2026-11-13T01:01:15.8002404Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=400 origin +8a8082de2b905bb3f4abe5756c02083043c93970:refs/remotes/origin/line/N04Coordinates
+2026-11-13T01:01:17.1946230Z From https://github.com/Rogerhu12/continuous-flexibility
+2026-11-13T01:01:17.1948580Z  * [new ref]         8a8082de2b905bb3f4abe5756c02083043c93970 -> origin/line/N04Coordinates
+2026-11-13T01:01:17.1951891Z ##[endgroup]
+2026-11-13T01:01:17.1952457Z ##[group]Determining the checkout info
+2026-11-13T01:01:17.1954458Z ##[endgroup]
+2026-11-13T01:01:17.1960841Z [command]/usr/bin/git sparse-checkout disable
+2026-11-13T01:01:17.2020594Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-13T01:01:17.2052201Z ##[group]Checking out the ref
+2026-11-13T01:01:17.2056610Z [command]/usr/bin/git checkout --progress --force -B line/N04Coordinates refs/remotes/origin/line/N04Coordinates
+2026-11-13T01:01:17.6209395Z Switched to a new branch 'line/N04Coordinates'
+2026-11-13T01:01:17.6214124Z branch 'line/N04Coordinates' set up to track 'origin/line/N04Coordinates'.
+2026-11-13T01:01:17.6242422Z ##[endgroup]
+2026-11-13T01:01:17.6300174Z [command]/usr/bin/git log -1 --format=%H
+2026-11-13T01:01:17.6327323Z 8a8082de2b905bb3f4abe5756c02083043c93970
+2026-11-13T01:01:17.6350792Z ##[group]Removing auth
+2026-11-13T01:01:17.6351298Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T01:01:17.6379914Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T01:01:17.6663775Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T01:01:17.6687431Z http.https://github.com/.extraheader
+2026-11-13T01:01:17.6695033Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-11-13T01:01:17.6727074Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T01:01:17.7005652Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T01:01:17.7036698Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T01:01:17.7306910Z ##[endgroup]
+2026-11-13T01:01:17.7523977Z ##[group]Run df -h /
+2026-11-13T01:01:17.7524316Z [36;1mdf -h /[0m
+2026-11-13T01:01:17.7580423Z shell: /usr/bin/bash -e {0}
+2026-11-13T01:01:17.7580752Z env:
+2026-11-13T01:01:17.7580957Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:01:17.7581221Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:01:17.7581495Z ##[endgroup]
+2026-11-13T01:01:17.7691505Z Filesystem      Size  Used Avail Use% Mounted on
+2026-11-13T01:01:17.7691953Z /dev/root       145G   58G   88G  40% /
+2026-11-13T01:01:17.8045651Z ##[group]Run leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+2026-11-13T01:01:17.8046110Z with:
+2026-11-13T01:01:17.8046336Z   auto-config: false
+2026-11-13T01:01:17.8046572Z   build: false
+2026-11-13T01:01:17.8046775Z   test: false
+2026-11-13T01:01:17.8046967Z   lint: false
+2026-11-13T01:01:17.8047176Z   use-mathlib-cache: true
+2026-11-13T01:01:17.8047434Z   use-github-cache: false
+2026-11-13T01:01:17.8047667Z   mk_all-check: false
+2026-11-13T01:01:17.8047914Z   check-reservoir-eligibility: false
+2026-11-13T01:01:17.8048191Z   leanchecker: false
+2026-11-13T01:01:17.8048416Z   lean4checker: false
+2026-11-13T01:01:17.8048630Z   nanoda: false
+2026-11-13T01:01:17.8049087Z   nanoda-allow-sorry: true
+2026-11-13T01:01:17.8049340Z   axiom-audit: false
+2026-11-13T01:01:17.8049636Z   axiom-audit-allow: propext,Classical.choice,Quot.sound
+2026-11-13T01:01:17.8049995Z   lake-package-directory: .
+2026-11-13T01:01:17.8050281Z   reinstall-transient-toolchain: false
+2026-11-13T01:01:17.8050592Z env:
+2026-11-13T01:01:17.8050785Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:01:17.8051014Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:01:17.8051247Z ##[endgroup]
+2026-11-13T01:01:17.8114711Z ##[start-action display=install elan;id=__leanprover_lean-action.__run]
+2026-11-13T01:01:17.8145246Z ##[group]Run : Install Elan
+2026-11-13T01:01:17.8145579Z [36;1m: Install Elan[0m
+2026-11-13T01:01:17.8145897Z [36;1m${GITHUB_ACTION_PATH}/scripts/install_elan.sh[0m
+2026-11-13T01:01:17.8196444Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T01:01:17.8196805Z env:
+2026-11-13T01:01:17.8197011Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:01:17.8197244Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:01:17.8197661Z ##[endgroup]
+2026-11-13T01:01:17.8314407Z ##[group]Elan Installation Output
+2026-11-13T01:01:17.9111638Z info: downloading installer
+2026-11-13T01:01:18.5797993Z info: downloading https://releases.lean-lang.org/lean4/v4.35.0-rc3/lean-4.35.0-rc3-linux.tar.zst
+2026-11-13T01:01:22.8118002Z info: installing /home/runner/.elan/toolchains/leanprover--lean4---v4.35.0-rc3
+2026-11-13T01:01:30.1961709Z Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)
+2026-11-13T01:01:30.2489002Z Lake version 5.0.0-src+470d5ce (Lean version 4.35.0-rc3)
+2026-11-13T01:01:30.2530955Z ##[endgroup]
+2026-11-13T01:01:30.2531282Z 
+2026-11-13T01:01:30.2554137Z ##[end-action id=__leanprover_lean-action.__run;outcome=success;conclusion=success;duration_ms=12443]
+2026-11-13T01:01:30.2563208Z ##[start-action display=configure `lean-action`;id=__leanprover_lean-action.config]
+2026-11-13T01:01:30.2656099Z ##[group]Run : Configure Lean Action
+2026-11-13T01:01:30.2656424Z [36;1m: Configure Lean Action[0m
+2026-11-13T01:01:30.2656739Z [36;1m${GITHUB_ACTION_PATH}/scripts/config.sh[0m
+2026-11-13T01:01:30.2713175Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T01:01:30.2713522Z env:
+2026-11-13T01:01:30.2713722Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:01:30.2713973Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:01:30.2714213Z   AUTO_CONFIG: false
+2026-11-13T01:01:30.2714431Z   BUILD: false
+2026-11-13T01:01:30.2714633Z   TEST: false
+2026-11-13T01:01:30.2714824Z   LINT: false
+2026-11-13T01:01:30.2715017Z ##[endgroup]
+2026-11-13T01:01:30.3184261Z ##[group]Configure lean-action
+2026-11-13T01:01:30.3268787Z ##[end-action id=__leanprover_lean-action.config;outcome=success;conclusion=success;duration_ms=70]
+2026-11-13T01:01:30.3273905Z ##[start-action display=reinstall transient toolchain;id=__leanprover_lean-action.__run_2]
+2026-11-13T01:01:30.3292610Z ##[end-action id=__leanprover_lean-action.__run_2;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-13T01:01:30.3296014Z ##[start-action display=ensure all files are imported;id=__leanprover_lean-action.mk_all]
+2026-11-13T01:01:30.3300489Z ##[end-action id=__leanprover_lean-action.mk_all;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-13T01:01:30.3303038Z ##[start-action display=Run actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25;id=__leanprover_lean-action.cache-restore]
+2026-11-13T01:01:30.3307120Z ##[end-action id=__leanprover_lean-action.cache-restore;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-13T01:01:30.3309436Z ##[start-action display=detect mathlib;id=__leanprover_lean-action.detect-mathlib]
+2026-11-13T01:01:30.3313412Z ##[end-action id=__leanprover_lean-action.detect-mathlib;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-13T01:01:30.3315468Z ##[start-action display=get mathlib cache;id=__leanprover_lean-action.__run_3]
+2026-11-13T01:01:30.3587423Z ##[group]Run : Get Mathlib Cache
+2026-11-13T01:01:30.3587730Z [36;1m: Get Mathlib Cache[0m
+2026-11-13T01:01:30.3587998Z [36;1mecho "::group::Mathlib Cache"[0m
+2026-11-13T01:01:30.3588432Z [36;1m# Use cache.mathlib.org unless the workflow sets `MATHLIB_CACHE_GET_URL`.[0m
+2026-11-13T01:01:30.3589518Z [36;1m# The cache client reads an empty value as a URL, so unset it to get the client's default.[0m
+2026-11-13T01:01:30.3590400Z [36;1mif [ -z "${MATHLIB_CACHE_GET_URL+x}" ]; then[0m
+2026-11-13T01:01:30.3590931Z [36;1m  export MATHLIB_CACHE_GET_URL="https://cache.mathlib.org/mathlib4"[0m
+2026-11-13T01:01:30.3591394Z [36;1melif [ -z "$MATHLIB_CACHE_GET_URL" ]; then[0m
+2026-11-13T01:01:30.3591725Z [36;1m  unset MATHLIB_CACHE_GET_URL[0m
+2026-11-13T01:01:30.3591997Z [36;1mfi[0m
+2026-11-13T01:01:30.3592204Z [36;1mlake exe cache get[0m
+2026-11-13T01:01:30.3592462Z [36;1mecho "::endgroup::"[0m
+2026-11-13T01:01:30.3592711Z [36;1mecho[0m
+2026-11-13T01:01:30.3653539Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T01:01:30.3653885Z env:
+2026-11-13T01:01:30.3654085Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:01:30.3654498Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:01:30.3654734Z ##[endgroup]
+2026-11-13T01:01:30.4076971Z ##[group]Mathlib Cache
+2026-11-13T01:01:30.4532106Z info: mathlib: materializing new dependency
+2026-11-13T01:01:30.5204770Z info: mathlib: fetching revision 'c55e6e786f49471c72fbddbec5415808896aec1e' from https://github.com/leanprover-community/mathlib4.git
+2026-11-13T01:01:32.2079552Z info: mathlib: checking out revision 'c55e6e786f49471c72fbddbec5415808896aec1e'
+2026-11-13T01:01:43.0074041Z info: plausible: materializing new dependency
+2026-11-13T01:01:43.0294019Z info: plausible: fetching revision 'fb13df72ecefd8ddbf9291021d7f33a8673eb57b' from https://github.com/leanprover-community/plausible
+2026-11-13T01:01:43.2206749Z info: plausible: checking out revision 'fb13df72ecefd8ddbf9291021d7f33a8673eb57b'
+2026-11-13T01:01:43.6003134Z info: LeanSearchClient: materializing new dependency
+2026-11-13T01:01:43.6177189Z info: LeanSearchClient: fetching revision '29ff470276c725ae01505d55b17148c18fc7dfd3' from https://github.com/leanprover-community/LeanSearchClient
+2026-11-13T01:01:43.7830982Z info: LeanSearchClient: checking out revision '29ff470276c725ae01505d55b17148c18fc7dfd3'
+2026-11-13T01:01:44.1382333Z info: importGraph: materializing new dependency
+2026-11-13T01:01:44.1555097Z info: importGraph: fetching revision '7e81a29bda33a6b257bd37557a6aa6aebe175d96' from https://github.com/leanprover-community/import-graph
+2026-11-13T01:01:44.3714762Z info: importGraph: checking out revision '7e81a29bda33a6b257bd37557a6aa6aebe175d96'
+2026-11-13T01:01:44.8267689Z info: proofwidgets: materializing new dependency
+2026-11-13T01:01:44.8480100Z info: proofwidgets: fetching revision 'c643bbb3c24f8a25f9c14e3a6b1ceb13d01f3de1' from https://github.com/leanprover-community/ProofWidgets4
+2026-11-13T01:01:45.0764936Z info: proofwidgets: checking out revision 'c643bbb3c24f8a25f9c14e3a6b1ceb13d01f3de1'
+2026-11-13T01:01:46.2915521Z info: aesop: materializing new dependency
+2026-11-13T01:01:46.3131318Z info: aesop: fetching revision 'a90fbf7b02ff06a0deebf74088dff9e5fe02c9ea' from https://github.com/leanprover-community/aesop
+2026-11-13T01:01:46.5558128Z info: aesop: checking out revision 'a90fbf7b02ff06a0deebf74088dff9e5fe02c9ea'
+2026-11-13T01:01:47.0577207Z info: Qq: materializing new dependency
+2026-11-13T01:01:47.0764635Z info: Qq: fetching revision '37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9' from https://github.com/leanprover-community/quote4
+2026-11-13T01:01:47.2813688Z info: Qq: checking out revision '37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9'
+2026-11-13T01:01:47.6678631Z info: batteries: materializing new dependency
+2026-11-13T01:01:47.6865811Z info: batteries: fetching revision '3b7c8101932390d60e92a3f3d917901d5b5a773b' from https://github.com/leanprover-community/batteries
+2026-11-13T01:01:48.1800546Z info: batteries: checking out revision '3b7c8101932390d60e92a3f3d917901d5b5a773b'
+2026-11-13T01:01:48.7368164Z info: Cli: materializing new dependency
+2026-11-13T01:01:48.7552108Z info: Cli: fetching revision '843844fa601dd56767b1eb22b7ada5b64d5e567a' from https://github.com/leanprover/lean4-cli
+2026-11-13T01:01:48.9450129Z info: Cli: checking out revision '843844fa601dd56767b1eb22b7ada5b64d5e567a'
+2026-11-13T01:01:49.7107019Z ✔ [2/8] Built Cache.Cli (319ms)
+2026-11-13T01:01:49.9111797Z ✔ [4/12] Built Cache.Lean (388ms)
+2026-11-13T01:01:50.3117302Z ✔ [5/12] Built Cache.Env (356ms)
+2026-11-13T01:01:50.5163457Z ✔ [6/12] Built Batteries.Tactic.OpenPrivate (866ms)
+2026-11-13T01:01:50.7166195Z ✔ [8/42] Built Cache.Infra (408ms)
+2026-11-13T01:01:50.8167673Z ✔ [9/42] Built Cache.Cli:c.o (127ms)
+2026-11-13T01:01:50.9169515Z ✔ [10/42] Built Cache.Lean:c.o (147ms)
+2026-11-13T01:01:52.0182672Z ✔ [11/42] Built Cache.IO (1.4s)
+2026-11-13T01:01:52.1184655Z ✔ [12/42] Built Batteries.Tactic.OpenPrivate:c.o (1.2s)
+2026-11-13T01:01:52.1185516Z ✔ [13/42] Built Cache.Env:c.o (151ms)
+2026-11-13T01:01:52.3201854Z ✔ [14/42] Built Cache.Infra:c.o (215ms)
+2026-11-13T01:01:53.1214732Z ✔ [15/42] Built Cache.Hashing (746ms)
+2026-11-13T01:01:53.5220465Z ✔ [16/42] Built Cache.Hashing:c.o (398ms)
+2026-11-13T01:01:53.6221154Z ✔ [17/42] Built Cache.IO:c.o (1.5s)
+2026-11-13T01:01:55.1280860Z ✔ [18/42] Built Cache.Requests (1.7s)
+2026-11-13T01:01:55.7278146Z ✔ [19/42] Built Cache.Marker (570ms)
+2026-11-13T01:01:55.8290313Z ✔ [20/42] Built Cache.Marker:c.o (117ms)
+2026-11-13T01:01:56.5283879Z ✔ [21/42] Built Cache.Query (678ms)
+2026-11-13T01:01:57.1290699Z ✔ [22/42] Built Cache.Upload.Dest (580ms)
+2026-11-13T01:01:57.4285413Z ✔ [23/42] Built Cache.Query:c.o (280ms)
+2026-11-13T01:01:57.5287354Z ✔ [24/42] Built Cache.Upload.Dest:c.o (115ms)
+2026-11-13T01:01:57.8290416Z ✔ [25/42] Built Cache.Requests:c.o (2.6s)
+2026-11-13T01:01:58.1335844Z ✔ [26/42] Built Cache.Warning (670ms)
+2026-11-13T01:01:58.4340144Z ✔ [27/42] Built Cache.Upload.Rclone (660ms)
+2026-11-13T01:01:58.7344064Z ✔ [28/42] Built Cache.Warning:c.o (287ms)
+2026-11-13T01:01:58.8345814Z ✔ [29/42] Built Cache.Upload.Curl (633ms)
+2026-11-13T01:01:58.9348021Z ✔ [30/42] Built Cache.Upload.Rclone:c.o (177ms)
+2026-11-13T01:01:59.0349948Z ✔ [31/42] Built Cache.Upload.Curl:c.o (189ms)
+2026-11-13T01:01:59.5354164Z ✔ [32/42] Built Cache.Upload.Azure (586ms)
+2026-11-13T01:01:59.7359635Z ✔ [33/42] Built Cache.Upload.S3 (751ms)
+2026-11-13T01:01:59.7361137Z ✔ [34/42] Built Cache.Upload.Azure:c.o (200ms)
+2026-11-13T01:02:00.0362348Z ✔ [35/42] Built Cache.Upload.S3:c.o (312ms)
+2026-11-13T01:02:00.3365726Z ✔ [36/42] Built Cache.Upload.Defs (581ms)
+2026-11-13T01:02:00.4366635Z ✔ [37/42] Built Cache.Upload.Defs:c.o (155ms)
+2026-11-13T01:02:00.8382538Z ✔ [38/42] Built Cache.Upload (524ms)
+2026-11-13T01:02:00.9383773Z ✔ [39/42] Built Cache.Upload:c.o (127ms)
+2026-11-13T01:02:01.9393330Z ✔ [40/42] Built Cache.Main (1.1s)
+2026-11-13T01:02:02.8393085Z ✔ [41/42] Built Cache.Main:c.o (892ms)
+2026-11-13T01:02:03.4416123Z ✔ [42/42] Built cache:exe (619ms)
+2026-11-13T01:02:06.1767960Z Current branch: HEAD
+2026-11-13T01:02:06.1768448Z Using cache from origin: (some leanprover-community/mathlib4)
+2026-11-13T01:02:06.1769551Z Attempting to download 8943 file(s) from leanprover-community/mathlib4 cache at https://cache.mathlib.org/mathlib4
+2026-11-13T01:02:06.4493656Z 
+2026-11-13T01:02:06.5678177Z Downloaded: 1 file(s) [attempted 1/8943 = 0%, 310 KB/s], Decompressed: 0
+2026-11-13T01:02:06.6812347Z Downloaded: 90 file(s) [attempted 90/8943 = 1%, 375 KB/s], Decompressed: 1
+2026-11-13T01:02:06.7810793Z Downloaded: 176 file(s) [attempted 176/8943 = 1%, 206 KB/s], Decompressed: 43
+2026-11-13T01:02:06.8842603Z Downloaded: 250 file(s) [attempted 250/8943 = 2%, 569 KB/s], Decompressed: 100
+2026-11-13T01:02:06.9851881Z Downloaded: 322 file(s) [attempted 322/8943 = 3%, 212 KB/s], Decompressed: 100
+2026-11-13T01:02:07.0910172Z Downloaded: 405 file(s) [attempted 405/8943 = 4%, 176 KB/s], Decompressed: 100
+2026-11-13T01:02:07.1910007Z Downloaded: 474 file(s) [attempted 474/8943 = 5%, 435 KB/s], Decompressed: 100
+2026-11-13T01:02:07.2966338Z Downloaded: 541 file(s) [attempted 541/8943 = 6%, 806 KB/s], Decompressed: 100
+2026-11-13T01:02:07.3921308Z Downloaded: 622 file(s) [attempted 622/8943 = 6%, 1913 KB/s], Decompressed: 248
+2026-11-13T01:02:07.4923919Z Downloaded: 701 file(s) [attempted 701/8943 = 7%, 1556 KB/s], Decompressed: 248
+2026-11-13T01:02:07.5923869Z Downloaded: 789 file(s) [attempted 789/8943 = 8%, 644 KB/s], Decompressed: 248
+2026-11-13T01:02:07.7113208Z Downloaded: 866 file(s) [attempted 866/8943 = 9%, 1404 KB/s], Decompressed: 248
+2026-11-13T01:02:07.8532826Z Downloaded: 932 file(s) [attempted 932/8943 = 10%, 72 KB/s], Decompressed: 248
+2026-11-13T01:02:07.9567598Z Downloaded: 1022 file(s) [attempted 1022/8943 = 11%, 1595 KB/s], Decompressed: 248
+2026-11-13T01:02:08.0683969Z Downloaded: 1096 file(s) [attempted 1096/8943 = 12%, 224 KB/s], Decompressed: 248
+2026-11-13T01:02:08.2750471Z Downloaded: 1159 file(s) [attempted 1159/8943 = 12%, 658 KB/s], Decompressed: 248
+2026-11-13T01:02:08.4712409Z Downloaded: 1189 file(s) [attempted 1189/8943 = 13%, 784 KB/s], Decompressed: 248
+2026-11-13T01:02:08.5722639Z Downloaded: 1246 file(s) [attempted 1246/8943 = 13%, 794 KB/s], Decompressed: 248
+2026-11-13T01:02:08.6749070Z Downloaded: 1337 file(s) [attempted 1337/8943 = 14%, 149 KB/s], Decompressed: 248
+2026-11-13T01:02:08.7900711Z Downloaded: 1364 file(s) [attempted 1364/8943 = 15%, 1369 KB/s], Decompressed: 248
+2026-11-13T01:02:08.9092546Z Downloaded: 1466 file(s) [attempted 1466/8943 = 16%, 4136 KB/s], Decompressed: 248
+2026-11-13T01:02:09.0091157Z Downloaded: 1556 file(s) [attempted 1556/8943 = 17%, 446 KB/s], Decompressed: 248
+2026-11-13T01:02:09.1195789Z Downloaded: 1646 file(s) [attempted 1646/8943 = 18%, 1937 KB/s], Decompressed: 620
+2026-11-13T01:02:09.2169807Z Downloaded: 1732 file(s) [attempted 1732/8943 = 19%, 211 KB/s], Decompressed: 620
+2026-11-13T01:02:09.3240511Z Downloaded: 1812 file(s) [attempted 1812/8943 = 20%, 232 KB/s], Decompressed: 620
+2026-11-13T01:02:09.4266744Z Downloaded: 1870 file(s) [attempted 1870/8943 = 20%, 727 KB/s], Decompressed: 620
+2026-11-13T01:02:09.5312678Z Downloaded: 1946 file(s) [attempted 1946/8943 = 21%, 2536 KB/s], Decompressed: 620
+2026-11-13T01:02:09.6373151Z Downloaded: 2034 file(s) [attempted 2034/8943 = 22%, 531 KB/s], Decompressed: 620
+2026-11-13T01:02:09.7910846Z Downloaded: 2124 file(s) [attempted 2124/8943 = 23%, 78 KB/s], Decompressed: 620
+2026-11-13T01:02:09.8904417Z Downloaded: 2198 file(s) [attempted 2198/8943 = 24%, 663 KB/s], Decompressed: 620
+2026-11-13T01:02:10.0032346Z Downloaded: 2274 file(s) [attempted 2274/8943 = 25%, 1085 KB/s], Decompressed: 620
+2026-11-13T01:02:10.1353192Z Downloaded: 2298 file(s) [attempted 2298/8943 = 25%, 1920 KB/s], Decompressed: 620
+2026-11-13T01:02:10.2399480Z Downloaded: 2365 file(s) [attempted 2365/8943 = 26%, 338 KB/s], Decompressed: 620
+2026-11-13T01:02:10.3642181Z Downloaded: 2427 file(s) [attempted 2427/8943 = 27%, 1998 KB/s], Decompressed: 620
+2026-11-13T01:02:10.4649230Z Downloaded: 2519 file(s) [attempted 2519/8943 = 28%, 372 KB/s], Decompressed: 620
+2026-11-13T01:02:10.5640809Z Downloaded: 2586 file(s) [attempted 2586/8943 = 28%, 105 KB/s], Decompressed: 620
+2026-11-13T01:02:10.6640974Z Downloaded: 2638 file(s) [attempted 2638/8943 = 29%, 791 KB/s], Decompressed: 620
+2026-11-13T01:02:10.7662265Z Downloaded: 2696 file(s) [attempted 2696/8943 = 30%, 123 KB/s], Decompressed: 620
+2026-11-13T01:02:10.8895199Z Downloaded: 2769 file(s) [attempted 2769/8943 = 30%, 395 KB/s], Decompressed: 620
+2026-11-13T01:02:10.9977787Z Downloaded: 2850 file(s) [attempted 2850/8943 = 31%, 107 KB/s], Decompressed: 620
+2026-11-13T01:02:11.0991227Z Downloaded: 2947 file(s) [attempted 2947/8943 = 32%, 1449 KB/s], Decompressed: 620
+2026-11-13T01:02:11.2048188Z Downloaded: 3025 file(s) [attempted 3025/8943 = 33%, 203 KB/s], Decompressed: 620
+2026-11-13T01:02:11.3036512Z Downloaded: 3113 file(s) [attempted 3113/8943 = 34%, 281 KB/s], Decompressed: 620
+2026-11-13T01:02:11.4054594Z Downloaded: 3192 file(s) [attempted 3192/8943 = 35%, 530 KB/s], Decompressed: 620
+2026-11-13T01:02:11.5090429Z Downloaded: 3270 file(s) [attempted 3270/8943 = 36%, 1101 KB/s], Decompressed: 620
+2026-11-13T01:02:11.6370211Z Downloaded: 3358 file(s) [attempted 3358/8943 = 37%, 691 KB/s], Decompressed: 620
+2026-11-13T01:02:11.7365696Z Downloaded: 3436 file(s) [attempted 3436/8943 = 38%, 185 KB/s], Decompressed: 620
+2026-11-13T01:02:11.8396813Z Downloaded: 3493 file(s) [attempted 3493/8943 = 39%, 223 KB/s], Decompressed: 620
+2026-11-13T01:02:11.9710940Z Downloaded: 3563 file(s) [attempted 3563/8943 = 39%, 970 KB/s], Decompressed: 620
+2026-11-13T01:02:12.0791344Z Downloaded: 3610 file(s) [attempted 3610/8943 = 40%, 1154 KB/s], Decompressed: 620
+2026-11-13T01:02:12.1830268Z Downloaded: 3667 file(s) [attempted 3667/8943 = 41%, 279 KB/s], Decompressed: 620
+2026-11-13T01:02:12.3032646Z Downloaded: 3744 file(s) [attempted 3744/8943 = 41%, 384 KB/s], Decompressed: 620
+2026-11-13T01:02:12.4241458Z Downloaded: 3827 file(s) [attempted 3827/8943 = 42%, 1313 KB/s], Decompressed: 620
+2026-11-13T01:02:12.5359061Z Downloaded: 3896 file(s) [attempted 3896/8943 = 43%, 801 KB/s], Decompressed: 620
+2026-11-13T01:02:12.6353320Z Downloaded: 3972 file(s) [attempted 3972/8943 = 44%, 165 KB/s], Decompressed: 620
+2026-11-13T01:02:12.7350222Z Downloaded: 4041 file(s) [attempted 4041/8943 = 45%, 156 KB/s], Decompressed: 620
+2026-11-13T01:02:12.8406328Z Downloaded: 4125 file(s) [attempted 4125/8943 = 46%, 2195 KB/s], Decompressed: 620
+2026-11-13T01:02:12.9605499Z Downloaded: 4203 file(s) [attempted 4203/8943 = 46%, 793 KB/s], Decompressed: 1595
+2026-11-13T01:02:13.0592414Z Downloaded: 4275 file(s) [attempted 4275/8943 = 47%, 236 KB/s], Decompressed: 1595
+2026-11-13T01:02:13.1691429Z Downloaded: 4361 file(s) [attempted 4361/8943 = 48%, 211 KB/s], Decompressed: 1595
+2026-11-13T01:02:13.2705152Z Downloaded: 4453 file(s) [attempted 4453/8943 = 49%, 496 KB/s], Decompressed: 1595
+2026-11-13T01:02:13.3840811Z Downloaded: 4529 file(s) [attempted 4529/8943 = 50%, 636 KB/s], Decompressed: 1595
+2026-11-13T01:02:13.4858279Z Downloaded: 4615 file(s) [attempted 4615/8943 = 51%, 250 KB/s], Decompressed: 1595
+2026-11-13T01:02:13.6270634Z Downloaded: 4682 file(s) [attempted 4682/8943 = 52%, 1211 KB/s], Decompressed: 1595
+2026-11-13T01:02:13.7290435Z Downloaded: 4744 file(s) [attempted 4744/8943 = 53%, 530 KB/s], Decompressed: 1595
+2026-11-13T01:02:13.8870253Z Downloaded: 4790 file(s) [attempted 4790/8943 = 53%, 197 KB/s], Decompressed: 1595
+2026-11-13T01:02:13.9976585Z Downloaded: 4855 file(s) [attempted 4855/8943 = 54%, 770 KB/s], Decompressed: 1595
+2026-11-13T01:02:14.1104054Z Downloaded: 4906 file(s) [attempted 4906/8943 = 54%, 1239 KB/s], Decompressed: 1595
+2026-11-13T01:02:14.2129509Z Downloaded: 5014 file(s) [attempted 5014/8943 = 56%, 1912 KB/s], Decompressed: 1595
+2026-11-13T01:02:14.3171147Z Downloaded: 5114 file(s) [attempted 5114/8943 = 57%, 453 KB/s], Decompressed: 1595
+2026-11-13T01:02:14.4298136Z Downloaded: 5220 file(s) [attempted 5220/8943 = 58%, 520 KB/s], Decompressed: 1595
+2026-11-13T01:02:14.5319965Z Downloaded: 5342 file(s) [attempted 5342/8943 = 59%, 381 KB/s], Decompressed: 1595
+2026-11-13T01:02:14.6513429Z Downloaded: 5439 file(s) [attempted 5439/8943 = 60%, 1333 KB/s], Decompressed: 1595
+2026-11-13T01:02:14.7574768Z Downloaded: 5506 file(s) [attempted 5506/8943 = 61%, 67 KB/s], Decompressed: 1595
+2026-11-13T01:02:14.8573076Z Downloaded: 5626 file(s) [attempted 5626/8943 = 62%, 161 KB/s], Decompressed: 1595
+2026-11-13T01:02:14.9589356Z Downloaded: 5718 file(s) [attempted 5718/8943 = 63%, 578 KB/s], Decompressed: 1595
+2026-11-13T01:02:15.0593033Z Downloaded: 5797 file(s) [attempted 5797/8943 = 64%, 604 KB/s], Decompressed: 1595
+2026-11-13T01:02:15.1721122Z Downloaded: 5899 file(s) [attempted 5899/8943 = 65%, 2324 KB/s], Decompressed: 1595
+2026-11-13T01:02:15.2808279Z Downloaded: 5964 file(s) [attempted 5964/8943 = 66%, 7647 KB/s], Decompressed: 1595
+2026-11-13T01:02:15.3973807Z Downloaded: 6019 file(s) [attempted 6019/8943 = 67%, 2214 KB/s], Decompressed: 1595
+2026-11-13T01:02:15.4972129Z Downloaded: 6135 file(s) [attempted 6135/8943 = 68%, 655 KB/s], Decompressed: 1595
+2026-11-13T01:02:15.6449969Z Downloaded: 6216 file(s) [attempted 6216/8943 = 69%, 338 KB/s], Decompressed: 1595
+2026-11-13T01:02:15.7498577Z Downloaded: 6278 file(s) [attempted 6278/8943 = 70%, 1585 KB/s], Decompressed: 1595
+2026-11-13T01:02:15.8514093Z Downloaded: 6393 file(s) [attempted 6393/8943 = 71%, 1380 KB/s], Decompressed: 1595
+2026-11-13T01:02:15.9597308Z Downloaded: 6502 file(s) [attempted 6502/8943 = 72%, 957 KB/s], Decompressed: 1595
+2026-11-13T01:02:16.0823365Z Downloaded: 6585 file(s) [attempted 6585/8943 = 73%, 1999 KB/s], Decompressed: 1595
+2026-11-13T01:02:16.1850346Z Downloaded: 6670 file(s) [attempted 6670/8943 = 74%, 2128 KB/s], Decompressed: 1595
+2026-11-13T01:02:16.2850336Z Downloaded: 6781 file(s) [attempted 6781/8943 = 75%, 634 KB/s], Decompressed: 1595
+2026-11-13T01:02:16.3947793Z Downloaded: 6883 file(s) [attempted 6883/8943 = 76%, 163 KB/s], Decompressed: 1595
+2026-11-13T01:02:16.5043248Z Downloaded: 6978 file(s) [attempted 6978/8943 = 78%, 1305 KB/s], Decompressed: 1595
+2026-11-13T01:02:16.6143521Z Downloaded: 7072 file(s) [attempted 7072/8943 = 79%, 764 KB/s], Decompressed: 1595
+2026-11-13T01:02:16.7234368Z Downloaded: 7179 file(s) [attempted 7179/8943 = 80%, 362 KB/s], Decompressed: 1595
+2026-11-13T01:02:16.8549026Z Downloaded: 7296 file(s) [attempted 7296/8943 = 81%, 262 KB/s], Decompressed: 1595
+2026-11-13T01:02:16.9760219Z Downloaded: 7393 file(s) [attempted 7393/8943 = 82%, 527 KB/s], Decompressed: 1595
+2026-11-13T01:02:17.0803407Z Downloaded: 7483 file(s) [attempted 7483/8943 = 83%, 229 KB/s], Decompressed: 1595
+2026-11-13T01:02:17.1810456Z Downloaded: 7590 file(s) [attempted 7590/8943 = 84%, 1743 KB/s], Decompressed: 1595
+2026-11-13T01:02:17.2950302Z Downloaded: 7721 file(s) [attempted 7721/8943 = 86%, 2106 KB/s], Decompressed: 1595
+2026-11-13T01:02:17.4180170Z Downloaded: 7821 file(s) [attempted 7821/8943 = 87%, 1042 KB/s], Decompressed: 1595
+2026-11-13T01:02:17.5149682Z Downloaded: 7934 file(s) [attempted 7934/8943 = 88%, 2182 KB/s], Decompressed: 1595
+2026-11-13T01:02:17.6202441Z Downloaded: 8038 file(s) [attempted 8038/8943 = 89%, 264 KB/s], Decompressed: 1595
+2026-11-13T01:02:17.7218629Z Downloaded: 8146 file(s) [attempted 8146/8943 = 91%, 128 KB/s], Decompressed: 1595
+2026-11-13T01:02:17.8484538Z Downloaded: 8237 file(s) [attempted 8237/8943 = 92%, 2328 KB/s], Decompressed: 1595
+2026-11-13T01:02:17.9560467Z Downloaded: 8340 file(s) [attempted 8340/8943 = 93%, 1515 KB/s], Decompressed: 1595
+2026-11-13T01:02:18.0552499Z Downloaded: 8458 file(s) [attempted 8458/8943 = 94%, 750 KB/s], Decompressed: 1595
+2026-11-13T01:02:18.1557258Z Downloaded: 8560 file(s) [attempted 8560/8943 = 95%, 879 KB/s], Decompressed: 1595
+2026-11-13T01:02:18.2679313Z Downloaded: 8654 file(s) [attempted 8654/8943 = 96%, 393 KB/s], Decompressed: 1595
+2026-11-13T01:02:18.3755178Z Downloaded: 8712 file(s) [attempted 8712/8943 = 97%, 590 KB/s], Decompressed: 1595
+2026-11-13T01:02:18.4810217Z Downloaded: 8786 file(s) [attempted 8786/8943 = 98%, 294 KB/s], Decompressed: 1595
+2026-11-13T01:02:18.5212492Z Downloaded: 8890 file(s) [attempted 8890/8943 = 99%, 557 KB/s], Decompressed: 1595
+2026-11-13T01:02:18.5240128Z Downloaded: 8943 file(s) [attempted 8943/8943 = 100%, 557 KB/s], Decompressed: 1595
+2026-11-13T01:02:38.4807016Z Decompressed 8943 file(s)
+2026-11-13T01:02:38.4807374Z Already decompressed 8943 file(s)
+2026-11-13T01:02:38.5384182Z ##[endgroup]
+2026-11-13T01:02:38.5384589Z 
+2026-11-13T01:02:38.5392187Z ##[end-action id=__leanprover_lean-action.__run_3;outcome=success;conclusion=success;duration_ms=68207]
+2026-11-13T01:02:38.5422759Z ##[start-action display=build Rogerhu12/continuous-flexibility;id=__leanprover_lean-action.build]
+2026-11-13T01:02:38.5427975Z ##[end-action id=__leanprover_lean-action.build;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-13T01:02:38.5431965Z ##[start-action display=test Rogerhu12/continuous-flexibility;id=__leanprover_lean-action.test]
+2026-11-13T01:02:38.5436646Z ##[end-action id=__leanprover_lean-action.test;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-13T01:02:38.5440331Z ##[start-action display=lint Rogerhu12/continuous-flexibility;id=__leanprover_lean-action.lint]
+2026-11-13T01:02:38.5444773Z ##[end-action id=__leanprover_lean-action.lint;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-13T01:02:38.5446954Z ##[start-action display=Run actions/cache/save@caa296126883cff596d87d8935842f9db880ef25;id=__leanprover_lean-action.__actions_cache]
+2026-11-13T01:02:38.5457893Z ##[end-action id=__leanprover_lean-action.__actions_cache;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-13T01:02:38.5460406Z ##[start-action display=check reservoir eligibility;id=__leanprover_lean-action.__run_4]
+2026-11-13T01:02:38.5464062Z ##[end-action id=__leanprover_lean-action.__run_4;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-13T01:02:38.5467017Z ##[start-action display=check environment with leanchecker;id=__leanprover_lean-action.__run_5]
+2026-11-13T01:02:38.5472220Z ##[end-action id=__leanprover_lean-action.__run_5;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-13T01:02:38.5474668Z ##[start-action display=check environment with nanoda;id=__leanprover_lean-action.nanoda]
+2026-11-13T01:02:38.5478420Z ##[end-action id=__leanprover_lean-action.nanoda;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-13T01:02:38.5481304Z ##[start-action display=audit axioms with axiom-audit;id=__leanprover_lean-action.axiom-audit]
+2026-11-13T01:02:38.5484761Z ##[end-action id=__leanprover_lean-action.axiom-audit;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-13T01:02:38.6730707Z ##[group]Run actions/cache/restore@v4
+2026-11-13T01:02:38.6731017Z with:
+2026-11-13T01:02:38.6731220Z   path: .lake/build
+2026-11-13T01:02:38.6731782Z   key: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-main~8a8082de2b905bb3f4abe5756c02083043c93970
+2026-11-13T01:02:38.6732627Z   restore-keys: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-main~
+
+2026-11-13T01:02:38.6733141Z   enableCrossOsArchive: false
+2026-11-13T01:02:38.6733425Z   fail-on-cache-miss: false
+2026-11-13T01:02:38.6733667Z   lookup-only: false
+2026-11-13T01:02:38.6733900Z env:
+2026-11-13T01:02:38.6734093Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:02:38.6734316Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:02:38.6734544Z ##[endgroup]
+2026-11-13T01:02:38.7816226Z (node:3433) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T01:02:38.7817571Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T01:02:38.8673007Z Cache hit for restore-key: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-main~0f979ad40b004572c26deb5cfe6c73bf2675217d
+2026-11-13T01:02:38.8790038Z (node:3433) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-13T01:02:39.9291293Z Received 268435456 of 977475220 (27.5%), 255.5 MBs/sec
+2026-11-13T01:02:40.9304742Z Received 578813952 of 977475220 (59.2%), 275.4 MBs/sec
+2026-11-13T01:02:41.9367272Z Received 901775360 of 977475220 (92.3%), 285.7 MBs/sec
+2026-11-13T01:02:42.1845730Z Received 977475220 of 977475220 (100.0%), 286.1 MBs/sec
+2026-11-13T01:02:42.1849338Z Cache Size: ~932 MB (977475220 B)
+2026-11-13T01:02:42.1962272Z [command]/usr/bin/tar -xf /home/runner/work/_temp/86a5ff63-8d6a-4e21-8a91-ff4db06a0256/cache.tzst -P -C /home/runner/work/continuous-flexibility/continuous-flexibility --use-compress-program unzstd
+2026-11-13T01:03:04.1097919Z Cache restored successfully
+2026-11-13T01:03:04.2182312Z Cache restored from key: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-main~0f979ad40b004572c26deb5cfe6c73bf2675217d
+2026-11-13T01:03:04.5545679Z ##[group]Run own=$(gh cache list -R "$GITHUB_REPOSITORY" --key "$PREFIX" --limit 1 --json key --jq '.[0].key // empty' || true)
+2026-11-13T01:03:04.5547168Z [36;1mown=$(gh cache list -R "$GITHUB_REPOSITORY" --key "$PREFIX" --limit 1 --json key --jq '.[0].key // empty' || true)[0m
+2026-11-13T01:03:04.5548293Z [36;1mif [ -n "$own" ]; then echo "own cache entry exists ($own)"; exit 0; fi[0m
+2026-11-13T01:03:04.5549198Z [36;1mfor sha in $(git log -60 --format=%H); do[0m
+2026-11-13T01:03:04.5550973Z [36;1m  id=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$sha&per_page=30"               --jq '[.workflow_runs[] | select(.name == "Build" and .status == "completed" and .conclusion != "cancelled" and (.head_branch | startswith("line/")))][0].id // empty' || true)[0m
+2026-11-13T01:03:04.5552751Z [36;1m  [ -n "$id" ] || continue[0m
+2026-11-13T01:03:04.5553253Z [36;1m  dir="$RUNNER_TEMP/line-build-$id"[0m
+2026-11-13T01:03:04.5553777Z [36;1m  for try in 1 2 3; do[0m
+2026-11-13T01:03:04.5554313Z [36;1m    [ -f "$dir/lake-build.tar.zst" ] && break[0m
+2026-11-13T01:03:04.5554870Z [36;1m    rm -rf "$dir"[0m
+2026-11-13T01:03:04.5555575Z [36;1m    gh run download "$id" -R "$GITHUB_REPOSITORY" -n lake-build-line -D "$dir" || sleep 10[0m
+2026-11-13T01:03:04.5556366Z [36;1m  done[0m
+2026-11-13T01:03:04.5557218Z [36;1m  if [ -f "$dir/lake-build.tar.zst" ] && tar --zstd -xf "$dir/lake-build.tar.zst"; then[0m
+2026-11-13T01:03:04.5558092Z [36;1m    echo "reused the build of run $id (head ${sha:0:8})"[0m
+2026-11-13T01:03:04.5558693Z [36;1m    exit 0[0m
+2026-11-13T01:03:04.5559256Z [36;1m  fi[0m
+2026-11-13T01:03:04.5559595Z [36;1m  echo "run $id (head ${sha:0:8}) has no usable build artifact"[0m
+2026-11-13T01:03:04.5560021Z [36;1mdone[0m
+2026-11-13T01:03:04.5560480Z [36;1mecho "no line build among the last 60 commits"[0m
+2026-11-13T01:03:05.0639838Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T01:03:05.0640444Z env:
+2026-11-13T01:03:05.0640790Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:03:05.0641170Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:03:05.0645818Z   GH_TOKEN: ***
+2026-11-13T01:03:05.0646685Z   PREFIX: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates~
+2026-11-13T01:03:05.0647622Z ##[endgroup]
+2026-11-13T01:03:07.7256229Z own cache entry exists (lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates~f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd)
+2026-11-13T01:03:07.8441152Z ##[group]Run actions/cache/restore@v4
+2026-11-13T01:03:07.8441479Z with:
+2026-11-13T01:03:07.8441691Z   path: .lake/build
+2026-11-13T01:03:07.8442324Z   key: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates~8a8082de2b905bb3f4abe5756c02083043c93970
+2026-11-13T01:03:07.8443278Z   restore-keys: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates~
+
+2026-11-13T01:03:07.8443856Z   enableCrossOsArchive: false
+2026-11-13T01:03:07.8444129Z   fail-on-cache-miss: false
+2026-11-13T01:03:07.8444381Z   lookup-only: false
+2026-11-13T01:03:07.8444597Z env:
+2026-11-13T01:03:07.8444790Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:03:07.8445047Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:03:07.8445284Z ##[endgroup]
+2026-11-13T01:03:07.9559780Z (node:3501) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T01:03:07.9633209Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T01:03:08.0313439Z Cache hit for restore-key: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates~f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd
+2026-11-13T01:03:08.0409908Z (node:3501) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-13T01:03:09.0642710Z Received 239075328 of 1210153573 (19.8%), 228.0 MBs/sec
+2026-11-13T01:03:10.0689964Z Received 520093696 of 1210153573 (43.0%), 247.5 MBs/sec
+2026-11-13T01:03:11.0720762Z Received 788529152 of 1210153573 (65.2%), 250.1 MBs/sec
+2026-11-13T01:03:12.0730129Z Received 1048576000 of 1210153573 (86.6%), 249.6 MBs/sec
+2026-11-13T01:03:12.6703483Z Received 1210153573 of 1210153573 (100.0%), 250.5 MBs/sec
+2026-11-13T01:03:12.6705771Z Cache Size: ~1154 MB (1210153573 B)
+2026-11-13T01:03:12.6745374Z [command]/usr/bin/tar -xf /home/runner/work/_temp/716a38de-3177-4cbc-b19f-4e434d6a24cf/cache.tzst -P -C /home/runner/work/continuous-flexibility/continuous-flexibility --use-compress-program unzstd
+2026-11-13T01:03:54.5436018Z Cache restored successfully
+2026-11-13T01:03:54.5641953Z Cache restored from key: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates~f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd
+2026-11-13T01:03:54.6044953Z ##[group]Run echo "main layer = lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-main~0f979ad40b004572c26deb5cfe6c73bf2675217d"
+2026-11-13T01:03:54.6046151Z [36;1mecho "main layer = lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-main~0f979ad40b004572c26deb5cfe6c73bf2675217d"[0m
+2026-11-13T01:03:54.6047302Z [36;1mecho "matched key = lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates~f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd"[0m
+2026-11-13T01:03:54.6174783Z shell: /usr/bin/bash -e {0}
+2026-11-13T01:03:54.6175064Z env:
+2026-11-13T01:03:54.6175276Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:03:54.6175527Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:03:54.6175774Z ##[endgroup]
+2026-11-13T01:03:54.6246070Z main layer = lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-main~0f979ad40b004572c26deb5cfe6c73bf2675217d
+2026-11-13T01:03:54.6248200Z matched key = lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates~f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd
+2026-11-13T01:03:54.6275896Z ##[group]Run python3 scripts/gen_root.py
+2026-11-13T01:03:54.6276268Z [36;1mpython3 scripts/gen_root.py[0m
+2026-11-13T01:03:54.6321351Z shell: /usr/bin/bash -e {0}
+2026-11-13T01:03:54.6321628Z env:
+2026-11-13T01:03:54.6321838Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:03:54.6322100Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:03:54.6322348Z ##[endgroup]
+2026-11-13T01:03:54.7613358Z src/ContinuousFlexibility.lean: 4637 imports
+2026-11-13T01:03:54.7701150Z ##[group]Run bash scripts/ci/changed_modules.sh > changed_modules.txt || true
+2026-11-13T01:03:54.7701759Z [36;1mbash scripts/ci/changed_modules.sh > changed_modules.txt || true[0m
+2026-11-13T01:03:54.7702389Z [36;1mecho "count=$(wc -l < changed_modules.txt | tr -d ' ')" >> "$GITHUB_OUTPUT"[0m
+2026-11-13T01:03:54.7702962Z [36;1mecho "$(wc -l < changed_modules.txt) changed modules"; head -40 changed_modules.txt[0m
+2026-11-13T01:03:54.7750956Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T01:03:54.7751323Z env:
+2026-11-13T01:03:54.7751532Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:03:54.7751774Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:03:54.7752021Z ##[endgroup]
+2026-11-13T01:03:55.8760437Z 1150 changed modules
+2026-11-13T01:03:55.8783238Z ContinuousFlexibility.Analysis.AbsoluteReciprocalJetBounds
+2026-11-13T01:03:55.8784113Z ContinuousFlexibility.Analysis.ActualAtlasCutFirstJets
+2026-11-13T01:03:55.8784727Z ContinuousFlexibility.Analysis.ActualNegativeMovingReferenceUnitPoint
+2026-11-13T01:03:55.8785326Z ContinuousFlexibility.Analysis.ActualNegativeOppositeRootFields
+2026-11-13T01:03:55.8785863Z ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity
+2026-11-13T01:03:55.8786481Z ContinuousFlexibility.Analysis.ActualPositiveGaugeRootFirstJets
+2026-11-13T01:03:55.8787473Z ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData
+2026-11-13T01:03:55.8788449Z ContinuousFlexibility.Analysis.ActualPositiveReferenceFirstJets
+2026-11-13T01:03:55.8789674Z ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation
+2026-11-13T01:03:55.8790434Z ContinuousFlexibility.Analysis.ActualRadialCellComparison
+2026-11-13T01:03:55.8791252Z ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData
+2026-11-13T01:03:55.8792020Z ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields
+2026-11-13T01:03:55.8792663Z ContinuousFlexibility.Analysis.AdjugateAiryTransport
+2026-11-13T01:03:55.8793297Z ContinuousFlexibility.Analysis.AdjugateInversePrincipalField
+2026-11-13T01:03:55.8793885Z ContinuousFlexibility.Analysis.AdjugatePrincipalField
+2026-11-13T01:03:55.8794485Z ContinuousFlexibility.Analysis.AdjugatePrincipalFiniteJets
+2026-11-13T01:03:55.8795092Z ContinuousFlexibility.Analysis.AffineMaterialSampling
+2026-11-13T01:03:55.8795691Z ContinuousFlexibility.Analysis.AffineWeightedCompositionJets
+2026-11-13T01:03:55.8796282Z ContinuousFlexibility.Analysis.AiryFirstJetMatching
+2026-11-13T01:03:55.8796848Z ContinuousFlexibility.Analysis.AiryHalfHolonomy
+2026-11-13T01:03:55.8797413Z ContinuousFlexibility.Analysis.AiryInteriorChartMaterialJets
+2026-11-13T01:03:55.8797988Z ContinuousFlexibility.Analysis.AngularFiberEndpointJets
+2026-11-13T01:03:55.8798565Z ContinuousFlexibility.Analysis.AngularFiberFiniteJetBounds
+2026-11-13T01:03:55.8799532Z ContinuousFlexibility.Analysis.AngularInverseFirstDerivative
+2026-11-13T01:03:55.8800428Z ContinuousFlexibility.Analysis.AngularRegularity
+2026-11-13T01:03:55.8801019Z ContinuousFlexibility.Analysis.AngularRegularityIntegral
+2026-11-13T01:03:55.8801580Z ContinuousFlexibility.Analysis.AngularSimpleDivisionBounds
+2026-11-13T01:03:55.8802186Z ContinuousFlexibility.Analysis.AngularSineMixedBounds
+2026-11-13T01:03:55.8802738Z ContinuousFlexibility.Analysis.AngularSineQuotient
+2026-11-13T01:03:55.8803259Z ContinuousFlexibility.Analysis.AngularTaylorDivision
+2026-11-13T01:03:55.8803837Z ContinuousFlexibility.Analysis.AngularTaylorPolynomial
+2026-11-13T01:03:55.8804375Z ContinuousFlexibility.Analysis.BoundaryJetClosure
+2026-11-13T01:03:55.8804971Z ContinuousFlexibility.Analysis.BoundaryRadialFrechetJets
+2026-11-13T01:03:55.8805522Z ContinuousFlexibility.Analysis.BoundaryTaylorBounds
+2026-11-13T01:03:55.8806137Z ContinuousFlexibility.Analysis.BoundaryTaylorCanonicalExtension
+2026-11-13T01:03:55.8806710Z ContinuousFlexibility.Analysis.BoundaryTaylorDensity
+2026-11-13T01:03:55.8807210Z ContinuousFlexibility.Analysis.BoundaryTaylorHeight
+2026-11-13T01:03:55.8807834Z ContinuousFlexibility.Analysis.BoundaryTaylorMatching
+2026-11-13T01:03:55.8808579Z ContinuousFlexibility.Analysis.BoundaryTaylorPrincipalRemainder
+2026-11-13T01:03:55.8809575Z ContinuousFlexibility.Analysis.BufferedRadialAuxiliaryColumn
+2026-11-13T01:03:55.8847821Z ##[group]Run bash scripts/ci/watchdog.sh changed_modules.txt "$FILE_LIMIT_SECONDS" &
+2026-11-13T01:03:55.8848639Z [36;1mbash scripts/ci/watchdog.sh changed_modules.txt "$FILE_LIMIT_SECONDS" &[0m
+2026-11-13T01:03:55.8849503Z [36;1mwd=$![0m
+2026-11-13T01:03:55.8849815Z [36;1mset +e[0m
+2026-11-13T01:03:55.8850448Z [36;1mtimeout --signal=TERM --kill-after=60s 240m lake build -v $(cat changed_modules.txt) > quick.log 2>&1[0m
+2026-11-13T01:03:55.8851069Z [36;1mstatus=$?[0m
+2026-11-13T01:03:55.8851508Z [36;1mkill "$wd" 2>/dev/null[0m
+2026-11-13T01:03:55.8851945Z [36;1mgrep -E '^(error|✖)' quick.log | head -100[0m
+2026-11-13T01:03:55.8852421Z [36;1mgrep -E '^error' -A40 quick.log | head -400[0m
+2026-11-13T01:03:55.8852963Z [36;1mbash scripts/ci/slowest.sh quick.log[0m
+2026-11-13T01:03:55.8853422Z [36;1mif [ -s slow_files.txt ]; then[0m
+2026-11-13T01:03:55.8853895Z [36;1m  while read -r m s; do[0m
+2026-11-13T01:03:55.8854675Z [36;1m    echo "::error::$m compiled for more than $FILE_LIMIT_SECONDS seconds and was stopped; split the file or find the slow declaration"[0m
+2026-11-13T01:03:55.8855436Z [36;1m  done < slow_files.txt[0m
+2026-11-13T01:03:55.8855858Z [36;1m  status=1[0m
+2026-11-13T01:03:55.8856212Z [36;1mfi[0m
+2026-11-13T01:03:55.8856529Z [36;1mexit "$status"[0m
+2026-11-13T01:03:55.8904949Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T01:03:55.8905459Z env:
+2026-11-13T01:03:55.8905892Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:03:55.8906230Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:03:55.8906652Z ##[endgroup]
+2026-11-13T01:04:17.1970373Z ✖ [7102/7102] Building ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds (13s)
+2026-11-13T01:04:17.1971849Z error: src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean:263:66: unsolved goals
+2026-11-13T01:04:17.1972595Z error: build failed
+2026-11-13T01:04:17.2039363Z error: src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean:263:66: unsolved goals
+2026-11-13T01:04:17.2040322Z E : Type u_1
+2026-11-13T01:04:17.2040706Z A : Type u_2
+2026-11-13T01:04:17.2041607Z inst✝⁸ : TopologicalSpace E
+2026-11-13T01:04:17.2042127Z inst✝⁷ : AddCommGroup E
+2026-11-13T01:04:17.2042600Z inst✝⁶ : Module ℝ E
+2026-11-13T01:04:17.2042913Z inst✝⁵ : IsTopologicalAddGroup E
+2026-11-13T01:04:17.2043248Z inst✝⁴ : ContinuousSMul ℝ E
+2026-11-13T01:04:17.2043540Z inst✝³ : T2Space E
+2026-11-13T01:04:17.2043809Z inst✝² : TopologicalSpace A
+2026-11-13T01:04:17.2044094Z inst✝¹ : AddCommGroup A
+2026-11-13T01:04:17.2044358Z inst✝ : Module ℝ A
+2026-11-13T01:04:17.2044578Z U : Set E
+2026-11-13T01:04:17.2044799Z L : E → E →L[ℝ] E
+2026-11-13T01:04:17.2045040Z q : ℕ → Seminorm ℝ E
+2026-11-13T01:04:17.2045621Z hq : Monotone q
+2026-11-13T01:04:17.2045952Z J : SmoothDirections (U ×ˢ univ) fun z => (L z.1) z.2
+2026-11-13T01:04:17.2046302Z V : E → E →L[ℝ] E
+2026-11-13T01:04:17.2046577Z operatorBase inverseLoss forwardLoss : ℕ
+2026-11-13T01:04:17.2046883Z hV :
+2026-11-13T01:04:17.2047102Z   ∀ (R : ℝ),
+2026-11-13T01:04:17.2047340Z     1 ≤ R →
+2026-11-13T01:04:17.2047559Z       ∀ (s : ℕ),
+2026-11-13T01:04:17.2047794Z         ∃ C,
+2026-11-13T01:04:17.2048016Z           0 ≤ C ∧
+2026-11-13T01:04:17.2048250Z             ∀ x ∈ U,
+2026-11-13T01:04:17.2048527Z               (q operatorBase) x ≤ R →
+2026-11-13T01:04:17.2049043Z                 ∀ (y : E),
+2026-11-13T01:04:17.2049910Z                   (q s) ((V x) y) ≤ C * ((1 + (q (s + inverseLoss)) x) * (q operatorBase) y + (q (s + inverseLoss)) y)
+2026-11-13T01:04:17.2050480Z hF :
+2026-11-13T01:04:17.2050706Z   ∀ (n : ℕ) (R : ℝ),
+2026-11-13T01:04:17.2050957Z     1 ≤ R →
+2026-11-13T01:04:17.2051179Z       ∀ (s : ℕ),
+2026-11-13T01:04:17.2051407Z         ∃ C,
+2026-11-13T01:04:17.2051658Z           0 ≤ C ∧
+2026-11-13T01:04:17.2051895Z             ∀ x ∈ U,
+2026-11-13T01:04:17.2052169Z               (q operatorBase) x ≤ R →
+2026-11-13T01:04:17.2052495Z                 ∀ (v : Fin n → E),
+2026-11-13T01:04:17.2052861Z                   (∀ (i : Fin n), (q operatorBase) (v i) ≤ R) →
+2026-11-13T01:04:17.2053476Z                     ∀ (y : E),
+2026-11-13T01:04:17.2053808Z                       (q s) (inverseForwardJet J n x v y) ≤
+2026-11-13T01:04:17.2054119Z --
+2026-11-13T01:04:17.2054334Z error: build failed
+2026-11-13T01:04:17.2243845Z compiled project modules: 0; slowest:
+2026-11-13T01:04:22.2304055Z ##[error]Process completed with exit code 1.
+2026-11-13T01:04:22.2954531Z ##[group]Run actions/cache/save@v4
+2026-11-13T01:04:22.2954845Z with:
+2026-11-13T01:04:22.2955069Z   path: .lake/build
+2026-11-13T01:04:22.2955704Z   key: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates~8a8082de2b905bb3f4abe5756c02083043c93970
+2026-11-13T01:04:22.2956430Z   enableCrossOsArchive: false
+2026-11-13T01:04:22.2956694Z env:
+2026-11-13T01:04:22.2956896Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:04:22.2957137Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:04:22.2957377Z ##[endgroup]
+2026-11-13T01:04:22.4040720Z (node:3673) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T01:04:22.4041646Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T01:04:22.4222443Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/continuous-flexibility/continuous-flexibility --files-from manifest.txt --use-compress-program zstdmt
+2026-11-13T01:05:05.7503009Z (node:3673) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-13T01:05:06.7352121Z Sent 201326592 of 1210140990 (16.6%), 192.0 MBs/sec
+2026-11-13T01:05:07.7370006Z Sent 671088640 of 1210140990 (55.5%), 319.8 MBs/sec
+2026-11-13T01:05:08.2595338Z Sent 1210140990 of 1210140990 (100.0%), 456.9 MBs/sec
+2026-11-13T01:05:08.4395077Z Cache saved with key: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates~8a8082de2b905bb3f4abe5756c02083043c93970
+2026-11-13T01:05:08.5828076Z ##[group]Run gh cache list -R "$GITHUB_REPOSITORY" --key "$PREFIX" --limit 100 --json id,key             --jq '.[] | select(.key != $ENV.KEEP) | .id' |
+2026-11-13T01:05:08.5829388Z [36;1mgh cache list -R "$GITHUB_REPOSITORY" --key "$PREFIX" --limit 100 --json id,key             --jq '.[] | select(.key != $ENV.KEEP) | .id' |[0m
+2026-11-13T01:05:08.5830145Z [36;1m  while read -r id; do gh cache delete "$id" -R "$GITHUB_REPOSITORY" || true; done[0m
+2026-11-13T01:05:08.6282872Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T01:05:08.6283282Z env:
+2026-11-13T01:05:08.6283507Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:05:08.6283986Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:05:08.6287620Z   GH_TOKEN: ***
+2026-11-13T01:05:08.6288598Z   PREFIX: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates~
+2026-11-13T01:05:08.6290525Z   KEEP: lake-build-709bdc1d91e53cf08fa50c520efee5422313c860e809bec6e952367e47b16902-line/N04Coordinates~8a8082de2b905bb3f4abe5756c02083043c93970
+2026-11-13T01:05:08.6291832Z ##[endgroup]
+2026-11-13T01:05:09.1018542Z ##[group]Run total=$(find src/ContinuousFlexibility -name '*.lean' | wc -l)
+2026-11-13T01:05:09.1019680Z [36;1mtotal=$(find src/ContinuousFlexibility -name '*.lean' | wc -l)[0m
+2026-11-13T01:05:09.1020909Z [36;1mbuilt=$(find .lake/build/lib/lean/ContinuousFlexibility -name '*.olean' ! -name '*.server.olean' ! -name '*.private.olean' | wc -l)[0m
+2026-11-13T01:05:09.1022109Z [36;1mecho "modules compiled / total: $built / $total"[0m
+2026-11-13T01:05:09.1086725Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T01:05:09.1087343Z env:
+2026-11-13T01:05:09.1087665Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:05:09.1088054Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:05:09.1088439Z ##[endgroup]
+2026-11-13T01:05:09.1583608Z modules compiled / total: 5125 / 4701
+2026-11-13T01:05:09.1645606Z ##[group]Run find .lake/build/ir -name '*.setup.json' -delete 2>/dev/null || true
+2026-11-13T01:05:09.1646575Z [36;1mfind .lake/build/ir -name '*.setup.json' -delete 2>/dev/null || true[0m
+2026-11-13T01:05:09.1647338Z [36;1mtar --zstd -cf lake-build.tar.zst .lake/build[0m
+2026-11-13T01:05:09.1647937Z [36;1mls -lh lake-build.tar.zst[0m
+2026-11-13T01:05:09.1710445Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T01:05:09.1711030Z env:
+2026-11-13T01:05:09.1711349Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:05:09.1711740Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:05:09.1712121Z ##[endgroup]
+2026-11-13T01:05:22.9520996Z -rw-r--r-- 1 runner runner 702M Nov 13 01:05 lake-build.tar.zst
+2026-11-13T01:05:22.9584544Z ##[group]Run actions/upload-artifact@v4
+2026-11-13T01:05:22.9584907Z with:
+2026-11-13T01:05:22.9585135Z   name: lake-build-line
+2026-11-13T01:05:22.9585407Z   path: lake-build.tar.zst
+2026-11-13T01:05:22.9585670Z   retention-days: 3
+2026-11-13T01:05:22.9585927Z   compression-level: 0
+2026-11-13T01:05:22.9586178Z   if-no-files-found: warn
+2026-11-13T01:05:22.9586438Z   overwrite: false
+2026-11-13T01:05:22.9586682Z   include-hidden-files: false
+2026-11-13T01:05:22.9586946Z env:
+2026-11-13T01:05:22.9587149Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:05:22.9587397Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:05:22.9587651Z ##[endgroup]
+2026-11-13T01:05:23.1321792Z (node:3763) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T01:05:23.1322559Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T01:05:23.1369505Z With the provided path, there will be 1 file uploaded
+2026-11-13T01:05:23.1375352Z Artifact name is valid!
+2026-11-13T01:05:23.1376137Z Root directory input is valid!
+2026-11-13T01:05:23.3495987Z Beginning upload of artifact content to blob storage
+2026-11-13T01:05:23.4010312Z (node:3763) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-13T01:05:23.5406474Z Uploaded bytes 8388608
+2026-11-13T01:05:23.5886841Z Uploaded bytes 16777216
+2026-11-13T01:05:23.6522157Z Uploaded bytes 25165824
+2026-11-13T01:05:23.6990956Z Uploaded bytes 33554432
+2026-11-13T01:05:23.7370371Z Uploaded bytes 41943040
+2026-11-13T01:05:23.7960519Z Uploaded bytes 50331648
+2026-11-13T01:05:23.8009187Z Uploaded bytes 58720256
+2026-11-13T01:05:23.8030997Z Uploaded bytes 67108864
+2026-11-13T01:05:23.8944436Z Uploaded bytes 75497472
+2026-11-13T01:05:23.9128255Z Uploaded bytes 83886080
+2026-11-13T01:05:23.9317804Z Uploaded bytes 92274688
+2026-11-13T01:05:23.9635170Z Uploaded bytes 100663296
+2026-11-13T01:05:24.0464611Z Uploaded bytes 109051904
+2026-11-13T01:05:24.0599904Z Uploaded bytes 117440512
+2026-11-13T01:05:24.0629650Z Uploaded bytes 125829120
+2026-11-13T01:05:24.1288154Z Uploaded bytes 134217728
+2026-11-13T01:05:24.1740007Z Uploaded bytes 142606336
+2026-11-13T01:05:24.1849737Z Uploaded bytes 150994944
+2026-11-13T01:05:24.2490833Z Uploaded bytes 159383552
+2026-11-13T01:05:24.2670758Z Uploaded bytes 167772160
+2026-11-13T01:05:24.3089680Z Uploaded bytes 176160768
+2026-11-13T01:05:24.3700116Z Uploaded bytes 184549376
+2026-11-13T01:05:24.3878648Z Uploaded bytes 192937984
+2026-11-13T01:05:24.4072817Z Uploaded bytes 201326592
+2026-11-13T01:05:24.4239503Z Uploaded bytes 209715200
+2026-11-13T01:05:24.4826475Z Uploaded bytes 218103808
+2026-11-13T01:05:24.5225812Z Uploaded bytes 226492416
+2026-11-13T01:05:24.5353472Z Uploaded bytes 234881024
+2026-11-13T01:05:24.5363556Z Uploaded bytes 243269632
+2026-11-13T01:05:24.5885170Z Uploaded bytes 251658240
+2026-11-13T01:05:24.6462432Z Uploaded bytes 260046848
+2026-11-13T01:05:24.6745620Z Uploaded bytes 268435456
+2026-11-13T01:05:24.6920274Z Uploaded bytes 276824064
+2026-11-13T01:05:24.7034113Z Uploaded bytes 285212672
+2026-11-13T01:05:24.7326640Z Uploaded bytes 293601280
+2026-11-13T01:05:24.7829704Z Uploaded bytes 301989888
+2026-11-13T01:05:24.8047770Z Uploaded bytes 310378496
+2026-11-13T01:05:24.8352957Z Uploaded bytes 318767104
+2026-11-13T01:05:24.8608078Z Uploaded bytes 327155712
+2026-11-13T01:05:24.8947310Z Uploaded bytes 335544320
+2026-11-13T01:05:24.9310423Z Uploaded bytes 343932928
+2026-11-13T01:05:24.9459786Z Uploaded bytes 352321536
+2026-11-13T01:05:25.0169973Z Uploaded bytes 360710144
+2026-11-13T01:05:25.0377289Z Uploaded bytes 369098752
+2026-11-13T01:05:25.0398371Z Uploaded bytes 377487360
+2026-11-13T01:05:25.1174603Z Uploaded bytes 385875968
+2026-11-13T01:05:25.1509916Z Uploaded bytes 394264576
+2026-11-13T01:05:25.1529408Z Uploaded bytes 402653184
+2026-11-13T01:05:25.2244062Z Uploaded bytes 411041792
+2026-11-13T01:05:25.2286863Z Uploaded bytes 419430400
+2026-11-13T01:05:25.2899999Z Uploaded bytes 427819008
+2026-11-13T01:05:25.2960608Z Uploaded bytes 436207616
+2026-11-13T01:05:25.3530099Z Uploaded bytes 444596224
+2026-11-13T01:05:25.3560436Z Uploaded bytes 452984832
+2026-11-13T01:05:25.4001792Z Uploaded bytes 461373440
+2026-11-13T01:05:25.4104984Z Uploaded bytes 469762048
+2026-11-13T01:05:25.4501513Z Uploaded bytes 478150656
+2026-11-13T01:05:25.5327346Z Uploaded bytes 486539264
+2026-11-13T01:05:25.5456680Z Uploaded bytes 494927872
+2026-11-13T01:05:25.5783368Z Uploaded bytes 503316480
+2026-11-13T01:05:25.6120686Z Uploaded bytes 511705088
+2026-11-13T01:05:25.6704840Z Uploaded bytes 520093696
+2026-11-13T01:05:25.6892193Z Uploaded bytes 528482304
+2026-11-13T01:05:25.7100942Z Uploaded bytes 536870912
+2026-11-13T01:05:25.7170581Z Uploaded bytes 545259520
+2026-11-13T01:05:25.7917539Z Uploaded bytes 553648128
+2026-11-13T01:05:25.8009081Z Uploaded bytes 562036736
+2026-11-13T01:05:25.8791644Z Uploaded bytes 570425344
+2026-11-13T01:05:25.9065309Z Uploaded bytes 578813952
+2026-11-13T01:05:25.9197392Z Uploaded bytes 587202560
+2026-11-13T01:05:25.9280053Z Uploaded bytes 595591168
+2026-11-13T01:05:25.9963587Z Uploaded bytes 603979776
+2026-11-13T01:05:25.9985421Z Uploaded bytes 612368384
+2026-11-13T01:05:26.0337357Z Uploaded bytes 620756992
+2026-11-13T01:05:26.0570020Z Uploaded bytes 629145600
+2026-11-13T01:05:26.1075532Z Uploaded bytes 637534208
+2026-11-13T01:05:26.1286938Z Uploaded bytes 645922816
+2026-11-13T01:05:26.1642907Z Uploaded bytes 654311424
+2026-11-13T01:05:26.1817187Z Uploaded bytes 662700032
+2026-11-13T01:05:26.2084294Z Uploaded bytes 671088640
+2026-11-13T01:05:26.3063342Z Uploaded bytes 679477248
+2026-11-13T01:05:26.3579781Z Uploaded bytes 687865856
+2026-11-13T01:05:26.3794762Z Uploaded bytes 696254464
+2026-11-13T01:05:26.4087050Z Uploaded bytes 704643072
+2026-11-13T01:05:26.4491578Z Uploaded bytes 713031680
+2026-11-13T01:05:26.4689929Z Uploaded bytes 721420288
+2026-11-13T01:05:26.4929560Z Uploaded bytes 729808896
+2026-11-13T01:05:26.6835831Z Uploaded bytes 735257764
+2026-11-13T01:05:26.6989408Z Finished uploading artifact content to blob storage!
+2026-11-13T01:05:26.6993243Z SHA256 digest of uploaded artifact zip is 625a7f93ccd55ecba3c0648697d96ce78cb9420dd3427581fb6b70a6dced0ff8
+2026-11-13T01:05:26.6995464Z Finalizing artifact upload
+2026-11-13T01:05:27.0324237Z Artifact lake-build-line.zip successfully finalized. Artifact ID 13999063737
+2026-11-13T01:05:27.0325575Z Artifact lake-build-line has been successfully uploaded! Final size is 735257764 bytes. Artifact ID is 13999063737
+2026-11-13T01:05:27.0335080Z Artifact download URL: https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43341646689/artifacts/13999063737
+2026-11-13T01:05:27.0602950Z ##[group]Run actions/upload-artifact@v4
+2026-11-13T01:05:27.0603509Z with:
+2026-11-13T01:05:27.0603876Z   name: build-log
+2026-11-13T01:05:27.0604321Z   path: build.log
+quick.log
+
+2026-11-13T01:05:27.0604811Z   if-no-files-found: warn
+2026-11-13T01:05:27.0605289Z   compression-level: 6
+2026-11-13T01:05:27.0605744Z   overwrite: false
+2026-11-13T01:05:27.0606201Z   include-hidden-files: false
+2026-11-13T01:05:27.0606690Z env:
+2026-11-13T01:05:27.0607077Z   LEAN_NUM_THREADS: 2
+2026-11-13T01:05:27.0607539Z   FILE_LIMIT_SECONDS: 300
+2026-11-13T01:05:27.0607983Z ##[endgroup]
+2026-11-13T01:05:27.2319280Z (node:3775) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T01:05:27.2320357Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T01:05:27.2369265Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-11-13T01:05:27.2393492Z The least common ancestor is /home/runner/work/continuous-flexibility/continuous-flexibility. This will be the root directory of the artifact
+2026-11-13T01:05:27.2399952Z With the provided path, there will be 1 file uploaded
+2026-11-13T01:05:27.2400880Z Artifact name is valid!
+2026-11-13T01:05:27.2401334Z Root directory input is valid!
+2026-11-13T01:05:27.4403611Z Beginning upload of artifact content to blob storage
+2026-11-13T01:05:27.5150659Z (node:3775) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-13T01:05:27.5471372Z Uploaded bytes 305624
+2026-11-13T01:05:27.5598779Z Finished uploading artifact content to blob storage!
+2026-11-13T01:05:27.5600152Z SHA256 digest of uploaded artifact zip is f4fd1b4f7ab987e4bef53934e317a53adfae1a31369db41fe50a0c8053ee0265
+2026-11-13T01:05:27.5601845Z Finalizing artifact upload
+2026-11-13T01:05:27.8908161Z Artifact build-log.zip successfully finalized. Artifact ID 13999019031
+2026-11-13T01:05:27.8909272Z Artifact build-log has been successfully uploaded! Final size is 305624 bytes. Artifact ID is 13999019031
+2026-11-13T01:05:27.8920249Z Artifact download URL: https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43341646689/artifacts/13999019031
+2026-11-13T01:05:27.9150427Z Post job cleanup.
+2026-11-13T01:05:28.0091275Z [command]/usr/bin/git version
+2026-11-13T01:05:28.0137177Z git version 2.56.1
+2026-11-13T01:05:28.0175853Z Temporarily overriding HOME='/home/runner/work/_temp/3df90624-1c68-4cbc-b891-621cb7134251' before making global git config changes
+2026-11-13T01:05:28.0177335Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-13T01:05:28.0183649Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/continuous-flexibility/continuous-flexibility
+2026-11-13T01:05:28.0228159Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T01:05:28.0269810Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T01:05:28.0614967Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T01:05:28.0653506Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T01:05:28.0991478Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T01:05:28.1027783Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T01:05:28.1521424Z Cleaning up orphan processes
+2026-11-13T01:05:28.2013903Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/cache/restore@v4, actions/cache/save@v4, actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

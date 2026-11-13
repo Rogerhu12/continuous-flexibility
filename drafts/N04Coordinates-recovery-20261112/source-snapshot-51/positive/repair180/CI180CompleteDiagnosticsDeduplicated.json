@@ -1,0 +1,229 @@
+{
+  "schema": "exact-context-deduplication/v1",
+  "source": {
+    "path": "/workspace/scratch/n04-drafts-20261113/root/ci/CI180CompleteErrorBlocks.json",
+    "git_blob": "de707e9723b06179cd9d44ef18acdbe2a445e4f4",
+    "sha256": "1073ce5a1418e2085cd4ecf7905c7db07ec60091fdc26145612118de44b551fe",
+    "utf8_bytes": 100934,
+    "lines": 2035,
+    "final_newline": true
+  },
+  "reconstruction": "Each error is header + prelude + context: + shared_context.splitlines() + goal; final error has complete_text. All14 contexts equal byte-for-byte; no omitted unique source diagnostic.",
+  "shared_contexts": {
+    "c2127977d4dc64cb8a1b1d9106e5a99fa343ade52e10f745753d580057a02036": "E : Type u_1\nA : Type u_2\ninst✝⁸ : TopologicalSpace E\ninst✝⁷ : AddCommGroup E\ninst✝⁶ : Module ℝ E\ninst✝⁵ : IsTopologicalAddGroup E\ninst✝⁴ : ContinuousSMul ℝ E\ninst✝³ : T2Space E\ninst✝² : TopologicalSpace A\ninst✝¹ : AddCommGroup A\ninst✝ : Module ℝ A\nU : Set E\nL : E → E →L[ℝ] E\nq : ℕ → Seminorm ℝ E\nhq : Monotone q\nJ : SmoothDirections (U ×ˢ univ) fun z => (L z.1) z.2\nV : E → E →L[ℝ] E\noperatorBase inverseLoss forwardLoss : ℕ\nhV :\n  ∀ (R : ℝ),\n    1 ≤ R →\n      ∀ (s : ℕ),\n        ∃ C,\n          0 ≤ C ∧\n            ∀ x ∈ U,\n              (q operatorBase) x ≤ R →\n                ∀ (y : E),\n                  (q s) ((V x) y) ≤ C * ((1 + (q (s + inverseLoss)) x) * (q operatorBase) y + (q (s + inverseLoss)) y)\nhF :\n  ∀ (n : ℕ) (R : ℝ),\n    1 ≤ R →\n      ∀ (s : ℕ),\n        ∃ C,\n          0 ≤ C ∧\n            ∀ x ∈ U,\n              (q operatorBase) x ≤ R →\n                ∀ (v : Fin n → E),\n                  (∀ (i : Fin n), (q operatorBase) (v i) ≤ R) →\n                    ∀ (y : E),\n                      (q s) (inverseForwardJet J n x v y) ≤\n                        C *\n                          ((1 + (q (s + (n + forwardLoss))) x + ∑ i, (q (s + (n + forwardLoss))) (v i)) *\n                              (q operatorBase) y +\n                            (q (s + (n + forwardLoss))) y)\na : ℕ → Seminorm ℝ A\nha : Monotone a\nbase productLoss : ℕ\nhbase : operatorBase ≤ base\nhproduct :\n  ∀ (R : ℝ),\n    1 ≤ R →\n      ∀ (b c : ℕ),\n        ∃ C,\n          0 ≤ C ∧\n            ∀ (z : (E × E) × A),\n              (pairGrading (pairGrading q q) a base) z ≤ R →\n                (1 + (pairGrading (pairGrading q q) a b) z) * (1 + (pairGrading (pairGrading q q) a c) z) ≤\n                  C * (1 + (pairGrading (pairGrading q q) a (b + c + productLoss)) z)\nd : ℕ → Seminorm ℝ ((E × E) × A) := ⋯\nhd : Monotone d\nhx : ∀ (s : ℕ) (z : (E × E) × A), (q s) z.1.1 ≤ (d s) z\nhu : ∀ (s : ℕ) (z : (E × E) × A), (q s) z.1.2 ≤ (d s) z\nhau : ∀ (s : ℕ) (z : (E × E) × A), (a s) z.2 ≤ (d s) z\nhfst : ∀ (s : ℕ) (y : E × E), (q s) y.1 ≤ (pairGrading q q s) y\nhsnd : ∀ (s : ℕ) (y : E × E), (q s) y.2 ≤ (pairGrading q q s) y\nn : ℕ\nv : Fin n → A →L[ℝ] E\ne : TameInverseExpression E E E A\nie :\n  TameInverseExpression.IsZeroLoss q q q a e →\n    ∃ loss,\n      ∀ (R : ℝ),\n        1 ≤ R →\n          ∀ (s : ℕ),\n            ∃ C,\n              0 ≤ C ∧\n                ∀ (z : (E × E) × A),\n                  z.1.1 ∈ U →\n                    (pairGrading (pairGrading q q) a base) z ≤ R →\n                      (pairGrading q q s) (TameInverseExpression.eval J V e z.1 z.2) ≤\n                        C * (1 + (pairGrading (pairGrading q q) a (s + loss)) z)\nhe : TameInverseExpression.IsZeroLoss q q q a (TameInverseExpression.forward n v e)\nloss : ℕ\nhb :\n  ∀ (R : ℝ),\n    1 ≤ R →\n      ∀ (s : ℕ),\n        ∃ C,\n          0 ≤ C ∧\n            ∀ (z : (E × E) × A),\n              z.1.1 ∈ U →\n                (pairGrading (pairGrading q q) a base) z ≤ R →\n                  (pairGrading q q s) (TameInverseExpression.eval J V e z.1 z.2) ≤\n                    C * (1 + (pairGrading (pairGrading q q) a (s + loss)) z)\nR : ℝ\nhR : 1 ≤ R\ncLow : Fin n → NNReal\nhcLow : ∀ (i : Fin n) (x : A), (q operatorBase) (↑(v i) x) ≤ ↑(cLow i) * (a (operatorBase + 0)) x\nR' : ℝ := ⋯\nhRR : R ≤ R'\nhR' : 1 ≤ R'\nI : Type (max 0 u_1 u_2) := ⋯\nP : ℕ → I → ℝ := ⋯\ns : ℕ\ncHigh : Fin n → NNReal\nhcHigh : ∀ (i : Fin n) (x : A), (q (s + (n + forwardLoss))) (↑(v i) x) ≤ ↑(cHigh i) * (a (s + (n + forwardLoss) + 0)) x\nK : ℝ := ⋯\nhK : 1 ≤ K\nC : ℝ\nhC : 0 ≤ C\nhc :\n  ∀ x ∈ U,\n    (q operatorBase) x ≤ R' →\n      ∀ (v : Fin n → E),\n        (∀ (i : Fin n), (q operatorBase) (v i) ≤ R') →\n          ∀ (y : E),\n            (q s) (inverseForwardJet J n x v y) ≤\n              C *\n                ((1 + (q (s + (n + forwardLoss))) x + ∑ i, (q (s + (n + forwardLoss))) (v i)) * (q operatorBase) y +\n                  (q (s + (n + forwardLoss))) y)\ni : I\nhv : ∀ (j : Fin n), (q operatorBase) ((v j) (↑i).2) ≤ R'\nhh :\n  (q s) (inverseForwardJet J n (↑i).1.1 (fun j => (v j) (↑i).2) (TameInverseExpression.eval J V e (↑i).1 (↑i).2).1) ≤\n    C *\n      ((1 + (q (s + (n + forwardLoss))) (↑i).1.1 + ∑ i_1, (q (s + (n + forwardLoss))) ((v i_1) (↑i).2)) *\n          (q operatorBase) (TameInverseExpression.eval J V e (↑i).1 (↑i).2).1 +\n        (q (s + (n + forwardLoss))) (TameInverseExpression.eval J V e (↑i).1 (↑i).2).1)\nhdirs : ∑ j, (q (s + (n + forwardLoss))) ((v j) (↑i).2) ≤ (∑ j, ↑(cHigh j)) * (d (s + (n + forwardLoss))) ↑i\nhcoef :\n  1 + (q (s + (n + forwardLoss))) (↑i).1.1 + ∑ j, (q (s + (n + forwardLoss))) ((v j) (↑i).2) ≤\n    K * P (s + (n + forwardLoss)) i"
+  },
+  "errors": [
+    {
+      "number": 0,
+      "header": "error: src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean:257:21: don't know how to synthesize implicit argument `d`",
+      "prelude": [
+        "  @add_le_add ℝ",
+        "    ((1 + (q (s + (n + forwardLoss))) (↑i).1.1 + ∑ j, (q (s + (n + forwardLoss))) ((v j) (↑i).2)) *",
+        "      (q operatorBase) ?m.2544.1)",
+        "    (K * P (s + (n + forwardLoss)) i * (pairGrading q q operatorBase) ?m.2544) ((q (s + (n + forwardLoss))) ?m.2619.1)",
+        "    (K * (pairGrading q q (s + (n + forwardLoss))) ?m.2619) Real.instAdd Real.instPreorder",
+        "    IsOrderedAddMonoid.toAddLeftMono IsOrderedAddMonoid.toAddRightMono",
+        "    (mul_le_mul hcoef (hfst operatorBase ?m.2544) (apply_nonneg (q operatorBase) ?m.2544.1)",
+        "      (mul_nonneg (LE.le.trans zero_le_one hK) (add_nonneg zero_le_one (apply_nonneg (d (s + (n + forwardLoss))) ↑i))))",
+        "    (LE.le.trans (hfst (s + (n + forwardLoss)) ?m.2619)",
+        "      (le_mul_of_one_le_left (apply_nonneg (pairGrading q q (s + (n + forwardLoss))) ?m.2619) hK))"
+      ],
+      "shared_context_sha256": "c2127977d4dc64cb8a1b1d9106e5a99fa343ade52e10f745753d580057a02036",
+      "goal": [
+        "⊢ ℝ"
+      ]
+    },
+    {
+      "number": 1,
+      "header": "error: src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean:257:21: don't know how to synthesize implicit argument `c`",
+      "prelude": [
+        "  @add_le_add ℝ",
+        "    ((1 + (q (s + (n + forwardLoss))) (↑i).1.1 + ∑ j, (q (s + (n + forwardLoss))) ((v j) (↑i).2)) *",
+        "      (q operatorBase) ?m.2544.1)",
+        "    (K * P (s + (n + forwardLoss)) i * (pairGrading q q operatorBase) ?m.2544) ((q (s + (n + forwardLoss))) ?m.2619.1)",
+        "    (K * (pairGrading q q (s + (n + forwardLoss))) ?m.2619) Real.instAdd Real.instPreorder",
+        "    IsOrderedAddMonoid.toAddLeftMono IsOrderedAddMonoid.toAddRightMono",
+        "    (mul_le_mul hcoef (hfst operatorBase ?m.2544) (apply_nonneg (q operatorBase) ?m.2544.1)",
+        "      (mul_nonneg (LE.le.trans zero_le_one hK) (add_nonneg zero_le_one (apply_nonneg (d (s + (n + forwardLoss))) ↑i))))",
+        "    (LE.le.trans (hfst (s + (n + forwardLoss)) ?m.2619)",
+        "      (le_mul_of_one_le_left (apply_nonneg (pairGrading q q (s + (n + forwardLoss))) ?m.2619) hK))"
+      ],
+      "shared_context_sha256": "c2127977d4dc64cb8a1b1d9106e5a99fa343ade52e10f745753d580057a02036",
+      "goal": [
+        "⊢ ℝ"
+      ]
+    },
+    {
+      "number": 2,
+      "header": "error: src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean:257:21: don't know how to synthesize implicit argument `b`",
+      "prelude": [
+        "  @add_le_add ℝ",
+        "    ((1 + (q (s + (n + forwardLoss))) (↑i).1.1 + ∑ j, (q (s + (n + forwardLoss))) ((v j) (↑i).2)) *",
+        "      (q operatorBase) ?m.2544.1)",
+        "    (K * P (s + (n + forwardLoss)) i * (pairGrading q q operatorBase) ?m.2544) ((q (s + (n + forwardLoss))) ?m.2619.1)",
+        "    (K * (pairGrading q q (s + (n + forwardLoss))) ?m.2619) Real.instAdd Real.instPreorder",
+        "    IsOrderedAddMonoid.toAddLeftMono IsOrderedAddMonoid.toAddRightMono",
+        "    (mul_le_mul hcoef (hfst operatorBase ?m.2544) (apply_nonneg (q operatorBase) ?m.2544.1)",
+        "      (mul_nonneg (LE.le.trans zero_le_one hK) (add_nonneg zero_le_one (apply_nonneg (d (s + (n + forwardLoss))) ↑i))))",
+        "    (LE.le.trans (hfst (s + (n + forwardLoss)) ?m.2619)",
+        "      (le_mul_of_one_le_left (apply_nonneg (pairGrading q q (s + (n + forwardLoss))) ?m.2619) hK))"
+      ],
+      "shared_context_sha256": "c2127977d4dc64cb8a1b1d9106e5a99fa343ade52e10f745753d580057a02036",
+      "goal": [
+        "⊢ ℝ"
+      ]
+    },
+    {
+      "number": 3,
+      "header": "error: src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean:257:21: don't know how to synthesize implicit argument `a`",
+      "prelude": [
+        "  @add_le_add ℝ",
+        "    ((1 + (q (s + (n + forwardLoss))) (↑i).1.1 + ∑ j, (q (s + (n + forwardLoss))) ((v j) (↑i).2)) *",
+        "      (q operatorBase) ?m.2544.1)",
+        "    (K * P (s + (n + forwardLoss)) i * (pairGrading q q operatorBase) ?m.2544) ((q (s + (n + forwardLoss))) ?m.2619.1)",
+        "    (K * (pairGrading q q (s + (n + forwardLoss))) ?m.2619) Real.instAdd Real.instPreorder",
+        "    IsOrderedAddMonoid.toAddLeftMono IsOrderedAddMonoid.toAddRightMono",
+        "    (mul_le_mul hcoef (hfst operatorBase ?m.2544) (apply_nonneg (q operatorBase) ?m.2544.1)",
+        "      (mul_nonneg (LE.le.trans zero_le_one hK) (add_nonneg zero_le_one (apply_nonneg (d (s + (n + forwardLoss))) ↑i))))",
+        "    (LE.le.trans (hfst (s + (n + forwardLoss)) ?m.2619)",
+        "      (le_mul_of_one_le_left (apply_nonneg (pairGrading q q (s + (n + forwardLoss))) ?m.2619) hK))"
+      ],
+      "shared_context_sha256": "c2127977d4dc64cb8a1b1d9106e5a99fa343ade52e10f745753d580057a02036",
+      "goal": [
+        "⊢ ℝ"
+      ]
+    },
+    {
+      "number": 4,
+      "header": "error: src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean:260:11: don't know how to synthesize implicit argument `c`",
+      "prelude": [
+        "  @LE.le.trans ℝ Real.instPreorder ((q (s + (n + forwardLoss))) ?m.2619.1)",
+        "    ((pairGrading q q (s + (n + forwardLoss))) ?m.2619) (K * (pairGrading q q (s + (n + forwardLoss))) ?m.2619)",
+        "    (hfst (s + (n + forwardLoss)) ?m.2619)",
+        "    (le_mul_of_one_le_left (apply_nonneg (pairGrading q q (s + (n + forwardLoss))) ?m.2619) hK)"
+      ],
+      "shared_context_sha256": "c2127977d4dc64cb8a1b1d9106e5a99fa343ade52e10f745753d580057a02036",
+      "goal": [
+        "⊢ ℝ"
+      ]
+    },
+    {
+      "number": 5,
+      "header": "error: src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean:260:11: don't know how to synthesize implicit argument `b`",
+      "prelude": [
+        "  @LE.le.trans ℝ Real.instPreorder ((q (s + (n + forwardLoss))) ?m.2619.1)",
+        "    ((pairGrading q q (s + (n + forwardLoss))) ?m.2619) (K * (pairGrading q q (s + (n + forwardLoss))) ?m.2619)",
+        "    (hfst (s + (n + forwardLoss)) ?m.2619)",
+        "    (le_mul_of_one_le_left (apply_nonneg (pairGrading q q (s + (n + forwardLoss))) ?m.2619) hK)"
+      ],
+      "shared_context_sha256": "c2127977d4dc64cb8a1b1d9106e5a99fa343ade52e10f745753d580057a02036",
+      "goal": [
+        "⊢ ℝ"
+      ]
+    },
+    {
+      "number": 6,
+      "header": "error: src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean:260:11: don't know how to synthesize implicit argument `a`",
+      "prelude": [
+        "  @LE.le.trans ℝ Real.instPreorder ((q (s + (n + forwardLoss))) ?m.2619.1)",
+        "    ((pairGrading q q (s + (n + forwardLoss))) ?m.2619) (K * (pairGrading q q (s + (n + forwardLoss))) ?m.2619)",
+        "    (hfst (s + (n + forwardLoss)) ?m.2619)",
+        "    (le_mul_of_one_le_left (apply_nonneg (pairGrading q q (s + (n + forwardLoss))) ?m.2619) hK)"
+      ],
+      "shared_context_sha256": "c2127977d4dc64cb8a1b1d9106e5a99fa343ade52e10f745753d580057a02036",
+      "goal": [
+        "⊢ ℝ"
+      ]
+    },
+    {
+      "number": 7,
+      "header": "error: src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean:261:13: don't know how to synthesize implicit argument `b`",
+      "prelude": [
+        "  @le_mul_of_one_le_left ℝ instMulZeroOneClassOfSemiring.toMulOneClass",
+        "    Real.instAddCommMonoid.toAddZeroClass.toAddZero.toZero K ((pairGrading q q (s + (n + forwardLoss))) ?m.2619)",
+        "    Real.instPreorder Real.instIsOrderedRing.toMulPosMono",
+        "    (apply_nonneg (pairGrading q q (s + (n + forwardLoss))) ?m.2619) hK"
+      ],
+      "shared_context_sha256": "c2127977d4dc64cb8a1b1d9106e5a99fa343ade52e10f745753d580057a02036",
+      "goal": [
+        "⊢ ℝ"
+      ]
+    },
+    {
+      "number": 8,
+      "header": "error: src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean:261:51: don't know how to synthesize placeholder for argument `a`",
+      "prelude": [],
+      "shared_context_sha256": "c2127977d4dc64cb8a1b1d9106e5a99fa343ade52e10f745753d580057a02036",
+      "goal": [
+        "⊢ E × E"
+      ]
+    },
+    {
+      "number": 9,
+      "header": "error: src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean:260:41: don't know how to synthesize placeholder for argument `y`",
+      "prelude": [],
+      "shared_context_sha256": "c2127977d4dc64cb8a1b1d9106e5a99fa343ade52e10f745753d580057a02036",
+      "goal": [
+        "⊢ E × E"
+      ]
+    },
+    {
+      "number": 10,
+      "header": "error: src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean:258:11: don't know how to synthesize implicit argument `d`",
+      "prelude": [
+        "  @mul_le_mul ℝ Real.instMul Real.instAddCommMonoid.toAddZeroClass.toAddZero.toZero Real.instPreorder",
+        "    (1 + (q (s + (n + forwardLoss))) (↑i).1.1 + ∑ j, (q (s + (n + forwardLoss))) ((v j) (↑i).2))",
+        "    (K * P (s + (n + forwardLoss)) i) ((q operatorBase) ?m.2544.1) ((pairGrading q q operatorBase) ?m.2544)",
+        "    Real.instIsOrderedRing.toPosMulMono Real.instIsOrderedRing.toMulPosMono hcoef (hfst operatorBase ?m.2544)",
+        "    (apply_nonneg (q operatorBase) ?m.2544.1)",
+        "    (mul_nonneg (LE.le.trans zero_le_one hK) (add_nonneg zero_le_one (apply_nonneg (d (s + (n + forwardLoss))) ↑i)))"
+      ],
+      "shared_context_sha256": "c2127977d4dc64cb8a1b1d9106e5a99fa343ade52e10f745753d580057a02036",
+      "goal": [
+        "⊢ ℝ"
+      ]
+    },
+    {
+      "number": 11,
+      "header": "error: src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean:258:11: don't know how to synthesize implicit argument `c`",
+      "prelude": [
+        "  @mul_le_mul ℝ Real.instMul Real.instAddCommMonoid.toAddZeroClass.toAddZero.toZero Real.instPreorder",
+        "    (1 + (q (s + (n + forwardLoss))) (↑i).1.1 + ∑ j, (q (s + (n + forwardLoss))) ((v j) (↑i).2))",
+        "    (K * P (s + (n + forwardLoss)) i) ((q operatorBase) ?m.2544.1) ((pairGrading q q operatorBase) ?m.2544)",
+        "    Real.instIsOrderedRing.toPosMulMono Real.instIsOrderedRing.toMulPosMono hcoef (hfst operatorBase ?m.2544)",
+        "    (apply_nonneg (q operatorBase) ?m.2544.1)",
+        "    (mul_nonneg (LE.le.trans zero_le_one hK) (add_nonneg zero_le_one (apply_nonneg (d (s + (n + forwardLoss))) ↑i)))"
+      ],
+      "shared_context_sha256": "c2127977d4dc64cb8a1b1d9106e5a99fa343ade52e10f745753d580057a02036",
+      "goal": [
+        "⊢ ℝ"
+      ]
+    },
+    {
+      "number": 12,
+      "header": "error: src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean:258:66: don't know how to synthesize placeholder for argument `a`",
+      "prelude": [],
+      "shared_context_sha256": "c2127977d4dc64cb8a1b1d9106e5a99fa343ade52e10f745753d580057a02036",
+      "goal": [
+        "⊢ E"
+      ]
+    },
+    {
+      "number": 13,
+      "header": "error: src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean:258:47: don't know how to synthesize placeholder for argument `y`",
+      "prelude": [],
+      "shared_context_sha256": "c2127977d4dc64cb8a1b1d9106e5a99fa343ade52e10f745753d580057a02036",
+      "goal": [
+        "⊢ E × E"
+      ]
+    },
+    {
+      "number": 14,
+      "header": "error: src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean:257:13: failed to infer `have` declaration type",
+      "complete_text": [
+        "Some required targets logged failures:",
+        "- ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds"
+      ]
+    }
+  ]
+}
