@@ -195,7 +195,7 @@ theorem negativeInverse_forwardPrefixes
     rw [abs_of_pos (hlength 0 k).2.1]
     exact (hlength 0 k).2.2.2.2.1
   have hcoef : (2 + |(G.V 0).right k - (G.V 0).left k|) * C₀ ≤ B * E ^ B :=
-    (mul_le_mul_of_nonneg_right (add_le_add_left hspan 2)
+    (mul_le_mul_of_nonneg_right (add_le_add le_rfl hspan)
       (zero_le_one.trans hC₀)).trans (hcommon E hE).1
   have hforward : N04NegativeInverseJet.UnitPrefix J (z, p)
       (parameterGrading G.W.S low) (parameterGrading G.W.S (low + N + shift * K + 1))
@@ -221,7 +221,7 @@ theorem negativeInverse_forwardPrefixes
   have hk : G.Neg 0 k := (G.neg_iff_inl 0 k).mpr ⟨(m, side), hi⟩
   have hjac := (hJac 0 z hzbase k hk q hq).trans (hcommon E hE).2.1
   have hlinear := (G.negativeInverseCanonicalLinear_norm 0 k).trans
-    ((add_le_add_left hspan 1).trans (hcommon E hE).2.2.1)
+    ((add_le_add le_rfl hspan).trans (hcommon E hE).2.2.1)
   exact ⟨hforward, hheight, hjac, hlinear⟩
 
 end N04RealizationGauge

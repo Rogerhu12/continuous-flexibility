@@ -177,7 +177,7 @@ theorem n04NegativeInverse_overlapScalar_bound
       ‖iteratedFDeriv ℝ j (n04NegativeInverseOverlapOuter height) (f x)‖ ≤
         (2 : ℝ) ^ N * C * (1 + M) :=
     (houter height j (hj.trans hnN) (f x) hband).trans
-      (mul_le_mul_of_nonneg_left (add_le_add_left hvalue 1)
+      (mul_le_mul_of_nonneg_left (add_le_add le_rfl hvalue)
         (mul_nonneg (pow_nonneg (by norm_num) _) (zero_le_one.trans hC)))
   exact n04NegativeInverse_contDiff_comp_sharp_bound J' Q' hV
     (n04NegativeInverseOverlapOuter_contDiffOn height) (fun y hy => hy.2)
