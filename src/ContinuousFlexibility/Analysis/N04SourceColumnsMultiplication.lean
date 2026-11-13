@@ -32,6 +32,14 @@ attribute [local instance]
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
 
+/-- Specialize the height weight without simplifying any chosen
+coefficient or loss in a full-family estimate. -/
+private theorem n04SourceColumns_positiveHeight_elim
+    {k : ℕ} (hk : 0 < k) {A H W x : ℝ}
+    (h : x ≤ A * parameterHeightWeight H k * W) :
+    x ≤ A * H * W := by
+  simpa only [parameterHeightWeight, if_neg (Nat.ne_of_gt hk)] using h
+
 variable {D : ReferenceData} {S : PhysicalSpacesData} {T : MaterialData} {cell : ℕ → ℕ}
   {base : ℕ} {ε : ℝ}
   {f g : Parameter S → ℕ → PolarPoint → ℝ} {f₀ g₀ : ℕ → PolarPoint → ℝ}
@@ -149,7 +157,7 @@ theorem CurrentJetDataOn.sourceColumns_mul
         (ht.choose_spec s).choose * T.E0 (T.sample (cell m)) ^ (ht.choose_spec s).choose *
           T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) *
             oneHighVariationWeight (parameterGrading S) base' (s + ht.choose) z v := by
-      simpa only [parameterHeightWeight, if_neg (Nat.ne_of_gt hk)] using hj
+      exact n04SourceColumns_positiveHeight_elim hk hj
     exact hj'
 
 /-- A fixed spatial reference multiplier is a special case of the
