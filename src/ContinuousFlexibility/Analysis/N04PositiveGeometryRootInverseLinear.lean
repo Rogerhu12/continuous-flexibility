@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.NonlinearInverseJetTriangle
 import ContinuousFlexibility.Analysis.N04RealizationPlaneJetDirections
+import ContinuousFlexibility.Analysis.TameProductDirections
 
 /-!
 # The oriented triangular inverse differential
