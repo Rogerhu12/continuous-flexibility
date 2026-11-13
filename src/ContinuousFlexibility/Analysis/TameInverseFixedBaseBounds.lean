@@ -35,7 +35,8 @@ private theorem inverseInputProfile_product
         (p (a + b + loss) x * p base y + p base x * p (a + b + loss) y) :=
     (mul_le_mul (hp (by omega) x) (hp (by omega) y)
       (apply_nonneg _ _) (apply_nonneg _ _)).trans (hc x y)
-  refine ⟨3 + 2 * C * R, by positivity, fun ι _ x hx => ?_⟩
+  refine ⟨3 + 2 * C * R, by positivity, ?_⟩
+  intro ι _ x hx
   let H : ℝ := ∑ i, p (a + b + loss) (x i)
   let L : ℝ := ∑ i, p base (x i)
   have hH : 0 ≤ H := Finset.sum_nonneg (fun _ _ => apply_nonneg _ _)
@@ -150,7 +151,7 @@ private theorem inverseExpression_fixedBase_growth
       exact ⟨0, fun R hR s => ⟨0, le_rfl, fun z _ _ => by simp [TameInverseExpression.eval]⟩⟩
   | source =>
       refine ⟨0, fun R hR s => ⟨1, zero_le_one, fun z _ _ => ?_⟩⟩
-      simpa only [TameInverseExpression.eval, pairGrading_apply, map_zero, zero_add,
+      simpa only [TameInverseExpression.eval, d, pairGrading_apply, map_zero, zero_add,
         one_mul, Nat.add_zero] using (hu s z).trans (le_add_of_nonneg_left zero_le_one)
   | linearSource c =>
       refine ⟨0, fun R hR s => ?_⟩
@@ -174,8 +175,9 @@ private theorem inverseExpression_fixedBase_growth
       obtain ⟨loss, hb⟩ := ie he
       refine ⟨loss, fun R hR s => ?_⟩
       obtain ⟨C, hC, hc⟩ := hb R hR s
-      exact ⟨C, hC, fun z hz hl => by simpa only [TameInverseExpression.eval,
-        map_neg_eq_map] using hc z hz hl⟩
+      refine ⟨C, hC, ?_⟩
+      intro z hz hl
+      simpa only [TameInverseExpression.eval, map_neg_eq_map] using hc z hz hl
   | inverse e ie =>
       obtain ⟨loss, hb⟩ := ie he
       refine ⟨inverseLoss + operatorBase + loss + productLoss, fun R hR => ?_⟩
@@ -194,7 +196,7 @@ private theorem inverseExpression_fixedBase_growth
         simpa only [TameInverseExpression.eval, pairGrading_apply, map_zero, add_zero] using
           h.trans (mul_le_mul_of_nonneg_left (add_le_add
             (mul_le_mul (add_le_add le_rfl (hx _ i.val)) (hsnd _ _)
-              (apply_nonneg _ _) (by dsimp [P]; positivity))
+              (apply_nonneg _ _) (add_nonneg zero_le_one (apply_nonneg _ _)))
             (hsnd _ _)) hC)
       have hg := inverseProfile_linear_step P
         (fun s i => pairGrading q q s (e.eval J V i.val.1 i.val.2))
@@ -255,7 +257,7 @@ private theorem inverseExpression_fixedBase_growth
             Finset.sum_nonneg (fun j _ => (cHigh j).coe_nonneg)]
         have harg := add_le_add
           (mul_le_mul hcoef (hfst operatorBase _) (apply_nonneg _ _)
-            (mul_nonneg (zero_le_one.trans hK) (by dsimp [P]; positivity)))
+            (mul_nonneg (zero_le_one.trans hK) (add_nonneg zero_le_one (apply_nonneg _ _))))
           ((hfst (s + (n + forwardLoss)) _).trans
             (le_mul_of_one_le_left (apply_nonneg _ _) hK))
         simpa only [TameInverseExpression.eval, pairGrading_apply, map_zero, zero_add] using
@@ -329,8 +331,7 @@ theorem inverseFamilySmoothDirections_fixedBase_oneHigh
         _ ≤ ∑ _i : Fin n, (1 : ℝ) := Finset.sum_le_sum (fun i _ => (hw i).le)
         _ = _ := by simp
     have hbox : d base (x, w) ≤ R + n := by
-      rw [d, jetGrading_apply]
-      exact add_le_add hlow hsum
+      simpa only [d, jetGrading_apply] using add_le_add hlow hsum
     rw [inverseFamilySmoothDirections_apply J hU V hleft hright hcont n hx.1]
     have hprojection : q s (inverseExpressionJetValue J V n x w).1 ≤
         pairGrading q q s (inverseExpressionJetValue J V n x w) := by

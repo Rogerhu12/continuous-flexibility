@@ -61,17 +61,20 @@ theorem spaces_interpolation_affine_product_bound
           _ ≤ ∑ i : Fin (k + 1), q (order j) (1, x i) := by
             simp only [hqone, Finset.sum_add_distrib, Finset.sum_const,
               Finset.card_univ, Fintype.card_fin, nsmul_eq_mul, mul_one]
-            exact add_le_add_right (by exact_mod_cast Nat.succ_le_succ (Nat.zero_le k)) _
+            have hk : (1 : ℝ) ≤ (k + 1 : ℕ) := by
+              exact_mod_cast Nat.succ_le_succ (Nat.zero_le k)
+            exact add_le_add hk le_rfl
           _ ≤ ∑ _i : Fin (k + 1), q (order j + 2) (1, x (pick j)) :=
             Finset.sum_le_sum (fun i _ => (hpick j i).trans (hq (by omega) _))
           _ = _ := by simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin,
             nsmul_eq_mul, M]
       have hlow (j : Fin (m + 1)) : q B (1, x (pick j)) ≤ 1 + R := by
-        rw [hqone]; exact add_le_add_left (hx _) 1
+        rw [hqone]; exact add_le_add le_rfl (hx (pick j))
       have hhigh (j : Fin (m + 1)) : q (s + L) (1, x (pick j)) ≤ P := by
         rw [hqone]
-        exact add_le_add_left (Finset.single_le_sum (fun _ _ => apply_nonneg _ _)
-          (Finset.mem_univ (pick j))) 1
+        exact add_le_add le_rfl (Finset.single_le_sum
+          (fun (i : Fin (k + 1)) _ => apply_nonneg (p (s + L)) (x i))
+          (Finset.mem_univ (pick j)))
       have herase (j : Fin (m + 1)) :
           (∏ l ∈ Finset.univ.erase j, q B (1, x (pick l))) ≤ (1 + R) ^ (m + 1) := by
         calc
@@ -115,8 +118,8 @@ private theorem tameJetSize_selected_unit_le
   have hx : 1 + p (t + L) x ≤ P := by
     dsimp [P]
     rw [Fin.sum_univ_succ]
-    exact add_le_add_left (le_add_of_nonneg_right
-      (Finset.sum_nonneg (fun _ _ => apply_nonneg _ _))) 1
+    exact add_le_add le_rfl (le_add_of_nonneg_right
+      (Finset.sum_nonneg (fun (i : Fin n) _ => apply_nonneg (p (t + L)) (v i))))
   have hs : (∑ j, p (t + L) (v (σ j))) ≤ (m : ℝ) * P := by
     calc
       _ ≤ ∑ _j : Fin m, P := Finset.sum_le_sum (fun j _ => hslot (Fin.succ (σ j)))
@@ -185,8 +188,9 @@ theorem projectiveCompositionJets_fixedBase_oneHigh
   have hBK : BK + d 0 ≤ B := (le_max_right _ _).trans (le_max_right _ _)
   refine ⟨B, hBJ, fun n => ?_⟩
   let δ : ℕ := ∑ j : Fin (n + 1), d j.val
-  have hd (j : ℕ) (hj : j ≤ n) : d j ≤ δ :=
-    Finset.single_le_sum (fun _ _ => Nat.zero_le _)
+  have hd (j : ℕ) (hj : j ≤ n) : d j ≤ δ := by
+    dsimp only [δ]
+    exact Finset.single_le_sum (fun (l : Fin (n + 1)) _ => Nat.zero_le (d l.val))
       (Finset.mem_univ (⟨j, Nat.lt_succ_of_le hj⟩ : Fin (n + 1)))
   let termLoss (c : OrderedFinpartition n) : ℕ :=
     e c.length + δ + c.length * (BK + δ) + LP
@@ -202,7 +206,7 @@ theorem projectiveCompositionJets_fixedBase_oneHigh
     have hb := hc₀ i x hx ((hp hBJ x).trans hbx) Fin.elim0
     rw [(J i).zero x hx, tameJetSize_zero] at hb
     exact hb.trans (mul_le_mul_of_nonneg_left
-      (add_le_add_left ((hp hBK x).trans hbx) 1) hC₀)
+      (add_le_add le_rfl ((hp hBK x).trans hbx)) hC₀)
   have hinner (t : ℕ) : ∃ A : ℝ, 1 ≤ A ∧
       ∀ i x, x ∈ U → p B x ≤ R → ∀ v : Fin n → E,
       (∀ l, p B (v l) ≤ 1) → ∀ j : ℕ, j ≤ n → ∀ σ : Fin j → Fin n,
@@ -220,8 +224,8 @@ theorem projectiveCompositionJets_fixedBase_oneHigh
           (le_add_of_nonneg_left zero_le_one)
     have hP : (1 + ∑ l, p (t + d j) ((Fin.cons x v : Fin (n + 1) → E) l)) ≤
         1 + ∑ l, p (t + δ) ((Fin.cons x v : Fin (n + 1) → E) l) :=
-      add_le_add_left (Finset.sum_le_sum (fun l _ =>
-        hp (Nat.add_le_add_left (hd j hj) t) _)) 1
+      add_le_add le_rfl (Finset.sum_le_sum (fun l _ =>
+        hp (Nat.add_le_add (Nat.le_refl t) (hd j hj)) _))
     calc
       _ ≤ C j' * tameJetSize p j t (d j) BJ x (v ∘ σ) :=
         hc j' i x hx ((hp hBJ x).trans hbx) (v ∘ σ)
@@ -257,8 +261,8 @@ theorem projectiveCompositionJets_fixedBase_oneHigh
     let P : ℕ → ℝ := fun t => 1 + ∑ l, p t ((Fin.cons x v : Fin (n + 1) → E) l)
     have hP (t : ℕ) : 1 ≤ P t := le_add_of_nonneg_right
       (Finset.sum_nonneg (fun _ _ => apply_nonneg _ _))
-    have hmono : Monotone P := fun _ _ h => add_le_add_left
-      (Finset.sum_le_sum (fun l _ => hp h _)) 1
+    have hmono : Monotone P := fun _ _ h => add_le_add le_rfl
+      (Finset.sum_le_sum (fun l _ => hp h _))
     have hb (l : Fin (n + 1)) :
         p BP ((Fin.cons x v : Fin (n + 1) → E) l) ≤ max R 1 := by
       refine Fin.cases ?_ (fun j => ?_) l
