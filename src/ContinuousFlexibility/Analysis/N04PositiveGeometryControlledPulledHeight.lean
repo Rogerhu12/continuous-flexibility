@@ -119,13 +119,13 @@ theorem n04PositiveGeometry_controlledPulledHeight_shifted_bound
     have hu : u ≤ a + b := by omega
     cases inv
     · simp only [Bool.false_eq_true, ite_false]
-      rw [mixedDerivative_radialFunction]
+      rw [mixedDerivative_radialFunction (H₀ i) u w]
       split_ifs with hw
       · exact ((hr i u hu _).2.2.1).trans hRto
       · simpa only [abs_zero] using (zero_le_one.trans (hM i).1)
     · change |mixedDerivative u w (fun p : PolarPoint =>
         (fun r : ℝ => (H₀ i r)⁻¹) p.1) (Function.invFun (Y i) q.1, q.2)| ≤ M i
-      rw [mixedDerivative_radialFunction]
+      rw [mixedDerivative_radialFunction (fun r : ℝ => (H₀ i r)⁻¹) u w]
       split_ifs with hw
       · exact ((hr i u hu _).2.2.2).trans hRto
       · simpa only [abs_zero] using (zero_le_one.trans (hM i).1)

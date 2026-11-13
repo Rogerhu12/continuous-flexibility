@@ -54,9 +54,12 @@ theorem n04PositiveGeometry_controlled_coefficient_partition
   have hpoint : g (e, θ) = (e, β θ) :=
     Prod.ext rfl (n04PositiveGeometry_controlled_angle_inverse_boundary
       G hz hs i side m hsource θ)
-  have hcomp := iteratedFDeriv_comp
-    (hξ.contDiffAt (x := g (e, θ))) (hg.contDiffAt (x := (e, θ)))
-    (by simp : (j : ℕ∞ω) ≤ ∞)
+  have hcomp : iteratedFDeriv ℝ j (ξ ∘ g) (e, θ) =
+      ∑ c : OrderedFinpartition j,
+        c.compAlongOrderedFinpartition (iteratedFDeriv ℝ c.length ξ (g (e, θ)))
+          (fun k => iteratedFDeriv ℝ (c.partSize k) g (e, θ)) :=
+    iteratedFDeriv_comp (hξ.contDiffAt (x := g (e, θ)))
+      (hg.contDiffAt (x := (e, θ))) (by simp : (j : ℕ∞ω) ≤ ∞)
   have heval := congrArg
     (fun A : PolarPoint [×j]→L[ℝ] ℝ => A (fun _ => (1, 0))) hcomp
   simp only [ContinuousMultilinearMap.sum_apply,

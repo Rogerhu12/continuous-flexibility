@@ -98,7 +98,7 @@ private theorem fiberSlice_inverse_germ
   · change f (n04PositiveGeometry_fiberSlice a L
         (n04PositiveGeometry_fiberLift (fun p => g (n04PositiveGeometry_fiberSlice a L p)) p)) = p.2
     rw [n04PositiveGeometry_fiberSlice_lift]
-    exact hfg _ hp
+    simpa only [n04PositiveGeometry_fiberSlice_apply] using hfg _ hp
 
 /-- An actual original-state inverse estimate on any finite affine
 slice. The forward premise only bounds the requested state prefix.
@@ -154,7 +154,7 @@ theorem n04PositiveGeometry_mixedInverse_affine_bound
     have hj := n04PositiveGeometry_fiberSlice_iteratedFDeriv JF a L hfq' 1
       (fun _ => ((0 : P), v))
     simp only [iteratedFDeriv_one_apply, n04PositiveGeometry_fiberSliceLinear_apply,
-      map_zero, n04PositiveGeometry_fiberSlice_lift] at hj
+      map_zero, G, n04PositiveGeometry_fiberSlice_lift] at hj
     change B (fderiv ℝ F (n04PositiveGeometry_fiberLift G q) (0, v)) = v
     exact (congrArg B hj).trans (hB v)
   have hforward' (j : ℕ) (hj : 0 < j) (hjn : j ≤ n)

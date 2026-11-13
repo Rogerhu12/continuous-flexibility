@@ -47,9 +47,9 @@ def n04PositiveGeometry_rootOddTrace_joint
     (hroot : deriv D.w (n01ComponentRoot C m side) = 0) (j : ℕ) (hj : j ≤ 3) :
     SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
       (n04PositiveGeometry_rootOddTrace D S C g m side j) := by
-  rw [n04PositiveGeometry_rootOddTrace_eq D S C g m side j hj]
-  exact n04PositiveGeometry_rootBoundaryFormula_joint hT hS hN hε
-    g hg hg0 m side hr hroot ⟨4 + j, by omega⟩
+  exact (n04PositiveGeometry_rootBoundaryFormula_joint hT hS hN hε
+    g hg hg0 m side hr hroot ⟨4 + j, by omega⟩).congr (fun y _ =>
+      (congrFun (n04PositiveGeometry_rootOddTrace_eq D S C g m side j hj) y).symm)
 
 theorem n04PositiveGeometry_rootOddTrace_zero_pos
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

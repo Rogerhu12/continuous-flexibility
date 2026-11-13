@@ -86,9 +86,10 @@ theorem n04PositiveGeometry_rootBoundaryFormula_sample_prefix
   refine ⟨shift, fun s => ?_⟩
   refine (hshift s).elim fun Ai h => ?_
   refine h.elim fun hAi hin => ?_
-  obtain ⟨C, hC, degree, hformula⟩ :=
-    n04PositiveGeometry_boundaryFormulas_weighted_reserve
-      (E := StateDirections W.S × ℝ) K s 1 L hL
+  refine (n04PositiveGeometry_boundaryFormulas_weighted_reserve
+    (E := StateDirections W.S × ℝ) K s 1 L hL).elim fun C h => ?_
+  refine h.elim fun hC h => ?_
+  refine h.elim fun degree hformula => ?_
   obtain ⟨A₀, _, hpack⟩ := coefficientEnvelope_pack (C * Ai ^ degree) (Ai * degree)
   let A := max 1 A₀
   have hA : 1 ≤ A := le_max_left _ _

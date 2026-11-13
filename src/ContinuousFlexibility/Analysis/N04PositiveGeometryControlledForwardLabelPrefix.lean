@@ -1,5 +1,5 @@
 import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledForwardLabelDirections
-import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
+import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledLabelPrefix
 import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootLabelSample
 
 /-!
@@ -46,56 +46,15 @@ theorem n04PositiveGeometry_rootForwardDefect_fixedBase_prefix_of_flow
           (∀ j, pairGrading (sectorGrading S) realGrading (low + s + shift * K + 1) (v j) ≤ R) →
           |J.D k x v| ≤ A * T.H (T.sample m) ^ (3 / 4 : ℝ) *
             R ^ (((u + shift * k : ℕ) : ℝ) / (((s + shift * K : ℕ) : ℝ) + 1)) := by
-  classical
-  let p := pairGrading (sectorGrading S) realGrading
-  have hp : Monotone p := sectorPairGrading_monotone S
-  have hI : HasInterpolation p := hasInterpolation_of_hasSmoothing hp
-    (hasSmoothing_pairGrading (solve_sector_hasSmoothing hS) hasSmoothing_realGrading)
-  obtain ⟨B, hB⟩ := n04PositiveGeometry_rootForwardDefect_fixedBase_oneHigh_of_flow
-    hT hS hN hflow
-  choose ell hell using hB
-  let L : ℕ → ℕ := fun k => 5 + ell k
-  obtain ⟨low, hlow, hprefix⟩ := n04Realization_fixedBase_prefix_power
-    p hp hI (max base B) L
-  have hbase : base ≤ low := (le_max_left _ _).trans hlow
-  have hBlow : B ≤ low := (le_max_right _ _).trans hlow
-  refine ⟨low, hbase, fun K => ?_⟩
-  obtain ⟨shift, hshift⟩ := hprefix K
-  refine ⟨shift, fun s => ?_⟩
-  obtain ⟨A₀, hA₀, hinterp⟩ := hshift s
-  let I : Type := Fin (K + 1) × Fin (s + 1)
-  choose c hc hcb using fun i : I => hell i.1.val 1 zero_le_one (i.2.val + 5)
-  let C₀ : ℝ := 1 + ∑ i : I, c i
-  have hC₀ : 1 ≤ C₀ := le_add_of_nonneg_right
-    (Finset.sum_nonneg (fun i _ => hc i))
-  have hcC (i : I) : c i ≤ C₀ :=
-    (Finset.single_le_sum (fun j _ => hc j) (Finset.mem_univ i)).trans
-      (le_add_of_nonneg_left zero_le_one)
-  refine ⟨C₀ * A₀, one_le_mul_of_one_le_of_one_le hC₀ hA₀, ?_⟩
-  intro k hk u hu b hb side m θ J x hx hxlow v hvlow R hR hxR hvR
-  let i : I := (⟨k, Nat.lt_succ_of_le hk⟩, ⟨u, Nat.lt_succ_of_le hu⟩)
-  have hxB : p B x ≤ 1 := (hp hBlow x).trans hxlow
-  have hraw := hcb i b hb side m θ J x hx hxB v
-  change |J.D k x v| ≤ c i * T.H (T.sample m) ^ (3 / 4 : ℝ) *
-    oneHighVariationWeight p B (u + 5 + ell k) x v at hraw
-  have hH : 0 ≤ T.H (T.sample m) ^ (3 / 4 : ℝ) :=
-    Real.rpow_nonneg ((material_circle_sample_weights_pos hT hN.1.1).2 m).le _
-  have hweight : oneHighVariationWeight p B (u + 5 + ell k) x v ≤
-      oneHighVariationWeight p low (u + L k) x v :=
-    oneHighVariationWeight_mono hp hBlow (by dsimp only [L]; omega) x v
-  have hpower := hinterp k hk u hu x hxlow v hvlow R hR hxR hvR
-  calc
-    _ ≤ (c i * T.H (T.sample m) ^ (3 / 4 : ℝ)) *
-        oneHighVariationWeight p low (u + L k) x v := hraw.trans
-      (mul_le_mul_of_nonneg_left hweight (mul_nonneg (hc i) hH))
-    _ ≤ (c i * T.H (T.sample m) ^ (3 / 4 : ℝ)) *
-        (A₀ * R ^ (((u + shift * k : ℕ) : ℝ) / (((s + shift * K : ℕ) : ℝ) + 1))) :=
-      mul_le_mul_of_nonneg_left hpower (mul_nonneg (hc i) hH)
-    _ ≤ (C₀ * T.H (T.sample m) ^ (3 / 4 : ℝ)) *
-        (A₀ * R ^ (((u + shift * k : ℕ) : ℝ) / (((s + shift * K : ℕ) : ℝ) + 1))) :=
-      mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right (hcC i) hH)
-        (mul_nonneg (zero_le_one.trans hA₀) (Real.rpow_nonneg (zero_le_one.trans hR) _))
-    _ = _ := by ac_rfl
+  exact n04PositiveGeometry_labelDefect_prefix_of_oneHigh
+    (pairGrading (sectorGrading S) realGrading) (sectorPairGrading_monotone S)
+    (hasInterpolation_of_hasSmoothing (sectorPairGrading_monotone S)
+      (hasSmoothing_pairGrading (solve_sector_hasSmoothing hS) hasSmoothing_realGrading))
+    (sectorNeighborhood S base ε ε)
+    (fun b side m θ x => iteratedDeriv b (fun α => n01RootLabel S C (liftSectorParameter S C x) m side α - α) θ)
+    (fun m => T.H (T.sample m) ^ (3 / 4 : ℝ))
+    (fun m => Real.rpow_nonneg ((material_circle_sample_weights_pos hT hN.1.1).2 m).le _)
+    base 5 (n04PositiveGeometry_rootForwardDefect_fixedBase_oneHigh_of_flow hT hS hN hflow)
 
 /-- The literal forward slope has the same fixed low base. Its zeroth
 parameter order includes the reference slope; every positive parameter
@@ -120,58 +79,25 @@ theorem n04PositiveGeometry_rootForwardDerivative_fixedBase_prefix_of_flow
           (∀ j, pairGrading (sectorGrading S) realGrading (low + s + shift * K + 1) (v j) ≤ R) →
           |J.D k x v| ≤ A * parameterHeightWeight (T.H (T.sample m) ^ (3 / 4 : ℝ)) k *
             R ^ (((u + shift * k : ℕ) : ℝ) / (((s + shift * K : ℕ) : ℝ) + 1)) := by
-  obtain ⟨low, hlow, hprefix⟩ :=
-    n04PositiveGeometry_rootForwardDefect_fixedBase_prefix_of_flow hT hS hN hflow
-  obtain ⟨RH, hRH, hheight⟩ := materialHeight_E0_weight_bounded hT
-    (by norm_num : (0 : ℝ) < 3 / 4) 0
+  refine (materialHeight_E0_weight_bounded hT
+    (by norm_num : (0 : ℝ) < 3 / 4) 0).elim ?_
+  intro RH hRHData
+  have hRH := hRHData.1
+  have hheight := hRHData.2
   have hHbound (m : ℕ) : T.H (T.sample m) ^ (3 / 4 : ℝ) ≤ RH := by
     simpa only [Real.rpow_zero, mul_one] using
       hheight _ (materialSample_mem_interval hN.1.1 hT m)
-  refine ⟨low, hlow, fun K => ?_⟩
-  obtain ⟨shift, hshift⟩ := hprefix K
-  refine ⟨shift, fun s => ?_⟩
-  obtain ⟨A, hA, hbound⟩ := hshift s
-  let C₁ : ℝ := A * (RH + 1) + 1
-  have hC₁ : 1 ≤ C₁ := le_add_of_nonneg_left
-    (mul_nonneg (zero_le_one.trans hA) (by positivity))
-  have hAC₁ : A ≤ C₁ := by dsimp only [C₁]; nlinarith only [hA, hRH]
-  have hAHC₁ : A * RH + 1 ≤ C₁ := by dsimp only [C₁]; nlinarith only [hA]
-  refine ⟨C₁, hC₁, ?_⟩
-  intro k hk d hd u hu side m θ J x hx hxlow v hvlow R hR hxR hvR
-  let JD := n04PositiveGeometry_rootForwardDefect_angularDirections
-    hT hS hN side m (u + d + 1) θ
-  have hb := hbound k hk u hu (u + d + 1) (by omega)
-    side m θ JD x hx hxlow v hvlow R hR hxR hvR
-  let P : ℝ := R ^ (((u + shift * k : ℕ) : ℝ) / (((s + shift * K : ℕ) : ℝ) + 1))
-  have hP : 0 ≤ P := Real.rpow_nonneg (zero_le_one.trans hR) _
-  have hPone : 1 ≤ P := Real.one_le_rpow hR (div_nonneg (Nat.cast_nonneg _) (by positivity))
-  have hH : 0 ≤ T.H (T.sample m) ^ (3 / 4 : ℝ) :=
-    Real.rpow_nonneg ((material_circle_sample_weights_pos hT hN.1.1).2 m).le _
-  by_cases hkzero : k = 0
-  · subst k
-    have heq : J.D 0 x v = JD.D 0 x v + (if u + d = 0 then 1 else 0) :=
-      (smoothDirections_D_zero_apply J hx v).trans
-        ((n04PositiveGeometry_rootForwardDerivative_angular_eq hT hS hN hx side m (u + d) θ).trans
-          (congrArg (fun t : ℝ => t + (if u + d = 0 then 1 else 0))
-            (smoothDirections_D_zero_apply JD hx v).symm))
-    have hconstant : |(if u + d = 0 then (1 : ℝ) else 0)| ≤ 1 := by
-      split_ifs <;> norm_num
-    have hfinal : |J.D 0 x v| ≤ C₁ * P := calc
-      _ ≤ |JD.D 0 x v| + |(if u + d = 0 then (1 : ℝ) else 0)| :=
-        (congrArg abs heq).trans_le (abs_add_le _ _)
-      _ ≤ A * T.H (T.sample m) ^ (3 / 4 : ℝ) * P + 1 := add_le_add hb hconstant
-      _ ≤ A * RH * P + P := add_le_add
-        (mul_le_mul_of_nonneg_right
-          (mul_le_mul_of_nonneg_left (hHbound m) (zero_le_one.trans hA)) hP) hPone
-      _ = (A * RH + 1) * P := by rw [add_mul, one_mul]
-      _ ≤ C₁ * P := mul_le_mul_of_nonneg_right hAHC₁ hP
-    simpa only [parameterHeightWeight, ite_true, mul_one] using hfinal
-  · have hjet := n04PositiveGeometry_rootForwardDerivative_positive_jet_eq
-      hT hS hN side m (u + d) θ J JD (Nat.pos_of_ne_zero hkzero) hx v
-    have hfinal : |J.D k x v| ≤ C₁ * T.H (T.sample m) ^ (3 / 4 : ℝ) * P :=
-      ((congrArg abs hjet).trans_le hb).trans
-        (mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right hAC₁ hH) hP)
-    simpa only [parameterHeightWeight, if_neg hkzero] using hfinal
+  exact n04PositiveGeometry_labelSlope_prefix_of_defect
+    (pairGrading (sectorGrading S) realGrading) (sectorNeighborhood S base ε ε)
+    (fun b side m θ x => iteratedDeriv b (fun α => n01RootLabel S C (liftSectorParameter S C x) m side α - α) θ)
+    (fun b side m θ x => iteratedDeriv b (deriv (n01RootLabel S C (liftSectorParameter S C x) m side)) θ)
+    (fun m => T.H (T.sample m) ^ (3 / 4 : ℝ))
+    (fun m => Real.rpow_nonneg ((material_circle_sample_weights_pos hT hN.1.1).2 m).le _)
+    base 4 hRH hHbound
+    (n04PositiveGeometry_rootForwardDefect_angularDirections hT hS hN)
+    (fun side m b θ x hx => n04PositiveGeometry_rootForwardDerivative_angular_eq
+      hT hS hN hx side m b θ)
+    (n04PositiveGeometry_rootForwardDefect_fixedBase_prefix_of_flow hT hS hN hflow)
 
 /-- N01 chooses one common neighborhood before all parameter orders.
 Both actual stored-root slopes then satisfy the normalized finite intrinsic
@@ -199,18 +125,33 @@ theorem n04PositiveGeometry_rootForwardDerivative_fixedBase_samplePrefix
             |J.D k x v| ≤ A * W.U.E0 (W.U.sample (X.cell i)) ^ A *
               parameterHeightWeight (W.U.H (W.U.sample (X.cell i)) ^ (3 / 4 : ℝ)) k *
               R ^ (((u + shift * k : ℕ) : ℝ) / (((s + shift * K : ℕ) : ℝ) + 1)) := by
-  obtain ⟨newBase, ε', hb, hε, hεW, hflow⟩ :=
-    exists_ordinaryFlowJacobianBounds_of_n01 W.hT W.through03.1.1
+  refine (exists_ordinaryFlowJacobianBounds_of_n01 W.hT W.through03.1.1).elim ?_
+  intro newBase hbaseData
+  refine hbaseData.elim ?_
+  intro ε' hneighborhood
+  have hb := hneighborhood.1
+  have hε := hneighborhood.2.1
+  have hεW := hneighborhood.2.2.1
+  have hflow := hneighborhood.2.2.2
   have hN := n01Properties_restrict W.hT W.through03.1.1 hb le_rfl hε hεW
-  obtain ⟨low, hlow, hprefix⟩ :=
-    n04PositiveGeometry_rootForwardDerivative_fixedBase_prefix_of_flow W.hT W.hS hN hflow
+  refine (n04PositiveGeometry_rootForwardDerivative_fixedBase_prefix_of_flow
+    W.hT W.hS hN hflow).elim ?_
+  intro low hlowData
+  have hlow := hlowData.1
+  have hprefix := hlowData.2
   refine ⟨newBase, ε', hb, hε, hεW, low, hlow, fun K => ?_⟩
-  obtain ⟨shift, hshift⟩ := hprefix K
+  refine (hprefix K).elim ?_
+  intro shift hshift
   refine ⟨shift, fun s => ?_⟩
-  obtain ⟨A, hA, hbound⟩ := hshift s
-  obtain ⟨B, hB, hsample⟩ :=
-    n04PositiveGeometry_positiveSource_circle_parameter_weight W X (3 / 4 : ℝ)
-      (A := 0) (C := A) (by norm_num) (zero_le_one.trans hA)
+  refine (hshift s).elim ?_
+  intro A hAData
+  have hA := hAData.1
+  have hbound := hAData.2
+  refine (n04PositiveGeometry_positiveSource_circle_parameter_weight W X (3 / 4 : ℝ)
+    (A := 0) (C := A) (by norm_num) (zero_le_one.trans hA)).elim ?_
+  intro B hBData
+  have hB := hBData.1
+  have hsample := hBData.2
   refine ⟨B, hB, ?_⟩
   intro k hk d hd u hu i side m hm θ J x hx hxlow v hvlow R hR hxR hvR
   have hj := hbound k hk d hd u hu (!side) m θ J x hx hxlow v hvlow R hR hxR hvR

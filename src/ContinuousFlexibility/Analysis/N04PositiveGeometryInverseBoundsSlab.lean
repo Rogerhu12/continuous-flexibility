@@ -53,11 +53,9 @@ theorem n04PositiveGeometry_radialKernel_middleMass_envelope
       (if side then d i else l i) := by linarith only [hquarter]
   have hpos := integral_positiveEndpointCutoff_complement_pos (hgeom.1 side) (hgeom.2.1 side)
   rw [abs_of_pos (inv_pos.mpr hpos)]
-  exact (positiveReferenceMiddleMass_inv_le (hgeom.1 side) hfour).trans
-    (by simpa only [div_eq_mul_inv] using
-      mul_le_mul_of_nonneg_left (le_abs_self
-        (((if side then r i else c i) - (if side then d i else l i))⁻¹))
-        (by norm_num : (0 : ℝ) ≤ 2))
+  apply (positiveReferenceMiddleMass_inv_le (hgeom.1 side) hfour).trans
+  rw [div_eq_mul_inv]
+  exact mul_le_mul_of_nonneg_left (le_abs_self _) (by norm_num)
 
 /-- Every ordinary jet of the literal radial inverse has a uniform
 component envelope on its full finite coefficient box and physical slab.

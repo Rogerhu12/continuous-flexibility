@@ -17,6 +17,8 @@ namespace ContinuousFlexibility.Analysis
 open Set Function Filter ContinuousFlexibility.Statements
 open scoped ContDiff Topology BigOperators
 
+set_option backward.isDefEq.respectTransparency false
+
 variable {X E F : Type*}
   [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
   [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]

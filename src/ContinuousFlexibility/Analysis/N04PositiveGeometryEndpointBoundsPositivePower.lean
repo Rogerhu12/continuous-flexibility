@@ -30,7 +30,7 @@ theorem n04PositiveGeometry_positivePower_outer_prefix (γ : ℝ) (N : ℕ) :
       _ = |γ| + (n : ℝ) := by
         rw [abs_of_nonneg (show (0 : ℝ) ≤ (n : ℝ) from Nat.cast_nonneg n)]
       _ ≤ |γ| + (N : ℝ) :=
-        add_le_add_left (show (n : ℝ) ≤ (N : ℝ) by exact_mod_cast hn) |γ|
+        add_le_add le_rfl (show (n : ℝ) ≤ (N : ℝ) by exact_mod_cast hn)
       _ ≤ (degree : ℝ) := Nat.le_ceil _
   have hpower : x ^ (γ - (n : ℝ)) ≤ M ^ degree := by
     calc
@@ -76,7 +76,7 @@ theorem n04PositiveGeometry_boundaryWord_positivePower
   intro U f J Q hpos K s d hN x hx θ P M H t hM hH hHM ht shift hJ hinv
   have hvalue : f (x, θ) ≤ M :=
     (le_abs_self _).trans (by simpa only [Real.norm_eq_abs] using hJ.value hx)
-  exact hkernel J Q isOpen_Ioi
+  exact hkernel (g := fun y : ℝ => y ^ γ) J Q isOpen_Ioi
     (fun _ hy => (contDiffAt_id.rpow_const_of_ne (ne_of_gt hy)).contDiffWithinAt)
     hpos K s d hN x hx θ P M H t hM hH hHM ht shift hJ
     (fun n hn => houter M hM (f (x, θ)) (hpos _ ⟨hx, mem_univ _⟩) hvalue hinv n hn)

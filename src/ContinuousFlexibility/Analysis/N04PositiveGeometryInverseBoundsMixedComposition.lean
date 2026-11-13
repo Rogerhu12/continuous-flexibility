@@ -29,9 +29,14 @@ theorem n04PositiveGeometry_movingPoint_projected_partition
       ∑ c : OrderedFinpartition n, ∑ s : Finset (Fin c.length),
         n04PositiveGeometry_inverseSelectedTerm b f g x c s := by
   classical
-  have hcomp := iteratedFDeriv_comp
-    (g := f) (f := n04PositiveGeometry_fiberLift g) hf
-    (contDiffAt_fst.prodMk hg) (by simp : (n : ℕ∞ω) ≤ ∞)
+  have hcomp : iteratedFDeriv ℝ n (f ∘ n04PositiveGeometry_fiberLift g) x =
+      ∑ c : OrderedFinpartition n,
+        c.compAlongOrderedFinpartition
+          (iteratedFDeriv ℝ c.length f (n04PositiveGeometry_fiberLift g x))
+          (fun i => iteratedFDeriv ℝ (c.partSize i)
+            (n04PositiveGeometry_fiberLift g) x) :=
+    iteratedFDeriv_comp hf (contDiffAt_fst.prodMk hg)
+      (by simp : (n : ℕ∞ω) ≤ ∞)
   apply ContinuousMultilinearMap.ext
   intro v
   rw [n04PositiveGeometry_projectedJet_apply, hcomp]

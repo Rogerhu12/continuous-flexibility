@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaAlgebra
+import ContinuousFlexibility.Analysis.N01cPhysicalGraphJets
 
 /-!
 # The eight literal boundary formulas with one spatial order coefficient
@@ -45,40 +46,21 @@ theorem n04PositiveGeometry_boundaryWord_of_angular
   rw [he'] at he
   exact (congrArg norm he).trans_le hbound
 
-private def boundaryStateWord : (k : ℕ) → StateAngleWord k
-  | 0 => .nil
-  | k + 1 => .state (boundaryStateWord k)
-
-private def boundaryAngleWord {n : ℕ} (w : StateAngleWord n) :
-    (b : ℕ) → StateAngleWord (n + b)
-  | 0 => w
-  | b + 1 => .angle (boundaryAngleWord w b)
-
-private theorem boundaryStateWord_arities (k : ℕ) :
-    (boundaryStateWord k).stateArity = k ∧ (boundaryStateWord k).angleArity = 0 := by
-  induction k with
-  | zero => exact ⟨rfl, rfl⟩
-  | succ k ih =>
-      constructor <;> simp only [boundaryStateWord, StateAngleWord.stateArity,
-        StateAngleWord.angleArity, ih.1, ih.2]
-
-private theorem boundaryAngleWord_arities {n : ℕ} (w : StateAngleWord n) (b : ℕ) :
-    (boundaryAngleWord w b).stateArity = w.stateArity ∧
-    (boundaryAngleWord w b).angleArity = w.angleArity + b := by
-  induction b with
-  | zero => exact ⟨rfl, rfl⟩
-  | succ b ih =>
-      constructor <;> simp only [boundaryAngleWord, StateAngleWord.stateArity,
-        StateAngleWord.angleArity, ih.1, ih.2, Nat.add_assoc]
-
 private theorem boundary_pureSlots_predicate {n : ℕ} (w : StateAngleWord n)
     (P : E → Prop) (hP : P 0) (v : Fin w.stateArity → E) (hv : ∀ i, P (v i)) :
     ∀ i, P (w.pureSlots v i).1 := by
   induction w with
   | nil => intro i; exact i.elim0
   | state w ih =>
-      exact Fin.cases (hv 0) (ih (Fin.tail v) (fun i => hv i.succ))
-  | angle w ih => exact Fin.cases hP (ih v hv)
+      intro j
+      refine Fin.cases ?_ (fun i => ?_) j
+      · exact hv (0 : Fin (w.stateArity + 1))
+      · exact ih (Fin.tail v) (fun i => hv i.succ) i
+  | angle w ih =>
+      intro j
+      refine Fin.cases ?_ (fun i => ?_) j
+      · exact hP
+      · exact ih v hv i
 
 theorem n04PositiveGeometry_boundaryWord_to_angular_reserve
     (J : SmoothDirections (U ×ˢ (univ : Set ℝ)) f)
@@ -96,12 +78,11 @@ theorem n04PositiveGeometry_boundaryWord_to_angular_reserve
       (w.isPure_pureSlots v) (boundary_pureSlots_predicate w P hP v hv)
     rw [smoothDirections_joint_pureSlots J JA w hx θ v] at hw
     exact hw
-  have htower := hword (k + b) (boundaryAngleWord (boundaryStateWord k) b)
-  have hstate := (boundaryAngleWord_arities (boundaryStateWord k) b).1.trans
-    (boundaryStateWord_arities k).1
-  have hangle := (boundaryAngleWord_arities (boundaryStateWord k) b).2
-  rw [(boundaryStateWord_arities k).2, Nat.zero_add] at hangle
-  simp only [hstate, hangle] at htower
+  let w := StateAngleWord.stateThenAngle k b
+  have htower := hword (b + k) w
+  have hstate : w.stateArity = k := StateAngleWord.stateThenAngle_stateArity k b
+  have hangle : w.angleArity = b := StateAngleWord.stateThenAngle_angleArity k b
+  rw [hstate, hangle] at htower
   exact htower hk hb v hv
 
 theorem n04PositiveGeometry_boundaryWord_to_angular

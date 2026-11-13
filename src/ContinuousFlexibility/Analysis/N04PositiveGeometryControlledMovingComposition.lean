@@ -217,7 +217,8 @@ theorem n04PositiveGeometry_movingPoint_polynomial_envelope (n : ℕ) :
       simpa only [he] using hh
     · push_neg at hid
       obtain ⟨i, hi, hbad⟩ := hid
-      rw [n04PositiveGeometry_inverseSelectedTerm_eq_zero hg w c s i hi hbad, norm_zero]
+      rw [n04PositiveGeometry_inverseSelectedTerm_eq_zero hg w c s i hi
+        (fun h => hbad h.1 h.2), norm_zero]
       exact hR
   calc
     _ ≤ ∑ c : OrderedFinpartition n, ∑ s : Finset (Fin c.length),

@@ -18,6 +18,21 @@ open scoped ContDiff BigOperators
 local instance n04PositiveOddPowerPrefixStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
+private def oddPowerTracePrefix
+    {Y : Type*} [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
+    [IsTopologicalAddGroup Y] [ContinuousSMul ℝ Y]
+    (pgrade : ℕ → Seminorm ℝ Y) (U : Set Y) (F : ℕ → Y × ℝ → ℝ)
+    (low K s shift : ℕ) (A E H : ℝ) : Prop :=
+  ∀ n : ℕ, n ≤ 3 → ∀ k : ℕ, k ≤ K → ∀ u : ℕ, u ≤ s → ∀ d : ℕ, d ≤ 1 →
+    ∀ θ : ℝ, ∀ J : SmoothDirections U
+      (fun z => iteratedDeriv (u + d) (fun η => F n (z, η)) θ),
+    ∀ z ∈ U, pgrade low z ≤ 1 → ∀ v : Fin k → Y,
+    (∀ l, pgrade low (v l) ≤ 1) → ∀ R : ℝ, 1 ≤ R →
+    pgrade (low + s + shift * K + 1) z ≤ R →
+    (∀ l, pgrade (low + s + shift * K + 1) (v l) ≤ R) →
+    ‖J.D k z v‖ ≤ A * E ^ A * parameterHeightWeight H k *
+      R ^ (((u + shift * k : ℕ) : ℝ) / (((s + shift * K : ℕ) : ℝ) + 1))
+
 theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix
     (W : N04RealizationStart) (X : N04RealizationChoice W)
     {base : ℕ} {ε : ℝ} (hb : W.base ≤ base) (hε : 0 < ε)
@@ -39,22 +54,11 @@ theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix
           (stateProfile W.D W.S W.C (liftSectorParameter W.S W.C z).1)
           (stateHeight W.D W.S W.C (liftSectorParameter W.S W.C z))
           (n01ComponentRoot W.C m (!side)) (n01ComponentRootOrientation (!side)) ρ) →
-      ∀ n : ℕ, n ≤ 3 → ∀ k : ℕ, k ≤ K → ∀ u : ℕ, u ≤ s → ∀ d : ℕ, d ≤ 1 →
-      ∀ θ : ℝ, ∀ J : SmoothDirections (sectorNeighborhood W.S base ε ε)
-        (fun z => iteratedDeriv (u + d)
-          (fun η => n04PositiveGeometry_rootOddPowerTrace W.D W.S W.C g m (!side) γ n
-            (z, η)) θ),
-      ∀ z ∈ sectorNeighborhood W.S base ε ε,
-      pairGrading (sectorGrading W.S) realGrading low z ≤ 1 →
-      ∀ v : Fin k → (StateDirections W.S × ℝ),
-      (∀ l, pairGrading (sectorGrading W.S) realGrading low (v l) ≤ 1) →
-      ∀ R : ℝ, 1 ≤ R →
-      pairGrading (sectorGrading W.S) realGrading (low + s + shift * K + 1) z ≤ R →
-      (∀ l, pairGrading (sectorGrading W.S) realGrading
-        (low + s + shift * K + 1) (v l) ≤ R) →
-      ‖J.D k z v‖ ≤ A * W.U.E0 (W.U.sample (X.cell i)) ^ A *
-        parameterHeightWeight (W.U.H (W.U.sample (X.cell i)) ^ (3 / 4 : ℝ)) k *
-        R ^ (((u + shift * k : ℕ) : ℝ) / (((s + shift * K : ℕ) : ℝ) + 1)) := by
+      oddPowerTracePrefix (pairGrading (sectorGrading W.S) realGrading)
+        (sectorNeighborhood W.S base ε ε)
+        (fun n => n04PositiveGeometry_rootOddPowerTrace W.D W.S W.C g m (!side) γ n)
+        low K s shift A (W.U.E0 (W.U.sample (X.cell i)))
+        (W.U.H (W.U.sample (X.cell i)) ^ (3 / 4 : ℝ)) := by
   classical
   have hN := n01Properties_restrict W.hT W.through03.1.1 hb le_rfl hε hεW
   refine (n04PositiveGeometry_rootBoundaryFormula_sample_prefix

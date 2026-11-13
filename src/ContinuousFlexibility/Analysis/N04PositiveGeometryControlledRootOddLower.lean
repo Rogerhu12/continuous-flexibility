@@ -101,7 +101,8 @@ theorem n04PositiveGeometry_rootOddValue_sample_inverse
   have hbLow : base ≤ low := le_max_left _ _
   have hlowS : lowS ≤ low := (le_max_left _ _).trans (le_max_right _ _)
   have hlossS : lossS ≤ low := (le_max_right _ _).trans (le_max_right _ _)
-  refine (retainedReference_positive_endpoint_host_sample_bound W.P W.metadata.selected
+  refine (ContinuousFlexibility.Radial.retainedReference_positive_endpoint_host_sample_bound
+      W.P W.metadata.selected
       W.metadata.first_two one_pos W.realizes W.hw W.coordinates
       W.through03.1.1.2.2.2.1 W.hT (hA 0).le).elim ?_
   intro K₁ hKdata

@@ -19,6 +19,8 @@ namespace ContinuousFlexibility.Analysis
 open Set Function
 open scoped ContDiff BigOperators
 
+set_option backward.isDefEq.respectTransparency false
+
 variable {E F G : Type*}
   [NormedAddCommGroup E] [NormedSpace ℝ E]
   [NormedAddCommGroup F] [NormedSpace ℝ F]
