@@ -187,8 +187,6 @@ theorem n04NegativeInverse_graph_expansion {n : ℕ}
       apply Finset.sum_congr rfl
       intro s _
       congr 1
-      funext i
-      by_cases hi : i ∈ s <;> simp only [Finset.piecewise, hi, if_true, if_false]
 
 end GraphBounds
 

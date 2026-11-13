@@ -89,7 +89,9 @@ theorem spatialInverse_continuousOn (J : SmoothDirections (U ×ˢ V) F)
   change ContinuousWithinAt
     (fun x : E × Y => (N04NegativeGeometryImplicitJet.spatialDifferential J (x.1, G x)).inverse)
     (U ×ˢ W) p
-  exact hc.comp_continuousWithinAt (hDc p hp)
+  exact ContinuousAt.comp_continuousWithinAt
+    (f := fun x : E × Y => N04NegativeGeometryImplicitJet.spatialDifferential J (x.1, G x))
+    (x := p) (s := U ×ˢ W) hc (hDc p hp)
 
 theorem spatialInverse_left (J : SmoothDirections (U ×ˢ V) F)
     (p : E × Y)

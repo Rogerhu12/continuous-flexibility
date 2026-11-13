@@ -118,9 +118,9 @@ variable {E F₀ : Type*}
 the direct output of the physical scalar and vector estimates. -/
 def UnitPrefix {D : Set (E × PolarPoint)} {f : E × PolarPoint → F₀}
     (J : SmoothDirections D f) (p : E × PolarPoint)
-    (low high : Seminorm ℝ E) (N prefix shift : ℕ) (C H R t : ℝ) : Prop :=
+    (low high : Seminorm ℝ E) (N paramOrder shift : ℕ) (C H R t : ℝ) : Prop :=
   ∀ j : ℕ, 0 < j → j ≤ N → ∀ w : StateAngleWord j,
-    w.stateArity ≤ prefix → ∀ b : Fin j → E, ∀ y : Fin j → PolarPoint,
+    w.stateArity ≤ paramOrder → ∀ b : Fin j → E, ∀ y : Fin j → PolarPoint,
     (∀ i, low (b i) ≤ 1) → (∀ i, high (b i) ≤ R) →
     (∀ i, ‖y i‖ ≤ 1) →
     ‖J.D j p (fun i => if w.isState i then (b i, 0) else (0, y i))‖ ≤
@@ -129,10 +129,10 @@ def UnitPrefix {D : Set (E × PolarPoint)} {f : E × PolarPoint → F₀}
 
 theorem UnitPrefix.homogeneous {D : Set (E × PolarPoint)} {f : E × PolarPoint → F₀}
     {J : SmoothDirections D f} {p : E × PolarPoint}
-    {low high : Seminorm ℝ E} {N prefix shift : ℕ} {C H R t : ℝ}
-    (h : UnitPrefix J p low high N prefix shift C H R t)
+    {low high : Seminorm ℝ E} {N paramOrder shift : ℕ} {C H R t : ℝ}
+    (h : UnitPrefix J p low high N paramOrder shift C H R t)
     (j : ℕ) (hj : 0 < j) (hjN : j ≤ N) (w : StateAngleWord j)
-    (hw : w.stateArity ≤ prefix) (b : Fin j → E) (y : Fin j → PolarPoint)
+    (hw : w.stateArity ≤ paramOrder) (b : Fin j → E) (y : Fin j → PolarPoint)
     (hlow : ∀ i, low (b i) ≤ 1) (hhigh : ∀ i, high (b i) ≤ R) :
     ‖J.D j p (fun i => if w.isState i then (b i, 0) else (0, y i))‖ ≤
       C * parameterHeightWeight H w.stateArity *
@@ -143,10 +143,10 @@ theorem UnitPrefix.homogeneous {D : Set (E × PolarPoint)} {f : E × PolarPoint 
 
 theorem UnitPrefix.norm_le {D : Set (E × PolarPoint)} {f : E × PolarPoint → F₀}
     {J : SmoothDirections D f} {p : E × PolarPoint}
-    {low high : Seminorm ℝ E} {N prefix shift : ℕ} {C H R t : ℝ}
-    (h : UnitPrefix J p low high N prefix shift C H R t)
+    {low high : Seminorm ℝ E} {N paramOrder shift : ℕ} {C H R t : ℝ}
+    (h : UnitPrefix J p low high N paramOrder shift C H R t)
     (j : ℕ) (hj : 0 < j) (hjN : j ≤ N) (w : StateAngleWord j)
-    (hw : w.stateArity ≤ prefix) (v : Fin j → E × PolarPoint)
+    (hw : w.stateArity ≤ paramOrder) (v : Fin j → E × PolarPoint)
     (hlow : ∀ i, low (v i).1 ≤ 1) (hhigh : ∀ i, high (v i).1 ≤ R)
     (hphysical : ∀ i, ‖(v i).2‖ ≤ 1)
     (hstate : ∀ i, w.isState i = false → (v i).1 = 0)
@@ -170,13 +170,13 @@ theorem inverse_unitPrefix_of_jacobian
     (hmap : MapsTo G (U ×ˢ W) V)
     (hJac : ∀ p ∈ U ×ˢ W, planeJacobian (fun y => F (p.1, y)) (G p) ≠ 0)
     (hright : ∀ p ∈ U ×ˢ W, F (p.1, G p) = p.2)
-    (low high : Seminorm ℝ E) (N prefix shift : ℕ) (hshift : 1 ≤ shift)
+    (low high : Seminorm ℝ E) (N paramOrder shift : ℕ) (hshift : 1 ≤ shift)
     (p : E × PolarPoint) (hp : p ∈ U ×ˢ W)
     {C I H L R t : ℝ} (hC : 0 ≤ C) (hI : 0 ≤ I)
     (hH : 0 ≤ H) (hHL : H ≤ L) (hL : 1 ≤ L) (hR : 0 ≤ R) (ht : 0 ≤ t)
     (hdet : |planeJacobian (fun y => F (p.1, y)) (G p)|⁻¹ ≤ I)
-    (hforward : UnitPrefix J (p.1, G p) low high N prefix shift C H R t) :
-    UnitPrefix K p low high N prefix shift
+    (hforward : UnitPrefix J (p.1, G p) low high N paramOrder shift C H R t) :
+    UnitPrefix K p low high N paramOrder shift
       (n04NegativeInverse_prefixMajorant (2 * C * I) C L N) H R t := by
   intro n hn hnN w hw b y hl hh hy
   let A := spatialInverse J G
@@ -188,7 +188,7 @@ theorem inverse_unitPrefix_of_jacobian
   have hfirst (a : PolarPoint) (ha : ‖a‖ ≤ 1) :
       ‖J.D 1 (p.1, G p) (fun _ : Fin 1 => (0, a))‖ ≤ C := by
     let w₁ : StateAngleWord 1 := .angle .nil
-    have h := hforward 1 (by omega) (by omega) w₁ (Nat.zero_le prefix)
+    have h := hforward 1 (by omega) (by omega) w₁ (Nat.zero_le paramOrder)
       (fun _ => 0) (fun _ => a)
       (fun _ => by simp only [map_zero, zero_le_one])
       (fun _ => by simpa only [map_zero] using hR) (fun _ => ha)
@@ -204,7 +204,7 @@ theorem inverse_unitPrefix_of_jacobian
   have hApoint : ‖A p‖ ≤ 2 * C * I :=
     spatialInverse_norm_le J p ⟨hp.1, hmap hp⟩ (hJac p hp) hC hdet hfirst
   apply prefix_norm_le J K hU hV hW hmap A hAc hleft hright low high
-    N prefix shift hshift p hp (mul_nonneg (mul_nonneg (by norm_num) hC) hI)
+    N paramOrder shift hshift p hp (mul_nonneg (mul_nonneg (by norm_num) hC) hI)
     hC hH hHL hL hR ht hApoint hforward.homogeneous n hn hnN w hw
   · intro i
     cases hi : w.isState i <;> simp only [hi, Bool.false_eq_true, if_false, if_true]
@@ -234,15 +234,15 @@ theorem normalized_inverse_prefix_norm_le
     (B : PolarPoint →L[ℝ] PolarPoint) (c : PolarPoint)
     (hBmap : MapsTo (fun q => c + B q) Ω W)
     (Q : SmoothDirections (U ×ˢ Ω) (fun p => G (p.1, c + B p.2)))
-    (low high : Seminorm ℝ E) (N prefix shift : ℕ) (hshift : 1 ≤ shift)
+    (low high : Seminorm ℝ E) (N paramOrder shift : ℕ) (hshift : 1 ≤ shift)
     {z : E} (hz : z ∈ U) {q : PolarPoint} (hq : q ∈ Ω)
     {C I T H L R t : ℝ} (hC : 0 ≤ C) (hI : 0 ≤ I) (hT : 0 ≤ T)
     (hH : 0 ≤ H) (hHL : H ≤ L) (hL : 1 ≤ L) (hR : 0 ≤ R) (ht : 0 ≤ t)
     (hdet : |planeJacobian (fun y => F (z, y)) (G (z, c + B q))|⁻¹ ≤ I)
     (hB : ‖B‖ ≤ T)
-    (hforward : UnitPrefix J (z, G (z, c + B q)) low high N prefix shift C H R t)
+    (hforward : UnitPrefix J (z, G (z, c + B q)) low high N paramOrder shift C H R t)
     (n : ℕ) (hn : 0 < n) (hnN : n ≤ N)
-    (w : StateAngleWord n) (hw : w.stateArity ≤ prefix) (v : Fin n → E × PolarPoint)
+    (w : StateAngleWord n) (hw : w.stateArity ≤ paramOrder) (v : Fin n → E × PolarPoint)
     (hlow : ∀ i, low (v i).1 ≤ 1) (hhigh : ∀ i, high (v i).1 ≤ R)
     (hphysical : ∀ i, ‖(v i).2‖ ≤ 1)
     (hstate : ∀ i, w.isState i = false → (v i).1 = 0)
@@ -252,7 +252,7 @@ theorem normalized_inverse_prefix_norm_le
         parameterHeightWeight H w.stateArity *
           t ^ (w.angleArity + shift * w.stateArity - 1) := by
   have hK := inverse_unitPrefix_of_jacobian J K hU hV hW hmap hJac hright
-    low high N prefix shift hshift (z, c + B q) ⟨hz, hBmap hq⟩
+    low high N paramOrder shift hshift (z, c + B q) ⟨hz, hBmap hq⟩
     hC hI hH hHL hL hR ht hdet hforward
   have hM : 0 ≤ n04NegativeInverse_prefixMajorant (2 * C * I) C L N :=
     zero_le_one.trans (n04NegativeInverse_prefixMajorant_one_le
@@ -277,14 +277,14 @@ theorem scalar_prefix_norm_le
     (J : SmoothDirections (U ×ˢ V) f) (K : SmoothDirections (U ×ˢ W) G)
     (hmap : MapsTo G (U ×ˢ W) V)
     (Q : SmoothDirections (U ×ˢ W) (fun p => f (p.1, G p)))
-    (low high : Seminorm ℝ E) (N prefix shift : ℕ) (hshift : 1 ≤ shift)
+    (low high : Seminorm ℝ E) (N paramOrder shift : ℕ) (hshift : 1 ≤ shift)
     (p : E × PolarPoint) (hp : p ∈ U ×ˢ W)
     {C M H L R t : ℝ} (hC : 0 ≤ C) (hM : 1 ≤ M)
     (hH : 0 ≤ H) (hHL : H ≤ L) (hL : 1 ≤ L) (hR : 0 ≤ R) (ht : 0 ≤ t)
-    (hforward : UnitPrefix J (p.1, G p) low high N prefix shift C H R t)
-    (hinverse : UnitPrefix K p low high N prefix shift M H R t)
+    (hforward : UnitPrefix J (p.1, G p) low high N paramOrder shift C H R t)
+    (hinverse : UnitPrefix K p low high N paramOrder shift M H R t)
     (n : ℕ) (hn : 0 < n) (hnN : n ≤ N)
-    (w : StateAngleWord n) (hw : w.stateArity ≤ prefix) (v : Fin n → E × PolarPoint)
+    (w : StateAngleWord n) (hw : w.stateArity ≤ paramOrder) (v : Fin n → E × PolarPoint)
     (hlow : ∀ i, low (v i).1 ≤ 1) (hhigh : ∀ i, high (v i).1 ≤ R)
     (hphysical : ∀ i, ‖(v i).2‖ ≤ 1)
     (hstate : ∀ i, w.isState i = false → (v i).1 = 0)
@@ -292,7 +292,7 @@ theorem scalar_prefix_norm_le
     ‖Q.D n p v‖ ≤ n04NegativeInverse_partitionMajorant C M L n *
       parameterHeightWeight H w.stateArity *
         t ^ (w.angleArity + shift * w.stateArity - 1) := by
-  exact scalar_graph_norm_le J K hmap Q low high n prefix shift hn hshift p hp
+  exact scalar_graph_norm_le J K hmap Q low high n paramOrder shift hn hshift p hp
     hC hM hH hHL hL hR ht
     (fun j hj hjn => hforward.homogeneous j hj (hjn.trans hnN))
     (fun j hj hjn => hinverse.norm_le j hj (hjn.trans hnN))
@@ -311,16 +311,16 @@ theorem normalized_scalar_prefix_norm_le
     (hBmap : MapsTo (fun q => c + B q) Ω W)
     (Qf : SmoothDirections (U ×ˢ W) (fun p => f (p.1, G p)))
     (Q : SmoothDirections (U ×ˢ Ω) (fun p => f (p.1, G (p.1, c + B p.2))))
-    (low high : Seminorm ℝ E) (N prefix shift : ℕ) (hshift : 1 ≤ shift)
+    (low high : Seminorm ℝ E) (N paramOrder shift : ℕ) (hshift : 1 ≤ shift)
     {z : E} (hz : z ∈ U) {q : PolarPoint} (hq : q ∈ Ω)
     {C I T H L R t : ℝ} (hC : 0 ≤ C) (hI : 0 ≤ I) (hT : 0 ≤ T)
     (hH : 0 ≤ H) (hHL : H ≤ L) (hL : 1 ≤ L) (hR : 0 ≤ R) (ht : 0 ≤ t)
     (hdet : |planeJacobian (fun y => F (z, y)) (G (z, c + B q))|⁻¹ ≤ I)
     (hB : ‖B‖ ≤ T)
-    (hforward : UnitPrefix J (z, G (z, c + B q)) low high N prefix shift C H R t)
-    (hscalar : UnitPrefix Jf (z, G (z, c + B q)) low high N prefix shift C H R t)
+    (hforward : UnitPrefix J (z, G (z, c + B q)) low high N paramOrder shift C H R t)
+    (hscalar : UnitPrefix Jf (z, G (z, c + B q)) low high N paramOrder shift C H R t)
     (n : ℕ) (hn : 0 < n) (hnN : n ≤ N)
-    (w : StateAngleWord n) (hw : w.stateArity ≤ prefix) (v : Fin n → E × PolarPoint)
+    (w : StateAngleWord n) (hw : w.stateArity ≤ paramOrder) (v : Fin n → E × PolarPoint)
     (hlow : ∀ i, low (v i).1 ≤ 1) (hhigh : ∀ i, high (v i).1 ≤ R)
     (hphysical : ∀ i, ‖(v i).2‖ ≤ 1)
     (hstate : ∀ i, w.isState i = false → (v i).1 = 0)
@@ -334,7 +334,7 @@ theorem normalized_scalar_prefix_norm_le
   have hM : 1 ≤ M := n04NegativeInverse_prefixMajorant_one_le
     (mul_nonneg (mul_nonneg (by norm_num) hC) hI) hC (zero_le_one.trans hL) N
   have hK := inverse_unitPrefix_of_jacobian J K hU hV hW hmap hJac hright
-    low high N prefix shift hshift (z, c + B q) ⟨hz, hBmap hq⟩
+    low high N paramOrder shift hshift (z, c + B q) ⟨hz, hBmap hq⟩
     hC hI hH hHL hL hR ht hdet hforward
   have hunit (y : Fin n → PolarPoint) (hy : ∀ i, ‖y i‖ ≤ 1) :
       ‖Qf.D n (z, c + B q)
@@ -342,7 +342,7 @@ theorem normalized_scalar_prefix_norm_le
       n04NegativeInverse_partitionMajorant C M L n *
         parameterHeightWeight H w.stateArity *
           t ^ (w.angleArity + shift * w.stateArity - 1) := by
-    apply scalar_prefix_norm_le Jf K hmap Qf low high N prefix shift hshift
+    apply scalar_prefix_norm_le Jf K hmap Qf low high N paramOrder shift hshift
       (z, c + B q) ⟨hz, hBmap hq⟩ hC hM hH hHL hL hR ht hscalar hK n hn hnN w hw
     · intro i
       cases hi : w.isState i <;> simp only [hi, Bool.false_eq_true, if_false, if_true]

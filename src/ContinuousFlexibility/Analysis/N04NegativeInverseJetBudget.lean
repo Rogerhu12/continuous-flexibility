@@ -39,26 +39,26 @@ theorem higher_norm_le (J : SmoothDirections (U ×ˢ V) F)
     (hleft : ∀ p ∈ U ×ˢ W, ∀ y : Y,
       A p (J.D 1 (p.1, G p) (fun _ : Fin 1 => (0, y))) = y)
     (hright : ∀ p ∈ U ×ˢ W, F (p.1, G p) = p.2)
-    (low high : Seminorm ℝ E) (n prefix shift : ℕ) (hshift : 1 ≤ shift)
+    (low high : Seminorm ℝ E) (n paramOrder shift : ℕ) (hshift : 1 ≤ shift)
     (p : E × Y) (hp : p ∈ U ×ˢ W)
     {C M H L R t : ℝ} (hC : 0 ≤ C) (hM : 1 ≤ M)
     (hH : 0 ≤ H) (hHL : H ≤ L) (hL : 1 ≤ L) (hR : 0 ≤ R) (ht : 0 ≤ t)
     (hforward : ∀ j : ℕ, 0 < j → j ≤ n + 2 → ∀ w : StateAngleWord j,
-      w.stateArity ≤ prefix → ∀ b : Fin j → E, ∀ y : Fin j → Y,
+      w.stateArity ≤ paramOrder → ∀ b : Fin j → E, ∀ y : Fin j → Y,
       (∀ i, low (b i) ≤ 1) → (∀ i, high (b i) ≤ R) →
       ‖J.D j (p.1, G p) (fun i => if w.isState i then (b i, 0) else (0, y i))‖ ≤
         C * parameterHeightWeight H w.stateArity *
           t ^ (w.angleArity + shift * w.stateArity - 1) *
             w.selectedProduct (fun i => ‖y i‖))
     (hlower : ∀ j : ℕ, 0 < j → j < n + 2 → ∀ w : StateAngleWord j,
-      w.stateArity ≤ prefix → ∀ v : Fin j → E × Y,
+      w.stateArity ≤ paramOrder → ∀ v : Fin j → E × Y,
       (∀ i, low (v i).1 ≤ 1) → (∀ i, high (v i).1 ≤ R) →
       (∀ i, ‖(v i).2‖ ≤ 1) →
       (∀ i, w.isState i = false → (v i).1 = 0) →
       (∀ i, w.isState i = true → (v i).2 = 0) →
       ‖K.D j p v‖ ≤ M * parameterHeightWeight H w.stateArity *
         t ^ (w.angleArity + shift * w.stateArity - 1))
-    (w : StateAngleWord (n + 2)) (hw : w.stateArity ≤ prefix)
+    (w : StateAngleWord (n + 2)) (hw : w.stateArity ≤ paramOrder)
     (v : Fin (n + 2) → E × Y)
     (hlow : ∀ i, low (v i).1 ≤ 1) (hhigh : ∀ i, high (v i).1 ≤ R)
     (hphysical : ∀ i, ‖(v i).2‖ ≤ 1)
@@ -92,7 +92,7 @@ theorem higher_norm_le (J : SmoothDirections (U ×ˢ V) F)
     have hl (i : Fin c.length) : ‖y c i‖ ≤ M * parameterHeightWeight H (κ c i) *
         t ^ (β c i + shift * κ c i - 1) := by
       by_cases hi : c.partSize i < n + 2
-      · have hk : κ c i ≤ prefix :=
+      · have hk : κ c i ≤ paramOrder :=
           (Finset.single_le_sum (fun j _ => Nat.zero_le (κ c j)) (Finset.mem_univ i)).trans
             ((w.sum_restrict_stateArity c).le.trans hw)
         dsimp only [y]
@@ -111,7 +111,7 @@ theorem higher_norm_le (J : SmoothDirections (U ×ˢ V) F)
           C * parameterHeightWeight H output.stateArity *
             t ^ (output.angleArity + shift * output.stateArity - 1) *
               output.selectedProduct (fun i => ‖y c i‖) := by
-      have hk : output.stateArity ≤ prefix := by
+      have hk : output.stateArity ≤ paramOrder := by
         have hle : output.stateArity ≤ output.flowParameterOrder (κ c) := by
           unfold StateAngleWord.flowParameterOrder
           omega
@@ -148,13 +148,13 @@ theorem first_norm_le (J : SmoothDirections (U ×ˢ V) F)
     (hleft : ∀ p ∈ U ×ˢ W, ∀ y : Y,
       A p (J.D 1 (p.1, G p) (fun _ : Fin 1 => (0, y))) = y)
     (hright : ∀ p ∈ U ×ˢ W, F (p.1, G p) = p.2)
-    (low high : Seminorm ℝ E) (prefix shift : ℕ)
+    (low high : Seminorm ℝ E) (paramOrder shift : ℕ)
     (p : E × Y) (hp : p ∈ U ×ˢ W)
     {a C H R t : ℝ} (ha : 0 ≤ a) (hC : 0 ≤ C) (hH : 0 ≤ H) (ht : 0 ≤ t)
     (hApoint : ‖A p‖ ≤ a)
-    (hparameter : 1 ≤ prefix → ∀ b : E, low b ≤ 1 → high b ≤ R →
+    (hparameter : 1 ≤ paramOrder → ∀ b : E, low b ≤ 1 → high b ≤ R →
       ‖J.D 1 (p.1, G p) (fun _ : Fin 1 => (b, 0))‖ ≤ C * H * t ^ (shift - 1))
-    (w : StateAngleWord 1) (hw : w.stateArity ≤ prefix)
+    (w : StateAngleWord 1) (hw : w.stateArity ≤ paramOrder)
     (v : Fin 1 → E × Y)
     (hlow : ∀ i, low (v i).1 ≤ 1) (hhigh : ∀ i, high (v i).1 ≤ R)
     (hphysical : ∀ i, ‖(v i).2‖ ≤ 1)
@@ -165,7 +165,7 @@ theorem first_norm_le (J : SmoothDirections (U ×ˢ V) F)
   cases w with
   | state w =>
     cases w
-    have hk : 1 ≤ prefix := hw
+    have hk : 1 ≤ paramOrder := hw
     have hf := hparameter hk (v 0).1 (hlow 0) (hhigh 0)
     have he : K.D 1 p v = -A p (J.D 1 (p.1, G p)
         (fun _ : Fin 1 => ((v 0).1, 0))) := by
@@ -290,20 +290,20 @@ theorem prefix_norm_le (J : SmoothDirections (U ×ˢ V) F)
     (hleft : ∀ p ∈ U ×ˢ W, ∀ y : Y,
       A p (J.D 1 (p.1, G p) (fun _ : Fin 1 => (0, y))) = y)
     (hright : ∀ p ∈ U ×ˢ W, F (p.1, G p) = p.2)
-    (low high : Seminorm ℝ E) (N prefix shift : ℕ) (hshift : 1 ≤ shift)
+    (low high : Seminorm ℝ E) (N paramOrder shift : ℕ) (hshift : 1 ≤ shift)
     (p : E × Y) (hp : p ∈ U ×ˢ W)
     {a C H L R t : ℝ} (ha : 0 ≤ a) (hC : 0 ≤ C)
     (hH : 0 ≤ H) (hHL : H ≤ L) (hL : 1 ≤ L) (hR : 0 ≤ R) (ht : 0 ≤ t)
     (hApoint : ‖A p‖ ≤ a)
     (hforward : ∀ j : ℕ, 0 < j → j ≤ N → ∀ w : StateAngleWord j,
-      w.stateArity ≤ prefix → ∀ b : Fin j → E, ∀ y : Fin j → Y,
+      w.stateArity ≤ paramOrder → ∀ b : Fin j → E, ∀ y : Fin j → Y,
       (∀ i, low (b i) ≤ 1) → (∀ i, high (b i) ≤ R) →
       ‖J.D j (p.1, G p) (fun i => if w.isState i then (b i, 0) else (0, y i))‖ ≤
         C * parameterHeightWeight H w.stateArity *
           t ^ (w.angleArity + shift * w.stateArity - 1) *
             w.selectedProduct (fun i => ‖y i‖))
     (n : ℕ) (hn : 0 < n) (hnN : n ≤ N)
-    (w : StateAngleWord n) (hw : w.stateArity ≤ prefix) (v : Fin n → E × Y)
+    (w : StateAngleWord n) (hw : w.stateArity ≤ paramOrder) (v : Fin n → E × Y)
     (hlow : ∀ i, low (v i).1 ≤ 1) (hhigh : ∀ i, high (v i).1 ≤ R)
     (hphysical : ∀ i, ‖(v i).2‖ ≤ 1)
     (hstate : ∀ i, w.isState i = false → (v i).1 = 0)
@@ -313,7 +313,7 @@ theorem prefix_norm_le (J : SmoothDirections (U ×ˢ V) F)
         t ^ (w.angleArity + shift * w.stateArity - 1) := by
   have hL0 : 0 ≤ L := zero_le_one.trans hL
   have hall : ∀ m : ℕ, m ≤ N → ∀ j : ℕ, 0 < j → j ≤ m →
-      ∀ word : StateAngleWord j, word.stateArity ≤ prefix → ∀ u : Fin j → E × Y,
+      ∀ word : StateAngleWord j, word.stateArity ≤ paramOrder → ∀ u : Fin j → E × Y,
       (∀ i, low (u i).1 ≤ 1) → (∀ i, high (u i).1 ≤ R) →
       (∀ i, ‖(u i).2‖ ≤ 1) →
       (∀ i, word.isState i = false → (u i).1 = 0) →
@@ -338,7 +338,7 @@ theorem prefix_norm_le (J : SmoothDirections (U ×ˢ V) F)
         subst j
         cases m with
         | zero =>
-          have hparameter : 1 ≤ prefix → ∀ b : E, low b ≤ 1 → high b ≤ R →
+          have hparameter : 1 ≤ paramOrder → ∀ b : E, low b ≤ 1 → high b ≤ R →
               ‖J.D 1 (p.1, G p) (fun _ : Fin 1 => (b, 0))‖ ≤
                 C * H * t ^ (shift - 1) := by
             intro hprefix b hb hbh
@@ -355,7 +355,7 @@ theorem prefix_norm_le (J : SmoothDirections (U ×ˢ V) F)
               StateAngleWord.selectedProduct, parameterHeightWeight, Nat.zero_add,
               Nat.mul_one, Nat.one_ne_zero, ite_false, mul_one] using h
           have hh := first_norm_le J K hU hV hW hmap A hA hleft hright low high
-            prefix shift p hp ha hC hH ht hApoint hparameter word hword u hul huh hup hus hua
+            paramOrder shift p hp ha hC hH ht hApoint hparameter word hword u hul huh hup hus hua
           exact hh.trans (mul_le_mul_of_nonneg_right
             (mul_le_mul_of_nonneg_right
               (n04NegativeInverse_prefixMajorant_first_le ha hC hL0 0)
@@ -363,7 +363,7 @@ theorem prefix_norm_le (J : SmoothDirections (U ×ˢ V) F)
         | succ m =>
           have hM := n04NegativeInverse_prefixMajorant_one_le ha hC hL0 (m + 1)
           have hh := higher_norm_le J K hU hV hW hmap A hA hleft hright low high
-            m prefix shift hshift p hp hC hM hH hHL hL hR ht
+            m paramOrder shift hshift p hp hC hM hH hHL hL hR ht
             (fun j hj hjN => hforward j hj (hjN.trans hm))
             (fun j hj hjN word hword u hul huh hup hus hua =>
               ih (by omega) j hj (by omega) word hword u hul huh hup hus hua)
@@ -397,26 +397,26 @@ This is the final raw estimate for the pulled physical height. -/
 theorem scalar_graph_norm_le (J : SmoothDirections (U ×ˢ V) f)
     (K : SmoothDirections (U ×ˢ W) G) (hmap : MapsTo G (U ×ˢ W) V)
     (Q : SmoothDirections (U ×ˢ W) (fun p => f (p.1, G p)))
-    (low high : Seminorm ℝ E) (n prefix shift : ℕ) (hn : 0 < n)
+    (low high : Seminorm ℝ E) (n paramOrder shift : ℕ) (hn : 0 < n)
     (hshift : 1 ≤ shift) (p : E × Y) (hp : p ∈ U ×ˢ W)
     {C M H L R t : ℝ} (hC : 0 ≤ C) (hM : 1 ≤ M)
     (hH : 0 ≤ H) (hHL : H ≤ L) (hL : 1 ≤ L) (hR : 0 ≤ R) (ht : 0 ≤ t)
     (hforward : ∀ j : ℕ, 0 < j → j ≤ n → ∀ w : StateAngleWord j,
-      w.stateArity ≤ prefix → ∀ b : Fin j → E, ∀ y : Fin j → Y,
+      w.stateArity ≤ paramOrder → ∀ b : Fin j → E, ∀ y : Fin j → Y,
       (∀ i, low (b i) ≤ 1) → (∀ i, high (b i) ≤ R) →
       ‖J.D j (p.1, G p) (fun i => if w.isState i then (b i, 0) else (0, y i))‖ ≤
         C * parameterHeightWeight H w.stateArity *
           t ^ (w.angleArity + shift * w.stateArity - 1) *
             w.selectedProduct (fun i => ‖y i‖))
     (hinverse : ∀ j : ℕ, 0 < j → j ≤ n → ∀ w : StateAngleWord j,
-      w.stateArity ≤ prefix → ∀ v : Fin j → E × Y,
+      w.stateArity ≤ paramOrder → ∀ v : Fin j → E × Y,
       (∀ i, low (v i).1 ≤ 1) → (∀ i, high (v i).1 ≤ R) →
       (∀ i, ‖(v i).2‖ ≤ 1) →
       (∀ i, w.isState i = false → (v i).1 = 0) →
       (∀ i, w.isState i = true → (v i).2 = 0) →
       ‖K.D j p v‖ ≤ M * parameterHeightWeight H w.stateArity *
         t ^ (w.angleArity + shift * w.stateArity - 1))
-    (w : StateAngleWord n) (hw : w.stateArity ≤ prefix) (v : Fin n → E × Y)
+    (w : StateAngleWord n) (hw : w.stateArity ≤ paramOrder) (v : Fin n → E × Y)
     (hlow : ∀ i, low (v i).1 ≤ 1) (hhigh : ∀ i, high (v i).1 ≤ R)
     (hphysical : ∀ i, ‖(v i).2‖ ≤ 1)
     (hstate : ∀ i, w.isState i = false → (v i).1 = 0)
@@ -461,7 +461,7 @@ theorem scalar_graph_norm_le (J : SmoothDirections (U ×ˢ V) f)
         (fun j hj => hstate _ (by simpa only [StateAngleWord.isState_restrict] using hj)) hi
     have hl (i : Fin c.length) : ‖y c i‖ ≤ M * parameterHeightWeight H (κ c i) *
         t ^ (β c i + shift * κ c i - 1) := by
-      have hk : κ c i ≤ prefix :=
+      have hk : κ c i ≤ paramOrder :=
         (Finset.single_le_sum (fun j _ => Nat.zero_le (κ c j)) (Finset.mem_univ i)).trans
           ((w.sum_restrict_stateArity c).le.trans hw)
       exact hinverse (c.partSize i) (c.partSize_pos i) (c.partSize_le i)
@@ -475,7 +475,7 @@ theorem scalar_graph_norm_le (J : SmoothDirections (U ×ˢ V) f)
           C * parameterHeightWeight H output.stateArity *
             t ^ (output.angleArity + shift * output.stateArity - 1) *
               output.selectedProduct (fun i => ‖y c i‖) := by
-      have hk : output.stateArity ≤ prefix := by
+      have hk : output.stateArity ≤ paramOrder := by
         have hle : output.stateArity ≤ output.flowParameterOrder (κ c) := by
           unfold StateAngleWord.flowParameterOrder
           omega
