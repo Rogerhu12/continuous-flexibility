@@ -41,14 +41,17 @@ theorem N04HeightReferenceDataOn.height_mul
   let J : SmoothDirections (univ : Set ℝ)
       (fun _ => mixedDerivative a b (fun y => f m y * g m y) q) :=
     smoothDirections_constant isOpen_univ _
+  have hfixedD (u w : ℕ) :
+      (RF.parameter u w q hq).D 0 (0 : ℝ) Fin.elim0 =
+        mixedDerivative u w (g m) q :=
+    smoothDirections_D_zero_apply (RF.parameter u w q hq) (mem_univ (0 : ℝ)) Fin.elim0
   have ht := n04Realization_fixedSpatialProduct_parameterJet_bound hΩ (hf.1 m hm).1
     RF a b s 0 hab hq J (mem_univ (0 : ℝ)) Fin.elim0
     (mul_nonneg hA.le (Real.rpow_nonneg hEpos.le _))
     (mul_nonneg hB.le (Real.rpow_nonneg hEpos.le _)) le_rfl hleft
     (fun u w huw => by
-      simpa only [RF, n04Realization_mixedJetRegularity_fixedSpatial,
-        smoothDirections_D_zero_apply (smoothDirections_constant isOpen_univ _) (mem_univ (0 : ℝ)),
-        Real.one_rpow, mul_one] using hright u w huw)
+      rw [hfixedD u w]
+      simpa only [Real.one_rpow, mul_one] using hright u w huw)
   have ht' : |mixedDerivative a b (fun y => f m y * g m y) q| ≤
       (2 : ℝ) ^ (a + b) * (A * E ^ A) * (B * E ^ B) := by
     simpa only [smoothDirections_D_zero_apply J (mem_univ (0 : ℝ)),
