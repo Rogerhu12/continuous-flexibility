@@ -50,8 +50,8 @@ theorem N01Properties.n04NegativeGeometry_originalDiscriminant_of_preservedCorre
     0 < (originalCoefficients D S C z).b p ^ 2 -
       (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p := by
   by_cases hzero : deriv (χ m) p.1 = 0
-  · have he := returnCorrectedCoefficients_eq_original_at_of_deriv_zero (D := D)
-      hN.2.2.2.1.2.2.1 χ z m p hp hzero
+  · have he := returnCorrectedCoefficients_eq_original_at_of_deriv_zero
+      (D := D) hN.2.2.2.1.2.2.1 χ z m p hp hzero
     have hd := hfield.negative_discriminant z hz hs m p ⟨hp, mem_univ _⟩
     rw [hcoeff, he.1, he.2, returnCorrectedCoefficients_a] at hd
     exact hd

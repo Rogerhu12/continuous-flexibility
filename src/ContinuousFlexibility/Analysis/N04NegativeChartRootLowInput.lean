@@ -155,7 +155,8 @@ theorem FullHalfFieldPowerControl.root_low_input
       (fun q hq => (heq q (Ioo_subset_Icc_self hq.1)).2)
   let R := rootRescaledField (fun q => d (y, q)) (fun q => c (y, q)) δ
   have hR : ContDiff ℝ ∞ R := contDiff_rootRescaledField hdz hcz δ
-  have hRp := rootRescaledField_periodic (hdp y) (hcp y) δ
+  have hRp := rootRescaledField_periodic (d := fun p => d (y, p))
+    (c := fun p => c (y, p)) (T := Real.pi) (hdp y) (hcp y) δ
   have hpoint {q : N04FlowPoint} (hq : q.1 ∈ n04FlowParameterBox) (hx : 0 ≤ q.1.1)
       {t : ℝ} (ht : t ∈ Icc (0 : ℝ) 1) :
       δ * q.1.1 * t ^ 2 ∈ Icc (0 : ℝ) (W.negativeOpticalWidth m side) := by
@@ -190,11 +191,11 @@ theorem FullHalfFieldPowerControl.root_low_input
     (fun q hq hx t ht => by
       change |deriv (fun η => -R (1 - t, (q.1, η))) q.2| ≤ 1
       rw [deriv.fun_neg, abs_neg]
-      exact hangle q hq hx (1 - t) ⟨by linarith [ht.2], by linarith [ht.1]⟩)
+      exact hangle q hq hx (1 - t) ⟨by linarith only [ht.2], by linarith only [ht.1]⟩)
     (fun j hj q hq hx t ht => by
       change ‖iteratedFDeriv ℝ j (-(fun v => R (1 - t, v))) q‖ ≤ _
       rw [iteratedFDeriv_neg_apply, norm_neg]
-      exact hraw j hj q hq hx (1 - t) ⟨by linarith [ht.2], by linarith [ht.1]⟩)
+      exact hraw j hj q hq hx (1 - t) ⟨by linarith only [ht.2], by linarith only [ht.1]⟩)
     (A.inverse y) (A.inverse_equations y) (n01RootLabel W.S W.C z m side)
     (n01RootLabel_contDiff W.hS W.hT W.through03.1.1 hzold hs m side)
     (fun j hj θ => (hlabel z hzL hs m side j hj θ).trans (by

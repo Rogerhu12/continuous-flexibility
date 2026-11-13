@@ -14,10 +14,37 @@ stored corrected field, including the inactive part of each component.
 
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace ContinuousFlexibility.Analysis.N04RealizationStart
 
 open Set ContinuousFlexibility.Statements
 open scoped ContDiff
+
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
+
+private theorem original_add_correction {a c v : ℝ} (h : v = c - a) : a + v = c := by
+  rw [h]
+  ring
+
+private theorem halfGap_of_reflection (A : SymmetricCoefficients) (p : PolarPoint)
+    (hdrift : n04bCharacteristicDrift A (p.1, -p.2) = -n04bCharacteristicDrift A p)
+    (hgap : n04bCharacteristicHalfGap A (p.1, -p.2) = n04bCharacteristicHalfGap A p) :
+    (-1 / 2 : ℝ) * (minusCharacteristicSpeed A (p.1, -p.2) +
+      minusCharacteristicSpeed A p) = n04bCharacteristicHalfGap A p := by
+  rw [(n04b_characteristic_speed_factorization A (p.1, -p.2)).1,
+    (n04b_characteristic_speed_factorization A p).1, hdrift, hgap]
+  ring
 
 variable (W : N04RealizationStart)
 
@@ -30,7 +57,7 @@ private def addScalarTowersCongr
   (smoothDirectionsAdd Jf Jg).congrOn he
 
 private theorem add_actual_residual {a b c d : ℝ} (hc : c = b - a) (hd : d = b) :
-    a + c = d := by rw [hc, hd]; ring
+    a + c = d := (original_add_correction hc).trans hd.symm
 
 private def reflectedMinusHalfGapTower
     {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
@@ -58,9 +85,7 @@ private def reflectedMinusHalfGapTower
     (minusCharacteristicSpeed (A q.1) (q.2.1, -q.2.2) +
       minusCharacteristicSpeed (A q.1) q.2) = _
   have hh := href q.1 hq.1 q.2 hq.2
-  rw [(n04b_characteristic_speed_factorization _ _).1,
-    (n04b_characteristic_speed_factorization _ _).1, hh.1, hh.2]
-  ring
+  exact halfGap_of_reflection _ _ hh.1 hh.2
 
 theorem negativeOriginalDiscriminant_pos (m : ℕ)
     {z : StateDirections W.S × ℝ}
@@ -122,23 +147,27 @@ def negativeOriginalMinusJointTower (m : ℕ) :
       ((((contDiffAt_snd.fst.pow 2).sub
         (contDiffAt_fst.mul contDiffAt_snd.snd)).sqrt hq.2.ne').div
           contDiffAt_fst hq.1.ne')).contDiffWithinAt
-  have hmap : ∀ x ∈ sectorNeighborhood W.S W.base W.ε W.ε ×ˢ
-      (Ioo (W.C.left m) (W.C.right m) ×ˢ (univ : Set ℝ)),
-      (originalCoefficientEntry W.D W.S W.C 0 (liftSectorParameter W.S W.C x.1) x.2,
-        originalCoefficientEntry W.D W.S W.C 1 (liftSectorParameter W.S W.C x.1) x.2,
-        originalCoefficientEntry W.D W.S W.C 2 (liftSectorParameter W.S W.C x.1) x.2) ∈ V := by
+  have hmap : MapsTo
+      (fun x : (StateDirections W.S × ℝ) × PolarPoint =>
+        (originalCoefficientEntry W.D W.S W.C 0 (liftSectorParameter W.S W.C x.1) x.2,
+          originalCoefficientEntry W.D W.S W.C 1 (liftSectorParameter W.S W.C x.1) x.2,
+          originalCoefficientEntry W.D W.S W.C 2 (liftSectorParameter W.S W.C x.1) x.2))
+      (sectorNeighborhood W.S W.base W.ε W.ε ×ˢ
+        (Ioo (W.C.left m) (W.C.right m) ×ˢ univ)) V := by
     intro x hx
-    simpa only [originalCoefficientEntry, ↓reduceIte, if_pos rfl,
-      if_neg (by decide : (1 : Fin 3) ≠ 0), if_neg (by decide : (2 : Fin 3) ≠ 0),
-      if_neg (by decide : (2 : Fin 3) ≠ 1), V, mem_setOf_eq] using
+    change 0 < (originalCoefficients W.D W.S W.C
+        (liftSectorParameter W.S W.C x.1)).a x.2 ∧
+      0 < (originalCoefficients W.D W.S W.C
+        (liftSectorParameter W.S W.C x.1)).b x.2 ^ 2 -
+          (originalCoefficients W.D W.S W.C (liftSectorParameter W.S W.C x.1)).a x.2 *
+            (originalCoefficients W.D W.S W.C (liftSectorParameter W.S W.C x.1)).c x.2
+    exact
       And.intro (W.negativeOriginalRadial_pos m hx.1 hx.2)
         (W.negativeOriginalDiscriminant_pos m hx.1 hx.2.1)
   apply ((smoothDirectionsProd (J 0) (smoothDirectionsProd (J 1) (J 2))).comp_contDiff
     hV hkernel hmap).congrOn
   intro x hx
-  simp only [originalCoefficientEntry, ↓reduceIte, if_pos rfl,
-    if_neg (by decide : (1 : Fin 3) ≠ 0), if_neg (by decide : (2 : Fin 3) ≠ 0),
-    if_neg (by decide : (2 : Fin 3) ≠ 1), minusCharacteristicSpeed]
+  rfl
 
 /-- The actual residual velocity has the same full-component domain as
 the chart; its construction uses no chart estimate. -/

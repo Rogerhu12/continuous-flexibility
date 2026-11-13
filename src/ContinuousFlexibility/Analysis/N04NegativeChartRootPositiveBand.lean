@@ -103,6 +103,7 @@ theorem negativeRootPositiveRadius_inverse_material
     exact hh.trans_eq (by ring)
   have hpow : (δ⁻¹) ^ 2 ≤ D ^ 2 * E ^ (q * 2) := by
     have hh := pow_le_pow_left₀ (inv_nonneg.mpr hδ.le) hδcost 2
+    change (δ⁻¹) ^ 2 ≤ (D * E ^ q) ^ 2 at hh
     simpa only [mul_pow, ← Real.rpow_mul_natCast hEp.le, Nat.cast_ofNat] using hh
   have hcost : 2 * (C * M + 1) * (B * (δ⁻¹) ^ 2 * E ^ p) ≤
       2 * ((C * K + 1) * E ^ r) * (B * (D ^ 2 * E ^ (q * 2)) * E ^ p) :=

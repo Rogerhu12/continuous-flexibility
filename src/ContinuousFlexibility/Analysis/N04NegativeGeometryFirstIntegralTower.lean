@@ -118,10 +118,16 @@ private theorem correctedFirstIntegralCircle_decode
       (H.decode.map_add (hN.singleComponentFlowInverseCircle hS hT m x) d)).trans
         (congrArg₂ (fun a b : ℝ => a + b) hflow (houter.trans hsum))
   have hleft : stateLeftChart S (liftSectorParameter S C x.1).1 m v =
-      v + H.decode x.1.1.val.2.2.2 m v := hN.2.2.1.sector_leftChart x.1 m v
+      v + H.decode x.1.1.val.2.2.2 m v :=
+    hN.2.2.1.sector_leftChart x.1 m v
   have hinverse : Function.invFun (returnCorrectedMinusFlow S C χ
       (liftSectorParameter S C x.1) m x.2) θ = v :=
     congrFun (correctedFlow_inverse_comp hN hS hT χ hχrange m x hx hr) θ
+  have harg : stateLeftChart S (liftSectorParameter S C x.1).1 m
+      (Function.invFun (returnCorrectedMinusFlow S C χ
+        (liftSectorParameter S C x.1) m x.2) θ) =
+      v + H.decode x.1.1.val.2.2.2 m v :=
+    (congrArg (stateLeftChart S (liftSectorParameter S C x.1).1 m) hinverse).trans hleft
   change θ + 0 + H.decode
     (hN.n04NegativeGeometryMinusFirstIntegralCircle hS hT χ m x) m θ =
       stateLeftChart S (liftSectorParameter S C x.1).1 m
@@ -129,10 +135,9 @@ private theorem correctedFirstIntegralCircle_decode
           (liftSectorParameter S C x.1) m x.2) θ)
   calc
     _ = θ + 0 + ((u - θ) + ((v - u) + H.decode x.1.1.val.2.2.2 m v)) :=
-      congrArg (fun q : ℝ => θ + 0 + q) hdecode
+      congrArg (fun t : ℝ => θ + 0 + t) hdecode
     _ = v + H.decode x.1.1.val.2.2.2 m v := by ring
-    _ = stateLeftChart S (liftSectorParameter S C x.1).1 m v := hleft.symm
-    _ = _ := congrArg (stateLeftChart S (liftSectorParameter S C x.1).1 m) hinverse.symm
+    _ = _ := harg.symm
 
 /-- One genuine joint tower for the actual first integral on an interior
 physical strip. The cutoff, old flow and inverse are all retained. -/

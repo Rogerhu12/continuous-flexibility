@@ -61,6 +61,7 @@ theorem negativeChartRootPlotField_stateJet
   have hce : iteratedFDeriv ℝ k (fun y : P => c (y, p)) 0 v =
       negativeChartCoefficientJet c k v p := flowParameterField_eq_joint hc k 0 v p
   rw [hde, hce]
+  rfl
 
 /-- The same-order root estimate retains a marked coefficient weight
 and charges only `j - 1` to the spatial interpolation degree. -/

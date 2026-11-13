@@ -46,9 +46,8 @@ theorem n04NegativeGeometry_inverse_continuousOn_of_lipschitz
       dist (G z) (G q) ≤ (K : ℝ) * dist z.2 (F (z.1, G q)) := by
     filter_upwards [(hU.prod hW).mem_nhds hq, htarget] with z hz htz
     have hleft : G (z.1, F (z.1, G q)) = G q := by
-      have hgF : G (z.1, F (z.1, G q)) ∈ V :=
-        hMaps (show (z.1, F (z.1, G q)) ∈ U ×ˢ W from ⟨hz.1, htz⟩)
-      apply hInj z.1 hz.1 hgF hGq
+      have hpre : (z.1, F (z.1, G q)) ∈ U ×ˢ W := ⟨hz.1, htz⟩
+      apply hInj z.1 hz.1 (hMaps hpre) hGq
       exact hRight (z.1, F (z.1, G q)) ⟨hz.1, htz⟩
     simpa only [hleft] using
       (hLip z.1 hz.1).dist_le_mul z.2 hz.2 (F (z.1, G q)) htz
@@ -93,11 +92,11 @@ theorem n04NegativeGeometry_intervalInverse_continuousOn
     have hal : a < l := by
       have hamax := le_max_left a r
       dsimp only [l]
-      linarith [hGq.1]
+      linarith only [hamax, hGq.1]
     have hrl : r < l := by
       have hrmax := le_max_right a r
       dsimp only [l]
-      linarith
+      linarith only [hrmax, hr]
     have hl : l ∈ Ioo a b := ⟨hal, hlG.trans hGq.2⟩
     have hlt : F (q.1, l) < q.2 := by
       rw [← hRight q hq]
@@ -120,11 +119,11 @@ theorem n04NegativeGeometry_intervalInverse_continuousOn
     have hub : u < b := by
       have hminb := min_le_left b r
       dsimp only [u]
-      linarith [hGq.2]
+      linarith only [hminb, hGq.2]
     have hur : u < r := by
       have hminr := min_le_right b r
       dsimp only [u]
-      linarith
+      linarith only [hminr, hr]
     have hu : u ∈ Ioo a b := ⟨hGq.1.trans hGu, hub⟩
     have hlt : q.2 < F (q.1, u) := by
       rw [← hRight q hq]

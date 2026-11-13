@@ -1,0 +1,118 @@
+diff --git a/src/ContinuousFlexibility/Analysis/N04RealizationLeadCurrentSplit.lean b/src/ContinuousFlexibility/Analysis/N04RealizationLeadCurrentSplit.lean
+--- a/src/ContinuousFlexibility/Analysis/N04RealizationLeadCurrentSplit.lean
++++ b/src/ContinuousFlexibility/Analysis/N04RealizationLeadCurrentSplit.lean
+@@ -108,6 +108,11 @@
+   liftSectorParameter (G.S η) (G.C η) z
+ /-- The reference state. -/
+ abbrev ref : AnnularState (G.S η) × ℝ := ((G.C η).referenceState, 0)
++
++/-- Quantitative reference jets of the same replaced atlas. This certificate
++has no neighborhood parameter; it is supplied by the parent current obligation. -/
++abbrev ReferenceData : Prop :=
++  ReferenceJets G.W.D G.W.U (G.S η) (G.C η) (G.L η) (G.V η)
+ 
+ /-- Jet-difference data of the replaced atlas on pieces satisfying `P`. -/
+ abbrev Data (P : ℕ → Prop) (b : ℕ) (ε : ℝ)
+@@ -265,8 +270,9 @@
+         (B.centerLeft i) (B.centerRight i) (lower i) (upper i)) ∧
+     (∀ i, τ (W.C.referenceState, 0) i = id ∧ σ (W.C.referenceState, 0) i = id ∧
+       Q (W.C.referenceState, 0) i = (fun _ => (1 : ℝ))) ∧
+-    ∀ η, (N04RealizationGauge.mk W X e Y H τ σ Q B.region).GeometryData η
+-      ((N04RealizationGauge.mk W X e Y H τ σ Q B.region).Pos η) b ε
++    ∀ η, (N04RealizationGauge.mk W X e Y H τ σ Q B.region).ReferenceData η →
++      (N04RealizationGauge.mk W X e Y H τ σ Q B.region).GeometryData η
++        ((N04RealizationGauge.mk W X e Y H τ σ Q B.region).Pos η) b ε
+ 
+ /-- The geometry interface on negative pieces. -/
+ def N04RealizationNegativeGeometryObligation : Prop :=
+@@ -274,16 +280,20 @@
+     ∃ (b' : ℕ) (ε' : ℝ), b ≤ b' ∧ 0 < ε' ∧ ε' ≤ ε ∧
+       ∀ η, G.GeometryData η (G.Neg η) b' ε'
+ 
+-/-- The pulled physical coefficients and columns, given the geometry interface. -/
++/-- The pulled physical coefficients and columns, given the geometry interface
++and the parent's quantitative reference jets of the same atlas. The neighborhood
++is chosen before the auxiliary column and its reference certificate. -/
+ def N04RealizationPulledFieldObligation : Prop :=
+   ∀ (G : N04RealizationGauge) (b : ℕ) (ε : ℝ), G.Admissible b ε →
+-    (∀ η, G.GeometryData η (fun _ => True) b ε) →
+-    ∃ (b' : ℕ) (ε' : ℝ), b ≤ b' ∧ 0 < ε' ∧ ε' ≤ ε ∧ ∀ η, G.FieldData η b' ε'
++    (∀ η, G.ReferenceData η → G.GeometryData η (fun _ => True) b ε) →
++    ∃ (b' : ℕ) (ε' : ℝ), b ≤ b' ∧ 0 < ε' ∧ ε' ≤ ε ∧
++      ∀ η, G.ReferenceData η → G.FieldData η b' ε'
+ 
+ /-- The source factors and both scalar columns, given the interface. -/
+ def N04RealizationSourceColumnObligation : Prop :=
+   ∀ (G : N04RealizationGauge) (b : ℕ) (ε : ℝ), G.Admissible b ε →
+-    (∀ η, G.GeometryData η (fun _ => True) b ε) → (∀ η, G.FieldData η b ε) →
++    (∀ η, G.ReferenceData η → G.GeometryData η (fun _ => True) b ε) →
++    (∀ η, G.ReferenceData η → G.FieldData η b ε) →
+     ∃ (b' : ℕ) (ε' : ℝ), b ≤ b' ∧ 0 < ε' ∧ ε' ≤ ε ∧ ∀ η,
+       ReferenceJets G.W.D G.W.U (G.S η) (G.C η) (G.L η) (G.V η) →
+       ∀ a : Atom, atomIsSourceColumn a →
+@@ -293,7 +303,8 @@
+ given the interface. -/
+ def N04RealizationPrincipalObligation : Prop :=
+   ∀ (G : N04RealizationGauge) (b : ℕ) (ε : ℝ), G.Admissible b ε →
+-    (∀ η, G.GeometryData η (fun _ => True) b ε) → (∀ η, G.FieldData η b ε) →
++    (∀ η, G.ReferenceData η → G.GeometryData η (fun _ => True) b ε) →
++    (∀ η, G.ReferenceData η → G.FieldData η b ε) →
+     ∃ (b' : ℕ) (ε' : ℝ), b ≤ b' ∧ 0 < ε' ∧ ε' ≤ ε ∧ ∀ η,
+       ReferenceJets G.W.D G.W.U (G.S η) (G.C η) (G.L η) (G.V η) →
+       ∀ a : Atom, atomIsPrincipal a →
+diff --git a/src/ContinuousFlexibility/Analysis/N04RealizationLeadCurrentProof.lean b/src/ContinuousFlexibility/Analysis/N04RealizationLeadCurrentProof.lean
+--- a/src/ContinuousFlexibility/Analysis/N04RealizationLeadCurrentProof.lean
++++ b/src/ContinuousFlexibility/Analysis/N04RealizationLeadCurrentProof.lean
+@@ -7,6 +7,9 @@
+ current obligation: the positive family and its neighborhood come from the
+ positive geometry statement, every later statement restricts the
+ neighborhood, and the data of every atom are restricted to the last one.
++The geometry and field data remain conditional on the same atlas's reference
++jets until the parent supplies that certificate. All neighborhood choices
++still precede the auxiliary column.
+ -/
+ 
+ noncomputable section
+@@ -46,23 +49,26 @@
+   have hεε : ε ≤ W.ε := hp.2.2.1
+   have hadm : G.Admissible b ε :=
+     ⟨hb, hε, hεε, hfam, hp.2.2.2.2.1, B, lower, upper, rfl, hp.2.2.2.1⟩
+-  have hgeoP : ∀ η, G.GeometryData η (G.Pos η) b ε := hp.2.2.2.2.2
++  have hgeoP : ∀ η, G.ReferenceData η → G.GeometryData η (G.Pos η) b ε :=
++    hp.2.2.2.2.2
+   have h2 := hneg G b ε hadm
+   let b2 := h2.choose
+   let ε2 := h2.choose_spec.choose
+   have hp2 := h2.choose_spec.choose_spec
+   have hadm2 : G.Admissible b2 ε2 := G.admissible_mono hadm hp2.1 hp2.2.1 hp2.2.2.1
+-  have hgeo2 : ∀ η, G.GeometryData η (fun _ => True) b2 ε2 := fun η =>
+-    G.geometryData_union η (G.geometryData_mono η (hgeoP η) (fun _ h => h) hp2.1 hp2.2.2.1)
+-      (hp2.2.2.2 η)
++  have hgeo2 : ∀ η, G.ReferenceData η → G.GeometryData η (fun _ => True) b2 ε2 :=
++    fun η href =>
++      G.geometryData_union η
++        (G.geometryData_mono η (hgeoP η href) (fun _ h => h) hp2.1 hp2.2.2.1)
++        (hp2.2.2.2 η)
+   have h3 := hfield G b2 ε2 hadm2 hgeo2
+   let b3 := h3.choose
+   let ε3 := h3.choose_spec.choose
+   have hp3 := h3.choose_spec.choose_spec
+   have hadm3 : G.Admissible b3 ε3 := G.admissible_mono hadm2 hp3.1 hp3.2.1 hp3.2.2.1
+-  have hgeo3 : ∀ η, G.GeometryData η (fun _ => True) b3 ε3 := fun η =>
+-    G.geometryData_mono η (hgeo2 η) (fun _ h => h) hp3.1 hp3.2.2.1
+-  have hfd3 : ∀ η, G.FieldData η b3 ε3 := hp3.2.2.2
++  have hgeo3 : ∀ η, G.ReferenceData η → G.GeometryData η (fun _ => True) b3 ε3 :=
++    fun η href => G.geometryData_mono η (hgeo2 η href) (fun _ h => h) hp3.1 hp3.2.2.1
++  have hfd3 : ∀ η, G.ReferenceData η → G.FieldData η b3 ε3 := hp3.2.2.2
+   have h4 := hsrc G b3 ε3 hadm3 hgeo3 hfd3
+   have h5 := hprin G b3 ε3 hadm3 hgeo3 hfd3
+   let b4 := h4.choose
+@@ -88,7 +94,7 @@
+   intro η _ _ _ _ hrefJ a ha hs
+   have hdata : G.Data η (fun _ => True) nb ε' (G.atomFamily η a) (G.atomRef η a) :=
+     (atom_classification a ha hs).elim
+-      (fun hg => ((hgeo3 η).1 a hg).mono (fun _ h => h) hb3 hε'3
++      (fun hg => ((hgeo3 η hrefJ).1 a hg).mono (fun _ h => h) hb3 hε'3
+         (G.cost_nonneg η).1 (G.cost_nonneg η).2.1)
+       (fun hr => hr.elim
+         (fun hsc => (hp4.2.2.2 η hrefJ a hsc).mono (fun _ h => h) (le_max_left _ _)

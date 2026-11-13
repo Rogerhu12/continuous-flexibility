@@ -47,6 +47,7 @@ private theorem inwardIntegral_inverse_bound
     exact mul_le_mul hx.1 hs (half_pos hρ).le hxpos.le
   have hscale := mul_le_mul hp havg.1 (inv_pos.mpr hM).le
     (Real.rpow_nonneg hxpos.le (3 / 2 : ℝ))
+  simp only [Function.comp_def] at hscale
   rw [← heq] at hscale
   have hlo : (ρ / 2) ^ 2 * M⁻¹ * (2 / 3 : ℝ) ≤
       ∫ t in (0 : ℝ)..x, Real.sqrt (t * g t) := by linarith only [hscale]
@@ -110,6 +111,7 @@ theorem NegativeOpticalFactors.interior_referenceTravel_inverse_material
   have hexI := F.reference_powers (-(1 / 2 : ℝ))
   let Ci : ℕ → ℝ := hexI.choose
   have hCi := hexI.choose_spec.1
+  have hCi0 : 0 < Ci 0 := hCi 0
   have hi := hexI.choose_spec.2
   have hexU := F.reference_powers (1 / 2 : ℝ)
   let Cu : ℕ → ℝ := hexU.choose
@@ -143,7 +145,8 @@ theorem NegativeOpticalFactors.interior_referenceTravel_inverse_material
     (show x ∈ Icc (0 : ℝ) (W.C.right m - W.C.left m) from
       ⟨hxpos.le, hx.2.trans (W.negativeOpticalWidth_le_component m side)⟩)
   have hintegral : (∫ t in (0 : ℝ)..x,
-      opticalSpeed W.D.w (inwardComponentPoint (W.C.left m) (W.C.right m) side t)) =
+      ContinuousFlexibility.Statements.opticalSpeed W.D.w
+        (inwardComponentPoint (W.C.left m) (W.C.right m) side t)) =
       ∫ t in (0 : ℝ)..x, Real.sqrt (t * F.reference m side t) := by
     apply intervalIntegral.integral_congr
     intro t ht

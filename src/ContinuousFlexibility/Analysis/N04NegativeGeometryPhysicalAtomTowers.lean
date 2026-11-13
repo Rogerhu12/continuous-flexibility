@@ -12,6 +12,8 @@ The two inverse-coordinate atoms are treated on their canonical domain.
 
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements CanonicalGeometry
@@ -174,8 +176,10 @@ def negativePhysicalAtomJointTower
     (a : Atom) (ha : negativePhysicalGeometryAtom a) :
     SmoothDirections (sectorNeighborhood G.W.S G.W.base G.W.ε G.W.ε ×ˢ unitStrip)
       (fun x : (StateDirections G.W.S × ℝ) × PolarPoint => G.atomFamily η a x.1 m x.2) := by
-  let j := ((G.neg_iff_inl η m).mp hm).choose
-  have hi := ((G.neg_iff_inl η m).mp hm).choose_spec
+  classical
+  have hnegative := (G.neg_iff_inl η m).mp hm
+  let j := hnegative.choose
+  have hi := hnegative.choose_spec
   have hk : G.X.e₀ (G.negativeIndex j) = .inl (j.1, j.2) := G.X.e₀.apply_symm_apply _
   have haux : a ≠ .auxiliaryColumn := by
     intro he

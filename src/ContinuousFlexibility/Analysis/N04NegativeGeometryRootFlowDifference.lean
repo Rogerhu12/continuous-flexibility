@@ -53,7 +53,7 @@ theorem flowJet_difference_norm_le_of_integral_equations
     abel
   have hb := flowJet_norm_le_of_integral_equation
     (hu.sub hu₀) (hq.sub hq₀) hα hα0 hM hΛ hsub hbound
-  simpa only [norm_zero, zero_add, Pi.sub_apply] using hb
+  simpa only [Pi.sub_apply, norm_zero, zero_add] using hb
 
 /-- The ordinary mixed derivative of a difference of two actual flows
 obeys the zero-initial-data estimate at every spatial order. -/

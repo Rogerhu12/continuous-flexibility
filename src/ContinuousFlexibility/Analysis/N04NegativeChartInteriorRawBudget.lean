@@ -83,9 +83,10 @@ theorem negativeInterior_raw_fractional
   have hH : 0 ≤ H := Real.rpow_nonneg (W.hT.2.1 _
     (materialSample_mem_radialCore W.hT W.radial.1.choose_spec.2.1 _)).2.1.le _
   have hE : 0 ≤ E := zero_le_one.trans (W.floor _)
-  have hHM : H ≤ M := by simpa only [Real.rpow_zero, mul_one] using
-    hheight (W.negativeHalfSample e m side)
-      (materialSample_mem_radialCore W.hT W.radial.1.choose_spec.2.1 _)
+  have hHM : H ≤ M := by
+    simpa only [Real.rpow_zero, mul_one] using
+      hheight (W.negativeHalfSample e m side)
+        (materialSample_mem_radialCore W.hT W.radial.1.choose_spec.2.1 _)
   have hHL : H ≤ L := hHM.trans (le_max_right _ _)
   have hQ : 1 ≤ Q := by dsimp only [Q]; linarith only [apply_nonneg (p (s + loss)) z,
     apply_nonneg (p (s + loss)) w]

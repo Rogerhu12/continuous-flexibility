@@ -101,16 +101,16 @@ theorem FlatMixedDiagonalGrowth.spatial_orders
   exact (hb t i x hx hxB w hw y hy k hk a b le_rfl).trans
     (mul_le_mul_of_nonneg_right hfactor (by positivity))
 
-private def mixedLeibnizMass (n a b : ℕ) : ℝ :=
+def mixedLeibnizMass (n a b : ℕ) : ℝ :=
   ∑ j ∈ Finset.range (b + 1), ∑ i ∈ Finset.range (a + 1),
     ∑ k ∈ Finset.range (n + 1),
       (b.choose j : ℝ) * (a.choose i : ℝ) * (n.choose k : ℝ)
 
-private theorem mixedLeibnizMass_nonneg (n a b : ℕ) : 0 ≤ mixedLeibnizMass n a b := by
+theorem mixedLeibnizMass_nonneg (n a b : ℕ) : 0 ≤ mixedLeibnizMass n a b := by
   unfold mixedLeibnizMass
   positivity
 
-private theorem flatMixed_triple_sum_bound
+theorem flatMixed_triple_sum_bound
     {ι₁ ι₂ ι₃ : Type*} [Fintype ι₁] [Fintype ι₂] [Fintype ι₃]
     (f : ι₁ → ι₂ → ι₃ → ℝ) (hf : ∀ i j k, 0 ≤ f i j k)
     (i : ι₁) (j : ι₂) (k : ι₃) :
@@ -130,7 +130,7 @@ private theorem flatMixed_triple_sum_bound
       (Finset.mem_univ i)
   exact (h₁.trans h₂).trans h₃
 
-private theorem jointMixedDiagonal_mul_le
+theorem jointMixedDiagonal_mul_le
     {f g h : E × PolarPoint → ℝ} {V₀ : Set PolarPoint}
     (J : SmoothDirections (U ×ˢ V₀) f) (K : SmoothDirections (U ×ˢ V₀) g)
     (L : SmoothDirections (U ×ˢ V₀) h)
