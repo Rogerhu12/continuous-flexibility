@@ -47,12 +47,26 @@ def n04NegativeGeometry_physicalUnitJointTower
       ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
       ContinuousLinearMap.coe_snd', smul_apply, smul_eq_mul,
       Prod.mk_add_mk, zero_add]
-  apply (J.compAffine P c (hU.prod (isOpen_Ioo.prod isOpen_univ))
-    (fun x hx => ?_)).congrOn
-  · rw [hpoint]
+  have hMaps : MapsTo (fun x => c + P x) (U ×ˢ unitStrip) (U ×ˢ Ω) := by
+    intro x hx
+    rw [hpoint]
     exact ⟨hx.1, hmap hx.2⟩
-  · intro x hx
-    exact congrArg f (hpoint x)
+  exact (J.compAffine P c (hU.prod (isOpen_Ioo.prod isOpen_univ)) hMaps).congrOn
+    (fun x _ => congrArg f (hpoint x))
+
+set_option backward.isDefEq.respectTransparency true
+
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
 
 namespace N04RealizationStart
 
@@ -161,7 +175,8 @@ def negativePhysicalAtomJointTower
     (a : Atom) (ha : negativePhysicalGeometryAtom a) :
     SmoothDirections (sectorNeighborhood G.W.S G.W.base G.W.ε G.W.ε ×ˢ unitStrip)
       (fun x : (StateDirections G.W.S × ℝ) × PolarPoint => G.atomFamily η a x.1 m x.2) := by
-  obtain ⟨j, hi⟩ := (G.neg_iff_inl η m).mp hm
+  let j := ((G.neg_iff_inl η m).mp hm).choose
+  have hi := ((G.neg_iff_inl η m).mp hm).choose_spec
   have hk : G.X.e₀ (G.negativeIndex j) = .inl (j.1, j.2) := G.X.e₀.apply_symm_apply _
   have haux : a ≠ .auxiliaryColumn := by
     intro he

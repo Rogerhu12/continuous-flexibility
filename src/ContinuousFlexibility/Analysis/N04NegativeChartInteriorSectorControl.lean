@@ -60,20 +60,20 @@ namespace N04RealizationStart
 
 variable (W : N04RealizationStart)
 
-def negativeInteriorPhysicalDomain (ρ : ℕ → ℝ) (i : ℕ × Bool) : Set PolarPoint :=
+def negativeInteriorPhysicalDomain (ρ : ℕ → Bool → ℝ) (i : ℕ × Bool) : Set PolarPoint :=
   W.negativeInwardPoint i.1 i.2 ''
-    (Icc (ρ i.1 / 2) (W.negativeOpticalWidth i.1 i.2) ×ˢ univ)
+    (Icc (ρ i.1 i.2 / 2) (W.negativeOpticalWidth i.1 i.2) ×ˢ univ)
 
-theorem negativeInteriorPhysicalDomain_subset (ρ : ℕ → ℝ) (hρ : ∀ m, 0 < ρ m)
+theorem negativeInteriorPhysicalDomain_subset (ρ : ℕ → Bool → ℝ) (hρ : ∀ m side, 0 < ρ m side)
     (i : ℕ × Bool) : W.negativeInteriorPhysicalDomain ρ i ⊆
       Ioo (W.C.left i.1) (W.C.right i.1) ×ˢ (univ : Set ℝ) := by
   rintro _ ⟨p, hp, rfl⟩
   exact ⟨W.negativeInteriorRadius_component ρ hρ i.1 i.2 hp.1, mem_univ _⟩
 
-variable (e : ℕ ≃ N04PieceIndex W.D) (ρ : ℕ → ℝ)
-  (hρ : ∀ m, 0 < ρ m ∧ ρ m ≤ W.negativeMaterialCollar m)
+variable (e : ℕ ≃ N04PieceIndex W.D) (ρ : ℕ → Bool → ℝ)
+  (hρ : ∀ m side, 0 < ρ m side ∧ ρ m side ≤ W.negativeMaterialCollar m)
   (hρb : ∃ B A : ℝ, 0 < B ∧ 0 ≤ A ∧ ∀ m side,
-    (ρ m)⁻¹ ≤ B * W.T.E0 (W.negativeHalfSample e m side) ^ A)
+    (ρ m side)⁻¹ ≤ B * W.T.E0 (W.negativeHalfSample e m side) ^ A)
 
 private def negativeInterior_originalSpeedControl
     {base loss : ℕ} {ε : ℝ}
@@ -85,9 +85,9 @@ private def negativeInterior_originalSpeedControl
       (fun i _ => W.T.E0 (W.negativeHalfSample e i.1 i.2))
       (fun _ z => minusCharacteristicSpeed (originalCoefficients W.D W.S W.C z)) := by
   refine ⟨fun i => ⟨fun z hz => ((G.regular i.1).spatial z hz).mono
-    (W.negativeInteriorPhysicalDomain_subset ρ (fun m => (hρ m).1) i),
+    (W.negativeInteriorPhysicalDomain_subset ρ (fun m side => (hρ m side).1) i),
     fun a b q hq => (G.regular i.1).parameter a b q
-      (W.negativeInteriorPhysicalDomain_subset ρ (fun m => (hρ m).1) i hq)⟩, ?_⟩
+      (W.negativeInteriorPhysicalDomain_subset ρ (fun m side => (hρ m side).1) i hq)⟩, ?_⟩
   intro K s
   obtain ⟨C, A, hC, hA, hb⟩ := W.negativeInterior_speed_power_bounds e ρ hρ hρb G K s
   refine ⟨C, A, hC, hA, ?_⟩

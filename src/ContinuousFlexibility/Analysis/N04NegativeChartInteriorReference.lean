@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N04NegativeChartInteriorSectorControl
 import ContinuousFlexibility.Analysis.ActualNegativeReferenceAiryCoordinate
+import ContinuousFlexibility.Analysis.N01ControlLengthBound
 
 /-!
 # The actual reference travel stays quantitatively positive in the interior
@@ -58,15 +59,50 @@ namespace N04RealizationStart
 
 variable {W : N04RealizationStart} {e : ℕ ≃ N04PieceIndex W.D}
 
+/-- The original component travel has a material upper bound at either
+selected half sample, uniformly before all states and derivative orders. -/
+theorem negativeTravel_material_upper (W : N04RealizationStart)
+    (e : ℕ ≃ N04PieceIndex W.D) :
+    ∃ B A : ℝ, 0 < B ∧ 0 ≤ A ∧ ∀ m side,
+      W.C.travel m ≤ B * W.T.E0 (W.negativeHalfSample e m side) ^ A := by
+  obtain ⟨K, P, hK, hP, ht⟩ := W.through03.1.1.travel_le_actualCell_length
+  obtain ⟨C, Q, hC, hQ, hrad⟩ := materialSample_radialE_power_bound W.hT W.radial.1 hP.le
+  obtain ⟨B, A, hB, hA, hhost⟩ := n04bActualTypedAtlas_negative_host_sample_E0_power
+    W.hT W.hS W.through03 W.field e Q hQ
+  let V : ℝ := 1 + |W.D.b - W.D.a|
+  have hV : 0 < V := lt_of_lt_of_le zero_lt_one (le_add_of_nonneg_right (abs_nonneg _))
+  refine ⟨K * V * C * B, A, mul_pos (mul_pos (mul_pos hK hV) hC) hB, hA,
+    fun m side => ?_⟩
+  have hends := W.through03.1.1.2.2.2.1.1 m
+  have hwidth : W.C.right m - W.C.left m ≤ V := by
+    have h := le_abs_self (W.D.b - W.D.a)
+    dsimp only [V]
+    linarith only [hends.1, hends.2.2, h]
+  have hp : 0 ≤ radialE (W.D.cellIndex (W.C.cell m)) ^ P := Real.rpow_nonneg
+    (Real.exp_pos _).le P
+  calc
+    _ ≤ K * radialE (W.D.cellIndex (W.C.cell m)) ^ P *
+        (W.C.right m - W.C.left m) := ht m (W.C.cell m) (W.host m)
+    _ ≤ K * radialE (W.D.cellIndex (W.C.cell m)) ^ P * V :=
+      mul_le_mul_of_nonneg_left hwidth (mul_nonneg hK.le hp)
+    _ = K * V * radialE (W.D.cellIndex (W.C.cell m)) ^ P := by ring
+    _ ≤ K * V * (C * W.T.E0 (W.T.sample (W.C.cell m)) ^ Q) :=
+      mul_le_mul_of_nonneg_left (hrad _) (mul_nonneg hK.le hV.le)
+    _ ≤ K * V * (C * (B * W.T.E0 (W.negativeHalfSample e m side) ^ A)) :=
+      mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left
+        (hhost (e.symm (.inl (m, side))) m side (e.apply_symm_apply _)
+          (W.C.cell m) (W.host m)) hC.le) (mul_nonneg hK.le hV.le)
+    _ = _ := by ring
+
 /-- The reciprocal of the actual reference travel is polynomial at the
 selected half sample, uniformly after any material overlap restriction. -/
 theorem NegativeOpticalFactors.interior_referenceTravel_inverse_material
-    (F : W.NegativeOpticalFactors e) (ρ : ℕ → ℝ)
-    (hρ : ∀ m, 0 < ρ m ∧ ρ m ≤ W.negativeMaterialCollar m)
+    (F : W.NegativeOpticalFactors e) (ρ : ℕ → Bool → ℝ)
+    (hρ : ∀ m side, 0 < ρ m side ∧ ρ m side ≤ W.negativeMaterialCollar m)
     (hρb : ∃ C P : ℝ, 0 < C ∧ 0 ≤ P ∧ ∀ m side,
-      (ρ m)⁻¹ ≤ C * W.T.E0 (W.negativeHalfSample e m side) ^ P) :
+      (ρ m side)⁻¹ ≤ C * W.T.E0 (W.negativeHalfSample e m side) ^ P) :
     ∃ B A : ℝ, 0 < B ∧ 0 ≤ A ∧ ∀ m side x,
-      x ∈ Icc (ρ m / 2) (W.negativeOpticalWidth m side) →
+      x ∈ Icc (ρ m side / 2) (W.negativeOpticalWidth m side) →
       let τ := n04bTravelOrientation (W.C.travel m) side
         (opticalTravel W.D.w (W.C.left m)
           (inwardComponentPoint (W.C.left m) (W.C.right m) side x))
@@ -92,10 +128,10 @@ theorem NegativeOpticalFactors.interior_referenceTravel_inverse_material
     · simpa only [iteratedDeriv_zero, ← Real.sqrt_eq_rpow,
         abs_of_nonneg (Real.sqrt_nonneg _)] using hu m side t ht 0
   have hraw := inwardIntegral_inverse_bound (F.reference_smooth m side).continuous
-    (hρ m).1 ((hρ m).2.trans (W.negativeMaterialCollar_bounds m).2.1) hx
+    (hρ m side).1 ((hρ m side).2.trans (W.negativeMaterialCollar_bounds m).2.1) hx
     (mul_pos (hCi 0) (Real.rpow_pos_of_pos hEpos _))
     (F.reference_pos m side) (fun t ht => (href t ht).1) (fun t ht => (href t ht).2)
-  have hxpos : 0 < x := (half_pos (hρ m).1).trans_le hx.1
+  have hxpos : 0 < x := (half_pos (hρ m side).1).trans_le hx.1
   have htravel := n04b_reference_orientedTravel_inwardIntegral
     W.radial.1.choose_spec.1 W.through03.1.1.2.2.2.1 m side
     (show x ∈ Icc (0 : ℝ) (W.C.right m - W.C.left m) from
@@ -116,7 +152,7 @@ theorem NegativeOpticalFactors.interior_referenceTravel_inverse_material
   calc
     _ ≤ 6 * (Ci 0 * E ^ (Ci 0)) * (Cρ * E ^ Pρ) ^ 2 :=
       mul_le_mul_of_nonneg_left
-        (pow_le_pow_left₀ (inv_nonneg.mpr (hρ m).1.le) (hbρ m side) 2) (by positivity)
+        (pow_le_pow_left₀ (inv_nonneg.mpr (hρ m side).1.le) (hbρ m side) 2) (by positivity)
     _ = (6 * Ci 0 * Cρ ^ 2) * E ^ (Ci 0 + Pρ * 2) := by
       rw [mul_pow, ← Real.rpow_mul_natCast hEpos.le, Real.rpow_add hEpos]
       norm_num only [Nat.cast_ofNat]

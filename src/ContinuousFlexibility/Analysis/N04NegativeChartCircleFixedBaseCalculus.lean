@@ -60,8 +60,16 @@ theorem n04FixedBaseSmoothFamilyOn_circleCompose_maps
       (fun i x => circleShiftedChartComposeLinear hH hT hD hγ (travel i) (f i x) (g i x)) := by
   letI : ∀ n, CompleteSpace (H.level n) :=
     fun n => (hH.2.1 n).isComplete.completeSpace_coe
-  exact (n04FixedBaseSmoothFamilyOn_circleComposition hH hT hD hγ hi travel).comp hp hIp
-    (hf.prodMk hp hg) hU isOpen_univ (fun _ _ _ => mem_univ _)
+  let outer : I → (H.Space × H.Space) → H.Space := fun i x =>
+    circleShiftedChartComposeLinear hH hT hD hγ (travel i) x.1 x.2
+  let inner : I → E → H.Space × H.Space := fun i x => (f i x, g i x)
+  have ho : N04FixedBaseSmoothFamilyOn (pairGrading H.grading H.grading) H.grading
+      univ outer := n04FixedBaseSmoothFamilyOn_circleComposition hH hT hD hγ hi travel
+  have hj : N04FixedBaseSmoothFamilyOn p (pairGrading H.grading H.grading) U inner :=
+    hf.prodMk hp hg
+  exact N04FixedBaseSmoothFamilyOn.comp (Y := fun n => H.level n) (bond := H.bond)
+    (q := pairGrading H.grading H.grading) (r := H.grading) (f := inner) (g := outer)
+    ho hp hIp hj hU isOpen_univ (fun _ _ _ => mem_univ _)
 
 theorem n04FixedBaseSmoothFamilyOn_circleInverse_maps
     (hH : IsCircleModel T γ H) (hT : IsMaterialData D T)

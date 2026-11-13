@@ -58,7 +58,8 @@ def negativeRawReferenceJointTower (m : ℕ) :
     (fun x hx => ⟨hzero, hx.2⟩)).congrOn
   intro x _
   simp only [P, ContinuousLinearMap.prod_apply, ContinuousLinearMap.zero_apply,
-    ContinuousLinearMap.coe_snd', liftSectorParameter_eq_affine, map_zero, add_zero]
+    ContinuousLinearMap.coe_snd', liftSectorParameter, Prod.fst_zero, Prod.snd_zero,
+    ZeroMemClass.coe_zero, add_zero]
 
 def negativeRawDefectJointTower (m : ℕ) :
     SmoothDirections (W.transportDomain ×ˢ W.componentDomain m)
@@ -149,6 +150,28 @@ theorem negativeTransport_slope_recurrence (m n a b : ℕ)
     (liftSectorParameter_mem_stateNeighborhood hx le_rfl)
     (W.through03.1.1.2.2.1.liftSectorParameter_sector x) m y hy.1
     (W.negativeOriginalDiscriminant_pos m hx hy.1)
+
+theorem negativeTransport_forcing_recurrence (m n a b : ℕ)
+    (z w : Parameter W.S) (hz : z ∈ W.transportDomain)
+    {p : PolarPoint} (hp : p ∈ W.componentDomain m) :
+    jointMixedDiagonal (W.negativeTransportForcingJointTower m) n a b z w p =
+      jointMixedDiagonal (W.negativeRawDefectJointTower m) n a b z w p +
+      diagonalJetProduct
+        (diagonalJetProduct
+          (fun k i j (_ : Unit) =>
+            jointMixedDiagonal (W.negativeCutoffDerivativeJointTower m) k i j z w p)
+          (fun k i j (_ : Unit) =>
+            jointMixedDiagonal (W.negativeInverseSlopeJointTower m) k i j z w p))
+        (fun k i j (_ : Unit) =>
+          jointMixedDiagonal (W.negativePulledCorrectionJointTower m) k i j z w p)
+        n a b () := by
+  apply jointMixedDiagonal_add_triple_mul
+    (W.negativeRawDefectJointTower m) (W.negativeCutoffDerivativeJointTower m)
+    (W.negativeInverseSlopeJointTower m) (W.negativePulledCorrectionJointTower m)
+    (W.negativeTransportForcingJointTower m) W.transportDomain_open
+    (W.componentDomain_open m) (W.transportDomain_convex m) _ n a b z w hz p hp
+  intro x hx q hq
+  rw [returnCorrectionVelocityLinear_eq_transportProduct]
 
 theorem negativeTransport_residual_recurrence (m n a b : ℕ)
     (z w : Parameter W.S) (hz : z ∈ W.transportDomain)

@@ -55,7 +55,7 @@ theorem n04NegativeChart_coordinatePullback_positiveJet
           ((hf z hz).comp
             ((contDiff_const.add (contDiff_const.mul contDiff_fst)).prodMk
               contDiff_snd).contDiffOn hmap) hh i j hq
-      simp only [Function.comp_apply] at hsub
+      simp only [Function.comp_def] at hsub
       rw [hsub, n07a_mixedDerivative_radialAffine]) k hx v
   have hS := smoothDirections_D_sub_constant JC JS hk hx v
   have hC := n04Realization_smoothDirections_D_const_mul J JC (c ^ i)

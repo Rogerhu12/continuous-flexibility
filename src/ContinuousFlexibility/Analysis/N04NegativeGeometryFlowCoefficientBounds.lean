@@ -82,7 +82,7 @@ private theorem field_angle_contDiff
   rw [he]
   exact (hs.fderiv_right (by simp)).clm_apply contDiff_const
 
-private theorem field_angle_jet_le
+theorem n04NegativeGeometry_field_angle_jet_le
     {F : ℝ × N04FlowPoint → ℝ} (hF : ContDiff ℝ ∞ F)
     (t : ℝ) (q : N04FlowPoint) (j : ℕ) :
     ‖iteratedFDeriv ℝ j (fun p : N04FlowPoint =>
@@ -148,7 +148,7 @@ theorem n04NegativeGeometry_flowCoefficient_weighted_prefix (Λ : ℝ) (N : ℕ)
   have houter (j : ℕ) (hjk : j ≤ k) :
       ‖iteratedFDeriv ℝ j (fun y : N04FlowPoint =>
         deriv (fun θ : ℝ => F (t, (y.1, θ))) y.2) (Ψ q)‖ ≤ A * ρ ^ j :=
-    (field_angle_jet_le hF t (Ψ q) j).trans
+    (n04NegativeGeometry_field_angle_jet_le hF t (Ψ q) j).trans
       (hprefix j (hjk.trans hk) t ht (Ψ q) hq)
   have hb := n04NegativeGeometry_weighted_composition_jet_le hΨ
     (field_angle_contDiff hF t) q k hB hρ houter hinner

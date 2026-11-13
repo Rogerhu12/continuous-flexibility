@@ -20,12 +20,12 @@ open scoped ContDiff
 
 variable (W : N04RealizationStart)
 
-theorem negativeInteriorRadius_component (ρ : ℕ → ℝ) (hρ : ∀ m, 0 < ρ m)
+theorem negativeInteriorRadius_component (ρ : ℕ → Bool → ℝ) (hρ : ∀ m side, 0 < ρ m side)
     (m : ℕ) (side : Bool) {x : ℝ}
-    (hx : x ∈ Icc (ρ m / 2) (W.negativeOpticalWidth m side)) :
+    (hx : x ∈ Icc (ρ m side / 2) (W.negativeOpticalWidth m side)) :
     inwardComponentPoint (W.C.left m) (W.C.right m) side x ∈
       Ioo (W.C.left m) (W.C.right m) := by
-  have hxpos := (half_pos (hρ m)).trans_le hx.1
+  have hxpos := (half_pos (hρ m side)).trans_le hx.1
   have hxwidth := hx.2.trans_lt (W.negativeOpticalWidth_lt_component m side)
   cases side <;> simp only [inwardComponentPoint, Bool.false_eq_true, ↓reduceIte]
     <;> constructor <;> linarith only [hxpos, hxwidth]
@@ -34,26 +34,27 @@ theorem negativeMaterialCollar_interior_component (m : ℕ) (side : Bool) {x : �
     (hx : x ∈ Icc (W.negativeMaterialCollar m / 2) (W.negativeOpticalWidth m side)) :
     inwardComponentPoint (W.C.left m) (W.C.right m) side x ∈
       Ioo (W.C.left m) (W.C.right m) :=
-  W.negativeInteriorRadius_component W.negativeMaterialCollar
-    (fun m => (W.negativeMaterialCollar_bounds m).1) m side hx
+  W.negativeInteriorRadius_component (fun m _ => W.negativeMaterialCollar m)
+    (fun m _ => (W.negativeMaterialCollar_bounds m).1) m side hx
 
-theorem negativeInteriorRadius_distance (ρ : ℕ → ℝ)
-    (hρ : ∀ m, 0 < ρ m ∧ ρ m ≤ W.negativeMaterialCollar m)
+theorem negativeInteriorRadius_distance (ρ : ℕ → Bool → ℝ)
+    (hρ : ∀ m side, 0 < ρ m side ∧ ρ m side ≤ W.negativeMaterialCollar m)
     (m : ℕ) (side : Bool) {x : ℝ}
-    (hx : x ∈ Icc (ρ m / 2) (W.negativeOpticalWidth m side)) :
+    (hx : x ∈ Icc (ρ m side / 2) (W.negativeOpticalWidth m side)) :
     (min (inwardComponentPoint (W.C.left m) (W.C.right m) side x - W.C.left m)
       (W.C.right m - inwardComponentPoint (W.C.left m) (W.C.right m) side x))⁻¹ ≤
-        2 * (ρ m)⁻¹ := by
-  have hl := (hρ m).2.trans ((W.negativeMaterialCollar_bounds m).2.2.2 false)
-  have hr := (hρ m).2.trans ((W.negativeMaterialCollar_bounds m).2.2.2 true)
-  have hmin : ρ m / 2 ≤ min
+        2 * (ρ m side)⁻¹ := by
+  have hl := (hρ m side).2.trans ((W.negativeMaterialCollar_bounds m).2.2.2 false)
+  have hr := (hρ m side).2.trans ((W.negativeMaterialCollar_bounds m).2.2.2 true)
+  have hρpos : 0 < ρ m side := (hρ m side).1
+  have hmin : ρ m side / 2 ≤ min
       (inwardComponentPoint (W.C.left m) (W.C.right m) side x - W.C.left m)
       (W.C.right m - inwardComponentPoint (W.C.left m) (W.C.right m) side x) := by
     cases side <;> simp only [negativeOpticalWidth, n04bNegativeRight, n04bNegativeLeft,
       inwardComponentPoint, Bool.false_eq_true, ↓reduceIte] at hx hl hr ⊢
-      <;> apply le_min <;> linarith only [hx.1, hx.2, hl, hr, (hρ m).1]
+      <;> apply le_min <;> linarith only [hx.1, hx.2, hl, hr, hρpos]
   simpa only [inv_div, inv_inv, div_eq_mul_inv] using
-    inv_anti₀ (half_pos (hρ m).1) hmin
+    inv_anti₀ (half_pos hρpos) hmin
 
 private theorem interior_host_parameter_weights
     (e : ℕ ≃ N04PieceIndex W.D) (A : ℝ) (hA : 0 ≤ A) :
@@ -98,12 +99,12 @@ private theorem interior_host_parameter_weights
       using hh.trans he
 
 private theorem inverse_endpoint_power_material
-    (e : ℕ ≃ N04PieceIndex W.D) (ρ : ℕ → ℝ)
-    (hρ : ∀ m, 0 < ρ m ∧ ρ m ≤ W.negativeMaterialCollar m)
+    (e : ℕ ≃ N04PieceIndex W.D) (ρ : ℕ → Bool → ℝ)
+    (hρ : ∀ m side, 0 < ρ m side ∧ ρ m side ≤ W.negativeMaterialCollar m)
     (hρb : ∃ B A : ℝ, 0 < B ∧ 0 ≤ A ∧ ∀ m side,
-      (ρ m)⁻¹ ≤ B * W.T.E0 (W.negativeHalfSample e m side) ^ A) (s : ℕ) :
+      (ρ m side)⁻¹ ≤ B * W.T.E0 (W.negativeHalfSample e m side) ^ A) (s : ℕ) :
     ∃ C P : ℝ, 1 ≤ C ∧ 0 ≤ P ∧ ∀ m side x,
-      x ∈ Icc (ρ m / 2) (W.negativeOpticalWidth m side) →
+      x ∈ Icc (ρ m side / 2) (W.negativeOpticalWidth m side) →
       ∀ a : ℕ, a ≤ s →
       ((min (inwardComponentPoint (W.C.left m) (W.C.right m) side x - W.C.left m)
         (W.C.right m - inwardComponentPoint (W.C.left m) (W.C.right m) side x))⁻¹) ^ a ≤
@@ -115,7 +116,7 @@ private theorem inverse_endpoint_power_material
     fun m side x hx a ha => ?_⟩
   let E : ℝ := W.T.E0 (W.negativeHalfSample e m side)
   have hE : 1 ≤ E := W.floor _
-  have hr := W.negativeInteriorRadius_component ρ (fun m => (hρ m).1) m side hx
+  have hr := W.negativeInteriorRadius_component ρ (fun m side => (hρ m side).1) m side hx
   have hd : 0 ≤ (min
       (inwardComponentPoint (W.C.left m) (W.C.right m) side x - W.C.left m)
       (W.C.right m - inwardComponentPoint (W.C.left m) (W.C.right m) side x))⁻¹ :=
@@ -138,15 +139,15 @@ private theorem inverse_endpoint_power_material
 reference half. Both the spatial fraction and the positive state weight
 are exactly those of the original endpoint power control. -/
 theorem negativeInterior_speed_power_bounds
-    (e : ℕ ≃ N04PieceIndex W.D) (ρ : ℕ → ℝ)
-    (hρ : ∀ m, 0 < ρ m ∧ ρ m ≤ W.negativeMaterialCollar m)
+    (e : ℕ ≃ N04PieceIndex W.D) (ρ : ℕ → Bool → ℝ)
+    (hρ : ∀ m side, 0 < ρ m side ∧ ρ m side ≤ W.negativeMaterialCollar m)
     (hρb : ∃ B A : ℝ, 0 < B ∧ 0 ≤ A ∧ ∀ m side,
-      (ρ m)⁻¹ ≤ B * W.T.E0 (W.negativeHalfSample e m side) ^ A)
+      (ρ m side)⁻¹ ≤ B * W.T.E0 (W.negativeHalfSample e m side) ^ A)
     {base loss : ℕ} {ε : ℝ}
     (G : WholeCharacteristicSpeedPowerControl W.D W.T W.S W.C base loss ε)
     (K s : ℕ) :
     ∃ C A : ℝ, 1 ≤ C ∧ 0 ≤ A ∧ ∀ m side (p : PolarPoint),
-      p.1 ∈ Icc (ρ m / 2) (W.negativeOpticalWidth m side) →
+      p.1 ∈ Icc (ρ m side / 2) (W.negativeOpticalWidth m side) →
       ∀ k : ℕ, k ≤ K → ∀ a b : ℕ, a + b ≤ s →
       ∀ J : SmoothDirections (stateNeighborhood W.S W.C base ε)
         (fun z => mixedDerivative a b
@@ -171,7 +172,7 @@ theorem negativeInterior_speed_power_bounds
   intro m side p hp k hk a b hab J z hz hlow v hv R hR hhigh hvhigh
   let q : PolarPoint := W.negativeInwardPoint m side p
   have hq : q ∈ Ioo (W.C.left m) (W.C.right m) ×ˢ (univ : Set ℝ) :=
-    ⟨W.negativeInteriorRadius_component ρ (fun m => (hρ m).1) m side hp, mem_univ _⟩
+    ⟨W.negativeInteriorRadius_component ρ (fun m side => (hρ m side).1) m side hp, mem_univ _⟩
   let d : ℝ := min (q.1 - W.C.left m) (W.C.right m - q.1)
   have hd : 0 < d := lt_min (sub_pos.mpr hq.1.1) (sub_pos.mpr hq.1.2)
   let E : ℝ := W.T.E0 (W.negativeHalfSample e m side)

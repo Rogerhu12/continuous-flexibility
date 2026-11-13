@@ -60,7 +60,7 @@ namespace NegativeOpticalFactors
 variable {W : N04RealizationStart} {e : ℕ ≃ N04PieceIndex W.D}
   (F : NegativeOpticalFactors W e)
 
-theorem fullHalfFields_root_chart
+theorem fullHalfFields_root_travel
     (hd : ContDiff ℝ ∞ d) (hc : ContDiff ℝ ∞ c)
     (hdp : ∀ y r, Function.Periodic (fun θ => d (y, (r, θ))) Real.pi)
     (hcp : ∀ y r, Function.Periodic (fun θ => c (y, (r, θ))) Real.pi)
@@ -74,9 +74,15 @@ theorem fullHalfFields_root_chart
       d (y, p) = F.fullHalfDrift z m side p ∧
       c (y, p) = F.fullHalfSpeed z m side p)
     {x : ℝ} (hx : x ∈ Ioc (0 : ℝ) R) (θ : ℝ) :
-    extendedRootEvenOddChart (W.negativeRootInverseCoordinate A z m side y) (x, θ) =
-      n04bActualNegativeChart W.hT W.hS W.through03 W.field z m side
-        (W.negativeInwardPoint m side (δ * x, θ)) := by
+    characteristicTravelChart
+      (rootCharacteristicCoordinate (W.negativeRootInverseCoordinate A z m side y) 1)
+      (rootCharacteristicCoordinate (W.negativeRootInverseCoordinate A z m side y) (-1))
+      (x, θ) =
+      (n04bTravelOrientation (W.C.travel m) side
+        (n04bActualTravelChart W.S W.C W.L z m
+          (W.negativeInwardPoint m side (δ * x, θ))).1,
+       (n04bActualTravelChart W.S W.C W.L z m
+          (W.negativeInwardPoint m side (δ * x, θ))).2) := by
   let G := W.negativeRootInverseCoordinate A z m side y
   let u : ℝ → ℝ := fun η => n04bMinusFirstIntegral (fun p => W.L.minusFlow z m p.1 p.2)
     (stateLeftChart W.S z.1 m) (W.negativeInwardPoint m side (δ * x, η))
@@ -128,6 +134,36 @@ theorem fullHalfFields_root_chart
       apply Prod.ext <;> dsimp only <;> ring
     rw [ha]
     exact rootTravel_of_signed_footpoints G u (W.C.travel m) x θ side hm href
+  exact ht
+
+theorem fullHalfFields_root_chart
+    (hd : ContDiff ℝ ∞ d) (hc : ContDiff ℝ ∞ c)
+    (hdp : ∀ y r, Function.Periodic (fun θ => d (y, (r, θ))) Real.pi)
+    (hcp : ∀ y r, Function.Periodic (fun θ => c (y, (r, θ))) Real.pi)
+    (A : NegativeChartRootFlowData d c δ) (y : P)
+    {z : AnnularState W.S × ℝ}
+    (hz : z ∈ stateNeighborhood W.S W.C W.base (W.ε / 2))
+    (hs : stateSector W.S z.1) (m : ℕ) (side : Bool)
+    {R : ℝ} (hR : 0 < R) (hδ : 0 < δ)
+    (hδc : δ * R ≤ W.negativeMaterialCollar m)
+    (hrep : ∀ p : PolarPoint, p.1 ∈ Icc (0 : ℝ) (W.negativeOpticalWidth m side) →
+      d (y, p) = F.fullHalfDrift z m side p ∧
+      c (y, p) = F.fullHalfSpeed z m side p)
+    {x : ℝ} (hx : x ∈ Ioc (0 : ℝ) R) (θ : ℝ) :
+    extendedRootEvenOddChart (W.negativeRootInverseCoordinate A z m side y) (x, θ) =
+      n04bActualNegativeChart W.hT W.hS W.through03 W.field z m side
+        (W.negativeInwardPoint m side (δ * x, θ)) := by
+  let G := W.negativeRootInverseCoordinate A z m side y
+  have ht := F.fullHalfFields_root_travel hd hc hdp hcp A y hz hs m side hR hδ hδc hrep hx θ
+  have hz' : z ∈ stateNeighborhood W.S W.C W.base W.ε :=
+    stateNeighborhood_mono W.S W.C le_rfl (by linarith [W.ε_pos]) hz
+  have hδx : 0 < δ * x := mul_pos hδ hx.1
+  have hband : δ * x ≤ W.negativeMaterialCollar m :=
+    (mul_le_mul_of_nonneg_left hx.2 hδ.le).trans hδc
+  have hhalf := (W.negativeMaterialCollar_bounds m).2.2.2 side
+  have hw := W.negativeOpticalWidth_pos m side
+  have hwidth : δ * x < W.negativeOpticalWidth m side := by
+    linarith only [hband, hhalf, hw]
   have hp : W.negativeInwardPoint m side (δ * x, θ) ∈
       Ioo (W.C.left m) (W.C.right m) ×ˢ (univ : Set ℝ) := by
     have hh := hwidth.trans (W.negativeOpticalWidth_lt_component m side)

@@ -108,6 +108,21 @@ private theorem linearVariation_markedForcing_prefix
   rw [mul_pow, ← pow_mul, pow_add]
   ring
 
+private theorem variationPullback_contDiff {f : E × PolarPoint → ℝ}
+    (hf : ContDiff ℝ ∞ f) {γ : Q → E} {α : Q → ℝ}
+    (hγ : ContDiff ℝ ∞ γ) (hα : ContDiff ℝ ∞ α) :
+    ContDiff ℝ ∞ (fun z : Q × ℝ => f (γ z.1, (z.2, α z.1))) :=
+  hf.comp ((hγ.comp contDiff_fst).prodMk
+    (contDiff_snd.prodMk (hα.comp contDiff_fst)))
+
+private theorem variationPullback_continuous_time
+    {Θ : E × PolarPoint → ℝ} (hΘ : ContDiff ℝ ∞ Θ)
+    (n : ℕ) (q : E) (v : Fin n → E) (α : ℝ) :
+    ContinuousOn (fun t => flowParameterField Θ n q v (t, α)) (Icc (0 : ℝ) 1) :=
+  ((contDiff_flowParameterField hΘ n q v).continuous.comp
+    (continuous_id.prodMk continuous_const)).continuousOn
+
+set_option diagnostics true in
 set_option backward.isDefEq.respectTransparency true in
 private theorem actualVariation_of_forcing_bound
     (n K : ℕ) (hn : 0 < n) {C₀ : ℝ} (hC₀ : 1 ≤ C₀) :
@@ -138,25 +153,16 @@ private theorem actualVariation_of_forcing_bound
     linearVariation_markedForcing_prefix (Q := Q) n K hC₀
   refine ⟨C, hC, ?_⟩
   intro G Θ hG J hΘ hinit hflow γ α hγ hα v x W M ρ Λ D hW hM hρ hamp hκj hforcing
-  let κ : Q × ℝ → ℝ := fun z => flowVariationCoefficient G Θ (γ z.1) (z.2, α z.1)
-  let F : Q × ℝ → ℝ := fun z => flowVariationForcing J hΘ n (γ z.1) v (z.2, α z.1)
-  let w : Q → ℝ → ℝ := fun y t => flowParameterField Θ n (γ y) v (t, α y)
-  have hmap : ContDiff ℝ ∞ (fun z : Q × ℝ => (γ z.1, (z.2, α z.1))) :=
-    (hγ.comp contDiff_fst).prodMk (contDiff_snd.prodMk (hα.comp contDiff_fst))
-  have hκ : ContDiff ℝ ∞ κ :=
-    (n04NegativeChart_flowCoefficient_joint_contDiff hG hΘ).comp hmap
-  have hF : ContDiff ℝ ∞ F :=
-    (n04NegativeChart_flowForcing_joint_contDiff hG J hΘ hn v).comp hmap
-  have hwjoint : ContDiff ℝ ∞ (fun z : Q × ℝ => w z.1 z.2) :=
-    (n04NegativeChart_flowParameterField_joint_contDiff hΘ n v).comp hmap
-  have hw (y : Q) : ContinuousOn (w y) (Icc (0 : ℝ) 1) :=
-    (hwjoint.continuous.comp (continuous_const.prodMk continuous_id)).continuousOn
-  have hzero (y : Q) : w y 0 = 0 :=
-    actualVariation_zero hinit hn (γ y) (α y) v
-  have hderiv (y : Q) (t : ℝ) (_ht : t ∈ Ioo (0 : ℝ) 1) :
-      HasDerivAt (w y) (κ (y, t) * w y t + F (y, t)) t :=
-    actualVariation_hasDerivAt hG J hΘ hinit hflow hn (γ y) t (α y) v
-  exact hlinear hκ hF hw hzero hderiv x D hW hM hρ hamp hκj hforcing
+  exact hlinear
+    (κ := fun z => flowVariationCoefficient G Θ (γ z.1) (z.2, α z.1))
+    (F := fun z => flowVariationForcing J hΘ n (γ z.1) v (z.2, α z.1))
+    (w := fun y t => flowParameterField Θ n (γ y) v (t, α y))
+    (variationPullback_contDiff (n04NegativeChart_flowCoefficient_joint_contDiff hG hΘ) hγ hα)
+    (variationPullback_contDiff (n04NegativeChart_flowForcing_joint_contDiff hG J hΘ hn v) hγ hα)
+    (fun y => variationPullback_continuous_time hΘ n (γ y) v (α y))
+    (fun y => actualVariation_zero hinit hn (γ y) (α y) v)
+    (fun y t _ => actualVariation_hasDerivAt hG J hΘ hinit hflow hn (γ y) t (α y) v)
+    x D hW hM hρ hamp hκj hforcing
 
 set_option backward.isDefEq.respectTransparency true in
 /-- This is the genuine state-order induction step. The forcing factors

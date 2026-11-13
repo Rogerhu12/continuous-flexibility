@@ -137,7 +137,13 @@ private theorem opticalDirection_joint_material_bounds (j : ℕ) :
           C * W.T.E0 (W.T.sample ((W.A e).cell (e.symm (.inl i)))) ^ A *
             (W.T.H (W.T.sample ((W.A e).cell (e.symm (.inl i)))) ^ (3 / 4 : ℝ)) *
               pairGrading (stateGrading W.S) realGrading 0 v := by
-  obtain ⟨C, A, hC, hA, hb⟩ := F.control_direction_material_jets j
+  refine (F.control_direction_material_jets j).elim ?_
+  intro C hCA
+  refine hCA.elim ?_
+  intro A hAdata
+  have hC := hAdata.1
+  have hA := hAdata.2.1
+  have hb := hAdata.2.2
   refine ⟨C, A, hC, hA, fun i t ht v => ?_⟩
   have hH : 0 ≤ W.T.H (W.T.sample ((W.A e).cell (e.symm (.inl i)))) ^ (3 / 4 : ℝ) :=
     Real.rpow_nonneg (W.hT.2.1 _
@@ -177,7 +183,7 @@ theorem opticalSpeed_mixed_material_bounds (n k : ℕ) :
     simpa only [Real.rpow_zero, mul_one] using
       hHeight (W.T.sample ((W.A e).cell (e.symm (.inl i))))
         (materialSample_mem_radialCore W.hT W.radial.1.choose_spec.2.1 _)
-  obtain ⟨B, A, hB, hA, hb⟩ := affineSqrt_bounds_from_inverse
+  refine (affineSqrt_bounds_from_inverse
     (pairGrading (stateGrading W.S) realGrading 0)
     (isOpen_stateNeighborhood W.S W.C W.base (W.ε / 2)) I
     (fun i => F.reference i.1 i.2) (fun i t => -F.control i.1 i.2 t)
@@ -187,13 +193,22 @@ theorem opticalSpeed_mixed_material_bounds (n k : ℕ) :
     (fun i z => F.square_affine z i.1 i.2) (fun i z => F.speed_affine z i.1 i.2)
     E H hE hH ⟨R, hR, hHR⟩ (fun i t ht z hz => F.stateSquare_pos hz i.1 i.2 ht)
     (by
-      obtain ⟨B, A, hB, hA, hb⟩ := F.stateSquare_inverse_material
-      exact ⟨B, A, hB, hA, fun i t ht z hz => hb z hz i.1 i.2 t ht⟩)
+      refine F.stateSquare_inverse_material.elim ?_
+      intro B hBA
+      refine hBA.elim ?_
+      intro A h
+      exact ⟨B, A, h.1, h.2.1, fun i t ht z hz => h.2.2 z hz i.1 i.2 t ht⟩)
     (fun j => by
-      obtain ⟨B, A, hB, hA, hb⟩ := F.stateSquare_material_jets j
-      exact ⟨B, A, hB, hA, fun i t ht z hz => hb z hz i.1 i.2 t ht⟩)
-    (F.opticalDirection_joint_material_bounds) n k
-  exact ⟨B, A, hB, hA, fun m side => hb (m, side)⟩
+      refine (F.stateSquare_material_jets j).elim ?_
+      intro B hBA
+      refine hBA.elim ?_
+      intro A h
+      exact ⟨B, A, h.1, h.2.1, fun i t ht z hz => h.2.2 z hz i.1 i.2 t ht⟩)
+    (F.opticalDirection_joint_material_bounds) n k).elim ?_
+  intro B hBA
+  refine hBA.elim ?_
+  intro A h
+  exact ⟨B, A, h.1, h.2.1, fun m side => h.2.2 (m, side)⟩
 
 end N04RealizationStart.NegativeOpticalFactors
 end ContinuousFlexibility.Analysis

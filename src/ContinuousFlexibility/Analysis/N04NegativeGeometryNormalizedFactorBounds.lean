@@ -141,9 +141,10 @@ private theorem normalizedFactorSector_of_n01
         (fun q => T.H q.1 ^ (3 / 4 : ℝ)) (fun q => T.E0 q.1)
         (fun z => normalizedSpeedFactor D S C i (liftSectorParameter S C z)) := by
   intro i
-  obtain ⟨RF, hraw⟩ := n04NegativeGeometry_normalizedFactor_regular_bounds
+  refine (n04NegativeGeometry_normalizedFactor_regular_bounds
     hS hT (normalizedFactor_partA hN) hε hε1
-    (n01PartB_mono (normalizedFactor_partB hN) hb hεold) hE hloc hχloc hI i
+    (n01PartB_mono (normalizedFactor_partB hN) hb hεold) hE hloc hχloc hI i).elim ?_
+  intro RF hraw
   exact normalizedFactor_sector_regular_bounds RF hraw
 
 namespace N04RealizationStart

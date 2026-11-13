@@ -98,7 +98,8 @@ theorem negativeFirstIntegral_reference (m : ℕ) {p : PolarPoint}
     W.negativeMinusFirstIntegral 0 m p = p.2 + opticalTravel W.D.w (W.C.left m) p.1 := by
   have hz : liftSectorParameter W.S W.C (0 : StateDirections W.S × ℝ) =
       (W.C.referenceState, (0 : ℝ)) := by
-    rw [liftSectorParameter_eq_affine, map_zero, add_zero]
+    simp only [liftSectorParameter, Prod.fst_zero, Prod.snd_zero,
+      ZeroMemClass.coe_zero, add_zero]
   simpa only [negativeMinusFirstIntegral, hz] using
     (n04b_reference_firstIntegrals W.through03.1.1.2.2.1 W.field m hp p.2).1
 

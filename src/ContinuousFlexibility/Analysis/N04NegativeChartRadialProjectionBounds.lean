@@ -1,6 +1,6 @@
 import ContinuousFlexibility.Analysis.N04RealizationFixedSpatialProduct
 import ContinuousFlexibility.Analysis.FlowJetLinearization
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
 
 /-! Multiplication by the actual normalized radius keeps the full
 positive-state bound and its original high seminorm. -/

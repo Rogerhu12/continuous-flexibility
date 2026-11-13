@@ -16,6 +16,8 @@ namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements CanonicalGeometry
 
+set_option backward.isDefEq.respectTransparency true
+
 /-- Affine pullback by the literal canonical unit point. -/
 def n04NegativeGeometry_canonicalUnitJointTower
     {X F : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
@@ -40,12 +42,12 @@ def n04NegativeGeometry_canonicalUnitJointTower
       ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
       ContinuousLinearMap.coe_snd', smul_apply, smul_eq_mul,
       Prod.mk_add_mk, zero_add]
-  apply (J.compAffine P c (hU.prod (isOpen_Ioo.prod isOpen_univ))
-    (fun x hx => ?_)).congrOn
-  · rw [hpoint]
+  have hMaps : MapsTo (fun x => c + P x) (U ×ˢ unitStrip) (U ×ˢ Ω) := by
+    intro x hx
+    rw [hpoint]
     exact ⟨hx.1, hmap hx.2⟩
-  · intro x hx
-    exact congrArg f (hpoint x)
+  exact (J.compAffine P c (hU.prod (isOpen_Ioo.prod isOpen_univ)) hMaps).congrOn
+    (fun x _ => congrArg f (hpoint x))
 
 namespace N04RealizationStart
 
@@ -90,6 +92,22 @@ def negativeInverseUnitJointTower
     (n04bActualReferenceCut W.through03) k m side hi
   exact (congrFun hf.2.2.2.2.1 (canonicalUnitPoint (W.A e) k x.2)).symm
 
+private theorem negativePulledHeight_eq_actual
+    (e : ℕ ≃ N04PieceIndex W.D) (k m : ℕ) (side : Bool)
+    (hi : e k = .inl (m, side)) (z : AnnularState W.S × ℝ) (q : PolarPoint) :
+    (W.A e).height z k ((W.A e).inverseChart z k q) =
+      n04bActualNegativeHeight W.hT W.hS W.through03 W.field z m side
+        (n04bActualNegativeInverse W.hT W.hS W.through03 W.field z m side q) := by
+  have hf := n04bTypedAtlasData_negative_fields
+    (C := W.C) (L := W.L) (z := z) e
+    (n04bActualNegativeChart W.hT W.hS W.through03 W.field)
+    (n04bActualNegativeHeight W.hT W.hS W.through03 W.field)
+    (n04bActualNegativeInverse W.hT W.hS W.through03 W.field)
+    (n04bActualReferenceCut W.through03) k m side hi
+  exact (congrFun hf.2.2.2.2.2 ((W.A e).inverseChart z k q)).trans
+    (congrArg (n04bActualNegativeHeight W.hT W.hS W.through03 W.field z m side)
+      (congrFun hf.2.2.2.2.1 q))
+
 /-- The same typed negative height pulled back by the same typed inverse. -/
 def negativePulledHeightJointTower
     (e : ℕ ≃ N04PieceIndex W.D) (k m : ℕ) (side : Bool)
@@ -99,18 +117,19 @@ def negativePulledHeightJointTower
         (W.A e).height (liftSectorParameter W.S W.C x.1) k
           ((W.A e).inverseChart (liftSectorParameter W.S W.C x.1) k
             (canonicalUnitPoint (W.A e) k x.2))) := by
-  apply (n04NegativeGeometry_canonicalUnitJointTower (W.A e) k
-    (sectorNeighborhood_isOpen W.S W.base W.ε W.ε)
-    (W.negativePulledHeightRootJointTower m side)
-    (W.negativeCanonicalUnit_mapsTo e k m side hi)).congrOn
-  intro x hx
-  have hf := n04bTypedAtlasData_negative_fields
-    (C := W.C) (L := W.L) (z := liftSectorParameter W.S W.C x.1) e
-    (n04bActualNegativeChart W.hT W.hS W.through03 W.field)
-    (n04bActualNegativeHeight W.hT W.hS W.through03 W.field)
-    (n04bActualNegativeInverse W.hT W.hS W.through03 W.field)
-    (n04bActualReferenceCut W.through03) k m side hi
-  rw [hf.2.2.2.2.1, hf.2.2.2.2.2]
+  let J : SmoothDirections (sectorNeighborhood W.S W.base W.ε W.ε ×ˢ unitStrip)
+      (fun x : (StateDirections W.S × ℝ) × PolarPoint =>
+        n04bActualNegativeHeight W.hT W.hS W.through03 W.field
+          (liftSectorParameter W.S W.C x.1) m side
+          (n04bActualNegativeInverse W.hT W.hS W.through03 W.field
+            (liftSectorParameter W.S W.C x.1) m side (canonicalUnitPoint (W.A e) k x.2))) :=
+    n04NegativeGeometry_canonicalUnitJointTower (W.A e) k
+      (sectorNeighborhood_isOpen W.S W.base W.ε W.ε)
+      (W.negativePulledHeightRootJointTower m side)
+      (W.negativeCanonicalUnit_mapsTo e k m side hi)
+  exact J.congrOn (fun x _ =>
+    (W.negativePulledHeight_eq_actual e k m side hi
+      (liftSectorParameter W.S W.C x.1) (canonicalUnitPoint (W.A e) k x.2)).symm)
 
 end N04RealizationStart
 end ContinuousFlexibility.Analysis
