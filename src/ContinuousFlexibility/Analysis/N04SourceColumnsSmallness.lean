@@ -116,7 +116,8 @@ theorem CurrentJetDataOn.sourceColumns_half_reference
   have hdiff : |f z m q - f₀ m q| ≤ M * parameterGrading S base' z := by
     have h := hv0.choose_spec.2 z hzU m trivial (⟨q, hq⟩ : unitStrip) 0 0 le_rfl
     have h' : |f z m q - f₀ m q| ≤ M * parameterGrading S loss z := by
-      simpa only [spaces_mixedDerivative_zero, Nat.zero_add] using h
+      simp only [spaces_mixedDerivative_zero, Nat.zero_add] at h
+      exact h
     exact h'.trans (mul_le_mul_of_nonneg_left hloss hM)
   have hprod : M * (A * T.E0 (T.sample (cell m)) ^ A) ≤ Q := by
     calc

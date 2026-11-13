@@ -126,8 +126,9 @@ theorem n04SourceColumns_inverseJacobian_unit
           radialPartial (atom D T S C L K z m .inverseAngleDefect) p *
             angularPartial (atom D T S C L K z m .inverseRadial) p) := by
   have hu : DifferentiableAt ℝ (canonicalUnitPoint K m) p :=
-    (differentiableAt_const.add (differentiableAt_const.mul differentiableAt_fst)).prodMk
-      differentiableAt_snd
+    ((differentiableAt_const (K.left m)).add
+      ((differentiableAt_const (K.right m - K.left m)).mul differentiableAt_fst)).prodMk
+        differentiableAt_snd
   have hcomp := planeJacobian_comp hu hinverse
   have hpair := n04SourceColumns_planeJacobian_coordinatePair hradial hangle
     (K.physicalLeft m) (K.physicalRight m - K.physicalLeft m)
@@ -151,6 +152,31 @@ theorem n04SourceColumns_inverseJacobian_unit
             angularPartial (atom D T S C L K z m .inverseRadial) p)) /
         (K.right m - K.left m) := (eq_div_iff hcanonical).mpr hscaled
     _ = _ := by ring
+
+/-- The determinant polynomial in the spatial jet notation used by the
+current-data interface. -/
+theorem n04SourceColumns_inverseJacobian_unit_mixed
+    (z : AnnularState S × ℝ) (m : ℕ)
+    (hphysical : K.physicalRight m - K.physicalLeft m ≠ 0)
+    (hcanonical : K.right m - K.left m ≠ 0)
+    (hradial : ContDiffOn ℝ ∞ (atom D T S C L K z m .inverseRadial) unitStrip)
+    (hangle : ContDiffOn ℝ ∞ (atom D T S C L K z m .inverseAngleDefect) unitStrip)
+    {p : PolarPoint} (hp : p ∈ unitStrip)
+    (hinverse : DifferentiableAt ℝ (K.inverseChart z m) (canonicalUnitPoint K m p)) :
+    planeJacobian (K.inverseChart z m) (canonicalUnitPoint K m p) =
+      ((K.physicalRight m - K.physicalLeft m) / (K.right m - K.left m)) *
+        (mixedDerivative 1 0 (atom D T S C L K z m .inverseRadial) p *
+            (1 + mixedDerivative 0 1 (atom D T S C L K z m .inverseAngleDefect) p) -
+          mixedDerivative 1 0 (atom D T S C L K z m .inverseAngleDefect) p *
+            mixedDerivative 0 1 (atom D T S C L K z m .inverseRadial) p) := by
+  have hU : IsOpen unitStrip := isOpen_Ioo.prod isOpen_univ
+  have hr := (hradial.contDiffAt (hU.mem_nhds hp)).differentiableAt (by simp)
+  have ha := (hangle.contDiffAt (hU.mem_nhds hp)).differentiableAt (by simp)
+  rw [n04SourceColumns_inverseJacobian_unit z m hphysical hcanonical p hinverse hr ha,
+    radialPartial_eq_mixedDerivative_on hU hradial hp,
+    angularPartial_eq_mixedDerivative_on hU hangle hp,
+    radialPartial_eq_mixedDerivative_on hU hangle hp,
+    angularPartial_eq_mixedDerivative_on hU hradial hp]
 
 /-- A genuine chart inverse gives the source factor as the product of
 the pulled height and the absolute inverse-chart determinant. -/
