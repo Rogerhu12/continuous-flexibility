@@ -222,10 +222,13 @@ theorem n04NegativeInverse_pureJoint_of_mixed
             (v 0).2.2 * (J.fixedLast ea).D n (x, q) tail := by
         have hdir : v 0 = (v 0).2.1 • er + (v 0).2.2 • ea := by
           apply Prod.ext
-          · simpa only [er, ea, Prod.fst_add, Prod.fst_smul, smul_zero, add_zero] using hz
-          · apply Prod.ext <;>
-              simp only [er, ea, Prod.snd_add, Prod.snd_smul, Prod.fst_add,
-                Prod.fst_smul, smul_eq_mul, mul_one, mul_zero, add_zero, zero_add]
+          · change (v 0).1 = (v 0).2.1 • (0 : E) + (v 0).2.2 • (0 : E)
+            simpa only [smul_zero, add_zero] using hz
+          · apply Prod.ext
+            · change (v 0).2.1 = (v 0).2.1 * 1 + (v 0).2.2 * 0
+              rw [mul_one, mul_zero, add_zero]
+            · change (v 0).2.2 = (v 0).2.1 * 0 + (v 0).2.2 * 1
+              rw [mul_zero, mul_one, zero_add]
         calc
           _ = L (v 0) := by
             dsimp only [L]

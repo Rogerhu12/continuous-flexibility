@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadNegativeSplit
+import ContinuousFlexibility.Analysis.N04NegativeInverseForwardClosure
 
 /-!
 # N04Coordinates-Realization, negative geometry: inverse chart
@@ -17,6 +17,16 @@ namespace ContinuousFlexibility.Blueprint
 open ContinuousFlexibility.Analysis
 
 theorem N04RealizationNegativeInverse : N04RealizationNegativeInverseObligation := by
-  sorry
+  intro G b ε hadm hchart hheight
+  obtain ⟨low, radius, hb, hadm', hradius, hsmall, hforward⟩ :=
+    G.negativeInverse_forwardPrefixes hadm (hchart 0) (hheight 0)
+  obtain ⟨hpoint, hheight⟩ :=
+    G.negativeInverse_jointPrefixes_of_forward hadm' hsmall hforward
+  exact ⟨low, radius, hb, hadm'.2.1, hradius,
+    G.negativeInverse_collect_joint hadm' hsmall hpoint hheight⟩
 
 end ContinuousFlexibility.Blueprint
+
+/-- info: 'ContinuousFlexibility.Blueprint.N04RealizationNegativeInverse' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms ContinuousFlexibility.Blueprint.N04RealizationNegativeInverse

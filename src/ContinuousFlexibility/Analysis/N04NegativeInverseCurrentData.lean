@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N04NegativeInverseCurrentTowers
 import ContinuousFlexibility.Analysis.N04SourceColumnsPrefix
 import ContinuousFlexibility.Analysis.N04NegativeInversePrefixPower
+import ContinuousFlexibility.Analysis.SectorParameterGeometry
 
 /-! Finite prefixes of selected current jets with one fixed low order. -/
 
@@ -69,23 +70,31 @@ theorem CurrentJetDataOn.negativeInverse_prefix_power
     exact ⟨hs.choose, hs.choose_spec.1,
       fun m q hq i j hij z hz v => hs.choose_spec.2 m.val m.property q hq i j hij
         ((RF m).parameter i j q hq) z hz v⟩
-  obtain ⟨b, hbase, hprefix⟩ := n04SourceColumns_prefix_power (parameterGrading S)
-    (tamePairGrading_monotone (sectorGrading_monotone S) (fun _ _ _ => le_rfl))
+  let data := n04SourceColumns_prefix_power (X := Parameter S) (I := I)
+    (U := sectorNeighborhood S base ε ε) (Ω := unitStrip) (parameterGrading S)
+    (sectorPairGrading_monotone S)
     hI base L (fun m : I => T.E0 (T.sample (cell m.val)))
     (fun k m => parameterHeightWeight (T.H (T.sample (cell m.val)) ^ (3 / 4 : ℝ)) k)
     (fun m => hE m.val)
     (fun k m => parameterHeightWeight_nonneg (Real.rpow_nonneg (hH m.val) _) k)
     (fun m z => f z m.val) RF hb
+  let b := data.choose
+  have hbase : base ≤ b := data.choose_spec.1
+  let hprefix := data.choose_spec.2
   refine ⟨b, hbase, fun K => ?_⟩
-  obtain ⟨shift, hshift⟩ := hprefix K
+  let shifted := hprefix K
+  let shift := shifted.choose
+  let hshift := shifted.choose_spec
   refine ⟨shift, fun s => ?_⟩
-  obtain ⟨B, hB, hbound⟩ := hshift s
-  refine ⟨B, hB, ?_⟩
+  let bound := hshift s
+  let B := bound.choose
+  have hbound := bound.choose_spec.2
+  refine ⟨B, bound.choose_spec.1, ?_⟩
   intro k hk m hm q hq i j hij J z hz hlow v hv R hR hzR hvR
   have he := congrArg (fun A : (Parameter S) [×k]→L[ℝ] ℝ => A v)
     (J.unique ((RF ⟨m, hm⟩).parameter i j q hq) k z hz)
-  rw [he]
-  exact hbound k hk ⟨m, hm⟩ q hq i j hij z hz hlow v hv R hR hzR hvR
+  exact (congrArg abs he).trans_le
+    (hbound k hk ⟨m, hm⟩ q hq i j hij z hz hlow v hv R hR hzR hvR)
 
 /-- The selected current prefix with the exact inverse-recursion degree.
 The base is fixed once; each positive joint order saves one spatial derivative. -/
@@ -128,23 +137,31 @@ theorem CurrentJetDataOn.negativeInverse_sharpPrefix_power
     exact ⟨hs.choose, hs.choose_spec.1,
       fun m q hq i j hij z hz v => hs.choose_spec.2 m.val m.property q hq i j hij
         ((RF m).parameter i j q hq) z hz v⟩
-  obtain ⟨b, hbase, hprefix⟩ := n04NegativeInverse_scalar_prefix_power (parameterGrading S)
-    (tamePairGrading_monotone (sectorGrading_monotone S) (fun _ _ _ => le_rfl))
+  let data := n04NegativeInverse_scalar_prefix_power (X := Parameter S) (I := I)
+    (U := sectorNeighborhood S base ε ε) (Ω := unitStrip) (parameterGrading S)
+    (sectorPairGrading_monotone S)
     hI base L (fun m : I => T.E0 (T.sample (cell m.val)))
     (fun k m => parameterHeightWeight (T.H (T.sample (cell m.val)) ^ (3 / 4 : ℝ)) k)
     (fun m => hE m.val)
     (fun k m => parameterHeightWeight_nonneg (Real.rpow_nonneg (hH m.val) _) k)
     (fun m z => f z m.val) RF hb
+  let b := data.choose
+  have hbase : base ≤ b := data.choose_spec.1
+  let hprefix := data.choose_spec.2
   refine ⟨b, hbase, fun K => ?_⟩
-  obtain ⟨shift, hshiftOne, hshift⟩ := hprefix K
-  refine ⟨shift, hshiftOne, fun s => ?_⟩
-  obtain ⟨B, hB, hbound⟩ := hshift s
-  refine ⟨B, hB, ?_⟩
+  let shifted := hprefix K
+  let shift := shifted.choose
+  let hshift := shifted.choose_spec.2
+  refine ⟨shift, shifted.choose_spec.1, fun s => ?_⟩
+  let bound := hshift s
+  let B := bound.choose
+  have hbound := bound.choose_spec.2
+  refine ⟨B, bound.choose_spec.1, ?_⟩
   intro k hk m hm q hq i j hij J z hz hlow v hv R hR hzR hvR
   have he := congrArg (fun A : (Parameter S) [×k]→L[ℝ] ℝ => A v)
     (J.unique ((RF ⟨m, hm⟩).parameter i j q hq) k z hz)
-  rw [he]
-  exact hbound k hk ⟨m, hm⟩ q hq i j hij z hz hlow v hv R hR hzR hvR
+  exact (congrArg abs he).trans_le
+    (hbound k hk ⟨m, hm⟩ q hq i j hij z hz hlow v hv R hR hzR hvR)
 
 end ContinuousFlexibility.Analysis
 
