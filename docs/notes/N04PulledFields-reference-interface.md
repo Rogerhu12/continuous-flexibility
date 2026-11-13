@@ -313,3 +313,13 @@ The proposed implication restores information already present in
 `N04RealizationCurrentObligation`; it does not add an unproved premise to
 the final geometric theorem. The full proof and axiom audit would still
 be required after the lead repairs the split.
+
+The independent module
+[N04PulledFieldsReferenceSplit.lean](../../src/ContinuousFlexibility/Analysis/N04PulledFieldsReferenceSplit.lean)
+defines these proposed interfaces in its own namespace and proves their
+conditional assembly into the exact unchanged parent. It is submitted to CI
+without applying the patch to any frozen definition. This checks the proposed
+information flow; it does not prove any of the input obligations. In
+particular, it does not resolve separate questions about unrestricted
+normalization buffers or the unguarded all-piece tower in a predicate-restricted
+`CurrentJetDataOn`.

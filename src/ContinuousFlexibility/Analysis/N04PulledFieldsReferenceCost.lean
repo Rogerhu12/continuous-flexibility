@@ -84,7 +84,7 @@ theorem n04PulledFields_currentData_rawSpatial
         |mixedDerivative i j (fun y => f z m y - f₀ m y) q.val +
           mixedDerivative i j (f₀ m) q.val| := by rw [hsub, sub_add_cancel]
     _ ≤ |mixedDerivative i j (fun y => f z m y - f₀ m y) q.val| +
-        |mixedDerivative i j (f₀ m) q.val| := abs_add _ _
+        |mixedDerivative i j (f₀ m) q.val| := abs_add_le _ _
     _ ≤ B * T.E0 (T.sample (cell m)) ^ B *
           T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) *
             parameterGrading S (s + hv.choose) z +

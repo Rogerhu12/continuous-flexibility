@@ -15,6 +15,8 @@ namespace ContinuousFlexibility.Analysis
 open ContinuousFlexibility.Statements ContinuousFlexibility.Radial
 open scoped ContDiff
 
+set_option backward.isDefEq.respectTransparency false
+
 /-- The mixed derivative is independent of the pre-existing height increment.
 Both derivatives are derivatives of the actual coefficient function. -/
 theorem n04PulledFields_hasDerivAt_radialCoefficient_mixedHeight

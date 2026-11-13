@@ -18,6 +18,8 @@ namespace ContinuousFlexibility.Analysis
 open ContinuousFlexibility.Statements ContinuousFlexibility.Radial
 open scoped ContDiff
 
+set_option backward.isDefEq.respectTransparency false
+
 /-- The actual first height variation of the radial principal coefficient.
 The reference profile and the reference primitive are retained. -/
 theorem n04PulledFields_hasDerivAt_radialCoefficient
@@ -77,7 +79,8 @@ theorem n04PulledFields_radialCoefficientResponse_hasDerivAt
     HasDerivAt (fun s => (1 + 3 * w s ^ 2) * deriv f s)
       (1 + 3 * w r ^ 2) r := by
   have hd := ((hw.hasDerivAt.pow 2).const_mul 3).const_add 1
-  simpa only [hf0, mul_zero, mul_one, zero_add] using hd.mul hf
+  simpa only [Pi.mul_apply, Pi.pow_apply, hf0, mul_zero, mul_one, zero_add]
+    using hd.mul hf
 
 /-- A fixed coordinate change multiplies this nonzero response by its
 inverse slope.  A bound for current-minus-reference coordinate jets
