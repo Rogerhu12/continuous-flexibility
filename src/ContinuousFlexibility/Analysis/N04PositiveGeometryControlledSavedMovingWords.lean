@@ -91,7 +91,7 @@ theorem n04PositiveGeometry_movingPoint_unit_saved_word_bound
   have hb := hbound U W (L ∘ f) g (smoothDirections_postcompCLM JF L) JG
     (smoothDirections_postcompCLM JO L) x hx hfx p q R hR M H t hM hH hHM ht
     K C hC houter' hinner hn w hw v hpure hv
-  apply (mul_le_mul_left (zero_lt_one.trans_le ht)).mp
+  apply (mul_le_mul_iff_right₀ (zero_lt_one.trans_le ht)).mp
   calc
     t * ‖JO.D n x v‖ = ‖(smoothDirections_postcompCLM JO L).D n x v‖ := by
       rw [smoothDirections_postcompCLM_D_apply]

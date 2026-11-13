@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledDiscKernel
 import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightFormula
 import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsSpatialInputs
+import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
 
 /-!
 # Genuine joint towers of the physical discriminant power traces

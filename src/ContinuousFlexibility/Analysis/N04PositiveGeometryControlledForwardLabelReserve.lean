@@ -59,7 +59,7 @@ theorem n04PositiveGeometry_rootForwardDerivative_fixedBase_reserve_of_flow
   have hRH : 0 < RH := heightData.choose_spec.1
   have hheight := heightData.choose_spec.2
   have hHbound (m : ℕ) : T.H (T.sample m) ^ (3 / 4 : ℝ) ≤ RH := by
-    simpa only [Real.rpow_zero, mul_one] using
+    simpa only [RH, Real.rpow_zero, mul_one] using
       hheight _ (materialSample_mem_interval hN.1.1 hT m)
   exact n04PositiveGeometry_labelSlope_prefix_of_defect
     (pairGrading (sectorGrading S) realGrading) (sectorNeighborhood S base ε ε)

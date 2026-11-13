@@ -21,8 +21,15 @@ theorem positiveGeometry_data_auxiliary
     G.GeometryData η (G.Pos η) b ε := by
   refine ⟨?_, h.2⟩
   intro a ha
-  cases a <;> first
-    | exact False.elim ha
-    | exact h.1 _ trivial
+  cases a
+  case chartRadial => exact h.1 .chartRadial trivial
+  case chartAngleDefect => exact h.1 .chartAngleDefect trivial
+  case inverseRadial => exact h.1 .inverseRadial trivial
+  case inverseAngleDefect => exact h.1 .inverseAngleDefect trivial
+  case height => exact h.1 .height trivial
+  case heightInverse => exact h.1 .heightInverse trivial
+  case jacobian => exact h.1 .jacobian trivial
+  case jacobianInverse => exact h.1 .jacobianInverse trivial
+  all_goals exact False.elim ha
 
 end ContinuousFlexibility.Analysis.N04RealizationGauge
