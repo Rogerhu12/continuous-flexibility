@@ -143,10 +143,10 @@ theorem negativeInverse_forwardPrefixes
   obtain ⟨L, hL, hlength⟩ := G.negativeInverse_length_values
   refine ⟨low, ε', hb.trans hbase, hadm', hε'.trans hradiusε, hhalf, ?_⟩
   intro K
-  let prefix := hprefix K
-  let shift := prefix.choose
-  have hshift : 1 ≤ shift := prefix.choose_spec.1
-  have horder := prefix.choose_spec.2
+  let prefixData := hprefix K
+  let shift := prefixData.choose
+  have hshift : 1 ≤ shift := prefixData.choose_spec.1
+  have horder := prefixData.choose_spec.2
   refine ⟨shift, hshift, fun N => ?_⟩
   let order := horder N
   let C := order.choose

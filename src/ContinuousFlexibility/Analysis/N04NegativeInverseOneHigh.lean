@@ -49,6 +49,28 @@ theorem n04NegativeInverse_fractional_oneHigh
   simpa only [coe_normSeminorm, Real.norm_eq_abs, multilinearTameSize,
     oneHighVariationWeight] using hn v
 
+/-- Reorder the finite loss while the grading and the multilinear map
+are abstract. This prevents rewriting from unfolding a concrete state
+grading or a supplied mixed tower. -/
+theorem n04NegativeInverse_fractional_prefix_oneHigh
+    (p : ℕ → Seminorm ℝ E) (base shift s a b : ℕ) (x : E)
+    {k : ℕ} (A : E [×k]→L[ℝ] ℝ) {M : ℝ} (hM : 0 ≤ M) (hab : a + b ≤ s)
+    (hraw : ∀ v : Fin k → E, (∀ i, p base (v i) ≤ 1) →
+      ∀ R : ℝ, 1 ≤ R → p (base + s + shift * k + 1) x ≤ R →
+        (∀ i, p (base + s + shift * k + 1) (v i) ≤ R) →
+        |A v| ≤ M * R ^ (((a + b + shift * k : ℕ) : ℝ) /
+          (((s + shift * k : ℕ) : ℝ) + 1)))
+    (v : Fin k → E) :
+    |A v| ≤ M * oneHighVariationWeight p base (s + (base + shift * k + 1)) x v := by
+  have hα : ((a + b + shift * k : ℕ) : ℝ) /
+      (((s + shift * k : ℕ) : ℝ) + 1) ≤ 1 :=
+    spatialOrder_fraction_le_one (Nat.add_le_add_right hab (shift * k))
+  have hn := n04NegativeInverse_fractional_oneHigh p base
+    (base + s + shift * k + 1) x A hM hα hraw v
+  have horder : base + s + shift * k + 1 = s + (base + shift * k + 1) := by omega
+  rw [horder] at hn
+  exact hn
+
 attribute [local instance]
   n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
   n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
@@ -88,26 +110,27 @@ theorem CurrentJetDataOn.negativeInverse_of_positive_prefixes
             R ^ (((i + j + shift * k : ℕ) : ℝ) /
               (((s + shift * k : ℕ) : ℝ) + 1))) :
     CurrentJetDataOn S T cell P base ε f f₀ := by
-  apply CurrentJetDataOn.of_positive_towers hε hE hH RF hperiod h₀ hzero hlow
+  apply CurrentJetDataOn.of_positive_towers (S := S) (T := T) (cell := cell)
+    (P := P) (base := base) (ε := ε) (f := f) (f₀ := f₀)
+    hε hE hH RF hperiod h₀ hzero hlow
   intro k hk
-  obtain ⟨shift, hshift⟩ := hraw k hk
+  let orderData := hraw k hk
+  let shift : ℕ := orderData.choose
+  let hshift := orderData.choose_spec
   refine ⟨base + shift * k + 1, fun s => ?_⟩
-  obtain ⟨B, hB, hb⟩ := hshift s
+  let boundData := hshift s
+  let B : ℝ := boundData.choose
+  have hB : 0 < B := boundData.choose_spec.1
+  have hb := boundData.choose_spec.2
   refine ⟨B, hB, ?_⟩
   intro m hm q hq i j hij z hz v
   have hM : 0 ≤ B * T.E0 (T.sample (cell m)) ^ B *
       T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) :=
     mul_nonneg (mul_nonneg hB.le (Real.rpow_nonneg (zero_le_one.trans (hE m)) _))
       (Real.rpow_nonneg (hH m) _)
-  have hα : ((i + j + shift * k : ℕ) : ℝ) /
-      (((s + shift * k : ℕ) : ℝ) + 1) ≤ 1 :=
-    spatialOrder_fraction_le_one (Nat.add_le_add_right hij (shift * k))
-  have hn := n04NegativeInverse_fractional_oneHigh (parameterGrading S) base
-    (base + s + shift * k + 1) z (((RF m hm).parameter i j q hq).D k z) hM hα
+  exact n04NegativeInverse_fractional_prefix_oneHigh (parameterGrading S) base
+    shift s i j z (((RF m hm).parameter i j q hq).D k z) hM hij
     (hb m hm q hq i j hij z hz) v
-  have horder : base + s + shift * k + 1 = s + (base + shift * k + 1) := by omega
-  rw [horder] at hn
-  exact hn
 
 end ContinuousFlexibility.Analysis
 

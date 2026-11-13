@@ -18,12 +18,15 @@ open ContinuousFlexibility.Analysis
 
 theorem N04RealizationNegativeInverse : N04RealizationNegativeInverseObligation := by
   intro G b ε hadm hchart hheight
-  obtain ⟨low, radius, hb, hadm', hradius, hsmall, hforward⟩ :=
-    G.negativeInverse_forwardPrefixes hadm (hchart 0) (hheight 0)
-  obtain ⟨hpoint, hheight⟩ :=
-    G.negativeInverse_jointPrefixes_of_forward hadm' hsmall hforward
-  exact ⟨low, radius, hb, hadm'.2.1, hradius,
-    G.negativeInverse_collect_joint hadm' hsmall hpoint hheight⟩
+  let data := G.negativeInverse_forwardPrefixes hadm (hchart 0) (hheight 0)
+  let low : ℕ := data.choose
+  let radius : ℝ := data.choose_spec.choose
+  have hb : b ≤ low := data.choose_spec.choose_spec.1
+  let hadm' : G.Admissible low radius := data.choose_spec.choose_spec.2.choose
+  let spec := data.choose_spec.choose_spec.2.choose_spec
+  have estimates := G.negativeInverse_jointPrefixes_of_forward hadm' spec.2.1 spec.2.2
+  exact ⟨low, radius, hb, hadm'.2.1, spec.1,
+    G.negativeInverse_collect_joint hadm' spec.2.1 estimates.1 estimates.2⟩
 
 end ContinuousFlexibility.Blueprint
 
