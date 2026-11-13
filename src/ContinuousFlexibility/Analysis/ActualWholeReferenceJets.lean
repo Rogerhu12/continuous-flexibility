@@ -92,10 +92,16 @@ theorem n04Coordinates_actual_whole_referenceJets_with_auxiliary
           ∀ k z v, J.D k z v = 0) ∧
         ∀ v : Atom, v ≠ .auxiliaryColumn → ∀ z m,
           atom Γ.reference U S' C' L' V' z m v = atom Γ.reference U S C L V z m v := by
-  obtain ⟨Y, H, hfamily, hother⟩ :=
+  have hprod :=
     n04Coordinates_actual_whole_reference_nonAuxiliaryJets
       P hSelected hband hq hΓ hw hcoordinates hT hS hN hfield e₀
       hE0 hκ hhost hoptical cell hcell src
+  let Y : N04PositiveComponent Γ.reference.a Γ.reference.b (deriv Γ.reference.w) → ℝ → ℝ :=
+    hprod.choose
+  let H : N04PositiveComponent Γ.reference.a Γ.reference.b (deriv Γ.reference.w) → ℝ → ℝ :=
+    hprod.choose_spec.choose
+  have hfamily := hprod.choose_spec.choose_spec.1
+  have hother := hprod.choose_spec.choose_spec.2
   refine ⟨Y, H, hfamily, ?_⟩
   intro e τ σ Q F buffer href
   let A := n04bActualTypedAtlas hT hS hN hfield e₀
@@ -106,9 +112,37 @@ theorem n04Coordinates_actual_whole_referenceJets_with_auxiliary
   dsimp only
   intro hA hR
   let U := enlargedMaterialData T
-  obtain ⟨i, l, u, η, hlu, hinterval, hU, hS', hN', hA', hR', hgauge, hQ,
-    hcompact, hsupport, hinside, hauxRegular, hauxBound, hauxRef, hauxZero, hauxJ, _⟩ :=
+  have hpackage :=
     exists_wholeReferenceGauge_auxiliary_package hT hS hN A e cell ψ χ h₀ τ σ Q buffer hA hR
+  let i : N04PositiveComponent Γ.reference.a Γ.reference.b (deriv Γ.reference.w) :=
+    hpackage.choose
+  let l : ℝ := hpackage.choose_spec.choose
+  let u : ℝ := hpackage.choose_spec.choose_spec.choose
+  let η : (S.height (3 / 4 : ℝ)).Space :=
+    hpackage.choose_spec.choose_spec.choose_spec.choose
+  have hprops := hpackage.choose_spec.choose_spec.choose_spec.choose_spec
+  have hlu := hprops.1
+  have hinterval := hprops.2.1
+  have hU := hprops.2.2.1
+  have hspaces := hprops.2.2.2
+  have hS' := hspaces.1
+  have hN' := hspaces.2.1
+  have hA' := hspaces.2.2.1
+  have hgeometry := hspaces.2.2.2
+  have hR' := hgeometry.1
+  have hgauge := hgeometry.2.1
+  have hQ := hgeometry.2.2.1
+  have hsupportData := hgeometry.2.2.2
+  have hcompact := hsupportData.1
+  have hsupport := hsupportData.2.1
+  have hinside := hsupportData.2.2.1
+  have hjetData := hsupportData.2.2.2
+  have hauxRegular := hjetData.1
+  have hauxBound := hjetData.2.1
+  have hauxRef := hjetData.2.2.1
+  have hdifferenceData := hjetData.2.2.2
+  have hauxZero := hdifferenceData.1
+  have hauxJ := hdifferenceData.2.1
   let S' := physicalSpacesReplaceAuxiliaryColumn S η
   let C' := geometryReplaceAuxiliaryColumn C η
   let R' := returnReplaceAuxiliaryColumn R η
@@ -119,7 +153,8 @@ theorem n04Coordinates_actual_whole_referenceJets_with_auxiliary
     canonicalAtom_replaceAuxiliaryColumn_of_ne Γ.reference U S C L V η z m v hv
   have hreference : ReferenceJets Γ.reference U S' C' L' V' := by
     refine ⟨?_, ?_⟩
-    · obtain ⟨B0, _, hother0⟩ := (hother e τ σ Q buffer.region href).2 0
+    · have hotherAtZero := (hother e τ σ Q buffer.region href).2 0
+      have hother0 := hotherAtZero.choose_spec.2
       intro m v
       by_cases hv : v = .auxiliaryColumn
       · subst v
@@ -127,8 +162,14 @@ theorem n04Coordinates_actual_whole_referenceJets_with_auxiliary
       · rw [hsame v hv (C.referenceState, 0) m]
         exact ⟨(hother0 m v hv).1, (hother0 m v hv).2.1⟩
     · intro s
-      obtain ⟨B1, hB1, hrest⟩ := (hother e τ σ Q buffer.region href).2 s
-      obtain ⟨B2, hB2, haux⟩ := hauxBound s
+      have hotherAtOrder := (hother e τ σ Q buffer.region href).2 s
+      have hauxAtOrder := hauxBound s
+      let B1 : ℝ := hotherAtOrder.choose
+      let B2 : ℝ := hauxAtOrder.choose
+      have hB1 : 0 < B1 := hotherAtOrder.choose_spec.1
+      have hB2 : 0 < B2 := hauxAtOrder.choose_spec.1
+      have hrest := hotherAtOrder.choose_spec.2
+      have haux := hauxAtOrder.choose_spec.2
       let B : ℝ := max B1 B2
       have hB : 0 < B := hB1.trans_le (le_max_left _ _)
       refine ⟨B, hB, ?_⟩
