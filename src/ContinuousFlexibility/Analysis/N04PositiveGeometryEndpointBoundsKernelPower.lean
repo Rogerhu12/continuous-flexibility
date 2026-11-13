@@ -155,14 +155,26 @@ theorem n04PositiveGeometry_rootKernelTerm_finite_power
     rw [← Real.rpow_mul_natCast (zero_le_one.trans hR)]
     congr 1
     ring
-  have hpoint := hcompact B hBN z hzlow r hr θ n hn c w
-  have hden := n04PositiveGeometry_rootSpatialInput_denominators hT hS hN hr hroot c w
-    (show (z, θ) ∈ sectorNeighborhood S base ε ε ×ˢ univ from ⟨hz, mem_univ _⟩)
+  let v0 : N04RootRadialPacket c.length :=
+    n04PositiveGeometry_rootSpatialInput (D := D) (C := C) c w r (z, θ)
+  have hzθ : (z, θ) ∈ sectorNeighborhood S base ε ε ×ˢ (univ : Set ℝ) :=
+    ⟨hz, mem_univ θ⟩
+  have hpoint : ‖v0‖ ≤ M0 := hcompact B hBN z hzlow r hr θ n hn c w
+  have hden : (7 / 8 : ℝ) ≤ n06RootNormalizedQ (fun ij => v0 (0, ij)) ∧
+      (1 / 2 : ℝ) ≤ n06RootNormalizedDiscriminant (fun ij => v0 (0, ij)) :=
+    n04PositiveGeometry_rootSpatialInput_denominators hT hS hN hr hroot c w
+      (z := (z, θ)) hzθ
+  have hv0 : v0 ∈ n04PositiveGeometry_rootRadialKernelDomain c.length :=
+    ⟨lt_of_lt_of_le (by norm_num : (0 : ℝ) < 7 / 8) hden.1,
+      lt_of_lt_of_le (by norm_num : (0 : ℝ) < 1 / 2) hden.2⟩
   let j : Fin (N + 1) := ⟨c.length, by have := c.length_le; omega⟩
   have houter' (a : ℕ) (ha : a ≤ b + k) :
       ‖iteratedFDeriv ℝ a g (fun ij => f ij (z, θ))‖ ≤ CK := by
-    apply rootKernel_projection_bound c.length a π hπ _ (hmap ⟨hz, mem_univ _⟩)
-    exact (houter j a (by omega) _ hpoint hden.1 hden.2).trans (hCoCK j)
+    have ha' : a ≤ s + K := ha.trans (Nat.add_le_add hbs hk)
+    have hraw : ‖iteratedFDeriv ℝ a (n04PositiveGeometry_rootRadialKernel c.length) v0‖ ≤
+        Co j := houter j a ha' v0 hpoint hden.1 hden.2
+    change ‖iteratedFDeriv ℝ a (π ∘ n04PositiveGeometry_rootRadialKernel c.length) v0‖ ≤ CK
+    exact rootKernel_projection_bound c.length a π hπ v0 hv0 (hraw.trans (hCoCK j))
   let P : (StateDirections S × ℝ) → Prop := fun y => p B y ≤ 1 ∧ p (s + inputLoss) y ≤ R
   have hzero : P 0 := by
     constructor
