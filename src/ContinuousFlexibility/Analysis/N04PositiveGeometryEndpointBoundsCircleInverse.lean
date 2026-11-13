@@ -22,7 +22,7 @@ namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements
 
-private theorem endpointBounds_compLinear_apply
+theorem n04PositiveGeometry_endpointBounds_compLinear_apply
     {E F G : Type*}
     [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
     [TopologicalSpace F] [AddCommGroup F] [Module ℝ F] [IsTopologicalAddGroup F]
@@ -98,7 +98,7 @@ theorem n04PositiveGeometry_endpointBounds_inverseLinear_oneHigh
     hLP n s loss B x v
   have hjet : J.D n x v = JP.D n (LP x) (fun i => LP (v i)) := by
     exact (congrArg (fun A => A v) (J.unique KJ n x hx)).trans
-      (endpointBounds_compLinear_apply JP LP hU hmap n x v)
+      (n04PositiveGeometry_endpointBounds_compLinear_apply JP LP hU hmap n x v)
   calc
     _ = M.grading s (JP.D n (LP x) (fun i => LP (v i))) := congrArg (M.grading s) hjet
     _ ≤ C * tameJetSize (pairGrading M.grading M.grading) n s loss B

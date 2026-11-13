@@ -63,8 +63,13 @@ theorem n04PositiveGeometry_scalarInverse_contDiffOn
   let H : (P × ℝ) × ℝ → ℝ := fun z => F (z.1.1, z.2) - z.1.2
   have hFq : ContDiffAt ℝ ∞ F (q.1, G q) :=
     hF.contDiffAt ((hV.prod isOpen_univ).mem_nhds ⟨hq.1, mem_univ _⟩)
+  have hprojection : ContDiffAt ℝ ∞
+      (fun z : (P × ℝ) × ℝ => (z.1.1, z.2)) (q, G q) :=
+    contDiffAt_fst.fst.prodMk contDiffAt_snd
+  have hvalue : ContDiffAt ℝ ∞ (fun z : (P × ℝ) × ℝ => z.1.2) (q, G q) :=
+    contDiffAt_fst.snd
   have hc : ContDiffAt ℝ ∞ H (q, G q) :=
-    (hFq.comp _ (contDiffAt_fst.fst.prodMk contDiffAt_snd)).sub contDiffAt_fst.snd
+    (hFq.comp (q, G q) hprojection).sub hvalue
   let d : ℝ := deriv (fun t => F (q.1, t)) (G q)
   have hd : d ≠ 0 := (hpositive q.1 hq.1 (G q)).ne'
   have ha : HasDerivAt (fun t => F (q.1, t)) d (G q) :=
