@@ -42,8 +42,8 @@ theorem negativeChartRootPlotField_stateJet
     hd.comp (contDiff_id.prodMk contDiff_const)
   have hcp : ContDiff ℝ ∞ (fun y : P => c (y, p)) :=
     hc.comp (contDiff_id.prodMk contDiff_const)
-  have had : ContDiff ℝ ∞ (fun y : P => a • d (y, p)) := contDiff_const.smul hdp
-  have hbc : ContDiff ℝ ∞ (fun y : P => b • c (y, p)) := contDiff_const.smul hcp
+  have had : ContDiff ℝ ∞ (fun y : P => a • d (y, p)) := hdp.const_smul a
+  have hbc : ContDiff ℝ ∞ (fun y : P => b • c (y, p)) := hcp.const_smul b
   have he : (fun y : P => f (y, q.1)) =
       (fun y : P => a • d (y, p)) + (fun y : P => b • c (y, p)) := rfl
   change iteratedFDeriv ℝ k (fun y : P => f (y, q.1)) 0 v = _

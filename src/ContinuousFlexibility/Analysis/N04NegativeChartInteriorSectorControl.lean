@@ -78,7 +78,6 @@ variable (e : ℕ ≃ N04PieceIndex W.D) (ρ : ℕ → Bool → ℝ)
     (ρ m side)⁻¹ ≤ B * W.T.E0 (W.negativeHalfSample e m side) ^ A)
 
 include hρ hρb in
-set_option diagnostics true in
 private def negativeInterior_originalSpeedControl
     {base loss : ℕ} {ε : ℝ}
     (G : WholeCharacteristicSpeedPowerControl W.D W.T W.S W.C base loss ε) :
@@ -114,6 +113,7 @@ def NegativeInteriorSpeedControl (base loss : ℕ) (ε : ℝ) : Type :=
       (originalCoefficients W.D W.S W.C (liftSectorParameter W.S W.C z)))
 
 include hρ hρb in
+set_option diagnostics true in
 def negativeInterior_sectorSpeedControl
     {base loss : ℕ} {ε : ℝ}
     (G : WholeCharacteristicSpeedPowerControl W.D W.T W.S W.C base loss ε) :
@@ -122,8 +122,11 @@ def negativeInterior_sectorSpeedControl
     (f := fun (_ : ℕ × Bool) z => minusCharacteristicSpeed (originalCoefficients W.D W.S W.C z))
     (sectorParameterInclusion W.S)
     (sectorNeighborhood_isOpen W.S base ε ε)
-    (fun x hx => (liftSectorParameter_eq_affine W.S W.C x) ▸
-      liftSectorParameter_mem_stateNeighborhood hx le_rfl)
+    (fun x hx => by
+      change (W.C.referenceState, (0 : ℝ)) + sectorParameterInclusion W.S x ∈
+        stateNeighborhood W.S W.C base ε
+      rw [← liftSectorParameter_eq_affine W.S W.C x]
+      exact liftSectorParameter_mem_stateNeighborhood (C := W.C) hx le_rfl)
     (pairGrading_sectorParameterInclusion W.S)
     (W.negativeInterior_originalSpeedControl e ρ hρ hρb G)
     (fun _ x => congrArg

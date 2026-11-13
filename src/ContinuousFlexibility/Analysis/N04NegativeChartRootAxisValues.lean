@@ -214,7 +214,9 @@ theorem fullHalfFields_root_axis_inverse_material :
     (hd.comp (contDiff_const.prodMk contDiff_id))
     (hc.comp (contDiff_const.prodMk contDiff_id)) (hdp y) (hcp y) (A.flow_equations y)
     (n01RootLabel_contDiff W.hS W.hT W.through03.1.1 hz' hs m side) (Real.sqrt δ) θ).2
-  rw [← W.negativeRootInverseCoordinate_eq_scaled A z m side y, hrep θ] at he
+  rw [← W.negativeRootInverseCoordinate_eq_scaled A z m side y] at he
+  simp only [Function.comp_apply, id_eq] at he
+  rw [hrep θ] at he
   dsimp only
   rw [he]
   have hh := scaledOdd_inverse_bound hδ hδone hcval.1 hlabel.1 hcval.2
