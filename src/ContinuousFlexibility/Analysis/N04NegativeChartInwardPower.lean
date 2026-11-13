@@ -26,10 +26,17 @@ theorem n04NegativeChart_mixedDerivative_inward
       (fun q => f (inwardComponentPoint l h side q.1, q.2)) p =
       n01ComponentRootOrientation side ^ a *
         mixedDerivative a b f (inwardComponentPoint l h side p.1, p.2) := by
-  cases side <;> simp only [mixedDerivative, inwardComponentPoint,
-    n01ComponentRootOrientation, Bool.false_eq_true, ↓reduceIte,
-    iteratedDeriv_comp_const_add, iteratedDeriv_comp_const_sub,
-    smul_eq_mul, one_pow, one_mul]
+  cases side with
+  | false =>
+    simpa only [mixedDerivative, inwardComponentPoint, n01ComponentRootOrientation,
+      Bool.false_eq_true, ↓reduceIte, one_pow, one_mul] using
+      congrFun (iteratedDeriv_comp_const_add a
+        (fun r : ℝ => iteratedDeriv b (fun θ => f (r, θ)) p.2) l) p.1
+  | true =>
+    simpa only [mixedDerivative, inwardComponentPoint, n01ComponentRootOrientation,
+      ↓reduceIte, smul_eq_mul] using
+      congrFun (iteratedDeriv_comp_const_sub a
+        (fun r : ℝ => iteratedDeriv b (fun θ => f (r, θ)) p.2) h) p.1
 
 namespace N04RealizationStart
 
@@ -138,7 +145,8 @@ def negativeHalf_inward_powerControl
       (smoothDirections_postcompCLM (RF.parameter a b _ (hmap i hq))
         (n01ComponentRootOrientation i.2 ^ a • ContinuousLinearMap.id ℝ ℝ)).congr
           (fun x hx => by
-            simpa only [Function.comp_apply, smul_apply, ContinuousLinearMap.id_apply, smul_eq_mul] using
+            simpa only [negativeInwardPoint, Function.comp_apply, smul_apply,
+              ContinuousLinearMap.id_apply, smul_eq_mul] using
               (n04NegativeChart_mixedDerivative_inward (f x)
                 (W.C.left i.1) (W.C.right i.1) i.2 a b q).symm) }
   refine ⟨RG, ?_⟩

@@ -49,9 +49,9 @@ private theorem chartData_cases (P : Atom → Prop)
     | exact hJ
     | exact hI
 
+set_option diagnostics true in
 /-- No Jacobian estimate is an input: both Jacobian atoms follow from
 the true coordinate current data and the retained reference geometry. -/
-set_option diagnostics true in
 theorem negativeChart_data_of_coordinates {b : ℕ} {ε : ℝ}
     (hb : G.W.base ≤ b) (hε : 0 < ε) (hεW : ε ≤ G.W.ε)
     (hR : G.Data η (G.Neg η) b ε

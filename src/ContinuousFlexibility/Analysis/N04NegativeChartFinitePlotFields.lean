@@ -139,7 +139,7 @@ theorem fullHalfFields_finiteAffine_representatives_uniform
     have hpq := F.stateSquare_pos (hρV y) m side hp
     have hlo := inv_le_of_inv_le₀ hpq (hinv (x + L (ρ y)) (hρV y) m side p.1 hp)
     have hhi : q (y, p) ≤ Bu * E ^ Au := (le_abs_self _).trans (by
-      simpa only [iteratedDeriv_zero] using
+      simpa only [q, Bu, Au, E, iteratedDeriv_zero] using
         hupper (x + L (ρ y)) (hρV y) m side p.1 hp)
     exact ⟨hlo, hhi.trans (by dsimp only [u]; linarith only [hl])⟩
   let d : ((Fin n → ℝ) × PolarPoint) → ℝ := fun y =>
@@ -151,8 +151,8 @@ theorem fullHalfFields_finiteAffine_representatives_uniform
       normalizedSpeedFactor_periodic (C := W.C) W.hS (x + L (ρ y)) i
         (R (W.negativeInwardPoint m side (r, θ)).1, θ)
   refine ⟨d, c, contDiff_const.mul (hAs 0), (hΦ.comp hq).mul (hAs 1),
-    fun y r θ => congrArg (fun z => -n01ComponentRootOrientation side * z) (hperiod 0 y r θ),
-    fun y r θ => congrArg (fun z => Φ (q (y, (r, θ))) * z) (hperiod 1 y r θ), ?_, ?_⟩
+    fun y r θ => congrArg (fun z : ℝ => -n01ComponentRootOrientation side * z) (hperiod 0 y r θ),
+    fun y r θ => congrArg (fun z : ℝ => Φ (q (y, (r, θ))) * z) (hperiod 1 y r θ), ?_, ?_⟩
   · intro p hp
     have hin := inwardComponentPoint_mem side
       (show p.1 ∈ Icc (0 : ℝ) (W.C.right m - W.C.left m) from
@@ -172,17 +172,29 @@ theorem fullHalfFields_finiteAffine_representatives_uniform
     have hAg (i : Fin 2) : A i =ᶠ[𝓝 (0, p)] (fun y =>
         normalizedSpeedFactor W.D W.S W.C i (x + L y.1) (W.negativeInwardPoint m side y.2)) := by
       filter_upwards [hρg, hRg] with y hy hz
-      simp only [A, Ψ, hy, hz, negativeInwardPoint]
+      have he : Ψ y = (y.1, W.negativeInwardPoint m side y.2) :=
+        Prod.ext hy (Prod.ext hz rfl)
+      exact congrArg (fun z : (Fin n → ℝ) × PolarPoint =>
+        normalizedSpeedFactor W.D W.S W.C i (x + L z.1) z.2) he
     have hΦg : (fun y => Φ (q y)) =ᶠ[𝓝 (0, p)] (fun y => Real.sqrt (q y)) := by
-      simpa only [Real.sqrt_eq_rpow] using (hΦeq (q (0, p)) (hqrange 0 p hp)).comp_tendsto
+      simpa only [Φ, Function.comp_apply, Real.sqrt_eq_rpow] using
+        (hΦeq (q (0, p)) (hqrange 0 p hp)).comp_tendsto
         hq.continuous.continuousAt
     constructor
     · filter_upwards [hAg 0] with y hy
-      exact congrArg (fun z => -n01ComponentRootOrientation side * z) hy
+      change -n01ComponentRootOrientation side * A 0 y =
+        -n01ComponentRootOrientation side * normalizedSpeedFactor W.D W.S W.C 0
+          (x + L y.1) (W.negativeInwardPoint m side y.2)
+      exact congrArg (fun z : ℝ => -n01ComponentRootOrientation side * z) hy
     · filter_upwards [hΦg, hAg 1, hρg] with y hφ ha hρy
-      change Φ (q y) * A 1 y = _
-      rw [hφ, ha]
-      simp only [q, hρy, fullHalfSpeed, opticalSpeed]
+      change Φ (q y) * A 1 y = Real.sqrt (F.stateSquare (x + L y.1) m side y.2.1) *
+        normalizedSpeedFactor W.D W.S W.C 1 (x + L y.1) (W.negativeInwardPoint m side y.2)
+      have hqeq : q y = F.stateSquare (x + L y.1) m side y.2.1 :=
+        congrArg (fun t : Fin n → ℝ => F.stateSquare (x + L t) m side y.2.1) hρy
+      exact (congrArg₂ (fun a b : ℝ => a * b) hφ ha).trans
+        (congrArg (fun t : ℝ => Real.sqrt t *
+          normalizedSpeedFactor W.D W.S W.C 1 (x + L y.1)
+            (W.negativeInwardPoint m side y.2)) hqeq)
 
   · have hlocal := mem_nhds_iff.mp hρid
     let V₀ := hlocal.choose
@@ -206,14 +218,26 @@ theorem fullHalfFields_finiteAffine_representatives_uniform
       have ha (i : Fin 2) : A i (y, p) =
           normalizedSpeedFactor W.D W.S W.C i (x + L y)
             (W.negativeInwardPoint m side p) := by
-        simp only [A, Ψ, hρeq y hy, hRid, negativeInwardPoint]
+        have he : Ψ (y, p) = (y, W.negativeInwardPoint m side p) :=
+          Prod.ext (hρeq y hy) (Prod.ext hRid rfl)
+        exact congrArg (fun z : (Fin n → ℝ) × PolarPoint =>
+          normalizedSpeedFactor W.D W.S W.C i (x + L z.1) z.2) he
       have hφ : Φ (q (y, p)) = Real.sqrt (q (y, p)) := by
-        simpa only [Real.sqrt_eq_rpow] using (hΦeq (q (y, p)) (hqrange y p hp)).self_of_nhds
+        simpa only [Φ, Real.sqrt_eq_rpow] using
+          (hΦeq (q (y, p)) (hqrange y p hp)).self_of_nhds
       constructor
-      · exact congrArg (fun a => -n01ComponentRootOrientation side * a) (ha 0)
-      · change Φ (q (y, p)) * A 1 (y, p) = _
-        rw [hφ, ha 1]
-        simp only [q, hρeq y hy, fullHalfSpeed, opticalSpeed]
+      · change -n01ComponentRootOrientation side * A 0 (y, p) =
+          -n01ComponentRootOrientation side * normalizedSpeedFactor W.D W.S W.C 0
+            (x + L y) (W.negativeInwardPoint m side p)
+        exact congrArg (fun a : ℝ => -n01ComponentRootOrientation side * a) (ha 0)
+      · change Φ (q (y, p)) * A 1 (y, p) = Real.sqrt (F.stateSquare (x + L y) m side p.1) *
+          normalizedSpeedFactor W.D W.S W.C 1 (x + L y) (W.negativeInwardPoint m side p)
+        have hqeq : q (y, p) = F.stateSquare (x + L y) m side p.1 :=
+          congrArg (fun t : Fin n → ℝ => F.stateSquare (x + L t) m side p.1) (hρeq y hy)
+        exact (congrArg₂ (fun a b : ℝ => a * b) hφ (ha 1)).trans
+          (congrArg (fun t : ℝ => Real.sqrt t *
+            normalizedSpeedFactor W.D W.S W.C 1 (x + L y)
+              (W.negativeInwardPoint m side p)) hqeq)
 
 set_option diagnostics true in
 /-- The pointwise germ interface is retained for existing callers. -/
