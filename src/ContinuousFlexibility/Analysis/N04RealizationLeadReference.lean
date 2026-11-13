@@ -112,7 +112,7 @@ theorem n04Realization_referenceObligation : N04RealizationReferenceObligation :
       by_cases hv : v = .auxiliaryColumn
       · subst v
         exact hauxReg m
-      · rw [hsame v hv (W.C.referenceState, 0) m]
+      · rw [hsame v hv (C'.referenceState, 0) m]
         exact ⟨(hother0 m v hv).1, (hother0 m v hv).2.1⟩
     · intro s
       obtain ⟨B1, hB1, hrest⟩ := hjets s
@@ -130,7 +130,7 @@ theorem n04Realization_referenceObligation : N04RealizationReferenceObligation :
       by_cases hv : v = .auxiliaryColumn
       · subst v
         exact (haux m p hp a b hab).trans (hcost (le_max_right _ _))
-      · rw [hsame v hv (W.C.referenceState, 0) m]
+      · rw [hsame v hv (C'.referenceState, 0) m]
         exact ((hrest m v hv).2.2 p hp a b hab).trans (hcost (le_max_left _ _))
   have hpos : ∀ m, 0 < W.T.E0 (W.T.sample (V.cell m)) := fun m =>
     zero_lt_one.trans_le (hE0 _)

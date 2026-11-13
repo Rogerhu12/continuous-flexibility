@@ -29,11 +29,11 @@ local instance n04PulledFieldsCoefficientRegularityStateSMul (S : PhysicalSpaces
 
 set_option backward.isDefEq.respectTransparency false
 
-private def n04PulledFields_errorProjection (i : Fin 3) : (ℝ × ℝ) →L[ℝ] ℝ :=
+def n04PulledFields_errorProjection (i : Fin 3) : (ℝ × ℝ) →L[ℝ] ℝ :=
   if i = 0 then 0 else if i = 1 then ContinuousLinearMap.fst ℝ ℝ ℝ
     else ContinuousLinearMap.snd ℝ ℝ ℝ
 
-private theorem n04PulledFields_coefficient_reconstruction
+theorem n04PulledFields_coefficient_reconstruction
     (i : Fin 3) (A B : SymmetricCoefficients) (ha : B.a = A.a) (p : PolarPoint) :
     canonicalCoefficientComponent i A p -
         n04PulledFields_errorProjection i (A.b p - B.b p, A.c p - B.c p) =

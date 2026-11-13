@@ -92,7 +92,7 @@ private theorem n04PulledFieldsInverseAffine_angle_weight
       parameterHeightWeight H w.stateArity *
         t ^ (if w.stateArity = 0 then w.angleArity - 1 else w.angleArity + offset) := by
   by_cases hw : w.stateArity = 0
-  · simp only [parameterHeightWeight, hw, if_pos rfl, one_mul]
+  · simp only [parameterHeightWeight, hw, ite_true, one_mul]
     have hcoord (i : Fin n) :
         (normSeminorm ℝ ℝ) (n04PulledFields_inverseAngleProjection (v i)) ≤ 1 := by
       have hh : |(v i).2.2| ≤ ‖(v i).2‖ := by

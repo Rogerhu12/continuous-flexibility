@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.CoupledCircleJointJetAlgebra
 import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 import ContinuousFlexibility.Analysis.TameElementaryCalculus
+import ContinuousFlexibility.Analysis.TameLocalCalculus
 
 /-!
 # A common low base for genuine joint kernel jets
@@ -145,7 +146,7 @@ private theorem n04PulledFields_kernelJoint_unit_bound (n s : ℕ) (R : ℝ) (hR
   have hsum : 0 ≤ ∑ i, pairGrading p p high (w i) :=
     Finset.sum_nonneg (fun _ _ => apply_nonneg _ _)
   have hzQ : 1 + p high z.1 ≤ Q :=
-    (add_le_add_left (n04PulledFields_pair_fst_le p high z) 1).trans
+    (add_le_add (le_refl 1) (n04PulledFields_pair_fst_le p high z)).trans
       (le_add_of_nonneg_right hsum)
   have hz₂Q : p high z.2 ≤ Q :=
     (n04PulledFields_pair_snd_le p high z).trans
@@ -160,10 +161,13 @@ private theorem n04PulledFields_kernelJoint_unit_bound (n s : ℕ) (R : ℝ) (hR
     let j : Fin (n + 1) := ⟨r, Nat.lt_succ_of_le hr⟩
     have horder : r + s + loss ≤ high := by dsimp only [high]; omega
     have hm := n04PulledFields_boxMajorant (p base) (p (r + s + loss)) (r + 1) u
-      hR₀ hQ ((add_le_add_left (hp horder z.1) 1).trans hzQ)
+      hR₀ hQ ((add_le_add (le_refl 1) (hp horder z.1)).trans hzQ)
       hlow (fun i => (hp horder (u i)).trans (hhigh i))
     have hc : C j * (((r + 1 : ℕ) : ℝ) + 1) * R₀ ^ (r + 1) ≤ A :=
-      Finset.single_le_sum (fun k _ =>
+      Finset.single_le_sum
+        (f := fun k : Fin (n + 1) =>
+          C k * (((k.val + 1 : ℕ) : ℝ) + 1) * R₀ ^ (k.val + 1))
+        (fun k _ =>
         mul_nonneg (mul_nonneg (hC k) (by positivity))
           (pow_nonneg (zero_le_one.trans hR₀) _)) (Finset.mem_univ j)
     calc

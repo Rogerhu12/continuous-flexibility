@@ -17,6 +17,28 @@ namespace ContinuousFlexibility.Analysis
 open ContinuousFlexibility.Statements
 open scoped BigOperators
 
+/-- A physical height factor can be relaxed at parameter order zero
+using its uniform upper bound. Every positive order keeps the factor. -/
+theorem n04PulledFields_fullHeight_le_parameterWeight
+    {H L : ℝ} (hH : 0 ≤ H) (hHL : H ≤ L) (hL : 1 ≤ L) (k : ℕ) :
+    H ≤ L * parameterHeightWeight H k := by
+  by_cases hk : k = 0
+  · simpa only [parameterHeightWeight, if_pos hk, mul_one] using hHL
+  · simpa only [parameterHeightWeight, if_neg hk, one_mul] using
+      mul_le_mul_of_nonneg_right hL hH
+
+/-- Convert the actual physical-column power estimate to the common
+parameter-height convention without changing its spatial power. -/
+theorem n04PulledFields_fullHeight_power_le
+    {C E A H L t : ℝ} (hC : 0 ≤ C) (hE : 0 ≤ E)
+    (hH : 0 ≤ H) (hHL : H ≤ L) (hL : 1 ≤ L) (ht : 0 ≤ t) (k d : ℕ) :
+    C * E ^ A * H * t ^ d ≤
+      (C * L) * E ^ A * parameterHeightWeight H k * t ^ d := by
+  have h := mul_le_mul_of_nonneg_right
+    (mul_le_mul_of_nonneg_left (n04PulledFields_fullHeight_le_parameterWeight hH hHL hL k)
+      (mul_nonneg hC (Real.rpow_nonneg hE _))) (pow_nonneg ht _)
+  exact h.trans_eq (by ring)
+
 /-- Pack the entire finite moving-point coefficient, uniformly before
 the sampled envelope is evaluated. No height factor is used in the pack. -/
 theorem n04PulledFields_movingPoint_materialConstant
