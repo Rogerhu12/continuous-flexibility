@@ -135,7 +135,7 @@ def N04RealizationPositiveCoefficientPowerBounds
       (fun p => T.H p.1 ^ (3 / 4 : ℝ)) (fun p => T.E0 p.1)
       (fun z => canonicalCoefficientComponent i (L.coefficients (liftSectorParameter S C z)))
 
-private theorem n04Realization_positiveCoefficient_eq_original
+theorem n04Realization_positiveCoefficient_eq_original
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {R : ReturnEquationData S}
     {L : ReturnCorrectionData S} {base : ℕ} {ε : ℝ}
