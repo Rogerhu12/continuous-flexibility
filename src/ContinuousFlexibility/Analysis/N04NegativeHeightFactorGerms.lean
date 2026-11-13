@@ -66,7 +66,7 @@ theorem negative_heightFactor_germs {b : ℕ} {ε : ℝ}
   have hD := G.W.radial.1
   have hT : IsMaterialData G.W.D G.W.U := isMaterialData_enlargedMaterialData hD G.W.hT
   have hI : HasInterpolation (parameterGrading (G.S η)) :=
-    n04NegativeHeight_parameterInterpolation G.W.hS
+    n04NegativeHeight_parameterInterpolation (S := G.W.S) G.W.hS
   have hE := (G.cost_nonneg η).2.2
   have hH := (G.cost_nonneg η).2.1
   have hR := G.negative_chartAtom_germ η he hchart .chartRadial trivial
