@@ -66,7 +66,8 @@ theorem n04Realization_actualRoot_chart_data
   have hk : e.symm (.inl (m, side)) = k := by
     simpa only [Equiv.symm_apply_apply] using (congrArg e.symm hi).symm
   have hki : (if side then (K.cutPair m).2 else (K.cutPair m).1) = k := by
-    cases side <;> simpa only [K, n04bActualTypedAtlas, n04bTypedAtlasData_cutPair] using hk
+    cases side <;> simpa only [K, n04bActualTypedAtlas, n04bTypedAtlasData_cutPair,
+      Bool.false_eq_true, ↓reduceIte] using hk
   have hroot : (c, θ) ∈ physicalPieceClosed S K z k ∧
       (K.chart z k (c, θ)).1 = 0 := by
     simpa only [hki] using canonicalCutRoot_mem_closed_and_zero hA hcut hz hs m side θ
