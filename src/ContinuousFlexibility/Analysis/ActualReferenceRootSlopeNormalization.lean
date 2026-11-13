@@ -31,9 +31,12 @@ private theorem radial_unit_density_height_slope
   let j : ℝ := deriv f r
   have hf : HasDerivAt f j r :=
     (hasDerivAt_radial_slice hF.fst).differentiableAt.hasDerivAt
-  have hd := (hf.comp_hasFDerivAt (f := fun p : PolarPoint => p.1)
-    (r, 0) (hasFDerivAt_fst (p := (r, 0)))).prodMk
-    (hasFDerivAt_snd (p := (r, 0)))
+  have hd0 := (hf.comp_hasFDerivAt (f := fun p : PolarPoint => p.1)
+    ((r, 0) : PolarPoint) (hasFDerivAt_fst (𝕜 := ℝ) (p := ((r, 0) : PolarPoint)))).prodMk
+    (hasFDerivAt_snd (𝕜 := ℝ) (p := ((r, 0) : PolarPoint)))
+  have hd : HasFDerivAt (fun p : PolarPoint => (f p.1, p.2))
+      ((j • ContinuousLinearMap.fst ℝ ℝ ℝ).prod (ContinuousLinearMap.snd ℝ ℝ ℝ))
+      ((r, 0) : PolarPoint) := hd0
   have hnear : F =ᶠ[𝓝 (r, 0)] (fun p : PolarPoint => (f p.1, p.2)) := by
     filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds
       (show (r, (0 : ℝ)) ∈ Ioo a b ×ˢ (univ : Set ℝ) from ⟨hr, mem_univ _⟩)]
@@ -95,10 +98,10 @@ theorem n04Coordinates_actual_reference_root_slope_normalization
     hT hS hN hfield e m side
   have href : z₀ ∈ stateNeighborhood S C base ε :=
     reference_mem_stateNeighborhood S C base hN.1.1.2.1
-  have hsref : stateSector S z₀.1 := hN.1.1.2.2.1.stateSector
+  have hsref : stateSector S z₀.1 := n04b_referenceState_sector hN.1.1.2.2.1
   have hline : ContDiffAt ℝ ∞ (fun r : ℝ => (r, (0 : ℝ))) c :=
     contDiffAt_id.prodMk contDiffAt_const
-  have hf : ContDiffAt ℝ ∞ f c := (hroot.1 0).1.fst.comp c hline
+  have hf : ContDiffAt ℝ ∞ f c := ((hroot.1 0).1.fst.comp c hline :)
   have hH : ContinuousAt (fun r : ℝ => H (r, 0)) c :=
     ((hroot.1 0).2.1.comp c hline).continuousAt
   have hj : ContinuousAt (deriv f) c :=

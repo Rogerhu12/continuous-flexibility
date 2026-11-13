@@ -43,7 +43,7 @@ theorem root_normalized_division_lower_at_zero
       dsimp only [Q]
       ring
     rw [he, mul_comm κ t] at h
-    exact (mul_le_mul_left ht.1).mp h
+    exact le_of_mul_le_mul_left h ht.1
   have hlim := ge_of_tendsto hQ.continuousWithinAt.tendsto hb
   simpa only [Q, mul_zero, add_zero] using hlim
 
@@ -113,7 +113,7 @@ theorem referenceRootSpeedFactor_lower_of_component_optical
     simpa only [mul_zero, add_zero] using hq
   refine ⟨hv, hs, ?_⟩
   have hi : (referenceRootSpeedFactor w g r σ 0)⁻¹ ^ 2 ≤ κ⁻¹ := by
-    rw [← inv_pow]
+    rw [inv_pow]
     exact inv_anti₀ hκ hs
   have hb : (referenceRootSpeedFactor w g r σ 0)⁻¹ ≤ 1 + κ⁻¹ := by
     nlinarith only [hi, sq_nonneg ((referenceRootSpeedFactor w g r σ 0)⁻¹ - (1 / 2 : ℝ))]

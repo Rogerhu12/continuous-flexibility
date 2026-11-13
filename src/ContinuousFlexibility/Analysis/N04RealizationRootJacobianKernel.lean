@@ -77,8 +77,8 @@ theorem n04Realization_rootUnit_jacobian_cost
     fun r _ => rootEven_period_add hGperiod r
   have hzero : ∀ η, G (0, 0, η) = l η :=
     rootInverseCoordinate_zero Real.pi_ne_zero hΘ.1 hΘ.2 hEndpoint hEndpointPeriod
-  have hχraw : 0 < rootOddCoefficient G (0, θ) := by
-    simpa only [extendedRootOddCoefficient_of_nonneg G (p := (0, θ)) (le_refl (0 : ℝ))] using hχ
+  have hχraw : 0 < rootOddCoefficient G (0, θ) :=
+    lt_of_lt_of_eq hχ (extendedRootOddCoefficient_of_nonneg _ (p := (0, θ)) le_rfl)
   have hJ : planeJacobian (extendedRootEvenOddChart G) (0, θ) =
       ((3 / 2 : ℝ) * extendedRootOddCoefficient G (0, θ)) ^ (2 / 3 : ℝ) *
         deriv l θ := by

@@ -19,8 +19,18 @@ set_option backward.isDefEq.respectTransparency false
 
 theorem norm_rootProfileInverseLinear_unit {σ : ℝ} (hσ : σ = 1 ∨ σ = -1) :
     ‖rootProfileInverseLinear σ‖ = 1 := by
-  rcases hσ with rfl | rfl <;>
-    simp [rootProfileInverseLinear, ContinuousLinearMap.opNorm_prod]
+  have hσinv : |σ⁻¹| = 1 := by rcases hσ with rfl | rfl <;> norm_num
+  have happ (v : PolarPoint) : rootProfileInverseLinear σ v = (σ⁻¹ * v.1, v.2) := by
+    simp only [rootProfileInverseLinear, ContinuousLinearMap.prod_apply,
+      ContinuousLinearMap.smul_apply, ContinuousLinearMap.coe_fst',
+      ContinuousLinearMap.coe_snd', smul_eq_mul]
+  apply le_antisymm
+  · refine ContinuousLinearMap.opNorm_le_bound _ zero_le_one (fun v => ?_)
+    rw [happ]
+    simp only [Prod.norm_def, Real.norm_eq_abs, abs_mul, hσinv, one_mul, le_refl]
+  · have h := (rootProfileInverseLinear σ).le_opNorm ((0, 1) : PolarPoint)
+    rw [happ] at h
+    simpa [Prod.norm_def, max_eq_right (zero_le_one : (0 : ℝ) ≤ 1)] using h
 
 theorem rootAffineJetEnvelope_unit {σ : ℝ} (hσ : σ = 1 ∨ σ = -1)
     (B : ℕ → ℝ) : rootAffineJetEnvelope σ B = fun n => 2 * B n := by

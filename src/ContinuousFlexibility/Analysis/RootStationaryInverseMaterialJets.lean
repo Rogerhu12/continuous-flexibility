@@ -121,8 +121,10 @@ theorem rootRegularizedFlow_zero_inverseJets_le_material
     have hfirst : ‖fderiv ℝ f (q.1, g q)‖ ≤ D 0 * W ^ (D 0) * S := by
       rw [hgzero]
       change ‖fderiv ℝ f q‖ ≤ _
-      simpa only [norm_iteratedFDeriv_one, Nat.zero_add,
-        Nat.add_comm 1 flowLoss, S] using hjet 0
+      have h0 : ‖iteratedFDeriv ℝ 1 f q‖ ≤
+          D 0 * W ^ (D 0) * (1 + p (1 + flowLoss) z) := hjet 0
+      rw [norm_iteratedFDeriv_one, Nat.add_comm 1 flowLoss] at h0
+      exact h0
     have hM : 0 ≤ D 0 * W ^ (D 0) * S :=
       mul_nonneg (mul_nonneg (hD 0).le
         (Real.rpow_nonneg (zero_le_one.trans hW) _)) (zero_le_one.trans hS)

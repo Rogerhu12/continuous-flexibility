@@ -40,7 +40,8 @@ def n04Realization_planeLinear_directions
       R.comp (ContinuousLinearMap.snd ℝ Y Y)
   let J := solveSmoothDirectionsPostcomp (smoothDirectionsUniformProd Jr Jθ) S
   refine J.congr (fun x _ => ?_)
-  ext v
+  apply ContinuousLinearMap.ext
+  intro v
   simp only [S, L, R, ContinuousLinearMap.add_apply, ContinuousLinearMap.comp_apply,
     ContinuousLinearMap.smulRightL_apply_apply, ContinuousLinearMap.smulRight_apply,
     ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd']
@@ -55,7 +56,7 @@ def n04Realization_planeMultilinear_directions
     (n : ℕ) (A : X → PolarPoint [×n]→L[ℝ] Y)
     (J : ∀ v : Fin n → PolarPoint, SmoothDirections U (fun x => A x v)) :
     SmoothDirections U A := by
-  induction n generalizing A with
+  induction n with
   | zero =>
       let e := continuousMultilinearCurryFin0 ℝ PolarPoint Y
       let K := solveSmoothDirectionsPostcomp (J (0 : Fin 0 → PolarPoint))

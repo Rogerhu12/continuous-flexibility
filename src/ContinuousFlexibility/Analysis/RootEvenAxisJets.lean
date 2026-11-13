@@ -120,10 +120,10 @@ theorem exists_rootEven_axis_jet_bound (n : ℕ) :
           _ ≤ dist q (x, 0, θ) + dist (x, 0, θ) (0, 0, θ) := dist_triangle _ _ _
           _ ≤ x ^ (3 / 2 : ℝ) + x :=
             add_le_add (Metric.mem_closedBall.mp hq) hcenter.le
-          _ ≤ x + x := add_le_add_right hrpow x
+          _ ≤ x + x := add_le_add hrpow le_rfl
           _ < δ := by linarith only [hxδ, hδ]
       exact (hδsub (Metric.mem_ball.mpr hdist) ⟨k, Nat.lt_succ_of_le hk⟩).le
-    rw [iteratedFDeriv_eqOn_of_isOpen (isOpen_Ioi.prod isOpen_univ) hEq n
+    rw [mem_setOf_eq, iteratedFDeriv_eqOn_of_isOpen (isOpen_Ioi.prod isOpen_univ) hEq n
       (show (x, θ) ∈ Ioi (0 : ℝ) ×ˢ (univ : Set ℝ) from ⟨hx.1, mem_univ _⟩)]
     exact hlocal G hG x θ (M + η) hx.1 hx1 hball
   have hmem : ((0, θ) : PolarPoint) ∈ closure (Ioo (0 : ℝ) a ×ˢ ({θ} : Set ℝ)) := by

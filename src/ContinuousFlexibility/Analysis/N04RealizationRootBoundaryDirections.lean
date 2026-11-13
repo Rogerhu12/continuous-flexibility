@@ -64,7 +64,8 @@ def n04Realization_rootLabel_jointDirections
     cases side with
     | false =>
         funext θ
-        simpa only [F, n01RootLabel, circleAffineLift, add_zero, one_mul] using
+        simpa only [F, H, n01RootLabel, circleAffineLift, add_zero, one_mul,
+          Bool.false_eq_true, ↓reduceIte] using
           (hN.2.2.1.sector_leftChart x j θ).symm
     | true => exact hN.sectorReturnTransportCircle_odd_lift hS hT x hx j
   have hpos : MapsTo F U (circlePositiveLiftDomain H) := by
@@ -101,8 +102,7 @@ def n04Realization_rootLabel_jointDirections
         Function.invFun (n01RootLabel S C (liftSectorParameter S C p.1) m side) p.2 :=
       congrArg (fun f : ℝ → ℝ => Function.invFun f p.2) (hlift p.1 hp.1 m)
     change p.2 + 0 + H.decode (G p.1) m p.2 = _
-    rw [hd, hinv]
-    ring
+    linear_combination hd + hinv
 
 /-- The original forward root label, with its genuine state and angle jets. -/
 def n04Realization_rootLabel_forwardJointDirections
