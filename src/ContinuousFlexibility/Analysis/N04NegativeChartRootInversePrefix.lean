@@ -88,7 +88,7 @@ theorem original_raw (j : ℕ) (hj : j ≤ K + N + 1)
   have hb := i.raw 0 (Nat.zero_le _) Fin.elim0 (fun a => a.elim0)
     (fun a => a.elim0) j hj t ht θ
   simpa only [flowParameterField, iteratedFDeriv_zero_apply, parameterHeightWeight,
-    if_pos rfl, mul_one, Nat.mul_zero, Nat.add_zero] using hb
+    ↓reduceIte, mul_one, Nat.mul_zero, Nat.add_zero, original, negativeChartRootPlotField] using hb
 
 theorem field_raw {T : ℝ} (hT : 0 ≤ T)
     (hτ : ∀ t ∈ Icc (0 : ℝ) 1, |deriv (compactScalarFlowTime 0 1) t| ≤ T)
@@ -184,7 +184,8 @@ theorem n04NegativeChart_rootInverse_stateFree_prefix (N K shift : ℕ) (RH : �
     (n04FlowReverseField_periodic i.original_periodic)
     (i.flow.inverse 0) (i.flow.inverse_equations 0) i.q ha hraw
     (j - 1) (by omega) (compactScalarFlowTime 0 1 t) (n04Flow_compactTime_mem t)
-  simpa only [Nat.sub_add_cancel hj] using hh
+  rw [Nat.sub_add_cancel hj] at hh
+  simpa only [NegativeChartRootInverseInput.trajectory, negativeChartRootPlotTimeChange] using hh
 
 private theorem rootTime_derivative_bound :
     ∃ T : ℝ, 1 ≤ T ∧ ∀ t ∈ Icc (0 : ℝ) 1,
@@ -222,7 +223,7 @@ theorem coefficient_prefix {T B : ℝ} (hT : 0 ≤ T) (hB : 1 ≤ B)
     have hh := i.field_raw hT hτ 0 (Nat.zero_le _) Fin.elim0 (fun a => a.elim0)
       (fun a => a.elim0) (a + 1) (by omega) t ht θ
     simpa only [flowParameterField, iteratedFDeriv_zero_apply, parameterHeightWeight,
-      if_pos rfl, mul_one, Nat.mul_zero, Nat.add_zero, Nat.add_sub_cancel] using hh
+      ↓reduceIte, mul_one, Nat.mul_zero, Nat.add_zero, Nat.add_sub_cancel, F] using hh
   have he : (fun y : N04FlowPoint =>
       flowVariationCoefficient i.field i.trajectory (0, y.1) (t, y.2)) =
       fun y : N04FlowPoint => deriv (fun θ => F (t, (y.1, θ)))

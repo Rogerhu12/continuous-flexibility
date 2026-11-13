@@ -250,13 +250,13 @@ theorem negativeInterior_firstIntegral_fractional
     · apply HasWeightedJetBound.monoDegree (hW := hE) (hH := hH) (hQ := hQ)
         (hdenom := hd) (hde := show a + b ≤ n * D + a + b by omega)
       refine ⟨Cr, Ar, hCr.le, hAr, fun x hx => ?_⟩
-      simpa only [pow_zero, mul_one] using ((hpair x hx).1.trans
+      simpa only [L, negativeInteriorJet, E, Cr, Ar, pow_zero, mul_one] using ((hpair x hx).1.trans
         (mul_le_mul_of_nonneg_left (hp x hx)
           (mul_nonneg hCr.le (Real.rpow_nonneg (zero_le_one.trans (hE x hx)) _))))
     · apply HasWeightedJetBound.monoDegree (hW := hE) (hH := hH) (hQ := hQ)
         (hdenom := hd) (hde := show a + b ≤ n * D + a + b by omega)
       refine ⟨Cr, Ar, hCr.le, hAr, fun x hx => ?_⟩
-      simpa only [pow_one] using ((hpair x hx).2.trans
+      simpa only [Ld, negativeInteriorJet, E, H, Cr, Ar, pow_one] using ((hpair x hx).2.trans
         (mul_le_mul_of_nonneg_left (hp x hx)
           (mul_nonneg (mul_nonneg hCr.le (Real.rpow_nonneg (zero_le_one.trans (hE x hx)) _))
             (hH x hx))))

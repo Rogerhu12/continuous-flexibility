@@ -155,9 +155,7 @@ theorem FullHalfFieldPowerControl.actualRootComposition_prefix
       ContinuousLinearMap.comp_apply, add_assoc]
   have hstate (n : ℕ) : pairGrading (stateGrading W.S) realGrading n
       (x - (W.C.referenceState, 0)) = parameterGrading W.S n z := by
-    rw [show x = liftSectorParameter W.S W.C z from rfl,
-      liftSectorParameter_sub_reference, pairGrading_sectorParameterInclusion]
-    rfl
+    simpa only [x, liftSectorParameter_sub_reference, pairGrading_sectorParameterInclusion, parameterGrading]
   have hdir (n : ℕ) (y : Fin 1 → ℝ) : pairGrading (stateGrading W.S) realGrading n
       (Lx y) = parameterGrading W.S n (L y) := rfl
   have hx := liftSectorParameter_mem_stateNeighborhood (C := W.C)

@@ -3,6 +3,7 @@ import ContinuousFlexibility.Analysis.N04NegativeChartRootLabelRepresentative
 import ContinuousFlexibility.Analysis.N04NegativeChartRootCoefficient
 import ContinuousFlexibility.Analysis.N04NegativeChartProjectionAffineBounds
 import ContinuousFlexibility.Analysis.N04NegativeChartPartialJets
+import ContinuousFlexibility.Analysis.N04NegativeChartInteriorRawBudget
 
 /-! One finite plot carries the actual divided fields, endpoint label and
 their single inverse flow on a common open convex state neighborhood. -/
@@ -27,6 +28,7 @@ attribute [local instance]
   n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
+  interiorRaw_parameterTopology interiorRaw_parameterAddGroup interiorRaw_parameterSMul
 
 variable {W : N04RealizationStart} {e : ℕ ≃ N04PieceIndex W.D}
 
@@ -122,7 +124,7 @@ theorem coordinate_joint_contDiff :
     ContDiff ℝ ∞ (fun x : (Fin n → ℝ) × (ℝ × ℝ × ℝ) => A.coordinate x.1 x.2) := by
   have harg : ContDiff ℝ ∞
       (fun x : (Fin n → ℝ) × (ℝ × ℝ × ℝ) =>
-        ((x.1, (x.2.1, Real.sqrt δ * x.2.2.1)), (1, x.2.2.2))) :=
+        ((x.1, (x.2.1, Real.sqrt δ * x.2.2.1)), ((1 : ℝ), x.2.2.2))) :=
     (contDiff_fst.prodMk (contDiff_snd.fst.prodMk
       (contDiff_const.mul contDiff_snd.snd.fst))).prodMk
       (contDiff_const.prodMk contDiff_snd.snd.snd)
@@ -139,6 +141,7 @@ theorem coordinate_actual (y : Fin n → ℝ) (hy : y ∈ A.V) :
   funext q
   exact congrArg (fun a : ℝ => a - q.2.2) (A.label y hy _)
 
+set_option diagnostics true in
 /-- Both exact projection identities hold on the same open state and
 spatial neighborhood, so all later mixed jets use that single germ. -/
 theorem projection_eq (hb : W.base ≤ base) (hε : ε ≤ W.ε / 2)
@@ -151,16 +154,17 @@ theorem projection_eq (hb : W.base ≤ base) (hε : ε ≤ W.ε / 2)
   have hz := liftSectorParameter_mem_stateNeighborhood (C := W.C)
     (sectorNeighborhood_mono W.S hb hε hε (A.sector y hy)) le_rfl
   have hs := W.through03.1.1.2.2.1.liftSectorParameter_sector (z + L y)
-  rw [A.coordinate_actual y hy]
   cases odd with
   | false =>
-    exact F.fullHalfFields_root_angle_defect A.hd A.hc A.dp A.cp
-      A.flow y hz hs m side (by norm_num : (0 : ℝ) < 2) hδ hband
-      (A.fields y hy) ⟨hp.1, hp.2.le⟩
+    exact (F.fullHalfFields_root_angle_defect A.hd A.hc A.dp A.cp
+      A.flow y (z := z + L y) hz hs m side (by norm_num : (0 : ℝ) < 2) hδ hband
+      (A.fields y hy) (p := p) ⟨hp.1, hp.2.le⟩).trans
+        (congrArg (fun g => rootEven g p) (A.coordinate_actual y hy).symm)
   | true =>
-    exact F.fullHalfFields_root_coefficient A.hd A.hc A.dp A.cp
-      A.flow y hz hs m side (by norm_num : (0 : ℝ) < 2) hδ hband
-      (A.fields y hy) ⟨hp.1, hp.2.le⟩
+    exact (F.fullHalfFields_root_coefficient A.hd A.hc A.dp A.cp
+      A.flow y (z := z + L y) hz hs m side (by norm_num : (0 : ℝ) < 2) hδ hband
+      (A.fields y hy) (p := p) ⟨hp.1, hp.2.le⟩).trans
+        (congrArg (fun g => rootOddCoefficient g p) (A.coordinate_actual y hy).symm)
 
 /-- A bound for the finite coordinate returns a bound for any actual
 mixed tower. Its displayed projection constant precedes the component,

@@ -4,6 +4,7 @@ import ContinuousFlexibility.Analysis.N04NegativeChartPositivePowerBounds
 import ContinuousFlexibility.Analysis.N04NegativeChartRadialProjectionBounds
 import ContinuousFlexibility.Analysis.N04NegativeChartPhysicalBounds
 import ContinuousFlexibility.Analysis.N04NegativeHeightDomains
+import ContinuousFlexibility.Analysis.N04NegativeChartInteriorRawBudget
 
 /-! The actual divided travel and angle prefix determine both physical
 chart components on the selected material root band. -/
@@ -30,6 +31,8 @@ attribute [local instance]
   n07aNonlinearSectorParameterSub
 
 namespace N04RealizationStart
+
+attribute [local instance] interiorRaw_parameterTopology interiorRaw_parameterAddGroup interiorRaw_parameterSMul
 
 def negativeRootPrefixField (W : N04RealizationStart) (m : ℕ) (side odd : Bool)
     (δ : ℝ) (z : Parameter W.S) (q : PolarPoint) : ℝ :=
@@ -220,6 +223,7 @@ private theorem fractional_oneHigh (p : ℕ → Seminorm ℝ (Parameter W.S))
       simpa only [coe_normSeminorm, R] using h)
   simpa only [coe_normSeminorm, multilinearTameSize, oneHighVariationWeight] using hh v
 
+set_option diagnostics true in
 include A in
 /-- Positive powers and multiplication by the normalized radius keep
 one height factor and the original parameter base. -/
@@ -322,6 +326,7 @@ theorem RootCoordinatePrefixData.normalized_positive_bounds :
       _ = ((2 : ℝ) ^ s * Bp * E ^ Bp) * H * V := by ring
       _ ≤ _ := mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right hcmpP hH) hV
 
+set_option diagnostics true in
 include A in
 /-- Undo the fixed inward scale at the end. Its inverse pays only a
 material power; the high parameter order keeps spatial coefficient one. -/
@@ -421,8 +426,9 @@ theorem RootCoordinatePrefixData.physical_positive_bounds :
     n04NegativeChart_coordinatePullback_positiveJet (isOpen_sectorNeighborhood W.S base ε ε)
       (n01ComponentRoot W.C m side) c d h hh hf hmap a b hqU JP K hn hz v
   have hj : J.D n z v = (d / c ^ a) * Jg.D n z v := by
-    rw [hjet]
-    field_simp [hc, hd.ne'] <;> ring
+    have hcancel (r : ℝ) : (d / c ^ a) * ((c ^ a / d) * r) = r := by
+      field_simp [hc, hd.ne'] <;> ring
+    exact ((congrArg (fun r : ℝ => (d / c ^ a) * r) hjet).trans (hcancel _)).symm
   let E := W.T.E0 (W.negativeHalfSample e m side)
   let H := W.T.H (W.negativeHalfSample e m side) ^ (3 / 4 : ℝ)
   let V := oneHighVariationWeight (parameterGrading W.S) base (s + loss) z v
