@@ -58,6 +58,18 @@ theorem n04NegativeInverseScalarAtom_property
   · exact ha
   · exact hh
 
+theorem n04NegativeInverseScalarAtom_jet_bound
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} {f : Atom → E → ℝ} {n : ℕ} {x : E} {v : Fin n → E} {bound : ℝ}
+    (hr : ∀ Q : SmoothDirections U (f .chartRadial), ‖Q.D n x v‖ ≤ bound)
+    (ha : ∀ Q : SmoothDirections U (f .chartAngleDefect), ‖Q.D n x v‖ ≤ bound)
+    (hh : ∀ Q : SmoothDirections U (f .height), ‖Q.D n x v‖ ≤ bound)
+    (i : Fin 3) (Q : SmoothDirections U (f (n04NegativeInverseScalarAtom i))) :
+    ‖Q.D n x v‖ ≤ bound :=
+  n04NegativeInverseScalarAtom_property
+    (P := fun a => ∀ J : SmoothDirections U (f a), ‖J.D n x v‖ ≤ bound) hr ha hh i Q
+
 private theorem n04NegativeInverse_nil_prefix
     {x M H t : ℝ} {shift : ℕ}
     (h : x ≤ M * parameterHeightWeight H StateAngleWord.nil.stateArity *
@@ -679,7 +691,12 @@ theorem negativeInverse_componentScalars_purePrefix
       .chartRadial trivial
     let Qheight := G.negativeInverse_componentAtomJointTowerOn hadm' k' m (!side) hiOpp
       .height trivial
-    let Qpair := smoothDirectionsProd Qrad Qheight
+    let Qpair : SmoothDirections (sectorNeighborhood G.W.S low ε' ε' ×ˢ
+        (Ioo (G.W.C.left m) (G.W.C.right m) ×ˢ univ))
+        (fun x : Parameter G.W.S × PolarPoint =>
+          (G.negativeInversePhysicalAtomFamily 0 .chartRadial x.1 k' x.2,
+            G.negativeInversePhysicalAtomFamily 0 .height x.1 k' x.2)) :=
+      smoothDirectionsProd Qrad Qheight
     have hvalue : |G.negativeInversePhysicalAtomFamily 0 .height z k' p| ≤ M := by
       have hb0 : ‖Qheight.D 0 (z, p) Fin.elim0‖ ≤
           M * parameterHeightWeight H StateAngleWord.nil.stateArity *
@@ -749,8 +766,20 @@ theorem negativeInverse_componentScalars_purePrefix
             (Fintype.card (OrderedFinpartition n) : ℝ) * (M * L) ^ n *
               parameterHeightWeight H w.stateArity *
                 t ^ (w.angleArity + shift * w.stateArity - 1) :=
-        n04NegativeInverse_overlapScalar_bound Qpair Q height heq
-        ⟨hz, hp⟩ hband hn hnN w shift hshift hCO hM hH (hheightL k) hL ht houter hvalue v hinner
+        n04NegativeInverse_overlapScalar_bound
+          (E := Parameter G.W.S × PolarPoint)
+          (U := sectorNeighborhood G.W.S low ε' ε' ×ˢ
+            (Ioo (G.W.C.left m) (G.W.C.right m) ×ˢ (univ : Set ℝ)))
+          (f := fun x : Parameter G.W.S × PolarPoint =>
+            (G.negativeInversePhysicalAtomFamily 0 .chartRadial x.1 k' x.2,
+              G.negativeInversePhysicalAtomFamily 0 .height x.1 k' x.2))
+          (g := fun x : Parameter G.W.S × PolarPoint =>
+            G.negativeInversePhysicalAtomFamily 0
+              (if height then .height else .chartRadial) x.1 k x.2)
+          (x := (z, p)) (N := s + K) (n := n)
+          (C := CO) (M := M) (H := H) (L := L) (t := t)
+          Qpair Q height heq ⟨hz, hp⟩ hband hn hnN w shift hshift hCO hM hH
+          (hheightL k) hL ht houter hvalue v hinner
       have hcoef : ((2 : ℝ) ^ (s + K) * CO * (1 + M)) *
           (Fintype.card (OrderedFinpartition n) : ℝ) * (M * L) ^ n ≤ B * E ^ B :=
         (hpack E hE).2 n hnN
@@ -774,14 +803,16 @@ theorem negativeInverse_componentScalars_purePrefix
             G.negativeInversePhysicalAtomFamily 0 .chartAngleDefect x.1 k' x.2) :=
         Q.congrOn (fun x hx => (hidentity x hx).2.1)
       exact hfinish (sourceBound 1 Qsource n w hwK hws v hvlow hvR hvphys hvstate hvspatial)
-    exact n04NegativeInverseScalarAtom_property
-      (P := fun atom => ∀ Q : SmoothDirections (sectorNeighborhood G.W.S low ε' ε' ×ˢ
-          (Ioo (G.W.C.left m) (G.W.C.right m) ×ˢ univ))
-          (fun x : Parameter G.W.S × PolarPoint =>
-            G.negativeInversePhysicalAtomFamily 0 atom x.1 k x.2),
-        ‖Q.D n (z, p) v‖ ≤ B * E ^ B * parameterHeightWeight H w.stateArity *
-          R ^ (((w.angleArity + shift * w.stateArity - 1 : ℕ) : ℝ) /
-            (((s + shift * K : ℕ) : ℝ) + 1)))
+    exact n04NegativeInverseScalarAtom_jet_bound
+      (E := Parameter G.W.S × PolarPoint)
+      (U := sectorNeighborhood G.W.S low ε' ε' ×ˢ
+        (Ioo (G.W.C.left m) (G.W.C.right m) ×ˢ (univ : Set ℝ)))
+      (f := fun atom (x : Parameter G.W.S × PolarPoint) =>
+        G.negativeInversePhysicalAtomFamily 0 atom x.1 k x.2)
+      (n := n) (x := (z, p)) (v := v)
+      (bound := B * E ^ B * parameterHeightWeight H w.stateArity *
+        R ^ (((w.angleArity + shift * w.stateArity - 1 : ℕ) : ℝ) /
+          (((s + shift * K : ℕ) : ℝ) + 1)))
       (hcompose false) hangle (hcompose true) a J
 
 end N04RealizationGauge
