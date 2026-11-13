@@ -85,9 +85,9 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → ℝ)
   (N : Set ℝ)
 
+include hcell in
 /-- The actual physical domains give the required core membership and
 one-sided comparison with the stored sample, even before restricting states. -/
-include hcell in
 theorem n04WholeReferenceGauge_sample_endpointX :
     let K := n04bActualTypedAtlas hT hS hN hfield e₀
     let V := n04WholeReferenceGaugeAtlasData C L K e cell ψ χ h₀ τ σ Q N
@@ -147,9 +147,9 @@ theorem n04WholeReferenceGauge_sample_endpointX :
     have h := hpositive i p.1 ⟨hpi.1.1.le, hpi.1.2.le⟩ hcore
     linarith only [h, hAN]
 
+include hcell in
 /-- The normalizer and every prescribed sample coefficient power use the
 same actual cell, with constants uniform before all states and pieces. -/
-include hcell in
 theorem n04WholeReferenceGauge_material_sample_comparison (P : ℝ) (hP : 0 ≤ P) :
     let K := n04bActualTypedAtlas hT hS hN hfield e₀
     let V := n04WholeReferenceGaugeAtlasData C L K e cell ψ χ h₀ τ σ Q N
@@ -170,9 +170,9 @@ theorem n04WholeReferenceGauge_material_sample_comparison (P : ℝ) (hP : 0 ≤ 
   exact hbound p.1 (T.sample (V.cell m)) h.1
     (materialSample_mem_interval hN.1.1.1.1 hT (V.cell m)) h.2
 
+include hcell in
 /-- Every strictly smaller positive sample-height exponent absorbs a
 fixed physical coefficient cost on all pieces of this same V. -/
-include hcell in
 theorem n04WholeReferenceGauge_material_sample_height_decay
     (γ β P : ℝ) (hβ : 0 < β) (hβγ : β < γ) :
     let K := n04bActualTypedAtlas hT hS hN hfield e₀

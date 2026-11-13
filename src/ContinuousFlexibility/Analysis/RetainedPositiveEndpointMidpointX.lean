@@ -61,7 +61,8 @@ theorem retainedReference_positive_endpoint_midpointX_bound
   · have hg : ∃ tail : Bool, ∃ n : ℕ, S.chain.index ≤ n ∧
         n04PositiveLeft i = P.sideRadius tail * n06MorsePositiveLeft S.chain tail n ∧
         n04PositiveRight i = P.sideRadius tail * n06MorsePositiveRight S.chain tail n := by
-      simpa only [U, mem_setOf_eq, not_not] using hi
+      by_contra hne
+      exact hi hne
     obtain ⟨tail, n, hn, hl, hr⟩ := hg
     let l := n06MorsePositiveLeft S.chain tail n
     let r := n06MorsePositiveRight S.chain tail n

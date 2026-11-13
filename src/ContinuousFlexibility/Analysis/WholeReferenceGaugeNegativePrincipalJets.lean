@@ -4,6 +4,7 @@ import ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds
 import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 import ContinuousFlexibility.Analysis.LocalMixedProductBounds
 import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
+import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Four actual negative principal atoms
@@ -54,14 +55,22 @@ private def negativeAiryAtom (ρ : ℝ) (v : Atom) (p : PolarPoint) : ℝ :=
 private theorem negativeAiryAtom_smooth (ρ : ℝ) (v : Atom) :
     ContDiff ℝ ∞ (negativeAiryAtom ρ v) := by
   by_cases hA : v = .principalA ∨ v = .principalAInverse
-  · simpa only [negativeAiryAtom, if_pos hA] using
-      (contDiff_const : ContDiff ℝ ∞ (fun _ : PolarPoint => (1 : ℝ)))
+  · have hfun : negativeAiryAtom ρ v = fun _ : PolarPoint => (1 : ℝ) := by
+      funext p
+      simp only [negativeAiryAtom, if_pos hA]
+    rw [hfun]
+    exact contDiff_const
   · by_cases hB : v = .principalB
-    · simpa only [negativeAiryAtom, if_neg hA, if_pos hB] using
-        (contDiff_const : ContDiff ℝ ∞ (fun _ : PolarPoint => (0 : ℝ)))
-    · simpa only [negativeAiryAtom, if_neg hA, if_neg hB] using
-        ((contDiff_const.mul contDiff_fst).neg :
-          ContDiff ℝ ∞ (fun p : PolarPoint => -(ρ * p.1)))
+    · have hfun : negativeAiryAtom ρ v = fun _ : PolarPoint => (0 : ℝ) := by
+        funext p
+        simp only [negativeAiryAtom, if_neg hA, if_pos hB]
+      rw [hfun]
+      exact contDiff_const
+    · have hfun : negativeAiryAtom ρ v = fun p : PolarPoint => -(ρ * p.1) := by
+        funext p
+        simp only [negativeAiryAtom, if_neg hA, if_neg hB]
+      rw [hfun]
+      exact (contDiff_const.mul contDiff_fst).neg
 
 private theorem negativeAiryAtom_mixed_bound (ρ M : ℝ) (hρ : 0 ≤ ρ)
     (hM : 1 ≤ M) (hρM : ρ ≤ M) (v : Atom) {p : PolarPoint}
@@ -81,12 +90,21 @@ private theorem negativeAiryAtom_mixed_bound (ρ M : ℝ) (hρ : 0 ≤ ρ)
     · rw [if_neg hb, abs_zero]
       exact hM0
   by_cases hA : v = .principalA ∨ v = .principalAInverse
-  · simpa only [negativeAiryAtom, if_pos hA] using
-      hconstant 1 (by simpa only [abs_one] using hM)
+  · have hfun : negativeAiryAtom ρ v = fun _ : PolarPoint => (1 : ℝ) := by
+      funext q
+      simp only [negativeAiryAtom, if_pos hA]
+    rw [hfun]
+    exact hconstant 1 (by simpa only [abs_one] using hM)
   · by_cases hB : v = .principalB
-    · simpa only [negativeAiryAtom, if_neg hA, if_pos hB] using
-        hconstant 0 (by simpa only [abs_zero] using hM0)
-    · simp only [negativeAiryAtom, if_neg hA, if_neg hB]
+    · have hfun : negativeAiryAtom ρ v = fun _ : PolarPoint => (0 : ℝ) := by
+        funext q
+        simp only [negativeAiryAtom, if_neg hA, if_pos hB]
+      rw [hfun]
+      exact hconstant 0 (by simpa only [abs_zero] using hM0)
+    · have hfun : negativeAiryAtom ρ v = fun q : PolarPoint => -(ρ * q.1) := by
+        funext q
+        simp only [negativeAiryAtom, if_neg hA, if_neg hB]
+      rw [hfun]
       rw [n08_mixedDerivative_radial (fun r : ℝ => -(ρ * r))]
       by_cases hb : b = 0
       · rw [if_pos hb, iteratedDeriv_fun_neg, iteratedDeriv_const_mul_field]
@@ -149,7 +167,7 @@ theorem n04WholeReferenceGauge_negative_principalReferenceJets_enlargedMaterialD
       have hpositive : V.positive m = true := by
         simp only [V, n04WholeReferenceGaugeAtlasData, n04WholeCanonicalAtlasData,
           n04bWithInteriorDivision, n04WholePiecePositive, hi]
-      exact False.elim (Bool.true_ne_false (hpositive.symm.trans hm))
+      exact False.elim (Bool.false_ne_true (hpositive.symm.trans hm).symm)
   | inl j =>
       let k := if j.2 then (K.cutPair j.1).2 else (K.cutPair j.1).1
       have hk : e₀ k = .inl j := by
@@ -173,7 +191,9 @@ theorem n04WholeReferenceGauge_negative_principalReferenceJets_enlargedMaterialD
           (V.coefficients z m).a p = 1 ∧ (V.coefficients z m).b p = 0 ∧
             (V.coefficients z m).c p = -p.1 := by
         have hpK : p ∈ canonicalOpen S K k := by
-          simpa only [canonicalOpen, hl, hr] using hp
+          have hl' : V.left m = K.left k := hl
+          have hr' : V.right m = K.right k := hr
+          simpa only [canonicalOpen, hl', hr'] using hp
         rw [hcoeff]
         exact n04bActualTypedAtlas_negative_airy_coefficients
           hT hS hN hfield e₀ hz hs k j hk p hpK
@@ -225,7 +245,7 @@ theorem n04WholeReferenceGauge_negative_principalReferenceJets_enlargedMaterialD
         have hp' : p + (0, Real.pi) ∈ unitStrip := by
           refine ⟨?_, mem_univ _⟩
           change 0 < p.1 + 0 ∧ p.1 + 0 < 1
-          simpa only [add_zero] using hp.1
+          simpa only [add_zero, mem_Ioo] using hp.1
         calc
           _ = negativeAiryAtom ρ v (p + (0, Real.pi)) := hEq hp'
           _ = negativeAiryAtom ρ v p := by

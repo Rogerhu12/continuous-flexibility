@@ -70,9 +70,15 @@ private theorem negative_E0_fields (U : MaterialData) (z : AnnularState S × ℝ
     rcases j with ⟨a, side⟩
     cases side <;> simp only [Bool.false_eq_true, ite_false, ite_true,
       Equiv.apply_symm_apply]
-  rcases n04WholeReferenceGaugeAtlasData_negative_fields
-    C L K e cell ψ χ h₀ τ σ Q N z m j hi with
-    ⟨_, _, hleft, hright, _, hsample, _, _, _, _, _, _⟩
+  have hfields : V.left m = K.left k ∧ V.right m = K.right k ∧
+      V.physicalLeft m = K.physicalLeft k ∧ V.physicalRight m = K.physicalRight k ∧
+      physicalPieceOpen S V z m = physicalPieceOpen S K z k ∧
+      V.cell m = K.cell k ∧ V.positive m = false ∧
+      V.chart z m = K.chart z k ∧ V.inverseChart z m = K.inverseChart z k ∧
+      V.height z m = K.height z k ∧ V.coefficients z m = K.coefficients z k ∧
+      V.potential z m = K.potential z k :=
+    n04WholeReferenceGaugeAtlasData_negative_fields C L K e cell ψ χ h₀ τ σ Q N z m j hi
+  obtain ⟨_, _, hleft, hright, _, hsample, _, _, _, _, _, _⟩ := hfields
   refine ⟨k, hk, hsample, ?_⟩
   rw [canonicalE0Atom_eq_normalizedPower]
   funext p

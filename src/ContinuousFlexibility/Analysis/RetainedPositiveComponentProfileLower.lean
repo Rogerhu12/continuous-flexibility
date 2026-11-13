@@ -95,7 +95,8 @@ theorem retainedReference_positive_component_profile_material_lower
   · have hg : ∃ side : Bool, ∃ n : ℕ, S.chain.index ≤ n ∧
         n04PositiveLeft i = P.sideRadius side * n06MorsePositiveLeft S.chain side n ∧
         n04PositiveRight i = P.sideRadius side * n06MorsePositiveRight S.chain side n := by
-      simpa only [U, mem_setOf_eq, not_not] using hi
+      by_contra hne
+      exact hi hne
     obtain ⟨side, n, hn, hl, hu⟩ := hg
     have hm : n04PositiveMidpoint i = P.sideRadius side *
         ((n06MorsePositiveLeft S.chain side n + n06MorsePositiveRight S.chain side n) / 2) := by

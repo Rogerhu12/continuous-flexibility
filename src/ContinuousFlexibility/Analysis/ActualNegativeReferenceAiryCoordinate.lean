@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.OpticalHalfAiryAverage
 import ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields
 import ContinuousFlexibility.Analysis.N01OpticalRootDivision
+import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # The stored negative reference chart is the integral Airy coordinate
@@ -38,8 +39,10 @@ theorem n04b_reference_orientedTravel_inwardIntegral
   · have hy : C.right m - x ∈ Icc (C.left m) (C.right m) := by
       constructor <;> linarith only [hx.1, hx.2]
     have hv := n04b_referenceOpticalSpeed_continuousOn hD hC m
-    have hiL := (hv.mono (Icc_subset_Icc le_rfl hy.2)).intervalIntegrable_of_Icc hy.1
-    have hiR := (hv.mono (Icc_subset_Icc hy.1 le_rfl)).intervalIntegrable_of_Icc hy.2
+    have hiL := (hv.mono (Icc_subset_Icc le_rfl hy.2)).intervalIntegrable_of_Icc
+      (μ := volume) hy.1
+    have hiR := (hv.mono (Icc_subset_Icc hy.1 le_rfl)).intervalIntegrable_of_Icc
+      (μ := volume) hy.2
     have hadd := intervalIntegral.integral_add_adjacent_intervals hiL hiR
     have hwhole : (∫ r in C.left m..C.right m, opticalSpeed D.w r) = C.travel m :=
       n04b_referenceTravel_right hC m
@@ -107,6 +110,7 @@ theorem n04Coordinates_actual_reference_negative_airy_chart
     K.chart (C.referenceState, 0) (e.symm (.inl (m, side)))
         (inwardComponentPoint (C.left m) (C.right m) side x, θ) =
       (n06AiryRadialCoordinate c x, θ) := by
+  dsimp only
   let K := n04bActualTypedAtlas hT hS hN hfield e
   let k := e.symm (.inl (m, side))
   let z₀ : AnnularState S × ℝ := (C.referenceState, 0)
@@ -123,7 +127,7 @@ theorem n04Coordinates_actual_reference_negative_airy_chart
     hT hS hN hfield e href hsref k m side (e.apply_symm_apply _) hp
   rw [hg.1.self_of_nhds]
   change n04bRootStripChart (C.travel m) side (n04bActualTravelChart S C L z₀ m p) = _
-  rw [n04b_reference_actualTravelChart hN.1.1.2.2.1 hT hS hN hfield m
+  rw [n04b_reference_actualTravelChart hN.1.1.2.2.1 hfield m
     ⟨hp.1.1.le, hp.1.2.le⟩ θ]
   change (n04bRootHalfCoordinate (C.travel m) side
     (opticalTravel D.w (C.left m) p.1), θ) = _

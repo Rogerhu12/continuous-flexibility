@@ -50,12 +50,24 @@ theorem canonical_staticAtom_contDiffOn_of_core
     · exact hEll
     · exact hEllInv
   · rcases ha with rfl | rfl | rfl | rfl | rfl | rfl
-    · simpa only [atom, div_eq_mul_inv, smul_eq_mul] using hH.smul_const (T.H (T.sample (K.cell m)))⁻¹
-    · simpa only [atom, div_eq_mul_inv, smul_eq_mul] using hHInv.const_smul (T.H (T.sample (K.cell m)))
-    · simpa only [atom, div_eq_mul_inv, smul_eq_mul] using hM.smul_const (T.M (T.sample (K.cell m)))⁻¹
-    · simpa only [atom, div_eq_mul_inv, smul_eq_mul] using hMInv.const_smul (T.M (T.sample (K.cell m)))
-    · simpa only [atom, div_eq_mul_inv, smul_eq_mul] using hE.smul_const (T.E0 (T.sample (K.cell m)))⁻¹
-    · simpa only [atom, div_eq_mul_inv, smul_eq_mul] using hEInv.const_smul (T.E0 (T.sample (K.cell m)))
+    · refine (hH.mul (contDiffOn_const (c := (T.H (T.sample (K.cell m)))⁻¹))).congr ?_
+      intro p _
+      simp only [atom, div_eq_mul_inv]
+    · refine ((contDiffOn_const (c := T.H (T.sample (K.cell m)))).mul hHInv).congr ?_
+      intro p _
+      simp only [atom, div_eq_mul_inv]
+    · refine (hM.mul (contDiffOn_const (c := (T.M (T.sample (K.cell m)))⁻¹))).congr ?_
+      intro p _
+      simp only [atom, div_eq_mul_inv]
+    · refine ((contDiffOn_const (c := T.M (T.sample (K.cell m)))).mul hMInv).congr ?_
+      intro p _
+      simp only [atom, div_eq_mul_inv]
+    · refine (hE.mul (contDiffOn_const (c := (T.E0 (T.sample (K.cell m)))⁻¹))).congr ?_
+      intro p _
+      simp only [atom, div_eq_mul_inv]
+    · refine ((contDiffOn_const (c := T.E0 (T.sample (K.cell m)))).mul hEInv).congr ?_
+      intro p _
+      simp only [atom, div_eq_mul_inv]
 
 theorem canonical_staticAtom_angle_period
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

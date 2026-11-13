@@ -90,7 +90,8 @@ theorem retainedReference_positive_closed_interval_X_oscillation
   · have hg : ∃ side : Bool, ∃ n : ℕ, S.chain.index ≤ n ∧
         n04PositiveLeft i = P.sideRadius side * n06MorsePositiveLeft S.chain side n ∧
         n04PositiveRight i = P.sideRadius side * n06MorsePositiveRight S.chain side n := by
-      simpa only [U, mem_setOf_eq, not_not] using hi
+      by_contra hne
+      exact hi hne
     obtain ⟨side, n, hn, hl, hu⟩ := hg
     have hR : 0 < P.sideRadius side := P.sideRadius_pos side
     have hscaled (x : ℝ) (hx : x ∈ Icc (n04PositiveLeft i) (n04PositiveRight i)) :

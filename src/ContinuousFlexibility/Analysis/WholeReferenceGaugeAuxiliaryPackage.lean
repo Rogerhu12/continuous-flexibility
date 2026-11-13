@@ -80,10 +80,40 @@ theorem exists_wholeReferenceGauge_auxiliary_package
       ∀ a : Atom, a ≠ .auxiliaryColumn → a ≠ .ratioE0 → a ≠ .ratioE0Inverse →
         ∀ z m, atom D T' S' C' L' V' z m a = atom D T S C L V z m a := by
   let V := n04WholeReferenceGaugeAtlasData C L K e cell ψ χ h₀ τ σ Q B.region
-  obtain ⟨i, l, u, η, hlu, hinterval, hSη, hNη, hAη, hgauge, hQη,
-      hcompact, hsupport, _⟩ :=
-    exists_buffered_auxiliaryColumn_replacement_with_witness
-      (K := V) hT hS hN hA B rfl
+  have hregion : V.normalizationRegion = B.region :=
+    (n04WholeReferenceGaugeAtlasData_physical_fields C L K e cell ψ χ h₀ τ σ Q
+      B.region).2.2.2.2.2.2.2.trans
+      (n04WholeCanonicalAtlasData_cut_metadata C L K e cell σ τ Q B.region).2.2
+  have hwit := exists_buffered_auxiliaryColumn_replacement_with_witness
+    (K := V) hT hS hN hA B hregion
+  let i := hwit.choose
+  let l := hwit.choose_spec.choose
+  let u := hwit.choose_spec.choose_spec.choose
+  let η := hwit.choose_spec.choose_spec.choose_spec.choose
+  have hspec := hwit.choose_spec.choose_spec.choose_spec.choose_spec
+  have hlu : l < u := hspec.1
+  have hinterval : Icc l u ⊆ Ioo (B.normalizationLeft i) (B.normalizationRight i) :=
+    hspec.2.1
+  have hSη : IsPhysicalSpaces D T (physicalSpacesReplaceAuxiliaryColumn S η) :=
+    hspec.2.2.1
+  have hNη : NonlinearPropertiesThrough03 D T (physicalSpacesReplaceAuxiliaryColumn S η)
+      (geometryReplaceAuxiliaryColumn C η) (returnReplaceAuxiliaryColumn R η)
+      (correctionReplaceAuxiliaryColumn L η) base loss ε :=
+    hspec.2.2.2.1
+  have hAη : CanonicalGeometry D (physicalSpacesReplaceAuxiliaryColumn S η)
+      (geometryReplaceAuxiliaryColumn C η) (canonicalReplaceAuxiliaryColumn V η) base ε :=
+    hspec.2.2.2.2.1
+  have hgauge : CanonicalGeometry.AuxiliaryColumnGauge
+      (physicalSpacesReplaceAuxiliaryColumn S η) (canonicalReplaceAuxiliaryColumn V η) :=
+    hspec.2.2.2.2.2.1
+  have hQη : (physicalSpacesReplaceAuxiliaryColumn S η).Q
+      (physicalSpacesReplaceAuxiliaryColumn S η).psi = 1 :=
+    hspec.2.2.2.2.2.2.1
+  have hcompact : HasCompactRadialSupport D ((S.height (3 / 4 : ℝ)).decode η) :=
+    hspec.2.2.2.2.2.2.2.1
+  have hsupport : ∀ p : PolarPoint, (S.height (3 / 4 : ℝ)).decode η p ≠ 0 →
+      p.1 ∈ Icc l u :=
+    hspec.2.2.2.2.2.2.2.2.1
   let S' := physicalSpacesReplaceAuxiliaryColumn S η
   let C' := geometryReplaceAuxiliaryColumn C η
   let R' := returnReplaceAuxiliaryColumn R η
@@ -95,9 +125,13 @@ theorem exists_wholeReferenceGauge_auxiliary_package
       (V'.physicalRight (e.symm (.inr i))) :=
     wholeReferenceGauge_auxiliary_support_interval C L K e cell ψ χ h₀ τ σ Q
       B.region B i hinterval
-  obtain ⟨hT', hS', hN', hregular, hbound⟩ :=
-    canonical_auxiliaryReferenceJets_enlargedMaterialData hT hSη hNη hAη hRη
-      hgauge (e.symm (.inr i)) hintervalV hsupport
+  have hjets := canonical_auxiliaryReferenceJets_enlargedMaterialData hT hSη hNη hAη hRη
+    hgauge (e.symm (.inr i)) hintervalV hsupport
+  have hT' := hjets.1
+  have hS' := hjets.2.1
+  have hN' := hjets.2.2.1
+  have hregular := hjets.2.2.2.1
+  have hbound := hjets.2.2.2.2
   refine ⟨i, l, u, η, hlu, hinterval, hT', hS', hN', hAη, hRη, hgauge, hQη,
     hcompact, hsupport, hintervalV, hregular, hbound, ?_, ?_, ?_, ?_⟩
   · intro z hz hs m
