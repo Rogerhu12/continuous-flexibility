@@ -14,10 +14,10 @@ stay in one fixed low-seminorm ball. Translation costs no grading order.
 noncomputable section
 
 namespace ContinuousFlexibility.Statements
-
+set_option backward.isDefEq.respectTransparency false
 open Set Filter ContinuousFlexibility.Analysis
 open scoped BigOperators Topology
-
+set_option diagnostics true
 local instance circleShiftedForwardFixedBasePairSMul (M : CircleModelData) :
     SMul ℝ (M.Space × M.Space) := Prod.instSMul
 
