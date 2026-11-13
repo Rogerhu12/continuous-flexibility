@@ -40,8 +40,8 @@ theorem iteratedFDeriv_graph_zero {g : P → Y}
       graph n (iteratedFDeriv ℝ n g 0) v := by
   have hid : iteratedFDeriv ℝ n (id : P → P) 0 =
       continuousLinearJets (ContinuousLinearMap.id ℝ P) n 0 :=
-    ((hasProjectiveJetsOn_continuousLinear (ContinuousLinearMap.id ℝ P) univ).
-      eq_iteratedFDeriv_finiteDimensional isOpen_univ n (mem_univ 0)).symm
+    ((hasProjectiveJetsOn_continuousLinear (ContinuousLinearMap.id ℝ P) univ).eq_iteratedFDeriv_finiteDimensional
+      isOpen_univ n (mem_univ 0)).symm
   change iteratedFDeriv ℝ n (fun p => ((id : P → P) p, g p)) 0 v = _
   rw [iteratedFDeriv_prodMk (contDiffAt_id : ContDiffAt ℝ ∞ (id : P → P) 0)
     hg (by simp)]
@@ -49,15 +49,18 @@ theorem iteratedFDeriv_graph_zero {g : P → Y}
   rw [hid]
   cases n with
   | zero =>
-      change (0, _) = (0 : P × Y) + (0, _)
+      change ((0 : P), iteratedFDeriv ℝ 0 g 0 v) =
+        (0 : P × Y) + (0, iteratedFDeriv ℝ 0 g 0 v)
       rw [zero_add]
   | succ n =>
       cases n with
       | zero =>
-          change (v 0, _) = (v 0, (0 : Y)) + (0, _)
+          change (v 0, iteratedFDeriv ℝ 1 g 0 v) =
+            (v 0, (0 : Y)) + (0, iteratedFDeriv ℝ 1 g 0 v)
           simp only [Prod.mk_add_mk, add_zero, zero_add]
       | succ n =>
-          change (0, _) = (0 : P × Y) + (0, _)
+          change ((0 : P), iteratedFDeriv ℝ (n + 2) g 0 v) =
+            (0 : P × Y) + (0, iteratedFDeriv ℝ (n + 2) g 0 v)
           rw [zero_add]
 
 end Graph
@@ -93,23 +96,33 @@ theorem finiteAffine_partition_sum_zero
   have hGzero : G 0 = (0, g x) := by
     simp only [G, map_zero, add_zero]
   have hpoint : (x, (0 : Y)) + M (0, g x) = (x, g x) := by
-    simp only [M, ContinuousLinearMap.prodMap_apply, ContinuousLinearMap.id_apply,
-      map_zero, Prod.mk_add_mk, add_zero, zero_add]
+    change (x, (0 : Y)) + (L 0, g x) = (x, g x)
+    simp only [map_zero, Prod.mk_add_mk, add_zero, zero_add]
   have hF : ContDiffAt ℝ ∞ F (G 0) := by
     rw [hGzero]
     apply (smoothDirections_contDiffOn_finiteAffine J (x, (0 : Y)) M).contDiffAt
-    exact (J.open_domain.preimage (continuous_const.add M.continuous)).mem_nhds
-      (by simpa only [mem_preimage, hpoint] using (show (x, g x) ∈ U ×ˢ V from
-        ⟨hx, hmap hx⟩))
+    have hopen : IsOpen ((fun p : P × Y => (x, (0 : Y)) + M p) ⁻¹' (U ×ˢ V)) :=
+      J.open_domain.preimage (continuous_const.add M.continuous)
+    apply hopen.mem_nhds
+    change (x, (0 : Y)) + M (0, g x) ∈ U ×ˢ V
+    rw [hpoint]
+    exact ⟨hx, hmap hx⟩
   have heq : F ∘ G =ᶠ[𝓝 (0 : P)] (fun _ => (0 : Y)) := by
-    have hnear : ∀ᶠ p : P in 𝓝 0, x + L p ∈ U :=
-      (continuous_const.add L.continuous).continuousAt.tendsto.eventually
-        (by simpa only [map_zero, add_zero] using hU.mem_nhds hx)
+    have hcont : ContinuousAt (fun p : P => x + L p) 0 :=
+      (continuous_const.add L.continuous).continuousAt
+    have ht : Tendsto (fun p : P => x + L p) (𝓝 0) (𝓝 x) := by
+      simpa only [map_zero, add_zero] using hcont.tendsto
+    have hnear : ∀ᶠ p : P in 𝓝 0, x + L p ∈ U := ht.eventually (hU.mem_nhds hx)
     filter_upwards [hnear] with p hp
-    simpa only [F, G, Function.comp_apply, M, ContinuousLinearMap.prodMap_apply,
-      ContinuousLinearMap.id_apply, Prod.mk_add_mk, zero_add] using hzero (x + L p) hp
-  have hcomp := congrArg (fun A : P [×n]→L[ℝ] Y => A v)
-    (iteratedFDeriv_comp hF hG (by simp : (n : ℕ∞ω) ≤ ∞))
+    change H (x + L p, (0 : Y) + g (x + L p)) = 0
+    rw [zero_add]
+    exact hzero (x + L p) hp
+  have hformula : iteratedFDeriv ℝ n (F ∘ G) 0 =
+      ∑ c : OrderedFinpartition n,
+        c.compAlongOrderedFinpartition (iteratedFDeriv ℝ c.length F (G 0))
+          (fun i => iteratedFDeriv ℝ (c.partSize i) G 0) :=
+    iteratedFDeriv_comp hF hG (by simp : (n : ℕ∞ω) ≤ ∞)
+  have hcomp := congrArg (fun A : P [×n]→L[ℝ] Y => A v) hformula
   simp only [ContinuousMultilinearMap.sum_apply,
     OrderedFinpartition.compAlongOrderFinpartition_apply,
     OrderedFinpartition.applyOrderedFinpartition_apply] at hcomp
@@ -147,7 +160,7 @@ theorem tower_eq_finiteAffine
     iteratedFDeriv ℝ n (fun p => g (x + L p)) 0 v =
       (tower J hg hmap A hA n).value x (fun i => L (v i)) := by
   classical
-  induction n using Nat.strong_induction_on generalizing v with
+  induction n using Nat.strong_induction_on with
   | h n ih =>
     cases n with
     | zero =>
@@ -382,3 +395,7 @@ def n04NegativeInverse_jointTower
 
 end PlanarInverse
 end ContinuousFlexibility.Analysis
+
+/-- info: 'ContinuousFlexibility.Analysis.n04NegativeInverse_jointTower' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms ContinuousFlexibility.Analysis.n04NegativeInverse_jointTower
