@@ -137,7 +137,9 @@ def negativePhysicalAtomJointTower
   · let L : ((StateDirections W.S × ℝ) × PolarPoint) →L[ℝ] ℝ :=
       (ContinuousLinearMap.snd ℝ ℝ ℝ).comp
         (ContinuousLinearMap.snd ℝ (StateDirections W.S × ℝ) PolarPoint)
-    let Jθ := smoothDirectionsLinearOn L (hU.prod (isOpen_Ioo.prod isOpen_univ))
+    let Jθ : SmoothDirections (U ×ˢ unitStrip)
+        (fun x : (StateDirections W.S × ℝ) × PolarPoint => L x) :=
+      smoothDirectionsLinearOn L (hU.prod (isOpen_Ioo.prod isOpen_univ))
     apply ((smoothDirectionsProd JC Jθ).comp_contDiff isOpen_univ
       ((contDiff_fst.snd.sub contDiff_snd) :
         ContDiff ℝ ∞ (fun p : PolarPoint × ℝ => p.1.2 - p.2)).contDiffOn

@@ -92,10 +92,8 @@ theorem fullHalfFields_finiteAffine_representatives_uniform
       hΨ (fun q => ⟨hstate q.1, hRmem _, mem_univ _⟩)
   let q : ((Fin n → ℝ) × PolarPoint) → ℝ := fun y =>
     F.stateSquare (x + L (ρ y.1)) m side y.2.1
-  let K := stateJointKappaCLM W.hS W.hT W.radial.1 m
-  have hk : ContDiff ℝ ∞ (fun y : Fin n → ℝ => stateKappa W.S (x + L (ρ y)).1 m) := by
-    simpa only [K, stateJointKappaCLM_apply] using
-      K.contDiff.comp (contDiff_const.add (L.contDiff.comp hρ))
+  have hk : ContDiff ℝ ∞ (fun y : Fin n → ℝ => stateKappa W.S (x + L (ρ y)).1 m) :=
+    (W.negativeKappa_finiteAffine_contDiff x L m).comp hρ
   have hq : ContDiff ℝ ∞ q :=
     ((F.reference_smooth m side).comp contDiff_snd.fst).sub
       ((hk.comp contDiff_fst).mul ((F.control_smooth m side).comp contDiff_snd.fst))

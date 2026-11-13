@@ -66,6 +66,9 @@ theorem N01Properties.n04NegativeGeometry_selectorInverseCircle_fixedBase_oneHig
       ∀ v : Fin n → StateDirections S × ℝ,
         (S.circle (3 / 4 : ℝ)).grading s (J.D n x v) ≤
           K * tameJetSize (pairGrading (sectorGrading S) realGrading) n s L B x v := by
+  letI : ContinuousNeg (S.circle (3 / 4 : ℝ)).Space :=
+    (withSeminorms_graded (fun n => (S.circle (3 / 4 : ℝ)).level n)
+      (S.circle (3 / 4 : ℝ)).bond).isTopologicalAddGroup.toContinuousNeg
   let I : Type := {rsel : ℕ → ℝ // ∀ m, rsel m ∈ Icc (C.left m) (C.right m)}
   have hf := hN.n04FixedBase_endpointFlowCircle hS hT
     (fun i : I => i.val) (fun i => i.property)

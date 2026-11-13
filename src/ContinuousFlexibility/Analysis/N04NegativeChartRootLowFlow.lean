@@ -32,7 +32,8 @@ private theorem field_fiber_raw_bounds {F : ℝ × N04FlowPoint → ℝ}
       have he : (fun q : N04FlowPoint => F (t, ((0 : ℝ × ℝ), Real.pi) + q)) =
           (fun q => F (t, q)) := by
         funext q
-        simpa only [Prod.mk_add_mk, zero_add, add_comm Real.pi q.2] using hp t q.1 q.2
+        rcases q with ⟨w, η⟩
+        simpa only [Prod.mk_add_mk, zero_add, add_comm Real.pi η] using hp t w η
       have hh := iteratedFDeriv_comp_add_left (𝕜 := ℝ)
         (f := fun q : N04FlowPoint => F (t, q)) (j + 1)
         ((0 : ℝ × ℝ), Real.pi) (v, θ)
@@ -99,9 +100,12 @@ private theorem displacement_jet_to_value {h : ℝ → ℝ} (hh : ContDiff ℝ �
           ((ContinuousLinearMap.norm_id_le (𝕜 := ℝ) (E := ℝ)).trans
             (le_add_of_nonneg_left hR))
   have he : h = (fun η => h η - η) + id := by funext η; simp
-  conv_lhs => rw [he]
-  rw [iteratedFDeriv_add_apply
-    ((hh.sub contDiff_id).contDiffAt.of_le (by simp : (n : ℕ∞ω) ≤ ∞)) contDiffAt_id]
+  have hjet : iteratedFDeriv ℝ n h θ =
+      iteratedFDeriv ℝ n (fun η => h η - η) θ + iteratedFDeriv ℝ n (id : ℝ → ℝ) θ := by
+    conv_lhs => rw [he]
+    exact iteratedFDeriv_add_apply
+      ((hh.sub contDiff_id).contDiffAt.of_le (by simp : (n : ℕ∞ω) ≤ ∞)) contDiffAt_id
+  rw [hjet]
   exact (norm_add_le _ _).trans ((add_le_add hb hid).trans_eq (by ring))
 
 /-- The estimate is on the positive radial box. Smooth extensions only
@@ -146,8 +150,9 @@ theorem n04NegativeChart_normalized_flow_low :
     linarith only [hM, Real.pi_pos, hterm]
   have hvalue : |g v| ≤ M + Real.pi := by
     have hb0 := n04Flow_displacement_abs_le hF hΘ v.1 v.2 (zero_le_one.trans hM)
-      (fun t ht θ => by simpa only [norm_iteratedFDeriv_zero, Real.norm_eq_abs] using
-        hraw 0 (by omega) (v.1, θ) hv hvx t ht) ht
+      (fun t ht θ => by
+        simpa only [norm_iteratedFDeriv_zero, Real.norm_eq_abs] using
+          hraw 0 (by omega) (v.1, θ) hv hvx t ht) ht
     calc
       _ = |(g v - v.2) + v.2| := by rw [sub_add_cancel]
       _ ≤ |g v - v.2| + |v.2| := abs_add_le _ _
@@ -160,8 +165,9 @@ theorem n04NegativeChart_normalized_flow_low :
     | succ k =>
         have hh := hb hM (le_refl (1 : ℝ)) F hF hp Θ hΘ v
           (fun t ht θ => hangle (v.1, θ) hv hvx t ht)
-          (fun j hj t ht θ => by simpa only [one_pow, mul_one] using
-            hraw (j + 1) (by omega) (v.1, θ) hv hvx t ht)
+          (fun j hj t ht θ => by
+            simpa only [one_pow, mul_one] using
+              hraw (j + 1) (by omega) (v.1, θ) hv hvx t ht)
           k (by omega) 1 ht
         have hh' : ‖iteratedFDeriv ℝ (k + 1) g v‖ ≤ C * M ^ e := by
           simpa only [one_pow, mul_one] using hh
@@ -172,9 +178,10 @@ theorem n04NegativeChart_normalized_flow_low :
     have hc := norm_iteratedFDeriv_comp_le hg (rootFlowNormalizedArgument σ).contDiff
       (by simp : (k : ℕ∞ω) ≤ ∞) q (C := B) (D := (1 : ℝ))
       (fun j hj => hjet j (hj.trans hk))
-      (fun j hj _ => by simpa only [one_pow] using
-        (flowJet_norm_iteratedFDeriv_clm_le (rootFlowNormalizedArgument σ) hj q).trans
-          (rootFlowNormalizedArgument_norm hσ))
+      (fun j hj _ => by
+        have hjb := (flowJet_norm_iteratedFDeriv_clm_le (rootFlowNormalizedArgument σ) hj q).trans
+          (rootFlowNormalizedArgument_norm hσ)
+        simpa only [one_pow] using hjb)
     have hf : (k.factorial : ℝ) ≤ 2 := by interval_cases k <;> norm_num
     have hc' : ‖iteratedFDeriv ℝ k (g ∘ rootFlowNormalizedArgument σ) q‖ ≤ k.factorial * B := by
       simpa only [one_pow, mul_one] using hc

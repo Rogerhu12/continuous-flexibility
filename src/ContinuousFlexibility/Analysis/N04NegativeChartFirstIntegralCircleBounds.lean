@@ -93,6 +93,9 @@ theorem N01Properties.n04FixedBase_correctedFlowInverseCircle
       (S.circle (3 / 4 : ℝ)).grading (sectorNeighborhood S base ε ε)
       (fun i => hN.n04NegativeGeometryCorrectedFlowInverseCircle
         hS hT χ hχrange (rsel i) (hrsel i)) := by
+  letI : ContinuousNeg (S.circle (3 / 4 : ℝ)).Space :=
+    (withSeminorms_graded (fun n => (S.circle (3 / 4 : ℝ)).level n)
+      (S.circle (3 / 4 : ℝ)).bond).isTopologicalAddGroup.toContinuousNeg
   have hf := hN.n04FixedBase_correctedFlowCircle hS hT χ hχrange hflow rsel hrsel
   have hi := n04FixedBaseSmoothFamilyOn_circleInverse_maps (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1
     (by norm_num) (hS.2.2.2.2.1 (3 / 4 : ℝ)).2.2

@@ -19,6 +19,15 @@ namespace ContinuousFlexibility.Analysis.N04RealizationStart
 open Set ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint
 open scoped ContDiff
 
+set_option backward.isDefEq.respectTransparency true
+
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+
 variable (W : N04RealizationStart)
 
 def negativeInwardPoint (m : ℕ) (side : Bool) (p : PolarPoint) : PolarPoint :=
@@ -26,10 +35,11 @@ def negativeInwardPoint (m : ℕ) (side : Bool) (p : PolarPoint) : PolarPoint :=
 
 theorem negativeInwardPoint_contDiff (m : ℕ) (side : Bool) :
     ContDiff ℝ ∞ (W.negativeInwardPoint m side) := by
-  cases side <;> simp only [negativeInwardPoint, inwardComponentPoint,
-    Bool.false_eq_true, ↓reduceIte]
-  · exact (contDiff_const.add contDiff_fst).prodMk contDiff_snd
-  · exact (contDiff_const.sub contDiff_fst).prodMk contDiff_snd
+  cases side
+  · change ContDiff ℝ ∞ (fun p : PolarPoint => (W.C.left m + p.1, p.2))
+    exact (contDiff_const.add contDiff_fst).prodMk contDiff_snd
+  · change ContDiff ℝ ∞ (fun p : PolarPoint => (W.C.right m - p.1, p.2))
+    exact (contDiff_const.sub contDiff_fst).prodMk contDiff_snd
 
 theorem negativeInwardPoint_mem_annular (m : ℕ) (side : Bool) {p : PolarPoint}
     (hp : p.1 ∈ Icc (0 : ℝ) (W.negativeOpticalWidth m side)) :
@@ -39,6 +49,23 @@ theorem negativeInwardPoint_mem_annular (m : ℕ) (side : Bool) {p : PolarPoint}
     (show p.1 ∈ Icc (0 : ℝ) (W.C.right m - W.C.left m) from
       ⟨hp.1, hp.2.trans (W.negativeOpticalWidth_le_component m side)⟩)
   exact ⟨⟨hc.1.trans_le hi.1, hi.2.trans_lt hc.2.2⟩, mem_univ _⟩
+
+/-- Only the scalar affine restriction is differentiated; the state
+space keeps its original projective topology. -/
+theorem negativeKappa_finiteAffine_contDiff
+    {P : Type*} [NormedAddCommGroup P] [NormedSpace ℝ P]
+    (x : AnnularState W.S × ℝ) (L : P →L[ℝ] (AnnularState W.S × ℝ)) (m : ℕ) :
+    ContDiff ℝ ∞ (fun y : P => stateKappa W.S (x + L y).1 m) := by
+  let K := stateJointKappaCLM W.hS W.hT W.radial.1 m
+  have he : (fun y : P => stateKappa W.S (x + L y).1 m) =
+      (fun y => K x + (K.comp L) y) := by
+    funext y
+    calc
+      _ = K (x + L y) := (stateJointKappaCLM_apply W.hS W.hT W.radial.1 m _).symm
+      _ = K x + (K.comp L) y := by
+        simpa only [ContinuousLinearMap.comp_apply] using K.map_add x (L y)
+  rw [he]
+  exact contDiff_const.add (K.comp L).contDiff
 
 private theorem negativeHalf_partA : N01PartA W.D W.T W.S W.C := by
   have h := W.through03.1.1
@@ -84,7 +111,7 @@ theorem fullHalfFields_reference (m : ℕ) (side : Bool) {p : PolarPoint}
       F.fullHalfSpeed (W.C.referenceState, 0) m side p = Real.sqrt (F.reference m side p.1) := by
   have hf := normalizedSpeedFactor_reference W.hS W.hT W.negativeHalf_partA
     W.ε_pos W.negativeHalf_partB (W.negativeInwardPoint_mem_annular m side hp)
-  simp only [fullHalfDrift, fullHalfSpeed, hf.1, hf.2, mul_zero, mul_one,
+  constructor <;> simp only [fullHalfDrift, fullHalfSpeed, hf.1, hf.2, mul_zero, mul_one,
     opticalSpeed, F.stateSquare_reference]
 
 theorem fullHalfFields_minus_speed
@@ -117,6 +144,28 @@ theorem fullHalfFields_minus_speed
   dsimp only [fullHalfDrift, fullHalfSpeed]
   ring
 
+private theorem normalizedFactor_inward_finiteAffine_contDiffAt
+    {n : ℕ} (x : AnnularState W.S × ℝ)
+    (L : (Fin n → ℝ) →L[ℝ] (AnnularState W.S × ℝ)) (y : Fin n → ℝ)
+    (hy : x + L y ∈ stateNeighborhood W.S W.C W.base (W.ε / 2))
+    (m : ℕ) (side : Bool) (p : PolarPoint)
+    (hp : p.1 ∈ Icc (0 : ℝ) (W.negativeOpticalWidth m side)) (i : Fin 2) :
+    ContDiffAt ℝ ∞ (fun q : (Fin n → ℝ) × PolarPoint =>
+      normalizedSpeedFactor W.D W.S W.C i (x + L q.1)
+        (W.negativeInwardPoint m side q.2)) (y, p) := by
+  have hy' : x + L y ∈ stateNeighborhood W.S W.C W.base W.ε :=
+    stateNeighborhood_mono W.S W.C le_rfl (by linarith [W.ε_pos]) hy
+  let V := ((fun q => x + L q) ⁻¹' stateNeighborhood W.S W.C W.base W.ε) ×ˢ
+    annularOpen W.D
+  have hV : IsOpen V :=
+    ((isOpen_stateNeighborhood W.S W.C W.base W.ε).preimage
+      (continuous_const.add L.continuous)).prod (isOpen_Ioo.prod isOpen_univ)
+  exact ((contDiffOn_normalizedSpeedFactor_finiteAffine W.hS W.hT W.negativeHalf_partA
+      W.negativeHalf_partB x L i).contDiffAt
+      (hV.mem_nhds ⟨hy', W.negativeInwardPoint_mem_annular m side hp⟩)).comp (y, p)
+        (contDiff_fst.prodMk
+          ((W.negativeInwardPoint_contDiff m side).comp contDiff_snd)).contDiffAt
+
 /-- A finite state plot is smooth at each actual point, including the
 physical root. This supplies an open germ without any quantitative
 assumption on the size of an extension outside the closed half. -/
@@ -130,31 +179,8 @@ theorem fullHalfFields_finiteAffine_contDiffAt
       F.fullHalfDrift (x + L q.1) m side q.2) (y, p) ∧
     ContDiffAt ℝ ∞ (fun q : (Fin n → ℝ) × PolarPoint =>
       F.fullHalfSpeed (x + L q.1) m side q.2) (y, p) := by
-  have hy' : x + L y ∈ stateNeighborhood W.S W.C W.base W.ε :=
-    stateNeighborhood_mono W.S W.C le_rfl (by linarith [W.ε_pos]) hy
-  let V := ((fun q => x + L q) ⁻¹' stateNeighborhood W.S W.C W.base W.ε) ×ˢ
-    annularOpen W.D
-  have hV : IsOpen V :=
-    ((isOpen_stateNeighborhood W.S W.C W.base W.ε).preimage
-      (continuous_const.add L.continuous)).prod (isOpen_Ioo.prod isOpen_univ)
-  have hn (i : Fin 2) : ContDiffAt ℝ ∞ (fun q : (Fin n → ℝ) × PolarPoint =>
-      normalizedSpeedFactor W.D W.S W.C i (x + L q.1)
-        (W.negativeInwardPoint m side q.2)) (y, p) :=
-    ((contDiffOn_normalizedSpeedFactor_finiteAffine W.hS W.hT W.negativeHalf_partA
-      W.negativeHalf_partB x L i).contDiffAt
-      (hV.mem_nhds ⟨hy', W.negativeInwardPoint_mem_annular m side hp⟩)).comp (y, p)
-        (contDiff_fst.prodMk
-          ((W.negativeInwardPoint_contDiff m side).comp contDiff_snd)).contDiffAt
-  let K := stateJointKappaCLM W.hS W.hT W.radial.1 m
-  have hk : ContDiff ℝ ∞ (fun v : Fin n → ℝ => stateKappa W.S (x + L v).1 m) := by
-    have he : (fun v : Fin n → ℝ => stateKappa W.S (x + L v).1 m) =
-        fun v => K x + (K.comp L) v := by
-      funext v
-      change K (x + L v) = K x + (K.comp L) v
-      rw [map_add]
-      rfl
-    rw [he]
-    exact contDiff_const.add (K.comp L).contDiff
+  have hn := normalizedFactor_inward_finiteAffine_contDiffAt (W := W) x L y hy m side p hp
+  have hk := W.negativeKappa_finiteAffine_contDiff x L m
   have hq : ContDiff ℝ ∞ (fun q : (Fin n → ℝ) × PolarPoint =>
       F.stateSquare (x + L q.1) m side q.2.1) :=
     ((F.reference_smooth m side).comp contDiff_snd.fst).sub
