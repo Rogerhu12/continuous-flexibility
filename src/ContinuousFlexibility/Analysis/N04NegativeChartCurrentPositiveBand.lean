@@ -29,6 +29,7 @@ attribute [local instance]
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
 
+set_option diagnostics true in
 /-- The index may contain a component, side and physical point. The
 radius and low base precede all of them and every later derivative order. -/
 theorem n04NegativeChart_current_half_reference
@@ -48,8 +49,11 @@ theorem n04NegativeChart_current_half_reference
       ∀ i z, z ∈ sectorNeighborhood S b η η →
         f i 0 / 2 ≤ f i z ∧ 0 < f i z ∧
           (f i z)⁻¹ ≤ 2 * B * T.E0 (T.sample (sample i)) ^ A := by
-  obtain ⟨N, hN, hbound⟩ := n07a_materialSample_envelope_bound hD hT
-    (by norm_num : 0 < (3 / 4 : ℝ)) (P + A)
+  refine (n07a_materialSample_envelope_bound hD hT
+    (by norm_num : 0 < (3 / 4 : ℝ)) (P + A)).elim ?_
+  intro N hNdata
+  have hN := hNdata.1
+  have hbound := hNdata.2
   let Q : ℝ := c * B * N
   let b : ℕ := max base loss
   let δ : ℝ := (12 * Q)⁻¹

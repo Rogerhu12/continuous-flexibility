@@ -49,6 +49,7 @@ def n04NegativeGeometry_physicalUnitJointTower
       Prod.mk_add_mk, zero_add]
   have hMaps : MapsTo (fun x => c + P x) (U ×ˢ unitStrip) (U ×ˢ Ω) := by
     intro x hx
+    change c + P x ∈ U ×ˢ Ω
     rw [hpoint]
     exact ⟨hx.1, hmap hx.2⟩
   exact (J.compAffine P c (hU.prod (isOpen_Ioo.prod isOpen_univ)) hMaps).congrOn
@@ -72,6 +73,7 @@ namespace N04RealizationStart
 
 variable (W : N04RealizationStart)
 
+set_option diagnostics true in
 /-- The literal six physical atoms have joint parameter and unit-point
 towers. The typed negative index and all normalizations are unchanged. -/
 def negativePhysicalAtomJointTower
@@ -129,10 +131,9 @@ def negativePhysicalAtomJointTower
           (p.1 - K.left k) / (K.right k - K.left k))).contDiffOn
       (fun _ _ => mem_univ _)).congrOn
     intro x hx
-    change (_ - K.left k) / (K.right k - K.left k) =
-      ((K.chart (liftSectorParameter W.S W.C x.1) k (physicalUnitPoint K k x.2)).1 -
-        K.left k) / (K.right k - K.left k)
-    rw [hchart]
+    exact congrArg (fun f : PolarPoint → PolarPoint =>
+      ((f (physicalUnitPoint K k x.2)).1 - K.left k) / (K.right k - K.left k))
+      (hchart x.1).symm
   · let L : ((StateDirections W.S × ℝ) × PolarPoint) →L[ℝ] ℝ :=
       (ContinuousLinearMap.snd ℝ ℝ ℝ).comp
         (ContinuousLinearMap.snd ℝ (StateDirections W.S × ℝ) PolarPoint)
@@ -142,27 +143,23 @@ def negativePhysicalAtomJointTower
         ContDiff ℝ ∞ (fun p : PolarPoint × ℝ => p.1.2 - p.2)).contDiffOn
       (fun _ _ => mem_univ _)).congrOn
     intro x hx
-    change _ - x.2.2 =
-      (K.chart (liftSectorParameter W.S W.C x.1) k (physicalUnitPoint K k x.2)).2 - x.2.2
-    rw [hchart]
+    exact congrArg (fun f : PolarPoint → PolarPoint =>
+      (f (physicalUnitPoint K k x.2)).2 - x.2.2) (hchart x.1).symm
   · apply JH.congrOn
     intro x hx
-    change _ = K.height (liftSectorParameter W.S W.C x.1) k (physicalUnitPoint K k x.2)
-    rw [hheight]
+    exact (congrFun (hheight x.1) (physicalUnitPoint K k x.2)).symm
   · apply JHI.congrOn
     intro x hx
-    change _ = (K.height (liftSectorParameter W.S W.C x.1) k (physicalUnitPoint K k x.2))⁻¹
-    rw [hheight]
+    exact congrArg (fun t : ℝ => t⁻¹)
+      (congrFun (hheight x.1) (physicalUnitPoint K k x.2)).symm
   · apply JJ.congrOn
     intro x hx
-    change _ = |planeJacobian (K.chart (liftSectorParameter W.S W.C x.1) k)
-      (physicalUnitPoint K k x.2)|
-    rw [hchart]
+    exact congrArg (fun f : PolarPoint → PolarPoint =>
+      |planeJacobian f (physicalUnitPoint K k x.2)|) (hchart x.1).symm
   · apply JJI.congrOn
     intro x hx
-    change _ = |planeJacobian (K.chart (liftSectorParameter W.S W.C x.1) k)
-      (physicalUnitPoint K k x.2)|⁻¹
-    rw [hchart]
+    exact congrArg (fun f : PolarPoint → PolarPoint =>
+      |planeJacobian f (physicalUnitPoint K k x.2)|⁻¹) (hchart x.1).symm
 
 end N04RealizationStart
 

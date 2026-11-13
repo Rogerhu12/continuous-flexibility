@@ -12,6 +12,21 @@ namespace ContinuousFlexibility.Analysis.N04RealizationStart
 open Set ContinuousFlexibility.Statements CanonicalGeometry
 open scoped ContDiff
 
+private theorem transport_product_recurrence
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} {V : Set PolarPoint} {f g : E × PolarPoint → ℝ}
+    (J : SmoothDirections (U ×ˢ V) f) (K : SmoothDirections (U ×ˢ V) g)
+    (hU : IsOpen U) (hV : IsOpen V) (hc : Convex ℝ (U ×ˢ V))
+    (ht : ∀ x ∈ U, ∀ p ∈ V, radialPartial (fun q => f (x, q)) p =
+      -(g (x, p) * angularPartial (fun q => f (x, q)) p))
+    (n a b : ℕ) (x w : E) (hx : x ∈ U) {p : PolarPoint} (hp : p ∈ V) :
+    jointMixedDiagonal J n (a + 1) b x w p =
+      -diagonalJetProduct
+        (fun k i j (_ : Unit) => jointMixedDiagonal K k i j x w p)
+        (fun k i j (_ : Unit) => jointMixedDiagonal J k i (j + 1) x w p) n a b () :=
+  jointMixedDiagonal_transport J K hU hV hc ht n a b x w hx hp
+
 variable (W : N04RealizationStart)
 
 private abbrev transportDomain : Set (Parameter W.S) :=
@@ -164,14 +179,38 @@ theorem negativeTransport_forcing_recurrence (m n a b : ℕ)
             jointMixedDiagonal (W.negativeInverseSlopeJointTower m) k i j z w p))
         (fun k i j (_ : Unit) =>
           jointMixedDiagonal (W.negativePulledCorrectionJointTower m) k i j z w p)
-        n a b () := by
-  apply jointMixedDiagonal_add_triple_mul
+        n a b () :=
+  jointMixedDiagonal_add_triple_mul
     (W.negativeRawDefectJointTower m) (W.negativeCutoffDerivativeJointTower m)
     (W.negativeInverseSlopeJointTower m) (W.negativePulledCorrectionJointTower m)
     (W.negativeTransportForcingJointTower m) W.transportDomain_open
-    (W.componentDomain_open m) (W.transportDomain_convex m) _ n a b z w hz p hp
-  intro x hx q hq
-  rw [returnCorrectionVelocityLinear_eq_transportProduct]
+    (W.componentDomain_open m) (W.transportDomain_convex m)
+    (fun x _ q _ => congrArg (fun c : ℝ =>
+      (minusCharacteristicSpeed (originalCoefficients W.D W.S W.C
+        (liftSectorParameter W.S W.C x)) q -
+        minusCharacteristicSpeed (originalCoefficients W.D W.S W.C
+          (W.C.referenceState, 0)) q) + c)
+      (returnCorrectionVelocityLinear_eq_transportProduct W.D W.S W.C W.cutoff.cutoff
+        (liftSectorParameter W.S W.C x) m q
+        (W.R.residual (liftSectorParameter W.S W.C x)))) n a b z w hz p hp
+
+private theorem negativeTransport_residual_identity (m : ℕ) {x : Parameter W.S}
+    (hx : x ∈ W.transportDomain) {y : PolarPoint} (hy : y ∈ W.componentDomain m) :
+    radialPartial (fun q => returnCorrectionPulledDisplacementLinear W.S W.C W.cutoff.cutoff
+      (liftSectorParameter W.S W.C x) m q (W.R.residual (liftSectorParameter W.S W.C x))) y =
+      -(minusCharacteristicSpeed (W.L.coefficients (liftSectorParameter W.S W.C x)) y *
+        angularPartial (fun q => returnCorrectionPulledDisplacementLinear W.S W.C W.cutoff.cutoff
+          (liftSectorParameter W.S W.C x) m q (W.R.residual (liftSectorParameter W.S W.C x))) y) := by
+  have he := W.through03.1.1.returnCorrectionPulledDisplacementLinear_transport_actual
+    W.hS W.hT (liftSectorParameter_mem_stateNeighborhood hx le_rfl)
+    (W.through03.1.1.2.2.1.liftSectorParameter_sector x) W.through03.1.2
+    W.cutoff.cutoff m (W.cutoff.cutoff_smooth m) (W.cutoff.range_on_component m)
+    (W.R.residual (liftSectorParameter W.S W.C x)) y hy.1
+  have ht := he.trans (congrArg (fun c : ℝ => -c *
+    angularPartial (fun q => returnCorrectionPulledDisplacementLinear W.S W.C W.cutoff.cutoff
+      (liftSectorParameter W.S W.C x) m q (W.R.residual (liftSectorParameter W.S W.C x))) y)
+        (W.negativeTransport_speed_identity m hx hy).symm)
+  simpa only [neg_mul] using ht
 
 theorem negativeTransport_residual_recurrence (m n a b : ℕ)
     (z w : Parameter W.S) (hz : z ∈ W.transportDomain)
@@ -182,37 +221,25 @@ theorem negativeTransport_residual_recurrence (m n a b : ℕ)
           jointMixedDiagonal (W.negativeMinusJointTower m) k i j z w p)
         (fun k i j (_ : Unit) =>
           jointMixedDiagonal (W.negativePulledCorrectionJointTower m) k i (j + 1) z w p)
-        n a b () := by
-  apply jointMixedDiagonal_transport
+        n a b () :=
+  transport_product_recurrence
     (W.negativePulledCorrectionJointTower m) (W.negativeMinusJointTower m)
     W.transportDomain_open (W.componentDomain_open m) (W.transportDomain_convex m)
-    _ n a b z w hz hp
-  intro x hx y hy
-  have he := W.through03.1.1.returnCorrectionPulledDisplacementLinear_transport_actual
-    W.hS W.hT (liftSectorParameter_mem_stateNeighborhood hx le_rfl)
-    (W.through03.1.1.2.2.1.liftSectorParameter_sector x) W.through03.1.2
-    W.cutoff.cutoff m (W.cutoff.cutoff_smooth m) (W.cutoff.range_on_component m)
-    (W.R.residual (liftSectorParameter W.S W.C x)) y hy.1
-  rw [W.negativeTransport_speed_identity m hx hy]
-  exact he.trans (by ring)
+    (fun _ hx _ hy => W.negativeTransport_residual_identity m hx hy) n a b z w hz hp
 
-theorem negativeTransport_firstIntegral_recurrence (m n a b : ℕ)
-    (z w : Parameter W.S) (hz : z ∈ W.transportDomain)
-    {p : PolarPoint} (hp : p ∈ W.componentDomain m) :
-    jointMixedDiagonal (W.negativeFirstIntegralDefectJointTower m) n (a + 1) b z w p =
-      -diagonalJetProduct
-        (fun k i j (_ : Unit) =>
-          jointMixedDiagonal (W.negativeMinusJointTower m) k i j z w p)
-        (fun k i j (_ : Unit) =>
-          jointMixedDiagonal (W.negativeFirstIntegralDefectJointTower m) k i (j + 1) z w p)
-        n a b () - jointMixedDiagonal (W.negativeTransportForcingJointTower m) n a b z w p := by
-  apply n04NegativeChart_jointMixedDiagonal_inhomogeneous_transport
-    (W.negativeFirstIntegralDefectJointTower m) (W.negativeMinusJointTower m)
-    (W.negativeTransportForcingJointTower m) W.transportDomain_open
-    (W.componentDomain_open m) (W.transportDomain_convex m) _ n a b z w hz hp
-  intro x hx y hy
-  let v := liftSectorParameter W.S W.C x
-  have hv := liftSectorParameter_mem_stateNeighborhood hx le_rfl
+private theorem negativeTransport_firstIntegral_identity (m : ℕ) {x : Parameter W.S}
+    (hx : x ∈ W.transportDomain) {y : PolarPoint} (hy : y ∈ W.componentDomain m) :
+    radialPartial (W.negativeFirstIntegralDefect x m) y =
+      -(minusCharacteristicSpeed (W.L.coefficients (liftSectorParameter W.S W.C x)) y *
+        angularPartial (W.negativeFirstIntegralDefect x m) y) -
+      ((minusCharacteristicSpeed (originalCoefficients W.D W.S W.C
+        (liftSectorParameter W.S W.C x)) y -
+        minusCharacteristicSpeed (originalCoefficients W.D W.S W.C (W.C.referenceState, 0)) y) +
+        returnCorrectionVelocityLinear W.D W.S W.C W.cutoff.cutoff
+          (liftSectorParameter W.S W.C x) m y
+          (W.R.residual (liftSectorParameter W.S W.C x))) := by
+  let v : AnnularState W.S × ℝ := liftSectorParameter W.S W.C x
+  have hv := liftSectorParameter_mem_stateNeighborhood (C := W.C) hx le_rfl
   have hs := W.through03.1.1.2.2.1.liftSectorParameter_sector x
   have hΦ := n04b_actualMinusFlow_regular W.through03 W.hS W.hT W.field hv hs m
   have hL := stateLeftChart_contDiff W.S v m (W.hS.2.1 (3 / 4 : ℝ))
@@ -220,6 +247,8 @@ theorem negativeTransport_firstIntegral_recurrence (m n a b : ℕ)
   have hτ := n04b_referenceTravel_hasDerivAt W.radial.1.choose_spec.1
     W.through03.1.1.2.2.2.1 m hy.1
   have htransport := n04NegativeChart_minusFirstIntegral_defect_transport
+    (d := n04bCharacteristicDrift (W.L.coefficients v))
+    (v := n04bCharacteristicHalfGap (W.L.coefficients v))
     hΦ Real.pi_ne_zero hL (fun r hr θ => (hflow θ).2.2.1 r hr) hy hτ
   have href := n07a_minusCharacteristicSpeed_reference W.hS W.hT W.through03.1.1
     (W.through03.1.1.negativeComponent_subset_annularOpen m hy).1 y.2
@@ -241,6 +270,22 @@ theorem negativeTransport_firstIntegral_recurrence (m n a b : ℕ)
   exact htransport.trans (congrArg (fun e : ℝ =>
     -(minusCharacteristicSpeed (W.L.coefficients v) y *
       angularPartial (W.negativeFirstIntegralDefect x m) y) - e) hforcing.symm)
+
+theorem negativeTransport_firstIntegral_recurrence (m n a b : ℕ)
+    (z w : Parameter W.S) (hz : z ∈ W.transportDomain)
+    {p : PolarPoint} (hp : p ∈ W.componentDomain m) :
+    jointMixedDiagonal (W.negativeFirstIntegralDefectJointTower m) n (a + 1) b z w p =
+      -diagonalJetProduct
+        (fun k i j (_ : Unit) =>
+          jointMixedDiagonal (W.negativeMinusJointTower m) k i j z w p)
+        (fun k i j (_ : Unit) =>
+          jointMixedDiagonal (W.negativeFirstIntegralDefectJointTower m) k i (j + 1) z w p)
+        n a b () - jointMixedDiagonal (W.negativeTransportForcingJointTower m) n a b z w p :=
+  n04NegativeChart_jointMixedDiagonal_inhomogeneous_transport
+    (W.negativeFirstIntegralDefectJointTower m) (W.negativeMinusJointTower m)
+    (W.negativeTransportForcingJointTower m) W.transportDomain_open
+    (W.componentDomain_open m) (W.transportDomain_convex m)
+    (fun _ hx _ hy => W.negativeTransport_firstIntegral_identity m hx hy) n a b z w hz hp
 
 end ContinuousFlexibility.Analysis.N04RealizationStart
 

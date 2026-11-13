@@ -155,20 +155,19 @@ private theorem opticalDirection_joint_material_bounds (j : ℕ) :
     (stateJointKappaCLM_apply W.hS W.hT W.radial.1 i.1 v)
     (hb i.1 i.2 t ht v.1) hcost (stateGrading_fst_le_jointStateGrading W.S 0 v)
 
-/-- The mixed bound is for every genuine parameter tower of the actual
-radial derivative. Constants precede the component, state and point. -/
-theorem opticalSpeed_mixed_material_bounds (n k : ℕ) :
-    ∃ B A : ℝ, 0 < B ∧ 0 < A ∧ ∀ m side t,
-      t ∈ Icc (0 : ℝ) (W.negativeOpticalWidth m side) →
+set_option diagnostics true in
+private theorem opticalSpeed_indexed_material_bounds (n k : ℕ) :
+    ∃ B A : ℝ, 0 < B ∧ 0 < A ∧ ∀ i : ℕ × Bool, ∀ t,
+      t ∈ Icc (0 : ℝ) (W.negativeOpticalWidth i.1 i.2) →
       ∀ J : SmoothDirections (stateNeighborhood W.S W.C W.base (W.ε / 2))
-        (fun z => iteratedDeriv n (F.opticalSpeed z m side) t),
+        (fun z => iteratedDeriv n (F.opticalSpeed z i.1 i.2) t),
       ∀ z ∈ stateNeighborhood W.S W.C W.base (W.ε / 2),
       ∀ v : Fin k → AnnularState W.S × ℝ,
         |J.D k z v| ≤
-          B * W.T.E0 (W.T.sample ((W.A e).cell (e.symm (.inl (m, side))))) ^ A *
+          B * W.T.E0 (W.T.sample ((W.A e).cell (e.symm (.inl i)))) ^ A *
             parameterHeightWeight
-              (W.T.H (W.T.sample ((W.A e).cell (e.symm (.inl (m, side))))) ^ (3 / 4 : ℝ)) k *
-              ∏ i, pairGrading (stateGrading W.S) realGrading 0 (v i) := by
+              (W.T.H (W.T.sample ((W.A e).cell (e.symm (.inl i)))) ^ (3 / 4 : ℝ)) k *
+              ∏ j, pairGrading (stateGrading W.S) realGrading 0 (v j) := by
   let I : ℕ × Bool → Set ℝ := fun i => Icc 0 (W.negativeOpticalWidth i.1 i.2)
   let E : ℕ × Bool → ℝ := fun i =>
     W.T.E0 (W.T.sample ((W.A e).cell (e.symm (.inl i))))
@@ -177,13 +176,16 @@ theorem opticalSpeed_mixed_material_bounds (n k : ℕ) :
   have hE (i : ℕ × Bool) : 1 ≤ E i := W.floor _
   have hH (i : ℕ × Bool) : 0 ≤ H i := Real.rpow_nonneg
     (W.hT.2.1 _ (materialSample_mem_radialCore W.hT W.radial.1.choose_spec.2.1 _)).2.1.le _
-  obtain ⟨R, hR, hHeight⟩ := materialHeight_E0_weight_bounded W.hT
-    (γ := (3 / 4 : ℝ)) (by norm_num) 0
+  refine (materialHeight_E0_weight_bounded W.hT
+    (γ := (3 / 4 : ℝ)) (by norm_num) 0).elim ?_
+  intro R hRdata
+  have hR := hRdata.1
+  have hHeight := hRdata.2
   have hHR (i : ℕ × Bool) : H i ≤ R := by
     simpa only [Real.rpow_zero, mul_one] using
       hHeight (W.T.sample ((W.A e).cell (e.symm (.inl i))))
         (materialSample_mem_radialCore W.hT W.radial.1.choose_spec.2.1 _)
-  refine (affineSqrt_bounds_from_inverse
+  exact affineSqrt_bounds_from_inverse
     (pairGrading (stateGrading W.S) realGrading 0)
     (isOpen_stateNeighborhood W.S W.C W.base (W.ε / 2)) I
     (fun i => F.reference i.1 i.2) (fun i t => -F.control i.1 i.2 t)
@@ -204,7 +206,23 @@ theorem opticalSpeed_mixed_material_bounds (n k : ℕ) :
       refine hBA.elim ?_
       intro A h
       exact ⟨B, A, h.1, h.2.1, fun i t ht z hz => h.2.2 z hz i.1 i.2 t ht⟩)
-    (F.opticalDirection_joint_material_bounds) n k).elim ?_
+    (F.opticalDirection_joint_material_bounds) n k
+
+/-- The mixed bound is for every genuine parameter tower of the actual
+radial derivative. Constants precede the component, state and point. -/
+theorem opticalSpeed_mixed_material_bounds (n k : ℕ) :
+    ∃ B A : ℝ, 0 < B ∧ 0 < A ∧ ∀ m side t,
+      t ∈ Icc (0 : ℝ) (W.negativeOpticalWidth m side) →
+      ∀ J : SmoothDirections (stateNeighborhood W.S W.C W.base (W.ε / 2))
+        (fun z => iteratedDeriv n (F.opticalSpeed z m side) t),
+      ∀ z ∈ stateNeighborhood W.S W.C W.base (W.ε / 2),
+      ∀ v : Fin k → AnnularState W.S × ℝ,
+        |J.D k z v| ≤
+          B * W.T.E0 (W.T.sample ((W.A e).cell (e.symm (.inl (m, side))))) ^ A *
+            parameterHeightWeight
+              (W.T.H (W.T.sample ((W.A e).cell (e.symm (.inl (m, side))))) ^ (3 / 4 : ℝ)) k *
+              ∏ i, pairGrading (stateGrading W.S) realGrading 0 (v i) := by
+  refine (F.opticalSpeed_indexed_material_bounds n k).elim ?_
   intro B hBA
   refine hBA.elim ?_
   intro A h

@@ -44,8 +44,8 @@ def n04NegativeGeometry_canonicalUnitJointTower
       Prod.mk_add_mk, zero_add]
   have hMaps : MapsTo (fun x => c + P x) (U ×ˢ unitStrip) (U ×ˢ Ω) := by
     intro x hx
-    rw [hpoint]
-    exact ⟨hx.1, hmap hx.2⟩
+    have hm : (x.1, canonicalUnitPoint K k x.2) ∈ U ×ˢ Ω := ⟨hx.1, hmap hx.2⟩
+    exact (hpoint x).symm ▸ hm
   exact (J.compAffine P c (hU.prod (isOpen_Ioo.prod isOpen_univ)) hMaps).congrOn
     (fun x _ => congrArg f (hpoint x))
 

@@ -31,7 +31,9 @@ theorem n04NegativeChart_radialProduct_parameterJet_bound
     apply (abs_mixedDerivative_le_norm_iteratedFDeriv hΩ contDiff_fst.contDiffOn
       u w hq).trans
     by_cases hn : u + w = 0
-    · simpa only [hn, norm_iteratedFDeriv_zero, Real.norm_eq_abs] using hqone
+    · change ‖iteratedFDeriv ℝ (u + w) (fun p : PolarPoint => p.1) q‖ ≤ 1
+      rw [hn, norm_iteratedFDeriv_zero]
+      simpa only [Real.norm_eq_abs] using hqone
     · exact (flowJet_norm_iteratedFDeriv_clm_le
         (ContinuousLinearMap.fst ℝ ℝ ℝ) (Nat.pos_of_ne_zero hn) q).trans
         (ContinuousLinearMap.norm_fst_le ℝ ℝ ℝ)

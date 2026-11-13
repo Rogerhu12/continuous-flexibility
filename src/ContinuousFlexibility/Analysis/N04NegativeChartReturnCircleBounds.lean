@@ -105,6 +105,9 @@ theorem N01Properties.n04FixedBase_rightChartInverseCircle :
     N04FixedBaseSmoothFamilyOn (pairGrading (sectorGrading S) realGrading)
       (S.circle (3 / 4 : ℝ)).grading (sectorNeighborhood S base ε ε)
       (fun _ : I => hN.rightChartInverseCircle hS hT) := by
+  letI : ContinuousNeg (S.circle (3 / 4 : ℝ)).Space :=
+    (withSeminorms_graded (fun n => (S.circle (3 / 4 : ℝ)).level n)
+      (S.circle (3 / 4 : ℝ)).bond).isTopologicalAddGroup.toContinuousNeg
   let hH := hS.2.1 (3 / 4 : ℝ)
   have hu := hN.n04FixedBase_sectorReturnTransportCircle (I := I) hS hT hflow
   have ho := hu.postTameContinuousLinear (circleOddContinuousLinear hH) (circleOddLinear_tame hH)
@@ -121,6 +124,9 @@ theorem N01Properties.n04FixedBase_selectorInverseCircle
     N04FixedBaseSmoothFamilyOn (pairGrading (sectorGrading S) realGrading)
       (S.circle (3 / 4 : ℝ)).grading (sectorNeighborhood S base ε ε)
       (fun i => hN.selectorInverseCircle hS hT (rsel i) (hrsel i)) := by
+  letI : ContinuousNeg (S.circle (3 / 4 : ℝ)).Space :=
+    (withSeminorms_graded (fun n => (S.circle (3 / 4 : ℝ)).level n)
+      (S.circle (3 / 4 : ℝ)).bond).isTopologicalAddGroup.toContinuousNeg
   have hf := hN.n04FixedBase_endpointFlowCircle hS hT rsel hrsel
   have hi := n04FixedBaseSmoothFamilyOn_circleInverse_maps (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1
     (by norm_num) (hS.2.2.2.2.1 (3 / 4 : ℝ)).2.2
