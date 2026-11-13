@@ -1,0 +1,122 @@
+{
+  "schema": "n04_ci187_circle_forward_independent_complete_static_review_v1",
+  "proposed_backup_path": "audit/recovery/reviews/CI187CircleShiftedForwardFixedBaseBoundsIndependentReview.json",
+  "reviewer": "/root/audit_coordinates",
+  "result": "PASS_COMPLETE_SOURCE_DELTA_AND_ACTUAL_API_STATIC_REVIEW_UNCOMPILED",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "baseline": {
+    "head": "4a9f2194ef3b84cb2840c4cf95807635c33d8d88",
+    "tree": "d5508ec676a6d4a0aed4ac0ca9364717612e535d",
+    "source": "25ac7596fcd840162d70ba65a76b502cbe9e58e1",
+    "sha256": "215ce15fb8ae30c5cf57bc2b3c77cbe018d6a3bdd21b134fcc3da333f98d78b4",
+    "lines": 213,
+    "ci_status": "FAILED_CI187"
+  },
+  "source": {
+    "blob": "e81998dd165a9b3ab67d527e1e3fc33f12d70765",
+    "sha256": "dbaec99c20613aba1590ffe730c4abdd971064ce968fa834a117a71d66be105d",
+    "bytes": 11932,
+    "lines": 213
+  },
+  "candidate": {
+    "blob": "49aade5dc8ee82c9867c3126cd73a9aee02f4174",
+    "sha256": "ce49b5bad1d2d46e0a6f830215fd421f06e7319216f7d6b225f4800547e5af66"
+  },
+  "patch": {
+    "blob": "59ab34fd22e790a71f76fde6bb4bd5a3f46b3a76",
+    "sha256": "4cf1c42482b2adb7be26a3ca8e95a45339b4c50efd20832698936699fd639861",
+    "hunks": 3,
+    "added": 4,
+    "deleted": 4,
+    "net": 0,
+    "forward_reconstruction_exact": true,
+    "reverse_reconstruction_exact": true
+  },
+  "diagnostics": {
+    "blob": "9bc9224385aaf9c4d701714e0027b4448031c2bc",
+    "sha256": "bd849433ce130b2b10fa00745ff24bf6a5481b43531ed0b38a61d789446d1a5a",
+    "complete_blocks": [
+      "85:12 Fin.snoc dependent-family application mismatch; 8 lines",
+      "98:19 isDefEq default200000 timeout; 5 lines",
+      "152:0 whnf default200000 timeout; 5 lines"
+    ],
+    "original_log_not_redownloaded": true
+  },
+  "full_read_scope": [
+    "Entire frozen213 after source and actual213 before source, exact three-hunk patch, final candidate, all three complete diagnostics.",
+    "Actual14ad source-last ordered derivative proof and the named generic callee declarations with surrounding section binders: ProjectiveDifferential.unique, ProjectiveJets.congr_germ and the continuous unit-ball normalization in de78. These identities match actual187; no new provider graph or replacement selected."
+  ],
+  "actual_callees": [
+    {
+      "blob": "14ad46cae7d92dca46f5efd006f5260873046713",
+      "sha256": "5f19c405b830b56e9ad43319b2e9b306af3a27d840167fc29d592e9b9edaec56",
+      "name": "hasProjectiveLineDerivAt_inverseForwardJet",
+      "checked": "Fin.snoc alpha is Fin(n+2) to M.Space times M.Space; inner Fin.cons alpha is Fin(n+1) to M.Space, exactly the constant families in the original generic proof."
+    },
+    {
+      "blob": "a6290d8207dc1171bd6b4aa1a4d60b512e9c35b4",
+      "sha256": "0ed62c54e8cf1e36f906368c47e79e6aef089ad2e439e1bb44ff99a36fd3e7a3",
+      "name": "HasProjectiveLineDerivAt.unique",
+      "implicit_names": [
+        "V",
+        "F"
+      ]
+    },
+    {
+      "blob": "b7ada8e57f9f58fa568762693eaded6538708e6e",
+      "sha256": "2411247d23d436966563315406fc15b2bf2c3a2340c3b77a94a0391db66b8e0b",
+      "name": "HasProjectiveLineDerivAt.congr_germ",
+      "implicit_names": [
+        "V",
+        "W"
+      ],
+      "direction": "g =eventually f transfers the derivative of f to g. Here hg is kernel =eventually same inverseForwardJet."
+    },
+    {
+      "blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "name": "multilinear_bound_of_unitBall",
+      "implicit_names": [
+        "E",
+        "F",
+        "k",
+        "C",
+        "a"
+      ]
+    }
+  ],
+  "checks": [
+    "The restored dependent alpha annotations fix the exact reported Fin.snoc last-element type mismatch without changing any vector or slot order.",
+    "hsame explicitly names the identical inverseForwardJet derivative and actual kernel derivative with both orders n+1, same base e, direction v0, same translated source and Fin.cons(v0)(tail v). unique and congr_germ source/target names are verified against the actual declarations.",
+    "hbound explicitly uses E=F=M.Space, k=1, C=C*P and original a. Its complete inequality is the exact conclusion of the already-used continuous multilinear unit-ball theorem at the constant one-slot vector y; hunit, source CLM, subsequent hA rewrite and final simplification remain unchanged.",
+    "Both complete public headers were independently byte-checked; all prior scalar/majorant private proof bytes, complete prefix, imports, local product instance, constants and their quantifier order remain unchanged. There are no added assumptions or public names, and no resource/transparency changes."
+  ],
+  "public_headers": [
+    {
+      "name": "circleShiftedChartCompose_orderedJet_eq_kernel",
+      "before": true,
+      "after": true,
+      "sha256": "343f1f91d75417ce3498c7f0f1ecb087ac5a4a25c8ced93cf4b05167a8cf1858"
+    },
+    {
+      "name": "circleShiftedChartCompose_orderedJets_fixedBase_bound",
+      "before": true,
+      "after": true,
+      "sha256": "9cca6a1573826058359460b0c8f1c9b1ba9c56065831acf75f47145ac84fad38"
+    }
+  ],
+  "correction_to_previous_review": {
+    "blob": "91936a29cd3983e3106535c9f2d7f78a2efe9d48",
+    "scope": "The preceding static review missed the dependent-family elaboration failure caused by omitting the two original alpha annotations. CI187 establishes that earlier source is not compiled-ready. Its historical receipt/source remain immutable; this review applies only to e81998dd. The two timeout causes are not proven uniquely by their diagnostics."
+  },
+  "findings": [],
+  "budget": {
+    "net_lean": 0,
+    "source_lines": 213,
+    "reported_draft_total": 20000
+  },
+  "limits": [
+    "No local Lean/elaboration or successful-compilation assertion. The typed equalities/inequality remove implicit inference work but do not prove that default200000 performance now succeeds.",
+    "No source edit, active/index/ref mutation, new Lean module, CI query/download or new large graph performed. Root-owned successor full CI remains required."
+  ]
+}

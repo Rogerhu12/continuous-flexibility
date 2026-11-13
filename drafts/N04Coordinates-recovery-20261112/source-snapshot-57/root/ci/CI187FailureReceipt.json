@@ -1,0 +1,23 @@
+{
+  "schema": "n04-ci-failure-receipt/v1",
+  "round": 187,
+  "head": "4a9f2194ef3b84cb2840c4cf95807635c33d8d88",
+  "tree": "d5508ec676a6d4a0aed4ac0ca9364717612e535d",
+  "run": 43353548973,
+  "job": 131650064242,
+  "status": "completed",
+  "conclusion": "failure",
+  "updated_at": "2026-11-13T02:42:56Z",
+  "quick": "failure",
+  "full": "skipped",
+  "fresh_project_modules": 0,
+  "original_log": "c2e95452537a077bf03330804a27dec2a7344ad9",
+  "complete_errors": "9bc9224385aaf9c4d701714e0027b4448031c2bc",
+  "diagnostics": 3,
+  "no_artifact_download_needed": true,
+  "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "released_draft_credit": 0,
+  "draft_actual_upper": 20000,
+  "remaining": 0,
+  "performance": "The former scalar-majorant diagnostics are absent. Explicit Fin.snoc/Fin.cons dependent family inference failed; the uniqueness application and second public declaration also timed out. The later timeouts are not proved independent of the preceding elaboration failure. No heartbeat or watchdog increase."
+}

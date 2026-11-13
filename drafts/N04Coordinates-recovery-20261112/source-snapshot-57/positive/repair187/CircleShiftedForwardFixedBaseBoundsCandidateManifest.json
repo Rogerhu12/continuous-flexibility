@@ -1,0 +1,192 @@
+{
+  "schema": "n04-ci-repair-candidate/v1",
+  "path": "positive/repair187/CircleShiftedForwardFixedBaseBoundsCandidateManifest.json",
+  "repository_full_name": "Rogerhu12/continuous-flexibility",
+  "status": "SOURCE_CANDIDATE_STATIC_ONLY_NOT_COMPILED",
+  "actual_base": {
+    "head": "4a9f2194ef3b84cb2840c4cf95807635c33d8d88",
+    "tree": "d5508ec676a6d4a0aed4ac0ca9364717612e535d",
+    "run": 43353548973,
+    "job": 131650064242,
+    "ci": "CI187_COMPLETE_FAILURE"
+  },
+  "source": {
+    "module": "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+    "install_path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "archive_path": "positive/repair187/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "e81998dd165a9b3ab67d527e1e3fc33f12d70765",
+    "sha256": "dbaec99c20613aba1590ffe730c4abdd971064ce968fa834a117a71d66be105d",
+    "utf8_bytes": 11932,
+    "lines": 213,
+    "final_newline": true,
+    "server_readback_equal": true
+  },
+  "before": {
+    "git_blob": "25ac7596fcd840162d70ba65a76b502cbe9e58e1",
+    "sha256": "215ce15fb8ae30c5cf57bc2b3c77cbe018d6a3bdd21b134fcc3da333f98d78b4",
+    "utf8_bytes": 11335,
+    "lines": 213,
+    "final_newline": true,
+    "candidate": "7ba8e36b239d26fe503dfabf5a6d555a2b7e3d79",
+    "review": "91936a29cd3983e3106535c9f2d7f78a2efe9d48",
+    "owner": "3ff495453288cb78ea070b93d73a2168bcbe56ad",
+    "status": "HISTORICAL_STATIC_REVIEWED_FAILED_CI187"
+  },
+  "patch": {
+    "git_blob": "59ab34fd22e790a71f76fde6bb4bd5a3f46b3a76",
+    "sha256": "4cf1c42482b2adb7be26a3ca8e95a45339b4c50efd20832698936699fd639861",
+    "utf8_bytes": 2281,
+    "lines": 31,
+    "final_newline": true,
+    "hunks": 3,
+    "added": 4,
+    "deleted": 4,
+    "net": 0,
+    "forward_and_reverse_exact": true
+  },
+  "exact_replacements": [
+    {
+      "old": "          Fin.snoc (fun i : Fin (n + 1) => (Fin.cons (v 0) (Fin.tail v) i, (0 : M.Space)))",
+      "new": "          Fin.snoc (α := fun _ : Fin (n + 2) => M.Space × M.Space) (fun i : Fin (n + 1) => (Fin.cons (α := fun _ : Fin (n + 1) => M.Space) (v 0) (Fin.tail v) i, (0 : M.Space)))"
+    },
+    {
+      "old": "    have hsame := (hf.congr_germ hg).unique hk",
+      "new": "    have hsame : inverseForwardJet J (n + 1) e (Fin.cons (v 0) (Fin.tail v)) y = coupledCircleKernel hD hT hγ hM hI (n + 1) (n + 1) e (circleTranslationContinuousLinear hM hT hD hγ travel y) (Fin.cons (v 0) (Fin.tail v)) := HasProjectiveLineDerivAt.unique (V := M.Space) (F := M.Space) (HasProjectiveLineDerivAt.congr_germ (V := M.Space) (W := M.Space) hf hg) hk"
+    },
+    {
+      "old": "  have hbound := multilinear_bound_of_unitBall A (M.grading s) (M.grading base)\n    (M.grading H) (mul_nonneg hC hP) hunit (fun _ : Fin 1 => y)",
+      "new": "  have hbound : M.grading s (A (fun _ : Fin 1 => y)) ≤ (C * P) * multilinearTameSize (M.grading base) (M.grading H) 1 a (fun _ : Fin 1 => y) :=\n    multilinear_bound_of_unitBall (E := M.Space) (F := M.Space) (k := 1) (C := C * P) (a := a) A (M.grading s) (M.grading base) (M.grading H) (mul_nonneg hC hP) hunit (fun _ : Fin 1 => y)"
+    }
+  ],
+  "public_headers": [
+    {
+      "name": "circleShiftedChartCompose_orderedJet_eq_kernel",
+      "header": "theorem circleShiftedChartCompose_orderedJet_eq_kernel\n    (travel : ℕ → ℝ) {U : Set M.Space} (hU : IsOpen U)\n    (J : SmoothDirections (U ×ˢ univ) (fun z : M.Space × M.Space =>\n      circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2))\n    (n : ℕ) :\n    ∀ e ∈ U, ∀ (v : Fin n → M.Space) (y : M.Space),\n      inverseForwardJet J n e v y =\n        coupledCircleKernel hD hT hγ hM hI n n e\n          (circleTranslationContinuousLinear hM hT hD hγ travel y) v "
+    },
+    {
+      "name": "circleShiftedChartCompose_orderedJets_fixedBase_bound",
+      "header": "theorem circleShiftedChartCompose_orderedJets_fixedBase_bound :\n    ∃ base loss : ℕ, ∀ (n : ℕ) (R : ℝ), 1 ≤ R →\n      ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧\n        ∀ (travel : ℕ → ℝ) (U : Set M.Space) (hU : IsOpen U)\n          (J : SmoothDirections (U ×ˢ univ) (fun z : M.Space × M.Space =>\n            circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2)),\n          ∀ e ∈ U, M.grading base e ≤ R → ∀ v : Fin n → M.Space,\n            (∀ i, M.grading base (v i) ≤ R) → ∀ y : M.Space,\n              M.grading s (inverseForwardJet J n e v y) ≤ C *\n                ((1 + M.grading (s + (n + loss)) e +\n                    ∑ i, M.grading (s + (n + loss)) (v i)) * M.grading base y +\n                  M.grading (s + (n + loss)) y) "
+    }
+  ],
+  "unchanged": {
+    "public_headers": 2,
+    "imports": [
+      "import ContinuousFlexibility.Analysis.TameInverseExpressions",
+      "import ContinuousFlexibility.Analysis.CoupledCircleCompositionCurveDerivative",
+      "import ContinuousFlexibility.Analysis.CircleTranslationUniformBounds",
+      "import ContinuousFlexibility.Analysis.TameMultilinearNormalization"
+    ],
+    "local_pair_smul": true,
+    "private_majorant_and_scalar_helper": true,
+    "kernel_constant_choice": true,
+    "source_and_parameter_witnesses": true,
+    "quantifier_order": true,
+    "resources": true,
+    "all_other_bytes": true
+  },
+  "diagnosis": {
+    "complete_error_blob": "9bc9224385aaf9c4d701714e0027b4448031c2bc",
+    "complete_error_sha256": "bd849433ce130b2b10fa00745ff24bf6a5481b43531ed0b38a61d789446d1a5a",
+    "original_log_blob": "c2e95452537a077bf03330804a27dec2a7344ad9",
+    "original_log_sha256": "4dadc9b9e1a3285aa8ac10bc32ad9bbbe4bb745324f772dbae709e69e055e2c1",
+    "errors": [
+      {
+        "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:85:12: Application type mismatch: The argument",
+        "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:85:12: Application type mismatch: The argument\n  (0, y)\nhas type\n  ↥M.Space × ↥M.Space\nbut is expected to have type\n  ?m.237 (Fin.last (n + 1))\nin the application\n  Fin.snoc (fun i => ?m.284) (0, y)",
+        "lines": 8
+      },
+      {
+        "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:98:19: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached",
+        "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:98:19: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+        "lines": 5
+      },
+      {
+        "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:152:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached",
+        "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:152:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+        "lines": 5
+      }
+    ],
+    "complete": true,
+    "no_artifact_redownload": true
+  },
+  "rationale": [
+    "Restore the two dependent alpha families verbatim in mathematical shape from the actual generic derivative proof in TameInverseExpressions. The Fin.snoc result family is Fin (n+2) -> M.Space × M.Space, and its inner Fin.cons family is Fin (n+1) -> M.Space.",
+    "The germ-congruence and derivative uniqueness step now has an explicit equality target and explicit source/target types. Its two derivatives and equality germ are unchanged.",
+    "The existing source-only unit-ball normalization call now has its exact complete inequality target and explicit E, F, k=1, C=C*P and a. The original continuous linear source map, hunit, rw and final simp are unchanged.",
+    "The two timeout locations identify expensive elaboration boundaries, not a proven unique performance cause. No resource increase or compiler-success claim is made."
+  ],
+  "actual_api_pins": [
+    {
+      "module": "ContinuousFlexibility.Analysis.TameInverseExpressions",
+      "git_blob": "14ad46cae7d92dca46f5efd006f5260873046713",
+      "api": "hasProjectiveLineDerivAt_inverseForwardJet",
+      "scope": "actual generic hi supplies both alpha annotations; same direct J.derivative specialized"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ProjectiveDifferential",
+      "git_blob": "a6290d8207dc1171bd6b4aa1a4d60b512e9c35b4",
+      "sha256": "0ed62c54e8cf1e36f906368c47e79e6aef089ad2e439e1bb44ff99a36fd3e7a3",
+      "utf8_bytes": 14138,
+      "lines": 289,
+      "final_newline": true,
+      "api": "HasProjectiveLineDerivAt.unique",
+      "explicit_implicit_names": [
+        "V",
+        "F"
+      ],
+      "actual_base_fetch_match": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ProjectiveJets",
+      "git_blob": "b7ada8e57f9f58fa568762693eaded6538708e6e",
+      "sha256": "2411247d23d436966563315406fc15b2bf2c3a2340c3b77a94a0391db66b8e0b",
+      "utf8_bytes": 15392,
+      "lines": 352,
+      "final_newline": true,
+      "api": "HasProjectiveLineDerivAt.congr_germ",
+      "explicit_implicit_names": [
+        "V",
+        "W"
+      ],
+      "actual_base_fetch_match": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "git_blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "utf8_bytes": 9718,
+      "lines": 204,
+      "final_newline": true,
+      "api": "multilinear_bound_of_unitBall",
+      "explicit_implicit_names": [
+        "E",
+        "F",
+        "k",
+        "C",
+        "a"
+      ],
+      "actual_base_fetch_match": true
+    }
+  ],
+  "budget": {
+    "before_lines": 213,
+    "after_lines": 213,
+    "net": 0,
+    "conservative_uncompiled_total": 20000,
+    "remaining": 0,
+    "ci_credit_released": 0
+  },
+  "operations": {
+    "local_lean": false,
+    "local_elaboration": false,
+    "active_edits": false,
+    "git_refs": false,
+    "ci_queries": false,
+    "new_lean_modules": false,
+    "source_blob_only": true
+  },
+  "pending": [
+    "Independent peer review of this exact source and delta",
+    "Next root-controlled complete CI performance and typing validation"
+  ]
+}

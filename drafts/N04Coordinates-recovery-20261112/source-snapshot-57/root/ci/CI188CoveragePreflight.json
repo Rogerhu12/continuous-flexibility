@@ -1,0 +1,45 @@
+{
+  "schema": "n04-exact-source-coverage-preflight/v1",
+  "head": "795cc520c075a91e56e14a92ee826479c15c168d",
+  "tree": "b18c521c94c2630bfb9694d85a64401bbf432379",
+  "source_graph": "Actual4802 blobs; root edges explicitly replaced by generated4734 imports, from complete182 generated4637 plus97 new modules. Checked-in root remains4241 imports.",
+  "all_nodes": 4802,
+  "project_nodes": 4798,
+  "new_modules_since_complete182": 97,
+  "rebound_modules": 9,
+  "generated_imports": 4734,
+  "checked_imports": 4241,
+  "full_lag": 493,
+  "default_roots": [
+    "ContinuousFlexibility",
+    "AxiomAudit",
+    "Challenge.FlexibleSphereChallenge",
+    "Solution.FlexibleSphereSolution"
+  ],
+  "default_all_reachable": 4796,
+  "default_project_reachable": 4792,
+  "default_unreached": [
+    "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+    "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth",
+    "ContinuousFlexibility.Blueprint.N01c.Coefficients",
+    "ContinuousFlexibility.Blueprint.N01c.Flows",
+    "ContinuousFlexibility.Blueprint.N01c.Speeds",
+    "ContinuousFlexibility.Blueprint.N05.VolumeModel"
+  ],
+  "extra_quick_targets": [
+    "ContinuousFlexibility.Blueprint.N01c.Coefficients",
+    "ContinuousFlexibility.Blueprint.N01c.Flows",
+    "ContinuousFlexibility.Blueprint.N01c.Speeds",
+    "ContinuousFlexibility.Blueprint.N05.VolumeModel"
+  ],
+  "combined_all_reachable": 4800,
+  "combined_project_reachable": 4796,
+  "remaining_unreached": [
+    "ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit",
+    "ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth"
+  ],
+  "missing": [],
+  "cycles": [],
+  "compilation": "PENDING",
+  "note": "One source-only 213-to213 explicit-type repair, same public heads/imports and generated4734 root. CI188 pending."
+}

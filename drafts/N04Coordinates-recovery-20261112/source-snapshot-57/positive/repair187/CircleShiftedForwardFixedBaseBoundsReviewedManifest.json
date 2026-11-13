@@ -1,0 +1,104 @@
+{
+  "schema": "n04-reviewed-source-selection/v1",
+  "path": "positive/repair187/CircleShiftedForwardFixedBaseBoundsReviewedManifest.json",
+  "repository_full_name": "Rogerhu12/continuous-flexibility",
+  "owner": "/root/proof_inventory",
+  "status": "FULL_SOURCE_AND_EXACT_DELTA_REVIEWED_ONLY_NOT_COMPILED",
+  "selected_source": {
+    "module": "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+    "install_path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "archive_path": "positive/repair187/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "e81998dd165a9b3ab67d527e1e3fc33f12d70765",
+    "sha256": "dbaec99c20613aba1590ffe730c4abdd971064ce968fa834a117a71d66be105d",
+    "utf8_bytes": 11932,
+    "lines": 213,
+    "final_newline": true,
+    "server_readback_equal": true
+  },
+  "candidate": {
+    "git_blob": "49aade5dc8ee82c9867c3126cd73a9aee02f4174",
+    "sha256": "ce49b5bad1d2d46e0a6f830215fd421f06e7319216f7d6b225f4800547e5af66",
+    "utf8_bytes": 10608,
+    "lines": 192,
+    "final_newline": true
+  },
+  "patch": {
+    "git_blob": "59ab34fd22e790a71f76fde6bb4bd5a3f46b3a76",
+    "sha256": "4cf1c42482b2adb7be26a3ca8e95a45339b4c50efd20832698936699fd639861",
+    "utf8_bytes": 2281,
+    "lines": 31,
+    "final_newline": true,
+    "hunks": 3,
+    "added": 4,
+    "deleted": 4,
+    "net": 0
+  },
+  "independent_peer": {
+    "path": "audit/recovery/reviews/CI187CircleShiftedForwardFixedBaseBoundsIndependentReview.json",
+    "git_blob": "89495ddfd683902260aca85e3b94e65a56dc537b",
+    "sha256": "945f40c65c0298fa154ef875e99ecdd68deb826d1df569a5f267d274c9f6c80f",
+    "utf8_bytes": 6075,
+    "lines": 122,
+    "final_newline": true,
+    "reviewer": "/root/audit_coordinates",
+    "result": "PASS_COMPLETE_SOURCE_DELTA_AND_ACTUAL_API_STATIC_REVIEW_UNCOMPILED",
+    "findings": []
+  },
+  "predecessor": {
+    "source": "25ac7596fcd840162d70ba65a76b502cbe9e58e1",
+    "owner": "3ff495453288cb78ea070b93d73a2168bcbe56ad",
+    "review": "91936a29cd3983e3106535c9f2d7f78a2efe9d48",
+    "head": "4a9f2194ef3b84cb2840c4cf95807635c33d8d88",
+    "status": "FAILED_CI187_NOT_COMPILED_READY",
+    "historical_bytes_preserved": true
+  },
+  "complete_diagnostics": {
+    "git_blob": "9bc9224385aaf9c4d701714e0027b4448031c2bc",
+    "sha256": "bd849433ce130b2b10fa00745ff24bf6a5481b43531ed0b38a61d789446d1a5a",
+    "blocks": 3,
+    "lines_per_block": [
+      8,
+      5,
+      5
+    ],
+    "original_log_blob": "c2e95452537a077bf03330804a27dec2a7344ad9",
+    "log_redownloaded": false
+  },
+  "exact_checks": {
+    "source_candidate_patch_peer_server_readback": true,
+    "all_three_replacements_forward_reverse": true,
+    "two_complete_public_headers_byte_equal": true,
+    "all_other_bytes_identical": true,
+    "actual_generic_api_names_verified": true,
+    "source_slot_and_kernel_orders_unchanged": true,
+    "constant_and_loss_quantifiers_unchanged": true,
+    "no_new_hypothesis": true,
+    "no_new_public_name": true,
+    "no_resource_or_transparency_change": true
+  },
+  "scope": "Restore the two exact dependent families from actual14ad and give complete types to the existing germ-uniqueness and source-only normalization boundaries. This is an elaboration repair of the same genuine tower and estimate, not a new proof assumption.",
+  "readiness": "Independent full source review is complete; typing and default200000 performance remain unverified until root-controlled complete successor CI.",
+  "previous_review_correction": {
+    "blob": "91936a29cd3983e3106535c9f2d7f78a2efe9d48",
+    "scope": "The preceding static review missed the dependent-family elaboration failure caused by omitting the two original alpha annotations. CI187 establishes that earlier source is not compiled-ready. Its historical receipt/source remain immutable; this review applies only to e81998dd. The two timeout causes are not proven uniquely by their diagnostics."
+  },
+  "budget": {
+    "source_before": 213,
+    "source_after": 213,
+    "net": 0,
+    "uncompiled_draft_upper_bound": 20000,
+    "released_credit": 0,
+    "remaining": 0
+  },
+  "operations": {
+    "local_lean": false,
+    "active_edits": false,
+    "index_or_refs": false,
+    "ci_queries": false,
+    "new_lean_modules": false
+  },
+  "pending": [
+    "Root-controlled next complete CI",
+    "Explicit downstream206 provider binding only after selecting this exact source; preserve earlier graph/receipts"
+  ]
+}

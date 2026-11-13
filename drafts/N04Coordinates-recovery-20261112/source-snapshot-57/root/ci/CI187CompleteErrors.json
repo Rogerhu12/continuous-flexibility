@@ -1,0 +1,31 @@
+{
+  "schema": "n04-complete-ci-diagnostics/v1",
+  "round": 187,
+  "head": "4a9f2194ef3b84cb2840c4cf95807635c33d8d88",
+  "run": 43353548973,
+  "job": 131650064242,
+  "original_log": {
+    "blob": "c2e95452537a077bf03330804a27dec2a7344ad9",
+    "sha256": "4dadc9b9e1a3285aa8ac10bc32ad9bbbe4bb745324f772dbae709e69e055e2c1",
+    "bytes": 67443
+  },
+  "diagnostics": [
+    {
+      "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:85:12: Application type mismatch: The argument",
+      "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:85:12: Application type mismatch: The argument\n  (0, y)\nhas type\n  ↥M.Space × ↥M.Space\nbut is expected to have type\n  ?m.237 (Fin.last (n + 1))\nin the application\n  Fin.snoc (fun i => ?m.284) (0, y)",
+      "lines": 8
+    },
+    {
+      "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:98:19: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached",
+      "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:98:19: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+      "lines": 5
+    },
+    {
+      "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:152:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached",
+      "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:152:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+      "lines": 5
+    }
+  ],
+  "complete": true,
+  "reason": "The full Fin.snoc application mismatch is8 lines and each timeout5 lines, all visibly terminated; no40-line truncation or missing goal. No ZIP required."
+}

@@ -1,0 +1,584 @@
+{
+  "schema": "n04-shared-interface-minimal-closure/v1",
+  "path": "positive/recovery/N04RetainedCutoffOpticalFieldMinimalClosure.json",
+  "repository_full_name": "Rogerhu12/continuous-flexibility",
+  "status": "READ_ONLY_SOURCE_AVAILABILITY_AND_BOUNDED_CONSUMER_REVIEW_NOT_COMPILED",
+  "actual_anchor": {
+    "head": "4a9f2194ef3b84cb2840c4cf95807635c33d8d88",
+    "tree": "d5508ec676a6d4a0aed4ac0ca9364717612e535d",
+    "note": "CI187 is failed on CircleShiftedForwardFixedBaseBounds; this is not an activation gate."
+  },
+  "upstream_pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "existing_plans": {
+    "next150": "14d63e2dfd4abf9853ebf0d301b40fe1fd2c9d22",
+    "inventory623": "a0948c5b56e409d3a636e97a873df717f978caeb",
+    "next84_owned_addendum": "07db1968d6c742312ae36aeb07a8036153569db6",
+    "same_cutoff_route": "fc631678cd227d3f2b34feeefe37bbf79fd3d20e",
+    "same_cutoff_interface_checkpoint": "ab73f31a7106a56ca54981a0b43e8f1216988980"
+  },
+  "conclusion": {
+    "buffered294_already_in_second71": true,
+    "new_source_modules": 4,
+    "new_source_lines": 485,
+    "shared_update_net_lines": 21,
+    "new_root_imports": 4,
+    "marginal_added_lines_including_root": 510,
+    "no_new_lean_written": true,
+    "activation_not_authorized": true,
+    "whole_active_token_exhaustiveness_proved": false
+  },
+  "additional_sources": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bOriginalType",
+      "path": "src/ContinuousFlexibility/Analysis/N04bOriginalType.lean",
+      "git_blob": "09d985c6ab3216df48a0d4e48a6e2744a190c2c7",
+      "sha256": "cf12b76bc90c4237619d52c835e04f6be5be9b775ea54fe762e8a87667f8c96b",
+      "utf8_bytes": 2883,
+      "lines": 60,
+      "final_newline": true,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bStateProfileType",
+        "ContinuousFlexibility.Scalar.TypeCorrection"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bCorrectedFieldFacts",
+      "path": "src/ContinuousFlexibility/Analysis/N04bCorrectedFieldFacts.lean",
+      "git_blob": "dd3c1dbb8a932de6e2c9ab64b82d18ce2de6f68a",
+      "sha256": "d022f6d209aebfa7ba31b2ec0992f5dfe784916af164379450a402a9d865ab9d",
+      "utf8_bytes": 8284,
+      "lines": 176,
+      "final_newline": true,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectionOperatorComparison"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bOpticalFieldType",
+      "path": "src/ContinuousFlexibility/Analysis/N04bOpticalFieldType.lean",
+      "git_blob": "da2a788ce170da35a3c0f1d72849ab87187bbe15",
+      "sha256": "88891722dfa086127c946dc92a8e04bc53973df6a37cfb0c4beb013ba806ba08",
+      "utf8_bytes": 5042,
+      "lines": 109,
+      "final_newline": true,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bOriginalType",
+        "ContinuousFlexibility.Analysis.N04bCorrectedFieldFacts",
+        "ContinuousFlexibility.Analysis.N04bFieldRegularity"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceCorrection",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceCorrection.lean",
+      "git_blob": "8de44e6b9b63d15c1bf36be0521c5358c37d2b01",
+      "sha256": "d40a5560d69b5f1c0addeb6da26b2032e3edef8b96af8c2e5ad6f521094fa64b",
+      "utf8_bytes": 6660,
+      "lines": 140,
+      "final_newline": true,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01RadialFlow",
+        "ContinuousFlexibility.Analysis.ReturnCorrectedFlow"
+      ]
+    }
+  ],
+  "already_planned_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionBufferedCollars",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionBufferedCollars.lean",
+      "blob": "e52779806ba4290ea6dc7af3864a2cb20455afbd",
+      "git_blob": "e52779806ba4290ea6dc7af3864a2cb20455afbd",
+      "sha256": "4c1f8954ac061a3e7e41696ae0e73974f61898982e1310efbfc4fc5fc08ae944",
+      "bytes": 17203,
+      "lines": 294,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap"
+      ],
+      "selected_stage": "main1ece-additional",
+      "first_available_stage": "main1ece-additional",
+      "exact_second71": {
+        "module": "ContinuousFlexibility.Analysis.ReturnCorrectionBufferedCollars",
+        "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionBufferedCollars.lean",
+        "blob": "e52779806ba4290ea6dc7af3864a2cb20455afbd",
+        "sha256": "4c1f8954ac061a3e7e41696ae0e73974f61898982e1310efbfc4fc5fc08ae944",
+        "bytes": 17203,
+        "lines": 294,
+        "imports": [
+          "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap"
+        ],
+        "kind": "additional-main1ece",
+        "expected_preimage": null
+      }
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionOperatorComparison",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionOperatorComparison.lean",
+      "blob": "76de31e84da12bd83ca792b2e1b7158be53b90cb",
+      "git_blob": "76de31e84da12bd83ca792b2e1b7158be53b90cb",
+      "sha256": "0235a2a23b36feafbe6b77ded7269212500886cb934531e9b4ec49e6bac449c5",
+      "bytes": 8165,
+      "lines": 163,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnOpticalCorrectionSource"
+      ],
+      "selected_stage": "main1ece-additional",
+      "first_available_stage": "main1ece-additional",
+      "exact_second71": {
+        "module": "ContinuousFlexibility.Analysis.ReturnCorrectionOperatorComparison",
+        "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionOperatorComparison.lean",
+        "blob": "76de31e84da12bd83ca792b2e1b7158be53b90cb",
+        "sha256": "0235a2a23b36feafbe6b77ded7269212500886cb934531e9b4ec49e6bac449c5",
+        "bytes": 8165,
+        "lines": 163,
+        "imports": [
+          "ContinuousFlexibility.Analysis.ReturnOpticalCorrectionSource"
+        ],
+        "kind": "additional-main1ece",
+        "expected_preimage": null
+      }
+    }
+  ],
+  "active_boundary_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bStateProfileType",
+      "path": "src/ContinuousFlexibility/Analysis/N04bStateProfileType.lean",
+      "git_blob": "a21640350dc6a6b400d83f646d7f451f4e977c90",
+      "sha256": "d0453cae8528608053a30bf0cbc25787833e1538ff969adf0ea3a2627d51f0bc",
+      "utf8_bytes": 13424,
+      "lines": 283,
+      "final_newline": true,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bSingletonType",
+        "Mathlib.Topology.Algebra.InfiniteSum.Ring",
+        "Mathlib.Tactic.Abel"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01RadialFlow",
+      "path": "src/ContinuousFlexibility/Analysis/N01RadialFlow.lean",
+      "git_blob": "18a0371244efb04d672cc40253d7036589b1cf2d",
+      "sha256": "5004376f805d5d555f8041af9386b335ae722e16f62dbc2ddf8ba28a5868bd7c",
+      "utf8_bytes": 10939,
+      "lines": 221,
+      "final_newline": true,
+      "imports": [
+        "ContinuousFlexibility.Radial.RadialHeight",
+        "ContinuousFlexibility.Analysis.StateControlCofiniteClosure",
+        "ContinuousFlexibility.Analysis.OpticalTravelVariation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectedFlow",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectedFlow.lean",
+      "git_blob": "36693b0d8102e289a31ebd012f8eeb6cf63f795c",
+      "sha256": "9323567f5c4d710472b4d8b4f9ea52c5cdb5d16aa8d83b9661844f61f91b8763",
+      "utf8_bytes": 18529,
+      "lines": 343,
+      "final_newline": true,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectionAlgebra",
+        "ContinuousFlexibility.Analysis.ReturnChartDifferentiation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.TypeCorrection",
+      "path": "src/ContinuousFlexibility/Scalar/TypeCorrection.lean",
+      "git_blob": "d40da5359abab2b5185a10f36b0a048ae80ff6d2",
+      "sha256": "eeb9c3ed1c80a368957530b177ab263f88b82c544014648411ea4c8cf3e62c83",
+      "utf8_bytes": 13868,
+      "lines": 267,
+      "final_newline": true,
+      "imports": [
+        "ContinuousFlexibility.Scalar.Linearization",
+        "ContinuousFlexibility.Scalar.Normalization"
+      ]
+    }
+  ],
+  "closed_at_boundary_reason": [
+    "BufferedCollars294 is an exact second71 record; its only direct project import ReturnCorrectionSpeedGap is in the already frozen623 closure.",
+    "CorrectedFieldFacts176 imports only ReturnCorrectionOperatorComparison163, which is an exact second71 record.",
+    "OriginalType60 imports active StateProfileType283 and active Scalar.TypeCorrection267. The exact used zero-negative-type public header is byte-identical to main284; selecting this existing active provider does not select main284's internal choose rewrite.",
+    "ReferenceCorrection140 imports active N01RadialFlow221 and ReturnCorrectedFlow343; both actual187 blobs match the main-pinned623 records.",
+    "OpticalFieldType109 imports the new OriginalType60, CorrectedFieldFacts176 and the explicit shared FieldRegularity80 update.",
+    "This is a minimal import closure relative to the existing next84+71 union and the four explicitly read actual boundaries. It is not a new whole-tree typechecking or name-collision certificate."
+  ],
+  "state_profile_selection": {
+    "active": {
+      "module": "ContinuousFlexibility.Analysis.N04bStateProfileType",
+      "path": "src/ContinuousFlexibility/Analysis/N04bStateProfileType.lean",
+      "git_blob": "a21640350dc6a6b400d83f646d7f451f4e977c90",
+      "sha256": "d0453cae8528608053a30bf0cbc25787833e1538ff969adf0ea3a2627d51f0bc",
+      "utf8_bytes": 13424,
+      "lines": 283,
+      "final_newline": true,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bSingletonType",
+        "Mathlib.Topology.Algebra.InfiniteSum.Ring",
+        "Mathlib.Tactic.Abel"
+      ]
+    },
+    "main": {
+      "module": "ContinuousFlexibility.Analysis.N04bStateProfileType",
+      "path": "src/ContinuousFlexibility/Analysis/N04bStateProfileType.lean",
+      "git_blob": "cf6ba25169c48d9aef1b42b68773d907ebcd6d37",
+      "sha256": "d1716320a0d90d8548af347148a6f3c0275cdcfd7703b530ba1902df21b146c7",
+      "utf8_bytes": 13496,
+      "lines": 284,
+      "final_newline": true,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bSingletonType",
+        "Mathlib.Topology.Algebra.InfiniteSum.Ring",
+        "Mathlib.Tactic.Abel"
+      ]
+    },
+    "used_public_header": "theorem N01Properties.n04b_originalCoefficients_zero_negative_type\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)\n    {x : AnnularState S} (hx : stateGrading S base (x - C.referenceState) < ε)\n    (m : ℕ) {p : PolarPoint} (hp : p.1 ∈ Ioo (C.left m) (C.right m)) :\n    0 < (originalCoefficients D S C (x, 0)).a p ∧\n      (originalCoefficients D S C (x, 0)).b p = 0 ∧\n      (originalCoefficients D S C (x, 0)).c p < 0 ∧\n      0 < (originalCoefficients D S C (x, 0)).b p ^ 2 -\n        (originalCoefficients D S C (x, 0)).a p *\n          (originalCoefficients D S C (x, 0)).c p ",
+    "used_header_byte_identical": true,
+    "note": "Keep active a216 in this minimal gate. Future full-main merge may separately adopt cf6b's witness-choice proof rewrite."
+  },
+  "shared_field_migration": {
+    "module": "ContinuousFlexibility.Analysis.N04bFieldRegularity",
+    "before": {
+      "module": "ContinuousFlexibility.Analysis.N04bFieldRegularity",
+      "path": "src/ContinuousFlexibility/Analysis/N04bFieldRegularity.lean",
+      "git_blob": "0accc70bea719eb47f46bcde4989c99798027273",
+      "sha256": "e9785ca55354e5eb97a0243c085d2ddfefdd0d302b70fb9ee759fdde7591ca55",
+      "utf8_bytes": 2927,
+      "lines": 59,
+      "final_newline": true,
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ]
+    },
+    "after": {
+      "module": "ContinuousFlexibility.Analysis.N04bFieldRegularity",
+      "path": "src/ContinuousFlexibility/Analysis/N04bFieldRegularity.lean",
+      "git_blob": "fc6a92f96c18e23d8b87eb0f3385909c90154194",
+      "sha256": "ba633ef11b1dd37d934e9ba3852ac3352c43e65cc79b629927abcccbd533abf7",
+      "utf8_bytes": 4008,
+      "lines": 80,
+      "final_newline": true,
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ]
+    },
+    "exact_diff": "--- a/active/N04bFieldRegularity.lean\n+++ b/main/N04bFieldRegularity.lean\n@@ -39,12 +39,33 @@\n   positive_a :\n     ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →\n       ∀ p ∈ annularOpen D, 0 < (L.coefficients z).a p\n+  /-- The explicitly constructed correction is the actual radial optical flow\n+  at the reference state. This is a raw construction property, proved before\n+  introducing any canonical chart. -/\n+  reference_flow :\n+    ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,\n+      L.minusFlow (C.referenceState, 0) m r θ =\n+        θ - ∫ s in C.left m..r, Real.sqrt (-deriv D.w s / (s * D.w s))\n   negative_discriminant :\n     ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →\n       ∀ m, ∀ p ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ),\n         0 < (L.coefficients z).b p ^ 2 -\n           (L.coefficients z).a p * (L.coefficients z).c p\n \n+/-- The raw field properties imply the actual spatial correction contract. -/\n+theorem N04bFieldRegularity.toReturnCorrectionSpatialProperties\n+    {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}\n+    {L : ReturnCorrectionData S} {base : ℕ} {ε : ℝ}\n+    (hfield : N04bFieldRegularity D S C L base ε) :\n+    ReturnCorrectionSpatialProperties D S C L base ε := by\n+  intro z hz hs\n+  have hregular := hfield.smooth_coefficients z hz hs\n+  refine ⟨hregular.2.1, hregular.2.2, ?_⟩\n+  rintro ⟨r, θ⟩ hp\n+  have hperiod := hfield.periodic_coefficients z hz hs r hp.1\n+  simpa only [Prod.mk_add_mk, add_zero] using\n+    And.intro (hperiod.2.1 θ) (hperiod.2.2 θ)\n+\n /-- A genuine cumulative corrected field with the additional raw regularity\n needed to construct its characteristic atlas. All witnesses may be chosen\n together; no normal-form certificate is included in this statement. -/\n",
+    "structure_header": "structure N04bFieldRegularity (D : ReferenceData) (S : PhysicalSpacesData)\n    (C : NonlinearGeometryData S) (L : ReturnCorrectionData S)\n    (base : ℕ) (ε : ℝ) : Prop where\n",
+    "new_field_exact": "  reference_flow :\n    ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,\n      L.minusFlow (C.referenceState, 0) m r θ =\n        θ - ∫ s in C.left m..r, Real.sqrt (-deriv D.w s / (s * D.w s))",
+    "added_public_head": "theorem N04bFieldRegularity.toReturnCorrectionSpatialProperties\n    {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}\n    {L : ReturnCorrectionData S} {base : ℕ} {ε : ℝ}\n    (hfield : N04bFieldRegularity D S C L base ε) :\n    ReturnCorrectionSpatialProperties D S C L base ε ",
+    "original_four_fields_unchanged": true,
+    "field_data_statement_text_unchanged_semantically_stronger": true,
+    "no_field_weakening_or_erasure": true,
+    "proposed_same_witness_supply": "The previously checked fixed-input adapter first obtains only a smaller base/epsilon from exists_gap_neighborhood_for_positive_cutoff for the same153 chi and R. Restrict the same N02/N03 witnesses, rewrite the same L.minusFlow with its retained literal identity, then call N01Properties.n04b_returnCorrectedMinusFlow_reference (r is implicit). Feed that exact reference identity to n04b_opticalFieldRegularity; no new L=Q.field E is selected.",
+    "optical_producer": {
+      "module": "ContinuousFlexibility.Analysis.N04bOpticalFieldType",
+      "declaration": "ContinuousFlexibility.Statements.N01Properties.n04b_opticalFieldRegularity",
+      "record_reference_field_assignment": "reference_flow := fun m r hr θ => hreference m r hr θ",
+      "git_blob": "da2a788ce170da35a3c0f1d72849ab87187bbe15"
+    },
+    "reference_identity_supplier": {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceCorrection",
+      "declaration": "ContinuousFlexibility.Statements.N01Properties.n04b_returnCorrectedMinusFlow_reference",
+      "git_blob": "8de44e6b9b63d15c1bf36be0521c5358c37d2b01",
+      "implicit_physical_radius": "{r : ℝ}"
+    }
+  },
+  "bounded_active_consumers": {
+    "basis": "Parent exact187 import graph gave nine non-root direct importers. Each exact file was fetched and scanned fully for the field type, named projections, structure constructors and structural elimination. Related CoefficientProbeFieldRegularity161 was also fetched.",
+    "direct_importers": 9,
+    "additional_name_candidate": 1,
+    "records": [
+      {
+        "module": "ContinuousFlexibility.Analysis.CanonicalPrimitivePreservation",
+        "path": "src/ContinuousFlexibility/Analysis/CanonicalPrimitivePreservation.lean",
+        "git_blob": "9baf771b7e16079913a1e7f6acfa5e228ff8b063",
+        "sha256": "d30e0dde1407b59ea139014f5715d3cff6e08ef02218dfbf8d5714d1dfcd510d",
+        "utf8_bytes": 2154,
+        "lines": 51,
+        "final_newline": true,
+        "type_and_projection_occurrences": [
+          {
+            "line": 34,
+            "text": "    {base : ℕ} {ε : ℝ} (h : N04bFieldRegularity D S C L base ε) :"
+          },
+          {
+            "line": 44,
+            "text": "  obtain ⟨ha, hb, hc⟩ := h.smooth_coefficients z hz hs"
+          },
+          {
+            "line": 47,
+            "text": "    exact (h.periodic_coefficients z hz hs r hr).2.1"
+          },
+          {
+            "line": 49,
+            "text": "    exact (h.periodic_coefficients z hz hs r hr).2.2"
+          }
+        ],
+        "concrete_field_record_or_tuple_construction_found": false,
+        "structural_destructuring_of_field_found": false,
+        "role": "USES_EXISTING_NAMED_PROJECTIONS_OR_PASSES_FIELD_AS_INPUT"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N03NegativePotentialPhysicalJets",
+        "path": "src/ContinuousFlexibility/Analysis/N03NegativePotentialPhysicalJets.lean",
+        "git_blob": "4279849ed3ea8948ac0a3e895cd4879a02d5609a",
+        "sha256": "0b3295ba4487ffe878615625d0fb9966c14b830bb41473c1fe5a691d82568087",
+        "utf8_bytes": 11482,
+        "lines": 206,
+        "final_newline": true,
+        "type_and_projection_occurrences": [
+          {
+            "line": 124,
+            "text": "    (hfield : N04bFieldRegularity D S C L base ε) :"
+          },
+          {
+            "line": 134,
+            "text": "      (hfield.smooth_coefficients z hz hs), hF, hG, hh,"
+          },
+          {
+            "line": 170,
+            "text": "    (hfield : N04bFieldRegularity D S C L base ε)"
+          },
+          {
+            "line": 188,
+            "text": "    (hfield : N04bFieldRegularity D S C L base ε)"
+          }
+        ],
+        "concrete_field_record_or_tuple_construction_found": false,
+        "structural_destructuring_of_field_found": false,
+        "role": "USES_EXISTING_NAMED_PROJECTIONS_OR_PASSES_FIELD_AS_INPUT"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N03TotalCoefficientJets",
+        "path": "src/ContinuousFlexibility/Analysis/N03TotalCoefficientJets.lean",
+        "git_blob": "42459379fc6209cad9b23ff4706383e7c90841b7",
+        "sha256": "d672fa7b316873b725aaa7449376b3eaa9b6388dff8bd967ff9069be4ac83fd9",
+        "utf8_bytes": 11708,
+        "lines": 215,
+        "final_newline": true,
+        "type_and_projection_occurrences": [
+          {
+            "line": 150,
+            "text": "    (hfield : N04bFieldRegularity D S C L base ε)"
+          },
+          {
+            "line": 180,
+            "text": "    have hh := hfield.smooth_coefficients z (hsub hz.1) hz.2"
+          }
+        ],
+        "concrete_field_record_or_tuple_construction_found": false,
+        "structural_destructuring_of_field_found": false,
+        "role": "USES_EXISTING_NAMED_PROJECTIONS_OR_PASSES_FIELD_AS_INPUT"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04bActualCharacteristics",
+        "path": "src/ContinuousFlexibility/Analysis/N04bActualCharacteristics.lean",
+        "git_blob": "35b5c40473937d26dc724aae8503d94aac191c6d",
+        "sha256": "da8388b36ca405be529ba7c8aed772ea675175c20a1b84deaac61de8c3bc821b",
+        "utf8_bytes": 5913,
+        "lines": 135,
+        "final_newline": true,
+        "type_and_projection_occurrences": [
+          {
+            "line": 116,
+            "text": "    (hfield : N04bFieldRegularity D S C L base ε)"
+          },
+          {
+            "line": 128,
+            "text": "  have hreg := hfield.smooth_coefficients z hz hs"
+          },
+          {
+            "line": 132,
+            "text": "    (hreg.2.2.contDiffAt hnhds) (hfield.positive_a z hz hs p hpD).ne'"
+          },
+          {
+            "line": 133,
+            "text": "    (hfield.negative_discriminant z hz hs m p hp)"
+          }
+        ],
+        "concrete_field_record_or_tuple_construction_found": false,
+        "structural_destructuring_of_field_found": false,
+        "role": "USES_EXISTING_NAMED_PROJECTIONS_OR_PASSES_FIELD_AS_INPUT"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04bActualRootHeightCollar",
+        "path": "src/ContinuousFlexibility/Analysis/N04bActualRootHeightCollar.lean",
+        "git_blob": "2a818bf0586948e4ffdfc0a8e7745ae135eb8184",
+        "sha256": "537c571e0adaa89fdceb3df697377a6a770a236e5743983b0f7f79e33603e0f5",
+        "utf8_bytes": 5259,
+        "lines": 100,
+        "final_newline": true,
+        "type_and_projection_occurrences": [
+          {
+            "line": 36,
+            "text": "    (hfield : N04bFieldRegularity D S C L base ε)"
+          },
+          {
+            "line": 44,
+            "text": "  have ha := (hfield.smooth_coefficients z hz hs).1.contDiffAt"
+          },
+          {
+            "line": 47,
+            "text": "    hfield.positive_a z hz hs (rootProfileShift r₀ ι p) hp⟩"
+          },
+          {
+            "line": 55,
+            "text": "    (hfield : N04bFieldRegularity D S C L base ε)"
+          }
+        ],
+        "concrete_field_record_or_tuple_construction_found": false,
+        "structural_destructuring_of_field_found": false,
+        "role": "USES_EXISTING_NAMED_PROJECTIONS_OR_PASSES_FIELD_AS_INPUT"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04bGeometricCompletion",
+        "path": "src/ContinuousFlexibility/Analysis/N04bGeometricCompletion.lean",
+        "git_blob": "b68b4e5b5343bacfbaef6243f8108becfeb69ad5",
+        "sha256": "475ee911c0e35e7aac6d588f8038accdb35fd340e933fc6460754c3ccdfd78f1",
+        "utf8_bytes": 4520,
+        "lines": 93,
+        "final_newline": true,
+        "type_and_projection_occurrences": [
+          {
+            "line": 33,
+            "text": "    (hfield : N04bFieldRegularity D S C L base ε)"
+          },
+          {
+            "line": 42,
+            "text": "  obtain ⟨ha, hb, hc⟩ := hfield.smooth_coefficients z hz hs"
+          },
+          {
+            "line": 55,
+            "text": "    (hfield : N04bFieldRegularity D S C L base ε)"
+          }
+        ],
+        "concrete_field_record_or_tuple_construction_found": false,
+        "structural_destructuring_of_field_found": false,
+        "role": "USES_EXISTING_NAMED_PROJECTIONS_OR_PASSES_FIELD_AS_INPUT"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.N04bRootGermCollar",
+        "path": "src/ContinuousFlexibility/Analysis/N04bRootGermCollar.lean",
+        "git_blob": "02b1dddba9773b310357f3c2e3e532a6dfb1fccf",
+        "sha256": "fcb7047b3c7a15e1174c055220f247832d61d42b5ee1e5413e2c35bf6c2c5713",
+        "utf8_bytes": 5426,
+        "lines": 108,
+        "final_newline": true,
+        "type_and_projection_occurrences": [
+          {
+            "line": 62,
+            "text": "    (hL : N04bFieldRegularity D S C L base ε)"
+          },
+          {
+            "line": 80,
+            "text": "    · have hl := hL.periodic_coefficients z hz hs (r₀ + t) ht"
+          }
+        ],
+        "concrete_field_record_or_tuple_construction_found": false,
+        "structural_destructuring_of_field_found": false,
+        "role": "USES_EXISTING_NAMED_PROJECTIONS_OR_PASSES_FIELD_AS_INPUT"
+      },
+      {
+        "module": "ContinuousFlexibility.Blueprint.N04b.CanonicalConstruction",
+        "path": "src/ContinuousFlexibility/Blueprint/N04b/CanonicalConstruction.lean",
+        "git_blob": "90bc675f4b4aca37d6a7b6e84f345e47d6da1644",
+        "sha256": "01511b9469e5be2ba4919c94a861881dabd82212c1e5de3d6231546b9ad9b76d",
+        "utf8_bytes": 1514,
+        "lines": 36,
+        "final_newline": true,
+        "type_and_projection_occurrences": [
+          {
+            "line": 31,
+            "text": "    (hfield : N04bFieldRegularity A.val S C L base ε) :"
+          }
+        ],
+        "concrete_field_record_or_tuple_construction_found": false,
+        "structural_destructuring_of_field_found": false,
+        "role": "OPEN_BLUEPRINT_SORRY_FIELD_IS_AN_INPUT"
+      },
+      {
+        "module": "ContinuousFlexibility.Blueprint.N04b.FieldRealization",
+        "path": "src/ContinuousFlexibility/Blueprint/N04b/FieldRealization.lean",
+        "git_blob": "662a2edad6384134c53c41666a431665c12c0402",
+        "sha256": "bd55db6c6b06b16d5c487aac8b52664ee13112e4f328f86e585e572281f59228",
+        "utf8_bytes": 1017,
+        "lines": 27,
+        "final_newline": true,
+        "type_and_projection_occurrences": [],
+        "concrete_field_record_or_tuple_construction_found": false,
+        "structural_destructuring_of_field_found": false,
+        "role": "OPEN_BLUEPRINT_SORRY_NOT_A_PRODUCER"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CoefficientProbeFieldRegularity",
+        "path": "src/ContinuousFlexibility/Analysis/CoefficientProbeFieldRegularity.lean",
+        "git_blob": "d986b14ba4e6dff8c2063b1bdb45fad8240c655d",
+        "sha256": "bbc1af4760992b1585f1a6c0bf7d946b23aa9a7cedd7521cbbed8465eeab7e59",
+        "utf8_bytes": 8168,
+        "lines": 161,
+        "final_newline": true,
+        "type_and_projection_occurrences": [],
+        "concrete_field_record_or_tuple_construction_found": false,
+        "structural_destructuring_of_field_found": false,
+        "role": "NO_REFERENCE_TO_N04B_FIELD_STRUCTURE"
+      }
+    ],
+    "result": "No concrete construction or positional elimination of N04bFieldRegularity was found in these ten exact files. Seven direct implemented consumers use unchanged named projections or pass hfield onward. The two Blueprint endpoints contain sorry and are excluded as producers.",
+    "limitation": "A direct-import list is not a proof of all transitive textual consumers. Default-main GitHub searches were used only for navigation, never as an active-tree exhaustive scan. A complete all-library CI remains required.",
+    "peer_next71_note": "Audit reported a raw scan of all71 planned source bytes with zero N04bFieldRegularity occurrences. This is a peer message, not an independently archived full-tree proof."
+  },
+  "preserved_reference_travel": {
+    "actual": {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualTravel.lean",
+      "git_blob": "07661eae46124d0a5550bf4f6de16a5874838d3c",
+      "sha256": "4307b8b206489be492e33a3f12198e4af5271c45a5db821b85ac2db0133ce7eb",
+      "utf8_bytes": 12681,
+      "lines": 243,
+      "final_newline": true,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bOperatorGerms",
+        "ContinuousFlexibility.Analysis.N04bActualTravelChart",
+        "ContinuousFlexibility.Analysis.N04bReferenceTravelCut",
+        "ContinuousFlexibility.Analysis.N04bErrorFactorization",
+        "ContinuousFlexibility.Analysis.N08ReferenceFlow",
+        "ContinuousFlexibility.Analysis.N01CoefficientValueJets",
+        "ContinuousFlexibility.Analysis.EvenPeriodicTestGerms",
+        "ContinuousFlexibility.Analysis.OperatorCoefficientClassification",
+        "ContinuousFlexibility.Analysis.OffAxisContinuousRecovery"
+      ]
+    },
+    "decision": "Retain actual07661 with its original hT/hS/hN public binders for this shared-structure migration. Merely adding reference_flow does not require selecting main dcaa's shortened API; that source change would require a separate explicit consumer migration.",
+    "main_alternative_blob": "dcaa59739ff527e45fea4ac96940666548b1a1e6"
+  },
+  "future_adapter": {
+    "max_planned_lines": 140,
+    "written_lines": 0,
+    "fixed_input_source": "6ba76a32edfe98908b3b1d44f9af3c7e3d72bfe5",
+    "strong_n03_source": "fd48b7aea0616211039f84119dd4fb7f5d36a455",
+    "same_objects": [
+      "D",
+      "T",
+      "S",
+      "C",
+      "R",
+      "L",
+      "chi",
+      "host j",
+      "closed-buffer x/delta"
+    ],
+    "only_new_choices": [
+      "base2",
+      "epsilon2"
+    ],
+    "strict_gap_supplier": {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionBufferedCollars",
+      "declaration": "ContinuousFlexibility.Statements.exists_gap_neighborhood_for_positive_cutoff",
+      "git_blob": "e52779806ba4290ea6dc7af3864a2cb20455afbd"
+    },
+    "note": "Full public head and actual extraction steps are retained in ab73 and fc631; no OPEN Blueprint theorem is called."
+  },
+  "pending": [
+    "Root-controlled explicit shared contract cohort selection",
+    "Full active-tree consumer/name validation at integration",
+    "Complete CI before activation or any budget credit"
+  ]
+}

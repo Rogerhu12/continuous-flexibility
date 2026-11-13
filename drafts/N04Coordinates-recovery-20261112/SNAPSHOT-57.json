@@ -1,0 +1,197 @@
+{
+  "schema": "n04-recovery-snapshot/v1",
+  "snapshot": 57,
+  "created_at": "2026-11-13 02:52:50 UTC",
+  "parent": "b0a6a13d1b42f8c4f26fc6a8763a8d21995723ef",
+  "additional_parent": "795cc520c075a91e56e14a92ee826479c15c168d",
+  "compiled_baseline": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "compiled_baseline_tree": "02a8747b6aaae413f67372d96e52ad8f3dbd9e9a",
+  "source_index": {
+    "path": "drafts/N04Coordinates-recovery-20261112/SOURCE-INDEX.json",
+    "blob": "3b97ce89273e93037726e317ba4f8d75f3d9ab10",
+    "sha256": "2d906d5eaeccff0afaa2f479c9ec8498bc9169059d81486809aeba17f4be43f6",
+    "bytes": 1732014,
+    "entries": 3409,
+    "new": 14
+  },
+  "artifacts": [
+    {
+      "name": "root/state/Backup56PushReceipt.json",
+      "blob": "524eb3825155c2c913d9b6dc7c3cc47b6608819d",
+      "sha256": "22750f8581d3c43993662aaa111cfc704b91c6752e200c8d54afe8c20fb0a238",
+      "bytes": 844,
+      "lines": 24
+    },
+    {
+      "name": "root/ci/CI187-build.log",
+      "blob": "c2e95452537a077bf03330804a27dec2a7344ad9",
+      "sha256": "4dadc9b9e1a3285aa8ac10bc32ad9bbbe4bb745324f772dbae709e69e055e2c1",
+      "bytes": 67443,
+      "lines": 792
+    },
+    {
+      "name": "root/ci/CI187CompleteErrors.json",
+      "blob": "9bc9224385aaf9c4d701714e0027b4448031c2bc",
+      "sha256": "bd849433ce130b2b10fa00745ff24bf6a5481b43531ed0b38a61d789446d1a5a",
+      "bytes": 2251,
+      "lines": 31
+    },
+    {
+      "name": "root/ci/CI187FailureReceipt.json",
+      "blob": "0d180f7bc3b530e8b9d832f0af70e8bdccf2e5f2",
+      "sha256": "eb3976e96b6208a57b5154acb21c171a7e54ec5ca0b54201c1c291e60126479f",
+      "bytes": 1037,
+      "lines": 23
+    },
+    {
+      "name": "positive/repair187/CircleShiftedForwardFixedBaseBoundsCandidateManifest.json",
+      "blob": "49aade5dc8ee82c9867c3126cd73a9aee02f4174",
+      "sha256": "ce49b5bad1d2d46e0a6f830215fd421f06e7319216f7d6b225f4800547e5af66",
+      "bytes": 10608,
+      "lines": 192
+    },
+    {
+      "name": "positive/repair187/CircleShiftedForwardFixedBaseBounds.patch",
+      "blob": "59ab34fd22e790a71f76fde6bb4bd5a3f46b3a76",
+      "sha256": "4cf1c42482b2adb7be26a3ca8e95a45339b4c50efd20832698936699fd639861",
+      "bytes": 2281,
+      "lines": 31
+    },
+    {
+      "name": "audit/recovery/reviews/CI187CircleShiftedForwardFixedBaseBoundsIndependentReview.json",
+      "blob": "89495ddfd683902260aca85e3b94e65a56dc537b",
+      "sha256": "945f40c65c0298fa154ef875e99ecdd68deb826d1df569a5f267d274c9f6c80f",
+      "bytes": 6075,
+      "lines": 122
+    },
+    {
+      "name": "positive/repair187/CircleShiftedForwardFixedBaseBoundsReviewedManifest.json",
+      "blob": "e5cf29853148c0b2e5fb9a2164bff0086747a320",
+      "sha256": "2ab3f71ff5de0036d83892897d85a50e9f14b28f7f11ea16e70ec6784450afd0",
+      "bytes": 4431,
+      "lines": 104
+    },
+    {
+      "name": "root/ci/CI188StagingPlan.json",
+      "blob": "e888169eb24a34182466e49064f9b421b9aaea67",
+      "sha256": "fd5d64bb91424f79e0e35fa35413e47ba7e04a6dce8bc33a25e139b2d42b9bdf",
+      "bytes": 3145,
+      "lines": 78
+    },
+    {
+      "name": "root/ci/CI188PushReceipt.json",
+      "blob": "8d0f48c88234427db941fac938fa24825c728d8f",
+      "sha256": "58b6957f244500ff14250c6e1c31123c5f87af6f537b20a78ff280f205ee1dac",
+      "bytes": 728,
+      "lines": 19
+    },
+    {
+      "name": "root/ci/CI188CoveragePreflight.json",
+      "blob": "8b318edaf5192e065a46498ce66e58effda9d80f",
+      "sha256": "a9729983107edbb998ee49d360a25258afcceb938307dbdbd52ecb48296036ca",
+      "bytes": 1803,
+      "lines": 45
+    },
+    {
+      "name": "positive/recovery/N04RetainedCutoffOpticalFieldMinimalClosure.json",
+      "blob": "f4e15eedb18c1bee7860654bdc163d764f980431",
+      "sha256": "a7052647fd9455d757c9c5b2dd31133afbd08e8ab09fca6128795f09995fb6fa",
+      "bytes": 29535,
+      "lines": 584
+    },
+    {
+      "name": "positive/reconstructed/CircleShiftedFullForwardFixedBaseBoundsCI188ProviderBinding.json",
+      "blob": "d4026fb33acc52f6977fb112f15fb5b6fffee9ae",
+      "sha256": "383fa458905f9905c85dbc3fdc006f0ae8d8bf476bb593893f8ad56929c071d8",
+      "bytes": 7520,
+      "lines": 145
+    },
+    {
+      "name": "root/state/CRITICAL-current.json",
+      "blob": "44c629965e6bbef758fcc710cd78acbb253a7a96",
+      "sha256": "0bfa560253010e5e0b76c5be89e816d2c514f23c95713700b5fdc50a664e1a0a",
+      "bytes": 8781,
+      "lines": 168
+    }
+  ],
+  "outside_archive": {
+    "exact_target": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+    "paths": 4933,
+    "changed_since56": 0
+  },
+  "active": {
+    "schema": "n04-ci-push-receipt/v1",
+    "round": 188,
+    "repository": "Rogerhu12/continuous-flexibility",
+    "branch": "line/N04Coordinates",
+    "parent": "4a9f2194ef3b84cb2840c4cf95807635c33d8d88",
+    "commit": "795cc520c075a91e56e14a92ee826479c15c168d",
+    "tree": "b18c521c94c2630bfb9694d85a64401bbf432379",
+    "plan": "e888169eb24a34182466e49064f9b421b9aaea67",
+    "force": false,
+    "expected_sha_verified": true,
+    "ref_readback_exact": true,
+    "pushed_readback_utc": "2026-11-13 02:50:14 UTC",
+    "earliest_first_ci_lookup_utc": "2026-11-13T02:55:14.000Z",
+    "conservative_active_added": 18603,
+    "actual_retained_upper": 20000,
+    "compilation": "PENDING",
+    "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b"
+  },
+  "previous_failure": {
+    "schema": "n04-ci-failure-receipt/v1",
+    "round": 187,
+    "head": "4a9f2194ef3b84cb2840c4cf95807635c33d8d88",
+    "tree": "d5508ec676a6d4a0aed4ac0ca9364717612e535d",
+    "run": 43353548973,
+    "job": 131650064242,
+    "status": "completed",
+    "conclusion": "failure",
+    "updated_at": "2026-11-13T02:42:56Z",
+    "quick": "failure",
+    "full": "skipped",
+    "fresh_project_modules": 0,
+    "original_log": "c2e95452537a077bf03330804a27dec2a7344ad9",
+    "complete_errors": "9bc9224385aaf9c4d701714e0027b4448031c2bc",
+    "diagnostics": 3,
+    "no_artifact_download_needed": true,
+    "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+    "released_draft_credit": 0,
+    "draft_actual_upper": 20000,
+    "remaining": 0,
+    "performance": "The former scalar-majorant diagnostics are absent. Explicit Fin.snoc/Fin.cons dependent family inference failed; the uniqueness application and second public declaration also timed out. The later timeouts are not proved independent of the preceding elaboration failure. No heartbeat or watchdog increase."
+  },
+  "budget": {
+    "new_full_Lean_archives": 0,
+    "active213_retained_by_additional_parent": true,
+    "repair_net": 0,
+    "after182_existing": 19276,
+    "held_selected_lines": 670,
+    "forward_net_since159": 54,
+    "actual_retained_upper": 20000,
+    "remaining": 0,
+    "active_conservative": 18603,
+    "released_credit": 0,
+    "conditional_complete_owned_credit": [
+      213,
+      301,
+      115,
+      152,
+      44
+    ]
+  },
+  "endpoint": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open",
+    "proved": 37,
+    "total": 42,
+    "exact_target": "theorem N04Coordinates (hN04b : N04bStatement) : N04cStatement",
+    "allowed_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "environment": "Local execution unavailable; remote Git persistence only."
+}
