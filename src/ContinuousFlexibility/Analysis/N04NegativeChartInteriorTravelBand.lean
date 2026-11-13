@@ -177,7 +177,9 @@ theorem negativeInteriorTravelControl_nonempty
       (W.negativeScaledOrientedTravel i.1.1 i.1.2 0 i.2.val)⁻¹ ≤
         B * W.T.E0 (W.negativeHalfSample e i.1.1 i.1.2) ^ A
     rw [W.negativeScaledOrientedTravel_reference i.1.1 i.1.2 (hq i)]
-    simpa only [← hpq.2, negativeInwardPoint] using interior_scaled_reference_inverse hb.1 hb.2
+    have he := congrArg Prod.fst hpq.2
+    rw [← he]
+    exact interior_scaled_reference_inverse hb.1 hb.2
   have hfirst (i : I) (z : Parameter W.S) (hz : z ∈ sectorNeighborhood W.S b₀ ε₀ ε₀)
       (v : Fin 1 → Parameter W.S) :
       |(J i).D 1 z v| ≤ C * W.T.E0 (W.T.sample (sample i)) ^ C *
@@ -200,10 +202,11 @@ theorem negativeInteriorTravelControl_nonempty
       (J i).congr (fun _ _ => by simp only [mixedDerivative, iteratedDeriv_zero, f])
     have hh := hc.choose_spec.2 1 0 0 le_rfl (by omega) i.1.1 i.1.2 i.2.val
       i.2.property K z hz w hw R hR
-      (by simpa only [Nat.zero_add, Nat.mul_one] using hzR)
-      (fun j => by simpa only [Nat.zero_add, Nat.mul_one] using hwR j)
-    simpa only [K, SmoothDirections.congr, Nat.zero_add, Nat.mul_one, Nat.cast_add,
-      Nat.cast_one, parameterHeightWeight, Nat.one_ne_zero, if_false] using hh
+      (by simpa only [D, Nat.zero_add, Nat.mul_one] using hzR)
+      (fun j => by simpa only [D, Nat.zero_add, Nat.mul_one] using hwR j)
+    simpa only [C, D, H, sample, negativeHalfSample, K, SmoothDirections.congr,
+      Nat.zero_add, Nat.mul_one, Nat.cast_add, Nat.cast_one, parameterHeightWeight,
+      Nat.one_ne_zero, if_false] using hh
   have hband := n04NegativeChart_current_half_reference W.radial.1 W.hT sample
     b₀ (D + b₀ + 1) ε₀ hs.2.1 f J C C B A hc.choose_spec.1 hr.1 hreference hfirst
   let base := hband.choose

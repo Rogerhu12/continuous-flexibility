@@ -48,7 +48,6 @@ def FullHalfFieldPowerControl.rootCompositionScaleCoefficient
     (Q : F.FullHalfFieldPowerControl base loss) : ℝ :=
   Q.root_low_input.choose_spec.choose_spec.choose
 
-set_option diagnostics true in
 theorem FullHalfFieldPowerControl.actualRootComposition_prefix
     (Q : F.FullHalfFieldPowerControl base loss) :
     ∃ b : ℕ, ∃ ε : ℝ,

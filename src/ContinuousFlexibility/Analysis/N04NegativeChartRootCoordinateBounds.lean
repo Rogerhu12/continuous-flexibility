@@ -223,7 +223,6 @@ private theorem fractional_oneHigh (p : ℕ → Seminorm ℝ (Parameter W.S))
       simpa only [coe_normSeminorm, R] using h)
   simpa only [coe_normSeminorm, multilinearTameSize, oneHighVariationWeight] using hh v
 
-set_option diagnostics true in
 include A in
 /-- Positive powers and multiplication by the normalized radius keep
 one height factor and the original parameter base. -/
@@ -325,7 +324,6 @@ theorem RootCoordinatePrefixData.normalized_positive_bounds :
       _ = ((2 : ℝ) ^ s * Bp * E ^ Bp) * H * V := by ring
       _ ≤ _ := mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right hcmpP hH) hV
 
-set_option diagnostics true in
 include A in
 /-- Undo the fixed inward scale at the end. Its inverse pays only a
 material power; the high parameter order keeps spatial coefficient one. -/

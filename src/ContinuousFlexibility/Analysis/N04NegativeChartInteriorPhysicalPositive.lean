@@ -66,6 +66,7 @@ private theorem interior_enlarge_cost {x C A B E H V : ℝ}
 namespace N04RealizationStart
 
 set_option backward.isDefEq.respectTransparency true
+attribute [local instance] interiorRaw_parameterTopology interiorRaw_parameterAddGroup interiorRaw_parameterSMul
 
 variable (W : N04RealizationStart)
 
@@ -109,6 +110,7 @@ def NegativeInteriorPhysicalPositiveBounds
         W.T.H (W.negativeHalfSample e m side) ^ (3 / 4 : ℝ) *
           oneHighVariationWeight (parameterGrading W.S) base (s + loss) z v
 
+set_option diagnostics true in
 /-- Both literal projections use one state sector before every derivative
 order. The radial power has its true current lower bound on the indexed
 interior; qualitative positivity remains on the full component. -/
