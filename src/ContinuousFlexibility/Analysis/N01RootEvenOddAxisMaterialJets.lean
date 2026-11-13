@@ -93,6 +93,54 @@ private theorem exists_extendedRootEvenOdd_axis_jet_bound (n : ℕ) :
       _ ≤ C * M := mul_le_mul_of_nonneg_right
         (by dsimp only [C]; linarith only [hCE]) hM0
 
+/-- The material packaging for an arbitrary graded state space. All grading
+manipulations happen here, away from the actual state spaces. -/
+private theorem rootEvenOdd_jet_bound_generic {E : Type} [AddCommGroup E] [Module ℝ E]
+    {p : ℕ → Seminorm ℝ E} (hp : Monotone p) (x : E) {inputLoss n : ℕ}
+    {B0 : ℕ → ℝ} (hB0 : ∀ k, 0 < B0 k) {DC W : ℝ} (hW : 1 ≤ W)
+    {G : ℝ × ℝ × ℝ → ℝ} (hG : ContDiff ℝ ∞ G)
+    (hGperiod : ∀ x ζ θ, G (x, ζ, θ + Real.pi) = G (x, ζ, θ) + Real.pi) {θ : ℝ}
+    (hroot : ∀ k, ‖iteratedFDeriv ℝ k (fun q : ℝ × ℝ × ℝ => G q - q.2.2) (0, 0, θ)‖ ≤
+      B0 k * W ^ (B0 k) * (1 + p (k + inputLoss) x))
+    (hbound : ∀ G : ℝ × ℝ × ℝ → ℝ, ContDiff ℝ ∞ G →
+      (∀ x ζ θ, G (x, ζ, θ + Real.pi) = G (x, ζ, θ) + Real.pi) →
+      ∀ θ M : ℝ, 1 ≤ M →
+      (∀ k, k ≤ n + 1 →
+        ‖iteratedFDeriv ℝ k (fun q : ℝ × ℝ × ℝ => G q - q.2.2) (0, 0, θ)‖ ≤ M) →
+      ‖iteratedFDeriv ℝ n (fun p : PolarPoint => extendedRootEven G p - p.2)
+        (0, θ)‖ ≤ DC * M ∧
+      ‖iteratedFDeriv ℝ n (extendedRootOddCoefficient G) (0, θ)‖ ≤ DC * M)
+    {A B : ℝ} (hA : 1 ≤ A) (hB0A : ∀ k, k ≤ n + 1 → B0 k ≤ A) (hAB : A ≤ B)
+    (hCAB : DC * A ≤ B) (hB : 0 < B) :
+    ‖iteratedFDeriv ℝ n (fun p : PolarPoint => extendedRootEven G p - p.2) (0, θ)‖ ≤
+        B * W ^ B * (1 + p (n + (inputLoss + 1)) x) ∧
+      ‖iteratedFDeriv ℝ n (extendedRootOddCoefficient G) (0, θ)‖ ≤
+        B * W ^ B * (1 + p (n + (inputLoss + 1)) x) := by
+  have hW0 : 0 ≤ W := zero_le_one.trans hW
+  have hP : 1 ≤ 1 + p (n + (inputLoss + 1)) x := le_add_of_nonneg_right (apply_nonneg _ _)
+  have hM : 1 ≤ A * W ^ A * (1 + p (n + (inputLoss + 1)) x) :=
+    one_le_mul_of_one_le_of_one_le
+      (one_le_mul_of_one_le_of_one_le hA (Real.one_le_rpow hW (zero_le_one.trans hA))) hP
+  have hprefix (k : ℕ) (hk : k ≤ n + 1) :
+      ‖iteratedFDeriv ℝ k (fun q : ℝ × ℝ × ℝ => G q - q.2.2) (0, 0, θ)‖ ≤
+        A * W ^ A * (1 + p (n + (inputLoss + 1)) x) :=
+    (hroot k).trans (mul_le_mul
+      (mul_le_mul (hB0A k hk) (Real.rpow_le_rpow_of_exponent_le hW (hB0A k hk))
+        (Real.rpow_nonneg hW0 _) (zero_le_one.trans hA))
+      (add_le_add le_rfl (hp (by omega : k + inputLoss ≤ n + (inputLoss + 1)) x))
+      (add_nonneg zero_le_one (apply_nonneg _ _))
+      (mul_nonneg (zero_le_one.trans hA) (Real.rpow_nonneg hW0 _)))
+  have hjets := hbound G hG hGperiod θ _ hM hprefix
+  have hmajorant : DC * (A * W ^ A * (1 + p (n + (inputLoss + 1)) x)) ≤
+      B * W ^ B * (1 + p (n + (inputLoss + 1)) x) := by
+    calc
+      _ = (DC * A) * W ^ A * (1 + p (n + (inputLoss + 1)) x) := by ring
+      _ ≤ _ := mul_le_mul_of_nonneg_right
+        (mul_le_mul hCAB (Real.rpow_le_rpow_of_exponent_le hW hAB)
+          (Real.rpow_nonneg hW0 _) hB.le)
+        (zero_le_one.trans hP)
+  exact ⟨hjets.1.trans hmajorant, hjets.2.trans hmajorant⟩
+
 theorem n01_rootEvenOdd_unit_axis_material_jets_of_component_optical
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε K : ℝ}
@@ -134,11 +182,21 @@ theorem n01_rootEvenOdd_unit_axis_material_jets_of_component_optical
               (z - (C.referenceState, 0))) := by
   classical
   choose DC hDC hbound using exists_extendedRootEvenOdd_axis_jet_bound
-  obtain ⟨C0, low, inputLoss, hC0, hfloor, B0, hB0, hroot⟩ :=
-    n01_rootInverseCoordinate_unit_axis_material_jets_of_component_optical
-      hS hT hN hflow hK
   have hp : Monotone (pairGrading (stateGrading S) realGrading) :=
     tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
+  refine (n01_rootInverseCoordinate_unit_axis_material_jets_of_component_optical
+    hS hT hN hflow hK).elim ?_
+  intro C0 hR1
+  refine hR1.elim ?_
+  intro low hR2
+  refine hR2.elim ?_
+  intro inputLoss hR3
+  have hC0 := hR3.1
+  have hfloor := hR3.2.1
+  refine hR3.2.2.elim ?_
+  intro B0 hB0r
+  have hB0 := hB0r.1
+  have hroot := hB0r.2
   let A : ℕ → ℝ := fun n => 1 + ∑ k ∈ Finset.range (n + 2), B0 k
   have hA (n : ℕ) : 1 ≤ A n :=
     le_add_of_nonneg_right (Finset.sum_nonneg (fun k _ => (hB0 k).le))
@@ -150,15 +208,6 @@ theorem n01_rootEvenOdd_unit_axis_material_jets_of_component_optical
     linarith only [hA n, hCA n]
   refine ⟨C0, low, inputLoss + 1, hC0, hfloor, B, hB, ?_⟩
   intro z hz hs hlow m j hhost hoptical side g hg hfactor R hR hstrip δ hδ Θ hΘ θ n
-  let W : ℝ := C0 * T.E0 (T.sample j)
-  have hW : 1 ≤ W := hfloor j
-  let P : ℝ := 1 + pairGrading (stateGrading S) realGrading
-    (n + (inputLoss + 1)) (z - (C.referenceState, 0))
-  have hP : 1 ≤ P := le_add_of_nonneg_right (apply_nonneg _ _)
-  let M : ℝ := A n * W ^ (A n) * P
-  have hM : 1 ≤ M := one_le_mul_of_one_le_of_one_le
-    (one_le_mul_of_one_le_of_one_le (hA n)
-      (Real.one_le_rpow hW (zero_le_one.trans (hA n)))) hP
   let r : ℝ := n01ComponentRoot C m side
   let σ : ℝ := n01ComponentRootOrientation side
   let d : PolarPoint → ℝ := localizedRootDrift D S C r σ hR z
@@ -185,35 +234,15 @@ theorem n01_rootEvenOdd_unit_axis_material_jets_of_component_optical
   have hGperiod : ∀ x ζ θ, G (x, ζ, θ + Real.pi) = G (x, ζ, θ) + Real.pi :=
     rootInverseCoordinate_period_add Real.pi_ne_zero hEndpoint hpositive hendpointPeriod
       (n01RootLabel_period_add hN hz hs m side)
-  have hprefix (k : ℕ) (hk : k ≤ n + 1) :
-      ‖iteratedFDeriv ℝ k (fun q : ℝ × ℝ × ℝ => G q - q.2.2) (0, 0, θ)‖ ≤ M := by
-    have hb : ‖iteratedFDeriv ℝ k (fun q : ℝ × ℝ × ℝ => G q - q.2.2)
-        (0, 0, θ)‖ ≤ B0 k * W ^ (B0 k) *
-        (1 + pairGrading (stateGrading S) realGrading (k + inputLoss)
-          (z - (C.referenceState, 0))) :=
-      hroot z hz hs hlow m j hhost hoptical side g hg hfactor R hR hstrip
-        δ hδ Θ hΘ θ k
-    have hcoef : B0 k ≤ A n :=
-      (Finset.single_le_sum (fun i _ => (hB0 i).le)
-        (Finset.mem_range.mpr (by omega : k < n + 2))).trans
-        (le_add_of_nonneg_left zero_le_one)
-    exact hb.trans (mul_le_mul
-      (mul_le_mul hcoef (Real.rpow_le_rpow_of_exponent_le hW hcoef)
-        (Real.rpow_nonneg (zero_le_one.trans hW) _) (zero_le_one.trans (hA n)))
-      (add_le_add_left (hp (by omega : k + inputLoss ≤ n + (inputLoss + 1)) _) 1)
-      (add_nonneg zero_le_one (apply_nonneg _ _))
-      (mul_nonneg (zero_le_one.trans (hA n))
-        (Real.rpow_nonneg (zero_le_one.trans hW) _)))
-  have hjets := hbound n G hG hGperiod θ M hM hprefix
+  have hB0A (k : ℕ) (hk : k ≤ n + 1) : B0 k ≤ A n :=
+    (Finset.single_le_sum (f := B0) (fun i _ => (hB0 i).le)
+      (Finset.mem_range.mpr (by omega : k < n + 2))).trans
+      (le_add_of_nonneg_left zero_le_one)
   have hAB : A n ≤ B n := by dsimp only [B]; linarith only [hCA n]
   have hCAB : DC n * A n ≤ B n := by dsimp only [B]; linarith only [hA n]
-  have hmajorant : DC n * M ≤ B n * W ^ (B n) * P := by
-    calc
-      _ = (DC n * A n) * W ^ (A n) * P := by dsimp only [M]; ring
-      _ ≤ _ := mul_le_mul_of_nonneg_right
-        (mul_le_mul hCAB (Real.rpow_le_rpow_of_exponent_le hW hAB)
-          (Real.rpow_nonneg (zero_le_one.trans hW) _) (hB n).le)
-        (zero_le_one.trans hP)
-  exact ⟨hjets.1.trans hmajorant, hjets.2.trans hmajorant⟩
+  exact rootEvenOdd_jet_bound_generic hp (z - (C.referenceState, 0)) hB0 (hfloor j) hG
+    hGperiod
+    (fun k => hroot z hz hs hlow m j hhost hoptical side g hg hfactor R hR hstrip δ hδ Θ hΘ θ k)
+    (hbound n) (hA n) hB0A hAB hCAB (hB n)
 
 end ContinuousFlexibility.Analysis

@@ -18,6 +18,36 @@ namespace ContinuousFlexibility.Analysis
 open Set ContinuousFlexibility.Statements
 open scoped ContDiff
 
+/-- The power estimate for an arbitrary graded state space. All grading
+manipulations happen here, away from the actual state spaces. -/
+private theorem rootOddPower_jet_bound_generic {E : Type} [AddCommGroup E] [Module ℝ E]
+    {p : ℕ → Seminorm ℝ E} (x : E) {lowP lossJ outLoss : ℕ} (hx : p lowP x ≤ 1)
+    {BJ A B : ℕ → ℝ} (hBJ : ∀ k, 0 < BJ k) (hA : ∀ k, 1 ≤ A k) (hJA : ∀ k, BJ k ≤ A k)
+    {VJ W PV γ : ℝ} (hVJ : 1 ≤ VJ) (hVJW : VJ ≤ W) (hW : 1 ≤ W)
+    {f : PolarPoint → ℝ} {q : PolarPoint} (hf : ContDiffAt ℝ ∞ f q) (hpos : 0 < f q)
+    (hval : f q ≤ PV * W ^ PV) (hinv : (f q)⁻¹ ≤ PV * W ^ PV)
+    (hjets : ∀ k, ‖iteratedFDeriv ℝ k f q‖ ≤
+      BJ k * VJ ^ (BJ k) * (1 + p (k + lossJ) x))
+    (hbound : ∀ z : E, p lowP z ≤ 1 → ∀ W : ℝ, 1 ≤ W →
+      ∀ g : PolarPoint → ℝ, ∀ y : PolarPoint, ContDiffAt ℝ ∞ g y →
+        0 < g y → g y ≤ PV * W ^ PV → (g y)⁻¹ ≤ PV * W ^ PV →
+        (∀ k, 1 ≤ k → ‖iteratedFDeriv ℝ k g y‖ ≤
+          A k * W ^ (A k) * (1 + p (k + lossJ) z)) →
+        ∀ k, ‖iteratedFDeriv ℝ k (fun y => g y ^ γ) y‖ ≤
+          B k * W ^ (B k) * (1 + p (k + outLoss) z))
+    (n : ℕ) :
+    ‖iteratedFDeriv ℝ n (fun y => f y ^ γ) q‖ ≤
+      B n * W ^ (B n) * (1 + p (n + outLoss) x) := by
+  refine hbound x hx W hW f q hf hpos hval hinv ?_ n
+  intro k _hk
+  have hpower : VJ ^ (BJ k) ≤ W ^ (A k) :=
+    (Real.rpow_le_rpow (zero_le_one.trans hVJ) hVJW (hBJ k).le).trans
+      (Real.rpow_le_rpow_of_exponent_le hW (hJA k))
+  exact (hjets k).trans (mul_le_mul_of_nonneg_right
+    (mul_le_mul (hJA k) hpower (Real.rpow_nonneg (zero_le_one.trans hVJ) _)
+      (zero_le_one.trans (hA k)))
+    (add_nonneg zero_le_one (apply_nonneg _ _)))
+
 theorem n01_rootOddCoefficient_unit_rpow_material_jets_of_component_optical
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε K : ℝ}
@@ -58,24 +88,48 @@ theorem n01_rootOddCoefficient_unit_rpow_material_jets_of_component_optical
   have hI := coordinate_hasInterpolation_pair (stateGrading_monotone S)
     (fun _ _ _ => le_rfl) (coordinate_hasInterpolation_stateGrading hS)
     coordinate_hasInterpolation_realGrading
-  obtain ⟨CJ, lowJ, lossJ, hCJ, hfloorJ, BJ, hBJ, hjets⟩ :=
-    n01_rootEvenOdd_unit_axis_material_jets_of_component_optical hS hT hN hflow hK
-  obtain ⟨CV, lowV, PV, hCV, hfloorV, hPV, hvalues⟩ :=
-    n01_rootOddCoefficient_unit_material_values_of_component_optical hS hT hN hflow hK
+  refine (n01_rootEvenOdd_unit_axis_material_jets_of_component_optical
+    hS hT hN hflow hK).elim ?_
+  intro CJ hJ1
+  refine hJ1.elim ?_
+  intro lowJ hJ2
+  refine hJ2.elim ?_
+  intro lossJ hJ3
+  have hCJ := hJ3.1
+  have hfloorJ := hJ3.2.1
+  refine hJ3.2.2.elim ?_
+  intro BJ hBJj
+  have hBJ := hBJj.1
+  have hjets := hBJj.2
+  refine (n01_rootOddCoefficient_unit_material_values_of_component_optical
+    hS hT hN hflow hK).elim ?_
+  intro CV hV1
+  refine hV1.elim ?_
+  intro lowV hV2
+  refine hV2.elim ?_
+  intro PV hV3
+  have hfloorV := hV3.2.1
+  have hPV := hV3.2.2.1
+  have hvalues := hV3.2.2.2
   let C0 : ℝ := max CJ CV
   have hC0 : 1 ≤ C0 := hCJ.trans (le_max_left _ _)
   have hE (j : ℕ) : 0 < T.E0 (T.sample j) :=
     (hT.2.1 _ (materialSample_mem_interval hN.1.1 hT j)).2.2.1
   have hfloor (j : ℕ) : 1 ≤ C0 * T.E0 (T.sample j) :=
     (hfloorJ j).trans (mul_le_mul_of_nonneg_right (le_max_left _ _) (hE j).le)
-  obtain ⟨lowP, outLoss, hpowers⟩ :=
-    positivePower_polynomial_material_bound (X := PolarPoint) hp hI lossJ
+  refine (positivePower_polynomial_material_bound (X := PolarPoint) hp hI lossJ).elim ?_
+  intro lowP hP1
+  refine hP1.elim ?_
+  intro outLoss hpowers
   let A : ℕ → ℝ := fun n => max 1 (BJ n)
   have hA (n : ℕ) : 1 ≤ A n := le_max_left _ _
   have hJA (n : ℕ) : BJ n ≤ A n := le_max_right _ _
   refine ⟨C0, max lowJ (max lowV lowP), outLoss, hC0, hfloor, ?_⟩
   intro γ
-  obtain ⟨B, hB, hbound⟩ := hpowers γ PV hPV A hA
+  refine (hpowers γ PV hPV A hA).elim ?_
+  intro B hBb
+  have hB := hBb.1
+  have hbound := hBb.2
   refine ⟨B, hB, ?_⟩
   intro z hz hs hlow m j hhost hoptical side g hg hfactor R hR hstrip δ hδ Θ hΘ θ n
   have hzJ := (hp (le_max_left lowJ (max lowV lowP)) _).trans hlow
@@ -124,19 +178,10 @@ theorem n01_rootOddCoefficient_unit_rpow_material_jets_of_component_optical
     mul_le_mul_of_nonneg_left
       (Real.rpow_le_rpow (zero_le_one.trans (hfloorV j)) hWV (zero_le_one.trans hPV))
       (zero_le_one.trans hPV)
-  refine hbound (z - (C.referenceState, 0)) hzP W hW
-    (extendedRootOddCoefficient G) (0, θ) hχ.contDiffAt hvalue.1
-    (hvalue.2.1.trans hvalueMono) (hvalue.2.2.trans hvalueMono) ?_ n
-  intro k _hk
-  have hb := (hjets z hz hs hzJ m j hhost hoptical side g hg hfactor R hR hstrip
-    δ hδ Θ hΘ θ k).2
-  have hpower : (CJ * T.E0 (T.sample j)) ^ (BJ k) ≤ W ^ (A k) :=
-    (Real.rpow_le_rpow (zero_le_one.trans (hfloorJ j)) hWJ (hBJ k).le).trans
-      (Real.rpow_le_rpow_of_exponent_le hW (hJA k))
-  exact hb.trans (mul_le_mul_of_nonneg_right
-    (mul_le_mul (hJA k) hpower
-      (Real.rpow_nonneg (zero_le_one.trans (hfloorJ j)) _)
-      (zero_le_one.trans (hA k)))
-    (add_nonneg zero_le_one (apply_nonneg _ _)))
+  exact rootOddPower_jet_bound_generic (z - (C.referenceState, 0)) hzP hBJ hA hJA
+    (hfloorJ j) hWJ hW hχ.contDiffAt hvalue.1
+    (hvalue.2.1.trans hvalueMono) (hvalue.2.2.trans hvalueMono)
+    (fun k => (hjets z hz hs hzJ m j hhost hoptical side g hg hfactor R hR hstrip
+      δ hδ Θ hΘ θ k).2) hbound n
 
 end ContinuousFlexibility.Analysis
