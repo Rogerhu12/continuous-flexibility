@@ -106,14 +106,20 @@ private theorem n04PulledFields_pairError_physicalOneHigh
       p hU V hV hc W F hW hF Ephys Hphys hE hH hcost RF
       (fun m => solveSmoothDirectionsPostcomp (J m) (n04PulledFields_errorProjection 1))
       (hcover (n04PulledFields_errorProjection 1))
-    rw [n04PulledFields_errorProjection_one_eq]
-    exact hg.1
+    exact (congrArg (fun π : (ℝ × ℝ) →L[ℝ] ℝ =>
+      N04PulledFieldsFixedBaseMixedGrowth p W F
+        (f := fun _ x => π (f x.1 x.2))
+        (fun m => solveSmoothDirectionsPostcomp (J m) π))
+      n04PulledFields_errorProjection_one_eq).mpr hg.1
   · apply n04PulledFields_mixedPhysical_of_strips_or_zero
       p hU V hV hc W F hW hF Ephys Hphys hE hH hcost RF
       (fun m => solveSmoothDirectionsPostcomp (J m) (n04PulledFields_errorProjection 2))
       (hcover (n04PulledFields_errorProjection 2))
-    rw [n04PulledFields_errorProjection_two_eq]
-    exact hg.2
+    exact (congrArg (fun π : (ℝ × ℝ) →L[ℝ] ℝ =>
+      N04PulledFieldsFixedBaseMixedGrowth p W F
+        (f := fun _ x => π (f x.1 x.2))
+        (fun m => solveSmoothDirectionsPostcomp (J m) π))
+      n04PulledFields_errorProjection_two_eq).mpr hg.2
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
