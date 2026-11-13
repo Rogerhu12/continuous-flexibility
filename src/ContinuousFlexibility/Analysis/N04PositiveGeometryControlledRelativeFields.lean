@@ -90,9 +90,7 @@ theorem n04PositiveGeometry_exists_actual_relative_root_polynomial (n : ℕ) :
     (one_le_pow₀ (one_le_mul_of_one_le_of_one_le hK
       (one_le_pow₀ (one_le_mul_of_one_le_of_one_le hK (one_le_pow₀ hK)))))
   refine ⟨A, hA, degree, ?_⟩
-  intro D S C K base ε hgeometry hcut href hsref z hz hs m side M hM hraw₀ hraw
-  let i := if side then (K.cutPair m).2 else (K.cutPair m).1
-  let r := n01ComponentRoot C m side
+  intro D S C K base ε hgeometry hcut href hsref z hz hs m side M hM i r hraw₀ hraw
   let U : ℝ := K₀ * M ^ (dI + 1)
   let R : ℝ := K₀ * U ^ (N + 1)
   let Q : ℝ := K₀ * R ^ (N + 1)
@@ -215,7 +213,12 @@ theorem n04PositiveGeometry_exists_actual_relative_root_polynomial (n : ℕ) :
       have hb := hproduct hreg0.2.1
         ((hreg.2.1.inv hreg.2.2.2.ne').comp (r, θ) (hforward θ).1)
         (fun j hj => (hraw₀.height_jets θ j hj).trans hMQ) hcI hk
-      simpa only [q, n04CoordinatesCurrentHeightRatio, div_eq_mul_inv, Function.comp_def] using hb
+      have he : q = (fun p => K.height (C.referenceState, 0) i p *
+          (K.height z i (τ p))⁻¹) := by
+        funext p
+        exact div_eq_mul_inv _ _
+      exact (congrArg (fun f : PolarPoint → ℝ =>
+        ‖iteratedFDeriv ℝ k f (r, θ)‖ ≤ V) he).mpr hb
     · intro k hk
       have hb := hproduct (hreg0.2.1.inv hreg0.2.2.2.ne')
         (hreg.2.1.comp (r, θ) (hforward θ).1)
@@ -236,8 +239,14 @@ theorem n04PositiveGeometry_exists_actual_relative_root_polynomial (n : ℕ) :
       (canonicalCurrentPoint_root_radial hgeometry hcut href hsref hz hs m side θ) rfl
     change ‖fderiv ℝ (canonicalReferencePoint C K z i) (τ (r, θ))‖ ≤ V
     rw [hy]
-    simpa only [norm_iteratedFDeriv_one] using
-      ((hinverse (τ (r, θ)).2).2 1 le_rfl (by dsimp only [N]; omega)).trans hRV
+    have hb : ‖fderiv ℝ (K.inverseChart (C.referenceState, 0) i ∘ K.chart z i)
+        (r, (τ (r, θ)).2)‖ ≤ V := by
+      simpa only [norm_iteratedFDeriv_one] using
+        ((hinverse (τ (r, θ)).2).2 1 le_rfl (by dsimp only [N]; omega)).trans hRV
+    have he : K.inverseChart (C.referenceState, 0) i ∘ K.chart z i =
+        canonicalReferencePoint C K z i := rfl
+    exact (congrArg (fun f : PolarPoint → PolarPoint =>
+      ‖fderiv ℝ f (r, (τ (r, θ)).2)‖ ≤ V) he).mp hb
   have hout : RootEndpointJetBounds n τ q r V⁻¹ V V :=
     { radial_lower := fun θ => (hdiag θ).1
       angular_lower := fun θ => (hdiag θ).2

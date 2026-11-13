@@ -159,7 +159,8 @@ theorem n04PositiveGeometry_angularInterpolation_lower_of_small
     (1 / 4 : ℝ) ≤ deriv
       (fun η => positiveAngularTaylorInterpolation n l r δ A (x, η)) θ := by
   have hjet := n04PositiveGeometry_angularInterpolation_defect_jet_bound
-    (b := 1) hA hδ hδone hM (by simpa only [iteratedDeriv_one] using hbound) x θ
+    (b := 1) (l := l) (r := r) hA hδ hδone hM
+    (by simpa only [iteratedDeriv_one] using hbound) x θ
   have hsmooth : ContDiff ℝ ∞
       (fun η => positiveAngularTaylorInterpolation n l r δ A (x, η)) :=
     (contDiff_positiveAngularTaylorInterpolation hA l r δ).comp
@@ -221,7 +222,7 @@ theorem n04PositiveGeometry_angularInterpolation_fixedCircle_bound
     mul_nonneg (mul_nonneg (by norm_num) hN.le) hM₀
   have hjets (b : ℕ) (hb : b ≤ j) (θ : ℝ) :=
     n04PositiveGeometry_angularInterpolation_defect_jet_bound (b := b)
-      hA hδ hδone hM₀
+      (l := l) (r := r) hA hδ hδone hM₀
       (fun side k hk η => hbound side k hk b (hb.trans hj) η) x θ
   have hn := circleSingleComponentField_norm_le hM hH 0 j _ hsmooth hlow hjets
   exact hn.trans ((mul_le_mul_of_nonneg_right (haB j hj) hlow).trans_eq (by ring))

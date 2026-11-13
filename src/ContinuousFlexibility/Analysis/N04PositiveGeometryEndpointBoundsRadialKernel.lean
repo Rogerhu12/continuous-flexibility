@@ -89,7 +89,8 @@ jets selected by a spatial partition. -/
 def n04PositiveGeometry_rootRadialPacket {n : ℕ} (c : OrderedFinpartition n)
     (u : PolarPoint → N06RootNormalizedCoordinates) (p e : PolarPoint) :
     N04RootRadialPacket c.length := fun ij =>
-  (Fin.cons (u p) (fun i => iteratedFDeriv ℝ (c.partSize i) u p
+  (Fin.cons (α := fun _ : Fin (c.length + 1) => N06RootNormalizedCoordinates)
+    (u p) (fun i => iteratedFDeriv ℝ (c.partSize i) u p
     (fun _ => e))) ij.1 ij.2
 
 theorem n04PositiveGeometry_rootRadialPacket_norm_le {n : ℕ}
@@ -109,6 +110,7 @@ theorem n04PositiveGeometry_rootRadialPacket_norm_le {n : ℕ}
         ((mul_le_mul_of_nonneg_left hp hM).trans_eq (mul_one _)))
   apply (pi_norm_le_iff_of_nonneg hM).mpr
   intro ij
+  dsimp only [n04PositiveGeometry_rootRadialPacket]
   refine Fin.cases ?_ (fun i => ?_) ij.1
   · exact ((pi_norm_le_iff_of_nonneg hM).mp hval) ij.2
   · exact ((pi_norm_le_iff_of_nonneg hM).mp (hjet i)) ij.2

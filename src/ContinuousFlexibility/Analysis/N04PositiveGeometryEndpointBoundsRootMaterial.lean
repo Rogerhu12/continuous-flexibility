@@ -111,17 +111,19 @@ theorem n04PositiveGeometry_rootHeightStateJetCLM_material_bound
       ∀ x : AnnularState S,
         |n04PositiveGeometry_rootHeightStateJetCLM hD hT hS a b p hp i x| ≤
           C * T.E0 p.1 ^ A * T.H p.1 ^ scalarBeta * stateGrading S (s + 7) x := by
-  obtain ⟨C, A, hC, hA, hb⟩ :=
-    n04PositiveGeometry_rootHeightJetCLM_material_bound hD hT hS s
-  refine ⟨C, A, hC, hA, ?_⟩
+  refine (n04PositiveGeometry_rootHeightJetCLM_material_bound hD hT hS s).elim ?_
+  intro C hC
+  refine hC.elim ?_
+  intro A hA
+  refine ⟨C, A, hA.1, hA.2.1, ?_⟩
   intro i a b hab p hp x
   have hW : 0 ≤ C * T.E0 p.1 ^ A * T.H p.1 ^ scalarBeta :=
-    mul_nonneg (mul_nonneg hC
+    mul_nonneg (mul_nonneg hA.1
       (Real.rpow_nonneg (hT.2.1 p.1 hp.1).2.2.1.le _))
       (Real.rpow_nonneg (hT.2.1 p.1 hp.1).2.1.le _)
   have he : n04PositiveGeometry_rootHeightStateJetCLM hD hT hS a b p hp i x =
       n04PositiveGeometry_rootHeightJetCLM hD hT hS a b p hp i x.1 := rfl
-  exact (congrArg abs he).trans_le ((hb i a b hab p hp x.1).trans
+  exact (congrArg abs he).trans_le ((hA.2.2 i a b hab p hp x.1).trans
     (mul_le_mul_of_nonneg_left (n06_root_commonHeightGrading_le_state S (s + 7) x) hW))
 
 /-- The genuine quadratic parameter jets retain their polynomial cost

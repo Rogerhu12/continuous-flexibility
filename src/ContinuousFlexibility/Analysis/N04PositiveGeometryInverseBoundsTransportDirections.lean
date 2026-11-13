@@ -127,6 +127,6 @@ def n04PositiveGeometry_oneSidedTransportPairDirections
     n04PositiveGeometry_endpointRadialInverseDirections hU n hlc hcd hdr hκX hMσ
       B hB hzero JB hfirst hcoeff
   exact ⟨n04Realization_positiveFiberChart_jointDirections hU φ Y pair.1 KY,
-    n04PositiveGeometry_fiberChartInverseDirections KI pair.2⟩
+    n04PositiveGeometry_fiberChartInverseDirections (φ := φ) (Y := Y) KI pair.2⟩
 
 end ContinuousFlexibility.Analysis

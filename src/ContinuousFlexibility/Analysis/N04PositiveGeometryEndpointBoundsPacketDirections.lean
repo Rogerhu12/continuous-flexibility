@@ -4,6 +4,7 @@ import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRootHeigh
 import ContinuousFlexibility.Analysis.N01cAngularJetTowers
 import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
 import ContinuousFlexibility.Analysis.BoundaryMixedJets
+import ContinuousFlexibility.Analysis.CircleCompositionFaaBounds
 
 /-!
 # The actual radial packet traces and their angular parameter towers
@@ -27,6 +28,20 @@ section RadialRestriction
 variable {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
   [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
   {U : Set X} {Ω : Set PolarPoint} {f : X → PolarPoint → ℝ}
+
+/-- Additional angular derivatives add to the intrinsic angular index
+of the same actual radial trace. -/
+theorem n04PositiveGeometry_iteratedDeriv_mixedTrace
+    {g : PolarPoint → ℝ} (hΩ : IsOpen Ω) (hg : ContDiffOn ℝ ∞ g Ω)
+    (r : ℝ) (hr : ∀ θ, (r, θ) ∈ Ω) (a d b : ℕ) (θ : ℝ) :
+    iteratedDeriv b (fun η => mixedDerivative a d g (r, η)) θ =
+      mixedDerivative a (b + d) g (r, θ) := by
+  have he : (fun η => mixedDerivative a d g (r, η)) =
+      iteratedDeriv d (radialBoundaryJet g r a) :=
+    funext (fun η => (iteratedDeriv_radialBoundaryJet_eq_mixedDerivative
+      hΩ hg r hr a d η).symm)
+  rw [he, circle_iteratedDeriv_iteratedDeriv]
+  exact iteratedDeriv_radialBoundaryJet_eq_mixedDerivative hΩ hg r hr a (b + d) θ
 
 /-- A fixed radial trace retains the original state-angle domain. -/
 def n04PositiveGeometry_radialTrace_joint

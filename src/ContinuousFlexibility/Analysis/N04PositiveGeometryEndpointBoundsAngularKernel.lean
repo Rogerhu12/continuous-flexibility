@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N04PositiveGeometryFiniteKernelBounds
 import ContinuousFlexibility.Analysis.N01cStateAngleSelections
+import ContinuousFlexibility.Analysis.N01cPhysicalGraphJets
 import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
 import ContinuousFlexibility.Scalar.WeightedTowerCalculus
 
@@ -92,5 +93,70 @@ theorem n04PositiveGeometry_angularKernel_weighted_bound
   exact n04PositiveGeometry_finiteKernel_weighted_bound JT hV hg hmap Q
     n w.stateArity (w.angleArity + shift * w.stateArity) (x, θ) ⟨hx, mem_univ _⟩ v
     κ cost hκ hcost hC hM hH hHL hL ht houter hinner
+
+private theorem pureSlots_fst_property {n : ℕ} (w : StateAngleWord n)
+    (P : E → Prop) (hzero : P 0) (v : Fin w.stateArity → E)
+    (hv : ∀ j, P (v j)) : ∀ j, P (w.pureSlots v j).1 := by
+  induction w with
+  | nil => intro j; exact j.elim0
+  | state w ih =>
+      intro j
+      refine Fin.cases ?_ (fun i => ?_) j
+      · exact hv 0
+      · exact ih (Fin.tail v) (fun i => hv i.succ) i
+  | angle w ih =>
+      intro j
+      refine Fin.cases ?_ (fun i => ?_) j
+      · exact hzero
+      · exact ih v hv i
+
+/-- The same estimate for an arbitrary genuine angular parameter tower.
+The two arities are simplified only after the whole direction family
+has been quantified, so no parameter tuple is recast or reordered. -/
+theorem n04PositiveGeometry_angularKernel_parameter_bound
+    (hU : IsOpen U)
+    (J : ∀ i, SmoothDirections (U ×ˢ (univ : Set ℝ)) (f i))
+    (JA : ∀ i b θ, SmoothDirections U
+      (fun x => iteratedDeriv b (fun η => f i (x, η)) θ))
+    {V : Set (ι → ℝ)} (hV : IsOpen V) {g : (ι → ℝ) → ℝ}
+    (hg : ContDiffOn ℝ ∞ g V)
+    (hmap : MapsTo (fun z i => f i z) (U ×ˢ univ) V)
+    (Q : SmoothDirections (U ×ˢ univ) (fun z => g (fun i => f i z)))
+    (k b shift : ℕ) (x : E) (hx : x ∈ U) (θ : ℝ)
+    (P : E → Prop) (hzero : P 0)
+    {C M H L t : ℝ} (hC : 0 ≤ C) (hM : 1 ≤ M)
+    (hH : 0 ≤ H) (hHL : H ≤ L) (hL : 1 ≤ L) (ht : 1 ≤ t)
+    (houter : ∀ j, j ≤ b + k → ‖iteratedFDeriv ℝ j g (fun i => f i (x, θ))‖ ≤ C)
+    (hinputs : ∀ i e u, e ≤ k → u ≤ b →
+      ∀ v : Fin e → E, (∀ j, P (v j)) →
+        ‖(JA i u θ).D e x v‖ ≤ M * parameterHeightWeight H e * t ^ (u + shift * e))
+    (Qout : SmoothDirections U
+      (fun y => iteratedDeriv b (fun η => g (fun i => f i (y, η))) θ))
+    (v : Fin k → E) (hv : ∀ j, P (v j)) :
+    ‖Qout.D k x v‖ ≤ (Fintype.card (OrderedFinpartition (b + k)) : ℝ) *
+      C * M ^ (b + k) * L ^ (b + k) * parameterHeightWeight H k * t ^ (b + shift * k) := by
+  let w := StateAngleWord.stateThenAngle k b
+  have hs : ∀ z : Fin w.stateArity → E, (∀ j, P (z j)) →
+      ‖(smoothDirections_angularStateSlice Q w.angleArity θ).D w.stateArity x z‖ ≤
+        (Fintype.card (OrderedFinpartition (b + k)) : ℝ) *
+          C * M ^ (b + k) * L ^ (b + k) * parameterHeightWeight H w.stateArity *
+            t ^ (w.angleArity + shift * w.stateArity) := by
+    intro z hz
+    rw [← smoothDirections_joint_pureSlots Q
+      (fun a η => smoothDirections_angularStateSlice Q a η) w hx θ z]
+    apply n04PositiveGeometry_angularKernel_weighted_bound hU J JA hV hg hmap Q
+      w shift x hx θ (w.pureSlots z) (w.isPure_pureSlots z) P
+      (pureSlots_fst_property w P hzero z hz) hC hM hH hHL hL ht houter
+    intro i e u he hu
+    exact hinputs i e u
+      (by simpa only [w, StateAngleWord.stateThenAngle_stateArity] using he)
+      (by simpa only [w, StateAngleWord.stateThenAngle_angleArity] using hu)
+  have hwk : w.stateArity = k := StateAngleWord.stateThenAngle_stateArity k b
+  have hwb : w.angleArity = b := StateAngleWord.stateThenAngle_angleArity k b
+  rw [hwk, hwb] at hs
+  have he : Qout.D k x v = (smoothDirections_angularStateSlice Q b θ).D k x v :=
+    congrArg (fun A : E [×k]→L[ℝ] ℝ => A v)
+      (Qout.unique (smoothDirections_angularStateSlice Q b θ) k x hx)
+  exact (congrArg norm he).trans_le (hs v hv)
 
 end ContinuousFlexibility.Analysis

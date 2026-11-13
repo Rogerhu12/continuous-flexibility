@@ -73,6 +73,25 @@ def n04PositiveGeometry_rootPacketSectorMixed_parameter
         (fun p => n06ActualRootAbsorbedCoordinates D S y p i) (r, θ))
         (liftSectorParameter_eq_affine S C z).symm)
 
+/-- The finite intrinsic angular prolongation still has the original
+joint sector and angle tower. -/
+def n04PositiveGeometry_rootPacketSectorMixed_joint
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (hS : IsPhysicalSpaces D T S) (hε : ε ≤ 1)
+    (hr : r ∈ radialCore D) (i : Fin 6) (a d : ℕ) :
+    SmoothDirections (sectorNeighborhood S base ε ε ×ˢ (univ : Set ℝ))
+      (fun z => mixedDerivative a d (fun p => n06ActualRootAbsorbedCoordinates D S
+        (liftSectorParameter S C z.1) p i) (r, z.2)) := by
+  let J := n04PositiveGeometry_rootPacketSectorTrace_joint
+    (C := C) (base := base) hD hT hS hε hr i a
+  apply (smoothDirections_angularIterate J d).congr
+  intro z _
+  exact iteratedDeriv_radialBoundaryJet_eq_mixedDerivative isOpen_univ
+    (((contDiff_apply ℝ ℝ i).comp
+      (n06_actualRootAbsorbedCoordinates_contDiff hD hT hS
+        (liftSectorParameter S C z.1))).contDiffOn)
+    r (fun _ => mem_univ _) a d z.2
+
 /-- A fixed base and angular loss control the literal sector packet
 through every future parameter and angular order. -/
 theorem n04PositiveGeometry_rootPacketSector_finiteShift_power

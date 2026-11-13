@@ -99,9 +99,11 @@ theorem n04PositiveGeometry_collarEndMass_bounds
         (n04PositiveGeometry_envelope_reindex hl e))
     apply h.mono
     intro z
-    have hs : |z.1.2| ≤ |r (e z) - l (e z)| + |l (e z)| :=
-      (by simpa only [sub_add_cancel] using abs_add_le (z.1.2 - l (e z)) (l (e z))).trans
-        (add_le_add_right (abs_sub_left_of_mem_uIcc z.2) _)
+    have hs : |z.1.2| ≤ |r (e z) - l (e z)| + |l (e z)| := by
+      calc
+        _ = |(z.1.2 - l (e z)) + l (e z)| := by rw [sub_add_cancel]
+        _ ≤ |z.1.2 - l (e z)| + |l (e z)| := abs_add_le _ _
+        _ ≤ _ := add_le_add_right (abs_sub_left_of_mem_uIcc z.2) _
     rw [Prod.norm_def, Real.norm_eq_abs]
     exact max_le (le_add_of_nonneg_right (by positivity))
       (hs.trans (le_add_of_nonneg_left (norm_nonneg _)))
@@ -110,12 +112,12 @@ theorem n04PositiveGeometry_collarEndMass_bounds
       (fun z : J => W (e z)) q (fun z y => a (e z) y.1 j) :=
     ((ha j).reindex e).precompLinear hW' L q (fun _ => rfl)
   have ht : N04PositiveKernelJetBounds (fun z : J => W (e z)) q
-      (fun _ y : E × ℝ => y.2) :=
+      (fun (_ : J) (y : E × ℝ) => y.2) :=
     N04PositiveKernelJetBounds.linear hW' (ContinuousLinearMap.snd ℝ E ℝ) hq
   let F : I → E × ℝ → ℝ := fun i y => n04PositiveGeometry_collarEndpointSlopeSum n
     (l i) (r i) (δ i) root (a i y.1) y.2
-  have hF := n04PositiveGeometry_collarEndpointSlopeSum_bounds hW' n root
-    (fun z y => a (e z) y.1) (fun _ y => y.2)
+  have hF := n04PositiveGeometry_collarEndpointSlopeSum_bounds (p := q) hW' n root
+    (fun (z : J) (y : E × ℝ) => a (e z) y.1) (fun (_ : J) (y : E × ℝ) => y.2)
     (fun z => l (e z)) (fun z => r (e z)) (fun z => δ (e z)) ha' ht
     (n04PositiveGeometry_envelope_reindex hl e) (n04PositiveGeometry_envelope_reindex hr e)
     (n04PositiveGeometry_envelope_reindex hδ e) (n04PositiveGeometry_envelope_reindex hspan e)

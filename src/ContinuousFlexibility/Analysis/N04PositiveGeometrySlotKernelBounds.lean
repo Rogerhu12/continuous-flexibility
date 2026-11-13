@@ -65,9 +65,8 @@ theorem n04PositiveGeometry_partition_savedSpatial_cost
           Finset.sum_congr rfl (fun i _ => hstep i)
         _ = w.angleArity := w.sum_restrict_angleArity c
     have hc := c.length_pos hn
-    change (∑ i : Fin c.length,
-      n04PositiveGeometry_savedSpatialCost (w.restrict (c.emb i)) offset) ≤
-        w.angleArity - 1
+    rw [show n04PositiveGeometry_savedSpatialCost w offset = w.angleArity - 1 by
+      simp only [n04PositiveGeometry_savedSpatialCost, hw, ite_true]]
     omega
   · have hblock (i : Fin c.length) :
         n04PositiveGeometry_savedSpatialCost (w.restrict (c.emb i)) offset ≤
