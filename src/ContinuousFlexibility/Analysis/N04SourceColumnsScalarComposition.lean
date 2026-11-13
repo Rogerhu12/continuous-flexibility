@@ -24,6 +24,11 @@ open scoped ContDiff BigOperators
 variable {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
   [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
 
+/-- Iterating scalar derivatives adds their two orders. -/
+theorem n04SourceColumns_iteratedDeriv_add (f : ℝ → ℝ) (a b : ℕ) :
+    iteratedDeriv a (iteratedDeriv b f) = iteratedDeriv (a + b) f := by
+  simp only [iteratedDeriv_eq_iterate, Function.iterate_add_apply]
+
 /-- The normalized reciprocal has uniformly bounded outer derivatives
 through any mixed scalar prefix on the same fixed compact interval. -/
 theorem n04SourceColumns_inverse_outerJets_bound (N : ℕ) :
@@ -34,7 +39,7 @@ theorem n04SourceColumns_inverse_outerJets_bound (N : ℕ) :
   refine ⟨max 1 B, le_max_left _ _, fun t ht a b hab => ?_⟩
   have h := (hb (a + b) hab t ht).1
   rw [norm_iteratedFDeriv_eq_norm_iteratedDeriv,
-    circle_iteratedDeriv_iteratedDeriv]
+    n04SourceColumns_iteratedDeriv_add]
   apply le_trans _ (le_max_right 1 B)
   simpa only [norm_iteratedFDeriv_eq_norm_iteratedDeriv, Nat.add_comm] using h
 
@@ -53,7 +58,7 @@ theorem n04SourceColumns_shiftedInverse_outerJets_bound (N : ℕ) :
   refine ⟨max 1 B, le_max_left _ _, fun t ht a b hab => ?_⟩
   have h := hb (a + b) hab t ht
   rw [norm_iteratedFDeriv_eq_norm_iteratedDeriv,
-    circle_iteratedDeriv_iteratedDeriv]
+    n04SourceColumns_iteratedDeriv_add]
   apply le_trans _ (le_max_right 1 B)
   simpa only [norm_iteratedFDeriv_eq_norm_iteratedDeriv, Nat.add_comm] using h
 

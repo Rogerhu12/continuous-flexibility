@@ -81,8 +81,8 @@ theorem n04SourceColumns_fullProduct_parameter_bound (m k a b : ℕ) (RH : ℝ) 
         n01c_finset_prod_spatialOrder _ orders hR s, horders]
     simpa only [hBiProd, M, parameterHeightWeight, mul_assoc, mul_left_comm, mul_comm] using hprod
   have hd := smoothDirections_D_eq_linearCombination J JT (fun _ => (1 : ℝ))
-    (fun y hy => by simpa only [one_mul] using
-      n04Realization_mixedProductLeibniz_on_open e hΩ
+    (fun y hy => by
+      simpa only [one_mul] using n04Realization_mixedProductLeibniz_on_open e hΩ
         (fun i => f i y) (fun i => (RF i).spatial y hy) hq) k hx v
   simp only [one_mul] at hd
   rw [hd]
@@ -152,7 +152,7 @@ theorem n04SourceColumns_fullProduct_raw_oneHigh (m K s : ℕ) (RH : ℝ) :
         have h := hraw j 0 (Nat.zero_le _) u w (huw.trans hab) q hq x hx hlow
           Fin.elim0 (fun t => t.elim0) R hR hxR (fun t => t.elim0)
         simpa only [smoothDirections_D_zero_apply ((RF j).parameter u w q hq) hx,
-          parameterHeightWeight, if_pos rfl, mul_one] using h
+          parameterHeightWeight, ite_true, mul_one] using h
       have hjet (j : Fin m) (u w : ℕ) (huw : u + w ≤ a + b)
           (d : OrderedFinpartition k) (t : Fin d.length) :
           ‖((RF j).parameter u w q hq).D (d.partSize t) x (v ∘ d.emb t)‖ ≤

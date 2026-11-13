@@ -54,7 +54,7 @@ private theorem n04SourceColumns_zeroTower_of_value
     |J.D 0 z v| ≤ B * E ^ B * parameterHeightWeight H 0 *
       oneHighVariationWeight p base high z v := by
   simpa only [smoothDirections_D_zero_apply J hz v, parameterHeightWeight,
-    if_pos rfl, mul_one, oneHighVariationWeight, Finset.univ_eq_empty,
+    ite_true, mul_one, oneHighVariationWeight, Finset.univ_eq_empty,
     Finset.prod_empty, Finset.sum_empty, add_zero] using h
 
 /-- The positive-order height weight is the scalar height itself. -/

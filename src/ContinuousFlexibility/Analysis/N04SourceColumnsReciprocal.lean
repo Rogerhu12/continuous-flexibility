@@ -39,7 +39,7 @@ theorem n04SourceColumns_inverse_abs_outer_envelope
   have hscalar : ‖iteratedFDeriv ℝ a (iteratedDeriv b (fun u : ℝ => u⁻¹)) t‖ ≤
       ((a + b).factorial : ℝ) * (|t|⁻¹) ^ (a + b + 1) := by
     simpa only [norm_iteratedFDeriv_eq_norm_iteratedDeriv,
-      circle_iteratedDeriv_iteratedDeriv, one_div, absoluteReciprocalJetBound,
+      n04SourceColumns_iteratedDeriv_add, one_div, absoluteReciprocalJetBound,
       inv_pow, Nat.add_comm] using hformula
   have hfact : ((a + b).factorial : ℝ) ≤ (N.factorial : ℝ) :=
     Nat.cast_le.mpr (Nat.factorial_le hab)

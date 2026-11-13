@@ -109,8 +109,10 @@ def sourceColumnsInverseDeterminantRef : ℕ → PolarPoint → ℝ :=
 theorem sourceColumns_inverseDeterminant_zero :
     G.sourceColumnsInverseDeterminant η (0 : Parameter (G.S η)) =
       G.sourceColumnsInverseDeterminantRef η := by
-  simp only [sourceColumnsInverseDeterminant, sourceColumnsInverseDeterminantRef,
-    G.sourceColumns_atomFamily_zero η]
+  funext m p
+  unfold sourceColumnsInverseDeterminant sourceColumnsInverseDeterminantRef
+  rw [G.sourceColumns_atomFamily_zero η .inverseRadial,
+    G.sourceColumns_atomFamily_zero η .inverseAngleDefect]
 
 /-- The explicit polynomial is the genuine inverse-chart determinant. -/
 theorem sourceColumns_inverseDeterminant_eq {b : ℕ} {ε : ℝ}
