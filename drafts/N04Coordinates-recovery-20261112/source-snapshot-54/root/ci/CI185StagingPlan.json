@@ -1,0 +1,67 @@
+{
+  "schema": "n04-single-source-ci-repair-plan/v1",
+  "round": 185,
+  "status": "REVIEWED_MINIMAL_INSTANCE_REPAIR",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "branch": "line/N04Coordinates",
+  "parent": "91aabb8b96f6d7571bc5bd6a2142a58d84738dc1",
+  "commit": "ac176dbd9f00a76e7c1ec1c0d7c97bdb93626f5c",
+  "tree": "64a4d0ed5ffafabc9aa75f0811a57809370392ef",
+  "main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "failure": {
+    "receipt": "bd0ccf86cd3684524f525c95b444781575b58174",
+    "diagnostics": "6766ed934d27570f0e06deb4bb7efd65690435ff",
+    "original_log": "9afb640b8f060eccbefc5216f012911ad823d57e",
+    "read_complete": true
+  },
+  "source": {
+    "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "before": "eff7a91bcc29fb4e6f13d24d2813849b70eb4e90",
+    "after": "85ff989e03a1281fbfbbfb7071a2f866819b581c",
+    "lines": 174,
+    "net_added": 3,
+    "candidate": "708e04c4e73467b1b9f670a58f9526ffb24ba508",
+    "patch": "57cb377f5d8d5aa24a8b15dba7e227404edf9f26",
+    "peer": "ecde2f928c634a4357035efffabf1428b98454c8",
+    "owner": "4d0596cfc70a650c6c66c67a70d84fce1f3ed9dd"
+  },
+  "change": "Exactly one local SMul ℝ (M.Space × M.Space) instance defined by Prod.instSMul, following actual112/266/301 source pattern. All prior proof/public-head/import/option bytes unchanged. No altered resource budget.",
+  "preflight": {
+    "exact_full_tree_readback": true,
+    "only_one_source_path_changed": true,
+    "all_src_nodes": 4802,
+    "project_nodes": 4798,
+    "imports_and_graph_edges_unchanged": true,
+    "missing_imports": 0,
+    "cycles": 0,
+    "all_other_paths_identical_to184": true
+  },
+  "budget": {
+    "conservative_since_complete182": 18564,
+    "new_source_lines": 16624,
+    "shared_full_lines": 1447,
+    "full_root_lag": 493,
+    "precise_added": 16763,
+    "precise_deleted": 255,
+    "repository_limit": 20000,
+    "existing_draft_after182": 19276,
+    "held_fullJ206": 206,
+    "held_piece286": 286,
+    "held_global178": 178,
+    "forward_repair_net_since159": 15,
+    "actual_retained_upper": 19961,
+    "guard": 20000,
+    "remaining": 39,
+    "conditional_complete_group_credit": [
+      174,
+      301,
+      115,
+      152,
+      44
+    ]
+  },
+  "no_credit_yet": true,
+  "CI_gate": "Wait at least five minutes for first query, at least one minute thereafter. No resource changes. Complete quick/full/blueprint success required before further activation or draft release.",
+  "next_group": "Proposed81 existing ready sources plus three reviewed fullJ/StageE sources only after complete185; still separately gated."
+}

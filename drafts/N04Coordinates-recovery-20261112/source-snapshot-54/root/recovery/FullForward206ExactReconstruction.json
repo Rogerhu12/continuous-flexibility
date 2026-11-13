@@ -1,0 +1,10 @@
+{
+  "base_blob": "52bc280f8a817b5afac75d049e0c5d01d0366997",
+  "selected_blob": "b0432b0c9033f1655fb127f705c00d772c255a44",
+  "patch_blob": "a902fec5bd816a712dc5c2d605d018d3adb39542",
+  "forward_exact": true,
+  "reverse_exact": true,
+  "base_commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
+  "base_path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/positive/working/CircleShiftedFullForwardFixedBaseBounds.lean.txt",
+  "new_Lean_line_delta": 3
+}

@@ -1,0 +1,81 @@
+{
+  "schema": "n04-owned-source-reviewed-selection/v1",
+  "status": "SOURCE_REVIEWED_ONLY_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "artifact_path": "positive/repair184/CircleShiftedForwardFixedBaseBoundsReviewedManifest.json",
+  "selected_source": {
+    "path": "positive/repair184/CircleShiftedForwardFixedBaseBounds.lean",
+    "intended_path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "85ff989e03a1281fbfbbfb7071a2f866819b581c",
+    "sha256": "db833e98ec374977606ea387ea672d17c91d0a3ff514c5aedba7488227f01a82",
+    "utf8_bytes": 9026,
+    "lines": 174,
+    "final_newline": true
+  },
+  "candidate": {
+    "git_blob": "708e04c4e73467b1b9f670a58f9526ffb24ba508",
+    "sha256": "7a4c7655f33874f4436fb2902664c34bacf0d9b226abdc3ba31916230de510c7",
+    "utf8_bytes": 8222,
+    "lines": 130,
+    "final_newline": true
+  },
+  "exact_patch": {
+    "git_blob": "57cb377f5d8d5aa24a8b15dba7e227404edf9f26",
+    "sha256": "0a1a6cb7fb5931930ea2f132d6dbbe69ff2252bb3faad5dca98bb1d60b86c765",
+    "utf8_bytes": 621,
+    "lines": 12,
+    "final_newline": true,
+    "hunks": 1,
+    "added_lines": 3,
+    "deleted_lines": 0,
+    "net_lines": 3,
+    "exact_reverse": true
+  },
+  "independent_review": {
+    "reviewer": "/root",
+    "git_blob": "ecde2f928c634a4357035efffabf1428b98454c8",
+    "sha256": "a70fa91064e0b90a333c927bc4c8765b30c3f144d46c3692118e85e50f057596",
+    "utf8_bytes": 2492,
+    "lines": 41,
+    "final_newline": true,
+    "status": "FULL_SOURCE_AND_EXACT_DELTA_STATIC_PASS_UNCOMPILED"
+  },
+  "selected_predecessor": {
+    "head": "91aabb8b96f6d7571bc5bd6a2142a58d84738dc1",
+    "tree": "874193e6ca8080da8101554fe92e30348161dba0",
+    "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "eff7a91bcc29fb4e6f13d24d2813849b70eb4e90",
+    "sha256": "afae749be22c550a897c45755f456bade73f684a52ca65ca50cd6c02cfbf8a58",
+    "utf8_bytes": 8897,
+    "lines": 171,
+    "final_newline": true,
+    "previous_owner_git_blob": "2da983637a31cb8bbdcb34576276c98d9d9d8303"
+  },
+  "invariants": {
+    "same_all_existing_public_headers": true,
+    "same_all_existing_proof_bytes": true,
+    "same_imports_and_resource_options": true,
+    "only_new_declaration": "ContinuousFlexibility.Statements.circleShiftedForwardFixedBasePairSMul",
+    "source_byte_change_since_peer": false
+  },
+  "CI_scope": {
+    "failed_round": 184,
+    "diagnostics_git_blob": "6766ed934d27570f0e06deb4bb7efd65690435ff",
+    "next_CI_owned_by": "/root",
+    "compiled": false,
+    "performance_not_verified": true,
+    "no_credit_released": true
+  },
+  "budget": {
+    "source_lines": 174,
+    "exact_net_added_Lean_lines": 3,
+    "no_new_mathematical_leaf": true,
+    "no_duplicate_Lean_archive_required": true
+  },
+  "persistence": {
+    "source_candidate_patch_peer_exact_Git_readbacks": true,
+    "local_filesystem_claim": false,
+    "no_active_index_ref_or_CI_mutation_by_owner": true
+  }
+}

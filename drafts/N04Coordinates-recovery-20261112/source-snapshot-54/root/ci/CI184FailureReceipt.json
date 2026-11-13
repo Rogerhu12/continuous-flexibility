@@ -1,0 +1,38 @@
+{
+  "schema": "n04-ci-failure-receipt/v1",
+  "round": 184,
+  "head": "91aabb8b96f6d7571bc5bd6a2142a58d84738dc1",
+  "tree": "874193e6ca8080da8101554fe92e30348161dba0",
+  "run_id": 43347207316,
+  "workflow_number": 1868,
+  "job_id": 131629331564,
+  "conclusion": "failure",
+  "updated_utc": "2026-11-13T01:51:13Z",
+  "quick": "failure",
+  "full": "skipped",
+  "blueprint_status": "skipped",
+  "fresh_compiled_project_modules": 2,
+  "fresh_compiled_sources": [
+    "CanonicalReferencePieceInequality44",
+    "N04EndpointCircleFixedBaseBounds115"
+  ],
+  "source_diagnostics": 2,
+  "files": [
+    "CircleShiftedForwardFixedBaseBounds"
+  ],
+  "log": {
+    "blob": "9afb640b8f060eccbefc5216f012911ad823d57e",
+    "sha256": "098373bc32e21e46921de63451a563f968e9b2262f7eebb104c4ba32fa8a056c",
+    "bytes": 68763
+  },
+  "complete_errors": "6766ed934d27570f0e06deb4bb7efd65690435ff",
+  "artifact_downloaded": false,
+  "artifact_needed": false,
+  "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "draft_credit": 0,
+  "budget": {
+    "actual_retained_upper": 19955,
+    "remaining": 45,
+    "active_conservative": 18561
+  }
+}

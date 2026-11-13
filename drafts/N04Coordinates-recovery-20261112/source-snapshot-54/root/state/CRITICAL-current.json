@@ -1,0 +1,141 @@
+{
+  "schema": "n04-live-recovery-state/v1",
+  "as_of": "2026-11-13 02:08:17 UTC",
+  "active": {
+    "schema": "n04-ci-push-receipt/v1",
+    "round": 185,
+    "repository": "Rogerhu12/continuous-flexibility",
+    "branch": "line/N04Coordinates",
+    "parent": "91aabb8b96f6d7571bc5bd6a2142a58d84738dc1",
+    "commit": "ac176dbd9f00a76e7c1ec1c0d7c97bdb93626f5c",
+    "tree": "64a4d0ed5ffafabc9aa75f0811a57809370392ef",
+    "plan": "f5009c17d312baab4b158dfbfbd04cd398336a53",
+    "force": false,
+    "expected_sha_verified": true,
+    "ref_readback_exact": true,
+    "pushed_readback_utc": "2026-11-13 01:56:53 UTC",
+    "earliest_first_ci_lookup_utc": "2026-11-13T02:01:53.000Z",
+    "conservative_active_added": 18564,
+    "compilation": "PENDING",
+    "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+    "run_id": 43348582859,
+    "job_id": 131633809897,
+    "status": "completed",
+    "conclusion": "failure",
+    "failure_receipt": "73ddfdc1a4e332e064a3eaf5113eed1bd1dedace",
+    "full": "skipped"
+  },
+  "last_complete_green": {
+    "head": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+    "tree": "02a8747b6aaae413f67372d96e52ad8f3dbd9e9a",
+    "success": "318abffc005fd4c3069d27066e3ad5c1ad63a7b4",
+    "coverage": "43f48f184f286e81597f12ab2bc242ea369bf271"
+  },
+  "draft_budget": {
+    "guard": 20000,
+    "after_complete182": 19276,
+    "held_actual_sources": [
+      206,
+      286,
+      178
+    ],
+    "forward_net_since159": 15,
+    "actual_retained_upper": 19961,
+    "remaining": 39,
+    "credit_since182": 0
+  },
+  "repository_budget": {
+    "hard_added_Lean_limit": 20000,
+    "active_conservative_since182": 18564,
+    "new_source_lines": 16624,
+    "shared_full": 1447,
+    "whole_root_lag": 493
+  },
+  "failed_repairs": [
+    "183: five diagnostics in AE44/forward159/endpoint115.",
+    "184: AE44 and endpoint115 compiled. Forward171 still two timeout diagnostics.",
+    "185: local product SMul addition174 did not resolve either timeout; fresh0, complete gate failed."
+  ],
+  "current_repair": "proof_inventory is splitting the heavy zero case and kernel/unit-ball estimate into private lemmas, retaining the two original public heads and all witnesses; net additional Lean must fit39 and no limits may rise. Root reviews then publishes CI186.",
+  "selected_uncompiled": {
+    "fullJ": {
+      "source": "b0432b0c9033f1655fb127f705c00d772c255a44",
+      "lines": 206,
+      "owner": "58dd5ca292030c3d94ebd92cf812c631c23bdde0",
+      "peer": "1cb80c2fc11ae217e873685b63e91f5d6bf111a8",
+      "recovery": {
+        "base_blob": "52bc280f8a817b5afac75d049e0c5d01d0366997",
+        "selected_blob": "b0432b0c9033f1655fb127f705c00d772c255a44",
+        "patch_blob": "a902fec5bd816a712dc5c2d605d018d3adb39542",
+        "forward_exact": true,
+        "reverse_exact": true,
+        "base_commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
+        "base_path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/positive/working/CircleShiftedFullForwardFixedBaseBounds.lean.txt",
+        "new_Lean_line_delta": 3
+      }
+    },
+    "piece": {
+      "source": "d8f2a72059aea8d0a2a37702ec95cf7017c2f31c",
+      "lines": 286,
+      "owner": "f5517acf2efd614bfcecbc3b3bc7f3eecf5ce4e9",
+      "peer": "7a941317e67fe215d27ae6362a4c7d6b2f37b373"
+    },
+    "global": {
+      "source": "94aa073f7aff6b010b18fa65e26167978711aa5e",
+      "lines": 178,
+      "owner": "d20802922b7a2d856d3a9ab22acc1ca1034503c5",
+      "peer": "de261ed1adae2d1c5ec55686509b589541ad3a96",
+      "remaining": "Common original-E0 exponent1/state/existential transport assembly."
+    }
+  },
+  "next84": {
+    "expected_parent": "ac176dbd9f00a76e7c1ec1c0d7c97bdb93626f5c",
+    "base_tree": "64a4d0ed5ffafabc9aa75f0811a57809370392ef",
+    "entries": 84,
+    "main_sources": 79,
+    "owned_sources": 5,
+    "new_source_lines": 14977,
+    "generated_imports": 4818,
+    "checked_imports": 4241,
+    "full_lag": 577,
+    "conservative_added": 15554,
+    "all_nodes": 4886,
+    "missing": 0,
+    "cycles": 0,
+    "all_retained_and_new_graph_blobs_match": true,
+    "conditional_owned_credit_only_after_complete_CI": [
+      199,
+      184,
+      206,
+      286,
+      178
+    ],
+    "gate": "Full185 green plus206 owner/peer final binding; fresh main/ref before staging.",
+    "old81_peer": "81cdc5264824bac20985257b7812aa36adef475d",
+    "three_layout": "07db1968d6c742312ae36aeb07a8036153569db6",
+    "all_owners_addendum": "c89f356d07d364076f56541d91535496a4005e10",
+    "status": "All sources/owners/peers ready, held until actual repaired parent complete green and fresh forward-provider rebinding."
+  },
+  "same_witness_assembly": {
+    "field_gateway": "Preserve153's actual R/L/chi/j/closedbuffer, shrink base/epsilon for strict cutoff gap, restrict same N02/N03, then opticalFieldRegularity. proof_inventory read-only phase paused for repair.",
+    "Principal": "Actual134(n=3) shares294's chosen C0/B/hfinite and all Y/H lets. Strengthen294 to retain conditional ReferencePrincipal, then151 can discharge using hA and hN.1.1.2.1. Preserve same Y/H through auxiliary replacement. T->enlargedMaterialData needs inverse denominator monotonicity at same B; auxiliary replacement itself definitionally preserves Principal.",
+    "Transmission": "No T or psi dependence; auxiliary replacement preserves it definitionally. Still supply actual relative matching to WholeReferenceGaugeTransmission.actual_transmissionGeometry and the same hfamily4. href alone is insufficient.",
+    "missing_activation": "134 plus194/167 immediate providers are not current185 or the frozen161 reference selection. Audit is recovering their existing owners/peers and minimal activation closure; do not count them as already covered.",
+    "R_forcing": "206 supplies full forward jets; finite actual composition332 can choose one fixed low base before selector index/order. Original R/chi/lift/inverse witnesses and one restricted sector neighborhood must be retained. Actual strong radial mixed/PDE jets are still open."
+  },
+  "endpoint": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open",
+    "proved": 37,
+    "total": 42,
+    "exact_target": "theorem N04Coordinates (hN04b : N04bStatement) : N04cStatement",
+    "allowed_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "environment": "Local execution unavailable; no native retries or local writes asserted. Git text/trees/expected refs only; preserve single original completed CI logs before repair. No resource limits/root/STATUS/workflow edits."
+}

@@ -1,0 +1,41 @@
+--- a/positive/working/CircleShiftedFullForwardFixedBaseBounds.lean.txt
++++ b/positive/reconstructed/CircleShiftedFullForwardFixedBaseBounds.lean
+@@ -26,6 +26,9 @@
+   rw [Fin.prod_univ_succAbove (fun j => if j = i then (1 : ℝ) else h j) i] at he
+   simpa only [ite_true, Fin.succAbove_ne, ite_false, one_mul] using he.symm
+ 
++local instance circleShiftedFullForwardFixedBasePairSMul (M : CircleModelData) :
++    SMul ℝ (M.Space × M.Space) := Prod.instSMul
++
+ variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {M : CircleModelData}
+   (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+   (hγ : 0 < γ) (hM : IsCircleModel T γ M) (hI : HasInterpolation M.grading)
+@@ -156,7 +159,7 @@
+         have hq : Monotone q := gradedSeminorm_monotone _ _
+         have hp : 1 + q H' x.1 + (∑ j : Fin n, q H' (w (i.succAbove j)).1) ≤
+             1 + q H x.1 + ∑ j : Fin n, p H (w (i.succAbove j)) :=
+-          add_le_add (add_le_add_left (hq horder x.1) 1)
++          add_le_add (add_le_add le_rfl (hq horder x.1))
+             (Finset.sum_le_sum (fun j _ =>
+               (hq horder (w (i.succAbove j)).1).trans (hfst H (w (i.succAbove j)))))
+         have hz : q H' (w i).2 ≤ p H (w i) :=
+@@ -175,8 +178,8 @@
+           (apply_nonneg (q base) (w i).2) (by positivity)
+         have hsmall :
+             (1 + q H' x.1 + (∑ j : Fin n, q H' (w (i.succAbove j)).1)) *
+-              q base (w i).2 + q H' (w i).2 ≤ A :=
+-          (by simpa only [mul_one] using add_le_add hm hz).trans hfit
++              q base (w i).2 + q H' (w i).2 ≤ A := by
++          refine le_trans ?_ hfit; simpa only [mul_one] using add_le_add hm hz
+         exact hraw.trans (mul_le_mul_of_nonneg_left hsmall hK)
+       have hsumq (I : Finset (Fin (n + 1))) :
+           q s (∑ i ∈ I, t i) ≤ ∑ i ∈ I, q s (t i) := by
+@@ -196,7 +199,7 @@
+       change q s (J₀.D (n + 1) x w) ≤ _
+       rw [hj]
+       exact (map_add_le_add (q s) _ _).trans
+-        ((add_le_add hmain ((hsumq Finset.univ).trans hsumt)).trans_eq (by ring))
++        ((add_le_add hmain ((hsumq Finset.univ).trans hsumt)).trans_eq (by dsimp only [A]; ring))
+   exact multilinear_bound_of_unitBall (J.D n x) (q s) (p base) (p H)
+     (by positivity) hlocal v
+ 

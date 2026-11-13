@@ -1,0 +1,35 @@
+{
+  "schema": "n04-ci-failure-receipt/v1",
+  "round": 185,
+  "head": "ac176dbd9f00a76e7c1ec1c0d7c97bdb93626f5c",
+  "tree": "64a4d0ed5ffafabc9aa75f0811a57809370392ef",
+  "run_id": 43348582859,
+  "workflow_number": 1870,
+  "job_id": 131633809897,
+  "updated_utc": "2026-11-13T02:02:17Z",
+  "conclusion": "failure",
+  "quick": "failure",
+  "full": "skipped",
+  "blueprint_status": "skipped",
+  "fresh_compiled_project_modules": 0,
+  "source_diagnostics": 2,
+  "files": [
+    "CircleShiftedForwardFixedBaseBounds"
+  ],
+  "log": {
+    "blob": "bf85be1f2a8fa0a4ca7476aafe5b7f971107f56a",
+    "sha256": "735c42f163377d77f13da46a5b8d4ccd31dff6020c19dfcfe06f24b85dbdc6dd",
+    "bytes": 68521
+  },
+  "complete_errors": "17e7185894d1cbbcee11bffbc8b3d6c3a0066fd0",
+  "artifact_needed": false,
+  "artifact_downloaded": false,
+  "last_complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
+  "draft_credit": 0,
+  "budget": {
+    "actual_retained_upper": 19961,
+    "remaining": 39,
+    "active_conservative": 18564
+  },
+  "interpretation": "The local product scalar instance alone did not resolve either default-budget timeout. No performance success is asserted."
+}

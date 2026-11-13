@@ -1,10 +1,10 @@
 {
-  "kind": "recovery_snapshot_with_reviewed_and_working_Lean",
-  "snapshot": 53,
-  "prior_commit": "10f1232a7a757f1da29b6748bc747f9b495a4b14",
-  "line_head": "91aabb8b96f6d7571bc5bd6a2142a58d84738dc1",
-  "line_tree": "874193e6ca8080da8101554fe92e30348161dba0",
-  "frozen_at": "2026-11-13 01:51:19 UTC",
+  "kind": "recovery_snapshot_without_duplicate_selected_Lean",
+  "snapshot": 54,
+  "prior_commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
+  "line_head": "ac176dbd9f00a76e7c1ec1c0d7c97bdb93626f5c",
+  "line_tree": "64a4d0ed5ffafabc9aa75f0811a57809370392ef",
+  "frozen_at": "2026-11-13 02:09:12 UTC",
   "files": [
     {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/cut-first-jets-syntax/ConstructedRootCutFirstJets.base.lean.txt",
@@ -30659,7 +30659,7 @@
       "lines": 909,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/root/ci/CI183-build.log"
       }
     },
@@ -30671,7 +30671,7 @@
       "lines": 47,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/root/ci/CI183CompleteErrors.json"
       }
     },
@@ -30683,7 +30683,7 @@
       "lines": 41,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/root/ci/CI183FailureReceipt.json"
       }
     },
@@ -30695,7 +30695,7 @@
       "lines": 38,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/root/repair183/CanonicalReferencePieceInequalityCandidate.json"
       }
     },
@@ -30707,7 +30707,7 @@
       "lines": 36,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/root/repair183/CanonicalReferencePieceInequalityReviewed.json"
       }
     },
@@ -30719,7 +30719,7 @@
       "lines": 47,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/quantitative/recovery/CanonicalReferencePieceInequalityCI183RepairPeer.json"
       }
     },
@@ -30731,7 +30731,7 @@
       "lines": 11,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/audit/repair183/N04EndpointCircleFixedBaseBounds.patch"
       }
     },
@@ -30743,7 +30743,7 @@
       "lines": 59,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/audit/repair183/N04EndpointCircleFixedBaseBoundsCandidateManifest.json"
       }
     },
@@ -30755,7 +30755,7 @@
       "lines": 25,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/root/state/Backup52PushReceipt.json"
       }
     },
@@ -30767,7 +30767,7 @@
       "lines": 10,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/root/repair183/CanonicalReferencePieceInequality.patch"
       }
     },
@@ -30779,7 +30779,7 @@
       "lines": 32,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/positive/repair183/CircleShiftedForwardFixedBaseBounds.patch"
       }
     },
@@ -30791,7 +30791,7 @@
       "lines": 200,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/positive/repair183/CircleShiftedForwardFixedBaseBoundsCandidateManifest.json"
       }
     },
@@ -30803,7 +30803,7 @@
       "lines": 34,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/root/reviews/CircleShiftedForwardFixedBaseBoundsCI183RepairPeer.json"
       }
     },
@@ -30815,7 +30815,7 @@
       "lines": 91,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/positive/repair183/CircleShiftedForwardFixedBaseBoundsReviewedManifest.json"
       }
     },
@@ -30827,7 +30827,7 @@
       "lines": 44,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/audit/repair183/N04EndpointCircleFixedBaseBoundsReviewedManifest.json"
       }
     },
@@ -30839,7 +30839,7 @@
       "lines": 203,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/positive/working/CircleShiftedFullForwardFixedBaseBounds.lean.txt"
       }
     },
@@ -30851,7 +30851,7 @@
       "lines": 286,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/quantitative/reconstructed/CanonicalTransportPieceJetEnvelope.lean.txt"
       }
     },
@@ -30863,7 +30863,7 @@
       "lines": 213,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/quantitative/reconstructed/CanonicalTransportPieceJetEnvelopeOriginal285Candidate.json"
       }
     },
@@ -30875,7 +30875,7 @@
       "lines": 242,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/quantitative/reconstructed/CanonicalTransportPieceJetEnvelopeFinalCandidateManifest.json"
       }
     },
@@ -30887,7 +30887,7 @@
       "lines": 10,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/quantitative/reconstructed/CanonicalTransportPieceJetEnvelopeImport.patch"
       }
     },
@@ -30899,7 +30899,7 @@
       "lines": 255,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/audit/recovery/reviews/CanonicalTransportPieceJetEnvelopeIndependentReview.json"
       }
     },
@@ -30911,7 +30911,7 @@
       "lines": 91,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/quantitative/reconstructed/CanonicalTransportPieceJetEnvelopeReviewedManifest.json"
       }
     },
@@ -30923,7 +30923,7 @@
       "lines": 178,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/root/working/CanonicalTransportGlobalBounds.lean.txt"
       }
     },
@@ -30935,7 +30935,7 @@
       "lines": 76,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/root/working/CanonicalTransportGlobalBoundsCandidateManifest.json"
       }
     },
@@ -30947,7 +30947,7 @@
       "lines": 108,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/root/ci/CI184StagingPlan.json"
       }
     },
@@ -30959,7 +30959,7 @@
       "lines": 18,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/root/ci/CI184PushReceipt.json"
       }
     },
@@ -30971,7 +30971,7 @@
       "lines": 32,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/root/reviews/N04EndpointCircleFixedBaseBoundsCI183RepairPeer.json"
       }
     },
@@ -30983,12 +30983,324 @@
       "lines": 134,
       "persistence": "Git artifact; no current local write asserted",
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "dd4041719e45f15a77719f508a0cee89db1b36e3",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-53/root/state/CRITICAL-current.json"
+      }
+    },
+    {
+      "source": "root/state/Backup53PushReceipt.json",
+      "blob": "7634b8e331544e6b8a877401463aa50ccdcfb08a",
+      "sha256": "11bc8182395ba99e7f7c17dcd50eb2c5594ecc5ee56ea730bc6ffaf0ce62823a",
+      "bytes": 838,
+      "lines": 23,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/root/state/Backup53PushReceipt.json"
+      }
+    },
+    {
+      "source": "root/ci/CI184-build.log",
+      "blob": "9afb640b8f060eccbefc5216f012911ad823d57e",
+      "sha256": "098373bc32e21e46921de63451a563f968e9b2262f7eebb104c4ba32fa8a056c",
+      "bytes": 68763,
+      "lines": 806,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/root/ci/CI184-build.log"
+      }
+    },
+    {
+      "source": "root/ci/CI184CompleteErrors.json",
+      "blob": "6766ed934d27570f0e06deb4bb7efd65690435ff",
+      "sha256": "2c6be3c7d2b0004e29405fc65096a49590390a0cc1900354006ea87f2ee45aae",
+      "bytes": 2049,
+      "lines": 32,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/root/ci/CI184CompleteErrors.json"
+      }
+    },
+    {
+      "source": "root/ci/CI184FailureReceipt.json",
+      "blob": "bd0ccf86cd3684524f525c95b444781575b58174",
+      "sha256": "c9394d77ae079e6cfcbf647133da643305d76ebe1dd6bb20770426e28aacd6e5",
+      "bytes": 1133,
+      "lines": 38,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/root/ci/CI184FailureReceipt.json"
+      }
+    },
+    {
+      "source": "positive/repair184/CircleShiftedForwardFixedBaseBoundsCandidateManifest.json",
+      "blob": "708e04c4e73467b1b9f670a58f9526ffb24ba508",
+      "sha256": "7a4c7655f33874f4436fb2902664c34bacf0d9b226abdc3ba31916230de510c7",
+      "bytes": 8222,
+      "lines": 130,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/positive/repair184/CircleShiftedForwardFixedBaseBoundsCandidateManifest.json"
+      }
+    },
+    {
+      "source": "positive/repair184/CircleShiftedForwardFixedBaseBounds.patch",
+      "blob": "57cb377f5d8d5aa24a8b15dba7e227404edf9f26",
+      "sha256": "0a1a6cb7fb5931930ea2f132d6dbbe69ff2252bb3faad5dca98bb1d60b86c765",
+      "bytes": 621,
+      "lines": 12,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/positive/repair184/CircleShiftedForwardFixedBaseBounds.patch"
+      }
+    },
+    {
+      "source": "root/reviews/CircleShiftedForwardFixedBaseBoundsCI184RepairPeer.json",
+      "blob": "ecde2f928c634a4357035efffabf1428b98454c8",
+      "sha256": "a70fa91064e0b90a333c927bc4c8765b30c3f144d46c3692118e85e50f057596",
+      "bytes": 2492,
+      "lines": 41,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/root/reviews/CircleShiftedForwardFixedBaseBoundsCI184RepairPeer.json"
+      }
+    },
+    {
+      "source": "positive/repair184/CircleShiftedForwardFixedBaseBoundsReviewedManifest.json",
+      "blob": "4d0596cfc70a650c6c66c67a70d84fce1f3ed9dd",
+      "sha256": "9d215e98938e005018f1a587fa0e8291d6a13a2d7248d1d9aec046741dac1f85",
+      "bytes": 3023,
+      "lines": 81,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/positive/repair184/CircleShiftedForwardFixedBaseBoundsReviewedManifest.json"
+      }
+    },
+    {
+      "source": "audit/recovery/reviews/CanonicalTransportGlobalBoundsIndependentReview.json",
+      "blob": "de261ed1adae2d1c5ec55686509b589541ad3a96",
+      "sha256": "13c1ff077ee7c113c688f9d4b56cbc60eddbbd78500cb6449ff9561963a055c1",
+      "bytes": 14578,
+      "lines": 222,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/audit/recovery/reviews/CanonicalTransportGlobalBoundsIndependentReview.json"
+      }
+    },
+    {
+      "source": "root/working/CanonicalTransportGlobalBoundsReviewedManifest.json",
+      "blob": "d20802922b7a2d856d3a9ab22acc1ca1034503c5",
+      "sha256": "9ea49584a9b042a909a53e3890ecf57f1a429d985f90dd110d0429ee7c1ef7db",
+      "bytes": 2264,
+      "lines": 51,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/root/working/CanonicalTransportGlobalBoundsReviewedManifest.json"
+      }
+    },
+    {
+      "source": "audit/recovery/reviews/Next81AtCI184ExecutionPreflight.json",
+      "blob": "81cdc5264824bac20985257b7812aa36adef475d",
+      "sha256": "bd3e9a62e0ae5c00d84f25466ce2cadbd3e8e414db7129f6f195ba5c658bbc58",
+      "bytes": 4808,
+      "lines": 1,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/audit/recovery/reviews/Next81AtCI184ExecutionPreflight.json"
+      }
+    },
+    {
+      "source": "positive/reconstructed/CircleShiftedFullForwardFixedBaseBoundsCandidateManifest.json",
+      "blob": "6a5ba52762cf0da0a191a79419700424f67bd682",
+      "sha256": "5335f0c61946472aa802a594bf874fa65723758097013f3bd6b1d01e89e80001",
+      "bytes": 18548,
+      "lines": 344,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/positive/reconstructed/CircleShiftedFullForwardFixedBaseBoundsCandidateManifest.json"
+      }
+    },
+    {
+      "source": "positive/reconstructed/CircleShiftedFullForwardFixedBaseBounds.patch",
+      "blob": "a902fec5bd816a712dc5c2d605d018d3adb39542",
+      "sha256": "e6be3db8a43127b429d6e0f3e71c67105ec698e0137f94c7fd7229be75541cca",
+      "bytes": 2240,
+      "lines": 41,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/positive/reconstructed/CircleShiftedFullForwardFixedBaseBounds.patch"
+      }
+    },
+    {
+      "source": "positive/reconstructed/CircleShiftedFullForwardFixedBaseBoundsProviderInventory.json",
+      "blob": "b7adc37fa050ddbe10c58a34d5752c1d0e312d09",
+      "sha256": "fde9f33513306ea2a9a25cf88885e86f7bef9c47decbd3f0df3b6e54749e3533",
+      "bytes": 245687,
+      "lines": 5912,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/positive/reconstructed/CircleShiftedFullForwardFixedBaseBoundsProviderInventory.json"
+      }
+    },
+    {
+      "source": "quantitative/recovery/reviews/CircleShiftedForwardFullFixedBaseWorkingPrecheck.json",
+      "blob": "9d0a9b7473fd99c3316c98fb882e26dff2d26e42",
+      "sha256": "8054c184e6794b1d43ce00359de8bf546c81b3e8e79160328bceafbe0009082e",
+      "bytes": 8771,
+      "lines": 180,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/quantitative/recovery/reviews/CircleShiftedForwardFullFixedBaseWorkingPrecheck.json"
+      }
+    },
+    {
+      "source": "root/ci/CI185StagingPlan.json",
+      "blob": "f5009c17d312baab4b158dfbfbd04cd398336a53",
+      "sha256": "7dce5fadfc33f55d0ee9dc1cc7e92e62fa7e2e61c31052b12771840ea861a137",
+      "bytes": 2683,
+      "lines": 67,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/root/ci/CI185StagingPlan.json"
+      }
+    },
+    {
+      "source": "root/ci/CI185PushReceipt.json",
+      "blob": "f4d500126b2eab1cbcdd6c29e94744afb37d7ad2",
+      "sha256": "f1fb387333af94d8e323842997926f0ef515fd7b751c75e07d0255f6fcb24422",
+      "bytes": 694,
+      "lines": 18,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/root/ci/CI185PushReceipt.json"
+      }
+    },
+    {
+      "source": "quantitative/recovery/reviews/CircleShiftedFullForwardFixedBaseBoundsIndependentReview.json",
+      "blob": "1cb80c2fc11ae217e873685b63e91f5d6bf111a8",
+      "sha256": "90b6f8df0915d21db03fb0fdc644ed8e6d5b9db8d5087f035319d56d1bc820b3",
+      "bytes": 14378,
+      "lines": 317,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/quantitative/recovery/reviews/CircleShiftedFullForwardFixedBaseBoundsIndependentReview.json"
+      }
+    },
+    {
+      "source": "audit/recovery/Next84AdditionalThreeLayoutAtCI185.json",
+      "blob": "07db1968d6c742312ae36aeb07a8036153569db6",
+      "sha256": "0e4f1a9bff80b6ae88a063d37f445b7197d2fbcd4616c2830621adb52e3522ac",
+      "bytes": 5660,
+      "lines": 1,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/audit/recovery/Next84AdditionalThreeLayoutAtCI185.json"
+      }
+    },
+    {
+      "source": "root/ci/CI185-build.log",
+      "blob": "bf85be1f2a8fa0a4ca7476aafe5b7f971107f56a",
+      "sha256": "735c42f163377d77f13da46a5b8d4ccd31dff6020c19dfcfe06f24b85dbdc6dd",
+      "bytes": 68521,
+      "lines": 800,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/root/ci/CI185-build.log"
+      }
+    },
+    {
+      "source": "root/ci/CI185CompleteErrors.json",
+      "blob": "17e7185894d1cbbcee11bffbc8b3d6c3a0066fd0",
+      "sha256": "632d76dd712c790bb90b5e1250b91e3decb17a02b7ba6809dae0adf616f61b33",
+      "bytes": 1874,
+      "lines": 29,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/root/ci/CI185CompleteErrors.json"
+      }
+    },
+    {
+      "source": "root/ci/CI185FailureReceipt.json",
+      "blob": "73ddfdc1a4e332e064a3eaf5113eed1bd1dedace",
+      "sha256": "37fa4dc69b4d97038de939697d5b11e8ed1468f8f0ceea5adbf630987c981336",
+      "bytes": 1159,
+      "lines": 35,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/root/ci/CI185FailureReceipt.json"
+      }
+    },
+    {
+      "source": "positive/reconstructed/CircleShiftedFullForwardFixedBaseBoundsReviewedManifest.json",
+      "blob": "58dd5ca292030c3d94ebd92cf812c631c23bdde0",
+      "sha256": "d0091630aaa0b558ca57e4616ec69bc0431c3a3cc0465d7198a858a8aa249b92",
+      "bytes": 5087,
+      "lines": 111,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/positive/reconstructed/CircleShiftedFullForwardFixedBaseBoundsReviewedManifest.json"
+      }
+    },
+    {
+      "source": "audit/recovery/Next84FullForward206OwnerBindingAddendum.json",
+      "blob": "c89f356d07d364076f56541d91535496a4005e10",
+      "sha256": "ed819434b8a40b970ec279f9eddaa599d03530baa873ab9b3baf79640912d33f",
+      "bytes": 2727,
+      "lines": 53,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/audit/recovery/Next84FullForward206OwnerBindingAddendum.json"
+      }
+    },
+    {
+      "source": "root/state/CRITICAL-current.json",
+      "blob": "75204878615397889e9dcad778e853d9fb0cede1",
+      "sha256": "1d434d1eb51f429488137195a10a059b0d1bb185ab047f7064f40b04d80bf5bb",
+      "bytes": 6619,
+      "lines": 141,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/root/state/CRITICAL-current.json"
+      }
+    },
+    {
+      "source": "root/recovery/FullForward206ExactReconstruction.json",
+      "blob": "1339474dca85603e065ea3e9715cb8842383da07",
+      "sha256": "000dd85b24d379ec5007a22dc5c7983023ac58d7ddee07f9933d9b6e83e5a5ec",
+      "bytes": 467,
+      "lines": 10,
+      "persistence": "Git artifact; no current local write asserted",
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-54/root/recovery/FullForward206ExactReconstruction.json"
       }
     }
   ],
-  "storage_note": "Preserve three new uncompiled sources once:203 working full-J,286 reviewed piece envelope,178 working global bounds. Original285 retained by immutable blob identity and exact patch only. Current three-file repair retained by additional active parent; outside archive remains exact complete-green182.",
+  "storage_note": "Outside archive remains exact complete-green182. Retain original185 log/errors and all final206/piece/global peer/owner records; selected206 is exactly recoverable from snapshot53 working203 plus preserved four-hunk patch. No full selected Lean source is duplicated. Active174 is retained by additional parent.",
   "compiled_baseline": "c1b979ff1d175a29bedc0196203c370cb855fb4b",
   "compiled_baseline_tree": "02a8747b6aaae413f67372d96e52ad8f3dbd9e9a"
 }

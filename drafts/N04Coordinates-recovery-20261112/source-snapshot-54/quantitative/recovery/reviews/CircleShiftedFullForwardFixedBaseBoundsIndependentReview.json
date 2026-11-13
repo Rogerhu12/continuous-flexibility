@@ -1,0 +1,317 @@
+{
+  "schema": "n04-full-source-independent-review/v1",
+  "artifact_path": "quantitative/recovery/reviews/CircleShiftedFullForwardFixedBaseBoundsIndependentReview.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "reviewer": "/root/quantitative_route",
+  "owner": "/root/proof_inventory",
+  "status": "FULL_SOURCE_EXACT_DELTA_AND_SELECTED_GRAPH_STATIC_PASS_UNCOMPILED",
+  "selected_source": {
+    "path": "positive/reconstructed/CircleShiftedFullForwardFixedBaseBounds.lean",
+    "intended_path": "src/ContinuousFlexibility/Analysis/CircleShiftedFullForwardFixedBaseBounds.lean",
+    "git_blob": "b0432b0c9033f1655fb127f705c00d772c255a44",
+    "sha256": "ac05f36caca3c4b9261abb81f35187c82847b30081b154937de931878e11bf39",
+    "utf8_bytes": 10419,
+    "lines": 206
+  },
+  "candidate": {
+    "git_blob": "6a5ba52762cf0da0a191a79419700424f67bd682",
+    "sha256": "5335f0c61946472aa802a594bf874fa65723758097013f3bd6b1d01e89e80001",
+    "utf8_bytes": 18548,
+    "lines": 344
+  },
+  "patch": {
+    "git_blob": "a902fec5bd816a712dc5c2d605d018d3adb39542",
+    "sha256": "e6be3db8a43127b429d6e0f3e71c67105ec698e0137f94c7fd7229be75541cca",
+    "utf8_bytes": 2240,
+    "lines": 41
+  },
+  "prior_precheck": {
+    "git_blob": "9d0a9b7473fd99c3316c98fb882e26dff2d26e42",
+    "sha256": "8054c184e6794b1d43ce00359de8bf546c81b3e8e79160328bceafbe0009082e",
+    "status": "working203 changes_required; not relabeled as final PASS"
+  },
+  "historical_sources": {
+    "working203": {
+      "git_blob": "52bc280f8a817b5afac75d049e0c5d01d0366997",
+      "sha256": "c5d4febf98bdb2a80960fb3e4d81816f7b0e1d14eba3b88da24a852eab74bb2d",
+      "utf8_bytes": 10258,
+      "lines": 203
+    },
+    "intermediate203": {
+      "git_blob": "0edc1a4ce9724b5b85573a652b68a6cc203bb66c",
+      "sha256": "fe84c56c065c86e9bf090071781ae5d41f1a75551d5389dc938799fc62f7de3d",
+      "utf8_bytes": 10286,
+      "lines": 203
+    },
+    "historical_manifests_unchanged": true
+  },
+  "full_read_scope": [
+    "Read every line of the final206 source. Previously read every line of working203; independently applied and reversed the manifest's four exact edits. Final206 minus the authorized local-instance insertion is byte-identical to intermediate203.",
+    "Read the actual selected174 forward supplier; removing its sole three-line local instance reconstructs previously fully read171 exactly. Bind the separate root174 full-source repair peer and owner without claiming its timeout is resolved.",
+    "Read actual full scalar joint-jet source367, genuine smoothDirections112, continuous normalization204, affine/uniqueness124, coupled realization151; checked the actual inverseForwardJet definition/zero theorem, translation decoder, pairGrading and tameJetSize interfaces.",
+    "Read exact pinned finite-product/sum/succAbove and scalar iterated-derivative shift API signatures and checked their applications in both private helper proofs.",
+    "Independently recomputed the entire286-node metadata DAG and compared every unchanged selected provider with the original fixed2 graph. This is selected-source graph verification, not a new compilation or a re-reading of all284 upstream source bodies."
+  ],
+  "delta": {
+    "hunks": 4,
+    "added": 7,
+    "deleted": 4,
+    "net": 3,
+    "exact_reverse": true,
+    "final206_to_intermediate203_exact_by_removing_instance": true,
+    "complete_theorem_headers": [
+      {
+        "name": "fullForward_prod_erase",
+        "header_sha256": "292211dfa3659cfaaa1f8b09eaa10fd50ade1c130bed49378426793dc2bf27ff",
+        "working_and_final_exact": true
+      },
+      {
+        "name": "fullForward_ordered_decode",
+        "header_sha256": "29bb21c812ad032dfc545baebe245104960a90344117cf5f17daaa1fa1174228",
+        "working_and_final_exact": true
+      },
+      {
+        "name": "circleShiftedChartCompose_fullJet_eq_ordered",
+        "header_sha256": "41ed1f957c2a8760b3c46d6b52899690f22ff99f82f543e4d213a3ccd68b1e86",
+        "working_and_final_exact": true
+      },
+      {
+        "name": "circleShiftedChartCompose_fullJets_fixedBase_oneHigh",
+        "header_sha256": "8abeb33446dded681119bcc4ee90bf5adc3a48be4b60f04e071f82131ad86a5e",
+        "working_and_final_exact": true
+      }
+    ],
+    "all_imports_unchanged": true,
+    "no_resource_or_option_change": true,
+    "corrected_findings": [
+      "F1: explicit add_le_add le_rfl now proves 1+q_low<=1+q_high in the required operand order.",
+      "F2: hsmall now has its intermediate target supplied by refine le_trans ?_ hfit.",
+      "F3: the last scalar trans_eq expands the same local A before ring."
+    ],
+    "local_instance": {
+      "name": "ContinuousFlexibility.Statements.circleShiftedFullForwardFixedBasePairSMul",
+      "body": "Prod.instSMul",
+      "effect": "Selects the existing componentwise scalar action used by actual112 and the reviewed174 supplier. No mathematical premise, source, grading, loss, tower or proof body is changed."
+    }
+  },
+  "mathematical_verification": {
+    "full_identity": "At order n+1 the given J.D is exactly the ordered (n+1)-kernel plus n+1 ordered n-kernels, each using the corresponding source second-component and every remaining first-component. The Fin.succAbove product identity removes precisely one slot, with no division and no nonzero direction premise.",
+    "same_tower": "The genuine112 tower is only used with SmoothDirections.unique to prove the formula for the supplied J. Restriction to univ×univ preserves D definitionally. The numerical result returns to the original J.D, including n=0 via J.zero.",
+    "quantifiers": "The single base and loss from selected174 precede all n,R,s,travel,J,x,v. For each n,R>=1,s, constants C_n and C_(n-1) are chosen before travel/J/x/v. The final constant C_n*R+n*C_(n-1) and loss n+loss match the public header.",
+    "unit_ball": "Pair grading bounds both coordinates. Low direction bounds <1 and R>=1 justify all actual174 hypotheses. For each deleted slot, H'=s+(n-1+loss)<=H=s+(n+loss); finite sum reindexing counts that slot's source high factor and the remaining chart high factors exactly once.",
+    "zero_order": "The empty direction family is replaced by Fin.elim0, inverseForwardJet_zero recovers the actual linear family, and J.zero identifies its value. The n*C_(n-1) term is zero; no extra zeroth-order estimate is assumed.",
+    "normalization": "Uses multilinear_bound_of_unitBall on the genuine continuous multilinear map J.D n x. Its multilinearTameSize unfolds to exactly tameJetSize at high s+(n+loss); no algebraic surrogate, B(n) low ball, or new representative is substituted.",
+    "material_scope": "The entire result uses the original circle model M and its grading. The theorem does not assert residual/forcing bounds, radial PDE estimates, CurrentJets, or a final common state neighborhood."
+  },
+  "selected_graph": {
+    "git_blob": "b7adc37fa050ddbe10c58a34d5752c1d0e312d09",
+    "sha256": "fde9f33513306ea2a9a25cf88885e86f7bef9c47decbd3f0df3b6e54749e3533",
+    "utf8_bytes": 245687,
+    "lines": 5912,
+    "root": "ContinuousFlexibility.Analysis.CircleShiftedFullForwardFixedBaseBounds",
+    "node_count": 286,
+    "upstream_count": 285,
+    "project_edges": 465,
+    "reachable": 286,
+    "missing": [],
+    "cycles": [],
+    "invalid_topological_edges": [],
+    "edge_list_matches_source_import_arrays": true,
+    "predecessor_graph": {
+      "git_blob": "95637435ae5e1c45a9ed6cbd699fb2e784920725",
+      "sha256": "027309702b2891d18c0446a8e032bf7e6e56209e22129e38b028c01da6235c03",
+      "utf8_bytes": 244665,
+      "lines": 5893
+    },
+    "exactly_changed_records": [
+      "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+      "ContinuousFlexibility.Analysis.CircleShiftedFullForwardFixedBaseBounds"
+    ],
+    "other284_provider_records_match_fixed2": {
+      "graph": {
+        "git_blob": "6d4933e47763157649c2ccafdfd67b05f74809a6",
+        "sha256": "14d2524b5a9b6f3b1b7779bca8a05b2d41087fde52098aea8f0a7ed29a753c5f"
+      },
+      "count": 284,
+      "compared_fields": [
+        "module",
+        "path",
+        "blob",
+        "sha256",
+        "bytes",
+        "lines",
+        "project_imports"
+      ],
+      "findings": []
+    },
+    "independent_raw_source_fingerprint_checks": [
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleShiftedFullForwardFixedBaseBounds",
+        "blob_exact": true,
+        "sha_exact": true,
+        "bytes_exact": true,
+        "imports_exact": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+        "blob_exact": true,
+        "sha_exact": true,
+        "bytes_exact": true,
+        "imports_exact": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleChartCompositionJets",
+        "blob_exact": true,
+        "sha_exact": true,
+        "bytes_exact": true,
+        "imports_exact": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleCompositionSmoothDirections",
+        "blob_exact": true,
+        "sha_exact": true,
+        "bytes_exact": true,
+        "imports_exact": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CoupledCircleCompositionRealization",
+        "blob_exact": true,
+        "sha_exact": true,
+        "bytes_exact": true,
+        "imports_exact": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleTranslationUniformBounds",
+        "blob_exact": true,
+        "sha_exact": true,
+        "bytes_exact": true,
+        "imports_exact": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.SmoothDirectionsAffine",
+        "blob_exact": true,
+        "sha_exact": true,
+        "bytes_exact": true,
+        "imports_exact": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameInverseExpressions",
+        "blob_exact": true,
+        "sha_exact": true,
+        "bytes_exact": true,
+        "imports_exact": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+        "blob_exact": true,
+        "sha_exact": true,
+        "bytes_exact": true,
+        "imports_exact": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+        "blob_exact": true,
+        "sha_exact": true,
+        "bytes_exact": true,
+        "imports_exact": true
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameLocalCalculus",
+        "blob_exact": true,
+        "sha_exact": true,
+        "bytes_exact": true,
+        "imports_exact": true
+      }
+    ],
+    "retained_selected_fallbacks": [
+      "N01NeighborhoodRestriction cc38a6d2b17c7398b071a6b22a130668877f3204",
+      "TameMultilinearNormalization de78e2674d4a5cf3574364b6cc1b589b478c7915"
+    ],
+    "absent_unneeded_modules": [
+      "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds",
+      "ContinuousFlexibility.Analysis.StateNeighborhood"
+    ],
+    "parent_plan_review": {
+      "git_blob": "7f2cdb412ab8f6d68a2ea4dbe28b51f1031044e7",
+      "sha256": "b6f1402d8d1b7012217c434b8fcfaceb0cbd00bdbafcefe621d8a68a74cf6709"
+    }
+  },
+  "forward174_binding": {
+    "source": {
+      "git_blob": "85ff989e03a1281fbfbbfb7071a2f866819b581c",
+      "sha256": "db833e98ec374977606ea387ea672d17c91d0a3ff514c5aedba7488227f01a82",
+      "utf8_bytes": 9026,
+      "lines": 174
+    },
+    "peer": {
+      "git_blob": "ecde2f928c634a4357035efffabf1428b98454c8",
+      "sha256": "a70fa91064e0b90a333c927bc4c8765b30c3f144d46c3692118e85e50f057596",
+      "utf8_bytes": 2492,
+      "lines": 41
+    },
+    "owner": {
+      "git_blob": "4d0596cfc70a650c6c66c67a70d84fce1f3ed9dd",
+      "sha256": "9d215e98938e005018f1a587fa0e8291d6a13a2d7248d1d9aec046741dac1f85",
+      "utf8_bytes": 3023,
+      "lines": 81
+    },
+    "same_public_headers_proofs_imports_as171": true,
+    "only_three_line_local_instance": true,
+    "performance_not_verified": true
+  },
+  "pinned_mathlib": {
+    "revision": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "sources": [
+      {
+        "path": "Mathlib/Algebra/BigOperators/Fin.lean",
+        "git_blob": "95092dd72334eb133dfc410d6d796b4cacc0fdfc",
+        "sha256": "8ec6ee70bae9af42db59b82a1b7e8f1b3056d5e9dd358d9f7cc8c58746ca7dd2",
+        "utf8_bytes": 31637,
+        "lines": 801,
+        "used": [
+          "Fin.prod_univ_succAbove",
+          "Fin.sum_univ_succAbove"
+        ]
+      },
+      {
+        "path": "Mathlib/Data/Fin/SuccPred.lean",
+        "git_blob": "f80f72eb0667975bb4899c7433c7701c70cdb87c",
+        "sha256": "629c383404d781330bbbf2813eef3f7cf4ecc44a3ca11c6b8336285504c9626e",
+        "utf8_bytes": 40989,
+        "lines": 950,
+        "used": [
+          "Fin.succAbove_ne"
+        ]
+      },
+      {
+        "path": "Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+        "git_blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+        "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+        "utf8_bytes": 24303,
+        "lines": 517,
+        "used": [
+          "iteratedDeriv_comp_add_const"
+        ]
+      }
+    ]
+  },
+  "scoped_name_check": {
+    "metadata_rows": 106,
+    "explicit_declarations": 662,
+    "wanted": [
+      "circleShiftedChartCompose_fullJet_eq_ordered",
+      "circleShiftedChartCompose_fullJets_fixedBase_oneHigh",
+      "circleShiftedFullForwardFixedBasePairSMul"
+    ],
+    "hits": [],
+    "not_a_fresh_full_repository_scan": true
+  },
+  "findings": [],
+  "qualifications": [
+    "Formal static PASS is for exact final206 and selected174 only; no local Lean/elaboration or CI was run or queried.",
+    "The earlier171 supplier timed out. The product-instance repair has a separate static peer; this review does not certify runtime performance.",
+    "The candidate's historical_working_source.supersession sentence retains the intermediate final203 wording. Its selected source, previous_final203, exact patch and explicit +3 local-instance section unambiguously select206; this historical sentence is not used as the final delta description.",
+    "The name check reuses106 exact-source metadata rows/662 explicit declarations and is not a fresh whole-repository name scan. The eventual bounded activation group must retain its own current-source/name checks.",
+    "No source, active tree, refs, index, CI settings, witnesses or resource limits were changed by this reviewer."
+  ]
+}

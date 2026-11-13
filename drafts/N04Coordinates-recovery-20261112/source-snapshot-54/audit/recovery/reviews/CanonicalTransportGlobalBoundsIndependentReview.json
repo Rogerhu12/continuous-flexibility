@@ -1,0 +1,222 @@
+{
+  "schema": "n04-full-independent-source-review-v1",
+  "path": "audit/recovery/reviews/CanonicalTransportGlobalBoundsIndependentReview.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "reviewer": "/root/audit_coordinates",
+  "author": "/root",
+  "status": "PASS_FULL_STATIC_SOURCE_MATHEMATICS_API_AND_SELECTED_IMPORT_REVIEW_UNCOMPILED",
+  "source": {
+    "module": "ContinuousFlexibility.Analysis.CanonicalTransportGlobalBounds",
+    "path": "src/ContinuousFlexibility/Analysis/CanonicalTransportGlobalBounds.lean",
+    "blob": "94aa073f7aff6b010b18fa65e26167978711aa5e",
+    "sha256": "fcc95720d1dbe0711d6b905a76be759a05560ad73e3fa2acc71cf45aed8cac1f",
+    "bytes": 9496,
+    "lines": 178,
+    "imports": [
+      "ContinuousFlexibility.Analysis.CanonicalTransportPieceJetEnvelope",
+      "ContinuousFlexibility.Analysis.CanonicalReferencePieceInequality",
+      "ContinuousFlexibility.Analysis.CanonicalActualWholeGeometry",
+      "ContinuousFlexibility.Analysis.N07aActualMaterialComparison",
+      "ContinuousFlexibility.Analysis.N07aMaterialLocalWindow"
+    ]
+  },
+  "candidate": {
+    "blob": "18837c042fb33ab687fceb2e008239c30a70a321",
+    "sha256": "7b3b4de4430c6c1d0d75a395d5c5538800b806d2d58d6095cab6ae1ebd4cfbbb"
+  },
+  "baseline": {
+    "head": "91aabb8b96f6d7571bc5bd6a2142a58d84738dc1",
+    "tree": "874193e6ca8080da8101554fe92e30348161dba0",
+    "complete_green": "c1b979ff1d175a29bedc0196203c370cb855fb4b"
+  },
+  "scope": "Full 178 lines and complete two public heads; all eight direct/critical actual provider sources below; retained definitions and pinned calculus APIs. No new Lean or source edit made by reviewer.",
+  "public_declarations": [
+    {
+      "name": "ContinuousFlexibility.Analysis.n04_referenceCurrent_transport_global_jet_bounds",
+      "line": 50,
+      "header": "theorem n04_referenceCurrent_transport_global_jet_bounds\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hε : 0 < ε)\n    (hrefState : referenceStateConditions D S C)\n    (hgeom : CanonicalGeometry D S C K base ε)\n    (href : CanonicalGeometry.ReferenceJets D T S C L K)\n    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)\n    (z : CanonicalGeometry.Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε)\n    (τ : PolarPoint → PolarPoint) (q : PolarPoint → ℝ)\n    (hqual : WholeCanonicalTransportQualitative (D := D) C K\n      (liftSectorParameter S C z) τ q) :\n    ∃ B : ℝ, 0 < B ∧\n      (∀ p ∈ annularOpen D, ∀ n : ℕ, n ≤ 2 →\n        ‖iteratedFDeriv ℝ n q p‖ ≤ B * T.M p.1) ∧\n      (∀ p ∈ annularOpen D, ∀ n : ℕ, 1 ≤ n → n ≤ 2 →\n        ‖iteratedFDeriv ℝ n τ p‖ ≤ B * T.M p.1)",
+      "header_sha256": "eb5e9b79452b9e57275792db5db0c2b40b56be2ec960f210323038559e992775"
+    },
+    {
+      "name": "ContinuousFlexibility.Analysis.n04_referenceCurrent_transport_global_material_ratios",
+      "line": 125,
+      "header": "theorem n04_referenceCurrent_transport_global_material_ratios\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hε : 0 < ε)\n    (hrefState : referenceStateConditions D S C)\n    (hgeom : CanonicalGeometry D S C K base ε)\n    (href : CanonicalGeometry.ReferenceJets D T S C L K)\n    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε) :\n    ∃ base' : ℕ, base ≤ base' ∧ ∃ η : ℝ, 0 < η ∧ η ≤ ε ∧\n      ∀ z ∈ sectorNeighborhood S base' η η,\n        ∀ τ : PolarPoint → PolarPoint,\n          ContDiffOn ℝ 3 τ (annularOpen D) →\n          MapsTo τ (annularOpen D) (annularOpen D) →\n          (∀ m p, p ∈ referencePhysicalPieceOpen S K m →\n            τ p = canonicalCurrentPoint C K (liftSectorParameter S C z) m p) →\n          ∀ p ∈ annularOpen D,\n            T.H (τ p).1 / T.H p.1 ≤ Real.exp 1 ∧\n            T.M (τ p).1 / T.M p.1 ≤ Real.exp 1",
+      "header_sha256": "affab7f42a6f57c84c5032442698eaeb534d074188ccc4b121d8c513f77f50c0"
+    }
+  ],
+  "private_declarations": [
+    "n04_transport_norm_jet_continuous",
+    "n04_transport_material_ratio_continuous"
+  ],
+  "held_piece_supplier": {
+    "blob": "d8f2a72059aea8d0a2a37702ec95cf7017c2f31c",
+    "sha256": "517644dd25d04d697027d8559837c4c79a687198f548cf8d8470debc236f9a16",
+    "owner": "f5517acf2efd614bfcecbc3b3bc7f3eecf5ce4e9",
+    "owner_sha256": "807635b94b95649ff478af30cc891f117b4787fc76a1a475749c489fb427def0",
+    "independent_full_peer": "7a941317e67fe215d27ae6362a4c7d6b2f37b373",
+    "independent_peer_sha256": "0919152110fa4dcaf74c2ff976f472b18b8fd67e8d218adc62fe11fc0d60c9e2",
+    "preserved": "Select final286 with explicit StateNeighborhood import; original285 is not silently reinstated."
+  },
+  "actual_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferencePieceInequality",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferencePieceInequality.lean",
+      "blob": "b9be621151ca4757fe041997db8cc11afe13b01a",
+      "reachable": true,
+      "sha256": "6de4fdcb894add8edb408ae7abeffd381eab9a409d0fc8d2c099f24d1b00c59b",
+      "lines": 44,
+      "read_scope": "complete source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalActualWholeGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalActualWholeGeometry.lean",
+      "blob": "d82f602e7088470fbfc9c9f05f38f4d6432fc824",
+      "reachable": true,
+      "sha256": "b2e32adec83f1d401687f8365ecc59e16a99fa5a4abcbf138d3595f9bd7dffea",
+      "lines": 109,
+      "read_scope": "complete source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aActualMaterialComparison",
+      "path": "src/ContinuousFlexibility/Analysis/N07aActualMaterialComparison.lean",
+      "blob": "07f326d248a88a0a78e561ed2967a7b060008d6e",
+      "reachable": true,
+      "sha256": "8ca15e75808a72b55d0c98fb51794de30d61ec28f3c4d40b5a4887ec8995a918",
+      "lines": 213,
+      "read_scope": "complete source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aMaterialLocalWindow",
+      "path": "src/ContinuousFlexibility/Analysis/N07aMaterialLocalWindow.lean",
+      "blob": "c1736f076aaf29b8a7452f71471e69338f6e0a5a",
+      "reachable": true,
+      "sha256": "829f03ca4159b30af3d31fd30248524fd422f6884dd31153991ec19778bcfa1d",
+      "lines": 123,
+      "read_scope": "complete source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aMaterialPieceBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N07aMaterialPieceBounds.lean",
+      "blob": "321fa9566f12829d7c6769789a9b51d2fa13fc1f",
+      "reachable": true,
+      "sha256": "a452494a4445a85e2261f014c14034ca704cb976449d652b833af2e0a5fb888e",
+      "lines": 128,
+      "read_scope": "complete source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aSampleEnvelopes",
+      "path": "src/ContinuousFlexibility/Analysis/N07aSampleEnvelopes.lean",
+      "blob": "0cc657b5ea25b922a5676dc0a8c0f6dbda938ba7",
+      "reachable": true,
+      "sha256": "2771c0d74dd4b7c69a238496b9dfdb72509da0c273dee70c918e581754684898",
+      "lines": 56,
+      "read_scope": "complete source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aInverseChartDisplacement",
+      "path": "src/ContinuousFlexibility/Analysis/N07aInverseChartDisplacement.lean",
+      "blob": "a8663ec60a6b5c8c28a19bdc73aef2077cc056a4",
+      "reachable": true,
+      "sha256": "1da709019a54d937724685fc3a587e7abac13d8c2bd55c0f69ef4bd864c05d7d",
+      "lines": 111,
+      "read_scope": "complete source"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aMaterialProductBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N07aMaterialProductBounds.lean",
+      "blob": "705984daec9322d629166432628ecd887534171f",
+      "reachable": true,
+      "sha256": "cb6614c253d91ae45cc383551456cd0b345acd5e78ad2e4117a549560c84bf90",
+      "lines": 134,
+      "read_scope": "complete source"
+    }
+  ],
+  "additional_actual_definitions": [
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "check": "canonicalCurrentPoint literally K.inverseChart z m (K.chart reference m p); referencePhysicalPieceOpen is Ioo physical bounds times univ; referenceBounds, referenceDomain, charts and partition projections checked."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateNeighborhood",
+      "blob": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+      "check": "reference_mem_stateNeighborhood exact S/C/base/hε call; visible through final286."
+    }
+  ],
+  "pinned_mathlib": {
+    "commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "declarations": [
+      {
+        "module": "Mathlib.Analysis.Calculus.ContDiff.Defs",
+        "blob": "e7fd4979f58f787927500713547b3671402ae782",
+        "name": "ContDiffAt.differentiableAt_iteratedFDeriv",
+        "signature": "ContDiffAt 𝕜 n f x and (m : Nat∞ω) < n give DifferentiableAt 𝕜 (iteratedFDeriv 𝕜 m f) x.",
+        "application": "n<=2 yields n<3 by omega/exact_mod_cast, then continuousAt.norm.continuousWithinAt."
+      },
+      {
+        "module": "Mathlib.Analysis.Calculus.ContDiff.FTaylorSeries",
+        "blob": "ad3dee4ba3e3f6a9fd4030b170538f3f7d6f7099",
+        "name": "Filter.EventuallyEq.iteratedFDeriv",
+        "signature": "h : f1 =ᶠ[nhds x] f2 gives h.iteratedFDeriv 𝕜 n : iteratedFDeriv 𝕜 n f1 =ᶠ[nhds x] iteratedFDeriv 𝕜 n f2.",
+        "application": "The same file uses (h.iteratedFDeriv 𝕜 n).eq_of_nhds; both local-to-global substitutions in this source have the correct direction."
+      }
+    ]
+  },
+  "mathematical_checks": [
+    "The finite actual piece supplier fixes z then returns e before all pieces, points and q0..2/tau1..2 orders, retaining the exact T,K and sample T.sample(K.cell m).",
+    "The material ratio supplier returns r>=1 and M(sample)/M(p)<=r on the same reference physical piece. M(p)>0 is obtained from IsMaterialData's true 1<=M, not an E0 floor.",
+    "The complete product e*r is made subpower first, then one_power gives |e*r|<=B*M(sample) with B>0. Multiplying M(sample)<=r*M(p) by B and cancelling the strictly positive r proves e<=B*M(p), with no extra point-dependent exponent or sample replacement.",
+    "WholeCanonicalTransportQualitative has exactly the C3, map/period/reflection, actual per-piece field and q positivity clauses destructured here. Only its genuine global maps and local field identities are used; it supplies no desired numerical transport bound.",
+    "On an open reference piece, hfields gives actual global tau equal to canonicalCurrentPoint and actual q equal to Href/Hcurrent(tau). These point identities form actual neighborhood germs. The pinned iteratedFDeriv congruence transfers their genuine jets, including q order zero.",
+    "C3 of each given global map implies continuity of all normed jets through order2. The right hand B*M is continuous on the actual annular open set by the material smoothness clause. The exact reference-partition AE extension then passes all piece inequalities through root/cut complements.",
+    "The second public theorem selects the material window delta, then one base'/eta via n07a_inverseChart_material_displacement, before z, tau, m and p. It does not choose state-dependent neighborhoods.",
+    "For p in the reference piece, y=Fref(p) lies in the true canonicalOpen; the reference left inverse gives Gref(y)=p. The supplied actual piece identity gives Gcurrent(y)=tau(p). These exact equalities transform the existing displacement estimate into |tau(p).fst-p.fst|<=delta*ell(p.fst).",
+    "The window comparison is evaluated at the original physical point and its actual image. Both are in radialCore by referenceBounds and the given true MapsTo. It yields the correct Hforward and Mforward projections without comparing cell indices or asserting movingPhysicalPiece=referencePhysicalPiece.",
+    "Material ratio continuity follows independently from actual H/M smoothness, tau continuity, true MapsTo and denominator positivity. The same reference-partition theorem extends both <=exp(1) bounds to every annular point.",
+    "No E0>=1, final PrimitiveGeometry/transport certificate, unwrapped-angle zero-order bound, new witness or changed T/K/sample is introduced. Existing CurrentJets and ReferenceJets remain explicit inputs."
+  ],
+  "quantifiers": {
+    "first": "Given the original admissible z and given global tau/q with the qualitative certificate, one B>0 precedes all annular points and the two finite derivative families.",
+    "second": "One base'>=base and one 0<eta<=epsilon precede every z in the smaller sector neighborhood and every actual compatible tau; the bound exp(1) is common.",
+    "remaining": "The common exponent A=1/positive scalar assembly and state-to-sector existential wrapper are not claimed by this source."
+  },
+  "import_verification": {
+    "reused_graph": "6d4933e47763157649c2ccafdfd67b05f74809a6",
+    "roots": [
+      "ContinuousFlexibility.Analysis.CanonicalTransportPieceJetEnvelope",
+      "ContinuousFlexibility.Analysis.CanonicalReferencePieceInequality",
+      "ContinuousFlexibility.Analysis.CanonicalActualWholeGeometry",
+      "ContinuousFlexibility.Analysis.N07aActualMaterialComparison",
+      "ContinuousFlexibility.Analysis.N07aMaterialLocalWindow"
+    ],
+    "upstream_nodes": 853,
+    "with_new_source": 854,
+    "missing": [],
+    "cycles": [],
+    "retained_blob_mismatches": [],
+    "explicit_overrides": "Only final held286 and actual184 AE44 b9be selected; all other reachable provider blobs matched the complete actual184 tree.",
+    "no_fresh_full_repository_graph_or_body_scan": true
+  },
+  "names": {
+    "public_names": [
+      "ContinuousFlexibility.Analysis.n04_referenceCurrent_transport_global_jet_bounds",
+      "ContinuousFlexibility.Analysis.n04_referenceCurrent_transport_global_material_ratios"
+    ],
+    "warnings": [],
+    "collisions": [],
+    "scope": "Existing four explicit indices and freshly read next81, not generated declarations/fullmain fresh scan."
+  },
+  "findings": [],
+  "limitations": [
+    "No Lean elaboration, local compilation or CI run was performed for this source.",
+    "The actual184 tree is an exact static binding, not a claim that its run is fully green.",
+    "This does not construct CurrentJets, finish the 15 primitive material jets, or finish the same-witness Realization assembly."
+  ],
+  "actions": {
+    "source_modified": false,
+    "new_Lean": false,
+    "active_index_or_refs_modified": false,
+    "CI_queried": false,
+    "local_Lean": false
+  }
+}

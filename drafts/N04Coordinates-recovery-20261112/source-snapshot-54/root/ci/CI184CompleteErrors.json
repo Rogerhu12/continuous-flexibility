@@ -1,0 +1,32 @@
+{
+  "schema": "n04-complete-ci-errors/v1",
+  "round": 184,
+  "head": "91aabb8b96f6d7571bc5bd6a2142a58d84738dc1",
+  "tree": "874193e6ca8080da8101554fe92e30348161dba0",
+  "run": 43347207316,
+  "job": 131629331564,
+  "log": {
+    "blob": "9afb640b8f060eccbefc5216f012911ad823d57e",
+    "sha256": "098373bc32e21e46921de63451a563f968e9b2262f7eebb104c4ba32fa8a056c",
+    "bytes": 68763
+  },
+  "errors": [
+    {
+      "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:62:15: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached",
+      "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:62:15: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+      "lines": 5
+    },
+    {
+      "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:77:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached",
+      "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:77:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+      "lines": 5
+    }
+  ],
+  "completeness": "Each actual diagnostic has a complete five-line timeout message, ends before the next error or successful target, and has no omitted40-line goal. Joblog downloaded exactly once after completed failure; no ZIP needed.",
+  "fresh_compiled": [
+    "ContinuousFlexibility.Analysis.N04EndpointCircleFixedBaseBounds",
+    "ContinuousFlexibility.Analysis.CanonicalReferencePieceInequality"
+  ],
+  "full": "skipped",
+  "credit": 0
+}

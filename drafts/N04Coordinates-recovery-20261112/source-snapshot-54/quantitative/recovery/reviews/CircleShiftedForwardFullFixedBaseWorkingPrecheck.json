@@ -1,0 +1,180 @@
+{
+  "schema": "n04-independent-static-precheck-v1",
+  "status": "changes_required_before_final_freeze",
+  "reviewer": "/root/quantitative_route",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "subject": {
+    "git_blob": "52bc280f8a817b5afac75d049e0c5d01d0366997",
+    "sha256": "c5d4febf98bdb2a80960fb3e4d81816f7b0e1d14eba3b88da24a852eab74bb2d",
+    "utf8_bytes": 10258,
+    "lines": 203,
+    "public_declarations": [
+      "ContinuousFlexibility.Statements.circleShiftedChartCompose_fullJet_eq_ordered",
+      "ContinuousFlexibility.Statements.circleShiftedChartCompose_fullJets_fixedBase_oneHigh"
+    ]
+  },
+  "input_plan": {
+    "git_blob": "f81ad4bb45fb3a85c6d82683a3e0af16865d41db"
+  },
+  "selection": {
+    "main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "mathlib": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "forward_supplier": "eff7a91bcc29fb4e6f13d24d2813849b70eb4e90",
+    "forward_supplier_owner": "2da983637a31cb8bbdcb34576276c98d9d9d8303",
+    "forward_supplier_peer": "f48f6eeb9f6a8e0bd6acbdbfc609569269364189"
+  },
+  "reading": {
+    "working_source": "all203 lines read; full proof and both complete public headers assessed",
+    "providers": [
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+        "git_blob": "eff7a91bcc29fb4e6f13d24d2813849b70eb4e90",
+        "sha256": "afae749be22c550a897c45755f456bade73f684a52ca65ca50cd6c02cfbf8a58",
+        "utf8_bytes": 8897,
+        "lines": 171,
+        "read_scope": "complete171; exact orderedJet/kernel and fixed-base numerical suppliers, selected CI184 source; no successful compilation inferred"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleChartCompositionJets",
+        "git_blob": "78ee43e48a7c8104ef977bd527f82f572f0ba107",
+        "sha256": "26d8489820d9b56af3f99caa2b7633aecc5cb475776d6c484698f518c517b3a6",
+        "utf8_bytes": 18723,
+        "lines": 367,
+        "read_scope": "complete367; actual full joint scalar jet, prod_single_replacement and circleChartCompositionJets_apply"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleCompositionSmoothDirections",
+        "git_blob": "e18aa8ce1e77ebdc960d721a286e9ffdb7b58632",
+        "sha256": "aa517f48d3ea24278d0f4b7ef1b1a7e23547d22ee54b5cd09d1af73f8d259def",
+        "utf8_bytes": 5725,
+        "lines": 112,
+        "read_scope": "complete112; actual full-J existence and decode formula"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+        "git_blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+        "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+        "utf8_bytes": 9718,
+        "lines": 204,
+        "read_scope": "complete204; multilinear_bound_of_unitBall applied to genuine J.D"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.SmoothDirectionsAffine",
+        "git_blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+        "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+        "utf8_bytes": 5346,
+        "lines": 124,
+        "read_scope": "complete124; SmoothDirections.unique and preserved derivatives"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.CircleTranslationUniformBounds",
+        "git_blob": "29683e9c974fecbcd03fef36251ebb8b0061c485",
+        "sha256": "7ef561296693115b33d9daa18e66efb1778b028ac5d558696449a73af322b79f",
+        "utf8_bytes": 6812,
+        "lines": 144,
+        "read_scope": "exact public translation decode/grading interfaces and shift call sites"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+        "git_blob": "bc38b3601334a7b76a3eda9f3602c4d3b2440423",
+        "sha256": "8970cb3def322b3ecaf1d4c717754fc68f57d4a63d4ed82023a7d4fae5ac9b09",
+        "utf8_bytes": 23021,
+        "lines": 512,
+        "read_scope": "exact tameJetSize definition and surrounding scalar contracts"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.TameLocalCalculus",
+        "git_blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+        "sha256": "6952ac2501bd38f0f6d51b1633f52d30ed1820f9380bd6dd58ebc24c601e1991",
+        "utf8_bytes": 11512,
+        "lines": 250,
+        "read_scope": "exact pairGrading definition/apply contract"
+      }
+    ],
+    "pinned_apis": [
+      {
+        "path": "Mathlib/Algebra/BigOperators/Fin.lean",
+        "git_blob": "95092dd72334eb133dfc410d6d796b4cacc0fdfc",
+        "sha256": "8ec6ee70bae9af42db59b82a1b7e8f1b3056d5e9dd358d9f7cc8c58746ca7dd2",
+        "utf8_bytes": 31637,
+        "lines": 801,
+        "declarations": [
+          "Fin.prod_univ_succAbove",
+          "Fin.sum_univ_succAbove (generated to_additive)"
+        ],
+        "scope": "exact signatures and proof at pinned revision"
+      },
+      {
+        "path": "Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+        "git_blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+        "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+        "utf8_bytes": 24303,
+        "lines": 517,
+        "declarations": [
+          "iteratedDeriv_comp_add_const"
+        ],
+        "scope": "exact function equality at pinned revision"
+      },
+      {
+        "path": "Mathlib/Tactic/Ring/Compare.lean",
+        "git_blob": "072207e46a1d242f32d15a7db1ced0860d3808a5",
+        "sha256": "deacf6b6076053467cdd362f36853033aefe83ae2b7a3650f73158f7d3063005",
+        "utf8_bytes": 12883,
+        "lines": 265,
+        "declarations": [
+          "add_le_add_left"
+        ],
+        "scope": "lines87-90 directly restate _root_.add_le_add_left, concluding b+a<=c+a"
+      }
+    ]
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "line": 159,
+      "kind": "definite_operand_order_mismatch",
+      "before": "add_le_add_left (hq horder x.1) 1",
+      "required_replacement": "add_le_add le_rfl (hq horder x.1)",
+      "reason": "The actual root API gives q(H')x.1+1<=q(H)x.1+1; hp requires 1+q(H')x.1<=1+q(H)x.1. The bilateral add call matches the required order."
+    },
+    {
+      "id": "F2",
+      "lines": [
+        178,
+        179
+      ],
+      "kind": "expected_goal_elaboration_hardening",
+      "before": "(by simpa only [mul_one] using add_le_add hm hz).trans hfit",
+      "suggested_replacement": "by refine le_trans ?_ hfit; simpa only [mul_one] using add_le_add hm hz",
+      "reason": "Supply the intermediate target before the tactic proof; same scalar inequality and no new constant. Static risk, not a reported compilation failure."
+    },
+    {
+      "id": "F3",
+      "line": 199,
+      "kind": "explicit_local_alias_elaboration_hardening",
+      "before": "(by ring)",
+      "suggested_replacement": "(by dsimp only [A]; ring)",
+      "reason": "This particular trans_eq must identify C*R*A+(n+1)*K*A with the target whose affine factor is expanded. Explicitly unfold only A. Static hardening, not a reported compilation failure."
+    }
+  ],
+  "mathematical_checks": [
+    "Full joint order n+1 is the ordered (n+1)-kernel plus all n-kernels indexed by each omitted source-direction slot. Fin.succAbove enumeration is exact and uses no division by a decoded direction.",
+    "The full decoded jet is obtained from genuine smoothDirections existence and uniqueness, then transported to the supplied J. No replacement representative is used in the final bound.",
+    "One base and one loss come from the actual selected171 supplier before n,R,s,travel,J,x,v. C at n and K at n-1 are selected before travel/J; total constant is C*R+n*K.",
+    "R>=1 controls all unit-ball direction first components and source second components. H'=s+(n-1+loss)<=H=s+(n+loss); monotonicity and the exact omitted-slot sum account for every high factor once.",
+    "The n=0 branch uses actual inverseForwardJet_zero and J.zero, including the empty sum/product normalization.",
+    "The final public continuous multilinear unit-ball theorem is applied to original J.D n x. Its multilinearTameSize is definitionally the displayed tameJetSize with high index s+(n+loss). No algebraic-map substitute or B(n) low-base weakening is used.",
+    "No fourth definite source/API issue was found in the assessed interfaces."
+  ],
+  "boundaries": {
+    "compiled": false,
+    "local_lean_or_elaboration": false,
+    "source_edited": false,
+    "active_refs_ci_changed": false,
+    "final_source_pass": false,
+    "final_successor_still_required": true,
+    "full_repository_name_scan": false,
+    "closure_note": "Owner reports285 upstream providers/461 project edges for the four imports; final graph and final source bytes remain to be bound. This precheck does not independently recertify the entire graph."
+  }
+}

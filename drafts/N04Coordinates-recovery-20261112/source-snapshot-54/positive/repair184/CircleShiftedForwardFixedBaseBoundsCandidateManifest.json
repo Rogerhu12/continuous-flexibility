@@ -1,0 +1,130 @@
+{
+  "schema": "n04-ci-minimal-repair-candidate/v1",
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "artifact_path": "positive/repair184/CircleShiftedForwardFixedBaseBoundsCandidateManifest.json",
+  "active_base": {
+    "head": "91aabb8b96f6d7571bc5bd6a2142a58d84738dc1",
+    "tree": "874193e6ca8080da8101554fe92e30348161dba0",
+    "path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "eff7a91bcc29fb4e6f13d24d2813849b70eb4e90",
+    "sha256": "afae749be22c550a897c45755f456bade73f684a52ca65ca50cd6c02cfbf8a58",
+    "utf8_bytes": 8897,
+    "lines": 171,
+    "final_newline": true,
+    "previous_owner_git_blob": "2da983637a31cb8bbdcb34576276c98d9d9d8303"
+  },
+  "selected": {
+    "path": "positive/repair184/CircleShiftedForwardFixedBaseBounds.lean",
+    "intended_path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "85ff989e03a1281fbfbbfb7071a2f866819b581c",
+    "sha256": "db833e98ec374977606ea387ea672d17c91d0a3ff514c5aedba7488227f01a82",
+    "utf8_bytes": 9026,
+    "lines": 174,
+    "final_newline": true
+  },
+  "patch": {
+    "git_blob": "57cb377f5d8d5aa24a8b15dba7e227404edf9f26",
+    "sha256": "0a1a6cb7fb5931930ea2f132d6dbbe69ff2252bb3faad5dca98bb1d60b86c765",
+    "utf8_bytes": 621,
+    "lines": 12,
+    "final_newline": true,
+    "hunks": 1,
+    "added_lines": 3,
+    "deleted_lines": 0,
+    "net_lines": 3,
+    "exact_reverse": true
+  },
+  "exact_change": {
+    "insert_before": "variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {M : CircleModelData}",
+    "inserted_bytes": "local instance circleShiftedForwardFixedBasePairSMul (M : CircleModelData) :\n    SMul ℝ (M.Space × M.Space) := Prod.instSMul\n\n",
+    "unique_new_local_instance": "ContinuousFlexibility.Statements.circleShiftedForwardFixedBasePairSMul",
+    "purpose": "Make the concrete product scalar-action instance explicit, following the existing genuine circle composition and inverse sources. It is definitionally Prod.instSMul; there is no mathematical construction or changed family.",
+    "performance_limit": "Static review cannot establish that these default-budget timeouts are eliminated; only the next root-owned CI can establish that."
+  },
+  "complete_public_headers": [
+    {
+      "name": "circleShiftedChartCompose_orderedJet_eq_kernel",
+      "header": "theorem circleShiftedChartCompose_orderedJet_eq_kernel\n    (travel : ℕ → ℝ) {U : Set M.Space} (hU : IsOpen U)\n    (J : SmoothDirections (U ×ˢ univ) (fun z : M.Space × M.Space =>\n      circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2))\n    (n : ℕ) :\n    ∀ e ∈ U, ∀ (v : Fin n → M.Space) (y : M.Space),\n      inverseForwardJet J n e v y =\n        coupledCircleKernel hD hT hγ hM hI n n e\n          (circleTranslationContinuousLinear hM hT hD hγ travel y) v"
+    },
+    {
+      "name": "circleShiftedChartCompose_orderedJets_fixedBase_bound",
+      "header": "theorem circleShiftedChartCompose_orderedJets_fixedBase_bound :\n    ∃ base loss : ℕ, ∀ (n : ℕ) (R : ℝ), 1 ≤ R →\n      ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧\n        ∀ (travel : ℕ → ℝ) (U : Set M.Space) (hU : IsOpen U)\n          (J : SmoothDirections (U ×ˢ univ) (fun z : M.Space × M.Space =>\n            circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2)),\n          ∀ e ∈ U, M.grading base e ≤ R → ∀ v : Fin n → M.Space,\n            (∀ i, M.grading base (v i) ≤ R) → ∀ y : M.Space,\n              M.grading s (inverseForwardJet J n e v y) ≤ C *\n                ((1 + M.grading (s + (n + loss)) e +\n                    ∑ i, M.grading (s + (n + loss)) (v i)) * M.grading base y +\n                  M.grading (s + (n + loss)) y)"
+    }
+  ],
+  "same_existing_public_headers": true,
+  "same_all_proof_bytes": true,
+  "same_imports": [
+    "ContinuousFlexibility.Analysis.TameInverseExpressions",
+    "ContinuousFlexibility.Analysis.CoupledCircleCompositionCurveDerivative",
+    "ContinuousFlexibility.Analysis.CircleTranslationUniformBounds",
+    "ContinuousFlexibility.Analysis.TameMultilinearNormalization"
+  ],
+  "same_options": true,
+  "new_resource_options": [],
+  "actual_pattern_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleCompositionSmoothDirections",
+      "git_blob": "e18aa8ce1e77ebdc960d721a286e9ffdb7b58632",
+      "sha256": "aa517f48d3ea24278d0f4b7ef1b1a7e23547d22ee54b5cd09d1af73f8d259def",
+      "utf8_bytes": 5725,
+      "lines": 112,
+      "final_newline": true,
+      "actual_prefix": "local instance circleCompositionSmoothDirectionsPairSMul (S : CircleModelData) :\n    SMul ℝ (S.Space × S.Space) := Prod.instSMul"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds",
+      "git_blob": "1f55edbb185fe33327757a087479196cc8565e4f",
+      "sha256": "435088fc0bad2d63d09101dfcb8a2629cc24e5437f855867e41cac8368b2eb64",
+      "utf8_bytes": 15638,
+      "lines": 301,
+      "final_newline": true,
+      "actual_prefix": "local instance circleFixedBaseInversePairSMul (M : CircleModelData) :\n    SMul ℝ (M.Space × M.Space) := Prod.instSMul"
+    }
+  ],
+  "unchanged_actual_callees": {
+    "previous_full_review_git_blob": "f48f6eeb9f6a8e0bd6acbdbfc609569269364189",
+    "previous_candidate_git_blob": "cba4640db303d9ff4724df82fc03534268fc425c",
+    "scope": "The two theorem bodies and their complete public contracts are byte-identical to171. This delta does not introduce new imports or different mathematical providers."
+  },
+  "ci": {
+    "round": 184,
+    "run": 43347207316,
+    "job": 131629331564,
+    "complete_error_json_git_blob": "6766ed934d27570f0e06deb4bb7efd65690435ff",
+    "complete_error_json_sha256": "2c6be3c7d2b0004e29405fc65096a49590390a0cc1900354006ea87f2ee45aae",
+    "joblog_git_blob": "9afb640b8f060eccbefc5216f012911ad823d57e",
+    "joblog_sha256": "098373bc32e21e46921de63451a563f968e9b2262f7eebb104c4ba32fa8a056c",
+    "diagnostics": [
+      {
+        "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:62:15: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached",
+        "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:62:15: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+        "lines": 5
+      },
+      {
+        "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:77:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached",
+        "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:77:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+        "lines": 5
+      }
+    ],
+    "completeness": "Each actual diagnostic has a complete five-line timeout message, ends before the next error or successful target, and has no omitted40-line goal. Joblog downloaded exactly once after completed failure; no ZIP needed."
+  },
+  "budget": {
+    "net_new_Lean_lines": 3,
+    "resources_unchanged": true,
+    "no_duplicate_source_archive_required": "Preserve the exact patch relative to active184 bytes; parent owns backup/activation."
+  },
+  "invariants": {
+    "same_witnesses": true,
+    "same_tower": true,
+    "same_base_loss_order": true,
+    "same_source_normalization": true,
+    "same_material_weight": true,
+    "no_local_Lean_or_elaboration": true,
+    "no_active_ref_or_index_changes": true,
+    "no_CI_query_or_download": true
+  },
+  "persistence": "Git blob exact UTF-8 readback; no local availability claim",
+  "peer_review": "PENDING_ROOT_FULL_SOURCE_AND_DELTA_REVIEW"
+}

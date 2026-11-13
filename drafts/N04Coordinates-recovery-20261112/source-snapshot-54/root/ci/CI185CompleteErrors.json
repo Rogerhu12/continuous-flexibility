@@ -1,0 +1,29 @@
+{
+  "schema": "n04-complete-ci-errors/v1",
+  "round": 185,
+  "head": "ac176dbd9f00a76e7c1ec1c0d7c97bdb93626f5c",
+  "tree": "64a4d0ed5ffafabc9aa75f0811a57809370392ef",
+  "run": 43348582859,
+  "job": 131633809897,
+  "log": {
+    "blob": "bf85be1f2a8fa0a4ca7476aafe5b7f971107f56a",
+    "sha256": "735c42f163377d77f13da46a5b8d4ccd31dff6020c19dfcfe06f24b85dbdc6dd",
+    "bytes": 68521
+  },
+  "errors": [
+    {
+      "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:65:15: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached",
+      "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:65:15: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+      "lines": 5
+    },
+    {
+      "header": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:80:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached",
+      "text": "error: src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean:80:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+      "lines": 5
+    }
+  ],
+  "completeness": "Both emitted error blocks are complete five-line timeout diagnostics; no40-line truncation or omitted goal. Original completed job log downloaded once; no artifact needed.",
+  "fresh_compiled_project_modules": 0,
+  "full": "skipped",
+  "credit": 0
+}

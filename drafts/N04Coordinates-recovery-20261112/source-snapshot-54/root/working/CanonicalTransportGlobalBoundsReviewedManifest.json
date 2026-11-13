@@ -1,0 +1,51 @@
+{
+  "schema": "n04-global-transport-reviewed-owner/v1",
+  "owner": "/root",
+  "status": "FULL_STATIC_PEER_PASS_HELD_UNCOMPILED",
+  "source": {
+    "module": "ContinuousFlexibility.Analysis.CanonicalTransportGlobalBounds",
+    "path": "src/ContinuousFlexibility/Analysis/CanonicalTransportGlobalBounds.lean",
+    "blob": "94aa073f7aff6b010b18fa65e26167978711aa5e",
+    "sha256": "fcc95720d1dbe0711d6b905a76be759a05560ad73e3fa2acc71cf45aed8cac1f",
+    "bytes": 9496,
+    "lines": 178,
+    "imports": [
+      "ContinuousFlexibility.Analysis.CanonicalTransportPieceJetEnvelope",
+      "ContinuousFlexibility.Analysis.CanonicalReferencePieceInequality",
+      "ContinuousFlexibility.Analysis.CanonicalActualWholeGeometry",
+      "ContinuousFlexibility.Analysis.N07aActualMaterialComparison",
+      "ContinuousFlexibility.Analysis.N07aMaterialLocalWindow"
+    ]
+  },
+  "candidate": {
+    "blob": "18837c042fb33ab687fceb2e008239c30a70a321",
+    "sha256": "7b3b4de4430c6c1d0d75a395d5c5538800b806d2d58d6095cab6ae1ebd4cfbbb"
+  },
+  "peer": {
+    "reviewer": "/root/audit_coordinates",
+    "blob": "de261ed1adae2d1c5ec55686509b589541ad3a96",
+    "sha256": "13c1ff077ee7c113c688f9d4b56cbc60eddbbd78500cb6449ff9561963a055c1"
+  },
+  "source_unchanged_after_peer": true,
+  "source_and_candidate_exact_Git_readback": true,
+  "retained_actual_closure_matches184": true,
+  "reachable_nodes": 854,
+  "missing": 0,
+  "cycles": 0,
+  "public_names": [
+    "n04_referenceCurrent_transport_global_jet_bounds",
+    "n04_referenceCurrent_transport_global_material_ratios"
+  ],
+  "budget": {
+    "new_Lean_lines": 178,
+    "allocated_max": 200,
+    "no_CI_credit": true
+  },
+  "limitations": [
+    "Independently reviewed; not compiled.",
+    "This gives the two core numerical families; the final transport existential/common A=1 wrapper and state-to-sector conversion remain a short subsequent assembly.",
+    "The common E0 ratio exponent must use materialE0_rpow_le_of_exponent_le at0<=1 with original T; M>=1 does not imply E0>=1.",
+    "No new CurrentJets, material15 jets, primitive transmission or final Realization is claimed."
+  ],
+  "remaining": "Common A=1 and state/existential transport assembly; all actual CurrentJets and material15 construction; exact final Realization."
+}

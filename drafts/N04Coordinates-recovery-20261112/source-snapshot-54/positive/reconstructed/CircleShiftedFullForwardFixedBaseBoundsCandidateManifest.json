@@ -1,0 +1,344 @@
+{
+  "schema": "n04-owned-actual-source-candidate/v1",
+  "status": "FROZEN_SOURCE_CANDIDATE_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "artifact_path": "positive/reconstructed/CircleShiftedFullForwardFixedBaseBoundsCandidateManifest.json",
+  "source": {
+    "archive_path": "positive/reconstructed/CircleShiftedFullForwardFixedBaseBounds.lean",
+    "intended_path": "src/ContinuousFlexibility/Analysis/CircleShiftedFullForwardFixedBaseBounds.lean",
+    "git_blob": "b0432b0c9033f1655fb127f705c00d772c255a44",
+    "sha256": "ac05f36caca3c4b9261abb81f35187c82847b30081b154937de931878e11bf39",
+    "utf8_bytes": 10419,
+    "lines": 206,
+    "final_newline": true
+  },
+  "historical_working_source": {
+    "archive_path": "positive/working/CircleShiftedFullForwardFixedBaseBounds.lean.txt",
+    "git_blob": "52bc280f8a817b5afac75d049e0c5d01d0366997",
+    "sha256": "c5d4febf98bdb2a80960fb3e4d81816f7b0e1d14eba3b88da24a852eab74bb2d",
+    "utf8_bytes": 10258,
+    "lines": 203,
+    "final_newline": true,
+    "status": "UNFROZEN_WORKING_DRAFT_NOT_REVIEWED_NOT_COMPILED",
+    "supersession": "Preserved exactly; only three local proof edits select this final203 candidate. Historical bytes are not overwritten."
+  },
+  "exact_patch": {
+    "path": "positive/reconstructed/CircleShiftedFullForwardFixedBaseBoundsWorkingToCandidate.patch",
+    "git_blob": "a902fec5bd816a712dc5c2d605d018d3adb39542",
+    "sha256": "e6be3db8a43127b429d6e0f3e71c67105ec698e0137f94c7fd7229be75541cca",
+    "utf8_bytes": 2240,
+    "lines": 41,
+    "final_newline": true,
+    "hunks": 4,
+    "added": 7,
+    "deleted": 4,
+    "replacements": [
+      {
+        "id": "typed_deleted_slot_transitivity",
+        "old": "              q base (w i).2 + q H' (w i).2 ≤ A :=\n          (by simpa only [mul_one] using add_le_add hm hz).trans hfit",
+        "new": "              q base (w i).2 + q H' (w i).2 ≤ A := by\n          refine le_trans ?_ hfit; simpa only [mul_one] using add_le_add hm hz",
+        "reason": "Give the intermediate comparison an expected type instead of invoking .trans on an untyped tactic expression."
+      },
+      {
+        "id": "unfold_local_affine_factor",
+        "old": "((add_le_add hmain ((hsumq Finset.univ).trans hsumt)).trans_eq (by ring))",
+        "new": "((add_le_add hmain ((hsumq Finset.univ).trans hsumt)).trans_eq (by dsimp only [A]; ring))",
+        "reason": "Expose the same local A in the inner equality before polynomial normalization."
+      },
+      {
+        "id": "unambiguous_left_affine_addition",
+        "old": "add_le_add (add_le_add_left (hq horder x.1) 1)",
+        "new": "add_le_add (add_le_add le_rfl (hq horder x.1))",
+        "reason": "Use the typed 1+q_low ≤ 1+q_high comparison; avoid the opposite addition convention of the selected API."
+      },
+      {
+        "id": "concrete_circle_product_scalar_action",
+        "insert_before": "variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {M : CircleModelData}",
+        "inserted_bytes": "local instance circleShiftedFullForwardFixedBasePairSMul (M : CircleModelData) :\n    SMul ℝ (M.Space × M.Space) := Prod.instSMul\n\n",
+        "reason": "Use exactly Prod.instSMul as in the actual genuine circle tower112 and positive inverse301. Root explicitly authorized this +3 alongside the forward-provider repair."
+      }
+    ],
+    "reverse_recovers_all_working_bytes": true,
+    "all_four_complete_theorem_headers_identical": true,
+    "all_four_imports_identical": true,
+    "no_option_changes": true,
+    "all_proof_bytes_identical_to_final203": true
+  },
+  "public_declarations": [
+    {
+      "name": "circleShiftedChartCompose_fullJet_eq_ordered",
+      "visibility": "public",
+      "line": 59,
+      "header": "theorem circleShiftedChartCompose_fullJet_eq_ordered\n    (travel : ℕ → ℝ)\n    (J : SmoothDirections ((univ : Set M.Space) ×ˢ univ)\n      (fun z : M.Space × M.Space =>\n        circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2))\n    (n : ℕ) (x : M.Space × M.Space) (v : Fin (n + 1) → M.Space × M.Space) :\n    J.D (n + 1) x v =\n      inverseForwardJet J (n + 1) x.1 (fun i => (v i).1) x.2 +\n        ∑ i : Fin (n + 1), inverseForwardJet J n x.1\n          (fun j : Fin n => (v (i.succAbove j)).1) (v i).2",
+      "header_sha256": "41ed1f957c2a8760b3c46d6b52899690f22ff99f82f543e4d213a3ccd68b1e86"
+    },
+    {
+      "name": "circleShiftedChartCompose_fullJets_fixedBase_oneHigh",
+      "visibility": "public",
+      "line": 89,
+      "header": "theorem circleShiftedChartCompose_fullJets_fixedBase_oneHigh :\n    ∃ base loss : ℕ, ∀ (n : ℕ) (R : ℝ), 1 ≤ R → ∀ s : ℕ,\n      ∃ C : ℝ, 0 ≤ C ∧ ∀ (travel : ℕ → ℝ)\n        (J : SmoothDirections univ (fun x : M.Space × M.Space =>\n          circleShiftedChartComposeContinuousLinear hM hT hD hγ travel x.1 x.2)),\n        ∀ x : M.Space × M.Space, pairGrading M.grading M.grading base x ≤ R →\n        ∀ v : Fin n → M.Space × M.Space,\n          M.grading s (J.D n x v) ≤\n            C * tameJetSize (pairGrading M.grading M.grading) n s (n + loss) base x v",
+      "header_sha256": "8abeb33446dded681119bcc4ee90bf5adc3a48be4b60f04e071f82131ad86a5e"
+    }
+  ],
+  "private_declarations": [
+    {
+      "name": "fullForward_prod_erase",
+      "visibility": "private",
+      "line": 21,
+      "header": "private theorem fullForward_prod_erase {n : ℕ}\n    (h : Fin (n + 1) → ℝ) (i : Fin (n + 1)) :\n    (∏ j ∈ Finset.univ.erase i, h j) = ∏ j : Fin n, h (i.succAbove j)",
+      "header_sha256": "292211dfa3659cfaaa1f8b09eaa10fd50ade1c130bed49378426793dc2bf27ff"
+    },
+    {
+      "name": "fullForward_ordered_decode",
+      "visibility": "private",
+      "line": 37,
+      "header": "private theorem fullForward_ordered_decode\n    (travel : ℕ → ℝ)\n    (J : SmoothDirections ((univ : Set M.Space) ×ˢ univ)\n      (fun z : M.Space × M.Space =>\n        circleShiftedChartComposeContinuousLinear hM hT hD hγ travel z.1 z.2))\n    (n : ℕ) (e : M.Space) (v : Fin n → M.Space) (y : M.Space) (m : ℕ) (θ : ℝ) :\n    M.decode (inverseForwardJet J n e v y) m θ =\n      iteratedDeriv n (M.decode y m) (θ + travel m + M.decode e m θ) *\n        ∏ i, M.decode (v i) m θ",
+      "header_sha256": "29bb21c812ad032dfc545baebe245104960a90344117cf5f17daaa1fa1174228"
+    }
+  ],
+  "section_context": "variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {M : CircleModelData} (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hγ : 0 < γ) (hM : IsCircleModel T γ M) (hI : HasInterpolation M.grading); include hI precedes the private decode theorem and both public declarations.",
+  "actual_mathematics": {
+    "full_tower_identity": "The first public theorem proves the actual supplied J.D_(n+1) equals the ordered source term plus all n+1 deleted-source terms, using the existing genuine decoder tower and SmoothDirections.unique. No source slot is omitted.",
+    "fixed_choices": "Choose base and loss once from the reviewed ordered-kernel bound, before all n,R,s,travel,J,x,v. The parameter-order loss is n+loss; the numerical C is chosen before travel and the given full tower.",
+    "numerical_constant": "C_n*R + (n:Real)*C_(n-1), where n=0 contributes zero times C_(n-1). No new low-base choice depends on n.",
+    "unit_ball": "Normalize the actual continuous multilinear map J.D n x with current multilinear_bound_of_unitBall. Deleted-source terms have their high index promoted to s+(n+loss), and each high direction is counted once through Fin.sum_univ_succAbove.",
+    "weights": "The source, target and all numerical operations use exactly M.grading. For gamma=3/4 this preserves the material weight encoded by that same circle model; there is no unweighted wrapper or replacement model.",
+    "scope_limit": "This proves the full forward circle operation bound. It is not a final residual, corrected forcing, radial PDE or CurrentJets producer. All same-R/L/chi and buffer obligations remain separate."
+  },
+  "implementation_plan": {
+    "git_blob": "f81ad4bb45fb3a85c6d82683a3e0af16865d41db",
+    "sha256": "5a268532c5ea56df2f124f336206b62feaefef6248e2abe6ae8229d0705caca8"
+  },
+  "selected_graph": {
+    "git_blob": "b7adc37fa050ddbe10c58a34d5752c1d0e312d09",
+    "sha256": "fde9f33513306ea2a9a25cf88885e86f7bef9c47decbd3f0df3b6e54749e3533",
+    "utf8_bytes": 245687,
+    "lines": 5912,
+    "final_newline": true,
+    "node_count": 286,
+    "upstream_providers": 285,
+    "project_edges": 465,
+    "missing": [],
+    "cycles": [],
+    "predecessor_graph_git_blob": "95637435ae5e1c45a9ed6cbd699fb2e784920725",
+    "only_two_source_rebindings": true,
+    "same_edges_and_topology": true,
+    "state_neighborhood_not_imported": true,
+    "inverse_fixed_base_module_not_imported": true
+  },
+  "actual_providers": [
+    {
+      "key": "ForwardActualChartJets",
+      "module": "ContinuousFlexibility.Analysis.CircleChartCompositionJets",
+      "git_blob": "78ee43e48a7c8104ef977bd527f82f572f0ba107",
+      "sha256": "26d8489820d9b56af3f99caa2b7633aecc5cb475776d6c484698f518c517b3a6",
+      "utf8_bytes": 18723,
+      "lines": 367,
+      "final_newline": true,
+      "sha_matches": true,
+      "project_imports_match": true
+    },
+    {
+      "key": "ForwardGenuineDirections",
+      "module": "ContinuousFlexibility.Analysis.CircleCompositionSmoothDirections",
+      "git_blob": "e18aa8ce1e77ebdc960d721a286e9ffdb7b58632",
+      "sha256": "aa517f48d3ea24278d0f4b7ef1b1a7e23547d22ee54b5cd09d1af73f8d259def",
+      "utf8_bytes": 5725,
+      "lines": 112,
+      "final_newline": true,
+      "sha_matches": true,
+      "project_imports_match": true
+    },
+    {
+      "key": "ForwardCoupledRealization",
+      "module": "ContinuousFlexibility.Analysis.CoupledCircleCompositionRealization",
+      "git_blob": "c0b4ada33ad03e522aed5a3a52d8ef461bec9be3",
+      "sha256": "08ae5c8b3e993e1db595d5a4ee79e5711910bfac1f89a7871d7a42ced29223f0",
+      "utf8_bytes": 7809,
+      "lines": 151,
+      "final_newline": true,
+      "sha_matches": true,
+      "project_imports_match": true
+    },
+    {
+      "key": "ForwardTranslation",
+      "module": "ContinuousFlexibility.Analysis.CircleTranslationUniformBounds",
+      "git_blob": "29683e9c974fecbcd03fef36251ebb8b0061c485",
+      "sha256": "7ef561296693115b33d9daa18e66efb1778b028ac5d558696449a73af322b79f",
+      "utf8_bytes": 6812,
+      "lines": 144,
+      "final_newline": true,
+      "sha_matches": true,
+      "project_imports_match": true
+    },
+    {
+      "key": "ForwardUnique",
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsAffine",
+      "git_blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+      "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+      "utf8_bytes": 5346,
+      "lines": 124,
+      "final_newline": true,
+      "sha_matches": true,
+      "project_imports_match": true
+    },
+    {
+      "key": "ForwardInverseExpressions",
+      "module": "ContinuousFlexibility.Analysis.TameInverseExpressions",
+      "git_blob": "14ad46cae7d92dca46f5efd006f5260873046713",
+      "sha256": "5f19c405b830b56e9ad43319b2e9b306af3a27d840167fc29d592e9b9edaec56",
+      "utf8_bytes": 22877,
+      "lines": 490,
+      "final_newline": true,
+      "sha_matches": true,
+      "project_imports_match": true
+    },
+    {
+      "key": "FullJNormalization",
+      "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "git_blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "utf8_bytes": 9718,
+      "lines": 204,
+      "final_newline": true,
+      "sha_matches": true,
+      "project_imports_match": true
+    },
+    {
+      "key": "FullJElementary",
+      "module": "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+      "git_blob": "bc38b3601334a7b76a3eda9f3602c4d3b2440423",
+      "sha256": "8970cb3def322b3ecaf1d4c717754fc68f57d4a63d4ed82023a7d4fae5ac9b09",
+      "utf8_bytes": 23021,
+      "lines": 512,
+      "final_newline": true,
+      "sha_matches": true,
+      "project_imports_match": true
+    },
+    {
+      "key": "Repair184ForwardAfter",
+      "module": "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+      "git_blob": "85ff989e03a1281fbfbbfb7071a2f866819b581c",
+      "sha256": "db833e98ec374977606ea387ea672d17c91d0a3ff514c5aedba7488227f01a82",
+      "utf8_bytes": 9026,
+      "lines": 174,
+      "final_newline": true,
+      "sha_matches": true,
+      "project_imports_match": true
+    }
+  ],
+  "additional_project_provider": {
+    "module": "ContinuousFlexibility.Analysis.TameLocalCalculus",
+    "git_blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+    "sha256": "6952ac2501bd38f0f6d51b1633f52d30ed1820f9380bd6dd58ebc24c601e1991",
+    "used_public": [
+      "pairGrading_apply"
+    ],
+    "review_scope": "Products section and public API previously fully checked; the circle spaces supply all topology instances."
+  },
+  "pinned_mathlib": [
+    {
+      "repository": "leanprover-community/mathlib4",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Algebra/BigOperators/Fin.lean",
+      "git_blob": "95092dd72334eb133dfc410d6d796b4cacc0fdfc",
+      "sha256": "8ec6ee70bae9af42db59b82a1b7e8f1b3056d5e9dd358d9f7cc8c58746ca7dd2",
+      "utf8_bytes": 31637,
+      "lines": 801,
+      "final_newline": true,
+      "used_public": [
+        "Fin.prod_univ_succAbove",
+        "Fin.sum_univ_succAbove"
+      ]
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Data/Fin/SuccPred.lean",
+      "git_blob": "f80f72eb0667975bb4899c7433c7701c70cdb87c",
+      "sha256": "629c383404d781330bbbf2813eef3f7cf4ecc44a3ca11c6b8336285504c9626e",
+      "utf8_bytes": 40989,
+      "lines": 950,
+      "final_newline": true,
+      "used_public": [
+        "Fin.succAbove_ne"
+      ]
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "path": "Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "git_blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "utf8_bytes": 24303,
+      "lines": 517,
+      "final_newline": true,
+      "used_public": [
+        "iteratedDeriv_comp_add_const"
+      ]
+    }
+  ],
+  "independent_precheck": {
+    "reviewer": "/root/quantitative_route",
+    "scope": "Full203 working source and actual367/112/171/204/124/144 plus pair/tame definitions and pinned finite/iterated-derivative APIs read; three local findings, no fourth definite finding. Formal final-source peer remains pending.",
+    "three_findings": "One actual left-addition order mismatch; two static elaboration disambiguations (typed intermediate comparison and explicit local A unfolding). The latter two are not represented as observed compilation errors.",
+    "source_was_not_modified_by_reviewer": true,
+    "git_blob": "9d0a9b7473fd99c3316c98fb882e26dff2d26e42",
+    "sha256": "8054c184e6794b1d43ce00359de8bf546c81b3e8e79160328bceafbe0009082e",
+    "status": "changes_required_before_final_freeze; all three listed changes now applied",
+    "final_review_scope": "The final206 source and this selected174 provider still require the separate formal peer; the original working-source precheck is not mislabeled as final PASS."
+  },
+  "readiness_hold": {
+    "supplier_module": "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+    "failed171_git_blob": "eff7a91bcc29fb4e6f13d24d2813849b70eb4e90",
+    "selected174_git_blob": "85ff989e03a1281fbfbbfb7071a2f866819b581c",
+    "selected174_candidate_git_blob": "708e04c4e73467b1b9f670a58f9526ffb24ba508",
+    "selected174_owner_git_blob": "4d0596cfc70a650c6c66c67a70d84fce1f3ed9dd",
+    "selected174_peer_git_blob": "ecde2f928c634a4357035efffabf1428b98454c8",
+    "status": "Root has fully source-reviewed the174 minimal local product-instance repair. Its performance remains unverified until the next complete root-owned CI; no compilation or install-readiness claim is made for this206 candidate.",
+    "complete_CI184_diagnostics_git_blob": "6766ed934d27570f0e06deb4bb7efd65690435ff"
+  },
+  "budget": {
+    "authorized_original_max_lines": 203,
+    "explicit_parent_authorized_local_instance_delta": 3,
+    "selected_source_lines": 206,
+    "net_lines_relative_to_preserved203_working": 3,
+    "pair_group_net_delta": "174 forward +3 and206 fullJ +3, total +6; parent reports conservative draft19961 before any future credit.",
+    "archive_instruction": "Use the historical working203 .lean.txt plus the exact four-hunk7+/4- patch, or replace the working path; do not count another full206 Lean archive copy."
+  },
+  "persistence": {
+    "method": "Git blobs with exact UTF-8 readback",
+    "local_filesystem_claim": false,
+    "active_or_ref_changes": false,
+    "local_Lean_or_elaboration": false,
+    "CI_queries": false
+  },
+  "peer_review": "PENDING_FORMAL_FINAL_SOURCE_PEER",
+  "previous_final203": {
+    "git_blob": "0edc1a4ce9724b5b85573a652b68a6cc203bb66c",
+    "sha256": "fe84c56c065c86e9bf090071781ae5d41f1a75551d5389dc938799fc62f7de3d",
+    "utf8_bytes": 10286,
+    "lines": 203,
+    "final_newline": true,
+    "candidate_git_blob": "a39884e446e12d01476b28262dc10bb8a5a11630",
+    "scope": "The three precheck corrections are preserved exactly. The selected206 adds only the authorized concrete local product scalar-action instance."
+  },
+  "new_local_instance": {
+    "name": "ContinuousFlexibility.Statements.circleShiftedFullForwardFixedBasePairSMul",
+    "literal": "local instance circleShiftedFullForwardFixedBasePairSMul (M : CircleModelData) :\n    SMul ℝ (M.Space × M.Space) := Prod.instSMul\n\n",
+    "source_patterns": [
+      "e18aa8ce1e77ebdc960d721a286e9ffdb7b58632",
+      "1f55edbb185fe33327757a087479196cc8565e4f"
+    ],
+    "semantics": "Definitionally the existing componentwise scalar multiplication. No new mathematical input and no changed proof body."
+  },
+  "name_scope": {
+    "new_public_theorems": [
+      "circleShiftedChartCompose_fullJet_eq_ordered",
+      "circleShiftedChartCompose_fullJets_fixedBase_oneHigh"
+    ],
+    "new_local_instance": "ContinuousFlexibility.Statements.circleShiftedFullForwardFixedBasePairSMul",
+    "global_name_preflight": "Pending bounded group/name-index check; no full-repository collision-free claim yet."
+  }
+}

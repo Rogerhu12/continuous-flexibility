@@ -1,0 +1,41 @@
+{
+  "schema": "n04-minimal-ci-repair-independent-review/v1",
+  "reviewer": "/root",
+  "status": "FULL_SOURCE_AND_EXACT_DELTA_STATIC_PASS_UNCOMPILED",
+  "candidate": {
+    "blob": "708e04c4e73467b1b9f670a58f9526ffb24ba508",
+    "sha256": "7a4c7655f33874f4436fb2902664c34bacf0d9b226abdc3ba31916230de510c7"
+  },
+  "source": {
+    "path": "positive/repair184/CircleShiftedForwardFixedBaseBounds.lean",
+    "intended_path": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+    "git_blob": "85ff989e03a1281fbfbbfb7071a2f866819b581c",
+    "sha256": "db833e98ec374977606ea387ea672d17c91d0a3ff514c5aedba7488227f01a82",
+    "utf8_bytes": 9026,
+    "lines": 174,
+    "final_newline": true
+  },
+  "patch": {
+    "git_blob": "57cb377f5d8d5aa24a8b15dba7e227404edf9f26",
+    "sha256": "0a1a6cb7fb5931930ea2f132d6dbbe69ff2252bb3faad5dca98bb1d60b86c765",
+    "utf8_bytes": 621,
+    "lines": 12,
+    "final_newline": true,
+    "hunks": 1,
+    "added_lines": 3,
+    "deleted_lines": 0,
+    "net_lines": 3,
+    "exact_reverse": true
+  },
+  "scope": [
+    "Full171 mathematical source read in prior reviewf48f6eeb9f6a8e0bd6acbdbfc609569269364189; current full174 verified by exact forward and reverse insertion reconstruction. Both full public heads, four imports, every existing proof byte and every option unchanged.",
+    "Independently inspected the actual112-line CircleCompositionSmoothDirections e18aa8ce1e77ebdc960d721a286e9ffdb7b58632,301-line CirclePositiveInverseFixedBaseBounds1f55edbb185fe33327757a087479196cc8565e4f and266-line CircleCompositionUniformBounds c106d144ed51f41df90902c42a30c657ae361a33. Each explicitly chooses the same Prod.instSMul for the concrete circle product.",
+    "The added local instance is exactly Prod.instSMul. It supplies the existing componentwise scalar action, with no new mathematical assumption, changed J, kernel, source, low grading, loss, material or sample.",
+    "Read both complete five-line CI184 diagnostics from the preserved original joblog. One is at the generic derivative application and one at the second declaration; no omitted goal context or artifact extraction is required."
+  ],
+  "net_new_Lean_lines": 3,
+  "limitations": [
+    "Static review does not prove the timeout is resolved. Require next complete CI with unchanged200000-heartbeat and300-second limits.",
+    "The instance is local; no unrelated namespace attribute, transparency or resource option is altered. No draft credit before complete green."
+  ]
+}
