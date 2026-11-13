@@ -149,6 +149,17 @@ guard expected different line wrapping. The run also identified two
 small elaboration repairs in the reduction/cancellation lemmas, now
 addressed, and an inherited reference-chain failure in
 `N03RootEndpointMaterialJets`; the lead's subsequent repair `3e7dcfcf`
-has been merged. The full assembled obstruction is pending its first
-CI check. The original NegativeGeometry blueprint theorem is not marked
-complete.
+has been merged.
+
+The second run, `43418085638` at `eec2d271`, compiled the interface audit,
+height-multiplier preservation, negative reductions, admissible-gauge
+existence, and the gauge-value module. It found two pointwise-continuity
+elaboration errors in the jump module and a reference-identity simplification
+plus a large-record rewrite timeout in the gauge perturbation module.
+These have been replaced by explicitly typed scalar equalities, without
+raising heartbeat limits. The inherited reference-chain failure moved to
+`ActualReferenceRootFiniteMaterialData.lean:92`
+(`exists_bound_of_continuousOn` on a split line); the subnode does not
+import that module. The complete obstruction audit remains pending until
+its dependencies pass. The original NegativeGeometry blueprint theorem is
+not marked complete.

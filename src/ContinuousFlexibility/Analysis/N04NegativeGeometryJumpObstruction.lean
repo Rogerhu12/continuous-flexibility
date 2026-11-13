@@ -62,9 +62,11 @@ theorem n04NegativeGeometry_smooth_jump_contradiction
   have hc : ContinuousAt (fun _ : E => c) x := continuousAt_const
   have hd : ContinuousAt (fun _ : E => d) x := continuousAt_const
   have hf : ContinuousAt f x := by
-    simpa only [sub_add_cancel] using hfsub.add hc
+    have hsum : ContinuousAt (fun z : E => (f z - c) + c) x := hfsub.add hc
+    simpa only [sub_add_cancel] using hsum
   have hg : ContinuousAt g x := by
-    simpa only [sub_add_cancel] using hgsub.add hd
+    have hsum : ContinuousAt (fun z : E => (g z - d) + d) x := hgsub.add hd
+    simpa only [sub_add_cancel] using hsum
   have hfline : ContinuousAt (fun t : ℝ => f (γ t)) 0 :=
     hf.comp_of_eq hγ hγzero
   have hgline : ContinuousAt (fun t : ℝ => g (γ t)) 0 :=

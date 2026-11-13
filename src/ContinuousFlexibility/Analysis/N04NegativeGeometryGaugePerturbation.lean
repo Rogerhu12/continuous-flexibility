@@ -83,7 +83,8 @@ theorem n04NegativeGeometry_perturbedGauge_admissible
     refine ⟨href.1, href.2.1, ?_⟩
     funext p
     change G.Q (G.W.C.referenceState, 0) i p * (if (0 : ℝ) = 0 then 1 else φ i p) = 1
-    simp only [if_pos rfl, mul_one, href.2.2]
+    rw [if_pos (rfl : (0 : ℝ) = 0), mul_one]
+    exact congrFun href.2.2 p
   · intro z hz hs i
     have hf : N04NegativeGeometryHeightFactor
         (fun p => if z.2 = 0 then 1 else φ i p)
@@ -108,12 +109,20 @@ theorem n04NegativeGeometry_perturbedGauge_pulledHeight_positive
       G.pulledHeight η z m y /
         (if z.2 = 0 then 1 else φ i (positiveReferenceCylinderInverse (G.Y i) y)) := by
   classical
-  rw [n04NegativeGeometry_gauge_pulledHeight_positive
-    (n04NegativeGeometryPerturbedGauge G φ) η z m i hi hστ y,
-    n04NegativeGeometry_gauge_pulledHeight_positive G η z m i hi hστ y]
-  change G.H i (positiveReferenceCylinderInverse (G.Y i) y).1 /
-      (G.Q (G.lift η z) i (positiveReferenceCylinderInverse (G.Y i) y) *
-        (if z.2 = 0 then 1 else φ i (positiveReferenceCylinderInverse (G.Y i) y))) = _
-  rw [div_div]
+  let x : PolarPoint := positiveReferenceCylinderInverse (G.Y i) y
+  let A : ℝ := G.H i x.1
+  let Q₀ : ℝ := G.Q (G.lift η z) i x
+  let M : ℝ := if z.2 = 0 then 1 else φ i x
+  have hnew : (n04NegativeGeometryPerturbedGauge G φ).pulledHeight η z m y =
+      A / (Q₀ * M) := by
+    exact n04NegativeGeometry_gauge_pulledHeight_positive
+      (n04NegativeGeometryPerturbedGauge G φ) η z m i hi hστ y
+  have hold : G.pulledHeight η z m y = A / Q₀ :=
+    n04NegativeGeometry_gauge_pulledHeight_positive G η z m i hi hστ y
+  calc
+    (n04NegativeGeometryPerturbedGauge G φ).pulledHeight η z m y =
+        A / (Q₀ * M) := hnew
+    _ = (A / Q₀) / M := (div_div A Q₀ M).symm
+    _ = G.pulledHeight η z m y / M := congrArg (fun t : ℝ => t / M) hold.symm
 
 end ContinuousFlexibility.Analysis
