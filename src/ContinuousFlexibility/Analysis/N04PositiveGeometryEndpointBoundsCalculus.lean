@@ -81,7 +81,8 @@ theorem n04PositiveGeometry_endpointBounds_linear
   refine ⟨A, hA.1, fun x _ _ v => ?_⟩
   have hjet : (smoothDirectionsLinearOn L hU).D n x v =
       continuousLinearJets L n x v := by
-    simpa only [ContinuousLinearMap.id_apply] using
+    simpa only [smoothDirectionsLinearOn, smoothDirectionsLinear,
+      smoothDirectionsOfJets, ContinuousLinearMap.id_apply] using
       n04PositiveGeometry_endpointBounds_compLinear_apply (smoothDirectionsLinear L)
         (ContinuousLinearMap.id ℝ E) hU (fun _ _ => mem_univ _) n x v
   rw [hjet]
@@ -156,12 +157,14 @@ theorem N04EndpointFixedBaseBounds.prod
   refine (hKell R hR s).elim ?_
   intro AK hAK
   refine ⟨AJ + AK, add_nonneg hAJ.1 hAK.1, fun x hx hxR v => ?_⟩
-  have hj := (hAJ.2 x hx ((hp (le_max_left _ _) x).trans hxR) v).trans
+  have hj : q s (J.D n x v) ≤ AJ * tameJetSize p n s ell B x v :=
+    (hAJ.2 x hx ((hp (le_max_left BJ BK) x).trans hxR) v).trans
     (mul_le_mul_of_nonneg_left
-      (tameJetSize_mono hp (le_max_left _ _) (le_max_left _ _) n s x v) hAJ.1)
-  have hk := (hAK.2 x hx ((hp (le_max_right _ _) x).trans hxR) v).trans
+      (tameJetSize_mono hp (le_max_left ellJ ellK) (le_max_left BJ BK) n s x v) hAJ.1)
+  have hk : r s (K.D n x v) ≤ AK * tameJetSize p n s ell B x v :=
+    (hAK.2 x hx ((hp (le_max_right BJ BK) x).trans hxR) v).trans
     (mul_le_mul_of_nonneg_left
-      (tameJetSize_mono hp (le_max_right _ _) (le_max_right _ _) n s x v) hAK.1)
+      (tameJetSize_mono hp (le_max_right ellJ ellK) (le_max_right BJ BK) n s x v) hAK.1)
   change q s (J.D n x v) + r s (K.D n x v) ≤ _
   exact (add_le_add hj hk).trans_eq (add_mul AJ AK (tameJetSize p n s ell B x v)).symm
 

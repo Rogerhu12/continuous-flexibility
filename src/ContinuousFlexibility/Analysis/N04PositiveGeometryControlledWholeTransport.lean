@@ -78,8 +78,8 @@ theorem n04PositiveGeometry_exists_wholeComponentEndpointTransport_polynomial_en
   have hMtwo : 1 ≤ 2 * M := by linarith
   have hMM : M ≤ 2 * M := by linarith
   have hκhalf : (κφ / 2)⁻¹ ≤ 2 * M := by
-    simpa only [inv_div, div_eq_mul_inv] using
-      mul_le_mul_of_nonneg_left hκφinv (by norm_num : (0 : ℝ) ≤ 2)
+    rw [inv_div, div_eq_mul_inv]
+    exact mul_le_mul_of_nonneg_left hκφinv (by norm_num : (0 : ℝ) ≤ 2)
   have hang := rawEndpointAngularInterpolation_family (n + 1) hlc hcd hdr
     hκφ hκφone hMn hψ hψangle hψjets hψperiod hψodd
   dsimp only at hang ⊢

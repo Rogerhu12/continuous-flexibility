@@ -82,8 +82,9 @@ theorem n04PositiveGeometry_scalarTriangularInverse_norm
     have hs : |v.2| ≤ ‖v‖ := by simpa only [Real.norm_eq_abs] using norm_snd_le v
     exact (abs_sub _ _).trans ((add_le_add hs hAv).trans_eq (by ring))
   apply max_le
-  · exact (norm_fst_le v).trans (by
-      nlinarith only [norm_nonneg v, abs_nonneg ((A (0, 1))⁻¹), norm_nonneg A])
+  · have hcoef : 1 ≤ 1 + |(A (0, 1))⁻¹| * (1 + ‖A‖) := by positivity
+    exact (norm_fst_le v).trans (by
+      simpa only [one_mul] using mul_le_mul_of_nonneg_right hcoef (norm_nonneg v))
   · exact (mul_le_mul_of_nonneg_left hsub (abs_nonneg _)).trans (by
       nlinarith only [norm_nonneg v])
 
@@ -92,7 +93,7 @@ private theorem scalarTriangularInverse_common_bound
     (hA : ‖A‖ ≤ M) (hb : |(A (0, 1))⁻¹| ≤ M) :
     ‖n04PositiveGeometry_scalarTriangularInverse A‖ ≤ 3 * M ^ 2 := by
   have hp : |(A (0, 1))⁻¹| * (1 + ‖A‖) ≤ M * (1 + M) :=
-    mul_le_mul hb (add_le_add_left hA 1) (by positivity) (zero_le_one.trans hM)
+    mul_le_mul hb (add_le_add le_rfl hA) (by positivity) (zero_le_one.trans hM)
   apply (n04PositiveGeometry_scalarTriangularInverse_norm A).trans
   have hM2 : M ≤ M ^ 2 := by nlinarith only [hM]
   nlinarith only [hp, hM, hM2]

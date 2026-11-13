@@ -78,7 +78,7 @@ theorem n04PositiveGeometry_leftRootInverseCircle_decode
   have hi : circleAffineInverse (fun _ => 0) (sectorChartContinuousLinear S x) m θ =
       Function.invFun (n01RootLabel S C (liftSectorParameter S C x) m false) θ :=
     congrArg (fun f : ℝ → ℝ => Function.invFun f θ) (leftRootChart_lift hN x m)
-  exact hd.trans (by rw [sub_zero, hi])
+  exact hd.trans (congrArg₂ (fun r t : ℝ => r - t) hi (sub_zero θ))
 
 /-- Its tower is obtained from the actual positive inverse operator. -/
 def n04PositiveGeometry_leftRootInverseCircle_directions

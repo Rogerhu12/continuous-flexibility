@@ -61,7 +61,7 @@ theorem n04PositiveGeometry_rootInverseCircle_decode
           Function.invFun (n01RootLabel S C (liftSectorParameter S C x) m true) θ :=
         congrArg (fun f : ℝ → ℝ => Function.invFun f θ)
           (hN.sectorReturnTransportCircle_odd_lift hS hT x hx m)
-      exact hd.trans (by rw [sub_zero, hi])
+      exact hd.trans (congrArg₂ (fun r t : ℝ => r - t) hi (sub_zero θ))
 
 private theorem leftRootInverseCircle_fixedBaseBounds
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)

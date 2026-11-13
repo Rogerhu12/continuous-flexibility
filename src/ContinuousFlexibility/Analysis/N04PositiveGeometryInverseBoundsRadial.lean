@@ -61,9 +61,9 @@ theorem n04PositiveGeometry_radialCoefficientDomain_isOpen
     simp only [n04PositiveGeometry_radialCoefficientDomain, mem_setOf_eq,
       mem_iInter, mem_inter_iff]
   rw [he]
-  exact isOpen_iInter fun side =>
+  exact isOpen_iInter_of_finite fun side =>
     (isOpen_lt continuous_const (hc side 0)).inter
-      (isOpen_iInter fun j => isOpen_lt (hc side j).abs continuous_const)
+      (isOpen_iInter_of_finite fun j => isOpen_lt (hc side j).abs continuous_const)
 
 /-- The finite coefficient kernel is the literal two-collar radial
 interpolation, with the same fixed middle interval and collar widths. -/
@@ -109,7 +109,7 @@ theorem n04PositiveGeometry_radialKernel_contDiff
     isOpen_univ n l r c d hcd η hη hgap A hA J
   have hK : ContDiff ℝ ∞ (fun p : N04PositiveRadialCoefficients n × PolarPoint =>
       endpointFiberInterpolation n l r c d η (A p.1) p.2) := by
-    apply contDiff_iff_contDiffOn_univ.mpr
+    apply contDiffOn_univ.mp
     simpa only [univ_prod_univ] using smoothDirections_contDiffOn_finiteDimensional K
   exact hK.comp (contDiff_fst.prodMk (contDiff_snd.prodMk contDiff_const))
 
@@ -188,8 +188,12 @@ theorem n04PositiveGeometry_radialKernel_geometry
       A a side 0 θ = if side then r else l := rfl
   have hfirst (a : V) (side : Bool) (θ : ℝ) : κ ≤ A a side 1 θ := by
     have ha : κ < a.1 side 0 := (a.2 side).1
-    simpa only [A, n04PositiveGeometry_radialCoefficientField,
-      dif_pos (Nat.succ_pos n)] using ha.le
+    have hfin : (⟨0, Nat.succ_pos n⟩ : Fin (n + 1)) = 0 := by
+      apply Fin.ext
+      simp only [Fin.val_zero]
+    change κ ≤ if hj : 0 < n + 1 then a.1 side ⟨0, hj⟩ else 0
+    rw [dif_pos (Nat.succ_pos n), hfin]
+    exact ha.le
   have hbound (a : V) (side : Bool) (j : ℕ) (hj : 1 ≤ j)
       (hjn : j ≤ n + 1) (θ : ℝ) : |A a side j θ| ≤ M := by
     cases j with
@@ -268,7 +272,7 @@ def n04PositiveGeometry_endpointRadialInverseDirections
       (fun p : E × PolarPoint => C (p.1, p.2.2)) :=
     (JC.compLinear L (hU.prod isOpen_univ)
       (fun p hp => by rw [hL]; exact ⟨hp.1, mem_univ _⟩)).congrOn
-      (fun p _ => by rw [hL])
+      (fun p _ => congrArg C (hL p))
   let R : (E × PolarPoint) →L[ℝ] ℝ :=
     (ContinuousLinearMap.fst ℝ ℝ ℝ).comp (ContinuousLinearMap.snd ℝ E PolarPoint)
   let JR : SmoothDirections (U ×ˢ univ) (fun p : E × PolarPoint => p.2.1) :=

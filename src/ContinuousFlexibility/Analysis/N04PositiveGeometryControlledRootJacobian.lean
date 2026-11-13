@@ -49,6 +49,24 @@ private theorem root_absJacobian_eq_of_unit_firstJet
     rcases hσ with h | h <;> rw [h] <;> norm_num
   simpa only [abs_mul, hσabs, mul_one] using congrArg abs (hchain.symm.trans hJ)
 
+private theorem root_material_cost_of_unit_firstJet
+    {F M : PolarPoint → PolarPoint} {r σ θ P W : ℝ}
+    (hσ : σ = 1 ∨ σ = -1) (hP : 1 ≤ P) (hW : 1 ≤ W)
+    (hF : ContDiffAt ℝ ∞ F (r, θ))
+    (hjet : iteratedFDeriv ℝ 1 (fun p => F (rootProfileShift r σ p)) (0, θ) =
+      iteratedFDeriv ℝ 1 M (0, θ))
+    (hmodel : ContDiffAt ℝ ∞ M (0, θ) ∧ 0 < planeJacobian M (0, θ) ∧
+      (planeJacobian M (0, θ))⁻¹ ≤ 4 * (P * W ^ P)) :
+    |planeJacobian F (r, θ)|⁻¹ ≤ (4 * P) * W ^ (4 * P) := by
+  have hJac : |planeJacobian F (r, θ)| = planeJacobian M (0, θ) :=
+    (root_absJacobian_eq_of_unit_firstJet hσ hF hmodel.1 hjet).trans (abs_of_pos hmodel.2.1)
+  rw [hJac]
+  calc
+    _ ≤ 4 * (P * W ^ P) := hmodel.2.2
+    _ = (4 * P) * W ^ P := by ring
+    _ ≤ (4 * P) * W ^ (4 * P) := mul_le_mul_of_nonneg_left
+      (Real.rpow_le_rpow_of_exponent_le hW (by linarith)) (by linarith)
+
 /-- A fixed neighborhood and one material power control the reciprocal
 determinant of every original chart at every genuine root circle. -/
 theorem n04PositiveGeometry_actual_root_jacobian_material_cost
@@ -175,16 +193,7 @@ theorem n04PositiveGeometry_actual_root_jacobian_material_cost
     hM hχ.1 hχ.2.2
   have hF : ContDiffAt ℝ ∞ (K.chart z i) (r, θ) :=
     ((hA'.boundary z hzroot hs i).2.2.2.2.1 (r, θ) hident.1).1
-  have hJac : |planeJacobian (K.chart z i) (r, θ)| =
-      planeJacobian (extendedRootEvenOddChart G) (0, θ) := by
-    exact (root_absJacobian_eq_of_unit_firstJet (n01ComponentRootOrientation_eq side)
-      hF hmodel.1 (hident.2.2.2.2.1 1)).trans (abs_of_pos hmodel.2.1)
-  change |planeJacobian (K.chart z i) (r, θ)|⁻¹ ≤ (4 * P) * W ^ (4 * P)
-  rw [hJac]
-  calc
-    _ ≤ 4 * M := hmodel.2.2
-    _ = (4 * P) * W ^ P := by dsimp only [M]; ring
-    _ ≤ (4 * P) * W ^ (4 * P) := mul_le_mul_of_nonneg_left
-      (Real.rpow_le_rpow_of_exponent_le hW (by linarith)) (by linarith)
+  exact root_material_cost_of_unit_firstJet (n01ComponentRootOrientation_eq side)
+    hP hW hF (hident.2.2.2.2.1 1) hmodel
 
 end ContinuousFlexibility.Analysis
