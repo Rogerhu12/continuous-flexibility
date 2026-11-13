@@ -67,18 +67,21 @@ def n04PositiveGeometry_sourceBoundary_jointDirections
       have hi : e k = .inl (m, !side) := by
         rw [hki]
         exact e.apply_symm_apply _
+      have hrad : (if !side then C.right m else C.left m) =
+          n04PositiveEndpoint i side := by
+        change n04PositiveEndpoint i side =
+          (if side then C.left m else C.right m) at ho
+        cases side <;> exact ho.symm
       let J := n04Realization_actualRoot_currentPoint_jointDirections
         hT hS hN hfield e k m (!side) hi
       apply J.congr
       intro p _
-      change n04PositiveEndpoint i side =
-        (if side then C.left m else C.right m) at ho
       change canonicalCurrentPoint C K (liftSectorParameter S C p.1) k
           (if !side then C.right m else C.left m, p.2) =
         canonicalCurrentPoint C K (liftSectorParameter S C p.1) k
           (n04PositiveEndpoint i side, p.2)
-      rw [ho]
-      cases side <;> rfl
+      exact congrArg (fun r : ℝ =>
+        canonicalCurrentPoint C K (liftSectorParameter S C p.1) k (r, p.2)) hrad
 
 /-- The angular displacement of the actual endpoint source has its
 genuine joint tower. Subtracting the unwrapped angle retains periodic

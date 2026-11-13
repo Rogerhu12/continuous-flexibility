@@ -75,6 +75,8 @@ variable (G : N04RealizationGauge) (η : (G.W.S.height (3 / 4 : ℝ)).Space)
   (m : ℕ) (i : N04PositiveComponent G.W.D.a G.W.D.b (deriv G.W.D.w))
   (hi : G.e m = .inr i)
 
+include hi
+
 /-- On a positive piece the canonical unit coordinate is already the
 canonical coordinate, since its endpoints are exactly zero and one. -/
 theorem n04PositiveGeometry_inverseAngle_formula

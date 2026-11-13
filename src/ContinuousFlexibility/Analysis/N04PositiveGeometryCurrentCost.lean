@@ -67,13 +67,21 @@ theorem n04PositiveGeometry_geometryData_forces_right_cost
           parameterGrading G.W.S (1 + loss)
             (n04PositiveGeometry_circleDirection G.W.hS k, 0) *
           (1 - G.Y i (buffer.centerRight i)) := by
-  obtain ⟨loss, hvalue⟩ := (hdata.1 .inverseAngleDefect trivial).2.choose_spec.1
-  obtain ⟨B, hB, hbound⟩ := hvalue 1
+  have hvalue := (hdata.1 .inverseAngleDefect trivial).2.choose_spec.1
+  let loss : ℕ := hvalue.choose
+  have hconstant := hvalue.choose_spec 1
+  let B : ℝ := hconstant.choose
+  have hB : 0 < B := hconstant.choose_spec.1
+  have hbound := hconstant.choose_spec.2
   refine ⟨loss, B, hB, ?_⟩
   intro i k hsource
   let m : ℕ := G.e.symm (.inr i)
   have hi : G.e m = .inr i := G.e.apply_symm_apply _
-  obtain ⟨a, ha, _, hz⟩ := n04PositiveGeometry_circleDirection_small G.W.hS k b hε
+  have hsmall := n04PositiveGeometry_circleDirection_small G.W.hS k b hε
+  let a : ℝ := hsmall.choose
+  have ha : 0 < a := hsmall.choose_spec.1
+  have hz : (a • n04PositiveGeometry_circleDirection G.W.hS k, (0 : ℝ)) ∈
+      sectorNeighborhood G.W.S b ε ε := hsmall.choose_spec.2.2
   let z : Parameter G.W.S := (a • n04PositiveGeometry_circleDirection G.W.hS k, 0)
   have hzstate : G.lift η z ∈ stateNeighborhood G.W.S G.W.C b ε :=
     liftSectorParameter_mem_stateNeighborhood hz le_rfl

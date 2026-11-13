@@ -91,9 +91,9 @@ theorem n04PositiveGeometry_exists_bad_buffer
   have hc := hC.2 (I j)
   have hnonneg : 0 ≤ C * E j ^ C * Hm j ^ (3 / 4 : ℝ) * K j loss := by
     have he0 : 0 ≤ E j := zero_le_one.trans (hE j)
-    have hh0 := hH j
-    have hk0 := hK j loss
-    positivity
+    exact mul_nonneg
+      (mul_nonneg (mul_nonneg hC.1.le (Real.rpow_nonneg he0 _))
+        (Real.rpow_nonneg (hH j) _)) (hK j loss)
   exact hc.trans (mul_le_mul_of_nonneg_left hwidth hnonneg)
 
 end ContinuousFlexibility.Analysis

@@ -36,6 +36,7 @@ private theorem sineDouble_circleMember (T : MaterialData) (γ : ℝ) (m : ℕ) 
   apply circleSingleComponentField_member T γ m _
     ((contDiff_const.mul contDiff_id).sin)
   intro θ
+  change Real.sin (2 * (θ + Real.pi)) = Real.sin (2 * θ)
   rw [mul_add, Real.sin_add_two_pi]
 
 /-- A circle element with exactly the prescribed single-component sine
@@ -121,17 +122,28 @@ private theorem real_seminorm_smul
     (p : Seminorm ℝ E) (a : ℝ) (v : E) : p (a • v) = |a| * p v := by
   rw [map_smul_eq_mul, Real.norm_eq_abs]
 
+private theorem real_seminorm_smul_zero
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : Seminorm ℝ (E × ℝ)) (a : ℝ) (v : E) :
+    p (a • v, 0) = |a| * p (v, 0) := by
+  have hpair : (a • v, (0 : ℝ)) = a • (v, (0 : ℝ)) := by
+    rw [Prod.smul_mk, smul_zero]
+  exact (congrArg p hpair).trans (real_seminorm_smul p a (v, 0))
+
+private theorem real_seminorm_nonneg_smul_zero
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : Seminorm ℝ (E × ℝ)) {a : ℝ} (ha : 0 ≤ a) (v : E) :
+    p (a • v, 0) = a * p (v, 0) :=
+  (real_seminorm_smul_zero p a v).trans
+    (congrArg (fun t : ℝ => t * p (v, 0)) (abs_of_nonneg ha))
+
 /-- The parameter grading is exactly homogeneous along a state line with
 zero auxiliary scalar parameter. The calculation does not unfold the
 physical grading. -/
 theorem n04PositiveGeometry_parameterGrading_smul_zero
     (S : PhysicalSpacesData) (n : ℕ) (v : StateDirections S) (a : ℝ) :
-    parameterGrading S n (a • v, 0) = |a| * parameterGrading S n (v, 0) := by
-  calc
-    parameterGrading S n (a • v, 0) = parameterGrading S n (a • (v, (0 : ℝ))) := by
-      rw [Prod.smul_mk, smul_zero]
-    _ = |a| * parameterGrading S n (v, 0) :=
-      real_seminorm_smul (parameterGrading S n) a (v, 0)
+    parameterGrading S n (a • v, 0) = |a| * parameterGrading S n (v, 0) :=
+  real_seminorm_smul_zero (parameterGrading S n) a v
 
 /-- The common positive amplitude cancels from every grading of the
 chosen sine direction. -/
@@ -139,8 +151,9 @@ theorem n04PositiveGeometry_circleDirection_parameterGrading
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     (hS : IsPhysicalSpaces D T S) (m n : ℕ) {a : ℝ} (ha : 0 ≤ a) :
     parameterGrading S n (a • n04PositiveGeometry_circleDirection hS m, 0) =
-      a * parameterGrading S n (n04PositiveGeometry_circleDirection hS m, 0) := by
-  rw [n04PositiveGeometry_parameterGrading_smul_zero, abs_of_nonneg ha]
+      a * parameterGrading S n (n04PositiveGeometry_circleDirection hS m, 0) :=
+  real_seminorm_nonneg_smul_zero (parameterGrading S n) ha
+    (n04PositiveGeometry_circleDirection hS m)
 
 /-- The actual left chart on this line, at every component and angle. -/
 theorem n04PositiveGeometry_circleDirection_leftChart
@@ -172,6 +185,22 @@ theorem n04PositiveGeometry_circleDirection_rootLabel_test
   simp only [ite_true, show 2 * (Real.pi / 4) = Real.pi / 2 by ring,
     Real.sin_pi_div_two, mul_one]
 
+private theorem inverse_at_image_of_deriv_pos
+    {f : ℝ → ℝ} (hpos : ∀ θ, 0 < deriv f θ) {θ y : ℝ} (himage : f θ = y) :
+    Function.invFun f y = θ :=
+  (congrArg (Function.invFun f) himage.symm).trans
+    (Function.leftInverse_invFun (strictMono_of_deriv_pos hpos).injective θ)
+
+private theorem left_rootLabel_deriv_pos
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1) (m : ℕ) (θ : ℝ) :
+    0 < deriv (n01RootLabel S C z m false) θ :=
+  lt_of_lt_of_le (by norm_num : (0 : ℝ) < 1 / 2)
+    (hN.2.2.2.2.2.2.2.1 z hz hs m θ).1
+
 /-- At the displaced test angle the genuine inverse root label returns
 the original angle. N01 supplies injectivity on the actual state
 neighborhood, so no inverse certificate is added to the hypotheses. -/
@@ -185,15 +214,16 @@ theorem n04PositiveGeometry_circleDirection_inverseRootLabel_test
     Function.invFun (n01RootLabel S C
         (liftSectorParameter S C (a • n04PositiveGeometry_circleDirection hS m, 0))
         m false) (Real.pi / 4 + a) = Real.pi / 4 := by
-  have hs := hN.2.2.1.liftSectorParameter_sector
-    (a • n04PositiveGeometry_circleDirection hS m, 0)
-  have hpos (θ : ℝ) : 0 < deriv (n01RootLabel S C
-      (liftSectorParameter S C (a • n04PositiveGeometry_circleDirection hS m, 0))
-      m false) θ :=
-    lt_of_lt_of_le (by norm_num : (0 : ℝ) < 1 / 2)
-      (hN.2.2.2.2.2.2.2.1 _ hz hs m θ).1
-  rw [← n04PositiveGeometry_circleDirection_rootLabel_test hS hN.2.2.1 m a]
-  exact Function.leftInverse_invFun (strictMono_of_deriv_pos hpos).injective _
+  exact inverse_at_image_of_deriv_pos
+    (left_rootLabel_deriv_pos hN hz (hN.2.2.1.liftSectorParameter_sector
+      (a • n04PositiveGeometry_circleDirection hS m, 0)) m)
+    (n04PositiveGeometry_circleDirection_rootLabel_test hS hN.2.2.1 m a)
+
+private theorem inverse_displacement_abs
+    {f : ℝ → ℝ} {θ a : ℝ} (ha : 0 ≤ a)
+    (hinverse : Function.invFun f (θ + a) = θ) :
+    |Function.invFun f (θ + a) - (θ + a)| = a := by
+  rw [hinverse, show θ - (θ + a) = -a by ring, abs_neg, abs_of_nonneg ha]
 
 /-- The inverse angular displacement has exactly the same nonzero
 amplitude as the original chart perturbation. -/
@@ -207,9 +237,8 @@ theorem n04PositiveGeometry_circleDirection_inverseRootLabel_displacement
     |Function.invFun (n01RootLabel S C
         (liftSectorParameter S C (a • n04PositiveGeometry_circleDirection hS m, 0))
         m false) (Real.pi / 4 + a) - (Real.pi / 4 + a)| = a := by
-  rw [n04PositiveGeometry_circleDirection_inverseRootLabel_test hS hN m a hz]
-  rw [show Real.pi / 4 - (Real.pi / 4 + a) = -a by ring,
-    abs_neg, abs_of_nonneg ha]
+  exact inverse_displacement_abs ha
+    (n04PositiveGeometry_circleDirection_inverseRootLabel_test hS hN m a hz)
 
 /-- A nonidentity left root label occurs in every positive sector
 neighborhood while all nonchart state directions remain zero. -/

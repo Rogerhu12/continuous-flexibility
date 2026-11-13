@@ -43,7 +43,10 @@ theorem n04PositiveGeometry_tailComponent_right_strictMono (W : N04RealizationSt
     (W.metadata.selected.2.2.2.1 W.S₀.sigma W.metadata.selected.2.2.1).1
   have hm := (morseRealization_turning_component_order hreal).2.1
   intro m n hmn
-  rw [n04PositiveGeometry_tailComponent_right, n04PositiveGeometry_tailComponent_right]
+  change n04PositiveRight (n04PositiveGeometry_tailComponent W m) <
+    n04PositiveRight (n04PositiveGeometry_tailComponent W n)
+  rw [n04PositiveGeometry_tailComponent_right W m,
+    n04PositiveGeometry_tailComponent_right W n]
   have hroot := hm (Nat.add_lt_add_right hmn 1)
   have hscaled := mul_lt_mul_of_pos_left hroot (W.P.sideRadius_pos true)
   simpa only [n06MorsePositiveRight, ↓reduceIte, Nat.add_assoc] using hscaled

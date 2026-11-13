@@ -93,3 +93,14 @@ theorem n04Realization_not_positiveGeometryObligation :
           (n04PositiveGeometry_rightSource_spec W X i)⟩
 
 end ContinuousFlexibility.Analysis
+
+open Lean in
+run_cmd do
+  let axioms ← collectAxioms
+    ``ContinuousFlexibility.Analysis.n04Realization_not_positiveGeometryObligation
+  for ax in axioms do
+    unless ax == ``propext || ax == ``Classical.choice || ax == ``Quot.sound do
+      throwError "Unexpected axiom {ax} in n04Realization_not_positiveGeometryObligation"
+
+#print axioms ContinuousFlexibility.Analysis.n04RealizationStart_nonempty
+#print axioms ContinuousFlexibility.Analysis.n04Realization_not_positiveGeometryObligation

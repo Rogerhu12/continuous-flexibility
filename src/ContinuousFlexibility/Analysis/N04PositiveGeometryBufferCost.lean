@@ -77,6 +77,6 @@ same positive amplitude occurs in the boundary jump and its tame bound. -/
 theorem n04PositiveGeometry_cancel_amplitude
     {a K δ : ℝ} (ha : 0 < a) (h : a ≤ (K * a) * δ) : 1 ≤ K * δ := by
   have h' : a * 1 ≤ a * (K * δ) := by nlinarith only [h]
-  exact (mul_le_mul_left ha).mp h'
+  exact le_of_mul_le_mul_left h' ha
 
 end ContinuousFlexibility.Analysis
