@@ -58,7 +58,7 @@ theorem n04Realization_referenceObligation : N04RealizationReferenceObligation :
     W.metadata.first_two one_pos W.realizes W.hw W.coordinates W.hT W.hS W.through03 W.field
     X.e₀ hE0 X.κ_pos W.host X.optical X.cell X.cell_mem X.src
   refine ⟨hprod.choose, hprod.choose_spec.choose, hprod.choose_spec.choose_spec.1, ?_⟩
-  intro e τ σ Q F buffer href b' ε' hb hε' hε'ε hV hR
+  intro e τ σ Q F buffer href b' ε' hb hε' hε'ε V hV hR
   have hrest := hprod.choose_spec.choose_spec.2 e τ σ Q buffer.region href
   have hprincipal := hrest.1 hε' hV
   have hjets := hrest.2
@@ -72,7 +72,6 @@ theorem n04Realization_referenceObligation : N04RealizationReferenceObligation :
   let u := hpack.choose_spec.choose_spec.choose
   let η := hpack.choose_spec.choose_spec.choose_spec.choose
   have hp := hpack.choose_spec.choose_spec.choose_spec.choose_spec
-  let V := n04RealizationAtlas W X e hprod.choose hprod.choose_spec.choose τ σ Q buffer.region
   let S' := physicalSpacesReplaceAuxiliaryColumn W.S η
   let C' := geometryReplaceAuxiliaryColumn W.C η
   let L' := correctionReplaceAuxiliaryColumn W.L η
