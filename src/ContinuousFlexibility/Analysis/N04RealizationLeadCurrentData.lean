@@ -39,7 +39,8 @@ def CurrentJetDataOn (S : PhysicalSpacesData) (T : MaterialData) (cell : ℕ →
   (∀ z ∈ sectorNeighborhood S base ε ε, ∀ m, P m →
     ContDiffOn ℝ ∞ (f z m) unitStrip ∧
       ∀ q ∈ unitStrip, f z m (q + (0, Real.pi)) = f z m q) ∧
-  ∃ J : ∀ m (i j : ℕ) (q : unitStrip), SmoothDirections (sectorNeighborhood S base ε ε)
+  ∃ J : ∀ m, P m → ∀ (i j : ℕ) (q : unitStrip),
+      SmoothDirections (sectorNeighborhood S base ε ε)
       (fun z => mixedDerivative i j (fun y => f z m y - f₀ m y) q.val),
     (∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m, P m → ∀ (q : unitStrip) (i j : ℕ),
@@ -48,9 +49,9 @@ def CurrentJetDataOn (S : PhysicalSpacesData) (T : MaterialData) (cell : ℕ →
           B * T.E0 (T.sample (cell m)) ^ B * T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) *
             parameterGrading S (s + loss) z) ∧
     ∀ k : ℕ, ∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
-      ∀ z ∈ sectorNeighborhood S base ε ε, ∀ v : Fin k → Parameter S, ∀ m, P m →
+      ∀ z ∈ sectorNeighborhood S base ε ε, ∀ v : Fin k → Parameter S, ∀ m (hm : P m),
         ∀ (q : unitStrip) (i j : ℕ), i + j ≤ s →
-          |(J m i j q).D k z v| ≤
+          |(J m hm i j q).D k z v| ≤
             B * T.E0 (T.sample (cell m)) ^ B * T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) *
               oneHighVariationWeight (parameterGrading S) base (s + loss) z v
 
@@ -82,7 +83,7 @@ theorem CurrentJetDataOn.mono {P P' : ℕ → Prop} {base base' : ℕ} {ε ε' :
     isOpen_sectorNeighborhood S base' ε' ε'
   have hJ := h.2
   refine ⟨fun z hz m hm => h.1 z (hsub hz) m (hP m hm),
-    fun m i j q => (hJ.choose m i j q).restrict hopen hsub, ?_, ?_⟩
+    fun m hm i j q => (hJ.choose m (hP m hm) i j q).restrict hopen hsub, ?_, ?_⟩
   · have hv := hJ.choose_spec.1
     exact ⟨hv.choose, fun s => ⟨(hv.choose_spec s).choose, (hv.choose_spec s).choose_spec.1,
       fun z hz m hm q i j hij =>
@@ -136,38 +137,25 @@ theorem CurrentJetDataOn.union {P Q R : ℕ → Prop} {base : ℕ} {ε : ℝ}
               T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) *
                 oneHighVariationWeight (parameterGrading S) base (s + max (lP k) (lQ k)) z v :=
     fun m hm => (hcover m hm).elim
-      (fun hPm => ⟨hP.2.choose m, fun k s z hz v q i j hij =>
+      (fun hPm => ⟨hP.2.choose m hPm, fun k s z hz v q i j hij =>
         cost_raise (hBP k s) (le_max_left _ _) (hE m) (hH m)
           (oneHighVariationWeight_nonneg _ _ _ _ _)
           (oneHighVariationWeight_mono (base := base) (base' := base) hmono le_rfl
             (Nat.add_le_add_left (le_max_left _ _) s) z v)
           (((htP k).choose_spec s).choose_spec.2 z hz v m hPm q i j hij)⟩)
-      (fun hQm => ⟨hQ.2.choose m, fun k s z hz v q i j hij =>
+      (fun hQm => ⟨hQ.2.choose m hQm, fun k s z hz v q i j hij =>
         cost_raise (hBQ k s) (le_max_right _ _) (hE m) (hH m)
           (oneHighVariationWeight_nonneg _ _ _ _ _)
           (oneHighVariationWeight_mono (base := base) (base' := base) hmono le_rfl
             (Nat.add_le_add_left (le_max_right _ _) s) z v)
           (((htQ k).choose_spec s).choose_spec.2 z hz v m hQm q i j hij)⟩)
-  have hpiece' : ∀ m, ∃ Jm : ∀ (i j : ℕ) (q : unitStrip),
-      SmoothDirections (sectorNeighborhood S base ε ε)
-        (fun z => mixedDerivative i j (fun y => f z m y - f₀ m y) q.val),
-      R m → ∀ (k s : ℕ), ∀ z ∈ sectorNeighborhood S base ε ε, ∀ v : Fin k → Parameter S,
-        ∀ (q : unitStrip) (i j : ℕ), i + j ≤ s →
-          |(Jm i j q).D k z v| ≤
-            max (BP k s) (BQ k s) * T.E0 (T.sample (cell m)) ^ max (BP k s) (BQ k s) *
-              T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) *
-                oneHighVariationWeight (parameterGrading S) base (s + max (lP k) (lQ k)) z v := by
-    intro m
-    by_cases hm : R m
-    · exact ((hpiece m hm).elim fun Jm hJm => ⟨Jm, fun _ => hJm⟩)
-    · exact ⟨hP.2.choose m, fun h => absurd h hm⟩
   have hvP := hP.2.choose_spec.1
   have hvQ := hQ.2.choose_spec.1
   refine ⟨fun z hz m hm => (hcover m hm).elim (hP.1 z hz m) (hQ.1 z hz m),
-    fun m => (hpiece' m).choose, ⟨max hvP.choose hvQ.choose, fun s => ?_⟩,
+    fun m hm => (hpiece m hm).choose, ⟨max hvP.choose hvQ.choose, fun s => ?_⟩,
     fun k => ⟨max (lP k) (lQ k), fun s => ⟨max (BP k s) (BQ k s),
       lt_max_of_lt_left (hBP k s), fun z hz v m hm q i j hij =>
-        (hpiece' m).choose_spec hm k s z hz v q i j hij⟩⟩⟩
+        (hpiece m hm).choose_spec k s z hz v q i j hij⟩⟩⟩
   have hsP := hvP.choose_spec s
   have hsQ := hvQ.choose_spec s
   exact ⟨max hsP.choose hsQ.choose, lt_max_of_lt_left hsP.choose_spec.1,

@@ -3,21 +3,21 @@
 ## Problem
 
 `N04CoordinatesRealization : N04cStatement`
-(`src/ContinuousFlexibility/Blueprint/N04Coordinates/Realization.lean`) is derived from five
-subnode theorems in `Blueprint/N04Coordinates/Realization/` (`PositiveGeometry`,
-`NegativeGeometry`, `PulledFields`, `SourceColumns`, `Principal`) by
-`n04Realization_of_obligations` and `n04Realization_currentObligation_of_split`. One line proves
-one subnode.
+(`src/ContinuousFlexibility/Blueprint/N04Coordinates/Realization.lean`) is derived from the subnode theorems in
+`Blueprint/N04Coordinates/Realization/`: `PositiveGeometry`, `NegativeGeometry/Chart`,
+`NegativeGeometry/Height`, `NegativeGeometry/Inverse`, `PulledFields`, `SourceColumns` and
+`Principal`, by `n04Realization_of_obligations`, `n04Realization_currentObligation_of_split` and
+`n04Realization_negativeGeometry_of_split`. One line proves one subnode.
 
 Each line owns its subnode's statement. The present statements are the lead's first draft. When a
 statement is false or unusable, the line writes the correct statement and changes the shared
-definitions (`N04RealizationLeadCurrentData.lean`, `N04RealizationLeadCurrentSplit.lean`) and the
-assembly with it, then proves it.
+definitions (`N04RealizationLeadCurrentData.lean`, `N04RealizationLeadCurrentSplit.lean`,
+`N04RealizationLeadNegativeSplit.lean`) and the assembly with it, then proves it.
 
 ## Completion standard
 
 - `N04CoordinatesRealization` keeps exactly the statement `N04cStatement` and is still derived from
-  the five subnode theorems.
+  the subnode theorems.
 - The line's subnode theorem contains no `sorry`, and its axiom audit lists only `propext`,
   `Classical.choice` and `Quot.sound`.
 - A refutation of a draft statement, or a conditional or relative version, does not finish the line.
