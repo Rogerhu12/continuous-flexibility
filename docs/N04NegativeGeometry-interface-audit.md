@@ -54,9 +54,58 @@ not arbitrary inputs to `CurrentJetDataOn`.
    includes the auxiliary-column replacement.
 
 These facts permit a multiplier that switches from one to a nontrivial
-interior bump when the scalar state parameter leaves zero. The branch is
-developing the admissibility and nonsmoothness argument explicitly rather
-than assuming that the interface diagnostic by itself settles the node.
+interior bump when the scalar state parameter leaves zero.
+
+## Complete obstruction to the frozen obligation
+
+`Analysis/N04NegativeGeometryObstruction.lean` contains the assembled
+statement
+
+```lean
+theorem n04NegativeGeometry_obligation_false :
+    ¬ N04RealizationNegativeGeometryObligation
+```
+
+The argument uses an actual admissible gauge, not just an arbitrary scalar
+family. Its compilation status is recorded below.
+
+1. `N04NegativeGeometryAdmissibleExistence` constructs `G`, `b`, and
+   `ε > 0` from the proved retained-start, optical, positive-reference and
+   qualitative matching results. It uses neither open current-geometry
+   subnode. The reference profile also has a positive component `i`.
+2. Let `B` be the buffer supplied by `G.Admissible`. Set
+   `aᵢ = (leftᵢ + B.centerLeft i) / 2` and
+   `δᵢ = (B.centerLeft i - leftᵢ) / 4`. The existing smooth cutoff
+   `χᵢ = positiveEndpointCutoff aᵢ δᵢ` is supported strictly between the
+   left endpoint and the fixed middle, takes values in `[0,1]`, and is one
+   at `aᵢ`. `N04NegativeGeometryInteriorFactor` certifies `φᵢ = 1 + χᵢ`.
+3. Change only the positive height family to
+   `Q' z i p = Q z i p * (if z.2 = 0 then 1 else φᵢ p)`.
+   `N04NegativeGeometryGaugePerturbation` proves the resulting gauge `G'`
+   is admissible on exactly the same neighborhood. Spatial smoothness,
+   endpoint jets, periodicity, evenness and the fixed middle are retained;
+   the permitted upper height bound doubles.
+4. `N04NegativeGeometryGaugeValues` supplies a canonical `y : unitStrip`
+   whose reference inverse point is `(aᵢ, 0)`. Let `m` be the corresponding
+   positive piece. At this point the original and modified pulled heights
+   satisfy `g(0) = f(0) > 0` and, on the scalar axis,
+   `g(0,t) = f(0,t)/2` whenever `t ≠ 0`.
+5. If the frozen NegativeGeometry obligation held, apply it once to `G`
+   and once to `G'`. Intersect its two output neighborhoods using the
+   maximum base order and the minimum positive radius, and choose the
+   auxiliary column to be zero. The unguarded tower binder supplies
+   zeroth-order directional towers for both pulled heights at this
+   **positive** piece. It does not ask for a proof that the piece is
+   negative.
+6. `N04NegativeGeometryJumpObstruction` converts those towers into
+   continuity. Taking the punctured limit at zero in `g = f/2` gives
+   `f(0) = f(0)/2`, contradicting `f(0) > 0`. Subtracting different
+   constant reference values in the two towers does not affect the
+   continuity argument. Any positive-radius shrinking still contains
+   the same punctured scalar germ.
+
+This concerns the over-quantified subnode interface. It does not refute
+the manuscript's existence assertion for a suitably chosen smooth atlas.
 
 ## Negative-piece reductions
 
@@ -89,6 +138,17 @@ on this branch, in accordance with `N04Realization-Common.md`.
 
 The source modules have no proof placeholders, added project axioms,
 unsafe declarations, or raised heartbeat limits. The interface
-counterexample and the negative reductions include guarded axiom audits.
-Compilation and the complete branch CI are pending; the original
-NegativeGeometry blueprint theorem is not marked complete.
+counterexample, negative reductions, admissible existence, reference
+positivity, jump obstruction and full refutation include guarded axiom
+audits.
+
+The first CI run, `43417103992` at `9344362a`, accepted the explicit
+absolute-value counterexample and printed only `propext`,
+`Classical.choice`, and `Quot.sound`; its module failed only because the
+guard expected different line wrapping. The run also identified two
+small elaboration repairs in the reduction/cancellation lemmas, now
+addressed, and an inherited reference-chain failure in
+`N03RootEndpointMaterialJets`; the lead's subsequent repair `3e7dcfcf`
+has been merged. The full assembled obstruction is pending its first
+CI check. The original NegativeGeometry blueprint theorem is not marked
+complete.

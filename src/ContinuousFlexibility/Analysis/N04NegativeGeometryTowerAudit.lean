@@ -110,6 +110,10 @@ end ContinuousFlexibility.Analysis
 
 #print axioms ContinuousFlexibility.Analysis.n04NegativeGeometry_currentData_tower_all_pieces
 #print axioms ContinuousFlexibility.Analysis.n04NegativeGeometry_currentData_empty_iff
-/-- info: 'ContinuousFlexibility.Analysis.n04NegativeGeometry_abs_parameter_not_currentData' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/--
+info: 'ContinuousFlexibility.Analysis.n04NegativeGeometry_abs_parameter_not_currentData' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+-/
 #guard_msgs in
 #print axioms ContinuousFlexibility.Analysis.n04NegativeGeometry_abs_parameter_not_currentData

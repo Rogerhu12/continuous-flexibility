@@ -175,19 +175,27 @@ theorem negative_pulledHeightRef
         ((G.W.A G.X.e₀).inverseChart (G.W.C.referenceState, 0) (G.negativeIndex j)
           (canonicalUnitPoint (G.W.A G.X.e₀) (G.negativeIndex j) q)) := by
   have h := G.negative_fields η (G.W.C.referenceState, 0) m j hi
-  change (G.V η).height (G.W.C.referenceState, 0) m
-    (G.pulledPoint η (G.W.C.referenceState, 0) m q) = _
-  rw [h.2.2.2.2.2.2.2.2.2.1,
-    G.negative_pulledPoint η (G.W.C.referenceState, 0) m j hi q]
+  exact (congrFun h.2.2.2.2.2.2.2.2.2.1
+      (G.pulledPoint η (G.W.C.referenceState, 0) m q)).trans
+    (congrArg ((G.W.A G.X.e₀).height (G.W.C.referenceState, 0) (G.negativeIndex j))
+      (G.negative_pulledPoint η (G.W.C.referenceState, 0) m j hi q))
 
 end N04RealizationGauge
 
 end ContinuousFlexibility.Analysis
 
-/-- info: 'ContinuousFlexibility.Analysis.N04RealizationGauge.negative_atomDifference_mixedDerivative' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/--
+info: 'ContinuousFlexibility.Analysis.N04RealizationGauge.negative_atomDifference_mixedDerivative' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+-/
 #guard_msgs in
 #print axioms ContinuousFlexibility.Analysis.N04RealizationGauge.negative_atomDifference_mixedDerivative
 
-/-- info: 'ContinuousFlexibility.Analysis.N04RealizationGauge.negative_pulledHeight' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/--
+info: 'ContinuousFlexibility.Analysis.N04RealizationGauge.negative_pulledHeight' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+-/
 #guard_msgs in
 #print axioms ContinuousFlexibility.Analysis.N04RealizationGauge.negative_pulledHeight

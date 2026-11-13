@@ -104,7 +104,8 @@ theorem n04NegativeGeometry_referenceGauge_pulledHeight
         (wholePositiveReferenceGaugeInverse τ χ y) =
       h₀ (χ y) / Q (χ y) := by
   rw [wholePositiveReferenceGaugeHeight_eq]
-  simp only [wholePositiveReferenceGaugeInverse, Function.comp_apply, hστ]
+  change h₀ (σ (τ (χ y))) / Q (σ (τ (χ y))) = h₀ (χ y) / Q (χ y)
+  rw [hστ (χ y)]
 
 /-- The preceding identity for the literal pulled-height field of an
 admissible-gauge record, including auxiliary-column replacement. The
