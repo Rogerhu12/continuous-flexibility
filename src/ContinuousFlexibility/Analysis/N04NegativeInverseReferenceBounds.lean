@@ -271,6 +271,43 @@ theorem CurrentJetDataOn.negativeInverse_uniform_small
             |mixedDerivative i j (fun y => f z m y - f₀ m y) q.val| < δ :=
   n04NegativeInverse_valuePrefix_uniform_small hD hT hε h.2.choose_spec.1 s A hδ
 
+/-- A reference value envelope and a uniformly small value difference
+give a current value envelope. This numerical argument is independent
+of the representation of the underlying physical atlas. -/
+theorem CurrentJetDataOn.negativeInverse_value_bound
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hε : 0 < ε)
+    (h : CurrentJetDataOn S T cell P base ε f f₀)
+    (C : ℝ) (hC : 0 < C)
+    (hfloor : ∀ m, 1 ≤ T.E0 (T.sample (cell m)))
+    (href : ∀ m, P m → ∀ q ∈ unitStrip,
+      |f₀ m q| ≤ C * T.E0 (T.sample (cell m)) ^ C) :
+    ∃ b : ℕ, ∃ ε' B : ℝ, base ≤ b ∧ 0 < ε' ∧ ε' ≤ ε ∧ 0 < B ∧
+      ∀ z ∈ sectorNeighborhood S b ε' ε', ∀ m, P m →
+        ∀ q ∈ unitStrip, |f z m q| ≤ B * T.E0 (T.sample (cell m)) ^ B := by
+  have hbound := h.negativeInverse_uniform_small hD hT hε 0 0
+    (by norm_num : (0 : ℝ) < 1)
+  let b : ℕ := hbound.choose
+  let ε' : ℝ := hbound.choose_spec.choose
+  have hb : base ≤ b := hbound.choose_spec.choose_spec.1
+  have hε' : 0 < ε' := hbound.choose_spec.choose_spec.2.1
+  have hε'ε : ε' ≤ ε := hbound.choose_spec.choose_spec.2.2.1
+  have hsmall := hbound.choose_spec.choose_spec.2.2.2
+  obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (1 + C) C
+  refine ⟨b, ε', B, hb, hε', hε'ε, hB, ?_⟩
+  intro z hz m hm q hq
+  let E := T.E0 (T.sample (cell m))
+  have hE : 1 ≤ E := hfloor m
+  have hdiff : |f z m q - f₀ m q| < 1 := by
+    simpa only [Real.rpow_zero, one_mul, spaces_mixedDerivative_zero] using
+      hsmall z hz m hm ⟨q, hq⟩ 0 0 (by omega)
+  calc
+    |f z m q| = |(f z m q - f₀ m q) + f₀ m q| := by rw [sub_add_cancel]
+    _ ≤ |f z m q - f₀ m q| + |f₀ m q| := abs_add_le _ _
+    _ ≤ 1 + C * E ^ C := add_le_add hdiff.le (href m hm q hq)
+    _ ≤ E ^ C + C * E ^ C := add_le_add_right (Real.one_le_rpow hE hC.le) _
+    _ = (1 + C) * E ^ C := by ring
+    _ ≤ B * E ^ B := hpack E hE
+
 end UniformSmallness
 
 namespace N04RealizationGauge
@@ -303,6 +340,19 @@ theorem negativeInverse_atomData_uniform_small
   rw [G.nonAuxiliary_atomFamily_eq 0 η a ha, G.nonAuxiliary_atomRef_eq 0 η a ha]
   exact hsmall z hz m hm q i j hij
 
+/-- The zeroth spatial order of the retained reference atom, with the
+auxiliary column fixed before transporting the current estimate. -/
+theorem negativeInverse_reference_geometry_values (a : Atom) (ha : atomIsGeometry a) :
+    ∃ C : ℝ, 0 < C ∧ ∀ m, G.Neg 0 m → ∀ q ∈ unitStrip,
+      |G.atomRef 0 a m q| ≤ C * G.W.U.E0 (G.W.U.sample ((G.V 0).cell m)) ^ C := by
+  have hrefAll := G.negativeInverse_reference_geometry_bounds 0
+  let C : ℝ := hrefAll.choose
+  have hC : 0 < C := hrefAll.choose_spec.1
+  have href := hrefAll.choose_spec.2
+  refine ⟨C, hC, ?_⟩
+  intro m hm q hq
+  simpa only [spaces_mixedDerivative_zero] using href 0 m hm a ha q hq 0 0 (by omega)
+
 /-- A current geometry atom has a uniform polynomial value bound on one
 smaller neighborhood.  The neighborhood is selected before the auxiliary
 column and every negative piece. -/
@@ -314,40 +364,27 @@ theorem negativeInverse_atom_value_bound
         ∀ z ∈ sectorNeighborhood G.W.S b' ε' ε', ∀ m, G.Neg η m →
           ∀ q ∈ unitStrip, |G.atomFamily η a z m q| ≤
             B * G.W.U.E0 (G.W.U.sample ((G.V η).cell m)) ^ B := by
-  have hne : a ≠ .auxiliaryColumn :=
-    atomIsNegativeInverseReference_ne_auxiliary (Or.inl ha)
-  have hbound := G.negativeInverse_atomData_uniform_small hε a hne h 0 0
-    (by norm_num : (0 : ℝ) < 1)
+  have hU := isMaterialData_enlargedMaterialData G.W.radial.1 G.W.hT
+  have hreference := G.negativeInverse_reference_geometry_values a ha
+  let C : ℝ := hreference.choose
+  have hC : 0 < C := hreference.choose_spec.1
+  have href := hreference.choose_spec.2
+  have hbound := h.negativeInverse_value_bound G.W.radial.1 hU hε C hC
+    ((G.cost_nonneg 0).2.2) href
   let b' : ℕ := hbound.choose
   let ε' : ℝ := hbound.choose_spec.choose
-  have hb : b ≤ b' := hbound.choose_spec.choose_spec.1
-  have hε' : 0 < ε' := hbound.choose_spec.choose_spec.2.1
-  have hε'ε : ε' ≤ ε := hbound.choose_spec.choose_spec.2.2.1
-  have hsmall := hbound.choose_spec.choose_spec.2.2.2
-  have hrefAll := G.negativeInverse_reference_geometry_bounds 0
-  let C : ℝ := hrefAll.choose
-  have hC : 0 < C := hrefAll.choose_spec.1
-  have href := hrefAll.choose_spec.2
-  obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (1 + C) C
+  let B : ℝ := hbound.choose_spec.choose_spec.choose
+  have hspec := hbound.choose_spec.choose_spec.choose_spec
+  have hb : b ≤ b' := hspec.1
+  have hε' : 0 < ε' := hspec.2.1
+  have hε'ε : ε' ≤ ε := hspec.2.2.1
+  have hB : 0 < B := hspec.2.2.2.1
+  have hvalues := hspec.2.2.2.2
   refine ⟨b', ε', B, hb, hε', hε'ε, hB, ?_⟩
   intro η z hz m hm q hq
-  let E := G.W.U.E0 (G.W.U.sample ((G.V η).cell m))
-  have hE : 1 ≤ E := (G.cost_nonneg η).2.2 m
-  have hdiff : |G.atomFamily η a z m q - G.atomRef η a m q| < 1 := by
-    simpa only [Real.rpow_zero, one_mul, spaces_mixedDerivative_zero] using
-      hsmall η z hz m hm ⟨q, hq⟩ 0 0 (by omega)
-  have hreference : |G.atomRef η a m q| ≤ C * E ^ C := by
-    simpa only [spaces_mixedDerivative_zero] using href η m hm a ha q hq 0 0 (by omega)
-  calc
-    |G.atomFamily η a z m q| =
-        |(G.atomFamily η a z m q - G.atomRef η a m q) + G.atomRef η a m q| := by
-      rw [sub_add_cancel]
-    _ ≤ |G.atomFamily η a z m q - G.atomRef η a m q| + |G.atomRef η a m q| :=
-      abs_add_le _ _
-    _ ≤ 1 + C * E ^ C := add_le_add hdiff.le hreference
-    _ ≤ E ^ C + C * E ^ C := add_le_add_right (Real.one_le_rpow hE hC.le) _
-    _ = (1 + C) * E ^ C := by ring
-    _ ≤ B * E ^ B := hpack E hE
+  rw [G.nonAuxiliary_atomFamily_eq 0 η a
+    (atomIsNegativeInverseReference_ne_auxiliary (Or.inl ha))]
+  exact hvalues z hz m hm q hq
 
 end N04RealizationGauge
 end ContinuousFlexibility.Analysis
