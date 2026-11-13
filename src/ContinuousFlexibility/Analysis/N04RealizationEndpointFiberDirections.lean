@@ -53,7 +53,8 @@ def n04Realization_endpointFiberInterpolation_jointDirections
       (ht : t ∈ Metric.ball (if side then d else c) (ε side)) (θ : ℝ) :
       Y side x (t, θ) = t :=
     (hexit side).choose_spec.2 (A x side) (hA x hx side) t
-      (by simpa only [hcenter side] using ht) θ
+      (Eq.mpr (congrArg (fun q : ℝ => t ∈ Metric.ball q (ε side))
+        (hcenter side)) ht) θ
   let R : (E × PolarPoint) →L[ℝ] ℝ :=
     (ContinuousLinearMap.fst ℝ ℝ ℝ).comp (ContinuousLinearMap.snd ℝ E PolarPoint)
   let JR : SmoothDirections (U ×ˢ univ) (fun p : E × PolarPoint => p.2.1) :=
