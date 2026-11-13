@@ -19,6 +19,8 @@ namespace ContinuousFlexibility.Statements
 open Set ContinuousFlexibility.Analysis
 open scoped ContDiff
 
+set_option backward.isDefEq.respectTransparency false
+
 local instance n04MinusFirstIntegralStripStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
@@ -113,10 +115,13 @@ private theorem correctedFirstIntegralCircle_decode
     hN.singleComponentFlowInverseCompose_decode hS hT m x hx hr (e + c) θ
   have hdecode : H.decode
       (hN.n04NegativeGeometryMinusFirstIntegralCircle hS hT χ m x) m θ =
-      (u - θ) + ((v - u) + H.decode x.1.1.val.2.2.2 m v) :=
-    (congrArg (fun f : ℕ → ℝ → ℝ => f m θ)
-      (H.decode.map_add (hN.singleComponentFlowInverseCircle hS hT m x) d)).trans
-        (congrArg₂ (fun a b : ℝ => a + b) hflow (houter.trans hsum))
+      (u - θ) + ((v - u) + H.decode x.1.1.val.2.2.2 m v) := by
+    change H.decode (hN.singleComponentFlowInverseCircle hS hT m x + d) m θ = _
+    have hadd : H.decode (hN.singleComponentFlowInverseCircle hS hT m x + d) m θ =
+        H.decode (hN.singleComponentFlowInverseCircle hS hT m x) m θ + H.decode d m θ :=
+      congrArg (fun f : ℕ → ℝ → ℝ => f m θ)
+        (H.decode.map_add (hN.singleComponentFlowInverseCircle hS hT m x) d)
+    rw [hadd, hflow, houter, hsum]
   have hleft := hN.2.2.1.sector_leftChart x.1 m v
   have hinverse := congrFun (correctedFlow_inverse_comp hN hS hT χ hχrange
     m x hx hr) θ

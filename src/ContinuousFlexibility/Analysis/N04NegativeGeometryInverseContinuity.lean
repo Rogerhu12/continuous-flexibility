@@ -41,14 +41,17 @@ theorem n04NegativeGeometry_inverse_continuousOn_of_lipschitz
   have htarget : ∀ᶠ z : P × Y in 𝓝 q, F (z.1, G q) ∈ W :=
     hforward.tendsto.eventually (by rw [hRight q hq]; exact hW.mem_nhds hq.2)
   have hdist : Tendsto (fun z : P × Y => dist z.2 (F (z.1, G q))) (𝓝 q) (𝓝 0) := by
-    simpa only [hRight q hq, dist_self] using (continuousAt_snd.dist hforward).tendsto
+    simpa only [hRight q hq, dist_self] using continuousAt_snd.dist hforward
   have hbound : ∀ᶠ z : P × Y in 𝓝 q,
       dist (G z) (G q) ≤ (K : ℝ) * dist z.2 (F (z.1, G q)) := by
     filter_upwards [(hU.prod hW).mem_nhds hq, htarget] with z hz htz
     have hleft : G (z.1, F (z.1, G q)) = G q := by
-      apply hInj z.1 hz.1 (hMaps ⟨hz.1, htz⟩) hGq
+      have hsource : G (z.1, F (z.1, G q)) ∈ V :=
+        hMaps (show (z.1, F (z.1, G q)) ∈ U ×ˢ W from ⟨hz.1, htz⟩)
+      apply hInj z.1 hz.1 hsource hGq
       exact hRight (z.1, F (z.1, G q)) ⟨hz.1, htz⟩
-    simpa only [hleft] using (hLip z.1 hz.1).dist_le_mul hz.2 htz
+    simpa only [hleft, Prod.mk.eta] using
+      (hLip z.1 hz.1).dist_le_mul z.2 hz.2 (F (z.1, G q)) htz
   have hlim : Tendsto (fun z : P × Y => (K : ℝ) * dist z.2 (F (z.1, G q)))
       (𝓝 q) (𝓝 0) := by
     simpa only [mul_zero] using hdist.const_mul (K : ℝ)
@@ -90,7 +93,7 @@ theorem n04NegativeGeometry_intervalInverse_continuousOn
     have hal : a < l := by
       have hamax := le_max_left a r
       dsimp only [l]
-      linarith
+      linarith [hGq.1]
     have hrl : r < l := by
       have hrmax := le_max_right a r
       dsimp only [l]
@@ -117,7 +120,7 @@ theorem n04NegativeGeometry_intervalInverse_continuousOn
     have hub : u < b := by
       have hminb := min_le_left b r
       dsimp only [u]
-      linarith
+      linarith [hGq.2]
     have hur : u < r := by
       have hminr := min_le_right b r
       dsimp only [u]

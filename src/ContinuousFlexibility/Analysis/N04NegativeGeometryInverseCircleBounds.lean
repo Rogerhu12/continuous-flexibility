@@ -22,6 +22,8 @@ namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
 
+set_option backward.isDefEq.respectTransparency false
+
 local instance n04NegativeGeometryInverseBoundsCircleSMul (H : CircleModelData) :
     SMul ℝ (H.Space × H.Space) := Prod.instSMul
 
