@@ -45,7 +45,7 @@ private theorem unitRootHeight_material_mono
       (Real.rpow_le_rpow_of_exponent_le hW hab)
   exact mul_le_mul
     (mul_le_mul hab hpower (Real.rpow_nonneg (zero_le_one.trans hV) _) hb)
-    (add_le_add_left (hp (Nat.add_le_add_left hlm k) z) 1)
+    (add_le_add le_rfl (hp (Nat.add_le_add_left hlm k) z))
     (add_nonneg zero_le_one (apply_nonneg _ _))
     (mul_nonneg hb (Real.rpow_nonneg (zero_le_one.trans hW) _))
 
@@ -92,15 +92,38 @@ theorem n01_rootDividedHeight_unit_rpow_material_jets_of_component_optical
   have hI := coordinate_hasInterpolation_pair (stateGrading_monotone S)
     (fun _ _ _ => le_rfl) (coordinate_hasInterpolation_stateGrading hS)
     coordinate_hasInterpolation_realGrading
-  obtain ⟨Cχ, lowχ, lossχ, hCχ, hfloorχ, hpowersχ⟩ :=
-    n01_rootOddCoefficient_unit_rpow_material_jets_of_component_optical hS hT hN hflow hK
-  obtain ⟨CV, lowV, lossV, hCV, hfloorV, hpowersV⟩ :=
-    n01_rootFactor_axis_rpow_material_jets_of_component_optical hS hT hN hK
-  obtain ⟨_, lowPos, _, _, _, _, hvaluesχ⟩ :=
-    n01_rootOddCoefficient_unit_material_values_of_component_optical hS hT hN hflow hK
-  let inputLoss : ℕ := max lossχ lossV
-  obtain ⟨productLow, outLoss, hproduct⟩ :=
-    pointwiseProduct_polynomial_material_bound (X := PolarPoint) hp hI inputLoss
+  refine (n01_rootOddCoefficient_unit_rpow_material_jets_of_component_optical
+    hS hT hN hflow hK).elim ?_
+  intro Cχ hχ1
+  refine hχ1.elim ?_
+  intro lowχ hχ2
+  refine hχ2.elim ?_
+  intro lossχ hχ3
+  have hCχ := hχ3.1
+  have hfloorχ := hχ3.2.1
+  have hpowersχ := hχ3.2.2
+  refine (n01_rootFactor_axis_rpow_material_jets_of_component_optical hS hT hN hK).elim ?_
+  intro CV hV1
+  refine hV1.elim ?_
+  intro lowV hV2
+  refine hV2.elim ?_
+  intro lossV hV3
+  have hCV := hV3.1
+  have hfloorV := hV3.2.1
+  have hpowersV := hV3.2.2
+  refine (n01_rootOddCoefficient_unit_material_values_of_component_optical
+    hS hT hN hflow hK).elim ?_
+  intro _ hX1
+  refine hX1.elim ?_
+  intro lowPos hX2
+  refine hX2.elim ?_
+  intro _ hX3
+  have hvaluesχ := hX3.2.2.2
+  refine (pointwiseProduct_polynomial_material_bound (X := PolarPoint) hp hI
+    (max lossχ lossV)).elim ?_
+  intro productLow hY1
+  refine hY1.elim ?_
+  intro outLoss hproduct
   let C0 : ℝ := max Cχ CV
   have hC0 : 1 ≤ C0 := hCχ.trans (le_max_left _ _)
   have hE (j : ℕ) : 0 < T.E0 (T.sample j) :=
@@ -109,13 +132,22 @@ theorem n01_rootDividedHeight_unit_rpow_material_jets_of_component_optical
     (hfloorχ j).trans (mul_le_mul_of_nonneg_right (le_max_left _ _) (hE j).le)
   refine ⟨C0, max lowχ (max lowV (max lowPos productLow)), outLoss, hC0, hfloor, ?_⟩
   intro γ
-  obtain ⟨Bχ, hBχ, hjetsχ⟩ := hpowersχ (γ / 6)
-  obtain ⟨BV, hBV, hjetsV⟩ := hpowersV (-γ / 4)
+  refine (hpowersχ (γ / 6)).elim ?_
+  intro Bχ hBχj
+  have hBχ := hBχj.1
+  have hjetsχ := hBχj.2
+  refine (hpowersV (-γ / 4)).elim ?_
+  intro BV hBVj
+  have hBV := hBVj.1
+  have hjetsV := hBVj.2
   let A : ℕ → ℝ := fun k => max 1 (max (Bχ k) (BV k))
   have hA (k : ℕ) : 1 ≤ A k := le_max_left _ _
   have hχA (k : ℕ) : Bχ k ≤ A k := (le_max_left _ _).trans (le_max_right _ _)
   have hVA (k : ℕ) : BV k ≤ A k := (le_max_right _ _).trans (le_max_right _ _)
-  obtain ⟨BP, hBP, hbound⟩ := hproduct A hA
+  refine (hproduct A hA).elim ?_
+  intro BP hBPb
+  have hBP := hBPb.1
+  have hbound := hBPb.2
   let Q : ℝ := (3 / 2 : ℝ) ^ (γ / 6)
   have hQ : 0 < Q := Real.rpow_pos_of_pos (by norm_num : (0 : ℝ) < 3 / 2) _
   let B : ℕ → ℝ := fun k => 1 + (1 + Q) * BP k

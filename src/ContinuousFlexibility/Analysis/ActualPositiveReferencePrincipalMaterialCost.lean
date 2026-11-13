@@ -137,7 +137,7 @@ theorem n04Coordinates_retained_positive_reference_principal_material_cost
       (fun side => (hinput.2.2.2 side).2.2.2)).1
   have hcosts := positiveReferenceFiniteRadialJets_prescribed_costs n
     (κ := U⁻¹) (M := U) (U := U) (a := a) (b := b) (y := y) (h := hsource)
-    hlr (inv_pos.mpr hUpos) hUpos.le hU le_rfl (by simp only [inv_inv])
+    hlr (inv_pos.mpr hUpos) hUpos.le hU le_rfl (inv_inv U).le
     hinput.2.1 hinput.2.2.1
     (fun side => (hd side).1) (fun side => (hd side).2.1)
     (fun side => (hd side).2.2.1) (fun side => (hd side).2.2.2.1)
@@ -158,7 +158,9 @@ theorem n04Coordinates_retained_positive_reference_principal_material_cost
   have hlow (x : ℝ) : h ≤ H x := by
     have hx := hcosts.2.2.2 x
     have hHx : 0 < H x := hx.2.2.2.1
-    simpa only [inv_inv] using inv_anti₀ (inv_pos.mpr hHx) hx.2.2.2.2.2
+    have hinv := inv_anti₀ (inv_pos.mpr hHx) hx.2.2.2.2.2
+    rw [inv_inv] at hinv
+    exact hinv
   have hU6 : U ^ 6 = B ^ 6 * C0 ^ (6 * B) * E ^ (6 * B) := by
     dsimp only [U]
     rw [mul_pow, ← Real.rpow_mul_natCast (mul_pos hC0pos hE).le B 6,

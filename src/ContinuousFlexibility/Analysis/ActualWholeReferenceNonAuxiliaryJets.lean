@@ -208,8 +208,10 @@ theorem n04Coordinates_actual_whole_reference_nonAuxiliaryJets
         (C.referenceState, 0) m v hE hEi
       apply hraise hBGB
       refine ⟨?_, ?_, hnegativeGeometryS e cell ψ χ h₀ τ σ Q N hraw m hm v hv⟩
-      · simpa only [he] using hr.1
-      · simpa only [he] using hr.2
+      · rw [he]
+        exact hr.1
+      · rw [he]
+        exact hr.2
     | true =>
       exact henlarge hBP hBPB m v hE hEi
         (hpositiveS e τ σ Q N href m hm v (Or.inl hv))
@@ -234,8 +236,10 @@ theorem n04Coordinates_actual_whole_reference_nonAuxiliaryJets
         (C.referenceState, 0) m .potential (by decide) (by decide)
       apply hraise hBVB
       refine ⟨?_, ?_, hnegativePotentialS e cell ψ χ h₀ τ σ Q N hraw m hm⟩
-      · simpa only [he] using hr.1
-      · simpa only [he] using hr.2
+      · rw [he]
+        exact hr.1
+      · rw [he]
+        exact hr.2
     | true =>
       exact henlarge hBP hBPB m .potential (by decide) (by decide)
         (hpositiveS e τ σ Q N href m hm .potential (Or.inr (Or.inr rfl)))

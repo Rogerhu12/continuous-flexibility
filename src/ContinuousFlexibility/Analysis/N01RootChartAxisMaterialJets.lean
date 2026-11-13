@@ -152,13 +152,41 @@ theorem n01_rootChart_unit_positive_material_jets_of_component_optical
   classical
   have hp : Monotone (pairGrading (stateGrading S) realGrading) :=
     tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
-  obtain ⟨CE, lowE, lossE, hCE, hfloorE, BE, hBE, heven⟩ :=
-    n01_rootEvenOdd_unit_axis_material_jets_of_component_optical hS hT hN hflow hK
-  obtain ⟨CP, lowP, lossP, hCP, hfloorP, hpowers⟩ :=
-    n01_rootOddCoefficient_unit_rpow_material_jets_of_component_optical hS hT hN hflow hK
-  obtain ⟨_, lowPos, _, _, _, _, hvalues⟩ :=
-    n01_rootOddCoefficient_unit_material_values_of_component_optical hS hT hN hflow hK
-  obtain ⟨BP, hBP, hpower⟩ := hpowers (2 / 3 : ℝ)
+  refine (n01_rootEvenOdd_unit_axis_material_jets_of_component_optical
+    hS hT hN hflow hK).elim ?_
+  intro CE hE1
+  refine hE1.elim ?_
+  intro lowE hE2
+  refine hE2.elim ?_
+  intro lossE hE3
+  have hCE := hE3.1
+  have hfloorE := hE3.2.1
+  refine hE3.2.2.elim ?_
+  intro BE hBEe
+  have hBE := hBEe.1
+  have heven := hBEe.2
+  refine (n01_rootOddCoefficient_unit_rpow_material_jets_of_component_optical
+    hS hT hN hflow hK).elim ?_
+  intro CP hP1
+  refine hP1.elim ?_
+  intro lowP hP2
+  refine hP2.elim ?_
+  intro lossP hP3
+  have hCP := hP3.1
+  have hfloorP := hP3.2.1
+  have hpowers := hP3.2.2
+  refine (n01_rootOddCoefficient_unit_material_values_of_component_optical
+    hS hT hN hflow hK).elim ?_
+  intro _ hV1
+  refine hV1.elim ?_
+  intro lowPos hV2
+  refine hV2.elim ?_
+  intro _ hV3
+  have hvalues := hV3.2.2.2
+  refine (hpowers (2 / 3 : ℝ)).elim ?_
+  intro BP hBPp
+  have hBP := hBPp.1
+  have hpower := hBPp.2
   let C0 : ℝ := max CE CP
   have hC0 : 1 ≤ C0 := hCE.trans (le_max_left _ _)
   have hE (j : ℕ) : 0 < T.E0 (T.sample j) :=
@@ -171,12 +199,14 @@ theorem n01_rootChart_unit_positive_material_jets_of_component_optical
     (Finset.sum_nonneg (fun k _ => add_nonneg (hBE k).le (hBP k).le))
   have hEA (n k : ℕ) (hk : k ≤ n) : BE k ≤ A n :=
     (le_add_of_nonneg_right (hBP k).le).trans
-      ((Finset.single_le_sum (fun i _ => add_nonneg (hBE i).le (hBP i).le)
+      ((Finset.single_le_sum (f := fun i => BE i + BP i)
+        (fun i _ => add_nonneg (hBE i).le (hBP i).le)
         (Finset.mem_range.mpr (by omega : k < n + 1))).trans
           (le_add_of_nonneg_left zero_le_one))
   have hPA (n k : ℕ) (hk : k ≤ n) : BP k ≤ A n :=
     (le_add_of_nonneg_left (hBE k).le).trans
-      ((Finset.single_le_sum (fun i _ => add_nonneg (hBE i).le (hBP i).le)
+      ((Finset.single_le_sum (f := fun i => BE i + BP i)
+        (fun i _ => add_nonneg (hBE i).le (hBP i).le)
         (Finset.mem_range.mpr (by omega : k < n + 1))).trans
           (le_add_of_nonneg_left zero_le_one))
   let DC : ℕ → ℝ := fun n => 2 + (3 / 2 : ℝ) ^ (2 / 3 : ℝ) * (2 : ℝ) ^ n
@@ -216,7 +246,7 @@ theorem n01_rootChart_unit_positive_material_jets_of_component_optical
         ((Real.rpow_le_rpow (zero_le_one.trans hV) hVW ha).trans
           (Real.rpow_le_rpow_of_exponent_le hW haA))
         (Real.rpow_nonneg (zero_le_one.trans hV) _) (zero_le_one.trans (hA n)))
-      (add_le_add_left (hp hkl _) 1)
+      (add_le_add le_rfl (hp hkl _))
       (add_nonneg zero_le_one (apply_nonneg _ _))
       (mul_nonneg (zero_le_one.trans (hA n))
         (Real.rpow_nonneg (zero_le_one.trans hW) _))

@@ -109,9 +109,11 @@ theorem n04WholeReferenceGauge_positive_potentialReferenceJets_fixedFamily
       obtain ⟨hl, hr, _, _, _, hsample, _, _, _, _, _, _⟩ :=
         n04WholeReferenceGaugeAtlasData_positive_fields C L A e cell ψ χ h₀ τ σ Q N
           (C.referenceState, 0) m i hi
+      have hl' : V.left m = 0 := hl
+      have hr' : V.right m = 1 := hr
       have hunit (p : PolarPoint) : canonicalUnitPoint V m p = p := by
         change (V.left m + (V.right m - V.left m) * p.1, p.2) = p
-        simp only [hl, hr, sub_zero, one_mul, zero_add, Prod.mk.eta]
+        simp only [hl', hr', sub_zero, one_mul, zero_add, Prod.mk.eta]
       have hatom : atom D₀ T S C L V (C.referenceState, 0) m .potential =
           V.potential (C.referenceState, 0) m := by
         funext p
@@ -128,7 +130,7 @@ theorem n04WholeReferenceGauge_positive_potentialReferenceJets_fixedFamily
           (fun p : PolarPoint => f p.1) unitStrip := by
         intro p hp
         have hpCanonical : p ∈ canonicalOpen S V m := by
-          simpa only [unitStrip, canonicalOpen, hl, hr] using hp
+          simpa only [unitStrip, canonicalOpen, hl', hr'] using hp
         rw [hatom]
         exact (n04WholeReferenceGaugeAtlasData_positive_reference_potential_flux_germ
           hT hS hN hfield e₀ e cell Y H τ σ Q N m i hi (hgeometry i) (href i)

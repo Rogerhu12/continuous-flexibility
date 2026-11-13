@@ -37,7 +37,7 @@ private theorem referencePotential_profile_compact_bound
   have hjet : |iteratedDeriv k w x| ≤ A j := by
     simpa only [Real.norm_eq_abs] using hA j x hx
   exact (hjet.trans (le_abs_self _)).trans
-    (Finset.single_le_sum (fun _ _ => abs_nonneg _) (Finset.mem_univ j))
+    (Finset.single_le_sum (f := fun k => |A k|) (fun _ _ => abs_nonneg _) (Finset.mem_univ j))
 
 /-- The actual flux potential has polynomial sample bounds at every
 order. The returned finite data, width and range geometry use precisely
@@ -210,7 +210,7 @@ theorem n04Coordinates_retained_positive_reference_potential_material_jets
   have hH : ContDiff ℝ ∞ H := by
     simpa only [Function.comp_def] using hgeometry.height_smooth.comp hline
   have hχ : ContDiff ℝ ∞ χ := by
-    simpa only [positiveReferenceCylinderInverse, Function.comp_def] using
+    simpa only [positiveReferenceCylinderInverse, Function.comp_def, χ] using
       hgeometry.inverse_smooth.fst.comp hline
   have hforward : ∀ k, k ≤ s + 2 → ∀ x : ℝ,
       |iteratedDeriv (k + 1) Y x| ≤ A₀ (s + 2) * W ^ A₀ (s + 2) ∧

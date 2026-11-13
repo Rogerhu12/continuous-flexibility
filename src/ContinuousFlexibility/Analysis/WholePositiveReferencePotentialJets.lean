@@ -40,7 +40,7 @@ private theorem radialReferencePotential_flux_formula
   have hH : ContDiff ℝ ∞ H := by
     simpa only [Function.comp_def] using hgeometry.height_smooth.comp hline
   have hχ : ContDiff ℝ ∞ χ := by
-    simpa only [positiveReferenceCylinderInverse, Function.comp_def] using
+    simpa only [positiveReferenceCylinderInverse, Function.comp_def, χ] using
       hgeometry.inverse_smooth.fst.comp hline
   have hYpos : 0 < deriv Y (χ x) := by
     simpa only [planeJacobian_positiveReferenceCylinderChart
@@ -98,10 +98,7 @@ theorem n04WholeReferenceGaugeAtlasData_positive_reference_potential_flux_germ
     V.potential (C.referenceState, 0) m =ᶠ[𝓝 p]
       (fun q : PolarPoint => -(H i (Function.invFun (Y i) q.1) *
         deriv ((fun r => D.w r * deriv (H i) r) ∘ Function.invFun (Y i)) q.1)) := by
-  let V := n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀)
-    e cell (fun j => positiveReferenceCylinderChart (Y j))
-    (fun j => positiveReferenceCylinderInverse (Y j))
-    (fun j q => H j q.1) τ σ Q N
+  intro V
   have hopen : IsOpen (canonicalOpen S V m) := isOpen_Ioo.prod isOpen_univ
   filter_upwards [hopen.mem_nhds hp] with q hq
   have hv := (n04WholeReferenceGaugeAtlasData_positive_reference_formulas

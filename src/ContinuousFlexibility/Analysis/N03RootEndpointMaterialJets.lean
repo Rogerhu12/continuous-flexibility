@@ -41,7 +41,7 @@ private theorem physicalRoot_two_material_mono
     _ = (2 * a) * V ^ a * (1 + p (n + l) z) := by ring
     _ ≤ _ := mul_le_mul
       (mul_le_mul hab hpower (Real.rpow_nonneg (zero_le_one.trans hV) _) hb)
-      (add_le_add_left (hp (Nat.add_le_add_left hlm n) z) 1)
+      (add_le_add le_rfl (hp (Nat.add_le_add_left hlm n) z))
       (add_nonneg zero_le_one (apply_nonneg _ _))
       (mul_nonneg hb (Real.rpow_nonneg (zero_le_one.trans hW) _))
 
@@ -82,8 +82,17 @@ theorem n04b_actual_root_material_jets_of_component_optical
                 (z - (C.referenceState, 0))) := by
   have hp : Monotone (pairGrading (stateGrading S) realGrading) :=
     tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
-  obtain ⟨rootBase, flowLoss, η, hb, hη, hηε, hflow, hinputs⟩ :=
-    n01_exists_common_root_inputs n04FlowJetsTarget_proof hS hT hN.1.1
+  refine (n01_exists_common_root_inputs n04FlowJetsTarget_proof hS hT hN.1.1).elim ?_
+  intro rootBase hR1
+  refine hR1.elim ?_
+  intro flowLoss hR2
+  refine hR2.elim ?_
+  intro η hR3
+  have hb := hR3.1
+  have hη := hR3.2.1
+  have hηε := hR3.2.2.1
+  have hflow := hR3.2.2.2.1
+  have hinputs := hR3.2.2.2.2
   have hsub := stateNeighborhood_mono S C hb hηε
   have hN' := nonlinearPropertiesThrough03_restrict hT hN hb le_rfl hη hηε
   have hA' := n04PartA_restrict hA hb hηε
@@ -93,10 +102,29 @@ theorem n04b_actual_root_material_jets_of_component_optical
       periodic_coefficients := fun z hz => hfield.periodic_coefficients z (hsub hz)
       positive_a := fun z hz => hfield.positive_a z (hsub hz)
       negative_discriminant := fun z hz => hfield.negative_discriminant z (hsub hz) }
-  obtain ⟨CF, lowF, lossF, hCF, hfloorF, BF, hBF, hchart⟩ :=
-    n01_rootChart_unit_positive_material_jets_of_component_optical hS hT hN'.1.1 hflow hK
-  obtain ⟨CH, lowH, lossH, hCH, hfloorH, hheights⟩ :=
-    n01_rootDividedHeight_unit_rpow_material_jets_of_component_optical hS hT hN'.1.1 hflow hK
+  refine (n01_rootChart_unit_positive_material_jets_of_component_optical
+    hS hT hN'.1.1 hflow hK).elim ?_
+  intro CF hF1
+  refine hF1.elim ?_
+  intro lowF hF2
+  refine hF2.elim ?_
+  intro lossF hF3
+  have hCF := hF3.1
+  have hfloorF := hF3.2.1
+  refine hF3.2.2.elim ?_
+  intro BF hBFc
+  have hBF := hBFc.1
+  have hchart := hBFc.2
+  refine (n01_rootDividedHeight_unit_rpow_material_jets_of_component_optical
+    hS hT hN'.1.1 hflow hK).elim ?_
+  intro CH hH1
+  refine hH1.elim ?_
+  intro lowH hH2
+  refine hH2.elim ?_
+  intro lossH hH3
+  have hCH := hH3.1
+  have hfloorH := hH3.2.1
+  have hheights := hH3.2.2
   let C0 : ℝ := max CF CH
   let low : ℕ := max lowF lowH
   let outLoss : ℕ := max lossF lossH
@@ -112,7 +140,10 @@ theorem n04b_actual_root_material_jets_of_component_optical
     (le_max_right low outLoss).trans (le_max_right rootBase (max low outLoss)),
     lt_min hη (by norm_num), (min_le_left _ _).trans hηε, ?_⟩
   intro γ
-  obtain ⟨BH, hBH, hheight⟩ := hheights γ
+  refine (hheights γ).elim ?_
+  intro BH hBHh
+  have hBH := hBHh.1
+  have hheight := hBHh.2
   let B : ℕ → ℝ := fun n => 2 * (1 + BF n + BH n)
   have hBpos (n : ℕ) : 0 < B n :=
     mul_pos (by norm_num) (add_pos (add_pos zero_lt_one (hBF n)) (hBH n))
@@ -132,12 +163,33 @@ theorem n04b_actual_root_material_jets_of_component_optical
       linarith only [he])
   have hzF := (hp (le_max_left lowF lowH) _).trans hlow
   have hzH := (hp (le_max_right lowF lowH) _).trans hlow
-  obtain ⟨g, R, hR, κ, hg, _, hκ, hfactor, hgeometry, hflows⟩ := hinputs m side
-  obtain ⟨δ, A, hδ, _, _, hApos, hfamily⟩ := hflows 1 zero_lt_one
+  refine (hinputs m side).elim ?_
+  intro g hI1
+  refine hI1.elim ?_
+  intro R hI2
+  refine hI2.elim ?_
+  intro hR hI3
+  refine hI3.elim ?_
+  intro κ hI4
+  have hg := hI4.1
+  have hκ := hI4.2.2.1
+  have hfactor := hI4.2.2.2.1
+  have hgeometry := hI4.2.2.2.2.1
+  have hflows := hI4.2.2.2.2.2
+  refine (hflows 1 zero_lt_one).elim ?_
+  intro δ hD1
+  refine hD1.elim ?_
+  intro A hD2
+  have hδ := hD2.1
+  have hApos := hD2.2.2.2.1
+  have hfamily := hD2.2.2.2.2
   have hstrip := (hgeometry.1 z hzroot hs).1
-  obtain ⟨Θ, hΘ, hident⟩ := n03_controlledRootInput_unit_identification
+  refine (n03_controlledRootInput_unit_identification
     hS hT hN' hfield' hA' hB' hzroot hs m side hg hR hκ hδ hApos hstrip
-    (hfamily z hzroot hs)
+    (hfamily z hzroot hs)).elim ?_
+  intro Θ hΘi
+  have hΘ := hΘi.1
+  have hident := hΘi.2
   let r := n01ComponentRoot C m side
   let σ := n01ComponentRootOrientation side
   let i := if side then (K.cutPair m).2 else (K.cutPair m).1
@@ -159,7 +211,13 @@ theorem n04b_actual_root_material_jets_of_component_optical
   have hσne : σ ≠ 0 := by rcases hσ with h | h <;> rw [h] <;> norm_num
   have hpoint : rootProfileShift r σ (0, θ) = (r, θ) := by
     simp only [rootProfileShift, mul_zero, add_zero]
-  obtain ⟨hclosed, hFregular, hHregular, hHpos, hFjet, hHjet⟩ := hident θ
+  have hidθ := hident θ
+  have hclosed := hidθ.1
+  have hFregular := hidθ.2.1
+  have hHregular := hidθ.2.2.1
+  have hHpos := hidθ.2.2.2.1
+  have hFjet := hidθ.2.2.2.2.1
+  have hHjet := hidθ.2.2.2.2.2
   have hFbound (n : ℕ) (hn : 1 ≤ n) :
       ‖iteratedFDeriv ℝ n (fun p => K.chart z i (rootProfileShift r σ p)) (0, θ)‖ ≤
         AF n * (1 + pairGrading (stateGrading S) realGrading (n + lossF)

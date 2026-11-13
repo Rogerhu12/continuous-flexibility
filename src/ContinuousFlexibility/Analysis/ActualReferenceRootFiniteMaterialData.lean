@@ -2,6 +2,7 @@ import ContinuousFlexibility.Analysis.ActualReferenceRootSlopeNormalization
 import ContinuousFlexibility.Analysis.N03RootEndpointMaterialJets
 import ContinuousFlexibility.Analysis.N04bActualAtlasInteriorCompletion
 import ContinuousFlexibility.Analysis.OneSidedBoundaryJets
+import ContinuousFlexibility.Analysis.N04bReferenceActualTravel
 
 /-!
 # Actual finite reference data with a material envelope
@@ -58,15 +59,34 @@ theorem n04Coordinates_actual_reference_root_finite_material_data
   have hA := n04bWithInteriorDivision_partA
     (n04b_actualTypedAtlas_partA hT hS hN hfield e)
   have hB := n04bActualTypedAtlas_interiorCompletion_partB hT hS hN hfield e
-  obtain ⟨C0, newBase, outLoss, η, hC0, hfloor, _, _, hη, _, hjet⟩ :=
-    n04b_actual_root_material_jets_of_component_optical hS hT hN hfield hA hB hK
-  obtain ⟨A, hApos, hjetA⟩ := hjet 1
-  obtain ⟨I, hIpos, hjetI⟩ := hjet (-1)
-  obtain ⟨Q, hQpos, hjetQ⟩ := hjet 2
+  refine (n04b_actual_root_material_jets_of_component_optical hS hT hN hfield hA hB hK).elim ?_
+  intro C0 hJ1
+  refine hJ1.elim ?_
+  intro newBase hJ2
+  refine hJ2.elim ?_
+  intro outLoss hJ3
+  refine hJ3.elim ?_
+  intro η hJ4
+  have hC0 := hJ4.1
+  have hfloor := hJ4.2.1
+  have hη := hJ4.2.2.2.2.1
+  have hjet := hJ4.2.2.2.2.2.2
+  refine (hjet 1).elim ?_
+  intro A hAj
+  have hApos := hAj.1
+  have hjetA := hAj.2
+  refine (hjet (-1)).elim ?_
+  intro I hIj
+  have hIpos := hIj.1
+  have hjetI := hIj.2
+  refine (hjet 2).elim ?_
+  intro Q hQj
+  have hQpos := hQj.1
+  have hjetQ := hQj.2
   let z₀ : AnnularState S × ℝ := (C.referenceState, 0)
   have href : z₀ ∈ stateNeighborhood S C newBase η :=
     reference_mem_stateNeighborhood S C newBase hη
-  have hsref : stateSector S z₀.1 := hN.1.1.2.2.1.stateSector
+  have hsref : stateSector S z₀.1 := n04b_referenceState_sector hN.1.1.2.2.1
   have hD := n04b_profileGeometry_of_through03 hN
   obtain ⟨W₀, hW₀⟩ := (isCompact_Icc : IsCompact (Icc D.a D.b))
     .exists_bound_of_continuousOn hD.2.2.1.1.continuous.continuousOn
@@ -87,7 +107,7 @@ theorem n04Coordinates_actual_reference_root_finite_material_data
   have hVQB : V * Q 0 ≤ B := by dsimp only [B]; linarith only [hJ, hIpos 0, hQpos 0]
   have hAB (n : ℕ) (hn : n ≤ N) : A n ≤ B := by
     have hAn : A n ≤ J :=
-      Finset.single_le_sum (fun k _ => (hApos k).le)
+      Finset.single_le_sum (f := A) (fun k _ => (hApos k).le)
         (Finset.mem_range.mpr (Nat.lt_succ_of_le hn))
     dsimp only [B]
     linarith only [hAn, hIpos 0, hQpos 0, hVQ]
@@ -104,7 +124,8 @@ theorem n04Coordinates_actual_reference_root_finite_material_data
   have hcost {a b : ℝ} (ha : a ≤ B) (hb : b ≤ B) : b * W ^ a ≤ M :=
     mul_le_mul hb (Real.rpow_le_rpow_of_exponent_le hW ha)
       (Real.rpow_nonneg (zero_le_one.trans hW) _) (zero_le_one.trans hBone)
-  have hi : (if side then (K.cutPair m).2 else (K.cutPair m).1) = k := by
+  have hi : (if side then ((n04bActualTypedAtlas hT hS hN hfield e).cutPair m).2
+      else ((n04bActualTypedAtlas hT hS hN hfield e).cutPair m).1) = k := by
     cases side <;> rfl
   have hja := hjetA z₀ href hsref m j hhost hoptical side 0
   have hji := hjetI z₀ href hsref m j hhost hoptical side 0
@@ -121,9 +142,11 @@ theorem n04Coordinates_actual_reference_root_finite_material_data
   have hopen := n04Coordinates_actual_reference_negative_radial_fields hT hS hN hfield e m side
   have hHpos : 0 < K.height z₀ k (c, 0) := (hroot.1 0).2.2.2.1
   have hHinv : (K.height z₀ k (c, 0))⁻¹ ≤ I 0 * W ^ (I 0) := by
-    simpa only [n04bWithInteriorDivision, n01ComponentRoot, hi, z₀, sub_self,
-      map_zero, add_zero, mul_one, norm_iteratedFDeriv_zero, Real.rpow_neg_one,
-      Real.norm_of_nonneg (inv_nonneg.mpr hHpos.le)] using hji.2.2.2 0
+    have h0 : |K.height z₀ k (c, 0)|⁻¹ ≤ I 0 * W ^ (I 0) := by
+      simpa only [n04bWithInteriorDivision, n01ComponentRoot, hi, z₀, sub_self,
+        map_zero, add_zero, mul_one, norm_iteratedFDeriv_zero, Real.rpow_neg_one,
+        norm_inv, Real.norm_eq_abs] using hji.2.2.2 0
+    rwa [abs_of_pos hHpos] at h0
   have hHsquare : K.height z₀ k (c, 0) ^ 2 ≤ Q 0 * W ^ (Q 0) := by
     simpa only [n04bWithInteriorDivision, n01ComponentRoot, hi, z₀, sub_self,
       map_zero, add_zero, mul_one, norm_iteratedFDeriv_zero, Real.rpow_two,

@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.ActualReferenceRootFiniteMaterialData
 import ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData
+import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Material data of the actual interior positive reference source
