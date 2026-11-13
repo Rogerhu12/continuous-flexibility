@@ -37,8 +37,8 @@ private def fixedJetDirections
       apply congrArg (J.D (n + 1) x)
       funext i
       refine Fin.lastCases ?_ (fun j => ?_) i
-      · exact Fin.snoc_last u w
-      · exact Fin.snoc_castSucc u w j
+      · simp only [Fin.snoc_last, w]
+      · simp only [Fin.snoc_castSucc, u]
 
 /-- Evaluated ordinary spatial jets are genuine parameter functions on
 the same joint domain, even when that domain is not a product. -/
