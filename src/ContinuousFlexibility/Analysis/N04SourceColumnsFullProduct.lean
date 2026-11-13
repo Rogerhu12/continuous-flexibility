@@ -79,7 +79,7 @@ theorem n04SourceColumns_fullProduct_parameter_bound (m k a b : ℕ) (RH : ℝ) 
       dsimp only [Bi]
       rw [Finset.prod_mul_distrib,
         n01c_finset_prod_spatialOrder _ orders hR s, horders]
-    simpa only [hBiProd, M, mul_assoc, mul_left_comm, mul_comm] using hprod
+    simpa only [hBiProd, M, parameterHeightWeight, mul_assoc, mul_left_comm, mul_comm] using hprod
   have hd := smoothDirections_D_eq_linearCombination J JT (fun _ => (1 : ℝ))
     (fun y hy => by simpa only [one_mul] using
       n04Realization_mixedProductLeibniz_on_open e hΩ
