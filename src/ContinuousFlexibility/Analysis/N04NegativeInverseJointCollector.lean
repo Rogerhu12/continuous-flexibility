@@ -75,13 +75,15 @@ private theorem n04NegativeInverse_jointPrefixes_of_scalar_bound
     (J : ∀ m, P m → SmoothDirections (sectorNeighborhood S base ε ε ×ˢ unitStrip)
       (fun x : Parameter S × PolarPoint => f x.1 m x.2))
     (hbound : ∀ m (hm : P m),
+      ∀ JP : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ unitStrip)
+        (fun x : Parameter S × PolarPoint => f x.1 m x.2),
       ∀ Q : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ unitStrip)
         (fun x : Parameter S × PolarPoint => g x.1 m x.2),
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ q ∈ unitStrip,
       ∀ n : ℕ, ∀ w : StateAngleWord n, 0 < w.stateArity →
       ∀ v : Fin n → Parameter S × PolarPoint,
       (∀ i, w.isState i = true → (v i).2 = 0) →
-        |Q.D n (z, q) v| ≤ (1 + I m) * ‖(J m hm).D n (z, q) v‖)
+        |Q.D n (z, q) v| ≤ (1 + I m) * ‖JP.D n (z, q) v‖)
     (hpoint : N04NegativeInverseJointPrefixes S T cell P base ε f) :
     N04NegativeInverseJointPrefixes S T cell P base ε g := by
   intro k hk
@@ -100,7 +102,7 @@ private theorem n04NegativeInverse_jointPrefixes_of_scalar_bound
   refine ⟨D, hD, ?_⟩
   intro m hm Q z hz q hq n w hw hs v hv R hR hzR hvR hp hstate hspatial
   have hP := hb m hm (J m hm) z hz q hq n w hw hs v hv R hR hzR hvR hp hstate hspatial
-  have hA := hbound m hm Q z hz q hq n w (hw.symm ▸ hk) v hspatial
+  have hA := hbound m hm (J m hm) Q z hz q hq n w (hw.symm ▸ hk) v hspatial
   let E : ℝ := T.E0 (T.sample (cell m))
   let H : ℝ := T.H (T.sample (cell m)) ^ (3 / 4 : ℝ)
   let W : ℝ := R ^ (((w.angleArity + shift * k - 1 : ℕ) : ℝ) /
@@ -144,8 +146,8 @@ theorem negativeInverse_atom_jointPrefixes
     (G.cost_nonneg 0).2.2 (G.cost_nonneg 0).2.1 hC (fun _ => abs_nonneg _)
     (fun m => (abs_of_pos (inv_pos.mpr (hc 0 m).1)).trans_le (hc 0 m).2.2.2.1)
     J
-    (fun m hm Q z hz q hq n w hk v hv =>
-      G.negativeInverseAtom_positiveJoint_bound 0 m (J m hm) a ha Q w hk ⟨hz, hq⟩ v hv)
+    (fun m hm JP Q z hz q hq n w hk v hv =>
+      G.negativeInverseAtom_positiveJoint_bound 0 m JP a ha Q w hk ⟨hz, hq⟩ v hv)
     hpoint
 
 /-- The point and pulled-height joint estimates close exactly the

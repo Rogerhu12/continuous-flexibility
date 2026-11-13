@@ -57,8 +57,9 @@ theorem n04NegativeInverse_physicalUnit_jet
     change c + L x ∈ U ×ˢ Ω
     rw [hpoint]
     exact ⟨hx.1, hmap hx.2⟩
+  have hunit : IsOpen (U ×ˢ unitStrip) := hU.prod (isOpen_Ioo.prod isOpen_univ)
   let Q' : SmoothDirections (U ×ˢ unitStrip) g :=
-    (J.compAffine L c (hU.prod (isOpen_Ioo.prod isOpen_univ)) hm).congrOn
+    (J.compAffine L c hunit hm).congrOn
       (fun x hx => (congrArg f (hpoint x)).trans (heq x hx))
   let q := n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData K) k p
   have hq : q ∈ unitStrip :=
@@ -80,9 +81,12 @@ theorem n04NegativeInverse_physicalUnit_jet
   have h := congrArg (fun B : (E × PolarPoint) [×n]→L[ℝ] F => B v')
     (Q.unique Q' n (z, q) ⟨hz, hq⟩)
   change Q.D n (z, q) v' =
-    (J.compAffine L c (hU.prod (isOpen_Ioo.prod isOpen_univ)) hm).D n (z, q) v' at h
-  rw [SmoothDirections.compAffine_apply, hpoint, hpq, hdir] at h
-  exact h.symm
+    (J.compAffine L c hunit hm).D n (z, q) v' at h
+  have hbase : c + L (z, q) = (z, p) :=
+    (hpoint (z, q)).trans (congrArg (fun r : PolarPoint => (z, r)) hpq)
+  have heval := congrArg₂
+    (fun (x : E × PolarPoint) (u : Fin n → E × PolarPoint) => J.D n x u) hbase hdir
+  exact (h.trans ((J.compAffine_apply L c hunit hm n (z, q) v').trans heval)).symm
 
 /-- Unit physical directions on the original interval acquire only the
 fixed inverse-length cost. -/
