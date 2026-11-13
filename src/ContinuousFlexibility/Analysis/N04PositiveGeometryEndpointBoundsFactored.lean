@@ -105,10 +105,19 @@ theorem n04PositiveGeometry_factoredRootTrace_finiteShift_power
         ‖J.D k z v‖ ≤ F * C0 * T.E0 r ^ A * parameterHeightWeight (T.H r ^ scalarBeta) k *
           R ^ ((b : ℝ) / ((s : ℝ) + 1)) := by
   classical
-  obtain ⟨B, inputLoss, hB, hp⟩ :=
-    n04PositiveGeometry_orientedRootTrace_finiteShift_power hT hS hN hε hE N requestedBase
+  let data := n04PositiveGeometry_orientedRootTrace_finiteShift_power
+    hT hS hN hε hE N requestedBase
+  let B : ℕ := data.choose
+  let inputLoss : ℕ := data.choose_spec.choose
+  have hB : requestedBase ≤ B := data.choose_spec.choose_spec.1
+  have hp := data.choose_spec.choose_spec.2
   refine ⟨B, inputLoss, hB, fun K s => ?_⟩
-  obtain ⟨C0, A, hC0, hA, hb⟩ := hp K s
+  let orderData := hp K s
+  let C0 : ℝ := orderData.choose
+  let A : ℝ := orderData.choose_spec.choose
+  have hC0 : 1 ≤ C0 := orderData.choose_spec.choose_spec.1
+  have hA : 0 ≤ A := orderData.choose_spec.choose_spec.2.1
+  have hb := orderData.choose_spec.choose_spec.2.2
   have hpow : 1 ≤ (2 : ℝ) ^ N := one_le_pow₀ (by norm_num)
   refine ⟨(2 : ℝ) ^ N * C0, A, one_le_mul_of_one_le_of_one_le hpow hC0, hA, ?_⟩
   intro r hr hroot σ hσ g hg hg0 F hF hFjets a d had b hbs θ J k hk z hz hzlow v hv R hR hzR hvR

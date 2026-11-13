@@ -99,16 +99,34 @@ theorem n04PositiveGeometry_rootRawCoefficient_sample_prefix
           R ^ ((b : ℝ) / ((s : ℝ) + 1)) := by
   have hN := n01Properties_restrict W.hT W.through03.1.1 hb le_rfl hε hεW
   have hE : ∀ r ∈ radialCore W.D, 1 ≤ W.T.E0 r := fun r _ => W.floor r
-  obtain ⟨Bd, Ld, hBd, hd⟩ := n04PositiveGeometry_orientedRootTrace_finiteShift_power
+  let driftData := n04PositiveGeometry_orientedRootTrace_finiteShift_power
     W.hT W.hS hN hεone hE N requestedBase
-  obtain ⟨Bc, Lc, hBc, hc⟩ := n04PositiveGeometry_factoredRootTrace_finiteShift_power
+  let Bd : ℕ := driftData.choose
+  let Ld : ℕ := driftData.choose_spec.choose
+  have hBd : requestedBase ≤ Bd := driftData.choose_spec.choose_spec.1
+  have hd := driftData.choose_spec.choose_spec.2
+  let speedData := n04PositiveGeometry_factoredRootTrace_finiteShift_power
     W.hT W.hS hN hεone hE N requestedBase
+  let Bc : ℕ := speedData.choose
+  let Lc : ℕ := speedData.choose_spec.choose
+  have hBc : requestedBase ≤ Bc := speedData.choose_spec.choose_spec.1
+  have hc := speedData.choose_spec.choose_spec.2
   obtain ⟨F, hF, hFbound⟩ := n04PositiveGeometry_referenceRootSpeedFactor_sample_prefix W X N
   let p := pairGrading (sectorGrading W.S) realGrading
   have hp : Monotone p := sectorPairGrading_monotone W.S
   refine ⟨max Bd Bc, max Ld Lc, hBd.trans (le_max_left _ _), fun K s => ?_⟩
-  obtain ⟨Cd, Ad, hCd, hAd, hdb⟩ := hd K s
-  obtain ⟨Cc, Ac, hCc, hAc, hcb⟩ := hc K s
+  let driftOrder := hd K s
+  let Cd : ℝ := driftOrder.choose
+  let Ad : ℝ := driftOrder.choose_spec.choose
+  have hCd : 1 ≤ Cd := driftOrder.choose_spec.choose_spec.1
+  have hAd : 0 ≤ Ad := driftOrder.choose_spec.choose_spec.2.1
+  have hdb := driftOrder.choose_spec.choose_spec.2.2
+  let speedOrder := hc K s
+  let Cc : ℝ := speedOrder.choose
+  let Ac : ℝ := speedOrder.choose_spec.choose
+  have hCc : 1 ≤ Cc := speedOrder.choose_spec.choose_spec.1
+  have hAc : 0 ≤ Ac := speedOrder.choose_spec.choose_spec.2.1
+  have hcb := speedOrder.choose_spec.choose_spec.2.2
   obtain ⟨Dd, hDd, hds⟩ := n04PositiveGeometry_positiveEndpoint_parameter_weight W X
     (γ := (3 / 4 : ℝ)) (by norm_num) hAd (zero_le_one.trans hCd)
   obtain ⟨Dc, hDc, hcs⟩ := n04PositiveGeometry_positiveEndpoint_parameter_weight W X
