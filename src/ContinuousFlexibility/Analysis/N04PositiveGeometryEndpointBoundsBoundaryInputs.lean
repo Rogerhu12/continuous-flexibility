@@ -20,6 +20,19 @@ open scoped ContDiff
 local instance n04PositiveBoundaryInputStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
+private def rootInputSelect {α : Fin 9 → Type*}
+    (a0 : α 0) (a1 : α 1) (a2 : α 2) (a3 : α 3) (a4 : α 4)
+    (a5 : α 5) (a6 : α 6) (a7 : α 7) (a8 : α 8) (j : Fin 9) : α j :=
+  Fin.cases (motive := α) a0
+    (Fin.cases a1
+      (Fin.cases a2
+        (Fin.cases a3
+          (Fin.cases a4
+            (Fin.cases a5
+              (Fin.cases a6
+                (Fin.cases a7
+                  (Fin.cases a8 (fun l : Fin 0 => Fin.elim0 l))))))))) j
+
 def n04PositiveGeometry_rootBoundaryInput
     (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
     (g : ℝ → ℝ) (m : ℕ) (side : Bool) (j : Fin 9)
@@ -66,17 +79,10 @@ def n04PositiveGeometry_rootBoundaryInput_joint
     (smoothDirections_angularIterate
     (n04Realization_rootLabel_forwardJointDirections hT hS hN m side) 1).congr
       (fun _ _ => by simp only [iteratedDeriv_one])
-  exact Fin.cases (motive := fun l : Fin 9 =>
+  exact rootInputSelect (α := fun l : Fin 9 =>
       SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
         (n04PositiveGeometry_rootBoundaryInput D S C g m side l))
-    (JC false 0)
-    (Fin.cases (JC false 1)
-      (Fin.cases (JC false 2)
-        (Fin.cases (JC false 3)
-          (Fin.cases (JC true 0)
-            (Fin.cases (JC true 1)
-              (Fin.cases (JC true 2)
-                (Fin.cases (JC true 3)
-                  (Fin.cases JB (fun l : Fin 0 => Fin.elim0 l))))))))) j
+    (JC false 0) (JC false 1) (JC false 2) (JC false 3)
+    (JC true 0) (JC true 1) (JC true 2) (JC true 3) JB j
 
 end ContinuousFlexibility.Analysis
