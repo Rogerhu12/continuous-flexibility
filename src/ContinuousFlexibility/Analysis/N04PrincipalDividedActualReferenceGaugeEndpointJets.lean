@@ -59,15 +59,15 @@ theorem n04Coordinates_referenceGaugePrincipal_endpoint_jets
   have hcontinuous : Continuous (deriv D.w) := hD.2.2.1.1.continuous_deriv (by simp)
   have hlr := (n04PositiveComponent_bounds hcontinuous i).2.1
   have hY : ContDiff ℝ ∞ Y := by
-    simpa only [positiveReferenceCylinderChart, Function.comp_def] using
+    simpa only [positiveReferenceCylinderChart, Function.comp_def, id_eq] using
       hG.chart_smooth.fst.comp (contDiff_id.prodMk (contDiff_const :
         ContDiff ℝ ∞ (fun _ : ℝ => (0 : ℝ))))
   have hH₀ : ContDiff ℝ ∞ H₀ := by
-    simpa only [Function.comp_def] using
+    simpa only [Function.comp_def, id_eq] using
       hG.height_smooth.comp (contDiff_id.prodMk (contDiff_const :
         ContDiff ℝ ∞ (fun _ : ℝ => (0 : ℝ))))
   have hYpos (r : ℝ) : 0 < deriv Y r := by
-    simpa only [planeJacobian_positiveReferenceCylinderChart
+    simpa only [planeJacobian_positiveReferenceCylinderChart (p := (r, 0))
       (hY.differentiable (by simp) r)] using hG.jacobian_positive (r, 0)
   have hends := hG.cylinder_endpoint_values hlr
   have hpoint : positiveReferenceCylinderInverse Y ((if side then (1 : ℝ) else 0), θ) =

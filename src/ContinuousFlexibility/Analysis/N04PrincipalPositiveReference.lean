@@ -131,8 +131,7 @@ theorem n04PrincipalPositive_reference_inverseJacobian_bounds {b : ℕ} {ε : �
     (eq_div_iff hJ).mpr hprod
   have hforward := hb.choose_spec.2 m .jacobian q.val q.property 0 0 (by omega)
   have hforwardInv := hb.choose_spec.2 m .jacobianInverse q.val q.property 0 0 (by omega)
-  simp only [spaces_mixedDerivative_zero, atom, abs_abs, abs_inv] at
-    hforward hforwardInv
+  simp only [spaces_mixedDerivative_zero, atom, abs_abs, abs_inv] at hforward hforwardInv
   rw [he] at hforward hforwardInv
   change |planeJacobian I p| ≤ _ ∧ |planeJacobian I p|⁻¹ ≤ _
   rw [hJI, one_div, abs_inv, inv_inv]

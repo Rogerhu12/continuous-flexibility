@@ -89,7 +89,7 @@ theorem congr (hf : N04PrincipalPairBounds (U := U) (Ω := Ω) p E W f f₀)
   have hed : ∀ m x, x ∈ U →
       EqOn (fun q => f m x q - f₀ m q) (fun q => g m x q - g₀ m q) Ω := by
     intro m x hx q hq
-    rw [he m x hx hq, he₀ m hq]
+    exact congrArg₂ (fun a b : ℝ => a - b) (he m x hx hq) (he₀ m hq)
   let SD : ∀ m, MixedJetRegularity U Ω (fun x q => g m x q - g₀ m q) := fun m =>
     (RD m).congr hΩ (fun x hx => ((SF m).spatial x hx).sub ((SR m).spatial x hx)) (hed m)
   exact ⟨base, SF, SR, SD,

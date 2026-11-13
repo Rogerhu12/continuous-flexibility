@@ -50,15 +50,15 @@ theorem exists_referenceGaugePrincipal_difference_extension
         F v =ᶠ[𝓝 p] (fun q => canonicalCoefficientComponent v B q -
           canonicalCoefficientComponent v B₀ q) := by
   have hY : ContDiff ℝ ∞ Y := by
-    simpa only [positiveReferenceCylinderChart, Function.comp_def] using
+    simpa only [positiveReferenceCylinderChart, Function.comp_def, id_eq] using
       hG.chart_smooth.fst.comp (contDiff_id.prodMk (contDiff_const :
         ContDiff ℝ ∞ (fun _ : ℝ => (0 : ℝ))))
   have hH₀ : ContDiff ℝ ∞ H₀ := by
-    simpa only [Function.comp_def] using
+    simpa only [Function.comp_def, id_eq] using
       hG.height_smooth.comp (contDiff_id.prodMk (contDiff_const :
         ContDiff ℝ ∞ (fun _ : ℝ => (0 : ℝ))))
   have hYpos (r : ℝ) : 0 < deriv Y r := by
-    simpa only [planeJacobian_positiveReferenceCylinderChart
+    simpa only [planeJacobian_positiveReferenceCylinderChart (p := (r, 0))
       (hY.differentiable (by simp) r)] using hG.jacobian_positive (r, 0)
   have href := (wholePositiveCanonicalFields_reference A₀ hτ₀ hσ₀ hQ₀).2.1
   obtain ⟨F, hF, he⟩ := exists_wholePositivePrincipal_difference_extension

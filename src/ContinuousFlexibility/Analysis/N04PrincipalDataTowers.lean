@@ -59,6 +59,38 @@ def n04Principal_mixedRegularity_restrict
   spatial z hz := R.spatial z (hVU hz)
   parameter a b q hq := (R.parameter a b q hq).restrict hV hVU
 
+/-- Transport weighted bounds to a selected genuine tower before
+specializing the parameter space or its grading. -/
+private theorem weightedTower_chosen_bound
+    {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+    [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
+    {U V : Set X} {Ω : Set PolarPoint} {P : ℕ → Prop}
+    (p : ℕ → Seminorm ℝ X) (b : ℕ) (E W : ℕ → ℝ)
+    {F : ℕ → X → PolarPoint → ℝ}
+    (hVU : V ⊆ U) (hlow : ∀ x ∈ V, p b x ≤ 1)
+    (J : ∀ m (a c : ℕ) (q : Ω),
+      SmoothDirections U (fun x => mixedDerivative a c (F m x) q.val))
+    (R : ∀ m : {m : ℕ // P m}, MixedJetRegularity U Ω (F m.val))
+    (hb : N04PrincipalWeightedTowerBounds p b
+      (fun m : {m : ℕ // P m} => E m.val)
+      (fun m : {m : ℕ // P m} => W m.val) R) :
+    ∀ k : ℕ, ∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+      ∀ x ∈ V, ∀ v : Fin k → X, ∀ m, P m →
+        ∀ (q : Ω) (a c : ℕ), a + c ≤ s →
+          |(J m a c q).D k x v| ≤
+            B * E m ^ B * W m * oneHighVariationWeight p b (s + loss) x v := by
+  intro k
+  obtain ⟨loss, hloss⟩ := hb k
+  refine ⟨loss, fun s => ?_⟩
+  obtain ⟨B, hB, hbound⟩ := hloss s
+  refine ⟨B, hB, ?_⟩
+  intro x hx v m hm q a c hac
+  have he := (J m a c q).unique ((R ⟨m, hm⟩).parameter a c q.val q.property)
+    k x (hVU hx)
+  exact (congrArg (fun A => |A v|) he).trans_le
+    ((Real.norm_eq_abs _).symm.trans_le
+      (hbound ⟨m, hm⟩ a c hac q.val q.property x (hVU hx) (hlow x hx) v))
+
 /-- Weighted estimates on the pieces in `P`, together with a genuine
 tower on every piece, give the exact frozen interface on a smaller
 neighborhood. This respects the global tower quantifier even outside P. -/
@@ -91,17 +123,9 @@ theorem n04Principal_data_of_weightedDifference
     fun m a b q => (J m a b q).restrict hU hsub
   apply n04Principal_currentData_of_tower hδ hδhalf hE hH
     (fun z hz m hm => hreg z (hsub hz) m hm) hzero J'
-  intro k
-  have hbk := hb k
-  refine ⟨hbk.choose, fun s => ⟨(hbk.choose_spec s).choose,
-    (hbk.choose_spec s).choose_spec.1, ?_⟩⟩
-  intro z hz v m hm q a b hab
-  have hj : (J' m a b q).D k z =
-      ((R ⟨m, hm⟩).parameter a b q.val q.property).D k z :=
-    (J m a b q).unique ((R ⟨m, hm⟩).parameter a b q.val q.property) k z (hsub hz)
-  rw [hj]
-  exact (Real.norm_eq_abs _).symm.trans_le
-    ((hbk.choose_spec s).choose_spec.2 ⟨m, hm⟩ a b hab q.val q.property z
-      (hsub hz) (n04Principal_parameter_low_le_one hδhalf hz) v)
+  exact weightedTower_chosen_bound (parameterGrading S) newBase
+    (fun m => T.E0 (T.sample (cell m)))
+    (fun m => T.H (T.sample (cell m)) ^ (3 / 4 : ℝ))
+    hsub (fun _ hz => n04Principal_parameter_low_le_one hδhalf hz) J R hb
 
 end ContinuousFlexibility.Analysis
