@@ -31,7 +31,7 @@ theorem CurrentJetDataOn.height_congr
     (hfg : ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m, P m → EqOn (f z m) (g z m) unitStrip)
     (hfg₀ : ∀ m, P m → EqOn (f₀ m) (g₀ m) unitStrip) :
     CurrentJetDataOn S T cell P base ε g g₀ := by
-  rcases hf with ⟨hfsp, Jf, ⟨loss, hv⟩, ht⟩
+  have hv := hf.2.choose_spec.1
   have hU : IsOpen unitStrip := isOpen_Ioo.prod isOpen_univ
   have he (z : Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε)
       (m : ℕ) (hm : P m) (i j : ℕ) (q : unitStrip) :
@@ -43,18 +43,19 @@ theorem CurrentJetDataOn.height_congr
   let J : ∀ m, P m → ∀ (i j : ℕ) (q : unitStrip),
       SmoothDirections (sectorNeighborhood S base ε ε)
         (fun z => mixedDerivative i j (fun y => g z m y - g₀ m y) q.val) :=
-    fun m hm i j q => (Jf m hm i j q).congr (fun z hz => he z hz m hm i j q)
-  refine ⟨fun z hz m hm => ⟨(hfsp z hz m hm).1.congr
+    fun m hm i j q => (hf.2.choose m hm i j q).congr (fun z hz => he z hz m hm i j q)
+  refine ⟨fun z hz m hm => ⟨(hf.1 z hz m hm).1.congr
     (fun q hq => (hfg z hz m hm hq).symm), ?_⟩,
-    J, ⟨loss, fun s => ?_⟩, ht⟩
+    J, ⟨hv.choose, fun s => ?_⟩, hf.2.choose_spec.2⟩
   · intro q hq
     have hs : q + (0, Real.pi) ∈ unitStrip :=
       ⟨by simpa only [Prod.fst_add, add_zero] using hq.1, mem_univ _⟩
     exact (hfg z hz m hm hs).symm.trans
-      (((hfsp z hz m hm).2 q hq).trans (hfg z hz m hm hq))
-  · obtain ⟨B, hB, hb⟩ := hv s
-    exact ⟨B, hB, fun z hz m hm q i j hij =>
-      (congrArg abs (he z hz m hm i j q).symm).trans_le (hb z hz m hm q i j hij)⟩
+      (((hf.1 z hz m hm).2 q hq).trans (hfg z hz m hm hq))
+  · have hs := hv.choose_spec s
+    exact ⟨hs.choose, hs.choose_spec.1, fun z hz m hm q i j hij =>
+      (congrArg abs (he z hz m hm i j q).symm).trans_le
+        (hs.choose_spec.2 z hz m hm q i j hij)⟩
 
 /-- A state-independent family has zero difference at every jet order. -/
 theorem CurrentJetDataOn.height_fixed

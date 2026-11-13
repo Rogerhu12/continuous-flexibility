@@ -19,6 +19,25 @@ namespace ContinuousFlexibility.Analysis.N04RealizationGauge
 open Set ContinuousFlexibility.Statements CanonicalGeometry
 open scoped ContDiff
 
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
+
+private theorem height_referenceDensity_scalar {a J h : ℝ}
+    (ha : 0 ≤ a) (hJ : 0 ≤ J) (hh : 0 < h)
+    (he : h⁻¹ = Real.sqrt (a * J)) : a * J * h ^ 2 = 1 := by
+  have hsq := congrArg (fun x : ℝ => x ^ 2) he
+  rw [Real.sq_sqrt (mul_nonneg ha hJ)] at hsq
+  rw [← hsq, ← mul_pow, inv_mul_cancel₀ hh.ne', one_pow]
+
 variable (G : N04RealizationGauge)
   (η : (G.W.S.height (3 / 4 : ℝ)).Space)
 
@@ -74,10 +93,13 @@ theorem negativeHeightAngularRef_one (m : ℕ) (hm : G.Neg η m)
     hd.1, hd.2, add_zero, one_pow, mul_zero, zero_pow two_ne_zero, sub_zero]
 
 theorem negativeHeightAngularFamily_zero :
-    G.negativeHeightAngularFamily η 0 = G.negativeHeightAngularRef η := by
-  funext m
-  simp only [negativeHeightAngularFamily, negativeHeightAngularRef,
-    G.height_atomFamily_zero η]
+    G.negativeHeightAngularFamily η 0 = G.negativeHeightAngularRef η :=
+  congrArg₂
+    (fun R A : ℕ → PolarPoint → ℝ => fun m =>
+      n04NegativeHeightUnitNumerator ((G.V η).left m)
+        ((G.V η).right m - (G.V η).left m) (R m) (A m))
+    (G.height_atomFamily_zero η .chartRadial)
+    (G.height_atomFamily_zero η .chartAngleDefect)
 
 theorem negative_heightRef_pos (m : ℕ) (hm : G.Neg η m)
     (q : PolarPoint) (hq : q ∈ unitStrip) :
@@ -99,22 +121,25 @@ theorem negativeHeight_referenceDensity (m : ℕ) (hm : G.Neg η m)
       G.atomRef η .height m q ^ 2 = 1 := by
   have hz := G.height_zero_mem_sector η
   have hformula := G.negativeHeight_sqrt_formula η 0 hz m hm q hq
-  rw [G.negativeHeightAngularFamily_zero η,
-    G.negativeHeightAngularRef_one η m hm q hq,
-    G.height_atomFamily_zero η .height,
-    G.height_atomFamily_zero η .heightInverse,
-    G.height_atomFamily_zero η .jacobian,
-    G.physicalRadialFamily_zero η m] at hformula
-  have ha : 0 ≤ G.physicalRadialRef η m q := by
-    simpa only [G.physicalRadialFamily_zero η m] using
-      (G.physicalRadial_pos η 0 hz m hm hq).le
+  have hN : G.negativeHeightAngularFamily η 0 m q = 1 :=
+    (congrFun (congrFun (G.negativeHeightAngularFamily_zero η) m) q).trans
+      (G.negativeHeightAngularRef_one η m hm q hq)
+  have haeq : G.physicalRadialFamily η 0 m q = G.physicalRadialRef η m q :=
+    congrFun (G.physicalRadialFamily_zero η m) q
+  have hJeq : G.atomFamily η .jacobian 0 m q = G.atomRef η .jacobian m q :=
+    congrFun (congrFun (G.height_atomFamily_zero η .jacobian) m) q
+  have hheq : G.atomFamily η .heightInverse 0 m q = G.atomRef η .heightInverse m q :=
+    congrFun (congrFun (G.height_atomFamily_zero η .heightInverse) m) q
+  have hroot : G.atomRef η .heightInverse m q =
+      Real.sqrt (G.physicalRadialRef η m q * G.atomRef η .jacobian m q) :=
+    hheq.symm.trans (hformula.2.2.trans
+      ((congrArg₂ (fun d n : ℝ => Real.sqrt (d / n))
+        (congrArg₂ (fun x y : ℝ => x * y) haeq hJeq) hN).trans
+          (congrArg Real.sqrt (div_one _))))
+  have ha : 0 ≤ G.physicalRadialRef η m q :=
+    (G.physicalRadial_pos η 0 hz m hm hq).le.trans_eq haeq
   have hJ : 0 ≤ G.atomRef η .jacobian m q := abs_nonneg _
-  have hsq := congrArg (fun x : ℝ => x ^ 2) hformula.2.2
-  rw [div_one, Real.sq_sqrt (mul_nonneg ha hJ)] at hsq
-  change (G.atomRef η .height m q)⁻¹ ^ 2 =
-    G.physicalRadialRef η m q * G.atomRef η .jacobian m q at hsq
-  rw [← hsq, ← mul_pow, inv_mul_cancel₀ (G.negative_heightRef_pos η m hm q hq).ne',
-    one_pow]
+  exact height_referenceDensity_scalar ha hJ (G.negative_heightRef_pos η m hm q hq) hroot
 
 end ContinuousFlexibility.Analysis.N04RealizationGauge
 

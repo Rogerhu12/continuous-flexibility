@@ -20,6 +20,26 @@ namespace ContinuousFlexibility.Analysis.N04RealizationGauge
 open Set ContinuousFlexibility.Statements CanonicalGeometry
 open scoped ContDiff
 
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
+
+/-- Transport spatial data without rewriting state-space instances. -/
+private theorem height_referenceSpatial_of_eq {f g : PolarPoint → ℝ} (he : f = g)
+    (hf : ContDiffOn ℝ ∞ f unitStrip ∧
+      ∀ q ∈ unitStrip, f (q + (0, Real.pi)) = f q) :
+    ContDiffOn ℝ ∞ g unitStrip ∧
+      ∀ q ∈ unitStrip, g (q + (0, Real.pi)) = g q :=
+  he ▸ hf
+
 variable (G : N04RealizationGauge)
   (η : (G.W.S.height (3 / 4 : ℝ)).Space)
 
@@ -53,8 +73,8 @@ theorem negative_height_referenceData (a : Atom) (ha : atomIsGeometry a) :
       a = .sourceFactor ∨ a = .sourceFactorInverse := by
     cases a <;> simp_all [atomIsGeometry]
   refine ⟨fun m hm => ?_, fun s => ?_⟩
-  · simpa only [G.height_atomFamily_zero η a] using
-      G.negative_geometry_spatial η 0 (G.height_zero_mem_sector η) m hm a ha
+  · exact height_referenceSpatial_of_eq (congrFun (G.height_atomFamily_zero η a) m)
+      (G.negative_geometry_spatial η 0 (G.height_zero_mem_sector η) m hm a ha)
   · obtain ⟨B, hB, hb⟩ :=
       n04WholeReferenceGauge_negative_geometryReferenceJets_enlargedMaterialData
         G.W.hT G.W.hS G.W.through03 G.W.field G.X.e₀ G.X.κ_pos s
@@ -66,15 +86,15 @@ theorem negative_height_referenceData (a : Atom) (ha : atomIsGeometry a) :
       (fun t p => G.H t p.1) G.τ G.σ G.Q G.N
       (fun t => ⟨G.W.C.cell t, G.W.host t, G.X.optical t⟩)
       m hm a hgeometry q hq i j hij
-    have he := canonicalAtom_replaceAuxiliaryColumn_of_ne
-      G.W.D G.W.U G.W.S G.W.C G.W.L
-      (n04RealizationAtlas G.W G.X G.e G.Y G.H G.τ G.σ G.Q G.N)
-      η (G.W.C.referenceState, 0) m a hne
-    change |mixedDerivative i j
-      (atom G.W.D G.W.U (G.S η) (G.C η) (G.L η) (G.V η)
-        (G.W.C.referenceState, 0) m a) q| ≤ _
-    rw [he]
-    exact hraw
+    have he : G.atomRef η a m =
+        atom G.W.D G.W.U G.W.S G.W.C G.W.L
+          (n04RealizationAtlas G.W G.X G.e G.Y G.H G.τ G.σ G.Q G.N)
+          (G.W.C.referenceState, 0) m a :=
+      canonicalAtom_replaceAuxiliaryColumn_of_ne
+        G.W.D G.W.U G.W.S G.W.C G.W.L
+        (n04RealizationAtlas G.W G.X G.e G.Y G.H G.τ G.σ G.Q G.N)
+        η (G.W.C.referenceState, 0) m a hne
+    exact (congrArg (fun F : PolarPoint → ℝ => |mixedDerivative i j F q|) he).trans_le hraw
 
 /-- The fixed physical pullback of `a` has reference data at the same
 retained sample. No reciprocal-profile estimate enters this lemma. -/
@@ -82,10 +102,10 @@ theorem negative_physicalRadial_referenceData :
     N04HeightReferenceDataOn G.W.U (G.V η).cell (G.Neg η)
       (G.physicalRadialRef η) := by
   refine ⟨fun m hm => ?_, fun s => ?_⟩
-  · simpa only [G.physicalRadialFamily_zero η m] using
-      G.physicalRadial_spatial η 0 (G.height_zero_mem_sector η) m hm
+  · exact height_referenceSpatial_of_eq (G.physicalRadialFamily_zero η m)
+      (G.physicalRadial_spatial η 0 (G.height_zero_mem_sector η) m hm)
   · obtain ⟨A, hA, hb⟩ :=
-      G.W.through03.1.1.reference_coefficient_mixed_global_bound s
+      N01Properties.reference_coefficient_mixed_global_bound G.W.through03.1.1 s
     let L : ℝ := max 1 (G.W.D.b - G.W.D.a)
     have hL : 1 ≤ L := le_max_left _ _
     let B : ℝ := 1 + L ^ s * A

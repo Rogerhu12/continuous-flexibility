@@ -19,6 +19,18 @@ namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements CanonicalGeometry
 
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
+
 namespace N04RealizationGauge
 
 variable (G : N04RealizationGauge)
@@ -33,13 +45,23 @@ theorem heightRadialDifferenceTower_bound (k s : ℕ) :
             G.W.U.H (G.W.U.sample ((G.V η).cell m)) ^ (3 / 4 : ℝ) *
               oneHighVariationWeight (parameterGrading G.W.S) G.W.base
                 (s + G.W.loss) z v := by
-  obtain ⟨A, hA, hb⟩ := G.W.through03.1.1.sectorCoefficientTower_bound k s
-  obtain ⟨B₀, P₀, hB₀, hP₀, hsample⟩ :=
-    n04bActualTypedAtlas_negative_host_sample_weights G.W.hT G.W.hS
+  have hcoeff := G.W.through03.1.1.sectorCoefficientTower_bound k s
+  let A : ℝ := hcoeff.choose
+  have hA : 0 < A := hcoeff.choose_spec.1
+  have hb := hcoeff.choose_spec.2
+  have hweights := n04bActualTypedAtlas_negative_host_sample_weights G.W.hT G.W.hS
       G.W.through03 G.W.field G.X.e₀ (3 / 4 : ℝ) 0 A hA.le
+  let B₀ : ℝ := hweights.choose
+  let P₀ : ℝ := hweights.choose_spec.choose
+  have hB₀ : 0 < B₀ := hweights.choose_spec.choose_spec.1
+  have hP₀ : 0 ≤ P₀ := hweights.choose_spec.choose_spec.2.1
+  have hsample := hweights.choose_spec.choose_spec.2.2
   let L : ℝ := max 1 (G.W.D.b - G.W.D.a)
   have hL : 1 ≤ L := le_max_left _ _
-  obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (L ^ s * A * B₀) P₀
+  have hpacked := coefficientEnvelope_pack (L ^ s * A * B₀) P₀
+  let B : ℝ := hpacked.choose
+  have hB : 0 < B := hpacked.choose_spec.1
+  have hpack := hpacked.choose_spec.2
   refine ⟨B, hB, ?_⟩
   intro m hm q i j hij z hz v
   let t := G.heightRadialLabel η m hm
@@ -119,8 +141,14 @@ theorem negative_physicalRadial_currentData :
       (sectorNeighborhood_isOpen G.W.S G.W.base δ δ) hsub
   refine ⟨fun z hz m hm => G.physicalRadial_spatial η z (hsub hz) m hm,
     J, ⟨G.W.base + G.W.loss, fun s => ?_⟩, fun k => ⟨G.W.loss, fun s => ?_⟩⟩
-  · obtain ⟨A, hA, hb⟩ := G.heightRadialDifferenceTower_bound η 1 s
-    obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (3 * A) A
+  · have hfirstBound := G.heightRadialDifferenceTower_bound η 1 s
+    let A : ℝ := hfirstBound.choose
+    have hA : 0 < A := hfirstBound.choose_spec.1
+    have hb := hfirstBound.choose_spec.2
+    have hpacked := coefficientEnvelope_pack (3 * A) A
+    let B : ℝ := hpacked.choose
+    have hB : 0 < B := hpacked.choose_spec.1
+    have hpack := hpacked.choose_spec.2
     refine ⟨B, hB, ?_⟩
     intro z hz m hm q i j hij
     let E : ℝ := G.W.U.E0 (G.W.U.sample ((G.V η).cell m))
@@ -143,7 +171,11 @@ theorem negative_physicalRadial_currentData :
             le_rfl hhigh y v) hM)
     have hzero : mixedDerivative i j
         (fun y => G.physicalRadialFamily η 0 m y - G.physicalRadialRef η m y) q.val = 0 := by
-      simp only [G.physicalRadialFamily_zero, sub_self, mixedDerivative_fun_zero]
+      have he := congrArg
+        (fun F : PolarPoint → ℝ => mixedDerivative i j
+          (fun y => F y - G.physicalRadialRef η m y) q.val)
+        (G.physicalRadialFamily_zero η m)
+      exact he.trans (by simp only [sub_self, mixedDerivative_fun_zero])
     have hvalue := n04NegativeGeometry_sector_difference_bound
       (G.heightRadialDifferenceTower η m hm i j q) G.W.ε_pos hδle hδhalf
       (by omega : G.W.base ≤ s + (G.W.base + G.W.loss)) hzero hM hfirst hz
@@ -156,8 +188,9 @@ theorem negative_physicalRadial_currentData :
       _ ≤ B * E ^ B * H * parameterGrading G.W.S (s + (G.W.base + G.W.loss)) z :=
         mul_le_mul_of_nonneg_right
           (mul_le_mul_of_nonneg_right (hpack E hE) hH) hweight
-  · obtain ⟨B, hB, hb⟩ := G.heightRadialDifferenceTower_bound η k s
-    exact ⟨B, hB, fun z hz v m hm q i j hij => hb m hm q i j hij z (hsub hz) v⟩
+  · have hbound := G.heightRadialDifferenceTower_bound η k s
+    exact ⟨hbound.choose, hbound.choose_spec.1, fun z hz v m hm q i j hij =>
+      hbound.choose_spec.2 m hm q i j hij z (hsub hz) v⟩
 
 end N04RealizationGauge
 end ContinuousFlexibility.Analysis

@@ -53,6 +53,7 @@ theorem negativeHeight_sqrt_formula
   have hnegative := G.negative_fields η (G.lift η z) m j hi
   have hpoint : physicalUnitPoint (G.V η) m q = physicalUnitPoint K k q := by
     simp only [physicalUnitPoint, hnegative.2.2.1, hnegative.2.2.2.1]
+    rfl
   have hnumerator : G.negativeHeightAngularFamily η z m q =
       n04NegativeHeightAngularFactor (K.chart (G.lift η z) k) (physicalUnitPoint K k q) := by
     unfold negativeHeightAngularFamily

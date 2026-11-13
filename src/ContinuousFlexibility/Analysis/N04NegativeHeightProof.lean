@@ -19,6 +19,18 @@ namespace ContinuousFlexibility.Analysis
 open Set ContinuousFlexibility.Statements CanonicalGeometry
 open scoped ContDiff
 
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
+
 namespace N04RealizationGauge
 
 variable (G : N04RealizationGauge)
@@ -35,7 +47,9 @@ theorem negative_heightAtom_germs {b : ℕ} {ε : ℝ}
     n04NegativeHeight_parameterInterpolation G.W.hS
   have hE := (G.cost_nonneg η).2.2
   have hH := (G.cost_nonneg η).2.1
-  obtain ⟨hN, hA⟩ := G.negative_heightFactor_germs η hb he heW hchart
+  have hFactors := G.negative_heightFactor_germs η hb he heW hchart
+  have hN := hFactors.1
+  have hA := hFactors.2
   have hNs := hN.sqrtFactor hD hT hI hE (G.negativeHeightAngularRef_one η) false
   have hNi := hN.sqrtFactor hD hT hI hE (G.negativeHeightAngularRef_one η) true
   have hAs := hA.sqrtFactor hD hT hI hE (G.negativeHeightNormalizedRadialRef_one η) false
@@ -71,13 +85,15 @@ end N04RealizationGauge
 valid for every auxiliary column and all parameter and spatial orders. -/
 theorem n04Realization_negativeHeight : N04RealizationNegativeHeightObligation := by
   intro G b ε hadm hchart
-  obtain ⟨hh, hi⟩ := G.negative_heightAtom_germs 0 hadm.1 hadm.2.1 hadm.2.2.1 (hchart 0)
-  obtain ⟨b', ε', hb, he, hele, hheight, hinverse⟩ :=
-    hh.common hi (G.cost_nonneg 0).2.2 (G.cost_nonneg 0).2.1
+  have hg := G.negative_heightAtom_germs 0 hadm.1 hadm.2.1 hadm.2.2.1 (hchart 0)
+  have hc := hg.1.common hg.2 (G.cost_nonneg 0).2.2 (G.cost_nonneg 0).2.1
+  let b' : ℕ := hc.choose
+  let ε' : ℝ := hc.choose_spec.choose
+  have hd := hc.choose_spec.choose_spec
   have hzero : G.NegativeAtomData 0 atomIsNegativeHeight b' ε' := by
     intro a ha
-    cases a <;> first | exact hheight | exact hinverse | exact ha.elim
-  exact ⟨b', ε', hb, he, hele,
+    cases a <;> first | exact ha.elim | exact hd.2.2.2.1 | exact hd.2.2.2.2
+  exact ⟨b', ε', hd.1, hd.2.1, hd.2.2.1,
     fun η => G.negativeHeightAtomData_auxiliary 0 η b' ε' hzero⟩
 
 end ContinuousFlexibility.Analysis

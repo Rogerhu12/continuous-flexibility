@@ -12,10 +12,24 @@ The two inverse-coordinate atoms are treated on their canonical domain.
 
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements CanonicalGeometry
 open scoped ContDiff
+
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
 
 def negativePhysicalGeometryAtom : Atom → Prop
   | .chartRadial | .chartAngleDefect | .height | .heightInverse
@@ -47,12 +61,12 @@ def n04NegativeGeometry_physicalUnitJointTower
       ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
       ContinuousLinearMap.coe_snd', smul_apply, smul_eq_mul,
       Prod.mk_add_mk, zero_add]
-  apply (J.compAffine P c (hU.prod (isOpen_Ioo.prod isOpen_univ))
-    (fun x hx => ?_)).congrOn
-  · rw [hpoint]
-    exact ⟨hx.1, hmap hx.2⟩
-  · intro x hx
-    exact congrArg f (hpoint x)
+  have hmaps : MapsTo (fun x => c + P x) (U ×ˢ unitStrip) (U ×ˢ Ω) := by
+    intro x hx
+    exact (hpoint x).symm ▸ (show (x.1, physicalUnitPoint K k x.2) ∈ U ×ˢ Ω from
+      ⟨hx.1, hmap hx.2⟩)
+  exact (J.compAffine P c (hU.prod (isOpen_Ioo.prod isOpen_univ)) hmaps).congrOn
+    (fun x _ => congrArg f (hpoint x))
 
 namespace N04RealizationStart
 
@@ -118,7 +132,8 @@ def negativePhysicalAtomJointTower
     change (_ - K.left k) / (K.right k - K.left k) =
       ((K.chart (liftSectorParameter W.S W.C x.1) k (physicalUnitPoint K k x.2)).1 -
         K.left k) / (K.right k - K.left k)
-    rw [hchart]
+    exact congrArg (fun p : PolarPoint => (p.1 - K.left k) / (K.right k - K.left k))
+      (congrFun (hchart x.1) (physicalUnitPoint K k x.2)).symm
   · let L : ((StateDirections W.S × ℝ) × PolarPoint) →L[ℝ] ℝ :=
       (ContinuousLinearMap.snd ℝ ℝ ℝ).comp
         (ContinuousLinearMap.snd ℝ (StateDirections W.S × ℝ) PolarPoint)
@@ -130,25 +145,29 @@ def negativePhysicalAtomJointTower
     intro x hx
     change _ - x.2.2 =
       (K.chart (liftSectorParameter W.S W.C x.1) k (physicalUnitPoint K k x.2)).2 - x.2.2
-    rw [hchart]
+    exact congrArg (fun p : PolarPoint => p.2 - x.2.2)
+      (congrFun (hchart x.1) (physicalUnitPoint K k x.2)).symm
   · apply JH.congrOn
     intro x hx
     change _ = K.height (liftSectorParameter W.S W.C x.1) k (physicalUnitPoint K k x.2)
-    rw [hheight]
+    exact (congrFun (hheight x.1) (physicalUnitPoint K k x.2)).symm
   · apply JHI.congrOn
     intro x hx
     change _ = (K.height (liftSectorParameter W.S W.C x.1) k (physicalUnitPoint K k x.2))⁻¹
-    rw [hheight]
+    exact congrArg (fun t : ℝ => t⁻¹)
+      (congrFun (hheight x.1) (physicalUnitPoint K k x.2)).symm
   · apply JJ.congrOn
     intro x hx
     change _ = |planeJacobian (K.chart (liftSectorParameter W.S W.C x.1) k)
       (physicalUnitPoint K k x.2)|
-    rw [hchart]
+    exact congrArg (fun F : PolarPoint → PolarPoint =>
+      |planeJacobian F (physicalUnitPoint K k x.2)|) (hchart x.1).symm
   · apply JJI.congrOn
     intro x hx
     change _ = |planeJacobian (K.chart (liftSectorParameter W.S W.C x.1) k)
       (physicalUnitPoint K k x.2)|⁻¹
-    rw [hchart]
+    exact congrArg (fun F : PolarPoint → PolarPoint =>
+      |planeJacobian F (physicalUnitPoint K k x.2)|⁻¹) (hchart x.1).symm
 
 end N04RealizationStart
 
@@ -161,7 +180,10 @@ def negativePhysicalAtomJointTower
     (a : Atom) (ha : negativePhysicalGeometryAtom a) :
     SmoothDirections (sectorNeighborhood G.W.S G.W.base G.W.ε G.W.ε ×ˢ unitStrip)
       (fun x : (StateDirections G.W.S × ℝ) × PolarPoint => G.atomFamily η a x.1 m x.2) := by
-  obtain ⟨j, hi⟩ := (G.neg_iff_inl η m).mp hm
+  classical
+  have hnegative := (G.neg_iff_inl η m).mp hm
+  let j := hnegative.choose
+  have hi := hnegative.choose_spec
   have hk : G.X.e₀ (G.negativeIndex j) = .inl (j.1, j.2) := G.X.e₀.apply_symm_apply _
   have haux : a ≠ .auxiliaryColumn := by
     intro he
