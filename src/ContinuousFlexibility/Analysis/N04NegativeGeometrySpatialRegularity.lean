@@ -72,7 +72,7 @@ theorem n04NegativeGeometry_atoms_spatial_of_fields
   have hJperiod (p : PolarPoint) (hp : p ∈ referencePhysicalPieceOpen S K m) :
       planeJacobian (K.chart z m) (p + (0, Real.pi)) = planeJacobian (K.chart z m) p :=
     n06_planeJacobian_chart_lift hF (fun q hq => (hperiod q hq).1) hp
-  cases a <;> simp only [atomIsGeometry] at ha
+  cases a <;> simp only [atomIsGeometry] at ha <;> dsimp only [atom]
   · refine ⟨(((hF.comp hP.contDiffOn hPmap).fst.sub contDiffOn_const).div_const _), ?_⟩
     intro p hp
     change ((K.chart z m (physicalUnitPoint K m (p + (0, Real.pi)))).1 - K.left m) /
@@ -131,7 +131,7 @@ theorem negative_geometry_spatial (G : N04RealizationGauge)
   exact hj.elim fun j hi => by
     let k := G.negativeIndex j
     have hk : G.X.e₀ k = .inl (j.1, j.2) := G.X.e₀.apply_symm_apply _
-    have hz' := liftSectorParameter_mem_stateNeighborhood hz le_rfl
+    have hz' := liftSectorParameter_mem_stateNeighborhood (C := G.W.C) hz le_rfl
     have hs := G.W.through03.1.1.2.2.1.liftSectorParameter_sector z
     have hf := n04NegativeGeometry_referenceHalf_fields
       G.W.hT G.W.hS G.W.through03 G.W.field G.X.e₀ k j.1 j.2 hk hz' hs
