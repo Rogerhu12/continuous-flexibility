@@ -57,7 +57,8 @@ theorem n04PositiveGeometry_factoredRootTrace_formula
     have h' : ContDiffAt ℝ ∞
         (fun p => (n06PhysicalRootFields D S C (liftSectorParameter S C z) p).2)
         (r + σ * 0, θ) := by simpa only [mul_zero, add_zero] using h
-    exact h'.comp 0 hs
+    have hcomp := h'.comp 0 hs
+    exact hcomp
   have hwline : ContinuousAt (fun x : ℝ => D.w (r + σ * x)) 0 :=
     hw.continuous.continuousAt.comp
       ((continuous_const.add (continuous_const.mul continuous_id)).continuousAt)
@@ -75,9 +76,8 @@ theorem n04PositiveGeometry_factoredRootTrace_formula
   have hmul := iteratedDeriv_fun_mul
     (hA.of_le (show (a : ℕ∞ω) ≤ ∞ by simp))
     (hf.of_le (show (a : ℕ∞ω) ≤ ∞ by simp))
-  rw [Fin.sum_univ_eq_sum_range (fun j => (a.choose j : ℝ) *
-    iteratedDeriv j A 0 * iteratedDeriv (a - j) f 0) (a + 1)]
-  exact hmul
+  exact hmul.trans (Fin.sum_univ_eq_sum_range (fun j => (a.choose j : ℝ) *
+    iteratedDeriv j A 0 * iteratedDeriv (a - j) f 0) (a + 1)).symm
 
 theorem n04PositiveGeometry_factoredRootTrace_finiteShift_power
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -157,7 +157,8 @@ theorem n04PositiveGeometry_factoredRootTrace_finiteShift_power
         ContinuousLinearMap.id_apply, smul_eq_mul, iteratedDeriv_const_mul_field])
       k z hz v hraw
     have hcoeff : |coeff j| ≤ (a.choose j : ℝ) * F := by
-      rw [coeff, abs_mul, abs_of_nonneg (Nat.cast_nonneg _)]
+      dsimp only [coeff]
+      rw [abs_mul, abs_of_nonneg (Nat.cast_nonneg _)]
       exact mul_le_mul_of_nonneg_left (hFjets j (by omega)) (Nat.cast_nonneg _)
     exact hscalar.trans (mul_le_mul_of_nonneg_right hcoeff hM)
   have hout := n04PositiveGeometry_angularFiniteSum_parameter_bound Ji

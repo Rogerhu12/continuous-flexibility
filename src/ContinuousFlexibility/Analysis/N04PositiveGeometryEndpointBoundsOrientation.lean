@@ -21,8 +21,6 @@ local instance n04PositiveOrientationStateSMul (S : PhysicalSpacesData) :
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε r : ℝ}
 
-set_option diagnostics true in
-set_option trace.profiler true in
 theorem n04PositiveGeometry_orientedRootTrace_finiteShift_power
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (hN : N01Properties D T S C base loss ε) (hε : ε ≤ 1)
