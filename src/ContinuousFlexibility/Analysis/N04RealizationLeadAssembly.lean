@@ -169,6 +169,7 @@ def N04RealizationCurrentObligation : Prop :=
       let L' := correctionReplaceAuxiliaryColumn W.L η
       let V' := canonicalReplaceAuxiliaryColumn
         (n04RealizationAtlas W X e Y H τ σ Q B.region) η
+      ReferenceJets W.D W.U S' C' L' V' →
       ∀ a : Atom, a ≠ .auxiliaryColumn → ¬ atomIsStatic a →
         (∀ z ∈ sectorNeighborhood S' newBase ε' ε', ∀ m,
           ContDiffOn ℝ ∞ (atom W.D W.U S' C' L' V' (liftSectorParameter S' C' z) m a)
@@ -482,7 +483,7 @@ theorem n04Realization_of_obligations
   have hB' : N04PartB S' C' L' V' newBase ε' := cutOperator_replaceAuxiliaryColumn η hcut
   have hcurrent : CurrentJets W.D W.U S' C' L' V' newBase ε' :=
     n04Realization_currentJets_of_parts W X e Y H τ σ Q B.region η newBase ε'
-      hηs.2.2.2.2.1 hηs.2.2.2.2.2 (hother η) hrefjets.1
+      hηs.2.2.2.2.1 hηs.2.2.2.2.2 (hother η hrefjets) hrefjets.1
   have hprim : PrimitiveGeometryProperties W.D W.U S' C' L' V' newBase ε' :=
     ⟨referenceRadial_replaceAuxiliaryColumn η hradial, hprin, hrefjets, hcurrent, hgauge,
       transmissionGeometry_replaceAuxiliaryColumn η htrans⟩
