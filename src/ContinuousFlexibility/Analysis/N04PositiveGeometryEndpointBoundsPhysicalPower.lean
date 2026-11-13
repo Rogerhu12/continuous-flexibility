@@ -93,9 +93,11 @@ theorem n04PositiveGeometry_physicalRootTrace_finiteShift_power
   have hcard (n : ℕ) (hn : n ≤ N) :
       (Fintype.card (OrderedFinpartition n) : ℝ) ≤ count := by
     let j : Fin (N + 1) := ⟨n, by omega⟩
-    exact (Finset.single_le_sum (fun i _ => Nat.cast_nonneg
-      (Fintype.card (OrderedFinpartition i.val))) (Finset.mem_univ j)).trans
-        (le_add_of_nonneg_left zero_le_one)
+    exact (Finset.single_le_sum
+      (f := fun i : Fin (N + 1) => (Fintype.card (OrderedFinpartition i.val) : ℝ))
+      (fun i _ => Nat.cast_nonneg (Fintype.card (OrderedFinpartition i.val)))
+      (Finset.mem_univ j)).trans
+        (le_add_of_nonneg_left (zero_le_one : (0 : ℝ) ≤ 1))
   refine ⟨B, inputLoss, hB, fun K s => ?_⟩
   let orderData := hterms K s
   let C0 := orderData.choose
