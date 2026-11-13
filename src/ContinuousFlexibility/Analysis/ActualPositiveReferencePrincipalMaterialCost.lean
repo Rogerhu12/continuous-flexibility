@@ -164,7 +164,7 @@ theorem n04Coordinates_retained_positive_reference_principal_material_cost
   have hU6 : U ^ 6 = B ^ 6 * C0 ^ (6 * B) * E ^ (6 * B) := by
     dsimp only [U]
     rw [mul_pow, ← Real.rpow_mul_natCast (mul_pos hC0pos hE).le B 6,
-      show B * (6 : ℝ) = 6 * B by ring, Real.mul_rpow hC0pos.le hE.le]
+      Nat.cast_ofNat, show B * (6 : ℝ) = 6 * B by ring, Real.mul_rpow hC0pos.le hE.le]
     ring
   have hweight : 16 * d ^ 2 * U ^ 6 * P0 * E ^ A0 ≤ K * E ^ K := by
     calc
