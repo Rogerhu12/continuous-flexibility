@@ -97,7 +97,7 @@ theorem n04Realization_currentObligation_of_split
           (min_le_right _ _) (G.cost_nonneg η).1 (G.cost_nonneg η).2.1))
   have hJ := hdata.2
   have hv := hJ.choose_spec.1
-  exact ⟨fun z hz m => hdata.1 z hz m trivial, hJ.choose,
+  exact ⟨fun z hz m => hdata.1 z hz m trivial, fun m => hJ.choose m trivial,
     ⟨hv.choose, fun s => ⟨(hv.choose_spec s).choose, (hv.choose_spec s).choose_spec.1,
       fun z hz m q i j hij => (hv.choose_spec s).choose_spec.2 z hz m trivial q i j hij⟩⟩,
     fun k => ⟨(hJ.choose_spec.2 k).choose, fun s =>
