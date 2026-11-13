@@ -111,9 +111,8 @@ theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix
   let P : (StateDirections W.S × ℝ) → Prop := fun w =>
     p low w ≤ 1 ∧ p (low + s + shift * K + 1) w ≤ R
   have hP : P 0 := by
-    constructor
-    · simpa only [map_zero] using (zero_le_one : (0 : ℝ) ≤ 1)
-    · simpa only [map_zero] using (zero_le_one.trans hR)
+    exact ⟨((p low).map_zero').trans_le (zero_le_one : (0 : ℝ) ≤ 1),
+      ((p (low + s + shift * K + 1)).map_zero').trans_le (zero_le_one.trans hR)⟩
   have hE : 1 ≤ E := (W.floor _).trans (le_enlargedMaterialData_E0 W.T _)
   have hH : 0 ≤ H := (hheight i).1
   have hHL : H ≤ L := (hheight i).2.trans (le_max_right _ _)

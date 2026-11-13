@@ -176,10 +176,9 @@ theorem n04PositiveGeometry_rootKernelTerm_finite_power
     change ‖iteratedFDeriv ℝ a (π ∘ n04PositiveGeometry_rootRadialKernel c.length) v0‖ ≤ CK
     exact rootKernel_projection_bound c.length a π hπ v0 hv0 (hraw.trans (hCoCK j))
   let P : (StateDirections S × ℝ) → Prop := fun y => p B y ≤ 1 ∧ p (s + inputLoss) y ≤ R
-  have hzero : P 0 := by
-    constructor
-    · simpa only [map_zero] using (zero_le_one : (0 : ℝ) ≤ 1)
-    · simpa only [map_zero] using zero_le_one.trans hR
+  have hzero : P 0 :=
+    ⟨(p B).map_zero'.trans_le zero_le_one,
+      (p (s + inputLoss)).map_zero'.trans_le (zero_le_one.trans hR)⟩
   have hinputs (ij : Fin (c.length + 1) × Fin 6) (e u : ℕ)
       (he : e ≤ k) (hu : u ≤ b) (dirs : Fin e → StateDirections S × ℝ)
       (hdirs : ∀ a, P (dirs a)) :
