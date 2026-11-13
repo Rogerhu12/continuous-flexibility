@@ -39,6 +39,6 @@ theorem n04_referencePieces_le_on_annularOpen
     MeasureTheory.Measure.eqOn_open_of_ae_eq
       (μ := (volume : Measure PolarPoint)) hAE hU hmin hf
   intro p hp
-  exact (heq p hp).symm.trans_le (min_le_right _ _)
+  exact (heq hp).symm.trans_le (min_le_right _ _)
 
 end ContinuousFlexibility.Analysis
