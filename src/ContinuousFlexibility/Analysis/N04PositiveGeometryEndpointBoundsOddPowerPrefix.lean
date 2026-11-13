@@ -96,6 +96,7 @@ theorem n04PositiveGeometry_rootOddPowerTrace_sample_prefix
   have hC (j : Fin 4) : 1 ≤ C j := (powerData j).choose_spec.1
   let degree : Fin 4 → ℕ := fun j => (powerData j).choose_spec.2.choose
   have hpower (j : Fin 4) := (powerData j).choose_spec.2.choose_spec
+    (U := sectorNeighborhood W.S base ε ε)
   let C₀ : ℝ := 1 + ∑ j, C j
   let D : ℕ := ∑ j, degree j
   have hC₀ : 1 ≤ C₀ := le_add_of_nonneg_right
