@@ -78,12 +78,12 @@ theorem N04SourceReferenceData.sourceColumns_scalarComp
       subst j
       have hsource := (hi.choose_spec.2 m q hq u w (huw.trans hab)).trans hiM
       simpa only [smoothDirections_D_zero_apply (RF.parameter u w q hq) (mem_univ _),
-        Real.norm_eq_abs, parameterHeightWeight, if_pos rfl, one_pow, mul_one]
+        Real.norm_eq_abs, parameterHeightWeight, ite_true, one_pow, mul_one]
         using hsource)
   have hb' : |mixedDerivative a b (fun p => g (f₀ m p)) q| ≤
       C ij * M ^ (a + b + 1) := by
     simpa only [smoothDirections_D_zero_apply J (mem_univ _), Real.norm_eq_abs,
-      Nat.zero_add, parameterHeightWeight, if_pos rfl, one_pow, mul_one] using hb
+      Nat.zero_add, parameterHeightWeight, ite_true, one_pow, mul_one] using hb
   have hbound : |mixedDerivative a b (fun p => g (f₀ m p)) q| ≤ Q * M ^ (s + 1) :=
     hb'.trans (mul_le_mul (hCQ ij) (pow_le_pow_right₀ hM (Nat.add_le_add_right hab 1))
       (pow_nonneg (zero_le_one.trans hM) _) (zero_le_one.trans hQ))
