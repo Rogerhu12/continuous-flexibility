@@ -1,0 +1,351 @@
+{
+  "schema": "n04-full-forward-fixed-base-executable-route/v1",
+  "status": "READ_ONLY_ACTUAL_PROVIDER_ROUTE_NOT_A_PROVED_NEW_LEMMA_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "source_pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "active_diagnostic_pin": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+  "scope": "Close the genuine full joint forward-circle estimate needed by the two literal return-correction compositions. Preserve the supplied circle model, all chosen towers, the actual C/R/L/chi tuple, and a low base before all parameter orders. No new Lean or active edits in this record.",
+  "existing_records": [
+    {
+      "blob": "5f4f31a241940af33cffb06da8475c75cafa386a",
+      "sha256": "e7a092c0cf8dd1b943a577252797a33459e9db28cd47240cf6c86a2e8bf1d995",
+      "meaning": "Actual returnCorrectionVelocityLinear = chi' A Z supplier check and same-R displacement simplification; retained as prior record."
+    },
+    {
+      "blob": "eb5c0c2723b89d31d33eaec568a8cb39edd43007",
+      "meaning": "Reviewed owner for actual discriminant increment184; original coefficient increment only, not corrected residual forcing."
+    }
+  ],
+  "notation": {
+    "M": "The same CircleModelData; q=M.grading; p=pairGrading q q; hM:IsCircleModel T gamma M with gamma>0. For the actual state chain gamma=3/4 and M=S.circle(3/4).",
+    "F": "F_t(e,y)=circleShiftedChartComposeContinuousLinear hM hT hD hgamma t e y.",
+    "P": "P_t(e,y)=circlePositiveInverseComposeLinear hM hT hD hgamma t e y.",
+    "T": "T_t=circleTranslationContinuousLinear hM hT hD hgamma t; its decoded value is u_m(theta+t_m).",
+    "K": "K(r,k;e,y,w)=coupledCircleKernel hD hT hgamma hM hI r k e y w.",
+    "J": "Any already given SmoothDirections univ F_t. The auxiliary existing genuine tower is used only to identify J.D by uniqueness.",
+    "tau": "The potentially unbounded optical travel is the index function t:Nat->Real. It is never inserted as a vector of M.Space."
+  },
+  "key_exact_public_headers": {
+    "kernel_fixed_base": "theorem coupled_circle_kernel_grading_bounds :\n    ∃ base loss : ℕ, ∀ (r k s : ℕ) (R : ℝ), 1 ≤ R →\n      ∃ C : ℝ, 0 ≤ C ∧ ∀ ψ : M.Space, M.grading base ψ ≤ R →\n        ∀ (v : M.Space) (w : Fin k → M.Space),\n          M.grading s (coupledCircleKernel hD hT hγ hM hI r k ψ v w) ≤\n            C * coupledCircleKernelMajorant M base (r + s + loss) ψ (Fin.cons v w)",
+    "full_scalar_jet_formula": "theorem circleChartCompositionJets_apply (hS : IsCircleModel T γ S)\n    (travel : ℕ → ℝ) (n : ℕ) (x : S.Space × S.Space)\n    (v : Fin n → S.Space × S.Space) (m : ℕ) (θ : ℝ) :\n    circleChartCompositionJets hS travel n x v m θ =\n      iteratedDeriv n (S.decode x.2 m) (circleCompositionPhase travel x m θ) *\n        ∏ i, S.decode (v i).1 m θ +\n      ∑ i : Fin n, iteratedDeriv (n - 1) (S.decode (v i).2 m)\n          (circleCompositionPhase travel x m θ) *\n        ∏ j ∈ Finset.univ.erase i, S.decode (v j).1 m θ",
+    "genuine_full_tower": "theorem exists_circleChartComposition_smoothDirections\n    (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)\n    (hD : IsAccumulatingProfile D) (hγ : 0 < γ)\n    (hinterp : HasInterpolation S.grading) (travel : ℕ → ℝ) :\n    ∃ J : SmoothDirections univ\n      (fun x : S.Space × S.Space =>\n        circleShiftedChartComposeContinuousLinear hS hT hD hγ travel x.1 x.2),\n      ∀ n x (v : Fin n → S.Space × S.Space),\n        S.decode (J.D n x v) = circleChartCompositionJets hS travel n x v",
+    "translation_all_orders": "theorem circleTranslationContinuousLinear_grading_le\n    (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)\n    (hD : IsAccumulatingProfile D) (hγ : 0 < γ) (travel : ℕ → ℝ)\n    (s : ℕ) (u : S.Space) :\n    S.grading s (circleTranslationContinuousLinear hS hT hD hγ travel u) ≤ S.grading s u",
+    "actual_same_residual_displacement": "theorem returnCorrectionDisplacementLinear_at_actual\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {base loss : ℕ} {ε : ℝ}\n    (hN01 : N01Properties D T S C base loss ε)\n    (hN02 : N02Properties D T S C R base ε)\n    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)\n    (hsector : stateSector S z.1) (m : ℕ) (θ : ℝ) :\n    returnCorrectionDisplacementLinear S C z m θ (R.residual z) =\n      returnCorrectionInitialMap S C z m θ - θ",
+    "actual_same_residual_velocity": "theorem returnCorrectionVelocityLinear_at_actual\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {base loss : ℕ} {ε : ℝ}\n    (hN01 : N01Properties D T S C base loss ε)\n    (hN02 : N02Properties D T S C R base ε)\n    (χ : ℕ → ℝ → ℝ) {z : AnnularState S × ℝ}\n    (hz : z ∈ stateNeighborhood S C base ε) (hsector : stateSector S z.1)\n    (m : ℕ) (p : PolarPoint) :\n    returnCorrectionVelocityLinear D S C χ z m p (R.residual z) =\n      returnCorrectedMinusSpeed D S C χ z m p -\n        minusCharacteristicSpeed (originalCoefficients D S C z) p"
+  },
+  "first_missing_actual_leaf": {
+    "prospective_name": "circleShiftedChartCompose_fullJets_fixedBase_oneHigh",
+    "prospective_head": "theorem circleShiftedChartCompose_fullJets_fixedBase_oneHigh\n    {D : ReferenceData} {T : MaterialData} {gamma : ℝ} {M : CircleModelData}\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (hgamma : 0 < gamma) (hM : IsCircleModel T gamma M)\n    (hI : HasInterpolation M.grading) :\n    ∃ B ell : ℕ, ∀ n : ℕ, ∀ R : ℝ, 1 ≤ R → ∀ s : ℕ,\n      ∃ C : ℝ, 0 ≤ C ∧ ∀ (travel : ℕ → ℝ)\n        (J : SmoothDirections univ (fun x : M.Space × M.Space =>\n          circleShiftedChartComposeContinuousLinear hM hT hD hgamma travel x.1 x.2)),\n      ∀ x : M.Space × M.Space,\n        pairGrading M.grading M.grading B x ≤ R →\n      ∀ v : Fin n → M.Space × M.Space,\n        M.grading s (J.D n x v) ≤\n          C * tameJetSize (pairGrading M.grading M.grading) n s (n + ell) B x v",
+    "not_assumed": "The conclusion is not an input. Inputs are the actual model/interpolation data. No all-order derivative bound for the desired full J is assumed.",
+    "distinction_from159": "CircleShiftedForwardFixedBaseBounds159 controls inverseForwardJet with a single source slot. It does not supply the complete joint derivative formula here. Use the genuine circleChartCompositionJets formula, including every source-component term.",
+    "quantifier_choice": "Choose (B,ell) exactly once from coupled_circle_kernel_grading_bounds before n,R,s,travel,J. At each n,R,s choose two kernel constants. Loss(n)=n+ell is selected before R,s, and base never depends on n."
+  },
+  "full_joint_identity": {
+    "zero": "J.D 0 x Fin.elim0 = K(0,0;x.1,T_t x.2,Fin.elim0).",
+    "successor": "For N=n+1, J.D N x v = K(N,N;x.1,T_t x.2,fun i => (v i).1) + sum i:Fin N, K(n,n;x.1,T_t((v i).2),fun j:Fin n => (v(i.succAbove j)).1).",
+    "proof_steps": [
+      "Obtain the existing genuine full tower and its decoder equality from exists_circleChartComposition_smoothDirections. Use J.unique at x in univ; do not choose a different representative for the final estimate.",
+      "Apply the original circle decoder's injectivity. Rewrite the supplied J decoder with circleChartCompositionJets_apply and each kernel with coupledCircleKernel_decode_apply.",
+      "Use circleTranslationContinuousLinear_decode and iteratedDeriv_comp_add_const to move the same literal travel to the source field. The scalar phases agree by addition commutativity.",
+      "For a deleted source slot i, rewrite the product over univ.erase i as the product indexed by i.succAbove. Derive this from prod_single_replacement with replacement 1 plus Fin.prod_univ_succAbove and Fin.succAbove_ne; this avoids division and handles zero factors.",
+      "Use Fin.sum_univ_succAbove (the pinned to_additive companion) to reindex the one-high terms. No Schwarz identity or independently selected jet family is needed."
+    ],
+    "finite_apis": [
+      {
+        "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+        "path": "Mathlib/Algebra/BigOperators/Fin.lean",
+        "blob": "95092dd72334eb133dfc410d6d796b4cacc0fdfc",
+        "head": "theorem Fin.prod_univ_succAbove (f : Fin (n+1) → M) (x : Fin (n+1)) : ∏ i, f i = f x * ∏ i : Fin n, f (x.succAbove i)",
+        "read": "Actual public block including to_additive annotation read at the fixed pin."
+      },
+      {
+        "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+        "path": "Mathlib/Data/Fin/SuccPred.lean",
+        "blob": "f80f72eb0667975bb4899c7433c7701c70cdb87c",
+        "head": "@[simp] lemma Fin.succAbove_ne (p : Fin (n+1)) (i : Fin n) : p.succAbove i ≠ p",
+        "read": "Actual public statement and proof read."
+      }
+    ]
+  },
+  "numerical_proof": {
+    "majorant_definition": "Majorant(B,h,e,u)=(1+q_h e)*product q_B(u_i)+sum_i q_h(u_i)*product_(j!=i) q_B(u_j).",
+    "common_high": "For N=n+1 take h=s+(N+ell); the main kernel has r=N, the deleted kernels r=n. Promote only the deleted high index from n+s+ell to N+s+ell via coupledCircleKernelMajorant_mono_high. B is unchanged.",
+    "main_term": "Under p_B x<=R and R>=1, Majorant(B,h,x.1,Fin.cons(T_t x.2, v.fst)) <= R*tameJetSize p N s (N+ell) B x v. Translation contracts all q_j. The two source coefficients (1+q_h x.1)*q_B x.2+q_h x.2 are <=R*(1+p_h x); every derivative-direction high term has a source low factor <=R.",
+    "deleted_source_term": "For each i:Fin N, Majorant(B,h,x.1,Fin.cons(T_t(v_i.snd),other v.fst)) <= tameJetSize p N s (N+ell) B x v. Reindex exactly to the N original direction slots; each appears once. Pair-grading projections dominate both components, and 1+q_h x.1<=1+p_h x.",
+    "constant": "For N>0 choose C=R*C_main+(N:Real)*C_deleted. For N=0 choose C=R*C_main. Seminorm sum/add subadditivity and the finite sum of N identical tame majorants finish. Constants may depend on N,R,s but are chosen before travel and J.",
+    "normalization": "No new multilinear normalization or private inverseInputProfile_product is needed for this leaf: the public kernel majorant already has exactly one high input. All factor estimates are direct finite products and sums.",
+    "weight": "Every kernel and translation remains in the original M.grading. Thus the same physical H(sample m)^gamma weight is retained; it is not reconstructed from an unweighted UniformSmoothFamilyOn wrapper."
+  },
+  "actual_operation_chain": {
+    "input_neighborhood": "U=sectorNeighborhood S base epsilon epsilon for the single hN belonging to the retained153 tuple. Keep its actual common hflow:1/2<=deriv(C.minusFlow(lift x)m r)<=3/2 for all original closed-radius selectors.",
+    "state_grading": "p=pairGrading (sectorGrading S) realGrading; q=(S.circle(3/4)).grading.",
+    "ordered_composition": "Use the public projectiveCompositionJets_fixedBase_oneHigh and its actual HasProjectiveJetsOn.comp_topological realization, then the given J.unique. Product/add/subtract/odd/even/left-chart maps use their existing continuous linear operators.",
+    "base_rule": "At each finite operation node, the composition theorem enlarges base only using the inner zero-order loss d(0) and the fixed outer base. The finite chain is fixed before all n. Parameter losses combine by the theorem's finite ordered-partition formula; no loss(n) becomes a low-base condition.",
+    "nodes": [
+      {
+        "id": "a",
+        "literal": "hN.returnFlowCircle hS hT",
+        "supplier": "endpointFlowCircle_fixedBase_oneHigh115 at rsel=C.right, hrsel=hN.right_radius_mem; constants still precede the selector."
+      },
+      {
+        "id": "l",
+        "literal": "sectorChartContinuousLinear S x = x.1.val.2.2.2",
+        "supplier": "sectorParameter_chart_grading_le and sectorChartContinuousLinear_tame60cb; exact continuous source, zero loss."
+      },
+      {
+        "id": "u",
+        "literal": "hN.sectorReturnTransportCircle hS hT x = P_(-C.travel)(a(x),l(x)-a(x))",
+        "supplier": "circleReturnTransport definition. Apply reviewed301 and328 on one common inverse domain; no forward kernel is needed at this node."
+      },
+      {
+        "id": "rho",
+        "literal": "hN.sectorReturnResidualCircle hS hT x = P_0(odd(u(x)),even(u(x)))",
+        "supplier": "circleReturnResidualModel definition. Actual odd right-lift lower 1/3; apply301+328, preserving same residual field and original circle weight."
+      },
+      {
+        "id": "dR",
+        "literal": "hN.rightChartInverseCircle hS hT x = -P_0(odd(u(x)),odd(u(x)))",
+        "supplier": "circlePositiveInversePerturbation literal negative diagonal and N01ReturnInverseCircle definition; same lower1/3. The minus sign is handled by map_neg_eq_map."
+      },
+      {
+        "id": "eInv",
+        "literal": "hN.selectorInverseCircle hS hT C.right hN.right_radius_mem x",
+        "supplier": "Reviewed152 genuine selector inverse, already uniform at fixed base and same negative optical travel."
+      },
+      {
+        "id": "w",
+        "literal": "hN.returnTransportInverseCircle hS hT x = dR(x)+F_0(dR(x),eInv(x))",
+        "supplier": "FIRST use of the proposed full-forward theorem plus328. Exact public decoder is C.minusReturnInverse(lift x)m(C.rightChartInverse(lift x)m theta)-(theta+C.travel m)."
+      },
+      {
+        "id": "kappa",
+        "literal": "hN.returnCorrectionInitialCircle hS hT x = l(x)+F_(-C.travel)(l(x),w(x))",
+        "supplier": "SECOND use of the same full-forward theorem plus328. Exact decoder is returnCorrectionInitialMap S C (lift x)m theta-theta."
+      }
+    ],
+    "common_lower_providers": [
+      {
+        "public": "N01Properties.rightChartCandidate_deriv_bounds",
+        "source": "ReturnChartUniformBounds.lean",
+        "input": "Same hN,hz,hsector and hflow at C.right.",
+        "output": "1/3 <= deriv rightChartCandidate <= 4; do not substitute the correction-initial bound here."
+      },
+      {
+        "public": "N01Properties.returnCorrectionInitialMap_deriv_bounds",
+        "source": "ReturnChartUniformBounds.lean",
+        "input": "Same hN,hz,hsector and hflow.",
+        "output": "1/12 <= deriv returnCorrectionInitialMap <= 12."
+      },
+      {
+        "use": "For inverse input odd(u), choose circleUniformInverseDomain M (1/3); its interior gives lower1/6 for301 and actual points enter by the true1/3 bound."
+      },
+      {
+        "use": "For the interpolation id+chi*kappa with 0<=chi<=1, actual lower1/12 follows from convexity of 1 and K'. The common open inverse domain gives lower1/24. No higher-order neighborhood is chosen."
+      }
+    ],
+    "same_R": "Do not invoke exists_returnEquation again. hN02.2.1 identifies the already retained R.residual(lift x) decoder with returnResidualField. sectorReturnResidualCircle_decode gives that same field; decoder injectivity identifies the circle-valued functions on U, and tower uniqueness transfers all jets.",
+    "prospective_actual_head": "With the same hN,hS,hT,hflow, prove ∃B,base≤B ∧ ∀n∃L∀R≥0∀s∃K≥0, ∀J:SmoothDirections U (hN.returnCorrectionInitialCircle hS hT), ∀x∈U,p_B x≤R→∀v, q_s(J.D n x v)≤K*tameJetSize p n s L B x v. A corresponding rho bound uses the first four nodes; it alone is not the corrected forcing bound."
+  },
+  "forcing_and_limits": {
+    "exact_displacement": "returnCorrectionDisplacementLinear_at_actual hN hN02 hz hsector m theta makes the actual residual argument exactly kappa(theta); the averaged/dslope operator is not a remaining numerical supplier for that actual argument.",
+    "velocity": "For the same r, alpha=invFun(C.minusFlow z m r)theta, beta=invFun(returnInterpolation(chi m r)K)alpha, A=deriv(C.minusFlow z m r)alpha, Z=K(beta)-beta, actual velocity increment=chi'(r)*A*Z.",
+    "circle_representation": "Use centered selector e_r and t_r=-opticalTravel. i_r=chi_r*kappa; a_r=P_t(e_r,angularDerivative(e_r)) decodes A-1; z_r=P_t(e_r,P_0(i_r,kappa)) decodes Z. Then chi'*(z_r+product(a_r,z_r)) is the actual increment. These are same original maps, not a new R or L.",
+    "raw_vs_corrected": "The reviewed199 and184 joint increment producers concern originalCoefficients. minusCharacteristicSpeed strip growth also concerns original coefficients, not L.coefficients. Same153's corrected speed identity gives original speed+chi'AZ. The forcing in the difference PDE is G_raw-chi'AZ, never a homogeneous equation.",
+    "sample": "Circle norms use literal T.sample m. Original physical joint coefficients use the actual host j(m). Preserve these labels and apply only an explicit same-witness material/sample comparison when decoding; no implicit identification is licensed.",
+    "radial": "This forward leaf supplies state/angular circle jets. Radial derivatives, the true flow ODE, coefficient/source joint bounds, and loss bookkeeping remain necessary. An extra radial derivative of a factor must be counted in the total spatial budget.",
+    "domain": "Only the retained closed buffer has the supplied material lower bounds for a and Delta. Neither positivity on the full negative half nor an arbitrary root limit yields a uniform Delta floor. On chi'-support use its genuine nested buffer and delta^-1 cost. Root/outer-region transport and matching remain separate.",
+    "completion_status": "No CurrentJets, final canonical materialJets, or transport certificate is claimed by this read-only record."
+  },
+  "implementation_order": [
+    "Implement the full-J kernel identity and the two direct majorant comparisons in one actual full-forward leaf, using only the fixed main/pinned public APIs above.",
+    "Apply301/328+115+the genuine chart CLM to the literal u,rho,dR fields and two full-forward nodes, reusing the existing qualitative towers solely for identities and continuity.",
+    "Transfer rho to the same retained R via N02 decode; use the public at_actual displacement equality to avoid an independent mean-integral bound.",
+    "Only then assemble chi'AZ with the actual cutoff contraction, angular derivative and product operators; retain the closedbuffer/material/sample and radial PDE obligations explicitly."
+  ],
+  "read_sources": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleChartCompositionJets.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "78ee43e48a7c8104ef977bd527f82f572f0ba107",
+      "sha256": "26d8489820d9b56af3f99caa2b7633aecc5cb475776d6c484698f518c517b3a6",
+      "utf8_bytes": 18723,
+      "lines": 367,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CoupledCircleCompositionJetBounds.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "e1c5a8aead00ed031a1ff7ac9da3dcfcd530d91d",
+      "sha256": "30bca6f872d5ec88a5653cee5f3485a8a5a2d544b3cb2bffff686e891fc9dcc0",
+      "utf8_bytes": 12324,
+      "lines": 221,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CoupledCircleCompositionKernels.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "f50299408fad51d50612b6222f1cf8cca9fcc84b",
+      "sha256": "58c16923546ad83f8bc2dffb465f75a483e271f5efc763d683bba50c630ebf1c",
+      "utf8_bytes": 7213,
+      "lines": 134,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CoupledCircleCompositionRealization.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "c0b4ada33ad03e522aed5a3a52d8ef461bec9be3",
+      "sha256": "08ae5c8b3e993e1db595d5a4ee79e5711910bfac1f89a7871d7a42ced29223f0",
+      "utf8_bytes": 7809,
+      "lines": 151,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleCompositionSmoothDirections.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "e18aa8ce1e77ebdc960d721a286e9ffdb7b58632",
+      "sha256": "aa517f48d3ea24278d0f4b7ef1b1a7e23547d22ee54b5cd09d1af73f8d259def",
+      "utf8_bytes": 5725,
+      "lines": 112,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CircleTranslationUniformBounds.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "29683e9c974fecbcd03fef36251ebb8b0061c485",
+      "sha256": "7ef561296693115b33d9daa18e66efb1778b028ac5d558696449a73af322b79f",
+      "utf8_bytes": 6812,
+      "lines": 144,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAffine.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+      "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+      "utf8_bytes": 5346,
+      "lines": 124,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnInverseCircle.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "e99a08956ffd3e0dcf86d6e1ed0a4421b5675a86",
+      "sha256": "4efcb2d32b0e23c51812bfe4b14add3e20ffd4356394f87a1f15ef5ab308c55e",
+      "utf8_bytes": 17591,
+      "lines": 317,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01CircleLinearTame.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "60cb27e73d5bac0102e5436d7fad54ae47740532",
+      "sha256": "18f9059ced21bc434aec9f75840a1dbb7842444192939afd4755dc1ed105ef7a",
+      "utf8_bytes": 4342,
+      "lines": 99,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ResidualCircleModel.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "e7aeb751c99fbc50dbb5a0b1398b0afe061213b6",
+      "sha256": "69096dee20990cc9e9e06ce9c823c138080aa648a08f329af47fd16580dbfebd",
+      "utf8_bytes": 13400,
+      "lines": 264,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ResidualSectorCoordinates.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "f10148f5287f1e0cd6802cec6ced3a2dca0d6d98",
+      "sha256": "7cb2eb450dec4d3c45df18151efff46f38f26de19457e7f4b488bea09796d5eb",
+      "utf8_bytes": 4646,
+      "lines": 104,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01ResidualSmoothTame.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "ddef35ff6690d2ea86984e765305ed23e3708bc3",
+      "sha256": "6282bdb211d2ed494d7002fc23972918cdbe5bcadd71886268e90bb37682459c",
+      "utf8_bytes": 8992,
+      "lines": 169,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ReturnChartUniformBounds.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "d632e8aa3ad47fa9733b123e14a42fcd5ff90d40",
+      "sha256": "a1677fbf43c7000ede695fbcbdafd48d3290e84970b197cdf3470ec8fadaf22d",
+      "utf8_bytes": 14630,
+      "lines": 283,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionResidualLinear.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "20c303b0135ac0eb7e779d7767bded4ba3e05be5",
+      "sha256": "011d097e57c082dfe2aa6bef910a224df021b23709c8ee4329083dd65fbb5e5d",
+      "utf8_bytes": 11895,
+      "lines": 223,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInverseModel.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "6f2c793893f51f1fd72c6201f149a0e527458994",
+      "sha256": "a6767f0378b48caf72404311675e416be98e8d1bad81800d134190a0a7d9d34d",
+      "utf8_bytes": 3740,
+      "lines": 81,
+      "read_scope": "Full selected source read; numerical use is restricted to public contracts recorded below"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CirclePositiveInversePerturbation.lean",
+      "ref": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "d532c92eee0cf46e41a22a1a641cf1d95ac87ef6",
+      "sha256": "db1f19b5c13d3eb7146ea15da658ccf5e2f49cb752a8cde198e4ac66957d0b14",
+      "utf8_bytes": 3084,
+      "lines": 67,
+      "read_scope": "Full source read; literal negative diagonal and decoder checked"
+    }
+  ],
+  "selected_owned_sources": [
+    {
+      "module": "N04EndpointCircleFixedBaseBounds",
+      "blob": "09a1696b57c7fe3678cc6e10e419bb8fa22c0c11",
+      "lines": 115,
+      "scope": "Actual fixed-B endpoint producer; full public contract reread."
+    },
+    {
+      "module": "CirclePositiveInverseFixedBaseBounds",
+      "blob": "1f55edbb185fe33327757a087479196cc8565e4f",
+      "lines": 301,
+      "scope": "Actual zero-travel fixed-B inverse plus all-travel transport; full source reread."
+    },
+    {
+      "module": "N04SelectorInverseCircleFixedBaseBounds",
+      "blob": "054e86dbc3a61f36df0ff4fd7ddf71aefeacb117",
+      "lines": 152,
+      "scope": "Literal selector inverse fixed-B; full source reread."
+    },
+    {
+      "module": "TameFixedBaseCompositionBounds",
+      "historical_blob": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+      "scope": "Public ordered-partition numerical contract. CI179 proof repairs are parent-owned; final source/owner must be explicitly rebound before activation."
+    },
+    {
+      "module": "TameInverseFixedBaseBounds",
+      "selected_repair_blob": "083d926c2e2bd91323a068b40e93dc93117f9779",
+      "candidate_manifest_blob": "81bd956f10d35b0d581c6f84c5d725157b969c13",
+      "scope": "CI179 repair candidate preserves the public inverse contract; current independent peer/CI gate remains explicit."
+    }
+  ],
+  "verification": {
+    "new_lean_lines": 0,
+    "local_compile": false,
+    "ci_queries": false,
+    "active_or_ref_edits": false,
+    "graph": "This is a bounded public-source execution plan, not a claim that the combined operation DAG is installed or compiled.",
+    "proof_status": "All existing suppliers are source-inspected; the new full-J identity and direct inequalities are a concrete proof outline awaiting authorized implementation and independent review."
+  }
+}

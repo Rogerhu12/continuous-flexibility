@@ -1,0 +1,304 @@
+{
+  "schema": "N04-independent-full-source-repair-review-v1",
+  "reviewer": "/root/quantitative_route",
+  "status": "PASS static independent full-source and exact-delta review; actual compilation remains pending",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "path": "quantitative/recovery/reviews/CI178TameFixedBaseCompositionBoundsIndependentReview.json",
+  "base": {
+    "commit": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+    "tree": "4df6517d5b3c92f5a366501af217c4471d0f23f8"
+  },
+  "source_path": "src/ContinuousFlexibility/Analysis/TameFixedBaseCompositionBounds.lean",
+  "owner_candidate": {
+    "blob": "835e2b08a0eb2c8b0cd13957e5459815542f58ce",
+    "sha256": "d64899e3cff7eb192a2ed5f5ec3882c772158243d81413e097d7e6b67afbe3dc"
+  },
+  "ci_evidence": {
+    "failure_blob": "7cf7cf4c4d22516555de1c15865cc6987d85a228",
+    "complete_diagnostic_blob": "6133cc506f9c773918e456d1fc8ce476c3dba19e",
+    "composition_error_sites": [
+      64,
+      70,
+      73,
+      119,
+      189
+    ],
+    "other_eight_diagnostics": "belong to separately owned TameInverseFixedBaseBounds; not repaired or signed here"
+  },
+  "mechanical": {
+    "before": {
+      "blob": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+      "sha256": "f70497231b60b5c0a59e8de16cb534f1820e2bd9d6469ed8c86643b88f428b80",
+      "lines": 328
+    },
+    "after": {
+      "blob": "a71b7b644bd5db40c05c3e41cd6db9d05e1d1e9f",
+      "sha256": "4ff61f1def2d2c627cc6e1dd56160dd500220f260e5804c1446e428eb6c3872b",
+      "lines": 332
+    },
+    "headers": [
+      {
+        "name": "spaces_interpolation_affine_product_bound",
+        "private": false,
+        "header_sha256": "aebe2f074e8e0ab96fd5b624eee2d388a32ca92405be37aa0351e2bab727337f"
+      },
+      {
+        "name": "tameJetSize_selected_unit_le",
+        "private": true,
+        "header_sha256": "05b5052d0f1da00c5b0a85f3b39348fb589ce65515a49650ce4e2b073607a159"
+      },
+      {
+        "name": "tameJetSize_uniform_slots",
+        "private": true,
+        "header_sha256": "011c9ff2169a218c1f48fa50bbef6f8ba230b745bba6c6d769568889ff653290"
+      },
+      {
+        "name": "projectiveCompositionJets_fixedBase_oneHigh",
+        "private": false,
+        "header_sha256": "5a3f7eba646275a8efdc8b13215794de4c17e3546fbc0d0b9c5e00d858e2cf16"
+      }
+    ],
+    "imports_equal": true,
+    "options_equal": true,
+    "delta": {
+      "added": 17,
+      "deleted": 13,
+      "blocks": 8,
+      "forward_exact": true,
+      "reverse_exact": true,
+      "substitutions": [
+        {
+          "tag": "replace",
+          "old_start": 64,
+          "old_end": 64,
+          "new_start": 64,
+          "new_end": 66,
+          "before": [
+            "            exact add_le_add_right (by exact_mod_cast Nat.succ_le_succ (Nat.zero_le k)) _\n"
+          ],
+          "after": [
+            "            have hk : (1 : ℝ) ≤ (k + 1 : ℕ) := by\n",
+            "              exact_mod_cast Nat.succ_le_succ (Nat.zero_le k)\n",
+            "            exact add_le_add hk le_rfl\n"
+          ]
+        },
+        {
+          "tag": "replace",
+          "old_start": 70,
+          "old_end": 70,
+          "new_start": 72,
+          "new_end": 72,
+          "before": [
+            "        rw [hqone]; exact add_le_add_left (hx _) 1\n"
+          ],
+          "after": [
+            "        rw [hqone]; exact add_le_add le_rfl (hx (pick j))\n"
+          ]
+        },
+        {
+          "tag": "replace",
+          "old_start": 73,
+          "old_end": 74,
+          "new_start": 75,
+          "new_end": 77,
+          "before": [
+            "        exact add_le_add_left (Finset.single_le_sum (fun _ _ => apply_nonneg _ _)\n",
+            "          (Finset.mem_univ (pick j))) 1\n"
+          ],
+          "after": [
+            "        exact add_le_add le_rfl (Finset.single_le_sum\n",
+            "          (fun (i : Fin (k + 1)) _ => apply_nonneg (p (s + L)) (x i))\n",
+            "          (Finset.mem_univ (pick j)))\n"
+          ]
+        },
+        {
+          "tag": "replace",
+          "old_start": 118,
+          "old_end": 119,
+          "new_start": 121,
+          "new_end": 122,
+          "before": [
+            "    exact add_le_add_left (le_add_of_nonneg_right\n",
+            "      (Finset.sum_nonneg (fun _ _ => apply_nonneg _ _))) 1\n"
+          ],
+          "after": [
+            "    exact add_le_add le_rfl (le_add_of_nonneg_right\n",
+            "      (Finset.sum_nonneg (fun (i : Fin n) _ => apply_nonneg (p (t + L)) (v i))))\n"
+          ]
+        },
+        {
+          "tag": "replace",
+          "old_start": 188,
+          "old_end": 189,
+          "new_start": 191,
+          "new_end": 193,
+          "before": [
+            "  have hd (j : ℕ) (hj : j ≤ n) : d j ≤ δ :=\n",
+            "    Finset.single_le_sum (fun _ _ => Nat.zero_le _)\n"
+          ],
+          "after": [
+            "  have hd (j : ℕ) (hj : j ≤ n) : d j ≤ δ := by\n",
+            "    dsimp only [δ]\n",
+            "    exact Finset.single_le_sum (fun (l : Fin (n + 1)) _ => Nat.zero_le (d l.val))\n"
+          ]
+        },
+        {
+          "tag": "replace",
+          "old_start": 205,
+          "old_end": 205,
+          "new_start": 209,
+          "new_end": 209,
+          "before": [
+            "      (add_le_add_left ((hp hBK x).trans hbx) 1) hC₀)\n"
+          ],
+          "after": [
+            "      (add_le_add le_rfl ((hp hBK x).trans hbx)) hC₀)\n"
+          ]
+        },
+        {
+          "tag": "replace",
+          "old_start": 223,
+          "old_end": 224,
+          "new_start": 227,
+          "new_end": 228,
+          "before": [
+            "      add_le_add_left (Finset.sum_le_sum (fun l _ =>\n",
+            "        hp (Nat.add_le_add_left (hd j hj) t) _)) 1\n"
+          ],
+          "after": [
+            "      add_le_add le_rfl (Finset.sum_le_sum (fun l _ =>\n",
+            "        hp (Nat.add_le_add (Nat.le_refl t) (hd j hj)) _))\n"
+          ]
+        },
+        {
+          "tag": "replace",
+          "old_start": 260,
+          "old_end": 261,
+          "new_start": 264,
+          "new_end": 265,
+          "before": [
+            "    have hmono : Monotone P := fun _ _ h => add_le_add_left\n",
+            "      (Finset.sum_le_sum (fun l _ => hp h _)) 1\n"
+          ],
+          "after": [
+            "    have hmono : Monotone P := fun _ _ h => add_le_add le_rfl\n",
+            "      (Finset.sum_le_sum (fun l _ => hp h _))\n"
+          ]
+        }
+      ]
+    },
+    "providers": [
+      {
+        "path": "src/ContinuousFlexibility/Analysis/SpacesInterpolationProducts.lean",
+        "blob": "bef566d963e0bafb656cca8fb64d118d2c396162",
+        "sha256": "302248ce14c8d3ef488a6a46d8cb80cb72b374f89da308baac7012fa92f8fd58",
+        "lines": 212
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameTopologicalComposition.lean",
+        "blob": "55b7375931ca80f58ae6dd8b82e28ab9da80f5e4",
+        "sha256": "5efa594a0a0b44d12427f42e759ca575e5bf69a05743a8d4326e1d81d2b197a0",
+        "lines": 103
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameMultilinearNormalization.lean",
+        "blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+        "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+        "lines": 204
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAffine.lean",
+        "blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+        "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+        "lines": 124
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameElementaryCalculus.lean",
+        "blob": "bc38b3601334a7b76a3eda9f3602c4d3b2440423",
+        "sha256": "8970cb3def322b3ecaf1d4c717754fc68f57d4a63d4ed82023a7d4fae5ac9b09",
+        "lines": 512
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameJetComposition.lean",
+        "blob": "0beb73d391faac1b0cbce07a5c1e6321663fccf7",
+        "sha256": "92c2136183ae3552216e6248785e0364cc6360f3f0ffe20a4164f1af46296f7e",
+        "lines": 287
+      },
+      {
+        "repository": "mathlib4",
+        "commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+        "path": "Mathlib/Tactic/Ring/Compare.lean",
+        "blob": "072207e46a1d242f32d15a7db1ced0860d3808a5",
+        "sha256": "deacf6b6076053467cdd362f36853033aefe83ae2b7a3650f73158f7d3063005",
+        "lines": 265
+      },
+      {
+        "repository": "mathlib4",
+        "commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+        "path": "Mathlib/Algebra/Order/BigOperators/Group/Finset.lean",
+        "blob": "9a2a19c62c65329f604f175559d556d6e45ec13a",
+        "sha256": "327dadef5af7180764c161be2418446b7950aa35210af24e98f099d2463139c3",
+        "lines": 830
+      }
+    ]
+  },
+  "reading": {
+    "complete_before_lines": 328,
+    "complete_after_lines": 332,
+    "exact_delta_blocks": 8,
+    "public_heads_preserved": 2,
+    "private_heads_preserved": 2,
+    "imports_and_resource_options_preserved": true,
+    "provider_contracts_read": [
+      "spaces_interpolation_product_bound fixes base/loss before finite arity and assigned orders, with the same +2 input shift and one-high sum.",
+      "tameJetSize definition and zero-degree formula; actual ordered-partition term and full sum definitions/apply theorem.",
+      "multilinearTameSize_le_affine and multilinear_bound_of_unitBall at the actual de78 provider.",
+      "Pinned Mathlib Finset.single_le_sum/sum_nonneg are generated by the read to_additive declarations at Group/Finset.lean:151 and :265.",
+      "Pinned Mathlib Tactic/Ring/Compare.lean:87 has b+a <= c+a for its add_le_add_left; bilateral add_le_add fixes the intended leading 1 without relying on name orientation."
+    ]
+  },
+  "findings": [
+    {
+      "old_site": 64,
+      "result": "The cast comparison is explicitly real, 1 <= cast(k+1). add_le_add hk le_rfl produces 1+sum <= cast(k+1)+sum exactly."
+    },
+    {
+      "old_site": 70,
+      "result": "The selected actual index pick j is explicit. add_le_add le_rfl (hx (pick j)) produces 1+p_B(x_pick) <= 1+R."
+    },
+    {
+      "old_site": 73,
+      "result": "The finite index type Fin(k+1), real seminorm summand p(s+L)(x i), and selected term are explicit; its sum comparison is prefixed by 1 in the correct order."
+    },
+    {
+      "old_site": 119,
+      "result": "After the true Fin.cons head/tail sum is expanded, the tail nonnegativity explicitly uses Fin n and p(t+L)(v i); no Nat-valued NonnegHom metavariable remains in that application."
+    },
+    {
+      "old_site": 189,
+      "result": "dsimp only [delta] exposes the same finite sum over Fin(n+1); the explicitly natural summand d l.val and exact index <j,hj> give d j <= delta. No choice or loss definition changes."
+    },
+    {
+      "old_sites": [
+        205,
+        223,
+        260
+      ],
+      "result": "The same addition orientation is repaired in the dependent remainder. The natural monotonicity proof is explicitly t+d j <= t+delta via Nat.add_le_add (Nat.le_refl t) (hd j hj). These are the same inequalities, not additional premises."
+    }
+  ],
+  "mathematical_contract_check": {
+    "affine_product": "Same B,L chosen before k,m,orders,s,R; zero arity case unchanged, max-pick finite product/sum and original constants unchanged.",
+    "composition": "B=max BJ (max BP (BK+d0)) remains before every parameter n. delta and finite partition loss L remain after n but before R,s; input/output towers and same maps are unchanged.",
+    "normalization": "Actual ordered-partition continuous multilinear map is still normalized from its low-unit-polydisc estimate using the existing theorem; no low-base hypothesis depends on n."
+  },
+  "limits": {
+    "no_local_lean_or_elaboration": true,
+    "no_heartbeat_or_resource_increase": true,
+    "no_active_or_index_edits": true,
+    "no_refs_or_ci_actions": true,
+    "no_new_math_or_weaker_contract": true,
+    "compilation_claim": false
+  },
+  "verdict": "All eight substitutions and the full repaired source pass independent static review. The five reported composition errors are addressed at their actual types. The next CI remains the typechecking and performance gate."
+}

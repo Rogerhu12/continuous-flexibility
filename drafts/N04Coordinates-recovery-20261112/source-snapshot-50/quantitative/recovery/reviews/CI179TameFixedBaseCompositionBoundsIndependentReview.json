@@ -1,0 +1,137 @@
+{
+  "schema": "N04-independent-source-repair-review-v1",
+  "reviewer": "/root/quantitative_route",
+  "date_utc": "2026-11-13",
+  "artifact_path": "quantitative/recovery/reviews/CI179TameFixedBaseCompositionBoundsIndependentReview.json",
+  "status": "PASS_STATIC_FULL_SOURCE_AND_EXACT_DELTA",
+  "module": "ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds",
+  "baseline_head": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+  "before": {
+    "git_blob": "a71b7b644bd5db40c05c3e41cd6db9d05e1d1e9f",
+    "sha256": "4ff61f1def2d2c627cc6e1dd56160dd500220f260e5804c1446e428eb6c3872b",
+    "bytes": 17987,
+    "lines": 332
+  },
+  "after": {
+    "git_blob": "f43a2b774c41da8cc9417051adc8c0a89d3ed04e",
+    "sha256": "413d4e8bdc31eed96843605c677e8eb7dd805903c6556ba0979e40ac0c6f6587",
+    "bytes": 18103,
+    "lines": 332
+  },
+  "owner_manifest": {
+    "git_blob": "b9d841306e172758fb1f803857fbaf49dd44c08c",
+    "sha256": "d199d6372de919103d10784b00588b85a95e8e2ccd81f5e1ac17adb032291799"
+  },
+  "complete_diagnostics": {
+    "git_blob": "319def55c91d846721fd02317bd7dfeb4c0250bd",
+    "sha256": "56c8bd4a103974c2e928cf674ab28166b809101acf4bf1e19316c1a014dc8dd5",
+    "bytes": 17815,
+    "composition_error_contexts_read": 4,
+    "final_context_complete": true
+  },
+  "prior_full_source_review": {
+    "git_blob": "03db06f647af897e26104528dcb1464e4b1c22cf",
+    "sha256": "b7c36fdad5270a007ad077c11bc6961b560cf11c340c38f4ef34cb653efaa1ce",
+    "scope": "Previous 328-to-332 proof and actual provider contracts. The subsequent four CI179 elaboration failures are not concealed by this prior static review."
+  },
+  "reading_scope": {
+    "entire_before_332_lines": true,
+    "entire_after_332_lines": true,
+    "all_four_complete_reported_goal_contexts": true,
+    "all_four_exact_hunks": true,
+    "owner_manifest_read": true
+  },
+  "mechanical": {
+    "four_unique_literal_replacements": true,
+    "forward_reconstruction_exact": true,
+    "reverse_reconstruction_exact": true,
+    "added_lines": 4,
+    "deleted_lines": 4,
+    "net_lines": 0,
+    "all_other_bytes_identical": true,
+    "four_complete_headers_identical": true,
+    "imports_and_options_identical": true,
+    "headers": [
+      {
+        "name": "spaces_interpolation_affine_product_bound",
+        "sha256": "ddc4fa2d5d73217944b72a03408c176854ee944e4581ccfa3c4a24b4641119bc",
+        "private": false
+      },
+      {
+        "name": "tameJetSize_selected_unit_le",
+        "sha256": "5ba5d649c6163bf535043bf3835be375a34fafc6a71040692ff4c8feb6e82e7b",
+        "private": true
+      },
+      {
+        "name": "tameJetSize_uniform_slots",
+        "sha256": "730c491348aa71fa010ad2ca4a48de3487fb22949d53e18e9c47633f8845a548",
+        "private": true
+      },
+      {
+        "name": "projectiveCompositionJets_fixedBase_oneHigh",
+        "sha256": "1c1cb1a92ed348ea7d795a670d3a5d56338e3bb406045066a99224300fe11ee9",
+        "private": false
+      }
+    ],
+    "exact_unified_diff": "--- before332\n+++ after332\n@@ -220,7 +220,7 @@\n     let j' : Fin (n + 1) := ⟨j, Nat.lt_succ_of_le hj⟩\n     have hCA : C j' * (j + 1 : ℕ) ≤ A :=\n       (Finset.single_le_sum\n-        (fun l _ => mul_nonneg (hC l) (Nat.cast_nonneg _)) (Finset.mem_univ j')).trans\n+        (fun (l : Fin (n + 1)) _ => mul_nonneg (hC l) (Nat.cast_nonneg (l.val + 1))) (Finset.mem_univ j')).trans\n           (le_add_of_nonneg_left zero_le_one)\n     have hP : (1 + ∑ l, p (t + d j) ((Fin.cons x v : Fin (n + 1) → E) l)) ≤\n         1 + ∑ l, p (t + δ) ((Fin.cons x v : Fin (n + 1) → E) l) :=\n@@ -247,7 +247,7 @@\n     let order : Fin (c.length + 1) → ℕ := Fin.cons (s + e c.length + δ) (fun _ => BK + δ)\n     let total : ℕ := s + (e c.length + δ + c.length * (BK + δ))\n     have htotal : ∑ j, order j ≤ total := by\n-      simp only [order, Fin.sum_univ_succ, Finset.sum_const, Finset.card_univ,\n+      simp only [order, Fin.sum_univ_succ, Fin.cons_zero, Fin.cons_succ, Finset.sum_const, Finset.card_univ,\n         Fintype.card_fin, smul_eq_mul]\n       omega\n     obtain ⟨D, hD, hpD⟩ := hproduct n (c.length + 1) order total htotal\n@@ -276,7 +276,7 @@\n         omega\n       have hh := (hpD (Fin.cons x v) hb).trans\n         (mul_le_mul_of_nonneg_left (hmono hbudget) hD)\n-      simpa only [order, Fin.prod_univ_succ, Finset.prod_const,\n+      simpa only [order, Fin.prod_univ_succ, Fin.cons_zero, Fin.cons_succ, Finset.prod_const,\n         Finset.card_univ, Fintype.card_fin, P] using hh\n     have hbase : q (s + e c.length) (f i x) ≤ AH * P (s + e c.length + δ) := by\n       have hh := hhigh i x hx hbx v hv 0 (Nat.zero_le n) Fin.elim0\n@@ -327,6 +327,6 @@\n       Finset.sum_le_sum (fun c _ => hc c i x hx hbx w (fun l => (hw l).le))\n     _ = K₀ * ((1 + p (s + L) x) + ∑ l, p (s + L) (w l)) := by\n       rw [← Finset.sum_mul, Fin.sum_univ_succ]\n-      simp only [K₀, add_assoc]\n+      simp only [K₀, Fin.cons_zero, Fin.cons_succ, add_assoc]\n \n end ContinuousFlexibility.Analysis\n"
+  },
+  "findings": [
+    {
+      "after_line": 223,
+      "result": "PASS",
+      "reason": "The finite-sum nonnegativity lambda explicitly binds l : Fin (n+1) and Nat.cast_nonneg (l.val+1). It now proves nonnegativity for the actual variable summand C l * (l.val+1), rather than allowing the chosen j+1 to be inferred for every summand. The chosen j-prime has val j definitionally, so single_le_sum and the unchanged addition of one yield the actual A."
+    },
+    {
+      "after_line": 250,
+      "result": "PASS",
+      "reason": "Fin.sum_univ_succ exposes head and successor entries of order = Fin.cons (s+e c.length+delta) (fun _ => BK+delta). Explicit Fin.cons_zero/succ reduce exactly these entries; constant sum and omega then prove the unchanged total-order budget."
+    },
+    {
+      "after_line": 279,
+      "result": "PASS",
+      "reason": "The same two cons rewrites reduce the assigned-order product from hpD to the unchanged P high-order factor times P(BK+delta)^c.length. No factor, direction, or order is changed."
+    },
+    {
+      "after_line": 330,
+      "result": "PASS",
+      "reason": "After sum_mul and Fin.sum_univ_succ, the two cons rewrites identify the actual input head with x and successor slots with w. The exact K0 affine one-high right-hand side is retained; there is no replacement of the genuine jet input."
+    }
+  ],
+  "pinned_api_check": {
+    "mathlib_commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "lean_toolchain": "v4.35.0-rc3",
+    "sources": [
+      {
+        "path": "Mathlib/Data/Fin/Tuple/Basic.lean",
+        "declarations": [
+          "Fin.cons_succ",
+          "Fin.cons_zero"
+        ],
+        "actual_definition_and_simp_forms_read": true
+      },
+      {
+        "path": "Mathlib/Algebra/BigOperators/Fin.lean",
+        "declarations": [
+          "Fin.prod_univ_succ",
+          "Fin.sum_univ_succ",
+          "Fin.prod_cons"
+        ],
+        "actual_head_tail_formula_read": true
+      }
+    ],
+    "Finset.single_le_sum": "Exact finite nonnegative-summand contract retained from the preceding full review; the current lambda now matches that summand."
+  },
+  "quantifier_and_object_preservation": {
+    "base_B_before_all_orders": true,
+    "order_dependent_loss_before_radius_and_output_order": true,
+    "same_ordered_partitions_and_actual_composition_jets": true,
+    "same_constants_and_one_high_affine_expression": true
+  },
+  "limits": {
+    "no_local_Lean_or_elaboration": true,
+    "no_resource_limit_change": true,
+    "no_source_edit_by_reviewer": true,
+    "no_active_index_refs_or_CI_mutation": true,
+    "compilation_claim": "None. Actual acceptance and performance remain for CI180."
+  }
+}

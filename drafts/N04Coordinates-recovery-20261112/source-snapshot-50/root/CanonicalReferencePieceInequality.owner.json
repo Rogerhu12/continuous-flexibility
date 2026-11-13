@@ -1,0 +1,62 @@
+{
+  "schema": "N04-new-leaf-owner-v1",
+  "owner": "/root",
+  "module": "ContinuousFlexibility.Analysis.CanonicalReferencePieceInequality",
+  "destination": "src/ContinuousFlexibility/Analysis/CanonicalReferencePieceInequality.lean",
+  "source": {
+    "blob": "d0b62f775987c37e6af0553ee18ea6dcd0224c8f",
+    "sha256": "a25275a8eb0f1900a6d2949e1ad85fd166023dc38684bf154659c6d3196ade98",
+    "bytes": 2027,
+    "lines": 44
+  },
+  "providers": [
+    {
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "bytes": 101197
+    },
+    {
+      "path": "Mathlib/MeasureTheory/Measure/OpenPos.lean",
+      "blob": "64b8663d129b8d5d7613fb2bf7583eabf3a4d1d3",
+      "sha256": "e58615b60bff5e995e3133b6e5bf35d22e5f7fded53f23ccd99301926cef5676",
+      "bytes": 12246
+    },
+    {
+      "path": "Mathlib/MeasureTheory/Measure/Lebesgue/Basic.lean",
+      "blob": "84794cf74fa34664073bbf336adccdefb5bada62",
+      "sha256": "628bcfc45fabd59501cdebf1cc3a8003ef3aba18fc7de4710ca9ffc1033b32d7",
+      "bytes": 32510
+    },
+    {
+      "path": "Mathlib/MeasureTheory/OuterMeasure/AE.lean",
+      "blob": "1802fcab91bae1a8537d57413d45b28628d6d5b5",
+      "sha256": "de58d3b2aa42d801e9a268df285c32e5aa6ca7ffc5b42bf5eff8f12bda87a00d",
+      "bytes": 13573
+    }
+  ],
+  "mathlib_commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "source_baseline": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+  "proposal_evidence": "02afed9bf50db228be9ebd058dabc7cd5453ff9f",
+  "complete_public_header": "theorem n04_referencePieces_le_on_annularOpen\n    {D : ReferenceData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {K : CanonicalData S} {base : ℕ} {ε : ℝ}\n    (hgeom : CanonicalGeometry D S C K base ε)\n    (href : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)\n    (hsector : stateSector S C.referenceState)\n    {f g : PolarPoint → ℝ}\n    (hf : ContinuousOn f (annularOpen D)) (hg : ContinuousOn g (annularOpen D))\n    (hpieces : ∀ m p, p ∈ referencePhysicalPieceOpen S K m → f p ≤ g p) :\n    ∀ p ∈ annularOpen D, f p ≤ g p := by",
+  "public_name": "ContinuousFlexibility.Analysis.n04_referencePieces_le_on_annularOpen",
+  "actual_objects": "Same D,S,C,K,base,epsilon. Reference membership and sector proof are passed for the actual same C; no new choice of atlas or maps.",
+  "proof_route": [
+    "Actual hgeom.partition at (C.referenceState,0) provides a null exceptional subset of PolarPoint.",
+    "Restrict the null-complement AE event and the open-annulus membership event to global volume.restrict annularOpen.",
+    "Convert actual reference-state physicalPieceOpen membership with hgeom.referenceDomain.",
+    "The local inequality gives min(f,g)=f almost everywhere.",
+    "Continuity and the positive measure of nonempty open subsets give pointwise min(f,g)=f on the same annularOpen.",
+    "Reverse that equality and apply min_le_right to obtain the pointwise inequality."
+  ],
+  "name_check": {
+    "actual178_rg_matches": 0,
+    "pinned_main_git_grep_matches": 0
+  },
+  "imports_no_Blueprint": true,
+  "resource_options_changed": false,
+  "new_Lean_lines": 44,
+  "compilation": "not compiled; draft only, not in CI179",
+  "scope": "A shared extension step for the actual finite derivative and material-ratio estimates; it does not select global maps or assume the final transport numeric certificate.",
+  "independent_review": "requested from /root/quantitative_route"
+}

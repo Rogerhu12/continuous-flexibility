@@ -1,0 +1,192 @@
+{
+  "schema": "n04-independent-source-review-v2",
+  "status": "PASS_SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "path": "audit/recovery/reviews/N04DiscriminantIncrementJointGainIndependentReview.json",
+  "reviewer": "audit_coordinates",
+  "owner": "proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "subject": {
+    "path": "positive/reconstructed/N04DiscriminantIncrementJointGain.lean",
+    "module": "ContinuousFlexibility.Analysis.N04DiscriminantIncrementJointGain",
+    "git_blob": "70f648d5fdfbc870f42a1b44e9f29ed9bdcebec7",
+    "sha256": "a12fa214a4051d36079ac80261edf99b13e0c73c77b7f8989899facbc0b7782b",
+    "utf8_bytes": 10592,
+    "lines": 184
+  },
+  "candidate": {
+    "git_blob": "4d96f7e4b1620dbecfe3f2e4dfdc10c4b6c3874b",
+    "sha256": "4723d6e1693bcecc902eb4a7d3d57a9676932f59cb55916cb8c2059ce8eae635"
+  },
+  "selected_graph": {
+    "git_blob": "9465fc829af8b88d425dd98a79515d32a5f7f538",
+    "sha256": "238df1a3afc71aaee821ffae59560a53f1ff6839fa83ce6b8b2cb3a95044d6e3",
+    "nodes": 509,
+    "project_edges": 970,
+    "main_nodes": 507,
+    "held_nodes": 2,
+    "upstream_pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "mathlib_pin": "c55e6e786f49471c72fbddbec5415808896aec1e"
+  },
+  "review_scope": {
+    "entire_subject_source": true,
+    "entire_public_header": true,
+    "direct_mathematical_providers_fully_read": [
+      "N04CoefficientIncrementJointGain",
+      "N01CharacteristicJointGrowth",
+      "WeightedJointComposition",
+      "WeightedJointOperations",
+      "WeightedJointProducts",
+      "SmoothDirectionsAffine",
+      "SmoothDirectionsNormedComposition",
+      "N01CoefficientJointTower"
+    ],
+    "additional_actual_definitions_and_used_contracts_read": [
+      "N01OriginalCoefficientSpatialJets.originalCoefficientEntry",
+      "N01cStateSeminorms.SmoothDirections.restrict",
+      "WeightedTowerCalculus.smoothDirectionsScalarPostcompose",
+      "Nonlinear.coefficientFamily and originalCoefficients and liftSectorParameter and sectorNeighborhood",
+      "TameElementaryCalculus.smoothDirectionsAdd"
+    ],
+    "pinned_api_read": [
+      "ContinuousLinearMap.prod_apply",
+      "ContinuousLinearMap.coe_fst'",
+      "ContinuousLinearMap.coe_snd'",
+      "ContinuousLinearMap.id_apply",
+      "ContinuousLinearMap public aliases of root add/sub/smul/zero apply"
+    ],
+    "transitive_graph_scope": "All recorded node identities and imports checked structurally. Main507 module/path/blob identities independently matched the complete fixed main1ece tree; transitive bodies were not all reread or recompiled."
+  },
+  "actual_input_owner": {
+    "path": "positive/reconstructed/N04CoefficientIncrementJointGainReviewedManifest.json",
+    "git_blob": "5081c4b1441e511e156173bcebfe9dd56b985469",
+    "source_git_blob": "63073bc007f7945e905e6cb9237a96f2c463ff8a",
+    "independent_peer": "f51a7c5303f3ead57a169d8eee834c8895d42bb4",
+    "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED"
+  },
+  "providers": [
+    {
+      "name": "N04CoefficientIncrementJointGain",
+      "sha256": "d94ade21f71bc1074689e67b3ef5922d24c9f15ed26b7c9d0490d0c8ef3a40e8",
+      "sha256_matches_candidate": true
+    },
+    {
+      "name": "N01CharacteristicJointGrowth",
+      "sha256": "41b21de7ebdb4b635f1b2b83657884713a0d3ca13b98c2ef69c64f6d09e3c30b",
+      "sha256_matches_candidate": true
+    },
+    {
+      "name": "WeightedJointComposition",
+      "sha256": "7a04fb5661645cbd20a15252deadf05f732c3b84505141c89867f481bafd41b2",
+      "sha256_matches_candidate": true
+    },
+    {
+      "name": "WeightedJointOperations",
+      "sha256": "8caae1b11577f110368626ad71e48dd2ad8bd6f011b5e2ddf1710356a05f3993",
+      "sha256_matches_candidate": true
+    },
+    {
+      "name": "WeightedJointProducts",
+      "sha256": "d6a3c54795c2481294a543b4fe9dc4170cce2741b2718427c76d6112cb74b7c6",
+      "sha256_matches_candidate": true
+    },
+    {
+      "name": "SmoothDirectionsAffine",
+      "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+      "sha256_matches_candidate": true
+    },
+    {
+      "name": "SmoothDirectionsNormedComposition",
+      "sha256": "f59f35ed991dfdcd1715cd5a9c478f0fb6e0e4e0d6f723925a9bbdbe2d63de2e",
+      "sha256_matches_candidate": true
+    },
+    {
+      "name": "N01CoefficientJointTower",
+      "sha256": "082e10476e7067ac5bd8246dbce72aad825019fc196bd45d6191198abdd9b639",
+      "sha256_matches_candidate": true
+    },
+    {
+      "name": "N01OriginalCoefficientSpatialJets",
+      "sha256": "8d8751954a975c5a8d8d7b22e4c592ddff0ffcda787f35b7eb9c11018a9db528",
+      "sha256_matches_candidate": true
+    },
+    {
+      "name": "N01cStateSeminorms",
+      "sha256": "99abe3e9057a214b52c5188410cfc8d2ca2a3f9a52733bcb5c73dd9757666d26",
+      "sha256_matches_candidate": true
+    },
+    {
+      "name": "WeightedTowerCalculus",
+      "sha256": "ca17c1326690271a54670c095d664693a6d5680fff254ea96a6937b83eec1b84",
+      "sha256_matches_candidate": true
+    },
+    {
+      "name": "Nonlinear",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "sha256_matches_candidate": true
+    },
+    {
+      "name": "MathlibPiProd",
+      "sha256": "9c18b9c8d8eefd9e874bee3930ac30e160ff25d0ae9ecbb2e9c90572a56e3584",
+      "sha256_matches_candidate": true
+    },
+    {
+      "name": "MathlibCLMBasic",
+      "sha256": "7bdb5def2e7b70c85181b3d8f3df311e8928ccae1fd6000b9e61a4a75a2ab1db",
+      "sha256_matches_candidate": true
+    },
+    {
+      "name": "TameElementaryCalculus",
+      "sha256": "8970cb3def322b3ecaf1d4c717754fc68f57d4a63d4ed82023a7d4fae5ac9b09",
+      "sha256_matches_candidate": true
+    }
+  ],
+  "complete_public_declarations": [
+    {
+      "name": "ContinuousFlexibility.Statements.N01Properties.exists_discriminantIncrement_strip_joint_growth",
+      "full_header": "theorem N01Properties.exists_discriminantIncrement_strip_joint_growth\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)\n    (j : ℕ → ℕ)\n    (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))\n    (l h : ℕ → ℝ) (hl : ∀ m, C.left m < l m)\n    (hh : ∀ m, h m < C.right m) :\n    ∃ K : ∀ m, SmoothDirections\n      (sectorNeighborhood S base ε ε ×ˢ (Ioo (l m) (h m) ×ˢ univ))\n      (fun z : (StateDirections S × ℝ) × PolarPoint =>\n        (((originalCoefficients D S C (liftSectorParameter S C z.1)).b z.2 ^ 2 -\n            (originalCoefficients D S C (liftSectorParameter S C z.1)).a z.2 *\n              (originalCoefficients D S C (liftSectorParameter S C z.1)).c z.2) -\n          ((originalCoefficients D S C (C.referenceState, 0)).b z.2 ^ 2 -\n            (originalCoefficients D S C (C.referenceState, 0)).a z.2 *\n              (originalCoefficients D S C (C.referenceState, 0)).c z.2)) /\n          T.H (T.sample (j m)) ^ (3 / 4 : ℝ)),\n      ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧\n        UniformWeightedJointGrowth (pairGrading (sectorGrading S) realGrading)\n          (fun m => radialE (D.cellIndex (j m))) K B L := by\n"
+    }
+  ],
+  "findings": [],
+  "mathematical_checks": [
+    "The theorem uses the original coefficient field for the same D,T,S,C,N01 witness, original neighborhood and component m. It does not substitute the corrected coefficients or a different host. j(m), cell containment, physical strip endpoints and the fixed sample H(j(m))^(3/4) are preserved.",
+    "The new coefficient-reference tower is formed by the actual continuous linear projection L0(z,p)=(0,p). MapsTo uses genuine zero membership in the same sector neighborhood. The physical point and every spatial direction stay unchanged.",
+    "For the reference tower, the original unweighted growth estimate is called at R=0. Its parameter arguments and projected parameter directions are literally zero, while all spatial directions retain their unit bounds. Consequently the norm is at most A, including n=0. A is then bounded by the required one-high expression using nonnegativity.",
+    "JD is precisely the scalar-postcomposed increment tower from the reviewed199 provider, restricted to the actual inner strip and changed only by an exact function identity. Both restrict and congrOn retain its derivative layers definitionally. The exact same sample height inverse multiplies every layer.",
+    "Three genuine products are formed: (b+b0)*delta_b/H, c*delta_a/H, and a0*delta_c/H. The public weighted product theorem produces one fixed pair B_i,L_i for each entire tower. Taking finite maxima occurs before all R and derivative orders n; monotonicity transports the three estimates to the common pair.",
+    "The two subtractions use genuine product/continuous-linear postcomposition towers. UniformWeightedJointGrowth.sub is applied with the same W and same common B,L, so high parameter seminorms do not multiply in the final estimate.",
+    "The exact scalar identity is (b+b0)(b-b0)-c(a-a0)-a0(c-c0)=(b^2-ac)-(b0^2-a0*c0). Expansion of the actual coefficientFamily at mixed order zero gives those differences. The three instances share the same inverse height scalar, yielding the literal normalized discriminant in the public result.",
+    "The genuine result tower K is built before its numerical constants and is connected by congrOn/congr to the literal requested discriminant function. The result retains base<=B and loss<=B exactly as supplied by the public product theorem; it does not assert loss<=L.",
+    "Every required witness and hypothesis occurs explicitly in the complete public declaration. There are no section variables used only in the proof that need an include command."
+  ],
+  "mechanical_checks": {
+    "source_sha256_verified": true,
+    "candidate_sha256_verified": true,
+    "graph_sha256_verified": true,
+    "source_imports_exactly_match_graph": true,
+    "complete_public_header_matches_candidate": true,
+    "provider_fingerprints_matched": 15,
+    "distinct_nodes": 509,
+    "reachable_nodes": 509,
+    "recorded_and_recomputed_edges": 970,
+    "missing_project_imports": 0,
+    "duplicate_module_nodes": 0,
+    "topological_order_failures": 0,
+    "upstream_main_blob_mismatches": 0,
+    "held199_exact_blob": "63073bc007f7945e905e6cb9237a96f2c463ff8a",
+    "explicit_name_check": {
+      "checkout": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+      "terms": [
+        "exists_discriminantIncrement_strip_joint_growth",
+        "n04DiscriminantIncrementStateSMul"
+      ],
+      "method": "Readonly rg in actual src; zero matches.",
+      "scope": "Exact textual public theorem and local instance names only. This is not a fresh full-repository generated-declaration collision scan."
+    }
+  },
+  "limitations": [
+    "No Lean compilation was run, and no claim about elaborator resource use or future CI success is made.",
+    "The509 selected graph includes the held reviewed199 and new184 sources. This review does not certify that all selected main nodes are installed in the current active checkout.",
+    "This leaf establishes the actual normalized discriminant increment joint tower and its fixed-loss weighted bound. It does not establish discriminant positivity, reciprocal or square-root bounds, a whole-negative-component extension, or a final CurrentJets/PrimitiveGeometry certificate.",
+    "No active source, index, Git reference, CI state, neighborhood, material data or existing receipt was modified."
+  ]
+}

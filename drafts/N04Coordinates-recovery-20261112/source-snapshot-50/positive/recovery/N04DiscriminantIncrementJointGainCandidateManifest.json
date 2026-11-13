@@ -1,0 +1,279 @@
+{
+  "schema": "n04-source-candidate/v1",
+  "status": "SOURCE_ONLY_NOT_COMPILED_PENDING_INDEPENDENT_REVIEW",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "path": "positive/reconstructed/N04DiscriminantIncrementJointGainCandidateManifest.json",
+  "source": {
+    "path": "positive/reconstructed/N04DiscriminantIncrementJointGain.lean",
+    "local_path": "/workspace/scratch/n04-drafts-20261113/positive/reconstructed/N04DiscriminantIncrementJointGain.lean",
+    "target_module": "ContinuousFlexibility.Analysis.N04DiscriminantIncrementJointGain",
+    "git_blob": "70f648d5fdfbc870f42a1b44e9f29ed9bdcebec7",
+    "sha256": "a12fa214a4051d36079ac80261edf99b13e0c73c77b7f8989899facbc0b7782b",
+    "utf8_bytes": 10592,
+    "lines": 184,
+    "final_newline": true
+  },
+  "selected_main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "mathlib_pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "authorized_after_green": {
+    "CI": 177,
+    "head": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+    "evidence": "Parent message confirms complete success; author did not query CI.",
+    "maximum_new_Lean_lines": 250,
+    "actual_new_Lean_lines": 184,
+    "preexisting_draft_bound": 19725,
+    "new_draft_bound": 19909,
+    "remaining_global_bound": 91,
+    "no_active_changes": true,
+    "no_local_Lean": true
+  },
+  "implementation_plan": {
+    "git_blob": "1a8c2975c59151b2b5208898bfdd2809a4674ab3",
+    "path": "positive/recovery/N04DiscriminantIncrementFirstLeafImplementationPlan.json"
+  },
+  "actual_input_owner": {
+    "path": "positive/reconstructed/N04CoefficientIncrementJointGainReviewedManifest.json",
+    "git_blob": "5081c4b1441e511e156173bcebfe9dd56b985469",
+    "source_git_blob": "63073bc007f7945e905e6cb9237a96f2c463ff8a",
+    "independent_peer": "f51a7c5303f3ead57a169d8eee834c8895d42bb4",
+    "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED"
+  },
+  "imports": [
+    "ContinuousFlexibility.Analysis.N04CoefficientIncrementJointGain",
+    "ContinuousFlexibility.Analysis.N01CharacteristicJointGrowth",
+    "ContinuousFlexibility.Analysis.WeightedJointProducts"
+  ],
+  "public_declarations": [
+    {
+      "name": "ContinuousFlexibility.Statements.N01Properties.exists_discriminantIncrement_strip_joint_growth",
+      "full_header": "theorem N01Properties.exists_discriminantIncrement_strip_joint_growth\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)\n    (j : ℕ → ℕ)\n    (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))\n    (l h : ℕ → ℝ) (hl : ∀ m, C.left m < l m)\n    (hh : ∀ m, h m < C.right m) :\n    ∃ K : ∀ m, SmoothDirections\n      (sectorNeighborhood S base ε ε ×ˢ (Ioo (l m) (h m) ×ˢ univ))\n      (fun z : (StateDirections S × ℝ) × PolarPoint =>\n        (((originalCoefficients D S C (liftSectorParameter S C z.1)).b z.2 ^ 2 -\n            (originalCoefficients D S C (liftSectorParameter S C z.1)).a z.2 *\n              (originalCoefficients D S C (liftSectorParameter S C z.1)).c z.2) -\n          ((originalCoefficients D S C (C.referenceState, 0)).b z.2 ^ 2 -\n            (originalCoefficients D S C (C.referenceState, 0)).a z.2 *\n              (originalCoefficients D S C (C.referenceState, 0)).c z.2)) /\n          T.H (T.sample (j m)) ^ (3 / 4 : ℝ)),\n      ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧\n        UniformWeightedJointGrowth (pairGrading (sectorGrading S) realGrading)\n          (fun m => radialE (D.cellIndex (j m))) K B L := by\n"
+    }
+  ],
+  "local_instance": "n04DiscriminantIncrementStateSMul",
+  "selected_graph": {
+    "path": "positive/reconstructed/N04DiscriminantIncrementJointGainSelectedProviders.json",
+    "git_blob": "9465fc829af8b88d425dd98a79515d32a5f7f538",
+    "sha256": "238df1a3afc71aaee821ffae59560a53f1ff6839fa83ce6b8b2cb3a95044d6e3",
+    "utf8_bytes": 549225,
+    "lines": 12840,
+    "final_newline": true,
+    "counts": {
+      "nodes": 509,
+      "project_edges": 970,
+      "external_imports": 187,
+      "owned": 2,
+      "main": 507,
+      "missing": 0,
+      "cycles": 0
+    }
+  },
+  "providers": [
+    {
+      "name": "N04CoefficientIncrementJointGain",
+      "path": "positive/reconstructed/N04CoefficientIncrementJointGain.lean",
+      "selection": "held reviewed199",
+      "git_blob": "63073bc007f7945e905e6cb9237a96f2c463ff8a",
+      "sha256": "d94ade21f71bc1074689e67b3ef5922d24c9f15ed26b7c9d0490d0c8ef3a40e8",
+      "utf8_bytes": 10715,
+      "lines": 199,
+      "final_newline": true,
+      "read_scope": "held reviewed source; full source reread"
+    },
+    {
+      "name": "N01CharacteristicJointGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/N01CharacteristicJointGrowth.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "b95f6b480dcf1aa6634d4591b24ae2125b645f9a",
+      "sha256": "41b21de7ebdb4b635f1b2b83657884713a0d3ca13b98c2ef69c64f6d09e3c30b",
+      "utf8_bytes": 24803,
+      "lines": 435,
+      "final_newline": true,
+      "read_scope": "complete435 reread, including private/public boundary"
+    },
+    {
+      "name": "WeightedJointComposition",
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointComposition.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "b3a73752bec84738dfc1f85cae1ddad39718e934",
+      "sha256": "7a04fb5661645cbd20a15252deadf05f732c3b84505141c89867f481bafd41b2",
+      "utf8_bytes": 7349,
+      "lines": 144,
+      "final_newline": true,
+      "read_scope": "complete source reread"
+    },
+    {
+      "name": "WeightedJointOperations",
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointOperations.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "33d59355404f7ad98ee177af0ccd0dbafbf136ce",
+      "sha256": "8caae1b11577f110368626ad71e48dd2ad8bd6f011b5e2ddf1710356a05f3993",
+      "utf8_bytes": 8016,
+      "lines": 155,
+      "final_newline": true,
+      "read_scope": "complete source reread"
+    },
+    {
+      "name": "WeightedJointProducts",
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointProducts.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "a2f03fe0abfaf31ef200ffe22d2ecce8bf3c0028",
+      "sha256": "d6a3c54795c2481294a543b4fe9dc4170cce2741b2718427c76d6112cb74b7c6",
+      "utf8_bytes": 3255,
+      "lines": 65,
+      "final_newline": true,
+      "read_scope": "complete source reread"
+    },
+    {
+      "name": "SmoothDirectionsAffine",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAffine.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+      "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+      "utf8_bytes": 5346,
+      "lines": 124,
+      "final_newline": true,
+      "read_scope": "compAffine/congrOn/unique complete proofs reread"
+    },
+    {
+      "name": "SmoothDirectionsNormedComposition",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsNormedComposition.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "044cabd4f03203951521892a886e54e7eafa3863",
+      "sha256": "f59f35ed991dfdcd1715cd5a9c478f0fb6e0e4e0d6f723925a9bbdbe2d63de2e",
+      "utf8_bytes": 5282,
+      "lines": 113,
+      "final_newline": true,
+      "read_scope": "complete source reread"
+    },
+    {
+      "name": "N01CoefficientJointTower",
+      "path": "src/ContinuousFlexibility/Analysis/N01CoefficientJointTower.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "6a73e0d13b39b7cfda04fb0b22208e9c2e44fdb0",
+      "sha256": "082e10476e7067ac5bd8246dbce72aad825019fc196bd45d6191198abdd9b639",
+      "utf8_bytes": 4844,
+      "lines": 100,
+      "final_newline": true,
+      "read_scope": "complete source reread"
+    },
+    {
+      "name": "N01OriginalCoefficientSpatialJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01OriginalCoefficientSpatialJets.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "a6ef81af9b34cd42ee567396bc989fabe3381c18",
+      "sha256": "8d8751954a975c5a8d8d7b22e4c592ddff0ffcda787f35b7eb9c11018a9db528",
+      "utf8_bytes": 11580,
+      "lines": 208,
+      "final_newline": true,
+      "read_scope": "complete source reread; public entry definition"
+    },
+    {
+      "name": "N01cStateSeminorms",
+      "path": "src/ContinuousFlexibility/Analysis/N01cStateSeminorms.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "f96fa185722d12bab8545de1d59ea100a0556417",
+      "sha256": "99abe3e9057a214b52c5188410cfc8d2ca2a3f9a52733bcb5c73dd9757666d26",
+      "utf8_bytes": 16398,
+      "lines": 331,
+      "final_newline": true,
+      "read_scope": "exact restriction block only, not a new full-source review"
+    },
+    {
+      "name": "WeightedTowerCalculus",
+      "path": "src/ContinuousFlexibility/Scalar/WeightedTowerCalculus.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "016523877104f642a44e572693b1b8b2251faa2c",
+      "sha256": "ca17c1326690271a54670c095d664693a6d5680fff254ea96a6937b83eec1b84",
+      "utf8_bytes": 14257,
+      "lines": 306,
+      "final_newline": true,
+      "read_scope": "exact scalar postcompose definition/apply block only"
+    },
+    {
+      "name": "Nonlinear",
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "selection": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+      "git_blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "utf8_bytes": 101197,
+      "lines": 1773,
+      "final_newline": true,
+      "read_scope": "actual coefficient/lift/neighborhood/oneHigh/N01 definitions"
+    },
+    {
+      "name": "MathlibPiProd",
+      "path": "Mathlib/Topology/Algebra/Module/ContinuousLinearMap/PiProd.lean",
+      "selection": "mathlib c55e6e786f49471c72fbddbec5415808896aec1e",
+      "git_blob": "adc8aec3458c3c9a2d27d017daca7981a25ea956",
+      "sha256": "9c18b9c8d8eefd9e874bee3930ac30e160ff25d0ae9ecbb2e9c90572a56e3584",
+      "utf8_bytes": 16603,
+      "lines": 439,
+      "final_newline": true,
+      "read_scope": "actual prod_apply, coe_fst', coe_snd' blocks"
+    },
+    {
+      "name": "MathlibCLMBasic",
+      "path": "Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Basic.lean",
+      "selection": "mathlib c55e6e786f49471c72fbddbec5415808896aec1e",
+      "git_blob": "47fed33950cf184bf699fd945809de5e75e8fcc6",
+      "sha256": "7bdb5def2e7b70c85181b3d8f3df311e8928ccae1fd6000b9e61a4a75a2ab1db",
+      "utf8_bytes": 45178,
+      "lines": 1111,
+      "final_newline": true,
+      "read_scope": "actual id_apply and zero/add/sub/smul public alias blocks"
+    },
+    {
+      "name": "TameElementaryCalculus",
+      "path": "src/ContinuousFlexibility/Analysis/TameElementaryCalculus.lean",
+      "selection": "main1ece",
+      "git_blob": "bc38b3601334a7b76a3eda9f3602c4d3b2440423",
+      "sha256": "8970cb3def322b3ecaf1d4c717754fc68f57d4a63d4ed82023a7d4fae5ac9b09",
+      "lines": 512,
+      "read_scope": "Public smoothDirectionsAdd definition reread; used as genuine addition tower."
+    }
+  ],
+  "source_review_notes": [
+    "Current coefficients come from public originalCoefficient_stripTower and originalCoefficient_strip_joint_growth at the given j,l,h.",
+    "Reference towers are the same original towers precomposed with the actual CLM L0(x,y)=(0,y); compAffine_apply preserves every physical slot and kills only parameter slots.",
+    "Reference quantitative bounds use original growth at low radius0, unchanged physical point and norm; hence no new low base or material sample.",
+    "The normalized increment tower is exactly public199 postcomposition by H(j m)^(-3/4), restricted to the same open strip. The same j/m/physical point is retained.",
+    "The literal identity is (b+b0)db/H - c da/H - a0 dc/H = (Delta-Delta0)/H; division is multiplication by an inverse and ring is valid without a new H lower assumption.",
+    "Three fixed public weighted multiplication closures choose B1,L1 etc before joint order. B=max Bi, L=max Li. Separate bounds base<=Bi and loss<=Bi are used correctly; loss<=Li is not asserted.",
+    "All sums, products and differences are actual SmoothDirections on the original U×V. The final literal discriminant tower is congruent to that same constructed tower; no order-dependent selection.",
+    "No private characteristic or sample-bound helper is invoked. No sqrt/inverse discriminant tower or corrected coefficient is silently used."
+  ],
+  "guarantee": {
+    "tower_selected_once_before_B_L": true,
+    "low_base_before_all_joint_orders": true,
+    "loss_before_all_joint_orders": true,
+    "material_weight": "W(m)=radialE(D.cellIndex(j m))",
+    "height_gain": "Output is the literal (Delta_current-Delta_reference)/T.H(T.sample(j m))^(3/4); the same scalar restores H^(3/4) at every derivative layer.",
+    "coefficient_object": "originalCoefficients D S C; never L.coefficients",
+    "physical_domain": "Ioo(l m)(h m) × univ with C.left m < l m and h m < C.right m; empty strips allowed",
+    "required_lower_bounds": "None in this polynomial leaf. Later reciprocal/sqrt arguments still require the same153 closed-buffer lower bound.",
+    "not_claimed": [
+      "CurrentJets",
+      "corrected forcing Graw-chi' A Z",
+      "uniform discriminant floor on a full root half",
+      "same-R residual quantitative completion",
+      "installation readiness",
+      "compiled theorem"
+    ]
+  },
+  "verification": {
+    "source_recomputed_locally_and_in_functions": true,
+    "server_blob_exact_readback": true,
+    "new_theorem_search": "Exact GitHub token query returned zero; actual177 rg returned zero.",
+    "local_instance_search": "Exact GitHub token query returned zero; actual177 rg returned zero.",
+    "full_selected_graph_imports_closed": true,
+    "all_nodes_reachable": true,
+    "no_project_cycles": true,
+    "forbidden_tokens_found": [],
+    "resource_options_added": [],
+    "local_Lean_or_build": false,
+    "CI_queries": false,
+    "ref_or_index_changes": false
+  },
+  "review_request": "Full source plus the exact direct public contracts and scalar CLM APIs; source frozen at this identity pending review."
+}

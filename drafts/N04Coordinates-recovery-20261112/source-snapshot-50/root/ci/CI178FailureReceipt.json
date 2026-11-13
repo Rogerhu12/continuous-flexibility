@@ -1,0 +1,42 @@
+{
+  "schema": "N04-complete-ci-failure-v1",
+  "ci_round": 178,
+  "commit": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+  "tree": "4df6517d5b3c92f5a366501af217c4471d0f23f8",
+  "run_id": 43335371097,
+  "job_id": 131590094897,
+  "workflow_number": 1857,
+  "conclusion": "failure",
+  "run_updated_at": "2026-11-13T00:19:05Z",
+  "first_verified_at": "2026-11-13 00:19:10 UTC",
+  "quick_targets": 1150,
+  "generated_root_imports": 4637,
+  "new_project_modules_compiled_this_run": 0,
+  "failing_modules": [
+    "ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds",
+    "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds"
+  ],
+  "unique_source_errors": 13,
+  "full_build": "skipped",
+  "endpoint_report": "skipped",
+  "log": {
+    "blob": "28171e253f8d9c548b84b69c1a9d80fd9c13d5f6",
+    "sha256": "c34394b165287f28d21367497ee2396ba4a13fda33aea10d0b875599aa5d3784",
+    "bytes": 97155
+  },
+  "complete_error_blocks": {
+    "blob": "6133cc506f9c773918e456d1fc8ce476c3dba19e",
+    "sha256": "5871c394969e23377bc17124683b737627c417c652a423762b885912502559f1",
+    "count": 13
+  },
+  "complete_green_baseline": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+  "budget": {
+    "source": 19539,
+    "root_lag": 396,
+    "total": 19935,
+    "limit": 20000,
+    "remaining": 65,
+    "draft_bound_before_repairs": 19909
+  },
+  "no_draft_credit_applied_for_owned677": true
+}

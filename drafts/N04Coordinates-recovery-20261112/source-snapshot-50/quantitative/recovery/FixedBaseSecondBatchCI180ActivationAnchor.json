@@ -1,0 +1,56 @@
+{
+  "schema": "N04-conditional-execution-plan-actual-parent-anchor-v1",
+  "artifact_path": "quantitative/recovery/FixedBaseSecondBatchCI180ActivationAnchor.json",
+  "author": "/root/quantitative_route",
+  "parent_plan": {
+    "git_blob": "d5e3166592308c414a60214aa41c3b51bec2f9a1",
+    "sha256": "db7c5087d05250d0207c2d160db58ff443d17a73c89c697570a22446c00f3c05",
+    "bytes": 738878
+  },
+  "scope": "Bind the just-completed inverse repair peer and owner without rewriting the immutable plan or changing a source/tree entry. All required repair source identities and graph imports are unchanged.",
+  "selected_inverse": {
+    "module": "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds",
+    "source": "083d926c2e2bd91323a068b40e93dc93117f9779",
+    "sha256": "7d8e733967093d47742799f946c847296b63de70ac0c41cceb33c1ba84755b83",
+    "lines": 349,
+    "owner": "e5543f699e1559634d3bddf7d2979f400b31be0b",
+    "owner_sha256": "a1bd4eb55264bc12028a0ef6587c671618521003ad734e33077f0bc45cc166e0",
+    "full_peer": "ce1f2bf6010c189257a7207a829f4b94834d12cb",
+    "full_peer_sha256": "4c5b9fb62cd9946441085a0027419a2e27c17fab4bce8d9bdbc10c7eb1f40ac0",
+    "peer_status": "PASS_SOURCE_REVIEW_ONLY_NOT_COMPILED",
+    "owner_and_peer_fetched_and_exact_hash_verified": true
+  },
+  "composition": {
+    "source": "f43a2b774c41da8cc9417051adc8c0a89d3ed04e",
+    "full_peer": "6e8632acbce133cb50f6f2d59508211f1083a05e",
+    "full_peer_sha256": "024d1310009680fb08b7b121e45ed312257ed4d10384c7b2921c983fb55ce678"
+  },
+  "conclusion": "Exact CI180 actual parent tree f6bf0e9... now matches all413 retained selected providers and all106 source preimages. The new inverse owner/peer is bound. The only remaining operational gate is complete actual CI180 green and the parent's finite-tree/source-only staging checks; no CI query or green assertion was made.",
+  "unchanged": {
+    "source_only_entries": 106,
+    "fixed2_original_entries": 105,
+    "preferred_conservative_added": 18549,
+    "existing_provider_gate_count": 413,
+    "owned_draft_credit_now": 0,
+    "old115_owner_body_limitation_preserved": true
+  },
+  "no_ref_or_CI_change": true,
+  "supersedes_metadata_only_addendum": "fe6041a255c7d766698f8f277d998747839315c5",
+  "actual_parent_check": {
+    "schema": "N04-exact-CI180-parent-rebind-v1",
+    "parent_head": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+    "parent_tree": "f6bf0e9e425b2b0c019a1026ccbbfd0bf742c700",
+    "structural_base": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+    "exact_diff_from_base": "M\tsrc/ContinuousFlexibility/Analysis/TameFixedBaseCompositionBounds.lean\nM\tsrc/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean\n",
+    "retained_selected_providers_checked": 413,
+    "retained_provider_mismatches": [],
+    "source_preimages_checked": 106,
+    "new_paths_absent": 97,
+    "shared_preimages_exact": 9,
+    "checked_in_root_generator_and_exclusion_unchanged": true,
+    "preferred_added_budget": 18549,
+    "full_root_lag": 493,
+    "CI180_status": "Pushed according to parent; complete green not assumed or queried",
+    "no_ref_change": true
+  }
+}

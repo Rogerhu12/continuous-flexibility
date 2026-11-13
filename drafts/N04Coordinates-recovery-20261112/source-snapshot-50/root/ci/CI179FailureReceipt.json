@@ -1,0 +1,46 @@
+{
+  "schema": "N04-complete-ci-failure-v1",
+  "ci_round": 179,
+  "commit": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+  "tree": "05fa006b7aa6b0568fd1f9117f17148fbb241d40",
+  "run_id": 43337192468,
+  "job_id": 131596239443,
+  "workflow_number": 1858,
+  "conclusion": "failure",
+  "completed_at": "2026-11-13T00:33:13Z",
+  "verified_at": "2026-11-13T00:33:44Z",
+  "failed_step": "Quick check of the changed modules",
+  "full_build_and_blueprint_status": "skipped",
+  "fresh_source_modules_compiled": 0,
+  "job_log": {
+    "blob": "45bc18074787c4d6e780455e52595dfed6915e7e",
+    "bytes": 78610,
+    "diagnostic_contexts_truncated": true
+  },
+  "complete_error_record": {
+    "blob": "319def55c91d846721fd02317bd7dfeb4c0250bd",
+    "sha256": "56c8bd4a103974c2e928cf674ab28166b809101acf4bf1e19316c1a014dc8dd5",
+    "unique_source_errors": 8,
+    "files": {
+      "TameFixedBaseCompositionBounds.lean": 4,
+      "TameInverseFixedBaseBounds.lean": 4
+    },
+    "complete": true
+  },
+  "complete_original_artifact": {
+    "id": 13998700963,
+    "zip_blob": "eb9e9843badedc4b0161a166b4402195840aff25",
+    "zip_bytes": 307683,
+    "zip_sha256": "7ec9de166e0d1bc03ee89876fb89e8f9ea449c02e6aff5ddb0a43edc663f5017",
+    "members": [
+      "quick.log"
+    ],
+    "quick_log_bytes": 7467300,
+    "quick_log_sha256": "79004936944c56aad521d7304b4d73eb210417cb04c7657ce6589f3c8d59b72b",
+    "downloaded_once": true,
+    "archive_retains_original_zip": true
+  },
+  "baseline_unchanged": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+  "completion_claim": false,
+  "repair_scope": "Explicit finite-sum types, finite-tuple application simp rules, exact double-sum theorem, and deletion of a tactic after a closed goal. No resources, imports, or public contracts change."
+}

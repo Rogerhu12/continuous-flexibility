@@ -1,0 +1,244 @@
+{
+  "schema": "n04-ci-repair-candidate/v1",
+  "status": "CANDIDATE_SOURCE_REPAIR_ONLY_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "local_directory": "/workspace/scratch/n04-drafts-20261113/positive/repair179",
+  "intended_module": "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds",
+  "base": {
+    "ref": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+    "tree": "05fa006b7aa6b0568fd1f9117f17148fbb241d40",
+    "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+    "git_blob": "81547f3c26d523217f65968079581f3bc557e5bf",
+    "sha256": "38378c48f2a2c8d905f41a4e2099ed2129589e547e113664980806b8de33d338",
+    "utf8_bytes": 18529,
+    "lines": 350,
+    "final_newline": true
+  },
+  "selected": {
+    "path": "positive/repair179/TameInverseFixedBaseBounds.lean",
+    "git_blob": "083d926c2e2bd91323a068b40e93dc93117f9779",
+    "sha256": "7d8e733967093d47742799f946c847296b63de70ac0c41cceb33c1ba84755b83",
+    "utf8_bytes": 18532,
+    "lines": 349,
+    "final_newline": true
+  },
+  "exact_patch": {
+    "path": "positive/repair179/TameInverseFixedBaseBounds.patch",
+    "git_blob": "3c9abd1008537a1b81687a6e1d1d803992a6acc5",
+    "sha256": "92886ec1b390e522c6fb1914db56e0e67e7cda8bbd90a34e0a14306be9f77c83",
+    "utf8_bytes": 1392,
+    "lines": 28,
+    "final_newline": true
+  },
+  "ci_evidence": {
+    "round": 179,
+    "run_id": 43337192468,
+    "job_id": 131596239443,
+    "artifact_id": 13998700963,
+    "complete_artifact": {
+      "local_path": "/workspace/scratch/n04-drafts-20261113/root/ci/CI179-artifact/quick.log",
+      "git_blob": "648382f663927371c9b6e6af8d26f1598073f5fe",
+      "sha256": "79004936944c56aad521d7304b4d73eb210417cb04c7657ce6589f3c8d59b72b",
+      "utf8_bytes": 7467300,
+      "lines": 26801,
+      "final_newline": true
+    },
+    "artifact_scope": "Parent downloaded the artifact once; owner read the complete four inverse diagnostic blocks, including the complete 134-line context ending in Finset (Fin n). No CI query or download by owner.",
+    "full_inverse_diagnostic_block": {
+      "path": "positive/repair179/CI179TameInverseFixedBaseErrors.txt",
+      "git_blob": "d62286d99bb0e47b690967a1a0f50793496d4033",
+      "sha256": "06a04ddf4474e5559c9e18304ec7cd0c0d09fced10575d5ac9da390839db3e14",
+      "utf8_bytes": 6507,
+      "lines": 173,
+      "final_newline": true
+    },
+    "error_locations": [
+      "49:45",
+      "58:8",
+      "257:12",
+      "257:37"
+    ]
+  },
+  "repairs": [
+    {
+      "locations": [
+        "49:45"
+      ],
+      "change": "Replace simultaneous distributivity simp with exact Fintype.sum_mul_sum _ _.",
+      "reason": "The pinned public lemma has precisely outer i then inner j, matching the target without a residual sum swap."
+    },
+    {
+      "locations": [
+        "58:8"
+      ],
+      "change": "Delete the subsequent ring after the preceding simp-only already closes the equality.",
+      "reason": "The complete CI diagnosis is No goals to be solved; the existing simplification remains byte-identical."
+    },
+    {
+      "locations": [
+        "257:12",
+        "257:37"
+      ],
+      "change": "Pass s := Finset.univ and bind j : Fin n in Finset.sum_nonneg.",
+      "reason": "The standalone nlinarith fact has no expected sum to infer the finite set; the complete artifact shows an unsolved Finset (Fin n)."
+    }
+  ],
+  "mechanical_evidence": {
+    "path": "positive/repair179/TameInverseFixedBaseBoundsMechanicalEvidence.json",
+    "git_blob": "dddce96a2f32ce3a49dab8d6f9aa6b9c868881e4",
+    "sha256": "1d15f88c2b81634ee0569b58b9779408032555c60dfef228cdccfa9905728fef",
+    "utf8_bytes": 6816,
+    "lines": 96,
+    "final_newline": true
+  },
+  "mechanical_checks": {
+    "replacements": [
+      {
+        "before": "        simp only [Finset.sum_mul, Finset.mul_sum]\n",
+        "after": "        exact Fintype.sum_mul_sum _ _\n"
+      },
+      {
+        "before": "        simp only [mul_add, Finset.sum_add_distrib, ← Finset.mul_sum, ← Finset.sum_mul]\n        ring\n",
+        "after": "        simp only [mul_add, Finset.sum_add_distrib, ← Finset.mul_sum, ← Finset.sum_mul]\n"
+      },
+      {
+        "before": "            Finset.sum_nonneg (fun j _ => (cHigh j).coe_nonneg)]\n",
+        "after": "            Finset.sum_nonneg (s := Finset.univ) (fun (j : Fin n) _ => (cHigh j).coe_nonneg)]\n"
+      }
+    ],
+    "reverse_reconstruction_equal": true,
+    "complete_declaration_headers_equal": true,
+    "complete_headers": [
+      "private theorem inverseInputProfile_product\n    {E : Type*} [AddCommGroup E] [Module ℝ E]\n    (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (hI : HasInterpolation p) :\n    ∃ base loss : ℕ, ∀ (a b : ℕ) (R : ℝ), 0 ≤ R →\n      ∃ C : ℝ, 0 ≤ C ∧ ∀ {ι : Type} [Fintype ι] (x : ι → E),\n        (∑ i, p base (x i)) ≤ R →\n        (1 + ∑ i, p a (x i)) * (1 + ∑ i, p b (x i)) ≤\n          C * (1 + ∑ i, p (a + b + loss) (x i)) := by",
+      "private theorem inverseProfile_linear_step\n    {I : Type*} (P f g : ℕ → I → ℝ)\n    (hP : ∀ s i, 0 ≤ P s i) (hmono : ∀ i, Monotone (fun s => P s i))\n    (base opLoss productLoss loss : ℕ)\n    (hprod : ∀ a b, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ i, P a i * P b i ≤ C * P (a + b + productLoss) i)\n    (hf : ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ i, f s i ≤ C * P (s + loss) i)\n    (hstep : ∀ s, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ i, g s i ≤ C * (P (s + opLoss) i * f base i + f (s + opLoss) i)) :\n    ∀ s, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ i, g s i ≤ C * P (s + (opLoss + base + loss + productLoss)) i := by",
+      "private theorem inverseExpression_fixedBase_growth\n    (a : ℕ → Seminorm ℝ A) (ha : Monotone a)\n    (base productLoss : ℕ) (hbase : operatorBase ≤ base)\n    (hproduct : ∀ R : ℝ, 1 ≤ R → ∀ b c, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ z : (E × E) × A, pairGrading (pairGrading q q) a base z ≤ R →\n        (1 + pairGrading (pairGrading q q) a b z) *\n          (1 + pairGrading (pairGrading q q) a c z) ≤\n        C * (1 + pairGrading (pairGrading q q) a (b + c + productLoss) z))\n    (e : TameInverseExpression E E E A) (he : e.IsZeroLoss q q q a) :\n    ∃ loss : ℕ, ∀ R : ℝ, 1 ≤ R → ∀ s, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ z : (E × E) × A, z.1.1 ∈ U →\n        pairGrading (pairGrading q q) a base z ≤ R →\n        pairGrading q q s (e.eval J V z.1 z.2) ≤\n          C * (1 + pairGrading (pairGrading q q) a (s + loss) z) := by",
+      "theorem inverseFamilySmoothDirections_fixedBase_oneHigh\n    (hI : HasInterpolation (pairGrading q q))\n    (hU : IsOpen U)\n    (hleft : ∀ x ∈ U, ∀ y, V x (L x y) = y)\n    (hright : ∀ x ∈ U, ∀ y, L x (V x y) = y)\n    (hcont : ContinuousOn (fun z : E × E => V z.1 z.2) (U ×ˢ univ)) :\n    ∃ base : ℕ, ∀ n : ℕ, ∃ loss : ℕ, ∀ R : ℝ, 1 ≤ R →\n      ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧\n        ∀ x ∈ U ×ˢ univ, pairGrading q q base x ≤ R →\n          ∀ v : Fin n → E × E,\n            q s ((inverseFamilySmoothDirections J hU V hleft hright hcont).D n x v) ≤\n              C * tameJetSize (pairGrading q q) n s loss base x v := by"
+    ],
+    "public_headers": 1,
+    "private_headers": 3,
+    "imports_equal": true,
+    "options_equal": true,
+    "no_new_public_names": true,
+    "no_new_imports": true,
+    "no_resources_axioms_or_sorry_changes": true,
+    "net_source_lines": -1,
+    "added_lines": 2,
+    "deleted_lines": 3,
+    "actual_providers": [
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameInverseBounds.lean",
+        "ref": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+        "git_blob": "aeee314ef570e000726d4c0b44ac7918fc1b0c4a",
+        "sha256": "925fda87a5189968db6eb87ffe62505baf7a32638d304dcf31c4aabcf681ab37",
+        "utf8_bytes": 11046,
+        "lines": 244,
+        "final_newline": true,
+        "review_scope": "Actual179 source identity checked equal to the provider pinned by CI178 full review; no mathematical provider change"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameInverseJets.lean",
+        "ref": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+        "git_blob": "976c9b64fc749b055e22c2e8596a8781263956bc",
+        "sha256": "e34d22d95954a7c2bbd2dd6317eb1fcd08e4e7ded3cd3633729b501236bf694d",
+        "utf8_bytes": 12129,
+        "lines": 254,
+        "final_newline": true,
+        "review_scope": "Actual179 source identity checked equal to the provider pinned by CI178 full review; no mathematical provider change"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameInverseExpressions.lean",
+        "ref": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+        "git_blob": "14ad46cae7d92dca46f5efd006f5260873046713",
+        "sha256": "5f19c405b830b56e9ad43319b2e9b306af3a27d840167fc29d592e9b9edaec56",
+        "utf8_bytes": 22877,
+        "lines": 490,
+        "final_newline": true,
+        "review_scope": "Actual179 source identity checked equal to the provider pinned by CI178 full review; no mathematical provider change"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+        "ref": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+        "git_blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+        "sha256": "6952ac2501bd38f0f6d51b1633f52d30ed1820f9380bd6dd58ebc24c601e1991",
+        "utf8_bytes": 11512,
+        "lines": 250,
+        "final_newline": true,
+        "review_scope": "Actual179 source identity checked equal to the provider pinned by CI178 full review; no mathematical provider change"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameJetLocalBounds.lean",
+        "ref": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+        "git_blob": "af44988e9b25134eaeb1ae6505691d755d8bc228",
+        "sha256": "0cdfa8c38f6ff5e84cc7d486946ca4c96a7574ec929185edfa7397204374a184",
+        "utf8_bytes": 9127,
+        "lines": 196,
+        "final_newline": true,
+        "review_scope": "Actual179 source identity checked equal to the provider pinned by CI178 full review; no mathematical provider change"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/SpacesInterpolationProducts.lean",
+        "ref": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+        "git_blob": "bef566d963e0bafb656cca8fb64d118d2c396162",
+        "sha256": "302248ce14c8d3ef488a6a46d8cb80cb72b374f89da308baac7012fa92f8fd58",
+        "utf8_bytes": 10818,
+        "lines": 212,
+        "final_newline": true,
+        "review_scope": "Actual179 source identity checked equal to the provider pinned by CI178 full review; no mathematical provider change"
+      }
+    ]
+  },
+  "pinned_mathlib": {
+    "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "api_evidence": {
+      "path": "positive/repair179/CI179PinnedFiniteSumAPIs.json",
+      "git_blob": "7d565a62a2e51051e533ee25dae5d76e67d2a290",
+      "sha256": "b0aac9b6919f44640a02434593e086ff132b263b6b294233b9f23677f138bdd6",
+      "utf8_bytes": 2485,
+      "lines": 18,
+      "final_newline": true
+    },
+    "providers": [
+      {
+        "repository": "leanprover-community/mathlib4",
+        "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+        "path": "Mathlib/Algebra/BigOperators/Ring/Finset.lean",
+        "git_blob": "358b48660c6f8f973b98869a6bb32faec009e527",
+        "read_scope": "Relevant public declaration and surrounding section variables read",
+        "declarations": "\nlemma sum_mul (s : Finset ι) (f : ι → R) (a : R) :\n    (∑ i ∈ s, f i) * a = ∑ i ∈ s, f i * a := map_sum (AddMonoidHom.mulRight a) _ s\n\nlemma mul_sum (s : Finset ι) (f : ι → R) (a : R) :\n    a * ∑ i ∈ s, f i = ∑ i ∈ s, a * f i := map_sum (AddMonoidHom.mulLeft a) _ s\n\nlemma sum_mul_sum (s : Finset ι) (t : Finset κ) (f : ι → R) (g : κ → R) :\n    (∑ i ∈ s, f i) * ∑ j ∈ t, g j = ∑ i ∈ s, ∑ j ∈ t, f i * g j := by\n  simp_rw [sum_mul, ← mul_sum]\n\nlemma _root_.Fintype.sum_mul_sum [Fintype ι] [Fintype κ] (f : ι → R) (g : κ → R) :\n    (∑ i, f i) * ∑ j, g j = ∑ i, ∑ j, f i * g j :=\n  Finset.sum_mul_sum _ _ _ _\n\nlemma _root_.Commute.sum_right (s : Finset ι) (f : ι → R) (b : R)\n    (h : ∀ i ∈ s, Commute b (f i)) : Commute b (∑ i ∈ s, f i) :="
+      },
+      {
+        "repository": "leanprover-community/mathlib4",
+        "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+        "path": "Mathlib/Algebra/Order/BigOperators/Group/Finset.lean",
+        "git_blob": "9a2a19c62c65329f604f175559d556d6e45ec13a",
+        "read_scope": "Relevant public declaration and surrounding section variables read",
+        "declarations": "    Antitone fun x ↦ ∏ i ∈ s, f i x :=\n  fun _ _ hab ↦ Finset.prod_le_prod fun i hi ↦ hf i hi hab\n\n/-- A finite product of functions antitone on `u` is antitone on `u`. -/\n@[to_additive finsetSum /-- A finite sum of functions antitone on `u` is antitone on `u`. -/]\ntheorem _root_.AntitoneOn.finsetProd' [MulLeftMono N] {γ : Type*} [Preorder γ] {u : Set γ}\n    {f : ι → γ → N} (hf : ∀ i ∈ s, AntitoneOn (f i) u) :\n    AntitoneOn (fun x ↦ ∏ i ∈ s, f i x) u :=\n  fun _ ha _ hb hab ↦ Finset.prod_le_prod fun i hi ↦ hf i hi ha hb hab\n\n@[to_additive sum_nonneg]\ntheorem one_le_prod [MulLeftMono N] (h : ∀ i ∈ s, 1 ≤ f i) : 1 ≤ ∏ i ∈ s, f i :=\n  le_trans (by rw [prod_const_one]) (prod_le_prod h)\n\n@[deprecated (since := \"2026-09-01\")] alias one_le_prod' := one_le_prod\n\n@[to_additive sum_nonneg']\ntheorem one_le_prod'' [MulLeftMono N] (h : ∀ i : ι, 1 ≤ f i) : 1 ≤ ∏ i ∈ s, f i :="
+      }
+    ]
+  },
+  "mathematical_scope": {
+    "preserved": "Original finite input profile, the same inverse expressions, genuine inverseFamilySmoothDirections and final tameJetSize. Constants and all index arithmetic unchanged.",
+    "quantifiers": "The low base remains before every n; each order loss remains before all R and s. No extra assumption or new representative.",
+    "review": "Full actual350 source and resulting349 source, all four complete diagnostics, and relevant pinned finite-sum declarations read. Actual six project provider blobs are identical to the previous full source review.",
+    "verification": "SOURCE_REVIEW_ONLY_NOT_COMPILED: no Lean/lake/elaboration/build/CI query, active edit, index or ref operation."
+  },
+  "historical_review": {
+    "source": "81547f3c26d523217f65968079581f3bc557e5bf",
+    "peer_blob": "15568d41ffdcf2a6860b310d683678a1e50e72d0",
+    "peer_sha256": "f4f46a0df8280563ee0faff4f75eae817dc349b13f4777cb62d46908adbcae1a",
+    "owner_blob": "27eeb0c43dca8e6a3cd6c600f080660c051dc32d",
+    "note": "Historical CI178 static review preserved; CI179 diagnostics show further elaboration defects. This candidate requires a fresh exact-delta/full-source peer and CI."
+  },
+  "budget": {
+    "previous_lines": 350,
+    "selected_lines": 349,
+    "net_source_lines": -1,
+    "authorized_net_max": 15,
+    "storage": "One new selected repair path; parent retains actual before/after source commit history. No extra Lean archive copy."
+  },
+  "peer_review": {
+    "status": "PENDING_FULL_INDEPENDENT_REVIEW",
+    "requested_reviewer": "/root/audit_coordinates"
+  }
+}

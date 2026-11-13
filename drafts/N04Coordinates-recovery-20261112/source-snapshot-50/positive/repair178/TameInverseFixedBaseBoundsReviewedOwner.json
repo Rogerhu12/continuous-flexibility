@@ -1,0 +1,95 @@
+{
+  "schema": "n04-ci-repair-reviewed-owner/v1",
+  "status": "REVIEWED_SOURCE_REPAIR_ONLY_NOT_COMPILED",
+  "path": "positive/repair178/TameInverseFixedBaseBoundsReviewedManifest.json",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "base": {
+    "commit": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+    "tree": "4df6517d5b3c92f5a366501af217c4471d0f23f8",
+    "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+    "git_blob": "45fae56b12e755379fcf3e4aa3e211ba0cfe9c7a",
+    "sha256": "7e79129c9a9df8e2d74c353106685db461089a05ec1141f333211d5a257c6aac",
+    "utf8_bytes": 18485,
+    "lines": 349,
+    "final_newline": true
+  },
+  "selected": {
+    "path": "positive/repair178/TameInverseFixedBaseBounds.lean",
+    "git_blob": "81547f3c26d523217f65968079581f3bc557e5bf",
+    "sha256": "38378c48f2a2c8d905f41a4e2099ed2129589e547e113664980806b8de33d338",
+    "utf8_bytes": 18529,
+    "lines": 350,
+    "final_newline": true
+  },
+  "candidate": {
+    "path": "positive/repair178/TameInverseFixedBaseBoundsCandidateManifest.json",
+    "git_blob": "2865d4019ae377bfbf955106f0ae178928013890",
+    "sha256": "36968fd4461e5ab70a49e83615e1e9c0cf2cae8bdffb3452a15929902c2bda5e",
+    "utf8_bytes": 12497,
+    "lines": 237,
+    "final_newline": true
+  },
+  "independent_peer": {
+    "path": "audit/repair178/CI178TameInverseFixedBaseBoundsIndependentReview.json",
+    "git_blob": "15568d41ffdcf2a6860b310d683678a1e50e72d0",
+    "sha256": "f4f46a0df8280563ee0faff4f75eae817dc349b13f4777cb62d46908adbcae1a",
+    "utf8_bytes": 11261,
+    "lines": 184,
+    "final_newline": true,
+    "reviewer": "audit_coordinates",
+    "status": "PASS_SOURCE_REVIEW_ONLY_NOT_COMPILED"
+  },
+  "patch": {
+    "path": "positive/repair178/TameInverseFixedBaseBounds.patch",
+    "git_blob": "ff7aa0209206887f4ca594099d094293d7ef4610",
+    "sha256": "2b418da9e629094be4c5caf0678ff95c7e0a7e2b4feb58327b3f41061da342a4",
+    "utf8_bytes": 3355,
+    "lines": 61,
+    "final_newline": true
+  },
+  "diagnostics": {
+    "run_id": 43335371097,
+    "job_id": 131590094897,
+    "log": {
+      "local_path": "/workspace/scratch/n04-drafts-20261113/root/ci/CI178-build.log",
+      "git_blob": "e2df6bff2f48262ba5fe25bedc564e75ed3b0c10",
+      "sha256": "5f87531f2c86ace5cb59ac6e685c439158e60831ecdfbc8b08bbf2193e57c45c",
+      "utf8_bytes": 97156,
+      "lines": 910,
+      "final_newline": true
+    },
+    "full_inverse_diagnostic_block": {
+      "path": "positive/repair178/CI178TameInverseFixedBaseErrors.txt",
+      "git_blob": "72493403faea21966c9f02836de5ff9af3233aaa",
+      "sha256": "e4efa9829cecfb9175d2fb4bf04127a11d20f28283c745491afbbcd5d4706f68",
+      "utf8_bytes": 3542,
+      "lines": 36,
+      "final_newline": true
+    },
+    "error_locations": [
+      "38:40",
+      "39:2",
+      "153:6",
+      "178:33",
+      "178:35",
+      "178:38",
+      "197:37",
+      "332:10"
+    ],
+    "warning": "Unused section-variable warning preserved; no resource or linter setting changed."
+  },
+  "preservation": {
+    "complete_public_headers": 1,
+    "complete_private_headers": 3,
+    "all_complete_headers_equal": true,
+    "imports_options_equal": true,
+    "reverse_reconstruction_equal": true,
+    "net_lines": 1,
+    "new_Lean_source_lines": 350,
+    "change_scope": "Six local proof elaboration sites only; original fixed base, losses, numerical constants, expressions and genuine inverse tower are preserved."
+  },
+  "source_unchanged_after_peer": true,
+  "verification": "Exact Gitblob content returned and compared for selected source, patch, candidate, diagnostics and peer. No local Lean, active/index/ref edits or CI actions. Future CI is required.",
+  "archive_note": "The old source is exactly stored in the recorded active178 commit. This owner record does not request another duplicate Lean archive; root controls activation/backup accounting."
+}

@@ -1,0 +1,196 @@
+{
+  "schema": "n04-ci-repair-independent-review-v2",
+  "status": "PASS_SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "path": "audit/repair179/CI179TameInverseFixedBaseBoundsIndependentReview.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "reviewer": "audit_coordinates",
+  "owner": "proof_inventory",
+  "base": {
+    "ref": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+    "tree": "05fa006b7aa6b0568fd1f9117f17148fbb241d40",
+    "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+    "git_blob": "81547f3c26d523217f65968079581f3bc557e5bf",
+    "sha256": "38378c48f2a2c8d905f41a4e2099ed2129589e547e113664980806b8de33d338",
+    "utf8_bytes": 18529,
+    "lines": 350,
+    "final_newline": true
+  },
+  "selected": {
+    "path": "positive/repair179/TameInverseFixedBaseBounds.lean",
+    "git_blob": "083d926c2e2bd91323a068b40e93dc93117f9779",
+    "sha256": "7d8e733967093d47742799f946c847296b63de70ac0c41cceb33c1ba84755b83",
+    "utf8_bytes": 18532,
+    "lines": 349,
+    "final_newline": true
+  },
+  "candidate": {
+    "git_blob": "81bd956f10d35b0d581c6f84c5d725157b969c13",
+    "sha256": "ab6116a70dae3658eaaee78ecc71bf3f787beca46e3b1dd795bcc7ef9269b714"
+  },
+  "patch": {
+    "path": "positive/repair179/TameInverseFixedBaseBounds.patch",
+    "git_blob": "3c9abd1008537a1b81687a6e1d1d803992a6acc5",
+    "sha256": "92886ec1b390e522c6fb1914db56e0e67e7cda8bbd90a34e0a14306be9f77c83",
+    "utf8_bytes": 1392,
+    "lines": 28,
+    "final_newline": true
+  },
+  "complete_diagnostics": {
+    "path": "positive/repair179/CI179TameInverseFixedBaseErrors.txt",
+    "git_blob": "d62286d99bb0e47b690967a1a0f50793496d4033",
+    "sha256": "06a04ddf4474e5559c9e18304ec7cd0c0d09fced10575d5ac9da390839db3e14",
+    "utf8_bytes": 6507,
+    "lines": 173,
+    "final_newline": true
+  },
+  "historical_review": {
+    "source": "81547f3c26d523217f65968079581f3bc557e5bf",
+    "peer_blob": "15568d41ffdcf2a6860b310d683678a1e50e72d0",
+    "peer_sha256": "f4f46a0df8280563ee0faff4f75eae817dc349b13f4777cb62d46908adbcae1a",
+    "owner_blob": "27eeb0c43dca8e6a3cd6c600f080660c051dc32d",
+    "note": "Historical CI178 static review preserved; CI179 diagnostics show further elaboration defects. This candidate requires a fresh exact-delta/full-source peer and CI."
+  },
+  "scope": {
+    "entire_350_preimage_and_349_candidate_read": true,
+    "four_complete_cached_diagnostics_read": true,
+    "no_new_project_provider_contract": true,
+    "actual_base": "Exact path fetched at immutable386ddd382873abcf8e0a97b02378ce2b3ee78919; returned81547f3c and all bytes equal the reviewed350 preimage.",
+    "upstream_scope": "The six actual project provider identities in the candidate exactly retain the preceding complete source review15568d41 pins. Their used contracts were read in that review and are unchanged; no whole dependency graph was rebuilt here."
+  },
+  "mechanical": {
+    "source_sha256": "7d8e733967093d47742799f946c847296b63de70ac0c41cceb33c1ba84755b83",
+    "before_sha256": "38378c48f2a2c8d905f41a4e2099ed2129589e547e113664980806b8de33d338",
+    "patch_sha256": "92886ec1b390e522c6fb1914db56e0e67e7cda8bbd90a34e0a14306be9f77c83",
+    "diagnostic_sha256": "06a04ddf4474e5559c9e18304ec7cd0c0d09fced10575d5ac9da390839db3e14",
+    "forward_literal_reconstruction": true,
+    "reverse_literal_reconstruction": true,
+    "standard_patch_applied_exact": true,
+    "hunks": 3,
+    "added_lines": 2,
+    "deleted_lines": 3,
+    "net_lines": -1,
+    "complete_headers_equal": true,
+    "public_headers": 1,
+    "private_headers": 3,
+    "imports_equal": true,
+    "resource_options_equal": true,
+    "rest_of_source_exact": true,
+    "no_new_declarations": true
+  },
+  "complete_headers": [
+    "private theorem inverseInputProfile_product\n    {E : Type*} [AddCommGroup E] [Module ℝ E]\n    (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (hI : HasInterpolation p) :\n    ∃ base loss : ℕ, ∀ (a b : ℕ) (R : ℝ), 0 ≤ R →\n      ∃ C : ℝ, 0 ≤ C ∧ ∀ {ι : Type} [Fintype ι] (x : ι → E),\n        (∑ i, p base (x i)) ≤ R →\n        (1 + ∑ i, p a (x i)) * (1 + ∑ i, p b (x i)) ≤\n          C * (1 + ∑ i, p (a + b + loss) (x i)) := by",
+    "private theorem inverseProfile_linear_step\n    {I : Type*} (P f g : ℕ → I → ℝ)\n    (hP : ∀ s i, 0 ≤ P s i) (hmono : ∀ i, Monotone (fun s => P s i))\n    (base opLoss productLoss loss : ℕ)\n    (hprod : ∀ a b, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ i, P a i * P b i ≤ C * P (a + b + productLoss) i)\n    (hf : ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ i, f s i ≤ C * P (s + loss) i)\n    (hstep : ∀ s, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ i, g s i ≤ C * (P (s + opLoss) i * f base i + f (s + opLoss) i)) :\n    ∀ s, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ i, g s i ≤ C * P (s + (opLoss + base + loss + productLoss)) i := by",
+    "private theorem inverseExpression_fixedBase_growth\n    (a : ℕ → Seminorm ℝ A) (ha : Monotone a)\n    (base productLoss : ℕ) (hbase : operatorBase ≤ base)\n    (hproduct : ∀ R : ℝ, 1 ≤ R → ∀ b c, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ z : (E × E) × A, pairGrading (pairGrading q q) a base z ≤ R →\n        (1 + pairGrading (pairGrading q q) a b z) *\n          (1 + pairGrading (pairGrading q q) a c z) ≤\n        C * (1 + pairGrading (pairGrading q q) a (b + c + productLoss) z))\n    (e : TameInverseExpression E E E A) (he : e.IsZeroLoss q q q a) :\n    ∃ loss : ℕ, ∀ R : ℝ, 1 ≤ R → ∀ s, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ z : (E × E) × A, z.1.1 ∈ U →\n        pairGrading (pairGrading q q) a base z ≤ R →\n        pairGrading q q s (e.eval J V z.1 z.2) ≤\n          C * (1 + pairGrading (pairGrading q q) a (s + loss) z) := by",
+    "theorem inverseFamilySmoothDirections_fixedBase_oneHigh\n    (hI : HasInterpolation (pairGrading q q))\n    (hU : IsOpen U)\n    (hleft : ∀ x ∈ U, ∀ y, V x (L x y) = y)\n    (hright : ∀ x ∈ U, ∀ y, L x (V x y) = y)\n    (hcont : ContinuousOn (fun z : E × E => V z.1 z.2) (U ×ˢ univ)) :\n    ∃ base : ℕ, ∀ n : ℕ, ∃ loss : ℕ, ∀ R : ℝ, 1 ≤ R →\n      ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧\n        ∀ x ∈ U ×ˢ univ, pairGrading q q base x ≤ R →\n          ∀ v : Fin n → E × E,\n            q s ((inverseFamilySmoothDirections J hU V hleft hright hcont).D n x v) ≤\n              C * tameJetSize (pairGrading q q) n s loss base x v := by"
+  ],
+  "findings": [],
+  "exact_diagnostic_repairs": [
+    {
+      "locations": [
+        "49:45"
+      ],
+      "verified": "Pinned Fintype.sum_mul_sum has exactly (sum i,f i)*(sum j,g j)=sum i,sum j,f i*g j. Its two arguments specialize to fun i=>p a(x i) and fun j=>p b(x j), preserving the required outer-i/inner-j order. This replaces the residual sum-order mismatch from simultaneous simp."
+    },
+    {
+      "locations": [
+        "58:8"
+      ],
+      "verified": "Only the redundant ring after the original successful simplification is deleted. The full diagnostic reports No goals to be solved, and the preceding dsimp/simp are unchanged."
+    },
+    {
+      "locations": [
+        "257:12",
+        "257:37"
+      ],
+      "verified": "The standalone nlinarith fact now names s:=Finset.univ and j:Fin n, producing exactly 0<=sum j:Fin n,(cHigh j:Real). Pinned sum_nonneg is the to_additive declaration of one_le_prod and uses this same s binder. The fixed K=1+sum cHigh and P=1+d inequality is unchanged."
+    }
+  ],
+  "pinned_mathlib": {
+    "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "providers": [
+      {
+        "path": "Mathlib/Algebra/BigOperators/Ring/Finset.lean",
+        "git_blob": "358b48660c6f8f973b98869a6bb32faec009e527",
+        "sha256": "35b640ccd01c32ee0885dbb252ed49a7e178bcc1501e1f76918040ef8f5290dc",
+        "scope": "Relevant public Fintype.sum_mul_sum, Finset.sum_mul_sum, sum_mul/mul_sum and NonUnitalNonAssocSemiring surrounding section read."
+      },
+      {
+        "path": "Mathlib/Algebra/Order/BigOperators/Group/Finset.lean",
+        "git_blob": "9a2a19c62c65329f604f175559d556d6e45ec13a",
+        "sha256": "327dadef5af7180764c161be2418446b7950aa35210af24e98f099d2463139c3",
+        "scope": "to_additive sum_nonneg source declaration and its bound finite-set parameter read."
+      }
+    ]
+  },
+  "actual_project_providers": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseBounds.lean",
+      "ref": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+      "git_blob": "aeee314ef570e000726d4c0b44ac7918fc1b0c4a",
+      "sha256": "925fda87a5189968db6eb87ffe62505baf7a32638d304dcf31c4aabcf681ab37",
+      "utf8_bytes": 11046,
+      "lines": 244,
+      "final_newline": true,
+      "review_scope": "Actual179 source identity checked equal to the provider pinned by CI178 full review; no mathematical provider change"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseJets.lean",
+      "ref": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+      "git_blob": "976c9b64fc749b055e22c2e8596a8781263956bc",
+      "sha256": "e34d22d95954a7c2bbd2dd6317eb1fcd08e4e7ded3cd3633729b501236bf694d",
+      "utf8_bytes": 12129,
+      "lines": 254,
+      "final_newline": true,
+      "review_scope": "Actual179 source identity checked equal to the provider pinned by CI178 full review; no mathematical provider change"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseExpressions.lean",
+      "ref": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+      "git_blob": "14ad46cae7d92dca46f5efd006f5260873046713",
+      "sha256": "5f19c405b830b56e9ad43319b2e9b306af3a27d840167fc29d592e9b9edaec56",
+      "utf8_bytes": 22877,
+      "lines": 490,
+      "final_newline": true,
+      "review_scope": "Actual179 source identity checked equal to the provider pinned by CI178 full review; no mathematical provider change"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+      "ref": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+      "git_blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+      "sha256": "6952ac2501bd38f0f6d51b1633f52d30ed1820f9380bd6dd58ebc24c601e1991",
+      "utf8_bytes": 11512,
+      "lines": 250,
+      "final_newline": true,
+      "review_scope": "Actual179 source identity checked equal to the provider pinned by CI178 full review; no mathematical provider change"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameJetLocalBounds.lean",
+      "ref": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+      "git_blob": "af44988e9b25134eaeb1ae6505691d755d8bc228",
+      "sha256": "0cdfa8c38f6ff5e84cc7d486946ca4c96a7574ec929185edfa7397204374a184",
+      "utf8_bytes": 9127,
+      "lines": 196,
+      "final_newline": true,
+      "review_scope": "Actual179 source identity checked equal to the provider pinned by CI178 full review; no mathematical provider change"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SpacesInterpolationProducts.lean",
+      "ref": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+      "git_blob": "bef566d963e0bafb656cca8fb64d118d2c396162",
+      "sha256": "302248ce14c8d3ef488a6a46d8cb80cb72b374f89da308baac7012fa92f8fd58",
+      "utf8_bytes": 10818,
+      "lines": 212,
+      "final_newline": true,
+      "review_scope": "Actual179 source identity checked equal to the provider pinned by CI178 full review; no mathematical provider change"
+    }
+  ],
+  "mathematical_preservation": "The input-profile estimate, original finite inverse expressions, actual inverseFamilySmoothDirections, fixed low base before n, each loss before R/s, all constants and derivative budgets, and final tameJetSize remain unchanged. No new bound or representative is assumed.",
+  "limitations": {
+    "no_Lean_or_local_build": true,
+    "no_CI_query": true,
+    "no_active_source_index_or_ref_change": true,
+    "no_new_math_statement": true,
+    "next_CI_required": true,
+    "note": "This fresh exact-source review supersedes readiness of the previous350 for these diagnosed errors only. Neither the historical static review nor this receipt is a compilation claim."
+  }
+}

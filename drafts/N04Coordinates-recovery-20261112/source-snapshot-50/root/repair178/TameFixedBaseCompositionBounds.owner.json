@@ -1,0 +1,64 @@
+{
+  "schema": "N04-CI-source-only-repair-owner-v1",
+  "owner": "/root",
+  "ci_failure": "7cf7cf4c4d22516555de1c15865cc6987d85a228",
+  "path": "src/ContinuousFlexibility/Analysis/TameFixedBaseCompositionBounds.lean",
+  "before": {
+    "blob": "f7492e92dd84ed60c9f2400df00b1554a48ccf52",
+    "sha256": "f70497231b60b5c0a59e8de16cb534f1820e2bd9d6469ed8c86643b88f428b80",
+    "lines": 328
+  },
+  "after": {
+    "blob": "a71b7b644bd5db40c05c3e41cd6db9d05e1d1e9f",
+    "sha256": "4ff61f1def2d2c627cc6e1dd56160dd500220f260e5804c1446e428eb6c3872b",
+    "bytes": 17987,
+    "lines": 332,
+    "head_count": 4
+  },
+  "delta": {
+    "added": 17,
+    "deleted": 13,
+    "net": 4
+  },
+  "repairs": [
+    {
+      "location": 64,
+      "change": "Give 1<=Nat.cast(k+1) an explicit real type; use bilateral add_le_add for the shared sum."
+    },
+    {
+      "location": 70,
+      "change": "Use add_le_add le_rfl (hx (pick j)) for 1+p<=1+R."
+    },
+    {
+      "location": 73,
+      "change": "Give the finite real summand and chosen index explicit types before adding the leading1."
+    },
+    {
+      "location": 119,
+      "change": "Give the tail sum its explicit Fin n argument and exact seminorm; use add_le_add le_rfl."
+    },
+    {
+      "location": 189,
+      "change": "Expose the let-defined natural delta sum, with exact summand d l.val."
+    },
+    {
+      "locations": [
+        205,
+        223,
+        260
+      ],
+      "change": "Repair the same one-sided-add orientation in the still-dependent main body; use bilateral real/natural add_le_add."
+    }
+  ],
+  "unchanged": {
+    "all_four_theorem_heads": true,
+    "both_public_heads": true,
+    "imports": true,
+    "definitions": true,
+    "resource_options": true,
+    "selected_atlas_or_material_objects": "not applicable; generic theorem inputs and conclusions unchanged"
+  },
+  "scope": "Complete328/332source read; five reported error sites plus the same three subsequent addition calls repaired. No new mathematics or weaker statement. Compiler outcome awaits reviewed CI successor.",
+  "independent_review": "pending",
+  "storage": "Repair source will be selected once at the original src path through the next active parent; no full duplicate Lean archive copy."
+}

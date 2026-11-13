@@ -1,0 +1,131 @@
+{
+  "schema": "N04-draft-charge-provenance-v1",
+  "author": "/root/quantitative_route",
+  "artifact_path": "quantitative/recovery/FixedBaseSecondBatchFourOwned727ChargeEvidence.json",
+  "date_utc": "2026-11-13",
+  "status": "PROVEN_HISTORICAL_CHARGE_NO_CURRENT_RECLASSIFICATION",
+  "selected_rows": [
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds",
+      "lines": 159,
+      "git_blob": "4ea70ab43fc1fa6e51ddcfa3849f97580bf02235",
+      "sha256": "4c3c07d97d9b4ad03cbb16f4b9b1829eabacdbeb1c012dee3733958f32ac1941",
+      "archive_commit": "9f11634c5091a3fd5901bc11b2bfb7971f8e7122",
+      "archive_path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-34/positive/compatibility/circle-forward-source-apply/CircleShiftedForwardFixedBaseBounds.lean",
+      "charge_record": "e23bc263e84242b5ccf0ee478f47969e35112f21",
+      "charge_record_sha256": "ad98588b21566a8643a62b79f2743d348e51c86fccbb0fe18fd5ca261bd949ef",
+      "charge_explanation": "Snapshot34 explicitly counts this final 159-line apply-compatible source separately from the distinct earlier reconstructed 159-line source and root60: 378 new lines. 19585 - 4481 compiled-copy lines + 378 = 15482. Only this final source is eligible for this row; its distinct historical 159-line predecessor is not also credited.",
+      "destination": "src/ContinuousFlexibility/Analysis/CircleShiftedForwardFixedBaseBounds.lean",
+      "exact_source_and_archived_content_verified": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds",
+      "lines": 301,
+      "git_blob": "1f55edbb185fe33327757a087479196cc8565e4f",
+      "sha256": "435088fc0bad2d63d09101dfcb8a2629cc24e5437f855867e41cac8368b2eb64",
+      "archive_commit": "acac62fd1903dd18733c1759927aca87ad7b045a",
+      "archive_path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-35/positive/reconstructed/CirclePositiveInverseFixedBaseBounds.lean",
+      "charge_record": "f8eec1034be1f1b09f018b3f2399d518fec1d90a",
+      "charge_record_sha256": "d9a781f0caf62b43a105a1be4ddcdc595617b13baa03017b0b50b9fa5f154a20",
+      "charge_explanation": "Snapshot35 explicitly adds 1470 = 349 + 301 + 235 + 140 + 151 + 294 lines, taking 15482 to 16952. This is the exact 301-line selected source.",
+      "destination": "src/ContinuousFlexibility/Analysis/CirclePositiveInverseFixedBaseBounds.lean",
+      "exact_source_and_archived_content_verified": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04EndpointCircleFixedBaseBounds",
+      "lines": 115,
+      "git_blob": "09a1696b57c7fe3678cc6e10e419bb8fa22c0c11",
+      "sha256": "4726b99d556fcd77b094156f54551a65b5ec63b04f570f2ffb90fecdd1d0c29e",
+      "archive_commit": "be31f3ade99ace57e0fc7760a89491bbf9cab771",
+      "archive_path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-36/positive/reconstructed/N04EndpointCircleFixedBaseBounds.lean",
+      "charge_record": "9b7826a4420843f8762bc4e47d96901409a7e5d4",
+      "charge_record_sha256": "4f1b1c736eb94d9d46cd861599c5dd944fe84572c42db523564a2e0856e76066",
+      "charge_explanation": "Snapshot36 explicitly adds 953 = 256 + 197 + 115 + 94 + 109 + 182 lines, taking 16952 to 17905. This is the exact selected 115-line source.",
+      "destination": "src/ContinuousFlexibility/Analysis/N04EndpointCircleFixedBaseBounds.lean",
+      "exact_source_and_archived_content_verified": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04SelectorInverseCircleFixedBaseBounds",
+      "lines": 152,
+      "git_blob": "054e86dbc3a61f36df0ff4fd7ddf71aefeacb117",
+      "sha256": "93154c0937eac430488bc4927b7d5e5f42d026df05959e430686c650ddd79fd4",
+      "archive_commit": "0227745d7d0b759233e7714896f99493b29661d2",
+      "archive_path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-38/positive/reconstructed/N04SelectorInverseCircleFixedBaseBounds.lean",
+      "charge_record": "ee9d072e5cf0ca7baf0ef5832298425f42004a07",
+      "charge_record_sha256": "c96c60607ea09541d6a5df31ead1b6fb5c4960b288ebfc9398c2d3bd6bdb8d17",
+      "charge_explanation": "Snapshot38 explicitly adds 654 = 174 additional working-composition lines + final composition328 + selector152, taking 18872 to 19526. The .lean.txt historical input is not a separately counted new Lean source.",
+      "destination": "src/ContinuousFlexibility/Analysis/N04SelectorInverseCircleFixedBaseBounds.lean",
+      "exact_source_and_archived_content_verified": true
+    }
+  ],
+  "total_unique_selected_lines": 727,
+  "source_index": {
+    "git_blob": "89f6c52694801f43cc92907e5f71c4b13096c1dd",
+    "entries": 3189,
+    "scope": "Snapshot47 index confirms each exact SHA256 and archived storage path. All four archived UTF8 source contents were fetched and checked against the selected Git blobs."
+  },
+  "carried_ledger": {
+    "git_blob": "7a0aab35f942c06078903f0f05633480eadf2e5c",
+    "chain": [
+      {
+        "snapshot": 34,
+        "upper_bound": 15482
+      },
+      {
+        "snapshot": 35,
+        "upper_bound": 16952
+      },
+      {
+        "snapshot": 36,
+        "upper_bound": 17905
+      },
+      {
+        "snapshot": 37,
+        "upper_bound": 18872
+      },
+      {
+        "snapshot": 38,
+        "upper_bound": 19526
+      },
+      {
+        "snapshots": "39 through 43",
+        "upper_bound": 19526
+      },
+      {
+        "snapshot": 44,
+        "upper_bound": 19825
+      },
+      {
+        "snapshot": 45,
+        "upper_bound": 19899
+      },
+      {
+        "snapshot": 47,
+        "upper_bound": 19970
+      }
+    ],
+    "snapshot47_record": "34b89af44fea15919101ec0e9a39211af8816968",
+    "scope": "Historical inclusion is established by exact charge records, not inferred merely from archive existence. Later repairs, newly authorized sources and reclassifications belong to the parent current ledger and are not recomputed here."
+  },
+  "disjointness": {
+    "distinct_from_fixed_batch1_final328_and349": true,
+    "distinct_from_small_group100_74_repair_71": true,
+    "historical_composition_and_inverse677_evidence": "0b4fc88a7cc2b1e8d7ca4f7f0e97b9d96885cdb5",
+    "no_duplicate_credit_for_predecessors_or_archived_copies": true
+  },
+  "reclassification_gate": {
+    "credit_now": 0,
+    "maximum_future_credit_for_these_exact_four_sources": 727,
+    "requirements": [
+      "All four exact selected source bytes, or separately reviewed explicit source successors, must be part of one actual complete green library build.",
+      "The parent must confirm the same charged rows have not already been credited by a later ledger.",
+      "Any repair delta is counted or credited separately using its exact source history; this record does not credit an unbuilt successor or an unselected historical copy."
+    ],
+    "CI178_and_CI179_failed": "No compilation credit is authorized by this record."
+  },
+  "audit_limits": {
+    "no_Lean_added": true,
+    "no_ref_or_CI_change": true,
+    "no_current_balance_claim": true
+  }
+}

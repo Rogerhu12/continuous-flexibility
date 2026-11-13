@@ -1,0 +1,430 @@
+{
+  "kind": "recovery_snapshot_with_latest_compiled_tree",
+  "snapshot": 50,
+  "created_at": "2026-11-13T00:52:07.310311+00:00",
+  "parent": "c8739d24d653a828a0100187254a199378b076c9",
+  "additional_parent": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+  "compiled_baseline": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+  "compiled_baseline_tree": "da843557a720e7424e680ec2eaa3de49ad7ea07a",
+  "source_index_blob": "1afcc61e7f4dc57c6e42742d8661fe516acdb142",
+  "source_index": {
+    "path": "drafts/N04Coordinates-recovery-20261112/SOURCE-INDEX.json",
+    "sha256": "8de5c802b02b78058d4827425f16c4a9dc9821be1246c48ff8c43c8844d90a49",
+    "entries": 3273,
+    "new": 46,
+    "updated": 0
+  },
+  "artifacts": [
+    {
+      "name": "root/ci/CI178-build.log",
+      "blob": "28171e253f8d9c548b84b69c1a9d80fd9c13d5f6",
+      "sha256": "c34394b165287f28d21367497ee2396ba4a13fda33aea10d0b875599aa5d3784",
+      "bytes": 97155,
+      "lines": 909
+    },
+    {
+      "name": "root/ci/CI178CompleteErrorBlocks.json",
+      "blob": "6133cc506f9c773918e456d1fc8ce476c3dba19e",
+      "sha256": "5871c394969e23377bc17124683b737627c417c652a423762b885912502559f1",
+      "bytes": 7187,
+      "lines": 144
+    },
+    {
+      "name": "root/ci/CI178FailureReceipt.json",
+      "blob": "7cf7cf4c4d22516555de1c15865cc6987d85a228",
+      "sha256": "3ea508c4394334c36da87ff908dcabb650b879813cdf4c2fa0c2f2ec78d77398",
+      "bytes": 1372,
+      "lines": 42
+    },
+    {
+      "name": "root/repair178/TameFixedBaseCompositionBounds.owner.json",
+      "blob": "835e2b08a0eb2c8b0cd13957e5459815542f58ce",
+      "sha256": "d64899e3cff7eb192a2ed5f5ec3882c772158243d81413e097d7e6b67afbe3dc",
+      "bytes": 2226,
+      "lines": 64
+    },
+    {
+      "name": "root/repair178/TameFixedBaseCompositionBounds.reviewed-owner.json",
+      "blob": "0bea6cb11fdb6f419558aaf5e157fb844109f223",
+      "sha256": "bf3a62d1da4cc30182d65c1b60121bdb45a66238f9797c0882422e6042a8d168",
+      "bytes": 2494,
+      "lines": 70
+    },
+    {
+      "name": "quantitative/recovery/reviews/CI178TameFixedBaseCompositionBoundsIndependentReview.json",
+      "blob": "03db06f647af897e26104528dcb1464e4b1c22cf",
+      "sha256": "b7c36fdad5270a007ad077c11bc6961b560cf11c340c38f4ef34cb653efaa1ce",
+      "bytes": 12213,
+      "lines": 304
+    },
+    {
+      "name": "positive/repair178/TameInverseFixedBaseBoundsCandidateManifest.json",
+      "blob": "2865d4019ae377bfbf955106f0ae178928013890",
+      "sha256": "36968fd4461e5ab70a49e83615e1e9c0cf2cae8bdffb3452a15929902c2bda5e",
+      "bytes": 12497,
+      "lines": 237
+    },
+    {
+      "name": "positive/repair178/TameInverseFixedBaseBoundsReviewedOwner.json",
+      "blob": "27eeb0c43dca8e6a3cd6c600f080660c051dc32d",
+      "sha256": "e171be2bb3b4488863095ff181de93f649f16ab08aef35bca8e50afe19416303",
+      "bytes": 3889,
+      "lines": 95
+    },
+    {
+      "name": "audit/recovery/reviews/CI178TameInverseFixedBaseBoundsIndependentReview.json",
+      "blob": "15568d41ffdcf2a6860b310d683678a1e50e72d0",
+      "sha256": "f4f46a0df8280563ee0faff4f75eae817dc349b13f4777cb62d46908adbcae1a",
+      "bytes": 11261,
+      "lines": 184
+    },
+    {
+      "name": "positive/repair178/TameInverseFixedBaseBounds.patch",
+      "blob": "ff7aa0209206887f4ca594099d094293d7ef4610",
+      "sha256": "2b418da9e629094be4c5caf0678ff95c7e0a7e2b4feb58327b3f41061da342a4",
+      "bytes": 3355,
+      "lines": 61
+    },
+    {
+      "name": "root/ci/CI179StagingPlan.json",
+      "blob": "8e47551abe9a23e9050588598bf294b19e1e3fc4",
+      "sha256": "4adc40a1f018085db80ea3ad372f6779f6a29a0b21532142fc34c2e643abc72f",
+      "bytes": 2816,
+      "lines": 77
+    },
+    {
+      "name": "root/ci/CI179PushReceipt.json",
+      "blob": "593ca397e12f90839e20cdcfacf5a0637f98eb6b",
+      "sha256": "be36ab122526662e92faa12b859c4e1f18ac29b4412344316e2dafec9f13793a",
+      "bytes": 562,
+      "lines": 15
+    },
+    {
+      "name": "root/ci/CI179-build.log",
+      "blob": "45bc18074787c4d6e780455e52595dfed6915e7e",
+      "sha256": "f99f7d59bf82637d02486fd3483c5482e4f8c31e4da1d4a8e4628955b3335fc7",
+      "bytes": 78610,
+      "lines": 961
+    },
+    {
+      "name": "root/ci/CI179CompleteErrorBlocks.json",
+      "blob": "319def55c91d846721fd02317bd7dfeb4c0250bd",
+      "sha256": "56c8bd4a103974c2e928cf674ab28166b809101acf4bf1e19316c1a014dc8dd5",
+      "bytes": 17815,
+      "lines": 397
+    },
+    {
+      "name": "root/repair179/TameFixedBaseCompositionBounds.owner.json",
+      "blob": "b9d841306e172758fb1f803857fbaf49dd44c08c",
+      "sha256": "d199d6372de919103d10784b00588b85a95e8e2ccd81f5e1ac17adb032291799",
+      "bytes": 2077,
+      "lines": 54
+    },
+    {
+      "name": "quantitative/recovery/reviews/CI179TameFixedBaseCompositionBoundsIndependentReview.json",
+      "blob": "6e8632acbce133cb50f6f2d59508211f1083a05e",
+      "sha256": "024d1310009680fb08b7b121e45ed312257ed4d10384c7b2921c983fb55ce678",
+      "bytes": 7668,
+      "lines": 137
+    },
+    {
+      "name": "positive/repair179/TameInverseFixedBaseBoundsCandidateManifest.json",
+      "blob": "81bd956f10d35b0d581c6f84c5d725157b969c13",
+      "sha256": "ab6116a70dae3658eaaee78ecc71bf3f787beca46e3b1dd795bcc7ef9269b714",
+      "bytes": 15310,
+      "lines": 244
+    },
+    {
+      "name": "positive/repair179/TameInverseFixedBaseBounds.patch",
+      "blob": "3c9abd1008537a1b81687a6e1d1d803992a6acc5",
+      "sha256": "92886ec1b390e522c6fb1914db56e0e67e7cda8bbd90a34e0a14306be9f77c83",
+      "bytes": 1392,
+      "lines": 28
+    },
+    {
+      "name": "positive/repair179/CI179TameInverseFixedBaseErrors.txt",
+      "blob": "d62286d99bb0e47b690967a1a0f50793496d4033",
+      "sha256": "06a04ddf4474e5559c9e18304ec7cd0c0d09fced10575d5ac9da390839db3e14",
+      "bytes": 6507,
+      "lines": 173
+    },
+    {
+      "name": "positive/repair179/TameInverseFixedBaseBoundsMechanicalEvidence.json",
+      "blob": "dddce96a2f32ce3a49dab8d6f9aa6b9c868881e4",
+      "sha256": "1d15f88c2b81634ee0569b58b9779408032555c60dfef228cdccfa9905728fef",
+      "bytes": 6816,
+      "lines": 96
+    },
+    {
+      "name": "positive/repair179/CI179PinnedFiniteSumAPIs.json",
+      "blob": "7d565a62a2e51051e533ee25dae5d76e67d2a290",
+      "sha256": "b0aac9b6919f44640a02434593e086ff132b263b6b294233b9f23677f138bdd6",
+      "bytes": 2485,
+      "lines": 18
+    },
+    {
+      "name": "positive/reconstructed/N04DiscriminantIncrementJointGain.lean",
+      "blob": "70f648d5fdfbc870f42a1b44e9f29ed9bdcebec7",
+      "sha256": "a12fa214a4051d36079ac80261edf99b13e0c73c77b7f8989899facbc0b7782b",
+      "bytes": 10592,
+      "lines": 184
+    },
+    {
+      "name": "positive/recovery/N04DiscriminantIncrementJointGainCandidateManifest.json",
+      "blob": "4d96f7e4b1620dbecfe3f2e4dfdc10c4b6c3874b",
+      "sha256": "4723d6e1693bcecc902eb4a7d3d57a9676932f59cb55916cb8c2059ce8eae635",
+      "bytes": 14527,
+      "lines": 279
+    },
+    {
+      "name": "positive/recovery/N04DiscriminantIncrementJointGainReviewedOwner.json",
+      "blob": "eb5c0c2723b89d31d33eaec568a8cb39edd43007",
+      "sha256": "7a2969f9bdefc85dd9888c0c8eac5f5f6e9ceae2d7aaaea778cefc9c379e7492",
+      "bytes": 4905,
+      "lines": 80
+    },
+    {
+      "name": "audit/recovery/reviews/N04DiscriminantIncrementJointGainIndependentReview.json",
+      "blob": "48536c8b4fc52d157997c07a1ef8105ad4bdfd51",
+      "sha256": "13d8319161b8f8f593e8f59eec6759d654e2212e33925c9dcd291df0b2734250",
+      "bytes": 11492,
+      "lines": 192
+    },
+    {
+      "name": "positive/recovery/N04DiscriminantIncrementJointGainDependencyGraph.json",
+      "blob": "9465fc829af8b88d425dd98a79515d32a5f7f538",
+      "sha256": "238df1a3afc71aaee821ffae59560a53f1ff6839fa83ce6b8b2cb3a95044d6e3",
+      "bytes": 549225,
+      "lines": 12840
+    },
+    {
+      "name": "positive/recovery/N04DiscriminantIncrementJointGainExtraDependencies.json",
+      "blob": "abb5ac6c201d270d369468b2438092fae2b896f3",
+      "sha256": "e4d92177c6dc8f6e3810f532774011ded044dd73f62012f8022f801b2834cdd3",
+      "bytes": 10671,
+      "lines": 268
+    },
+    {
+      "name": "root/CanonicalReferencePieceInequality.lean",
+      "blob": "d0b62f775987c37e6af0553ee18ea6dcd0224c8f",
+      "sha256": "a25275a8eb0f1900a6d2949e1ad85fd166023dc38684bf154659c6d3196ade98",
+      "bytes": 2027,
+      "lines": 44
+    },
+    {
+      "name": "root/CanonicalReferencePieceInequality.owner.json",
+      "blob": "a91a2c1e9350252a89e29c01d78d11197bf5ca80",
+      "sha256": "a604174c8cabf04d3718fbfb61d9451dfffbaa594d766b5b602cda99a22bc319",
+      "bytes": 3575,
+      "lines": 62
+    },
+    {
+      "name": "quantitative/recovery/reviews/CanonicalReferencePieceInequalityIndependentReview.json",
+      "blob": "9b9983df8ab1720f93011044575bef196335720a",
+      "sha256": "62d9dad10c85de5c744ced965dffc57f4b759d00117e21dbdff2ea6f12545474",
+      "bytes": 7897,
+      "lines": 157
+    },
+    {
+      "name": "root/CanonicalReferencePieceInequality.reviewed-owner.json",
+      "blob": "5819fbde11d5495b671efeac25181fa486747696",
+      "sha256": "d08fae7295a5d93a26238817c32359d54849698e9a974f5e022e6ae5af1b1ad3",
+      "bytes": 4213,
+      "lines": 72
+    },
+    {
+      "name": "quantitative/recovery/FixedBaseSecondBatchActualCI178Checkpoint.json",
+      "blob": "25873c947c5999e5e6ed95f58c1b348bdb305fc7",
+      "sha256": "ec948f79bda029cf730cd17ac9cba44ada687d0102925fbcc8f9523876e7cf07",
+      "bytes": 448923,
+      "lines": 10597
+    },
+    {
+      "name": "quantitative/recovery/FixedBaseSecondBatchFourOwned727ChargeEvidence.json",
+      "blob": "ba05d8a380c5b2c42c61cabcc3d24cc3419ace7c",
+      "sha256": "8c6927e7ed7bdadc6794139518857fc013d9501cf12ded441f294a73cb3b2313",
+      "bytes": 6983,
+      "lines": 131
+    },
+    {
+      "name": "positive/recovery/N04FullForwardFixedBaseActualOperationRoute.json",
+      "blob": "072cdd3bd9369eb78720d5d37e30305a88db536f",
+      "sha256": "1f551ff21bf82a7a658a8ea8d75323c05790cd43b8c2d694ecf48bd3999caa54",
+      "bytes": 27569,
+      "lines": 351
+    },
+    {
+      "name": "root/ci/CI179FailureReceipt.json",
+      "blob": "3b26058fbc27de621ca34042b2b4c9e1f5e121e8",
+      "sha256": "1362265577e85eb1a0dbf2ceee54b15523c771620134aa4a064b8028d823c01f",
+      "bytes": 1752,
+      "lines": 46
+    },
+    {
+      "name": "root/ci/CI179-artifact/build-log.zip",
+      "blob": "eb9e9843badedc4b0161a166b4402195840aff25",
+      "sha256": "7ec9de166e0d1bc03ee89876fb89e8f9ea449c02e6aff5ddb0a43edc663f5017",
+      "bytes": 307683,
+      "lines": null,
+      "binary": true
+    },
+    {
+      "name": "root/repair179/TameFixedBaseCompositionBounds.reviewed-owner.json",
+      "blob": "a9028c417e5f6a1280a2a3984f7db66214bc5bac",
+      "sha256": "4816bd2e2ffdcbbd056460dcb50c5e372edec695dcaec65d458de30c19e967cb",
+      "bytes": 2329,
+      "lines": 60
+    },
+    {
+      "name": "root/repair179/TameFixedBaseCompositionBounds.patch",
+      "blob": "15a2cc1bffe251f173ee8238d97c331e473ed91d",
+      "sha256": "37d67590705baac2d7390e087ad289a1248406f346b6ff733f8a02d6d315dc06",
+      "bytes": 2129,
+      "lines": 37
+    },
+    {
+      "name": "audit/repair179/CI179TameInverseFixedBaseBoundsIndependentReview.json",
+      "blob": "ce1f2bf6010c189257a7207a829f4b94834d12cb",
+      "sha256": "4c5b9fb62cd9946441085a0027419a2e27c17fab4bce8d9bdbc10c7eb1f40ac0",
+      "bytes": 12057,
+      "lines": 196
+    },
+    {
+      "name": "positive/repair179/TameInverseFixedBaseBoundsReviewedManifest.json",
+      "blob": "e5543f699e1559634d3bddf7d2979f400b31be0b",
+      "sha256": "a1bd4eb55264bc12028a0ef6587c671618521003ad734e33077f0bc45cc166e0",
+      "bytes": 3976,
+      "lines": 99
+    },
+    {
+      "name": "root/ci/CI180SourceOnlyRepairPlan.json",
+      "blob": "83b6a1fff5ca94cc805c7ff5ce9d57a23550f246",
+      "sha256": "972c470e8e2587da08604696315b103240fb1e70809993bef09d65d189261ba0",
+      "bytes": 2422,
+      "lines": 71
+    },
+    {
+      "name": "root/ci/CI180PushReceipt.json",
+      "blob": "5940e5f4d5c7a6172e258faa8d95bf4db540d542",
+      "sha256": "3a244bc7ac0de4ee679dbf9caaacad895644e914d7f409799bb2b73a475e7ca6",
+      "bytes": 580,
+      "lines": 15
+    },
+    {
+      "name": "quantitative/recovery/FixedBaseSecondBatchCI180ConditionalExecutionPlan.json",
+      "blob": "d5e3166592308c414a60214aa41c3b51bec2f9a1",
+      "sha256": "db7c5087d05250d0207c2d160db58ff443d17a73c89c697570a22446c00f3c05",
+      "bytes": 738878,
+      "lines": 16883
+    },
+    {
+      "name": "quantitative/recovery/FixedBaseSecondBatchCI180ActivationAnchor.json",
+      "blob": "d2d84bc129b92081530d9b9592d59477b59f3b19",
+      "sha256": "2b6adcab4116d50b208664eb4116dad764d8d71d2c42a087f3122c6aaf8ef6f8",
+      "bytes": 3102,
+      "lines": 56
+    },
+    {
+      "name": "quantitative/recovery/FixedBaseSecondBatchCI180ProjectedImportGraph.json",
+      "blob": "6d4933e47763157649c2ccafdfd67b05f74809a6",
+      "sha256": "14d2524b5a9b6f3b1b7779bca8a05b2d41087fde52098aea8f0a7ed29a753c5f",
+      "bytes": 3255900,
+      "lines": 1
+    },
+    {
+      "name": "audit/recovery/CanonicalPrimitiveStageBShortCrossHalfRangeRoute.json",
+      "blob": "670f44fdfd5f2be5147a6a4f1a62546c756d2609",
+      "sha256": "8f6c9c928ccc70a7fc402cbefb4fce303c8531d1df457651720ce32305d91e96",
+      "bytes": 26576,
+      "lines": 395
+    }
+  ],
+  "outside_archive": {
+    "exact_target": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+    "upgrade_from": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+    "paths": 4802,
+    "all_complete_green": true
+  },
+  "CI178": {
+    "conclusion": "failure",
+    "receipt": "7cf7cf4c4d22516555de1c15865cc6987d85a228"
+  },
+  "CI179": {
+    "conclusion": "failure",
+    "receipt": "3b26058fbc27de621ca34042b2b4c9e1f5e121e8",
+    "complete_errors": "319def55c91d846721fd02317bd7dfeb4c0250bd",
+    "complete_original_zip": "eb9e9843badedc4b0161a166b4402195840aff25",
+    "summary_contexts_truncated": true,
+    "original_artifact_read": true
+  },
+  "active": {
+    "ci_round": 180,
+    "commit": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+    "tree": "f6bf0e9e425b2b0c019a1026ccbbfd0bf742c700",
+    "parent": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+    "pushed_readback": "2026-11-13T00:48:44.107948+00:00",
+    "first_ci_lookup_not_before": "2026-11-13T00:53:44.107948+00:00",
+    "plan_blob": "83b6a1fff5ca94cc805c7ff5ce9d57a23550f246",
+    "source_added_since_complete_green": 19543,
+    "source_deleted": 0,
+    "full_root_lag": 396,
+    "conservative_total": 19939,
+    "net_repair_added": -1,
+    "status": "pushed; awaiting first permitted CI lookup"
+  },
+  "budget": {
+    "new_archived_Lean_lines": 228,
+    "components": [
+      184,
+      44
+    ],
+    "baseline49": 19725,
+    "repair_net_since49": 4,
+    "retained_uncompiled_conservative_upper_bound": 19957,
+    "limit": 20000,
+    "remaining": 43,
+    "fixed131_credit_only_after_complete_green": {
+      "lines": 681,
+      "components": [
+        332,
+        349
+      ],
+      "current_credit": 0,
+      "provenance": "0b4fc88a7cc2b1e8d7ca4f7f0e97b9d96885cdb5",
+      "after_credit": 19276
+    },
+    "fixed2_owned727_current_credit": 0,
+    "fixed2_owned727_provenance": "ba05d8a380c5b2c42c61cabcc3d24cc3419ace7c",
+    "no_double_credit_or_duplicate_Lean_copies": true
+  },
+  "fixed2_next_candidate": {
+    "plan": "d5e3166592308c414a60214aa41c3b51bec2f9a1",
+    "actual180_anchor": "d2d84bc129b92081530d9b9592d59477b59f3b19",
+    "entries": 106,
+    "new": 97,
+    "shared": 9,
+    "conservative_added": 18549,
+    "activate_only_after_complete180_green": true
+  },
+  "main_rules_checked": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "root_workflow_resource_toolchain_dependency_limits_unchanged": true,
+  "environment": "Native Git fetch/read and local execution work; native Git push lacks credentials. Published through the connected GitHub API, with exact local/API tree equality and non-force expected-old update. Lean/lake remain unavailable in PATH.",
+  "endpoint_status": {
+    "FlowJets": "proved",
+    "Realization": "open",
+    "N04Coordinates": "open",
+    "proved": 37,
+    "total": 42,
+    "open": [
+      "N01c",
+      "N02N03",
+      "N04b",
+      "N04Coordinates",
+      "N05"
+    ]
+  },
+  "invalid_superseded_metadata_excluded": {
+    "blob": "ea6d5b2f4e5c53c82ca0962dbb53b297ca2bb588",
+    "reason": "Incomplete wrapper created after volatile store reset; valid reconstructed AE owner5819 is selected instead."
+  }
+}

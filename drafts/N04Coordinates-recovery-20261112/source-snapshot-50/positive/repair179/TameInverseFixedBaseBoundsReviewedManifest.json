@@ -1,0 +1,99 @@
+{
+  "schema": "n04-ci-repair-reviewed-manifest/v1",
+  "status": "REVIEWED_SOURCE_ONLY_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "module": "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds",
+  "base": {
+    "ref": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+    "tree": "05fa006b7aa6b0568fd1f9117f17148fbb241d40",
+    "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+    "git_blob": "81547f3c26d523217f65968079581f3bc557e5bf",
+    "sha256": "38378c48f2a2c8d905f41a4e2099ed2129589e547e113664980806b8de33d338",
+    "utf8_bytes": 18529,
+    "lines": 350,
+    "final_newline": true
+  },
+  "selected": {
+    "path": "positive/repair179/TameInverseFixedBaseBounds.lean",
+    "git_blob": "083d926c2e2bd91323a068b40e93dc93117f9779",
+    "sha256": "7d8e733967093d47742799f946c847296b63de70ac0c41cceb33c1ba84755b83",
+    "utf8_bytes": 18532,
+    "lines": 349,
+    "final_newline": true
+  },
+  "candidate": {
+    "path": "positive/repair179/TameInverseFixedBaseBoundsCandidateManifest.json",
+    "git_blob": "81bd956f10d35b0d581c6f84c5d725157b969c13",
+    "sha256": "ab6116a70dae3658eaaee78ecc71bf3f787beca46e3b1dd795bcc7ef9269b714",
+    "utf8_bytes": 15310,
+    "lines": 244,
+    "final_newline": true
+  },
+  "independent_review": {
+    "path": "audit/repair179/CI179TameInverseFixedBaseBoundsIndependentReview.json",
+    "git_blob": "ce1f2bf6010c189257a7207a829f4b94834d12cb",
+    "sha256": "4c5b9fb62cd9946441085a0027419a2e27c17fab4bce8d9bdbc10c7eb1f40ac0",
+    "utf8_bytes": 12057,
+    "lines": 196,
+    "final_newline": true,
+    "reviewer": "/root/audit_coordinates",
+    "status": "PASS_SOURCE_REVIEW_ONLY_NOT_COMPILED"
+  },
+  "patch": {
+    "path": "positive/repair179/TameInverseFixedBaseBounds.patch",
+    "git_blob": "3c9abd1008537a1b81687a6e1d1d803992a6acc5",
+    "sha256": "92886ec1b390e522c6fb1914db56e0e67e7cda8bbd90a34e0a14306be9f77c83",
+    "utf8_bytes": 1392,
+    "lines": 28,
+    "final_newline": true
+  },
+  "complete_diagnostics": {
+    "path": "positive/repair179/CI179TameInverseFixedBaseErrors.txt",
+    "git_blob": "d62286d99bb0e47b690967a1a0f50793496d4033",
+    "sha256": "06a04ddf4474e5559c9e18304ec7cd0c0d09fced10575d5ac9da390839db3e14",
+    "utf8_bytes": 6507,
+    "lines": 173,
+    "final_newline": true
+  },
+  "mechanical_evidence": {
+    "path": "positive/repair179/TameInverseFixedBaseBoundsMechanicalEvidence.json",
+    "git_blob": "dddce96a2f32ce3a49dab8d6f9aa6b9c868881e4",
+    "sha256": "1d15f88c2b81634ee0569b58b9779408032555c60dfef228cdccfa9905728fef",
+    "utf8_bytes": 6816,
+    "lines": 96,
+    "final_newline": true
+  },
+  "pinned_api_evidence": {
+    "path": "positive/repair179/CI179PinnedFiniteSumAPIs.json",
+    "git_blob": "7d565a62a2e51051e533ee25dae5d76e67d2a290",
+    "sha256": "b0aac9b6919f44640a02434593e086ff132b263b6b294233b9f23677f138bdd6",
+    "utf8_bytes": 2485,
+    "lines": 18,
+    "final_newline": true
+  },
+  "owner_checks": {
+    "peer_full_text_read": true,
+    "selected_source_peer_candidate_hashes_match": true,
+    "three_replacements_exact_and_reversible": true,
+    "complete_headers_unchanged": 4,
+    "imports_options_unchanged": true,
+    "net_source_lines": -1,
+    "source_readback_exact": true,
+    "all_artifacts_local_and_Git_blobs": true,
+    "public_contract_and_same_tower_unchanged": true
+  },
+  "limitations": {
+    "compiled": false,
+    "ci_query": false,
+    "active_or_index_or_refs_changed": false,
+    "next_CI_required": true
+  },
+  "history": {
+    "source": "81547f3c26d523217f65968079581f3bc557e5bf",
+    "peer_blob": "15568d41ffdcf2a6860b310d683678a1e50e72d0",
+    "peer_sha256": "f4f46a0df8280563ee0faff4f75eae817dc349b13f4777cb62d46908adbcae1a",
+    "owner_blob": "27eeb0c43dca8e6a3cd6c600f080660c051dc32d",
+    "note": "Historical CI178 static review preserved; CI179 diagnostics show further elaboration defects. This candidate requires a fresh exact-delta/full-source peer and CI."
+  }
+}

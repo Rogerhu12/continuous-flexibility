@@ -1,0 +1,157 @@
+{
+  "schema": "N04-independent-full-source-review-v1",
+  "status": "PASS independent static full-source/API review; uncompiled",
+  "reviewer": "/root/quantitative_route",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "intended_path": "quantitative/recovery/reviews/CanonicalReferencePieceInequalityIndependentReview.json",
+  "source": {
+    "intended_path": "src/ContinuousFlexibility/Analysis/CanonicalReferencePieceInequality.lean",
+    "blob": "d0b62f775987c37e6af0553ee18ea6dcd0224c8f",
+    "sha256": "a25275a8eb0f1900a6d2949e1ad85fd166023dc38684bf154659c6d3196ade98",
+    "bytes": 2027,
+    "lines": 44,
+    "public_name": "ContinuousFlexibility.Analysis.n04_referencePieces_le_on_annularOpen",
+    "header_sha256": "37109d942d97c4a407b49594701f094a577819f18fb563fcf12464e6e60e0b86"
+  },
+  "source_read": "Complete local44-line candidate read and byte-hashed to the exact owner-provided Git identity. Remote source lookup returned404 before owner upload; this review does not claim that source object was already persisted by the owner.",
+  "providers": [
+    {
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "pin": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "bytes": 101197,
+      "lines": 1773
+    },
+    {
+      "path": "src/ContinuousFlexibility/Statements/Analysis.lean",
+      "pin": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "bytes": 30441,
+      "lines": 603
+    },
+    {
+      "path": "src/ContinuousFlexibility/Scalar/Coordinates.lean",
+      "pin": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+      "blob": "3a80c86f2d2007ba774e12ccf3816c1f5d236b51",
+      "sha256": "fb2764e0b6752be0c36127e775e4a64001b1683d796f8ec43129e82de5ab881a",
+      "bytes": 1501,
+      "lines": 40
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "path": "Mathlib/MeasureTheory/Measure/OpenPos.lean",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "blob": "64b8663d129b8d5d7613fb2bf7583eabf3a4d1d3",
+      "sha256": "e58615b60bff5e995e3133b6e5bf35d22e5f7fded53f23ccd99301926cef5676",
+      "bytes": 12246,
+      "lines": 276
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "path": "Mathlib/MeasureTheory/OuterMeasure/AE.lean",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "blob": "1802fcab91bae1a8537d57413d45b28628d6d5b5",
+      "sha256": "de58d3b2aa42d801e9a268df285c32e5aa6ca7ffc5b42bf5eff8f12bda87a00d",
+      "bytes": 13573,
+      "lines": 334
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "path": "Mathlib/MeasureTheory/Measure/Restrict.lean",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "blob": "c09895e051ae618e89078cb5ef27a4c11f49d75e",
+      "sha256": "23e9fdc4229631efb2dfb57ad7a6f1a7891d545346393544ebc9ec3d9e2314fb",
+      "bytes": 55387,
+      "lines": 1134
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "path": "Mathlib/MeasureTheory/Measure/Prod.lean",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "blob": "dcda187671ab2b4ded4e301fb30ca0391eb41c3b",
+      "sha256": "62b4007fc8e0a0ddca557fcdacbe649752764d09c7a97763a5450146cb9d03c9",
+      "bytes": 63260,
+      "lines": 1271
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "path": "Mathlib/MeasureTheory/Measure/Lebesgue/Basic.lean",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "blob": "84794cf74fa34664073bbf336adccdefb5bada62",
+      "sha256": "628bcfc45fabd59501cdebf1cc3a8003ef3aba18fc7de4710ca9ffc1033b32d7",
+      "bytes": 32510,
+      "lines": 680
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "path": "Mathlib/MeasureTheory/Measure/Haar/OfBasis.lean",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "blob": "3b37fa5afdb3882f15353ad3d2a7f7fff4fa63e5",
+      "sha256": "f9a552df475ecbf1715b4ac85515967bf534ee2484037b49dc4e392eb36d4761",
+      "bytes": 13553,
+      "lines": 319
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "path": "Mathlib/MeasureTheory/Group/Measure.lean",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "blob": "6b47bb8ce072504dfaf9080749c99b525d35c91b",
+      "sha256": "cba62e69e14aafd9e79c41c3209cc75828e5bd7e3bcf46e5af7d8281e43696bd",
+      "bytes": 44553,
+      "lines": 968
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "path": "Mathlib/Topology/Order/OrderClosed.lean",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "blob": "9603945a9c797c1d1d695ddf79281f6887211098",
+      "sha256": "e311dbc7fca744dc0f0d4a10e3c838eb4996c2fa8b63e833077c40f763f05444",
+      "bytes": 31689,
+      "lines": 764
+    }
+  ],
+  "checks": [
+    {
+      "part": "actual partition",
+      "result": "CanonicalGeometry.partition is evaluated at the original (C.referenceState,0) using explicit href and hsector. Its null exceptional set is planar and its cover is on annularOpen D minus that set. Existence/uniqueness is destructured only for the existing actual index."
+    },
+    {
+      "part": "same reference domain",
+      "result": "CanonicalGeometry.referenceDomain m rewrites actual physicalPieceOpen at the reference state into referencePhysicalPieceOpen for the identical K and m. No alternate partition or atlas is chosen."
+    },
+    {
+      "part": "almost-everywhere comparison",
+      "result": "measure_eq_zero_iff_ae_notMem requires no added measurable-set premise for E. ae_restrict_of_ae and ae_restrict_mem restrict to the same open annulus; min_eq_left uses the actual per-piece inequality."
+    },
+    {
+      "part": "continuous extension",
+      "result": "annularOpen D is definitionally Ioo D.a D.b times univ. Filter.Tendsto.min is the pinned to_dual generated protected lemma from Filter.Tendsto.max in OrderClosed:708; it yields continuity of the actual min from hf,hg. Measure.eqOn_open_of_ae_eq at OpenPos:115 has the exact (hAE,hU,hmin,hf) order and named μ."
+    },
+    {
+      "part": "measure instances",
+      "result": "PolarPoint is the abbreviation Real times Real. The standard product volume is used throughout. Real volume is an additive Haar measure via Haar.OfBasis:309-319 and hence has positive measure on nonempty opens by IsAddHaarMeasure's superclass; its standard sigma-finite instance supplies SFinite. Prod:282-286 supplies the product-volume IsOpenPosMeasure instance. No custom measure or norm/volume substitution is introduced."
+    },
+    {
+      "part": "endpoint conclusion",
+      "result": "heq says min(f p)(g p)=f p at each point in the open annulus. Reversing it and composing with min_le_right gives f p<=g p, including points of the exceptional set."
+    }
+  ],
+  "name_check": {
+    "actual178_exact_token_matches": 0,
+    "pinned_main1ece_exact_token_matches": 0,
+    "scope": "Read-only rg on actual source and git grep on pinned main1ece. Namespace is explicitly ContinuousFlexibility.Analysis; one new public declaration. No claim of elaborator-generated or archive-global declaration enumeration."
+  },
+  "scope_limits": {
+    "continuous_inputs_are_explicit": true,
+    "reference_neighborhood_and_sector_are_explicit": true,
+    "does_not_produce_continuity_or_numeric_envelopes": true,
+    "no_primitive_materialJets_or_transport_assumption": true,
+    "no_local_lean_or_build": true,
+    "no_source_edits": true,
+    "no_resource_option_changes": true,
+    "no_ref_or_ci_actions": true
+  },
+  "verdict": "The full44-line proof and exact pinned APIs agree; pass for independent static review. Owner must persist the exact source and a future full CI must validate elaboration."
+}

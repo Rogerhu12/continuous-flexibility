@@ -1,0 +1,60 @@
+{
+  "schema": "N04-CI-source-only-repair-owner-v1",
+  "owner": "/root",
+  "ci_round_failed": 179,
+  "head": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+  "run": 43337192468,
+  "job": 131596239443,
+  "path": "src/ContinuousFlexibility/Analysis/TameFixedBaseCompositionBounds.lean",
+  "before": {
+    "blob": "a71b7b644bd5db40c05c3e41cd6db9d05e1d1e9f",
+    "sha256": "4ff61f1def2d2c627cc6e1dd56160dd500220f260e5804c1446e428eb6c3872b",
+    "lines": 332
+  },
+  "after": {
+    "blob": "f43a2b774c41da8cc9417051adc8c0a89d3ed04e",
+    "sha256": "413d4e8bdc31eed96843605c677e8eb7dd805903c6556ba0979e40ac0c6f6587",
+    "bytes": 18103,
+    "lines": 332
+  },
+  "delta": {
+    "added": 4,
+    "deleted": 4,
+    "net": 0
+  },
+  "repairs": [
+    {
+      "location": 224,
+      "change": "Specify the finite summand at each l as C l * Nat.cast(l.val+1), including its nonnegativity proof; do not infer the fixed chosen j in every summand."
+    },
+    {
+      "locations": [
+        252,
+        279,
+        328
+      ],
+      "change": "Add Fin.cons_zero and Fin.cons_succ to the existing simp-only sets for the assigned-order sum, assigned-order product, and final input normalization."
+    }
+  ],
+  "complete_artifact_diagnostic": {
+    "artifact_id": 13998700963,
+    "zip_sha256": "7ec9de166e0d1bc03ee89876fb89e8f9ea449c02e6aff5ddb0a43edc663f5017",
+    "quick_sha256": "79004936944c56aad521d7304b4d73eb210417cb04c7657ce6589f3c8d59b72b",
+    "errors_sha256": "56c8bd4a103974c2e928cf674ab28166b809101acf4bf1e19316c1a014dc8dd5",
+    "complete": true,
+    "explanation": "The job summary truncated long goal contexts. Original quick.log was read from build-log ZIP, including the complete121-line context for the final normalization error."
+  },
+  "unchanged": {
+    "all4_theorem_heads": true,
+    "both_public_heads": true,
+    "imports_options": true,
+    "mathematical_constants_losses_and_objects": true
+  },
+  "scope": "Type inference and explicit finite tuple application only. Same base precedes all orders. No new source or resource changes. Independent peer passed; awaiting CI180.",
+  "independent_review": {
+    "blob": "6e8632acbce133cb50f6f2d59508211f1083a05e",
+    "sha256": "024d1310009680fb08b7b121e45ed312257ed4d10384c7b2921c983fb55ce678",
+    "status": "PASS_STATIC_FULL_SOURCE_AND_EXACT_DELTA",
+    "compiled": false
+  }
+}

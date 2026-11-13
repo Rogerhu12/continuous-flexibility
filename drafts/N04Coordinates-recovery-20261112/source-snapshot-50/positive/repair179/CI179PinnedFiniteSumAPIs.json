@@ -1,0 +1,18 @@
+[
+  {
+    "repository": "leanprover-community/mathlib4",
+    "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "path": "Mathlib/Algebra/BigOperators/Ring/Finset.lean",
+    "git_blob": "358b48660c6f8f973b98869a6bb32faec009e527",
+    "read_scope": "Relevant public declaration and surrounding section variables read",
+    "declarations": "\nlemma sum_mul (s : Finset ι) (f : ι → R) (a : R) :\n    (∑ i ∈ s, f i) * a = ∑ i ∈ s, f i * a := map_sum (AddMonoidHom.mulRight a) _ s\n\nlemma mul_sum (s : Finset ι) (f : ι → R) (a : R) :\n    a * ∑ i ∈ s, f i = ∑ i ∈ s, a * f i := map_sum (AddMonoidHom.mulLeft a) _ s\n\nlemma sum_mul_sum (s : Finset ι) (t : Finset κ) (f : ι → R) (g : κ → R) :\n    (∑ i ∈ s, f i) * ∑ j ∈ t, g j = ∑ i ∈ s, ∑ j ∈ t, f i * g j := by\n  simp_rw [sum_mul, ← mul_sum]\n\nlemma _root_.Fintype.sum_mul_sum [Fintype ι] [Fintype κ] (f : ι → R) (g : κ → R) :\n    (∑ i, f i) * ∑ j, g j = ∑ i, ∑ j, f i * g j :=\n  Finset.sum_mul_sum _ _ _ _\n\nlemma _root_.Commute.sum_right (s : Finset ι) (f : ι → R) (b : R)\n    (h : ∀ i ∈ s, Commute b (f i)) : Commute b (∑ i ∈ s, f i) :="
+  },
+  {
+    "repository": "leanprover-community/mathlib4",
+    "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "path": "Mathlib/Algebra/Order/BigOperators/Group/Finset.lean",
+    "git_blob": "9a2a19c62c65329f604f175559d556d6e45ec13a",
+    "read_scope": "Relevant public declaration and surrounding section variables read",
+    "declarations": "    Antitone fun x ↦ ∏ i ∈ s, f i x :=\n  fun _ _ hab ↦ Finset.prod_le_prod fun i hi ↦ hf i hi hab\n\n/-- A finite product of functions antitone on `u` is antitone on `u`. -/\n@[to_additive finsetSum /-- A finite sum of functions antitone on `u` is antitone on `u`. -/]\ntheorem _root_.AntitoneOn.finsetProd' [MulLeftMono N] {γ : Type*} [Preorder γ] {u : Set γ}\n    {f : ι → γ → N} (hf : ∀ i ∈ s, AntitoneOn (f i) u) :\n    AntitoneOn (fun x ↦ ∏ i ∈ s, f i x) u :=\n  fun _ ha _ hb hab ↦ Finset.prod_le_prod fun i hi ↦ hf i hi ha hb hab\n\n@[to_additive sum_nonneg]\ntheorem one_le_prod [MulLeftMono N] (h : ∀ i ∈ s, 1 ≤ f i) : 1 ≤ ∏ i ∈ s, f i :=\n  le_trans (by rw [prod_const_one]) (prod_le_prod h)\n\n@[deprecated (since := \"2026-09-01\")] alias one_le_prod' := one_le_prod\n\n@[to_additive sum_nonneg']\ntheorem one_le_prod'' [MulLeftMono N] (h : ∀ i : ι, 1 ≤ f i) : 1 ≤ ∏ i ∈ s, f i :="
+  }
+]

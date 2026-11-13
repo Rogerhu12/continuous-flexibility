@@ -1,0 +1,80 @@
+{
+  "schema": "n04-reviewed-source-owner-manifest/v1",
+  "status": "REVIEWED_SOURCE_ONLY_NOT_COMPILED",
+  "path": "positive/reconstructed/N04DiscriminantIncrementJointGainReviewedManifest.json",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "source": {
+    "path": "positive/reconstructed/N04DiscriminantIncrementJointGain.lean",
+    "local_path": "/workspace/scratch/n04-drafts-20261113/positive/reconstructed/N04DiscriminantIncrementJointGain.lean",
+    "target_module": "ContinuousFlexibility.Analysis.N04DiscriminantIncrementJointGain",
+    "git_blob": "70f648d5fdfbc870f42a1b44e9f29ed9bdcebec7",
+    "sha256": "a12fa214a4051d36079ac80261edf99b13e0c73c77b7f8989899facbc0b7782b",
+    "utf8_bytes": 10592,
+    "lines": 184,
+    "final_newline": true
+  },
+  "candidate": {
+    "path": "positive/reconstructed/N04DiscriminantIncrementJointGainCandidateManifest.json",
+    "git_blob": "4d96f7e4b1620dbecfe3f2e4dfdc10c4b6c3874b",
+    "sha256": "4723d6e1693bcecc902eb4a7d3d57a9676932f59cb55916cb8c2059ce8eae635",
+    "utf8_bytes": 14527,
+    "lines": 279,
+    "final_newline": true
+  },
+  "independent_review": {
+    "path": "audit/recovery/reviews/N04DiscriminantIncrementJointGainIndependentReview.json",
+    "git_blob": "48536c8b4fc52d157997c07a1ef8105ad4bdfd51",
+    "sha256": "13d8319161b8f8f593e8f59eec6759d654e2212e33925c9dcd291df0b2734250",
+    "utf8_bytes": 11492,
+    "lines": 192,
+    "final_newline": true,
+    "reviewer": "audit_coordinates",
+    "status": "PASS_SOURCE_REVIEW_ONLY_NOT_COMPILED"
+  },
+  "selected_graph": {
+    "path": "positive/reconstructed/N04DiscriminantIncrementJointGainSelectedProviders.json",
+    "git_blob": "9465fc829af8b88d425dd98a79515d32a5f7f538",
+    "sha256": "238df1a3afc71aaee821ffae59560a53f1ff6839fa83ce6b8b2cb3a95044d6e3",
+    "utf8_bytes": 549225,
+    "lines": 12840,
+    "final_newline": true,
+    "counts": {
+      "nodes": 509,
+      "project_edges": 970,
+      "external_imports": 187,
+      "owned": 2,
+      "main": 507,
+      "missing": 0,
+      "cycles": 0
+    }
+  },
+  "actual_input_owner": {
+    "path": "positive/reconstructed/N04CoefficientIncrementJointGainReviewedManifest.json",
+    "git_blob": "5081c4b1441e511e156173bcebfe9dd56b985469",
+    "source_git_blob": "63073bc007f7945e905e6cb9237a96f2c463ff8a",
+    "independent_peer": "f51a7c5303f3ead57a169d8eee834c8895d42bb4",
+    "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED"
+  },
+  "public_declarations": [
+    {
+      "name": "ContinuousFlexibility.Statements.N01Properties.exists_discriminantIncrement_strip_joint_growth",
+      "full_header": "theorem N01Properties.exists_discriminantIncrement_strip_joint_growth\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}\n    (hN : N01Properties D T S C base loss ε)\n    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)\n    (j : ℕ → ℕ)\n    (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))\n    (l h : ℕ → ℝ) (hl : ∀ m, C.left m < l m)\n    (hh : ∀ m, h m < C.right m) :\n    ∃ K : ∀ m, SmoothDirections\n      (sectorNeighborhood S base ε ε ×ˢ (Ioo (l m) (h m) ×ˢ univ))\n      (fun z : (StateDirections S × ℝ) × PolarPoint =>\n        (((originalCoefficients D S C (liftSectorParameter S C z.1)).b z.2 ^ 2 -\n            (originalCoefficients D S C (liftSectorParameter S C z.1)).a z.2 *\n              (originalCoefficients D S C (liftSectorParameter S C z.1)).c z.2) -\n          ((originalCoefficients D S C (C.referenceState, 0)).b z.2 ^ 2 -\n            (originalCoefficients D S C (C.referenceState, 0)).a z.2 *\n              (originalCoefficients D S C (C.referenceState, 0)).c z.2)) /\n          T.H (T.sample (j m)) ^ (3 / 4 : ℝ)),\n      ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧\n        UniformWeightedJointGrowth (pairGrading (sectorGrading S) realGrading)\n          (fun m => radialE (D.cellIndex (j m))) K B L := by\n"
+    }
+  ],
+  "unchanged_after_peer": true,
+  "verification": {
+    "source_and_candidate_fingerprints_match_peer": true,
+    "peer_graph_identity_matches_candidate": true,
+    "full_public_header_matches": true,
+    "peer_all509_reachable_and507_main_exact": true,
+    "local_Lean_compile": false,
+    "active_edits": false,
+    "index_ref_or_CI_actions": false
+  },
+  "mathematical_scope": "One actual normalized original-discriminant increment tower for the same N01 witness, full-component host, physical strip, sample, and H^(3/4). Fixed B/L precede all joint orders and low-radius parameters. Same-state reference projection preserves the physical point.",
+  "limitations": [
+    "Source review and exact graph closure do not assert installation or compilation readiness.",
+    "No positivity, square-root or reciprocal estimates, no whole-half floor, no corrected residual forcing, and no final CurrentJets claim."
+  ]
+}

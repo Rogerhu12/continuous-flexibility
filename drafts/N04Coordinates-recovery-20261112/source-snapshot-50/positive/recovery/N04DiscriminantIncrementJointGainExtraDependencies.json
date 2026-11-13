@@ -1,0 +1,268 @@
+{
+  "schema": "n04-selected-provider-increment-report/v1",
+  "status": "READ_ONLY_EXACT_SOURCE_AVAILABILITY_NOT_COMPILED",
+  "path": "positive/recovery/N04DiscriminantIncrementIntegrationDelta.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "source": {
+    "path": "positive/reconstructed/N04DiscriminantIncrementJointGain.lean",
+    "local_path": "/workspace/scratch/n04-drafts-20261113/positive/reconstructed/N04DiscriminantIncrementJointGain.lean",
+    "target_module": "ContinuousFlexibility.Analysis.N04DiscriminantIncrementJointGain",
+    "git_blob": "70f648d5fdfbc870f42a1b44e9f29ed9bdcebec7",
+    "sha256": "a12fa214a4051d36079ac80261edf99b13e0c73c77b7f8989899facbc0b7782b",
+    "utf8_bytes": 10592,
+    "lines": 184,
+    "final_newline": true
+  },
+  "candidate": {
+    "path": "positive/reconstructed/N04DiscriminantIncrementJointGainCandidateManifest.json",
+    "git_blob": "4d96f7e4b1620dbecfe3f2e4dfdc10c4b6c3874b",
+    "sha256": "4723d6e1693bcecc902eb4a7d3d57a9676932f59cb55916cb8c2059ce8eae635",
+    "utf8_bytes": 14527,
+    "lines": 279,
+    "final_newline": true
+  },
+  "reviewed_owner": {
+    "path": "positive/reconstructed/N04DiscriminantIncrementJointGainReviewedManifest.json",
+    "git_blob": "eb5c0c2723b89d31d33eaec568a8cb39edd43007",
+    "sha256": "7a2969f9bdefc85dd9888c0c8eac5f5f6e9ceae2d7aaaea778cefc9c379e7492",
+    "utf8_bytes": 4905,
+    "lines": 80,
+    "final_newline": true
+  },
+  "independent_review": {
+    "path": "audit/recovery/reviews/N04DiscriminantIncrementJointGainIndependentReview.json",
+    "git_blob": "48536c8b4fc52d157997c07a1ef8105ad4bdfd51",
+    "sha256": "13d8319161b8f8f593e8f59eec6759d654e2212e33925c9dcd291df0b2734250",
+    "utf8_bytes": 11492,
+    "lines": 192,
+    "final_newline": true
+  },
+  "final_graph": {
+    "path": "positive/reconstructed/N04DiscriminantIncrementJointGainSelectedProviders.json",
+    "git_blob": "9465fc829af8b88d425dd98a79515d32a5f7f538",
+    "sha256": "238df1a3afc71aaee821ffae59560a53f1ff6839fa83ce6b8b2cb3a95044d6e3",
+    "utf8_bytes": 549225,
+    "lines": 12840,
+    "final_newline": true,
+    "counts": {
+      "nodes": 509,
+      "project_edges": 970,
+      "external_imports": 187,
+      "owned": 2,
+      "main": 507,
+      "missing": 0,
+      "cycles": 0
+    }
+  },
+  "old_graph": {
+    "git_blob": "ba4f80c814ec1273b8363c5f50b5a12c8e9a1b34",
+    "sha256": "d3991538bfb405c6d02859f888d43d9d84a65dfa4a4b6f051be6dc8315e5783f",
+    "main_nodes": 491,
+    "scope": "Seven imports of the earlier199 producer. It is not the full graph of the new184."
+  },
+  "graph_accounting": {
+    "main_before": 491,
+    "main_added": 16,
+    "main_after": 507,
+    "owned_predecessor199": 1,
+    "new_owned184": 1,
+    "total_nodes": 509,
+    "total_edges": 970,
+    "missing": 0,
+    "cycles": 0
+  },
+  "comparison_pins": {
+    "full_green177": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+    "submitted178": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+    "selected_main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "method": "Readonly exact git rev-parse/show for precisely these16 paths at both fixed commits; line counts from full blob bytes."
+  },
+  "added_main_nodes": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N01OriginalCoefficientTameBounds",
+      "path": "src/ContinuousFlexibility/Analysis/N01OriginalCoefficientTameBounds.lean",
+      "selected_blob": "2882b8f1346b141ca00fc4a465fa14235e0abc57",
+      "selected_lines": 231,
+      "actual177": "absent",
+      "actual178": "absent"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cLinearContinuity",
+      "path": "src/ContinuousFlexibility/Analysis/N01cLinearContinuity.lean",
+      "selected_blob": "cad933a01811df33f104946fd5bd47a05bdb958e",
+      "selected_lines": 33,
+      "actual177": "identical",
+      "actual_blob": "cad933a01811df33f104946fd5bd47a05bdb958e",
+      "actual_lines": 33,
+      "actual178": "identical",
+      "actual178_blob": "cad933a01811df33f104946fd5bd47a05bdb958e",
+      "actual178_lines": 33
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.WeightedStateRegularity",
+      "path": "src/ContinuousFlexibility/Scalar/WeightedStateRegularity.lean",
+      "selected_blob": "3b576f7e314650c574c617de0e076bbd2afacfed",
+      "selected_lines": 194,
+      "actual177": "identical",
+      "actual_blob": "3b576f7e314650c574c617de0e076bbd2afacfed",
+      "actual_lines": 194,
+      "actual178": "identical",
+      "actual178_blob": "3b576f7e314650c574c617de0e076bbd2afacfed",
+      "actual178_lines": 194
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.WeightedStateFlatness",
+      "path": "src/ContinuousFlexibility/Scalar/WeightedStateFlatness.lean",
+      "selected_blob": "dce94d3c5754ca1c1c5a144e7526176ff837f274",
+      "selected_lines": 229,
+      "actual177": "identical",
+      "actual_blob": "dce94d3c5754ca1c1c5a144e7526176ff837f274",
+      "actual_lines": 229,
+      "actual178": "identical",
+      "actual178_blob": "dce94d3c5754ca1c1c5a144e7526176ff837f274",
+      "actual178_lines": 229
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.WeightedFieldRegularity",
+      "path": "src/ContinuousFlexibility/Scalar/WeightedFieldRegularity.lean",
+      "selected_blob": "93280ed94daf02d26c29db746d86bb78c72cf5b2",
+      "selected_lines": 96,
+      "actual177": "identical",
+      "actual_blob": "93280ed94daf02d26c29db746d86bb78c72cf5b2",
+      "actual_lines": 96,
+      "actual178": "identical",
+      "actual178_blob": "93280ed94daf02d26c29db746d86bb78c72cf5b2",
+      "actual178_lines": 96
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01cHeightParameterJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01cHeightParameterJets.lean",
+      "selected_blob": "0c7d3864cce92ddf4fbf223d0c7b607720e9b76e",
+      "selected_lines": 133,
+      "actual177": "identical",
+      "actual_blob": "0c7d3864cce92ddf4fbf223d0c7b607720e9b76e",
+      "actual_lines": 133,
+      "actual178": "identical",
+      "actual178_blob": "0c7d3864cce92ddf4fbf223d0c7b607720e9b76e",
+      "actual178_lines": 133
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.PhysicalJetLinearity",
+      "path": "src/ContinuousFlexibility/Analysis/PhysicalJetLinearity.lean",
+      "selected_blob": "1bbe0e760e22a6765f602dbf7115348cb4035b74",
+      "selected_lines": 80,
+      "actual177": "absent",
+      "actual178": "absent"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.JointMixedTameBounds",
+      "path": "src/ContinuousFlexibility/Analysis/JointMixedTameBounds.lean",
+      "selected_blob": "4d8f586b05c130768ef60a244b2325d5c6814444",
+      "selected_lines": 246,
+      "actual177": "absent",
+      "actual178": "absent"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameUniformFamilyGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/TameUniformFamilyGrowth.lean",
+      "selected_blob": "3118f4c042fe5fcabb4398389f62fdc14c0c9821",
+      "selected_lines": 288,
+      "actual177": "absent",
+      "actual178": "absent"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameUniformFamilyJets",
+      "path": "src/ContinuousFlexibility/Analysis/TameUniformFamilyJets.lean",
+      "selected_blob": "af2fcbf1366ab7ff2a314f03f02cbfe99234961d",
+      "selected_lines": 270,
+      "actual177": "absent",
+      "actual178": "absent"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WeightedJointOperations",
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointOperations.lean",
+      "selected_blob": "33d59355404f7ad98ee177af0ccd0dbafbf136ce",
+      "selected_lines": 155,
+      "actual177": "absent",
+      "actual178": "absent"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.PolynomialJetOperations",
+      "path": "src/ContinuousFlexibility/Analysis/PolynomialJetOperations.lean",
+      "selected_blob": "f888ef1e75a21eb881a1a3fb59b4538983582bcd",
+      "selected_lines": 158,
+      "actual177": "absent",
+      "actual178": "absent"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.PolynomialProductOuterJets",
+      "path": "src/ContinuousFlexibility/Analysis/PolynomialProductOuterJets.lean",
+      "selected_blob": "303e9c1574ebf1744c2d88096172c50350766cf8",
+      "selected_lines": 72,
+      "actual177": "absent",
+      "actual178": "absent"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WeightedJointProducts",
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointProducts.lean",
+      "selected_blob": "a2f03fe0abfaf31ef200ffe22d2ecce8bf3c0028",
+      "selected_lines": 65,
+      "actual177": "absent",
+      "actual178": "absent"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WeightedJointPowers",
+      "path": "src/ContinuousFlexibility/Analysis/WeightedJointPowers.lean",
+      "selected_blob": "860ee0b7c683ac5db3d6939f9dc6aa7703698ff3",
+      "selected_lines": 94,
+      "actual177": "absent",
+      "actual178": "absent"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CharacteristicJointGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/N01CharacteristicJointGrowth.lean",
+      "selected_blob": "b95f6b480dcf1aa6634d4591b24ae2125b645f9a",
+      "selected_lines": 435,
+      "actual177": "absent",
+      "actual178": "absent"
+    }
+  ],
+  "incremental_budget": {
+    "all16_source_lines": 2779,
+    "already_identical_in177_and178": {
+      "modules": 5,
+      "source_lines": 685
+    },
+    "absent_in_both177_and178": {
+      "modules": 11,
+      "source_lines": 2094,
+      "generated_root_lines_if_newly_activated": 11,
+      "source_plus_generated_root_lines": 2105
+    },
+    "changed_existing_modules": 0,
+    "new_owned184": {
+      "source_lines": 184,
+      "generated_root_lines_if_newly_activated": 1
+    },
+    "held199": {
+      "source_lines": 199,
+      "owner_blob": "5081c4b1441e511e156173bcebfe9dd56b985469",
+      "scope": "Already present in the prior plan as a separate held owned leaf; no duplicate charge or deduction is inferred here."
+    },
+    "note": "This is the difference from the old491-provider graph, not a standalone complete installable cohort. Overlap with future fixed518/other scheduled cohorts must be removed by exact module/blob union before budgeting. No such overlap has been silently deducted."
+  },
+  "source_budget": {
+    "new_Lean_written_for_this_leaf": 184,
+    "authorized_cap": 250,
+    "unused_cap_released_by_parent": 66,
+    "no_further_Lean_authorized_here": true
+  },
+  "verification": {
+    "only_small16_path_comparison": true,
+    "no_repository_wide_rescan": true,
+    "no_active_edits": true,
+    "no_compilation": true,
+    "no_CI_queries": true,
+    "no_ref_writes": true
+  }
+}

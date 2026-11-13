@@ -1,0 +1,237 @@
+{
+  "schema": "n04-ci-repair-candidate/v1",
+  "status": "CANDIDATE_SOURCE_REPAIR_ONLY_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "local_directory": "/workspace/scratch/n04-drafts-20261113/positive/repair178",
+  "intended_module": "ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds",
+  "base": {
+    "commit": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+    "tree": "4df6517d5b3c92f5a366501af217c4471d0f23f8",
+    "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+    "git_blob": "45fae56b12e755379fcf3e4aa3e211ba0cfe9c7a",
+    "sha256": "7e79129c9a9df8e2d74c353106685db461089a05ec1141f333211d5a257c6aac",
+    "utf8_bytes": 18485,
+    "lines": 349,
+    "final_newline": true
+  },
+  "selected": {
+    "path": "positive/repair178/TameInverseFixedBaseBounds.lean",
+    "git_blob": "81547f3c26d523217f65968079581f3bc557e5bf",
+    "sha256": "38378c48f2a2c8d905f41a4e2099ed2129589e547e113664980806b8de33d338",
+    "utf8_bytes": 18529,
+    "lines": 350,
+    "final_newline": true
+  },
+  "exact_patch": {
+    "path": "positive/repair178/TameInverseFixedBaseBounds.patch",
+    "git_blob": "ff7aa0209206887f4ca594099d094293d7ef4610",
+    "sha256": "2b418da9e629094be4c5caf0678ff95c7e0a7e2b4feb58327b3f41061da342a4",
+    "utf8_bytes": 3355,
+    "lines": 61,
+    "final_newline": true
+  },
+  "ci_evidence": {
+    "run_id": 43335371097,
+    "job_id": 131590094897,
+    "log": {
+      "local_path": "/workspace/scratch/n04-drafts-20261113/root/ci/CI178-build.log",
+      "git_blob": "e2df6bff2f48262ba5fe25bedc564e75ed3b0c10",
+      "sha256": "5f87531f2c86ace5cb59ac6e685c439158e60831ecdfbc8b08bbf2193e57c45c",
+      "utf8_bytes": 97156,
+      "lines": 910,
+      "final_newline": true
+    },
+    "full_inverse_diagnostic_block": {
+      "path": "positive/repair178/CI178TameInverseFixedBaseErrors.txt",
+      "git_blob": "72493403faea21966c9f02836de5ff9af3233aaa",
+      "sha256": "e4efa9829cecfb9175d2fb4bf04127a11d20f28283c745491afbbcd5d4706f68",
+      "utf8_bytes": 3542,
+      "lines": 36,
+      "final_newline": true
+    },
+    "error_locations": [
+      "38:40",
+      "39:2",
+      "153:6",
+      "178:33",
+      "178:35",
+      "178:38",
+      "197:37",
+      "332:10"
+    ],
+    "warning": "Unused section-variable warning preserved; no resource or linter setting changed."
+  },
+  "repairs": [
+    {
+      "locations": [
+        "38:40",
+        "39:2"
+      ],
+      "change": "Refine the existential before intro of the implicit index type, Fintype instance, tuple and low-bound hypothesis.",
+      "reason": "The former ordinary lambda was implicitly abstracted over the first two binders before its own explicit names were applied."
+    },
+    {
+      "locations": [
+        "153:6"
+      ],
+      "change": "Add the local abbreviation d to the existing simp-only list.",
+      "reason": "Expand the right-hand grading in hu to the same public pairGrading_apply form as the source constructor target; same inequality and constant."
+    },
+    {
+      "locations": [
+        "178:33",
+        "178:35",
+        "178:38"
+      ],
+      "change": "Refine C/hC, introduce z hz hl in the tactic block, and run simpa on its own line.",
+      "reason": "Keep the using expression inside the scope containing the actual point and membership hypotheses."
+    },
+    {
+      "locations": [
+        "197:37",
+        "same-pattern forward branch former line 258"
+      ],
+      "change": "Use add_nonneg zero_le_one (apply_nonneg _ _) at both identical P nonnegativity sites.",
+      "reason": "The expected goal is already the nonnegative 1+seminorm value; no dsimp progress is required. The second matching site is repaired before the next CI without changing any numerical argument."
+    },
+    {
+      "locations": [
+        "332:10"
+      ],
+      "change": "Use simpa only [d, jetGrading_apply] using add_le_add hlow hsum.",
+      "reason": "d is a local function-valued abbreviation rather than an equality argument to rw."
+    }
+  ],
+  "mechanical_checks": {
+    "exact_replacement_groups": 5,
+    "actual_changed_sites": 6,
+    "replacements": [
+      {
+        "before": "  refine ⟨3 + 2 * C * R, by positivity, fun ι _ x hx => ?_⟩\n",
+        "after": "  refine ⟨3 + 2 * C * R, by positivity, ?_⟩\n  intro ι _ x hx\n",
+        "occurrences": 1
+      },
+      {
+        "before": "      simpa only [TameInverseExpression.eval, pairGrading_apply, map_zero, zero_add,\n        one_mul, Nat.add_zero] using (hu s z).trans (le_add_of_nonneg_left zero_le_one)\n",
+        "after": "      simpa only [TameInverseExpression.eval, d, pairGrading_apply, map_zero, zero_add,\n        one_mul, Nat.add_zero] using (hu s z).trans (le_add_of_nonneg_left zero_le_one)\n",
+        "occurrences": 1
+      },
+      {
+        "before": "      exact ⟨C, hC, fun z hz hl => by simpa only [TameInverseExpression.eval,\n        map_neg_eq_map] using hc z hz hl⟩\n",
+        "after": "      refine ⟨C, hC, ?_⟩\n      intro z hz hl\n      simpa only [TameInverseExpression.eval, map_neg_eq_map] using hc z hz hl\n",
+        "occurrences": 1
+      },
+      {
+        "before": "(by dsimp [P]; positivity)",
+        "after": "(add_nonneg zero_le_one (apply_nonneg _ _))",
+        "occurrences": 2
+      },
+      {
+        "before": "      rw [d, jetGrading_apply]\n      exact add_le_add hlow hsum\n",
+        "after": "      simpa only [d, jetGrading_apply] using add_le_add hlow hsum\n",
+        "occurrences": 1
+      }
+    ],
+    "reverse_reconstruction_equal": true,
+    "complete_declaration_headers_equal": true,
+    "complete_headers": [
+      "private theorem inverseInputProfile_product\n    {E : Type*} [AddCommGroup E] [Module ℝ E]\n    (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (hI : HasInterpolation p) :\n    ∃ base loss : ℕ, ∀ (a b : ℕ) (R : ℝ), 0 ≤ R →\n      ∃ C : ℝ, 0 ≤ C ∧ ∀ {ι : Type} [Fintype ι] (x : ι → E),\n        (∑ i, p base (x i)) ≤ R →\n        (1 + ∑ i, p a (x i)) * (1 + ∑ i, p b (x i)) ≤\n          C * (1 + ∑ i, p (a + b + loss) (x i)) := by",
+      "private theorem inverseProfile_linear_step\n    {I : Type*} (P f g : ℕ → I → ℝ)\n    (hP : ∀ s i, 0 ≤ P s i) (hmono : ∀ i, Monotone (fun s => P s i))\n    (base opLoss productLoss loss : ℕ)\n    (hprod : ∀ a b, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ i, P a i * P b i ≤ C * P (a + b + productLoss) i)\n    (hf : ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ i, f s i ≤ C * P (s + loss) i)\n    (hstep : ∀ s, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ i, g s i ≤ C * (P (s + opLoss) i * f base i + f (s + opLoss) i)) :\n    ∀ s, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ i, g s i ≤ C * P (s + (opLoss + base + loss + productLoss)) i := by",
+      "private theorem inverseExpression_fixedBase_growth\n    (a : ℕ → Seminorm ℝ A) (ha : Monotone a)\n    (base productLoss : ℕ) (hbase : operatorBase ≤ base)\n    (hproduct : ∀ R : ℝ, 1 ≤ R → ∀ b c, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ z : (E × E) × A, pairGrading (pairGrading q q) a base z ≤ R →\n        (1 + pairGrading (pairGrading q q) a b z) *\n          (1 + pairGrading (pairGrading q q) a c z) ≤\n        C * (1 + pairGrading (pairGrading q q) a (b + c + productLoss) z))\n    (e : TameInverseExpression E E E A) (he : e.IsZeroLoss q q q a) :\n    ∃ loss : ℕ, ∀ R : ℝ, 1 ≤ R → ∀ s, ∃ C : ℝ, 0 ≤ C ∧\n      ∀ z : (E × E) × A, z.1.1 ∈ U →\n        pairGrading (pairGrading q q) a base z ≤ R →\n        pairGrading q q s (e.eval J V z.1 z.2) ≤\n          C * (1 + pairGrading (pairGrading q q) a (s + loss) z) := by",
+      "theorem inverseFamilySmoothDirections_fixedBase_oneHigh\n    (hI : HasInterpolation (pairGrading q q))\n    (hU : IsOpen U)\n    (hleft : ∀ x ∈ U, ∀ y, V x (L x y) = y)\n    (hright : ∀ x ∈ U, ∀ y, L x (V x y) = y)\n    (hcont : ContinuousOn (fun z : E × E => V z.1 z.2) (U ×ˢ univ)) :\n    ∃ base : ℕ, ∀ n : ℕ, ∃ loss : ℕ, ∀ R : ℝ, 1 ≤ R →\n      ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧\n        ∀ x ∈ U ×ˢ univ, pairGrading q q base x ≤ R →\n          ∀ v : Fin n → E × E,\n            q s ((inverseFamilySmoothDirections J hU V hleft hright hcont).D n x v) ≤\n              C * tameJetSize (pairGrading q q) n s loss base x v := by"
+    ],
+    "public_headers": 1,
+    "private_headers": 3,
+    "imports_equal": true,
+    "options_equal": true,
+    "net_source_lines": 1,
+    "no_new_public_names": true,
+    "no_new_imports": true,
+    "no_axioms_or_sorry_or_resource_changes": true
+  },
+  "mathematical_scope": {
+    "preserved": "Same p/q, original input profile, finite inverse expressions, same genuine inverseFamilySmoothDirections and final tameJetSize.",
+    "quantifiers": "The low base remains before every inverse order n; each loss is before every R and s. No order-dependent low base is introduced.",
+    "arithmetic": "Constants, index arithmetic and product/interpolation budgets are byte-identical outside local binder/simplification/nonnegativity repairs.",
+    "source_review": "Full before and after source read; selected actual provider contracts read as specified below.",
+    "verification": "No Lean, lake, elaboration, CI query, active edit, index or ref operation."
+  },
+  "actual_providers": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseBounds.lean",
+      "git_blob": "aeee314ef570e000726d4c0b44ac7918fc1b0c4a",
+      "sha256": "925fda87a5189968db6eb87ffe62505baf7a32638d304dcf31c4aabcf681ab37",
+      "utf8_bytes": 11046,
+      "lines": 244,
+      "final_newline": true,
+      "ref": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+      "read_scope": "Full source read"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseJets.lean",
+      "git_blob": "976c9b64fc749b055e22c2e8596a8781263956bc",
+      "sha256": "e34d22d95954a7c2bbd2dd6317eb1fcd08e4e7ded3cd3633729b501236bf694d",
+      "utf8_bytes": 12129,
+      "lines": 254,
+      "final_newline": true,
+      "ref": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+      "read_scope": "Actual expression-jet definitions and inverseFamilySmoothDirections/_apply blocks read"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseExpressions.lean",
+      "git_blob": "14ad46cae7d92dca46f5efd006f5260873046713",
+      "sha256": "5f19c405b830b56e9ad43319b2e9b306af3a27d840167fc29d592e9b9edaec56",
+      "utf8_bytes": 22877,
+      "lines": 490,
+      "final_newline": true,
+      "ref": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+      "read_scope": "Actual inductive/eval block 160–189 read; unchanged expression calculus not re-reviewed in this repair"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+      "git_blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+      "sha256": "6952ac2501bd38f0f6d51b1633f52d30ed1820f9380bd6dd58ebc24c601e1991",
+      "utf8_bytes": 11512,
+      "lines": 250,
+      "final_newline": true,
+      "ref": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+      "read_scope": "Products section pairGrading_apply/monotone and tupleGrading APIs read"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameJetLocalBounds.lean",
+      "git_blob": "af44988e9b25134eaeb1ae6505691d755d8bc228",
+      "sha256": "0cdfa8c38f6ff5e84cc7d486946ca4c96a7574ec929185edfa7397204374a184",
+      "utf8_bytes": 9127,
+      "lines": 196,
+      "final_newline": true,
+      "ref": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+      "read_scope": "Full source read"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SpacesInterpolationProducts.lean",
+      "git_blob": "bef566d963e0bafb656cca8fb64d118d2c396162",
+      "sha256": "302248ce14c8d3ef488a6a46d8cb80cb72b374f89da308baac7012fa92f8fd58",
+      "utf8_bytes": 10818,
+      "lines": 212,
+      "final_newline": true,
+      "ref": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+      "read_scope": "Full source read"
+    }
+  ],
+  "instructions": {
+    "agents": {
+      "path": "AGENTS.md",
+      "git_blob": "e6835ac7265ded9040e63ea60908e8f91f645f7d",
+      "sha256": "c93fb4ff25e2109e6d06cd0a2139fa6cdbdd97d4f33ea0dcbe45f8432aee39ac",
+      "utf8_bytes": 3153,
+      "lines": 49,
+      "final_newline": true
+    },
+    "local_builds": "Not performed; parent explicitly requires CI only."
+  },
+  "peer_review": {
+    "status": "PENDING_FULL_INDEPENDENT_REVIEW",
+    "requested_reviewer": "/root/audit_coordinates"
+  }
+}

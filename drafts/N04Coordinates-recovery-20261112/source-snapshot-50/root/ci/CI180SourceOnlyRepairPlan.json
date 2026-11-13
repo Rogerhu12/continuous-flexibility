@@ -1,0 +1,71 @@
+{
+  "schema": "N04-reviewed-source-only-repair-staging-v1",
+  "ci_round": 180,
+  "commit": "f4b3136dbf87877aa4aa94bfbaefc5554db8d2dd",
+  "tree": "f6bf0e9e425b2b0c019a1026ccbbfd0bf742c700",
+  "parent": "386ddd382873abcf8e0a97b02378ce2b3ee78919",
+  "complete_green": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+  "complete_green_evidence": "5980c2ba762512f9ea495cfe101031ec4c8b0a4e",
+  "failure": "3b26058fbc27de621ca34042b2b4c9e1f5e121e8",
+  "complete_errors": "319def55c91d846721fd02317bd7dfeb4c0250bd",
+  "repairs": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameFixedBaseCompositionBounds.lean",
+      "before": "a71b7b644bd5db40c05c3e41cd6db9d05e1d1e9f",
+      "after": "f43a2b774c41da8cc9417051adc8c0a89d3ed04e",
+      "before_lines": 332,
+      "after_lines": 332,
+      "reviewed_owner": "a9028c417e5f6a1280a2a3984f7db66214bc5bac",
+      "peer": "6e8632acbce133cb50f6f2d59508211f1083a05e"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameInverseFixedBaseBounds.lean",
+      "before": "81547f3c26d523217f65968079581f3bc557e5bf",
+      "after": "083d926c2e2bd91323a068b40e93dc93117f9779",
+      "before_lines": 350,
+      "after_lines": 349,
+      "reviewed_owner": "e5543f699e1559634d3bddf7d2979f400b31be0b",
+      "peer": "ce1f2bf6010c189257a7207a829f4b94834d12cb"
+    }
+  ],
+  "git_parent_diff": {
+    "paths": 2,
+    "added": 6,
+    "deleted": 7,
+    "net": -1
+  },
+  "git_green_diff": {
+    "paths": 131,
+    "added": 19543,
+    "deleted": 0
+  },
+  "whole_root_lag": 396,
+  "generated_imports": 4637,
+  "checked_imports": 4241,
+  "conservative_budget": 19939,
+  "limit": 20000,
+  "all_public_private_heads_imports_options_unchanged": true,
+  "main_rules_checked": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "new_Lean_sources_staged": 0,
+  "draft_budget": {
+    "prior": 19958,
+    "repair_delta": -1,
+    "current": 19957,
+    "remaining": 43,
+    "credit_only_after_repaired_fixed131_complete_green": {
+      "lines": 681,
+      "components": [
+        332,
+        349
+      ],
+      "original_counted_provenance": "0b4fc88a7cc2b1e8d7ca4f7f0e97b9d96885cdb5",
+      "result": 19276
+    }
+  },
+  "publishing": {
+    "via": "connected GitHub API",
+    "tree_equal_native_candidate": true,
+    "unused_native_commit": "eec282923fed004aabecf64b05fe933c03daf12c",
+    "native_push": "failed for unavailable credentials; branch was verified unchanged before API fast-forward"
+  }
+}

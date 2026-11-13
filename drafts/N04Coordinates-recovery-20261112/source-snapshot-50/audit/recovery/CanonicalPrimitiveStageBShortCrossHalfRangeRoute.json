@@ -1,0 +1,395 @@
+{
+  "schema": "n04-stage-b-readonly-implementation-route-v2",
+  "status": "READONLY_ROUTE_NOT_NEW_LEAN_OR_COMPILED_PRODUCER",
+  "path": "audit/recovery/CanonicalPrimitiveStageBShortCrossHalfRangeRoute.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "author": "audit_coordinates",
+  "baseline": {
+    "active_pin_for_provider_check": "21e274710fea6f5c0becf177ebd2512cbe723dc9",
+    "tree": "4df6517d5b3c92f5a366501af217c4471d0f23f8",
+    "previous_complete_green": "7bbdf33284a9f0d21d3587b0c42d65aa109f9f30",
+    "mathlib": "c55e6e786f49471c72fbddbec5415808896aec1e"
+  },
+  "previous_report": {
+    "blob": "d7e3259e315b21d575a428620c9c14b5b9078dde",
+    "sha256": "d3eb96b091bc46099bcdaed454ecd3dca0a735d887b7ed3fc4d453ffa411d63c",
+    "preserved": true
+  },
+  "conclusion": {
+    "shortest_next_leaf": "One Bool theorem for the same actual K and whole V: a single common neighborhood shrink; current target 0<v<1, opposite u>1; at a crossing point, including the old reference cut, 1<u<=5/4 and 7/16<=v<1.",
+    "simplification": "Only the reference maps-to bound Rref<1 is used. Extend the upper current bound Rcur<=5/4 from each fixed reference open half to its closure using the true stored full-component chart germ. No computation of the reference chart's exact value at the old cut and no optical midpoint identity is required.",
+    "replacement_notice": "The new general crossing-point positive buffer is7/16, not the earlier cut-only3/4 conclusion. The original cut-only route remains historical and is not falsely asserted for all crossing points.",
+    "downstream_window_check": "The exact RootTravelOppositeCoordinates, ActualNegativeOppositeRootFields, CanonicalNegativeTravelTransition and CanonicalWholeNegativeTransport contracts contain no3/4 lower-window assumption. The existing StageC/D plan requires fixed positive compact ranges. Therefore7/16 suffices.",
+    "optional_stronger_choice": "If a future consumer actually requires v>=3/4, use the same one shrink with delta=1/10. Then u<=11/10 and v>=2-(11/10)^2=79/100>=3/4. No new atlas, host or neighborhood choice depending on the point is introduced."
+  },
+  "proposed_complete_public_header": "theorem n04WholeReferenceGaugeAtlas_moving_negative_crossHalf_range\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {L : ReturnCorrectionData S} {base loss baseCur : ℕ} {ε εCur : ℝ}\n    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)\n    (hS : IsPhysicalSpaces D T S)\n    (hN : NonlinearPropertiesThrough03 D T S C R L base loss ε)\n    (hfield : N04bFieldRegularity D S C L base ε)\n    (e0 : ℕ ≃ N04PieceIndex D) (e : ℕ ≃ N04WholePieceIndex D)\n    (cell : N04PositiveComponent D.a D.b (deriv D.w) → ℕ)\n    (ψ χ : N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → PolarPoint)\n    (h0 : N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → ℝ)\n    (τ σ : (AnnularState S × ℝ) →\n      N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → PolarPoint)\n    (Q : (AnnularState S × ℝ) →\n      N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → ℝ)\n    (N : Set ℝ) (hεCur : 0 < εCur)\n    (hinc : sectorNeighborhood S baseCur εCur εCur ⊆ sectorNeighborhood S base ε ε) :\n    let K := n04bActualTypedAtlas hT hS hN hfield e0\n    let V := n04WholeReferenceGaugeAtlasData C L K e cell ψ χ h0 τ σ Q N\n    CanonicalGeometry.CurrentJets D T S C L V baseCur εCur →\n    ∃ base' : ℕ, baseCur ≤ base' ∧ ∃ ε' : ℝ, 0 < ε' ∧ ε' ≤ εCur ∧\n      sectorNeighborhood S base' ε' ε' ⊆ sectorNeighborhood S baseCur εCur εCur ∧\n      CanonicalGeometry.CurrentJets D T S C L V base' ε' ∧\n      ∀ ζ ∈ sectorNeighborhood S base' ε' ε', ∀ m (side : Bool) (p : PolarPoint),\n        p ∈ physicalPieceOpen S V (liftSectorParameter S C ζ)\n          (e.symm (.inl (m, side))) →\n        let k := e0.symm (.inl (m, side))\n        let k' := e0.symm (.inl (m, !side))\n        let ρ := n04bRootCutRadius (C.travel m)\n        let v := (K.chart (liftSectorParameter S C ζ) k p).1 / ρ\n        let u := (K.chart (liftSectorParameter S C ζ) k' p).1 / ρ\n        0 < v ∧ v < 1 ∧ 1 < u ∧\n          (p ∉ referencePhysicalPieceOpen S K k →\n            u ≤ (5 / 4 : ℝ) ∧ (7 / 16 : ℝ) ≤ v)",
+  "proposed_header_status": "Precise intended statement, not elaborated. The hcur input is the genuine CurrentJets already consumed by the established StageA/B route; no desired range, cut bound, continuity or materialJets is assumed.",
+  "estimated_new_source_lines": {
+    "minimum": 180,
+    "maximum": 240,
+    "includes": "Complete parameters, typed negative-field identities, one shrink, interior atom conversion, closure at cut, Bool classification and rational buffer.",
+    "authorization": "No Lean source was written under the current budget. Reassess after full green before implementing."
+  },
+  "fixed_notation": {
+    "K": "n04bActualTypedAtlas hT hS hN hfield e0",
+    "V": "n04WholeReferenceGaugeAtlasData C L K e cell ψ χ h0 τ σ Q N",
+    "original_component": "Omega_m=Ioo(C.left m)(C.right m)×univ",
+    "k_s": "e0.symm(.inl(m,s))",
+    "whole_s": "e.symm(.inl(m,s))",
+    "U_s": "referencePhysicalPieceOpen S K k_s",
+    "rho": "n04bRootCutRadius(C.travel m)",
+    "R_z_s": "fun p => (K.chart z k_s p).1/rho",
+    "reference_cut": "n04bActualReferenceCut hN m"
+  },
+  "exact_supplier_calls": [
+    {
+      "role": "One shrink, before every component/side/point/order",
+      "call": "n04Coordinates_currentAtoms_uniformly_close (K := V) (δ := (1/4:ℝ)) hD hT hcur hεCur (by norm_num)",
+      "result": "base',epsilon', inclusion hU, restriction of the original CurrentJets and all-atom pointwise difference<1/4"
+    },
+    {
+      "role": "Original construction state validity",
+      "call": "liftSectorParameter_mem_stateNeighborhood (C := C) (hinc (hU hζ)) le_rfl; (hN.1.1.2.2.1).liftSectorParameter_sector ζ",
+      "result": "hz/hs for the original hN/hfield, without rebuilding K from restricted proofs"
+    },
+    {
+      "role": "Reference state validity",
+      "call": "n04b_reference_valid_of_through03 hN",
+      "result": "reference hz0 and hs0"
+    },
+    {
+      "role": "Actual K geometry",
+      "call": "n04b_actualTypedAtlas_partA hT hS hN hfield e0",
+      "result": "hA:CanonicalGeometry D S C K base ε"
+    },
+    {
+      "role": "Exact negative fields of the whole V",
+      "call": "n04WholeReferenceGaugeAtlasData_negative_fields C L K e cell ψ χ h0 τ σ Q N z (e.symm(.inl(m,s))) (m,s) (e.apply_symm_apply _)",
+      "result": "left/right, physical endpoints/domain, cell and full chart function identities; reduce the selected cutPair via the actual typed metadata and one Bool case split"
+    },
+    {
+      "role": "Actual typed endpoints",
+      "call": "n04bTypedAtlasData_left C L cut e0 F h J k; n04bTypedAtlasData_right C L cut e0 F h J k; n04bTypedAtlasData_cutPair C L cut e0 F h J m",
+      "arguments": "cut=n04bActualReferenceCut hN; F=n04bActualNegativeChart hT hS hN hfield; h=n04bActualNegativeHeight hT hS hN hfield; J=n04bActualNegativeInverse hT hS hN hfield",
+      "result": "K.left k_s=0; K.right k_s=rho; K.cutPair m=(k_false,k_true)"
+    },
+    {
+      "role": "True fixed-half affine inverse",
+      "call": "n07aCanonicalUnitInversePoint_maps (K := n07aPhysicalIntervalData K) hwidth hp; n07aCanonicalUnitPoint_inverse (K := n07aPhysicalIntervalData K) hwidth p",
+      "arguments": "q=n07aCanonicalUnitInversePoint(n07aPhysicalIntervalData K)k_s p; hwidth=hp.1.1.trans hp.1.2",
+      "result": "q in unitStrip and physicalUnitPoint K k_s q=p, used only for p in the open reference half"
+    },
+    {
+      "role": "Reference upper bound",
+      "call": "(hA.charts (C.referenceState,0) hz0 hs0 k_s).1 hp0",
+      "arguments": "hp0 is hp transported by (hA.referenceDomain k_s).symm",
+      "result": "0<Rref_s(p)<1 after left/right/rho positivity"
+    },
+    {
+      "role": "Positive common scale",
+      "call": "n04bRootCutRadius_pos (n04b_actualTravel_positive hN hS hT hfield hz hs m)",
+      "result": "rho>0"
+    },
+    {
+      "role": "Full-component current stored germ",
+      "call": "n04bActualTypedAtlas_negative_component_germs hT hS hN hfield e0 hz hs k_s m s (e0.apply_symm_apply _) hpFull",
+      "result": "hg.1:stored chart =eventually rootPhysicalChart near the actual p"
+    },
+    {
+      "role": "Full-component raw regularity",
+      "call": "n04b_actualRootPhysical_regular_at hN hS hT hfield hz hs m s hpFull",
+      "result": "hr.1:ContDiffAt of that same rootPhysicalChart; (hr.1.congr_of_eventuallyEq hg.1).continuousAt.fst.div_const rho gives actual R_z_s continuity at p"
+    },
+    {
+      "role": "Open-half bound to its closure",
+      "call": "ContinuousWithinAt.closure_le hpClosure hR.continuousWithinAt continuousWithinAt_const (fun y hy => (hInteriorUpper y hy).le)",
+      "result": "R_z_s(p)<=5/4; only p in full component and closure U_s are needed"
+    },
+    {
+      "role": "Moving-point classification",
+      "call": "n04bActualTypedAtlas_moving_negative_reference_unitPoint hT hS hN hfield e0 z m side p hpK",
+      "arguments": "hpK comes from the exact whole negative physical-domain equality",
+      "result": "hpFull plus old-cut equality or a true reference half of the same component with its actual affine inverse"
+    },
+    {
+      "role": "Cut belongs to either reference-half closure",
+      "call": "n04b_negativeHalf_bounds hN.1.1.2.2.2.1 (n04bActualReferenceCut_mem hN) (m,s), then closure_prod_eq, closure_Ioo hwidth.ne, closure_univ",
+      "result": "old cut is the appropriate Icc endpoint; hwidth.ne has the required left!=right orientation"
+    },
+    {
+      "role": "Target canonical range",
+      "call": "(hA.charts z hz hs k_side).1 hpK",
+      "result": "0<v<1"
+    },
+    {
+      "role": "True opposite relation at the same p",
+      "call": "n04bActualTypedAtlas_negative_opposite_normalized hT hS hN hfield e0 hz hs k_side k_opp m side (e0.apply_symm_apply _) (e0.apply_symm_apply _) hpFull",
+      "result": "u>0, v>0, v^(3/2)+u^(3/2)=2, actual radial conversion and actual H/J ratios"
+    }
+  ],
+  "proof_blocks": [
+    {
+      "step": 1,
+      "proof": "After the single shrink, fix state,m,s and p in U_s. Use the exact affine inverse q and negative field equalities to turn the .chartRadial difference into |Rcur_s(p)-Rref_s(p)|<1/4. Reference maps-to gives Rref_s(p)<1, hence Rcur_s(p)<5/4. The atom is normalized by rho and evaluated at fixed-reference physicalUnitPoint; neither point nor scale may be silently replaced."
+    },
+    {
+      "step": 2,
+      "proof": "For p in closure(U_s) intersect Omega_m, use the actual stored component germ and actual root regularity to obtain continuity of Rcur_s at p. Apply the pinned closure_le directly to the preceding interior upper bound. This handles the old cut without its exact reference optical value and without assuming p lies in that side's moving half."
+    },
+    {
+      "step": 3,
+      "proof": "For p in the target moving half but outside its fixed reference open half, the compiled71 classification gives either p at the old cut, or p in a fixed half refSide. The first case lies in closure U_opp by exact endpoint metadata. In the second case refSide=target contradicts the guard, so Bool refSide=!target and p belongs to U_opp, hence its closure. Apply Step2 to get u<=5/4."
+    },
+    {
+      "step": 4,
+      "proof": "Maps-to gives0<v<1. Let hvpow:=Real.rpow_le_self_of_le_one hv.le hvlt.le (by norm_num : (1:ℝ)<=3/2). If u<=1, the same lemma givesu^(3/2)<=u; the exact power sum2 would then be<=v+u<2. Hence1<u."
+    },
+    {
+      "step": 5,
+      "proof": "Use Real.rpow_le_rpow_of_exponent_le huone.le (by norm_num : (3/2:ℝ)<=2), then Real.rpow_two, to getu^(3/2)<=u². Fromu<=5/4 andu>0, mul_nonneg(sub_nonneg.mpr huUpper)(by linarith : 0<=(5/4:ℝ)+u) givesu²<=25/16. The power sum andv^(3/2)<=v yield7/16<=v by nlinarith. All constants are numerical and independent of state,component,side,sample and derivative order."
+    }
+  ],
+  "exact_mathlib": {
+    "closure": {
+      "continuousWithinAt_closure_le": "theorem ContinuousWithinAt.closure_le [TopologicalSpace β] {f g : β → α} {s : Set β} {x : β}\n    (hx : x ∈ closure s) (hf : ContinuousWithinAt f s x) (hg : ContinuousWithinAt g s x)\n    (h : ∀ y ∈ s, f y ≤ g y) : f x ≤ g x",
+      "scope": "At fixed c55, alpha=Real and beta=PolarPoint satisfy the declaration's surrounding order/topology instances. The API requires only continuity within the source set at the boundary point, with no additional NeBot instance or global continuity assumption.",
+      "closure_prod_eq": "theorem closure_prod_eq {s : Set X} {t : Set Y} : closure (s ×ˢ t) = closure s ×ˢ closure t",
+      "closure_Ioo": "theorem closure_Ioo {a b : alpha} (hab : a ≠ b) : closure (Ioo a b) = Icc a b",
+      "evidence": [
+        {
+          "repository": "leanprover-community/mathlib4",
+          "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+          "path": "Mathlib/Topology/Order/OrderClosed.lean",
+          "blob": "9603945a9c797c1d1d695ddf79281f6887211098",
+          "sha256": "e311dbc7fca744dc0f0d4a10e3c838eb4996c2fa8b63e833077c40f763f05444",
+          "read_scope": "The named declarations, their relevant surrounding typeclass context, and exact signatures; not a claim to audit all unrelated theorems in this file.",
+          "names": [
+            "ContinuousWithinAt.closure_le"
+          ]
+        },
+        {
+          "repository": "leanprover-community/mathlib4",
+          "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+          "path": "Mathlib/Topology/Order/DenselyOrdered.lean",
+          "blob": "6158d1cc81003eb1ac571469b7ac645e2e7b31f3",
+          "sha256": "b02cb3aa48b52b227247c6efbd3ac1ec1f0ddbb24420dde89c40614d392c300d",
+          "read_scope": "The named declarations, their relevant surrounding typeclass context, and exact signatures; not a claim to audit all unrelated theorems in this file.",
+          "names": [
+            "closure_Ioo"
+          ]
+        },
+        {
+          "repository": "leanprover-community/mathlib4",
+          "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+          "path": "Mathlib/Topology/Constructions/SumProd.lean",
+          "blob": "e77aea8bdc88a4f5a3cd48851310fbf049adc353",
+          "sha256": "92c90d685802bbd0f23e981ace7757c4ae42f504e5595d972941e539c12beb6f",
+          "read_scope": "The named declarations, their relevant surrounding typeclass context, and exact signatures; not a claim to audit all unrelated theorems in this file.",
+          "names": [
+            "closure_prod_eq"
+          ]
+        }
+      ]
+    },
+    "continuity": {
+      "path": "Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "checked": "ContDiffAt.congr_of_eventuallyEq (h:ContDiffAt k n f x)(hg:f1=eventually f):ContDiffAt k n f1 x; ContDiffAt.continuousAt",
+      "direction": "The actual stored chart is f1 and the rootPhysicalChart is f, so hg.1 is used without symmetry."
+    },
+    "powers": {
+      "path": "Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "git_blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "ref": "c55e6e786f49471c72fbddbec5415808896aec1e",
+      "full_signatures": [
+        "Real.rpow_le_self_of_le_one (h1:0<=x)(h2:x<=1)(h3:1<=y):x^y<=x",
+        "Real.rpow_le_rpow_of_exponent_le (hx:1<=x)(hyz:y<=z):x^y<=x^z",
+        "Real.rpow_two (x:ℝ):x^(2:ℝ)=x^2"
+      ],
+      "read_scope": "Actual declarations and surrounding section at the fixed c55 pin, with the same rpow_le_self API already used by installed RootTravelUniformBounds and RootCoordinateJets."
+    }
+  },
+  "downstream": {
+    "fixed_windows": {
+      "opposite_u": "[1,5/4]",
+      "target_v": "[7/16,1]",
+      "height_factor_base_v_over_u": "[7/20,1]",
+      "jacobian_factor_base_u_over_v": "[1,20/7]"
+    },
+    "actual_factors": "Htarget/Hopp=(v/u)^(1/4), |Jtarget|/|Jopp|=sqrt(u/v), from the existing actual same-point theorem. Consequently the factors and their reciprocals have fixed positive value ranges; future finite-jet composition still needs its own proof.",
+    "curve_scope": "Both charts share the actual travel angle, not necessarily the physical theta. The full-component germ is available for the forward chart/height/J relation even when p is outside the opposite moving half.",
+    "inverse_source_boundary": "Keep inverseChart and sourceFactor on the target canonicalOpen/unitStrip. Never evaluate the opposite inverse/source atom at u>1 by claiming u is in the unit strip.",
+    "sample_bookkeeping": "V.cell(whole_s)=K.cell(k_s) is retained. The two K half cells/samples may differ; no equality is used. This qualitative globally absorbed range estimate needs no sample conversion. Subsequent material jet transfer must separately compare the original target/opposite sample costs, and cannot apply a closed-half point comparison to a point outside that half.",
+    "not_claimed": "No CurrentJets construction, fifteen-field materialJets assembly, all-order cross-half bounds or final realization certificate is supplied by this readonly route."
+  },
+  "provider_identity_checks": {
+    "checked22_against_exact178_tree": true,
+    "all22_match_prior_complete_green177_tree": true,
+    "no_uncompiled_reference85_supplier": true,
+    "scope": "Previously completed exact22 path/blob comparison before the CI179 repair. The pending fixed131 repair concerns unrelated inverse/composition modules; no silent main pin change is made."
+  },
+  "providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalCurrentUniformCloseness",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean",
+      "blob": "f5b40e8f0c2af008aebf74066a8ef36d82c761fb",
+      "sha256": "fa10773294a616aae51226c5e6ea735a5b87727afca8ae2de81d3bc84094543f",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualNegativeMovingReferenceUnitPoint",
+      "path": "src/ContinuousFlexibility/Analysis/ActualNegativeMovingReferenceUnitPoint.lean",
+      "blob": "aba2322ac91263cc9b63a6f487c5338f21667574",
+      "sha256": "4de7f0e3cff3982cb846413fa1f6eedbe2762a82bcd9e88d350ff1c5f38e9ff9",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualTypedAtlas",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean",
+      "blob": "334d3c0c19727465e3afc75f988c79df1b8d7b8a",
+      "sha256": "91687b630205a380f137dcdb4cb32068d79582e09d17d4a4cd14317e21b9e19f",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualAtlasGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualAtlasGeometry.lean",
+      "blob": "6e704770a6066c6279f7c3cdae96c1d695d554d3",
+      "sha256": "9249ea8b23d4edc27fe5e9d405e32a3da2248556efb394db33faf279aefa1d0a",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualAtlasGerms",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualAtlasGerms.lean",
+      "blob": "0bf89b2339f60ac8ba2cf9678637f4bf96830a66",
+      "sha256": "5abee83c1a68e2b04a6d733f7e51473a15453d5debda0e8526106462e3b4d73e",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualRootInterior",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualRootInterior.lean",
+      "blob": "f59704e802cdf7bd9ae8a66504974410052233e0",
+      "sha256": "e48818ca3333c9e39ad2b5cf2528733a278f2aa2921a83508be9f8e4c759e66c",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualNegativePiece",
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualNegativePiece.lean",
+      "blob": "3c91714519afd34806169f9b5b07cf57b4fc31f9",
+      "sha256": "03abefe846815f0aab0ca4f51af39e6dcaff40a058ad5bd47ad4d74224bf7cd7",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bNegativePieceProperties",
+      "path": "src/ContinuousFlexibility/Analysis/N04bNegativePieceProperties.lean",
+      "blob": "2ecc846fdedb37258938eba1525c560e64c76ce1",
+      "sha256": "bf7550bb2622b44351af468a1d6f371fddbf5e5abae597424bc20fb9564bad40",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceActualTravel.lean",
+      "blob": "07661eae46124d0a5550bf4f6de16a5874838d3c",
+      "sha256": "4307b8b206489be492e33a3f12198e4af5271c45a5db821b85ac2db0133ce7eb",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceTravelCut",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceTravelCut.lean",
+      "blob": "d0abf85548b22ac21260636b709f3f01ea25482a",
+      "sha256": "9e9116e69a649d72eb4d05aa5989c2a10aedae8025568972437c1fc00f0b5030",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bRootTravelIntervals",
+      "path": "src/ContinuousFlexibility/Analysis/N04bRootTravelIntervals.lean",
+      "blob": "f1b26fa6eea80e225e7b305e0179a1720417e1a3",
+      "sha256": "7e0938b188bf262b10fb148e6cf08428c1fa27e47aaa032770feae85470aea80",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bRootTravelCharts",
+      "path": "src/ContinuousFlexibility/Analysis/N04bRootTravelCharts.lean",
+      "blob": "4c07f9e17218a4366860a3984a2e933033115a8b",
+      "sha256": "3d9439442dea831b5b918e47a2606e6e6460081be5e7b3e8beee0a2c052840a7",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RootTravelOppositeCoordinates",
+      "path": "src/ContinuousFlexibility/Analysis/RootTravelOppositeCoordinates.lean",
+      "blob": "e573bf412782f3cd9d51fccc619367c3fc8fcd40",
+      "sha256": "52ea40ea85ce5a873754a4a39a44d0b5d39c792a18a1e1a487b37bf5bcfe80ce",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualNegativeOppositeRootFields",
+      "path": "src/ContinuousFlexibility/Analysis/ActualNegativeOppositeRootFields.lean",
+      "blob": "2741a227986d3479a7ced38469e19133966a0d35",
+      "sha256": "ff81af86365dfcd2fa3c5eaa7b58e41dbbf49828cf4eab328dc8ed8101f44689",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasData.lean",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bTypedAtlasData",
+      "path": "src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+      "blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "sha256": "166d48b590552637d5efedb29ce0b19d5963d02f33e7caebffe44a04b576fdf4",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceMetadata",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceMetadata.lean",
+      "blob": "d2be1124da85939a9dfd1cba380a9ac303c61308",
+      "sha256": "21d8319b313d567698500bb20354251130e9d1746ff414fdf5aad2adb94ee7c0",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bReferenceHalves",
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+      "blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+      "sha256": "598b1d5f18c4a22eecd5108949d46b2ddca955d79ea66090b85ca6ba06ff8227",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient",
+      "path": "src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "sha256": "bbec6c5ccb9e0d9bcf75516b8c9024e4f15c2e834119822ace6da3c4e70fd51c",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/N07aCurrentPhysicalGeometry.lean",
+      "blob": "dd8ea3aac0ba1e207170091f16a2bfc623a4257b",
+      "sha256": "067b9539ca2976ec2b523901a574fd74a397013091406a77901799b87a2e78cf",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SolveReturnEquations",
+      "path": "src/ContinuousFlexibility/Analysis/SolveReturnEquations.lean",
+      "blob": "79f7407854a3dea4f22ebf924f1a074265e878dc",
+      "sha256": "936751f4227d524f93ee0daa0d620fb309e98bd78888b0b7cefed8da06e82d6c",
+      "read_scope": "Full source read for the relevant provider/API audit."
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "read_scope": "Target definitions and exact N01/Through03/atom sections; prior Stage B report records earlier definition audit."
+    }
+  ],
+  "actions": {
+    "new_Lean_sources": 0,
+    "active_changes": 0,
+    "CI_queries": 0,
+    "refs_changed": 0,
+    "artifact": "JSON route only"
+  }
+}
