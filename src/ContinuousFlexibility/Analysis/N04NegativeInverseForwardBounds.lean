@@ -5,6 +5,7 @@ import ContinuousFlexibility.Analysis.N04NegativeInversePureJointBounds
 import ContinuousFlexibility.Analysis.N04NegativeGeometryPhysicalAtomTowers
 import ContinuousFlexibility.Analysis.ActualNegativeOppositeRootFields
 import ContinuousFlexibility.Analysis.MaterialEndpointWeightTransport
+import ContinuousFlexibility.Analysis.N07aPhysicalAtomBounds
 
 /-!
 # Actual forward inputs on the two fixed negative reference halves
@@ -34,6 +35,20 @@ attribute [local instance]
   n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
+
+/-- A uniform estimate on an open reference half passes to its old cut
+by continuity of the actual full-component field. -/
+theorem n04NegativeInverse_le_on_closedHalf
+    {f : PolarPoint → ℝ} {a b M : ℝ} (hab : a < b)
+    {p : PolarPoint} (hp : p ∈ Icc a b ×ˢ (univ : Set ℝ))
+    (hf : ContinuousAt f p)
+    (hbound : ∀ q ∈ Ioo a b ×ˢ (univ : Set ℝ), f q ≤ M) : f p ≤ M := by
+  have hpcl : p ∈ closure (Ioo a b ×ˢ (univ : Set ℝ)) := by
+    rw [closure_prod_eq, closure_Ioo hab.ne, closure_univ]
+    exact hp
+  have hcl : f p ∈ closure (Iic M) :=
+    hf.continuousWithinAt.mem_closure hpcl hbound
+  simpa only [isClosed_Iic.closure_eq, mem_Iic] using hcl
 
 namespace N04RealizationStart
 
@@ -191,6 +206,72 @@ namespace N04RealizationGauge
 
 variable (G : N04RealizationGauge)
 
+/-- The retained half has its actual root radius, old optical endpoints,
+and the actual chosen chart and inverse at every state. -/
+theorem negativeInverse_actual_fields
+    (η : (G.W.S.height (3 / 4 : ℝ)).Space) (z : Parameter G.W.S)
+    (k m : ℕ) (side : Bool) (hi : G.e k = .inl (m, side)) :
+    (G.V η).left k = 0 ∧
+      (G.V η).right k = n04bRootCutRadius (G.W.C.travel m) ∧
+      (G.V η).physicalLeft k =
+        n04bNegativeLeft G.W.C (n04bActualReferenceCut G.W.through03) (m, side) ∧
+      (G.V η).physicalRight k =
+        n04bNegativeRight G.W.C (n04bActualReferenceCut G.W.through03) (m, side) ∧
+      (G.V η).chart (G.lift η z) k =
+        n04bActualNegativeChart G.W.hT G.W.hS G.W.through03 G.W.field
+          (liftSectorParameter G.W.S G.W.C z) m side ∧
+      (G.V η).inverseChart (G.lift η z) k =
+        n04bActualNegativeInverse G.W.hT G.W.hS G.W.through03 G.W.field
+          (liftSectorParameter G.W.S G.W.C z) m side ∧
+      (G.V η).height (G.lift η z) k =
+        n04bActualNegativeHeight G.W.hT G.W.hS G.W.through03 G.W.field
+          (liftSectorParameter G.W.S G.W.C z) m side := by
+  have hf := G.negative_fields η (liftSectorParameter G.W.S G.W.C z) k (m, side) hi
+  have hk : G.X.e₀ (G.negativeIndex (m, side)) = .inl (m, side) :=
+    G.X.e₀.apply_symm_apply _
+  have ht := n04bTypedAtlasData_negative_fields
+    (C := G.W.C) (L := G.W.L) (z := liftSectorParameter G.W.S G.W.C z) G.X.e₀
+    (n04bActualNegativeChart G.W.hT G.W.hS G.W.through03 G.W.field)
+    (n04bActualNegativeHeight G.W.hT G.W.hS G.W.through03 G.W.field)
+    (n04bActualNegativeInverse G.W.hT G.W.hS G.W.through03 G.W.field)
+    (n04bActualReferenceCut G.W.through03) (G.negativeIndex (m, side)) m side hk
+  refine ⟨?_, ?_, ?_, ?_, hf.2.2.2.2.2.2.2.1.trans ht.2.2.2.1,
+    hf.2.2.2.2.2.2.2.2.1.trans ht.2.2.2.2.1,
+    hf.2.2.2.2.2.2.2.2.2.1.trans ht.2.2.2.2.2⟩
+  · rw [hf.1]
+    exact n04bTypedAtlasData_left ..
+  · rw [hf.2.1]
+    simp only [N04RealizationStart.A, n04bActualTypedAtlas, n04bTypedAtlasData_right, hk]
+  · rw [hf.2.2.1]
+    change n04bReferenceTypedLeft G.W.C (n04bActualReferenceCut G.W.through03)
+      (G.X.e₀ (G.negativeIndex (m, side))) = _
+    rw [hk]
+    rfl
+  · rw [hf.2.2.2.1]
+    change n04bReferenceTypedRight G.W.C (n04bActualReferenceCut G.W.through03)
+      (G.X.e₀ (G.negativeIndex (m, side))) = _
+    rw [hk]
+    rfl
+
+/-- Every point of the original component belongs to a closed old half.
+The cut itself is covered by the same assertion. -/
+theorem negativeInverse_referenceHalf_cover
+    (η : (G.W.S.height (3 / 4 : ℝ)).Space) (m : ℕ) {p : PolarPoint}
+    (hp : p ∈ Ioo (G.W.C.left m) (G.W.C.right m) ×ˢ (univ : Set ℝ)) :
+    ∃ side : Bool, let k := G.e.symm (.inl (m, side))
+      p ∈ Icc ((G.V η).physicalLeft k) ((G.V η).physicalRight k) ×ˢ (univ : Set ℝ) := by
+  have hf (side : Bool) := G.negativeInverse_actual_fields η 0
+    (G.e.symm (.inl (m, side))) m side (G.e.apply_symm_apply _)
+  by_cases hcut : p.1 ≤ n04bActualReferenceCut G.W.through03 m
+  · refine ⟨false, ?_⟩
+    dsimp only
+    rw [(hf false).2.2.1, (hf false).2.2.2.1]
+    exact ⟨⟨hp.1.1.le, hcut⟩, mem_univ _⟩
+  · refine ⟨true, ?_⟩
+    dsimp only
+    rw [(hf true).2.2.1, (hf true).2.2.2.1]
+    exact ⟨⟨(lt_of_not_ge hcut).le, hp.1.2.le⟩, mem_univ _⟩
+
 theorem negativeInverse_pair_sample_weights (γ P : ℝ) (hP : 0 ≤ P) :
     ∃ B A : ℝ, 0 < B ∧ 0 ≤ A ∧
       ∀ (η : (G.W.S.height (3 / 4 : ℝ)).Space) k k' m side side',
@@ -207,6 +288,109 @@ theorem negativeInverse_pair_sample_weights (γ P : ℝ) (hP : 0 ≤ P) :
   rw [hf.2.2.2.2.2.1, hf'.2.2.2.2.2.1]
   exact hb (G.negativeIndex (m, side)) (G.negativeIndex (m, side')) m side side'
     (G.X.e₀.apply_symm_apply _) (G.X.e₀.apply_symm_apply _)
+
+/-- The actual reciprocal determinant bound on an open old half extends
+to its closed half at all points that remain in the original component. -/
+theorem negativeInverse_inverseJacobian_closedHalf
+    (η : (G.W.S.height (3 / 4 : ℝ)).Space)
+    {z : Parameter G.W.S} (hz : z ∈ sectorNeighborhood G.W.S G.W.base G.W.ε G.W.ε)
+    (k m : ℕ) (side : Bool) (hi : G.e k = .inl (m, side))
+    {p : PolarPoint}
+    (hp : p ∈ Ioo (G.W.C.left m) (G.W.C.right m) ×ˢ (univ : Set ℝ))
+    (hhalf : p ∈ Icc ((G.V η).physicalLeft k) ((G.V η).physicalRight k) ×ˢ
+      (univ : Set ℝ))
+    {M : ℝ} (hvalues : ∀ q ∈ unitStrip,
+      |G.atomFamily η .jacobianInverse z k q| ≤ M) :
+    |planeJacobian (n04bActualNegativeChart G.W.hT G.W.hS G.W.through03 G.W.field
+      (liftSectorParameter G.W.S G.W.C z) m side) p|⁻¹ ≤ M := by
+  have hf := G.negativeInverse_actual_fields η z k m side hi
+  obtain ⟨B, hB, hlength⟩ := G.negativeInverse_length_values
+  have hlen : (G.V η).physicalLeft k < (G.V η).physicalRight k :=
+    sub_pos.mp (hlength η k).1
+  apply n04NegativeInverse_le_on_closedHalf hlen hhalf
+  · let J := G.W.negativeJacobianInverseJointTower m side
+    have hc : ContinuousAt (fun x : Parameter G.W.S × PolarPoint =>
+        |planeJacobian (n04bActualNegativeChart G.W.hT G.W.hS G.W.through03 G.W.field
+          (liftSectorParameter G.W.S G.W.C x.1) m side) x.2|⁻¹) (z, p) :=
+      J.continuousOn.continuousAt (J.open_domain.mem_nhds ⟨hz, hp⟩)
+    exact hc.comp (continuousAt_const.prodMk continuousAt_id)
+  · intro r hr
+    let q := n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData (G.V η)) k r
+    have hq : q ∈ unitStrip :=
+      n07aCanonicalUnitInversePoint_maps (K := n07aPhysicalIntervalData (G.V η)) hlen hr
+    have hpoint : physicalUnitPoint (G.V η) k q = r :=
+      n07aCanonicalUnitPoint_inverse (K := n07aPhysicalIntervalData (G.V η)) hlen r
+    have hv := hvalues q hq
+    change ||planeJacobian ((G.V η).chart (G.lift η z) k)
+      (physicalUnitPoint (G.V η) k q)|⁻¹| ≤ M at hv
+    rw [hpoint, hf.2.2.2.2.1, abs_of_nonneg (inv_nonneg.mpr (abs_nonneg _))] at hv
+    exact hv
+
+/-- The determinant needed by the actual negative inverse has one
+uniform coefficient envelope.  Crossing the old reference cut is
+handled by the actual opposite-root determinant identity and by transfer
+between the two stored material samples. -/
+theorem negativeInverse_inverseJacobian_bound
+    {b : ℕ} {ε : ℝ} (hadm : G.Admissible b ε)
+    (h : G.Data 0 (G.Neg 0) b ε
+      (G.atomFamily 0 .jacobianInverse) (G.atomRef 0 .jacobianInverse)) :
+    ∃ b' : ℕ, ∃ ε' B : ℝ, b ≤ b' ∧ 0 < ε' ∧ ε' ≤ ε ∧ 0 < B ∧
+      ∀ (η : (G.W.S.height (3 / 4 : ℝ)).Space),
+        ∀ z ∈ sectorNeighborhood G.W.S b' ε' ε', ∀ k, G.Neg η k →
+          ∀ q ∈ unitStrip,
+            |planeJacobian ((G.V η).chart (G.lift η z) k)
+              (G.pulledPoint η (G.lift η z) k q)|⁻¹ ≤
+              B * G.W.U.E0 (G.W.U.sample ((G.V η).cell k)) ^ B := by
+  obtain ⟨b', ε', C, hb, hε', hε'ε, hC, hvalues⟩ :=
+    G.negativeInverse_atom_value_bound hadm.2.1 .jacobianInverse
+      (by simp [atomIsGeometry]) h
+  obtain ⟨M, P, hM, hP, htransfer⟩ := G.negativeInverse_pair_sample_weights 0 C hC.le
+  obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (C * M) P
+  refine ⟨b', ε', B, hb, hε', hε'ε, hB, ?_⟩
+  intro η z hz k hk q hq
+  obtain ⟨⟨m, side⟩, hi⟩ := (G.neg_iff_inl η k).mp hk
+  have hzfull : z ∈ sectorNeighborhood G.W.S G.W.base G.W.ε G.W.ε :=
+    sectorNeighborhood_mono G.W.S (hadm.1.trans hb)
+      (hε'ε.trans hadm.2.2.1) (hε'ε.trans hadm.2.2.1) hz
+  have hf := G.negativeInverse_actual_fields η z k m side hi
+  let y := canonicalUnitPoint (G.V η) k q
+  have hy : y ∈ Ioo (0 : ℝ) (n04bRootCutRadius (G.W.C.travel m)) ×ˢ (univ : Set ℝ) := by
+    change canonicalUnitPoint (G.V η) k q ∈ _
+    rw [G.negative_canonicalUnitPoint η k (m, side) hi]
+    exact G.W.negativeCanonicalUnit_mapsTo G.X.e₀ (G.negativeIndex (m, side)) m side
+      (G.X.e₀.apply_symm_apply _) hq
+  let p := n04bActualNegativeInverse G.W.hT G.W.hS G.W.through03 G.W.field
+    (liftSectorParameter G.W.S G.W.C z) m side y
+  have hp := G.W.negativeInverse_maps_component m side hzfull hy
+  obtain ⟨source, hhalf⟩ := G.negativeInverse_referenceHalf_cover η m hp
+  let k' := G.e.symm (.inl (m, source))
+  have hi' : G.e k' = .inl (m, source) := G.e.apply_symm_apply _
+  have hk' : G.Neg η k' := (G.neg_iff_inl η k').mpr ⟨(m, source), hi'⟩
+  have hsource := G.negativeInverse_inverseJacobian_closedHalf η hzfull k' m source hi'
+    hp hhalf (hvalues η z hz k' hk')
+  have hcompare :
+      |planeJacobian (n04bActualNegativeChart G.W.hT G.W.hS G.W.through03 G.W.field
+        (liftSectorParameter G.W.S G.W.C z) m side) p|⁻¹ ≤
+      |planeJacobian (n04bActualNegativeChart G.W.hT G.W.hS G.W.through03 G.W.field
+        (liftSectorParameter G.W.S G.W.C z) m source) p|⁻¹ := by
+    have hs : source = side ∨ source = !side := by cases source <;> cases side <;> simp
+    rcases hs with rfl | rfl
+    · exact le_rfl
+    · exact G.W.negativeInverse_inverseJacobian_le_opposite m side hzfull hy
+  have ht : G.W.U.E0 (G.W.U.sample ((G.V η).cell k')) ^ C ≤
+      M * G.W.U.E0 (G.W.U.sample ((G.V η).cell k)) ^ P := by
+    simpa only [Real.rpow_zero, one_mul] using htransfer η k k' m side source hi hi'
+  change |planeJacobian ((G.V η).chart (G.lift η z) k)
+    ((G.V η).inverseChart (G.lift η z) k y)|⁻¹ ≤ _
+  rw [hf.2.2.2.2.1, hf.2.2.2.2.2.1]
+  calc
+    _ ≤ C * G.W.U.E0 (G.W.U.sample ((G.V η).cell k')) ^ C :=
+      hcompare.trans hsource
+    _ ≤ C * (M * G.W.U.E0 (G.W.U.sample ((G.V η).cell k)) ^ P) :=
+      mul_le_mul_of_nonneg_left ht hC.le
+    _ = (C * M) * G.W.U.E0 (G.W.U.sample ((G.V η).cell k)) ^ P := by ring
+    _ ≤ B * G.W.U.E0 (G.W.U.sample ((G.V η).cell k)) ^ B :=
+      hpack _ ((G.cost_nonneg η).2.2 k)
 
 /-- Genuine joint towers of one of the actual physical atoms restrict
 to every admissible parameter neighborhood without changing their jets. -/

@@ -51,6 +51,13 @@ theorem atomIsNegativeInverseReference_ne_auxiliary
   · cases a <;> simp_all [atomIsGeometry]
   · cases canonical <;> cases inverse <;> simp [canonicalLengthSelector]
 
+private theorem negativeInverse_geometry_reference_cases
+    (a : Atom) (ha : atomIsGeometry a) :
+    a = .chartRadial ∨ a = .chartAngleDefect ∨ a = .inverseRadial ∨
+      a = .inverseAngleDefect ∨ a = .height ∨ a = .heightInverse ∨
+      a = .jacobian ∨ a = .jacobianInverse ∨ a = .sourceFactor ∨ a = .sourceFactorInverse := by
+  cases a <;> simp_all [atomIsGeometry]
+
 namespace N04RealizationGauge
 
 variable (G : N04RealizationGauge)
@@ -75,8 +82,8 @@ theorem negativeInverse_reference_geometry_regular
       ∀ p ∈ unitStrip, G.atomRef η a m (p + (0, Real.pi)) = G.atomRef η a m p := by
   have hne : a ≠ .auxiliaryColumn :=
     atomIsNegativeInverseReference_ne_auxiliary (Or.inl ha)
-  have hE : a ≠ .ratioE0 := by cases a <;> simp_all [atomIsGeometry]
-  have hEi : a ≠ .ratioE0Inverse := by cases a <;> simp_all [atomIsGeometry]
+  have hE : a ≠ .ratioE0 := by cases a <;> simp [atomIsGeometry] at ha ⊢
+  have hEi : a ≠ .ratioE0Inverse := by cases a <;> simp [atomIsGeometry] at ha ⊢
   rw [G.inverseReference_atomRef_unreplaced η m a hne,
     canonicalAtom_enlargedMaterialData_of_ne_ratios G.W.D G.W.T G.W.S G.W.C G.W.L
       (n04RealizationAtlas G.W G.X G.e G.Y G.H G.τ G.σ G.Q G.N)
@@ -86,7 +93,7 @@ theorem negativeInverse_reference_geometry_regular
     (fun i => positiveReferenceCylinderChart (G.Y i))
     (fun i => positiveReferenceCylinderInverse (G.Y i))
     (fun i p => G.H i p.1) G.τ G.σ G.Q G.N m hm a
-  cases a <;> simp_all [atomIsGeometry]
+  cases a <;> simp [atomIsGeometry] at ha ⊢
 
 theorem negativeInverse_reference_geometry_bounds (s : ℕ) :
     ∃ B : ℝ, 0 < B ∧
@@ -106,8 +113,8 @@ theorem negativeInverse_reference_geometry_bounds (s : ℕ) :
     (fun i => positiveReferenceCylinderChart (G.Y i))
     (fun i => positiveReferenceCylinderInverse (G.Y i))
     (fun i p => G.H i p.1) G.τ G.σ G.Q G.N
-    (fun m => ⟨G.W.C.cell m, G.W.host m, G.X.optical m⟩) m hm a ?_ p hp i j hij
-  cases a <;> simp_all [atomIsGeometry]
+    (fun m => ⟨G.W.C.cell m, G.W.host m, G.X.optical m⟩) m hm a
+    (negativeInverse_geometry_reference_cases a ha) p hp i j hij
 
 /-- The four length costs are uniform even before selecting a negative
 piece.  Their positivity is supplied by the same reference geometry. -/
@@ -191,16 +198,21 @@ variable {D : ReferenceData} {S : PhysicalSpacesData} {T : MaterialData}
 
 /-- Every fixed finite spatial prefix becomes uniformly small after one
 neighborhood restriction, even with an additional fixed coefficient power. -/
-theorem CurrentJetDataOn.negativeInverse_uniform_small
+private theorem n04NegativeInverse_valuePrefix_uniform_small
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hε : 0 < ε)
-    (h : CurrentJetDataOn S T cell P base ε f f₀)
+    (hvalue : ∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+      ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m, P m →
+        ∀ (q : unitStrip) (i j : ℕ), i + j ≤ s →
+          |mixedDerivative i j (fun y => f z m y - f₀ m y) q.val| ≤
+            B * T.E0 (T.sample (cell m)) ^ B *
+              T.H (T.sample (cell m)) ^ (3 / 4 : ℝ) * parameterGrading S (s + loss) z)
     (s : ℕ) (A : ℝ) {δ : ℝ} (hδ : 0 < δ) :
     ∃ b : ℕ, ∃ ε' : ℝ, base ≤ b ∧ 0 < ε' ∧ ε' ≤ ε ∧
       ∀ z ∈ sectorNeighborhood S b ε' ε', ∀ m, P m →
         ∀ (q : unitStrip) (i j : ℕ), i + j ≤ s →
           T.E0 (T.sample (cell m)) ^ A *
             |mixedDerivative i j (fun y => f z m y - f₀ m y) q.val| < δ := by
-  obtain ⟨loss, hdiff⟩ := h.2.choose_spec.1
+  obtain ⟨loss, hdiff⟩ := hvalue
   obtain ⟨B, hB, hb⟩ := hdiff s
   obtain ⟨C, hC, hbound⟩ := material_sample_height_coefficient_power_bounded
     hD hT cell (A + B) (by norm_num : (0 : ℝ) < 3 / 4)
@@ -240,6 +252,19 @@ theorem CurrentJetDataOn.negativeInverse_uniform_small
       mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left (hbound m) hB.le) hg
     _ < δ := hsmall
 
+/-- Only the value-difference part of current data is used to choose
+this neighborhood; no parameter jet is requested at this stage. -/
+theorem CurrentJetDataOn.negativeInverse_uniform_small
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hε : 0 < ε)
+    (h : CurrentJetDataOn S T cell P base ε f f₀)
+    (s : ℕ) (A : ℝ) {δ : ℝ} (hδ : 0 < δ) :
+    ∃ b : ℕ, ∃ ε' : ℝ, base ≤ b ∧ 0 < ε' ∧ ε' ≤ ε ∧
+      ∀ z ∈ sectorNeighborhood S b ε' ε', ∀ m, P m →
+        ∀ (q : unitStrip) (i j : ℕ), i + j ≤ s →
+          T.E0 (T.sample (cell m)) ^ A *
+            |mixedDerivative i j (fun y => f z m y - f₀ m y) q.val| < δ :=
+  n04NegativeInverse_valuePrefix_uniform_small hD hT hε h.2.choose_spec.1 s A hδ
+
 end UniformSmallness
 
 namespace N04RealizationGauge
@@ -266,6 +291,43 @@ theorem negativeInverse_atomData_uniform_small
   intro η z hz m hm q i j hij
   rw [G.nonAuxiliary_atomFamily_eq 0 η a ha, G.nonAuxiliary_atomRef_eq 0 η a ha]
   exact hsmall z hz m hm q i j hij
+
+/-- A current geometry atom has a uniform polynomial value bound on one
+smaller neighborhood.  The neighborhood is selected before the auxiliary
+column and every negative piece. -/
+theorem negativeInverse_atom_value_bound
+    {b : ℕ} {ε : ℝ} (hε : 0 < ε) (a : Atom) (ha : atomIsGeometry a)
+    (h : G.Data 0 (G.Neg 0) b ε (G.atomFamily 0 a) (G.atomRef 0 a)) :
+    ∃ b' : ℕ, ∃ ε' B : ℝ, b ≤ b' ∧ 0 < ε' ∧ ε' ≤ ε ∧ 0 < B ∧
+      ∀ (η : (G.W.S.height (3 / 4 : ℝ)).Space),
+        ∀ z ∈ sectorNeighborhood G.W.S b' ε' ε', ∀ m, G.Neg η m →
+          ∀ q ∈ unitStrip, |G.atomFamily η a z m q| ≤
+            B * G.W.U.E0 (G.W.U.sample ((G.V η).cell m)) ^ B := by
+  have hne : a ≠ .auxiliaryColumn :=
+    atomIsNegativeInverseReference_ne_auxiliary (Or.inl ha)
+  obtain ⟨b', ε', hb, hε', hε'ε, hsmall⟩ :=
+    G.negativeInverse_atomData_uniform_small hε a hne h 0 0 (by norm_num : (0 : ℝ) < 1)
+  obtain ⟨C, hC, href⟩ := G.negativeInverse_reference_geometry_bounds 0
+  obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (1 + C) C
+  refine ⟨b', ε', B, hb, hε', hε'ε, hB, ?_⟩
+  intro η z hz m hm q hq
+  let E := G.W.U.E0 (G.W.U.sample ((G.V η).cell m))
+  have hE : 1 ≤ E := (G.cost_nonneg η).2.2 m
+  have hdiff : |G.atomFamily η a z m q - G.atomRef η a m q| < 1 := by
+    simpa only [Real.rpow_zero, one_mul, spaces_mixedDerivative_zero] using
+      hsmall η z hz m hm ⟨q, hq⟩ 0 0 (by omega)
+  have hreference : |G.atomRef η a m q| ≤ C * E ^ C := by
+    simpa only [spaces_mixedDerivative_zero] using href η m hm a ha q hq 0 0 (by omega)
+  calc
+    |G.atomFamily η a z m q| =
+        |(G.atomFamily η a z m q - G.atomRef η a m q) + G.atomRef η a m q| := by
+      rw [sub_add_cancel]
+    _ ≤ |G.atomFamily η a z m q - G.atomRef η a m q| + |G.atomRef η a m q| :=
+      abs_add_le _ _
+    _ ≤ 1 + C * E ^ C := add_le_add hdiff.le hreference
+    _ ≤ E ^ C + C * E ^ C := add_le_add_right (Real.one_le_rpow hE hC.le) _
+    _ = (1 + C) * E ^ C := by ring
+    _ ≤ B * E ^ B := hpack E hE
 
 end N04RealizationGauge
 end ContinuousFlexibility.Analysis
