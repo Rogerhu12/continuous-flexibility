@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegralsTransport
 import ContinuousFlexibility.Analysis.JointMixedTransportCalculus
 import ContinuousFlexibility.Analysis.ScalarTransportSystemBounds
+import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
 
 /-!
 # The actual transport equation for a centered first integral

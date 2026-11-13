@@ -112,10 +112,12 @@ theorem n04Realization_referenceObligation : N04RealizationReferenceObligation :
       by_cases hv : v = .auxiliaryColumn
       · subst v
         exact hauxReg m
-      · have heq := hsame v hv (C'.referenceState, 0) m
-        exact (congrArg (fun f : PolarPoint → ℝ =>
+      · have hf : atom W.D W.U S' C' L' V' (C'.referenceState, 0) m v =
+            atom W.D W.U W.S W.C W.L V (W.C.referenceState, 0) m v :=
+          hsame v hv (C'.referenceState, 0) m
+        exact Eq.mpr (congrArg (fun f : PolarPoint → ℝ =>
           ContDiffOn ℝ ∞ f unitStrip ∧
-            ∀ p ∈ unitStrip, f (p + (0, Real.pi)) = f p) heq).mpr
+            ∀ p ∈ unitStrip, f (p + (0, Real.pi)) = f p) hf)
           ⟨(hother0 m v hv).1, (hother0 m v hv).2.1⟩
     · intro s
       obtain ⟨B1, hB1, hrest⟩ := hjets s
@@ -133,10 +135,12 @@ theorem n04Realization_referenceObligation : N04RealizationReferenceObligation :
       by_cases hv : v = .auxiliaryColumn
       · subst v
         exact (haux m p hp a b hab).trans (hcost (le_max_right _ _))
-      · have heq := congrArg (fun f : PolarPoint → ℝ => |mixedDerivative a b f p|)
-          (hsame v hv (C'.referenceState, 0) m)
-        exact heq.trans_le
-          (((hrest m v hv).2.2 p hp a b hab).trans (hcost (le_max_left _ _)))
+      · have hf : atom W.D W.U S' C' L' V' (C'.referenceState, 0) m v =
+            atom W.D W.U W.S W.C W.L V (W.C.referenceState, 0) m v :=
+          hsame v hv (C'.referenceState, 0) m
+        exact (congrArg (fun f : PolarPoint → ℝ =>
+          |mixedDerivative a b f p|) hf).trans_le
+            (((hrest m v hv).2.2 p hp a b hab).trans (hcost (le_max_left _ _)))
   have hpos : ∀ m, 0 < W.T.E0 (W.T.sample (V.cell m)) := fun m =>
     zero_lt_one.trans_le (hE0 _)
   refine ⟨η, hS', referencePrincipal_replaceAuxiliaryColumn η

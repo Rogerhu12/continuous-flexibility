@@ -76,23 +76,14 @@ theorem n04NegativeChart_currentDeterminant_data
     h1₀ (hA₀.sourceColumns_mixedDerivative 0 1) hE hH
   have hCt := hA.sourceColumns_mixedDerivative hA₀ 1 0
   have hDt := hR.sourceColumns_mixedDerivative hR₀ 0 1
-  have hAB := hAt.sourceColumns_mul hD hT hε hE hI hBt hAr hBr
-  let b₁ : ℕ := hAB.choose
-  let ε₁ : ℝ := hAB.choose_spec.choose
-  have hb₁ : base ≤ b₁ := hAB.choose_spec.choose_spec.1
-  have hε₁ : 0 < ε₁ := hAB.choose_spec.choose_spec.2.1
-  have hε₁ε : ε₁ ≤ ε := hAB.choose_spec.choose_spec.2.2.1
+  obtain ⟨b₁, ε₁, hb₁, hε₁, hε₁ε, hAB⟩ :=
+    hAt.sourceColumns_mul hD hT hε hE hI hBt hAr hBr
   have hC₁ := hCt.mono (fun _ h => h) hb₁ hε₁ε hE₀ hH
   have hD₁ := hDt.mono (fun _ h => h) hb₁ hε₁ε hE₀ hH
-  have hCD := hC₁.sourceColumns_mul hD hT hε₁ hE hI hD₁ hCr hDr
-  let b₂ : ℕ := hCD.choose
-  let ε₂ : ℝ := hCD.choose_spec.choose
-  have hb₂ : b₁ ≤ b₂ := hCD.choose_spec.choose_spec.1
-  have hε₂ : 0 < ε₂ := hCD.choose_spec.choose_spec.2.1
-  have hε₂ε₁ : ε₂ ≤ ε₁ := hCD.choose_spec.choose_spec.2.2.1
-  have hAB₂ := hAB.choose_spec.choose_spec.2.2.2.mono
-    (fun _ h => h) hb₂ hε₂ε₁ hE₀ hH
-  have hsub := hAB₂.sourceColumns_sub hCD.choose_spec.choose_spec.2.2.2
+  obtain ⟨b₂, ε₂, hb₂, hε₂, hε₂ε₁, hCD⟩ :=
+    hC₁.sourceColumns_mul hD hT hε₁ hE hI hD₁ hCr hDr
+  have hAB₂ := hAB.mono (fun _ h => h) hb₂ hε₂ε₁ hE₀ hH
+  have hsub := hAB₂.sourceColumns_sub hCD
     (hAr.sourceColumns_mul hBr hE) (hCr.sourceColumns_mul hDr hE) hE hH
   exact ⟨b₂, ε₂, hb₁.trans hb₂, hε₂, hε₂ε₁.trans hε₁ε,
     hsub.sourceColumns_constMul hE hH c hc⟩

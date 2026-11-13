@@ -68,7 +68,7 @@ private theorem field_angle_eq_fderiv
     hF.comp (contDiff_const.prodMk contDiff_id)
   have hd := (hs.differentiable (by simp) q).hasFDerivAt.comp_hasDerivAt q.2
     ((hasDerivAt_const q.2 q.1).prodMk (hasDerivAt_id q.2))
-  simpa only [Function.comp_def, id_eq] using hd.deriv
+  simpa only [Function.comp_def, id_eq, Prod.zero_eq_mk] using hd.deriv
 
 private theorem field_angle_contDiff
     {F : ℝ × N04FlowPoint → ℝ} (hF : ContDiff ℝ ∞ F) (t : ℝ) :

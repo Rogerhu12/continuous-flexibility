@@ -66,6 +66,104 @@ private theorem composition_prod_erase_succAbove {n : ℕ}
   rw [prod_single_replacement f i 1, one_mul] at h
   simpa only [ite_true, Fin.succAbove_ne, ite_false, one_mul] using h
 
+private theorem composition_translated_deriv {f g : ℝ → ℝ} {t : ℝ}
+    (h : g = fun θ => f (θ + t)) (r : ℕ) (a : ℝ) :
+    iteratedDeriv r g a = iteratedDeriv r f (a + t) :=
+  (congrArg (fun u : ℝ → ℝ => iteratedDeriv r u a) h).trans
+    (congrFun (iteratedDeriv_comp_add_const r f t) a)
+
+private theorem composition_decode_add_sum
+    {E F : Type*} [AddCommGroup E] [Module ℝ E]
+    [AddCommGroup F] [Module ℝ F]
+    (L : E →ₗ[ℝ] F) {n : ℕ} (x : E) (v : Fin n → E) :
+    L (x + ∑ i, v i) = L x + ∑ i, L (v i) := by
+  rw [map_add, map_sum]
+
+private theorem composition_pair_slot_bound
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (q : ℕ → Seminorm ℝ E) (hq : Monotone q)
+    {a b : ℕ} (hab : a ≤ b) (x : E × E) :
+    q a x.1 ≤ pairGrading q q b x ∧ q a x.2 ≤ pairGrading q q b x := by
+  rw [pairGrading_apply]
+  exact ⟨(hq hab x.1).trans (le_add_of_nonneg_right (apply_nonneg _ _)),
+    (hq hab x.2).trans (le_add_of_nonneg_left (apply_nonneg _ _))⟩
+
+/-- The normalization argument is independent of every realization choice
+in the circle model. Keeping it abstract also keeps kernel checking small. -/
+private theorem composition_kernel_oneHigh
+    {E ι : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (q : ℕ → Seminorm ℝ E) (hq : Monotone q)
+    (K : ι → (r k : ℕ) → E → E → (Fin k → E) → E)
+    {base loss : ℕ}
+    (hb : ∀ r k s : ℕ, ∀ R : ℝ, 1 ≤ R →
+      ∃ C : ℝ, 0 ≤ C ∧ ∀ t e u v (A : ℝ), 0 ≤ A →
+      q base e ≤ R → q base u ≤ R → (∀ i : Fin k, q base (v i) ≤ R) →
+      1 + q (r + s + loss) e ≤ A → q (r + s + loss) u ≤ A →
+      (∀ i, q (r + s + loss) (v i) ≤ A) → q s (K t r k e u v) ≤ C * A)
+    (n : ℕ) (R : ℝ) (_hR : 0 ≤ R) (s : ℕ) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ t (jet : ∀ k, (E × E) [×k]→L[ℝ] E) (x : E × E),
+      (∀ v : Fin 0 → E × E, jet 0 v = K t 0 0 x.1 x.2 Fin.elim0) →
+      (∀ k (v : Fin (k + 1) → E × E), jet (k + 1) v =
+        K t (k + 1) (k + 1) x.1 x.2 (fun i => (v i).1) +
+          ∑ i : Fin (k + 1), K t k k x.1 (v i).2
+            (fun j => (v (i.succAbove j)).1)) →
+      pairGrading q q base x ≤ R → ∀ v : Fin n → E × E,
+        q s (jet n v) ≤ C * tameJetSize (pairGrading q q) n s (n + loss) base x v := by
+  classical
+  let p : ℕ → Seminorm ℝ (E × E) := pairGrading q q
+  let R' : ℝ := max R 1
+  have hR' : 1 ≤ R' := le_max_right _ _
+  obtain ⟨Cmain, hCmain, hmainBound⟩ := hb n n s R' hR'
+  obtain ⟨Ctail, hCtail, htailBound⟩ := hb (n - 1) (n - 1) s R' hR'
+  have hC : 0 ≤ Cmain + (n : ℝ) * Ctail := by positivity
+  refine ⟨Cmain + (n : ℝ) * Ctail, hC, fun t jet x hzero hsucc hxR => ?_⟩
+  apply multilinear_bound_of_unitBall (jet n) (q s)
+    (p base) (p (s + (n + loss))) hC
+  intro v hv
+  let A : ℝ := 1 + p (s + (n + loss)) x + ∑ i, p (s + (n + loss)) (v i)
+  have hA : 0 ≤ A := by dsimp [A]; positivity
+  have he : q base x.1 ≤ R' :=
+    ((composition_pair_slot_bound q hq le_rfl x).1).trans (hxR.trans (le_max_left _ _))
+  have hu : q base x.2 ≤ R' :=
+    ((composition_pair_slot_bound q hq le_rfl x).2).trans (hxR.trans (le_max_left _ _))
+  have hv1 (i : Fin n) : q base (v i).1 ≤ R' :=
+    ((composition_pair_slot_bound q hq le_rfl (v i)).1).trans ((hv i).le.trans hR')
+  have hv2 (i : Fin n) : q base (v i).2 ≤ R' :=
+    ((composition_pair_slot_bound q hq le_rfl (v i)).2).trans ((hv i).le.trans hR')
+  have hAe {j : ℕ} (hj : j ≤ s + (n + loss)) : 1 + q j x.1 ≤ A :=
+    (add_le_add le_rfl (composition_pair_slot_bound q hq hj x).1).trans
+      (le_add_of_nonneg_right (Finset.sum_nonneg (fun _ _ => apply_nonneg _ _)))
+  have hAu {j : ℕ} (hj : j ≤ s + (n + loss)) : q j x.2 ≤ A :=
+    ((composition_pair_slot_bound q hq hj x).2).trans
+      ((le_add_of_nonneg_left zero_le_one).trans
+        (le_add_of_nonneg_right (Finset.sum_nonneg (fun _ _ => apply_nonneg _ _))))
+  have hAv (i : Fin n) {j : ℕ} (hj : j ≤ s + (n + loss)) :
+      q j (v i).1 ≤ A ∧ q j (v i).2 ≤ A := by
+    have hs : p (s + (n + loss)) (v i) ≤ A :=
+      (Finset.single_le_sum (fun _ _ => apply_nonneg _ _) (Finset.mem_univ i)).trans
+        (le_add_of_nonneg_left (by positivity))
+    exact ⟨((composition_pair_slot_bound q hq hj (v i)).1).trans hs,
+      ((composition_pair_slot_bound q hq hj (v i)).2).trans hs⟩
+  have hmain := hmainBound t x.1 x.2 (fun i => (v i).1) A hA
+    he hu hv1 (hAe (by omega)) (hAu (by omega)) (fun i => (hAv i (by omega)).1)
+  cases n with
+  | zero =>
+      have hdirs : (fun i : Fin 0 => (v i).1) = Fin.elim0 := Subsingleton.elim _ _
+      rw [hzero v]
+      simpa only [Nat.cast_zero, zero_mul, add_zero, hdirs] using hmain
+  | succ n =>
+      have htail (i : Fin (n + 1)) :
+          q s (K t n n x.1 (v i).2 (fun j => (v (i.succAbove j)).1)) ≤ Ctail * A :=
+        htailBound t x.1 (v i).2 (fun j => (v (i.succAbove j)).1) A hA he (hv2 i)
+          (fun j => hv1 (i.succAbove j)) (hAe (by omega))
+          (hAv i (by omega)).2 (fun j => (hAv (i.succAbove j) (by omega)).1)
+      rw [hsucc n v]
+      apply (map_add_le_add (q s) _ _).trans
+      apply (add_le_add hmain ((composition_seminorm_sum_bound _ _ _).trans
+        (Finset.sum_le_sum (fun i _ => htail i)))).trans_eq
+      simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
+      ring
+
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : CircleModelData}
   (hH : IsCircleModel T γ H) (hT : IsMaterialData D T)
   (hD : IsAccumulatingProfile D) (hγ : 0 < γ) (hI : HasInterpolation H.grading)
@@ -82,15 +180,10 @@ private theorem shiftedCompositionKernel_decode (travel : ℕ → ℝ) (r k : �
         ∏ j, H.decode (v j) m θ := by
   have hk := coupledCircleKernel_decode_apply hD hT hγ hH hI r k e
     (circleTranslationContinuousLinear hH hT hD hγ travel u) v m θ
-  have ht := congrFun
+  have ht : H.decode (circleTranslationContinuousLinear hH hT hD hγ travel u) m =
+      fun a => H.decode u m (a + travel m) := congrFun
     (circleTranslationContinuousLinear_decode hH hT hD hγ travel u) m
-  have hj :
-      iteratedDeriv r
-          (H.decode (circleTranslationContinuousLinear hH hT hD hγ travel u) m)
-          (θ + H.decode e m θ) =
-        iteratedDeriv r (H.decode u m) ((θ + H.decode e m θ) + travel m) := by
-    rw [ht]
-    exact congrFun (iteratedDeriv_comp_add_const r (H.decode u m) (travel m)) _
+  have hj := composition_translated_deriv ht r (θ + H.decode e m θ)
   have heq : (θ + H.decode e m θ) + travel m = θ + travel m + H.decode e m θ := by ring
   exact hk.trans (congrArg (fun a => a * ∏ j, H.decode (v j) m θ)
     (hj.trans (congrArg (iteratedDeriv r (H.decode u m)) heq)))
@@ -116,7 +209,7 @@ private theorem fullCompositionJet_zero_kernel
     (x : H.Space × H.Space) (hx : x ∈ U) (v : Fin 0 → H.Space × H.Space) :
     J.D 0 x v = shiftedCompositionKernel hH hT hD hγ hI travel 0 0 x.1 x.2 Fin.elim0 := by
   apply hH.2.2.2.2.2.1
-  rw [fullCompositionJet_decode hH hT hD hγ hI travel J 0 x hx v]
+  refine (fullCompositionJet_decode hH hT hD hγ hI travel J 0 x hx v).trans ?_
   funext m θ
   simp only [circleChartCompositionJets_apply, shiftedCompositionKernel_decode,
     circleCompositionPhase, Fin.prod_univ_zero, Fin.sum_univ_zero, mul_one, add_zero]
@@ -133,8 +226,12 @@ private theorem fullCompositionJet_succ_kernels
       ∑ i : Fin (n + 1), shiftedCompositionKernel hH hT hD hγ hI travel n n x.1
         (v i).2 (fun j => (v (i.succAbove j)).1) := by
   apply hH.2.2.2.2.2.1
-  rw [fullCompositionJet_decode hH hT hD hγ hI travel J (n + 1) x hx v,
-    map_add, map_sum]
+  refine (fullCompositionJet_decode hH hT hD hγ hI travel J (n + 1) x hx v).trans ?_
+  refine Eq.trans ?_ (composition_decode_add_sum H.decode
+    (shiftedCompositionKernel hH hT hD hγ hI travel (n + 1) (n + 1) x.1 x.2
+      (fun i => (v i).1))
+    (fun i : Fin (n + 1) => shiftedCompositionKernel hH hT hD hγ hI travel n n
+      x.1 (v i).2 (fun j => (v (i.succAbove j)).1))).symm
   funext m θ
   simp only [Pi.add_apply, Pi.sum_apply, circleChartCompositionJets_apply,
     shiftedCompositionKernel_decode, circleCompositionPhase, Nat.add_sub_cancel]
@@ -152,16 +249,12 @@ private theorem shiftedCompositionKernel_uniform_affine_bound :
       H.grading (r + s + loss) u ≤ A →
       (∀ i, H.grading (r + s + loss) (v i) ≤ A) →
       H.grading s (shiftedCompositionKernel hH hT hD hγ hI travel r k e u v) ≤ C * A := by
-  let data := coupled_circle_kernel_grading_bounds hD hT hγ hH hI
-  let base : ℕ := data.choose
-  let loss : ℕ := data.choose_spec.choose
+  obtain ⟨base, loss, hkernel⟩ := coupled_circle_kernel_grading_bounds hD hT hγ hH hI
   refine ⟨base, loss, fun r k s R hR => ?_⟩
-  let estimate := data.choose_spec.choose_spec r k s R hR
-  let C : ℝ := estimate.choose
-  have hC : 0 ≤ C := estimate.choose_spec.1
+  obtain ⟨C, hC, hbound⟩ := hkernel r k s R hR
   refine ⟨C * (((k + 1 : ℕ) : ℝ) + 1) * R ^ (k + 1), by positivity,
     fun travel e u v A hA he hu hv hAe hAu hAv => ?_⟩
-  let τ := circleTranslationContinuousLinear hH hT hD hγ travel
+  let τ : H.Space →L[ℝ] H.Space := circleTranslationContinuousLinear hH hT hD hγ travel
   have hlow (i : Fin (k + 1)) :
       H.grading base ((Fin.cons (τ u) v : Fin (k + 1) → H.Space) i) ≤ R := by
     refine Fin.cases ?_ hv i
@@ -174,7 +267,7 @@ private theorem shiftedCompositionKernel_uniform_affine_bound :
   have hb := composition_majorant_on_low_ball (H.grading base)
     (H.grading (r + s + loss)) (Fin.cons (τ u) v)
     (by positivity) hA hAe hR hlow hhigh
-  exact (estimate.choose_spec.2 e he (τ u) v).trans
+  exact (hbound e he (τ u) v).trans
     ((mul_le_mul_of_nonneg_left hb hC).trans_eq (by ring))
 
 include hI in
@@ -190,69 +283,15 @@ theorem n04NegativeChart_circleComposition_fixedBase_oneHigh :
       ∀ v : Fin n → H.Space × H.Space,
         H.grading s (J.D n x v) ≤
           C * tameJetSize (pairGrading H.grading H.grading) n s (n + loss) base x v := by
-  classical
-  let data := shiftedCompositionKernel_uniform_affine_bound hH hT hD hγ hI
-  let base : ℕ := data.choose
-  let loss : ℕ := data.choose_spec.choose
-  have hb := data.choose_spec.choose_spec
-  let p := pairGrading H.grading H.grading
+  obtain ⟨base, loss, hb⟩ := shiftedCompositionKernel_uniform_affine_bound hH hT hD hγ hI
   refine ⟨base, loss, fun n R hR s => ?_⟩
-  let R' : ℝ := max R 1
-  have hR' : 1 ≤ R' := le_max_right _ _
-  let main := hb n n s R' hR'
-  let tail := hb (n - 1) (n - 1) s R' hR'
-  let C : ℝ := main.choose + (n : ℝ) * tail.choose
-  have hC : 0 ≤ C := add_nonneg main.choose_spec.1
-    (mul_nonneg (Nat.cast_nonneg _) tail.choose_spec.1)
+  obtain ⟨C, hC, hbound⟩ := composition_kernel_oneHigh H.grading
+    (gradedSeminorm_monotone (fun j => H.level j) H.bond)
+    (shiftedCompositionKernel hH hT hD hγ hI) hb n R hR s
   refine ⟨C, hC, fun travel U J x hx hxR => ?_⟩
-  apply multilinear_bound_of_unitBall (J.D n x) (H.grading s)
-    (p base) (p (s + (n + loss))) hC
-  intro v hv
-  let A : ℝ := 1 + p (s + (n + loss)) x + ∑ i, p (s + (n + loss)) (v i)
-  have hA : 0 ≤ A := by dsimp [A]; positivity
-  have he : H.grading base x.1 ≤ R' :=
-    (circleGrading_fst_le_pair le_rfl x).trans (hxR.trans (le_max_left _ _))
-  have hu : H.grading base x.2 ≤ R' :=
-    (circleGrading_snd_le_pair le_rfl x).trans (hxR.trans (le_max_left _ _))
-  have hv1 (i : Fin n) : H.grading base (v i).1 ≤ R' :=
-    (circleGrading_fst_le_pair le_rfl (v i)).trans ((hv i).le.trans hR')
-  have hv2 (i : Fin n) : H.grading base (v i).2 ≤ R' :=
-    (circleGrading_snd_le_pair le_rfl (v i)).trans ((hv i).le.trans hR')
-  have hAe {t : ℕ} (ht : t ≤ s + (n + loss)) : 1 + H.grading t x.1 ≤ A :=
-    (add_le_add le_rfl (circleGrading_fst_le_pair ht x)).trans
-      (le_add_of_nonneg_right (Finset.sum_nonneg (fun _ _ => apply_nonneg _ _)))
-  have hAu {t : ℕ} (ht : t ≤ s + (n + loss)) : H.grading t x.2 ≤ A :=
-    (circleGrading_snd_le_pair ht x).trans ((le_add_of_nonneg_left zero_le_one).trans
-      (le_add_of_nonneg_right (Finset.sum_nonneg (fun _ _ => apply_nonneg _ _))))
-  have hAv (i : Fin n) {t : ℕ} (ht : t ≤ s + (n + loss)) :
-      H.grading t (v i).1 ≤ A ∧ H.grading t (v i).2 ≤ A := by
-    have hs : p (s + (n + loss)) (v i) ≤ A :=
-      (Finset.single_le_sum (fun _ _ => apply_nonneg _ _) (Finset.mem_univ i)).trans
-        (le_add_of_nonneg_left (by positivity))
-    exact ⟨(circleGrading_fst_le_pair ht (v i)).trans hs,
-      (circleGrading_snd_le_pair ht (v i)).trans hs⟩
-  have hmain := main.choose_spec.2 travel x.1 x.2 (fun i => (v i).1) A hA
-    he hu hv1 (hAe (by omega)) (hAu (by omega)) (fun i => (hAv i (by omega)).1)
-  cases n with
-  | zero =>
-      rw [fullCompositionJet_zero_kernel hH hT hD hγ hI travel J x hx v]
-      have hdirs : (fun i : Fin 0 => (v i).1) = Fin.elim0 := Subsingleton.elim _ _
-      simpa only [C, Nat.cast_zero, zero_mul, add_zero, hdirs] using hmain
-  | succ n =>
-      have htail (i : Fin (n + 1)) :
-          H.grading s (shiftedCompositionKernel hH hT hD hγ hI travel n n x.1
-            (v i).2 (fun j => (v (i.succAbove j)).1)) ≤ tail.choose * A := by
-        exact tail.choose_spec.2 travel x.1 (v i).2
-          (fun j => (v (i.succAbove j)).1) A hA he (hv2 i)
-          (fun j => hv1 (i.succAbove j)) (hAe (by omega))
-          (hAv i (by omega)).2 (fun j => (hAv (i.succAbove j) (by omega)).1)
-      rw [fullCompositionJet_succ_kernels hH hT hD hγ hI travel J n x hx v]
-      apply (map_add_le_add (H.grading s) _ _).trans
-      apply (add_le_add hmain ((composition_seminorm_sum_bound _ _ _).trans
-        (Finset.sum_le_sum (fun i _ => htail i)))).trans_eq
-      simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
-      dsimp only [C]
-      ring
+  exact hbound travel (fun k => J.D k x) x
+    (fullCompositionJet_zero_kernel hH hT hD hγ hI travel J x hx)
+    (fun k => fullCompositionJet_succ_kernels hH hT hD hγ hI travel J k x hx) hxR
 
 /-- info: 'ContinuousFlexibility.Statements.n04NegativeChart_circleComposition_fixedBase_oneHigh'
 depends on axioms: [propext, Classical.choice, Quot.sound] -/

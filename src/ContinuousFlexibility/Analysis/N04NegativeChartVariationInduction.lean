@@ -1,7 +1,7 @@
 import ContinuousFlexibility.Analysis.N04NegativeChartVariationSelection
 
 /-!
-# All positive state orders of the actual flow on one fixed domain
+# Every finite state prefix of the actual flow on one fixed domain
 
 The induction changes only the additive state-order spatial loss and
 the ordinary material polynomial. The input domain, the family of actual
@@ -42,11 +42,11 @@ private theorem material_coefficient_mono {A C C' : ℝ} {e e' : ℕ}
   mul_le_mul hCC' (pow_le_pow_right₀ hA hee')
     (pow_nonneg (zero_le_one.trans hA) _) (hC.trans hCC')
 
-/-- Genuine strong induction in state order. The assumed head bounds
+/-- Genuine strong induction on a fixed finite state prefix. The head bounds
 refer only to derivatives of the original speed along the state-free
 spatial flow. All positive state derivatives of that flow are proved
 here by their actual ODE and its strict-lower finite forcing expansion. -/
-theorem n04NegativeChart_actualVariation_all_orders
+theorem n04NegativeChart_actualVariation_all_orders (N : ℕ)
     (G Θ : I → E × PolarPoint → ℝ)
     (hG : ∀ i, ContDiff ℝ ∞ (G i))
     (J : ∀ i, ContinuousTimeSpeedTower (univ : Set E) (G i))
@@ -71,25 +71,26 @@ theorem n04NegativeChart_actualVariation_all_orders
         ‖iteratedFDeriv ℝ j (fun y : Q =>
           flowVariationCoefficient (G i) (Θ i) (γ i y) (t, α i y)) (x i)‖ ≤
             C * A i ^ e * ρ K i ^ j)
-    (hhead : ∀ n : ℕ, 0 < n → ∃ D : ℕ, ∀ K : ℕ,
+    (hhead : ∀ n : ℕ, n ≤ N → 0 < n → ∃ D : ℕ, ∀ K : ℕ,
       ∃ C : ℝ, ∃ e : ℕ, 1 ≤ C ∧ ∀ i (v : Fin n → E), admissible n i v →
         ∀ t ∈ Icc (0 : ℝ) 1, ∀ d : FlowForcingChoice n, ∀ j, j ≤ K →
           ‖iteratedFDeriv ℝ j (fun y : Q =>
             canonicalFlowForcingFactors (J i) (hΘ i) (γ i y) v t d 0 (α i y)) (x i)‖ ≤
               parameterHeightWeight (H i) d.2.card *
                 (C * A i ^ e) * ρ K i ^ (D + j)) :
-    ∀ n : ℕ, ∃ D : ℕ,
+    ∀ n : ℕ, n ≤ N → ∃ D : ℕ,
       NegativeChartPositiveVariationOrderBounds Θ γ α x H A ρ admissible n D := by
   classical
   intro n
   induction n using Nat.strong_induction_on with
   | h n ih =>
+    intro hnN
     by_cases hn0 : n = 0
     · subst n
       exact ⟨0, fun K => ⟨1, 0, le_rfl, by omega⟩⟩
     have hn : 0 < n := Nat.pos_of_ne_zero hn0
-    obtain ⟨D₀, hheads⟩ := hhead n hn
-    choose d hd using (fun m : Fin n => ih m m.isLt)
+    obtain ⟨D₀, hheads⟩ := hhead n hnN hn
+    choose d hd using (fun m : Fin n => ih m m.isLt (m.isLt.le.trans hnN))
     let D : ℕ := D₀ + ∑ m : Fin n, d m
     have hD₀ : D₀ ≤ D := Nat.le_add_right _ _
     have hdD (m : Fin n) : d m ≤ D :=

@@ -23,6 +23,26 @@ variable {E Q : Type} [NormedAddCommGroup E] [NormedSpace ℝ E]
   [FiniteDimensional ℝ E] [NormedAddCommGroup Q] [NormedSpace ℝ Q]
   [FiniteDimensional ℝ Q]
 
+private theorem actualVariation_hasDerivAt
+    {G Θ : E × PolarPoint → ℝ}
+    (hG : ContDiff ℝ ∞ G) (J : ContinuousTimeSpeedTower (univ : Set E) G)
+    (hΘ : ContDiff ℝ ∞ Θ)
+    (hinit : ∀ q α, Θ (q, (0, α)) = α)
+    (hflow : ∀ q t α, HasDerivAt (fun r => Θ (q, (r, α)))
+      (G (q, (t, Θ (q, (t, α))))) t)
+    {n : ℕ} (hn : 0 < n) (q : E) (t α : ℝ) (v : Fin n → E) :
+    HasDerivAt (fun r => flowParameterField Θ n q v (r, α))
+      (flowVariationCoefficient G Θ q (t, α) * flowParameterField Θ n q v (t, α) +
+        flowVariationForcing J hΘ n q v (t, α)) t := by
+  have hd := globalCircleVectorTrajectory_hasDerivAt_parameterJet_time hG
+    (contDiff_flowInitialSlice hΘ α).continuous
+    (fun z => hinit z α) (fun z r => hflow z r α) n q t v
+  change HasDerivAt (fun r => flowParameterField Θ n q v (r, α))
+    (flowParameterField (fun z => G (z.1, (z.2.1, Θ z))) n q v (t, α)) t at hd
+  apply hd.congr_deriv
+  rw [flowVariationForcing_eq_source_sub hG J hΘ hn]
+  ring
+
 /-- This is the genuine state-order induction step. The forcing factors
 contain only original speed derivatives and strictly lower state
 variations; the current unknown is not among the bounded factors.
@@ -86,16 +106,8 @@ theorem n04NegativeChart_actualVariation_weighted_step (n K : ℕ) (hn : 0 < n) 
     | succ n => simp only [iteratedFDeriv_succ_const, Pi.zero_apply,
         ContinuousMultilinearMap.zero_apply]
   have hderiv (y : Q) (t : ℝ) (_ht : t ∈ Ioo (0 : ℝ) 1) :
-      HasDerivAt (w y) (κ (y, t) * w y t + F (y, t)) t := by
-    have hd := globalCircleVectorTrajectory_parameterJet_linearODE J hG
-      (contDiff_flowInitialSlice hΘ (α y)).continuous
-      (fun z => hinit z (α y)) (fun z r => hflow z r (α y)) hn (γ y) t v
-    change HasDerivAt (fun r => flowParameterField Θ n (γ y) v (r, α y))
-      (speedAlongFlowAngularJet J (flowInitialSlice Θ (α y)) (γ y, t) *
-        flowParameterField Θ n (γ y) v (t, α y) +
-        flowVariationForcing J hΘ n (γ y) v (t, α y)) t at hd
-    simpa only [speedAlongFlowAngularJet_eq_coefficient (Θ := Θ) hG J (γ y) (t, α y),
-      w, κ, F] using hd
+      HasDerivAt (w y) (κ (y, t) * w y t + F (y, t)) t :=
+    actualVariation_hasDerivAt hG J hΘ hinit hflow hn (γ y) t (α y) v
   let M₁ : ℝ := C₀ * M ^ (n + 1)
   let W₁ : ℝ := W * ρ ^ (D * (n + 1))
   have hM₁ : 1 ≤ M₁ := one_le_mul_of_one_le_of_one_le hC₀ (one_le_pow₀ hM)

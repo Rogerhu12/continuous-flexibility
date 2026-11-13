@@ -56,7 +56,8 @@ theorem CurrentJetDataOn.sourceColumns_congr
         mixedDerivative i j (fun y => g z m y - g₀ m y) q.val :=
     n07a_mixedDerivative_eqOn hU
       (fun _ hy => congrArg₂ (· - ·) (he z hz m hy) (he₀ m hy)) i j q.property
-  refine ⟨?_, fun m _ i j q => (hf.2.choose m trivial i j q).congr (fun z hz => heJ z hz m i j q),
+  refine ⟨?_, fun m _ i j q => (hf.2.choose m trivial i j q).congr
+    (fun z hz => heJ z hz m i j q),
     ?_, ?_⟩
   · intro z hz m _
     refine ⟨(hf.1 z hz m trivial).1.congr (fun _ hq => (he z hz m hq).symm), ?_⟩

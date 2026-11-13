@@ -145,8 +145,8 @@ theorem stateSquare_material_jets (n : ℕ) :
         |stateKappa W.S z.1 m * iteratedDeriv n (F.control m side) t| := abs_sub _ _
     _ ≤ Cr n * E ^ (Cr n) + Cd * M * Q := add_le_add href hdir
     _ ≤ Cr n * E ^ (Cr n) + (Cd * M * Q) * E ^ (Cr n) :=
-      add_le_add_left (le_mul_of_one_le_right (mul_pos (mul_pos hCd hM) hQ).le
-        (Real.one_le_rpow hE (hCr n).le)) _
+      add_le_add le_rfl (le_mul_of_one_le_right (mul_pos (mul_pos hCd hM) hQ).le
+        (Real.one_le_rpow hE (hCr n).le))
     _ = _ := by ring
 
 end ContinuousFlexibility.Analysis.N04RealizationStart.NegativeOpticalFactors

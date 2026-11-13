@@ -24,6 +24,35 @@ private theorem inverseOperator_restrict_jet_eq
   congrArg (fun A : E [×n]→L[ℝ] F => A v)
     (K.unique (smoothDirectionsRestrict J hU hUV) n x hx)
 
+/-- Restriction and enlargement of the low box are independent of the
+concrete projective-limit circle model. Keeping this step abstract also
+prevents elaboration from repeatedly expanding that model's operations. -/
+private theorem inverseOperator_fixedBase_restrict
+    {I E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F] [T2Space F]
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F)
+    {U V : Set E} {f : I → E → F} (hU : IsOpen U) (hUV : U ⊆ V)
+    (JP : ∀ i, SmoothDirections V (f i)) (A : I → E → Prop)
+    (hA : ∀ i x, x ∈ U → A i x)
+    (hbound : ∃ B : ℕ, ∀ n : ℕ, ∃ L : ℕ, ∀ R : ℝ, 1 ≤ R → ∀ s : ℕ,
+      ∃ C : ℝ, 0 ≤ C ∧ ∀ i (J : SmoothDirections V (f i)) x,
+        A i x → p B x ≤ R → ∀ v : Fin n → E,
+          q s (J.D n x v) ≤ C * tameJetSize p n s L B x v) :
+    ∃ B : ℕ, ∀ n : ℕ, ∃ L : ℕ, ∀ R : ℝ, 0 ≤ R → ∀ s : ℕ,
+      ∃ C : ℝ, 0 ≤ C ∧ ∀ i (K : SmoothDirections U (f i)) x,
+        x ∈ U → p B x ≤ R → ∀ v : Fin n → E,
+          q s (K.D n x v) ≤ C * tameJetSize p n s L B x v := by
+  obtain ⟨B, hB⟩ := hbound
+  refine ⟨B, fun n => ?_⟩
+  obtain ⟨L, hL⟩ := hB n
+  refine ⟨L, fun R _ s => ?_⟩
+  obtain ⟨C, hC, hCs⟩ := hL (max R 1) (le_max_right _ _) s
+  refine ⟨C, hC, fun i K x hx hlow v => ?_⟩
+  have he := inverseOperator_restrict_jet_eq hU hUV (JP i) K n x hx v
+  exact (congrArg (q s) he).trans_le
+    (hCs i (JP i) x (hA i x hx) (hlow.trans (le_max_left _ _)) v)
+
 theorem n04NegativeGeometry_inverseOperator_fixedBase
     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : CircleModelData}
     (hH : IsCircleModel T γ H) (hT : IsMaterialData D T)
@@ -45,26 +74,19 @@ theorem n04NegativeGeometry_inverseOperator_fixedBase
       ∀ v : Fin n → H.Space × H.Space,
         H.grading s (K.D n y v) ≤
           C * tameJetSize (pairGrading H.grading H.grading) n s L B y v := by
-  obtain ⟨B, hB⟩ := circlePositiveInverseComposeLinear_fixedBase_oneHigh
-    (M := H) hD hT hγ hH hi JF (JP (fun _ => 0)) (a / 2) (half_pos ha)
-  refine ⟨B, fun n => ?_⟩
-  obtain ⟨L, hL⟩ := hB n
-  refine ⟨L, fun R _hR s => ?_⟩
-  obtain ⟨C, hC, hbound⟩ := hL (max R 1) (le_max_right _ _) s
-  refine ⟨C, hC, fun travel K y hy hlow v => ?_⟩
-  have hlower (m : ℕ) (θ : ℝ) :
-      a / 2 ≤ deriv (circleAffineLift travel (H.decode y.1) 1 m) θ := by
-    rw [circleAffineLift_deriv hH]
-    exact interior_subset hy.1 m θ
   have hsub : circleUniformInverseDomain H a ×ˢ (univ : Set H.Space) ⊆
       circlePositiveLiftDomain H ×ˢ univ :=
     fun y hy => ⟨circleUniformInverseDomain_subset_positive ha hy.1, hy.2⟩
-  have heq : K.D n y v = (JP travel).D n y v :=
-    inverseOperator_restrict_jet_eq
-      ((circleUniformInverseDomain_isOpen H a).prod isOpen_univ) hsub
-      (JP travel) K n y hy v
-  exact (congrArg (H.grading s) heq).trans_le (hbound travel (JP travel) y hlower
-    (hlow.trans (le_max_left _ _)) v)
+  apply inverseOperator_fixedBase_restrict
+    (pairGrading H.grading H.grading) H.grading
+    ((circleUniformInverseDomain_isOpen H a).prod isOpen_univ) hsub JP
+    (fun travel y => ∀ m θ,
+      a / 2 ≤ deriv (circleAffineLift travel (H.decode y.1) 1 m) θ)
+  · intro travel y hy m θ
+    rw [circleAffineLift_deriv hH]
+    exact interior_subset hy.1 m θ
+  · exact circlePositiveInverseComposeLinear_fixedBase_oneHigh
+      hD hT hγ hH hi JF (JP (fun _ => 0)) (a / 2) (half_pos ha)
 
 
 end ContinuousFlexibility.Statements

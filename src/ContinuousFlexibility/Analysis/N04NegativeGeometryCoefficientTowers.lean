@@ -21,6 +21,14 @@ open scoped ContDiff
 
 variable (W : N04RealizationStart)
 
+private def addScalarTowersCongr
+    {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+    [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
+    {U : Set X} {f g h : X → ℝ}
+    (Jf : SmoothDirections U f) (Jg : SmoothDirections U g)
+    (he : ∀ x ∈ U, f x + g x = h x) : SmoothDirections U h :=
+  (smoothDirectionsAdd Jf Jg).congrOn he
+
 theorem negativeOriginalDiscriminant_pos (m : ℕ)
     {z : StateDirections W.S × ℝ}
     (hz : z ∈ sectorNeighborhood W.S W.base W.ε W.ε)
@@ -81,13 +89,19 @@ def negativeOriginalMinusJointTower (m : ℕ) :
       ((((contDiffAt_snd.fst.pow 2).sub
         (contDiffAt_fst.mul contDiffAt_snd.snd)).sqrt hq.2.ne').div
           contDiffAt_fst hq.1.ne')).contDiffWithinAt
-  apply ((smoothDirectionsProd (J 0) (smoothDirectionsProd (J 1) (J 2))).comp_contDiff
-    hV hkernel (fun x hx => ?_)).congrOn
-  · simpa only [originalCoefficientEntry, ↓reduceIte] using
+  have hmap : ∀ x ∈ sectorNeighborhood W.S W.base W.ε W.ε ×ˢ
+      (Ioo (W.C.left m) (W.C.right m) ×ˢ (univ : Set ℝ)),
+      (originalCoefficientEntry W.D W.S W.C 0 (liftSectorParameter W.S W.C x.1) x.2,
+        originalCoefficientEntry W.D W.S W.C 1 (liftSectorParameter W.S W.C x.1) x.2,
+        originalCoefficientEntry W.D W.S W.C 2 (liftSectorParameter W.S W.C x.1) x.2) ∈ V := by
+    intro x hx
+    simpa only [originalCoefficientEntry, ↓reduceIte] using
       And.intro (W.negativeOriginalRadial_pos m hx.1 hx.2)
         (W.negativeOriginalDiscriminant_pos m hx.1 hx.2.1)
-  · intro x hx
-    simp only [originalCoefficientEntry, ↓reduceIte, minusCharacteristicSpeed]
+  apply ((smoothDirectionsProd (J 0) (smoothDirectionsProd (J 1) (J 2))).comp_contDiff
+    hV hkernel hmap).congrOn
+  intro x hx
+  simp only [originalCoefficientEntry, ↓reduceIte, minusCharacteristicSpeed]
 
 /-- The actual residual velocity has the same full-component domain as
 the chart; its construction uses no chart estimate. -/
@@ -124,21 +138,31 @@ theorem negativeMinus_eq_corrected (m : ℕ)
       (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
       (W.through03.1.1.2.2.1.liftSectorParameter_sector z) m p.1 hp.1 p.2).2
 
+private theorem negativeMinus_sum_identity (m : ℕ)
+    (x : (StateDirections W.S × ℝ) × PolarPoint)
+    (hx : x ∈ sectorNeighborhood W.S W.base W.ε W.ε ×ˢ
+      (Ioo (W.C.left m) (W.C.right m) ×ˢ (univ : Set ℝ))) :
+    minusCharacteristicSpeed
+        (originalCoefficients W.D W.S W.C (liftSectorParameter W.S W.C x.1)) x.2 +
+      returnCorrectionVelocityLinear W.D W.S W.C W.cutoff.cutoff
+        (liftSectorParameter W.S W.C x.1) m x.2
+        (W.R.residual (liftSectorParameter W.S W.C x.1)) =
+      minusCharacteristicSpeed (W.L.coefficients (liftSectorParameter W.S W.C x.1)) x.2 := by
+  rw [W.negativeMinus_eq_corrected m hx.1 hx.2,
+    returnCorrectionVelocityLinear_at_actual W.through03.1.1 W.through03.1.2
+      W.cutoff.cutoff (liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl)
+      (W.through03.1.1.2.2.1.liftSectorParameter_sector x.1)]
+  ring
+
 /-- The literal corrected characteristic speed has a joint tower. -/
 def negativeMinusJointTower (m : ℕ) :
     SmoothDirections
       (sectorNeighborhood W.S W.base W.ε W.ε ×ˢ
         (Ioo (W.C.left m) (W.C.right m) ×ˢ univ))
       (fun x : (StateDirections W.S × ℝ) × PolarPoint =>
-        minusCharacteristicSpeed (W.L.coefficients (liftSectorParameter W.S W.C x.1)) x.2) := by
-  apply (smoothDirectionsAdd (W.negativeOriginalMinusJointTower m)
-    (W.negativeCorrectionVelocityJointTower m)).congrOn
-  intro x hx
-  rw [W.negativeMinus_eq_corrected m hx.1 hx.2,
-    returnCorrectionVelocityLinear_at_actual W.through03.1.1 W.through03.1.2
-      W.cutoff.cutoff (liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl)
-      (W.through03.1.1.2.2.1.liftSectorParameter_sector x.1)]
-  ring
+        minusCharacteristicSpeed (W.L.coefficients (liftSectorParameter W.S W.C x.1)) x.2) :=
+  addScalarTowersCongr (W.negativeOriginalMinusJointTower m)
+    (W.negativeCorrectionVelocityJointTower m) (W.negativeMinus_sum_identity m)
 
 /-- Reflection of the actual minus speed recovers the actual positive
 half-gap, as a function on the same complete physical component. -/

@@ -64,7 +64,7 @@ theorem n04NegativeGeometry_spatialDifferential_continuousOn
     ContinuousOn (n04NegativeGeometry_spatialDifferential J) (U ×ˢ V) := by
   apply continuousOn_clm_apply.mpr
   intro y
-  simpa only [n04NegativeGeometry_spatialDifferential_apply] using
+  simpa only [n04NegativeGeometry_spatialDifferential_apply, Function.comp_def, id_eq] using
     (J.continuous 1).comp
       (continuous_id.prodMk continuous_const).continuousOn
       (fun _ hz => ⟨hz, mem_univ (fun _ : Fin 1 => ((0 : E), y))⟩)
@@ -112,9 +112,14 @@ private theorem inverse_contDiffAt_jointAffine
     contDiffAt_id.prodMk (contDiffAt_const.add Ly.contDiff.contDiffAt)
   have hp0 : (fun q : Fin m → ℝ => (q, z.2 + Ly q)) 0 = (0, z.2) := by
     simp only [map_zero, add_zero]
+  have hlocal : ContDiffAt ℝ ∞
+      (fun p : (Fin m → ℝ) × PolarPoint => G (z.1 + Lp p.1, p.2))
+      ((fun q : Fin m → ℝ => (q, z.2 + Ly q)) 0) :=
+    hp0.symm ▸ hs.contDiffAt (hO.mem_nhds h0)
+  have hcomposed := hlocal.comp (0 : Fin m → ℝ) hpath
   have hc : ContDiffAt ℝ ∞
-      (fun q : Fin m → ℝ => G (z.1 + Lp q, z.2 + Ly q)) 0 :=
-    ((hp0.symm ▸ hs.contDiffAt (hO.mem_nhds h0))).comp 0 hpath
+      (fun q : Fin m → ℝ => G (z.1 + Lp q, z.2 + Ly q)) 0 := by
+    simpa only [Function.comp_def] using hcomposed
   have heq : (fun q : Fin m → ℝ => G (z.1 + Lp q, z.2 + Ly q)) =
       (fun q => G (z + L q)) := by
     funext q
@@ -169,8 +174,10 @@ def n04NegativeGeometry_parameterized_planar_inverse_jointTower
       n04NegativeGeometry_spatialDifferential JH (z, G z) = D z := by
     change n04NegativeGeometry_spatialDifferential JH (z, G z) =
       n04NegativeGeometry_spatialDifferential J (z.1, G z)
-    rw [n04NegativeGeometry_spatialDifferential_eq_fderiv JH ⟨hz, hMaps hz⟩]
-    rw [n04NegativeGeometry_spatialDifferential_eq_fderiv J ⟨hz.1, hMaps hz⟩]
+    rw [n04NegativeGeometry_spatialDifferential_eq_fderiv JH
+      (z := (z, G z)) ⟨hz, hMaps hz⟩]
+    rw [n04NegativeGeometry_spatialDifferential_eq_fderiv J
+      (z := (z.1, G z)) ⟨hz.1, hMaps hz⟩]
     exact fderiv_sub_const z.2
   apply n04NegativeGeometry_implicitSmoothDirections JH (hU.prod hW)
     hG hMaps A hA
