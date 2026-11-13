@@ -54,11 +54,11 @@ private theorem endpointUnitPower_oneHigh
           (Real.rpow_nonneg (zero_le_one.trans (hE m q hq)) _)
       have hh0 : ‖J.D 0 x v‖ ≤
           C * E m q ^ A * R ^ (((a + b : ℕ) : ℝ) / ((s : ℝ) + 1)) := by
-        simpa only [one_pow, one_mul, parameterHeightWeight, if_pos rfl, mul_one] using hh
+        simpa only [one_pow, one_mul, parameterHeightWeight, ↓reduceIte, mul_one] using hh
       have hh' : ‖J.D 0 x v‖ ≤ C * E m q ^ A * R :=
         hh0.trans (mul_le_mul_of_nonneg_left
           (Real.rpow_le_self_of_one_le hR (spatialOrder_fraction_le_one hab)) hM)
-      simpa only [parameterHeightWeight, if_pos rfl, mul_one,
+      simpa only [parameterHeightWeight, ↓reduceIte, mul_one,
         oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero, add_zero, R] using hh'
     · obtain ⟨C, A, hC, hA, hb⟩ := hf.positive_oneHigh
         (fun _ _ _ => zero_le_one) hH hE k s

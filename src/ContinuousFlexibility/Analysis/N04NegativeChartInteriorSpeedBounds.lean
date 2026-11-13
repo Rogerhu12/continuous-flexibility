@@ -53,8 +53,9 @@ theorem negativeInteriorRadius_distance (ρ : ℕ → Bool → ℝ)
     cases side <;> simp only [negativeOpticalWidth, n04bNegativeRight, n04bNegativeLeft,
       inwardComponentPoint, Bool.false_eq_true, ↓reduceIte] at hx hl hr ⊢
       <;> apply le_min <;> linarith only [hx.1, hx.2, hl, hr, hρpos]
-  simpa only [inv_div, inv_inv, div_eq_mul_inv] using
-    inv_anti₀ (half_pos hρpos) hmin
+  have hi := inv_anti₀ (half_pos hρpos) hmin
+  rw [inv_div, div_eq_mul_inv] at hi
+  exact hi
 
 private theorem interior_host_parameter_weights
     (e : ℕ ≃ N04PieceIndex W.D) (A : ℝ) (hA : 0 ≤ A) :

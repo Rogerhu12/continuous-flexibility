@@ -80,21 +80,23 @@ theorem FullHalfFieldPowerControl.root_low_coefficients
         p.1 ∈ Icc (0 : ℝ) (W.negativeOpticalWidth m side) →
         ‖iteratedFDeriv ℝ j d p‖ ≤ B * W.T.E0 (W.negativeHalfSample e m side) ^ B ∧
         ‖iteratedFDeriv ℝ j c p‖ ≤ B * W.T.E0 (W.negativeHalfSample e m side) ^ B := by
-  obtain ⟨Bd, hBd, hd⟩ := endpointUnit_closed_representative_low
+  have hd := endpointUnit_closed_representative_low
     (jointStateGrading_monotone W.S) A.1
     (fun i => W.negativeOpticalWidth_pos i.1 i.2) (fun _ => W.floor _) 2
-  obtain ⟨Bc, hBc, hc⟩ := endpointUnit_closed_representative_low
+  have hc := endpointUnit_closed_representative_low
     (jointStateGrading_monotone W.S) A.2
     (fun i => W.negativeOpticalWidth_pos i.1 i.2) (fun _ => W.floor _) 2
+  let Bd : ℝ := hd.choose
+  let Bc : ℝ := hc.choose
   let B := max 1 (max Bd Bc)
   have hB : 1 ≤ B := le_max_left _ _
   have hmono {a E : ℝ} (ha : a ≤ B) (hE : 1 ≤ E) : a * E ^ a ≤ B * E ^ B :=
     mul_le_mul ha (Real.rpow_le_rpow_of_exponent_le hE ha)
       (Real.rpow_nonneg (zero_le_one.trans hE) _) (zero_le_one.trans hB)
   refine ⟨B, hB, fun z hz hlow m side d c hds hcs heqD heqC j hj p hp => ?_⟩
-  exact ⟨(hd (m, side) z hz hlow d hds heqD j hj p hp).trans
+  exact ⟨(hd.choose_spec.2 (m, side) z hz hlow d hds heqD j hj p hp).trans
       (hmono ((le_max_left _ _).trans (le_max_right _ _)) (W.floor _)),
-    (hc (m, side) z hz hlow c hcs heqC j hj p hp).trans
+    (hc.choose_spec.2 (m, side) z hz hlow c hcs heqC j hj p hp).trans
       (hmono ((le_max_right _ _).trans (le_max_right _ _)) (W.floor _))⟩
 
 end N04RealizationStart.NegativeOpticalFactors

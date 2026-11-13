@@ -145,9 +145,9 @@ theorem negativeMaterialCollar_minus_speed (z : AnnularState W.S × ℝ)
     cases side <;> simp only [negativeInwardPoint, inwardComponentPoint,
       Bool.false_eq_true, ↓reduceIte] <;> constructor <;> linarith only [hp.1, hx]
   have hd : deriv (W.cutoff.cutoff m) (W.negativeInwardPoint m side p).1 = 0 := by
-    simpa only [deriv_const] using
+    simpa only [negativeInwardPoint, deriv_const] using
       (W.negativeMaterialCollar_cutoff_germ m side hp.2).deriv.eq_of_nhds
-  have he := returnCorrectedCoefficients_eq_original_at_of_deriv_zero
+  have he := returnCorrectedCoefficients_eq_original_at_of_deriv_zero (D := W.D)
     W.through03.1.1.2.2.2.1.2.2.1 W.cutoff.cutoff z m
     (W.negativeInwardPoint m side p) hpoint hd
   rw [W.coefficients_eq]
@@ -170,7 +170,7 @@ theorem fullHalfFields_corrected_minus_speed {z : AnnularState W.S × ℝ}
         Real.sqrt p.1 * F.fullHalfSpeed z m side p := by
   rw [W.negativeMaterialCollar_minus_speed z m side hp]
   exact F.fullHalfFields_minus_speed hz m side ⟨hp.1,
-    hp.2.trans ((W.negativeMaterialCollar_bounds m).2.2.2 side).trans
+    (hp.2.trans ((W.negativeMaterialCollar_bounds m).2.2.2 side)).trans
       (by linarith only [W.negativeOpticalWidth_pos m side])⟩
 
 end NegativeOpticalFactors
@@ -192,7 +192,8 @@ theorem negativeMaterialCollar_interior_distance (m : ℕ) (side : Bool) {x : �
       inwardComponentPoint, Bool.false_eq_true, ↓reduceIte] at hx hl hr ⊢
       <;> apply le_min <;> linarith only [hx.1, hx.2, hl, hr, hd]
   have hi := inv_anti₀ (half_pos hd) hmin
-  simpa only [inv_div, inv_inv, div_eq_mul_inv] using hi
+  rw [inv_div, div_eq_mul_inv] at hi
+  exact hi
 
 end ContinuousFlexibility.Analysis.N04RealizationStart
 
