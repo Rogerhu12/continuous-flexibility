@@ -15,6 +15,18 @@ namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements
 
+private theorem sourceAngleTrace_sectorPair_unit
+    (S : PhysicalSpacesData) {low larger : ℕ} {η : ℝ}
+    (hl : low ≤ larger) (hη : η ≤ 1 / 2)
+    (z : StateDirections S × ℝ) (hz : z ∈ sectorNeighborhood S larger η η) :
+    pairGrading (sectorGrading S) realGrading low z ≤ 1 := by
+  have he : pairGrading (sectorGrading S) realGrading larger z =
+      sectorGrading S larger z.1 + |z.2| :=
+    pairGrading_apply (sectorGrading S) realGrading larger z
+  have hsum : sectorGrading S larger z.1 + |z.2| ≤ 1 := by
+    linarith only [hz.1, hz.2, hη]
+  exact (sectorPairGrading_monotone S hl z).trans (he.trans_le hsum)
+
 theorem n04PositiveGeometry_sourceAngleTrace_uniform_prefix
     (W : N04RealizationStart) (X : N04RealizationChoice W)
     {base : ℕ} {ε : ℝ} (hb : W.base ≤ base) (hε : 0 < ε)
@@ -47,12 +59,8 @@ theorem n04PositiveGeometry_sourceAngleTrace_uniform_prefix
   have hVU : V ⊆ sectorNeighborhood W.S base ε ε :=
     sectorNeighborhood_mono W.S (hblow.trans hlarge) hη hη
   have hunit (l : ℕ) (hl : l ≤ low) (z : StateDirections W.S × ℝ) (hz : z ∈ V) :
-      p l z ≤ 1 := by
-    apply (hp (hl.trans hlarge) z).trans
-    have he : p larger z = sectorGrading W.S larger z.1 + |z.2| :=
-      pairGrading_apply (sectorGrading W.S) realGrading larger z
-    rw [he]
-    linarith only [hz.1, hz.2, hηhalf]
+      p l z ≤ 1 :=
+    sourceAngleTrace_sectorPair_unit W.S (hl.trans hlarge) hηhalf z hz
   let E := W.U.E0 (W.U.sample (X.cell i))
   let H := W.U.H (W.U.sample (X.cell i)) ^ (3 / 4 : ℝ)
   have hE : 1 ≤ E := (W.floor _).trans (le_enlargedMaterialData_E0 W.T _)

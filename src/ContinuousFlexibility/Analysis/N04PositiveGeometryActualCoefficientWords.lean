@@ -39,6 +39,20 @@ private theorem radial_snd_eq_firstJet
     (iteratedFDeriv ℝ 1 f q (fun _ => (1, 0))).2 at h
   simpa only [iteratedFDeriv_one_apply, radialPartial] using h
 
+private theorem angularGraph_jet_of_snd
+    {φ : PolarPoint → ℝ} {p : PolarPoint} {k : ℕ}
+    (hφ : ContDiffAt ℝ ∞ φ p) (hk : 2 ≤ k)
+    (S : PolarPoint [×k]→L[ℝ] PolarPoint)
+    (hS : iteratedFDeriv ℝ k φ p =
+      (ContinuousLinearMap.snd ℝ ℝ ℝ).compContinuousMultilinearMap S) :
+    iteratedFDeriv ℝ k (n04PositiveGeometry_angularGraph φ) p =
+      n04PositiveGeometry_angleOutputProjection.compContinuousMultilinearMap S := by
+  apply ContinuousMultilinearMap.ext
+  intro v
+  have he := n04PositiveGeometry_fiberLift_jet hφ hk v
+  exact he.trans (congrArg (fun a : ℝ => ((0 : ℝ), a))
+    (congrArg (fun A : PolarPoint [×k]→L[ℝ] ℝ => A v) hS))
+
 theorem n04PositiveGeometry_controlledCoefficient_word_bound
     {W : N04RealizationStart} {X : N04RealizationChoice W}
     (G : N04PositiveGeometryControlledFamily W X 3)
@@ -137,12 +151,8 @@ theorem n04PositiveGeometry_controlledCoefficient_word_bound
         (hsource y hy) (by simp : (k : ℕ∞ω) ≤ ∞)
   have hF (k : ℕ) (hk : 2 ≤ k) (hk4 : k ≤ 4) (y) (hy : y ∈ U ×ˢ (univ : Set ℝ)) :
       iteratedFDeriv ℝ k (f y) (g y (q y)) =
-        n04PositiveGeometry_angleOutputProjection.compContinuousMultilinearMap (S k y) := by
-    ext v
-    have he := n04PositiveGeometry_fiberLift_jet (p := g y (q y))
-      (hφ y hy).contDiffAt hk v
-    exact he.trans (congrArg (fun a : ℝ => ((0 : ℝ), a))
-      (congrArg (fun A : PolarPoint [×k]→L[ℝ] ℝ => A v) (hangle k hk4 y hy)))
+        n04PositiveGeometry_angleOutputProjection.compContinuousMultilinearMap (S k y) :=
+    angularGraph_jet_of_snd (hφ y hy).contDiffAt hk (S k y) (hangle k hk4 y hy)
   have hX (k : ℕ) (_hk : 1 ≤ k) (hk4 : k ≤ 4) (y) (hy : y ∈ U ×ˢ (univ : Set ℝ)) :
       iteratedFDeriv ℝ k (ξ y) (g y (q y)) =
         (ContinuousLinearMap.fst ℝ ℝ ℝ).compContinuousMultilinearMap (S k y) := by
@@ -158,8 +168,10 @@ theorem n04PositiveGeometry_controlledCoefficient_word_bound
   have hcoef (y) (hy : y ∈ U ×ˢ (univ : Set ℝ)) :
       G.toN04PositiveGeometryControlData.coefficients (liftSectorParameter W.S W.C y.1)
         i side j y.2 = iteratedFDeriv ℝ j (ξ y ∘ g y) (q y) (fun _ => (1, 0)) := by
-    rw [N04PositiveGeometryControlData.coefficients_eq_angularPullback]
-    exact n06_radialBoundaryJet_eq_frechet j ((hξ y hy).comp (q y) (hg y hy))
+    have he := congrArg (fun a : ℕ → ℝ → ℝ => a j y.2)
+      (G.toN04PositiveGeometryControlData.coefficients_eq_angularPullback
+        (liftSectorParameter W.S W.C y.1) i side)
+    exact he.trans (n06_radialBoundaryJet_eq_frechet j ((hξ y hy).comp (q y) (hg y hy)))
   let QD := Q.congr hcoef
   have hbound := data.choose_spec.2.choose_spec.2 (sectorNeighborhood_isOpen W.S base ε ε)
     f g ξ q b S hf hg hξ
