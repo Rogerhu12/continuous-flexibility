@@ -24,11 +24,15 @@ run_cmd do
       | none => false
     if owned then
       declarations := declarations + 1
-      match info with
-      | .axiomInfo _ => throwError "Target module declares an axiom: {name}"
-      | .thmInfo _ => theorems := theorems + 1
-      | _ => pure ()
+      -- Imported theorems of a module are seen as `axiomInfo` without their proofs;
+      -- `collectAxioms` still follows the proofs. A declared axiom is the one whose
+      -- own axiom set contains it.
       let axioms ← collectAxioms name
+      if axioms.contains name then
+        throwError "Target module declares an axiom: {name}"
+      match info with
+      | .thmInfo _ | .axiomInfo _ => theorems := theorems + 1
+      | _ => pure ()
       for ax in axioms do
         unless observed.contains ax do
           observed := ax :: observed

@@ -7,6 +7,7 @@ public import Mathlib.Analysis.Calculus.Deriv.Support
 public import Mathlib.MeasureTheory.Function.LpSpace.Indicator
 public import Mathlib.Topology.Algebra.Module.Basic
 public import Mathlib.Topology.Order.MonotoneConvergence
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
 
 /-!
 # The deep-tail form core and its Dirichlet truncations

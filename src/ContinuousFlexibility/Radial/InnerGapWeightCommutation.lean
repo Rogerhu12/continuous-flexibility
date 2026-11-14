@@ -4,6 +4,7 @@ public import ContinuousFlexibility.Radial.InnerWeightRatios
 public import Mathlib.Algebra.BigOperators.Ring.Finset
 public import Mathlib.LinearAlgebra.Matrix.PosDef
 public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+public import Mathlib.Algebra.Order.Star.Real
 
 /-!
 # Exact commutation of gap weights and the positive interface

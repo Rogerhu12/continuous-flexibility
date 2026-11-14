@@ -18,6 +18,10 @@ noncomputable section
 
 namespace ContinuousFlexibility.Analysis
 
+/-- The upstream `SFinite angleMeasure` instances are private to their modules. -/
+private instance : SFinite ContinuousFlexibility.Statements.angleMeasure := by
+  unfold ContinuousFlexibility.Statements.angleMeasure; infer_instance
+
 open Set Filter MeasureTheory ContinuousFlexibility.Statements
 
 def n07aAngularPeriodicRepresentative (u : PolarPoint → ℝ) (p : PolarPoint) : ℝ :=

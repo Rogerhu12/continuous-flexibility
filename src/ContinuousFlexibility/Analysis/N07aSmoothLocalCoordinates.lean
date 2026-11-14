@@ -2,6 +2,7 @@ module
 
 public import ContinuousFlexibility.Geometry.LocalInverse
 public import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
+public import Mathlib.Analysis.Calculus.FDeriv.OfCompLeft
 
 /-!
 # Genuine smooth local coordinates for a globally smooth map
