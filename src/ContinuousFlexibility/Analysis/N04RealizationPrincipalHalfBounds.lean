@@ -38,7 +38,9 @@ private theorem half_reference_of_relative_error
     _ = 2 * a₀⁻¹ := by simp only [div_eq_mul_inv, mul_inv_rev, inv_inv]
     _ ≤ 2 * r := mul_le_mul_of_nonneg_left hi (by norm_num)
 
-private theorem firstJet_half_reference
+/-- A genuine first parameter jet controls the relative error on a
+convex neighborhood. This numerical form also applies to optical travel. -/
+theorem n04Realization_firstJet_half_reference
     {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
     [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
     {U : Set X} {f : X → ℝ} (J : SmoothDirections U f)
@@ -204,7 +206,7 @@ theorem n04Realization_positive_principal_half_reference
     exact (hfirst m hm y hy w hw v).trans (mul_le_mul_of_nonneg_left
       (ContinuousFlexibility.Analysis.oneHighVariationWeight_mono
         hmono le_rfl (le_max_right base loss) w v) hM)
-  have h := firstJet_half_reference (J m hm y hy)
+  have h := n04Realization_firstJet_half_reference (J m hm y hy)
     (CanonicalGeometry.parameterGrading S) base high (hmono (le_max_left base loss))
     (sectorNeighborhood_convex S base ε ε) hzero hM hQ hprod ha0 hi
     hfirstHigh hzU hlow hsmall

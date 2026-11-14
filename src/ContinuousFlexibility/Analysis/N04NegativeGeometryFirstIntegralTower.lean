@@ -19,6 +19,8 @@ namespace ContinuousFlexibility.Statements
 open Set ContinuousFlexibility.Analysis
 open scoped ContDiff
 
+set_option backward.isDefEq.respectTransparency false
+
 local instance n04MinusFirstIntegralStripStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
@@ -65,6 +67,15 @@ private theorem correctedFlow_inverse_comp
     (hN.singleComponentInterpolationCircle_lift hS hT χ m x hx)
   exact invFun_comp_of_bijective hf hg
 
+/-- The initial-chart displacement transported through the actual
+cutoff interpolation. -/
+def N01Properties.n04NegativeGeometryInitialFirstIntegralCircle
+    (m : ℕ) (x : (StateDirections S × ℝ) × ℝ) : CircleSpace S :=
+  hN.singleComponentInterpolationInverseCircle hS hT χ m x +
+    circlePositiveInverseComposeLinear (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num)
+      (fun _ => 0) (hN.singleComponentInterpolationCircle hS hT χ m x)
+      x.1.1.val.2.2.2
+
 /-- The circle displacement of the actual first integral, before taking
 its state-and-angle tower. -/
 def N01Properties.n04NegativeGeometryMinusFirstIntegralCircle
@@ -72,10 +83,65 @@ def N01Properties.n04NegativeGeometryMinusFirstIntegralCircle
   hN.singleComponentFlowInverseCircle hS hT m x +
     circlePositiveInverseComposeLinear (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num)
       (fun _ => 0) (hN.singleComponentFlowCircle hS hT m x)
-      (hN.singleComponentInterpolationInverseCircle hS hT χ m x +
-        circlePositiveInverseComposeLinear (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num)
-          (fun _ => 0) (hN.singleComponentInterpolationCircle hS hT χ m x)
-          x.1.1.val.2.2.2)
+      (hN.n04NegativeGeometryInitialFirstIntegralCircle hS hT χ m x)
+
+private theorem circle_decode_add_eval (H : CircleModelData)
+    (e c : H.Space) (m : ℕ) (θ : ℝ) :
+    H.decode (e + c) m θ = H.decode e m θ + H.decode c m θ :=
+  congrArg (fun f : ℕ → ℝ → ℝ => f m θ) (H.decode.map_add e c)
+
+include hχrange in
+private theorem initialFirstIntegralCircle_decode
+    (m : ℕ) (x : (StateDirections S × ℝ) × ℝ)
+    (hx : x.1 ∈ sectorNeighborhood S base ε ε)
+    (hr : x.2 ∈ Ioo (C.left m) (C.right m)) (θ : ℝ) :
+    let v := Function.invFun (returnInterpolation (χ m x.2)
+      (returnCorrectionInitialMap S C (liftSectorParameter S C x.1) m)) θ
+    (S.circle (3 / 4 : ℝ)).decode
+        (hN.n04NegativeGeometryInitialFirstIntegralCircle hS hT χ m x) m θ =
+      (v - θ) + (S.circle (3 / 4 : ℝ)).decode x.1.1.val.2.2.2 m v := by
+  let H := S.circle (3 / 4 : ℝ)
+  let v := Function.invFun (returnInterpolation (χ m x.2)
+    (returnCorrectionInitialMap S C (liftSectorParameter S C x.1) m)) θ
+  let e : CircleSpace S := hN.singleComponentInterpolationInverseCircle hS hT χ m x
+  let c : CircleSpace S := circlePositiveInverseComposeLinear (hS.2.1 (3 / 4 : ℝ))
+    hT hN.1.1 (by norm_num) (fun _ => 0)
+      (hN.singleComponentInterpolationCircle hS hT χ m x) x.1.1.val.2.2.2
+  have he : H.decode e m θ = v - θ :=
+    hN.singleComponentInterpolationInverseCircle_decode
+      hS hT χ hχrange m x hx ⟨hr.1.le, hr.2.le⟩ θ
+  have hc : H.decode c m θ = H.decode x.1.1.val.2.2.2 m v :=
+    hN.singleComponentInterpolationInverseCompose_decode
+      hS hT χ hχrange m x hx ⟨hr.1.le, hr.2.le⟩ x.1.1.val.2.2.2 θ
+  exact (circle_decode_add_eval H e c m θ).trans
+    (congrArg₂ (fun a b : ℝ => a + b) he hc)
+
+include hχrange in
+private theorem correctedFirstIntegralCircle_displacement
+    (m : ℕ) (x : (StateDirections S × ℝ) × ℝ)
+    (hx : x.1 ∈ sectorNeighborhood S base ε ε)
+    (hr : x.2 ∈ Ioo (C.left m) (C.right m)) (θ : ℝ) :
+    let u := Function.invFun (C.minusFlow (liftSectorParameter S C x.1) m x.2) θ
+    let v := Function.invFun (returnInterpolation (χ m x.2)
+      (returnCorrectionInitialMap S C (liftSectorParameter S C x.1) m)) u
+    (S.circle (3 / 4 : ℝ)).decode
+        (hN.n04NegativeGeometryMinusFirstIntegralCircle hS hT χ m x) m θ =
+      (u - θ) + ((v - u) + (S.circle (3 / 4 : ℝ)).decode x.1.1.val.2.2.2 m v) := by
+  let H := S.circle (3 / 4 : ℝ)
+  let u := Function.invFun (C.minusFlow (liftSectorParameter S C x.1) m x.2) θ
+  let c : CircleSpace S := hN.n04NegativeGeometryInitialFirstIntegralCircle hS hT χ m x
+  let d : CircleSpace S := circlePositiveInverseComposeLinear (hS.2.1 (3 / 4 : ℝ))
+    hT hN.1.1 (by norm_num) (fun _ => 0) (hN.singleComponentFlowCircle hS hT m x) c
+  have he : H.decode (hN.singleComponentFlowInverseCircle hS hT m x) m θ = u - θ :=
+    hN.singleComponentFlowInverseCircle_decode hS hT m x hx hr θ
+  have hd : H.decode d m θ = H.decode c m u :=
+    hN.singleComponentFlowInverseCompose_decode hS hT m x hx hr c θ
+  have hc := initialFirstIntegralCircle_decode hN hS hT χ hχrange m x hx hr u
+  exact (circle_decode_add_eval H (hN.singleComponentFlowInverseCircle hS hT m x)
+    d m θ).trans (congrArg₂ (fun a b : ℝ => a + b) he (hd.trans hc))
+
+private theorem firstIntegral_displacement_cancel (θ u v d : ℝ) :
+    θ + 0 + ((u - θ) + ((v - u) + d)) = v + d := by ring
 
 include hχrange in
 private theorem correctedFirstIntegralCircle_decode
@@ -91,53 +157,24 @@ private theorem correctedFirstIntegralCircle_decode
   let u : ℝ := Function.invFun (C.minusFlow (liftSectorParameter S C x.1) m x.2) θ
   let v : ℝ := Function.invFun (returnInterpolation (χ m x.2)
     (returnCorrectionInitialMap S C (liftSectorParameter S C x.1) m)) u
-  let e : CircleSpace S := hN.singleComponentInterpolationInverseCircle hS hT χ m x
-  let c : CircleSpace S := circlePositiveInverseComposeLinear (hS.2.1 (3 / 4 : ℝ))
-    hT hN.1.1 (by norm_num) (fun _ => 0)
-      (hN.singleComponentInterpolationCircle hS hT χ m x) x.1.1.val.2.2.2
-  let d : CircleSpace S := circlePositiveInverseComposeLinear (hS.2.1 (3 / 4 : ℝ))
-    hT hN.1.1 (by norm_num) (fun _ => 0)
-      (hN.singleComponentFlowCircle hS hT m x) (e + c)
-  have hflow : H.decode (hN.singleComponentFlowInverseCircle hS hT m x) m θ = u - θ :=
-    hN.singleComponentFlowInverseCircle_decode hS hT m x hx hr θ
-  have hinitial : H.decode e m u = v - u :=
-    hN.singleComponentInterpolationInverseCircle_decode
-      hS hT χ hχrange m x hx ⟨hr.1.le, hr.2.le⟩ u
-  have hinner : H.decode c m u = H.decode x.1.1.val.2.2.2 m v :=
-    hN.singleComponentInterpolationInverseCompose_decode
-      hS hT χ hχrange m x hx ⟨hr.1.le, hr.2.le⟩ x.1.1.val.2.2.2 u
-  have hsum : H.decode (e + c) m u = (v - u) + H.decode x.1.1.val.2.2.2 m v :=
-    (congrArg (fun f : ℕ → ℝ → ℝ => f m u) (H.decode.map_add e c)).trans
-      (congrArg₂ (fun a b : ℝ => a + b) hinitial hinner)
-  have houter : H.decode d m θ = H.decode (e + c) m u :=
-    hN.singleComponentFlowInverseCompose_decode hS hT m x hx hr (e + c) θ
   have hdecode : H.decode
       (hN.n04NegativeGeometryMinusFirstIntegralCircle hS hT χ m x) m θ =
       (u - θ) + ((v - u) + H.decode x.1.1.val.2.2.2 m v) :=
-    (congrArg (fun f : ℕ → ℝ → ℝ => f m θ)
-      (H.decode.map_add (hN.singleComponentFlowInverseCircle hS hT m x) d)).trans
-        (congrArg₂ (fun a b : ℝ => a + b) hflow (houter.trans hsum))
+    correctedFirstIntegralCircle_displacement hN hS hT χ hχrange m x hx hr θ
   have hleft : stateLeftChart S (liftSectorParameter S C x.1).1 m v =
       v + H.decode x.1.1.val.2.2.2 m v :=
     hN.2.2.1.sector_leftChart x.1 m v
   have hinverse : Function.invFun (returnCorrectedMinusFlow S C χ
       (liftSectorParameter S C x.1) m x.2) θ = v :=
     congrFun (correctedFlow_inverse_comp hN hS hT χ hχrange m x hx hr) θ
-  have harg : stateLeftChart S (liftSectorParameter S C x.1).1 m
+  have hrecover : stateLeftChart S (liftSectorParameter S C x.1).1 m
       (Function.invFun (returnCorrectedMinusFlow S C χ
         (liftSectorParameter S C x.1) m x.2) θ) =
       v + H.decode x.1.1.val.2.2.2 m v :=
     (congrArg (stateLeftChart S (liftSectorParameter S C x.1).1 m) hinverse).trans hleft
-  change θ + 0 + H.decode
-    (hN.n04NegativeGeometryMinusFirstIntegralCircle hS hT χ m x) m θ =
-      stateLeftChart S (liftSectorParameter S C x.1).1 m
-        (Function.invFun (returnCorrectedMinusFlow S C χ
-          (liftSectorParameter S C x.1) m x.2) θ)
-  calc
-    _ = θ + 0 + ((u - θ) + ((v - u) + H.decode x.1.1.val.2.2.2 m v)) :=
-      congrArg (fun t : ℝ => θ + 0 + t) hdecode
-    _ = v + H.decode x.1.1.val.2.2.2 m v := by ring
-    _ = _ := harg.symm
+  exact (congrArg (fun d : ℝ => θ + 0 + d) hdecode).trans
+    ((firstIntegral_displacement_cancel θ u v (H.decode x.1.1.val.2.2.2 m v)).trans
+      hrecover.symm)
 
 /-- One genuine joint tower for the actual first integral on an interior
 physical strip. The cutoff, old flow and inverse are all retained. -/
@@ -179,7 +216,7 @@ def N01Properties.n04NegativeGeometryMinusFirstIntegral_stripJointTower
       Jinitial Jleft hinitialpos)
   let B : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ Ioo l h)
       (hN.n04NegativeGeometryMinusFirstIntegralCircle hS hT χ m) := by
-    unfold n04NegativeGeometryMinusFirstIntegralCircle
+    unfold n04NegativeGeometryMinusFirstIntegralCircle n04NegativeGeometryInitialFirstIntegralCircle
     exact smoothDirectionsAdd Kflow
       (circleInverseComposeDirections hH hT hN.1.1 (by norm_num) hi (fun _ => 0)
         Jflow A hflowpos)

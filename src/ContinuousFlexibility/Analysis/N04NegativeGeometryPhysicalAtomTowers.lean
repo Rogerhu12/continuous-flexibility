@@ -19,18 +19,6 @@ namespace ContinuousFlexibility.Analysis
 open Set ContinuousFlexibility.Statements CanonicalGeometry
 open scoped ContDiff
 
-attribute [local instance]
-  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
-  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
-  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
-  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
-  n07aNonlinearAnnularParameterSub
-  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
-  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
-  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
-  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
-  n07aNonlinearSectorParameterSub
-
 def negativePhysicalGeometryAtom : Atom → Prop
   | .chartRadial | .chartAngleDefect | .height | .heightInverse
   | .jacobian | .jacobianInverse => True
@@ -61,17 +49,33 @@ def n04NegativeGeometry_physicalUnitJointTower
       ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
       ContinuousLinearMap.coe_snd', smul_apply, smul_eq_mul,
       Prod.mk_add_mk, zero_add]
-  have hmaps : MapsTo (fun x => c + P x) (U ×ˢ unitStrip) (U ×ˢ Ω) := by
+  have hMaps : MapsTo (fun x => c + P x) (U ×ˢ unitStrip) (U ×ˢ Ω) := by
     intro x hx
-    exact Eq.mpr (congrArg (fun y : X × PolarPoint => y ∈ U ×ˢ Ω) (hpoint x))
-      ⟨hx.1, hmap hx.2⟩
-  exact (J.compAffine P c (hU.prod (isOpen_Ioo.prod isOpen_univ)) hmaps).congrOn
+    change c + P x ∈ U ×ˢ Ω
+    rw [hpoint]
+    exact ⟨hx.1, hmap hx.2⟩
+  exact (J.compAffine P c (hU.prod (isOpen_Ioo.prod isOpen_univ)) hMaps).congrOn
     (fun x _ => congrArg f (hpoint x))
+
+set_option backward.isDefEq.respectTransparency true
+
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
 
 namespace N04RealizationStart
 
 variable (W : N04RealizationStart)
 
+set_option diagnostics true in
 /-- The literal six physical atoms have joint parameter and unit-point
 towers. The typed negative index and all normalizations are unchanged. -/
 def negativePhysicalAtomJointTower
@@ -129,46 +133,37 @@ def negativePhysicalAtomJointTower
           (p.1 - K.left k) / (K.right k - K.left k))).contDiffOn
       (fun _ _ => mem_univ _)).congrOn
     intro x hx
-    change (_ - K.left k) / (K.right k - K.left k) =
-      ((K.chart (liftSectorParameter W.S W.C x.1) k (physicalUnitPoint K k x.2)).1 -
-        K.left k) / (K.right k - K.left k)
-    exact congrArg (fun p : PolarPoint => (p.1 - K.left k) / (K.right k - K.left k))
-      (congrFun (hchart x.1) (physicalUnitPoint K k x.2)).symm
+    exact congrArg (fun f : PolarPoint → PolarPoint =>
+      ((f (physicalUnitPoint K k x.2)).1 - K.left k) / (K.right k - K.left k))
+      (hchart x.1).symm
   · let L : ((StateDirections W.S × ℝ) × PolarPoint) →L[ℝ] ℝ :=
       (ContinuousLinearMap.snd ℝ ℝ ℝ).comp
         (ContinuousLinearMap.snd ℝ (StateDirections W.S × ℝ) PolarPoint)
-    let Jθ : SmoothDirections (U ×ˢ unitStrip) L :=
+    let Jθ : SmoothDirections (U ×ˢ unitStrip)
+        (fun x : (StateDirections W.S × ℝ) × PolarPoint => L x) :=
       smoothDirectionsLinearOn L (hU.prod (isOpen_Ioo.prod isOpen_univ))
     apply ((smoothDirectionsProd JC Jθ).comp_contDiff isOpen_univ
       ((contDiff_fst.snd.sub contDiff_snd) :
         ContDiff ℝ ∞ (fun p : PolarPoint × ℝ => p.1.2 - p.2)).contDiffOn
       (fun _ _ => mem_univ _)).congrOn
     intro x hx
-    change _ - x.2.2 =
-      (K.chart (liftSectorParameter W.S W.C x.1) k (physicalUnitPoint K k x.2)).2 - x.2.2
-    exact congrArg (fun p : PolarPoint => p.2 - x.2.2)
-      (congrFun (hchart x.1) (physicalUnitPoint K k x.2)).symm
+    exact congrArg (fun f : PolarPoint → PolarPoint =>
+      (f (physicalUnitPoint K k x.2)).2 - x.2.2) (hchart x.1).symm
   · apply JH.congrOn
     intro x hx
-    change _ = K.height (liftSectorParameter W.S W.C x.1) k (physicalUnitPoint K k x.2)
     exact (congrFun (hheight x.1) (physicalUnitPoint K k x.2)).symm
   · apply JHI.congrOn
     intro x hx
-    change _ = (K.height (liftSectorParameter W.S W.C x.1) k (physicalUnitPoint K k x.2))⁻¹
     exact congrArg (fun t : ℝ => t⁻¹)
       (congrFun (hheight x.1) (physicalUnitPoint K k x.2)).symm
   · apply JJ.congrOn
     intro x hx
-    change _ = |planeJacobian (K.chart (liftSectorParameter W.S W.C x.1) k)
-      (physicalUnitPoint K k x.2)|
-    exact congrArg (fun F : PolarPoint → PolarPoint =>
-      |planeJacobian F (physicalUnitPoint K k x.2)|) (hchart x.1).symm
+    exact congrArg (fun f : PolarPoint → PolarPoint =>
+      |planeJacobian f (physicalUnitPoint K k x.2)|) (hchart x.1).symm
   · apply JJI.congrOn
     intro x hx
-    change _ = |planeJacobian (K.chart (liftSectorParameter W.S W.C x.1) k)
-      (physicalUnitPoint K k x.2)|⁻¹
-    exact congrArg (fun F : PolarPoint → PolarPoint =>
-      |planeJacobian F (physicalUnitPoint K k x.2)|⁻¹) (hchart x.1).symm
+    exact congrArg (fun f : PolarPoint → PolarPoint =>
+      |planeJacobian f (physicalUnitPoint K k x.2)|⁻¹) (hchart x.1).symm
 
 end N04RealizationStart
 

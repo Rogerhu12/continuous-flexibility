@@ -142,20 +142,20 @@ theorem continuous_graph_reindex {U : Set E} {n N : ℕ}
     (B : N04NegativeGeometryImplicitJet U Y n) (σ : Fin n → Fin N) :
     ContinuousOn (fun p : E × (Fin N → E) =>
       graph n (B.value p.1) (p.2 ∘ σ)) (U ×ˢ univ) := by
-  have hσ : Continuous (fun v : Fin N → E => v ∘ σ) :=
-    continuous_pi (fun i => continuous_apply (σ i))
-  have hb : ContinuousOn (fun p : E × (Fin N → E) =>
-      B.value p.1 (p.2 ∘ σ)) (U ×ˢ univ) :=
-    B.continuous.comp
-      (continuous_fst.prodMk (hσ.comp continuous_snd)).continuousOn
+  have hr : Continuous (fun p : E × (Fin N → E) => p.2 ∘ σ) :=
+    continuous_pi (fun i => (continuous_apply (σ i)).comp continuous_snd)
+  have hv : ContinuousOn (fun p : E × (Fin N → E) => B.value p.1 (p.2 ∘ σ))
+      (U ×ˢ univ) :=
+    B.continuous.comp (continuous_fst.prodMk hr).continuousOn
       (fun _ hp => ⟨hp.1, mem_univ _⟩)
-  have hp : Continuous (fun p : E × (Fin N → E) => parameter n (p.2 ∘ σ)) :=
-    (parameter (E := E) (Y := Y) n).cont.comp (hσ.comp continuous_snd)
-  have hz : ContinuousOn (fun _ : E × (Fin N → E) => (0 : E)) (U ×ˢ univ) :=
-    continuousOn_const
-  apply (hp.continuousOn.add (hz.prodMk hb)).congr
-  intro p _
-  simp only [Pi.add_apply, graph_apply]
+  have hp : ContinuousOn (fun p : E × (Fin N → E) =>
+      parameter (E := E) (Y := Y) n (p.2 ∘ σ)) (U ×ˢ univ) :=
+    ((parameter (E := E) (Y := Y) n).cont.comp hr).continuousOn
+  have he : (fun p : E × (Fin N → E) => graph n (B.value p.1) (p.2 ∘ σ)) =
+      (fun p => parameter n (p.2 ∘ σ) + ((0 : E), B.value p.1 (p.2 ∘ σ))) :=
+    funext (fun p => graph_apply n (B.value p.1) (p.2 ∘ σ))
+  rw [he]
+  exact hp.add (continuousOn_const.prodMk hv)
 
 def forcing {U : Set E} {V : Set Y} {H : E × Y → Y} {N : ℕ}
     (J : SmoothDirections (U ×ˢ V) H) (g : E → Y)

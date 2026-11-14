@@ -99,7 +99,7 @@ theorem n04Flow_spatialJet_difference_norm_le_of_composed_bound
   rw [iteratedFDeriv_sub_apply
     (hs.of_le (by simp : (n : ℕ∞ω) ≤ ∞))
     (hs₀.of_le (by simp : (n : ℕ∞ω) ≤ ∞))]
-  exact hb t ht
+  simpa only [parametricSpatialJet, Function.comp_apply, id_eq] using hb t ht
 
 /-- Actual value stability depends on the original field difference
 and the angular derivative of just the first field. -/
