@@ -137,3 +137,12 @@ The assembly also fixes its topological additive-group and continuous
 scalar-action proof instances locally. This avoids repeatedly deriving
 those same instances inside each saved-word bound; the four factor
 conclusions and the order of all uniform choices are unchanged.
+
+The two whole-component transports are then composed in an abstract
+parameter space by `N04PositiveGeometryPlaneSavedTransportComposition`.
+The actual-family adapter supplies its four factor bounds, the displayed
+transport identities, and the closed-slab maps. The generic bound uses
+the maximum of the unchanged factor cost and composition cost; the
+existing sampled polynomial envelope absorbs both. This moves the
+composition and pairing proof out of the repeated actual-atlas instance
+search without changing the transport-prefix conclusion.
