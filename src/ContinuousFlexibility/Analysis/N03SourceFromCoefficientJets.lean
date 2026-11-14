@@ -167,11 +167,14 @@ theorem N01Properties.exists_returnCorrectionSource_of_coefficient_jets
     (sobolevModel_physicalNorm_le_grading (hS.1 (3 / 4 : ℝ)) η.1
       (s := s) (t := s) le_rfl).trans
       (le_add_of_nonneg_right (apply_nonneg (realGrading s) η.2))
+  -- Pointwise, so that the product's two instance paths are never unified.
+  have hconv : Convex ℝ (sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) := by
+    intro x hx y hy a b ha hb hab
+    exact ⟨sectorNeighborhood_convex S base ε ε hx.1 hy.1 ha hb hab, mem_univ _⟩
   refine smoothTameOn_symmetricSource_of_coefficient_jets
     (E := (StateDirections S × ℝ) × CircleSpace S) (D := D) (T := T) (S := S)
     (U := sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) hS hT
-    ((sectorNeighborhood_isOpen S base ε ε).prod isOpen_univ)
-    ((sectorNeighborhood_convex S base ε ε).prod convex_univ)
+    ((sectorNeighborhood_isOpen S base ε ε).prod isOpen_univ) hconv
     p q hpcont hqcont hp hq hIp hIq hheight A hcoeff hsym hderiv
     (fun z : ((StateDirections S × ℝ) × CircleSpace S) × HeightPair S =>
       E (liftSectorParameter S C z.1.1) z.1.2 z.2) ?_

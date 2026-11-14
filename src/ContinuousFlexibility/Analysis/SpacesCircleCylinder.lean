@@ -24,9 +24,10 @@ namespace ContinuousFlexibility.Statements
 open Set Filter MeasureTheory
 open scoped ENNReal
 
-private instance circleAngleMeasure_sFinite : SFinite angleMeasure := by
-  unfold angleMeasure
-  infer_instance
+/-- `angleMeasure` is finite. Public, so that every module using the angular
+measure finds it; a module does not see another module's private instances. -/
+instance circleAngleMeasure_isFiniteMeasure : IsFiniteMeasure angleMeasure :=
+  ⟨by simp [angleMeasure, Measure.restrict_apply_univ, Real.volume_Ioc]⟩
 
 private def circleUnitRadialMeasure : Measure ℝ :=
   volume.restrict (Ioc (0 : ℝ) 1)

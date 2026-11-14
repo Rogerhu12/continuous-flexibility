@@ -20,10 +20,6 @@ noncomputable section
 
 namespace ContinuousFlexibility.Statements
 
-/-- The upstream `SFinite angleMeasure` instances are private to their modules. -/
-private instance : MeasureTheory.SFinite ContinuousFlexibility.Statements.angleMeasure := by
-  unfold ContinuousFlexibility.Statements.angleMeasure; infer_instance
-
 open Set Filter MeasureTheory
 open scoped ContDiff Topology ENNReal
 open ContinuousFlexibility.Radial
