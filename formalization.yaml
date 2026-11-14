@@ -1,0 +1,108 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Smooth isometric bending of a closed sphere"
+  description: >-
+    A Lean formalization of the main theorem of the manuscript Smooth isometric
+    bending of a closed sphere: there are a smooth Riemannian metric on the
+    two-sphere and a jointly smooth, one-periodic family of isometric
+    embeddings of it into Euclidean three-space whose images are not all
+    congruent. An inner disk and a complementary cap are fixed pointwise, and
+    the area, the enclosed volume and the total mean curvature are constant
+    along the family. This repository contains the whole Lean development,
+    including its Challenge and Solution.
+  authors: ["Boyang Hu"]
+  responsible_maintainers: ["Boyang Hu"]
+  license: "Apache-2.0"
+
+repository:
+  role: "substantive-development"
+
+sources:
+  - title: "Smooth isometric bending of a closed sphere"
+    authors: ["Boyang Hu"]
+    id: "https://github.com/Rogerhu12/continuous-flexibility/tree/main/paper/flexible-surface-readable"
+    type: "paper"
+    relationship: "formalizes"
+    location: "Version of 10 November 2026, Theorem 1 (label thm:main)"
+    author_endorsement: "participated"
+    note: >-
+      The 104-page readable version in paper/flexible-surface-readable is the
+      version the Lean files cite; the 62-page version in
+      paper/flexible-surface-rewrite has the same theorems, constants and
+      labels. The manuscript treats the oscillator and Morse spectra and
+      Hamilton's Nash-Moser theorem as standard inputs; the formalization
+      assumes none of them and proves in Lean the parts that the argument uses.
+
+related_formalizations:
+  - id: "https://github.com/leanprover-community/mathlib4"
+    relationship: "builds-on"
+    note: "Pinned in lake-manifest.json."
+
+classification:
+  arxiv: ["math.DG"]
+  msc2020: ["53A05", "53C24"]
+
+automation:
+  methods:
+    - method: "manual"
+      tool_setup: >-
+        Boyang Hu wrote the manuscript, chose the blueprint and the division of
+        the work, and maintains the formalization.
+    - method: "agent"
+      framework: "OpenAI ChatGPT Pro"
+      tool_setup: >-
+        One agent session per blueprint statement wrote the Lean proofs on its
+        own branch against a task file stating the problem, the completion
+        standard and the source in the manuscript.
+    - method: "agent"
+      framework: "Anthropic Claude Code"
+      tool_setup: >-
+        A coordinating agent wrote the blueprint statements and task files,
+        reviewed and integrated the branches, ran the continuous integration
+        and repaired integration errors.
+  notes: >-
+    The Lean proofs were written by AI agents under human direction. Every
+    merge was checked by a full build with an axiom audit of all project
+    declarations.
+
+status:
+  scope: >-
+    FlexibleSphere.exists_closedBending states thm:main with Mathlib notions
+    only. The full default build passes for all library modules, the
+    Challenge and the Solution, and admits only the three standard axioms.
+    The sorry counts below exclude the intentional Challenge placeholder.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Quot.sound", "Classical.choice"]
+  main_results:
+    - declaration: "FlexibleSphere.exists_closedBending"
+      file: "src/Solution/FlexibleSphereSolution.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+
+fidelity:
+  divergences: >-
+    The canonical statement is src/Challenge/FlexibleSphereChallenge.lean. The
+    surface diffeomorphic to the sphere is taken to be Mathlib's unit sphere in
+    EuclideanSpace R (Fin 3) with its smooth structure, carrying a smooth
+    Riemannian metric that each phase map pulls back from the Euclidean inner
+    product. Embeddings are Manifold.IsSmoothEmbedding. Noncongruence means
+    that no affine isometry of Euclidean space maps one image onto another.
+    The inner disk and the cap are closed sets homeomorphic to the closed unit
+    disk, with the regularity and nesting conditions written out. Area is the
+    two-dimensional Hausdorff measure of the image; the enclosed volume is the
+    Lebesgue measure of a bounded connected open region whose frontier is the
+    image; the mean curvature is half the trace of the shape operator for the
+    outward unit normal, and its total is integrated against the Hausdorff
+    measure of the image.
+
+review:
+  status: "agent-reviewed"
+  notes: >-
+    Agent review, the full default build and compiled transitive axiom audits
+    cover this checkpoint. The Challenge statement was compared with thm:main
+    of the manuscript. This does not establish line-by-line correspondence
+    between the informal and formal proofs.
