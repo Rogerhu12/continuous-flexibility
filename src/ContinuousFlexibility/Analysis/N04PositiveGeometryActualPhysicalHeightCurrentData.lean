@@ -31,6 +31,27 @@ attribute [local instance]
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
 
+private theorem currentPhysicalHeight_pureDirections
+    {E : Type*} [Zero E] {n : ℕ} (w : StateAngleWord n)
+    (u : Fin n → E × PolarPoint)
+    (h₀ : ∀ j, w.isState j = false → (u j).1 = 0)
+    (h₁ : ∀ j, w.isState j = true → (u j).2 = 0) :
+    ∀ j, if w.isState j then (u j).2 = 0 else (u j).1 = 0 := by
+  intro j
+  cases hj : w.isState j with
+  | false => simpa only [hj, Bool.false_eq_true, ite_false] using h₀ j hj
+  | true => simpa only [hj, ite_true] using h₁ j hj
+
+private theorem currentPhysicalHeight_scalar
+    (A E H R : ℝ) (angle shift s : ℕ) {a k : ℕ}
+    (hk : 0 < k) (ha : a = k) :
+    A * E ^ A * parameterHeightWeight H a *
+        R ^ (((angle + shift * a : ℕ) : ℝ) / (((s + shift * k : ℕ) : ℝ) + 1)) =
+      A * E ^ A * H *
+        R ^ (((angle + shift * k : ℕ) : ℝ) / (((s + shift * k : ℕ) : ℝ) + 1)) := by
+  subst a
+  simp only [parameterHeightWeight, if_neg (Nat.ne_of_gt hk)]
+
 theorem n04PositiveGeometry_controlledGauge_height_fields
     {W : N04RealizationStart} {X : N04RealizationChoice W}
     (F : N04PositiveGeometryControlledFamily W X 3)
@@ -130,10 +151,7 @@ theorem n04PositiveGeometry_actualControlledPhysicalHeight_currentData_of_invers
   intro m hm z hz q hq R hR hzR n hn w hw v hv hvR hvS hv0 hv1
   have hzlow := n04Principal_parameter_low_le_one (S := W.S) hδhalf hz
   have hnpos : 0 < n := by have hs := w.arity_sum; omega
-  have hpure (j : Fin n) : if w.isState j then (v j).2 = 0 else (v j).1 = 0 := by
-    cases hj : w.isState j with
-    | false => simpa only [hj, if_false] using hv0 j hj
-    | true => simpa only [hj, if_true] using hv1 j hj
+  have hpure := currentPhysicalHeight_pureDirections w v hv0 hv1
   have hb' := bd.choose_spec.2 (index m hm) (J₀ (index m hm)) z (hsub hz) hzlow q hq R hR
     hzR n hnpos hn w (by omega) v hpure (fun j => ⟨hv j, hvR j, hvS j⟩)
   have hvalue : |(J m hm).D n (z, q) v| = ‖(J₀ (index m hm)).D n (z, q) v‖ :=
@@ -144,8 +162,14 @@ theorem n04PositiveGeometry_actualControlledPhysicalHeight_currentData_of_invers
         A * W.U.E0 (W.U.sample ((G.V η).cell m)) ^ A *
           W.U.H (W.U.sample ((G.V η).cell m)) ^ (3 / 4 : ℝ) *
           R ^ (((w.angleArity + shift * k : ℕ) : ℝ) / (((s + shift * k : ℕ) : ℝ) + 1)) := by
-    rw [hw, (hfields m hm).1]
-    simp only [parameterHeightWeight, if_neg (Nat.ne_of_gt hk)]
+    exact (currentPhysicalHeight_scalar A
+      (W.U.E0 (W.U.sample (X.cell (index m hm))))
+      (W.U.H (W.U.sample (X.cell (index m hm))) ^ (3 / 4 : ℝ))
+      R w.angleArity shift s hk hw).trans
+      (congrArg (fun cell : ℕ => A * W.U.E0 (W.U.sample cell) ^ A *
+        W.U.H (W.U.sample cell) ^ (3 / 4 : ℝ) *
+        R ^ (((w.angleArity + shift * k : ℕ) : ℝ) / (((s + shift * k : ℕ) : ℝ) + 1)))
+        (hfields m hm).1.symm)
   exact hvalue.trans_le (hb'.trans_eq hscalar)
 
 end ContinuousFlexibility.Analysis
