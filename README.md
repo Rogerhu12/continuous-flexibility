@@ -4,7 +4,10 @@ Lean 4 formalization of the main theorem of the manuscript in `paper/flexible-su
 there is a smooth, periodic family of isometric embeddings of the sphere in `ℝ³` whose images are
 not all congruent.
 
-The theorem is **not yet proved**. Current state, numbers and next steps: [docs/STATUS.md](docs/STATUS.md).
+The theorem is proved: `FlexibleSphere.exists_closedBending` (`src/Solution/FlexibleSphereSolution.lean`)
+has no `sorry` and depends only on `propext`, `Classical.choice` and `Quot.sound`. The statement is
+the Mathlib-only Challenge `src/Challenge/FlexibleSphereChallenge.lean`. Current state and numbers:
+[docs/STATUS.md](docs/STATUS.md).
 Working rules: [AGENTS.md](AGENTS.md).
 
 ## Build

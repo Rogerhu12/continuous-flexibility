@@ -45,7 +45,7 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 | Default build with the `AxiomAudit` library (10,092 jobs) | passed |
 | Blueprint statements proved / total | 42 / 42 (S01, S02, R01, R02, R03, R04, W01, N12, Tame, N04Cubic, R05a, N04Transmission, ScalarCalculus, R05b, R06a, N04Root, Solve, R06b, R06c, Spaces, R07, R08, R10b, R09, ScalarWeighted, R12, R11b, N04a, N01b, N01a, R10a, N09N10, R11a, N07b, N08, N07a, N06, N01c, N05, N02N03, N04b, N04Coordinates); `BlueprintStatus` also counts N01c's three sub-statements (45 / 45) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | proved; axioms `propext`, `Classical.choice`, `Quot.sound` |
-| Modules on the module system | 11 of 6111 |
+| Modules on the module system | 1 of 6111 (the Challenge; the migration is on `line/ModuleSystem`) |
 
 N04Coordinates (`line/N04Realization-lead`, PR #41 and the seven Realization sub-lines, PRs #44–#50),
 [CI run 43560263963](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43560263963) of the
