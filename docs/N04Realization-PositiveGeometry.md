@@ -83,12 +83,21 @@ definitionally the original reference state. The proof now states this
 exact reference-atom equality before rewriting. This is part of the
 current line's complete-CI responsibility under the revised rules.
 
-The positive blueprint now invokes the unconditional construction in
-`N04PositiveGeometryProof.lean`. Its module checks the transitive axiom
+The positive blueprint invokes the proof term for the corrected obligation
+in `N04PositiveGeometryProof.lean`. Its module checks the transitive axiom
 set against `propext`, `Classical.choice`, and `Quot.sound`, and prints that
-set for the CI log. Compilation fixes are being validated before recording
-completion; the interface changes and historical counterexample alone do
-not establish completion.
+set for the CI log. Completion requires that check and the complete CI to
+succeed on the integrated head; the interface changes and historical
+counterexample alone do not establish completion. The final PR report
+records the exact head, CI run, axiom output, compiled-module tally, and
+open statements.
+
+The 2026-11-14 integration at `7e7c344a` includes realization lead
+`4facd3c1`, which supplies the proved NegativeChart and NegativeInverse
+nodes. Its additions preserve the shared realization interfaces and the
+original `N04cStatement` assembly. The local timings below predate that
+lead merge and describe individual proof repairs, rather than the result
+of the integrated build.
 
 ### CI performance repair, 2026-11-14
 
@@ -146,3 +155,13 @@ the maximum of the unchanged factor cost and composition cost; the
 existing sampled polynomial envelope absorbs both. This moves the
 composition and pairing proof out of the repeated actual-atlas instance
 search without changing the transport-prefix conclusion.
+
+Run `43557895844` then stopped
+`N04PositiveGeometryActualTransportSamplePrefix` after 310 seconds. The
+index-bound proof now applies a pure natural-number horizon lemma instead
+of rewriting the dependent actual-family context. The two normalized
+root denominators are aligned with explicit `congrArg` equalities, and a
+small abstract Boolean-selection lemma transfers the two transport bounds
+to an arbitrary supplied tower. The public statement, material sample,
+low and high seminorm windows, and order of the uniform choices remain
+unchanged.
