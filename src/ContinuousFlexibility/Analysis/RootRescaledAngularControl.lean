@@ -43,15 +43,13 @@ theorem rootRescaledField_periodic {d c : PolarPoint → ℝ} {T : ℝ}
 
 /-- The ordinary angular derivative of the actual rescaled field is
 bounded by four times the collar size and the input angular bound. -/
-theorem rootRescaledField_angular_deriv_le
+theorem rootRescaledField_angular_deriv_le_at
     {d c : PolarPoint → ℝ} (hd : ContDiff ℝ ∞ d) (hc : ContDiff ℝ ∞ c)
     {δ M : ℝ} (hδ : 0 ≤ δ) (hM : 0 ≤ M)
-    (hdb : ∀ r, |r| ≤ δ → ∀ θ,
-      |deriv (fun η => d (r, η)) θ| ≤ M)
-    (hcb : ∀ r, |r| ≤ δ → ∀ θ,
-      |deriv (fun η => c (r, η)) θ| ≤ M)
     {t : ℝ} (ht : t ∈ Icc (0 : ℝ) 1)
-    {v : ℝ × ℝ} (hv : v ∈ n04FlowParameterBox) (θ : ℝ) :
+    {v : ℝ × ℝ} (hv : v ∈ n04FlowParameterBox) (θ : ℝ)
+    (hdb : |deriv (fun η => d (δ * v.1 * t ^ 2, η)) θ| ≤ M)
+    (hcb : |deriv (fun η => c (δ * v.1 * t ^ 2, η)) θ| ≤ M) :
     |deriv (fun η => rootRescaledField d c δ (t, (v, η))) θ| ≤ 4 * δ * M := by
   have htx : t ^ 2 ≤ 1 := by
     simpa only [pow_two, one_mul] using mul_le_mul ht.2 ht.2 ht.1 zero_le_one
@@ -63,9 +61,6 @@ theorem rootRescaledField_angular_deriv_le
   have hζ : |δ * v.2| ≤ δ := by
     rw [abs_mul, abs_of_nonneg hδ]
     simpa only [mul_one] using mul_le_mul_of_nonneg_left hvζ hδ
-  have hr : |δ * v.1 * t ^ 2| ≤ δ := by
-    rw [abs_mul, abs_of_nonneg (sq_nonneg t)]
-    exact (mul_le_mul_of_nonneg_left htx (abs_nonneg _)).trans (by simpa using hx)
   have hA : |2 * (δ * v.1) * t| ≤ 2 * δ := by
     rw [abs_mul, abs_mul, abs_of_nonneg (by norm_num : (0 : ℝ) ≤ 2),
       abs_of_nonneg ht.1]
@@ -102,9 +97,33 @@ theorem rootRescaledField_angular_deriv_le
           (abs_mul (2 * (δ * v.2) * t ^ 2) (deriv (fun η => c (δ * v.1 * t ^ 2, η)) θ))
     _ ≤ 2 * δ * M + 2 * δ * M :=
       add_le_add
-        (mul_le_mul hA (hdb _ hr θ) (abs_nonneg _) (mul_nonneg (by norm_num) hδ))
-        (mul_le_mul hB (hcb _ hr θ) (abs_nonneg _) (mul_nonneg (by norm_num) hδ))
+        (mul_le_mul hA hdb (abs_nonneg _) (mul_nonneg (by norm_num) hδ))
+        (mul_le_mul hB hcb (abs_nonneg _) (mul_nonneg (by norm_num) hδ))
     _ = 4 * δ * M := by ring
+
+/-- The original symmetric-interval interface follows by evaluating
+its coefficient bounds at the same physical point. -/
+theorem rootRescaledField_angular_deriv_le
+    {d c : PolarPoint → ℝ} (hd : ContDiff ℝ ∞ d) (hc : ContDiff ℝ ∞ c)
+    {δ M : ℝ} (hδ : 0 ≤ δ) (hM : 0 ≤ M)
+    (hdb : ∀ r, |r| ≤ δ → ∀ θ,
+      |deriv (fun η => d (r, η)) θ| ≤ M)
+    (hcb : ∀ r, |r| ≤ δ → ∀ θ,
+      |deriv (fun η => c (r, η)) θ| ≤ M)
+    {t : ℝ} (ht : t ∈ Icc (0 : ℝ) 1)
+    {v : ℝ × ℝ} (hv : v ∈ n04FlowParameterBox) (θ : ℝ) :
+    |deriv (fun η => rootRescaledField d c δ (t, (v, η))) θ| ≤ 4 * δ * M := by
+  have ht2 : t ^ 2 ≤ 1 := by
+    simpa only [pow_two, one_mul] using mul_le_mul ht.2 ht.2 ht.1 zero_le_one
+  have hr : |δ * v.1 * t ^ 2| ≤ δ := by
+    rw [abs_mul, abs_mul, abs_of_nonneg hδ, abs_of_nonneg (sq_nonneg t)]
+    calc
+      _ ≤ δ * 1 * 1 := mul_le_mul
+        (mul_le_mul_of_nonneg_left (abs_le.mpr hv.1) hδ) ht2
+        (sq_nonneg t) (by simpa only [mul_one] using hδ)
+      _ = δ := by ring
+  exact rootRescaledField_angular_deriv_le_at hd hc hδ hM ht hv θ
+    (hdb _ hr θ) (hcb _ hr θ)
 
 /-- One collar gives the desired angular integral bound for every state
 in the input family. The bounds used to choose it are only first angular

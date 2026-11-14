@@ -48,6 +48,45 @@ private theorem halfGap_of_reflection (A : SymmetricCoefficients) (p : PolarPoin
 
 variable (W : N04RealizationStart)
 
+private def addScalarTowersCongr
+    {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+    [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
+    {U : Set X} {f g h : X → ℝ}
+    (Jf : SmoothDirections U f) (Jg : SmoothDirections U g)
+    (he : ∀ x ∈ U, f x + g x = h x) : SmoothDirections U h :=
+  (smoothDirectionsAdd Jf Jg).congrOn he
+
+private theorem add_actual_residual {a b c d : ℝ} (hc : c = b - a) (hd : d = b) :
+    a + c = d := (original_add_correction hc).trans hd.symm
+
+private def reflectedMinusHalfGapTower
+    {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+    [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
+    {U : Set X} {Ω : Set PolarPoint} (A : X → SymmetricCoefficients)
+    (J : SmoothDirections (U ×ˢ Ω) (fun q : X × PolarPoint =>
+      minusCharacteristicSpeed (A q.1) q.2))
+    (hΩ : ∀ p ∈ Ω, (p.1, -p.2) ∈ Ω)
+    (href : ∀ x ∈ U, ∀ p ∈ Ω,
+      n04bCharacteristicDrift (A x) (p.1, -p.2) = -n04bCharacteristicDrift (A x) p ∧
+      n04bCharacteristicHalfGap (A x) (p.1, -p.2) = n04bCharacteristicHalfGap (A x) p) :
+    SmoothDirections (U ×ˢ Ω) (fun q : X × PolarPoint =>
+      n04bCharacteristicHalfGap (A q.1) q.2) := by
+  let R : PolarPoint →L[ℝ] PolarPoint :=
+    (ContinuousLinearMap.fst ℝ ℝ ℝ).prod (-ContinuousLinearMap.snd ℝ ℝ ℝ)
+  let P : (X × PolarPoint) →L[ℝ] X × PolarPoint :=
+    (ContinuousLinearMap.fst ℝ X PolarPoint).prod
+      (R.comp (ContinuousLinearMap.snd ℝ X PolarPoint))
+  let K := J.compLinear P J.open_domain (fun q hq => ⟨hq.1, hΩ q.2 hq.2⟩)
+  let B : (ℝ × ℝ) →L[ℝ] ℝ :=
+    (-1 / 2 : ℝ) • (ContinuousLinearMap.fst ℝ ℝ ℝ + ContinuousLinearMap.snd ℝ ℝ ℝ)
+  apply (solveSmoothDirectionsPostcomp (smoothDirectionsProd K J) B).congrOn
+  intro q hq
+  change (-1 / 2 : ℝ) *
+    (minusCharacteristicSpeed (A q.1) (q.2.1, -q.2.2) +
+      minusCharacteristicSpeed (A q.1) q.2) = _
+  have hh := href q.1 hq.1 q.2 hq.2
+  exact halfGap_of_reflection _ _ hh.1 hh.2
+
 theorem negativeOriginalDiscriminant_pos (m : ℕ)
     {z : StateDirections W.S × ℝ}
     (hz : z ∈ sectorNeighborhood W.S W.base W.ε W.ε)
@@ -165,21 +204,31 @@ theorem negativeMinus_eq_corrected (m : ℕ)
       (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
       (W.through03.1.1.2.2.1.liftSectorParameter_sector z) m p.1 hp.1 p.2).2
 
+private theorem negativeMinus_sum_identity (m : ℕ)
+    (x : (StateDirections W.S × ℝ) × PolarPoint)
+    (hx : x ∈ sectorNeighborhood W.S W.base W.ε W.ε ×ˢ
+      (Ioo (W.C.left m) (W.C.right m) ×ˢ (univ : Set ℝ))) :
+    minusCharacteristicSpeed
+        (originalCoefficients W.D W.S W.C (liftSectorParameter W.S W.C x.1)) x.2 +
+      returnCorrectionVelocityLinear W.D W.S W.C W.cutoff.cutoff
+        (liftSectorParameter W.S W.C x.1) m x.2
+        (W.R.residual (liftSectorParameter W.S W.C x.1)) =
+      minusCharacteristicSpeed (W.L.coefficients (liftSectorParameter W.S W.C x.1)) x.2 :=
+  add_actual_residual
+    (returnCorrectionVelocityLinear_at_actual W.through03.1.1 W.through03.1.2
+      W.cutoff.cutoff (liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl)
+      (W.through03.1.1.2.2.1.liftSectorParameter_sector x.1) m x.2)
+    (W.negativeMinus_eq_corrected m hx.1 hx.2)
+
 /-- The literal corrected characteristic speed has a joint tower. -/
 def negativeMinusJointTower (m : ℕ) :
     SmoothDirections
       (sectorNeighborhood W.S W.base W.ε W.ε ×ˢ
         (Ioo (W.C.left m) (W.C.right m) ×ˢ univ))
       (fun x : (StateDirections W.S × ℝ) × PolarPoint =>
-        minusCharacteristicSpeed (W.L.coefficients (liftSectorParameter W.S W.C x.1)) x.2) := by
-  apply (smoothDirectionsAdd (W.negativeOriginalMinusJointTower m)
-    (W.negativeCorrectionVelocityJointTower m)).congrOn
-  intro x hx
-  exact (original_add_correction
-    (returnCorrectionVelocityLinear_at_actual W.through03.1.1 W.through03.1.2
-      W.cutoff.cutoff (liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl)
-      (W.through03.1.1.2.2.1.liftSectorParameter_sector x.1) m x.2)).trans
-    (W.negativeMinus_eq_corrected m hx.1 hx.2).symm
+        minusCharacteristicSpeed (W.L.coefficients (liftSectorParameter W.S W.C x.1)) x.2) :=
+  addScalarTowersCongr (W.negativeOriginalMinusJointTower m)
+    (W.negativeCorrectionVelocityJointTower m) (W.negativeMinus_sum_identity m)
 
 /-- Reflection of the actual minus speed recovers the actual positive
 half-gap, as a function on the same complete physical component. -/
@@ -188,28 +237,12 @@ def negativeHalfGapJointTower (m : ℕ) :
       (sectorNeighborhood W.S W.base W.ε W.ε ×ˢ
         (Ioo (W.C.left m) (W.C.right m) ×ˢ univ))
       (fun x : (StateDirections W.S × ℝ) × PolarPoint =>
-        n04bCharacteristicHalfGap (W.L.coefficients (liftSectorParameter W.S W.C x.1)) x.2) := by
-  let J := W.negativeMinusJointTower m
-  let R : PolarPoint →L[ℝ] PolarPoint :=
-    (ContinuousLinearMap.fst ℝ ℝ ℝ).prod (-ContinuousLinearMap.snd ℝ ℝ ℝ)
-  let P : ((StateDirections W.S × ℝ) × PolarPoint) →L[ℝ]
-      (StateDirections W.S × ℝ) × PolarPoint :=
-    (ContinuousLinearMap.fst ℝ (StateDirections W.S × ℝ) PolarPoint).prod
-      (R.comp (ContinuousLinearMap.snd ℝ (StateDirections W.S × ℝ) PolarPoint))
-  let K := J.compLinear P J.open_domain (fun x hx => by
-    exact ⟨hx.1, hx.2.1, mem_univ _⟩)
-  let A : (ℝ × ℝ) →L[ℝ] ℝ :=
-    (-1 / 2 : ℝ) • (ContinuousLinearMap.fst ℝ ℝ ℝ + ContinuousLinearMap.snd ℝ ℝ ℝ)
-  apply (solveSmoothDirectionsPostcomp (smoothDirectionsProd K J) A).congrOn
-  intro x hx
-  have href := n04b_actualCharacteristic_reflection W.through03
-    (liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl)
-    (W.through03.1.1.2.2.1.liftSectorParameter_sector x.1) x.2
-  change (-1 / 2 : ℝ) *
-    (minusCharacteristicSpeed (W.L.coefficients (liftSectorParameter W.S W.C x.1))
-      (x.2.1, -x.2.2) +
-      minusCharacteristicSpeed (W.L.coefficients (liftSectorParameter W.S W.C x.1)) x.2) = _
-  exact halfGap_of_reflection _ _ href.1 href.2
+        n04bCharacteristicHalfGap (W.L.coefficients (liftSectorParameter W.S W.C x.1)) x.2) :=
+  reflectedMinusHalfGapTower (fun z => W.L.coefficients (liftSectorParameter W.S W.C z))
+    (W.negativeMinusJointTower m) (fun _ hp => ⟨hp.1, mem_univ _⟩)
+    (fun z hz p _ => n04b_actualCharacteristic_reflection W.through03
+      (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
+      (W.through03.1.1.2.2.1.liftSectorParameter_sector z) p)
 
 end ContinuousFlexibility.Analysis.N04RealizationStart
 
